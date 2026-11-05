@@ -76,12 +76,18 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
+          "marks": [
+            "colour"
+          ],
           "text": "The loss runs to a dozen or so: enough to leave a trade short-handed, not enough to alter what the town can do.",
           "slots": [],
           "vid": 2
         },
         {
           "angle": "visitor",
+          "marks": [
+            "colour"
+          ],
           "text": "About a dozen households' worth of people have moved on; the town has redistributed the work among the rest without much comment.",
           "slots": [],
           "vid": 3
@@ -123,6 +129,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "colour"
+          ],
           "text": "The loss is a hundred or so people, and it is the sort of loss a town argues about rather than absorbs.",
           "slots": [],
           "vid": 2
@@ -140,6 +149,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "QUANTITY: several hundred": [
         {
           "angle": "ledger",
+          "marks": [
+            "colour"
+          ],
           "text": "Several hundred have left {settlement}. The town is measurably smaller, and its institutions have not shrunk to match.",
           "slots": [
             "settlement"
@@ -157,6 +169,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "counterforce",
+          "marks": [
+            "colour"
+          ],
           "text": "Several hundred people are no longer here. What they paid in, the town now raises from the ones who stayed.",
           "slots": [],
           "vid": 3
@@ -165,6 +180,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "QUANTITY: many hundreds": [
         {
           "angle": "elder",
+          "marks": [
+            "colour"
+          ],
           "text": "Many hundreds have gone. {settlement} is a substantially different settlement than it was, and it has not finished discovering how.",
           "slots": [
             "settlement"
@@ -173,6 +191,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
+          "marks": [
+            "colour"
+          ],
           "text": "The departure runs to many hundreds. The town carries its old infrastructure on a fraction of its old population.",
           "slots": [],
           "vid": 2
@@ -190,6 +211,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "QUANTITY: thousands": [
         {
           "angle": "visitor",
+          "marks": [
+            "colour"
+          ],
           "text": "Thousands have gone from {settlement}. This is not a decline; it is an evacuation on a slower schedule.",
           "slots": [
             "settlement"
@@ -207,6 +231,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "elder",
+          "marks": [
+            "colour"
+          ],
           "text": "Thousands of people have left. What remains occupies a settlement built for something considerably larger.",
           "slots": [],
           "vid": 3
@@ -237,6 +264,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "counterforce",
+          "marks": [
+            "colour"
+          ],
           "text": "The gap between what the town grew and what it needed has been paid in the usual currency; the rolls carry it.",
           "slots": [],
           "vid": 3
@@ -291,6 +321,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "RECEIPT: births and deaths in balance": [
         {
           "angle": "ledger",
+          "marks": [
+            "colour"
+          ],
           "text": "The rolls balance. {settlement} replaces itself and does not exceed itself, which is what most settlements do most of the time.",
           "slots": [
             "settlement"
@@ -348,6 +381,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
+          "marks": [
+            "colour"
+          ],
           "text": "{settlement} is growing. The pressure shows as crowding rather than prosperity so far, which is normal at this stage.",
           "slots": [
             "settlement"
@@ -9384,6 +9420,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "FALLING-NARROW": [
         {
           "angle": "ledger",
+          "marks": [
+            "colour"
+          ],
           "text": "{settlement} is losing what it had and is hard to reach, and a town in that position gets smaller quietly, without anyone outside marking the stages.",
           "slots": [
             "settlement"

@@ -7684,9 +7684,10 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 2,
         "stores: >= 6": 1
       },
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -7821,9 +7822,10 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 1,
         "market": 1
       },
-      "undeclared": 2,
+      "undeclared": 1,
       "crisisScoped": false
     },
     {
@@ -8390,10 +8392,11 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 1,
         "institution: granary": 2,
         "no institution: granary": 1
       },
-      "undeclared": 1,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -8532,10 +8535,11 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 1,
         "gate": 1,
-        "market": 1
+        "market": 2
       },
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -8664,6 +8668,7 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 1,
         "crisis: any": 2
       },
       "undeclared": 0,
@@ -8720,9 +8725,10 @@
       },
       "declares": [],
       "lineDeclares": {
-        "market": 2
+        "colour": 1,
+        "market": 3
       },
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -8776,9 +8782,10 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 2,
         "market": 1
       },
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -8826,9 +8833,10 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 1,
         "market": 3
       },
-      "undeclared": 1,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -8876,9 +8884,10 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 3,
         "market": 1
       },
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -8924,9 +8933,10 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 1,
         "market": 3
       },
-      "undeclared": 1,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -8972,9 +8982,10 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 2,
         "market": 2
       },
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -9368,9 +9379,10 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 2,
         "gate": 1
       },
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -9705,8 +9717,11 @@
         "stateOrgan": true
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 4,
+      "lineDeclares": {
+        "colour": 3,
+        "guild": 1
+      },
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -9778,9 +9793,11 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 2,
+        "guild": 1,
         "market": 1
       },
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -9852,9 +9869,10 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 3,
         "no organised crime": 1
       },
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -9899,8 +9917,10 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 4,
+      "lineDeclares": {
+        "colour": 4
+      },
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -9945,8 +9965,10 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 4,
+      "lineDeclares": {
+        "colour": 4
+      },
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -10052,9 +10074,10 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 2,
         "market": 1
       },
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -10220,9 +10243,10 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 1,
         "no crisis: indebted": 1
       },
-      "undeclared": 2,
+      "undeclared": 1,
       "crisisScoped": false
     },
     {
@@ -10275,10 +10299,11 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 2,
         "no walls": 1,
         "walls": 1
       },
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -10830,9 +10855,10 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 2,
         "market": 1
       },
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -11116,9 +11142,10 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 2,
         "magic": 1
       },
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -11594,9 +11621,10 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 2,
         "no hunger": 1
       },
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -11649,9 +11677,10 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 2,
         "market": 1
       },
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -11703,9 +11732,10 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 2,
         "market": 1
       },
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -11758,9 +11788,10 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 2,
         "market": 1
       },
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -11951,9 +11982,10 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 1,
         "grain": 2
       },
-      "undeclared": 1,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -12021,11 +12053,12 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 1,
         "game": 1,
         "grain": 1,
         "watch": 1
       },
-      "undeclared": 1,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -12093,9 +12126,10 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 2,
         "grain": 1
       },
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -12967,9 +13001,10 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 1,
         "gate": 1
       },
-      "undeclared": 2,
+      "undeclared": 1,
       "crisisScoped": false
     },
     {
@@ -13050,9 +13085,10 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 2,
         "no hunger": 1
       },
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -13444,9 +13480,10 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 2,
         "market": 1
       },
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -13704,10 +13741,11 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 2,
         "no walls": 1,
         "walls": 1
       },
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -13868,9 +13906,10 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 2,
         "institution: tavern": 1
       },
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -14417,9 +14456,10 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 2,
         "population: small": 1
       },
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -14511,10 +14551,11 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 1,
         "market": 1,
         "tier: >= town": 1
       },
-      "undeclared": 1,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -14560,9 +14601,10 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 2,
         "tier: >= town": 1
       },
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -14608,9 +14650,10 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 2,
         "tier: >= town": 1
       },
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -14656,9 +14699,10 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 2,
         "walls": 1
       },
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -14706,9 +14750,10 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 1,
         "grain": 2
       },
-      "undeclared": 1,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -14846,10 +14891,11 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 1,
         "no migration: exodus": 1,
         "no migration: influx": 1
       },
-      "undeclared": 2,
+      "undeclared": 1,
       "crisisScoped": false
     },
     {
@@ -14941,9 +14987,10 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 1,
         "migration: influx": 2
       },
-      "undeclared": 1,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -24805,9 +24852,10 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 1,
         "population: small": 1
       },
-      "undeclared": 1,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {

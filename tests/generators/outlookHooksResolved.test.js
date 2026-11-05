@@ -29,3 +29,58 @@ describe('the outlook hooks resolve (CENSUS-1f unit 3)', () => {
     expect(hooks).toContain(TIMBER);
   });
 });
+
+// CENSUS-3g unit 5 (R-AM read, R-U / R-G): the starving set. Ledgered since R-AM, the kept-refused
+// original read false on 162 of the 1,000 (`tier` 110, `food` 140) and was then dropped by the
+// hook-truth pass. The original is reworded to presume only the famine band (no "Villagers"), and
+// the moderate gap (Import-Dependent / Pressured: the chair's ruling 1 of 2026-11-03, "a grain-price
+// hook for a moderate gap, nothing for a fed place") takes one twin with no famine words.
+describe('the starving outlook set (CENSUS-3g unit 5)', () => {
+  const STARVING = Object.keys(OUTLOOK_HOOK_SIBLINGS).find((t) => t.startsWith('The settlement is starving.'));
+  const SET = OUTLOOK_HOOK_SIBLINGS[STARVING];
+  const starvingHooks = (tier, band) => deriveSupplyRiskAnalysis(400, {}, [], { tradeRouteAccess: 'isolated', tier },
+    { deficit: 50, dailyProduction: 50, dailyNeed: 100 },
+    () => factsOf({ tier, institutions: [], economicState: { foodSecurity: { foodRecord: { band } } } })).plotHooks.map((h) => h.hook);
+
+  it('the original presumes only the famine band: no residents called villagers', () => {
+    expect(STARVING).not.toMatch(/villagers?/i);
+    expect(SET[0].needs).toEqual(['food: ≤ deficit']);
+  });
+
+  it('a starving town keeps the starving hook', () => {
+    expect(starvingHooks('town', 'famine')).toEqual([STARVING]);
+  });
+
+  it.each(['importDependent', 'pressured'])('a %s gap reads the twin, with no famine words', (band) => {
+    const [hook] = starvingHooks('hamlet', band);
+    expect(hook).toBe(SET[1].text);
+    expect(hook).not.toMatch(/\bstarv|\bbanditry\b|\bfamine\b|villagers?/i);
+  });
+
+  it('the twin answers the moderate gap only', () => {
+    expect(SET[1]).toMatchObject({ twinOf: STARVING, excludes: ['food: ≤ deficit'], needs: ['food: ≤ pressured'] });
+  });
+});
+
+// CENSUS-3h (R-AV, the chair's answer 2): a twin carries only the severity and category the record
+// holds. The moderate-gap twin takes the band the food record reads at that birth — its category
+// is the band's own label (`FOOD_SECURITY_BANDS`, never re-spelled), its severity the band's grade
+// (Import-Dependent `medium`, the record's own grade for that band's hook; Pressured `low`) —
+// and never "Survival Crisis / critical", which stays with the famine-band original.
+describe('the moderate-gap twin carries the band the record reads (CENSUS-3h, R-AV)', () => {
+  const STARVING = Object.keys(OUTLOOK_HOOK_SIBLINGS).find((t) => t.startsWith('The settlement is starving.'));
+  const graded = (band) => deriveSupplyRiskAnalysis(400, {}, [], { tradeRouteAccess: 'isolated', tier: 'hamlet' },
+    { deficit: 50, dailyProduction: 50, dailyNeed: 100 },
+    () => factsOf({ tier: 'hamlet', institutions: [], economicState: { foodSecurity: { foodRecord: { band } } } })).plotHooks[0];
+
+  it.each([
+    ['importDependent', 'Import-Dependent', 'medium'],
+    ['pressured', 'Pressured', 'low'],
+  ])('a %s gap: category %s, severity %s', (band, category, severity) => {
+    expect(graded(band)).toMatchObject({ category, severity });
+  });
+
+  it.each(['famine', 'deficit'])('a %s band keeps the original at Survival Crisis / critical', (band) => {
+    expect(graded(band)).toMatchObject({ hook: STARVING, category: 'Survival Crisis', severity: 'critical' });
+  });
+});

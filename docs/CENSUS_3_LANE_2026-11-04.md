@@ -10,6 +10,12 @@
 >
 > **CENSUS-3e (2026-11-05): the NPC loyalty guard rows declared (`[guard]` loyalty 29 → 0 on the 1,000), `demographic_pressure` split by direction (R-AA), the grain-monopoly hook reworded (R-V measured: `guild` is not settled at the draw). The outlook twins and the timeline roll stay carried (CENSUS-1f has not wired them). See "CENSUS-3e" at the end.**
 >
+> **CENSUS-3f (2026-11-05): CENSUS-1f merged (the outlook and timeline sites wired by the mechanism lane); unit 3 re-measured (`[sea]` 66 → 0 on the 1,000, no slot emptied); the seven canonical v0 rows declared through the projector's tag slot (`market` ×2, `guild` ×1); R-AJ / R-AL / R-AM / R-AO not landed on 1b, listed as waiting. Nothing of this lane remains but the compose and those four. See "CENSUS-3f" at the end.**
+>
+> **CENSUS-3g (2026-11-05): CENSUS-1g merged (R-AO, R-AM, R-AJ); DS-ECO-6 v4 declares `guild`; 77 lines marked `colour`; the starving outlook set reworded and twinned once R-AM ledgered it. 3g wrote no section; CENSUS-3h wrote it from the commits. See "CENSUS-3g" at the end.**
+>
+> **CENSUS-3h (2026-11-05): CENSUS-1g's tip merged (R-AL: 16 history births, 0 empty tension lists); the moderate-gap twin graded by the band the record reads (R-AV: 95 of 1,000, 131 of 525); R-AU not landed on 1b at this seat's boundary, so the 250-class findings on `OUTLOOK_HOOK_SIBLINGS` stay listed as the mechanism lane's. Nothing of this lane remains but the compose. See "CENSUS-3h" at the end.**
+>
 > **Where the phase-A seat stopped.** Phase A (annotation) is complete, committed and pushed. **Phase B (apply) was not started.** `lane/census-1b-2026-11-04` had not been pushed at any boundary of this lane (`git ls-remote` was empty at each one), so neither the vocabulary module, the sibling-column schema nor `drawDeclared` exists to apply against. The two-phase rule forbids applying before they land. The next seat starts at Phase B, step 1 below.
 
 ## Phase A: the ledger (`docs/census/declarations/`)
@@ -511,3 +517,232 @@ Every other surface is unchanged.
 1. `freshAdmittedTwin`: keep it at the loyalty site, or lift it into `drawDeclared` as a `used` registry option for every `drawUnique` site (the mechanism lane's)?
 2. `demographic_pressure`'s exodus hook is never true at birth (0 of 74), because every born migration is an influx. Is it declared as ordered (as now), or reworded under R-W?
 3. The 16 fill-drawn `demographic_pressure` tensions with no live migration print no hooks. Should the fill draw that template only under a live migration (a history draw change, which moves births), or is an empty list acceptable?
+
+## CENSUS-3f (2026-11-05)
+
+Base: CENSUS-3e's tip `de8de790f`. Merged: `origin/lane/census-1b-2026-11-04` at `99b0036` (CENSUS-1f: sites 19/18/15, the arrival redraw-once, the POLITICAL_FLAVOR cascade, OUTLOOK_HOOK_SIBLINGS enforced `4dfb47b`, the timeline roll through `drawDeclared` `cb46c3e`, RULING_POWER_SIBLINGS' door, `sacredHouse`, R-Z's sentence, the canonical tag slot `4818948`) as `f5061f6`, with no conflict. At the merge `gen:dossier-prose --check` and `wiring-census.mjs --check` are green (709 pools / 2,338 variants). `declarationRegisters.test.js` is red with 2 tests, and it is red identically at 1b's own tip `99b0036`: the undeclared register's `fell` 22 / `gone` 156 and the 45 opted pools unpinned are CENSUS-2e's and 1f's declarations. Those are the compose's to re-take (R-T), so they are not re-pinned here. Re-fetched before units 3 and 4: still `99b0036`.
+
+### The units
+
+| unit | commit | what | births moved (records 1,000 · pages 60) |
+|---|---|---|---|
+| 1 | `f5061f6` | the merge; the census re-taken through its door (`--check` green, nothing to stamp); the 60 as the merged base (`artifacts/census3f-base`) | 0 · 0 (this lane's) |
+| 2 | — (this record) | unit 3 re-measured at the wired outlook and timeline sites (below) | 0 · 0 (no twin added, no slot emptied) |
+| 3 | `525084d` | the seven canonical v0 rows declare through the tag slot | 0 · 1 (soak1k-30, dossier) |
+| 4 | — | R-AJ / R-AL / R-AM / R-AO: none landed on 1b at `99b0036` (listed as waiting, below) | — |
+
+### Unit 2 · re-measured at the wired sites (soak1k-0..999, the merged base's own records)
+
+The outlook hooks (`foodBalance.js`, CENSUS-1f `4dfb47b`) are a T site with no draw, so a twin's share is exactly the births whose record refuses the original:
+
+| set | twin prints (births) | original prints | share of the line's births | of 1,000 |
+|---|---|---|---|---|
+| timber, `navigable` (3b's twin, without "and shipbuilding") | 153 | 87 | 153 / 240 = 0.64 | 0.153 |
+| iron, `institution: smith` (3d's twin, no blacksmiths) | 17 | 172 | 17 / 189 = 0.09 | 0.017 |
+| either / both | 162 / 8 | | | |
+| starving, `food: ≤ deficit` + `tier: <= village` | no twin: a refused original keeps its text (the self-check's set) | | | |
+
+`navigable` is `waterOf(...).kind !== 'none'` (coast or river), so the timber twin moves only the dry places. `reader:hook-pools [sea]` reads **0 on the 1,000 at the merged base** (66 at CENSUS-3e). The fall is CENSUS-1f's wiring of the twin this lane authored, and it is counted once, on 1f's record. 1f's own count against its base: golden 104 / 525, of which 102 are `navigable` and 19 hooks `institution: smith`.
+
+**The timeline roll** (CENSUS-1f `cb46c3e`, Appendix B item 12) resolves a refused drawn row to the argmax over the template's admitted, unprinted rows. Of 1,927 events within 80 years on the 1,000, **0 print an empty hook list**: no timeline slot empties, so no twin is owed (R-G) and no mute slot is listed. This includes the twelve 3d rows and `demographic_pressure`'s directions.
+
+**The tensions (kind A, this lane's filter).** 16 of 74 `demographic_pressure` tensions print an empty hook list, the only empty tension lists on the 1,000. These are the §10 mute slots R-AL cures at the history draw (`needs: migration`, the mechanism lane's site). They are listed under waiting, below. The lines on the same surface that speak to the condition are the tension's description ("…through arrivals, departures, or both") and its faction ("The newly arrived or departing"). 16 of 1,000 is ≥ 1 in 100, so §10's fill rule would want a line. R-AL removes the slot instead, and a gap line here would be a fourth row in the timeline's spliced domain (CENSUS-3e ruling 2). So no line is written.
+
+### Unit 3 · the canonical rows (`525084d`)
+
+The annex carries the slot (`0. *(canonical)* \`[market]\` …`), `gen:dossier-prose` projects it, and `--check` is green. The receipt is the leaf's `marks` on vid 0, never hand-edited (R-D).
+
+| row | declares |
+|---|---|
+| DS-ECO-3 SHORTAGE × trade-dependent ("…Little reaches the markets…") | `market` |
+| DS-ECO-3 SURPLUS × trade-dependent ("…the markets are well-fed.") | `market` |
+| DS-ECO-6 significant off-book ("…paying duties and guild fees.") | `guild`. The pool renders on the final record, so R-Q / R-AN do not bite (4b's composite) |
+| DS-ECO-3 ADEQUATE; DS-ECO-6 minor shadow; DS-ECO-7 TALLIES, CATALOG (frozen) | nothing beyond the key, so no slot. ADEQUATE's pool is `{crisis-scoped}`, so its silence already reads calm. They are not marked `colour` because R-AO's spelling has not landed |
+
+None of the three pools goes mute. Each keeps an undeclared sibling: SHORTAGE v3, SURPLUS v3, significant v1 and v2. Red-first: `tests/data/canonicalRowsDeclared.test.js` was 3 red on `f5061f6` and is 8 / 8 green. The 24 suites that read the economy corpus are red on 63 tests before and after, with identical titles (the base's). Two values moved inside them by cause and are not re-pinned:
+- the register's `fell` went from 22 to 25 (these three pools: 2 → 1, 2 → 1, 3 → 2);
+- `stateProseKernel` law-5's byte-identity list went from 203 to 215 (+12 rows: DS-ECO-6 significant read without facts).
+
+### Waiting (the chair's answers 1–3 and R-AM / R-AO; none on 1b at `99b0036`)
+
+- **R-AJ** (`freshAdmittedTwin` lifted into `drawDeclared`). Not landed, so the loyalty site's local copy stays. When it lands: merge it and hash `npcs` and `factions[].members[].plotHooks` on the 1,000 before and after (byte-identical expected). The merged base's 1,000 per-birth section hashes are kept for that comparison (scratch).
+- **R-AK** (the exodus hook stays `migration: exodus`). It is waiting on the pulse: 0 of 74 at birth, and it is unchanged.
+- **R-AL** (`needs: migration` at the `demographic_pressure` history draw). Not landed. The 16 of 74 tensions with no live migration (16 of 1,000 births) are the mute slots above. They will move 16 births at the history draw, a history change counted by cause on the mechanism lane.
+- **R-AM** (kept-refused originals ledgered). Not landed. On this lane's sets it will make the starving outlook set visible to the self-check: the set has no twin, so a refused original keeps its text. `cert:false-presumption` may then rise on `foodBalance:OUTLOOK_HOOK_SIBLINGS`, and that rise is the instrument seeing it, reported by cause. 3d measured that set at 8 printed / 0 false on soak1k-0..199, so a rise is not expected to be large.
+- **R-AO** (`colour` per line). Not landed. The four slotless canonical rows above are its first candidates on this lane.
+
+### The base's own reds (listed, not cured; not this lane's)
+
+| red | at | belongs to |
+|---|---|---|
+| `hookThemeDraws pin:no-hook-is-lost` 860 against its pin of 861 | red already at `ee3b9c766` (this lane's cut point from census-1) and at 1b's `6e2cb6d`. At the window compose `6d84aa8`, which set the 861 pin, the same suite fails earlier, on the NPC denominator (595 vs 613) | the window / rung-1b compose (`6d84aa8`), which is pre-census. No census lane |
+| `economicStructure` ×2: `economicState.js` 909 > its ceiling; the export surface gained `mandatedRoleCandidate` | `2906232` (F1 unit 2, defence claim writers) and `e28f4b1` (F5 unit 2, the institutions band), 2026-11-04 ~12:40 | the window branch's F1 / F5 program, pre-census |
+| `typecheck:domain:strict` +4 / +2 | `crisisFactFindings.js` +4 (F13, `57004ae`); `composeStateProse.js` +2 (`bbfc335`, CENSUS-1b wave 1 item 2) | the window branch's F13; CENSUS-1b (the mechanism lane) |
+| `declarationRegisters` ×2 | red identically at 1b's tip | the compose (R-T) |
+| `typecheck:ratchet` | green (167, ceiling 167) | — |
+
+### The 60 and the 1,000 (R-B: BEFORE = the merged base `f5061f6`, AFTER = `525084d`)
+
+Runs: `soak-review.mjs --workers 4`, written to `artifacts/census3f-base` / `census3f-after60` (60) and to `census3f-before` (a worktree of `f5061f6`) / `census3f-after` (1,000). Records are 60 / 60 and 1,000 / 1,000 byte-identical.
+
+| class | 60 before → after | 1,000 before → after (settlements / occurrences) |
+|---|---|---|
+| `reader:hook-pools` | 0 → 0 | 5 / 5 → 5 / 5. All 5 are `[guard] "Guard" with no enforcement body` on the conflict labels "Military/Guard" ×4 and the revolt line ×1 (soak1k-110, -462, -470, -571, -614), which are not this lane's. **`[sea]` 0 → 0** (66 at CENSUS-3e, cured by the merge) and **`[guard]` loyalty / crime_wave 0 → 0** |
+| `coh:crisis-blind-prose` | 0 → 0 | 0 → 0. CENSUS-3e's base had 35 (food secure / migration 32, pilgrims 3), and they are cured by siblings in the merge; 0 on this lane's claims |
+| every other `coh:*`, `A-12:*` | 0 | 0 → 0 |
+| `cert:*`, including `cert:false-presumption` | 0 → 0 | 0 → 0; certification 1,000 / 1,000 (no replay mismatch) |
+| `reader:scale-lists`, `reader:traditions-water` | 0 | 0 → 0 |
+| every finding class | identical | identical (1,662 → 1,662 · CLIMB) |
+
+**`declared-share`** (1,000, before → after):
+- history: 1,504 / 10,396 (0.145) → the same. CENSUS-3e's AFTER was 786 / 5,072; the denominator grew with 1f's timeline resolutions, which note the draw.
+- npcs: 5,156 / 42,932 (0.120) → the same.
+- economics: 388 / 1,771 (0.219); tab:economics 1,851 / 28,025 (0.066); foundry:economics 1,140 / 13,370 (0.085); pdf:economics 215 / 215 → the same.
+- tab:dossier: 48,695 → **48,859** / 213,133 (0.228 → 0.229), unit 3's three rows.
+
+**The undeclared register** for this lane's surfaces (statePools, re-taken in a scratch copy and not written, R-T):
+- DS-ECO 172 → 169;
+- DS-SUP 57 → 57;
+- DS-POP 67 → 67.
+
+The whole register re-takes at 1,486 lines / 516 pools against its pin of 2,026 / 672; the difference is the siblings' declarations, which are the compose's. The hook tables (history, npcs, economics) are outside the register, which covers the state corpus only.
+
+### Golden / manifest / census / pin rows moved, by cause (never re-recorded)
+
+- **Golden and soak records: 0.** Unit 3 is display-time; records are 1,000 / 1,000 byte-identical.
+- **Pages:**
+  - 1 of 60 (soak1k-30's dossier: no guild, so the significant-off-book v1 prints in place of v0);
+  - on the 1,000, the dossier draws of a declared line rise by 164;
+  - pages beyond the 60's sample were not hashed.
+- **The generated leaf:** `economy.generated.js` gains three `marks` arrays (projected, `--check` green). The wiring census and the manifest are unmoved.
+- **Pins:** none edited. Inside the base's reds, the register's `fell` went from 22 to 25 and law-5's list from 203 to 215, as above.
+
+### Where CENSUS-3g starts
+
+Nothing of this lane remains but the compose and the mechanism lane's four items. When 1b shows R-AJ, R-AL, R-AM or R-AO:
+- **R-AJ:** merge it, then hash `npcs` and the faction members' hooks on the 1,000 (byte-identical expected).
+- **R-AL:** count the 16 history births, and confirm 0 empty tension lists.
+- **R-AM:** read `cert:false-presumption` on `foodBalance:OUTLOOK_HOOK_SIBLINGS` and on the loyalty pool, by cause. Twin or reword a kept false line under R-G / R-U.
+- **R-AO:** mark the four slotless canonical rows `colour`, plus any other read line in this lane's mixed pools.
+
+### Open questions for the chair
+
+1. DS-ECO-6 "a large share off the books" v4 ("The guilds are losing their grip…", dm-only) presumes guilds as much as the canonical row this unit declared. It is DS-ECO's (this lane's annex rows), not in the seven. Should it declare `guild` now (display-time, about 1/4 of that pool's no-guild births), or wait for the compose's mute scan?
+2. §10's fill rule (≥ 1 in 100) reads the 16 / 1,000 `demographic_pressure` mute slots as owing a line. R-AL removes them at the draw instead. This seat reads R-AL as superseding the gap line. Is that right?
+
+## CENSUS-3g (2026-11-05; written by CENSUS-3h from the commits, since 3g's report stayed in its transcript)
+
+Base: CENSUS-3f's tip `525084d`. Merged: `origin/lane/census-1b-2026-11-04` at `d2b1ab0` (CENSUS-1g: R-AO `c000dd9`, R-AM `28c6d2a`, R-AJ `d2b1ab0`) as `2b9ee3d`, with no conflict. `gen:dossier-prose --check` and `wiring-census.mjs --check` are green (709 pools / 2,338 variants).
+
+| unit | commit | what | births moved |
+|---|---|---|---|
+| 1 | `2b9ee3d` | the merge. R-AJ is confirmed by hash: every section of soak1k-0..999, `npcs` and `factions[].members[].plotHooks` included, is byte-identical before and after | 0 |
+| 2 | `b6caa5e` | DS-ECO-6 "a large share off the books" v4 ("The guilds are losing their grip…", dm-only) declares `guild` (the chair's answer 1 of 07:2x; R-AD). Red-first: `canonicalRowsDeclared.test.js` 1 red, then 9 / 9 | display-time; records 0; pages on the 60: 0 (tab:dossier declared draws 2,843 → 2,847) |
+| 3 | `b1aab0f` | R-AO: 77 lines marked `colour` (read; presumes nothing) through the annex tag slot. These are the four slotless canonical rows (DS-ECO-3 ADEQUATE, DS-ECO-6 minor shadow, DS-ECO-7 TALLIES and CATALOG), 68 of the 73 undeclared lines in this lane's 41 mixed pools, and DS-ECO-7 TALLIES v1–3 and CATALOG v1–3. Red-first: `canonicalRowsDeclared.test.js` 9 red, then 18 / 18 | 0 (colour is silence to the draw; pages 0 / 60) |
+| 4 | — | no commit carries a unit 4 | — |
+| 5 | `167c957` | R-AM read: the starving outlook set reworded (R-U) and twinned (R-G). Below | soak 1,000: 143 · golden 525: 167 · the 60: 4 pages (`economicViability` only) |
+
+**The five read lines left unmarked at unit 3** (each presumes a fact, so `colour` would be false; they stay in the undeclared register for the compose's reading): DS-ECO-1 C4 v2, DS-ECO-2 FOOD deficit v1, DS-ECO-8 COMFORTABLE v3, DS-ECO-11 fullyExploited v1, DS-POP-1 balance v3.
+
+**The undeclared register after unit 3** (statePools, re-taken in scratch, not written, R-T): DS-ECO 168 → 111, DS-SUP 57 → 51, DS-POP 67 → 54.
+
+### Unit 5 · the starving outlook set (`167c957`)
+
+R-AM's ledger showed the kept-refused starving original false in 162 of the 1,000 births (`tier` 110, `food` 140). Each was later dropped from the record by the hook-truth pass. The loyalty pool read 0 false.
+
+- **R-U:** the original no longer calls the residents "Villagers" ("Its hungriest are turning to banditry"). It now declares only `food: ≤ deficit`.
+- **R-G, the chair's ruling recorded here (vetoable):** one twin for the moderate gap (Import-Dependent / Pressured; the chair's ruling 1 of 2026-11-03: a food hook for a moderate gap, nothing for a fed place), with no famine words: "The settlement grows less food than it eats, and a merchant has offered to make up the difference at a price the settlement cannot pay in coin." It excludes `food: ≤ deficit` and needs `food: ≤ pressured`. Its share is the births whose record refuses the original in the moderate band (a T site has no draw): 95 of 1,000.
+- **The residue:** a fed place (Secure; 45 of 1,000 at 3g's reading) has no true line, so `resolveSibling` keeps the refused original. The hook-truth pass then drops it, so it never prints. This is the mechanism lane's site policy, which the chair has since ruled on (R-AU, below).
+- **Births moved** (`economicViability` only): soak 1,000: 143 (45 reworded text, 95 twin added, 3 starving towns that now keep the hook). Golden 525: 167. The 60: 4 pages. Empty economics hook lists on the branch go from 88 to 38. Red-first: `outlookHooksResolved.test.js` 4 red, then 7 / 7.
+
+3g's three questions and the chair's answers (08:3x): (1) R-AU — the site drops a refused hook with no admitted sibling, and the mechanism lane changes it; (2) R-AV — the twin carries only the severity and category the record holds; (3) the `A-11` finding on the merged base is CENSUS-2f's fish fix (`3386e59b7` on lane 2), not this lane's.
+
+## CENSUS-3h (2026-11-05)
+
+Base: CENSUS-3g's tip `167c957`. Merged: `origin/lane/census-1b-2026-11-04` at `e8b0072` (CENSUS-1g: R-AL `ef551fc`, the rulingStructure fix `12615155`, unit 3c `1425ac7`) as `bfd0958`, with no conflict. `gen:dossier-prose --check` is green. The wiring census was re-taken through its door: 1g's declared columns now count this lane's R-AO `colour` marks, and that is the only diff. Re-fetched at unit 7: 1b is at `5215c43` (CENSUS-1h unit 7, R-AQ `8c6dcab`, and a merge of census-5). R-AU is not in it (neither `foodBalance.js` nor `drawDeclared.js` changed), so it is not merged here: nothing of this lane needs it, and census-5's lane comes in at the compose.
+
+| unit | commit | what | births moved (soak 1,000 · golden 525 · pages on the 60) |
+|---|---|---|---|
+| 1 | `bfd0958` | the merge; the census re-taken; the 60 as the merged base (`artifacts/census3h-base`) | 16 · 0 · 0 (R-AL, counted at unit 2) |
+| 2 | — (this record) | R-AL counted (below) | — |
+| 3 | `113a165` | R-AV: the moderate-gap twin graded by the band the record reads | 95 · 131 · 2 (soak1k-10, -15) |
+| 4 | — | R-AU not landed on 1b at this boundary | — |
+| 5 (unit 7) | this commit | the 60 and the 1,000 as a diff; this record | 0 |
+
+### Unit 2 · R-AL counted (sha per record section, `167c957` against `bfd0958`)
+
+- **Soak 1,000: 16 births move**, in `history` and `generationCoherenceReceipt` only (the receipt hashes the history). They are soak1k-8, -120, -129, -237, -295, -332, -394, -467, -608, -647, -712, -772, -800, -851, -951 and -976.
+- **These are exactly the 16 births whose tension list was empty at the base**, every one a `demographic_pressure` tension with no live migration. Births with an empty tension list: **16 → 0**. No mute slot remains, so none is listed for the compose (R-AR: the slot is absent, not mute).
+- **Golden 525: 0 move.**
+
+### Unit 3 · R-AV (`113a165`)
+
+`deriveSupplyRiskAnalysis` grades the moderate-gap twin by the band the food record reads at that birth, through the declaration's own reader (`famine.band`).
+- **The category** is the band's own label (`FOOD_SECURITY_BANDS`, never re-spelled).
+- **The severity** is the band's grade:
+  - Import-Dependent `medium`: the record's own grade for that band's viability hook ("A poor harvest somewhere else…");
+  - Pressured `low`: the grade under it, because the ladder writes no Pressured hook.
+- **The famine-band original** keeps "Survival Crisis / critical".
+- **The chair's ruling recorded here (vetoable):** the grade map is this seat's reading of "the band … and the category that band carries".
+- **Display:** the Plot Hooks collector prints no severity sub-label below `high` and gives both grades priority 7. On the page the grade change therefore reads as a source label and an order, not as a new mark.
+
+Births whose severity changes (`economicViability` only):
+
+| corpus | Pressured / low | Import-Dependent / medium | total |
+|---|---|---|---|
+| soak 1,000 | 67 | 28 | 95 |
+| golden 525 | 131 | 0 | 131 |
+
+Red-first: `outlookHooksResolved.test.js` 2 red, then 11 / 11.
+
+### Unit 4 · R-AU: not landed
+
+At this boundary the kept-refused residue on `foodBalance:OUTLOOK_HOOK_SIBLINGS` reads **45 births / 45 findings on the 1,000** (6 / 6 on the 60), before and after this seat.
+- **Not 250.** The chair's 250-in-161 was the set before CENSUS-3g's reword and twin. The 45 are the fed (Secure) places that keep the refused original, which never prints.
+- **Listed as the mechanism lane's (R-AU).** When CENSUS-1h changes the site, 45 → 0 is expected with no page moved, and no twin is owed for the fed case (R-L).
+
+### The 60 and the 1,000 (R-B: BEFORE = the merged base `bfd0958`, AFTER = `113a165`)
+
+Runs: `soak-review.mjs --workers 4`, written to `artifacts/census3h-base` / `census3h-after60` (60) and to `census3h-before` (an export of `bfd0958`) / `census3h-after` (1,000).
+
+| class | 60 before → after | 1,000 before → after (settlements / occurrences) |
+|---|---|---|
+| `reader:hook-pools` | 0 → 0 | 5 / 5 → 5 / 5. All 5 are `[guard]` conflict labels: lane 4's, cured by R-AW on the mechanism lane. 0 on this lane's pools |
+| every `coh:*` | 0 → 0 | 0 → 0 |
+| `A-11:sea-words-landlocked` | 0 → 0 | 1 / 1 → 1 / 1. This is CENSUS-2f's fish fix (`3386e59b7`, lane 2), which the compose merges; not this lane's |
+| `A-12:*` | 0 | 0 → 0 |
+| `cert:false-presumption` | 6 / 6 → 6 / 6 | 45 / 45 → 45 / 45, all `foodBalance:OUTLOOK_HOOK_SIBLINGS`, the fed residue waiting on R-AU (unit 4). No other cause. Certification is otherwise 1,000 / 1,000 |
+| `reader:faction-role-fit` / `tension-memory` / `validation-on-page` | 18/25, 4/4, 60/163 (unchanged) | 348/521, 61/61, 985/2,547 (unchanged) |
+| findings · verdict | 107 → 107 · STOP | 1,707 → 1,707 · STOP. The base's STOP at the same counts (R-B) |
+
+**`declared-share` on the 1,000** (unchanged by this seat; R-AV re-grades a resolved line and declares nothing new):
+
+| surface | declared / drawn | share |
+|---|---|---|
+| history | 1,568 / 10,499 | 0.149 |
+| npcs | 5,156 / 42,932 | 0.120 |
+| economics | 549 / 1,932 | 0.284 |
+| tab:dossier | 49,011 / 213,133 | 0.230 |
+| tab:economics | 1,851 / 28,025 | 0.066 |
+| foundry:economics | 1,140 / 13,370 | 0.085 |
+| pdf:economics | 215 / 215 | 1 |
+
+**The undeclared register** (statePools, re-taken in scratch, not written, R-T), at the base and at the tip alike: DS-ECO 111, DS-SUP 51, DS-POP 54. The whole register re-takes at 1,409 lines / 478 pools. The difference from its pin is the siblings' declarations, which are the compose's.
+
+### Golden / manifest / census / pin rows moved, by cause (never re-recorded)
+
+- **Records:**
+  - R-AL (the merge): soak 1,000 16, golden 0;
+  - R-AV: soak 1,000 95, golden 131 (`economicViability`).
+  - The sets do not overlap in section.
+- **Pages on the 60:** 2 (R-AV).
+- **The wiring census:** re-taken at the merge (the declared columns gain this lane's `colour` marks).
+- **The manifest and the registers:** not re-pinned.
+- **Pins:** none edited. `outlookHooksResolved.test.js` gains 4 tests.
+- **The base's own reds, unchanged:** `typecheck:domain:strict` (crisisFactFindings +4, composeStateProse +2); the reds listed at CENSUS-3f.
+
+### Where CENSUS-3i starts
+
+Nothing of this lane remains but the compose. Two notes for whoever reads it:
+- **When R-AU lands**, read `cert:false-presumption` on `OUTLOOK_HOOK_SIBLINGS`: 45 → 0 is expected, with no page moved.
+- **The five read-but-unmarked DS lines of CENSUS-3g unit 3** are for the compose's mute and presumption reading.
