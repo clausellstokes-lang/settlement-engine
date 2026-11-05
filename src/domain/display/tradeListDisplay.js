@@ -21,6 +21,7 @@
 import { filterDeclared, lineText } from '../facts/drawDeclared.js';
 import { factsOf } from '../facts/factsOf.js';
 import { LUXURY_CLASS, NOT_A_GOOD } from '../../data/tradeListDeclarations.js';
+import { REVENUE_HOMES } from '../../data/revenueHomes.js';
 
 /** The stored trade marks → their kind. */
 const MARKS = Object.freeze([
@@ -90,4 +91,31 @@ export function displayTradeList(list, settlement, options = {}) {
  */
 export function tradeMarksOnPage(printed) {
   return new Set(printed.flatMap((raw) => tradeMarkOf(raw).kinds));
+}
+
+/**
+ * THE REVENUES THAT LEFT THE LISTS (CENSUS-3c; the chair's ruling R-P 2): a DISPLAY read model over
+ * the record's own trade lists and income table. A NOT_A_GOOD label the lists carry is printed under
+ * the income table, in its home's words (`data/revenueHomes.js`), when no income row of the same
+ * family already speaks for it and the record holds the fact behind it (`filterDeclared` against
+ * `factsOf`). A label with no home prints nowhere (the lane doc's "needs a home"). No figure is
+ * invented: the record holds no share for these, so the surfaces print them unmeasured.
+ * @param {any} settlement
+ * @returns {Array<{ text: string, desc: string }>}
+ */
+export function revenuesOffTheLists(settlement) {
+  const eco = settlement?.economicState;
+  if (!eco) return [];
+  const listed = new Set([...(eco.primaryExports || []), ...(eco.primaryImports || [])]
+    .filter((x) => typeof x === 'string').map((raw) => fold(tradeMarkOf(raw).label)));
+  const income = new Set((Array.isArray(eco.incomeSources) ? eco.incomeSources : [])
+    .map((/** @type {{ source?: unknown, name?: unknown } | null} */ r) => fold(r?.source ?? r?.name)));
+  const wanted = REVENUE_HOMES.filter((home) => home.labels.some((l) => listed.has(fold(l)))
+    && !home.family.some((f) => income.has(fold(f))));
+  return filterDeclared(wanted, {
+    facts: () => factsOf(settlement),
+    poolId: 'income:revenues-off-the-lists',
+    surface: 'economics',
+    drawKind: 'A',
+  }).map((home) => ({ text: home.text, desc: home.desc }));
 }
