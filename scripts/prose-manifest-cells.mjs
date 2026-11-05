@@ -147,6 +147,9 @@ export const MANIFEST_PROVENANCE = Object.freeze({
     + '0 added, 0 removed.'
     + ' 2026-11-04 (TRUTH, second step (unit D), docs/shift-records/2026-11-04-rung1-18-truth-2-unit-d.json, ODQ §934.105, RUNG 1 OF THE'
     + ' SOAK LADDER): re-recorded at the stage of 844acaccc because the infiltrator takes a real name and the criminal structure is not null beside a network; 24 of the 1,050 rows move, '
+    + '0 added, 0 removed.'
+    + ' 2026-11-04 (X-46 car 3, I7, docs/shift-records/2026-11-04-rung1-19-x46-car-3-i7-realised.json, ODQ §934.105, RUNG 1 OF THE'
+    + ' SOAK LADDER): re-recorded at the stage of 6ca454d2b because the realised table is re-measured at the composed tip and every settlement\'s density factor answers it; 158 of the 1,050 rows move, '
     + '0 added, 0 removed.',
 });
 
