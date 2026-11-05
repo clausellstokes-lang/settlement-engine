@@ -16,6 +16,7 @@ import { readFileSync } from 'node:fs';
 import { declarationOf, assertDeclarable } from '../../../src/domain/facts/factVocabulary.js';
 import { textOf } from '../../../src/domain/facts/textOf.js';
 import { STRESS_DESCS } from '../../../src/data/narrativeData.js';
+import * as espree from 'espree';
 
 const ledger = (name) => JSON.parse(readFileSync(new URL(`../../../docs/census/declarations/${name}.json`, import.meta.url), 'utf8'));
 
@@ -84,5 +85,78 @@ describe.each(TABLES)('%s carries the ledger\'s declarations', (name, root) => {
       const d = declarationOf(r.node);
       for (const a of [...d.needs, ...d.excludes]) expect(() => assertDeclarable(a)).not.toThrow();
     }
+  });
+});
+
+// ── INLINE TABLES (T branches inside a generator function: no live table to walk) ────────────
+
+/**
+ * Every object literal `{ text: <literal>, needs?, excludes?, crisis? }` in a source file, keyed by
+ * its text (a template literal's text is its quasis joined with `${…}` source).
+ * @param {string} rel the file, repo-relative
+ * @returns {Map<string, { needs: string[], excludes: string[], crisis: string[] }[]>}
+ */
+export function declaredLiteralsOf(rel) {
+  const src = readFileSync(new URL(`../../../${rel}`, import.meta.url), 'utf8');
+  const ast = espree.parse(src, { ecmaVersion: 'latest', sourceType: 'module', range: true, ecmaFeatures: { jsx: true } });
+  /** @type {Map<string, any[]>} */ const out = new Map();
+  const str = (n) => n.type === 'Literal' ? n.value : n.type === 'TemplateLiteral'
+    ? n.quasis.map((q, i) => q.value.cooked + (i < n.expressions.length ? '${' + src.slice(...n.expressions[i].range) + '}' : '')).join('') : undefined;
+  const walk = (n) => {
+    if (!n || typeof n !== 'object') return;
+    if (n.type === 'ObjectExpression') {
+      const prop = (k) => n.properties.find((p) => p.type === 'Property' && (p.key.name === k || p.key.value === k));
+      const t = prop('text');
+      if (t && typeof str(t.value) === 'string') {
+        const arr = (k) => { const p = prop(k); return p && p.value.type === 'ArrayExpression' ? p.value.elements.map((e) => e.value) : []; };
+        const key = str(t.value);
+        out.set(key, [...(out.get(key) || []), { needs: arr('needs'), excludes: arr('excludes'), crisis: arr('crisis') }]);
+      }
+    }
+    for (const k of Object.keys(n)) { const v = n[k]; if (Array.isArray(v)) v.forEach(walk); else if (v && typeof v.type === 'string') walk(v); }
+  };
+  walk(ast);
+  return out;
+}
+
+/**
+ * @param {string} name the ledger
+ * @param {string} rel the source file
+ * @param {(lineId: string, atom: string) => boolean} guaranteed atoms the cell's key or branch already guarantees (not written)
+ */
+function inlineArm(name, rel, guaranteed) {
+  const d = ledger(name);
+  const found = declaredLiteralsOf(rel);
+  const wrong = [];
+  for (const pool of d.pools) for (const line of pool.lines) {
+    if (line.text.includes('${')) continue; // a template row: held by its own arm
+    const want = expectedDeclaration(pool, line);
+    want.needs = want.needs.filter((a) => !guaranteed(line.lineId, a));
+    want.excludes = want.excludes.filter((a) => !guaranteed(line.lineId, a));
+    const declaring = want.needs.length || want.excludes.length || want.crisis.length;
+    const have = found.get(line.text);
+    if (!declaring) { if (have) wrong.push(`${line.lineId}: declares, the ledger does not`); continue; }
+    if (!have || have.length !== 1) { wrong.push(`${line.lineId}: ${have ? have.length : 0} declared rows`); continue; }
+    if (JSON.stringify(have[0]) !== JSON.stringify(want)) wrong.push(`${line.lineId}: ${JSON.stringify(have[0])} ≠ ${JSON.stringify(want)}`);
+  }
+  return wrong;
+}
+
+describe('SPATIAL_TEXT (spatialGenerator.js, inline T cells; carried through textOf)', () => {
+  // The cells are keyed by terrain, and some by a branch on the roster: those atoms are the key's
+  // (R-B1 widened to a cell key — the chair's ruling this lane makes, recorded in the lane doc).
+  const guaranteed = (lineId, a) => a.startsWith('terrain:')
+    || (a === 'institution: temple' && /\.(sacred|shrine)$/.test(lineId))
+    || (a === 'walls' && /^villageLayouts\.(hills|desert)(\.walled)?$/.test(lineId))
+    || (a === 'garrison' && lineId === 'townLayouts.mountain.garrison');
+  it('every declaring ledger line is declared in place, exactly', () => {
+    expect(inlineArm('SPATIAL_TEXT', 'src/generators/spatialGenerator.js', guaranteed)).toEqual([]);
+  });
+  it('the three template rows carry their atoms', () => {
+    const found = declaredLiteralsOf('src/generators/spatialGenerator.js');
+    const by = (head) => [...found.entries()].filter(([k]) => k.startsWith(head)).map(([, v]) => v[0]);
+    expect(by('Great river city: bridge quarter')).toEqual([{ needs: ['river', 'market'], excludes: [], crisis: [] }]);
+    expect(by('${sacredSubject} and green above the tideline')).toEqual([{ needs: ['coast'], excludes: [], crisis: [] }]);
+    expect(by('Close-built stone houses below the ${sacredHouse}')).toEqual([{ needs: ['gate'], excludes: [], crisis: [] }]);
   });
 });
