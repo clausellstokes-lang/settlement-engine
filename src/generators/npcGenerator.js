@@ -777,9 +777,9 @@ export const generateCrimeLevel = (npc, npcIndex, summary, allNpcs) => {
   // F3 FOOD-WORDS: a secret that says people are starving only where the food record goes hungry
   const stressEffects = secretsHeldByFoodRecord((summary.stressTypes || (stressType ? [stressType] : [])).flatMap(s => STRESS_INSTITUTION_EFFECTS[s] || []), summary.foodRecord);
   if (stressEffects.length > 0 && random01(0.45)) {
-    const effect = pickRandom2(stressEffects);
+    const effect = drawDeclared(stressEffects, { draw: pickRandom2, facts: () => factsOf({ npcs: allNpcs, stress: (summary.stressTypes || (stressType ? [stressType] : [])).map((type) => ({ type })), economicState: { foodSecurity: { foodRecord: summary.foodRecord } } }), ctx: { npc: npcIndex }, poolId: 'stressInstitutionEffects:STRESS_INSTITUTION_EFFECTS', surface: 'npcs', drawKind: 'R' }).line; // CENSUS-1c: ⚠ the 0.45 roll stays on the food-filtered pool's emptiness, as before (§2.2)
     const otherNpc = otherNpcOf({ npcs: allNpcs }, npcIndex); // CENSUS-1 fact 14: the other-NPC home's selection
-    return {
+    if (effect) return {
       what: fillSentenceSlots(effect.secret, { faction: topFaction, commodity, npc: otherNpc?.name }, { npc: 'someone' }), // F11: a fallback that opens a sentence is sentence-cased
       stakes: fillSentenceSlots(effect.stakes, { faction: govFaction, commodity, npc: otherNpc?.name }, { npc: 'someone' }),
     };
