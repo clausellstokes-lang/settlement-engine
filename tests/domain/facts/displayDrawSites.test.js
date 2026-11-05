@@ -20,6 +20,7 @@ import { settlementRumors, whatPhrase } from '../../../src/domain/display/settle
 import { conjunctionContent } from '../../../src/domain/display/causeConjunctionContent.js';
 import { causeLifecyclePhrase } from '../../../src/domain/display/causeLifecycleVocabulary.js';
 import { deriveWarName, deriveRouteName } from '../../../src/domain/display/warAndRoadNames.js';
+import { deriveMarketQuote, strongestDeviation } from '../../../src/domain/display/marketPrices.js';
 
 /** @param {() => unknown} fn */
 const ledgerOf = (fn) => withPresumptionLedger(fn).ledger;
@@ -102,5 +103,17 @@ describe('Appendix B row 103 — the war and road name pools (kind H)', () => {
     const road = withPresumptionLedger(() => deriveRouteName({ row, fromId: 'a' }));
     expect(road.result).toEqual(deriveRouteName({ row, fromId: 'a' }));
     expect(road.ledger.map((e) => e.pool)).toEqual(['ROUTE_NAME_POOLS.land.addressed']);
+  });
+});
+
+describe('Appendix B row 110 — the market movement phrases and crier frames (kinds T and H)', () => {
+  it('a quote resolves its movement; the crier line notes its frame, both unchanged', () => {
+    const good = { id: 'grain', label: 'Grain' };
+    const quote = withPresumptionLedger(() => deriveMarketQuote({ good, settlementId: 's', band: 'shortage', driftBand: 'shortage' }));
+    expect(quote.result).toEqual(deriveMarketQuote({ good, settlementId: 's', band: 'shortage', driftBand: 'shortage' }));
+    expect(quote.ledger.map((e) => [e.pool, e.drawKind])).toEqual([[`MOVEMENTS.${quote.result.movement}`, 'T']]);
+    const cried = withPresumptionLedger(() => strongestDeviation([quote.result], 'shortage'));
+    expect(cried.result).toEqual(strongestDeviation([quote.result], 'shortage'));
+    expect(cried.ledger.map((e) => e.pool)).toEqual(['CRIER_FRAMES.dear']);
   });
 });

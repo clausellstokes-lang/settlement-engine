@@ -58,6 +58,7 @@
 import { getSpatialLedger } from '../spatial/distanceRead.js';
 import { normalizeGood } from '../region/goodsCatalog.js';
 import { compareCodepoint } from '../deterministicSort.js';
+import { drawDeclared, resolveDeclared, lineText } from '../facts/drawDeclared.js';
 
 /** @typedef {'shortage'|'adequate'|'surplus'} Band */
 /** @typedef {'near_double'|'shade_above'|'usual'|'shade_under'|'third_under'} Movement */
@@ -202,7 +203,8 @@ export function deriveMarketQuote({ good, settlementId: _settlementId, band, dri
     label: good.label,
     band: useBand,
     movement,
-    phrase: MOVEMENTS[movement],
+    // CENSUS-1d unit 2 (row 110, kind T): the movement's phrase resolved through `resolveDeclared`.
+    phrase: String(lineText(resolveDeclared(MOVEMENTS[movement], { poolId: `MOVEMENTS.${movement}`, surface: 'economics' }).line) ?? MOVEMENTS[movement]),
     tag: tagFor(useBand),
   };
 }
@@ -245,7 +247,13 @@ export const CRIER_FRAMES = Object.freeze({
  *  @param {{ label: string, phrase: string, receipt: string }} slots @returns {string} */
 function crierLineFor(tag, seed, { label, phrase, receipt }) {
   const pool = CRIER_FRAMES[tag];
-  const frame = seed ? pool[fnv1a32(`${seed}::${tag}`) % pool.length] : pool[0];
+  // CENSUS-1d unit 2 (Appendix B row 110, kind H): the same modulus over the FULL pool,
+  // resolved through `drawDeclared`; a market quote holds no settlement record, so no facts are
+  // handed (a declared frame would be refused); none declares.
+  const frame = String(lineText(drawDeclared(pool, {
+    draw: (p) => (seed ? p[fnv1a32(`${seed}::${tag}`) % p.length] : p[0]),
+    key: `${seed}::${tag}`, poolId: `CRIER_FRAMES.${tag}`, surface: 'economics', drawKind: 'H',
+  }).line) ?? pool[0]);
   return frame.replace('{label}', label).replace('{phrase}', phrase).replace('{receipt}', receipt);
 }
 
