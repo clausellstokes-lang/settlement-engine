@@ -46,6 +46,7 @@ import {
 // `src/domain/prose/` import there; `kinSpines`'s docblock carries the measurement). A script
 // is outside `src/`, so the island fence — which scans `src/` alone — is untouched.
 import { contentWords } from '../src/domain/prose/composedWalker.js';
+import { assertDeclarable, POOL_RULINGS, STATE_MARK_DIMENSIONS } from '../src/domain/facts/factVocabulary.js';
 
 const ROOT = path.resolve(path.dirname(url.fileURLToPath(import.meta.url)), '..');
 const checkOnly = process.argv.includes('--check');
@@ -235,6 +236,55 @@ const CANONICAL_RE = /^0\.\s+\*\(([^)]*canonical[^)]*)\)\*\s+(.*)$/;
  * is deliberately NOT a label — the remainder must be empty or a gloss opener.
  */
 const BOLD_LINE_RE = /^\*\*((?:(?!\*\*).)+)\*\*(\s*(?:[—–·,:(-]\s*.*|\*.*)?)$/;
+
+/**
+ * ⭐ THE POOL-LEVEL DECLARATION (CENSUS-1b wave 1 item 2; `docs/DESIGN_POOL_CENSUS.md` §3.1). A
+ * pool label may end in ONE brace group, `**UNDER SIEGE** {crisis: under_siege · no walls}`, holding
+ * the atoms the pool key guarantees (declared once on the pool, never on its lines) and the two
+ * pool rulings, `{crisis-scoped}` (silence there reads as calm) and `{colour}` (the pool presumes
+ * nothing). Items are split on `·`; each must be a ruling or a DECLARABLE atom (a home answers it).
+ */
+const POOL_BRACES_RE = /^(\*\*.*\*\*.*?)\s*\{([^{}]*)\}\s*$/;
+
+/**
+ * Validate a pool's brace group into its declaration.
+ * @param {string} body the text inside the braces
+ * @param {string} where for the error
+ * @returns {{ declares: string[], crisisScoped: boolean, colour: boolean }}
+ */
+function poolBraces(body, where) {
+  const out = { declares: [], crisisScoped: false, colour: false };
+  for (const item of body.split('·').map((x) => x.trim()).filter(Boolean)) {
+    if (item === 'crisis-scoped') { out.crisisScoped = true; continue; }
+    if (item === 'colour') { out.colour = true; continue; }
+    if (POOL_RULINGS.includes(item)) continue;
+    try { assertDeclarable(item.replace(/^no\s+/i, '')); } catch (e) {
+      throw new Error(`${where}: the pool's brace group names '${item}', which is neither a pool ruling (${POOL_RULINGS.join(', ')}) nor a declarable atom — ${e.message}`, { cause: e });
+    }
+    out.declares.push(item);
+  }
+  return out;
+}
+
+/** The kernel's mark words, flat: a state variant's mark is one of these, `dm-only`, or a declarable atom. */
+const MARK_WORDS = new Set(Object.values(STATE_MARK_DIMENSIONS).flat());
+
+/**
+ * ⭐ THE TAG SLOT IS A CLOSED VOCABULARY (CENSUS-1b wave 1 item 2). Every mark a STATE variant's
+ * tag slot carries after its angle is the audience mark, a kernel mark word, or a fact ATOM of
+ * the vocabulary (`X` needs, `no X` excludes, `crisis: …`), and an atom must be DECLARABLE: an
+ * unknown word, or one whose dimension has no home yet, refuses the projection by name.
+ * @param {ReadonlyArray<string>} marks
+ * @param {string} where
+ */
+function assertStateMarks(marks, where) {
+  for (const m of marks) {
+    if (m === 'dm-only' || MARK_WORDS.has(m)) continue;
+    try { assertDeclarable(m.replace(/^no\s+/i, '')); } catch (e) {
+      throw new Error(`${where}: the tag slot carries '${m}', which is no mark word and no declarable atom — ${e.message}`, { cause: e });
+    }
+  }
+}
 /** A trailing italic authoring note. */
 const TRAILING_NOTE_RE = /\s*\*\([^*]*\)\*\s*$/;
 /**
@@ -376,12 +426,15 @@ function parseAnnex(src, headerRe, label, options = {}) {
   let block = null;
   let pool = null;
   let lastBold = null;
+  /** the pending label's brace group, validated (CENSUS-1b wave 1) */
+  let lastBraces = null;
   let lastIndex = -1;
   let skipping = false;
 
   const openPool = (key) => {
     if (block === null) throw new Error(`${label}: pool "${key}" outside any block`);
-    pool = { key, variants: [], declared: {} };
+    pool = { key, variants: [], declared: {}, braces: lastBraces };
+    lastBraces = null;
     block.pools.push(pool);
     lastIndex = -1;
   };
@@ -510,8 +563,14 @@ function parseAnnex(src, headerRe, label, options = {}) {
       continue;
     }
 
-    const bold = line.match(BOLD_LINE_RE);
-    if (bold && isPoolLabel(bold[1], bold[2] || "")) { lastBold = bold[1]; continue; }
+    // A label's trailing brace group is the pool's own declaration; the label is read without it.
+    const braced = line.match(POOL_BRACES_RE);
+    const bold = (braced ? braced[1] : line).match(BOLD_LINE_RE);
+    if (bold && isPoolLabel(bold[1], bold[2] || "")) {
+      lastBold = bold[1];
+      lastBraces = braced ? poolBraces(braced[2], `${label} ${block.id} :: ${poolKeyOf(bold[1])}`) : null;
+      continue;
+    }
 
     const canonical = line.match(CANONICAL_RE);
     if (canonical) {
@@ -541,6 +600,7 @@ function parseAnnex(src, headerRe, label, options = {}) {
       lastIndex = n;
       const first = parseTag(variant[2]);
       const folded = foldTags(first, variant[3] ? parseTag(variant[3]) : null);
+      if (options.closedMarks) assertStateMarks(folded.marks, `${label} ${block.id} :: ${pool.key} #${n}`);
       pool.variants.push({
         index: n,
         angle: first.angle,
@@ -852,6 +912,11 @@ function projectBlocks(blocks, options = {}) {
             });
             return kin.length ? { kin } : {};
           })(),
+          // CENSUS-1b wave 1: the pool's brace group, emitted only where the annex wrote one, so
+          // no leaf byte moves until a pool declares (`docs/DESIGN_POOL_CENSUS.md` §3.1, §3.5).
+          ...(p.braces && p.braces.declares.length ? { declares: p.braces.declares } : {}),
+          ...(p.braces && p.braces.crisisScoped ? { crisisScoped: true } : {}),
+          ...(p.braces && p.braces.colour ? { colour: true } : {}),
           ...(p.declared.explains ? { explains: p.declared.explains } : {}),
           ...(p.declared.spines ? { spines: p.declared.spines } : {}),
           ...(p.declared.covers ? { covers: p.declared.covers } : {}),
@@ -976,7 +1041,7 @@ const CLAUSE_OPENERS = Object.values(connectives.lists)
   .map((joint) => joint.trim().split(/\s+/)[0].toLowerCase().replace(/[^a-z]/g, ''))
   .filter(Boolean);
 
-const stateBlocks = parseAnnex(stateSrc, STATE_HEADER, 'DOSSIER_STATE', { regionEnd: CONNECTIVES_HEADING_RE });
+const stateBlocks = parseAnnex(stateSrc, STATE_HEADER, 'DOSSIER_STATE', { regionEnd: CONNECTIVES_HEADING_RE, closedMarks: true });
 const causalBlocks = parseAnnex(causalSrc, CAUSAL_HEADER, 'CAUSAL_DOSSIER');
 
 const stateDrop = assertNothingDropped(stateSrc, STATE_HEADER, stateBlocks, 'DOSSIER_STATE', { regionEnd: CONNECTIVES_HEADING_RE });

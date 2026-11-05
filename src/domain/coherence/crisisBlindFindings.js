@@ -43,7 +43,7 @@ import { activeCrisisTypes, familyActiveIn } from '../crisis/crisisFacts.js';
  * @typedef {object} CalmClaim
  * @property {string} claim
  * @property {RegExp} re
- * @property {string} family a key of CRISIS_FAMILIES, or 'migration'
+ * @property {string} family a key of CRISIS_FAMILIES, or a key of TYPE_FAMILIES ('migration', 'debt')
  */
 
 /** @type {ReadonlyArray<CalmClaim>} */
@@ -76,6 +76,9 @@ const CLAIMS = Object.freeze([
   { claim: 'nobody would replace the seat', re: /\bdoes not come up, because there is nobody the \p{L}+ would name\b/u, family: 'succession' },
   { claim: 'the seat is safe', re: /\bsafe for the plainest reason a seat can be safe\b/, family: 'succession' },
   // unrest: insurgency, slave revolt, wartime
+  // Rung 2D unit 2 (the chair's ruling): an insurgency or a revolt denies the seat's safety as
+  // surely as an open succession (rung 2C §3c: `soak1k-1` slave revolt, `-3001` insurgency).
+  { claim: 'the seat is safe', re: /\bsafe for the plainest reason a seat can be safe\b/, family: 'unrest' },
   { claim: 'very little street violence', re: /\bvery little street violence\b/, family: 'unrest' },
   { claim: 'random violence is put down', re: /\brandom violence is put down\b/, family: 'unrest' },
   // crisis: any active crisis
@@ -84,10 +87,39 @@ const CLAIMS = Object.freeze([
   { claim: 'things are fine', re: /^Things are fine\./, family: 'crisis' },
   // migration (an influx): a page that says families are leaving
   { claim: 'families leaving', re: /\bfamilies left this week\b/, family: 'migration' },
+  // ── RUNG 2D UNIT 3 (the chair's ruling): the twelve rows rung 2C's sixty-line read
+  // (`docs/SOAK_10000_RUNG2C_2026-11-04.md` §3c) found outside the thirty claims above, nine
+  // phrases. The instrument only: the goals (npcStructure.js, the registry's R11 / CENSUS-4)
+  // and the desk lines keep their words; the cure is their declarations, not this table.
+  // A ruler's want of "current stability" (×4 in the city tier: a fracture, a debt).
+  { claim: 'current stability', re: /\b[Uu]se current stability to address structural vulnerabilities\b/, family: 'crisis' },
+  // A ruler's want that takes the order as settled, under an open succession or an uprising.
+  { claim: 'competent administration', re: /\bcompetent administration of current responsibilities\b/, family: 'succession' },
+  { claim: 'competent administration', re: /\bcompetent administration of current responsibilities\b/, family: 'unrest' },
+  { claim: 'stable institutional competition', re: /\bstable institutional competition\b/, family: 'succession' },
+  { claim: 'stable institutional competition', re: /\bstable institutional competition\b/, family: 'unrest' },
+  // The food band's own word, under a siege or a famine, and under an influx it cannot feed.
+  { claim: 'food secure', re: /^Food Secure\b/, family: 'hunger' },
+  { claim: 'food secure', re: /^Food Secure\b/, family: 'migration' },
+  // An economy line that says nothing is failing, or that no one export matters, under hunger.
+  { claim: 'nothing is failing', re: /^Nothing about that is failing\b/, family: 'hunger' },
+  { claim: 'depends on none alone', re: /\bsells several things outward and depends on none of them alone\b/, family: 'hunger' },
+  // A place under threat that a stranger walks into unchallenged, or where pilgrims queue at ease.
+  { claim: 'nobody stops a stranger', re: /\bwithout being stopped, challenged or counted by anybody at all\b/, family: 'threat' },
+  { claim: 'pilgrims queue patiently', re: /\bqueue patiently for their turn\b/, family: 'threat' },
+  // A year that closes ahead, under a debt that takes the revenue.
+  { claim: 'a year closed ahead', re: /\bcloses every year ahead\b/, family: 'debt' },
 ]);
 
-/** The migration "family": its one type, outside the state-prose dimensions. */
-const MIGRATION_TYPES = Object.freeze(['mass_migration']);
+/**
+ * The claims read under a single crisis type rather than a state-prose family (outside the
+ * kernel's dimensions): mass migration (an influx), and since rung 2D a debt.
+ * @type {Readonly<Record<string, ReadonlyArray<string>>>}
+ */
+const TYPE_FAMILIES = Object.freeze({
+  migration: Object.freeze(['mass_migration']),
+  debt: Object.freeze(['indebted']),
+});
 
 /** @param {string} text @returns {string[]} */
 function sentencesOf(text) {
@@ -110,7 +142,8 @@ export function crisisBlindFindings(settlement, surfaces) {
   const active = {};
   for (const { family } of CLAIMS) {
     if (active[family]) continue;
-    active[family] = family === 'migration' ? types.filter((t) => MIGRATION_TYPES.includes(t)) : familyActiveIn(settlement, family, types);
+    const own = TYPE_FAMILIES[family];
+    active[family] = own ? types.filter((t) => own.includes(t)) : familyActiveIn(settlement, family, types);
   }
   /** @type {CrisisBlindFinding[]} */
   const findings = [];

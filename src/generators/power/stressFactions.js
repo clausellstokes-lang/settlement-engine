@@ -47,7 +47,7 @@ const pushPoolNamed = (factions, category, power, desc, extra = {}) => {
 
 // applyStressEventFactions — apply every active stress type's power reweighting
 // and faction injection to `factions` (mutates in place).
-export const applyStressEventFactions = (factions, ke, P, S, config, institutions) => { const force = forceWordsOf(defenseFactsOf({ institutions: institutions || [] })), soldiersStand = force.members === 'soldiers'; // F1 (rung 1B): the force words read the record
+export const applyStressEventFactions = (factions, ke, P, S, config, institutions, stressEntries = []) => { const force = forceWordsOf(defenseFactsOf({ institutions: institutions || [] })), soldiersStand = force.members === 'soldiers'; // F1 (rung 1B): the force words read the record
   (ke('under_siege') &&
     (factions.forEach((N) => {
       ((N.faction.toLowerCase().includes('military') || N.faction.toLowerCase().includes('guard')) &&
@@ -266,8 +266,9 @@ export const applyStressEventFactions = (factions, ke, P, S, config, institution
             }))
           // RUNG2-F13 (soak1k-0, soak1k-4204): the weak-economy arm minted an emigration under an
           // influx. It reads the one direction (domain/crisis/migrationDirection.js); same power, same
-          // governing ×0.85, so only the words move.
-          : migrationDirectionOf(null) === 'exodus' ? (factions.push({
+          // governing ×0.85, so only the words move. CENSUS-1b unit B: the direction is the ENTRY's
+          // (the power step now receives the stress entries).
+          : migrationDirectionOf((stressEntries || []).find((e) => e?.type === 'mass_migration') ?? null) === 'exodus' ? (factions.push({
               faction: 'Departure Committee',
               power: 8,
               desc: "Informal group coordinating group departures, selling assets, and managing the logistics of relocation. Their existence is a public statement about the settlement's prospects.",

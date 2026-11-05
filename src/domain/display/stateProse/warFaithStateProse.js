@@ -118,6 +118,7 @@ import { documentSideOf } from '../../worldPulse/treatyOrientation.js';
 import { observancePhraseOf } from '../../dossier/faithReading.js';
 import { wallsAnswered } from '../../defense/defenseFacts.js';
 import { crisisAnswered } from '../../crisis/crisisFacts.js';
+import { factsAnswered } from '../../facts/factsAnswered.js';
 
 /**
  * The desk's corpus, typed at the import boundary — the generated leaves stay pure data
@@ -805,7 +806,7 @@ export function nicheContestPoolKey(ranks) {
  */
 export function warFaithStateProse(settlement, readings = {}, options = {}) {
   // F10 + F12: the walls and the five crisis dimensions answered once, from the defence and crisis readers (stateProseKernel law 5).
-  options = crisisAnswered(settlement, wallsAnswered(settlement, options));
+  options = factsAnswered(settlement, crisisAnswered(settlement, wallsAnswered(settlement, options)));
   const war = readings.war || null;
   const faith = readings.faith || null;
   const name = properFill(settlement?.name);

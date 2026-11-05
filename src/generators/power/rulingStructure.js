@@ -690,10 +690,17 @@ export const generatePowerStructure = (
               ? 'Mages and arcane practitioners hold real influence through monopoly on magical services and the latent fear their capabilities inspire.'
               : 'Magical practitioners are consulted but not formally empowered. Their influence is advisory, transactional, and quietly resented.',
     });
+  // CENSUS-1b unit B (the chair's ruling): the power step reads the stress ENTRIES the intent
+  // carries — their kinds, and the migration entry's direction — not `config.stressTypes`. A held
+  // intent written before the entries were carried falls back to the config's kinds (no entry, so
+  // the catalog's direction). At birth the two kind lists are one list, so no birth moves.
+  const stressEntries = Array.isArray(projection.stressEntries) ? projection.stressEntries : null;
   const stressType = (config == null ? void 0 : config.stressType) || null,
-    stressTypes = (config == null ? void 0 : config.stressTypes) || (stressType ? [stressType] : []),
+    stressTypes = stressEntries
+      ? stressEntries.map((e) => e.type)
+      : (config == null ? void 0 : config.stressTypes) || (stressType ? [stressType] : []),
     hasStress = (s) => stressTypes.includes(s);
-  applyStressEventFactions(factions, hasStress, governingFaction, hasNobleInst, config, institutions);
+  applyStressEventFactions(factions, hasStress, governingFaction, hasNobleInst, config, institutions, stressEntries || []);
   normalizeAndAnnotateFactions(factions, forceWordsOf(defenseFactsOf({ institutions: nativeInstitutions }))); // F1: the standing lines name the force that stands
   // Tag each faction with a category for power-economy correlation
   factions.forEach((f) => {
@@ -711,6 +718,7 @@ export const generatePowerStructure = (
     governingFaction,
     hasNobleInstitution: hasNobleInst,
     stressTypes,
+    stressEntries: stressEntries || [],
     fallbackStressType: stressType,
   });
   // ── Public legitimacy & faction dynamics ────────────────────────────────
