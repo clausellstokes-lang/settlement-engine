@@ -188,7 +188,7 @@ export const ROUTE_WORDS = Object.freeze(['road', 'river', 'port', 'crossroads',
  * @property {string} [terrain] @property {string} [route] @property {string} [tier]
  * @property {(npc: unknown) => boolean|undefined} [hasOtherNpc]
  * @property {boolean} [soldiers] @property {boolean} [commander] @property {any} [faith] @property {boolean} [guardPresence]
- * @property {boolean} [guild]
+ * @property {boolean} [guild] @property {boolean} [sacredHouse]
  * @property {ReadonlyArray<string>} [foodSources] @property {ReadonlyArray<unknown>} [imports]
  * @property {ReadonlyArray<unknown>} [exports] @property {string|null} [culture] @property {string} [crime]
  * @property {string} [prosperity]
@@ -249,6 +249,10 @@ export const FACT_DIMENSIONS = Object.freeze({
   // ── presence: institutions (fact 11; `facts/institutions.js`) ──
   temple: dim({ shape: 'presence', home: 'hasInstitution', reader: (f) => (typeof f.hasInstitution === 'function' ? f.hasInstitution('temple') : undefined) }),
   docks: dim({ shape: 'presence', home: 'hasInstitution', reader: (f) => (typeof f.hasInstitution === 'function' ? f.hasInstitution('docks') : undefined) }),
+  // R-AE (CENSUS-1f, 2026-11-05): ONE composite, defined once because more than one spatial line
+  // needs it — a sacred house of any kind the roster names (`factsOf.js :: sacredHouse`: temple ∨
+  // monastery); `temple` stays narrow. A line never composes atoms itself.
+  sacredHouse: dim({ shape: 'presence', home: 'sacredHouse', reader: (f) => bool(f.sacredHouse) }),
   institution: dim({ shape: 'presence', home: 'hasInstitution', keys: INSTITUTION_WORDS,
     reader: (f, key) => (typeof f.hasInstitution === 'function' && key ? f.hasInstitution(key) : undefined) }),
   // ── presence: the rest of §1 / §3.2, homed or not ──

@@ -26,6 +26,8 @@ The design's §1 marked these "single" but they were not getters on `factsOf`, s
 
 `guardPresence` = watch ∨ garrison ∨ militia ∨ hired company, defined ONCE in `factsOf` as a named derived reader over the homes (the hook pools' "a guard captain…" lines and CENSUS-2's 24 `stop` lines declare `needs: guardPresence`). A composite is lawful only when it is named in the vocabulary module with its definition beside it; a line never composes atoms itself.
 
+**Added 2026-11-05 06:17 UTC (CENSUS-1f, the chair's R-AE):** the second composite, `sacredHouse` = a temple-kind house (church, cathedral, shrine, chapel, abbey: `institutions.js :: INSTITUTION_KIND_PATTERNS.temple`) ∨ a monastery-kind house (monastery, friary), as the roster names them, defined once in `factsOf` and named in `factVocabulary.js`; `temple` stays narrow. A `council` presence has no home: no reader of the power structure's bodies exists (a council shows only through the government label, `ruler: council`), so the lines that want one ("Fund the council") wait on `council`.
+
 ## 4. Water
 
 The vocabulary takes the reader's values and nothing else: `waterAccessKind` answers coast, river, navigable; the trade-route reader answers `port`. `lake` is an atom only if the record carries it (CENSUS-1b checks; if not, it is dropped and the procedure is corrected). The procedure document is corrected to this list.
