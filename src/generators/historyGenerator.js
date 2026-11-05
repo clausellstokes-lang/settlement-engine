@@ -334,6 +334,31 @@ const generateEventNarrative = (eventTemplate, yearsAgo, extraTokens = {}, descS
 };
 
 // ─── buildHistoricalEvent ─────────────────────────────────────────────────────
+
+/**
+ * THE TENSION TEMPLATES' DECLARATIONS (R-AL, CENSUS-1g unit 4), read at the selection: a template
+ * that presumes a fact declares it beside the table (never on the template object, which is spread
+ * into the record). `demographic_pressure` presumes a live migration — `crisis: migration` (R-I:
+ * "one of K must be active" is THE spelling; a bare `migration` is no atom). A refused template
+ * is set aside and the selection's own fallback draws the next one (no draw moved, R-Q).
+ * @type {Readonly<Record<string, Readonly<{ crisis?: ReadonlyArray<string> }>>>}
+ */
+export const TENSION_TEMPLATE_DECLARATIONS = Object.freeze({
+  demographic_pressure: Object.freeze({ crisis: Object.freeze(['migration']) }),
+});
+
+/**
+ * Is a selected tension template admitted by the birth so far (noted in the ledger when it declares)?
+ * @param {{ type: string }} tmpl @param {any} facts the history's `hookFacts` thunk
+ */
+const tensionAdmitted = (tmpl, facts) => {
+  const decl = TENSION_TEMPLATE_DECLARATIONS[tmpl.type];
+  if (!decl) return true;
+  const line = Object.freeze({ text: tmpl.type, ...decl });
+  return drawDeclared([line], {
+    draw: (p) => p[0], facts, poolId: 'historyData:HISTORICAL_EVENTS_DATA.tension', surface: 'history', drawKind: 'R',
+  }).line !== null;
+};
 /**
  * Select and personalise a set of current tensions for this settlement.
  * Uses institution presence, economic state, stress type, and neighbor
@@ -474,7 +499,7 @@ const buildHistoricalEvent = (
     const tensionType = STRESS_TO_TENSION[primaryStress];
     if (tensionType && !usedTypes.has(tensionType)) {
       const tmpl = HISTORICAL_EVENTS_DATA.find(e => e.type === tensionType);
-      if (tmpl) {
+      if (tmpl && tensionAdmitted(tmpl, hookFacts)) {
         selected.push({ ...tmpl });
         usedTypes.add(tensionType);
       }
@@ -503,6 +528,7 @@ const buildHistoricalEvent = (
     // roster here is the pre-trim one; the density law's trim only removes a criminal faction,
     // never adds one, so "none here" is "none on the final record".
     if (candidate.type === 'crime_wave' && !crimeSignalOf({ seats: factions, estate: institutions }).present) continue;
+    if (!tensionAdmitted(candidate, hookFacts)) continue; // R-AL: a template that presumes a fact declares it
     selected.push({ ...candidate });
     usedTypes.add(candidate.type);
   }

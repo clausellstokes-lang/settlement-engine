@@ -1756,7 +1756,8 @@ describe('SEAM car 4 — §2.5\'s grammar, and every refusal it declares', () =>
     const marks = new Set(allStateBlocks.flatMap(([, b]) => Object.values(b.pools).flat())
       .flatMap((v) => v.marks || []));
     expect([...marks].filter((m) => m.startsWith('grammar'))).toEqual([]);
-    const src = readFileSync(resolve(ROOT, 'scripts/generate-dossier-state-prose.mjs'), 'utf8');
+    // CENSUS-1g unit 5: the annex parse (which routes the tag) moved verbatim to scripts/lib/dossier-annex-parse.mjs.
+    const src = readFileSync(resolve(ROOT, 'scripts/lib/dossier-annex-parse.mjs'), 'utf8');
     expect(src).toContain('GRAMMAR_TAG_RE');
     // No variant carries a grammar tag yet — Shift 1 authors them — so the claim the corpus
     // supports is the ABSENCE, pinned in both directions.
