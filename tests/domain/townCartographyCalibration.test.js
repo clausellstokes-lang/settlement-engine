@@ -430,6 +430,19 @@
  *   worst slice now reads 2.2381 at town (21 -> 47) against the declared 1.6. CORPUS_ROWS stays 504; the throw
  *   census stays 0.
  *
+ *   2026-11-04 — X-46 CAR 3, I7, THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER; record
+ *   docs/shift-records/2026-11-04-rung1-19-x46-car-3-i7-realised.json; the chair signs by the owner's
+ *   delegation, vetoable). Written from the staged tree S19 (the step's tree with the door paths carried from
+ *   the branch). The per-tier maximum roster reads 11/15/22/46/92/105; CARTOGRAPHY_CALIBRATION.MAX_INSTITUTIONS
+ *   11/15/22/47/92/105 -> 11/15/22/46/92/105 by hand, the corpus re-captured at it (bytes identical where no
+ *   cap bit). Re-keyed by measurement over the recorded corpus (the suite's own definitions):
+ *   FROZEN.maxInstitutions 11/15/22/47/92/105 -> 11/15/22/46/92/105; FROZEN.maxBuildings 12/19/30/102/216/256
+ *   -> 11/19/30/104/216/257; DUPLICATES.permille 126/199/43/59/52/57 -> 137/195/34/57/54/55 (derived ceilings
+ *   202/319/69/95/84/92 -> 220/312/55/92/87/88); the FALSIFIER { thorp: 33, hamlet: 15, village: 10, town: 35,
+ *   city: 37, metropolis: 29 } = 159 -> { thorp: 30, hamlet: 9, village: 5, town: 31, city: 37, metropolis: 33
+ *   } = 145. W6 stays the one named red until record 27: its worst slice now reads 2.3 at town (20 -> 46)
+ *   against the declared 1.6. CORPUS_ROWS stays 504; the throw census stays 0.
+ *
  * To re-record after an INTENTIONAL change, run:
  *   UPDATE_CARTOGRAPHY_CALIBRATION=1 npx vitest run tests/domain/townCartographyCalibration.test.js
  * and add a row above before committing. Re-recording without adding a row is a
@@ -497,12 +510,12 @@ const TUNING_SOURCE = resolve(
  * would red on every deliberate cap change and say nothing the count cap does not.
  */
 const FROZEN = Object.freeze({
-  thorp: Object.freeze({ throws: 0, maxInstitutions: 11, maxBuildings: 12 }),
+  thorp: Object.freeze({ throws: 0, maxInstitutions: 11, maxBuildings: 11 }),
   hamlet: Object.freeze({ throws: 0, maxInstitutions: 15, maxBuildings: 19 }),
   village: Object.freeze({ throws: 0, maxInstitutions: 22, maxBuildings: 30 }),
-  town: Object.freeze({ throws: 0, maxInstitutions: 47, maxBuildings: 102 }),
+  town: Object.freeze({ throws: 0, maxInstitutions: 46, maxBuildings: 104 }),
   city: Object.freeze({ throws: 0, maxInstitutions: 92, maxBuildings: 216 }),
-  metropolis: Object.freeze({ throws: 0, maxInstitutions: 105, maxBuildings: 256 }),
+  metropolis: Object.freeze({ throws: 0, maxInstitutions: 105, maxBuildings: 257 }),
 });
 
 /**
@@ -547,12 +560,12 @@ const FROZEN = Object.freeze({
  * those, which is the evidence that the census measures the cure rather than nothing.
  */
 const DUPLICATES = Object.freeze({
-  thorp: Object.freeze({ permille: 126 }),
-  hamlet: Object.freeze({ permille: 199 }),
-  village: Object.freeze({ permille: 43 }),
-  town: Object.freeze({ permille: 59 }),
-  city: Object.freeze({ permille: 52 }),
-  metropolis: Object.freeze({ permille: 57 }),
+  thorp: Object.freeze({ permille: 137 }),
+  hamlet: Object.freeze({ permille: 195 }),
+  village: Object.freeze({ permille: 34 }),
+  town: Object.freeze({ permille: 57 }),
+  city: Object.freeze({ permille: 54 }),
+  metropolis: Object.freeze({ permille: 55 }),
 });
 
 /**
@@ -1173,8 +1186,8 @@ describe('W7 a corpus that outgrows the derived caps is LOUD', () => {
     // roster counts alone. The four tiers are the four that could not draw. ⚠ FIVE SINCE
     // 2026-09-30 (the urban band, ODQ §934.86): complete city blocks put 68 of the corpus's
     // cities over the superseded city binding (64), which no city reached before.
-    expect(refused).toEqual({ thorp: 33, hamlet: 15, village: 10, town: 35, city: 37, metropolis: 29 });
-    expect(Object.values(refused).reduce((sum, count) => sum + count, 0)).toBe(159);
+    expect(refused).toEqual({ thorp: 30, hamlet: 9, village: 5, town: 31, city: 37, metropolis: 33 });
+    expect(Object.values(refused).reduce((sum, count) => sum + count, 0)).toBe(145);
     // And the superseded per-row byte band is below what the corpus really produces,
     // which is the second premise the cap change alone could never have reached.
     const worstRow = Object.values(manifest)
@@ -1244,7 +1257,8 @@ describe('W8 the drawn corpus does not repeat itself', () => {
     // 194/316/74/96/84/88 -> 194/316/74/96/84/87 on 2026-11-04: X-46 CAR 1B, SECOND STEP (U4–U5) (header), the same operator.
     // 194/316/74/96/84/87 -> 194/316/72/96/84/87 on 2026-11-04: PLACE-NOT-TIER (R6, UNITS 1–2) (header), the same operator.
     // 194/316/72/96/84/87 -> 202/319/69/95/84/92 on 2026-11-04: PINS, FIRST STEP (UNITS 1–3 AND THE CHAIR'S ADDENDUM) (header), the same operator.
-    expect(CARTOGRAPHY_TIERS.map(duplicateCeilingPermille)).toEqual([202, 319, 69, 95, 84, 92]);
+    // 202/319/69/95/84/92 -> 220/312/55/92/87/88 on 2026-11-04: X-46 CAR 3, I7 (header), the same operator.
+    expect(CARTOGRAPHY_TIERS.map(duplicateCeilingPermille)).toEqual([220, 312, 55, 92, 87, 88]);
     // And the derivation is live — a hypothetical reading derives its own ceiling.
     expect(Math.ceil((100 * CARTOGRAPHY_HEADROOM_PERMILLE) / 1000)).toBe(160);
   });
