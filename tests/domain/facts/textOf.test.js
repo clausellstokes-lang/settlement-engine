@@ -26,6 +26,7 @@ describe('textOf', () => {
     expect(textOf(pilgrims)('X')).toBe('Pilgrims in travel-stained cloaks queue patiently for their turn at the holy places.');
     const rows = [...ARRIVAL_SENSES.flatMap((s) => [...s.lines, ...s.dominant]), ...Object.values(ARRIVAL_PEOPLE).flat(), ...Object.values(ARRIVAL_SCENES).flat()];
     expect(rows.every((r) => typeof textOf(r) === 'function' || typeof textOf(r) === 'string')).toBe(true);
-    expect(rows.filter((r) => typeof r === 'object').length).toBe(86);
+    // 86 → 92 by cause: CENSUS-2f unit 2 (R-AP) declared the fish key's three bare lines and the faith key's bell, incense and hymn
+    expect(rows.filter((r) => typeof r === 'object').length).toBe(92);
   });
 });

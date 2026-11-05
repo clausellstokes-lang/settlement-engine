@@ -126,10 +126,12 @@ export const ARRIVAL_SENSES = Object.freeze([
     institutions: ['fish market', 'fishmonger', 'fishing', 'fisher', 'fishers'],
     trade: ['fish'],
     lines: [
-      { text: () => "Gulls quarrel over the fish stalls, and the air smells of the morning's catch.", needs: ['market', 'navigable'] },
-      () => 'A fishmonger shouts a price over the slap of wet baskets.',
-      () => 'Nets hang drying on poles, and the smell of the catch follows you.',
-      () => 'A basket of fish, still flapping, is carried past at a run.',
+      // CENSUS-2f, R-AP: the picker reaches `fish` by a fish market's or a fishmonger's NAME, which guarantees no
+      // catch (soak1k-152), so every line here declares `fish` (the food record's source) and a refused beat redraws.
+      { text: () => "Gulls quarrel over the fish stalls, and the air smells of the morning's catch.", needs: ['market', 'navigable', 'fish'] },
+      { text: () => 'A fishmonger shouts a price over the slap of wet baskets.', needs: ['fish'] },
+      { text: () => 'Nets hang drying on poles, and the smell of the catch follows you.', needs: ['fish'] },
+      { text: () => 'A basket of fish, still flapping, is carried past at a run.', needs: ['fish'] },
     ],
     dominant: [
       { text: () => 'Racks of drying fish line the way in, and the smell of salt and catch is everywhere.', needs: ['navigable'] },
@@ -168,10 +170,12 @@ export const ARRIVAL_SENSES = Object.freeze([
     institutions: ['cathedral', 'temple', 'church', 'churches', 'chapel', 'monastery', 'abbey', 'shrine', 'priory', 'friary', 'priest'],
     trade: ['pilgrim', 'relic', 'religious tourism'],
     lines: [
-      () => 'A bell marks the hour, and a few heads bow as it rings.',
-      () => 'The smell of incense drifts out into the press of the lane.',
+      // CENSUS-2f, R-AP: the key is reachable by a `priest` or `chapel` name with no sacred house on the roster, so the
+      // bell, the incense and the hymn declare `sacredHouse`; the wayside shrine set into a wall presumes nothing.
+      { text: () => 'A bell marks the hour, and a few heads bow as it rings.', needs: ['sacredHouse'] },
+      { text: () => 'The smell of incense drifts out into the press of the lane.', needs: ['sacredHouse'] },
       () => 'Someone has left fresh flowers at a small shrine set into a wall.',
-      () => 'Voices raised in a hymn carry, faintly, from somewhere among the roofs.',
+      { text: () => 'Voices raised in a hymn carry, faintly, from somewhere among the roofs.', needs: ['sacredHouse'] },
     ],
     dominant: [
       { text: () => "Pilgrims crowd the road in, and every second stall sells candles, tokens or someone's blessing.", needs: ['market'], excludes: ['crisis: threat'], crisis: ['any'] },
@@ -238,10 +242,12 @@ export const ARRIVAL_SENSES = Object.freeze([
     institutions: ['market square', 'market squares', 'weekly market', 'daily markets', 'markets', 'market hall', 'bazaar', 'annual fair', 'fairs'],
     trade: [],
     lines: [
-      { text: () => 'Stallholders call their wares over the noise of the market.', crisis: ['any'] },
-      { text: () => 'The market is loud with haggling long before noon.', excludes: ['crisis: threat'], crisis: ['any'] },
-      { text: () => 'A knot of buyers argues over a price, and the seller enjoys every word of it.', excludes: ['crisis: threat', 'crisis: hunger'], crisis: ['any'] },
-      { text: () => 'A child weaves between the stalls with a basket bigger than she is.', crisis: ['any'] },
+      // CENSUS-2f, R-AP: the key is picked by name fragments, not by the market's own reader (`isMarketInstitution`,
+      // the catalogue's tags), so every line declares the `market` it presumes.
+      { text: () => 'Stallholders call their wares over the noise of the market.', needs: ['market'], crisis: ['any'] },
+      { text: () => 'The market is loud with haggling long before noon.', needs: ['market'], excludes: ['crisis: threat'], crisis: ['any'] },
+      { text: () => 'A knot of buyers argues over a price, and the seller enjoys every word of it.', needs: ['market'], excludes: ['crisis: threat', 'crisis: hunger'], crisis: ['any'] },
+      { text: () => 'A child weaves between the stalls with a basket bigger than she is.', needs: ['market'], crisis: ['any'] },
     ],
     dominant: [] },
   { key: 'herbs',

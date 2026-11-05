@@ -481,3 +481,30 @@ heldKeyWriterCensus 1 · worldGenerationClockSeam 1 · writerReach (file) · cor
 **Answer 1, DOSSIER_CAUSAL_PROSE is dead (R-AI, R-S).** CENSUS-1f's addendum measured the importer census: nothing in `src` imports `causalDossierProse.js` (0 importers). Dead: listed, left in stasis, no vids, its Phase A ledger (`docs/census/declarations/DOSSIER_CAUSAL_PROSE.json`, 113 declarations) is the record. Not declared in the annex.
 
 **The dead list of this lane, complete:** DAILY_LIFE_CONTEXT · TERRAIN_CONTEXT, ROUTE_CONTEXT, DEFENSE_CONTEXT; DOSSIER_CAUSAL_PROSE.
+
+### Unit 2 — R-AP, the fish key, and the audit of the five arrival tables
+
+**The fish key.** `chooseSense` picks a sense by catalogue NAME fragments (`fish market`, `fishmonger`, `fishing`, `fisher`), which guarantee no catch: soak1k-152 (an occupied forest village on a mountain pass, food sources `game` only) printed "A basket of fish, still flapping, is carried past at a run." The four lines under `fish.lines` now declare `fish` (the `foodSources` presence atom; the gulls line keeps its `market`, `navigable`), through the arrival tables' row channel (`{ text, needs }`), so a refused beat redraws from the admitted lines.
+
+**The audit (every keyed pool of the five tables; measured on the 1,000 at the merged base by a scratch scanner that births each seed and reads the drawn line back out of `arrivalScene`).**
+
+| table · key | picker | presumed fact | reachable without it? | ruling |
+|---|---|---|---|---|
+| SENSES `fish.lines` | name fragments | the catch (`fish`) | **yes** — 1 of 38 drawn (soak1k-152) | declare `fish` (4 lines) |
+| SENSES `fish.dominant` | the exports / income (`trade: fish`) | the fish trade, which the picker read | no (soak1k-716 draws it at a port that exports fish with no food-record catch: true by the exports) | hygiene (R-B1); `navigable` kept |
+| SENSES `market.lines` | name fragments, not `isMarketInstitution`'s tags | `market` | yes in principle (the two spellings differ); 0 of 3 on the 1,000 | declare `market` (4 lines) |
+| SENSES `faith.lines` | fragments incl. `priest`, `chapel` | a house of worship (`sacredHouse`) for the bell, the incense, the hymn | yes in principle; 0 of 43 | declare `sacredHouse` on 3; the wayside shrine set into a wall presumes nothing |
+| SENSES `livestock` | stock institutions | animals handled here (what the stockyard, drover, shepherd or dairy guarantees) | — | **not declared**: the homed `livestock` atom is the food record's source (pastoral house AND grazing land), a narrower claim than the lines make; it is false in 86 of the 87 `livestock.lines` births, so declaring it would refuse true lines (R-W's wrong-presumption test). "Sheep … from the grazing beyond the houses" presumes grazing, which a common-grazing house OR the resource provides — a disjunction a line cannot declare (R-U); left as it is |
+| SENSES, the other 12 keys | name fragments | the trade the matched house practises | no | hygiene |
+| SCENES `port`, `river`, `smoke`, `ordinary`, `market` | the route field (`tradeRouteAccess`), the market fragments for `market` | the route the picker read | no (port/river: `navigable` 34 of 34) | hygiene; `market` already guarded by the beat's T1-12 market agreement |
+| PEOPLE (11 cultures + `mixed`) | the culture profile key | the culture | no; `mixed` is a default fallback that no profile key reaches (every key has a pool; 0 of 1,000) | hygiene; `mixed` listed as an unreachable fallback (its "three languages" presume a mixed people, a fact with no home — R-U applies if it is ever reached) |
+| TENSIONS (safety label, prosperity) | the record's own safety label / prosperity | that label | no | hygiene |
+| MEMORIES (event template) | the record's recent event | that event | no | hygiene |
+
+**Births moved (the 1,000, the arrival scene read back on every seed):** **1** — soak1k-152, whose sense beat is now left out (every fish line refused; the redraw-once rule leaves an empty clean set out). `A-11:sea-words-landlocked` 1 → 0 expected on the 1,000 (read in unit 6). Golden **0 / 525**. The market and faith declarations move nothing on the 1,000.
+
+**A-11's own condition (the instrument stood, R-AP).** A-11 reads sea words only where `waterAccessKind(terrain, route)` is `none`. On the 1,000, **417** births hold the `fish` atom, **231** of them river places, and **0** of the 417 lack water — so no birth admitted by the atom can be flagged. soak1k-170 (a river village, food record `fish`) keeps "A basket of fish, still flapping…" and its water gate is open (pinned in the new test).
+
+**Mute slot for the compose's §10 census:** ARRIVAL_SENSES `fish.lines` under a fish house with no catch — 1 of 1,000 (soak1k-152), under the 1-in-100 bar. No twin: a line for an inland fish trade would need words A-11 reads as sea words, and nothing else on the overview speaks to the fish house, so the compose's census decides.
+
+Red-first: `tests/generators/arrivalFishKeyDeclared.test.js` (the three table arms and soak1k-152 red at the parent; soak1k-170 the positive control, green on both). Pin re-keyed by cause: `tests/domain/facts/textOf.test.js` declared-row count 86 → 92 (fish +3, faith +3).
