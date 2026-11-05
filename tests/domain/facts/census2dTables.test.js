@@ -237,3 +237,19 @@ describe('THORP_PRESSURES and the slave-revolt cells (CENSUS-2d)', () => {
     expect(Object.values(STRESS_TYPE_MAP.slave_revolt).filter((v) => typeof v === 'string' && /slave market/i.test(v))).toEqual([]);
   });
 });
+
+import { CAST_CRISIS_SIBLINGS as CAST_REASON_SIBLINGS } from '../../../src/domain/crisis/crisisCast.js';
+import { resolveSibling } from '../../../src/domain/facts/drawDeclared.js';
+import { factsOf } from '../../../src/domain/facts/factsOf.js';
+
+describe('CRISIS_CAST_REASONS: the brunt reasons a crisis reaches by more than one kind (enforced at the wired site)', () => {
+  const opts = (record) => ({ facts: factsOf(record), drawKind: /** @type {'T'} */ ('T') });
+  const rec = (types, band, extra = {}) => ({ stress: types.map((type) => ({ type, ...extra })), economicState: { foodSecurity: { foodRecord: { band } } } });
+  it('food_security under a famine keeps the hunger; under a fed influx it is the strain', () => {
+    expect(resolveSibling('the hunger falls first on its people', CAST_REASON_SIBLINGS, opts(rec(['famine'], 'famine')))).toBe('the hunger falls first on its people');
+    expect(resolveSibling('the hunger falls first on its people', CAST_REASON_SIBLINGS, opts(rec(['mass_migration'], 'secure', { direction: 'influx' })))).toBe('the strain falls first on its people');
+  });
+  it('housing_pressure under monster pressure names no newcomers', () => {
+    expect(resolveSibling('its people take in the newcomers', CAST_REASON_SIBLINGS, opts(rec(['monster_pressure'], 'secure')))).toBe('its houses are where the crisis is felt first');
+  });
+});
