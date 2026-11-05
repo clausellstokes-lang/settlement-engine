@@ -3426,12 +3426,12 @@ PEACE, not missing data.
 
 **`statusLabel: On campaign`**
 1. `[ledger]` {settlement}'s army is in the field against {counterpart}, and everything the town does at home is done with that absence in it.
-2. `[street]` The town is short of the people who would ordinarily be here, and the shortness is felt at the harvest and the gate before it is felt anywhere else.
+2. `[street · gate]` The town is short of the people who would ordinarily be here, and the shortness is felt at the harvest and the gate before it is felt anywhere else.
 3. `[unfolding]` What {settlement} wins from this campaign it will win somewhere else; what it is spending, it is spending here, continuously and in plain view.
 4. `[visitor]` A stranger finds {settlement} quieter than a town this size should be, and finds the reason is arithmetic rather than mood.
 
 **`statusLabel: Occupied`**
-1. `[street]` {settlement} is held by {counterpart}. The hall still sits, the market still opens, and neither of them decides anything that {counterpart} has an opinion about.
+1. `[street · market]` {settlement} is held by {counterpart}. The hall still sits, the market still opens, and neither of them decides anything that {counterpart} has an opinion about.
 2. `[ledger]` What is decided at {settlement} is decided subject to the occupier; the town's institutions run, and run inside a boundary somebody else drew.
 3. `[visitor]` A stranger at {settlement} deals with the town's own people and notices, eventually, whose soldiers are standing where the town's would be.
 
@@ -3571,7 +3571,7 @@ each cell below is authored from the page-owner's side.
 
 **`economic` · `strained`**
 1. `[ledger]` The tribute out of {settlement} is paid and paid grudgingly: the stores complain, the wagons run late, and every season somebody proposes that this be the last one.
-2. `[street]` The granary stands lighter than it should at {settlement}, and the lightness is the bill of the war, still being settled.
+2. `[street · institution: granary]` The granary stands lighter than it should at {settlement}, and the lightness is the bill of the war, still being settled.
 3. `[unfolding]` What {settlement} sends {counterpart} is still going and is going more slowly each season, and the slowing is being noticed at the other end.
 
 **`economic` · `defaulted`**
@@ -3671,7 +3671,7 @@ each cell below is authored from the page-owner's side.
 
 **`sovereignty` · `defaulted`**
 1. `[ledger]` An army has crossed into {settlement}'s internal quarrel; the pledge of non-intervention lies broken, and openly.
-2. `[street]` The town's own dispute is no longer the town's own, and the people who made it somebody else's are visible from the gate.
+2. `[street · gate]` The town's own dispute is no longer the town's own, and the people who made it somebody else's are visible from the gate.
 3. `[unfolding]` {settlement}'s internal quarrel now has a foreign army in it, and whatever it was about before, it is about that now.
 
 **generic floor · `honored`** *(unnamed family)*
@@ -3728,11 +3728,11 @@ existence of content elsewhere.
 **PDF PARITY:** parity (the print chapter self-gates to null; when it renders at
 all it renders this).
 
-1. `[street]` This settlement is at peace and keeps no named faith.
-2. `[ledger]` Nothing is being fought here and nothing is being kept here; the town's quarrels and its observances are both private matters.
-3. `[visitor]` A stranger finds neither soldiers nor temples worth remarking on at {settlement}, and finds the town entirely unbothered by the absence of both.
-4. `[elder]` {settlement} has neither a war nor a creed to its name at present, and has been in that condition long enough to have forgotten it is a condition.
-5. `[counterforce]` There are quarrels {settlement} could be part of and observances it could keep, and it is part of none and keeps none.
+1. `[street · war: peace]` This settlement is at peace and keeps no named faith.
+2. `[ledger · war: peace]` Nothing is being fought here and nothing is being kept here; the town's quarrels and its observances are both private matters.
+3. `[visitor · war: peace]` A stranger finds neither soldiers nor temples worth remarking on at {settlement}, and finds the town entirely unbothered by the absence of both.
+4. `[elder · war: peace]` {settlement} has neither a war nor a creed to its name at present, and has been in that condition long enough to have forgotten it is a condition.
+5. `[counterforce · war: peace]` There are quarrels {settlement} could be part of and observances it could keep, and it is part of none and keeps none.
 
 ---
 
@@ -4612,7 +4612,7 @@ reads what the panel renders. A page draws at most one of each.
 **DEVOTION: `faithful`**
 1. `[ledger]` The town keeps its faith properly. Attendance is the rule rather than the exception, and lapsing is noticed.
 2. `[street]` Devotion here is steady and unspectacular. Most households keep the rites, and the ones that do not are known.
-3. `[visitor]` {settlement} is faithful in the working sense: the benches are full on the days they should be full.
+3. `[visitor · temple]` {settlement} is faithful in the working sense: the benches are full on the days they should be full.
 
 **DEVOTION: `observant`**
 1. `[street]` Faith here is habit more than fervour. The rites are kept, and kept without much heat.
@@ -4620,12 +4620,12 @@ reads what the panel renders. A page draws at most one of each.
 3. `[ledger]` Devotion in {settlement} is ordinary: real enough to organize a year around, thin enough not to organize a life around.
 
 **DEVOTION: `lukewarm`**
-1. `[visitor]` The benches are thinly filled. The rites survive as custom rather than conviction, and the custom is wearing.
+1. `[visitor · temple]` The benches are thinly filled. The rites survive as custom rather than conviction, and the custom is wearing.
 2. `[street]` Faith here has become a formality. The forms are observed, and fewer people each season could say why.
 3. `[ledger]` {settlement} keeps the calendar and little else of the creed; the clergy preach to the same few households.
 
 **DEVOTION: `secular`**
-1. `[ledger]` Devotion here is nearly gone. The building stands and the rites are performed, largely for the people who have always performed them.
+1. `[ledger · temple]` Devotion here is nearly gone. The building stands and the rites are performed, largely for the people who have always performed them.
 2. `[street]` The town keeps very little of its faith. Nothing forbids the rites and almost nobody attends them, and neither half of that is discussed.
 3. `[threshold]` {settlement} is not a godless town, but it is a distracted one. The creed reaches the ceremonies and not much further.
 
@@ -4636,7 +4636,7 @@ reads what the panel renders. A page draws at most one of each.
 
 **ARC: `trend: falling`** · a cause clause is licensed ONLY where `piety.causes[]` carries `conduct_drift` or `clergy_distortion`
 1. `[unfolding]` Devotion is ebbing. The town no longer lives as its creed asks, and the observance is following the conduct rather than correcting it.
-2. `[street]` The benches empty a little each season, not from any quarrel with the faith, only from the slow discovery that nothing punishes absence.
+2. `[street · temple]` The benches empty a little each season, not from any quarrel with the faith, only from the slow discovery that nothing punishes absence.
 3. `[threshold]` Belief here is receding ahead of the ceremonies; the ceremonies are the last part to go, and they have not gone.
 
 **ARC: `trend: steady`**
@@ -4662,11 +4662,11 @@ reads what the panel renders. A page draws at most one of each.
 **SINK: `unaffiliated` present, arc falling** (the pews draining)
 1. `[ledger]` A growing share of the town keeps no god at all. The share is not going to a rival rite, it is going out of the rites altogether.
 2. `[threshold]` The unaffiliated are the fastest-growing part of {settlement}'s religious life, which is a way of saying its religious life is shrinking.
-3. `[street]` People here are leaving the rites without joining anything; the benches thin and nothing fills them.
+3. `[street · temple]` People here are leaving the rites without joining anything; the benches thin and nothing fills them.
 
 **SINK: `unaffiliated` present, arc rising** (the pews reclaiming)
 1. `[unfolding]` The unaffiliated are drifting back toward the observances. Crisis has a way of ending indifference.
-2. `[ledger]` The godless share of the town is shrinking; whatever emptied the benches has stopped being persuasive.
+2. `[ledger · temple]` The godless share of the town is shrinking; whatever emptied the benches has stopped being persuasive.
 3. `[street]` People who kept no rite are keeping one again, and mostly the one their households kept before them.
 
 **MANDATE: contested, or patron security below the floor**
@@ -4784,7 +4784,7 @@ panel does not surface at all.
 
 **STANDING: `established`**
 1. `[ledger]` {creed} is properly settled here. Enough of the town keeps it that its days are the town's days, without its holding the seat.
-2. `[visitor]` The creed is established: a real congregation, a real house, and no serious claim on the patron's place.
+2. `[visitor · temple]` The creed is established: a real congregation, a real house, and no serious claim on the patron's place.
 3. `[elder]` It is one of the town's faiths rather than one of its curiosities: a distinction of {timeband_span}, not of seasons. *— requires `tenure`*
 
 **STANDING: `ascendant`**
@@ -4809,8 +4809,8 @@ panel does not surface at all.
 
 **NICHE: every niche uncontested** · **THE GOOD STATE (R-DST-G)**
 1. `[ledger]` Each of the town's creeds keeps its own ground. They divide the year without dividing the households, and nobody competes for the same believer.
-2. `[visitor]` The faiths of {settlement} do not overlap: different tempers, different callings, and consequently no quarrel worth having.
-3. `[street]` The religious field here is orderly. Every rite answers something the others do not, which is why they all survive.
+2. `[visitor · no crisis: religious_conversion]` The faiths of {settlement} do not overlap: different tempers, different callings, and consequently no quarrel worth having.
+3. `[street · no crisis: religious_conversion]` The religious field here is orderly. Every rite answers something the others do not, which is why they all survive.
 
 **LEGITIMACY: `secure`**
 1. `[elder]` The patron's claim is not questioned here. Whatever the shares say, the town regards {creed} as the rightful faith of this place, and has for {timeband_span}. *— requires `tenure`*

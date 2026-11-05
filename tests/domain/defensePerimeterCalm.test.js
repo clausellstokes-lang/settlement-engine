@@ -47,6 +47,7 @@ describe('CENSUS-5 · the DS-DEF perimeter calm claims', () => {
       expect(drawable(blockId, poolKey, null, walls)).toContain(vid);
       for (const type of ['under_siege', 'occupied', 'monster_pressure', 'insurgency', 'slave_revolt', 'wartime']) {
         const vids = drawable(blockId, poolKey, type, walls);
+        // anchored: the calm arm above asserts the same vid IS drawable, and the length below that the pool is not empty
         expect(vids, `${type}`).not.toContain(vid);
         expect(vids.length, `${type}: the pool went mute`).toBeGreaterThan(0);
       }

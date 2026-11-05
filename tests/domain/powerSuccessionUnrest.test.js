@@ -30,6 +30,7 @@ describe('CENSUS-5 · DS-POW-4 under an uprising', () => {
   it('in calm the settled lines draw and the unrest-safe line does not', () => {
     const vids = drawable([]);
     expect(vids).toEqual(expect.arrayContaining([1, 2, 3]));
+    // anchored: the line above asserts v1–v3 ARE drawable from this same read; the unrest arms below assert v6 draws
     expect(vids).not.toContain(6);
   });
 
