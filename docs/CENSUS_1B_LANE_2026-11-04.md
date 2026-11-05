@@ -232,3 +232,11 @@ Against B: golden **0 / 525**; soak records **9 / 60** and pages **9 / 60** (tab
 3. **Unit 3c:** the wiring census's four declared columns and `tablePools`. ⚠ The ordering: `gen:dossier-prose` projects the leaves FROM the census, so the census's declared columns must read the annex (or the projector's own parse), not the generated leaves, or the columns are born one projection stale.
 4. **Unit 8 (wave 2, R-O).**
 5. `RULING_POWER_SIBLINGS`' door; the militia sets' order question (both for the chair).
+
+### Addendum — the chair's five items (message of 2026-11-05 ~04:50, under R-A), received at this seat's boundary: listed for CENSUS-1f
+
+1. **R-Y:** give the vid-less kernel families (DOSSIER_CAUSAL_PROSE, the decree family, the connectives) vids (ids, not draws; byte-identity 0), so CENSUS-2e can declare them.
+2. **R-AE:** one composite `sacredHouse` (temple ∨ monastery ∨ friary ∨ shrine, as the roster names them; `temple` stays narrow); home a `council` presence by delegation to the power structure's bodies reader if one exists, else record that none does ("Fund the council" waits on it).
+3. The projector hardcodes `marks: []` on canonical v0 rows: give the v0 rows a real tag slot (CENSUS-3d's seven rows).
+4. **R-Z** into `docs/census/VOCABULARY_RULINGS_2026-11-04.md` as a dated sentence: a draw site is handed the ONE field measured settled before the draw (`birthFactsOf`), never the whole container. (This seat's R-Q cure, `f2367a4`, is the same class: the native roster at the power step is not the final roster.)
+5. **Sites 19, 18, 15 have NOT landed** at `2c5915c`. Site 19 (`relationshipArchetypes.js :: createTieProseDraw`) is not routed through `drawDeclared`. Sites 18 (`assembleInstitutions.js`'s `pickVariant` of the descriptions) and 15 (the per-definition service roll) carry only CENSUS-1c's `resolveSibling` walls siblings. CENSUS-4c's declarations (`cd17614`) are carried but not enforced at those draws. They are unit 4's, for CENSUS-1f, and CENSUS-4e waits on them.
