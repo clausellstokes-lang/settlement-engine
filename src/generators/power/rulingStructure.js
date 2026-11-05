@@ -397,7 +397,7 @@ export const generatePowerStructure = (
       'Guild Authority':
         "The guilds have formalised their political control; the city's elected bodies are largely ceremonial.",
       'Military Council':
-        said('Military commanders and garrison officers hold decisive political weight; civic matters defer to security priorities.'),
+        'Military commanders and garrison officers hold decisive political weight; civic matters defer to security priorities.',
       'Church Council':
         'Religious authorities hold formal civic influence; canonical law and civil ordinance are intertwined.',
       'Merchant Council':
@@ -444,7 +444,9 @@ export const generatePowerStructure = (
       'Town Council':
         'An elected or appointed council governs; merchants, guilds, and prominent families compete for seats.',
     },
-    govDesc = govDescByLabel[govBody] || govDescByFaction[governingFaction] || govDescByFaction['Mixed Council'],
+    // R-AM (CENSUS-1g): resolved where it is CHOSEN, not inside the table (an eager `said` noted a
+    // description no birth printed); `said` hands every non-key back untouched, so nothing moves.
+    govDesc = said(govDescByLabel[govBody] || govDescByFaction[governingFaction] || govDescByFaction['Mixed Council']),
     priorityBonus = topPriority > 80 ? 18 : topPriority > 65 ? 12 : topPriority > 50 ? 6 : 0,
     govPower = [
       'Theocratic Council',

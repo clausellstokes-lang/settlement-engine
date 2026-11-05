@@ -12,8 +12,8 @@
 import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 
-const SRC = readFileSync(new URL('../../scripts/generate-dossier-state-prose.mjs', import.meta.url), 'utf8');
-const CANONICAL_RE = new Function(`${/^const CANONICAL_RE = .*;$/m.exec(SRC)[0]} return CANONICAL_RE;`)();
+const SRC = readFileSync(new URL('../../scripts/lib/dossier-annex-parse.mjs', import.meta.url), 'utf8'); // CENSUS-1g unit 5: the parse moved verbatim
+const CANONICAL_RE = new Function(`${/^export const CANONICAL_RE = .*;$/m.exec(SRC)[0].replace(/^export /, '')} return CANONICAL_RE;`)();
 const row = (line) => {
   const m = line.match(CANONICAL_RE);
   return m && { marks: m[2] ? m[2].split('·').map((p) => p.trim()).filter(Boolean) : [], text: m[3] };
