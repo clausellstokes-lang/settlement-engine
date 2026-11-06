@@ -291,7 +291,7 @@ export const DOSSIER_MOUNTS = Object.freeze([
     mount: 'power.criminalUnderside', tab: 'power', desk: 'power', blockId: 'DS-POW-6', rung: 'sentence', dimensions: ['walls'],
   }),
   Object.freeze({
-    mount: 'power.succession', tab: 'power', desk: 'power', blockId: 'DS-POW-4', rung: 'sentence', dimensions: ['succession'],
+    mount: 'power.succession', tab: 'power', desk: 'power', blockId: 'DS-POW-4', rung: 'sentence', dimensions: ['succession', 'unrest'],
   }),
   Object.freeze({
     mount: 'power.factionLadder', tab: 'power', desk: 'power', blockId: 'DS-POW-3', rung: 'sentence',

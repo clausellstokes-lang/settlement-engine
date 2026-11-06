@@ -2149,7 +2149,7 @@ did not die.
 **`riskLabel: Stable` (no challengers)**
 1. `[ledger · succession settled]` Nobody at {settlement} is positioned to take the {seat}. What {faction} holds it holds without a rival on the rolls, and the succession question is not a live one here.
 2. `[street · succession settled]` The question of who might replace the {seat} at {settlement} does not come up, because there is nobody the town would name if it did.
-3. `[counterforce · succession settled]` There is discontent at {settlement} and no contender to carry it; the {seat} is safe for the plainest reason a seat can be safe.
+3. `[counterforce · succession settled · no unrest]` There is discontent at {settlement} and no contender to carry it; the {seat} is safe for the plainest reason a seat can be safe.
 4. `[ledger · succession open]` No contender stands at {settlement} to take the {seat}, and the absence settles nothing: who governs is an open question, and nobody is strong enough to close it.
 5. `[street · succession open]` The {seat} at {settlement} has no rival and no secure holder either; the town asks who governs and gets no answer it can act on.
 
