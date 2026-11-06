@@ -342,11 +342,11 @@
       "suite": "tests/property/generatorGoldenMaster.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": "26a02855273d9946e18da47fee95c31e0caab81267ff71c646737c6d5357cc15",
+      "sha256": "e7e8a6ff2cec9ab63bf363335c2ea3563c9f984dfaddd32a643dcc1bda60b457",
       "rows": 525,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (RUNG 1 OF THE SOAK LADDER, recorded by the cloud chair, session 019yED1Rc3svZxTNcEJVRr77)",
+      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (RUNG 1 OF THE SOAK LADDER; the owner's delegation of 2026-11-06 to the cloud chair, session 01FE9mEvGxnFx6WTBkEC6ie9)",
       "note": "RE-RECORDED THROUGH THE SIGNED DOOR at the genesis freeze 2026-09-16 (owner: 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); 525 rows moved since the em-dash wave e3f6029b2 (banked §901); the key set unchanged."
     },
     {
