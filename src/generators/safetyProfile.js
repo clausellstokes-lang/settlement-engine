@@ -12,6 +12,7 @@ import {
 } from '../domain/institutionClassify.js';
 import { institutionCategoryFlags } from './roleCategory.js';
 import { crimeSignalOf } from '../domain/crimeSignal.js';
+import { runningCriminalChains } from '../domain/display/defenseDisplay.js';
 import { defenceOf } from '../domain/facts/defence.js';
 import { factsOf } from '../domain/facts/factsOf.js';
 import { resolveSibling } from '../domain/facts/drawDeclared.js';
@@ -751,10 +752,16 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
  *     (unit C's rule, now on the final record); the famine/siege desperation-theft entry is then
  *     printed once, never twice, as at the economy step;
  *   - debt evasion: the same line without its "criminal networks" clause where none exists.
+ * ⛔ NOR BESIDE THE BLOCK'S OWN LIST (RUNG-2 LANDING phase C unit 3, 2026-11-06; rung 2E's A-06 in
+ * soak1k-6759, -6885, -7485, -7845: "No criminal infrastructure" beside the listed Gambling Den
+ * whose line "funds broader criminal network"). The survival line also reads the safety profile's
+ * own `criminalInstitutions` and the running criminal supply chains — the two lists RUNG1B-F9 made
+ * the Defense structure read (`defenseDisplay.js :: deriveCriminalStructure`, `listed`). A listed
+ * operation is infrastructure, not a network: the debt-evasion line still reads the signal alone.
  * Every entry's TYPE is kept (the services menu reads types). No draw. Returns the input
  * `economicState` BY REFERENCE when no line changes, else a copy with a copied crime list.
  *
- * @template {{ safetyProfile?: { crimeTypes?: Array<{ type?: unknown, desc?: unknown }> } | null } | null | undefined} E
+ * @template {{ safetyProfile?: { crimeTypes?: Array<{ type?: unknown, desc?: unknown }>, criminalInstitutions?: unknown[] } | null, activeChains?: Array<{ needKey?: unknown, status?: unknown, chainId?: unknown } | null> } | null | undefined} E
  * @param {E} economicState
  * @param {Parameters<typeof crimeSignalOf>[0]} lists the FINAL roster's seats and the estate
  * @returns {E}
@@ -764,13 +771,16 @@ export function settleCrimeLinesToSignal(economicState, lists) {
   const crimes = safetyProfile?.crimeTypes;
   if (!Array.isArray(crimes) || !crimes.length) return economicState;
   const present = crimeSignalOf(lists).present;
-  const lineFor = { 'Survival crime': present ? DESPERATION_THEFT_DESC : SURVIVAL_NO_NETWORK_DESC,
+  const infrastructure = present
+    || (Array.isArray(safetyProfile?.criminalInstitutions) && safetyProfile.criminalInstitutions.length > 0)
+    || runningCriminalChains({ economicState: { activeChains: economicState?.activeChains } }).length > 0;
+  const lineFor = { 'Survival crime': infrastructure ? DESPERATION_THEFT_DESC : SURVIVAL_NO_NETWORK_DESC,
     'debt evasion': present ? DEBT_EVASION_DESC : DEBT_EVASION_NO_NETWORK_DESC };
   let settled = crimes.map((entry) => {
     const desc = lineFor[/** @type {keyof typeof lineFor} */ (String(entry?.type))];
     return desc !== undefined && entry.desc !== desc ? { ...entry, desc } : entry;
   });
-  if (present && settled.some((entry) => entry?.type === 'Survival crime')) {
+  if (infrastructure && settled.some((entry) => entry?.type === 'Survival crime')) {
     settled = settled.filter((entry) => !(entry?.type === 'desperation theft' && entry.desc === DESPERATION_THEFT_DESC));
   }
   if (settled.length === crimes.length && settled.every((entry, i) => entry === crimes[i])) return economicState;
