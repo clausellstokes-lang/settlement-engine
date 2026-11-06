@@ -43,11 +43,17 @@
  * equal stressors, and the calm control below is what proves the measured gap is caused
  * by them.
  *
- * THE CALM CONTROL: with zero stressors the three tiers drift at 10.5% / 11.0% / 10.75%
- * — statistically indistinguishable, and every one of those events is a PROMOTION. So
- * the matched-pressure ceilings measure RESISTANCE TO STRESSORS, not a dead instrument
- * and not a pre-existing tier gradient. Each calm arm carries its own registered FLOOR
- * so the ceiling can never go vacuous by the corpus quietly ceasing to drift at all.
+ * THE CALM CONTROL: with zero stressors every drift event is a PROMOTION, so the
+ * matched-pressure ceilings measure RESISTANCE TO STRESSORS, not a dead instrument and not
+ * a pre-existing tier gradient. Each calm arm carries its own registered FLOOR so the
+ * ceiling can never go vacuous by the corpus quietly ceasing to drift at all. Since
+ * LANDING-7 R-B2 (below) a calm promotion is one of two things, counted apart: CONVERGENCE
+ * (the place was born already stamping the next tier, in the overlap of the owner's roll
+ * bands, and its tier record catches up to its stamp) or DRIFT (born in the promotion
+ * lead-in, 0.92 x the next tier's cut up to the cut). Convergence is asserted to be exactly
+ * the overlap-born places that clear the promotion support line; drift is asserted per tier
+ * against the count the band geometry predicts. (2026-07-31: the three tiers drifted at
+ * 10.5% / 11.0% / 10.75% under the old disjoint bands, a spread of at most 10 of 120.)
  *
  * ── WHERE THE INERTIA ACTUALLY LIVES (the recorded boundary of this confirmation) ──
  * The end-to-end property holds, and the mechanism is worth naming exactly, because it
@@ -114,6 +120,23 @@
  * tier's cut (the overlap of the owner's roll bands: village 350-400, town 2,250-2,500; the city band
  * has none), and they promote with no stressor because their population already stamps the next
  * tier. The lead-in-only promotions are 23 / 26 / 41. Left red, named, for the chair.
+ * RE-STATED 2026-11-06 (LANDING-7 lane B, seat 3), the chair's ruling R-B2, quoted: "the calm control
+ * is RE-STATED: a place born inside the owner's band overlap converges, it does not drift. Under X-46
+ * car 1 the roll bands overlap (a village rolls 75–400, a town 300–2,500, a city 2,000–15,000) while
+ * the tier stamp is disjoint (88 / 350 / 2,250 / 15,000; TIER_STAMP_CUTS), so a village rolled at
+ * 350–400 already STAMPS a town at birth; its tier record catching up under calm is the record
+ * converging to the stamp — legitimate under the owner's bands, and not the mechanism [the] calm
+ * control exists to measure. [...] the lead-in's share of each roll band differs by construction
+ * [...], so TIER-FLAT within 10 was a pin on the old bands' geometry." So the spread pin is gone and
+ * two pins take its place, keeping its purpose (the stressor arms' gap is caused by stressors, not by
+ * tier): CONVERGENCE (the overlap-born promotions, exactly the support-eligible overlap-born places,
+ * no promotion born below the lead-in) and DRIFT per tier (the lead-in promotions, inside the
+ * two-sided binomial band at N=120, alpha 1e-3, z = 3.29, around N x the lead-in window's share of the
+ * tier's integer roll band). At 1f2a8504e, first 120: convergence 18 / 16 / 0, drift 5 / 10 / 11
+ * against expected 10.3 / 9.8 / 11.1. The matched and acute bounds are unchanged (town ceiling 43).
+ * One measured qualification of the ruling's "every one of them": 6 of the 24 overlap-born villages
+ * never reach the promotion support line (0.62) inside the horizon, so convergence is exactly the
+ * overlap-born places that ever read promotion-eligible, every one of which promotes.
  *
  * ────────────────────────────────────────────────────────────────────────────────
  * SUBSYSTEM-CERTIFICATION ROW (liftable — the certification build reads the tagged
@@ -179,7 +202,7 @@ import { evaluateTierResourceDynamics } from '../../src/domain/worldPulse/tierRe
 import { rollCandidates } from '../../src/domain/worldPulse/candidateEvents.js';
 import { createPRNG } from '../../src/kernel/prng.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
-import { POPULATION_RANGES, TIER_ORDER } from '../../src/data/constants.js';
+import { POPULATION_RANGES, TIER_ORDER, TIER_STAMP_CUTS } from '../../src/data/constants.js';
 import { readEnvelope } from '../helpers/distributionEnvelope.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
@@ -206,6 +229,30 @@ const LOADS = Object.freeze({ calm: 0, matched: 0.7, acute: 1 });
 /** The structural-failure threshold in tierEligibility. Read here only to PIN that the
  *  corpus's demotions actually cross it — never to re-derive the engine's decision. */
 const STRUCTURAL_FAILURE_SUPPORT = 0.25;
+
+/** The dark promotion lead-in in tierEligibility (pop >= 0.92 x the next tier's stamp cut). Read
+ *  here only to DERIVE the calm drift geometry (R-B2); the CONVERGENCE pin below reds if no calm
+ *  promotion is born in [0.92 x cut, cut) while one is born below it. */
+const PROMOTION_LEAD_IN = 0.92;
+
+/** The two-sided binomial band the calm drift pin is asserted in: alpha 1e-3, the alpha this
+ *  file's envelopes are derived at. */
+const DRIFT_BAND_Z = 3.29;
+
+/**
+ * The calm geometry of one tier under the owner's bands: the next tier's stamp cut, the lowest
+ * integer population in the promotion lead-in, and the lead-in's share of the tier's integer roll
+ * band (`resolveConfig` rolls `randInt(min, max)`, inclusive).
+ * @param {string} tier
+ */
+function calmGeometry(tier) {
+  const next = TIER_ORDER[TIER_ORDER.indexOf(tier) + 1];
+  const cut = TIER_STAMP_CUTS[next];
+  const leadIn = Math.ceil(cut * PROMOTION_LEAD_IN);
+  const band = POPULATION_RANGES[tier];
+  const share = (Math.min(cut, band.max + 1) - Math.max(leadIn, band.min)) / (band.max - band.min + 1);
+  return { cut, leadIn, share };
+}
 
 /** The one canonical home for this file's derived distribution bounds. */
 const ENVELOPES = JSON.parse(readFileSync(
@@ -453,18 +500,54 @@ describe('directive 6 / J-D6 — the CALM control (what makes the ceilings mean 
     }
   });
 
-  it('the calm baseline is TIER-FLAT — the measured gap is caused by the stressors, not by tier', () => {
-    const calmCounts = TIERS.map((tier) => countAt('calm', tier));
-    // Deliberately NOT an ordering claim: the three calm rates are statistically
-    // indistinguishable (10.5% / 11.0% / 10.75% at N=400), so any strict inequality here
-    // would be over-fitting one corpus. A spread bound is the honest statement, and it is
-    // what licenses reading the matched-pressure spread as a stressor effect.
-    expect(Math.max(...calmCounts) - Math.min(...calmCounts), 'calm spread across tiers')
-      .toBeLessThanOrEqual(10);
-    // ...against a matched-pressure spread an order of magnitude larger.
+  // R-B2 (LANDING-7, the chair): a place born inside the owner's band overlap CONVERGES to the stamp it
+  // already carries; it does not drift. The two are counted apart and pinned through their own doors.
+  const calmClassified = (tier) => {
+    const { cut, leadIn } = calmGeometry(tier);
+    return trialsAt('calm', tier).map((trial) => ({
+      seed: trial.seed,
+      born: trial.population >= cut ? 'overlap' : trial.population >= leadIn ? 'leadIn' : 'below',
+      promoted: Boolean(trial.outcome),
+      eligible: trial.eligibilities.some((eligibility) => eligibility.direction === 'promotion'),
+    }));
+  };
+
+  it('CONVERGENCE: the overlap-born calm promotions are exactly the overlap-born places that can promote', () => {
+    for (const tier of TIERS) {
+      const rows = calmClassified(tier);
+      const convergence = rows.filter((row) => row.promoted && row.born === 'overlap').map((row) => row.seed);
+      const overlapEligible = rows.filter((row) => row.born === 'overlap' && row.eligible).map((row) => row.seed);
+      expect(convergence, `${tier}: every overlap-born place that reads promotion-eligible converges, none other`)
+        .toEqual(overlapEligible);
+      expect(
+        rows.filter((row) => row.promoted && row.born === 'below').map((row) => row.seed),
+        `${tier}: a calm promotion born below the lead-in is neither convergence nor drift`,
+      ).toEqual([]);
+    }
+    // Anti-vacuity: the two overlapping bands converge, the city band (no overlap with metropolis) cannot.
+    expect(calmClassified('village').filter((row) => row.promoted && row.born === 'overlap').length).toBeGreaterThan(0);
+    expect(calmClassified('town').filter((row) => row.promoted && row.born === 'overlap').length).toBeGreaterThan(0);
+    expect(calmClassified('city').filter((row) => row.born === 'overlap').length).toBe(0);
+  });
+
+  it('DRIFT: each tier\'s lead-in promotions sit in the binomial band its own roll geometry predicts', () => {
+    const driftCounts = [];
+    for (const tier of TIERS) {
+      const { share } = calmGeometry(tier);
+      const expected = CORPUS_N * share;
+      const tolerance = DRIFT_BAND_Z * Math.sqrt(CORPUS_N * share * (1 - share));
+      const drift = calmClassified(tier).filter((row) => row.promoted && row.born === 'leadIn').length;
+      driftCounts.push(drift);
+      expect(
+        Math.abs(drift - expected),
+        `${tier}: ${drift} lead-in promotions of ${CORPUS_N} against ${expected.toFixed(1)} expected (`
+        + `${(share * 100).toFixed(2)}% of the roll band), band +/- ${tolerance.toFixed(1)} (two-sided alpha 1e-3)`,
+      ).toBeLessThanOrEqual(tolerance);
+    }
+    // ...and the matched-pressure spread still exceeds the calm DRIFT spread: the gap is the stressors'.
     const matchedCounts = TIERS.map((tier) => countAt('matched', tier));
     expect(Math.max(...matchedCounts) - Math.min(...matchedCounts))
-      .toBeGreaterThan(Math.max(...calmCounts) - Math.min(...calmCounts));
+      .toBeGreaterThan(Math.max(...driftCounts) - Math.min(...driftCounts));
   });
 
   it('DIRECTION TOTALITY: calm drift is always upward, stressed drift is always downward', () => {
