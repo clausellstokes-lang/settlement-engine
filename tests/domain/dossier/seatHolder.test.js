@@ -33,7 +33,12 @@ beforeAll(async () => {
   }
 }, 120_000);
 
-const isClaimantVacancy = (s) => (s.powerStructure?.factions || []).some((f) => /claimant/i.test(nameOf(f)));
+// Premise re-stated by identity with its cause (LANDING-7 lane G, second seat, ruling R-G1, 2026-11-06):
+// since 6da7d3f64 (RUNG1-TRUTH unit D) a non-royal succession_void names its claimants from the noble
+// pool, so the old name test (/claimant/i) counted 0 vacancies and the vacancy limb passed vacuously.
+// A vacancy is the record's own fact: the governing faction's `vacant` modifier, which the stressor
+// writes (stressFactions.js :: applyStressEventFactions) and powerStrata.js :: rulingChainOf reads.
+const isClaimantVacancy = (s) => (governingFactionOf(s)?.modifiers || []).includes('vacant');
 
 describe('the seat over 120 generated settlements (twenty per tier, fixed seeds)', () => {
   it('every settlement seats exactly one named person of the governing faction, or reads its claimant vacancy once', () => {
@@ -55,6 +60,7 @@ describe('the seat over 120 generated settlements (twenty per tier, fixed seeds)
       seated += 1;
     }
     expect(misses).toEqual([]);
+    expect(vacant, 'fixture premise: the corpus holds a vacant seat (rulers-thorp-11 among them)').toBeGreaterThan(0);
     expect(seated + vacant).toBe(120);
   });
 

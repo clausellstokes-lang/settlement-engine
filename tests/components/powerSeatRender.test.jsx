@@ -81,13 +81,19 @@ describe('the governs note names the rival or goes', () => {
 });
 
 describe('the vacant seat reads once', () => {
+  // Premise re-stated by identity with its cause (LANDING-7 lane G, second seat, ruling R-G1, 2026-11-06):
+  // since 6da7d3f64 (RUNG1-TRUTH unit D) a non-royal succession_void names its claimants from the
+  // noble pool, so no faction is named "Claimant…" and the old name premise held on 0 of 1,000 thorps.
+  // The vacancy is the record's own fact, the governing faction's `vacant` modifier, which
+  // powerStrata.js :: rulingChainOf now reads. Scanned rulers-thorp-0..999 in order: 20 carry it;
+  // thorp 11 is still the first. Its roster names no claimant, so the absence line is the unsettled one.
   it('thorp 11 (a claimant vacancy) never renders "The seat The seat"', () => {
     const s = born('thorp', 11);
-    expect((s.powerStructure.factions || []).some((f) => /claimant/i.test(nameOf(f))), 'fixture premise: claimant vacancy').toBe(true);
+    expect(governingFactionOf(s)?.modifiers || [], 'fixture premise: the governing seat is vacant').toContain('vacant');
     tab(s);
     const chain = screen.getByTestId('ruling-chain');
     const words = chain.innerText ?? chain.textContent;
-    expect(screen.getByTestId('ruling-chain-absence').textContent).toMatch(/^Stands empty; 2 claimants circle: Claimant Bloc A, Claimant Bloc B\.$/);
+    expect(screen.getByTestId('ruling-chain-absence').textContent).toMatch(/^Stands empty; the succession is unsettled\.$/);
     expect(words.replace(/\s+/g, ' ')).not.toMatch(/The seat ?The seat/); // anchored: the absence row is asserted on this render
   });
 
