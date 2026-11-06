@@ -113,3 +113,41 @@ title "X: no water supply", description naming the industry and the missing supp
 4. Reading discipline, disclosed: the four display readers of unit 2 and
    `serviceCategoryTables.js`'s middle rows were read at their changed regions, not whole;
    `resourceChains.js` was read at its water table only.
+
+---
+
+# SECOND SEAT (BRIEF-REVIEW-INTAKE-2, 2026-11-06) — the chair's rulings R1–R6 executed in order
+
+## Unit 0 (R6) — the six files read whole, the first seat's edits re-judged
+
+Read whole: `serviceCategoryTables.js`, `resourceChains.js`, `InstitutionsTab.jsx`,
+`serviceComponents.jsx`, `dossierSearch.js`, `pdf/sections/Institutions.jsx`.
+
+- **`serviceCategoryTables.js` — a real miss.** The first seat added its 10 rows one per line
+  under their own comments; the file went 797 → 810 lines and broke
+  `tests/generators/servicesStructure.test.js` "every services/ module stays under 800 lines"
+  (the F31 ceiling the file's own RS-13 note names: "Packed several to a line to stay under the
+  services/ module ceiling"). Red at `2ced7e88d` (1 failed), green here: the six house rows are
+  ONE packed line closing the RS-13 block, the four service names ride the last line of their
+  category group in the RS-13 registration (values unchanged; lookup is by key). 798 lines.
+- **`serviceComponents.jsx` — a dead alias.** `const attribution = inst` was the proxy branch's
+  husk; removed, the row reads `inst` (its comment moved onto `inst`). No behaviour change.
+- `InstitutionsTab.jsx`, `dossierSearch.js`, `pdf/sections/Institutions.jsx`: nothing. No
+  second reader of the deleted table survives anywhere in `src/` or `tests/` (grep); the PDF's
+  "proxy attributions such as (smuggling)" note is a different sense (rows naming no roster
+  house) and stays true. `resourceChains.js`: the water table is consistent with unit 3; its
+  chain table is unit 4's (R4).
+- **Two reds at the lane tip that are NOT unit 0's to cure (registers, the chair's):**
+  `tests/lint/sourceCitationIntegrity.walker.test.js` "the archival exclusion is still the set
+  this walker documents" — `dated` 9 → 10, caused by this lane's own record (its basename is
+  dated, `DATED_BASENAME`), a roster growth the baseline must absorb at landing; and
+  `scripts/check-observed-shape-readers.mjs` exits 1 on "execution INPUT changed …
+  institutionServiceKeys.generated.js" (unit 2's regenerated key list; its `--write` re-freeze
+  absorbs it). Neither is refrozen here.
+- Targeted green after the repair: servicesStructure, serviceCategoryRegistration walker,
+  compromisedTag, servicesInstitutionCardNesting, institutionsInverted, proseNumerics,
+  institutionLabelSeam census, labelLadderParity, institutionProvenanceBadges, and the
+  services-data family (dataVocabularyCoverage, informationBrokerageCatalog,
+  underwaysInstitutionParity, governmentServicesCivic, prosperityRank, institutionDisplayName,
+  customContentConsumerEvidence walker, voiceMechanics, tuningRegister walker).
+- Goldens: 0 moved by unit 0 (a data-order-inert repack and a display alias).

@@ -219,14 +219,6 @@ export const INSTITUTION_DEFAULT_CATEGORY = {
   'Small prison/stocks': 'legal',
   'Large prison': 'legal',
   'Massive prison': 'legal',
-  // The former proxy hosts' own rows (lane REVIEW-INTAKE unit 2, 2026-11-06): the water and
-  // sewage houses carry an empty menu but still owe a row (the walker's totality pin).
-  'Water source': 'legal',
-  'Multiple water sources': 'legal',
-  'Sewage system': 'legal',
-  Farmland: 'food',
-  'Common grazing land': 'transport',
-  'Access to external mill': 'food',
   'Assay office': 'legal',
   'Customs house': 'legal',
   'Auction house': 'legal',
@@ -280,7 +272,7 @@ export const INSTITUTION_DEFAULT_CATEGORY = {
   // kept total anyway. Value = the majority category of the house's registered menu
   // (ties: first in menu order), emitted by script, as were the fifteen re-aligned rows
   // above whose old value no row of their own menu shared. Packed several to a line to
-  // stay under the services/ module ceiling. A new menu-bearing house owes a row.
+  // stay under the services/ module ceiling. A new menu-bearing house owes a row (last line: REVIEW-INTAKE).
   Academy: 'information', 'Advanced water infrastructure': 'legal', 'Adventurers Guild': 'employment', "Adventurers' Charter Hall": 'employment',
   Airship: 'transport', Alchemist: 'magic', 'Aqueduct or water system': 'legal', Arena: 'entertainment', 'Assassins Guild': 'criminal',
   'Banking House': 'legal', "Caravaneer's Post": 'transport', "Chroniclers' exchange": 'information', 'Church/Temple': 'healing', Citadel: 'employment',
@@ -295,6 +287,7 @@ export const INSTITUTION_DEFAULT_CATEGORY = {
   'Spellcasting Services': 'magic', 'Subsistence farming': 'equipment', "Tailor's Guild": 'equipment', Theater: 'entertainment', 'Thieves Guild': 'criminal',
   'Town council': 'legal', 'Town walls': 'legal', 'Underground network': 'criminal', University: 'information', "Veteran's Lodge": 'employment',
   'Village elder': 'legal', 'Village headman': 'legal', Watchtower: 'equipment', 'Whisper market': 'information', 'Wizard Tower': 'magic',
+  'Access to external mill': 'food', 'Common grazing land': 'transport', Farmland: 'food', 'Multiple water sources': 'legal', 'Sewage system': 'legal', 'Water source': 'legal',
 };
 // ── Explicit service→category lookup (auto-generated from comprehensive audit) ──
 export const SERVICE_CATEGORY_MAP = {
@@ -594,11 +587,6 @@ export const SERVICE_CATEGORY_MAP = {
   'Basic provisions': 'lodging',
   'Food and drink (all grades)': 'lodging',
   Lodging: 'lodging',
-  // The former proxy hosts' own service names (lane REVIEW-INTAKE unit 2, 2026-11-06).
-  'Lodging (rooms to let)': 'lodging',
-  'Grain at harvest': 'food',
-  'Grain milling (a day away)': 'food',
-  Pasturage: 'transport',
   'Lodging (all grades)': 'lodging',
   'Alchemical products': 'magic',
   'Alchemical reagents': 'magic',
@@ -658,12 +646,12 @@ export const SERVICE_CATEGORY_MAP = {
   // Gambling -> entertainment). The nine host-dependent names now have one home each. Grouped by category,
   // alphabetical, packed several to a line (the services/ module ceiling); order is inert.
   Accommodation: 'lodging', 'Full accommodation': 'lodging', Hospitality: 'lodging', 'Information hub': 'lodging', 'Message receipt': 'lodging',
-  'Route information': 'lodging', 'Short accommodation': 'lodging', 'Way-bill registration': 'lodging',
+  'Route information': 'lodging', 'Short accommodation': 'lodging', 'Way-bill registration': 'lodging', 'Lodging (rooms to let)': 'lodging',
   'Aged wine': 'food', 'Ale production': 'food', 'Basic food': 'food', 'Batch baking': 'food', Cheese: 'food', 'Dice games': 'food', 'Drink service': 'food',
   'Fresh bread': 'food', 'Fresh fish retail': 'food', 'Fresh meat': 'food', 'Fresh milk': 'food', 'Fresh produce': 'food', 'Grain grinding': 'food',
   Mead: 'food', Meals: 'food', 'Milling service': 'food', 'Offal and by-products': 'food', Pastries: 'food', 'Preserved fish': 'food',
   'Salting and preservation': 'food', 'Sausage and charcuterie': 'food', 'Seasonal specialties': 'food', 'Smoked fish': 'food', 'Street food': 'food',
-  'Table wine': 'food', 'Wholesale trade': 'food', 'Wine wholesale': 'food',
+  'Table wine': 'food', 'Wholesale trade': 'food', 'Wine wholesale': 'food', 'Grain at harvest': 'food', 'Grain milling (a day away)': 'food',
   'Aerial reconnaissance': 'equipment', 'Alloy production': 'equipment', 'Approaching threat warning': 'equipment', 'Arrow and bolt production': 'equipment',
   'Arrow production': 'equipment', 'Assay service': 'equipment', 'Barrel making': 'equipment', 'Basic carpentry': 'equipment', 'Basic repairs': 'equipment',
   'Basic smithing': 'equipment', 'Bow crafting': 'equipment', 'Bow maintenance': 'equipment', Brokerage: 'equipment', 'Building construction': 'equipment',
@@ -742,7 +730,7 @@ export const SERVICE_CATEGORY_MAP = {
   'Freight insurance': 'transport', 'Grooming and care': 'transport', 'Horse boarding': 'transport', 'Horse change': 'transport', 'Horse hire': 'transport',
   'Labour hire': 'transport', 'Livery and boarding': 'transport', 'Merchant networking': 'transport', 'Overnight boarding': 'transport',
   'Pack animal sales': 'transport', 'Parcel forwarding': 'transport', Porterage: 'transport', 'River piloting': 'transport', 'Road intelligence': 'transport',
-  'Route planning': 'transport', 'Small cargo': 'transport', 'Vessel mooring': 'transport', 'Way-bill services': 'transport',
+  'Route planning': 'transport', 'Small cargo': 'transport', 'Vessel mooring': 'transport', 'Way-bill services': 'transport', Pasturage: 'transport',
   'Administrative oversight': 'legal', Appeals: 'legal', 'Appeals court': 'legal', 'Bail hearings': 'legal', 'Bullion exchange': 'legal',
   'Bylaws and ordinances': 'legal', 'Cargo inspection': 'legal', 'Cargo loading and unloading': 'legal', Certification: 'legal',
   'Citizen registration': 'legal', 'Civic administration': 'legal', 'Civic announcements': 'legal', 'Civic law enforcement': 'legal',

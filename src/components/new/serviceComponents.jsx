@@ -28,13 +28,12 @@ export function ServiceItem({ svc, accent='#6b5340', isCriminal=false, _tradeDep
   const name  = typeof svc === 'string' ? svc : svc?.name || '';
   const displayName = institutionDisplayName(name);
   const desc  = typeof svc === 'object' ? (svc.desc || '') : '';
+  // The row's provider, attributed as the record has it: RS-19 is kept in the RECORD (lane
+  // REVIEW-INTAKE unit 2), so a row's institution is always the house that really offers it.
   const inst  = typeof svc === 'object' ? (svc.institution || '') : '';
   // §14 — services the user authored (or produced by a custom institution) carry
   // a `custom`/`source` flag; the dossier tints their row gold with a ✦ marker.
   const isCustom = typeof svc === 'object' && (svc.custom === true || svc.source === 'custom');
-  // RS-19 is kept in the RECORD now (lane REVIEW-INTAKE unit 2): the generator no longer
-  // surfaces one house's menu through another, so a row's institution is always its provider.
-  const attribution = inst;
   const isImp = impaired?.has(name) || impaired?.has(inst);
   const isDeg = !isImp && (degraded?.has(name) || degraded?.has(inst));
   const isVul = !isImp && !isDeg && (vulnerable?.has(name) || vulnerable?.has(inst));
@@ -77,7 +76,7 @@ export function ServiceItem({ svc, accent='#6b5340', isCriminal=false, _tradeDep
             honest element for a line whose child may open a dialog. The two paragraphs above
             keep their `<p>`: their children are inline-only.
             @enforced-by tests/components/servicesInstitutionCardNesting.test.jsx */}
-        {attribution&&<div style={{fontSize:chromeFontSize(FS.xxs, mobile),color:isCriminal?'#7a4040':'#9c8068',margin:'1px 0 0',fontStyle:'italic'}}><InstitutionLink name={attribution} settlement={settlement} /></div>}
+        {inst&&<div style={{fontSize:chromeFontSize(FS.xxs, mobile),color:isCriminal?'#7a4040':'#9c8068',margin:'1px 0 0',fontStyle:'italic'}}><InstitutionLink name={inst} settlement={settlement} /></div>}
         {(isImp||isDeg)&&depReasons&&(depReasons.get(name)||depReasons.get(inst))&&(()=>{
           const r=depReasons.get(name)||depReasons.get(inst);
           return <p style={{fontSize:proseFontSize(FS.xxs,mobile),color:isImp?'#8b1a1a':'#8a4010',margin:'3px 0 0',lineHeight:1.3}}>
