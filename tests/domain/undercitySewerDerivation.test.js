@@ -37,7 +37,7 @@ import { describe, expect, it } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { TERRAIN_DATA } from '../../src/data/geographyData.js';
 import { institutionalCatalog } from '../../src/data/institutionalCatalog.js';
-import { TIER_ORDER } from '../../src/data/constants.js';
+import { TIER_ORDER, popToTier } from '../../src/data/constants.js';
 import { DISTRICT_CATEGORIES } from '../../src/domain/districtProfile.js';
 import { facetOf } from '../../src/domain/spatial/cohesionWeave.js';
 import { JOINT_KINDS, TEMPERAMENTS } from '../../src/domain/undercity/jointVocabulary.js';
@@ -376,21 +376,29 @@ describe('MF-UC1 — the undercity sanitation ladder and its wells', () => {
     expect(water.tags).toEqual(['essential', 'water']);
     expect(institutionalCatalog.town.Infrastructure['Aqueduct or water system']).toBe(undefined);
 
-    const ladders = TIER_ORDER.map((t) => deriveSewerLadder(world(t, 'plains', `uc1-wells-${t}`)));
+    const places = TIER_ORDER.map((t) => world(t, 'plains', `uc1-wells-${t}`));
+    const ladders = places.map((p) => deriveSewerLadder(p));
     // Tier-scaled: the extent never shrinks as the tier rises.
     const extents = ladders.map((l) => WELL_EXTENTS.indexOf(l.wells.find((w) => w.kind === 'well').extent));
     expect(extents).toEqual([...extents].sort((a, b) => a - b));
     expect(extents[0]).toBeLessThan(extents[extents.length - 1]);
-    // The cistern appears exactly at the tiers the catalog makes the water system required at.
+    // The cistern appears exactly at the places the STAMP makes a city or larger, where the catalog
+    // makes the water system required. Re-keyed by identity on 2026-11-06 (LANDING-7 ruling R-E2;
+    // the cause is X-46 car 1, 433289899, the stamp cuts): `uc1-wells-town` rolls 2,258 people,
+    // which the stamp reads as a city (≥ 2,250) whatever it rolled as, so its engineered cistern
+    // is RIGHT. The expectation reads the stamp of each place's own population, never a roll label.
+    const stamped = places.map((p) => popToTier(p.population));
+    const cityScale = TIER_ORDER.filter((t, i) => ['city', 'metropolis'].includes(stamped[i]));
+    expect(cityScale).toEqual(['town', 'city', 'metropolis']);   // measured: town 2,258 stamps city
     const withCistern = TIER_ORDER.filter((t, i) => ladders[i].wells.some((w) => w.kind === 'cistern'));
-    expect(withCistern).toEqual(['city', 'metropolis']);
+    expect(withCistern).toEqual(cityScale);
     expect(ladders.map((l) => l.wells.find((w) => w.kind === 'cistern')?.license).filter(Boolean))
-      .toEqual(['ENGINEERED_WATER_SYSTEM', 'ENGINEERED_WATER_SYSTEM']);
+      .toEqual(cityScale.map(() => 'ENGINEERED_WATER_SYSTEM'));
 
     // THE GENERAL FORM on every row (§311.8.1): temperament + a caused portal from the closed
     // vocabulary, anchored to a quarter the 12-enum names.
     const rows = ladders.flatMap((l) => l.wells);
-    expect(rows.length).toBe(TIER_ORDER.length + 2);
+    expect(rows.length).toBe(TIER_ORDER.length + cityScale.length);
     expect([...new Set(rows.map((w) => w.temperament))]).toEqual([SEWER_TEMPERAMENT]);
     expect(TEMPERAMENTS).toContain(SEWER_TEMPERAMENT);
     expect([...new Set(rows.flatMap((w) => w.surfaceJoins.map((j) => `${j.kind}|${j.anchor}`)))]).toEqual(['stair|well-house']);
