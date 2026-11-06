@@ -24,6 +24,7 @@ import { deepClone } from '../../domain/clone.js';
 import { deriveFactionProfile } from '../../domain/factionProfile.js';
 import { createPRNG } from '../../kernel/prng.js';
 import { clearActiveRng, setActiveRng } from '../../kernel/rngContext.js';
+import { withLedgerBlock } from '../../domain/facts/presumptionLedger.js';
 import {
   generatePowerStructure,
   renormalizeFactionPower,
@@ -160,8 +161,24 @@ function assertIntent(intent) {
  * Replay the original power calculation without consuming the active pipeline
  * step's stream. The named seed reproduces every power-local roll even if later
  * code adds draws elsewhere in generatePower.
+ *
+ * Every power pass runs through here (the generatePower step, then
+ * reconcilePowerStructure at powerEconomyReconcilePass and at assembly), so the
+ * projection runs as the `powerStructure` block of the presumption ledger, as
+ * the economy runs as `economicState` (RUNG-2 LANDING phase E, R-E2; phase D's
+ * R-D1): a later pass replaces the notes the earlier pass drew, so the ledger
+ * holds one power note set. No draw moves; the ledger is not persisted.
  */
 export function projectPowerGenerationIntent(
+  intent,
+  economicState,
+  options = {},
+) {
+  return withLedgerBlock('powerStructure', () => projectPower(intent, economicState, options));
+}
+
+/** The projection itself (see projectPowerGenerationIntent). */
+function projectPower(
   intent,
   economicState,
   { defenseLabel = null } = {},
