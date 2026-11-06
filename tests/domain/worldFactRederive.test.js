@@ -404,8 +404,13 @@ describe('EM-B2b — world facts by consequence: the route, the refusals and the
     // the window's earlier records under the same landing), re-keyed at the landed tip by LANDING-5 under the chair's
     // ruling 4 with no per-step census: the generator master 4c42885b.. -> e98702fe.. and the prose manifest
     // 95ef4439.. -> d43a3ae2.. . The stride below still re-derives every row to its committed digest.
+    // Then record 28 of the rung-1 landing, THE V-SUMMARY-HOOKS CURE (ODQ §934.105;
+    // docs/shift-records/2026-11-05-rung1-28-summary-hook-count.json), through the signed door at 0aea2b010: the
+    // generator master e98702fe.. -> 26a02855.. (183 of 525 rows); the prose manifest did not move. That door act did
+    // not restate this pin; restated here by LANDING-7 lane E (third seat), with the stride below re-deriving every
+    // sampled row, no layer, to its committed digest at the restating tip.
     expect(shaOfFile(GOLDEN), 'tests/fixtures/generator-golden-master.json moved')
-      .toBe('e98702feba1c9aa93fd17ea2a9bf6282d6bdff30b66f616f7245ce56856d1673');
+      .toBe('26a02855273d9946e18da47fee95c31e0caab81267ff71c646737c6d5357cc15');
     expect(shaOfFile(PROSE_GOLDEN), 'tests/fixtures/dossier-prose-manifest-golden.json moved')
       .toBe('d43a3ae263acd4a5606a4e2be1e0aea55859ffd61a424bb7d87fb6fae130dece');
 
