@@ -106,6 +106,14 @@
  * bands where the disjoint bands gave each about a tenth. At the tip calm is 110 / 126 / 41 of 400
  * (first 120: 34 / 42 / 11), so the TIER-FLAT control below is red by a design consequence of the
  * bands, left for the chair's ruling (docs/LANDING7_L7B_2026-11-06.md).
+ * CURED IN PART 2026-11-06 (LANDING-7 lane B, seat 2, the chair's ruling R-B1): the promotion window
+ * now reads the next tier's STAMP CUT (TIER_STAMP_CUTS) instead of its roll-band minimum. Calm at
+ * N=400 110 / 126 / 41 -> 71 / 80 / 41 (first 120: 34 / 42 / 11 -> 23 / 26 / 11, spread 31 -> 15);
+ * the matched and acute arms did not move by one trial. The TIER-FLAT control is STILL RED at 15: of
+ * the calm promotions, 48 of 71 villages and 54 of 80 towns were GENERATED at or above the next
+ * tier's cut (the overlap of the owner's roll bands: village 350-400, town 2,250-2,500; the city band
+ * has none), and they promote with no stressor because their population already stamps the next
+ * tier. The lead-in-only promotions are 23 / 26 / 41. Left red, named, for the chair.
  *
  * ────────────────────────────────────────────────────────────────────────────────
  * SUBSYSTEM-CERTIFICATION ROW (liftable — the certification build reads the tagged
