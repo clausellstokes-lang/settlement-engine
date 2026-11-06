@@ -1189,14 +1189,19 @@ describe('A13 — the PROVENANCE move, EXECUTABLE since the holder census landed
   const CAPTURED_TREASURY_TOWN = Object.freeze({
     config: {
       settType: 'town',
-      tradeRouteAccess: 'road',
-      monsterThreat: 'random_threat',
-      culture: 'germanic',
-      terrainOverride: 'hills',
+      tradeRouteAccess: 'none',
+      monsterThreat: 'heartland',
+      culture: 'slavic',
+      terrainOverride: 'forest',
     },
     // rate-9-2 -> rate-11-9 on 2026-09-30, with tests/fixtures/tasteTowns.js INTERESTED_TOWNS: the
     // same-seed shift left rate-9-2's Town hall without a tax service (urban band, ODQ §934.86).
-    seed: 'rate-11-9',
+    // rate-11-9 -> rate-93-0 on 2026-11-06 (LANDING-7 lane G), with INTERESTED_TOWNS again and by
+    // identity with its cause: the X-46 train's compose 1264a8152 moved rate-11-9 out of capture
+    // (criminalCaptureState 'none'). Scanned at the landing tip in rateGrid's own order, taken with
+    // the grid's own config: 2 of the 128 town cells hold every captured precondition (rate-93-0 at
+    // index 372, rate-135-1); rate-93-0 is the first. The assertions are unchanged.
+    seed: 'rate-93-0',
   });
 
   it('⭐⭐ THE FAIL LIMB IS REACHABLE ON REAL INPUT: a citing variant whose holder this town has captured', () => {
