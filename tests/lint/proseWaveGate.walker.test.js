@@ -898,8 +898,11 @@ describe('(d) THE FIXTURE SECTION — the interested fact BOTH WAYS (SITTING §T
     expect(fixture.towns.map((t) => t.label)).toEqual(['captured', 'clean']);
     const captured = fixture.towns[0];
     const clean = fixture.towns[1];
-    expect(captured.standing, 'rate-11-9 is the captured town').toBe('INTERESTED');
-    expect(clean.standing, 'rate-3-0 is the control and it is NOT interested').toBe('LICENSED');
+    // Re-keyed by identity 2026-11-06 (REVIEW-INTAKE-3 R7): the captured town is rate-57-3, not
+    // rate-11-9. Cause: "a proxy is not a provider" — a Housing row rolls one service, so later
+    // rolls fork in the captured town (tests/fixtures/tasteTowns.js says how it was chosen).
+    expect(captured.standing, 'rate-57-3 is the captured town').toBe('INTERESTED');
+    expect(clean.standing, 'rate-3-2 (was rate-3-0, same cause) is the control and it is NOT interested').toBe('LICENSED');
     expect(captured.holder, 'and the holder is the census\'s own answer').toBeTruthy();
   });
 
