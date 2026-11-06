@@ -2,10 +2,10 @@
   "schemaVersion": 1,
   "corpus": {
     "pulseRoots": 12,
-    "introductions": 253,
+    "introductions": 270,
     "retirements": 0,
-    "finalEntries": 253,
-    "homes": 42
+    "finalEntries": 270,
+    "homes": 44
   },
   "addressTotality": {
     "rows": [
@@ -55,15 +55,15 @@
         "home": "applied|conflict_pressure",
         "field": "headline",
         "voiceClass": "indicative",
-        "distinctValues": 2,
-        "occurrences": 6
+        "distinctValues": 3,
+        "occurrences": 11
       },
       {
         "home": "applied|conflict_pressure",
         "field": "summary",
         "voiceClass": "indicative",
-        "distinctValues": 2,
-        "occurrences": 6
+        "distinctValues": 3,
+        "occurrences": 11
       },
       {
         "home": "applied|flourishing",
@@ -125,85 +125,85 @@
         "home": "applied|npc_expose",
         "field": "headline",
         "voiceClass": "indicative",
-        "distinctValues": 2,
-        "occurrences": 3
+        "distinctValues": 1,
+        "occurrences": 2
       },
       {
         "home": "applied|npc_expose",
         "field": "summary",
         "voiceClass": "indicative",
-        "distinctValues": 2,
-        "occurrences": 3
+        "distinctValues": 1,
+        "occurrences": 2
       },
       {
         "home": "applied|npc_mobilize",
         "field": "headline",
         "voiceClass": "indicative",
-        "distinctValues": 5,
-        "occurrences": 5
+        "distinctValues": 4,
+        "occurrences": 4
       },
       {
         "home": "applied|npc_mobilize",
         "field": "summary",
         "voiceClass": "indicative",
-        "distinctValues": 5,
-        "occurrences": 5
+        "distinctValues": 4,
+        "occurrences": 4
       },
       {
         "home": "applied|npc_protect",
         "field": "headline",
         "voiceClass": "indicative",
-        "distinctValues": 9,
-        "occurrences": 9
+        "distinctValues": 7,
+        "occurrences": 7
       },
       {
         "home": "applied|npc_protect",
         "field": "summary",
         "voiceClass": "indicative",
-        "distinctValues": 9,
+        "distinctValues": 7,
+        "occurrences": 7
+      },
+      {
+        "home": "applied|npc_reform",
+        "field": "headline",
+        "voiceClass": "indicative",
+        "distinctValues": 16,
+        "occurrences": 19
+      },
+      {
+        "home": "applied|npc_reform",
+        "field": "summary",
+        "voiceClass": "indicative",
+        "distinctValues": 18,
+        "occurrences": 19
+      },
+      {
+        "home": "applied|npc_suppress",
+        "field": "headline",
+        "voiceClass": "indicative",
+        "distinctValues": 7,
         "occurrences": 9
       },
       {
-        "home": "applied|npc_reform",
-        "field": "headline",
-        "voiceClass": "indicative",
-        "distinctValues": 20,
-        "occurrences": 23
-      },
-      {
-        "home": "applied|npc_reform",
-        "field": "summary",
-        "voiceClass": "indicative",
-        "distinctValues": 22,
-        "occurrences": 23
-      },
-      {
-        "home": "applied|npc_suppress",
-        "field": "headline",
-        "voiceClass": "indicative",
-        "distinctValues": 8,
-        "occurrences": 12
-      },
-      {
         "home": "applied|npc_suppress",
         "field": "summary",
         "voiceClass": "indicative",
-        "distinctValues": 8,
-        "occurrences": 12
+        "distinctValues": 7,
+        "occurrences": 9
       },
       {
         "home": "applied|rival_sabotage",
         "field": "headline",
         "voiceClass": "indicative",
-        "distinctValues": 2,
-        "occurrences": 5
+        "distinctValues": 1,
+        "occurrences": 3
       },
       {
         "home": "applied|rival_sabotage",
         "field": "summary",
         "voiceClass": "indicative",
         "distinctValues": 1,
-        "occurrences": 5
+        "occurrences": 3
       },
       {
         "home": "applied|roads",
@@ -237,85 +237,99 @@
         "home": "applied|stressor_aftermath",
         "field": "headline",
         "voiceClass": "indicative",
-        "distinctValues": 2,
-        "occurrences": 3
+        "distinctValues": 3,
+        "occurrences": 9
       },
       {
         "home": "applied|stressor_aftermath",
         "field": "summary",
         "voiceClass": "indicative",
-        "distinctValues": 2,
-        "occurrences": 3
+        "distinctValues": 3,
+        "occurrences": 9
       },
       {
         "home": "applied|stressor_birth_insurgency",
         "field": "headline",
         "voiceClass": "indicative",
-        "distinctValues": 1,
-        "occurrences": 1
+        "distinctValues": 4,
+        "occurrences": 4
       },
       {
         "home": "applied|stressor_birth_insurgency",
         "field": "summary",
         "voiceClass": "indicative",
-        "distinctValues": 1,
-        "occurrences": 1
+        "distinctValues": 4,
+        "occurrences": 4
       },
       {
         "home": "applied|stressor_birth_mass_migration",
+        "field": "headline",
+        "voiceClass": "indicative",
+        "distinctValues": 3,
+        "occurrences": 4
+      },
+      {
+        "home": "applied|stressor_birth_mass_migration",
+        "field": "summary",
+        "voiceClass": "indicative",
+        "distinctValues": 3,
+        "occurrences": 4
+      },
+      {
+        "home": "applied|stressor_birth_monster_raider_pressure",
+        "field": "headline",
+        "voiceClass": "indicative",
+        "distinctValues": 3,
+        "occurrences": 6
+      },
+      {
+        "home": "applied|stressor_birth_monster_raider_pressure",
+        "field": "summary",
+        "voiceClass": "indicative",
+        "distinctValues": 3,
+        "occurrences": 6
+      },
+      {
+        "home": "applied|stressor_birth_rebellion",
         "field": "headline",
         "voiceClass": "indicative",
         "distinctValues": 1,
         "occurrences": 2
       },
       {
-        "home": "applied|stressor_birth_mass_migration",
+        "home": "applied|stressor_birth_rebellion",
         "field": "summary",
         "voiceClass": "indicative",
         "distinctValues": 1,
         "occurrences": 2
-      },
-      {
-        "home": "applied|stressor_birth_monster_raider_pressure",
-        "field": "headline",
-        "voiceClass": "indicative",
-        "distinctValues": 1,
-        "occurrences": 3
-      },
-      {
-        "home": "applied|stressor_birth_monster_raider_pressure",
-        "field": "summary",
-        "voiceClass": "indicative",
-        "distinctValues": 1,
-        "occurrences": 3
       },
       {
         "home": "applied|stressor_escalate_insurgency",
         "field": "headline",
         "voiceClass": "indicative",
         "distinctValues": 1,
-        "occurrences": 2
+        "occurrences": 1
       },
       {
         "home": "applied|stressor_escalate_insurgency",
         "field": "summary",
         "voiceClass": "indicative",
         "distinctValues": 1,
-        "occurrences": 2
+        "occurrences": 1
       },
       {
         "home": "applied|stressor_residual",
         "field": "headline",
         "voiceClass": "indicative",
-        "distinctValues": 2,
-        "occurrences": 3
+        "distinctValues": 3,
+        "occurrences": 9
       },
       {
         "home": "applied|stressor_residual",
         "field": "summary",
         "voiceClass": "indicative",
-        "distinctValues": 2,
-        "occurrences": 3
+        "distinctValues": 3,
+        "occurrences": 9
       },
       {
         "home": "applied|trade_pressure",
@@ -433,43 +447,43 @@
         "home": "queued|conflict_pressure",
         "field": "headline",
         "voiceClass": "indicative",
-        "distinctValues": 2,
-        "occurrences": 2
+        "distinctValues": 1,
+        "occurrences": 1
       },
       {
         "home": "queued|conflict_pressure",
         "field": "summary",
         "voiceClass": "indicative",
+        "distinctValues": 1,
+        "occurrences": 1
+      },
+      {
+        "home": "queued|faction_government_challenge",
+        "field": "headline",
+        "voiceClass": "indicative",
+        "distinctValues": 1,
+        "occurrences": 1
+      },
+      {
+        "home": "queued|faction_government_challenge",
+        "field": "summary",
+        "voiceClass": "indicative",
+        "distinctValues": 1,
+        "occurrences": 1
+      },
+      {
+        "home": "queued|neutral_to_rival",
+        "field": "headline",
+        "voiceClass": "indicative",
         "distinctValues": 2,
         "occurrences": 2
       },
       {
-        "home": "queued|faction_government_challenge",
-        "field": "headline",
-        "voiceClass": "indicative",
-        "distinctValues": 1,
-        "occurrences": 1
-      },
-      {
-        "home": "queued|faction_government_challenge",
-        "field": "summary",
-        "voiceClass": "indicative",
-        "distinctValues": 1,
-        "occurrences": 1
-      },
-      {
-        "home": "queued|neutral_to_rival",
-        "field": "headline",
-        "voiceClass": "indicative",
-        "distinctValues": 1,
-        "occurrences": 1
-      },
-      {
         "home": "queued|neutral_to_rival",
         "field": "summary",
         "voiceClass": "indicative",
         "distinctValues": 1,
-        "occurrences": 1
+        "occurrences": 2
       },
       {
         "home": "queued|npc_exploit",
@@ -494,20 +508,6 @@
       },
       {
         "home": "queued|npc_mobilize",
-        "field": "summary",
-        "voiceClass": "indicative",
-        "distinctValues": 1,
-        "occurrences": 1
-      },
-      {
-        "home": "queued|npc_reform",
-        "field": "headline",
-        "voiceClass": "indicative",
-        "distinctValues": 1,
-        "occurrences": 1
-      },
-      {
-        "home": "queued|npc_reform",
         "field": "summary",
         "voiceClass": "indicative",
         "distinctValues": 1,
@@ -545,15 +545,15 @@
         "home": "queued|strategy_sue_for_peace",
         "field": "headline",
         "voiceClass": "indicative",
-        "distinctValues": 1,
-        "occurrences": 1
+        "distinctValues": 2,
+        "occurrences": 2
       },
       {
         "home": "queued|strategy_sue_for_peace",
         "field": "summary",
         "voiceClass": "indicative",
-        "distinctValues": 1,
-        "occurrences": 1
+        "distinctValues": 2,
+        "occurrences": 2
       },
       {
         "home": "queued|trade_pressure",
@@ -564,6 +564,34 @@
       },
       {
         "home": "queued|trade_pressure",
+        "field": "summary",
+        "voiceClass": "indicative",
+        "distinctValues": 1,
+        "occurrences": 1
+      },
+      {
+        "home": "realm|realm_insurgency",
+        "field": "headline",
+        "voiceClass": "indicative",
+        "distinctValues": 1,
+        "occurrences": 3
+      },
+      {
+        "home": "realm|realm_insurgency",
+        "field": "summary",
+        "voiceClass": "indicative",
+        "distinctValues": 2,
+        "occurrences": 3
+      },
+      {
+        "home": "realm|realm_mass_migration",
+        "field": "headline",
+        "voiceClass": "indicative",
+        "distinctValues": 1,
+        "occurrences": 1
+      },
+      {
+        "home": "realm|realm_mass_migration",
         "field": "summary",
         "voiceClass": "indicative",
         "distinctValues": 1,
@@ -598,15 +626,15 @@
         "occurrences": 1
       }
     ],
-    "rowsSha256": "b1b776e5cc76dd5322d659ed37b54112da992be113f4c9176b70b494745ddb5f",
+    "rowsSha256": "6214cb83e8047ecaf7697d2d917ce047c198d8fcfb742de1fcfe9df812072679",
     "totals": {
-      "homes": 42,
+      "homes": 44,
       "fields": 2,
-      "identities": 84,
+      "identities": 88,
       "prospectiveIdentities": 0,
-      "indicativeIdentities": 84,
-      "distinctValues": 365,
-      "occurrences": 506
+      "indicativeIdentities": 88,
+      "distinctValues": 372,
+      "occurrences": 540
     }
   },
   "rewriteLiveness": {
@@ -616,31 +644,31 @@
         {
           "field": "mechanicalOutcomes",
           "capPerPulse": 8,
-          "headlineOccurrences": 53,
-          "distinctValues": 24,
+          "headlineOccurrences": 45,
+          "distinctValues": 21,
           "prospectiveOccurrences": 0,
           "prospectiveDistinctValues": 0,
-          "indicativeOccurrences": 53,
-          "indicativeDistinctValues": 24
+          "indicativeOccurrences": 45,
+          "indicativeDistinctValues": 21
         },
         {
           "field": "selectedOutcomes",
           "capPerPulse": 24,
-          "headlineOccurrences": 160,
-          "distinctValues": 81,
+          "headlineOccurrences": 166,
+          "distinctValues": 82,
           "prospectiveOccurrences": 0,
           "prospectiveDistinctValues": 0,
-          "indicativeOccurrences": 160,
-          "indicativeDistinctValues": 81
+          "indicativeOccurrences": 166,
+          "indicativeDistinctValues": 82
         }
       ],
       "union": {
-        "headlineOccurrences": 213,
-        "distinctValues": 81,
+        "headlineOccurrences": 211,
+        "distinctValues": 82,
         "prospectiveOccurrences": 0,
         "prospectiveDistinctValues": 0,
-        "indicativeOccurrences": 213,
-        "indicativeDistinctValues": 81
+        "indicativeOccurrences": 211,
+        "indicativeDistinctValues": 82
       }
     },
     "rows": [

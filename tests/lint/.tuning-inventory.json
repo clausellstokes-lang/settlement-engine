@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "c8e3accb51f3b3c4ad6379ced5f035044eba523e",
-  "measuredBy": "LANDING-7 A seat (Opus 5.5), cloud chair session 01FE9mEvGxnFx6WTBkEC6ie9",
+  "measuredAtSha": "fecbdfd68ee036ad482d9cae34d1abc4f0dc133b",
+  "measuredBy": "LANDING-7-E3 (Opus 5.5)",
   "date": "2026-11-06",
-  "note": "one dependent gained, no value moved: src/domain/viabilitySummary.js (born by the V-SUMMARY-HOOKS cure c1cf38bbb, buildViabilitySummary moved out of viability.js) now reads src/data/constants.js#METROPOLIS_ROLL_TUNING; tables 261, named 535, bare 6945 unchanged",
+  "note": "LANDING-7 R-E8: DENSITY_CEILINGS enters as a homes-registered table (re-derived from the stamp-band maxima, draft row)",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -2428,7 +2428,7 @@
       "idiom": "literal",
       "keys": 7,
       "line": 227,
-      "spanDigest": "2f8fb902cb2abbbfc9e2eafbc4ed5ee61cd213220af0cba49dc0f9edb6d7b969",
+      "spanDigest": "1cb1b9f82fd6bd73eb6b372f80b11960ec486c4f3a3ff3528cf9e8990b14c6fe",
       "leaves": {
         "weights.PROSPERITY_BAND": 0.25,
         "weights.CIVIC_CAPACITY": 0.25,
@@ -2438,8 +2438,8 @@
         "weights.FOUNDING_CHARTER": 0,
         "civicSaturation": 4,
         "calamitySaturation": 3,
-        "cesspitFailurePopulation": 2000,
-        "highWaterSaturation": 12000,
+        "cesspitFailurePopulation": 777,
+        "highWaterSaturation": 5399,
         "absentFloor": 0.1,
         "certainThreshold": 0.9
       },
@@ -3535,11 +3535,45 @@
         "src/domain/worldPulse/demographicsMigration.js"
       ]
     },
+    "src/domain/worldPulse/demographicsRates.js#DENSITY_CEILINGS": {
+      "exported": true,
+      "idiom": "literal",
+      "keys": 6,
+      "line": 164,
+      "spanDigest": "e7661abf510150ed4ca96c5cb8862d77ccc23a9b4bcb23ae55cc11c3d2e95646",
+      "leaves": {
+        "thorp": 36,
+        "hamlet": 131,
+        "village": 543,
+        "town": 3374,
+        "city": 22798,
+        "metropolis": 140000
+      },
+      "dependents": [
+        "src/domain/display/demographicReading.js",
+        "src/domain/worldPulse/candidateEvents.js",
+        "src/domain/worldPulse/demographicsKernel.js",
+        "src/domain/worldPulse/demographicsLadder.js",
+        "src/domain/worldPulse/demographicsMigration.js",
+        "src/domain/worldPulse/demographicsObservation.js",
+        "src/domain/worldPulse/demographicsPlans.js",
+        "src/domain/worldPulse/demographicsPushPull.js",
+        "src/domain/worldPulse/demographicsRisk.js",
+        "src/domain/worldPulse/demographicsWar.js",
+        "src/domain/worldPulse/migrationKernel.js",
+        "src/domain/worldPulse/populationDynamics.js",
+        "src/domain/worldPulse/settlementLifecycleFirstClass.js",
+        "src/domain/worldPulse/sovereigntyMarketStage.js",
+        "src/domain/worldPulse/tierResourceDynamics.js",
+        "src/domain/worldPulse/warReasons.js"
+      ],
+      "namedDependents": []
+    },
     "src/domain/worldPulse/demographicsRates.js#DEMOGRAPHIC_TUNING": {
       "exported": true,
       "idiom": "literal",
       "keys": 11,
-      "line": 218,
+      "line": 234,
       "spanDigest": "b4476edae48f99ca0e8ca71de94a353ed4dd26f411507f2364f8199dde212007",
       "leaves": {
         "BIRTH_EASE": 0.75,
@@ -8635,11 +8669,11 @@
   },
   "unclosed": [],
   "totals": {
-    "tables": 261,
-    "keys": 2203,
+    "tables": 262,
+    "keys": 2209,
     "unregisteredNamed": 535,
     "bareDecimals": 6945,
     "zeroDependentTables": 10,
-    "zeroNamedDependentTables": 170
+    "zeroNamedDependentTables": 171
   }
 }

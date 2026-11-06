@@ -73,7 +73,11 @@ function world(settType, terrain, tag) {
 /** A city in the mountains whose roster carries a stone quarry — the working fixture. */
 const QUARRY_CITY = world('city', 'mountain', '2');
 /** A walled inland town: a GATE and no waterfront. */
-const WALLED_TOWN = world('town', 'mountain', '2');
+// Re-pinned '2' to '36' on 2026-11-06 (LANDING-7 lane E): under the owner's bands (X-46 car 1, 433289899) the
+// town band is [300, 2500] and seed 2's town no longer walls itself; over tags 0..39, 7 mountain towns are
+// walled, 2 clear the smuggler floor (12: 0.5, 36: 0.575), and '36' (1,620 people) is the one that also keeps
+// its storing commerce (an undercroft); '12' has none.
+const WALLED_TOWN = world('town', 'mountain', '36');
 /**
  * An unwalled coastal town: a WATERFRONT and no gate.
  * Re-pinned '1' to '3' on 2026-09-30 (the urban band, ODQ §934.86): the same-seed roster shift
@@ -81,7 +85,9 @@ const WALLED_TOWN = world('town', 'mountain', '2');
  * waterfront and could no longer show the waterfront licensing the subset ALONE. Seed 2 is walled
  * too; seed 3 is the first sibling that is unwalled, port-routed and above the share floor.
  */
-const HARBOUR_TOWN = world('town', 'coastal', '3');
+// Re-pinned '3' to '4' on 2026-11-06 (LANDING-7 lane E, the owner's bands, 433289899): seed 3's town no longer
+// clears the smuggler floor; over tags 0..39, 33 coastal towns are unwalled and 10 carry the cellar; '4' is the first.
+const HARBOUR_TOWN = world('town', 'coastal', '4');
 /**
  * An unwalled inland town: neither, so the smuggler licence has nowhere to sit.
  * Re-pinned '3' to '4' on 2026-09-30 (the urban band, ODQ §934.86): the same-seed roster shift

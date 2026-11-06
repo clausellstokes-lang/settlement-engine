@@ -120,8 +120,18 @@ const TOTAL_KEYS = Object.freeze(['identities', 'distinctValues', 'occurrences']
 // applied|stressor_birth_insurgency, applied|stressor_escalate_insurgency, queued|conflict_pressure,
 // queued|faction_government_challenge, queued|npc_mobilize, queued|npc_reform). Conservation closes: 253 − 0 = 253. No
 // surviving row flips its voice class; the voice debt stays EMPTY.
+// ── RE-RECORDED 2026-11-06 BY LANDING-7 LANE E (the chair's ruling R-E10, §934.105, under the owner's "I also now give all
+// permissions required now and in the future. I also defer all judgement to you."), IN THE SAME ACT AS THE NEWS-HEADLINE
+// CONTRACT, THE PROSE-FAMILY CONTRACT AND THE OSR WALKER'S PRODUCERS ARM (the 3d50676bb door) ─────────────────────────────
+// 253/0/253/42 → 270/0/270/44. ONE CAUSE: THE DENSITY CEILINGS RE-DERIVED FROM THE STAMP BANDS (R-E8, 20c0139c5). This corpus
+// lights every `*Enabled` flag, demographics included, so the lit density walls (thorp 90 → 36 … city 38,000 → 22,798) re-deal
+// the AO-0 year. ONE CORPUS BUILD PER TREE, every field measured (the throw below disabled in a scratch copy only): at
+// 989219706 (the ceilings' parent) the harness reproduces every frozen figure of all three contracts exactly; at 20c0139c5
+// ALONE it measures the whole tip, byte for byte (nothing after the ceilings moves the corpus). One home leaves
+// (queued|npc_reform) and three arrive (applied|stressor_birth_rebellion, realm|realm_insurgency, realm|realm_mass_migration).
+// Conservation closes: 270 − 0 = 270. No surviving row flips its voice class; the voice debt stays EMPTY.
 const CORPUS = Object.freeze({
-  pulseRoots: 12, introductions: 253, retirements: 0, finalEntries: 253, homes: 42,
+  pulseRoots: 12, introductions: 270, retirements: 0, finalEntries: 270, homes: 44,
 });
 
 export const NEWS_VOICE_PROTECTED_SUBSTRATE = Object.freeze([

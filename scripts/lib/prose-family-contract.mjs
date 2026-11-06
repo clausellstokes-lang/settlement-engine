@@ -171,16 +171,24 @@ const EXPECTED_ROOTS = new Map([
 // osr002's raider-pressure residual. Families: pulseHistory 45/995/4838 -> 46/952/5051, regionalLog 2/4/153 -> 2/4/157;
 // chronicle and timeline hold. Totals 58/1014/5010 -> 59/971/5227; bytes 7517 -> 7665; digest 1d67e350 -> c24ac7a8;
 // the regional root reach [0,1,3..11] -> 0..11 (root 2 carries regional events again from X-46 car 3).
+// ── RE-RECORDED 2026-11-06 BY LANDING-7 LANE E (the chair's ruling R-E10, §934.105), IN THE SAME ACT AS THE NEWS-VOICE AND
+// NEWS-HEADLINE CONTRACTS AND THE OSR WALKER'S PRODUCERS ARM (the 3d50676bb door; ONE corpus build per tree measured with this
+// library's own functions, which reproduces every frozen figure below EXACTLY at the ceilings' parent 989219706). ONE CAUSE:
+// THE DENSITY CEILINGS RE-DERIVED FROM THE STAMP BANDS (R-E8, 20c0139c5), measured at 20c0139c5 ALONE byte-equal to the tip.
+// scalarRows 25574 -> 26891; wizardNews final/accumulated/unique 253/1529/253 -> 270/1615/270; regional 75/75 -> 86/86.
+// THE SHAPE HOLDS: 59 identities, none added and none removed; 42 rows move a count. Families: pulseHistory 46/952/5051 ->
+// 46/957/5042, regionalLog 2/4/157 -> 2/4/189; chronicle and timeline hold. Totals 59/971/5227 -> 59/976/5250; bytes
+// 7665 -> 7669; digest c24ac7a8 -> 7c53b1cd. The regional root reach 0..11 holds.
 const EXPECTED_CORPUS = Object.freeze({
-  scalarRows: 25574, canonEventLogEntries: 1, wizardNewsFinalEntries: 253,
-  wizardNewsAccumulatedEntries: 1529, wizardNewsUnique: 253, pulseHistory: 12,
-  regionalEventLog: 75, regionalEventLogUnique: 75, aiChronicle: 1,
+  scalarRows: 26891, canonEventLogEntries: 1, wizardNewsFinalEntries: 270,
+  wizardNewsAccumulatedEntries: 1615, wizardNewsUnique: 270, pulseHistory: 12,
+  regionalEventLog: 86, regionalEventLogUnique: 86, aiChronicle: 1,
 });
 const EXPECTED_REGIONAL_ROOTS = Object.freeze([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
 const EXPECTED_FAMILY_TOTALS = Object.freeze([
   { family: 'chronicle', identities: 7, distinctValues: 7, occurrences: 7 },
-  { family: 'pulseHistory', identities: 46, distinctValues: 952, occurrences: 5051 },
-  { family: 'regionalLog', identities: 2, distinctValues: 4, occurrences: 157 },
+  { family: 'pulseHistory', identities: 46, distinctValues: 957, occurrences: 5042 },
+  { family: 'regionalLog', identities: 2, distinctValues: 4, occurrences: 189 },
   { family: 'timeline', identities: 4, distinctValues: 8, occurrences: 12 },
 ]);
 // 2026-10-02 (THE VOICE PROGRAM wave 1, the owner: "Updates like these need to reflect actions not to potential"):
@@ -189,9 +197,9 @@ const EXPECTED_FAMILY_TOTALS = Object.freeze([
 // (+6, +7, +9: both towns named, a deed per kind) and the three SUMMARY rows shrink (−1, −3, −1: the NPC line now states
 // the aim alone, its move having gone to the headline). EXPECTED_ROWS_BYTES holds at 8000 by digit-width coincidence again;
 // the digest below is the pin that convicts.
-const EXPECTED_TOTALS = Object.freeze({ families: 4, identities: 59, distinctValues: 971, occurrences: 5227 });
-const EXPECTED_ROWS_BYTES = 7665;
-const EXPECTED_ROWS_SHA256 = 'c24ac7a816698a0e8eb1da6dcb605c023fbf5215762cf6a9e971798b243d7a6e';
+const EXPECTED_TOTALS = Object.freeze({ families: 4, identities: 59, distinctValues: 976, occurrences: 5250 });
+const EXPECTED_ROWS_BYTES = 7669;
+const EXPECTED_ROWS_SHA256 = '7c53b1cd8f181b7080021bb9c89074bea84a6205cab29ed0b6e491bb8c332832';
 const codepoint = (left, right) => (left < right ? -1 : left > right ? 1 : 0);
 const same = (left, right) => JSON.stringify(left) === JSON.stringify(right);
 const identityOf = (row) => `${row.family}\0${row.path}\0${row.field}`;

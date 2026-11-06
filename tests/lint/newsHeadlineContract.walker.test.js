@@ -115,7 +115,7 @@ describe('complete Wizard News address and headline rewrite contract', () => {
     expect(overlapFields.consequenceOutcomes.filter(isStateOnlyOutcome)).toHaveLength(12);
   });
 
-  it('A2 freezes all 84 address rows and their canonical digest', () => {
+  it('A2 freezes all 88 address rows and their canonical digest', () => {
     expect(compareNewsAddressRows(addressRows, baseline.addressTotality.rows)).toBe(true);
     expect(addressRowsSha256(addressRows)).toBe(baseline.addressTotality.rowsSha256);
     // T8 · SHIFT (§858 + §860): 106 → 102 identities over 53 → 51 homes. The two homes that leave
@@ -136,7 +136,9 @@ describe('complete Wizard News address and headline rewrite contract', () => {
     // the homes that leave and arrive are named at news-voice-contract.mjs's RE-RECORDED block. Every row stays indicative.
     // 2026-11-04 (LANDING-2b, the chair's ruling 5; the rung-1 window 05897b88d..5dd0f323a, by first-parent sample point): 45/2/90/0/90/385/522 →
     // 42/2/84/0/84/365/506; ten homes out and seven in, named at news-voice-contract.mjs's RE-RECORDED block. Every row stays indicative.
-    expect(baseline.addressTotality.totals).toEqual({ homes: 42, fields: 2, identities: 84, prospectiveIdentities: 0, indicativeIdentities: 84, distinctValues: 365, occurrences: 506 });
+    // 2026-11-06 (LANDING-7 R-E10, the density ceilings re-derived from the stamp bands, 20c0139c5 alone): 42/2/84/0/84/365/506 →
+    // 44/2/88/0/88/372/540; one home out and three in, named at news-voice-contract.mjs's RE-RECORDED block. Every row stays indicative.
+    expect(baseline.addressTotality.totals).toEqual({ homes: 44, fields: 2, identities: 88, prospectiveIdentities: 0, indicativeIdentities: 88, distinctValues: 372, occurrences: 540 });
   });
 
   it('A3 freezes both raw lanes and all 26 exact rewrite counts', () => {

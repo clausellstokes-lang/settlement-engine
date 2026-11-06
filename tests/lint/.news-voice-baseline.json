@@ -2,10 +2,10 @@
   "schemaVersion": 1,
   "corpus": {
     "pulseRoots": 12,
-    "introductions": 253,
+    "introductions": 270,
     "retirements": 0,
-    "finalEntries": 253,
-    "homes": 42
+    "finalEntries": 270,
+    "homes": 44
   },
   "retroDetection": {
     "rows": [

@@ -21,7 +21,7 @@ import { beforeAll, describe, expect, it } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
-import { POPULATION_RANGES, TIER_ORDER } from '../../src/data/constants.js';
+import { POPULATION_RANGES, TIER_ORDER, TIER_STAMP_CUTS } from '../../src/data/constants.js';
 import { nativeSemanticName } from '../../src/domain/content/customContentSemanticAuthority.js';
 import { hasMarketInstitution, isCityScale } from '../../src/generators/economy/viability.js';
 
@@ -88,13 +88,23 @@ describe('hasMarketInstitution — the catalogue decides, never the shelf', () =
 });
 
 describe('isCityScale — the city cuts read the tier', () => {
-  it('agrees with the old population > 5000 cut at every band edge of today\'s ranges', () => {
+  // RE-STATED (LANDING-7 lane E): the premise was the old disjoint bands, where the tier and the old
+  // `population > 5000` cut agreed at every band edge. X-46 car 1 (433289899) made the roll bands
+  // overlap and put the one population -> tier law in the stamp (TIER_STAMP_CUTS.city 2,250), so the
+  // edges no longer agree with any fixed cut: the town band's max 2,500 stamps city. The two arms are
+  // now pinned to their own laws: with a tier, the tier decides; with none, the stamp's city cut.
+  it('reads the tier at every band edge, and the stamp\'s city cut when no tier is known', () => {
     for (const tier of TIER_ORDER) {
       for (const population of [POPULATION_RANGES[tier].min, POPULATION_RANGES[tier].max]) {
-        expect(isCityScale(tier, population), `${tier} ${population}`).toBe(population > 5000);
-        expect(isCityScale(undefined, population), `no tier, ${population}`).toBe(population > 5000);
+        expect(isCityScale(tier, population), `${tier} ${population}`)
+          .toBe(TIER_ORDER.indexOf(tier) >= TIER_ORDER.indexOf('city'));
+        expect(isCityScale(undefined, population), `no tier, ${population}`)
+          .toBe(population >= TIER_STAMP_CUTS.city);
       }
     }
+    // Anchored: the overlap edge really splits the arms (a town at its band max is city-scale only untiered).
+    expect(isCityScale('town', POPULATION_RANGES.town.max)).toBe(false);
+    expect(isCityScale(undefined, POPULATION_RANGES.town.max)).toBe(true);
   });
 
   it('reads the tier over the population, so a band move carries the cut with it', () => {

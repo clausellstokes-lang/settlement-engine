@@ -162,7 +162,11 @@ const CORPUS = Object.freeze([
       + 'profile, whose merchant bloc usually already owns its institutions',
     // Re-pinned `-3` to `-23` on 2026-08-01 (I1 catalog stream translation, see the
     // block note above). `-23` also keeps this specimen's threat_defense fire.
-    seed: 'effect-reach-v1-criminal-crossroads-town-23',
+    // Re-pinned `-23` to `-0` on 2026-11-06 (LANDING-7 R-E12): X-46 car 3's institution budget
+    // (90dc22f18, bisected first-parent) moved `-23` off the pull. Scanned over `-0..-999` with this
+    // file's own detector, the stratum fires on 456 of 1,000; `-0` is the first, and it keeps the
+    // threat_defense fire too.
+    seed: 'effect-reach-v1-criminal-crossroads-town-0',
     config: Object.freeze({
       settType: 'town',
       culture: 'steppe',
@@ -222,7 +226,11 @@ const CORPUS = Object.freeze([
     // FIX 1, which confined the dependency repair to the settlement's own tier block): -24 no
     // longer adds a hard dependency, and -3 is the first sibling that does (32 of 60 do). Its
     // isolation_support stratum is gone from every config (UNREACHABLE_STRATA below).
-    seed: 'effect-reach-v1-iso-metro-3',
+    // Re-pinned `-3` to `-26` on 2026-11-06 (LANDING-7 R-E12): X-46 car 3's institution budget
+    // (90dc22f18, bisected first-parent) moved `-3` off the hard dependency. Scanned over `-0..-999`
+    // with this file's own detector, it fires on 146 of 1,000; `-26` is the first, and it keeps the
+    // standard-subsumption and magical-transit fires (isolation_support stays at zero).
+    seed: 'effect-reach-v1-iso-metro-26',
     config: Object.freeze({
       settType: 'metropolis',
       culture: 'greek',
@@ -270,7 +278,10 @@ const CORPUS = Object.freeze([
     // authored `subsumes` reference then removes it, with the paired control still silent.
     // Re-pinned `-8` to `-2` on 2026-09-30 (the urban-band registry re-ordered the town's
     // catalog draws, ODQ §934.86); `-2` is the first sibling where the same holds again.
-    seed: 'effect-reach-v1-custom-subsumption-town-2',
+    // Re-pinned `-2` to `-3` on 2026-11-06 (LANDING-7 R-E12): X-46 car 1 U2, the owner's bands
+    // (433289899, bisected), moved `-2` off the seating. Scanned over `-0..-999` with this file's own
+    // detector and its paired control, it fires on 281 of 1,000; `-3` is the first.
+    seed: 'effect-reach-v1-custom-subsumption-town-3',
     config: Object.freeze({
       settType: 'town',
       culture: 'latin',
@@ -314,7 +325,10 @@ const CORPUS = Object.freeze([
       + 'access check removes it — fired on 10 of 40 sibling seeds',
     // Re-pinned `-6` to `-8` on 2026-09-30 (the urban-band registry re-ordered the village's
     // catalog draws, ODQ §934.86): `-8` is the first sibling that seats the Fishmonger again.
-    seed: 'effect-reach-v1-mountain-pass-fishmonger-8',
+    // Re-pinned `-8` to `-7` on 2026-11-06 (LANDING-7 R-E12): X-46 car 3's institution budget
+    // (90dc22f18, bisected first-parent) moved `-8` off the seating. Scanned over `-0..-999` with this
+    // file's own detector, it fires on 85 of 1,000; `-7` is the first.
+    seed: 'effect-reach-v1-mountain-pass-fishmonger-7',
     config: Object.freeze({
       settType: 'village',
       culture: 'germanic',

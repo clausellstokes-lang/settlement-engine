@@ -161,6 +161,14 @@
         "INSTITUTION_BUDGET_ANCHORS"
       ],
       "note": "X-46 car 3 (d224a5a0): the seven [population, houses] anchors of the institution budget curve, log-linear between them; the metropolis anchor 120 -> 93 by the chair’s ruling of 2026-11-04 (rung-1 pins unit 3)."
+    },
+    {
+      "kind": "tables",
+      "file": "src/domain/worldPulse/demographicsRates.js",
+      "exports": [
+        "DENSITY_CEILINGS"
+      ],
+      "note": "LANDING-7 ruling R-E8 (2026-11-06): the lit demographic density ceiling by tier, D_tier. Unsuffixed, so the _TUNING glob cannot see it; the demographic roster (DEMOGRAPHIC_TUNING_COVERAGE) already names it."
     }
   ],
   "moduleSide": [
@@ -747,7 +755,7 @@
       "signedAt": null,
       "unit": null,
       "band": null,
-      "note": ""
+      "note": "LANDING-7 ruling R-E2 (2026-11-06), DRAFT, vetoable by the owner, who wrote that day: \"I also now give all permissions required now and in the future. I also defer all judgement to you.\" cesspitFailurePopulation 2000 -> 777 and highWaterSaturation 12000 -> 5399: re-based to the stamp cuts X-46 car 1 (433289899) moved (town 901 -> 350, city 5001 -> 2250), each figure keeping its ratio to the cut of the tier it sat in (2000 x 350/901, 12000 x 2250/5001). Under the old figures every town read the high-water cause at about zero and a saturated calamity lifted none. Nothing here is signed."
     },
     "src/domain/worldPulse/anticipatedReactions.js#REACTION_TUNING": {
       "role": null,
@@ -2578,6 +2586,21 @@
       },
       "band": null,
       "note": "T1 0.6 -> 0.3 (fe56bddd; the soak 1000 dry run §4, adopted by the chair under the owner’s word of 2026-11-04, a veto point). Declared at the rung-1 landing (LANDING-1 door 3)."
+    },
+    "src/domain/worldPulse/demographicsRates.js#DENSITY_CEILINGS": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "thorp": "people",
+        "hamlet": "people",
+        "village": "people",
+        "town": "people",
+        "city": "people",
+        "metropolis": "people"
+      },
+      "band": null,
+      "note": "LANDING-7 ruling R-E8 (2026-11-06), DRAFT, vetoable by the owner, who wrote that day: \"I also now give all permissions required now and in the future. I also defer all judgement to you.\" THE RULE: each tier's ceiling = its old ceiling / its old band maximum x its STAMP-band maximum (cut(next) - 1, TIER_STAMP_CUTS, X-46 car 1 433289899 and car 2's law). Per tier: thorp 90 / 60 x 24 = 36; hamlet 600 / 400 x 87 = 131; village 1,400 / 900 x 349 = 543; town 7,500 / 5,000 x 2,249 = 3,374; city 38,000 / 25,000 x 14,999 = 22,798; metropolis 140,000 held (its stamp band is open, so there is no maximum to follow). Under the old contiguous bands the stamp band and the roll band were one band, so the rule reproduces the old table. It holds the P5a interlock (a mountain tier without works stays below the next tier's stamp cut; at maximum works every terrain clears it). Nothing here is signed."
     },
     "src/data/institutionBudget.js#INSTITUTION_BUDGET_ANCHORS": {
       "role": null,

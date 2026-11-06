@@ -10,7 +10,7 @@
 
 import { describe, expect, it } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
-import { advanceFoodStockpile } from '../../src/domain/worldPulse/foodStockpile.js';
+import { advanceFoodStockpile, STOCKPILE_TUNING } from '../../src/domain/worldPulse/foodStockpile.js';
 import { generateFoodSecurity } from '../../src/generators/foodGenerator.js';
 
 const CONFIG = Object.freeze({
@@ -21,6 +21,8 @@ const CONFIG = Object.freeze({
   monsterThreat: 'civilized',
 });
 const SEED = 'custom-food-impact-canonical-truth';
+// The stockpile arm's own seed (LANDING-7 R-E7): see the arm for why it is not SEED.
+const STOCKPILE_SEED = 'custom-food-impact-canonical-truth-0';
 
 const FOOD_INSTITUTION = Object.freeze({
   localUid: 'sun-terrace',
@@ -146,6 +148,15 @@ describe('custom foodImpact — canonical generation and tick integration', () =
     // Three declarations make the one-week reserve movement exceed the
     // stockpile's two-decimal conservation precision. Both runs have the same
     // three institutions; only their foodImpact values differ.
+    //
+    // Re-seated 2026-11-06 (LANDING-7 ruling R-E7) from SEED to STOCKPILE_SEED,
+    // by identity with its cause: X-46 car 1 (433289899) moved the town band, and
+    // SEED's town now rolls 789 people whose consumer deficit lands at exactly
+    // 5% = foodStockpile.js's rationFloorPct. The drawdown runs only ABOVE that
+    // floor (effectiveDeficit > rationFloorPct), so storage did not move and the
+    // strict `<` below read 6.3 vs 6.3. STOCKPILE_SEED is the first sibling
+    // (-0 of -0..-5, measured) whose consumer deficit (8%) sits above the floor,
+    // so the strict assertion measures the drawdown mechanism again.
     const institutions = [
       FOOD_INSTITUTION,
       {
@@ -166,13 +177,15 @@ describe('custom foodImpact — canonical generation and tick integration', () =
         ...item,
         foodImpact: 'produces',
       })),
-    });
+    }, CONFIG, STOCKPILE_SEED);
     const consumer = generate({
       institutions: institutions.map(item => ({
         ...item,
         foodImpact: 'consumes',
       })),
-    });
+    }, CONFIG, STOCKPILE_SEED);
+    // The premise the strict comparison needs, stated: the consumer's deficit is above the floor.
+    expect(foodOf(consumer).deficitPct).toBeGreaterThan(STOCKPILE_TUNING.rationFloorPct);
 
     const producerTick = advanceFoodStockpile(producer, {
       interval: 'one_week',

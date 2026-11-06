@@ -779,9 +779,13 @@ describe('6. DORMANCY — dark is a no-op by OBJECT IDENTITY', () => {
 
   test('drop-when-empty: a realm whose plans have all closed carries no key', () => {
     // One tick at easy pressure writes nothing worth keeping.
+    // ⚠ RE-KEYED BY IDENTITY (LANDING-7 R-E8, 2026-11-06): the town's DENSITY_CEILINGS moved
+    // 7,500 -> 3,374 (the ceilings follow the STAMP-band maxima), so 3,000 on plains read
+    // 3,000 / 3,880 = 0.77, `filling`, and its band was kept. The head count follows the
+    // ceiling by the same factor (3,000 x 3,374 / 7,500 = 1,350), keeping its old 0.35: easy.
     const live = [{
       saveId: 'Quiethold',
-      settlement: place({ id: 'Quiethold', tier: 'town', population: 3000, dailyProduction: 40000 }),
+      settlement: place({ id: 'Quiethold', tier: 'town', population: 1350, dailyProduction: 40000 }),
     }];
     const ws = litWorld();
     const r = advanceDemographics({

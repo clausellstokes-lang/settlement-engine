@@ -100,16 +100,16 @@
       "id": "capture.criminalCity.equilibrium",
       "file": "tests/generators/captureBirthScale.test.js",
       "n": 400,
-      "baseRate": 0.9925,
-      "baseMeasuredAt": "2026-07-27",
+      "baseRate": 0.965,
+      "baseMeasuredAt": "2026-11-06",
       "baseMeasurementN": 400,
       "direction": "lower",
-      "alpha": 0.0001,
-      "bound": 388,
-      "margin": 5.216,
-      "measurementContext": "minifold claude/composite-r4 d0fdcf7c, live tree carrying unrelated foreign dirt (none in this instrument's path)",
+      "alpha": 0.001,
+      "bound": 372,
+      "margin": 3.809,
+      "measurementContext": "lane/landing7-l7e-2026-11-06 at 6269e5cea (clean tree; the cause bisected in scratch worktrees from master a07ee4e0a to the landing tip 8e60cb2a5)",
       "loosenPending": false,
-      "notes": "397/400 criminal-heavy cities read equilibrium or worse. THIN BASE in the informative tail (3 non-events), so alpha is 1e-4 rather than 1e-3 (which derives 389). The authored floor was Math.round(400*0.5)=200 — 114 sigma below the mean, a floor that could only red if the mechanism were deleted outright. The town half of the same assertion measures 400/400 and is degenerate: it keeps its authored 50% floor un-derived."
+      "notes": "RE-KEYED BY IDENTITY 2026-11-06 (LANDING-7 lane E, the chair's ruling R-E12, §934.105): re-measured at this test's own N=400 (cap-crim-city-0..399), 386/400 read equilibrium or worse (14 adversarial). THE CAUSE, bisected: 433289899 (X-46 car 1 U2, the owner's historical bands) moves the count 393 -> 386 (393 at master a07ee4e0a and at c8e26ee2b/39038801b, 386 at 433289899 and at every first-parent sample after it to the landing tip 8e60cb2a5, one sample at 385); the 397 of 2026-07-27 had already drifted to 393 before the window, inside the old floor. The base is no longer thin (14 non-events), so by this entry's own rule alpha is 1e-3 (1e-4 derives 370, looser); the floor is re-derived from the measured rate, 388 -> 372, margin 3.809 sigma. PRIOR NOTE: 397/400 criminal-heavy cities read equilibrium or worse. THIN BASE in the informative tail (3 non-events), so alpha is 1e-4 rather than 1e-3 (which derives 389). The authored floor was Math.round(400*0.5)=200 — 114 sigma below the mean, a floor that could only red if the mechanism were deleted outright. The town half of the same assertion measures 400/400 and is degenerate: it keeps its authored 50% floor un-derived."
     },
     {
       "id": "narrativeQuality.relationshipRumor.emitted",

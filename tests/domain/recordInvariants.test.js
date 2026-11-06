@@ -33,7 +33,7 @@ import {
   FLAGS_EVER_TRUE, FLAG_FIELDS, KNOWN_VIOLATIONS, FLAG_CORPUS,
 } from '../../src/domain/edit/recordInvariantFlags.js';
 import { RECORD_CLASSES } from '../../src/domain/edit/recordRegister.js';
-import { FOOD_SECURITY_BANDS, FOOD_SECURITY_CUTS, LEGITIMACY_BANDS } from '../../src/data/bandLadders.js';
+import { FOOD_SECURITY_BANDS, FOOD_SECURITY_CUTS, LEGITIMACY_BANDS, legitimacyBandOf } from '../../src/data/bandLadders.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const LEAF = 'src/domain/edit/recordInvariants.js';
@@ -150,8 +150,12 @@ const MUTANTS = {
   'V-BAND-LEGITIMACY': (r) => {
     const card = r.powerStructure.publicLegitimacy;
     const part = Object.keys(card.breakdown)[0];
-    card.score -= 25;
-    card.breakdown[part] -= 25;
+    // The shift crosses a band either way (LANDING-7 lane E, 2026-11-06): the rich base row now sits at 25,
+    // inside the floor band (Legitimacy Crisis, < 30), where -25 lands at 0 in the SAME band and convicted
+    // nothing. Down when that leaves the band, else up; the score and its breakdown move together as before.
+    const delta = legitimacyBandOf(card.score - 25).label === card.label ? 25 : -25;
+    card.score += delta;
+    card.breakdown[part] += delta;
   },
   'V-GOVERNING': (r) => { r.powerStructure.governingName = `${r.powerStructure.governingName} of Nowhere`; },
   'V-FLAGVEC': (r) => {
