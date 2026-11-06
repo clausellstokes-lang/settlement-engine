@@ -33,7 +33,12 @@ beforeAll(async () => {
   }
 }, 120_000);
 
-const isClaimantVacancy = (s) => (s.powerStructure?.factions || []).some((f) => /claimant/i.test(nameOf(f)));
+// Premise re-stated by identity with its cause (LANDING-7 lane G, second seat, ruling R-G1, 2026-11-06):
+// since 6da7d3f64 (RUNG1-TRUTH unit D) a non-royal succession_void names its claimants from the noble
+// pool, so the old name test (/claimant/i) counted 0 vacancies and the vacancy limb passed vacuously.
+// A vacancy is the record's own fact: the governing faction's `vacant` modifier, which the stressor
+// writes (stressFactions.js :: applyStressEventFactions) and powerStrata.js :: rulingChainOf reads.
+const isClaimantVacancy = (s) => (governingFactionOf(s)?.modifiers || []).includes('vacant');
 
 describe('the seat over 120 generated settlements (twenty per tier, fixed seeds)', () => {
   it('every settlement seats exactly one named person of the governing faction, or reads its claimant vacancy once', () => {
@@ -55,6 +60,7 @@ describe('the seat over 120 generated settlements (twenty per tier, fixed seeds)
       seated += 1;
     }
     expect(misses).toEqual([]);
+    expect(vacant, 'fixture premise: the corpus holds a vacant seat (rulers-thorp-11 among them)').toBeGreaterThan(0);
     expect(seated + vacant).toBe(120);
   });
 
@@ -89,11 +95,15 @@ function crafted(npcs) {
 }
 
 describe('the tier\'s own head wins (chair ruling c, 2026-11-03)', () => {
-  it('every city seats its required Mayor; rulers-city-9 and rulers-city-12 also hold a Governor', () => {
+  // Fixture re-seated by identity rulers-city-9/-12 -> rulers-city-5/-9 (LANDING-7 lane G, 2026-11-06):
+  // Register VII lit (3420d01e3, X-46 car 4; first-parent bisect: green at fb5edb7f5, red from
+  // 3420d01e3) re-draws the city rosters, so the two cities whose governing faction holds a Governor
+  // beside its Mayor are now -5 and -9 (2 of the 20, the mechanism still fires); the assertion is unchanged.
+  it('every city seats its required Mayor; rulers-city-5 and rulers-city-9 also hold a Governor', () => {
     const cities = corpus.filter(({ tier, s }) => tier === 'city' && !isClaimantVacancy(s));
     expect(cities.length).toBe(20);
     const both = cities.filter(({ s }) => { const gov = nameOf(governingFactionOf(s)); const roles = (s.npcs || []).filter((n) => n.factionAffiliation === gov).map((n) => n.role); return roles.includes('Mayor') && roles.includes('Governor'); });
-    expect(both.map(({ seed }) => seed), 'fixture premise: the two cities that drew a Governor').toEqual(expect.arrayContaining(['rulers-city-9', 'rulers-city-12']));
+    expect(both.map(({ seed }) => seed), 'fixture premise: the two cities that drew a Governor').toEqual(expect.arrayContaining(['rulers-city-5', 'rulers-city-9']));
     expect(cities.map(({ seed, s }) => `${seed}:${rulingChainOf(s).npc?.role}`).filter((r) => !r.endsWith(':Mayor'))).toEqual([]);
   });
 

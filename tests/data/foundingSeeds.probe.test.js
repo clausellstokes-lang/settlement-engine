@@ -46,22 +46,28 @@ describe('claims-parity — each synopsis is proven by the forged world', () => 
     // Receipt 1: Legitimacy Crisis, governance fractured.
     expect(legit.label).toBe('Legitimacy Crisis');
     expect(legit.governanceFractured).toBe(true);
-    // Receipt 2: a catastrophic siege within the last fifteen years.
-    expect(eventsOf(t).some((e) => /siege/i.test(e.name) && e.severity === 'catastrophic' && e.yearsAgo <= 15)).toBe(true);
+    // Receipt 2: plague at its onset, a quarantine council among the factions. Re-stated 2026-11-06 with the
+    // re-chosen seed (LANDING-7 G2, ruling R-G2): it replaces "a catastrophic siege within the last fifteen
+    // years", crown-8826's incidental specific, which crown-3 does not forge (its siege is major, 28 years back).
+    const stressTypes = (Array.isArray(t.stress) ? t.stress : [t.stress]).filter(Boolean).map((e) => e.type);
+    expect(stressTypes).toContain('plague_onset');
+    expect((t.powerStructure?.factions || []).map((f) => f.faction)).toContain('Quarantine Council');
     // Receipt 3: a figure formalising the independent authority the collapse created.
     expect(goalsOf(t).some((g) => /independent operational authority|exit before the gap between title and authority/i.test(g))).toBe(true);
-    // THE SPECIFICS THE SYNOPSIS QUOTES, re-pinned 2026-11-04 (REGISTERS-6, the chair's ruling E1: crown-8826).
-    // "A mining town raised on rich ore": Mining among its strengths, the mining chain live.
-    expect(t.resourceAnalysis?.economicStrengths || []).toContain('Mining');
-    expect((t.economicState?.activeChains || []).map((c) => c.label)).toContain('Mining & Quarrying');
-    // "... and poor harvests": the food record reads short (past Secure).
+    // THE SPECIFICS THE SYNOPSIS QUOTES, re-pinned 2026-11-06 (LANDING-7 G2, the chair's ruling R-G2: crown-3, the
+    // first crown seed forging the essential story; the specifics follow its world). The mining town and the
+    // siege ten years past were crown-8826's; crown-3's two are the plague (receipt 2 above) and the thieves' guild.
+    // "A town of poor harvests": the food record reads short (past Secure).
     expect(['Pressured', 'Import-Dependent', 'Deficit', 'Deficit — Active Famine']).toContain(t.economicState?.foodSecurity?.label);
-    // "ten years past a siege": the catastrophic siege sits ten years back.
-    expect(eventsOf(t).filter((e) => /siege/i.test(e.name) && e.severity === 'catastrophic').map((e) => e.yearsAgo)).toContain(10);
-    // "Its merchant oligarchy holds a title the streets no longer honour".
-    expect(t.powerStructure?.government).toBe('Merchant oligarchy');
-    // "a guild master has begun, quietly, to write the authority ... into permanent ink": the coup is the guild master's.
+    // "Its guild council holds a title the streets no longer honour" (was a merchant oligarchy, crown-8826's).
+    expect(t.powerStructure?.government).toBe('Guild Council');
+    // "... and the thieves' guild already outweighs it": the Thieves' Guild outranks the governing faction on power.
+    const governing = (t.powerStructure?.factions || []).find((f) => f.isGoverning);
+    expect((t.powerStructure?.factions || []).find((f) => f.faction === "Thieves' Guild")?.power).toBeGreaterThan(governing?.power);
+    // "that guild's master has begun, quietly, to write the authority ... into permanent ink": the coup is the
+    // thieves' guild master's.
     expect((Array.isArray(t.npcs) ? t.npcs : []).some((n) => /guild master/i.test(n?.role || '')
+      && n?.factionAffiliation === "Thieves' Guild"
       && /independent operational authority/i.test(n?.goal?.short || ''))).toBe(true);
   });
 

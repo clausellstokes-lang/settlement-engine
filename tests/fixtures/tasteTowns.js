@@ -43,6 +43,18 @@ export const PAIRED_TOWN = Object.freeze({
 });
 
 /**
+ * ⭐ RE-TAKEN 2026-11-06 (LANDING-7 A, chair ruling R-A5), RE-KEYED BY IDENTITY WITH ITS CAUSE:
+ * the X-46 scale train's compose `1264a8152` (first-parent stage 2 of the rung-1 landing) moved
+ * `rate-11-9` under its paired config out of capture — its `criminalCaptureState` reads `none`
+ * and the DS-GEN-11 treasury row LICENSED, so it is no longer INTERESTED. The captured town is
+ * now `rate-93-0` with its OWN grid config: the FIRST town of `prose-rate-corpus.mjs :: rateGrid`,
+ * in the grid's own order (index 372; 373 positions scanned, 61 town-tier cells generated), on
+ * which every precondition the captured pins assert holds — corrupted, tier town, the treasury
+ * row INTERESTED with the Town hall as holder and the captured-at-birth mark, interested on the
+ * state organs only, every non-organ row not interested. The one corrupted town before it,
+ * `rate-69-0`, reads LICENSED with no holder. The clean control `rate-3-0` still holds its own
+ * preconditions at this tip and is unchanged.
+ *
  * ⭐ RE-TAKEN 2026-09-30 (the urban band, ODQ §934.86): `rate-9-2` is still corrupted, but the
  * same-seed shift left its Town hall without a tax service, so its treasury record has no
  * holder. `rate-11-9` is the first town in the same grid and config that is corrupted with the
@@ -57,9 +69,9 @@ export const PAIRED_TOWN = Object.freeze({
 export const INTERESTED_TOWNS = Object.freeze([
   Object.freeze({
     label: 'captured',
-    seed: 'rate-11-9',
+    seed: 'rate-93-0',
     config: Object.freeze({
-      settType: 'town', tradeRouteAccess: 'road', monsterThreat: 'random_threat', culture: 'germanic', terrainOverride: 'hills',
+      settType: 'town', tradeRouteAccess: 'none', monsterThreat: 'heartland', culture: 'slavic', terrainOverride: 'forest',
     }),
   }),
   Object.freeze({
