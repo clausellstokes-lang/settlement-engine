@@ -98,6 +98,6 @@ describe('X-46 car 3 — the route-required rows are exempt from the density fac
     // even without the exemption. Re-seeded on the premise (a port city whose harbour master drops without the
     // exemption under the new d): joins-subsumption-9, the only seed of joins-subsumption-0..39 that carries it.
     expect(names(withExemption(port, 'joins-subsumption-9'))).toContain("Harbour master's office");
-    expect(names(withoutExemption(port, 'joins-subsumption-9'))).not.toContain("Harbour master's office");
+    expect(names(withoutExemption(port, 'joins-subsumption-9'))).not.toContain("Harbour master's office"); // anchored: the line above finds the office through the same names() on the same seed with the exemption
   }, 240_000);
 });

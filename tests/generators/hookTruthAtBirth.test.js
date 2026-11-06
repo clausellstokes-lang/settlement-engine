@@ -41,14 +41,15 @@ describe('the record stores only hooks true of it', () => {
   it('soak1k-28: the starving hook on a fed place is not stored, and the place keeps hooks', () => {
     const { settlement } = birth(28);
     const texts = storedTexts(settlement);
-    expect(texts).not.toContain(STARVING);
+    expect(texts).not.toContain(STARVING); // anchored: the next line proves the stored hooks are non-empty
     expect(texts.length).toBeGreaterThan(0);
     expect(hookTruthFindings(settlement)).toEqual([]);
   });
 
   it('soak1k-476: "paying their soldiers" with no armed force is not stored', () => {
     const { settlement } = birth(476);
-    expect(storedTexts(settlement)).not.toContain(SOLDIERS);
+    expect(storedTexts(settlement).length).toBeGreaterThan(0);
+    expect(storedTexts(settlement)).not.toContain(SOLDIERS); // anchored: the line above proves the place keeps stored hooks
     expect(hookTruthFindings(settlement)).toEqual([]);
   });
 
@@ -66,13 +67,14 @@ describe('the record stores only hooks true of it', () => {
     const settlement = generateSettlementPipeline(cfg, null, { seed: grain, customContent: {} });
     const stated = Number(/(\d+)\s+plot hooks? available/.exec(settlement.economicViability.summary)?.[1]);
     expect(stated).toBe(settlement.economicViability.plotHooks.length);
-    expect(recordInvariants(settlement).map((each) => each.id)).not.toContain('V-SUMMARY-HOOKS');
+    expect(recordInvariants(settlement).map((each) => each.id)).not.toContain('V-SUMMARY-HOOKS'); // anchored: the line above proves the summary states the stored hook count, the very thing V-SUMMARY-HOOKS checks
   });
 
   it('the receipt\'s battery no longer finds a record hook on soak1k-28', () => {
     const { settlement } = birth(28);
     const battery = settlement.generationCoherenceReceipt.judgments.find((j) => j.id === 'record_coherence_battery');
-    expect((battery?.findings || []).map((f) => f.path)).not.toContain('battery.hook-truth-record');
+    expect(battery).toBeTruthy();
+    expect((battery?.findings || []).map((f) => f.path)).not.toContain('battery.hook-truth-record'); // anchored: the line above proves the battery judgment is on the receipt
   });
 });
 

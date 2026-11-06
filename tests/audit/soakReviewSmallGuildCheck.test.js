@@ -48,13 +48,13 @@ describe('soak1k-313, Achilopolis: a hamlet with a Periodic market', () => {
   };
   it('gives no A-14 for its Merchant Guilds', async () => {
     const checks = await review({});
-    expect(checks).not.toContain('A-14:guild-power-small');
-    expect(checks).not.toContain('A-12:self-vouch-false');
+    expect(checks).not.toContain('A-14:guild-power-small'); // anchored: review() pins the hamlet and its Periodic market, and the next test drives the same review() to A-12
+    expect(checks).not.toContain('A-12:self-vouch-false'); // anchored: review() pins its subject live, and the next test proves A-12 IS reported when the walls sentence is there
   });
   it('keeps A-12 red on its real contradiction, the walls sentence in a hamlet without walls', async () => {
     const checks = await review({ daily_life: 'The halls, the walls and the roads are all better than a hamlet this size strictly requires.' });
     expect(checks).toContain('coh:defense-words');
     expect(checks).toContain('A-12:self-vouch-false');
-    expect(checks).not.toContain('A-14:guild-power-small');
+    expect(checks).not.toContain('A-14:guild-power-small'); // anchored: the two lines above pin this same checks list live (coh:defense-words and A-12 are in it)
   });
 });

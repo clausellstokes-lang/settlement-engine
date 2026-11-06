@@ -32,11 +32,12 @@ describe('exports on their seeds', () => {
   /** @param {number} i */
   const exportsOf = (i) => birth(i).settlement.economicState.primaryExports;
   it('soak1k-12: a thorp in famine exports no Mountain cheese', () => {
-    expect(exportsOf(12)).not.toContain('Mountain cheese');
+    expect(Array.isArray(exportsOf(12))).toBe(true);
+    expect(exportsOf(12)).not.toContain('Mountain cheese'); // anchored: the line above proves the export list is read off the record, and the rule's executed twin above (SURPLUS keeps Mountain cheese) pins the member
   });
   it('soak1k-3: a town in famine exports no Baked goods, and keeps its salted fish', () => {
     const list = exportsOf(3);
-    expect(list).not.toContain('Baked goods');
+    expect(list).not.toContain('Baked goods'); // anchored: the next line pins the salted fish in this same list
     expect(list).toEqual(expect.arrayContaining(['Salted fish', 'Smoked seafood']));
   });
   it('soak1k-5: an import-fed metropolis keeps its Preserved foods (the salt and wine trade)', () => {

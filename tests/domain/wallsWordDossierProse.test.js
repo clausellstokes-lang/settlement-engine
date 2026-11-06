@@ -82,7 +82,7 @@ describe('F10 · the siege header speaks of walls only where walls stand', () =>
       expect(defenseFactsOf(s).hasWalls).toBe(false);
       const line = headerOf(s, b.seed, b.tier);
       expect(line, b.seed).toEqual(expect.any(String));
-      expect(line, b.seed).not.toMatch(WALL_TERM);
+      expect(line, b.seed).not.toMatch(WALL_TERM); // anchored: two lines down pins the line to the drawn cure member, so it is live text
       expect(defenseWordsFindings(s, line), b.seed).toEqual([]);
       expect(line, b.seed).toBe(member(b, DRAWN[b.seed].cure));
     }

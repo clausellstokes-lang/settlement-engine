@@ -41,7 +41,8 @@ describe('the water fact', () => {
 describe('the Greek culture line inland (hand-built)', () => {
   it('speaks of no harbour in a landlocked place', () => {
     const line = cultureScopeLine({ culturalIdentity: GREEK, config: { terrainType: 'plains', tradeRouteAccess: 'road' } });
-    expect(line).not.toMatch(/harbou?r/i);
+    expect(line.length).toBeGreaterThan(0);
+    expect(line).not.toMatch(/harbou?r/i); // anchored: the line above proves the scope line is live text
   });
   it('keeps the harbour on the coast and on a river', () => {
     expect(cultureScopeLine({ culturalIdentity: GREEK, config: { terrainType: 'coastal', tradeRouteAccess: 'road' } })).toMatch(/harbour/);
@@ -59,7 +60,7 @@ describe('the Fish market inland (hand-built)', () => {
   };
   it('sells preserved fish, not the morning catch, where there is no water', () => {
     const inland = names({ _waterAccess: 'none' });
-    expect(inland).not.toContain('Fresh fish retail');
+    expect(inland).not.toContain('Fresh fish retail'); // anchored: the next line pins Preserved fish in this same list
     expect(inland).toContain('Preserved fish');
   });
   it('keeps the morning catch where there is water', () => {
@@ -76,14 +77,16 @@ describe('the soak seeds that printed a catch inland', () => {
     const { settlement: s } = birth(i);
     expect(inland(s)).toBe(true);
     const sources = (s.economicState?.incomeSources || []).map((x) => (typeof x === 'string' ? x : x?.source));
-    expect(sources.join(' | ')).not.toMatch(/\bFish\b/);
+    expect(sources.length).toBeGreaterThan(0);
+    expect(sources.join(' | ')).not.toMatch(/\bFish\b/); // anchored: the line above proves the income sources are live
   });
 
   // 2026-11-04 (chair's ruling P1): SOAK-3 re-dealt the corpus (the de-aliased cellFor), so the old seed no longer carries this case's premise; re-pointed to the first seed of the new corpus that does (an inland place with a fish institution): was 7, then 90 (no fish institution). Re-picked 2026-11-04 after x46-1b and x46-3 composed (the budget moved the corpus again).
   it.each([11, 4])('soak1k-%i dries no fish on racks at the gate', (i) => {
     const { settlement: s } = birth(i);
     expect(inland(s)).toBe(true);
-    expect(String(s.arrivalScene || '')).not.toMatch(/Racks of drying fish/);
+    expect(String(s.arrivalScene || '').length).toBeGreaterThan(0);
+    expect(String(s.arrivalScene || '')).not.toMatch(/Racks of drying fish/); // anchored: the line above proves the arrival scene is live text
   });
 
   // 2026-11-04 (chair's ruling P1): SOAK-3 re-dealt the corpus (the de-aliased cellFor), so the old seed no longer carries this case's premise; re-pointed to the first seed of the new corpus that does (an inland place with a Fish market): was 93; 35 still carries it.
@@ -91,6 +94,7 @@ describe('the soak seeds that printed a catch inland', () => {
     const { settlement: s } = birth(i);
     expect(inland(s)).toBe(true);
     const all = Object.values(s.availableServices || {}).flat().map((x) => x?.name);
-    expect(all).not.toContain('Fresh fish retail');
+    expect(all.length).toBeGreaterThan(0);
+    expect(all).not.toContain('Fresh fish retail'); // anchored: the line above proves the services are live
   });
 });

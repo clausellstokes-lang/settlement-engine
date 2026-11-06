@@ -24,7 +24,7 @@ const offered = (config) => {
 
 describe('a magic-off metropolis with a dragon resident (hand-built)', () => {
   it('prints no aerial deterrence', () => {
-    expect(offered({ magicExists: false, priorityMagic: 50 })).not.toContain('Aerial deterrence');
+    expect(offered({ magicExists: false, priorityMagic: 50 })).not.toContain('Aerial deterrence'); // anchored: the next test drives the same offered() with magic on and finds it (the twin)
   });
   it('keeps it where magic works', () => {
     expect(offered({ magicExists: true, priorityMagic: 50 })).toContain('Aerial deterrence');
@@ -38,6 +38,7 @@ describe('the soak seeds that printed the dragon line with magic off', () => {
     const { settlement: s } = birth(i);
     expect(s.config.magicExists).toBe(false);
     const all = Object.values(s.availableServices || {}).flat().map((x) => x?.name);
-    expect(all).not.toContain('Aerial deterrence');
+    expect(all.length).toBeGreaterThan(0);
+    expect(all).not.toContain('Aerial deterrence'); // anchored: the line above proves the services are live
   });
 });

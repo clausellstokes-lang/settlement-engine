@@ -15,6 +15,7 @@ describe('inland cities with aerial docks or salt works', () => {
     const { settlement: s } = birth(i);
     expect(waterAccessKind(s.config.terrainType, s.config.tradeRouteAccess)).toBe('none');
     const sources = (s.economicState?.incomeSources || []).map((x) => (typeof x === 'string' ? x : x?.source));
-    expect(sources.join(' | ')).not.toMatch(/\bFish\b/);
+    expect(sources.length).toBeGreaterThan(0);
+    expect(sources.join(' | ')).not.toMatch(/\bFish\b/); // anchored: the line above proves the income sources are live
   });
 });

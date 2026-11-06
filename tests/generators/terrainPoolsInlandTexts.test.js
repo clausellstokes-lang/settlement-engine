@@ -20,7 +20,8 @@ describe('inland texts on their seeds', () => {
   // 2026-11-04 (chair's ruling P1): SOAK-3 re-dealt the corpus (the de-aliased cellFor), so the old seed no longer carries this case's premise; re-pointed to the first seed of the new corpus that does (an inland place with an Auction house): was 111, 113.
   it.each([11, 28])('soak1k-%i: the Auction house sells no ships', (i) => {
     const s = birth(i).settlement;
-    expect(s.institutions.find((x) => x.name === 'Auction house').desc).not.toMatch(/\bships?\b/i);
+    expect(s.institutions.find((x) => x.name === 'Auction house').desc).toMatch(/\S/);
+    expect(s.institutions.find((x) => x.name === 'Auction house').desc).not.toMatch(/\bships?\b/i); // anchored: the line above proves the Auction house desc is live text
   });
 });
 

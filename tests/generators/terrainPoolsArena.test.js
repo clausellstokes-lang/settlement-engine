@@ -19,7 +19,7 @@ describe('the arena chain (hand-built)', () => {
     const chain = arenaChain(['Gambling den'], 'town');
     expect(chain).toBeTruthy();
     expect(chain.outputs).toContain('Games of chance');
-    for (const row of ARENA_ROWS) expect(chain.outputs).not.toContain(row);
+    for (const row of ARENA_ROWS) expect(chain.outputs).not.toContain(row); // anchored: the line above pins Games of chance in these outputs
   });
   it('a metropolis with a Colosseum keeps the arena rows', () => {
     const chain = arenaChain(['Colosseum/arena', 'Gambling district'], 'metropolis');
@@ -32,8 +32,10 @@ describe('the soak seeds that printed gladiators with no arena', () => {
   it.each([4, 28, 40])('soak1k-%i prints no gladiatorial chain output', (i) => {
     const { settlement: s } = birth(i);
     const names = (s.institutions || []).map((x) => String(x?.name || '').toLowerCase()).join(' | ');
-    expect(names).not.toMatch(/arena|amphithea|colosse|fighting pit/);
+    expect((s.institutions || []).length).toBeGreaterThan(0);
+    expect(names).not.toMatch(/arena|amphithea|colosse|fighting pit/); // anchored: the line above proves the roster is live
     const outputs = (s.economicState?.activeChains || []).flatMap((chain) => chain.outputs || []);
-    expect(outputs).not.toContain('Gladiatorial combat');
+    expect((s.economicState?.activeChains || []).length).toBeGreaterThan(0);
+    expect(outputs).not.toContain('Gladiatorial combat'); // anchored: the line above proves the active chains are live
   });
 });

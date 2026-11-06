@@ -46,7 +46,7 @@ describe('F10 unit 4 · the three soak seeds', () => {
   it('soak1k-15 keeps its public works without the walls it lacks', () => {
     const { settlement, text } = BIRTHS[15];
     expect(defenseFactsOf(settlement).hasWalls).toBe(false);
-    expect(text).not.toContain('Walls, wells, roads, and the watch');
+    expect(text).not.toContain('Walls, wells, roads, and the watch'); // anchored: the next line pins the wall-free twin in this same text
     expect(text).toContain('Wells, roads and the common ground');
   });
 

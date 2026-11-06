@@ -47,7 +47,8 @@ describe('the council case, hand-built (was soak1k-694)', () => {
       expect(s.tier).toBe('city');
       expect(governingFactionOf(s)?.faction).toBe('Ecclesiastical Council');
       const pool = getUpgradeOpportunities(s.institutions, s.tier, {}).map((c) => c.role);
-      expect(pool).not.toContain('Mayor');
+      expect(pool.length).toBeGreaterThan(0);
+      expect(pool).not.toContain('Mayor'); // anchored: the line above proves the upgrade pool is live
     }
   });
 
@@ -55,7 +56,7 @@ describe('the council case, hand-built (was soak1k-694)', () => {
     for (const s of cities) {
       const chain = rulingChainOf(s);
       expect(chain.npc?.role).toBe('Mayor');
-      expect(String(chain.npc?.name || '')).not.toMatch(/^The /);
+      expect(String(chain.npc?.name || '')).not.toMatch(/^The /); // anchored: the line above pins the seat's Mayor live
       expect(seatHolderFindings(s)).toEqual([]);
     }
   });

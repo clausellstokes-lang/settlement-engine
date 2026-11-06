@@ -46,7 +46,8 @@ describe('soak dependence, second pass', () => {
 
   it('a tier where a column is constant contributes nothing to the pool', () => {
     const flatInThorps = stepA.map((v, k) => (tierOf[k] === 'thorp' ? 7 : v));
-    expect(Object.keys(residualDependence(flatInThorps, linked, tierOf).byTier)).not.toContain('thorp');
+    expect(Object.keys(residualDependence(flatInThorps, linked, tierOf).byTier).length).toBeGreaterThan(0);
+    expect(Object.keys(residualDependence(flatInThorps, linked, tierOf).byTier)).not.toContain('thorp'); // anchored: the line above proves the other tiers still contribute
   });
 
   it('copies are named by the raw threshold or the same leaf', () => {
@@ -67,8 +68,8 @@ describe('soak dependence, second pass', () => {
     const names = (rows) => rows.map((r) => `${r.a}~${r.b}`);
     expect(names(out.copies)).toContain('fam1.stepA~fam4.copyOfA');
     expect(names(out.surprisesA)).toContain('fam1.stepA~fam3.linked');
-    expect(names(out.surprisesA)).not.toContain('fam1.stepA~fam2.stepB');
-    expect(names(out.surprisesA)).not.toContain('fam1.stepA~fam4.copyOfA');
+    expect(names(out.surprisesA)).not.toContain('fam1.stepA~fam2.stepB'); // anchored: the line above pins fam3.linked in this same surprise list
+    expect(names(out.surprisesA)).not.toContain('fam1.stepA~fam4.copyOfA'); // anchored: two lines up pins fam3.linked in this same surprise list
     const linkedRow = out.surprisesA.find((r) => r.a === 'fam1.stepA' && r.b === 'fam3.linked');
     expect(linkedRow.witness.seeds).toHaveLength(3);
     // The chain the hand-built engine "promises" is absent once tier is held still: kind (b).
