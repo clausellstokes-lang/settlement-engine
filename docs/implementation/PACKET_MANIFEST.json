@@ -30969,7 +30969,8 @@
         {
           "_note": "⛔ THE PROOF THAT THE DERIVING HALF DRAWS: npcGenerator imports the ambient helpers, so generateRelationships's 62 draws come off the step's stream. NOT EDITED — the seam is in the step, not in the generator.",
           "path": "src/generators/npcGenerator.js",
-          "symbol": "import { random as _rng, pick as ctxPick } from '../kernel/rngContext.js';"
+          "symbol": "import { random as _rng, pick as ctxPick } from '../kernel/rngContext.js';",
+          "retiredBy": "§934.105 (rule 39 addendum, judgment 269; §731.3's idiom): census-1h R-AT (0c445be43) REWROTE this line in place — the import gains getActiveRng so a resolution's tie-break key carries the settlement's identity; the ambient helpers are still imported, so the note's proof stands; retired by the rewriting lane, never re-sealed (LANDING-R2, the rung-2 landing)"
         },
         {
           "_note": "THE STEP. It stays ONE registration; the seam is internal.",
@@ -30994,7 +30995,8 @@
         {
           "_note": "CHOOSER 2 — takes the roster AND DRAWS 62 TIMES. An argument is not a proof of purity, which is the sentence version 1 needed and did not have.",
           "path": "src/generators/npcGenerator.js",
-          "symbol": "export const generateRelationships = (npcs, config = {}, institutions = []) => {"
+          "symbol": "export const generateRelationships = (npcs, config = {}, institutions = []) => {",
+          "retiredBy": "§934.105 (rule 39 addendum, judgment 269; §731.3's idiom): census-1f unit 1a (d422a8dbd, Appendix B site 19) REWROTE this line in place — generateRelationships gains its fourth parameter `settled` so the tie draw resolves through drawDeclared; retired by the rewriting lane, never re-sealed (LANDING-R2, the rung-2 landing)"
         },
         {
           "_note": "CHOOSER 3 — takes both and draws twice. RE-ANCHORED 2026-10-31 (GS-2 one faction set, ODQ §934.101, lane G2): the chooser now takes the power factions, not the relationships, and draws nothing.",
@@ -41101,6 +41103,7 @@
         {
           "path": "src/generators/stressNarrative.js",
           "symbol": "export function renderStressSummary(type, name, roll) {",
+          "retiredBy": "§934.105 (rule 39 addendum, judgment 269; §731.3's idiom): census-2c unit 1a (6dda5f72c, R-P 1) REWROTE this line in place — renderStressSummary gains its fourth parameter `facts` so the influx food line needs hunger; the landed pin is retired by the rewriting lane, never re-sealed (LANDING-R2, the rung-2 landing)",
           "_note": "The F8 re-render's producer, UNCHANGED: only the ARGUMENT the assembly step passes it changes. Its `name` parameter is the settlement name the summary embeds, which is why a held name must reach it. count 1."
         },
         {
