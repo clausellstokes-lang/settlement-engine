@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "fecbdfd68ee036ad482d9cae34d1abc4f0dc133b",
-  "measuredBy": "LANDING-7-E3 (Opus 5.5)",
+  "measuredAtSha": "229e62cd14f80f1c3d97708ab3dcd28afe4c6f35",
+  "measuredBy": "the cloud chair (Fable 5.1), session 01FE9mEvGxnFx6WTBkEC6ie9, on the owner record docs/tuning-signatures/2026-11-06-v1.json",
   "date": "2026-11-06",
-  "note": "LANDING-7 R-E8: DENSITY_CEILINGS enters as a homes-registered table (re-derived from the stamp-band maxima, draft row)",
+  "note": "Register VII signed at tuning-register v1 on the owner record of 2026-11-06 (docs/tuning-signatures/2026-11-06-v1.json, ODQ §934.105): the eight densityBands.js dials, their digests frozen at this tip; no value moved",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -610,7 +610,7 @@
       "exported": true,
       "idiom": "mixed",
       "keys": 2,
-      "line": 45,
+      "line": 46,
       "spanDigest": "6b3d0a1b34604e0b09ffa63b1642dffa44a7552fa114d2ca602253156c8db98e",
       "leaves": {
         "rates.exploiter": {
