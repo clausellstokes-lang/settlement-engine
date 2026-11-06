@@ -1355,8 +1355,8 @@ const PAIRS = [
     "Speaking Stones, paired and linked into a network, each station priced like a merchant's house and held only by the crown or the great guilds.",
   ],
   [
-    "Each household takes its turn walking the lanes after dark, a lantern kept burning at the crossroads and the alarm raised at the first sign of trouble. Nobody is paid, and the headman holds the rota.",
-    "A rota of unpaid householders who walk the lanes by night, keep a lantern lit at the crossroads, and raise the alarm. Whose turn it is, the headman decides.",
+    "Each household takes its turn walking the lanes after dark, a lantern kept burning at the crossroads and the alarm raised at the first sign of trouble. Nobody is paid, and the households hold the rota.",
+    "A rota of unpaid householders who walk the lanes by night, keep a lantern lit at the crossroads, and raise the alarm. Whose turn it is, the rota decides.",
   ],
 ];
 
