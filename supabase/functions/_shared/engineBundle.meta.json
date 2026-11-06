@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-11-04T03:20:18.725Z",
+  "generatedAt": "2026-11-06T17:41:03.354Z",
   "entry": "src/engine/serviceEntry.js",
-  "sourceHash": "b594e0e64fe9ef2f",
-  "engineVersion": "094b246b1ff9f5cf",
-  "builtFromCommit": "9a9982ab36b9fb24257da7fc7a89d4a79bbdc978",
+  "sourceHash": "ff2d42172d2996e0",
+  "engineVersion": "51f0592cb309f45b",
+  "builtFromCommit": "b42130883da2ed18cc760a87c63be620ad0ebd99",
   "inputs": [
     "node_modules/seedrandom/seedrandom.js",
     "src/data/arrivalProse.js",
@@ -82,6 +82,9 @@
     "src/domain/density/seatKey.js",
     "src/domain/deterministicSort.js",
     "src/domain/display/institutionDisplayName.js",
+    "src/domain/display/stateProse/stateProseKernel.js",
+    "src/domain/display/stateProse/tierVoice.js",
+    "src/domain/display/stateProse/weaveBlock.js",
     "src/domain/factionArchetypes.js",
     "src/domain/factionProfile.js",
     "src/domain/factionRefs.js",
