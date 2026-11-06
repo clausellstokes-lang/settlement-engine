@@ -176,9 +176,10 @@ export const HOLDER_SOURCES = Object.freeze({
   isEntrepot: Object.freeze({ kind: 'market', cite: 'src/generators/economy/economicState.js:878', read: true }),
   activeChains: Object.freeze({ kind: 'market', cite: 'src/generators/economy/economicState.js:821', read: true }),
   exportPosture: Object.freeze({ kind: 'market', cite: 'src/domain/display/dossierViewModel.js:570', read: true }),
-  economicStrengths: Object.freeze({ kind: 'market', cite: 'src/generators/resourceGenerator.js:500', read: true }),
-  strategicValue: Object.freeze({ kind: 'market', cite: 'src/generators/resourceGenerator.js:501', read: true }),
-  exploitation: Object.freeze({ kind: 'market', cite: 'src/generators/resourceGenerator.js:418', read: true }),
+  // ⭐ CITED BY SYMBOL (rule 32): REVIEW-INTAKE-3 R9 moved :500/:501/:418 down the file.
+  economicStrengths: Object.freeze({ kind: 'market', cite: 'src/generators/resourceGenerator.js :: generateResourceAnalysis', read: true }),
+  strategicValue: Object.freeze({ kind: 'market', cite: 'src/generators/resourceGenerator.js :: generateResourceAnalysis', read: true }),
+  exploitation: Object.freeze({ kind: 'market', cite: 'src/generators/resourceGenerator.js :: generateResourceAnalysis', read: true }),
 
   // ── the toll bar: the route, and what may and may not pass along it ──
   tradeRouteAccess: Object.freeze({ kind: 'toll-bar', cite: 'src/generators/steps/resolveConfig.js:198', read: true }),

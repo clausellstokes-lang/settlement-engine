@@ -39,7 +39,8 @@ registerStep('generateNarratives', {
   // nearby resources get different analyses. Special resources flow through too.
   const nearbyResources = resolveNearbyCommodities(effectiveConfig, terrainT);
   const specialResources = effectiveConfig.specialResources || [];
-  const resourceAnalysis = generateResourceAnalysis(terrainT, nearbyResources, specialResources, institutions, effectiveConfig);
+  // The reconciled economy rides along so a gap line says which kind it is (REVIEW-INTAKE-3 R9).
+  const resourceAnalysis = generateResourceAnalysis(terrainT, nearbyResources, specialResources, institutions, effectiveConfig, economicState);
   // Viability first: settlementReason is deficit-aware — an isolated settlement
   // with a food shortfall must not claim self-sufficiency. Feed it the same
   // condition-filtered roster as resource analysis and the economy: terrain
