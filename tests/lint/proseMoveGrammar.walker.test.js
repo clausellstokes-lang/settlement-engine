@@ -761,8 +761,11 @@ describe('the PROVENANCE detector cites the twelve holder kinds and nothing wide
       + `  kind-only ${kindOnly} · generic-only ${genericOnly} · both ${both}\n`
       + `  carrying the WITHDRAWN generic limb but NOT cited: ${genericNotCited.length}\n`
       + `${cited.map((v) => `    ${v.block} :: ${v.pool} | ${(v.text.match(PROVENANCE_KIND_LIMB) || [''])[0]}`).join('\n')}\n`);
-    expect(cited.length).toBe(8);
-    expect(kindOnly).toBe(8);
+    // 8 -> 7, re-keyed by identity (LANDING-8): F10 WALLS-WORD's wall-free twin of DS-ECO-9 BLOCKADED (4a49ae5bb) kept
+    // v1's "sealed off from the road" and was an eighth citing variant; LANDING-7 lane F's R-F2 (282891162) re-worded it
+    // ("sealed off, and the road brings nothing more to them"), so the seven citing variants are this title's seven again.
+    expect(cited.length).toBe(7);
+    expect(kindOnly).toBe(7);
     expect(genericOnly).toBe(0);
     expect(both).toBe(0);
     expect(genericNotCited.length).toBe(11);
@@ -825,7 +828,8 @@ describe('the PROVENANCE detector cites the twelve holder kinds and nothing wide
         }
       }
     }
-    expect(cited.length).toBe(8);
+    // 8 -> 7 by the same cause as the split arm above (282891162, R-F2).
+    expect(cited.length).toBe(7);
     expect(ties).toEqual([]);
   });
 });
