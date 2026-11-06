@@ -50,7 +50,7 @@
  */
 
 import { clamp01 } from '../../kernel/math.js';
-import { POPULATION_RANGES, TIER_ORDER } from '../../data/constants.js';
+import { POPULATION_RANGES, TIER_ORDER, TIER_STAMP_CUTS } from '../../data/constants.js';
 import { hash01 } from '../region/contestMath.js';
 // WAVE P4 (design §7b): the viability ladder gates the founding mover. Pure read.
 import { gradeFromReading, moverPermitted } from './demographicsLadder.js';
@@ -164,7 +164,7 @@ export const RESPONSE_TUNING = Object.freeze({
    *  ("a farm town with open land"): the granary makes half again what it eats. */
   SURPLUS_EASE: 1.00,
   SURPLUS_FULL: 1.50,
-  /** How close to the next tier's authored minimum a settlement must be for the
+  /** How close to the next tier's stamp cut a settlement must be for the
    *  promotion lean to saturate. Below the ease point ascension is a daydream. */
   THRESHOLD_EASE: 0.70,
   /** Unplaced people, as a share of the settlement's own head count, at which the
@@ -184,15 +184,26 @@ export function nextTierOf(tier) {
   return i >= 0 ? (TIER_ORDER[i + 1] || null) : null;
 }
 
-/** A tier's authored population minimum. @param {string|null} tier @returns {number} */
+/** A tier's authored population minimum — the CURRENT tier's own floor (the viability grade
+ *  below). A town rolled at 300–349 is legitimate, so this stays on the roll band.
+ *  @param {string|null} tier @returns {number} */
 function tierFloorOf(tier) {
   return num(asObject(/** @type {Record<string, unknown>} */ (POPULATION_RANGES)[String(tier || '')]).min, 0);
 }
 
+/** The population at which a place BECOMES this tier: its stamp cut (X-46 car 2's law,
+ *  `constants.js :: TIER_STAMP_CUTS`; LANDING-7 R-B3). Every NEXT-tier reading in this file
+ *  reads this, never the next tier's roll-band minimum, which under the owner's overlapping
+ *  bands sits below the stamp (a town rolls from 300 and is stamped from 350).
+ *  @param {string|null} tier @returns {number} */
+function tierCutOf(tier) {
+  return num(/** @type {Record<string, unknown>} */ (TIER_STAMP_CUTS)[String(tier || '')], 0);
+}
+
 /**
  * EARNED ASCENSION'S FOOD TEST (J-P4: "your food base must afford the city you're
- * becoming"). K_food — the FLOW, never the reserves — must already cover the next
- * tier's whole authored minimum. An unfed settlement (no food physics on the record)
+ * becoming"). K_food — the FLOW, never the reserves — must already cover the
+ * population at which the next tier is stamped (its `TIER_STAMP_CUTS` cut). An unfed settlement (no food physics on the record)
  * cannot be tested, and an absent measurement is never evidence, so it reads as
  * headroom present exactly as P1a's viability read refuses to call absence a failure.
  * @param {DemographicReadings} readings @param {string} tier @returns {boolean}
@@ -201,7 +212,7 @@ export function nextTierHeadroom(readings, tier) {
   const next = nextTierOf(tier);
   if (!next) return false;
   if (readings.foodKnown !== true) return true;
-  return num(readings.foodCapacity, 0) >= tierFloorOf(next);
+  return num(readings.foodCapacity, 0) >= tierCutOf(next);
 }
 
 /**
@@ -298,7 +309,7 @@ export function scoreResponses(input) {
       terms: {
         prosperity: clamp01(num(input.prosperity01, T.NEUTRAL_SCORE)),
         connectivity: clamp01(num(input.connectivity01, T.NEUTRAL_SCORE)),
-        at_threshold: ramp(pop / Math.max(1, tierFloorOf(nextTierOf(input.tier))), T.THRESHOLD_EASE, 1),
+        at_threshold: ramp(pop / Math.max(1, tierCutOf(nextTierOf(input.tier))), T.THRESHOLD_EASE, 1),
         saturated: saturated01,
       },
     },

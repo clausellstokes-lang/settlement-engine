@@ -64,7 +64,7 @@
  */
 
 import { clamp01 } from '../../kernel/math.js';
-import { POPULATION_RANGES, TIER_ORDER, PROSPERITY_TIERS, prosperityRank } from '../../data/constants.js';
+import { POPULATION_RANGES, TIER_ORDER, TIER_STAMP_CUTS, PROSPERITY_TIERS, prosperityRank } from '../../data/constants.js';
 import { NAMING_DATA } from '../../data/namingData.js';
 import { activeSpatialDigest } from '../spatial/distanceRead.js';
 // THE STEADING PEN'S LEDGER HALF (chair ruling CR-WR10-I). The ledger reads, the
@@ -968,15 +968,18 @@ export function advanceSettlementLifecycle({ snapshot, worldState: hostWorldStat
           next.population += Math.abs(applied);
           next.inflow += Math.abs(applied);
         }
-        // PROMOTE up the in-orbit ladder (the popToTier idiom at the record scale).
-        const hamletMin = num(/** @type {{ min?: number }} */ ((/** @type {Record<string, unknown>} */ (POPULATION_RANGES)).hamlet || {}).min, 61);
-        const villageMin = num(/** @type {{ min?: number }} */ ((/** @type {Record<string, unknown>} */ (POPULATION_RANGES)).village || {}).min, 401);
-        if (next.tier === 'thorp' && next.population >= hamletMin) {
+        // PROMOTE up the in-orbit ladder (the popToTier idiom at the record scale). A steading
+        // BECOMES the next rung by the tier STAMP (X-46 car 2's law, LANDING-7 R-B3): the cut,
+        // never the next tier's roll-band minimum, which under the owner's overlapping bands
+        // sits below the stamp (a hamlet rolls from 20, a hamlet is STAMPED from 25).
+        const hamletCut = TIER_STAMP_CUTS.hamlet;
+        const villageCut = TIER_STAMP_CUTS.village;
+        if (next.tier === 'thorp' && next.population >= hamletCut) {
           next.tier = 'hamlet';
           next.history = [...next.history.slice(-(T.HISTORY_CAP - 1)), `Grew into a hamlet (tick ${tick}).`];
           receipts.push({ id: parentId, kind: 'satellite_promoted', satId: next.id, name: next.name, tier: 'hamlet', population: next.population });
         }
-        if (!next.charterPending && next.population >= villageMin) {
+        if (!next.charterPending && next.population >= villageCut) {
           // CHARTER-PENDING (the owner's graduation-at-village ruling) — VISIBLE,
           // chronicle-noted, deferral-visible; NEVER a silent cap. The V2 machinery
           // executes pending charters (parked, its own commission).
@@ -1047,10 +1050,11 @@ export function advanceSettlementLifecycle({ snapshot, worldState: hostWorldStat
 
     // ── B3. CONVERGENCE — one deterministic pair scan per parent per tick:
     // codepoint-ordered ids, first ORBIT-ADJACENT pair old enough whose combined
-    // population reaches hamlet scale; a seeded draw gates the merge. ──
+    // population reaches hamlet scale; a seeded draw gates the merge. The fold MINTS a hamlet,
+    // so "hamlet scale" is the hamlet STAMP cut (R-B3), the same threshold the ladder reads. ──
     sats = satellitesOf(nextLedger, parentId);
     if (sats.length >= 2) {
-      const hamletMin = num(/** @type {{ min?: number }} */ ((/** @type {Record<string, unknown>} */ (POPULATION_RANGES)).hamlet || {}).min, 61);
+      const hamletCut = TIER_STAMP_CUTS.hamlet;
       let merged = false;
       for (let i = 0; i < sats.length && !merged; i += 1) {
         for (let j = i + 1; j < sats.length && !merged; j += 1) {
@@ -1059,7 +1063,7 @@ export function advanceSettlementLifecycle({ snapshot, worldState: hostWorldStat
           if (Math.abs(num(a.orbit, 0) - num(b.orbit, 0)) > 1) continue; // close orbit-proximity only
           if (tick - num(a.foundedTick, tick) < T.CONVERGE_MIN_AGE) continue;
           if (tick - num(b.foundedTick, tick) < T.CONVERGE_MIN_AGE) continue;
-          if (a.population + b.population < hamletMin) continue;
+          if (a.population + b.population < hamletCut) continue;
           if (draw() >= T.CONVERGE_P) continue;
           // MERGE b into a (codepoint-lower id survives): populations SUM (conservation),
           // histories concatenate, the receipt names both steadings.
