@@ -93,10 +93,17 @@ describe('FAMINE VILLAGE (isolated, famine emergently rolled)', () => {
 // 2. CORRUPT TRADE TOWN — trade crossroads, high criminal priority; corruption
 //    SPAWNS at generation (probabilistic, gated on a criminal institution).
 //    Seed searched over fixture-corrupt-${i} and pinned.
+//    Re-pinned `-0` to `-5` on 2026-11-06 (LANDING-7 lane B): X-46 car 3's density factor
+//    (47829c070, U3) scales every optional institution chance, so fewer towns draw a criminal
+//    institution (fixture-corrupt-0..59: 60 → 45 at that stage, 40 at the landed tip) and `-0`
+//    now draws none — so no corruption spawns and the safety profile names no criminal
+//    institution. The chain itself holds: given a criminal institution, ~55% of towns spawn a
+//    corrupt NPC at master and at the tip alike (32/60 → 22/40). `-5` is the first of -0..-59
+//    at the tip where every arm below holds (22 of 60 do).
 // ─────────────────────────────────────────────────────────────────────────────
 describe('CORRUPT TRADE TOWN (trade route + corruption)', () => {
   const CONFIG = { settType: 'town', tradeRouteAccess: 'crossroads', terrainOverride: 'plains', priorityCriminal: 90, priorityMilitary: 20, magicExists: true };
-  const SEED = 'fixture-corrupt-0'; // pinned: ≥1 corrupt NPC + criminal faction (searched)
+  const SEED = 'fixture-corrupt-5'; // pinned: ≥1 corrupt NPC + criminal faction (searched; re-pinned, see above)
   let s;
   beforeAll(() => { s = gen(CONFIG, SEED); });
 
