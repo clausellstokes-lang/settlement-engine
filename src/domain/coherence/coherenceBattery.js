@@ -134,7 +134,7 @@ export function coherenceBattery(settlement, surfaces, options = {}) {
   }
   if (runs('crisis-cast-sense')) {
     /** @type {Array<{ surface: string, quote: string, detail: string }>} */
-    let found = [];
+    let found;
     try {
       found = crisisCastSenseFindings(settlement, surfaces ?? {});
     } catch (error) {
