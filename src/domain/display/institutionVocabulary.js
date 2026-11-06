@@ -152,6 +152,7 @@ export const INSTITUTION_IDENTITY = Object.freeze({
   "Assassins' guild": 'A professional order of killers working through cut-outs and cover, acknowledged by no one and used by many.',
   'Citizen militia': 'Ordinary residents who drill and muster against local threats. Part-time soldiers with their own tools and no pay.',
   'Household levy': 'One able-bodied adult from each household musters with hunting bows, spears, and farm tools when danger reaches the fields.',
+  'Village watch': 'Unpaid neighbours who take turns walking the lanes after dark. Their whole duty is to see trouble first and wake everyone else to it.',
   'Palisade or earthworks': 'A wooden palisade or earthen bank thrown up to slow raiders and beasts. Rough defence for a place that cannot afford stone.',
   "Veteran's lodge": 'A drinking hall for old soldiers and mercenaries. Informal muscle, tall tales, and the occasional job for a band that needs swords.',
   'Town walls': 'Stone walls and gates ringing a town. Costly to raise and costly to keep, but they decide who gets in.',
