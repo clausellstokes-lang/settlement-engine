@@ -185,7 +185,9 @@ describe('P4.2 CAUSAL RISK — continuous, and never a governor', () => {
     // changed. (Measured 2026-08-01: bound 43700 walls, pressures 0.6865 / 0.9153 /
     // 1.1442 — all above the crowding ease point and all under the pressure ceiling,
     // which is what makes three DISTINCT readings a statement about continuity rather
-    // than about clamping.)
+    // than about clamping. RE-MEASURED at LANDING-7 R-E8, 2026-11-06, after the city's
+    // DENSITY_CEILINGS moved 38,000 -> 22,798: bound 26218 walls, pressures 1.1443 /
+    // 1.5257 / 1.9071, still all above the ease point and under the ceiling of 2.)
     settlement: place({ tier: 'city', population, dailyProduction: 200000 }),
     worldState: litWorld(),
     settlementId: 'ashford',
@@ -245,14 +247,19 @@ describe('P4.2 CAUSAL RISK — continuous, and never a governor', () => {
   });
 
   test('raid exposure rises with a thin watch and with sprawl, and is capped', () => {
+    // ⚠ RE-KEYED BY IDENTITY (LANDING-7 R-E8, 2026-11-06): the thorp's DENSITY_CEILINGS moved
+    // 90 -> 36 (the ceilings follow the STAMP-band maxima), so 30 people on plains filled 73
+    // percent of the new 41-soul wall and the holding no longer sprawled (0.2683). The head
+    // count follows the ceiling by the same factor (30 x 36 / 90 = 12): sprawl 0.7073 against
+    // the old 0.7115, raid lift 0.1872 under the cap.
     const watched = demographicRiskOf({
-      settlement: place({ tier: 'thorp', population: 30, dailyProduction: 400 }),
+      settlement: place({ tier: 'thorp', population: 12, dailyProduction: 400 }),
       worldState: litWorld(),
       settlementId: 'edge',
       scores: { defense_readiness: 90, healing_capacity: 50, infrastructure_condition: 50, trade_connectivity: 20 },
     });
     const bare = demographicRiskOf({
-      settlement: place({ tier: 'thorp', population: 30, dailyProduction: 400 }),
+      settlement: place({ tier: 'thorp', population: 12, dailyProduction: 400 }),
       worldState: litWorld(),
       settlementId: 'edge',
       scores: { defense_readiness: 2, healing_capacity: 50, infrastructure_condition: 50, trade_connectivity: 20 },
