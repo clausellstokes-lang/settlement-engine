@@ -1957,7 +1957,13 @@ describe('SEAM car 5b — THE HOLDER CENSUS: the source of each construction (SI
     // 61 AND NOT 62 SINCE LANE DEFENSE's 0b2548de5: the one licensed row that left
     // (DS-GEN-6 :: isolated, see 'ROWS by source standing') was one this town held, through its
     // toll-bar. No other licensed row changed its source. Traced by lane DEFENSE-2.
-    expect(held.length, 'and it really does keep the records').toBe(61);
+    // 66 AND NOT 61 SINCE the rung1-pins stage (37b1e746d, lane/rung1-pins at fa95f69d4),
+    // bisected by first-parent stage of the rung-1 window (LANDING-7): the five DS-GEN-9
+    // 'recency framing' rows (Recent · Living memory · Last century · Ancient · Deep history)
+    // find a holder in this town, and no row left. The window passed through 50 between the X-46
+    // car 3 stage (6ca454d2b) and the F6 BUDGET-FLOOR stage (6d84aa834), which restored exactly
+    // the rung1-pins row set; the tip's 66 rows are that set, row for row.
+    expect(held.length, 'and it really does keep the records').toBe(66);
     expect(licensed.filter((row) => sourceOfForTown(row, clean).standing === 'INTERESTED')).toEqual([]);
   });
 
