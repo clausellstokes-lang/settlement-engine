@@ -51,7 +51,10 @@ describe('the soak seeds that printed ships or a fisherman inland', () => {
   });
   // Chair ruling, round 3, 3b: a row the cascade adds after the variant pick takes its ship-free text.
   // 2026-11-04 (chair's ruling P1): SOAK-3 re-dealt the corpus (the de-aliased cellFor), so the old seed no longer carries this case's premise; re-pointed to the first seed of the new corpus that does (an inland place with a cascade-added Ropemaker): was 573, 171. Re-picked 2026-11-04 after x46-1b and x46-3 composed (the budget moved the corpus again).
-  it.each([23, 118])('soak1k-%i: the cascade-added Ropemaker speaks of no ships', (i) => {
+  // Re-picked 2026-11-06 (LANDING-7 lane D): 23 seats no Ropemaker at all since the compose of
+  // lane/rung1b-f6-budget-floor (6d84aa834, bisected by first-parent stage; 7e28a6331 still
+  // carries it); 28 is the first seed of the corpus that does (an inland city, water 'none').
+  it.each([28, 118])('soak1k-%i: the cascade-added Ropemaker speaks of no ships', (i) => {
     const s = birth(i).settlement;
     const rope = s.institutions.find((x) => x.name === 'Ropemaker');
     expect(rope?.source).toBe('cascade');
