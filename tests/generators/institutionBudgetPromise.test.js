@@ -41,6 +41,14 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 // NONE), F1 DEFENCE-WORDS 5e9ffb220 5 → 28, F3 FOOD-WORDS db8ce5da8 28 → 38, F4 CRIME-SIGNAL ba9fde402 38 → 56, and no later
 // stage to this branch's tip. The movers are the rung-1B word and instrument lanes' generator changes on the d = 1 path, not
 // the budget. Re-captured by this file's own loop at 6fb0de59f with the factor forced to 1.0, twice and equal.
+// RE-KEYED BY IDENTITY 2026-11-06 (LANDING-9, the rung-1 landing at 3c62e8ef5): 13 of 60 moved, by four signed records,
+// none of them the budget. MEASURED, this file's own loop per first-parent stage from 3d8a74e4b (0 moved), each step's
+// mover isolated by reverse-applying its other commits' src/ diffs: lane D b37bbf395 moves 24 (bfd70d809, the food floor
+// that record 34 supersedes); lane F1 3da1104da moves 8, 20, 44 (59237b232, the Village watch's texts, record 32); lane G
+// 64ad4fe47 moves 51, 53 (5d3f7b5cb, the vacant seat from its fact, record 33); lane H 18fd6b442 moves 6, 13, 24, 30, 31,
+// 36, 49 (66b1407bd, the food per cent from the pounds, record 34) and 8, 14, 20, 44 (8e92c0440, the Village watch
+// presumes no governor, record 35); 5f6d243b2 and every other step move none. Re-captured at 3c62e8ef5 with the factor
+// forced to 1.0, twice and equal.
 const BEFORE = Object.freeze([
   'e6ac9242fde826c5', // 0
   '538078cfed56f711', // 1
@@ -48,37 +56,37 @@ const BEFORE = Object.freeze([
   'b79bd2a9bb017f26', // 3
   'c3b67c3f7c272fb1', // 4
   '86f2f518dcc098fe', // 5
-  '55b6797ffcfe30d5', // 6
+  'be18be007f2ed87a', // 6
   '5f41e1b04e1e892e', // 7
-  'f27de545335b4315', // 8
+  '0aa2f463d2807a0b', // 8
   '10c41ae0010e232e', // 9
   'ec2e5b9f17d063a4', // 10
   '9e168a54ee82e906', // 11
   'bb885fcbcb00559c', // 12
-  '0a971fec05bd117e', // 13
-  '4c66c8abfc117f8d', // 14
+  '2c03406c4eaeb243', // 13
+  'bb874628962bae17', // 14
   '2ae8abf100ba8d8d', // 15
   'fb56c4dc3d4f0f96', // 16
   '372b2b821490088b', // 17
   '007acd9c21a1f153', // 18
   'bf3fca3dd85eca7e', // 19
-  'ec9ca48cac4caa46', // 20
+  'd8f721aa7d4447c8', // 20
   'e35117139d68b877', // 21
   '1c1e792b0b1c4914', // 22
   '91583616f014238a', // 23
-  '88febb41697df3f8', // 24
+  'ac1dd5fdc00848be', // 24
   '820c381ae698685c', // 25
   '6ccc54035f3b949e', // 26
   '5164d746227d374d', // 27
   '7c5b3719cf0d5a56', // 28
   'd0b637aa031535ec', // 29
-  '760e2ae7fa5b56da', // 30
-  'aa2e57f81f8df5d2', // 31
+  'a5014b054b86085e', // 30
+  'a226c37d7863fc4d', // 31
   '43871a622389f4eb', // 32
   '9b66af04feb5c874', // 33
   '35ec1d4738a2f003', // 34
   'e9bf64a5572b86ac', // 35
-  '00e54c54c10569df', // 36
+  '6c6d08a5e23a8fe5', // 36
   'd91a9a06d4cf443d', // 37
   'f8b0c3bd26bc3e80', // 38
   '77c2bd9134764c5f', // 39
@@ -86,16 +94,16 @@ const BEFORE = Object.freeze([
   'e96e8b38f29f1585', // 41
   'ebafb5147efb69a6', // 42
   '208f82792883c676', // 43
-  '65dcdc8451217756', // 44
+  '07748301b1b32a5a', // 44
   '0fb804809ad6b4b0', // 45
   '2b4a0db14d7ea661', // 46
   '881aceff26fdd2ce', // 47
   '990b40e3588eb665', // 48
-  '23b54fae0398a3df', // 49
+  'fa74beb3c5a7c283', // 49
   'cd9fe6d601929a36', // 50
-  '542c8543723e5319', // 51
+  '5b076a9a00c46931', // 51
   '0fd5c8b3e473c203', // 52
-  '4a2f15df76208200', // 53
+  '9912674baa1a62f0', // 53
   '180216611784fa28', // 54
   '5ae67ffa0872db75', // 55
   '449037fc9ff9de04', // 56
