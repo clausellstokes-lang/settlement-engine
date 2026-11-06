@@ -24,6 +24,8 @@
  * @property {'K'|'R'|'H'|'T'|'A'} drawKind
  * @property {boolean} [crisisScoped] the pool opted into the crisis dimension
  * @property {ReadonlyArray<string>} [poolDeclares] the pool's own atoms
+ * @property {boolean} [colour] the line (or its pool) is marked `colour` (R-AO): read, presumes
+ *   nothing — no atom for the self-check, counted as declared by `declared-share`
  * @property {Record<string, unknown>} [ctx] the per-line context a context atom needs (`npc`)
  * @property {string} resolvedBy 'drawn' | 'twin' | 'argmax' | 'none' | 'kept' (a refused or unanswered
  *   line the site printed anyway, R-AM)

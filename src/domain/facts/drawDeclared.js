@@ -334,6 +334,7 @@ function note(options, line, pool, atoms, resolvedBy) {
     resolvedBy,
     ...(options.crisisScoped ? { crisisScoped: true } : {}),
     ...(options.poolDeclares && options.poolDeclares.length ? { poolDeclares: options.poolDeclares } : {}),
+    ...(typeof line === 'object' && line.colour === true ? { colour: true } : {}), // R-AO: counted by declared-share
     ...(options.ctx ? { ctx: options.ctx } : {}),
   });
 }

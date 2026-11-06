@@ -419,7 +419,7 @@ function drawPiece(block, blockId, poolKey, role, read, typing = {}) {
   const variant = drawVariant(eligible, blockId, poolKey, read.seed);
   if (!variant) return null;
   // CENSUS-1b wave 1: the drawn line is noted in the open presumption ledger (no-op otherwise).
-  noteDrawnVariant(variant, { blockId, poolKey, crisisScoped: poolRead.crisisScoped === true, poolDeclares: poolRead.poolDeclares });
+  noteDrawnVariant(variant, { blockId, poolKey, crisisScoped: poolRead.crisisScoped === true, poolDeclares: poolRead.poolDeclares, colour: poolMetaOf(block, poolKey).colour === true });
   const face = drawFace(variant, blockId, poolKey, read.seed);
   const wordings = variant.wordings;
   const source = face === 0 || !Array.isArray(wordings) ? variant.text : wordings[face - 1];

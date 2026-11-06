@@ -88,7 +88,8 @@ export function declaredShare(ledger) {
   for (const e of Array.isArray(ledger) ? ledger : []) {
     const row = (out[e.surface] ||= { drawn: 0, declared: 0 });
     row.drawn += 1;
-    if ((e.atoms && e.atoms.length) || (e.poolDeclares && e.poolDeclares.length) || e.crisisScoped) row.declared += 1;
+    // A `colour` line (R-AO) is declared: read, presumes nothing (the chair, 11:0x, on CENSUS-4h Q1).
+    if ((e.atoms && e.atoms.length) || (e.poolDeclares && e.poolDeclares.length) || e.crisisScoped || e.colour === true) row.declared += 1;
   }
   return out;
 }

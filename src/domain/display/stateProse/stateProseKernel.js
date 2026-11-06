@@ -65,7 +65,7 @@
  *
  * @enforced-by tests/domain/stateProseKernel.test.js
  */
-import { STATE_MARK_DIMENSIONS, EMPTY_DECLARATION, declarationOfTags, declarationOfMarks, declarationAdmits, declares, atomsOf } from '../../facts/factVocabulary.js';
+import { STATE_MARK_DIMENSIONS, EMPTY_DECLARATION, declarationOfTags, declarationOfMarks, declarationAdmits, declares, atomsOf, COLOUR_MARK } from '../../facts/factVocabulary.js';
 import { activePresumptionLedger, notePresumption } from '../../facts/presumptionLedger.js';
 
 /**
@@ -347,8 +347,10 @@ export function eligibleVariants(pool, options = {}) {
  * `crisis`, …; `factVocabulary.js :: declarationOfMarks`) and any fact atoms its marks declare.
  * A no-op when no ledger is open.
  * @param {StateProseVariant|null|undefined} variant
+ * A line marked `colour` (R-AO), or drawn from a pool braced `{colour}` (`where.colour`), is noted
+ * `colour: true`: no atom, but `declared-share` counts it (the chair, 11:0x, on CENSUS-4h Q1).
  * @param {{ blockId: string, poolKey: string, surface?: string, crisisScoped?: boolean,
- *   poolDeclares?: ReadonlyArray<string> }} where
+ *   poolDeclares?: ReadonlyArray<string>, colour?: boolean }} where
  */
 export function noteDrawnVariant(variant, where) {
   if (!variant || activePresumptionLedger() === null) return;
@@ -363,6 +365,7 @@ export function noteDrawnVariant(variant, where) {
     resolvedBy: 'drawn',
     ...(where.crisisScoped ? { crisisScoped: true } : {}),
     ...(where.poolDeclares && where.poolDeclares.length ? { poolDeclares: where.poolDeclares } : {}),
+    ...(where.colour === true || (Array.isArray(variant.marks) && variant.marks.includes(COLOUR_MARK)) ? { colour: true } : {}),
   });
 }
 
@@ -618,7 +621,7 @@ export function readStateProse(corpus, blockId, poolKey, options = {}) {
   if (!variant) return null;
   // CENSUS-1c unit 4: the single-pool read notes its draw too (the PDF, Tonight and Foundry paths
   // read here, not through composeStateProse's drawPiece); a no-op when no ledger is open.
-  noteDrawnVariant(variant, { blockId, poolKey, crisisScoped: /** @type {any} */ (options).crisisScoped === true, poolDeclares: /** @type {any} */ (options).poolDeclares });
+  noteDrawnVariant(variant, { blockId, poolKey, crisisScoped: /** @type {any} */ (options).crisisScoped === true, poolDeclares: /** @type {any} */ (options).poolDeclares, colour: /** @type {any} */ (block)?.poolMeta?.[poolKey]?.colour === true });
   const text = fillSlots(variant.text, options.slots || {});
   if (text === null) return null;
   return Object.freeze({
