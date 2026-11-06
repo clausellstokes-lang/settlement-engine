@@ -4329,7 +4329,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "Nobody at {settlement} casts, brews or wards for a living, and nothing in the town waits on anyone who does.",
+          "text": "Nobody at {settlement} casts, brews or wards for a living, and nothing in the town leans on magic.",
           "slots": [
             "settlement"
           ],

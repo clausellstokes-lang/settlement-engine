@@ -3244,7 +3244,7 @@ relied on by nothing.
 
 **`magicDependency` false, availability absent**
 1. `[ledger]` No one works magic at {settlement}, and nothing in the town depends on it.
-2. `[street]` Nobody at {settlement} casts, brews or wards for a living, and nothing in the town waits on anyone who does.
+2. `[street]` Nobody at {settlement} casts, brews or wards for a living, and nothing in the town leans on magic.
 3. `[visitor]` A stranger who comes to {settlement} looking for magic finds none, and finds nothing that misses it.
 
 ---
