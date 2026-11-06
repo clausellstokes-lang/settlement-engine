@@ -9688,7 +9688,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 4,
-      "grammars": 3,
+      "grammars": 2,
       "predicate": [
         {
           "field": "eco.foodSecurity.stockpile.blockaded",
@@ -39476,7 +39476,7 @@
         "DS-ECO-9 :: BLOCKADED"
       ],
       "variants": 4,
-      "grammars": 3,
+      "grammars": 2,
       "blocks": [
         "DS-ECO-9"
       ]
@@ -49671,7 +49671,7 @@
         "eco.foodSecurity.stockpile.blockaded"
       ],
       "readingFunction": "foodSecurityPoolKey",
-      "count": "4 variant(s) · 3 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
