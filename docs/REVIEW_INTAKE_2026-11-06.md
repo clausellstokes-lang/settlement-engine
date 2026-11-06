@@ -274,3 +274,88 @@ a feature by the owner's word of 2026-11-04). Measured: `secret.what` repeated i
 (`factionLeaderSecret.js`, `npcGenerator.js`), so no cure here. The chair's intended shape: a
 text already on the roster resolves to the next admitted row by a deterministic rule, with no
 further roll; a duplicate only when the pool is exhausted, and then counted.
+
+---
+
+# THIRD SEAT (BRIEF-REVIEW-INTAKE-3, 2026-11-06) — the chair's rulings R7–R10 executed in the order R8 → R7 → R9 → R10
+
+## R8 — the drifted holder citations cite their symbol — commits `0d4731d98`, `0be6de880`
+
+- `holderTable.js :: HOLDER_SOURCES` `viable` / `criticalIssueCount` (were `viability.js:588/608`,
+  now at 586/606) cite `src/generators/economy/viability.js :: generateEconomicViability`.
+- The producer index resolves the symbol form from the SAME tree pass: `wiring-census.mjs ::
+  astTokens` tags each write with its top-level declaration, `producerCitations` emits
+  `path :: symbol` beside `path:line`. A declaration that does not write the token, or does not
+  exist, resolves to nothing (planted). No register byte moves (`wiring-census.mjs --check` 0).
+- **Red-first**: `tests/lint/holderCitesBySymbol.test.js` red at `5ac105919` 3 of 3, green.
+  `proseWiringCensus.walker` red at `5ac105919` (1 failed: "EVERY MAPPING ROW IS CITED TO A
+  PRODUCER THE TREE STILL CARRIES"), **green 78 of 78** from the test's own run.
+- Disclosed: R8's first commit reworded viability.js's end-of-file note to name the holder
+  module, which reds the walker's fence arm (e) by bytes; caught at R9's neighbour run and
+  repaired in its own commit `0be6de880` (the note no longer names it). Goldens: 0.
+
+## R7 — the captured fixture town re-keyed by identity — commit `827a8d433`
+
+- Cause named beside each pin: "a proxy is not a provider" (unit 2) — a Housing row rolls one
+  service, so later rolls fork; `rate-11-9`'s treasury row reads LICENSED with no holder.
+- **Replacement: `rate-57-3`** (town/road/heartland/slavic/riverside, its own grid config) —
+  the FIRST town of `prose-rate-corpus.mjs :: rateGrid` in the grid's order (index 231 of 768)
+  on which every precondition of the four pins holds. **Scanned: the whole grid, 768 positions,
+  the 128 town-tier cells generated**; it is the ONLY such town (rejected corrupted towns:
+  rate-9-2 LICENSED/no holder, rate-57-0 Weekly market, rate-69-0 Lord's appointee).
+- **Extension, for the chair's veto:** with the captured pin green, the same test's CLEAN
+  control assertion surfaced red by the same cause (`rate-3-0`'s treasury is its Weekly market
+  again; it had been masked). Re-keyed by the same rule: **`rate-3-2`**, the first grid town
+  (index 14) uncaptured, a town, Town hall keeping the treasury. No assertion changed in what it
+  asserts.
+- Red at `0d4731d98`: the four pins; green here: proseTasteInterested, proseWaveGate,
+  proseTasteCorruption, proseComposed (139 of 139). Goldens: 0.
+
+## R9 (unit 4b) — a gap says which kind — commit `f8f0afe0f`
+
+`resourceGenerator.js :: supplyOfInput` classifies each would-be "lacks access" line: **local**
+(the non-depleted nearby roster, `economicState.localProduction`, or a local producer per
+`localInstitutionSupplies`) → not written; **imported** (`economicState.primaryImports`,
+parenthetical reasons stripped; for grain the food record's `importPct` > 0) → `kind:
+'imported'`, "<house> runs on imported <good>", severity low; **missing** → `kind: 'missing'`, as
+before. `generateResourceAnalysis` takes the reconciled `economicState` (6th argument). Three
+holder citations into resourceGenerator.js drifted with the edit and were re-addressed to
+`resourceGenerator.js :: generateResourceAnalysis` (rule 32). `imports.critical` is NOT used as
+import evidence: `buildViabilityReport` puts a processor's input on it exactly when the terrain
+lacks it, so it is the gap restated, not a record of trade.
+
+- **Red-first**: `tests/generators/gapSaysWhichKind.test.js` red at `827a8d433` 7 of 7, green.
+  On READER R1's births at this tip: local — the four mills' grain (soak1k-0, -8, -12, -24),
+  soak1k-8's dairy livestock; imported — soak1k-4/-22 Smelter iron ore, Bakers grain; TRUE rows
+  still missing — soak1k-4 Potter/clay, Brickmaker/clay, Vintner/grapes, soak1k-8 Sawmill/timber.
+- **1,000, before → after**: gap lines **5,166 in 980** settlements → **3,929 in 760**: missing
+  **2,834** (755 settlements), imported **1,095** (495); **1,237** local lines no longer written.
+- **Goldens**: **525 of 525** move, one cause ("a gap says which kind") — proven: with
+  `resourceAnalysis.gaps` removed from both trees, 0 of 525 differ; rows carrying a gap line
+  525 → 369. Nothing re-recorded.
+- Note for the chair: READER R1's audit (an older base) read soak1k-4/-22's copper-ore smelter
+  as FALSE through "Iron" on the imports; at this tip no record names copper, so it is
+  `missing`. The severity of an `imported` line (low) is this seat's choice; vetoable.
+
+## R10 (unit 5) — two roster instruments — commit `e516e8806`
+
+`checks.mjs :: rosterDuplicate`; `coh:roster-duplicate-secret` / `-goal` as record checks,
+`KIND_OF` **7** (a contradiction kind the stop rule reads; vetoable — no kind names "who").
+Red-first `tests/scripts/soakRosterDuplicates.test.js` red at `f8f0afe0f` 3 of 4 (control
+green), green 4 of 4. **1,000: secret 459, goal 634, either 719** (the first seat's figures
+reproduced). Both STOP the rung until the census compose's cure (the INBOX row above).
+
+## Found, not touched (the chair rules)
+
+1. `tests/generators/foodModelSingleWriter.test.js` "the convicted row: the sentence says what
+   the list holds…" expects 4 dependencies on its golden row; reads 1 — red at `5ac105919`
+   (proved on that tree), unit 3's cause (the water entries left `dependencies`). A
+   generated-world pin, not previously recorded here.
+2. `tests/generators/pipelinePinnedChoosers.test.js` A1 (golden byte-identity, 41 rows) — red at
+   `5ac105919`, the expected golden-identity red until the landing re-records (as
+   `nameHeldThroughAssembly` A1).
+3. Registers for the landing's refreeze grow by this seat: the observed-shape readers' execution
+   input now also moves on `resourceGenerator.js`, `steps/generateNarratives.js` and
+   `viability.js` (comment); the citation roster's `dated` 9 → 10 is unchanged.
+4. `scripts/prose-wave-gate.mjs :: fixtureSection`'s comment still names `rate-3-0` as the control
+   (a script comment, out of this ruling's manifest).
