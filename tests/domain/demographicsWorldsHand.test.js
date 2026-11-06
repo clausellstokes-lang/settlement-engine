@@ -568,14 +568,16 @@ describe('P4.4 THE VIABILITY LADDER — five rungs, and a mover it actually stop
       ground: { applicable: true, saturated: false, sites: 6 },
       satelliteLaneLit: true, satelliteCap: 2,
     }).find((s) => s.response === 'satellite');
-    // A town whose bound clears its own floor of 901 may break ground.
+    // A town whose bound clears its own floor may break ground. The floor is the town ROLL band's
+    // minimum (demographicsResponses.js :: tierFloorOf, an own-floor reader); X-46 car 1 (433289899)
+    // moved it 901 -> 300, so the refused arm's bound moves 400 -> 200 (400 now clears a town).
     expect(founding(4000).refusal).toBe('available');
     expect(founding(4000).available).toBe(true);
     // The SAME town whose granaries and ground together no longer support a town is
     // refused BY NAME, and its weight is zero rather than merely small.
-    expect(founding(400).refusal).toBe('nonviable');
-    expect(founding(400).available).toBe(false);
-    expect(founding(400).weight).toBe(0);
+    expect(founding(200).refusal).toBe('nonviable');
+    expect(founding(200).available).toBe(false);
+    expect(founding(200).weight).toBe(0);
 
     const gate = read('src/domain/worldPulse/demographicsResponses.js');
     expect(gate).toContain("!foundingPermitted ? 'nonviable'");

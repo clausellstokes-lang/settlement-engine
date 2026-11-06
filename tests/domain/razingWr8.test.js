@@ -484,7 +484,9 @@ describe('WR-8 R / CR-WR8-F — the razing forces no tier; the tier reads the ne
   });
 
   test('ARM A — the tier FALLS when the truth falls: a heavy sack demotes through the real chooser', () => {
-    const before = 1200;
+    // X-46 car 1 (433289899) moved the town band to [300, 2500]: a 1,200-soul town now keeps 336 after
+    // the heaviest sack, a town still. 800 stamps town too (TIER_STAMP_CUTS.town 350) and falls to 224.
+    const before = 800;
     const sack = conservedSack({ population: before, severity01: 1, namedCastCount: 3 });
     expect(sack.survivors).toBeLessThan(POPULATION_RANGES.town.min * 0.82);
 
