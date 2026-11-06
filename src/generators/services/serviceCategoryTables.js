@@ -219,6 +219,14 @@ export const INSTITUTION_DEFAULT_CATEGORY = {
   'Small prison/stocks': 'legal',
   'Large prison': 'legal',
   'Massive prison': 'legal',
+  // The former proxy hosts' own rows (lane REVIEW-INTAKE unit 2, 2026-11-06): the water and
+  // sewage houses carry an empty menu but still owe a row (the walker's totality pin).
+  'Water source': 'legal',
+  'Multiple water sources': 'legal',
+  'Sewage system': 'legal',
+  Farmland: 'food',
+  'Common grazing land': 'transport',
+  'Access to external mill': 'food',
   'Assay office': 'legal',
   'Customs house': 'legal',
   'Auction house': 'legal',
@@ -586,6 +594,11 @@ export const SERVICE_CATEGORY_MAP = {
   'Basic provisions': 'lodging',
   'Food and drink (all grades)': 'lodging',
   Lodging: 'lodging',
+  // The former proxy hosts' own service names (lane REVIEW-INTAKE unit 2, 2026-11-06).
+  'Lodging (rooms to let)': 'lodging',
+  'Grain at harvest': 'food',
+  'Grain milling (a day away)': 'food',
+  Pasturage: 'transport',
   'Lodging (all grades)': 'lodging',
   'Alchemical products': 'magic',
   'Alchemical reagents': 'magic',

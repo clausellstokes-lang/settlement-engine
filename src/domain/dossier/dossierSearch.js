@@ -46,7 +46,6 @@ import { resourceDisplayName } from '../display/resourceDisplayName.js';
 import { relationshipsDeskLists } from '../display/stateProse/relationshipsDeskRead.js';
 import { deriveFoundingTraditions } from '../traditions/genesis.js';
 import { mergeCustomFoundingTraditions } from '../traditions/customFounding.js';
-import { PROXY_SERVICE_HOSTS } from '../../data/servicesData.js';
 import { compareCodepoint } from '../deterministicSort.js';
 
 /**
@@ -283,13 +282,13 @@ export function enumerateDossierObjects(settlement, viewer = {}, options = {}) {
   });
 
   // INSTITUTIONS — the index's entries, each with the service rows the Institutions tab joins
-  // under it (a proxy host lists none, as on that tab).
+  // under it (every row names its real provider since lane REVIEW-INTAKE unit 2).
   /** @type {Map<string, Array<Record<string, unknown>>>} */
   const servicesByInstitution = new Map();
   for (const { svc } of serviceRows(view.availableServices)) {
     const row = asRecord(svc);
     const host = row ? asText(row.institution) : '';
-    if (!row || !host || Object.prototype.hasOwnProperty.call(PROXY_SERVICE_HOSTS, host.toLowerCase())) continue;
+    if (!row || !host) continue;
     const list = servicesByInstitution.get(host) || [];
     list.push(row);
     servicesByInstitution.set(host, list);

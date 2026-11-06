@@ -6,7 +6,6 @@ import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
 import { resourceDisplayName } from '../../domain/display/resourceDisplayName.js';
-import { PROXY_SERVICE_HOSTS } from '../../data/servicesData.js';
 // X-35 (the owner, 2026-11-01): the row is the SINK of the Institutions card's service door. It
 // declares the index's own anchor and follows THE ONE FOCUS CONVENTION (X-20 (c)), so a click on a
 // house's service lands with this row at the top of the Services tab.
@@ -33,13 +32,9 @@ export function ServiceItem({ svc, accent='#6b5340', isCriminal=false, _tradeDep
   // §14 — services the user authored (or produced by a custom institution) carry
   // a `custom`/`source` flag; the dossier tints their row gold with a ✦ marker.
   const isCustom = typeof svc === 'object' && (svc.custom === true || svc.source === 'custom');
-  // RS-19: a native service whose host is a PROXY (the generator surfaced an inn's menu
-  // through a Sewage system or a Housing row, servicesData.js :: PROXY_SERVICE_HOSTS) names
-  // no institution: better unsaid than a false claim. A proxy row applies only when no
-  // catalog key matches the name exactly, and tests/joins/services.test.js forbids a row
-  // shadowing one, so the host's name alone answers it. `inst` stays the lookup key below.
-  const viaProxy = !isCustom && Boolean(PROXY_SERVICE_HOSTS[inst.toLowerCase()]);
-  const attribution = viaProxy ? '' : inst;
+  // RS-19 is kept in the RECORD now (lane REVIEW-INTAKE unit 2): the generator no longer
+  // surfaces one house's menu through another, so a row's institution is always its provider.
+  const attribution = inst;
   const isImp = impaired?.has(name) || impaired?.has(inst);
   const isDeg = !isImp && (degraded?.has(name) || degraded?.has(inst));
   const isVul = !isImp && !isDeg && (vulnerable?.has(name) || vulnerable?.has(inst));

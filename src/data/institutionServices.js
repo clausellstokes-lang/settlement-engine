@@ -1706,6 +1706,50 @@ export const INSTITUTION_SERVICES = {
     "Broker introduction": { on: true, p: 0.7, desc: "Be put in front of the one broker who deals in your subject." },
     "Standing retainer": { on: false, p: 0.6, desc: "A patron's covert feed, renewed for as long as the payments hold." },
     "Manufactured claim": { on: false, p: 0.3, desc: "Have a story built, laundered through other mouths, and put into circulation." }
+  },
+
+  // ── A PROXY IS NOT A PROVIDER (lane REVIEW-INTAKE unit 2, 2026-11-06). APPENDED, as the
+  // note above requires. These twelve rows used to borrow an inn's, a courthouse's or a
+  // mill's menu through servicesData.js :: PROXY_SERVICE_HOSTS, so the record credited a
+  // Sewage system with "Food and drink". Each now owns what its house really offers. An
+  // EMPTY entry is a house with no menu: it resolves here by exact name (so no fuzzy match
+  // lends it one), rolls nothing and has no fallback (tests/joins/proxyIsNotProvider.test.js).
+  "Dwellings (4-16)": {
+    "Hospitality": { on: true, p: 0.5, desc: "A bed by the hearth and a place at a shared table, for a traveller who asks." }
+  },
+  "Dwellings (17-80)": {
+    "Hospitality": { on: true, p: 0.5, desc: "A bed by the hearth and a place at a shared table, for a traveller who asks." }
+  },
+  "Dwellings (80-180)": {
+    "Hospitality": { on: true, p: 0.5, desc: "A bed by the hearth and a place at a shared table, for a traveller who asks." }
+  },
+  "Housing (180-1000 structures)": {
+    "Lodging (rooms to let)": { on: true, p: 0.6, desc: "A room let in a private house, by the night or the week." }
+  },
+  "Housing (1000-5000 structures)": {
+    "Lodging (rooms to let)": { on: true, p: 0.6, desc: "A room let in a private house, by the night or the week." }
+  },
+  // The largest housing row had no menu and no proxy; with the rows above it would now
+  // fuzzy-match the 1000-5000 menu, so it is named here, with the same one service.
+  "Housing (5000+ structures)": {
+    "Lodging (rooms to let)": { on: true, p: 0.6, desc: "A room let in a private house, by the night or the week." }
+  },
+  "Water source": {},
+  "Multiple water sources": {},
+  "Sewage system": {},
+  "Massive prison": {
+    "Long-term incarceration": { on: true, p: 1.0, desc: "Hold convicted criminals for extended sentences." },
+    "Hard labour contracts": { on: false, p: 0.6, desc: "Assign prisoners to labour contracts for public works." },
+    "Visitor permits": { on: false, p: 0.4, desc: "Obtain a permit to visit an incarcerated person." }
+  },
+  "Farmland": {
+    "Grain at harvest": { on: true, p: 0.6, desc: "Grain sold by the sack to a household, straight from the field at harvest." }
+  },
+  "Common grazing land": {
+    "Pasturage": { on: true, p: 0.6, desc: "Grazing on the common for a traveller's beasts, for a small fee." }
+  },
+  "Access to external mill": {
+    "Grain milling (a day away)": { on: true, p: 1.0, desc: "Grain carted to a mill outside the settlement and brought back as flour." }
   }
 
 };
