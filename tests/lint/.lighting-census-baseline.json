@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "4da45678284d207b28118d2ab79febc67bfbaa43",
-  "measuredBy": "LANDING-7 A seat (Opus 5.5), cloud chair session 01FE9mEvGxnFx6WTBkEC6ie9",
+  "measuredAtSha": "c16d9a6ee48bc9931b39d23c57c8b2121c1a1dfa",
+  "measuredBy": "LANDING-8 (Opus 5.5), cloud chair session 01FE9mEvGxnFx6WTBkEC6ie9",
   "date": "2026-11-06",
-  "note": "LANDING-7 A cured three window-born literal-table each-family parks (terrainPoolsWatersideScopes, terrainPoolsCatchLanding, fishRowOnWater): each it.each family is one parameterless test looping its rows, so the three files are credited.",
-  "files": 2938,
+  "note": "LANDING-8 at the rung-1 landing tip: files 2938 -> 2940 are the two test files born on the landing after LANDING-7 A measured (lane B R-B3 tests/domain/nextTierStampReaders.test.js, lane C tests/pdf/pageChromeFixedLeading.test.jsx); the parked count and the titles move with the lanes B-H merges and this landing re-keys, measured whole.",
+  "files": 2940,
   "parked": 368,
-  "credited": 2570,
-  "titles": 27843,
-  "suiteTitles": 7408
+  "credited": 2572,
+  "titles": 27868,
+  "suiteTitles": 7414
 }
