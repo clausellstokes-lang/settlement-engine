@@ -48,20 +48,24 @@ function humanizeMotif(id) {
 }
 
 /**
- * For each tradition whose window phrase an earlier one on the tab already printed: that
- * earlier tradition's name, keyed by the later one's id. Render order is the list's order.
+ * For each tradition whose window phrase an earlier one on the tab already printed: the NEAREST
+ * earlier tradition's name in that window, keyed by the later one's id. Render order is the list's
+ * order. Nearest, not first (RUNG-2 LANDING phase C unit 3, rung 2E's X-50 in soak1k-5255 and
+ * -5441): with three in one window, naming the first printed the same sentence on the second and
+ * the third card; each now names the one before it, so every line prints once and stays true.
  * @param {ReadonlyArray<any> | null | undefined} traditions @returns {Map<string, string>}
  */
 function sameWindowPlan(traditions) {
   /** @type {Map<string, string>} */
   const plan = new Map();
   /** @type {Map<string, string>} */
-  const firstBy = new Map();
+  const lastBy = new Map();
   for (const rec of Array.isArray(traditions) ? traditions : []) {
     const phrase = describeTraditionWindow(rec?.window);
-    const first = firstBy.get(phrase);
-    if (first === undefined) firstBy.set(phrase, String(rec?.name ?? ''));
-    else if (first) plan.set(rec.id, first);
+    const name = String(rec?.name ?? '');
+    const prev = lastBy.get(phrase);
+    if (prev) plan.set(rec.id, prev);
+    if (name || prev === undefined) lastBy.set(phrase, name);
   }
   return plan;
 }
