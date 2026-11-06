@@ -240,6 +240,24 @@ export function runningCriminalChains(settlement) {
 }
 
 /**
+ * DOES THE BLOCK LIST CRIME (RUNG-2 LANDING phase D, R-D2; F9's law extended)? The Defense
+ * block's own lists: the operations (`safetyProfile.criminalInstitutions`), the running criminal
+ * supply chains (`runningCriminalChains`) — F9's two — and the block's "Active crime patterns"
+ * (`safetyProfile.crimeTypes`), which a crisis fills with its own operations (a religious
+ * conversion's religious fraud and informant networks, soak1k-1801). The denial that nothing
+ * criminal is organised here (DS-DEF-4's `structure null` pool, the tab's static line) prints only
+ * where this is false: beside a listed pattern it is the contradiction F9 cured for the operations.
+ * @param {DefenseDisplaySettlement | null | undefined} settlement
+ * @returns {boolean}
+ */
+export function blockListsCrime(settlement) {
+  const sp = /** @type {{ crimeTypes?: unknown[], criminalInstitutions?: unknown[] } | undefined} */ (settlement?.economicState?.safetyProfile);
+  return (sp?.criminalInstitutions || []).length > 0
+    || (sp?.crimeTypes || []).length > 0
+    || runningCriminalChains(settlement).length > 0;
+}
+
+/**
  * Supporting-capabilities cards (economic backing, arcane support, legal, medical,
  * logistics, and naval when coastal). Computed from defense scores + institution
  * presence flags (economicState.compound.inst). Returns an array of

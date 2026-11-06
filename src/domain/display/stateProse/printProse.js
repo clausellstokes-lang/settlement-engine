@@ -83,7 +83,7 @@ import { powerStateProse } from './powerStateProse.js';
 import { stressorsStateProse } from './stressorsStateProse.js';
 import { warFaithStateProse } from './warFaithStateProse.js';
 import { deriveAllActiveConditions } from '../../activeConditions.js';
-import { deriveCriminalStructure } from '../defenseDisplay.js';
+import { blockListsCrime, deriveCriminalStructure } from '../defenseDisplay.js';
 import { magicWorksAt } from '../../worldPulse/magicWorksAt.js';
 import { deriveFoodBalance, deriveGranaryOutlook } from '../dossierViewModel.js';
 import { populationTrendBand } from '../trendLens.js';
@@ -420,7 +420,11 @@ export function buildPrintProse(settlement, ctx = {}) {
   const supporting = defenseSupportingProse(r, opts);
   // T2-24: silent where magic does not function, exactly as ViabilityTab gates it.
   const magic = magicWorksAt({ settlement: r }) === false ? { arcaneReliance: null } : defenseMagicDependencyProse(r, opts);
-  const criminal = defenseCriminalProse(r, deriveCriminalStructure(r)?.key || null, opts);
+  const criminalKey = deriveCriminalStructure(r)?.key || null;
+  const criminal = defenseCriminalProse(r, criminalKey, opts);
+  // R-D2 (RUNG-2 LANDING phase D; F9's law extended), as DefenseTab: the `structure null` reading
+  // is a denial and is never printed beside the block's own crime patterns or operations.
+  const criminalDenialListed = !criminalKey && blockListsCrime(r);
 
   // ── THE FAITH HALF OF THE WAR & FAITH DESK — mirrors FaithTab.jsx:113-141 ───────────
   // The war half is print-deferred (see PRINT_DEFERRED_MOUNTS), so the war readings are
@@ -557,7 +561,7 @@ export function buildPrintProse(settlement, ctx = {}) {
   ]);
   put('defense', 'defense.wallRationale', [printed('defense.wallRationale', wall.rationale)]);
   put('defense', 'defense.criminalStructure', [
-    printed('defense.criminalStructure', criminal.structure),
+    criminalDenialListed ? null : printed('defense.criminalStructure', criminal.structure),
   ]);
   put('defense', 'defense.supportingCapabilities', [
     printed('defense.supportingCapabilities', supporting.logistics),
