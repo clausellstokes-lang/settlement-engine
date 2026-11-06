@@ -15,7 +15,7 @@
       "poolCrisis": null,
       "crisisScoped": false,
       "colour": false,
-      "ruling": "Culture-keyed, no calm asserted: not opted in. No twin: an empty cell already falls to the plain identity sentence by ruling T1. The inland Norse and Slavic forms are written (RUNG-2 LANDING phase B; the chair's 10:0x: a waterside slot mute inland is MUTE, not absent), each declaring `excludes: navigable`.",
+      "ruling": "Culture-keyed, no calm asserted: not opted in. No twin: an empty cell already falls to the plain identity sentence by ruling T1. The inland Norse and Slavic forms are written (RUNG-2 LANDING phase B; the chair's 10:0x: a waterside slot mute inland is MUTE, not absent), each declaring `excludes: navigable`; the Greek inland form declares the same since phase C unit 4.",
       "lines": [
         {
           "lineId": "SCOPE_PHRASE.germanic",
@@ -158,13 +158,15 @@
           "lineId": "INLAND_SCOPE_PHRASE.greek",
           "text": "built around the agora, on hillside ground and civic association",
           "needs": [],
-          "excludes": [],
+          "excludes": [
+            "navigable"
+          ],
           "crisis": null,
           "colour": false,
           "stop": [
             "culture"
           ],
-          "note": "the landlocked greek form (scopePhrase :539-540)"
+          "note": "the landlocked greek form; RUNG-2 LANDING phase C unit 4: aligned with the norse and slavic inland forms, declares `excludes: navigable` (0 of 41 inland Greek births on the 1,000 carry water: no page moves)"
         },
         {
           "lineId": "INLAND_SCOPE_PHRASE.norse",

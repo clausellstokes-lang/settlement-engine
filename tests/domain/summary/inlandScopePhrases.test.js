@@ -55,8 +55,11 @@ describe('the waterside forms are untouched', () => {
 });
 
 describe('the declaration (the census channel)', () => {
+  // RUNG-2 LANDING phase C unit 4: the Greek inland form (the first, 2026-11-04) is aligned with the
+  // two phase B wrote — it declared nothing; it now declares `excludes: navigable` (0 of the 41
+  // inland Greek births on the 1,000 carry water, so no page moves).
   it('each inland phrase declares `excludes: navigable` and nothing else', () => {
-    for (const text of ['built around the hall, on kin, oath and the assembly', 'built in timber compounds on land held in common, kin by kin']) {
+    for (const text of ['built around the agora, on hillside ground and civic association', 'built around the hall, on kin, oath and the assembly', 'built in timber compounds on land held in common, kin by kin']) {
       expect(QUICK_GUIDE_SIBLINGS[text]).toEqual([{ text, excludes: ['navigable'] }]);
     }
   });

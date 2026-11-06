@@ -545,7 +545,7 @@ function scopePhrase(cultureKey, settlement) {
     // it always did), and every atom they declare is a water atom — the branch is their gate.
     // RUNG-2 LANDING phase B (the chair's 10:0x): the inland form goes through the declared
     // channel — a declared inland phrase (`excludes: navigable`) is admitted by the draw only where
-    // the record holds no water; an undeclared one (the Greek form) keeps as it always read.
+    // the record holds no water. Phase C unit 4: all three inland forms declare it (Greek aligned).
     if (isLandlocked(settlement)) {
       return Object.hasOwn(INLAND_SCOPE_PHRASE, cultureKey) ? declaredClause(INLAND_SCOPE_PHRASE[cultureKey], settlement) : '';
     }
@@ -588,7 +588,8 @@ function declaredClause(clause, settlement) {
  * delegation): the Greek phrase without its harbour. A culture with none takes the plain sentence.
  * The Norse and Slavic forms (RUNG-2 LANDING phase B, the chair's ruling of 2026-11-05 10:0x: the
  * slot was mute in 38 of 98 Norse and 30 of 82 Slavic births on the 1,000) presume no water and
- * no season, and declare it (`excludes: navigable`, `QUICK_GUIDE_SIBLINGS`).
+ * no season, and declare it (`excludes: navigable`, `QUICK_GUIDE_SIBLINGS`); the Greek form declares the
+ * same since phase C unit 4.
  * @type {Readonly<Record<string, string>>}
  */
 const INLAND_SCOPE_PHRASE = Object.freeze({
@@ -746,7 +747,9 @@ export const QUICK_GUIDE_SIBLINGS = Object.freeze({
   [SCOPE_PHRASE.greek]: Object.freeze([Object.freeze({ text: SCOPE_PHRASE.greek, needs: ['navigable'] })]),
   // RUNG-2 LANDING phase B (the chair's 10:0x): the two inland waterside forms presume NO water —
   // `excludes: navigable`, the very fact `scopePhrase`'s branch reads (R-AY) — so the draw admits
-  // them where the sea lines are withheld.
+  // them where the sea lines are withheld. Phase C unit 4: the Greek inland form is aligned with
+  // them (it declared nothing; 0 of 41 inland Greek births on the 1,000 carry water: no page moves).
+  [INLAND_SCOPE_PHRASE.greek]: Object.freeze([Object.freeze({ text: INLAND_SCOPE_PHRASE.greek, excludes: ['navigable'] })]),
   [INLAND_SCOPE_PHRASE.norse]: Object.freeze([Object.freeze({ text: INLAND_SCOPE_PHRASE.norse, excludes: ['navigable'] })]),
   [INLAND_SCOPE_PHRASE.slavic]: Object.freeze([Object.freeze({ text: INLAND_SCOPE_PHRASE.slavic, excludes: ['navigable'] })]),
   [FOOD_SECURITY_CLAUSE.surplus]: Object.freeze([Object.freeze({ text: FOOD_SECURITY_CLAUSE.surplus, excludes: ['crisis: hunger'], crisis: ['any'] })]),

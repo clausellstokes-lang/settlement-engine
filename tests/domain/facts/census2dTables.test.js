@@ -254,7 +254,7 @@ describe.each([
   ['STRESS_TYPE_MAP', STRESS_TYPE_SIBLINGS, STRESS_TYPE_MAP, 4],
   ['STRESSOR_SPINE_PHRASES', STRESSOR_SPINE_SIBLINGS, STRESSOR_SPINE_PHRASES, 2],
   ['CONDITION_ARCHETYPE_TEMPLATES', CONDITION_ARCHETYPE_SIBLINGS, CONDITION_ARCHETYPE_TEMPLATES, 6],
-  ['QUICK_GUIDE_CLAUSES', QUICK_GUIDE_SIBLINGS, null, 8], // CENSUS-2g unit 7 (R-AY): the Slavic scope's `river` dropped, 7 → 6; RUNG-2 LANDING phase B: the inland Norse and Slavic forms declare `excludes: navigable`, 6 → 8
+  ['QUICK_GUIDE_CLAUSES', QUICK_GUIDE_SIBLINGS, null, 9], // CENSUS-2g unit 7 (R-AY): the Slavic scope's `river` dropped, 7 → 6; RUNG-2 LANDING phase B: the inland Norse and Slavic forms declare `excludes: navigable`, 6 → 8; phase C unit 4: the Greek inland form aligned, 8 → 9
 ])('%s: the declared sibling sets stand beside the table', (name, siblings, root, n) => {
   it('every declaring ledger line has its set, exactly; nothing else is declared', () => {
     const r = siblingArm(name, siblings, root);
