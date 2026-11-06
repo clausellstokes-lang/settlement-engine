@@ -18,7 +18,7 @@
       "src/domain/display/stateProse/stressorsStateProseCandidates.js": "ee0548fc8b662da76e4bf85a1fae30433e9f738277c774e16c6a7abd7fb93552",
       "src/domain/display/stateProse/warFaithStateProseCandidates.js": "b5b193dd2a2c83d077da5f82fd4a5fc5f5ad15a3b6a214725daf41ede442324b"
     },
-    "producerIndexFiles": 1292
+    "producerIndexFiles": 1293
   },
   "totals": {
     "pools": 709,
@@ -43066,17 +43066,20 @@
       "lines": 320,
       "declares": [],
       "lineDeclares": {
+        "colour": 6,
         "crisis: any": 40,
+        "fish": 6,
         "institution: mill": 2,
-        "market": 3,
+        "market": 7,
         "navigable": 3,
         "no crisis: hunger": 6,
         "no crisis: monster_pressure": 1,
         "no crisis: threat": 4,
         "no crisis: under_siege": 9,
-        "no crisis: unrest": 1
+        "no crisis: unrest": 1,
+        "sacredHouse": 3
       },
-      "undeclared": 275,
+      "undeclared": 262,
       "crisisScoped": false
     },
     {
@@ -43135,12 +43138,14 @@
       "lines": 56,
       "declares": [],
       "lineDeclares": {
+        "colour": 13,
         "crisis: any": 5,
         "institution: granary": 1,
         "magic": 4,
-        "market": 1
+        "market": 1,
+        "sacredHouse": 2
       },
-      "undeclared": 46,
+      "undeclared": 31,
       "crisisScoped": false
     },
     {
@@ -43293,6 +43298,7 @@
       "declares": [],
       "lineDeclares": {
         "coast": 5,
+        "colour": 777,
         "garrison": 6,
         "gate": 2,
         "guild": 25,
@@ -43308,7 +43314,7 @@
         "walls": 8,
         "watch": 7
       },
-      "undeclared": 921,
+      "undeclared": 144,
       "crisisScoped": false
     },
     {
@@ -43426,6 +43432,7 @@
       "lines": 55,
       "declares": [],
       "lineDeclares": {
+        "colour": 35,
         "guild": 1,
         "hospital": 1,
         "navigable": 1,
@@ -43435,7 +43442,7 @@
         "tier: ≥ town": 1,
         "walls": 1
       },
-      "undeclared": 46,
+      "undeclared": 11,
       "crisisScoped": false
     },
     {
@@ -43543,11 +43550,12 @@
       "lines": 56,
       "declares": [],
       "lineDeclares": {
+        "colour": 53,
         "docks": 1,
         "guild": 1,
         "sacredHouse": 1
       },
-      "undeclared": 53,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
