@@ -2713,7 +2713,7 @@ supplies the ancestry.
 **`Economic Survival`: `STRONG`**
 1. `[ledger · no crisis: debt]` {settlement} can absorb a sustained crisis out of its own revenue: emergency measures can be paid for and the defence kept paid while they last.
 2. `[street · no crisis: debt]` The town could go through a bad season with its arrangements intact, and the people who would have to be paid through one know it.
-3. `[counterforce]` Trouble at {settlement} has not turned into a collapse, and the reason is money. A town that can pay through a crisis mostly does.
+3. `[counterforce · crisis]` Trouble at {settlement} has not turned into a collapse, and the reason is money. A town that can pay through a crisis mostly does.
 
 **`Economic Survival`: `ADEQUATE`** {colour}
 1. `[ledger]` {settlement} can fund a short crisis. A long one begins eating reserves within a few months, and the reserves are not deep enough to hide that from anybody.
@@ -4679,7 +4679,7 @@ reads what the panel renders. A page draws at most one of each.
 3. `[street · temple]` People here are leaving the rites without joining anything; the benches thin and nothing fills them.
 
 **SINK: `unaffiliated` present, arc rising** (the pews reclaiming)
-1. `[unfolding]` The unaffiliated are drifting back toward the observances. Crisis has a way of ending indifference.
+1. `[unfolding · crisis]` The unaffiliated are drifting back toward the observances. Crisis has a way of ending indifference.
 2. `[ledger · temple]` The godless share of the town is shrinking; whatever emptied the benches has stopped being persuasive.
 3. `[street · colour]` People who kept no rite are keeping one again, and mostly the one their households kept before them.
 

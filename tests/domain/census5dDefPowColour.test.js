@@ -19,10 +19,11 @@ const pool = (b, k) => (DOSSIER_STATE_PROSE_DEFENSE[b] || DOSSIER_STATE_PROSE_PO
 const marksOf = (b, k, re) => pool(b, k).find((v) => re.test(v.text))?.marks || [];
 
 describe('CENSUS-5d unit 2b · DS-DEF / DS-POW: every read line declares or is colour', () => {
-  it('only the three lines waiting on a home stay undeclared in DS-DEF and DS-POW', () => {
+  // Re-keyed by the compose (unit 2 item 6, 2026-11-06): DS-DEF-2 Economic Survival STRONG v3 waited
+  // on unit 8 and now declares `crisis` (R-I); the two DS-POW-7 deferral lines still wait on a home.
+  it('only the two lines waiting on a home stay undeclared in DS-DEF and DS-POW', () => {
     const mine = Object.entries(undeclaredRows(statePoolCounts(LEAVES))).filter(([k]) => /^DS-(DEF|POW)-/.test(k));
     expect(mine.sort()).toEqual([
-      ['DS-DEF-2::Economic Survival: STRONG', 1],
       ['DS-POW-7::receipt deferred (the alignment exists and has not happened)', 2],
     ]);
   });

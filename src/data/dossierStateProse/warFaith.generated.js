@@ -4590,6 +4590,9 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
       "SINK: unaffiliated present, arc rising": [
         {
           "angle": "unfolding",
+          "marks": [
+            "crisis"
+          ],
           "text": "The unaffiliated are drifting back toward the observances. Crisis has a way of ending indifference.",
           "slots": [],
           "vid": 1

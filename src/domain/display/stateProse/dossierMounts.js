@@ -324,7 +324,7 @@ export const DOSSIER_MOUNTS = Object.freeze([
       + 'calm town should open that fold is a LAYOUT ruling for the chair, not a lane\'s.',
   }),
   Object.freeze({
-    mount: 'defense.threatAssessment', tab: 'defense', desk: 'defense', blockId: 'DS-DEF-2', rung: 'sentence', dimensions: ['threat'],
+    mount: 'defense.threatAssessment', tab: 'defense', desk: 'defense', blockId: 'DS-DEF-2', rung: 'sentence', dimensions: ['threat', 'crisis'],
   }),
   // ⛔ GLANCE BY CHAIR RULING 2026-10-30 (RULINGS-T1 T1-6/T1-9/T1-10, the owner's delegation;
   // rubric R2). Each of these three positions printed a sentence beside rows that already
@@ -434,7 +434,7 @@ export const DOSSIER_MOUNTS = Object.freeze([
     mount: 'war.dormantNote', tab: 'war', desk: 'warFaith', blockId: 'DS-WAR-3', rung: 'sentence',
   }),
   Object.freeze({
-    mount: 'faith.patronSeat', tab: 'faith', desk: 'warFaith', blockId: 'DS-FTH-1', rung: 'sentence', dimensions: ['walls'],
+    mount: 'faith.patronSeat', tab: 'faith', desk: 'warFaith', blockId: 'DS-FTH-1', rung: 'sentence', dimensions: ['walls', 'crisis'],
   }),
   Object.freeze({
     mount: 'faith.teaser', tab: 'faith', desk: 'warFaith', blockId: 'DS-FTH-2', rung: 'sentence',

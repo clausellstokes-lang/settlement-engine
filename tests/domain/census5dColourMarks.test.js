@@ -18,10 +18,13 @@ const LEAF = DOSSIER_STATE_PROSE_WAR_FAITH;
 const marksOf = (blockId, poolKey, re) => LEAF[blockId].pools[poolKey].find((v) => re.test(v.text))?.marks || [];
 
 describe('CENSUS-5d unit 2 · DS-FTH / DS-WAR: every read line declares or is marked colour', () => {
-  it('the only undeclared line left in DS-FTH and DS-WAR is the one waiting on unit 8', () => {
+  // Re-keyed by the compose (unit 2 item 6, 2026-11-06): the line that waited on unit 8 declares
+  // `crisis` (R-I; tests/domain/facts/composeBareCrisis.test.js), so no DS-FTH / DS-WAR line is left.
+  it('no undeclared line is left in DS-FTH and DS-WAR (the unit-8 line declares `crisis`)', () => {
     const rows = undeclaredRows(statePoolCounts([LEAF]));
     const mine = Object.entries(rows).filter(([k]) => /^DS-(FTH|WAR)-/.test(k));
-    expect(mine).toEqual([['DS-FTH-1::SINK: unaffiliated present, arc rising', 1]]);
+    expect(mine).toEqual([]);
+    expect(marksOf('DS-FTH-1', 'SINK: unaffiliated present, arc rising', /Crisis has a way of ending indifference/)).toContain('crisis');
   });
 
   it('the reading\'s presumptions declare', () => {
