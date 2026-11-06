@@ -9,9 +9,11 @@ import { cultureScopeLine } from '../../src/domain/summary/settlementQuickGuide.
 const line = (key, terrainType, tradeRouteAccess) => cultureScopeLine({ culturalIdentity: { key, label: key }, config: { terrainType, tradeRouteAccess } });
 
 describe('waterside scopes', () => {
-  it.each(['norse', 'slavic'])('%s: no water line in a landlocked place, kept by water', (key) => {
-    expect(line(key, 'plains', 'road')).toBe('');
-    expect(line(key, 'riverside', 'road')).not.toBe('');
+  it('norse and slavic: no water line in a landlocked place, kept by water', () => {
+    for (const key of ['norse', 'slavic']) {
+      expect(line(key, 'plains', 'road'), `${key}: no water line in a landlocked place`).toBe('');
+      expect(line(key, 'riverside', 'road'), `${key}: kept by water`).not.toBe('');
+    }
   });
   it('a dry culture keeps its line inland', () => {
     expect(line('germanic', 'plains', 'road')).not.toBe('');
