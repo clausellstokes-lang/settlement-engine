@@ -624,7 +624,11 @@ describe('EM-R3 — the power structure is final under a held pin', () => {
     // 28 -> 31 (2026-11-06, LANDING-7 R-E12, by stage): 29 X-46 car 1 U2 433289899; car 3 inside (U3 19, U5 30, U9 31,
     // U10 30) composed at 90dc22f18 29; 30 rung-1 pins 37b1e746d; 34 F2 REPEAT-ONCE 272af44f3; 31 F6 BUDGET-FLOOR
     // 6d84aa834. The counterforce is still live.
-    expect(staleAtCloseout).toHaveLength(31);
+    // 31 -> 32 (2026-11-06, LANDING-9-POWER, bisected by stage): lane H's step 18fd6b442, R-H5 66b1407bd alone
+    // (reverse-applied: 31; 8e92c0440, 5f6d243b2 move 0). One row, thorp|germanic|coastal|port: under the desert
+    // change its 2 lb of 32 now read 6% from the rounded pounds (5% before), so foodLabel Secure -> Pressured and
+    // prosperity Moderate -> Poor, and the held coastal receipt is stale at the closeout. Still live.
+    expect(staleAtCloseout).toHaveLength(32);
     expect(staleWitness, 'no stale row was captured, so the refusal below proves nothing')
       .not.toBeNull();
     expect(() => assertPowerEconomyFreshness(
@@ -767,7 +771,9 @@ describe('EM-R3 — the power structure is final under a held pin', () => {
     // in DOORS-4 with A3's same cause; the replay still recomputes the receipt when no pin is held.
     // 21 -> 28 (2026-11-06, LANDING-7 R-E12, A3's same stages): 22 X-46 car 1 U2 433289899; 26 X-46 car 3 90dc22f18;
     // 27 rung-1 pins 37b1e746d; 31 F2 272af44f3; 28 F6 6d84aa834.
-    expect(refreshedAway).toHaveLength(28);
+    // 28 -> 29 (2026-11-06, LANDING-9-POWER, A3's same cause and row): R-H5 66b1407bd at lane H's step 18fd6b442,
+    // thorp|germanic|coastal|port — the desert world's food reads Pressured, so the unpinned replay recomputes it.
+    expect(refreshedAway).toHaveLength(29);
 
     // ANTI-VACUITY (2): the refresher is not inert in general — skip it on an UNPINNED run and
     // the record moves, so the identity above is a property of the HELD path.
