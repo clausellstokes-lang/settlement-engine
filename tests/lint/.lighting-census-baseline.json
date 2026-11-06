@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "884ad193197e3f20de69d56b9fee2777a01a28d5",
-  "measuredBy": "LANDING-2 seat (Opus 5.5)",
-  "date": "2026-11-04",
-  "note": "GALLERY-FREE: the owner's word of 2026-11-04, one pin test (tests/components/galleryPostingFree.test.jsx) folded into the rung-1 landing",
+  "measuredAtSha": "460490364accd5dae96d8efd6b195b2d0420155e",
+  "measuredBy": "LANDING-7 A seat (Opus 5.5), cloud chair session 01FE9mEvGxnFx6WTBkEC6ie9",
+  "date": "2026-11-06",
+  "note": "LANDING-6 23f9cc785 cured twelve each-family parks (parked 383 -> 371, credited +12, titles +125, suiteTitles +39); the landing commits between 884ad1931 and 69a7d7000 moved titles -2 (97348f8bf -5, bc2a64000 +1, c1cf38bbb +2) and suiteTitles +1, measured at 69a7d7000 (27713 / 7366). No file added or removed.",
   "files": 2938,
-  "parked": 383,
-  "credited": 2555,
-  "titles": 27715,
-  "suiteTitles": 7365
+  "parked": 371,
+  "credited": 2567,
+  "titles": 27838,
+  "suiteTitles": 7405
 }
