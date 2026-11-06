@@ -45,6 +45,7 @@ import { fileURLToPath } from 'node:url';
 import { dirname, join, relative } from 'node:path';
 import { describe, expect, test, vi } from 'vitest';
 import { createPRNG } from '../../src/kernel/prng.js';
+import { POPULATION_RANGES, TIER_STAMP_CUTS } from '../../src/data/constants.js';
 import {
   evaluatePopulationDynamics, applyPopulationOutcomeToSettlement,
 } from '../../src/domain/worldPulse/populationDynamics.js';
@@ -543,9 +544,20 @@ describe('4. THE LABEL LAG — a tier label that cannot follow its census', () =
 
 // ═══════════════════════════════════════════════════════════════════════════════
 describe('5. PROMOTION — law 4 on both arms', () => {
+  // RE-SEATED 2026-11-06 (LANDING-7 lane E), by identity with two causes. X-46 car 1
+  // (433289899) moved the bands, so the old hamlet of 380 stamps TOWN and promoted twice in
+  // eight ticks. LANDING-7 R-B1 made the dark window read the next tier's STAMP CUT (0.92 x
+  // cut), and every such window except the metropolis one lies at or above the next tier's
+  // roll-band floor, which is where the dark mint clamps. So the mint can now fire only on
+  // city -> metropolis: 0.92 x 15,000 = 13,800 <= pop < 15,000. The fixture is a city of
+  // 14,000 (the first seat re-keyed tierResourceDynamics' floor bump to the same rung).
+  const FROM = 'city';
+  const TO = 'metropolis';
+  const BELOW = 14000;                          // inside the dark window, under the cut
+  const CUT = TIER_STAMP_CUTS[TO];              // 15,000: the full floor earned ascension needs
   const promoteFixture = (population) => ({
-    population, tier: 'hamlet', name: 'Ashford',
-    config: { tier: 'hamlet', terrainType: 'plains' },
+    population, tier: FROM, name: 'Ashford',
+    config: { tier: FROM, terrainType: 'plains' },
     economicState: {
       foodSecurity: {
         dailyNeed: population * 2, dailyProduction: population * 6, deficitPct: 0,
@@ -579,56 +591,56 @@ describe('5. PROMOTION — law 4 on both arms', () => {
   }
 
   test('DARK: the legacy mint is intact, and a golden depends on it', () => {
-    // 380 is inside the old window (0.92 x 401 = 368.9), so dark it promotes and the
-    // applier raises the head count to the village floor: 21 people out of nothing.
-    const dark = promote({ lit: false, population: 380 });
+    // 14,000 is inside the window (0.92 x 15,000 = 13,800), so dark it promotes and the
+    // applier raises the head count to the metropolis floor: 1,000 people out of nothing.
+    const dark = promote({ lit: false, population: BELOW });
     expect(dark.change.direction).toBe('promotion');
-    expect(dark.settlement.tier).toBe('village');
-    expect(dark.settlement.population, 'the dark mint must be byte-for-byte the legacy behaviour').toBe(401);
+    expect(dark.settlement.tier).toBe(TO);
+    expect(dark.settlement.population, 'the dark mint must be byte-for-byte the legacy behaviour').toBe(POPULATION_RANGES[TO].min);
     const bump = dark.settlement.populationHistory.at(-1);
-    expect(bump.delta).toBe(21);
+    expect(bump.delta).toBe(POPULATION_RANGES[TO].min - BELOW);
     expect(String(bump.reason)).toContain('population floor');
   });
 
   test('LIT: earned ascension refuses the same promotion outright, so nobody is invented', () => {
-    const lit = promote({ lit: true, population: 380 });
+    const lit = promote({ lit: true, population: BELOW });
     expect(lit.change, 'lit, a settlement below its next tier floor may not rise').toBeNull();
-    expect(lit.settlement.tier).toBe('hamlet');
-    expect(lit.settlement.population).toBe(380);
+    expect(lit.settlement.tier).toBe(FROM);
+    expect(lit.settlement.population).toBe(BELOW);
   });
 
   test('LIT: at the full floor it promotes, conserving exactly, and stamps the law it rose under', () => {
-    const lit = promote({ lit: true, population: 401 });
+    const lit = promote({ lit: true, population: CUT });
     expect(lit.change.direction).toBe('promotion');
     expect(lit.change.populationConserved).toBe(true);
-    expect(lit.settlement.tier).toBe('village');
-    expect(lit.settlement.population, 'a tier change created somebody').toBe(401);
+    expect(lit.settlement.tier).toBe(TO);
+    expect(lit.settlement.population, 'a tier change created somebody').toBe(CUT);
     expect(lit.settlement.populationHistory || [], 'a conserved promotion leaves no bump breadcrumb').toEqual([]);
   });
 
   test('THE APPLIER, both arms on ONE settlement: the stamp is the whole difference', () => {
     // The crispest form of the pin: the same settlement, the same outcome, one key apart.
-    const settlement = promoteFixture(380);
-    const base = { id: 'x', generatedAtTick: 4, tierChange: { saveId: 'Ashford', fromTier: 'hamlet', toTier: 'village', direction: 'promotion' } };
+    const settlement = promoteFixture(BELOW);
+    const base = { id: 'x', generatedAtTick: 4, tierChange: { saveId: 'Ashford', fromTier: FROM, toTier: TO, direction: 'promotion' } };
     const minted = applyTierOutcomeToSettlement(settlement, base);
     const conserved = applyTierOutcomeToSettlement(settlement, {
       ...base, tierChange: { ...base.tierChange, populationConserved: true },
     });
-    expect(minted.population).toBe(401);
-    expect(conserved.population).toBe(380);
-    expect(minted.tier).toBe('village');
-    expect(conserved.tier, 'the tier must still rise: only the mint is dispositioned').toBe('village');
+    expect(minted.population).toBe(POPULATION_RANGES[TO].min);
+    expect(conserved.population).toBe(BELOW);
+    expect(minted.tier).toBe(TO);
+    expect(conserved.tier, 'the tier must still rise: only the mint is dispositioned').toBe(TO);
     expect((minted.populationHistory || []).length).toBe(1);
     expect((conserved.populationHistory || []).length).toBe(0);
   });
 
   test('DEMOTION was already conservation-exact and stays so on both arms', () => {
-    const settlement = promoteFixture(380);
-    const demote = { id: 'x', generatedAtTick: 4, tierChange: { saveId: 'Ashford', fromTier: 'hamlet', toTier: 'thorp', direction: 'demotion' } };
-    expect(applyTierOutcomeToSettlement(settlement, demote).population).toBe(380);
+    const settlement = promoteFixture(BELOW);
+    const demote = { id: 'x', generatedAtTick: 4, tierChange: { saveId: 'Ashford', fromTier: FROM, toTier: 'town', direction: 'demotion' } };
+    expect(applyTierOutcomeToSettlement(settlement, demote).population).toBe(BELOW);
     expect(applyTierOutcomeToSettlement(settlement, {
       ...demote, tierChange: { ...demote.tierChange, populationConserved: true },
-    }).population).toBe(380);
+    }).population).toBe(BELOW);
   });
 });
 
@@ -754,11 +766,23 @@ describe('8. THE DARK FENCE — measured against HEAD, not recorded from the new
   // ⚠ The discriminator is the same one this wave used at the AO-5 denominator and at the
   // rumor-ledger golden: BEHAVIOUR HELD, WORDING MOVED. Where behaviour moved instead — the
   // npcAgency:914 metronome case — the site was STOPPED, not re-recorded.
+  // ── RE-RECORDED 2026-11-06 BY LANDING-7 LANE E (second seat), BY STAGE, NOT FROM THE TIP ──
+  // THE DARK PATH MOVED, AND IT MOVED FOR TWO NAMED, RULED CAUSES — measured, not assumed. The
+  // same trace was extracted into a probe and run in scratch worktrees at each stage:
+  //     433289899^ (before X-46 car 1)   42b514c1.. · 992cccb5.. · 389b242a.. · 1f5a367f..  (= the old FROZEN: the probe is faithful)
+  //     433289899  (X-46 car 1, the owner's bands and the stamp)
+  //                                      065c9d74.. · a6accfbe.. · acf81305.. · 4f3e5f83..
+  //     2168ffdba  (LANDING-7 R-B1, the dark window reads the next tier's STAMP CUT)
+  //                                      85cbc0cb.. · a6accfbe.. · acf81305.. · 4f3e5f83..
+  // `git bisect run` over 433289899..8e60cb2a5 on the 0.15 digest named 2168ffdba as its only
+  // later mover; the other three have not moved since car 1. Both causes rebuild what the dark
+  // ladder reads (the realm's bands, then the window), which is exactly what this fence was
+  // built to see. Neither is a defect. The owner's bands are §934.105's; R-B1 is the chair's.
   const FROZEN = Object.freeze({
-    0.15: '42b514c1e896342b',
-    0.45: '992cccb50f00081d',
-    0.70: '389b242ad966a03a',
-    0.90: '1f5a367f4dd622d3',
+    0.15: '85cbc0cbb13d8b65',
+    0.45: 'a6accfbebd1def48',
+    0.70: 'acf81305f27626a0',
+    0.90: '4f3e5f8387da61b1',
   });
   const REALM = Object.freeze([
     ['Ashford', 'town', 300, 900], ['Brack', 'hamlet', 380, 1200], ['Cairn', 'thorp', 40, 300],
