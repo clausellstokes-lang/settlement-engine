@@ -142,6 +142,10 @@ import { DOSSIER_CONNECTIVES, DOSSIER_CONNECTIVE_DECLARATIONS } from '../../../d
  *   it did before this car.
  * @property {ReadonlyArray<string>} [spines] turn only
  * @property {ReadonlyArray<string>} [covers] turn only
+ * @property {ReadonlyArray<string>} [declares] the pool's brace group (CENSUS-1b wave 1), emitted
+ *   only where the annex wrote one; read by `poolReadOf`
+ * @property {true} [crisisScoped] the pool opted into the crisis dimension (CENSUS-1b wave 1)
+ * @property {true} [colour] the pool is a colour pool (`{colour}`, CENSUS-2e); noted with the draw
  */
 /**
  * A modifier candidate as a desk hands it over.
@@ -321,18 +325,15 @@ function leavesOf(given) {
 const DEFAULT_POOL_META = Object.freeze({ role: 'spine' });
 
 /**
- * A pool's frozen metadata, or the default. Read from the block's SIBLING map, never from
- * the pool array: `drawVariant` reads `blockId` and `poolKey` and never a pool's fields, so
- * a `poolMeta` edit cannot move a draw BY CONSTRUCTION (ARCH §2.1).
- * @param {{poolMeta?: Record<string, PoolMeta>}|undefined} block
- * @param {string} poolKey
- * @returns {PoolMeta}
- */
-/**
  * The read one pool is drawn under: the desk's read plus the pool's own brace group (CENSUS-1b
  * wave 1: `poolMeta.declares`, `poolMeta.crisisScoped`), so the kernel gates the pool-level atoms
  * and the inverse crisis default. A pool with neither reads under the desk's read unchanged.
- * @param {any} block @param {string} poolKey @param {any} read
+ * @param {{poolMeta?: Record<string, PoolMeta>}|undefined} block
+ * @param {string} poolKey
+ * @param {{slots: Record<string, unknown>, seed: string, audience: string,
+ *   dimensions: Record<string, string>}} read
+ * @returns {{slots: Record<string, unknown>, seed: string, audience: string,
+ *   dimensions: Record<string, string>, poolDeclares?: ReadonlyArray<string>, crisisScoped?: true}}
  */
 function poolReadOf(block, poolKey, read) {
   const meta = poolMetaOf(block, poolKey);
@@ -341,6 +342,14 @@ function poolReadOf(block, poolKey, read) {
   return { ...read, ...(poolDeclares ? { poolDeclares } : {}), ...(meta.crisisScoped === true ? { crisisScoped: true } : {}) };
 }
 
+/**
+ * A pool's frozen metadata, or the default. Read from the block's SIBLING map, never from
+ * the pool array: `drawVariant` reads `blockId` and `poolKey` and never a pool's fields, so
+ * a `poolMeta` edit cannot move a draw BY CONSTRUCTION (ARCH §2.1).
+ * @param {{poolMeta?: Record<string, PoolMeta>}|undefined} block
+ * @param {string} poolKey
+ * @returns {PoolMeta}
+ */
 function poolMetaOf(block, poolKey) {
   const map = block ? block.poolMeta : undefined;
   const meta = map && typeof map === 'object' ? map[poolKey] : undefined;
@@ -401,7 +410,8 @@ export function composedPieceOf(pool, variant, poolKey, options) {
  * Draw one pool: the variant, its face, its filled text and its piece. `null` when the pool
  * is absent, when nothing is eligible, or when the fill fails — the caller DROPS a candidate
  * that answers `null` and walks on, which changes no modulus of any pool it already drew.
- * @param {{pools?: Record<string, ReadonlyArray<import('./stateProseKernel.js').StateProseVariant>>}} block
+ * @param {{pools?: Record<string, ReadonlyArray<import('./stateProseKernel.js').StateProseVariant>>,
+ *   poolMeta?: Record<string, PoolMeta>}} block
  * @param {string} blockId
  * @param {string} poolKey
  * @param {'spine'|'modifier'|'turn'} role

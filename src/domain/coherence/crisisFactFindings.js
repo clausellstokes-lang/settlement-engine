@@ -37,6 +37,37 @@ import { STRESS_INSTITUTION_EFFECTS } from '../../data/stressInstitutionEffects.
 import { migrationDirectionOf } from '../crisis/migrationDirection.js';
 
 /** @typedef {{ quote: string, detail: string }} CrisisFactFinding */
+/**
+ * A stress entry as this module reads it: the Tonight sheet's own entry, plus the migration
+ * direction `migrationDirectionOf` reads off a mass_migration entry.
+ * @typedef {import('../summary/tonightSheet.js').TonightStress & { direction?: unknown }} CrisisStress
+ */
+/**
+ * A stress entry that carries its crisis cast: the `entries` filter in `crisisCastSenseFindings`
+ * keeps only these (`cast` present, `cast.roles` an array), and its cast narrows to this.
+ * @typedef {CrisisStress & { cast: import('../crisis/crisisCast.js').CrisisCast }} CastCrisisStress
+ */
+/**
+ * A cast person as this module reads it: the Tonight sheet's npc plus the house it sits in.
+ * @typedef {import('../summary/tonightSheet.js').TonightNpc & { factionAffiliation?: unknown }} CrisisNpc
+ */
+/**
+ * The settlement fields this module reads, shaped so the record still goes, unwidened, to the
+ * two typed readers it is handed to (`composeTonightSheet`, `governingFactionOf`). Every leaf
+ * read is checked where it is read (`str`, `Array.isArray`), so the open fields stay `unknown`.
+ * @typedef {object} CrisisSettlement
+ * @property {CrisisStress | CrisisStress[] | null} [stress]
+ * @property {CrisisNpc[]} [npcs]
+ * @property {{ foodSecurity?: { foodRecord?: { band?: unknown, storageMonths?: unknown } | null } | null }} [economicState]
+ * @property {CrisisPowerStructure} [powerStructure]
+ */
+/**
+ * The power structure as this module reads it: the ruling-power shape, its factions carrying the
+ * `category` `isCriminal` reads, and the capture state.
+ * @typedef {Omit<import('../rulingPower.js').PowerStructure, 'factions'> & {
+ *   factions?: Array<import('../rulingPower.js').RulingFaction & { category?: unknown }>,
+ *   criminalCaptureState?: unknown }} CrisisPowerStructure
+ */
 
 /** @param {unknown} v @returns {string} */
 const str = (v) => (typeof v === 'string' ? v : '');
@@ -45,7 +76,7 @@ const SENTENCES = /(?<=[.!?])\s+(?=[A-Z"“‘'(])|\n+/;
 /** @param {string} text */
 const sentencesOf = (text) => text.split(SENTENCES).map((x) => x.trim()).filter(Boolean);
 
-/** @param {any} s @returns {any[]} */
+/** @param {CrisisSettlement | null | undefined} s @returns {CrisisStress[]} */
 const stressesOf = (s) => {
   const raw = s?.stress;
   return (Array.isArray(raw) ? raw : raw ? [raw] : []).filter((e) => !!e && typeof e === 'object');
@@ -73,7 +104,7 @@ function monthsOfWord(w) {
 /**
  * famine-stores: one finding per stores line of six months or more, on a surface, while the food
  * record's band is an active famine, unless the line says the stores are held.
- * @param {any} settlement @param {string} text
+ * @param {CrisisSettlement | null | undefined} settlement @param {string} text
  * @returns {CrisisFactFinding[]}
  */
 export function famineStoresFindings(settlement, text) {
@@ -84,7 +115,7 @@ export function famineStoresFindings(settlement, text) {
   for (const m of str(text).matchAll(STORES_LINE)) {
     const months = monthsOfWord(m[1]);
     if (!(months >= FAMINE_STORES_HELD_MONTHS) || HELD.test(m[0])) continue;
-    out.push({ quote: m[0], detail: `active famine; the line prints ${months} months in hand (record ${record.storageMonths})` });
+    out.push({ quote: m[0], detail: `active famine; the line prints ${months} months in hand (record ${/** @type {{ storageMonths?: unknown }} */ (record).storageMonths})` });
   }
   return out;
 }
@@ -99,7 +130,7 @@ const INFLUX = /\bnew arrivals\b|\bnewcomers?\b|\breceiving more people\b|\btaki
 /**
  * migration-direction: one finding per sentence on a surface that tells the other direction
  * from the mass_migration entry's own.
- * @param {any} settlement @param {string} text
+ * @param {CrisisSettlement | null | undefined} settlement @param {string} text
  * @returns {CrisisFactFinding[]}
  */
 export function migrationDirectionFindings(settlement, text) {
@@ -131,12 +162,12 @@ const MEETING_AGAINST = / is conducting meetings with people who should not be m
 
 /**
  * crisis-cast-sense: the Tonight sheet's cast read against the roles it names.
- * @param {any} settlement
+ * @param {CrisisSettlement | null | undefined} settlement
  * @param {Readonly<Record<string, string>>} [surfaces]
  * @returns {Array<CrisisFactFinding & { surface: string }>}
  */
 export function crisisCastSenseFindings(settlement, surfaces = {}) {
-  const entries = stressesOf(settlement).filter((e) => e.cast && Array.isArray(e.cast.roles));
+  const entries = /** @type {CastCrisisStress[]} */ (stressesOf(settlement).filter((e) => e.cast && Array.isArray(e.cast.roles)));
   /** @type {Array<CrisisFactFinding & { surface: string }>} */
   const out = [];
   const governing = governingFactionOf(settlement);
