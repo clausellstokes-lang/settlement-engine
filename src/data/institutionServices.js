@@ -1714,25 +1714,27 @@ export const INSTITUTION_SERVICES = {
   // Sewage system with "Food and drink". Each now owns what its house really offers. An
   // EMPTY entry is a house with no menu: it resolves here by exact name (so no fuzzy match
   // lends it one), rolls nothing and has no fallback (tests/joins/proxyIsNotProvider.test.js).
+  // A ONE-ROW MENU IS ROLLED AT p 1.0 (chair ruling R1, 2026-11-06): a lower p on a house's only
+  // row is a fake roll, since the generator's fallback grants it anyway, and it spends a draw.
   "Dwellings (4-16)": {
-    "Hospitality": { on: true, p: 0.5, desc: "A bed by the hearth and a place at a shared table, for a traveller who asks." }
+    "Hospitality": { on: true, p: 1.0, desc: "A bed by the hearth and a place at a shared table, for a traveller who asks." }
   },
   "Dwellings (17-80)": {
-    "Hospitality": { on: true, p: 0.5, desc: "A bed by the hearth and a place at a shared table, for a traveller who asks." }
+    "Hospitality": { on: true, p: 1.0, desc: "A bed by the hearth and a place at a shared table, for a traveller who asks." }
   },
   "Dwellings (80-180)": {
-    "Hospitality": { on: true, p: 0.5, desc: "A bed by the hearth and a place at a shared table, for a traveller who asks." }
+    "Hospitality": { on: true, p: 1.0, desc: "A bed by the hearth and a place at a shared table, for a traveller who asks." }
   },
   "Housing (180-1000 structures)": {
-    "Lodging (rooms to let)": { on: true, p: 0.6, desc: "A room let in a private house, by the night or the week." }
+    "Lodging (rooms to let)": { on: true, p: 1.0, desc: "A room let in a private house, by the night or the week." }
   },
   "Housing (1000-5000 structures)": {
-    "Lodging (rooms to let)": { on: true, p: 0.6, desc: "A room let in a private house, by the night or the week." }
+    "Lodging (rooms to let)": { on: true, p: 1.0, desc: "A room let in a private house, by the night or the week." }
   },
   // The largest housing row had no menu and no proxy; with the rows above it would now
   // fuzzy-match the 1000-5000 menu, so it is named here, with the same one service.
   "Housing (5000+ structures)": {
-    "Lodging (rooms to let)": { on: true, p: 0.6, desc: "A room let in a private house, by the night or the week." }
+    "Lodging (rooms to let)": { on: true, p: 1.0, desc: "A room let in a private house, by the night or the week." }
   },
   "Water source": {},
   "Multiple water sources": {},
@@ -1743,10 +1745,10 @@ export const INSTITUTION_SERVICES = {
     "Visitor permits": { on: false, p: 0.4, desc: "Obtain a permit to visit an incarcerated person." }
   },
   "Farmland": {
-    "Grain at harvest": { on: true, p: 0.6, desc: "Grain sold by the sack to a household, straight from the field at harvest." }
+    "Grain at harvest": { on: true, p: 1.0, desc: "Grain sold by the sack to a household, straight from the field at harvest." }
   },
   "Common grazing land": {
-    "Pasturage": { on: true, p: 0.6, desc: "Grazing on the common for a traveller's beasts, for a small fee." }
+    "Pasturage": { on: true, p: 1.0, desc: "Grazing on the common for a traveller's beasts, for a small fee." }
   },
   "Access to external mill": {
     "Grain milling (a day away)": { on: true, p: 1.0, desc: "Grain carted to a mill outside the settlement and brought back as flour." }

@@ -60,6 +60,20 @@ describe('a former proxy host offers only its own menu', () => {
     expect(hostRows).toBeGreaterThan(120);
   });
 
+  // R1 (chair ruling, 2026-11-06): a house whose menu is ONE row offers it at p 1.0. A lower p
+  // is a fake roll (the generator's fallback grants the first `on` row anyway) that spends a
+  // draw. Red at the parent: Hospitality 0.5, Lodging (rooms to let) / Grain at harvest /
+  // Pasturage 0.6.
+  it('a former host whose menu is one row offers it at p 1.0', () => {
+    const oneRow = FORMER_PROXY_HOSTS.map(([name]) => name).concat('Housing (5000+ structures)')
+      .filter((name) => Object.keys(INSTITUTION_SERVICES[name] || {}).length === 1);
+    expect(oneRow).toHaveLength(9);
+    for (const name of oneRow) {
+      const [[svc, row]] = Object.entries(INSTITUTION_SERVICES[name]);
+      expect({ name, svc, on: row.on, p: row.p }).toEqual({ name, svc, on: true, p: 1.0 });
+    }
+  });
+
   it('the houses with no menu (water, sewage) are tolerated: they surface nothing and crash nothing', () => {
     for (const name of ['Water source', 'Multiple water sources', 'Sewage system']) {
       expect(INSTITUTION_SERVICES[name], `${name} owns an (empty) entry, so no fuzzy match borrows a menu`).toEqual({});
