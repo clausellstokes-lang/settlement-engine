@@ -759,7 +759,7 @@ export const buildGovernanceLabels = ({
   const governingFactionName =
     factions.find(faction => faction.isGoverning)?.faction || null;
 
-  let recentConflict = resolveSibling(deriveBaselineConflict({ // F10, CENSUS-1c: a soldiers line its declared sibling where no garrison or hired company stands (BASELINE_CONFLICT_SIBLINGS, data/powerSiblings.js)
+  const baselineConflict = deriveBaselineConflict({
     stressFlags,
     institutionFlags,
     institutionSignals,
@@ -768,7 +768,7 @@ export const buildGovernanceLabels = ({
     monsterThreat: config?.monsterThreat,
     hasRoyalAuthority,
     hasNoblePower,
-  }), BASELINE_CONFLICT_SIBLINGS, { facts: () => factsOf({ institutions: (institutionNames || []).map((name) => ({ name })) }), poolId: 'governanceNarrative:BASELINE_CONFLICT_SIBLINGS', surface: 'power', drawKind: 'T' });
+  });
 
   const primaryStress = selectPrimaryStress(
     stressTypes,
@@ -780,7 +780,7 @@ export const buildGovernanceLabels = ({
   );
   const stressNarratives = buildStressNarratives({
     migrationEntry: (stressEntries || []).find((e) => e?.type === 'mass_migration') ?? null,
-    baselineConflict: recentConflict,
+    baselineConflict: null, // set below, once resolved where it prints
     institutionFlags,
     institutionNames,
     institutionSignals,
@@ -789,6 +789,19 @@ export const buildGovernanceLabels = ({
     hasRoyalAuthority,
     hasNoblePower,
   });
+
+  // F10, CENSUS-1c: a soldiers line its declared sibling where no garrison or hired company stands
+  // (BASELINE_CONFLICT_SIBLINGS, data/powerSiblings.js). R-D1 unit 2 (R-AU at the site): the set is
+  // resolved ONLY where the baseline prints — no primary-stress narrative, or the `infiltrated` one
+  // that carries it. A narrative that overrides it draws nothing from the set and writes no note
+  // (rung 2E soak1k-5589: three notes of a line the siege narrative overwrote). No roll either way.
+  const baselineOverridden = Boolean(
+    primaryStress && primaryStress !== 'infiltrated' && stressNarratives[primaryStress],
+  );
+  let recentConflict = baselineOverridden
+    ? baselineConflict
+    : resolveSibling(baselineConflict, BASELINE_CONFLICT_SIBLINGS, { facts: () => factsOf({ institutions: (institutionNames || []).map((name) => ({ name })) }), poolId: 'governanceNarrative:BASELINE_CONFLICT_SIBLINGS', surface: 'power', drawKind: 'T' });
+  stressNarratives.infiltrated = recentConflict;
 
   if (recentConflict) {
     recentConflict = rewriteFactionPhrasing(
