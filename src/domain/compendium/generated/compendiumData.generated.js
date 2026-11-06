@@ -13,7 +13,7 @@ export const COMPENDIUM_DATA = Object.freeze({
     "demoWorld": {
       "seed": "lf-033",
       "name": "Cnocby",
-      "population": 412
+      "population": 82
     }
   },
   "causal": {
@@ -480,7 +480,7 @@ export const COMPENDIUM_DATA = Object.freeze({
   },
   "institutions": {
     "tierCount": 6,
-    "entryCount": 518,
-    "distinctNames": 281
+    "entryCount": 519,
+    "distinctNames": 282
   }
 });
