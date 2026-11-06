@@ -898,7 +898,9 @@ describe('(d) THE FIXTURE SECTION — the interested fact BOTH WAYS (SITTING §T
     expect(fixture.towns.map((t) => t.label)).toEqual(['captured', 'clean']);
     const captured = fixture.towns[0];
     const clean = fixture.towns[1];
-    expect(captured.standing, 'rate-11-9 is the captured town').toBe('INTERESTED');
+    // rate-11-9 -> rate-93-0 (LANDING-7 A, R-A5): the X-46 compose 1264a8152 moved rate-11-9 out of
+    // capture; tests/fixtures/tasteTowns.js :: INTERESTED_TOWNS re-seats by identity, the scan named there.
+    expect(captured.standing, 'rate-93-0 is the captured town').toBe('INTERESTED');
     expect(clean.standing, 'rate-3-0 is the control and it is NOT interested').toBe('LICENSED');
     expect(captured.holder, 'and the holder is the census\'s own answer').toBeTruthy();
   });
