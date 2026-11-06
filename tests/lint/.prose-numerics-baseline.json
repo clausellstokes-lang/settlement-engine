@@ -876,6 +876,30 @@
     "snippet": "`Condition expired: ${exp.label} (after ${exp.duration.elapsedTicks.toFixed(2)} ticks).`"
   },
   {
+    "path": "src/domain/viabilitySummary.js",
+    "line": 64,
+    "category": "floatInterpolation",
+    "snippet": "`△ VIABLE WITH PROVISIONING STRAIN: ${deficitPercent}% of daily food need remains uncovered.`"
+  },
+  {
+    "path": "src/domain/viabilitySummary.js",
+    "line": 64,
+    "category": "percentToken",
+    "snippet": "`△ VIABLE WITH PROVISIONING STRAIN: ${deficitPercent}% of daily food need remains uncovered.`"
+  },
+  {
+    "path": "src/domain/viabilitySummary.js",
+    "line": 66,
+    "category": "floatInterpolation",
+    "snippet": "`✓ VIABLE WITH PROVISIONING SUPPORT: imports, reserves, or extraordinary supply cover ${rawDeficitPercent}% of daily food need.`"
+  },
+  {
+    "path": "src/domain/viabilitySummary.js",
+    "line": 66,
+    "category": "percentToken",
+    "snippet": "`✓ VIABLE WITH PROVISIONING SUPPORT: imports, reserves, or extraordinary supply cover ${rawDeficitPercent}% of daily food need.`"
+  },
+  {
     "path": "src/domain/worldPulse/brokerageServices.js",
     "line": 464,
     "category": "floatInterpolation",
@@ -922,30 +946,6 @@
     "line": 101,
     "category": "floatInterpolation",
     "snippet": "Math.floor(value)"
-  },
-  {
-    "path": "src/generators/economy/viability.js",
-    "line": 121,
-    "category": "floatInterpolation",
-    "snippet": "`△ VIABLE WITH PROVISIONING STRAIN: ${deficitPercent}% of daily food need remains uncovered.`"
-  },
-  {
-    "path": "src/generators/economy/viability.js",
-    "line": 121,
-    "category": "percentToken",
-    "snippet": "`△ VIABLE WITH PROVISIONING STRAIN: ${deficitPercent}% of daily food need remains uncovered.`"
-  },
-  {
-    "path": "src/generators/economy/viability.js",
-    "line": 123,
-    "category": "floatInterpolation",
-    "snippet": "`✓ VIABLE WITH PROVISIONING SUPPORT: imports, reserves, or extraordinary supply cover ${rawDeficitPercent}% of daily food need.`"
-  },
-  {
-    "path": "src/generators/economy/viability.js",
-    "line": 123,
-    "category": "percentToken",
-    "snippet": "`✓ VIABLE WITH PROVISIONING SUPPORT: imports, reserves, or extraordinary supply cover ${rawDeficitPercent}% of daily food need.`"
   },
   {
     "path": "src/generators/steps/assembleInstitutions.js",

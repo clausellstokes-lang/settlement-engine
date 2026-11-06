@@ -70,7 +70,8 @@ const CANON = () => ({ phase: 'canon', eventLog: [], locks: {} });
 function expectNoLaunchGate(container) {
   expect(container.querySelector('[data-skin="launch"]')).toBeNull();
   expect(container.querySelector('[data-launch-gate]')).toBeNull();
-  expect(container.textContent).not.toContain('Available at launch');
+  expect((container.textContent || '').trim().length).toBeGreaterThan(0);
+  expect(container.textContent).not.toContain('Available at launch'); // anchored: the line above proves the surface rendered text, so an empty render cannot pass
   expect(screen.queryByRole('dialog', { name: 'Available at launch' })).toBeNull();
 }
 

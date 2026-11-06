@@ -38,8 +38,7 @@ export const INSTITUTION_DEFAULT_CATEGORY = {
   'Gladiatorial school': 'employment',
   'Beast trainers': 'employment',
   'Citizen militia': 'employment',
-  // DEFENCE-ROWS: the village's own watch (a catalogue row of the window), filed with the Town watch.
-  'Village watch': 'employment',
+  'Village watch': 'employment', // DEFENCE-ROWS: the village's own watch (a row of the window), filed with the Town watch.
   'Town watch': 'employment',
   'Professional city watch': 'employment',
   Garrison: 'employment',
@@ -359,9 +358,7 @@ export const SERVICE_CATEGORY_MAP = {
   'Gated entry': 'legal',
   'Hiring hall': 'employment',
   'Horse training': 'employment',
-  // DEFENCE-ROWS (the Village watch's second service, landed with the window): the watch's own call-out, filed
-  // with Night watch and Patrol and watch, the watch's other two rows.
-  'Hue and cry': 'employment',
+  'Hue and cry': 'employment', // DEFENCE-ROWS: the Village watch's own call-out, filed with its Night watch and Patrol and watch.
   'Hunting guide hire': 'employment',
   'Livestock management': 'employment',
   'Animal training': 'employment',
@@ -682,8 +679,7 @@ export const SERVICE_CATEGORY_MAP = {
   'Specialty repairs': 'equipment', 'Stained glass': 'equipment', 'Standard boots': 'equipment', 'Surplus sale': 'equipment',
   'Tack and equipment': 'equipment', 'Tailoring (bespoke)': 'equipment', 'Taxidermy and trophies': 'equipment', 'Technical consulting': 'equipment',
   Thatching: 'equipment', 'Tool manufacture': 'equipment', 'Treasure appraisal': 'equipment', 'Wagon and cart work': 'equipment',
-  'Weapon smithing': 'equipment', 'Weekly market': 'equipment', 'Wine appraisal': 'equipment', 'Wood management': 'equipment',
-  'Working clothes (bulk)': 'equipment',
+  'Weapon smithing': 'equipment', 'Weekly market': 'equipment', 'Wine appraisal': 'equipment', 'Wood management': 'equipment', 'Working clothes (bulk)': 'equipment',
   'Alchemical components': 'magic', 'Alchemical ingredients': 'magic', 'Arcane identification': 'magic', 'Arcane instruction': 'magic',
   'Arcane training': 'magic', 'Component identification': 'magic', 'Component sourcing': 'magic', 'Consignment sales': 'magic', 'Curse removal': 'magic',
   'Custom enchanting': 'magic', 'Dimensional storage': 'magic', 'Divination and scrying': 'magic', 'Draconic consultation': 'magic',

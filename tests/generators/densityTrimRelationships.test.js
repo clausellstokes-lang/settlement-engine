@@ -26,7 +26,8 @@ describe('the trim takes its relationships with it', () => {
     expect(roster.has("Thieves' Guild")).toBe(false);
     const rows = settlement.powerStructure.factionRelationships || [];
     expect(rows.filter((row) => row.pair.includes("Thieves' Guild"))).toEqual([]);
-    expect(JSON.stringify(rows)).not.toMatch(/Thieves' Guild/);
+    expect(rows.length).toBeGreaterThan(0);
+    expect(JSON.stringify(rows)).not.toMatch(/Thieves' Guild/); // anchored: the line above proves the relationship rows are live
     // every surviving row joins two seats on the final roster
     expect(rows.filter((row) => row.pair.some((name) => !roster.has(name)))).toEqual([]);
   });

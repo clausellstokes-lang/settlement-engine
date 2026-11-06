@@ -204,8 +204,14 @@ describe('the column census, measured across the estate', () => {
     // 2,228 → 2,230, measured on this walk; not attributed row by row. The re-map files 162
     // catalog pairs in new buckets, and a pair entering or leaving 'magic' or 'criminal' is gated
     // differently, so the rolled row count on these thirty may move; it moved by two.
-    expect(serviceRows, 'the header claims 2,230 instantiated service rows over these thirty')
-      .toBe(2230);
+    // ⭐ RE-MEASURED 2026-11-06 (LANDING-7 lane F), SAME-SEED SHIFTS OF THE SCALE PROGRAM: 2,230 → 1,925,
+    // bisected by stage over the window's first-parent chain (3dcb3c6fd..8e60cb2a5), one composed lane per move:
+    // 1264a8152 x46-train 2,230 → 2,222 · d4bf6431c x46-2 thresholds → 2,245 · 90dc22f18 x46-3 budget → 1,917 ·
+    // 37b1e746d rung1-pins → 1,908 · 6ca454d2b x46-3 I7 re-key → 1,890 · 11467ed57 rung1-pins final → 1,881 ·
+    // 6d84aa834 rung1b-f6 budget floor → 1,925. The populations and the institution budget moved; the liveness
+    // anchor is unchanged in kind.
+    expect(serviceRows, 'the header claims 1,925 instantiated service rows over these thirty')
+      .toBe(1925);
     expect(
       carriers,
       'a generation step began writing `settlement.services`. The schema declares the field and'
@@ -427,7 +433,10 @@ describe('THE HONESTY RULE — a column is `closed` only where every source the 
     // The measured fault, now cured: 23 rows over 30 settlements named an institution the
     // live roster does not hold — `(lawless)`, `(informal)`, `(street gang)`,
     // `(arcane underground)`, `(smuggling)`. Zero were duty-kind, so the class was latent.
-    expect(orphans).toBe(23);
+    // RE-MEASURED 2026-11-06 (LANDING-7 lane F): 23 → 21, bisected by stage — d4bf6431c (x46-2 thresholds) 23 → 22,
+    // 90dc22f18 (x46-3 budget) 22 → 21; `(street gang)` left the dropped set at 1264a8152 (x46-train). Same seeds,
+    // a re-generated world; the filter still drops real rows (the line below).
+    expect(orphans).toBe(21);
     expect([...dropped].some((name) => /lawless|informal|street gang|arcane underground|smuggling/i.test(name))).toBe(true);
     // anchored: the line above proves the filter dropped real rows, so an empty leak list
     // cannot be an empty scan

@@ -169,7 +169,9 @@ describe('§I FACET INFERENCE HONESTY — the anchoring walker (CH-1, ODQ §503.
     // were wrong, A3 would be measuring this file's own bug. This arm rules that out by
     // executing the parsed live table against the real chokepoint, cell by cell.
     // MUTANT: drop one alternative from the parser's regex → the reproduction breaks.
-    expect(CATALOG_ROWS.length, 'the catalog row count moved — re-measure, do not re-word').toBe(518);
+    // RE-MEASURED 2026-11-06 (LANDING-7 lane F): 518 -> 519 rows (1554 -> 1557 cells). Cause: 22ea53ea8, F1 unit 3,
+    // the Village watch catalogue row (village/Defense). The new row moves no inference cell (A3 unmoved).
+    expect(CATALOG_ROWS.length, 'the catalog row count moved — re-measure, do not re-word').toBe(519);
     const disagreements = [];
     for (const row of CATALOG_ROWS) {
       const bare = inferenceOnly(row.inst);
@@ -180,7 +182,7 @@ describe('§I FACET INFERENCE HONESTY — the anchoring walker (CH-1, ODQ §503.
       }
     }
     expect(disagreements).toEqual([]);
-    expect(CATALOG_ROWS.length * FACET_KINDS.length).toBe(1554);
+    expect(CATALOG_ROWS.length * FACET_KINDS.length).toBe(1557);
   });
 
   it('A1 · the four mis-inferring rows stop asserting a nature, and the DERIVED INTERIOR each one draws moves to `generic`', () => {

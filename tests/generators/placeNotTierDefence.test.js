@@ -43,7 +43,7 @@ describe('the military government line reads the standing forces', () => {
   it('drops the soldiers sentence, and only it, where none stand', () => {
     const rel = relOf({ ...NO_FORCE, hasMilitia: true });
     expect(rel.type).toBe('subordinate');
-    expect(rel.narrative).not.toContain('soldiers');
+    expect(rel.narrative).not.toContain('soldiers'); // anchored: the next line pins the relationship's whole narrative
     expect(rel.narrative).toBe('Military/Guard operates as the executive arm of Town Council.');
   });
 });
@@ -60,13 +60,15 @@ describe('a village with no garrison, watch or militia (soak1k-110)', () => {
 
   it('prints no soldiers line on its Power tab', () => {
     const narratives = (s.powerStructure.factionRelationships || []).map((r) => r.narrative);
-    expect(narratives.join('\n')).not.toContain('soldiers enforce rather than govern');
+    expect(narratives.length).toBeGreaterThan(0);
+    expect(narratives.join('\n')).not.toContain('soldiers enforce rather than govern'); // anchored: the line above proves the relationship narratives are live
     expect(forceTerms(s, narratives)).toEqual([]);
   });
 
   it('seats no Guard Captain', () => {
     const roles = s.npcs.map((n) => n.role);
-    expect(roles).not.toContain('Guard Captain');
+    expect(roles.length).toBeGreaterThan(0);
+    expect(roles).not.toContain('Guard Captain'); // anchored: the line above proves the roster is live
     expect(forceTerms(s, roles)).toEqual([]);
   });
 });
@@ -93,7 +95,8 @@ describe('a hamlet with no force names no garrison as a party (soak1k-13)', () =
 
   it('lists no "The garrison" among the parties of its tensions', () => {
     const parties = (s.history?.currentTensions || []).flatMap((t) => t.factions || []);
-    expect(parties).not.toContain('The garrison');
+    expect((s.history?.currentTensions || []).length).toBeGreaterThan(0);
+    expect(parties).not.toContain('The garrison'); // anchored: the line above proves the tensions are live
     expect(forceTerms(s, parties)).toEqual([]);
   });
 });

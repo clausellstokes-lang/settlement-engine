@@ -691,7 +691,7 @@ describe('⭐ THE PATRON-LESS TOWN — what the deity-free review corpus renders
     const desk = warFaithStateProse(quiet.settlement, { faith: quiet.model, hasPatron: false },
       { seed: 'greyford', audience: 'player' });
     expect(desk.faithTeaser.sentence).toMatch(/keep their observances/);
-    expect(desk.faithTeaser.sentence).not.toMatch(/church|cleric|faction|faith/i);
+    expect(desk.faithTeaser.sentence).not.toMatch(/church|cleric|faction|faith/i); // anchored: the line above proves the teaser is the live observances sentence
   });
 
   test('a town WITH a patron draws no teaser — the page cannot say both', () => {

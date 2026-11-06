@@ -2985,6 +2985,202 @@
     "tests/property/heraldKnowledgeDeskGolden.test.js": {
       "kind": "rationale",
       "ref": "golden-byte-pin"
+    },
+    "tests/data/dwellingsHouseholdNames.test.js": {
+      "kind": "rationale",
+      "rationale": "X-46 CAR 2, 3c: THE DWELLINGS AND HOUSING ROWS NAME THE OWNER'S HOUSEHOLD BANDS. The subject is authored catalogue DATA (six required rows, one per tier) plus a src/-wide scan that no file still spells an old-scale name. IT IS A RATIONALE BECAUSE ITS CATCHING POWER WAS PROVEN BY AN EXECUTED IN-PLACE NEGATIVE CONTROL (LANDING-7 lane F, 2026-11-06, at 8e60cb2a5 + lane commits): the thorp row in src/data/institutionalCatalog.js renamed back to its old-scale spelling Dwellings (4-16) -> BOTH arms red (2 failed / 2: the thorp row is absent, and the scan names the old string by file); file restored byte-exact (git diff clean), 2/2 green. A standing sweep plant would mutate the catalogue, the file nearly every generation suite imports, to re-run that identical check."
+    },
+    "tests/data/institutionFabric.test.js": {
+      "kind": "rationale",
+      "rationale": "X-46 CAR 3: THE FABRIC REGISTRY (fabricRows / isFabricRow / isFabricInstitution, and the X-45 backing weight 0 every fabric row must carry). The subject is a closed fourteen-row set compared by exact equality, plus a cross-table coupling to src/data/institutionBacking.js. IT IS A RATIONALE BECAUSE ITS CATCHING POWER WAS PROVEN BY AN EXECUTED IN-PLACE NEGATIVE CONTROL (LANDING-7 lane F, 2026-11-06): the Dwellings (1-8) backing row raised from weight 0 to weight 1 -> the backing arm red (1 failed / 5) naming the row; file restored byte-exact (git diff clean), 5/5 green. The exact-set arm reds on any added or dropped fabric row by construction, so a standing plant adds no catching power over the ordinary run."
+    },
+    "tests/data/metropolisBandPosition.test.js": {
+      "kind": "rationale",
+      "rationale": "X-46 CAR 1b, U3: THE LOG POSITION INSIDE THE METROPOLIS BAND (src/data/constants.js :: metropolisBandPosition, read off METROPOLIS_ROLL_TUNING). The subject is one pure function pinned at its anchors, two interior points to three decimals, monotonicity and its clamps. IT IS A RATIONALE BECAUSE ITS CATCHING POWER WAS PROVEN BY AN EXECUTED IN-PLACE NEGATIVE CONTROL (LANDING-7 lane F, 2026-11-06): the log read replaced by the linear read the header warns against -> the interior-points arm red (1 failed / 3); file restored byte-exact (git diff clean), 3/3 green. A standing plant in constants.js, a module every suite imports, would re-run that identical check at sweep cost."
+    },
+    "tests/generators/defenceClaimWriters.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/defenceTwinLines.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/densityPowerConservation.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/densityTrimRelationships.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/fishRowOnWater.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/foodExports.test.jsx": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/foodExportsProcessed.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/foodSurplusResidue.test.jsx": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/foodwaysOneLine.test.jsx": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/historyCrimeWaveSignal.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/hookSecretStarving.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/hookTruthAtBirth.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/institutionBudgetCurve.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/institutionBudgetDensity.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/institutionBudgetPromise.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/institutionBudgetRarity.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/institutionBudgetReach.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/institutionBudgetRouteRequired.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/metropolisTailedRoll.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/moneyChangersTownFloor.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/npcCrimeSignalWriters.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/placeNotTierDefence.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/placeNotTierGuilds.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/populationBandRoll.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/recordBatteryUnnamed.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/resolveCrisisCast.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/safetyDebtLineSignal.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/safetyNetworkTheft.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/safetySurvivalLineSignal.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/selfVouchReceipt.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/soakDefenceReach.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/stressFactionNames.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/terrainPoolsArena.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/terrainPoolsCatchLanding.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/terrainPoolsDragon.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/terrainPoolsDragonLicence.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/terrainPoolsDryRoles.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/terrainPoolsHookLines.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/terrainPoolsInlandTexts.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/terrainPoolsPortRole.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/terrainPoolsSeaWords.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/terrainPoolsSeat.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/tierNounPoolDraws.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/villageWatchRow.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/x46NpcBand.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/lint/faithTeaserLicence.test.js": {
+      "kind": "rationale",
+      "rationale": "LANE FAITH-POOLS (2026-11-04): EVERY DS-FTH-2 SENTENCE READS THE ONE FAITH READING. A closed-vocabulary walker over a generated prose block. IT IS A RATIONALE BECAUSE ITS REMOVER-PROOF IS CARRIED IN THE FILE AND RE-RUN ON EVERY GATE RUN: its anti-vacuity arm drives the LIVE detector (unlicensed) with a planted denial, a planted grade and a planted case-bound word out of place, each required to red. EXECUTED IN-PLACE NEGATIVE CONTROL on the shipped corpus as well (LANDING-7 lane F, 2026-11-06): DS-FTH-2 PRIVATE vid 1 in src/data/dossierStateProse/warFaith.generated.js rewritten to a denial (No faith holds {settlement}.) -> the corpus arm red (1 failed / 3); file restored byte-exact (git diff clean), 3/3 green. A standing sweep plant would mutate a generated artefact under its own freshness contract."
     }
   },
   "meta": {

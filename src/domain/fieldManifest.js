@@ -53,9 +53,11 @@ export const FROZEN_VS_LIVE = Object.freeze([
     displayRule: 'The Disasters & Famine row may prefer the persisted score ONLY because the '
       + 'writeback re-grades it through the persisted gate every tick; legacy saves without it '
       + 'must keep falling through to live resilienceScore.',
+    // The read moved with RUNG1B-F9 unit 1 (26ed1b259): the Defense tab's Disasters & Famine row now
+    // takes the ONE score `threatAssessment.js :: disasterReadinessScore`, which keeps this chain.
     guards: [{
-      file: 'src/domain/display/defenseDisplay.js',
-      mustMatch: 'scores\\.disaster\\s*\\?\\?\\s*r\\.economicState\\?\\.foodSecurity\\?\\.resilienceScore',
+      file: 'src/domain/display/threatAssessment.js',
+      mustMatch: 'scores\\.disaster\\s*\\?\\?\\s*r\\?\\.economicState\\?\\.foodSecurity\\?\\.resilienceScore',
       why: 'legacy saves degrade gracefully: no persisted disaster score → live resilience',
     }],
   },
@@ -319,7 +321,8 @@ export const ENGINE_FIELD_REGISTRY = Object.freeze([
     field: 'disaster',
     path: 'defenseProfile.scores.disaster',
     producer: 'src/generators/defenseGenerator.js',
-    consumers: ['src/domain/display/defenseDisplay.js'],
+    // threatAssessment.js :: disasterReadinessScore — the Defense tab's one reader since 26ed1b259
+    consumers: ['src/domain/display/threatAssessment.js'],
   },
   {
     field: 'magicNote',

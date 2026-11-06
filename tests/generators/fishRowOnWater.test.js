@@ -27,6 +27,6 @@ describe('a fishing row on water is a fish source', () => {
     const { settlement: s, config } = birth(i);
     expect(waterAccessKind(config.terrainType, config.tradeRouteAccess)).toBe('none');
     expect(s.institutions.some((/** @type {any} */ x) => x.name === 'Fish market')).toBe(true);
-    expect(s.economicState.foodSecurity.foodRecord.foodSources).not.toContain('fish');
+    expect(s.economicState.foodSecurity.foodRecord.foodSources).not.toContain('fish'); // anchored: the line above pins the Fish market, the row that used to write 'fish' here (soak1k-116's sources are empty)
   });
 });

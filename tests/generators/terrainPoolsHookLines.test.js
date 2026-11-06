@@ -27,7 +27,7 @@ describe('the hook pools\' wet lines', () => {
   });
   it('the twin is taken only where there is no water', () => {
     const line = 'Find the person responsible for three unsolved dock-side killings';
-    expect(inlandHookLine(line, 'none')).not.toMatch(WET_HOOK_WORD);
+    expect(inlandHookLine(line, 'none')).not.toMatch(WET_HOOK_WORD); // anchored: two lines down the same function returns a live dry line unchanged for 'none'
     expect(inlandHookLine(line, 'maritime')).toBe(line);
     expect(inlandHookLine(line, 'river')).toBe(line);
     expect(inlandHookLine('Close a murder case that has made the merchants nervous', 'none')).toBe('Close a murder case that has made the merchants nervous');

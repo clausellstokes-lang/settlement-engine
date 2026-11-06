@@ -203,14 +203,21 @@ describe('[CH-3 §3.1] catalog tier-gate parity: the UI reader and the generator
       .map((l, i) => (/Object\.entries\(institutionToggles\)\.forEach/.test(l) ? i : -1))
       .filter((i) => i >= 0);
     expect(loopLines.length).toBe(2);
-    // …and `minTier` is named on exactly TWO lines of the whole file: the gate in the main
-    // iteration and the same gate in `rollFor`, the helper the weighted exclusive group and
-    // the independent roll share (the urban band, 2026-09-30).
+    // …and `minTier` is named on exactly THREE lines of the whole file: the gate in the main
+    // iteration, the same gate in `rollFor`, the helper the weighted exclusive group and
+    // the independent roll share (the urban band, 2026-09-30), and — RE-RECORDED 2026-11-06
+    // (LANDING-7 lane F), 2 -> 3, cause bf3d1258e (RUNG1B-F6 unit 2) — the same gate in
+    // `exemptHouseExpectation`, the density factor's X: the expected houses of the density-exempt
+    // rows skip a row below its gate. ⚠ NAMED, NOT REPAIRED: that X counts a FORCED row 1 only
+    // AFTER this gate, so a forced row below its minTier is placed by the force path yet absent
+    // from X. Latent while the gated class is empty (A1); a row that re-adopts "author here, gate
+    // there" would make the two disagree, and that is a ruling, not a re-record.
     const gateLines = lines
       .map((l, i) => (l.includes('minTier') ? i : -1))
       .filter((i) => i >= 0);
-    expect(gateLines.length).toBe(2);
+    expect(gateLines.length).toBe(3);
     expect(gateLines.map((i) => lines[i].trim()).sort()).toEqual([
+      'if (inst.minTier && env.tierIndex < TIER_ORDER.indexOf(inst.minTier)) continue;',
       'if (inst.minTier && tierIndex < TIER_ORDER.indexOf(inst.minTier)) return null;',
       'if (inst.minTier && tierIndex < TIER_ORDER.indexOf(inst.minTier)) return;',
     ]);
