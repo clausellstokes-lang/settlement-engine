@@ -174,7 +174,7 @@ describe('EM-P2 — the generation fork register: totality, derivation, and Tier
     // GS-2 (2026-10-31, ODQ §934.101): same 35 -> 34 and transformed 15 -> 13 in BOTH comparands below, the three
     // retired rows (generatePopulation|conflicts same; generatePopulation|factions and corruptionPass|factions transformed).
     expect(tallyOf(GENERATION_TIER1, 'onRecordClass'), 'the FINAL comparand tally')
-      .toEqual({ absent: 20, same: 34, transformed: 13, varies: 7 }); // LANDING-1 (2026-11-04): one row same -> varies, re-measured by the census at the landed tip. lane CRISIS (2026-11-03): resolveCrisisCast joins: crisisCast absent, settlement same
+      .toEqual({ absent: 20, same: 30, transformed: 13, varies: 11 }); // LANDING-8 (2026-11-06): same 34 -> 30, varies 7 -> 11, the four stress rows under the copy-on-write crisis cast (lane D, 8befe5a0d). LANDING-1 (2026-11-04): one row same -> varies, re-measured by the census at the landed tip. lane CRISIS (2026-11-03): resolveCrisisCast joins: crisisCast absent, settlement same
     // 2026-10-01, the urban band (ODQ §934.86): absent 27 -> 26, same 18 -> 19. The same re-measure moved two rows'
     // post-step comparand (generationRepairs absent -> varies; isolationSupport varies -> same), and both now agree
     // with their final comparand, so the disagreeing rows below go 18 -> 16 (generationForkCensus records the same).
@@ -187,7 +187,7 @@ describe('EM-P2 — the generation fork register: totality, derivation, and Tier
       .filter((row) => row.onRecordClass !== row.producedOnRecordClass)
       .map((row) => `${row.step}|${row.key}`);
     process.stdout.write(`\n[A3s] the two comparands disagree on ${disagreeing.length} rows: ${disagreeing.join(', ')}\n`);
-    expect(disagreeing.length, 'the disagreement count is the register\'s reason for carrying both').toBe(17); // lane CRISIS (2026-11-03): resolveCrisisCast joins: assembleSettlement|stress (16 -> 17)
+    expect(disagreeing.length, 'the disagreement count is the register\'s reason for carrying both').toBe(13); // LANDING-8 (2026-11-06): 17 -> 13, the four stress rows' two comparands agree under the copy-on-write crisis cast (8befe5a0d). lane CRISIS (2026-11-03): resolveCrisisCast joins: assembleSettlement|stress (16 -> 17)
     expect(GENERATION_TIER1.filter((row) => row.key === 'effectiveConfig'
       && row.onRecordClass === 'same' && row.producedOnRecordClass === 'absent').length,
     'the seven effectiveConfig rows: the config IS on the record, and no writer handed it there').toBe(7);
