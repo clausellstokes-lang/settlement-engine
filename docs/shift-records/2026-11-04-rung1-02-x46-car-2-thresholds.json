@@ -47,6 +47,20 @@
       "action": "re-record",
       "predictedRows": 15,
       "proofForm": "derived-artefact"
+    },
+    {
+      "surface": "faith-field-dormancy-fence",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "in-file corpus constant",
+      "expected": {
+        "constant": "tests/property/faithFieldDormancyFence.test.js :: DORMANT_GOLDEN",
+        "DORMANT_GOLDEN": {
+          "from": "6e85308b0f396a77",
+          "to": "f80ebc3290869df9"
+        },
+        "amendment": "SECOND ACT, 2026-11-06 (LANDING-7 A, second seat, under the cloud chair Fable 5.1 by the owner's delegation of 2026-11-06, vetoable): this record never predicted this surface. The fence hashes the DORMANT faith corpus, whose 900 / 1,500 / 4,200 / 8,000 rows straddle the TIER_STAMP_CUTS that this cause re-based causalState.js onto (dense >= 2,250, adequate >= 350, thin < 88), so the cuts re-tiered the corpus and moved the golden. Bisected by first-parent stage to d4bf6431c and, inside the lane, to the ONE commit 04c1a3d25. The field itself stays dormant."
+      }
     }
   ]
 }

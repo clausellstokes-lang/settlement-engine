@@ -503,7 +503,14 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // record settles away from R0 at that evidence leaf in nine more chains, and the second merge carries it along.
     // 2026-11-04, the window-end pin re-key (REGISTERS seat; masked behind A7's first figure in DOORS-4, traced by this
     // seat over the same stage trees): [21, 23] → [18, 20] (FOOD-2, stage T2) → [12, 12] (SIZE-3, stage S5).
-    expect([chains().rideAlongChains, chains().rideAlongLeaves], 'the honesty machinery firing').toEqual([12, 12]);
+    // 2026-11-06 (LANDING-7 A, the chair's ruling R-A6: LANDING-6's "ride-along still bisecting", finished; re-keyed by
+    // identity with its step, bisected over the rung-1 landing's first-parent stages with a probe of this census's pair
+    // half and the tip's own EDITS, in scratch trees; every src-touching stage measured or bracketed by equal neighbours):
+    // [12, 12] at a07ee4e0a and soak2 (a8739327e) → [16, 16] X-46 car 1 (1264a8152) → [14, 14] terrain-pools (ac09ea83b)
+    // → [31, 31] X-46 car 3 (90dc22f18, the institution budget) → [24, 24] PLACE-NOT-TIER (6129c300d) → [27, 27] PINS
+    // (37b1e746d) → [21, 21] car 3 I7 (6ca454d2b), unmoved to the tip (F6, F1, F10, the residual tick bc2a64000, the
+    // summary-hook cure c1cf38bbb). Chains and leaves stay equal: every ride-along chain carries exactly one leaf.
+    expect([chains().rideAlongChains, chains().rideAlongLeaves], 'the honesty machinery firing').toEqual([21, 21]);
   }, ARM_TIMEOUT);
 
   it('A8 the family declared instruments hold at this seam', () => {

@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "57606fa6434f4405000d2e93f804c4d754ab566a",
-  "measuredBy": "LANDING-2 seat (Opus 5.5)",
-  "date": "2026-11-04",
-  "note": "the rung-1 landing (ODQ §934.105): the window lanes' tuning sites, the three growth sites attributed by DECLARED_GROWTH rows",
+  "measuredAtSha": "c8e3accb51f3b3c4ad6379ced5f035044eba523e",
+  "measuredBy": "LANDING-7 A seat (Opus 5.5), cloud chair session 01FE9mEvGxnFx6WTBkEC6ie9",
+  "date": "2026-11-06",
+  "note": "one dependent gained, no value moved: src/domain/viabilitySummary.js (born by the V-SUMMARY-HOOKS cure c1cf38bbb, buildViabilitySummary moved out of viability.js) now reads src/data/constants.js#METROPOLIS_ROLL_TUNING; tables 261, named 535, bare 6945 unchanged",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -74,6 +74,7 @@
         "src/domain/townMap/townMapModel.js",
         "src/domain/traditions/genesis.js",
         "src/domain/traditions/politics.js",
+        "src/domain/viabilitySummary.js",
         "src/domain/worldPulse/beliefAxisSubjects.js",
         "src/domain/worldPulse/calamityKernel.js",
         "src/domain/worldPulse/conquestFeeds.js",
@@ -2179,7 +2180,7 @@
       "exported": true,
       "idiom": "mixed",
       "keys": 56,
-      "line": 193,
+      "line": 207,
       "spanDigest": "f6f58469dba9ea6434aeaf3e609b8d7942ceedba98dd233f6bf53bfb3e49d581",
       "leaves": {
         "MORPHOLOGY.LEGITIMACY_WEIGHT": 0.3,

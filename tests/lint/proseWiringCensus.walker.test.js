@@ -1936,7 +1936,14 @@ describe('SEAM car 5b — THE HOLDER CENSUS: the source of each construction (SI
       'every interested row names a state organ').toBe(true);
     // 16 -> 23 on 2026-09-30 (the urban band, ODQ §934.86): the city's complete block seats more
     // institutions that keep a state organ's record, so more licensed rows find a holder here.
-    expect(interested.length, 'the licensed rows this captured city makes interested').toBe(23);
+    // 23 -> 16 at the F6 BUDGET-FLOOR stage (6d84aa834, the lane's bf3d1258e "the target gives
+    // way"), bisected by first-parent stage of the rung-1 window (LANDING-7): the stage re-draws
+    // this city's roster (65 -> 63 institutions), and the Professional city watch, still seated,
+    // no longer instantiates its one record service ('Crime reporting'), so the WATCH kind has no
+    // holder here. The seven rows that leave are exactly the watch's: DS-DEF-5 (watch PRESENT;
+    // NO organized force at all), DS-ECO-6's three off-book TIER rows and DS-POW-6's two
+    // capture-reached rows. No row was gained; the gate above is unmoved.
+    expect(interested.length, 'the licensed rows this captured city makes interested').toBe(16);
     // THE MARK NAMES ITS GROUND rather than asserting a standing nobody can trace.
     const one = sourceOfForTown(interested[0], town);
     expect(one.standing).toBe('INTERESTED');
@@ -1962,7 +1969,13 @@ describe('SEAM car 5b — THE HOLDER CENSUS: the source of each construction (SI
     // 61 AND NOT 62 SINCE LANE DEFENSE's 0b2548de5: the one licensed row that left
     // (DS-GEN-6 :: isolated, see 'ROWS by source standing') was one this town held, through its
     // toll-bar. No other licensed row changed its source. Traced by lane DEFENSE-2.
-    expect(held.length, 'and it really does keep the records').toBe(61);
+    // 66 AND NOT 61 SINCE the rung1-pins stage (37b1e746d, lane/rung1-pins at fa95f69d4),
+    // bisected by first-parent stage of the rung-1 window (LANDING-7): the five DS-GEN-9
+    // 'recency framing' rows (Recent · Living memory · Last century · Ancient · Deep history)
+    // find a holder in this town, and no row left. The window passed through 50 between the X-46
+    // car 3 stage (6ca454d2b) and the F6 BUDGET-FLOOR stage (6d84aa834), which restored exactly
+    // the rung1-pins row set; the tip's 66 rows are that set, row for row.
+    expect(held.length, 'and it really does keep the records').toBe(66);
     expect(licensed.filter((row) => sourceOfForTown(row, clean).standing === 'INTERESTED')).toEqual([]);
   });
 

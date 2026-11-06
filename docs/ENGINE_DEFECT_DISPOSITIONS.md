@@ -167,7 +167,7 @@ flag true. **The conditions silence the default sliders, not the hash ceiling.**
 |---|---|---|
 | producer | `src/generators/economy/economicState.js:62` | `ecoInstFlags = getInstFlags(config, institutions)` — the **raw** roster |
 | the read under it | `src/generators/priorityHelpers.js :: getInstitutionNames` | `nativeSemanticNames(institutions)` — never `liveInstitutions()` |
-| the stamp | `src/generators/economy/economicState.js:883` | `compound: ecoInstFlags` — written **once**, at generation |
+| the stamp | `src/generators/economy/economicState.js :: generateEconomicState` (the `compound` key of the record it returns) | `compound: ecoInstFlags` — written **once**, at generation |
 | the consumer | `src/domain/display/stateProse/defenseStateProse.js:578` + `:616` | `const compound = settlement?.economicState?.compound?.inst \|\| {}`, then `civicFlag(compound.hasCourtSystem), civicFlag(compound.hasPrison)` (`civicFlag` itself at `:269`) |
 | the pool that keys on it | same file, `:1369` (the DS-DEF-6 collision block) | DS-DEF-2 row 3 `internalRowPoolKey` = `hasCourtSystem` × `hasPrison` |
 
@@ -176,6 +176,8 @@ Nothing on the advance path recomputes `compound`.
 *(Every line cite in this section is read AT THIS COMMIT'S TIP — this car's own two docblocks
 shift `economicState.js` by 11 lines and `defenseStateProse.js` by 22, so the recon brief's
 pre-edit cites `:51`, `:872` and `:240-248` do not resolve here and are corrected above.)*
+*(The stamp row is re-addressed to its SYMBOL, rule 32 (LANDING-7 A, 2026-11-06): `:883` fell past
+the file's end when LANDING-3's dbd17ae05 moved the pre-chain trade lists to `economy/primaryTradeLists.js`.)*
 
 ### CONFIRMED by execution — city seed `civic-probe`
 
