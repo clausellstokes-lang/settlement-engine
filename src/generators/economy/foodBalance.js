@@ -381,10 +381,19 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
       ? Math.max(0, foodSecurity.rawDeficit)
       : Math.max(0, -surplusFinal);
     // foodSecurity returns deficitPct (rounded) + dailyNeed, not a deficit-lbs
-    // field; reconstruct the lbs from them. deficitPct === 0 ⇔ deficit === 0, so
-    // the SIGN is preserved exactly. Clamp into [0, rawDeficit].
+    // field; reconstruct the lbs from them. Clamp into [0, rawDeficit].
     const cDeficitPct = Number.isFinite(foodSecurity.deficitPct) ? foodSecurity.deficitPct : 0;
     deficit = Math.max(0, Math.min(rawDeficitFinal, Math.round((cDeficitPct / 100) * dailyNeedFinal)));
+    // ⛔ THE SIGN IS ENFORCED, NOT INHERITED FROM ROUNDING (LANDING-7 lane D, 2026-11-06). This
+    // block used to say "deficitPct === 0 ⇔ deficit === 0", and rounding broke it: on a
+    // thirteen-soul thorp a 1% gap is a quarter of a pound, Math.round made it 0 lb, and the
+    // view published "no deficit" beside the record's 1% (thorp|desert|port, once F3's fish on
+    // water shrank its residual). A gap the record names is at least one pound on the view, and
+    // the raw gap it is carved from is never smaller than the residual.
+    if (cDeficitPct > 0 && deficit < 1) {
+      deficit = 1;
+      rawDeficitFinal = Math.max(rawDeficitFinal, deficit);
+    }
     deficitPercent = cDeficitPct;
     // WHO CARRIES THE COVERED PORTION. The writer publishes its own split
     // (foodSecurity.importCoverage / .magicOffset, lb/day), so read it: a view

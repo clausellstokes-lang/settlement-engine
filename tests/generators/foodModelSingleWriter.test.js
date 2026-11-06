@@ -390,9 +390,13 @@ describe('FIX-G1 — the viability summary counts the list the record publishes'
 
     // …and the sentence counts the PUBLISHED list, not that second drawer. Pre-cure this
     // read 4 against a list of 3 (measured at b5c28d8e2).
+    // RE-KEYED 4 → 3 BY IDENTITY (LANDING-7 lane D, 2026-11-06): the X-46-3 institution budget
+    // (compose 90dc22f18, lane/x46-3-budget at 4bfd2d698) no longer seats this desert town's
+    // Brewery, so "Brewery: requires water access" left the PUBLISHED list (Mills, Dyer, the
+    // grain import remain) and the sentence followed it, 4 → 3, with the habitat above intact.
     expect(statedCount(v.summary), 'the headline stated no count at all').not.toBeNull();
     expect(statedCount(v.summary)).toBe((v.dependencies || []).length);
-    expect(statedCount(v.summary)).toBe(4);
+    expect(statedCount(v.summary)).toBe(3);
     // The record's three readings of one fact now agree, which is the invariant.
     expect(v.metrics.dependencyCount).toBe((v.dependencies || []).length);
   });

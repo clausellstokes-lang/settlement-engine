@@ -3,9 +3,10 @@
  *
  * Runs after the settlement is assembled: the NPCs, the one faction set and the legitimacy
  * pass all exist only once `assembleSettlement` has bundled them. Each active stress entry
- * gains `cast`, derived by `src/domain/crisis/crisisCast.js :: deriveCrisisCast` over the
- * whole town, worst crisis first in the engine's severity order
- * (`STRESS_SEVERITY_WEIGHT`, the order `generateStress` already ranks by).
+ * on the record is replaced by a copy carrying `cast` (copy-on-write: see below), derived by
+ * `src/domain/crisis/crisisCast.js :: deriveCrisisCast` over the whole town, worst crisis
+ * first in the engine's severity order (`STRESS_SEVERITY_WEIGHT`, the order `generateStress`
+ * already ranks by).
  *
  * ⛔ ONE DRAW AT MOST, AND ONLY FOR A TEMPORARY PERSON. The cast takes no draw; the occasional
  * roles are ranked over a hash of seed and crisis id. A temporary person is minted only when a
@@ -37,7 +38,7 @@ const TEMPORARY_ROLE = Object.freeze(/** @type {Record<string, string>} */ ({
 const UNPINNED = Symbol('unpinned');
 
 /**
- * The stress container as a list of entries, in place (the same objects the record holds).
+ * The stress container as a list of entries (the same objects the record holds; read only).
  * @param {unknown} stress
  * @returns {Array<Record<string, unknown>>}
  */
@@ -90,17 +91,27 @@ registerStep('resolveCrisisCast', {
   const crisisCast = {};
   for (const entry of entries) {
     const cast = casts.get(String(entry.type));
-    if (!cast) continue;
-    entry.cast = cast;
-    crisisCast[String(entry.type)] = cast;
+    if (cast) crisisCast[String(entry.type)] = cast;
   }
-  // The stressors alias (normalizeSettlement) may be a separate container: keep it in step.
-  if (settlement.stressors !== settlement.stress) {
-    for (const twin of entriesOf(settlement.stressors)) {
-      const cast = casts.get(String(twin.type));
-      if (cast) twin.cast = cast;
-    }
-  }
+  // ⛔ COPY-ON-WRITE, NEVER IN PLACE. The record's stress entries are the SAME objects
+  // `ctx.stress` holds (assembleSettlement places the array by reference) and, on a
+  // regeneration, the authored `config.stressorEdits.added` entries themselves (frozen store
+  // state). Writing `cast` onto them in place was an undeclared write of `ctx.stress` (the
+  // strict data-flow contract) and a TypeError on a frozen entry (undo → regenerate). So the
+  // record gets a NEW container of entry copies carrying `cast`; the inputs are left untouched.
+  const withCast = (/** @type {unknown} */ e) => {
+    if (!e || typeof e !== 'object') return e;
+    const cast = casts.get(String((/** @type {Record<string, unknown>} */ (e)).type));
+    return cast ? { .../** @type {Record<string, unknown>} */ (e), cast } : e;
+  };
+  const recast = (/** @type {unknown} */ container) => (Array.isArray(container)
+    ? container.map(withCast)
+    : withCast(container));
+  // The stressors alias (normalizeSettlement) may be the same container or a separate one.
+  const aliased = settlement.stressors === settlement.stress;
+  const hasTwin = Object.prototype.hasOwnProperty.call(settlement, 'stressors');
+  settlement.stress = recast(settlement.stress);
+  if (hasTwin) settlement.stressors = aliased ? settlement.stress : recast(settlement.stressors);
   // A temporary person serves every crisis whose lever it holds.
   for (const person of minted) {
     const serves = Object.entries(crisisCast)

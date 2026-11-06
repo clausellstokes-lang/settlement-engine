@@ -299,9 +299,18 @@ describe("no arcane governance line in a no-magic world (GS-4)", () => {
     const offenders = [];
     let alchemistTowns = 0;
     let priestLines = 0;
+    // ⭐ THE TRIP-WIRE IS ESTABLISHED, NOT HOPED FOR (re-keyed by identity, LANDING-7 lane D,
+    // 2026-11-06). The eleven seeds carried an Alchemist by the luck of their rolls; the X-46
+    // population bands (compose 1264a8152: towns 267, 651, 759) and the X-46-3 institution
+    // budget (compose 90dc22f18: town 63, 65 → 19 houses) re-rolled four of them without one,
+    // and none of the four printed an arcane line — the anchor below fell to 7, the claim did
+    // not. The assertion concerns whether an Alchemist raises the arcane line, so it is put on
+    // the roll through the public force-toggle seam (filed on Crafts, TE-CH-5).
     for (const [n, settType, culture, terrainOverride, tradeRouteAccess] of ELEVEN) {
+      const alchemist = settType === 'town' ? 'Alchemist shop' : 'Alchemist quarter';
       const settlement = generateSettlementPipeline({
         settType, culture, terrainOverride, magicExists: false, tradeRouteAccess, _randomizePriorities: true,
+        _institutionToggles: { [`${settType}::Crafts::${alchemist}`]: { allow: true, require: true } },
       }, null, { seed: `ux-audit-v2-2026-10-30-${n}`, customContent: {} });
       if ((settlement.institutions || []).some((i) => /^Alchemist (shop|quarter)$/.test(i.name))) alchemistTowns += 1;
       const recentConflict = settlement.powerStructure?.recentConflict || '';
