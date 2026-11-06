@@ -380,21 +380,22 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
     rawDeficitFinal      = Number.isFinite(foodSecurity.rawDeficit)
       ? Math.max(0, foodSecurity.rawDeficit)
       : Math.max(0, -surplusFinal);
-    // foodSecurity returns deficitPct (rounded) + dailyNeed, not a deficit-lbs
-    // field; reconstruct the lbs from them. Clamp into [0, rawDeficit].
+    // The lbs are reconstructed from deficitPct (rounded) + dailyNeed, the two fields every
+    // persisted record carries. The writer's own per cent is the share of its own rounded
+    // pounds (foodGenerator.js, LANDING-7 lane H), so on a small need this recovers them.
+    // Clamp into [0, rawDeficit].
     const cDeficitPct = Number.isFinite(foodSecurity.deficitPct) ? foodSecurity.deficitPct : 0;
     deficit = Math.max(0, Math.min(rawDeficitFinal, Math.round((cDeficitPct / 100) * dailyNeedFinal)));
-    // ⛔ THE SIGN IS ENFORCED, NOT INHERITED FROM ROUNDING (LANDING-7 lane D, 2026-11-06). This
-    // block used to say "deficitPct === 0 ⇔ deficit === 0", and rounding broke it: on a
-    // thirteen-soul thorp a 1% gap is a quarter of a pound, Math.round made it 0 lb, and the
-    // view published "no deficit" beside the record's 1% (thorp|desert|port, once F3's fish on
-    // water shrank its residual). A gap the record names is at least one pound on the view, and
-    // the raw gap it is carved from is never smaller than the residual.
-    if (cDeficitPct > 0 && deficit < 1) {
-      deficit = 1;
-      rawDeficitFinal = Math.max(rawDeficitFinal, deficit);
-    }
-    deficitPercent = cDeficitPct;
+    // ⛔ ONE FIGURE, DERIVED FROM THE OTHER (LANDING-7 lane H, STOP-1, 2026-11-06). The view
+    // publishes integer pounds, so its share is the share THOSE pounds are of the need it
+    // publishes, rounded as the record invariant V-FOOD-PCT rounds it, and never the writer's
+    // percentage carried beside them. Carried, the two split on a small need: a 1% gap on a
+    // 32 lb thorp is a third of a pound, which publishes as 0 lb beside 1% (the sign broken), and
+    // a 1 lb floor under it published 1 lb beside 1% where those pounds are 3% (the share broken,
+    // on 17 golden rows). Derived, a gap that rounds to no pound reads 0%, and a positive share
+    // always has the pounds that produce it. No floor.
+    deficitPercent = Math.round(dailyNeedFinal) > 0
+      ? Math.round((deficit / Math.round(dailyNeedFinal)) * 100) : 0;
     // WHO CARRIES THE COVERED PORTION. The writer publishes its own split
     // (foodSecurity.importCoverage / .magicOffset, lb/day), so read it: a view
     // that re-derives a number its writer already holds is a second source of

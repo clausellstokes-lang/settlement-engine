@@ -78,6 +78,9 @@ export const FOUNDING_SEEDS = Object.freeze([
   // the other way), plague and short harvests → the legitimacy crisis, the crisis → the thieves' guild above the
   // council, and the crisis and that weight → the guild master's goal. It holds no link from the plague to the
   // quarantine council, so the council stands beside the other facts with no causal word.
+  // `firstDecade` RE-WORDED 2026-11-06 (LANDING-7 lane H, the verifier's NOTE-5, the chair's ruling R-H3; vetoable by
+  // the owner): "a failing crown" named a governor crown-3 does not seat. The power the master formalises is the
+  // governing guild council's, whose title the streets no longer honour (the synopsis's own held fact).
   Object.freeze({
     id: 'the-contested-crown',
     title: 'The Crown That Will Not Hold',
@@ -87,7 +90,7 @@ export const FOUNDING_SEEDS = Object.freeze([
     synopsis:
       "A plague is taking hold in this town, and it has thinned the hands that work the fields, so the harvests come in short. A quarantine council sits among its factions. Between the sickness and the short harvests, the guild council holds a title the streets no longer honour, and the crisis has lifted the thieves' guild above it; that guild's master has begun, quietly, to write the authority the collapse handed it into permanent ink. The coup here is not a rumour. It is a matter of paperwork.",
     firstDecade:
-      "Opens in a legitimacy crisis: fractured governance, a plague at its onset, and the thieves' guild master formalising the power a failing crown can no longer reclaim.",
+      "Opens in a legitimacy crisis: fractured governance, a plague at its onset, and the thieves' guild master formalising the power the guild council, its title no longer honoured in the streets, can no longer reclaim.",
     receipts: Object.freeze([
       "Its legitimacy reads 'Legitimacy Crisis', with governance fractured.",
       'Plague is at its onset, and a quarantine council sits among its factions.',

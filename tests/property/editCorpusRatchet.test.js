@@ -401,7 +401,11 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // (FOOD-1) → {28, 2} (FOOD-2); the escalation figures below did not move.
     // 2026-11-05 (LANDING-5, by stage as A3): declared-only {28, 2} -> {29, 2} car 1 1264a8152 -> {29, 3} car 3 90dc22f18 ->
     // {30, 7} PINS 37b1e746d -> {34, 12} car 3 I7 6ca454d2b -> {31, 6} F6 6d84aa834.
-    expect(tally(census().rows.filter((row) => row.declaredOnly.length > 0).map((row) => row.label))).toEqual({ E7: 31, E8: 6 });
+    // 2026-11-06 (LANDING-7 lane H, the chair's ruling R-H5: re-keyed by identity with its cause, measured by a probe of
+    // this census's E7 half at the parent ba4366c83 and after): {31, 6} -> {32, 6}. The one new row is
+    // thorp|germanic|coastal|port|civilized|golden-master-v3, declared-only on powerStructure (its economy fingerprint
+    // receipt), one of the 17 thorps whose food writer read 0 lb beside 1% and now derives its per cent from its pounds.
+    expect(tally(census().rows.filter((row) => row.declaredOnly.length > 0).map((row) => row.label))).toEqual({ E7: 32, E8: 6 });
     // anchored: the layer channel is clean on all three counts, and a widening reds here.
     expect(layerRows.filter((row) => row.escalations.length > 0)).toEqual([]);
     expect(layerRows.filter((row) => row.live.length > 0)).toEqual([]);
