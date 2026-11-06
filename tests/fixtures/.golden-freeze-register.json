@@ -257,7 +257,7 @@
       "suite": "tests/property/demographicsLifecycleGolden.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": "23bc2e9ba6888212583ab635ed5069da32eaf12fcbb9eaa6bf7b52db92521b47",
+      "sha256": "03ab9c86e89466a8ac877ef430ecbe349a07d699ed6ffeeacb65668157ba731f",
       "rows": 4,
       "seedSet": null,
       "distinctFloor": null,

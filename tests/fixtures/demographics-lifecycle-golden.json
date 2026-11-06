@@ -1,6 +1,6 @@
 {
   "p5b-a": {
-    "hash": "93bbb14ca12bd2e18d804882f59f7a8dc334b4c61484c241a3a9d5264473a849",
+    "hash": "4aeb294577a3882ed141f2d8fb589468fb7fb91827751e4bd616574d31212acd",
     "evidence": {
       "firstFoundingTick": 41,
       "firstPlanFoundingTick": 41,
@@ -11,17 +11,17 @@
         "plan.Brimhold.1"
       ],
       "finalPopulations": {
-        "Brimhold": 8718,
-        "Farvale": 883
+        "Brimhold": 7958,
+        "Farvale": 813
       },
       "satelliteIds": [
         "steading.brimhold.41"
       ],
       "receiptHistogram": {
-        "demographic_migration": 78,
-        "demographic_plan_closed": 1,
-        "demographic_plan_opened": 1,
-        "demographic_step": 152,
+        "demographic_migration": 160,
+        "demographic_plan_closed": 2,
+        "demographic_plan_opened": 2,
+        "demographic_step": 160,
         "satellite_charter_pending": 1,
         "satellite_founded": 1,
         "satellite_promoted": 1,
@@ -31,7 +31,7 @@
     }
   },
   "p5b-b": {
-    "hash": "3023ca87ff976ffbbadf25804f9cb73846b0b2457fdafc653c08b328b01063a7",
+    "hash": "adbfaf7b63a5726acc53aebf0fc7e505cec1e4ad161d084c21c70810623ee76c",
     "evidence": {
       "firstFoundingTick": 41,
       "firstPlanFoundingTick": 41,
@@ -42,17 +42,17 @@
         "plan.Brimhold.1"
       ],
       "finalPopulations": {
-        "Brimhold": 8721,
-        "Farvale": 885
+        "Brimhold": 7969,
+        "Farvale": 822
       },
       "satelliteIds": [
         "steading.brimhold.41"
       ],
       "receiptHistogram": {
-        "demographic_migration": 78,
-        "demographic_plan_closed": 1,
-        "demographic_plan_opened": 1,
-        "demographic_step": 147,
+        "demographic_migration": 150,
+        "demographic_plan_closed": 2,
+        "demographic_plan_opened": 2,
+        "demographic_step": 160,
         "satellite_charter_pending": 1,
         "satellite_founded": 1,
         "satellite_promoted": 1,
@@ -62,7 +62,7 @@
     }
   },
   "p5b-c": {
-    "hash": "495d6f04689bc02b44ff5abc0540e2028ca2821a1e3a83a8d5442454fcb3f2f8",
+    "hash": "2d85dd86430f87dfc88a0c60869858b955a86ce4623b85a4c53a14a73943de96",
     "evidence": {
       "firstFoundingTick": 41,
       "firstPlanFoundingTick": 41,
@@ -73,17 +73,17 @@
         "plan.Brimhold.1"
       ],
       "finalPopulations": {
-        "Brimhold": 8718,
-        "Farvale": 887
+        "Brimhold": 7964,
+        "Farvale": 818
       },
       "satelliteIds": [
         "steading.brimhold.41"
       ],
       "receiptHistogram": {
-        "demographic_migration": 78,
-        "demographic_plan_closed": 1,
-        "demographic_plan_opened": 1,
-        "demographic_step": 141,
+        "demographic_migration": 160,
+        "demographic_plan_closed": 2,
+        "demographic_plan_opened": 2,
+        "demographic_step": 160,
         "satellite_charter_pending": 1,
         "satellite_founded": 1,
         "satellite_promoted": 1,
@@ -93,7 +93,7 @@
     }
   },
   "p5b-d": {
-    "hash": "ddd688eec286dc03d6d94f9281cebade3a99952522a5d907acdc5b822cafa3d4",
+    "hash": "6346e95e29801bb06e87a45113d00592e826a5cbdeec149d3739ac0abeb04ee7",
     "evidence": {
       "firstFoundingTick": 41,
       "firstPlanFoundingTick": 41,
@@ -104,17 +104,17 @@
         "plan.Brimhold.1"
       ],
       "finalPopulations": {
-        "Brimhold": 8721,
-        "Farvale": 885
+        "Brimhold": 7956,
+        "Farvale": 816
       },
       "satelliteIds": [
         "steading.brimhold.41"
       ],
       "receiptHistogram": {
-        "demographic_migration": 78,
-        "demographic_plan_closed": 1,
-        "demographic_plan_opened": 1,
-        "demographic_step": 152,
+        "demographic_migration": 160,
+        "demographic_plan_closed": 2,
+        "demographic_plan_opened": 2,
+        "demographic_step": 160,
         "satellite_charter_pending": 1,
         "satellite_founded": 1,
         "satellite_promoted": 1,
