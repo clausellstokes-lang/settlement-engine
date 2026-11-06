@@ -220,6 +220,27 @@ export function guildPowerSmall(s) {
     .find((n) => /guild/i.test(n) && !(market && MARKET_GUILD.test(n)));
 }
 
+/** DS-DEF-4's `structure null` variants and the Defense tab's static no-organised-crime line. */
+const DS_DEF4_DENIAL = /No criminal infrastructure has been identified|goes wrong one thing at a time and belongs to whoever did it|met with genuine incomprehension|No organized criminal infrastructure detected\./;
+/** The Defense block's "Active crime patterns" list with at least one row under it. */
+const CRIME_PATTERNS_LISTED = /Active crime patterns\s*\n\s*\S/;
+
+/**
+ * A-06's reading: the phrase pair (the bare denial anywhere on the screen beside an organised
+ * network's words), and (RUNG-2 LANDING phase D, R-D2; soak1k-1801) the Defense tab's denial
+ * under the block's own "Active crime patterns". The survival pattern's own "No criminal
+ * infrastructure: …" is a pattern, not the denial, so the second arm reads DS-DEF-4's sentences.
+ * @param {string} screenText every screen surface, joined
+ * @param {string} defense the Defense tab
+ * @returns {string|null} the finding's detail, or null
+ */
+export function crimeAbsentAndOrganised(screenText, defense) {
+  if (/No criminal infrastructure/i.test(screenText) && /criminal network|thieves['’] guild|crime boss|kingpin/i.test(screenText)) return 'and an organised network elsewhere';
+  const tab = String(defense || '');
+  if (DS_DEF4_DENIAL.test(tab) && CRIME_PATTERNS_LISTED.test(tab)) return 'beside the block\'s own crime patterns';
+  return null;
+}
+
 /** Does the place have water a boat or a net could use? */
 function hasWater(s, config) {
   // The terrain home's one chain (CENSUS-1 fact 13), the birth config as the last fallback.
@@ -339,8 +360,9 @@ export function reviewSettlement(s, config, r) {
   const lacks = (screenText.match(/exists but lacks access to/g) || []).length;
   if (lacks) add('A-05:lacks-access-lines', 'screen', '', `${lacks} lines`);
 
-  // ── A-06: crime said absent beside an organised network
-  if (/No criminal infrastructure/i.test(screenText) && /criminal network|thieves['’] guild|crime boss|kingpin/i.test(screenText)) add('A-06:crime-absent-and-organised', 'screen', 'No criminal infrastructure', 'and an organised network elsewhere');
+  // ── A-06: crime said absent beside an organised network, or beside the block's own crime patterns
+  const crimeAbsent = crimeAbsentAndOrganised(screenText, r.tabs.defense);
+  if (crimeAbsent) add('A-06:crime-absent-and-organised', 'screen', 'No criminal infrastructure', crimeAbsent);
 
   // ── A-08: the fixed hidden-ruler note that never says who
   const hidden = sentencesOf(screenText).find((x) => /appears to govern is not the faction that governs/i.test(x));
