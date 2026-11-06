@@ -63,6 +63,7 @@ import { warFaithStateProseCandidates } from '../../src/domain/display/statePros
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { driftRun } from '../helpers/dossierManifest.js';
 import { ROOT } from '../helpers/dossierCorpus.js';
+import { CALM_FACTS_ADMIT_ALL } from '../helpers/calmFactsDouble.js';
 
 /**
  * THE SHIPPED CORPUS, all six state leaves merged on block id — which is the shape a desk
@@ -1164,6 +1165,9 @@ describe('the composer — turns (ARCH §4.2 step 1, §5.3)', () => {
       seed: 'shipped-probe',
       audience: 'dm',
       dimensions: dimensionsFor(block.pool),
+      // CENSUS-5: the first shipped pool (DS-DEF-1 readiness STRONG) declares fact atoms and opts
+      // into the crisis dimension, so the read carries facts, as every desk's does.
+      facts: CALM_FACTS_ADMIT_ALL,
     });
     expect(unit.pieces.length, 'every sibling pool offered, and none of them seats').toBe(1);
   });

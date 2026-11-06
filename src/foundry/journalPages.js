@@ -29,10 +29,11 @@ import {
   prominentPair, prominentType, prominentProse,
 } from '../pdf/lib/format.js';
 import { gateFaithEvents } from '../domain/display/faithEventFilter.js';
-import { composeTonightSheet, TONIGHT_COPY } from '../domain/summary/tonightSheet.js';
+import { composeTonightSheet, printsAsWant, secretLeadOf, TONIGHT_COPY } from '../domain/summary/tonightSheet.js';
 import { composeCrisisPage, CRISIS_PAGE_COPY } from '../domain/crisis/crisisPage.js';
 import { institutionDisplayName } from '../domain/display/institutionDisplayName.js';
 import { resourceDisplayName } from '../domain/display/resourceDisplayName.js';
+import { displayTradeList, revenuesOffTheLists } from '../domain/display/tradeListDisplay.js';
 import { foodwaysLineOf } from '../domain/foodways.js';
 import {
   overviewHeadline, powerHeadline, economicsHeadline, defenseHeadline,
@@ -140,7 +141,7 @@ function tonightPage(settlement) {
   return md(
     sheet.opening ? md(`## ${sheet.crisis ? TONIGHT_COPY.crisis : TONIGHT_COPY.urgent}`, esc(sheet.opening)) : null,
     sheet.people.length ? md('', `## ${TONIGHT_COPY.people}`, sheet.people.map(p =>
-      `- **${esc(p.name)}** (${esc([p.role, p.castLabel || why[p.why]].filter(Boolean).join(' · '))})${p.line ? `: ${p.why === 'secret' ? esc(p.line) : p.sameAs ? `${TONIGHT_COPY.wantsSame} ${esc(p.sameAs)}.` : `${TONIGHT_COPY.wants} ${esc(p.line)}`}` : ''}`)) : null,
+      `- **${esc(p.name)}** (${esc([p.role, p.castLabel || why[p.why]].filter(Boolean).join(' · '))})${p.line ? `: ${!printsAsWant(p) ? esc([secretLeadOf(p), p.line].filter(Boolean).join(' ')) : p.sameAs ? `${TONIGHT_COPY.wantsSame} ${esc(p.sameAs)}.` : `${TONIGHT_COPY.wants} ${esc(p.line)}`}` : ''}`)) : null,
     sheet.facts.length ? md('', `## ${TONIGHT_COPY.facts}`, sheet.facts.map(f => `- **${esc(f.label)}**: ${esc(f.text)}`)) : null,
     sheet.hooks.length ? md('', `## ${TONIGHT_COPY.hooks}`, sheet.hooks.map(h =>
       `- ${esc(h.text)}${h.source ? ` *(${esc(h.source)})*` : ''}`)) : null,
@@ -287,11 +288,14 @@ function economicsPage(vm) {
     kv('Complexity', e.economicComplexity),
     // The resource label seam: a trade list may carry a raw RESOURCE_DATA key beside an
     // authored phrase, and the VTT journal printed both exactly as the record spells them.
-    kv('Exports', (e.primaryExports || []).map(x => resourceDisplayName(x)).filter(Boolean).join(', ')),
-    kv('Imports', (e.primaryImports || []).map(x => resourceDisplayName(x)).filter(Boolean).join(', ')),
+    // F11 / CENSUS-3b unit 3: the journal reads the SCREEN's lists (one display reader).
+    kv('Exports', displayTradeList(e.primaryExports, vm.raw, { side: 'exports' }).map(x => resourceDisplayName(x)).filter(Boolean).join(', ')),
+    kv('Imports', displayTradeList(e.primaryImports, vm.raw, { side: 'imports', exports: e.primaryExports }).map(x => resourceDisplayName(x)).filter(Boolean).join(', ')),
     fb.display ? kv('Food', fb.display) : (fb.deficit ? kv('Food deficit', fb.deficit) : kv('Food surplus', fb.surplus)),
     (e.incomeSources || []).length ? md('', '## Income', e.incomeSources.map(s =>
       `- ${esc(label(s.source) || s.source)}: ${esc(Math.round(s.percentage))}%`)) : null,
+    // CENSUS-3c (R-P 2): the revenues that left the trade lists, where the record holds their fact.
+    revenuesOffTheLists(vm.raw).length ? kv('Also earned (no share recorded)', revenuesOffTheLists(vm.raw).map((r) => r.text).join(', ')) : null,
     (e.chains || []).length ? md('', '## Supply chains', e.chains.map(c =>
       `- **${esc(c.name)}** *(${esc(c.status)})*${c.description ? `: ${esc(c.description)}` : ''}`)) : null,
   );

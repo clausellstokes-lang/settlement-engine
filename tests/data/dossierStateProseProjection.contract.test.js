@@ -59,6 +59,8 @@ import {
   AUDIENCE_DM, AUDIENCE_PLAYER, STATE_MARK_DIMENSIONS,
   eligibleVariants, poolDimensions, readStateProse,
 } from '../../src/domain/display/stateProse/stateProseKernel.js';
+import { assertDeclarable } from '../../src/domain/facts/factVocabulary.js';
+import { CALM_FACTS_ADMIT_ALL } from '../helpers/calmFactsDouble.js';
 
 const ROOT = resolve(import.meta.dirname, '../..');
 
@@ -794,7 +796,12 @@ describe('the demoted state dimension — the channel the kernel enforces', () =
       .flatMap((variant) => variant.marks || []));
     const vocabulary = Object.values(STATE_MARK_DIMENSIONS).flat();
 
-    const unclassified = [...stateMarks].filter((m) => m !== 'dm-only' && !vocabulary.includes(m));
+    // CENSUS-1b wave 1: the mark vocabulary is the fact vocabulary's mark half, and a fact ATOM
+    // the projector routes into `marks` (`X` / `no X`, `crisis: …`) is classified too — but only
+    // a DECLARABLE one (a home answers it): an unknown atom, or one with no reader yet, is
+    // unclassified exactly as an unknown mark word is.
+    const declarable = (m) => { try { assertDeclarable(m.replace(/^no\s+/, '')); return true; } catch { return false; } };
+    const unclassified = [...stateMarks].filter((m) => m !== 'dm-only' && !vocabulary.includes(m) && !declarable(m));
     const inTwoDimensions = vocabulary.filter((word, i) => vocabulary.indexOf(word) !== i);
     // The causal register's arm names are family-local and OPEN (92 distinct today), so
     // they cannot be a closed vocabulary and stay outside STATE_MARK_DIMENSIONS. What must
@@ -832,7 +839,7 @@ describe('the demoted state dimension — the channel the kernel enforces', () =
         for (const value of STATE_MARK_DIMENSIONS[dimension]) {
           for (const others of otherAnswers(dims, dimension)) {
             const answered = readStateProse({ [id]: { pools: { [key]: pool } } }, id, key,
-              { slots, seed: 's', audience: AUDIENCE_DM, dimensions: { ...others, [dimension]: value } });
+              { slots, seed: 's', audience: AUDIENCE_DM, dimensions: { ...others, [dimension]: value }, facts: CALM_FACTS_ADMIT_ALL });
             if (answered === null) mute.push(`${id} :: ${key} :: ${dimension}=${value}${Object.keys(others).length ? ` with ${JSON.stringify(others)}` : ''}`);
           }
         }
@@ -852,8 +859,11 @@ describe('the demoted state dimension — the channel the kernel enforces', () =
     expect([...new Set(DIMENSIONED_POOLS.map((p) => p.id))].sort())
       // F10 WALLS-WORD (2026-11-04): sixteen more blocks partition by `walls`.
       // F12 CRISIS-BLIND (2026-11-04): six more partition by a crisis dimension (DS-DEF-1, -2, -4, -11, DS-ECO-1, DS-POW-4).
-      .toEqual(['DS-CND-1', 'DS-DEF-1', 'DS-DEF-11', 'DS-DEF-2', 'DS-DEF-4', 'DS-DEF-6', 'DS-ECO-1', 'DS-ECO-12', 'DS-ECO-3', 'DS-ECO-8', 'DS-ECO-9', 'DS-FTH-1', 'DS-GEN-1', 'DS-GEN-3',
-        'DS-GEN-6', 'DS-GEN-9', 'DS-HK-1', 'DS-POW-2', 'DS-POW-4', 'DS-POW-6', 'DS-POW-7', 'DS-STR-1', 'DS-STR-2', 'DS-WAR-1', 'DS-WAR-2']);
+      // CENSUS-3b unit 2 (2026-11-05): DS-ECO-10 (POSTURE established v1 carries `no hunger`).
+      // CENSUS-3c unit 4 (2026-11-05): DS-ECO-2 (the FOOD / GRANARY calm lines carry `no hunger`, R-K);
+      // DS-POP-1 (QUANTITY thousands v2 "retains its walls" declares `walls`, R-O's one word).
+      .toEqual(['DS-CND-1', 'DS-DEF-1', 'DS-DEF-11', 'DS-DEF-2', 'DS-DEF-4', 'DS-DEF-6', 'DS-ECO-1', 'DS-ECO-10', 'DS-ECO-12', 'DS-ECO-2', 'DS-ECO-3', 'DS-ECO-8', 'DS-ECO-9', 'DS-FTH-1', 'DS-GEN-1', 'DS-GEN-3',
+        'DS-GEN-6', 'DS-GEN-9', 'DS-HK-1', 'DS-POP-1', 'DS-POW-2', 'DS-POW-4', 'DS-POW-6', 'DS-POW-7', 'DS-STR-1', 'DS-STR-2', 'DS-WAR-1', 'DS-WAR-2']);
   });
 
   it('never returns a variant that contradicts the state it was asked about', () => {
@@ -901,7 +911,7 @@ describe('the demoted state dimension — the channel the kernel enforces', () =
     const thin = {};
     for (const audience of [AUDIENCE_DM, AUDIENCE_PLAYER]) {
       thin[audience] = DIMENSION_STATES.filter(({ pool, dims, dimension, value }) => otherAnswers(dims, dimension).some((others) => eligibleVariants(
-        pool, { slots: bagFor(pool), audience, dimensions: { ...others, [dimension]: value } },
+        pool, { slots: bagFor(pool), audience, dimensions: { ...others, [dimension]: value }, facts: CALM_FACTS_ADMIT_ALL },
       ).length <= 1)).length;
     }
     // MEASURED at 2d5112851, and the two audiences DIFFER BY ONE. The design volume
@@ -914,7 +924,7 @@ describe('the demoted state dimension — the channel the kernel enforces', () =
     // No state may go SILENT: a value with zero eligible variants is a dead branch of the
     // corpus dressed as a town with nothing to say, and the ratchet above would not see it.
     const silent = DIMENSION_STATES.filter(({ pool, dims, dimension, value }) => otherAnswers(dims, dimension).some((others) => eligibleVariants(
-      pool, { slots: bagFor(pool), audience: AUDIENCE_DM, dimensions: { ...others, [dimension]: value } },
+      pool, { slots: bagFor(pool), audience: AUDIENCE_DM, dimensions: { ...others, [dimension]: value }, facts: CALM_FACTS_ADMIT_ALL },
     ).length === 0));
     expect(silent).toEqual([]);
   });
@@ -1746,7 +1756,8 @@ describe('SEAM car 4 — §2.5\'s grammar, and every refusal it declares', () =>
     const marks = new Set(allStateBlocks.flatMap(([, b]) => Object.values(b.pools).flat())
       .flatMap((v) => v.marks || []));
     expect([...marks].filter((m) => m.startsWith('grammar'))).toEqual([]);
-    const src = readFileSync(resolve(ROOT, 'scripts/generate-dossier-state-prose.mjs'), 'utf8');
+    // CENSUS-1g unit 5: the annex parse (which routes the tag) moved verbatim to scripts/lib/dossier-annex-parse.mjs.
+    const src = readFileSync(resolve(ROOT, 'scripts/lib/dossier-annex-parse.mjs'), 'utf8');
     expect(src).toContain('GRAMMAR_TAG_RE');
     // No variant carries a grammar tag yet — Shift 1 authors them — so the claim the corpus
     // supports is the ABSENCE, pinned in both directions.

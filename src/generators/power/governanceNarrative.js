@@ -12,7 +12,7 @@
  * those precedence rules explicit when adding new narrative cases.
  */
 
-import { resolveGenerationWorldLaw } from '../generationContext.js'; import { migrationDirectionOf } from '../../domain/crisis/migrationDirection.js'; import { defenceTwinLine } from '../../data/defenceTwinLines.js'; import { defenseFactsOf } from '../../domain/defense/defenseFacts.js'; // F10: one line, so no cited line moves
+import { resolveGenerationWorldLaw } from '../generationContext.js'; import { migrationDirectionOf } from '../../domain/crisis/migrationDirection.js'; import { resolveSibling } from '../../domain/facts/drawDeclared.js'; import { factsOf } from '../../domain/facts/factsOf.js'; import { BASELINE_CONFLICT_SIBLINGS } from '../../data/powerSiblings.js'; export { BASELINE_CONFLICT_SIBLINGS }; // F10, CENSUS-1c, CENSUS-5c (R-AB: the table moved to data/powerSiblings.js, re-exported): one line, so no cited line moves
 
 const SMALL_SETTLEMENT_TIERS = new Set(['thorp', 'hamlet', 'village']);
 
@@ -592,7 +592,7 @@ const buildReligiousConversionNarrative = (governingFactionName) => {
   );
 };
 
-const buildMigrationNarrative = (institutionFlags, governingFactionName) => {
+const buildMigrationNarrative = (institutionFlags, governingFactionName, migrationEntry = null) => {
   if ((institutionFlags.economyOutput || 50) >= 50) {
     return (
       'The settlement is receiving more people than its infrastructure was built for. ' +
@@ -604,7 +604,8 @@ const buildMigrationNarrative = (institutionFlags, governingFactionName) => {
   // RUNG2-F13 (soak1k-0, soak1k-4204): the weak-economy arm told a DEPARTURE under an influx. It
   // reads the one direction now (domain/crisis/migrationDirection.js); the power step holds the
   // kind, not the entry, and the entry is born from the same catalog fact. No draw either way.
-  if (migrationDirectionOf(null) === 'exodus') {
+  // CENSUS-1b unit B: the power step now receives the stress ENTRIES, so the direction is the entry's.
+  if (migrationDirectionOf(migrationEntry) === 'exodus') {
     return 'Three families left this week. Two more last week. The departure is quiet and orderly, which makes it worse. The people leaving have thought it through. What remains is those who cannot leave, those who choose to stay, and institutions running on fewer people than they were designed for.';
   }
   return (
@@ -626,6 +627,7 @@ const buildSlaveRevoltNarrative = (institutionNames) => {
 };
 
 const buildStressNarratives = ({
+  migrationEntry = null,
   baselineConflict,
   institutionFlags,
   institutionNames,
@@ -695,6 +697,7 @@ const buildStressNarratives = ({
     mass_migration: buildMigrationNarrative(
       institutionFlags,
       governingFactionName,
+      migrationEntry,
     ),
     slave_revolt: buildSlaveRevoltNarrative(institutionNames),
   };
@@ -720,6 +723,7 @@ export const buildGovernanceLabels = ({
   governingFaction: configuredGoverningFaction,
   hasNobleInstitution,
   stressTypes,
+  stressEntries = [],
   fallbackStressType,
   worldLaw = null, // absent, it resolves from config exactly as generatePowerStructure builds its own
 }) => {
@@ -755,7 +759,7 @@ export const buildGovernanceLabels = ({
   const governingFactionName =
     factions.find(faction => faction.isGoverning)?.faction || null;
 
-  let recentConflict = defenceTwinLine(deriveBaselineConflict({ // F10: a soldiers line its twin where no garrison or hired company stands (data/defenceTwinLines.js)
+  let recentConflict = resolveSibling(deriveBaselineConflict({ // F10, CENSUS-1c: a soldiers line its declared sibling where no garrison or hired company stands (BASELINE_CONFLICT_SIBLINGS, data/powerSiblings.js)
     stressFlags,
     institutionFlags,
     institutionSignals,
@@ -764,7 +768,7 @@ export const buildGovernanceLabels = ({
     monsterThreat: config?.monsterThreat,
     hasRoyalAuthority,
     hasNoblePower,
-  }), defenseFactsOf({ institutions: (institutionNames || []).map((name) => ({ name })) }));
+  }), BASELINE_CONFLICT_SIBLINGS, { facts: () => factsOf({ institutions: (institutionNames || []).map((name) => ({ name })) }), poolId: 'governanceNarrative:BASELINE_CONFLICT_SIBLINGS', surface: 'power', drawKind: 'T' });
 
   const primaryStress = selectPrimaryStress(
     stressTypes,
@@ -775,6 +779,7 @@ export const buildGovernanceLabels = ({
     tier,
   );
   const stressNarratives = buildStressNarratives({
+    migrationEntry: (stressEntries || []).find((e) => e?.type === 'mass_migration') ?? null,
     baselineConflict: recentConflict,
     institutionFlags,
     institutionNames,

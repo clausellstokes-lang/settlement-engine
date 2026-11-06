@@ -16,7 +16,7 @@ import { PageChrome } from '../primitives/PageChrome.jsx';
 import { ChapterBand, GoldRule, HairRule } from '../primitives/Dense.jsx';
 import { NotesField } from '../primitives/Editable.jsx';
 import { type, palette, space, pt } from '../theme.js';
-import { composeTonightSheet, TONIGHT_COPY } from '../../domain/summary/tonightSheet.js';
+import { composeTonightSheet, printsAsWant, secretLeadOf, TONIGHT_COPY } from '../../domain/summary/tonightSheet.js';
 import { CrisisSections } from './CrisisSections.jsx';
 
 /** @param {{ children: string, color: string }} props */
@@ -65,7 +65,7 @@ export function TonightAtTheTable({ settlement, narrativeMode }) {
               </Text>
               {p.line ? (
                 <Text style={{ ...type.body, color: palette.second, fontSize: pt['9'], lineHeight: 1.3 }}>
-                  {p.why === 'secret' ? p.line : p.sameAs ? `${TONIGHT_COPY.wantsSame} ${p.sameAs}.` : `${TONIGHT_COPY.wants} ${p.line}`}
+                  {!printsAsWant(p) ? [secretLeadOf(p), p.line].filter(Boolean).join(' ') : p.sameAs ? `${TONIGHT_COPY.wantsSame} ${p.sameAs}.` : `${TONIGHT_COPY.wants} ${p.line}`}
                 </Text>
               ) : null}
             </View>

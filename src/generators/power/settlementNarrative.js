@@ -26,6 +26,8 @@ export const STRESS_FLAVOR = {
 };
 
 // STRESS_RUMORS — each renders a rumour phrasing from a relationship object
+// {colour} (CENSUS-2e, R-R; ledger docs/census/declarations/STRESS_RUMORS.json): the fixed words presume
+// only the two NPCs the key supplies, and the `tension` slot is upstream relationship prose, declared there.
 const STRESS_RUMORS = [
   (rel) => {
     var detail;

@@ -1,0 +1,79 @@
+{
+  "id": "tradeGoods.deriveLocalCommodities",
+  "source": "src/generators/economy/tradeGoods.js :: deriveLocalCommodities",
+  "drawKind": "T",
+  "pool": {
+    "declares": [],
+    "crisisScoped": false,
+    "colour": false,
+    "notes": "localProduction commodities (lowercase). Resource-derived commodities come from RESOURCE_DATA (data, not here; includes the abstract \"trade_access\" commodity of crossroads_position/defended_pass — CATEGORY ERROR, an access fact not a commodity). The seven institution-bonus rows below match institution NAMES by bare substring (private regex) — declared on the row with the reader that should answer.",
+    "needs": [],
+    "excludes": []
+  },
+  "rows": [
+    {
+      "id": "tradeGoods.deriveLocalCommodities::flour",
+      "text": "flour",
+      "needs": [
+        "institution: mill"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "Branch n.includes('mill')||'baker': a SAWMILL or a baker alone adds flour (INSTITUTION_KIND_PATTERNS.mill excludes sawmill). producer: institution: mill / food-source: mill."
+    },
+    {
+      "id": "tradeGoods.deriveLocalCommodities::ironwork",
+      "text": "ironwork",
+      "needs": [
+        "institution: smith"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "Branch 'smith'||'metalwork' substring."
+    },
+    {
+      "id": "tradeGoods.deriveLocalCommodities::leather",
+      "text": "leather",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "unhomed: tannery (no institution kind). Branch tanner/leather substring."
+    },
+    {
+      "id": "tradeGoods.deriveLocalCommodities::cloth",
+      "text": "cloth",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "unhomed: weaver (no institution kind). Branch weaver/textile."
+    },
+    {
+      "id": "tradeGoods.deriveLocalCommodities::meat",
+      "text": "meat",
+      "needs": [
+        "livestock"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "unhomed: butcher. Presumes herds."
+    },
+    {
+      "id": "tradeGoods.deriveLocalCommodities::lumber",
+      "text": "lumber",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "unhomed: carpenter/sawmill."
+    },
+    {
+      "id": "tradeGoods.deriveLocalCommodities::salt",
+      "text": "salt",
+      "needs": [
+        "coast"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "Branch dock||port||fishmonger substring: a RIVER dock (or any name containing 'port', e.g. 'support') yields sea salt. producer: unhomed: salt pans."
+    }
+  ]
+}

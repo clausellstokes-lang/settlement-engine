@@ -1,0 +1,240 @@
+{
+  "pool": {
+    "id": "npcData.NPC_FEATURES",
+    "file": "src/data/npcData.js",
+    "drawKind": "R",
+    "drawSite": "npcGenerator.js:355 pickFromArray",
+    "colour": true,
+    "crisisScoped": false,
+    "keyDeclares": {},
+    "lines": 28,
+    "declaring": 0,
+    "note": "Physical features; every line is colour."
+  },
+  "rows": [
+    {
+      "id": "#0",
+      "text": "a scar cutting through one eyebrow",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#1",
+      "text": "ink-stained fingers",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#2",
+      "text": "surprisingly soft hands",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#3",
+      "text": "eyes that are slightly different colours",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#4",
+      "text": "a jaw set permanently as if biting back words",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#5",
+      "text": "hair prematurely grey for their apparent age",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#6",
+      "text": "an old injury that affects their gait",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#7",
+      "text": "a ring on every finger",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#8",
+      "text": "a branded mark they keep covered",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#9",
+      "text": "laugh lines that run deep",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#10",
+      "text": "a voice that carries further than intended",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#11",
+      "text": "teeth that have been replaced with metal",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#12",
+      "text": "a prosthetic hand, finely crafted",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#13",
+      "text": "heavy-lidded eyes that suggest either wisdom or exhaustion",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#14",
+      "text": "a network of small scars on their knuckles",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#15",
+      "text": "a habit of standing very still",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#16",
+      "text": "a slight accent",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#17",
+      "text": "sun-darkened skin that suggests years outdoors",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#18",
+      "text": "a perpetual half-smile",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#19",
+      "text": "a cough they suppress with visible effort",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#20",
+      "text": "unusually long fingers",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#21",
+      "text": "close-cropped hair",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#22",
+      "text": "a full beard maintained with military precision",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#23",
+      "text": "a shaved head with old tattoos",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#24",
+      "text": "ink-work visible at the collar and cuffs",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#25",
+      "text": "a sealed letter always tucked in their belt",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#26",
+      "text": "a cloak clasped with an unusual brooch",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#27",
+      "text": "eyes that never stop moving",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    }
+  ]
+}

@@ -25,6 +25,7 @@ import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.j
 import { generalDeskLines } from '../generalDeskRead.js'; // DS-GEN-18 · the general desk's ONE caller
 import Button from '../../primitives/Button.jsx';
 import { institutionDisplayName } from '../../../domain/display/institutionDisplayName.js';
+import { displayTradeList, tradeMarksOnPage, revenuesOffTheLists } from '../../../domain/display/tradeListDisplay.js'; // CENSUS-3b unit 3 — the trade lists' one display reader (kind A, filterDeclared)
 import { resourceDisplayName } from '../../../domain/display/resourceDisplayName.js'; // §934.22 item 2 — the native-resource label seam (the Imports pills)
 import { edged } from '../../../design/edgedBox.js';
 import { foodStoresWords } from '../../../domain/summary/tonightSheet.js'; // the stores sentence's ONE writer (TRIM-2 request 3)
@@ -344,6 +345,15 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
     if (!res || Array.isArray(res.imports)) return [];
     return res.imports?.critical || [];
   })();
+  // CENSUS-3b unit 3: the lists AS PRINTED — the category errors out, the export wins over the
+  // import, every item filtered by its declaration (the luxury class: `tier: ≥ village`). The
+  // record's lists are untouched; the legend reads the marks actually on the page.
+  const shownExports = displayTradeList(eco.primaryExports, s, { side: 'exports' });
+  const shownImports = displayTradeList(
+    [...(eco.primaryImports || []), ...terrainCriticals.filter(tc => !(eco.primaryImports || []).some(imp => imp.toLowerCase().includes(tc.toLowerCase())))],
+    s, { side: 'imports', exports: eco.primaryExports });
+  const exportMarks = tradeMarksOnPage(shownExports);
+  const shownCriticals = terrainCriticals.filter(tc => shownImports.some(imp => imp.toLowerCase().includes(tc.toLowerCase()) || tc.toLowerCase().includes(imp.toLowerCase())));
 
   const _hasCrit = eco.tradeDependencies?.some(d => d.severity === 'critical');
   const _sp = eco.safetyProfile || {};
@@ -431,6 +441,11 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
             </div>
             );
           })}
+          {/* CENSUS-3c (R-P 2): the revenues that left the trade lists, where the record holds the
+              fact behind them; unmeasured, because the record holds no share for them. */}
+          {revenuesOffTheLists(s).length>0&&<div style={{fontSize:proseFontSize(FS.xs, mobile),color:MUTED,lineHeight:1.45}}>
+            Also earned, with no share recorded: {revenuesOffTheLists(s).map((r,i)=><span key={r.text}>{i>0?' ':''}<strong style={{fontWeight:700}}>{r.text}</strong>, {r.desc}</span>)}
+          </div>}
         </div>
       </Section>}
 
@@ -440,14 +455,14 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
       <DeskLines mount="economics.commercialProfile" settlementName={s?.name} tier={s?.tier} rungs={[deskProse.incomeMix, deskProse.criminalLine]} />
 
       {/* ── TRADE PROFILE (exports + imports unified) ───────────────────── */}
-      {(eco.primaryExports?.length>0||eco.primaryImports?.length>0||eco.localProduction?.length>0)&&<Section title="Trade Profile" collapsible defaultOpen>
+      {(shownExports.length>0||shownImports.length>0||eco.localProduction?.length>0)&&<Section title="Trade Profile" collapsible defaultOpen>
         <div style={{display:'grid',gridTemplateColumns:mobile?'1fr':'1fr 1fr',gap:12,marginBottom:eco.localProduction?.length>0?12:0}}>
           {/* Exports */}
           <div>
             <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch.success,marginBottom:6}}>Exports</div>
-            {eco.primaryExports?.length>0
+            {shownExports.length>0
               ?<div style={{display:'flex',flexWrap:'wrap',gap:4}}>
-                {eco.primaryExports.map((e,i)=>{
+                {shownExports.map((e,i)=>{
                   const transit=e.includes('(transit)');
                   const ownership=tradeLabelOwnership(eco,'exports',e);
                   const title=ownership.members.length
@@ -458,7 +473,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
                   if(ownership.customOnly) return <span key={i} title={title} style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:GOLD_DEEP,...GOLD_TINT,borderWidth:1,borderStyle:'solid',padding:'3px 9px',display:'inline-flex',alignItems:'center',gap:4}}>{e}{ownership.members.length?<span style={{fontWeight:600,opacity:0.8}}> · incl. {ownership.members.length}</span>:null}<span style={{fontWeight:800}}>✦</span></span>;
                   return <span key={i} title={title} style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:600,color:transit?'#2a3a7a':'#1a5a28',background:transit?'#eaecf8':'#e8f5ec',border:`1px solid ${transit?'#a8b8e8':'#a8d8b0'}`,padding:'3px 9px',display:'inline-flex',alignItems:'center',gap:4}}>{e}{ownership.mixed?<span style={{fontWeight:700,color:GOLD_DEEP}}>{ownership.members.length?` · incl. ${ownership.members.length} ✦`:' · also custom ✦'}</span>:null}</span>;
                 })}
-                {eco.isEntrepot&&<div style={{width:'100%',fontSize:chromeFontSize(FS.xxs, mobile),color:swatch.info,fontStyle:'italic',marginTop:4}}>Blue = re-exported transit goods</div>}
+                {exportMarks.has('transit')&&<div style={{width:'100%',fontSize:chromeFontSize(FS.xxs, mobile),color:swatch.info,fontStyle:'italic',marginTop:4}}>Blue = re-exported transit goods</div>}
               </div>
               :<p style={{fontSize:proseFontSize(FS.sm, mobile),color:MUTED,fontStyle:'italic',margin:0}}>No significant exports.</p>
             }
@@ -466,9 +481,9 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
           {/* Imports */}
           <div>
             <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch.danger,marginBottom:6}}>Imports</div>
-            {eco.primaryImports?.length>0
+            {shownImports.length>0
               ?<div style={{display:'flex',flexWrap:'wrap',gap:4}}>
-                {[...eco.primaryImports, ...terrainCriticals.filter(tc => !eco.primaryImports.some(imp => imp.toLowerCase().includes(tc.toLowerCase())))].sort().map((imp,i)=>{
+                {[...shownImports].sort().map((imp,i)=>{
                     const n=eco.necessityImports?.some(x=>imp.toLowerCase().includes(x.toLowerCase()));
                     const t=terrainCriticals.some(tc=>imp.toLowerCase().includes(tc.toLowerCase())||tc.toLowerCase().includes(imp.toLowerCase()));
                     const color = t?'#7a0a0a':n?'#8b1a1a':'#7a5010';
@@ -489,9 +504,9 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
                     if(ownership.customOnly) return <span key={i} title={title} style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:GOLD_DEEP,...GOLD_TINT,borderWidth:1,borderStyle:'solid',padding:'3px 9px',display:'inline-flex',alignItems:'center',gap:4}}>{impLabel}{ownership.members.length?<span style={{fontWeight:600,opacity:0.8}}> · incl. {ownership.members.length}</span>:null}<span style={{fontWeight:800}}>✦</span></span>;
                     return <span key={i} title={title} style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:600,color,background:bg,border:`1px solid ${bdr}`,padding:'3px 9px',display:'inline-flex',alignItems:'center',gap:4}}>{impLabel}{ownership.mixed?<span style={{fontWeight:700,color:GOLD_DEEP}}>{ownership.members.length?` · incl. ${ownership.members.length} ✦`:' · also custom ✦'}</span>:null}</span>;
                   })}
-                {(eco.necessityImports?.length>0||terrainCriticals.length>0)&&<div style={{width:'100%',fontSize:proseFontSize(FS.xxs, mobile),color:swatch.inkMag3,fontStyle:'italic',marginTop:4}}>
-                  {terrainCriticals.length>0&&<span style={{color:swatch['#7A0A0A']}}>Terrain cannot produce</span>}
-                  {terrainCriticals.length>0&&eco.necessityImports?.length>0&&<span> · </span>}
+                {(eco.necessityImports?.length>0||shownCriticals.length>0)&&<div style={{width:'100%',fontSize:proseFontSize(FS.xxs, mobile),color:swatch.inkMag3,fontStyle:'italic',marginTop:4}}>
+                  {shownCriticals.length>0&&<span style={{color:swatch['#7A0A0A']}}>Terrain cannot produce</span>}
+                  {shownCriticals.length>0&&eco.necessityImports?.length>0&&<span> · </span>}
                   {eco.necessityImports?.length>0&&<span style={{color:swatch.danger}}>Settlement necessity</span>}
                 </div>}
               </div>

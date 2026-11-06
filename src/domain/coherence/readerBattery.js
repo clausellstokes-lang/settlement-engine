@@ -23,10 +23,10 @@
  * Pure.
  */
 
-import { POWER_ROLES_BY_CATEGORY } from '../../data/historyData.js';
-import { NOBLE_ROLES } from '../../generators/npc/factionRoleCatalog.js';
-import { hasMarketInstitution } from '../facts/market.js';
+import { ROLE_CLASS, classOfRole, holdsOffice, shareTradeOrOffice, exemptedVerdict, seatFactions, PRESUMING_KINDS, factionRoleFits } from '../roles/roleClass.js';
+import { factsOf } from '../facts/factsOf.js'; // CENSUS-1c unit 6c: the market, watch and guard answers
 import { nativeSemanticName } from '../content/customContentSemanticAuthority.js';
+import { wantRegisterFault } from '../summary/tonightSheet.js';
 import { collect, str } from './recordBattery.js';
 import { waterOf } from '../facts/water.js';
 import { terrainClassOf, tradeRouteOf } from '../facts/terrain.js';
@@ -180,130 +180,9 @@ export function readerDistributions(s, surfaces = null) {
 
 // ──────────────────────────── 3. relation-types ────────────────────────────
 
-/**
- * THE ROLE→CLASS MAP: every role the NPC generator draws (`historyData.js ::
- * POWER_ROLES_BY_CATEGORY`, the noble roles of `factionRoleCatalog.js :: NOBLE_ROLES`) to one of
- * nine classes. Category → class: government → office (its noble roles → noble), religious →
- * clergy, crafts → trade, military → military, economy → merchant, criminal → criminal, magic →
- * arcane; `other` is classed one by one below (a role with no shared trade or office stays
- * `other` and is not judged). A role the map does not know is `other`.
- */
-const CATEGORY_CLASS = Object.freeze({ government: 'office', religious: 'clergy', crafts: 'trade', military: 'military', economy: 'merchant', criminal: 'criminal', magic: 'arcane', other: 'other' });
-const ROLE_OVERRIDES = Object.freeze({
-  // economy roles that are a craft, not a counting-house
-  'Master Craftsman': 'trade', 'Master Shipwright': 'trade',
-  // `other`, classed one by one
-  'Miller': 'trade', 'Blacksmith': 'trade', 'Shepherd': 'trade', 'Woodcutter': 'trade', 'Widowed Farmer': 'trade',
-  'Fisherman': 'trade', 'Apothecary': 'trade', 'Master Builder': 'trade', 'Innkeeper': 'trade', 'Tavern Owner': 'trade',
-  'Gravedigger': 'trade', 'Rat Catcher': 'trade', 'Cartographer': 'trade', 'Midwife': 'trade', 'Healer': 'trade',
-  'Dockworker/Stevedore': 'trade',
-  'Village Priest': 'clergy', 'Street Preacher': 'clergy',
-  'Hedge Witch': 'arcane',
-  'Elder': 'office', 'Disgraced Official': 'office',
-  'Mercenary-for-Hire': 'military', 'Wounded Soldier': 'military',
-  'Debt-Ridden Noble': 'noble',
-  'Wandering Peddler': 'merchant', 'Debt Collector': 'merchant',
-  // faction-pool titles (`factionRoles.js :: FACTION_ROLES`)
-  'High Priestess': 'clergy', 'Watch Captain': 'military', 'Guildmaster': 'merchant', 'Senior Trader': 'merchant',
-  'Kingpin': 'criminal', 'Lieutenant': 'criminal', 'Lord Mayor': 'office', 'Archmagister': 'arcane',
-});
-
-/** @returns {Readonly<Record<string,string>>} role → class */
-function buildRoleClass() {
-  /** @type {Record<string,string>} */
-  const map = {};
-  const nobles = new Set(NOBLE_ROLES.map((r) => r.role));
-  for (const [category, roles] of Object.entries(POWER_ROLES_BY_CATEGORY)) {
-    const list = Array.isArray(roles) ? roles : Object.values(roles).flat();
-    for (const r of list) {
-      const role = typeof r === 'string' ? r : str(r?.role);
-      if (!role) continue;
-      map[role] = nobles.has(role) ? 'noble' : (CATEGORY_CLASS[/** @type {keyof typeof CATEGORY_CLASS} */ (category)] ?? 'other');
-    }
-  }
-  return Object.freeze({ ...map, ...ROLE_OVERRIDES });
-}
-export const ROLE_CLASS = buildRoleClass();
-
-/** @param {string} role */
-export const classOfRole = (role) => ROLE_CLASS[role] ?? 'other';
-
-/** Classes that share an office or a trade between them (a governance seat; a counting-house and its craft). */
-const FAMILY = Object.freeze({ office: 'governance', noble: 'governance', clergy: 'faith', military: 'arms', arcane: 'arcane', criminal: 'crime', merchant: 'commerce', trade: 'commerce', other: 'other' });
-/** A craft role that names no one trade (it sits beside any craft). */
-const GENERIC_CRAFT = /^(?:Master Craftsman|Guild Warden|Journeyman Overseer|Craft Guild Representative|Guild Master|Guildmaster)$/;
-/** @param {string} role the trade a trade role names ("Master Blacksmith" → "blacksmith") */
-const tradeOf = (role) => role.replace(/^(?:Master|Head) /, '').toLowerCase();
-/** Holds an office: a seat of government or rank, a command, a senior see, a guild's head. */
-const HOLDS_OFFICE = /Captain|Commander|Chief|Warden|Marshal|Master of Arms|Quartermaster|High Priest|Archbishop|Abbot|Inquisitor|Head of the Faithful|Guild ?[Mm]aster|Market Overseer|Magister|Archmage/;
-/** @param {string} role */
-const holdsOffice = (role) => ['office', 'noble'].includes(classOfRole(role)) || HOLDS_OFFICE.test(role);
-
-/**
- * Do two roles share a trade or an office? Unknown (`other`) roles are not judged.
- * @param {string} a @param {string} b @returns {boolean|null} null = not judged
- */
-export function shareTradeOrOffice(a, b) {
-  const ca = classOfRole(a); const cb = classOfRole(b);
-  if (ca === 'other' || cb === 'other') return null;
-  if (FAMILY[/** @type {keyof typeof FAMILY} */ (ca)] !== FAMILY[/** @type {keyof typeof FAMILY} */ (cb)]) return false;
-  if (ca === 'trade' && cb === 'trade' && !GENERIC_CRAFT.test(a) && !GENERIC_CRAFT.test(b)) return tradeOf(a) === tradeOf(b);
-  return true;
-}
-
-const PRESUMING_KINDS = /** @type {const} */ (['Mentor and Successor', 'Professional Rivalry', 'Jurisdictional Tension']);
-
-/** The seat's holder: the tier's head role (`npcGenerator.js :: TIER_MANDATORY_ROLES`: Elder, Mayor, Governor) and the Lord Mayor. */
-const SEAT_ROLE = /^(?:Elder|Mayor|Lord Mayor|Governor)$/;
-/** Classes that share (the chair's ruling Q1): the same class, or noble with office. */
-const classesShare = (/** @type {string} */ ca, /** @type {string} */ cb) => ca === cb || (ca === 'noble' && cb === 'office') || (ca === 'office' && cb === 'noble');
-
-/**
- * The factions that hold or contest the seat, which count as ONE office (the chair's ruling Q1):
- * the governing faction and every faction whose `contestsNiche` names it.
- * @param {any} s @returns {Set<string>}
- */
-function seatFactions(s) {
-  const ps = s?.powerStructure ?? {};
-  const factions = Array.isArray(ps.factions) ? ps.factions : [];
-  const governing = new Set([str(ps.governingName), ...factions.filter((/** @type {any} */ f) => f?.isGoverning).map((/** @type {any} */ f) => str(f.faction ?? f.name))].filter(Boolean));
-  for (const f of factions) if (governing.has(str(f?.contestsNiche))) governing.add(str(f.faction ?? f.name));
-  return governing;
-}
-
-/**
- * THE EXEMPTED RULE (the chair's ruling Q1, 2026-11-04, verbatim): "two roles share a class when
- * they are in the same class of your map, OR when both are members of the same faction (the
- * faction that holds or contests the seat counts as one office), OR when one holds the seat and
- * the other sits in the body that holds it. Clergy↔clergy, arcane↔arcane, military↔military,
- * criminal↔criminal, merchant↔merchant, noble↔office share. Professional Rivalry needs a shared
- * trade or a shared market (two merchants, two craft masters), else fires. Jurisdictional Tension
- * needs two office-holders (any two offices), else fires."
- * Unit 12 (the chair's ruling, 2026-11-04): "Professional Rivalry PASSES between two
- * office-holders, between noble and office, and between noble and noble … it also passes within
- * one class … same trade, shared market. It FIRES only across unrelated classes" and "the faction
- * and seat exemptions apply to Professional Rivalry too". Jurisdictional Tension stays (two
- * offices). Read here: merchant with trade is a shared market; `other` roles stay unjudged.
- * @param {string} kind @param {{ role: string, npc: any }} a @param {{ role: string, npc: any }} b @param {Set<string>} seat
- * @returns {{ fires: boolean|null, why: string }} null = not judged
- */
-export function exemptedVerdict(kind, a, b, seat) {
-  const ca = classOfRole(a.role); const cb = classOfRole(b.role);
-  if (kind === 'Jurisdictional Tension') return { fires: !(holdsOffice(a.role) && holdsOffice(b.role)), why: 'two office-holders' };
-  if (ca === 'other' || cb === 'other') return { fires: null, why: '' };
-  if (kind === 'Professional Rivalry') {
-    // Unit 12 (the chair's ruling): rivals for standing (two offices, noble and office, noble and
-    // noble), one class, a shared trade or a shared market (merchant and trade read as the market).
-    if (ca === cb) return { fires: false, why: 'same class' };
-    if (['office', 'noble'].includes(ca) && ['office', 'noble'].includes(cb)) return { fires: false, why: 'rivals for standing' };
-    if (['merchant', 'trade'].includes(ca) && ['merchant', 'trade'].includes(cb)) return { fires: false, why: 'a shared market' };
-  } else if (classesShare(ca, cb)) return { fires: false, why: 'same class' };
-  const fa = str(a.npc?.factionAffiliation); const fb = str(b.npc?.factionAffiliation);
-  if (fa && fa === fb) return { fires: false, why: 'same faction' };
-  if (fa && fb && seat.has(fa) && seat.has(fb)) return { fires: false, why: 'the seat\'s factions, one office' };
-  if ((SEAT_ROLE.test(a.role) && seat.has(fb)) || (SEAT_ROLE.test(b.role) && seat.has(fa))) return { fires: false, why: 'seat and its body' };
-  return { fires: true, why: '' };
-}
+// THE ROLE-CLASS RULE lives in `../roles/roleClass.js` (CENSUS-4: one rule, one home, read by the
+// generator's tie step and by this instrument); re-exported for this module's readers.
+export { ROLE_CLASS, classOfRole, shareTradeOrOffice, exemptedVerdict };
 
 /**
  * A relationship whose kind presumes a shared trade or office between two roles that share none.
@@ -378,7 +257,11 @@ export function tensionMemoryFindings(s, surfaces) {
 // ──────────────────────────── 5. hook-pools ────────────────────────────
 
 const GUARD_WORDS = /\b(?:guard captain|guards?|garrison|the watch|watch ?(?:captain|commander|house)|watchm[ae]n|city watch|town watch|soldiers?|sentries|sentry)\b/i;
-const ENFORCEMENT_HOUSE = /watch|guard|garrison|barracks|militia|levy|citadel|mercenar|free company|hired blades|warden/i;
+// CENSUS-1c unit 6c (the vocabulary rulings §6): the enforcement HOUSE is the fact home's composite
+// `guardPresence` (watch ∨ garrison ∨ militia ∨ hired company), not this instrument's own regex;
+// the people half (a guard-like role on the roster) stays the instrument's. "The old guard" is an
+// idiom (a faction's veterans), excluded from the guard sense until the hook lines declare.
+const GUARD_IDIOM = /\bthe old guard\b/gi;
 const ENFORCEMENT_ROLE = /Guard|Watch|Garrison|Commander|Soldier|Warden|Mercenary|Knight|Master of Arms|Quartermaster|Captain/;
 const SEA_HOOK_WORDS = /\b(?:harbou?rs?|ships?|shipbuilding|shipwrights?|shipyards?|shipping|docks?|dockside|dock-side|wharf|wharves|quays?|fleet|sailors?|boats?|seafar\w*|the sea)\b/i;
 
@@ -394,13 +277,13 @@ export function hookPoolsFindings(s, surfaces) {
   /** @type {Array<{surface:string,quote:string,detail:string}>} */
   const out = [];
   const lines = linesOf(surfaces.plot_hooks);
-  const enforcement = houseNames(s).some((h) => ENFORCEMENT_HOUSE.test(h))
+  const enforcement = factsOf(s).guardPresence === true
     || (Array.isArray(s?.npcs) ? s.npcs : []).some((/** @type {any} */ n) => ENFORCEMENT_ROLE.test(str(n?.role)));
   if (!enforcement) {
-    const hit = lines.find((x) => GUARD_WORDS.test(x));
-    if (hit) out.push({ surface: 'plot_hooks', quote: hit, detail: `[guard] "${str(hit.match(GUARD_WORDS)?.[0])}" with no enforcement body` });
+    const hit = lines.find((x) => GUARD_WORDS.test(x.replace(GUARD_IDIOM, '')));
+    if (hit) out.push({ surface: 'plot_hooks', quote: hit, detail: `[guard] "${str(hit.replace(GUARD_IDIOM, '').match(GUARD_WORDS)?.[0])}" with no enforcement body` });
   }
-  if (!hasNavigableWater(s)) {
+  if (!factsOf(s).water.navigable) {
     const hit = lines.find((x) => SEA_HOOK_WORDS.test(x));
     if (hit) out.push({ surface: 'plot_hooks', quote: hit, detail: `[sea] "${str(hit.match(SEA_HOOK_WORDS)?.[0])}" at terrain ${terrainOf(s)}, route ${routeOf(s)}` });
   }
@@ -426,13 +309,24 @@ export function traditionsWaterFindings(s, surfaces) {
 // ──────────────────────────── 7. tonight-wants ────────────────────────────
 
 /**
- * On the Tonight sheet, "Wants to" followed by a capitalised word — a sentence, not a want
- * ("Wants to Was approached…", "Wants to The supplies…"). A want's verb is lower-case.
+ * Every "Wants to" line on the Tonight sheet read by THE ONE SHAPE RULE (`tonightSheet.js ::
+ * wantRegisterFault`, lane R11): `[sentence-not-a-want]` — a sentence pasted after "Wants to"
+ * ("Wants to Was approached…", "Wants to The supplies…"); `[abstract-register]` — a want in
+ * management prose no DM can say aloud ("Wants to convert governance instability into…"). One
+ * finding per sub-case per settlement; the detail counts its lines.
  * @param {any} _s @param {Readonly<Record<string,string>>} surfaces
  */
 export function tonightWantsFindings(_s, surfaces) {
-  const hits = linesOf(surfaces.tonight).filter((x) => /\bWants to [A-Z]/.test(x));
-  return hits.length ? [{ surface: 'tonight', quote: hits[0], detail: `${hits.length} lines; starts "${str(hits[0].match(/\bWants to ([A-Z][\w'’]*)/)?.[1])}"` }] : [];
+  /** @type {Array<{surface:string,quote:string,detail:string}>} */
+  const out = [];
+  const wants = linesOf(surfaces.tonight).filter((x) => /\bWants to /.test(x));
+  for (const tag of /** @type {const} */ (['sentence-not-a-want', 'abstract-register'])) {
+    const hits = wants.filter((x) => wantRegisterFault(x.slice(x.indexOf('Wants to ') + 9)) === tag);
+    if (!hits.length) continue;
+    const lead = str(hits[0].slice(hits[0].indexOf('Wants to ') + 9).match(/^[\w'’-]+/)?.[0]);
+    out.push({ surface: 'tonight', quote: hits[0], detail: `[${tag}] ${hits.length} lines; starts "${lead}"` });
+  }
+  return out;
 }
 
 // ──────────────────────────── 8. rule-text ────────────────────────────
@@ -476,14 +370,14 @@ export function possessiveSlipFindings(_s, surfaces) {
 // ───────────────────────── 10. daily-life-placeholder ─────────────────────────
 
 const PLACEHOLDER = 'dawn, the market, the tavern, the watch';
-const WATCH_HOUSE = /watch|guard|garrison/i;
 
 /**
  * The Daily Life placeholder line where it names what the place lacks — ONCE per settlement
  * (the chair's ruling, 2026-11-04): it counts when the line renders AND at least one sub-case
  * holds, and the detail names which: `[no-market]` (no market by the engine's predicate,
  * `viability.js :: hasMarketInstitution`; a Periodic market is a market, the chair's ruling on
- * soak1k-313), `[no-watch]` (no watch, guard or garrison house), or both. How many pages carry
+ * soak1k-313), `[no-watch]` (no watch: `factsOf(record).defence.watch`, CENSUS-1c unit 6c — a
+ * garrison is not a watch), or both. How many pages carry
  * the line at all is a distribution (`readerDistributions :: dailyLifeLine`), not a finding.
  * @param {any} s @param {Readonly<Record<string,string>>} surfaces
  */
@@ -491,11 +385,35 @@ export function dailyLifePlaceholderFindings(s, surfaces) {
   const hit = linesOf(surfaces.daily_life).find((x) => x.includes(PLACEHOLDER));
   if (!hit) return [];
   const lacks = [
-    ...(!hasMarketInstitution(s?.institutions) ? ['no-market'] : []),
-    ...(!houseNames(s).some((h) => WATCH_HOUSE.test(h)) ? ['no-watch'] : []),
+    ...(!factsOf(s).market ? ['no-market'] : []),
+    ...(!factsOf(s).defence.watch ? ['no-watch'] : []),
   ];
   if (!lacks.length) return [];
   return [{ surface: 'daily_life', quote: hit, detail: `${lacks.map((x) => `[${x}]`).join('')} ${lacks.map((x) => x.replace('-', ' ')).join(', ')}` }];
+}
+
+// ───────────────────────── 11. faction-role-fit ─────────────────────────
+
+/**
+ * A faction that seats a member whose role does not fit its kind (R12, the chair's ruling of
+ * 2026-11-04: religious → clergy; noble → noble or office; military → military; criminal →
+ * criminal; `domain/roles/roleClass.js :: factionRoleFits`, the rule the assembly seam applies).
+ * Read on the record: each power faction's category against the roles of the NPCs affiliated to
+ * it; the factions that hold or contest the seat also seat office-holders and nobles (ruling Q1). One finding per misfit faction; the detail names the misfit roles and their classes.
+ * @param {any} s @param {Readonly<Record<string,string>>} _surfaces
+ */
+export function factionRoleFitFindings(s, _surfaces) {
+  /** @type {Array<{surface:string,quote:string,detail:string}>} */
+  const out = [];
+  const npcs = Array.isArray(s?.npcs) ? s.npcs : [];
+  const seat = seatFactions(s);
+  for (const f of Array.isArray(s?.powerStructure?.factions) ? s.powerStructure.factions : []) {
+    const name = str(f?.faction);
+    const misfits = npcs.filter((/** @type {any} */ n) => str(n?.factionAffiliation) === name && !factionRoleFits(f?.category, n?.role, { seat: seat.has(name) }));
+    if (!name || !misfits.length) continue;
+    out.push({ surface: 'factions', quote: `${name} (${str(f.category)})`, detail: misfits.map((/** @type {any} */ n) => `${str(n.role)} (${classOfRole(str(n.role))})`).join(', ') });
+  }
+  return out;
 }
 
 // ───────────────────────────── the battery ─────────────────────────────
@@ -511,6 +429,7 @@ const RUNS = Object.freeze({
   'rule-text': ruleTextFindings,
   'possessive-slip': possessiveSlipFindings,
   'daily-life-placeholder': dailyLifePlaceholderFindings,
+  'faction-role-fit': factionRoleFitFindings,
 });
 
 /** The checks, in report order (the soak prefixes each with `reader:`). */

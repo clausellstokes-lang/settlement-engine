@@ -185,6 +185,12 @@ function readIdentity(settlement) {
 
 /** @typedef {ReturnType<typeof readIdentity>} TraditionIdentity */
 
+/**
+ * The water-keyed elements (CENSUS-1c unit 6): each weighs 0 where the water home answers 'none'
+ * (`tradeRouteSemantics.js :: waterAccessKind`), for a founding or an addition alike.
+ */
+const WATER_ELEMENTS = Object.freeze(['first-landing', 'river', 'tide']);
+
 /** Economic characters that read as "market" for act weighting. */
 const MARKET_ECON = Object.freeze(['crossroads', 'port', 'road']);
 
@@ -193,8 +199,9 @@ const MARKET_ECON = Object.freeze(['crossroads', 'port', 'road']);
  * @param {TraditionElement} el @param {TraditionIdentity} id @returns {number}
  */
 function elementWeight(el, id) {
-  // CENSUS-1 wave 0, fact 4: as in `foundingElementWeight`, no first landing without water.
-  if (el.id === 'first-landing' && waterAccessKind(id.terrain, id.econ) === 'none') return 0;
+  // CENSUS-1 wave 0, fact 4, extended by CENSUS-1c unit 6 (the vocabulary rulings §6): as in
+  // `foundingElementWeight`, no water-keyed element (first landing, river, tide) without water.
+  if (WATER_ELEMENTS.includes(el.id) && waterAccessKind(id.terrain, id.econ) === 'none') return 0;
   let w = el.foundingFit ? 0.25 : 1; // origin elements rarely recur as additions
   if (id.terrain && el.terrains.includes(id.terrain)) w += 3;
   if (id.econ && el.econ.includes(id.econ)) w += 2;
@@ -212,7 +219,7 @@ function foundingElementWeight(el, id) {
   // CENSUS-1 wave 0, fact 4: a first landing needs water to land from — the water home
   // (`tradeRouteSemantics.js :: waterAccessKind`: coast, river or port), else the element
   // weighs 0 (it was 1.5 inland, the cause of reader:traditions-water).
-  if (el.id === 'first-landing' && waterAccessKind(id.terrain, id.econ) === 'none') return 0;
+  if (WATER_ELEMENTS.includes(el.id) && waterAccessKind(id.terrain, id.econ) === 'none') return 0;
   let w = el.id === 'founding' ? 3 : el.id === 'first-landing' ? 1.5 : 1;
   if (el.id === 'first-landing') w += 3;
   if (el.id === 'charter' && id.econ === 'crossroads') w += 1.5;

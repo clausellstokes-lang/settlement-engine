@@ -31,7 +31,7 @@
 import { describe, expect, test } from 'vitest';
 
 import { DOSSIER_STATE_PROSE_WAR_FAITH as WAR_FAITH } from '../../src/data/dossierStateProse/warFaith.generated.js';
-import { poolDimensions } from '../../src/domain/display/stateProse/stateProseKernel.js';
+import { poolDimensions, STATE_MARK_DIMENSIONS } from '../../src/domain/display/stateProse/stateProseKernel.js';
 import { drawnMember } from '../helpers/drawnProse.js';
 import {
   DOSSIER_MOUNTS, UNMOUNTED_BLOCKS, drawnAtMount, sentenceMountForBlock,
@@ -51,6 +51,7 @@ import { faithPanelModel, trimFaithDeskToPanel } from '../../src/components/sett
 import { settlementWarStatus, settlementWarExhaustion, warExhaustionBand } from '../../src/domain/display/warStatus.js';
 import { settlementMobilization } from '../../src/domain/display/mobilizationStatus.js';
 import { settlementOccupation, occupierHoldings } from '../../src/domain/display/occupationStatus.js';
+import { assertDeclarable } from '../../src/domain/facts/factVocabulary.js';
 
 const BLOCK = (id) => WAR_FAITH[id];
 const POOLS = (id) => Object.keys(BLOCK(id).pools);
@@ -198,7 +199,14 @@ describe('ONE STATE DIMENSION in the leaf: walls (F10 WALLS-WORD, 2026-11-04)', 
     // Beside the AUDIENCE mark (law 2, not a dimension) the leaf spells only the walls pair.
     const marks = new Set(Object.keys(WAR_FAITH).flatMap((id) => Object.values(BLOCK(id).pools)
       .flat().flatMap((v) => v.marks || [])));
-    expect([...marks].sort()).toEqual(['dm-only', 'no walls', 'walls']);
+    // CENSUS-5 (2026-11-05): the tag slot also carries the census channel's declarable fact
+    // atoms (`gate`, `temple`, `war: peace`, `no crisis: …`), which partition no kernel dimension:
+    // the kernel's own words stay the walls pair, and every other mark is a declarable atom.
+    const KERNEL_WORDS = new Set(Object.values(STATE_MARK_DIMENSIONS).flat());
+    expect([...marks].filter((m) => m === 'dm-only' || KERNEL_WORDS.has(m)).sort()).toEqual(['dm-only', 'no walls', 'walls']);
+    for (const m of [...marks].filter((x) => x !== 'dm-only' && !KERNEL_WORDS.has(x))) {
+      expect(() => assertDeclarable(m.replace(/^no\s+/i, '')), m).not.toThrow();
+    }
     const owing = new Set(Object.keys(partitioned).map((k) => k.split(' :: ')[0]));
     for (const row of DOSSIER_MOUNTS.filter((r) => r.desk === 'warFaith')) {
       expect(row.dimensions, `${row.mount} declares a dimension its block does not carry`)

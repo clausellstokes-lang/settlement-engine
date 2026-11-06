@@ -41,6 +41,7 @@ import { factionArchetype, FACTION_ARCHETYPES } from './factionArchetypes.js';
 // closure via `domain/events/mutateEntities.js`, which imports this same symbol.
 // @enforced-by tests/build/vendorPdfLazy.test.js (first-paint byte budget).
 import { rollsRegisterVii } from './density/densityLaw.js';
+import { resolveSibling } from './facts/drawDeclared.js';
 
 const A = FACTION_ARCHETYPES;
 
@@ -488,6 +489,11 @@ function resolveGovernmentLabel(archetype, tier, factions, governing, incumbentS
  * @param {string[]} [opts.losers]  losing contender names (coup verdicts) — get grudge edges
  * @param {boolean} [opts.demoteIncumbent] force the defeated house to survive (true) or
  *   to be overwritten (false). ABSENT ⇒ derived: lawful cause AND a Register VII world.
+ * @param {object | (() => object) | null} [opts.facts] CENSUS-1f (Appendix B row 116, T): the
+ *   settlement's `factsOf`, handed by the caller (this module cannot import the facts home: its
+ *   graph reaches this file). The new government's desc and the cause's stability line resolve
+ *   through `resolveSibling(…, RULING_POWER_SIBLINGS, …)`; both sets carry no twin, so a refused
+ *   text keeps its words and an unanswered record is unchanged (resolveSibling's rule).
  * @returns {{ settlement: Object, transfer: Object|null, error: string|null }}
  */
 export function transferRulingPower(settlement, newPowerName, opts = {}) {
@@ -540,7 +546,7 @@ export function transferRulingPower(settlement, newPowerName, opts = {}) {
         faction: toGovernment,
         ...(f.name != null ? { name: toGovernment } : {}),
         ...(seatCategory ? { category: seatCategory } : {}),
-        desc: GOVERNMENT_DESCS[archetype] || GOVERNMENT_DESCS[A.OTHER],
+        desc: resolveSibling(GOVERNMENT_DESCS[archetype] || GOVERNMENT_DESCS[A.OTHER], RULING_POWER_SIBLINGS, { facts: opts.facts ?? null, poolId: 'rulingPower:GOVERNMENT_DESCS', surface: 'power', drawKind: 'T' }), // CENSUS-1f (row 116): the door is `opts.facts`
         isGoverning: true,
         modifiers: [...(f.modifiers || []), cause === 'coup' ? 'seized_power' : cause],
         legitimacyCrisis: false,
@@ -667,7 +673,7 @@ export function transferRulingPower(settlement, newPowerName, opts = {}) {
         previousGovernments,
         publicLegitimacy,
         factionRelationships: [...renamedRelationships, ...extraRelationships],
-        stability: STABILITY_BY_CAUSE[cause],
+        stability: resolveSibling(STABILITY_BY_CAUSE[cause], RULING_POWER_SIBLINGS, { facts: opts.facts ?? null, poolId: 'rulingPower:STABILITY_BY_CAUSE', surface: 'power', drawKind: 'T' }), // CENSUS-1f (row 116)
         // ⭐ THE THIRD BRANCH IS §810.8's WHOLE POINT SAID IN PLAIN WORDS. This is not a
         // news beat; it is the prose the dossier, the summary tab, the power tab and the
         // PDF's power section all read, so it is where a reader of the world actually
@@ -687,3 +693,21 @@ export function transferRulingPower(settlement, newPowerName, opts = {}) {
     error: null,
   };
 }
+
+/**
+ * DECLARED SIBLINGS, CARRIED (CENSUS-5b unit 2, 2026-11-05; the chair's ruling R-C): a transfer
+ * of power's two table texts that presume beyond their key — a clergy government's "temple
+ * calendar" (a temple), and an election's "Stable: a fresh mandate" (no crisis active: the
+ * stability claim rung 2D convicted beside a crisis). Keyed by the text; NO CONSUMER READS THIS YET
+ * (Appendix B row 116 is CENSUS-1d's T site), so it moves no record. No twin: a transfer of power
+ * happens in play, after birth, so the soak cannot measure the slot (the lane doc's open row).
+ * @type {Readonly<Record<string, ReadonlyArray<{ text: string, needs?: ReadonlyArray<string>, crisis?: ReadonlyArray<string> }>>>}
+ */
+export const RULING_POWER_SIBLINGS = Object.freeze({
+  'Clergy govern; doctrine legitimises political authority and the temple calendar shapes civic life.': Object.freeze([
+    Object.freeze({ text: 'Clergy govern; doctrine legitimises political authority and the temple calendar shapes civic life.', needs: Object.freeze(['temple']) }),
+  ]),
+  'Stable: a fresh mandate, still finding its footing': Object.freeze([
+    Object.freeze({ text: 'Stable: a fresh mandate, still finding its footing', crisis: Object.freeze(['calm']) }),
+  ]),
+});

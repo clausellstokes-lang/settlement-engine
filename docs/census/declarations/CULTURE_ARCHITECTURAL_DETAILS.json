@@ -1,0 +1,530 @@
+{
+  "poolId": "CULTURE_ARCHITECTURAL_DETAILS",
+  "source": "src/data/cultureProfiles.js (CULTURE_PROFILES[*].architecturalDetails, :88-521)",
+  "drawKind": "R",
+  "drawSite": "src/data/cultureProfiles.js:579 choose() at birth (culturalIdentity.architecturalDetail, a named child stream), else src/generators/narrative/arrivalScene.js:266-272 pickRandom fallback with one speaks() redraw; SIGHT beat",
+  "pools": [
+    {
+      "pool": "germanic",
+      "keyGuarantees": [
+        "resolveCultureProfileKey(config.culture) === 'germanic' (mixed carries none: its birth detail joins two profiles' lines); stop: culture",
+        "SIGHT beat only when checkInstCompat gave no landmark",
+        "rendered only when the record's primary stress has no STRESS_DESCS vignette (src/generators/narrative/arrivalScene.js:215,226,259,292): every record crisis kind has one, so this beat is silent under a record crisis and renders under calm, a custom DM crisis type, or a world pulse stressor the scene never reads",
+        "speaks() market/catch filter applies to the materialized detail and the fallback (arrivalScene.js:269-272)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Not opted: built form, no calm asserted.",
+      "lines": [
+        {
+          "lineId": "CULTURE_PROFILES.germanic.architecturalDetails[0]",
+          "text": "half-timbered upper floors project above the busier lanes",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "CULTURE_PROFILES.germanic.architecturalDetails[1]",
+          "text": "steep roofs, enclosed craft yards, and carved lintels mark the older wards",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "CULTURE_PROFILES.germanic.architecturalDetails[2]",
+          "text": "a hall-and-market axis organizes the settlement center",
+          "needs": [
+            "market"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "latin",
+      "keyGuarantees": [
+        "resolveCultureProfileKey(config.culture) === 'latin' (mixed carries none: its birth detail joins two profiles' lines); stop: culture",
+        "SIGHT beat only when checkInstCompat gave no landmark",
+        "rendered only when the record's primary stress has no STRESS_DESCS vignette (src/generators/narrative/arrivalScene.js:215,226,259,292): every record crisis kind has one, so this beat is silent under a record crisis and renders under calm, a custom DM crisis type, or a world pulse stressor the scene never reads",
+        "speaks() market/catch filter applies to the materialized detail and the fallback (arrivalScene.js:269-272)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Not opted: built form, no calm asserted.",
+      "lines": [
+        {
+          "lineId": "CULTURE_PROFILES.latin.architecturalDetails[0]",
+          "text": "arcaded market fronts define the principal square",
+          "needs": [
+            "market"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "CULTURE_PROFILES.latin.architecturalDetails[1]",
+          "text": "warm tile roofs and enclosed courtyards break up the stone streets",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "CULTURE_PROFILES.latin.architecturalDetails[2]",
+          "text": "fountains, steps, and reused columns give the civic center a layered age",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "celtic",
+      "keyGuarantees": [
+        "resolveCultureProfileKey(config.culture) === 'celtic' (mixed carries none: its birth detail joins two profiles' lines); stop: culture",
+        "SIGHT beat only when checkInstCompat gave no landmark",
+        "rendered only when the record's primary stress has no STRESS_DESCS vignette (src/generators/narrative/arrivalScene.js:215,226,259,292): every record crisis kind has one, so this beat is silent under a record crisis and renders under calm, a custom DM crisis type, or a world pulse stressor the scene never reads",
+        "speaks() market/catch filter applies to the materialized detail and the fallback (arrivalScene.js:269-272)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Not opted: built form, no calm asserted.",
+      "lines": [
+        {
+          "lineId": "CULTURE_PROFILES.celtic.architecturalDetails[0]",
+          "text": "earth-banked enclosures and older rounded foundations remain visible between newer halls",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "CULTURE_PROFILES.celtic.architecturalDetails[1]",
+          "text": "carved stone and timber markers stand where roads meet the assembly ground",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "CULTURE_PROFILES.celtic.architecturalDetails[2]",
+          "text": "the settlement follows the contours of the land instead of a surveyed grid",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "arabic",
+      "keyGuarantees": [
+        "resolveCultureProfileKey(config.culture) === 'arabic' (mixed carries none: its birth detail joins two profiles' lines); stop: culture",
+        "SIGHT beat only when checkInstCompat gave no landmark",
+        "rendered only when the record's primary stress has no STRESS_DESCS vignette (src/generators/narrative/arrivalScene.js:215,226,259,292): every record crisis kind has one, so this beat is silent under a record crisis and renders under calm, a custom DM crisis type, or a world pulse stressor the scene never reads",
+        "speaks() market/catch filter applies to the materialized detail and the fallback (arrivalScene.js:269-272)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Not opted: built form, no calm asserted.",
+      "lines": [
+        {
+          "lineId": "CULTURE_PROFILES.arabic.architecturalDetails[0]",
+          "text": "shaded arcades and latticed upper windows soften the market streets",
+          "needs": [
+            "market"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "CULTURE_PROFILES.arabic.architecturalDetails[1]",
+          "text": "courtyard gates reveal planted interiors and carefully managed water",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "CULTURE_PROFILES.arabic.architecturalDetails[2]",
+          "text": "caravan courts and covered lanes make movement through the merchant quarter deliberate",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "caravan courts (trade-route kind)",
+            "merchant quarter (size)"
+          ]
+        }
+      ]
+    },
+    {
+      "pool": "norse",
+      "keyGuarantees": [
+        "resolveCultureProfileKey(config.culture) === 'norse' (mixed carries none: its birth detail joins two profiles' lines); stop: culture",
+        "SIGHT beat only when checkInstCompat gave no landmark",
+        "rendered only when the record's primary stress has no STRESS_DESCS vignette (src/generators/narrative/arrivalScene.js:215,226,259,292): every record crisis kind has one, so this beat is silent under a record crisis and renders under calm, a custom DM crisis type, or a world pulse stressor the scene never reads",
+        "speaks() market/catch filter applies to the materialized detail and the fallback (arrivalScene.js:269-272)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Not opted: built form, no calm asserted.",
+      "lines": [
+        {
+          "lineId": "CULTURE_PROFILES.norse.architecturalDetails[0]",
+          "text": "carved roof beams and long hall ridges dominate the older quarter",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "CULTURE_PROFILES.norse.architecturalDetails[1]",
+          "text": "turf roofs and timber sheds gather behind the working waterfront",
+          "needs": [
+            "navigable"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "CULTURE_PROFILES.norse.architecturalDetails[2]",
+          "text": "the assembly ground sits between the principal hall and the landing",
+          "needs": [
+            "navigable"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "slavic",
+      "keyGuarantees": [
+        "resolveCultureProfileKey(config.culture) === 'slavic' (mixed carries none: its birth detail joins two profiles' lines); stop: culture",
+        "SIGHT beat only when checkInstCompat gave no landmark",
+        "rendered only when the record's primary stress has no STRESS_DESCS vignette (src/generators/narrative/arrivalScene.js:215,226,259,292): every record crisis kind has one, so this beat is silent under a record crisis and renders under calm, a custom DM crisis type, or a world pulse stressor the scene never reads",
+        "speaks() market/catch filter applies to the materialized detail and the fallback (arrivalScene.js:269-272)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Not opted: built form, no calm asserted.",
+      "lines": [
+        {
+          "lineId": "CULTURE_PROFILES.slavic.architecturalDetails[0]",
+          "text": "painted timber fronts and enclosed garden plots line the older lanes",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "CULTURE_PROFILES.slavic.architecturalDetails[1]",
+          "text": "a communal green, bathhouse, and well bind several household compounds together",
+          "needs": [
+            "institution: bathhouse"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "CULTURE_PROFILES.slavic.architecturalDetails[2]",
+          "text": "palisade lines and river stairs reveal successive stages of expansion",
+          "needs": [
+            "palisade",
+            "river"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "east_asian",
+      "keyGuarantees": [
+        "resolveCultureProfileKey(config.culture) === 'east_asian' (mixed carries none: its birth detail joins two profiles' lines); stop: culture",
+        "SIGHT beat only when checkInstCompat gave no landmark",
+        "rendered only when the record's primary stress has no STRESS_DESCS vignette (src/generators/narrative/arrivalScene.js:215,226,259,292): every record crisis kind has one, so this beat is silent under a record crisis and renders under calm, a custom DM crisis type, or a world pulse stressor the scene never reads",
+        "speaks() market/catch filter applies to the materialized detail and the fallback (arrivalScene.js:269-272)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Not opted: built form, no calm asserted.",
+      "lines": [
+        {
+          "lineId": "CULTURE_PROFILES.east_asian.architecturalDetails[0]",
+          "text": "tiled rooflines and enclosed courts create a measured rhythm along the main axis",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "CULTURE_PROFILES.east_asian.architecturalDetails[1]",
+          "text": "ward gates, shop fronts, and planted courtyards divide public from household space",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "CULTURE_PROFILES.east_asian.architecturalDetails[2]",
+          "text": "the market street terminates at an administrative or temple precinct",
+          "needs": [
+            "market"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "mesoamerican",
+      "keyGuarantees": [
+        "resolveCultureProfileKey(config.culture) === 'mesoamerican' (mixed carries none: its birth detail joins two profiles' lines); stop: culture",
+        "SIGHT beat only when checkInstCompat gave no landmark",
+        "rendered only when the record's primary stress has no STRESS_DESCS vignette (src/generators/narrative/arrivalScene.js:215,226,259,292): every record crisis kind has one, so this beat is silent under a record crisis and renders under calm, a custom DM crisis type, or a world pulse stressor the scene never reads",
+        "speaks() market/catch filter applies to the materialized detail and the fallback (arrivalScene.js:269-272)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Not opted: built form, no calm asserted.",
+      "lines": [
+        {
+          "lineId": "CULTURE_PROFILES.mesoamerican.architecturalDetails[0]",
+          "text": "a raised ceremonial precinct overlooks a broad and intensely used market plaza",
+          "needs": [
+            "market"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "CULTURE_PROFILES.mesoamerican.architecturalDetails[1]",
+          "text": "terraces, plastered platforms, and residential compounds step with the terrain",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "CULTURE_PROFILES.mesoamerican.architecturalDetails[2]",
+          "text": "causeways and managed water divide the settlement into organized neighborhoods",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "causeways and managed water (water not navigable necessarily)"
+          ]
+        }
+      ]
+    },
+    {
+      "pool": "south_asian",
+      "keyGuarantees": [
+        "resolveCultureProfileKey(config.culture) === 'south_asian' (mixed carries none: its birth detail joins two profiles' lines); stop: culture",
+        "SIGHT beat only when checkInstCompat gave no landmark",
+        "rendered only when the record's primary stress has no STRESS_DESCS vignette (src/generators/narrative/arrivalScene.js:215,226,259,292): every record crisis kind has one, so this beat is silent under a record crisis and renders under calm, a custom DM crisis type, or a world pulse stressor the scene never reads",
+        "speaks() market/catch filter applies to the materialized detail and the fallback (arrivalScene.js:269-272)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Not opted: built form, no calm asserted.",
+      "lines": [
+        {
+          "lineId": "CULTURE_PROFILES.south_asian.architecturalDetails[0]",
+          "text": "shaded bazaar fronts open toward tanks, wells, and neighborhood shrines",
+          "needs": [
+            "market",
+            "institution: temple"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "CULTURE_PROFILES.south_asian.architecturalDetails[1]",
+          "text": "carved stone, plastered courtyards, and workshop lanes layer sacred and commercial space",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "CULTURE_PROFILES.south_asian.architecturalDetails[2]",
+          "text": "occupational quarters cluster around shared water and market infrastructure",
+          "needs": [
+            "market"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "steppe",
+      "keyGuarantees": [
+        "resolveCultureProfileKey(config.culture) === 'steppe' (mixed carries none: its birth detail joins two profiles' lines); stop: culture",
+        "SIGHT beat only when checkInstCompat gave no landmark",
+        "rendered only when the record's primary stress has no STRESS_DESCS vignette (src/generators/narrative/arrivalScene.js:215,226,259,292): every record crisis kind has one, so this beat is silent under a record crisis and renders under calm, a custom DM crisis type, or a world pulse stressor the scene never reads",
+        "speaks() market/catch filter applies to the materialized detail and the fallback (arrivalScene.js:269-272)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Not opted: built form, no calm asserted.",
+      "lines": [
+        {
+          "lineId": "CULTURE_PROFILES.steppe.architecturalDetails[0]",
+          "text": "corrals and open assembly ground occupy as much space as the permanent halls",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "CULTURE_PROFILES.steppe.architecturalDetails[1]",
+          "text": "storehouses and caravan yards mark the boundary between settlement and seasonal encampment",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "caravan yards (trade-route kind)"
+          ]
+        },
+        {
+          "lineId": "CULTURE_PROFILES.steppe.architecturalDetails[2]",
+          "text": "broad lanes are sized for herds, carts, and mounted movement",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "greek",
+      "keyGuarantees": [
+        "resolveCultureProfileKey(config.culture) === 'greek' (mixed carries none: its birth detail joins two profiles' lines); stop: culture",
+        "SIGHT beat only when checkInstCompat gave no landmark",
+        "rendered only when the record's primary stress has no STRESS_DESCS vignette (src/generators/narrative/arrivalScene.js:215,226,259,292): every record crisis kind has one, so this beat is silent under a record crisis and renders under calm, a custom DM crisis type, or a world pulse stressor the scene never reads",
+        "speaks() market/catch filter applies to the materialized detail and the fallback (arrivalScene.js:269-272)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Not opted: built form, no calm asserted.",
+      "lines": [
+        {
+          "lineId": "CULTURE_PROFILES.greek.architecturalDetails[0]",
+          "text": "a colonnaded market edge frames the busiest civic ground",
+          "needs": [
+            "market"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "CULTURE_PROFILES.greek.architecturalDetails[1]",
+          "text": "whitewashed courts and stone stairs climb toward a fortified high precinct",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "fortified high precinct (an inner fortification, not the perimeter)"
+          ]
+        },
+        {
+          "lineId": "CULTURE_PROFILES.greek.architecturalDetails[2]",
+          "text": "workshops, shrines, and meeting halls crowd the approaches to the agora",
+          "needs": [
+            "market",
+            "institution: temple"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        }
+      ]
+    }
+  ]
+}

@@ -16,6 +16,7 @@
  *   - Economics tab UI
  */
 
+import { textOf } from '../domain/facts/textOf.js';
 import { getActiveRng } from '../kernel/rngContext.js';
 import { FOOD_IMPORT_RATES, SIEGE_PRODUCTION_KEPT } from '../data/foodImportRates.js';
 import { FOOD_SECURITY_CUTS, foodSecurityBandOf, foodSecurityFlagsOf } from '../data/bandLadders.js';
@@ -478,7 +479,7 @@ export function generateFoodSecurity(tier, institutions, config) {
     famineCutPct: stressFamine ? Math.round((1 - famineKeeps) * 100) : 0,
     foodwaysLine: composeFoodwaysLine({
       sources: foodSources,
-      cultureLines: CULTURE_PROFILES[/** @type {keyof typeof CULTURE_PROFILES} */ (config.cultureProfileKey)]?.foodways || null,
+      cultureLines: CULTURE_PROFILES[/** @type {keyof typeof CULTURE_PROFILES} */ (config.cultureProfileKey)]?.foodways?.map(textOf) || null, // R-C: a declared row gives back its text (CENSUS-2d)
       identity: `${tier}|${population}|${terrain}|${route}|${config.cultureProfileKey || ''}`,
     }),
   });

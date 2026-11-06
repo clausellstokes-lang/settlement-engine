@@ -454,7 +454,9 @@ describe('DS-GEN-12 / DS-GEN-13 / DS-GEN-17 — three total partitions', () => {
     // "ruined reads NO-MARKET" cannot distinguish: the SAME row reads MARKET-OPEN while it
     // stands and NO-MARKET once stamped. A one-sided assertion here would pass just as
     // happily if `marketPoolKey` had been broken into always answering NO-MARKET.
-    const bazaar = (extra) => [{ name: 'Grand bazaar', ...extra }];
+    // CENSUS-1b unit A (d): re-keyed to the market home, which reads the catalogue's market
+    // tag (an authored 'Grand bazaar' carries none), so the falsifier's row is a catalogue market.
+    const bazaar = (extra) => [{ name: 'Weekly market', ...extra }];
     expect(marketPoolKey({ institutions: bazaar({}), tradeRouteAccess: 'road' }))
       .toBe('MARKET-OPEN');
     // Both ruin spellings the estate stamps, each against that same standing reading.
@@ -467,7 +469,7 @@ describe('DS-GEN-12 / DS-GEN-13 / DS-GEN-17 — three total partitions', () => {
     expect(marketPoolKey({ institutions: bazaar({ status: 'ruined' }), isEntrepot: true, tradeRouteAccess: 'road' }))
       .toBe('NO-MARKET');
     // A live row alongside a ruined one still carries the town — the filter is per ROW.
-    expect(marketPoolKey({ institutions: [...bazaar({ status: 'ruined' }), { name: 'Weekly market' }], tradeRouteAccess: 'road' }))
+    expect(marketPoolKey({ institutions: [...bazaar({ status: 'ruined' }), { name: 'Market square' }], tradeRouteAccess: 'road' }))
       .toBe('MARKET-OPEN');
   });
 
@@ -500,9 +502,14 @@ describe('DS-GEN-12 / DS-GEN-13 / DS-GEN-17 — three total partitions', () => {
     for (const route of ['road', 'river', 'port', 'crossroads', 'desert_road']) {
       expect(marketPoolKey({ institutions: stalls, tradeRouteAccess: route }), route).toBe('MARKET-OPEN');
     }
-    // The name class is the engine's own, not a category test.
-    for (const name of ['Weekly market', 'Grand bazaar', 'Caravan masters\' exchange', 'The shambles', 'Market stalls']) {
+    // CENSUS-1b unit A (d), the chair's ruling: the market is THE MARKET HOME's (the catalogue's
+    // market tag on the live roster), not the retired name class. A catalogue market (and an
+    // annual fair) is one; a name that merely contains a market word is not.
+    for (const name of ['Weekly market', 'Market square', 'Annual fair']) {
       expect(marketPoolKey({ institutions: [{ name }], tradeRouteAccess: 'road' }), name).toBe('MARKET-OPEN');
+    }
+    for (const name of ['Black market', 'Stock exchange', 'Grand bazaar', 'The shambles']) {
+      expect(marketPoolKey({ institutions: [{ name }], tradeRouteAccess: 'road' }), name).toBe('NO-MARKET');
     }
     const reached = new Set([
       marketPoolKey({ institutions: [], tradeRouteAccess: 'road' }),

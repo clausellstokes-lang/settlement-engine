@@ -408,14 +408,14 @@ export const NPC_WANTS = {
     'simple robes of their order',
     'ceremonial attire worn at all times',
     'plain devotional dress with one opulent accessory',
-    'vestments a size too grand for the shrine they serve',
+    { text: 'vestments a size too grand for the shrine they serve', needs: ['sacredHouse'] }, // CENSUS-4f: the ledger's declaration, re-read under R-AE (a shrine is a sacred house)
     'threadbare robes patched with fabric from finer ones',
     'a formal habit with a travel-stained hem never cleaned',
     'lay clothes with the collar of the order left visible',
   ],
   economy: [
     'merchant dress: practical but signalling wealth through material',
-    'guild colours worn with pride',
+    { text: 'guild colours worn with pride', needs: ['guild'] }, // CENSUS-4f: the ledger's declaration
     'clothes that once cost a fortune and now show the miles',
     'well-cut but understated trading clothes',
     'sober broadcloth with buttons worth more than the coat',
@@ -428,7 +428,7 @@ export const NPC_WANTS = {
     'fine clothes worn ironically over rougher garments',
     'guard or clergy disguise worn as a habit',
     'whatever is clean (they move frequently)',
-    "a dockhand's oilskins over hands too clean for the work",
+    { text: "a dockhand's oilskins over hands too clean for the work", needs: ['docks'] }, // CENSUS-4f: the ledger's declaration
     'respectable dress exactly average for the street they work',
     'good boots and cheap everything else',
     'a heavy coat worn indoors, contents unexamined',
@@ -458,7 +458,7 @@ export const NPC_WANTS = {
 export const NPC_FACTION_GOALS = {
   Mayor: [
     {
-      short: "Navigate a dispute between two powerful guilds without losing either's support",
+      needs: ['guild'], short: "Navigate a dispute between two powerful guilds without losing either's support", // CENSUS-4b: the ledger's declaration (docs/census/declarations/npcData.NPC_FACTION_GOALS.json)
       long: 'Die in office having kept the peace (legacy matters more than wealth)',
       driven_by: 'protection',
     },
@@ -533,14 +533,14 @@ export const NPC_FACTION_GOALS = {
       driven_by: 'protection',
     },
     {
-      short: "Identify which of their officers is on the thieves' guild payroll",
+      short: "Identify which of their officers is on the thieves' guild payroll", // CENSUS-4b: NOT declared — F4's writer (npcGenerator, crimeSignalOf) rewrites the guild to 'a powerful outside interest' where no crime signal stands, so the printed line presumes nothing (tests/generators/npcCrimeSignalWriters.test.js soak1k-531)
       long: 'Die in bed rather than in the street (unusual ambition for the role)',
       driven_by: 'personal',
     },
   ],
   'Garrison Commander': [
     {
-      short: 'Secure emergency funding to repair the east wall before it becomes a crisis',
+      needs: ['walls'], short: 'Secure emergency funding to repair the east wall before it becomes a crisis', // CENSUS-4b: the ledger's declaration (docs/census/declarations/npcData.NPC_FACTION_GOALS.json)
       long: 'Be remembered as the commander who made this settlement truly defensible',
       driven_by: 'military',
     },
@@ -564,7 +564,7 @@ export const NPC_FACTION_GOALS = {
   ],
   'High Priest': [
     {
-      short: 'Restore a desecrated shrine before the annual festival (quietly, without scandal)',
+      needs: ['temple'], short: 'Restore a desecrated shrine before the annual festival (quietly, without scandal)', // CENSUS-4b: the ledger's declaration (docs/census/declarations/npcData.NPC_FACTION_GOALS.json)
       long: 'Unite the fractious local clergy under a single doctrinal standard',
       driven_by: 'spiritual',
     },
@@ -581,7 +581,7 @@ export const NPC_FACTION_GOALS = {
       driven_by: 'protection',
     },
     {
-      short: 'Convince their superior in the faith to fund repairs to the temple roof',
+      needs: ['temple'], short: 'Convince their superior in the faith to fund repairs to the temple roof', // CENSUS-4b: the ledger's declaration (docs/census/declarations/npcData.NPC_FACTION_GOALS.json)
       long: 'Leave a detailed record of the congregation so future priests know who this community was',
       driven_by: 'knowledge',
     },
@@ -648,7 +648,7 @@ export const NPC_FACTION_GOALS = {
   ],
   'Master Craftsman': [
     {
-      short: 'Complete a prestigious commission that will make their reputation in the city',
+      needs: ['tier: ≥ city'], short: 'Complete a prestigious commission that will make their reputation in the city', // CENSUS-4b: the ledger's declaration (docs/census/declarations/npcData.NPC_FACTION_GOALS.json)
       long: 'Train an apprentice who surpasses them: the greatest achievement of any craftsman',
       driven_by: 'personal',
     },
@@ -744,7 +744,7 @@ export const NPC_FACTION_GOALS = {
   ],
   'Tavern Owner': [
     {
-      short: 'Manage the fallout from a brawl last week that left a local merchant hospitalised',
+      needs: ['hospital'], short: 'Manage the fallout from a brawl last week that left a local merchant hospitalised', // CENSUS-4b: the ledger's declaration (docs/census/declarations/npcData.NPC_FACTION_GOALS.json)
       long: "Pay off the building and own it outright before they're too old to work it",
       driven_by: 'wealth',
     },
@@ -768,7 +768,7 @@ export const NPC_FACTION_GOALS = {
   ],
   Healer: [
     {
-      short: 'Identify the source of a cluster of unusual illnesses in the western quarter',
+      needs: ['tier: ≥ town'], short: 'Identify the source of a cluster of unusual illnesses in the western quarter', // CENSUS-4b: the ledger's declaration (docs/census/declarations/npcData.NPC_FACTION_GOALS.json)
       long: 'Train enough local healers that the settlement can cope without them',
       driven_by: 'protection',
     },
@@ -780,278 +780,336 @@ export const NPC_FACTION_GOALS = {
   ],
 };
 
-export const NPC_CRIMINAL_SECRETS = {
-  criminal: [
-    {
-      secret: 'Has been embezzling from the organisation they oversee for three years',
-      stakes: 'Exposure means disgrace, legal prosecution, and enemies who feel personally betrayed',
-    },
-    {
-      secret: 'Secretly directs a fencing operation through a trusted intermediary',
-      stakes: 'Criminal liability and the end of any political or social standing',
-    },
-    {
-      secret: 'Ordered what was officially ruled an accident, and sleeps fine about it',
-      stakes: "Murder charge, loss of everything, and the victim's family who suspects the truth",
-    },
-    {
-      secret: "On the payroll of the thieves' guild as a silent informant",
-      stakes: 'Exposure would cost them their post and likely their safety',
-    },
-    {
-      secret: 'Has been systematically bribing multiple officials for preferential treatment',
-      stakes: 'A cascade of confessions from any single one of the bribed parties',
-    },
-    {
-      secret: "Runs a protection scheme targeting the very merchants they're supposed to serve",
-      stakes: 'Civil and criminal liability; the merchants have been keeping records',
-    },
-    {
-      secret: 'Has been falsifying inspection records for a fee',
-      stakes: 'The next disaster caused by the uninspected goods will be traced back to them',
-    },
-    {
-      secret: 'Their legitimate business is a front for moving contraband',
-      stakes: 'Seizure of everything; the legitimacy is thin and investigators are circling',
-    },
-  ],
-  personal: [
-    {
-      secret: 'Has a second family in another settlement that neither family knows about',
-      stakes: 'Both relationships collapse, along with any claim to moral authority',
-    },
-    {
-      secret: 'Their identity is fabricated. They fled a different life entirely',
-      stakes: 'The person they became would be destroyed; the person they were might be wanted',
-    },
-    {
-      secret: 'Suffering from an illness they expect to kill them within two years',
-      stakes: 'Rivals would move against them immediately if they knew; dependents would panic',
-    },
-    {
-      secret: 'Deeply in debt to a creditor who owns the debt as leverage, not income',
-      stakes: 'The creditor will call it in at the worst possible moment, and has leverage to do so',
-    },
-    {
-      secret: 'Was directly responsible for a death that was ruled an accident',
-      stakes: 'Criminal liability and the complete destruction of their reputation',
-    },
-    {
-      secret: 'Has been funding a forbidden relationship with embezzled money',
-      stakes: 'Both the relationship and the embezzlement would become public simultaneously',
-    },
-    {
-      secret: "Their celebrated achievement was stolen. They took credit for another's work",
-      stakes: "The real author has evidence; they've been sitting on it for years",
-    },
-    {
-      secret: 'Has been slowly poisoning a rival with something that looks like natural illness',
-      stakes: 'A competent healer or investigator would find the evidence almost immediately',
-    },
-  ],
-  political: [
-    {
-      secret: 'Has been feeding strategic intelligence to a rival settlement',
-      stakes: 'Treason charges; execution or exile in most jurisdictions',
-    },
-    {
-      secret: 'Their appointment was secured through forged credentials',
-      stakes: "Discovery ends their career and discredits every decision they've made",
-    },
-    {
-      secret: "Knows the settlement's most important legal document was fraudulently created",
-      stakes: 'Revealing it destabilises everything; not revealing it makes them complicit',
-    },
-    {
-      secret: 'Has been delaying vital information from reaching the decision-makers',
-      stakes: 'When the consequences emerge, the delay will be investigated and traced',
-    },
-    {
-      secret: "Is the illegitimate heir to a title currently held by someone who doesn't know they exist",
-      stakes: 'Could claim it, or could be seen as a threat by those who benefit from the status quo',
-    },
-    {
-      secret: 'Has agreed to hand over authority to an external power in exchange for personal safety',
-      stakes: "Treason. Those they've sold out would not be forgiving",
-    },
-  ],
-  magical: [
-    {
-      secret: "Possesses a magical ability they've hidden for their entire career",
-      stakes: 'In some jurisdictions, concealment is itself a crime; in all of them, it changes everything',
-    },
-    {
-      secret: 'Made a binding pact with an entity they now cannot name without consequence',
-      stakes: 'The pact will come due (soon), and the terms are worse than they appeared at signing',
-    },
-    {
-      secret: 'Has been using magic to alter memories of specific events',
-      stakes: 'The alterations are imperfect; some victims already sense something is wrong',
-    },
-    {
-      secret: 'Knows the location of a sealed magical site that others have been searching for',
-      stakes: 'Everyone who wants it would kill for the information; none of them should have it',
-    },
-    {
-      secret: "Is under a compulsion placed by someone who is now dead, and it's getting harder to resist",
-      stakes: 'The compulsion will eventually force an action that exposes everything',
-    },
-    {
-      secret: 'Has been studying a forbidden school of magic under a false research pretext',
-      stakes: 'The research has progressed to the point where hiding it grows harder each week',
-    },
-  ],
-  religious: [
-    {
-      secret: "Lost their faith completely but maintains the role. It's just a job now",
-      stakes: "Discovery destroys their flock's trust and their own standing; some would call it heresy",
-    },
-    {
-      secret: "Has been covering for a colleague's heretical activities out of personal loyalty",
-      stakes: 'When the colleague is exposed (and they will be), this secret comes with them',
-    },
-    {
-      secret: 'Secretly receives what they believe are genuine divine visions, which terrifies them',
-      stakes: 'Acting on the visions would be seen as madness; ignoring them may be worse',
-    },
-    {
-      secret: 'Has been systematically falsifying miracle reports for decades',
-      stakes: 'A sceptical investigator with the right access could unravel it all in a week',
-    },
-    {
-      secret: 'Knows their religious order was founded on a historical lie',
-      stakes: "The truth would shatter the institution they've dedicated their life to",
-    },
-    {
-      secret:
-        "Possesses a relic that was officially declared destroyed, and kept it because they couldn't face destroying something real",
-      stakes: 'Possession is heresy; surrender means explaining how they had it',
-    },
-  ],
-  family: [
-    {
-      secret: 'Has been sending money to a disowned family member in secret for years',
-      stakes: 'The family member knows enough to burn them; the payments are leverage',
-    },
-    {
-      secret: 'Knows their celebrated family history is fabricated, and helped fabricate it',
-      stakes: 'The real history is much worse; discovery would shame all who share the name',
-    },
-    {
-      secret: 'One of their children is not theirs biologically, and they know it',
-      stakes: 'Every inheritance, every decision, made differently if this becomes known',
-    },
-    {
-      secret: 'Owes a life-debt to someone whose interests directly conflict with their current role',
-      stakes: 'The debt will eventually be called in at the worst possible moment',
-    },
-    {
-      secret: "Has been protecting a sibling's crime for years (a serious one)",
-      stakes: 'Discovery makes them an accessory; the sibling has reason to pre-empt exposure',
-    },
-  ],
-  historical: [
-    {
-      secret: 'Was present at (and did nothing to prevent) an atrocity that is now history',
-      stakes: 'Complicity charges; the moral weight has been crushing them for years',
-    },
-    {
-      secret: 'Knows the actual truth behind a founding event that the settlement reveres',
-      stakes: 'The truth would delegitimise current power structures; powerful people prefer the myth',
-    },
-    {
-      secret: 'Survived something everyone believes killed them, under a different name',
-      stakes: 'The original identity, if revealed, carries baggage that would end the current one',
-    },
-    {
-      secret: 'Has been maintaining a cover-up of a past institutional failure that cost lives',
-      stakes: 'Exposure means accountability for something that happened a long time ago, to real people',
-    },
-    {
-      secret: 'Was the informant whose report triggered a purge that destroyed innocent lives',
-      stakes: 'The report was accurate in some ways but deliberately misleading in others',
-    },
-    {
-      secret: 'Possesses an original copy of a document that was officially declared destroyed',
-      stakes: 'The document changes the legitimacy of something very important to very powerful people',
-    },
-    {
-      secret: 'The person who raised them was not their parent, and that parent is someone significant',
-      stakes: "The revelation would disrupt inheritance, property, and several people's sense of identity",
-    },
-  ],
-  military: [
-    {
-      secret: 'Gave an order during a battle that caused friendly casualties. It was covered up as enemy action',
-      stakes: 'The families of the dead believe a lie that this person actively maintains',
-    },
-    {
-      secret: 'Was captured and released under terms they have never disclosed',
-      stakes: "The terms may mean they owe something to an enemy that they haven't paid yet",
-    },
-    {
-      secret: 'Knows that the decisive victory everyone celebrates was won through treachery, not skill',
-      stakes: 'Several people built careers on that victory; they would not appreciate the truth',
-    },
-    {
-      secret: 'Has been selling patrol routes and schedules to someone outside the settlement',
-      stakes: 'People have already died as a result; they are rationalising this as survivable',
-    },
-    {
-      secret: 'Has been skimming from military supply budgets for years through a trusted subordinate',
-      stakes: 'The subordinate now knows enough to destroy them, and is becoming expensive',
-    },
-    {
-      secret:
-        'Was ordered to commit an atrocity and complied, and has since risen in the organisation that ordered it',
-      stakes: 'The order came from someone senior; exposure implicates both of them',
-    },
-  ],
-  economic_betrayal: [
-    {
-      secret: 'Has been quietly shorting investments they publicly recommend, profiting from collapse',
-      stakes: 'Civil fraud liability and the permanent destruction of a reputation built over decades',
-    },
-    {
-      secret: 'The goods they sell as locally produced are sourced from somewhere with exploitative labour practices',
-      stakes: 'The premium they charge depends entirely on the lie holding',
-    },
-    {
-      secret: 'Has been paying a health official to suppress a finding about their product',
-      stakes: 'People are being harmed; the official is growing nervous; the finding is documented',
-    },
-    {
-      secret: 'Has information about a competitor that would ruin them, obtained through clearly illegal means',
-      stakes: 'Using the information exposes how it was obtained; not using it means watching an advantage expire',
-    },
-    {
-      secret: "Their business partner died of natural causes that weren't entirely natural",
-      stakes: 'An investigation would find ambiguous evidence: enough to ruin, maybe enough to prosecute',
-    },
-  ],
-  identity: [
-    {
-      secret: 'Is a member of a group that faces serious persecution, and passes for something else entirely',
-      stakes: 'Discovery ends everything they have built; some of the people closest to them would turn on them',
-    },
-    {
-      secret: 'Their celebrated origin story is a fabrication they created to escape an intolerable past',
-      stakes: 'The real past includes people who are still alive and who remember',
-    },
-    {
-      secret: 'Has been corresponding with someone they are publicly required to treat as an enemy',
-      stakes: 'The correspondence is genuine and affectionate; it would be read as treason',
-    },
-    {
-      secret: 'Lives a second life under a different name in another part of the settlement or a nearby town',
-      stakes: 'The two lives have begun to approach each other geographically',
-    },
-    {
-      secret: 'Is not who their documents say they are. The real person died years ago and they took the identity',
-      stakes: "The real person's family recently moved to the area",
-    },
-  ],
+// CENSUS-4g (R-AX, the chair's ruling of 2026-11-05 08:3x): THE CRIMINAL SECRETS, KEYED BY THEIR
+// HOLDER'S ROLE. A religious secret that makes its holder a churchman ("maintains the role", "a
+// colleague's heretical activities", "falsifying miracle reports", "their religious order", "a
+// relic … declared destroyed" that was theirs to destroy) sits under `clergy`; a military one that
+// makes its holder a soldier or an officer (an order given in battle, patrol routes to sell, the
+// military supply budget, an atrocity ordered by the organisation they rose in) under `military`;
+// every other secret is role-free (`any`). The key is the holder's role class
+// (`domain/roles/roleClass.js :: classOfRole`), the fact's own reader (R-AP): no settlement atom
+// expresses a holder's role and none is added (no NPC-scoped atom enters the vocabulary).
+//
+// KEYED (CENSUS-1i unit 3): the draw (`generators/npc/factionLeaderSecret.js`) reads
+// `criminalSecretsForHolder(type, holderClass)` — the historic order with only the rows keyed to
+// another role left out, so a clergy holder's religious pool and a soldier's military pool are
+// unchanged and only a mismatched holder's draw moves — and its type roll re-maps a type the
+// holder's key empties (R-AX refined). The flat view `NPC_CRIMINAL_SECRETS` below is no longer what
+// the draw reads; it stays the table's census export (`tablePools`) and the unkeyed reading.
+//
+// @enforced-by tests/data/criminalSecretsByHolder.test.js
+export const NPC_CRIMINAL_SECRETS_BY_HOLDER = {
+  any: {
+    criminal: [
+      {
+        secret: 'Has been embezzling from the organisation they oversee for three years',
+        stakes: 'Exposure means disgrace, legal prosecution, and enemies who feel personally betrayed',
+      },
+      {
+        secret: 'Secretly directs a fencing operation through a trusted intermediary',
+        stakes: 'Criminal liability and the end of any political or social standing',
+      },
+      {
+        secret: 'Ordered what was officially ruled an accident, and sleeps fine about it',
+        stakes: "Murder charge, loss of everything, and the victim's family who suspects the truth",
+      },
+      {
+        secret: "On the payroll of the thieves' guild as a silent informant",
+        stakes: 'Exposure would cost them their post and likely their safety',
+      },
+      {
+        secret: 'Has been systematically bribing multiple officials for preferential treatment',
+        stakes: 'A cascade of confessions from any single one of the bribed parties',
+      },
+      {
+        secret: "Runs a protection scheme targeting the very merchants they're supposed to serve",
+        stakes: 'Civil and criminal liability; the merchants have been keeping records',
+      },
+      {
+        secret: 'Has been falsifying inspection records for a fee',
+        stakes: 'The next disaster caused by the uninspected goods will be traced back to them',
+      },
+      {
+        secret: 'Their legitimate business is a front for moving contraband',
+        stakes: 'Seizure of everything; the legitimacy is thin and investigators are circling',
+      },
+    ],
+    personal: [
+      {
+        secret: 'Has a second family in another settlement that neither family knows about',
+        stakes: 'Both relationships collapse, along with any claim to moral authority',
+      },
+      {
+        secret: 'Their identity is fabricated. They fled a different life entirely',
+        stakes: 'The person they became would be destroyed; the person they were might be wanted',
+      },
+      {
+        secret: 'Suffering from an illness they expect to kill them within two years',
+        stakes: 'Rivals would move against them immediately if they knew; dependents would panic',
+      },
+      {
+        secret: 'Deeply in debt to a creditor who owns the debt as leverage, not income',
+        stakes: 'The creditor will call it in at the worst possible moment, and has leverage to do so',
+      },
+      {
+        secret: 'Was directly responsible for a death that was ruled an accident',
+        stakes: 'Criminal liability and the complete destruction of their reputation',
+      },
+      {
+        secret: 'Has been funding a forbidden relationship with embezzled money',
+        stakes: 'Both the relationship and the embezzlement would become public simultaneously',
+      },
+      {
+        secret: "Their celebrated achievement was stolen. They took credit for another's work",
+        stakes: "The real author has evidence; they've been sitting on it for years",
+      },
+      {
+        secret: 'Has been slowly poisoning a rival with something that looks like natural illness',
+        stakes: 'A competent healer or investigator would find the evidence almost immediately',
+      },
+    ],
+    political: [
+      {
+        secret: 'Has been feeding strategic intelligence to a rival settlement',
+        stakes: 'Treason charges; execution or exile in most jurisdictions',
+      },
+      {
+        secret: 'Their appointment was secured through forged credentials',
+        stakes: "Discovery ends their career and discredits every decision they've made",
+      },
+      {
+        secret: "Knows the settlement's most important legal document was fraudulently created",
+        stakes: 'Revealing it destabilises everything; not revealing it makes them complicit',
+      },
+      {
+        secret: 'Has been delaying vital information from reaching the decision-makers',
+        stakes: 'When the consequences emerge, the delay will be investigated and traced',
+      },
+      {
+        secret: "Is the illegitimate heir to a title currently held by someone who doesn't know they exist",
+        stakes: 'Could claim it, or could be seen as a threat by those who benefit from the status quo',
+      },
+      {
+        secret: 'Has agreed to hand over authority to an external power in exchange for personal safety',
+        stakes: "Treason. Those they've sold out would not be forgiving",
+      },
+    ],
+    magical: [
+      {
+        secret: "Possesses a magical ability they've hidden for their entire career",
+        stakes: 'In some jurisdictions, concealment is itself a crime; in all of them, it changes everything',
+      },
+      {
+        secret: 'Made a binding pact with an entity they now cannot name without consequence',
+        stakes: 'The pact will come due (soon), and the terms are worse than they appeared at signing',
+      },
+      {
+        secret: 'Has been using magic to alter memories of specific events',
+        stakes: 'The alterations are imperfect; some victims already sense something is wrong',
+      },
+      {
+        secret: 'Knows the location of a sealed magical site that others have been searching for',
+        stakes: 'Everyone who wants it would kill for the information; none of them should have it',
+      },
+      {
+        secret: "Is under a compulsion placed by someone who is now dead, and it's getting harder to resist",
+        stakes: 'The compulsion will eventually force an action that exposes everything',
+      },
+      {
+        secret: 'Has been studying a forbidden school of magic under a false research pretext',
+        stakes: 'The research has progressed to the point where hiding it grows harder each week',
+      },
+    ],
+    religious: [
+      {
+        secret: 'Secretly receives what they believe are genuine divine visions, which terrifies them',
+        stakes: 'Acting on the visions would be seen as madness; ignoring them may be worse',
+      },
+    ],
+    family: [
+      {
+        secret: 'Has been sending money to a disowned family member in secret for years',
+        stakes: 'The family member knows enough to burn them; the payments are leverage',
+      },
+      {
+        secret: 'Knows their celebrated family history is fabricated, and helped fabricate it',
+        stakes: 'The real history is much worse; discovery would shame all who share the name',
+      },
+      {
+        secret: 'One of their children is not theirs biologically, and they know it',
+        stakes: 'Every inheritance, every decision, made differently if this becomes known',
+      },
+      {
+        secret: 'Owes a life-debt to someone whose interests directly conflict with their current role',
+        stakes: 'The debt will eventually be called in at the worst possible moment',
+      },
+      {
+        secret: "Has been protecting a sibling's crime for years (a serious one)",
+        stakes: 'Discovery makes them an accessory; the sibling has reason to pre-empt exposure',
+      },
+    ],
+    historical: [
+      {
+        secret: 'Was present at (and did nothing to prevent) an atrocity that is now history',
+        stakes: 'Complicity charges; the moral weight has been crushing them for years',
+      },
+      {
+        secret: 'Knows the actual truth behind a founding event that the settlement reveres',
+        stakes: 'The truth would delegitimise current power structures; powerful people prefer the myth',
+      },
+      {
+        secret: 'Survived something everyone believes killed them, under a different name',
+        stakes: 'The original identity, if revealed, carries baggage that would end the current one',
+      },
+      {
+        secret: 'Has been maintaining a cover-up of a past institutional failure that cost lives',
+        stakes: 'Exposure means accountability for something that happened a long time ago, to real people',
+      },
+      {
+        secret: 'Was the informant whose report triggered a purge that destroyed innocent lives',
+        stakes: 'The report was accurate in some ways but deliberately misleading in others',
+      },
+      {
+        secret: 'Possesses an original copy of a document that was officially declared destroyed',
+        stakes: 'The document changes the legitimacy of something very important to very powerful people',
+      },
+      {
+        secret: 'The person who raised them was not their parent, and that parent is someone significant',
+        stakes: "The revelation would disrupt inheritance, property, and several people's sense of identity",
+      },
+    ],
+    military: [
+      {
+        secret: 'Was captured and released under terms they have never disclosed',
+        stakes: "The terms may mean they owe something to an enemy that they haven't paid yet",
+      },
+      {
+        secret: 'Knows that the decisive victory everyone celebrates was won through treachery, not skill',
+        stakes: 'Several people built careers on that victory; they would not appreciate the truth',
+      },
+    ],
+    economic_betrayal: [
+      {
+        secret: 'Has been quietly shorting investments they publicly recommend, profiting from collapse',
+        stakes: 'Civil fraud liability and the permanent destruction of a reputation built over decades',
+      },
+      {
+        secret: 'The goods they sell as locally produced are sourced from somewhere with exploitative labour practices',
+        stakes: 'The premium they charge depends entirely on the lie holding',
+      },
+      {
+        secret: 'Has been paying a health official to suppress a finding about their product',
+        stakes: 'People are being harmed; the official is growing nervous; the finding is documented',
+      },
+      {
+        secret: 'Has information about a competitor that would ruin them, obtained through clearly illegal means',
+        stakes: 'Using the information exposes how it was obtained; not using it means watching an advantage expire',
+      },
+      {
+        secret: "Their business partner died of natural causes that weren't entirely natural",
+        stakes: 'An investigation would find ambiguous evidence: enough to ruin, maybe enough to prosecute',
+      },
+    ],
+    identity: [
+      {
+        secret: 'Is a member of a group that faces serious persecution, and passes for something else entirely',
+        stakes: 'Discovery ends everything they have built; some of the people closest to them would turn on them',
+      },
+      {
+        secret: 'Their celebrated origin story is a fabrication they created to escape an intolerable past',
+        stakes: 'The real past includes people who are still alive and who remember',
+      },
+      {
+        secret: 'Has been corresponding with someone they are publicly required to treat as an enemy',
+        stakes: 'The correspondence is genuine and affectionate; it would be read as treason',
+      },
+      {
+        secret: 'Lives a second life under a different name in another part of the settlement or a nearby town',
+        stakes: 'The two lives have begun to approach each other geographically',
+      },
+      {
+        secret: 'Is not who their documents say they are. The real person died years ago and they took the identity',
+        stakes: "The real person's family recently moved to the area",
+      },
+    ],
+  },
+  clergy: {
+    religious: [
+      {
+        secret: "Lost their faith completely but maintains the role. It's just a job now",
+        stakes: "Discovery destroys their flock's trust and their own standing; some would call it heresy",
+      },
+      {
+        secret: "Has been covering for a colleague's heretical activities out of personal loyalty",
+        stakes: 'When the colleague is exposed (and they will be), this secret comes with them',
+      },
+      {
+        secret: 'Has been systematically falsifying miracle reports for decades',
+        stakes: 'A sceptical investigator with the right access could unravel it all in a week',
+      },
+      {
+        secret: 'Knows their religious order was founded on a historical lie',
+        stakes: "The truth would shatter the institution they've dedicated their life to",
+      },
+      {
+        secret:
+          "Possesses a relic that was officially declared destroyed, and kept it because they couldn't face destroying something real",
+        stakes: 'Possession is heresy; surrender means explaining how they had it',
+      },
+    ],
+  },
+  military: {
+    military: [
+      {
+        secret: 'Gave an order during a battle that caused friendly casualties. It was covered up as enemy action',
+        stakes: 'The families of the dead believe a lie that this person actively maintains',
+      },
+      {
+        secret: 'Has been selling patrol routes and schedules to someone outside the settlement',
+        stakes: 'People have already died as a result; they are rationalising this as survivable',
+      },
+      {
+        secret: 'Has been skimming from military supply budgets for years through a trusted subordinate',
+        stakes: 'The subordinate now knows enough to destroy them, and is becoming expensive',
+      },
+      {
+        secret:
+          'Was ordered to commit an atrocity and complied, and has since risen in the organisation that ordered it',
+        stakes: 'The order came from someone senior; exposure implicates both of them',
+      },
+    ],
+  },
 };
+
+/** The historic position of every keyed type's rows: the holder key each slot drew from, in order. */
+export const CRIMINAL_SECRET_LEGACY_ORDER = {
+  religious: ['clergy', 'clergy', 'any', 'clergy', 'clergy', 'clergy'],
+  military: ['military', 'any', 'any', 'military', 'military', 'military'],
+};
+
+/**
+ * One secret type's rows for a holder, in the historic order; a row keyed to another role is left out.
+ * `holderClass` null keeps every row (the flat view the unkeyed draw reads).
+ * @param {string} type @param {string | null} holderClass
+ * @returns {Array<{ secret: string, stakes: string }>}
+ */
+export function criminalSecretsForHolder(type, holderClass) {
+  const order = CRIMINAL_SECRET_LEGACY_ORDER[type];
+  const free = NPC_CRIMINAL_SECRETS_BY_HOLDER.any[type];
+  if (!order) return free ? [...free] : undefined;
+  /** @type {Record<string, number>} */ const at = {};
+  const rows = [];
+  for (const key of order) {
+    const i = at[key] ?? 0; at[key] = i + 1;
+    if (holderClass === null || key === 'any' || key === holderClass) rows.push(NPC_CRIMINAL_SECRETS_BY_HOLDER[key][type][i]);
+  }
+  return rows;
+}
+
+/** The flat view the unkeyed draw reads (byte-identical to the table before R-AX). */
+export const NPC_CRIMINAL_SECRETS = Object.fromEntries(
+  Object.keys(NPC_CRIMINAL_SECRETS_BY_HOLDER.any).map((type) => [type, criminalSecretsForHolder(type, null)]),
+);
 
 export const FACTION_CONFLICT_TYPES = {
   government: ['military', 'economy', 'religious'],
@@ -1070,7 +1128,7 @@ export const NPC_FACTION_LOYALTY = {
     "One of their staff has started asking questions about records from seven years ago. They've been reassigned twice already.",
     'A merchant they publicly opposed is now publicly supporting them. No explanation offered.',
     "Their most trusted advisor hasn't been seen in four days. The official story changes each time it's told.",
-    "They know who committed a crime the guard is currently investigating. They're not telling the guard.",
+    { text: "They know who committed a crime the guard is currently investigating. They're not telling the guard.", needs: ['guardPresence'] }, // CENSUS-3e: the ledger's declaration
     "Someone has been leaving anonymous notes in their office pointing to a colleague's corruption. The notes are accurate.",
     "They've been meeting privately with someone from outside the settlement whose identity they won't disclose.",
     'A routine appointment they made three weeks ago has been rescheduled four times. Each time they initiated the change.',
@@ -1078,22 +1136,22 @@ export const NPC_FACTION_LOYALTY = {
     'They received a deposition in a civil case that, if acted on, would be correct, and would ruin someone they need.',
   ],
   military: [
-    'Three guards have gone missing in the same district on night patrol. The report filed says they deserted.',
-    'Weapons from the armoury have been disappearing in small quantities for months. The inventory matches, somehow.',
+    { text: 'Three guards have gone missing in the same district on night patrol. The report filed says they deserted.', needs: ['guardPresence'] }, // CENSUS-3e: the ledger's declaration
+    { text: 'Weapons from the armoury have been disappearing in small quantities for months. The inventory matches, somehow.', needs: ['guardPresence'] }, // CENSUS-3e: the ledger's declaration
     "They received orders from above that contradict what they know to be right. They haven't acted on either yet.",
-    'A prisoner in their custody knows something valuable. So does someone with reason to ensure they never speak.',
+    { text: 'A prisoner in their custody knows something valuable. So does someone with reason to ensure they never speak.', needs: ['guardPresence'] }, // CENSUS-3e: the ledger's declaration
     "They've noticed the same group of faces at multiple locations where incidents occurred. No one else has.",
-    "Someone is paying their soldiers more than their salary. The soldiers aren't saying who.",
+    { text: "Someone is paying their soldiers more than their salary. The soldiers aren't saying who.", needs: ['guardPresence'] }, // CENSUS-3e: the ledger's declaration
     'A spy they turned is now being turned back, and feeding information in both directions.',
-    "The ambush that killed two of their best people wasn't random. Someone knew the patrol route.",
+    { text: "The ambush that killed two of their best people wasn't random. Someone knew the patrol route.", needs: ['guardPresence'] }, // CENSUS-3e: the ledger's declaration
     'A recruit they turned away has since joined a different outfit. The different outfit is now paying them to monitor this one.',
     'They are carrying out orders they believe are wrong. They have not yet decided at what point they stop carrying them out.',
-    "A weapons cache they were responsible for is smaller than it should be. They haven't reported it yet.",
+    { text: "A weapons cache they were responsible for is smaller than it should be. They haven't reported it yet.", needs: ['guardPresence'] }, // CENSUS-3e: the ledger's declaration
   ],
   religious: [
     'A parishioner confessed something to them three months ago. The information is dangerous. They cannot act on it.',
     'The holy relic in their keeping is not what everyone believes it is. Only they know this.',
-    "Someone has been leaving offerings at the shrine that shouldn't be possible. The site has been sealed.",
+    { text: "Someone has been leaving offerings at the shrine that shouldn't be possible. The site has been sealed.", needs: ['institution: temple'] }, // CENSUS-3e: the ledger's declaration
     "A novice has the gift. They know what that means for the novice. They're not sure what to do.",
     'They received a directive from the hierarchy that contradicts their own theology. Compliance is expected.',
     "A healing they performed was successful in a way they cannot explain. It's happened twice now.",
@@ -1107,7 +1165,7 @@ export const NPC_FACTION_LOYALTY = {
     "A shipment they weren't expecting arrived and is now in their warehouse. They don't know who sent it or what to do.",
     "A business rival has offered them a partnership with terms so good it must be a trap. They can't find the trap.",
     'One of their most reliable suppliers has gone dark. The goods are still arriving. Someone else is sending them.',
-    'They have evidence of price-fixing across the whole market. Publishing it helps their competition as much as their customers.',
+    { text: 'They have evidence of price-fixing across the whole market. Publishing it helps their competition as much as their customers.', needs: ['market'] }, // CENSUS-3e: the ledger's declaration
     "A young trader has been undercutting them in ways that shouldn't be possible on their claimed capital.",
     "Someone is buying up their debts. Quietly. They don't know who, or why, or when they plan to call them in.",
     'A valuable cargo was reported lost at sea. The manifest has reappeared in a market two settlements away.',
@@ -1117,23 +1175,23 @@ export const NPC_FACTION_LOYALTY = {
     'A supplier is providing goods of uncertain provenance. The price is too good to ask questions. People have started asking questions.',
   ],
   criminal: [
-    "One of their people is talking to the guard. They don't know which one yet. They're watching.",
+    { text: "One of their people is talking to the guard. They don't know which one yet. They're watching.", needs: ['guardPresence'] }, // CENSUS-3e: the ledger's declaration
     'A valuable item came through their network recently. Three different parties have asked about it quietly.',
     "Someone in the legitimate government is playing both sides. That's useful, until it isn't.",
     'A job went wrong in a way that suggests information was leaked. They have three suspects.',
     "They're protecting someone from something worse. The someone doesn't know and wouldn't thank them.",
     'A new face has appeared in three separate incidents involving their operations. Coincidence or surveillance?',
-    'The guard captain has a file. They know because someone who works for the guard captain also works for them.',
+    { text: 'The guard captain has a file. They know because someone who works for the guard captain also works for them.', needs: ['guardPresence'] }, // CENSUS-3e: the ledger's declaration
     "Someone tried to rob one of their fronts. The attempt was professional. That's more worrying than amateur.",
   ],
   magic: [
     "An experiment failed in a way that shouldn't be possible. The results have been sealed. They're still thinking.",
     "A student asked a question three weeks ago that they haven't been able to answer. That's new.",
-    'Something in the settlement is absorbing ambient magical energy. The readings are increasing.',
+    { text: 'Something in the settlement is absorbing ambient magical energy. The readings are increasing.', needs: ['magic'] }, // CENSUS-3e: the ledger's declaration
     "They've been approached by someone who knows things about their research that were never made public.",
     'An old colleague has sent a message asking for a meeting. The colleague was declared dead six years ago.',
-    'The magical ward they placed on the vaults was bypassed. Not broken. Bypassed. That requires inside knowledge.',
-    'They have two competing theories about what is happening to magic in this region. Both are alarming.',
+    { text: 'The magical ward they placed on the vaults was bypassed. Not broken. Bypassed. That requires inside knowledge.', needs: ['magic'] }, // CENSUS-3e: the ledger's declaration
+    { text: 'They have two competing theories about what is happening to magic in this region. Both are alarming.', needs: ['magic'] }, // CENSUS-3e: the ledger's declaration
     'Someone has been making inquiries about their past research. Not the published work, the unpublished work.',
   ],
   other: [
@@ -1330,8 +1388,16 @@ export const NPC_PRESENTATION_MODES = {
 // way, and the archetype OBJECTS are unchanged (consumers compare them with === and
 // Object.entries().find: identity is load-bearing). `size` hands the pool length to the draw.
 // Index 0 of every pool is the pre-existing canonical closure, verbatim.
-const pairProse = (salt, variants) => Object.assign((r, s, variant, force) => (isTieIndex(variant) ? variants[variant % variants.length]
-  : pickVariant(variants, `${r?.name ?? ''}>${s?.name ?? ''}::${salt}`))(r, s, force || TIE_FORCE_WORDS), { size: variants.length }); // F1: the force words, garrison's by default (`defenseFacts.js :: forceWordsOf`)
+// CENSUS-4c (R-C, the table-consumer rule): a variant that presumes a record fact is declared IN
+// PLACE as `{ line: closure, needs?, excludes?, crisis? }` (the ledger's 30 rows,
+// docs/census/declarations/npcData.STRESS_ECONOMIC_EFFECTS.json); a bare closure declares nothing.
+// `closureOf` is the consumer's tolerance (byte-identical: the same closure is called), and `lines`
+// hands the declared variants, read-only and in index order, to the tie draw's resolution
+// (Appendix B site 19, `relationshipArchetypes.js :: createTieProseDraw`: CENSUS-1d's to wire).
+// ⚠ ONE index picks the desc AND the tension line: a refusal of either row refuses the pair.
+const closureOf = variant => (typeof variant === 'function' ? variant : variant.line);
+const pairProse = (salt, variants) => Object.assign((r, s, variant, force) => closureOf(isTieIndex(variant) ? variants[variant % variants.length]
+  : pickVariant(variants, `${r?.name ?? ''}>${s?.name ?? ''}::${salt}`))(r, s, force || TIE_FORCE_WORDS), { size: variants.length, lines: Object.freeze([...variants]) }); // F1: the force words, garrison's by default (`defenseFacts.js :: forceWordsOf`)
 const TIE_FORCE_WORDS = Object.freeze({ body: 'garrison', members: 'soldiers', member: 'soldier' });
 /** A drawn tie index is a non-negative integer; anything else takes the pair-hash fallback. */
 const isTieIndex = variant => Number.isInteger(variant) && variant >= 0;
@@ -1348,8 +1414,8 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `What ${r.name} sells is respectability, and ${s.name} is a steady customer. Goods move through channels no inspector has thought to draw on a map.`,
       (r, s) =>
         `${r.name} signs the import papers and ${s.name} decides what is actually in the crates. The warehouse keeps two inventories, and only one is shown to the customs house.`,
-      (r, s) =>
-        `${s.name}'s money buys ${r.name}'s stock at full price and sells it back through stalls that pay no market dues. Both of them call it a partnership.`,
+      { line: (r, s) =>
+        `${s.name}'s money buys ${r.name}'s stock at full price and sells it back through stalls that pay no market dues. Both of them call it a partnership.`, needs: ["market"] },
       (r, s) =>
         `${r.name}'s shop front is real, the trade is real, and a third of the coin that passes through it belongs to ${s.name}.`,
       (r, s) =>
@@ -1422,8 +1488,8 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${r.name} takes ${s.name}'s silver every quarter day and keeps certain doors unwatched in return. Each treats the other as a reliable colleague.`,
       (r, s) =>
         `${s.name}'s people are never searched on ${r.name}'s watch. The arrangement is three years old and has never been put in writing.`,
-      (r, s) =>
-        `${r.name} warns ${s.name} before every raid and arrests the competitors ${s.name} names. The watch reports show a fine record of arrests.`,
+      { line: (r, s) =>
+        `${r.name} warns ${s.name} before every raid and arrests the competitors ${s.name} names. The watch reports show a fine record of arrests.`, needs: ["watch"] },
       (r, s) =>
         `When ${s.name}'s crew needs a prisoner released, ${r.name} signs the order. When ${r.name} needs an arrest, ${s.name} supplies the culprit.`,
       (r, s) =>
@@ -1454,10 +1520,10 @@ export const STRESS_ECONOMIC_EFFECTS = {
       (r, s) => `${r.name} keeps a file on ${s.name}'s operation that grows by the week; ${s.name} keeps one on ${r.name} that is already complete.`,
       (r, s) => `The war between ${r.name} and ${s.name} is fought in raids, informants, and paperwork. Neither side counts it as winnable; neither will stop.`,
       (r, s) => `${r.name} has closed three of ${s.name}'s houses this year. ${s.name} has opened four.`,
-      (r, s) =>
-        `${r.name} wants ${s.name} in a cell and has said so before the council. ${s.name} has answered by paying two of ${r.name}'s informants.`,
-      (r, s) =>
-        `${s.name}'s people know ${r.name}'s patrol routes by heart, and ${r.name}'s people know which taverns ${s.name} uses. Neither side has made the arrest that counts.`,
+      { line: (r, s) =>
+        `${r.name} wants ${s.name} in a cell and has said so before the council. ${s.name} has answered by paying two of ${r.name}'s informants.`, excludes: ["ruler: lord","ruler: occupier"] },
+      { line: (r, s) =>
+        `${s.name}'s people know ${r.name}'s patrol routes by heart, and ${r.name}'s people know which taverns ${s.name} uses. Neither side has made the arrest that counts.`, needs: ["institution: tavern"] },
       (r, s) =>
         `${r.name} and ${s.name} are open enemies. Every raid ${r.name} orders costs ${s.name} money, and every month ${s.name} survives costs ${r.name} standing.`,
       (r, s) =>
@@ -1473,8 +1539,8 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${s.name} has offered ${r.name} a truce and a purse. ${r.name} has not answered, which ${s.name} counts as progress.`,
       (r, s) =>
         `${r.name}'s best informant inside ${s.name}'s crew has stopped reporting. Nobody has seen the informant for nine days.`,
-      (r, s) =>
-        `${s.name} has hired an advocate to sue ${r.name} over the last raid. The case comes before the council this season.`,
+      { line: (r, s) =>
+        `${s.name} has hired an advocate to sue ${r.name} over the last raid. The case comes before the council this season.`, excludes: ["ruler: lord","ruler: occupier"] },
       (r, s) =>
         `${r.name} has been ordered to stand down against ${s.name} by someone above ${r.name}. The order did not say why.`,
     ]),
@@ -1510,8 +1576,8 @@ export const STRESS_ECONOMIC_EFFECTS = {
       (r, s) => `${s.name}'s company has taken on a second client, and ${r.name} has learned the client's name.`,
       (r, s) =>
         `A guard from ${s.name}'s company was killed protecting ${r.name}'s cargo. ${s.name} wants compensation the contract does not mention.`,
-      (r, s) =>
-        `The council wants ${s.name}'s company under the watch's command. ${r.name} loses the contract's whole value if it agrees.`,
+      { line: (r, s) =>
+        `The council wants ${s.name}'s company under the watch's command. ${r.name} loses the contract's whole value if it agrees.`, needs: ["watch"], excludes: ["ruler: lord","ruler: occupier"] },
       (r, s) => `${r.name} has asked ${s.name} to escort a cargo with no manifest. ${s.name} has named a price.`,
     ]),
     type: 'patron_client',
@@ -1525,8 +1591,8 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `Between ${r.name}'s pulpit and ${s.name}'s ${f.body}, the settlement is governed twice over; the sermons and the patrol routes have a way of agreeing.`,
       (r, s) =>
         `${r.name} blesses what ${s.name} enforces, and ${s.name} enforces what ${r.name} blesses. Where one authority ends and the other begins is a question neither permits.`,
-      (r, s, f) =>
-        `${r.name} preaches the cause and ${s.name} raises the men. The shrine's coffers pay for the ${f.body}'s swords.`,
+      { line: (r, s, f) =>
+        `${r.name} preaches the cause and ${s.name} raises the men. The shrine's coffers pay for the ${f.body}'s swords.`, needs: ["institution: temple"] },
       (r, s, f) =>
         `${s.name}'s ${f.members} take their oaths before ${r.name}'s altar. To ${r.name}'s faithful, ${s.name}'s orders carry the weight of scripture.`,
       (r, s) =>
@@ -1542,8 +1608,8 @@ export const STRESS_ECONOMIC_EFFECTS = {
       (r, s) => `The crowd that obeys them both has begun to notice it is one crowd. So has ${s.name}.`,
       (r, s, f) =>
         `${r.name} has declared a holy day on which no ${f.member} may bear arms. ${s.name} has a patrol scheduled for it.`,
-      (r, s) =>
-        `${s.name}'s men have started praying at a different shrine. ${r.name} counts the empty places at every service.`,
+      { line: (r, s) =>
+        `${s.name}'s men have started praying at a different shrine. ${r.name} counts the empty places at every service.`, needs: ["institution: temple"] },
       (r, s) =>
         `${r.name} wants an armed march against a rival sect. ${s.name} has counted the cost in men and wants to wait a year.`,
       (r, s, f) =>
@@ -1561,8 +1627,8 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${s.name}'s money passes through ${r.name}'s offertory and comes out consecrated; the meeting rooms are sanctified, the accounts are not examined.`,
       (r, s) =>
         `${r.name} provides the sanctity, ${s.name} provides the income, and the congregation provides the cover (unknowingly), which is what makes it work.`,
-      (r, s) =>
-        `${s.name}'s crew meets in the crypt beneath ${r.name}'s shrine after evening prayers. ${r.name} keeps the only key.`,
+      { line: (r, s) =>
+        `${s.name}'s crew meets in the crypt beneath ${r.name}'s shrine after evening prayers. ${r.name} keeps the only key.`, needs: ["institution: temple"] },
       (r, s) =>
         `${r.name} records ${s.name}'s payments as gifts from a pious donor. The donor has never attended a service.`,
       (r, s) =>
@@ -1574,14 +1640,14 @@ export const STRESS_ECONOMIC_EFFECTS = {
     ]),
     tension: pairProse('t', [
       (r, s) => `${r.name} has a genuine crisis of conscience that ${s.name} is not prepared to accommodate.`,
-      (r, s) => `A visiting cleric has asked to audit the shrine's books. ${s.name} has offered to handle it.`,
+      { line: (r, s) => `A visiting cleric has asked to audit the shrine's books. ${s.name} has offered to handle it.`, needs: ["institution: temple"] },
       (r, s) => `${r.name} has started keeping a second set of records. Confession, of a kind.`,
-      (r, s) =>
-        `A member of ${r.name}'s congregation saw ${s.name}'s men carrying crates out of the shrine at night, and has asked ${r.name} about it twice.`,
+      { line: (r, s) =>
+        `A member of ${r.name}'s congregation saw ${s.name}'s men carrying crates out of the shrine at night, and has asked ${r.name} about it twice.`, needs: ["institution: temple"] },
       (r, s) =>
         `${s.name} wants to store weapons beneath ${r.name}'s altar. ${r.name} has refused once and been asked again.`,
-      (r, s) =>
-        `${r.name}'s superior is coming to inspect the shrine's accounts. ${s.name}'s gifts make up half the income.`,
+      { line: (r, s) =>
+        `${r.name}'s superior is coming to inspect the shrine's accounts. ${s.name}'s gifts make up half the income.`, needs: ["institution: temple"] },
       (r, s) => `${r.name} preached a sermon on theft last week. ${s.name} took it personally.`,
       (r, s) =>
         `${s.name} has asked ${r.name} to marry two of the crew under false names. ${r.name} has not set a date.`,
@@ -1602,8 +1668,8 @@ export const STRESS_ECONOMIC_EFFECTS = {
       (r, s) =>
         `${s.name} brings ${r.name} the jobs and the payment, and ${r.name} asks no questions about who the work is for.`,
       (r, s) => `${r.name}'s workshop has a back door, and ${s.name}'s couriers are the only ones who use it.`,
-      (r, s) =>
-        `${r.name} supplies ${s.name}'s network with wards against detection. Each ward is sold at triple the guild price.`,
+      { line: (r, s) =>
+        `${r.name} supplies ${s.name}'s network with wards against detection. Each ward is sold at triple the guild price.`, needs: ["guild"] },
       (r, s) =>
         `${s.name} pays ${r.name} a retainer to be ready at any hour. Twice this year, ${r.name} has been called out before dawn.`,
     ]),
@@ -1617,10 +1683,10 @@ export const STRESS_ECONOMIC_EFFECTS = {
       (r, s) => `${s.name} owes ${r.name} for three months of work and has offered information instead of coin.`,
       (r, s) =>
         `A ward ${r.name} made for ${s.name} failed during a robbery. ${s.name} blames the ward; ${r.name} blames the thief.`,
-      (r, s) =>
-        `The guild has summoned ${r.name} to explain a shortfall in licensed components. ${s.name}'s orders account for the missing stock.`,
-      (r, s) =>
-        `${r.name} has been offered a guild post that requires a clean record. ${s.name} has a list of everything ${r.name} has made.`,
+      { line: (r, s) =>
+        `The guild has summoned ${r.name} to explain a shortfall in licensed components. ${s.name}'s orders account for the missing stock.`, needs: ["guild"] },
+      { line: (r, s) =>
+        `${r.name} has been offered a guild post that requires a clean record. ${s.name} has a list of everything ${r.name} has made.`, needs: ["guild"] },
     ]),
     type: 'patron_client',
   },
@@ -1639,24 +1705,24 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${s.name} holds the settlement's tax rolls as security for its loans. ${r.name} cannot raise a levy without ${s.name}'s clerks counting it first.`,
       (r, s) =>
         `${r.name} owes ${s.name} more than the settlement collects in two years of taxes. ${s.name} is paid first, every quarter.`,
-      (r, s) =>
-        `${s.name} lends and ${r.name} spends. The council's decisions are made in ${r.name}'s chamber and approved in ${s.name}'s counting-house.`,
+      { line: (r, s) =>
+        `${s.name} lends and ${r.name} spends. The council's decisions are made in ${r.name}'s chamber and approved in ${s.name}'s counting-house.`, excludes: ["ruler: lord","ruler: occupier"] },
       (r, s) => `${r.name} governs on ${s.name}'s credit. Every loan renewed adds one more condition to the next.`,
     ]),
     tension: pairProse('t', [
       (r, s) => `${r.name} has identified an alternative creditor. ${s.name} has heard the same rumour.`,
       (r, s) => `The interest falls due at midsummer and the treasury will not cover it. ${s.name} has already drafted the terms of the extension.`,
-      (r, s) => `A faction on the council wants the debt repudiated outright. ${r.name} has stopped disagreeing in public.`,
-      (r, s) =>
-        `${s.name} has asked for a seat on the council as a condition of the next loan. ${r.name} has three weeks to answer.`,
-      (r, s) =>
-        `${r.name} has proposed a new tax to clear the debt. ${s.name}'s friends on the council will vote against it.`,
+      { line: (r, s) => `A faction on the council wants the debt repudiated outright. ${r.name} has stopped disagreeing in public.`, excludes: ["ruler: lord","ruler: occupier"] },
+      { line: (r, s) =>
+        `${s.name} has asked for a seat on the council as a condition of the next loan. ${r.name} has three weeks to answer.`, excludes: ["ruler: lord","ruler: occupier"] },
+      { line: (r, s) =>
+        `${r.name} has proposed a new tax to clear the debt. ${s.name}'s friends on the council will vote against it.`, excludes: ["ruler: lord","ruler: occupier"] },
       (r, s) =>
         `${s.name} is calling in a third of the debt at once. ${r.name} has until the next quarter day to find it.`,
       (r, s) =>
         `${r.name} has started borrowing small sums from ${s.name}'s rivals. ${s.name}'s clerks have seen the receipts.`,
-      (r, s) =>
-        `${s.name} has refused credit for the winter grain stores. ${r.name} must choose between the creditor and the granary.`,
+      { line: (r, s) =>
+        `${s.name} has refused credit for the winter grain stores. ${r.name} must choose between the creditor and the granary.`, needs: ["institution: granary"] },
     ]),
     type: 'debtor_creditor',
   },
@@ -1673,8 +1739,8 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${r.name} controls the ${f.body}'s pay and ${s.name} controls its swords. Each uses their half to bargain for the other's.`,
       (r, s) =>
         `${s.name} reports to ${r.name} on paper and to no one in practice. ${r.name} has three letters of complaint unanswered.`,
-      (r, s) =>
-        `${r.name} wants the watch under civil command; ${s.name} wants the council out of the barracks. They meet monthly and settle nothing.`,
+      { line: (r, s) =>
+        `${r.name} wants the watch under civil command; ${s.name} wants the council out of the barracks. They meet monthly and settle nothing.`, needs: ["watch","garrison"], excludes: ["ruler: lord","ruler: occupier"] },
       (r, s) =>
         `${r.name} sets the curfew and ${s.name} decides whether to enforce it. The two have not agreed on a curfew in a year.`,
       (r, s) =>
@@ -1684,14 +1750,14 @@ export const STRESS_ECONOMIC_EFFECTS = {
       (r, s) => 'An incident is coming that will force the issue. Both are positioning for it.',
       (r, s) => 'A prisoner is currently held by both jurisdictions at once. Neither will release the paperwork first.',
       (r, s) => `${s.name} has begun drilling in the square without asking. ${r.name} has begun writing letters to the capital.`,
-      (r, s, f) =>
-        `${r.name} has cut the ${f.body}'s pay to fund the market repairs. ${s.name} has told the ${f.members} who signed the order.`,
-      (r, s) =>
-        `${s.name} arrested a councillor's son without ${r.name}'s warrant. ${r.name} has demanded his release by tomorrow.`,
-      (r, s) =>
-        `${r.name} has asked the capital to replace ${s.name}. ${s.name} has asked the capital to dissolve ${r.name}'s council.`,
-      (r, s) =>
-        `A riot is expected on the next market day, and ${r.name} and ${s.name} have issued opposite orders for it.`,
+      { line: (r, s, f) =>
+        `${r.name} has cut the ${f.body}'s pay to fund the market repairs. ${s.name} has told the ${f.members} who signed the order.`, needs: ["market"] },
+      { line: (r, s) =>
+        `${s.name} arrested a councillor's son without ${r.name}'s warrant. ${r.name} has demanded his release by tomorrow.`, excludes: ["ruler: lord","ruler: occupier"] },
+      { line: (r, s) =>
+        `${r.name} has asked the capital to replace ${s.name}. ${s.name} has asked the capital to dissolve ${r.name}'s council.`, excludes: ["ruler: lord","ruler: occupier"] },
+      { line: (r, s) =>
+        `A riot is expected on the next market day, and ${r.name} and ${s.name} have issued opposite orders for it.`, needs: ["market"] },
       (r, s, f) =>
         `${s.name} has begun collecting a road toll for the ${f.body}. ${r.name} calls it theft from the treasury.`,
     ]),
@@ -1725,8 +1791,8 @@ export const STRESS_ECONOMIC_EFFECTS = {
       (r, s) => `A post opens at midsummer, and only ${r.name} or ${s.name} can fill it.`,
       (r, s) =>
         `${s.name} has been telling clients that ${r.name}'s work is slipping. Two of the clients have repeated it to ${r.name}.`,
-      (r, s) =>
-        `${r.name} and ${s.name} will both present proposals at the next council session. Only one will be accepted.`,
+      { line: (r, s) =>
+        `${r.name} and ${s.name} will both present proposals at the next council session. Only one will be accepted.`, excludes: ["ruler: lord","ruler: occupier"] },
       (r, s) => `${r.name} lost the last contract to ${s.name} by a single vote, and has learned who cast it.`,
     ]),
     type: 'rival',
@@ -1806,7 +1872,7 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${r.name} and ${s.name} are allies by arithmetic: each has counted the cost of the other as an enemy and found it too high. The friendship is warm, public, and entirely conditional.`,
       (r, s) =>
         `The alliance between ${r.name} and ${s.name} was born of a shared threat and has outlived it; both are quietly recalculating what it is now for.`,
-      (r, s) => `${r.name} and ${s.name} share a council bloc and a list of enemies. They do not share their plans.`,
+      { line: (r, s) => `${r.name} and ${s.name} share a council bloc and a list of enemies. They do not share their plans.`, excludes: ["ruler: lord","ruler: occupier"] },
       (r, s) => `${r.name} and ${s.name} back each other in public and check each other's work in private.`,
       (r, s) =>
         `${r.name} brings the votes and ${s.name} brings the money. The alliance is three years old and has won every vote it needed.`,
@@ -1844,8 +1910,8 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${r.name} sends difficult cases to ${s.name}, and ${s.name} sends them back solved. Neither has ever charged the other a fee.`,
       (r, s) =>
         `${r.name} and ${s.name} have stood on opposite sides of three disputes and praised each other after every one.`,
-      (r, s) =>
-        `${s.name} once told the council that ${r.name} was right and ${s.name} was wrong. ${r.name} has not forgotten it.`,
+      { line: (r, s) =>
+        `${s.name} once told the council that ${r.name} was right and ${s.name} was wrong. ${r.name} has not forgotten it.`, excludes: ["ruler: lord","ruler: occupier"] },
       (r, s) =>
         `${r.name} and ${s.name} consult each other before any decision that matters. The advice is honest and is always taken seriously.`,
       (r, s) =>
@@ -1858,8 +1924,8 @@ export const STRESS_ECONOMIC_EFFECTS = {
       (r, s) => `${r.name} has learned something about ${s.name}'s family that ${s.name} does not know.`,
       (r, s) => `${s.name} has been offered ${r.name}'s post by people who want ${r.name} gone.`,
       (r, s) => `${r.name} has made a mistake that ${s.name} is bound to report. ${s.name} has not reported it.`,
-      (r, s) =>
-        `The council has asked ${r.name} and ${s.name} to audit each other's accounts. Both agreed, and neither is comfortable.`,
+      { line: (r, s) =>
+        `The council has asked ${r.name} and ${s.name} to audit each other's accounts. Both agreed, and neither is comfortable.`, excludes: ["ruler: lord","ruler: occupier"] },
       (r, s) =>
         `${s.name} has publicly backed a plan that ${r.name} thinks will fail. ${r.name} has said so once, in private.`,
     ]),
@@ -1957,8 +2023,8 @@ export const STRESS_ECONOMIC_EFFECTS = {
       (r, s) => 'A newcomer keeps trying to reconcile them, and is about to learn why nobody else does.',
       (r, s) => `${s.name} has been appointed to judge a case in which ${r.name} is a party.`,
       (r, s) => `${r.name} has found the document that proves what ${s.name} did, and has kept it locked away.`,
-      (r, s) =>
-        `${r.name} and ${s.name} have been placed on the same council committee. The first meeting is next week.`,
+      { line: (r, s) =>
+        `${r.name} and ${s.name} have been placed on the same council committee. The first meeting is next week.`, excludes: ["ruler: lord","ruler: occupier"] },
       (r, s) => `${s.name}'s child has asked to apprentice with ${r.name}. ${r.name} has not refused.`,
       (r, s) => `${r.name} has learned that ${s.name} is in debt and could be ruined by one call on a loan.`,
     ]),
@@ -1996,4 +2062,26 @@ export const TRAIT_PRESENCE_DISTRIBUTION = Object.freeze({
   flawOnly: 0.30,
   temperamentOnly: 0.20,
   neither: 0.10,
+});
+
+/**
+ * DECLARED SIBLINGS (CENSUS-1c unit 1; `docs/DESIGN_POOL_CENSUS.md` §3.1, the twin tables
+ * dissolved): the inland twins of this file's goal and loyalty-hook lines (F5). Each set is the original line, declaring what it presumes, and beside it its
+ * twin with the complementary atom (`twinOf` the original). The original stays where this table's
+ * string consumers read it; the draw site resolves a drawn key through
+ * `domain/facts/drawDeclared.js :: resolveSibling` (the original if the record admits it, else the
+ * twin). Retired from the text-keyed tables `defenceTwinLines.js` / `inlandHookLines.js` (F5, F10),
+ * every twin to the byte. VETOABLE wording, as before (the owner's).
+ */
+export const NPC_HOOK_SIBLINGS = Object.freeze({
+  // NPC_FACTION_GOALS — the Guard Captain's goal.
+  'Find the person responsible for three unsolved dock-side killings': Object.freeze([
+    Object.freeze({ text: 'Find the person responsible for three unsolved dock-side killings', needs: Object.freeze(['navigable']) }),
+    Object.freeze({ text: 'Find the person responsible for three unsolved killings', twinOf: 'Find the person responsible for three unsolved dock-side killings', excludes: Object.freeze(['navigable']) }),
+  ]),
+  // NPC_FACTION_LOYALTY — the economy loyalty hook.
+  'A valuable cargo was reported lost at sea. The manifest has reappeared in a market two settlements away.': Object.freeze([
+    Object.freeze({ text: 'A valuable cargo was reported lost at sea. The manifest has reappeared in a market two settlements away.', needs: Object.freeze(['navigable']) }),
+    Object.freeze({ text: 'A valuable cargo was reported lost on the road. The manifest has reappeared in a market two settlements away.', twinOf: 'A valuable cargo was reported lost at sea. The manifest has reappeared in a market two settlements away.', excludes: Object.freeze(['navigable']) }),
+  ]),
 });

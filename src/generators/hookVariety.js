@@ -121,3 +121,6 @@ export function drawUnique(pool, used, keyFn = (x) => /** @type {string} */ (x),
   }
   return chosen;
 }
+
+// THE REGISTRY-AWARE TWIN (CENSUS-3e's `freshAdmittedTwin`) moved to `drawDeclared`'s `registry`
+// option (R-AJ, CENSUS-1g unit 3): one resolver for every site that draws through `drawUnique`.

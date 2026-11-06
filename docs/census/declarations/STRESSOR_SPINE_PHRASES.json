@@ -1,0 +1,880 @@
+{
+  "poolId": "STRESSOR_SPINE_PHRASES",
+  "source": "src/data/stressorSpinePhrases.js :52 STRESSOR_SPINE_PHRASES",
+  "drawKind": "T",
+  "drawSite": "src/domain/simulationSpine.js:374-402 strainPhraseOf / fearPhraseOf → STRESSOR_SPINE_PHRASES[type].strain|fear",
+  "pools": [
+    {
+      "pool": "under_siege.strain",
+      "keyGuarantees": [
+        "stressor type = under_siege",
+        "slot: \"It is currently strained by ___\""
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "under_siege"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one phrase per slot (T).",
+      "lines": [
+        {
+          "lineId": "STRESSOR_SPINE_PHRASES.under_siege.strain",
+          "text": "an active siege",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "under_siege"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "under_siege.fear",
+      "keyGuarantees": [
+        "stressor type = under_siege",
+        "slot: \"Its people fear ___\""
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "under_siege"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one phrase per slot (T).",
+      "lines": [
+        {
+          "lineId": "STRESSOR_SPINE_PHRASES.under_siege.fear",
+          "text": "the wall coming down before any relief arrives",
+          "needs": [
+            "walls"
+          ],
+          "excludes": [],
+          "crisis": [
+            "under_siege"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ],
+      "twins": [
+        {
+          "text": "the stores running out before any relief arrives",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "under_siege"
+          ],
+          "why": "The one fear line needs walls; a besieged place with no perimeter wall has no fear phrase."
+        }
+      ]
+    },
+    {
+      "pool": "famine.strain",
+      "keyGuarantees": [
+        "stressor type = famine",
+        "slot: \"It is currently strained by ___\""
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "famine"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one phrase per slot (T).",
+      "lines": [
+        {
+          "lineId": "STRESSOR_SPINE_PHRASES.famine.strain",
+          "text": "famine",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "famine"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "famine.fear",
+      "keyGuarantees": [
+        "stressor type = famine",
+        "slot: \"Its people fear ___\""
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "famine"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one phrase per slot (T).",
+      "lines": [
+        {
+          "lineId": "STRESSOR_SPINE_PHRASES.famine.fear",
+          "text": "a second failed harvest on top of the first",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "famine"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "occupied.strain",
+      "keyGuarantees": [
+        "stressor type = occupied",
+        "slot: \"It is currently strained by ___\""
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "occupied"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one phrase per slot (T).",
+      "lines": [
+        {
+          "lineId": "STRESSOR_SPINE_PHRASES.occupied.strain",
+          "text": "a foreign occupation",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "occupied"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "occupied.fear",
+      "keyGuarantees": [
+        "stressor type = occupied",
+        "slot: \"Its people fear ___\""
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "occupied"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one phrase per slot (T).",
+      "lines": [
+        {
+          "lineId": "STRESSOR_SPINE_PHRASES.occupied.fear",
+          "text": "what the occupier will take next",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "occupied"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "politically_fractured.strain",
+      "keyGuarantees": [
+        "stressor type = politically_fractured",
+        "slot: \"It is currently strained by ___\""
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "politically_fractured"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one phrase per slot (T).",
+      "lines": [
+        {
+          "lineId": "STRESSOR_SPINE_PHRASES.politically_fractured.strain",
+          "text": "a governing council that no longer meets",
+          "needs": [
+            "ruler: council"
+          ],
+          "excludes": [],
+          "crisis": [
+            "politically_fractured"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ],
+      "twins": [
+        {
+          "text": "factions that each hold part of the place and will not yield",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "politically_fractured"
+          ],
+          "why": "The one strain line presumes a council ruler; a fractured place ruled by an elder, lord or priest has no strain phrase."
+        }
+      ]
+    },
+    {
+      "pool": "politically_fractured.fear",
+      "keyGuarantees": [
+        "stressor type = politically_fractured",
+        "slot: \"Its people fear ___\""
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "politically_fractured"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one phrase per slot (T).",
+      "lines": [
+        {
+          "lineId": "STRESSOR_SPINE_PHRASES.politically_fractured.fear",
+          "text": "the quarrel turning into something with blood in it",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "politically_fractured"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "indebted.strain",
+      "keyGuarantees": [
+        "stressor type = indebted",
+        "slot: \"It is currently strained by ___\""
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "indebted"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one phrase per slot (T).",
+      "lines": [
+        {
+          "lineId": "STRESSOR_SPINE_PHRASES.indebted.strain",
+          "text": "debt to an outside power",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "indebted"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "indebted.fear",
+      "keyGuarantees": [
+        "stressor type = indebted",
+        "slot: \"Its people fear ___\""
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "indebted"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one phrase per slot (T).",
+      "lines": [
+        {
+          "lineId": "STRESSOR_SPINE_PHRASES.indebted.fear",
+          "text": "the creditor calling in the whole of what is owed",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "indebted"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "recently_betrayed.strain",
+      "keyGuarantees": [
+        "stressor type = recently_betrayed",
+        "slot: \"It is currently strained by ___\""
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "recently_betrayed"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one phrase per slot (T).",
+      "lines": [
+        {
+          "lineId": "STRESSOR_SPINE_PHRASES.recently_betrayed.strain",
+          "text": "a betrayal still working its way through the town",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "recently_betrayed"
+          ],
+          "colour": false,
+          "stop": [
+            "tier"
+          ]
+        }
+      ]
+    },
+    {
+      "pool": "recently_betrayed.fear",
+      "keyGuarantees": [
+        "stressor type = recently_betrayed",
+        "slot: \"Its people fear ___\""
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "recently_betrayed"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one phrase per slot (T).",
+      "lines": [
+        {
+          "lineId": "STRESSOR_SPINE_PHRASES.recently_betrayed.fear",
+          "text": "that whoever did it is still living among them",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "recently_betrayed"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "infiltrated.strain",
+      "keyGuarantees": [
+        "stressor type = infiltrated",
+        "slot: \"It is currently strained by ___\""
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "infiltrated"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one phrase per slot (T).",
+      "lines": [
+        {
+          "lineId": "STRESSOR_SPINE_PHRASES.infiltrated.strain",
+          "text": "quiet penetration by an outside interest",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "infiltrated"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "infiltrated.fear",
+      "keyGuarantees": [
+        "stressor type = infiltrated",
+        "slot: \"Its people fear ___\""
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "infiltrated"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one phrase per slot (T).",
+      "lines": [
+        {
+          "lineId": "STRESSOR_SPINE_PHRASES.infiltrated.fear",
+          "text": "learning at last who has been listening",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "infiltrated"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "plague_onset.strain",
+      "keyGuarantees": [
+        "stressor type = plague_onset",
+        "slot: \"It is currently strained by ___\""
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "plague_onset"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one phrase per slot (T).",
+      "lines": [
+        {
+          "lineId": "STRESSOR_SPINE_PHRASES.plague_onset.strain",
+          "text": "a disease outbreak",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "plague_onset"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "plague_onset.fear",
+      "keyGuarantees": [
+        "stressor type = plague_onset",
+        "slot: \"Its people fear ___\""
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "plague_onset"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one phrase per slot (T).",
+      "lines": [
+        {
+          "lineId": "STRESSOR_SPINE_PHRASES.plague_onset.fear",
+          "text": "the sickness reaching their own doorway",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "plague_onset"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "succession_void.strain",
+      "keyGuarantees": [
+        "stressor type = succession_void",
+        "slot: \"It is currently strained by ___\""
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "succession_void"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one phrase per slot (T).",
+      "lines": [
+        {
+          "lineId": "STRESSOR_SPINE_PHRASES.succession_void.strain",
+          "text": "an empty seat of authority",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "succession_void"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "succession_void.fear",
+      "keyGuarantees": [
+        "stressor type = succession_void",
+        "slot: \"Its people fear ___\""
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "succession_void"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one phrase per slot (T).",
+      "lines": [
+        {
+          "lineId": "STRESSOR_SPINE_PHRASES.succession_void.fear",
+          "text": "the wrong claimant reaching that seat first",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "succession_void"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "monster_pressure.strain",
+      "keyGuarantees": [
+        "stressor type = monster_pressure",
+        "slot: \"It is currently strained by ___\""
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "monster_pressure"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one phrase per slot (T).",
+      "lines": [
+        {
+          "lineId": "STRESSOR_SPINE_PHRASES.monster_pressure.strain",
+          "text": "beast and raider pressure out of the surrounding country",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "monster_pressure"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "monster_pressure.fear",
+      "keyGuarantees": [
+        "stressor type = monster_pressure",
+        "slot: \"Its people fear ___\""
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "monster_pressure"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one phrase per slot (T).",
+      "lines": [
+        {
+          "lineId": "STRESSOR_SPINE_PHRASES.monster_pressure.fear",
+          "text": "whatever is out there working its way closer",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "monster_pressure"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "insurgency.strain",
+      "keyGuarantees": [
+        "stressor type = insurgency",
+        "slot: \"It is currently strained by ___\""
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "insurgency"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one phrase per slot (T).",
+      "lines": [
+        {
+          "lineId": "STRESSOR_SPINE_PHRASES.insurgency.strain",
+          "text": "an active insurgency",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "insurgency"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "insurgency.fear",
+      "keyGuarantees": [
+        "stressor type = insurgency",
+        "slot: \"Its people fear ___\""
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "insurgency"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one phrase per slot (T).",
+      "lines": [
+        {
+          "lineId": "STRESSOR_SPINE_PHRASES.insurgency.fear",
+          "text": "being made to choose a side in the open",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "insurgency"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "religious_conversion.strain",
+      "keyGuarantees": [
+        "stressor type = religious_conversion",
+        "slot: \"It is currently strained by ___\""
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "religious_conversion"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one phrase per slot (T).",
+      "lines": [
+        {
+          "lineId": "STRESSOR_SPINE_PHRASES.religious_conversion.strain",
+          "text": "a change of faith the community did not choose",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "religious_conversion"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "religious_conversion.fear",
+      "keyGuarantees": [
+        "stressor type = religious_conversion",
+        "slot: \"Its people fear ___\""
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "religious_conversion"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one phrase per slot (T).",
+      "lines": [
+        {
+          "lineId": "STRESSOR_SPINE_PHRASES.religious_conversion.fear",
+          "text": "the old observances being forbidden outright",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "religious_conversion"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "slave_revolt.strain",
+      "keyGuarantees": [
+        "stressor type = slave_revolt",
+        "slot: \"It is currently strained by ___\""
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "slave_revolt"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one phrase per slot (T).",
+      "lines": [
+        {
+          "lineId": "STRESSOR_SPINE_PHRASES.slave_revolt.strain",
+          "text": "a slave revolt",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "slave_revolt"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "slave_revolt.fear",
+      "keyGuarantees": [
+        "stressor type = slave_revolt",
+        "slot: \"Its people fear ___\""
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "slave_revolt"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one phrase per slot (T).",
+      "lines": [
+        {
+          "lineId": "STRESSOR_SPINE_PHRASES.slave_revolt.fear",
+          "text": "the reprisal that follows whichever way it ends",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "slave_revolt"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "wartime.strain",
+      "keyGuarantees": [
+        "stressor type = wartime",
+        "slot: \"It is currently strained by ___\""
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "wartime"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one phrase per slot (T).",
+      "lines": [
+        {
+          "lineId": "STRESSOR_SPINE_PHRASES.wartime.strain",
+          "text": "a war it cannot step out of",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "wartime"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "wartime.fear",
+      "keyGuarantees": [
+        "stressor type = wartime",
+        "slot: \"Its people fear ___\""
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "wartime"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one phrase per slot (T).",
+      "lines": [
+        {
+          "lineId": "STRESSOR_SPINE_PHRASES.wartime.fear",
+          "text": "the next levy taking the rest of their sons",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "wartime"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "mass_migration.strain",
+      "keyGuarantees": [
+        "stressor type = mass_migration",
+        "slot: \"It is currently strained by ___\""
+      ],
+      "poolNeeds": [
+        "migration: influx"
+      ],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "mass_migration"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one phrase per slot (T).",
+      "lines": [
+        {
+          "lineId": "STRESSOR_SPINE_PHRASES.mass_migration.strain",
+          "text": "an arrival of people it was never built to hold",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "mass_migration"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "mass_migration.fear",
+      "keyGuarantees": [
+        "stressor type = mass_migration",
+        "slot: \"Its people fear ___\""
+      ],
+      "poolNeeds": [
+        "migration: influx"
+      ],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "mass_migration"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one phrase per slot (T).",
+      "lines": [
+        {
+          "lineId": "STRESSOR_SPINE_PHRASES.mass_migration.fear",
+          "text": "there not being enough to go round",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "mass_migration"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    }
+  ]
+}

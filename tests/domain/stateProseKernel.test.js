@@ -56,6 +56,25 @@ import { PROSPERITY_TIERS } from '../../src/data/constants.js';
 import { deriveProsperityLabel } from '../../src/generators/economy/prosperity.js';
 import { expectAbsentWithAnchor, expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
+import { CALM_FACTS_ADMIT_ALL } from '../helpers/calmFactsDouble.js';
+import { variantFactDeclaration } from '../../src/domain/display/stateProse/stateProseKernel.js';
+
+/**
+ * CENSUS-5b unit 3 (re-keyed by that cause): a variant whose OWN declaration needs an active
+ * crisis (`crisis: <kinds>` without `calm` or `any`; R-I) is not a calm variant, so the calm
+ * pre-cure reference sets it aside — the crisis-safe twins of the pools that went mute (R-L).
+ * @param {any} variant
+ */
+const needsCrisis = (variant) => {
+  const c = variantFactDeclaration(variant).crisis;
+  return c.length > 0 && !c.includes('calm') && !c.includes('any');
+};
+/**
+ * CENSUS-5c unit 3 (2026-11-05): a variant that EXCLUDES a presence atom (`no organised crime`,
+ * DS-DEF-4 structure null v1) is refused by the calm double, which holds every presence atom;
+ * the calm reference sets it aside, as it sets aside a crisis-needing variant above.
+ */
+const excludesPresence = (variant) => variantFactDeclaration(variant).excludes.some((a) => !/^crisis\b/.test(a));
 
 /**
  * The hash pair, re-spelled here so every key this file checks is checked against an
@@ -220,12 +239,14 @@ describe('the state-prose reader — anchored liveness', () => {
     }
   });
 
+  // CENSUS-3c (R-N): DS-ECO-8's lines declare fact atoms (STRUGGLING v3 `market`), so the kernel
+  // reads the pool against `facts` (fail-closed); the one calm double keeps these the laws' arms.
   for (const rung of PROSPERITY_RUNGS) {
     it(`offers the settlement-naming rung only while the town has a name — ${rung.pool} [${rung.why}]`, () => {
       const pool = DOSSIER_STATE_PROSE_ECONOMY[rung.block].pools[rung.pool];
-      const named = eligibleVariants(pool, { slots: { settlement: 'Thornwall' }, audience: AUDIENCE_DM })
+      const named = eligibleVariants(pool, { slots: { settlement: 'Thornwall' }, audience: AUDIENCE_DM, facts: CALM_FACTS_ADMIT_ALL })
         .map((v) => v.text);
-      const unnamed = eligibleVariants(pool, { slots: {}, audience: AUDIENCE_DM }).map((v) => v.text);
+      const unnamed = eligibleVariants(pool, { slots: {}, audience: AUDIENCE_DM, facts: CALM_FACTS_ADMIT_ALL }).map((v) => v.text);
 
       const slotted = named.find((t) => t.includes('{settlement}'));
       expect(slotted, 'the rung must carry at least one settlement-anchored line').toBeTruthy();
@@ -248,7 +269,7 @@ describe('the state-prose reader — anchored liveness', () => {
       ).toBe(true);
       const line = readStateProse(
         DOSSIER_STATE_PROSE_ECONOMY, rung.block, rung.pool,
-        { slots: { settlement: 'Thornwall' }, seed: 'save-1::eco-8', audience: AUDIENCE_DM },
+        { slots: { settlement: 'Thornwall' }, seed: 'save-1::eco-8', audience: AUDIENCE_DM, facts: CALM_FACTS_ADMIT_ALL },
       );
       expect(line?.text).toBeTruthy();
       // anchored: the two assertions above prove the pool can produce a slot token and that the reader returned live prose, so this measures substitution rather than absence-of-everything
@@ -385,7 +406,7 @@ describe('the state-prose reader — THE PROMISE', () => {
   for (const rung of PROSPERITY_RUNGS) {
     it(`draws the same sentence for the same seed and the same state, every time — ${rung.pool} [${rung.why}]`, () => {
       const args = [DOSSIER_STATE_PROSE_ECONOMY, rung.block, rung.pool,
-        { slots: { settlement: 'Thornwall' }, seed: 'world-7::DS-ECO-8', audience: AUDIENCE_DM }];
+        { slots: { settlement: 'Thornwall' }, seed: 'world-7::DS-ECO-8', audience: AUDIENCE_DM, facts: CALM_FACTS_ADMIT_ALL }];
       const first = readStateProse(...args);
       for (let i = 0; i < 20; i++) expect(readStateProse(...args)).toEqual(first);
     });
@@ -393,7 +414,7 @@ describe('the state-prose reader — THE PROMISE', () => {
     it(`reads canonical-at-zero when there is no seed — ${rung.pool} [${rung.why}]`, () => {
       const pool = DOSSIER_STATE_PROSE_ECONOMY[rung.block].pools[rung.pool];
       const seedless = readStateProse(DOSSIER_STATE_PROSE_ECONOMY, rung.block, rung.pool,
-        { slots: { settlement: 'Thornwall' } });
+        { slots: { settlement: 'Thornwall' }, facts: CALM_FACTS_ADMIT_ALL });
       expect(seedless?.text).toBe(pool[0].text.replace('{settlement}', 'Thornwall'));
     });
   }
@@ -438,13 +459,18 @@ describe('the state-prose reader — law 5, and the darkness of it', () => {
     let draws = 0;
     for (const { desk, blockId, poolKey, pool } of ALL_POOLS) {
       if (poolDimensions(pool).length > 0) continue;
+      // CENSUS-3b unit 2 skipped a pool whose variants declare FACT atoms (fail-closed without
+      // `facts`); the CENSUS-1e merge keeps it in the sweep instead, read against R-N's one calm
+      // double below (CENSUS-5's), so the sweep stays as wide as each side had it.
       poolsChecked += 1;
       const slots = bagFor(pool);
       for (const audience of [AUDIENCE_DM, AUDIENCE_PLAYER]) {
         const reference = pool.filter(
-          (variant) => variantIsAudible(variant, audience) && variantIsAnchored(variant, slots),
+          (variant) => variantIsAudible(variant, audience) && variantIsAnchored(variant, slots) && !needsCrisis(variant) && !excludesPresence(variant),
         );
-        const cured = eligibleVariants(pool, { slots, audience });
+        // CENSUS-5: a pool whose lines declare fact atoms reads against `facts`; the calm
+        // admit-all double keeps this the pre-cure comparison (`tests/helpers/calmFactsDouble.js`).
+        const cured = eligibleVariants(pool, { slots, audience, facts: CALM_FACTS_ADMIT_ALL });
         if (cured.length !== reference.length || cured.some((v, i) => v !== reference[i])) {
           drift.push(`ELIGIBILITY :: ${desk} :: ${blockId} :: ${poolKey} :: ${audience}`);
         }
@@ -453,7 +479,7 @@ describe('the state-prose reader — law 5, and the darkness of it', () => {
           const was = drawVariant(reference, blockId, poolKey, seed);
           const wasText = was ? fillSlots(was.text, slots) : null;
           const nowText = readStateProse({ [blockId]: { pools: { [poolKey]: pool } } },
-            blockId, poolKey, { slots, seed, audience })?.text ?? null;
+            blockId, poolKey, { slots, seed, audience, facts: CALM_FACTS_ADMIT_ALL })?.text ?? null;
           if (wasText !== nowText) {
             drift.push(`DRAW :: ${desk} :: ${blockId} :: ${poolKey} :: ${audience} :: seed "${seed}"`);
           }
@@ -466,8 +492,12 @@ describe('the state-prose reader — law 5, and the darkness of it', () => {
     // by being empty, which is the failure mode this pair of floors exists to refuse.
     // F10 WALLS-WORD (2026-11-04): 32 more pools partition by `walls`, so 730 are swept.
     // F12 CRISIS-BLIND (2026-11-04): 14 more pools partition by a crisis dimension, so 716.
-    expect(poolsChecked).toBeGreaterThanOrEqual(716);
-    expect(draws).toBeGreaterThanOrEqual(716 * 2 * SWEEP_SEEDS.length);
+    // CENSUS-3b unit 2 (2026-11-05): DS-ECO-10 established and DS-ECO-12 one-source take `no hunger`
+    // (a crisis dimension) and DS-ECO-8 COMFORTABLE declares `no crisis: indebted` (a fact atom), so 713.
+    // CENSUS-5b unit 1 (2026-11-05): DS-DEF-1 `readiness WEAK` partitions by `walls` (v2, the
+    // perimeter line, declares it; R-O), so 712 (the CENSUS-1e merge composes the two).
+    expect(poolsChecked).toBeGreaterThanOrEqual(712);
+    expect(draws).toBeGreaterThanOrEqual(712 * 2 * SWEEP_SEEDS.length);
   });
 
   it('leaves the causal register untouched — no arm name is a dimension word', () => {

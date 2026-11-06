@@ -17,8 +17,8 @@ import {
   isFabricRow,
 } from '../../data/institutionalCatalog.js';
 import { densityFactor, isDensityExempt, scaleChance } from '../../data/institutionBudget.js';
-import { INSTITUTION_DESC_VARIANTS } from '../../data/institutionDescVariants.js';
-import { INLAND_DESCRIPTIONS } from '../../data/inlandDescriptions.js'; import { defenceTwinLine } from '../../data/defenceTwinLines.js'; import { defenseFactsOf } from '../../domain/defense/defenseFacts.js'; // F10: one line, so no cited line moves
+import { INSTITUTION_DESC_VARIANTS, DESC_VARIANT_SIBLINGS } from '../../data/institutionDescVariants.js';
+import { INLAND_DESCRIPTIONS } from '../../data/inlandDescriptions.js'; import { resolveSibling } from '../../domain/facts/drawDeclared.js'; import { factsOf, birthFactsOf } from '../../domain/facts/factsOf.js'; import { drawInstitutionDesc } from './institutionDescDraw.js'; // F10, CENSUS-1c, CENSUS-1f: one line, so no cited line moves
 import { pickVariant } from '../../kernel/proseHash.js';
 import { TERRAIN_DATA } from '../../data/geographyData.js';
 import { RESOURCE_DATA } from '../../data/goods/identity.js';
@@ -1001,7 +1001,7 @@ registerStep('assembleInstitutions', {
       const pool = [inst.desc, ...variants];
       const dry = worldLaw.portKind === 'none' ? pool.filter((desc) => !SHIP_WORD.test(desc)) : pool;
       const inland = dry.length ? null : INLAND_DESCRIPTIONS[`${tier}|${inst.category}|${inst.name}`];
-      inst.desc = speakTierNoun(defenceTwinLine(inland || pickVariant(dry.length ? dry : pool, `${ctx._seed}:${inst.name}`), defenseFactsOf({ institutions })), tierNounFor(tier)); // F10: a desc that names walls the roster lacks takes its twin (data/defenceTwinLines.js), draw-free
+      inst.desc = speakTierNoun(inland ? resolveSibling(inland, DESC_VARIANT_SIBLINGS, { facts: () => factsOf({ institutions }), poolId: 'institutionDescVariants:DESC_VARIANT_SIBLINGS', surface: 'institutions', drawKind: 'H' }) : drawInstitutionDesc(dry.length ? dry : pool, `${ctx._seed}:${inst.name}`, () => birthFactsOf({ institutions, config, tier }, worldLaw), `${tier}|${inst.category}|${inst.name}`), tierNounFor(tier)); // F10, CENSUS-1c, CENSUS-1f (site 18): the same pick, resolved through drawDeclared against the declaration column and the walls siblings (steps/institutionDescDraw.js), draw-free
     }
   }
 

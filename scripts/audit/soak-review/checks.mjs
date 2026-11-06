@@ -55,6 +55,10 @@ export const KIND_OF = Object.freeze({
   'X-50:boilerplate-twice': 6, 'A-09:behaviour-line-share': 6,
   'A-10:role-only-npc': 7, 'A-10:placeholder-faction': 7, 'A-03:tonight-they': 7,
   'A-05:lacks-access-lines': -2,
+  // CENSUS-1b wave 1 (2026-11-04): the runtime self-check (`facts/presumptionCheck.js`) — a drawn
+  // line's declared atom the FINAL record contradicts. A certification failure: STOP from the
+  // first declared pool (the chair's ruling 5).
+  'cert:false-presumption': -1,
   // I2: the advisory battery judgment's verdict — "records the battery would not vouch for" — informational.
   'info:battery-would-not-vouch': -2,
   // F9 (2026-11-04): crime denied beside a listed operation, A-06 in reverse; A-06's own kind

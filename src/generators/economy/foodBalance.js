@@ -3,7 +3,7 @@
  */
 
 import { SEVERITY, tierAtLeast } from '../../data/constants.js';
-import { FOOD_SECURITY_CUTS, foodSecurityBandKeyOf } from '../../data/bandLadders.js';
+import { FOOD_SECURITY_BANDS, FOOD_SECURITY_CUTS, foodSecurityBandKeyOf } from '../../data/bandLadders.js';
 import { FOOD_IMPORT_RATES, SIEGE_PRODUCTION_KEPT } from '../../data/foodImportRates.js';
 import {
   getTradeRouteFeatures,
@@ -17,6 +17,7 @@ import {
 } from '../../domain/content/customContentSemanticAuthority.js';
 import { availableNativeResourceKeys } from '../../domain/resourceSemantics.js';
 import { resolveTerrain } from '../../domain/resolveTerrain.js';
+import { resolveSibling } from '../../domain/facts/drawDeclared.js';
 import {
   hasTradeRouteConnection,
   isTradeRouteDisconnected,
@@ -733,7 +734,17 @@ export function appendProvisioningAtScaleDeps(
   }
 }
 
-export const deriveSupplyRiskAnalysis = (population, terrain, institutions, config, foodBalance) => {
+/**
+ * CENSUS-1f unit 3 (Appendix B item 23, T): every printed hook resolves through
+ * `resolveSibling(…, OUTLOOK_HOOK_SIBLINGS, …)` (below) — the timber line's `navigable` (its twin
+ * drops "shipbuilding"), the iron line's `institution: smith` (its twin drops the blacksmiths), the
+ * starving line's famine band (its twin, CENSUS-3g, the moderate gap; a fed place keeps the refused original). `facts`
+ * is the birth's partial record at the economy step (the roster, the config, the tier, the
+ * economic state: `viability.js`); absent, the hooks print unchanged (resolveSibling's rule).
+ * @param {any} population @param {any} terrain @param {any} institutions @param {any} config @param {any} foodBalance
+ * @param {object | (() => object) | null} [facts]
+ */
+export const deriveSupplyRiskAnalysis = (population, terrain, institutions, config, foodBalance, facts = null) => {
   const issues = [];
   const warnings = [];
   const hooks = [];
@@ -744,13 +755,15 @@ export const deriveSupplyRiskAnalysis = (population, terrain, institutions, conf
     if (route === 'isolated' || route === 'none' || route === 'road') {
       hooks.push({
         category: 'Survival Crisis',
-        hook: 'The settlement is starving. Villagers are turning to banditry, and a merchant has offered to supply food at a price the settlement cannot pay in coin.',
+        hook: 'The settlement is starving. Its hungriest are turning to banditry, and a merchant has offered to supply food at a price the settlement cannot pay in coin.',
         severity: 'critical',
       });
     } else if (route !== 'isolated') {
       hooks.push({
         category: 'Trade Monopoly',
-        hook: 'A single merchant guild controls grain imports and has raised prices 300%. The locals are weighing whether to pay it, find another supplier, or take the grain.',
+        // CENSUS-3e (answer 2, R-V measured): `guild` at this step differs from the final record on
+        // 25 of 1,000 births, so the hook presumes only the imports its branch guarantees.
+        hook: 'A single importer controls the grain coming in and has raised prices 300%. The locals are weighing whether to pay it, find another supplier, or take the grain.',
         severity: 'high',
       });
       if (route === 'river')
@@ -823,5 +836,75 @@ export const deriveSupplyRiskAnalysis = (population, terrain, institutions, conf
     hasExternalSupply,
   );
 
-  return { issues, warnings, plotHooks: hooks };
+  // R-AU (CENSUS-1h): a refused hook with no admitted twin DROPS here (kind A) — it never kept-and-
+  // noted a line that `hookTruthRecord.js :: withoutFalseHooks` removed later (the starving hook on
+  // a fed place: 250 kept notes in 161 of the 1,000, none printed); that pass stays as defence.
+  const resolved = hooks
+    .map((h) => ({ ...h, hook: resolveSibling(h.hook, OUTLOOK_HOOK_SIBLINGS, { facts, poolId: 'foodBalance:OUTLOOK_HOOK_SIBLINGS', surface: 'economics', drawKind: 'T', dropRefused: true }) })) // CENSUS-1f
+    .filter((h) => h.hook !== null);
+  return { issues, warnings, plotHooks: resolved.map((h) => (h.hook === MODERATE_GAP_TWIN ? { ...h, ...moderateGapGrade(facts) } : h)) };
 };
+
+/**
+ * One declared sibling set: the original `needs` its atoms; its twin (when the slot needs one)
+ * `excludes` them. @param {string} text @param {string[]} needs @param {string} [twin]
+ */
+const declaredSet = (text, needs, twin) => Object.freeze([
+  Object.freeze({ text, needs: Object.freeze(needs) }),
+  ...(twin === undefined ? [] : [Object.freeze({ text: twin, twinOf: text, excludes: Object.freeze(needs) })]),
+]);
+
+/**
+ * THE OUTLOOK HOOKS' DECLARED SIBLINGS, CARRIED (CENSUS-3d unit 6, 2026-11-05;
+ * `docs/DESIGN_POOL_CENSUS.md` §3.1, the chair's ruling R-C). `deriveSupplyRiskAnalysis` prints its
+ * hooks from inline T branches; a branch is the mechanism lane's to route through
+ * `drawDeclared.js :: resolveSibling` (Appendix B item 23), so the declarations stand HERE, keyed
+ * by the printed text, and no consumer reads them yet (byte-identical). A branch's own key is not
+ * re-declared: the dam (route river), the blockade (route port, coastal), the bandits (route road).
+ * Measured on soak1k-0..199 before the change, printed / false by the final record: the timber
+ * 33 / 16 (`navigable`: the reader:hook-pools `[sea]` class, "shipbuilding" on plains and desert
+ * roads), the iron 38 / 3 (`institution: smith`), the starving 8 / 0 (re-read by CENSUS-3g once R-AM
+ * ledgered the kept-refused original: 162 of 1,000 false, reworded and twinned below). The three
+ * twins are the chair's rulings (R-G), recorded in `docs/CENSUS_3_LANE_2026-11-04.md`.
+ */
+const MODERATE_GAP_TWIN = 'The settlement grows less food than it eats, and a merchant has offered to make up the difference at a price the settlement cannot pay in coin.';
+/**
+ * CENSUS-3h (R-AV, the chair's answer 2 of 2026-11-05 08:3x): a twin carries only the severity and
+ * category the record holds. The moderate-gap twin prints only where the food record reads
+ * Import-Dependent or Pressured (its declaration); its category is that band's own label (the one
+ * ladder, never re-spelled) and its severity the band's grade — Import-Dependent `medium`, the
+ * record's own grade for that band's viability hook ("A poor harvest somewhere else…"), Pressured
+ * `low`, the grade under it (the ladder writes no Pressured hook). "critical" stays with the
+ * famine-band original. The band is read through the declaration's own reader (`famine.band`).
+ * @type {Readonly<Record<string, string>>}
+ */
+const MODERATE_GAP_SEVERITY = Object.freeze({ importDependent: 'medium', pressured: 'low' });
+/** @param {object | (() => object) | null} facts @returns {{ category?: string, severity?: string }} */
+function moderateGapGrade(facts) {
+  const f = /** @type {any} */ (typeof facts === 'function' ? facts() : facts);
+  const band = f?.famine?.band;
+  const severity = typeof band === 'string' ? MODERATE_GAP_SEVERITY[band] : undefined;
+  if (severity === undefined) return {};
+  return { category: FOOD_SECURITY_BANDS[/** @type {keyof typeof FOOD_SECURITY_BANDS} */ (band)].label, severity };
+}
+const STARVING_HOOK = 'The settlement is starving. Its hungriest are turning to banditry, and a merchant has offered to supply food at a price the settlement cannot pay in coin.';
+export const OUTLOOK_HOOK_SIBLINGS = Object.freeze({
+  "Something is killing the forest the timber comes from, and the settlement's building and shipbuilding trades stall without it. Find another supplier, or find out what is in those woods?": declaredSet(
+    "Something is killing the forest the timber comes from, and the settlement's building and shipbuilding trades stall without it. Find another supplier, or find out what is in those woods?", ['navigable'],
+    "Something is killing the forest the timber comes from, and the settlement's building trades stall without it. Find another supplier, or find out what is in those woods?"),
+  'War breaks out. Metal suppliers prioritize military contracts. Blacksmiths cannot get iron for tools/repairs. Economy suffers, population discontent grows.': declaredSet(
+    'War breaks out. Metal suppliers prioritize military contracts. Blacksmiths cannot get iron for tools/repairs. Economy suffers, population discontent grows.', ['institution: smith'],
+    'War breaks out. Metal suppliers prioritize military contracts, and the iron for tools and repairs stops arriving. Economy suffers, population discontent grows.'),
+  // CENSUS-3g unit 5 (R-AM read; R-U, R-G — the chair's rulings recorded in the lane doc): the
+  // original presumes only the famine band ("Villagers" left the text: its `tier` read false on 110
+  // of the 1,000); the moderate gap (Import-Dependent / Pressured, the chair's ruling 1 of
+  // 2026-11-03) takes one twin with no famine words; a fed place DROPS the refused original at the
+  // site (R-AU, CENSUS-1h; the hook-truth pass stays as defence in depth).
+  [STARVING_HOOK]: Object.freeze([
+    Object.freeze({ text: STARVING_HOOK, needs: Object.freeze(['food: ≤ deficit']) }),
+    Object.freeze({
+      text: MODERATE_GAP_TWIN,
+      twinOf: STARVING_HOOK, excludes: Object.freeze(['food: ≤ deficit']), needs: Object.freeze(['food: ≤ pressured']),
+    }),
+  ]),
+});

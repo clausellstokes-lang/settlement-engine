@@ -1,0 +1,186 @@
+{
+  "poolId": "DS-GEN-16",
+  "source": "src/data/dossierStateProse/general.generated.js (annex docs/content/RECEIPT_POOLS_DOSSIER_STATE.md)",
+  "drawKind": "K",
+  "drawSite": "eventRecordPoolKey(history.historicalEvents) → readStateProse → eligibleVariants → drawVariant",
+  "pools": [
+    {
+      "pool": "ANCHORED-RECENT",
+      "keyGuarantees": [
+        "exactly one anchored event with lasting effects, within a generation"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour, not scoped: speaks of the past, asserts no present calm.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "The {calamity} is recent enough that {settlement} still divides time by it, and the record still marks it as bearing on the town today.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "What the {calamity} took from {settlement} is still being counted, and some of the counting is done aloud.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:3",
+          "text": "{settlement} has the particular carefulness of a town that was lately reminded what can happen to towns.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "ANCHORED-OLD",
+      "keyGuarantees": [
+        "exactly one anchored event with lasting effects, older_than_bearers"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour, not scoped: speaks of the past, asserts no present calm.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "The {calamity} is {timeband_age} now, and {settlement} keeps it the way old towns keep such things, in habits whose reasons have outlived the people who could explain them.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "The record of the {calamity} survives in what {settlement} does differently since; the event is old and its instructions are still being followed.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:3",
+          "text": "Nobody now in {settlement} saw the {calamity}, and everybody here lives in the town it made.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "LAYERED-ANCHORED",
+      "keyGuarantees": [
+        "more than one anchored event with lasting effects"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour, not scoped: speaks of the past, asserts no present calm.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "{settlement}'s record is a stack of hard seasons survived in order, and the record still marks each of them as bearing on the town.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "{settlement} has been knocked down and has answered more than once, and the answering shows; this is a town with practice.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "RECORDED-UNANCHORED",
+      "keyGuarantees": [
+        "an unanchored (anchored === false) event with lasting effects, none anchored"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour, not scoped: speaks of the past, asserts no present calm.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "The {calamity} stands on {settlement}'s record and the record does not carry it forward; it happened here, and what it left is no longer counted among the things that explain the place.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "{settlement} keeps the {calamity} as an event rather than as a cause, which is what a town does with the troubles it has finished having.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "UNMARKED",
+      "keyGuarantees": [
+        "no anchored or unanchored event with lasting effects and no major/catastrophic event"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Scoped: line 1 says the town's history is the quiet, even kind, which an active crisis contradicts; line 2 speaks only of the books.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "No great blow stands on {settlement}'s record; the town's history is the quieter kind, and its evenness is the inheritance.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "calm",
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "{settlement}'s books record no disaster worth the word, which is itself a fact about the place worth recording.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        }
+      ]
+    }
+  ]
+}

@@ -10,12 +10,12 @@
 
 import { chooseOrPin, registerStep } from '../pipeline.js';
 import { generateSettlementName } from '../npcGenerator.js';
-import { generateFactions, generateConflicts } from '../powerGenerator.js';
+import { generateFactions, generateConflicts } from '../powerGenerator.js'; import { fitFactionRoster } from '../power/factionRoleFit.js'; import { resolveFactionLabelsAtClose } from '../power/factionLabelClose.js'; // CENSUS-4 R12; CENSUS-1i R-AW
 // F8: re-render stress summaries with the real settlement name. resolveStress
 // (step 3) rolled them 16 steps ago with an empty name and stashed the
 // rng-derived choice in each entry's `summaryRoll`; we re-render here now that
 // the name exists.
-import { renderStressSummary } from '../stressNarrative.js';
+import { renderStressSummary } from '../stressNarrative.js'; import { factsOf } from '../../domain/facts/factsOf.js'; // CENSUS-2c: one line, so no cited line moves
 import { generatePressureSentence, generateArrivalScene, generateCoherence } from '../narrativeGenerator.js';
 import { generateDefenseProfile } from '../defenseGenerator.js';
 import { settleCrimeLinesToSignal } from '../safetyProfile.js';
@@ -208,7 +208,7 @@ registerStep('assembleSettlement', {
     for (const e of entries) {
       if (e && typeof e === 'object'
           && Object.prototype.hasOwnProperty.call(e, 'summaryRoll')) {
-        e.summary = renderStressSummary(e.type, settlement.name, e.summaryRoll);
+        e.summary = renderStressSummary(e.type, settlement.name, e.summaryRoll, factsOf(settlement)); // CENSUS-2c: declared sentences resolve (stressNarrative.js :: STRESS_SUMMARY_SIBLINGS)
         delete e.summaryRoll;
       }
     }
@@ -344,7 +344,7 @@ registerStep('assembleSettlement', {
   // stream, so they move nothing generated after them, and a town with no crossing tie has no
   // conflict row. Under a held roster both re-derive from the held NPCs: a pure projection and
   // a seed-stable stream.
-  settlement.factions = generateFactions(settlement.npcs, settlement.powerStructure?.factions);
+  if (chooseOrPin(pins, 'npcs', () => UNPINNED) === UNPINNED) settlement.npcs = fitFactionRoster(settlement.npcs, settlement); settlement.factions = generateFactions(settlement.npcs, settlement.powerStructure?.factions); // CENSUS-4 R12: one line, so no cited line moves
   settlement.conflicts = inAssemblySubstream(
     rng,
     'faction-conflicts',
@@ -367,7 +367,7 @@ registerStep('assembleSettlement', {
   // as the structural appender above (the conflicts are re-derived on every run, never held).
   Object.assign(settlement, storeTrueHooksOnly(settlement, {
     npcsHeld: chooseOrPin(pins, 'npcs', () => UNPINNED) !== UNPINNED,
-  }));
+  })); resolveFactionLabelsAtClose(settlement); // CENSUS-1i R-AW: a label whose fact settles late resolves here, against the final roster (no roll; one line, so no cited line moves)
 
   // A durable, seed-stable receipt over the FINAL player-facing dossier.
   // Repairs happen in their owning passes; this boundary proves that the

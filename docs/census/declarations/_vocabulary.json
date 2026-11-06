@@ -1,0 +1,278 @@
+{
+ "note": "SUPERSEDED (CENSUS-3b unit 1, 2026-11-05): the ONE spelling is src/domain/facts/factVocabulary.js. Every ledger row in this directory was re-spelled to it by the table in `respelledTo` (also in docs/CENSUS_3_LANE_2026-11-04.md, Phase B). The phase-A atoms below are kept as history.",
+ "grammar": {
+  "presence": "needs/excludes take the bare atom: \"walls\", \"market\", \"institution: mill\", \"water: coast\"",
+  "band": "a range: \"tier: >= town\", \"tier: <= hamlet\", \"population: small\", \"stores: < 3\", \"magic: >= medium\"",
+  "crisis": "crisis takes [kinds or families] | \"calm\" | \"any\"; a row with no crisis key is silent (neutral unless its pool is crisis-scoped)",
+  "disjunction": "within ONE fact a row may list values joined by | (\"watch|garrison|militia\": any one of the defence fact's presence answers holds). Never across facts (design §3.2: conjunction across dimensions)."
+ },
+ "atoms": {
+  "walls": {
+   "reader": "factsOf(r).defence.walls",
+   "shape": "presence"
+  },
+  "palisade": {
+   "reader": "factsOf(r).defence.palisade",
+   "shape": "presence"
+  },
+  "gate": {
+   "reader": "factsOf(r).defence.gate",
+   "shape": "presence"
+  },
+  "watch": {
+   "reader": "factsOf(r).defence.watch",
+   "shape": "presence"
+  },
+  "militia": {
+   "reader": "factsOf(r).defence.militia",
+   "shape": "presence"
+  },
+  "garrison": {
+   "reader": "factsOf(r).defence.garrison",
+   "shape": "presence"
+  },
+  "hospital": {
+   "reader": "factsOf(r).defence.hospital",
+   "shape": "presence"
+  },
+  "healer": {
+   "reader": "factsOf(r).defence.healer",
+   "shape": "presence"
+  },
+  "market": {
+   "reader": "factsOf(r).market",
+   "shape": "presence"
+  },
+  "magic": {
+   "reader": "factsOf(r).magic.functions",
+   "shape": "presence"
+  },
+  "magic: <band>": {
+   "reader": "factsOf(r).magic.level",
+   "values": [
+    "none",
+    "low",
+    "medium",
+    "high"
+   ],
+   "shape": "band"
+  },
+  "water: coast": {
+   "reader": "factsOf(r).water.coast  (kind 'maritime': a coast, or a port route off a riverside)",
+   "shape": "presence"
+  },
+  "water: river": {
+   "reader": "factsOf(r).water.river",
+   "shape": "presence"
+  },
+  "water: navigable": {
+   "reader": "factsOf(r).water.navigable (coast OR river)",
+   "shape": "presence"
+  },
+  "institution: <kind>": {
+   "reader": "factsOf(r).hasInstitution(kind)",
+   "values": [
+    "hospital",
+    "healer",
+    "monastery",
+    "mill",
+    "smith",
+    "bathhouse",
+    "docks",
+    "quarry",
+    "mine",
+    "tavern",
+    "school",
+    "temple",
+    "granary"
+   ],
+   "shape": "presence"
+  },
+  "terrain: <class>": {
+   "reader": "factsOf(r).terrain",
+   "values": [
+    "plains",
+    "hills",
+    "forest",
+    "riverside",
+    "coastal",
+    "mountain",
+    "desert"
+   ],
+   "shape": "presence"
+  },
+  "population: <band>": {
+   "reader": "factsOf(r).populationBand",
+   "values": [
+    "small",
+    "middling",
+    "large"
+   ],
+   "shape": "band"
+  },
+  "stores: <range>": {
+   "reader": "factsOf(r).storesMonths",
+   "shape": "band"
+  },
+  "food-band: deficit": {
+   "reader": "factsOf(r).famine.starvingAllowed (band deficit|famine)",
+   "shape": "presence"
+  },
+  "ruler: <kind>": {
+   "reader": "factsOf(r).rulerKind",
+   "values": [
+    "elder",
+    "lord",
+    "priest",
+    "mayor",
+    "occupier",
+    "council"
+   ],
+   "shape": "presence"
+  },
+  "migration: <dir>": {
+   "reader": "factsOf(r).migration.direction",
+   "values": [
+    "in",
+    "out"
+   ],
+   "shape": "presence"
+  },
+  "war: <state>": {
+   "reader": "factsOf(r).warState",
+   "values": [
+    "front",
+    "aggressor",
+    "at war",
+    "peace"
+   ],
+   "shape": "presence"
+  },
+  "other-npc": {
+   "reader": "factsOf(r).hasOtherNpc(npc)",
+   "shape": "presence"
+  },
+  "tier: <range>": {
+   "reader": "record.tier (a field; the design §1 'single (a field)'); comparator data/constants.js :: tierAtLeast",
+   "offFactsOf": true,
+   "values": [
+    "thorp",
+    "hamlet",
+    "village",
+    "town",
+    "city",
+    "metropolis"
+   ],
+   "shape": "band"
+  },
+  "route: <kind>": {
+   "reader": "facts/terrain.js :: tradeRouteOf (the terrain home's second export)",
+   "offFactsOf": true,
+   "values": [
+    "road",
+    "river",
+    "port",
+    "crossroads",
+    "isolated",
+    "mountain_pass"
+   ],
+   "shape": "presence"
+  },
+  "food-source: <src>": {
+   "reader": "economicState.foodSecurity.foodRecord.foodSources (foodGenerator.js :: generateFoodSecurity)",
+   "offFactsOf": true,
+   "values": [
+    "grain",
+    "livestock",
+    "fish",
+    "mill",
+    "game"
+   ],
+   "shape": "presence"
+  },
+  "culture: <key>": {
+   "reader": "resolveCulture.js :: resolveSettlementCulture",
+   "offFactsOf": true,
+   "shape": "presence"
+  },
+  "crime": {
+   "reader": "display/defenseDisplay.js :: deriveCriminalStructure (non-null)",
+   "offFactsOf": true,
+   "shape": "presence"
+  }
+ },
+ "crisis": {
+  "kinds": [
+   "under_siege",
+   "famine",
+   "occupied",
+   "politically_fractured",
+   "indebted",
+   "recently_betrayed",
+   "infiltrated",
+   "plague_onset",
+   "succession_void",
+   "monster_pressure",
+   "insurgency",
+   "religious_conversion",
+   "slave_revolt",
+   "wartime",
+   "mass_migration"
+  ],
+  "families": {
+   "threat": [
+    "under_siege",
+    "occupied",
+    "monster_pressure"
+   ],
+   "hunger": [
+    "famine",
+    "under_siege",
+    "+ any food-record deficit"
+   ],
+   "succession": [
+    "succession_void",
+    "politically_fractured"
+   ],
+   "unrest": [
+    "insurgency",
+    "slave_revolt",
+    "wartime"
+   ],
+   "any": [
+    "*"
+   ]
+  },
+  "reader": "factsOf(r).crisis.has(kind|family)",
+  "calm": "no active crisis (factsOf(r).crisis.active === false)"
+ },
+ "respelledTo": {
+  "water: coast": "coast",
+  "food-source: fish": "fish",
+  "food-source: grain": "grain",
+  "food-source: game": "game",
+  "water: river": "river",
+  "water: navigable": "navigable",
+  "no food-band: deficit": "no food: ≤ deficit",
+  "no crime": "no organised crime",
+  "no migration: in": "no migration: influx",
+  "no migration: out": "no migration: exodus",
+  "migration: in": "migration: influx",
+  "food-source: livestock": "livestock",
+  "no food-source: grain": "no grain",
+  "no food-source: livestock": "no livestock",
+  "no food-source: game": "no game",
+  "crime": "organised crime",
+  "food-band: deficit": "food: ≤ deficit",
+  "watch|garrison|militia": "guardPresence",
+  "migration: out": "migration: exodus",
+  "garrison|militia": "guardPresence",
+  "terrain: coastal|desert": "no terrain: plains · no terrain: hills · no terrain: forest · no terrain: riverside · no terrain: mountain",
+  "route: isolated|port": "no route: road · no route: river · no route: crossroads · no route: mountain_pass",
+  "route: isolated|port|river": "no route: road · no route: crossroads · no route: mountain_pass",
+  "magic: >= low": "magic level: ≥ low",
+  "route: port|river": "no route: road · no route: crossroads · no route: isolated · no route: mountain_pass",
+  "institution: temple|institution: monastery": "(undeclarable: a disjunction over a many-valued presence; left undeclared)",
+  "no water: navigable": "no navigable"
+ }
+}

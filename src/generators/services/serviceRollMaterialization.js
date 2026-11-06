@@ -8,7 +8,7 @@
  * in the public orchestrator because they consume the completed bucket state.
  */
 
-import { random as rng } from '../../kernel/rngContext.js';
+import { random as rng, getActiveRng } from '../../kernel/rngContext.js';
 import { getInstFlags } from '../helpers.js';
 import { classifyService } from './serviceClassifier.js';
 import { getServiceTierInfo } from './serviceAvailability.js';
@@ -22,8 +22,8 @@ import {
   isMaterializedCustomContent,
   nativeSemanticName,
 } from '../../domain/content/customContentSemanticAuthority.js';
-import { defenseFactsOf } from '../../domain/defense/defenseFacts.js';
-import { defenceTwinLine } from '../../data/defenceTwinLines.js';
+import { birthFactsOf } from '../../domain/facts/factsOf.js';
+import { drawDeclared } from '../../domain/facts/drawDeclared.js'; import { SERVICE_DESC_SIBLINGS } from '../../data/institutionServices.js';
 
 const CRIMINAL_INSTITUTION_KEYWORDS = Object.freeze([
   'thieves',
@@ -60,19 +60,47 @@ function isCriminalProvider(institution) {
 }
 
 /**
+ * THE PER-DEFINITION SERVICE ROLL, RESOLVED (CENSUS-1f unit 1c; Appendix B site 15, R). A service
+ * that SURVIVED its rolls (the catalogue roll in `getServicesForInstitution`, the two gates here —
+ * none moved, none added) is resolved through `drawDeclared` against the declarations CENSUS-4c
+ * placed on its definition (`institutionServices.js`, 49 rows, carried onto the row by the
+ * catalogue's `...rowDef`). Admitted: kept, byte-identical. Refused: its desc's walls twin
+ * (CENSUS-1c's `SERVICE_DESC_SIBLINGS`, the same resolution as before) when the record admits it;
+ * else the service is NOT materialized (a list printed whole: kind A's filter). A custom service
+ * declares nothing and is never touched.
+ * @param {Record<string, unknown>} service
+ * @param {object | (() => object) | null} facts the birth's facts at the roll
+ * @returns {Record<string, unknown> | null}
+ */
+export function resolveServiceRow(service, facts) {
+  if (service.custom === true || service.source === 'custom') return service;
+  const r = drawDeclared([service], {
+    draw: (p) => p[0],
+    facts,
+    poolId: `institutionServices:${String(service.svcKey ?? service.institution ?? '')}.${String(service.name ?? '')}`, key: `${getActiveRng()?.seed ?? ''}::institutionServices:${String(service.svcKey ?? service.institution ?? '')}.${String(service.name ?? '')}`, // R-AT (CENSUS-1i unit 5)
+    surface: 'services',
+    drawKind: 'R',
+    twin: (line) => {
+      const set = /** @type {Record<string, ReadonlyArray<any>>} */ (SERVICE_DESC_SIBLINGS)[String(line?.desc ?? '')];
+      const t = set ? set.find((l) => l && typeof l.twinOf === 'string') : null;
+      return t ? { ...line, desc: t.text, needs: [...(t.needs ?? [])], excludes: [...(t.excludes ?? [])], crisis: [...(t.crisis ?? [])] } : null;
+    },
+  });
+  return r.line ?? null;
+}
+
+/**
  * Project one catalog-resolution record into the persisted settlement shape
  * without dropping exact custom-definition identity.
  *
- * @param {Record<string, unknown>} service
+ * @param {Record<string, unknown>} service the RESOLVED row (`resolveServiceRow`)
  * @param {string} institutionName
- * @param {import('../../data/defenceTwinLines.js').DefenceTwinFacts} [defence] the place's
- *   defence facts: a desc that names walls the place lacks takes its twin (F10 unit 4)
  */
-function projectAvailableService(service, institutionName, defence) {
+function projectAvailableService(service, institutionName) {
   /** @type {Record<string, unknown>} */
   const projected = {
     name: service.name,
-    desc: defenceTwinLine(service.desc, defence),
+    desc: service.desc,
     institution: institutionName,
     ...projectCustomDefinitionIdentity(service),
   };
@@ -154,8 +182,9 @@ export function materializeInstitutionServiceRolls(input) {
   });
   const filteredInstitutions =
     institutions.filter(worldLaw.allowsInstitution);
-  // F10 unit 4: the roster's defence facts, read once, for the descs that name walls. Draw-free.
-  const defence = defenseFactsOf({ institutions });
+  // F10 unit 4, CENSUS-1f: the birth's facts at the roll (the roster, the tier, the config's
+  // terrain, the world law's water and magic law), read lazily, for the declared rows. Draw-free.
+  const facts = () => birthFactsOf({ institutions, config, tier }, worldLaw);
 
   for (const institution of filteredInstitutions) {
     const services = getServicesForInstitution(
@@ -239,10 +268,12 @@ export function materializeInstitutionServiceRolls(input) {
         )
         && buckets[category]
       ) {
+        // CENSUS-1f (site 15): resolved AFTER the rolls, so no roll moves.
+        const row = resolveServiceRow(service, facts);
+        if (!row) continue;
         const projected = projectAvailableService(
-          service,
+          row,
           String(institution.name || ''),
-          defence,
         );
         buckets[category].push(projected);
         materializedByIdentity.set(identityKey, [projected]);
@@ -255,9 +286,8 @@ export function materializeInstitutionServiceRolls(input) {
           && /food|drink|provision|meal/i.test(String(service.name || ''))
         ) {
           const foodProjection = projectAvailableService(
-            service,
+            row,
             String(institution.name || ''),
-            defence,
           );
           buckets.food.push(foodProjection);
           const tracked = materializedByIdentity.get(identityKey);

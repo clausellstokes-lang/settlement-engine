@@ -1,0 +1,470 @@
+{
+  "pool": {
+    "id": "npcData.NPC_WANTS",
+    "file": "src/data/npcData.js",
+    "drawKind": "R",
+    "drawSite": "npcGenerator.js:356 pickFromArray",
+    "colour": false,
+    "crisisScoped": false,
+    "keyDeclares": {},
+    "lines": 56,
+    "declaring": 3,
+    "note": "Clothing keyed by the NPC's own category (generateNPCAppearance(category); no stress re-routing), so the key guarantees the NPC's role only, no record atom. Three lines presume a place fact: guild colours (economy#1), the shrine they serve (religious#4), a dockhand's oilskins (criminal#4 -- not routed through inlandHookLine, so it prints inland). military#1 'guard uniform' left undeclared (any force may be called guard). All other lines are colour."
+  },
+  "rows": [
+    {
+      "id": "government#0",
+      "text": "formal robes of office",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "government#1",
+      "text": "expensive but conservative merchant dress",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "government#2",
+      "text": "a chain of office worn even off-duty",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "government#3",
+      "text": "court attire with discreet personal touches",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "government#4",
+      "text": "robes cut for a taller predecessor, never altered",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "government#5",
+      "text": "official dress one grade above their actual station",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "government#6",
+      "text": "sombre official black with a jewelled clasp nobody asks about",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "government#7",
+      "text": "immaculate formal wear that has clearly never seen weather",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "military#0",
+      "text": "functional armour with personal sigils",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "military#1",
+      "text": "guard uniform kept immaculate",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "military#2",
+      "text": "soldier's practical dress with officer's insignia",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "military#3",
+      "text": "battle-worn plate they haven't replaced",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "military#4",
+      "text": "a dress uniform kept for funerals, worn thin at the elbows",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "military#5",
+      "text": "mismatched armour pieces, each from a different campaign",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "military#6",
+      "text": "a field coat carrying the insignia of a disbanded company",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "military#7",
+      "text": "civilian dress worn like a uniform: pressed, squared, joyless",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "religious#0",
+      "text": "religious vestments layered over travelling clothes",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "religious#1",
+      "text": "simple robes of their order",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "religious#2",
+      "text": "ceremonial attire worn at all times",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "religious#3",
+      "text": "plain devotional dress with one opulent accessory",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "religious#4",
+      "text": "vestments a size too grand for the shrine they serve",
+      "needs": [
+        "sacredHouse"
+      ],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious#5",
+      "text": "threadbare robes patched with fabric from finer ones",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "religious#6",
+      "text": "a formal habit with a travel-stained hem never cleaned",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "religious#7",
+      "text": "lay clothes with the collar of the order left visible",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "economy#0",
+      "text": "merchant dress: practical but signalling wealth through material",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "economy#1",
+      "text": "guild colours worn with pride",
+      "needs": [
+        "guild"
+      ],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy#2",
+      "text": "clothes that once cost a fortune and now show the miles",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "economy#3",
+      "text": "well-cut but understated trading clothes",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "economy#4",
+      "text": "sober broadcloth with buttons worth more than the coat",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "economy#5",
+      "text": "foreign-cut clothes from a market they want to be asked about",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "economy#6",
+      "text": "a ledger-keeper's plain dress with ink at the right cuff",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "economy#7",
+      "text": "last season's fashion maintained with visible determination",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "criminal#0",
+      "text": "nondescript working clothes chosen specifically to be forgettable",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "criminal#1",
+      "text": "fine clothes worn ironically over rougher garments",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "criminal#2",
+      "text": "guard or clergy disguise worn as a habit",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "criminal#3",
+      "text": "whatever is clean (they move frequently)",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "criminal#4",
+      "text": "a dockhand's oilskins over hands too clean for the work",
+      "needs": [
+        "docks"
+      ],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal#5",
+      "text": "respectable dress exactly average for the street they work",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "criminal#6",
+      "text": "good boots and cheap everything else",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "criminal#7",
+      "text": "a heavy coat worn indoors, contents unexamined",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "magic#0",
+      "text": "scholarly robes with heavy pockets",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "magic#1",
+      "text": "travelling mage's coat covered in small pouches",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "magic#2",
+      "text": "deceptively plain clothes that crackle faintly with residual energy",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "magic#3",
+      "text": "formal academic dress worn with absent-minded disregard",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "magic#4",
+      "text": "robes singed at one cuff and never mended",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "magic#5",
+      "text": "practical dress with chalk dust in every seam",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "magic#6",
+      "text": "a scholar's gown two institutions out of date",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "magic#7",
+      "text": "ordinary clothes with a lining that clinks faintly",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "other#0",
+      "text": "clothes practical for their work with one personal flourish",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "other#1",
+      "text": "travel-worn but well-maintained gear",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "other#2",
+      "text": "second-hand fine clothes that don't quite fit",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "other#3",
+      "text": "whatever was available (they don't care about dress)",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "other#4",
+      "text": "work clothes patched by someone who loved them",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "other#5",
+      "text": "a good coat inherited from a larger relative",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "other#6",
+      "text": "dress entirely without signal (deliberately so)",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "other#7",
+      "text": "weathered gear maintained past the point of economy",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    }
+  ]
+}

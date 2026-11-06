@@ -9,6 +9,7 @@
  * no wider than its line: a self-reference beside it still finds, and `speakTierNoun` still
  * returns the line unchanged (a keep changes what the CHECK forgives, never a rendered byte).
  */
+import { textOf } from '../../../../src/domain/facts/textOf.js';
 import { describe, expect, it } from 'vitest';
 
 import { speakTierNoun } from '../../../../src/domain/display/stateProse/stateProseKernel.js';
@@ -60,7 +61,7 @@ describe('ruling 3 — the steppe built-form line\'s "river town" names the cult
   // tier noun reads wrong. Routed, this line would say "A fortified trade station or river thorp acts as the settled
   // hinge of a much wider mobile hinterland": that a thorp (or a metropolis) is the region's hinge. It is the
   // culture's design grammar, the same string for every steppe place, so that ONE line is kept.
-  const line = CULTURE_PROFILES.steppe.builtForm.find((s) => /river town/.test(s));
+  const line = CULTURE_PROFILES.steppe.builtForm.map(textOf).find((s) => /river town/.test(s));
   it('the line exists in the steppe profile\'s built form', () => expect(line).toBeTruthy());
   it.each(['thorp', 'hamlet', 'village', 'city', 'metropolis'])('is kept on a %s', (tier) => expectKept(line, tier));
   it('the keep is that line\'s, not the phrase\'s: a self-referring "a river town" still moves and still finds', () => {

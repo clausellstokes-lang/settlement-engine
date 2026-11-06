@@ -25,6 +25,8 @@
  * @consumes docs/content/RECEIPT_POOLS_DOSSIER_STATE.md §7b
  */
 
+import { assertDeclarable } from '../../src/domain/facts/factVocabulary.js';
+
 /** ARCH §2.3: the three roles a pool may declare. */
 export const POOL_ROLES = Object.freeze(['spine', 'modifier', 'turn']);
 
@@ -799,6 +801,8 @@ export function parseConnectives(src) {
   const lists = {};
   /** @type {Array<{relation: string, seat: string, floor: number, pin: number, owed: boolean}>} */
   const pins = [];
+  /** @type {Record<string, Record<string, Array<string[]|null>>>} */
+  const declarations = {};
   for (let i = at + 1; i < lines.length && !/^##\s/.test(lines[i]); i++) {
     const m = lines[i].trimEnd().match(CONNECTIVE_ROW_RE);
     if (!m) continue;
@@ -812,9 +816,24 @@ export function parseConnectives(src) {
     }
     if (lists[relation] && lists[relation][seat]) refuse(label, `(\`${relation}\`, \`${seat}\`) is declared twice`);
     const pin = Number(pinText);
-    const joints = /\bOWED\b/.test(cell)
+    // CENSUS-1h unit 7 (R-AQ): a joint may carry a POSITION-KEYED declaration after its
+    // backticks — `` `Also,` [market] `` — projected into a list parallel to the phrase list
+    // that the draw never reads (`stateProseKernel.js :: resolveDeclaredPosition`).
+    const elements = /\bOWED\b/.test(cell)
       ? []
-      : [...cell.matchAll(/`([^`]*)`/g)].map((j) => (j[1] === EMPTY_OPENER_TOKEN ? '' : j[1]));
+      : [...cell.matchAll(/`([^`]*)`(?:\s*\[([^\]`]+)\])?/g)];
+    const joints = elements.map((j) => (j[1] === EMPTY_OPENER_TOKEN ? '' : j[1]));
+    const tagsOf = elements.map((j) => {
+      if (!j[2]) return null;
+      const tags = j[2].split('·').map((t) => t.trim()).filter(Boolean);
+      for (const tag of tags) {
+        const neg = /^no\s+(.+)$/i.exec(tag);
+        try { assertDeclarable(neg ? neg[1] : tag); } catch (e) {
+          refuse(label, `the joint \`${j[1]}\` declares \`${tag}\`: ${/** @type {Error} */ (e).message}`);
+        }
+      }
+      return tags;
+    });
     for (const joint of joints) {
       if (/[—–]/.test(joint)) refuse(label, `the joint \`${joint}\` carries an em dash`);
       if (/\bwhich\b/i.test(joint)) refuse(label, `the joint \`${joint}\` carries a \`which\` tail (wall 6)`);
@@ -830,6 +849,7 @@ export function parseConnectives(src) {
         + ' — the pin is a measurement of the list, not an aspiration');
     }
     lists[relation] = { ...(lists[relation] || {}), [seat]: joints };
+    declarations[relation] = { ...(declarations[relation] || {}), [seat]: tagsOf };
     pins.push({ relation, seat, floor: Number(floorText), pin, owed: joints.length < Number(floorText) });
   }
   const reachable = Object.entries(REACHABLE_SEATS).map(([r, s]) => `${r}.${s.seat}`).sort();
@@ -839,7 +859,7 @@ export function parseConnectives(src) {
       + ` pairs are ${reachable.join(' ')} — a fifth pair is a projector error, and a missing one`
       + ' silences a seat with no reader ever told');
   }
-  return { lists, pins };
+  return { lists, pins, declarations };
 }
 
 // ── THE KINSHIP SET (REWRITE car 8a-4; SITTING §T.4 adopting agenda C″) ─────────────

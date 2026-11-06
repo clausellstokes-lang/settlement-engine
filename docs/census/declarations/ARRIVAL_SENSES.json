@@ -1,0 +1,1544 @@
+{
+ "poolId": "ARRIVAL_SENSES",
+ "source": "src/data/arrivalProse.js:31-251",
+ "drawKind": "R",
+ "drawSite": "src/generators/narrative/arrivalScene.js:150-165 chooseSense (pickRandom over keys within one point of best) then :283-285 agreeingLine (pickRandom, one redraw on a market/catch contradiction); SENSE beat, every birth",
+ "pools": [
+  {
+   "pool": "smiths.lines",
+   "keyGuarantees": [
+    "chooseSense: a native institution name matches the 'smiths' fragments at a word start",
+    "renders in EVERY birth whose roster matches, crisis or none (SENSE is not gated by underStress)",
+    "agreeingLine (arrivalScene.js:251-256) redraws once off any line naming a market the roster lacks, or racks of drying fish where portKind is none"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": true,
+   "ruling": "Not opted: trade sounds and smells sayable under any condition.",
+   "lines": [
+    {
+     "lineId": "ARRIVAL_SENSES.smiths.lines[0]",
+     "text": "The ring of hammer on anvil carries over the roofs of {name}.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.smiths.lines[1]",
+     "text": "You hear the forge work before you see it: hammer on iron, steady as a heartbeat.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.smiths.lines[2]",
+     "text": "A drift of forge smoke hangs over the roofs, and somewhere under it a hammer keeps time.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.smiths.lines[3]",
+     "text": "A smith quenches a blade in a hiss of steam, and the sound follows you down the lane.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "smiths.dominant",
+   "keyGuarantees": [
+    "chooseSense: a native institution name matches the 'smiths' fragments at a word start, and exports/income match its trade fragments (dominant)",
+    "renders in EVERY birth whose roster matches, crisis or none (SENSE is not gated by underStress)",
+    "agreeingLine (arrivalScene.js:251-256) redraws once off any line naming a market the roster lacks, or racks of drying fish where portKind is none"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": true,
+   "ruling": "Not opted: trade sounds and smells sayable under any condition.",
+   "lines": [
+    {
+     "lineId": "ARRIVAL_SENSES.smiths.dominant[0]",
+     "text": "The hammering echoes through all of {name}, and the place plainly lives by its forges.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.smiths.dominant[1]",
+     "text": "Forge smoke hangs over everything here, and the ring of the anvils never quite stops.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.smiths.dominant[2]",
+     "text": "Racks of new ironwork stand outside the workshops, waiting for the carts.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.smiths.dominant[3]",
+     "text": "{name} works iron the way other places breathe: the clang of it is in every lane.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "arms.dominant",
+   "keyGuarantees": [
+    "chooseSense: a native institution name matches the 'arms' fragments at a word start, and exports/income match its trade fragments (dominant)",
+    "renders in EVERY birth whose roster matches, crisis or none (SENSE is not gated by underStress)",
+    "agreeingLine (arrivalScene.js:251-256) redraws once off any line naming a market the roster lacks, or racks of drying fish where portKind is none"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Opted: renders under a crisis, and lines assert traffic on the open road (a siege shuts it), plenty (hunger denies it) or easy crowds (an armed threat denies it).",
+   "lines": [
+    {
+     "lineId": "ARRIVAL_SENSES.arms.dominant[0]",
+     "text": "The hammering echoes throughout {name}, and most of it is the sound of blades being made.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.arms.dominant[1]",
+     "text": "Racks of spearheads and helms stand outside the workshops, waiting for the carts.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.arms.dominant[2]",
+     "text": "Every forge you pass is making something meant for a war, and the carts on the road out are full of it.",
+     "needs": [],
+     "excludes": [
+      "crisis: under_siege"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": [
+      "\"meant for a war\" (a war somewhere; war state not presumed here)"
+     ]
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.arms.dominant[3]",
+     "text": "A smith tests a new blade against a post, frowns, and sends it back to the fire.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "bread.lines",
+   "keyGuarantees": [
+    "chooseSense: a native institution name matches the 'bread' fragments at a word start",
+    "renders in EVERY birth whose roster matches, crisis or none (SENSE is not gated by underStress)",
+    "agreeingLine (arrivalScene.js:251-256) redraws once off any line naming a market the roster lacks, or racks of drying fish where portKind is none"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Not opted: trade sounds and smells sayable under any condition.",
+   "lines": [
+    {
+     "lineId": "ARRIVAL_SENSES.bread.lines[0]",
+     "text": "The smell of fresh bread meets you on the road in.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.bread.lines[1]",
+     "text": "Someone has been baking since before dawn, and the air still carries it.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.bread.lines[2]",
+     "text": "A mill wheel turns somewhere close, and flour dust drifts on the breeze.",
+     "needs": [
+      "institution: mill"
+     ],
+     "excludes": [],
+     "crisis": null,
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.bread.lines[3]",
+     "text": "The warm smell of an oven reaches you before the first doorway does.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "bread.dominant",
+   "keyGuarantees": [
+    "chooseSense: a native institution name matches the 'bread' fragments at a word start, and exports/income match its trade fragments (dominant)",
+    "renders in EVERY birth whose roster matches, crisis or none (SENSE is not gated by underStress)",
+    "agreeingLine (arrivalScene.js:251-256) redraws once off any line naming a market the roster lacks, or racks of drying fish where portKind is none"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Opted: renders under a crisis, and lines assert traffic on the open road (a siege shuts it), plenty (hunger denies it) or easy crowds (an armed threat denies it).",
+   "lines": [
+    {
+     "lineId": "ARRIVAL_SENSES.bread.dominant[0]",
+     "text": "The smell of bread hits you as you walk into {name}, and it never really leaves.",
+     "needs": [],
+     "excludes": [
+      "crisis: hunger"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.bread.dominant[1]",
+     "text": "Carts of grain rattle toward the mills while the ovens send the smell of bread down every lane.",
+     "needs": [
+      "institution: mill"
+     ],
+     "excludes": [
+      "crisis: hunger"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": [
+      "grain (food source)"
+     ]
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.bread.dominant[2]",
+     "text": "Flour dust lies pale on the doorsteps, and the whole place smells of the ovens.",
+     "needs": [],
+     "excludes": [
+      "crisis: hunger"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.bread.dominant[3]",
+     "text": "Sacks of flour are stacked shoulder high by the roadside, waiting to be carted out.",
+     "needs": [],
+     "excludes": [
+      "crisis: hunger"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": []
+    }
+   ],
+   "droppedTwins": [
+    {
+     "text": "The ovens of {name} are still lit, and every loaf is spoken for before it cools.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "hunger"
+     ],
+     "why": "every bread.dominant line excludes the hunger family, so a bread-dominant place under famine, siege or a crisis with a food deficit has no sense line (share of eligible births small, ~1/(n+1) once drawn; written because the pool empties wholly in that slice)",
+     "droppedBy": "chair CENSUS-2: below the empty-slot bar (a share of bread-dominant births under hunger only)"
+    }
+   ]
+  },
+  {
+   "pool": "tanners.lines",
+   "keyGuarantees": [
+    "chooseSense: a native institution name matches the 'tanners' fragments at a word start",
+    "renders in EVERY birth whose roster matches, crisis or none (SENSE is not gated by underStress)",
+    "agreeingLine (arrivalScene.js:251-256) redraws once off any line naming a market the roster lacks, or racks of drying fish where portKind is none"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": true,
+   "ruling": "Not opted: trade sounds and smells sayable under any condition.",
+   "lines": [
+    {
+     "lineId": "ARRIVAL_SENSES.tanners.lines[0]",
+     "text": "Downwind of the tanning pits the air turns sharp and sour.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.tanners.lines[1]",
+     "text": "The tannery makes itself known long before you reach it.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.tanners.lines[2]",
+     "text": "Hides hang drying on frames, and the smell comes with them.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.tanners.lines[3]",
+     "text": "A sour reek drifts over the rooftops from the tanning yard.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "tanners.dominant",
+   "keyGuarantees": [
+    "chooseSense: a native institution name matches the 'tanners' fragments at a word start, and exports/income match its trade fragments (dominant)",
+    "renders in EVERY birth whose roster matches, crisis or none (SENSE is not gated by underStress)",
+    "agreeingLine (arrivalScene.js:251-256) redraws once off any line naming a market the roster lacks, or racks of drying fish where portKind is none"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Opted: renders under a crisis, and lines assert traffic on the open road (a siege shuts it), plenty (hunger denies it) or easy crowds (an armed threat denies it).",
+   "lines": [
+    {
+     "lineId": "ARRIVAL_SENSES.tanners.dominant[0]",
+     "text": "The reek of the tanning pits hangs over {name}, and the locals have long since stopped noticing it.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.tanners.dominant[1]",
+     "text": "Bales of hides and bundled pelts crowd the carts on the road out.",
+     "needs": [],
+     "excludes": [
+      "crisis: under_siege"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.tanners.dominant[2]",
+     "text": "Frames of drying leather line the lanes, and the sour smell of the pits follows you everywhere.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "brewers.lines",
+   "keyGuarantees": [
+    "chooseSense: a native institution name matches the 'brewers' fragments at a word start",
+    "renders in EVERY birth whose roster matches, crisis or none (SENSE is not gated by underStress)",
+    "agreeingLine (arrivalScene.js:251-256) redraws once off any line naming a market the roster lacks, or racks of drying fish where portKind is none"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": true,
+   "ruling": "Not opted: trade sounds and smells sayable under any condition.",
+   "lines": [
+    {
+     "lineId": "ARRIVAL_SENSES.brewers.lines[0]",
+     "text": "The sweet, heavy smell of malt hangs over the lane.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.brewers.lines[1]",
+     "text": "A barrel thuds down from a cart, and somebody inside cheers its arrival.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.brewers.lines[2]",
+     "text": "The smell of the mash tun follows you past the brewhouse door.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.brewers.lines[3]",
+     "text": "A cask stands propped by a doorway, waiting for the evening trade.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "brewers.dominant",
+   "keyGuarantees": [
+    "chooseSense: a native institution name matches the 'brewers' fragments at a word start, and exports/income match its trade fragments (dominant)",
+    "renders in EVERY birth whose roster matches, crisis or none (SENSE is not gated by underStress)",
+    "agreeingLine (arrivalScene.js:251-256) redraws once off any line naming a market the roster lacks, or racks of drying fish where portKind is none"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Opted: renders under a crisis, and lines assert traffic on the open road (a siege shuts it), plenty (hunger denies it) or easy crowds (an armed threat denies it).",
+   "lines": [
+    {
+     "lineId": "ARRIVAL_SENSES.brewers.dominant[0]",
+     "text": "{name} smells of malt from one end to the other.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.brewers.dominant[1]",
+     "text": "Barrels are stacked by every doorway, and the carts on the road out are loaded with more.",
+     "needs": [],
+     "excludes": [
+      "crisis: under_siege"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.brewers.dominant[2]",
+     "text": "The steam of the mash tuns drifts across the roofs, sweet and heavy.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "fish.lines",
+   "keyGuarantees": [
+    "chooseSense: a native institution name matches the 'fish' fragments at a word start",
+    "renders in EVERY birth whose roster matches, crisis or none (SENSE is not gated by underStress)",
+    "agreeingLine (arrivalScene.js:251-256) redraws once off any line naming a market the roster lacks, or racks of drying fish where portKind is none"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Not opted: trade sounds and smells sayable under any condition.",
+   "lines": [
+    {
+     "lineId": "ARRIVAL_SENSES.fish.lines[0]",
+     "text": "Gulls quarrel over the fish stalls, and the air smells of the morning's catch.",
+     "needs": [
+      "market",
+      "navigable"
+     ],
+     "excludes": [],
+     "crisis": null,
+     "colour": false,
+     "stop": [
+      "gulls (large water)"
+     ]
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.fish.lines[1]",
+     "text": "A fishmonger shouts a price over the slap of wet baskets.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.fish.lines[2]",
+     "text": "Nets hang drying on poles, and the smell of the catch follows you.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": false,
+     "stop": [
+      "nets"
+     ]
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.fish.lines[3]",
+     "text": "A basket of fish, still flapping, is carried past at a run.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "fish.dominant",
+   "keyGuarantees": [
+    "chooseSense: a native institution name matches the 'fish' fragments at a word start, and exports/income match its trade fragments (dominant)",
+    "renders in EVERY birth whose roster matches, crisis or none (SENSE is not gated by underStress)",
+    "agreeingLine (arrivalScene.js:251-256) redraws once off any line naming a market the roster lacks, or racks of drying fish where portKind is none"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Not opted: trade sounds and smells sayable under any condition.",
+   "lines": [
+    {
+     "lineId": "ARRIVAL_SENSES.fish.dominant[0]",
+     "text": "Racks of drying fish line the way in, and the smell of salt and catch is everywhere.",
+     "needs": [
+      "navigable"
+     ],
+     "excludes": [],
+     "crisis": null,
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.fish.dominant[1]",
+     "text": "Half of {name} seems to be gutting, salting or selling fish.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.fish.dominant[2]",
+     "text": "Barrels of salt fish stand stacked for the carts, and the gulls have opinions about every one.",
+     "needs": [
+      "navigable"
+     ],
+     "excludes": [],
+     "crisis": null,
+     "colour": false,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "cloth.lines",
+   "keyGuarantees": [
+    "chooseSense: a native institution name matches the 'cloth' fragments at a word start",
+    "renders in EVERY birth whose roster matches, crisis or none (SENSE is not gated by underStress)",
+    "agreeingLine (arrivalScene.js:251-256) redraws once off any line naming a market the roster lacks, or racks of drying fish where portKind is none"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Not opted: trade sounds and smells sayable under any condition.",
+   "lines": [
+    {
+     "lineId": "ARRIVAL_SENSES.cloth.lines[0]",
+     "text": "A loom clatters behind an open shutter.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.cloth.lines[1]",
+     "text": "Lengths of dyed cloth hang drying in bright strips between the houses.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.cloth.lines[2]",
+     "text": "The thump of the fulling stocks carries from the cloth yard.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": false,
+     "stop": [
+      "fulling stocks (no institution kind)"
+     ]
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.cloth.lines[3]",
+     "text": "A dyer walks past with hands stained to the wrist.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "cloth.dominant",
+   "keyGuarantees": [
+    "chooseSense: a native institution name matches the 'cloth' fragments at a word start, and exports/income match its trade fragments (dominant)",
+    "renders in EVERY birth whose roster matches, crisis or none (SENSE is not gated by underStress)",
+    "agreeingLine (arrivalScene.js:251-256) redraws once off any line naming a market the roster lacks, or racks of drying fish where portKind is none"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Opted: renders under a crisis, and lines assert traffic on the open road (a siege shuts it), plenty (hunger denies it) or easy crowds (an armed threat denies it).",
+   "lines": [
+    {
+     "lineId": "ARRIVAL_SENSES.cloth.dominant[0]",
+     "text": "The clatter of looms follows you through {name}, from one shutter to the next.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.cloth.dominant[1]",
+     "text": "Bolts of cloth and bales of wool fill the carts waiting on the road out.",
+     "needs": [],
+     "excludes": [
+      "crisis: under_siege"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.cloth.dominant[2]",
+     "text": "Bolts of cloth hang drying in long bright strips across every yard.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "livestock.lines",
+   "keyGuarantees": [
+    "chooseSense: a native institution name matches the 'livestock' fragments at a word start",
+    "renders in EVERY birth whose roster matches, crisis or none (SENSE is not gated by underStress)",
+    "agreeingLine (arrivalScene.js:251-256) redraws once off any line naming a market the roster lacks, or racks of drying fish where portKind is none"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Opted: renders under a crisis, and lines assert traffic on the open road (a siege shuts it), plenty (hunger denies it) or easy crowds (an armed threat denies it).",
+   "lines": [
+    {
+     "lineId": "ARRIVAL_SENSES.livestock.lines[0]",
+     "text": "Sheep call to one another from the grazing beyond the houses.",
+     "needs": [],
+     "excludes": [
+      "crisis: under_siege",
+      "crisis: monster_pressure"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": [
+      "sheep (food source)"
+     ]
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.livestock.lines[1]",
+     "text": "A dog drives a handful of animals across the road, and you wait for them.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.livestock.lines[2]",
+     "text": "The smell of the byres reaches you on the breeze.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": false,
+     "stop": [
+      "byres"
+     ]
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.livestock.lines[3]",
+     "text": "Someone is churning butter in a doorway, and the rhythm of it carries.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "livestock.dominant",
+   "keyGuarantees": [
+    "chooseSense: a native institution name matches the 'livestock' fragments at a word start, and exports/income match its trade fragments (dominant)",
+    "renders in EVERY birth whose roster matches, crisis or none (SENSE is not gated by underStress)",
+    "agreeingLine (arrivalScene.js:251-256) redraws once off any line naming a market the roster lacks, or racks of drying fish where portKind is none"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Opted: renders under a crisis, and lines assert traffic on the open road (a siege shuts it), plenty (hunger denies it) or easy crowds (an armed threat denies it).",
+   "lines": [
+    {
+     "lineId": "ARRIVAL_SENSES.livestock.dominant[0]",
+     "text": "Drovers push their herds along the road, and the whole place smells of the pens.",
+     "needs": [],
+     "excludes": [
+      "crisis: under_siege"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.livestock.dominant[1]",
+     "text": "The lowing of penned cattle carries across {name} at every hour.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.livestock.dominant[2]",
+     "text": "Hurdles and holding pens crowd the edge of the settlement, full and noisy.",
+     "needs": [],
+     "excludes": [
+      "crisis: hunger"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "faith.lines",
+   "keyGuarantees": [
+    "chooseSense: a native institution name matches the 'faith' fragments at a word start",
+    "renders in EVERY birth whose roster matches, crisis or none (SENSE is not gated by underStress)",
+    "agreeingLine (arrivalScene.js:251-256) redraws once off any line naming a market the roster lacks, or racks of drying fish where portKind is none",
+    "faith fragments are wider than institution: temple (monastery, priory, friary, priest)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": true,
+   "ruling": "Not opted: trade sounds and smells sayable under any condition.",
+   "lines": [
+    {
+     "lineId": "ARRIVAL_SENSES.faith.lines[0]",
+     "text": "A bell marks the hour, and a few heads bow as it rings.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.faith.lines[1]",
+     "text": "The smell of incense drifts out into the press of the lane.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.faith.lines[2]",
+     "text": "Someone has left fresh flowers at a small shrine set into a wall.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.faith.lines[3]",
+     "text": "Voices raised in a hymn carry, faintly, from somewhere among the roofs.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "faith.dominant",
+   "keyGuarantees": [
+    "chooseSense: a native institution name matches the 'faith' fragments at a word start, and exports/income match its trade fragments (dominant)",
+    "renders in EVERY birth whose roster matches, crisis or none (SENSE is not gated by underStress)",
+    "agreeingLine (arrivalScene.js:251-256) redraws once off any line naming a market the roster lacks, or racks of drying fish where portKind is none",
+    "faith fragments are wider than institution: temple (monastery, priory, friary, priest)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Opted: renders under a crisis, and lines assert traffic on the open road (a siege shuts it), plenty (hunger denies it) or easy crowds (an armed threat denies it).",
+   "lines": [
+    {
+     "lineId": "ARRIVAL_SENSES.faith.dominant[0]",
+     "text": "Pilgrims crowd the road in, and every second stall sells candles, tokens or someone's blessing.",
+     "needs": [
+      "market"
+     ],
+     "excludes": [
+      "crisis: threat"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.faith.dominant[1]",
+     "text": "The bells of {name} answer one another across the roofs, and the streets slow for them.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": false,
+     "stop": [
+      "several bells (more than one house of worship)"
+     ]
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.faith.dominant[2]",
+     "text": "Pilgrims in travel-stained cloaks queue patiently for their turn at the holy places.",
+     "needs": [],
+     "excludes": [
+      "crisis: threat",
+      "crisis: unrest"
+     ],
+     "note": "R-F3 (the chair, 2026-11-05): a calm arrival claim; the LINE widens to the unrest family.",
+     "crisis": "any",
+     "colour": false,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "stone.lines",
+   "keyGuarantees": [
+    "chooseSense: a native institution name matches the 'stone' fragments at a word start",
+    "renders in EVERY birth whose roster matches, crisis or none (SENSE is not gated by underStress)",
+    "agreeingLine (arrivalScene.js:251-256) redraws once off any line naming a market the roster lacks, or racks of drying fish where portKind is none"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": true,
+   "ruling": "Not opted: trade sounds and smells sayable under any condition.",
+   "lines": [
+    {
+     "lineId": "ARRIVAL_SENSES.stone.lines[0]",
+     "text": "A fine grey dust from the workings settles on every doorstep.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.stone.lines[1]",
+     "text": "Carts of rock grind past, their axles complaining.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.stone.lines[2]",
+     "text": "The chink of chisels on stone carries on the wind.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.stone.lines[3]",
+     "text": "Workers coming off a shift are grey with dust to the eyebrows.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "stone.dominant",
+   "keyGuarantees": [
+    "chooseSense: a native institution name matches the 'stone' fragments at a word start, and exports/income match its trade fragments (dominant)",
+    "renders in EVERY birth whose roster matches, crisis or none (SENSE is not gated by underStress)",
+    "agreeingLine (arrivalScene.js:251-256) redraws once off any line naming a market the roster lacks, or racks of drying fish where portKind is none"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Opted: renders under a crisis, and lines assert traffic on the open road (a siege shuts it), plenty (hunger denies it) or easy crowds (an armed threat denies it).",
+   "lines": [
+    {
+     "lineId": "ARRIVAL_SENSES.stone.dominant[0]",
+     "text": "{name} lives on what comes out of the ground, and the dust of it is on everything.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.stone.dominant[1]",
+     "text": "Ore carts and stone carts grind along the road in a line that never seems to end.",
+     "needs": [],
+     "excludes": [
+      "crisis: under_siege"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.stone.dominant[2]",
+     "text": "Spoil heaps rise beyond the houses, and the sound of the workings never quite stops.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "timber.lines",
+   "keyGuarantees": [
+    "chooseSense: a native institution name matches the 'timber' fragments at a word start",
+    "renders in EVERY birth whose roster matches, crisis or none (SENSE is not gated by underStress)",
+    "agreeingLine (arrivalScene.js:251-256) redraws once off any line naming a market the roster lacks, or racks of drying fish where portKind is none"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": true,
+   "ruling": "Not opted: trade sounds and smells sayable under any condition.",
+   "lines": [
+    {
+     "lineId": "ARRIVAL_SENSES.timber.lines[0]",
+     "text": "The rasp of a saw and the smell of fresh-cut wood come from a workshop yard.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.timber.lines[1]",
+     "text": "Sawn planks stand stacked to season against a wall.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.timber.lines[2]",
+     "text": "Curls of shavings blow across the lane from a carpenter's bench.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.timber.lines[3]",
+     "text": "The knock of a mallet on wood keeps time somewhere close.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "timber.dominant",
+   "keyGuarantees": [
+    "chooseSense: a native institution name matches the 'timber' fragments at a word start, and exports/income match its trade fragments (dominant)",
+    "renders in EVERY birth whose roster matches, crisis or none (SENSE is not gated by underStress)",
+    "agreeingLine (arrivalScene.js:251-256) redraws once off any line naming a market the roster lacks, or racks of drying fish where portKind is none"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": true,
+   "ruling": "Not opted: trade sounds and smells sayable under any condition.",
+   "lines": [
+    {
+     "lineId": "ARRIVAL_SENSES.timber.dominant[0]",
+     "text": "The smell of sawn timber is everywhere in {name}, and so is the sawdust.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.timber.dominant[1]",
+     "text": "Stacks of seasoning planks line the road in, taller than the carts that wait for them.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.timber.dominant[2]",
+     "text": "The rasp of the saws carries from yard to yard all through the day.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "kilns.lines",
+   "keyGuarantees": [
+    "chooseSense: a native institution name matches the 'kilns' fragments at a word start",
+    "renders in EVERY birth whose roster matches, crisis or none (SENSE is not gated by underStress)",
+    "agreeingLine (arrivalScene.js:251-256) redraws once off any line naming a market the roster lacks, or racks of drying fish where portKind is none"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": true,
+   "ruling": "Not opted: trade sounds and smells sayable under any condition.",
+   "lines": [
+    {
+     "lineId": "ARRIVAL_SENSES.kilns.lines[0]",
+     "text": "A thread of kiln smoke rises over the roofs, and the air tastes faintly of ash.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.kilns.lines[1]",
+     "text": "Fresh pots stand drying in a row outside a workshop.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.kilns.lines[2]",
+     "text": "Charcoal smoke lingers in the lane, thick and sweetish.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.kilns.lines[3]",
+     "text": "The heat of a working kiln reaches you from across the lane.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "kilns.dominant",
+   "keyGuarantees": [
+    "chooseSense: a native institution name matches the 'kilns' fragments at a word start, and exports/income match its trade fragments (dominant)",
+    "renders in EVERY birth whose roster matches, crisis or none (SENSE is not gated by underStress)",
+    "agreeingLine (arrivalScene.js:251-256) redraws once off any line naming a market the roster lacks, or racks of drying fish where portKind is none"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Opted: renders under a crisis, and lines assert traffic on the open road (a siege shuts it), plenty (hunger denies it) or easy crowds (an armed threat denies it).",
+   "lines": [
+    {
+     "lineId": "ARRIVAL_SENSES.kilns.dominant[0]",
+     "text": "Kiln smoke hangs over {name}, and the dust of fired clay is on everything.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.kilns.dominant[1]",
+     "text": "Crates of pots and glassware, packed in straw, wait for the carts on the road out.",
+     "needs": [],
+     "excludes": [
+      "crisis: under_siege"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.kilns.dominant[2]",
+     "text": "The kilns are lit all through the day, and the heat of them is in every lane.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "horses.lines",
+   "keyGuarantees": [
+    "chooseSense: a native institution name matches the 'horses' fragments at a word start",
+    "renders in EVERY birth whose roster matches, crisis or none (SENSE is not gated by underStress)",
+    "agreeingLine (arrivalScene.js:251-256) redraws once off any line naming a market the roster lacks, or racks of drying fish where portKind is none"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": true,
+   "ruling": "Not opted: trade sounds and smells sayable under any condition.",
+   "lines": [
+    {
+     "lineId": "ARRIVAL_SENSES.horses.lines[0]",
+     "text": "The smell of horses and hay comes from the stables.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.horses.lines[1]",
+     "text": "A team stands in harness, stamping, while the carters argue over the load.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.horses.lines[2]",
+     "text": "An ostler leads a tired horse past you toward the trough.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.horses.lines[3]",
+     "text": "Harness jingles somewhere behind you as a cart pulls out.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "horses.dominant",
+   "keyGuarantees": [
+    "chooseSense: a native institution name matches the 'horses' fragments at a word start, and exports/income match its trade fragments (dominant)",
+    "renders in EVERY birth whose roster matches, crisis or none (SENSE is not gated by underStress)",
+    "agreeingLine (arrivalScene.js:251-256) redraws once off any line naming a market the roster lacks, or racks of drying fish where portKind is none"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Opted: renders under a crisis, and lines assert traffic on the open road (a siege shuts it), plenty (hunger denies it) or easy crowds (an armed threat denies it).",
+   "lines": [
+    {
+     "lineId": "ARRIVAL_SENSES.horses.dominant[0]",
+     "text": "Hooves and wheels fill the road, and the yards are crowded with teams changing over.",
+     "needs": [],
+     "excludes": [
+      "crisis: under_siege"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.horses.dominant[1]",
+     "text": "{name} is loud with horses: shod, sold, hired and fed at every hour.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.horses.dominant[2]",
+     "text": "Fresh horses stand saddled and waiting while the tired ones are led away.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "market.lines",
+   "keyGuarantees": [
+    "chooseSense: a native institution name matches the 'market' fragments at a word start",
+    "renders in EVERY birth whose roster matches, crisis or none (SENSE is not gated by underStress)",
+    "agreeingLine (arrivalScene.js:251-256) redraws once off any line naming a market the roster lacks, or racks of drying fish where portKind is none"
+   ],
+   "poolNeeds": [
+    "market"
+   ],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Opted: renders under a crisis, and lines assert traffic on the open road (a siege shuts it), plenty (hunger denies it) or easy crowds (an armed threat denies it).",
+   "lines": [
+    {
+     "lineId": "ARRIVAL_SENSES.market.lines[0]",
+     "text": "Stallholders call their wares over the noise of the market.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.market.lines[1]",
+     "text": "The market is loud with haggling long before noon.",
+     "needs": [],
+     "excludes": [
+      "crisis: threat"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.market.lines[2]",
+     "text": "A knot of buyers argues over a price, and the seller enjoys every word of it.",
+     "needs": [],
+     "excludes": [
+      "crisis: threat",
+      "crisis: hunger"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.market.lines[3]",
+     "text": "A child weaves between the stalls with a basket bigger than she is.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "herbs.lines",
+   "keyGuarantees": [
+    "chooseSense: a native institution name matches the 'herbs' fragments at a word start",
+    "renders in EVERY birth whose roster matches, crisis or none (SENSE is not gated by underStress)",
+    "agreeingLine (arrivalScene.js:251-256) redraws once off any line naming a market the roster lacks, or racks of drying fish where portKind is none"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Not opted: trade sounds and smells sayable under any condition.",
+   "lines": [
+    {
+     "lineId": "ARRIVAL_SENSES.herbs.lines[0]",
+     "text": "The bitter smell of drying herbs drifts from an apothecary's door.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": false,
+     "stop": [
+      "apothecary (key may be a healer or physician only)"
+     ]
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.herbs.lines[1]",
+     "text": "Bundles of herbs hang under the eaves of a narrow shop, and their scent reaches the lane.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": false,
+     "stop": [
+      "a narrow shop (apothecary)"
+     ]
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.herbs.lines[2]",
+     "text": "Someone is grinding something pungent behind an open shutter.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "herbs.dominant",
+   "keyGuarantees": [
+    "chooseSense: a native institution name matches the 'herbs' fragments at a word start, and exports/income match its trade fragments (dominant)",
+    "renders in EVERY birth whose roster matches, crisis or none (SENSE is not gated by underStress)",
+    "agreeingLine (arrivalScene.js:251-256) redraws once off any line naming a market the roster lacks, or racks of drying fish where portKind is none"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Not opted: trade sounds and smells sayable under any condition.",
+   "lines": [
+    {
+     "lineId": "ARRIVAL_SENSES.herbs.dominant[0]",
+     "text": "Spice and drying herbs scent every lane, and the stalls are piled with them.",
+     "needs": [
+      "market"
+     ],
+     "excludes": [],
+     "crisis": null,
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.herbs.dominant[1]",
+     "text": "Sacks of herbs and spices fill the carts, and the smell of them clings to your clothes.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.herbs.dominant[2]",
+     "text": "Every other doorway seems to sell a remedy for something.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "arcane.lines",
+   "keyGuarantees": [
+    "chooseSense: a native institution name matches the 'arcane' fragments at a word start",
+    "renders in EVERY birth whose roster matches, crisis or none (SENSE is not gated by underStress)",
+    "agreeingLine (arrivalScene.js:251-256) redraws once off any line naming a market the roster lacks, or racks of drying fish where portKind is none",
+    "world magic is real (magicEnabled); stop: the record's own magic functions are not what the key reads"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": true,
+   "ruling": "Not opted: trade sounds and smells sayable under any condition.",
+   "lines": [
+    {
+     "lineId": "ARRIVAL_SENSES.arcane.lines[0]",
+     "text": "A faint glow lingers in an upper window, even at midday.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.arcane.lines[1]",
+     "text": "The air near an alchemist's door smells of sulphur and something sweeter.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.arcane.lines[2]",
+     "text": "A vendor sells charms from a tray, and nobody laughs at the buyers.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.arcane.lines[3]",
+     "text": "A lamp that burns without oil lights a doorway off the lane.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "arcane.dominant",
+   "keyGuarantees": [
+    "chooseSense: a native institution name matches the 'arcane' fragments at a word start, and exports/income match its trade fragments (dominant)",
+    "renders in EVERY birth whose roster matches, crisis or none (SENSE is not gated by underStress)",
+    "agreeingLine (arrivalScene.js:251-256) redraws once off any line naming a market the roster lacks, or racks of drying fish where portKind is none",
+    "world magic is real (magicEnabled); stop: the record's own magic functions are not what the key reads"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": true,
+   "ruling": "Not opted: trade sounds and smells sayable under any condition.",
+   "lines": [
+    {
+     "lineId": "ARRIVAL_SENSES.arcane.dominant[0]",
+     "text": "Magic is a trade in {name} like any other: signs offer enchanting and identification by the hour.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.arcane.dominant[1]",
+     "text": "The air prickles faintly, the way it does where a great deal of spellwork is done.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "ARRIVAL_SENSES.arcane.dominant[2]",
+     "text": "Stalls sell reagents in stoppered jars, and the buyers know exactly what they want.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    }
+   ]
+  }
+ ]
+}
