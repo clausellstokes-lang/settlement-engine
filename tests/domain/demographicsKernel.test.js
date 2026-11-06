@@ -153,7 +153,17 @@ describe('DORMANCY — dark is a no-op by OBJECT IDENTITY, not by deep equality'
     // demographic step started writing behind its own dark flag (a defect) or the
     // settlement-lifecycle lane changed for its own documented reason (state the cause,
     // then re-record).
-    const FROZEN = '2b2d754f4aed09fd';
+    //
+    // RE-KEYED (LANDING-7 lane E, 2026-11-06) for the lifecycle lane's own documented cause, the
+    // owner's population bands, bisected by stage in scratch worktrees (demographics dark throughout;
+    // the identity pins above stay green at every stage):
+    //     2b2d754f4aed09fd  through 433289899^
+    //     1e884997fa27331f  at 433289899 (X-46 car 1, U2: the overlapping roll bands and the stamp;
+    //                       the lifecycle reads the realm's tiers and bands)
+    //     2f38d38bffc76292  at 270c3ed77 (X-46 car 1b, U4: the metropolis band body 60,000 -> 50,000;
+    //                       the seeding drive reads range.max as a ratio, and Fallowmere is a metropolis)
+    // and unmoved by R-B3 (1f2a8504e) and to the landing tip 8e60cb2a5 (git bisect, first bad 270c3ed77).
+    const FROZEN = '2f38d38bffc76292';
     let live = realmUpdates();
     let worldState = { simulationRules: { settlementLifecycleEnabled: true } };
     const trace = [];
