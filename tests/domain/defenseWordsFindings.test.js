@@ -116,8 +116,12 @@ describe('defenseFactsOf reads the roster and the engine\'s months', () => {
     expect(f.defenceNames).toEqual(['Palisade']);
   });
 
+  // ⭐ RE-KEYED BY IDENTITY (LANDING-7 lane D, 2026-11-06): the healer's village was
+  // defense-village-17; the X-46-3 institution budget (compose 90dc22f18) cut it to 8 houses at
+  // 124 souls and the healer went with them, so the tab rightly reads "Clergy care". The first
+  // village of this corpus that seats the same 'Healer (divine, 1st level)' and no hospital is 47.
   it('a 1st-level healer is a healer and not a hospital', () => {
-    const f = defenseFactsOf(world('defense-village-17'));
+    const f = defenseFactsOf(world('defense-village-47'));
     expect(f.hasHospital).toBe(false);
     expect(f.hasHealer).toBe(true);
     expect(f.healerName).toBe('Healer (divine, 1st level)');
@@ -168,7 +172,7 @@ describe('the Defense tab says only what the place has', () => {
   });
 
   it('"Hospital present" only with a real hospital; a healer is named as a healer', () => {
-    const s = world('defense-village-17');
+    const s = world('defense-village-47'); // re-keyed from 17 with the arm above (X-46-3 budget)
     const med = deriveSupportingCapabilities(s).find((c) => c.label === 'Medical Readiness');
     expect(med.status).toBe('Healer');
     expect(med.note).toContain('Healer (divine, 1st level)');
