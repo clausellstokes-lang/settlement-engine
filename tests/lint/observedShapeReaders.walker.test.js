@@ -640,10 +640,13 @@ describe('reader-with-no-writer ratchet: the EXECUTED corpus', () => {
     // byte-equal before and after it). ⚠ NOT cross-recorded here: the three news-family walkers are red on FOOD's whole
     // re-deal of the AO-0 year (news-voice homes 44 → 45, prose-family identities 61 → 58, digests), a reference re-record
     // the ruling did not cover; it is reported to the chair, not done piecemeal.
+    // 2026-11-04 (REGISTERS-4, the chair's ruling C5, cross-recorded in news-voice, news-headline and prose-family in the
+    // same act): final 264 → 260, accumulated 1541 → 1521, unique 265 → 261; regional 77/77 HOLD. By stage: FOOD-1 (T1)
+    // 257/1510/258/80, FOOD-2 (T2) 264/1541/265/77, SIZE-3 (S5, the guild market) 260/1521/261/77; nothing after S5 moves.
     expect(scalarCorpus.scalarMeta).toEqual({
       canonEventLogEntries: 1,
-      wizardNewsFinalEntries: 264,
-      wizardNewsAccumulatedEntries: 1541,
+      wizardNewsFinalEntries: 260,
+      wizardNewsAccumulatedEntries: 1521,
       // FP BATCH 4 (2026-09-24, the FP chair): wizardNewsFinalEntries 240 → 272 and wizardNewsAccumulatedEntries 1567 → 1604 —
       // the Herald lens U2 (32315e384, FP-31): the feed keeps its newest 52 weeks whole under the 240 cap, so the corpus's
       // twelve monthly pulses retire one entry instead of thirty-three; unique 273 HOLDS. Attributed by equality with the U2
@@ -653,7 +656,7 @@ describe('reader-with-no-writer ratchet: the EXECUTED corpus', () => {
       // (a peacetime suit retires when a war opens against its court; its feed reconcile mints the one id). Accumulated 1567
       // and final 240 DO NOT MOVE. Cross-recorded in the same act: news-voice (introductions 273), prose-family
       // (scalarRows 25549, pulseHistory 1055/5097), the OSR register --write at 98e0d8664 (exact, 1970 findings).
-      wizardNewsUnique: 265,
+      wizardNewsUnique: 261,
       pulseHistory: 12,
       // TE36 (ODQ §271): 109 → 73, one cause — the regional event log carries the pulse's
       // selected outcomes, and the retired bare-decline family was 36 of them. That mint's

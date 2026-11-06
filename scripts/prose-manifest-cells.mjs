@@ -89,7 +89,32 @@ export const MANIFEST_PROVENANCE = Object.freeze({
     + ' and defends in every world; 36 of the 1,050 rows move, none added or removed.'
     + ' 2026-10-01 (J33, docs/shift-records/2026-10-01-urban-band-warden-census.json, the same rulings): re-recorded'
     + ' again because Warden\'s Lodge leaves every druid and magic list, so a magic town holding one loses the druid'
-    + ' readings it alone had opened; 70 of the 1,050 rows move, none added or removed.',
+    + ' readings it alone had opened; 70 of the 1,050 rows move, none added or removed.'
+    + ' 2026-11-03 (FOOD-1, docs/shift-records/2026-11-03-food-1-one-food-record.json, ODQ §934.104, THE COHERENCE AND'
+    + ' SCALE WINDOW): re-recorded because every food sentence reads one stored food record with one set of cut-offs and'
+    + ' the surplus words read it; 222 of the 1,050 rows move, none added or removed.'
+    + ' 2026-11-03 (FOOD-2, docs/shift-records/2026-11-03-food-2-food-base-numbers.json, ODQ §934.104, THE COHERENCE AND'
+    + ' SCALE WINDOW): re-recorded because the food base numbers read one terrain table with no hidden storage divisor'
+    + ' and draw the hinterland as normal supply; 978 of the 1,050 rows move, none added or removed.'
+    + ' 2026-11-03 (FOOD-3, docs/shift-records/2026-11-03-food-3-food-diversity.json, ODQ §934.104, THE COHERENCE AND'
+    + ' SCALE WINDOW): re-recorded because the food record holds the sources a place has and preserved sources lengthen'
+    + ' the stores the defence lines read; 120 of the 1,050 rows move, none added or removed.'
+    + ' 2026-11-03 (SIZE-3, docs/shift-records/2026-11-03-size-3-guild-market.json, ODQ §934.104, THE COHERENCE AND'
+    + ' SCALE WINDOW): re-recorded because a small place with no real market no longer seats a merchant guild, so its'
+    + ' power lines and the conflict line the guild carried move; 174 of the 1,050 rows move, none added or removed.'
+    + ' 2026-11-03 (DEFENSE, docs/shift-records/2026-11-03-defense-roster-pools.json, ODQ §934.104, THE COHERENCE AND'
+    + ' SCALE WINDOW): re-recorded because the Defense tab\'s pools check the roster before they speak, so the defence'
+    + ' lines that presupposed a garrison, soldiers, walls or an empty store are reworded; 1,018 of the 1,050 rows move,'
+    + ' none added or removed.'
+    + ' 2026-11-03 (X-49, docs/shift-records/2026-11-03-x49-stores-off-defense.json, ODQ §934.104, THE COHERENCE AND'
+    + ' SCALE WINDOW): re-recorded because the stored-food figure has one home, the Economy tab, so the Defense tab\'s'
+    + ' food-stores lines leave; all 1,050 rows move, none added or removed.'
+    + ' 2026-11-03 (DEFENSE-2, docs/shift-records/2026-11-03-defense-magic-dependency.json, ODQ §934.104, THE COHERENCE'
+    + ' AND SCALE WINDOW): re-recorded because the defence record stores the one magic reliance reading and the Defense'
+    + ' tab reads it and the one practitioner census; 512 of the 1,050 rows move, none added or removed.'
+    + ' 2026-11-03 (FOOD-print, docs/shift-records/2026-11-03-food-print-comfortable-pool.json, ODQ §934.104, THE'
+    + ' COHERENCE AND SCALE WINDOW): re-recorded because the comfortable-prosperity pool stops claiming a food surplus'
+    + ' the food record does not show; 232 of the 1,050 rows move, none added or removed.',
 });
 
 /** This surface's identity in tests/fixtures/.golden-freeze-register.json. */

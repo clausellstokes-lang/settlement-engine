@@ -132,7 +132,19 @@ const GOLDEN_CONTROL_KEY = 'town|germanic|plains|road|civilized|golden-master-v3
 // 2026-10-31, tension variety (GS-1, ODQ §934.101), through the signed door
 // (docs/shift-records/2026-10-31-tension-variety.json): 9f94ab28... -> 67a3cc18..., this town's tie prose drawn
 // without replacement from eight-variant pools.
-const GOLDEN_CONTROL_HASH = '67a3cc18596429f43bf1d98abfae28d6900b1a527b65d70d08015545b0ae9529';
+// 2026-11-03, FOOD-1 (ODQ §934.104), through the signed door (docs/shift-records/2026-11-03-food-1-one-food-record.json):
+// 67a3cc18... -> 48f22f18..., this town's food record stored and its prosperity read from it.
+// 2026-11-03, FOOD-2 (ODQ §934.104), through the signed door (docs/shift-records/2026-11-03-food-2-food-base-numbers.json):
+// 48f22f18... -> f0ec823b..., this town's food base read from the one terrain table and its hinterland drawn as supply.
+// 2026-11-03, FOOD-3 (ODQ §934.104), through the signed door (docs/shift-records/2026-11-03-food-3-food-diversity.json):
+// f0ec823b... -> 908c8abd..., this town's food sources, failed source and foodways line stored on its food record.
+// 2026-11-03, DEFENSE-2 roster lines (ODQ §934.104), through the signed door
+// (docs/shift-records/2026-11-03-defense-roster-lines.json): 908c8abd... -> c957dd78..., this town's germanic
+// defence pattern reworded to hold on every roster.
+// 2026-11-03, DEFENSE-2 magic dependency (ODQ §934.104), through the signed door
+// (docs/shift-records/2026-11-03-defense-magic-dependency.json): c957dd78... -> b1b9502a..., this town's defence
+// record storing the one magic reliance reading.
+const GOLDEN_CONTROL_HASH = 'b1b9502a37d001f01ea75bbb3bfa22c2a8ae70ba98c27d4067a6198aebef9f51';
 /** EM-P0's own pinned-mode row and its chooser keys, re-measured here under the mocks. */
 const PIN_ROW = {
   settType: 'town', culture: 'germanic', terrainOverride: 'riverside',
@@ -160,7 +172,9 @@ const REPEATED_VIAS = ['fork', 'direct', 'direct', 'direct'];
 // on the probe row (measured). The tie prose left the pair-hash door: its 19 ties' 38 desc/tension picks now render
 // at a drawn index, and the draw opens one fnv offset per archetype present (9 here) through the external channel.
 const PICK_VARIANT_CALLS = 69;
-const FNV_EXTERNAL_CALLS = 15;
+// 2026-11-04, window-end pin re-key (REGISTERS seat): 15 -> 16 external fnv1a32 calls on the probe row (measured;
+// FOOD-3, food diversity, traced at stage T3 in DOORS-4).
+const FNV_EXTERNAL_CALLS = 16;
 /** The fork law A1 pins: the mint wrapper's equivalence rests on this line and nothing else. */
 const FORK_LAW = 'fork: (label) => createPRNG(`${seed}::${label}`),';
 /** §6.4's off-corpus block: a wizard-reachable switch, the keys it moves, and 24 seeds. */
@@ -343,7 +357,7 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
     expect(foreign.map((record) => record.seed), 'every minted seed is root-prefixed').toEqual([]);
   }, 120_000);
 
-  it('A3e — the classification re-executed: the declared corpus is 63 rows, 13 steps draw, and every stepDraws and keyMoves reproduces', () => {
+  it('A3e — the classification re-executed: the declared corpus is 63 rows, 12 steps draw, and every stepDraws and keyMoves reproduces', () => {
     const corpus = censusCorpus();
     const grid = [];
     const pairsSeen = new Set();
@@ -364,7 +378,7 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
     expect(fresh.rows.length, 'the measured pair set is the registry"s, not a literal').toBe(GENERATION_TIER1.length);
     expect(fresh.rows.length, 'anti-vacuity: the pair set is real before any equality is claimed').toBeGreaterThan(70);
     expect(fresh.steps.length, 'every registered step was perturbed').toBe(getStepOrder().length);
-    expect(fresh.drawingSteps.length, 'steps that draw at all').toBe(13);
+    expect(fresh.drawingSteps.length, 'steps that draw at all').toBe(12);
     process.stdout.write(`\n[A3e] corpus=${fresh.corpusRows} pairs=${fresh.rows.length}`
       + ` wall=${fresh.wallMs}ms drawingSteps=${fresh.drawingSteps.length}\n`);
 
@@ -467,7 +481,7 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
     expect(repeated.map(([seed]) => seed), 'exactly one seed is minted more than once').toEqual([REPEATED_SEED]);
   }, 120_000);
 
-  it('A6 — the hash channel: 69 distinct pickVariant seeds, fifteen external fnv1a32 calls, and two censuses disjoint by construction', () => {
+  it('A6 — the hash channel: 69 distinct pickVariant seeds, sixteen external fnv1a32 calls, and two censuses disjoint by construction', () => {
     const seen = censusRun(CENSUS_ROW);
     const realChoices = seen.picks.filter((pick) => pick.poolLen > 1 && pick.seed && pick.seed !== ' undefined');
     const pickSeeds = new Set(seen.picks.map((pick) => pick.seed));

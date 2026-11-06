@@ -2496,6 +2496,22 @@
       "kind": "rationale",
       "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
     },
+    "tests/generators/foodBaseNumbers.test.js": {
+      "kind": "mutation",
+      "label": "food/the stand-in mill extends no stores"
+    },
+    "tests/generators/foodDiversity.test.js": {
+      "kind": "mutation",
+      "label": "food/preserved sources lengthen the stores by a quarter month each"
+    },
+    "tests/generators/foodRecord.test.js": {
+      "kind": "mutation",
+      "label": "food/the record's surplus condition is grows-more-than-eats"
+    },
+    "tests/generators/smallPlaceMarket.test.js": {
+      "kind": "mutation",
+      "label": "size/the catalogue decides what is a market"
+    },
     "tests/generators/foodVariance.test.js": {
       "kind": "rationale",
       "ref": "generators-tree-admitted-subject-coupled-2026-08-30"

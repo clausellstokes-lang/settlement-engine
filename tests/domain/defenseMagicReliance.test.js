@@ -19,6 +19,7 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import { deriveMagicReliance, magicPractitioners } from '../../src/domain/magicReliance.js';
 import { deriveSupportingCapabilities } from '../../src/domain/display/defenseDisplay.js';
 import { defenseMagicDependencyProse } from '../../src/domain/display/stateProse/defenseStateProse.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 /** @param {string} tier @param {string} seed @param {object} [over] */
 const born = (tier, seed, over = {}) =>
@@ -56,7 +57,7 @@ describe('the Arcane Support row reads the practitioner census', () => {
 
   it('where magic does not work there is no Arcane Support row at all', () => {
     const s = born('town', 'd2-nomagic-town-0', { magicExists: false, priorityMagic: 0 });
-    expect(deriveSupportingCapabilities(s).map((c) => c.label), 'the capability rows').not.toContain('Arcane Support');
+    expectAbsentWithAnchor(deriveSupportingCapabilities(s).map((c) => c.label), 'Arcane Support', 'Medical Readiness', 'the capability rows');
   });
 });
 

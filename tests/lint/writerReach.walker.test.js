@@ -524,7 +524,7 @@ describe('writer-with-no-reader ratchet: the live judgment', () => {
     expect(outside).toEqual([]);
   });
 
-  test('THE CULTURE CLASS IS STILL LIVE: the dossier view model and the quick guide read culture on settlement and npcs while the writer is config — six rows, exact, a review-backlog wiring finding', () => {
+  test('THE CULTURE CLASS IS STILL LIVE: the dossier view model and the quick guide read culture on settlement and npcs while the writer is config — four rows, exact, a review-backlog wiring finding', () => {
     // PAIDFIX repair 1 struck the three generateCampaignPDF.js sites and the campaign
     // PDF IS gone from this join. Two readers remain, and the readers’ SHAPE is what
     // is wrong, not the writer’s. When the review fixes them this arm re-records to
@@ -534,9 +534,11 @@ describe('writer-with-no-reader ratchet: the live judgment', () => {
     });
     const culture = rows.filter((row) => row.key === 'culture')
       .map((row) => `${row.file} | ${row.readerShape} <- ${row.writerShape}`).sort();
+    // BANKED 2026-11-04 (REGISTERS-5, the chair's ruling D2): the two quick-guide rows
+    // left this join at TRIM-2's X-51 (7d327ca73), which retired the quick guide from the
+    // PDF's Tonight chapter, TableView and SessionMode; bisected 7d327ca73^ green (six rows),
+    // 7d327ca73 red (four). The win is banked with an anchor below, never a loosened list.
     expect(culture).toEqual([
-      'src/domain/summary/settlementQuickGuide.js | settlement <- _config',
-      'src/domain/summary/settlementQuickGuide.js | settlement <- config',
       'src/pdf/lib/viewModel.js | npcs <- _config',
       'src/pdf/lib/viewModel.js | npcs <- config',
       'src/pdf/lib/viewModel.js | settlement <- config',
@@ -546,6 +548,11 @@ describe('writer-with-no-reader ratchet: the live judgment', () => {
       culture.map((row) => row.split(' | ')[0]), 'src/utils/generateCampaignPDF.js',
       'src/pdf/lib/viewModel.js',
       'the campaign PDF left this join at PAIDFIX repair 1 and the view model did not — a win already banked, beside a debt still open',
+    );
+    expectAbsentWithAnchor(
+      culture.map((row) => row.split(' | ')[0]), 'src/domain/summary/settlementQuickGuide.js',
+      'src/pdf/lib/viewModel.js',
+      'the quick guide left this join at X-51 (7d327ca73): ONE Tonight sheet, the quick guide retired',
     );
     // The join as SPECIFIED is spec-faithful and unusable as a bare alert, which is
     // why Car 2 asserts named classes exactly and REPORTS the rest grouped by key.

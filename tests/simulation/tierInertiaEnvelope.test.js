@@ -90,6 +90,9 @@
  * divergence of the kind that blocked tests/simulation/distributionEnvelopes.test.js.
  * Every bound is EXACTLY its alpha-1e-3 derivation: nothing here is loosenPending and
  * nothing is a ratified stricter override.
+ * RE-MEASURED 2026-11-04 (REGISTERS-4, after FOOD-1/2): eight of the nine base rates moved and were
+ * re-derived at N=400 on the same family (city calm held at 43/400); the first-120 corpus lands
+ * within 1.37 sigma of the family on every cell (per-cell z in the manifest notes).
  *
  * ────────────────────────────────────────────────────────────────────────────────
  * SUBSYSTEM-CERTIFICATION ROW (liftable — the certification build reads the tagged
@@ -115,6 +118,14 @@
  *   the ordering collapses to near-totality. With NO stressors all three arms are floored
  *   at 3/120 and every drift event is a PROMOTION, which is what makes the matched-pressure
  *   ceilings a measurement of resistance rather than of silence.
+ *   ⚠ RE-STATED 2026-11-04 (REGISTERS-4, the chair's ruling C4 on the J22 precedent; the figures
+ *   above are the 2026-07-31 record, kept). FOOD-1/FOOD-2 lifted small-settlement derived support by
+ *   the owner's word, and the curve moved with no tier rule changed. Re-measured at N=400: matched
+ *   54.75% / 5.75% / 1.5% (village / town / city), so the village floor is 48/120, the town ceiling
+ *   17/120 and the city ceiling 8/120 (village > town > city still holds structurally); acute
+ *   98.75% / 72.0% / 38.25%, floored at 113 / 70 / 29 of 120, so acute pressure still CLOSES the gap
+ *   (worst ratio 120/29 = 4.14 against the matched separation 48/8 = 6) but no longer to
+ *   near-totality; calm floors 5 / 3 / 3. The loosened bounds are owner decision point O-FOOD-INERTIA.
  * @certification-mechanism   The inertia is EMERGENT, not structural. Every demotion in
  *   the certified corpus fires the population-independent structural-failure branch
  *   (support <= 0.25); that branch is scale-free (matched support + matched relative
@@ -128,6 +139,10 @@
  *   matched-pressure city ceiling means high-tier resistance eroded; a red on the
  *   matched-pressure village floor means low-tier settlements stopped responding to
  *   stressors; a red on an acute floor means acute pressure no longer closes the gap.
+ *   ⚠ 2026-11-04: this falsifier fired as written. FOOD-1/FOOD-2 moved derived support (traced by
+ *   stage: FOOD-1 the town and city arms, FOOD-2 every moved arm, FOOD-3 the village matched arm by
+ *   two of 400), and the matched village floor (87), the town acute floor (93) and the acute ratio
+ *   red with no tier rule touched. Re-measured and re-derived, never loosened silently (above).
  * @certification-engine-edits  none (measurement + pins only, by J-D6)
  * ────────────────────────────────────────────────────────────────────────────────
  */
@@ -386,6 +401,12 @@ describe('directive 6 / J-D6 — ACUTE matched pressure CLOSES the gap', () => {
     // acute load (95.5% -> 72.0% demoting at N=400), and the acute arms now land 120 / 104 / 91.
     // The gap still CLOSES (a ratio of 1.3 against matched's 13); it no longer closes to within
     // ten. Whether it should is J-D6's tuning-band question, owner decision point O11.
+    // ⚠ RE-STATED 2026-11-04 (REGISTERS-4, the chair's ruling C4, the same door). FOOD-1/FOOD-2 lifted
+    // derived support and every acute arm resists more: at N=400 village 99.5% -> 98.75%, town 88.5% ->
+    // 72.0%, city 72.0% -> 38.25%; the test's corpus lands 118 / 89 / 49 (was 120 / 104 / 91), a ratio
+    // of 2.41 against the old 1.71 bound. The floors re-derive to 113 / 70 / 29, so the worst ratio the
+    // city floor allows is 120/29 = 4.14, still under the matched separation 48/8 = 6: the gap still
+    // CLOSES, now to within a ratio of about 2.4 rather than 1.3. Owner decision point O-FOOD-INERTIA.
     const villageFloor = envelope('tierInertia.matchedPressure.village.demotionFloor').bound;
     const cityCeiling = envelope('tierInertia.matchedPressure.city.demotionCeiling').bound;
     const acuteWorstRatio = CORPUS_N / acuteFloor;

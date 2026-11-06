@@ -36,6 +36,9 @@ const gen = ({ tier, seed }) => generateSettlementPipeline({ settType: tier }, n
 afterEach(cleanup);
 
 describe('the stored food is printed once, on the Economics tab', () => {
+  // The two 60-seed loops carry their own budget (the house form: economicsImpactOnce, tabSentencesOnce).
+  // 60 births + 60 renders measured ~14 s plain and over the 20 s default under CI's coverage
+  // instrumentation on a saturated runner (run 41852088236, 2026-11-04); the budget is the work's, not a retry.
   it('the Economics tab prints the record\'s months exactly once, in words that follow the record, over 60 seeds', () => {
     const wrong = [];
     for (const row of seeds(10)) {
@@ -50,7 +53,7 @@ describe('the stored food is printed once, on the Economics tab', () => {
       unmount();
     }
     expect(wrong).toEqual([]);
-  });
+  }, 120000);
 
   it('the stores sentence has one writer: the Economics row prints the Tonight sheet\'s own words, over 60 seeds', () => {
     const src = readFileSync('src/components/new/tabs/EconomicsTab.jsx', 'utf8');
@@ -66,7 +69,7 @@ describe('the stored food is printed once, on the Economics tab', () => {
       unmount();
     }
     expect(wrong).toEqual([]);
-  });
+  }, 120000);
 
   it('no other tab prints a stored-food figure', () => {
     const found = [];

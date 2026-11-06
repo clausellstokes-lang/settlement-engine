@@ -50,6 +50,19 @@ describe('claims-parity — each synopsis is proven by the forged world', () => 
     expect(eventsOf(t).some((e) => /siege/i.test(e.name) && e.severity === 'catastrophic' && e.yearsAgo <= 15)).toBe(true);
     // Receipt 3: a figure formalising the independent authority the collapse created.
     expect(goalsOf(t).some((g) => /independent operational authority|exit before the gap between title and authority/i.test(g))).toBe(true);
+    // THE SPECIFICS THE SYNOPSIS QUOTES, re-pinned 2026-11-04 (REGISTERS-6, the chair's ruling E1: crown-8826).
+    // "A mining town raised on rich ore": Mining among its strengths, the mining chain live.
+    expect(t.resourceAnalysis?.economicStrengths || []).toContain('Mining');
+    expect((t.economicState?.activeChains || []).map((c) => c.label)).toContain('Mining & Quarrying');
+    // "... and poor harvests": the food record reads short (past Secure).
+    expect(['Pressured', 'Import-Dependent', 'Deficit', 'Deficit — Active Famine']).toContain(t.economicState?.foodSecurity?.label);
+    // "ten years past a siege": the catastrophic siege sits ten years back.
+    expect(eventsOf(t).filter((e) => /siege/i.test(e.name) && e.severity === 'catastrophic').map((e) => e.yearsAgo)).toContain(10);
+    // "Its merchant oligarchy holds a title the streets no longer honour".
+    expect(t.powerStructure?.government).toBe('Merchant oligarchy');
+    // "a guild master has begun, quietly, to write the authority ... into permanent ink": the coup is the guild master's.
+    expect((Array.isArray(t.npcs) ? t.npcs : []).some((n) => /guild master/i.test(n?.role || '')
+      && /independent operational authority/i.test(n?.goal?.short || ''))).toBe(true);
   });
 
   it('THE MILL THAT OUTLIVED ITS WARS — a scarred survivor', () => {

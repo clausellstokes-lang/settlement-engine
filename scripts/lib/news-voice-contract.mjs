@@ -76,8 +76,26 @@ const TOTAL_KEYS = Object.freeze(['identities', 'distinctValues', 'occurrences']
 // queued|legitimacy_pressure, queued|npc_reform, webwar_campaign_complete|null, webwar_campaign_minted|null; new
 // applied|reinforcement_cost, queued|npc_exploit, queued|npc_suppress, queued|tier_demotion. The re-dealt year resolves no
 // stressor and mints no web-war campaign; the voice debt stays EMPTY.
+// ── RE-RECORDED 2026-11-04 BY THE REGISTERS-4 SEAT (the cloud chair's ruling C5, session 019yED1Rc3svZxTNcEJVRr77, under the
+// owner's "I defer all judgement to you"), IN THE SAME ACT AS THE NEWS-HEADLINE CONTRACT, THE PROSE-FAMILY CONTRACT AND THE OSR
+// WALKER'S PRODUCERS ARM (the 0c1fb8dec door) ──────────────────────────────────────────────────────────────────────────
+// 265/1/264/44 → 261/1/260/45. ONE CORPUS BUILD PER STAGE, every field measured (the throw below disabled in a scratch copy
+// only), against c0ef42c13, where the same harness reproduces every frozen figure of all three contracts exactly. THREE
+// WORLD-CHANGING STAGES, ATTRIBUTED BY STAGE (the DOORS trace trees):
+//   T1 FOOD-1     265/1/264/44 → 258/1/257/42: eight homes leave (applied|food_pressure, applied|generosity_refuge,
+//                 applied|generosity_relief, applied|npc_bargain, applied|resource_depletion, queued|food_pressure,
+//                 queued|npc_mobilize, queued|tier_demotion) and six arrive (applied|npc_hoard, applied|stressor_aftermath,
+//                 applied|stressor_birth_criminal_corridor, applied|stressor_birth_infiltration,
+//                 applied|stressor_birth_monster_raider_pressure, applied|stressor_residual).
+//   T2 FOOD-2     258/1/257/42 → 265/1/264/45: two leave (applied|legitimacy_pressure, applied|npc_hoard) and five arrive
+//                 (applied|stressor_birth_indebtedness, applied|stressor_birth_market_shock,
+//                 applied|stressor_escalate_indebtedness, compound|compound_calling_of_debts,
+//                 queued|stressor_birth_magic_deadzone) — the homes 44 → 45 TIPFIX named.
+//   S5 SIZE-3     265/1/264/45 → 261/1/260/45: the guild market re-deals the year's draws; four fewer introductions, the same
+//                 45 homes. Nothing after S5 moves (S6..S9 and the tip measure 261/1/260/45).
+// Conservation closes: 261 − 1 = 260. No surviving row flips its voice class; the voice debt stays EMPTY.
 const CORPUS = Object.freeze({
-  pulseRoots: 12, introductions: 265, retirements: 1, finalEntries: 264, homes: 44,
+  pulseRoots: 12, introductions: 261, retirements: 1, finalEntries: 260, homes: 45,
 });
 
 export const NEWS_VOICE_PROTECTED_SUBSTRATE = Object.freeze([

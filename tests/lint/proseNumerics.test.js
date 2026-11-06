@@ -540,9 +540,16 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 // snippet byte-identical on every row; no ceiling moves.
 // MERGE (chair, 2026-10-31): G2 and W2-LINKS both re-addressed PowerStrata.jsx and npcComponents.jsx rows; the
 // addresses below are re-read from the merged tree's own failure diff, pure line moves, totals 207 / 140 / 50.
-const REVIEWED_TOTAL_CEILING = 207;
+// REGISTERS-5 (2026-11-04, the chair's ruling D3 on REGISTERS door 6) — THE DEBT FELL BY TWO, A
+// REVIEWED SHRINK. 207 -> 205, floatInterpolation 140 -> 138. Both removed rows were reviewed against
+// the diff that cured them: TRIM-2's X-51 (7d327ca73, "one Tonight sheet") retired TableView.jsx's
+// `{pressure}` (was line 248) and TonightAtTheTable.jsx's `{npc.power || 0}` (was line 205) with the
+// quick guide's Tonight block. The 23 rows door 6 re-addressed at the composed tip (16e3086b4) were pure
+// line moves. The ceilings follow the baseline down, as TE-STRIP-1's note demands: at 207 the +1 leak
+// control below went vacuous (205 + 1 = 206 sits under a stale 207).
+const REVIEWED_TOTAL_CEILING = 205;
 const REVIEWED_CATEGORY_CEILINGS = Object.freeze({
-  floatInterpolation: 140,
+  floatInterpolation: 138,
   percentToken: 50,
   multiplier: 8,
   twoDecimalScore: 9,
@@ -884,8 +891,8 @@ describe('prose numerics live-tree ratchet (exact legacy identity, shrink-only)'
     const temporaryRegeneratedBaseline = JSON.parse(JSON.stringify(mutatedLive));
     expect(mutatedLive).toEqual(temporaryRegeneratedBaseline);
     expect(ceilingViolations(temporaryRegeneratedBaseline)).toEqual([
-      'total 208 exceeds reviewed ceiling 207',
-      'floatInterpolation 141 exceeds reviewed ceiling 140',
+      'total 206 exceeds reviewed ceiling 205',
+      'floatInterpolation 139 exceeds reviewed ceiling 138',
     ]);
   });
 

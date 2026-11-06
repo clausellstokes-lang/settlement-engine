@@ -109,8 +109,10 @@ describe('the landing prose quotes the fixture it is about', () => {
 
     const body = landing.realm.body2.toLowerCase();
     // The two weeks the sentence calls out BY NUMBER.
+    // 2026-11-04 (REGISTERS-6 ruling E3): [10, 12] -> [8, 10]. The coherence window's world (FOOD-2 re-timed
+    // the advance at lf-033) moved the routes to week 8, before the crime at week 10; body2 was re-grounded.
     const weeks = advance.map((entry) => Number(String(entry.week).replace(/\D/g, '')));
-    for (const spoken of [10, 12]) {
+    for (const spoken of [8, 10]) {
       expect(
         weeks,
         `the prose calls out week ${spoken}, which the fixture's advance timeline no longer contains`

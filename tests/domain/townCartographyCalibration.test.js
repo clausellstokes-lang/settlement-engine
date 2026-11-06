@@ -280,6 +280,43 @@
  *   stays 0 of 504; `CORPUS_ROWS` stays 504; W2's live re-measure reproduces every sampled row;
  *   and the three town-map goldens and eleven other cartography suites are green.
  *
+ *   2026-11-03 — FOOD-1, THROUGH THE SIGNED DOOR (ODQ §934.104, THE COHERENCE AND SCALE WINDOW; record
+ *   docs/shift-records/2026-11-03-food-1-one-food-record.json; the chair signs by the owner's delegation, vetoable).
+ *   One stored food record and one set of cut-offs move prosperity, and with it the institution draws of 7 sampled
+ *   rows. Written from the staged tree S1 (S0 green on the committed corpus). ONE PASS: the per-tier maximum roster
+ *   reads 12/25/42/69/83/86 again, so CARTOGRAPHY_CALIBRATION.MAX_INSTITUTIONS does not move and the corpus is the
+ *   fixed point. Re-keyed by measurement: `FROZEN.city.maxBuildings` 212 → 211; `DUPLICATES.permille`
+ *   139/212/84/64/50/55 → 146/215/82/62/50/56 (derived ceilings 223/340/135/103/80/88 →
+ *   234/344/132/100/80/90). CORPUS_ROWS stays 504; the throw census stays 0.
+ *
+ *   2026-11-03 — FOOD-2, THROUGH THE SIGNED DOOR (ODQ §934.104, THE COHERENCE AND SCALE WINDOW; record
+ *   docs/shift-records/2026-11-03-food-2-food-base-numbers.json; the chair signs by the owner's delegation, vetoable).
+ *   The food base numbers (one terrain table, no hidden /1.3, the hinterland as normal supply) move prosperity and
+ *   legitimacy, and with them the drawn rosters of 19 sampled rows and 3 tier argmax rows (city, hamlet, thorp).
+ *   Written from the staged tree S2 (S1 green on the committed corpus). ONE PASS: the per-tier maximum roster reads
+ *   12/25/42/69/83/86 again, so CARTOGRAPHY_CALIBRATION.MAX_INSTITUTIONS does not move and the corpus is the fixed
+ *   point. Re-keyed by measurement (W4's pair and W8's exact readings): `FROZEN.thorp.maxBuildings` 12 → 13 and
+ *   `FROZEN.city.maxBuildings` 211 → 212; `DUPLICATES.permille` 146/215/82/62/50/56 → 143/221/85/64/51/58 (derived
+ *   ceilings 234/344/132/100/80/90 → 229/354/136/103/82/93). CORPUS_ROWS stays 504; the throw census stays 0.
+ *
+ *   2026-11-03 — FOOD-3, THROUGH THE SIGNED DOOR (ODQ §934.104, THE COHERENCE AND SCALE WINDOW; record
+ *   docs/shift-records/2026-11-03-food-3-food-diversity.json; the chair signs by the owner's delegation, vetoable).
+ *   Food diversity lengthens the stores of places with preserved sources, and the defence readings that read them
+ *   move the drawn rosters of 4 sampled rows and the thorp argmax row. Written from the staged tree S3 (S2 green on
+ *   the committed corpus). ONE PASS: the per-tier maximum roster reads 12/25/42/69/83/86 again, so
+ *   CARTOGRAPHY_CALIBRATION.MAX_INSTITUTIONS does not move. `FROZEN` does not move (W4 green). Re-keyed by
+ *   measurement (W8's exact readings): `DUPLICATES.permille` 143/221/85/64/51/58 → 130/204/88/64/51/58 (derived ceilings 229/354/136/103/82/93 → 208/327/141/103/82/93).
+ *   CORPUS_ROWS stays 504; the throw census stays 0.
+ *
+ *   2026-11-03 — SIZE-3, THROUGH THE SIGNED DOOR (ODQ §934.104, THE COHERENCE AND SCALE WINDOW; record
+ *   docs/shift-records/2026-11-03-size-3-guild-market.json; the chair signs by the owner's delegation, vetoable).
+ *   The merchant guild is no longer seated over a market-less thorp, hamlet or village, so 39 of the 504 rows draw
+ *   a different town (2 of them sampled by W2; no argmax row moves). Written from the staged tree S5 (S4 green on
+ *   the committed corpus). ONE PASS: the per-tier maximum roster reads 12/25/42/69/83/86 again, so
+ *   CARTOGRAPHY_CALIBRATION.MAX_INSTITUTIONS does not move. `FROZEN` does not move (W4 green). Re-keyed by
+ *   measurement (W8's exact readings): `DUPLICATES.permille` 130/204/88/64/51/58 → 126/201/89/64/51/58 (derived ceilings 208/327/141/103/82/93 → 202/322/143/103/82/93).
+ *   CORPUS_ROWS stays 504; the throw census stays 0.
+ *
  * To re-record after an INTENTIONAL change, run:
  *   UPDATE_CARTOGRAPHY_CALIBRATION=1 npx vitest run tests/domain/townCartographyCalibration.test.js
  * and add a row above before committing. Re-recording without adding a row is a
@@ -347,7 +384,7 @@ const TUNING_SOURCE = resolve(
  * would red on every deliberate cap change and say nothing the count cap does not.
  */
 const FROZEN = Object.freeze({
-  thorp: Object.freeze({ throws: 0, maxInstitutions: 12, maxBuildings: 12 }),
+  thorp: Object.freeze({ throws: 0, maxInstitutions: 12, maxBuildings: 13 }),
   hamlet: Object.freeze({ throws: 0, maxInstitutions: 25, maxBuildings: 29 }),
   village: Object.freeze({ throws: 0, maxInstitutions: 42, maxBuildings: 47 }),
   town: Object.freeze({ throws: 0, maxInstitutions: 69, maxBuildings: 122 }),
@@ -397,12 +434,12 @@ const FROZEN = Object.freeze({
  * those, which is the evidence that the census measures the cure rather than nothing.
  */
 const DUPLICATES = Object.freeze({
-  thorp: Object.freeze({ permille: 139 }),
-  hamlet: Object.freeze({ permille: 212 }),
-  village: Object.freeze({ permille: 84 }),
+  thorp: Object.freeze({ permille: 126 }),
+  hamlet: Object.freeze({ permille: 201 }),
+  village: Object.freeze({ permille: 89 }),
   town: Object.freeze({ permille: 64 }),
-  city: Object.freeze({ permille: 50 }),
-  metropolis: Object.freeze({ permille: 55 }),
+  city: Object.freeze({ permille: 51 }),
+  metropolis: Object.freeze({ permille: 58 }),
 });
 
 /**
@@ -1080,7 +1117,12 @@ describe('W8 the drawn corpus does not repeat itself', () => {
     // constant, which is UNCHANGED; the ceiling is a readout of it, and a reader who wants
     // the bound should read the headroom, not these six numbers.
     // 236/349/125/103/84/93 -> 223/340/135/103/80/88 on 2026-09-30: the urban band's re-record (header).
-    expect(CARTOGRAPHY_TIERS.map(duplicateCeilingPermille)).toEqual([223, 340, 135, 103, 80, 88]);
+    // 223/340/135/103/80/88 -> 234/344/132/100/80/90 on 2026-11-03: FOOD-1 (header), the derived ceilings of the re-keyed
+    // readings by the same operator.
+    // 234/344/132/100/80/90 -> 229/354/136/103/82/93 on 2026-11-03: FOOD-2 (header), the same operator.
+    // 229/354/136/103/82/93 -> 208/327/141/103/82/93 on 2026-11-03: FOOD-3 (header), the same operator.
+    // 208/327/141/103/82/93 -> 202/322/143/103/82/93 on 2026-11-03: SIZE-3 (header), the same operator.
+    expect(CARTOGRAPHY_TIERS.map(duplicateCeilingPermille)).toEqual([202, 322, 143, 103, 82, 93]);
     // And the derivation is live — a hypothetical reading derives its own ceiling.
     expect(Math.ceil((100 * CARTOGRAPHY_HEADROOM_PERMILLE) / 1000)).toBe(160);
   });

@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "0c104fe807a27c4600ec741616ed111a2ff94712",
-  "measuredBy": "G2",
-  "date": "2026-10-31",
-  "note": "GS-2 one faction set (ODQ §934.101): bare decimals 6975 -> 6962, a win banked; npcGenerator.js 83 -> 71 (the dead _generateFactionConflict deleted) and power/conflicts.js 1 -> 0 (the no-rivalry 0.4 coin gone); no value moved, no ceiling rose",
+  "measuredAtSha": "feb8aff012f841a27fa05eb9d0b375850a1dd785",
+  "measuredBy": "REGISTERS seat (the chair's ruling, ODQ §934.104)",
+  "date": "2026-11-04",
+  "note": "composed tip of the coherence window: FOOD wins in foodBalance/foodGenerator, DEFENSE-3 R2 one siege dial, LADDER_TUNING dependents (HOOKS/TRIM re-pointed readers), TRIM-2 HOOK_COUNT declared",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -5640,9 +5640,10 @@
         "SEAT_TRANSITION_CAP": 24
       },
       "dependents": [
+        "src/domain/coherence/seatHolderFindings.js",
         "src/domain/display/npcInteriorityRead.js",
-        "src/domain/dossier/powerStrata.js",
         "src/domain/dossier/realmEntityWeb.js",
+        "src/domain/dossier/seatHolder.js",
         "src/domain/roads/thirdPartyRansom.js",
         "src/domain/worldPulse/assizeKernel.js",
         "src/domain/worldPulse/commonsVoiceKernel.js",
@@ -7925,6 +7926,7 @@
     "src/domain/spatial/teleportEdges.js": 3,
     "src/domain/spatial/waterBodies.js": 5,
     "src/domain/summary/tonightAtTheTable.js": 1,
+    "src/domain/summary/tonightSheet.js": 1,
     "src/domain/townCartography/cartographyPlan.js": 1,
     "src/domain/townCartography/cartographyTuning.js": 1,
     "src/domain/townMap/arch/aoBake.js": 3,
@@ -8050,7 +8052,7 @@
     "src/domain/worldPulse/worldState.js": 7,
     "src/generators/demandProfile.js": 1,
     "src/generators/economy/viability.js": 1,
-    "src/generators/foodGenerator.js": 7,
+    "src/generators/foodGenerator.js": 5,
     "src/generators/generationReceiptJudgments.js": 1,
     "src/generators/historyGenerator.js": 1,
     "src/generators/power/economyReconciliation.js": 2
@@ -8392,12 +8394,12 @@
     "src/generators/density/densityRoll.js": 6,
     "src/generators/density/successionGrammar.js": 3,
     "src/generators/economy/economicState.js": 6,
-    "src/generators/economy/foodBalance.js": 27,
+    "src/generators/economy/foodBalance.js": 24,
     "src/generators/economy/neighbourEconomicBias.js": 2,
     "src/generators/economy/prosperity.js": 13,
     "src/generators/factionCorrelation.js": 4,
     "src/generators/factionDynamics.js": 38,
-    "src/generators/foodGenerator.js": 63,
+    "src/generators/foodGenerator.js": 48,
     "src/generators/generationCoherence.js": 1,
     "src/generators/history/historyEventStrands.js": 47,
     "src/generators/historyGenerator.js": 13,
@@ -8433,8 +8435,8 @@
   "totals": {
     "tables": 257,
     "keys": 2187,
-    "unregisteredNamed": 535,
-    "bareDecimals": 6962,
+    "unregisteredNamed": 534,
+    "bareDecimals": 6944,
     "zeroDependentTables": 10,
     "zeroNamedDependentTables": 168
   }

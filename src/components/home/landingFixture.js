@@ -121,23 +121,23 @@ export const fixture = {
       {
         "axis": "Trade connectivity",
         "from": "adequate",
-        "to": "critical",
+        "to": "collapsed",
         "tone": "danger",
-        "reason": "Wartime pressure disrupts trade flows. Trade route strain disrupts trade flows."
+        "reason": "Criminal pressure disrupts trade flows. Wartime pressure disrupts trade flows."
       },
       {
         "axis": "Religious authority",
         "from": "strained",
         "to": "adequate",
         "tone": "success",
-        "reason": "Vael (major) anchors religious authority (piety ×1.36). Religious Authorities carries power 14."
+        "reason": "Vael (major) anchors religious authority (piety ×1.37)."
       },
       {
         "axis": "Social trust",
         "from": "adequate",
         "to": "strained",
         "tone": "warning",
-        "reason": "Criminal pressure erodes communal trust. Public legitimacy 32 colors trust."
+        "reason": "Criminal pressure erodes communal trust. Public legitimacy 28 colors trust."
       }
     ],
     "advance": [
@@ -160,22 +160,22 @@ export const fixture = {
         "text": "Religious conversion fracture is over, but it leaves sectarian memory, temple debt, ritual disputes. It will be remembered for a while yet."
       },
       {
-        "week": "Week 7",
+        "week": "Week 8",
         "season": "the spring of year 1",
         "headline": "Nuada Walsh shields their people",
         "text": "Nuada Walsh is out to protect their followers."
+      },
+      {
+        "week": "Week 8",
+        "season": "the spring of year 1",
+        "headline": "Cnocby's trade routes break down",
+        "text": "Caravans are passing Cnocby by, and its market stalls stand half empty."
       },
       {
         "week": "Week 10",
         "season": "the spring of year 1",
         "headline": "Crime takes hold of Cnocby",
         "text": "Thieves and racketeers are working Cnocby's streets in the open."
-      },
-      {
-        "week": "Week 12",
-        "season": "the spring of year 1",
-        "headline": "Cnocby's trade routes break down",
-        "text": "Caravans are passing Cnocby by, and its market stalls stand half empty."
       }
     ],
     "chronicle": [

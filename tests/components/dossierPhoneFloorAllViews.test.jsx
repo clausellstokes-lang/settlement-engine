@@ -582,7 +582,9 @@ const DESKTOP_BASELINE = Object.freeze({
   // beside line, the Economic Backing row and the empty-state line left the page; no token moved.
   // 27 -> 26 (2026-10-30, cure lane T11 U3, VERIFIER F11 / X-2): the fixture town's one order & crime plot
   // hook left the Defense page for the Plot Hooks tab; no token moved (bisected: 317307cc green, 987602c0 moves it).
-  "Systems/Defense":     { measured: 25, sub14: 25 },
+  // 25 -> 26 (2026-11-04, REGISTERS-4 door 7, measured at the composed tip): DEFENSE-3's X-52 food endurance line
+  // (8e9de64b9, the siege reading of the stores) adds one prose line on WIRING-2's re-measure; no token moved.
+  "Systems/Defense":     { measured: 26, sub14: 26 },
   // 5 -> 4 (2026-10-30, UX consolidation U2, T2-10): the "Depleted. Consumed locally, export potential
   // reduced" label shortened to "Depleted" and fell under the walk's measuring length; no token moved.
   "Systems/Resources":   { measured:  4, sub14:  4 },
@@ -677,7 +679,9 @@ const MOBILE_BASELINE = Object.freeze({
   // prose 27 -> 25, chrome 1 -> 2 (2026-10-30, UX consolidation U6): the criminal faction is now one
   // name-and-band chrome line (12px floor, lawful) instead of a description paragraph.
   // prose 25 -> 24 (2026-10-30, cure lane T11 U3, VERIFIER F11 / X-2): the inline order & crime hook is cut.
-  "Systems/Defense":     { prose: 23, chrome: 2, sub14: 2, sub12: 0 },
+  // prose 23 -> 24 (2026-11-04, REGISTERS-4 door 7, measured at the composed tip): DEFENSE-3's X-52 food endurance
+  // line (8e9de64b9) adds one prose line on WIRING-2's re-measure; the sub-floor counts hold.
+  "Systems/Defense":     { prose: 24, chrome: 2, sub14: 2, sub12: 0 },
   // chrome 1 -> 0 (2026-10-30, UX consolidation U2): the long Depleted label is now one word.
   "Systems/Resources":   { prose:  4, chrome: 0, sub14: 0, sub12: 0 },
   // prose 5 -> 2 (2026-10-30, UX consolidation U3): the caption and the receipt left the page.

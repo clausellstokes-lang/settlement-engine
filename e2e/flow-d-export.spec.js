@@ -25,6 +25,17 @@
  * an entitled user, so the spec follows the product and drives one. The free
  * tier's purchase rung is BuyThisDossier.jsx's own subject, not this spec's.
  *
+ * ⛔ WHY THE DOWNLOAD JOURNEY IS NOW A STAFF SESSION (TIPFIX, 2026-11-03). The EXPORT-GATE
+ * lane (X-53/X-54, the owner's rule of 2026-11-03: until launch the paid version is the
+ * staff accounts' alone) wraps every export control outside the gallery in
+ * LaunchGatedExport.jsx: in a closed build (launchGate.js :: purchasesOpen false) a
+ * NON-STAFF account's click opens AvailableAtLaunchDialog.jsx and the control's own handler
+ * never fires; a staff account (authSlice.js :: isElevated) keeps the real export. The
+ * journey is therefore SPLIT, never deleted: the premium non-staff account asserts the new
+ * truth (the launch dialog, OK closes it, no download), and the download journey runs under
+ * a staff mock session (role 'admin', the same settlement_mock_auth seam), where exports are
+ * open (exportLaunchGate.js :: exportsOpenFor).
+ *
  * Mode: local (VITE_E2E_LOCAL_DATA=true) — same seam as Flow C.
  */
 
@@ -42,6 +53,15 @@ const MOCK_EXPORT_AUTH = {
   isFounder: false,
   needsVerification: false,
   emailNotifications: true,
+};
+
+// A staff account: STAFF_ROLES includes 'admin', so isElevated() is true and
+// exportsOpenFor({ staff: true }) keeps the real export before launch.
+const MOCK_STAFF_EXPORT_AUTH = {
+  ...MOCK_EXPORT_AUTH,
+  user: { id: 'mock-staff-e2e', email: 'staff-cartographer@example.test', user_metadata: {} },
+  role: 'admin',
+  displayName: 'Staff Cartographer',
 };
 
 const SAVES_KEY = 'dnd_settlement_saves';
@@ -67,43 +87,72 @@ async function waitForDossier(page) {
   await expect(page.getByText('Loading settlement view...')).toHaveCount(0, { timeout: 30_000 });
 }
 
+function seedAuth(page, auth) {
+  return page.addInitScript((a) => {
+    try { localStorage.setItem('settlement_mock_auth', JSON.stringify(a)); } catch { /* private mode */ }
+  }, auth);
+}
+
+/** Generate a village through the real hero, save it, open its detail view; returns the export button. */
+async function savedDossierExportButton(page) {
+  await page.goto('/create');
+
+  // Generate a complete settlement via the real hero (guarantees every field
+  // the PDF layout expects is present).
+  const h = hero(page);
+  await expect(h).toBeVisible({ timeout: 10_000 });
+  await sizeButton(h, 'Village').click();
+  await primaryCta(h).click();
+  await waitForDossier(page);
+
+  // Save it so we can open its detail view (the export affordance lives in
+  // SettlementDetail, not the generate output toolbar).
+  await page.getByRole('button', { name: /^Save to Library$/ }).click();
+  await expect(page.getByRole('button', { name: /Saved to Library/ })).toBeVisible({ timeout: 10_000 });
+
+  const savedId = await page.evaluate((key) => {
+    const arr = JSON.parse(localStorage.getItem(key) || '[]');
+    return arr[0] ? String(arr[0].id) : null;
+  }, SAVES_KEY);
+  expect(savedId, 'save id not found').toBeTruthy();
+
+  await page.goto(`/settlements/${encodeURIComponent(savedId)}`);
+  const openExport = page.getByRole('button', { name: /Export Dossier|Building PDF/i });
+  await expect(openExport).toBeVisible({ timeout: 15_000 });
+  return openExport;
+}
+
 test.describe('Tier 3.7 Flow D — PDF export journey', () => {
-  test.beforeEach(async ({ page }, testInfo) => {
+  test.beforeEach(async ({ page: _page }, testInfo) => {
     test.skip(testInfo.project.name === 'mobile-safari', 'desktop-only journey');
-    await page.addInitScript((auth) => {
-      try { localStorage.setItem('settlement_mock_auth', JSON.stringify(auth)); } catch { /* private mode */ }
-    }, MOCK_EXPORT_AUTH);
   });
 
-  test('generate → save → export triggers a .pdf download of non-trivial size', async ({ page }) => {
+  test('before launch, a premium non-staff account\'s export opens the "Available at launch" dialog and starts no download', async ({ page }) => {
+    test.setTimeout(90_000);
+    await seedAuth(page, MOCK_EXPORT_AUTH);
+    const downloads = [];
+    page.on('download', (d) => downloads.push(d));
+
+    const openExport = await savedDossierExportButton(page);
+    await openExport.click();
+
+    const teaser = page.getByRole('dialog', { name: 'Available at launch' });
+    await expect(teaser).toBeVisible({ timeout: 10_000 });
+    await expect(page.getByRole('dialog', { name: 'Export Dossier' }), 'the variant picker never opens behind the teaser').toHaveCount(0);
+
+    await teaser.getByRole('button', { name: 'OK', exact: true }).click();
+    await expect(teaser).toHaveCount(0);
+    // A download would have fired from the variant picker's commit; give a stray one time to land.
+    await page.waitForTimeout(1_500);
+    expect(downloads.length, 'no download starts before launch for a non-staff account').toBe(0);
+  });
+
+  test('generate → save → export triggers a .pdf download of non-trivial size (staff: exports open before launch)', async ({ page }) => {
     // PDF rendering off the main thread can take a few seconds headless.
     test.setTimeout(90_000);
+    await seedAuth(page, MOCK_STAFF_EXPORT_AUTH);
 
-    await page.goto('/create');
-
-    // Generate a complete settlement via the real hero (guarantees every field
-    // the PDF layout expects is present).
-    const h = hero(page);
-    await expect(h).toBeVisible({ timeout: 10_000 });
-    await sizeButton(h, 'Village').click();
-    await primaryCta(h).click();
-    await waitForDossier(page);
-
-    // Save it so we can open its detail view (the export affordance lives in
-    // SettlementDetail, not the generate output toolbar).
-    await page.getByRole('button', { name: /^Save to Library$/ }).click();
-    await expect(page.getByRole('button', { name: /Saved to Library/ })).toBeVisible({ timeout: 10_000 });
-
-    const savedId = await page.evaluate((key) => {
-      const arr = JSON.parse(localStorage.getItem(key) || '[]');
-      return arr[0] ? String(arr[0].id) : null;
-    }, SAVES_KEY);
-    expect(savedId, 'save id not found').toBeTruthy();
-
-    // Open the detail view and launch the export variant picker.
-    await page.goto(`/settlements/${encodeURIComponent(savedId)}`);
-    const openExport = page.getByRole('button', { name: /Export Dossier|Building PDF/i });
-    await expect(openExport).toBeVisible({ timeout: 15_000 });
+    const openExport = await savedDossierExportButton(page);
     await openExport.click();
 
     // ExportSheet modal — pick + commit. The primary CTA reads

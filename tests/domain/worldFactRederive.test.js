@@ -373,10 +373,31 @@ describe('EM-B2b — world facts by consequence: the route, the refusals and the
     // Then GS-1, tension variety (ODQ §934.101; docs/shift-records/2026-10-31-tension-variety.json), lane G3: the
     // generator master 590cb9ab.. -> 8355c460.. (the GS-1 golden re-record, 525 of 525 rows); the prose manifest
     // did not move.
+    // Then FOOD-1 (ODQ §934.104; docs/shift-records/2026-11-03-food-1-one-food-record.json), lane DOORS: the generator
+    // master 8355c460.. -> e9fe8b5b.. (525 of 525 rows) and the prose manifest aafa41e4.. -> f85bdd7a.. (222 rows).
+    // Then FOOD-2 (ODQ §934.104; docs/shift-records/2026-11-03-food-2-food-base-numbers.json), lane DOORS: the generator
+    // master e9fe8b5b.. -> 8d3ce803.. (525 of 525 rows) and the prose manifest f85bdd7a.. -> 74b3963f.. (978 rows).
+    // Then FOOD-3 (ODQ §934.104; docs/shift-records/2026-11-03-food-3-food-diversity.json), lane DOORS: the generator
+    // master 8d3ce803.. -> f1f24e86.. (525 of 525 rows) and the prose manifest 74b3963f.. -> aeee81fa.. (120 rows).
+    // Then SIZE-2 (ODQ §934.104; docs/shift-records/2026-11-03-size-2-tier-noun-story-text.json), lane DOORS: the
+    // generator master f1f24e86.. -> 1f402a82.. (192 of 525 rows); the prose manifest did not move.
+    // Then SIZE-3 (ODQ §934.104; docs/shift-records/2026-11-03-size-3-guild-market.json), lane DOORS: the generator
+    // master 1f402a82.. -> efa49945.. (191 of 525 rows) and the prose manifest aeee81fa.. -> cd112d2b.. (174 rows).
+    // Then DEFENSE (ODQ §934.104; docs/shift-records/2026-11-03-defense-roster-pools.json), lane DOORS: the prose
+    // manifest cd112d2b.. -> 5b26b0d4.. (1,018 rows); the generator master did not move.
+    // Then X-49 (ODQ §934.104; docs/shift-records/2026-11-03-x49-stores-off-defense.json), lane DOORS: the prose
+    // manifest 5b26b0d4.. -> 4b28e712.. (1,050 rows); the generator master did not move.
+    // Then DEFENSE-2, the roster lines (ODQ §934.104; docs/shift-records/2026-11-03-defense-roster-lines.json), lane
+    // DOORS: the generator master efa49945.. -> 7f1312d2.. (267 of 525 rows); the prose manifest did not move.
+    // Then DEFENSE-2, the magic dependency (ODQ §934.104; docs/shift-records/2026-11-03-defense-magic-dependency.json),
+    // lane DOORS: the generator master 7f1312d2.. -> 4c42885b.. (256 of 525 rows) and the prose manifest
+    // 4b28e712.. -> 2865af22.. (512 rows).
+    // Then FOOD-print (ODQ §934.104; docs/shift-records/2026-11-03-food-print-comfortable-pool.json), lane DOORS: the
+    // prose manifest 2865af22.. -> 95ef4439.. (232 rows); the generator master did not move.
     expect(shaOfFile(GOLDEN), 'tests/fixtures/generator-golden-master.json moved')
-      .toBe('8355c460c4bc822967b7fc96042dae2d09fdf01b3b634e1317eecc32af32945c');
+      .toBe('4c42885b932c67830ac71fb65cef623311a889718f9a648cdaf40870681aa37c');
     expect(shaOfFile(PROSE_GOLDEN), 'tests/fixtures/dossier-prose-manifest-golden.json moved')
-      .toBe('aafa41e411069427f14a0d6df6a8bc11e9e170a64e7a9d735547daaaa755215b');
+      .toBe('95ef44394f228a5878861f775e213345b88884c14c82869e92a731ecf76fc53f');
 
     // AND THE REASON THEY CANNOT MOVE: fresh generation passes no layer, so no world fact is ever
     // routed and `config′` is `config` itself. Measured against the committed manifest.

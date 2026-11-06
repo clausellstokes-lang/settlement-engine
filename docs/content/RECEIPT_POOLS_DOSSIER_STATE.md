@@ -1198,7 +1198,7 @@ contradict** it (R-DST-C).
 3. `[visitor]` Nothing about {settlement}'s condition asks to be remarked on. The town supports itself and has a little in hand.
 
 **COMFORTABLE** — *reliable surplus, reserves exist*
-1. `[ledger]` {settlement} runs a reliable surplus. The margin is not large and it is dependable, and there are reserves behind it.
+1. `[ledger]` {settlement} closes every year ahead. The margin is not large and it is dependable, and there are reserves behind it.
 2. `[street]` People here put things by, and can. That is the difference between this town and a poorer one.
 3. `[visitor]` The town is plainly past subsistence. The buildings are finished rather than patched, and the stores are more than the season needs.
 

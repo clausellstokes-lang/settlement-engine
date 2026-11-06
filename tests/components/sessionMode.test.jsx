@@ -182,7 +182,7 @@ describe('SessionMode — the constitutional faith seam', () => {
     expect(section).not.toBeNull();
     expect(screen.getByRole('button', { name: 'Faith' })).toBeTruthy();
     expect(section.textContent).toMatch(/church/i);
-    expect(section.textContent).not.toContain('quiet observances');
+    expect(section.textContent).not.toContain('quiet observances'); // anchored: the line above reads the church in this same section
   });
 
   it('FREE viewer: deity-event narration is dropped from the recent-events tail', () => {

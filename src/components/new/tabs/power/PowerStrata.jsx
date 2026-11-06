@@ -32,7 +32,7 @@ import EntityLink from '../../../primitives/EntityLink.jsx';
 import { MentionText } from '../../../ProseParagraph.jsx';
 import { factionIdFromName } from '../../../../lib/entities.js';
 import { deriveFactionSupport } from '../../../../domain/dossier/powerSupport.js';
-import { derivePowerStrata, groupRelationships, crisisNoteFor } from '../../../../domain/dossier/powerStrata.js';
+import { derivePowerStrata, groupRelationships, crisisNoteFor, withoutShownSentences } from '../../../../domain/dossier/powerStrata.js';
 import useIsMobile from '../../../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../../../design/proseScale.js';
 
@@ -243,7 +243,7 @@ export function ThePowers({ settlement, powers, factionSupport, showCoupChip = t
  *
  * @param {{ settlement:any, roster:any[], expandedFaction:number|null, setExpandedFaction:(i:number|null)=>void, focusIndex:number, focusedRowRef:any }} props
  */
-export function TheFactions({ settlement, roster, expandedFaction, setExpandedFaction, focusIndex, focusedRowRef }) {
+export function TheFactions({ settlement, roster, expandedFaction, setExpandedFaction, focusIndex, focusedRowRef, shownOnTab = [] }) {
   // THE PHONE PROSE FLOOR — a faction's description and its crisis note, the two
   // reading passages in this stratum. Read BEFORE the early return so the hook
   // order is stable on an empty roster. The names, the archetype, the power
@@ -281,7 +281,7 @@ export function TheFactions({ settlement, roster, expandedFaction, setExpandedFa
       <div style={{ border: `1px solid ${SEAM}` }}>
         {roster.map((r, i) => (
           <FactionRow key={i} settlement={settlement} r={r} i={i} last={i === roster.length - 1} powerGold={powerGold}
-            isExp={expandedFaction === i} onToggle={() => setExpandedFaction(expandedFaction === i ? null : i)} rowRef={i === focusIndex ? focusedRowRef : null} onJumpToPower={jumpToPower} />
+            isExp={expandedFaction === i} onToggle={() => setExpandedFaction(expandedFaction === i ? null : i)} rowRef={i === focusIndex ? focusedRowRef : null} onJumpToPower={jumpToPower} shownOnTab={shownOnTab} />
         ))}
       </div>
     </Section>
@@ -289,16 +289,16 @@ export function TheFactions({ settlement, roster, expandedFaction, setExpandedFa
 }
 
 /** One roster row, extracted verbatim from TheFactions (BUILD-W2-SEARCH U2, no behaviour change) so the dossier search mounts a faction through its own row; TheFactions keeps the expanded index and the focus ref. */
-export function FactionRow({ settlement, r, i, last = false, isExp, onToggle, rowRef = null, onJumpToPower, powerGold = powerAccent('ruler') }) {
+export function FactionRow({ settlement, r, i, last = false, isExp, onToggle, rowRef = null, onJumpToPower, powerGold = powerAccent('ruler'), shownOnTab = [] }) {
   const mobile = useIsMobile();
   const c = FACTION_COLORS[i % FACTION_COLORS.length];
   const f = r.faction || {};
   // GS-2 (ODQ §934.101): the members are the named NPCs whose own power affiliation is this faction; the minted
   // tie-component group this row used to print beneath it is gone with the second faction vocabulary.
   const memberCount = (settlement?.npcs || []).filter((npc) => npc?.factionAffiliation === r.name).length;
-  // The crisis note as the dossier prints it: the "appears to govern" claim names the
-  // outranking rival or goes (powerStrata.js :: crisisNoteFor).
-  const crisisNote = crisisNoteFor(settlement, f);
+  // The crisis note as the dossier prints it (powerStrata.js :: crisisNoteFor), less any sentence the tab prints in another
+  // block (X-50, BOILERPLATE ONCE: the legitimacy panel's fracture line has one home; the search mount passes none).
+  const crisisNote = withoutShownSentences(crisisNoteFor(settlement, f), shownOnTab);
   const expandable = !!(f.desc || crisisNote);
   const holds = r.powerRole === 'ruler';
   return (
@@ -405,9 +405,9 @@ export function TheWeb({ groups }) {
  * The three strata, composed. PowerTab owns the roster expand/focus state and
  * threads it through so the NPC-faction-link focus affordance keeps working.
  *
- * @param {{ settlement:any, powerStructure:any, expandedFaction:number|null, setExpandedFaction:(i:number|null)=>void, focusIndex:number, focusedRowRef:any, showCoupChip?: boolean }} props
+ * @param {{ settlement:any, powerStructure:any, expandedFaction:number|null, setExpandedFaction:(i:number|null)=>void, focusIndex:number, focusedRowRef:any, showCoupChip?: boolean, shownOnTab?: ReadonlyArray<string> }} props
  */
-export function PowerStrata({ settlement, powerStructure, expandedFaction, setExpandedFaction, focusIndex, focusedRowRef, showCoupChip = true }) {
+export function PowerStrata({ settlement, powerStructure, expandedFaction, setExpandedFaction, focusIndex, focusedRowRef, showCoupChip = true, shownOnTab = [] }) {
   const { powers, roster } = derivePowerStrata(settlement);
   const groups = groupRelationships(powerStructure?.factionRelationships);
   const factionSupport = deriveFactionSupport(settlement);
@@ -421,7 +421,7 @@ export function PowerStrata({ settlement, powerStructure, expandedFaction, setEx
         expandedFaction={expandedFaction}
         setExpandedFaction={setExpandedFaction}
         focusIndex={focusIndex}
-        focusedRowRef={focusedRowRef}
+        focusedRowRef={focusedRowRef} shownOnTab={shownOnTab}
       />
       <TheWeb groups={groups} />
     </>

@@ -22,7 +22,7 @@ import {
   nativeSemanticName,
   nativeSemanticNames,
 } from '../../domain/content/customContentSemanticAuthority.js';
-import { resolveGenerationWorldLaw } from '../generationContext.js';
+import { resolveGenerationWorldLaw } from '../generationContext.js'; import { hasMarketInstitution } from '../economy/viability.js'; // SIZE-3: one line, so no cited line moves
 
 // renormalizeFactionPower — rescale every faction's `power` to integer
 // percentage points summing to exactly 100, using largest-remainder rounding
@@ -463,10 +463,10 @@ export const generatePowerStructure = (
     merchantPower > 5 &&
       !(tier === 'thorp' && merchantPower < 12) &&
       (!['thorp', 'hamlet', 'village'].includes(tier) ||
-        nativeInstitutions.some(function (inst) {
-          var nameLower = nativeSemanticName(inst).toLowerCase();
-          return nameLower.includes('market') || inst.category === 'Economy';
-        })))
+        // SIZE-3 (ODQ §934.104): a real market by the catalogue (economy/viability.js :: hasMarketInstitution),
+        // never the shelf ('market' in a name or any Economy row, which "Subsistence farming" always passed).
+        hasMarketInstitution(nativeInstitutions)
+      ))
   ) {
     const merchantGoverns =
         governingFaction &&

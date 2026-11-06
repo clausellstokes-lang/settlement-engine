@@ -37,7 +37,7 @@ import {
 import { deriveArmedForces, deriveSupportingCapabilities } from '../../src/domain/display/defenseDisplay.js';
 import { buildThreatAssessment } from '../../src/domain/display/threatAssessment.js';
 import { tierNounFor } from '../../src/domain/display/stateProse/weaveBlock.js';
-import { expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
+import { expectAbsentWithAnchor, expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
 import { buildPrintProse } from '../../src/domain/display/stateProse/printProse.js';
 import { collectPlotHooks } from '../../src/domain/dossier/plotHooks.js';
 import { toPublicSafe } from '../../src/domain/display/publicSafe.js';
@@ -97,7 +97,7 @@ describe('DS-DEF-6 at defense.supportingCapabilities — a real draw, not a lite
     expect(container.textContent).toContain(expected);
     // The producer's own capability rows are UNTOUCHED beside it, less the stored-food row.
     const caps = deriveSupportingCapabilities(port);
-    expect(caps.map((c) => c.label)).not.toContain('Logistics & Supply');
+    expectAbsentWithAnchor(caps.map((c) => c.label), 'Logistics & Supply', 'Naval Defense', 'the producer rows less the stored-food row');
     expect(container.textContent).toContain(caps.find((c) => c.label === 'Naval Defense').note);
     expect(container.textContent).toContain('Legal Infrastructure');
     // UX consolidation (T2-23): Economic Backing left the rows; Economic Survival owns it.
@@ -379,7 +379,7 @@ describe('T2-24 — magic does not function: no arcane provision, no magic-depen
   test('no Arcane Support row in a dead-magic world, even with an alchemist on the roll', () => {
     const s = deadMagicTown();
     expect(s, 'fixture premise: a dead-magic city whose roster matches the arcane regex').toBeTruthy();
-    expect(deriveSupportingCapabilities(s).map((c) => c.label), 'the capability rows').not.toContain('Arcane Support');
+    expectAbsentWithAnchor(deriveSupportingCapabilities(s).map((c) => c.label), 'Arcane Support', 'Medical Readiness', 'the capability rows');
     const { container } = render(e(DefenseTab, { settlement: s, narrativeNote: null }));
     openSection(container, 'Supporting Capabilities');
     expect(container.textContent).toContain('Medical Readiness');

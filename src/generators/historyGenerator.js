@@ -896,14 +896,15 @@ export const generateHistory = (
     });
   }
 
+  const noun = tierNounFor(tier), spokenTimeline = timeline.map((e) => /** @type {any} */ (speakRecord(e, noun)));
   return {
     age,
-    founding,
-    historicalEvents: timeline,
-    currentTensions: tensions,
+    founding: speakFounding(founding, noun),
+    historicalEvents: spokenTimeline,
+    currentTensions: Array.isArray(tensions) ? tensions.map((t) => speakRecord(t, noun)) : tensions,
     historicalCharacter,
     ...(ancientRuin ? { ancientRuin } : {}),
-    eventsTimeline: timeline.map(e => ({
+    eventsTimeline: spokenTimeline.map(e => ({
       year: age - e.yearsAgo,
       yearsAgo: e.yearsAgo,
       name: e.name,
@@ -912,3 +913,55 @@ export const generateHistory = (
     })),
   };
 };
+
+// ─── SIZE ruling 2: the stored story text speaks the place's own noun ────────
+// ⚠ AT THE END OF THE FILE ON PURPOSE (imports hoist; these helpers are read only when
+// generateHistory runs): the prose wiring census's holder citations name this file's producer
+// writes by LINE, so nothing is inserted above them.
+import { speakTierNoun } from '../domain/display/stateProse/stateProseKernel.js';
+import { tierNounFor } from '../domain/display/stateProse/weaveBlock.js';
+
+/**
+ * SIZE ruling 2 (coherence program, 2026-11-03, root-cause failure 8): STORY TEXT WRITTEN AT
+ * GENERATION NAMES THE PLACE BY ITS OWN NOUN. The history pools (historyData,
+ * historyDescVariants) and the founding pools (narrativeData, via genArrivalDetail) were
+ * written with 'town' as the word for a settlement of any size, so a village's record read
+ * "the trade the town depended on". Every stored prose string of the history record now passes
+ * through the dossier kernel's own `speakTierNoun` with the settlement's tier noun — the same
+ * helper and the same kept comparisons as every screen and the PDF. A town is identity, so no
+ * town's record moves; nothing here draws, so no other field moves.
+ * @param {unknown} value a string, an array of strings, or anything else (returned as is)
+ * @param {string|null} noun
+ * @returns {unknown}
+ */
+function speakStored(value, noun) {
+  if (typeof value === 'string') return speakTierNoun(value, noun);
+  if (Array.isArray(value)) return value.map((v) => (typeof v === 'string' ? speakTierNoun(v, noun) : v));
+  return value;
+}
+
+/** The prose fields of an event or tension record that a reader sees. */
+const STORED_PROSE_KEYS = Object.freeze(['description', 'lastingEffects', 'plotHooks', 'hooks', 'narrative']);
+
+/**
+ * @param {unknown} record @param {string|null} noun
+ * @returns {unknown} a shallow copy with its prose fields spoken (the record itself if not an object)
+ */
+function speakRecord(record, noun) {
+  if (!record || typeof record !== 'object' || Array.isArray(record)) return record;
+  const out = /** @type {Record<string, unknown>} */ ({ ...record });
+  for (const key of STORED_PROSE_KEYS) if (key in out) out[key] = speakStored(out[key], noun);
+  return out;
+}
+
+/**
+ * The founding: every own string or string-array field is spoken (it carries the founding
+ * reason and the stress note drawn from narrativeData).
+ * @param {unknown} founding @param {string|null} noun @returns {unknown}
+ */
+function speakFounding(founding, noun) {
+  if (!founding || typeof founding !== 'object' || Array.isArray(founding)) return founding;
+  const out = /** @type {Record<string, unknown>} */ ({ ...founding });
+  for (const [key, value] of Object.entries(out)) out[key] = speakStored(value, noun);
+  return out;
+}

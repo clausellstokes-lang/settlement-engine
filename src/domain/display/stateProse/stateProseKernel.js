@@ -561,6 +561,10 @@ export const TIER_NOUN_KEPT = Object.freeze([
   Object.freeze({ phrase: 'one town\'s worth', why: 'a measure of conviction, not this place: warFaith DS corpus' }),
   Object.freeze({ phrase: 'in any town', why: 'a generalisation over all places: the miller line in domain/display/institutionVocabulary.js' }),
   Object.freeze({ phrase: 'a nearby town', why: 'somewhere else: NPC secrets in data/npcData.js' }),
+  Object.freeze({ phrase: 'the town they started in', why: 'somewhere else: the founders\' earlier home (the founding pool in generators/narrativeGenerator.js)' }),
+  Object.freeze({ phrase: 'a partner town', why: 'somewhere else: a trading partner (generation-time history text, data/historyDescVariants.js)' }),
+  Object.freeze({ phrase: 'edge of town', why: 'the idiom "at the edge of town" carries no determiner and no tier (data/narrativeData.js arrival scenes)' }),
+  Object.freeze({ phrase: 'ends of town', why: 'the idiom "at opposite ends of town" carries no determiner and no tier (data/narrativeData.js stress vignettes)' }),
   Object.freeze({ phrase: 'neither town', why: 'a pair: this place and its counterpart together (general and warFaith DS corpora, DS-REL lines)' }),
   Object.freeze({ phrase: 'through town', why: 'the idiom "the way through town" carries no determiner and no tier (general DS corpus)' }),
   Object.freeze({ phrase: 'in town', why: 'the idiom "in town" (present locally) carries no determiner and no tier' }),
@@ -592,8 +596,10 @@ export function tierNounKeptSpans(line) {
  */
 const MODIFIED_NOUN = /(^|[^\p{L}\p{N}_])(A|a|An|an|Every|every|The|the)((?: [\p{L}]+(?:-[\p{L}]+)*,?){0,2}) town(['’]s)?(?=[^\p{L}\p{N}_]|$)/gu;
 
-/** The adjectives a DEFINITE modified reference may carry: measured over the corpus. */
-const DEFINITE_MODIFIERS = new Set(['whole', 'very', 'wrong', 'sort of']);
+/** The adjectives a DEFINITE modified reference may carry: measured over the dossier corpus
+ * ('whole', 'very', 'wrong', 'sort of') and the generation-time story text ('outer': the
+ * migration line's "the outer town", the second settlement grown at the edges). */
+const DEFINITE_MODIFIERS = new Set(['whole', 'very', 'wrong', 'sort of', 'outer']);
 
 /** Words that, between the article and the noun, mean the noun is not the article's head. */
 const NOT_A_MODIFIER = new Set([
@@ -618,13 +624,20 @@ export function speakTierNoun(line, tierNoun) {
   // NO NOUN, OR THE CORPUS'S OWN NOUN ⇒ the line by identity. A town is the corpus's voice
   // already, so it is not merely equal to what it was: it is the same string.
   if (!noun || noun === 'town') return line;
+  // A kept phrase is honoured by the definite rule too ('the town they started in' is the
+  // founders' earlier home, not this place).
+  const keptBefore = tierNounKeptSpans(line);
   const definite = line.replace(
     GENERIC_NOUN,
     /**
-     * @param {string} _match @param {string} before @param {string} determiner
-     * @param {string|undefined} possessive
+     * @param {string} match @param {string} before @param {string} determiner
+     * @param {string|undefined} possessive @param {number} offset
      */
-    (_match, before, determiner, possessive) => `${before}${determiner} ${noun}${possessive || ''}`,
+    (match, before, determiner, possessive, offset) => {
+      const start = offset + before.length;
+      if (keptBefore.some(([a, b]) => start < b && a < offset + match.length)) return match;
+      return `${before}${determiner} ${noun}${possessive || ''}`;
+    },
   );
   // The modified and indefinite references (SIZE lane, 2026-11-03), each one refused where it
   // sits inside a kept phrase (`TIER_NOUN_KEPT`). A HAND-DRIVEN SCAN, not `replace`: a refused

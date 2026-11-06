@@ -13,10 +13,11 @@
  * ⛔ THE RENDER, NOT A GREP: a screen that does not pass the noun is invisible to a source
  * search for the call; it is visible on the page.
  *
- * WHAT THIS DOES NOT YET HOLD: story text written into the record AT GENERATION (history
- * events, migration narration, plot hooks) is a separate cause with its own signed shift. A
- * finding whose words stand verbatim in the stored record is partitioned out here and counted
- * by the second arm, which names that residual rather than hiding it.
+ * STORY TEXT WRITTEN AT GENERATION (history events, their effects and hooks, the founding,
+ * the migration pressure line) speaks the same noun since SIZE ruling 2, and so does the arrival
+ * scene's drawn hook (`ARRIVAL_SCENES` / `STRESS_DESCS` through
+ * `generators/narrative/arrivalScene.js :: composeArrivalScene`, the SIZE REQUEST landed by lane
+ * DOORS-2). No residual is excluded: every finding on every tab is an offender.
  */
 import React from 'react';
 import { afterEach, beforeAll, describe, expect, test, vi } from 'vitest';
@@ -49,6 +50,7 @@ import { DailyLifeTab } from '../../src/components/new/tabs/DailyLifeTab.jsx';
 import { OverviewTab } from '../../src/components/new/tabs/OverviewTab.jsx';
 import { DefenseTab } from '../../src/components/new/tabs/DefenseTab.jsx';
 import { PowerTab } from '../../src/components/new/tabs/PowerTab.jsx';
+import PlotHooksTab from '../../src/components/new/tabs/PlotHooksTab.jsx';
 
 const TIERS = ['thorp', 'hamlet', 'village'];
 const PER_TIER = 20;
@@ -62,6 +64,7 @@ const TABS = [
   ['DailyLife', (s) => <DailyLifeTab settlement={s} />],
   ['Defense', (s) => <DefenseTab settlement={s} />],
   ['Power', (s) => <PowerTab powerStructure={s.powerStructure} settlement={s} />],
+  ['PlotHooks', (s) => <PlotHooksTab settlement={s} />],
 ];
 const HEADER = /The roads into this \p{L}+ are busy and the \p{L}+ is poor/u;
 
@@ -73,7 +76,7 @@ function expandAll(container) {
   }
 }
 
-/** @type {Array<{s: object, record: string, pages: Record<string, string>}>} */
+/** @type {Array<{s: object, pages: Record<string, string>}>} */
 const PLACES = [];
 beforeAll(async () => {
   await loadGenerationLawPayloads();
@@ -92,17 +95,11 @@ beforeAll(async () => {
         pages[tab] = container.textContent || '';
         cleanup();
       }
-      PLACES.push({ s, record: JSON.stringify(s), pages });
+      PLACES.push({ s, pages });
     }
   }
 }, 600_000);
 afterEach(cleanup);
-
-/** Is the finding's own wording stored in the record (written at generation)? */
-function storedAtGeneration(record, text, index) {
-  const around = text.slice(Math.max(0, index - 18), index + 12);
-  return record.includes(around);
-}
 
 describe('the screen calls a small place by its own noun', () => {
   test('every place is small, so the arms below read the population they claim', () => {
@@ -113,11 +110,9 @@ describe('the screen calls a small place by its own noun', () => {
 
   test('no rendered tab calls a thorp, hamlet or village a town (outside a kept comparison)', () => {
     const offenders = [];
-    for (const { s, record, pages } of PLACES) {
+    for (const { s, pages } of PLACES) {
       for (const [tab, text] of Object.entries(pages)) {
-        for (const f of tierNounFindings(s, text)) {
-          if (!storedAtGeneration(record, text, f.index)) offenders.push(`${s.tier} ${s.name} / ${tab}: …${f.context}…`);
-        }
+        for (const f of tierNounFindings(s, text)) offenders.push(`${s.tier} ${s.name} / ${tab}: …${f.context}…`);
       }
     }
     expect(offenders).toEqual([]);

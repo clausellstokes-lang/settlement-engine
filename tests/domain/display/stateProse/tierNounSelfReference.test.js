@@ -40,6 +40,7 @@ describe('speakTierNoun — the self-references the corpus writes as "a town"', 
     ['The town is still a town at heart.', 'village', 'The village is still a village at heart.'],
     ['The well in this town is deep; the town is proud of it.', 'thorp', 'The well in this thorp is deep; the thorp is proud of it.'],
     ['Rations run short in a besieged town.', 'city', 'Rations run short in a besieged city.'],
+    ['Nobody yet knows if the outer town counts.', 'hamlet', 'Nobody yet knows if the outer hamlet counts.'],
   ])('%s  (%s)', (line, noun, spoken) => {
     expect(speakTierNoun(line, noun)).toBe(spoken);
   });
