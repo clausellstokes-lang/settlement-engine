@@ -46,18 +46,10 @@ export const BASELINE_CONFLICT_SIBLINGS = Object.freeze({
   ]),
 });
 
-/**
- * DECLARED SIBLINGS (CENSUS-1c unit 1; the twin tables dissolved, `docs/DESIGN_POOL_CENSUS.md`
- * §3.1): a town's informal military modifier. The original stays where it is spelled above; the twin stands beside it here with
- * the complementary atom, and the site resolves a drawn key through `resolveSibling`. Retired from
- * `data/defenceTwinLines.js` (F10 unit 4), every twin to the byte.
- */
-export const MILITARY_MODIFIER_SIBLINGS = Object.freeze({
-  'garrison-backed': Object.freeze([
-    Object.freeze({ text: 'garrison-backed', needs: Object.freeze(['garrison']) }),
-    Object.freeze({ text: 'arms-backed', twinOf: 'garrison-backed', excludes: Object.freeze(['garrison']) }),
-  ]),
-});
+// CENSUS-5e unit 2 (2026-11-05; the chair's answer 1 to CENSUS-5d, R-AN / R-U): the town military
+// modifier's set (`MILITARY_MODIFIER_SIBLINGS`: garrison-backed / arms-backed) dissolved. Garrison
+// differs between the power step and the final record on 9 of 2,121 steps, so it is not settled
+// there; the site prints the twin's wording, which presumes nothing about the garrison.
 
 /**
  * One declared sibling set: the original `needs` its atoms; its twin (when the slot needs one)

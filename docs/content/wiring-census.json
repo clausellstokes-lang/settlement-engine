@@ -40259,8 +40259,8 @@
       },
       "declares": [],
       "lineDeclares": {
+        "clergy": 1,
         "colour": 1,
-        "priest": 1,
         "temple": 1
       },
       "undeclared": 0,
@@ -40376,8 +40376,8 @@
       },
       "declares": [],
       "lineDeclares": {
-        "colour": 2,
-        "priest": 1
+        "clergy": 1,
+        "colour": 2
       },
       "undeclared": 0,
       "crisisScoped": false

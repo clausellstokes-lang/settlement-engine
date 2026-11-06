@@ -4350,7 +4350,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         {
           "angle": "ledger",
           "marks": [
-            "priest"
+            "clergy"
           ],
           "text": "{settlement} keeps the calendar and little else of the creed; the clergy preach to the same few households.",
           "slots": [
@@ -4412,7 +4412,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         {
           "angle": "ledger",
           "marks": [
-            "priest"
+            "clergy"
           ],
           "text": "The observance is gaining. What the clergy record is larger each time they record it, and nothing in the reckoning runs the other way.",
           "slots": [],
