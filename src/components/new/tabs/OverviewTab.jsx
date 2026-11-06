@@ -522,11 +522,12 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
           the Resources tab owns the strengths and the strategic value. */}
 
       {/* ── WARNINGS & COHERENCE NOTES ────────────────────────────────────── */}
-      {((r.structuralViolations?.length||0)+(r.coherenceNotes?.length||0)+(r.structuralSuggestions?.length||0)>0)&&<div style={{...FLUSH}}>
-        {r.structuralViolations?.length>0&&<div style={{background:swatch['#FAF8F4'],border:'1px solid #e8c0c0',borderLeft:'3px solid #8b1a1a',padding:'10px 14px',marginBottom:8}}>
-          <div style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:swatch.danger,marginBottom:4}}>Structural Issues</div>
-          {r.structuralViolations.map((v,i)=><div key={i} style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch['#5A1A1A'],marginBottom:3}}><span style={{fontWeight:700}}>{v.institution||v.group}: </span>{v.reason}</div>)}
-        </div>}
+      {/* "Structural Issues" and "Suggestions" are CUT from the DM page (READER-R1, the
+          chair's ruling 1): they printed the structural validator's rule text ("X is not
+          compatible with port access", "Consider: …") as facts about the place. Both are on
+          the Viability tab's staff panel (domain/display/validationOnPage.js ::
+          staffValidationRows), elevated viewers only. */}
+      {(r.coherenceNotes?.length||0)>0&&<div style={{...FLUSH}}>
         {/* Coherence notes (G5): sole web render site of the generation-frozen
             coherenceNotes record. The survey vintage is said once per page (X-8), by the
             Systems Health label, so this header and its two siblings carry no suffix. */}
@@ -542,17 +543,8 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
             <span style={{fontSize: proseFontSize(FS['12.5'],mobile),color:swatch.inkMag2,lineHeight:1.5}}>{note.note||Ti(note)}</span>
           </div>
         ))}
-        {/* DS-GEN-7's lines are CUT (T1-10, R2): the rows above and below are the record's own
-            words, and the row `overview.warnings` glances. */}
-        {r.structuralSuggestions?.length>0&&<div style={{background:swatch['#F4F6FD'],border:'1px solid #c0cce8',borderLeft:'3px solid #2a3a7a',padding:'10px 14px'}}>
-          <div style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:swatch.info,marginBottom:4}}>Suggestions</div>
-          {/* The suggestion reads as two sentences: the reason (period-normalized —
-              producers are inconsistent about trailing stops), then the same
-              " Consider: …" form the PDF's format.js renders, so the two surfaces
-              can never disagree on this copy's shape. The joined-words defect
-              ("…incursions.. ConsiderPalisade") lived here — §767.3(b). */}
-          {r.structuralSuggestions.map((v,i)=><div key={i} style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch['#1A2A5A'],marginBottom:3}}>{String(v.reason||'').trim().replace(/\.+$/,'')}.{v.suggested?.length>0&&<span style={{color:swatch.inkMag3,fontStyle:'italic'}}>{' '}Consider: {v.suggested.join(', ')}.</span>}</div>)}
-        </div>}
+        {/* DS-GEN-7's lines are CUT (T1-10, R2): the rows above are the record's own words,
+            and the row `overview.warnings` glances. */}
       </div>}
 
       {/* THE SPATIAL LAYOUT SECTION IS CUT (the owner, 2026-11-01, X-37; see Row 2 above):

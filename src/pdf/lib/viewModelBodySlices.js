@@ -23,6 +23,7 @@ import { entityIdFor } from '../../domain/dossier/entityLinks.js';
 import { customSupplyChainViewModel } from './customSupplyChains.js';
 import { stressArray, foodCore, avgScore } from './viewModelPrimitives.js';
 import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
+import { resourceGapLines } from '../../domain/display/validationOnPage.js';
 
 // Pull the human resource name off an exploitation chain entry (engine stores
 // it as `rawResource`; tolerate a few legacy shapes + bare strings).
@@ -271,7 +272,6 @@ export function servicesSlice(active) {
 export function resourcesSlice(active) {
   const s = active || {};
   const ra = s?.resourceAnalysis || {};
-  const v = s?.economicViability || {};
   const cfg = s?.config || {};
 
   // Convert exploitation lists into chain-flow rows. Engine keys are
@@ -330,8 +330,11 @@ export function resourcesSlice(active) {
     // resourceAnalysis emits exports/gaps/priorityNotes (resourceGenerator); the
     // old exportPotential/structuralGaps/v.priorityNotes reads never resolved.
     exportPotential:    ra?.exports || ra?.exportPotential || s?.exportPotential || [],
-    priorityNotes:      ra?.priorityNotes || v?.priorityNotes || [],
-    structuralGaps:     ra?.gaps || ra?.structuralGaps || s?.structuralGaps || [],
+    // READER-R1 (the chair's rulings 1 and 3): the DM document prints the record-read gap
+    // lines, in the house voice, and neither the generator's raw gap rows nor its priority
+    // notes (the sliders' text); the web tab reads the same helper.
+    priorityNotes:      [],
+    structuralGaps:     resourceGapLines(s),
     terrainEffects:     ra?.terrainEffects || s?.terrainEffects || ra?.featureEffects || [],
     terrainCriticals:   ra?.terrainCriticals || [],
     terrainAdvantages:  ra?.terrainAdvantages || [],

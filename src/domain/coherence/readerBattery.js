@@ -57,6 +57,32 @@ export const hasNavigableWater = (s) => waterOf(s).navigable;
 const REQUIRES_ACCESS = /\brequires? ([a-z ]+?) access\b/;
 const NOT_COMPATIBLE = /\bis not compatible with\b/;
 const LACKS_ACCESS = /\bexists but lacks access to\b/;
+/** A gap line in either voice: the generator's ("X exists but lacks access to Y") or the house's ("No Y reaches the X."). */
+const GAP_LINE = /\bexists but lacks access to (.+?)\.?$|^No (.+?) reach(?:es)? the .+\.$/;
+/** Words that name no good of their own. */
+const GAP_FILLER = new Set(['from', 'with', 'water', 'that', 'this', 'their', 'ore', 'access']);
+
+/**
+ * GAP-VS-RECORD (lane READER-R1): the good a gap line names, read against what the record says
+ * the place HAS — the economy's production, imports and exports, the nearby resources that are
+ * not depleted, the food record's sources and ordinary supply. Deliberately its own simple
+ * reader (a word in common), not the cure's table: an instrument that imported the cure would
+ * measure the cure against itself.
+ * @param {any} s @param {string} good
+ */
+function recordHoldsGood(s, good) {
+  const es = s?.economicState || {};
+  const depleted = new Set(Array.isArray(s?.config?.nearbyResourcesDepleted) ? s.config.nearbyResourcesDepleted : []);
+  const nearby = (Array.isArray(s?.config?.nearbyResources) ? s.config.nearbyResources : []).filter((/** @type {unknown} */ k) => !depleted.has(k));
+  const food = es.foodSecurity?.foodRecord || {};
+  const held = [...(es.localProduction || []), ...(es.primaryImports || []), ...(es.primaryExports || []), ...nearby, ...(food.foodSources || [])]
+    // "precious stones" are gems, not a quarry's stone (soak1k-316 at 1,000).
+    .map((/** @type {unknown} */ x) => str(x).toLowerCase().replace(/\bprecious stones?\b/g, 'gems').replace(/[_/()\-,.]+/g, ' '));
+  const words = held.join(' ').split(/\s+/).filter(Boolean).map((w) => w.replace(/s$/, ''));
+  const wanted = good.toLowerCase().replace(/[_/()\-,.]+/g, ' ').split(/\s+/).filter((w) => w.length >= 4 && !GAP_FILLER.has(w)).map((w) => w.replace(/s$/, ''));
+  if (wanted.some((w) => words.includes(w))) return true;
+  return /\b(?:grain|flour)\b/.test(good.toLowerCase()) && Number(food.normalImportPct) > 0;
+}
 
 /**
  * The generator's own consistency checks rendered as facts: "X requires river access", "X is
@@ -64,7 +90,8 @@ const LACKS_ACCESS = /\bexists but lacks access to\b/;
  * Viability page's stated count of critical issues against the Critical Issues it lists.
  * Sub-cases: `[structural]` (requires / not compatible), `[requires-on-water]` (a "requires
  * <water> access" where the terrain IS that water), `[gaps]` (the lacks-access lines A-05
- * counts), `[viability-count]`.
+ * counts), `[viability-count]`, and `[gap-vs-record]` (a gap line, in either voice, whose
+ * good the record holds: "Mill exists but lacks access to grain" in a village exporting grain).
  * @param {any} s @param {Readonly<Record<string,string>>} surfaces
  */
 export function validationOnPageFindings(s, surfaces) {
@@ -84,6 +111,11 @@ export function validationOnPageFindings(s, surfaces) {
     if (onWater) out.push({ surface, quote: onWater, detail: `[requires-on-water] terrain ${terrain}, route ${routeOf(s)}` });
     const gap = lines.find((x) => LACKS_ACCESS.test(x));
     if (gap) out.push({ surface, quote: gap, detail: `[gaps] ${lines.filter((x) => LACKS_ACCESS.test(x)).length} lines` });
+    const answered = lines.filter((x) => {
+      const m = x.match(GAP_LINE);
+      return m ? recordHoldsGood(s, str(m[1] ?? m[2])) : false;
+    });
+    if (answered.length) out.push({ surface, quote: answered[0], detail: `[gap-vs-record] ${answered.length} lines` });
   }
   const viability = str(surfaces.viability);
   const stated = viability.match(/^(\d+) critical issues? prevents? /m);

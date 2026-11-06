@@ -27,6 +27,7 @@ import { collectPlotHooks } from '../../domain/dossier/plotHooks.js';
 import { crisisNoteFor } from '../../domain/dossier/powerStrata.js';
 import { deriveFoodBalance, deriveViability } from '../../domain/display/dossierViewModel.js';
 import { isViabilityItem } from '../../domain/display/viabilityFilter.js';
+import { criticalIssuesOf, stressEffectsOf, viabilityIssueText } from '../../domain/display/validationOnPage.js';
 import { summarizeMagic, deriveMagicProfile } from '../../domain/magicProfile.js';
 import { humanize } from './format.js';
 import { buildPdfLiveWorld } from './liveWorld.js';
@@ -423,7 +424,9 @@ function overviewSlice(active, ai, useAi) {
     // coherenceNotes/structuralSuggestions live at the settlement root, not on
     // economicViability — the old v?.* reads were always empty in the PDF.
     coherenceNotes:    s?.coherenceNotes || v?.coherenceNotes || [],
-    structuralSuggestions: s?.structuralSuggestions || v?.structuralSuggestions || [],
+    // READER-R1 ruling 1: the structural validator's suggestions are generator advice, not
+    // facts about the place; the DM document prints none (the web's staff panel keeps them).
+    structuralSuggestions: [],
     warnings:          s?.warnings || [],
   };
 }
@@ -564,7 +567,9 @@ function viabilitySlice(active) {
   // activeMagicChains directly — derive them the same way the web ViabilityTab
   // does, and exclude the special-typed issues from the main list so they don't
   // render twice (they get their own PDF sections).
-  const stressConsequences = [...(v.issues || []), ...(v.warnings || [])].filter(i => i?.type === 'stress_consequence');
+  // READER-R1 ruling 2: a CRITICAL stress consequence is one of the critical issues (the
+  // summary and `metrics.criticalIssueCount` count it); only the others are stress effects.
+  const stressConsequences = stressEffectsOf(v);
   // pdf-3: by_design items are pushed to the settlement-root structuralViolations
   // (structuralValidator), NOT economicViability.issues — so the old issues-only
   // filter was permanently empty and those authored plot seeds printed as garbled
@@ -600,24 +605,30 @@ function viabilitySlice(active) {
     // opportunity/food items live in Economics & Resources, not Viability, and
     // must not double-print here. Shared predicate with ViabilityTab.
     issues:                (v.issues || [])
-      .filter(iss => iss?.severity !== 'by_design' && iss?.type !== 'stress_consequence' && isViabilityItem(iss))
+      // READER-R1 ruling 2: every critical issue the summary counts is listed (a critical stress
+      // consequence included, and listed once: `stressConsequences` holds only the others).
+      .filter(iss => (iss?.severity || '').toLowerCase() === 'critical'
+        || (iss?.severity !== 'by_design' && iss?.type !== 'stress_consequence' && isViabilityItem(iss)))
       .map(iss => ({
         severity: iss?.severity,
         title: iss?.title,
-        description: iss?.description,
+        description: viabilityIssueText(iss, s),
         institution: iss?.institution,
-        priorityNote: iss?.priorityNote,
+        priorityNote: iss?.priorityNote,  // a repeated note is dropped below (X-50)
         suggestedFixes: iss?.suggestedFixes || [],
-      })),
-    criticalIssues:        v?.criticalIssues || (v?.issues || []).filter(i => (i?.severity || '').toLowerCase() === 'critical' && i?.type !== 'stress_consequence'),
+      }))
+      .map((iss, i, all) => (iss.priorityNote && all.findIndex(o => o.priorityNote === iss.priorityNote) < i ? { ...iss, priorityNote: undefined } : iss)),
+    // ONE COUNT, ONE HOME (READER-R1 ruling 2): the list the summary sentence counts.
+    criticalIssues:        criticalIssuesOf(v).map(i => ({ ...i, description: viabilityIssueText(i, s) })),
     // pdf-6 (golden): warnings honour the Viability filter — dependency/food/
     // resource-chain items belong to Economics, not here.
     warnings:              [...(v?.warnings || []), ...(s?.warnings || [])].filter(isViabilityItem),
     // pdf-3 (main): by_design tensions are surfaced as plot seeds (byDesignContradictions),
     // so exclude them here — they must not double-print as apparent defects.
-    structuralViolations:  (s?.structuralViolations || []).filter(x => x?.severity !== 'by_design'),
+    // READER-R1 ruling 1: the structural validator's rule text never prints on a DM surface.
+    structuralViolations:  [],
     stress:                stress.map(x => ({ label: x?.label || x?.icon, summary: x?.summary, hook: crisisHookFor(s, x) })),
-    stressConsequences:    v?.stressConsequences?.length ? v.stressConsequences : stressConsequences,
+    stressConsequences:    stressConsequences,
     magicDependency:       !!dp?.magicDependency,
     activeMagicChains:     v?.activeMagicChains?.length ? v.activeMagicChains : activeMagicChains,
     byDesignContradictions: v?.byDesignContradictions?.length ? v.byDesignContradictions : byDesignContradictions,

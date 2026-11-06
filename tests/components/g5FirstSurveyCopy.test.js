@@ -64,10 +64,11 @@ describe('G5 first-survey framing — ViabilityTab (Outlook)', () => {
     expect(src).not.toMatch(/economically optimised/); // anchored: same source as the toMatch above
   });
 
-  test('the Structural Crises section is covered by the page label, not a suffix', () => {
+  test('the Structural Crises section left the DM page; the staff panel header is bare (READER-R1 ruling 1)', () => {
     const src = read(VIABILITY_TAB);
-    expect(src).toMatch(/Structural Crises \(\$\{structViolations\.length\}\)/);
-    expect(src).not.toMatch(/Structural Crises · First Survey/); // anchored: the toMatch on the bare header above reads this same source
+    expect(src).toMatch(/Generator checks \(staff\) \(\$\{staffRows\.length\}\)/);
+    expect(src).not.toMatch(/title=\{`Structural Crises/); // anchored: the toMatch on the staff header above reads this same source
+    expect(src).not.toMatch(/Generator checks · First Survey/); // anchored: same source as the toMatch above
   });
 
   test('the frozen magicDependency record left Outlook and carries its stamp on the Magic tab', () => {
@@ -96,10 +97,12 @@ describe('G5 first-survey framing — OverviewTab', () => {
     // read one label per page as satisfying it (RULINGS-CROSS X-8, vetoable). The Systems
     // Health label is that one; the Structural Issues, Coherence Notes and Suggestions
     // headers are bare.
+    // READER-R1 ruling 1 (2026-11-05): Structural Issues and Suggestions left the DM page for the
+    // Viability tab's staff panel; Coherence Notes is the one warning header left, and bare.
     const src = read(OVERVIEW_TAB);
-    expect(src).toMatch(/>Structural Issues</);
     expect(src).toMatch(/>Coherence Notes</);
-    expect(src).toMatch(/>Suggestions</);
+    expect(src).not.toMatch(/>Structural Issues</); // anchored: the toMatch on Coherence Notes above reads this same source
+    expect(src).not.toMatch(/>Suggestions</); // anchored: same source as the toMatch above
     // The one label is the pill's (copy/sectionHelp.js); the tab's own source prints the words nowhere.
     expect((src.match(/>[^<]*first survey/gi) || []).length, 'the page prints "first survey" in no label of its own').toBe(0);
     expect((read('src/copy/sectionHelp.js').match(/first survey/gi) || []).length, 'the pill copy says it once').toBe(1);

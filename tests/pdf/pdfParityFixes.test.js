@@ -91,9 +91,10 @@ describe('pdf-3 — by-design contradictions are plot seeds, not garbled violati
   });
 
   test('the by-design item is EXCLUDED from structuralViolations (no double-print)', () => {
-    const vios = vm.viability.structuralViolations;
-    expect(vios.every(v => v.severity !== 'by_design')).toBe(true);
-    expect(vios.map(v => v.institution)).toEqual(['Palisade']);
+    // READER-R1 ruling 1 (2026-11-05): the DM document prints no structural violation at all
+    // (validator rule text); the by-design item is still the plot seed above, once.
+    expect(vm.viability.structuralViolations).toEqual([]);
+    expect(vm.viability.byDesignContradictions.length).toBeGreaterThan(0);
   });
 });
 

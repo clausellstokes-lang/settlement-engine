@@ -118,6 +118,8 @@ const ROUTE_DISJUNCTION = /\b(?:by )?(?:road|land|river) or (?:by )?(?:harbou?r|
 const AIRSHIP_PORT = /\b(?:docks?(?:\/port facilities)?|port facilities|harbou?r master(?:'s|’s)?(?: office)?|berths?|anchorage|(?:between )?ship and shore|harbou?r approach(?:es)?|ship(?:s|wrights?|yards?|ping)?)\b/gi;
 /** F5 (2026-11-04): an A-05 gap line, "<chain>: <house> exists but lacks access to <good>". */
 const LACKS_ACCESS_LINE = /^[^:\n]{1,60}: (.+?) exists but lacks access to .+$/;
+/** READER-R1 (2026-11-05): the same lack in the house voice, "No <good> reaches the <house>." — F5's licence, read alike. */
+const NO_INPUT_LINE = /^No .+? reach(?:es)? the (.+?)\.$/;
 
 /**
  * A-11 reads prose, not ledgers of LACKS (lane F5, 2026-11-04, on rung 1B's soak1k-992 and
@@ -133,7 +135,7 @@ const LACKS_ACCESS_LINE = /^[^:\n]{1,60}: (.+?) exists but lacks access to .+$/;
  * @returns {string}
  */
 export function withoutLackLedger(x) {
-  const gap = x.match(LACKS_ACCESS_LINE);
+  const gap = x.match(LACKS_ACCESS_LINE) || x.match(NO_INPUT_LINE);
   if (gap) return gap[1];
   // The "covers" list ends the row; it is stripped wherever the sentence split put it (an impact
   // of two sentences leaves it on the second, soak1k-605).
