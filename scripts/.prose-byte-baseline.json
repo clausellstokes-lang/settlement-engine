@@ -61,8 +61,8 @@
       "ceilingGzip": 108482
     },
     "src/data/dossierStateProse/economy.generated.js": {
-      "raw": 127825,
-      "gzip": 20028,
+      "raw": 127853,
+      "gzip": 20042,
       "ceilingRaw": 393810,
       "ceilingGzip": 87513
     },
@@ -219,6 +219,14 @@
       "toRaw": 166003,
       "gzipAfter": 24378,
       "reason": "+5,206 B: F10 WALLS-WORD (4a49ae5b), the wall-free twins in the war and faith desk (DS-WAR-1/2, DS-FTH-1). The chair’s ruling of 2026-11-04 (the owner’s veto point). Projected through `npm run gen:dossier-prose` at the landed tip, never by the scratch bypass."
+    },
+    {
+      "car": "LANDING-7 lane F R-F2 (282891162), recorded at the rung-1 landing by LANDING-8",
+      "leaf": "src/data/dossierStateProse/economy.generated.js",
+      "fromRaw": 127825,
+      "toRaw": 127853,
+      "gzipAfter": 20042,
+      "reason": "+28 B: DS-ECO-9 BLOCKADED's wall-free twin (v4 `[ledger · no walls]`) re-worded so it no longer cites the road holder: \"The stores are sealed off from the road.\" -> \"The stores are sealed off, and the road brings nothing more to them.\" (the chair's ruling R-F2; the owner's veto class). Projected through `node scripts/generate-dossier-state-prose.mjs` by lane F; attributed by stage at f93c69938 (green at 5fbb339be)."
     }
   ]
 }
