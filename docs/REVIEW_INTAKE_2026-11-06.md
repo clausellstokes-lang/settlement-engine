@@ -257,7 +257,8 @@ no house) · Public bathhouse → hot_springs_mineral (bathes in it).
 
 - **Unit 4, second commit** ("a gap says which kind"): classify `imported` / `local` (not
   written) / `missing` in `evaluateInstitutionChain` — the writer and the record only. Sized by
-  the after-table above (2,951 + 69 imported, 918 + 4 local-class, 997 missing). The finding for
+  the after-table above (2,951 imported, 1,218 local-class = 593 available + 625 local
+  producer, 997 missing). The finding for
   its seat stands: the gap writer reads chain ACTIVATION (`terrainAllows && resourcePresent`),
   the imports list reads `terrainAllows || local || available`, so they disagree by
   construction.
