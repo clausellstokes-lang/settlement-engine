@@ -67,6 +67,9 @@ const freezeRow = (/** @type {GenerationTier1Row} */ row) => Object.freeze(Objec
 // one cause per commit. The crisis cast writes copy-on-write (LANDING-7 lane D, 8befe5a0d): the record's `stress` is a
 // copy of the entries the stress steps produced on the 54 corpus rows that cast a crisis, so the FINAL comparand of the
 // four `stress` rows reads same 63 -> same 9 / transformed 54, class 'same' -> 'varies' (the produced triples unmoved).
+// The food writer and its view derive the per cent from the pounds they publish (record 34: lane H's 66b1407bd,
+// superseding lane D's floor bfd70d809, which alone read 41 -> 39): generateNarratives|economicViability, both triples,
+// same 41 / transformed 22 -> same 42 / transformed 21.
 /**
  * ⛔ TWO COMPARANDS, BECAUSE THEY ARE DIFFERENT CLAIMS (design §22; chair ruling Q-6).
  * `onRecord` answers whether the key's FINAL value lands on the record. `producedOnRecord`
@@ -150,7 +153,7 @@ export const GENERATION_TIER1 = Object.freeze(/** @type {GenerationTier1Row[]} *
   { step: 'corruptionPass', key: 'npcs', via: 'mutates', stepDraws: 38, keyMoves: 19, rows: 63, class: 'drawn', onRecord: { absent: 0, same: 0, transformed: 63 }, onRecordClass: 'transformed', producedOnRecord: { absent: 0, same: 0, transformed: 63 }, producedOnRecordClass: 'transformed', recordPath: 'record.npcs' },
   { step: 'generateNarratives', key: 'settlementReason', via: 'provides', stepDraws: 63, keyMoves: 0, rows: 63, class: 'pure', onRecord: { absent: 0, same: 63, transformed: 0 }, onRecordClass: 'same', producedOnRecord: { absent: 0, same: 63, transformed: 0 }, producedOnRecordClass: 'same', recordPath: 'record.settlementReason' },
   { step: 'generateNarratives', key: 'resourceAnalysis', via: 'provides', stepDraws: 63, keyMoves: 0, rows: 63, class: 'pure', onRecord: { absent: 0, same: 63, transformed: 0 }, onRecordClass: 'same', producedOnRecord: { absent: 0, same: 63, transformed: 0 }, producedOnRecordClass: 'same', recordPath: 'record.resourceAnalysis' },
-  { step: 'generateNarratives', key: 'economicViability', via: 'provides', stepDraws: 63, keyMoves: 0, rows: 63, class: 'pure', onRecord: { absent: 0, same: 41, transformed: 22 }, onRecordClass: 'varies', producedOnRecord: { absent: 0, same: 41, transformed: 22 }, producedOnRecordClass: 'varies', recordPath: 'record.economicViability' },
+  { step: 'generateNarratives', key: 'economicViability', via: 'provides', stepDraws: 63, keyMoves: 0, rows: 63, class: 'pure', onRecord: { absent: 0, same: 42, transformed: 21 }, onRecordClass: 'varies', producedOnRecord: { absent: 0, same: 42, transformed: 21 }, producedOnRecordClass: 'varies', recordPath: 'record.economicViability' },
   { step: 'generateNarratives', key: 'history', via: 'provides', stepDraws: 63, keyMoves: 63, rows: 63, class: 'drawn', onRecord: { absent: 0, same: 0, transformed: 63 }, onRecordClass: 'transformed', producedOnRecord: { absent: 0, same: 0, transformed: 63 }, producedOnRecordClass: 'transformed', recordPath: 'record.history' },
   { step: 'assembleSettlement', key: 'settlement', via: 'provides', stepDraws: 63, keyMoves: 63, rows: 63, class: 'drawn', onRecord: { absent: 0, same: 63, transformed: 0 }, onRecordClass: 'same', producedOnRecord: { absent: 0, same: 63, transformed: 0 }, producedOnRecordClass: 'same', recordPath: 'record' },
   { step: 'assembleSettlement', key: 'powerStructure', via: 'mutates', stepDraws: 63, keyMoves: 0, rows: 63, class: 'pure', onRecord: { absent: 0, same: 0, transformed: 63 }, onRecordClass: 'transformed', producedOnRecord: { absent: 0, same: 0, transformed: 63 }, producedOnRecordClass: 'transformed', recordPath: 'record.powerStructure' },
