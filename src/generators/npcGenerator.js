@@ -1675,8 +1675,7 @@ export const generateRelationships = (npcs, config = {}, institutions = [], sett
 
 // generateSettlementName
 export const generateSettlementName = (r = 'germanic') => {
-  const prefixData = NAMING_DATA[resolveNameCulture(r)] || NAMING_DATA.germanic;
-  const suffixData = NAMING_DATA[r === 'mixed' ? resolveNameCulture(r) : resolveNameCulture(r)] || prefixData;
+  const prefixData = NAMING_DATA[resolveNameCulture(r)] || NAMING_DATA.germanic; const suffixData = NAMING_DATA[r === 'mixed' ? resolveNameCulture(r) : resolveNameCulture(r)] || prefixData; // LANDING-R2: one line, so the merged file meets rung 1's banked ceiling (1287)
   return `${prefixData.settlementPrefixes[Math.floor(_rng() * prefixData.settlementPrefixes.length)]}${suffixData.settlementSuffixes[Math.floor(_rng() * suffixData.settlementSuffixes.length)]}`;
 };
 
