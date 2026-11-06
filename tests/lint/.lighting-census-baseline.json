@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "eb100ddcb722602c64fc4c9d2e1b6a513c80d9cb",
-  "measuredBy": "REGISTERS-3 seat",
-  "date": "2026-11-04",
-  "note": "composed tip of the coherence window: new titles from FAITH, RULERS, MAGIC, DEFENSE(-2,-3), SIZE, FOOD(1-3), HOOKS, TRIM(-2), WIRING(1,2), DOORS, OSR",
-  "files": 2848,
-  "parked": 365,
-  "credited": 2483,
-  "titles": 27326,
-  "suiteTitles": 7230
+  "measuredAtSha": "792159d3d2fc2dd9d58d6ada4c0ad8d39c9db2a3",
+  "measuredBy": "ENGINE-MERGE (Opus 5.5)",
+  "date": "2026-11-06",
+  "note": "the engine lanes merged with master a07ee4e0a: both sides test files counted at the merged tip",
+  "files": 2861,
+  "parked": 367,
+  "credited": 2494,
+  "titles": 27386,
+  "suiteTitles": 7252
 }
