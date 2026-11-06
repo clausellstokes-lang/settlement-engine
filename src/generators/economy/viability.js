@@ -669,7 +669,7 @@ export function hasMarketInstitution(institutions) {
  * assembler passes the settlement's OWN tier, never its 'village' default.
  *
  * (The prose wiring census's holder citations into this file name their writes by SYMBOL since
- * REVIEW-INTAKE-3 R8, `holderTable.js :: HOLDER_SOURCES`, so a line inserted above no longer drifts them.)
+ * REVIEW-INTAKE-3 R8 (rule 32), so a line inserted above no longer drifts them.)
  * @param {unknown} tier
  * @param {unknown} population
  * @returns {boolean}
