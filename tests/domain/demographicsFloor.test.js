@@ -411,6 +411,13 @@ describe('3. THE DESCENT — the floored-six shape walks the ladder to the termi
   // measuring the horizon rather than the cure. The terminal candidate is measured at
   // tick 434 on this fixture, which is the derivation confirmed by execution.
   const HORIZON = 700;
+  // RE-KEYED 2026-11-06 (LANDING-7 lane E, by identity with X-46 car 1, 433289899). Under the
+  // old bands a hamlet held 61 to 400 and this fixture was a hamlet of 120 fed for 46. Under
+  // the owner's bands a hamlet rolls 20 to 100 and is STAMPED 25 to 87, so 120 is a village
+  // in fact and the lit ladder never read it as failing a hamlet. The shape is kept at the
+  // same ratio: a hamlet of 60 (inside its stamp band) whose granary (20 a day) feeds about
+  // a third of it.
+  const HAMLET_POP = 60;
 
   test('LIT: a settlement whose GRANARY fails walks the ladder down and the terminal candidate fires', () => {
     // ⭐ WAVE P4 MOVED WHAT DRIVES THE DESCENT, and refusing to move this fixture with it
@@ -418,12 +425,13 @@ describe('3. THE DESCENT — the floored-six shape walks the ladder to the termi
     // settlement to its death, including a settlement with food to spare — that is the
     // ratchet, and a cure that kept it would not be a cure. What must still be true, and
     // is, is that a settlement whose CAPACITY genuinely fails still dies: the granary here
-    // feeds 46 and 120 people are at the table, so the claim is corroborated, mortality
-    // runs at its authored strength, and the viability ladder does the rest. Measured:
-    // hamlet to thorp, terminal candidate at tick 106.
+    // holds a bound of 22 and 60 people are at the table, so the claim is corroborated,
+    // mortality runs at its authored strength, and the viability ladder does the rest.
+    // Measured (2026-11-06, the owner's bands): hamlet to thorp, terminal candidate at tick
+    // 497, inside the 700-tick horizon (it was tick 106 for the old 120-person fixture).
     const failed = walk({
-      pressure: 0.70, lit: true, ticks: HORIZON, tier: 'hamlet', population: 120,
-      dailyProduction: 40, named: 0, conditions: FAMINE,
+      pressure: 0.70, lit: true, ticks: HORIZON, tier: 'hamlet', population: HAMLET_POP,
+      dailyProduction: 20, named: 0, conditions: FAMINE,
     });
     expect(failed.tiers, 'the descent is the claim, in order').toEqual(['hamlet', 'thorp']);
     expect(failed.deathTick, 'the terminal lane was never reached').not.toBeNull();
@@ -438,7 +446,7 @@ describe('3. THE DESCENT — the floored-six shape walks the ladder to the termi
     // this horizon, which is precisely the reading the old lane earned. One number apart —
     // the fields' output — and the same fixture under the same famine lives.
     const sound = walk({
-      pressure: 0.70, lit: true, ticks: HORIZON, tier: 'hamlet', population: 120,
+      pressure: 0.70, lit: true, ticks: HORIZON, tier: 'hamlet', population: HAMLET_POP,
       dailyProduction: 300, named: 0, conditions: FAMINE,
     });
     expect(sound.deathTick, 'a well-fed settlement was killed by a story').toBeNull();
@@ -446,13 +454,17 @@ describe('3. THE DESCENT — the floored-six shape walks the ladder to the termi
     expect(sound.population, 'the well-fed settlement emptied anyway').toBeGreaterThan(0);
   });
 
-  test('DARK (the control): the same fixture stalls at hamlet at exactly 300 people, forever', () => {
+  test('DARK (the control): the same fixture stalls at its own tier at exactly 300 people, forever', () => {
     const dark = walk({ pressure: 0.70, lit: false, ticks: HORIZON });
-    // Dark the ladder DOES move twice, on the existing population-failure tests, and then
-    // stops: at 300 people a hamlet is inside its own band (61 to 400) and its support of
-    // 0.30 is above the structural-failure floor of 0.25, so nothing else can demote it
-    // and the frozen population can never fall to where something would.
-    expect(dark.tiers).toEqual(['town', 'village', 'hamlet']);
+    // RE-KEYED 2026-11-06 (LANDING-7 lane E; X-46 car 1, 433289899). Under the old bands the
+    // dark ladder moved twice on the population-failure tests (town 901+, village 401+) and
+    // stalled at hamlet, whose band held 61 to 400. Under the owner's bands 300 is the town
+    // roll band's own floor (300 to 2,500), so no population-failure test fires at all and
+    // the dark ladder never moves: the frozen town stays a town of 300. Its support of 0.30
+    // is above the structural-failure floor of 0.25, so nothing else can demote it, and the
+    // frozen population can never fall to where something would. The claim (dark, the
+    // frozen place is immortal) is unchanged; only the rung it freezes on moved.
+    expect(dark.tiers).toEqual(['town']);
     expect(dark.population).toBe(300);
     expect(dark.deathTick, 'dark, a nonviable settlement must remain immortal').toBeNull();
     expect(dark.died).toBe(false);
@@ -479,20 +491,25 @@ describe('4. THE LABEL LAG — a tier label that cannot follow its census', () =
   // exists for, isolated: tier drift is OFF in both arms, so the label never moves and
   // the only difference between them is which fact the death gate consults.
   const OFF = { tierDriftEnabled: false };
+  // RE-KEYED 2026-11-06 (LANDING-7 lane E; X-46 car 1, 433289899). "Thorp-scale in fact" is
+  // the stamp (popToTier), and the owner's bands put the hamlet cut at 25: forty people now
+  // stamp HAMLET, so the label no longer lags the census at all and the lit death correctly
+  // refused. Fifteen people (inside the thorp stamp band, under the cut) restore the case.
+  const THORP_SCALE = 15;
 
-  test('DARK: forty people wearing a hamlet label are immortal', () => {
+  test('DARK: fifteen people wearing a hamlet label are immortal', () => {
     const dark = walk({
-      pressure: 0.70, lit: false, ticks: 200, tier: 'hamlet', population: 40,
+      pressure: 0.70, lit: false, ticks: 200, tier: 'hamlet', population: THORP_SCALE,
       dailyProduction: 300, rules: OFF,
     });
     expect(dark.tier).toBe('hamlet');
-    expect(dark.population).toBe(40);
+    expect(dark.population).toBe(THORP_SCALE);
     expect(dark.deathTick).toBeNull();
   });
 
   test('LIT: the same settlement is thorp-scale in fact, and it reaches the terminal lane', () => {
     const lit = walk({
-      pressure: 0.70, lit: true, ticks: 200, tier: 'hamlet', population: 40,
+      pressure: 0.70, lit: true, ticks: 200, tier: 'hamlet', population: THORP_SCALE,
       dailyProduction: 300, rules: OFF,
     });
     expect(lit.tier, 'the death gate must not mint a tier: the label is still the drift lane\'s to write')
@@ -505,7 +522,7 @@ describe('4. THE LABEL LAG — a tier label that cannot follow its census', () =
     // The applier's staleness contract is unchanged in substance. Without the stamp a
     // non-thorp settlement is refused exactly as before, which is what keeps every dark
     // outcome and every parked legacy proposal reading the way it always did.
-    const hamlet = place({ tier: 'hamlet', population: 40, dailyProduction: 300 });
+    const hamlet = place({ tier: 'hamlet', population: THORP_SCALE, dailyProduction: 300 });
     const unstamped = { id: 'x', lifecyclePatch: { kind: 'terminal_death', saveId: 'Ashford' }, metadata: { tick: 9 } };
     const stamped = {
       id: 'x',
