@@ -143,18 +143,25 @@ const ESPREE_OPTIONS = Object.freeze({ ecmaVersion: 2024, sourceType: 'module', 
  *
  * FAIL-CLOSED ON A PARSE FAILURE: the file contributes nothing and is NAMED, because a
  * silent fallback to the regex would put the shape this function exists to refuse back in.
+ *
+ * ⭐ EVERY WRITE CARRIES THE TOP-LEVEL DECLARATION IT SITS IN (`symbol`; '' for an anonymous
+ * default export or a bare statement), so a citation can name `path :: symbol` instead of a
+ * line that drifts (OPERATING_STANDARD rule 32; REVIEW-INTAKE-3 R8, after two holder
+ * citations into `viability.js` went stale by two lines).
  * @param {string} source
- * @returns {{writes: Array<{name: string, line: number}>,
+ * @returns {{writes: Array<{name: string, line: number, symbol: string}>,
  *   mentions: Array<{name: string, line: number}>, parsed: boolean}}
  */
 export function astTokens(source) {
-  /** @type {Array<{name: string, line: number}>} */
+  /** @type {Array<{name: string, line: number, symbol: string}>} */
   const writes = [];
   /** @type {Array<{name: string, line: number}>} */
   const mentions = [];
   /** @type {object} */
   let root;
   try { root = parse(String(source), ESPREE_OPTIONS); } catch { return { writes, mentions, parsed: false }; }
+  /** The top-level declaration the walk is inside; set per statement (per declarator) below. */
+  let symbol = '';
   /** @param {object|null} node @returns {string} */
   const nameOf = (node) => {
     if (!node) return '';
@@ -169,12 +176,12 @@ export function astTokens(source) {
     if (typeof row.type !== 'string') return;
     if (row.type === 'Property' && !row.computed && row.key && row.key.loc) {
       const name = nameOf(row.key);
-      if (name) writes.push({ name, line: row.key.loc.start.line });
+      if (name) writes.push({ name, line: row.key.loc.start.line, symbol });
     }
     if (row.type === 'AssignmentExpression' && row.left && row.left.type === 'MemberExpression'
       && !row.left.computed && row.left.property && row.left.property.loc) {
       const name = nameOf(row.left.property);
-      if (name) writes.push({ name, line: row.left.property.loc.start.line });
+      if (name) writes.push({ name, line: row.left.property.loc.start.line, symbol });
     }
     if (row.type === 'Identifier' && row.loc) mentions.push({ name: row.name, line: row.loc.start.line });
     const isFunction = row.type === 'FunctionDeclaration' || row.type === 'FunctionExpression'
@@ -185,7 +192,20 @@ export function astTokens(source) {
       walk(row[key]);
     }
   };
-  walk(root);
+  // The same walk as one `walk(root)`, statement by statement in source order, so each write
+  // learns its top-level declaration; a `const a = …, b = …` names each declarator apart.
+  for (const statement of /** @type {Array<Record<string, any>>} */ (/** @type {{body?: unknown}} */ (root).body)) {
+    const declaration = statement.declaration || statement;
+    if (declaration.type === 'VariableDeclaration') {
+      for (const declarator of declaration.declarations) {
+        symbol = declarator.id && declarator.id.type === 'Identifier' ? declarator.id.name : '';
+        walk(declarator);
+      }
+      continue;
+    }
+    symbol = declaration.id && declaration.id.type === 'Identifier' ? declaration.id.name : '';
+    walk(statement);
+  }
   return { writes, mentions, parsed: true };
 }
 
@@ -213,6 +233,11 @@ export function producerIndex() {
  * `src/domain/**` that could disagree would be two producer indexes, and the estate's rule is
  * one reader per fact: `producerIndex` is written in terms of this function so a divergence is
  * impossible rather than merely unlikely.
+ *
+ * ⭐ TWO FORMS PER WRITE, BOTH FROM THIS ONE PASS: `path:line`, and `path :: symbol` (the
+ * top-level declaration the write sits in, once per token and declaration). A citation that
+ * drifts is re-addressed to the symbol form, permanently (OPERATING_STANDARD rule 32); a
+ * declaration that does not write the token, or does not exist, resolves to nothing.
  * @returns {{cites: Map<string, string[]>, files: number, unparsed: string[]}}
  */
 export function producerCitations() {
@@ -228,10 +253,17 @@ export function producerCitations() {
     const rel = relative(ROOT, abs);
     const { writes, parsed } = astTokens(readFileSync(abs, 'utf8'));
     if (!parsed) { unparsed.push(rel); continue; }
+    /** @type {Set<string>} the symbol citations this file has already given, per token */
+    const symbolCited = new Set();
     for (const write of writes) {
-      const held = cites.get(write.name);
-      if (held) held.push(`${rel}:${write.line}`);
-      else cites.set(write.name, [`${rel}:${write.line}`]);
+      const held = cites.get(write.name) || [];
+      if (!cites.has(write.name)) cites.set(write.name, held);
+      held.push(`${rel}:${write.line}`);
+      const bySymbol = write.symbol ? `${rel} :: ${write.symbol}` : '';
+      if (bySymbol && !symbolCited.has(`${write.name}\u0000${bySymbol}`)) {
+        symbolCited.add(`${write.name}\u0000${bySymbol}`);
+        held.push(bySymbol);
+      }
     }
   }
   return { cites, files: files.length, unparsed };

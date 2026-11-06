@@ -668,8 +668,8 @@ export function hasMarketInstitution(institutions) {
  * bands the two readings agree everywhere (tests/generators/smallPlaceMarket.test.js). The
  * assembler passes the settlement's OWN tier, never its 'village' default.
  *
- * ⚠ THESE HELPERS SIT AT THE END OF THE FILE ON PURPOSE: the prose wiring census's holder
- * citations name this file's producer writes by LINE, so nothing is inserted above them.
+ * (The prose wiring census's holder citations into this file name their writes by SYMBOL since
+ * REVIEW-INTAKE-3 R8, `holderTable.js :: HOLDER_SOURCES`, so a line inserted above no longer drifts them.)
  * @param {unknown} tier
  * @param {unknown} population
  * @returns {boolean}
