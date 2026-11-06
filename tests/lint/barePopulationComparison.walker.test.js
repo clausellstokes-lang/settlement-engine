@@ -119,7 +119,7 @@ const BAND_READERS = Object.freeze({
   'src/domain/highWater.js :: TIER_FLOOR': 'own floor: the least population a recorded tier implies, a reading, not a crossing',
   // The mint: a place just made a tier is clamped into that tier's own band.
   'src/domain/worldPulse/tierOutcomeApply.js :: promotedFloor': 'mint: the promoted place is clamped into its new tier\'s own band',
-  'src/domain/events/mutateEntities.js :: band': 'mint: SHIFT_TIER rebands the place into its destination tier\'s own band',
+  'src/domain/events/mutateEntities.js :: thorpFloor': 'own floor: SHIFT_TIER rebands into the destination STAMP band (R-E6); thorp, which has no stamp cut, floors at its own roll minimum',
   // A ratio, not a crossing.
   'src/domain/worldPulse/settlementLifecycleKernel.js :: range': 'ratio: seedingDrive reads pop / the current band max',
   'src/domain/worldPulse/tierResourceDynamics.js :: tierEligibility': 'ratio: the promotion severity weight pop / next min (R-B1 left it, eligibility reads the cut); for the chair',
