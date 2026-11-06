@@ -452,10 +452,14 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
       + `[A4] varies rows: ${variesRows.join(', ')}\n`);
 
     failOnDifference(differences, emitTier1Literal(fresh.rows));
-    expect(variesRows.length, 'the varies rows of the FINAL comparand').toBe(7);
+    // LANDING-8 (2026-11-06, ODQ §934.105): 7 -> 11. The crisis cast writes copy-on-write (lane D, 8befe5a0d), so the four
+    // `stress` rows' FINAL comparand reads 'varies' (same 9 / transformed 54), measured by this arm's fresh execution.
+    expect(variesRows.length, 'the varies rows of the FINAL comparand').toBe(11);
     // 2026-10-01, the urban band (ODQ §934.86): 18 -> 16 (measured). The institution rebuild moved the producedOnRecord
     // classes of isolationSupport (varies -> same) and generationRepairs (absent -> varies); the six varies rows stay six.
-    expect(disagreeing.length, 'the rows where the two comparands disagree').toBe(17); // lane CRISIS (2026-11-03): resolveCrisisCast joins: assembleSettlement|stress's produced value differs from the record where a crisis is cast (16 -> 17)
+    // LANDING-8 (2026-11-06, ODQ §934.105): 17 -> 13, the same cause (8befe5a0d): the four `stress` rows' two comparands
+    // now agree ('varies' both), because the record holds a copy of exactly what the stress steps produced.
+    expect(disagreeing.length, 'the rows where the two comparands disagree').toBe(13); // lane CRISIS (2026-11-03): resolveCrisisCast joins: assembleSettlement|stress's produced value differs from the record where a crisis is cast (16 -> 17)
     expect(nonUnanimous.length, 'exactly one row lands in two places, and it is already varies').toBe(1);
     // ⛔ THERE IS NO producedPath, AND THAT IS A MEASUREMENT. If this ever becomes non-zero a
     // second path field is owed and the register is telling half a truth about WHERE.
