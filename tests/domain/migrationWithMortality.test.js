@@ -182,22 +182,28 @@ describe('M4 / P5b — destination size saturation delegates to demography when 
     }
   });
 
-  it('DIVERGENCE: a 20k city is full to the legacy lane and about half-full to the demographic bound', () => {
-    const city = { population: 20_000, tier: 'city', config: { tier: 'city' } };
+  // ⚠ RE-KEYED BY IDENTITY (LANDING-7 R-E8, 2026-11-06). The city's DENSITY_CEILINGS moved
+  // 38,000 -> 22,798 (the ceilings follow the STAMP-band maxima). The fixture's head count
+  // follows the ceiling by the same factor (20,000 x 22,798 / 38,000 = 11,999 ~ 12,000), so it
+  // keeps its share of the bound (0.526 against 0.526), still reads full to the legacy pop/9000
+  // arm, and now also stamps the tier it wears (a 20,000 place stamps metropolis).
+  it('DIVERGENCE: a 12k city is full to the legacy lane and about half-full to the demographic bound', () => {
+    const city = { population: 12_000, tier: 'city', config: { tier: 'city' } };
     const dark = sizeSaturationOf(city, { simulationRules: {} }, 'Cityhold');
     const worldState = { simulationRules: { demographicsEnabled: true } };
     const lit = sizeSaturationOf(city, worldState, 'Cityhold');
     const readings = demographicReadings(city, worldState, 'Cityhold');
 
     expect(dark).toBe(1);
-    expect(readings.bound).toBe(38_000);
-    expect(lit).toBeCloseTo(20_000 / 38_000, 12);
+    expect(readings.bound).toBe(22_798);
+    expect(lit).toBeCloseTo(12_000 / 22_798, 12);
     expect(lit).toBeGreaterThan(0.52);
     expect(lit).toBeLessThan(0.54);
   });
 
   it('WRITER/READER SPELLING: settlementId carries completed works into the canonical reader', () => {
-    const city = { population: 20_000, tier: 'city', config: { tier: 'city' } };
+    // the same city, re-keyed with the arm above (R-E8): 22,798 x 1.24 at three works = 28,270
+    const city = { population: 12_000, tier: 'city', config: { tier: 'city' } };
     const worldState = {
       simulationRules: { demographicsEnabled: true },
       spatialLedgers: {
@@ -208,7 +214,7 @@ describe('M4 / P5b — destination size saturation delegates to demography when 
     const throughSeam = sizeSaturationOf(city, worldState, 'Cityhold');
     const contextBlind = sizeSaturationOf(city, worldState);
 
-    expect(readings.bound).toBe(47_120);
+    expect(readings.bound).toBe(28_270);
     expect(throughSeam).toBe(Math.min(1, pressureOf(readings.population, readings.bound)));
     expect(throughSeam).toBeLessThan(contextBlind);
 

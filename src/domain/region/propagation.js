@@ -315,7 +315,9 @@ function impact(channel, localDelta, change, kind, goods, detail = {}) {
     // its apply step early-expires at the target (see applyRegionalImpact).
     ...(detail.relievesArchetype ? { relievesArchetype: detail.relievesArchetype } : {}),
     explanation: detail.explanation || explainImpact(kind, channel, localDelta, goods),
-    createdAt: wallClockNow(),
+    // Stamped once by deriveRegionalImpacts (the threaded `now`, or the clock only when none is
+    // threaded); the key holds its place here so the impact's shape is unchanged.
+    createdAt: null,
   };
 }
 
@@ -477,7 +479,8 @@ function waveImpactForChannel(channel, sourceImpact, depth, decay) {
       chainId: sourceImpact.sourceChange?.chainId || null,
     },
     explanation: `${sourceImpact.explanation || 'Regional pressure'} The pressure continues through ${channel.type.replace(/_/g, ' ')}.`,
-    createdAt: wallClockNow(),
+    // Stamped once by deriveRegionalImpacts, as impact() above.
+    createdAt: null,
   };
 }
 
@@ -743,9 +746,15 @@ export function deriveRegionalImpacts(localDelta, graph, options = {}) {
     frontier = nextFrontier;
   }
   // Deterministic timestamp: stamp every impact with the threaded `now` rather
-  // than wall-clock, so a replay is byte-identical (falls back to each impact's
-  // own createdAt when `now` isn't threaded).
-  if (now) for (const item of out) item.createdAt = now;
+  // than wall-clock, so a replay is byte-identical. Only when `now` isn't threaded
+  // is the wall clock read, ONCE, at this boundary (LANDING-2: impact() and
+  // waveImpactForChannel() used to read it eagerly for every impact and the
+  // threaded `now` then overwrote it, so a pinned advance read the clock it never
+  // used: worldGenerationClockSeam ARM C, reached once X-46 re-scaled the corpus).
+  if (out.length) {
+    const stamp = now || wallClockNow();
+    for (const item of out) item.createdAt = stamp;
+  }
   return out;
 }
 

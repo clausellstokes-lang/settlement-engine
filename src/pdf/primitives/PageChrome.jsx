@@ -14,6 +14,18 @@
 import { Page, View, Text } from '@react-pdf/renderer';
 import { sheet, palette, type, page as pageGeo, pt } from '../theme.js';
 
+// ⛔ A FIXED TEXT CARRIES NO lineHeight (LANDING-7 lane C, 2026-11-06). @react-pdf/layout
+// re-resolves a page's ALREADY-resolved styles on every relayout of a page split
+// (relayoutPage → resolvePageStyles), and a resolved lineHeight is a bare number, so each
+// pass multiplies it by the fontSize again. A body node passes through a few relayouts; a
+// FIXED node is carried to every page of the chapter and compounds without bound —
+// `type.caption`'s 1.35 became 10.8 on page 1, 3.5e5 on page 2, ×64 a page after, and
+// 6.4e21 on page 11, where pdfkit refused the footer's border ("unsupported number"), so no
+// chapter of eleven pages or more could print (the metropolis Institutions chapter). The
+// footer is one line, so the font's own leading is the right one: the caption's family and
+// size, nothing to re-multiply. Pinned by tests/pdf/pageChromeFixedLeading.test.jsx.
+const FOOTER_TEXT = { fontFamily: type.caption.fontFamily, fontSize: type.caption.fontSize, color: palette.faint };
+
 export function PageChrome({ settlement, narrativeMode = false, children, ...pageProps }) {
   const name = settlement?.name || 'Settlement';
 
@@ -71,9 +83,9 @@ export function PageChrome({ settlement, narrativeMode = false, children, ...pag
           paddingTop: 6,
         }}
       >
-        <Text style={{ ...type.caption, color: palette.faint }}>SettlementForge</Text>
+        <Text style={FOOTER_TEXT}>SettlementForge</Text>
         <Text
-          style={{ ...type.caption, color: palette.faint }}
+          style={FOOTER_TEXT}
           render={({ pageNumber, totalPages }) => `${pageNumber} / ${totalPages}`}
         />
       </View>

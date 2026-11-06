@@ -123,7 +123,7 @@ describe('export controls outside the gallery, NON-STAFF, before launch', () => 
       owner(false);
       const { control, label, fired } = mount();
       expect(control.textContent).toContain(label);
-      expect(control.textContent).not.toContain(PILL);
+      expect(control.textContent).not.toContain(PILL); // anchored: the line above reads the control's own label in this same text
       expect(control.disabled).toBe(false);
       expect(control.getAttribute('data-skin') === 'launch' || control.getAttribute('data-launch-skin') === '').toBe(true);
       expect(description(control)).toContain(PILL);
@@ -148,7 +148,7 @@ describe('export controls, STAFF account, before launch: they work', () => {
       owner(true);
       const { control, fired } = mount();
       expect(control.getAttribute('data-skin')).not.toBe('launch');
-      expect(description(control)).not.toContain(PILL);
+      expect(description(control)).not.toContain(PILL); // anchored: the gated arm above reads PILL through this same description() on these mounts
       fireEvent.click(control);
       await settle();
       expect(screen.queryByRole('dialog', { name: PILL })).toBeNull();
@@ -164,7 +164,7 @@ describe('export controls, NON-STAFF, purchases OPEN (launch): they work', () =>
       owner(false);
       const { control, fired } = mount();
       expect(control.getAttribute('data-skin')).not.toBe('launch');
-      expect(description(control)).not.toContain(PILL);
+      expect(description(control)).not.toContain(PILL); // anchored: the gated arm above reads PILL through this same description() on these mounts
       fireEvent.click(control);
       await settle();
       expect(screen.queryByRole('dialog', { name: PILL })).toBeNull();

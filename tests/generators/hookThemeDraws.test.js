@@ -255,8 +255,19 @@ describe('HK-3 draws — the corpus, through the real pipeline', () => {
     // 209 → 207 (measured by a probe copy of this file's own `genAt`). HK-3's invariant is intact:
     // every hook is still typed (typed = total = 861) and the above-K share reads 87/861 = 10.10%,
     // inside the ≤ 12% envelope below. Re-based, not re-argued.
-    expect(total, 'the corpus NPC-hook total moved — HK-3 must never drop a hook').toBe(861);
-    expect(duplicates, 'the exact-duplicate residual is bounded pool EXHAUSTION and must not move').toBe(26);
+    // ⭐ RE-KEYED BY IDENTITY 2026-11-04, THE RUNG-1 LANDING (LANDING-2; the chair's ruling: TRUTH stopped
+    // storing false hooks, so the stored count is the TRUE hooks and the rest is derived at read). Bisected over
+    // every first-parent step of the window by this file's own corpus (total / exact duplicates):
+    //   e7925c368 the window's base                         861 / 26
+    //   90dc22f18 x46-3 (the institution budget)            863 / 24   the scale re-dealt the NPC census
+    //   ff4448d2e TRUTH (at 6da7d3f64)                      862 / 24   one false hook no longer stored
+    //   37b1e746d PINS (at fa95f69d4)                       862 / 26   the draws moved, the count did not
+    //   6ca454d2b I7 (the realised table re-measured)       861 / 26   the density table re-dealt the census
+    //   5e9ffb220 RUNG1B-F1 (the defence words)             860 / 25   a hook that spoke of an absent defence is not stored
+    // No step is HK-3's: its invariant (a stricter tier is skipped when it would empty the set) is intact, and
+    // every drop is a TRUE-HOOKS-ONLY drop or a re-dealt census. Re-based, not re-argued.
+    expect(total, 'the corpus NPC-hook total moved — HK-3 must never drop a hook').toBe(860);
+    expect(duplicates, 'the exact-duplicate residual is bounded pool EXHAUSTION and must not move').toBe(25);
 
     // A PRE-EXISTING CONDITION, pinned here so HK-3 cannot be blamed for it and so
     // it cannot quietly grow: 52 of the corpus's 613 generated NPCs carry NO
@@ -275,6 +286,10 @@ describe('HK-3 draws — the corpus, through the real pipeline', () => {
     //   5c8a8c741  611 / 50   (the service-catalogue car: no movement)
     //   cd6ec1c49  613 / 52   [hamlet 61 · village 74 · town 104 · city 165 · metropolis 209]
     //   0e68bee62  613 / 52   (and every sha after it, to the tip)
+    //   2f9f4a295  613 / 52   [hamlet 67 · village 74 · town 105 · city 160 · metropolis 207]  PR #72's merge-base
+    //   a7f13fef4  613 / 52   [hamlet 67 · village 74 · town 103 · city 162 · metropolis 207]  FOOD-2, composed dd3158aab
+    //   43f9c0dcc  608 / 47   [hamlet 62 · village 74 · town 103 · city 162 · metropolis 207]  SIZE-3, composed 8cd65978e
+    //   8fab1dc34  608 / 47   [hamlet 62 · village 74 · town 103 · city 162 · metropolis 207]  the lane tip (REGISTERS-7 F3)
     //
     // THE MOVER IS `cd6ec1c49` — "A generalist role no longer joins any faction the
     // settlement happens to have", a SIGNED act under docs/shift-records/
@@ -297,8 +312,25 @@ describe('HK-3 draws — the corpus, through the real pipeline', () => {
     // rather than argued: every NPC that differs is a structural placeholder (no plotHooks). town-6's Landed Gentry
     // Lord Mayor seat is now filled (-1); town-8's Thieves' Guild Kingpin and Lieutenant seats are now honestly
     // unled (+2). No hook-bearing NPC lost its hooks (17 same-id records only re-dealt role or faction).
-    expect(npcTotal, 'the NPC denominator must be a real corpus').toBe(613);
-    expect(hookless, 'hookless NPCs grew — a hook-bearing record is being dropped downstream').toBe(52);
+    // RE-BASED 2026-11-04 (REGISTERS-7 F3, door 9): 613 -> 608 NPCs and 52 -> 47 hookless, the movers LISTED by
+    // identity against a full first-parent sweep of PR #72's window (each sha in its own git archive, the corpus
+    // built by this file's own genAt). Two steps, and every NPC that differs is an unnamed, hookless seat placeholder:
+    //  - a7f13fef4 (FOOD-2, the food base numbers; composed dd3158aab): town-8's Kingpin and Lieutenant placeholders
+    //    go (-2) and city-10 gains the same two (+2). Net 0; the tiers read town 105 -> 103, city 160 -> 162.
+    //  - 43f9c0dcc (SIZE-3, the small-place guild check requires a real market; composed 8cd65978e): hamlet-7's
+    //    Guildmaster and Senior Trader go with the guild a market-less hamlet no longer seats, and hamlet-6's and
+    //    hamlet-11's Lord Mayor and hamlet-9's Watch Captain placeholders go as well (-5, all hamlet).
+    // No hook-bearing NPC lost a hook: zero same-id records re-dealt, total 861 and duplicates 26 unchanged. The
+    // hookless figure fell with the denominator, so 47 of 608 is the same defect at a lower count.
+    // RE-BASED 2026-11-04 (the rung-1 landing, LANDING-2): 608 -> 595 NPCs and 47 -> 34 hookless, bisected over every
+    // first-parent step of the window (npcs / hookless): e7925c368 608/47 · x46-train 1264a8152 609/48 · terrain-pools
+    // ac09ea83b 607/46 · x46-3 90dc22f18 596/35 · PLACE-NOT-TIER 6129c300d 594/33 · PINS 37b1e746d 589/28 · I7 6ca454d2b
+    // 588/27 · RUNG1B-F6 6d84aa834 595/34. At EVERY step the hook-bearing count (npcs − hookless) is 561: each mover
+    // is a hookless seat placeholder, seated or struck as the scale re-dealt the offices. Asserted below, so the
+    // day a hook-bearing record is dropped this pin says so by name.
+    expect(npcTotal, 'the NPC denominator must be a real corpus').toBe(595);
+    expect(hookless, 'hookless NPCs grew — a hook-bearing record is being dropped downstream').toBe(34);
+    expect(npcTotal - hookless, 'a hook-bearing NPC was dropped (561 at every step of the rung-1 window)').toBe(561);
   });
 
   test('pin:same-seed-survivors — the same seed draws the same hooks, forever', () => {

@@ -297,7 +297,11 @@ describe('writer-with-no-reader ratchet: the frozen register', () => {
     // ELEVEN BECAME TWELVE (2026-10-31, GS-1 tension variety, ODQ §934.101): `proseVariant on relationships`,
     // engine-internal. The tie's line is drawn without replacement across the town, so the generator stores the
     // drawn index and the rename path in generateSettlementPipeline.js re-renders at it; no surface reads it.
-    expect(WRITER_DARK_REGISTER.length).toBe(12);
+    // TWELVE BECAME TEN ((LANDING-5, the cloud chair's ruling 2 on LANDING-4's report, ODQ §934.105)): `densityRungRole on npcs` retired by its own premise — the
+    // density dial is lit everywhere since X-46 car 4's density law, so clause D-dial convicted it — and
+    // `supersessionReason on proposals` retired by clause S, the corpus's 327 proposals carrying no such key (coverage
+    // lost, not reach; the writer is unchanged). The register's own header carries both retirements.
+    expect(WRITER_DARK_REGISTER.length).toBe(10);
     expect(liveEvidence.map((row) => row.identity).sort())
       .toEqual(WRITER_DARK_REGISTER.map((row) => row.identity).sort());
     for (const row of liveEvidence) {
@@ -482,7 +486,9 @@ describe('writer-with-no-reader ratchet: the live judgment', () => {
     // written on every world with a tie: nine became ten.
     // GS-1 tension variety (2026-10-31, ODQ §934.101): `proseVariant on relationships` is registered engine-internal and
     // written on every world with a tie: ten became eleven.
-    expect(registeredAndDark.length).toBe(11);
+    // 2026-11-05 (LANDING-5, the cloud chair's ruling 2 on LANDING-4's report, ODQ §934.105): `supersessionReason on proposals` (registered AND dark) retired by clause S — the
+    // corpus no longer writes it — so eleven became ten. The retired density row was never in the cohort.
+    expect(registeredAndDark.length).toBe(10);
     expect(baseline.darkUnregistered.length).toBe(cohort.length - registeredAndDark.length);
     expect(reviewableDark(cohort).length).toBe(baseline.reviewableDarkCount);
     expect(reviewableDark(cohort).length).toBeLessThan(cohort.length);
@@ -524,7 +530,7 @@ describe('writer-with-no-reader ratchet: the live judgment', () => {
     expect(outside).toEqual([]);
   });
 
-  test('THE CULTURE CLASS IS STILL LIVE: the dossier view model and the quick guide read culture on settlement and npcs while the writer is config — six rows, exact, a review-backlog wiring finding', () => {
+  test('THE CULTURE CLASS IS STILL LIVE: the dossier view model and the quick guide read culture on settlement and npcs while the writer is config — four rows, exact, a review-backlog wiring finding', () => {
     // PAIDFIX repair 1 struck the three generateCampaignPDF.js sites and the campaign
     // PDF IS gone from this join. Two readers remain, and the readers’ SHAPE is what
     // is wrong, not the writer’s. When the review fixes them this arm re-records to
@@ -534,9 +540,11 @@ describe('writer-with-no-reader ratchet: the live judgment', () => {
     });
     const culture = rows.filter((row) => row.key === 'culture')
       .map((row) => `${row.file} | ${row.readerShape} <- ${row.writerShape}`).sort();
+    // BANKED 2026-11-04 (REGISTERS-5, the chair's ruling D2): the two quick-guide rows
+    // left this join at TRIM-2's X-51 (7d327ca73), which retired the quick guide from the
+    // PDF's Tonight chapter, TableView and SessionMode; bisected 7d327ca73^ green (six rows),
+    // 7d327ca73 red (four). The win is banked with an anchor below, never a loosened list.
     expect(culture).toEqual([
-      'src/domain/summary/settlementQuickGuide.js | settlement <- _config',
-      'src/domain/summary/settlementQuickGuide.js | settlement <- config',
       'src/pdf/lib/viewModel.js | npcs <- _config',
       'src/pdf/lib/viewModel.js | npcs <- config',
       'src/pdf/lib/viewModel.js | settlement <- config',
@@ -546,6 +554,11 @@ describe('writer-with-no-reader ratchet: the live judgment', () => {
       culture.map((row) => row.split(' | ')[0]), 'src/utils/generateCampaignPDF.js',
       'src/pdf/lib/viewModel.js',
       'the campaign PDF left this join at PAIDFIX repair 1 and the view model did not — a win already banked, beside a debt still open',
+    );
+    expectAbsentWithAnchor(
+      culture.map((row) => row.split(' | ')[0]), 'src/domain/summary/settlementQuickGuide.js',
+      'src/pdf/lib/viewModel.js',
+      'the quick guide left this join at X-51 (7d327ca73): ONE Tonight sheet, the quick guide retired',
     );
     // The join as SPECIFIED is spec-faithful and unusable as a bare alert, which is
     // why Car 2 asserts named classes exactly and REPORTS the rest grouped by key.
@@ -783,9 +796,7 @@ describe('writer-with-no-reader ratchet: the register doors convict what they ca
     // Car 4 admitted the dial rows, and an index would have quietly re-pointed every
     // arm below at a row with a different canonical field set.
     const row = WRITER_DARK_REGISTER.find((entry) => entry.identity === 'cultureProfileKey on config');
-    const dialRow = WRITER_DARK_REGISTER.find((entry) => entry.identity === 'densityRungRole on npcs');
     expect(row.reason).toBe('engine-internal');
-    expect(dialRow.reason).toBe('dark-by-construction');
     expect(() => assertWriterDarkRegister([{ ...row, reason: 'because-i-said-so' }])).toThrow(/unknown reason/);
     expect(() => assertWriterDarkRegister([{ ...row, extraField: 1 }])).toThrow(/noncanonical fields/);
     expect(() => assertWriterDarkRegister([row, row])).toThrow(/DUPLICATED/);
@@ -793,100 +804,18 @@ describe('writer-with-no-reader ratchet: the register doors convict what they ca
     expect(() => assertWriterDarkRegister([{ ...row, shape: 'somethingElse' }])).toThrow(/does not name its own key/);
     expect(() => assertWriterDarkRegister([{ ...row, writer: 'scripts/notSrc.mjs' }])).toThrow(/repo-relative src/);
     expect(() => assertWriterDarkRegister([{ ...row, charter: 'no section here' }])).toThrow(/chartering section/);
-    // BOTH prose fields carry the 80-character floor, each on the reason that owns it.
+    // The 80-character floor on the engine-internal prose. The dark-by-construction half (`lighting`, and the
+    // generation-dial door's own structure) was asserted on the live density row; 2026-11-05 (LANDING-5, the cloud chair's ruling 2 on LANDING-4's report, ODQ §934.105)
+    // that row retired with its premise and no live dial row remains to carry those lines, so they went with it.
     expect(() => assertWriterDarkRegister([{ ...row, why: 'too short' }])).toThrow(/at least 80 characters/);
-    expect(() => assertWriterDarkRegister([{ ...dialRow, lighting: 'too short' }]))
-      .toThrow(/at least 80 characters/);
     // And each reason refuses the OTHER's prose field as foreign.
     const { why: _why, ...dialShaped } = row;
     expect(() => assertWriterDarkRegister([{ ...dialShaped, reason: 'dark-by-construction' }]))
       .toThrow(/noncanonical fields/);
-    // The generation-dial door's own structure is law too.
-    expect(() => assertWriterDarkRegister([{ ...dialRow, door: { ...dialRow.door, configKey: 'noUnderscore' } }]))
-      .toThrow(/configKey must start with/);
-    expect(() => assertWriterDarkRegister([{ ...dialRow, door: { ...dialRow.door, dialModule: 'src/lib/x.js' } }]))
-      .toThrow(/must live under src\/domain/);
     expect(Object.keys(CANONICAL_FIELDS).sort()).toEqual([...DARK_REASONS].sort());
     for (const entry of WRITER_DARK_REGISTER) {
       expect(Object.keys(entry).sort().join(',')).toBe(CANONICAL_FIELDS[entry.reason]);
     }
-  });
-
-  test('the surviving generation-dial row is LIVE-VERIFIED, and its writer writes in none of OSR’s four spellings — the executed bit is the write proof', () => {
-    const dialRows = WRITER_DARK_REGISTER.filter((row) => row.door?.kind === 'generation-dial');
-    // ⭐ ONE ROW, NOT TWO, SINCE 2026-09-08. The living-content pair member
-    // (`customContentRoster on settlement`) was retired when its dial was lit; the
-    // density row survives because its own dial is still at 1 against a register
-    // version of 2. The pipeline assertion below is kept and NOT reduced with the
-    // row: the assignment it pins is what made the text probe blind in the first
-    // place, and it is still the shape a future re-registration would rest on.
-    expect(dialRows.map((row) => row.identity).sort())
-      .toEqual(['densityRungRole on npcs']);
-    // THE WHOLE REASON FOR THE RULING, asserted rather than asserted-about: the text
-    // probe finds NOTHING at either writer. `customContentRoster` is written by an
-    // ASSIGNMENT and `densityRungRole` through a COMPUTED PROPERTY KEY behind
-    // RUNG_ROLE_FIELD, and OSR's four spellings (property, quoted, shorthand,
-    // token-in-string-literal) see neither. A clause that read only that probe
-    // convicted both as "the writer stopped writing", which is false.
-    for (const row of dialRows) {
-      expect(writeShapesIn(read(row.writer), row.key), `${row.identity}: the text probe must find NOTHING`)
-        .toEqual([]);
-      expect(live.dialGated.has(row.identity), `${row.identity} must be in the measured dialGated set`).toBe(true);
-    }
-    expect(read('src/generators/generateSettlementPipeline.js'))
-      .toContain('finalCtx.settlement.customContentRoster = livingContentRoster;');
-    expect(read('src/generators/density/applyDensityLaw.js')).toContain('[RUNG_ROLE_FIELD]:');
-    // And the evidence the live run recorded names the proof it actually used.
-    for (const row of liveEvidence.filter((entry) => dialRows.some((d) => d.identity === entry.identity))) {
-      expect(row.writeProof).toBe('dialGated membership (executed: present lit, absent dark)');
-    }
-    for (const row of liveEvidence.filter((entry) => !dialRows.some((d) => d.identity === entry.identity))) {
-      expect(row.writeProof).toMatch(/^source text \(/);
-    }
-  });
-
-  test('THE WIDENING IS NARROW: a generation-dial identity that is NOT dial-gated still convicts at clause W', async () => {
-    // The plant the ruling asks for. This row is spelled exactly like a real dial
-    // row — same reason, same door shape, a writer that writes by ASSIGNMENT and so
-    // is invisible to the text probe — and it differs in ONE respect: it is not in
-    // the measured dialGated set. If the widening had swallowed the clause, this
-    // would sail through. It must convict.
-    // ⚠ THE PLANT'S DOOR IS THE DENSITY DIAL, AND IT MOVED THERE ON THE LIGHTING
-    // DAY. It used to name the living-content dial, which is LIT now, so clause
-    // D-dial convicted the plant before clause W could — a plant that dies of the
-    // wrong cause proves nothing about the clause it was built for. The density
-    // dial is still 1 against a register version of 2, so the plant reaches the
-    // clause it is aimed at.
-    const notGated = {
-      identity: 'plantedAssignmentKey on settlement', key: 'plantedAssignmentKey', shape: 'settlement',
-      writer: 'src/generators/generateSettlementPipeline.js', reason: 'dark-by-construction',
-      door: {
-        kind: 'generation-dial', configKey: '_densityLawVersion',
-        dialModule: 'src/domain/density/densityLaw.js',
-        dialExport: 'NEW_SETTLEMENT_DENSITY_LAW_VERSION',
-        litModule: 'src/domain/density/densityLaw.js',
-        litExport: 'REGISTER_VII_DENSITY_LAW_VERSION',
-      },
-      lighting: 'x'.repeat(90), car: '§7 the probe', charter: '§7 the probe',
-    };
-    const readAssignment = (path) => (path === notGated.writer
-      ? 'ctx.settlement.plantedAssignmentKey = value;\n' : read(path));
-    // Its write is invisible to the probe, exactly like the two real rows…
-    expect(writeShapesIn('ctx.settlement.plantedAssignmentKey = value;\n', notGated.key)).toEqual([]);
-    // …and it convicts anyway, because it is not dial-gated.
-    const message = await convicts([notGated], {
-      readSource: readAssignment, dialGated: live.dialGated,
-    });
-    expect(message).toContain('clause W');
-    expect(message).toContain('not in the measured dialGated set');
-    expect(message).toContain('BIT claim');
-    // The ONLY thing that separates it from a row that passes is membership.
-    const admitted = await assertWriterDarkRegisterEvidence([notGated], {
-      root: ROOT,
-      readSource: readAssignment,
-      dialGated: new Set([...live.dialGated, notGated.identity]),
-    });
-    expect(admitted[0].writeProof).toBe('dialGated membership (executed: present lit, absent dark)');
   });
 
   test('THE WIDENING IS REASON-SCOPED: an engine-internal row whose writer writes only by assignment still convicts at clause W', async () => {
@@ -911,46 +840,6 @@ describe('writer-with-no-reader ratchet: the register doors convict what they ca
       dialGated: live.dialGated,
     });
     expect(pendingMessage).toContain('clause W');
-  });
-
-  test('clause S is REASON-AWARE: a dial row is EXPECTED absent from the judged population, and a dial that has ROLLED convicts with its own instruction', async () => {
-    const row = WRITER_DARK_REGISTER.find((entry) => entry.identity === 'densityRungRole on npcs');
-    // Absent is CORRECT for this reason — the old clause S convicted exactly this
-    // and would have convicted every correct dial row.
-    const clean = await assertWriterDarkRegisterEvidence([row], {
-      root: ROOT, dialGated: live.dialGated, verdicts: live.verdicts,
-    });
-    expect(clean[0].identity).toBe(row.identity);
-    expect(live.verdicts.has(row.identity)).toBe(false);
-    // PRESENT and DARK: the dial rolled, and the row must retire rather than be kept.
-    const rolled = await convicts([row], {
-      dialGated: live.dialGated,
-      verdicts: new Map([[row.identity, { verdict: 'DARK', reach: {} }]]),
-    });
-    expect(rolled).toContain('the dial has ROLLED');
-    expect(rolled).toContain('judged normally');
-    // PRESENT and LIT: bank the win instead.
-    const lit = await convicts([row], {
-      dialGated: live.dialGated,
-      verdicts: new Map([[row.identity, { verdict: 'LIT', reach: { 'web-display': 'R' } }]]),
-    });
-    expect(lit).toContain('BANK THE WIN');
-    // And the ratchet's own comparison says the same thing rather than reporting
-    // every correct dial row as a win to bank.
-    expect(compareDark(liveView, baseline).struck).toEqual([]);
-  });
-
-  test('a generation-dial row with NO measured dialGated set convicts — an absent measurement is not an acquittal', async () => {
-    // The row moved from the living-content pair member to the density one when
-    // the former was retired at the lighting; the clause under test is the same.
-    const row = WRITER_DARK_REGISTER.find((entry) => entry.identity === 'densityRungRole on npcs');
-    const message = await convicts([row], { verdicts: live.verdicts });
-    expect(message).toContain('clause W');
-    expect(message).toContain('no measured dialGated set was supplied');
-    expect(message).toContain('not an acquittal');
-    // The doors carry the measurement themselves, which is why the live run passes.
-    expect(live.dialGated, 'measure() must build the dial corpora for the doors').toBeInstanceOf(Set);
-    expect(live.dialGated.size).toBe(29);
   });
 
   test('a second --genesis over an existing baseline is refused', async () => {
@@ -1263,9 +1152,10 @@ describe('writer-with-no-reader ratchet: the lit-dial arm', () => {
     // other 29, and the frozen roster above is what guards them meanwhile.
     const dialRows = WRITER_DARK_REGISTER.filter((row) => row.door?.kind === 'generation-dial');
     // One row since the living-content dial was lit and its row retired with its
-    // premise; the direction this arm guards is unchanged.
-    expect(dialRows.map((row) => row.identity).sort())
-      .toEqual(['densityRungRole on npcs']);
+    // premise; NONE since 2026-11-05 (LANDING-5, the cloud chair's ruling 2 on LANDING-4's report, ODQ §934.105), when the
+    // density dial was lit too and `densityRungRole on npcs` retired with its premise. The empty set is stated, and
+    // the frozen roster above (where both density identities are still dial-gated) is what guards the direction now.
+    expect(dialRows.map((row) => row.identity).sort()).toEqual([]);
     for (const row of dialRows) expect(gated.has(row.identity)).toBe(true);
     // ⭐ AND THE RETIRED IDENTITY IS STILL DIAL-GATED, WHICH IS WHY THE FROZEN
     // ROSTER ABOVE IS THE THING GUARDING IT NOW. Retiring a register row does not
@@ -1288,53 +1178,4 @@ describe('writer-with-no-reader ratchet: the lit-dial arm', () => {
     expect(controlShapes.settlement.rows).toBe(16);
   });
 
-  test('a lit-dial identity that gains a surface reader is convicted as struck, not silently lit', async () => {
-    // The row shape a widened clause W would admit, driven end to end against the
-    // real doors: the dial is dark (so D-dial passes) and the identity has gained a
-    // reader (so clause S convicts with the strike instruction).
-    // ⚠ THE DOOR IS THE DENSITY DIAL SINCE 2026-09-08, for the reason the sibling
-    // plant above gives: clause S is only reachable while D-dial passes, and the
-    // living-content dial no longer passes it. The key and the writer stay the
-    // living-content ones, because what this arm is about is a DARK row that gains
-    // a surface reader, not about which dial guards it.
-    const dialRow = {
-      identity: 'customContentRoster on settlement', key: 'customContentRoster', shape: 'settlement',
-      writer: 'src/generators/generateSettlementPipeline.js', reason: 'dark-by-construction',
-      door: {
-        kind: 'generation-dial', configKey: '_densityLawVersion',
-        dialModule: 'src/domain/density/densityLaw.js',
-        dialExport: 'NEW_SETTLEMENT_DENSITY_LAW_VERSION',
-        litModule: 'src/domain/density/densityLaw.js',
-        litExport: 'REGISTER_VII_DENSITY_LAW_VERSION',
-      },
-      lighting: 'x'.repeat(90), car: '§7 the probe', charter: '§866 the MAT pick',
-    };
-    let message = null;
-    try {
-      await assertWriterDarkRegisterEvidence([dialRow], {
-        root: ROOT,
-        readSource: (path) => (path === dialRow.writer
-          ? 'const settlement = { customContentRoster: roster };\n' : read(path)),
-        verdicts: new Map([[dialRow.identity, { verdict: 'LIT', reach: { 'web-display': 'R' } }]]),
-        dialGated: gated,
-      });
-    } catch (error) { message = error.message; }
-    expect(message).toContain('BANK THE WIN');
-    expect(message).toContain('strike the row');
-    // And with the dials EQUAL the same row dies at D-dial instead, before clause S.
-    let rolled = null;
-    try {
-      await assertWriterDarkRegisterEvidence([dialRow], {
-        root: ROOT,
-        readSource: (path) => (path === dialRow.writer
-          ? 'const settlement = { customContentRoster: roster };\n' : read(path)),
-        importModule: async () => ({
-          NEW_SETTLEMENT_DENSITY_LAW_VERSION: 2, REGISTER_VII_DENSITY_LAW_VERSION: 2,
-        }),
-        dialGated: gated,
-      });
-    } catch (error) { rolled = error.message; }
-    expect(rolled).toContain('D-dial');
-    expect(rolled).toContain('already EQUALS');
-  });
 });

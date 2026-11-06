@@ -39,7 +39,7 @@ describe('the self-vouch line follows the receipt\'s battery judgment', () => {
     expect(judgment.findings.map((f) => f.path)).toEqual(expect.arrayContaining([
       'battery.food-words', 'battery.defense-words', 'battery.tier-noun',
     ]));
-    expect(verdict(settlement)).not.toMatch(VOUCH);
+    expect(verdict(settlement)).not.toMatch(VOUCH); // anchored: the next line pins the live contradiction verdict
     expect(verdict(settlement)).toMatch(/cannot all be true/);
   });
 
@@ -61,6 +61,7 @@ describe('the self-vouch line follows the receipt\'s battery judgment', () => {
           .filter((entry) => entry.id !== 'record_coherence_battery'),
       },
     };
-    expect(verdict(older)).not.toMatch(VOUCH);
+    expect(typeof verdict(older)).toBe('string');
+    expect(verdict(older)).not.toMatch(VOUCH); // anchored: the line above pins the verdict read; an older receipt prints no vouch line at all (empty), the claim itself
   });
 });

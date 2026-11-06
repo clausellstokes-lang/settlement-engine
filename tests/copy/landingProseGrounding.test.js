@@ -109,8 +109,13 @@ describe('the landing prose quotes the fixture it is about', () => {
 
     const body = landing.realm.body2.toLowerCase();
     // The two weeks the sentence calls out BY NUMBER.
+    // 2026-11-04 (REGISTERS-6 ruling E3): [10, 12] -> [8, 10]. The coherence window's world (FOOD-2 re-timed
+    // the advance at lf-033) moved the routes to week 8, before the crime at week 10; body2 was re-grounded.
     const weeks = advance.map((entry) => Number(String(entry.week).replace(/\D/g, '')));
-    for (const spoken of [10, 12]) {
+    // 2026-11-04 (LANDING-2, the rung-1 landing): [8, 10] -> [8, 9]. The rung-1 window's town (population 82)
+    // derives a new timeline at lf-033 (the reforms at week 8, the Elder Council's capture at week 9); body2 was
+    // re-grounded.
+    for (const spoken of [8, 9]) {
       expect(
         weeks,
         `the prose calls out week ${spoken}, which the fixture's advance timeline no longer contains`
@@ -129,11 +134,12 @@ describe('the landing prose quotes the fixture it is about', () => {
     const headlines = advance.map((entry) => `${entry.headline} ${entry.text}`.toLowerCase()).join(' | ');
     // 2026-10-02, the Voice Program (ODQ §934.88): the engine now writes each beat as a deed ("goes onto a war footing",
     // "Crime takes hold", "trade routes break down"), so the pairs bind the deed words on both sides.
+    // 2026-11-04 (LANDING-2): re-grounded with body2 on the rung-1 window's timeline; the pairs follow the beats.
     for (const [inProse, inFixture] of [
-      ['creed', 'creed'],
-      ['war footing', 'war footing'],
-      ['fracture', 'fracture'],
-      ['crime', 'crime'],
+      ['open challenge', 'open challenge'],
+      ['raider pressure', 'raider pressure'],
+      ['reforms', 'reforms'],
+      ['captured an institution', 'captures an institution'],
       ['trade routes', 'trade routes'],
     ]) {
       expect(
@@ -157,19 +163,20 @@ describe('the landing prose quotes the fixture it is about', () => {
     }
     expect(body, 'the road clause lost its receipt').toContain('road');
     expect(receipts.route, 'the fixture town is no longer road-reached').toContain('road');
-    expect(body, 'the inn clause lost its receipt').toContain('inn');
-    expect(receipts.institution, 'the fixture institution is no longer the travellers\' inn').toContain('inn');
+    // 2026-11-04 (LANDING-2): the travellers' inn -> the blacksmith, re-grounded with forge.body.
+    expect(body, 'the smith clause lost its receipt').toContain('smith');
+    expect(receipts.institution, 'the fixture institution is no longer the blacksmith').toContain('blacksmith');
   });
 
   it('the 02 body names the four receipts the card shows', () => {
     const body = landing.voice.body.toLowerCase();
     expect(body).toContain(fixture.town.name.toLowerCase());
     // The conflict receipt is bound by BOTH its parties, the other three by their nouns.
-    for (const word of ['elder council', 'craft guilds', 'road', 'timber', 'inn']) {
+    for (const word of ['elder council', 'religious authorities', 'road', 'timber', 'blacksmith']) {
       expect(body, `the voice body stopped naming the "${word}" receipt`).toContain(word);
     }
     const receipts = fixture.voice.receipts.map((r) => r.text.toLowerCase()).join(' | ');
-    for (const word of ['elder council', 'craft guilds', 'road', 'timber', 'inn']) {
+    for (const word of ['elder council', 'religious authorities', 'road', 'timber', 'blacksmith']) {
       expect(receipts, `the fixture no longer carries a "${word}" receipt for the voice card`).toContain(word);
     }
     // The card prints FOUR receipt lines and the sentence says so. It printed three from the

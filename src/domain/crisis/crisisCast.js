@@ -35,6 +35,7 @@ import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { factsOf } from '../facts/factsOf.js';
 import { resolveSibling } from '../facts/drawDeclared.js';
 import { CAST_EDIT_PATH, CAST_EDIT_SEPARATOR } from '../userEditLines.js';
+import { nativeSemanticName } from '../content/customContentSemanticAuthority.js';
 
 // ── The tuning (the owner's dials; docs/DESIGN_CRISIS_TAB.md "Open for the owner's veto") ──
 
@@ -563,8 +564,13 @@ export function deriveLevers(s, kind) {
   // The STANDING roster only (the ruin filter's one door): a calamity's ruin, an economic or
   // magic close, an abolition, an abandonment or a demotion leaves the row on the roster,
   // stamped, and a closed house holds no lever.
+  // ⛔ A CUSTOM HOUSE IS NEVER A LEVER BY ITS NAME. The kind's house table is a native
+  // catalog-name heuristic; a materialized custom institution's `name` is presentation only
+  // (domain/content/customContentSemanticAuthority.js), so it is read through
+  // `nativeSemanticName` exactly as the services generator reads it: a bespoke hall called
+  // "State Granary" grants no famine lever.
   const houses = liveInstitutions(s)
-    .filter((i) => !!i && lever.house.test(str(i.name)));
+    .filter((i) => !!i && lever.house.test(nativeSemanticName(i)));
   const holders = officeHoldersOf(s, lever.office);
   const seen = new Set();
   /** @type {CastLever[]} */
@@ -717,7 +723,8 @@ export function defenderCandidates(s) {
   }
   // The house fallback credits a house with the town's defence, so it reads the STANDING roster
   // only (`liveInstitutions`): a closed garrison defends nothing.
-  for (const i of liveInstitutions(s).filter((x) => /garrison|barracks|watch|militia|wall|guard/i.test(str(x?.name)))) {
+  // A custom house's name is presentation only (`nativeSemanticName`, as in `deriveLevers`).
+  for (const i of liveInstitutions(s).filter((x) => /garrison|barracks|watch|militia|wall|guard/i.test(nativeSemanticName(x)))) {
     out.push({ role: 'defender', kind: 'institution', id: str(i.name), name: str(i.name), reason: CAST_REASONS.defenderInstitution, temporary: false });
   }
   return { candidates: out, absent: CAST_ABSENCES.noMilitary };

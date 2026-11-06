@@ -23,10 +23,12 @@ describe('a fishing row on water is a fish source', () => {
     const fishmonger = s.institutions.find((/** @type {any} */ x) => x.name === 'Fishmonger');
     expect(foodWordsFindings(s, fishmonger.desc)).toEqual([]);
   });
-  it.each([116, 152])('soak1k-%i: an inland Fish market is no catch', (i) => {
-    const { settlement: s, config } = birth(i);
-    expect(waterAccessKind(config.terrainType, config.tradeRouteAccess)).toBe('none');
-    expect(s.institutions.some((/** @type {any} */ x) => x.name === 'Fish market')).toBe(true);
-    expect(s.economicState.foodSecurity.foodRecord.foodSources).not.toContain('fish');
+  it('soak1k-116 and soak1k-152: an inland Fish market is no catch', () => {
+    for (const i of [116, 152]) {
+      const { settlement: s, config } = birth(i);
+      expect(waterAccessKind(config.terrainType, config.tradeRouteAccess), `soak1k-${i} is inland`).toBe('none');
+      expect(s.institutions.some((/** @type {any} */ x) => x.name === 'Fish market'), `soak1k-${i} keeps a Fish market`).toBe(true);
+      expect(s.economicState.foodSecurity.foodRecord.foodSources, `soak1k-${i}'s record holds no fish`).not.toContain('fish'); // anchored: the line above pins the Fish market, the row that used to write 'fish' here
+    }
   });
 });

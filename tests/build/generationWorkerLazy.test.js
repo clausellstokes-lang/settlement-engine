@@ -297,7 +297,48 @@ const SENTINEL = 'settlementforge:generation:worker-v1';
 // (generation.worker-DumDp2-f.js), 9e66e658c 1,480,698 B (generation.worker-XUebZ5Kh.js), userEdits.js 800 -> 808 B
 // and no other module moved. Buying eight bytes back by golfing unrelated code was refused as worse engineering than
 // recording the truth. Placed beside the constant so the cited lines above do not move. MONOTONE-DOWN from here.
-export const WORKER_BUNDLE_CEILING_BYTES = 1480698;
+// 1,480,698 -> 1,491,801 (2026-11-04, the coherence window's composed tip, REGISTERS-5 door 12): A RISE OF 11,103 B, THE
+// CHAIR'S RULING (ODQ §934.104, recorded in briefs/REGISTERS.md item 12), VETOABLE BY THE OWNER. Every byte is new feature
+// code from the window. Nothing in it is dead or duplicated; the one pre-existing ~150 B duplicate in foodBalance.js is left
+// alone. MEASURED by a fresh `vite build` of a git archive at each first-parent compose point; the worker bytes are the
+// file's size:
+//   c0ef42c13 base 1,480,698 -> 1169b3cd5 1,486,662 (+5,964, per FIRSTPAINT's bisect: FOOD +4,025 over its two composes,
+//     DEFENSE-2 +1,404, the SIZE compose +462, MAGIC +46, WIRING-1 +21, the chair's X-52 wiring +6);
+//   1169b3cd5 = FIRSTPAINT 7469cd0a6 = SOAK-1000 25653a3f9 = TIPFIX 4edc4917f = 1,486,662 (0);
+//   the DOORS compose 8cd65978e 1,491,801 (+5,139). Its per-module minified pricing sums to +5,654:
+//     - SIZE ruling 2 (5eda29d5c, 8c76cf743), the tier noun in generated story text: historyGenerator.js,
+//       narrativeText.js and arrivalScene.js import speakTierNoun and tierNounFor. That brings stateProseKernel.js
+//       (+4,481) and weaveBlock.js (+96) into the worker, plus +690, +117 and +55 in the three importers.
+//     - SIZE-3 (43f9c0dcc), the small-place guild needs a real market: rulingStructure.js imports
+//       hasMarketInstitution, so viability.js +306 and rulingStructure.js -91.
+//   Nothing moves after the DOORS compose (60ae4c909 and the lane tip 80d485c7e: 1,491,801, generation.worker-BV-oj6mh.js).
+// The ceiling is recorded AT the measured figure, never above it. MONOTONE-DOWN from here.
+// 1,491,801 -> 1,491,837 (2026-11-04, the landing of PR #72, door 12 taken again by the chair, ODQ §934.104): A RISE OF
+// 36 B, VETOABLE BY THE OWNER. The one mover is REGISTERS-7 F5 (fff75ce35): factionRoles.js :: ensureFactionStructuralNpcs
+// now skips a seat whose ref is in the DM layer's `dm:` namespace (a DM-added faction is the DM's row; the appender had
+// been seating two placeholder office-holders for it). The namespace is spelled as a literal because importing
+// dmLayer.js :: DM_ID_NS pulls the editor module into the first-paint closure (whose raw budget has no margin); the
+// shared leaf module for DM_ID_NS is filed for the next window. MEASURED by a fresh `vite build` at the composed tip
+// abf9338af (generation.worker-DRWBjLQU.js, 1,491,837 B) against a git archive of the lane's previous commit 2e95daeb8.
+// MONOTONE-DOWN from here.
+// 1,491,837 -> 1,573,556 (2026-11-04, THE RUNG-1 LANDING, door 12 taken by the landing seat under the chair's brief LANDING-1
+// item 11, "re-record ONLY at the measured figure with every byte attributed to a lane"): A RISE OF 81,719 B, VETOABLE BY
+// THE OWNER. MEASURED by a fresh `vite build` of a git archive at EVERY src-moving first-parent step of the rung-1 window
+// (39038801b..bf263a78d), the worker bytes being the file's size; the window base 39038801b builds 1,491,801 and the
+// window tip 54daafda3 1,573,520, and the merge with the integration tip adds only its own attributed +36:
+//   CRISIS compose d3e072368 +131,205 (crisis3 9738e6d21 -132) · SELF-VOUCH compose 0be13b5cb -73,482 ·
+//   F1 defence words 5e9ffb220 +3,862 · F10 walls word 54daafda3 +3,061 · x46-3 budget 90dc22f18 +2,726 ·
+//   terrain-pools ac09ea83b +2,421 · F4 crime signal ba9fde402 +1,788 · rung1-truth ff4448d2e +1,737 (final 844acaccc -20) ·
+//   F6 budget floor 6d84aa834 +1,385 · tier-noun-pools a9982e3b9 +1,211 · F3 food words db8ce5da8 +1,137 ·
+//   Register VII lit 3420d01e3 +646 · F5 instruments 7e28a6331 +605 (unit 6 +8) · R6 place-not-tier 6129c300d +555 ·
+//   the receipt's kind 7 cdc949867 +551 · food-exports 63bb72785 +397 · x46-1b 79c442330 +344, final fb0341b93 +395 ·
+//   x46-4 c7d068169 +373 · rung1-pins 37b1e746d +309, final 11467ed57 +32 · rung1-n1 513e1bf11 +230, final 4fb9cc5e6 +274 ·
+//   x46-train 1264a8152 +100 · x46-2 d4bf6431c -15 · T1/T2 fe56bddd4 +10 · F2 272af44f3 +6 (with the test-only steps
+//   before it) · every other step 0 (soak2, hooks-under-stress, quarters-off, services-once, faith-pools, F7, F8, F9,
+//   READER-INSTRUMENTS, the docs and test steps). The sum closes exactly: 1,491,801 + 81,719 = 1,573,520, and the merge's +36 makes 1,573,556.
+//   The landed tip measures 1,573,556 B (generation.worker-BNd8BSQT.js). The ceiling is recorded AT the measured figure.
+// MONOTONE-DOWN from here.
+export const WORKER_BUNDLE_CEILING_BYTES = 1573556;
 
 const source = (path) => readFileSync(join(ROOT, path), 'utf8');
 
@@ -615,7 +656,7 @@ describe.runIf(DIST_EXISTS)('generation worker — production boundary', () => {
     expect(
       bytes,
       `generation worker bundle ${workers[0]} is ${bytes} B; the ceiling is `
-      + `${WORKER_BUNDLE_CEILING_BYTES} B (re-recorded at the measured X-45 figure by the chair's ruling, 2026-11-02). `
+      + `${WORKER_BUNDLE_CEILING_BYTES} B (re-recorded at the measured figure by the chair's ruling, 2026-11-04, ODQ §934.104). `
       + 'A RISE IS NEVER A LANE\'S EDIT: buy the bytes back, or take the ruling.',
     ).toBeLessThanOrEqual(WORKER_BUNDLE_CEILING_BYTES);
   });

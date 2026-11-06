@@ -1043,10 +1043,19 @@ describe('custom-content presentation-only claim neutrality', () => {
       terrainOverride: 'plains',
       tradeRouteAccess: 'road',
       monsterThreat: 'civilized',
-      // This contract needs a real native Baked goods owner. Terrain describes
-      // production potential, not an export; provide the chain's native grain
-      // input explicitly so the collision test cannot pass or fail with a
-      // resource roll unrelated to label ownership.
+      // This contract needs a real native owner of the colliding label. Terrain
+      // describes production potential, not an export; provide the chain's
+      // native grain input explicitly so the collision test cannot pass or fail
+      // with a resource roll unrelated to label ownership.
+      // ⭐ RE-KEYED BY IDENTITY (LANDING-7 lane D, 2026-11-06): the native owner
+      // was 'Milled flour'. F3 FOOD-WORDS unit 2b (1111bce79, composed at
+      // db8ce5da8; domain/foodSurplus.js :: ownFoodGoodsHeldByFoodRecord) offers
+      // an own-food PROCESSED good only on a food surplus, and the reference
+      // pack's authored food impact (+20% daily need) leaves this town growing
+      // 92% of what it eats — so bread is rightly withheld, and no town config
+      // holds both a surplus and the pack's town-tier custom export. 'Milled
+      // flour' is the same grain chain's native good that FOOD-EXPORTS keeps
+      // without a surplus; every assertion below is the same claim on it.
       nearbyResourcesRandom: false,
       nearbyResources: ['grain_fields'],
     };
@@ -1059,10 +1068,10 @@ describe('custom-content presentation-only claim neutrality', () => {
       },
     );
     const control = generateTradeCase('Quiet Custom Good');
-    const collision = generateTradeCase('Baked goods');
+    const collision = generateTradeCase('Milled flour');
 
     expect(control.economicState.primaryExports).toEqual(
-      expect.arrayContaining(['Baked goods', 'Weapons & armour']),
+      expect.arrayContaining(['Milled flour', 'Weapons & armour']),
     );
     expect(control.economicState.primaryExports)
       .not.toContain('Quiet Custom Good');
@@ -1085,15 +1094,15 @@ describe('custom-content presentation-only claim neutrality', () => {
     )).toBe(true);
 
     expect(collision.economicState.primaryExports).toEqual(
-      expect.arrayContaining(['Baked goods', 'Weapons & armour']),
+      expect.arrayContaining(['Milled flour', 'Weapons & armour']),
     );
     expect(collision.economicState.customCategoryExports?.['Weapons & armour'])
-      .toContain('Baked goods');
+      .toContain('Milled flour');
     expect(collision.economicState.nativeTradeLabels?.exports)
-      .toContain('Baked goods');
+      .toContain('Milled flour');
     expect(collision.economicState.customTradeEndpoints?.exports)
       .toContainEqual(expect.objectContaining({
-        label: 'Baked goods',
+        label: 'Milled flour',
         refId: 'custom:reference-aurora-field-rations',
         customDefinitionCategory: 'tradeGoods',
         customDefinitionId:
@@ -1102,11 +1111,11 @@ describe('custom-content presentation-only claim neutrality', () => {
     expect(collision.economicState.customTradeLabels?.exports)
       .toContain('Weapons & armour');
     expect(collision.economicState.customTradeLabels?.exports)
-      .not.toContain('Baked goods');
+      .not.toContain('Milled flour');
     expect(tradeLabelOwnership(
       collision.economicState,
       'exports',
-      'Baked goods',
+      'Milled flour',
     )).toMatchObject({
       custom: true,
       native: true,

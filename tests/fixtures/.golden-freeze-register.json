@@ -205,11 +205,11 @@
       "suite": "tests/domain/townCartographyCalibration.test.js",
       "recordEnv": "UPDATE_CARTOGRAPHY_CALIBRATION",
       "proofForm": null,
-      "sha256": "847826c278daf86d2d5c48e8a8f5918e02cf67e6c4775e534e714fd71b0ac97c",
+      "sha256": "8b9f334a578b965bce1a19635ee82ae7a0b2e9b88e7fb7af4e7449e475265200",
       "rows": 504,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§934.104 of docs/OWNER_DECISION_QUEUE.md (THE COHERENCE AND SCALE WINDOW, recorded by the cloud chair, session 019yED1Rc3svZxTNcEJVRr77)",
+      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (RUNG 1 OF THE SOAK LADDER, recorded by the cloud chair, session 019yED1Rc3svZxTNcEJVRr77)",
       "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON."
     },
     {
@@ -244,11 +244,11 @@
       "suite": "tests/property/corruptionWebDormancyGolden.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": "fa351b5d2386375b42cc032865f4b38d24fa20aca5e5e271204ceebd55c696bc",
+      "sha256": "892935c018df9b63b80b65d515025d89dab912d340e1ba9ddb8e99640d3ae889",
       "rows": 3,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§901",
+      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (RUNG 1 OF THE SOAK LADDER, recorded by the cloud chair, session 019yED1Rc3svZxTNcEJVRr77)",
       "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON."
     },
     {
@@ -257,11 +257,11 @@
       "suite": "tests/property/demographicsLifecycleGolden.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": "62329c24a314fc5ec5e1fd5cf9cef57c974f1a82cb2b1971a40121b9a3b69ee3",
+      "sha256": "03ab9c86e89466a8ac877ef430ecbe349a07d699ed6ffeeacb65668157ba731f",
       "rows": 4,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§901",
+      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (RUNG 1 OF THE SOAK LADDER; the owner's delegation of 2026-11-06 to the cloud chair, session 01FE9mEvGxnFx6WTBkEC6ie9)",
       "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON."
     },
     {
@@ -288,11 +288,11 @@
         "PRE_COUPLING_CORPUS_SHA"
       ],
       "frozenConstants": null,
-      "sha256": "437c3d8fed02fa47d2157e3dcf1340c19fd258b6c94b668808ee24040a4ad935",
+      "sha256": "5ba90965ffc771a88b21d9b3ca306f08e4e44de96c15a4d734b31634564f9f0a",
       "rows": null,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§934.104 of docs/OWNER_DECISION_QUEUE.md (THE COHERENCE AND SCALE WINDOW, recorded by the cloud chair, session 019yED1Rc3svZxTNcEJVRr77)",
+      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (RUNG 1 OF THE SOAK LADDER, recorded by the cloud chair, session 019yED1Rc3svZxTNcEJVRr77)",
       "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON.",
       "governance": "Charter §1.1 row 15 / §1.1a. Its header carries a hand-maintained enumeration of chartered movement windows which the freeze act retires into one sentence. Implementation-leave: the fence itself is not rebuilt."
     },
@@ -342,11 +342,11 @@
       "suite": "tests/property/generatorGoldenMaster.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": "4c42885b932c67830ac71fb65cef623311a889718f9a648cdaf40870681aa37c",
+      "sha256": "26a02855273d9946e18da47fee95c31e0caab81267ff71c646737c6d5357cc15",
       "rows": 525,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§934.104 of docs/OWNER_DECISION_QUEUE.md (THE COHERENCE AND SCALE WINDOW, recorded by the cloud chair, session 019yED1Rc3svZxTNcEJVRr77)",
+      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (RUNG 1 OF THE SOAK LADDER, recorded by the cloud chair, session 019yED1Rc3svZxTNcEJVRr77)",
       "note": "RE-RECORDED THROUGH THE SIGNED DOOR at the genesis freeze 2026-09-16 (owner: 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); 525 rows moved since the em-dash wave e3f6029b2 (banked §901); the key set unchanged."
     },
     {
@@ -368,11 +368,11 @@
       "suite": "tests/property/informationStatecraftDormancyGolden.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": "8fe9ad93d1145d4e4b7b9c4df245262fe522feebbab7daf4c39815a1b692d7b0",
+      "sha256": "d6871f051360646dc10bf2a1ab2fdbb5ac5748c8f4d6ef6327722755bb9131ae",
       "rows": 3,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§901",
+      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (RUNG 1 OF THE SOAK LADDER, recorded by the cloud chair, session 019yED1Rc3svZxTNcEJVRr77)",
       "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON."
     },
     {
@@ -381,11 +381,11 @@
       "suite": "tests/property/intelTradeDormancyGolden.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": "c1419cafb27ad79bc11a20f90c885edfb658e96a2a19ccdb9b875d48ad817c29",
+      "sha256": "0d7dc8cc3ef66b4b2000fd7c3b2a165abe7292d412fa7dc7e01041949bcb7a0b",
       "rows": 3,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§934.104 of docs/OWNER_DECISION_QUEUE.md (THE COHERENCE AND SCALE WINDOW, recorded by the cloud chair, session 019yED1Rc3svZxTNcEJVRr77)",
+      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (RUNG 1 OF THE SOAK LADDER, recorded by the cloud chair, session 019yED1Rc3svZxTNcEJVRr77)",
       "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON."
     },
     {
@@ -407,11 +407,11 @@
       "suite": "tests/property/interventionDormancyGolden.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": "bf5b0513793904ead721ba702011d6dae52fb9f4edd8e46ac43cda51662d921e",
+      "sha256": "6f881955d2383f4c47923a1a959bb9ecdd82de0861069a05996a6fe3aac2feec",
       "rows": 3,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§901",
+      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (RUNG 1 OF THE SOAK LADDER, recorded by the cloud chair, session 019yED1Rc3svZxTNcEJVRr77)",
       "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON."
     },
     {
@@ -433,11 +433,11 @@
       "suite": "tests/property/momentumDormancyGolden.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": "71d7ebbe1e41035d0a706c4e67cdbeb91067e51894ad6ff4edaa244ed7de7e66",
+      "sha256": "a534e409490ed1038c774bdc5e22d32fc13bb356c0edda35a5487db59e6062c4",
       "rows": 3,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§934.104 of docs/OWNER_DECISION_QUEUE.md (THE COHERENCE AND SCALE WINDOW, recorded by the cloud chair, session 019yED1Rc3svZxTNcEJVRr77)",
+      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (RUNG 1 OF THE SOAK LADDER, recorded by the cloud chair, session 019yED1Rc3svZxTNcEJVRr77)",
       "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON."
     },
     {
@@ -446,11 +446,11 @@
       "suite": "tests/property/npcCredibilityDormancyGolden.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": "c8d6a126e154e2561d1a8c0a6e405910f04b70630d271b6d7f536030d3fdd866",
+      "sha256": "4f960ea02fae2f09edd7ce98d2054c88f3330932887c9d6d290d371a80be9609",
       "rows": 3,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§934.89 (FP-46: the chair signs the chain's golden re-records by delegation)",
+      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (RUNG 1 OF THE SOAK LADDER, recorded by the cloud chair, session 019yED1Rc3svZxTNcEJVRr77)",
       "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON."
     },
     {
@@ -485,11 +485,11 @@
       "suite": "tests/property/npcLedgerDormancyGolden.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": "ca58422d8f46a8504aaa0d8a4315a2b4141e20596f48ac1a93f572fb9f6fe1e8",
+      "sha256": "ebcb187d9b80ee91c3257033c0f22a004fffe009b6dfeeb6a53f3ffc6c29f587",
       "rows": 2,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§901",
+      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (RUNG 1 OF THE SOAK LADDER, recorded by the cloud chair, session 019yED1Rc3svZxTNcEJVRr77)",
       "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON."
     },
     {
@@ -498,11 +498,11 @@
       "suite": "tests/pdf/goldenViewModel.test.js",
       "recordEnv": null,
       "proofForm": null,
-      "sha256": "fba7e35f337d590bc7dd5940e959bd4965974a03c2a6a208400fc01954f145df",
+      "sha256": "4db1770ecf6aa63ca35dd0e5229f6ca9bf4fff5acb75b60ec86d066614723684",
       "rows": null,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§934.104 of docs/OWNER_DECISION_QUEUE.md (THE COHERENCE AND SCALE WINDOW, recorded by the cloud chair, session 019yED1Rc3svZxTNcEJVRr77)",
+      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (RUNG 1 OF THE SOAK LADDER, recorded by the cloud chair, session 019yED1Rc3svZxTNcEJVRr77)",
       "governance": "THE WRITER IS VITEST ITSELF, NOT REPO SOURCE. This surface is a vitest toMatchSnapshot() file; its lawful re-record path is `vitest -u`. That path carries no env spelling and no writeFileSync, so no source scan can see it and THE DOOR CANNOT REFUSE IT. The walker can only CONVICT the result after the fact via the byte arm. This asymmetry is real and is written here rather than discovered at the freeze: for this one surface the machinery detects but does not prevent. Ruling on whether to convert it to a door-written manifest belongs to the freeze act.",
       "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON. Charter §1.1 row 6. The only __snapshots__ file in the estate."
     },
@@ -512,11 +512,11 @@
       "suite": "tests/property/peaceCausalDormancyGolden.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": "0ce1cdc734407259f9324bfd04ffa1d5364dc2053ee637a46a27b8b155fe93a5",
+      "sha256": "84be7e445eed7fe419903ba762371fcc35e20e7402d4ad7a2e9063146a8e051c",
       "rows": 3,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§901",
+      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (RUNG 1 OF THE SOAK LADDER, recorded by the cloud chair, session 019yED1Rc3svZxTNcEJVRr77)",
       "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON."
     },
     {
@@ -525,11 +525,11 @@
       "suite": "tests/property/provenanceDormancyGolden.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": "10432b43fe941bb496a0e01c99922e7dbc1569f8932e9864333f0a03a9d20c70",
+      "sha256": "4dbdcbef783b1c42388d10ecba5d45a4ef60bf7fec8a90a180e45e759fc02fea",
       "rows": 3,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§901",
+      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (RUNG 1 OF THE SOAK LADDER, recorded by the cloud chair, session 019yED1Rc3svZxTNcEJVRr77)",
       "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON."
     },
     {
@@ -629,11 +629,11 @@
       "suite": "tests/property/settlementPoliticsDormancyGolden.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": "b5540cf47a38d97e8fb6f5a63c59722834c8469226b1db84543ab8f64e77ae1c",
+      "sha256": "ab0703e58da1f229a0254383b30329d03fc0af28fe400ef9a2a069ec692a7772",
       "rows": 3,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§901",
+      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (RUNG 1 OF THE SOAK LADDER, recorded by the cloud chair, session 019yED1Rc3svZxTNcEJVRr77)",
       "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON."
     },
     {
@@ -668,11 +668,11 @@
       "suite": "tests/property/supplyWebWarfareDormancyGolden.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": "82966f36f634caef331a0bb2893e8dd8b82e5d187478a0c0f394c5409a31dec8",
+      "sha256": "79890a9e55b406da2391791e3d820f9703a425c66900ea4a87c98aa8cd0a074f",
       "rows": 3,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§901",
+      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (RUNG 1 OF THE SOAK LADDER, recorded by the cloud chair, session 019yED1Rc3svZxTNcEJVRr77)",
       "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON."
     },
     {
@@ -824,11 +824,11 @@
       "suite": "tests/property/dossierProseManifest.test.js",
       "recordEnv": null,
       "proofForm": null,
-      "sha256": "95ef44394f228a5878861f775e213345b88884c14c82869e92a731ecf76fc53f",
+      "sha256": "d43a3ae263acd4a5606a4e2be1e0aea55859ffd61a424bb7d87fb6fae130dece",
       "rows": 2,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§934.104 of docs/OWNER_DECISION_QUEUE.md (THE COHERENCE AND SCALE WINDOW, recorded by the cloud chair, session 019yED1Rc3svZxTNcEJVRr77)",
+      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (RUNG 1 OF THE SOAK LADDER, recorded by the cloud chair, session 019yED1Rc3svZxTNcEJVRr77)",
       "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON. ENROLLED, NOT RECORDED, AND THE DIFFERENCE IS THE WHOLE ROW. The chair's enroll record, verbatim: \"ENROLL dossier-prose-manifest — chair Fable 5.1, 2026-09-08, ARCH-COMPOSED-PROSE-v2 §3.7 / MEASURE car 1: a new golden carrier for the dossier's composed text (DRIFT corpus 525 × 2 audiences); the generator golden master cannot see a dossier sentence; every later change to this carrier is a declared shift on the SHIFT REGISTER, signed per cell class by the classifier's print.\" WHY THE RECORD IS QUOTED HERE AND NOT CUT AS A FILE, and why no capture arm runs through the door today: this register is UNFROZEN, and two of its own arms refuse both acts. goldenFreeze.walker.test.js asserts that while frozenAt is null NO surface row carries a sha256, rows or ownerRow — and recordGolden writes exactly those three in the same act that writes the fixture — and it asserts that docs/shift-records/ holds no cut record at all before the freeze act's own genesis record. A capture arm routed through the door today would therefore poison this register and red two green arms. This row follows the preset-lighting-witness precedent verbatim in shape: tests/helpers/dossierManifest.js is the SINGLE WRITER of the measurement and is imported by the suite, by scripts/prose-manifest-cells.mjs and by scripts/prose-duplicate-units.mjs, so the recorded world and the asserted world cannot diverge; the fixture bytes are exactly manifestBytes(driftRun().rows) and the suite asserts that identity by sha on every run. The path is deliberately named `-golden` so arm 2's tests/fixtures/*golden*.json glob claims it: a carrier named outside that glob would be enrolled only by this lane's good faith, and a later deletion of this row would red nothing. Enrolled by lane MEASURE car 1 (seat Opus 5 — Fable-unvalidated) in the same commit that minted the surface. When the freeze act arms this register, its re-record path becomes the door like every other."
     },
     {
@@ -837,11 +837,11 @@
       "suite": "tests/simulation/presetLightingWitness.test.js",
       "recordEnv": null,
       "proofForm": null,
-      "sha256": "5970658771e798bac3e2c8011072eecb7ac27a034ff3753e626d8bb02cc7a083",
+      "sha256": "c22c5c7fc1039a78613298f49b82e58a85ece95efaa3f6b66ef5488fb8c254a6",
       "rows": 15,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§934.104 of docs/OWNER_DECISION_QUEUE.md (THE COHERENCE AND SCALE WINDOW, recorded by the cloud chair, session 019yED1Rc3svZxTNcEJVRr77)",
+      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (RUNG 1 OF THE SOAK LADDER, recorded by the cloud chair, session 019yED1Rc3svZxTNcEJVRr77)",
       "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON. NO CAPTURE ARM EXISTS, AND THAT IS THE POINT. This is the estate's only bit-level witness of WHICH simulation preset a NEW CAMPAIGN is born with: every other pulse and dormancy golden drives literal rules, so lighting the shipped default — or silently re-darkening it later — is invisible to all of them. The manifest records, per preset plus a `__birth_default__` row born through the real birth door with no preset id, the resolved birth rules and the hashes of one simulated year (52 interior one-week ticks). It carries no env spelling and no writeFileSync: the door writes recorded values onto these rows, and every such value must stay null until the freeze act, so a capture arm routed through the door today would poison this register. Re-recorded BY HAND under the golden-shift discipline, from the recipe in the manifest's own _doc, which drives tests/simulation/presetLightingWitnessRun.js — the single writer of the measurement, imported by the suite so the recorded world and the asserted world cannot diverge. The path is deliberately named `-golden` so arm 2's tests/fixtures/*golden*.json glob claims it: a witness named outside that glob would be enrolled only by this lane's good faith, and a later deletion of this row would red nothing. Enrolled by lane LGT-P14-WITNESS (seat Opus 5 — Fable-unvalidated) in the same commit that minted the surface. When the freeze act arms this register, its re-record path becomes the door like every other."
     },
     {
@@ -850,11 +850,11 @@
       "suite": "tests/property/heraldKnowledgeDeskGolden.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": "c945553127f0b14881c0736a79557a0d91ddba5b19fad3f11adbcefb027c5cf0",
-      "rows": 473,
+      "sha256": "880e9d8e5a508870b6642c38fa2b83c40bbf0047e0e4ae53b78b68369e7aca1b",
+      "rows": 435,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§934.104 of docs/OWNER_DECISION_QUEUE.md (THE COHERENCE AND SCALE WINDOW, recorded by the cloud chair, session 019yED1Rc3svZxTNcEJVRr77)",
+      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (RUNG 1 OF THE SOAK LADDER, recorded by the cloud chair, session 019yED1Rc3svZxTNcEJVRr77)",
       "note": "ENROLLED 2026-09-24 by lane FP-I5 (IN-5) under the FP chair's dispatch, record docs/shift-records/2026-09-24-in5-herald-knowledge-desk.json (action enroll, chair-signed). THE NON-OMNISCIENT HERALD GOLDEN of the belief_misjudgment refile (J-INF-6), captured FIRST at the clean base 57b52b510 before the routing table moved: the reader corpus full_simulation row rr-fresh-full after one year, read through buildHeraldFeed campaign lens. Keys: <row>|contentSha256 (every item's content except its desk, sorted by id), <row>|itemCount, and <row>|section|<id> (the desk at capture). tests/property/heraldKnowledgeDeskGolden.test.js holds the digest and count byte-stable and asserts every desk equals its captured desk except the declared refile set, which reads the knowledge desk: the one-time shift, recorded. The single producer is tests/helpers/heraldDeskGolden.js, imported by the suite; the capture ran it byte-identical from outside the tree so the door's clean-tree refusal held."
     }
   ]

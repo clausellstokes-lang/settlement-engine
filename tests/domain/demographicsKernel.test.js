@@ -69,6 +69,23 @@ const REALM = Object.freeze([
 ]);
 
 const realmUpdates = () => REALM.map(([id, spec]) => ({ saveId: id, settlement: place({ id, ...spec }) }));
+
+/**
+ * ⚠ THE SAME REALM WITH ITS THREE WALL-BOUND STARTS UNDER THEIR WALLS (LANDING-7 R-E8,
+ * 2026-11-06), for the seam arm only. DENSITY_CEILINGS was re-derived from the STAMP-band
+ * maxima (thorp 90 -> 36, hamlet 600 -> 131, village 1,400 -> 543), so Brackwater 320,
+ * Cairnhold 40 and Elderfen 700 now start at 200, 167 and 152 percent of their walls and the
+ * lit step opens their crowding plans on tick 1, beside the step receipts. Each start follows
+ * its ceiling by the factor the ceiling moved, exactly as the shared realm fixture
+ * (tests/helpers/demographicsRealmFixture.js) re-keyed it: 320 -> 70, 40 -> 16, 700 -> 272.
+ * REALM itself is NOT moved: the fenced dormancy golden and the determinism family drive it,
+ * and the fence may move only for the lifecycle lane's own cause.
+ */
+const UNDER_WALLS = Object.freeze({ Brackwater: 70, Cairnhold: 16, Elderfen: 272 });
+const underWallsRealmUpdates = () => REALM.map(([id, spec]) => ({
+  saveId: id,
+  settlement: place({ id, ...spec, population: UNDER_WALLS[id] ?? spec.population }),
+}));
 const snapshotOf = (updates) => ({
   settlements: updates.map((u) => ({ id: u.saveId, name: u.saveId, settlement: u.settlement })),
 });
@@ -153,7 +170,17 @@ describe('DORMANCY — dark is a no-op by OBJECT IDENTITY, not by deep equality'
     // demographic step started writing behind its own dark flag (a defect) or the
     // settlement-lifecycle lane changed for its own documented reason (state the cause,
     // then re-record).
-    const FROZEN = '2b2d754f4aed09fd';
+    //
+    // RE-KEYED (LANDING-7 lane E, 2026-11-06) for the lifecycle lane's own documented cause, the
+    // owner's population bands, bisected by stage in scratch worktrees (demographics dark throughout;
+    // the identity pins above stay green at every stage):
+    //     2b2d754f4aed09fd  through 433289899^
+    //     1e884997fa27331f  at 433289899 (X-46 car 1, U2: the overlapping roll bands and the stamp;
+    //                       the lifecycle reads the realm's tiers and bands)
+    //     2f38d38bffc76292  at 270c3ed77 (X-46 car 1b, U4: the metropolis band body 60,000 -> 50,000;
+    //                       the seeding drive reads range.max as a ratio, and Fallowmere is a metropolis)
+    // and unmoved by R-B3 (1f2a8504e) and to the landing tip 8e60cb2a5 (git bisect, first bad 270c3ed77).
+    const FROZEN = '2f38d38bffc76292';
     let live = realmUpdates();
     let worldState = { simulationRules: { settlementLifecycleEnabled: true } };
     const trace = [];
@@ -173,7 +200,8 @@ describe('DORMANCY — dark is a no-op by OBJECT IDENTITY, not by deep equality'
 // ═══════════════════════════════════════════════════════════════════════════════
 describe('THE SEAM — one flag each, and neither inherits the other', () => {
   test('demographics LIT with the lifecycle lane DARK still steps, and receipts ride out', () => {
-    const updates = realmUpdates();
+    // the realm under its walls (R-E8): a tick-1 crowding plan is a different receipt kind
+    const updates = underWallsRealmUpdates();
     const r = advanceSettlementLifecycle({
       snapshot: snapshotOf(updates),
       worldState: { simulationRules: { demographicsEnabled: true } },
@@ -389,9 +417,13 @@ describe('J-P2 — natural mortality has no off switch, measured on the happiest
     // Prosperous: fields far beyond its need, no deficit, plenty of ground. Pressure is
     // low enough that neither the strain nor the deficit term contributes anything, so
     // any death observed here comes from the floor and nowhere else.
-    const rich = place({ id: 'Paradise', population: 2000, dailyProduction: 90000, deficitPct: 0 });
+    // ⚠ RE-KEYED BY IDENTITY (LANDING-7 R-E8, 2026-11-06): the town's DENSITY_CEILINGS moved
+    // 7,500 -> 3,374 (the ceilings follow the STAMP-band maxima), so 2,000 on plains read
+    // 2,000 / 3,880 = 0.52 and was no longer uncrowded. The head count follows the ceiling by
+    // the same factor (2,000 x 3,374 / 7,500 = 900), keeping the old 0.23 share of the bound.
+    const rich = place({ id: 'Paradise', population: 900, dailyProduction: 90000, deficitPct: 0 });
     const bound = effectiveBoundOf(foodCapacityOf(rich, LIT, 'Paradise'), densityCeilingOf(rich));
-    expect(2000 / bound.bound, 'the fixture must be genuinely uncrowded').toBeLessThan(0.5);
+    expect(900 / bound.bound, 'the fixture must be genuinely uncrowded').toBeLessThan(0.5);
 
     const WINDOW = 52;
     const failures = collectSeedFailures(['w1', 'w2', 'w3', 'w4', 'w5', 'w6'], (seed) => {

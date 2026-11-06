@@ -1042,7 +1042,7 @@ describe('SEAM car 4 — poolMeta, the RENDER half, projected and never hand-edi
     }
     expect({ missing, orphan }).toEqual({ missing: [], orphan: [] });
     // Non-vacuity: the walk found the whole register, not an empty one.
-    expect(META_ROWS.length).toBe(708);
+    expect(META_ROWS.length).toBe(709);
     expect(META_ROWS.every((r) => r.meta)).toBe(true);
   });
 
@@ -1155,7 +1155,7 @@ describe('SEAM car 4 — poolMeta, the RENDER half, projected and never hand-edi
     }
     expect(wrong).toEqual([]);
     // MEASURED at this tip: exactly the RESOLVED / WIRING-UNRESOLVED split of the census.
-    expect({ present, absent }).toEqual({ present: 340, absent: 368 });
+    expect({ present, absent }).toEqual({ present: 341, absent: 368 });
     expect(present).toBe(CENSUS.rows.filter((r) => r.reads.length > 0).length);
   });
 
@@ -2011,8 +2011,8 @@ describe('SEAM car 4d — the seat licence, computed where the census is visible
     }
     // The tally the projector prints, re-derived from the two committed files rather than
     // trusted: 708 pools, every one a sentence, and the reason is that none is a modifier yet.
-    expect(tally).toEqual({ 'sentence/not-a-modifier': 708 });
-    expect(META_ROWS).toHaveLength(708);
+    expect(tally).toEqual({ 'sentence/not-a-modifier': 709 });
+    expect(META_ROWS).toHaveLength(709);
     // ⛔ NO SHIPPED POOL IS A MODIFIER, which is why no clause can seat and why the `seat` key
     // is emitted nowhere: an ABSENT seat reads in the composer as the sentence.
     expect(modifiers, 'no shipped pool declares role modifier').toEqual([]);
@@ -2235,6 +2235,6 @@ describe('⭐⭐ REWRITE car 8a-4 — `kin`, the thread rule\'s typed half (SITT
     // than reasoned, and pinned a second time on the SHIFT REGISTER's comparator row.
     expect(META_ROWS.filter((r) => r.meta.kin !== undefined).map((r) => `${r.id} :: ${r.pool}`))
       .toEqual([]);
-    expect(META_ROWS.length, 'over the whole shipped corpus, not a slice').toBe(708);
+    expect(META_ROWS.length, 'over the whole shipped corpus, not a slice').toBe(709);
   });
 });

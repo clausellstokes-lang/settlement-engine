@@ -112,16 +112,16 @@ const FIXED = Object.freeze([0, 21, 42]);
  */
 const PRE_CHANGE = Object.freeze({
   0: Object.freeze({
-    derived: '2d6f74d83e2d11ac28f968b26add256bd6d7cb6ad30a58742c120867672e92c1',
-    replay: '051a74a765060065d71e81652a87cb6ce60f7bd7a873d96b07b3d1a659c5d204',
+    derived: '93cf79d258df160c71f84512bf9769a9510f4e5c25ada5ffc25c1c26b64dd3bf',
+    replay: '468d7c2a0ee2cbd9106f767027b9756b0b65c5b86bf2cab48b8c36d515a70333',
   }),
   21: Object.freeze({
-    derived: '67a3cc18596429f43bf1d98abfae28d6900b1a527b65d70d08015545b0ae9529',
-    replay: '40919b8e2db83f61ec7d313aedac39e1298856113e39339c830f663842d08d25',
+    derived: '0dfd25bc67d146684b685d585b162936ea90ca3144d960deac86985ac97679c0',
+    replay: '44d813b2a2fc9f16c6d4b7a00ad81c476080bb1fe476327e87b5aa0d8941a7cd',
   }),
   42: Object.freeze({
-    derived: 'c34b6b57a40ea89a6ecae273136f26b6ca85916fc84a17fc6e8c852246a60f27',
-    replay: '8e15ee00bd22dddc53acb02f8146759e5646218e93ca5b491753dbb068914556',
+    derived: '68d98fa01de5d341d10b35c20a83aa7eaa4ba6e4988dcc222c355a91b0f3f15c',
+    replay: 'f47ae41ccb25b361374d79aa88159f8892a974334d910eb233aeae865f2c7b6a',
   }),
 });
 // ── RE-CAPTURED 2026-10-01, the urban band (ODQ §934.86), BY THE SAME PLANT AND NEVER FROM THE LIVE STEP ALONE ─────
@@ -180,6 +180,25 @@ describe('EM-B2b2 — the DM\'s nearby-resources word survives resolveResources'
 // at the lane's committed tip (the detached worktree wt-G3-plant, never this checkout, restored afterwards), and the planted
 // step and the live step produced the SAME six digests, so EM-B2b2 still moves no byte of the no-edit path. Row 21's
 // `derived` is the re-recorded golden's control row (the GS-1 golden re-record).
+// ── RE-CAPTURED 2026-11-04, the coherence and scale window (ODQ §934.104), BY THE SAME PLANT (REGISTERS seat, the chair's
+// ruling 4) ──────────────────────────────────────────────────────────────────────────────────────────────────────────────
+// All three rows moved (six digests) from FOOD-1 (the food base numbers) onward, traced by stage in DOORS-4; the window's
+// later shifts (FOOD-2/3, SIZE, DEFENSE-2) moved them again under their signed records. Re-captured as above: the
+// pre-EM-B2b2 step (fetched raw at dde845c15^, sha256 62e16d59...) planted over a COPY of this tree at the composed tip
+// 8cd65978e (a scratchpad copy, never this checkout), and the planted step and the live step produced the SAME six
+// digests, so EM-B2b2 still moves no byte of the no-edit path. Row 21's `derived` is the re-recorded golden's control row
+// (b1b9502a, generationForkCensus GOLDEN_CONTROL_HASH after DOORS record 9).
+// ── RE-CAPTURED 2026-11-05, the rung-1 landing (ODQ §934.105), BY THE SAME PLANT (LANDING-5, the chair's ruling 4) ──
+// All six digests moved. BISECTED BY FIRST-PARENT STAGE, not assumed: the rows' fresh, derived and replay digests were
+// hashed at every stage of the landing — at 1264a8152^ they equal the 2026-11-04 block byte for byte, and at 54daafda3
+// they equal the landed tip's. They move at X-46 car 1 1264a8152, car 2 d4bf6431c, CRISIS d3e072368, TERRAIN-POOLS
+// ac09ea83b (row 21), SELF-VOUCH 0be13b5cb, X-46 car 3 90dc22f18, SELF-VOUCH I5 cdc949867, PLACE-NOT-TIER 6129c300d
+// (rows 21, 42), PINS 37b1e746d (rows 0, 42), TRUTH unit D 844acaccc, X-46 car 3 I7 6ca454d2b, F5 7e28a6331 (row 21),
+// F6 6d84aa834, F1 5e9ffb220 and F10 54daafda3 (row 21); every other stage moves none of them. Re-captured as above: the
+// pre-EM-B2b2 step (12c437de4, sha256 62e16d59...) planted over a COPY of this tree at 9072bca04 (a detached probe
+// worktree, never this checkout), and the planted step and the live step produced the SAME six digests, so EM-B2b2
+// still moves no byte of the no-edit path; on every row the fresh generation equals the dormant re-derivation. Row 21's
+// `derived` (0dfd25bc) is the landed golden's control row.
 
     const layer = layerOf([[ROOT_KEY, [...DM_ROSTER]]]);
 

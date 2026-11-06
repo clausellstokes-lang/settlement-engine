@@ -48,6 +48,7 @@ import {
   RETIRED_EDIT_MODE_READERS_BASELINE_SCHEMA,
   RETIRED_CORPUS_REDEAL_BASELINE_SCHEMA,
   RETIRED_ADVISORY_LOCKFILE_BASELINE_SCHEMA,
+  RETIRED_FED_WORLD_BASELINE_SCHEMA,
   RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
@@ -81,6 +82,7 @@ import {
   validateSchema24Baseline,
   validateSchema25Baseline,
   validateSchema26Baseline,
+  validateSchema27Baseline,
 } from '../../scripts/lib/observed-shape-baseline.mjs';
 import {
   artifactBaselineSchemaOf,
@@ -103,6 +105,7 @@ import {
   CORPUS_REDEAL_TARGET_SCHEMA,
   ADVISORY_LOCKFILE_TARGET_SCHEMA,
   FED_WORLD_TARGET_SCHEMA,
+  WINDOW_RUNG1_TARGET_SCHEMA,
 } from '../../scripts/migrate-observed-shape-readers.mjs';
 
 const HASH_A = 'a'.repeat(64);
@@ -681,8 +684,8 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
    */
   test('CR-OSR-FREEZE-6: the shape family unions containing siblings, above a size guard', () => {
     const keysOf = (n, extra = []) => [...Array.from({ length: n }, (_, i) => `k${i + 1}`), ...extra];
-    // `subject` has 10 own keys. `joins` covers 8 of them (0.80, exactly theta);
-    // `misses` covers 7 (0.70). Only the first may contribute.
+    // `subject` has 10 own keys. `joins` covers 8 of them (0.80, above theta 0.76);
+    // `misses` covers 7 (0.70, below it). Only the first may contribute.
     const shapes = {
       subject: { rows: 500, keys: keysOf(10) },
       joins: { rows: 500, keys: [...keysOf(8), 'fromJoiner'] },
@@ -690,6 +693,14 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     };
     expect([...shapeFamilyUnionOf('subject', shapes)].sort())
       .toEqual([...keysOf(10), 'fromJoiner'].sort());
+    // ⭐ THE BOUNDARY ITSELF, at the live theta (0.76 since the schema-27 rung): 19 of 25 own
+    // keys is EXACTLY theta and joins (the comparison is >=); 18 of 25 (0.72) does not.
+    const boundary = (covered) => ({
+      subject: { rows: 500, keys: keysOf(25) },
+      sibling: { rows: 500, keys: [...keysOf(covered), 'fromSibling'] },
+    });
+    expect(shapeFamilyUnionOf('subject', boundary(19)).has('fromSibling')).toBe(true);
+    expect(shapeFamilyUnionOf('subject', boundary(18)).has('fromSibling')).toBe(false);
 
     // THE SIZE GUARD IS A BOUNDARY, PINNED ON BOTH SIDES: the same perfect
     // superset contributes nothing to a 7-key shape and everything to an 8-key
@@ -786,7 +797,10 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     expect(raised.message).toContain(guarded);
     expect(raised.message).toContain('class-(a)');
     expect(raised.message).toContain('CR-OSR-FREEZE-6');
-    expect(raised.message).toContain('theta=0.8');
+    // ⭐ RE-PINNED AT THE SCHEMA-27 RUNG: 0.8 -> 0.76, the measured value (the crisis `cast`
+    // on `stressors`; see SHAPE_FAMILY_FILTER's WHY THESE NUMBERS). The message must carry
+    // the LIVE theta, so the pin moves with it.
+    expect(raised.message).toContain('theta=0.76');
     expect(raised.message).toMatch(/cleared 1 CR-OSR-FREEZE-3-R2 class-\(a\)/);
 
     // ── THE NEGATIVE CONTROL: same corpus, same clearing, unguarded identity ──
@@ -1129,6 +1143,15 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
       // ordinary row reads the same registry `commitRegistry` writes.
       'decrees on settlement',
       'kind on settlement',
+      // ⭐⭐ THE ELEVENTH, TWELFTH AND THIRTEENTH, DECLARED TOGETHER AT THE SCHEMA-27 RUNG (the
+      // chair's ruling 2 on lane LANDING-2b's STOP, 2026-11-04): the CRISIS car's temporary
+      // person, three keys of ONE record literal on ONE vacant-lever branch of
+      // generators/steps/resolveCrisisCast.js — the fifth class, the `isCriminal` precedent,
+      // and its first use since that entry. The crisis car's fourth measured identity,
+      // `_userEdits on stress`, is NOT declared: gate 0 cannot see its member-assignment writer.
+      'temporary on npcs',
+      'temporaryKind on npcs',
+      'crisisIds on npcs',
     ]);
     // ⚠ INDEX-ALIGNED WITH THE ROSTER ABOVE, one entry per line so a removal cannot
     // silently re-pair the survivors. The retired `factions on locks` was the OTHER
@@ -1144,6 +1167,9 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
       'save-time-writer', //             narrativeSummary on eventLog
       'save-time-writer', //             decrees on settlement
       'save-time-writer', //             kind on settlement
+      'conditional-generator-branch', // temporary on npcs
+      'conditional-generator-branch', // temporaryKind on npcs
+      'conditional-generator-branch', // crisisIds on npcs
     ]);
     expect(EXPLAINED_WRITER_EXEMPTIONS.map(({ writer }) => writer)).toEqual([
       'src/generators/economy/economicState.js',
@@ -1166,6 +1192,10 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
       // SITE was being accepted as a write shape. Gate 0 admits this file on `property`,
       // `quoted` and `shorthand`, and nothing else in src/ writes the phantom's `kind`.
       'src/domain/edit/phantoms.js',
+      // The crisis cast step's `mintTemporary` record literal, all three keys.
+      'src/generators/steps/resolveCrisisCast.js',
+      'src/generators/steps/resolveCrisisCast.js',
+      'src/generators/steps/resolveCrisisCast.js',
     ]);
     // ⚠ THE M9 eventLog BANK NAMES ONE RULING, AND THE SAME ONE FOR ALL FOUR.
     // At genesis this exact string is stamped into every tagged row's `reason`,
@@ -1260,12 +1290,17 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
       // mode's two save-time writers are re-proved here rather than asserted once.
       'decrees on settlement',
       'kind on settlement',
+      // ⭐ THE SCHEMA-27 TRIO, re-proved out of the scanned resolveCrisisCast.js on every scan.
+      'temporary on npcs',
+      'temporaryKind on npcs',
+      'crisisIds on npcs',
     ]);
     expect(evidence.map(({ key }) => key)).toEqual([
       'isCriminal',
       'neighbourNetwork', 'stresses', 'worldPulse',
       'appliedAt', 'deltas', 'event', 'narrativeSummary',
       'decrees', 'kind',
+      'temporary', 'temporaryKind', 'crisisIds',
     ]);
     // ⚠ THE M9 SPLIT IS MACHINE-DRAWN, NOT ARGUED. The same probe that admits
     // the four banked keys on `applyEvent.js` REFUSES the two nearest
@@ -1531,7 +1566,12 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     // ⭐ AND 26 HOLDS IT TOO: the fed-world rung admits 22 ordinary rows and drops or shrinks six,
     // none on a declared identity, so the pair stays 69/45. MEASURED off the live scan.
     expect(declaredBankOf(FED_WORLD_TARGET_SCHEMA)).toEqual({ bankedReads: 69, taggedRows: 45 });
-    expect(declaredBankOf(BASELINE_SCHEMA)).toEqual(declaredBankOf(FED_WORLD_TARGET_SCHEMA));
+    // ⭐⭐ AND 27 GROWS IT, THE ROSTER'S SECOND GROWTH AFTER 23: three declarations (the crisis
+    // cast's temporary person), five addresses, seven reads, so the pair goes 69/45 -> 76/50.
+    // MEASURED off the live scan at the subject, never predicted.
+    expect(declaredBankOf(WINDOW_RUNG1_TARGET_SCHEMA)).toEqual({ bankedReads: 76, taggedRows: 50 });
+    expect(declaredBankOf(BASELINE_SCHEMA)).toEqual(declaredBankOf(WINDOW_RUNG1_TARGET_SCHEMA));
+    expect(declaredBankOf(RETIRED_FED_WORLD_BASELINE_SCHEMA)).toEqual({ bankedReads: 69, taggedRows: 45 });
     expect(declaredBankOf(RETIRED_ADVISORY_LOCKFILE_BASELINE_SCHEMA)).toEqual({ bankedReads: 69, taggedRows: 45 });
     expect(declaredBankOf(RETIRED_CORPUS_REDEAL_BASELINE_SCHEMA)).toEqual({ bankedReads: 69, taggedRows: 45 });
     expect(declaredBankOf(RETIRED_EDIT_MODE_READERS_BASELINE_SCHEMA)).toEqual({ bankedReads: 69, taggedRows: 45 });
@@ -1615,7 +1655,9 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     // ⭐ SCHEMA 24: THE URBAN BAND'S CORPUS RE-DEAL (2026-10-01, ODQ §934.86 and its addendum 2): schema 23's envelope, tag law and ten-identity roster UNCHANGED, re-governed to a register that admits 53 ordinary rows the re-dealt AO-0 year exposes and shrinks one; nothing is declared and the bank holds at 69/45.
     // ⭐ SCHEMA 25: THE 2026-10 ADVISORY LOCKFILE BUMP (the chair's ruling of 2026-10-23, under the schema-13 precedent TE-MINT-1): schema 24's envelope re-governed to a lockfile that moves dompurify 3.4.17 and fflate 0.8.3 with package.json byte-identical — and, like 13's, its reconciliation must be, and measurably is, EMPTY.
     // ⭐ SCHEMA 26: THE FED WORLD (the chair's ruling (i) on lane OSR-RUNG's STOP, 2026-11-03, ODQ §934.104): a famine topology pass in the corpus and 22 admitted rows the self-feeding worlds no longer resolve; four rows go, two shrink, the bank holds at 69/45.
-    expect(BASELINE_SCHEMA).toBe(26);
+    // ⭐ SCHEMA 27: THE RUNG-1 WINDOW (the chair's rulings on lane LANDING-2b's STOP, 2026-11-04): the shape-family theta 0.80 -> 0.76, a topology pass that cures the window's `facets`/`issues` erosion, three crisis declarations (the roster 10 -> 13, the bank 76/50) and the window's rows admitted with attribution.
+    expect(BASELINE_SCHEMA).toBe(27);
+    expect(RETIRED_FED_WORLD_BASELINE_SCHEMA).toBe(26);
     expect(RETIRED_ADVISORY_LOCKFILE_BASELINE_SCHEMA).toBe(25);
     expect(RETIRED_CORPUS_REDEAL_BASELINE_SCHEMA).toBe(24);
     expect(RETIRED_EDIT_MODE_READERS_BASELINE_SCHEMA).toBe(23);
@@ -1640,7 +1682,8 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     // ⭐ 15 retired at §893.4, 16 at the stress-topology rung, 17 at the lineage-reanchor
     // rung, 18 at the exemption-retirement rung, 19 at the bank-fence rung; the LIVE
     // envelope is validated by 20 now.
-    expect(validateSchema26Baseline(live)).toBe(live);
+    expect(validateSchema27Baseline(live)).toBe(live);
+    expect(() => validateSchema26Baseline(live)).toThrow(/is not schema 26/);
     // … and 18, 19, 20, 21 and 22 keep their own literals, so each refuses the live envelope
     // it used to accept.
     expect(() => validateSchema25Baseline(live)).toThrow(/is not schema 25/);
@@ -1784,7 +1827,7 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     // `artifactBaselineSchemaOf` exists to prevent.
     expect(artifactBaselineSchemaOf('legacy-leaf')).toBe(2);
     expect(artifactBaselineSchemaOf('exact-origin')).toBe(3);
-    expect(BASELINE_SCHEMA).toBe(26);
+    expect(BASELINE_SCHEMA).toBe(27);
     expect(() => artifactBaselineSchemaOf('heuristic')).toThrow(/scan mode is unsupported/);
   });
 

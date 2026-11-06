@@ -358,6 +358,14 @@ export function ensureFactionStructuralNpcs(
 
   const additions = [];
   for (const seat of seats) {
+    // A DM-MINTED SEAT IS THE DM'S ROW, NEVER AN OFFICE TO FILL (EM-E8 B5). A faction the DM added
+    // reaches this list through the held roster at re-derivation and wears the layer's own `dm:`
+    // id. Seating placeholder office-holders for it would write NPCs the DM never asked for, so
+    // the record would gain three rows for one card. The engine leaves the DM's faction as the DM
+    // made it. Generated seats are untouched, so a world with no DM layer is byte-identical.
+    // The namespace's home is src/domain/edit/dmLayer.js :: DM_ID_NS; it is spelled here rather
+    // than imported because that editor module must stay out of the first-paint closure.
+    if (factionRefOf(seat).startsWith('dm:')) continue;
     const roleKey = matchFactionArchetype(seat);
     if (!roleKey) continue;                     // archetype with no structural roles (government/civic/labor/…)
     if (coveredRoleKeys.has(roleKey)) continue; // office already held (realized or already-synthesized)

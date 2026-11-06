@@ -44,8 +44,13 @@ function codeDigit(str) {
 /** Exports that imply a WATER economy (so water is dossier-substantiated even inland).
  *  NOTE: `salt` is deliberately EXCLUDED — salt comes from evaporation flats/dunes (a
  *  DRY landform), per the owner's salt⇒flats mapping; `preserved` still catches the
- *  coastal salt-meat trade. */
-const WATER_ECONOMY_RE = /fish|preserved|reed|peat|pearl|whal|ferry|barge|timber|lumber|mill/i;
+ *  coastal salt-meat trade.
+ *  ⛔ `mill` is EXCLUDED too (LANDING-7 A, R-A3′, 2026-11-06). The owner, verbatim: "Also
+ *  mills don't necessarily need water access as some mills use physical force from
+ *  livestock or wind." A town that mills its flour by horse or sail is no evidence of a
+ *  river, so "Milled flour" no longer draws one; a mill town on real water still gets it
+ *  from its river/coast route, its wet biome, or a water trade it really carries. */
+const WATER_ECONOMY_RE = /fish|preserved|reed|peat|pearl|whal|ferry|barge|timber|lumber/i;
 /** Biomes that FORBID standing water unless the economy justifies it (realm-coherence). */
 const DRY_BIOME_RE = /desert|arid|dune|waste|scrub|steppe|badland/i;
 /** Biomes/terrains that IMPLY water by nature. */

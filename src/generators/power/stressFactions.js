@@ -16,7 +16,7 @@ const nameKey = (name) => String(name || '').trim().toLowerCase().replace(/^the\
  * roster's own role pool (`FACTION_DESCRIPTORS[category]`, then the dedup pool
  * `FACTION_DESCRIPTORS_EXTRA[category]`) that no faction already on the roster carries. It
  * replaces the placeholders "Claimant Bloc A/B" and "Rival Faction B". No draw is taken; the
- * pools are keyed by role only (no culture-keyed faction pool exists in the estate).
+ * pools are keyed by role only (no faction pool keyed by the settlement's people exists in the estate).
  *
  * ⚠ AN EXHAUSTED POOL (every one of the role's ten names already on the roster, which no
  * generated roster reaches) answers null and the caller injects nothing rather than a

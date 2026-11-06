@@ -1510,11 +1510,14 @@ export function navalDefensePoolKey(navy, port, blockaded) {
   return navy ? 'Naval Defense: Naval force' : 'Naval Defense: Port only';
 }
 
-/** @param {any} settlement @returns {boolean} the record's own config says there is no water */
+/**
+ * @param {{ config?: { terrainType?: unknown, tradeRouteAccess?: unknown } | null } | null | undefined} settlement
+ * @returns {boolean} the record's own config says there is no water
+ */
 const dryRecord = (settlement) => {
   const config = settlement?.config;
   if (!config || typeof config !== 'object') return false;
-  return waterAccessKind(config.terrainType, config.tradeRouteAccess) === 'none';
+  return waterAccessKind(/** @type {string | null | undefined} */ (config.terrainType), /** @type {string | null | undefined} */ (config.tradeRouteAccess)) === 'none';
 };
 
 /**
@@ -1689,7 +1692,10 @@ export function magicDependencyPoolKey(magicDependency, namedChain, magicAbsent 
       : 'magicDependency true';
   }
   if (magicDependency !== false) return null;
-  return magicAbsent ? 'magicDependency false, availability absent' : 'magicDependency false';
+  // An `if`, not a returned ternary: the wiring census reads a branch's `if` test, so the
+  // absent pool's own field (`magicAbsent`) reaches its declared reads (LANDING-7 lane F, R-F1).
+  if (magicAbsent) return 'magicDependency false, availability absent';
+  return 'magicDependency false';
 }
 
 /**

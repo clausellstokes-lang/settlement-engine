@@ -14,7 +14,8 @@ describe('the harbour line in an airship city with no water', () => {
   it('soak1k-11: an airship city with no water claims no harbour on the Defense desk', () => {
     const s = birth(11).settlement;
     expect(s.institutions.some((x) => /Airship/.test(x.name))).toBe(true);
-    expect(JSON.stringify(defenseSupportingProse(s, { seed: s._seed }))).not.toMatch(/harbou?r/i);
+    expect(JSON.stringify(defenseSupportingProse(s, { seed: s._seed })).length).toBeGreaterThan(2);
+    expect(JSON.stringify(defenseSupportingProse(s, { seed: s._seed }))).not.toMatch(/harbou?r/i); // anchored: the line above proves the desk is a non-empty record, and the next test pins the harbour line live on a port
   });
 
   it('a coastal port still has its harbour line', () => {

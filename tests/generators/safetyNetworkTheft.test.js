@@ -23,7 +23,7 @@ describe('the survival-crime line reads the criminal network', () => {
   it("a town with a thieves' guild chapter prints the pool's desperation-theft line", () => {
     const profile = generateSafetyProfile(POOR, 'town', [{ name: "Thieves' guild chapter", category: 'Criminal' }]);
     expect(survival(profile)?.desc).toBe(DESPERATION);
-    expect(profile.crimeTypes.map((c) => c.desc).join(' ')).not.toMatch(CLAUSE);
+    expect(profile.crimeTypes.map((c) => c.desc).join(' ')).not.toMatch(CLAUSE); // anchored: the line above pins the survival row's desc, so the crime list is live
   });
 
   it('a town with no criminal institution keeps the clause', () => {
@@ -41,7 +41,8 @@ describe('the survival-crime line reads the criminal network', () => {
     it('soak1k-136 (a city with a black market): no clause on the record', () => {
       const { settlement } = birth(136);
       const descs = settlement.economicState.safetyProfile.crimeTypes.map((c) => c.desc).join(' ');
-      expect(descs).not.toMatch(CLAUSE);
+      expect(descs.length).toBeGreaterThan(0);
+      expect(descs).not.toMatch(CLAUSE); // anchored: the line above proves the crime descs are live
     });
   });
 });

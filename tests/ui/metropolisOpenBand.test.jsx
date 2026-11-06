@@ -20,15 +20,15 @@ describe('the metropolis band reads open on every surface', () => {
     const { container } = render(<TiersTab />);
     const text = container.textContent || '';
     expect(text).toContain('15,000+ pop.');
-    expect(text).not.toContain('60,000');
-    expect(text).not.toContain('50,000');
+    expect(text).not.toContain('60,000'); // anchored: the line above pins the 15,000+ label in this same text
+    expect(text).not.toContain('50,000'); // anchored: two lines up pins the 15,000+ label in this same text
   });
 
   test('the compendium search keywords carry 15000+ for the metropolis, not a ceiling', () => {
     const row = COMPENDIUM_INDEX.find(e => e.id === 'tier-metropolis');
     expect(row?.keywords).toContain('15000+');
-    expect(row?.keywords).not.toContain('60000');
-    expect(row?.keywords).not.toContain('50000');
+    expect(row?.keywords).not.toContain('60000'); // anchored: the line above pins 15000+ in these keywords
+    expect(row?.keywords).not.toContain('50000'); // anchored: two lines up pins 15000+ in these keywords
   });
 });
 

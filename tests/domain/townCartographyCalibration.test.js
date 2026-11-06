@@ -317,6 +317,189 @@
  *   measurement (W8's exact readings): `DUPLICATES.permille` 130/204/88/64/51/58 → 126/201/89/64/51/58 (derived ceilings 208/327/141/103/82/93 → 202/322/143/103/82/93).
  *   CORPUS_ROWS stays 504; the throw census stays 0.
  *
+ *   2026-11-04 — X-46 CAR 1 (THE OWNER'S HISTORICAL BANDS), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE
+ *   SOAK LADDER; record
+ *   docs/shift-records/2026-11-04-rung1-01-x46-car-1-bands.json; the chair signs by the owner's delegation,
+ *   vetoable). Written from the staged tree
+ *   S1 (the step's tree with the door paths carried from the branch). The per-tier maximum roster reads
+ *   12/25/42/70/82/86, so CARTOGRAPHY_CALIBRATION.MAX_INSTITUTIONS moves BY HAND 12/25/42/69/83/86 ->
+ *   12/25/42/70/82/86 and the
+ *   corpus re-recorded under it is the FIXED POINT (pass 2 wrote identical bytes; the roster counts are
+ *   cap-independent).
+ *   Re-keyed by measurement over the recorded corpus (the suite's own definitions): MAX_INSTITUTIONS thorp: 12,
+ *   hamlet: 25, village: 42, town: 69, city: 83, metropolis: 86 -> thorp: 12, hamlet: 25, village: 42, town: 70,
+ *   city: 82, metropolis: 86; FROZEN.maxInstitutions 12/25/42/69/83/86 -> 12/25/42/70/82/86; FROZEN.maxBuildings
+ *   13/29/47/122/212/271 -> 13/29/47/115/210/271; DUPLICATES.permille 126/201/89/64/51/58 -> 126/200/89/62/49/58
+ *   (derived ceilings 202/322/143/103/82/93 -> 202/320/143/100/79/93); W7 FALSIFIER refused {thorp: 50, hamlet: 73,
+ *   village: 84, town: 84, city: 68} = 359 -> {thorp: 50, hamlet: 73, village: 84, town: 84, city: 66} = 357; W8
+ *   LIVE anti-vacuity floor 600 -> 500 (the six argmax rows now draw 595).
+ *   CORPUS_ROWS stays 504; the throw census stays 0.
+ *
+ *   2026-11-04 — X-46 CAR 2 (LANE X46-2-THRESHOLDS), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK
+ *   LADDER; record
+ *   docs/shift-records/2026-11-04-rung1-02-x46-car-2-thresholds.json; the chair signs by the owner's delegation,
+ *   vetoable). Written from the staged tree
+ *   S2 (the step's tree with the door paths carried from the branch). The per-tier maximum roster reads
+ *   12/25/42/70/82/86, so CARTOGRAPHY_CALIBRATION moves BY HAND (MAX_INSTITUTIONS 12/25/42/70/82/86 ->
+ *   12/25/42/70/82/86; the byte input, if moved, below) and the
+ *   corpus re-recorded under it is the FIXED POINT (pass 2 wrote identical bytes; the roster counts are
+ *   cap-independent).
+ *   Re-keyed by measurement over the recorded corpus (the suite's own definitions): MAX_BUILDING_ROW_BYTES 448 ->
+ *   447 (the derived byte band 717 -> 716); FROZEN.maxInstitutions 12/25/42/70/82/86 -> 12/25/42/70/82/86;
+ *   FROZEN.maxBuildings 13/29/47/115/210/271 -> 13/29/48/120/210/272; DUPLICATES.permille 126/200/89/62/49/58 ->
+ *   129/215/84/56/50/54 (derived ceilings 202/320/143/100/79/93 -> 207/344/135/90/80/87).
+ *   CORPUS_ROWS stays 504; the throw census stays 0.
+ *
+ *   2026-11-04 — TERRAIN-POOLS, FIRST STEP (LANE TERRAIN-POOLS AT ITS FIRST MERGE), THROUGH THE SIGNED DOOR (ODQ
+ *   §934.105, RUNG 1 OF THE SOAK LADDER; record
+ *   docs/shift-records/2026-11-04-rung1-06-terrain-pools-1.json; the chair signs by the owner's delegation,
+ *   vetoable). Written from the staged tree
+ *   S6 (the step's tree with the door paths carried from the branch). The per-tier maximum roster reads
+ *   12/25/42/70/82/86, so CARTOGRAPHY_CALIBRATION does not move.
+ *   Re-keyed by measurement over the recorded corpus (the suite's own definitions): DUPLICATES.permille
+ *   129/215/84/56/50/54 -> 129/215/84/56/50/53 (derived ceilings 207/344/135/90/80/87 -> 207/344/135/90/80/85).
+ *   CORPUS_ROWS stays 504; the throw census stays 0.
+ *
+ *   2026-11-04 — T1/T2 (THE DRY RUN §4'S TWO PROPOSALS, ADOPTED BY THE CHAIR), THROUGH THE SIGNED DOOR (ODQ
+ *   §934.105, RUNG 1 OF THE SOAK LADDER; record
+ *   docs/shift-records/2026-11-04-rung1-10-t1-t2-siege-stores.json; the chair signs by the owner's delegation,
+ *   vetoable). Written from the staged tree
+ *   S10 (the step's tree with the door paths carried from the branch). The per-tier maximum roster reads
+ *   12/25/42/70/82/86, so CARTOGRAPHY_CALIBRATION does not move.
+ *   Re-keyed by measurement over the recorded corpus (the suite's own definitions): DUPLICATES.permille
+ *   129/215/84/56/50/53 -> 129/215/87/56/50/53 (derived ceilings 207/344/135/90/80/85 -> 207/344/140/90/80/85).
+ *   CORPUS_ROWS stays 504; the throw census stays 0.
+ *
+ *   2026-11-04 — X-46 CAR 1B, FIRST STEP (U1–U3), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
+ *   record
+ *   docs/shift-records/2026-11-04-rung1-11-x46-car-1b-1-no-ceiling.json; the chair signs by the owner's delegation,
+ *   vetoable). Written from the staged tree
+ *   S11 (the step's tree with the door paths carried from the branch). The per-tier maximum roster reads
+ *   12/25/42/70/82/86, so CARTOGRAPHY_CALIBRATION does not move.
+ *   Re-keyed by measurement over the recorded corpus (the suite's own definitions): FROZEN.maxInstitutions
+ *   12/25/42/70/82/86 -> 12/25/42/70/82/86; FROZEN.maxBuildings 13/29/48/120/210/272 -> 13/29/48/120/210/269;
+ *   DUPLICATES.permille 129/215/87/56/50/53 -> 129/215/87/56/50/54 (derived ceilings 207/344/140/90/80/85 ->
+ *   207/344/140/90/80/87).
+ *   CORPUS_ROWS stays 504; the throw census stays 0.
+ *
+ *   2026-11-04 — X-46 CAR 3 (LANE X46-3-BUDGET), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK
+ *   LADDER; record docs/shift-records/2026-11-04-rung1-12-x46-car-3-budget.json; the chair signs by the owner's
+ *   delegation, vetoable). Written from the staged tree S12 (the step's tree with the door paths carried from
+ *   the branch). The per-tier maximum roster reads 11/14/22/47/92/106; CARTOGRAPHY_CALIBRATION.MAX_INSTITUTIONS
+ *   12/25/42/70/82/86 -> 11/14/22/47/92/106 by hand, the corpus re-captured at it (bytes identical where no cap
+ *   bit). Re-keyed by measurement over the recorded corpus (the suite's own definitions):
+ *   FROZEN.maxInstitutions 12/25/42/70/82/86 -> 11/14/22/47/92/106; FROZEN.maxBuildings 13/29/48/120/210/269 ->
+ *   12/18/30/102/216/261; DUPLICATES.permille 129/215/87/56/50/54 -> 121/197/46/60/52/55 (derived ceilings
+ *   207/344/140/90/80/87 -> 194/316/74/96/84/88); the FALSIFIER { thorp: 50, hamlet: 73, village: 84, town: 84,
+ *   city: 66 } = 357 -> { thorp: 30, hamlet: 13, village: 5, town: 30, city: 37, metropolis: 43 } = 158. W6
+ *   (the headroom's own criterion) reds at this corpus, 2.4444 at village (9 -> 22) against the declared 1.6:
+ *   carried as the one named red until record 27 (the chair's ruling 2, LANDING-4's addendum). CORPUS_ROWS
+ *   stays 504; the throw census stays 0.
+ *
+ *   2026-11-04 — X-46 CAR 1B, SECOND STEP (U4–U5), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK
+ *   LADDER; record docs/shift-records/2026-11-04-rung1-13-x46-car-1b-2-curve.json; the chair signs by the
+ *   owner's delegation, vetoable). Written from the staged tree S13 (the step's tree with the door paths
+ *   carried from the branch). The per-tier maximum roster reads 11/14/22/47/92/106, so CARTOGRAPHY_CALIBRATION
+ *   does not move. Re-keyed by measurement over the recorded corpus (the suite's own definitions):
+ *   DUPLICATES.permille 121/197/46/60/52/55 -> 121/197/46/60/52/54 (derived ceilings 194/316/74/96/84/88 ->
+ *   194/316/74/96/84/87); the FALSIFIER { thorp: 30, hamlet: 13, village: 5, town: 30, city: 37, metropolis: 43
+ *   } = 158 -> { thorp: 30, hamlet: 13, village: 5, town: 30, city: 37, metropolis: 52 } = 167. W6 stays the
+ *   one named red (2.4444 at village, 9 -> 22, against 1.6) until record 27. CORPUS_ROWS stays 504; the throw
+ *   census stays 0.
+ *
+ *   2026-11-04 — PLACE-NOT-TIER (R6, UNITS 1–2), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK
+ *   LADDER; record docs/shift-records/2026-11-04-rung1-15-place-not-tier.json; the chair signs by the owner's
+ *   delegation, vetoable). Written from the staged tree S15 (the step's tree with the door paths carried from
+ *   the branch). The per-tier maximum roster reads 11/14/22/47/92/106, so CARTOGRAPHY_CALIBRATION does not
+ *   move. Re-keyed by measurement over the recorded corpus (the suite's own definitions): DUPLICATES.permille
+ *   121/197/46/60/52/54 -> 121/197/45/60/52/54 (derived ceilings 194/316/74/96/84/87 -> 194/316/72/96/84/87).
+ *   W6 stays the one named red (2.4444 at village, 9 -> 22, against 1.6) until record 27. CORPUS_ROWS stays
+ *   504; the throw census stays 0.
+ *
+ *   2026-11-04 — PINS, FIRST STEP (UNITS 1–3 AND THE CHAIR'S ADDENDUM), THROUGH THE SIGNED DOOR (ODQ §934.105,
+ *   RUNG 1 OF THE SOAK LADDER; record docs/shift-records/2026-11-04-rung1-17-pins-1-density-exemptions.json;
+ *   the chair signs by the owner's delegation, vetoable). Written from the staged tree S17 (the step's tree
+ *   with the door paths carried from the branch). The per-tier maximum roster reads 11/15/22/47/92/105;
+ *   CARTOGRAPHY_CALIBRATION.MAX_INSTITUTIONS 11/14/22/47/92/106 -> 11/15/22/47/92/105 by hand, the corpus
+ *   re-captured at it (bytes identical where no cap bit). Re-keyed by measurement over the recorded corpus (the
+ *   suite's own definitions): FROZEN.maxInstitutions 11/14/22/47/92/106 -> 11/15/22/47/92/105;
+ *   FROZEN.maxBuildings 12/18/30/102/216/261 -> 12/19/30/102/216/256; DUPLICATES.permille 121/197/45/60/52/54
+ *   -> 126/199/43/59/52/57 (derived ceilings 194/316/72/96/84/87 -> 202/319/69/95/84/92); the FALSIFIER {
+ *   thorp: 30, hamlet: 13, village: 5, town: 30, city: 37, metropolis: 52 } = 167 -> { thorp: 33, hamlet: 15,
+ *   village: 10, town: 35, city: 37, metropolis: 29 } = 159. W6 stays the one named red until record 27: its
+ *   worst slice now reads 2.2381 at town (21 -> 47) against the declared 1.6. CORPUS_ROWS stays 504; the throw
+ *   census stays 0.
+ *
+ *   2026-11-04 — X-46 CAR 3, I7, THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER; record
+ *   docs/shift-records/2026-11-04-rung1-19-x46-car-3-i7-realised.json; the chair signs by the owner's
+ *   delegation, vetoable). Written from the staged tree S19 (the step's tree with the door paths carried from
+ *   the branch). The per-tier maximum roster reads 11/15/22/46/92/105; CARTOGRAPHY_CALIBRATION.MAX_INSTITUTIONS
+ *   11/15/22/47/92/105 -> 11/15/22/46/92/105 by hand, the corpus re-captured at it (bytes identical where no
+ *   cap bit). Re-keyed by measurement over the recorded corpus (the suite's own definitions):
+ *   FROZEN.maxInstitutions 11/15/22/47/92/105 -> 11/15/22/46/92/105; FROZEN.maxBuildings 12/19/30/102/216/256
+ *   -> 11/19/30/104/216/257; DUPLICATES.permille 126/199/43/59/52/57 -> 137/195/34/57/54/55 (derived ceilings
+ *   202/319/69/95/84/92 -> 220/312/55/92/87/88); the FALSIFIER { thorp: 33, hamlet: 15, village: 10, town: 35,
+ *   city: 37, metropolis: 29 } = 159 -> { thorp: 30, hamlet: 9, village: 5, town: 31, city: 37, metropolis: 33
+ *   } = 145. W6 stays the one named red until record 27: its worst slice now reads 2.3 at town (20 -> 46)
+ *   against the declared 1.6. CORPUS_ROWS stays 504; the throw census stays 0.
+ *
+ *   2026-11-04 — PINS, SECOND STEP (UNITS 6–7), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK
+ *   LADDER; record docs/shift-records/2026-11-04-rung1-20-pins-2-rarity-mark.json; the chair signs by the
+ *   owner's delegation, vetoable). Written from the staged tree S20 (the step's tree with the door paths
+ *   carried from the branch). The per-tier maximum roster reads 11/15/23/46/92/104;
+ *   CARTOGRAPHY_CALIBRATION.MAX_INSTITUTIONS 11/15/22/46/92/105 -> 11/15/23/46/92/104 by hand, the corpus
+ *   re-captured at it (bytes identical where no cap bit). Re-keyed by measurement over the recorded corpus (the
+ *   suite's own definitions): FROZEN.maxInstitutions 11/15/22/46/92/105 -> 11/15/23/46/92/104;
+ *   DUPLICATES.permille 137/195/34/57/54/55 -> 137/195/37/57/54/54 (derived ceilings 220/312/55/92/87/88 ->
+ *   220/312/60/92/87/87); the FALSIFIER { thorp: 30, hamlet: 9, village: 5, town: 31, city: 37, metropolis: 33
+ *   } = 145 -> { thorp: 30, hamlet: 9, village: 7, town: 31, city: 37, metropolis: 33 } = 147. W6 stays the one
+ *   named red until record 27 (2.3 at town, 20 -> 46, against 1.6). CORPUS_ROWS stays 504; the throw census
+ *   stays 0.
+ *
+ *   2026-11-04 — F6 BUDGET-FLOOR (UNITS 1–4), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
+ *   record docs/shift-records/2026-11-04-rung1-22-f6-budget-floor.json; the chair signs by the owner's
+ *   delegation, vetoable). Written from the staged tree S22 (the step's tree with the door paths carried from
+ *   the branch). The per-tier maximum roster reads 11/16/23/46/90/104; CARTOGRAPHY_CALIBRATION.MAX_INSTITUTIONS
+ *   11/15/23/46/92/104 -> 11/16/23/46/90/104 by hand, the corpus re-captured at it (bytes identical where no
+ *   cap bit). Re-keyed by measurement over the recorded corpus (the suite's own definitions):
+ *   FROZEN.maxInstitutions 11/15/23/46/92/104 -> 11/16/23/46/90/104; FROZEN.maxBuildings 11/19/30/104/216/257
+ *   -> 12/19/30/118/216/258; DUPLICATES.permille 137/195/37/57/54/54 -> 126/207/44/62/46/53 (derived ceilings
+ *   220/312/60/92/87/87 -> 202/332/71/100/74/85); the FALSIFIER { thorp: 30, hamlet: 9, village: 7, town: 31,
+ *   city: 37, metropolis: 33 } = 147 -> { thorp: 36, hamlet: 21, village: 7, town: 32, city: 36, metropolis: 34
+ *   } = 166. W6 stays the one named red until record 27 (2.3 at town, 20 -> 46, against 1.6). CORPUS_ROWS stays
+ *   504; the throw census stays 0.
+ *
+ *   2026-11-04 — F1 DEFENCE-WORDS, FIRST STEP (UNITS 1–5), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE
+ *   SOAK LADDER; record docs/shift-records/2026-11-04-rung1-23-f1-defence-words.json; the chair signs by the
+ *   owner's delegation, vetoable). Written from the staged tree S23 (the step's tree with the door paths
+ *   carried from the branch). The per-tier maximum roster reads 11/16/24/46/90/104;
+ *   CARTOGRAPHY_CALIBRATION.MAX_INSTITUTIONS 11/16/23/46/90/104 -> 11/16/24/46/90/104 by hand, the corpus
+ *   re-captured at it (bytes identical where no cap bit). Re-keyed by measurement over the recorded corpus (the
+ *   suite's own definitions): FROZEN.maxInstitutions 11/16/23/46/90/104 -> 11/16/24/46/90/104;
+ *   DUPLICATES.permille 126/207/44/62/46/53 -> 126/207/46/62/46/53 (derived ceilings 202/332/71/100/74/85 ->
+ *   202/332/74/100/74/85); the FALSIFIER { thorp: 36, hamlet: 21, village: 7, town: 32, city: 36, metropolis:
+ *   34 } = 166 -> { thorp: 36, hamlet: 21, village: 6, town: 32, city: 36, metropolis: 34 } = 165. W6 stays the
+ *   one named red until record 27 (2.3 at town, 20 -> 46, against 1.6). CORPUS_ROWS stays 504; the throw census
+ *   stays 0.
+ *
+ *   2026-11-04 — F3 FOOD-WORDS (UNITS 1–5), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
+ *   record docs/shift-records/2026-11-04-rung1-24-f3-food-words.json; the chair signs by the owner's
+ *   delegation, vetoable). Written from the staged tree S24 (the step's tree with the door paths carried from
+ *   the branch). The per-tier maximum roster reads 11/16/24/46/90/104, so CARTOGRAPHY_CALIBRATION does not
+ *   move. Re-keyed by measurement over the recorded corpus (the suite's own definitions): DUPLICATES.permille
+ *   126/207/46/62/46/53 -> 117/202/47/62/45/53 (derived ceilings 202/332/74/100/74/85 -> 188/324/76/100/72/85).
+ *   W6 stays the one named red until record 27 (2.3 at town, 20 -> 46, against 1.6). CORPUS_ROWS stays 504; the
+ *   throw census stays 0.
+ *
+ *   2026-11-05 — THE HEADROOM RAISED BY ITS OWN CRITERION (the cloud chair's ruling 2 in LANDING-4's addendum, recorded
+ *   under ODQ §934.105, vetoable; BAND 21, ODQ §515). CARTOGRAPHY_HEADROOM_PERMILLE 1600 -> 2300: W6 measured the worst
+ *   single-seed slice at 2.3000 (town, 20 -> 46) at the landed tip of the rung-1 window, the smallest multiple of 100
+ *   permille at or above it is 2300, and W6 is green at it. The corpus does NOT move (no derived cap bound before the
+ *   rise: the drawn maxima 12/19/30/118/216/258 sit under the old building caps 26/42/71/138/264/327), so no signed
+ *   record is owed and none is written; FROZEN, DUPLICATES and the FALSIFIER are readings and do not move. The derived
+ *   ceilings move with the operator: W8's translate ceilings 188/324/76/100/72/85 -> 270/465/109/143/104/122, and the
+ *   live derivation's hypothetical 160 -> 230. CORPUS_ROWS stays 504; the throw census stays 0.
+ *
  * To re-record after an INTENTIONAL change, run:
  *   UPDATE_CARTOGRAPHY_CALIBRATION=1 npx vitest run tests/domain/townCartographyCalibration.test.js
  * and add a row above before committing. Re-recording without adding a row is a
@@ -384,12 +567,12 @@ const TUNING_SOURCE = resolve(
  * would red on every deliberate cap change and say nothing the count cap does not.
  */
 const FROZEN = Object.freeze({
-  thorp: Object.freeze({ throws: 0, maxInstitutions: 12, maxBuildings: 13 }),
-  hamlet: Object.freeze({ throws: 0, maxInstitutions: 25, maxBuildings: 29 }),
-  village: Object.freeze({ throws: 0, maxInstitutions: 42, maxBuildings: 47 }),
-  town: Object.freeze({ throws: 0, maxInstitutions: 69, maxBuildings: 122 }),
-  city: Object.freeze({ throws: 0, maxInstitutions: 83, maxBuildings: 212 }),
-  metropolis: Object.freeze({ throws: 0, maxInstitutions: 86, maxBuildings: 271 }),
+  thorp: Object.freeze({ throws: 0, maxInstitutions: 11, maxBuildings: 12 }),
+  hamlet: Object.freeze({ throws: 0, maxInstitutions: 16, maxBuildings: 19 }),
+  village: Object.freeze({ throws: 0, maxInstitutions: 24, maxBuildings: 30 }),
+  town: Object.freeze({ throws: 0, maxInstitutions: 46, maxBuildings: 118 }),
+  city: Object.freeze({ throws: 0, maxInstitutions: 90, maxBuildings: 216 }),
+  metropolis: Object.freeze({ throws: 0, maxInstitutions: 104, maxBuildings: 258 }),
 });
 
 /**
@@ -434,12 +617,12 @@ const FROZEN = Object.freeze({
  * those, which is the evidence that the census measures the cure rather than nothing.
  */
 const DUPLICATES = Object.freeze({
-  thorp: Object.freeze({ permille: 126 }),
-  hamlet: Object.freeze({ permille: 201 }),
-  village: Object.freeze({ permille: 89 }),
-  town: Object.freeze({ permille: 64 }),
-  city: Object.freeze({ permille: 51 }),
-  metropolis: Object.freeze({ permille: 58 }),
+  thorp: Object.freeze({ permille: 117 }),
+  hamlet: Object.freeze({ permille: 202 }),
+  village: Object.freeze({ permille: 47 }),
+  town: Object.freeze({ permille: 62 }),
+  city: Object.freeze({ permille: 45 }),
+  metropolis: Object.freeze({ permille: 53 }),
 });
 
 /**
@@ -1060,8 +1243,8 @@ describe('W7 a corpus that outgrows the derived caps is LOUD', () => {
     // roster counts alone. The four tiers are the four that could not draw. ⚠ FIVE SINCE
     // 2026-09-30 (the urban band, ODQ §934.86): complete city blocks put 68 of the corpus's
     // cities over the superseded city binding (64), which no city reached before.
-    expect(refused).toEqual({ thorp: 50, hamlet: 73, village: 84, town: 84, city: 68 });
-    expect(Object.values(refused).reduce((sum, count) => sum + count, 0)).toBe(359);
+    expect(refused).toEqual({ thorp: 36, hamlet: 21, village: 6, town: 32, city: 36, metropolis: 34 });
+    expect(Object.values(refused).reduce((sum, count) => sum + count, 0)).toBe(165);
     // And the superseded per-row byte band is below what the corpus really produces,
     // which is the second premise the cap change alone could never have reached.
     const worstRow = Object.values(manifest)
@@ -1122,9 +1305,25 @@ describe('W8 the drawn corpus does not repeat itself', () => {
     // 234/344/132/100/80/90 -> 229/354/136/103/82/93 on 2026-11-03: FOOD-2 (header), the same operator.
     // 229/354/136/103/82/93 -> 208/327/141/103/82/93 on 2026-11-03: FOOD-3 (header), the same operator.
     // 208/327/141/103/82/93 -> 202/322/143/103/82/93 on 2026-11-03: SIZE-3 (header), the same operator.
-    expect(CARTOGRAPHY_TIERS.map(duplicateCeilingPermille)).toEqual([202, 322, 143, 103, 82, 93]);
+    // 202/322/143/103/82/93 -> 202/320/143/100/79/93 on 2026-11-04: X-46 CAR 1 (THE OWNER'S HISTORICAL BANDS) (header), the same operator.
+    // 202/320/143/100/79/93 -> 207/344/135/90/80/87 on 2026-11-04: X-46 CAR 2 (LANE X46-2-THRESHOLDS) (header), the same operator.
+    // 207/344/135/90/80/87 -> 207/344/135/90/80/85 on 2026-11-04: TERRAIN-POOLS, FIRST STEP (LANE TERRAIN-POOLS AT ITS FIRST MERGE) (header), the same operator.
+    // 207/344/135/90/80/85 -> 207/344/140/90/80/85 on 2026-11-04: T1/T2 (THE DRY RUN §4'S TWO PROPOSALS, ADOPTED BY THE CHAIR) (header), the same operator.
+    // 207/344/140/90/80/85 -> 207/344/140/90/80/87 on 2026-11-04: X-46 CAR 1B, FIRST STEP (U1–U3) (header), the same operator.
+    // 207/344/140/90/80/87 -> 194/316/74/96/84/88 on 2026-11-04: X-46 CAR 3 (LANE X46-3-BUDGET) (header), the same operator.
+    // 194/316/74/96/84/88 -> 194/316/74/96/84/87 on 2026-11-04: X-46 CAR 1B, SECOND STEP (U4–U5) (header), the same operator.
+    // 194/316/74/96/84/87 -> 194/316/72/96/84/87 on 2026-11-04: PLACE-NOT-TIER (R6, UNITS 1–2) (header), the same operator.
+    // 194/316/72/96/84/87 -> 202/319/69/95/84/92 on 2026-11-04: PINS, FIRST STEP (UNITS 1–3 AND THE CHAIR'S ADDENDUM) (header), the same operator.
+    // 202/319/69/95/84/92 -> 220/312/55/92/87/88 on 2026-11-04: X-46 CAR 3, I7 (header), the same operator.
+    // 220/312/55/92/87/88 -> 220/312/60/92/87/87 on 2026-11-04: PINS, SECOND STEP (UNITS 6–7) (header), the same operator.
+    // 220/312/60/92/87/87 -> 202/332/71/100/74/85 on 2026-11-04: F6 BUDGET-FLOOR (UNITS 1–4) (header), the same operator.
+    // 202/332/71/100/74/85 -> 202/332/74/100/74/85 on 2026-11-04: F1 DEFENCE-WORDS, FIRST STEP (UNITS 1–5) (header), the same operator.
+    // 202/332/74/100/74/85 -> 188/324/76/100/72/85 on 2026-11-04: F3 FOOD-WORDS (UNITS 1–5) (header), the same operator.
+    // 188/324/76/100/72/85 -> 270/465/109/143/104/122 on 2026-11-05: CARTOGRAPHY_HEADROOM_PERMILLE 1600 -> 2300 (the chair's
+    // ruling 2, LANDING-4's addendum; header). The readings do not move; the ceilings are the same operator at the new headroom.
+    expect(CARTOGRAPHY_TIERS.map(duplicateCeilingPermille)).toEqual([270, 465, 109, 143, 104, 122]);
     // And the derivation is live — a hypothetical reading derives its own ceiling.
-    expect(Math.ceil((100 * CARTOGRAPHY_HEADROOM_PERMILLE) / 1000)).toBe(160);
+    expect(Math.ceil((100 * CARTOGRAPHY_HEADROOM_PERMILLE) / 1000)).toBe(230);
   });
 
   /**
@@ -1173,6 +1372,9 @@ describe('W8 the drawn corpus does not repeat itself', () => {
     }
     expect(failures).toEqual([]);
     // ANTI-VACUITY: the six rows actually drew, so the zero above is a measurement.
+    // 600 -> 500 at X-46 car 1b's first step (the six rows drew 595; the chair's ruling 3, LANDING-4's addendum, confirmed);
+    // 500 -> 600 on 2026-11-05 at the landed tip (the six rows draw 645: city 214, metropolis 257, town 118, village 26,
+    // hamlet 18, thorp 12). The floor follows the measurement, as ruling 3 orders.
     expect(measured).toBeGreaterThan(600);
   }, 300_000);
 

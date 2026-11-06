@@ -301,8 +301,13 @@ describe('EM-R8 — the escalation ladder never overwrites a HELD key, and the r
     const escalating = config.filter((trial) => trial.escalations.length > 0);
     const byEdit = {};
     for (const trial of escalating) byEdit[trial.label] = (byEdit[trial.label] || 0) + 1;
+    // 2026-11-05, the rung-1 landing (ODQ §934.105; LANDING-5 under the chair's ruling 4), READ arm by arm and BISECTED
+    // over the landing's first-parent stages (this file's census at each stage; at 1264a8152^ every figure is the frozen one):
+    // E7/E8 26/9 -> 28/9 X-46 car 1 1264a8152 -> 28/8 car 2 d4bf6431c -> 14/2 car 3 90dc22f18 (the institution budget) ->
+    // 15/2 car 1b-2 fb0341b93 -> 19/4 PINS 37b1e746d -> 22/4 car 3 I7 6ca454d2b -> 18/3 F6 6d84aa834; nothing else moves them.
+    // Every escalation still EXHAUSTS, and the layer channel is still silent (both lists empty at every stage).
     expect(Object.entries(byEdit).sort(), 'the config channel escalates on both world-fact edits, at the figures measured at this landing')
-      .toEqual([['E7 terrain to desert', 26], ['E8 culture to norse', 9]]);
+      .toEqual([['E7 terrain to desert', 18], ['E8 culture to norse', 3]]);
     // 2026-10-31, the GS-2 merge (lane G2, ODQ §934.101) then chair ruling X-29 (cure lane T13), each measured:
     // GS-2 re-dealt the world-fact re-derivations, E7 30 -> 31 and E8 10 -> 9, and its derived conflicts put TWO
     // power-card trials on the layer channel, exhausting on V-EVIDENCE-CONFLICT; the X-29 restatement of the receipt's
@@ -319,7 +324,7 @@ describe('EM-R8 — the escalation ladder never overwrites a HELD key, and the r
     expect(Object.entries(liveById).sort(), 'what the cure LEAVES on the world-fact channel: ONE '
       + 'REFERENTIAL cross-key check, and no prose-count or citation check at all. EM-B2b owns this seam '
       + '(EM-R7 §6 declares it dark)')
-      .toEqual([['V-DEFENSE-INST', 35]]);
+      .toEqual([['V-DEFENSE-INST', 21]]); // 2026-11-05 (LANDING-5, by stage): 35 -> 37 -> 36 -> 16 -> 17 -> 23 -> 26 -> 21 at the same seven steps as E7/E8 above
     // 2026-10-31, the GS-2 merge then chair ruling X-29 (cure lane T13): V-EVIDENCE-CONFLICT 8 -> 9 at the GS-2 re-deal,
     // then 9 -> 0, because the post-pass now restates the conflict citations from the merged record; V-DEFENSE-INST
     // unmoved at 35. The roster of what the cure leaves shrinks to one id.
@@ -356,7 +361,12 @@ describe('EM-R8 — the escalation ladder never overwrites a HELD key, and the r
     // themselves change, in 6 only an ordinal), among them the two power-card hamlets that EXHAUSTED the ladder before
     // the cure, and in every trial that cites a conflict the citations name exactly the merged record's own explained
     // conflicts.
-    expect(all.filter((trial) => trial.conflictsRestated).length, 'trials whose conflict citations the post-pass rebuilt').toBe(18);
+    // 2026-11-04, the window-end pin re-key (REGISTERS seat): 18 -> 17, FOOD-2 (the food base numbers), traced at stage
+    // T2 in DOORS-4; the town's own conflicts moved with the food world, the law above is unchanged.
+    // 2026-11-05 (LANDING-5, the chair's ruling 4; an anti-vacuity arm, READ and BISECTED by stage): 17 -> 16 TERRAIN-POOLS
+    // ac09ea83b -> 9 X-46 car 3 90dc22f18 -> 10 PLACE-NOT-TIER 6129c300d -> 7 car 3 I7 6ca454d2b -> 8 F6 6d84aa834 -> 9 F1
+    // 5e9ffb220. Still live (nine trials, six of them the E6 seat edit on the six hamlets), and `foreign` stays empty.
+    expect(all.filter((trial) => trial.conflictsRestated).length, 'trials whose conflict citations the post-pass rebuilt').toBe(9);
     const foreign = all.filter((trial) => trial.citesOwn === false).map((trial) => `${trial.label} ${trial.key}`);
     // anchored: the line above proves the restatement fires on twelve live trials, so silence here is a cure.
     expect(foreign, `the receipt cites a conflict list that is not the merged record's own:\n${foreign.join('\n')}`).toEqual([]);
@@ -394,7 +404,12 @@ describe('EM-R8 — the escalation ladder never overwrites a HELD key, and the r
     expect(ATOMIC_COLLECTIONS.includes(EVIDENCE_PATH), 'ATOMIC_COLLECTIONS governs THE MERGE for this path').toBe(true);
     expect(CLASS_EXCEPTIONS[EVIDENCE_PATH], 'and the CLASS_EXCEPTIONS row governs THE POST-PASS').toBe('MIRROR');
 
-    const row = sample63().find((candidate) => keyOf(candidate) === 'village|germanic|hills|road|civilized|golden-master-v3');
+    // 2026-11-04, the window-end pin re-key (REGISTERS seat, the chair's ruling 3): the trial row was
+    // village|germanic|hills|road|civilized|golden-master-v3 until SIZE-3, after which halving its faction[1] no longer
+    // re-takes the evidence array (atomicTaken held only economicState.primaryImports). Searched over all 63 rows with
+    // faction[1] halved: town|germanic|plains|road|civilized|gm-seed-c is the ONE row whose merge still takes the
+    // evidence whole from R1 with R1's row differing from the record's, so the arm keeps its subject.
+    const row = sample63().find((candidate) => keyOf(candidate) === 'town|germanic|plains|road|civilized|gm-seed-c');
     const { _seed: seed, ...config } = row;
     const base = generateSettlementPipeline(config, null, { seed, customContent: {} });
     const R0 = rederive(base, config, EMPTY, ENGINE, DECLARATIONS).record;
@@ -444,7 +459,8 @@ describe('EM-R8 — the escalation ladder never overwrites a HELD key, and the r
     // 2026-10-01, the urban band (ODQ §934.86): quiet 450 -> 457 of 498 (noisy 48 -> 41); the druid rulings (2026-10-01, ODQ §934.86 addendum 2, J30–J33): 457 -> 458 (41 -> 40).
     // 2026-10-31, chair ruling X-29 (cure lane T13; the GS-2 merge, ODQ §934.101): 458 -> 463 (noisy 40 -> 35), the
     // conflict-citation restatement (A2).
-    expect(quiet.length, 'the trials in which no rung fires at all').toBe(463);
+    // 2026-11-05 (LANDING-5, by stage): 463 -> 461 -> 462 -> 482 -> 481 -> 475 -> 472 -> 477 at the seven steps A2 names (noisy 35 -> 21).
+    expect(quiet.length, 'the trials in which no rung fires at all').toBe(477);
     // anchored: 463 of 498 trials are quiet by the expectation above, so this list is drawn from a live set.
     expect(noisyRepairs, `repairs moved with no rung firing at all:\n${noisyRepairs.join('\n')}`).toEqual([]);
     // anchored: the same census carries 35 noisy trials (A2), so the explanation below is exercised.
@@ -459,13 +475,14 @@ describe('EM-R8 — the escalation ladder never overwrites a HELD key, and the r
     const all = trials();
     const quiet = all.filter((trial) => trial.escalations.length === 0);
     // 2026-10-31, chair ruling X-29 (cure lane T13; the GS-2 merge): 458 -> 463, the restated conflict citations (A2).
-    expect(quiet.length, 'the quiet trials, which are 463 of 498 once the ladder stops repairing held facts').toBe(463);
+    // 2026-11-05 (LANDING-5, by stage, as A5): 463 -> 477.
+    expect(quiet.length, 'the quiet trials, which are 477 of 498 once the ladder stops repairing held facts').toBe(477);
     const drifted = quiet.filter((trial) => !trial.mergedIsPipeline).map((trial) => `${trial.label} ${trial.key}`);
     // anchored: `quiet` is 463 rows by the expectation above.
     expect(drifted, 'a quiet trial whose merged record is not mergeTree + recomputeMirrors + '
       + `recomputeReceipts of its own inputs — the guard changed something while doing nothing:\n${drifted.join('\n')}`).toEqual([]);
     const noisy = all.filter((trial) => trial.escalations.length > 0);
-    expect(noisy.length, 'and the blast radius of the ladder is exactly the config channel A2 measures').toBe(35); // X-29: 40 -> 35
+    expect(noisy.length, 'and the blast radius of the ladder is exactly the config channel A2 measures').toBe(21); // X-29: 40 -> 35; 2026-11-05 (LANDING-5, by stage): 35 -> 21
   }, SLOW);
 
   it('A7 · the chain: determinism and undo hold, and the power card stops making history it did not make', () => {

@@ -53,12 +53,14 @@ export const landing = {
     h2:    'A living town in one click. Twenty dials when you want them.',
     // Every concrete noun here is a FACT THE FIXTURE CARRIES, so §02 can print
     // the same receipts a screen later and the reader recognises them:
-    // the road roll (voice.receipts.route), the travellers' inn the roster seated
+    // the road roll (voice.receipts.route), the blacksmith the roster seated
     // (voice.receipts.institution), the cleared stands (voice.receipts.resource).
     // (Re-grounded 2026-09-30: the urban band's re-emitted fixture no longer carried
     // the market licensing quarrel, ODQ §934.86. The one-faction-set fixture of
-    // 2026-10-31 derives a quarrel again, voice.receipts.conflict, which §02 names.)
-    body:  'Pick a size and forge. Everything after that is derived, not drawn from a table: where the road goes, which inn takes the travellers, which faction is owed a favour, what was cut down a generation ago and never grew back. Open the Advanced panel and set terrain, age, wealth and trouble yourself.',
+    // 2026-10-31 derives a quarrel again, voice.receipts.conflict, which §02 names.
+    // Re-grounded 2026-11-04 at the rung-1 landing: the travellers' inn gave way to a blacksmith
+    // lifted by the nearby resources and terrain. An OWNER VETO POINT.)
+    body:  'Pick a size and forge. Everything after that is derived, not drawn from a table: where the road goes, which smith the hills make worth seating, which faction is owed a favour, what was cut down a generation ago and never grew back. Open the Advanced panel and set terrain, age, wealth and trouble yourself.',
     axiom: 'Every dossier answers the same question: given these constraints, what must this place be?',
     // ⛔ THE SECTION-LEVEL ASK IS GONE (owner, 2026-09-19, taking the draft's
     // recommendation): ONE ask at the top and ONE at the end. `cta` ("Forge a
@@ -104,7 +106,7 @@ export const landing = {
     // dials (town.eyebrow "road village · mountain") are what "a mountain
     // village the road reaches" says. tests/copy/landingProseGrounding.test.js
     // reds when a regenerated fixture leaves this sentence behind.
-    body:    'This is Cnocby: four hundred and twelve people, a mountain village the road reaches, and a bakehouse already on its second bake when you arrive. The Summary tab is your session prep. Systems, factions and history sit one tab deeper, for when the party starts digging.',
+    body:    'This is Cnocby: eighty-two people, a mountain village the road reaches, and a bakehouse already on its second bake when you arrive. The Summary tab is your session prep. Systems, factions and history sit one tab deeper, for when the party starts digging.',
     library: 'Sign in free to keep every town in your Library, organized by campaign.',
     // ⛔ `cta` ('Forge a settlement') and `link` ('Read on: the voice') ARE
     // DELETED. Neither was rendered anywhere — the brief block feeds §01's
@@ -136,8 +138,9 @@ export const landing = {
     // binds it to src/domain/aiGrounding.js and its suites. ⚑ The four named
     // receipts are voice.receipts[0], [1], [2] and [3], in the order the card prints
     // (re-grounded 2026-09-30 with forge.body above; the conflict line came back with
-    // the one-faction-set fixture, GS-2 of ODQ §934.101, re-grounded 2026-11-01).
-    body:   'Left is what the engine derived about Cnocby: the quarrel it found between the Elder Council and the Craft Guilds, the road it rolled, the timber it marked out, the inn it seated for travellers. Right is the same four facts for the table. The Narrative Layer never invents facts. Everything it needs is already in the brief.',
+    // the one-faction-set fixture, GS-2 of ODQ §934.101, re-grounded 2026-11-01; re-grounded
+    // 2026-11-04 at the rung-1 landing: the Religious Authorities and the blacksmith. An OWNER VETO POINT.)
+    body:   'Left is what the engine derived about Cnocby: the quarrel it found between the Elder Council and the Religious Authorities, the road it rolled, the timber it marked out, the blacksmith it seated. Right is the same four facts for the table. The Narrative Layer never invents facts. Everything it needs is already in the brief.',
     // Owner directive: disclose the AI up front (not prominent). The Narrative
     // Layer is no longer the ONLY AI surface (the Surveyor workshop is another),
     // so this line evolved (W-DOC reconcile, brief §4) from the stale "only AI
@@ -171,12 +174,14 @@ export const landing = {
     body1: 'Canonize the draft and Cnocby becomes part of your campaign: it takes events, keeps a chronicle, remembers. Put it on the world map in the Realm with the towns around it, tie them together by trade and grudge, and add your own gods, guilds and goods in the Compendium.',
     // ⚑ FIXTURE-GROUNDED, EVENT BY EVENT. Every beat in this sentence is one row
     // of realm.advance — the same six records the card beside it renders, in the
-    // same order, at the same weeks (1 creed · 2 wartime · 4 fracture · 10 crime
-    // · 12 trade). It is the most fragile prose on the page and the grounding
+    // same order, at the same weeks (3 challenge · 4 raiders · 8 reforms · 8 raiders
+    // passed · 9 capture · 12 trade). It is the most fragile prose on the page and the grounding
     // suite walks it word against field.
     // 2026-10-02, the Voice Program (ODQ §934.88): re-grounded on the regenerated timeline, which now speaks in deeds
     // ("Cnocby goes onto a war footing", "Crime takes hold of Cnocby", "Cnocby's trade routes break down").
-    body2: 'Then advance time. In Cnocby’s first twelve weeks the village took a patron creed and went onto a war footing, and the fracture the creed brought passed and left its memory; by week ten crime had taken hold of its streets, and by week twelve its trade routes had broken down. Every one of those is a record the engine wrote, and every one carries its cause.',
+    // 2026-11-04 (the rung-1 landing, LANDING-2; an OWNER VETO POINT): re-grounded on the timeline the rung-1
+    // window's town derives (an open challenge, the raiders, the reforms, the capture, the broken routes).
+    body2: 'Then advance time. In Cnocby’s first twelve weeks the village’s rulers faced an open challenge, and monster or raider pressure deepened and then passed, leaving its abandoned roads behind; by week eight Inghean MacCarthy was pushing through reforms, by week nine the Elder Council had captured an institution, and by week twelve its trade routes had broken down. Every one of those is a record the engine wrote, and every one carries its cause.',
     // The chronicle beside the realm map is the REGION's band, not the town's —
     // two cards that now say different things, and a reader needs to be told why.
     regionLine: 'Beside it, the region: what the neighbours did while Cnocby was busy.',

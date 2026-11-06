@@ -57,7 +57,14 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
  * which is either a real regression or a legitimate behaviour shift that owes a written
  * shift record. Re-freezing without one is how a promise stops being checkable.
  */
-const DORMANT_GOLDEN = '6e85308b0f396a77';
+// RE-RECORDED 2026-11-06 (LANDING-7 A), 6e85308b0f396a77 -> f80ebc3290869df9, under the signed
+// shift record docs/shift-records/2026-11-04-rung1-02-x46-car-2-thresholds.json (ODQ §934.105) as a
+// second act: bisected by first-parent stage to the X-46 car 2 compose d4bf6431c and, inside the lane,
+// to the ONE commit 04c1a3d25 — causalState.js's bare population comparisons re-based to
+// TIER_STAMP_CUTS (dense >= 2,250, adequate >= 350, thin < 88), which this corpus's 900 / 1,500 /
+// 4,200 / 8,000 rows straddle. A legitimate behaviour shift with its record, not a regression; the
+// field itself is still dormant (the arm below this one, unmoved, says so).
+const DORMANT_GOLDEN = 'f80ebc3290869df9';
 
 /**
  * The module set this car landed, as REPO-RELATIVE PATHS.

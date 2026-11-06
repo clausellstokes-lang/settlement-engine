@@ -395,7 +395,13 @@ describe('institution rename: the declared cascade over real pipeline saves', ()
       if (noOpResult.changed || noOpResult.touched.length || JSON.stringify(noOp) !== JSON.stringify(base)) noOpMoved.push(world.key);
 
       // (v) THE FACTION-HANDLE PIN: a case near-miss must NOT follow an institution rename.
-      const guild = rosterOf(base).find((name) => name === "Thieves' guild chapter");
+      // 2026-11-05 (LANDING-6, the chair's ruling: classify): the pin went VACUOUS, not red. X-46 car 1 (1264a8152, the
+      // population bands) took "Thieves' guild chapter" out of the corpus entirely (12 cities carried it at 1264a8152^,
+      // none from car 1 on; measured over all 525 rows, binary-searched over the window's first-parent steps); the only
+      // thieves' house the corpus now builds is "Thieves' guild (powerful)" (47 metropolises). The near-miss the pin
+      // guards is the same for either house (a house whose name opens "Thieves' guild" against the faction handle
+      // "Thieves' Guild"), so the habitat is re-grounded on both, never the assertion widened.
+      const guild = rosterOf(base).find((name) => name === "Thieves' guild chapter" || name === "Thieves' guild (powerful)");
       if (guild) {
         const handlesOf = (record) => [...valuesAt(record, 'npcs[].secondaryAffiliation'), ...valuesAt(record, 'factions[].members[].secondaryAffiliation')]
           .filter((value) => value.trim() === "Thieves' Guild").length;

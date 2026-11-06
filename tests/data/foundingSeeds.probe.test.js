@@ -46,10 +46,29 @@ describe('claims-parity — each synopsis is proven by the forged world', () => 
     // Receipt 1: Legitimacy Crisis, governance fractured.
     expect(legit.label).toBe('Legitimacy Crisis');
     expect(legit.governanceFractured).toBe(true);
-    // Receipt 2: a catastrophic siege within the last fifteen years.
-    expect(eventsOf(t).some((e) => /siege/i.test(e.name) && e.severity === 'catastrophic' && e.yearsAgo <= 15)).toBe(true);
+    // Receipt 2: plague at its onset, a quarantine council among the factions. Re-stated 2026-11-06 with the
+    // re-chosen seed (LANDING-7 G2, ruling R-G2): it replaces "a catastrophic siege within the last fifteen
+    // years", crown-8826's incidental specific, which crown-3 does not forge (its siege is major, 28 years back).
+    const stressTypes = (Array.isArray(t.stress) ? t.stress : [t.stress]).filter(Boolean).map((e) => e.type);
+    expect(stressTypes).toContain('plague_onset');
+    expect((t.powerStructure?.factions || []).map((f) => f.faction)).toContain('Quarantine Council');
     // Receipt 3: a figure formalising the independent authority the collapse created.
     expect(goalsOf(t).some((g) => /independent operational authority|exit before the gap between title and authority/i.test(g))).toBe(true);
+    // THE SPECIFICS THE SYNOPSIS QUOTES, re-pinned 2026-11-06 (LANDING-7 G2, the chair's ruling R-G2: crown-3, the
+    // first crown seed forging the essential story; the specifics follow its world). The mining town and the
+    // siege ten years past were crown-8826's; crown-3's two are the plague (receipt 2 above) and the thieves' guild.
+    // "A town of poor harvests": the food record reads short (past Secure).
+    expect(['Pressured', 'Import-Dependent', 'Deficit', 'Deficit — Active Famine']).toContain(t.economicState?.foodSecurity?.label);
+    // "Its guild council holds a title the streets no longer honour" (was a merchant oligarchy, crown-8826's).
+    expect(t.powerStructure?.government).toBe('Guild Council');
+    // "... and the thieves' guild already outweighs it": the Thieves' Guild outranks the governing faction on power.
+    const governing = (t.powerStructure?.factions || []).find((f) => f.isGoverning);
+    expect((t.powerStructure?.factions || []).find((f) => f.faction === "Thieves' Guild")?.power).toBeGreaterThan(governing?.power);
+    // "that guild's master has begun, quietly, to write the authority ... into permanent ink": the coup is the
+    // thieves' guild master's.
+    expect((Array.isArray(t.npcs) ? t.npcs : []).some((n) => /guild master/i.test(n?.role || '')
+      && n?.factionAffiliation === "Thieves' Guild"
+      && /independent operational authority/i.test(n?.goal?.short || ''))).toBe(true);
   });
 
   it('THE MILL THAT OUTLIVED ITS WARS — a scarred survivor', () => {
@@ -105,5 +124,110 @@ describe('claims-parity — each synopsis is proven by the forged world', () => 
     expect(eventsOf(t).some((e) => /uprising/i.test(e.name) && e.severity === 'major' && e.yearsAgo <= 15)).toBe(true);
     // Receipt 3: a figure holding the line around criminal/informal arrangements.
     expect(goalsOf(t).some((g) => /informal arrangements|criminal arrangements|corrupt interests/i.test(g))).toBe(true);
+  });
+});
+
+// ── LINK CLAIMS (LANDING-7 G3, the chair's ruling R-G3, 2026-11-06) ─────────────────────────────────────────
+// A synopsis may join two facts with a causal word ONLY where the forged record holds the link: a record field
+// that names one fact as the cause, trigger, consequence or reason of the other. The links are DATA beside the
+// claims (`links` on the registry entry: cause fact, effect fact, the record field, the synopsis words that
+// state it); each row is proven here by the forged world, like the facts. A row names a field from LINK_FIELDS
+// below, and each field proves exactly one (cause → effect) pair, so a row cannot borrow another link's proof.
+
+const masterOf = (t) => (Array.isArray(t.npcs) ? t.npcs : []).find((n) => /guild master/i.test(n?.role || '')
+  && n?.factionAffiliation === "Thieves' Guild" && /independent operational authority/i.test(n?.goal?.short || ''));
+const governingOf = (t) => (t.powerStructure?.factions || []).find((f) => f.isGoverning);
+const thievesOf = (t) => (t.powerStructure?.factions || []).find((f) => f.faction === "Thieves' Guild");
+/** The showcase story's six facts, each a predicate on the forged world (the same truths the claims above pin). */
+const FACTS = {
+  'poor harvests': (t) => ['Pressured', 'Import-Dependent', 'Deficit', 'Deficit — Active Famine'].includes(t.economicState?.foodSecurity?.label),
+  plague: (t) => (Array.isArray(t.stress) ? t.stress : [t.stress]).filter(Boolean).some((e) => e.type === 'plague_onset'),
+  'quarantine council': (t) => (t.powerStructure?.factions || []).some((f) => f.faction === 'Quarantine Council'),
+  'title unhonoured': (t) => legitOf(t).label === 'Legitimacy Crisis' && legitOf(t).governanceFractured === true
+    && t.powerStructure?.government === 'Guild Council' && governingOf(t)?.faction === 'Guild Council',
+  'thieves outweigh': (t) => (thievesOf(t)?.power ?? -1) > (governingOf(t)?.power ?? Infinity),
+  'master formalising': (t) => Boolean(masterOf(t)),
+};
+
+/**
+ * The record fields that can hold a link, each proving ONE (cause → effect) pair on the forged world. A field
+ * whose `holds` answers false is a link the town does not have; a synopsis row citing it reds.
+ */
+const LINK_FIELDS = {
+  // foodBalance's plague branch cuts local production (×0.75) and writes the stress's consequence for food.
+  'economicViability.issues[stress_consequence]': { cause: 'plague', effect: 'poor harvests',
+    holds: (t) => (t.economicViability?.issues || []).some((i) => i?.type === 'stress_consequence'
+      && i?.category === 'Food Supply' && /^Plague:/.test(i?.message || '')) },
+  // computePublicLegitimacy's safety term reads the safety label, whose strain is the plague's own.
+  'powerStructure.publicLegitimacy.breakdown.safety': { cause: 'plague', effect: 'title unhonoured',
+    holds: (t) => (legitOf(t).breakdown?.safety ?? 0) < 0
+      && /Plague Conditions/.test(t.economicState?.safetyProfile?.safetyLabel || '') },
+  // computePublicLegitimacy's food term reads the food label.
+  'powerStructure.publicLegitimacy.breakdown.food': { cause: 'poor harvests', effect: 'title unhonoured',
+    holds: (t) => (legitOf(t).breakdown?.food ?? 0) < 0 },
+  // applyLegitimacyMultipliers: the crisis band's multipliers turn the raw order (the council ahead) into the
+  // effective one (the guild ahead); the record keeps both.
+  'factions[].rawPower→power × publicLegitimacy multipliers': { cause: 'title unhonoured', effect: 'thieves outweigh',
+    holds: (t) => legitOf(t).govMultiplier < 1 && legitOf(t).crimMultiplier > 1
+      && (governingOf(t)?.rawPower ?? -1) > (thievesOf(t)?.rawPower ?? Infinity)
+      && (thievesOf(t)?.power ?? -1) > (governingOf(t)?.power ?? Infinity) },
+  // npcStructure: the master's goal is the template of the settlement condition the record stamps on her.
+  'npcs[].settlementCondition': { cause: 'title unhonoured', effect: 'master formalising',
+    holds: (t) => masterOf(t)?.settlementCondition === 'governance_fractured' },
+  // npcStructure: the template's rank, `dominant` when her faction leads its category and stands within reach of
+  // the governing faction's power, selects the formalising goal (the subordinate one only advances standing).
+  'npcs[].structuralRank': { cause: 'thieves outweigh', effect: 'master formalising',
+    holds: (t) => masterOf(t)?.structuralRank === 'dominant' },
+  // The stressor's own trace: would hold "harvests → plague" if a cause named the food record. resolveStress runs
+  // before the economy, so its causes name tier, threat and the stress generator.
+  'simulationTrace[stressor.plague_onset].causes': { cause: 'poor harvests', effect: 'plague',
+    holds: (t) => (Array.isArray(t.simulationTrace) ? t.simulationTrace : Object.values(t.simulationTrace || {}))
+      .filter((e) => e?.targetId === 'stressor.plague_onset')
+      .some((e) => (e.causes || []).some((c) => /food|harvest|grain/i.test(`${c?.source} ${c?.effect || ''}`))) },
+  // The faction's own trace: would hold "plague → quarantine council" if a cause named the stressor.
+  'simulationTrace[faction.quarantine_council].causes': { cause: 'plague', effect: 'quarantine council',
+    holds: (t) => (Array.isArray(t.simulationTrace) ? t.simulationTrace : Object.values(t.simulationTrace || {}))
+      .filter((e) => e?.targetId === 'faction.quarantine_council')
+      .some((e) => (e.causes || []).some((c) => /stress|plague/i.test(`${c?.source} ${c?.reason || ''}`))) },
+};
+
+/** Words that make a causal or sequential claim; in a synopsis with links each must sit inside a link's words. */
+const CAUSAL_WORDS = /\b(because|so|which|therefore|thus|since|hence|and now|newly|followed|between|lifted|handed)\b/gi;
+
+describe('link claims — each connective in the synopsis is a link the forged record holds', () => {
+  const entry = foundingSeedById('the-contested-crown');
+  let world = null;
+  const forged = () => (world ??= forge(entry));
+  const links = Array.isArray(entry.links) ? entry.links : [];
+
+  it('the entry declares its links', () => {
+    expect(links.length).toBeGreaterThan(0);
+  });
+
+  for (const fact of Object.keys(FACTS)) {
+    it(`fact: ${fact}`, () => {
+      expect(FACTS[fact](forged())).toBe(true);
+    });
+  }
+
+  for (const link of links) {
+    it(`link: ${link.cause} → ${link.effect} (${link.field})`, () => {
+      const t = forged();
+      expect(entry.synopsis).toContain(link.words);
+      expect(FACTS[link.cause]?.(t)).toBe(true);
+      expect(FACTS[link.effect]?.(t)).toBe(true);
+      const field = LINK_FIELDS[link.field];
+      expect(field, `no record field "${link.field}"`).toBeTruthy();
+      expect([field.cause, field.effect]).toEqual([link.cause, link.effect]);
+      expect(field.holds(t), `the record does not hold ${link.cause} → ${link.effect}`).toBe(true);
+    });
+  }
+
+  it('every causal word in the synopsis sits inside a declared link', () => {
+    const spans = links.map((l) => [entry.synopsis.indexOf(l.words), entry.synopsis.indexOf(l.words) + l.words.length]);
+    const loose = [...entry.synopsis.matchAll(CAUSAL_WORDS)]
+      .filter((m) => !spans.some(([a, b]) => a >= 0 && m.index >= a && m.index < b))
+      .map((m) => m[0]);
+    expect(loose).toEqual([]);
   });
 });

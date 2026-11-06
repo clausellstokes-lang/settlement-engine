@@ -163,11 +163,31 @@ describe('the composed-prose manifest — the DRIFT corpus, both audiences', () 
     // docs/shift-records/2026-11-03-x49-stores-off-defense.json): the stored-food figure has one home, the Economy
     // tab, so every row loses the Defense tab's two food-stores cells (DS-DEF-2's Disasters & Famine reserves line,
     // DS-DEF-6's Logistics & Supply stores line: 2,100 removed; 150 DS-DEF-6 cells changed). Towns unmoved at 516/3/3/3.
+    // 68,660 -> 68,874 (386/380/372 -> 384/378/372) at X-46 CAR 1 (THE OWNER'S HISTORICAL BANDS) (ODQ §934.105, RUNG 1 OF THE SOAK LADDER, 2026-11-04; record docs/shift-records/2026-11-04-rung1-01-x46-car-1-bands.json).
+    // Towns unmoved at 516/3/3/3.
+    // 68,874 -> 68,874 (384/378/372 -> 386/378/372) at X-46 CAR 2 (LANE X46-2-THRESHOLDS) (ODQ §934.105, RUNG 1 OF THE SOAK LADDER, 2026-11-04; record docs/shift-records/2026-11-04-rung1-02-x46-car-2-thresholds.json).
+    // Towns unmoved at 516/3/3/3.
+    // 68,874 -> 68,904 (386/378/372 -> 384/376/372) at TERRAIN-POOLS, FIRST STEP (LANE TERRAIN-POOLS AT ITS FIRST MERGE) (ODQ §934.105, RUNG 1 OF THE SOAK LADDER, 2026-11-04; record docs/shift-records/2026-11-04-rung1-06-terrain-pools-1.json).
+    // Towns unmoved at 516/3/3/3.
+    // 68,904 -> 67,944 (384/376/372 -> 378/370/366) at SELF-VOUCH (ODQ §934.105, RUNG 1 OF THE SOAK LADDER, 2026-11-04; record docs/shift-records/2026-11-04-rung1-08-self-vouch.json).
+    // Towns unmoved at 516/3/3/3.
+    // 67,944 -> 67,724 (378/370/366 -> 370/358/358) at X-46 CAR 3 (LANE X46-3-BUDGET) (ODQ §934.105, RUNG 1 OF THE SOAK LADDER, 2026-11-04; record docs/shift-records/2026-11-04-rung1-12-x46-car-3-budget.json).
+    // Towns unmoved at 516/3/3/3.
+    // 67,724 -> 67,716 (370/358/358 -> 370/358/358) at X-46 CAR 1B, SECOND STEP (U4–U5) (ODQ §934.105, RUNG 1 OF THE SOAK LADDER, 2026-11-04; record docs/shift-records/2026-11-04-rung1-13-x46-car-1b-2-curve.json).
+    // Towns unmoved at 516/3/3/3.
+    // 67,716 -> 67,688 (370/358/358 -> 372/358/358) at PINS, FIRST STEP (UNITS 1–3 AND THE CHAIR'S ADDENDUM) (ODQ §934.105, RUNG 1 OF THE SOAK LADDER, 2026-11-04; record docs/shift-records/2026-11-04-rung1-17-pins-1-density-exemptions.json).
+    // Towns unmoved at 516/3/3/3.
+    // 67,688 -> 67,780 (372/358/358 -> 372/358/358) at X-46 CAR 3, I7 (ODQ §934.105, RUNG 1 OF THE SOAK LADDER, 2026-11-04; record docs/shift-records/2026-11-04-rung1-19-x46-car-3-i7-realised.json).
+    // Towns unmoved at 516/3/3/3.
+    // 67,780 -> 67,754 (372/358/358 -> 372/360/358) at F6 BUDGET-FLOOR (UNITS 1–4) (ODQ §934.105, RUNG 1 OF THE SOAK LADDER, 2026-11-04; record docs/shift-records/2026-11-04-rung1-22-f6-budget-floor.json).
+    // Towns unmoved at 516/3/3/3.
+    // 67,754 -> 67,754 (372/360/358 -> 372/364/358) at F1 DEFENCE-WORDS, FIRST STEP (UNITS 1–5) (ODQ §934.105, RUNG 1 OF THE SOAK LADDER, 2026-11-04; record docs/shift-records/2026-11-04-rung1-23-f1-defence-words.json).
+    // Towns unmoved at 516/3/3/3.
     expect(tally, 'the DRIFT corpus by seed, cells and towns').toEqual({
-      'golden-master-v3': { cells: 68_660, towns: 516 },
-      'gm-seed-a': { cells: 386, towns: 3 },
-      'gm-seed-b': { cells: 380, towns: 3 },
-      'gm-seed-c': { cells: 372, towns: 3 },
+      'golden-master-v3': { cells: 67_754, towns: 516 },
+      'gm-seed-a': { cells: 372, towns: 3 },
+      'gm-seed-b': { cells: 364, towns: 3 },
+      'gm-seed-c': { cells: 358, towns: 3 },
     });
     // The two halves must close against the figures every other arm here reads.
     expect(Object.values(tally).reduce((n, r) => n + r.cells, 0)).toBe(run.cells.length);
@@ -494,7 +514,13 @@ describe('the two controls no one-audience manifest can see', () => {
     // CAPACITY-train car is WITHDRAWN. The tally is a driven arm below, not a sentence.
     // 309 -> 296 at the urban band's re-record (2026-09-30, ODQ §934.86): the moved worlds draw
     // from mixed pools at 13 fewer positions.
-    expect(differ.length, 'positions where the two faces draw differently').toBe(296);
+    // 296 -> 308 at X-46 CAR 1 (THE OWNER'S HISTORICAL BANDS) (ODQ §934.105, RUNG 1 OF THE SOAK LADDER, 2026-11-04; record docs/shift-records/2026-11-04-rung1-01-x46-car-1-bands.json): the moved worlds draw
+    // from mixed pools at 12 more positions.
+    // 308 -> 220 at X-46 CAR 3 (LANE X46-3-BUDGET) (ODQ §934.105, RUNG 1 OF THE SOAK LADDER, 2026-11-04; record docs/shift-records/2026-11-04-rung1-12-x46-car-3-budget.json): the moved worlds draw
+    // from mixed pools at 88 fewer positions.
+    // 220 -> 208 at F6 BUDGET-FLOOR (UNITS 1–4) (ODQ §934.105, RUNG 1 OF THE SOAK LADDER, 2026-11-04; record docs/shift-records/2026-11-04-rung1-22-f6-budget-floor.json): the moved worlds draw
+    // from mixed pools at 12 fewer positions.
+    expect(differ.length, 'positions where the two faces draw differently').toBe(208);
     expect(new Set(differ.map((row) => `${row.dm.block} :: ${row.dm.pool}`)).size,
       'over this many of the twelve mixed pools').toBe(1);
     // ⛔ REFUSAL 3: THE ONE-SIDED POSITIONS, WITH THEIR DIRECTION (the fold's P9). The leak

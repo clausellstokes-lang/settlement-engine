@@ -5,7 +5,7 @@
       "src/domain/display/stateProse/generalStateProse.js": "d0e22cd9629816f731f3d5ece96d54969b5fe6b80766e3c374091994c67ed6e4",
       "src/domain/display/stateProse/powerStateProse.js": "11c913c83fa1e88d5f75d5415f8723936acf9aae37d6465a87b1ad3cb4d21e7b",
       "src/domain/display/stateProse/economyStateProse.js": "d2bfe8cafa209803f26c83fde83534a7ba45230010ff87c33bd4ac52d831b924",
-      "src/domain/display/stateProse/defenseStateProse.js": "3754e325a7296cb78c4aceb93fa0d9b8372c9be305f4db7663b4efd256ef1edb",
+      "src/domain/display/stateProse/defenseStateProse.js": "6ebbed0ca4e9125607fde9443b16d4da328cc1481f711f25a22b5d384cec3ce7",
       "src/domain/display/stateProse/stressorsStateProse.js": "13c7f383882acf5bb48267feb4302ced6b9798cec2575470903f1aa88205600d",
       "src/domain/display/stateProse/warFaithStateProse.js": "f1972add38589ee55369fb06e4a5e0a8f90c4d966bf703d4367a3cdca52d6aac",
       "src/domain/display/stateProse/dossierMounts.js": "7d27d4500ca6c848d1a0bb348a7b418b2b0639e0ddf2983b9e0b2bb67d92ff66"
@@ -18,7 +18,7 @@
       "src/domain/display/stateProse/stressorsStateProseCandidates.js": "ee0548fc8b662da76e4bf85a1fae30433e9f738277c774e16c6a7abd7fb93552",
       "src/domain/display/stateProse/warFaithStateProseCandidates.js": "b5b193dd2a2c83d077da5f82fd4a5fc5f5ad15a3b6a214725daf41ede442324b"
     },
-    "producerIndexFiles": 1293
+    "producerIndexFiles": 1296
   },
   "totals": {
     "pools": 709,
@@ -26,14 +26,14 @@
     "variants": 2342,
     "resolved": 341,
     "unresolved": 368,
-    "resolvedWithPredicate": 207,
-    "resolvedWithCleanPredicate": 207,
+    "resolvedWithPredicate": 208,
+    "resolvedWithCleanPredicate": 208,
     "keyFunctions": 118,
     "keyFunctionsConsulted": 118,
     "keyTables": 33,
     "slotless": 65,
     "bagless": 140,
-    "predicatesOverUnreadFields": 99,
+    "predicatesOverUnreadFields": 100,
     "syntheticTableFields": 100,
     "tiers": {
       "MISSING": 34,
@@ -51,7 +51,7 @@
     "absent": {
       "measured": 373,
       "default": 3,
-      "not-produced": 59,
+      "not-produced": 61,
       "method-call": 18
     },
     "zeroK": 49,
@@ -6039,6 +6039,7 @@
       "grammars": 1,
       "predicate": [],
       "branchReads": [
+        "magicAbsent",
         "magicDependency"
       ],
       "fieldsRead": [
@@ -6051,11 +6052,13 @@
       "keyFunction": "magicDependencyPoolKey",
       "rung": "literal",
       "reads": [
+        "magicAbsent",
         "magicDependency"
       ],
       "readsGrain": "branch",
       "narrowed": false,
       "absent": {
+        "magicAbsent": "not-produced",
         "magicDependency": "measured"
       },
       "covert": false,
@@ -6065,7 +6068,7 @@
         "viability.magicDependency"
       ],
       "attach": [],
-      "k": 2,
+      "k": 1,
       "rateBp": 9831,
       "departure": null,
       "source": {
@@ -6074,6 +6077,7 @@
           "muster"
         ],
         "fields": {
+          "magicAbsent": "",
           "magicDependency": "muster"
         },
         "holder": null,
@@ -6102,8 +6106,15 @@
       "hasBag": true,
       "variants": 3,
       "grammars": 2,
-      "predicate": [],
+      "predicate": [
+        {
+          "field": "magicAbsent",
+          "op": "truthy",
+          "value": "(no literal)"
+        }
+      ],
       "branchReads": [
+        "magicAbsent",
         "magicDependency"
       ],
       "fieldsRead": [
@@ -6116,11 +6127,13 @@
       "keyFunction": "magicDependencyPoolKey",
       "rung": "literal",
       "reads": [
+        "magicAbsent",
         "magicDependency"
       ],
       "readsGrain": "branch",
       "narrowed": false,
       "absent": {
+        "magicAbsent": "not-produced",
         "magicDependency": "measured"
       },
       "covert": false,
@@ -6130,7 +6143,7 @@
         "viability.magicDependency"
       ],
       "attach": [],
-      "k": 2,
+      "k": 1,
       "rateBp": null,
       "departure": null,
       "source": {
@@ -6139,6 +6152,7 @@
           "muster"
         ],
         "fields": {
+          "magicAbsent": "",
           "magicDependency": "muster"
         },
         "holder": null,
@@ -10712,7 +10726,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 4,
-      "grammars": 3,
+      "grammars": 2,
       "predicate": [
         {
           "field": "eco.foodSecurity.stockpile.blockaded",
@@ -43312,7 +43326,7 @@
       "name": "INSTITUTION_DESC_VARIANTS",
       "drawKind": "H",
       "drawSite": "assembleInstitutions.js:65 shipFreeDesc + :1004 kernel/proseHash.js pickVariant over [catalogDesc, ...variants]",
-      "lines": 1037,
+      "lines": 1039,
       "declares": [],
       "lineDeclares": {
         "coast": 5,
@@ -43332,7 +43346,7 @@
         "walls": 8,
         "watch": 7
       },
-      "undeclared": 144,
+      "undeclared": 146,
       "crisisScoped": false
     },
     {
@@ -44024,7 +44038,7 @@
         "DS-ECO-9 :: BLOCKADED"
       ],
       "variants": 4,
-      "grammars": 3,
+      "grammars": 2,
       "blocks": [
         "DS-ECO-9"
       ]
@@ -44270,6 +44284,17 @@
       "grammars": 3,
       "blocks": [
         "DS-POW-1"
+      ]
+    },
+    {
+      "fact": "magicAbsent",
+      "pools": [
+        "DS-DEF-9 :: magicDependency false, availability absent"
+      ],
+      "variants": 3,
+      "grammars": 2,
+      "blocks": [
+        "DS-DEF-9"
       ]
     },
     {
@@ -44937,6 +44962,15 @@
         "mountsModifier": 0,
         "spineTabs": [
           "relationships"
+        ],
+        "modifierMounts": []
+      },
+      {
+        "field": "magicAbsent",
+        "mountsSpine": 1,
+        "mountsModifier": 0,
+        "spineTabs": [
+          "viability"
         ],
         "modifierMounts": []
       },
@@ -47067,9 +47101,9 @@
     {
       "block": "DS-DEF-9",
       "spines": 4,
-      "facts": 1,
-      "spinesReachedBp": 0,
-      "meanReachBp": 0
+      "facts": 2,
+      "spinesReachedBp": 5000,
+      "meanReachBp": 2500
     },
     {
       "block": "DS-ECO-1",
@@ -47843,10 +47877,17 @@
     {
       "block": "DS-DEF-9",
       "spines": 4,
-      "facts": 1,
-      "spinesReachedBp": 0,
-      "meanReachBp": 0,
+      "facts": 2,
+      "spinesReachedBp": 5000,
+      "meanReachBp": 2500,
       "byFact": [
+        {
+          "field": "magicAbsent",
+          "attach": [
+            "magicDependency true",
+            "magicDependency true, with a NAMED dependent chain"
+          ]
+        },
         {
           "field": "magicDependency",
           "attach": []
@@ -49964,11 +50005,11 @@
       ],
       [
         1,
-        80
+        82
       ],
       [
         2,
-        212
+        210
       ]
     ]
   },
@@ -49992,17 +50033,16 @@
         ],
         [
           1,
-          80
+          82
         ],
         [
           2,
-          212
+          210
         ]
       ],
       "blocksWithSpine": 50,
       "cannotAttach": [
         "DS-DEF-6",
-        "DS-DEF-9",
         "DS-ECO-1",
         "DS-ECO-10",
         "DS-ECO-3",
@@ -50024,7 +50064,7 @@
         "DS-STR-1",
         "DS-WAR-3"
       ],
-      "readPaths": 553,
+      "readPaths": 555,
       "modifierEligibleFactsByTab": [
         [
           "viability",
@@ -50493,7 +50533,7 @@
       "fields": {
         "LICENSED": 191,
         "OFFICE": 5,
-        "SOURCE-UNRESOLVED": 417
+        "SOURCE-UNRESOLVED": 419
       },
       "byKind": [
         [
@@ -50538,7 +50578,7 @@
         ]
       ],
       "unresolvedGrounds": {
-        "no-mapping": 417,
+        "no-mapping": 419,
         "no-institution-in-roster": 0
       },
       "twoSourceRows": 10,
@@ -51897,8 +51937,8 @@
       "leafBoth": 0,
       "leafEither": 2,
       "leafRows": [],
-      "deskRoots": 91,
-      "deskSegments": 193
+      "deskRoots": 92,
+      "deskSegments": 194
     }
   },
   "ratifiedAliases": {
@@ -52100,6 +52140,11 @@
     ],
     "legitimacy.governanceFractured": [
       "record",
+      "roll",
+      "rolls"
+    ],
+    "magicAbsent": [
+      "muster",
       "roll",
       "rolls"
     ],
@@ -53532,7 +53577,9 @@
       "tier": "THIN",
       "block": "DS-DEF-9",
       "subject": "magicDependency false, availability absent",
-      "fields": [],
+      "fields": [
+        "magicAbsent"
+      ],
       "readingFunction": "magicDependencyPoolKey",
       "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
     },
@@ -54186,7 +54233,7 @@
         "eco.foodSecurity.stockpile.blockaded"
       ],
       "readingFunction": "foodSecurityPoolKey",
-      "count": "4 variant(s) · 3 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",

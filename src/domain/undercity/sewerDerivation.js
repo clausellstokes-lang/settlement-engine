@@ -238,9 +238,17 @@ export const SEWER_DERIVATION_TUNING = Object.freeze({
   /** dated calamity records at which the rebuild cause saturates. */
   calamitySaturation: 3,
   /** the high-water population above which cesspits stop coping. */
-  cesspitFailurePopulation: 2000,
+  cesspitFailurePopulation: 777,
   /** the high-water population at which that cause saturates. */
-  highWaterSaturation: 12000,
+  highWaterSaturation: 5399,
+  // ⚠ RE-BASED TO THE STAMP CUTS (LANDING-7 ruling R-E2, 2026-11-06; a draft row in the tuning
+  // register, vetoable by the owner). The sweep chose 2,000 and 12,000 under the old bands (town
+  // 901–5,000, city 5,001–25,000), where they sat at 2.22× the town cut and 2.40× the city cut.
+  // X-46 car 1 (433289899) moved the cuts to 350 and 2,250, which left every town below the
+  // failure line (the cause read ≈0 for all of them, and calamity's 0.15 lifted none). Each figure
+  // keeps its ratio to the cut of the tier it sat in: 2,000 × 350 / 901 = 777, and
+  // 12,000 × 2,250 / 5,001 = 5,399. The rule is the derivation's own, tier-scaled; only the
+  // premise (the cuts) moved.
   /** at or below this score the rung is ABSENT — cesspits, with no draw taken. */
   absentFloor: 0.10,
   /** at or above this score the derived ceiling is CERTAIN, with no draw taken. */

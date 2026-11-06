@@ -25,7 +25,9 @@ function walk(dir, out = []) {
 }
 
 describe('X-46 3c: the Dwellings and Housing rows name the owner\'s household bands', () => {
-  it.each([
+  // Each-family cure (2026-11-05, LANDING-6): one parameterless test looping over the rows,
+  // each failure naming its tier and row.
+  const HOUSEHOLD_ROWS = [
     ['thorp', 'Dwellings (1-8)'],
     ['hamlet', 'Dwellings (5-25)'],
     ['village', 'Dwellings (15-100)'],
@@ -36,10 +38,15 @@ describe('X-46 3c: the Dwellings and Housing rows name the owner\'s household ba
     ['town', 'Housing (75-650 households)'],
     ['city', 'Housing (500-4000 households)'],
     ['metropolis', 'Housing (3500+ households)'],
-  ])('%s carries %s as its required dwellings row', (tier, name) => {
-    const row = institutionalCatalog[tier].Infrastructure?.[name];
-    expect(row, `${tier} has no "${name}" row`).toBeDefined();
-    expect(row.required).toBe(true);
+  ];
+
+  it('every tier from thorp to metropolis carries its household-band dwellings row as required', () => {
+    expect(HOUSEHOLD_ROWS).toHaveLength(6);
+    for (const [tier, name] of HOUSEHOLD_ROWS) {
+      const row = institutionalCatalog[tier].Infrastructure?.[name];
+      expect(row, `${tier} has no "${name}" row`).toBeDefined();
+      expect(row.required, `${tier}: "${name}" must be required`).toBe(true);
+    }
   });
 
   it('no source file still names an old-scale Dwellings row (every name-keyed table followed)', () => {

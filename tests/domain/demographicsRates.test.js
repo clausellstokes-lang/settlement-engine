@@ -43,7 +43,7 @@ import {
   reliefCreditorCount,
   starvationDeficit01Of,
 } from '../../src/domain/worldPulse/demographicsRates.js';
-import { TIER_ORDER, POPULATION_RANGES } from '../../src/data/constants.js';
+import { TIER_ORDER, POPULATION_RANGES, TIER_STAMP_CUTS } from '../../src/data/constants.js';
 import {
   DEMOGRAPHIC_PLANS_LEDGER,
   WORKS_TUNING,
@@ -173,6 +173,12 @@ describe('the authored tables are TOTAL over the tier and terrain vocabularies',
     }
   });
 
+  // ⚠ THE P5a ARMS READ THE NEXT TIER'S STAMP CUT (LANDING-7 rulings R-E1/R-E8, 2026-11-06). The
+  // interlock's premise is "the next tier": under X-46 car 1 (433289899) the roll bands
+  // overlap, and a place reaches the next tier at its STAMP CUT (car 2's law), not at the
+  // next roll band's minimum (a hamlet rolls from 20 but stamps from 25). Under the old
+  // contiguous bands the two were the same number, so the law is unchanged and only its
+  // premise moved. DENSITY_CEILINGS was re-derived in the same ruling (see its header).
   test('P5a: maximum public works clear every terrain x tier-promotion pair', () => {
     for (const terrain of Object.keys(TERRAIN_DENSITY_ADJUST)) {
       for (let i = 0; i < TIER_ORDER.length - 1; i += 1) {
@@ -181,8 +187,8 @@ describe('the authored tables are TOTAL over the tier and terrain vocabularies',
         const ceiling = p5aDensityCeiling(tier, terrain, WORKS_TUNING.WORKS_CAP);
         expect(
           ceiling,
-          `${terrain} ${tier} at maximum works must clear ${nextTier}'s floor`,
-        ).toBeGreaterThanOrEqual(POPULATION_RANGES[nextTier].min);
+          `${terrain} ${tier} at maximum works must clear ${nextTier}'s stamp cut`,
+        ).toBeGreaterThanOrEqual(TIER_STAMP_CUTS[nextTier]);
       }
     }
   });
@@ -191,7 +197,7 @@ describe('the authored tables are TOTAL over the tier and terrain vocabularies',
     for (let i = 0; i < TIER_ORDER.length - 1; i += 1) {
       const tier = TIER_ORDER[i];
       const nextTier = TIER_ORDER[i + 1];
-      const nextFloor = POPULATION_RANGES[nextTier].min;
+      const nextFloor = TIER_STAMP_CUTS[nextTier];
       expect(
         p5aDensityCeiling(tier, 'mountain', 0),
         `mountain ${tier} without works must remain below ${nextTier}`,
@@ -209,14 +215,14 @@ describe('the authored tables are TOTAL over the tier and terrain vocabularies',
     const maxWorksFactor = 1 + WORKS_TUNING.INFRASTRUCTURE_STEP * WORKS_TUNING.WORKS_CAP;
     const clearsEveryTierPair = factor => TIER_ORDER.slice(0, -1).every((tier, i) => (
       Math.round(DENSITY_CEILINGS[tier] * factor * maxWorksFactor)
-        >= POPULATION_RANGES[TIER_ORDER[i + 1]].min
+        >= TIER_STAMP_CUTS[TIER_ORDER[i + 1]]
     ));
 
     expect(TERRAIN_DENSITY_ADJUST.desert).toBe(0.55);
     expect(clearsEveryTierPair(TERRAIN_DENSITY_ADJUST.desert)).toBe(true);
     expect(clearsEveryTierPair(0.54)).toBe(false);
     expect(Math.round(DENSITY_CEILINGS.thorp * 0.54 * maxWorksFactor))
-      .toBeLessThan(POPULATION_RANGES.hamlet.min);
+      .toBeLessThan(TIER_STAMP_CUTS.hamlet);
   });
 
   test('the closed band vocabularies are non-empty and every produced word is a member', () => {

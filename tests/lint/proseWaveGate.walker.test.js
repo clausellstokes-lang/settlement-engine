@@ -161,7 +161,7 @@ describe('the CARTESIAN unit set is the attach set times the spines times the fa
     expect(disagree.slice(0, 5), 'a pool the two builders read differently').toEqual([]);
     // NON-VACUITY on the only axis that could hide a fork: a comparison over zero units is two
     // implementations agreeing about nothing. The defense section composes 383 units today.
-    expect(total, 'the units actually compared').toBe(383);
+    expect(total, 'the units actually compared').toBe(388);
     // AND THE FLAG IS A FLAG: without `bareSpine` the lib answers the SHAPE REPORT's question
     // (the units a corpus LICENSES), which on a spine pool is none. The two populations are
     // different on purpose, and this is the line that says so.
@@ -898,7 +898,9 @@ describe('(d) THE FIXTURE SECTION — the interested fact BOTH WAYS (SITTING §T
     expect(fixture.towns.map((t) => t.label)).toEqual(['captured', 'clean']);
     const captured = fixture.towns[0];
     const clean = fixture.towns[1];
-    expect(captured.standing, 'rate-11-9 is the captured town').toBe('INTERESTED');
+    // rate-11-9 -> rate-93-0 (LANDING-7 A, R-A5): the X-46 compose 1264a8152 moved rate-11-9 out of
+    // capture; tests/fixtures/tasteTowns.js :: INTERESTED_TOWNS re-seats by identity, the scan named there.
+    expect(captured.standing, 'rate-93-0 is the captured town').toBe('INTERESTED');
     expect(clean.standing, 'rate-3-0 is the control and it is NOT interested').toBe('LICENSED');
     expect(captured.holder, 'and the holder is the census\'s own answer').toBeTruthy();
   });
@@ -949,7 +951,7 @@ describe('THE ROSTER — a desk section is a LEAF, and the partition is asserted
     // partition makes "impossible" a measurement.
     const cover = sectionsCoverEveryPool();
     expect(cover.sections).toBe(6);
-    expect(cover.pools, 'every shipped pool').toBe(708);
+    expect(cover.pools, 'every shipped pool').toBe(709);
     expect(cover.unreached, 'a pool no section reaches').toEqual([]);
     expect(cover.twice, 'a pool two sections claim').toEqual([]);
   });
@@ -965,7 +967,7 @@ describe('THE ROSTER — a desk section is a LEAF, and the partition is asserted
           .toMatch(/^[a-z0-9-]+$/);
       }
     }
-    expect(total, 'and the six sum to the corpus').toBe(708);
+    expect(total, 'and the six sum to the corpus').toBe(709);
     expect(poolRosterOf({ section: 'no-such-desk' }).rows).toEqual([]);
     expect(poolRosterOf({ section: 'no-such-desk' }).why).toContain('NOT-EXECUTABLE');
     expect(poolRosterOf({}).rows.length, 'and no flag at all is the taste\'s seven').toBe(7);

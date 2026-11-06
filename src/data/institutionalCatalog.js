@@ -1227,7 +1227,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
     // the military slider like every defence row (`institutionProbability.js :: getBaseChance`, the
     // `watch` name). Name and text VETOABLE (the owner's content class).
     {
-      shared: { name: 'Village watch', desc: 'Householders who take turns walking the lanes after dark, keep a lantern at the crossroads, and raise the alarm. Unpaid; the headman keeps the rota.', tags: ['law_enforcement', 'defense'], priorityCategory: 'military' },
+      shared: { name: 'Village watch', desc: 'Householders who take turns walking the lanes after dark, keep a lantern at the crossroads, and raise the alarm. Unpaid; the rota is their own.', tags: ['law_enforcement', 'defense'], priorityCategory: 'military' },
       at: {
         village: { baseChance: 0.2 },
       },

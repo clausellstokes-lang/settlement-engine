@@ -1354,6 +1354,10 @@ const PAIRS = [
     "A network of paired Speaking Stones. A station costs as much as a merchant house, so only the crown and the great guilds keep them.",
     "Speaking Stones, paired and linked into a network, each station priced like a merchant's house and held only by the crown or the great guilds.",
   ],
+  [
+    "Each household takes its turn walking the lanes after dark, a lantern kept burning at the crossroads and the alarm raised at the first sign of trouble. Nobody is paid, and the households hold the rota.",
+    "A rota of unpaid householders who walk the lanes by night, keep a lantern lit at the crossroads, and raise the alarm. Whose turn it is, the rota decides.",
+  ],
 ];
 
 export const INSTITUTION_DESC_VARIANTS = Object.freeze({
@@ -1478,6 +1482,7 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
   "village|Defense|Palisade or earthworks": PAIRS[110],
   "village|Defense|Citizen militia": PAIRS[111],
   "village|Defense|Veteran's lodge": PAIRS[112],
+  "village|Defense|Village watch": PAIRS[332],
   "village|Magic|Hedge wizard": PAIRS[113],
   "village|Magic|Healer (divine, 1st level)": PAIRS[114],
   "village|Adventuring|Adventurers' charter hall": PAIRS[115],

@@ -99,11 +99,12 @@ import {
   RETIRED_EDIT_MODE_READERS_BASELINE_SCHEMA,
   RETIRED_CORPUS_REDEAL_BASELINE_SCHEMA,
   RETIRED_ADVISORY_LOCKFILE_BASELINE_SCHEMA,
+  RETIRED_FED_WORLD_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA,
   RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
-  validateSchema26Baseline,
+  validateSchema27Baseline,
 } from './lib/observed-shape-baseline.mjs';
 import {
   parseExactFlags,
@@ -204,7 +205,14 @@ const BASELINE = join(ROOT, 'scripts/.observed-shape-readers-baseline.json');
  *     `issues` shape back over MIN_ROWS, and the register ADMITS 22 ordinary rows in 17 files the
  *     self-feeding worlds of FOOD-1/FOOD-2 no longer resolve (tier drift, depletion,
  *     `resourceHistory`, the tier proposal's payload, a betrayal's former sponsor). Four rows go
- *     and two shrink; nothing is declared; the bank holds at 69/45. THE LIVE AUTHORITY.
+ *     and two shrink; nothing is declared; the bank holds at 69/45 (RETIRED).
+ * 27 = schema 26's topology and tag law, re-governed to THE RUNG-1 WINDOW (the chair's rulings
+ *     on lane LANDING-2b's STOP, 2026-11-04): the shape-family theta 0.80 -> 0.76 (the crisis
+ *     car's `cast` dropped `stressors` off its siblings at 0.7778), a corpus TOPOLOGY pass
+ *     (famine + the forced Underground network, 40 roots) that brings the eroded `facets` and
+ *     `issues` shapes back, THREE declarations (the crisis cast's temporary person: `temporary`,
+ *     `temporaryKind`, `crisisIds on npcs`; the roster 10 -> 13), and the window's ordinary rows
+ *     admitted with attribution. THE LIVE AUTHORITY.
  * ⚠ THIS LIST WENT STALE FOR EIGHT RUNGS — it marked 10 as "THE LIVE AUTHORITY" while
  *   the number stood at 18 — so it is filled in here rather than extended by one. Each
  *   rung's full rationale lives beside its own target constant in
@@ -226,6 +234,7 @@ export {
   RETIRED_EDIT_MODE_READERS_BASELINE_SCHEMA,
   RETIRED_CORPUS_REDEAL_BASELINE_SCHEMA,
   RETIRED_ADVISORY_LOCKFILE_BASELINE_SCHEMA,
+  RETIRED_FED_WORLD_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA, RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
@@ -430,11 +439,31 @@ export const isExactScanExcludedReadPath = (relativePath) => (
  * anything, so without the guard containment is noise (theta 1.00 with no guard
  * clears rows on 10 shapes instead of 2).
  *
+ * ⭐ RE-MEASURED AT THE SCHEMA-27 RUNG — 0.80 → 0.76 (the chair's ruling 1 on lane
+ * LANDING-2b's STOP, 2026-11-04). The CRISIS car (docs/DESIGN_CRISIS_TAB.md) put a derived
+ * `cast` on every stress entry (generators/steps/resolveCrisisCast.js), so the `stressors`
+ * shape grew 35 → 36 own keys while its three siblings `autoApplied`, `candidates` and
+ * `selected` — the proposal clones that carry no cast — still cover 28 of them. MEASURED at
+ * 5dd0f323a: 28/35 = 0.8000 without `cast` (exactly on the old theta, so the family held),
+ * 28/36 = 0.7778 with it (below it, so the WHOLE family fell out and 72 reads on `stressors`
+ * surfaced as 23 "new" rows — keys the siblings carry, i.e. the very sibling-slice poverty
+ * this filter exists to remove). `resolvedStressors` and `stressor` cover 27: 27/35 = 0.7714
+ * before the car and 27/36 = 0.7500 now, so they were never in the family.
+ * WHY 0.76: it is the lowest two-decimal value in (0.7500, 0.7778] — it restores exactly the
+ * pre-car family {autoApplied, candidates, selected} and keeps `resolvedStressors` and
+ * `stressor` OUT. 0.75 (the first quarter-step) was measured and refused: it admits both at
+ * exactly 0.7500 and widens the family past what it was before the car.
+ * ⭐ AND THE VERDICT MOVES ON `stressors` ALONE, MEASURED rather than argued: between 0.80 and
+ * 0.76 some 25 other shapes gain family members (`outcome`, `selectedOutcomes`, `traditions`,
+ * the `osr*` settlement and npc-slot shapes, …), but every additional cleared read — 72 of
+ * them — sits on `stressors`; no other shape's findings move. The class-(a) control below
+ * still holds (the four `stressors` class-(a) identities are not among the cleared).
+ *
  * ⭐ THE ADOPTION BASIS IS ZERO ERASURE, AND IT IS MACHINERY BELOW, NOT A
  * MEASUREMENT THAT HAPPENED ONCE. See `CLASS_A_PROTECTED_IDENTITIES`.
  */
 export const SHAPE_FAMILY_FILTER = Object.freeze({
-  theta: 0.8,
+  theta: 0.76,
   minKeys: 8,
 });
 
@@ -1337,6 +1366,49 @@ export const EXPLAINED_WRITER_EXEMPTIONS = Object.freeze([
       + ' corpus executes. The blob rides the data column WHOLE, so the save path stamps no key'
       + ' of its own and the mint is the only writer gate 0 can name.',
   }),
+  // ⭐⭐ THE SCHEMA-27 RUNG'S THREE DECLARATIONS — the CRISIS car's temporary person (crisis
+  // unit 1 2c47674a5, unit 2 aaa4ba493; docs/DESIGN_CRISIS_TAB.md), under the chair's ruling 2
+  // on lane LANDING-2b's STOP (2026-11-04). One writer, one branch, three keys of the same
+  // record literal, so the three stand or fall together. The class is the FIFTH
+  // (`conditional-generator-branch`, the `isCriminal` precedent): the corpus RUNS the step and
+  // still never sees the key, because `mintTemporary` fires only when a crisis's natural lever
+  // (grain, healer, warden) has NEITHER a house NOR an office-holder in the town. MEASURED: over
+  // all 72 corpus settlements (56 of them under famine, the only one of the three lever crises
+  // the corpus stimulates) not one npc carries any of the three keys, so no world takes it.
+  // ⚠ THE CRISIS CAR'S FOURTH MEASURED IDENTITY, `_userEdits on stress`, IS NOT DECLARED, and
+  // that is priced: its only writer spelling is the member assignment `entity._userEdits = {}`
+  // in src/domain/userEdits.js, which gate 0's four write shapes do not see; the one probe hit
+  // in that file is a JSDoc type cast, and banking on a type annotation is the clause-1
+  // laundering the companion-gate rung refused. It is admitted as ORDINARY debt beside its
+  // sibling `_userEdits on settlement`, which the register has always carried ordinary.
+  Object.freeze({
+    identity: 'temporary on npcs',
+    mechanism: 'conditional-generator-branch',
+    writer: 'src/generators/steps/resolveCrisisCast.js',
+    ruling: 'LANDING-2b — the chair\'s ruling 2 of 2026-11-04 (the crisis set as measured)',
+    why: 'The crisis cast step mints a TEMPORARY person (temporary: true) only when a natural'
+      + ' lever has neither a house nor an office-holder; measured over all 72 corpus worlds, none'
+      + ' takes the branch, though the corpus runs the step. Read by crisisCast.js,'
+      + ' crisisLifecycle.js and coherence/crisisCastFindings.js.',
+  }),
+  Object.freeze({
+    identity: 'temporaryKind on npcs',
+    mechanism: 'conditional-generator-branch',
+    writer: 'src/generators/steps/resolveCrisisCast.js',
+    ruling: 'LANDING-2b — the chair\'s ruling 2 of 2026-11-04 (the crisis set as measured)',
+    why: 'Written in the SAME record literal as temporary on npcs (temporaryKind: kind), on the'
+      + ' same vacant-lever branch the corpus never takes; read twice by crisis/crisisCast.js to'
+      + ' re-bind a minted person to its lever.',
+  }),
+  Object.freeze({
+    identity: 'crisisIds on npcs',
+    mechanism: 'conditional-generator-branch',
+    writer: 'src/generators/steps/resolveCrisisCast.js',
+    ruling: 'LANDING-2b — the chair\'s ruling 2 of 2026-11-04 (the crisis set as measured)',
+    why: 'Written in the SAME record literal (crisisIds: [crisisId]) and re-assigned to every'
+      + ' crisis the temporary person serves, on the vacant-lever branch the corpus never'
+      + ' takes; read twice by crisisLifecycle.js, which drops the person when its crises end.',
+  }),
 ]);
 
 /** The mechanisms an entry may claim. TOTAL positive predicate: an unlisted
@@ -1452,7 +1524,7 @@ export function assertExplainedWriterRowTags(
   baseline,
   entries = EXPLAINED_WRITER_EXEMPTIONS,
 ) {
-  validateSchema26Baseline(baseline);
+  validateSchema27Baseline(baseline);
   assertExplainedWriterExemptions(entries);
   const declarations = new Map(entries.map((entry) => [entry.identity, entry]));
   const genesis = baseline.frozenAtSha === baseline.migrationReview.subjectSha;
@@ -2923,7 +2995,17 @@ export function baselineOf({
       'every writer still exists in source, and every stimulus that reaches them re-deals 13-197 rows',
       'and still misses `outcome.tierChange`, so the rows are ADMITTED as ordinary debt under the',
       'review\'s notes for an engine lane to cure. Four rows go and two shrink; nothing is declared.',
-      'Of the ten declared bank entries NINE bank reads today; `isCriminal on incomeSources`',
+      'SCHEMA 27 = schema 26\'s topology and tag law, re-governed to THE RUNG-1 WINDOW (the chair\'s',
+      'rulings on lane LANDING-2b\'s STOP, 2026-11-04): the window the landing lands (the crisis car and',
+      'the rung-1 fix lanes). The CRISIS car\'s `cast` on every stress entry dropped `stressors` off its',
+      'three proposal-clone siblings (28/35 = 0.8000 -> 28/36 = 0.7778), so the shape-family theta goes',
+      '0.80 -> 0.76, the narrowest value that restores exactly that family. The window\'s generation',
+      'lanes left the corpus no Underground network (the one carrier of `facets`) and no short pulse',
+      'settlement (half of `issues`), so a TOPOLOGY pass (famine and the forced row, 40 roots, the pulse',
+      'untouched) brings both shapes back and creates nothing new. The crisis cast\'s temporary person',
+      'is DECLARED (`temporary`, `temporaryKind`, `crisisIds on npcs`; the fifth class), and the',
+      'window\'s other new and grown rows are ADMITTED as ordinary debt under attributed review notes.',
+      'Of the thirteen declared bank entries TWELVE bank reads today; `isCriminal on incomeSources`',
       'has banked nothing since schema 17 made its writer observable, and banked is always a',
       `subset of declared. This envelope banks ${bankPhrase(bankOf(inventory, rowTags))}.`,
       'The byte-frozen detector is unchanged; its output is narrowed by THREE clearing filters —',
@@ -2933,7 +3015,7 @@ export function baselineOf({
       'An untagged row means: a guarded read, of a real record rather than browser or language surface,',
       'of a key no writer the corpus runs produces and no declared out-of-corpus writer explains.',
       'A tagged row stays visible as governed explained-writer debt under its numeric ceiling and reason.',
-      'Schemas 4–25 are the RETIRED numeric predecessors.',
+      'Schemas 4–26 are the RETIRED numeric predecessors.',
     ],
     schema: BASELINE_SCHEMA,
     frozen: new Date().toISOString().slice(0, 10),
@@ -3107,7 +3189,7 @@ export async function run(argv = [], overrides = {}) {
     createScanArtifact,
     validateScanArtifact,
     assertFindingSourceEvidence,
-    validateBaseline: validateSchema26Baseline,
+    validateBaseline: validateSchema27Baseline,
     // ⭐ THE BANK FENCE'S TWO HAND-OWNED SIDES, overridable so the sentinel can drive
     // every refusal: the literal module and the migration script's declared post-bank.
     readBankLiteral: readBankLiteralModule,

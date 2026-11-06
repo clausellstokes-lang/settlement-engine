@@ -620,7 +620,7 @@ describe('SubstrateTab — surfaces OUR 16-variable causal read-model', () => {
     // GS-3a (G1 U2): the food row measures the food balance and the reserves now, not the
     // chains' status, so it is named "Food" (chair ruling 4's "Food supply chains" retired).
     expect(rows.some(r => r.textContent.startsWith('Food'))).toBe(true);
-    expect(container.textContent).not.toMatch(/Food supply chains/);
+    expect(container.textContent).not.toMatch(/Food supply chains/); // anchored: the line above finds the live Food row on this render
     for (const row of rows) {
       expect(row.textContent).not.toMatch(/\b(?:100|[1-9]?\d)\b/);
     }

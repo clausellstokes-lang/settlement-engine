@@ -710,6 +710,7 @@ describe('the world law reads its role vocabulary from the one magic leaf (WIRIN
     expect(MAGIC_ROLE_PATTERN.flags).toBe('i');
     const fs = await import('node:fs');
     const src = fs.readFileSync(new URL('../../src/generators/generationContext.js', import.meta.url), 'utf8');
-    expect(src).not.toMatch(/const MAGIC_ROLE_PATTERN\s*=/);
+    expect(src, 'the context reads the pattern by its import').toMatch(/MAGIC_ROLE_PATTERN,/);
+    expect(src).not.toMatch(/const MAGIC_ROLE_PATTERN\s*=/); // anchored: the line above proves the source was read and names the pattern
   });
 });

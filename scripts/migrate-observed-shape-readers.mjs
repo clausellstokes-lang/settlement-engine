@@ -183,13 +183,21 @@
  *     first real exercise, since 20's own re-freeze moved nothing. Its full rationale lives
  *     beside `RELATIONSHIPS_MOUNT_TARGET_SCHEMA`.
  *
- *   schema 24 -> 25 (LIVE)   the same tagged numeric reconciliation, and THE SECOND RUNG DRIVEN BY
+ *   schema 24 -> 25 (RETIRED) the same tagged numeric reconciliation, and THE SECOND RUNG DRIVEN BY
  *     A DEPENDENCY RATHER THAN THE DETECTOR OR THE INVENTORY — the schema-13 dead-dependency rung's
  *     shape, cut for a lockfile-only security bump (dompurify 3.4.17, fflate 0.8.3, the 2026-10
  *     advisories). It moves NO row, declares nothing, and leaves the roster and the bank where they
  *     stood. Its full rationale lives beside `ADVISORY_LOCKFILE_TARGET_SCHEMA`.
  *
- *   schema 25 -> 26 (LIVE)   the same tagged numeric reconciliation, and THE FIRST RUNG THAT IS BOTH
+ *   schema 26 -> 27 (LIVE)   the same tagged numeric reconciliation, and THE FIRST RUNG CUT FOR A
+ *     LANDING WINDOW rather than one lane: the CRISIS car and the rung-1 fix lanes, composed. It
+ *     moves the shape-family theta one step (0.80 -> 0.76, the crisis `cast` on `stressors`), adds
+ *     a corpus TOPOLOGY pass (producer 1d) that cures two instrument erosions the window caused
+ *     (`facets`, `issues`), DECLARES the crisis cast's temporary person (three identities, the
+ *     roster 10 -> 13, the bank 69/45 -> 76/50), and ADMITS the window's other rows with
+ *     attribution. Its full rationale lives beside `WINDOW_RUNG1_TARGET_SCHEMA`.
+ *
+ *   schema 25 -> 26 (RETIRED) the same tagged numeric reconciliation, and THE FIRST RUNG THAT IS BOTH
  *     OF ITS PRECEDENTS AT ONCE: the schema-17 corpus-coverage shape (a famine TOPOLOGY pass that
  *     brings the thinned `issues` shape back over MIN_ROWS and creates nothing) and the schema-24
  *     admission shape (22 ordinary rows the fed worlds of FOOD-1/FOOD-2 no longer resolve, each
@@ -273,6 +281,7 @@ import {
   validateSchema23Baseline,
   validateSchema24Baseline,
   validateSchema25Baseline,
+  validateSchema26Baseline,
 } from './lib/observed-shape-baseline.mjs';
 
 export const MIGRATION_REPORT_SCHEMA = 2;
@@ -1043,6 +1052,108 @@ export const ADVISORY_LOCKFILE_TARGET_SCHEMA = 25;
  *  ratchet-red, and its re-freeze lands next. */
 export const FED_WORLD_TARGET_SCHEMA = 26;
 
+/* ⭐⭐ THE SCHEMA 26 → 27 RUNG — THE RUNG-1 WINDOW
+ *  (the chair's rulings 1–6 on lane LANDING-2b's STOP, 2026-11-04, under the owner's delegation of
+ *  every open question to the chair; vetoable. The precedents: `FED_WORLD_TARGET_SCHEMA` (a corpus
+ *  topology pass and attributed admissions in one rung) and `EDIT_MODE_READERS_TARGET_SCHEMA` (a
+ *  roster growth). LANDING-1 measured the refusal; LANDING-2b wrote the rung.)
+ *
+ *  THE SUBJECT IS A WINDOW, NOT A LANE: everything the landing lands between the register's
+ *  freeze (05897b88d) and ⟨BASE⟩ 5dd0f323a — the CRISIS car (docs/DESIGN_CRISIS_TAB.md) and the
+ *  rung-1 fix lanes. At 0.80 the shrink-only `--write` refused 39 new rows (23 on `stressors`), 7
+ *  grown rows and a 44-row INSTRUMENT EROSION. Four acts answer it:
+ *
+ *  ⭐ 1 · THE SHAPE-FAMILY THETA 0.80 → 0.76 (ruling 1). The crisis car's derived `cast` on every
+ *  stress entry grew `stressors` 35 → 36 own keys; its proposal-clone siblings (`autoApplied`,
+ *  `candidates`, `selected`) cover 28: 0.8000 before, 0.7778 after, so the whole family fell out
+ *  and 72 sibling-carried reads surfaced. 0.76 is the lowest two-decimal value in
+ *  (0.7500, 0.7778]: it restores exactly that family and keeps `resolvedStressors`/`stressor`
+ *  (27/36 = 0.7500) out. MEASURED: between 0.80 and 0.76 the verdict moves on `stressors` alone.
+ *  The full numbers live beside `SHAPE_FAMILY_FILTER`.
+ *  ⚠ The other crisis fields — `cast`, `summary`, `crisisHook`, `viabilityNote`, `addedByEventId`
+ *  — surface NO row: they are keys of the OBSERVED `stressors`/`stress` shapes (the corpus runs
+ *  the step that writes them), so their reads resolve; only reads of UNOBSERVED keys are findings.
+ *
+ *  ⭐ 2 · THE EROSION, CURED BY TOPOLOGY (ruling 4; the schema-17/26 shape). ONE first-parent step
+ *  causes all of it, bisected with the corpus builder itself over the window's 78 first-parent
+ *  commits: 90dc22f18, the compose of lane/x46-3-budget (X-46 car 3, the density factor 47829c070
+ *  and its pins). At 79c442330 the corpus still observes `facets` (54 rows), `issues` (48), a
+ *  stressor-outcome proposal (25 origins) and `leverage` on `relationshipPatch`; at 90dc22f18 all
+ *  four are gone. The density factor re-deals the generated worlds: no corpus settlement rolls
+ *  'Underground network' (the one carrier of `facets`), none is short in the pulse (half of
+ *  `issues`). Producer 1d (`observed-shape-corpus.mjs`) — famine and the row forced through the
+ *  shipped `_institutionToggles` `require` door, ten seeds × four configs, roots only — brings
+ *  `facets` back at 40 rows and `issues` at 78 and creates NOTHING new: 31 of the 44 eroded rows
+ *  return (29 `facets`, 2 `institution on issues`).
+ *  ⭐ ELEVEN OF THE 44 WERE NEVER EROSION: the `proposalPayload` rows (`direction`, `fromTier`,
+ *  `toTier`, `factionId` ×3 files, `settlementId` ×2, `governmentPreference`, `legitimacyBand`,
+ *  `preserveInstitutions`) left the RAW detector because their keys are now OBSERVED on a
+ *  1,326-row `proposalPayload` — a writer the corpus now runs, the lawful shrink the erasure
+ *  guard's textual probe cannot tell from erosion.
+ *  ⛔ TWO ROWS ARE NOT CURED, AND THEY ARE RECORDED AS EROSION, NOT AS A REPAIR:
+ *  `formerSponsorSettlementId on originContext` (WorldPulseData.js ×3, applyWorldPulseBetrayal.js
+ *  ×1). The same 90dc22f18 re-deal left the pulse with no stressor-outcome proposal, which is the
+ *  only path the detector grounded those `stressor.originContext` reads through (bisected to the
+ *  `outcome` shape: the frozen one carried `originContext`, the live one does not). Reaching it
+ *  again needs a PULSE stimulus, and every pulse stimulus re-deals 13–197 rows (lane OSR-RUNG,
+ *  2026-11-03) — the `generated`-list law forbids it here. Both reads still stand and the key is
+ *  still never observed; an engine lane owns the cure (ruling 4's "STOP that part").
+ *
+ *  ⭐ 3 · THE CRISIS SET, AS MEASURED (ruling 2): four identities on six rows. THREE are DECLARED —
+ *  `temporary`, `temporaryKind`, `crisisIds on npcs`, the cast step's vacant-lever branch
+ *  (generators/steps/resolveCrisisCast.js; crisis units 1 2c47674a5, 2 aaa4ba493, 6 77b022183),
+ *  the fifth class — so the roster goes 10 → 13. The fourth, `_userEdits on stress`
+ *  (src/domain/userEdits.js; crisis unit 3 98796c866), is ADMITTED as ordinary debt: its writer is
+ *  a member assignment gate 0 cannot see, and its sibling `_userEdits on settlement` has always
+ *  been ordinary.
+ *
+ *  ⭐ 4 · THE WINDOW'S OTHER ROWS, ADMITTED WITH ATTRIBUTION (ruling 3; the fed-world precedent —
+ *  "visible as ordinary ratchet debt that may only shrink"). Each names its introducing commit:
+ *    `contestsNiche on factions` — reader unit 11 0a6e79d58 (coherence/readerBattery.js);
+ *    `labelNeeds`/`labelOtherwise on chains` ×2 each — F1 unit 2 2906232d1, and
+ *    `outputsRequiringProcessor on chains` — A-05 d4871ca7a (generators/computeActiveChains.js,
+ *      composed through the rung1b window);
+ *    `magicExists on config` — RUNG1B-F9 unit 2 c803628b4 (domain/magicReliance.js);
+ *    `text on plotHooks` ×2 — the rung-1 hook-truth record 7eb0bf0ba, moved by SELF-VOUCH 08b02acc5
+ *      (coherence/hookTruthRecord.js);
+ *    `isCustom on institutions` — X-46 car 3 U2 d0a3202b5 (data/institutionalCatalog.js);
+ *    `search on personality` and SIX grown rows in pdf/lib/viewModel.js (`blurb`/`race on npcs`,
+ *      `dominantRace`/`governmentType`/`race`/`terrain on settlement`, +1 read each) —
+ *      HOOKS-UNDER-STRESS unit 5 8c5cc7e11, which passes the settlement into `crisisHookFor`; no
+ *      read was added, the detector now grounds existing ones (MEASURED: the same estate with that
+ *      file alone at 8c5cc7e11^ reproduces the frozen counts exactly);
+ *    `baseChance on inst` 1 → 3 — X-46 car 3 U3 47829c070 and RUNG1B-F6 unit 2 bf3d1258e
+ *      (generators/steps/assembleInstitutions.js, two `.baseChance` reads added);
+ *    `leverage on relationshipPatch` — a re-deal, not an edit: relationshipEvolution.js is
+ *      untouched in the window; the 90dc22f18 bisect above stops the pulse writing `leverage`.
+ *
+ *  ⛔ THE RECONCILIATION, MEASURED at ⟨BASE⟩ 5dd0f323a plus this rung, against the committed
+ *  schema-26 register:
+ *
+ *      NEW 15 (11 files) · INCREASED 7 · GONE 24 · DECREASED 1
+ *
+ *  GONE: the 11 observed `proposalPayload` rows; `tierChange on outcome` ×6 files (a sibling of
+ *  `outcome` now carries the key — the re-dealt pulse reaches tier drift again); the family's own
+ *  `factionName on stressors` and `archetype on stressors` (the live `selected` now carries both);
+ *  the two uncured `formerSponsorSettlementId` rows above; and three rows producer 1d's stimulus
+ *  itself writes (`_institutionToggles on config` ×2, `forcedByToggle on institutions`). The
+ *  DECREASED row is `_userEdits on settlement` 3 → 2 (userEdits.js). Any further row, or any other
+ *  INCREASED one, means the tip moved under the measurement and the mint STOPS.
+ *
+ *  ⭐ THE CORPUS AND THE SCALAR STREAM MOVED UNDER THE WINDOW, and the register records them as
+ *  measured (ruling 5): shapes 1294 → 1261 and origins 9065 → 8486 (observation keys; the four
+ *  EXECUTION keys — seeds 4, configs 4, generations 16, pulseIntervals 12 — do not move); the
+ *  scalar stream, which producer 1d cannot touch, reads regional log 75 / 74 unique and wizard
+ *  news 1529 accumulated / 253 final / 253 unique, against 77/77 and 1521/260/261 at the freeze.
+ *
+ *  ⭐ THE BANK MOVES 69/45 → 76/50, MEASURED: the three declarations reach five addresses and
+ *  seven reads; no other moving row sits on a declared identity.
+ *
+ *  Its delta is the checker and the corpus builder (the two subjects) plus the two bookkeeping
+ *  paths. See `WINDOW_RUNG1_SCANNER_DELTA_PATHS`. The commit pair holds as at every rung: this rung
+ *  lands ratchet-red, and its re-freeze lands next. */
+export const WINDOW_RUNG1_TARGET_SCHEMA = 27;
+
 export const DECLARED_BANK_BY_TARGET = Object.freeze({
   [EXEMPTION_RETIREMENT_TARGET_SCHEMA]: Object.freeze({ bankedReads: 60, taggedRows: 39 }),
   [BANK_FENCE_TARGET_SCHEMA]: Object.freeze({ bankedReads: 60, taggedRows: 39 }),
@@ -1077,6 +1188,14 @@ export const DECLARED_BANK_BY_TARGET = Object.freeze({
   // the live scan at the subject: none of the 22 admitted rows, the four gone or the two shrunk is
   // on a declared identity, so the pair cannot move. The write refuses if the measurement disagrees.
   [FED_WORLD_TARGET_SCHEMA]: Object.freeze({ bankedReads: 69, taggedRows: 45 }),
+  // MEASURED off the live scan at the subject, never predicted from the delta: `bankOf` over the
+  // committed schema-26 register derives 69 reads across 45 addresses, and the three identities
+  // this rung DECLARES reach five addresses and seven reads in the live inventory — `temporary on
+  // npcs` ×1 at each of crisis/crisisCast.js, crisisLifecycle.js and coherence/crisisCastFindings.js,
+  // `temporaryKind on npcs` ×2 at crisis/crisisCast.js, `crisisIds on npcs` ×2 at
+  // crisisLifecycle.js. No other moving row sits on a declared identity. The write refuses if the
+  // measurement disagrees with this pair or with the walker's hand-owned literal.
+  [WINDOW_RUNG1_TARGET_SCHEMA]: Object.freeze({ bankedReads: 76, taggedRows: 50 }),
 });
 
 /** The declared post-bank of a target, or `null` for a rung that predates the law. */
@@ -1564,6 +1683,23 @@ export const FED_WORLD_SCANNER_DELTA_PATHS = Object.freeze([
   'scripts/migrate-observed-shape-readers.mjs',
 ]);
 
+/**
+ * The schema-26 → 27 detector delta — FOUR paths, the fed-world rung's set:
+ *   • `scripts/check-observed-shape-readers.mjs` — a SUBJECT: the shape-family theta 0.80 → 0.76
+ *     and the three crisis declarations, plus the live-validator binding, `_doc` and schema index;
+ *   • `scripts/lib/observed-shape-corpus.mjs` — a SUBJECT: producer 1d, the window topology pass;
+ *   • the two bookkeeping files — the 26 → 27 bump and the retired-26 validator, and this rung and
+ *     its declared post-bank.
+ * ⛔ NOTHING ELSE MOVED among the eleven governed detector inputs, measured rather than assumed:
+ * the scanner transition the migration reports names exactly these four MOVED and seven retained.
+ */
+export const WINDOW_RUNG1_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/lib/observed-shape-corpus.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
 export const BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS = Object.freeze([
   'package-lock.json',
   'package.json',
@@ -1612,6 +1748,8 @@ const ADVISORY_LOCKFILE_SCANNER_TRANSITION_POLICY =
   'schema-24-to-25-exact-scanner-transition-v1';
 const FED_WORLD_SCANNER_TRANSITION_POLICY =
   'schema-25-to-26-exact-scanner-transition-v1';
+const WINDOW_RUNG1_SCANNER_TRANSITION_POLICY =
+  'schema-26-to-27-exact-scanner-transition-v1';
 const CORPUS_COVERAGE_SCANNER_TRANSITION_POLICY =
   'schema-7-to-8-exact-scanner-transition-v1';
 const EPOCH_DARK_CORPUS_SCANNER_TRANSITION_POLICY =
@@ -1656,6 +1794,7 @@ export const LEAF_MIGRATION_PREDECESSOR = Object.freeze({
   [CORPUS_REDEAL_TARGET_SCHEMA]: EDIT_MODE_READERS_TARGET_SCHEMA,
   [ADVISORY_LOCKFILE_TARGET_SCHEMA]: CORPUS_REDEAL_TARGET_SCHEMA,
   [FED_WORLD_TARGET_SCHEMA]: ADVISORY_LOCKFILE_TARGET_SCHEMA,
+  [WINDOW_RUNG1_TARGET_SCHEMA]: FED_WORLD_TARGET_SCHEMA,
 });
 
 /**
@@ -1730,6 +1869,10 @@ const LEAF_PREDECESSOR_VALIDATOR = Object.freeze({
   // RETIRED literal from this rung onward, so this entry keeps validating schema 25
   // as schema 25 after the live number moves past it.
   [ADVISORY_LOCKFILE_TARGET_SCHEMA]: validateSchema25Baseline,
+  // The schema-27 rung's own predecessor. `validateSchema26Baseline` is bound to the
+  // RETIRED literal from this rung onward, so this entry keeps validating schema 26
+  // as schema 26 after the live number moves past it.
+  [FED_WORLD_TARGET_SCHEMA]: validateSchema26Baseline,
 });
 
 const RETIRED_EXACT_MIGRATION_KIND = `observed-shape-schema-2-to-${RETIRED_EXACT_TARGET_SCHEMA}-migration`;
@@ -2243,6 +2386,16 @@ const SCANNER_TRANSITION_BY_TARGET = new Map([
     // lockfile at the root and three files under `scripts/`, none of them subject paths, so the
     // unscanned digest cannot move BY THIS RUNG and the report's `unscannedMovement` is expected
     // null. The permission is carried because the class is lawful, not because it is exercised.
+    reviewableUnscannedMovement: true,
+  })],
+  [WINDOW_RUNG1_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: WINDOW_RUNG1_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: WINDOW_RUNG1_SCANNER_TRANSITION_POLICY,
+    // TRUE, matching every rung since 8→9 — and THIS rung exercises it: the window regenerated
+    // governed execution inputs (the dossier-state prose, the institution service keys, the prose
+    // norms, …) by their documented commands after the predecessor was frozen, and the report
+    // records that movement for the review's decision.
     reviewableUnscannedMovement: true,
   })],
   [FED_WORLD_TARGET_SCHEMA, Object.freeze({
@@ -3345,7 +3498,7 @@ export function run(argv = process.argv.slice(2)) {
   // any mismatch into a refusal rather than a silent mode switch.
   const targetSchema = command.targetSchema
     ? Number(command.targetSchema)
-    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : FED_WORLD_TARGET_SCHEMA);
+    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : WINDOW_RUNG1_TARGET_SCHEMA);
   if (![RETIRED_EXACT_TARGET_SCHEMA, HEURISTIC_TARGET_SCHEMA, FILTERED_TARGET_SCHEMA,
     SURFACE_FILTERED_TARGET_SCHEMA, BANKED_EXPLAINED_WRITER_TARGET_SCHEMA,
     CORPUS_COVERAGE_TARGET_SCHEMA, EPOCH_DARK_CORPUS_TARGET_SCHEMA,
@@ -3357,8 +3510,9 @@ export function run(argv = process.argv.slice(2)) {
     BANK_FENCE_TARGET_SCHEMA, RELATIONSHIPS_MOUNT_TARGET_SCHEMA,
     DOMAIN_READER_TARGET_SCHEMA, EDIT_MODE_READERS_TARGET_SCHEMA,
     CORPUS_REDEAL_TARGET_SCHEMA, ADVISORY_LOCKFILE_TARGET_SCHEMA,
-    FED_WORLD_TARGET_SCHEMA].includes(targetSchema)) {
-    throw new Error(`observed-shape --target-schema must be ${FED_WORLD_TARGET_SCHEMA} (live fed-world leaf),`
+    FED_WORLD_TARGET_SCHEMA, WINDOW_RUNG1_TARGET_SCHEMA].includes(targetSchema)) {
+    throw new Error(`observed-shape --target-schema must be ${WINDOW_RUNG1_TARGET_SCHEMA} (live rung-1-window leaf),`
+      + ` ${FED_WORLD_TARGET_SCHEMA} (retired fed-world leaf),`
       + ` ${ADVISORY_LOCKFILE_TARGET_SCHEMA} (retired advisory-lockfile leaf),`
       + ` ${CORPUS_REDEAL_TARGET_SCHEMA} (retired corpus-redeal leaf),`
       + ` ${EDIT_MODE_READERS_TARGET_SCHEMA} (retired edit-mode-readers leaf),`

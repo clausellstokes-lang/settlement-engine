@@ -54,12 +54,13 @@ describe('the absent state is its own state', () => {
     const sentence = defenseMagicDependencyProse(magicRelianceDeskSettlement(absent), opts).arcaneReliance?.sentence || '';
     const pool = DOSSIER_STATE_PROSE_DEFENSE['DS-DEF-9'].pools[ABSENT_KEY].map((v) => v.text.split('{settlement}')[0]);
     expect(pool.some((head) => sentence.startsWith(head))).toBe(true);
-    expect(sentence).not.toMatch(/There is magic at|\bpractitioners?\b|the arcane went away/);
+    expect(sentence).not.toMatch(/There is magic at|\bpractitioners?\b|the arcane went away/); // anchored: the line above proves the sentence opens with a live head of the absent pool
   });
 
   it('the absent pool itself asserts no practitioner and no magic present', () => {
+    expect(DOSSIER_STATE_PROSE_DEFENSE['DS-DEF-9'].pools[ABSENT_KEY].length).toBeGreaterThan(0);
     for (const v of DOSSIER_STATE_PROSE_DEFENSE['DS-DEF-9'].pools[ABSENT_KEY]) {
-      expect(v.text).not.toMatch(/There is magic at|\bpractitioners?\b|the arcane went away|\d/);
+      expect(v.text).not.toMatch(/There is magic at|\bpractitioners?\b|the arcane went away|\d/); // anchored: the line before the loop proves the absent pool is non-empty
     }
   });
 });

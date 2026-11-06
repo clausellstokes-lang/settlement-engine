@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "0c104fe807a27c4600ec741616ed111a2ff94712",
-  "measuredBy": "G2",
-  "date": "2026-10-31",
-  "note": "GS-2 one faction set (ODQ §934.101): bare decimals 6975 -> 6962, a win banked; npcGenerator.js 83 -> 71 (the dead _generateFactionConflict deleted) and power/conflicts.js 1 -> 0 (the no-rivalry 0.4 coin gone); no value moved, no ceiling rose",
+  "measuredAtSha": "fecbdfd68ee036ad482d9cae34d1abc4f0dc133b",
+  "measuredBy": "LANDING-7-E3 (Opus 5.5)",
+  "date": "2026-11-06",
+  "note": "LANDING-7 R-E8: DENSITY_CEILINGS enters as a homes-registered table (re-derived from the stamp-band maxima, draft row)",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -22,6 +22,132 @@
     ]
   },
   "tables": {
+    "src/data/constants.js#METROPOLIS_ROLL_TUNING": {
+      "exported": true,
+      "idiom": "literal",
+      "keys": 5,
+      "line": 49,
+      "spanDigest": "40e775124d2796f2b2c8197b942c30d24f44c1a500f3dbf627f0d6eae27312f6",
+      "leaves": {
+        "bodyMin": 15000,
+        "bodyMax": 50000,
+        "tailMax": 1000000,
+        "thinning": 0.5,
+        "tailShare": 0.3
+      },
+      "dependents": [
+        "src/components/ConfigurationPanel.jsx",
+        "src/components/HomeHero.jsx",
+        "src/components/loadingJourney/journeyManifest.js",
+        "src/components/map/HeraldGazetteer.jsx",
+        "src/components/map/RealmComparisons.jsx",
+        "src/components/map/TerritoryLayer.jsx",
+        "src/components/map/TierIcon.jsx",
+        "src/components/map/heraldRegister.js",
+        "src/components/settlement/eventComposer/EventComposerTierField.jsx",
+        "src/data/institutionBudget.js",
+        "src/data/institutionLookups.js",
+        "src/domain/arcaneInstitutionIdentity.js",
+        "src/domain/capacityModel.js",
+        "src/domain/causalState.js",
+        "src/domain/coherence/tierNounFindings.js",
+        "src/domain/compendium/bandLadders.js",
+        "src/domain/content/contentSampleCategoryFixtures.js",
+        "src/domain/content/reviewedSupplyChainPersistence.js",
+        "src/domain/display/stateProse/defenseStateProse.js",
+        "src/domain/display/stateProse/economyStateProse.js",
+        "src/domain/display/stateProse/weaveBlock.js",
+        "src/domain/display/tierStockImage.js",
+        "src/domain/edit/pools.js",
+        "src/domain/events/affordanceManifest.js",
+        "src/domain/events/mutateEntities.js",
+        "src/domain/highWater.js",
+        "src/domain/interior/interiorTemplates.js",
+        "src/domain/magicFilter.js",
+        "src/domain/magicLedger.js",
+        "src/domain/realm/autoplacement.js",
+        "src/domain/region/deriveRegionalState.js",
+        "src/domain/region/discoverDependencyCandidates.js",
+        "src/domain/roads/state.js",
+        "src/domain/state/deriveSystemState.js",
+        "src/domain/townMap/townLayoutV2.js",
+        "src/domain/townMap/townMapModel.js",
+        "src/domain/traditions/genesis.js",
+        "src/domain/traditions/politics.js",
+        "src/domain/viabilitySummary.js",
+        "src/domain/worldPulse/beliefAxisSubjects.js",
+        "src/domain/worldPulse/calamityKernel.js",
+        "src/domain/worldPulse/conquestFeeds.js",
+        "src/domain/worldPulse/corruptionWeb.js",
+        "src/domain/worldPulse/counterIntelSweep.js",
+        "src/domain/worldPulse/demographicsLadder.js",
+        "src/domain/worldPulse/demographicsLand.js",
+        "src/domain/worldPulse/demographicsRates.js",
+        "src/domain/worldPulse/demographicsResponses.js",
+        "src/domain/worldPulse/generosityKernel.js",
+        "src/domain/worldPulse/generosityUpdates.js",
+        "src/domain/worldPulse/informationStatecraft.js",
+        "src/domain/worldPulse/institutionLifecycle.js",
+        "src/domain/worldPulse/lineageClaim.js",
+        "src/domain/worldPulse/magicForms.js",
+        "src/domain/worldPulse/militaryStrength.js",
+        "src/domain/worldPulse/navalStrength.js",
+        "src/domain/worldPulse/pestilenceKernel.js",
+        "src/domain/worldPulse/relationshipMemory.js",
+        "src/domain/worldPulse/relationshipRuleHelpers.js",
+        "src/domain/worldPulse/religionState.js",
+        "src/domain/worldPulse/religiousContest.js",
+        "src/domain/worldPulse/settlementLifecycleFirstClass.js",
+        "src/domain/worldPulse/settlementLifecycleKernel.js",
+        "src/domain/worldPulse/tierOutcomeApply.js",
+        "src/domain/worldPulse/tierResourceDynamics.js",
+        "src/domain/worldPulse/traditionsKernel.js",
+        "src/domain/worldPulse/treasury.js",
+        "src/domain/worldPulse/upswingKernel.js",
+        "src/domain/worldPulse/urbanFabricKernel.js",
+        "src/generators/density/densityRoll.js",
+        "src/generators/economy/foodBalance.js",
+        "src/generators/economy/tradeGoods.js",
+        "src/generators/economy/upgradeOpportunities.js",
+        "src/generators/economy/viability.js",
+        "src/generators/foodGenerator.js",
+        "src/generators/generationContext.js",
+        "src/generators/helpers.js",
+        "src/generators/institutionProbability.js",
+        "src/generators/isolationGenerator.js",
+        "src/generators/lookups.js",
+        "src/generators/steps/assembleInstitutions.js",
+        "src/generators/steps/coherenceRepairPass.js",
+        "src/generators/steps/isolationPass.js",
+        "src/generators/steps/resolveConfig.js",
+        "src/generators/structuralValidator.js",
+        "src/store/mapSlice.js",
+        "src/store/selectors.js",
+        "src/store/settlementGenerateAction.js"
+      ],
+      "namedDependents": []
+    },
+    "src/data/foodImportRates.js#SIEGE_PRODUCTION_KEPT": {
+      "exported": true,
+      "idiom": "literal",
+      "keys": 1,
+      "line": 39,
+      "spanDigest": "da761b94bbe3853e8e2d51d5bdb3089bad32ea21c5392409b823d01d7ce68bd8",
+      "leaves": {
+        "value": 0.3
+      },
+      "dependents": [
+        "src/domain/defense/defenseFacts.js",
+        "src/domain/worldPulse/foodStockpile.js",
+        "src/generators/economy/foodBalance.js",
+        "src/generators/foodGenerator.js"
+      ],
+      "namedDependents": [
+        "src/domain/defense/defenseFacts.js",
+        "src/generators/economy/foodBalance.js",
+        "src/generators/foodGenerator.js"
+      ]
+    },
     "src/data/informationBrokerageTuning.js#INFORMATION_BROKERAGE_TUNING": {
       "exported": true,
       "idiom": "mixed",
@@ -77,6 +203,35 @@
         "src/domain/worldPulse/brokerageServicesFeed.js",
         "src/domain/worldPulse/brokerageStamps.js"
       ]
+    },
+    "src/data/institutionBudget.js#INSTITUTION_BUDGET_ANCHORS": {
+      "exported": true,
+      "idiom": "literal",
+      "keys": 7,
+      "line": 34,
+      "spanDigest": "454df7dd39bb160b09b55a7fb49294f930b1ddc8606b23910b5e01004685f2f3",
+      "leaves": {
+        "0.0": 5,
+        "0.1": 3,
+        "1.0": 30,
+        "1.1": 5,
+        "2.0": 100,
+        "2.1": 8,
+        "3.0": 400,
+        "3.1": 16,
+        "4.0": 2500,
+        "4.1": 36,
+        "5.0": 15000,
+        "5.1": 76,
+        "6.0": 60000,
+        "6.1": 93
+      },
+      "dependents": [
+        "src/generators/cascadeGenerator.js",
+        "src/generators/factionCorrelation.js",
+        "src/generators/steps/assembleInstitutions.js"
+      ],
+      "namedDependents": []
     },
     "src/domain/certification/infoConvergenceContract.js#INFO_CONVERGENCE_TUNING": {
       "exported": true,
@@ -199,6 +354,7 @@
       },
       "dependents": [
         "src/domain/causalState.js",
+        "src/domain/crimeSignal.js",
         "src/domain/display/deityEffects.js",
         "src/domain/display/glossary.js",
         "src/domain/events/affordanceManifest.js",
@@ -241,6 +397,7 @@
       },
       "dependents": [
         "src/domain/causalState.js",
+        "src/domain/crimeSignal.js",
         "src/domain/display/deityEffects.js",
         "src/domain/display/glossary.js",
         "src/domain/events/affordanceManifest.js",
@@ -284,6 +441,7 @@
       },
       "dependents": [
         "src/domain/causalState.js",
+        "src/domain/crimeSignal.js",
         "src/domain/display/deityEffects.js",
         "src/domain/display/glossary.js",
         "src/domain/events/affordanceManifest.js",
@@ -334,6 +492,7 @@
       },
       "dependents": [
         "src/domain/causalState.js",
+        "src/domain/crimeSignal.js",
         "src/domain/display/deityEffects.js",
         "src/domain/display/glossary.js",
         "src/domain/events/affordanceManifest.js",
@@ -376,6 +535,7 @@
       },
       "dependents": [
         "src/domain/causalState.js",
+        "src/domain/crimeSignal.js",
         "src/domain/display/deityEffects.js",
         "src/domain/display/glossary.js",
         "src/domain/events/affordanceManifest.js",
@@ -417,6 +577,7 @@
       },
       "dependents": [
         "src/domain/causalState.js",
+        "src/domain/crimeSignal.js",
         "src/domain/display/deityEffects.js",
         "src/domain/display/glossary.js",
         "src/domain/events/affordanceManifest.js",
@@ -445,11 +606,52 @@
         "src/domain/worldPulse/npcAgency.js"
       ]
     },
+    "src/domain/crisis/crisisCast.js#CRISIS_CAST_TUNING": {
+      "exported": true,
+      "idiom": "mixed",
+      "keys": 2,
+      "line": 45,
+      "spanDigest": "6b3d0a1b34604e0b09ffa63b1642dffa44a7552fa114d2ca602253156c8db98e",
+      "leaves": {
+        "rates.exploiter": {
+          "expr": "1 / 3"
+        },
+        "rates.scapegoat": {
+          "expr": "1 / 4"
+        },
+        "rates.waverer": {
+          "expr": "1 / 2"
+        },
+        "rates.profiteer": {
+          "expr": "1 / 3"
+        },
+        "rates.collaborator": {
+          "expr": "1 / 2"
+        },
+        "townCaps.exploiter": 1,
+        "townCaps.scapegoat": 1,
+        "townCaps.profiteer": 1,
+        "townCaps.collaborator": 1,
+        "townCaps.temporary": 1
+      },
+      "dependents": [
+        "src/components/new/tabs/CrisisTab.jsx",
+        "src/domain/coherence/crisisCastFindings.js",
+        "src/domain/crisis/crisisHooks.js",
+        "src/domain/crisis/crisisPage.js",
+        "src/domain/dossier/plotHooks.js",
+        "src/domain/summary/tonightSheet.js",
+        "src/generators/steps/resolveCrisisCast.js"
+      ],
+      "namedDependents": [
+        "src/domain/coherence/crisisCastFindings.js"
+      ]
+    },
     "src/domain/density/densityBands.js#TIER_ORDER": {
       "exported": true,
       "idiom": "literal",
       "keys": 6,
-      "line": 66,
+      "line": 69,
       "spanDigest": "3e036f2001bb6126b52252cc72c6dfc72fa3eb7b9a9f959102bc0d226d4ba66a",
       "leaves": {
         "0": "thorp",
@@ -476,7 +678,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 4,
-      "line": 74,
+      "line": 77,
       "spanDigest": "b455482c1a4b5d99a50156a9821f266fd71ef3d2d7a5b119cc1ffce75b4abb6a",
       "leaves": {
         "0": "minor",
@@ -503,13 +705,13 @@
       "exported": true,
       "idiom": "literal",
       "keys": 6,
-      "line": 110,
-      "spanDigest": "7e760fb8f637847d18720e4ef007bc6c35e9d3fd4b6ff01360094e01c171736b",
+      "line": 123,
+      "spanDigest": "cfe34b033d05d8ddace082c665d1cbee161adebac397344e7a2966c4dc5db6ee",
       "leaves": {
         "thorp.factions.min": 1,
         "thorp.factions.max": 1,
         "thorp.mass.min": 1,
-        "thorp.mass.max": 3,
+        "thorp.mass.max": 2,
         "thorp.doubledNiches.min": 0,
         "thorp.doubledNiches.max": 0,
         "thorp.suite.min": 1,
@@ -526,8 +728,8 @@
         "hamlet.rivalBonusSeat": 0,
         "village.factions.min": 2,
         "village.factions.max": 3,
-        "village.mass.min": 3,
-        "village.mass.max": 6,
+        "village.mass.min": 4,
+        "village.mass.max": 7,
         "village.doubledNiches.min": 0,
         "village.doubledNiches.max": 0,
         "village.suite.min": 1,
@@ -536,7 +738,7 @@
         "town.factions.min": 3,
         "town.factions.max": 5,
         "town.mass.min": 6,
-        "town.mass.max": 10,
+        "town.mass.max": 12,
         "town.doubledNiches.min": 0,
         "town.doubledNiches.max": 0,
         "town.suite.min": 1,
@@ -545,7 +747,7 @@
         "city.factions.min": 5,
         "city.factions.max": 8,
         "city.mass.min": 12,
-        "city.mass.max": 20,
+        "city.mass.max": 18,
         "city.doubledNiches.min": 1,
         "city.doubledNiches.max": 2,
         "city.suite.min": 2,
@@ -578,7 +780,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 6,
-      "line": 135,
+      "line": 148,
       "spanDigest": "1ebc51688e889ab9dcccb049962193d2158bbbfb777a52a4a3dc6d65f49da8ef",
       "leaves": {
         "thorp": "notable",
@@ -605,7 +807,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 5,
-      "line": 168,
+      "line": 181,
       "spanDigest": "2af9d1ab6619d9b5e3f30be0d79d05616ea7a610a6c39fd070223e88a0141ddf",
       "leaves": {
         "head": 0.18,
@@ -632,15 +834,16 @@
     "src/domain/density/densityBands.js#PARTICULAR_TILTS": {
       "exported": true,
       "idiom": "literal",
-      "keys": 5,
-      "line": 211,
-      "spanDigest": "2b3d90f10c28572d69632d3bc7b6c349a478b2f1d3a0eb1921447ad0f59dcda8",
+      "keys": 6,
+      "line": 235,
+      "spanDigest": "0fcad894eddf31bda5952e3440afb48a6b37334ffc236bdffc6909c5a3d1889e",
       "leaves": {
         "prosperity": 0.2,
         "connectivity": 0.12,
         "war": -0.15,
         "corruption": -0.08,
-        "vacancyTilt": 0.45
+        "vacancyTilt": 0.45,
+        "population": 0.75
       },
       "dependents": [
         "src/domain/density/densityCadence.js",
@@ -661,7 +864,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 3,
-      "line": 230,
+      "line": 255,
       "spanDigest": "a4ad2f589d833a90fc0f60b976f2057933d2bb664d60966d8ee038330435ba59",
       "leaves": {
         "base": 0.22,
@@ -687,7 +890,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 3,
-      "line": 255,
+      "line": 280,
       "spanDigest": "053163b7b6dedb46f48cfa63f4cc7a1165fc2af738ed21bb32d84db32c6387e2",
       "leaves": {
         "min": 0,
@@ -713,7 +916,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 2,
-      "line": 272,
+      "line": 297,
       "spanDigest": "cf12a2a87a946f8b7021c7e71b26eeade80c54a186b53cc2106915e286816e4e",
       "leaves": {
         "ruling_seat": 8,
@@ -738,7 +941,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 10,
-      "line": 311,
+      "line": 336,
       "spanDigest": "3b0b37bb4b82c22ce1945bfeaafa72b02d27b1b37990f4dd48a4575090ba4fa8",
       "leaves": {
         "continuityBase": 0.35,
@@ -788,7 +991,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 438,
+      "line": 439,
       "spanDigest": "3812788e098c702a89d72a5b51c0007f969391069da9b98b2fdd4f2e789ff838",
       "leaves": {
         "value": 50
@@ -802,7 +1005,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 439,
+      "line": 440,
       "spanDigest": "a6b1340215d65b0c4945f4b657854f6756ff2217a648606b9e467ee5ac00bbda",
       "leaves": {
         "value": 20
@@ -816,7 +1019,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 929,
+      "line": 940,
       "spanDigest": "d8ad20f683ec92a4a0b123ebd6748169b8712e96577f567cd56d3cdd08f76113",
       "leaves": {
         "value": 0.05
@@ -831,7 +1034,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 363,
+      "line": 364,
       "spanDigest": "861a71e24fdda07cea9d8f740fbe51ca1685d27dfd0a9f822f579ea609747fe2",
       "leaves": {
         "value": 0.15
@@ -846,7 +1049,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 579,
+      "line": 580,
       "spanDigest": "d8c363dde6af24802c24ec308fde1963fd20f88ef9f80765dbeb6bd7c6899e55",
       "leaves": {
         "value": 3
@@ -861,7 +1064,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 581,
+      "line": 582,
       "spanDigest": "61090f7451b7f2aadae1709fa76edc9f360ae61664c9f8fd48b677a1e8ecfa07",
       "leaves": {
         "value": 0.35
@@ -876,7 +1079,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 583,
+      "line": 584,
       "spanDigest": "0b8b01d51be797cd0143574956002d9faabb6345790cafa0a91e78f63118f528",
       "leaves": {
         "value": 0.08
@@ -891,7 +1094,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 585,
+      "line": 586,
       "spanDigest": "013116d8a083862271257454b6e161900d075e0a05df61a52dfd7e61938389e3",
       "leaves": {
         "value": 0.15
@@ -906,7 +1109,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 278,
+      "line": 279,
       "spanDigest": "7ba947e7a8eeeeaf7c1099788047bdabcfe31b570173434bd82b0f9d83263184",
       "leaves": {
         "value": 0.25
@@ -1977,8 +2180,8 @@
       "exported": true,
       "idiom": "mixed",
       "keys": 56,
-      "line": 193,
-      "spanDigest": "0e893587cef8b13904eb17abb76dda19c4159bc6a4f587b60be7ac365a3b1760",
+      "line": 207,
+      "spanDigest": "f6f58469dba9ea6434aeaf3e609b8d7942ceedba98dd233f6bf53bfb3e49d581",
       "leaves": {
         "MORPHOLOGY.LEGITIMACY_WEIGHT": 0.3,
         "MORPHOLOGY.CONCENTRATION_WEIGHT": 0.2,
@@ -2097,18 +2300,18 @@
         "MULTIPLICITY.PROSPERITY_RANK.wealthy": 6,
         "MULTIPLICITY.PROSPERITY_RANK.opulent": 6,
         "MULTIPLICITY.PROSPERITY_RANK_SPAN": 6,
-        "MULTIPLICITY.POPULATION_SPAN.thorp.0": 8,
-        "MULTIPLICITY.POPULATION_SPAN.thorp.1": 60,
-        "MULTIPLICITY.POPULATION_SPAN.hamlet.0": 61,
-        "MULTIPLICITY.POPULATION_SPAN.hamlet.1": 400,
-        "MULTIPLICITY.POPULATION_SPAN.village.0": 401,
-        "MULTIPLICITY.POPULATION_SPAN.village.1": 900,
-        "MULTIPLICITY.POPULATION_SPAN.town.0": 901,
-        "MULTIPLICITY.POPULATION_SPAN.town.1": 5000,
-        "MULTIPLICITY.POPULATION_SPAN.city.0": 5001,
-        "MULTIPLICITY.POPULATION_SPAN.city.1": 25000,
-        "MULTIPLICITY.POPULATION_SPAN.metropolis.0": 25001,
-        "MULTIPLICITY.POPULATION_SPAN.metropolis.1": 100000,
+        "MULTIPLICITY.POPULATION_SPAN.thorp.0": 5,
+        "MULTIPLICITY.POPULATION_SPAN.thorp.1": 30,
+        "MULTIPLICITY.POPULATION_SPAN.hamlet.0": 20,
+        "MULTIPLICITY.POPULATION_SPAN.hamlet.1": 100,
+        "MULTIPLICITY.POPULATION_SPAN.village.0": 75,
+        "MULTIPLICITY.POPULATION_SPAN.village.1": 400,
+        "MULTIPLICITY.POPULATION_SPAN.town.0": 300,
+        "MULTIPLICITY.POPULATION_SPAN.town.1": 2500,
+        "MULTIPLICITY.POPULATION_SPAN.city.0": 2000,
+        "MULTIPLICITY.POPULATION_SPAN.city.1": 15000,
+        "MULTIPLICITY.POPULATION_SPAN.metropolis.0": 15000,
+        "MULTIPLICITY.POPULATION_SPAN.metropolis.1": 50000,
         "BUILDINGS_PER_PARCEL.thorp": 1,
         "BUILDINGS_PER_PARCEL.hamlet": 2,
         "BUILDINGS_PER_PARCEL.village": 2,
@@ -2225,7 +2428,7 @@
       "idiom": "literal",
       "keys": 7,
       "line": 227,
-      "spanDigest": "2f8fb902cb2abbbfc9e2eafbc4ed5ee61cd213220af0cba49dc0f9edb6d7b969",
+      "spanDigest": "1cb1b9f82fd6bd73eb6b372f80b11960ec486c4f3a3ff3528cf9e8990b14c6fe",
       "leaves": {
         "weights.PROSPERITY_BAND": 0.25,
         "weights.CIVIC_CAPACITY": 0.25,
@@ -2235,8 +2438,8 @@
         "weights.FOUNDING_CHARTER": 0,
         "civicSaturation": 4,
         "calamitySaturation": 3,
-        "cesspitFailurePopulation": 2000,
-        "highWaterSaturation": 12000,
+        "cesspitFailurePopulation": 777,
+        "highWaterSaturation": 5399,
         "absentFloor": 0.1,
         "certainThreshold": 0.9
       },
@@ -3332,11 +3535,45 @@
         "src/domain/worldPulse/demographicsMigration.js"
       ]
     },
+    "src/domain/worldPulse/demographicsRates.js#DENSITY_CEILINGS": {
+      "exported": true,
+      "idiom": "literal",
+      "keys": 6,
+      "line": 164,
+      "spanDigest": "e7661abf510150ed4ca96c5cb8862d77ccc23a9b4bcb23ae55cc11c3d2e95646",
+      "leaves": {
+        "thorp": 36,
+        "hamlet": 131,
+        "village": 543,
+        "town": 3374,
+        "city": 22798,
+        "metropolis": 140000
+      },
+      "dependents": [
+        "src/domain/display/demographicReading.js",
+        "src/domain/worldPulse/candidateEvents.js",
+        "src/domain/worldPulse/demographicsKernel.js",
+        "src/domain/worldPulse/demographicsLadder.js",
+        "src/domain/worldPulse/demographicsMigration.js",
+        "src/domain/worldPulse/demographicsObservation.js",
+        "src/domain/worldPulse/demographicsPlans.js",
+        "src/domain/worldPulse/demographicsPushPull.js",
+        "src/domain/worldPulse/demographicsRisk.js",
+        "src/domain/worldPulse/demographicsWar.js",
+        "src/domain/worldPulse/migrationKernel.js",
+        "src/domain/worldPulse/populationDynamics.js",
+        "src/domain/worldPulse/settlementLifecycleFirstClass.js",
+        "src/domain/worldPulse/sovereigntyMarketStage.js",
+        "src/domain/worldPulse/tierResourceDynamics.js",
+        "src/domain/worldPulse/warReasons.js"
+      ],
+      "namedDependents": []
+    },
     "src/domain/worldPulse/demographicsRates.js#DEMOGRAPHIC_TUNING": {
       "exported": true,
       "idiom": "literal",
       "keys": 11,
-      "line": 218,
+      "line": 234,
       "spanDigest": "b4476edae48f99ca0e8ca71de94a353ed4dd26f411507f2364f8199dde212007",
       "leaves": {
         "BIRTH_EASE": 0.75,
@@ -5609,7 +5846,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 26,
-      "line": 45,
+      "line": 41,
       "spanDigest": "9d1ced79218f1e4475c990a9cff989f87df9e50fb0f076c42fd646573f47aba0",
       "leaves": {
         "STAND_MAX": 10,
@@ -5641,7 +5878,6 @@
       },
       "dependents": [
         "src/domain/display/npcInteriorityRead.js",
-        "src/domain/dossier/powerStrata.js",
         "src/domain/dossier/realmEntityWeb.js",
         "src/domain/roads/thirdPartyRansom.js",
         "src/domain/worldPulse/assizeKernel.js",
@@ -7925,6 +8161,7 @@
     "src/domain/spatial/teleportEdges.js": 3,
     "src/domain/spatial/waterBodies.js": 5,
     "src/domain/summary/tonightAtTheTable.js": 1,
+    "src/domain/summary/tonightSheet.js": 1,
     "src/domain/townCartography/cartographyPlan.js": 1,
     "src/domain/townCartography/cartographyTuning.js": 1,
     "src/domain/townMap/arch/aoBake.js": 3,
@@ -8050,10 +8287,11 @@
     "src/domain/worldPulse/worldState.js": 7,
     "src/generators/demandProfile.js": 1,
     "src/generators/economy/viability.js": 1,
-    "src/generators/foodGenerator.js": 7,
+    "src/generators/foodGenerator.js": 5,
     "src/generators/generationReceiptJudgments.js": 1,
     "src/generators/historyGenerator.js": 1,
-    "src/generators/power/economyReconciliation.js": 2
+    "src/generators/power/economyReconciliation.js": 2,
+    "src/generators/recordBatteryFindings.js": 1
   },
   "bareDecimals": {
     "src/domain/activeConditions.js": 60,
@@ -8072,7 +8310,6 @@
     "src/domain/display/armyStrength.js": 10,
     "src/domain/display/chronicleReadModel.js": 1,
     "src/domain/display/credibilityRead.js": 3,
-    "src/domain/display/defenseDisplay.js": 1,
     "src/domain/display/dossierViewModel.js": 3,
     "src/domain/display/forceComposition.js": 19,
     "src/domain/display/institutionVocabulary.js": 79,
@@ -8084,6 +8321,7 @@
     "src/domain/display/settlementBeliefs.js": 6,
     "src/domain/display/settlementPestilence.js": 5,
     "src/domain/display/settlementRumors.js": 3,
+    "src/domain/display/threatAssessment.js": 1,
     "src/domain/display/visibilityAudit.js": 2,
     "src/domain/display/warResolve.js": 12,
     "src/domain/display/warStatus.js": 2,
@@ -8389,15 +8627,15 @@
     "src/generators/chainMagicSubstitution.js": 16,
     "src/generators/defenseGenerator.js": 46,
     "src/generators/density/applyDensityLaw.js": 10,
-    "src/generators/density/densityRoll.js": 6,
+    "src/generators/density/densityRoll.js": 7,
     "src/generators/density/successionGrammar.js": 3,
     "src/generators/economy/economicState.js": 6,
-    "src/generators/economy/foodBalance.js": 27,
+    "src/generators/economy/foodBalance.js": 24,
     "src/generators/economy/neighbourEconomicBias.js": 2,
     "src/generators/economy/prosperity.js": 13,
     "src/generators/factionCorrelation.js": 4,
     "src/generators/factionDynamics.js": 38,
-    "src/generators/foodGenerator.js": 63,
+    "src/generators/foodGenerator.js": 48,
     "src/generators/generationCoherence.js": 1,
     "src/generators/history/historyEventStrands.js": 47,
     "src/generators/historyGenerator.js": 13,
@@ -8431,11 +8669,11 @@
   },
   "unclosed": [],
   "totals": {
-    "tables": 257,
-    "keys": 2187,
+    "tables": 262,
+    "keys": 2209,
     "unregisteredNamed": 535,
-    "bareDecimals": 6962,
+    "bareDecimals": 6945,
     "zeroDependentTables": 10,
-    "zeroNamedDependentTables": 168
+    "zeroNamedDependentTables": 171
   }
 }
