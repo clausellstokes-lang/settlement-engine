@@ -16,9 +16,12 @@
 import { magicLedger } from '../magicLedger.js';
 import { magicWorksAt } from '../worldPulse/magicWorksAt.js';
 
+/** @typedef {import('../magicLedger.js').MagicLedgerSource} MagicSource */
+
 /**
  * THE ONE READER.
- * @param {any} record a settlement record (or a `{ settlement }` snapshot item)
+ * @param {MagicSource & { settlement?: MagicSource | null } | null | undefined} record a settlement record (or a
+ *   `{ settlement }` snapshot item)
  * @returns {Readonly<{ functions: boolean, level: string, priority: number }>}
  */
 export function magicOf(record) {

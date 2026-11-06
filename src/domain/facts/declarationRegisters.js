@@ -80,8 +80,16 @@ export function variantColour(variant) {
  */
 
 /**
+ * One state-prose block as a leaf carries it: its pools (each a variant array) and each pool's brace
+ * rulings (`{crisis-scoped}`, `{colour}`, a declares group).
+ * @typedef {object} StatePoolBlock
+ * @property {Readonly<Record<string, unknown>>} [pools]
+ * @property {Readonly<Record<string, Readonly<{ crisisScoped?: unknown, colour?: unknown, declares?: unknown }>>>} [poolMeta]
+ */
+
+/**
  * The per-pool counts over the leaves, keyed `<blockId>::<poolKey>`, in the leaves' order.
- * @param {ReadonlyArray<Readonly<Record<string, any>>>} leaves the six `DOSSIER_STATE_PROSE_*` objects
+ * @param {ReadonlyArray<Readonly<Record<string, StatePoolBlock>>>} leaves the six `DOSSIER_STATE_PROSE_*` objects
  * @returns {Record<string, PoolCount>}
  */
 export function statePoolCounts(leaves) {

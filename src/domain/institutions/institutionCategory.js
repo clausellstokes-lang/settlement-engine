@@ -60,18 +60,24 @@ function keywordIdSet(keyword) {
 }
 
 /**
+ * The institution fields the category readers consult: a catalog row (`catalogId`, `category`,
+ * `tags`, stamped by assembleInstitutions) or an unstamped custom / legacy / DM row (its `name`).
+ * @typedef {{ catalogId?: string | null, name?: unknown, category?: unknown, tags?: unknown }} InstitutionLike
+ */
+
+/**
  * Does this institution match a keyword? Id-first for stamped, substring fallback.
- * @param {any} inst @param {string} keyword @returns {boolean}
+ * @param {InstitutionLike | null | undefined} inst @param {string} keyword @returns {boolean}
  */
 export function institutionMatchesKeyword(inst, keyword) {
   if (inst?.catalogId) return keywordIdSet(keyword).has(inst.catalogId);
   if (isMaterializedCustomContent(inst)) return false;
-  return String(inst?.name || '').toLowerCase().includes(String(keyword).toLowerCase());
+  return String(/** @type {InstitutionLike | null | undefined} */ (inst)?.name || '').toLowerCase().includes(String(keyword).toLowerCase());
 }
 
-/** Lowercased catalog group of an institution, '' when absent. @param {any} inst */
+/** Lowercased catalog group of an institution, '' when absent. @param {InstitutionLike | null | undefined} inst */
 const groupOf = (inst) => String(inst?.category || '').toLowerCase();
-/** Lowercased tag set of an institution. @param {any} inst @returns {string[]} */
+/** Lowercased tag set of an institution. @param {InstitutionLike | null | undefined} inst @returns {string[]} */
 const tagsOf = (inst) => (Array.isArray(inst?.tags) ? inst.tags : []).map((/** @type {unknown} */ t) => String(t).toLowerCase());
 
 // Per-category detector: clean GROUP + clean TAGS, with name-keyword fallbacks
@@ -100,7 +106,7 @@ const CATEGORY_DETECTORS = Object.freeze({
  * ('criminal' | 'magic' | 'religion')? GROUP + tags first, name keywords as the
  * unstamped/custom fallback.
  *
- * @param {any} inst
+ * @param {InstitutionLike | null | undefined} inst
  * @param {'criminal'|'magic'|'religion'} category
  * @returns {boolean}
  */
@@ -117,7 +123,7 @@ export function institutionInCategory(inst, category) {
   if (det.tags.some((t) => tags.includes(t))) return true;
   // Fallback for institutions with no usable metadata (custom / legacy / DM):
   // match by name keyword (id-first when stamped, substring otherwise).
-  if (!inst.category && tags.length === 0) {
+  if (!/** @type {InstitutionLike} */ (inst).category && tags.length === 0) {
     return det.nameKeywords.some((kw) => institutionMatchesKeyword(inst, kw));
   }
   return false;
@@ -129,7 +135,7 @@ export function institutionInCategory(inst, category) {
  * catalog's own guild marker; criminal guilds (Thieves' guild, Assassins' guild) are excluded via
  * the criminal detector. Name substring ('guild') backstops unstamped institutions.
  *
- * @param {any} inst
+ * @param {InstitutionLike | null | undefined} inst
  * @returns {boolean}
  */
 export function isCommerceGuild(inst) {

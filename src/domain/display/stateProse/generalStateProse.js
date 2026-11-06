@@ -1162,7 +1162,7 @@ export function marketPoolKey(state) {
   // `arrivalScene.holdsMarket` so chair ruling T1-12's equality holds by construction. The
   // retired name regex (`/\b(market|bazaar|exchange|shambles|stalls)\b/i`, `glyphAssign.js`'s
   // stall-rows rule) counted a black market. It moves pages, counted by cause.
-  const hasMarket = marketOf({ institutions: /** @type {any} */ (state)?.institutions });
+  const hasMarket = marketOf({ institutions: /** @type {{ institutions?: unknown } | null | undefined} */ (state)?.institutions });
   const key = !hasMarket
     ? 'NO-MARKET'
     : state?.isEntrepot === true

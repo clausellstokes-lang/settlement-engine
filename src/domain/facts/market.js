@@ -52,7 +52,7 @@ export function isMarketInstitution(inst) {
   const own = /** @type {{tags?: unknown}} */ (inst).tags;
   const tags = Array.isArray(own)
     ? own
-    : (CATALOGUE_TAGS_BY_NAME.get(nativeSemanticName(/** @type {any} */ (inst)).toLowerCase()) || []);
+    : (CATALOGUE_TAGS_BY_NAME.get(nativeSemanticName(/** @type {object} */ (inst)).toLowerCase()) || []);
   return tags.includes('market') || (tags.includes('guild') && tags.includes('trade'));
 }
 
@@ -63,7 +63,7 @@ export function isMarketInstitution(inst) {
  */
 export function hasMarketInstitution(institutions) {
   return (Array.isArray(institutions) ? institutions : [])
-    .some((inst) => isMarketInstitution(inst) && isLiveInstitution(/** @type {any} */ (inst)));
+    .some((inst) => isMarketInstitution(inst) && isLiveInstitution(/** @type {Parameters<typeof isLiveInstitution>[0]} */ (inst)));
 }
 
 /**

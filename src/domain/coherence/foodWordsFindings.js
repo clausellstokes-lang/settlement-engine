@@ -113,7 +113,7 @@ const CART_LINES = new Set(Object.values(FISH_TRADE_TWIN_LINES));
 function isFishTradeLine(sentence, settlement) {
   const s = /** @type {{ institutions?: unknown } | null | undefined} */ (settlement);
   const roster = Array.isArray(s?.institutions) ? s.institutions : [];
-  return roster.some((/** @type {any} */ inst) => /\bfish ?monger|\bfish market\b/i.test(String(inst?.name ?? '')) && typeof inst?.desc === 'string' && inst.desc.includes(sentence));
+  return roster.some((/** @type {{ name?: unknown, desc?: unknown } | null | undefined} */ inst) => /\bfish ?monger|\bfish market\b/i.test(String(inst?.name ?? '')) && typeof inst?.desc === 'string' && inst.desc.includes(sentence));
 }
 
 /**

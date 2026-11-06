@@ -35,7 +35,15 @@ import { deriveCriminalStructure } from '../display/defenseDisplay.js';
 import { prosperityLabelOf } from '../prosperityRank.js';
 
 /**
- * @param {any} record a settlement record
+ * The two fields `factsOf` reads itself (every other fact is its home's own reading of the record).
+ * @typedef {{
+ *   tier?: unknown,
+ *   economicState?: { prosperity?: unknown, foodSecurity?: { foodRecord?: { foodSources?: unknown } | null } | null } | null,
+ * } | null | undefined} FactsOwnFields
+ */
+
+/**
+ * @param {{} | null | undefined} record a settlement record (any value: each home reads it defensively)
  * @param {{ worldStressors?: ReadonlyArray<unknown> | null, settlementId?: unknown, worldState?: unknown, regionalGraph?: unknown, waterKind?: 'maritime'|'river'|'none' }} [options]
  *   the world, for the two facts a lone record cannot answer whole (the crisis's pulse stressors,
  *   the war state); and, for a birth IN PROGRESS whose partial record carries no terrain yet,
@@ -85,13 +93,13 @@ export function factsOf(record, options = {}) {
     /** fact 13: the trade-route kind (the terrain home's second reader) */
     get route() { return tradeRouteOf(record); },
     /** the tier (a field; the vocabulary's `tier` band) */
-    get tier() { return typeof record?.tier === 'string' ? record.tier : undefined; },
+    get tier() { return typeof /** @type {FactsOwnFields} */ (record)?.tier === 'string' ? /** @type {{ tier: string }} */ (record).tier : undefined; },
     /** fact 14: a second, named NPC beside this one */
     hasOtherNpc: (/** @type {number | object} */ npc) => hasOtherNpc(record, npc),
     // ── CENSUS-3b unit 1 (the chair's ruling R-E; the vocabulary rulings §2): DELEGATIONS to the
     // one canonical reader each — no field reader, no new logic. ──
     /** the food record's sources (`foodBalance.js :: deriveFoodRecord`), or undefined when it carries none */
-    get foodSources() { const v = record?.economicState?.foodSecurity?.foodRecord?.foodSources; return Array.isArray(v) ? v : undefined; },
+    get foodSources() { const v = /** @type {FactsOwnFields} */ (record)?.economicState?.foodSecurity?.foodRecord?.foodSources; return Array.isArray(v) ? v : undefined; },
     /** the import list (`canonicalAccessors.js :: canonImports`) */
     get imports() { return canonImports(record); },
     /** the export list (`canonicalAccessors.js :: canonExports`) */
@@ -101,7 +109,7 @@ export function factsOf(record, options = {}) {
     /** the criminal structure (`defenseDisplay.js :: deriveCriminalStructure`): its key, or 'none' */
     get crime() { return deriveCriminalStructure(record)?.key ?? 'none'; },
     /** the prosperity band (`prosperityRank.js :: prosperityLabelOf`), lower-cased, or undefined */
-    get prosperity() { const l = prosperityLabelOf(record?.economicState?.prosperity).toLowerCase(); return l || undefined; },
+    get prosperity() { const l = prosperityLabelOf(/** @type {FactsOwnFields} */ (record)?.economicState?.prosperity).toLowerCase(); return l || undefined; },
   });
 }
 
@@ -117,7 +125,7 @@ export function factsOf(record, options = {}) {
  * reads (0 of 585 births differ between `generatePopulation` and birth, CENSUS-4c); the factions
  * are not settled there (the density law can empty a guild faction later), so they are not
  * handed. Absent, the record carries none, as before.
- * @param {{ institutions?: unknown, config?: any, tier?: unknown, stress?: unknown, powerStructure?: unknown }} [partial]
+ * @param {{ institutions?: unknown, config?: { stressTypes?: unknown, tier?: unknown } | null, tier?: unknown, stress?: unknown, powerStructure?: unknown }} [partial]
  * @param {{ portKind?: 'maritime'|'river'|'none' } | null} [worldLaw]
  */
 export function birthFactsOf(partial = {}, worldLaw = null) {

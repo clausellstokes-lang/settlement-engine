@@ -11,12 +11,22 @@
  * Pure: no randomness, no clock.
  */
 
+/**
+ * The fields the terrain and trade-route chains read; every leaf is a string the record may carry.
+ * @typedef {{
+ *   config?: { terrainType?: unknown, terrainOverride?: unknown, tradeRouteAccess?: unknown } | null,
+ *   terrain?: unknown,
+ *   resourceAnalysis?: { terrain?: unknown } | null,
+ *   tradeRouteAccess?: unknown,
+ * } | null | undefined} TerrainRecord
+ */
+
 /** @param {unknown} v @returns {string} */
 const str = (v) => (typeof v === 'string' ? v.toLowerCase() : '');
 
 /**
  * THE ONE READER of the terrain class.
- * @param {any} record a settlement record
+ * @param {TerrainRecord} record a settlement record
  * @returns {string} e.g. 'plains' · 'hills' · 'forest' · 'riverside' · 'coastal' · 'mountain' · 'desert', or ''
  */
 export function terrainClassOf(record) {
@@ -25,7 +35,7 @@ export function terrainClassOf(record) {
 
 /**
  * The record's trade route, the same way.
- * @param {any} record
+ * @param {TerrainRecord} record
  * @returns {string} e.g. 'road' · 'river' · 'port' · 'crossroads' · 'isolated' · 'mountain_pass', or ''
  */
 export function tradeRouteOf(record) {

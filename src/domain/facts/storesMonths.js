@@ -21,6 +21,11 @@
  * Pure: no randomness, no clock; the writer returns a new object and mutates nothing.
  */
 
+/**
+ * The months the food security block carries, in its two homes (either may be absent).
+ * @typedef {{ storageMonths?: unknown, foodRecord?: { storageMonths?: unknown } | null }} FoodSecurityMonths
+ */
+
 /** @param {unknown} v @returns {v is number} */
 const isMonths = (v) => typeof v === 'number' && Number.isFinite(v);
 
@@ -28,12 +33,12 @@ const isMonths = (v) => typeof v === 'number' && Number.isFinite(v);
  * The food security block of a record (a generated settlement, or a sim settlement that
  * carries it at the top level, as `foodLedger` reads it).
  * @param {unknown} record
- * @returns {Record<string, any> | null}
+ * @returns {FoodSecurityMonths | null}
  */
 function foodSecurityOf(record) {
   const r = /** @type {{ economicState?: { foodSecurity?: unknown } | null, foodSecurity?: unknown } | null | undefined} */ (record);
   const fs = r?.economicState?.foodSecurity || r?.foodSecurity || null;
-  return fs && typeof fs === 'object' ? /** @type {Record<string, any>} */ (fs) : null;
+  return fs && typeof fs === 'object' ? /** @type {FoodSecurityMonths} */ (fs) : null;
 }
 
 /**

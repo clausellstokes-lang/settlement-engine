@@ -19,6 +19,13 @@ import { POWER_ROLES_BY_CATEGORY } from '../../data/historyData.js';
 import { NOBLE_ROLES } from '../../data/nobleRoles.js';
 import { fnv1a32 } from '../../kernel/proseHash.js';
 
+/**
+ * One party to a tie: its role, and the NPC (its faction affiliation is read for the faction and
+ * seat exemptions).
+ * @typedef {{ role: string, npc: { factionAffiliation?: unknown } | null | undefined }} TieParty
+ */
+/** @typedef {{ faction?: unknown, name?: unknown, isGoverning?: unknown, contestsNiche?: unknown }} SeatFaction */
+
 /** @param {unknown} v @returns {string} */
 const str = (v) => (typeof v === 'string' ? v : v == null ? '' : String(v));
 
@@ -103,12 +110,13 @@ const classesShare = (/** @type {string} */ ca, /** @type {string} */ cb) => ca 
 /**
  * The factions that hold or contest the seat, which count as ONE office (the chair's ruling Q1):
  * the governing faction and every faction whose `contestsNiche` names it.
- * @param {any} s @returns {Set<string>}
+ * @param {{ powerStructure?: { governingName?: unknown, factions?: unknown } | null } | null | undefined} s
+ * @returns {Set<string>}
  */
 export function seatFactions(s) {
   const ps = s?.powerStructure ?? {};
   const factions = Array.isArray(ps.factions) ? ps.factions : [];
-  const governing = new Set([str(ps.governingName), ...factions.filter((/** @type {any} */ f) => f?.isGoverning).map((/** @type {any} */ f) => str(f.faction ?? f.name))].filter(Boolean));
+  const governing = new Set([str(ps.governingName), ...factions.filter((/** @type {SeatFaction} */ f) => f?.isGoverning).map((/** @type {SeatFaction} */ f) => str(f.faction ?? f.name))].filter(Boolean));
   for (const f of factions) if (governing.has(str(f?.contestsNiche))) governing.add(str(f.faction ?? f.name));
   return governing;
 }
@@ -126,7 +134,7 @@ export function seatFactions(s) {
  * one class … same trade, shared market. It FIRES only across unrelated classes" and "the faction
  * and seat exemptions apply to Professional Rivalry too". Jurisdictional Tension stays (two
  * offices). Read here: merchant with trade is a shared market; `other` roles stay unjudged.
- * @param {string} kind @param {{ role: string, npc: any }} a @param {{ role: string, npc: any }} b @param {Set<string>} seat
+ * @param {string} kind @param {TieParty} a @param {TieParty} b @param {Set<string>} seat
  * @returns {{ fires: boolean|null, why: string }} null = not judged
  */
 export function exemptedVerdict(kind, a, b, seat) {
@@ -176,7 +184,7 @@ export const ROLE_FREE_BY_KIND = Object.freeze({
 /**
  * Does the tie kind's presumption fail between these two? (`exemptedVerdict(...).fires === true`;
  * an unjudged pair, an `other` role, is never refused.)
- * @param {string} archetypeKey @param {{ role: string, npc: any }} a @param {{ role: string, npc: any }} b
+ * @param {string} archetypeKey @param {TieParty} a @param {TieParty} b
  * @param {Set<string>} [seat]
  * @returns {boolean}
  */
@@ -191,7 +199,7 @@ export function tieRefused(archetypeKey, a, b, seat = new Set()) {
  * role-free kind of the same polarity (`ROLE_FREE_BY_KIND`) with the greatest `fnv1a32(key::pair)` — a hash, never a roll, so the stream
  * is untouched and only a refused tie moves.
  * @param {string} archetypeKey the drawn kind
- * @param {{ role: string, npc: any }} a @param {{ role: string, npc: any }} b
+ * @param {TieParty} a @param {TieParty} b
  * @param {string} pairKey a stable key of the directed pair (e.g. "<idA>><idB>")
  * @param {Set<string>} [seat]
  * @returns {{ key: string, refused: boolean }}

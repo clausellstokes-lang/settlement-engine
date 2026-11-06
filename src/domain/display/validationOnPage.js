@@ -38,10 +38,51 @@ import { resourceDisplayName } from './resourceDisplayName.js';
 
 /** @typedef {{ chain: string|null, impact: string, severity: string }} GapLine */
 
+/** @typedef {{ institution?: unknown, chain?: unknown, impact?: unknown, severity?: unknown, missing?: unknown }} GapRow */
+
+/**
+ * One viability issue or warning as the record carries it (`economicViability.issues` /
+ * `.warnings`); a description is a sentence or a `{ short, text }` pair.
+ * @typedef {{
+ *   severity?: unknown, type?: unknown, title?: unknown, message?: unknown,
+ *   description?: string | { short?: unknown, text?: unknown } | null,
+ *   [key: string]: unknown,
+ * }} ViabilityIssue
+ */
+
+/** @typedef {{ issues?: ReadonlyArray<ViabilityIssue> | null, warnings?: ReadonlyArray<ViabilityIssue> | null } | null | undefined} ViabilityRecord */
+
+/**
+ * The settlement fields these readers consult. Leaves are `unknown` (read through `str`, `norm`
+ * and `arr`), save the trade-route keys `isTradeRouteDisconnected` reads, the food record's sources
+ * (matched against the chain table's words) and the row lists the loops walk.
+ * @typedef {{
+ *   name?: unknown,
+ *   config?: { tradeRouteAccess?: string | null, [key: string]: unknown } | null,
+ *   economicState?: {
+ *     localProduction?: unknown, primaryImports?: unknown, primaryExports?: unknown,
+ *     tradeAccess?: string | null,
+ *     foodSecurity?: { foodRecord?: { foodSources?: ReadonlyArray<string> | null, normalImportPct?: unknown } | null } | null,
+ *   } | null,
+ *   institutions?: ReadonlyArray<{ name?: unknown } | null> | null,
+ *   resourceAnalysis?: { gaps?: ReadonlyArray<GapRow | null> | null, priorityNotes?: unknown } | null,
+ *   economicViability?: { metrics?: { tradeAccess?: string | null } | null } | null,
+ *   structuralViolations?: ReadonlyArray<{ severity?: unknown, institution?: unknown, group?: unknown, reason?: unknown }> | null,
+ *   structuralSuggestions?: ReadonlyArray<{ reason?: unknown, suggested?: unknown }> | null,
+ * } | null | undefined} PageRecord
+ */
+
+/**
+ * What `arr` hands back for a value of type T: an array's own elements, none for anything else
+ * (an `unknown` value may be any array, so its elements stay `unknown`).
+ * @template T
+ * @typedef {unknown extends T ? unknown[] : T extends ReadonlyArray<infer E> ? E[] : never[]} ArrOf
+ */
+
 /** @param {unknown} x @returns {string} */
 const str = (x) => (typeof x === 'string' ? x : x == null ? '' : String(x));
-/** @param {unknown} x @returns {any[]} */
-const arr = (x) => (Array.isArray(x) ? x : []);
+/** @template T @param {T} x @returns {ArrOf<T>} */
+const arr = (x) => /** @type {ArrOf<T>} */ (Array.isArray(x) ? x : []);
 /** @param {string} text a `recordGoods` text @param {string} word the singular word @returns {boolean} the word or its plural ("mineral salts" answers salt) */
 const holds = (text, word) => text.includes(norm(word)) || text.includes(norm(`${word}s`));
 /** @param {string} x */
@@ -86,7 +127,7 @@ const ROUTE_HOUSE_TAGS = Object.freeze(['market', 'transport']);
 /**
  * The record's own goods, as one searchable text: what the economy produces, imports and
  * exports, and the nearby resources that are not depleted (their keys and their commodities).
- * @param {any} s
+ * @param {PageRecord} s
  */
 function recordGoods(s) {
   const es = s?.economicState || {};
@@ -94,14 +135,14 @@ function recordGoods(s) {
   /** @type {string[]} */
   const goods = [
     ...arr(es.localProduction), ...arr(es.primaryImports), ...arr(es.primaryExports),
-    ...keys, ...keys.flatMap((/** @type {string} */ k) => arr(/** @type {any} */ (RESOURCE_DATA)[k]?.commodities)),
+    ...keys, ...keys.flatMap((/** @type {string} */ k) => arr(/** @type {Readonly<Record<string, { commodities?: unknown } | undefined>>} */ (RESOURCE_DATA)[k]?.commodities)),
   ].map(str);
   return goods.map(norm).join('|');
 }
 
 /**
  * Whether the record answers a chain's input.
- * @param {any} s @param {string} chainKey @param {any} inst @param {string} goods from `recordGoods`
+ * @param {PageRecord} s @param {string} chainKey @param {unknown} inst @param {string} goods from `recordGoods`
  */
 function inputAnswered(s, chainKey, inst, goods) {
   const spec = CHAIN_INPUTS[chainKey];
@@ -117,7 +158,7 @@ function inputAnswered(s, chainKey, inst, goods) {
   return false;
 }
 
-/** @param {any} inst @returns {string} the house as the sentence names it ("the potter") */
+/** @param {{ name?: unknown } | null | undefined} inst @returns {string} the house as the sentence names it ("the potter") */
 function houseWords(inst) {
   const name = str(institutionDisplayName(inst) || inst?.name).replace(/^access to (?:an? )?/i, '');
   return `the ${name.charAt(0).toLowerCase()}${name.slice(1)}`;
@@ -126,8 +167,10 @@ function houseWords(inst) {
 /** @param {string[]} nouns */
 const orList = (nouns) => (nouns.length < 2 ? nouns.join('') : `${nouns.slice(0, -1).join(', ')} or ${nouns[nouns.length - 1]}`);
 
-/** @param {string} rawResource @returns {[string, any]|null} the chain entry for a gap's raw resource */
-const chainFor = (rawResource) => /** @type {[string, any]|undefined} */ (
+/** @typedef {(typeof RESOURCE_CHAINS)[keyof typeof RESOURCE_CHAINS]} ResourceChain */
+
+/** @param {string} rawResource @returns {[string, ResourceChain]|null} the chain entry for a gap's raw resource */
+const chainFor = (rawResource) => /** @type {[string, ResourceChain]|undefined} */ (
   Object.entries(RESOURCE_CHAINS).find(([, c]) => c.rawResource === rawResource)) || null;
 
 /**
@@ -140,7 +183,7 @@ const chainFor = (rawResource) => /** @type {[string, any]|undefined} */ (
  *    the economy already exports it;
  *  - a chain worked part-way: "Work on the glass sand here stops half-way: no glassblower
  *    finishes it."
- * @param {any} s the settlement record
+ * @param {PageRecord} s the settlement record
  * @returns {GapLine[]}
  */
 export function resourceGapLines(s) {
@@ -171,7 +214,7 @@ export function resourceGapLines(s) {
   }
 
   // The houses the generator calls short of an input, grouped by house: one line per idle house.
-  /** @type {Map<string, any>} */
+  /** @type {Map<string, GapRow>} */
   const flagged = new Map();
   for (const g of gaps) if (g && typeof g === 'object' && g.institution) flagged.set(str(g.institution), g);
   for (const [name, g] of flagged) {
@@ -191,8 +234,8 @@ export function resourceGapLines(s) {
  * THE ONE CRITICAL LIST: the record's critical issues, every one the verdict counts
  * (`metrics.criticalIssueCount` and the summary sentence count `severity === 'critical'`,
  * a stress consequence included). The Critical Issues header and the verdict read this list.
- * @param {any} v the economicViability record
- * @returns {any[]}
+ * @param {ViabilityRecord} v the economicViability record
+ * @returns {ViabilityIssue[]}
  */
 export function criticalIssuesOf(v) {
   return arr(v?.issues).filter((i) => str(i?.severity).toLowerCase() === 'critical');
@@ -200,8 +243,8 @@ export function criticalIssuesOf(v) {
 
 /**
  * The stress effects that are NOT critical (a critical one is in `criticalIssuesOf`, once).
- * @param {any} v the economicViability record
- * @returns {any[]}
+ * @param {ViabilityRecord} v the economicViability record
+ * @returns {ViabilityIssue[]}
  */
 export function stressEffectsOf(v) {
   return [...arr(v?.issues), ...arr(v?.warnings)].filter((i) => i?.type === 'stress_consequence' && str(i?.severity).toLowerCase() !== 'critical');
@@ -212,7 +255,7 @@ const NO_ROUTE_CLAUSE = / and has no dependable trade route\./;
 /**
  * An issue's description as the DM reads it: "has no dependable trade route" only where the
  * record's route is disconnected. A connected route under siege is cut, not absent.
- * @param {any} issue @param {any} s the settlement record
+ * @param {ViabilityIssue | null | undefined} issue @param {PageRecord} s the settlement record
  * @returns {string}
  */
 export function viabilityIssueText(issue, s) {
@@ -226,7 +269,7 @@ export function viabilityIssueText(issue, s) {
 
 /**
  * THE STAFF PANEL'S ROWS: the generator's own checks, verbatim, for an elevated viewer only.
- * @param {any} s the settlement record
+ * @param {PageRecord} s the settlement record
  * @returns {Array<{ source: string, label: string, text: string }>}
  */
 export function staffValidationRows(s) {

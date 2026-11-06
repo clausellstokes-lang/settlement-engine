@@ -33,23 +33,45 @@ import { terrainClassOf, tradeRouteOf } from '../facts/terrain.js';
 
 /** @typedef {import('./coherenceBattery.js').BatteryFinding} BatteryFinding */
 
+/**
+ * The record fields the reader battery consults (everything else is read off the rendered text).
+ * Leaves are `unknown` — the readers coerce with `str` / `Number` or guard with `Array.isArray` —
+ * except the goods lists `recordHoldsGood` spreads, which are lists when present.
+ * @typedef {import('../facts/terrain.js').TerrainRecord & {
+ *   tier?: unknown,
+ *   config?: { nearbyResources?: unknown, nearbyResourcesDepleted?: unknown } | null,
+ *   institutions?: ReadonlyArray<unknown> | null,
+ *   npcs?: unknown,
+ *   economicState?: {
+ *     localProduction?: ReadonlyArray<unknown> | null,
+ *     primaryImports?: ReadonlyArray<unknown> | null,
+ *     primaryExports?: ReadonlyArray<unknown> | null,
+ *     foodSecurity?: { foodRecord?: { foodSources?: ReadonlyArray<unknown> | null, normalImportPct?: unknown } | null } | null,
+ *   } | null,
+ *   powerStructure?: { governingName?: unknown, factions?: unknown } | null,
+ *   history?: { currentTensions?: unknown, historicalEvents?: unknown } | null,
+ * } | null | undefined} ReaderRecord
+ */
+/** @typedef {{ name?: unknown, role?: unknown, factionAffiliation?: unknown }} ReaderNpc */
+/** @typedef {{ templateType?: unknown, description?: unknown, yearsAgo?: unknown, name?: unknown }} ReaderEvent */
+
 // ───────────────────────────── shared readers ─────────────────────────────
 
 /** @param {string} text @returns {string[]} */
 const linesOf = (text) => str(text).split('\n').map((x) => x.trim()).filter(Boolean);
 
-/** The terrain home's one chain (`facts/terrain.js`, CENSUS-1 fact 13). @param {any} s @returns {string} */
+/** The terrain home's one chain (`facts/terrain.js`, CENSUS-1 fact 13). @param {ReaderRecord} s @returns {string} */
 export function terrainOf(s) {
   return terrainClassOf(s);
 }
 
-/** @param {any} s @returns {string} */
+/** @param {ReaderRecord} s @returns {string} */
 export function routeOf(s) {
   return tradeRouteOf(s);
 }
 
 /** Navigable water: the water home (`facts/water.js`, CENSUS-1 fact 4), not a regex of its own.
- * @param {any} s */
+ * @param {ReaderRecord} s */
 export const hasNavigableWater = (s) => waterOf(s).navigable;
 
 // ───────────────────────── 1. validation-on-page ─────────────────────────
@@ -68,7 +90,7 @@ const GAP_FILLER = new Set(['from', 'with', 'water', 'that', 'this', 'their', 'o
  * not depleted, the food record's sources and ordinary supply. Deliberately its own simple
  * reader (a word in common), not the cure's table: an instrument that imported the cure would
  * measure the cure against itself.
- * @param {any} s @param {string} good
+ * @param {ReaderRecord} s @param {string} good
  */
 function recordHoldsGood(s, good) {
   const es = s?.economicState || {};
@@ -92,7 +114,7 @@ function recordHoldsGood(s, good) {
  * <water> access" where the terrain IS that water), `[gaps]` (the lacks-access lines A-05
  * counts), `[viability-count]`, and `[gap-vs-record]` (a gap line, in either voice, whose
  * good the record holds: "Mill exists but lacks access to grain" in a village exporting grain).
- * @param {any} s @param {Readonly<Record<string,string>>} surfaces
+ * @param {ReaderRecord} s @param {Readonly<Record<string,string>>} surfaces
  */
 export function validationOnPageFindings(s, surfaces) {
   /** @type {Array<{surface:string,quote:string,detail:string}>} */
@@ -130,7 +152,7 @@ export function validationOnPageFindings(s, surfaces) {
 
 // ──────────────────────────── 2. scale-lists ────────────────────────────
 
-/** @param {any} s @returns {string[]} the Institutions tab's rows, by their catalogue name */
+/** @param {ReaderRecord} s @returns {string[]} the Institutions tab's rows, by their catalogue name */
 const houseNames = (s) => (Array.isArray(s?.institutions) ? s.institutions : []).map((/** @type {unknown} */ i) => nativeSemanticName(i)).filter(Boolean);
 
 // The chair's list, with Q2 (2026-11-04): quality textiles, fine cloth and dyed cloth are luxury-class too.
@@ -169,7 +191,7 @@ export const STRENGTH_HOUSES = Object.freeze({
  * (b) an Economic strength naming a resource trade with no house behind it (`[~strength-no-house]`):
  * informational, a COLUMN only (the chair's ruling Q3: the list is the terrain's fixed potential,
  * which R2 relabels "what the land offers"), never folded into (a)'s line.
- * @param {any} s @param {Readonly<Record<string,string>>} surfaces
+ * @param {ReaderRecord} s @param {Readonly<Record<string,string>>} surfaces
  */
 export function scaleListsFindings(s, surfaces) {
   /** @type {Array<{surface:string,quote:string,detail:string}>} */
@@ -199,7 +221,7 @@ export function scaleListsFindings(s, surfaces) {
  *    `primaryExports` entry; check 2c);
  *  - `dailyLifeLine`: 1 where the Daily Life tab carries the placeholder line at all (check 10,
  *    the chair's ruling 2026-11-04), else 0.
- * @param {any} s @param {Readonly<Record<string,string>>|null} [surfaces]
+ * @param {ReaderRecord} s @param {Readonly<Record<string,string>>|null} [surfaces]
  * @returns {{ exports: number, dailyLifeLine: number }}
  */
 export function readerDistributions(s, surfaces = null) {
@@ -224,13 +246,14 @@ export { ROLE_CLASS, classOfRole, shareTradeOrOffice, exemptedVerdict };
  * - `[~strict]`, a column only, is the first reading (`shareTradeOrOffice`; Jurisdictional
  *   Tension where NEITHER role holds an office). A row strict alone flags is a column-only
  *   finding, and its detail says which exemption spared it.
- * @param {any} s @param {Readonly<Record<string,string>>} surfaces
+ * @param {ReaderRecord} s @param {Readonly<Record<string,string>>} surfaces
  */
 export function relationTypesFindings(s, surfaces) {
   /** @type {Array<{surface:string,quote:string,detail:string}>} */
   const out = [];
   const lines = linesOf(surfaces.relationships);
-  const people = new Map((Array.isArray(s?.npcs) ? s.npcs : []).map((/** @type {any} */ n) => [str(n?.name), n]));
+  /** @type {Map<string, ReaderNpc>} */
+  const people = new Map((Array.isArray(s?.npcs) ? s.npcs : []).map((/** @type {ReaderNpc} */ n) => [str(n?.name), n]));
   const seat = seatFactions(s);
   for (let i = 0; i + 1 < lines.length; i += 1) {
     const kind = PRESUMING_KINDS.find((k) => lines[i].includes(` ${k} `));
@@ -264,7 +287,7 @@ const LIVING = /\b(?:former\b|those who (?:suffered|remember|lost|fought|survive
  * sits in the Ancient or Deep-history band ON THE PAGE, worded with living participants
  * ("Former collaborators", "Those who suffered under the regime"). A tension with no source
  * event is not judged.
- * @param {any} s @param {Readonly<Record<string,string>>} surfaces
+ * @param {ReaderRecord} s @param {Readonly<Record<string,string>>} surfaces
  */
 export function tensionMemoryFindings(s, surfaces) {
   /** @type {Array<{surface:string,quote:string,detail:string}>} */
@@ -275,7 +298,7 @@ export function tensionMemoryFindings(s, surfaces) {
   for (const t of tensions) {
     const desc = str(t?.description);
     if (!desc || !page.includes(desc)) continue;
-    const source = events.find((/** @type {any} */ e) => e?.templateType === t?.type);
+    const source = events.find((/** @type {ReaderEvent} */ e) => e?.templateType === t?.type);
     if (!source) continue;
     const band = page.match(new RegExp(`${escapeRe(str(source.description))}\\n${Number(source.yearsAgo)}y ago\\n([^\\n]+)`));
     if (!band || !OLD_BANDS.test(band[1].trim())) continue;
@@ -303,14 +326,14 @@ const SEA_HOOK_WORDS = /\b(?:harbou?rs?|ships?|shipbuilding|shipwrights?|shipyar
  * speaks of ships and docks in a place with no navigable water (`[sea]`). The chair's brief names
  * the tension, outlook and history sections; the tab's NPC section carries the same pools
  * ("talking to the guard"), so the whole tab is read.
- * @param {any} s @param {Readonly<Record<string,string>>} surfaces
+ * @param {ReaderRecord} s @param {Readonly<Record<string,string>>} surfaces
  */
 export function hookPoolsFindings(s, surfaces) {
   /** @type {Array<{surface:string,quote:string,detail:string}>} */
   const out = [];
   const lines = linesOf(surfaces.plot_hooks);
   const enforcement = factsOf(s).guardPresence === true
-    || (Array.isArray(s?.npcs) ? s.npcs : []).some((/** @type {any} */ n) => ENFORCEMENT_ROLE.test(str(n?.role)));
+    || (Array.isArray(s?.npcs) ? s.npcs : []).some((/** @type {ReaderNpc} */ n) => ENFORCEMENT_ROLE.test(str(n?.role)));
   if (!enforcement) {
     const hit = lines.find((x) => GUARD_WORDS.test(x.replace(GUARD_IDIOM, '')));
     if (hit) out.push({ surface: 'plot_hooks', quote: hit, detail: `[guard] "${str(hit.replace(GUARD_IDIOM, '').match(GUARD_WORDS)?.[0])}" with no enforcement body` });
@@ -330,7 +353,7 @@ const WATER_TRADITION = /\b(?:Tide|Landfall|Landing|Sea|Harbou?r|Fleet)\b/;
  * A Traditions-tab tradition keyed on Tide, Landfall, Landing, Sea, Harbour or Fleet in a place
  * without water access: route road / overland / isolated / none and terrain not coastal,
  * riverside or lake.
- * @param {any} s @param {Readonly<Record<string,string>>} surfaces
+ * @param {ReaderRecord} s @param {Readonly<Record<string,string>>} surfaces
  */
 export function traditionsWaterFindings(s, surfaces) {
   if (waterOf(s).navigable) return []; // the water home (CENSUS-1 fact 4)
@@ -346,7 +369,7 @@ export function traditionsWaterFindings(s, surfaces) {
  * ("Wants to Was approached…", "Wants to The supplies…"); `[abstract-register]` — a want in
  * management prose no DM can say aloud ("Wants to convert governance instability into…"). One
  * finding per sub-case per settlement; the detail counts its lines.
- * @param {any} _s @param {Readonly<Record<string,string>>} surfaces
+ * @param {ReaderRecord} _s @param {Readonly<Record<string,string>>} surfaces
  */
 export function tonightWantsFindings(_s, surfaces) {
   /** @type {Array<{surface:string,quote:string,detail:string}>} */
@@ -369,7 +392,7 @@ const RULE_TEXT = /viable above [0-9,]+ souls|population of [0-9,]+ or more|[0-9
  * A catalogue threshold note on a DM surface ("viable above 2,000 souls", "a population of
  * 5,000 or more", "2,000-5,000 population for chapter", "cities only", "if technology exists",
  * "where the magic allows them"). One finding per surface.
- * @param {any} _s @param {Readonly<Record<string,string>>} surfaces
+ * @param {ReaderRecord} _s @param {Readonly<Record<string,string>>} surfaces
  */
 export function ruleTextFindings(_s, surfaces) {
   /** @type {Array<{surface:string,quote:string,detail:string}>} */
@@ -387,7 +410,7 @@ const DOUBLED_POSSESSIVE = /\b[A-Za-z][\w-]*['’]s['’](?![a-z])/;
 
 /**
  * A title with a doubled possessive ("Guildmaster of Tailor's'"). One finding per surface.
- * @param {any} _s @param {Readonly<Record<string,string>>} surfaces
+ * @param {ReaderRecord} _s @param {Readonly<Record<string,string>>} surfaces
  */
 export function possessiveSlipFindings(_s, surfaces) {
   /** @type {Array<{surface:string,quote:string,detail:string}>} */
@@ -411,7 +434,7 @@ const PLACEHOLDER = 'dawn, the market, the tavern, the watch';
  * soak1k-313), `[no-watch]` (no watch: `factsOf(record).defence.watch`, CENSUS-1c unit 6c — a
  * garrison is not a watch), or both. How many pages carry
  * the line at all is a distribution (`readerDistributions :: dailyLifeLine`), not a finding.
- * @param {any} s @param {Readonly<Record<string,string>>} surfaces
+ * @param {ReaderRecord} s @param {Readonly<Record<string,string>>} surfaces
  */
 export function dailyLifePlaceholderFindings(s, surfaces) {
   const hit = linesOf(surfaces.daily_life).find((x) => x.includes(PLACEHOLDER));
@@ -432,7 +455,7 @@ export function dailyLifePlaceholderFindings(s, surfaces) {
  * criminal; `domain/roles/roleClass.js :: factionRoleFits`, the rule the assembly seam applies).
  * Read on the record: each power faction's category against the roles of the NPCs affiliated to
  * it; the factions that hold or contest the seat also seat office-holders and nobles (ruling Q1). One finding per misfit faction; the detail names the misfit roles and their classes.
- * @param {any} s @param {Readonly<Record<string,string>>} _surfaces
+ * @param {ReaderRecord} s @param {Readonly<Record<string,string>>} _surfaces
  */
 export function factionRoleFitFindings(s, _surfaces) {
   /** @type {Array<{surface:string,quote:string,detail:string}>} */
@@ -441,9 +464,9 @@ export function factionRoleFitFindings(s, _surfaces) {
   const seat = seatFactions(s);
   for (const f of Array.isArray(s?.powerStructure?.factions) ? s.powerStructure.factions : []) {
     const name = str(f?.faction);
-    const misfits = npcs.filter((/** @type {any} */ n) => str(n?.factionAffiliation) === name && !factionRoleFits(f?.category, n?.role, { seat: seat.has(name) }));
+    const misfits = npcs.filter((/** @type {ReaderNpc} */ n) => str(n?.factionAffiliation) === name && !factionRoleFits(f?.category, n?.role, { seat: seat.has(name) }));
     if (!name || !misfits.length) continue;
-    out.push({ surface: 'factions', quote: `${name} (${str(f.category)})`, detail: misfits.map((/** @type {any} */ n) => `${str(n.role)} (${classOfRole(str(n.role))})`).join(', ') });
+    out.push({ surface: 'factions', quote: `${name} (${str(f.category)})`, detail: misfits.map((/** @type {ReaderNpc} */ n) => `${str(n.role)} (${classOfRole(str(n.role))})`).join(', ') });
   }
   return out;
 }

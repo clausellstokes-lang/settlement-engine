@@ -26,11 +26,11 @@ export const POPULATION_BANDS = Object.freeze(['small', 'middling', 'large']);
 
 /**
  * THE ONE READER.
- * @param {any} record a settlement record
+ * @param {{ population?: unknown, tier?: unknown } | null | undefined} record a settlement record
  * @returns {'small'|'middling'|'large'|null}
  */
 export function populationBandOf(record) {
   const pop = record?.population;
   const tier = typeof pop === 'number' && Number.isFinite(pop) && pop > 0 ? popToTier(pop) : record?.tier;
-  return BAND_OF_TIER[tier] ?? null;
+  return BAND_OF_TIER[/** @type {string} */ (tier)] ?? null;
 }

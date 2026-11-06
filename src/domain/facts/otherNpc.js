@@ -14,7 +14,7 @@
 /**
  * @param {{ npcs?: unknown } | null | undefined} record
  * @param {number | object | null | undefined} npc the speaking NPC (its index, or itself)
- * @returns {any | null}
+ * @returns {{ name?: unknown } | null} the roster's row for that NPC
  */
 export function otherNpcOf(record, npc) {
   const npcs = Array.isArray(record?.npcs) ? record.npcs : [];

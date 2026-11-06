@@ -41,7 +41,7 @@ export function rulerKindOfLabel(label) {
 
 /**
  * THE ONE READER.
- * @param {any} record a settlement record
+ * @param {{ powerStructure?: { government?: unknown } | null } | null | undefined} record a settlement record
  * @returns {string|null} a value of RULER_KINDS, or null when the record names no government
  */
 export function rulerKindOf(record) {

@@ -98,6 +98,12 @@ import { activePresumptionLedger, notePresumption } from '../../facts/presumptio
  * A desk leaf: block id → block.
  * @typedef {Record<string, StateProseBlock>} StateProseCorpus
  */
+/** @typedef {import('../../facts/factVocabulary.js').FactsLike} FactsLike the `factsOf(record)` a desk hands in */
+/**
+ * The read options as the eligibility gate takes them (the single-pool read hands its own options
+ * on to `eligibleVariants`, the pool's brace group with them).
+ * @typedef {NonNullable<Parameters<typeof eligibleVariants>[1]>} DeclaringOptions
+ */
 
 /**
  * FNV-1a 32-bit. A LOCAL copy of the eight-line helper, per the display-sidecar
@@ -312,7 +318,7 @@ export function eligibleVariants(pool, options = {}) {
   // The pool's own atoms (the key guarantees them; declared once on the pool): fail-closed too.
   if (Array.isArray(options.poolDeclares) && options.poolDeclares.length > 0) {
     if (!options.facts || typeof options.facts !== 'object') return [];
-    if (!declarationAdmits(declarationOfTags(options.poolDeclares), /** @type {any} */ (options.facts)).admitted) return [];
+    if (!declarationAdmits(declarationOfTags(options.poolDeclares), /** @type {FactsLike} */ (options.facts)).admitted) return [];
   }
   // Read on the RAW pool, before any filter: the audience or a missing slot could remove
   // the last variant carrying a dimension word and turn a partitioned pool into one that
@@ -336,7 +342,7 @@ export function eligibleVariants(pool, options = {}) {
     (variant) => variantIsAudible(variant, audience)
       && variantIsAnchored(variant, slots)
       && dimensions.every((dimension) => variantSpeaksOver(variant, dimension, given[dimension]))
-      && (!factual || declarationAdmits(variantFactDeclaration(variant), /** @type {any} */ (options.facts), { crisisScoped }).admitted),
+      && (!factual || declarationAdmits(variantFactDeclaration(variant), /** @type {FactsLike} */ (options.facts), { crisisScoped }).admitted),
   );
 }
 
@@ -393,7 +399,7 @@ export function resolveDeclaredPosition(declarations, drawn, facts, key, where =
     const tags = declarations[i];
     if (!Array.isArray(tags) || tags.length === 0) return true;
     if (!facts || typeof facts !== 'object') return false;
-    return declarationAdmits(declarationOfTags(tags), /** @type {any} */ (facts)).admitted;
+    return declarationAdmits(declarationOfTags(tags), /** @type {FactsLike} */ (facts)).admitted;
   };
   let pick = admits(drawn) ? drawn : -1;
   if (pick < 0) {
@@ -621,7 +627,7 @@ export function readStateProse(corpus, blockId, poolKey, options = {}) {
   if (!variant) return null;
   // CENSUS-1c unit 4: the single-pool read notes its draw too (the PDF, Tonight and Foundry paths
   // read here, not through composeStateProse's drawPiece); a no-op when no ledger is open.
-  noteDrawnVariant(variant, { blockId, poolKey, crisisScoped: /** @type {any} */ (options).crisisScoped === true, poolDeclares: /** @type {any} */ (options).poolDeclares, colour: /** @type {any} */ (block)?.poolMeta?.[poolKey]?.colour === true });
+  noteDrawnVariant(variant, { blockId, poolKey, crisisScoped: /** @type {DeclaringOptions} */ (options).crisisScoped === true, poolDeclares: /** @type {DeclaringOptions} */ (options).poolDeclares, colour: /** @type {(StateProseBlock & { poolMeta?: Readonly<Record<string, { colour?: unknown } | undefined>> }) | undefined} */ (block)?.poolMeta?.[poolKey]?.colour === true });
   const text = fillSlots(variant.text, options.slots || {});
   if (text === null) return null;
   return Object.freeze({

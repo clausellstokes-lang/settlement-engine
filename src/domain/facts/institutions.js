@@ -46,7 +46,7 @@ export const INSTITUTION_KINDS = Object.freeze(Object.keys(INSTITUTION_KIND_PATT
 
 /**
  * The live roster's native names.
- * @param {any} record
+ * @param {{ institutions?: unknown } | null | undefined} record
  * @returns {string[]}
  */
 export function liveInstitutionNames(record) {
@@ -55,7 +55,7 @@ export function liveInstitutionNames(record) {
 
 /**
  * THE ONE READER.
- * @param {any} record a settlement record (or any record carrying `institutions`)
+ * @param {{ institutions?: unknown } | null | undefined} record a settlement record (or any record carrying `institutions`)
  * @param {string} kind a key of INSTITUTION_KIND_PATTERNS
  * @returns {boolean}
  */

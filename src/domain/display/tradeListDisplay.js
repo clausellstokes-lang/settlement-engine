@@ -55,7 +55,7 @@ const NOT_A_GOOD_SET = new Set(NOT_A_GOOD.map(fold));
 /**
  * One list, as the page prints it.
  * @param {ReadonlyArray<unknown> | null | undefined} list the record's list (raw strings)
- * @param {any} settlement the record (its `factsOf` answers the declarations)
+ * @param {Parameters<typeof factsOf>[0]} settlement the record (its `factsOf` answers the declarations)
  * @param {{ side?: 'exports'|'imports', exports?: ReadonlyArray<unknown> | null }} [options]
  *   for the imports, the exports beside them (the export wins)
  * @returns {string[]} the raw items kept, in order
@@ -100,7 +100,13 @@ export function tradeMarksOnPage(printed) {
  * family already speaks for it and the record holds the fact behind it (`filterDeclared` against
  * `factsOf`). A label with no home prints nowhere (the lane doc's "needs a home"). No figure is
  * invented: the record holds no share for these, so the surfaces print them unmeasured.
- * @param {any} settlement
+ * @param {{
+ *   economicState?: {
+ *     primaryExports?: ReadonlyArray<unknown> | null,
+ *     primaryImports?: ReadonlyArray<unknown> | null,
+ *     incomeSources?: unknown,
+ *   } | null,
+ * } | null | undefined} settlement
  * @returns {Array<{ text: string, desc: string }>}
  */
 export function revenuesOffTheLists(settlement) {

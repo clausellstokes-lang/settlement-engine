@@ -21,12 +21,22 @@ import { recordAllowsStarving } from '../foodSurplus.js';
 const HUNGRY_LABELS = new Set([FOOD_SECURITY_BANDS.famine.label, FOOD_SECURITY_BANDS.deficit.label]);
 
 /**
+ * The fields the famine home reads: the food record (its band, as `recordAllowsStarving` takes it)
+ * and the food security block's legacy band label.
+ * @typedef {{
+ *   economicState?: {
+ *     foodSecurity?: { foodRecord?: Parameters<typeof recordAllowsStarving>[0], label?: unknown } | null,
+ *   } | null,
+ * } | null | undefined} FamineRecord
+ */
+
+/**
  * THE ONE READER.
- * @param {any} record a settlement record
+ * @param {unknown} record a settlement record (read as a `FamineRecord`)
  * @returns {Readonly<{ band: string|null, known: boolean, starvingAllowed: boolean, famine: boolean }>}
  */
 export function famineOf(record) {
-  const fs = record?.economicState?.foodSecurity;
+  const fs = /** @type {FamineRecord} */ (record)?.economicState?.foodSecurity;
   const foodRecord = fs?.foodRecord && typeof fs.foodRecord === 'object' ? fs.foodRecord : null;
   const label = typeof fs?.label === 'string' && fs.label !== '' ? fs.label : null;
   const band = typeof foodRecord?.band === 'string' ? foodRecord.band : null;

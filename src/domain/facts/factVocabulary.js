@@ -197,13 +197,18 @@ export const ROUTE_WORDS = Object.freeze(['road', 'river', 'port', 'crossroads',
 
 /**
  * @typedef {object} FactsLike the object `factsOf(record)` returns (or a test double)
- * @property {any} [crisis] @property {number|null} [storesMonths] @property {any} [defence]
- * @property {any} [water] @property {boolean} [market] @property {any} [famine] @property {any} [magic]
- * @property {string|null} [rulerKind] @property {any} [migration] @property {string} [warState]
+ * @property {Readonly<import('./crisisKind.js').CrisisFacts>} [crisis] @property {number|null} [storesMonths]
+ * @property {Readonly<import('./defence.js').DefenceFacts>} [defence]
+ * @property {ReturnType<typeof import('./water.js').waterOfKind>} [water] @property {boolean} [market]
+ * @property {ReturnType<typeof import('./famine.js').famineOf>} [famine]
+ * @property {ReturnType<typeof import('./magic.js').magicOf>} [magic]
+ * @property {string|null} [rulerKind] @property {ReturnType<typeof import('./migration.js').migrationOf>} [migration]
+ * @property {string} [warState]
  * @property {(kind: string) => boolean|undefined} [hasInstitution] @property {string|null} [populationBand]
  * @property {string} [terrain] @property {string} [route] @property {string} [tier]
  * @property {(npc: unknown) => boolean|undefined} [hasOtherNpc]
- * @property {boolean} [soldiers] @property {boolean} [commander] @property {any} [faith] @property {boolean} [guardPresence]
+ * @property {boolean} [soldiers] @property {boolean} [commander]
+ * @property {Readonly<import('../dossier/faithReading.js').FaithReading>} [faith] @property {boolean} [guardPresence]
  * @property {boolean} [guild] @property {boolean} [sacredHouse]
  * @property {ReadonlyArray<string>} [foodSources] @property {ReadonlyArray<unknown>} [imports]
  * @property {ReadonlyArray<unknown>} [exports] @property {string|null} [culture] @property {string} [crime]
@@ -534,7 +539,7 @@ export function atomHolds(word, facts, ctx = {}) {
   const atom = parseAtom(word);
   if (!atom || !facts) return undefined;
   if (atom.dimension === 'crisis') {
-    const c = /** @type {any} */ (facts).crisis;
+    const c = /** @type {FactsLike} */ (facts).crisis;
     if (!c || typeof c.has !== 'function') return undefined;
     if (!atom.values) return c.active === true; // `crisis`: a crisis is active
     return atom.values.some((v) => v === 'any' ? c.active === true : v === 'calm' ? c.active !== true : c.has(v));

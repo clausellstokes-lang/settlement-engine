@@ -24,7 +24,7 @@ import { factsOf } from './factsOf.js';
  */
 
 /**
- * @param {unknown} record the final settlement record
+ * @param {object | null | undefined} record the final settlement record
  * @param {ReadonlyArray<import('./presumptionLedger.js').LedgerEntry>} ledger
  * @param {{ worldStressors?: ReadonlyArray<unknown> | null, settlementId?: unknown }} [options]
  * @returns {FalsePresumption[]}
@@ -49,7 +49,8 @@ export function presumptionFindings(record, ledger, options = {}) {
 /**
  * The final record's facts, each read ONCE: the check runs after the record is final, so a
  * settled view is the same answer as the live one and costs one read per fact, not per atom.
- * @param {any} live a `factsOf` object
+ * @param {Readonly<Record<string, unknown>> & { hasInstitution(kind: string): boolean, hasOtherNpc(npc: unknown): boolean }} live
+ *   a `factsOf` object
  */
 function settledFacts(live) {
   /** @type {Record<string, unknown>} */ const held = {};
@@ -66,7 +67,7 @@ function settledFacts(live) {
   });
 }
 
-/** @param {string} atom @param {any} facts @param {Record<string, unknown>|undefined} ctx */
+/** @param {string} atom @param {import('./factVocabulary.js').FactsLike} facts @param {Record<string, unknown>|undefined} ctx */
 function answerOf(atom, facts, ctx) {
   if (atom.startsWith('crisis:')) {
     const c = facts.crisis;

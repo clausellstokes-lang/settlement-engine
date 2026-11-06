@@ -18,7 +18,7 @@ import { terrainClassOf, tradeRouteOf } from './terrain.js';
 
 /**
  * THE ONE READER.
- * @param {any} record a settlement record
+ * @param {import('./terrain.js').TerrainRecord} record a settlement record
  * @returns {Readonly<{ kind: 'maritime'|'river'|'none', navigable: boolean, coast: boolean, river: boolean }>}
  */
 export function waterOf(record) {

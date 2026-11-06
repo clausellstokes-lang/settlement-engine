@@ -565,7 +565,7 @@ function scopePhrase(cultureKey, settlement) {
  */
 function declaredClause(clause, settlement) {
   const resolved = resolveSibling(clause, QUICK_GUIDE_SIBLINGS, {
-    facts: () => factsOf(/** @type {any} */ (settlement)),
+    facts: () => factsOf(/** @type {Parameters<typeof factsOf>[0]} */ (settlement)),
     poolId: 'QUICK_GUIDE_CLAUSES',
     surface: 'overview',
     crisisScoped: QUICK_GUIDE_CRISIS_SCOPED.includes(clause),

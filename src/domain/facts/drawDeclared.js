@@ -34,16 +34,25 @@ import { hashKey } from '../display/stateProse/stateProseKernel.js';
 import { fnv1a32 } from '../../kernel/proseHash.js';
 import { UNTYPED } from '../hookThemes.js';
 
+/** @typedef {import('./factVocabulary.js').FactsLike} FactsLike */
+
+/**
+ * The text a line of type T prints: a declared row's `text`, else the line itself.
+ * @template T
+ * @typedef {T extends { text: string } ? string : T} LineText
+ */
+
 /**
  * The text a pool line prints: a bare string is itself; a declared line is `{ text, … }`.
- * @param {unknown} line
- * @returns {any}
+ * @template T
+ * @param {T} line
+ * @returns {LineText<T>}
  */
 export function lineText(line) {
   if (line && typeof line === 'object' && typeof (/** @type {{text?: unknown}} */ (line)).text === 'string') {
-    return /** @type {{text: string}} */ (line).text;
+    return /** @type {LineText<T>} */ (/** @type {{text?: unknown}} */ (line).text);
   }
-  return line;
+  return /** @type {LineText<T>} */ (line);
 }
 
 /** @param {unknown} line @returns {boolean} a twin line, reached only by resolution */
@@ -64,8 +73,9 @@ function poolDeclares(pool, tagged) {
 }
 
 /**
+ * @template [L=unknown] the pool's line type
  * @typedef {object} DrawDeclaredOptions
- * @property {(pool: any[]) => any} draw the site's existing selector over the pool it is handed
+ * @property {(pool: L[]) => L | null | undefined} draw the site's existing selector over the pool it is handed
  * @property {object|null|(() => object|null)} [facts] `factsOf(record)`, or a thunk to it (read only when a line declares)
  * @property {string} [key] the hash key prefix for the argmax resolution (`seed::pool`)
  * @property {string} [poolId] the pool's name in the ledger and the census
@@ -74,9 +84,9 @@ function poolDeclares(pool, tagged) {
  * @property {boolean} [tagged] the table's entries declare through a `tags` field (registries)
  * @property {boolean} [crisisScoped] the pool opted into the crisis dimension
  * @property {ReadonlyArray<string>} [poolDeclares] the pool's own atoms
- * @property {(line: any) => any} [twin] the site's twin resolver (a text-keyed lookup)
+ * @property {(line: L) => L | null | undefined} [twin] the site's twin resolver (a text-keyed lookup)
  * @property {Record<string, unknown>} [ctx] the per-line context a context atom needs (`npc`)
- * @property {DrawRegistry} [registry] the site's no-repeat registry when it draws through
+ * @property {DrawRegistry<L>} [registry] the site's no-repeat registry when it draws through
  *   `hookVariety.js :: drawUnique` (R-AJ, CENSUS-1g unit 3): a refused line resolves FIRST to a
  *   fresh admitted template (`freshAdmitted`), before the twin and the argmax
  * @property {boolean} [keepRefused] the site KEEPS its drawn line when nothing is admitted (a slot
@@ -89,11 +99,27 @@ function poolDeclares(pool, tagged) {
  */
 
 /**
+ * @template [L=unknown] the pool's line (template) type
  * @typedef {object} DrawRegistry the settlement-scoped registries `drawUnique` reads (HK-3)
  * @property {Set<string> | undefined} used the family registry (the template's key)
- * @property {(x: any) => string} keyFn a template's family key
+ * @property {(x: L) => string} keyFn a template's family key
  * @property {Set<string>} [themes] the theme registry
- * @property {(x: any) => string} [themeOfFn] a template's theme (`UNTYPED` blocks nothing)
+ * @property {(x: L) => string} [themeOfFn] a template's theme (`UNTYPED` blocks nothing)
+ */
+
+/**
+ * The line type of a table cell: a sibling set's member, else the cell itself.
+ * @template C
+ * @typedef {C extends ReadonlyArray<infer E> ? E : C} CellLine
+ */
+
+/**
+ * @template L the pool's line type
+ * @typedef {object} DrawResult
+ * @property {L | null | undefined} line the resolved line (null / undefined: nothing printed)
+ * @property {LineText<L> | null | undefined} text its text
+ * @property {string[] | null} refused the drawn line's refused atoms, null when it was admitted
+ * @property {'drawn'|'twin'|'argmax'|'none'|'kept'} resolvedBy
  */
 
 /**
@@ -104,9 +130,10 @@ function poolDeclares(pool, tagged) {
  * whose family is still unused (preferring an unspoken theme, `drawUnique`'s tiers), the one with
  * the highest FNV-1a hash of `key::drawn::candidate`, and registers it. It consumes NO roll. With
  * no family registry, or nothing fresh, it answers `undefined` and the resolution goes on.
- * @param {ReadonlyArray<any>} list @param {any} drawn @param {DrawRegistry} reg
- * @param {(x: any) => boolean} admits @param {string} key
- * @returns {any}
+ * @template L
+ * @param {ReadonlyArray<L>} list @param {L} drawn @param {DrawRegistry<L>} reg
+ * @param {(x: L) => boolean} admits @param {string} key
+ * @returns {L | undefined}
  */
 function freshAdmitted(list, drawn, reg, admits, key) {
   const used = reg.used;
@@ -114,7 +141,7 @@ function freshAdmitted(list, drawn, reg, admits, key) {
   const fresh = list.filter((x) => x !== drawn && !isTwin(x) && !used.has(reg.keyFn(x)) && admits(x));
   if (fresh.length === 0) return undefined;
   const themeOf = reg.themes instanceof Set && typeof reg.themeOfFn === 'function' ? reg.themeOfFn : null;
-  const blocking = (/** @type {any} */ x) => {
+  const blocking = (/** @type {L} */ x) => {
     const t = themeOf ? themeOf(x) : null;
     return typeof t === 'string' && t !== '' && t !== UNTYPED ? t : null;
   };
@@ -132,9 +159,10 @@ function freshAdmitted(list, drawn, reg, admits, key) {
 }
 
 /**
- * @param {ReadonlyArray<any>} pool
- * @param {DrawDeclaredOptions} options
- * @returns {{ line: any, text: any, refused: string[] | null, resolvedBy: 'drawn'|'twin'|'argmax'|'none'|'kept' }}
+ * @template L
+ * @param {ReadonlyArray<L>} pool
+ * @param {DrawDeclaredOptions<L>} options
+ * @returns {DrawResult<L>}
  */
 export function drawDeclared(pool, options) {
   const list = Array.isArray(pool) ? pool : [];
@@ -144,17 +172,17 @@ export function drawDeclared(pool, options) {
   const declared = scoped || poolAtoms !== null || poolDeclares(list, tagged);
   // THE DRAW, over the full pool (twins aside: they are reached by resolution only).
   const domain = declared && list.some(isTwin) ? list.filter((l) => !isTwin(l)) : pool;
-  const drawn = options.draw(/** @type {any[]} */ (domain));
+  const drawn = options.draw(/** @type {L[]} */ (domain));
   if (!declared) {
     note(options, drawn, list, [], drawn == null ? 'none' : 'drawn');
     return { line: drawn, text: lineText(drawn), refused: null, resolvedBy: drawn == null ? 'none' : 'drawn' };
   }
   const facts = typeof options.facts === 'function' ? options.facts() : options.facts ?? null;
-  const admit = (/** @type {any} */ line) => {
-    if (poolAtoms && !declarationAdmits(declarationOfTags(poolAtoms), /** @type {any} */ (facts)).admitted) {
+  const admit = (/** @type {L} */ line) => {
+    if (poolAtoms && !declarationAdmits(declarationOfTags(poolAtoms), /** @type {FactsLike | null} */ (facts)).admitted) {
       return { admitted: false, refused: ['(pool) ' + poolAtoms.join(' · ')] };
     }
-    return declarationAdmits(declarationOf(line, { tagged }), /** @type {any} */ (facts), { crisisScoped: scoped, ctx: options.ctx });
+    return declarationAdmits(declarationOf(line, { tagged }), /** @type {FactsLike | null} */ (facts), { crisisScoped: scoped, ctx: options.ctx });
   };
   if (drawn == null) {
     note(options, drawn, list, [], 'none');
@@ -217,7 +245,7 @@ export function filterDeclared(list, options) {
   const facts = typeof options.facts === 'function' ? options.facts() : options.facts ?? null;
   return items.filter((item) => {
     if (isTwin(item)) return false;
-    const ok = declarationAdmits(declarationOf(item, { tagged }), /** @type {any} */ (facts), { crisisScoped: scoped, ctx: options.ctx }).admitted;
+    const ok = declarationAdmits(declarationOf(item, { tagged }), /** @type {FactsLike | null} */ (facts), { crisisScoped: scoped, ctx: options.ctx }).admitted;
     if (ok) note(options, item, items, atomsOf(declarationOf(item, { tagged })), 'drawn');
     return ok;
   });
@@ -227,11 +255,13 @@ export function filterDeclared(list, options) {
  * KIND T: a table cell with no draw. A cell that is a bare line is itself; a cell that is a
  * declared sibling set (an original and its twin) resolves to its first non-twin line, through
  * the same rule.
- * @param {any} cell
- * @param {Omit<DrawDeclaredOptions, 'draw'>} options
+ * @template C
+ * @param {C} cell a line, or a sibling set (an array of lines)
+ * @param {Omit<DrawDeclaredOptions<CellLine<C>>, 'draw'>} options
+ * @returns {DrawResult<CellLine<C>>}
  */
 export function resolveDeclared(cell, options) {
-  const pool = Array.isArray(cell) ? cell : [cell];
+  const pool = /** @type {ReadonlyArray<CellLine<C>>} */ (/** @type {unknown} */ (Array.isArray(cell) ? cell : [cell]));
   return drawDeclared(pool, { ...options, draw: (p) => p[0], drawKind: options.drawKind || 'T' });
 }
 
@@ -248,7 +278,7 @@ export function resolveDeclared(cell, options) {
  * so the birth self-check (`cert:false-presumption`) re-asserts it against the final record.
  * @template T
  * @param {T} line the drawn line
- * @param {Readonly<Record<string, ReadonlyArray<any>>>} siblings the table's sibling sets
+ * @param {Readonly<Record<string, ReadonlyArray<unknown>>>} siblings the table's sibling sets
  * @param {Omit<DrawDeclaredOptions, 'draw'>} options
  * @returns {T}
  */
@@ -270,7 +300,7 @@ export function resolveSibling(line, siblings, options) {
 /**
  * R-AM: a sibling set's original kept as printed (no admitted twin, or no facts) is noted with the
  * original row's atoms.
- * @param {string} line @param {ReadonlyArray<any>} set
+ * @param {string} line @param {ReadonlyArray<unknown>} set
  * @param {Omit<DrawDeclaredOptions, 'draw'>} options
  */
 function noteKept(line, set, options) {
@@ -284,7 +314,7 @@ function noteKept(line, set, options) {
  * event's name — keeps the whole from being a key).
  * @template T
  * @param {T} text
- * @param {Readonly<Record<string, ReadonlyArray<any>>>} siblings
+ * @param {Readonly<Record<string, ReadonlyArray<unknown>>>} siblings
  * @param {Omit<DrawDeclaredOptions, 'draw'>} options
  * @returns {T}
  */
@@ -301,7 +331,7 @@ export function resolveSiblingSentences(text, siblings, options) {
  * (`cert:false-presumption`) re-asserts them against the final record. Needs no facts; moves no
  * birth; a line that is no key is not noted.
  * @param {unknown} line
- * @param {Readonly<Record<string, ReadonlyArray<any>>>} siblings
+ * @param {Readonly<Record<string, ReadonlyArray<unknown>>>} siblings
  * @param {Omit<DrawDeclaredOptions, 'draw'|'facts'|'twin'|'key'>} options
  */
 export function noteDeclared(line, siblings, options) {
@@ -311,15 +341,15 @@ export function noteDeclared(line, siblings, options) {
   note({ ...options, drawKind: options.drawKind || 'R' }, original, set, atomsOf(declarationOf(original)), 'drawn');
 }
 
-/** @param {any} line @param {number} i */
+/** @param {unknown} line @param {number} i @returns {string | number} */
 function lineIdOf(line, i) {
-  if (line && typeof line === 'object' && (typeof line.id === 'string' || typeof line.id === 'number')) return line.id;
+  if (line && typeof line === 'object' && (typeof /** @type {{ id?: unknown }} */ (line).id === 'string' || typeof /** @type {{ id?: unknown }} */ (line).id === 'number')) return /** @type {{ id: string | number }} */ (line).id;
   return i;
 }
 
 /**
- * @param {DrawDeclaredOptions | Omit<DrawDeclaredOptions, 'draw'|'twin'|'key'>} options
- * @param {any} line @param {ReadonlyArray<any>} pool @param {string[]} atoms
+ * @param {Pick<DrawDeclaredOptions, 'poolId'|'surface'|'drawKind'|'crisisScoped'|'poolDeclares'|'ctx'>} options
+ * @param {unknown} line @param {ReadonlyArray<unknown>} pool @param {string[]} atoms
  * @param {'drawn'|'twin'|'argmax'|'none'|'kept'} resolvedBy
  */
 function note(options, line, pool, atoms, resolvedBy) {
@@ -334,7 +364,7 @@ function note(options, line, pool, atoms, resolvedBy) {
     resolvedBy,
     ...(options.crisisScoped ? { crisisScoped: true } : {}),
     ...(options.poolDeclares && options.poolDeclares.length ? { poolDeclares: options.poolDeclares } : {}),
-    ...(typeof line === 'object' && line.colour === true ? { colour: true } : {}), // R-AO: counted by declared-share
+    ...(typeof line === 'object' && /** @type {{ colour?: unknown }} */ (line).colour === true ? { colour: true } : {}), // R-AO: counted by declared-share
     ...(options.ctx ? { ctx: options.ctx } : {}),
   });
 }

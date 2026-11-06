@@ -23,13 +23,13 @@ export const WAR_STATES = Object.freeze(['front', 'aggressor', 'at war', 'peace'
 
 /**
  * THE ONE READER.
- * @param {any} record a settlement record
+ * @param {object | null | undefined} record a settlement record
  * @param {{ worldState?: unknown, regionalGraph?: unknown, settlementId?: unknown }} [options]
  * @returns {'front'|'aggressor'|'at war'|'peace'}
  */
 export function warStateOf(record, options = {}) {
   if (options.worldState && options.settlementId != null) {
-    const status = settlementWarStatus(/** @type {any} */ ({ settlementId: options.settlementId, worldState: options.worldState, regionalGraph: options.regionalGraph }));
+    const status = settlementWarStatus(/** @type {Parameters<typeof settlementWarStatus>[0]} */ ({ settlementId: options.settlementId, worldState: options.worldState, regionalGraph: options.regionalGraph }));
     if (status?.besiegedBy?.length) return 'front';
     if (status?.besiegingTargets?.length) return 'aggressor';
   }

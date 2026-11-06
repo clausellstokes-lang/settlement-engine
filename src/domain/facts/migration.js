@@ -20,7 +20,7 @@ import { crisisEntries } from './crisisKind.js';
 
 /**
  * THE ONE READER.
- * @param {any} record a settlement record
+ * @param {object | null | undefined} record a settlement record
  * @returns {Readonly<{ active: boolean, direction: 'influx'|'exodus'|null }>}
  */
 export function migrationOf(record) {
