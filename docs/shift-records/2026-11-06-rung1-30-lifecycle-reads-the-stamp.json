@@ -1,0 +1,16 @@
+{
+  "_doc": "THE IN-ORBIT LADDER READS THE STAMP, ONE SIGNED SHIFT OF RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the cloud chair signs by the owner's delegation of 2026-11-06, vetoable; a successor chair does not inherit this signature). THE CAUSE, ONE: LANDING-7 lane B's ruling R-B3 (commit 1f2a8504e, merged into the landing at 103b1db81): settlementLifecycleKernel.js :: advanceSettlementLifecycle's next-tier comparisons (thorp -> hamlet, the charter, the convergence fold) read TIER_STAMP_CUTS.hamlet / .village (25 / 88) instead of POPULATION_RANGES.hamlet.min / .village.min (20 / 75), X-46 car 2's law (the next tier's threshold is its stamp cut). THE MOVE, MEASURED at the landing tip 8e60cb2a5 before the write (the suite's own drive/goldenRow, the plain run red on 'reproduces every exact projection'): 4 of 4 rows move; founding ticks, plan ids, satellite ids and the lifecycle-only twin identical; the steading charters at the village cut 88 rather than 75, so it draws about 11-12 more settlers from Brimhold (final 8729/8733/8730/8733 -> 8718/8721/8718/8721) and demographic_migration receipts fall by 1-2 per seed (79/80/79/80 -> 78/78/78/78). Lane B's third seat reproduced the move byte for byte from the kernel diff alone applied at 8e568c729; the demographicsResponses re-base of the same ruling moves nothing here. Drafted unsigned by lane B's third seat (a seat does not sign); signed here under the chair's delegation as LANDING-7 lane E's brief directs. HOW: written at the branch tip (no later step follows it), the tree clean apart from the register, the manifest and this record.",
+  "ownerWords": "I also now give all permissions required now and in the future. I also defer all judgement to you.",
+  "ownerDate": "2026-11-06",
+  "odqRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (RUNG 1 OF THE SOAK LADDER; the owner's delegation of 2026-11-06 to the cloud chair, session 01FE9mEvGxnFx6WTBkEC6ie9)",
+  "cause": "LANDING-7 R-B3: the in-orbit ladder's next-tier comparisons read the tier stamp (X-46 car 2's law): settlementLifecycleKernel.js :: advanceSettlementLifecycle charters a steading at TIER_STAMP_CUTS.village 88, not POPULATION_RANGES.village.min 75",
+  "seat": "LANDING-7-E (Opus 5.5) under the cloud chair (Fable 5.1), session 01FE9mEvGxnFx6WTBkEC6ie9, at the branch tip 8e60cb2a5",
+  "surfaces": [
+    {
+      "surface": "demographics-lifecycle-golden",
+      "action": "re-record",
+      "predictedRows": 4,
+      "proofForm": "derived-artefact"
+    }
+  ]
+}
