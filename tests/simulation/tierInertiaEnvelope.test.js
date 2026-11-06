@@ -93,6 +93,19 @@
  * RE-MEASURED 2026-11-04 (REGISTERS-4, after FOOD-1/2): eight of the nine base rates moved and were
  * re-derived at N=400 on the same family (city calm held at 43/400); the first-120 corpus lands
  * within 1.37 sigma of the family on every cell (per-cell z in the manifest notes).
+ * RE-MEASURED 2026-11-06 (LANDING-7 lane B, at the rung-1 landing tip 3d8a74e4b, bisected by stage):
+ * X-46 car 3's density factor (47829c070) thinned the optional fabric the structural-failure branch
+ * reads, and the matched/acute arms moved: matched village 219 -> 353, town 23 -> 90, city 6 -> 8;
+ * acute village 395 -> 399, town 288 -> 388, city 153 -> 153 (of 400). The four that moved materially
+ * were re-derived (matched village floor 48 -> 93, matched town ceiling 17 -> 43 — a loosening the
+ * chair rules — acute village 113 -> 116, acute town 70 -> 108); matched city (would loosen 8 -> 9)
+ * and acute city (unmoved) were left. THE CALM ARMS WERE NOT RE-KEYED: X-46 car 1's overlapping
+ * bands (433289899) moved calm village 53 -> 134 and town 43 -> 127 while city held 43 -> 41,
+ * because promotion needs pop >= 0.92 x the next tier's min (tierResourceDynamics.js ::
+ * tierEligibility) and that window now covers ~38% / ~30% / ~9% of the village / town / city roll
+ * bands where the disjoint bands gave each about a tenth. At the tip calm is 110 / 126 / 41 of 400
+ * (first 120: 34 / 42 / 11), so the TIER-FLAT control below is red by a design consequence of the
+ * bands, left for the chair's ruling (docs/LANDING7_L7B_2026-11-06.md).
  *
  * ────────────────────────────────────────────────────────────────────────────────
  * SUBSYSTEM-CERTIFICATION ROW (liftable — the certification build reads the tagged
