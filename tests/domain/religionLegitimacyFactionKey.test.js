@@ -173,15 +173,18 @@ describe('rulerLens reads the canonical governing seat', () => {
     const wrongPick = highestPower(s.powerStructure);
     expect(nameOf(seat)).toBe('Elder Council');
     expect(nameOf(wrongPick)).toBe('Religious Authorities');
-    expect(Number(seat.power)).toBe(14);
-    expect(Number(wrongPick.power)).toBe(44);
+    // 14/44 -> 17/57 (LANDING-7 lane E, 2026-11-06): both powers moved with the institution budget, not the shape:
+    // git bisect a07ee4e0a..8e60cb2a5, first bad 47829c070 (X-46 car 3, U3, the density factor: 14 -> 16), then
+    // 16 -> 17 at a later budget stage (not bisected). The seat is still the Elder Council under the temple.
+    expect(Number(seat.power)).toBe(17);
+    expect(Number(wrongPick.power)).toBe(57);
     expect(factionArchetype(seat)).toBe('government');     // from the name ('council')
     expect(factionArchetype(wrongPick)).toBe('religious'); // from the category
 
     // Selection, isolated: lens.power tracks the chosen record's own power. The roster is
-    // non-empty here, so leadPow floors it — assert the seat's 14 does NOT read as 44.
+    // non-empty here, so leadPow floors it — assert the seat's 17 does NOT read as the temple's 57.
     const lens = rulerLens(s);
-    expect(lens.power).toBeLessThan(0.45 + 0.55 * 0.44);
+    expect(lens.power).toBeLessThan(0.45 + 0.55 * 0.57);
     // And the lean is the seat's (government temper 0.5), not the temple's (religious 0.4).
     expect(lens.temper).toBeCloseTo(0.5, 10);
   });
