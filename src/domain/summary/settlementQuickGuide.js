@@ -721,10 +721,21 @@ const FOOD_SECURITY_CLAUSE = Object.freeze({
  */
 export const QUICK_GUIDE_SIBLINGS = Object.freeze({
   [SCOPE_PHRASE.norse]: Object.freeze([Object.freeze({ text: SCOPE_PHRASE.norse, needs: ['navigable'] })]),
-  [SCOPE_PHRASE.slavic]: Object.freeze([Object.freeze({ text: SCOPE_PHRASE.slavic, needs: ['river'] })]),
-  [SCOPE_PHRASE.mesoamerican]: Object.freeze([Object.freeze({ text: SCOPE_PHRASE.mesoamerican, needs: ['market'] })]),
-  [SCOPE_PHRASE.south_asian]: Object.freeze([Object.freeze({ text: SCOPE_PHRASE.south_asian, needs: ['market', 'institution: temple'] })]),
-  [SCOPE_PHRASE.greek]: Object.freeze([Object.freeze({ text: SCOPE_PHRASE.greek, needs: ['coast'] })]),
+  // CENSUS-2g unit 7 (R-AY): a self-gated line declares only what `scopePhrase` verifies (the record's
+  // water) — the Slavic line's `river` is dropped (and with it its set: it declares nothing), the Greek
+  // harbour declares `navigable`, not `coast`.
+  // CENSUS-2g unit 7 (the chair's ruling of 09:29, R-G): row 95 drops a refused scope, so each declared
+  // scope takes ONE twin that presumes nothing (share: the refused births only — 38 of 92 mesoamerican,
+  // 44 of 95 south-asian on the 1,000).
+  [SCOPE_PHRASE.mesoamerican]: Object.freeze([
+    Object.freeze({ text: SCOPE_PHRASE.mesoamerican, needs: ['market'] }),
+    Object.freeze({ text: 'built around a civic-ritual plaza, on tribute and the ritual calendar', twinOf: SCOPE_PHRASE.mesoamerican }),
+  ]),
+  [SCOPE_PHRASE.south_asian]: Object.freeze([
+    Object.freeze({ text: SCOPE_PHRASE.south_asian, needs: ['market', 'institution: temple'] }),
+    Object.freeze({ text: 'built around the tank, in quarters by trade and kin', twinOf: SCOPE_PHRASE.south_asian }),
+  ]),
+  [SCOPE_PHRASE.greek]: Object.freeze([Object.freeze({ text: SCOPE_PHRASE.greek, needs: ['navigable'] })]),
   [FOOD_SECURITY_CLAUSE.surplus]: Object.freeze([Object.freeze({ text: FOOD_SECURITY_CLAUSE.surplus, excludes: ['crisis: hunger'], crisis: ['any'] })]),
   [FOOD_SECURITY_CLAUSE.secure]: Object.freeze([Object.freeze({ text: FOOD_SECURITY_CLAUSE.secure, excludes: ['crisis: hunger'], crisis: ['any'] })]),
 });
@@ -734,7 +745,8 @@ export const QUICK_GUIDE_SIBLINGS = Object.freeze({
  * pools, by their sibling key. The T wiring passes `crisisScoped: true` for these; the pin is the compose's (R-T).
  * @type {ReadonlyArray<string>}
  */
-export const QUICK_GUIDE_CRISIS_SCOPED = Object.freeze([FOOD_SECURITY_CLAUSE.surplus, FOOD_SECURITY_CLAUSE.secure]);
+// CENSUS-2f, R-AH: the surplus and secure clauses write `crisis: any` (no calm line), so the inert flag is dropped.
+export const QUICK_GUIDE_CRISIS_SCOPED = Object.freeze([]);
 
 /** @param {string} label @param {SettlementQuickGuideSource} settlement @returns {string} */
 function foodSecurityClause(label, settlement) {

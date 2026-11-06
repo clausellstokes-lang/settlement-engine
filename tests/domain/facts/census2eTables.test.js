@@ -15,31 +15,43 @@ import { ARRIVAL_SCENES_CRISIS_SCOPED } from '../../../src/data/narrativeData.js
 import { SPATIAL_QUARTER_CRISIS_SCOPED } from '../../../src/generators/spatialGenerator.js';
 import { CONDITION_ARCHETYPE_CRISIS_SCOPED, CONDITION_ARCHETYPE_SIBLINGS, CONDITION_ARCHETYPE_TEMPLATES } from '../../../src/domain/activeConditions.js';
 import { QUICK_GUIDE_CRISIS_SCOPED, QUICK_GUIDE_SIBLINGS } from '../../../src/domain/summary/settlementQuickGuide.js';
+import { DAILY_LIFE_LOCAL_CRISIS_SCOPED } from '../../../src/components/new/tabs/DailyLifeTab.jsx';
 
 const ledger = (name) => JSON.parse(readFileSync(new URL(`../../../docs/census/declarations/${name}.json`, import.meta.url), 'utf8'));
-/** the ledger's opted pools that no crisis key guarantees (R-B1 drops the keyed ones) */
-const scopedPools = (name) => ledger(name).pools.filter((p) => p.crisisScoped && !(p.poolCrisis && p.poolCrisis.length)).map((p) => p.pool);
+/** a line the scope can bite: it does not write `crisis: any` (a calm or silent line) */
+const holdsCalm = (line) => !(line.crisis === 'any' || (Array.isArray(line.crisis) && line.crisis.includes('any')));
+/**
+ * the ledger's opted pools that no crisis key guarantees (R-B1 drops the keyed ones) AND that hold a
+ * calm line — CENSUS-2f, the chair's R-AH: a pool whose every line writes `crisis: any` has nothing
+ * for the flag to protect, so the flag is dropped there (39 inert pools; DEFENSE_CONTEXT's 5 sit on
+ * dead text, R-AI, and stay in stasis at its site).
+ */
+const scopedPools = (name) => ledger(name).pools
+  .filter((p) => p.crisisScoped && !(p.poolCrisis && p.poolCrisis.length) && p.lines.some(holdsCalm)).map((p) => p.pool);
 
-describe('unit 1 — the crisis-scoped flags stand on the carried tables (R-AF)', () => {
-  it('the arrival tables flag exactly the ledger\'s opted pools', () => {
+describe('unit 1 — the crisis-scoped flags stand only where a calm line is (R-AF, R-AH)', () => {
+  it('the arrival tables flag exactly the ledger\'s opted pools that hold a calm line', () => {
     for (const t of ['ARRIVAL_SENSES', 'ARRIVAL_PEOPLE', 'ARRIVAL_TENSIONS', 'ARRIVAL_MEMORIES']) {
       expect([t, [...ARRIVAL_CRISIS_SCOPED[t]]]).toEqual([t, scopedPools(t)]);
     }
     expect(Object.keys(ARRIVAL_CRISIS_SCOPED).sort()).toEqual(['ARRIVAL_MEMORIES', 'ARRIVAL_PEOPLE', 'ARRIVAL_SENSES', 'ARRIVAL_TENSIONS']);
     expect([...ARRIVAL_SCENES_CRISIS_SCOPED]).toEqual(scopedPools('ARRIVAL_SCENES'));
+    expect([...ARRIVAL_SCENES_CRISIS_SCOPED]).toEqual(['market', 'ordinary']);
   });
-  it('the spatial quarters flag the market and religious quarters', () => {
+  it('the spatial quarters, the condition archetypes and the quick-guide food clauses flag nothing (every line `crisis: any`)', () => {
     expect(SPATIAL_QUARTER_CRISIS_SCOPED.map((q) => `quarters: ${q}`)).toEqual(scopedPools('SPATIAL_TEXT'));
-  });
-  it('the condition archetypes and the quick-guide food clauses flag their sibling sets by key', () => {
     expect(CONDITION_ARCHETYPE_CRISIS_SCOPED.map((k) => Object.keys(CONDITION_ARCHETYPE_TEMPLATES).find((a) => CONDITION_ARCHETYPE_TEMPLATES[a].description === k)))
       .toEqual(scopedPools('CONDITION_ARCHETYPE_TEMPLATES'));
     for (const k of CONDITION_ARCHETYPE_CRISIS_SCOPED) expect(Object.prototype.hasOwnProperty.call(CONDITION_ARCHETYPE_SIBLINGS, k)).toBe(true);
     expect(QUICK_GUIDE_CRISIS_SCOPED.length).toBe(scopedPools('QUICK_GUIDE_CLAUSES').length);
     for (const k of QUICK_GUIDE_CRISIS_SCOPED) expect(Object.prototype.hasOwnProperty.call(QUICK_GUIDE_SIBLINGS, k)).toBe(true);
   });
+  it('the local Daily Life narrative flags its stress pool only (the no-stress sentence is calm)', () => {
+    expect([...DAILY_LIFE_LOCAL_CRISIS_SCOPED]).toEqual(scopedPools('DAILY_LIFE_TAB'));
+    expect([...DAILY_LIFE_LOCAL_CRISIS_SCOPED]).toEqual(['localNarrative.stress']);
+  });
   it('every flag is frozen (a table, not a mutable switch)', () => {
-    for (const l of [ARRIVAL_SCENES_CRISIS_SCOPED, SPATIAL_QUARTER_CRISIS_SCOPED, CONDITION_ARCHETYPE_CRISIS_SCOPED, QUICK_GUIDE_CRISIS_SCOPED, ...Object.values(ARRIVAL_CRISIS_SCOPED)]) {
+    for (const l of [ARRIVAL_SCENES_CRISIS_SCOPED, SPATIAL_QUARTER_CRISIS_SCOPED, CONDITION_ARCHETYPE_CRISIS_SCOPED, QUICK_GUIDE_CRISIS_SCOPED, DAILY_LIFE_LOCAL_CRISIS_SCOPED, ...Object.values(ARRIVAL_CRISIS_SCOPED)]) {
       expect(Object.isFrozen(l)).toBe(true);
     }
   });
@@ -90,7 +102,8 @@ describe('DAILY_LIFE_TAB — LOAD_MSGS and the local narrative (carried through 
   });
   it('paragraph [1] needs guardPresence (the parked guards stop); paragraph [2]\'s settled-authority sentence denies a succession crisis', () => {
     const p1 = [...found.entries()].find(([k]) => k.startsWith('${food}. Work is divided'));
-    expect(p1?.[1]).toEqual([{ needs: ['guardPresence'], excludes: [], crisis: ['any'] }]);
+    // CENSUS-2g unit 3 (the chair's answer 3): + `priest`, re-keyed by cause.
+    expect(p1?.[1]).toEqual([{ needs: ['guardPresence', 'priest'], excludes: [], crisis: ['any'] }]);
     expect(found.get('Most residents know where authority lives and how to petition it without making themselves memorable.')).toEqual([{ needs: [], excludes: ['crisis: succession'], crisis: ['any'] }]);
   });
   it('the anchors fallback names nothing the place must hold (R-W)', () => {
@@ -111,16 +124,18 @@ describe('POLITICAL_FLAVOR — the cascade\'s rows carry the ledger\'s declarati
   const NOT_WRITTEN = {
     'POLITICAL_FLAVOR.disaster_heavy[4]': ['walls'], // POLITICAL_FLAVOR_SIBLINGS (CENSUS-1c) resolves the walls after the draw
     'POLITICAL_FLAVOR.catastrophic[1].monster_incursion': ['walls', 'militia'], // one branch of the closure
-    'POLITICAL_FLAVOR.religious_heavy[0]': ['institution: temple'], // waiting on sacredHouse (R-AE)
+    'POLITICAL_FLAVOR.religious_heavy[0]': ['institution: temple'], // the ledger's temple is a sacred house of any kind (R-AE): written `sacredHouse` (CENSUS-2f unit 5)
     'POLITICAL_FLAVOR.religious_heavy[2]': ['institution: temple'],
   };
+  /** atoms the row writes in place of the ledger's, by cause (CENSUS-2f unit 5, R-AE's composite landed at `fc45cc1`) */
+  const WRITTEN_FOR = { 'POLITICAL_FLAVOR.religious_heavy[0]': ['sacredHouse'], 'POLITICAL_FLAVOR.religious_heavy[2]': ['sacredHouse'] };
   it('every row declares what its ledger lines say (a closure\'s branches share one row)', () => {
     const want = {};
     for (const pool of ledger('POLITICAL_FLAVOR').pools) for (const line of pool.lines) {
       const m = /^POLITICAL_FLAVOR\.(\w+)\[(\d+)\]/.exec(line.lineId);
       const d = expectedDeclaration(pool, line);
       const skip = NOT_WRITTEN[line.lineId] || [];
-      d.needs = d.needs.filter((a) => !skip.includes(a));
+      d.needs = [...d.needs.filter((a) => !skip.includes(a)), ...(WRITTEN_FOR[line.lineId] || [])];
       const key = `${m[1]}[${m[2]}]`;
       want[key] = JSON.stringify(d);
     }

@@ -258,19 +258,21 @@ export const POLITICAL_FLAVOR = {
     (r) =>
       `Governance is a performance everyone has agreed to keep up: the offices are filled, the seals are real, and beneath them the ${pickRandom2(r.filter((s) => s.type === "political"))?.name || "this event"} left a question of legitimacy that no one wants to reopen by answering`,
   ],
+  // R-AO (CENSUS-2f): in the mixed pools (disaster_heavy, religious_heavy, magical_heavy) every bare row was read and
+  // presumes nothing: marked `colour: true`. `stable` is crisis-scoped, so its bare rows presume calm and stay bare.
   disaster_heavy: [
-    (r) =>
-      `A settlement defined by what it survived. The ${pickRandom2(r.filter((s) => s.type === "disaster"))?.name || "this event"} shaped how this community thinks about risk, preparation, and who gets left behind`,
-    (r) =>
-      `Cautious and self-sufficient in ways that visitors find excessive. The ${pickRandom2(r.filter((s) => s.type === "disaster"))?.name || "this event"} made it that way and the lesson has never been unlearned`,
-    (r) =>
-      `The ${pickRandom2(r.filter((s) => s.type === "disaster"))?.name || "this event"} is the reference point for everything: before it, during it, after it. A generation has grown up for whom it is history rather than memory`,
-    (r) =>
-      `There is a practicality to the people here that outsiders read as coldness. The ${pickRandom2(r.filter((s) => s.type === "disaster"))?.name || "this event"} taught them what sentiment costs when the accounting comes due, and the lesson stuck`,
+    { text: (r) =>
+      `A settlement defined by what it survived. The ${pickRandom2(r.filter((s) => s.type === "disaster"))?.name || "this event"} shaped how this community thinks about risk, preparation, and who gets left behind`, colour: true },
+    { text: (r) =>
+      `Cautious and self-sufficient in ways that visitors find excessive. The ${pickRandom2(r.filter((s) => s.type === "disaster"))?.name || "this event"} made it that way and the lesson has never been unlearned`, colour: true },
+    { text: (r) =>
+      `The ${pickRandom2(r.filter((s) => s.type === "disaster"))?.name || "this event"} is the reference point for everything: before it, during it, after it. A generation has grown up for whom it is history rather than memory`, colour: true },
+    { text: (r) =>
+      `There is a practicality to the people here that outsiders read as coldness. The ${pickRandom2(r.filter((s) => s.type === "disaster"))?.name || "this event"} taught them what sentiment costs when the accounting comes due, and the lesson stuck`, colour: true },
     { text: (r) =>
       `The settlement keeps more in reserve than its size explains: granaries a little too large, walls a little too strong. The ${pickRandom2(r.filter((s) => s.type === "disaster"))?.name || "this event"} is the reason, and no argument about the expense has ever won against that memory`, needs: ['institution: granary'] },
-    (r) =>
-      `Ask why a custom here seems excessive and the answer is always the same shape: it did not used to be, until the ${pickRandom2(r.filter((s) => s.type === "disaster"))?.name || "this event"} made it necessary, and now it is simply how things are done`,
+    { text: (r) =>
+      `Ask why a custom here seems excessive and the answer is always the same shape: it did not used to be, until the ${pickRandom2(r.filter((s) => s.type === "disaster"))?.name || "this event"} made it necessary, and now it is simply how things are done`, colour: true },
   ],
   economic_heavy: [
     (r) =>
@@ -295,6 +297,11 @@ export const POLITICAL_FLAVOR = {
           ? `The ${s.name} ended, but the habits of occupation never fully left: the way people speak about authority, the way they watch strangers, the way official records from that period are still treated with suspicion`
           : `Everything before the ${s.name} is referred to as 'the old settlement'. What exists now was built after, by different people, with different assumptions, over different rubble`;
     },
+    // CENSUS-2g unit 4 (R-AS amended, the chair's answer 1): LISTED, not split, not declared. The
+    // branch is chosen by the EVENT'S TYPE, so the monster branch presumes walls + a militia it never
+    // verifies; printed in 0 of 1,000, both facts true on the final record wherever it could print;
+    // waits on a per-branch closure declaration channel (the mechanism lane's wave 2). The other
+    // branch is colour. A split would move 166 of 1,000 births by the modulus (refused).
     (r) => {
       const s = r.find((o) => o.severity === "catastrophic") || r[0];
       return s.type === "monster_incursion"
@@ -381,34 +388,36 @@ export const POLITICAL_FLAVOR = {
         : "Little has happened here worth recording, which the residents will tell you is the point. The work of keeping a place uneventful is real work, and they have done it well enough that no one thanks them for it",
   ],
   religious_heavy: [
-    (r) =>
-      `The ${pickRandom2(r.filter((s) => s.type === "religious"))?.name || "this event"} divided this settlement's relationship to faith in ways that never fully healed: the institution persisted; the unity didn't`,
-    (r) =>
-      `Religious history here is complicated: the ${pickRandom2(r.filter((s) => s.type === "religious"))?.name || "this event"} left an official account and an unofficial one, and which version you know says something about who you are`,
-    (r) =>
-      `The ${pickRandom2(r.filter((s) => s.type === "religious"))?.name || "this event"} is why the local clergy and the civic authority maintain a relationship of careful, documented mutual respect rather than the easy cooperation you find elsewhere`,
-    (r) =>
-      `Visitors sometimes ask why the people here seem so personally invested in theological questions that most settlements leave to the priests. The ${pickRandom2(r.filter((s) => s.type === "religious"))?.name || "this event"} is the explanation`,
-    (r) =>
-      `Faith here is a matter of loyalty as much as belief. The ${pickRandom2(r.filter((s) => s.type === "religious"))?.name || "this event"} drew a line through the community, and which side of it a family stood on is still remembered, still counted, still quietly held against them`,
-    (r) =>
-      `The calendar here is crowded with observances an outsider cannot keep straight, and the crowding is the point: the ${pickRandom2(r.filter((s) => s.type === "religious"))?.name || "this event"} left rival claims to the same holy days, and each is kept as loudly as the other`,
-    (r) =>
-      `There is a wariness in how people here speak of doctrine. The ${pickRandom2(r.filter((s) => s.type === "religious"))?.name || "this event"} made it dangerous to be too certain out loud, and the habit of caution has outlived the danger that taught it`,
+    // CENSUS-2f unit 5: [0]'s persisting institution and [2]'s local clergy presume a house of worship of any kind (R-AE's
+    // `sacredHouse`, settled at this draw on all 1,000 soak births — R-V, R-AN); a refused row moves to the admitted argmax.
+    { text: (r) =>
+      `The ${pickRandom2(r.filter((s) => s.type === "religious"))?.name || "this event"} divided this settlement's relationship to faith in ways that never fully healed: the institution persisted; the unity didn't`, needs: ['sacredHouse'] },
+    { text: (r) =>
+      `Religious history here is complicated: the ${pickRandom2(r.filter((s) => s.type === "religious"))?.name || "this event"} left an official account and an unofficial one, and which version you know says something about who you are`, colour: true },
+    { text: (r) =>
+      `The ${pickRandom2(r.filter((s) => s.type === "religious"))?.name || "this event"} is why the local clergy and the civic authority maintain a relationship of careful, documented mutual respect rather than the easy cooperation you find elsewhere`, needs: ['sacredHouse'] },
+    { text: (r) =>
+      `Visitors sometimes ask why the people here seem so personally invested in theological questions that most settlements leave to the priests. The ${pickRandom2(r.filter((s) => s.type === "religious"))?.name || "this event"} is the explanation`, colour: true },
+    { text: (r) =>
+      `Faith here is a matter of loyalty as much as belief. The ${pickRandom2(r.filter((s) => s.type === "religious"))?.name || "this event"} drew a line through the community, and which side of it a family stood on is still remembered, still counted, still quietly held against them`, colour: true },
+    { text: (r) =>
+      `The calendar here is crowded with observances an outsider cannot keep straight, and the crowding is the point: the ${pickRandom2(r.filter((s) => s.type === "religious"))?.name || "this event"} left rival claims to the same holy days, and each is kept as loudly as the other`, colour: true },
+    { text: (r) =>
+      `There is a wariness in how people here speak of doctrine. The ${pickRandom2(r.filter((s) => s.type === "religious"))?.name || "this event"} made it dangerous to be too certain out loud, and the habit of caution has outlived the danger that taught it`, colour: true },
   ],
   magical_heavy: [
-    (r) =>
-      `The ${pickRandom2(r.filter((s) => s.type === "magical"))?.name || "this event"} is why this settlement treats arcane matters with more caution than neighbours do, not superstition, institutional memory`,
+    { text: (r) =>
+      `The ${pickRandom2(r.filter((s) => s.type === "magical"))?.name || "this event"} is why this settlement treats arcane matters with more caution than neighbours do, not superstition, institutional memory`, colour: true },
     { text: (r) =>
       `A settlement with an unusual relationship to magic: the ${pickRandom2(r.filter((s) => s.type === "magical"))?.name || "this event"} made it both more dependent on arcane resources and more wary of them simultaneously`, needs: ['magic'] },
     { text: (r) =>
       `The ${pickRandom2(r.filter((s) => s.type === "magical"))?.name || "this event"} is still discussed (carefully) by the practitioners who work here. The details are not shared with outsiders, which outsiders find either sinister or sensible depending on their own experience with magic`, needs: ['magic'] },
-    (r) =>
-      `Ask what the local policy on arcane practice is and you will get a longer answer than the question seems to warrant. The ${pickRandom2(r.filter((s) => s.type === "magical"))?.name || "this event"} is why`,
+    { text: (r) =>
+      `Ask what the local policy on arcane practice is and you will get a longer answer than the question seems to warrant. The ${pickRandom2(r.filter((s) => s.type === "magical"))?.name || "this event"} is why`, colour: true },
     { text: (r) =>
       `The settlement relies on arcane workings it does not entirely trust. The ${pickRandom2(r.filter((s) => s.type === "magical"))?.name || "this event"} proved the two feelings can coexist indefinitely, and here they do, in the same shrug people give the weather`, needs: ['magic'] },
-    (r) =>
-      `There are places in and around the settlement that people simply do not go, and the reasons have hardened into custom without needing to be spoken. The ${pickRandom2(r.filter((s) => s.type === "magical"))?.name || "this event"} is where the custom started`,
+    { text: (r) =>
+      `There are places in and around the settlement that people simply do not go, and the reasons have hardened into custom without needing to be spoken. The ${pickRandom2(r.filter((s) => s.type === "magical"))?.name || "this event"} is where the custom started`, colour: true },
     { text: (r) =>
       `The practitioners here are respected, consulted, and watched: all three at once, without contradiction. The ${pickRandom2(r.filter((s) => s.type === "magical"))?.name || "this event"} taught the settlement that the useful and the dangerous are frequently the same people`, needs: ['magic'] },
   ],

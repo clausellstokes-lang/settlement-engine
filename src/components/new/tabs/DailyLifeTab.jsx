@@ -295,8 +295,11 @@ function listText(items, fallback) {
  * categories, so it was true of no place that reaches it: reworded to what it really presumes,
  * nothing (R-W). Paragraph [1]'s guards are the ledger's parked `guards` stop, now `guardPresence`
  * (its priests wait on a faith-presence atom: `priest` reads a senior cleric among the named people).
+ * CENSUS-2g unit 3 (the chair's answer 3, block j): the priests declare `priest`, carried until the site
+ * is wired; no reword.
  */
-export const DAILY_LIFE_LOCAL_CRISIS_SCOPED = Object.freeze(['localNarrative.food', 'localNarrative.order', 'localNarrative.stress', 'localNarrative.paragraphs']);
+// CENSUS-2f, R-AH: food, order and paragraphs write `crisis: any` on every line; only the stress pool holds a calm line.
+export const DAILY_LIFE_LOCAL_CRISIS_SCOPED = Object.freeze(['localNarrative.stress']);
 
 function buildLocalDailyLifeNarrative(ctx) {
   const terrain = humanize(ctx.terrain) || 'mixed terrain';
@@ -327,7 +330,7 @@ function buildLocalDailyLifeNarrative(ctx) {
 
   return [
     `Morning starts around ${anchors}. ${terrain} and ${trade} shape the pace: carts, tools, and gossip move where the ground and roads allow, while ${culture} gives even routine bargains a recognizable local rhythm.`,
-    textOf({ text: `${food}. Work is divided by habit more than proclamation. Farmers, haulers, priests, guards, and tradespeople all know which shortages can be endured and which ones will turn into arguments before sundown.`, needs: ['guardPresence'], crisis: ['any'] }),
+    textOf({ text: `${food}. Work is divided by habit more than proclamation. Farmers, haulers, priests, guards, and tradespeople all know which shortages can be endured and which ones will turn into arguments before sundown.`, needs: ['guardPresence', 'priest'], crisis: ['any'] }),
     `Power is felt through ${ctx.govFaction || 'whoever can make orders stick this week'}. ${ctx.stability < 45 ? "Promises are weighed carefully because yesterday's bargain may not survive tomorrow." : textOf({ text: 'Most residents know where authority lives and how to petition it without making themselves memorable.', excludes: ['crisis: succession'], crisis: ['any'] })} ${order}.`,
     `${stress} By evening, daily life narrows to lamplight, shared meals, debts remembered, and news carried from door to door. The settlement feels less like a map marker than a set of bargains people keep renewing because leaving would cost more than staying.`,
   ].join('\n\n');
