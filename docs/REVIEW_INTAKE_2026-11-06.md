@@ -202,3 +202,24 @@ cutter's one row is p 1.0).
      `criticalIssueCount -> viability.js:608`; the writes now sit at **:586** and **:606**.
      The fix is two digits in `src/domain/prose/holderTable.js :: HOLDER_SOURCES` (verified
      green with it); not committed because that file was not read whole by this seat.
+
+## Unit 6 (R3) — the receipt reads the trace it persisted
+
+`src/generators/steps/assembleSettlement.js` (read whole): the trace copy
+(`settlement.simulationTrace = ctx.simulationTrace`) now runs BEFORE
+`buildGenerationCoherenceReceipt`, whose provenance judgment
+(`generationReceiptJudgments.js :: provenanceAssessment`) reads `settlement.simulationTrace`.
+A two-block reorder plus a three-line note; the holder-table citations into this file (:111,
+:130, :131) sit above the move and do not shift.
+
+- **Red-first**: `tests/generators/receiptReadsPersistedTrace.test.js` "on 20 seeds, the
+  receipt says a trace is persisted exactly when the settlement carries one" — red at
+  `1492b5a7e` **20 of 20**, green here. Neighbours green: generationReceiptJudgments,
+  flagshipCoherence, assemblyCoherenceRngIsolation, heldKeyWriterCensus walker,
+  simulationSpine, trace.coverage, configPatchAllowlistWalker, conflictsSeam,
+  stressSummaryName.
+- **Goldens**: **525 of 525** move against the R1 tip (one cause: "the receipt reads the trace
+  it persisted" — the receipt is in the record). Nothing re-recorded.
+- Already red before this unit and expected to stay so until the chair's re-record:
+  `tests/generators/nameHeldThroughAssembly.test.js` A1 ("a golden row moved with no pin bag
+  anywhere", 41 rows of its sample) — red at `cbf8e24dc` too (unit 2's service rows).
