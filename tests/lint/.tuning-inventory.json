@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "e586cf45213f61f61415951f9c970bc81c6429d2",
-  "measuredBy": "LANDING-7-E2 (Opus 5.5)",
+  "measuredAtSha": "fecbdfd68ee036ad482d9cae34d1abc4f0dc133b",
+  "measuredBy": "LANDING-7-E3 (Opus 5.5)",
   "date": "2026-11-06",
-  "note": "R-E2: SEWER_DERIVATION_TUNING cesspitFailurePopulation 2000->777, highWaterSaturation 12000->5399, re-based to the stamp cuts (433289899)",
+  "note": "LANDING-7 R-E8: DENSITY_CEILINGS enters as a homes-registered table (re-derived from the stamp-band maxima, draft row)",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -3535,11 +3535,45 @@
         "src/domain/worldPulse/demographicsMigration.js"
       ]
     },
+    "src/domain/worldPulse/demographicsRates.js#DENSITY_CEILINGS": {
+      "exported": true,
+      "idiom": "literal",
+      "keys": 6,
+      "line": 164,
+      "spanDigest": "e7661abf510150ed4ca96c5cb8862d77ccc23a9b4bcb23ae55cc11c3d2e95646",
+      "leaves": {
+        "thorp": 36,
+        "hamlet": 131,
+        "village": 543,
+        "town": 3374,
+        "city": 22798,
+        "metropolis": 140000
+      },
+      "dependents": [
+        "src/domain/display/demographicReading.js",
+        "src/domain/worldPulse/candidateEvents.js",
+        "src/domain/worldPulse/demographicsKernel.js",
+        "src/domain/worldPulse/demographicsLadder.js",
+        "src/domain/worldPulse/demographicsMigration.js",
+        "src/domain/worldPulse/demographicsObservation.js",
+        "src/domain/worldPulse/demographicsPlans.js",
+        "src/domain/worldPulse/demographicsPushPull.js",
+        "src/domain/worldPulse/demographicsRisk.js",
+        "src/domain/worldPulse/demographicsWar.js",
+        "src/domain/worldPulse/migrationKernel.js",
+        "src/domain/worldPulse/populationDynamics.js",
+        "src/domain/worldPulse/settlementLifecycleFirstClass.js",
+        "src/domain/worldPulse/sovereigntyMarketStage.js",
+        "src/domain/worldPulse/tierResourceDynamics.js",
+        "src/domain/worldPulse/warReasons.js"
+      ],
+      "namedDependents": []
+    },
     "src/domain/worldPulse/demographicsRates.js#DEMOGRAPHIC_TUNING": {
       "exported": true,
       "idiom": "literal",
       "keys": 11,
-      "line": 218,
+      "line": 234,
       "spanDigest": "b4476edae48f99ca0e8ca71de94a353ed4dd26f411507f2364f8199dde212007",
       "leaves": {
         "BIRTH_EASE": 0.75,
@@ -8635,11 +8669,11 @@
   },
   "unclosed": [],
   "totals": {
-    "tables": 261,
-    "keys": 2203,
+    "tables": 262,
+    "keys": 2209,
     "unregisteredNamed": 535,
     "bareDecimals": 6945,
     "zeroDependentTables": 10,
-    "zeroNamedDependentTables": 170
+    "zeroNamedDependentTables": 171
   }
 }
