@@ -172,3 +172,33 @@ cutter's one row is p 1.0).
 - **Goldens**: against the committed manifest **525 of 525** move (one cause: the service
   rows). The amendment's own delta, hashed against the previous tip `cbf8e24dc`: **428 of
   525** rows. Nothing re-recorded.
+
+## The pins (R2) — re-keyed by identity, with the cause named
+
+- **`proseWiringCensus.walker` "A CAPTURED RULING STRUCTURE MAKES THE STATE ORGANS
+  INTERESTED"**: **no re-key needed at this tip.** After R1 the captured city reads **23**
+  again (green, unedited): with the one-row menus at p 1.0 the service stream no longer
+  forks where unit 2's p 0.5/0.6 rolls forked it, so the watch's "Crime reporting" rolls as at
+  master. The 23 → 16 the first seat recorded was a property of the p 0.5/0.6 menus.
+- **`proseComposed.walker` A13 "THE FAIL LIMB IS REACHABLE ON REAL INPUT"**: still red after
+  R1 (rate-11-9's treasury row reads LICENSED). Scanned `soak1k-0 … soak1k-299` at the tip:
+  **exactly one** town reaches the limb — **soak1k-9** (town, arabic, hills, river route,
+  criminal state `corrupted`, holder Town hall), the first. A13 re-seated on it by identity
+  (born through `soak-review/corpus.mjs :: birth`, the laws loaded once), the cause named in a
+  comment beside it. Red at the tip before the edit (1 failed), the whole file green after
+  (84 of 84).
+- **Found, NOT re-keyed (outside R2; the chair rules):**
+  1. The SAME fixture town (`tests/fixtures/tasteTowns.js :: INTERESTED_TOWNS` 'captured' =
+     rate-11-9) carries four more pins moved by the same cause, green at master `a07ee4e0a`,
+     red at this tip: `proseTasteInterested.walker` "prints the per-kind table …" and "the
+     taste's own row is INTERESTED on the captured town …"; `proseWaveGate.walker` (d)
+     "composes the captured town and the clean control …" and "THE TWO RENDERINGS DIFFER IN
+     EXACTLY ONE WAY". The fixture is a `{seed, config}` pipeline spec, so soak1k-9 (born
+     through `birthConfig` and the laws) does not drop into it as-is; the honest re-key is a
+     RATE-grid town that still reaches the limb, or a fixture shape that can carry a soak birth.
+     `scripts/taste-holders.mjs` and `scripts/prose-wave-gate.mjs` read the same fixture.
+  2. Unit 3 moved two holder-table citations: `proseWiringCensus.walker` "EVERY MAPPING ROW IS
+     CITED TO A PRODUCER THE TREE STILL CARRIES" reds on `viable -> viability.js:588` and
+     `criticalIssueCount -> viability.js:608`; the writes now sit at **:586** and **:606**.
+     The fix is two digits in `src/domain/prose/holderTable.js :: HOLDER_SOURCES` (verified
+     green with it); not committed because that file was not read whole by this seat.

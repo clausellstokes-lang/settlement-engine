@@ -49,6 +49,7 @@ import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { DOSSIER_RELATIONS } from '../../src/data/dossierRelations.generated.js';
 import { capturedRulingStructure, HOLDER_RECORDS, sourceOfForTown } from '../../src/domain/prose/holderTable.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { birth, ensureLaws } from '../../scripts/audit/soak-review/corpus.mjs';
 import { INSTITUTION_SERVICES } from '../../src/data/institutionServices.js';
 import { FACTION_ROLES } from '../../src/generators/factionRoles.js';
 import * as ROLE_CATALOG from '../../src/generators/npc/factionRoleCatalog.js';
@@ -1181,28 +1182,28 @@ describe('A13 — the PROVENANCE move, EXECUTABLE since the holder census landed
   // What changed at car 5c is that the TOWN path can now mint INTERESTED from a typed birth
   // fact, so the limb is reachable on real input and this arm reaches it with one.
   //
-  // ⚠ THE TOWN AND THE VARIANT ARE BOTH NAMED, AND BOTH ARE SHIPPED. The town is a rateGrid
-  // spec quoted with its seed; the variant is a real citing variant of the real corpus whose
-  // census row resolves to the TREASURY — a state organ. 17 of the 768 RATE towns put this
-  // exact row into INTERESTED, so the arm sits on a measured population and not on a
-  // coincidence.
-  const CAPTURED_TREASURY_TOWN = Object.freeze({
-    config: {
-      settType: 'town',
-      tradeRouteAccess: 'road',
-      monsterThreat: 'random_threat',
-      culture: 'germanic',
-      terrainOverride: 'hills',
-    },
-    // rate-9-2 -> rate-11-9 on 2026-09-30, with tests/fixtures/tasteTowns.js INTERESTED_TOWNS: the
-    // same-seed shift left rate-9-2's Town hall without a tax service (urban band, ODQ §934.86).
-    seed: 'rate-11-9',
-  });
+  // ⚠ THE TOWN AND THE VARIANT ARE BOTH NAMED, AND BOTH ARE SHIPPED. The town is a soak-corpus
+  // town named by its index and seed; the variant is a real citing variant of the real corpus
+  // whose census row resolves to the TREASURY — a state organ. Before the re-key below, 17 of
+  // the 768 RATE towns put this exact row into INTERESTED; after it, 1 of the first 300 soak
+  // towns does, so the arm sits on a measured (and now rare) population, not a coincidence.
+  // RE-KEYED BY IDENTITY, WITH ITS CAUSE (lane REVIEW-INTAKE-2, chair ruling R2, 2026-11-06):
+  // rate-11-9 no longer reaches the limb. Cause: "a proxy is not a provider" (REVIEW-INTAKE
+  // unit 2) — the former proxy hosts (a Housing row, the Dwellings) roll their own one-row
+  // menu instead of an inn's five, so every later roll of the service stream forks, and on
+  // rate-11-9 the treasury row now resolves LICENSED. The arm is re-seated on the FIRST town of
+  // the soak corpus (`scripts/audit/soak-review/corpus.mjs`, soak1k-0 onward) on which the limb
+  // is still reached: soak1k-9 (a corrupted hills town whose Town hall holds the treasury; the
+  // only one of soak1k-0..299). The composed tip may move it again; that re-key is the
+  // landing seat's.
+  const CAPTURED_TREASURY_TOWN = Object.freeze({ soakIndex: 9, seed: 'soak1k-9' });
 
-  it('⭐⭐ THE FAIL LIMB IS REACHABLE ON REAL INPUT: a citing variant whose holder this town has captured', () => {
-    const town = generateSettlementPipeline(
-      CAPTURED_TREASURY_TOWN.config, null, { seed: CAPTURED_TREASURY_TOWN.seed, customContent: {} },
-    );
+  it('⭐⭐ THE FAIL LIMB IS REACHABLE ON REAL INPUT: a citing variant whose holder this town has captured', async () => {
+    // Born exactly as the soak births it (the laws loaded once, then `birthConfig`).
+    await ensureLaws();
+    const born = birth(CAPTURED_TREASURY_TOWN.soakIndex);
+    expect(born.seed, 'the soak index names the seed the arm is pinned to').toBe(CAPTURED_TREASURY_TOWN.seed);
+    const town = born.settlement;
     expect(capturedRulingStructure(town).criminal, 'the named town\'s ruling structure is corrupted').toBe('corrupted');
     // A REAL SHIPPED CITING VARIANT, found in the corpus rather than written here.
     const entry = corpus.find((row) => row.block === 'DS-GEN-11'
