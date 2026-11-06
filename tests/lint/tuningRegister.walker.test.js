@@ -3,9 +3,11 @@
  *
  * ⛔⛔ THE VALUES IN THIS ESTATE ARE THE OWNER'S, AND NOTHING HERE PROPOSES ONE.
  * This walker measures the tuning estate and refuses writes. It does not tune. Every row of
- * the declared register lands `draft`, `signatureVersion` is 0, and a row becomes `signed`
+ * the declared register lands `draft`, `signatureVersion` starts at 0, and a row becomes `signed`
  * only through the refreeze ritual driven by a signing record the owner wrote at the tuning
- * sitting — the carve-out by nature that no delegation covers (THE PROMISE; §763.1).
+ * sitting — the carve-out by nature that no delegation covers (THE PROMISE; §763.1). The first
+ * such record is docs/tuning-signatures/2026-11-06-v1.json (Register VII, v1, ODQ §934.105):
+ * the ritual, naming it, applied it through `applySigningRecord` and wrote the declared register.
  *
  * ⭐ STATE YOUR SURFACE BEFORE YOUR ARMS (FOLD 25). Three populations, every measurement a
  * TEXT measurement over `codeOnly`-stripped source:
@@ -36,6 +38,7 @@
  * is report-only and has no `--update`.
  *
  *   TUNING_INVENTORY_REFREEZE='<seat>' TUNING_INVENTORY_NOTE='<why it moved>' \
+ *     [TUNING_SIGNATURE_RECORD=docs/tuning-signatures/<date>-v<N>.json] \
  *     npx vitest run tests/lint/tuningRegister.walker.test.js
  *
  * ⭐ AND IT EXITS NON-ZERO ON SUCCESS, BY DESIGN. A mode that both rewrites a register and
@@ -62,6 +65,7 @@ import {
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const INVENTORY_PATH = join(ROOT, INVENTORY_REL);
+const REGISTER_PATH = join(ROOT, REGISTER_REL);
 
 /**
  * THE SIX CEILINGS. Every one is a banked MEASUREMENT, never a guess and never a target:
@@ -126,6 +130,24 @@ function refreezeInventory(measured) {
   if (!verdict.ok) {
     throw new Error(`tuning inventory refreeze REFUSED [${verdict.refusal}] — ${verdict.detail}`);
   }
+  // ⭐ THE SIGNING HALF OF THE RITUAL (first exercised 2026-11-06, Register VII v1, ODQ §934.105).
+  // When the run names a record, the record is applied through `applySigningRecord` — the ONE
+  // path that may ever write `status: 'signed'` — and the DECLARED register is written beside
+  // the measured inventory: the named rows signed at version N, `signatureVersion` N, and the
+  // `signatures[N-1]` entry carrying the owner's words, the seat, the row and the digests frozen
+  // at this tip. The next register is computed IN FULL before any byte is written, so a refused
+  // record (blank fields, a version out of sequence, an id with no row, no unit, or module-side)
+  // writes nothing at all. The declared file goes first, so an inventory whose `measuredAtSha`
+  // names this tip never exists without the signature it was measured beside.
+  let signedRegister = null;
+  if (process.env.TUNING_SIGNATURE_RECORD) {
+    const record = JSON.parse(readFileSync(join(ROOT, process.env.TUNING_SIGNATURE_RECORD), 'utf8'));
+    const applied = applySigningRecord({ register, inventory: measured, record });
+    if (!applied.ok) {
+      throw new Error(`tuning signature REFUSED [${applied.refusal}] — ${applied.detail}`);
+    }
+    signedRegister = applied.register;
+  }
   const next = {
     _doc: committed?._doc ?? [
       'THE MEASURED TUNING INVENTORY — MACHINE-WRITTEN, NEVER HAND-EDITED.',
@@ -141,11 +163,20 @@ function refreezeInventory(measured) {
     note: process.env.TUNING_INVENTORY_NOTE.trim(),
     ...measured,
   };
+  if (signedRegister) {
+    const signing = `${REGISTER_PATH}.sign-${process.pid}`;
+    writeFileSync(signing, `${JSON.stringify(signedRegister, null, 2)}\n`, 'utf8');
+    renameSync(signing, REGISTER_PATH);
+  }
   const temporary = `${INVENTORY_PATH}.refreeze-${process.pid}`;
   writeFileSync(temporary, `${JSON.stringify(next, null, 2)}\n`, 'utf8');
   renameSync(temporary, INVENTORY_PATH);
+  const signedNote = signedRegister
+    ? ` SIGNED at tuning-register v${signedRegister.signatureVersion}: ${signedRegister.signatures.at(-1).ids.length} ids,`
+      + ` ${signedRegister.signatures.at(-1).odqRow}, by ${signedRegister.signatures.at(-1).signedBy}.`
+    : '';
   throw new Error(`tuning inventory REFROZEN at ${next.measuredAtSha} by ${next.measuredBy}:`
-    + ` ${next.totals.tables} tables, ${next.totals.unregisteredNamed} named, ${next.totals.bareDecimals} bare.`
+    + ` ${next.totals.tables} tables, ${next.totals.unregisteredNamed} named, ${next.totals.bareDecimals} bare.${signedNote}`
     + ' This run fails BY DESIGN so a refreeze can never be mistaken for a passing gate —'
     + ' re-run this walker without TUNING_INVENTORY_REFREEZE, and THAT green is the proof.');
 }
