@@ -228,8 +228,10 @@ describe('the wiring census — TOTALITY over the corpus', () => {
     // read. Sweep plant #84 makes the pair non-vacuous by execution: the literal rung
     // returning `predicate: []` unconditionally reds these two and leaves the split above
     // green, which is exactly the blindness plant #80 cannot see.
-    expect(summary.resolvedWithPredicate, 'RESOLVED rows carrying at least one predicate row').toBe(207);
-    expect(summary.resolvedWithCleanPredicate, 'and of those, every row a readable comparison').toBe(207);
+    // 208 AND NOT 207 SINCE LANDING-7 lane F (R-F1): `magicDependencyPoolKey`'s absent pool is
+    // returned from an `if (magicAbsent)` now, not a returned ternary, so its guard is recovered.
+    expect(summary.resolvedWithPredicate, 'RESOLVED rows carrying at least one predicate row').toBe(208);
+    expect(summary.resolvedWithCleanPredicate, 'and of those, every row a readable comparison').toBe(208);
     expect(summary.resolvedWithPredicate, 'a rung reached is never fewer than a predicate read')
       .toBeLessThanOrEqual(summary.resolved);
     expect(summary.resolvedWithCleanPredicate).toBeLessThanOrEqual(summary.resolvedWithPredicate);
@@ -279,7 +281,9 @@ describe('the census printed BESIDE the composed-fill census (report-only)', () 
     // is to say they could drift under any rebase and the gate would print the drift.
     expect(summary.slotless.length, 'pools naming a slot the block\'s bag never fills').toBe(65);
     expect(summary.bagless.length, 'pools in a block with no bag at all').toBe(140);
-    expect(summary.predicatesOverUnreadFields.length, 'predicates over a field no composer holds').toBe(99);
+    // 100 AND NOT 99 SINCE LANDING-7 lane F (R-F1): that recovered guard is over the bare
+    // parameter `magicAbsent`, which no composer holds as a field (as `magicDependency` is not).
+    expect(summary.predicatesOverUnreadFields.length, 'predicates over a field no composer holds').toBe(100);
     expect(summary.syntheticTableFields, 'and the table rung\'s own labels, counted apart').toBe(100);
   });
 });
@@ -647,7 +651,8 @@ describe('THE MAP READ THE OTHER WAY — fact → text, and the three tiers', ()
     const facts = factIndex(spines);
     // 63 AND NOT 59 SINCE SEAM car 3h: DS-DEF-2's four exposed key tables add four synthetic
     // table labels to the inverse, one per table, and no ordinary reading moved with them.
-    expect(facts.length, 'distinct readings a key function conjoins, at this tip').toBe(63);
+    // 64 AND NOT 63 SINCE LANDING-7 lane F (R-F1): `magicAbsent`, DS-DEF-9's absent pool's own guard.
+    expect(facts.length, 'distinct readings a key function conjoins, at this tip').toBe(64);
     const poolsNamed = new Set(facts.flatMap((f) => f.pools));
     const resolvedWithFields = spines.filter((r) => r.predicate.length > 0);
     expect(poolsNamed.size, 'every pool with a recovered predicate appears in the inverse')
@@ -1020,7 +1025,9 @@ describe('car 0 — `absent`: a measurement, or a default wearing a reading\'s c
     // standing proseWiringCensus reds (the stale-bytes verdict and the holder register).
     expect(totals.measured, 'read paths whose absence a predicate can see').toBe(373);
     expect(totals.default, 'read paths where a fallback hides it').toBe(3);
-    expect(totals['not-produced'], 'read paths no writer in the estate produces').toBe(59);
+    // 61 AND NOT 59 SINCE LANDING-7 lane F (R-F1): DS-DEF-9's two `false` pools now read the bare
+    // parameter `magicAbsent` at the branch grain, a read path no writer produces.
+    expect(totals['not-produced'], 'read paths no writer in the estate produces').toBe(61);
     // ⭐ THE FOURTH LABEL, ADDED AT MEASURE CAR 3 (the fold's cure 8, and the shape its P5
     // found in the pair table). A chain whose TAIL is a JS method — `eco.incomeSources.reduce`,
     // `readings.notableAbsences.map` — records a CALL the key function made on a reading, not a
@@ -1028,7 +1035,7 @@ describe('car 0 — `absent`: a measurement, or a default wearing a reading\'s c
     // eighteen cells, and every one of them was a wrong verdict rather than a finding.
     expect(totals['method-call'], 'read paths whose tail is a builtin, not a field').toBe(18);
     expect(Object.values(totals).reduce((a, b) => a + b, 0), 'and the four labels partition the read paths')
-      .toBe(453);
+      .toBe(455);
     // ⛔ THE TABLE RUNG CARRIES NO ABSENCE RECORD (car 10, cure 4, applied to a new column).
     // Rung 3's field is `"<reader> (via <TABLE> in <file>)"` — this instrument's own label —
     // so asking a producer index about it answers `not-produced` on every table row BY
@@ -1413,11 +1420,12 @@ describe('car 0 — the derived ATTACH sets, their coverage, and the fact budget
     // §6.3 works its whole example — is one: `country: pressed (walled)` attaching to
     // STRAINED is reachable at this grain and was not at the last.
     const dark = coverage.filter((c) => c.spinesReachedBp === 0).map((c) => c.block);
-    expect(dark.length, 'blocks where no fact of the block can attach to any spine of it').toBe(22);
+    expect(dark.length, 'blocks where no fact of the block can attach to any spine of it').toBe(21);
     expect(committed.grains.function.cannotAttach.length, 'against the grain the ruling replaced').toBe(25);
     expect(committed.grains.function.cannotAttach.filter((b) => !dark.includes(b)),
-      'and these three are what the branch grain buys (DS-DEF-9 went dark with F9 READER-CONTRADICTIONS\' absent-state pool, LANDING-1)')
-      .toEqual(['DS-DEF-11', 'DS-ECO-9', 'DS-POW-3']);
+      'and these four are what the branch grain buys (DS-DEF-9 went dark with F9 READER-CONTRADICTIONS\' absent-state pool at LANDING-1,'
+      + ' and came back at LANDING-7 lane F when that pool\'s `magicAbsent` test became an `if` the branch reader sees)')
+      .toEqual(['DS-DEF-11', 'DS-DEF-9', 'DS-ECO-9', 'DS-POW-3']);
     expectAbsentWithAnchor(dark, 'DS-DEF-11', 'DS-STR-1', 'the blocks that cannot compose');
     // ⭐⭐ AND DS-DEF-2 HAS LEFT THE DARK SET (SEAM car 3h) — A WIRING ACT, NEVER A GRAIN ONE.
     // At the last tip 22 of its 26 pools were WIRING-UNRESOLVED and the 4 that resolved were
@@ -1583,7 +1591,9 @@ describe('car 0 — mounts per fact, custom reachability, and the relation table
     // so the census keeps `magicDependencyPoolKey`'s parameter name `magicDependency` as the read.
     // It still resolves to the muster holder by name (no licensed row moves); `settlement` stays a
     // root through other reads; `magicDependency` is the one new root.
-    expect(join.deskRoots, 'the desks read this many distinct field roots').toBe(91);
+    // 92 AND NOT 91 SINCE LANDING-7 lane F (R-F1): the same function's third parameter,
+    // `magicAbsent`, reaches the branch grain through its `if`; it is the one new root.
+    expect(join.deskRoots, 'the desks read this many distinct field roots').toBe(92);
     expect(join.strictBoth, 'rows a projector could license today').toBe(0);
     expect(join.strictEither, 'and rows sharing even ONE endpoint with a desk read').toBe(0);
     expect(join.leafBoth, 'nor does a leaf-level normalisation reach a row').toBe(0);
@@ -1818,19 +1828,21 @@ describe('SEAM car 5b — THE HOLDER CENSUS: the source of each construction (SI
     // `settlement.config.tradeRouteAccess` and is now the unresolved `tradeAccess`. The total
     // of 611 below does not move.
     expect(summary.fields, 'FIELDS by source standing').toEqual({
-      LICENSED: 191, OFFICE: 5, 'SOURCE-UNRESOLVED': 417,
+      LICENSED: 191, OFFICE: 5, 'SOURCE-UNRESOLVED': 419,
     });
     expect(Object.values(summary.rows).reduce((a, b) => a + b, 0),
       'and every pool lands in exactly one row standing').toBe(spines.length);
     expect(Object.values(summary.fields).reduce((a, b) => a + b, 0),
-      'over this many sourced field entries').toBe(613);
+      'over this many sourced field entries').toBe(615);
     expect(summary.twoSourceRows, 'rows whose fields resolve to more than one kind').toBe(10);
     expect(summary.rowsWithNoReading, 'and rows the census recovered no reading for at all').toBe(368);
     // THE TWO UNRESOLVED GROUNDS STAY APART: a field no mapping row names is a different debt
     // from a kind with no institution behind it, and collapsing them would hide which is which.
     // 416 and toll-bar 12 (not 415 and 13) since lane DEFENSE's 0b2548de5: the same one field
     // entry of DS-GEN-6 :: isolated, traced at 'FIELDS by source standing' above.
-    expect(summary.unresolvedGrounds).toEqual({ 'no-mapping': 417, 'no-institution-in-roster': 0 });
+    // 419 / 615 AND NOT 417 / 613 SINCE LANDING-7 lane F (R-F1): DS-DEF-9's two `false` pools each
+    // gain the field entry `magicAbsent`, which no mapping row names. No row's standing moves.
+    expect(summary.unresolvedGrounds).toEqual({ 'no-mapping': 419, 'no-institution-in-roster': 0 });
     expect(summary.byKind, 'the licensed field count per kind').toEqual([
       ['muster', 62], ['market', 49], ['treasury', 22], ['court', 21], ['toll-bar', 12],
       ['watch', 9], ['road', 7], ['elders', 5], ['office', 5], ['parish', 4],

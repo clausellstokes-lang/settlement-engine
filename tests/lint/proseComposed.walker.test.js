@@ -24,6 +24,28 @@
  * rather than as an exact integer, because a heuristic pinned exactly becomes a re-record every
  * car pays and nobody reads.
  *
+ * ── OWED (LANDING-7 R-F5, the byte ceiling's idiom, rule 38): the under-claim ceiling is
+ * 1,282 + 26 = 1,308, and the 26 are OWED, not forgiven. 26 under-claims owed by the pools
+ * whose declared reads exceed what their lines say; bought back by the census wave that narrows
+ * per-line reads for the economics, axis, score and war surfaces (DESIGN_POOL_CENSUS §4.2 steps
+ * 4–5). Cause: F10's WALLS-WORD twins (`4a49ae5bb`) inherit their pools' per-line debt — each
+ * fails on the same ordinary fields (`eco.*`, `axis`, `score`, `war.status.*`) that three to
+ * five unmarked sibling lines of its pool also fail on (+25), with +3 / +1 / +1 positive reads
+ * beside them, less R-F4's one silence and R-F6's one reword. The arm prints the owed figure
+ * beside the ceiling on every run; the buy-back lowers OWED, never the base.
+ *
+ * ── A DECLARED ABSENCE IS CLAIMED BY SILENCE (LANDING-7 R-F4) ──────────────────────
+ * A0b's under-claim limb reads "the text claims every declared field", which is right for a
+ * POSITIVE declaration and wrong for a NEGATIVE one: a line declaring a fact ABSENT is claimed
+ * by not naming it. `composedWalker.js` states the two typed shapes in its header (an
+ * absence-named field the predicate holds truthy; an authored `no <fact>` mark on the variant).
+ * Such a field is answered on the REPORT channel as `claimed by silence`, counted and printed
+ * below, never filtered; plants convict both shapes' positive twins. Measured at R-F4's landing
+ * it answers ONE row (DS-DEF-9's `availability absent` pool); the WALLS-WORD twins' under-claims
+ * are all POSITIVE reads of their pools, so the `no walls` shape answers none of them. R-F6
+ * then reworded that one row's line (vid 2) to name the dependency it reads, so on the shipped
+ * corpus the rule answers NONE today; plants 4 and 5 hold it.
+ *
  * @enforced-by scripts/mutation-sweep.sh (plant 97)
  */
 import { readFileSync } from 'node:fs';
@@ -348,6 +370,53 @@ describe('A0b — the text claims every declared field and no other', () => {
     expect(negation[0].description).toMatch(/discriminates on a fact it does not state/);
   });
 
+  it('⛔ PLANT 4 — AN ABSENCE IS CLAIMED BY SILENCE, and only an absence (R-F4)', () => {
+    // A line reached only where magic is ABSENT says nothing of magic, and that is its whole
+    // point: the field is answered on the REPORT channel, never as an under-claim.
+    const absent = armA0b({
+      id: 'absent',
+      text: 'Nobody here works wards for a living.',
+      reads: ['magicAbsent'],
+      universe: ['magicAbsent'],
+      predicate: [{ field: 'magicAbsent', op: 'truthy', value: '(no literal)' }],
+    });
+    expect(absent.fails).toEqual([]);
+    expect(absent.reports.map((f) => `${f.subject}:${f.value}`))
+      .toEqual(['claimed by silence:magicAbsent (magicAbsent held truthy)']);
+    // ⛔ THE POSITIVE TWIN: the SAME field with no predicate holding it truthy declares nothing
+    // absent, so its silence is an under-claim exactly as before.
+    const unheld = armA0b({ id: 'unheld', text: 'Nobody here works wards for a living.', reads: ['magicAbsent'], predicate: [] });
+    expect(unheld.fails.map((f) => `${f.subject}:${f.value}`)).toEqual(['under-claim:magicAbsent']);
+    // ⛔ A POSITIVE FIELD HELD TRUTHY IS NOT AN ABSENCE, whatever the predicate says.
+    const positive = armA0b({
+      id: 'positive', text: 'The town is quiet.', reads: ['walls'],
+      predicate: [{ field: 'walls', op: 'truthy', value: '(no literal)' }],
+    });
+    expect(positive.fails.map((f) => f.subject)).toEqual(['under-claim']);
+  });
+
+  it('⛔ PLANT 5 — the authored `no <fact>` twin excludes its fact, and nothing else', () => {
+    const twin = (marks) => armA0b({
+      id: 'twin', text: 'The stores are sealed off.', reads: ['forces.walls.present', 'eco.stockpile'], marks,
+    });
+    // The wall-free twin is silent on walls by construction: claimed by silence.
+    expect(twin(['no walls']).reports.map((f) => f.value)).toEqual(['forces.walls.present (mark `no walls`)']);
+    // ...but a POSITIVE read of its pool the text never makes is still the twin's under-claim.
+    expect(twin(['no walls']).fails.map((f) => `${f.subject}:${f.value}`)).toEqual(['under-claim:eco.stockpile']);
+    // ⛔ AND THE SIBLING MARKED `walls` CLAIMS NOTHING BY SILENCE.
+    expect(twin(['walls']).reports).toEqual([]);
+    expect(twin(['walls']).fails.map((f) => f.value)).toEqual(['forces.walls.present', 'eco.stockpile']);
+  });
+
+  it('⛔ AN ABSENCE THE PREDICATE HOLDS FALSE STAYS AN IMPLICIT NEGATION — the limb is read first', () => {
+    const out = armA0b({
+      id: 'neg', text: 'The town is quiet.', reads: ['walls'], marks: ['no walls'],
+      predicate: [{ field: 'walls', op: 'falsy', value: '(no literal)' }],
+    });
+    expect(out.fails.map((f) => f.subject)).toEqual(['implicit-negation']);
+    expect(out.reports).toEqual([]);
+  });
+
   it('NOT-EXECUTABLE twice over, each naming its own column', () => {
     const noReading = armA0b({ id: 'none', text: 'The walls stand.', reads: [] });
     expect(noReading.fails).toEqual([]);
@@ -363,10 +432,20 @@ describe('A0b — the text claims every declared field and no other', () => {
   });
 
   it('⭐ THE SHIPPED CORPUS READING, printed and held SHRINK-ONLY', () => {
+    // ⛔ THE UNDER-CLAIM CEILING IS RE-KEYED WITH ITS CAUSE, NEVER SILENTLY RAISED (LANDING-7
+    // R-F5). 1,282 is the debt as it stood before the window; the 26 above it are F10's
+    // WALLS-WORD twins inheriting their pools' per-line debt (the twins fail on the same
+    // `eco.*` / `axis` / `score` / `war.status.*` fields as their unmarked siblings), and they
+    // are OWED to the census wave that narrows per-line reads (DESIGN_POOL_CENSUS §4.2 steps
+    // 4–5). The ceiling is the base plus the owed figure, both printed; a buy-back lowers OWED.
+    const UNDER_CLAIM_BASE = 1282;
+    const UNDER_CLAIM_OWED = 26;
+    const UNDER_CLAIM_CEILING = UNDER_CLAIM_BASE + UNDER_CLAIM_OWED;
     const tally = {
       'over-claim': 0, 'under-claim': 0, 'implicit-negation': 0,
     };
     let notExecutable = 0;
+    let silent = 0;
     /** @type {Set<string>} */
     const pools = new Set();
     for (const entry of corpus) {
@@ -377,18 +456,23 @@ describe('A0b — the text claims every declared field and no other', () => {
         reads: row ? row.reads : [],
         universe: row ? row.fieldsRead : [],
         predicate: row ? row.predicate : [],
+        // R-F4: the variant's own marks, so an authored `no <fact>` twin is read as one.
+        marks: entry.marks,
       });
       for (const finding of out.fails) {
         tally[finding.subject] += 1;
         pools.add(finding.id);
       }
+      silent += out.reports.filter((finding) => finding.subject === 'claimed by silence').length;
       notExecutable += out.notExecutable.length;
     }
     console.log(`\nA0b · the AUTHORING debt on the shipped corpus, before a byte of the rewrite moves`
       + `\n  variants walked      ${corpus.length}`
       + `\n  over-claims          ${tally['over-claim']}`
-      + `\n  under-claims         ${tally['under-claim']}`
+      + `\n  under-claims         ${tally['under-claim']}   ceiling ${UNDER_CLAIM_CEILING}`
+      + ` = ${UNDER_CLAIM_BASE} + ${UNDER_CLAIM_OWED} OWED (R-F5: the census wave buys them back)`
       + `\n  implicit negations   ${tally['implicit-negation']}`
+      + `\n  absences claimed by silence (R-F4, REPORT) ${silent}`
       + `\n  NOT-EXECUTABLE reads ${notExecutable}   pools carrying a finding ${pools.size}\n`);
     // NON-VACUITY FIRST: an arm reporting nothing on 2,266 variants has stopped reading.
     expect(tally['under-claim']).toBeGreaterThan(0);
@@ -396,7 +480,7 @@ describe('A0b — the text claims every declared field and no other', () => {
     // SHRINK-ONLY, and NOT an exact pin. The rewrite wave pays this debt down; a car that
     // ADDS a claim the census does not license reds here on the day it lands.
     expect(tally['over-claim']).toBeLessThanOrEqual(55);
-    expect(tally['under-claim']).toBeLessThanOrEqual(1282);
+    expect(tally['under-claim']).toBeLessThanOrEqual(UNDER_CLAIM_CEILING);
     expect(tally['implicit-negation']).toBeLessThanOrEqual(13);
     expect(pools.size).toBeLessThanOrEqual(240);
   });

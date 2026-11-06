@@ -2304,7 +2304,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no walls"
           ],
-          "text": "The stores are sealed off from the road. What is already in the town is what the town has, and no count is being added to it.",
+          "text": "The stores are sealed off, and the road brings nothing more to them. What is already in the town is what the town has, and no count is being added to it.",
           "slots": [],
           "vid": 4
         }

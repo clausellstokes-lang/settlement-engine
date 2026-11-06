@@ -1277,7 +1277,7 @@ sentence in two voices. **No named deaths.**
 1. `[ledger · walls]` The stores are sealed off from the road. What is inside the walls is what the town has, and no count is being added to it.
 2. `[street]` Nothing is coming in. The granary is the whole of the argument now and everybody is doing the same arithmetic.
 3. `[unfolding]` {settlement} is cut off from its supply and eating down what it holds. The stores are answering the siege in place of the fields.
-4. `[ledger · no walls]` The stores are sealed off from the road. What is already in the town is what the town has, and no count is being added to it.
+4. `[ledger · no walls]` The stores are sealed off, and the road brings nothing more to them. What is already in the town is what the town has, and no count is being added to it.
 
 **BLOCKADE BYPASSED** *(provenance-bearing; the covert variant is `dm-only`)*
 1. `[counterforce]` {settlement} is cut off and is still being fed. Something is getting past the line, not much of it, and enough to keep the counts from collapsing.
@@ -3244,7 +3244,7 @@ relied on by nothing.
 
 **`magicDependency` false, availability absent**
 1. `[ledger]` No one works magic at {settlement}, and nothing in the town depends on it.
-2. `[street]` Nobody at {settlement} casts, brews or wards for a living, and nothing in the town waits on anyone who does.
+2. `[street]` Nobody at {settlement} casts, brews or wards for a living, and nothing in the town leans on magic.
 3. `[visitor]` A stranger who comes to {settlement} looking for magic finds none, and finds nothing that misses it.
 
 ---
