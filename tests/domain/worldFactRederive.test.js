@@ -412,10 +412,11 @@ describe('EM-B2b — world facts by consequence: the route, the refusals and the
     // Then record 34 of the rung-1 landing, THE FOOD PER CENT FROM THE POUNDS (ODQ §934.105;
     // docs/shift-records/2026-11-06-rung1-34-food-per-cent-from-pounds.json), through the signed door by LANDING-8 from
     // the stage at 18fd6b442: the generator master 26a02855.. -> e7e8a6ff.. (77 of 525 rows); restated in the same act.
+    // The same record's second act: the prose manifest d43a3ae2.. -> 777e4b4b.. (24 of 1,050 rows, village|*|coastal|port).
     expect(shaOfFile(GOLDEN), 'tests/fixtures/generator-golden-master.json moved')
       .toBe('e7e8a6ff2cec9ab63bf363335c2ea3563c9f984dfaddd32a643dcc1bda60b457');
     expect(shaOfFile(PROSE_GOLDEN), 'tests/fixtures/dossier-prose-manifest-golden.json moved')
-      .toBe('d43a3ae263acd4a5606a4e2be1e0aea55859ffd61a424bb7d87fb6fae130dece');
+      .toBe('777e4b4b2968fab6b02a758435c7dcc8c779753942aeab77c4ae8c261e6d990e');
 
     // AND THE REASON THEY CANNOT MOVE: fresh generation passes no layer, so no world fact is ever
     // routed and `config′` is `config` itself. Measured against the committed manifest.
