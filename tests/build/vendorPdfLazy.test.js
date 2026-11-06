@@ -562,7 +562,7 @@ const requireDistRead = process.env.VERIFY_DIST === '1';
 // terms with their costs): **"do what you recommend"** — and the recommendation on the table
 // was this raise. Ledger §880.8; the seam is RECORDED AS PRICED AND NOT TAKEN, its prototype
 // kept out of the tree. Monotone-down and owner-signed discipline unchanged.
-const CLOSURE_BUDGET_BYTES = 1_037_485; // 2026-11-04: banked DOWN to the measured final-tip closure, REGISTERS door 13 (note at file end)
+const CLOSURE_BUDGET_BYTES = 1_042_033; // 2026-11-06: re-recorded AT the measured landing-tip closure, LANDING-8, a vetoable rise of 4,548 B (note at file end)
 // Transfer budgets measure each fetched chunk independently, matching CDN
 // compression rather than compressing an artificial concatenation. Recorded
 // 2026-07-24 from the seven-file closure: raw 1,034,954; gzip 321,341;
@@ -1766,7 +1766,7 @@ describe.runIf(distExists)('ARCH car 2 — the corpus rides data-lazy, and that 
 // ratification histories above each constant are the record of what that costs.
 describe('ARCH car 2 — the three first-paint budgets stay where the owner signed them', () => {
   it('the raw, gzip and Brotli closure budgets are unmoved', () => {
-    expect(CLOSURE_BUDGET_BYTES, 'the raw first-paint budget moved').toBe(1_037_485);
+    expect(CLOSURE_BUDGET_BYTES, 'the raw first-paint budget moved').toBe(1_042_033); // LANDING-8, 2026-11-06 (note at file end)
     expect(CLOSURE_GZIP_BUDGET_BYTES, 'the gzip transfer budget moved').toBe(336_286);
     expect(CLOSURE_BROTLI_BUDGET_BYTES, 'the Brotli transfer budget moved').toBe(282_346);
 
@@ -1881,3 +1881,16 @@ describe('ARCH car 2 — the three first-paint budgets stay where the owner sign
 // two compressed budgets are the measured closure x 1.015, rounded up to the byte: gzip 331,316 -> 336,286, Brotli
 // 278,173 -> 282,346. Both stay BELOW the 2026-09-01 figures (337,000 / 283,000), so nothing is raised against an
 // owner-signed ceiling. The raw budget stays at the measured 1,037,485. The ARCH car 2 pin moves with them.
+// ── (2026-11-06, THE RUNG-1 LANDING'S PROOF, LANDING-8 under the chair's brief LANDING-8 unit 4) THE RAW BUDGET RE-RECORDED
+//    AT THE MEASURED CLOSURE, 1,037,485 -> 1,042,033: A RISE OF 4,548 B, VETOABLE BY THE OWNER (with its ARCH car 2 pin) ──
+// A rise stays the owner's (rule 33, §P11.2); this one stands on the chair's brief under the owner's delegation of 2026-11-06
+// until the owner's word. MEASURED with this file's own closure walk over a fresh `vite build` of a git archive at every
+// src-moving first-parent step from 5dd0f323a to the landing base 3d8a74e4b, and of the staged tree at every LANDING-7 step:
+//   at 5dd0f323a the closure read 1,117,542 (the rung-1 window's 33 new domain imports, FIRSTPAINT-2's own figure);
+//   c5c7454a7 +24 · 3b93b9057 (hasMarketInstitution and the faction role catalogue to domain) +2,930 · bc2a64000 +5 ·
+//   c1cf38bbb (the V-SUMMARY-HOOKS cure) +1,192 -> 1,121,693, FIRSTPAINT-2's figure reproduced exactly; then FIRSTPAINT-2
+//   970adf01d -79,692 -> 1,042,001 at 69a7d7000 and at the base. So the base itself sat 4,516 B over this budget: the rung-1
+//   window's net +365 after FIRSTPAINT-2's excision (80,057 - 79,692) plus the four steps above (+4,151).
+//   LANDING-7: lane E 471780f4a +37 · lane H 18fd6b442 -5 · lanes B, C, D, F, G, G3, F2-4, A 0. 1,042,033 at the tip, the
+//   same eight chunks. The sum closes exactly: 1,037,485 + 4,516 + 32 = 1,042,033. The gzip and Brotli budgets are NOT moved
+//   (both green at the tip). The budget is recorded AT the measured figure. Monotone-down from here; raises stay owner-signed.

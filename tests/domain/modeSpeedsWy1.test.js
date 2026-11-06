@@ -522,7 +522,11 @@ describe('WY-1 A6 — the port program\'s flag is not read by any WY-1 code (a t
 describe('WY-1 A7 — the DRAFT tuning rows exist, unsigned, with every leaf united', () => {
   it('both tables carry a draft row whose unit map covers every leaf', () => {
     const register = JSON.parse(readFileSync(join(ROOT, 'tests/lint/.tuning-register.json'), 'utf8'));
-    expect(register.signatureVersion).toBe(0);
+    // The register has been at v1 since the owner's record of 2026-11-06 (Register VII, ODQ
+    // §934.105); the claim here is about THESE rows: no signature names them.
+    const signedIds = (register.signatures ?? []).flatMap((entry) => entry.ids);
+    expect(signedIds).not.toContain('src/domain/spatial/modeSpeeds.js#MODE_SPEED_TUNING');
+    expect(signedIds).not.toContain('src/domain/spatial/modeSpeeds.js#KM_SCALE_TUNING');
     const mode = register.tables['src/domain/spatial/modeSpeeds.js#MODE_SPEED_TUNING'];
     const scale = register.tables['src/domain/spatial/modeSpeeds.js#KM_SCALE_TUNING'];
     for (const row of [mode, scale]) {

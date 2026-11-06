@@ -189,6 +189,51 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * AND NOWHERE ELSE. Most recently at the ENGINE-HYGIENE landing (SHIFT RECORD,
  * 2026-09-01, TE-AGNOSTIC-1 cars `f2c1ad181` / `97d119c9b`); before that at T8.
  *
+ * ── 2026-11-06, THE VILLAGE WATCH'S ROTA PRESUMES NO GOVERNOR (RUNG 1 OF THE SOAK LADDER) ──
+ * THE SIXTY-FIRST MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation of 2026-11-06,
+ * inside a NAMED CHARTERED WINDOW: RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the §881.4 STOP's own terms); the
+ * record is docs/shift-records/2026-11-06-rung1-35-village-watch-no-governor.json. THE MOVER, FOUND: commit 8e92c0440
+ * (R-H2) inside first-parent step 18fd6b442 of the rung-1 landing and nothing else (the catalogue desc and both desc
+ * variants re-worded so no line names a headman; 66b1407bd reverse-applied leaves these 4 rows moving, 8e92c0440
+ * reverse-applied leaves 20, record 34's). On THIS corpus 4 of 360 rows move (village 4; every other tier 0);
+ * 360/360 hashes stay distinct. Written from the staged tree (18fd6b442 with the door paths carried from the branch),
+ * measured by scripts/audit/refence.mjs before the write. FENCE 3 (call-path dormancy) re-run green at the write.
+ * `2f6d48b3…` -> `68c107c2…`.
+ *
+ * ── 2026-11-06, THE FOOD PER CENT FROM THE POUNDS (RUNG 1 OF THE SOAK LADDER) ──
+ * THE SIXTIETH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation of 2026-11-06,
+ * inside a NAMED CHARTERED WINDOW: RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the §881.4 STOP's own terms); the
+ * record is docs/shift-records/2026-11-06-rung1-34-food-per-cent-from-pounds.json. THE MOVER, FOUND: one cause in two
+ * steps — lane D's food floor bfd70d809 (step b37bbf395, the only commit of that step to move this corpus: 2 rows),
+ * superseded by lane H's R-H5 66b1407bd (step 18fd6b442: the food writer and its view derive the per cent from the
+ * pounds they publish, no floor; 8e92c0440 moves 4 other rows, its own cause, 5f6d243b2 moves 0). On THIS corpus 20 of
+ * 360 rows move (thorp 12, hamlet 7, village 1; town, city, metropolis 0); 360/360 hashes stay distinct. Written from
+ * the staged tree (18fd6b442 with the door paths carried from the branch, 8e92c0440 reverse-applied), measured by
+ * scripts/audit/refence.mjs before the write. FENCE 3 (call-path dormancy) re-run green at the write.
+ * `5213e9d9…` -> `2f6d48b3…`.
+ *
+ * ── 2026-11-06, THE VACANT SEAT IS SAID FROM ITS FACT (RUNG 1 OF THE SOAK LADDER) ──
+ * THE FIFTY-NINTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation of 2026-11-06,
+ * inside a NAMED CHARTERED WINDOW: RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the §881.4 STOP's own terms); the
+ * record is docs/shift-records/2026-11-06-rung1-33-vacant-seat-fact.json. THE MOVER, FOUND: commit 5d3f7b5cb (R-G1) inside
+ * first-parent step 64ad4fe47 of the rung-1 landing and nothing else (the vacant seat read from the governing faction's
+ * `vacant` modifier, the crisis cast following it; c9be4d1f0 reverse-applied leaves the 8 rows moving, 5d3f7b5cb leaves
+ * 0). On THIS corpus 8 of 360 rows move (thorp 2, hamlet 1, village 2, town 2, metropolis 1; city 0); 360/360 hashes
+ * stay distinct. Written from the staged tree (64ad4fe47 with the door paths carried from the branch, lane D's food
+ * floor bfd70d809 reverse-applied: its own cause, record 34), measured by scripts/audit/refence.mjs before the write.
+ * FENCE 3 (call-path dormancy) re-run green at the write. `f6cccb63…` -> `5213e9d9…`.
+ *
+ * ── 2026-11-06, THE VILLAGE WATCH'S AUTHORED TEXTS (RUNG 1 OF THE SOAK LADDER) ──
+ * THE FIFTY-EIGHTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation of 2026-11-06,
+ * inside a NAMED CHARTERED WINDOW: RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the §881.4 STOP's own terms); the
+ * record is docs/shift-records/2026-11-06-rung1-32-village-watch-texts.json. THE MOVER, FOUND: commit 59237b232 inside
+ * first-parent step 3da1104da of the rung-1 landing and nothing else (the Village watch's identity one-liner and two
+ * desc variants authored; each of the step's other three source commits reverse-applied leaves the 3 rows moving,
+ * 59237b232 reverse-applied leaves 0). On THIS corpus 3 of 360 rows move (village 3; every other tier 0); 360/360
+ * hashes stay distinct. Written from the staged tree (3da1104da with the door paths carried from the branch, lane D's
+ * food floor bfd70d809 reverse-applied: its own cause, record 34), measured by scripts/audit/refence.mjs before the
+ * write. FENCE 3 (call-path dormancy) re-run green at the write. `3302d755…` -> `f6cccb63…`.
+ *
  * ── 2026-11-05, THE V-SUMMARY-HOOKS CURE (RUNG 1 OF THE SOAK LADDER) ──
  * THE FIFTY-SEVENTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation,
  * inside a NAMED CHARTERED WINDOW: RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the §881.4 STOP's own terms); the
@@ -810,7 +855,7 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * superseded by the ENGINE-HYGIENE re-record above, which is the record of the
  * one chartered window that has been spent since.
  */
-const PRE_COUPLING_CORPUS_SHA = '3302d7555d6bb0ead08408da08af3b6d60b05c72f7714c1d4f2d672a154aecd5';
+const PRE_COUPLING_CORPUS_SHA = '68c107c25fa76ef105bb447c7a3497d2f6357c414900a32ead856c36791475c9';
 
 const CORPUS_TIERS = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
 const CORPUS_ROUTES = Object.freeze(['road', 'isolated', 'port', 'crossroads']);
