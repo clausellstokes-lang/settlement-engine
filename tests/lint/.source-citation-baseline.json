@@ -47,9 +47,9 @@
     "pastEofCitationsExcluded": 377,
     "byRule": {
       "banner": 9,
-      "dated": 28,
+      "dated": 29,
       "sha-pin": 1,
-      "tree": 56
+      "tree": 84
     },
     "files": {
       "banner": [
@@ -87,6 +87,7 @@
         "docs/SOAK_1000_RUNG1B_F5_INSTRUMENTS_2026-11-04.md",
         "docs/SOAK_1000_RUNG1C_2026-11-04.md",
         "docs/SOAK_1000_RUNG1D_2026-11-04.md",
+        "docs/SOAK_1000_RUNG1E_2026-11-04.md",
         "docs/SOAK_1000_RUNG1_2026-11-04.md",
         "docs/SOAK_READER_INSTRUMENTS_2026-11-04.md",
         "docs/UX_CONSOLIDATION_2026-10-30.md",
@@ -151,13 +152,42 @@
         "docs/shift-records/2026-11-03-size-2-tier-noun-story-text.json",
         "docs/shift-records/2026-11-03-size-3-guild-market.json",
         "docs/shift-records/2026-11-03-x49-stores-off-defense.json",
+        "docs/shift-records/2026-11-04-rung1-01-x46-car-1-bands.json",
+        "docs/shift-records/2026-11-04-rung1-02-x46-car-2-thresholds.json",
+        "docs/shift-records/2026-11-04-rung1-03-crisis-derived-cast.json",
+        "docs/shift-records/2026-11-04-rung1-04-faith-pools.json",
+        "docs/shift-records/2026-11-04-rung1-05-tier-noun-pools.json",
+        "docs/shift-records/2026-11-04-rung1-06-terrain-pools-1.json",
+        "docs/shift-records/2026-11-04-rung1-07-food-exports.json",
+        "docs/shift-records/2026-11-04-rung1-08-self-vouch.json",
+        "docs/shift-records/2026-11-04-rung1-09-terrain-pools-2.json",
+        "docs/shift-records/2026-11-04-rung1-10-t1-t2-siege-stores.json",
+        "docs/shift-records/2026-11-04-rung1-11-x46-car-1b-1-no-ceiling.json",
+        "docs/shift-records/2026-11-04-rung1-12-x46-car-3-budget.json",
+        "docs/shift-records/2026-11-04-rung1-13-x46-car-1b-2-curve.json",
+        "docs/shift-records/2026-11-04-rung1-14-self-vouch-i5-kind-7.json",
+        "docs/shift-records/2026-11-04-rung1-15-place-not-tier.json",
+        "docs/shift-records/2026-11-04-rung1-16-truth-1-units-a-c.json",
+        "docs/shift-records/2026-11-04-rung1-17-pins-1-density-exemptions.json",
+        "docs/shift-records/2026-11-04-rung1-18-truth-2-unit-d.json",
+        "docs/shift-records/2026-11-04-rung1-19-x46-car-3-i7-realised.json",
+        "docs/shift-records/2026-11-04-rung1-20-pins-2-rarity-mark.json",
+        "docs/shift-records/2026-11-04-rung1-21-f5-instruments.json",
+        "docs/shift-records/2026-11-04-rung1-22-f6-budget-floor.json",
+        "docs/shift-records/2026-11-04-rung1-23-f1-defence-words.json",
+        "docs/shift-records/2026-11-04-rung1-24-f3-food-words.json",
+        "docs/shift-records/2026-11-04-rung1-25-f4-crime-signal.json",
+        "docs/shift-records/2026-11-04-rung1-26-f10-walls-word.json",
+        "docs/shift-records/2026-11-05-rung1-27-residual-outcome-tick.json",
+        "docs/shift-records/2026-11-05-rung1-28-summary-hook-count.json",
         "docs/shift-records/README.md",
         "docs/shift-records/_TEMPLATE.json"
       ]
     },
     "_rosterGrowth2026-10-30-consolidation": "FIVE documents JOINED the roster by being BORN into it, and they hid NOTHING (re-measured by BUILD-T1 on claude/ux-T1 rebased onto 2acd0206): the integration branch's docs/UX_CONSOLIDATION_2026-10-30.md joined `dated` (5 -> 6) and BUILD-S's docs/shift-records/2026-10-30-service-category-fidelity.json joined `tree` (40 -> 41), both already on the tip; BUILD-T1's three signed records docs/shift-records/2026-10-30-arrival-market-gate.json, -no-market-pool.json and -migration-one-direction.json joined `tree` (41 -> 44). GROWTHS, not class moves: each file entered the tree already archival by rule, and each shift record is a JSON signature with zero path:line citations of its own, so pastEofCitationsExcluded stays at 377.",
     "_rosterGrowth2026-11-03-soak-1000": "ONE document JOINED the roster by being BORN into it, and it hid NOTHING: docs/SOAK_1000_2026-11-03.md joined `dated` (8 -> 9, measured by this walker's own roster test on lane/soak1k-2026-11-03, 2026-11-03), the SOAK-1000 dry-run report the chair commissioned on the owner's word ('run 1000 generated settlements and review each in depth and in aggregate and tune'). WHY dated: it is a point-in-time record whose citations address branch claude/coherence-scale-2026-11-03 at 1169b3cd5, stated in its own header; the run of record is re-taken on the landed tip and re-addressing this one would falsify it. A GROWTH, not a class move: no live document left the gated corpus.",
-    "_rosterGrowth2026-11-04-rung1-window": "NINETEEN documents JOINED `dated` by being BORN into it, and they hid NOTHING: the rung-1 window’s lane reports and soak records (F1-F4, F6-F8, F10, HOOKS-UNDER-STRESS, R6 PLACE-NOT-TIER, X46 car 3, READER-INSTRUMENTS, and SOAK rungs 1, 1B, 1B-F5, 1C, 1D; two of them F6’s .after/.calibration JSON), 9 -> 28, measured at the landing (LANDING-1 door 7). Each carries 0 path:line citations. WHY dated: each is a point-in-time record of its own tip, stated in its header; re-addressing would falsify it. A GROWTH, not a class move: no live document left the gated corpus."
+    "_rosterGrowth2026-11-04-rung1-window": "NINETEEN documents JOINED `dated` by being BORN into it, and they hid NOTHING: the rung-1 window’s lane reports and soak records (F1-F4, F6-F8, F10, HOOKS-UNDER-STRESS, R6 PLACE-NOT-TIER, X46 car 3, READER-INSTRUMENTS, and SOAK rungs 1, 1B, 1B-F5, 1C, 1D; two of them F6’s .after/.calibration JSON), 9 -> 28, measured at the landing (LANDING-1 door 7). Each carries 0 path:line citations. WHY dated: each is a point-in-time record of its own tip, stated in its header; re-addressing would falsify it. A GROWTH, not a class move: no live document left the gated corpus.",
+    "_rosterGrowth2026-11-06-rung1-landing": "TWENTY-NINE documents JOINED the roster by being BORN into it, and they hid NOTHING (LANDING-7 A, measured by this walker at the rung-1 landing tip 3d8a74e4b): `tree` 56 -> 84, the twenty-eight signed records of the rung-1 landing (docs/shift-records/2026-11-04-rung1-01-x46-car-1-bands.json through 2026-11-05-rung1-28-summary-hook-count.json), each the signature of a golden re-record under ODQ §934.104/§934.105; `dated` 28 -> 29, docs/SOAK_1000_RUNG1E_2026-11-04.md, the rung 1E soak re-run at the landed tip (c99dcff1e), a point-in-time record of its own tip. GROWTHS, not class moves: no live document left the gated corpus, and the twenty-nine carry 0 past-EOF citations between them. (The archival corpus as a whole reads 389 past-EOF at this tip against the 377 frozen below; the 12-row rise sits in documents ALREADY on the roster whose targets have since shrunk, none in the newcomers, and the frozen figure is the freeze, left as recorded.)"
   },
   "rows": []
 }

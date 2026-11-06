@@ -47,7 +47,9 @@
  * past-EOF citations this gate deliberately does not see. FOUR rules select them,
  * each checkable, and the full roster is committed in the baseline's
  * `archivalExclusionAtFreeze.files`:
- *   tree (56)    docs/review-r2/**, docs/shift-records/**
+ *   tree (84)    docs/review-r2/**, docs/shift-records/**
+ *                (2026-11-06, the rung-1 landing, 56 -> 84: the landing's twenty-eight signed records
+ *                rung1-01..28 of 2026-11-04/05; GROWTHS that hid nothing, 0 past-EOF of their own.)
  *                (2026-11-04, the composed tip of the coherence window, 46 -> 56: the DOORS lane's ten signed records of
  *                2026-11-03 for FOOD-1/2/3, FOOD-print, SIZE-2/3, DEFENSE-2 x3 and X-49; GROWTHS that hid nothing.)
  *                (2026-10-31, the generator seams, 44 -> 46: G2's one-faction-set and G3's tension-variety records;
@@ -129,7 +131,7 @@
  *                pinning composite-r4 @ 69b7a8d3 whose citations address a town-map
  *                surface deleted at 43c3ac3805. It hid nothing — the excluded
  *                past-EOF count stayed 377 and ARM 2 was 0 on both sides.)
- *   dated (28)   an ISO date in the filename (2026-11-04, the rung-1 landing, 9 -> 28: nineteen lane reports and soak records of the rung-1 window, born dated, 0 path:line citations each; 2026-10-30: docs/UX_CONSOLIDATION_2026-10-30.md joined, 5 -> 6): the three COMPREHENSIVE_REVIEWs,
+ *   dated (29)   an ISO date in the filename (2026-11-06, LANDING-7, 28 -> 29: SOAK_1000_RUNG1E_2026-11-04, the rung 1E soak re-run at the landed tip, born dated, 0 past-EOF; 2026-11-04, the rung-1 landing, 9 -> 28: nineteen lane reports and soak records of the rung-1 window, born dated, 0 path:line citations each; 2026-10-30: docs/UX_CONSOLIDATION_2026-10-30.md joined, 5 -> 6): the three COMPREHENSIVE_REVIEWs,
  *                HANDOFF_2026-08-01_PAUSE, SIM-SEALS-SURVEY-2026-09-19,
  *                GENERATION_COHERENCE_AUDIT_2026-11-02 and GENERATION_ROOT_CAUSES_2026-11-02
  *                (both joined 2026-11-02, 6 -> 8 as measured at the merge over master,
