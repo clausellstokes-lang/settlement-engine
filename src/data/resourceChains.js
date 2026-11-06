@@ -259,35 +259,48 @@ export const RESOURCE_CHAINS = {
   },
 };
 
+// ⚠ PROCESS WATER, NOT MOTIVE WATER (lane REVIEW-INTAKE unit 3, 2026-11-06). An industry
+// listed here consumes water as part of its PROCESS (soaking hides, rinsing dye, mashing,
+// pulping), so it needs a SUPPLY: a water row of the record (Water source, Multiple water
+// sources, Aqueduct or water system, Advanced water infrastructure), river or coastal terrain,
+// or a river or port route gives one (economy/viability.js :: deriveWaterDependencyAnalysis).
+// `names` are the institution names that ARE this industry, matched exactly; `alternatives`
+// are catalog rows that supply water, so every suggested fix is a row the DM can add.
+const WATER_SUPPLY_ROWS = ["Water source", "Aqueduct or water system"];
 export const INDUSTRY_WATER_NEEDS = {
   Tannery: {
     required: !0,
-    alternatives: ["Aqueduct", "Multiple wells", "Water system"],
+    names: ["Tannery", "Tanners", "Tanner (established)"],
+    alternatives: WATER_SUPPLY_ROWS,
     reason: "Tanning requires large amounts of water for processing hides",
   },
   "Dyers' guild": {
     required: !0,
-    alternatives: ["Aqueduct", "Multiple wells"],
+    names: ["Dyers' guild", "Dyer"],
+    alternatives: WATER_SUPPLY_ROWS,
     reason: "Dyeing textiles requires significant water for preparation and rinsing",
-  },
-  "Fulling mill": {
-    required: !0,
-    alternatives: ["Water wheel", "River access"],
-    reason: "Fulling uses water-powered hammers to clean and thicken cloth",
-  },
-  Mill: {
-    required: !0,
-    alternatives: ["Windmill", "Horse mill"],
-    reason: "Traditional mills require water power for grinding grain",
   },
   Brewery: {
     required: !0,
-    alternatives: ["Deep well", "Spring access"],
+    names: ["Brewery", "Brewer"],
+    alternatives: WATER_SUPPLY_ROWS,
     reason: "Brewing requires clean water for production",
   },
   "Paper mill": {
     required: !0,
-    alternatives: [],
+    names: ["Paper mill"],
+    alternatives: WATER_SUPPLY_ROWS,
     reason: "Paper production requires water for pulping and processing",
   },
 };
+
+// MOTIVE WATER is not a dependency. A mill, a sawmill and a fulling mill need POWER, and water,
+// wind or a beast at the sweep gives it (the owner, 2026-11-06: "mills don't necessarily need
+// water access as some mills use physical force from livestock or wind"). Which one turns this
+// mill is the DM's to picture, so no warning is raised for these; the table documents the
+// distinction and keeps the names out of the process list above.
+export const MOTIVE_WATER_INDUSTRIES = Object.freeze({
+  Mill: Object.freeze({ names: Object.freeze(["Mill", "Mills (2-5)"]), reason: "Grinding needs motive power: water, wind or animal" }),
+  Sawmill: Object.freeze({ names: Object.freeze(["Sawmill", "Sawmill (commercial)"]), reason: "Sawing needs motive power: water, wind or animal" }),
+  "Fulling mill": Object.freeze({ names: Object.freeze(["Fulling mill", "Fuller"]), reason: "Fulling hammers need motive power: water, wind or animal" }),
+});
