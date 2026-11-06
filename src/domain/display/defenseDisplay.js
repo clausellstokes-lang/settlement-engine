@@ -247,14 +247,41 @@ export function runningCriminalChains(settlement) {
  * conversion's religious fraud and informant networks, soak1k-1801). The denial that nothing
  * criminal is organised here (DS-DEF-4's `structure null` pool, the tab's static line) prints only
  * where this is false: beside a listed pattern it is the contradiction F9 cured for the operations.
+ * A pattern whose own text denies organisation (`patternDeniesOrganisation`, phase E) lists no
+ * crime the denial contradicts, so it is not counted (R-E1).
  * @param {DefenseDisplaySettlement | null | undefined} settlement
  * @returns {boolean}
  */
 export function blockListsCrime(settlement) {
   const sp = /** @type {{ crimeTypes?: unknown[], criminalInstitutions?: unknown[] } | undefined} */ (settlement?.economicState?.safetyProfile);
   return (sp?.criminalInstitutions || []).length > 0
-    || (sp?.crimeTypes || []).length > 0
+    || (sp?.crimeTypes || []).some((pattern) => !patternDeniesOrganisation(pattern))
     || runningCriminalChains(settlement).length > 0;
+}
+
+/**
+ * A CRIME PATTERN WHOSE OWN TEXT DENIES ORGANISATION (RUNG-2 LANDING phase E, R-E1). The denial
+ * ("No criminal infrastructure has been identified") means no ORGANISED structure; beside such a
+ * pattern it is true, and phase D's silence there (soak1k-362, -452, -572, -686, -740, -800,
+ * -848, -884: "Background crime" alone) hid a true sentence. The pattern catalogue
+ * (`generators/safetyProfile.js`, its crime types and every stress addition), read whole, holds
+ * two texts that deny organisation in their own words, matched here by those words:
+ *   - "Background crime": "… No single dominant organisation: just the steady pressure …";
+ *   - "Survival crime" where no network exists: "Theft driven by economic desperation rather than
+ *     organization. No criminal infrastructure: …" (beside a network the same type prints the
+ *     desperation-theft line, which denies nothing, so the TEXT decides, not the type).
+ * Every other pattern (a crisis's fraud, networks, black markets; lawlessness; smuggling) is crime
+ * the denial would contradict.
+ */
+export const PATTERN_DENIES_ORGANISATION = /No single dominant organisation|No criminal infrastructure:/;
+
+/**
+ * @param {unknown} pattern one `safetyProfile.crimeTypes` entry, `{ type, desc }`
+ * @returns {boolean}
+ */
+export function patternDeniesOrganisation(pattern) {
+  const desc = /** @type {{ desc?: unknown } | null | undefined} */ (pattern)?.desc;
+  return typeof desc === 'string' && PATTERN_DENIES_ORGANISATION.test(desc);
 }
 
 /**
