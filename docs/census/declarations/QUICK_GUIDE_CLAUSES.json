@@ -15,7 +15,7 @@
       "poolCrisis": null,
       "crisisScoped": false,
       "colour": false,
-      "ruling": "Culture-keyed, no calm asserted: not opted in. No twin: an empty cell already falls to the plain identity sentence by ruling T1.",
+      "ruling": "Culture-keyed, no calm asserted: not opted in. No twin: an empty cell already falls to the plain identity sentence by ruling T1. The inland Norse and Slavic forms are written (RUNG-2 LANDING phase B; the chair's 10:0x: a waterside slot mute inland is MUTE, not absent), each declaring `excludes: navigable`.",
       "lines": [
         {
           "lineId": "SCOPE_PHRASE.germanic",
@@ -165,6 +165,34 @@
             "culture"
           ],
           "note": "the landlocked greek form (scopePhrase :539-540)"
+        },
+        {
+          "lineId": "INLAND_SCOPE_PHRASE.norse",
+          "text": "built around the hall, on kin, oath and the assembly",
+          "needs": [],
+          "excludes": [
+            "navigable"
+          ],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "culture"
+          ],
+          "note": "RUNG-2 LANDING phase B (the chair's ruling of 2026-11-05 10:0x): the landlocked norse form; presumes no water (the branch reads navigable) and no season; the slot was mute in 38 of 98 Norse births on the 1,000"
+        },
+        {
+          "lineId": "INLAND_SCOPE_PHRASE.slavic",
+          "text": "built in timber compounds on land held in common, kin by kin",
+          "needs": [],
+          "excludes": [
+            "navigable"
+          ],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "culture"
+          ],
+          "note": "RUNG-2 LANDING phase B (the chair's ruling of 2026-11-05 10:0x): the landlocked slavic form; presumes no water (the branch reads navigable) and no season; the slot was mute in 30 of 82 Slavic births on the 1,000"
         }
       ],
       "twins": [

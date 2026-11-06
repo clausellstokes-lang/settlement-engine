@@ -543,8 +543,11 @@ function scopePhrase(cultureKey, settlement) {
     // R-AS (amended): the three waterside scopes read the record's water HERE (chair ruling 5:
     // inland → the inland phrase; a river keeps the Greek harbour; a record with no config reads as
     // it always did), and every atom they declare is a water atom — the branch is their gate.
+    // RUNG-2 LANDING phase B (the chair's 10:0x): the inland form goes through the declared
+    // channel — a declared inland phrase (`excludes: navigable`) is admitted by the draw only where
+    // the record holds no water; an undeclared one (the Greek form) keeps as it always read.
     if (isLandlocked(settlement)) {
-      return Object.hasOwn(INLAND_SCOPE_PHRASE, cultureKey) ? INLAND_SCOPE_PHRASE[cultureKey] : '';
+      return Object.hasOwn(INLAND_SCOPE_PHRASE, cultureKey) ? declaredClause(INLAND_SCOPE_PHRASE[cultureKey], settlement) : '';
     }
     return SCOPE_PHRASE[cultureKey];
   }
@@ -583,10 +586,15 @@ function declaredClause(clause, settlement) {
 /**
  * A waterside scope's landlocked form, where one is authored (2026-11-04, under the owner's
  * delegation): the Greek phrase without its harbour. A culture with none takes the plain sentence.
+ * The Norse and Slavic forms (RUNG-2 LANDING phase B, the chair's ruling of 2026-11-05 10:0x: the
+ * slot was mute in 38 of 98 Norse and 30 of 82 Slavic births on the 1,000) presume no water and
+ * no season, and declare it (`excludes: navigable`, `QUICK_GUIDE_SIBLINGS`).
  * @type {Readonly<Record<string, string>>}
  */
 const INLAND_SCOPE_PHRASE = Object.freeze({
   greek: 'built around the agora, on hillside ground and civic association',
+  norse: 'built around the hall, on kin, oath and the assembly',
+  slavic: 'built in timber compounds on land held in common, kin by kin',
 });
 
 const WATERSIDE_SCOPES = new Set(['greek', 'norse', 'slavic']); // norse "the hall and the water", slavic "between river and forest" (chair ruling 5)
@@ -736,6 +744,11 @@ export const QUICK_GUIDE_SIBLINGS = Object.freeze({
     Object.freeze({ text: 'built around the tank, in quarters by trade and kin', twinOf: SCOPE_PHRASE.south_asian }),
   ]),
   [SCOPE_PHRASE.greek]: Object.freeze([Object.freeze({ text: SCOPE_PHRASE.greek, needs: ['navigable'] })]),
+  // RUNG-2 LANDING phase B (the chair's 10:0x): the two inland waterside forms presume NO water —
+  // `excludes: navigable`, the very fact `scopePhrase`'s branch reads (R-AY) — so the draw admits
+  // them where the sea lines are withheld.
+  [INLAND_SCOPE_PHRASE.norse]: Object.freeze([Object.freeze({ text: INLAND_SCOPE_PHRASE.norse, excludes: ['navigable'] })]),
+  [INLAND_SCOPE_PHRASE.slavic]: Object.freeze([Object.freeze({ text: INLAND_SCOPE_PHRASE.slavic, excludes: ['navigable'] })]),
   [FOOD_SECURITY_CLAUSE.surplus]: Object.freeze([Object.freeze({ text: FOOD_SECURITY_CLAUSE.surplus, excludes: ['crisis: hunger'], crisis: ['any'] })]),
   [FOOD_SECURITY_CLAUSE.secure]: Object.freeze([Object.freeze({ text: FOOD_SECURITY_CLAUSE.secure, excludes: ['crisis: hunger'], crisis: ['any'] })]),
 });
