@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "57606fa6434f4405000d2e93f804c4d754ab566a",
-  "measuredBy": "LANDING-2 seat (Opus 5.5)",
-  "date": "2026-11-04",
-  "note": "the rung-1 landing (ODQ §934.105): the window lanes' tuning sites, the three growth sites attributed by DECLARED_GROWTH rows",
+  "measuredAtSha": "e586cf45213f61f61415951f9c970bc81c6429d2",
+  "measuredBy": "LANDING-7-E2 (Opus 5.5)",
+  "date": "2026-11-06",
+  "note": "R-E2: SEWER_DERIVATION_TUNING cesspitFailurePopulation 2000->777, highWaterSaturation 12000->5399, re-based to the stamp cuts (433289899)",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -74,6 +74,7 @@
         "src/domain/townMap/townMapModel.js",
         "src/domain/traditions/genesis.js",
         "src/domain/traditions/politics.js",
+        "src/domain/viabilitySummary.js",
         "src/domain/worldPulse/beliefAxisSubjects.js",
         "src/domain/worldPulse/calamityKernel.js",
         "src/domain/worldPulse/conquestFeeds.js",
@@ -2179,7 +2180,7 @@
       "exported": true,
       "idiom": "mixed",
       "keys": 56,
-      "line": 193,
+      "line": 207,
       "spanDigest": "f6f58469dba9ea6434aeaf3e609b8d7942ceedba98dd233f6bf53bfb3e49d581",
       "leaves": {
         "MORPHOLOGY.LEGITIMACY_WEIGHT": 0.3,
@@ -2427,7 +2428,7 @@
       "idiom": "literal",
       "keys": 7,
       "line": 227,
-      "spanDigest": "2f8fb902cb2abbbfc9e2eafbc4ed5ee61cd213220af0cba49dc0f9edb6d7b969",
+      "spanDigest": "1cb1b9f82fd6bd73eb6b372f80b11960ec486c4f3a3ff3528cf9e8990b14c6fe",
       "leaves": {
         "weights.PROSPERITY_BAND": 0.25,
         "weights.CIVIC_CAPACITY": 0.25,
@@ -2437,8 +2438,8 @@
         "weights.FOUNDING_CHARTER": 0,
         "civicSaturation": 4,
         "calamitySaturation": 3,
-        "cesspitFailurePopulation": 2000,
-        "highWaterSaturation": 12000,
+        "cesspitFailurePopulation": 777,
+        "highWaterSaturation": 5399,
         "absentFloor": 0.1,
         "certainThreshold": 0.9
       },
