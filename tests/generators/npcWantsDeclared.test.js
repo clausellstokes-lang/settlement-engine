@@ -21,9 +21,10 @@ const DECLARED = Object.freeze({
 describe('NPC_WANTS declarations (CENSUS-4f unit 6)', () => {
   it('(a) the three ledgered lines declare in place, and only they', () => {
     const rows = Object.values(NPC_WANTS).flat();
-    const declared = rows.filter((r) => typeof r === 'object');
+    const declared = rows.filter((r) => typeof r === 'object' && r.colour !== true);
     expect(Object.fromEntries(declared.map((r) => [r.text, r.needs]))).toEqual(DECLARED);
-    expect(rows.filter((r) => typeof r === 'string').length).toBe(rows.length - 3);
+    // CENSUS-4h unit 4 (R-AO): every other want is phase A's read colour row, `{ text, colour: true }` (was a bare string)
+    expect(rows.filter((r) => typeof r === 'object' && r.colour === true && Object.keys(r).length === 2).length).toBe(rows.length - 3);
   });
 
   it('(b) the draw stores the text, and since CENSUS-1i unit 6 resolves a refused want: soak1k-9 (no docks) no longer prints the oilskins', async () => {

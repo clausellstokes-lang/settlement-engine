@@ -46,7 +46,8 @@
     },
     "lines": 108,
     "declaring": 9,
-    "note": "Role keys per historyData.js POWER_ROLES_BY_CATEGORY: Garrison Commander is gated on hasCommander (= a garrison stands, defenseFacts.js ROLE_NEEDS) for pool and mandated roles alike → garrison; Guild Master requiresGuild; Abbot requiresInstKeyword monastery|friary|monastic; Crime Lord / Tower Wizard / Guild Archmage / Inquisitor minTier city; magic roles pass worldLaw.allowsRole only where magic is enabled. Reach by tier: Mayor/Tax Collector/Guard Captain/High Priest/Master Craftsman/Healer/Hedge Wizard from village, Priest/Tavern Owner from hamlet. Guard Captain is gated on garrison|watch|militia (no single atom). Guard Captain#0.short ('dock-side') has an inland twin in data/inlandHookLines.js, applied after the draw. Governor#0.short presumes winter (season, no atom) and its 'grain' is rewritten to the trade commodity. Tavern Owner#0.short 'hospitalised' read as presuming a hospital here (judgement). Unexpressed presumptions: Mayor#3.short a council with annual elections, Council Member#0.long / Wealthiest Merchant#1.long a council and a merchant bloc (no 'council exists' atom; ruler: council would over-claim), Tax Collector#0.short a past riot, Guild Master#0.short a SECOND (rival) guild, Crime Lord#1.short a guard captain (watch|garrison|militia disjunction), High Priest#0.short a desecration event, Chief Magistrate#0.long / Governor#0.long a nobility / a crown (overlord, not this place's ruler). Abbot#1.short 'the local lord' read as possibly an overlord: no ruler atom."
+    "note": "Role keys per historyData.js POWER_ROLES_BY_CATEGORY: Garrison Commander is gated on hasCommander (= a garrison stands, defenseFacts.js ROLE_NEEDS) for pool and mandated roles alike → garrison; Guild Master requiresGuild; Abbot requiresInstKeyword monastery|friary|monastic; Crime Lord / Tower Wizard / Guild Archmage / Inquisitor minTier city; magic roles pass worldLaw.allowsRole only where magic is enabled. Reach by tier: Mayor/Tax Collector/Guard Captain/High Priest/Master Craftsman/Healer/Hedge Wizard from village, Priest/Tavern Owner from hamlet. Guard Captain is gated on garrison|watch|militia (no single atom). Guard Captain#0.short ('dock-side') has an inland twin in data/inlandHookLines.js, applied after the draw. Governor#0.short presumes winter (season, no atom) and its 'grain' is rewritten to the trade commodity. Tavern Owner#0.short 'hospitalised' read as presuming a hospital here (judgement). Unexpressed presumptions: Mayor#3.short a council with annual elections, Council Member#0.long / Wealthiest Merchant#1.long a council and a merchant bloc (no 'council exists' atom; ruler: council would over-claim), Tax Collector#0.short a past riot, Guild Master#0.short a SECOND (rival) guild, Crime Lord#1.short a guard captain (watch|garrison|militia disjunction), High Priest#0.short a desecration event, Chief Magistrate#0.long / Governor#0.long a nobility / a crown (overlord, not this place's ruler). Abbot#1.short 'the local lord' read as possibly an overlord: no ruler atom.",
+    "colourReRead": "CENSUS-4h (R-AO, the chair's answer 2 of block m): the no-atom goals re-read (short and long together, 45 rows, 44 with no key declaration and Guild Master#0 under its key); 35 presume nothing (colour: true); 10 presume a fact with no home and stay unmarked (colourReadBy): a regional or local lord (Mayor#1, Abbot/Abbess#1), a council election (Mayor#3), the season and the crown (Governor#0), a past riot (Tax Collector#0), a guard captain (Crime Lord#1), a council and a merchant bloc (Council Member#0, Wealthiest Merchant#1), a second guild (Guild Master#0), a nobility (Chief Magistrate#0) — the last four by phase A's own note"
   },
   "rows": [
     {
@@ -73,7 +74,8 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": false,
+      "colourReadBy": "CENSUS-4h: read, presumes a fact (not marked)"
     },
     {
       "id": "Mayor#1.long",
@@ -81,7 +83,8 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": false,
+      "colourReadBy": "CENSUS-4h: read, presumes a fact (not marked)"
     },
     {
       "id": "Mayor#2.short",
@@ -89,7 +92,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": true
     },
     {
       "id": "Mayor#2.long",
@@ -97,7 +100,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": true
     },
     {
       "id": "Mayor#3.short",
@@ -105,7 +108,8 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": false,
+      "colourReadBy": "CENSUS-4h: read, presumes a fact (not marked)"
     },
     {
       "id": "Mayor#3.long",
@@ -113,7 +117,8 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": false,
+      "colourReadBy": "CENSUS-4h: read, presumes a fact (not marked)"
     },
     {
       "id": "Governor#0.short",
@@ -121,7 +126,8 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": false,
+      "colourReadBy": "CENSUS-4h: read, presumes a fact (not marked)"
     },
     {
       "id": "Governor#0.long",
@@ -129,7 +135,8 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": false,
+      "colourReadBy": "CENSUS-4h: read, presumes a fact (not marked)"
     },
     {
       "id": "Governor#1.short",
@@ -137,7 +144,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": true
     },
     {
       "id": "Governor#1.long",
@@ -145,7 +152,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": true
     },
     {
       "id": "Council Member#0.short",
@@ -153,7 +160,8 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": false,
+      "colourReadBy": "CENSUS-4h: read, presumes a fact (not marked)"
     },
     {
       "id": "Council Member#0.long",
@@ -161,7 +169,8 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": false,
+      "colourReadBy": "CENSUS-4h: read, presumes a fact (not marked)"
     },
     {
       "id": "Council Member#1.short",
@@ -169,7 +178,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": true
     },
     {
       "id": "Council Member#1.long",
@@ -177,7 +186,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": true
     },
     {
       "id": "Tax Collector#0.short",
@@ -185,7 +194,8 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": false,
+      "colourReadBy": "CENSUS-4h: read, presumes a fact (not marked)"
     },
     {
       "id": "Tax Collector#0.long",
@@ -193,7 +203,8 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": false,
+      "colourReadBy": "CENSUS-4h: read, presumes a fact (not marked)"
     },
     {
       "id": "Tax Collector#1.short",
@@ -201,7 +212,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": true
     },
     {
       "id": "Tax Collector#1.long",
@@ -209,7 +220,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": true
     },
     {
       "id": "Chief Magistrate#0.short",
@@ -217,7 +228,8 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": false,
+      "colourReadBy": "CENSUS-4h: read, presumes a fact (not marked)"
     },
     {
       "id": "Chief Magistrate#0.long",
@@ -225,7 +237,8 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": false,
+      "colourReadBy": "CENSUS-4h: read, presumes a fact (not marked)"
     },
     {
       "id": "Chief Magistrate#1.short",
@@ -233,7 +246,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": true
     },
     {
       "id": "Chief Magistrate#1.long",
@@ -241,7 +254,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": true
     },
     {
       "id": "Guard Captain#0.short",
@@ -303,7 +316,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": true
     },
     {
       "id": "Garrison Commander#1.long",
@@ -311,7 +324,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": true
     },
     {
       "id": "Mercenary Captain#0.short",
@@ -319,7 +332,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": true
     },
     {
       "id": "Mercenary Captain#0.long",
@@ -327,7 +340,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": true
     },
     {
       "id": "Mercenary Captain#1.short",
@@ -335,7 +348,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": true
     },
     {
       "id": "Mercenary Captain#1.long",
@@ -343,7 +356,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": true
     },
     {
       "id": "High Priest#0.short",
@@ -369,7 +382,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": true
     },
     {
       "id": "High Priest#1.long",
@@ -377,7 +390,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": true
     },
     {
       "id": "Priest#0.short",
@@ -385,7 +398,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": true
     },
     {
       "id": "Priest#0.long",
@@ -393,7 +406,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": true
     },
     {
       "id": "Priest#1.short",
@@ -419,7 +432,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": true
     },
     {
       "id": "Abbot/Abbess#0.long",
@@ -427,7 +440,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": true
     },
     {
       "id": "Abbot/Abbess#1.short",
@@ -435,7 +448,8 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": false,
+      "colourReadBy": "CENSUS-4h: read, presumes a fact (not marked)"
     },
     {
       "id": "Abbot/Abbess#1.long",
@@ -443,7 +457,8 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": false,
+      "colourReadBy": "CENSUS-4h: read, presumes a fact (not marked)"
     },
     {
       "id": "Inquisitor#0.short",
@@ -451,7 +466,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": true
     },
     {
       "id": "Inquisitor#0.long",
@@ -459,7 +474,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": true
     },
     {
       "id": "Inquisitor#1.short",
@@ -467,7 +482,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": true
     },
     {
       "id": "Inquisitor#1.long",
@@ -475,7 +490,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": true
     },
     {
       "id": "Wealthiest Merchant#0.short",
@@ -483,7 +498,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": true
     },
     {
       "id": "Wealthiest Merchant#0.long",
@@ -491,7 +506,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": true
     },
     {
       "id": "Wealthiest Merchant#1.short",
@@ -499,7 +514,8 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": false,
+      "colourReadBy": "CENSUS-4h: read, presumes a fact (not marked)"
     },
     {
       "id": "Wealthiest Merchant#1.long",
@@ -507,7 +523,8 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": false,
+      "colourReadBy": "CENSUS-4h: read, presumes a fact (not marked)"
     },
     {
       "id": "Guild Master#0.short",
@@ -515,7 +532,8 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": false,
+      "colourReadBy": "CENSUS-4h: read, presumes a fact (not marked)"
     },
     {
       "id": "Guild Master#0.long",
@@ -523,7 +541,8 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": false,
+      "colourReadBy": "CENSUS-4h: read, presumes a fact (not marked)"
     },
     {
       "id": "Guild Master#1.short",
@@ -531,7 +550,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": true
     },
     {
       "id": "Guild Master#1.long",
@@ -539,7 +558,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": true
     },
     {
       "id": "Moneylender#0.short",
@@ -547,7 +566,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": true
     },
     {
       "id": "Moneylender#0.long",
@@ -555,7 +574,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": true
     },
     {
       "id": "Moneylender#1.short",
@@ -563,7 +582,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": true
     },
     {
       "id": "Moneylender#1.long",
@@ -571,7 +590,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": true
     },
     {
       "id": "Master Craftsman#0.short",
@@ -597,7 +616,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": true
     },
     {
       "id": "Master Craftsman#1.long",
@@ -605,7 +624,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": true
     },
     {
       "id": "Thieves' Guild Master#0.short",
@@ -613,7 +632,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": true
     },
     {
       "id": "Thieves' Guild Master#0.long",
@@ -621,7 +640,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": true
     },
     {
       "id": "Thieves' Guild Master#1.short",
@@ -629,7 +648,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": true
     },
     {
       "id": "Thieves' Guild Master#1.long",
@@ -637,7 +656,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": true
     },
     {
       "id": "Crime Lord#0.short",
@@ -645,7 +664,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": true
     },
     {
       "id": "Crime Lord#0.long",
@@ -653,7 +672,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": true
     },
     {
       "id": "Crime Lord#1.short",
@@ -661,7 +680,8 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": false,
+      "colourReadBy": "CENSUS-4h: read, presumes a fact (not marked)"
     },
     {
       "id": "Crime Lord#1.long",
@@ -669,7 +689,8 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": false,
+      "colourReadBy": "CENSUS-4h: read, presumes a fact (not marked)"
     },
     {
       "id": "Smuggler Chief#0.short",
@@ -677,7 +698,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": true
     },
     {
       "id": "Smuggler Chief#0.long",
@@ -685,7 +706,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": true
     },
     {
       "id": "Smuggler Chief#1.short",
@@ -693,7 +714,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": true
     },
     {
       "id": "Smuggler Chief#1.long",
@@ -701,7 +722,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": true
     },
     {
       "id": "Tower Wizard#0.short",
@@ -709,7 +730,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": true
     },
     {
       "id": "Tower Wizard#0.long",
@@ -717,7 +738,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": true
     },
     {
       "id": "Tower Wizard#1.short",
@@ -725,7 +746,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": true
     },
     {
       "id": "Tower Wizard#1.long",
@@ -733,7 +754,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": true
     },
     {
       "id": "Guild Archmage#0.short",
@@ -741,7 +762,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": true
     },
     {
       "id": "Guild Archmage#0.long",
@@ -749,7 +770,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": true
     },
     {
       "id": "Guild Archmage#1.short",
@@ -757,7 +778,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": true
     },
     {
       "id": "Guild Archmage#1.long",
@@ -765,7 +786,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": true
     },
     {
       "id": "Hedge Wizard#0.short",
@@ -773,7 +794,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": true
     },
     {
       "id": "Hedge Wizard#0.long",
@@ -781,7 +802,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": true
     },
     {
       "id": "Hedge Wizard#1.short",
@@ -789,7 +810,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": true
     },
     {
       "id": "Hedge Wizard#1.long",
@@ -797,7 +818,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": true
     },
     {
       "id": "Alchemist#0.short",
@@ -805,7 +826,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": true
     },
     {
       "id": "Alchemist#0.long",
@@ -813,7 +834,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": true
     },
     {
       "id": "Alchemist#1.short",
@@ -821,7 +842,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": true
     },
     {
       "id": "Alchemist#1.long",
@@ -829,7 +850,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": true
     },
     {
       "id": "Tavern Owner#0.short",
@@ -855,7 +876,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": true
     },
     {
       "id": "Tavern Owner#1.long",
@@ -863,7 +884,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": true
     },
     {
       "id": "Sage/Scholar#0.short",
@@ -871,7 +892,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": true
     },
     {
       "id": "Sage/Scholar#0.long",
@@ -879,7 +900,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": true
     },
     {
       "id": "Sage/Scholar#1.short",
@@ -887,7 +908,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": true
     },
     {
       "id": "Sage/Scholar#1.long",
@@ -895,7 +916,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": true
     },
     {
       "id": "Healer#0.short",
@@ -921,7 +942,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": true
     },
     {
       "id": "Healer#1.long",
@@ -929,7 +950,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": false
+      "colour": true
     }
   ]
 }
