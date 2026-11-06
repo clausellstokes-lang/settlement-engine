@@ -4599,13 +4599,13 @@ reads what the panel renders. A page draws at most one of each.
 **PATRON: `rankAxis: major`**
 1. `[visitor · walls]` {creed} is the patron here, and it is no local creed. The same rite is kept across enough of the realm to carry weight well past {settlement}'s walls.
 2. `[street · colour]` The observance here is {creed}'s, and it is the observance of the region besides; the calendar kept in this town is the calendar kept along the whole road.
-3. `[ledger · colour]` {settlement} keeps {creed}, a faith holding seats far beyond this one. Its clergy speak with the confidence of people who are not alone.
+3. `[ledger · clergy]` {settlement} keeps {creed}, a faith holding seats far beyond this one. Its clergy speak with the confidence of people who are not alone.
 4. `[visitor · no walls]` {creed} is the patron here, and it is no local creed. The same rite is kept across enough of the realm to carry weight well past {settlement}'s bounds.
 
-**PATRON: `rankAxis: minor`** {colour}
-1. `[ledger]` {creed} is the patron here, kept in a handful of settlements and nowhere near all of them; its reach ends not far past the district.
-2. `[street]` The town's rite is {creed}'s: established, unremarkable elsewhere, and entirely sufficient here.
-3. `[visitor]` {settlement} keeps {creed}. Travellers from far enough away will not know the name, which the clergy find easier to forgive than to fix.
+**PATRON: `rankAxis: minor`**
+1. `[ledger · colour]` {creed} is the patron here, kept in a handful of settlements and nowhere near all of them; its reach ends not far past the district.
+2. `[street · colour]` The town's rite is {creed}'s: established, unremarkable elsewhere, and entirely sufficient here.
+3. `[visitor · clergy]` {settlement} keeps {creed}. Travellers from far enough away will not know the name, which the clergy find easier to forgive than to fix.
 
 **PATRON: `rankAxis: cult`**
 1. `[visitor · colour]` The patron of {settlement} is {creed}, a creed with few other homes. What it lacks in reach it holds in intensity.
@@ -4668,10 +4668,10 @@ reads what the panel renders. A page draws at most one of each.
 2. `[ledger]` {creed} still leads, and not by much; a rival draws from the same households the patron does, and is close enough to be counted against it.
 3. `[street]` The seat is held rather than secure. Another rite has closed most of the distance between them.
 
-**STANDINGS: a plural field, no majority** {colour}
-1. `[ledger]` No creed commands {settlement}. Adherence is divided across several rites, none of them near a majority.
-2. `[visitor]` The town's faith is a field rather than a hierarchy. The patron leads a crowd rather than a following.
-3. `[street]` Several observances share this town in rough proportion, which the clergy of each describe differently.
+**STANDINGS: a plural field, no majority**
+1. `[ledger · colour]` No creed commands {settlement}. Adherence is divided across several rites, none of them near a majority.
+2. `[visitor · colour]` The town's faith is a field rather than a hierarchy. The patron leads a crowd rather than a following.
+3. `[street · clergy]` Several observances share this town in rough proportion, which the clergy of each describe differently.
 
 **SINK: `unaffiliated` present, arc falling** (the pews draining)
 1. `[ledger · colour]` A growing share of the town keeps no god at all. The share is not going to a rival rite, it is going out of the rites altogether.
@@ -4683,15 +4683,15 @@ reads what the panel renders. A page draws at most one of each.
 2. `[ledger · temple]` The godless share of the town is shrinking; whatever emptied the benches has stopped being persuasive.
 3. `[street · colour]` People who kept no rite are keeping one again, and mostly the one their households kept before them.
 
-**MANDATE: contested, or patron security below the floor** {colour}
-1. `[counterforce]` The ruler's claim gets no help from the observances. A divided faith cannot lend authority it does not itself hold.
-2. `[ledger]` Whatever legitimacy the seat has, it is not borrowed from the creed; the faith here is too contested to vouch for anyone.
-3. `[street]` The faith and the government stand apart. Neither is strengthened by the other, and the ruler feels it more than the clergy do.
+**MANDATE: contested, or patron security below the floor**
+1. `[counterforce · colour]` The ruler's claim gets no help from the observances. A divided faith cannot lend authority it does not itself hold.
+2. `[ledger · colour]` Whatever legitimacy the seat has, it is not borrowed from the creed; the faith here is too contested to vouch for anyone.
+3. `[street · clergy]` The faith and the government stand apart. Neither is strengthened by the other, and the ruler feels it more than the clergy do.
 
-**MANDATE: a dominant church** {colour}
-1. `[ledger]` The observance stands behind the seat, and it is an observance worth standing behind. The ruler governs with the creed's open endorsement.
-2. `[street]` Authority here is doubled: what the ruling power asks, the patron's clergy have already asked.
-3. `[visitor]` The faith is strong and it is aligned; the ruler's writ carries a weight the office alone would not give it.
+**MANDATE: a dominant church**
+1. `[ledger · colour]` The observance stands behind the seat, and it is an observance worth standing behind. The ruler governs with the creed's open endorsement.
+2. `[street · clergy]` Authority here is doubled: what the ruling power asks, the patron's clergy have already asked.
+3. `[visitor · colour]` The faith is strong and it is aligned; the ruler's writ carries a weight the office alone would not give it.
 
 **MANDATE: a measure of divine mandate** {colour}
 1. `[ledger]` The creed lends the ruler some standing, not the whole of the seat's authority, but a serviceable part of it.
@@ -4893,10 +4893,10 @@ panel does not surface at all.
 2. `[visitor]` Its means are ordinary: neither a lender nor a supplicant, which suits everyone here.
 3. `[elder]` The faith is comfortable rather than rich, and has been for long enough that nobody remembers it otherwise. *— requires `tenure`*
 
-**TEMPLE WEALTH: drawn down** {colour}
-1. `[ledger]` {institution}'s coffer is empty. What the tithe brings in leaves again immediately, and the fabric is beginning to show it.
-2. `[visitor]` It is poor. The rites are kept and the building is not, and the clergy have started asking in ways they would rather not.
-3. `[threshold]` The faith here has no reserve. A bad year would not close it; a second bad year is a real question.
+**TEMPLE WEALTH: drawn down**
+1. `[ledger · colour]` {institution}'s coffer is empty. What the tithe brings in leaves again immediately, and the fabric is beginning to show it.
+2. `[visitor · clergy]` It is poor. The rites are kept and the building is not, and the clergy have started asking in ways they would rather not.
+3. `[threshold · colour]` The faith here has no reserve. A bad year would not close it; a second bad year is a real question.
 
 **COVERT CONGREGATION: `deities[ref].covert` present** {colour}
 1. `[ledger · dm-only]` A congregation persists that the town's records do not show. It keeps {creed} without a building, at a size the suppression was meant to prevent.

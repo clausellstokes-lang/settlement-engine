@@ -4122,7 +4122,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         {
           "angle": "ledger",
           "marks": [
-            "colour"
+            "clergy"
           ],
           "text": "{settlement} keeps {creed}, a faith holding seats far beyond this one. Its clergy speak with the confidence of people who are not alone.",
           "slots": [
@@ -4147,6 +4147,9 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
       "PATRON: rankAxis: minor": [
         {
           "angle": "ledger",
+          "marks": [
+            "colour"
+          ],
           "text": "{creed} is the patron here, kept in a handful of settlements and nowhere near all of them; its reach ends not far past the district.",
           "slots": [
             "creed"
@@ -4155,6 +4158,9 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "colour"
+          ],
           "text": "The town's rite is {creed}'s: established, unremarkable elsewhere, and entirely sufficient here.",
           "slots": [
             "creed"
@@ -4163,6 +4169,9 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
+          "marks": [
+            "clergy"
+          ],
           "text": "{settlement} keeps {creed}. Travellers from far enough away will not know the name, which the clergy find easier to forgive than to fix.",
           "slots": [
             "settlement",
@@ -4519,6 +4528,9 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
       "STANDINGS: a plural field, no majority": [
         {
           "angle": "ledger",
+          "marks": [
+            "colour"
+          ],
           "text": "No creed commands {settlement}. Adherence is divided across several rites, none of them near a majority.",
           "slots": [
             "settlement"
@@ -4527,12 +4539,18 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
+          "marks": [
+            "colour"
+          ],
           "text": "The town's faith is a field rather than a hierarchy. The patron leads a crowd rather than a following.",
           "slots": [],
           "vid": 2
         },
         {
           "angle": "street",
+          "marks": [
+            "clergy"
+          ],
           "text": "Several observances share this town in rough proportion, which the clergy of each describe differently.",
           "slots": [],
           "vid": 3
@@ -4598,18 +4616,27 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
       "MANDATE: contested, or patron security below the floor": [
         {
           "angle": "counterforce",
+          "marks": [
+            "colour"
+          ],
           "text": "The ruler's claim gets no help from the observances. A divided faith cannot lend authority it does not itself hold.",
           "slots": [],
           "vid": 1
         },
         {
           "angle": "ledger",
+          "marks": [
+            "colour"
+          ],
           "text": "Whatever legitimacy the seat has, it is not borrowed from the creed; the faith here is too contested to vouch for anyone.",
           "slots": [],
           "vid": 2
         },
         {
           "angle": "street",
+          "marks": [
+            "clergy"
+          ],
           "text": "The faith and the government stand apart. Neither is strengthened by the other, and the ruler feels it more than the clergy do.",
           "slots": [],
           "vid": 3
@@ -4618,18 +4645,27 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
       "MANDATE: a dominant church": [
         {
           "angle": "ledger",
+          "marks": [
+            "colour"
+          ],
           "text": "The observance stands behind the seat, and it is an observance worth standing behind. The ruler governs with the creed's open endorsement.",
           "slots": [],
           "vid": 1
         },
         {
           "angle": "street",
+          "marks": [
+            "clergy"
+          ],
           "text": "Authority here is doubled: what the ruling power asks, the patron's clergy have already asked.",
           "slots": [],
           "vid": 2
         },
         {
           "angle": "visitor",
+          "marks": [
+            "colour"
+          ],
           "text": "The faith is strong and it is aligned; the ruler's writ carries a weight the office alone would not give it.",
           "slots": [],
           "vid": 3
@@ -4709,8 +4745,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
-        "attach": [],
-        "colour": true
+        "attach": []
       },
       "PATRON: rankAxis: cult": {
         "role": "spine",
@@ -4915,8 +4950,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 1,
-        "attach": [],
-        "colour": true
+        "attach": []
       },
       "SINK: unaffiliated present, arc falling": {
         "role": "spine",
@@ -4964,8 +4998,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 1,
-        "attach": [],
-        "colour": true
+        "attach": []
       },
       "MANDATE: a dominant church": {
         "role": "spine",
@@ -4981,8 +5014,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 1,
-        "attach": [],
-        "colour": true
+        "attach": []
       },
       "MANDATE: a measure of divine mandate": {
         "role": "spine",
@@ -5697,6 +5729,9 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
       "TEMPLE WEALTH: drawn down": [
         {
           "angle": "ledger",
+          "marks": [
+            "colour"
+          ],
           "text": "{institution}'s coffer is empty. What the tithe brings in leaves again immediately, and the fabric is beginning to show it.",
           "slots": [
             "institution"
@@ -5705,12 +5740,18 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
+          "marks": [
+            "clergy"
+          ],
           "text": "It is poor. The rites are kept and the building is not, and the clergy have started asking in ways they would rather not.",
           "slots": [],
           "vid": 2
         },
         {
           "angle": "threshold",
+          "marks": [
+            "colour"
+          ],
           "text": "The faith here has no reserve. A bad year would not close it; a second bad year is a real question.",
           "slots": [],
           "vid": 3
@@ -6159,8 +6200,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
-        "attach": [],
-        "colour": true
+        "attach": []
       },
       "COVERT CONGREGATION: deities[ref].covert present": {
         "role": "spine",

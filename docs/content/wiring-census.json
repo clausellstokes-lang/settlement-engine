@@ -39843,7 +39843,8 @@
       },
       "declares": [],
       "lineDeclares": {
-        "colour": 2,
+        "clergy": 1,
+        "colour": 1,
         "no walls": 1,
         "walls": 1
       },
@@ -39905,7 +39906,10 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
+      "lineDeclares": {
+        "clergy": 1,
+        "colour": 2
+      },
       "undeclared": 0,
       "crisisScoped": false
     },
@@ -40699,7 +40703,10 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
+      "lineDeclares": {
+        "clergy": 1,
+        "colour": 2
+      },
       "undeclared": 0,
       "crisisScoped": false
     },
@@ -40929,7 +40936,10 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
+      "lineDeclares": {
+        "clergy": 1,
+        "colour": 2
+      },
       "undeclared": 0,
       "crisisScoped": false
     },
@@ -41001,7 +41011,10 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
+      "lineDeclares": {
+        "clergy": 1,
+        "colour": 2
+      },
       "undeclared": 0,
       "crisisScoped": false
     },
@@ -42557,7 +42570,10 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
+      "lineDeclares": {
+        "clergy": 1,
+        "colour": 2
+      },
       "undeclared": 0,
       "crisisScoped": false
     },
