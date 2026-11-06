@@ -252,7 +252,14 @@ describe('EM-R0c — the merge: the consequence of an edit is the difference of 
 
   it('A6 · the order rule has two arms on economicState.activeChains', () => {
     const subjects = withChains();
-    expect(subjects.length, 'the rows whose active chains have an order to keep or to move').toBe(57);
+    // 2026-11-06, RE-KEYED BY IDENTITY (LANDING-7 R-E12): 57 -> 56, ONE row out, measured by `withChains()` itself.
+    // First-parent over the whole landing (a07ee4e0a .. this branch), the set moves at ONE stage, X-46 car 3's compose
+    // 90dc22f18, and inside car 3 commit by commit: U3 47829c070 (the density factor) takes three rows out
+    // (hamlet|germanic|coastal|port, hamlet|germanic|desert|road, village|germanic|forest|isolated, all civilized
+    // golden-master-v3) and U9 d207c8136 (the bottom end: the external mill is fabric) gives the two hamlets back. The row
+    // that stays out is village|germanic|forest|isolated|civilized|golden-master-v3: the budget thins its optional draws
+    // and it keeps one active chain where it kept seven at master a07ee4e0a.
+    expect(subjects.length, 'the rows whose active chains have an order to keep or to move').toBe(56);
 
     const armOne = [];
     const armTwo = [];
