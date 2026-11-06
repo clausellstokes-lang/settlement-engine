@@ -39,6 +39,7 @@ import { storesMonthsOf } from '../../../src/domain/facts/storesMonths.js';
 import { famineOf } from '../../../src/domain/facts/famine.js';
 import { terrainClassOf, tradeRouteOf } from '../../../src/domain/facts/terrain.js';
 import { waterAccessKind } from '../../../src/domain/tradeRouteSemantics.js';
+import { PATTERN_DENIES_ORGANISATION } from '../../../src/domain/display/defenseDisplay.js';
 
 /** The owner's bands (X-46, docs/UX_CONSOLIDATION_2026-10-30.md; car 1 is parked, not on this tip). */
 export const OWNER_BANDS = Object.freeze({
@@ -222,14 +223,38 @@ export function guildPowerSmall(s) {
 
 /** DS-DEF-4's `structure null` variants and the Defense tab's static no-organised-crime line. */
 const DS_DEF4_DENIAL = /No criminal infrastructure has been identified|goes wrong one thing at a time and belongs to whoever did it|met with genuine incomprehension|No organized criminal infrastructure detected\./;
-/** The Defense block's "Active crime patterns" list with at least one row under it. */
-const CRIME_PATTERNS_LISTED = /Active crime patterns\s*\n\s*\S/;
+/** The Defense block's "Active crime patterns" heading. */
+const CRIME_PATTERNS_HEADING = 'Active crime patterns';
+/** A screen line that closes a sentence (a pattern's description); a pattern's name does not. */
+const CLOSES_SENTENCE = /[.!?…]["”’)]?$/;
+
+/**
+ * The Defense block's "Active crime patterns" rows read off the tab text (`DefenseTab.jsx`: each
+ * row is its name, then its description), up to DS-DEF-4's lens or the next section heading.
+ * @param {string} tab the Defense tab
+ * @returns {Array<{ type: string, desc: string }>}
+ */
+export function crimePatternRows(tab) {
+  const at = tab.indexOf(CRIME_PATTERNS_HEADING);
+  if (at < 0) return [];
+  /** @type {Array<{ type: string, desc: string }>} */
+  const rows = [];
+  for (const line of tab.slice(at + CRIME_PATTERNS_HEADING.length).split('\n').map((x) => x.trim()).filter(Boolean)) {
+    if (DS_DEF4_DENIAL.test(line) || /[▲▼]$/.test(line)) break;
+    if (!CLOSES_SENTENCE.test(line)) rows.push({ type: line, desc: '' });
+    else if (rows.length) rows[rows.length - 1].desc += `${rows[rows.length - 1].desc ? ' ' : ''}${line}`;
+  }
+  return rows;
+}
 
 /**
  * A-06's reading: the phrase pair (the bare denial anywhere on the screen beside an organised
  * network's words), and (RUNG-2 LANDING phase D, R-D2; soak1k-1801) the Defense tab's denial
  * under the block's own "Active crime patterns". The survival pattern's own "No criminal
  * infrastructure: …" is a pattern, not the denial, so the second arm reads DS-DEF-4's sentences.
+ * Phase E (R-E1), the display's exemption mirrored: a list whose every row denies organisation
+ * in its own text (`defenseDisplay.js :: PATTERN_DENIES_ORGANISATION`: "Background crime", the
+ * no-network "Survival crime") is no crime the denial contradicts.
  * @param {string} screenText every screen surface, joined
  * @param {string} defense the Defense tab
  * @returns {string|null} the finding's detail, or null
@@ -237,7 +262,9 @@ const CRIME_PATTERNS_LISTED = /Active crime patterns\s*\n\s*\S/;
 export function crimeAbsentAndOrganised(screenText, defense) {
   if (/No criminal infrastructure/i.test(screenText) && /criminal network|thieves['’] guild|crime boss|kingpin/i.test(screenText)) return 'and an organised network elsewhere';
   const tab = String(defense || '');
-  if (DS_DEF4_DENIAL.test(tab) && CRIME_PATTERNS_LISTED.test(tab)) return 'beside the block\'s own crime patterns';
+  if (!DS_DEF4_DENIAL.test(tab)) return null;
+  const rows = crimePatternRows(tab);
+  if (rows.some((row) => !PATTERN_DENIES_ORGANISATION.test(row.desc))) return 'beside the block\'s own crime patterns';
   return null;
 }
 
