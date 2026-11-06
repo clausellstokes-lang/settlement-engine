@@ -1924,7 +1924,14 @@ describe('SEAM car 5b — THE HOLDER CENSUS: the source of each construction (SI
       'every interested row names a state organ').toBe(true);
     // 16 -> 23 on 2026-09-30 (the urban band, ODQ §934.86): the city's complete block seats more
     // institutions that keep a state organ's record, so more licensed rows find a holder here.
-    expect(interested.length, 'the licensed rows this captured city makes interested').toBe(23);
+    // 23 -> 16 at the F6 BUDGET-FLOOR stage (6d84aa834, the lane's bf3d1258e "the target gives
+    // way"), bisected by first-parent stage of the rung-1 window (LANDING-7): the stage re-draws
+    // this city's roster (65 -> 63 institutions), and the Professional city watch, still seated,
+    // no longer instantiates its one record service ('Crime reporting'), so the WATCH kind has no
+    // holder here. The seven rows that leave are exactly the watch's: DS-DEF-5 (watch PRESENT;
+    // NO organized force at all), DS-ECO-6's three off-book TIER rows and DS-POW-6's two
+    // capture-reached rows. No row was gained; the gate above is unmoved.
+    expect(interested.length, 'the licensed rows this captured city makes interested').toBe(16);
     // THE MARK NAMES ITS GROUND rather than asserting a standing nobody can trace.
     const one = sourceOfForTown(interested[0], town);
     expect(one.standing).toBe('INTERESTED');
