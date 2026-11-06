@@ -550,6 +550,12 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 // quick guide's Tonight block. The 23 rows door 6 re-addressed at the composed tip (16e3086b4) were pure
 // line moves. The ceilings follow the baseline down, as TE-STRIP-1's note demands: at 207 the +1 leak
 // control below went vacuous (205 + 1 = 206 sits under a stale 207).
+// LANDING-7 lane F (2026-11-06) — FOUR PURE RELOCATIONS, NO DEBT MOTION, NO CEILING CHANGE. c1cf38bbb (LANDING-6,
+// the chair's ruling 2) MOVED buildViabilitySummary out of src/generators/economy/viability.js into
+// src/domain/viabilitySummary.js, so its two sentences' four rows (floatInterpolation + percentToken on each)
+// re-address viability.js:121 -> viabilitySummary.js:64 and :123 -> :66. Category and snippet byte-identical on
+// all four; the regenerated census is 205 against 205 (138 / 50 / 8 / 9 / 0) and no other row moved. The two
+// sentences stay owed their humanization; a move is not a cure.
 const REVIEWED_TOTAL_CEILING = 205;
 const REVIEWED_CATEGORY_CEILINGS = Object.freeze({
   floatInterpolation: 138,
