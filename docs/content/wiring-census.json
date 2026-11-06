@@ -5,7 +5,7 @@
       "src/domain/display/stateProse/generalStateProse.js": "c67780262a7362640254d6fd04e302c0fd9b6bd3062cec69df021df6f93bd3ca",
       "src/domain/display/stateProse/powerStateProse.js": "17162968061353b811e61220c3306dcfd784b1110b93f75b1442dff0811294e3",
       "src/domain/display/stateProse/economyStateProse.js": "42d10cb7a3f25483c80b7f328c7f778617e628d7148d7d357b09ee45536c1908",
-      "src/domain/display/stateProse/defenseStateProse.js": "e5ee4e6c881848bcb0fff7512eeb97c105ca9a946c188c9ee3fc5cf27dece87a",
+      "src/domain/display/stateProse/defenseStateProse.js": "9504850e223c86681c6f89f6f55d90239cc732a1860a5687be725351b0e14234",
       "src/domain/display/stateProse/stressorsStateProse.js": "c876f4bd17ebf8d07701caf28f7c90262772e222183a5c01311d5814cb1b0bdb",
       "src/domain/display/stateProse/warFaithStateProse.js": "1a880f001c4ab469cbc6d2ca4ba0028587606c5bac6eb1676ed1fe2b0ea1ca52",
       "src/domain/display/stateProse/dossierMounts.js": "1c65db21ab6f7e7e56148490bf7cf49ba136bd6ed6aeaf504bdef9661e5d11be"
@@ -26,14 +26,14 @@
     "variants": 2310,
     "resolved": 341,
     "unresolved": 368,
-    "resolvedWithPredicate": 207,
-    "resolvedWithCleanPredicate": 207,
+    "resolvedWithPredicate": 208,
+    "resolvedWithCleanPredicate": 208,
     "keyFunctions": 118,
     "keyFunctionsConsulted": 118,
     "keyTables": 33,
     "slotless": 65,
     "bagless": 140,
-    "predicatesOverUnreadFields": 99,
+    "predicatesOverUnreadFields": 100,
     "syntheticTableFields": 100,
     "tiers": {
       "MISSING": 34,
@@ -51,7 +51,7 @@
     "absent": {
       "measured": 373,
       "default": 3,
-      "not-produced": 59,
+      "not-produced": 61,
       "method-call": 18
     },
     "zeroK": 49,
@@ -5513,6 +5513,7 @@
       "grammars": 1,
       "predicate": [],
       "branchReads": [
+        "magicAbsent",
         "magicDependency"
       ],
       "fieldsRead": [
@@ -5525,11 +5526,13 @@
       "keyFunction": "magicDependencyPoolKey",
       "rung": "literal",
       "reads": [
+        "magicAbsent",
         "magicDependency"
       ],
       "readsGrain": "branch",
       "narrowed": false,
       "absent": {
+        "magicAbsent": "not-produced",
         "magicDependency": "measured"
       },
       "covert": false,
@@ -5539,7 +5542,7 @@
         "viability.magicDependency"
       ],
       "attach": [],
-      "k": 2,
+      "k": 1,
       "rateBp": 9831,
       "departure": null,
       "source": {
@@ -5548,6 +5551,7 @@
           "muster"
         ],
         "fields": {
+          "magicAbsent": "",
           "magicDependency": "muster"
         },
         "holder": null,
@@ -5569,8 +5573,15 @@
       "hasBag": true,
       "variants": 3,
       "grammars": 2,
-      "predicate": [],
+      "predicate": [
+        {
+          "field": "magicAbsent",
+          "op": "truthy",
+          "value": "(no literal)"
+        }
+      ],
       "branchReads": [
+        "magicAbsent",
         "magicDependency"
       ],
       "fieldsRead": [
@@ -5583,11 +5594,13 @@
       "keyFunction": "magicDependencyPoolKey",
       "rung": "literal",
       "reads": [
+        "magicAbsent",
         "magicDependency"
       ],
       "readsGrain": "branch",
       "narrowed": false,
       "absent": {
+        "magicAbsent": "not-produced",
         "magicDependency": "measured"
       },
       "covert": false,
@@ -5597,7 +5610,7 @@
         "viability.magicDependency"
       ],
       "attach": [],
-      "k": 2,
+      "k": 1,
       "rateBp": null,
       "departure": null,
       "source": {
@@ -5606,6 +5619,7 @@
           "muster"
         ],
         "fields": {
+          "magicAbsent": "",
           "magicDependency": "muster"
         },
         "holder": null,
@@ -39711,6 +39725,17 @@
       ]
     },
     {
+      "fact": "magicAbsent",
+      "pools": [
+        "DS-DEF-9 :: magicDependency false, availability absent"
+      ],
+      "variants": 3,
+      "grammars": 2,
+      "blocks": [
+        "DS-DEF-9"
+      ]
+    },
+    {
       "fact": "marker.yearsAgo",
       "pools": [
         "DS-GEN-9 :: recency framing: Recent",
@@ -40375,6 +40400,15 @@
         "mountsModifier": 0,
         "spineTabs": [
           "relationships"
+        ],
+        "modifierMounts": []
+      },
+      {
+        "field": "magicAbsent",
+        "mountsSpine": 1,
+        "mountsModifier": 0,
+        "spineTabs": [
+          "viability"
         ],
         "modifierMounts": []
       },
@@ -42505,9 +42539,9 @@
     {
       "block": "DS-DEF-9",
       "spines": 4,
-      "facts": 1,
-      "spinesReachedBp": 0,
-      "meanReachBp": 0
+      "facts": 2,
+      "spinesReachedBp": 5000,
+      "meanReachBp": 2500
     },
     {
       "block": "DS-ECO-1",
@@ -43281,10 +43315,17 @@
     {
       "block": "DS-DEF-9",
       "spines": 4,
-      "facts": 1,
-      "spinesReachedBp": 0,
-      "meanReachBp": 0,
+      "facts": 2,
+      "spinesReachedBp": 5000,
+      "meanReachBp": 2500,
       "byFact": [
+        {
+          "field": "magicAbsent",
+          "attach": [
+            "magicDependency true",
+            "magicDependency true, with a NAMED dependent chain"
+          ]
+        },
         {
           "field": "magicDependency",
           "attach": []
@@ -45402,11 +45443,11 @@
       ],
       [
         1,
-        80
+        82
       ],
       [
         2,
-        212
+        210
       ]
     ]
   },
@@ -45430,17 +45471,16 @@
         ],
         [
           1,
-          80
+          82
         ],
         [
           2,
-          212
+          210
         ]
       ],
       "blocksWithSpine": 50,
       "cannotAttach": [
         "DS-DEF-6",
-        "DS-DEF-9",
         "DS-ECO-1",
         "DS-ECO-10",
         "DS-ECO-3",
@@ -45462,7 +45502,7 @@
         "DS-STR-1",
         "DS-WAR-3"
       ],
-      "readPaths": 553,
+      "readPaths": 555,
       "modifierEligibleFactsByTab": [
         [
           "viability",
@@ -45931,7 +45971,7 @@
       "fields": {
         "LICENSED": 191,
         "OFFICE": 5,
-        "SOURCE-UNRESOLVED": 417
+        "SOURCE-UNRESOLVED": 419
       },
       "byKind": [
         [
@@ -45976,7 +46016,7 @@
         ]
       ],
       "unresolvedGrounds": {
-        "no-mapping": 417,
+        "no-mapping": 419,
         "no-institution-in-roster": 0
       },
       "twoSourceRows": 10,
@@ -47335,8 +47375,8 @@
       "leafBoth": 0,
       "leafEither": 2,
       "leafRows": [],
-      "deskRoots": 91,
-      "deskSegments": 193
+      "deskRoots": 92,
+      "deskSegments": 194
     }
   },
   "ratifiedAliases": {
@@ -47538,6 +47578,11 @@
     ],
     "legitimacy.governanceFractured": [
       "record",
+      "roll",
+      "rolls"
+    ],
+    "magicAbsent": [
+      "muster",
       "roll",
       "rolls"
     ],
@@ -48970,7 +49015,9 @@
       "tier": "THIN",
       "block": "DS-DEF-9",
       "subject": "magicDependency false, availability absent",
-      "fields": [],
+      "fields": [
+        "magicAbsent"
+      ],
       "readingFunction": "magicDependencyPoolKey",
       "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
     },

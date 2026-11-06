@@ -1690,7 +1690,10 @@ export function magicDependencyPoolKey(magicDependency, namedChain, magicAbsent 
       : 'magicDependency true';
   }
   if (magicDependency !== false) return null;
-  return magicAbsent ? 'magicDependency false, availability absent' : 'magicDependency false';
+  // An `if`, not a returned ternary: the wiring census reads a branch's `if` test, so the
+  // absent pool's own field (`magicAbsent`) reaches its declared reads (LANDING-7 lane F, R-F1).
+  if (magicAbsent) return 'magicDependency false, availability absent';
+  return 'magicDependency false';
 }
 
 /**
