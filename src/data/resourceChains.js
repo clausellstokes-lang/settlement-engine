@@ -28,6 +28,13 @@ import { TAG } from './entityTags.js';
 // tag (stone masonry, desert salt) — they carry an empty processingTags and lean
 // on the exact-name fallback against REAL catalog names.
 //
+// ⚠ ONLY PROCESSORS (lane REVIEW-INTAKE-2 unit 4, chair ruling R4, 2026-11-06). A house listed
+// here TURNS this input into something: a mine extracts ore, a granary stores grain, a market
+// square sells salt, a bathhouse bathes in spring water, a stable yard shelters beasts — none
+// processes the input, so none is listed (each wrote "X exists but lacks access to Y" on a
+// place where it never needed Y). The struck pairs are listed in docs/REVIEW_INTAKE_2026-11-06.md
+// and pinned by tests/joins/chainNamesOnlyProcessors.test.js.
+//
 // `processingInstitutions` stays the human-readable gap-row vocabulary. It must
 // resolve under the same resolver runtime uses (catalog name ∨ keyword-backfill
 // tag) — the pin that would have caught the old 'granar'/'Salt merchant'/
@@ -54,8 +61,9 @@ export const RESOURCE_CHAINS = {
   grain: {
     rawResource: "grain",
     processingTags: [TAG.FOOD, TAG.AGRICULTURE],
-    // 'granar' (typo) → 'Town granary'; 'Baker' → 'Bakers (5-15)' (real catalog names).
-    processingInstitutions: ["Mill", "Town granary", "Bakers (5-15)", "Access to external mill"],
+    // 'Baker' → 'Bakers (5-15)' (a real catalog name). The granary stores grain and does not
+    // process it (R4).
+    processingInstitutions: ["Mill", "Bakers (5-15)", "Access to external mill"],
     intermediateGoods: ["flour", "stored grain"],
     finalProducts: ["bread", "beer", "animal feed"],
     exportValue: "medium",
@@ -84,7 +92,7 @@ export const RESOURCE_CHAINS = {
   ironOre: {
     rawResource: "iron ore",
     processingTags: [TAG.METALWORK],
-    processingInstitutions: ["Mine", "Smelter", "Blacksmiths' guild"],
+    processingInstitutions: ["Smelter", "Blacksmiths' guild"],
     intermediateGoods: ["pig iron", "iron bars"],
     finalProducts: ["tools", "weapons", "armor", "nails"],
     exportValue: "very high",
@@ -93,7 +101,7 @@ export const RESOURCE_CHAINS = {
   copperOre: {
     rawResource: "copper ore",
     processingTags: [TAG.METALWORK],
-    processingInstitutions: ["Mine", "Smelter", "Coppersmiths' guild"],
+    processingInstitutions: ["Smelter", "Coppersmiths' guild"],
     intermediateGoods: ["copper bars"],
     finalProducts: ["cookware", "wire", "decorative items"],
     exportValue: "high",
@@ -102,7 +110,7 @@ export const RESOURCE_CHAINS = {
   preciousMetals: {
     rawResource: "gold/silver ore",
     processingTags: [TAG.METALWORK, TAG.LUXURY],
-    processingInstitutions: ["Mine", "Smelter", "Goldsmiths' guild"],
+    processingInstitutions: ["Smelter", "Goldsmiths' guild"],
     intermediateGoods: ["gold/silver bars"],
     finalProducts: ["jewelry", "coins", "religious items"],
     exportValue: "very high",
@@ -162,7 +170,7 @@ export const RESOURCE_CHAINS = {
   gemstones: {
     rawResource: "gemstones",
     processingTags: [TAG.LUXURY, TAG.METALWORK],
-    processingInstitutions: ["Mine", "Jewelers' guild"],
+    processingInstitutions: ["Jewelers' guild"],
     intermediateGoods: ["cut gems"],
     finalProducts: ["jewelry", "decorative items"],
     exportValue: "very high",
@@ -211,8 +219,9 @@ export const RESOURCE_CHAINS = {
     // No 'salt' capability tag in the catalog — matched by exact name against the
     // real salt works + market that produce/distribute it.
     processingTags: [],
-    // 'Salt merchant' → 'Salt works'; 'Market' → 'Market square' (real catalog names).
-    processingInstitutions: ["Salt works", "Market square"],
+    // 'Salt merchant' → 'Salt works' (a real catalog name); the market that only sells it is
+    // not a processor (R4).
+    processingInstitutions: ["Salt works"],
     intermediateGoods: ["raw salt", "purified salt"],
     finalProducts: ["table salt", "salt for preservation", "salt for trade"],
     exportValue: "high",
@@ -230,8 +239,8 @@ export const RESOURCE_CHAINS = {
   camelCaravan: {
     rawResource: "camel_herds",
     processingTags: [TAG.TRANSPORT, TAG.LEATHER],
-    // 'Stable' → 'Stable yard' (real catalog name).
-    processingInstitutions: ["Caravanserai", "Stable yard", "Leather tanner"],
+    // A stable yard shelters beasts and does not process the herd (R4).
+    processingInstitutions: ["Caravanserai", "Leather tanner"],
     intermediateGoods: ["hides", "wool", "transport capacity"],
     finalProducts: ["camel leather", "caravan services", "riding animals"],
     exportValue: "very high",
@@ -240,7 +249,7 @@ export const RESOURCE_CHAINS = {
   oasisDate: {
     rawResource: "oasis_water",
     processingTags: [TAG.FOOD, TAG.MARKET],
-    processingInstitutions: ["Market", "Granary", "Merchant"],
+    processingInstitutions: [],
     intermediateGoods: ["fresh produce", "dates", "water supply"],
     finalProducts: ["dried dates", "date wine", "water rights"],
     exportValue: "high",
@@ -249,9 +258,9 @@ export const RESOURCE_CHAINS = {
   mineralHot: {
     rawResource: "hot_springs_mineral",
     processingTags: [TAG.HEALING, TAG.ALCHEMY],
-    // 'Alchemist' → 'Alchemist shop'; 'Herbalist' → 'Apothecary'; 'Bathhouse' →
-    // 'Public bathhouse' (real catalog names).
-    processingInstitutions: ["Alchemist shop", "Apothecary", "Public bathhouse"],
+    // 'Alchemist' → 'Alchemist shop'; 'Herbalist' → 'Apothecary' (real catalog names). The
+    // bathhouse bathes in the water and does not process it (R4).
+    processingInstitutions: ["Alchemist shop", "Apothecary"],
     intermediateGoods: ["mineral water", "salts", "therapeutic pools"],
     finalProducts: ["medicines", "restorative treatments", "mineral salts"],
     exportValue: "high",

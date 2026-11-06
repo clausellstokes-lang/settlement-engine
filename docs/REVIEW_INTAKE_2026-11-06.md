@@ -223,3 +223,53 @@ A two-block reorder plus a three-line note; the holder-table citations into this
 - Already red before this unit and expected to stay so until the chair's re-record:
   `tests/generators/nameHeldThroughAssembly.test.js` A1 ("a golden row moved with no pin bag
   anywhere", 41 rows of its sample) — red at `cbf8e24dc` too (unit 2's service rows).
+
+## Unit 4, first commit (R4) — the chain table names only processors
+
+`src/data/resourceChains.js` (read whole in unit 0) and `src/generators/resourceGenerator.js`
+(read whole). Judged against the catalogue's own menus (`institutionServices.js`): a house
+stays when it TURNS the input into something (Stone quarry dresses "Cut stone"; Salt works
+evaporates and boils; Dairy farmer makes cheese and butter; Access to external mill mills,
+a day away; Caravanserai turns herds into caravan service; the guild smiths work the bars).
+
+**The struck pairs (11):** Town granary → grain (stores it) · Mine → iron ore, copper ore,
+gold/silver ore, gemstones (extracts; its one service is "Raw extraction") · Market square →
+desert_salt (sells it) · Stable yard → camel_herds (shelters beasts) · Market, Granary,
+Merchant → oasis_water (sell, store, trade; the chain keeps its FOOD/MARKET tags and now names
+no house) · Public bathhouse → hot_springs_mineral (bathes in it).
+
+- **Red-first**: `tests/joins/chainNamesOnlyProcessors.test.js` — one arm per struck pair and
+  a generation arm (a plains roster of Market square, Town granary, Mine, Public bathhouse,
+  Stable yard writes no "lacks access" line): red at `67cafec07` **12 of 12**, green here.
+  `tests/joins/resourceChainCatalog.test.js`'s phantom pin anchored on 'Town granary' (the
+  'granar' typo's correction, not a ruling that a granary processes) re-anchored on
+  'Bakers (5-15)' with the cause named; 18 of 18 green.
+- **1,000 soak, before → after**: "lacks access" lines **6,568 in 982 settlements → 5,166 in
+  980**. By kind: on the imports list 3,915 → 2,951 · in `availableResources` 796 → 593 ·
+  local producer 625 → 625 · none 1,232 → 997.
+- **Goldens**: **380 of 525** move against the unit 6 tip (one cause: "the chain table names
+  only processors" — the gaps and the imports' critical list are in the record). Nothing
+  re-recorded.
+- Also measured on this run: (e) the receipt now reads the trace on **0 of 1,000** wrongly
+  (unit 6), and (a) 1,778 rows naming a former host, 0 foreign.
+
+## NOT STARTED at the context ceiling (per the brief's stop rule)
+
+- **Unit 4, second commit** ("a gap says which kind"): classify `imported` / `local` (not
+  written) / `missing` in `evaluateInstitutionChain` — the writer and the record only. Sized by
+  the after-table above (2,951 + 69 imported, 918 + 4 local-class, 997 missing). The finding for
+  its seat stands: the gap writer reads chain ACTIVATION (`terrainAllows && resourcePresent`),
+  the imports list reads `terrainAllows || local || available`, so they disagree by
+  construction.
+- **Unit 5** (R5, instruments only): `coh:roster-duplicate-secret` / `-goal` in
+  `scripts/audit/soak-review/checks.mjs`, red-first with planted rosters; first-seat counts 459
+  and 634 of 1,000 (unchanged on every re-run here).
+
+### INBOX (R5) — for the window after the census compose
+
+**The same secret or goal text on two NPCs of ONE roster** (X-50's defect; across dossiers it is
+a feature by the owner's word of 2026-11-04). Measured: `secret.what` repeated in **459** of
+1,000 soak rosters, `goal.short` in **634**. Draw sites owned by the census compose lane
+(`factionLeaderSecret.js`, `npcGenerator.js`), so no cure here. The chair's intended shape: a
+text already on the roster resolves to the next admitted row by a deterministic rule, with no
+further roll; a duplicate only when the pool is exhausted, and then counted.
