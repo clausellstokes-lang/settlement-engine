@@ -375,7 +375,13 @@ export function generateFoodSecurity(tier, institutions, config) {
   }
 
   const deficit       = Math.max(0, rawDeficit - importCoverage - magicOffset);
-  const deficitPct    = dailyNeed > 0 ? deficit / dailyNeed * 100 : 0;
+  // ⛔ THE SHARE IS THE SHARE OF THE POUNDS PUBLISHED (LANDING-7 lane H, STOP-1, 2026-11-06). The
+  // card publishes `deficit` and `dailyNeed` as integer pounds, so its per cent is what THOSE pounds
+  // are of THAT need, never the unrounded gap's share carried beside them: carried, a gap of a third
+  // of a pound on a 32 lb thorp published 0 lb beside 1% (17 golden thorps), the sign broken at the
+  // single writer itself, and no view of it could hold both laws. The band, the flags, the
+  // prosperity modifier and the food record all read this one figure. No floor.
+  const deficitPct    = Math.round(dailyNeed) > 0 ? Math.round(deficit) / Math.round(dailyNeed) * 100 : 0;
   const surplusPct    = dailyNeed > 0 ? Math.max(0, rawSurplus / dailyNeed * 100) : 0;
 
   // Normalized food ratio — 1.0 = exactly adequate
