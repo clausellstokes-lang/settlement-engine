@@ -356,7 +356,7 @@ export function isColourLine(line) {
   if (!line || typeof line !== 'object' || /** @type {{colour?: unknown}} */ (line).colour !== true) return false;
   const o = /** @type {Record<string, unknown>} */ (line);
   if (declares(declarationOf(o)) || typeof o.twinOf === 'string') {
-    throw new Error(`factVocabulary: the row '${String(o.text)}' is marked colour and declares — a colour line declares nothing else (R-AO)`);
+    throw new Error(`factVocabulary: the row '${String(o.text)}' is marked colour and declares: a colour line declares nothing else (R-AO)`);
   }
   return true;
 }
