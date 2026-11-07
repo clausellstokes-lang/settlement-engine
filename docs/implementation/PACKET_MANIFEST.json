@@ -33488,7 +33488,8 @@
         },
         {
           "path": "src/generators/power/rulingStructure.js",
-          "symbol": "export const renormalizeFactionPower"
+          "symbol": "export const renormalizeFactionPower",
+          "retiredBy": "§934.105 (the chair's ruling of 2026-11-07 06:1x UTC: the module ceilings split by verbatim moves; rule 39 addendum, judgment 269; §731.3's idiom): LANDING-R2's split e366b4beb MOVED renormalizeFactionPower byte for byte to src/generators/power/renormalizeFactionPower.js, rulingStructure.js re-exporting it — the landed pin is retired by the moving act, never re-sealed"
         }
       ],
       "retiredSymbols": [],
@@ -35068,7 +35069,8 @@
           {
             "_note": "THE TOTALITY WRITER rebalance-power DECLARES as its fulfil writer (design §12.8; ARCH §5). ⚠ MEASURED AND LOAD-BEARING: IT MUTATES IN PLACE — `factions[s.i].power = s.floor` — and returns the SAME array reference; largest-remainder to an exact sum of 100 with ties broken by current order; it returns the argument unchanged when the roster is empty or every power is <= 0. This packet CALLS it nowhere (EM-C3 does); the mutation is recorded here because a later caller that assumed purity would corrupt a roster. Proven present: grep -c -> 1.",
             "path": "src/generators/power/rulingStructure.js",
-            "symbol": "export const renormalizeFactionPower"
+            "symbol": "export const renormalizeFactionPower",
+            "retiredBy": "§934.105 (the chair's ruling of 2026-11-07 06:1x UTC: the module ceilings split by verbatim moves; rule 39 addendum, judgment 269; §731.3's idiom): LANDING-R2's split e366b4beb MOVED renormalizeFactionPower byte for byte to src/generators/power/renormalizeFactionPower.js, rulingStructure.js re-exporting it — the landed pin is retired by the moving act, never re-sealed"
           },
           {
             "_note": "⛔ NAMED BECAUSE IT EXISTS AND THE FINDING IS ACCEPTED (the chair's ruling 7) — AND IT IS REFUTED AS THE PREREQUISITE RULE'S SOURCE. MEASURED: (institutions, tier, _magicPriority) -> string. Its entire body is a keyword ladder over institution names returning a NARRATIVE SENTENCE through pickRandom (e.g. \"The great cathedral's spire is the tallest thing for miles.\"). No boolean, no violation list, no verdict — and it CONSUMES A DRAW. EM-B1a calls it nowhere; the row exists so EM-C3's compiler finds the correction in the manifest rather than re-discovering it. Proven present: grep -c -> 1.",
@@ -41726,6 +41728,7 @@
         {
           "path": "src/generators/power/rulingStructure.js",
           "symbol": "export const renormalizeFactionPower",
+          "retiredBy": "§934.105 (the chair's ruling of 2026-11-07 06:1x UTC: the module ceilings split by verbatim moves; rule 39 addendum, judgment 269; §731.3's idiom): LANDING-R2's split e366b4beb MOVED renormalizeFactionPower byte for byte to src/generators/power/renormalizeFactionPower.js, rulingStructure.js re-exporting it — the landed pin is retired by the moving act, never re-sealed",
           "_note": "THE TOTALITY RULE'S fulfil WRITER (design §12.8; the charter's EM-C3 row). ⚠ IT MUTATES IN PLACE - factions[s.i].power = s.floor - and returns the SAME reference, which is why the rule renormalises a CLONE and why the rule reads its TARGET from the clone's own sum rather than spelling a literal 100 (the tuning register's P2 arm holds a new file at zero named numeric constants). It returns the argument unchanged on an empty or all-zero roster, which the rule relies on for silence. ⛔ INJECTED, never imported, for the boundary reason above. count 1."
         },
         {
