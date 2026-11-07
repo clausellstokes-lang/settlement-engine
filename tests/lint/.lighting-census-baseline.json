@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "8fbe270a18833b6f37fa4b744d1d96a35a2933bf",
-  "measuredBy": "PEOPLE-1 CAST",
+  "measuredAtSha": "4644b0f2bf82c943bb47d718399b1fd8b4e487c5",
+  "measuredBy": "PEOPLE-4 TIES",
   "date": "2026-11-07",
-  "note": "the people car lane 1: the cast replaces the rung roster (one card per face-bearing house, the seat always faced, the powers first/second/third); institution, title, memberships, importance on every card; densityRungRole, factionGoal, linkedFactionIds no longer written at birth; the house and powers lit on the PDF NPC row",
-  "files": 2967,
+  "note": "one new suite, tests/generators/people/ties.test.js (one outgoing tie per card, R-P7)",
+  "files": 2968,
   "parked": 372,
-  "credited": 2595,
-  "titles": 27986,
-  "suiteTitles": 7452
+  "credited": 2596,
+  "titles": 27993,
+  "suiteTitles": 7455
 }
