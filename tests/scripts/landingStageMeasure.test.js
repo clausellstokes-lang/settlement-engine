@@ -56,6 +56,10 @@ describe('landing-stage.sh measure', () => {
  * at the step and at the carry; the path-only guard STOPPED on them although the carry could hide nothing. The paired
  * controls run the live `guard` arm in a throwaway repository: identical touched paths are carried with one receipt
  * line each (NEGATIVE); a one-byte difference on one touched door path still STOPs with that path named (POSITIVE).
+ * The chair's second ruling (the forward stack's first merge step whose door paths a landing record has since moved):
+ * a later move of a touched door path is carried when the step's bytes went forward unchanged until it and every later
+ * toucher carries `Owner-Signed:` (control d, the W0 case after record 0a); an unsigned later edit STOPs naming that
+ * commit (control c).
  */
 describe('landing-stage.sh build guard', () => {
   const run = (cmd, args, cwd) => spawnSync(cmd, args, { cwd, encoding: 'utf8' });
@@ -102,8 +106,31 @@ describe('landing-stage.sh build guard', () => {
     const r = run('sh', [script, 'guard', step], dir);
     rmSync(dir, { recursive: true, force: true });
     expect(r.status).toBe(1);
-    expect(r.stderr).toMatch(/STOP: step \S+ touched door paths; the carry would overwrite them:\ntests\/fixtures\/h\.json\n/);
+    expect(r.stderr).toMatch(/STOP: step \S+ touched door paths; the carry would overwrite them:\ntests\/fixtures\/h\.json \(first unsigned toucher [0-9a-f]{9}\)\n/);
     expect(r.stderr, 'the equal path is carried, not listed').toMatch(/carried: tests\/fixtures\/g\.json/);
     expect(r.stderr.split('STOP')[1]).not.toMatch(/g\.json/); // anchored: the STOP list names only the differing path
+  });
+
+  test('control (c): an unsigned later edit of a touched door path STOPs, naming that commit', () => {
+    const { dir, git, step } = repo();
+    writeFileSync(join(dir, 'tests/fixtures/g.json'), '{"a":9}\n');
+    git('commit', '-qam', 'an unsigned edit of g');
+    const bad = git('rev-parse', '--short=9', 'HEAD');
+    const r = run('sh', [script, 'guard', step], dir);
+    rmSync(dir, { recursive: true, force: true });
+    expect(r.status).toBe(1);
+    expect(r.stderr).toContain(`tests/fixtures/g.json (first unsigned toucher ${bad})`);
+  });
+
+  test('control (d): a signed later move of a touched door path carries with the receipt line (the W0 case)', () => {
+    const { dir, git, step } = repo();
+    writeFileSync(join(dir, 'tests/fixtures/g.json'), '{"a":3}\n');
+    git('commit', '-qam', 'record 0a act\n\nOwner-Signed: §934.105');
+    const signed = git('rev-parse', '--short=9', 'HEAD');
+    const r = run('sh', [script, 'guard', step], dir);
+    rmSync(dir, { recursive: true, force: true });
+    expect(r.status, r.stderr).toBe(0);
+    expect(r.stderr).toContain(`door path touched by the step, moved after it only by signed records — carried: tests/fixtures/g.json (${signed})`);
+    expect(r.stderr).toContain('door path touched by the step, equal to the carry — carried: tests/fixtures/h.json');
   });
 });

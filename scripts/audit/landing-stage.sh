@@ -56,12 +56,34 @@ case "$cmd" in
     # already carries -- touched ten door paths, each equal to the carry.
     touched=$(git diff --name-only "$parent" "$full" -- $(door_paths "$here") || true)
     differ=''
+    # The forward stack's own design (the chair's second ruling, 2026-11-07): a touched door path is also CARRIED when
+    # (a) its blob at the step equals its blob at the parent of the first commit in step..carry that touches it -- the
+    # step's bytes went forward unchanged until a record moved them -- AND (b) every commit in step..carry that touches
+    # it carries an `Owner-Signed:` trailer -- every later move went through the door. Otherwise STOP, naming the path
+    # and the first unsigned toucher (or the difference at the first toucher's parent).
     for p in $touched; do
       if git diff --quiet "$full" "$carry" -- "$p"; then
         echo "door path touched by the step, equal to the carry — carried: $p" >&2
-      else
-        differ="$differ$p
+        continue
+      fi
+      movers=$(git rev-list --reverse "$full..$carry" -- "$p")
+      first=$(printf '%s\n' "$movers" | head -n 1)
+      if [ -z "$first" ] || ! git diff --quiet "$full" "$first^1" -- "$p"; then
+        differ="$differ$p (differs from the step before any later commit touches it)
 "
+        continue
+      fi
+      unsigned=''
+      for c in $movers; do
+        if [ -z "$(git log -1 --format='%(trailers:key=Owner-Signed,valueonly)' "$c" | tr -d '[:space:]')" ]; then
+          unsigned=$c; break
+        fi
+      done
+      if [ -n "$unsigned" ]; then
+        differ="$differ$p (first unsigned toucher $(git rev-parse --short=9 "$unsigned"))
+"
+      else
+        echo "door path touched by the step, moved after it only by signed records — carried: $p ($(printf '%s\n' "$movers" | cut -c1-9 | tr '\n' ' ' | sed 's/ $//'))" >&2
       fi
     done
     if [ -n "$differ" ]; then
