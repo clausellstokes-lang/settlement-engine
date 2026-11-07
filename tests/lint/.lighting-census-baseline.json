@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "f06de9b25fab94a8cd8498b3c0847bf0003830e7",
-  "measuredBy": "MERGE-5AB (Opus 5.5), cloud chair session 01FE9mEvGxnFx6WTBkEC6ie9",
+  "measuredAtSha": "e467e491736529c8903b5f5d934a7473dcca9de4",
+  "measuredBy": "PEOPLE-6 LINKS",
   "date": "2026-11-07",
-  "note": "the union of the car's lanes 1..5B at the merged tip",
-  "files": 2972,
+  "note": "the people6InstitutionFaceLinks component suite (the face row and the door back), one new test file",
+  "files": 2973,
   "parked": 372,
-  "credited": 2600,
-  "titles": 28014,
-  "suiteTitles": 7467
+  "credited": 2601,
+  "titles": 28024,
+  "suiteTitles": 7471
 }
