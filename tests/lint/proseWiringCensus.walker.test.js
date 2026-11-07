@@ -289,7 +289,7 @@ describe('the census printed BESIDE the composed-fill census (report-only)', () 
     // ⛔ THE SUPPORTING FIGURES ARE ASSERTED, NOT PRINTED (car 10, cure 5). The lane's own
     // rule was "every count asserted as an integer" and these four were `console.log` — which
     // is to say they could drift under any rebase and the gate would print the drift.
-    expect(summary.slotless.length, 'pools naming a slot the block\'s bag never fills').toBe(76); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted).
+    expect(summary.slotless.length, 'pools naming a slot the block\'s bag never fills').toBe(67); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted).
     expect(summary.bagless.length, 'pools in a block with no bag at all').toBe(133); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted).
     // 100 AND NOT 99 SINCE LANDING-7 lane F (R-F1): that recovered guard is over the bare
     // parameter `magicAbsent`, which no composer holds as a field (as `magicDependency` is not).

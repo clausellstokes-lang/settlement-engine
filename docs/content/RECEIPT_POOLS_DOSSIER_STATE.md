@@ -810,29 +810,29 @@ the access.
 **SLOTS.** `{settlement}` `{access}` `{complexity}`
 
 **COMBINATION C1: a high rung on a working approach** {crisis-scoped}
-1. `[visitor]` A stranger reads {settlement}'s standing off its {access} before anyone tells him: the traffic is steady, the {complexity} keeps more hands busy than the town strictly needs, and none of it looks improvised.
+1. `[visitor]` Traffic on {settlement}'s {access} is steady, and the {complexity} keeps more hands busy than the town needs. Nobody here is waiting for work.
 2. `[ledger · crisis: any]` {settlement}'s books close with a margin, and the margin is broad rather than lucky. The {complexity} earns from several directions at once and the {access} carries all of it.
 3. `[street · no hunger]` Nobody here talks about the price of bread. The town is well off, the {access} keeps it that way, and the talk is about what to build next.
 
 **COMBINATION C2: a high rung on a narrow approach (`isolated` / `mountain_pass`)**
 1. `[visitor · stores: >= 6]` {settlement} is richer than its road suggests. Nothing reaches it easily and the stores are deep and the halls are finished anyway.
-2. `[ledger · colour]` The books here are strong on a thin channel: one way in, one way out, and a {complexity} that has learned to earn on it.
-3. `[counterforce · colour]` A narrow way in has not kept {settlement} poor. The approach is the thing that would ordinarily decide a town's condition here, and this town's condition is comfortable regardless of it.
+2. `[ledger · colour]` {settlement} has one way in and one way out, and its {complexity} still makes money. The road is narrow; the town is not poor.
+3. `[counterforce · colour]` A narrow way in has not kept {settlement} poor. Little comes in by the road, and the town is comfortable all the same.
 
 **COMBINATION C3: the middle rungs** {crisis-scoped}
-1. `[street · crisis: any]` {settlement} manages. The {complexity} covers what the town needs and leaves a little over, and the little over is what the year gets argued about.
+1. `[street · crisis: any]` {settlement} manages. The {complexity} covers what the town needs with a little left over, and every year people argue over how to spend it.
 2. `[ledger]` The accounts here balance on a thin margin. Nothing in them is failing; nothing in them is spare either.
 3. `[visitor · no crisis · market]` There is nothing striking about {settlement}'s condition in either direction: a working {access}, a working market, a town neither building nor selling off.
 
 **COMBINATION C4: a low rung on a working approach**
-1. `[ledger · colour]` {settlement} sits on a working {access} and still counts short. The traffic is real; the share of it that stays here is not.
-2. `[street]` The roads into this town are busy and the town is poor, which is the complaint a visitor will hear first and hear most.
-3. `[visitor · market]` A stranger arriving by the {access} finds more moving through {settlement} than settling in it. The market turns, and the town does not thicken on the turning.
+1. `[ledger · colour]` Traffic moves through {settlement}'s {access} every day, and little of the money stays. The stalls are thin and the town still counts short.
+2. `[street]` The {access} into {settlement} is busy and the town is poor. That is the first complaint a visitor hears, and the one they hear most.
+3. `[visitor · market]` More goods come off the {access} at {settlement} than are ever sold there. The traffic is busy and the town stays poor.
 
 **COMBINATION C5: a low rung on a narrow approach**
-1. `[visitor]` {settlement} is poor and hard to reach, and the two read as one fact: what the road does not carry, the town does without.
-2. `[ledger]` The books are short in the ordinary way: a {complexity} sized to the town and no further, and no approach wide enough to change the arithmetic.
-3. `[threshold]` {settlement} is poor and hard to reach, and the two hold each other in place: nothing about the approach would change the arithmetic, and nothing in the arithmetic would pay to widen the approach.
+1. `[visitor]` {settlement} is poor, and the road to it is long and hard. What the road does not bring in, the people here go without.
+2. `[ledger]` The {complexity} at {settlement} feeds the town and no more, and the road in is too poor to bring anything extra.
+3. `[threshold]` {settlement} is too poor to mend its road, and the road brings in too little to make it richer. Nobody here expects that to change.
 
 ---
 
