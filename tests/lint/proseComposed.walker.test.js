@@ -201,7 +201,10 @@ function unitRowOf(unit, texts) {
 
 describe('GUARD THE GUARD — the inputs this file judges are the real ones', () => {
   it('the corpus, the census and the relation leaf are the shipped ones, not empty stubs', () => {
-    expect(corpus.length, 'the shipped state corpus').toBe(2310);
+    // 2310 -> 2342 (each measured on the six leaves, parent -> commit): F12 unit 2 e19e3e4cf +13,
+    // census-2b item 5 70d05b25b +4, census-5 unit 2 06b59812f +1, census-3c unit 4 e3295d168 +10,
+    // census-5b unit 3 c00b30eb6 +4.
+    expect(corpus.length, 'the shipped state corpus').toBe(2342);
     expect(census.rows.length, 'the committed wiring census').toBe(709);
     expect(Object.keys(DOSSIER_RELATIONS).length, 'the committed relation leaf').toBe(165);
     // Every arm this module owns is exercised below; a roster that quietly shrank would make
