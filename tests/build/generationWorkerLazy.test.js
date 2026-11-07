@@ -351,7 +351,17 @@ const SENTINEL = 'settlementforge:generation:worker-v1';
 //   18fd6b442 +42 (each a merge of several commits; the bytes are attributed to the step, not inside it) · lanes B, C, G3, F2-4, A, E 0.
 //   The sum closes exactly: 1,573,556 + 492 + 790 = 1,574,838, the tip's generation.worker-MaAIxfqL.js.
 // The ceiling is recorded AT the measured figure. MONOTONE-DOWN from here.
-export const WORKER_BUNDLE_CEILING_BYTES = 1574838;
+// 1,574,838 -> 1,576,641 (2026-11-07, WIRING-W0-CLOSE, "the chair's ruling: trim then re-record at the measured figure"):
+// A RISE OF 1,803 B, VETOABLE BY THE OWNER. TRIMMED FIRST (no output byte moved), then MEASURED by a fresh `vite build` of a
+// git archive at every src-moving first-parent step of lane/wiring-w0-2026-11-07 from its base 76febf9b0 (1,574,838, this
+// ceiling exactly), the worker bytes being the file's size:
+//   343bd4eec (the migration direction declared once) +1,944 · adae99a10 0 · c99531cf9 (one import share) +135 ·
+//   3d1df12d7 (one food-source count) -223 · b893dcda1 (annotations dated) +139 · 02b8da4b3 0 · b79dfa98b (the asOf field
+//   withdrawn) -29 · f26949e69 0 · 848dd7dc1 (the projection re-spelled for the observed-shape gate 0) +17 ·
+//   THE TRIMS: eb4c508e1 (viability halves cut from one note, `directionOf`, the spine) -156 · 97209d8fc (the viability
+//   note's one fallback) -24. The sum closes exactly: 1,574,838 + 1,803 = 1,576,641. Recorded AT the measured figure.
+// MONOTONE-DOWN from here.
+export const WORKER_BUNDLE_CEILING_BYTES = 1576641;
 
 const source = (path) => readFileSync(join(ROOT, path), 'utf8');
 
@@ -669,7 +679,7 @@ describe.runIf(DIST_EXISTS)('generation worker — production boundary', () => {
     expect(
       bytes,
       `generation worker bundle ${workers[0]} is ${bytes} B; the ceiling is `
-      + `${WORKER_BUNDLE_CEILING_BYTES} B (re-recorded at the measured figure by the chair's ruling, 2026-11-04, ODQ §934.104). `
+      + `${WORKER_BUNDLE_CEILING_BYTES} B (re-recorded at the measured figure by the chair's ruling, 2026-11-07, WIRING-W0-CLOSE). `
       + 'A RISE IS NEVER A LANE\'S EDIT: buy the bytes back, or take the ruling.',
     ).toBeLessThanOrEqual(WORKER_BUNDLE_CEILING_BYTES);
   });

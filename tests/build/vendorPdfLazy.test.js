@@ -827,8 +827,18 @@ describe.runIf(distExists)('Tier 9.7 — vendor-pdf lazy load contract', () => {
     // code, where it belongs. Nothing eager re-merged: the first-paint closure arm above is
     // green on the same build. The ~700 B cross-environment margin the three prior raises
     // carried is kept — 678,131 + 700 = 678,831, under this ceiling.
+    // CEILING RE-RECORD 679_000 -> 679_623 (2026-11-07, WIRING-W0-CLOSE, "the chair's ruling: trim then re-record at the
+    // measured figure", VETOABLE BY THE OWNER): measured 679,622 after the trims; the bound is strict (`<`), so it sits ONE
+    // byte above the measured figure and no further — the ~700 B margin the raises above carried is NOT kept (the ruling:
+    // no slack). Attributed by a fresh `vite build` of a git archive at every src-moving first-parent step of
+    // lane/wiring-w0-2026-11-07 from its base 76febf9b0 (678,351): 343bd4eec (the migration direction declared once)
+    // +1,258 · adae99a10 0 · c99531cf9 (one import share) +131 · 3d1df12d7 (one food-source count) -221 · b893dcda1
+    // (annotations dated) +139 · 02b8da4b3 0 · b79dfa98b (the asOf field withdrawn) -29 · f26949e69 0 · 848dd7dc1 (the
+    // projection re-spelled for the observed-shape gate 0) +17 · eb4c508e1 0 · 97209d8fc (the viability note's one
+    // fallback, a trim) -24. The sum closes exactly: 678,351 + 1,271 = 679,622. Generation code, where it belongs; the
+    // first-paint closure arm above is green on the same build.
     expect(size).toBeGreaterThan(300_000);
-    expect(size).toBeLessThan(679_000);
+    expect(size).toBeLessThan(679_623);
   });
 
   // ── T13 TRANS: the transcendental kernel's CHUNK PLACEMENT ───────────────
