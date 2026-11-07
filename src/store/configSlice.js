@@ -79,13 +79,16 @@ export const DEFAULT_CONFIG = {
 const STRESSOR_EDITS_KEY = 'stressor' + 'Edits';
 const CONFIG_PATCH_EXTRA_KEYS = new Set(('consumers contentProfileId cultureProfileId '
   + 'cultureProfileKey customTradeGoods eventConditions exportBonus faith '
-  + 'generationContentProfile has importLabels intendedStressTypes latentPantheon '
-  + 'magicLevel minTier nearbyResourceDefinitions nearbyResourceDefinitionsDepleted '
+  + 'generationContentProfile has importLabels intendedStressTypes latentPantheon line '
+  + 'magicLevel map minTier nearbyResourceDefinitions nearbyResourceDefinitionsDepleted '
   + 'nearbyResourcesCustom nearbyResourcesNative nearbyResourcesNativeDepleted '
   + 'neighborRelationship neighbourRelType primaryDeityRef primaryDeitySnapshot '
   + 'resourceEdits routeRequired seed specialResources stressType stressTypes '
   + `${STRESSOR_EDITS_KEY} suppliers targetCampaignId terrainOverride terrainType tier `
   + 'tradeCommodity tradeRoute useCustomContent').split(' '));
+// ↑ `line` and `map` (2026-11-07, LANDING-R2): scan over-collection, the `resolved` alias on non-config objects —
+// `resolved.map(` in economy/foodBalance.js (census-3h unit 3, 113a165e0) and `resolved.line` in
+// power/relationshipArchetypes.js (census-1f unit 1a, d422a8dbd). Inert, kept so the walker cannot drift.
 
 /**
  * Is `key` on updateConfig's admitted surface? Underscore-prefixed keys are
