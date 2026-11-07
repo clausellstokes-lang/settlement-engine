@@ -18,7 +18,8 @@
  * No imports. No closures. No runtime work. Pure data.
  */
 
-/** @typedef {{ label: string, historyColour: string, viabilityNote: string }} StressTypeMeta */
+/** @typedef {{ label: string, historyColour: string, viabilityNote: string,
+ *   viabilityNoteByDirection?: {arrivals: string, departures: string} }} StressTypeMeta */
 
 /** @type {Record<string, StressTypeMeta>} */
 export const STRESS_TYPE_META = {
@@ -95,6 +96,14 @@ export const STRESS_TYPE_META = {
   mass_migration: {
     label: 'Mass Migration',
     historyColour: 'demographic',
+    // The TYPE's note names both directions because the catalogue lists the kind, not a town
+    // (R-W7 e, W0's `stress[].direction`). A settlement's entry never prints this line: it carries
+    // the ONE half its own direction names, declared here exactly as `stressTypes.js` declares it
+    // (W5 HIS, WAVE-RULINGS item 9, 2026-11-07), so this pure-data mirror reads the direction too.
     viabilityNote: 'Immigration: food balance stressed, labour market disrupted, criminal opportunity elevated. Emigration: tax base shrinking, institutions hollowing, labour shortage emerging.',
+    viabilityNoteByDirection: {
+      arrivals: 'Immigration: food balance stressed, labour market disrupted, criminal opportunity elevated.',
+      departures: 'Emigration: tax base shrinking, institutions hollowing, labour shortage emerging.',
+    },
   },
 };
