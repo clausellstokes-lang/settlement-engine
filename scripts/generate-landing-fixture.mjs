@@ -303,8 +303,16 @@ export function advanceTimelineFor(news, townId = 't', limit = ADVANCE_ENTRIES) 
  * conditions the place lacks, and the pressure sentence is Hector Gallagher's unreported mistake that
  * Inghean MacCarthy is bound to report. The inn clause and the old favour are DELETED; each of the four
  * sentences below is traceable to the receipts, the hooks and the pressure sentence of the same run.
+ *
+ * ⚠ RE-GROUNDED 2026-11-07 (the rung-2 landing, LANDING-R2 seat J; an OWNER VETO POINT). The pool census
+ * re-worded two of the run's fields (measured: --check green at 1bff51c6d, STALE at f5dc50c6b and at the
+ * tip; the four receipts, the conflict and the advance timeline did not move): the mayor's goal is now to
+ * win the people back with things that cost nothing, fair hearings and quick answers, and the pressure
+ * sentence is that Hector Gallagher and Inghean MacCarthy are about to be on opposite sides of a
+ * significant decision. The mistake-and-report sentence, no longer derived, is DELETED; the third and
+ * fourth sentences are redrafted from those two fields, the first two are unchanged.
  */
-const STOCK_NARRATION = 'The road made Cnocby by a coin’s width, three chances of it against two of nothing, and the mountain stands are being cleared faster than they grow back. The Elder Council and the Religious Authorities are at odds over conscripting the guilds’ apprentices, and a neutral name is being pressed to choose a side before the council next sits. The mayor, Odhrán MacCarthy, means to prove the office is worth having by means that do not wait on money the town does not have. Hector Gallagher has made a mistake that Inghean MacCarthy is bound to report, and Inghean MacCarthy has not reported it.';
+const STOCK_NARRATION = 'The road made Cnocby by a coin’s width, three chances of it against two of nothing, and the mountain stands are being cleared faster than they grow back. The Elder Council and the Religious Authorities are at odds over conscripting the guilds’ apprentices, and a neutral name is being pressed to choose a side before the council next sits. The mayor, Odhrán MacCarthy, means to win the people back with what costs nothing: fair hearings and quick answers. Hector Gallagher and Inghean MacCarthy are bound by something neither speaks of, and they are about to stand on opposite sides of a decision that matters.';
 
 /**
  * The frozen fixture object for one seed — every selection COMPUTED from engine
