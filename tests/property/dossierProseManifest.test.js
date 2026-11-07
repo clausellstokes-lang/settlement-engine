@@ -185,11 +185,14 @@ describe('the composed-prose manifest — the DRIFT corpus, both audiences', () 
     // Towns unmoved at 516/3/3/3.
     // 67,754 -> 67,730 (372/364/358 unmoved) at THE POOL CENSUS COMPOSED (ODQ §934.105, RUNG 2 OF THE SOAK LADDER, the landing
     // stacked on rung 1; record docs/shift-records/2026-11-06-rung2-04-census-composed-prose-manifest.json). Towns unmoved at 516/3/3/3.
+    // 67,730 -> 68,954 (372/364/358 -> 384/372/364) at W5 HIS CONSTRUCTION (ODQ §934.105, the construction-and-wiring
+    // wave of 2026-11-07; record docs/shift-records/2026-11-07-w5-01-legacy-and-living-memory-said.json): the new sentence
+    // mount history.legacy composes DS-GEN-16's living-memory and legacy lines. Towns unmoved at 516/3/3/3.
     expect(tally, 'the DRIFT corpus by seed, cells and towns').toEqual({
-      'golden-master-v3': { cells: 67_730, towns: 516 },
-      'gm-seed-a': { cells: 372, towns: 3 },
-      'gm-seed-b': { cells: 364, towns: 3 },
-      'gm-seed-c': { cells: 358, towns: 3 },
+      'golden-master-v3': { cells: 68_954, towns: 516 },
+      'gm-seed-a': { cells: 384, towns: 3 },
+      'gm-seed-b': { cells: 372, towns: 3 },
+      'gm-seed-c': { cells: 364, towns: 3 },
     });
     // The two halves must close against the figures every other arm here reads.
     expect(Object.values(tally).reduce((n, r) => n + r.cells, 0)).toBe(run.cells.length);
@@ -384,9 +387,10 @@ describe('the composed-prose manifest — the DRIFT corpus, both audiences', () 
     const absent = registered.filter((m) => !recorded.has(m));
     expect(absent, 'every mount the corpus does not reach carries a reason, and no other does')
       .toEqual(reasoned);
-    expect(registered.length, 'the registry\'s distinct mounts').toBe(56);
+    // 56 / 42 -> 57 / 43 at W5 HIS construction (2026-11-07): the sentence mount history.legacy, recorded.
+    expect(registered.length, 'the registry\'s distinct mounts').toBe(57);
     expect(registered.filter((m) => recorded.has(m)).length, 'and the manifest records this many')
-      .toBe(42);
+      .toBe(43);
     // ⛔ AND THE REASONS ARE RE-MEASURED, NEVER TAKEN ON FAITH: every reasoned mount sits on a
     // block that fires on NO town of the RATE grid either, so its silence here is the world's
     // and not this recipe's. A block that starts speaking reds this arm until someone re-states
