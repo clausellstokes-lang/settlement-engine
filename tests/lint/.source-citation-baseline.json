@@ -47,9 +47,9 @@
     "pastEofCitationsExcluded": 377,
     "byRule": {
       "banner": 9,
-      "dated": 76,
+      "dated": 98,
       "sha-pin": 1,
-      "tree": 90
+      "tree": 95
     },
     "files": {
       "banner": [
@@ -64,9 +64,16 @@
         "docs/UIUX_AUDIT_AND_PLAN.md"
       ],
       "dated": [
+        "docs/CENSUS_1B_LANE_2026-11-04.md",
+        "docs/CENSUS_1_LANE_2026-11-04.md",
+        "docs/CENSUS_2_LANE_2026-11-04.md",
+        "docs/CENSUS_3_LANE_2026-11-04.md",
+        "docs/CENSUS_4_LANE_2026-11-04.md",
+        "docs/CENSUS_5_LANE_2026-11-04.md",
         "docs/COMPREHENSIVE_REVIEW_2026-07-13.md",
         "docs/COMPREHENSIVE_REVIEW_2026-07-15.md",
         "docs/COMPREHENSIVE_REVIEW_2026-08-01.md",
+        "docs/F13_CRISIS_FACTS_2026-11-04.md",
         "docs/F1_DEFENCE_WORDS_2026-11-04.md",
         "docs/F2_REPEAT_ONCE_2026-11-04.md",
         "docs/F3_FOOD_WORDS_2026-11-04.md",
@@ -91,12 +98,22 @@
         "docs/LANDING9_EDGE_2026-11-06.md",
         "docs/LANDING9_POWER_2026-11-06.md",
         "docs/R6_PLACE_NOT_TIER_2026-11-04.md",
+        "docs/READER_R11_TONIGHT_WANTS_2026-11-04.md",
+        "docs/READER_R1_VALIDATION_ON_PAGE_2026-11-04.md",
         "docs/RUNG1B_F6_BUDGET_FLOOR_2026-11-04.after.json",
         "docs/RUNG1B_F6_BUDGET_FLOOR_2026-11-04.calibration.json",
         "docs/RUNG1B_F6_BUDGET_FLOOR_2026-11-04.md",
         "docs/RUNG1B_F7_RENAME_CASCADE_2026-11-04.md",
         "docs/RUNG1B_F8_CAST_EDIT_KEYS_2026-11-04.md",
         "docs/RUNG1C_F10_WALLS_WORD_2026-11-04.md",
+        "docs/RUNG2_F12_CRISIS_BLIND_2026-11-04.md",
+        "docs/RUNG2_TUNING_2026-11-04.md",
+        "docs/SOAK_10000_RUNG2B_2026-11-04.md",
+        "docs/SOAK_10000_RUNG2C_2026-11-04.md",
+        "docs/SOAK_10000_RUNG2D_2026-11-04.md",
+        "docs/SOAK_10000_RUNG2E_2026-11-06.md",
+        "docs/SOAK_10000_RUNG2F_2026-11-06.md",
+        "docs/SOAK_10000_RUNG2_2026-11-04.md",
         "docs/SOAK_1000_2026-11-03.md",
         "docs/SOAK_1000_RUNG1B_2026-11-04.md",
         "docs/SOAK_1000_RUNG1B_F5_INSTRUMENTS_2026-11-04.md",
@@ -107,6 +124,10 @@
         "docs/SOAK_READER_INSTRUMENTS_2026-11-04.md",
         "docs/UX_CONSOLIDATION_2026-10-30.md",
         "docs/X46_CAR3_BUDGET_REPORT_2026-11-04.md",
+        "docs/census/CHAIR_RULINGS_2026-11-05.md",
+        "docs/census/COMPOSE_2026-11-06.md",
+        "docs/census/LANDING_R2_2026-11-06.md",
+        "docs/census/VOCABULARY_RULINGS_2026-11-04.md",
         "docs/chair/2026-11-06/BRIEF-CENSUS-COMPOSE-2026-11-06.md",
         "docs/chair/2026-11-06/BRIEF-L7-A-REGISTERS-2026-11-06.md",
         "docs/chair/2026-11-06/BRIEF-L7-A2-2026-11-06.md",
@@ -131,6 +152,7 @@
         "docs/chair/2026-11-06/BRIEF-L7-H-VERIFIER-2026-11-06.md",
         "docs/chair/2026-11-06/BRIEF-L7-SIGN-2026-11-06.md",
         "docs/chair/2026-11-06/BRIEF-LANDING-8-2026-11-06.md",
+        "docs/chair/2026-11-06/BRIEF-LANDING-R2-2026-11-06.md",
         "docs/chair/2026-11-06/BRIEF-REVIEW-INTAKE-2-2026-11-06.md",
         "docs/chair/2026-11-06/BRIEF-REVIEW-INTAKE-2026-11-06.md",
         "docs/chair/2026-11-06/BRIEF-REVIEW-INTAKE-3-2026-11-06.md",
@@ -233,6 +255,11 @@
         "docs/shift-records/2026-11-06-rung1-33-vacant-seat-fact.json",
         "docs/shift-records/2026-11-06-rung1-34-food-per-cent-from-pounds.json",
         "docs/shift-records/2026-11-06-rung1-35-village-watch-no-governor.json",
+        "docs/shift-records/2026-11-06-rung2-01-census-composed-generator-master.json",
+        "docs/shift-records/2026-11-06-rung2-02-census-composed-espionage-fence.json",
+        "docs/shift-records/2026-11-06-rung2-03-census-composed-herald-desk.json",
+        "docs/shift-records/2026-11-06-rung2-04-census-composed-prose-manifest.json",
+        "docs/shift-records/2026-11-06-rung2-05-census-composed-lighting-witness.json",
         "docs/shift-records/README.md",
         "docs/shift-records/_TEMPLATE.json"
       ]
@@ -244,7 +271,8 @@
     "_rosterGrowth2026-11-06-landing8": "FORTY-SEVEN documents JOINED the roster by being BORN into it (LANDING-8, measured with this walker's own partitionDocs at the rung-1 landing tip 070347943): `tree` 84 -> 90, the six signed records of the day (docs/shift-records/2026-11-06-rung1-29, -30, -32, -33, -34, -35; record 31 is Register VII's, owed to the owner's hand); `dated` 29 -> 70, the day's forty-one dated documents: the nine LANDING-7 lane and verifier records, this landing's LANDING8_2026-11-06.md, and the thirty-one dated chair briefs under docs/chair/2026-11-06/. GROWTHS, not class moves: no live document left the gated corpus. The forty-seven carry ONE past-EOF citation between them (docs/LANDING7_A_2026-11-06.md line 20 cites viability.js:608, a file of 596 lines at this tip: a record of its own day, which is the exclusion's reason). The archival corpus as a whole reads 390 past-EOF at this tip against the 377 frozen below; the risk is named here rather than re-frozen, as the 2026-11-06 rung-1 note named its 389.",
     "_rosterGrowth2026-11-06-register-vii": "ONE document JOINED the roster by being BORN into it (LANDING-8, re-measured after rebasing onto the chair's 61dd5ce2b): `dated` 70 -> 71, docs/tuning-signatures/2026-11-06-v1.json, the owner's Register VII signature record (229e62cd1). A GROWTH that hid nothing: 0 past-EOF citations.",
     "_rosterGrowth2026-11-06-landing9-corpus": "ONE document JOINED the roster by being BORN into it (LANDING-9 corpus lane, measured with this walker's own arm): `dated` 71 -> 72, docs/LANDING9_CORPUS_2026-11-06.md, the lane's record, born dated, 0 past-EOF citations. A GROWTH, not a re-classification: no document changed class.",
-    "_rosterGrowth2026-11-07-landing9-lanes": "FOUR documents JOINED the roster by being BORN into it (the chair, at the merge of the five LANDING-9 lanes, measured with this walker's own arm): `dated` 72 -> 76, docs/LANDING9_EDGE_2026-11-06.md, docs/LANDING9_DISTILLER_2026-11-06.md, docs/LANDING9_DIGESTS_2026-11-06.md, docs/LANDING9_POWER_2026-11-06.md, the four lanes' records, born dated, 0 past-EOF citations. A GROWTH, not a re-classification: no document changed class."
+    "_rosterGrowth2026-11-07-landing9-lanes": "FOUR documents JOINED the roster by being BORN into it (the chair, at the merge of the five LANDING-9 lanes, measured with this walker's own arm): `dated` 72 -> 76, docs/LANDING9_EDGE_2026-11-06.md, docs/LANDING9_DISTILLER_2026-11-06.md, docs/LANDING9_DIGESTS_2026-11-06.md, docs/LANDING9_POWER_2026-11-06.md, the four lanes' records, born dated, 0 past-EOF citations. A GROWTH, not a re-classification: no document changed class.",
+    "_rosterGrowth2026-11-07-landing-r2": "TWENTY-SEVEN documents JOINED the roster by being BORN into it (LANDING-R2 seat E, measured with this walker's own partitionDocs at the rung-2 landing tip, rung 1 final merged with the pool census): `tree` 90 -> 95, the five signed records of the rung-2 landing (docs/shift-records/2026-11-06-rung2-01 .. -05, the census-composed generator master, espionage fence, herald desk, prose manifest and lighting witness, ruled per surface by the chair at 02:36 UTC under §934.105); `dated` 76 -> 98, the pool census's dated records: the six census lane reports (CENSUS_1, 1B, 2, 3, 4, 5 of 2026-11-04), the census rulings and records under docs/census/ (VOCABULARY_RULINGS_2026-11-04, CHAIR_RULINGS_2026-11-05, COMPOSE_2026-11-06, LANDING_R2_2026-11-06), the rung-2 base's lane and soak records (F13_CRISIS_FACTS, READER_R1_VALIDATION_ON_PAGE, READER_R11_TONIGHT_WANTS, RUNG2_F12_CRISIS_BLIND, RUNG2_TUNING, and the six SOAK_10000_RUNG2* soaks) and the chair's brief BRIEF-LANDING-R2-2026-11-06. GROWTHS, not class moves: no live document left the gated corpus, and the twenty-seven carry 0 past-EOF citations between them. The archival corpus as a whole reads 388 past-EOF at this tip against the 377 frozen below; the rise sits in documents already on the roster whose targets have since shrunk, none in the newcomers, and the frozen figure is the freeze, left as recorded."
   },
   "rows": []
 }
