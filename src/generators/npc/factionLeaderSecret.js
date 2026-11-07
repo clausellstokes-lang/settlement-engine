@@ -9,7 +9,8 @@
  */
 
 import { NPC_CRIMINAL_SECRETS } from '../../data/npcData.js';
-import { pick as pickFromArray, random as rng } from '../../kernel/rngContext.js';
+import { random as rng } from '../../kernel/rngContext.js';
+import { drawRefusingHeldThrough } from '../hookVariety.js';
 import { resolveGenerationWorldLaw } from '../generationContext.js';
 import { institutionCategoryFlags } from '../roleCategory.js';
 
@@ -44,11 +45,16 @@ const SAFE_SECRET_FALLBACK = Object.freeze({
  * @param {Record<string, unknown>} config
  * @param {Array<Record<string, unknown>>} institutions
  * @param {unknown} generationContext
+ * @param {Set<string>} [heldSecrets] - the secrets the roster already carries (REVIEW-INTAKE-4):
+ *   the final draw refuses them and falls through the pool in seed order, then (on the same roll)
+ *   through the personal bucket, then the safe line; every one held answers `null`, a figure
+ *   without a secret rather than a repeated one.
  */
 export function generateFactionLeaderSecret(
   config = {},
   institutions = [],
   generationContext = null,
+  heldSecrets = null,
 ) {
   const worldLaw = resolveGenerationWorldLaw(generationContext, config);
   const pri = {
@@ -106,7 +112,10 @@ export function generateFactionLeaderSecret(
     || []
   ).filter(worldLaw.allowsSecret);
   const eligiblePool = preferredPool.length ? preferredPool : fallbackPool;
-  return eligiblePool.length
-    ? pickFromArray(eligiblePool)
-    : SAFE_SECRET_FALLBACK;
+  if (!eligiblePool.length) return heldSecrets?.has(SAFE_SECRET_FALLBACK.secret) ? null : SAFE_SECRET_FALLBACK;
+  // The chosen bucket first, then (on the same roll) the personal bucket, the pool's own fallback.
+  const chain = preferredPool.length ? [preferredPool, fallbackPool] : [fallbackPool];
+  const drawn = drawRefusingHeldThrough(chain, heldSecrets, (row) => row.secret);
+  if (drawn) return drawn;
+  return heldSecrets?.has(SAFE_SECRET_FALLBACK.secret) ? null : SAFE_SECRET_FALLBACK;
 }

@@ -22,6 +22,7 @@ import {
 // long-owed explanation layer; rides the same generator-golden regen as the
 // starting pantheon). Deterministic: recordTrace stamps ts off ctx._traceClock.
 import { recordTrace } from '../../domain/trace.js';
+import { heldByOthers } from '../hookVariety.js';
 
 // Corrupted short-term goal by corruption vector — replaces the NPC's normal
 // short goal so their motivation reads as compromised at the table.
@@ -60,7 +61,10 @@ registerStep('corruptionPass', {
 
   // In a criminal-institution settlement every NPC gets an explicit boolean so
   // the world-pulse layer knows generation already decided (vs. a legacy save).
-  for (const npc of npcs) {
+  // REVIEW-INTAKE-4: the roster's goals as they stand; a corrupt goal another figure already carries
+  // is refused and the figure keeps its own (the corruption itself is still on its record). Draw-free.
+  const goalsNow = npcs.map((n) => n?.goal?.short);
+  for (const [k, npc] of npcs.entries()) {
     const flaw = npcCorruptibleFlaw(npc);
     if (!flaw) { npc.corrupt = false; continue; }
     if (!rng.chance(p)) { npc.corrupt = false; continue; }
@@ -75,8 +79,10 @@ registerStep('corruptionPass', {
     npc.corruptTies = { criminalInstitution: crimInst, thievesGuild: guild };
 
     // Compromised short-term motivation.
-    if (npc.goal && typeof npc.goal === 'object') {
-      npc.goal = { ...npc.goal, short: CORRUPT_SHORT_GOAL[vector] || CORRUPT_SHORT_GOAL.greed };
+    const corruptGoal = CORRUPT_SHORT_GOAL[vector] || CORRUPT_SHORT_GOAL.greed;
+    if (npc.goal && typeof npc.goal === 'object' && !heldByOthers(goalsNow, k).has(corruptGoal)) {
+      npc.goal = { ...npc.goal, short: corruptGoal };
+      goalsNow[k] = corruptGoal;
     }
 
     // The receipt: WHY this NPC was generated already corrupted, and WHAT the

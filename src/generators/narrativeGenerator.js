@@ -59,7 +59,7 @@ import { composeArrivalScene, ROUTE_TO_SCENE } from './narrative/arrivalScene.js
 import { genRelNarrative, genSuccessionNarr } from './powerGenerator.js';
 import { mergeNPCLists } from './npcGenerator.js';
 import { enrichNPCsWithStructure } from './npcStructure.js';
-import { generateCrimeLevel, getStressHistory } from './npcGenerator.js';
+import { generateCrimeLevel, getStressHistory } from './npcGenerator.js'; import { heldByOthers } from './hookVariety.js'; // REVIEW-INTAKE-4, one line so no cited line moves
 import { generateSiegeCapability } from './narrative/siegeCapability.js';
 // The history half of the coherence tail. Extracted so the history REROLL runs
 // the same derivations assembly runs instead of shipping generateHistory's raw
@@ -692,8 +692,8 @@ const _getSettReason = (safetyLabel, monsterThreat, hasStress) => {
  * Enrich an NPC object with faction affiliation, secret motivation overlay,
  * and stress-specific goal modifications.
  */
-const buildPoliticalNarrative = (npc, index, summary, allNpcs) => {
-  const crimeLevel = generateCrimeLevel(npc, index, summary, allNpcs);
+const buildPoliticalNarrative = (npc, index, summary, allNpcs, held = null) => { // held: the secrets the rest of the roster carries (REVIEW-INTAKE-4)
+  const crimeLevel = generateCrimeLevel(npc, index, summary, allNpcs, held);
   const secret = crimeLevel || npc.secret;
   let presentation = npc.presentation;
 
@@ -869,7 +869,7 @@ export const generateArrivalScene = settlement => composeArrivalScene(settlement
 export const enrichNpcCoherence = (settlement) => {
   const npcs = settlement.npcs || [];
   const summary = genSettSummary(settlement);
-  const enrichedNpcs = npcs.map((npc, idx) => buildPoliticalNarrative(npc, idx, summary, npcs));
+  const secretsNow = npcs.map((n) => n?.secret?.what); const enrichedNpcs = npcs.map((npc, idx) => { const e = buildPoliticalNarrative(npc, idx, summary, npcs, heldByOthers(secretsNow, idx)); secretsNow[idx] = e?.secret?.what; return e; }); // REVIEW-INTAKE-4: the overlay refuses a secret another figure holds
   const rawMergedNpcs = mergeNPCLists(
     enrichedNpcs,
     settlement.powerStructure?.factions || [],

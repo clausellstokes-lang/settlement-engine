@@ -13,6 +13,7 @@
  * the DM sees one coherent goal derived from the current situation.
  */
 
+import { heldByOthers } from './hookVariety.js';
 
 // Shared phrases hoisted once (train EM-T16's worker buy-back, judgment 214c): each is spelled here and referenced below; every emitted value is byte-identical.
 const GOVERNANCE_FRACTURED = 'governance_fractured';
@@ -414,6 +415,10 @@ export function enrichNPCsWithStructure(npcs, settlement) {
 
   const scored = npcs.map(n => ({ npc: n, score: npcRelevanceScore(n, powerFactions) }))
                      .sort((a,b) => b.score - a.score);
+  // REVIEW-INTAKE-4: the roster's goals as they stand (in scored order). A template goal another
+  // figure already carries is refused and the figure keeps its own goal; its structural position
+  // and constraint are still its situation's. Draw-free.
+  const goalsNow = scored.map(({ npc }) => npc?.goal?.short);
 
   return scored.map(({ npc }, idx) => {
     if (idx >= TOP_N) return npc;
@@ -427,9 +432,13 @@ export function enrichNPCsWithStructure(npcs, settlement) {
 
     // activeGoal replaces goal.short on enriched NPCs so the DM sees one coherent goal.
     // The settlement-derived goal is more specific than the generic role goal.
-    const updatedGoal = npc.goal
-      ? { ...npc.goal, short: tmpl.goal }
-      : { short: tmpl.goal, long: tmpl.goal };
+    const held = heldByOthers(goalsNow, idx).has(tmpl.goal.trim());
+    const updatedGoal = held
+      ? npc.goal
+      : npc.goal
+        ? { ...npc.goal, short: tmpl.goal }
+        : { short: tmpl.goal, long: tmpl.goal };
+    goalsNow[idx] = updatedGoal?.short;
 
     return {
       ...npc,

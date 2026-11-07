@@ -121,3 +121,69 @@ export function drawUnique(pool, used, keyFn = (x) => /** @type {string} */ (x),
   }
   return chosen;
 }
+
+/**
+ * REVIEW-INTAKE-4 (the chair's ruling, 2026-11-07) — A DRAW THAT REFUSES WHAT THE ROSTER HOLDS.
+ * One named figure's secret or goal is never a text another figure of the same roster already
+ * carries. The seeded roll lands on the SAME index a plain `pick(pool)` lands on (one roll,
+ * nothing more, so a roster with no collision is byte-identical to before); when that row's key
+ * is already held, the draw falls through the pool IN SEED ORDER — the next row, wrapping — to
+ * the first row nobody holds, with no further roll. A pool whose every row is held answers
+ * `undefined`: the figure goes without one from this writer rather than repeating (unlike
+ * `drawUnique`, which accepts the repeat). The caller registers what it keeps.
+ *
+ * @template T
+ * @param {T[]} pool
+ * @param {Set<string> | null | undefined} held - the texts the rest of the roster carries
+ * @param {(x: T) => string} [keyFn] - the text a row would put on the figure
+ * @returns {T | undefined}
+ */
+export function drawRefusingHeld(pool, held, keyFn = (x) => /** @type {string} */ (x)) {
+  return drawRefusingHeldThrough([pool], held, keyFn);
+}
+
+/**
+ * `drawRefusingHeld` over a CHAIN of pools, the writer's own fallback order (a role's goals, then
+ * its category's, then the generic pool): the ONE roll picks the start index in the FIRST
+ * non-empty pool exactly as `pick` would; when every row of a pool is held, the SAME roll
+ * re-scales onto the next pool and walks it in seed order. No pool spends a second roll, so a
+ * roster with no collision is byte-identical to a plain pick of the first pool; every pool
+ * exhausted answers `undefined`.
+ *
+ * @template T
+ * @param {ReadonlyArray<ReadonlyArray<T> | null | undefined>} pools
+ * @param {Set<string> | null | undefined} held
+ * @param {(x: T) => string} [keyFn]
+ * @returns {T | undefined}
+ */
+export function drawRefusingHeldThrough(pools, held, keyFn = (x) => /** @type {string} */ (x)) {
+  const live = pools.filter((pool) => Array.isArray(pool) && pool.length > 0);
+  if (live.length === 0) return undefined;
+  const u = _rng(); // THE ONE ROLL: on the first pool, rngContext.pick's own index
+  for (const pool of live) {
+    const start = Math.floor(u * pool.length);
+    if (!held || held.size === 0) return pool[start];
+    for (let k = 0; k < pool.length; k++) {
+      const row = pool[(start + k) % pool.length];
+      if (!held.has(String(keyFn(row) ?? '').trim())) return row;
+    }
+  }
+  return undefined;
+}
+
+/**
+ * The texts the REST of a roster carries for one field, trimmed, for `drawRefusingHeld` and for
+ * a rewriter that must not hand a figure a text another already holds.
+ * @param {ReadonlyArray<unknown>} texts - one entry per figure, in roster order
+ * @param {number} self - the figure being written (excluded)
+ * @returns {Set<string>}
+ */
+export function heldByOthers(texts, self) {
+  const held = new Set();
+  texts.forEach((text, k) => {
+    if (k === self || typeof text !== 'string') return;
+    const t = text.trim();
+    if (t) held.add(t);
+  });
+  return held;
+}
