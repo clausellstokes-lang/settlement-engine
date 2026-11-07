@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "229e62cd14f80f1c3d97708ab3dcd28afe4c6f35",
-  "measuredBy": "the cloud chair (Fable 5.1), session 01FE9mEvGxnFx6WTBkEC6ie9, on the owner record docs/tuning-signatures/2026-11-06-v1.json",
-  "date": "2026-11-06",
-  "note": "Register VII signed at tuning-register v1 on the owner record of 2026-11-06 (docs/tuning-signatures/2026-11-06-v1.json, ODQ §934.105): the eight densityBands.js dials, their digests frozen at this tip; no value moved",
+  "measuredAtSha": "cbaa94879f2e2b4c31d9bf415a47aba2cef678d3",
+  "measuredBy": "PEOPLE-1 CAST",
+  "date": "2026-11-07",
+  "note": "the people car lane 1: the dead _formatNPCForDisplay deleted from npcGenerator.js (one bare decimal fewer, 71 -> 70); the new people/castPowers.js names its two dials in CAST_POWERS_TUNING (a draft register row), so it carries no bare decimal and no unregistered constant",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -8042,6 +8042,21 @@
       ],
       "namedDependents": []
     },
+    "src/generators/people/castPowers.js#CAST_POWERS_TUNING": {
+      "exported": true,
+      "idiom": "literal",
+      "keys": 2,
+      "line": 61,
+      "spanDigest": "27e8cae7f714b6255ed46d5145a6bb53f4257fda9c347798c877bf6108baa529",
+      "leaves": {
+        "RANKS": 3,
+        "WEIGHT_ZERO_HOUSE": 0.5
+      },
+      "dependents": [
+        "src/generators/narrativeGenerator.js"
+      ],
+      "namedDependents": []
+    },
     "src/lib/townScene/adaptiveQuality.js#GOVERNOR_TUNING": {
       "exported": true,
       "idiom": "literal",
@@ -8646,7 +8661,7 @@
     "src/generators/narrativeGenerator.js": 2,
     "src/generators/neighbourGenerator.js": 43,
     "src/generators/npc/factionLeaderSecret.js": 48,
-    "src/generators/npcGenerator.js": 71,
+    "src/generators/npcGenerator.js": 70,
     "src/generators/npcStructure.js": 2,
     "src/generators/power/relationshipArchetypes.js": 13,
     "src/generators/power/rulingStructure.js": 13,
@@ -8669,11 +8684,11 @@
   },
   "unclosed": [],
   "totals": {
-    "tables": 262,
-    "keys": 2209,
+    "tables": 263,
+    "keys": 2211,
     "unregisteredNamed": 535,
-    "bareDecimals": 6945,
+    "bareDecimals": 6944,
     "zeroDependentTables": 10,
-    "zeroNamedDependentTables": 171
+    "zeroNamedDependentTables": 172
   }
 }
