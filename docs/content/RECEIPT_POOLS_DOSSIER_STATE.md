@@ -4119,26 +4119,26 @@ once, drawn in print and by `WarFaithSection`.
 **`Belligerent`** {colour}
 1. `[ledger]` {settlement} reaches for force earlier than its neighbours do; where another hall would send a letter, this one weighs a muster first.
 2. `[street]` The town's temper is known. When something goes wrong at a border, {settlement} is not the party that waits.
-3. `[visitor]` A stranger negotiating with {settlement} finds the hall reaching for consequences early, and finds the reaching is not a bluff.
+3. `[visitor]` Bargain with {settlement} and you find the hall threatens early, and means it.
 
 **`Assertive`** {colour}
-1. `[ledger]` {settlement} presses its claims. It does not seek fights and it does not leave a grievance to settle itself, and the difference is legible in how it negotiates.
-2. `[visitor]` A stranger dealing with {settlement} finds the hall firm rather than hostile, and finds that firmness holds when tested.
+1. `[ledger]` {settlement} presses its claims: it does not look for fights, but every grievance stays in the hall's letters until it is settled.
+2. `[visitor]` Deal with {settlement} and you find the hall firm but not hostile, and it holds firm when tested.
 3. `[street]` The town at {settlement} does not let a thing go, and its neighbours settle small matters with it promptly rather than discover what happens otherwise.
 
 **`Even-handed`** {colour}
 1. `[ledger]` {settlement} weighs a quarrel the way most halls do: neither eager nor reluctant, and predictable to anybody who has dealt with it twice.
-2. `[street]` The town has no reputation either way, which in these matters is itself a reputation.
-3. `[visitor]` A stranger can predict what {settlement}'s hall will do about a grievance, which is the most useful thing a neighbour can say about a town.
+2. `[street]` {settlement} is known neither for picking fights nor for avoiding them.
+3. `[visitor]` You can predict what {settlement}'s hall will do about a grievance, and its neighbours value that.
 
 **`Cautious`** {colour}
-1. `[ledger]` {settlement} prefers not to. Where a grievance can be carried rather than pressed, this hall carries it, and the carrying is its habit rather than its calculation.
-2. `[counterforce]` There are causes {settlement} holds and does not act on, and the holding is disposition rather than weakness.
+1. `[ledger]` {settlement} prefers not to fight: where a grievance can be lived with, the hall files it away and lives with it.
+2. `[counterforce]` {settlement} has grievances it could act on and does not, from temper, not weakness.
 3. `[street]` The town at {settlement} would rather be wronged than be at war, and says so when the question is put directly.
 
 **`Pacific`** {colour}
 1. `[ledger]` {settlement} will go a very long way to avoid a fight, and its neighbours price that in.
-2. `[street]` The town does not answer provocation, and the not-answering is a settled policy rather than a mood.
+2. `[street]` People at {settlement} do not answer provocation, as a matter of settled policy, not mood.
 3. `[counterforce]` {settlement} would not take up a cause another hall would seize on, and its neighbours can plan around that without having to test it.
 
 ---

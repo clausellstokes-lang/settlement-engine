@@ -2533,7 +2533,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "A stranger negotiating with {settlement} finds the hall reaching for consequences early, and finds the reaching is not a bluff.",
+          "text": "Bargain with {settlement} and you find the hall threatens early, and means it.",
           "slots": [
             "settlement"
           ],
@@ -2543,7 +2543,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
       "Assertive": [
         {
           "angle": "ledger",
-          "text": "{settlement} presses its claims. It does not seek fights and it does not leave a grievance to settle itself, and the difference is legible in how it negotiates.",
+          "text": "{settlement} presses its claims: it does not look for fights, but every grievance stays in the hall's letters until it is settled.",
           "slots": [
             "settlement"
           ],
@@ -2551,7 +2551,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "A stranger dealing with {settlement} finds the hall firm rather than hostile, and finds that firmness holds when tested.",
+          "text": "Deal with {settlement} and you find the hall firm but not hostile, and it holds firm when tested.",
           "slots": [
             "settlement"
           ],
@@ -2577,13 +2577,15 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "The town has no reputation either way, which in these matters is itself a reputation.",
-          "slots": [],
+          "text": "{settlement} is known neither for picking fights nor for avoiding them.",
+          "slots": [
+            "settlement"
+          ],
           "vid": 2
         },
         {
           "angle": "visitor",
-          "text": "A stranger can predict what {settlement}'s hall will do about a grievance, which is the most useful thing a neighbour can say about a town.",
+          "text": "You can predict what {settlement}'s hall will do about a grievance, and its neighbours value that.",
           "slots": [
             "settlement"
           ],
@@ -2593,7 +2595,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
       "Cautious": [
         {
           "angle": "ledger",
-          "text": "{settlement} prefers not to. Where a grievance can be carried rather than pressed, this hall carries it, and the carrying is its habit rather than its calculation.",
+          "text": "{settlement} prefers not to fight: where a grievance can be lived with, the hall files it away and lives with it.",
           "slots": [
             "settlement"
           ],
@@ -2601,7 +2603,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "counterforce",
-          "text": "There are causes {settlement} holds and does not act on, and the holding is disposition rather than weakness.",
+          "text": "{settlement} has grievances it could act on and does not, from temper, not weakness.",
           "slots": [
             "settlement"
           ],
@@ -2627,8 +2629,10 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "The town does not answer provocation, and the not-answering is a settled policy rather than a mood.",
-          "slots": [],
+          "text": "People at {settlement} do not answer provocation, as a matter of settled policy, not mood.",
+          "slots": [
+            "settlement"
+          ],
           "vid": 2
         },
         {
