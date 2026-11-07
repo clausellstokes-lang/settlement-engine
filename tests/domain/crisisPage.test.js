@@ -23,7 +23,7 @@ describe('the Crisis page, one section per active crisis', () => {
     for (const section of page) {
       const entry = entries.find((e) => e.type === section.type);
       expect(section.line.startsWith(entry.label)).toBe(true);
-      expect(section.line).toContain(CRISIS_PAGE_COPY.nature[entry.cast.nature]);
+      expect(section.line).toBe(`${entry.label}.`); // W4 second seat, row 21: the kind is the heading, no classification
       expect(section.cast.map((r) => r.name)).toEqual(entry.cast.roles.map((r) => r.name));
       for (const r of section.cast) expect(r.reason.length).toBeGreaterThan(0);
       expect(section.stakes.length).toBe(entry.cast.stakes.length);

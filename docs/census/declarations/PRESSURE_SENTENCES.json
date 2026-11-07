@@ -56,7 +56,7 @@
         },
         {
           "lineId": "PRESSURE_SENTENCES.under_siege[3]",
-          "text": "The walls of ${name} have held so far, which is the problem. A quick fall would at least have settled the question of who was to blame, and a slow one leaves ${govFaction} to answer for every day the relief does not come.",
+          "text": "The walls of ${name} have held so far, but the relief has not come, and every day it does not, more of the blame falls on ${govFaction}.",
           "needs": [
             "walls"
           ],
@@ -69,7 +69,7 @@
         },
         {
           "lineId": "PRESSURE_SENTENCES.under_siege[4]",
-          "text": "${name} is learning the arithmetic of a siege: how many mouths, how many days of ${commodity}, how many of the people on the walls are watching the enemy and how many are watching each other.",
+          "text": "${name} counts its mouths and its days of ${commodity} every morning, and the people on the walls watch each other as closely as they watch the enemy.",
           "needs": [
             "walls"
           ],
@@ -121,7 +121,7 @@
         },
         {
           "lineId": "PRESSURE_SENTENCES.famine[1]",
-          "text": "The harvest failure has restructured every relationship in ${name}. Whoever controls food now controls the settlement, and at least three factions have worked this out.",
+          "text": "Since the harvest failed, whoever holds the food in ${name} holds the power, and at least three factions are fighting over the stores.",
           "needs": [],
           "excludes": [],
           "crisis": [
@@ -154,7 +154,7 @@
         },
         {
           "lineId": "PRESSURE_SENTENCES.famine[4]",
-          "text": "${govFaction} of ${name} announced a fair distribution of the ${commodity} reserves last week; the announcement and the distribution are turning out to be two different things.",
+          "text": "${govFaction} of ${name} promised a fair share of the ${commodity} reserves last week, and little of it has reached the poor.",
           "needs": [],
           "excludes": [],
           "crisis": [
@@ -195,7 +195,7 @@
       "lines": [
         {
           "lineId": "PRESSURE_SENTENCES.occupied[0]",
-          "text": "${name} is under occupation; ${govFaction} answers to outside authority now, which means every decision made here is made twice: once officially, once actually.",
+          "text": "${name} is occupied; ${govFaction} still meets, but nothing it decides stands until the occupiers agree.",
           "needs": [],
           "excludes": [],
           "crisis": [
@@ -206,7 +206,7 @@
         },
         {
           "lineId": "PRESSURE_SENTENCES.occupied[1]",
-          "text": "The occupation has been running long enough that some residents have accommodated it and some have organised against it, and the divide between those two groups is not always visible from the outside.",
+          "text": "The occupation of ${name} has lasted long enough to split it: some families now work with the occupiers and some hide the people who fight them, often on the same street.",
           "needs": [],
           "excludes": [],
           "crisis": [
@@ -239,7 +239,7 @@
         },
         {
           "lineId": "PRESSURE_SENTENCES.occupied[4]",
-          "text": "Every household in ${name} has quietly decided what it would and would not do if asked, and most of them are hoping never to find out whether they were honest with themselves.",
+          "text": "Every household in ${name} has decided what it would do if the occupiers asked it for names, and every one of them hopes it is never asked.",
           "needs": [],
           "excludes": [],
           "crisis": [
@@ -289,7 +289,7 @@
         },
         {
           "lineId": "PRESSURE_SENTENCES.politically_fractured[1]",
-          "text": "Three factions are each waiting for one of the other two to make a mistake. In the meantime, ${name} is being administered by inertia.",
+          "text": "Three factions in ${name} are each waiting for one of the others to slip, and meanwhile nothing gets mended and no quarrel gets settled.",
           "needs": [],
           "excludes": [],
           "crisis": [
@@ -311,7 +311,7 @@
         },
         {
           "lineId": "PRESSURE_SENTENCES.politically_fractured[3]",
-          "text": "Nothing gets decided in ${name} because deciding would require one faction to be seen to win, and none of them can afford to let another be seen to lose. The paralysis is not an accident; it is the only stable arrangement left.",
+          "text": "Nothing gets decided in ${name}, because any decision would hand one faction a win the others will not allow, and every faction prefers the deadlock to losing.",
           "needs": [],
           "excludes": [],
           "crisis": [
@@ -322,7 +322,7 @@
         },
         {
           "lineId": "PRESSURE_SENTENCES.politically_fractured[4]",
-          "text": "${name} runs two of everything now (two watches, two courts of a kind, two versions of who is owed what), and the citizens have learned which one to approach for which favour, which is its own kind of government.",
+          "text": "${name} has two of everything now, two watches and two courts of a kind, and people have learned which one to ask for which favour.",
           "needs": [
             "watch"
           ],
@@ -407,7 +407,7 @@
         },
         {
           "lineId": "PRESSURE_SENTENCES.indebted[4]",
-          "text": "${name} still keeps up appearances: the civic buildings are painted, the festival was held. The money for both was borrowed, which everyone knows and no one says, because saying it would end the appearances that are the only asset left.",
+          "text": "${name} still paints its civic buildings and still held its festival, all on borrowed money; everyone knows it, and nobody says it aloud.",
           "needs": [],
           "excludes": [],
           "crisis": [
@@ -446,7 +446,7 @@
       "lines": [
         {
           "lineId": "PRESSURE_SENTENCES.recently_betrayed[0]",
-          "text": "Someone inside ${name} sold something important (recently enough that the wound is open, not yet scarred over), and the settlement's institutions are running at reduced trust while everyone suspects everyone else.",
+          "text": "Someone inside ${name} sold something important not long ago, and now everyone suspects everyone else; deals that took a handshake now take a witness.",
           "needs": [],
           "excludes": [],
           "crisis": [
@@ -529,7 +529,7 @@
       "lines": [
         {
           "lineId": "PRESSURE_SENTENCES.infiltrated[0]",
-          "text": "${name} doesn't know it's been infiltrated; decisions at the ${govFaction} level have been subtly shaped for months, and the direction those decisions have been shaped toward is only now becoming legible.",
+          "text": "${name} does not know it has been infiltrated; for months ${govFaction} has been deciding things one way, and only now can anyone see which way.",
           "needs": [],
           "excludes": [],
           "crisis": [
@@ -540,7 +540,7 @@
         },
         {
           "lineId": "PRESSURE_SENTENCES.infiltrated[1]",
-          "text": "Someone has been in ${name} long enough to understand it (its vulnerabilities, its factions, its trusted figures), and has been using that understanding systematically.",
+          "text": "Someone has lived in ${name} long enough to learn its weak points, its factions and whom it trusts, and is using all three.",
           "needs": [],
           "excludes": [],
           "crisis": [
@@ -573,7 +573,7 @@
         },
         {
           "lineId": "PRESSURE_SENTENCES.infiltrated[4]",
-          "text": "Whoever is inside ${name} has not asked for anything yet, and the waiting is the tell: they are still building the position, and by the time they spend it, it will be too late for ${govFaction} to have noticed.",
+          "text": "Whoever is working inside ${name} has asked for nothing yet; they are still earning trust, and ${govFaction} has not noticed.",
           "needs": [],
           "excludes": [],
           "crisis": [
@@ -625,7 +625,7 @@
         },
         {
           "lineId": "PRESSURE_SENTENCES.plague_onset[1]",
-          "text": "The disease has not yet become a plague, but the window for preventing that outcome is narrowing; every day the quarantine is ignored or negotiated around makes the arithmetic worse.",
+          "text": "The disease is not a plague yet, but every day the quarantine is ignored or bargained around brings it closer.",
           "needs": [],
           "excludes": [],
           "crisis": [
@@ -636,7 +636,7 @@
         },
         {
           "lineId": "PRESSURE_SENTENCES.plague_onset[2]",
-          "text": "${govFaction} is managing disclosure of the outbreak, which means what residents know and what is actually true have started to diverge.",
+          "text": "${govFaction} is playing the outbreak down, and what people are told is no longer what is true.",
           "needs": [],
           "excludes": [],
           "crisis": [
@@ -701,7 +701,7 @@
       "lines": [
         {
           "lineId": "PRESSURE_SENTENCES.succession_void[0]",
-          "text": "${name} has no effective leader; the last strong authority died ${weeksAgo} weeks ago, and ${topFaction} is moving faster than the settlement's institutions can process what's happening.",
+          "text": "${name}'s last strong leader died ${weeksAgo} weeks ago, and ${topFaction} is taking over the offices before anyone else can claim them.",
           "needs": [],
           "excludes": [],
           "crisis": [
@@ -723,7 +723,7 @@
         },
         {
           "lineId": "PRESSURE_SENTENCES.succession_void[2]",
-          "text": "The power vacuum is obvious to everyone; the question is not who fills it but what they do to fill it and who they owe when they have.",
+          "text": "Everyone can see the seat is empty, and every claimant is buying support with promises that will have to be paid.",
           "needs": [],
           "excludes": [],
           "crisis": [
@@ -734,7 +734,7 @@
         },
         {
           "lineId": "PRESSURE_SENTENCES.succession_void[3]",
-          "text": "The old authority in ${name} left no clear heir and a great many people who benefited from the old arrangement; each of them is now discovering that a claim is only as good as the people willing to enforce it.",
+          "text": "The old ruler of ${name} left no clear heir, and everyone who did well under the old order is gathering followers to back a claim.",
           "needs": [],
           "excludes": [],
           "crisis": [
@@ -786,7 +786,7 @@
       "lines": [
         {
           "lineId": "PRESSURE_SENTENCES.monster_pressure[0]",
-          "text": "The attacks on ${name}'s outlying farmsteads are following a pattern that doesn't fit opportunistic predation; someone or something is directing this, and the evidence is available to anyone who looks carefully.",
+          "text": "${name}'s outlying farms are being hit one after another, each one near the last; whatever is out there is choosing them.",
           "needs": [],
           "excludes": [],
           "crisis": [
@@ -874,7 +874,7 @@
       "lines": [
         {
           "lineId": "PRESSURE_SENTENCES.insurgency(street)[0]",
-          "text": "The commons of ${name} have stopped pretending to accept the current arrangement. ${govFaction} still holds the buildings and the official seal, but it is governing by momentum rather than consent. The first faction leader to offer a credible alternative will find an audience.",
+          "text": "The commons of ${name} have stopped obeying. ${govFaction} still holds the buildings and the official seal, but its orders go unanswered, and the first faction leader to offer something better will find people ready to follow.",
           "needs": [],
           "excludes": [],
           "crisis": [
@@ -885,7 +885,7 @@
         },
         {
           "lineId": "PRESSURE_SENTENCES.insurgency(street)[1]",
-          "text": "The street has gone quiet in ${name}, and the quiet is not calm. It is the pause before a thing that everyone can feel coming. ${govFaction} issues orders that are heard, noted, and not obeyed, and each unobeyed order costs it more than the last.",
+          "text": "The streets of ${name} have gone quiet, and everyone is waiting for something to break. ${govFaction} gives orders that are heard and not obeyed, and each one weakens it further.",
           "needs": [],
           "excludes": [],
           "crisis": [
@@ -925,7 +925,7 @@
       "lines": [
         {
           "lineId": "PRESSURE_SENTENCES.insurgency(institutional)[0]",
-          "text": "The challenge to ${govFaction} in ${name} is institutional, not the street but the ledger and the meeting room. Revenue is being held. Officials are slow-walking decisions. Someone is building a coalition, and ${govFaction} knows it but cannot act without legitimising what they are trying to suppress.",
+          "text": "The challenge to ${govFaction} in ${name} comes from its own officials: taxes held back, decisions left unsigned, a coalition forming. ${govFaction} knows it, and cannot move against it without making it stronger.",
           "needs": [],
           "excludes": [],
           "crisis": [
@@ -978,7 +978,7 @@
       "lines": [
         {
           "lineId": "PRESSURE_SENTENCES.mass_migration(strongeconomy)[0]",
-          "text": "${name} is absorbing more people than it was built for. The new arrivals and the old residents are not yet one community. They share streets and markets but not language, custom, or trust. ${govFaction} is managing the rate of change rather than directing it, and the rate of change is not cooperating.",
+          "text": "${name} is taking in more people than it was built for. The newcomers and the old residents share the streets and the market, but not a language, customs or trust, and ${govFaction} cannot keep up with how fast they come.",
           "needs": [
             "market"
           ],
@@ -1002,7 +1002,7 @@
         },
         {
           "lineId": "PRESSURE_SENTENCES.mass_migration(strongeconomy)[2]",
-          "text": "${name} has grown a second town at its edges. Newer, poorer, and not quite governed by the same rules as the first. ${govFaction} has not decided whether the outer town is part of the settlement or a thing that has happened to it, and the indecision is becoming a policy of its own.",
+          "text": "Newcomers have built a second, poorer town at the edges of ${name}, and ${govFaction} has not decided whether it governs it; until it does, the outer town keeps its own rules.",
           "needs": [],
           "excludes": [],
           "crisis": [
@@ -1088,7 +1088,7 @@
       "lines": [
         {
           "lineId": "PRESSURE_SENTENCES.wartime(winning)[0]",
-          "text": "${name} is at war and, for now, on the right side of it. Contracts are flowing, the garrison is reinforced, and the crown is paying. The men who left to fight have not come back, which is a grief that runs beneath the commerce. The question is whether the war ends before the accounts do.",
+          "text": "${name} is at war and, for now, on the right side of it: contracts are flowing, the garrison is reinforced, and the crown is paying. The men who left to fight have not come back.",
           "needs": [
             "garrison"
           ],
@@ -1103,7 +1103,7 @@
         },
         {
           "lineId": "PRESSURE_SENTENCES.wartime(winning)[1]",
-          "text": "The war has been good to ${name} so far, which is an uncomfortable thing to be. Being on the right side of it means the forges run day and night and the ${commodity} trade has never been dearer, and it means the settlement now needs the war to continue in order to pay for what the war has already cost it.",
+          "text": "Being on the right side of it keeps the forges of ${name} running day and night, and the ${commodity} trade has never paid better, and the place now needs the war to go on to pay for what the war has already cost it.",
           "needs": [
             "institution: smith"
           ],
@@ -1118,7 +1118,7 @@
         },
         {
           "lineId": "PRESSURE_SENTENCES.wartime(winning)[2]",
-          "text": "${name} is prospering on the right side of it: full warehouses, a reinforced garrison, coin moving fast. Prosperity built on a war is a wager that the war will end at the right moment, and no one in ${name} controls the moment.",
+          "text": "${name} is prospering on the right side of it: full warehouses, a reinforced garrison, coin moving fast, and all of it lost if the war turns.",
           "needs": [
             "garrison"
           ],
@@ -1214,7 +1214,7 @@
       "lines": [
         {
           "lineId": "PRESSURE_SENTENCES.religious_conversion[0]",
-          "text": "The new faith in ${name} does not yet have a building. It has the congregation. ${govFaction} have not yet decided whether this is a religious matter, a political one, or both, and the delay in deciding is itself a decision that both sides are interpreting.",
+          "text": "The new faith in ${name} has no building yet, only its congregation, and ${govFaction} cannot decide whether to treat it as a matter of faith or of politics; both sides read the delay as a sign.",
           "needs": [],
           "excludes": [],
           "crisis": [
@@ -1240,7 +1240,7 @@
         },
         {
           "lineId": "PRESSURE_SENTENCES.religious_conversion[2]",
-          "text": "The conversion order in ${name} was formally acknowledged within the week. The compliance was faster than anyone expected. The depth of that compliance is a separate question that no one with authority is asking loudly, because the answer would require a response.",
+          "text": "The conversion order in ${name} was accepted within the week, faster than anyone expected, and nobody in authority is asking whether the old rites still go on behind closed doors.",
           "needs": [],
           "excludes": [],
           "crisis": [
@@ -1303,7 +1303,7 @@
       "lines": [
         {
           "lineId": "PRESSURE_SENTENCES.slave_revolt[0]",
-          "text": "The revolt in ${name} is past the point where it could be resolved by show of force alone. The enslaved population controls enough territory and has enough organisation that suppression would require commitment the governing faction has not yet made. The market infrastructure that generated this situation is suspended. The question now is what the settlement looks like on the other side, and who decides.",
+          "text": "The revolt in ${name} is too big to put down by force alone: the enslaved hold whole districts and are organised, and the governing faction has not committed what crushing them would take. The slave trade has stopped. What is left to settle is what ${name} becomes afterwards, and who decides.",
           "needs": [],
           "excludes": [],
           "crisis": [

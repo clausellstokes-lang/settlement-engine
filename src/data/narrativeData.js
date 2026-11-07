@@ -226,9 +226,9 @@ export const STRESS_DESCS = {
     { text: r =>
       `${r} is in reasonable shape. The walls are standing, the market is functioning, the main street is paved. The paving needs repair. The wall has a section of new brick that doesn't quite match the old. The repairs that needed doing five years ago are still waiting.`, needs: ['walls', 'market'], excludes: ['crisis: threat'] },
     { text: _r =>
-      "A building near the gate has a new sign: an institution that wasn't there last season, with a name that is recognisably the name of an outside creditor. Someone has arrived and set up an office. This is not a good sign.", needs: ['gate'] },
+      "A building near the gate has a new sign, freshly painted with the name of an outside creditor. The creditor has opened an office here, and the locals walk past it without looking in.", needs: ['gate'] },
     { text: r =>
-      `${r} functions. The market is busy enough. The streets are clean enough. The civic buildings are maintained enough. 'Enough' is doing a lot of work in every impression.`, needs: ['market'] },
+      `${r} gets by. The market is busy enough, the streets clean enough and the civic buildings kept up just enough, and nothing more is being spent.`, needs: ['market'] },
     r =>
       `The merchant district of ${r} looks prosperous. The rest of the settlement, visible further in, looks like it has been waiting for the merchant district's prosperity to reach it for some years.`,
     r =>
@@ -240,7 +240,7 @@ export const STRESS_DESCS = {
     { text: r =>
       `The guard at ${r}'s gate is polite, thorough, and writes down more than guards usually write down. You are asked your business three times, by three different people, in the space of five minutes.`, needs: ['gate', 'guardPresence'] },
     r =>
-      `Something happened in ${r} recently. You cannot immediately say what, but the settlement has the quality of a place that is still processing something: hushed conversations, people watching the street.`,
+      `Something has happened in ${r} lately. Conversations drop to a murmur as you pass, and people watch the street from their doorways.`,
     { text: r =>
       `There are notices posted at the gate of ${r}. You take a moment to read one: it is asking for information about a specific event, with a contact at the council offices. The date on the notice is recent.`, needs: ['gate'] },
     { text: r =>
@@ -374,7 +374,7 @@ export const STRESS_DESCS = {
     r =>
       `${r} is observing a holy day, and you cannot tell which one. Some shops are shut and draped; others are pointedly open. Two processions are forming in different quarters, and the people watching each are counting who watches the other.`,
     { text: r =>
-      `The bells of ${r} ring at competing times: one set of chimes answered a beat later by another, from a different quarter, slightly out of tune with the first. No one seems to find this strange, which is the strangest part.`, needs: ['institution: temple'] },
+      `The bells of ${r} ring twice for every hour: one set of chimes, then another from a different quarter, a beat later and out of tune. Nobody in the street looks up.`, needs: ['institution: temple'] },
     r =>
       `The mason's yard in ${r} is its busiest enterprise: one set of holy symbols coming down, another going up, and the same three workmen paid for both. They no longer joke about it.`,
     r =>

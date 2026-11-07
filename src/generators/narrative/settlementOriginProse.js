@@ -76,8 +76,8 @@ export const ORIGIN_POOLS = Object.freeze({
 
   crossroads: Object.freeze([
     'Positioned at a major crossroads. Trade flows through here by geography, not by choice.',
-    'Built where two roads refuse to avoid each other. Nobody chose this ground; the map did.',
-    'A crossroads settlement. The meeting of routes is the whole of its fortune and the whole of its exposure.',
+    'Built where two busy roads cross, and laid out around the crossing.',
+    'A crossroads settlement: every road brings it trade, and any of them can bring it trouble.',
     'Founded at a junction on the oldest logic there is: whoever holds the meeting of roads holds what moves along them.',
     'It exists because travellers had to stop somewhere, and the roads decided that somewhere was here.',
   ]),
@@ -92,9 +92,9 @@ export const ORIGIN_POOLS = Object.freeze({
 
   'port.generic': Object.freeze([
     'A port settlement whose wharves and navigable water define its trade.',
-    'A port. The wharves are the reason the place exists, and everything inland of them is a consequence.',
+    'A port: the wharves are why the place exists, and everything else grew up behind them.',
     'Founded where the water runs deep enough to unload. That fact, and no other, put a settlement on this ground.',
-    'A working port: what it is worth is counted in berths, and what it fears is counted in the same.',
+    'A working port: its wealth is the cargo it unloads, and its worry is a season when the cargo does not come.',
     'Built around a landing. Trade arrives by hull rather than by axle, and the whole economy is shaped to that difference.',
   ]),
 
@@ -113,7 +113,7 @@ export const ORIGIN_POOLS = Object.freeze({
     'An inland river port: barges rather than hulls, and a working season that closes when the channel does.',
     'A river port whose wharves face a moving current; the year is divided by what the channel will allow.',
     'A river port, founded where the water runs deep and steady enough to take a loaded barge. Rarer than it sounds, and worth more.',
-    'An inland river port: cargo changes between barges and carts here, and the changing is itself the trade.',
+    'An inland river port: cargo moves from barges to carts here, and the handling is its living.',
   ]),
 
   'port.coastal': Object.freeze([
@@ -121,7 +121,7 @@ export const ORIGIN_POOLS = Object.freeze({
     'A seaport. The tide sets the working day, and the harbour is the only asset that finally matters.',
     'Founded on the coast for the shelter of its anchorage. The sea gives the settlement its living and sets the terms of it.',
     'A coastal settlement built to face the water. Most of what it eats, sells, and fears arrives the same way.',
-    'A seaport whose horizon is its market; what the land behind it produces matters less than what the hulls carry off.',
+    'A seaport that lives by its ships: what they carry off matters more here than anything the land behind it grows.',
   ]),
 
   'isolated.sustained': Object.freeze([

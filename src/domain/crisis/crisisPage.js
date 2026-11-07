@@ -26,6 +26,7 @@ import { factionIdFromName } from '../../lib/entities.js';
 import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { speakTierNoun } from '../display/stateProse/tierVoice.js';
 import { tierNounFor } from '../display/stateProse/weaveBlock.js';
+import { migrationDirectionOf } from './migrationDirection.js';
 
 /** The page's one copy constant, on every surface that prints it. */
 export const CRISIS_PAGE_COPY = Object.freeze({
@@ -49,12 +50,10 @@ export const CRISIS_PAGE_COPY = Object.freeze({
   pointer: 'Open the Crisis tab',
   begunByYou: 'begun by your event',
   stake: Object.freeze({ gains: 'gains', loses: 'loses', split: 'split' }),
-  nature: Object.freeze({
-    natural: 'a natural crisis',
-    social: 'a crisis of the town itself',
-    engineered: 'an engineered crisis',
-    external: 'a crisis from outside',
-  }),
+  // STYLE-AUDIT row 21 (W4 PEOPLE, second seat, 2026-11-07): the event line prints the kind as its
+  // heading; the cast's classification (natural, social, engineered, external) is machinery and is
+  // no longer printed. A migration says which way it runs (WAVE-RULINGS item 8: both sets).
+  direction: Object.freeze({ influx: 'people arriving', exodus: 'people leaving' }),
 });
 
 /**
@@ -103,7 +102,7 @@ export const CRISIS_PAGE_COPY = Object.freeze({
  *
  * @typedef {{ name?: unknown, id?: unknown }} PageNpc
  * @typedef {{ name?: unknown, id?: unknown }} PageInstitution
- * @typedef {{ type?: unknown, label?: unknown, summary?: unknown, crisisHook?: unknown, viabilityNote?: unknown, addedByEventId?: unknown, cast?: CrisisCast, _userEdits?: Record<string, { value?: unknown }> }} PageEntry
+ * @typedef {{ type?: unknown, label?: unknown, summary?: unknown, crisisHook?: unknown, viabilityNote?: unknown, addedByEventId?: unknown, direction?: unknown, cast?: CrisisCast, _userEdits?: Record<string, { value?: unknown }> }} PageEntry
  * @typedef {{ name?: unknown, tier?: unknown, stress?: PageEntry | PageEntry[] | null, npcs?: PageNpc[], institutions?: PageInstitution[] }} PageSettlement
  */
 
@@ -151,15 +150,15 @@ export function castDoorId(settlement, kind, id) {
 }
 
 /**
- * The event in one line: the crisis, its nature, and its onset where a record holds one.
- * The nature's copy says "the town"; it is spoken with the place's own noun (`noun`).
- * @param {string} label @param {CrisisNature | null} nature @param {PageEntry} entry
+ * The event in one line: the crisis, a migration's direction, and whether the DM's event began it.
+ * Spoken with the place's own noun (`noun`), as every fixed line on this page is.
+ * @param {string} label @param {PageEntry} entry
  * @param {string | null} noun the place's tier noun, or null when the record has no tier
  * @returns {string}
  */
-function eventLine(label, nature, entry, noun) {
+function eventLine(label, entry, noun) {
   const parts = [label];
-  if (nature) parts.push(CRISIS_PAGE_COPY.nature[nature]);
+  if (str(entry.type) === 'mass_migration') parts.push(CRISIS_PAGE_COPY.direction[migrationDirectionOf(entry)]);
   if (str(entry.addedByEventId)) parts.push(CRISIS_PAGE_COPY.begunByYou);
   return speakTierNoun(`${parts.join(', ')}.`, noun);
 }
@@ -196,7 +195,7 @@ export function composeCrisisPage(settlement) {
       type,
       label,
       nature,
-      line: eventLine(label, nature, entry, noun),
+      line: eventLine(label, entry, noun),
       summary: str(entry.summary),
       hook: crisisHookFor(s, entry),
       cast: (cast?.roles || []).map((r) => ({
