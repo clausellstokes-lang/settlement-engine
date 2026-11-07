@@ -872,7 +872,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "{faction} at {settlement} still issues its orders, but what it records and what actually happens no longer match.",
+          "text": "{faction} at {settlement} still writes its orders down, but the written orders no longer match what happens, so nobody can plan on anything the hall decides.",
           "slots": [
             "faction",
             "settlement"
@@ -988,7 +988,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "The {seat} at {settlement} governs a town that has recently fought over the question, and the losing side is still on the rolls.",
+          "text": "The {seat} at {settlement} governs a town that recently fought over who should rule. The side that lost still lives here and still owes the {seat} its dues, and it pays them slowly.",
           "slots": [
             "seat",
             "settlement"
@@ -3017,7 +3017,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "marks": [
             "dm-only"
           ],
-          "text": "The person who speaks for {faction} at {settlement} is not free to speak against a particular interest, and the constraint does not appear in any minute of any meeting.",
+          "text": "The person who speaks for {faction} at {settlement} will not speak against one particular interest. No minute of any meeting shows why, and whatever that interest wants passes unopposed.",
           "slots": [
             "faction",
             "settlement"
@@ -3088,7 +3088,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "Goods reach {settlement} around the customs rather than through them; the manifests are wrong, the landing points are unofficial, and enough officials are agreeable for it to be routine.",
+          "text": "Goods reach {settlement} around the customs rather than through them. The cargo lists are false, the landing places are unofficial, and the duties the town should collect are never paid.",
           "slots": [
             "settlement"
           ],

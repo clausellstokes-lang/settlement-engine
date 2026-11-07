@@ -690,7 +690,9 @@ describe('THE ANTI-VACUITY GUARD — the walker must fail on the corpus it ships
     // WIRING W3 (2026-11-07), C1-C6 said in DS-POW-5/-6 (+8 pools, +19 variants): 341 -> 345.
     // 345 -> 341 at WIRING W3's second seat (2026-11-07), the owner's style law over DS-POW-1/-2/-5/-6/-7: the plain
     // rewrites drop the "; …" afterthought from four power variants (measured on the leaves). Report-only, still a minority.
-    expect(carrying.length, 'entries carrying the trailing-coordinate class, at this tip').toBe(341);
+    // 341 -> 340 at the owner's reading of 2026-11-07 (WAVE-RULINGS item 16, the ledger vantage names the record and its
+    // cost): DS-POW-6 duty evasion v1 is two sentences now, not a "; …" list.
+    expect(carrying.length, 'entries carrying the trailing-coordinate class, at this tip').toBe(340);
     expect(carrying.length, 'and it is a minority of the 2,266 R1 variants').toBeLessThan(leaves.length / 2);
     console.log(`  Q · trailing coordinate: ${carrying.length} of ${leaves.length} R1 entries carry the class`);
   });

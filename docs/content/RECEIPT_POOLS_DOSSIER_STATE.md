@@ -2065,7 +2065,7 @@ causal clause; the stability string alone does not.
 
 **`Desperate` matched** {colour}
 1. `[street]` Nobody at {settlement} argues about who governs any more. The hall does what little it can, and people look after themselves.
-2. `[ledger]` {faction} at {settlement} still issues its orders, but what it records and what actually happens no longer match.
+2. `[ledger]` {faction} at {settlement} still writes its orders down, but the written orders no longer match what happens, so nobody can plan on anything the hall decides.
 3. `[unfolding]` There is no plan at {settlement} beyond the next few days, and the {seat} has stopped pretending otherwise to anyone who asks.
 
 **no token matched: `unclassified` (the plain-description floor)** {colour}
@@ -2085,7 +2085,7 @@ causal clause; the stability string alone does not.
 
 **`recentConflict` present** {colour}
 1. `[elder]` {settlement} is still living with its recent quarrel, and the hall is run the way it is because of who won it.
-2. `[ledger]` The {seat} at {settlement} governs a town that has recently fought over the question, and the losing side is still on the rolls.
+2. `[ledger]` The {seat} at {settlement} governs a town that recently fought over who should rule. The side that lost still lives here and still owes the {seat} its dues, and it pays them slowly.
 3. `[street]` Nobody at {settlement} needs the trouble explained to them; it is recent enough that the town simply refers to it and moves on.
 
 ---
@@ -2377,7 +2377,7 @@ own entailment and licenses nothing about who runs it.
 3. `[counterforce · dm-only]` Someone has bought a minor member of {faction} at {settlement}. It buys news and small favours, not decisions.
 
 **capture reached a LEADER** *(every variant `dm-only`; print-deferred)* {colour}
-1. `[ledger · dm-only]` The person who speaks for {faction} at {settlement} is not free to speak against a particular interest, and the constraint does not appear in any minute of any meeting.
+1. `[ledger · dm-only]` The person who speaks for {faction} at {settlement} will not speak against one particular interest. No minute of any meeting shows why, and whatever that interest wants passes unopposed.
 2. `[unfolding · dm-only]` Whoever pays {faction}'s leader at {settlement} now shapes what the whole of {faction} decides.
 3. `[street · dm-only]` {faction} at {settlement} has stopped opposing one particular interest and has never explained the change, which the town has noticed without being able to name.
 
@@ -2387,7 +2387,7 @@ own entailment and licenses nothing about who runs it.
 3. `[visitor · colour]` Things said to be unobtainable at {settlement} can be had, for a price, in a back room nobody points you to.
 
 **operation role `duty evasion`**
-1. `[ledger · colour]` Goods reach {settlement} around the customs rather than through them; the manifests are wrong, the landing points are unofficial, and enough officials are agreeable for it to be routine.
+1. `[ledger · colour]` Goods reach {settlement} around the customs rather than through them. The cargo lists are false, the landing places are unofficial, and the duties the town should collect are never paid.
 2. `[street · gate]` A share of what arrives at {settlement} never appears at the gate, and the share is not small.
 3. `[counterforce · colour]` The customs at {settlement} keep proper books, and a good share of goods goes around them anyway.
 

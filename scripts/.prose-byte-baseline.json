@@ -73,8 +73,8 @@
       "ceilingGzip": 177058
     },
     "src/data/dossierStateProse/power.generated.js": {
-      "raw": 123082,
-      "gzip": 17536,
+      "raw": 123197,
+      "gzip": 17569,
       "ceilingRaw": 357097,
       "ceilingGzip": 79355
     },
@@ -316,6 +316,7 @@
       "gzipAfter": 18543,
       "reason": "+9,966 B: eight new pools (the five structure flags, stateCrime banded by intensity, in DS-POW-5; the GM advisory's two in DS-POW-6), 19 variants with their poolMeta. Projected through node scripts/generate-dossier-state-prose.mjs; --check exit 0 at the tip."
     }
+
   ],
   "ceilingTransfersNewLeaves": [
     {
