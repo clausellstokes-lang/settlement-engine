@@ -13,7 +13,7 @@ const fixtures = [
   {
     id: 's1', name: 'Hightower\'s Reach', tier: 'town',
     savedAt: 1700000000000,
-    settlement: { name: 'Hightower\'s Reach', npcs: [{ name: 'Velda Marsh' }], factions: [{ faction: 'Salt Guild' }], phase: 'canon', neighbourNetwork: [{ name: 'Greymoor', relationshipType: 'rival' }] },
+    settlement: { name: 'Hightower\'s Reach', npcs: [{ name: 'Velda Marsh' }], /* PEOPLE-5A re-keyed (M-2): the powers, not the grouping */ powerStructure: { factions: [{ faction: 'Salt Guild' }] }, phase: 'canon', neighbourNetwork: [{ name: 'Greymoor', relationshipType: 'rival' }] },
   },
   {
     id: 's2', name: 'Greymoor', tier: 'city',

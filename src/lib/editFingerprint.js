@@ -60,7 +60,7 @@ export function extractEditCascade(cascade) {
     narrative_impact: enumStr(cascade.narrativeImpact),
     downstream: {
       npcs: numOrU(dc.npcs), hooks: numOrU(dc.hooks),
-      factions: numOrU(dc.factions), linked_saves: numOrU(dc.linkedSaves),
+      factions: numOrU(dc.powers), linked_saves: numOrU(dc.linkedSaves),
     },
   };
 }

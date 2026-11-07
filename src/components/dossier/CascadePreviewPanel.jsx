@@ -285,7 +285,7 @@ export default function CascadePreviewPanel({ onClose, onCommit }) {
                 title="Known related records"
                 body={
                   `The current settlement contains ${preview.downstreamCounts.npcs ?? 0} NPCs, ` +
-                  `${preview.downstreamCounts.factions ?? 0} factions, ` +
+                  `${preview.downstreamCounts.powers ?? 0} factions, ` +
                   `and ${preview.downstreamCounts.hooks ?? 0} hooks. This is context, not a claim that every record will change.`
                 }
               />

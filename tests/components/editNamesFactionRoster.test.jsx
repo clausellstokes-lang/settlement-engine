@@ -72,13 +72,16 @@ describe('Edit Names lists the canonical faction roster', () => {
     expect(screen.getByText('Merchant Guild')).toBeTruthy();
   });
 
-  test('a save WITHOUT a power roster still lists the legacy mirror (the documented fallback)', () => {
+  // PEOPLE-5A (M-2) RE-KEYED: the legacy NPC-grouping fallback is deleted — the powers are the only
+  // roster, so a save with only the grouping lists none of it (the empty state is the anchor).
+  test('a save WITHOUT a power roster no longer lists the NPC grouping (the fallback is deleted)', () => {
     renderNames({
       npcs: [],
       factions: [{ name: 'Old Mirror Guild', dominantCategory: 'merchant' }],
       powerStructure: { factions: [] },
     });
-    expect(screen.getByText('Old Mirror Guild')).toBeTruthy();
+    expect(screen.getByText(/no named NPCs or factions to rename/)).toBeTruthy();
+    expect(screen.queryByText('Old Mirror Guild')).toBeNull();
   });
 
   test('a settlement with neither roster shows the honest empty state', () => {
