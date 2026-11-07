@@ -292,6 +292,50 @@ export const FIRSTPAINT2_LAZY_DOMAIN = [
   '/src/domain/userEditLines.js',
   '/src/domain/viabilitySummary.js',
   '/src/domain/worldPulse/npcLadderFactionMembership.js',
+  // FIRSTPAINT-3 (LANDING-R2, 2026-11-07; helper seat J — verify:dist red at the rung-2 tip: bootSmoke "THE SHIPPED
+  // BUNDLE DOES NOT BOOT", cultureProfilesLazy, vendorPdfLazy FIX-B2 + ARCH car 2). THE SAME PREMISE, THE SAME
+  // MEASUREMENT. The pool census (CENSUS-1..5, the reader lanes, the compose) gave generators new domain imports —
+  // the fact homes (src/domain/facts/*), roles/roleClass, the war/defence display readers, factionRename — so the
+  // derived ESD grew 63 -> 104 members. 28 of the 41 new members are reached by NO module of the true first-paint
+  // source graph (main.jsx, lookups.js, kernel/**; MEASURED on Rollup's own resolved module graph, 1bff51c6d vs
+  // 8595768ac), and SEVEN of them statically import modules pinned lazy (defence.js / threatAssessment.js /
+  // defenseDisplay.js -> defense/defenseFacts.js, defenseDisplay.js -> crimeSignal.js, famine.js -> foodSurplus.js,
+  // factsOf.js -> dossier/faithReading.js, factionRename.js -> userEditLines.js + lib/narrativeMutations.js). Riding
+  // EAGER engine-core, those edges made engine-core import coherence-lazy and narrative-mutations: coherence-lazy and
+  // data-lazy (the culture corpus, the composed prose) entered first paint (closure 2,383,250 B vs the 1,042,033 B
+  // budget), and engine-core -> coherence-lazy -> data-lazy -> engine-core closed a chunk CYCLE whose TDZ throw
+  // stopped the shell mounting. These 27 ride coherence-lazy with the leaves they import; no module that stays in
+  // engine-core imports any of them (the closed set, measured), and none imports a module of the lazy `engine`
+  // chunk, so coherence-lazy gains no edge back into engine. The 28th, facts/textOf.js (a ~300 B zero-import leaf),
+  // STAYS in engine-core on purpose: data/cultureProfiles.js (data-lazy) imports it, and coherence-lazy already
+  // imports data-lazy, so pinning it here would mint a data-lazy <-> coherence-lazy cycle.
+  '/src/domain/crisis/migrationDirection.js',
+  '/src/domain/display/defenseDisplay.js',
+  '/src/domain/display/defenseScoreBands.js',
+  '/src/domain/display/numberWords.js',
+  '/src/domain/display/threatAssessment.js',
+  '/src/domain/display/warStatus.js',
+  '/src/domain/factionRename.js',
+  '/src/domain/facts/bareLine.js',
+  '/src/domain/facts/crisisKind.js',
+  '/src/domain/facts/defence.js',
+  '/src/domain/facts/factsOf.js',
+  '/src/domain/facts/famine.js',
+  '/src/domain/facts/guild.js',
+  '/src/domain/facts/institutions.js',
+  '/src/domain/facts/magic.js',
+  '/src/domain/facts/market.js',
+  '/src/domain/facts/migration.js',
+  '/src/domain/facts/otherNpc.js',
+  '/src/domain/facts/populationBand.js',
+  '/src/domain/facts/rulerKind.js',
+  '/src/domain/facts/terrain.js',
+  '/src/domain/facts/warState.js',
+  '/src/domain/facts/water.js',
+  '/src/domain/institutions/institutionCategory.js',
+  '/src/domain/resolveCulture.js',
+  '/src/domain/roles/roleClass.js',
+  '/src/domain/worldPulse/warFrontReads.js',
 ];
 for (const frag of ENGINE_SHARED_DOMAIN_EXCISIONS) ENGINE_SHARED_DOMAIN.delete(frag);
 for (const frag of FIRSTPAINT2_LAZY_DOMAIN) ENGINE_SHARED_DOMAIN.delete(frag);
@@ -971,7 +1015,7 @@ export default defineConfig({
             return 'engine-core-lazy';
 
           // ── FIRSTPAINT-2: the rung-1 window's lazy domain (its own chunk) ──
-          // The 27 modules excised from ESD above (FIRSTPAINT2_LAZY_DOMAIN): the coherence findings, the crisis
+          // The 27 + 27 (FIRSTPAINT-3) modules excised from ESD above (FIRSTPAINT2_LAZY_DOMAIN): the coherence findings, the crisis
           // cast and hooks, the dossier's power/faith/seat readings, the sea-lane trio. Their own chunk rather
           // than engine-core-lazy, whose contract is a small (<50 kB) presentation vocabulary
           // (tests/build/engineChunkLazy.test.js); pinned rather than orphaned (FP-G11). Its outward edges run

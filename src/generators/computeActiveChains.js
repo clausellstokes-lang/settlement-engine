@@ -18,8 +18,12 @@ import {customDeps} from '../lib/dependencyEngine.js';
 // unregistered — its slug fallback matches — this keeps the enumerated path live.)
 import '../lib/prebuiltResourceChains.js';
 import { compareCodepoint } from '../domain/deterministicSort.js';
-import { goodsHeldByFoodRecord } from './economy/foodBalance.js';
-import { ownFoodGoodsHeldByFoodRecord } from '../domain/foodSurplus.js';
+// The food-surplus gate is read from its home, not through economy/foodBalance.js's re-export: that
+// re-export made this module (pinned to the lazy `resource-chains` chunk) evaluate foodBalance.js first,
+// and since the pool census (measured: present at f5dc50c6b, absent at 1bff51c6d) Rollup keeps that order
+// with a bare `import "./engine-*.js"` — an engine <-> resource-chains chunk cycle (bootSmoke.test.js).
+// Same binding, same function: no generation change.
+import { goodsHeldByFoodRecord, ownFoodGoodsHeldByFoodRecord } from '../domain/foodSurplus.js';
 import {catalogIdForName} from '../data/institutionalCatalog.js';
 import { ALL_CATALOG_NAMES, institutionMatchesKeyword } from '../domain/institutions/institutionCategory.js';
 
