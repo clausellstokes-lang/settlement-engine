@@ -56,18 +56,25 @@ beforeAll(async () => { await loadGenerationLawPayloads(); });
 
 describe('the re-derivation through the engine service equals the local one', () => {
   it('for three seeds (town, village, city), the envelope over the wire equals the local core\'s, and the bag rode the body', async () => {
+    const failures = [];
+    // seed-loop: collected — every seed runs: a failing seed is caught and listed, and the roster is asserted once below
     for (const [settType, seed] of [['town', 'engine4-rederive-0'], ['village', 'engine4-rederive-1'], ['city', 'engine4-rederive-2']]) {
-      const { config, record, layer } = worldFor(settType, seed);
-      const local = await regenerateWithLayer(record, config, layer, DECLARATIONS, { remote: false });
-      const { impl, calls } = okFetch();
-      const remote = await regenerateWithLayerRemote(record, config, layer, DECLARATIONS, remoteOpts(impl));
-      expect(JSON.stringify(remote), `${settType} ${seed}`).toBe(JSON.stringify(local));
-      expect(calls.map((c) => c.body.op)).toEqual(['stepMeta', 'derive']);
-      const derive = calls[1].body;
-      expect(derive.seed).toBe(record._seed);
-      expect(Object.keys(derive.pins || {}).length, 'the pins bag is sent').toBeGreaterThan(0);
-      expect(derive.config).toEqual(JSON.parse(JSON.stringify(config)));
+      try {
+        const { config, record, layer } = worldFor(settType, seed);
+        const local = await regenerateWithLayer(record, config, layer, DECLARATIONS, { remote: false });
+        const { impl, calls } = okFetch();
+        const remote = await regenerateWithLayerRemote(record, config, layer, DECLARATIONS, remoteOpts(impl));
+        expect(JSON.stringify(remote), `${settType} ${seed}`).toBe(JSON.stringify(local));
+        expect(calls.map((c) => c.body.op)).toEqual(['stepMeta', 'derive']);
+        const derive = calls[1].body;
+        expect(derive.seed).toBe(record._seed);
+        expect(Object.keys(derive.pins || {}).length, 'the pins bag is sent').toBeGreaterThan(0);
+        expect(derive.config).toEqual(JSON.parse(JSON.stringify(config)));
+      } catch (error) {
+        failures.push(`${settType} ${seed}: ${String(error?.message ?? error).split('\n')[0]}`);
+      }
     }
+    expect(failures, `${failures.length} of the seeds failed; every seed ran`).toEqual([]);
   }, 240_000);
 
   it('the flag routes the seat: open, regenerateWithLayer reaches the service and never the local door', async () => {

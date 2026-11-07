@@ -13,7 +13,8 @@ import { describe, it, expect } from 'vitest';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { runGenerationRequest } from '../../src/workers/generationRequest.js';
-import { birthConfig } from '../../src/domain/density/densityCreateBoundary.js';
+import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 
 const configFor = (settType) => JSON.parse(JSON.stringify(birthConfig({
@@ -24,7 +25,12 @@ describe('the service runs the same core as the worker', () => {
     const bundle = await import(/* @vite-ignore */ pathToFileURL(
       resolve(__dirname, '..', '..', 'supabase', 'functions', '_shared', 'engineBundle.js')).href);
     await bundle.loadGenerationLawPayloads();
-    for (const [seed, settType] of [['remote-a', 'town'], ['remote-b', 'village'], ['remote-c', 'city']]) {
+    // The in-process side's law payloads, loaded once before the loop (they were loaded
+    // inside it, after the first served call; the bundle carries its own module copy, so
+    // the order never reached it). Hoisting the one await lets the loop run synchronously
+    // under collectSeedFailures: every seed runs and the roster is asserted once.
+    await loadGenerationLawPayloads();
+    const failures = collectSeedFailures([['remote-a', 'town'], ['remote-b', 'village'], ['remote-c', 'city']], ([seed, settType]) => {
       const config = configFor(settType);
       const serviceRequest = (birth) => ({
         op: 'settlement',
@@ -32,10 +38,10 @@ describe('the service runs the same core as the worker', () => {
         payload: { fullConfig: birth(config), neighbour: null, seed, contentRuntime: { customContent: {} } },
       });
       const served = bundle.runGenerationRequest(serviceRequest(bundle.birthConfig));
-      await (await import('../../src/domain/density/densityCreateBoundary.js')).loadGenerationLawPayloads();
       const local = runGenerationRequest(serviceRequest(birthConfig));
       expect(JSON.stringify(served.settlement), seed).toBe(JSON.stringify(local.settlement));
       expect(JSON.stringify(served.pipelineHistory), seed).toBe(JSON.stringify(local.pipelineHistory));
-    }
+    });
+    expectNoSeedFailures(failures, 'the bundle\'s core answers the in-process core\'s settlement and step list');
   });
 });

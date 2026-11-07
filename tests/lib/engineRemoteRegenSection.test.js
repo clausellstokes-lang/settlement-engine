@@ -85,24 +85,31 @@ beforeAll(async () => { await loadGenerationLawPayloads(); });
 
 describe('the regenSection op answers the pass the client runs', () => {
   it('for three seeds (town, village, city), both sections over the wire equal the local passes, replayed seed and minted', async () => {
+    const failures = [];
+    // seed-loop: collected — every seed runs: a failing seed is caught and listed, and the roster is asserted once below
     for (const [settType, seed] of SEEDS) {
-      const settlement = worldFor(settType, seed);
-      const cfg = settlement.config;
-      for (const replay of [`${seed}-replay`, undefined]) {
-        const seeded = replay === undefined ? {} : { seed: replay };
-        const localNpcs = regenNPCsPipeline(settlement, cfg, { locks: {}, ...seeded });
-        const localHistory = regenHistoryPipeline(settlement, cfg, seeded);
-        const { impl, calls } = okFetch();
-        const remoteNpcs = await runRemoteRegenSection({ section: 'npcs', settlement, config: cfg, locks: {}, ...seeded }, remoteOpts(impl));
-        const remoteHistory = await runRemoteRegenSection({ section: 'history', settlement, config: cfg, ...seeded }, remoteOpts(impl));
-        expect(JSON.stringify(remoteNpcs), `${settType} npcs ${String(replay)}`).toBe(JSON.stringify(localNpcs));
-        expect(JSON.stringify(remoteHistory), `${settType} history ${String(replay)}`).toBe(JSON.stringify(localHistory));
-        expect(calls.map((c) => [c.body.op, c.body.section])).toEqual([['regenSection', 'npcs'], ['regenSection', 'history']]);
-        expect(calls[0].body.settlement).toEqual(JSON.parse(JSON.stringify(settlement)));
-        expect(Object.prototype.hasOwnProperty.call(calls[1].body, 'locks'), 'history sends no locks').toBe(false);
-        expect(Object.prototype.hasOwnProperty.call(calls[1].body, 'seed')).toBe(replay !== undefined);
+      try {
+        const settlement = worldFor(settType, seed);
+        const cfg = settlement.config;
+        for (const replay of [`${seed}-replay`, undefined]) {
+          const seeded = replay === undefined ? {} : { seed: replay };
+          const localNpcs = regenNPCsPipeline(settlement, cfg, { locks: {}, ...seeded });
+          const localHistory = regenHistoryPipeline(settlement, cfg, seeded);
+          const { impl, calls } = okFetch();
+          const remoteNpcs = await runRemoteRegenSection({ section: 'npcs', settlement, config: cfg, locks: {}, ...seeded }, remoteOpts(impl));
+          const remoteHistory = await runRemoteRegenSection({ section: 'history', settlement, config: cfg, ...seeded }, remoteOpts(impl));
+          expect(JSON.stringify(remoteNpcs), `${settType} npcs ${String(replay)}`).toBe(JSON.stringify(localNpcs));
+          expect(JSON.stringify(remoteHistory), `${settType} history ${String(replay)}`).toBe(JSON.stringify(localHistory));
+          expect(calls.map((c) => [c.body.op, c.body.section])).toEqual([['regenSection', 'npcs'], ['regenSection', 'history']]);
+          expect(calls[0].body.settlement).toEqual(JSON.parse(JSON.stringify(settlement)));
+          expect(Object.prototype.hasOwnProperty.call(calls[1].body, 'locks'), 'history sends no locks').toBe(false);
+          expect(Object.prototype.hasOwnProperty.call(calls[1].body, 'seed')).toBe(replay !== undefined);
+        }
+      } catch (error) {
+        failures.push(`${settType} ${seed}: ${String(error?.message ?? error).split('\n')[0]}`);
       }
     }
+    expect(failures, `${failures.length} of the seeds failed; every seed ran`).toEqual([]);
   }, 240_000);
 
   it('an unknown section is refused before any fetch', async () => {
@@ -115,22 +122,29 @@ describe('the regenSection op answers the pass the client runs', () => {
 
 describe('the lifted action commits the same world through either transport', () => {
   it('for three seeds, regenSection(npcs) then (history) leaves the remote store byte-identical to the local one', async () => {
+    const failures = [];
+    // seed-loop: collected — every seed runs: a failing seed is caught and listed, and the roster is asserted once below
     for (const [settType, seed] of SEEDS) {
-      const world = worldFor(settType, seed);
-      const local = storeHolding(world);
-      const remote = storeHolding(world);
-      const { impl, calls } = okFetch();
-      for (const section of ['npcs', 'history']) {
-        await regenSectionAction(local.setState, local.getState, section, { remote: false });
-        await regenSectionAction(remote.setState, remote.getState, section, { remote: true, remoteOptions: remoteOpts(impl) });
+      try {
+        const world = worldFor(settType, seed);
+        const local = storeHolding(world);
+        const remote = storeHolding(world);
+        const { impl, calls } = okFetch();
+        for (const section of ['npcs', 'history']) {
+          await regenSectionAction(local.setState, local.getState, section, { remote: false });
+          await regenSectionAction(remote.setState, remote.getState, section, { remote: true, remoteOptions: remoteOpts(impl) });
+        }
+        expect(JSON.stringify(remote.getState().settlement), `${settType} ${seed}`).toBe(JSON.stringify(local.getState().settlement));
+        expect(remote.getState().settlement._regenSeed).toBe('engine5-regen-minted');
+        expect(JSON.stringify(remote.getState().lastRegenerationDelta)).toBe(JSON.stringify(local.getState().lastRegenerationDelta));
+        expect(calls.map((c) => c.body.section)).toEqual(['npcs', 'history']);
+        expect(calls.every((c) => c.body.config && c.body.config.settType === world.config.settType),
+          'the world\'s own config rides the body').toBe(true);
+      } catch (error) {
+        failures.push(`${settType} ${seed}: ${String(error?.message ?? error).split('\n')[0]}`);
       }
-      expect(JSON.stringify(remote.getState().settlement), `${settType} ${seed}`).toBe(JSON.stringify(local.getState().settlement));
-      expect(remote.getState().settlement._regenSeed).toBe('engine5-regen-minted');
-      expect(JSON.stringify(remote.getState().lastRegenerationDelta)).toBe(JSON.stringify(local.getState().lastRegenerationDelta));
-      expect(calls.map((c) => c.body.section)).toEqual(['npcs', 'history']);
-      expect(calls.every((c) => c.body.config && c.body.config.settType === world.config.settType),
-        'the world\'s own config rides the body').toBe(true);
     }
+    expect(failures, `${failures.length} of the seeds failed; every seed ran`).toEqual([]);
   }, 240_000);
 
   it('the slice keeps the action key and delegates to the lifted body', async () => {

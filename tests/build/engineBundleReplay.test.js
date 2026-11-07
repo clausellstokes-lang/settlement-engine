@@ -45,6 +45,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { goldenCorpus, keyOf } from '../helpers/goldenMasterCorpus.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 // The file's own address, never the working directory (moduleScopeCwdRatchet; TOOL-31's shape).
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
@@ -208,11 +209,12 @@ describe('engine bundle replay — the bundle generates what the app generates',
     const bundle = await loadBundle(BUNDLE);
     await bundle.loadGenerationLawPayloads();
     await loadGenerationLawPayloads();
-    for (const seed of seeds) {
+    const failures = collectSeedFailures(seeds, (seed) => {
       const viaBundle = JSON.stringify(bundle.generateSettlementPipeline(bundle.birthConfig(config), null, { seed, customContent: {} }));
       const inProcess = JSON.stringify(generateSettlementPipeline(birthConfig(config), null, { seed, customContent: {} }));
       expect(sha256(viaBundle), `seed ${seed}`).toBe(sha256(inProcess));
-    }
+    });
+    expectNoSeedFailures(failures, 'the bundle\'s birth equals the in-process birth');
   }, WALL_MS);
 
   it('NEGATIVE CONTROL: a temp copy of the bundle with a planted edit is not accepted by the same comparison', async () => {

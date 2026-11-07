@@ -35,18 +35,25 @@ beforeAll(async () => { await loadGenerationLawPayloads(); });
 
 describe('the settlement preview through the engine service', () => {
   it('for three seeds (town, village, city), the derive reply over the wire equals the panel\'s local call', async () => {
+    const failures = [];
+    // seed-loop: collected — every seed runs: a failing seed is caught and listed, and the roster is asserted once below
     for (const [settType, seed] of [['town', 'engine4-survey-0'], ['village', 'engine4-survey-1'], ['city', 'engine4-survey-2']]) {
-      // The surveyor's config is a compiled draft, not a birthed one; birthConfig here only
-      // gives the run a realistic config, and both sides receive the same object.
-      const config = birthConfig({ settType });
-      const local = generateSettlementPipeline(structuredClone(config), null, { seed });
-      const { impl, bodies } = deriveFetch();
-      const remote = await runRemoteDerive({ seed, config }, { fetchImpl: impl, url: URL_, getAccessToken: async () => null });
-      expect(JSON.stringify(remote), `${settType} ${seed}`).toBe(JSON.stringify(local));
-      expect(bodies[0].op).toBe('derive');
-      expect('pins' in bodies[0], 'no bag is sent for a preview').toBe(false);
-      expect(remote.engineVersion, 'unstamped, as the local pipeline returns it').toBeUndefined();
+      try {
+        // The surveyor's config is a compiled draft, not a birthed one; birthConfig here only
+        // gives the run a realistic config, and both sides receive the same object.
+        const config = birthConfig({ settType });
+        const local = generateSettlementPipeline(structuredClone(config), null, { seed });
+        const { impl, bodies } = deriveFetch();
+        const remote = await runRemoteDerive({ seed, config }, { fetchImpl: impl, url: URL_, getAccessToken: async () => null });
+        expect(JSON.stringify(remote), `${settType} ${seed}`).toBe(JSON.stringify(local));
+        expect(bodies[0].op).toBe('derive');
+        expect('pins' in bodies[0], 'no bag is sent for a preview').toBe(false);
+        expect(remote.engineVersion, 'unstamped, as the local pipeline returns it').toBeUndefined();
+      } catch (error) {
+        failures.push(`${settType} ${seed}: ${String(error?.message ?? error).split('\n')[0]}`);
+      }
     }
+    expect(failures, `${failures.length} of the seeds failed; every seed ran`).toEqual([]);
   }, 240_000);
 });
 
