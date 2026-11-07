@@ -351,7 +351,22 @@ const SENTINEL = 'settlementforge:generation:worker-v1';
 //   18fd6b442 +42 (each a merge of several commits; the bytes are attributed to the step, not inside it) · lanes B, C, G3, F2-4, A, E 0.
 //   The sum closes exactly: 1,573,556 + 492 + 790 = 1,574,838, the tip's generation.worker-MaAIxfqL.js.
 // The ceiling is recorded AT the measured figure. MONOTONE-DOWN from here.
-export const WORKER_BUNDLE_CEILING_BYTES = 1574838;
+// 1,574,838 -> 1,690,414 (2026-11-07, THE RUNG-2 LANDING, LANDING-R2 under the chair's ruling of 10:1x UTC, ODQ §934.105:
+// "RE-RECORD the generation-worker ceiling at the measured 1,690,414 with your attribution in minified figures"): A RISE OF
+// 115,576 B, VETOABLE BY THE OWNER. MEASURED by a fresh `vite build` of a git archive of each tree, the worker bytes being the
+// file's size: rung 1's final tree 1bff51c6d 1,574,838 (this ceiling, reproduced); the pool census's base f28689600 1,578,876;
+// the rung-2 line's tip before rung 1 f5dc50c6b 1,688,885; this landing's tip 1,690,414. So:
+//   THE RUNG-2 LINE (the census lanes 1b-5, the reader lanes, the compose, phases A-E) +110,009 — by module, minified estimates
+//   (Rollup's rendered lengths scaled ~0.30, so they do not close to the byte): the fact homes src/domain/facts/* ~30.7 KB
+//   (factVocabulary, drawDeclared, crisisKind, factsOf the largest) · the faction-rename cascade ~20.7 KB (factionRename.js
+//   ~17.1 + userEdits ~2.7 + userEditLines ~0.9, pulled in by generators/power/factionLabelClose.js, census-1i R-AW ba7887862 —
+//   tree-shaken already to applyFactionRenameToSettlement and what it reaches; a NAMED BUY-BACK of ~20 KB, the relabel at birth
+//   without the cascade, a census design change left for the register consolidation after the deploy) · the generators
+//   ~24 KB · the data tables ~21 KB (npcData, institutionDescVariants, powerSiblings) · domain/display ~7 KB · roles/roleClass ~4 KB;
+//   THE MERGE WITH RUNG 1 AND THIS LANDING'S CURES +5,567 (the two lineages' interaction, the module splits, the chunk cure).
+//   The sum closes exactly on the measured figures: 1,574,838 + 110,009 + 5,567 = 1,690,414.
+// The ceiling is recorded AT the measured figure. MONOTONE-DOWN from here.
+export const WORKER_BUNDLE_CEILING_BYTES = 1690414;
 
 const source = (path) => readFileSync(join(ROOT, path), 'utf8');
 
@@ -669,7 +684,7 @@ describe.runIf(DIST_EXISTS)('generation worker — production boundary', () => {
     expect(
       bytes,
       `generation worker bundle ${workers[0]} is ${bytes} B; the ceiling is `
-      + `${WORKER_BUNDLE_CEILING_BYTES} B (re-recorded at the measured figure by the chair's ruling, 2026-11-04, ODQ §934.104). `
+      + `${WORKER_BUNDLE_CEILING_BYTES} B (re-recorded at the measured figure by the chair's ruling, 2026-11-07, ODQ §934.105). `
       + 'A RISE IS NEVER A LANE\'S EDIT: buy the bytes back, or take the ruling.',
     ).toBeLessThanOrEqual(WORKER_BUNDLE_CEILING_BYTES);
   });
