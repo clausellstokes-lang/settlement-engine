@@ -85,8 +85,8 @@
       "ceilingGzip": 57524
     },
     "src/data/dossierStateProse/warFaith.generated.js": {
-      "raw": 176056,
-      "gzip": 25090,
+      "raw": 175479,
+      "gzip": 24923,
       "ceilingRaw": 505306,
       "ceilingGzip": 112290
     },

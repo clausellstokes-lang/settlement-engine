@@ -37,8 +37,8 @@
     "syntheticTableFields": 129,
     "tiers": {
       "MISSING": 32,
-      "THIN": 542,
-      "COVERED": 224,
+      "THIN": 541,
+      "COVERED": 225,
       "MISSING-AT-TIER": 45
     },
     "tierSilences": 352,
@@ -41050,12 +41050,13 @@
         "term"
       ],
       "slotsNamed": [
+        "counterpart",
         "settlement"
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 2,
+      "grammars": 3,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -41338,7 +41339,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 3,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -63646,12 +63647,12 @@
       "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
-      "tier": "THIN",
+      "tier": "COVERED",
       "block": "DS-WAR-2",
       "subject": "political · honored",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 3 grammar(s) · slots {counterpart, settlement}"
     },
     {
       "tier": "THIN",
@@ -63691,7 +63692,7 @@
       "subject": "informational · defaulted",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 3 grammar(s) · slots {counterpart, settlement}"
+      "count": "3 variant(s) · 2 grammar(s) · slots {counterpart, settlement}"
     },
     {
       "tier": "COVERED",
