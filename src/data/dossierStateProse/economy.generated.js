@@ -750,8 +750,10 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "gate"
           ],
-          "text": "The gate returns are thin in both columns. What arrives is short of what the town has contracted for, and the shortfall is in goods the town does not make.",
-          "slots": [],
+          "text": "Fewer carts reach {settlement}'s gate than the town has paid for, and what is missing is what the town cannot make for itself.",
+          "slots": [
+            "settlement"
+          ],
           "vid": 1
         },
         {
@@ -792,8 +794,10 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "grain"
           ],
-          "text": "The roads are quiet. In a town that lives off its own fields, quiet roads are a matter of company rather than supply.",
-          "slots": [],
+          "text": "The roads are quiet. {settlement} lives off its own fields, so what it misses is news and company, not food.",
+          "slots": [
+            "settlement"
+          ],
           "vid": 2
         },
         {
@@ -801,8 +805,10 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "market"
           ],
-          "text": "A stranger finds the approaches empty and the market unbothered. The two go together here.",
-          "slots": [],
+          "text": "The approaches to {settlement} are empty and the market does not mind; the town trades little beyond its own fields.",
+          "slots": [
+            "settlement"
+          ],
           "vid": 3
         },
         {
@@ -849,8 +855,10 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "crisis: any"
           ],
-          "text": "Trade here reads as unremarkable, which on a road is the good reading.",
-          "slots": [],
+          "text": "Trade at {settlement} is ordinary: carts arrive and leave on their usual days.",
+          "slots": [
+            "settlement"
+          ],
           "vid": 3
         }
       ],
@@ -889,8 +897,10 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "A stranger will wait behind carts to get in. The roads are working harder than the town requires of them.",
-          "slots": [],
+          "text": "Visitors wait behind carts to get into {settlement}. The roads carry more than the town needs.",
+          "slots": [
+            "settlement"
+          ],
           "vid": 3
         }
       ],
@@ -900,7 +910,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "Heavy traffic runs through {settlement} without much of it belonging to the town: the roads are busy, the books are local.",
+          "text": "Heavy traffic runs through {settlement}, but most of it is bound elsewhere and leaves little behind.",
           "slots": [
             "settlement"
           ],

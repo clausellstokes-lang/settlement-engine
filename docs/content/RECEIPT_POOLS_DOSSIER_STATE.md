@@ -923,30 +923,30 @@ already in register and stand as index 0 of their pools, quoted below.
 
 **SHORTAGE × trade-dependent**
 0. *(canonical)* `[market]` The roads have gone quiet. Little reaches the markets, and what the town depends on is not arriving.
-1. `[ledger · gate]` The gate returns are thin in both columns. What arrives is short of what the town has contracted for, and the shortfall is in goods the town does not make.
+1. `[ledger · gate]` Fewer carts reach {settlement}'s gate than the town has paid for, and what is missing is what the town cannot make for itself.
 2. `[street · market]` Market days are quiet and short. The stalls that depend on the roads are the ones standing empty.
 3. `[unfolding · colour]` Traffic into {settlement} has fallen below what the town runs on, and the stores are covering the difference for now.
 
 **SHORTAGE × not trade-dependent**
 1. `[ledger · walls]` Little moves on {settlement}'s roads and the books barely register it. The town buys and sells almost nothing beyond its own walls.
-2. `[street · grain]` The roads are quiet. In a town that lives off its own fields, quiet roads are a matter of company rather than supply.
-3. `[visitor · market]` A stranger finds the approaches empty and the market unbothered. The two go together here.
+2. `[street · grain]` The roads are quiet. {settlement} lives off its own fields, so what it misses is news and company, not food.
+3. `[visitor · market]` The approaches to {settlement} are empty and the market does not mind; the town trades little beyond its own fields.
 4. `[ledger · no walls]` Little moves on {settlement}'s roads and the books barely register it. The town buys and sells almost nothing beyond its own bounds.
 
 **ADEQUATE** {crisis-scoped}
 0. *(canonical)* `[colour]` Caravans keep to their rounds. Trade moves at its accustomed pace.
 1. `[ledger · crisis: any]` The traffic through {settlement} matches what the ledgers expect of it. Arrivals and departures come out even, week on week.
 2. `[street]` The carts come when the carts come. Nobody is watching the road for them.
-3. `[visitor · crisis: any]` Trade here reads as unremarkable, which on a road is the good reading.
+3. `[visitor · crisis: any]` Trade at {settlement} is ordinary: carts arrive and leave on their usual days.
 
 **SURPLUS × trade-dependent**
 0. *(canonical)* `[market]` The roads are busy. Caravans arrive thick and depart laden, and the markets are well-fed.
 1. `[ledger · market]` More is moving through {settlement} than the town's own trade accounts for. Everything the market depends on arrives ahead of its need.
 2. `[street · market]` The yard is full most mornings and the market is fat on it. What the town cannot make, the town can simply buy.
-3. `[visitor · colour]` A stranger will wait behind carts to get in. The roads are working harder than the town requires of them.
+3. `[visitor · colour]` Visitors wait behind carts to get into {settlement}. The roads carry more than the town needs.
 
 **SURPLUS × not trade-dependent**
-1. `[ledger · colour]` Heavy traffic runs through {settlement} without much of it belonging to the town: the roads are busy, the books are local.
+1. `[ledger · colour]` Heavy traffic runs through {settlement}, but most of it is bound elsewhere and leaves little behind.
 2. `[street · colour]` Plenty passes here. Not much of it stops.
 3. `[visitor · market]` The traffic on these roads outruns the market. What arrives is mostly going somewhere else.
 
