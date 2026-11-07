@@ -162,6 +162,13 @@ describe('X-46 car 4 (iii) — dark, the world is byte-identical; lit (in this t
   // record 34 (docs/shift-records/2026-11-06-rung1-34-food-per-cent-from-pounds.json), lane H's 66b1407bd. MEASURED by
   // this file's recipe per first-parent stage from 3d8a74e4b (0 moved): 0 at every step to 471780f4a; 2 at 18fd6b442,
   // and that stage minus 66b1407bd moves 0 (minus 8e92c0440 or 5f6d243b2 still 2). Re-captured at 3c62e8ef5, twice and equal.
+  // RE-KEYED BY IDENTITY 2026-11-07 (LANDING-R2, the pool census composed on rung 1's final 1bff51c6d, §934.105): 60 of 60
+  // moved. The cause is the census's generator changes — the same 33 lane commits the generator golden's record names
+  // (docs/shift-records/2026-11-06-rung2-01-census-composed-generator-master.json, the chair's ruled exception: per-cause
+  // stages are unbuildable on this landing). MEASURED by this file's recipe: rung 1's final 1bff51c6d 0 moved (green there);
+  // the census side f5dc50c6b red; the all-row mover on its own lineage, 73fa1a1e7 (reader-tonight-wants R11 unit 3, the 76
+  // registry goals rewritten in the house register) against its parent 7f0632463, moves 60 of 60 by itself. Re-captured at
+  // the tip dd2aab21d, twice and equal (fixture tests/fixtures/x46-npc-band-dark-digests.json).
   const DARK = /** @type {Record<string, string>} */ (JSON.parse(readFileSync(
     fileURLToPath(new URL('../fixtures/x46-npc-band-dark-digests.json', import.meta.url)), 'utf8',
   )));
