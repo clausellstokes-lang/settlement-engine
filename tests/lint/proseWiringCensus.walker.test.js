@@ -1704,7 +1704,12 @@ describe('car 0f — the ALIAS DRAFT: measured, nothing ratified, no leaf writte
     // src/generators/npcGenerator.js:780. ⚠ A FINDING, NOT A JOIN: that key builds a fact READ's
     // argument, not a write of world state; the AST cut cannot tell the two apart. Nothing joins
     // on it (the join arm below stays 0).
-    expect(draft.rows.length, 'candidate rows at this tip, docblock withdrawn').toBe(8);
+    // 8 -> 9 at MERGE-R2 (2026-11-07, the integration merge; re-keyed with its cause): the stress-secret draw now carries
+    // REVIEW-INTAKE-4's held key inside the census's declared draw on ONE line (src/generators/npcGenerator.js:791,
+    // `heldKey: (e) => fillSentenceSlots(e.secret, { …, npc: otherNpc?.name }, …)` beside the `stress:` argument), so
+    // `system:food_security -> name` gains a generator-write row there. ⚠ A FINDING, NOT A JOIN, like the 7 -> 8 row above:
+    // the key builds a held-text comparison, not a write of world state. Nothing joins on it (the join arm stays 0).
+    expect(draft.rows.length, 'candidate rows at this tip, docblock withdrawn').toBe(9);
     expect(draft.endpointsWithCandidate, 'endpoints with at least one candidate').toBe(4);
     expect(draft.noCandidate.length, 'and the wiring debt the SEAM and WAVE trains inherit').toBe(85);
     expect(draft.docblockReports.length, 'the withdrawn candidates, reported and never proposed').toBe(28);
@@ -1716,8 +1721,8 @@ describe('car 0f — the ALIAS DRAFT: measured, nothing ratified, no leaf writte
     // is re-cut to a real Property key or member assignment read from the syntax tree, where a
     // string, a comment and a parameter binding can propose nothing.
     const byEvidence = draft.rows.reduce((m, r) => m.set(r.evidence, (m.get(r.evidence) || 0) + 1), new Map());
-    // 4 -> 5 at 1d64e08ba (the npcGenerator.js:780 Property key above).
-    expect(byEvidence.get('generator-write'), 'the four sound citations survive the AST cut').toBe(5);
+    // 4 -> 5 at 1d64e08ba (the npcGenerator.js:780 Property key above). 5 -> 6 at MERGE-R2 (the held key's `name` row above).
+    expect(byEvidence.get('generator-write'), 'the four sound citations survive the AST cut').toBe(6);
     expect(draft.rows.filter((r) => r.evidence === 'generator-write').map((r) => r.at.replace(/:\d+$/, '')).sort(),
       'and each is a real write in a generator').toEqual([
       'src/generators/defenseGenerator.js',
@@ -1725,6 +1730,7 @@ describe('car 0f — the ALIAS DRAFT: measured, nothing ratified, no leaf writte
       'src/generators/npc/factionLeaderSecret.js',
       'src/generators/npcGenerator.js',
       'src/generators/npcGenerator.js',
+      'src/generators/npcGenerator.js', // MERGE-R2: the held key's `name` row (npcGenerator.js:791)
     ]);
     for (const withdrawn of ['src/generators/structuralValidator.js:588', 'src/generators/stressNarrative.js:80',
       'src/generators/defenseGenerator.js:603', 'src/generators/narrativeText.js:53', // :603 re-derived: generateDefenseProfile's `Disasters & Famine` comment, which EM-R0d shifted -5 from :608
