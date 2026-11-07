@@ -301,7 +301,10 @@ describe('writer-with-no-reader ratchet: the frozen register', () => {
     // density dial is lit everywhere since X-46 car 4's density law, so clause D-dial convicted it — and
     // `supersessionReason on proposals` retired by clause S, the corpus's 327 proposals carrying no such key (coverage
     // lost, not reach; the writer is unchanged). The register's own header carries both retirements.
-    expect(WRITER_DARK_REGISTER.length).toBe(10);
+    // TEN BECAME TWENTY-FIVE (2026-11-07, lane W6, the cloud chair's WIRING ruling R-W2, ODQ §934.105): the ECO
+    // section's fifteen GENERATION-origin INTERNAL identities with a reader, engine-internal, each with its consumer
+    // named by file and line (docs/WIRING_W6_2026-11-07.md).
+    expect(WRITER_DARK_REGISTER.length).toBe(25);
     expect(liveEvidence.map((row) => row.identity).sort())
       .toEqual(WRITER_DARK_REGISTER.map((row) => row.identity).sort());
     for (const row of liveEvidence) {
@@ -488,7 +491,9 @@ describe('writer-with-no-reader ratchet: the live judgment', () => {
     // written on every world with a tie: ten became eleven.
     // 2026-11-05 (LANDING-5, the cloud chair's ruling 2 on LANDING-4's report, ODQ §934.105): `supersessionReason on proposals` (registered AND dark) retired by clause S — the
     // corpus no longer writes it — so eleven became ten. The retired density row was never in the cohort.
-    expect(registeredAndDark.length).toBe(10);
+    // 2026-11-07 (lane W6, WIRING R-W2, ODQ §934.105): the ECO section's fifteen engine-internal rows, every one
+    // written on every world and DARK: ten became twenty-five.
+    expect(registeredAndDark.length).toBe(25);
     expect(baseline.darkUnregistered.length).toBe(cohort.length - registeredAndDark.length);
     expect(reviewableDark(cohort).length).toBe(baseline.reviewableDarkCount);
     expect(reviewableDark(cohort).length).toBeLessThan(cohort.length);

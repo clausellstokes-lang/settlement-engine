@@ -8,7 +8,7 @@
   "The reviewable slice is computed by RULE (reviewableDark), never hand-listed."
  ],
  "schema": 1,
- "frozenAtSha": "95717c2db8cabdd928f6884c6c20171a930657cb",
+ "frozenAtSha": "76febf9b0323ee1ba407f07d9118230e6ea58eb3",
  "charter": "§18.1 WRWALKER Car 1 (HORIZON) — chair-signed vetoably at the INSTR-WRW pre-stage",
  "minRows": 40,
  "corpusMeta": {
@@ -23,7 +23,7 @@
   "transitionCount": 14426
  },
  "shapesDigest": "782dcd97c1f8dc63870232f1660c255dfb5f6065c2cf0496e3e66b45823d9d03",
- "detectorDigest": "f7d2d719dc63a615e810a2469bb67fbf54bfe1919b32d0081b1d380e8b5dd576",
+ "detectorDigest": "c41eda420cd5f97a9a154729957ad86b6df4533656006864b9b4bb0c24588366",
  "verdictDigest": "ac48c453d28890e8747f6136704555d3bc7d86c61f2e3dc6a13c2e7ad75effab",
  "surfaceRoots": {
   "web": [
@@ -101,7 +101,7 @@
   "nGrades": 979601,
   "resolvedReceivers": 7018
  },
- "registerDigest": "a22cf1c82bd7f65a70ae86fdcdb40259fb7f88e8ab8f5fa6f3cb76fa828e0290",
+ "registerDigest": "762cfe381246fc23ff88be5ec8c007528cb3cd67e938ff4f7f6b8c8e86dd8f34",
  "pendingSurfaceCeiling": 3,
  "reviewableDarkCount": 497,
  "darkUnregistered": [
@@ -542,12 +542,6 @@
    "key": "cascadeAdded",
    "shape": "garrison",
    "rows": 353
-  },
-  {
-   "identity": "cascadeAdded on institutions",
-   "key": "cascadeAdded",
-   "shape": "institutions",
-   "rows": 19773
   },
   {
    "identity": "cascadeAdded on magicDef",
@@ -1504,12 +1498,6 @@
    "rows": 269
   },
   {
-   "identity": "dependencyCount on metrics",
-   "key": "dependencyCount",
-   "shape": "metrics",
-   "rows": 472
-  },
-  {
    "identity": "depletedSince on resourceDynamics",
    "key": "depletedSince",
    "shape": "resourceDynamics",
@@ -1684,12 +1672,6 @@
    "rows": 472
   },
   {
-   "identity": "effectiveAgriculture on foodSecurity",
-   "key": "effectiveAgriculture",
-   "shape": "foodSecurity",
-   "rows": 472
-  },
-  {
    "identity": "elder_council on leaderNpcIds",
    "key": "elder_council",
    "shape": "leaderNpcIds",
@@ -1724,12 +1706,6 @@
    "key": "escort01",
    "shape": "missions",
    "rows": 133
-  },
-  {
-   "identity": "exclusiveGroupCoexists on institutions",
-   "key": "exclusiveGroupCoexists",
-   "shape": "institutions",
-   "rows": 19773
   },
   {
    "identity": "exclusiveTags on autoApplied",
@@ -2008,18 +1984,6 @@
    "rows": 472
   },
   {
-   "identity": "forbiddenResources on institutions",
-   "key": "forbiddenResources",
-   "shape": "institutions",
-   "rows": 19773
-  },
-  {
-   "identity": "forbiddenTradeRoutes on institutions",
-   "key": "forbiddenTradeRoutes",
-   "shape": "institutions",
-   "rows": 19773
-  },
-  {
    "identity": "forbiddenTradeRoutes on magicDef",
    "key": "forbiddenTradeRoutes",
    "shape": "magicDef",
@@ -2036,12 +2000,6 @@
    "key": "forcedByConfig",
    "shape": "stressors",
    "rows": 373
-  },
-  {
-   "identity": "forcedByToggle on institutions",
-   "key": "forcedByToggle",
-   "shape": "institutions",
-   "rows": 19773
   },
   {
    "identity": "foundedTick on steadings",
@@ -2152,12 +2110,6 @@
    "rows": 12291
   },
   {
-   "identity": "gapPct on foodRecord",
-   "key": "gapPct",
-   "shape": "foodRecord",
-   "rows": 472
-  },
-  {
    "identity": "gateEvidence on autoApplied",
    "key": "gateEvidence",
    "shape": "autoApplied",
@@ -2258,12 +2210,6 @@
    "key": "grievance",
    "shape": "reasons",
    "rows": 4408
-  },
-  {
-   "identity": "growsMoreThanEats on foodRecord",
-   "key": "growsMoreThanEats",
-   "shape": "foodRecord",
-   "rows": 472
   },
   {
    "identity": "hands on homeFrontComponents",
@@ -2664,12 +2610,6 @@
   {
    "identity": "isSecure on foodSecurity",
    "key": "isSecure",
-   "shape": "foodSecurity",
-   "rows": 472
-  },
-  {
-   "identity": "isSurplus on foodSecurity",
-   "key": "isSurplus",
    "shape": "foodSecurity",
    "rows": 472
   },
@@ -5794,12 +5734,6 @@
    "rows": 12291
   },
   {
-   "identity": "randomDepletionEligible on resourceConditions",
-   "key": "randomDepletionEligible",
-   "shape": "resourceConditions",
-   "rows": 2364
-  },
-  {
    "identity": "randomDepletionEligible on resourceTaxonomy",
    "key": "randomDepletionEligible",
    "shape": "resourceTaxonomy",
@@ -6832,22 +6766,10 @@
    "rows": 1250
   },
   {
-   "identity": "terrainAccess on institutions",
-   "key": "terrainAccess",
-   "shape": "institutions",
-   "rows": 19773
-  },
-  {
    "identity": "terrainB on segments",
    "key": "terrainB",
    "shape": "segments",
    "rows": 1250
-  },
-  {
-   "identity": "terrainRequired on institutions",
-   "key": "terrainRequired",
-   "shape": "institutions",
-   "rows": 19773
   },
   {
    "identity": "textiles on osr001",
@@ -7150,12 +7072,6 @@
    "rows": 1210
   },
   {
-   "identity": "tradeRouteRequired on institutions",
-   "key": "tradeRouteRequired",
-   "shape": "institutions",
-   "rows": 19773
-  },
-  {
    "identity": "trappedBySiege on missions",
    "key": "trappedBySiege",
    "shape": "missions",
@@ -7244,12 +7160,6 @@
    "key": "warRulingRead",
    "shape": "metadata",
    "rows": 12291
-  },
-  {
-   "identity": "warningCount on metrics",
-   "key": "warningCount",
-   "shape": "metrics",
-   "rows": 472
   },
   {
    "identity": "weakness on npcStates",
