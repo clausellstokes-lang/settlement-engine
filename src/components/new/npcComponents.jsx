@@ -19,7 +19,8 @@ import { describeCompromiseConjunction } from '../../domain/display/causeConjunc
 import { npcInteriority } from '../../domain/display/npcInteriorityRead.js';
 import { whereaboutsLine, whereaboutsBadge } from '../../domain/roads/whereaboutsDisplay.js';
 import { cardTieLines } from '../../domain/relationships/cardTies.js';
-import { cardPowerLine, cardPowerNames, cardHouseOf, cardInstitutionDoorOf } from '../../domain/people/cardPowers.js';
+import { cardPowerLine, cardPowerNames, cardHouseOf } from '../../domain/people/cardPowers.js';
+import { cardInstitutionDoorOf } from '../../domain/people/cardDoor.js';
 import {
   NPC_GOALS, NPC_ROLE_ARCHETYPES, npcFacetOf,
 } from '../../domain/npc/npcBank.js';

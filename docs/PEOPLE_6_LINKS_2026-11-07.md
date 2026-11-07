@@ -20,12 +20,15 @@ The owner's word (2026-11-07, verbatim): *"I would like for the institution card
 
 | file | change |
 |---|---|
-| `src/domain/people/cardPowers.js` | Two pure readers. `facesByHouse(cards)`: row name → the card whose `institution` is `{ kind: 'house', key: <name> }`; the first card in roster order wins. `cardInstitutionDoorOf(card, settlement)`: a house face → `{ type: 'institution', id: entityIdFor('institution', <the roster row of that name>) }`; a minted face (kind `power`) → `{ type: 'faction', id: factionIdFromName(<power>) }`; `institution: null` → `null`. A house that the roster no longer holds gets an empty id, so the link renders as plain text. |
+| `src/domain/people/cardPowers.js` | One pure reader, `facesByHouse(cards)`: row name → the card whose `institution` is `{ kind: 'house', key: <name> }`; the first card in roster order wins. No new import. |
+| `src/domain/people/cardDoor.js` (new) | `cardInstitutionDoorOf(card, settlement)`: a house face → `{ type: 'institution', id: entityIdFor('institution', <the roster row of that name>) }`; a minted face (kind `power`) → `{ type: 'faction', id: factionIdFromName(<power>) }`; `institution: null` → `null`. A house that the roster no longer holds gets an empty id, so the link renders as plain text. It is kept apart from `cardPowers.js` because the print surfaces (the PDF, the world book, Foundry) import `cardPowers`. Putting the dossier's id module (`entityLinks.js`) there widened their closure, and `writerReach.walker`'s surfaceReach arm caught it (`loyalty on autoApplied` gained campaign-pdf and world-book). Only the web NPC card imports `cardDoor.js`. |
 | `src/components/new/tabs/InstitutionsTab.jsx` | The view model carries `face` (reusing the join's one key). The card prints a small row, `<title> — <name>`, under the description. The name is an `EntityLink` to the NPC card's own id. A house with no face (the census's NONE, every fabric row) prints no row. |
 | `src/components/new/npcComponents.jsx` | The card line's house is an `EntityLink` door back to the Institutions card. A minted face's door is its power's card on the Power tab. A DM's person shows no door. The power line follows unchanged. |
 | `tests/components/people6InstitutionFaceLinks.test.jsx` | New: 10 tests (§3). |
 | `tests/components/phoneChromeFloor.census.test.js` | Re-keyed with cause (§4). |
 | `tests/lint/.lighting-census-baseline.json` | Re-frozen (§4). |
+| `tests/lint/ruinFilterRoster.walker.test.js` | `cardDoor.js` is EXEMPT as a name-lookup (it reads the roster only to compute a link id, and a ruined house keeps its card and its face); readers 100 → 101, with cause. |
+| `docs/content/wiring-census.json` | Re-derived: `producerIndexFiles` 1271 → 1272 (`cardDoor.js`); pools and relation rows unmoved. |
 | `tests/lint/.source-citation-baseline.json`, `tests/lint/sourceCitationIntegrity.walker.test.js` | The dated roster, +1 (§4). |
 
 **Not changed.**
@@ -56,15 +59,30 @@ The owner's word (2026-11-07, verbatim): *"I would like for the institution card
 
 | register | door | result | commit |
 |---|---|---|---|
-| observed-shape readers | the plain check | **left as it is: STOPPED at the base** (`executionTree manifest digest mismatch`, the history-walk fault MERGE-5AB §4 reported). Not fought. The new reads, listed for the landing seat's rung: `npcs[].institution.kind` and `npcs[].institution.key` read on two new display callers through `cardInstitutionOf` (`cardPowers.js :: facesByHouse`, `cardInstitutionDoorOf`); `npcs[].institution.title`, `npcs[].title` and `npcs[].name` read on the face row (`InstitutionsTab.jsx :: InstitutionCard`); `institutions[].name` read in `cardInstitutionDoorOf` (the row lookup). Cause: PEOPLE-6 LINKS | — |
-| writer reach | the plain check | exit 0, unmoved (no new writer) | — |
+| observed-shape readers | the plain check | **left as it is: STOPPED at the base** (`executionTree manifest digest mismatch`, the history-walk fault MERGE-5AB §4 reported). Not fought. The new reads, listed for the landing seat's rung: `npcs[].institution.kind` and `npcs[].institution.key` read on two new display callers through `cardInstitutionOf` (`cardPowers.js :: facesByHouse`, `cardDoor.js :: cardInstitutionDoorOf`); `npcs[].institution.title`, `npcs[].title` and `npcs[].name` read on the face row (`InstitutionsTab.jsx :: InstitutionCard`); `institutions[].name` read in `cardInstitutionDoorOf` (the row lookup). Cause: PEOPLE-6 LINKS | — |
+| writer reach | the plain check | exit 0, unmoved (no new writer). The walker's surfaceReach arm went red once, through the door's first home in `cardPowers.js`, and was cured by moving the door to `cardDoor.js` (§2), not by a rebank | — |
+| wiring census | `node scripts/wiring-census.mjs`, then `--check` | `producerIndexFiles` 1271 → 1272 (`cardDoor.js`); 709 pools and 165 relation rows unmoved; `--check` exit 0 | the final commit |
+| ruin-filter roster | re-keyed by hand with cause | readers 100 → 101, `cardDoor.js` EXEMPT (name-lookup) | the final commit |
 | lighting census | `LIGHTING_CENSUS_REFREEZE='PEOPLE-6 LINKS'` + note, on a clean tree; then the plain run | files 2972 → 2973, credited 2600 → 2601, titles 28014 → 28024, suiteTitles 7467 → 7471; plain run 34 / 34 | `fc6b62112` |
 | phone chrome floor | re-keyed by hand with cause | /create 615 → 617, /settlements 861 → 863, /gallery 659 → 661. Of each +2, +1 is the face row's one `proseFontSize` site (0 bare) and +1 is red at the base. The base's /admin and /world +1 are left red | `e467e4917` |
 | dated roster | `tests/lint/.source-citation-baseline.json` | 101 → 102, this record; the `_rosterGrowth2026-11-07-people-6` note and the walker header's `dated (102)` | this record's commit |
 
 ## 5. The red list
 
-ROSTER_AND_REDS_PENDING
+**`tests/lint` + `tests/scripts`, whole.** The same command, `npx vitest run tests/lint tests/scripts`, was run at the tip and at a base worktree (`bc4b64230`, `node_modules` linked).
+- **Base:** 215 files, 13 red / 25 tests red.
+- **First tip run:** 14 red / 28 tests red. The +3 were this lane's: `ruinFilterRoster` 2 and the `writerReach.walker` surfaceReach arm 1. All three were cured (§2, §4). Re-run: `ruinFilterRoster` green, and `writerReach.walker` back to the base's 3.
+- **After the cures, the tip's reds equal the base's, file for file and arm for arm.** All of them are the base's:
+  - `observedShapeReaders.walker` 6 and `writerReach.walker` 3: the observed-shape STOP, MERGE-5AB §4.
+  - `proseFamilyContract` 5, `newsHeadlineContract` and `newsVoiceContract`: the lanes', the AO-0 corpus.
+  - `tuningRegister` 4, `institutionTable` 2, `negativeAssertionAnchor` 2, `heldKeyWriterCensus` 1, `mutationCoverageManifest` 1, `proseWiringCensus` 1.
+  - `ledgerCitationIntegrity` and `provenanceMap`: ENVIRONMENT, the local `review-fixes-2026-07-08` ref is absent.
+
+**The touched suites** (every test importing `InstitutionsTab`, `npcComponents`, `cardPowers`, `cardDoor` or `NPCsTab`): the base's two only.
+- `phoneChromeFloor.census`: /admin and /world +1, the base's; this lane's +1 on three routes is re-keyed.
+- `tabSentencesOnce`: X-50 PlotHooks repeats, the base's.
+
+**Mine: none.**
 
 ## 6. CONFIRMED vs PLAUSIBLE
 
