@@ -117,7 +117,7 @@ describe('F8 — stress summaries render with the real settlement name', () => {
     for (let i = 0; i < 20; i++) {
       const e = entriesOf(mk({ stressType: 'wartime' }, `war-${i}`))[0];
       branches.add(
-        e.summary.includes('positioned to profit') ? 'profit'
+        e.summary.includes('doing well out of it') ? 'profit' // W4 PEOPLE second seat 2026-11-07: re-keyed to the summary's plain wording (the owner's style law; rows 43-48, 254-260)
         : e.summary.includes('may not win') ? 'loss'
         : 'other'
       );

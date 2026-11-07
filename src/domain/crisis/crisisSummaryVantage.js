@@ -51,13 +51,13 @@ export const CRISIS_SUMMARY_VANTAGES = Object.freeze({
   famine: Object.freeze({
     traveller: 'In {name} you see hungry children at the doors, and long queues wherever food is handed out.',
     official: '{name} has lost a second harvest. Its leaders have begun rationing, while the families who can afford it hoard what they have.',
-    local: 'The harvest has failed in {name} two years running. Rations are short, the better-off are hoarding, and the children go hungry.',
+    local: 'Every family in {name} is eating less than it did, and those with stores put by are not sharing.',
     watch: 'Hunger has made {name} tense: what food is stored is watched day and night, and every quarrel over food turns ugly fast.',
   }),
   occupied: Object.freeze({
     traveller: 'Foreign officials run {name} now; the locals answer their questions politely and say as little as they can.',
     official: '{name} is governed by an outside power. Its own leaders keep their titles and do as they are told.',
-    local: 'People in {name} do what the occupiers ask and nothing more, and some of them are quietly working against them.',
+    local: 'In {name} people answer to foreign officials now, and mind what they say in the street.',
     watch: 'The occupiers watch {name} closely, and the resistance watches them back, careful never to be caught.',
   }),
   politically_fractured: Object.freeze({
@@ -68,14 +68,14 @@ export const CRISIS_SUMMARY_VANTAGES = Object.freeze({
   }),
   indebted: Object.freeze({
     traveller: '{name} owes more than it can ever pay, and the creditor\'s agents are as much at home in its streets as its own people.',
-    official: '{name} cannot repay what it owes to an outside power, and its leaders now decide nothing without asking what the creditor will say.',
+    official: 'Every plan {name}\'s leaders make must first pass the creditor, and most of them do not.',
     local: 'Everything {name} earns goes first to the debt, and people grumble that they now work for the creditor.',
     watch: 'The creditor keeps its own people in {name}, watching where every coin goes.',
   }),
   recently_betrayed: Object.freeze({
     traveller: '{name} is wary of new faces since someone trusted sold it out; questions come before help.',
     official: 'Someone trusted in {name} sold something important, and its leaders still do not know who, or how much was lost.',
-    local: 'Since the betrayal, people in {name} keep their own counsel: everyone knows it happened, and no one knows who did it.',
+    local: 'Since the betrayal, neighbours in {name} keep their own counsel and their doors shut.',
     watch: '{name} is still looking for whoever betrayed it, and every unexplained absence draws a hard look.',
   }),
   infiltrated: Object.freeze({
@@ -92,19 +92,19 @@ export const CRISIS_SUMMARY_VANTAGES = Object.freeze({
   }),
   succession_void: Object.freeze({
     traveller: '{name}\'s last leader is dead and nobody has taken their place; everyone you meet has a view on who should.',
-    official: '{name}\'s last strong leader died recently and no one has yet taken charge; several rivals are moving to do it first.',
+    official: 'No one in {name} has the standing to give an order others must obey, and every rival for the seat knows it.',
     local: 'With the old leader dead and no one in their place, people in {name} wait to see who comes out on top.',
     watch: 'Rivals for {name}\'s empty seat are gathering followers, and it may come to blows before anyone is chosen.',
   }),
   monster_pressure: Object.freeze({
     traveller: 'The roads around {name} are dangerous now: carts have gone missing, and a farmstead went up in flames last week.',
-    official: 'Something around {name} has grown bolder, and the place\'s usual defences were never meant for it.',
+    official: 'Those who answer for {name}\'s safety spend more on it every season, and still the attacks come.',
     local: 'Nobody in {name} goes out after dark now, and every family has a story of something seen at the edge of the fields.',
     watch: 'Whatever is attacking around {name}, wolves, raiders or worse, is getting bolder, and the lookouts count the days between attacks.',
   }),
   insurgency: Object.freeze({
     traveller: '{name} looks calm, but its offices are half empty and orders go unanswered; a powerful faction has turned against those in charge.',
-    official: 'A powerful faction in {name} says the government has no right to rule, and is quietly refusing it every cooperation.',
+    official: 'Those in charge of {name} know a powerful faction is defying them, and cannot say so openly without making it stronger.',
     local: 'People in {name} are choosing between the government and the faction that defies it, and many have stopped doing what the government asks.',
     watch: 'There is no fighting in {name}\'s streets; the danger is quieter, officials who will not act and orders that go nowhere.',
   }),
@@ -116,7 +116,7 @@ export const CRISIS_SUMMARY_VANTAGES = Object.freeze({
   }),
   slave_revolt: Object.freeze({
     traveller: 'Work has stopped across {name}: the enslaved have downed their tools, and their owners stand by not knowing what to do.',
-    official: 'The enslaved of {name} have risen and will not work. Its leaders\' first answer failed, and they have not settled on a second.',
+    official: 'Those in charge of {name} must choose between bargaining with the rebels and crushing them, and the owners press for the second.',
     local: 'Whole work gangs in {name} have downed their tools, and the owners argue over whether to bargain or to crack down.',
     watch: '{name}\'s enslaved are in open defiance, and everyone set to keep order is busy containing them.',
   }),

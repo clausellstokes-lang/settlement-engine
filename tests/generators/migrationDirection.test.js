@@ -61,7 +61,7 @@ describe('the writer: stress[].direction is written once, at the draw', () => {
     const entry = buildStressEntry('Vale', 'mass_migration', MIGRATION);
     expect(entry.direction).toBe('arrivals');
     expect(entry.viabilityNote).toBe(MIGRATION.viabilityNoteByDirection.arrivals);
-    expect(entry.summary).toMatch(/receiving more people than its infrastructure was built for/);
+    expect(entry.summary).toMatch(/taking in more people than it has houses or work for/); // W4 PEOPLE second seat 2026-11-07: re-keyed to the summary's plain wording (the owner's style law; rows 43-48, 254-260)
   });
 
   it('no other stressor carries a direction', () => {
