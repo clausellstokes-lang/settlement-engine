@@ -1,0 +1,16 @@
+{
+  "_doc": "W5 HIS STYLE PASS, ONE SIGNED RE-RECORD OF THE COMPOSED-PROSE MANIFEST, ODQ §934.105 (the cloud chair signs by the owner's delegation of 2026-11-06, vetoable; a successor chair does not inherit this signature; WIRING-RULINGS §5-§8 and STYLE-RULINGS §1-§2, docs/chair/2026-11-07/). THE CAUSE, ONE: the owner's style law of 2026-11-07 applied to W5's section (STYLE-AUDIT §2b-5) in the authored annex, one commit (554bab31): 345 variants rewritten in DS-GEN-1/-2/-3/-5/-6/-7/-8/-9/-10/-11/-12/-13/-14/-15/-16/-17/-18, DS-HK-1, DS-POP-1/-2/-3 and DS-REL-1, no variant added or removed, keys, tags and slots kept. A RULED READING of 'one re-record per block': the blocks share one cause and one commit, so the manifest is re-recorded once for all of them rather than eighteen times over the same corpus; the per-block lines are in docs/WIRING_W5_2026-11-07.md §2. No generator byte moves. NEW WORDS (the owner's veto class): every rewritten line, old -> new, in that record.",
+  "ownerWords": "I also now give all permissions required now and in the future. I also defer all judgement to you. · Deploy after the construction and wiring. · Regarding construction, I only meant for the facts from generation only. Nothing from advance time or simulation as that has to wait until after we build FPZ. · I agree keep the machinery's out of the prose. · Yes exactly please apply that everywhere appropriate!",
+  "ownerDate": "2026-11-07",
+  "odqRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation of 2026-11-06 to the cloud chair, session 01FE9mEvGxnFx6WTBkEC6ie9; the construction-and-wiring wave of 2026-11-07, the chair's rulings R-W1)",
+  "cause": "the owner's style law of 2026-11-07 — W5 HIS's section (history, Overview, relations): DS-GEN-1/-2/-3/-5/-6/-7/-8/-9/-10/-11/-12/-13/-14/-15/-16/-17/-18, DS-HK-1, DS-POP-1/-2/-3, DS-REL-1",
+  "seat": "W5 HIS (Opus 5.5) under the cloud chair (Fable 5.1), session 01FE9mEvGxnFx6WTBkEC6ie9, on lane/w5-his-2026-11-07",
+  "surfaces": [
+    {
+      "surface": "dossier-prose-manifest",
+      "action": "re-record",
+      "predictedRows": 2,
+      "proofForm": "derived-artefact"
+    }
+  ]
+}
