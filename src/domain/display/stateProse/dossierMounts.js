@@ -372,7 +372,7 @@ export const DOSSIER_MOUNTS = Object.freeze([
     mount: 'overview.market', tab: 'overview', desk: 'general', blockId: 'DS-GEN-13', rung: 'sentence',
   }),
   Object.freeze({
-    mount: 'overview.institutions', tab: 'overview', desk: 'general', blockId: 'DS-GEN-17', rung: 'sentence',
+    mount: 'overview.institutions', tab: 'overview', desk: 'general', blockId: 'DS-GEN-17', rung: 'sentence', dimensions: ['walls'], // census-2b item 2 (db3ed88c1): GARRISONED v2 declares walls ("not only in stone")
   }),
   Object.freeze({
     mount: 'defense.armedForces', tab: 'defense', desk: 'defense', blockId: 'DS-DEF-5', rung: 'sentence',
