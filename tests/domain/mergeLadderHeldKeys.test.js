@@ -57,7 +57,7 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import { getStepMeta } from '../../src/generators/pipeline.js';
 import { rederive } from '../../src/domain/edit/dmLayer.js';
 import { declarationsFor } from '../../src/domain/edit/fieldDeclarations.js';
-import { mergeConsequence, recomputeMirrors, recomputeReceipts } from '../../src/domain/edit/mergeConsequence.js';
+import { mergeConsequence, recomputeReceipts } from '../../src/domain/edit/mergeConsequence.js';
 import { mergeTree } from '../../src/domain/edit/recordMergeTree.js';
 import { recordInvariants } from '../../src/domain/edit/recordInvariants.js';
 import { ATOMIC_COLLECTIONS, CLASS_EXCEPTIONS, RECORD_CLASSES } from '../../src/domain/edit/recordRegister.js';
@@ -212,7 +212,6 @@ function trials() {
       const merged = out.record;
       const pure = mergeTree(cl(built.record), cl(R0), cl(R1)).value;
       const pipeline = cl(pure);
-      recomputeMirrors(pipeline);
       recomputeReceipts(pipeline);
       const exempt = new Set([...recordInvariants(base).map(vkey), ...recordInvariants(built.record).map(vkey),
         ...recordInvariants(R1).map(vkey)]);
@@ -264,7 +263,8 @@ describe('EM-R8 — the escalation ladder never overwrites a HELD key, and the r
     // denominator. Nothing writes the key in src/ today, so no trial below can carry it and the
     // census figures are unmoved; this line is the roster join made visible, which is the law
     // this arm's title states.
-    expect(HELD_KEYS.length, 'the HELD denominator is imported from the register, never re-typed').toBe(11);
+    // ELEVEN -> TEN AT PEOPLE-5B (M-7): `factions` (the NPC grouping) left the record and the register.
+    expect(HELD_KEYS.length, 'the HELD denominator is imported from the register, never re-typed').toBe(10);
 
     const movedOnPowerCard = power.filter((trial) => trial.heldMoved.length > 0).map((trial) => `${trial.label} ${trial.key} -> ${h(trial.heldMoved)}`);
     const movedAnywhere = all.filter((trial) => trial.heldMoved.length > 0).map((trial) => `${trial.label} ${trial.key} -> ${h(trial.heldMoved)}`);
@@ -498,7 +498,7 @@ describe('EM-R8 — the escalation ladder never overwrites a HELD key, and the r
     expect(quiet.length, 'the quiet trials, which are 477 of 498 once the ladder stops repairing held facts').toBe(477);
     const drifted = quiet.filter((trial) => !trial.mergedIsPipeline).map((trial) => `${trial.label} ${trial.key}`);
     // anchored: `quiet` is 463 rows by the expectation above.
-    expect(drifted, 'a quiet trial whose merged record is not mergeTree + recomputeMirrors + '
+    expect(drifted, 'a quiet trial whose merged record is not mergeTree + '
       + `recomputeReceipts of its own inputs — the guard changed something while doing nothing:\n${drifted.join('\n')}`).toEqual([]);
     const noisy = all.filter((trial) => trial.escalations.length > 0);
     expect(noisy.length, 'and the blast radius of the ladder is exactly the config channel A2 measures').toBe(21); // X-29: 40 -> 35; 2026-11-05 (LANDING-5, by stage): 35 -> 21

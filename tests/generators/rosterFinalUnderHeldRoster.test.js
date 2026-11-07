@@ -285,18 +285,16 @@ describe('EM-R2 — the roster is final inside enrichNpcCoherence under a held r
     expect(typeof drawn).toBe('number');
   }, 600_000);
 
-  it('A4 — the mirror always runs: a held roster carries its edit into every member chip', () => {
+  // PEOPLE-5B (2026-11-07, M-7): THE MIRROR LEFT with the grouping. A v2 record carries no member chip (the
+  // register's `factions[].members[]` MIRROR row and `recomputeMirrors` are gone), so a held roster's edit has ONE
+  // home to reach: the record's own card. The arm proves both halves: no chip exists, and the card carries the edit.
+  it('A4 — one home: the record carries no member chip, and a held roster carries its edit onto the card', () => {
     const settlement = generateSettlementPipeline({ ...CONFIG }, null, {
       seed: SEED, customContent: {},
     });
-    const chipIds = (settlement.factions || [])
-      .flatMap((faction) => (Array.isArray(faction.members) ? faction.members : []))
-      .map((member) => member?.id)
-      .filter(Boolean);
-    const rosterIds = new Set((settlement.npcs || []).map((npc) => npc?.id));
-    const targetId = chipIds.find((id) => rosterIds.has(id));
-    expect(targetId, 'the fixture carries a member chip whose id is in the roster').toBeDefined();
-
+    expect('factions' in settlement, 'a v2 record carries no grouping, so no member chip').toBe(false);
+    const targetId = (settlement.npcs || []).map((npc) => npc?.id).find(Boolean);
+    expect(targetId, 'the fixture carries a card').toBeDefined();
     const held = structuredClone(settlement.npcs || []).map((npc) => (
       npc?.id === targetId ? { ...npc, role: SENTINEL_ROLE, title: SENTINEL_TITLE } : npc
     ));
@@ -304,20 +302,10 @@ describe('EM-R2 — the roster is final inside enrichNpcCoherence under a held r
       structuredClone(settlement), createPRNG(SEED).fork('canonical-coherence'),
       { ...pinsFromContext(settlement), npcs: held },
     );
-    const carried = (out.factions || [])
-      .flatMap((faction) => (Array.isArray(faction.members) ? faction.members : []))
-      .filter((member) => member?.id === targetId);
-    expect(carried.length, 'the mirror kept the chip this arm edits').toBeGreaterThan(0);
-    expect(carried.filter((member) => member.role !== SENTINEL_ROLE),
-      'a member chip did not follow the held roster: the mirror was gated').toEqual([]);
-
-    // THE POSITIVE CONTROL: the chip a GATED mirror would leave behind still reads the
-    // pre-edit role, so "it carries the edit" is a measurement and not a tautology.
-    const stale = (settlement.factions || [])
-      .flatMap((faction) => (Array.isArray(faction.members) ? faction.members : []))
-      .filter((member) => member?.id === targetId);
-    expect(stale.filter((member) => member.role === SENTINEL_ROLE),
-      'the control is vacuous: the pre-edit chip already carried the sentinel').toEqual([]);
+    const card = (out.npcs || []).find((npc) => npc?.id === targetId);
+    expect(card?.role, 'the held edit reached the card').toBe(SENTINEL_ROLE);
+    // THE POSITIVE CONTROL: the pre-edit card does not already carry the sentinel.
+    expect((settlement.npcs || []).find((npc) => npc?.id === targetId)?.role).not.toBe(SENTINEL_ROLE);
   }, 600_000);
 
   it('A5 — the appender must not add: a held roster short an office-holder stays exactly as held', () => {
@@ -349,14 +337,13 @@ describe('EM-R2 — the roster is final inside enrichNpcCoherence under a held r
 
   it('A6 — the linkage is retired whole: the groups are derived from the held roster at assembly', () => {
     const record = runHeadless(createPRNG(SEED));
-    const groups = record.settlement?.factions || [];
-    expect(groups.length, 'the unpinned run produced faction groups').toBeGreaterThan(0);
+    // PEOPLE-5B (2026-11-07, M-7): the GROUPS LEFT the record (settlementMigrations.js drops the grouping at the
+    // normalize boundary); a card's standing is its `memberships`, each naming a power on the roster.
+    expect('factions' in (record.settlement || {}), 'a v2 record carries no grouping').toBe(false);
     const powerNames = (record.settlement?.powerStructure?.factions || []).map((f) => f.faction);
-    // GS-2 (ODQ §934.101): each group IS a power faction, so no linkage stamp exists to retire.
-    expect(groups.filter((group) => !powerNames.includes(group.name)),
-      'a group carries a name the power roster does not').toEqual([]);
-    expect(groups.filter((group) => group?.powerFactionName),
-      'a group still carries a linkage stamp').toEqual([]);
+    const strays = (record.settlement?.npcs || []).flatMap((npc) => (npc.memberships || []).map((m) => m.power))
+      .filter((power) => !powerNames.includes(power));
+    expect(strays, 'a membership names a power the roster does not carry').toEqual([]);
 
     // (1) THE RETIREMENT, AT THE SEAM: the step keeps its two choosers and no faction work. The
     // relationships chooser anchors the absences, so a vanished file cannot pass them.
@@ -369,22 +356,21 @@ describe('EM-R2 — the roster is final inside enrichNpcCoherence under a held r
     expectAbsentWithAnchor(stepSource, "chooseOrPin(pins, 'conflicts'", "chooseOrPin(pins, 'relationships'", 'A6: no conflicts chooser');
     expectAbsentWithAnchor(stepSource, 'linkFactions(', "chooseOrPin(pins, 'relationships'", 'A6: no linker');
 
-    // (2) WITH THE ROSTER HELD, THE GROUPS FOLLOW IT. One held NPC is re-affiliated to another
-    // power faction, and the derived groups file it there: assembly read the held roster.
+    // (2) WITH THE ROSTER HELD, THE CARD'S STANDING FOLLOWS IT. One held card is moved to another power,
+    // and the record carries the held standing: assembly read the held roster.
     const roster = record.settlement?.npcs || [];
-    const mover = roster.find((npc) => npc?.factionAffiliation);
-    const target = powerNames.find((name) => name !== mover?.factionAffiliation);
-    expect(mover && target, 'the fixture has an affiliated NPC and a second power faction').toBeTruthy();
-    const held = structuredClone(roster).map((npc) => (npc.id === mover.id ? { ...npc, factionAffiliation: target } : npc));
+    const mover = roster.find((npc) => (npc?.memberships || []).length > 0);
+    const target = powerNames.find((name) => !(mover?.memberships || []).some((m) => m.power === name));
+    expect(mover && target, 'the fixture has a card in a power and a second power').toBeTruthy();
+    const moved = [{ power: target, rank: 1, share: 1 }];
+    const held = structuredClone(roster).map((npc) => (npc.id === mover.id ? { ...npc, memberships: moved } : npc));
     const heldRun = runHeadless(createPRNG(SEED), {
       pins: { npcs: held, relationships: record.settlement.relationships },
     });
-    const heldGroups = heldRun.settlement?.factions || [];
-    const filedUnder = heldGroups.filter((group) => (group.members || []).some((m) => m.id === mover.id)).map((g) => g.name);
-    expect(filedUnder, 'the held NPC is filed under its held affiliation').toEqual([target]);
-    // THE CONTROL: the unpinned record files the same NPC elsewhere, so the line above measured.
-    expect(groups.filter((group) => (group.members || []).some((m) => m.id === mover.id)).map((g) => g.name))
-      .toEqual([mover.factionAffiliation]);
+    const heldCard = (heldRun.settlement?.npcs || []).find((npc) => npc.id === mover.id);
+    expect(heldCard?.memberships, 'the held card keeps its held standing').toEqual(moved);
+    // THE CONTROL: the unpinned record stands the same card elsewhere, so the line above measured.
+    expect(mover.memberships.map((m) => m.power)).not.toContain(target);
 
     // (3) THE LINKAGE TRACE IS GONE FROM BOTH RUNS, anchored on the population summary trace.
     const summaryLive = [record, heldRun].map((run) => (Array.isArray(run.simulationTrace) ? run.simulationTrace : [])
@@ -398,7 +384,8 @@ describe('EM-R2 — the roster is final inside enrichNpcCoherence under a held r
     const heldKeys = Object.keys(RECORD_CLASSES).filter((key) => RECORD_CLASSES[key] === 'HELD');
     expect(heldKeys, 'the roster is a HELD key of the record').toContain('npcs');
     expect(RECORD_CLASSES.npcs).toBe('HELD');
-    expect(CLASS_EXCEPTIONS['factions[].members[]']).toBe('MIRROR');
+    // PEOPLE-5B (M-7): the ungated mirror LEFT with the grouping; no MIRROR sits on the card.
+    expect(CLASS_EXCEPTIONS['factions[].members[]']).toBeUndefined();
 
     const settlement = generateSettlementPipeline({ ...CONFIG }, null, {
       seed: SEED, customContent: {},

@@ -2,8 +2,8 @@
 // Every row is a MEASUREMENT over the golden corpus and the save path, re-measured at promotion;
 // the walker holds this file equal to the corpus in BOTH directions.
 // ⛔ NO src/generators/** MODULE MAY IMPORT THIS FILE (§5.4).
-// ⛔ PATH SPELLING: collapsed. `[]` means "at every index"; `factions[].members` is the
-//    collection, `factions[].members[]` the entry. The merge's keyed arm passes exactly this
+// ⛔ PATH SPELLING: collapsed. `[]` means "at every index"; `npcs[].memberships` is the
+//    collection, `npcs[].memberships[]` the entry. The merge's keyed arm passes exactly this
 //    spelling to an entry node, which is how a PER-ENTRY group is matched with no new machinery.
 
 export const RECORD_CLASS_NAMES = Object.freeze([
@@ -12,8 +12,10 @@ export const RECORD_CLASS_NAMES = Object.freeze([
 
 /** Every top-level key a record can carry — generated, saved, or the editor's. */
 export const RECORD_CLASSES = Object.freeze({
-  // HELD (7) — the record's first-hand entity facts. Never re-derived.
-  institutions: 'HELD', npcs: 'HELD', factions: 'HELD', relationships: 'HELD',
+  // HELD (6) — the record's first-hand entity facts. Never re-derived.
+  // PEOPLE-5B (2026-11-07, M-7): `factions` (the NPC grouping) LEFT — the powers
+  // (`powerStructure.factions`) are the only faction roster of a v2 record.
+  institutions: 'HELD', npcs: 'HELD', relationships: 'HELD',
   conflicts: 'HELD', powerStructure: 'HELD', name: 'HELD',
   // WORLD (3) — the input itself; the merge takes R1's.
   config: 'WORLD', _config: 'WORLD', _seed: 'WORLD',
@@ -42,11 +44,12 @@ export const RECORD_CLASSES = Object.freeze({
   dmLayer: 'AUTHORED', decrees: 'AUTHORED',
 });
 
-/** The 41 a generated record carries. Arm A1 asserts this set exactly against the corpus. */
+/** The 40 a generated record carries. Arm A1 asserts this set exactly against the corpus.
+ *  PEOPLE-5B (M-7): 41 -> 40, `factions` left (the grouping leaves the record). */
 export const GENERATED_KEYS = Object.freeze([
   '_config', '_seed', 'activeConditions', 'aiOverlays', 'arrivalScene', 'availableServices',
   'coherenceNotes', 'conflicts', 'config', 'culturalIdentity', 'culturalNotes', 'defenseProfile',
-  'economicState', 'economicViability', 'factions', 'generationCoherenceReceipt',
+  'economicState', 'economicViability', 'generationCoherenceReceipt',
   'generatorVersion', 'history', 'id', 'institutions', 'isolationSupport', 'name',
   'neighborRelationship', 'npcs', 'population', 'powerStructure', 'pressureSentence',
   'prominentRelationship', 'relationships', 'resourceAnalysis', 'schemaVersion',
@@ -166,7 +169,8 @@ export const NOT_YET_WRITTEN_KEYS = Object.freeze(['crossSettlementConflicts']);
 /** Sub-paths whose class differs from their parent's. The WHOLE exception list. */
 export const CLASS_EXCEPTIONS = Object.freeze({
   'powerStructure.economyInputFingerprint': 'RECEIPT',
-  'factions[].members[]': 'MIRROR',
+  // PEOPLE-5B (M-7): `factions[].members[]` — the grouping's member copy, the ONLY MIRROR on an entity
+  // path — LEFT with the grouping; `mergeConsequence.js :: recomputeMirrors` left with it.
   // ⭐ MEASURED, not named: the ONLY receipt sub-path that reads an input the record lacks.
   'generationCoherenceReceipt.repairs': 'HISTORY',
   // ⛔ ONE PATH, TWO DECLARATIONS, TWO DIFFERENT ACTS -- and it is in both tables on purpose.
@@ -180,7 +184,8 @@ export const CLASS_EXCEPTIONS = Object.freeze({
   'generationCoherenceReceipt.judgments[].evidence': 'MIRROR',
 });
 
-/** Collections merged BY a declared key (48). A string is one field; an array is a composite. */
+/** Collections merged BY a declared key (45). A string is one field; an array is a composite.
+ *  PEOPLE-5B (M-7): 48 -> 45, the grouping's three rows left. */
 export const KEYED_COLLECTIONS = Object.freeze({
   activeConditions: 'archetype',
   'availableServices.criminal': 'name',
@@ -209,10 +214,6 @@ export const KEYED_COLLECTIONS = Object.freeze({
   'economicViability.dependencies': 'title',
   'economicViability.plotHooks': 'category',
   'economicViability.warnings': 'title',
-  factions: 'name',
-  'factions[].members': 'id',
-  // 2026-11-07 PEOPLE-1 CAST (R-P3/R-P5): a card's powers, one entry per power its house backs, keyed by the power's name.
-  'factions[].members[].memberships': 'power',
   'generationCoherenceReceipt.checks': 'id',
   'generationCoherenceReceipt.judgments': 'id',
   'generationCoherenceReceipt.repairs': Object.freeze(['type', 'subject', 'action']),
@@ -221,13 +222,15 @@ export const KEYED_COLLECTIONS = Object.freeze({
   'history.historicalEvents': 'name',
   'history.legacyAnnotations': Object.freeze(['eventName', 'yearsAgo']),
   institutions: 'name',
+  // the card is keyed by its id; its `institution` and its ranked `memberships` merge INSIDE the HELD card.
   npcs: 'id',
+  // 2026-11-07 PEOPLE-1 CAST (R-P3/R-P5): a card's powers, one entry per power its house backs, keyed by the power's name.
   'npcs[].memberships': 'power',
   'powerStructure.conflicts': Object.freeze(['parties', 'issue']),
   'powerStructure.factionRelationships': 'pair',
   // PEOPLE-4 TIES (2026-11-07; R-P7): the tie is DIRECTED, one outgoing per card, so its identity
-  // is `from,to,type` (the undirected `npc1Id,npc2Id` pair is not written). Still HELD. TODO(PEOPLE-5):
-  // a v1 save's `npc1Id`/`npc2Id` pair is read as `from`/`to` by the migration, not by a shim here.
+  // is `from,to,type` (the undirected `npc1Id,npc2Id` pair is not written). Still HELD. PEOPLE-5B (M-7):
+  // a v1 save's `npc1Id`/`npc2Id` pair is moved to `from`/`to` by settlementMigrations.js (v1 -> v2), never here.
   relationships: Object.freeze(['from', 'to', 'type']),
   'resourceAnalysis.exploitation.fullyExploited': 'chainKey',
   'resourceAnalysis.exploitation.partiallyExploited': 'chainKey',
@@ -334,4 +337,12 @@ export const CONSISTENCY_GROUPS = Object.freeze([
   //    in 63/63, and the merge splits it. The two-member list is required — `members: null` would
   //    swallow history's three ORDER-BEARING collections whenever the age moved.
   { id: 'history-age', root: 'history', members: Object.freeze(['age', 'founding.age']) },
+  // PEOPLE-5B (2026-11-07, M-7; the chair's ruling on editCorpusRatchet A3, lane 1's hand-back): A CARD'S
+  // STANDING IS ONE DERIVATION. people/castPowers.js writes a card's ranked `memberships` and its
+  // `importance` band from the same rank draw (the band is read off the best rank), so a seat move that
+  // re-draws one re-draws the other; merged apart they would state a rank-1 card with a minor band. The
+  // shim's `factionAffiliation`/`secondaryAffiliation` are derived from `memberships` too, but they are
+  // NOT members: a per-entry member must sit on every card (A6), the two are absent on a card of no
+  // power, and both leave the record with the shim at the landing (M-2).
+  { id: 'card-standing', root: 'npcs[]', members: Object.freeze(['memberships', 'importance']) },
 ]);

@@ -473,7 +473,8 @@ describe('EM-R1 — the writer census of every held key', () => {
     expect(derived.length, 'the held denominator is empty: every arm below would be vacuous')
       .toBeGreaterThan(0);
     expect(HELD_KEYS).toEqual(derived);
-    expect(HELD_KEYS).toEqual(['conflicts', 'factions', 'institutions', 'name', 'npcs', 'powerStructure', 'relationships']);
+    // PEOPLE-5B (M-7): `factions` (the NPC grouping) left the register's HELD set.
+    expect(HELD_KEYS).toEqual(['conflicts', 'institutions', 'name', 'npcs', 'powerStructure', 'relationships']);
 
     // The three HELD-but-SAVED_ONLY keys are excluded BY NAME, by the producer's own table.
     const savedOnlyHeld = Object.entries(RECORD_CLASSES)
