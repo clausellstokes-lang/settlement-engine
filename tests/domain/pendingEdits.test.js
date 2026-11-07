@@ -139,7 +139,7 @@ describe('pendingEdits — cascade preview', () => {
   const baseSettlement = {
     name: 'Hightower',
     npcs: [{ name: 'A', plotHooks: [{ text: 'H1' }, { text: 'H2' }] }, { name: 'B' }],
-    factions: [{ name: 'F1' }],
+    powerStructure: { factions: [{ faction: 'F1' }] }, // PEOPLE-5B (M-7): the powers are the only faction roster
     economicViability: { plotHooks: [{ hook: 'H3' }] },
   };
 

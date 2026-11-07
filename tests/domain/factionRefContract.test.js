@@ -90,8 +90,11 @@ describe('FactionRef consumers', () => {
 
   test('ordinary generated religious seats and name-linked structural clergy enter the clergy plane', () => {
     const faction = religiousSeat(); // actual generated shape: category + .faction, no id/archetype
+    // PEOPLE-5B (M-7): a v2 card stands in its power through `memberships` (entityLinksFaction reads them;
+    // linkedFactionIds left the card), so the retired generator's structural priest is given its membership.
     const priest = {
       ...generateFactionStructuralNpcs(faction)[0],
+      memberships: [{ power: faction.faction, rank: 1, share: 1 }],
       personality: { dominant: 'ruthless', flaw: 'corrupt' },
     };
 
@@ -106,20 +109,22 @@ describe('FactionRef consumers', () => {
     expect(npcInFaction(priest, faction, ladderFactionKey(faction), [faction])).toBe(true);
   });
 
-  test('successor inference joins legacy name handles to authored ids through the roster', () => {
+  // PEOPLE-5B (M-7): the cards' powers are `memberships` by the power's NAME; the roster resolves the name to
+  // the authored-id faction, so two cards standing in it overlap whatever its id.
+  test('successor inference joins the cards\' memberships to an authored-id faction through the roster', () => {
     const faction = religiousSeat({ id: 'faction.temple.stable' });
     const outgoing = {
       id: 'npc.outgoing',
       importance: 'pillar',
       status: 'dead',
-      linkedFactionIds: ['faction.temple.stable'],
+      memberships: [{ power: 'Religious Authorities', rank: 1, share: 1 }],
       linkedInstitutionIds: [],
     };
     const successor = {
       id: 'npc.successor',
       importance: 'key',
       status: 'active',
-      linkedFactionIds: ['Religious Authorities'], // pre-id migration save shape
+      memberships: [{ power: 'Religious Authorities', rank: 2, share: 0.5 }],
       linkedInstitutionIds: [],
     };
 
@@ -132,25 +137,28 @@ describe('FactionRef consumers', () => {
     })).toEqual([successor]);
   });
 
-  test('stable ids survive a rename while name-only handles follow the governed cascade', () => {
+  // PEOPLE-5B (M-7): a card's membership names its power, so it FOLLOWS the governed cascade whether the power
+  // carries a stable id or not, and the link resolves before and after.
+  test('a membership follows the governed cascade, with or without a stable faction id', () => {
     const stable = {
       powerStructure: {
         factions: [{ id: 'faction.temple.stable', faction: 'Old Temple', name: 'Old Temple' }],
       },
-      npcs: [{ factionAffiliation: 'Old Temple', linkedFactionIds: ['faction.temple.stable'] }],
+      npcs: [{ memberships: [{ power: 'Old Temple', rank: 1, share: 1 }] }],
     };
     applyFactionRenameToSettlement(stable, 'Old Temple', 'New Temple');
     const stableFaction = stable.powerStructure.factions[0];
-    expect(stable.npcs[0].linkedFactionIds).toEqual(['faction.temple.stable']);
+    expect(stableFaction.id, 'the id is identity, never a label').toBe('faction.temple.stable');
+    expect(stable.npcs[0].memberships[0].power).toBe('New Temple');
     expect(entityLinksFaction(stable.npcs[0], stableFaction, stable.powerStructure.factions)).toBe(true);
 
     const nameOnly = {
       powerStructure: { factions: [{ faction: 'Old Chapel', name: 'Old Chapel' }] },
-      npcs: [{ factionAffiliation: 'Old Chapel', linkedFactionIds: ['Old Chapel'] }],
+      npcs: [{ memberships: [{ power: 'Old Chapel', rank: 1, share: 1 }] }],
     };
     applyFactionRenameToSettlement(nameOnly, 'Old Chapel', 'New Chapel');
     const nameFaction = nameOnly.powerStructure.factions[0];
-    expect(nameOnly.npcs[0].linkedFactionIds).toEqual(['New Chapel']);
+    expect(nameOnly.npcs[0].memberships[0].power).toBe('New Chapel');
     expect(entityLinksFaction(nameOnly.npcs[0], nameFaction, nameOnly.powerStructure.factions)).toBe(true);
   });
 

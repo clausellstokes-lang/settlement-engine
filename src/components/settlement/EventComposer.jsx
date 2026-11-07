@@ -25,6 +25,7 @@ import { eventStalenessKey } from '../../domain/events/stalenessKey.js';
 import { EVENT_REGISTRY } from '../../domain/events/registryFull.js';
 import { rolesForInstitution, importanceForRole } from '../../domain/roles/roleCatalog.js';
 import { factionCompendium } from '../../domain/factions/factionCatalog.js';
+import { firstRankMembershipOf, powerOrderOf } from '../../domain/people/membership.js';
 import { buildInstitutionCatalog } from '../../domain/institutions/institutionCatalog.js';
 import { buildStressorPickerItems } from '../../domain/stressorPicker.js';
 import { GOODS_MODIFIERS_BY_TIER } from '../../data/goods/chains.js';
@@ -207,13 +208,12 @@ export default function EventComposer({ onLink = null }) {
       .map(([key, def]) => ({ id: key, name: def.label || key }))
       .sort((a, b) => a.name.localeCompare(b.name));
   }, [settlement?.config?.nearbyResources]);
-  // PROMOTE_NPC / DEMOTE_NPC — NPCs grouped by faction affiliation, keeping
-  // only factions with at least two members (the swap needs a counterpart).
+  // PROMOTE_NPC / DEMOTE_NPC — NPCs grouped by their first-rank power (PEOPLE-5B, M-7), keeping
+  // only powers with at least two members (the swap needs a counterpart).
   const npcSwapGroups = useMemo(() => {
-    const byFaction = new Map();
+    const byFaction = new Map(), powerOrder = powerOrderOf(settlement);
     for (const npc of settlement?.npcs || []) {
-      const faction = npc?.factionAffiliation;
-      if (!faction || !npc?.name) continue;
+      const faction = firstRankMembershipOf(npc, powerOrder)?.power; if (!faction || !npc?.name) continue;
       if (!byFaction.has(faction)) byFaction.set(faction, []);
       byFaction.get(faction).push({ id: String(npc.id || npc.name), name: npc.name });
     }
@@ -221,7 +221,7 @@ export default function EventComposer({ onLink = null }) {
       .filter(([, npcs]) => npcs.length >= 2)
       .map(([faction, npcs]) => ({ faction, npcs }))
       .sort((a, b) => a.faction.localeCompare(b.faction));
-  }, [settlement?.npcs]);
+  }, [settlement]);
   // IMPOSE_CORRUPTION — the manifest's wrap over readCorruptionClimate: the
   // EXACT list the imposeCorruption handler resolves against (the old inline
   // comment-mirror filter is retired — same-function law).

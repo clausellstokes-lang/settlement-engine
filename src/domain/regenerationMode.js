@@ -183,10 +183,10 @@ function lookupTagForEntity(settlement, catalogEntry) {
   if (type === 'faction') {
     // Mirror deriveAllFactionProfiles' source order so a faction stored under
     // any of the legacy containers resolves the same way the catalog derived it.
-    const holder = /** @type {{powerStructure?: {factions?: Array<Record<string, unknown>>}, power?: {factions?: Array<Record<string, unknown>>}, factions?: Array<Record<string, unknown>>}} */ (settlement);
+    // PEOPLE-5B (M-7): the powers are the only faction roster; the grouping fallback left with it.
+    const holder = /** @type {{powerStructure?: {factions?: Array<Record<string, unknown>>}, power?: {factions?: Array<Record<string, unknown>>}}} */ (settlement);
     const factions = holder.powerStructure?.factions
                   || holder.power?.factions
-                  || holder.factions
                   || [];
     const f = factions.find(fac =>
       fac?.id === id || deriveFactionProfile(fac, settlement)?.id === id);

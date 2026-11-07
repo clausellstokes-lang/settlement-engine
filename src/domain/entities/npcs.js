@@ -48,20 +48,18 @@
  *  @property {NpcImportance} importance
  *  @property {NpcStatus} status
  *  @property {string[]=} linkedInstitutionIds
- *  @property {string[]=} linkedFactionIds  id-first faction handles: faction.id,
- *    else the generated seat's canonical .faction/.name until the ID-only migration
+ *  @property {Array<{ power: string, rank: (1|2|3|null), share: (number|null) }>=} memberships
+ *    PEOPLE-5B (M-7): the card's standing in the powers — one entry per power, by the power's
+ *    name (∈ powerStructure.factions), ranked first/second/third where its house backs it
+ *    (people/castPowers.js), `rank: null` where a DM or an event placed it. Replaces
+ *    `linkedFactionIds` and `factionAffiliation`.
+ *  @property {({ kind: 'house'|'power', key: string, family: (string|null), title: (string|null) }|null)=} institution
+ *    the house (or, for a minted face, the power) this card is the face of; `null` for a DM's card.
  *  @property {(number|null)=} influence              0-100; null when never generated
  *  @property {(number|null)=} legitimacyContribution 0-100 — what they prop up when alive
  *  @property {(number|null)=} stabilityContribution  0-100 — how much their absence destabilizes
  *  @property {string[]=} serviceContribution  e.g. ["healing", "charity", "funerary_rites"]
  *  @property {string[]=} potentialSuccessors  npc ids the engine pre-suggests on death
- *  @property {string=} factionAffiliation    the house this figure belongs to, by the
- *    seat's display name — the key `factionAffiliation`, `ladderFactionKey` and
- *    `npcInFaction` all join on. DECLARED at TE-DENSITY-1 D2b: the field was already
- *    written (the coherence seam's `assignRoster`, the ADD_FACTION founder path) and
- *    read across the estate, but it was undeclared here, so every writer had to cross
- *    the boundary through a cast. Declaring it is a documentation of existing shape,
- *    not a change to it — no persisted byte moves.
  *  @property {string=} removedByEventId
  *  @property {string=} createdByEventId       event that created this NPC (ADD_NPC); undo drops it
  *  @property {string=} notes                  free-form DM annotation
@@ -83,6 +81,7 @@
  */
 
 import { slugify as kernelSlugify } from '../../kernel/slugify.js';
+import { membershipsOf } from '../people/membership.js';
 
 /**
  * THE STATUSES THAT MEAN A FIGURE CANNOT ACT, HOLD A PLACE, OR SUCCEED (design §15: "a jailed
@@ -155,6 +154,15 @@ export function importanceWeight(npc) {
 }
 
 /**
+ * The names of the powers a card stands in, in its memberships' order (PEOPLE-5B, M-7).
+ * @param {{ memberships?: unknown } | null | undefined} npc
+ * @returns {string[]}
+ */
+export function membershipPowers(npc) {
+  return membershipsOf(npc).map((m) => m.power);
+}
+
+/**
  * Create a new NPC with structural defaults. Used by the ADD_NPC event
  * and by manual user input. Caller supplies what they have; this fills
  * in defaults so downstream consumers always see a complete shape.
@@ -167,7 +175,7 @@ export function createNpc(input = {}) {
   // caller can pass — e.g. the originating event id — to disambiguate same-named NPCs).
   const idSeed = input._idSeed != null
     ? String(input._idSeed)
-    : [input.name, input.role, ...(input.linkedFactionIds || []), ...(input.linkedInstitutionIds || [])].join('|');
+    : [input.name, input.role, ...membershipPowers(input), ...(input.linkedInstitutionIds || [])].join('|');
   const id = input.id || `npc.${slugify(input.name || 'unnamed')}_${shortHash(idSeed)}`;
   return {
     id,
@@ -176,7 +184,9 @@ export function createNpc(input = {}) {
     importance: input.importance || 'notable',
     status: /** @type {NpcStatus} */ (input.status || 'active'),
     linkedInstitutionIds: input.linkedInstitutionIds || [],
-    linkedFactionIds:     input.linkedFactionIds || [],
+    memberships:          Array.isArray(input.memberships) ? input.memberships : [],
+    // a card born here (the DM's, an event's) is a face of no house unless the caller names one (M-7)
+    institution:          input.institution ?? null,
     influence:               input.influence ?? null,
     legitimacyContribution:  input.legitimacyContribution ?? null,
     stabilityContribution:   input.stabilityContribution ?? null,
@@ -237,7 +247,8 @@ export function killNpc(npc, eventId) {
     }
   }
 
-  for (const factionId of npc.linkedFactionIds || []) {
+  // the powers the card stands in, by name — the power's handle on a generated record (factionRefs.js)
+  for (const factionId of membershipPowers(npc)) {
     factionImpairments.push({
       factionId,
       impairment: {
@@ -298,9 +309,11 @@ export function assignNpcToRole({ npc, institutionId, role, quality, factionAlig
     importance: importance || npc?.importance,
     influence:  influence ?? npc?.influence,
     linkedInstitutionIds: dedupeIds([...(npc?.linkedInstitutionIds || []), institutionId]),
-    linkedFactionIds: factionAlignment
-      ? dedupeIds([...(npc?.linkedFactionIds || []), factionAlignment])
-      : (npc?.linkedFactionIds || []),
+    // PEOPLE-5B (M-7): the power the appointee answers to joins its memberships (unranked: a role
+    // filled by an event is not a backing roll), once.
+    memberships: factionAlignment && !membershipPowers(npc).includes(factionAlignment)
+      ? [...(Array.isArray(npc?.memberships) ? npc.memberships : []), { power: factionAlignment, rank: null, share: null }]
+      : (Array.isArray(npc?.memberships) ? npc.memberships : []),
   });
   const updated = { ...npc, ...structural };
 

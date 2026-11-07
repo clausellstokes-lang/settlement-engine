@@ -23,21 +23,12 @@ export default function SettlementDetailEditNames({
   // `.faction` / `.name` precedence can never be hand-rolled here.
   const mobile = useIsMobile();
   const powerFactions = settlement?.powerStructure?.factions || [];
-  const factionRows = (powerFactions.length
-    ? powerFactions.map((fac, fi) => ({
-        key: `power-${fi}`,
-        name: nameOf(fac),
-        label: fac?.category || 'power faction',
-      }))
-    : (settlement?.factions || []).map((fac, fi) => ({
-        key: `group-${fi}`,
-        name: fac?.name,
-        // GS-2 (ODQ §934.101): the grouping list is a projection of the power factions and carries no
-        // power-faction binding any more, so the label reads only the group's own category.
-        label: fac?.dominantCategory && fac.dominantCategory !== 'other'
-          ? fac.dominantCategory
-          : 'mixed',
-      }))
+  // PEOPLE-5B (M-7): the powers are the ONLY faction roster; the grouping fallback left with the grouping.
+  const factionRows = (powerFactions.map((fac, fi) => ({
+    key: `power-${fi}`,
+    name: nameOf(fac),
+    label: fac?.category || 'power faction',
+  }))
   ).filter(row => row.name);
   return (
       settlement&&<div style={{overflow:'hidden'}}>

@@ -96,11 +96,11 @@ function idFromSeed(seed) {
 function structuralFingerprint(s) {
   /** @param {unknown} v @returns {number} */
   const len = (v) => (Array.isArray(v) ? v.length : 0);
-  const holder = /** @type {{ npcs?: unknown, institutions?: unknown, powerStructure?: { factions?: unknown }, factions?: unknown, neighbourNetwork?: unknown, history?: { historicalEvents?: unknown }, config?: { nearbyResources?: unknown } } | null | undefined} */ (s);
+  const holder = /** @type {{ npcs?: unknown, institutions?: unknown, powerStructure?: { factions?: unknown }, neighbourNetwork?: unknown, history?: { historicalEvents?: unknown }, config?: { nearbyResources?: unknown } } | null | undefined} */ (s);
   return [
     len(holder?.npcs),
     len(holder?.institutions),
-    len(holder?.powerStructure?.factions ?? holder?.factions),
+    len(holder?.powerStructure?.factions), // PEOPLE-5B (M-7): the powers, no grouping fallback
     len(holder?.neighbourNetwork),
     len(holder?.history?.historicalEvents),
     len(holder?.config?.nearbyResources),

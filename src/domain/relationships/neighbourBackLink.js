@@ -197,7 +197,9 @@ export function liveNeighbourEngagements(settlement) {
       id: settlement.id,
       name: settlement.name || '',
       npcs: settlement.npcs || [],
-      factions: settlement.factions || [],
+      // PEOPLE-5B (M-7): the record's own powers, never its grouping (which left the record);
+      // crossSettlementConflicts.js :: engagingFactions reads the power roster first.
+      powerStructure: settlement.powerStructure || null,
     };
     const partner = {
       id: nr.id, name: nr.name, npcs: nr.npcs || [], factions: nr.factions || [],

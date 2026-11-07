@@ -78,16 +78,40 @@ const NPC_KINDS = new Set([
 ]);
 
 const STASIS_REASONS = new Set(['journey', 'imprisoned', 'missing', 'sequestered']);
+// PEOPLE-5B (M-7): the mirror of npc/npcOps.js :: SEAT_HELD_FIELDS — `memberships` (records) and
+// `institution` (a record or null) replace `factionAffiliation` and `linkedFactionIds`.
 const SEAT_FIELDS = new Set([
   'institutionId',
   'factionLink',
-  'factionAffiliation',
   'settlementId',
   'role',
   'linkedInstitutionIds',
-  'linkedFactionIds',
+  'memberships',
+  'institution',
 ]);
-const SEAT_ARRAY_FIELDS = new Set(['linkedInstitutionIds', 'linkedFactionIds']);
+const SEAT_ARRAY_FIELDS = new Set(['linkedInstitutionIds']);
+const MEMBERSHIP_RANKS = new Set([1, 2, 3, null]);
+const INSTITUTION_KINDS = new Set(['house', 'power']);
+/** One membership `{ power, rank, share }`, or null when it is not one. @param {unknown} entry */
+function membershipOf(entry) {
+  const m = recordOf(entry);
+  if (!m || typeof m.power !== 'string' || !m.power.trim()) return null;
+  const rank = m.rank ?? null;
+  const share = m.share ?? null;
+  if (!MEMBERSHIP_RANKS.has(rank)) return null;
+  if (share !== null && !(typeof share === 'number' && Number.isFinite(share))) return null;
+  return { power: m.power.trim(), rank, share };
+}
+/** A card's house `{ kind, key, family, title }`, null for a face of no house, undefined when invalid. @param {unknown} value */
+function institutionOf(value) {
+  if (value === null) return null;
+  const v = recordOf(value);
+  if (!v || !INSTITUTION_KINDS.has(v.kind) || typeof v.key !== 'string' || !v.key.trim()) return undefined;
+  const family = v.family ?? null;
+  const title = v.title ?? null;
+  if ((family !== null && typeof family !== 'string') || (title !== null && typeof title !== 'string')) return undefined;
+  return { kind: v.kind, key: v.key.trim(), family, title };
+}
 
 // The admission wall's mirror of tableLedger's KIND_SPEC. A mirror rather than
 // an import because this module is EAGER and the ledger is lazy; the end-to-end
@@ -637,7 +661,18 @@ export function normalizePendingEditPayload(kind, rawPayload, context) {
     for (const [key, value] of Object.entries(target)) {
       if (!SEAT_FIELDS.has(key)) return { ok: false, reason: 'npc_assignment_field_invalid' };
       if (value === undefined) continue;
-      if (SEAT_ARRAY_FIELDS.has(key)) {
+      if (key === 'memberships') {
+        if (!Array.isArray(value)) return { ok: false, reason: 'npc_assignment_value_invalid' };
+        const memberships = value.map(membershipOf);
+        if (memberships.some((m) => m === null)) return { ok: false, reason: 'npc_assignment_value_invalid' };
+        const powers = memberships.map((m) => /** @type {{ power: string }} */ (m).power);
+        if (new Set(powers).size !== powers.length) return { ok: false, reason: 'npc_assignment_value_invalid' };
+        filtered[key] = /** @type {JsonValue} */ (memberships);
+      } else if (key === 'institution') {
+        const institution = institutionOf(value);
+        if (institution === undefined) return { ok: false, reason: 'npc_assignment_value_invalid' };
+        filtered[key] = institution;
+      } else if (SEAT_ARRAY_FIELDS.has(key)) {
         if (!Array.isArray(value) || !value.every((entry) => (
           typeof entry === 'string'
           || (typeof entry === 'number' && Number.isFinite(entry))
