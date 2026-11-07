@@ -14,6 +14,7 @@ import { generateEconomicViability } from '../economicGenerator.js';
 import { generateHistory } from '../historyGenerator.js';
 import { deriveLegacyAnnotations } from '../legacyGenerator.js';
 import { getTerrainType } from '../terrainHelpers.js';
+import { getInstFlags } from '../priorityHelpers.js';
 import { recordTrace } from '../../domain/trace.js';
 import { availableNativeResourceKeys } from '../../domain/resourceSemantics.js';
 
@@ -54,8 +55,10 @@ registerStep('generateNarratives', {
   // exactly as generateHistory's is below — effectiveConfig itself carries no _seed,
   // so it is stamped on here. Without it the rung falls back to canonical-at-zero and
   // every settlement on a route shares one sentence, which is the defect lane RR closed.
+  // #10 (W5 HIS 2026-11-07): the port reason reads whether a docks or wharf institution exists.
+  const hasDocks = Boolean(getInstFlags(effectiveConfig, institutions).hasPort);
   const settlementReason = generateSettlementReason(
-    tier, tradeRoute, null, { ...effectiveConfig, _seed: ctx._seed },
+    tier, tradeRoute, null, { ...effectiveConfig, _seed: ctx._seed, hasDocks },
     economicViability?.metrics?.foodBalance || null
   );
   // Stamp the pipeline seed onto the config so generateHistory's prose-variant selection

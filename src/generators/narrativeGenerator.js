@@ -758,6 +758,8 @@ export const generateSettlementReason = (tier, route, neighbor, _config = {}, fo
     route,
     terrainType: _config.terrainType ?? null,
     hasFoodDeficit,
+    // #10: the port reason reads the roster's docks/wharf flag (undefined from a caller that does not say).
+    hasDocks: _config.hasDocks,
     supportChannels,
     specialResources: _config.specialResources ?? null,
     seed: _config._seed ?? null,

@@ -43,3 +43,28 @@ describe('generateSettlementReason deficit honesty', () => {
     expect(fed[1]).toMatch(/produce what it consumes/);
   });
 });
+
+// #10 (STYLE-RULINGS §1, W5 HIS 2026-11-07): A RECORD DEFECT, not a wording. A port route with no
+// docks or wharf institution on the roster printed "A port. The wharves are the reason the place
+// exists" over a mountain thorp with no docks. The port reason now reads whether a docks/wharf
+// institution exists (`hasDocks`, from the roster's port-infrastructure flag); with none, the arm
+// its terrain gives prints (riverside -> the river arm, else the road arm).
+describe('#10 — the port reason is gated on a docks or wharf institution', () => {
+  const PORT_WORDS = /\bport\b|wharve?s?\b|harbou?r|seaport|quay|berths?\b|hulls?\b|tide/i;
+  it('a port route WITHOUT docks prints no port reason', () => {
+    for (const terrainType of [null, 'mountains', 'coastal', 'plains']) {
+      const [reason] = generateSettlementReason('thorp', 'port', null, { hasDocks: false, terrainType });
+      expect(reason, `terrain ${terrainType}`).not.toMatch(PORT_WORDS);
+    }
+  });
+  it('a riverside port route without docks takes the river reason', () => {
+    const [reason] = generateSettlementReason('village', 'port', null, { hasDocks: false, terrainType: 'riverside' });
+    expect(reason).toMatch(/river/i);
+    expect(reason).not.toMatch(PORT_WORDS);
+  });
+  it('a port route WITH docks keeps its port reason, and a caller that does not say keeps it too', () => {
+    expect(generateSettlementReason('town', 'port', null, { hasDocks: true })[0]).toMatch(PORT_WORDS);
+    expect(generateSettlementReason('town', 'port', null, {})[0]).toMatch(PORT_WORDS);
+  });
+});
+
