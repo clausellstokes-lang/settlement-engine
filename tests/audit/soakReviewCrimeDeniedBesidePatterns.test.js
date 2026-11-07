@@ -8,6 +8,12 @@
  */
 import { describe, expect, it } from 'vitest';
 import { crimeAbsentAndOrganised } from '../../scripts/audit/soak-review/checks.mjs';
+import { variantByVid } from '../helpers/drawnProse.js';
+
+/** DS-DEF-4's denial pool, computed (proseDrawnAnchors: never a literal state-prose anchor). */
+const denialOf = (vid, settlement) => variantByVid({
+  leaf: 'defense', blockId: 'DS-DEF-4', poolKey: 'structure null (nothing organized recognized)', vid, slots: { settlement },
+});
 
 const SOAK1K_1801 = [
   'Criminal Architecture & Public Order ▲',
@@ -28,8 +34,8 @@ describe('A-06 reads the denial beside the block\'s own crime patterns', () => {
 
   it('each sister variant and the static line beside listed patterns is a finding', () => {
     for (const denial of [
-      'What goes wrong at Tarkhanbulag goes wrong one thing at a time and belongs to whoever did it.',
-      'A stranger asking after the arrangements at Tarkhanbulag is met with genuine incomprehension, which is either the truth or an unusually good performance of it.',
+      denialOf(2, 'Tarkhanbulag'),
+      denialOf(3, 'Tarkhanbulag'),
       'No organized criminal infrastructure detected. Crime exists at a petty, individual level.',
     ]) {
       const defense = `Active crime patterns\nreligious fraud\nFalse declarations.\n${denial}`;
@@ -45,7 +51,7 @@ describe('A-06 reads the denial beside the block\'s own crime patterns', () => {
   });
 
   it('the network-phrase arm reads as before', () => {
-    const screen = 'No criminal infrastructure has been identified at Ford.\nRevenue funds the criminal network.';
+    const screen = `${denialOf(1, 'Ford').split('. ')[0]}.\nRevenue funds the criminal network.`;
     expect(crimeAbsentAndOrganised(screen, '')).toMatch(/organised network/);
     expect(crimeAbsentAndOrganised('Revenue funds the criminal network.', '')).toBeNull();
   });
