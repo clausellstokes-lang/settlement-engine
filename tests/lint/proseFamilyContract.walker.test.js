@@ -175,6 +175,7 @@ describe('four durable prose-family exact-totality contract', () => {
     // 2026-11-05 (LANDING-5, the chair's addition (c); the walker was masked since X-46 car 1 by the duplicate regional id, so these are records 12–26 and the window's earlier records, attributed by stage at prose-family-contract.mjs's RE-RECORDED block; the residual tick itself moves only regionalEventLogUnique): 7517 → 7665, one identity in net.
     // 2026-11-06 (LANDING-7 R-E10; the density ceilings re-derived from the stamp bands, 20c0139c5 alone, measured byte-equal to the tip; prose-family-contract.mjs's RE-RECORDED block): 7665 → 7669, no identity in or out; 42 rows move a count.
     // 2026-11-07 (LANDING-R2 seat D2, the chair's 02:36 ruling, §934.105; re-taken at the tip 3d03dc723, attributed by step at prose-family-contract.mjs's RE-RECORDED block: rung 2's census-1b merge 0856c09d3 = d35532850, the census-4 merge 950b75014, the census-2 merge 2b31f33f3, census-1i unit 3 597866207, plus an interaction with rung 1): 7669 -> 7669, no identity in or out; 10 rows move a count and the digit widths cancel (rung 2 alone held 7665 -> 7665 too).
+    // 2026-11-07 (MERGE-R2, the integration merge of the rung-2 landing into lane/integration-2026-11-07; re-keyed by identity with its cause, measured at the merged tip 6c3e25661, PLAUSIBLE at prose-family-contract.mjs's RE-RECORDED block: the census steps composed with the integration side's WIRING-W0 / REVIEW-INTAKE lines): 7669 -> 7669, no identity in or out; 10 pulseHistory rows move a count and the digit widths cancel again.
     expect(Buffer.byteLength(JSON.stringify(live.rows))).toBe(7669);
     // TE36 (ODQ §271): the digest follows the counts it hashes. It is re-recorded here and in
     // prose-family-contract.mjs's EXPECTED_ROWS_SHA256 together, which is what keeps the
@@ -186,7 +187,8 @@ describe('four durable prose-family exact-totality contract', () => {
     // 2026-11-05 (LANDING-5, addition (c), by stage at prose-family-contract.mjs's RE-RECORDED block): 1d67e350… → c24ac7a8…, with EXPECTED_ROWS_SHA256.
     // 2026-11-06 (LANDING-7 R-E10; the density ceilings re-derived from the stamp bands, 20c0139c5 alone, measured byte-equal to the tip; prose-family-contract.mjs's RE-RECORDED block): c24ac7a8… → 7c53b1cd…, with EXPECTED_ROWS_SHA256.
     // 2026-11-07 (LANDING-R2 seat D2, the chair's 02:36 ruling, §934.105; re-taken at the tip 3d03dc723, attributed by step at prose-family-contract.mjs's RE-RECORDED block: rung 2's census-1b merge 0856c09d3 = d35532850, the census-4 merge 950b75014, the census-2 merge 2b31f33f3, census-1i unit 3 597866207, plus an interaction with rung 1): 7c53b1cd… -> 9f28cc22…, with EXPECTED_ROWS_SHA256.
-    expect(live.rowsSha256).toBe('9f28cc22dc88d59c2dca5d086cc2a57aa81b0582d28f45aa075ccf83a35ed8ec');
+    // 2026-11-07 (MERGE-R2, the integration merge of the rung-2 landing into lane/integration-2026-11-07; re-keyed by identity with its cause, measured at the merged tip 6c3e25661, PLAUSIBLE at prose-family-contract.mjs's RE-RECORDED block: the census steps composed with the integration side's WIRING-W0 / REVIEW-INTAKE lines): 9f28cc22… -> 4c5a458d…, with EXPECTED_ROWS_SHA256.
+    expect(live.rowsSha256).toBe('4c5a458d2a5358518b26bdc0d8f3c2ef7d6cafa09e33fa5887368359d1659b49');
     const counted = live.rows.findIndex((row) => row.occurrences > row.distinctValues);
     const movements = [
       [...clone(live.rows), { family: 'timeline', path: 'zz', field: 'type', distinctValues: 1, occurrences: 1 }],
@@ -219,7 +221,8 @@ describe('four durable prose-family exact-totality contract', () => {
     // new totals (59 − 7, 971 − 7, 5227 − 7); `chronicle` byte-identical at 7/7/7 for the eighth re-record running.
     // 2026-11-06 (LANDING-7 R-E10; the density ceilings re-derived from the stamp bands, 20c0139c5 alone, measured byte-equal to the tip; prose-family-contract.mjs's RE-RECORDED block): 52/964/5220 → 52/969/5243, the same seven off the new totals (59 − 7, 976 − 7, 5250 − 7); `chronicle` byte-identical at 7/7/7 for the ninth re-record running.
     // 2026-11-07 (LANDING-R2 seat D2, the chair's 02:36 ruling, §934.105; re-taken at the tip 3d03dc723, attributed by step at prose-family-contract.mjs's RE-RECORDED block: rung 2's census-1b merge 0856c09d3 = d35532850, the census-4 merge 950b75014, the census-2 merge 2b31f33f3, census-1i unit 3 597866207, plus an interaction with rung 1): 52/969/5243 -> 52/970/5253, the same seven off the new totals (59 - 7, 977 - 7, 5260 - 7); `chronicle` byte-identical at 7/7/7 for the tenth re-record running.
-    counterfeit.totals = { families: 3, identities: 52, distinctValues: 970, occurrences: 5253 };
+    // 2026-11-07 (MERGE-R2, the integration merge of the rung-2 landing into lane/integration-2026-11-07; re-keyed by identity with its cause, measured at the merged tip 6c3e25661, PLAUSIBLE at prose-family-contract.mjs's RE-RECORDED block: the census steps composed with the integration side's WIRING-W0 / REVIEW-INTAKE lines): 52/970/5253 -> 52/969/5252, the same seven off the new totals (59 - 7, 976 - 7, 5259 - 7); `chronicle` byte-identical at 7/7/7 for the eleventh re-record running.
+    counterfeit.totals = { families: 3, identities: 52, distinctValues: 969, occurrences: 5252 };
     counterfeit.rowsSha256 = proseFamilyRowsSha256(counterfeit.rows);
     expect(() => validateProseFamilyBaseline(counterfeit)).toThrow(/immutable/);
     for (const mutate of [
@@ -271,7 +274,8 @@ describe('four durable prose-family exact-totality contract', () => {
     // 2026-11-05 (LANDING-5, the chair's addition (c); the walker was masked since X-46 car 1 by the duplicate regional id, so these are records 12–26 and the window's earlier records, attributed by stage at prose-family-contract.mjs's RE-RECORDED block; the residual tick itself moves only regionalEventLogUnique): 45/995/4838 → 46/952/5051.
     // 2026-11-06 (LANDING-7 R-E10; the density ceilings re-derived from the stamp bands, 20c0139c5 alone, measured byte-equal to the tip; prose-family-contract.mjs's RE-RECORDED block): 46/952/5051 → 46/957/5042; identities hold.
     // 2026-11-07 (LANDING-R2 seat D2, the chair's 02:36 ruling, §934.105; re-taken at the tip 3d03dc723, attributed by step at prose-family-contract.mjs's RE-RECORDED block: rung 2's census-1b merge 0856c09d3 = d35532850, the census-4 merge 950b75014, the census-2 merge 2b31f33f3, census-1i unit 3 597866207, plus an interaction with rung 1): 46/957/5042 -> 46/958/5052; identities hold. Rung 2's steps -3/-14 (950b75014 -2/0, 2b31f33f3 +3/0, 597866207 -4/-14); +4/+24 interaction with rung 1.
-    expect(familyTotal(live, 'pulseHistory')).toEqual({ family: 'pulseHistory', identities: 46, distinctValues: 958, occurrences: 5052 });
+    // 2026-11-07 (MERGE-R2, the integration merge of the rung-2 landing into lane/integration-2026-11-07; re-keyed by identity with its cause, measured at the merged tip 6c3e25661, PLAUSIBLE at prose-family-contract.mjs's RE-RECORDED block: the census steps composed with the integration side's WIRING-W0 / REVIEW-INTAKE lines): 46/958/5052 -> 46/957/5051; identities hold (the ten moving rows are named at the RE-RECORDED block).
+    expect(familyTotal(live, 'pulseHistory')).toEqual({ family: 'pulseHistory', identities: 46, distinctValues: 957, occurrences: 5051 });
     const history = scalarRows.filter((row) => row.root === 'worldState');
     expect([...new Set(history.map((row) => row.path[1].value))]).toEqual([...Array(12).keys()]);
     const headline = (home) => live.rows.find((row) => row.path === `pulseHistory[].${home}[].headline`);
@@ -300,6 +304,7 @@ describe('four durable prose-family exact-totality contract', () => {
     // 2026-11-05 (LANDING-5, addition (c); records 12–26 and the window's earlier records, by stage at prose-family-contract.mjs's RE-RECORDED block): mechanical 18/41 → 24/53, consequence 71/176 → 71/189; selected holds at 81/160.
     // 2026-11-07 (LANDING-R2 seat D2, the chair's 02:36 ruling, §934.105; re-taken at the tip 3d03dc723, attributed by step at prose-family-contract.mjs's RE-RECORDED block: rung 2's census-1b merge 0856c09d3 = d35532850, the census-4 merge 950b75014, the census-2 merge 2b31f33f3, census-1i unit 3 597866207, plus an interaction with rung 1): selected holds at 82/166; mechanical 21/45 -> 21/46 (597866207 -1/-1; +1/+2 interaction with rung 1); consequence 68/167 -> 67/168
     // (950b75014 -1/0, 597866207 0/-1; 0/+2 interaction with rung 1).
+    // 2026-11-07 (MERGE-R2, the integration merge of the rung-2 landing into lane/integration-2026-11-07; re-keyed by identity with its cause, measured at the merged tip 6c3e25661, PLAUSIBLE at prose-family-contract.mjs's RE-RECORDED block: the census steps composed with the integration side's WIRING-W0 / REVIEW-INTAKE lines): all three headline lanes HOLD (selected 82/166, mechanical 21/46, consequence 67/168, measured).
     expect(headline('mechanicalOutcomes')).toMatchObject({ distinctValues: 21, occurrences: 46 });
     expect(headline('consequenceOutcomes')).toMatchObject({ distinctValues: 67, occurrences: 168 });
   });

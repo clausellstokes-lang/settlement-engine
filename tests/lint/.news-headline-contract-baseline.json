@@ -2,10 +2,10 @@
   "schemaVersion": 1,
   "corpus": {
     "pulseRoots": 12,
-    "introductions": 262,
+    "introductions": 266,
     "retirements": 0,
-    "finalEntries": 262,
-    "homes": 43
+    "finalEntries": 266,
+    "homes": 44
   },
   "addressTotality": {
     "rows": [
@@ -209,15 +209,15 @@
         "home": "applied|roads",
         "field": "headline",
         "voiceClass": "indicative",
-        "distinctValues": 41,
-        "occurrences": 41
+        "distinctValues": 45,
+        "occurrences": 45
       },
       {
         "home": "applied|roads",
         "field": "summary",
         "voiceClass": "indicative",
-        "distinctValues": 41,
-        "occurrences": 41
+        "distinctValues": 45,
+        "occurrences": 45
       },
       {
         "home": "applied|strategy_deploy",
@@ -514,6 +514,20 @@
         "occurrences": 1
       },
       {
+        "home": "queued|npc_sabotage",
+        "field": "headline",
+        "voiceClass": "indicative",
+        "distinctValues": 1,
+        "occurrences": 1
+      },
+      {
+        "home": "queued|npc_sabotage",
+        "field": "summary",
+        "voiceClass": "indicative",
+        "distinctValues": 1,
+        "occurrences": 1
+      },
+      {
         "home": "queued|npc_seek_promotion",
         "field": "headline",
         "voiceClass": "indicative",
@@ -531,15 +545,15 @@
         "home": "queued|strategy_sue_for_peace",
         "field": "headline",
         "voiceClass": "indicative",
-        "distinctValues": 2,
-        "occurrences": 2
+        "distinctValues": 1,
+        "occurrences": 1
       },
       {
         "home": "queued|strategy_sue_for_peace",
         "field": "summary",
         "voiceClass": "indicative",
-        "distinctValues": 2,
-        "occurrences": 2
+        "distinctValues": 1,
+        "occurrences": 1
       },
       {
         "home": "queued|trade_pressure",
@@ -612,15 +626,15 @@
         "occurrences": 1
       }
     ],
-    "rowsSha256": "88b04c5a9c80605f54f576452af88192fc9a3f1976585437fe96ea57585f0a79",
+    "rowsSha256": "d816e3c9c69a010b8ad9ccefa0f62f2cb1810945357c3c566a47ce566e596b3b",
     "totals": {
-      "homes": 43,
+      "homes": 44,
       "fields": 2,
-      "identities": 86,
+      "identities": 88,
       "prospectiveIdentities": 0,
-      "indicativeIdentities": 86,
-      "distinctValues": 356,
-      "occurrences": 524
+      "indicativeIdentities": 88,
+      "distinctValues": 364,
+      "occurrences": 532
     }
   },
   "rewriteLiveness": {

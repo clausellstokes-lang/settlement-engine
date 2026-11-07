@@ -141,8 +141,18 @@ const TOTAL_KEYS = Object.freeze(['identities', 'distinctValues', 'occurrences']
 // the criminal secret read the holder's role) 247 → 245 and queued|npc_suppress LEAVES (42 → 41 homes). At the tip 3d03dc723:
 // 262/0/262/43 — rung 2's steps −7 and the one home out; −1 introduction is INTERACTION with rung 1; no home in. Conservation closes:
 // 262 − 0 = 262. No surviving row flips its voice class; the voice debt stays EMPTY.
+// ── RE-RECORDED 2026-11-07 BY MERGE-R2 (2026-11-07, the integration merge of the rung-2 landing into lane/integration-2026-11-07;
+// re-keyed by identity with its cause), IN THE SAME ACT AS THE NEWS-HEADLINE AND PROSE-FAMILY CONTRACTS (the 3d50676bb door) ──────
+// 262/0/262/43 → 266/0/266/44. ONE CORPUS BUILD AT THE MERGED TIP 6c3e25661 (the merge 10b8f09b4 of fc4cb0b9f into a8daff92c), every
+// field measured (the throw below disabled in a scratch copy only); the OSR walker's corpus there reads wizardNews
+// final/accumulated/unique 266/1598/266, regional 86/86. The two parents pinned 270/0/270/44 (a8daff92c, the integration line) and
+// 262/0/262/43 (fc4cb0b9f, rung 2); the merged tip is NEITHER: the census steps (d35532850, 950b75014, 597866207) composed with the
+// integration side's WIRING-W0 / REVIEW-INTAKE lines. Against the rung-2 pin: +4 introductions and ONE HOME ARRIVES
+// (queued|npc_sabotage); no home leaves. Against the integration pin: −4 introductions and the same 44 homes. ATTRIBUTION
+// PLAUSIBLE, NOT BISECTED (the merge's residual is interaction between the two lines). Conservation closes: 266 − 0 = 266. No
+// surviving row flips its voice class; the voice debt stays EMPTY.
 const CORPUS = Object.freeze({
-  pulseRoots: 12, introductions: 262, retirements: 0, finalEntries: 262, homes: 43,
+  pulseRoots: 12, introductions: 266, retirements: 0, finalEntries: 266, homes: 44,
 });
 
 export const NEWS_VOICE_PROTECTED_SUBSTRATE = Object.freeze([

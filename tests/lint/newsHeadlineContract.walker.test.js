@@ -115,7 +115,7 @@ describe('complete Wizard News address and headline rewrite contract', () => {
     expect(overlapFields.consequenceOutcomes.filter(isStateOnlyOutcome)).toHaveLength(12);
   });
 
-  it('A2 freezes all 86 address rows and their canonical digest', () => {
+  it('A2 freezes all 88 address rows and their canonical digest', () => {
     expect(compareNewsAddressRows(addressRows, baseline.addressTotality.rows)).toBe(true);
     expect(addressRowsSha256(addressRows)).toBe(baseline.addressTotality.rowsSha256);
     // T8 · SHIFT (§858 + §860): 106 → 102 identities over 53 → 51 homes. The two homes that leave
@@ -142,7 +142,11 @@ describe('complete Wizard News address and headline rewrite contract', () => {
     // 43/2/86/0/86/356/524; queued|npc_suppress leaves at census-1i unit 3 (597866207, inside rung 2's census-1b merge 0856c09d3),
     // distinct/occurrences by step d35532850 −6/−6, 950b75014 −4/−4, 597866207 −4/−4, and −2/−2 interaction with rung 1, at
     // news-headline-contract.mjs's ADDRESS_TOTALS. Every row stays indicative.
-    expect(baseline.addressTotality.totals).toEqual({ homes: 43, fields: 2, identities: 86, prospectiveIdentities: 0, indicativeIdentities: 86, distinctValues: 356, occurrences: 524 });
+    // 2026-11-07 (MERGE-R2, the integration merge of the rung-2 landing into lane/integration-2026-11-07; re-keyed by identity with
+    // its cause, measured at the merged tip 6c3e25661): 43/2/86/0/86/356/524 → 44/2/88/0/88/364/532; queued|npc_sabotage ARRIVES and
+    // no home leaves; applied|roads 41/41 → 45/45 and queued|strategy_sue_for_peace 2/2 → 1/1 (both fields), at
+    // news-headline-contract.mjs's ADDRESS_TOTALS. PLAUSIBLE (census steps × WIRING-W0 / REVIEW-INTAKE), not bisected. Every row stays indicative.
+    expect(baseline.addressTotality.totals).toEqual({ homes: 44, fields: 2, identities: 88, prospectiveIdentities: 0, indicativeIdentities: 88, distinctValues: 364, occurrences: 532 });
   });
 
   it('A3 freezes both raw lanes and all 26 exact rewrite counts', () => {

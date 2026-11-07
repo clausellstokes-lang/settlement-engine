@@ -221,8 +221,13 @@ describe('the column census, measured across the estate', () => {
     // census-1f unit 1c (9eee701c0, "the per-definition service roll resolves through drawDeclared") 1,925 → 1,920
     // (thorp-1, village-0, town-1, metropolis-0, metropolis-4 one row each). Rung 1's final tip 1bff51c6d reads 1,925
     // and the composed tip 1,920 with the same per-settlement rows, so no interaction with rung 1.
-    expect(serviceRows, 'the header claims 1,920 instantiated service rows over these thirty')
-      .toBe(1920);
+    // ⭐ RE-MEASURED 2026-11-07 (MERGE-R2, the integration merge of the rung-2 landing; re-keyed with its cause): the two
+    // parents read 1,853 (the integration side, the review-intake's unit 2 above: -72) and 1,920 (the rung-2 landing,
+    // census-1f unit 1c: -5) from the shared 1,925; the merged tip reads 1,849 = 1,925 - 72 - 5 + 1, the two causes
+    // composed and one row of INTERACTION (the census's declared service roll over the review-intake's regenerated
+    // service keys; PLAUSIBLE as attributed, not bisected per settlement). The liveness anchor is unchanged in kind.
+    expect(serviceRows, 'the header claims 1,849 instantiated service rows over these thirty')
+      .toBe(1849);
     expect(
       carriers,
       'a generation step began writing `settlement.services`. The schema declares the field and'

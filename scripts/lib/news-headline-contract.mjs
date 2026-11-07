@@ -48,7 +48,13 @@ const LANES = Object.freeze({ mechanicalOutcomes: 8, selectedOutcomes: 24 });
 // step (rung 2's census-1b merge 0856c09d3: d35532850, 950b75014, 597866207) plus −1 introduction of interaction with rung 1; the
 // steps and the home that leaves (queued|npc_suppress) are recorded once, at the voice contract's copy. ADDRESS_TOTALS and
 // RAW_LIVENESS below, each noted. REWRITE_TOTALS and KNOWN_INERT_HEADLINE_REWRITES hold (all 26 inert).
-const CORPUS = Object.freeze({ pulseRoots: 12, introductions: 262, retirements: 0, finalEntries: 262, homes: 43 });
+// ── RE-RECORDED 2026-11-07 BY MERGE-R2 (2026-11-07, the integration merge of the rung-2 landing into lane/integration-2026-11-07;
+// re-keyed by identity with its cause), IN THE SAME ACT AS THE NEWS-VOICE CONTRACT (the 3d50676bb door): CORPUS 262/0/262/43 →
+// 266/0/266/44, measured at the merged tip 6c3e25661 (the census steps composed with the integration side's WIRING-W0 /
+// REVIEW-INTAKE lines; +4 introductions and queued|npc_sabotage arriving against the rung-2 pin, recorded once at the voice
+// contract's copy; PLAUSIBLE, not bisected). ADDRESS_TOTALS below, noted. RAW_LIVENESS HOLDS (46/21, 166/82, 212/82, measured);
+// REWRITE_TOTALS and KNOWN_INERT_HEADLINE_REWRITES hold (all 26 inert).
+const CORPUS = Object.freeze({ pulseRoots: 12, introductions: 266, retirements: 0, finalEntries: 266, homes: 44 });
 // ── RE-RECORDED 2026-09-01 BY T8 · SHIFT (ODQ §858 + §860) ─────────────────────────────────────
 // 53/106/14/92/400/544 → 51/102/12/90/393/536. `fields` holds at 2, as it must: the address grammar
 // is still headline-and-summary and nothing was added to it.
@@ -94,7 +100,12 @@ const CORPUS = Object.freeze({ pulseRoots: 12, introductions: 262, retirements: 
 // By step on rung 2 (census base f28689600 42/2/84/0/84/363/504): d35532850 distinct/occurrences −6/−6, 950b75014 −4/−4,
 // 597866207 −4/−4 and queued|npc_suppress leaves with its two rows (41/2/82/0/82/349/490 at f5dc50c6b); −2/−2 is INTERACTION with
 // rung 1. 8 surviving rows move a count; every row stays indicative.
-const ADDRESS_TOTALS = Object.freeze({ homes: 43, fields: 2, identities: 86, prospectiveIdentities: 0, indicativeIdentities: 86, distinctValues: 356, occurrences: 524 });
+// 2026-11-07 (MERGE-R2, the integration merge of the rung-2 landing into lane/integration-2026-11-07; re-keyed by identity with its
+// cause, measured at the merged tip 6c3e25661): 43/2/86/0/86/356/524 → 44/2/88/0/88/364/532. ONE HOME ARRIVES, queued|npc_sabotage
+// (headline and summary rows, 1/1 each), and none leaves; 4 surviving rows move a count: applied|roads headline and summary 41/41 →
+// 45/45, queued|strategy_sue_for_peace headline and summary 2/2 → 1/1. Every row stays indicative; the address digest
+// re-derived with the rows in the baseline. PLAUSIBLE (census steps × WIRING-W0 / REVIEW-INTAKE), not bisected.
+const ADDRESS_TOTALS = Object.freeze({ homes: 44, fields: 2, identities: 88, prospectiveIdentities: 0, indicativeIdentities: 88, distinctValues: 364, occurrences: 532 });
 const RAW_LIVENESS = Object.freeze({
   pulseRecords: 12,
   lanes: Object.freeze([

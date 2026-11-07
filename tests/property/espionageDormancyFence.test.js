@@ -189,52 +189,6 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * AND NOWHERE ELSE. Most recently at the ENGINE-HYGIENE landing (SHIFT RECORD,
  * 2026-09-01, TE-AGNOSTIC-1 cars `f2c1ad181` / `97d119c9b`); before that at T8.
  *
- * ── 2026-11-07, THE LEGACY ANNOTATION'S DATE IN ONE HOME (THE WIRING WAVE'S WRITER LANE W0) ──
- * THE SIXTY-SIXTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation of 2026-11-06,
- * inside a NAMED CHARTERED WINDOW: ODQ §934.105 (the chair's ruling R-W7 (d)); the record is
- * docs/shift-records/2026-11-07-w0-05-annotation-date-one-home.json. THE MOVER, FOUND: commit b79dfa98b alone (the
- * annotation's asOf field, read by nothing, withdrawn; its text keeps the date). On THIS corpus 337 of 360 rows move
- * (the places with an annotation); 360/360 hashes stay distinct. Written from the staged tree (b79dfa98b with the door
- * paths carried from the branch, the golden master's act committed first), measured by scripts/audit/refence.mjs
- * before the write. `a83e777b…` -> `726ef86a…`.
- *
- * ── 2026-11-07, LEGACY ANNOTATIONS DATED AT BIRTH (THE WIRING WAVE'S WRITER LANE W0) ──
- * THE SIXTY-FIFTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation of 2026-11-06,
- * inside a NAMED CHARTERED WINDOW: ODQ §934.105, the construction-and-wiring wave's writer lane (the chair's ruling
- * R-W7 (d)); the record is docs/shift-records/2026-11-07-w0-04-legacy-annotations-dated.json. THE MOVER, FOUND: commit
- * b893dcda1 alone (every legacy annotation dated 'as of the founding survey', in its text and as a field). On THIS
- * corpus 337 of 360 rows move (thorp 51, hamlet 53, village 55, town 58, city 60, metropolis 60: the places with an
- * annotation); 360/360 hashes stay distinct. Written from the staged tree (b893dcda1 with the door paths carried from
- * the branch, the golden master's act committed first), measured by scripts/audit/refence.mjs before the write.
- * `67c9727b…` -> `a83e777b…`.
- *
- * ── 2026-11-07, ONE FOOD-SOURCE COUNT (THE WIRING WAVE'S WRITER LANE W0) ──
- * THE SIXTY-FOURTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation of 2026-11-06,
- * inside a NAMED CHARTERED WINDOW: ODQ §934.105, the construction-and-wiring wave's writer lane (the chair's ruling
- * R-W7 (c)); the record is docs/shift-records/2026-11-07-w0-03-one-food-source-count.json. THE MOVER, FOUND: commit
- * 3d1df12d7 alone (the food chains, their count and the diversity note are the types of the record's foodSources).
- * On THIS corpus 360 of 360 rows move (60 a tier: every record's chain block); 360/360 hashes stay distinct. Written
- * from the staged tree (3d1df12d7 with the door paths carried from the branch, the golden master's act of the same
- * record committed first), measured by scripts/audit/refence.mjs before the write. `281ca040…` -> `67c9727b…`.
- *
- * ── 2026-11-07, ONE IMPORT SHARE (THE WIRING WAVE'S WRITER LANE W0) ──
- * THE SIXTY-THIRD MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation of 2026-11-06,
- * inside a NAMED CHARTERED WINDOW: ODQ §934.105, the construction-and-wiring wave's writer lane (the chair's ruling
- * R-W7 (c)); the record is docs/shift-records/2026-11-07-w0-02-one-import-share.json. THE MOVER, FOUND: commit
- * c99531cf9 alone (foodSecurity.importPct is the one import share, of the published pounds; the food record reads
- * it). On THIS corpus 241 of 360 rows move (thorp 2, hamlet 9, village 54, town 60, city 57, metropolis 59); 360/360
- * hashes stay distinct. Written from the staged tree (c99531cf9 with the door paths carried from the branch, the
- * golden master's act of the same record committed first), measured by scripts/audit/refence.mjs before the write.
- * `1bb9e7a2…` -> `281ca040…`.
- *
- * ── 2026-11-07, THE MIGRATION DIRECTION DECLARED ONCE (THE WIRING WAVE'S WRITER LANE W0) ──
- * THE SIXTY-SECOND MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation of 2026-11-06,
- * inside a NAMED CHARTERED WINDOW: ODQ §934.105, the construction-and-wiring wave's writer lane (the chair's ruling
- * R-W7 (e)); the record is docs/shift-records/2026-11-07-w0-01-migration-direction.json. THE MOVER, FOUND: commit
- * 343bd4eec alone, on the rung-1 candidate 76febf9b0 (stress[].direction written once at the draw, arrivals at birth;
- * every migration surface reads it). On THIS corpus 6 of 360 rows move (thorp 1, village 2, city 2, metropolis 1;
- * the corpus's mass_migration places); 360/360 hashes stay distinct. Written from the staged tree (343bd4eec with the
- * door paths carried from the branch), measured by scripts/audit/refence.mjs before the write. `68c107c2…` -> `1bb9e7a2…`.
  * ── 2026-11-06/07, THE POOL CENSUS COMPOSED (RUNG 2 OF THE SOAK LADDER, the landing stacked on rung 1) ──
  * THE SIXTY-SECOND MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation of 2026-11-06,
  * inside a NAMED CHARTERED WINDOW: RUNG 2 OF THE SOAK LADDER, ODQ §934.105; the record is
