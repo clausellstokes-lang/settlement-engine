@@ -21,6 +21,7 @@ import { seatCandidatesOf } from '../../../src/domain/dossier/seatHolder.js';
 import { rulingChainOf } from '../../../src/domain/dossier/powerStrata.js';
 import { factionArchetype, FACTION_ARCHETYPES as A } from '../../../src/domain/factionArchetypes.js';
 import { governingFactionOf, nameOf } from '../../../src/domain/rulingPower.js';
+import { enrichNPCsWithStructure } from '../../../src/generators/npcStructure.js';
 
 /** @type {Array<{ label: string, s: any }>} */
 const corpus = [];
@@ -127,5 +128,42 @@ describe('step 2 — the seat row is the governing power\'s rank-1 face (825 bor
     }
     expect(misses.slice(0, 20)).toEqual([]);
     expect(seated).toBeGreaterThan(780);
+  });
+});
+
+describe('step 3 — the structural standing is the first-rank power\'s (825 born settlements)', () => {
+  it('every card carries structuralRank from its first-rank power: rank 1 head, 2–3 inner circle, unranked member, none unaffiliated', () => {
+    const misses = [];
+    const seen = { head: 0, inner_circle: 0, member: 0, unaffiliated: 0 };
+    for (const { label, s } of corpus) {
+      for (const n of (s.npcs || []).filter((x) => x && x.institution)) {
+        const ranks = (n.memberships || []).map((m) => (Number.isInteger(m.rank) ? m.rank : 9));
+        const best = ranks.length ? Math.min(...ranks) : null;
+        const want = best === null ? 'unaffiliated' : best === 1 ? 'head' : best <= 3 ? 'inner_circle' : 'member';
+        if (n.structuralRank !== want) misses.push(`${label} ${n.id}: ${n.structuralRank} (want ${want})`);
+        else seen[want] += 1;
+      }
+    }
+    expect(misses.slice(0, 20)).toEqual([]);
+    for (const [k, v] of Object.entries(seen)) expect(v, `the corpus holds a ${k}`).toBeGreaterThan(0);
+  });
+
+  it('the template\'s rank reads the standing: of two faces in the dominant power, only its head takes the dominant row', () => {
+    const settlement = {
+      powerStructure: { factions: [
+        { faction: 'Town Council', category: 'government', power: 30, isGoverning: true },
+        { faction: 'Craft Guilds', category: 'economy', power: 10 },
+      ] },
+      economicState: {},
+    };
+    const card = (id, power, rank) => ({ id, name: id, role: `the ${id}`, category: 'government', memberships: [{ power, rank, share: 1 }], goal: { short: 'own goal' } });
+    const out = enrichNPCsWithStructure([card('reeve', 'Town Council', 2), card('mayor', 'Town Council', 1), { id: 'drifter', name: 'drifter', role: 'the drifter', category: 'other', memberships: [] }], settlement);
+    const by = Object.fromEntries(out.map((n) => [n.id, n]));
+    expect(by.mayor.structuralRank).toBe('head');
+    expect(by.reeve.structuralRank).toBe('inner_circle');
+    expect(by.drifter.structuralRank).toBe('unaffiliated');
+    expect(by.mayor.structuralPosition).toMatch(/^Holds governing authority/);
+    expect(by.reeve.structuralPosition).toMatch(/^Occupies a civic position|^Holds a civic position/);
+    expect(by.reeve.structuralPosition).not.toBe(by.mayor.structuralPosition); // anchored: both carry a position (the two lines above)
   });
 });

@@ -267,7 +267,9 @@ const REMOVAL_CONSEQUENCES = Object.freeze({
 // structuralRank would also crash `.toLowerCase()`. Translate in ONE place: map
 // 'subordinate' → 'secondary', String()-coerce the input, and collapse anything
 // unrecognized (including numbers and absent ranks) to 'minor'.
-const NPC_RANK_ALIASES = Object.freeze({ subordinate: 'secondary' });
+// The people car (PEOPLE-2 CAST-DERIVED, 2026-11-07) writes the standing in the first-rank power:
+// 'head' (rank 1) is the dominant palette, 'inner_circle' (ranks 2–3) the secondary.
+const NPC_RANK_ALIASES = Object.freeze({ subordinate: 'secondary', head: 'dominant', inner_circle: 'secondary' });
 /**
  * @param {unknown} rank
  * @returns {import('./settlement.schema.js').NpcRank}

@@ -41,6 +41,7 @@ export function measure(s, label) {
     label, tier: s.tier, npcs: npcs.length,
     names: npcs.map((n) => String(n.name || '')).filter(Boolean),
     titles: [...new Set(npcs.flatMap((n) => [n.title, n.role]).filter(Boolean).map(String))],
+    powers: (s.powerStructure?.factions || []).map((f) => String(f?.faction || f?.name || '')).filter(Boolean),
     casts,
     seat: seat ? { id: seat.id || seat.name, name: seat.name, rank1: (seat.memberships || []).some((m) => m.rank === 1) } : null,
     tonight: lines(composeTonightSheet(s)),
