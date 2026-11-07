@@ -210,8 +210,14 @@ describe('the column census, measured across the estate', () => {
     // 37b1e746d rung1-pins → 1,908 · 6ca454d2b x46-3 I7 re-key → 1,890 · 11467ed57 rung1-pins final → 1,881 ·
     // 6d84aa834 rung1b-f6 budget floor → 1,925. The populations and the institution budget moved; the liveness
     // anchor is unchanged in kind.
-    expect(serviceRows, 'the header claims 1,925 instantiated service rows over these thirty')
-      .toBe(1925);
+    // ⭐ RE-MEASURED 2026-11-07 (the chair, at the integration merge lane/integration-2026-11-07): 1,925 → 1,853,
+    // ONE CAUSE, the review-intake lane (tip 63a7cd852; CONFIRMED red at the same figure on that lane's own tip and at the
+    // merged tip 262e8b255 alike): its unit 2 made the record true — a proxy is not a provider, the twelve former proxy
+    // hosts own their menus and `institutionServiceKeys.generated.js` was regenerated (69960e5d9) — so fewer rows are
+    // instantiated over the same thirty (PLAUSIBLE as the unit; the lane is the measured cause, not bisected by unit).
+    // The liveness anchor is unchanged in kind.
+    expect(serviceRows, 'the header claims 1,853 instantiated service rows over these thirty')
+      .toBe(1853);
     expect(
       carriers,
       'a generation step began writing `settlement.services`. The schema declares the field and'
@@ -436,7 +442,10 @@ describe('THE HONESTY RULE — a column is `closed` only where every source the 
     // RE-MEASURED 2026-11-06 (LANDING-7 lane F): 23 → 21, bisected by stage — d4bf6431c (x46-2 thresholds) 23 → 22,
     // 90dc22f18 (x46-3 budget) 22 → 21; `(street gang)` left the dropped set at 1264a8152 (x46-train). Same seeds,
     // a re-generated world; the filter still drops real rows (the line below).
-    expect(orphans).toBe(21);
+    // RE-MEASURED 2026-11-07 (the chair, at the integration merge): 21 → 22, the review-intake lane (63a7cd852; the same
+    // figure on its own tip and at 262e8b255), the same re-generated world as the service-row move above; the filter
+    // still drops real rows (the line below).
+    expect(orphans).toBe(22);
     expect([...dropped].some((name) => /lawless|informal|street gang|arcane underground|smuggling/i.test(name))).toBe(true);
     // anchored: the line above proves the filter dropped real rows, so an empty leak list
     // cannot be an empty scan

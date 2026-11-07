@@ -16,6 +16,7 @@ import { setActiveRng, clearActiveRng } from '../../src/kernel/rngContext.js';
 import { createPRNG } from '../../src/kernel/prng.js';
 import { INSTITUTION_SERVICES } from '../../src/data/institutionServices.js';
 import { LOCALE_SERVICE_OVERRIDES } from '../../src/data/servicesData.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { generateAvailableServices } from '../../src/generators/servicesGenerator.js';
 import { getInstFlags } from '../../src/generators/priorityHelpers.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
@@ -66,7 +67,7 @@ describe('LOCALE_SERVICE_OVERRIDES join integrity', () => {
       expect(KEYS_LC.has(src), `${src} should have a dedicated INSTITUTION_SERVICES entry`).toBe(true);
     }
     // A prison holds the condemned; it does not try them (the chair's follow-up, 2026-10-30).
-    expect(Object.keys(INSTITUTION_SERVICES['Massive prison'])).not.toContain('Criminal trials');
+    expectAbsentWithAnchor(Object.keys(INSTITUTION_SERVICES['Massive prison']), 'Criminal trials', 'Long-term incarceration', 'a prison holds the condemned');
   });
 
   it('no override row shadows a dedicated INSTITUTION_SERVICES entry', () => {

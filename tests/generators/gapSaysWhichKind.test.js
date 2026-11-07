@@ -36,7 +36,7 @@ describe('a gap says which kind — planted on one roster (a desert Potter, no c
     expect(lines).toHaveLength(1);
     expect(lines[0].kind).toBe('imported');
     expect(lines[0].impact).toBe('Potter runs on imported clay');
-    expect(lines[0].impact).not.toMatch(LACKS);
+    expect(lines[0].impact).not.toMatch(LACKS); // anchored: the line above pins the live imported-line text, so a vanished line cannot pass this
   });
 
   it('local: clay the economy produces here is no gap, so no line is written', () => {

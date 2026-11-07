@@ -17,6 +17,7 @@
 import { describe, expect, test } from 'vitest';
 import { astTokens, producerCitations } from '../../scripts/wiring-census.mjs';
 import { HOLDER_SOURCES } from '../../src/domain/prose/holderTable.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const VIABILITY = 'src/generators/economy/viability.js';
 
@@ -34,8 +35,9 @@ describe('a holder citation that drifted cites its SYMBOL (rule 32)', () => {
     expect((cites.get('viable') || []).some((c) => /^src\/generators\/economy\/viability\.js:\d+$/.test(c))).toBe(true);
     // ⛔ THE PLANTS: a real declaration of that file that does not write the token, and one
     // that does not exist.
-    expect(cites.get('viable') || []).not.toContain(`${VIABILITY} :: isCityScale`);
-    expect(cites.get('viable') || []).not.toContain(`${VIABILITY} :: noSuchDeclaration`);
+    const viableCites = cites.get('viable') || [];
+    expectAbsentWithAnchor(viableCites, `${VIABILITY} :: isCityScale`, `${VIABILITY} :: generateEconomicViability`, 'a real declaration that does not write the token');
+    expectAbsentWithAnchor(viableCites, `${VIABILITY} :: noSuchDeclaration`, `${VIABILITY} :: generateEconomicViability`, 'a declaration that does not exist');
   });
 
   test('astTokens names the top-level declaration each write sits in', () => {

@@ -41102,8 +41102,8 @@
         },
         {
           "path": "src/generators/stressNarrative.js",
-          "symbol": "export function renderStressSummary(type, name, roll) {",
-          "_note": "The F8 re-render's producer, UNCHANGED: only the ARGUMENT the assembly step passes it changes. Its `name` parameter is the settlement name the summary embeds, which is why a held name must reach it. count 1."
+          "symbol": "export function renderStressSummary(type, name, roll, direction) {",
+          "_note": "SIGNATURE EXTENDED by WIRING-W0 (343bd4eec, R-W7 e, 2026-11-07): a fourth parameter `direction`, the stressor's own `stress[].direction`, read at the draw and at the re-render; the row re-cited to the live declaration by the chair at the integration merge (a landed packet's required symbol moved by a later authorized lane, not a retirement). As landed: The F8 re-render's producer, UNCHANGED: only the ARGUMENT the assembly step passes it changes. Its `name` parameter is the settlement name the summary embeds, which is why a held name must reach it. count 1."
         },
         {
           "path": "src/domain/edit/recordRegister.js",
