@@ -399,7 +399,8 @@ export async function run(argv = [], overrides = {}) {
   }
 
   if (flags.reportTo) {
-    const plan = planExternalArtifactOutputs({ root, outputs: [flags.reportTo] });
+    // One output, one plan: planExternalArtifactOutputs returns a plan PER output (WIRING-W0, R-W7 g).
+    const [plan] = planExternalArtifactOutputs({ root, outputs: [flags.reportTo] });
     publishJsonExclusive(plan, report);
     log(`writer-reach report → ${flags.reportTo}`);
   }
