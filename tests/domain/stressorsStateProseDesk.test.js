@@ -125,7 +125,9 @@ describe('the stressor desk — ALIVENESS at BIRTH', () => {
   it('all fifteen crisis banners speak over an ordinary generated stress record', () => {
     const reached = new Set();
     for (const type of Object.keys(STRESS_TYPE_MAP)) {
-      const drawn = crisisBannerRung(town, banner(type), { seed: `b-${type}` });
+      // W4 PEOPLE second seat 2026-11-07: the record carries its banner (a migration's lines declare the
+      // direction the record's own entry answers, WAVE-RULINGS item 8).
+      const drawn = crisisBannerRung({ ...town, stress: [banner(type)] }, banner(type), { seed: `b-${type}` });
       expect(drawn, `no rung for ${type}`).toBeTruthy();
       expect(drawn.sentence, `SILENT banner ${type}`).toBeTruthy();
       expect(drawn.sentence.length).toBeGreaterThan(20);
@@ -588,5 +590,22 @@ describe('DS-CND-1 — the stress type in the pool key', () => {
       expect((direction === 'arrivals' ? influx : exodus).has(text), `${direction} drew ${JSON.stringify(text)}`).toBe(true);
     });
     expectNoSeedFailures(failures, 'a migration record draws only its own direction\'s lines');
+  });
+
+  it('the MASS MIGRATION banner (DS-STR-1) speaks the direction its record declares, never both', () => {
+    const pool = STR1_POOLS['MASS MIGRATION'];
+    const marked = (atom) => new Set(pool.filter((v) => (v.marks || []).includes(atom)).map((v) => v.text));
+    const influx = marked('migration: influx');
+    const exodus = marked('migration: exodus');
+    expect(influx.size + exodus.size).toBe(pool.length);
+    expect(exodus.size).toBe(4);
+    const cases = ['arrivals', 'departures'].flatMap((direction) => [0, 1, 2, 3, 4, 5].map((i) => ({ direction, i })));
+    const failures = collectSeedFailures(cases, ({ direction, i }) => {
+      const entry = { ...banner('mass_migration'), direction };
+      const drawn = crisisBannerRung({ ...town, stress: [entry] }, entry, { seed: `str1-${direction}-${i}` });
+      const text = drawn?.sentence?.replace(/Thornwall/g, '{settlement}');
+      expect((direction === 'arrivals' ? influx : exodus).has(text), `${direction} drew ${JSON.stringify(text)}`).toBe(true);
+    });
+    expectNoSeedFailures(failures, 'a migration banner draws only its own direction\'s lines');
   });
 });

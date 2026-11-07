@@ -858,6 +858,13 @@ describe('the demoted state dimension — the channel the kernel enforces', () =
     expect({ spoke, mute }).toEqual({
       spoke: [],
       mute: [
+        // W4 PEOPLE second seat 2026-11-07 (WAVE-RULINGS item 8): DS-STR-1's MASS MIGRATION lines now
+        // declare their direction (`migration: influx` x7, `migration: exodus` x4); the calm admit-all
+        // double answers no migration (a keyed presence holds one key, and the double names none), so the
+        // facts gate holds both walls states silent here, the same class as the seven below. A real
+        // record answers its own direction (the desk suite's banner arm proves every banner speaks).
+        'DS-STR-1 :: MASS MIGRATION :: walls=walls',
+        'DS-STR-1 :: MASS MIGRATION :: walls=no walls',
         'DS-GEN-1 :: economic_disparity :: severity=minor with {"walls":"no walls"}',
         'DS-GEN-1 :: economic_disparity :: walls=no walls with {"severity":"minor"}',
         'DS-GEN-1 :: occupation_legacy :: severity=minor',
@@ -954,8 +961,11 @@ describe('the demoted state dimension — the channel the kernel enforces', () =
     // leaves parent -> commit and unchanged to the tip: the DS-GEN ledger's presence and band
     // declarations leave one admitted line in 13 more states under the calm admit-all double.
     // The bill grew by a declared cause; the ceiling still only ratchets DOWN from here.
-    expect(thin[AUDIENCE_DM]).toBeLessThanOrEqual(26);
-    expect(thin[AUDIENCE_PLAYER]).toBeLessThanOrEqual(27);
+    // 26 -> 28 (DM) and 27 -> 29 (player) at W4 PEOPLE second seat 2026-11-07: DS-STR-1's MASS MIGRATION
+    // pool declares its direction (WAVE-RULINGS item 8), so under the calm double (no migration answered)
+    // its two walls states admit no line; a declared cause, and the ceiling still only ratchets DOWN.
+    expect(thin[AUDIENCE_DM]).toBeLessThanOrEqual(28);
+    expect(thin[AUDIENCE_PLAYER]).toBeLessThanOrEqual(29);
     // No state may go SILENT: a value with zero eligible variants is a dead branch of the
     // corpus dressed as a town with nothing to say, and the ratchet above would not see it.
     const silent = DIMENSION_STATES.filter(({ pool, dims, dimension, value }) => otherAnswers(dims, dimension).some((others) => eligibleVariants(
@@ -964,7 +974,10 @@ describe('the demoted state dimension — the channel the kernel enforces', () =
     // The same seven states the T2 arm pins (census-2b item 2, db3ed88c1; 0 at its parent): under
     // the calm admit-all double their every line excludes a presence or needs a population band,
     // so the FACTS gate empties them, not the dimension. Named exactly, so a new silence reds.
+    // + DS-STR-1 MASS MIGRATION's two walls states at W4 PEOPLE second seat 2026-11-07 (the T2 arm's note above).
     expect(silent.map(({ id, key, dimension, value }) => `${id} :: ${key} :: ${dimension}=${value}`)).toEqual([
+      'DS-STR-1 :: MASS MIGRATION :: walls=walls',
+      'DS-STR-1 :: MASS MIGRATION :: walls=no walls',
       'DS-GEN-1 :: economic_disparity :: severity=minor',
       'DS-GEN-1 :: economic_disparity :: walls=no walls',
       'DS-GEN-1 :: occupation_legacy :: severity=minor',

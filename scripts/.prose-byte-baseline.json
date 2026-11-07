@@ -79,8 +79,8 @@
       "ceilingGzip": 79355
     },
     "src/data/dossierStateProse/stressors.generated.js": {
-      "raw": 145959,
-      "gzip": 20614,
+      "raw": 147408,
+      "gzip": 20851,
       "ceilingRaw": 258858,
       "ceilingGzip": 57524
     },
@@ -339,6 +339,14 @@
       "toRaw": 145959,
       "gzipAfter": 20614,
       "reason": "+51,856 B raw over the chain's 94,103 (the committed row stood at 94,080 after a banked shrink; gzip level 9: 15,105 -> 20,614): DS-CND-1 gains forty-five crisis-keyed direction pools (DIRECTION: worsening / stable / easing · CRISIS: <kind>, one set per crisis kind, 128 variants: four vantages on the direction each crisis is born with, two on the others, the migration pools in both directions) and its 33 style rows rewritten in the plain register; most of the bytes are the projection's per-variant metadata (marks, slots, vids, poolMeta). Projected through node scripts/generate-dossier-state-prose.mjs; --check exit 0."
+    },
+    {
+      "car": "W4 PEOPLE second seat (2026-11-07): the owner's style law of 2026-11-07 — DS-STR-1 (rows 5, 128-153; the migration in two sets, WAVE-RULINGS item 8)",
+      "leaf": "src/data/dossierStateProse/stressors.generated.js",
+      "fromRaw": 145959,
+      "toRaw": 147408,
+      "gzipAfter": 20851,
+      "reason": "+1,449 B raw (gzip level 9: 20,614 -> 20,851): DS-STR-1's 27 style rows and eleven tic strikes rewritten in the plain register; MASS MIGRATION's seven arrivals lines declare `migration: influx` and four departures lines (`migration: exodus`) join them, so a departures record never prints an arrival. Projected through node scripts/generate-dossier-state-prose.mjs; --check exit 0."
     }
   ],
   "ceilingTransfersNewLeaves": [

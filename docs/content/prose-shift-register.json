@@ -8,7 +8,7 @@
     "tip": "the six state leaves at the car-4 projection; base c45a46a78",
     "blocks": 68,
     "pools": 709,
-    "variants": 2490
+    "variants": 2494
   },
   "mechanisms": [
     {
@@ -21,13 +21,13 @@
         {
           "kind": "integer",
           "over": "the sum of poolMeta.variantCount over all 708 pools",
-          "value": 2490
+          "value": 2494
         },
         {
           "kind": "digest",
           "algo": "sha256",
           "over": "poolMeta.variantCount per pool",
-          "value": "3f7b183a82435d8d2ffa21b4abe775b3a5e3df5367fcdff0de5d39172f3d30c9"
+          "value": "2d9b205f80d5eb4048c09adad17f0c30dacf044bdee8a155989d81b46eb98125"
         }
       ]
     },
@@ -42,7 +42,7 @@
         {
           "kind": "integer",
           "over": "the sum of every faceCounts entry over all 708 pools",
-          "value": 2490
+          "value": 2494
         },
         {
           "kind": "integer",
@@ -53,7 +53,7 @@
           "kind": "digest",
           "algo": "sha256",
           "over": "poolMeta.faceCounts per pool, joined by commas",
-          "value": "b9634ff8913263e404e31e6d5563b136e1013e5a4606739111d3aee2d7fb045f"
+          "value": "65c41d1566b9eaa570361a3513e85ae15c322dba36b06980224c5aab6ba061f1"
         }
       ]
     },
@@ -68,7 +68,7 @@
           "kind": "digest",
           "algo": "sha256",
           "over": "poolMeta.vids per pool, joined by commas",
-          "value": "2ae5a790fa2a55b6e81820088ff01687ed8f78d8266ca089a131547d41475c49"
+          "value": "2e77ce2cd5a2e6d273a341e4ab65c63b580f96c400c1a89a8b1f579e50f38322"
         }
       ]
     },

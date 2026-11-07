@@ -23,7 +23,7 @@
   "totals": {
     "pools": 761,
     "blocks": 68,
-    "variants": 2490,
+    "variants": 2494,
     "resolved": 393,
     "unresolved": 368,
     "resolvedWithPredicate": 253,
@@ -30984,7 +30984,7 @@
       ],
       "hasBag": true,
       "variants": 6,
-      "grammars": 4,
+      "grammars": 2,
       "predicate": [
         {
           "field": "token (via CRISIS_POOL_OF in stressorsStateProse.js)",
@@ -31049,7 +31049,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 7,
-      "grammars": 3,
+      "grammars": 2,
       "predicate": [
         {
           "field": "token (via CRISIS_POOL_OF in stressorsStateProse.js)",
@@ -31114,7 +31114,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 6,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [
         {
           "field": "token (via CRISIS_POOL_OF in stressorsStateProse.js)",
@@ -31626,7 +31626,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 6,
-      "grammars": 4,
+      "grammars": 5,
       "predicate": [
         {
           "field": "token (via CRISIS_POOL_OF in stressorsStateProse.js)",
@@ -31816,7 +31816,7 @@
         "band"
       ],
       "hasBag": true,
-      "variants": 7,
+      "variants": 11,
       "grammars": 2,
       "predicate": [
         {
@@ -31864,11 +31864,13 @@
       },
       "declares": [],
       "lineDeclares": {
+        "migration: exodus": 4,
+        "migration: influx": 7,
         "no crisis: under_siege": 2,
         "no walls": 1,
         "walls": 1
       },
-      "undeclared": 5,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -48276,8 +48278,8 @@
         "DS-STR-1 :: WARTIME",
         "DS-STR-1 :: MASS MIGRATION"
       ],
-      "variants": 98,
-      "grammars": 37,
+      "variants": 102,
+      "grammars": 34,
       "blocks": [
         "DS-STR-1"
       ]
@@ -61260,7 +61262,7 @@
         "token (via CRISIS_POOL_OF in stressorsStateProse.js)"
       ],
       "readingFunction": "CRISIS_POOL_OF",
-      "count": "6 variant(s) · 4 grammar(s) · slots {season, settlement}"
+      "count": "6 variant(s) · 2 grammar(s) · slots {season, settlement}"
     },
     {
       "tier": "THIN",
@@ -61270,7 +61272,7 @@
         "token (via CRISIS_POOL_OF in stressorsStateProse.js)"
       ],
       "readingFunction": "CRISIS_POOL_OF",
-      "count": "7 variant(s) · 3 grammar(s) · slots {settlement}"
+      "count": "7 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -61280,7 +61282,7 @@
         "token (via CRISIS_POOL_OF in stressorsStateProse.js)"
       ],
       "readingFunction": "CRISIS_POOL_OF",
-      "count": "6 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "6 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -61360,7 +61362,7 @@
         "token (via CRISIS_POOL_OF in stressorsStateProse.js)"
       ],
       "readingFunction": "CRISIS_POOL_OF",
-      "count": "6 variant(s) · 4 grammar(s) · slots {settlement}"
+      "count": "6 variant(s) · 5 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -61390,7 +61392,7 @@
         "token (via CRISIS_POOL_OF in stressorsStateProse.js)"
       ],
       "readingFunction": "CRISIS_POOL_OF",
-      "count": "7 variant(s) · 2 grammar(s) · slots {band, settlement}"
+      "count": "11 variant(s) · 2 grammar(s) · slots {band, settlement}"
     },
     {
       "tier": "THIN",
