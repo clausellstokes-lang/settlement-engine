@@ -139,8 +139,10 @@ describe('SP-B reachability — every band edge is produced by a REAL world', ()
     }
     expect([...routes].sort()).toEqual([...ROUTE_POSITION_BANDS].sort());
     expect([...stores].sort()).toEqual([...STORES_BANDS].sort());
-    // The played world is what carries `bare`: born at the edge, below it one month on.
-    expect(conditionsGroundTruth(FAMINE_THORP).storesBand, 'the famine thorp was born below the edge').not.toBe('bare');
+    // `bare` is reached at BIRTH by the famine thorp since F13 unit 1 FAMINE-STORES (f3131e917, "a famine reads
+    // the stores"; measured with this fixture: born 'thin' at its parent 57004aee2, born 'bare' at it), and the
+    // played world one month on stays 'bare'. Before F13 the played world was what carried `bare`.
+    expect(conditionsGroundTruth(FAMINE_THORP).storesBand, 'a famine is born on bare stores (F13 unit 1)').toBe('bare');
     expect(conditionsGroundTruth(PLAYED[0]).storesBand).toBe('bare');
     expect([...tiers].sort()).toEqual([...TIERS].sort());
     // Pull is the one MINTED ladder, so its reachability claim is the load-bearing one.
