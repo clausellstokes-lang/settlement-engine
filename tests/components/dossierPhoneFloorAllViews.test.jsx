@@ -569,6 +569,13 @@ const desktopShape = (perView) => Object.fromEntries(
 // ac09ea83b terrain-pools (Relationships 61 -> 64) · 63bb72785 food-exports (Economics 39 -> 40) · 90dc22f18 x46-3
 // budget (Services 97 -> 104, Economics 40 -> 42, Resources 4 -> 2, Defense 26 -> 25) · 6d84aa834 rung1b-f6 budget
 // floor (Plot Hooks 38 -> 37, Institutions 63 -> 65, Services 104 -> 109, Relationships 64 -> 61). sub14 follows measured.
+// ── RE-MEASURED 2026-11-07 (LANDING-R2, the pool census composed on rung 1's final 1bff51c6d): content moved, no token did;
+// every floor holds. Two views, bisected by this file's walk (a probe copy) over the census lineage — rung 1's final and
+// the merge base bf263a78d read the old pin; the compose's census-1b merge 0856c09d3 moves both; inside census-1b's
+// first-parent line: e152ee220 (census-4 R8, the designer's threshold notes move off the page into the catalogue's own
+// field; reached census-1b by the merge 950b75014) Institutions 65 -> 62 · b8fdcd3d5 (census-1e unit 1, the registry goal
+// lookup resolves through the one rule: a stable entry under an active crisis is refused and the NPC keeps its role
+// goal) NPCs 31 -> 23. sub14 follows measured.
 const DESKTOP_BASELINE = Object.freeze({
   "Summary/Overview":    { measured: 11, sub14: 10 },
   // T2-25 measured it at 1 under Systems/Causes; X-12 moves it here (BUILD-T1), same count.
@@ -577,7 +584,7 @@ const DESKTOP_BASELINE = Object.freeze({
   // the fixture now that conflict parties are power factions (X-26a); no token moved. Relationships likewise 59 -> 60.
   "Summary/Plot Hooks":  { measured: 37, sub14: 37 },
   "Systems/Services":    { measured: 109, sub14: 109 },
-  "Systems/Institutions": { measured: 65, sub14: 65 }, // T1-14, measured 2026-10-30 by this walk
+  "Systems/Institutions": { measured: 62, sub14: 62 }, // T1-14, measured 2026-10-30 by this walk
   // 47 -> 40 (2026-10-30, UX consolidation U1, RULINGS-T2 T2-1..T2-8): no desktop token moved; the page lost
   // its duplicates (Economy/Food tiles, the Supply Chains rows, the Resource Exploitation chips, the plot hooks).
   "Systems/Economics":   { measured: 42, sub14: 42 },
@@ -606,7 +613,7 @@ const DESKTOP_BASELINE = Object.freeze({
   // instead of the siege/famine/plague flag, so the fixture's block renders on the public walk: its title
   // (chrome), its static explanation and its chain notes (prose). No token moved.
   "Systems/Magic":       { measured:  4, sub14:  4 },
-  "World/NPCs":          { measured: 31, sub14: 31 },
+  "World/NPCs":          { measured: 23, sub14: 23 },
   // 60 -> 61 / 58 -> 59 and mobile 58 -> 59 (2026-10-31, G3 at the merge, GS-1): the eight-variant tie lines wrap one
   // line longer in the fixture; no token moved.
   "World/Relationships": { measured: 61, sub14: 59 },
@@ -675,6 +682,9 @@ const DESKTOP_BASELINE = Object.freeze({
 // 36 -> 38), terrain-pools (Relationships chrome 2 -> 5), food-exports (Economics prose 32 -> 33), x46-3 budget
 // (Services 96 -> 103, Economics 33/7 -> 34/8, Resources 4 -> 2, Defense 24 -> 23, Relationships 59/5 -> 57/7),
 // rung1b-f6 floor (Plot Hooks 38 -> 37, Institutions 62 -> 64, Services 103 -> 108, Relationships 57/7 -> 58/3).
+// ── RE-MEASURED 2026-11-07 (LANDING-R2, the pool census composed): content moved, no token did; sub12 stays zero and the
+// floors arm is green. The same two steps as the desktop note: e152ee220 census-4 R8 (Institutions prose 64 -> 61) and
+// b8fdcd3d5 census-1e unit 1 (NPCs prose 30 -> 22); chrome and both sub-floor counts hold.
 const MOBILE_BASELINE = Object.freeze({
   "Summary/Overview":    { prose: 10, chrome: 1, sub14: 0, sub12: 0 },
   "Summary/Foundations": { prose:  1, chrome: 0, sub14: 0, sub12: 0 },
@@ -682,7 +692,7 @@ const MOBILE_BASELINE = Object.freeze({
   // line more (X-26a); both sub-floor counts stay where they were.
   "Summary/Plot Hooks":  { prose: 37, chrome: 0, sub14: 0, sub12: 0 },
   "Systems/Services":    { prose: 108, chrome: 1, sub14: 0, sub12: 0 },
-  "Systems/Institutions": { prose: 64, chrome: 1, sub14: 0, sub12: 0 },
+  "Systems/Institutions": { prose: 61, chrome: 1, sub14: 0, sub12: 0 },
   // prose 39 -> 33 (2026-10-30, UX consolidation U1): the duplicate blocks left the page; no floor moved.
   "Systems/Economics":   { prose: 34, chrome: 8, sub14: 8, sub12: 0 },
   // prose 27 -> 21 (2026-10-30, UX consolidation U5): tensions, conflicts and the duplicate rows left.
@@ -701,7 +711,7 @@ const MOBILE_BASELINE = Object.freeze({
   // prose 0 -> 3, chrome 0 -> 1 (2026-11-03, lane MAGIC, chair ruling 2): the dependence block reads the one
   // reliance reading; its title is the 12px chrome line, its explanation and chain notes take the prose floor.
   "Systems/Magic":       { prose:  3, chrome: 1, sub14: 1, sub12: 0 },
-  "World/NPCs":          { prose: 30, chrome: 1, sub14: 0, sub12: 0 },
+  "World/NPCs":          { prose: 22, chrome: 1, sub14: 0, sub12: 0 },
   "World/Relationships": { prose: 58, chrome: 3, sub14: 3, sub12: 0 },
   "World/Faith":         { prose:  1, chrome: 0, sub14: 0, sub12: 0 },
   "World/Daily Life":    { prose:  1, chrome: 0, sub14: 0, sub12: 0 },
