@@ -47,7 +47,9 @@
  * past-EOF citations this gate deliberately does not see. FOUR rules select them,
  * each checkable, and the full roster is committed in the baseline's
  * `archivalExclusionAtFreeze.files`:
- *   tree (84)    docs/review-r2/**, docs/shift-records/**
+ *   tree (104)   docs/review-r2/**, docs/shift-records/** (2026-11-07, PEOPLE-LAND second seat, 95 -> 104: the people car's
+ *                nine signed shift records, docs/shift-records/2026-11-07-people-land-0a/0b, people-1..people-5b and
+ *                people-land-shim-out, born into the tree class; the header read 84 while the baseline held 95)
  *                (2026-11-06, LANDING-8, 84 -> 90: the day's six signed records rung1-29, -30, -32..-35;
  *                GROWTHS that hid nothing, 0 past-EOF of their own.)
  *                (2026-11-06, the rung-1 landing, 56 -> 84: the landing's twenty-eight signed records
