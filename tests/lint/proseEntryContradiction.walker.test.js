@@ -511,8 +511,10 @@ describe('THE ANTI-VACUITY GUARD — the walker must fail on the corpus it ships
     // 46 -> 47 (both) at LANDING-R2 helper G2 (the chair's 06:5x DS-CND-1 boom line (ODQ §934.105)): boom v4's "than a year ago" is a dated
     // claim on a state-only field (C3 arm `dated claim on a state-only field` under
     // `eventProvenance: false`; NOT-EXECUTABLE without the flag) — measured on that one entry.
-    expect(notExecutable).toBe(47);
-    expect(fails).toBe(47);
+    // 47 -> 46 (both) at the chair's 07:1x ruling: the boom line's undated clause ("coin moves
+    // freely and work is easy to find") makes no dated claim, so the entry leaves the class.
+    expect(notExecutable).toBe(46);
+    expect(fails).toBe(46);
     // PRESENT-THEN-ABSENT on one of them, so the arm is proved rather than counted.
     const anchor = corpus.find((entry) => walkEntry(entry, withEntryContext(base, { eventProvenance: false }))
       .fails.some((f) => f.klass === 'C3'));

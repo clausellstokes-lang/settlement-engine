@@ -2805,7 +2805,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           "marks": [
             "crisis: any"
           ],
-          "text": "It is a good stretch for {settlement}: more coin changes hands than a year ago, and work is easy to find.",
+          "text": "It is a good stretch for {settlement}: coin moves freely and work is easy to find.",
           "slots": [
             "settlement"
           ],
