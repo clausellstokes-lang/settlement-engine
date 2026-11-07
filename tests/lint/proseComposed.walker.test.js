@@ -480,7 +480,11 @@ describe('A0b — the text claims every declared field and no other', () => {
     // measured, the seventy-nine new under-claims all on the twelve ARCANE lines.
     // 176 -> 180 OWED at W2 DEF (2026-11-07), the referee's frame cure: FIXTURE: gates gains v3 and v4 (its v1 entered the
     // twenty most-repeated story frames at 309 of 1,000 towns), each inheriting the pool's two unclaimed reads: 1458 -> 1462.
-    const UNDER_CLAIM_OWED = 180;
+    // 180 -> 183 OWED at W2 DEF (2026-11-07), the owner's reading (WAVE-RULINGS item 16: the ledger vantage names the
+    // record and its cost): FIXTURE: gangs v2's old wording ("{settlement} has organised gangs") claimed the key's three
+    // earlier flags only through the token "has"; the rewrite names the tax lists instead and the three inherited
+    // reads fall due as on every other FIXTURE line: 1462 -> 1465 measured, no other line moved.
+    const UNDER_CLAIM_OWED = 183;
     const UNDER_CLAIM_CEILING = UNDER_CLAIM_BASE + UNDER_CLAIM_OWED;
     // ⛔ THE OVER-CLAIM CEILING, RE-KEYED THE SAME WAY (census-1b unit A (d), 427f7b112). From that
     // commit the wiring census records `settlement` among DS-GEN-17's fieldsRead (the roster key
@@ -527,7 +531,7 @@ describe('A0b — the text claims every declared field and no other', () => {
       + `\n  over-claims          ${tally['over-claim']}   ceiling ${OVER_CLAIM_CEILING}`
       + ` = ${OVER_CLAIM_BASE} + ${OVER_CLAIM_OWED} OWED (427f7b112: DS-GEN-17's name slot)`
       + `\n  under-claims         ${tally['under-claim']}   ceiling ${UNDER_CLAIM_CEILING}`
-      + ` = ${UNDER_CLAIM_BASE} + ${UNDER_CLAIM_OWED} OWED (R-F5 26 + the pool census 34 + DS-GEN-17 PROVISIONED v3 1 + DS-CND-1 boom v4 1 + W2 DEF DS-DEF-9 FLAG pools 8 + W2 DEF DS-DEF-4 FIXTURE pools 17 + W2 DEF DS-DEF-5 FIXTURE pools 10 + W2 DEF DS-DEF-5 ARCANE pools 79 + FIXTURE: gates v3-v4 4: the census wave buys them back)`
+      + ` = ${UNDER_CLAIM_BASE} + ${UNDER_CLAIM_OWED} OWED (R-F5 26 + the pool census 34 + DS-GEN-17 PROVISIONED v3 1 + DS-CND-1 boom v4 1 + W2 DEF DS-DEF-9 FLAG pools 8 + W2 DEF DS-DEF-4 FIXTURE pools 17 + W2 DEF DS-DEF-5 FIXTURE pools 10 + W2 DEF DS-DEF-5 ARCANE pools 79 + FIXTURE: gates v3-v4 4 + the ledger rewrite of FIXTURE: gangs v2 3: the census wave buys them back)`
       + `\n  implicit negations   ${tally['implicit-negation']}`
       + `\n  absences claimed by silence (R-F4, REPORT) ${silent}`
       + `\n  NOT-EXECUTABLE reads ${notExecutable}   pools carrying a finding ${pools.size}\n`);

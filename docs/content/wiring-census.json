@@ -4383,7 +4383,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 2,
-      "grammars": 1,
+      "grammars": 2,
       "predicate": [
         {
           "field": "settlement.economicState.compound.inst.hasCharterHall",
@@ -45809,7 +45809,7 @@
         "DS-DEF-5 :: FIXTURE: charter hall"
       ],
       "variants": 2,
-      "grammars": 1,
+      "grammars": 2,
       "blocks": [
         "DS-DEF-5"
       ]
@@ -55356,7 +55356,7 @@
         "settlement.economicState.compound.inst.hasCharterHall"
       ],
       "readingFunction": "charterFixturePoolKey",
-      "count": "2 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "2 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",

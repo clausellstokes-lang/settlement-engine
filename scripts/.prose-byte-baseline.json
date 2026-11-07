@@ -55,8 +55,8 @@
   },
   "leaves": {
     "src/data/dossierStateProse/defense.generated.js": {
-      "raw": 183888,
-      "gzip": 25872,
+      "raw": 184656,
+      "gzip": 26137,
       "ceilingRaw": 488168,
       "ceilingGzip": 108482
     },
@@ -347,6 +347,14 @@
       "toRaw": 183888,
       "gzipAfter": 25872,
       "reason": "+531 B raw (gzip level 9: 25,818 -> 25,872), one commit: FIXTURE: gates v1 entered the twenty most-repeated story frames on the 1,000 (309 towns); the pool gains v3 (traveller) and v4 (watch) so the frame spreads. Projected through `node scripts/generate-dossier-state-prose.mjs`; `--check` exit 0."
+    },
+    {
+      "car": "W2 DEF second seat (2026-11-07; ODQ §934.105, WAVE-RULINGS item 16): DS-DEF-4, DS-DEF-5, DS-DEF-9 — the owner's reading, 2026-11-07: the ledger vantage names the record and its cost",
+      "leaf": "src/data/dossierStateProse/defense.generated.js",
+      "fromRaw": 183888,
+      "toRaw": 184656,
+      "gzipAfter": 26137,
+      "reason": "+768 B raw (gzip level 9: 25,872 -> 26,137), one commit: the twenty `[ledger]` lines this lane authored or rewrote (DS-DEF-4 capture none v1, adversarial v1, corrupted v1, capture v1, FIXTURE v1 x3 and gangs v2; DS-DEF-5 walls PRESENT v2, FIXTURE v2 x3, ARCANE v2 x6; DS-DEF-9 FLAG v2 x2) rewritten to name the record in a player's words and what the gap costs. Projected through `node scripts/generate-dossier-state-prose.mjs`; `--check` exit 0."
     }
   ],
   "ceilingTransfersNewLeaves": [

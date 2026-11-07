@@ -2206,7 +2206,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "No criminal has reached the {seat} at {settlement}; whatever goes on in the town, the hall decides its own business.",
+          "text": "No criminal's money appears in the {seat}'s accounts at {settlement}, so what the hall spends is spent on the town.",
           "slots": [
             "seat",
             "settlement"
@@ -2239,7 +2239,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "capture adversarial": [
         {
           "angle": "ledger",
-          "text": "The {seat} at {settlement} and the town's criminals are at open odds, each spending against the other, and neither is winning.",
+          "text": "The {seat} at {settlement} and the town's criminals are at open odds, and the hall's accounts show the cost: money spent on the fight is not spent on the town.",
           "slots": [
             "seat",
             "settlement"
@@ -2296,7 +2296,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "dm-only"
           ],
-          "text": "Someone at the {seat} of {settlement} is in the criminals' pocket, and the hall's decisions now bend to suit them in ways no ledger shows.",
+          "text": "Someone at the {seat} of {settlement} is in the criminals' pocket; the hall's accounts still balance, but the decisions behind them now bend to suit the criminals.",
           "slots": [
             "seat",
             "settlement"
@@ -2332,7 +2332,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "dm-only"
           ],
-          "text": "The criminals hold the {seat} at {settlement}. The hall announces decisions that were made elsewhere.",
+          "text": "The criminals hold the {seat} at {settlement}. The hall's minutes record decisions made elsewhere, and the town pays for them as if they were its own.",
           "slots": [
             "seat",
             "settlement"
@@ -2365,7 +2365,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "FIXTURE: black market": [
         {
           "angle": "ledger",
-          "text": "There is a black market at {settlement}, where contraband and stolen goods are sold outside the town's licences and tolls.",
+          "text": "Nothing sold at {settlement}'s black market reaches the toll book, so the town loses the dues on every load of contraband and stolen goods.",
           "slots": [
             "settlement"
           ],
@@ -2383,7 +2383,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "FIXTURE: thieves' guild": [
         {
           "angle": "ledger",
-          "text": "A thieves' guild operates at {settlement}, and most of the town's theft is organised through it.",
+          "text": "Few thefts at {settlement} are ever written into the town's books: a thieves' guild settles them first, and the losses go uncounted.",
           "slots": [
             "settlement"
           ],
@@ -2401,7 +2401,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "FIXTURE: smuggling": [
         {
           "angle": "ledger",
-          "text": "Smuggling moves goods in and out of {settlement}, around its tolls and its charters.",
+          "text": "Goods moved by smuggling never pass through {settlement}'s toll book, and every load that slips past is a due the town does not collect.",
           "slots": [
             "settlement"
           ],
@@ -2427,7 +2427,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "{settlement} has organised gangs: groups that hold ground or run front businesses.",
+          "text": "Whatever {settlement}'s gangs take in never appears on the tax lists, and the town is poorer by what they collect.",
           "slots": [
             "settlement"
           ],
@@ -2670,7 +2670,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "{settlement} is walled, and anyone coming in must use the way the town allows; trouble can only get in where the town decides.",
+          "text": "{settlement} is walled, and every arrival goes through a gate and into the gate tally; trouble can only get in where the town decides.",
           "slots": [
             "settlement"
           ],
@@ -2982,7 +2982,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "The wall at {settlement} is entered by its gates, and the town can shut them.",
+          "text": "The wall at {settlement} is entered by its gates, and the gate tolls are counted there; a gate left unwatched is a toll lost.",
           "slots": [
             "settlement"
           ],
@@ -3016,7 +3016,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "The hall at {settlement} is an adventurers' charter hall: parties sign on there for work the town will pay for.",
+          "text": "The charter hall at {settlement} keeps a book of the bounties the town has posted, and every unclaimed one is a danger still at large.",
           "slots": [
             "settlement"
           ],
@@ -3034,7 +3034,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "The free company at {settlement} answers to its captain and its contracts, not to the town.",
+          "text": "The free company at {settlement} keeps its own muster roll, not the town's: its fighters answer to their captain and their contracts.",
           "slots": [
             "settlement"
           ],
@@ -3052,7 +3052,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "The town's defence against magic rests on the wizard's tower at {settlement}.",
+          "text": "The town's defence against magic rests on the wizard's tower at {settlement}, and no muster roll lists it: if the wizard leaves, it leaves too.",
           "slots": [
             "settlement"
           ],
@@ -3070,7 +3070,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "{settlement}'s magical defence is organised through its mages' guild.",
+          "text": "{settlement}'s magical defence sits in the mages' guild's books, not the town's: the guild can withdraw it, and the town cannot hold it.",
           "slots": [
             "settlement"
           ],
@@ -3088,7 +3088,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "{settlement}'s magical support is its alchemists and what they brew.",
+          "text": "{settlement} buys its magical support from its alchemists by the batch, and the town's accounts carry it as a purchase, not a defence.",
           "slots": [
             "settlement"
           ],
@@ -3106,7 +3106,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "Divine magic stands behind {settlement}'s defence: its priests heal the wounded and bless the defenders.",
+          "text": "Divine magic stands behind {settlement}'s defence, but the priests who heal the wounded are on no muster roll, and the town cannot order them out.",
           "slots": [
             "settlement"
           ],
@@ -3124,7 +3124,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "{settlement}'s defence draws on its druids, who keep watch over the country around it.",
+          "text": "{settlement}'s defence draws on its druids, who keep watch over the country around it; they are on no muster roll, and the town cannot order them out.",
           "slots": [
             "settlement"
           ],
@@ -3142,7 +3142,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "{settlement} counts a few practitioners of the arcane among its defenders.",
+          "text": "{settlement} counts a few practitioners of the arcane among its defenders, though no muster roll lists them and none is bound to stay.",
           "slots": [
             "settlement"
           ],
@@ -5328,7 +5328,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "With no temple and a weak market, the arcane houses at {settlement} carry the authority a priesthood or a merchant guild would carry elsewhere.",
+          "text": "With no temple and a weak market, people at {settlement} take their oaths and quarrels to the arcane houses, and no parish register records what was settled there.",
           "slots": [
             "settlement"
           ],
@@ -5346,7 +5346,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "Arcane work at {settlement} is directed by its military, and the practitioners' first duty is to the town's soldiers.",
+          "text": "Arcane work at {settlement} is ordered by its military, and the practitioners' own books show it: defence work first, paying work after.",
           "slots": [
             "settlement"
           ],

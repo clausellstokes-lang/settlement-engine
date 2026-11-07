@@ -2866,12 +2866,12 @@ the leash is the state, not a fate.
 3. `[visitor · colour]` A stranger asking after the arrangements at {settlement} is met with genuine incomprehension, which is either the truth or an unusually good performance of it.
 
 **capture `none`**
-1. `[ledger · colour]` No criminal has reached the {seat} at {settlement}; whatever goes on in the town, the hall decides its own business.
+1. `[ledger · colour]` No criminal's money appears in the {seat}'s accounts at {settlement}, so what the hall spends is spent on the town.
 2. `[counterforce · organised crime]` There is a criminal interest at {settlement} with the means to reach into the hall and it has not; the seat's people are watched too closely for the approach to be worth its risk.
 3. `[street · colour]` Whatever is run at {settlement} is run outside the hall, and business with the hall is straight.
 
 **capture `adversarial`** {colour}
-1. `[ledger]` The {seat} at {settlement} and the town's criminals are at open odds, each spending against the other, and neither is winning.
+1. `[ledger]` The {seat} at {settlement} and the town's criminals are at open odds, and the hall's accounts show the cost: money spent on the fight is not spent on the town.
 2. `[street]` The hall at {settlement} moves against the operators and the operators move back, and the town is where the two of them meet.
 3. `[unfolding]` The hall and the operators at {settlement} are each spending on the other and neither is gaining, and the spending is coming out of things the town needed.
 
@@ -2881,12 +2881,12 @@ the leash is the state, not a fate.
 3. `[unfolding]` The hall and the criminals at {settlement} keep the peace because it suits them both, not because either is held back.
 
 **capture `corrupted`** *(every variant `dm-only`)* {colour}
-1. `[ledger · dm-only]` Someone at the {seat} of {settlement} is in the criminals' pocket, and the hall's decisions now bend to suit them in ways no ledger shows.
+1. `[ledger · dm-only]` Someone at the {seat} of {settlement} is in the criminals' pocket; the hall's accounts still balance, but the decisions behind them now bend to suit the criminals.
 2. `[unfolding · dm-only]` The criminals at {settlement} have bought their way into the hall, and each favour they get makes the next one easier.
 3. `[street · dm-only]` People at {settlement} do not know the hall has been bought, but they notice certain cases never quite reach an end.
 
 **capture `capture`** *(every variant `dm-only`)* {colour}
-1. `[ledger · dm-only]` The criminals hold the {seat} at {settlement}. The hall announces decisions that were made elsewhere.
+1. `[ledger · dm-only]` The criminals hold the {seat} at {settlement}. The hall's minutes record decisions made elsewhere, and the town pays for them as if they were its own.
 2. `[unfolding · dm-only]` At {settlement} the criminals and the government are the same people; they run the town and use the hall to do it.
 3. `[visitor · dm-only]` Business with the hall at {settlement} goes smoothly, and visitors never learn whose business it really was.
 
@@ -2898,20 +2898,20 @@ order: the black market, the thieves' guild, the smuggling network, the gangs (`
 `multiple criminal factions`, `front business`). Description position: plain lines.
 
 **FIXTURE: black market**
-1. `[ledger]` There is a black market at {settlement}, where contraband and stolen goods are sold outside the town's licences and tolls.
+1. `[ledger]` Nothing sold at {settlement}'s black market reaches the toll book, so the town loses the dues on every load of contraband and stolen goods.
 2. `[street]` Anyone at {settlement} who knows whom to ask can buy contraband or stolen goods at the black market.
 
 **FIXTURE: thieves' guild**
-1. `[ledger]` A thieves' guild operates at {settlement}, and most of the town's theft is organised through it.
+1. `[ledger]` Few thefts at {settlement} are ever written into the town's books: a thieves' guild settles them first, and the losses go uncounted.
 2. `[street]` The thieves at {settlement} answer to a guild, and the guild decides who works which streets.
 
 **FIXTURE: smuggling**
-1. `[ledger]` Smuggling moves goods in and out of {settlement}, around its tolls and its charters.
+1. `[ledger]` Goods moved by smuggling never pass through {settlement}'s toll book, and every load that slips past is a due the town does not collect.
 2. `[street]` A smuggling network runs through {settlement}, and some of what is sold in the town never paid a toll.
 
 **FIXTURE: gangs**
 1. `[street]` Criminal gangs at {settlement} keep a footing in the town, through the streets they hold or the businesses they front.
-2. `[ledger]` {settlement} has organised gangs: groups that hold ground or run front businesses.
+2. `[ledger]` Whatever {settlement}'s gangs take in never appears on the tax lists, and the town is poorer by what they collect.
 
 ---
 
@@ -2937,7 +2937,7 @@ may not say the contract is failing unless the economic arm supplies that.
 
 **walls PRESENT**
 1. `[visitor · gate]` There is a line around {settlement} and it is kept: the gates shut, the works are repaired, and a stranger enters where the town intends him to.
-2. `[ledger · colour]` {settlement} is walled, and anyone coming in must use the way the town allows; trouble can only get in where the town decides.
+2. `[ledger · colour]` {settlement} is walled, and every arrival goes through a gate and into the gate tally; trouble can only get in where the town decides.
 3. `[street · gate]` The town has a wall and arranges its day around the gates without noticing that it does.
 
 **walls ABSENT** {colour}
@@ -3001,17 +3001,17 @@ lines.
 
 **FIXTURE: gates**
 1. `[street]` Traffic in and out of {settlement} goes through its gates, and that is where anyone arriving is first seen.
-2. `[ledger]` The wall at {settlement} is entered by its gates, and the town can shut them.
+2. `[ledger]` The wall at {settlement} is entered by its gates, and the gate tolls are counted there; a gate left unwatched is a toll lost.
 3. `[visitor]` You come into {settlement} by a gate, and someone at the gate sees you come.
 4. `[unfolding]` Whatever reaches {settlement} by road reaches it at a gate, and the town can close them against it.
 
 **FIXTURE: charter hall**
 1. `[street]` Adventurers at {settlement} take their contracts at the charter hall, and the town posts its worst problems there.
-2. `[ledger]` The hall at {settlement} is an adventurers' charter hall: parties sign on there for work the town will pay for.
+2. `[ledger]` The charter hall at {settlement} keeps a book of the bounties the town has posted, and every unclaimed one is a danger still at large.
 
 **FIXTURE: free company**
 1. `[street]` A free company keeps a hall at {settlement} and hires out its swords to whoever pays.
-2. `[ledger]` The free company at {settlement} answers to its captain and its contracts, not to the town.
+2. `[ledger]` The free company at {settlement} keeps its own muster roll, not the town's: its fighters answer to their captain and their contracts.
 
 **THE ARCANE FIXTURES AND TRADITIONS (W2 DEF, 2026-11-07, construction C8 and C10):** a second
 sentence beside `arcane defense PRESENT` only (never beside the ABSENT line), naming WHO the
@@ -3024,27 +3024,27 @@ print nowhere). Description position: plain lines.
 
 **ARCANE: wizard's tower**
 1. `[street]` The wizard's tower at {settlement} is where the town turns when a threat is beyond its ordinary defences.
-2. `[ledger]` The town's defence against magic rests on the wizard's tower at {settlement}.
+2. `[ledger]` The town's defence against magic rests on the wizard's tower at {settlement}, and no muster roll lists it: if the wizard leaves, it leaves too.
 
 **ARCANE: mages' guild**
 1. `[street]` The mages' guild at {settlement} keeps the town's wards and answers hostile spells.
-2. `[ledger]` {settlement}'s magical defence is organised through its mages' guild.
+2. `[ledger]` {settlement}'s magical defence sits in the mages' guild's books, not the town's: the guild can withdraw it, and the town cannot hold it.
 
 **ARCANE: alchemists**
 1. `[street]` The magical help at {settlement} comes from its alchemists, who brew for the defenders.
-2. `[ledger]` {settlement}'s magical support is its alchemists and what they brew.
+2. `[ledger]` {settlement} buys its magical support from its alchemists by the batch, and the town's accounts carry it as a purchase, not a defence.
 
 **ARCANE: divine**
 1. `[street]` The clergy at {settlement} heal and ward by prayer, and the town counts them among its defences.
-2. `[ledger]` Divine magic stands behind {settlement}'s defence: its priests heal the wounded and bless the defenders.
+2. `[ledger]` Divine magic stands behind {settlement}'s defence, but the priests who heal the wounded are on no muster roll, and the town cannot order them out.
 
 **ARCANE: druidic**
 1. `[street]` Druids at {settlement} ward the land around the town and know its ground better than anyone.
-2. `[ledger]` {settlement}'s defence draws on its druids, who keep watch over the country around it.
+2. `[ledger]` {settlement}'s defence draws on its druids, who keep watch over the country around it; they are on no muster roll, and the town cannot order them out.
 
 **ARCANE: practitioners**
 1. `[street]` Practitioners of the arcane at {settlement} are called on when the town is threatened.
-2. `[ledger]` {settlement} counts a few practitioners of the arcane among its defenders.
+2. `[ledger]` {settlement} counts a few practitioners of the arcane among its defenders, though no muster roll lists them and none is bound to stay.
 
 ---
 
@@ -3358,11 +3358,11 @@ one vantage each.
 
 **FLAG: magicFillsVoid**
 1. `[street]` There is no temple at {settlement} and little trade, so people bring their troubles to the mages instead: a sickness, a quarrel, a failed harvest.
-2. `[ledger]` With no temple and a weak market, the arcane houses at {settlement} carry the authority a priesthood or a merchant guild would carry elsewhere.
+2. `[ledger]` With no temple and a weak market, people at {settlement} take their oaths and quarrels to the arcane houses, and no parish register records what was settled there.
 
 **FLAG: magicMilitarized**
 1. `[street]` The soldiers at {settlement} command its magic: the arcane houses answer to them, and their work goes first to the town's defence.
-2. `[ledger]` Arcane work at {settlement} is directed by its military, and the practitioners' first duty is to the town's soldiers.
+2. `[ledger]` Arcane work at {settlement} is ordered by its military, and the practitioners' own books show it: defence work first, paying work after.
 
 ---
 
