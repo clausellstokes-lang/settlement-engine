@@ -138,6 +138,13 @@ const stride = (rows, n) => rows.filter((_, index) => index % n === 0);
  * `src/generators/steps/resolveCrisisCast.js` reads the culture to name the crisis car's rare
  * TEMPORARY person (`pickFirst(config.culture, …)`) when a required crisis role has no holder. A culture
  * change re-names that one person; CRISIS-1 omitted the row and the chair's ruling of 2026-11-04 adds it.
+ *
+ * 2026-11-07, LANDING-R2 (the pool census composed): TWENTY-THREE. `src/generators/npcStructure.js` leaves the set at
+ * 73fa1a1e7 (reader-tonight-wants R11 unit 3, the 76 registry goals rewritten in the house register): its one
+ * match was a goal STRING ("…the enforcement capacity and institutional culture that makes current stability
+ * possible."), never a read of the fact, and the rewrite dropped the word. Measured: the file names `culture` once at
+ * the merge base bf263a78d and at rung 1's final 1bff51c6d, zero times at the census side f5dc50c6b; `git log -S`
+ * over the census range names 73fa1a1e7 alone. No reader was added or lost: a word left a sentence.
  */
 const CULTURE_READERS = Object.freeze([
   'src/generators/aiLayer.js',
@@ -155,7 +162,6 @@ const CULTURE_READERS = Object.freeze([
   'src/generators/narrativeGenerator.js',
   'src/generators/npc/generatedNpcTitle.js',
   'src/generators/npcGenerator.js',
-  'src/generators/npcStructure.js',
   'src/generators/pipeline.js',
   'src/generators/steps/assembleSettlement.js',
   'src/generators/steps/buildGenerationContext.js',
