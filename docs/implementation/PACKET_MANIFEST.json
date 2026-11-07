@@ -30984,7 +30984,8 @@
         {
           "_note": "THE DIRECT DRAW in the deriving half — the power-weighted scatter on the step's own handle. It is wrapped by chooseOrPin like the other three. RE-ANCHORED 2026-10-31 (GS-2 one faction set, ODQ §934.101, lane G2): linkFactions and its power-weighted scatter are deleted; members are the NPCs whose own affiliation names the faction, drawn nowhere. The anchor is the live faction build.",
           "path": "src/generators/steps/assembleSettlement.js",
-          "symbol": "settlement.factions = generateFactions(settlement.npcs, settlement.powerStructure?.factions);"
+          "symbol": "settlement.factions = generateFactions(settlement.npcs, settlement.powerStructure?.factions);",
+          "retiredBy": "§934.105 (PEOPLE-RULINGS M-2: the shim out; the NPC grouping and its builder deleted by PEOPLE-LAND, 2026-11-07)"
         },
         {
           "_note": "CHOOSER 1, the root draw. Takes no roster.",
@@ -31000,7 +31001,8 @@
         {
           "_note": "CHOOSER 3 — takes both and draws twice. RE-ANCHORED 2026-10-31 (GS-2 one faction set, ODQ §934.101, lane G2): the chooser now takes the power factions, not the relationships, and draws nothing.",
           "path": "src/generators/power/factionGrouping.js",
-          "symbol": "export const generateFactions = (npcs, powerFactions) => {"
+          "symbol": "export const generateFactions = (npcs, powerFactions) => {",
+          "retiredBy": "§934.105 (PEOPLE-RULINGS M-2: the shim out; the NPC grouping and its builder deleted by PEOPLE-LAND, 2026-11-07)"
         },
         {
           "_note": "CHOOSER 4 — draws three times. Its home is power/conflicts.js, not powerGenerator.js.",
@@ -39609,7 +39611,8 @@
         {
           "path": "src/generators/narrativeGenerator.js",
           "symbol": "export const relinkFactionMembers = (factions, enrichedNpcs) => {",
-          "_note": "src/generators/narrativeGenerator.js :: relinkFactionMembers — the MIRROR: untouched and never gated; count 1, verbatim at c69d16a5d."
+          "_note": "src/generators/narrativeGenerator.js :: relinkFactionMembers — the MIRROR: untouched and never gated; count 1, verbatim at c69d16a5d.",
+          "retiredBy": "§934.105 (PEOPLE-RULINGS M-2: the shim out; the NPC grouping and its builder deleted by PEOPLE-LAND, 2026-11-07)"
         },
         {
           "path": "src/generators/narrativeGenerator.js",

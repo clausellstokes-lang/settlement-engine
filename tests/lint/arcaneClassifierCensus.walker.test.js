@@ -197,7 +197,7 @@ const KNOWN_UNCONVERTED = Object.freeze({
   // and "the recorded site is no longer at :58" — which is the walker working: a
   // line-addressed register cannot tell a move from a birth without being told, and
   // being told is cheaper than the alternative. Third address re-point on this row.
-  'src/generators/factionRoles.js:59':
+  'src/generators/factionRoles.js:60':
     'CONTEXTUALLY SCOPED, not the class. The Archmagister\'s `linkToInst` runs only INSIDE the already-classified `arcane:` bucket, so tower|academy|college is searching an arcane faction\'s own building, not deciding whether one is arcane. Listed for completeness so a future audit does not re-find it as a defect.',
   'src/generators/isolationGenerator.js:97':
     'CONTEXTUALLY SCOPED, not the class. "Does this settlement already have an arcane maintainer?" runs inside the magic-forcing arm and searches the Magic-category catalog, where "academy" means "Academy of magic".',
