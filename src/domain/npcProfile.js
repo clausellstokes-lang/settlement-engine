@@ -25,6 +25,7 @@
 
 import { institutionMatchesRegex } from './institutionClassify.js';
 import { ARCANE_INST_TAGS, TRADE_INST_TAGS } from './arcaneInstitutionVocabulary.js';
+import { cardHouseOf, firstPowerOf, powerOrderOf } from './people/cardPowers.js';
 
 // ── Category → archetype mapping ────────────────────────────────────────
 // The generator's `category` field already aligns reasonably well with
@@ -343,6 +344,11 @@ function inferInstitutionLink(npc, settlement) {
   const institutions = Array.isArray(settlement.institutions) ? settlement.institutions : [];
   if (institutions.length === 0) return null;
 
+  // The card's own house first (PEOPLE-5A: a representative IS its institution's face).
+  const house = cardHouseOf(npc);
+  const own = house ? institutions.find((inst) => inst && inst.name === house) : null;
+  if (own) return `institution.${snakeCase(own.name)}`;
+
   const hint = CATEGORY_INSTITUTION_HINTS[archetypeFromCategory(npc.category)];
   if (!hint) return null;
 
@@ -576,7 +582,7 @@ export function deriveNpcProfile(npc, settlement) {
 
     // Linkages
     institutionLink: inferInstitutionLink(npc, settlement),
-    factionLink:     factionIdFromName(npc.factionAffiliation),
+    factionLink:     factionIdFromName(firstPowerOf(npc, powerOrderOf(settlement))),
 
     // Public-facing markers
     publicReputation: firstNonEmpty(

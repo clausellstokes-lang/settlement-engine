@@ -37,7 +37,7 @@ export function suggestedQuestions(anchor = {}, { settlement = null, worldState 
 
   if ((scope === 'settlement' || scope === 'map') && settlement) {
     const name = forName(settlement.name);
-    const factionList = settlement.factions || (settlement.powerStructure && settlement.powerStructure.factions);
+    const factionList = settlement.powerStructure && settlement.powerStructure.factions;
     const hasFactions = Array.isArray(factionList) && factionList.length > 0;
     const hasNpcs = Array.isArray(settlement.npcs) && settlement.npcs.length > 0;
     if (hasFactions) push(`What factions hold sway in ${name}?`);

@@ -31,7 +31,7 @@ function militaryCaptain(over = {}) {
     name: 'Beatrix Becker',
     role: 'Guard Captain',
     category: 'military',
-    factionAffiliation: 'Military/Guard',
+    memberships: [{ power: 'Military/Guard', rank: 1 }], // PEOPLE-5A re-keyed (M-1b): the link reads the first-rank membership
     structuralPosition: 'Commands enforcement capacity where civilian governance is failing.',
     structuralRank: 'dominant',
     influence: 'high',
@@ -58,7 +58,7 @@ function templeHighPriest(over = {}) {
     name: 'Sister Vaela',
     role: 'High Priestess',
     category: 'religious',
-    factionAffiliation: 'Religious Authorities',
+    memberships: [{ power: 'Religious Authorities', rank: 1 }], // PEOPLE-5A re-keyed (M-1b)
     structuralRank: 'dominant',
     influence: 'high',
     power: 8,
@@ -75,7 +75,7 @@ function minorTraderNpc(over = {}) {
     name: 'Oren the Quiet',
     role: 'Stall Keeper',
     category: 'economy',
-    factionAffiliation: 'Merchant Guilds',
+    memberships: [{ power: 'Merchant Guilds', rank: 1 }], // PEOPLE-5A re-keyed (M-1b)
     structuralRank: 'minor',
     influence: 'low',
     power: 3,
@@ -151,10 +151,12 @@ describe('deriveNpcProfile()', () => {
     expect(deriveNpcProfile({ id: 'x', name: 'X', category: 'unknown' }).archetype).toBe('other');
   });
 
-  it('factionLink derives a stable id from factionAffiliation', () => {
+  it('factionLink derives a stable id from the first-rank membership (PEOPLE-5A re-keyed)', () => {
     expect(deriveNpcProfile(militaryCaptain()).factionLink).toBe('faction.military_guard');
     expect(deriveNpcProfile(templeHighPriest()).factionLink).toBe('faction.religious_authorities');
-    expect(deriveNpcProfile({ id: 'x', name: 'X', factionAffiliation: '' }).factionLink).toBeNull();
+    expect(deriveNpcProfile({ id: 'x', name: 'X', memberships: [] }).factionLink).toBeNull();
+    // the shim's derived field alone links nowhere (the memberships are the source)
+    expect(deriveNpcProfile({ id: 'x', name: 'X', factionAffiliation: 'Military/Guard' }).factionLink).toBeNull();
   });
 
   it('inferences institutionLink from settlement institutions when available', () => {
