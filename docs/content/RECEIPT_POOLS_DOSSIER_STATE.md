@@ -2713,7 +2713,7 @@ supplies the ancestry.
 **`Economic Survival`: `STRONG`**
 1. `[ledger · no crisis: debt]` {settlement}'s accounts have money in hand: the town can keep its defenders paid and buy what a bad season needs without going begging.
 2. `[street · no crisis: debt]` The town could go through a bad season with its arrangements intact, and the people who would have to be paid through one know it.
-3. `[counterforce · crisis]` Trouble at {settlement} has not turned into collapse, because the town can pay its way through it.
+3. `[counterforce · crisis]` Trouble at {settlement} has not turned into a collapse, because the town can pay its way through it.
 
 **`Economic Survival`: `ADEQUATE`** {colour}
 1. `[ledger]` {settlement} can fund a short crisis. A long one begins eating reserves within a few months, and the reserves are not deep enough to hide that from anybody.

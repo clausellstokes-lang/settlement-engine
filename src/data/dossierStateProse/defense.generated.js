@@ -1034,7 +1034,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "crisis"
           ],
-          "text": "Trouble at {settlement} has not turned into collapse, because the town can pay its way through it.",
+          "text": "Trouble at {settlement} has not turned into a collapse, because the town can pay its way through it.",
           "slots": [
             "settlement"
           ],
