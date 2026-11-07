@@ -9,6 +9,9 @@
  *   - ONE FOOD-SOURCE COUNT (R-W7 c, cause 4b): the food chains, their count and the diversity note are the TYPES of
  *     the record's `foodSources` (FOOD-3; grain and the mill one type). Red at c99531cf9 (the count disagreed on
  *     every one of the 525), green after.
+ *   - LEGACY ANNOTATIONS DATED AT BIRTH (R-W7 d, cause 5): each annotation says it is as of the founding survey, in
+ *     its text and as a field, so no reader is told a frozen fact as live. Red at 3d1df12d7 (1,277 undated
+ *     annotations over the 525), green after.
  */
 import { beforeAll, describe, expect, it } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
@@ -61,5 +64,16 @@ describe('ONE FOOD-SOURCE COUNT (R-W7 c, cause 4b)', () => {
         || fs.chains['Trade & imports'] !== false;
     }).map(({ key, s }) => `${key}: ${s.economicState.foodSecurity.activeChainsCount} vs ${s.economicState.foodSecurity.foodRecord.foodSources.join('+')}`);
     expect(disagree).toEqual([]);
+  });
+});
+
+describe('LEGACY ANNOTATIONS DATED AT BIRTH (R-W7 d, cause 5)', () => {
+  it('every legacy annotation says it is as of the founding survey, in its text and as a field', () => {
+    const all = births.flatMap(({ key, s }) => (s.history?.legacyAnnotations || []).map((a) => ({ key, a })));
+    expect(all.length).toBeGreaterThan(30);
+    const undated = all
+      .filter(({ a }) => a.asOf !== 'founding-survey' || !a.annotation.startsWith('As of the founding survey, '))
+      .map(({ key, a }) => `${key}: ${a.annotation.slice(0, 60)}`);
+    expect(undated).toEqual([]);
   });
 });

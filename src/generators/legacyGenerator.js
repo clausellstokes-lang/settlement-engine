@@ -12,6 +12,13 @@
  *   - Political events > 200yr → cannot explain current legitimacy
  *   - Religious events > 300yr → founding character drift only
  * Returns 0–3 annotations; empty is valid.
+ *
+ * ⛔ DATED AT BIRTH, NEVER RE-DERIVED (WIRING-W0 cause 5, the chair's R-W7 (d), 2026-11-07). An annotation reads the
+ * legitimacy, prosperity and food of the record AS IT IS BORN (historyCoherence.js re-runs this against the final
+ * economicState, still at birth) and nothing refreshes it when a campaign advances, so its present-day half is a
+ * fact of the founding survey, not of the living town. Each annotation therefore SAYS so, in its own text and as a
+ * field (`asOf: 'founding-survey'`), the way the history already dates every event relative to the record's birth
+ * ("N years ago"). A re-derive on advance is the realm program's (after FPZ), not this file's.
  */
 
 import { createGenerationWorldLaw } from './generationContext.js';
@@ -56,8 +63,17 @@ function factionStrength(factions, matcher) {
 // effect: optional lasting effect string from the event, rephrased abstractly
 // The annotation is always one sentence — structural, no world-specific facts.
 
+/** The annotation's own date: the record's birth (R-W7 d). */
+export const LEGACY_ANNOTATION_AS_OF = 'founding-survey';
+const AS_OF_OPENING = 'As of the founding survey, ';
+
 function buildAnnotation(ev, relationship, suffix) {
-  const name   = ev.name   || 'a significant historical event';
+  return AS_OF_OPENING + annotationBody(ev, relationship, suffix);
+}
+
+function annotationBody(ev, relationship, suffix) {
+  // Mid-sentence after the date opening, an event named "The …" reads "the …".
+  const name   = String(ev.name || 'a significant historical event').replace(/^The /, 'the ');
   const effect = (ev.lastingEffects || [])[0] || null;
 
   // relationship: 'unresolved' | 'recovery' | 'drift'
@@ -272,6 +288,7 @@ export function deriveLegacyAnnotations(history, settlement) {
     seen.add(ev.type);
     result.push({
       annotation: buildAnnotation(ev, relationship, suffix),
+      asOf:       LEGACY_ANNOTATION_AS_OF,
       eventType:  ev.type,
       yearsAgo:   ev.yearsAgo,
       severity:   ev.severity,
