@@ -312,8 +312,9 @@ describe('the corpus loaders — fail-closed, and counted against the probe', ()
     // PROBE_ALL X1: 2,734 leaves in 786 pools over the two dossier corpora.
     // 2778 -> 2810: the state leaves' 2310 -> 2342 (F12 unit 2 e19e3e4cf +13, census-2b item 5
     // 70d05b25b +4, census-5 unit 2 06b59812f +1, census-3c unit 4 e3295d168 +10, census-5b unit 3
-    // c00b30eb6 +4); the causal leaf and the 787 pools unchanged.
-    expect(leaves.length + causal.length).toBe(2810);
+    // c00b30eb6 +4); the causal leaf and the 787 pools unchanged. 2810 -> 2811 at
+    // LANDING-R2 helper G (the chair's §934.105 ruling (1): DS-GEN-17 PROVISIONED v3, the hospital-only line) +1.
+    expect(leaves.length + causal.length).toBe(2811);
     expect(new Set([...leaves, ...causal].map((e) => e.poolId)).size).toBe(787);
     expect(new Set(leaves.map((e) => e.block)).size).toBe(68);
     expect(crier.length).toBeGreaterThan(300);
@@ -327,13 +328,14 @@ describe('the corpus loaders — fail-closed, and counted against the probe', ()
     // 2069 -> 2121, measured with this join over each commit's annex and leaves, parent -> commit:
     // e19e3e4cf +13, 70d05b25b +3, 06b59812f +1, e3295d168 +10, c00b30eb6 +4, and census-5c unit 2
     // (6dd3f9766, the {colour} rulings) +21 rows whose text now joins its twin. 0 unjoined.
-    expect(joined.length).toBe(2121);
+    // 2121 -> 2122 at LANDING-R2 helper G (the chair's §934.105 ruling (1): DS-GEN-17 PROVISIONED v3, the hospital-only line) +1.
+    expect(joined.length).toBe(2122);
     expect(unjoined).toEqual([]);
     // The compact-row grammar (a whole pool on one bullet line, 225 variants) carries no
     // per-row address, so not every leaf variant has an annex line. That gap is the ADDRESS
     // reader's, is declared, and is why the pool grammar stays with the projection.
     expect(leafLines.size).toBeLessThan(leaves.length);
-    expect(leafLines.size).toBe(2121);
+    expect(leafLines.size).toBe(2122); // 2121 -> 2122 at the same cause: the new line is addressed
   });
 });
 

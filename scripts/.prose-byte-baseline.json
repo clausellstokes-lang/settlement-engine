@@ -67,8 +67,8 @@
       "ceilingGzip": 87513
     },
     "src/data/dossierStateProse/general.generated.js": {
-      "raw": 271758,
-      "gzip": 36378,
+      "raw": 272102,
+      "gzip": 36423,
       "ceilingRaw": 796761,
       "ceilingGzip": 177058
     },
@@ -283,6 +283,14 @@
       "toRaw": 2732,
       "gzipAfter": 1295,
       "reason": "+686 B raw (+157 gzip, zlib level 9 as this ratchet measures it: 1,138 -> 1,295; the 1,332 in LANDING-R2's message to the chair was the gzip CLI's figure with its file header, corrected here), one commit: 8c6dcab72 adds the channel's 34 lines to the projected connectives. Past the leaf's ceiling of 2,122 / 1,236: the ceiling moved by the chair's ruling of 2026-11-07 04:43 UTC under the owner's delegation (ODQ §934.105; vetoable by the owner): the owner's row (ARCH §10, §13 row 17) amended by RE-APPORTIONMENT, the three-leaf total of 77,000 standing — proseNorms carried 11,052 raw of slack (19,938 of 30,990), so 610 raw of its share moves to the connectives leaf, which grew 2,046 -> 2,732 raw at R-AQ (census-1h unit 7, 8c6dcab72: the position-keyed declaration channel)."
+    },
+    {
+      "car": "The chair's ruling of 2026-11-07 06:1x UTC (ODQ §934.105, ruling (1)): DS-GEN-17's hospital-only PROVISIONED line, recorded by LANDING-R2 helper G",
+      "leaf": "src/data/dossierStateProse/general.generated.js",
+      "fromRaw": 271758,
+      "toRaw": 272102,
+      "gzipAfter": 36423,
+      "reason": "+344 B raw (gzip level 9: 36,378 -> 36,423), one commit: DS-GEN-17 PROVISIONED gains v3 `[visitor · institution: hospital]`, the line census-2b item 2 left the hospital-only key without. Projected through `node scripts/generate-dossier-state-prose.mjs`; `--check` exit 0."
     }
   ],
   "ceilingTransfersNewLeaves": [

@@ -6344,6 +6344,7 @@ no compass word, no real-world place, no named analogy.*
 **`PROVISIONED`**
 1. `[ledger · institution: granary · institution: hospital]` {settlement} keeps stores against the bad season and care for the bad year; the town has met scarcity before and built its answer into the roster.
 2. `[elder · institution: granary]` A town does not keep a granary out of optimism; {settlement}'s provision is the polite form of its memory.
+3. `[visitor · institution: hospital]` There is a house for the sick in {settlement}, so a bad year here is nursed and not only endured.
 
 **`BARE`** {colour}
 1. `[counterforce]` {settlement} keeps few institutions because it needs few; what a larger town does with buildings, this one does with acquaintance.
@@ -6415,7 +6416,7 @@ no compass word, no real-world place, no named analogy.*
 
 ---
 
-**CT-3 SECTION ENDS.** Three blocks, thirteen pools, thirty-one authored variants:
+**CT-3 SECTION ENDS.** Three blocks, thirteen pools, thirty-two authored variants:
 `DS-GEN-17` (the company the town keeps), `DS-GEN-18` (why these workshops) and `DS-FTH-4` (why
 the temple holds its ground). No pool falls below the two-variant floor the projection contract
 holds; every slot a variant uses is declared on its block's SLOTS line; every angle is drawn from

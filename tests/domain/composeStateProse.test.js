@@ -174,7 +174,8 @@ describe('the composer — the corpus loads, and the merge is legal', () => {
     // 2310 -> 2342, by cause (each measured on the six leaves, parent -> commit, 709 pools throughout):
     // F12 unit 2 (e19e3e4cf) 2310 -> 2323; census-2b item 5 (70d05b25b) +4; census-5 unit 2
     // (06b59812f) +1; census-3c unit 4 DS-ECO (e3295d168) +10; census-5b unit 3 (c00b30eb6) +4.
-    expect(SHIPPED_POOLS.reduce((n, row) => n + row.pool.length, 0), 'variants').toBe(2342);
+    // 2342 -> 2343 at LANDING-R2 helper G (the chair's §934.105 ruling (1): DS-GEN-17 PROVISIONED v3, the hospital-only line) +1.
+    expect(SHIPPED_POOLS.reduce((n, row) => n + row.pool.length, 0), 'variants').toBe(2343);
   });
 });
 

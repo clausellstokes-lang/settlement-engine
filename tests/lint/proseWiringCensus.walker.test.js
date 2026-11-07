@@ -192,7 +192,8 @@ describe('the wiring census — TOTALITY over the corpus', () => {
     // 2310 -> 2342, and the histogram with it, by cause (the six leaves, parent -> commit):
     // F12 unit 2 e19e3e4cf +13; census-2b item 5 70d05b25b +4; census-5 unit 2 06b59812f +1;
     // census-3c unit 4 e3295d168 +10; census-5b unit 3 c00b30eb6 +4.
-    expect(summary.variants, 'the R1 corpus holds this many variants').toBe(2342);
+    // 2342 -> 2343 at LANDING-R2 helper G (the chair's §934.105 ruling (1): DS-GEN-17 PROVISIONED v3, the hospital-only line) +1.
+    expect(summary.variants, 'the R1 corpus holds this many variants').toBe(2343);
     // THE MEAN IS THE CALLER'S TO FORMAT (INSTR-912 car 11). The census publishes `variants`
     // and `total` as integers; a `toFixed` inside `src/domain/prose/` is a float
     // interpolation and a two-decimal score against the estate's prose-numerics register, and
@@ -200,15 +201,16 @@ describe('the wiring census — TOTALITY over the corpus', () => {
     // decimal places over the same two integers — computed here.
     // 3.26 -> 3.30 with the same five causes; the histogram {2: 31, 3: 528, 4: 111, 5: 22, 6: 12,
     // 7: 4, 10: 1} -> the one below (pools grown 3 -> 4 by twins, 4 -> 5 by F12's calm lines).
+    // {2: 29, 3: 507} -> {2: 28, 3: 508} at LANDING-R2 helper G (the chair's §934.105 ruling (1): DS-GEN-17 PROVISIONED v3, the hospital-only line): DS-GEN-17 PROVISIONED grew 2 -> 3; the mean holds.
     expect((summary.variants / summary.total).toFixed(2), 'mean variants per pool').toBe('3.30');
     expect(Object.fromEntries(summary.variantHistogram), 'variants per pool, exactly').toEqual({
-      2: 29, 3: 507, 4: 128, 5: 27, 6: 13, 7: 4, 10: 1,
+      2: 28, 3: 508, 4: 128, 5: 27, 6: 13, 7: 4, 10: 1,
     });
     const summed = summary.variantHistogram.reduce((total, [size, pools]) => total + size * pools, 0);
-    expect(summed, 'and the histogram sums back to the corpus').toBe(2342);
+    expect(summed, 'and the histogram sums back to the corpus').toBe(2343);
     // PER PIECE: the same count rolled up to the block, which is the unit a reader meets.
     const perBlockTotal = summary.perBlock.reduce((total, [, n]) => total + n, 0);
-    expect(perBlockTotal, 'the per-block roll-up carries every variant once').toBe(2342);
+    expect(perBlockTotal, 'the per-block roll-up carries every variant once').toBe(2343);
     expect(summary.perBlock.length, 'across every block').toBe(68);
   });
 

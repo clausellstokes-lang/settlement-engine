@@ -23,7 +23,7 @@
   "totals": {
     "pools": 709,
     "blocks": 68,
-    "variants": 2342,
+    "variants": 2343,
     "resolved": 341,
     "unresolved": 368,
     "resolvedWithPredicate": 208,
@@ -25621,7 +25621,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 2,
+      "variants": 3,
       "grammars": 1,
       "predicate": [],
       "branchReads": [
@@ -25675,7 +25675,7 @@
       "declares": [],
       "lineDeclares": {
         "institution: granary": 2,
-        "institution: hospital": 1
+        "institution: hospital": 2
       },
       "undeclared": 0,
       "crisisScoped": false
@@ -56329,7 +56329,7 @@
       "subject": "PROVISIONED",
       "fields": [],
       "readingFunction": "institutionsPoolKey",
-      "count": "2 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
