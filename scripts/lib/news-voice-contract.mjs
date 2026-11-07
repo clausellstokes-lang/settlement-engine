@@ -130,8 +130,27 @@ const TOTAL_KEYS = Object.freeze(['identities', 'distinctValues', 'occurrences']
 // ALONE it measures the whole tip, byte for byte (nothing after the ceilings moves the corpus). One home leaves
 // (queued|npc_reform) and three arrive (applied|stressor_birth_rebellion, realm|realm_insurgency, realm|realm_mass_migration).
 // Conservation closes: 270 − 0 = 270. No surviving row flips its voice class; the voice debt stays EMPTY.
+// ── RE-RECORDED 2026-11-07 AT THE PEOPLE CAR'S LANDING (PEOPLE-LAND second seat, ODQ §934.105, under the owner's delegation
+// of 2026-11-06), IN THE SAME ACT AS THE NEWS-HEADLINE CONTRACT AND THE PROSE-FAMILY CONTRACT ─────────────────────────────
+// 270/0/270/44 → 400/1/399/40. ONE CAUSE: THE PEOPLE CAR (one face per institution) changes who the NPCs are, and so re-deals
+// the AO-0 year. ONE CORPUS BUILD PER TREE, every field measured (the throw below disabled in a scratch copy only): at the
+// integration base 262e8b255 the harness reproduces every frozen figure of all three contracts exactly (zero residue). BY
+// FIRST-PARENT POINT:
+//   262e8b255 (base)                       270/0/270/44   the frozen tuple, zero residue
+//   dc655f712 (lane 1, PEOPLE-1 CAST)      379/1/378/39: eight homes leave (applied|legitimacy_pressure, applied|npc_expose,
+//                                          applied|trade_pressure, queued|faction_government_challenge, queued|npc_exploit,
+//                                          queued|npc_mobilize, queued|npc_suppress, queued|trade_pressure) and three arrive
+//                                          (applied|cause_lifecycle, applied|npc_bargain, queued|npc_reform); the year's first
+//                                          retirement
+//   3aa160a70 (lane 2, PEOPLE-2 CAST-DERIVED)   400/1/399/40: applied|trade_pressure returns
+//   0f930ce95 (lane 3, HOOKS) · c7d552370 (lane 4, TIES) · 053283dfd (lane 5A, DISPLAY) · a725df7e4 (lane 5B, EDIT) ·
+//   2981f23f6 (the landing's step 1, the shim out) and the landing tip   400/1/399/40: no movement of the tuple or the homes
+// NET: seven homes out (the eight above less applied|trade_pressure) and three in (applied|cause_lifecycle,
+// applied|npc_bargain, queued|npc_reform). Conservation closes: 400 − 1 = 399. No surviving row flips its voice class (every
+// owned home, applied|npc_bargain arriving and applied|npc_expose leaving included, reads indicative at every point); the
+// voice debt stays EMPTY.
 const CORPUS = Object.freeze({
-  pulseRoots: 12, introductions: 270, retirements: 0, finalEntries: 270, homes: 44,
+  pulseRoots: 12, introductions: 400, retirements: 1, finalEntries: 399, homes: 40,
 });
 
 export const NEWS_VOICE_PROTECTED_SUBSTRATE = Object.freeze([

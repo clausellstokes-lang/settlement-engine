@@ -43,7 +43,11 @@ const LANES = Object.freeze({ mechanicalOutcomes: 8, selectedOutcomes: 24 });
 // CONTRACT (the 3d50676bb door): CORPUS 253/0/253/42 → 270/0/270/44, ONE CAUSE, the density ceilings re-derived from the stamp
 // bands (R-E8, 20c0139c5; the single-variable control and the named homes recorded once, at the voice contract's copy);
 // ADDRESS_TOTALS and RAW_LIVENESS below, each noted. REWRITE_TOTALS and KNOWN_INERT_HEADLINE_REWRITES hold (all 26 inert).
-const CORPUS = Object.freeze({ pulseRoots: 12, introductions: 270, retirements: 0, finalEntries: 270, homes: 44 });
+// ── RE-RECORDED 2026-11-07 AT THE PEOPLE CAR'S LANDING (PEOPLE-LAND second seat, §934.105), IN THE SAME ACT AS THE NEWS-VOICE
+// CONTRACT (the 4e010ec54 door): CORPUS 270/0/270/44 → 400/1/399/40, ONE CAUSE, the people car re-dealing the AO-0 year (the
+// first-parent points and the named homes recorded once, at the voice contract's copy); ADDRESS_TOTALS and RAW_LIVENESS
+// below, each noted. REWRITE_TOTALS and KNOWN_INERT_HEADLINE_REWRITES hold (all 26 inert).
+const CORPUS = Object.freeze({ pulseRoots: 12, introductions: 400, retirements: 1, finalEntries: 399, homes: 40 });
 // ── RE-RECORDED 2026-09-01 BY T8 · SHIFT (ODQ §858 + §860) ─────────────────────────────────────
 // 53/106/14/92/400/544 → 51/102/12/90/393/536. `fields` holds at 2, as it must: the address grammar
 // is still headline-and-summary and nothing was added to it.
@@ -85,7 +89,12 @@ const CORPUS = Object.freeze({ pulseRoots: 12, introductions: 270, retirements: 
 // copy; every row stays indicative.
 // 2026-11-06 (LANDING-7 R-E10; the density ceilings, 20c0139c5 alone): 42/2/84/0/84/365/506 → 44/2/88/0/88/372/540. One home out
 // and three in, named at the voice contract's copy; 32 surviving rows move a count; every row stays indicative.
-const ADDRESS_TOTALS = Object.freeze({ homes: 44, fields: 2, identities: 88, prospectiveIdentities: 0, indicativeIdentities: 88, distinctValues: 372, occurrences: 540 });
+// 2026-11-07 (the people car's landing, §934.105; by first-parent point): 44/2/88/0/88/372/540 → 40/2/80/0/80/596/800. Lane 1
+// dc655f712 39/2/78/0/78/596/758 (eight homes out, three in); lane 2 3aa160a70 40/2/80/0/80/596/800 (applied|trade_pressure
+// returns), digest 5b0965a9; lanes 3, 4, 5A hold; lane 5B a725df7e4 holds every total and moves four rows' counts (digest
+// 5b0965a9 → 77f91347); 2981f23f6 and the tip as now. Net seven homes out and three in, named at the voice contract's copy;
+// 28 surviving rows move a count; every row stays indicative.
+const ADDRESS_TOTALS = Object.freeze({ homes: 40, fields: 2, identities: 80, prospectiveIdentities: 0, indicativeIdentities: 80, distinctValues: 596, occurrences: 800 });
 const RAW_LIVENESS = Object.freeze({
   pulseRecords: 12,
   lanes: Object.freeze([
@@ -112,7 +121,11 @@ const RAW_LIVENESS = Object.freeze({
     // still equals the selected lane's (81 = 81).
     // 2026-11-06 (LANDING-7 R-E10; the density ceilings, 20c0139c5 alone): mechanical 53/24 → 45/21, selected 160/81 → 166/82,
     // union 213/81 → 211/82. All indicative; the union's distinct count still equals the selected lane's (82 = 82).
-    Object.freeze({ field: 'mechanicalOutcomes', capPerPulse: 8, headlineOccurrences: 45, distinctValues: 21, prospectiveOccurrences: 0, prospectiveDistinctValues: 0, indicativeOccurrences: 45, indicativeDistinctValues: 21 }),
+    // 2026-11-07 (the people car's landing, §934.105; by first-parent point): mechanical 45/21 → 49/26, selected 166/82 →
+    // 165/96, union 211/82 → 214/96. Lane 1 dc655f712 49/26, 165/96, 214/96; lane 2 3aa160a70 mechanical 50/27, union 215/96;
+    // lanes 3, 4, 5A hold; lane 5B a725df7e4 mechanical 49/26, union 214/96; 2981f23f6 and the tip as now. All indicative; the
+    // union's distinct count still equals the selected lane's (96 = 96).
+    Object.freeze({ field: 'mechanicalOutcomes', capPerPulse: 8, headlineOccurrences: 49, distinctValues: 26, prospectiveOccurrences: 0, prospectiveDistinctValues: 0, indicativeOccurrences: 49, indicativeDistinctValues: 26 }),
     // ⭐ THE CONTROL THAT HELD FOR TWO RE-RECORDS NOW MOVES, AND THAT IS THE POINT OF KEEPING IT.
     // T8 recorded this lane byte-identical twice running because the corruption work never authors
     // into it. WAR LANDING (§876): 151/80/95/66/56/14 → 153/78/95/63/58/15, and the shape names the
@@ -123,7 +136,7 @@ const RAW_LIVENESS = Object.freeze({
     // reach, and the first cause in three re-records that does.
     // 2026-10-01 (the urban band + the druid rulings): 154/78/96/63/58/15 → 155/75/93/59/62/16.
     // 2026-10-02 (THE VOICE PROGRAM wave 1): every persisted headline in this lane is now a deed; its prospective half is zero.
-    Object.freeze({ field: 'selectedOutcomes', capPerPulse: 24, headlineOccurrences: 166, distinctValues: 82, prospectiveOccurrences: 0, prospectiveDistinctValues: 0, indicativeOccurrences: 166, indicativeDistinctValues: 82 }),
+    Object.freeze({ field: 'selectedOutcomes', capPerPulse: 24, headlineOccurrences: 165, distinctValues: 96, prospectiveOccurrences: 0, prospectiveDistinctValues: 0, indicativeOccurrences: 165, indicativeDistinctValues: 96 }),
   ]),
   // TE36: the union follows the mechanical lane alone — 228 → 207 (−21, the same 21),
   // 83 → 80 distinct, 168 → 147 prospective. The indicative halves do not move at all.
@@ -140,7 +153,7 @@ const RAW_LIVENESS = Object.freeze({
   // 2026-10-01 (the urban band + the druid rulings): 207/78/145/63/62/15 → 204/75/137/59/67/16, and THE STRUCTURAL FACT SURVIVES:
   // union.distinctValues equals the selected lane's (75 = 75), so the mechanical spellings are still a subset of the public lane's.
   // 2026-10-02 (THE VOICE PROGRAM wave 1): the union's prospective half is zero for the first time.
-  union: Object.freeze({ headlineOccurrences: 211, distinctValues: 82, prospectiveOccurrences: 0, prospectiveDistinctValues: 0, indicativeOccurrences: 211, indicativeDistinctValues: 82 }),
+  union: Object.freeze({ headlineOccurrences: 214, distinctValues: 96, prospectiveOccurrences: 0, prospectiveDistinctValues: 0, indicativeOccurrences: 214, indicativeDistinctValues: 96 }),
 });
 // TE36 (ODQ §271): 17/9 → 16/10 and 69/168 → 66/147. THE RULE COUNT IS UNCHANGED AT 26 —
 // no rewrite rule was added or deleted; one CROSSED from active to inert because the corpus

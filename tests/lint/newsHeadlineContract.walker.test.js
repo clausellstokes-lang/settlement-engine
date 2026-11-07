@@ -115,7 +115,7 @@ describe('complete Wizard News address and headline rewrite contract', () => {
     expect(overlapFields.consequenceOutcomes.filter(isStateOnlyOutcome)).toHaveLength(12);
   });
 
-  it('A2 freezes all 88 address rows and their canonical digest', () => {
+  it('A2 freezes all 80 address rows and their canonical digest', () => {
     expect(compareNewsAddressRows(addressRows, baseline.addressTotality.rows)).toBe(true);
     expect(addressRowsSha256(addressRows)).toBe(baseline.addressTotality.rowsSha256);
     // T8 · SHIFT (§858 + §860): 106 → 102 identities over 53 → 51 homes. The two homes that leave
@@ -138,7 +138,10 @@ describe('complete Wizard News address and headline rewrite contract', () => {
     // 42/2/84/0/84/365/506; ten homes out and seven in, named at news-voice-contract.mjs's RE-RECORDED block. Every row stays indicative.
     // 2026-11-06 (LANDING-7 R-E10, the density ceilings re-derived from the stamp bands, 20c0139c5 alone): 42/2/84/0/84/365/506 →
     // 44/2/88/0/88/372/540; one home out and three in, named at news-voice-contract.mjs's RE-RECORDED block. Every row stays indicative.
-    expect(baseline.addressTotality.totals).toEqual({ homes: 44, fields: 2, identities: 88, prospectiveIdentities: 0, indicativeIdentities: 88, distinctValues: 372, occurrences: 540 });
+    // 2026-11-07 (the people car's landing, PEOPLE-LAND second seat, §934.105; by first-parent point: lane 1 dc655f712 39/2/78/0/78/596/758,
+    // lane 2 3aa160a70 as now, lane 5B a725df7e4 four rows' counts and the digest only): 44/2/88/0/88/372/540 → 40/2/80/0/80/596/800; net seven homes
+    // out and three in, named at news-voice-contract.mjs's RE-RECORDED block. Every row stays indicative.
+    expect(baseline.addressTotality.totals).toEqual({ homes: 40, fields: 2, identities: 80, prospectiveIdentities: 0, indicativeIdentities: 80, distinctValues: 596, occurrences: 800 });
   });
 
   it('A3 freezes both raw lanes and all 26 exact rewrite counts', () => {

@@ -179,16 +179,30 @@ const EXPECTED_ROOTS = new Map([
 // THE SHAPE HOLDS: 59 identities, none added and none removed; 42 rows move a count. Families: pulseHistory 46/952/5051 ->
 // 46/957/5042, regionalLog 2/4/157 -> 2/4/189; chronicle and timeline hold. Totals 59/971/5227 -> 59/976/5250; bytes
 // 7665 -> 7669; digest c24ac7a8 -> 7c53b1cd. The regional root reach 0..11 holds.
+// ── RE-RECORDED 2026-11-07 AT THE PEOPLE CAR'S LANDING (PEOPLE-LAND second seat, §934.105), IN THE SAME ACT AS THE NEWS-VOICE
+// AND NEWS-HEADLINE CONTRACTS (the 4e010ec54 door; ONE corpus build per tree measured with this library's own functions,
+// which reproduces every frozen figure below EXACTLY at the integration base 262e8b255). ONE CAUSE: THE PEOPLE CAR (one face
+// per institution) re-dealing the AO-0 year. By first-parent point (scalarRows; wizardNews final/accumulated/unique; regional
+// events; identities/distinct/occurrences; bytes; digest):
+//   dc655f712 lane 1 PEOPLE-1 CAST   26891 -> 36009; 378/2394/379; 86/86 -> 80/80; 59/976/5250 -> 58/1040/5495; 7669 -> 7523;
+//                                    48bcb128. ONE IDENTITY LEAVES: pulseHistory[].consequenceOutcomes[].proposalPayload.reason.
+//   3aa160a70 lane 2                 37487; 399/2518/400; 81/81; 58/1048/5526; 7523; 7e783477
+//   0f930ce95 lane 3 HOOKS · c7d552370 lane 4 TIES · 053283dfd lane 5A DISPLAY   no movement
+//   a725df7e4 lane 5B EDIT           37469; 58/1046/5508; 7523; afddb136
+//   2981f23f6 (the landing's step 1, the shim out) and the landing tip   as now
+// Families: pulseHistory 46/957/5042 -> 45/1027/5331, regionalLog 2/4/189 -> 2/4/158; chronicle and timeline hold. Totals
+// 59/976/5250 -> 58/1046/5508 (one identity out, none in; 39 surviving rows move a count); bytes 7669 -> 7523; digest
+// 7c53b1cd -> afddb136. The regional root reach 0..11 holds.
 const EXPECTED_CORPUS = Object.freeze({
-  scalarRows: 26891, canonEventLogEntries: 1, wizardNewsFinalEntries: 270,
-  wizardNewsAccumulatedEntries: 1615, wizardNewsUnique: 270, pulseHistory: 12,
-  regionalEventLog: 86, regionalEventLogUnique: 86, aiChronicle: 1,
+  scalarRows: 37469, canonEventLogEntries: 1, wizardNewsFinalEntries: 399,
+  wizardNewsAccumulatedEntries: 2518, wizardNewsUnique: 400, pulseHistory: 12,
+  regionalEventLog: 81, regionalEventLogUnique: 81, aiChronicle: 1,
 });
 const EXPECTED_REGIONAL_ROOTS = Object.freeze([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
 const EXPECTED_FAMILY_TOTALS = Object.freeze([
   { family: 'chronicle', identities: 7, distinctValues: 7, occurrences: 7 },
-  { family: 'pulseHistory', identities: 46, distinctValues: 957, occurrences: 5042 },
-  { family: 'regionalLog', identities: 2, distinctValues: 4, occurrences: 189 },
+  { family: 'pulseHistory', identities: 45, distinctValues: 1027, occurrences: 5331 },
+  { family: 'regionalLog', identities: 2, distinctValues: 4, occurrences: 158 },
   { family: 'timeline', identities: 4, distinctValues: 8, occurrences: 12 },
 ]);
 // 2026-10-02 (THE VOICE PROGRAM wave 1, the owner: "Updates like these need to reflect actions not to potential"):
@@ -197,9 +211,9 @@ const EXPECTED_FAMILY_TOTALS = Object.freeze([
 // (+6, +7, +9: both towns named, a deed per kind) and the three SUMMARY rows shrink (−1, −3, −1: the NPC line now states
 // the aim alone, its move having gone to the headline). EXPECTED_ROWS_BYTES holds at 8000 by digit-width coincidence again;
 // the digest below is the pin that convicts.
-const EXPECTED_TOTALS = Object.freeze({ families: 4, identities: 59, distinctValues: 976, occurrences: 5250 });
-const EXPECTED_ROWS_BYTES = 7669;
-const EXPECTED_ROWS_SHA256 = '7c53b1cd8f181b7080021bb9c89074bea84a6205cab29ed0b6e491bb8c332832';
+const EXPECTED_TOTALS = Object.freeze({ families: 4, identities: 58, distinctValues: 1046, occurrences: 5508 });
+const EXPECTED_ROWS_BYTES = 7523;
+const EXPECTED_ROWS_SHA256 = 'afddb136c9c6dab4f19ed17fef287e7ec1ef76ccded7e7f5578081c2407f9ce3';
 const codepoint = (left, right) => (left < right ? -1 : left > right ? 1 : 0);
 const same = (left, right) => JSON.stringify(left) === JSON.stringify(right);
 const identityOf = (row) => `${row.family}\0${row.path}\0${row.field}`;
