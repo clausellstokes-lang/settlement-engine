@@ -139,3 +139,24 @@ The golden fixtures, the freeze register and the fence/herald/prose suites also 
    - Components: `rung2-01..05` and the integration-side moves since 0b. None are measured: W0-CLOSE and the five-seat merges move no byte.
 2. No other mover.
 3. **The car composition at the step-1 merge commit.** Components: the car's seven lane records (`people-1`, `-2`, `-3`, `-4`, `-5a`, `-5b`, shim-out). 0a and 0b are already on the chain.
+
+### 0.6 The chair's rulings on phase A (2026-11-07, 20:02 UTC)
+
+The chair accepted phase A as measured.
+
+- **SC-0, accepted.**
+  - The rung-2 composition is staged at `572c15018`. The record names both commits: the cause event is the merge `10b8f09b4`, and the stage commit is `572c15018`. The record gives the reason in one sentence: MERGE-R2's composition commit took the rung-2 side's freeze-register and fence-suite bytes without a signature, and this record is that signature.
+  - The composition record restores the five W0 movement blocks (w0-01..05) in the fence suite's history comment, through the door's transplant, with its own block after them. The order is 0a, 0b, w0-01..05 as components, the rung-2 composition, then the car's.
+  - No other door path is hand-edited.
+- **SC-1, retire R12's generator half.** That is `fitFactionRoster` in the pipeline and in `assembleSettlement`, and `factionRoleFit.js`'s rewrite. The cause: superseded by construction (one face per face-bearing institution, role = the institution's title (M-1b), memberships born by rank).
+  - The reader (readerBattery `faction-role-fit`): retire it if the car's suites already pin what it checks (cause "superseded by construction; covered by <suite>"). Otherwise port it to `memberships[]` as a reader only.
+  - Any CENSUS-4 count or ratchet that tallied R12 is re-keyed with the cause. R12's fate is named in the composition table.
+- **SC-2, superseded.**
+  - R9's thorp second role contradicts M-1b and the charter: one NPC per institution; a thorp's two faces are two people. `guildTitleName` is superseded by the census titles and the honorific pools (R-P9). Both are retired with the cause named.
+  - The wiring census is then measured. A pool whose reads were R9's is re-keyed to the car's shape where the car holds the same fact. Otherwise it is declared UNREACHABLE with the cause.
+- **The five silent breaks are composed in step 1 as listed:**
+  1. `drawPersonHook` reads the hook lines from where the rung-2 landing moved them, never from a restored `inlandHookLines.js`.
+  2. `.text` is read, and `needs` is honoured through the held-set refusal filter (MERGE-R2's ruling).
+  3. `ties.js` passes the facts; a tie draw that fails closed is pinned as a defect.
+  4. The factionAffiliation readers are re-pointed to memberships. The car's legacy-reader walker is GREEN at the merged tip, with `fpz-list.json` unchanged unless the read is the simulation's (M-6).
+  5. The two tests are re-keyed with the cause.
