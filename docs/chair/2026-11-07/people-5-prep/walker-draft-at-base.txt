@@ -1,0 +1,151 @@
+# noLegacyFactionReaders draft at base 1031233a4: the violations PEOPLE-5 retires (file:line name kind [receiver])
+src/components/OutputContainer.jsx:561	factions	read	rawSettlement
+src/components/dossier/CascadePreviewPanel.jsx:288	factions	read	preview.downstreamCounts
+src/components/dossier/SettlementWorkbench.jsx:109	factionAffiliation	read	raw
+src/components/library/LibraryToolbar.jsx:105	factions	read	s.settlement
+src/components/library/LibraryToolbar.jsx:106	factions	read	s.settlement
+src/components/new/SummaryTab.jsx:122	factions	destructure	r
+src/components/new/npcComponents.jsx:85	factionAffiliation	read	npc
+src/components/new/npcComponents.jsx:337	factionAffiliation	read	npc
+src/components/new/tabs/NPCsTab.jsx:74	factionAffiliation	read	n
+src/components/new/tabs/power/PowerStrata.jsx:298	factionAffiliation	read	npc
+src/components/settlement/EventComposer.jsx:215	factionAffiliation	read	npc
+src/components/settlementDetail/SettlementDetailEditNames.jsx:32	factions	read	settlement
+src/components/settlementDetail/SettlementDetailEditNames.jsx:37	dominantCategory	read	fac
+src/components/settlementDetail/SettlementDetailEditNames.jsx:38	dominantCategory	read	fac
+src/data/foundingSeeds.js:104	structuralRank	path-string	
+src/domain/ai/personaSlicer.js:159	factionAffiliation	read	e
+src/domain/ai/personaSlicer.js:161	factions	read	home
+src/domain/ai/suggestedQuestions.js:40	factions	read	settlement
+src/domain/coherence/crisisCastFindings.js:61	factionAffiliation	read	npcs.find((n) => !!n && (str(n.id) || str(n.name)) === id)
+src/domain/coherence/hookTruthRecord.js:51	factions	read	record
+src/domain/coherence/hookTruthRecord.js:53	members	read	faction
+src/domain/coherence/hookTruthRecord.js:187	factions	read	record
+src/domain/coherence/hookTruthRecord.js:189	factions	read	record
+src/domain/coherence/hookTruthRecord.js:191	members	read	entry
+src/domain/coherence/hookTruthRecord.js:192	members	read	entry
+src/domain/coherence/hookTruthRecord.js:193	members	read	entry
+src/domain/coherence/readerBattery.js:320	factionAffiliation	read	a.npc
+src/domain/coherence/readerBattery.js:320	factionAffiliation	read	b.npc
+src/domain/content/contentSampleCategoryFixtures.js:268	factions	read	root
+src/domain/content/settlementContentProvenance.js:216	factions	read	value
+src/domain/crisis/crisisCast.js:403	factionAffiliation	read	n
+src/domain/crisis/crisisCast.js:665	factionAffiliation	read	n
+src/domain/crisis/crisisCast.js:684	factionAffiliation	read	roster.find((n) => (str(n.id) || str(n.name)) === r.id)
+src/domain/crisis/crisisCast.js:746	factionAffiliation	read	n
+src/domain/crisis/crisisCast.js:879	factionAffiliation	read	rosterOf(settlement).find((n) => (str(n.id) || str(n.name)) === b.id)
+src/domain/crisis/crisisHooks.js:101	factionAffiliation	read	npc
+src/domain/customContent.js:388	factionAffiliation	read	rawEntity
+src/domain/density/densityRungs.js:92	densityRungRole	string	
+src/domain/display/dossierViewModel.js:510	factions	read	s
+src/domain/display/galleryVeil.js:151	factionAffiliation	string	
+src/domain/display/galleryVeil.js:151	secondaryAffiliation	string	
+src/domain/display/galleryVeil.js:155	factionGoal	string	
+src/domain/display/galleryVeil.js:159	linkedFactionIds	string	
+src/domain/display/galleryVeil.js:729	secondaryAffiliation	string	
+src/domain/display/galleryVeil.js:729	factionAffiliation	string	
+src/domain/display/publicSafe.js:124	factionAffiliation	string	
+src/domain/display/publicSafe.js:124	secondaryAffiliation	string	
+src/domain/display/publicSafe.js:222	factionAffiliation	read	npc
+src/domain/display/publicSafe.js:223	secondaryAffiliation	read	npc
+src/domain/districtProfile.js:260	factions	read	settlement
+src/domain/dossier/dossierSearch.js:275	factionAffiliation	read	npc
+src/domain/dossier/dossierSearch.js:327	factions	read	view
+src/domain/dossier/entityLinks.js:408	factions	read	settlement
+src/domain/dossier/plotHooks.js:407	factionAffiliation	read	npc
+src/domain/edit/mergeConsequence.js:88	factions	read	merged
+src/domain/edit/mergeConsequence.js:96	members	read	faction
+src/domain/edit/mergeConsequence.js:97	members	read	faction
+src/domain/entities/npcs.js:170	linkedFactionIds	read	input
+src/domain/entities/npcs.js:179	linkedFactionIds	read	input
+src/domain/entities/npcs.js:240	linkedFactionIds	read	npc
+src/domain/entities/npcs.js:302	linkedFactionIds	read	npc
+src/domain/entities/npcs.js:303	linkedFactionIds	read	npc
+src/domain/entities/successors.js:58	factions	read	settlement
+src/domain/entities/successors.js:59	linkedFactionIds	read	outgoing
+src/domain/entities/successors.js:110	linkedFactionIds	read	candidate
+src/domain/factionProfile.js:351	factions	read	settlement
+src/domain/factionRefs.js:104	linkedFactionIds	read	entity
+src/domain/factionRename.js:227	factionAffiliation	string	
+src/domain/factionRename.js:229	secondaryAffiliation	string	
+src/domain/factionRename.js:231	linkedFactionIds	string	
+src/domain/factionRename.js:249	factionGoal	string	
+src/domain/factionRename.js:738	factions	read	settlement
+src/domain/factionRename.js:913	factions	read	settlement
+src/domain/factionRename.js:922	members	read	group
+src/domain/factionRename.js:1125	factions	read	settlement
+src/domain/factionRename.js:1127	members	read	group
+src/domain/factions/factionCatalog.js:57	factions	read	settlement
+src/domain/institutionRename.js:116	secondaryAffiliation	string	
+src/domain/institutionRename.js:222	factionAffiliation	path-string	
+src/domain/institutionRename.js:237	factionAffiliation	path-string	
+src/domain/intent/opVocabulary.js:182	factions	read	s
+src/domain/normalizeSettlement.js:103	factions	read	holder
+src/domain/npc/npcOps.js:72	factionAffiliation	string	
+src/domain/npc/npcOps.js:73	linkedFactionIds	string	
+src/domain/npcProfile.js:558	structuralRank	read	npc
+src/domain/npcProfile.js:572	factionAffiliation	read	npc
+src/domain/pendingEditIntents.js:84	factionAffiliation	string	
+src/domain/pendingEditIntents.js:88	linkedFactionIds	string	
+src/domain/pendingEditIntents.js:90	linkedFactionIds	string	
+src/domain/pendingEditsPreview.js:422	factions	read	settlement
+src/domain/pendingEditsPreview.js:423	factions	read	settlement
+src/domain/regenerationMode.js:189	factions	read	holder
+src/domain/relationships/neighbourBackLink.js:200	factions	read	settlement
+src/domain/relationships/neighbourBackLink.js:203	factions	read	nr
+src/domain/state/deriveSystemState.js:199	factions	read	s
+src/domain/tableLedger.js:308	factions	read	s
+src/generators/crossSettlementConflicts.js:180	factions	read	settlement
+src/generators/crossSettlementConflicts.js:268	dominantCategory	read	fa
+src/generators/crossSettlementConflicts.js:270	dominantCategory	read	fb
+src/generators/crossSettlementConflicts.js:284	dominantCategory	read	bestA
+src/generators/crossSettlementConflicts.js:285	dominantCategory	read	bestB
+src/generators/crossSettlementConflicts.js:291	dominantCategory	read	bestB
+src/generators/crossSettlementConflicts.js:292	dominantCategory	read	bestA
+src/generators/density/applyDensityLaw.js:490	factionAffiliation	read	npc
+src/generators/density/titularSuccession.js:189	factionRosterOf	call	
+src/generators/density/titularSuccession.js:243	factionRosterOf	call	
+src/generators/factionRoles.js:323	factions	read	settlement
+src/generators/factionRoles.js:342	factionAffiliation	read	npc
+src/generators/generateSettlementPipeline.js:449	factions	read	freshSettlement
+src/generators/generationCoherence.js:70	factions	read	settlement
+src/generators/generationCoherence.js:71	factions	read	settlement
+src/generators/generationCoherence.js:75	factions	read	settlement
+src/generators/generationReceiptJudgments.js:157	factionAffiliation	read	npc
+src/generators/generationReceiptJudgments.js:158	factionAffiliation	read	npc
+src/generators/generationReceiptJudgments.js:161	factionAffiliation	path-string	
+src/generators/generationReceiptJudgments.js:163	factionAffiliation	read	npc
+src/generators/generationReceiptJudgments.js:168	factions	read	settlement
+src/generators/generationReceiptJudgments.js:177	members	read	faction
+src/generators/narrativeGenerator.js:939	members	read	f
+src/generators/narrativeGenerator.js:940	members	read	f
+src/generators/narrativeGenerator.js:1034	factions	read	settlement
+src/generators/narrativeGenerator.js:1035	factions	read	settlement
+src/generators/neighbourGenerator.js:123	factions	read	neighbour
+src/generators/neighbourGenerator.js:186	factions	read	neighbour
+src/generators/npcStructure.js:39	factionAffiliation	read	npc
+src/generators/npcStructure.js:398	factionAffiliation	read	npc
+src/generators/power/conflicts.js:68	members	read	faction
+src/generators/power/factionGrouping.js:37	factionAffiliation	read	npc
+src/generators/recordBatteryFindings.js:78	factions	read	settlement
+src/generators/steps/assembleSettlement.js:139	factions	read	rawNeighbour
+src/generators/steps/assembleSettlement.js:351	factions	read	settlement
+src/generators/steps/corruptionPass.js:78	secondaryAffiliation	read	npc
+src/lib/editFingerprint.js:63	factions	read	dc
+src/lib/instantWorld/factionDedup.js:202	factions	read	s
+src/lib/instantWorld/factionDedup.js:213	factions	read	s
+src/lib/instantWorld/factionDedup.js:217	dominantCategory	read	f
+src/lib/structuralFingerprint.js:103	structuralRank	string	
+src/pdf/lib/viewModel.js:186	factions	read	active
+src/pdf/lib/viewModel.js:201	factions	read	s
+src/pdf/lib/viewModel.js:249	factionAffiliation	read	npc
+src/pdf/lib/viewModel.js:397	factions	read	s
+src/pdf/lib/viewModel.js:454	factions	read	s
+src/pdf/lib/viewModel.js:724	factionAffiliation	read	n
+src/pdf/lib/viewModel.js:733	factionAffiliation	read	n
+src/pdf/lib/viewModel.js:734	factionAffiliation	read	n
+src/pdf/lib/viewModel.js:750	factions	read	s
+src/pdf/lib/viewModel.js:840	factions	read	s
+src/pdf/lib/viewModelBodySlices.js:156	factions	read	s
+src/store/settlementPendingEditWriters.js:38	factionAffiliation	string	
+src/store/settlementPendingEditWriters.js:42	linkedFactionIds	string	
