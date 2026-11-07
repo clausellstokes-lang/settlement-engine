@@ -6,7 +6,7 @@
 
 - **Base.** `origin/lane/people-234-merge-2026-11-07` at `c7d552370` (lanes 1+2+3+4). The seat branched from it in the shared worktree, which was a clean detached HEAD at that sha, with `git switch -c`. `npm ci` exited 0. The clone was unshallowed.
 - **Lane 5A (`3d76fb058`): MERGED** at `053283dfd`, with no conflicts. 5A was cut from `c7d552370` itself, so the merged tree is byte-identical to 5A's tip (tree `8c8ab7a40`, the same at both).
-- **Lane 5B (`32dfacaee`, its tip at the seat's start and still its tip at the end): ABORTED.** 10 files conflict. Two of them are behaviour conflicts the one-writer principle cannot settle without editing the other lane's source (§3).
+- **Lane 5B (`32dfacaee` at the seat's start): ABORTED.** 5B then pushed `f24623a9f`, a docs-only commit to its record. A dry run (`git merge-tree`) against this tip gives the same 11 conflicting paths (its roster note adds `.source-citation-baseline.json`). Its `pendingEditsPreview.js:423` still writes `downstreamCounts.factions`, and its `neighbourBackLink.js:205` still copies `partner.factions`, so the abort stands for that tip too. 10 files conflict. Two of them are behaviour conflicts the one-writer principle cannot settle without editing the other lane's source (§3).
 - **The tip:** `lane/people-5ab-merge-2026-11-07` holds the 234 tip + 5A + this record and its roster step.
 
 ## 2. The merge of 5A (`053283dfd`)
