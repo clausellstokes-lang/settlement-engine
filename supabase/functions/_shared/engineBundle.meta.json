@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-11-07T01:20:05.924Z",
+  "generatedAt": "2026-11-07T05:35:31.481Z",
   "entry": "src/engine/serviceEntry.js",
-  "sourceHash": "778502e3086a3a71",
-  "engineVersion": "2a1127e4b9c24fe1",
-  "builtFromCommit": "a62c5081dd416abfd57e322602344fdf6b44da28",
+  "sourceHash": "6ab0fc0ff2ce6b1c",
+  "engineVersion": "1da6e02ceef82924",
+  "builtFromCommit": "316b67120c0dd97bbba033ab54b1887eebcaf913",
   "inputs": [
     "node_modules/seedrandom/seedrandom.js",
     "src/data/arrivalProse.js",
@@ -127,6 +127,7 @@
     "src/domain/magicLedger.js",
     "src/domain/magicReliance.js",
     "src/domain/marketInstitution.js",
+    "src/domain/migrationDirection.js",
     "src/domain/normalizeSettlement.js",
     "src/domain/priorityBands.js",
     "src/domain/prosperityRank.js",

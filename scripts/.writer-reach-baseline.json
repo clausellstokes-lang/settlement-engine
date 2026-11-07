@@ -8,7 +8,7 @@
   "The reviewable slice is computed by RULE (reviewableDark), never hand-listed."
  ],
  "schema": 1,
- "frozenAtSha": "b09db408602178f4e50001fba4af974567487be8",
+ "frozenAtSha": "316b67120c0dd97bbba033ab54b1887eebcaf913",
  "charter": "§18.1 WRWALKER Car 1 (HORIZON) — chair-signed vetoably at the INSTR-WRW pre-stage",
  "minRows": 40,
  "corpusMeta": {
@@ -22,9 +22,9 @@
   "originCount": 8543,
   "transitionCount": 14426
  },
- "shapesDigest": "782dcd97c1f8dc63870232f1660c255dfb5f6065c2cf0496e3e66b45823d9d03",
- "detectorDigest": "1dcced45ace570bc310f0b88ff72b4848a7ea75385d0ae883a2a72b46723e2e4",
- "verdictDigest": "ac48c453d28890e8747f6136704555d3bc7d86c61f2e3dc6a13c2e7ad75effab",
+ "shapesDigest": "312484a84b858223dff3b627dd9a46a643f7515327706cfcd13c5043948bb01d",
+ "detectorDigest": "c84dee54aeeb208396176095e3610ee74ace6a7bd569a85f0610665a36c4915e",
+ "verdictDigest": "53926477c6ba89aea0848e45fbadd6da95d48dddbded8c81566b5140ecda02d0",
  "surfaceRoots": {
   "web": [
    "src/main.jsx"
@@ -73,7 +73,7 @@
  ],
  "closureSizes": {
   "web-display": 750,
-  "web-transitive": 958,
+  "web-transitive": 962,
   "dossier-pdf": 465,
   "campaign-pdf": 104,
   "world-book": 121,
@@ -84,26 +84,26 @@
  "population": {
   "judged": 6691,
   "lit": 592,
-  "litName": 4823,
-  "dark": 1276,
+  "litName": 4824,
+  "dark": 1275,
   "thinKeys": 8818,
   "thinShapes": 904,
   "knownShapes": 355
  },
  "scanStats": {
-  "files": 1709,
-  "sites": 40505,
-  "propRead": 38341,
+  "files": 1713,
+  "sites": 40537,
+  "propRead": 38365,
   "elemRead": 0,
-  "destructure": 2151,
+  "destructure": 2159,
   "inOp": 13,
-  "rGrades": 6243,
-  "nGrades": 979601,
-  "resolvedReceivers": 7018
+  "rGrades": 6246,
+  "nGrades": 980930,
+  "resolvedReceivers": 7021
  },
  "registerDigest": "44edd67a4f8bf47e507539ef6fe2e1a5da75ec18197a02a42fff91d213ba9520",
  "pendingSurfaceCeiling": 3,
- "reviewableDarkCount": 497,
+ "reviewableDarkCount": 496,
  "darkUnregistered": [
   {
    "identity": "Bulk grain and flour on reasons",
@@ -181,7 +181,7 @@
    "identity": "_timePressure on factions",
    "key": "_timePressure",
    "shape": "factions",
-   "rows": 8720
+   "rows": 8719
   },
   {
    "identity": "accusedNid on osr007",
@@ -1789,73 +1789,73 @@
    "identity": "fac.arcane_orders on factions",
    "key": "fac.arcane_orders",
    "shape": "factions",
-   "rows": 8720
+   "rows": 8719
   },
   {
    "identity": "fac.craft_guilds on factions",
    "key": "fac.craft_guilds",
    "shape": "factions",
-   "rows": 8720
+   "rows": 8719
   },
   {
    "identity": "fac.elder_council on factions",
    "key": "fac.elder_council",
    "shape": "factions",
-   "rows": 8720
+   "rows": 8719
   },
   {
    "identity": "fac.elected_reeve on factions",
    "key": "fac.elected_reeve",
    "shape": "factions",
-   "rows": 8720
+   "rows": 8719
   },
   {
    "identity": "fac.landed_gentry on factions",
    "key": "fac.landed_gentry",
    "shape": "factions",
-   "rows": 8720
+   "rows": 8719
   },
   {
    "identity": "fac.merchant_guild_council on factions",
    "key": "fac.merchant_guild_council",
    "shape": "factions",
-   "rows": 8720
+   "rows": 8719
   },
   {
    "identity": "fac.merchant_guilds on factions",
    "key": "fac.merchant_guilds",
    "shape": "factions",
-   "rows": 8720
+   "rows": 8719
   },
   {
    "identity": "fac.military_guard on factions",
    "key": "fac.military_guard",
    "shape": "factions",
-   "rows": 8720
+   "rows": 8719
   },
   {
    "identity": "fac.noble_families on factions",
    "key": "fac.noble_families",
    "shape": "factions",
-   "rows": 8720
+   "rows": 8719
   },
   {
    "identity": "fac.religious_authorities on factions",
    "key": "fac.religious_authorities",
    "shape": "factions",
-   "rows": 8720
+   "rows": 8719
   },
   {
    "identity": "fac.thieves_guild on factions",
    "key": "fac.thieves_guild",
    "shape": "factions",
-   "rows": 8720
+   "rows": 8719
   },
   {
    "identity": "fac.town_council on factions",
    "key": "fac.town_council",
    "shape": "factions",
-   "rows": 8720
+   "rows": 8719
   },
   {
    "identity": "factionCaptureEvents on pulseHistory",
@@ -2078,12 +2078,6 @@
    "key": "gemstone_deposits",
    "shape": "depletedSince",
    "rows": 450
-  },
-  {
-   "identity": "gemstones on reasons",
-   "key": "gemstones",
-   "shape": "reasons",
-   "rows": 4408
   },
   {
    "identity": "glass sand on reasons",
@@ -5617,7 +5611,7 @@
    "identity": "publicTrust on factions",
    "key": "publicTrust",
    "shape": "factions",
-   "rows": 8720
+   "rows": 8719
   },
   {
    "identity": "purposeKind on npcs",
@@ -6997,7 +6991,7 @@
    "identity": "updatedByPulse on factions",
    "key": "updatedByPulse",
    "shape": "factions",
-   "rows": 8720
+   "rows": 8719
   },
   {
    "identity": "upstreamWeak on activeChains",
@@ -7483,7 +7477,7 @@
    "identity": "wealth on factions",
    "key": "wealth",
    "shape": "factions",
-   "rows": 8720
+   "rows": 8719
   },
   {
    "identity": "wetland on byTerrain",
@@ -8476,6 +8470,7 @@
   "chain on gaps": "campaign-pdf=N dossier-pdf=N foundry=N web-display=R web-transitive=N world-book=N",
   "impact on gaps": "dossier-pdf=N web-display=R web-transitive=N",
   "institution on gaps": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
+  "kind on gaps": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
   "missing on gaps": "dossier-pdf=N web-display=R web-transitive=N",
   "severity on gaps": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=R web-transitive=N world-book=N",
   "baseChance on garrison": "campaign-pdf=N dossier-pdf=N foundry=N web-transitive=N world-book=N",
@@ -13440,7 +13435,6 @@
   "desert_salt on reasons": "",
   "economic_strangulation on reasons": "",
   "exhaustion on reasons": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
-  "gemstones on reasons": "",
   "glass sand on reasons": "",
   "glass_sand on reasons": "",
   "gold/silver ore on reasons": "",
