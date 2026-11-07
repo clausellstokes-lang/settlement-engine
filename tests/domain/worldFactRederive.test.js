@@ -450,10 +450,13 @@ describe('EM-B2b — world facts by consequence: the route, the refusals and the
     // Record 5b, PEOPLE-5B EDIT (docs/shift-records/2026-11-07-people-5b-edit.json), from the stage at a725df7e4: the
     // generator master 47e48e47.. -> 8dc527fd.. (525 of 525 (thorp 84, hamlet 84, village 84, town 105, city 84,
     // metropolis 84) rows); the prose manifest did not move.
+    // Record 6, PEOPLE-LAND SHIM OUT (docs/shift-records/2026-11-07-people-land-shim-out.json), from the stage at
+    // 2981f23f6: the generator master 8dc527fd.. -> c7c11b0b.. (180 of 525 (thorp 12, hamlet 84, village 72, city 12)
+    // rows); the prose manifest 86517b75.. -> ffc84348.. (312 of 1,050 rows).
     expect(shaOfFile(GOLDEN), 'tests/fixtures/generator-golden-master.json moved')
-      .toBe('8dc527fd32b88fc0152badfe939e2d52f978af34c0fa6ba6bf9a516a24434f96');
+      .toBe('c7c11b0b81376930b074c1145bb40071a9b632848fae453361223e8be48db007');
     expect(shaOfFile(PROSE_GOLDEN), 'tests/fixtures/dossier-prose-manifest-golden.json moved')
-      .toBe('86517b757f3c5e25a415ae9ab6f7ef81d07d950a0b7da3e9415d2eeac8e0df4d');
+      .toBe('ffc84348c4e30aa13abe28590c343984b606106e6ef0dd697924979417706a30');
 
     // AND THE REASON THEY CANNOT MOVE: fresh generation passes no layer, so no world fact is ever
     // routed and `config′` is `config` itself. Measured against the committed manifest.
