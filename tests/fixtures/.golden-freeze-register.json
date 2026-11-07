@@ -288,7 +288,7 @@
         "PRE_COUPLING_CORPUS_SHA"
       ],
       "frozenConstants": null,
-      "sha256": "8e60085803c5915bcff6c493de609f66a233d2deb3d22135293bf95c114bc002",
+      "sha256": "5934f6905b9782fc48334e388e7768d11914f11a65eeba046be4a6f47d285477",
       "rows": null,
       "seedSet": null,
       "distinctFloor": null,
@@ -342,7 +342,7 @@
       "suite": "tests/property/generatorGoldenMaster.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": "1847e8b76ebc92534cace454b5c5f314c360c3336001fb6c72ace6e4579c3138",
+      "sha256": "8141a11150f53726955e9141705c0cdc47c02f131220e271ab42c2c749e8a3c1",
       "rows": 525,
       "seedSet": null,
       "distinctFloor": null,
@@ -498,11 +498,11 @@
       "suite": "tests/pdf/goldenViewModel.test.js",
       "recordEnv": null,
       "proofForm": null,
-      "sha256": "4db1770ecf6aa63ca35dd0e5229f6ca9bf4fff5acb75b60ec86d066614723684",
+      "sha256": "b1a92886d57bd55bb9d21dfa3ac0930d32955458c0b68b84d062729aa5509d0b",
       "rows": null,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (RUNG 1 OF THE SOAK LADDER, recorded by the cloud chair, session 019yED1Rc3svZxTNcEJVRr77)",
+      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation of 2026-11-06 to the cloud chair, session 01FE9mEvGxnFx6WTBkEC6ie9; the construction-and-wiring wave of 2026-11-07, the chair's rulings R-W7)",
       "governance": "THE WRITER IS VITEST ITSELF, NOT REPO SOURCE. This surface is a vitest toMatchSnapshot() file; its lawful re-record path is `vitest -u`. That path carries no env spelling and no writeFileSync, so no source scan can see it and THE DOOR CANNOT REFUSE IT. The walker can only CONVICT the result after the fact via the byte arm. This asymmetry is real and is written here rather than discovered at the freeze: for this one surface the machinery detects but does not prevent. Ruling on whether to convert it to a door-written manifest belongs to the freeze act.",
       "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON. Charter §1.1 row 6. The only __snapshots__ file in the estate."
     },
@@ -850,11 +850,11 @@
       "suite": "tests/property/heraldKnowledgeDeskGolden.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": "880e9d8e5a508870b6642c38fa2b83c40bbf0047e0e4ae53b78b68369e7aca1b",
+      "sha256": "3c8790800e3f451ef5f5dc0a21351e7a203897b9be81f87b708bfddddb1f5bbc",
       "rows": 435,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (RUNG 1 OF THE SOAK LADDER, recorded by the cloud chair, session 019yED1Rc3svZxTNcEJVRr77)",
+      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation of 2026-11-06 to the cloud chair, session 01FE9mEvGxnFx6WTBkEC6ie9; the construction-and-wiring wave of 2026-11-07, the chair's rulings R-W7)",
       "note": "ENROLLED 2026-09-24 by lane FP-I5 (IN-5) under the FP chair's dispatch, record docs/shift-records/2026-09-24-in5-herald-knowledge-desk.json (action enroll, chair-signed). THE NON-OMNISCIENT HERALD GOLDEN of the belief_misjudgment refile (J-INF-6), captured FIRST at the clean base 57b52b510 before the routing table moved: the reader corpus full_simulation row rr-fresh-full after one year, read through buildHeraldFeed campaign lens. Keys: <row>|contentSha256 (every item's content except its desk, sorted by id), <row>|itemCount, and <row>|section|<id> (the desk at capture). tests/property/heraldKnowledgeDeskGolden.test.js holds the digest and count byte-stable and asserts every desk equals its captured desk except the declared refile set, which reads the knowledge desk: the one-time shift, recorded. The single producer is tests/helpers/heraldDeskGolden.js, imported by the suite; the capture ran it byte-identical from outside the tree so the door's clean-tree refusal held."
     }
   ]

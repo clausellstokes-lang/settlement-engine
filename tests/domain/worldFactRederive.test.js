@@ -416,8 +416,10 @@ describe('EM-B2b — world facts by consequence: the route, the refusals and the
     // Then WIRING-W0 record 02, ONE IMPORT SHARE (ODQ §934.105, the chair's R-W7 (c);
     // docs/shift-records/2026-11-07-w0-02-one-import-share.json), through the signed door from the stage at c99531cf9:
     // the generator master e7e8a6ff.. -> 1847e8b7.. (415 of 525 rows); the prose manifest did not move. Restated in the same act.
+    // Then WIRING-W0 record 03, ONE FOOD-SOURCE COUNT (docs/shift-records/2026-11-07-w0-03-one-food-source-count.json), from
+    // the stage at 3d1df12d7: the generator master 1847e8b7.. -> 8141a111.. (525 of 525 rows); the prose manifest did not move.
     expect(shaOfFile(GOLDEN), 'tests/fixtures/generator-golden-master.json moved')
-      .toBe('1847e8b76ebc92534cace454b5c5f314c360c3336001fb6c72ace6e4579c3138');
+      .toBe('8141a11150f53726955e9141705c0cdc47c02f131220e271ab42c2c749e8a3c1');
     expect(shaOfFile(PROSE_GOLDEN), 'tests/fixtures/dossier-prose-manifest-golden.json moved')
       .toBe('777e4b4b2968fab6b02a758435c7dcc8c779753942aeab77c4ae8c261e6d990e');
 
