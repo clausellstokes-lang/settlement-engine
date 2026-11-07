@@ -54,6 +54,12 @@
 /** `Object.freeze` is shallow, so a row's two count triples are frozen by name or not at all. */
 const freezeRow = (/** @type {GenerationTier1Row} */ row) => Object.freeze(Object.assign(row, { onRecord: Object.freeze(row.onRecord), producedOnRecord: Object.freeze(row.producedOnRecord) }));
 
+// ── RE-MEASURED 2026-11-07, the people car (PEOPLE-4 TIES, R-P7): ONE row moved on the 63-row corpus —
+// generatePopulation|relationships keyMoves 53 -> 0, class drawn -> pure, onRecord/producedOnRecord same -> transformed
+// (63/63): the step provides `[]` under its chooser and the ties are drawn at the coherence seam on their own keyed
+// family (`people-ties`, people/ties.js), so the step's key no longer moves under its stream and the record's
+// ties are the seam's. The external fnv1a32 count 15 -> 16 (measured; the tie prose hashes once per tie drawn on
+// the census's probe row, one tie per card). Both the arms' own printed figures.
 // ── RE-MEASURED 2026-11-07, the people car (PEOPLE-1 CAST, ODQ §934.105): the cast is the roster's faces, one
 // card per house on its own keyed fork, so three rows moved on the 63-row corpus — generatePopulation|relationships
 // keyMoves 63 -> 53 (the ties are drawn over a cast whose names move on their own forks), corruptionPass|npcs
@@ -154,7 +160,7 @@ export const GENERATION_TIER1 = Object.freeze(/** @type {GenerationTier1Row[]} *
   { step: 'powerEconomyReconcilePass', key: 'powerStructure', via: 'mutates', stepDraws: 0, keyMoves: 0, rows: 63, class: 'pure', onRecord: { absent: 0, same: 0, transformed: 63 }, onRecordClass: 'transformed', producedOnRecord: { absent: 0, same: 0, transformed: 63 }, producedOnRecordClass: 'transformed', recordPath: 'record.powerStructure' },
   { step: 'structuralValidationPass', key: 'structural', via: 'provides', stepDraws: 0, keyMoves: 0, rows: 63, class: 'pure', onRecord: { absent: 63, same: 0, transformed: 0 }, onRecordClass: 'absent', producedOnRecord: { absent: 63, same: 0, transformed: 0 }, producedOnRecordClass: 'absent', recordPath: null },
   { step: 'generatePopulation', key: 'npcs', via: 'provides', stepDraws: 63, keyMoves: 63, rows: 63, class: 'drawn', onRecord: { absent: 0, same: 0, transformed: 63 }, onRecordClass: 'transformed', producedOnRecord: { absent: 0, same: 0, transformed: 63 }, producedOnRecordClass: 'transformed', recordPath: 'record.npcs' },
-  { step: 'generatePopulation', key: 'relationships', via: 'provides', stepDraws: 63, keyMoves: 53, rows: 63, class: 'drawn', onRecord: { absent: 0, same: 63, transformed: 0 }, onRecordClass: 'same', producedOnRecord: { absent: 0, same: 12, transformed: 51 }, producedOnRecordClass: 'varies', recordPath: 'record.relationships' },
+  { step: 'generatePopulation', key: 'relationships', via: 'provides', stepDraws: 63, keyMoves: 0, rows: 63, class: 'pure', onRecord: { absent: 0, same: 0, transformed: 63 }, onRecordClass: 'transformed', producedOnRecord: { absent: 0, same: 0, transformed: 63 }, producedOnRecordClass: 'transformed', recordPath: 'record.relationships' },
   { step: 'corruptionPass', key: 'npcs', via: 'mutates', stepDraws: 36, keyMoves: 20, rows: 63, class: 'drawn', onRecord: { absent: 0, same: 0, transformed: 63 }, onRecordClass: 'transformed', producedOnRecord: { absent: 0, same: 0, transformed: 63 }, producedOnRecordClass: 'transformed', recordPath: 'record.npcs' },
   { step: 'generateNarratives', key: 'settlementReason', via: 'provides', stepDraws: 63, keyMoves: 0, rows: 63, class: 'pure', onRecord: { absent: 0, same: 63, transformed: 0 }, onRecordClass: 'same', producedOnRecord: { absent: 0, same: 63, transformed: 0 }, producedOnRecordClass: 'same', recordPath: 'record.settlementReason' },
   { step: 'generateNarratives', key: 'resourceAnalysis', via: 'provides', stepDraws: 63, keyMoves: 0, rows: 63, class: 'pure', onRecord: { absent: 0, same: 63, transformed: 0 }, onRecordClass: 'same', producedOnRecord: { absent: 0, same: 63, transformed: 0 }, producedOnRecordClass: 'same', recordPath: 'record.resourceAnalysis' },
@@ -163,7 +169,9 @@ export const GENERATION_TIER1 = Object.freeze(/** @type {GenerationTier1Row[]} *
   { step: 'assembleSettlement', key: 'settlement', via: 'provides', stepDraws: 63, keyMoves: 63, rows: 63, class: 'drawn', onRecord: { absent: 0, same: 63, transformed: 0 }, onRecordClass: 'same', producedOnRecord: { absent: 0, same: 63, transformed: 0 }, producedOnRecordClass: 'same', recordPath: 'record' },
   { step: 'assembleSettlement', key: 'powerStructure', via: 'mutates', stepDraws: 63, keyMoves: 0, rows: 63, class: 'pure', onRecord: { absent: 0, same: 0, transformed: 63 }, onRecordClass: 'transformed', producedOnRecord: { absent: 0, same: 0, transformed: 63 }, producedOnRecordClass: 'transformed', recordPath: 'record.powerStructure' },
   { step: 'assembleSettlement', key: 'stress', via: 'mutates', stepDraws: 63, keyMoves: 54, rows: 63, class: 'drawn', onRecord: { absent: 0, same: 9, transformed: 54 }, onRecordClass: 'varies', producedOnRecord: { absent: 0, same: 9, transformed: 54 }, producedOnRecordClass: 'varies', recordPath: 'record.stress' },
-  { step: 'assembleSettlement', key: 'relationships', via: 'mutates', stepDraws: 63, keyMoves: 51, rows: 63, class: 'drawn', onRecord: { absent: 0, same: 63, transformed: 0 }, onRecordClass: 'same', producedOnRecord: { absent: 0, same: 63, transformed: 0 }, producedOnRecordClass: 'same', recordPath: 'record.relationships' },
+  // MERGE-234 (one tie writer, the chair's ruling of 10:4x UTC): drawn/51/same -> pure/0/transformed, MEASURED by A3e/A4 at the
+  // 1+2+3+4 tip — the `other` mints' `people-powers::mint::<slug>::tie` fork at the seam is retired (drawTies writes their tie).
+  { step: 'assembleSettlement', key: 'relationships', via: 'mutates', stepDraws: 63, keyMoves: 0, rows: 63, class: 'pure', onRecord: { absent: 0, same: 0, transformed: 63 }, onRecordClass: 'transformed', producedOnRecord: { absent: 0, same: 0, transformed: 63 }, producedOnRecordClass: 'transformed', recordPath: 'record.relationships' },
   { step: 'resolveCrisisCast', key: 'crisisCast', via: 'provides', stepDraws: 0, keyMoves: 0, rows: 63, class: 'pure', onRecord: { absent: 63, same: 0, transformed: 0 }, onRecordClass: 'absent', producedOnRecord: { absent: 63, same: 0, transformed: 0 }, producedOnRecordClass: 'absent', recordPath: null },
   { step: 'resolveCrisisCast', key: 'settlement', via: 'mutates', stepDraws: 0, keyMoves: 0, rows: 63, class: 'pure', onRecord: { absent: 0, same: 63, transformed: 0 }, onRecordClass: 'same', producedOnRecord: { absent: 0, same: 63, transformed: 0 }, producedOnRecordClass: 'same', recordPath: 'record' },
 ]).map(freezeRow));
@@ -232,7 +240,7 @@ export const GENERATION_CHANNELS = Object.freeze({
   mints: Object.freeze({ instrument: 'src/kernel/prng.js#createPRNG', direct: 4, rootSeedPrefixed: true }),
   // 2026-10-31, tension variety (GS-1, ODQ §934.101): 6 -> 15, the tie-prose draw's per-archetype offsets (measured).
   // 2026-11-04, window-end pin re-key (REGISTERS seat): 15 -> 16, FOOD-3 (food diversity) opens one more offset (measured).
-  hash: Object.freeze({ instrument: 'src/kernel/proseHash.js#pickVariant', fnv1a32External: 18 /* 2026-11-07 PEOPLE-1 CAST: 15 -> 18, MEASURED by the census (A6) at the lane's tip (the seam's mint and its tie draw) */ }),
+  hash: Object.freeze({ instrument: 'src/kernel/proseHash.js#pickVariant', fnv1a32External: 15 /* MERGE-234: 18 (lane 1) / 16 (lane 4) -> 15, MEASURED by A6 at the 1+2+3+4 tip: the seam mint's `::tie` draw (the retired pair generator's tie prose) is retired, one tie writer */ }),
 });
 
 /**

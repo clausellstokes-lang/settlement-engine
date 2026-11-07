@@ -23,7 +23,6 @@
  */
 
 import { chooseOrPin, registerStep } from '../pipeline.js';
-import { generateRelationships } from '../npcGenerator.js';
 import { generateRepresentatives } from '../people/representatives.js';
 import { recordTrace } from '../../domain/trace.js';
 
@@ -61,10 +60,13 @@ function drawPopulation(ctx, rng, pins) {
  * @param {Array} npcs
  */
 function derivePopulation(ctx, rng, pins, npcs) {
-  const { tier, institutions, effectiveConfig } = ctx;
+  const { tier } = ctx;
 
-  const relationships = chooseOrPin(pins, 'relationships',
-    () => generateRelationships(npcs, effectiveConfig, institutions));
+  // THE PEOPLE CAR (PEOPLE-4 TIES, 2026-11-07; R-P7): the pair-saturation writer is RETIRED. The
+  // ties are drawn at the coherence seam (narrativeGenerator.js :: generateCoherence, people/ties.js)
+  // over the FINAL cast, because the target rule reads the memberships the seam writes. Until then
+  // the key is empty (a held `relationships` key is still the DM's, carried through).
+  const relationships = chooseOrPin(pins, 'relationships', () => []);
 
   // Summary traces — one per category, not one per entity. Per-entity
   // traces would flood the rail (50+ NPCs is normal at metropolis tier)

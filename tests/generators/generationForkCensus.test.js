@@ -196,7 +196,12 @@ const PICK_VARIANT_CALLS = 31;
 // the tie prose (power/relationshipArchetypes.js) and the conflict lines (dossier/hookLines.js), one hash per tie
 // or conflict drawn; the cast is the roster's faces now (the probe town carries more cards than its named roster
 // did), so two more ties hash their prose. The cast's size is the named cause.
-const FNV_EXTERNAL_CALLS = 18; // 2026-11-07 PEOPLE-1 CAST: 15 -> 17 -> 18 (the seam's mint and its tie), measured by A6
+// RE-KEYED 2026-11-07 (the people car, PEOPLE-4 TIES, R-P7): 17 -> 16, measured. One tie per card replaces the
+// pair saturation, so the probe row's tie prose hashes once per card's own tie; the register's fnv1a32External
+// (15 at this lane's base, never re-keyed by PEOPLE-1) moves to the same measured figure.
+// RE-KEYED by MERGE-234 (one tie writer, the chair's ruling): 16 -> 15, measured by A6 at the 1+2+3+4 tip — the
+// seam mint's tie no longer hashes its prose through the retired pair generator; drawTies writes it.
+const FNV_EXTERNAL_CALLS = 15;
 /** The fork law A1 pins: the mint wrapper's equivalence rests on this line and nothing else. */
 const FORK_LAW = 'fork: (label) => createPRNG(`${seed}::${label}`),';
 /** §6.4's off-corpus block: a wizard-reachable switch, the keys it moves, and 24 seeds. */
@@ -466,7 +471,7 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
     // classes of isolationSupport (varies -> same) and generationRepairs (absent -> varies); the six varies rows stay six.
     // LANDING-8 (2026-11-06, ODQ §934.105): 17 -> 13, the same cause (8befe5a0d): the four `stress` rows' two comparands
     // now agree ('varies' both), because the record holds a copy of exactly what the stress steps produced.
-    expect(disagreeing.length, 'the rows where the two comparands disagree').toBe(14); // 2026-11-07 PEOPLE-1 CAST: 13 -> 14, the seam's tie moves `relationships` on a crisis-cast row (A4's own reading) // lane CRISIS (2026-11-03): resolveCrisisCast joins: assembleSettlement|stress's produced value differs from the record where a crisis is cast (16 -> 17)
+    expect(disagreeing.length, 'the rows where the two comparands disagree').toBe(13); // MERGE-234 (one tie writer): 14 -> 13, measured by this arm at the 1+2+3+4 tip — the seam's `::tie` fork is retired, so `relationships` is transformed on both comparands // 2026-11-07 PEOPLE-1 CAST: 13 -> 14, the seam's tie moves `relationships` on a crisis-cast row (A4's own reading) // lane CRISIS (2026-11-03): resolveCrisisCast joins: assembleSettlement|stress's produced value differs from the record where a crisis is cast (16 -> 17)
     expect(nonUnanimous.length, 'exactly one row lands in two places, and it is already varies').toBe(1);
     // ⛔ THERE IS NO producedPath, AND THAT IS A MEASUREMENT. If this ever becomes non-zero a
     // second path field is owed and the register is telling half a truth about WHERE.

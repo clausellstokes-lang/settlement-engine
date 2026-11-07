@@ -218,8 +218,9 @@ export const CARD_KINDS = Object.freeze({
   },
   relationship: {
     lists: [['relationships']],
-    idOf: (card) => ownIdOr(card, 'relationship', card.npc1Id || card.npc1Name, card.npc2Id || card.npc2Name, card.type),
-    floor: ['id', 'type', 'typeName', 'strength', 'npc1Id', 'npc2Id', 'npc1Name', 'npc2Name', 'npc1Role', 'npc2Role'],
+    // PEOPLE-4 TIES (R-P7): the tie's ends are `from`/`to` (directed); the names keep their fields.
+    idOf: (card) => ownIdOr(card, 'relationship', card.from || card.npc1Name, card.to || card.npc2Name, card.type),
+    floor: ['id', 'type', 'typeName', 'strength', 'from', 'to', 'npc1Name', 'npc2Name', 'npc1Role', 'npc2Role'],
     fields: {
       tension: ['tension'],
       description: ['description'],

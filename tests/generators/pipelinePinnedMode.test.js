@@ -41,7 +41,7 @@ import { describe, expect, it } from 'vitest';
 
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { chooseOrPin, getStepMeta, getStepOrder, runPipeline } from '../../src/generators/pipeline.js';
-import { generateRelationships } from '../../src/generators/npcGenerator.js';
+import { drawTies } from '../../src/generators/people/ties.js';
 import { resolveConfigWithUserContentTunables } from '../../src/domain/content/userContentTunables.js';
 import { pinsFrom, rederive } from '../../src/domain/edit/dmLayer.js';
 import { declarationsFor, isEditableCard } from '../../src/domain/edit/fieldDeclarations.js';
@@ -75,8 +75,11 @@ const CONFIG = {
  *  2026-11-07, PEOPLE-1 CAST (R-P2, the representative generator: one face per face-bearing house, the rung roster retired): 46 -> 36, the probe roster is the cast and its relationship pairs moved with it; re-measured by the arm's own recipe.
  *  2026-11-07, PEOPLE-3 HOOKS (one hook per representative: the second-hook coin flip is retired and the card's
  *  one hook draws on its own `people-hooks` fork, so every card body after it moves): 36 -> 32, the probe roster's
- *  relationship pairs moved with the cards; re-measured by the arm's own recipe. */
-const DERIVE_HALF_DRAWS = 32;
+ *  relationship pairs moved with the cards; re-measured by the arm's own recipe.
+ *  2026-11-07, PEOPLE-4 TIES (R-P7, one outgoing tie per card): 36 -> 0 (32 -> 0 at MERGE-234's union of lanes 3 and 4). The pair-saturation writer is retired; the
+ *  derive half provides `[]` under its chooser and the ties are drawn at the coherence seam on their own keyed family
+ *  (`people/ties.js :: drawTies`), so the derive half takes NO draw on the step's stream. */
+const DERIVE_HALF_DRAWS = 0;
 /** The seed §0R.1's derive-half probe was measured on, and the settlement it measured over. */
 const DERIVE_PROBE_STREAM = 'em-p0-probe-derive';
 const DERIVE_PROBE_SEED = 'em-p0-probe';
@@ -219,14 +222,19 @@ describe('EM-P0 — the pipeline seam: pins are consulted per chooser, on one st
     expect(JSON.stringify(second.record)).toBe(JSON.stringify(record));
   }, 120_000);
 
-  it('A3 — a pinned chooser does not draw: 67 derive-half draws unpinned, zero fully pinned', () => {
+  it('A3 — a pinned chooser does not draw: the cast stream minted unpinned, nothing fully pinned', () => {
+    // RE-KEYED 2026-11-07 (PEOPLE-4 TIES, R-P7): the step's OWN stream is draw-free unpinned too — the
+    // faces draw on the inner `people-faces` fork (PEOPLE-1) and the ties left the step for the coherence
+    // seam — so the discriminator is the inner fork: minted once unpinned, never under a full pin.
     const unpinned = instrumentedRoot(SEED);
     const unpinnedCtx = runHeadless(unpinned.root);
-    expect(unpinned.record.draws).toBeGreaterThan(DERIVE_HALF_DRAWS);
+    expect(unpinned.record.draws).toBe(DERIVE_HALF_DRAWS);
+    expect(unpinned.record.innerForks, 'the unpinned step mints its cast stream and its hook stream (MERGE-234: lanes 3 + 4)').toBe(2);
 
     const pinned = instrumentedRoot(SEED);
     runHeadless(pinned.root, { pins: pinsFromContext(unpinnedCtx) });
     expect(pinned.record.draws, 'a fully pinned step draws nothing on its own stream').toBe(0);
+    expect(pinned.record.innerForks, 'a fully pinned step mints no inner stream').toBe(0);
 
     // The derive half's own budget, re-measured exactly the way §0R.1 measured it — same
     // probe settlement, same seed — because that is the figure the packet predicts. An
@@ -234,10 +242,12 @@ describe('EM-P0 — the pipeline seam: pins are consulted per chooser, on one st
     const probeSettlement = generateSettlementPipeline({}, null, {
       seed: DERIVE_PROBE_SEED, customContent: {},
     });
+    // PEOPLE-4 TIES: the ties draw on their OWN keyed family, never on the ambient stream they run under.
     const budget = withAmbientCounter((counter) => {
       const start = counter.calls;
-      const relationships = generateRelationships(
-        probeSettlement.npcs, probeSettlement.config || {}, probeSettlement.institutions || [],
+      const relationships = drawTies(
+        probeSettlement.npcs, { config: probeSettlement.config || {}, institutions: probeSettlement.institutions || [] },
+        createPRNG(`${DERIVE_PROBE_STREAM}::ties`),
       );
       expect(relationships.length, 'the probe roster has ties to draw').toBeGreaterThan(0);
       return {
@@ -291,9 +301,10 @@ describe('EM-P0 — the pipeline seam: pins are consulted per chooser, on one st
     // fork in roster order" — `people-hooks` (people/representatives.js :: HOOKS_FORK_LABEL), the second
     // inner stream, beside `people-faces`; both are minted once and keyed per card, never per draw.
     expect(instrumented.record.innerForks, 'the step mints exactly `people-faces` and `people-hooks` (R-P2; PEOPLE-3)').toBe(2);
-    // Both halves drew on that ONE object: the derive half's 67 cannot fit alone in a count
-    // that also carries the root half's density band and roster draws.
-    expect(instrumented.record.draws).toBeGreaterThan(DERIVE_HALF_DRAWS);
+    // RE-KEYED 2026-11-07 (PEOPLE-4 TIES, R-P7): neither half draws on the ONE object now — the cast on
+    // its inner fork, the ties at the coherence seam — so its count is zero and the inner fork above is
+    // the step's whole stream footprint.
+    expect(instrumented.record.draws).toBe(DERIVE_HALF_DRAWS);
   }, 120_000);
 
   it('A6 — idempotency and purity: three pinned calls agree, and nothing is mutated', () => {
@@ -334,7 +345,7 @@ describe('EM-P0 — the pipeline seam: pins are consulted per chooser, on one st
 
 /** The step's own unpinned draw count at SEED and CONFIG. AS-OF `bdbf7c89c`, re-measured at
  *  EM-B2a2's base; A2 and A3 both re-measure it rather than trusting the numeral. */
-const UNPINNED_STEP_DRAWS = 280; // 2026-10-01, the urban band (ODQ §934.86): 315 -> 307; the druid rulings (2026-10-01, ODQ §934.86 addendum 2, J30–J33): 307 -> 310; each re-measured at this seed and config; GS-2 one faction set (ODQ §934.101): 310 -> 306, the name picks and the conflict draws left the step 2026-11-05, records 12–26 (the rung-1 landing's signed shifts, ODQ §934.105; re-keyed at the landed tip by LANDING-5 under the chair's ruling 4): 306 -> 303; 2026-11-07, PEOPLE-1 CAST (R-P2: the cast replaces the rung roster; the faces draw on the step's `people-faces` fork, so the step's OWN stream carries fewer draws): 303 -> 281, re-measured at this seed and config; 2026-11-07, PEOPLE-3 HOOKS (one hook per representative: the hooks draw on the step's second inner fork `people-hooks`, and the card bodies they no longer interleave move the rest): 281 -> 280, re-measured at this seed and config.
+const UNPINNED_STEP_DRAWS = 0; // 2026-11-07, PEOPLE-4 TIES (R-P7): 281 -> 0, the 281 were the retired pair writer's draws on the step's own stream; the ties are drawn at the coherence seam on their own family, and the cast on its inner fork. Earlier:  2026-10-01, the urban band (ODQ §934.86): 315 -> 307; the druid rulings (2026-10-01, ODQ §934.86 addendum 2, J30–J33): 307 -> 310; each re-measured at this seed and config; GS-2 one faction set (ODQ §934.101): 310 -> 306, the name picks and the conflict draws left the step 2026-11-05, records 12–26 (the rung-1 landing's signed shifts, ODQ §934.105; re-keyed at the landed tip by LANDING-5 under the chair's ruling 4): 306 -> 303; 2026-11-07, PEOPLE-1 CAST (R-P2: the cast replaces the rung roster; the faces draw on the step's `people-faces` fork, so the step's OWN stream carries fewer draws): 303 -> 281, re-measured at this seed and config.
 /** The overridden VALUE A3 carries through the pin channel into the assembled record. It is
  *  planted by the arm and appears nowhere in the generator's vocabulary. */
 const OVERRIDE_SENTINEL = 'EM-B2a2 SENTINEL BURGRAVE';
@@ -407,8 +418,12 @@ describe('EM-B2a2 — the pin primitive has ONE exported home: chooseOrPin lives
     const ctx = runHeadless(instrumented.root);
     for (const key of CHOOSER_KEYS) {
       expect(ctx[key], `${key} is produced unpinned`).toBeDefined();
-      expect(ctx.settlement[key].length, `${key} reaches the settlement`).toBe(ctx[key].length);
     }
+    expect(ctx.settlement.npcs.length, 'npcs reaches the settlement').toBe(ctx.npcs.length);
+    // PEOPLE-4 TIES (R-P7): the step provides `[]` under the `relationships` chooser; the ties are drawn at
+    // the coherence seam over the final cast, so the record carries them and the context does not.
+    expect(ctx.relationships).toEqual([]);
+    expect(ctx.settlement.relationships.length, 'the ties reach the settlement').toBeGreaterThan(0);
     expect(ctx.npcs.length).toBeGreaterThan(0);
 
     // (3) THE STEP'S OWN STREAM takes the SAME count unpinned. A draw added or removed in
@@ -437,6 +452,8 @@ describe('EM-B2a2 — the pin primitive has ONE exported home: chooseOrPin lives
     const base = runHeadless(unpinned.root);
     expect(unpinned.record.draws, 'the unpinned baseline this arm discriminates against')
       .toBe(UNPINNED_STEP_DRAWS);
+    // PEOPLE-4 TIES: the step's own stream is draw-free, so the inner cast fork is the discriminator.
+    expect(unpinned.record.innerForks, 'the unpinned step mints its cast stream and its hook stream (MERGE-234: lanes 3 + 4)').toBe(2);
 
     // FROZEN BEFORE ANY PINNED RUN. Design §21.5 measured a coherence pass writing through
     // a caller's own bag on three of nine sampled rows, so the base's text is captured
@@ -455,6 +472,7 @@ describe('EM-B2a2 — the pin primitive has ONE exported home: chooseOrPin lives
     const rederived = runHeadless(pinned.root, { pins: overridden });
 
     expect(pinned.record.draws, 'a fully pinned step must not advance its own stream').toBe(0);
+    expect(pinned.record.innerForks, 'a fully pinned step mints no inner stream').toBe(0);
 
     // THE DISCRIMINATOR (§9a). Generation is same-seed deterministic, so a DEAD pin
     // reproduces the record anyway; only a draw count and an OVERRIDDEN VALUE convict one.

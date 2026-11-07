@@ -986,8 +986,6 @@
    "stasis on npcs": 1
   },
   "src/domain/npcProfile.js": {
-   "npc1N on relationships": 1,
-   "npc2N on relationships": 1,
    "ousted on npcs": 1
   },
   "src/domain/pendingEditsPreview.js": {
@@ -2232,7 +2230,6 @@
    "reason on history": 2,
    "recency on historicalEvents": 1,
    "recencyLabel on historicalEvents": 1,
-   "relationships on npcs": 1,
    "resolution on historicalEvents": 1,
    "scale on historicalEvents": 1,
    "search on personality": 1,
@@ -5570,8 +5567,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/npcComponents.jsx",
-     "sha256": "a76cdca7aaf69f44bbff38f77e0fecf29a1a08e1697d1be3929923f3d8bccccc",
-     "size": 28463,
+     "sha256": "3386f3647ada390687938bf8bdce4d27eeea33bb460121c8a11f2fb6853ecbcf",
+     "size": 29608,
      "type": "file"
     },
     {
@@ -7334,8 +7331,8 @@
     {
      "mode": "100644",
      "path": "src/data/npcData.js",
-     "sha256": "375c3b0922ec6d1c93e6a6734f71d6fbe0c6000303e619bc82d5690f0f9c479d",
-     "size": 104805,
+     "sha256": "aebe234b1b3a4645626bb1f66eaa87793ef2bfaa1634c044c2642888baf746d8",
+     "size": 104791,
      "type": "file"
     },
     {
@@ -7719,8 +7716,8 @@
     {
      "mode": "100644",
      "path": "src/domain/ai/personaSlicer.js",
-     "sha256": "c2f3f2498e14dca9fe1757419a4939c0260b67cf0476f214ff6294c0fba12bf1",
-     "size": 13906,
+     "sha256": "c638e878754ff5bcf6bf377e468390f7f19481ca9f71c422003562e4d9bdb3f7",
+     "size": 14175,
      "type": "file"
     },
     {
@@ -9154,8 +9151,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/galleryVeil.js",
-     "sha256": "b79011e01e29fc73b6a8cfc7c72474e9f106d114a5fe5efa41147f7f95f92f95",
-     "size": 55427,
+     "sha256": "8d1adbc52902d8019742665e77cd57d6ff21b80529a6d0c9dfc336973c55f40b",
+     "size": 55516,
      "type": "file"
     },
     {
@@ -11051,8 +11048,8 @@
     {
      "mode": "100644",
      "path": "src/domain/regenerationPreservation.js",
-     "sha256": "519130ee717ded9b7e9bc8d59c75d83dc0ed02a4bef4e7a1564a0b4cf027f051",
-     "size": 13452,
+     "sha256": "bf3841b77c698902fe0a4fd10946a946b1e7a20d9f8d248e73b47c90cb877ca2",
+     "size": 13446,
      "type": "file"
     },
     {
@@ -11144,6 +11141,13 @@
      "path": "src/domain/relationships/canonicalRelationship.js",
      "sha256": "835e1a69b91fde219779f6e9415c07e7391152cad10e0e2ffb8c4fa33f960fc8",
      "size": 22091,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/domain/relationships/cardTies.js",
+     "sha256": "251baacd55b0f67fd92d56bc64f580b7d5ff3f64e78587248147c9637e57d644",
+     "size": 2364,
      "type": "file"
     },
     {
@@ -15958,8 +15962,8 @@
     {
      "mode": "100644",
      "path": "src/generators/generationReceiptJudgments.js",
-     "sha256": "82ea8f5e0f38b5de81149f6295bbef0fec7c7e44e41d2bb9ebe4a907488296b5",
-     "size": 26883,
+     "sha256": "45f12c29bae6ecb198d2311e904f0060169bff76c52c3bf6a6110ebce194d980",
+     "size": 27154,
      "type": "file"
     },
     {
@@ -16202,6 +16206,13 @@
     },
     {
      "mode": "100644",
+     "path": "src/generators/people/ties.js",
+     "sha256": "e5781831acc3a100db5ddba7c3ab07fe2a02c4e547119c7e29a905f0d27a822f",
+     "size": 7619,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/generators/pipeline.js",
      "sha256": "70fc750383315b33bdb10ba5f093b600b0fb70dbe5dda6b0c3f8c6d346a0bbe0",
      "size": 18721,
@@ -16252,8 +16263,8 @@
     {
      "mode": "100644",
      "path": "src/generators/power/relationshipArchetypes.js",
-     "sha256": "6bac69714d460a1ab78fa3f758e1acbb83a7869d664df342e0706c4015a03dfe",
-     "size": 7783,
+     "sha256": "551ad88fd3669ac4df431fdf04e1a53cc261b3278959b02121547f969d250802",
+     "size": 7843,
      "type": "file"
     },
     {
@@ -16266,8 +16277,8 @@
     {
      "mode": "100644",
      "path": "src/generators/power/settlementNarrative.js",
-     "sha256": "c44b0f09dace5f0de682bea0d76988e22c867d5479ef1d60252345759dae0085",
-     "size": 13861,
+     "sha256": "bfcbdd175b709b17196ea24a603ce748fe5c950a406a1ad6ce36c7ca1b83bfb5",
+     "size": 14155,
      "type": "file"
     },
     {
@@ -16441,8 +16452,8 @@
     {
      "mode": "100644",
      "path": "src/generators/steps/generatePopulation.js",
-     "sha256": "fe4c204ce6fc7e458069bc0e76f63693b46a0ef5acf37eaf2cc49e0466d36ffc",
-     "size": 5131,
+     "sha256": "97a18ba15550c3f7c13f4ec99e8c02ea0a49f70256425a736946790d65266a4d",
+     "size": 5368,
      "type": "file"
     },
     {
@@ -22348,8 +22359,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/npcComponents.jsx",
-     "sha256": "a76cdca7aaf69f44bbff38f77e0fecf29a1a08e1697d1be3929923f3d8bccccc",
-     "size": 28463,
+     "sha256": "3386f3647ada390687938bf8bdce4d27eeea33bb460121c8a11f2fb6853ecbcf",
+     "size": 29608,
      "type": "file"
     },
     {
@@ -24042,8 +24053,8 @@
     {
      "mode": "100644",
      "path": "src/data/npcData.js",
-     "sha256": "375c3b0922ec6d1c93e6a6734f71d6fbe0c6000303e619bc82d5690f0f9c479d",
-     "size": 104805,
+     "sha256": "aebe234b1b3a4645626bb1f66eaa87793ef2bfaa1634c044c2642888baf746d8",
+     "size": 104791,
      "type": "file"
     },
     {
@@ -24413,8 +24424,8 @@
     {
      "mode": "100644",
      "path": "src/domain/ai/personaSlicer.js",
-     "sha256": "c2f3f2498e14dca9fe1757419a4939c0260b67cf0476f214ff6294c0fba12bf1",
-     "size": 13906,
+     "sha256": "c638e878754ff5bcf6bf377e468390f7f19481ca9f71c422003562e4d9bdb3f7",
+     "size": 14175,
      "type": "file"
     },
     {
@@ -25813,8 +25824,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/galleryVeil.js",
-     "sha256": "b79011e01e29fc73b6a8cfc7c72474e9f106d114a5fe5efa41147f7f95f92f95",
-     "size": 55427,
+     "sha256": "8d1adbc52902d8019742665e77cd57d6ff21b80529a6d0c9dfc336973c55f40b",
+     "size": 55516,
      "type": "file"
     },
     {
@@ -27710,8 +27721,8 @@
     {
      "mode": "100644",
      "path": "src/domain/regenerationPreservation.js",
-     "sha256": "519130ee717ded9b7e9bc8d59c75d83dc0ed02a4bef4e7a1564a0b4cf027f051",
-     "size": 13452,
+     "sha256": "bf3841b77c698902fe0a4fd10946a946b1e7a20d9f8d248e73b47c90cb877ca2",
+     "size": 13446,
      "type": "file"
     },
     {
@@ -27803,6 +27814,13 @@
      "path": "src/domain/relationships/canonicalRelationship.js",
      "sha256": "835e1a69b91fde219779f6e9415c07e7391152cad10e0e2ffb8c4fa33f960fc8",
      "size": 22091,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/domain/relationships/cardTies.js",
+     "sha256": "251baacd55b0f67fd92d56bc64f580b7d5ff3f64e78587248147c9637e57d644",
+     "size": 2364,
      "type": "file"
     },
     {
@@ -32617,8 +32635,8 @@
     {
      "mode": "100644",
      "path": "src/generators/generationReceiptJudgments.js",
-     "sha256": "82ea8f5e0f38b5de81149f6295bbef0fec7c7e44e41d2bb9ebe4a907488296b5",
-     "size": 26883,
+     "sha256": "45f12c29bae6ecb198d2311e904f0060169bff76c52c3bf6a6110ebce194d980",
+     "size": 27154,
      "type": "file"
     },
     {
@@ -32861,6 +32879,13 @@
     },
     {
      "mode": "100644",
+     "path": "src/generators/people/ties.js",
+     "sha256": "e5781831acc3a100db5ddba7c3ab07fe2a02c4e547119c7e29a905f0d27a822f",
+     "size": 7619,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/generators/pipeline.js",
      "sha256": "70fc750383315b33bdb10ba5f093b600b0fb70dbe5dda6b0c3f8c6d346a0bbe0",
      "size": 18721,
@@ -32911,8 +32936,8 @@
     {
      "mode": "100644",
      "path": "src/generators/power/relationshipArchetypes.js",
-     "sha256": "6bac69714d460a1ab78fa3f758e1acbb83a7869d664df342e0706c4015a03dfe",
-     "size": 7783,
+     "sha256": "551ad88fd3669ac4df431fdf04e1a53cc261b3278959b02121547f969d250802",
+     "size": 7843,
      "type": "file"
     },
     {
@@ -32925,8 +32950,8 @@
     {
      "mode": "100644",
      "path": "src/generators/power/settlementNarrative.js",
-     "sha256": "c44b0f09dace5f0de682bea0d76988e22c867d5479ef1d60252345759dae0085",
-     "size": 13861,
+     "sha256": "bfcbdd175b709b17196ea24a603ce748fe5c950a406a1ad6ce36c7ca1b83bfb5",
+     "size": 14155,
      "type": "file"
     },
     {
@@ -33100,8 +33125,8 @@
     {
      "mode": "100644",
      "path": "src/generators/steps/generatePopulation.js",
-     "sha256": "fe4c204ce6fc7e458069bc0e76f63693b46a0ef5acf37eaf2cc49e0466d36ffc",
-     "size": 5131,
+     "sha256": "97a18ba15550c3f7c13f4ec99e8c02ea0a49f70256425a736946790d65266a4d",
+     "size": 5368,
      "type": "file"
     },
     {
@@ -39000,8 +39025,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/npcComponents.jsx",
-     "sha256": "a76cdca7aaf69f44bbff38f77e0fecf29a1a08e1697d1be3929923f3d8bccccc",
-     "size": 28463,
+     "sha256": "3386f3647ada390687938bf8bdce4d27eeea33bb460121c8a11f2fb6853ecbcf",
+     "size": 29608,
      "type": "file"
     },
     {
@@ -40764,8 +40789,8 @@
     {
      "mode": "100644",
      "path": "src/data/npcData.js",
-     "sha256": "375c3b0922ec6d1c93e6a6734f71d6fbe0c6000303e619bc82d5690f0f9c479d",
-     "size": 104805,
+     "sha256": "aebe234b1b3a4645626bb1f66eaa87793ef2bfaa1634c044c2642888baf746d8",
+     "size": 104791,
      "type": "file"
     },
     {
@@ -41149,8 +41174,8 @@
     {
      "mode": "100644",
      "path": "src/domain/ai/personaSlicer.js",
-     "sha256": "c2f3f2498e14dca9fe1757419a4939c0260b67cf0476f214ff6294c0fba12bf1",
-     "size": 13906,
+     "sha256": "c638e878754ff5bcf6bf377e468390f7f19481ca9f71c422003562e4d9bdb3f7",
+     "size": 14175,
      "type": "file"
     },
     {
@@ -42584,8 +42609,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/galleryVeil.js",
-     "sha256": "b79011e01e29fc73b6a8cfc7c72474e9f106d114a5fe5efa41147f7f95f92f95",
-     "size": 55427,
+     "sha256": "8d1adbc52902d8019742665e77cd57d6ff21b80529a6d0c9dfc336973c55f40b",
+     "size": 55516,
      "type": "file"
     },
     {
@@ -44481,8 +44506,8 @@
     {
      "mode": "100644",
      "path": "src/domain/regenerationPreservation.js",
-     "sha256": "519130ee717ded9b7e9bc8d59c75d83dc0ed02a4bef4e7a1564a0b4cf027f051",
-     "size": 13452,
+     "sha256": "bf3841b77c698902fe0a4fd10946a946b1e7a20d9f8d248e73b47c90cb877ca2",
+     "size": 13446,
      "type": "file"
     },
     {
@@ -44574,6 +44599,13 @@
      "path": "src/domain/relationships/canonicalRelationship.js",
      "sha256": "835e1a69b91fde219779f6e9415c07e7391152cad10e0e2ffb8c4fa33f960fc8",
      "size": 22091,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/domain/relationships/cardTies.js",
+     "sha256": "251baacd55b0f67fd92d56bc64f580b7d5ff3f64e78587248147c9637e57d644",
+     "size": 2364,
      "type": "file"
     },
     {
@@ -49388,8 +49420,8 @@
     {
      "mode": "100644",
      "path": "src/generators/generationReceiptJudgments.js",
-     "sha256": "82ea8f5e0f38b5de81149f6295bbef0fec7c7e44e41d2bb9ebe4a907488296b5",
-     "size": 26883,
+     "sha256": "45f12c29bae6ecb198d2311e904f0060169bff76c52c3bf6a6110ebce194d980",
+     "size": 27154,
      "type": "file"
     },
     {
@@ -49632,6 +49664,13 @@
     },
     {
      "mode": "100644",
+     "path": "src/generators/people/ties.js",
+     "sha256": "e5781831acc3a100db5ddba7c3ab07fe2a02c4e547119c7e29a905f0d27a822f",
+     "size": 7619,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/generators/pipeline.js",
      "sha256": "70fc750383315b33bdb10ba5f093b600b0fb70dbe5dda6b0c3f8c6d346a0bbe0",
      "size": 18721,
@@ -49682,8 +49721,8 @@
     {
      "mode": "100644",
      "path": "src/generators/power/relationshipArchetypes.js",
-     "sha256": "6bac69714d460a1ab78fa3f758e1acbb83a7869d664df342e0706c4015a03dfe",
-     "size": 7783,
+     "sha256": "551ad88fd3669ac4df431fdf04e1a53cc261b3278959b02121547f969d250802",
+     "size": 7843,
      "type": "file"
     },
     {
@@ -49696,8 +49735,8 @@
     {
      "mode": "100644",
      "path": "src/generators/power/settlementNarrative.js",
-     "sha256": "c44b0f09dace5f0de682bea0d76988e22c867d5479ef1d60252345759dae0085",
-     "size": 13861,
+     "sha256": "bfcbdd175b709b17196ea24a603ce748fe5c950a406a1ad6ce36c7ca1b83bfb5",
+     "size": 14155,
      "type": "file"
     },
     {
@@ -49871,8 +49910,8 @@
     {
      "mode": "100644",
      "path": "src/generators/steps/generatePopulation.js",
-     "sha256": "fe4c204ce6fc7e458069bc0e76f63693b46a0ef5acf37eaf2cc49e0466d36ffc",
-     "size": 5131,
+     "sha256": "97a18ba15550c3f7c13f4ec99e8c02ea0a49f70256425a736946790d65266a4d",
+     "size": 5368,
      "type": "file"
     },
     {
@@ -53152,5 +53191,5 @@
   "totalKeys": 12051,
   "usableShapes": 522
  },
- "total": 2068
+ "total": 2065
 }

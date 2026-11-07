@@ -43,7 +43,6 @@
 import { slugify } from '../../kernel/slugify.js';
 import { backingArchetypeOf, dealDoubledNiches, houseBacksOf } from '../../domain/dossier/powerSupport.js';
 import { BACKING_ARCHETYPES } from '../../data/institutionBacking.js';
-import { generateRelationships } from '../npcGenerator.js';
 import { resolveGenerationWorldLaw } from '../generationContext.js';
 import { deriveTradeCommodity } from '../tradeCommodity.js';
 import { governingFactionOf, nameOf } from '../../domain/rulingPower.js';
@@ -140,9 +139,10 @@ export function assignCastPowers(settlement, cards, rng) {
 
   // ── The `other` mint (R-P4) ──────────────────────────────────────────────────────────────
   // Minted HERE, where the powers are FINAL (the assembly's replay thins and adds powers after the
-  // population step), under the title table and on its own keyed fork (`people-powers::mint::<slug>`),
-  // and TIED to the seat on a second fork (`…::tie`) through today's tie generator, so the social
-  // graph reaches it (a face born after the ties was isolated: regenPreservesUserCanon convicted it).
+  // population step), under the title table and on its own keyed fork (`people-powers::mint::<slug>`).
+  // Its tie to the seat is drawn by the ONE tie writer (MERGE-234, the chair's ruling of 10:4x UTC:
+  // people/ties.js :: drawTies forces the seat as an `other` mint's target on `people-ties::<card id>`;
+  // the `…::tie` fork that drew it here through the retired pair generator is retired).
   const lateMints = [];
   const config = settlement?.config || {};
   const economicState = settlement?.economicState || {};
@@ -197,15 +197,6 @@ export function assignCastPowers(settlement, cards, rng) {
       // the hook's pool from the mint's EFFECTIVE category (no title-table row is `magic`, so no swap here)
       mintHookPools.set(id, hookPoolFor(row.title, null, { category: row.category }).pool);
       join(card, name, 1, null, true, cards.length + lateMints.length - 1);
-      // the tie: one relationship between the mint and the seat's face (the governing power's first,
-      // else the first card), appended to the record's ties where the seam holds them
-      const ties = settlement?.relationships;
-      const seatCard = cards.find((c) => (seatKey ? c?.institution?.kind === 'house' && c?.institution?.key === seatKey : c?.id === SEAT_CARD_ID)) || cards[0];
-      if (Array.isArray(ties) && seatCard && seatCard.id !== card.id) {
-        const drawTie = () => generateRelationships([seatCard, card], config, institutions);
-        const tie = mintStream ? onStream(mintStream.fork(`${powerSlug(name)}::tie`), drawTie) : drawTie();
-        for (const row of tie) ties.push(row);
-      }
     });
     // ONE HOOK PER SEAM-MINTED CARD (PEOPLE-3 HOOKS, composed by MERGE-234): lane 3's writer, in mint
     // order, each on its own per-card fork of lane 3's family (`people-powers::people-hooks::<card id>`),

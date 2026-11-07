@@ -330,14 +330,16 @@ export function inspectSettlement(settlement, config) {
   for (const [index, relationship] of (
     settlement?.relationships || []
   ).entries()) {
-    const first = npcById.get(relationship?.npc1Id);
-    const second = npcById.get(relationship?.npc2Id);
+    // PEOPLE-4 TIES (2026-11-07, R-P7): a tie is directed, `from` -> `to`; the undirected npc1Id/npc2Id
+    // pair is not written. TODO(PEOPLE-5): a v1 save's pair is read as from/to by the migration.
+    const first = npcById.get(relationship?.from);
+    const second = npcById.get(relationship?.to);
     if (!first || !second) {
       addFinding(
         findings,
         'relationship_endpoint_missing',
         `relationships[${index}]`,
-        `${relationship?.npc1Id || 'missing'} -> ${relationship?.npc2Id || 'missing'}`,
+        `${relationship?.from || 'missing'} -> ${relationship?.to || 'missing'}`,
       );
       continue;
     }
