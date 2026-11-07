@@ -114,7 +114,36 @@ None of (a)–(c) touches the ties-eye point (§3.4): only a server-side veil wo
 
 ## 5. Step 4: the proof
 
-FIGURES-PENDING
+**`sh scripts/gate-tail.sh npx vitest run tests/security tests/lint tests/scripts`.** Run at the tip `9619b4cd6` and, in the same form, at the base `f28d369b7` in a scratch worktree:
+
+| | files | tests |
+|---|---|---|
+| base `f28d369b7` | 9 failed / 356 passed / 1 skipped (366) | 14 failed / 5,005 passed / 1 skipped |
+| tip `9619b4cd6` | 10 failed / 355 passed / 1 skipped (366) | 15 failed / 5,007 passed / 1 skipped |
+
+**The one red beyond the base was mine, and is cured.** `implementationPackets` "discharges a row whose subject an authorized ruling removed…" went red because landed packet EM-B3a pins the test title `SQL 123 allowlist == JS PUBLIC_TOPLEVEL_KEYS` (`requiredSymbols[20]`), which step 2 had renamed. The title is restored byte for byte, with a comment saying why the "123" stays. The SQL it reads is still the net-current definition. Re-run: `implementationPackets` + `gallerySanitizeAllowlist.contract` 35/35. So the tip's reds now equal the base's, file for file and count for count.
+
+**The base's red list, none caused by this seat:**
+- `domainAnyCastBaseline` 5
+- `institutionTable` 2
+- `negativeAssertionAnchor` 2
+- `proseWiringCensus` 2
+- `mutationCoverageManifest` 1
+- `sovereigntyLightingContract` 1
+- `writerReach.walker` 1: "the surfaceReach grammar round-trips", the stale baseline (§6)
+- `ledgerCitationIntegrity` and `provenanceMap`: ENVIRONMENT, no local `refs/heads/review-fixes-2026-07-08`, as PEOPLE-LAND §5 records
+
+`tests/docs/architectureFreshness` (CURRENT_STATE.md's head) is also red at the base, 204's lane (§7.2).
+
+**The touched suites.** Every test file outside those three directories that imports `publicSafe`, `toPublicSafe` or `galleryVeil` (30 files, the people suites `people6InstitutionFaceLinks` and `tests/domain/display/publicSafe` among them): **712 of 712, exit 0**. `tests/security` + `tests/domain/display`: 2,231 passed, 1 failed (`tierNounKeptRulings`, red at the base). `tests/ops` + `tests/docs`: 265/266 (architectureFreshness, the base's). The migration tests: 139/139.
+
+**`npm run build`**: exit 0 at the tip and at the base. Bytes compared by chunk name, with hashes stripped (every chunk hash moves with the build stamp):
+- the ONLY chunk whose size moved is `assets/publicSafe-*.js`, **3,460 → 3,321 bytes (−139)**: the two dropped `publicNpc` fields and one dropped allowlist key;
+- the dist JS/CSS/HTML total is 34,901,811 → 34,901,672 (−139).
+
+`publicSafe.js` shrank, so no ceiling is raised and none is touched. Whether the landing lowers a zero-slack ceiling by these 139 bytes is the landing's call (rule 33).
+
+**No golden moved.** `git diff --stat f28d369b7 HEAD -- tests/fixtures/ docs/shift-records/` is empty. No generator, display or simulation file is touched (`git diff --stat`: 14 files, all in this manifest plus the migration's doors).
 
 ## 6. Registers
 
@@ -138,7 +167,23 @@ FIGURES-PENDING
 
 ## 8. CONFIRMED vs PLAUSIBLE
 
-FIGURES-PENDING
+**CONFIRMED** (each read from a command's own exit code or output):
+- 205's SQL executes in pglite and strips the three keys, while the powers and the card survive;
+- the client equals the server field for field;
+- every red-first (8, 6, and 4 violations);
+- the tip's red list equals the base's after the EM-B3a cure;
+- the 139-byte shrink is confined to one chunk;
+- the empty fixtures diff;
+- the rehearsal plan's figures and wave 205's sha256;
+- step 0's counts (the 525 at `f28d369b7`);
+- step 3's figures (879 / 387 / 576 / 480 / 152);
+- the criminal face's public `title`/`role`, from the code read;
+- writer reach's drift identical at base and tip.
+
+**PLAUSIBLE:**
+- That 205 applies cleanly in production. It is the same `create or replace` shape 189 applied, and it runs in pglite and in `migrationSequenceAll`, but the attended clone rehearsal (`--execute`) was not run.
+- That no deployed client reads the three keys off a public payload. The walker covers `src/`; an old client cached in a browser would simply see them absent.
+- That step 3 option (a) or (b) is the right shape. That is the chair's ruling.
 
 ## 9. THE DEPLOY STEP (for the owner, in plain words)
 
