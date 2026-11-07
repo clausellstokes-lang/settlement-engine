@@ -168,7 +168,11 @@ export const MANIFEST_PROVENANCE = Object.freeze({
     + '0 added, 0 removed.'
     + ' 2026-11-06 (THE FOOD PER CENT FROM THE POUNDS, docs/shift-records/2026-11-06-rung1-34-food-per-cent-from-pounds.json, ODQ §934.105,'
     + ' RUNG 1 OF THE SOAK LADDER): re-recorded at the stage of 18fd6b442 because the food writer and its view derive the per cent from the'
-    + ' pounds they publish, with no floor; 24 of the 1,050 rows move, 0 added, 0 removed.',
+    + ' pounds they publish, with no floor; 24 of the 1,050 rows move, 0 added, 0 removed.'
+    + ' 2026-11-07 (THE REVIEW-INTAKE LANE, RECORD 0a OF THE PEOPLE CAR\'S LANDING, docs/shift-records/2026-11-07-people-land-0a-review-intake.json,'
+    + ' ODQ §934.105): re-recorded at the stage of 5b444331a because the review-intake lane\'s merge (a proxy is not a provider; water read'
+    + ' from the record; no roster carries one secret or goal twice) moved the composed prose of four towns; 8 of the 1,050 rows move, 0 added,'
+    + ' 0 removed.',
 });
 
 /** This surface's identity in tests/fixtures/.golden-freeze-register.json. */
