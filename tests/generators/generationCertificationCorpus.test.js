@@ -383,38 +383,27 @@ function expectIndependentIntegrity(settlement, label) {
     ).toBe(100);
   }
 
+  // PEOPLE-LAND re-key, cause M-7 (the v2 boundary, PEOPLE_5B_EDIT §9 item 1), as
+  // scripts/audit/generation-certification-soak.mjs already reads it: a card's power is a MEMBERSHIP naming a
+  // power on the roster (the per-NPC `factionAffiliation` left the record), and a conflict is fought between
+  // POWER factions (GS-2, ODQ §934.101), so its parties are checked against `powerStructure.factions`. The
+  // grouping (`settlement.factions`) left the record at v2, so its member check has no subject and left with it.
   const powerFactionSet = new Set(powerFactionNames);
   for (const npc of npcs) {
-    if (!npc?.factionAffiliation) continue;
-    expect(
-      powerFactionSet.has(npc.factionAffiliation),
-      `${label} NPC ${npc.id} references a missing power faction`,
-    ).toBe(true);
-  }
-
-  const narrativeFactions = settlement.factions || [];
-  const narrativeFactionNames = narrativeFactions
-    .map(faction => faction?.name)
-    .filter(Boolean);
-  expect(
-    new Set(narrativeFactionNames).size,
-    `${label} contains duplicate narrative factions`,
-  ).toBe(narrativeFactionNames.length);
-
-  const narrativeFactionSet = new Set(narrativeFactionNames);
-  for (const [index, faction] of narrativeFactions.entries()) {
-    for (const member of faction?.members || []) {
+    for (const membership of Array.isArray(npc?.memberships) ? npc.memberships : []) {
+      if (!membership?.power) continue;
       expect(
-        npcById.has(member?.id),
-        `${label} faction[${index}] references a missing NPC`,
+        powerFactionSet.has(membership.power),
+        `${label} NPC ${npc.id} membership references a missing power faction`,
       ).toBe(true);
     }
   }
+  expect(Object.hasOwn(settlement, 'factions'), `${label} still carries the retired NPC grouping`).toBe(false);
   for (const [index, conflict] of (settlement.conflicts || []).entries()) {
     for (const party of conflict?.parties || []) {
       expect(
-        narrativeFactionSet.has(party),
-        `${label} conflict[${index}] references a missing narrative faction`,
+        powerFactionSet.has(party),
+        `${label} conflict[${index}] references a missing power faction`,
       ).toBe(true);
     }
   }
