@@ -115,7 +115,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "crisis: any",
             "no crisis: threat, unrest"
           ],
-          "text": "Much of the perimeter at {settlement} has nobody on it, and the people who live there seem used to that.",
+          "text": "Much of {settlement}'s perimeter has nobody on it, and the people who live there seem used to that.",
           "slots": [
             "settlement"
           ],
@@ -233,7 +233,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "People at {settlement} know what their town sits on and that their neighbours know it too, and it makes them careful whom they cross.",
+          "text": "People at {settlement} know what the town sits on and that their neighbours know it too, and it makes them careful whom they cross.",
           "slots": [
             "settlement"
           ],

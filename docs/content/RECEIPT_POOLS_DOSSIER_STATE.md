@@ -2562,7 +2562,7 @@ margin *arm*. They are different fields on different rows and both are kept;
 
 **readiness `WEAK`** {crisis-scoped}
 1. `[ledger · crisis: any]` The defensive arrangements at {settlement} are thin. Something is in place against most pressures and nothing is in place in depth.
-2. `[visitor · walls · crisis: any · no crisis: threat, unrest]` Much of the perimeter at {settlement} has nobody on it, and the people who live there seem used to that.
+2. `[visitor · walls · crisis: any · no crisis: threat, unrest]` Much of {settlement}'s perimeter has nobody on it, and the people who live there seem used to that.
 3. `[unfolding · crisis: any · no crisis: threat, unrest]` {settlement} has not been tested lately and would struggle if it were. Its defences are thinning, and nothing now under way will mend them.
 
 **readiness `CRITICAL`** {crisis-scoped}
@@ -2582,7 +2582,7 @@ margin *arm*. They are different fields on different rows and both are kept;
 
 **strategic value HIGH** {colour}
 1. `[ledger]` Any map of the region marks {settlement} as worth taking, so the town has to make itself cost more to seize than it is worth.
-2. `[street]` People at {settlement} know what their town sits on and that their neighbours know it too, and it makes them careful whom they cross.
+2. `[street]` People at {settlement} know what the town sits on and that their neighbours know it too, and it makes them careful whom they cross.
 3. `[visitor]` Spend a day at {settlement} and you see why anyone would want it, and why its people are careful whom they offend.
 
 **strategic value LOW**
