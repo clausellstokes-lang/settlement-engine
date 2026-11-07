@@ -11,7 +11,7 @@
       "scripts/prose-rate-corpus.mjs": "9d5d9f6ddfa7a6933fa2ec6a8e949066aacffad0d614caf22bb51e6efe39a399"
     },
     "rows": 1050,
-    "rowsSha": "5af6b1ace86df6c2e3fc2203611895ca66c41e8da50925fb5e15116dbd2d267a"
+    "rowsSha": "0379ab0d582256228ad0304b018d2e3f3ef1b6405402ae58d39b856453d0078e"
   },
   "rows": {
     "city|arabic|coastal|port|civilized|golden-master-v3::dm": "ba2807cebec82ea5b1ffe580928e8c822f600da7beafef7f315e8a65df994a6a",
@@ -764,8 +764,8 @@
     "town|germanic|plains|mountain_pass|civilized|golden-master-v3::player": "fffff357e0f926feeaefda3523a3b27dfef5a06a4c221cc88425874b1e5b96b1",
     "town|germanic|plains|none|civilized|golden-master-v3::dm": "d6c4d7c987368942d8cc14895b2d7a08e737f02d519416dd4165b0e4ab8747af",
     "town|germanic|plains|none|civilized|golden-master-v3::player": "3b3f1fcdaa3769d820e2a05b67723df8ec778d4f100785783526d5327dba2159",
-    "town|germanic|plains|port|civilized|golden-master-v3::dm": "678c99abdb2369fa161045690f1d2061b95c63e6dc293fccdfb70824afaff121",
-    "town|germanic|plains|port|civilized|golden-master-v3::player": "2a6c6d24f7e3a031208ca55dd188bbdc1e8e80484c56ff98b1b8703c9b9f3fce",
+    "town|germanic|plains|port|civilized|golden-master-v3::dm": "9dc77c5509869a6f6a04a1cf32dc72774152cef344ff9778dce58fefcde4688a",
+    "town|germanic|plains|port|civilized|golden-master-v3::player": "8b9757a9a0d2fb9523bda6ce1b2c9b7340b32436fdafa79f7d1f24b4773a3566",
     "town|germanic|plains|river|civilized|golden-master-v3::dm": "e1d8211cf49e60fbb6c1edde6c23764e642ad16a71581da87c3b56220f166b2f",
     "town|germanic|plains|river|civilized|golden-master-v3::player": "b81bcf176a2d258322180bba3000ec2651132816fa27ff14f61abd83b197770f",
     "town|germanic|plains|road|civilized|gm-seed-a::dm": "db6fc49eb5df8d71db4086e85289eab6b2f0db63db1a41ca1b2edf56357fa156",

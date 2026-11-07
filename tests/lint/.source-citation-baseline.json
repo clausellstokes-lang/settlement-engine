@@ -49,7 +49,7 @@
       "banner": 9,
       "dated": 132,
       "sha-pin": 1,
-      "tree": 106
+      "tree": 108
     },
     "files": {
       "banner": [
@@ -279,7 +279,9 @@
         "docs/shift-records/2026-11-07-w3-03-style-ds-pow-2.json",
         "docs/shift-records/2026-11-07-w3-04-style-ds-pow-5.json",
         "docs/shift-records/2026-11-07-w3-05-style-ds-pow-6.json",
-        "docs/shift-records/2026-11-07-w3-06-style-ds-pow-7.json"
+        "docs/shift-records/2026-11-07-w3-06-style-ds-pow-7.json",
+        "docs/shift-records/2026-11-07-w3-07-ledger-ds-pow-2.json",
+        "docs/shift-records/2026-11-07-w3-08-ledger-ds-pow-6.json"
       ]
     },
     "_rosterGrowth2026-10-30-consolidation": "FIVE documents JOINED the roster by being BORN into it, and they hid NOTHING (re-measured by BUILD-T1 on claude/ux-T1 rebased onto 2acd0206): the integration branch's docs/UX_CONSOLIDATION_2026-10-30.md joined `dated` (5 -> 6) and BUILD-S's docs/shift-records/2026-10-30-service-category-fidelity.json joined `tree` (40 -> 41), both already on the tip; BUILD-T1's three signed records docs/shift-records/2026-10-30-arrival-market-gate.json, -no-market-pool.json and -migration-one-direction.json joined `tree` (41 -> 44). GROWTHS, not class moves: each file entered the tree already archival by rule, and each shift record is a JSON signature with zero path:line citations of its own, so pastEofCitationsExcluded stays at 377.",
@@ -308,7 +310,7 @@
     "_rosterGrowth2026-11-07-merge-r2": "MERGE-R2 (2026-11-07, the integration merge of the rung-2 landing fc4cb0b9f into lane/integration-2026-11-07): dated 107 -> 130 and tree 95 -> 100, re-measured ONCE by the walker at the merged tip. dated: the integration side's 107 (76 + 31) united with LANDING-R2 seat E's 22 (76 -> 98), plus docs/INTEGRATION_MERGE_R2_2026-11-07.md, this seat's record, born dated, 0 past-EOF. tree: each side's +5 under the tree rule's paths (90 -> 95 on each side), united; no document changed class.",
     "_rosterGrowth2026-11-07-wave-rulings": "ONE document JOINED the roster by being BORN into it (the chair): `dated` 130 -> 131, docs/chair/2026-11-07/WAVE-RULINGS-2026-11-07.md, the writing wave's rulings, born dated, 0 past-EOF citations. A GROWTH, not a re-classification.",
     "_rosterGrowth2026-11-07-w3": "ONE document JOINED the roster by being BORN into it (lane W3 POW): `dated` 131 -> 132, docs/WIRING_W3_2026-11-07.md, the lane's record, born dated. A GROWTH, not a re-classification.",
-    "_rosterGrowth2026-11-07-w3-records": "SIX documents JOINED `tree` (100 -> 106) by being BORN into it (lane W3 POW, second seat), and they hid NOTHING: docs/shift-records/2026-11-07-w3-01 … -06, the signed re-records of the composed-prose manifest (C1-C6 said; the owner's style law over DS-POW-1, -2, -5, -6, -7). GROWTHS, not class moves: each entered the tree inside docs/shift-records/ and the ARCHIVAL_TREES rule classified it on its first commit; each is a JSON signature with zero path:line citations of its own, so pastEofCitationsExcluded stays 377 and ARM 2 over live docs stays 0."
+    "_rosterGrowth2026-11-07-w3-records": "SIX documents JOINED `tree` (100 -> 106) by being BORN into it (lane W3 POW, second seat), and they hid NOTHING: docs/shift-records/2026-11-07-w3-01 … -06, the signed re-records of the composed-prose manifest (C1-C6 said; the owner's style law over DS-POW-1, -2, -5, -6, -7). GROWTHS, not class moves: each entered the tree inside docs/shift-records/ and the ARCHIVAL_TREES rule classified it on its first commit; each is a JSON signature with zero path:line citations of its own, so pastEofCitationsExcluded stays 377 and ARM 2 over live docs stays 0. Then -07 and -08 (the ledger vantage, WAVE-RULINGS item 16): `tree` 106 -> 108, the same class, zero citations each."
   },
   "rows": []
 }
