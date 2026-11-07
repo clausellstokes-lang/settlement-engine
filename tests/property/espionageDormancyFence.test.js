@@ -189,6 +189,15 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * AND NOWHERE ELSE. Most recently at the ENGINE-HYGIENE landing (SHIFT RECORD,
  * 2026-09-01, TE-AGNOSTIC-1 cars `f2c1ad181` / `97d119c9b`); before that at T8.
  *
+ * ── 2026-11-07, THE LEGACY ANNOTATION'S DATE IN ONE HOME (THE WIRING WAVE'S WRITER LANE W0) ──
+ * THE SIXTY-SIXTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation of 2026-11-06,
+ * inside a NAMED CHARTERED WINDOW: ODQ §934.105 (the chair's ruling R-W7 (d)); the record is
+ * docs/shift-records/2026-11-07-w0-05-annotation-date-one-home.json. THE MOVER, FOUND: commit b79dfa98b alone (the
+ * annotation's asOf field, read by nothing, withdrawn; its text keeps the date). On THIS corpus 337 of 360 rows move
+ * (the places with an annotation); 360/360 hashes stay distinct. Written from the staged tree (b79dfa98b with the door
+ * paths carried from the branch, the golden master's act committed first), measured by scripts/audit/refence.mjs
+ * before the write. `a83e777b…` -> `726ef86a…`.
+ *
  * ── 2026-11-07, LEGACY ANNOTATIONS DATED AT BIRTH (THE WIRING WAVE'S WRITER LANE W0) ──
  * THE SIXTY-FIFTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation of 2026-11-06,
  * inside a NAMED CHARTERED WINDOW: ODQ §934.105, the construction-and-wiring wave's writer lane (the chair's ruling
@@ -893,7 +902,7 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * superseded by the ENGINE-HYGIENE re-record above, which is the record of the
  * one chartered window that has been spent since.
  */
-const PRE_COUPLING_CORPUS_SHA = 'a83e777b8452636d4b1231c5d471029202f1ee498a188c4972e4c74dd15b5b20';
+const PRE_COUPLING_CORPUS_SHA = '726ef86a695eb842659ccfdcc25c7acea4f4e99561d7f5a4e43df29a095f5bff';
 
 const CORPUS_TIERS = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
 const CORPUS_ROUTES = Object.freeze(['road', 'isolated', 'port', 'crossroads']);

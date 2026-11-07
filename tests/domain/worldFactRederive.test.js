@@ -420,8 +420,10 @@ describe('EM-B2b — world facts by consequence: the route, the refusals and the
     // the stage at 3d1df12d7: the generator master 1847e8b7.. -> 8141a111.. (525 of 525 rows); the prose manifest did not move.
     // Then WIRING-W0 record 04, LEGACY ANNOTATIONS DATED AT BIRTH (docs/shift-records/2026-11-07-w0-04-legacy-annotations-dated.json),
     // from the stage at b893dcda1: the generator master 8141a111.. -> 98f99494.. (525 of 525 rows); the prose manifest did not move.
+    // Then record 05, the annotation's date in one home (the asOf field withdrawn), from the stage at b79dfa98b:
+    // 98f99494.. -> 06050f53.. (525 of 525 rows); the prose manifest did not move.
     expect(shaOfFile(GOLDEN), 'tests/fixtures/generator-golden-master.json moved')
-      .toBe('98f994948fe1a8c0146d8e1cfe9e9e4a86e50289b8c83680590d28d54c77ae0c');
+      .toBe('06050f531a8f55f5d9e54026942dd11336352ea50920843bb7af929f0960623d');
     expect(shaOfFile(PROSE_GOLDEN), 'tests/fixtures/dossier-prose-manifest-golden.json moved')
       .toBe('777e4b4b2968fab6b02a758435c7dcc8c779753942aeab77c4ae8c261e6d990e');
 

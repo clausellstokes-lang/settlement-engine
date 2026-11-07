@@ -288,7 +288,7 @@
         "PRE_COUPLING_CORPUS_SHA"
       ],
       "frozenConstants": null,
-      "sha256": "16f3d5966b2f8bef6b25cba3b92b7f71df3b743e3087e572ad25f41acb1aa648",
+      "sha256": "b48e8b182702c6def55a13270ae2a0f60c3a5d72e8a4668beb10188003e3da76",
       "rows": null,
       "seedSet": null,
       "distinctFloor": null,
@@ -342,7 +342,7 @@
       "suite": "tests/property/generatorGoldenMaster.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": "98f994948fe1a8c0146d8e1cfe9e9e4a86e50289b8c83680590d28d54c77ae0c",
+      "sha256": "06050f531a8f55f5d9e54026942dd11336352ea50920843bb7af929f0960623d",
       "rows": 525,
       "seedSet": null,
       "distinctFloor": null,
