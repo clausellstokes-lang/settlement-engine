@@ -29,7 +29,7 @@ import { hasPantheon } from '../../map/PantheonPanel.jsx';
 // war tab, and the mount walker admits exactly one caller per desk so the public-dossier
 // gate lives in one place for both.
 import {
-  FaithCreedLines, FaithNicheGlance, FaithSeatLines, FaithTeaserLines, warFaithDeskRungs,
+  FaithCreedLines, FaithGroundLines, FaithNicheGlance, FaithSeatLines, FaithTeaserLines, warFaithDeskRungs,
 } from './WarFaithDesk.jsx';
 import { useStore } from '../../../store/index.js';
 import { BORDER, CARD, FS, GREEN, INK, MUTED, RED, SECOND, BODY, sans } from '../../theme.js';
@@ -137,6 +137,8 @@ export default function FaithTab({ settlement, saveId = null, playerView = false
       patronFallCause: model.patronFallSentence
         ? Object.keys(FALL_SENTENCE).find((c) => FALL_SENTENCE[c] === model.patronFallSentence)
         : undefined,
+      // DS-FTH-4's generation lens (W4 PEOPLE, 2026-11-07): the birth-time stress flags.
+      faithFlags: settlement?.safetyProfile?.flags || null,
     },
   });
 
@@ -166,6 +168,9 @@ export default function FaithTab({ settlement, saveId = null, playerView = false
       {/* ── faith.creedStanding (DS-FTH-3) — standing, legitimacy and the niche contest;
           the fall lens is cut where the panel prints the fall sentence (F4) ── */}
       <FaithCreedLines desk={panelDesk} settlement={settlement} />
+      {/* ── faith.templeGround (DS-FTH-4) — the church beside the town's other powers, from the
+          birth-time stress flags; it speaks with or without a patron (W4 PEOPLE, 2026-11-07) ── */}
+      <FaithGroundLines desk={panelDesk} settlement={settlement} />
       {pantheonCampaign && (
         <div data-testid="faith-realm-pantheon" style={{ marginTop: 16 }}>
           {/* The wait is WITNESSED, not confessed (the witnessed-wait ratchet's

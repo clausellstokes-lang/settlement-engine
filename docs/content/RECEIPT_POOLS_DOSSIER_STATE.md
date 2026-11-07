@@ -6351,6 +6351,20 @@ no compass word, no real-world place, no named analogy.*
 1. `[counterforce]` {settlement} keeps few institutions because it needs few; what a larger town does with buildings, this one does with acquaintance.
 2. `[street]` Nothing in {settlement} is official that could instead be somebody's job on the side.
 
+⭐ **THE GREAT HOUSE LENSES (W4 PEOPLE, 2026-11-07; the wiring inventory's C5, "great religious houses present").** Two more lenses at the same position, each keyed on its own composition boolean — `compound.inst.hasCathedral` and `compound.inst.hasMonastery` — and silent where it is false. Every variant names the house by its kind (the cathedral, the monastery), never by the roster's catalogue row, so no slot beyond `{settlement}` is needed. Four vantages each (the intro position), each declaring the house it names.
+
+**`GREAT HOUSE: cathedral`**
+1. `[traveller · institution: temple]` The cathedral stands taller than anything else in {settlement}, and travellers see it long before they arrive.
+2. `[local · institution: temple]` {settlement} sets its days by the cathedral bells: the feasts, the burials and the hours of work all follow them.
+3. `[newcomer · institution: temple]` Ask the way anywhere in {settlement} and you will be given it from the cathedral.
+4. `[official · institution: temple]` {settlement} keeps a cathedral, a bishop's church that the clergy of the whole district answer to.
+
+**`GREAT HOUSE: monastery`**
+1. `[traveller · institution: monastery]` Robed men and women from the monastery are a common sight on the way into {settlement}.
+2. `[local · institution: monastery]` {settlement} sets its day by the monastery bell.
+3. `[newcomer · institution: monastery]` Anyone new to {settlement} who needs a meal or a bed is sent to the monastery door.
+4. `[official · institution: monastery]` The monastery answers to its own order before it answers to whoever governs {settlement}.
+
 ---
 
 ### DS-GEN-18 · Economics/Services › Why these workshops (the crafts explained by their feed) · `economicState.activeChains[]` × `resourceAnalysis.exploitation` × `economicState.{isEntrepot, primaryImports}`
@@ -6414,6 +6428,28 @@ no compass word, no real-world place, no named analogy.*
 **`THIN`** {colour}
 1. `[ledger]` {creed} keeps a footing at {settlement} rather than a hold; the observance is present, and presence is the extent of it.
 2. `[street]` {institution} at {settlement} is one thread in the town's week, not the loom.
+
+⭐ **THE GENERATION LENS — THE CHURCH'S STANDING WITH THE TOWN'S OTHER POWERS (W4 PEOPLE, 2026-11-07; the wiring inventory's C1–C4, WAVE-RULINGS item 10: the block MOUNTED at `faith.templeGround` in the same commit).** Four pools keyed on the birth-time stress flags `safetyProfile.flags.{crusaderSynthesis, heresySuppression, heresyIntensity, religiousFraud, mageTheocracy}` (`priorityHelpers.js`), each drawn ONLY WHEN its flag is true and silent otherwise. These are GENERATION facts and hold on every settlement, deity or none, so they speak where `CONTESTED`/`ROOTED`/`ENDOWED`/`THIN` cannot (those four stay dark until the religion state and `templeWealth` reach the record). `heresyIntensity` bands the heresy pool: at or above one half the church hunts, below it the church preaches. Each flag already requires a church on the roster (and a garrison, a criminal house or a magic house as its own antecedent names), and each variant declares the house it presumes. Description position: plain lines, two vantages each (the projection's floor refuses a single-voiced pool). No variant names a creed or a god.
+
+**`FLAG: crusaderSynthesis`**
+1. `[watch · garrison · institution: temple]` The church and the garrison in {settlement} act as one: soldiers keep the feast days, priests stand at the musters, and an offence against the faith is answered by armed men who call themselves crusaders.
+2. `[local · garrison · institution: temple]` Soldiers in {settlement} keep the faith's feast days like crusaders, and the priests' word carries the weight of the garrison behind it.
+
+**`FLAG: heresySuppression: hunted`**
+1. `[local · institution: temple]` The church in {settlement} hunts heresy openly. Anyone suspected of working magic against the faith is denounced from the pulpit and handed to the authorities, so those who have the art keep it hidden.
+2. `[watch · institution: temple]` The church in {settlement} watches for heresy: a charm sold in the street or a spell worked behind a shutter can bring armed men to the door in the faith's name.
+
+**`FLAG: heresySuppression: preached`**
+1. `[newcomer · institution: temple]` The church in {settlement} preaches that magic is heresy against the faith, and a newcomer seen working a spell will be reported to the priests.
+2. `[local · institution: temple]` Magic is called heresy from {settlement}'s pulpit, and folk of the faith who know a charm or two keep it to themselves.
+
+**`FLAG: religiousFraud`**
+1. `[watch · institution: temple]` Some of {settlement}'s clergy work with its thieves: relics are sold twice, alms go missing, and no one in office asks where the money went. The fraud trades on the faith of ordinary folk.
+2. `[local · institution: temple]` Folk in {settlement} pay for blessings and relics they half suspect are a fraud. The church and the town's thieves share what their faith pays.
+
+**`FLAG: mageTheocracy`**
+1. `[official · institution: temple]` Priests and mages in {settlement} share authority: the church blesses the mages' work, and the mages' learning serves the faith.
+2. `[local · institution: temple]` In {settlement} the priests and the mages are hard to tell apart: the faith's rites use spellcraft, and the mages keep the feast days.
 
 ---
 

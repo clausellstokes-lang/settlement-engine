@@ -120,6 +120,7 @@ const PRINT_KICKER = Object.freeze({
   'faith.patronSeat': 'The patron seat',
   'faith.teaser': 'What the town keeps faith with',
   'faith.creedStanding': 'The creed\'s standing',
+  'faith.templeGround': 'The church and the town\'s other powers',
 });
 
 /** The label over one position, from whichever map owns it. */

@@ -315,8 +315,8 @@ describe('the corpus loaders — fail-closed, and counted against the probe', ()
     // c00b30eb6 +4); the causal leaf and the 787 pools unchanged. 2810 -> 2811 at
     // LANDING-R2 helper G (the chair's §934.105 ruling (1): DS-GEN-17 PROVISIONED v3, the hospital-only line) +1.
     // 2811 -> 2812 at LANDING-R2 helper G2 (the chair's 06:5x DS-CND-1 boom line (ODQ §934.105, ruling (2)): ARCHETYPE: boom v4 `[street · crisis: any]`) +1.
-    expect(leaves.length + causal.length).toBe(2812);
-    expect(new Set([...leaves, ...causal].map((e) => e.poolId)).size).toBe(787);
+    expect(leaves.length + causal.length).toBe(2830); // W4 PEOPLE 2026-11-07: +7 pools/+18 variants, the faith and great-house construction
+    expect(new Set([...leaves, ...causal].map((e) => e.poolId)).size).toBe(794); // W4 PEOPLE 2026-11-07: re-measured, the faith and great-house construction
     expect(new Set(leaves.map((e) => e.block)).size).toBe(68);
     expect(crier.length).toBeGreaterThan(300);
     expect(generator.length).toBeGreaterThan(0);
@@ -331,13 +331,13 @@ describe('the corpus loaders — fail-closed, and counted against the probe', ()
     // (6dd3f9766, the {colour} rulings) +21 rows whose text now joins its twin. 0 unjoined.
     // 2121 -> 2122 at LANDING-R2 helper G (the chair's §934.105 ruling (1): DS-GEN-17 PROVISIONED v3, the hospital-only line) +1.
     // 2122 -> 2123 at LANDING-R2 helper G2 (the chair's 06:5x DS-CND-1 boom line (ODQ §934.105, ruling (2)): ARCHETYPE: boom v4 `[street · crisis: any]`) +1.
-    expect(joined.length).toBe(2123);
+    expect(joined.length).toBe(2141); // W4 PEOPLE 2026-11-07: +7 pools/+18 variants, the faith and great-house construction
     expect(unjoined).toEqual([]);
     // The compact-row grammar (a whole pool on one bullet line, 225 variants) carries no
     // per-row address, so not every leaf variant has an annex line. That gap is the ADDRESS
     // reader's, is declared, and is why the pool grammar stays with the projection.
     expect(leafLines.size).toBeLessThan(leaves.length);
-    expect(leafLines.size).toBe(2123); // 2121 -> 2122 at the same cause: the new line is addressed; 2122 -> 2123 at G2's boom v4, likewise
+    expect(leafLines.size).toBe(2141); // 2121 -> 2122 at the same cause: the new line is addressed; 2122 -> 2123 at G2's boom v4, likewise; 2123 -> 2141 at W4 PEOPLE 2026-11-07 (the faith and great-house construction, 18 new lines, each addressed)
   });
 });
 
@@ -359,7 +359,7 @@ describe('the composed-fill resolver — measured against an orthogonal witness'
     // composer's slot bag from source and asking which blocks no bag serves. They agree
     // exactly. If the resolver ever goes dark it will disagree, loudly.
     expect(noBag.slice().sort()).toEqual([...UNMOUNTED_BLOCKS].sort());
-    expect(noBag.length).toBe(15);
+    expect(noBag.length).toBe(14); // W4 PEOPLE 2026-11-07: +7 pools/+18 variants, the faith and great-house construction
   });
 
   it('reads the three bags the reconciliation measured by hand', () => {

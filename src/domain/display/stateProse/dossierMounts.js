@@ -445,6 +445,13 @@ export const DOSSIER_MOUNTS = Object.freeze([
   Object.freeze({
     mount: 'faith.nicheRow', tab: 'faith', desk: 'warFaith', blockId: 'DS-FTH-3', rung: 'glance',
   }),
+  // DS-FTH-4 MOUNTED (W4 PEOPLE, 2026-11-07; WAVE-RULINGS item 10): its generation lens reads
+  // the birth-time stress flags (`safetyProfile.flags`), which every settlement carries, so the
+  // block speaks on the deity-free town too. The four religion-state pools stay undrawable
+  // until the religion state and `templeWealth` reach the record (the desk keys none of them).
+  Object.freeze({
+    mount: 'faith.templeGround', tab: 'faith', desk: 'warFaith', blockId: 'DS-FTH-4', rung: 'sentence',
+  }),
   Object.freeze({
     mount: 'defense.supportingCapabilities', tab: 'defense', desk: 'defense', blockId: 'DS-DEF-6', rung: 'sentence', dimensions: ['threat', 'walls'],
   }),
@@ -542,15 +549,10 @@ export const UNMOUNTED_BLOCKS = Object.freeze([
   //     aftermath, blockade and treaty-burden pools need activeConditions/spatialLedgers
   //     reads the war tab does not perform. Lit by a token-returning resistance ladder and
   //     an aftermath reader on the tab.
-  //   DS-FTH-4 — ⛔ `templeWealth` HAS NO WRITER IN THE ENGINE (a WF-7 design-doc future;
-  //     the estate's own DESIGN_FP_ARCH_WF.md V27 row records `grep templeWealth in
-  //     src/domain: 0` as VERIFIED), and `tenure` is not among the seven fields
-  //     `projectReligionStateOntoSettlement` puts on `config.faithProfile.deities[]`. Its
-  //     one remaining pool (CONTESTED) is the fact DS-FTH-1 already speaks on that tab.
-  //     Lit by the banded temple stock plus `tenure` in the projection.
+  //   (DS-FTH-4 left this list on 2026-11-07, W4 PEOPLE: mounted at `faith.templeGround` on its
+  //     generation lens; its religion-state pools stay undrawn, see the mount row.)
   'DS-WAR-4',
   'DS-WAR-5',
-  'DS-FTH-4',
 ]);
 
 /**

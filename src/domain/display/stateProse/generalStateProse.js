@@ -1218,6 +1218,24 @@ export function institutionsPoolKey(inst, record = undefined) {
   return CORPUS['DS-GEN-17'].pools[key] ? key : null;
 }
 
+/**
+ * DS-GEN-17's two GREAT HOUSE lenses (W4 PEOPLE, 2026-11-07; the wiring inventory's C5): the
+ * cathedral and the monastery the roster carries, each keyed on its own composition boolean
+ * (`compound.inst.hasCathedral`, `compound.inst.hasMonastery`) and null where it is false,
+ * which is R-DST-K. A town with both prints both: two houses, two facts.
+ * @param {unknown} hasCathedral @returns {string|null}
+ */
+export function cathedralPoolKey(hasCathedral) {
+  if (hasCathedral !== true) return null;
+  return CORPUS['DS-GEN-17'].pools['GREAT HOUSE: cathedral'] ? 'GREAT HOUSE: cathedral' : null;
+}
+
+/** @param {unknown} hasMonastery @returns {string|null} */
+export function monasteryPoolKey(hasMonastery) {
+  if (hasMonastery !== true) return null;
+  return CORPUS['DS-GEN-17'].pools['GREAT HOUSE: monastery'] ? 'GREAT HOUSE: monastery' : null;
+}
+
 // ── DS-GEN-18 · Economics › Why these workshops (the crafts explained by their feed) ──
 
 /**
@@ -1676,6 +1694,8 @@ export const GENERAL_STATE_PROSE_SILENT = Object.freeze({
     ground: null,
     market: null,
     institutions: null,
+    cathedral: null,
+    monastery: null,
     notableConnection: Object.freeze([]),
     populationDirection: null,
   }),
@@ -2020,6 +2040,9 @@ export function generalStateProse(settlement, readings = {}, options = {}) {
       ground: rung('DS-GEN-12', groundPoolKey(readings.terrainType), ''),
       market: rung('DS-GEN-13', marketPoolKey(readings), ''),
       institutions: rung('DS-GEN-17', institutionsPoolKey(readings.inst, settlement), ''),
+      // DS-GEN-17's two GREAT HOUSE lenses (W4 PEOPLE, C5): the cathedral, the monastery.
+      cathedral: rung('DS-GEN-17', cathedralPoolKey(readings.inst?.hasCathedral), ''),
+      monastery: rung('DS-GEN-17', monasteryPoolKey(readings.inst?.hasMonastery), ''),
       // DS-REL-2's two lenses at ONE position: the tie the town names first, then how much
       // of its roll this town's own conditions made. The connection line leads because the
       // page prints its datum directly beneath.

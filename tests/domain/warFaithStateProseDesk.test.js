@@ -43,6 +43,7 @@ import {
   patronRankPoolKey, pietyArcPoolKey, sinkPoolKey, standingsPoolKey, faithTeaserPoolKey,
   treatyDocumentPoolKey, treatyFrayingPoolKey, treatyTermPoolKey, warExhaustionPoolKey,
   warFaithStateProse, warStatusPoolKey,
+  crusaderPoolKey, heresyPoolKey, religiousFraudPoolKey, mageTheocracyPoolKey,
 } from '../../src/domain/display/stateProse/warFaithStateProse.js';
 
 // THE REAL PRODUCERS — the whole point of this file's fixtures.
@@ -56,7 +57,7 @@ import { COLOUR_MARK, assertDeclarable } from '../../src/domain/facts/factVocabu
 const BLOCK = (id) => WAR_FAITH[id];
 const POOLS = (id) => Object.keys(BLOCK(id).pools);
 /** The six blocks DESK CAR 4 mounts. */
-const MOUNTED = Object.freeze(['DS-WAR-1', 'DS-WAR-2', 'DS-WAR-3', 'DS-FTH-1', 'DS-FTH-2', 'DS-FTH-3']);
+const MOUNTED = Object.freeze(['DS-WAR-1', 'DS-WAR-2', 'DS-WAR-3', 'DS-FTH-1', 'DS-FTH-2', 'DS-FTH-3', 'DS-FTH-4']);
 
 // ── THE FIXTURES, MINTED BY PRODUCERS ────────────────────────────────────────────────
 
@@ -160,10 +161,11 @@ describe('the warFaith corpus join is populated, or every claim below is free', 
       'DS-FTH-1', 'DS-FTH-2', 'DS-FTH-3', 'DS-FTH-4',
     ]);
     const pools = ids.flatMap((id) => Object.values(BLOCK(id).pools));
-    expect(pools).toHaveLength(138);
+    expect(pools).toHaveLength(143); // W4 PEOPLE 2026-11-07: +5, DS-FTH-4's FLAG pools (C1-C4)
     // 430 -> 433 at census-5b unit 3 (c00b30eb6, R-L): DS-WAR-1 warExhaustion rested and DS-FTH-3's
     // two uncontested/secure pools each gain one crisis-safe twin (measured 430 at its parent).
-    expect(pools.reduce((n, pool) => n + pool.length, 0)).toBe(433);
+    // 433 -> 443 at W4 PEOPLE (2026-11-07): DS-FTH-4's five FLAG pools, two variants each.
+    expect(pools.reduce((n, pool) => n + pool.length, 0)).toBe(443);
   });
 
   test('the producer-minted fixtures really carry the producer shapes', () => {
@@ -249,6 +251,7 @@ describe('the mount rows this car lands', () => {
       'war.standing:sentence', 'war.treaties:sentence', 'war.dormantNote:sentence',
       'faith.patronSeat:sentence', 'faith.teaser:sentence',
       'faith.creedStanding:sentence', 'faith.nicheRow:glance',
+      'faith.templeGround:sentence', // W4 PEOPLE 2026-11-07: DS-FTH-4 mounted (WAVE-RULINGS item 10)
     ]);
     expect([...new Set(rows.map((r) => r.tab))].sort()).toEqual(['faith', 'war']);
     // C3 ACROSS THE PAGE-SET: every mounted block speaks at exactly ONE position, and
@@ -260,10 +263,10 @@ describe('the mount rows this car lands', () => {
 
   test('the three dark blocks stay dark, and the dark half SHRANK by six', () => {
     expect(UNMOUNTED_BLOCKS.filter((id) => id.startsWith('DS-WAR-') || id.startsWith('DS-FTH-')))
-      .toEqual(['DS-WAR-4', 'DS-WAR-5', 'DS-FTH-4']);
-    // The accounting identity for this leaf: 6 mounted + 3 dark = the 9 the corpus holds.
+      .toEqual(['DS-WAR-4', 'DS-WAR-5']); // W4 PEOPLE 2026-11-07: DS-FTH-4 mounted
+    // The accounting identity for this leaf: 7 mounted + 2 dark = the 9 the corpus holds.
     expect(new Set(DOSSIER_MOUNTS.filter((r) => r.desk === 'warFaith').map((r) => r.blockId)).size
-      + 3).toBe(9);
+      + 2).toBe(9);
   });
 });
 
@@ -337,6 +340,13 @@ function reachableKeys() {
   for (const cause of ['displaced', 'discredited', 'imposed', 'suppressed']) add('DS-FTH-3', patronFallPoolKey(cause));
   add('DS-FTH-3', nicheContestPoolKey([{ niche: 'a', isPatron: true }, { niche: 'a' }]));
   add('DS-FTH-3', nicheContestPoolKey([{ niche: 'a', isPatron: true }, { niche: 'b' }]));
+
+  // DS-FTH-4 — the generation lens (W4 PEOPLE, 2026-11-07): the birth-time stress flags.
+  add('DS-FTH-4', crusaderPoolKey({ crusaderSynthesis: true }));
+  add('DS-FTH-4', heresyPoolKey({ heresySuppression: true, heresyIntensity: 0.8 }));
+  add('DS-FTH-4', heresyPoolKey({ heresySuppression: true, heresyIntensity: 0.2 }));
+  add('DS-FTH-4', religiousFraudPoolKey({ religiousFraud: true }));
+  add('DS-FTH-4', mageTheocracyPoolKey({ mageTheocracy: true }));
   return out;
 }
 
@@ -388,6 +398,13 @@ const DECLARED_UNREACHABLE = Object.freeze({
     // No pilgrimage reading exists on either host tab.
     'PILGRIM SEASON: heavy', 'PILGRIM SEASON: thin', 'PILGRIM SEASON: suppressed by road danger',
   ]),
+  'DS-FTH-4': Object.freeze([
+    // W4 PEOPLE (2026-11-07) mounted the block on its generation lens (the FLAG pools). These
+    // four read the religion state (`share`, `tenure`, `legitimacy`, the niche) and
+    // `templeWealth`: `tenure` is not projected onto config.faithProfile.deities[] and
+    // `templeWealth` has no writer (WF-7). Lit by the projection of tenure plus the temple stock.
+    'CONTESTED', 'ROOTED', 'ENDOWED', 'THIN',
+  ]),
 });
 
 describe('THE MAP, total in both directions', () => {
@@ -429,9 +446,10 @@ describe('THE MAP, total in both directions', () => {
     // by hand first (76 / 22), and both were wrong — the identity above still held because
     // one pool was counted on BOTH sides. Count both sides; never take a total on trust.
     expect(total + declared).toBe(MOUNTED.reduce((n, id) => n + POOLS(id).length, 0));
-    expect(MOUNTED.reduce((n, id) => n + POOLS(id).length, 0)).toBe(98);
-    expect(declared).toBe(19);
-    expect(total).toBe(79);
+    // W4 PEOPLE 2026-11-07: DS-FTH-4 mounted, +9 pools: 5 REACHED (the FLAG lens), 4 DECLARED.
+    expect(MOUNTED.reduce((n, id) => n + POOLS(id).length, 0)).toBe(107);
+    expect(declared).toBe(23);
+    expect(total).toBe(84);
   });
 });
 

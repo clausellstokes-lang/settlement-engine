@@ -67,8 +67,8 @@
       "ceilingGzip": 87513
     },
     "src/data/dossierStateProse/general.generated.js": {
-      "raw": 272147,
-      "gzip": 36445,
+      "raw": 275322,
+      "gzip": 36858,
       "ceilingRaw": 796761,
       "ceilingGzip": 177058
     },
@@ -85,8 +85,8 @@
       "ceilingGzip": 57524
     },
     "src/data/dossierStateProse/warFaith.generated.js": {
-      "raw": 176442,
-      "gzip": 25180,
+      "raw": 181741,
+      "gzip": 25922,
       "ceilingRaw": 505306,
       "ceilingGzip": 112290
     },
@@ -307,6 +307,22 @@
       "toRaw": 94103,
       "gzipAfter": 15113,
       "reason": "+341 B raw (gzip level 9: 15,067 -> 15,113), one commit: DS-CND-1 ARCHETYPE: boom gains v4 `[street · crisis: any]`, reading only the archetype and the name, so a keyed boom has a printable line under any crisis (v1-v3 each deny hunger, threat and indebted). Projected through `node scripts/generate-dossier-state-prose.mjs`; `--check` exit 0."
+    },
+    {
+      "car": "W4 PEOPLE (2026-11-07, the construction-and-wiring wave; ODQ §934.105): the faith and great-house construction rows C1-C5",
+      "leaf": "src/data/dossierStateProse/general.generated.js",
+      "fromRaw": 272147,
+      "toRaw": 275322,
+      "gzipAfter": 36858,
+      "reason": "+3,175 B raw (gzip level 9: 36,445 -> 36,858): DS-FTH-4 gains five FLAG pools on the birth-time stress flags (crusaderSynthesis, heresySuppression hunted/preached, religiousFraud, mageTheocracy; 10 variants) and is MOUNTED at faith.templeGround; DS-GEN-17 gains the two GREAT HOUSE lenses (cathedral, monastery; 8 variants, four vantages each). Projected through node scripts/generate-dossier-state-prose.mjs; --check exit 0."
+    },
+    {
+      "car": "W4 PEOPLE (2026-11-07, the construction-and-wiring wave; ODQ §934.105): the faith and great-house construction rows C1-C5",
+      "leaf": "src/data/dossierStateProse/warFaith.generated.js",
+      "fromRaw": 176442,
+      "toRaw": 181741,
+      "gzipAfter": 25922,
+      "reason": "+5,299 B raw (gzip level 9: 25,180 -> 25,922): DS-FTH-4 gains five FLAG pools on the birth-time stress flags (crusaderSynthesis, heresySuppression hunted/preached, religiousFraud, mageTheocracy; 10 variants) and is MOUNTED at faith.templeGround; DS-GEN-17 gains the two GREAT HOUSE lenses (cathedral, monastery; 8 variants, four vantages each). Projected through node scripts/generate-dossier-state-prose.mjs; --check exit 0."
     }
   ],
   "ceilingTransfersNewLeaves": [

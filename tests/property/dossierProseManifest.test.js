@@ -68,6 +68,9 @@ const MOUNTS_THE_CORPUS_DOES_NOT_REACH = Object.freeze({
   'faith.creedStanding': 'DS-FTH-3 fires on no town of either corpus',
   'faith.nicheRow': 'DS-FTH-3 fires on no town of either corpus',
   'faith.patronSeat': 'DS-FTH-1 fires on no town of either corpus',
+  // W4 PEOPLE 2026-11-07: DS-FTH-4's generation lens reads the four birth-time faith flags,
+  // and none of the 525 golden configurations fires one (measured 0/525 for each flag).
+  'faith.templeGround': 'DS-FTH-4 fires on no town of either corpus',
   'overview.populationDirection': 'DS-POP-3 fires on no town of either corpus',
   'overview.steadings': 'DS-GEN-8 fires on no town of either corpus',
   'overview.stressorLifecycle': 'DS-STR-2 fires on no town of either corpus',
@@ -186,9 +189,9 @@ describe('the composed-prose manifest — the DRIFT corpus, both audiences', () 
     // 67,754 -> 67,730 (372/364/358 unmoved) at THE POOL CENSUS COMPOSED (ODQ §934.105, RUNG 2 OF THE SOAK LADDER, the landing
     // stacked on rung 1; record docs/shift-records/2026-11-06-rung2-04-census-composed-prose-manifest.json). Towns unmoved at 516/3/3/3.
     expect(tally, 'the DRIFT corpus by seed, cells and towns').toEqual({
-      'golden-master-v3': { cells: 67_730, towns: 516 },
-      'gm-seed-a': { cells: 372, towns: 3 },
-      'gm-seed-b': { cells: 364, towns: 3 },
+      'golden-master-v3': { cells: 68_114, towns: 516 }, // W4 PEOPLE 2026-11-07: DS-GEN-17's two GREAT HOUSE lenses add cells
+      'gm-seed-a': { cells: 378, towns: 3 }, // W4 PEOPLE 2026-11-07: DS-GEN-17's two GREAT HOUSE lenses add cells
+      'gm-seed-b': { cells: 366, towns: 3 }, // W4 PEOPLE 2026-11-07: DS-GEN-17's two GREAT HOUSE lenses add cells
       'gm-seed-c': { cells: 358, towns: 3 },
     });
     // The two halves must close against the figures every other arm here reads.
@@ -384,7 +387,7 @@ describe('the composed-prose manifest — the DRIFT corpus, both audiences', () 
     const absent = registered.filter((m) => !recorded.has(m));
     expect(absent, 'every mount the corpus does not reach carries a reason, and no other does')
       .toEqual(reasoned);
-    expect(registered.length, 'the registry\'s distinct mounts').toBe(56);
+    expect(registered.length, 'the registry\'s distinct mounts').toBe(57); // W4 PEOPLE 2026-11-07: + faith.templeGround (DS-FTH-4 mounted)
     expect(registered.filter((m) => recorded.has(m)).length, 'and the manifest records this many')
       .toBe(42);
     // ⛔ AND THE REASONS ARE RE-MEASURED, NEVER TAKEN ON FAITH: every reasoned mount sits on a

@@ -2,13 +2,13 @@
   "schema": "wiring-census/1",
   "stamp": {
     "files": {
-      "src/domain/display/stateProse/generalStateProse.js": "a1d82168bffd08d6aec168b0fd51b4b7ed21fbf67c6f30b2aec8832064e29267",
+      "src/domain/display/stateProse/generalStateProse.js": "0775c2ab8c6cf9282564b26115ae3ced00a5a79994ef2a8bc78d37ba53afffba",
       "src/domain/display/stateProse/powerStateProse.js": "11c913c83fa1e88d5f75d5415f8723936acf9aae37d6465a87b1ad3cb4d21e7b",
       "src/domain/display/stateProse/economyStateProse.js": "d2bfe8cafa209803f26c83fde83534a7ba45230010ff87c33bd4ac52d831b924",
       "src/domain/display/stateProse/defenseStateProse.js": "6ebbed0ca4e9125607fde9443b16d4da328cc1481f711f25a22b5d384cec3ce7",
       "src/domain/display/stateProse/stressorsStateProse.js": "13c7f383882acf5bb48267feb4302ced6b9798cec2575470903f1aa88205600d",
-      "src/domain/display/stateProse/warFaithStateProse.js": "f1972add38589ee55369fb06e4a5e0a8f90c4d966bf703d4367a3cdca52d6aac",
-      "src/domain/display/stateProse/dossierMounts.js": "b8466ea80b09292247baf73e1ab1660c6863362cd623b3b98e002e5ef9fb1f57"
+      "src/domain/display/stateProse/warFaithStateProse.js": "d9d33a57f2da0b2281e2d0eb3476bcbae3221f11b5fa7db39ac6f6d32102244e",
+      "src/domain/display/stateProse/dossierMounts.js": "f5acb5537ba8deca5c96148ef2b8eab9a279951016e000925af550dd276cf47c"
     },
     "candidateLeaves": {
       "src/domain/display/stateProse/defenseStateProseCandidates.js": "b4833f55274b040dc5627b0eedafe7f98f508cec73ac829ce213adabe8c3e96c",
@@ -21,23 +21,23 @@
     "producerIndexFiles": 1300
   },
   "totals": {
-    "pools": 709,
+    "pools": 716,
     "blocks": 68,
-    "variants": 2344,
-    "resolved": 341,
+    "variants": 2362,
+    "resolved": 348,
     "unresolved": 368,
     "resolvedWithPredicate": 208,
     "resolvedWithCleanPredicate": 208,
-    "keyFunctions": 118,
-    "keyFunctionsConsulted": 118,
+    "keyFunctions": 124,
+    "keyFunctionsConsulted": 124,
     "keyTables": 33,
-    "slotless": 65,
-    "bagless": 140,
+    "slotless": 69,
+    "bagless": 136,
     "predicatesOverUnreadFields": 100,
     "syntheticTableFields": 100,
     "tiers": {
       "MISSING": 34,
-      "THIN": 482,
+      "THIN": 489,
       "COVERED": 227,
       "MISSING-AT-TIER": 45
     },
@@ -47,17 +47,17 @@
     "narrowedRows": 0,
     "covertRows": 4,
     "objectClassed": 99,
-    "mountedRows": 567,
+    "mountedRows": 578,
     "absent": {
-      "measured": 373,
+      "measured": 387,
       "default": 3,
       "not-produced": 61,
       "method-call": 18
     },
-    "zeroK": 49,
-    "kExecutable": 341,
+    "zeroK": 51,
+    "kExecutable": 348,
     "kNotExecutable": 368,
-    "branchGrainRows": 311,
+    "branchGrainRows": 318,
     "functionGrainRows": 398,
     "customReachableRows": 21,
     "relationRows": 165,
@@ -107,7 +107,7 @@
       ],
       [
         "war",
-        6
+        7
       ],
       [
         "faith",
@@ -120,10 +120,10 @@
     ],
     "sourceLicensedRows": 114,
     "sourceOfficeRows": 3,
-    "sourceUnresolvedRows": 592,
+    "sourceUnresolvedRows": 599,
     "sourceTwoSourceRows": 10,
     "modifierRows": 0,
-    "declaredColumnRows": 709,
+    "declaredColumnRows": 716,
     "tablePools": 50
   },
   "rows": [
@@ -25748,6 +25748,126 @@
       "crisisScoped": false
     },
     {
+      "block": "DS-GEN-17",
+      "pool": "GREAT HOUSE: cathedral",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 4,
+      "grammars": 1,
+      "predicate": [],
+      "branchReads": [
+        "readings.inst.hasCathedral"
+      ],
+      "fieldsRead": [
+        "readings.inst.hasCathedral"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "cathedralPoolKey",
+      "rung": "literal",
+      "reads": [
+        "readings.inst.hasCathedral"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "readings.inst.hasCathedral": "measured"
+      },
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "overview.institutions"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "readings.inst.hasCathedral": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {
+        "institution: temple": 4
+      },
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-GEN-17",
+      "pool": "GREAT HOUSE: monastery",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 4,
+      "grammars": 1,
+      "predicate": [],
+      "branchReads": [
+        "readings.inst.hasMonastery"
+      ],
+      "fieldsRead": [
+        "readings.inst.hasMonastery"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "monasteryPoolKey",
+      "rung": "literal",
+      "reads": [
+        "readings.inst.hasMonastery"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "readings.inst.hasMonastery": "measured"
+      },
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "overview.institutions"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "readings.inst.hasMonastery": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {
+        "institution: monastery": 4
+      },
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
       "block": "DS-GEN-18",
       "pool": "STALLED",
       "slotsFilled": [
@@ -42831,23 +42951,32 @@
     {
       "block": "DS-FTH-4",
       "pool": "CONTESTED",
-      "slotsFilled": [],
+      "slotsFilled": [
+        "cleric",
+        "counterpart",
+        "creed",
+        "faction",
+        "houses",
+        "observance",
+        "rival_creed",
+        "settlement",
+        "term"
+      ],
       "slotsNamed": [
         "institution",
         "settlement"
       ],
       "slotsWithoutProvider": [
-        "institution",
-        "settlement"
+        "institution"
       ],
-      "hasBag": false,
+      "hasBag": true,
       "variants": 3,
       "grammars": 2,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
       "status": "WIRING-UNRESOLVED",
-      "reason": "the block is UNMOUNTED (dossierMounts.UNMOUNTED_BLOCKS): no composer reads it, so no predicate selects this pool",
+      "reason": "no pool-key function returns this key as a literal, no template of one binds it, and no module-level key table names it",
       "keyFunction": "",
       "rung": "none",
       "reads": [],
@@ -42857,7 +42986,9 @@
       "covert": false,
       "objectClasses": [],
       "objectClass": null,
-      "sites": [],
+      "sites": [
+        "faith.templeGround"
+      ],
       "attach": [],
       "k": null,
       "rateBp": null,
@@ -42879,7 +43010,17 @@
     {
       "block": "DS-FTH-4",
       "pool": "ROOTED",
-      "slotsFilled": [],
+      "slotsFilled": [
+        "cleric",
+        "counterpart",
+        "creed",
+        "faction",
+        "houses",
+        "observance",
+        "rival_creed",
+        "settlement",
+        "term"
+      ],
       "slotsNamed": [
         "creed",
         "institution",
@@ -42887,19 +43028,17 @@
         "timeband_age"
       ],
       "slotsWithoutProvider": [
-        "creed",
         "institution",
-        "settlement",
         "timeband_age"
       ],
-      "hasBag": false,
+      "hasBag": true,
       "variants": 3,
       "grammars": 3,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
       "status": "WIRING-UNRESOLVED",
-      "reason": "the block is UNMOUNTED (dossierMounts.UNMOUNTED_BLOCKS): no composer reads it, so no predicate selects this pool",
+      "reason": "no pool-key function returns this key as a literal, no template of one binds it, and no module-level key table names it",
       "keyFunction": "",
       "rung": "none",
       "reads": [],
@@ -42909,7 +43048,9 @@
       "covert": false,
       "objectClasses": [],
       "objectClass": null,
-      "sites": [],
+      "sites": [
+        "faith.templeGround"
+      ],
       "attach": [],
       "k": null,
       "rateBp": null,
@@ -42931,23 +43072,32 @@
     {
       "block": "DS-FTH-4",
       "pool": "ENDOWED",
-      "slotsFilled": [],
+      "slotsFilled": [
+        "cleric",
+        "counterpart",
+        "creed",
+        "faction",
+        "houses",
+        "observance",
+        "rival_creed",
+        "settlement",
+        "term"
+      ],
       "slotsNamed": [
         "institution",
         "settlement"
       ],
       "slotsWithoutProvider": [
-        "institution",
-        "settlement"
+        "institution"
       ],
-      "hasBag": false,
+      "hasBag": true,
       "variants": 2,
       "grammars": 2,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
       "status": "WIRING-UNRESOLVED",
-      "reason": "the block is UNMOUNTED (dossierMounts.UNMOUNTED_BLOCKS): no composer reads it, so no predicate selects this pool",
+      "reason": "no pool-key function returns this key as a literal, no template of one binds it, and no module-level key table names it",
       "keyFunction": "",
       "rung": "none",
       "reads": [],
@@ -42957,7 +43107,9 @@
       "covert": false,
       "objectClasses": [],
       "objectClass": null,
-      "sites": [],
+      "sites": [
+        "faith.templeGround"
+      ],
       "attach": [],
       "k": null,
       "rateBp": null,
@@ -42979,25 +43131,33 @@
     {
       "block": "DS-FTH-4",
       "pool": "THIN",
-      "slotsFilled": [],
+      "slotsFilled": [
+        "cleric",
+        "counterpart",
+        "creed",
+        "faction",
+        "houses",
+        "observance",
+        "rival_creed",
+        "settlement",
+        "term"
+      ],
       "slotsNamed": [
         "creed",
         "institution",
         "settlement"
       ],
       "slotsWithoutProvider": [
-        "creed",
-        "institution",
-        "settlement"
+        "institution"
       ],
-      "hasBag": false,
+      "hasBag": true,
       "variants": 2,
       "grammars": 2,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
       "status": "WIRING-UNRESOLVED",
-      "reason": "the block is UNMOUNTED (dossierMounts.UNMOUNTED_BLOCKS): no composer reads it, so no predicate selects this pool",
+      "reason": "no pool-key function returns this key as a literal, no template of one binds it, and no module-level key table names it",
       "keyFunction": "",
       "rung": "none",
       "reads": [],
@@ -43007,7 +43167,9 @@
       "covert": false,
       "objectClasses": [],
       "objectClass": null,
-      "sites": [],
+      "sites": [
+        "faith.templeGround"
+      ],
       "attach": [],
       "k": null,
       "rateBp": null,
@@ -43023,6 +43185,382 @@
       },
       "declares": [],
       "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-FTH-4",
+      "pool": "FLAG: crusaderSynthesis",
+      "slotsFilled": [
+        "cleric",
+        "counterpart",
+        "creed",
+        "faction",
+        "houses",
+        "observance",
+        "rival_creed",
+        "settlement",
+        "term"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 2,
+      "grammars": 1,
+      "predicate": [],
+      "branchReads": [
+        "readings.faithFlags",
+        "readings.faithFlags.crusaderSynthesis"
+      ],
+      "fieldsRead": [
+        "readings.faithFlags",
+        "readings.faithFlags.crusaderSynthesis"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "crusaderPoolKey",
+      "rung": "literal",
+      "reads": [
+        "readings.faithFlags",
+        "readings.faithFlags.crusaderSynthesis"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "readings.faithFlags": "measured",
+        "readings.faithFlags.crusaderSynthesis": "measured"
+      },
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "faith.templeGround"
+      ],
+      "attach": [],
+      "k": 1,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "readings.faithFlags": "",
+          "readings.faithFlags.crusaderSynthesis": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {
+        "garrison": 2,
+        "institution: temple": 2
+      },
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-FTH-4",
+      "pool": "FLAG: heresySuppression: hunted",
+      "slotsFilled": [
+        "cleric",
+        "counterpart",
+        "creed",
+        "faction",
+        "houses",
+        "observance",
+        "rival_creed",
+        "settlement",
+        "term"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 2,
+      "grammars": 1,
+      "predicate": [],
+      "branchReads": [
+        "readings.faithFlags",
+        "readings.faithFlags.heresyIntensity",
+        "readings.faithFlags.heresySuppression"
+      ],
+      "fieldsRead": [
+        "readings.faithFlags",
+        "readings.faithFlags.heresyIntensity",
+        "readings.faithFlags.heresySuppression"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "heresyPoolKey",
+      "rung": "literal",
+      "reads": [
+        "readings.faithFlags",
+        "readings.faithFlags.heresyIntensity",
+        "readings.faithFlags.heresySuppression"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "readings.faithFlags": "measured",
+        "readings.faithFlags.heresyIntensity": "measured",
+        "readings.faithFlags.heresySuppression": "measured"
+      },
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "faith.templeGround"
+      ],
+      "attach": [],
+      "k": 0,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "readings.faithFlags": "",
+          "readings.faithFlags.heresyIntensity": "",
+          "readings.faithFlags.heresySuppression": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {
+        "institution: temple": 2
+      },
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-FTH-4",
+      "pool": "FLAG: heresySuppression: preached",
+      "slotsFilled": [
+        "cleric",
+        "counterpart",
+        "creed",
+        "faction",
+        "houses",
+        "observance",
+        "rival_creed",
+        "settlement",
+        "term"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 2,
+      "grammars": 1,
+      "predicate": [],
+      "branchReads": [
+        "readings.faithFlags",
+        "readings.faithFlags.heresyIntensity",
+        "readings.faithFlags.heresySuppression"
+      ],
+      "fieldsRead": [
+        "readings.faithFlags",
+        "readings.faithFlags.heresyIntensity",
+        "readings.faithFlags.heresySuppression"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "heresyPoolKey",
+      "rung": "literal",
+      "reads": [
+        "readings.faithFlags",
+        "readings.faithFlags.heresyIntensity",
+        "readings.faithFlags.heresySuppression"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "readings.faithFlags": "measured",
+        "readings.faithFlags.heresyIntensity": "measured",
+        "readings.faithFlags.heresySuppression": "measured"
+      },
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "faith.templeGround"
+      ],
+      "attach": [],
+      "k": 0,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "readings.faithFlags": "",
+          "readings.faithFlags.heresyIntensity": "",
+          "readings.faithFlags.heresySuppression": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {
+        "institution: temple": 2
+      },
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-FTH-4",
+      "pool": "FLAG: religiousFraud",
+      "slotsFilled": [
+        "cleric",
+        "counterpart",
+        "creed",
+        "faction",
+        "houses",
+        "observance",
+        "rival_creed",
+        "settlement",
+        "term"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 2,
+      "grammars": 1,
+      "predicate": [],
+      "branchReads": [
+        "readings.faithFlags",
+        "readings.faithFlags.religiousFraud"
+      ],
+      "fieldsRead": [
+        "readings.faithFlags",
+        "readings.faithFlags.religiousFraud"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "religiousFraudPoolKey",
+      "rung": "literal",
+      "reads": [
+        "readings.faithFlags",
+        "readings.faithFlags.religiousFraud"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "readings.faithFlags": "measured",
+        "readings.faithFlags.religiousFraud": "measured"
+      },
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "faith.templeGround"
+      ],
+      "attach": [],
+      "k": 1,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "readings.faithFlags": "",
+          "readings.faithFlags.religiousFraud": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {
+        "institution: temple": 2
+      },
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-FTH-4",
+      "pool": "FLAG: mageTheocracy",
+      "slotsFilled": [
+        "cleric",
+        "counterpart",
+        "creed",
+        "faction",
+        "houses",
+        "observance",
+        "rival_creed",
+        "settlement",
+        "term"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 2,
+      "grammars": 2,
+      "predicate": [],
+      "branchReads": [
+        "readings.faithFlags",
+        "readings.faithFlags.mageTheocracy"
+      ],
+      "fieldsRead": [
+        "readings.faithFlags",
+        "readings.faithFlags.mageTheocracy"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "mageTheocracyPoolKey",
+      "rung": "literal",
+      "reads": [
+        "readings.faithFlags",
+        "readings.faithFlags.mageTheocracy"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "readings.faithFlags": "measured",
+        "readings.faithFlags.mageTheocracy": "measured"
+      },
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "faith.templeGround"
+      ],
+      "attach": [],
+      "k": 1,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "readings.faithFlags": "",
+          "readings.faithFlags.mageTheocracy": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {
+        "institution: temple": 2
+      },
       "undeclared": 0,
       "crisisScoped": false
     }
@@ -45446,13 +45984,27 @@
       {
         "field": "readings.faith",
         "mountsSpine": 0,
-        "mountsModifier": 7,
+        "mountsModifier": 8,
         "spineTabs": [],
         "modifierMounts": [
           "faith.creedStanding",
           "faith.nicheRow",
           "faith.patronSeat",
           "faith.teaser",
+          "faith.templeGround",
+          "war.dormantNote",
+          "war.standing",
+          "war.treaties"
+        ]
+      },
+      {
+        "field": "readings.faithFlags",
+        "mountsSpine": 1,
+        "mountsModifier": 3,
+        "spineTabs": [
+          "faith"
+        ],
+        "modifierMounts": [
           "war.dormantNote",
           "war.standing",
           "war.treaties"
@@ -45647,13 +46199,14 @@
       {
         "field": "readings.hasPatron",
         "mountsSpine": 0,
-        "mountsModifier": 7,
+        "mountsModifier": 8,
         "spineTabs": [],
         "modifierMounts": [
           "faith.creedStanding",
           "faith.nicheRow",
           "faith.patronSeat",
           "faith.teaser",
+          "faith.templeGround",
           "war.dormantNote",
           "war.standing",
           "war.treaties"
@@ -45899,13 +46452,14 @@
       {
         "field": "readings.patronFallCause",
         "mountsSpine": 0,
-        "mountsModifier": 7,
+        "mountsModifier": 8,
         "spineTabs": [],
         "modifierMounts": [
           "faith.creedStanding",
           "faith.nicheRow",
           "faith.patronSeat",
           "faith.teaser",
+          "faith.templeGround",
           "war.dormantNote",
           "war.standing",
           "war.treaties"
@@ -46251,13 +46805,14 @@
       {
         "field": "readings.settlementId",
         "mountsSpine": 0,
-        "mountsModifier": 7,
+        "mountsModifier": 8,
         "spineTabs": [],
         "modifierMounts": [
           "faith.creedStanding",
           "faith.nicheRow",
           "faith.patronSeat",
           "faith.teaser",
+          "faith.templeGround",
           "war.dormantNote",
           "war.standing",
           "war.treaties"
@@ -46486,13 +47041,14 @@
       {
         "field": "readings.war",
         "mountsSpine": 0,
-        "mountsModifier": 7,
+        "mountsModifier": 8,
         "spineTabs": [],
         "modifierMounts": [
           "faith.creedStanding",
           "faith.nicheRow",
           "faith.patronSeat",
           "faith.teaser",
+          "faith.templeGround",
           "war.dormantNote",
           "war.standing",
           "war.treaties"
@@ -46666,7 +47222,7 @@
       {
         "field": "settlement.name",
         "mountsSpine": 0,
-        "mountsModifier": 54,
+        "mountsModifier": 55,
         "spineTabs": [],
         "modifierMounts": [
           "defense.armedForces",
@@ -46691,6 +47247,7 @@
           "faith.nicheRow",
           "faith.patronSeat",
           "faith.teaser",
+          "faith.templeGround",
           "history.founded",
           "history.identity",
           "history.record",
@@ -47028,7 +47585,7 @@
       ],
       [
         "war",
-        6
+        7
       ],
       [
         "faith",
@@ -47183,6 +47740,13 @@
       "meanReachBp": 0
     },
     {
+      "block": "DS-FTH-4",
+      "spines": 5,
+      "facts": 6,
+      "spinesReachedBp": 10000,
+      "meanReachBp": 6000
+    },
+    {
       "block": "DS-GEN-11",
       "spines": 5,
       "facts": 3,
@@ -47219,10 +47783,10 @@
     },
     {
       "block": "DS-GEN-17",
-      "spines": 5,
-      "facts": 1,
-      "spinesReachedBp": 0,
-      "meanReachBp": 0
+      "spines": 7,
+      "facts": 3,
+      "spinesReachedBp": 10000,
+      "meanReachBp": 6667
     },
     {
       "block": "DS-GEN-18",
@@ -48321,6 +48885,62 @@
       ]
     },
     {
+      "block": "DS-FTH-4",
+      "spines": 5,
+      "facts": 6,
+      "spinesReachedBp": 10000,
+      "meanReachBp": 6000,
+      "byFact": [
+        {
+          "field": "readings.faithFlags",
+          "attach": []
+        },
+        {
+          "field": "readings.faithFlags.crusaderSynthesis",
+          "attach": [
+            "FLAG: heresySuppression: hunted",
+            "FLAG: heresySuppression: preached",
+            "FLAG: religiousFraud",
+            "FLAG: mageTheocracy"
+          ]
+        },
+        {
+          "field": "readings.faithFlags.heresyIntensity",
+          "attach": [
+            "FLAG: crusaderSynthesis",
+            "FLAG: religiousFraud",
+            "FLAG: mageTheocracy"
+          ]
+        },
+        {
+          "field": "readings.faithFlags.heresySuppression",
+          "attach": [
+            "FLAG: crusaderSynthesis",
+            "FLAG: religiousFraud",
+            "FLAG: mageTheocracy"
+          ]
+        },
+        {
+          "field": "readings.faithFlags.mageTheocracy",
+          "attach": [
+            "FLAG: crusaderSynthesis",
+            "FLAG: heresySuppression: hunted",
+            "FLAG: heresySuppression: preached",
+            "FLAG: religiousFraud"
+          ]
+        },
+        {
+          "field": "readings.faithFlags.religiousFraud",
+          "attach": [
+            "FLAG: crusaderSynthesis",
+            "FLAG: heresySuppression: hunted",
+            "FLAG: heresySuppression: preached",
+            "FLAG: mageTheocracy"
+          ]
+        }
+      ]
+    },
+    {
       "block": "DS-GEN-11",
       "spines": 5,
       "facts": 3,
@@ -48414,14 +49034,39 @@
     },
     {
       "block": "DS-GEN-17",
-      "spines": 5,
-      "facts": 1,
-      "spinesReachedBp": 0,
-      "meanReachBp": 0,
+      "spines": 7,
+      "facts": 3,
+      "spinesReachedBp": 10000,
+      "meanReachBp": 6667,
       "byFact": [
         {
           "field": "readings.inst",
-          "attach": []
+          "attach": [
+            "GREAT HOUSE: cathedral",
+            "GREAT HOUSE: monastery"
+          ]
+        },
+        {
+          "field": "readings.inst.hasCathedral",
+          "attach": [
+            "ADMINISTERED",
+            "GARRISONED",
+            "LETTERED",
+            "PROVISIONED",
+            "BARE",
+            "GREAT HOUSE: monastery"
+          ]
+        },
+        {
+          "field": "readings.inst.hasMonastery",
+          "attach": [
+            "ADMINISTERED",
+            "GARRISONED",
+            "LETTERED",
+            "PROVISIONED",
+            "BARE",
+            "GREAT HOUSE: cathedral"
+          ]
         }
       ]
     },
@@ -49635,8 +50280,8 @@
     }
   ],
   "factBudget": {
-    "zeroK": 49,
-    "executable": 341,
+    "zeroK": 51,
+    "executable": 348,
     "notExecutable": 368,
     "byBlock": [
       [
@@ -49714,6 +50359,13 @@
         {
           "zeroK": 2,
           "spines": 2
+        }
+      ],
+      [
+        "DS-FTH-4",
+        {
+          "zeroK": 2,
+          "spines": 5
         }
       ],
       [
@@ -49916,7 +50568,7 @@
         "DS-GEN-17",
         {
           "zeroK": 0,
-          "spines": 5
+          "spines": 7
         }
       ],
       [
@@ -50001,22 +50653,22 @@
       ],
       [
         0,
-        26
+        28
       ],
       [
         1,
-        82
+        85
       ],
       [
         2,
-        210
+        212
       ]
     ]
   },
   "grains": {
     "branch": {
-      "zeroK": 49,
-      "executable": 341,
+      "zeroK": 51,
+      "executable": 348,
       "notExecutable": 368,
       "histogram": [
         [
@@ -50029,18 +50681,18 @@
         ],
         [
           0,
-          26
+          28
         ],
         [
           1,
-          82
+          85
         ],
         [
           2,
-          210
+          212
         ]
       ],
-      "blocksWithSpine": 50,
+      "blocksWithSpine": 51,
       "cannotAttach": [
         "DS-DEF-6",
         "DS-ECO-1",
@@ -50053,7 +50705,6 @@
         "DS-GEN-13",
         "DS-GEN-14",
         "DS-GEN-16",
-        "DS-GEN-17",
         "DS-GEN-18",
         "DS-GEN-2",
         "DS-GEN-9",
@@ -50064,7 +50715,7 @@
         "DS-STR-1",
         "DS-WAR-3"
       ],
-      "readPaths": 555,
+      "readPaths": 569,
       "modifierEligibleFactsByTab": [
         [
           "viability",
@@ -50108,7 +50759,7 @@
         ],
         [
           "war",
-          6
+          7
         ],
         [
           "faith",
@@ -50121,8 +50772,8 @@
       ]
     },
     "function": {
-      "zeroK": 125,
-      "executable": 341,
+      "zeroK": 127,
+      "executable": 348,
       "notExecutable": 368,
       "histogram": [
         [
@@ -50143,18 +50794,18 @@
         ],
         [
           0,
-          70
+          72
         ],
         [
           1,
-          86
+          89
         ],
         [
           2,
-          130
+          132
         ]
       ],
-      "blocksWithSpine": 50,
+      "blocksWithSpine": 51,
       "cannotAttach": [
         "DS-DEF-11",
         "DS-DEF-6",
@@ -50170,7 +50821,6 @@
         "DS-GEN-13",
         "DS-GEN-14",
         "DS-GEN-16",
-        "DS-GEN-17",
         "DS-GEN-18",
         "DS-GEN-2",
         "DS-GEN-9",
@@ -50182,7 +50832,7 @@
         "DS-STR-1",
         "DS-WAR-3"
       ],
-      "readPaths": 792,
+      "readPaths": 806,
       "modifierEligibleFactsByTab": [
         [
           "viability",
@@ -50225,15 +50875,15 @@
           6
         ],
         [
+          "war",
+          6
+        ],
+        [
           "faith",
           6
         ],
         [
           "defense",
-          5
-        ],
-        [
-          "war",
           5
         ]
       ]
@@ -50528,12 +51178,12 @@
       "rows": {
         "LICENSED": 114,
         "OFFICE": 3,
-        "SOURCE-UNRESOLVED": 592
+        "SOURCE-UNRESOLVED": 599
       },
       "fields": {
         "LICENSED": 191,
         "OFFICE": 5,
-        "SOURCE-UNRESOLVED": 419
+        "SOURCE-UNRESOLVED": 433
       },
       "byKind": [
         [
@@ -50578,7 +51228,7 @@
         ]
       ],
       "unresolvedGrounds": {
-        "no-mapping": 419,
+        "no-mapping": 433,
         "no-institution-in-roster": 0
       },
       "twoSourceRows": 10,
@@ -51937,8 +52587,8 @@
       "leafBoth": 0,
       "leafEither": 2,
       "leafRows": [],
-      "deskRoots": 92,
-      "deskSegments": 194
+      "deskRoots": 93,
+      "deskSegments": 202
     }
   },
   "ratifiedAliases": {
@@ -56340,6 +56990,22 @@
       "count": "2 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
+      "tier": "THIN",
+      "block": "DS-GEN-17",
+      "subject": "GREAT HOUSE: cathedral",
+      "fields": [],
+      "readingFunction": "cathedralPoolKey",
+      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-GEN-17",
+      "subject": "GREAT HOUSE: monastery",
+      "fields": [],
+      "readingFunction": "monasteryPoolKey",
+      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
       "tier": "COVERED",
       "block": "DS-GEN-18",
       "subject": "STALLED",
@@ -58788,6 +59454,46 @@
       "fields": [],
       "readingFunction": "(unresolved)",
       "count": "2 variant(s) · 2 grammar(s) · slots {creed, institution, settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-FTH-4",
+      "subject": "FLAG: crusaderSynthesis",
+      "fields": [],
+      "readingFunction": "crusaderPoolKey",
+      "count": "2 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-FTH-4",
+      "subject": "FLAG: heresySuppression: hunted",
+      "fields": [],
+      "readingFunction": "heresyPoolKey",
+      "count": "2 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-FTH-4",
+      "subject": "FLAG: heresySuppression: preached",
+      "fields": [],
+      "readingFunction": "heresyPoolKey",
+      "count": "2 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-FTH-4",
+      "subject": "FLAG: religiousFraud",
+      "fields": [],
+      "readingFunction": "religiousFraudPoolKey",
+      "count": "2 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-FTH-4",
+      "subject": "FLAG: mageTheocracy",
+      "fields": [],
+      "readingFunction": "mageTheocracyPoolKey",
+      "count": "2 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "MISSING-AT-TIER",

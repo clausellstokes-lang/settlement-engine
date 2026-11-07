@@ -325,6 +325,8 @@ export function generalDeskLines(settlement, options = {}) {
         line(GROUND_MOUNT, prose.overview.ground),
         line(MARKET_MOUNT, prose.overview.market),
         line(INSTITUTIONS_MOUNT, prose.overview.institutions),
+        line(INSTITUTIONS_MOUNT, prose.overview.cathedral),
+        line(INSTITUTIONS_MOUNT, prose.overview.monastery),
       ].filter(Boolean).map(siteClause)),
       situationLine: line(SITUATION_MOUNT, prose.overview.situation),
       connectionLines: Object.freeze(prose.overview.notableConnection
