@@ -22,13 +22,20 @@
  *     with no known tier falls straight to the title precedence.
  * Nobody qualifies: null, and the caller says the seat is empty, once.
  *
- * Pure and deterministic; reads name, role and the faction handle only. A play-time
+ * THE PEOPLE CAR (PEOPLE-2 CAST-DERIVED, 2026-11-07). The cast now records who holds the seat:
+ * the governing power's RANK-1 FACE (people/castPowers.js floor 1 — the seat house's face, or
+ * the seat minted from the governing power). That card seats FIRST, title or none (a headman,
+ * a steward, the eldest carry no head word); the title read above follows it, for a record with
+ * no memberships (a pre-car save, a DM-authored person) and as the line behind an ousting.
+ *
+ * Pure and deterministic; reads name, role, the memberships and the faction handle only. A play-time
  * ousting is the ruling chain's to skip (powerStrata.js :: liveSeatCandidatesOf), where
  * the chain has always read it.
  */
 
-import { governingFactionOf } from '../rulingPower.js';
+import { governingFactionOf, nameOf } from '../rulingPower.js';
 import { npcInFaction, ladderFactionKey } from '../worldPulse/npcLadderFactionMembership.js';
+import { rankIn } from '../people/membership.js';
 
 /** @typedef {import('../rulingPower.js').RulingPowerSettlement} RulingPowerSettlement */
 
@@ -94,7 +101,8 @@ export function isOfficeStandIn(npc) {
 }
 
 /**
- * Every named member of the governing faction who carries a seat title, best first.
+ * Every named seat-holder of the governing power, best first: its rank-1 face (the people car),
+ * then every named member who carries a seat title.
  * @param {SeatSettlement | null | undefined} settlement
  * @returns {SeatNpc[]}
  */
@@ -106,26 +114,23 @@ export function seatCandidatesOf(settlement) {
   const roster = /** @type {unknown[]} */ (Array.isArray(settlement?.npcs) ? settlement.npcs : []);
   const tierHead = TIER_HEAD[text(settlement?.tier).toLowerCase()] || '';
   const tierRank = tierHead ? SEAT_TITLES.indexOf(tierHead) : -1;
+  const govName = text(nameOf(governing));
+  /** @type {SeatNpc | null} */
+  let first = null;
   /** @type {Array<{ npc: SeatNpc, own: number, rank: number, exact: number, at: number }>} */
   const found = [];
-  const governingName = text(/** @type {{ faction?: unknown, name?: unknown }} */ (governing)?.faction)
-    || text(/** @type {{ name?: unknown }} */ (governing)?.name);
   roster.forEach((row, at) => {
     if (!row || typeof row !== 'object') return;
     const npc = /** @type {SeatNpc} */ (row);
-    // 2026-11-07 PEOPLE-1 CAST, M-1b (the owner: a representative's ROLE is its institution's title and its
-    // standing in each power is its RANK there): the seat is the card that ranks FIRST in the governing
-    // power — read from `memberships` — whatever its title says; the seat-word read below stays for the
-    // records born before the car and for a crafted roster. Re-pointed here, the one reader of the seat.
-    const seatByRank = Array.isArray(npc.memberships) && npc.memberships.some((m) => m && typeof m === 'object'
-      && text(/** @type {{ power?: unknown }} */ (m).power) === governingName && /** @type {{ rank?: unknown }} */ (m).rank === 1);
-    const rank = seatByRank ? Math.max(tierRank, 0) : seatTitleRankOf(npc);
+    if (!first && govName && rankIn(npc, govName) === 1 && !isOfficeStandIn(npc)) { first = npc; return; }
+    const rank = seatTitleRankOf(npc);
     if (rank < 0 || isOfficeStandIn(npc)) return;
     if (!npcInFaction(/** @type {Record<string, unknown>} */ (row), governing, fkey, factions)) return;
     const exact = text(npc.role).toLowerCase() === SEAT_TITLES[rank].toLowerCase() ? 0 : 1;
     found.push({ npc, own: rank === tierRank ? 0 : 1, rank, exact, at });
   });
   found.sort((a, b) => (a.own - b.own) || (a.rank - b.rank) || (a.exact - b.exact) || (a.at - b.at));
-  return found.map((f) => f.npc);
+  const titled = found.map((f) => f.npc);
+  return first ? [first, ...titled] : titled;
 }
 

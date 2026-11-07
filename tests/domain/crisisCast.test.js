@@ -31,14 +31,14 @@ function town({ legitimacy = 'crisis', extraFactions = [], extraNpcs = [], insti
   return {
     tier: 'town',
     npcs: [
-      { id: 'n1', name: 'Mara Vell', role: 'Mayor', power: 9, factionAffiliation: 'Town Council', personality: { dominant: 'perceptive' } },
-      { id: 'n2', name: 'Tobin Ash', role: 'Guard Captain', power: 8, factionAffiliation: 'Military/Guard', personality: { dominant: 'brave' } },
-      { id: 'n3', name: 'Ilse Brand', role: 'High Priest', power: 5, factionAffiliation: 'Religious Authorities', personality: { flaw: 'vain' } },
-      { id: 'n4', name: 'Oda Fenn', role: 'Healer', power: 1, factionAffiliation: 'Religious Authorities', personality: {} },
-      { id: 'n5', name: 'Cass Morrow', role: 'Merchant Prince', power: 7, factionAffiliation: 'Merchant Guilds', personality: { flaw: 'greedy' } },
-      { id: 'n6', name: 'Pell Rook', role: 'Grain Factor', power: 4, factionAffiliation: 'Grain Holders', corrupt: true, corruptTies: { criminalInstitution: 'Thieves den', thievesGuild: 'Thieves den' }, personality: { flaw: 'greedy' } },
-      { id: 'n7', name: 'Wil Dunn', role: 'Blacksmith', power: 2, factionAffiliation: 'Craft Guilds', personality: {} },
-      { id: 'n8', name: 'Ren Hale', role: 'Baker', power: 1, factionAffiliation: 'Craft Guilds', personality: {} },
+      { id: 'n1', name: 'Mara Vell', role: 'Mayor', power: 9, memberships: [{ power: 'Town Council', rank: 1 }], personality: { dominant: 'perceptive' } },
+      { id: 'n2', name: 'Tobin Ash', role: 'Guard Captain', power: 8, memberships: [{ power: 'Military/Guard', rank: 1 }], personality: { dominant: 'brave' } },
+      { id: 'n3', name: 'Ilse Brand', role: 'High Priest', power: 5, memberships: [{ power: 'Religious Authorities', rank: 1 }], personality: { flaw: 'vain' } },
+      { id: 'n4', name: 'Oda Fenn', role: 'Healer', power: 1, memberships: [{ power: 'Religious Authorities', rank: 2 }], personality: {} },
+      { id: 'n5', name: 'Cass Morrow', role: 'Merchant Prince', power: 7, memberships: [{ power: 'Merchant Guilds', rank: 1 }], personality: { flaw: 'greedy' } },
+      { id: 'n6', name: 'Pell Rook', role: 'Grain Factor', power: 4, memberships: [{ power: 'Grain Holders', rank: 1 }], institution: { kind: 'house', key: 'Town granary', title: 'the granary reeve' }, corrupt: true, corruptTies: { criminalInstitution: 'Thieves den', thievesGuild: 'Thieves den' }, personality: { flaw: 'greedy' } },
+      { id: 'n7', name: 'Wil Dunn', role: 'Blacksmith', power: 2, memberships: [{ power: 'Craft Guilds', rank: 1 }], personality: {} },
+      { id: 'n8', name: 'Ren Hale', role: 'Baker', power: 1, memberships: [{ power: 'Craft Guilds', rank: 2 }], personality: {} },
       ...extraNpcs,
     ],
     institutions: institutions || [{ name: 'Town granary' }, { name: 'Weekly market' }, { name: 'Town council' }, { name: 'Town watch' }, { name: 'Parish churches (2-5)' }],
@@ -68,7 +68,7 @@ describe('the eleven rules, each over a hand-built town', () => {
     expect(c.candidates[0]).toMatchObject({ role: 'brunt', kind: 'npc', name: 'Ren Hale', reason: CAST_REASONS.bruntBase.food_security });
   });
 
-  it('rule 2: the lever is held by the office-holder, else the house itself, and no one is invented', () => {
+  it('rule 2: the lever is held by the lever house\'s face, else the house itself, and no one is invented', () => {
     const s = town();
     expect(leverCandidates(s, 'famine').candidates[0]).toMatchObject({ kind: 'npc', name: 'Pell Rook', reason: CAST_REASONS.leverRuns });
     const bare = town({ extraNpcs: [] });
@@ -133,7 +133,7 @@ describe('the eleven rules, each over a hand-built town', () => {
     const c = wavererCandidates(s, stakes);
     const split = new Set(stakes.filter((k) => k.stake === 'split').map((k) => k.factionId));
     expect(c.candidates.length).toBeGreaterThan(0);
-    for (const row of c.candidates) expect(split.has(s.npcs.find((n) => n.id === row.id).factionAffiliation)).toBe(true);
+    for (const row of c.candidates) expect(s.npcs.find((n) => n.id === row.id).memberships.some((m) => split.has(m.power))).toBe(true);
   });
 
   it('rule 11: every faction gets exactly one stake and one reason', () => {
@@ -149,12 +149,12 @@ describe('the eleven rules, each over a hand-built town', () => {
   });
 
   it('the occupier\'s local face leads the occupying house', () => {
-    const s = town({ extraFactions: [{ faction: 'Imperial Occupation', category: 'occupation', power: 30 }], extraNpcs: [{ id: 'n9', name: 'Varo Quill', role: 'Prefect', power: 9, factionAffiliation: 'Imperial Occupation' }] });
+    const s = town({ extraFactions: [{ faction: 'Imperial Occupation', category: 'occupation', power: 30 }], extraNpcs: [{ id: 'n9', name: 'Varo Quill', role: 'Prefect', power: 9, memberships: [{ power: 'Imperial Occupation', rank: 1 }] }] });
     expect(faceCandidates(s).candidates[0]).toMatchObject({ name: 'Varo Quill', reason: CAST_REASONS.face });
   });
 
   it('the generator\'s own "Occupation Authority", filed under the military category, is read as the occupier', () => {
-    const s = town({ extraFactions: [{ faction: 'Occupation Authority', category: 'military', power: 30 }], extraNpcs: [{ id: 'n9', name: 'Varo Quill', role: 'Guard Captain', power: 9, factionAffiliation: 'Occupation Authority' }] });
+    const s = town({ extraFactions: [{ faction: 'Occupation Authority', category: 'military', power: 30 }], extraNpcs: [{ id: 'n9', name: 'Varo Quill', role: 'Guard Captain', power: 9, memberships: [{ power: 'Occupation Authority', rank: 1 }] }] });
     expect(faceCandidates(s).candidates[0]).toMatchObject({ name: 'Varo Quill', reason: CAST_REASONS.face });
     expect(stakeOf(deriveStakes(s, 'occupied'), 'Occupation Authority')).toBe('gains');
   });
@@ -166,7 +166,7 @@ describe('the eleven rules, each over a hand-built town', () => {
     expect(defenderCandidates(s).candidates.length).toBeGreaterThan(0);
   });
 
-  it('a temporary person is minted only for a natural kind\'s lever with neither a house nor an office-holder, and only once per town', () => {
+  it('a temporary person is minted only for a natural kind\'s lever with neither a house nor a face, and only once per town', () => {
     const s = town({ institutions: [{ name: 'Town council' }] });
     s.npcs = s.npcs.filter((n) => !/healer|priest/i.test(n.role));
     const minted = [];
@@ -206,19 +206,19 @@ describe('two or more crises: the town is cast, not the crisis', () => {
 
   it('famine + insurgency: the insurgency\'s instigator is drawn from the house that bore the famine', () => {
     const s = town();
-    s.npcs.push({ id: 'n10', name: 'Jory Kemp', role: 'Weaver', power: 3, factionAffiliation: 'Craft Guilds' });
+    s.npcs.push({ id: 'n10', name: 'Jory Kemp', role: 'Weaver', power: 3, memberships: [{ power: 'Craft Guilds', rank: null }] });
     const casts = deriveCrisisCast(s, [{ type: 'famine' }, { type: 'insurgency' }], 'any-seed');
     const brunt = roleOf(casts.get('famine'), 'brunt');
     const inst = roleOf(casts.get('insurgency'), 'instigator');
     expect(brunt).toMatchObject({ name: 'Ren Hale' });
     expect(inst).toMatchObject({ reason: CAST_REASONS.instigatorLinked });
-    expect(s.npcs.find((n) => n.id === inst.id).factionAffiliation).toBe('Craft Guilds');
+    expect(s.npcs.find((n) => n.id === inst.id).memberships.map((m) => m.power)).toContain('Craft Guilds');
     expect(casts.get('insurgency').links).toEqual(['famine']);
     expect(hasContradiction(casts)).toBe(false);
   });
 
   it('occupation + insurgency: the insurgency turns on the occupation\'s local face', () => {
-    const s = town({ extraFactions: [{ faction: 'Imperial Occupation', category: 'occupation', power: 30 }], extraNpcs: [{ id: 'n9', name: 'Varo Quill', role: 'Prefect', power: 9, factionAffiliation: 'Imperial Occupation' }] });
+    const s = town({ extraFactions: [{ faction: 'Imperial Occupation', category: 'occupation', power: 30 }], extraNpcs: [{ id: 'n9', name: 'Varo Quill', role: 'Prefect', power: 9, memberships: [{ power: 'Imperial Occupation', rank: 1 }] }] });
     const casts = deriveCrisisCast(s, [{ type: 'occupied' }, { type: 'insurgency' }], 'any-seed');
     expect(roleOf(casts.get('occupied'), 'face')).toMatchObject({ name: 'Varo Quill' });
     expect(roleOf(casts.get('insurgency'), 'target')).toMatchObject({ name: 'Varo Quill', reason: CAST_REASONS.targetLinked });

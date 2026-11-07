@@ -66,6 +66,8 @@ function npcFactionHandle(npc) {
 export function npcInFaction(npc, faction, fkey, factions) {
   const f = asObject(faction);
   const name = factionName(f);
+  // PEOPLE-2 CAST-DERIVED (2026-11-07): the INPUT the people car gives — a card holding a membership in the power is its member.
+  if (Array.isArray(npc.memberships) && npc.memberships.some((m) => !!m && typeof m === 'object' && m.power === name)) return true;
   const handle = npcFactionHandle(npc);
   if (handle && (normalizeToken(handle) === normalizeToken(name) || handle === f.id || `fac.${normalizeToken(handle)}` === fkey)) return true;
   return entityLinksFaction(npc, f, factions);
