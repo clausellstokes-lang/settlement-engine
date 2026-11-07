@@ -62,10 +62,10 @@ The owner's word (2026-11-07, verbatim): *"I would like for the institution card
 |---|---|---|---|
 | observed-shape readers | the plain check | **left as it is: STOPPED at the base** (`executionTree manifest digest mismatch`, the history-walk fault MERGE-5AB §4 reported). Not fought. The new reads, listed for the landing seat's rung: `npcs[].institution.kind` and `npcs[].institution.key` read on two new display callers through `cardInstitutionOf` (`cardPowers.js :: facesByHouse`, `cardDoor.js :: cardInstitutionDoorOf`); `npcs[].institution.title`, `npcs[].title` and `npcs[].name` read on the face row (`InstitutionsTab.jsx :: InstitutionCard`); `institutions[].name` read in `cardInstitutionDoorOf` (the row lookup). Cause: PEOPLE-6 LINKS | — |
 | writer reach | the plain check | exit 0, unmoved (no new writer). The walker's surfaceReach arm went red once, through the door's first home in `cardPowers.js`, and was cured by moving the door to `cardDoor.js` (§2), not by a rebank | — |
-| wiring census | `node scripts/wiring-census.mjs`, then `--check` | `producerIndexFiles` 1271 → 1272 (`cardDoor.js`); 709 pools and 165 relation rows unmoved; `--check` exit 0 | the final commit |
+| wiring census | `node scripts/wiring-census.mjs`, then `--check` | `producerIndexFiles` 1271 → 1272 (`cardDoor.js`); 709 pools and 165 relation rows unmoved; `--check` exit 0. Step 2's `src/data/faceHonorifics.js` moves nothing (`--check` exit 0 before and after) | the final commit |
 | ruin-filter roster | re-keyed by hand with cause | readers 100 → 101, `cardDoor.js` EXEMPT (name-lookup) | the final commit |
-| lighting census | `LIGHTING_CENSUS_REFREEZE='PEOPLE-6 LINKS'` + note, on a clean tree; then the plain run | files 2972 → 2973, credited 2600 → 2601, titles 28014 → 28024, suiteTitles 7467 → 7471; plain run 34 / 34 | `fc6b62112` |
-| phone chrome floor | re-keyed by hand with cause | /create 615 → 617, /settlements 861 → 863, /gallery 659 → 661. Of each +2, +1 is the face row's one `proseFontSize` site (0 bare) and +1 is red at the base. The base's /admin and /world +1 are left red | `e467e4917` |
+| lighting census | `LIGHTING_CENSUS_REFREEZE='PEOPLE-6 LINKS'` + note, on a clean tree; then the plain run | step 1: files 2972 → 2973, credited 2600 → 2601, titles 28014 → 28024, suiteTitles 7467 → 7471. Step 2: files 2973 → 2974, credited 2601 → 2602, titles 28024 → 28035, suiteTitles 7471 → 7473. Plain run 34 / 34 each time | `fc6b62112`, `a342e6b8c` |
+| phone chrome floor | re-keyed by hand with cause | /create 615 → 617 → 618, /settlements 861 → 863 → 864, /gallery 659 → 661 → 662. Of each +3: +1 is the face row's one `proseFontSize` site (0 bare), +1 is the step-2 role row's one `chromeFontSize` site (0 bare), and +1 is red at the base. The base's /admin and /world +1 are left red | `e467e4917`, `d44a8017a` |
 | dated roster | `tests/lint/.source-citation-baseline.json` | 101 → 102, this record; the `_rosterGrowth2026-11-07-people-6` note and the walker header's `dated (102)` | this record's commit |
 
 ## 5. The red list
@@ -82,6 +82,7 @@ The owner's word (2026-11-07, verbatim): *"I would like for the institution card
 **The touched suites** (every test importing `InstitutionsTab`, `npcComponents`, `cardPowers`, `cardDoor` or `NPCsTab`): the base's two only.
 - `phoneChromeFloor.census`: /admin and /world +1, the base's; this lane's +1 on three routes is re-keyed.
 - `tabSentencesOnce`: X-50 PlotHooks repeats, the base's.
+- `npcRowLockToggle` (step 2) read the role line inside the toggle `<button>`. That line now sits under the toggle, so the test was re-keyed to read the card (the toggle's parent), with that cause; now green.
 - `proseNumerics` went red once, through the door's import shifting two rows of `npcComponents.jsx` by one line. Re-keyed by line with that cause; now green.
 
 **Mine: none.**
@@ -98,6 +99,14 @@ CONFIRMED:
 PLAUSIBLE:
 - That a minted face's card line should print its power's name as the door when the power line also reads "first of X". The owner asked for the link; the duplication is one word on the seat's card. The alternative is to link the X inside "first of X" instead.
 - That the public projection dropping the row is the intended "hide". The name itself stays on the NPC card, but the join (`institution`) is not public until STOP 1's migration lands. Then the row and the door return together on a public card unless the veil's ties eye is shut.
+- The honorific pools (§7) are judgement calls, each for the owner's veto. The ones that most reach beyond the title's own words:
+  - the lord's appointee → Bailiff;
+  - the outlaw host → Captain;
+  - the Highborn Circle's first → Lord / Lady;
+  - the hedge wizard → Cunning-Man;
+  - the musician → Minstrel / Bard.
+- That the role row should use the short form (the honorific alone, "Pastor") on every card rather than "Pastor of the parish church". The chair allowed either; the short form was chosen for consistency.
+- That a DM's own card keeps its authored title and role as before. The step reaches only cards with an institution.
 
 ## 7. Step 2: the honorifics (the chair's extension of 16:4x UTC, refined at 16:5x UTC)
 
