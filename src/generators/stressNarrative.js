@@ -25,6 +25,17 @@
  */
 import { drawDeclared, resolveSiblingSentences } from '../domain/facts/drawDeclared.js';
 
+/**
+ * #8 (STYLE-RULINGS §1(b), WAVE-RULINGS item 8; W4 PEOPLE second seat 2026-11-07): the migration's crisis
+ * hook in TWO sets on W0's `stress[].direction`, never one for both. Kept here, beside the summary the
+ * same direction picks, and not in `data/stressTypes.js`: only the generator reads it, and the data file
+ * rides first paint. The type-level hook in STRESS_TYPE_MAP stays the catalogue's (it lists the kind).
+ */
+export const MIGRATION_HOOK_BY_DIRECTION = Object.freeze({
+  arrivals: 'Someone has offered to find the newcomers work and a roof, for a price, and those in charge must decide whether to pay it.',
+  departures: 'Someone is paying families to leave, and nobody yet knows who wants the houses they leave behind.',
+});
+
 /** mass_migration's food sentence, the key of its declared sibling set (STRESS_SUMMARY_SIBLINGS). */
 const MIGRATION_FOOD = 'New arrivals come faster than housing, food, and employment can absorb them.';
 /** wartime (loss)'s price sentence, the key of its declared sibling set (CENSUS-2d; the chair's answer 1, R-U). */

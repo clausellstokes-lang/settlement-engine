@@ -16,7 +16,7 @@ import { pick, random01, randInt } from './helpers.js';
 import { random as _rng, getActiveRng } from '../kernel/rngContext.js';
 
 import { genArrivalDetail } from './narrativeGenerator.js';
-import { AGE_BY_TIER, HISTORICAL_EVENTS_DATA, EVENT_TYPE_NAMES, historyDescription } from '../data/historyData.js';
+import { AGE_BY_TIER, HISTORICAL_EVENTS_DATA, EVENT_TYPE_NAMES, historyDescription, tensionDescription } from '../data/historyData.js';
 import { resolveGenerationWorldLaw } from './generationContext.js'; import { defenseFactsOf } from '../domain/defense/defenseFacts.js'; import { crimeSignalOf } from '../domain/crimeSignal.js'; // R6 (and F4 unit 3b): one line, so no cited line moves
 import {
   STRESS_TO_TENSION,
@@ -553,10 +553,10 @@ const buildHistoricalEvent = (
   const tensionTokens = buildCurrentTensionTokens(context);
   return selected
     .filter(worldLaw.allowsHistoryEvent)
-    .map(tension => ({
+    .map(({ descriptionByDirection, ...tension }) => ({ // #20: the direction table is the template's, never the record's
       ...tension,
       description: renderHistoryTemplate(
-        substituteNames(tension.description),
+        substituteNames(tensionDescription({ ...tension, descriptionByDirection }, config)), // #20: the migration's own direction
         tensionTokens,
       ),
       factions: (tension.factions || []).map(substituteNames),

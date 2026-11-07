@@ -8,7 +8,7 @@
 
 import { random as _rng } from '../kernel/rngContext.js';
 import {tierAtLeast, getTradeRouteFeatures} from './helpers.js';
-import { rollStressSummary, renderStressSummary } from './stressNarrative.js';
+import { MIGRATION_HOOK_BY_DIRECTION, rollStressSummary, renderStressSummary } from './stressNarrative.js';
 
 import {STRESS_TYPE_MAP} from '../data/stressTypes.js'; import { hasMarketInstitution } from '../domain/facts/market.js'; // MERGE-R2: one line, so no cited line moves
 import { MIGRATION_DIRECTION_AT_BIRTH } from '../domain/migrationDirection.js';
@@ -59,7 +59,7 @@ export const buildStressEntry = (settlementName, stressType, stressData) => {
     ...(direction ? { direction } : {}),
     summaryRoll,
     summary:       renderStressSummary(stressType, settlementName, summaryRoll, direction),
-    crisisHook:    stressData.crisisHook,
+    crisisHook:    (direction && MIGRATION_HOOK_BY_DIRECTION[direction]) || stressData.crisisHook, // #8: the hook its own direction names
     viabilityNote: (direction && stressData.viabilityNoteByDirection?.[direction]) || stressData.viabilityNote,
     historyColour: stressData.historyColour,
     // MERGE-R2 (the chair's ruling 1, R-W7 e): F13's second write of `direction` (the catalog's

@@ -14,7 +14,8 @@ import { describe, expect, it } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { buildStressEntry } from '../../src/generators/stressGenerator.js';
 import { STRESS_TYPE_MAP } from '../../src/data/stressTypes.js';
-import { renderStressSummary } from '../../src/generators/stressNarrative.js';
+import { MIGRATION_HOOK_BY_DIRECTION, renderStressSummary } from '../../src/generators/stressNarrative.js';
+import { HISTORICAL_EVENTS_DATA, tensionDescription } from '../../src/data/historyData.js';
 import { PRESSURE_SENTENCES } from '../../src/generators/narrativeText.js';
 import { buildGovernanceLabels } from '../../src/generators/power/governanceNarrative.js';
 import { applyStressEventFactions } from '../../src/generators/power/stressFactions.js';
@@ -163,9 +164,38 @@ describe('the readers at a DEPARTURES record', () => {
     }
   });
 
+  it('the crisis hook is the one its own direction names (#8, W4 PEOPLE second seat 2026-11-07)', () => {
+    const departing = buildStressEntry('Vale', 'mass_migration', { ...MIGRATION });
+    expect(departing.crisisHook).toBe(MIGRATION_HOOK_BY_DIRECTION.arrivals); // born: arrivals, the one rule
+    expect(migrationDirectionOfText(MIGRATION_HOOK_BY_DIRECTION.departures)).not.toBe('arrivals');
+    expect(MIGRATION_HOOK_BY_DIRECTION.departures).toMatch(/leave/);
+    expect(MIGRATION_HOOK_BY_DIRECTION.arrivals).toMatch(/newcomers/);
+    expect(MIGRATION_HOOK_BY_DIRECTION.arrivals).not.toBe(MIGRATION_HOOK_BY_DIRECTION.departures);
+  });
+
+  it('the live tension describes the direction the record declares (#20, W4 PEOPLE second seat 2026-11-07)', () => {
+    const template = HISTORICAL_EVENTS_DATA.find((e) => e.type === 'demographic_pressure');
+    const away = tensionDescription(template, { stressTypes: ['mass_migration'], migrationDirection: 'departures' });
+    const toward = tensionDescription(template, { stressTypes: ['mass_migration'] });
+    expect(away).toBe(template.descriptionByDirection.departures);
+    expect(toward).toBe(template.descriptionByDirection.arrivals);
+    expect(`${away} ${toward}`).not.toMatch(/or both|arrived and left|gained and lost/);
+  });
+
   it('the viability note prints the one half the record names', () => {
-    expect(MIGRATION.viabilityNoteByDirection.departures).toMatch(/^Emigration:/);
-    expect(MIGRATION.viabilityNoteByDirection.arrivals).toMatch(/^Immigration:/);
+    // W4 PEOPLE second seat 2026-11-07 (#30, the owner's style law): the halves are re-worded in plain
+    // words and cut after their catalogue labels ("If people arrive:" / "If people leave:"), so the pin
+    // re-keys from the old "Immigration:" / "Emigration:" prefixes to the halves' own place in the note:
+    // each half is its label's clause, and neither carries the other direction's.
+    const note = MIGRATION.viabilityNote;
+    const { arrivals, departures } = MIGRATION.viabilityNoteByDirection;
+    expect(note.indexOf('If people arrive: ')).toBe(0);
+    expect(note).toContain(`If people arrive: ${arrivals.charAt(0).toLowerCase()}${arrivals.slice(1)} If people leave: `);
+    expect(note.endsWith(`If people leave: ${departures.charAt(0).toLowerCase()}${departures.slice(1)}`)).toBe(true);
+    expect(departures).toMatch(/^Taxes will fall short/);
+    expect(arrivals).toMatch(/^Food will run short/);
+    expect(departures).not.toMatch(/newcomers|arrive/i);
+    expect(arrivals).not.toMatch(/leave|empty/i);
   });
 });
 

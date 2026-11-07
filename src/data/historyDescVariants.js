@@ -125,8 +125,8 @@ export const HISTORY_DESC_VARIANTS = Object.freeze({
     "Few would grant that the sitting authority had any real right to power, and none could say who did",
   ],
   "demographic_pressure": [
-    "People arrived and left faster than the settlement could adjust to either, and the churn reshaped ordinary life",
-    "The settlement gained and lost people quicker than its institutions could absorb the change, and daily life bent under the strain",
+    "Newcomers kept arriving faster than the settlement could find them roofs and work, and ordinary life changed around them",
+    "The settlement took in more people than it could house or employ, and the strain showed in every crowded street",
   ],
   "trade_dispute": [
     "A quarrel over the terms of trade with a neighbouring settlement grew until it reached every merchant and every purse in the market",
