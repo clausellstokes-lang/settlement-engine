@@ -342,11 +342,11 @@
       "suite": "tests/property/generatorGoldenMaster.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": "6b0d226e38e80f7d85c2ea21f050e4cd3bbb93a2730b48153269194deb2305ac",
+      "sha256": "58fb2164498c630bbc8913234f6e2288df490fe9787882efb18cf9c92a3d7e3e",
       "rows": 525,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation of 2026-11-06 to the cloud chair, session 01FE9mEvGxnFx6WTBkEC6ie9; the people car's landing, 2026-11-07)",
+      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's people-model charter of 2026-11-07, PEOPLE-RULINGS §0; the owner's delegation of 2026-11-06 to the cloud chair, session 01FE9mEvGxnFx6WTBkEC6ie9; the people car's landing)",
       "note": "RE-RECORDED THROUGH THE SIGNED DOOR at the genesis freeze 2026-09-16 (owner: 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); 525 rows moved since the em-dash wave e3f6029b2 (banked §901); the key set unchanged."
     },
     {

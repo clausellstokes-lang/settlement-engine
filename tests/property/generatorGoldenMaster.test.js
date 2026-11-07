@@ -18,6 +18,13 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-11-07 — RECORD 1, PEOPLE-1 CAST, THROUGH THE SIGNED DOOR (ODQ §934.105, THE PEOPLE CAR’S LANDING;
+ *   record docs/shift-records/2026-11-07-people-1-cast.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   525 of 525 rows (thorp 84, hamlet 84, village 84, town 105, city 84, metropolis 84; the key set identical) against the stage of the base 262e8b255 (6b0d226e.., record 0b's post-state). THE CAUSE, ONE (first-parent
+ *   step dc655f712): lane 1, PEOPLE-1 CAST (262e8b255..bbe4a02ab): one face per face-bearing house, the seat always faced, memberships from the backing catalogue, each power's first, second and third, the late-born powers' faces minted at the seam. ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree S1 (the tree of dc655f712 with the door paths carried from
+ *   the branch, the previous record's writes committed). 6b0d226e.. -> 58fb2164..
+ *
  * 2026-11-07 — RECORD 0B, THE W0 MERGE'S COMPOSITION, THROUGH THE SIGNED DOOR (ODQ §934.105, THE PEOPLE CAR’S LANDING;
  *   record docs/shift-records/2026-11-07-people-land-0b-w0-merge.json; the cloud chair signs under the owner's delegation, vetoable).
  *   525 of 525 rows (thorp 84, hamlet 84, village 84, town 105, city 84, metropolis 84; the key set identical) against the stage of the first parent 780180b08 (b1be65e4.., equal to record 0a's stage). THE CAUSE, ONE (first-parent
