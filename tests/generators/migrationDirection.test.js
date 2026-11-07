@@ -95,13 +95,15 @@ describe('the pipeline: every surface of a born migration agrees with the record
         expect(migration, 'the forced migration survived').toBeTruthy();
         expect(migration.direction).toBe('arrivals');
         expect(s.config.migrationDirection).toBe('arrivals');
-        expect(s.powerStructure.stability).not.toMatch(/arriving or leaving/);
         expect(migrationDirectionFindings(s, null)).toEqual([]);
-        // the Power vignette never tells the departure beside an arrival record
-        expect(s.powerStructure.recentConflict || '').not.toMatch(/Three families left this week/);
-        // the faction note follows the record
+        // the stability label names the one direction wherever the migration sets it (a stronger crisis may set it first)
+        if (/people/.test(s.powerStructure.stability)) expect(s.powerStructure.stability).toMatch(/^Strained \(people arriving\)/);
+        // the Power vignette, when it is the migration's, tells the arrival
+        const vignette = migrationDirectionOfText(s.powerStructure.recentConflict);
+        expect([null, 'arrivals']).toContain(vignette);
+        // the faction note follows the record: the newcomers organise, no departure committee forms
         const names = (s.powerStructure.factions || []).map((f) => f.faction);
-        expect(names).not.toContain('Departure Committee');
+        expect(names.filter((n) => n === "Newcomers' Settlement" || n === 'Departure Committee')).toEqual(["Newcomers' Settlement"]);
       });
     }
   }
