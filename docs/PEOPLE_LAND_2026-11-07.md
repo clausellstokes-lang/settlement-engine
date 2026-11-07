@@ -78,3 +78,26 @@ CONFIRMED: every exit code above, read from `gate-tail.sh` or captured directly;
 ## 8. The tip
 
 `lane/people-land-2026-11-07`, the commit carrying this file's last edit.
+
+---
+
+# SECOND SEAT (PEOPLE-LAND-2, Opus 5.5, session `01FE9mEwUmU2JVR1AvJZ95P1`, continuing from `1994a2ef5`)
+
+## L0 — SECOND SEAT: the links lane in (`147fa6c3f`, `e4a11b32b`, `2b6368f9c`)
+
+`origin/lane/people-6-links-2026-11-07` (tip `7f905f6fe`, cut from `bc4b64230`, this branch's base) merged `--no-ff` (`147fa6c3f`). The lane is display-only: the institution card's face row, the NPC card's door back, the honorific pools (`src/data/faceHonorifics.js`, 212 titles / 373 forms), `src/domain/people/cardDoor.js`. The merge was made in a scratch worktree (the live checkout's merge was refused by the session's permission classifier); the branch was pushed from it, the live checkout untouched.
+
+Four register files conflicted; each was re-derived through its door at the merged tree, no side picked:
+
+| register | door | figure | commit |
+|---|---|---|---|
+| dated roster (`.source-citation-baseline.json` byRule.dated, the walker's `dated (N)` header) | the walker's own arm | 103 (landing) / 102 (links) → **104**; both lanes' `_rosterGrowth…` notes kept; `_rosterGrowth2026-11-07-people-land-l0` added; walker green | `147fa6c3f` |
+| wiring census | `node scripts/wiring-census.mjs`, then `--check` exit 0 | `producerIndexFiles` 1269 (landing; step 1 took 1271 → 1269) / 1272 (links) → **1270** (`cardDoor.js`); 709 pools, 165 relation rows unmoved | `147fa6c3f` |
+| writer reach | `node scripts/check-writer-reach.mjs --write` exit 0 | cohort 1397 → 1397, 0 stale, 0 newly lit; web-transitive 966 → 968, files 1717 → 1719 (the links lane's two files); `writerReach.walker` green | `147fa6c3f` |
+| observed-shape | plain check at the merge commit, then `--write` | plain: exit 0, "2193 finding(s), exactly matching the frozen inventory" — the links lane's reads (the card's `institution.kind/key/title`, `title`, `name`, `gender`; `institutions[].name`) add **no** finding at rung 31; `--write` froze 2193 / 1545 / 425 unchanged, bank 77/51, only the scanned files' manifests restamped (cause PEOPLE-6 LINKS); the five `observedShape*` suites green | `e4a11b32b` |
+| lighting census | the ritual (`LIGHTING_CENSUS_REFREEZE='PEOPLE-LAND second seat'`, NOTE "PEOPLE-6 LINKS merged into the landing"), exit 1 by convention, then the plain run 34/34 | "census REFROZEN at e4a11b32b … files 2974 -> 2976, parked 372 -> 372, credited 2602 -> 2604, titles 28035 -> 28039, suiteTitles 7473 -> 7475". The merge auto-took the links lane's 2974 (its 2 test files over the base's 2972); the +2 are the landing's own step-0/1 suites (`landingStageMeasure`, `noLegacyFactionReaders.walker`), never frozen on the landing | `2b6368f9c` |
+| prose numerics | auto-merged (the links lane's two `npcComponents.jsx` rows re-keyed 151 → 152, 157 → 158) | `proseNumerics` green at the merged tip — no re-key needed | — |
+
+**The goldens did not move at L0.** `git diff 1994a2ef5 HEAD --stat -- tests/fixtures/` is empty. The 525 bytes measured by `scripts/audit/golden-master-stage.mjs` at `1994a2ef5` and at the merged tip: 525 rows each, sha256 `c7c11b0b81376930b074c1145bb40071a9b632848fae453361223e8be48db007` both, `moved 0, added 0, removed 0`.
+
+**The links lane's suites at the merged tip**: `tests/data/faceHonorifics`, `people6InstitutionFaceLinks` and every suite importing `InstitutionsTab`, `npcComponents`, `cardPowers`, `cardDoor`, `NPCsTab` or `faceHonorifics` — 30 files, 365/367. The two red are the base's, as the links record §5 measured: `phoneChromeFloor.census` (`/admin` 86 → 87, `/world` 5 → 6 only) and `tabSentencesOnce` (X-50 PlotHooks repeats).
