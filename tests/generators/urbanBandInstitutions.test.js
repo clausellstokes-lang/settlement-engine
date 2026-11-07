@@ -259,7 +259,7 @@ describe('G6 — a druid is a priest where magic does not work (J30)', () => {
     expect(rows, 'druid rows in magic-free worlds').toBeGreaterThan(40);
     expect(backed, 'druid rows in a settlement with a religious faction').toBeGreaterThan(20);
     expect(wrong).toEqual([]);
-  });
+  }, 120_000); // 2026-11-07 PEOPLE car: an explicit budget — this arm births the 144 magic-free settlements with the cast (12.6 s alone at base, 15.5 s at the tip; 52–57 s six-way on 4 cores), past vitest's 20 s default in the wide sweep
 
   it('in a magic world every druid institution keeps its authored pairing', () => {
     const wrong = [];
