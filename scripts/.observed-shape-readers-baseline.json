@@ -119,7 +119,7 @@
   "untouched) brings both shapes back and creates nothing new. The crisis cast's temporary person",
   "is DECLARED (`temporary`, `temporaryKind`, `crisisIds on npcs`; the fifth class), and the",
   "window's other new and grown rows are ADMITTED as ordinary debt under attributed review notes.",
-  "SCHEMA 28 = schema 27's topology, tag law, thirteen-identity roster and register, ALL UNCHANGED,",
+  "SCHEMA 28 (RETIRED) held schema 27's topology, tag law, thirteen-identity roster and register, ALL UNCHANGED,",
   "re-governed to THE TIER-CHANGE COVERAGE PASS (the chair's corpus-coverage ruling of 2026-11-06,",
   "the militia precedent). LANDING-7 lane B's R-B1 (2168ffdba) made the promotion window read the",
   "next tier's stamp cut; producer 2's populations never move within twelve intervals, so its pulse",
@@ -129,9 +129,16 @@
   "own one-save pulse over `osr-tier-14`, a town generated over the city cut that the stamp law",
   "promotes at interval 5, entering roots only as a bounded view of its tier candidates. The live",
   "scan reproduces the schema-27 register: the reconciliation is EMPTY, so no row moves.",
-  "Of the thirteen declared bank entries TWELVE bank reads today; `isCriminal on incomeSources`",
+  "SCHEMA 29 = schema 28's topology, tag law, corpus and register, re-governed to THE MIGRATION-",
+  "DIRECTION DECLARATION (the chair's ruling of 2026-11-07 03:55 UTC, ODQ §934.105, lane WIRING-W0).",
+  "R-W7 (e) declared a mass migration's direction once, on `stress[].direction`, and projects it onto",
+  "the resolved config in steps/stressConfirmPass.js for the readers that hold only the config; the",
+  "one guarded read of that projection (src/domain/migrationDirection.js) has no observed writer,",
+  "because no corpus world draws a `mass_migration`. The fifth class explains it: ONE declaration,",
+  "`migrationDirection on config`, the roster 13 -> 14; the one new row is admitted TAGGED.",
+  "Of the fourteen declared bank entries THIRTEEN bank reads today; `isCriminal on incomeSources`",
   "has banked nothing since schema 17 made its writer observable, and banked is always a",
-  "subset of declared. This envelope banks 76 banked read(s) across 50 tagged address(es).",
+  "subset of declared. This envelope banks 77 banked read(s) across 51 tagged address(es).",
   "The byte-frozen detector is unchanged; its output is narrowed by THREE clearing filters —",
   "CR-OSR-FREEZE-6 shape-family union (M6), the M11 DOM-global receiver exclusion, the M12",
   "language-surface residual — while M8/M9 findings stay present under sparse rowTags. All are inside",
@@ -139,7 +146,7 @@
   "An untagged row means: a guarded read, of a real record rather than browser or language surface,",
   "of a key no writer the corpus runs produces and no declared out-of-corpus writer explains.",
   "A tagged row stays visible as governed explained-writer debt under its numeric ceiling and reason.",
-  "Schemas 4–27 are the RETIRED numeric predecessors."
+  "Schemas 4–28 are the RETIRED numeric predecessors."
  ],
  "corpusMeta": {
   "configs": 4,
@@ -154,16 +161,16 @@
  },
  "digests": {
   "corpusMeta": "9bb16c3ef8ee03e9da654079cb80ca6fa10721759d089fd1cbea5a7a85b05062",
-  "inventory": "b82c9d9f768b02b0452e59413d7bbc7f29e323d3680c58974ed10c90f5c954e4",
-  "manifests": "872fa77d5507c0fcbfee2b64d4b64215d64cec9860dcc3f9ecf9619dccbde1a3",
-  "migrationReview": "ada908cf672ceffc7cb2d2a3ee15051f3270cdbe0759a6b367742123a39f310b",
-  "rowTags": "54feb30c6a02c0444f9ccfa32939089efc93b02dc4c7de75c000ad0489ecfbf1",
-  "scanStats": "7570e69679bf4f604f2f92f5e93b51ab3c365fc11aca29d6d0cf7ff38b00c07a",
-  "sentinel": "1da2a743afaef2f653d989c53bcdfa15325cd058ad83dfdc821e3e1ee850669d"
+  "inventory": "39ae5d072bc760c4765e31664b828f931b6891d03d27d5c5397fab0c7b9ad5b3",
+  "manifests": "394e60377269baecff9bd6c8b2146e7d6da608e3270029fda10985d3f00cef08",
+  "migrationReview": "19e6114aded81ff9a11da9f2ee5bf38ed02c6095077212435da3f4a376f298d0",
+  "rowTags": "707fe2c0f85a64f89016fd606099f7a8a71fa5ac76b218d8eb2b287a998b7d1d",
+  "scanStats": "9e0f0308c75edff171480853566080a4631ef117dcf0fd06385e8945958bdafc",
+  "sentinel": "1360634bc157a4e8495ffa25ea84768df27b8d6def4c41c9bc13018b946d1fb6"
  },
  "frozen": "2026-11-07",
- "frozenAtSha": "b35a25ec9d524f1d082e42411792eba98c3b505f",
- "identities": 1450,
+ "frozenAtSha": "848dd7dc1951bf5333140b6b6a8f1e7601dfcaeb",
+ "identities": 1451,
  "inventory": {
   "src/components/BuyThisDossier.jsx": {
    "mapEdits on settlement": 1
@@ -952,6 +959,9 @@
    "road on config": 1,
    "roadAccess on config": 1,
    "trade_connectivity on scores": 2
+  },
+  "src/domain/migrationDirection.js": {
+   "migrationDirection on config": 1
   },
   "src/domain/normalizeSettlement.js": {
    "neighbourNetwork on settlement": 1
@@ -2419,7 +2429,7 @@
  "manifests": {
   "detectorTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "bfd92ce7fdc94b550dafe1cc38e462d470fd370a91c4440f2fdc83ba9fd1341e",
+   "digest": "8663c9bc28d06b1d4aba14c58882e51f5b378c9a7a5ccb3dc9a5999cedecb089",
    "entries": [
     {
      "mode": "100644",
@@ -2438,8 +2448,8 @@
     {
      "mode": "100644",
      "path": "scripts/check-observed-shape-readers.mjs",
-     "sha256": "f4d183d8db26495502befe97d57df179523f0b006428e4bdba0b2f30dff7dc96",
-     "size": 202737,
+     "sha256": "15b8b4084627d627a7275b24cd310217328468ba41b0c67c63c8bb0c99cad0c7",
+     "size": 205955,
      "type": "file"
     },
     {
@@ -2459,8 +2469,8 @@
     {
      "mode": "100644",
      "path": "scripts/lib/observed-shape-baseline.mjs",
-     "sha256": "6b9d54aa3a342e179a434d1f4dd34cf697d5b2500d924d44f539c26c52a608b2",
-     "size": 76497,
+     "sha256": "ef4e79b9ea5a3edfeba48c6cb6f3ea0947c3df1049f0f07d345c7c3f7ff6a7d4",
+     "size": 78346,
      "type": "file"
     },
     {
@@ -2487,8 +2497,8 @@
     {
      "mode": "100644",
      "path": "scripts/migrate-observed-shape-readers.mjs",
-     "sha256": "cfa4bb5aa1ba041c9773e4536e829eae02a5ba094f148a3783e6ce2278389c33",
-     "size": 215475,
+     "sha256": "f7073a7eeb99d187e8ee7f9d39b5a9d1ba1d4738f5f858671043a1a8cece72e7",
+     "size": 221595,
      "type": "file"
     },
     {
@@ -2502,7 +2512,7 @@
   },
   "executionTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "fc5efb07e00865067967de26deb6ea1304e83d00b24a495db2d1abfdd0faf363",
+   "digest": "138f744e8117ba82e60c590ce0ebac4e35d2571a316bfe709cb93382b2a84490",
    "entries": [
     {
      "mode": "100644",
@@ -2521,8 +2531,8 @@
     {
      "mode": "100644",
      "path": "scripts/check-observed-shape-readers.mjs",
-     "sha256": "f4d183d8db26495502befe97d57df179523f0b006428e4bdba0b2f30dff7dc96",
-     "size": 202737,
+     "sha256": "15b8b4084627d627a7275b24cd310217328468ba41b0c67c63c8bb0c99cad0c7",
+     "size": 205955,
      "type": "file"
     },
     {
@@ -2542,8 +2552,8 @@
     {
      "mode": "100644",
      "path": "scripts/lib/observed-shape-baseline.mjs",
-     "sha256": "6b9d54aa3a342e179a434d1f4dd34cf697d5b2500d924d44f539c26c52a608b2",
-     "size": 76497,
+     "sha256": "ef4e79b9ea5a3edfeba48c6cb6f3ea0947c3df1049f0f07d345c7c3f7ff6a7d4",
+     "size": 78346,
      "type": "file"
     },
     {
@@ -2570,8 +2580,8 @@
     {
      "mode": "100644",
      "path": "scripts/migrate-observed-shape-readers.mjs",
-     "sha256": "cfa4bb5aa1ba041c9773e4536e829eae02a5ba094f148a3783e6ce2278389c33",
-     "size": 215475,
+     "sha256": "f7073a7eeb99d187e8ee7f9d39b5a9d1ba1d4738f5f858671043a1a8cece72e7",
+     "size": 221595,
      "type": "file"
     },
     {
@@ -7393,15 +7403,15 @@
     {
      "mode": "100644",
      "path": "src/data/stressInstitutionEffects.js",
-     "sha256": "d2fdd06e8276c2537bfa6f710995c15f64b87d873540865e777554d8f9020bd5",
-     "size": 27133,
+     "sha256": "26ed6eb85cb6875455c7e7a439fcf3771c417e8e4c4eb0cd30351caf517c9522",
+     "size": 27351,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/data/stressTypes.js",
-     "sha256": "b0c17d7b95bb01678afcef71c9337d2215dd18a0bcc78a934b59b920f0e5fad5",
-     "size": 8129,
+     "sha256": "978ff202642d9ee10a6df74e61c50416a912b219d3c07faf6c3b580651d0e16e",
+     "size": 8658,
      "type": "file"
     },
     {
@@ -7414,8 +7424,8 @@
     {
      "mode": "100644",
      "path": "src/data/stressorSpinePhrases.js",
-     "sha256": "249ef4e00f0285bb68867ef162e5a0f3ed77d66df93e16462d97ef70038946bf",
-     "size": 4577,
+     "sha256": "65714ff114282e0ee44f015d964256976d8898a3f334a0865e3aeadf5242272d",
+     "size": 5003,
      "type": "file"
     },
     {
@@ -10619,6 +10629,13 @@
     },
     {
      "mode": "100644",
+     "path": "src/domain/migrationDirection.js",
+     "sha256": "ed4d43eb76b2f14fe5c2460273b9936b4406e2fd53b7a985321b5342d6646de0",
+     "size": 4774,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/domain/modelRegistry.js",
      "sha256": "be96592ca23a8cb3ad88a7ca3b39c814d40c140b53825d4560c8e90cb753f024",
      "size": 13586,
@@ -10830,7 +10847,7 @@
     {
      "mode": "100644",
      "path": "src/domain/prose/holderTable.js",
-     "sha256": "2849a18851b238329e41af90b2dcdbbdc1f99b42c4a84cba1b6cc4de0a14c4b5",
+     "sha256": "b8c551fff74fa7a65e573f238a6757b18cc03680ca8dcbc5103b65581f9392d9",
      "size": 47441,
      "type": "file"
     },
@@ -11285,8 +11302,8 @@
     {
      "mode": "100644",
      "path": "src/domain/simulationSpine.js",
-     "sha256": "b32fab8585fa24241ee554708bc5cc23f9dfe4a46265ebb9a29a7e524cccfc6b",
-     "size": 36984,
+     "sha256": "ae2b6ecbbd2e458617ee9714ac8fa488390e05fad26281f4a118ba52311d901e",
+     "size": 37627,
      "type": "file"
     },
     {
@@ -14932,8 +14949,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/settlementPolitics.js",
-     "sha256": "971c5331bf89cd572214a0a11d9be041b2bf366b0886df9f61efd7ecdf1ddd6a",
-     "size": 61828,
+     "sha256": "93682b56a645b6fb80cba56c97ed288996e1c81d80ce2fa84fa9ae86acd06c01",
+     "size": 62037,
      "type": "file"
     },
     {
@@ -15786,8 +15803,8 @@
     {
      "mode": "100644",
      "path": "src/generators/economy/foodBalance.js",
-     "sha256": "356c35f4e62803d14f0647bcfe735f3ac85cb190104739a776d7be8783496584",
-     "size": 43052,
+     "sha256": "36b8b70deaac0e8554661942232ace4e1b1e1954b35d9b1c44de8e8b200ef848",
+     "size": 43569,
      "type": "file"
     },
     {
@@ -15870,8 +15887,8 @@
     {
      "mode": "100644",
      "path": "src/generators/foodGenerator.js",
-     "sha256": "5919d7f265f6a409afda32cbefe39336e387f38a901318091f3279c0ab30e09d",
-     "size": 33334,
+     "sha256": "558c11cbd2d9de4beb6c8d5efbbe174eda20055a14de7d091912b33e10122d53",
+     "size": 34753,
      "type": "file"
     },
     {
@@ -15982,8 +15999,8 @@
     {
      "mode": "100644",
      "path": "src/generators/legacyGenerator.js",
-     "sha256": "14f9266d003124764110fa482935e57c7f394796ea886582719e3f3a427568f6",
-     "size": 13727,
+     "sha256": "b5aff1ada5479f75fdb69ac6a00d329c748409fb8a4cc7a429dd5b361a28be9f",
+     "size": 14862,
      "type": "file"
     },
     {
@@ -16024,8 +16041,8 @@
     {
      "mode": "100644",
      "path": "src/generators/narrativeGenerator.js",
-     "sha256": "8b8f3cbba378684a23d44ff6e659213bc2a5e7f0c95be2c31ce1667d5242ee45",
-     "size": 47689,
+     "sha256": "52dff99885d73a5f1267143ed4d6792676557e06efb9f8d8d431053f6bdb2ad9",
+     "size": 48157,
      "type": "file"
     },
     {
@@ -16038,8 +16055,8 @@
     {
      "mode": "100644",
      "path": "src/generators/narrativeText.js",
-     "sha256": "1e8557eafc6352e325757be83050c9fd832a4b3cbdba07a73ef834953f05ec24",
-     "size": 45090,
+     "sha256": "8f6e22c2608e4e7cafd19c235ec3007279dcb72ba0036fd866b9dec1373fa68f",
+     "size": 45993,
      "type": "file"
     },
     {
@@ -16087,8 +16104,8 @@
     {
      "mode": "100644",
      "path": "src/generators/npcGenerator.js",
-     "sha256": "c2cbd5e63e89f1e86c2816a9b9f88a4ca44b7a99b4087707706476ab3b9f6308",
-     "size": 73714,
+     "sha256": "cd48d8f8037480ca65f1782d9cc094f751a6fc4cb11dd5d0785e51f543f0f970",
+     "size": 73925,
      "type": "file"
     },
     {
@@ -16143,8 +16160,8 @@
     {
      "mode": "100644",
      "path": "src/generators/power/governanceNarrative.js",
-     "sha256": "f8b5486df2a9469b1f0205e29830c0622561d162e9762e565fc415e99989a326",
-     "size": 35310,
+     "sha256": "fdba1c30e02b1320ea47977fe409eae3c8d39546d99080026cb6b506870ce929",
+     "size": 35825,
      "type": "file"
     },
     {
@@ -16171,8 +16188,8 @@
     {
      "mode": "100644",
      "path": "src/generators/power/stressFactions.js",
-     "sha256": "0f0e1ff3423c09bdb2bf844516b6d27c13d737aaa2c2c7b787947c2677e6c4f1",
-     "size": 24493,
+     "sha256": "89e09298f1acab82defb17b96833ca37e0420a8e24a2e6e0268a44ec302cc6ca",
+     "size": 24900,
      "type": "file"
     },
     {
@@ -16276,8 +16293,8 @@
     {
      "mode": "100644",
      "path": "src/generators/steps/assembleSettlement.js",
-     "sha256": "cc982d58218d58407d8a4d85ddc192b75a8f89f8d1506637b65f80677dfaa37d",
-     "size": 22397,
+     "sha256": "8c16078efcdb029bcd85e34a8ad2f1f075ad953f7c52bc3b7c111e0c64c37f3f",
+     "size": 22450,
      "type": "file"
     },
     {
@@ -16423,8 +16440,8 @@
     {
      "mode": "100644",
      "path": "src/generators/steps/stressConfirmPass.js",
-     "sha256": "40c7ca12e79cd62a9b77fded7593c3a6a9ee6ebf2333148dd65ce50faebe65d9",
-     "size": 8112,
+     "sha256": "7b92b9d130775390555b9e2610c079a6be37eb0dc89de57e8be668074db1290d",
+     "size": 8970,
      "type": "file"
     },
     {
@@ -16444,15 +16461,15 @@
     {
      "mode": "100644",
      "path": "src/generators/stressGenerator.js",
-     "sha256": "d3cad7ff14a6e766dfc22e7aef7d844a2b14a1fcf9af9a1f506736ea6687f890",
-     "size": 17869,
+     "sha256": "49d9e752eefeddac85589adee0f4ee874ad29b8663a4c18476a30ea2498edef9",
+     "size": 18572,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/generators/stressNarrative.js",
-     "sha256": "89ed40d06e2c9e08aac6470adf8123ba7df176f6413bd8bc4ff242bcdb0a489f",
-     "size": 9766,
+     "sha256": "021bd0dc5cae681787239879d3851462312aef2f3a594c90367932e4798fb01c",
+     "size": 10586,
      "type": "file"
     },
     {
@@ -18782,8 +18799,8 @@
     {
      "mode": "100644",
      "path": "src/store/configSlice.js",
-     "sha256": "27f8302391fb5ef663c90e5f174871d91f4987a34f37205e520a5c3503697070",
-     "size": 12637,
+     "sha256": "1b52cfc1d427abd6fff9f38ab3e91de6b957c0b5979bc9ecbd3656b08deb2381",
+     "size": 12656,
      "type": "file"
     },
     {
@@ -19048,8 +19065,8 @@
     {
      "mode": "100644",
      "path": "src/store/settlementLifecycleHelpers.js",
-     "sha256": "8f9d9ff34aed36af3139bf6ddd93f851183df541c324f738e676ba0c069ac229",
-     "size": 16651,
+     "sha256": "f15a02f2220bda031bd7c78aefc11264c0d33533428907f5e26c3ff87c105a32",
+     "size": 16768,
      "type": "file"
     },
     {
@@ -19245,7 +19262,7 @@
   },
   "scanTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "9463f94207fc52fee4378dd5fbd1148a0b04192647cbe5c2ef200178d6979527",
+   "digest": "2bb0497c551d14ee8bf055c0d4266f041e7e3628acbc28fe853c4e1b72bbb04e",
    "entries": [
     {
      "mode": "100644",
@@ -23982,15 +23999,15 @@
     {
      "mode": "100644",
      "path": "src/data/stressInstitutionEffects.js",
-     "sha256": "d2fdd06e8276c2537bfa6f710995c15f64b87d873540865e777554d8f9020bd5",
-     "size": 27133,
+     "sha256": "26ed6eb85cb6875455c7e7a439fcf3771c417e8e4c4eb0cd30351caf517c9522",
+     "size": 27351,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/data/stressTypes.js",
-     "sha256": "b0c17d7b95bb01678afcef71c9337d2215dd18a0bcc78a934b59b920f0e5fad5",
-     "size": 8129,
+     "sha256": "978ff202642d9ee10a6df74e61c50416a912b219d3c07faf6c3b580651d0e16e",
+     "size": 8658,
      "type": "file"
     },
     {
@@ -24003,8 +24020,8 @@
     {
      "mode": "100644",
      "path": "src/data/stressorSpinePhrases.js",
-     "sha256": "249ef4e00f0285bb68867ef162e5a0f3ed77d66df93e16462d97ef70038946bf",
-     "size": 4577,
+     "sha256": "65714ff114282e0ee44f015d964256976d8898a3f334a0865e3aeadf5242272d",
+     "size": 5003,
      "type": "file"
     },
     {
@@ -27173,6 +27190,13 @@
     },
     {
      "mode": "100644",
+     "path": "src/domain/migrationDirection.js",
+     "sha256": "ed4d43eb76b2f14fe5c2460273b9936b4406e2fd53b7a985321b5342d6646de0",
+     "size": 4774,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/domain/modelRegistry.js",
      "sha256": "be96592ca23a8cb3ad88a7ca3b39c814d40c140b53825d4560c8e90cb753f024",
      "size": 13586,
@@ -27384,7 +27408,7 @@
     {
      "mode": "100644",
      "path": "src/domain/prose/holderTable.js",
-     "sha256": "2849a18851b238329e41af90b2dcdbbdc1f99b42c4a84cba1b6cc4de0a14c4b5",
+     "sha256": "b8c551fff74fa7a65e573f238a6757b18cc03680ca8dcbc5103b65581f9392d9",
      "size": 47441,
      "type": "file"
     },
@@ -27839,8 +27863,8 @@
     {
      "mode": "100644",
      "path": "src/domain/simulationSpine.js",
-     "sha256": "b32fab8585fa24241ee554708bc5cc23f9dfe4a46265ebb9a29a7e524cccfc6b",
-     "size": 36984,
+     "sha256": "ae2b6ecbbd2e458617ee9714ac8fa488390e05fad26281f4a118ba52311d901e",
+     "size": 37627,
      "type": "file"
     },
     {
@@ -31486,8 +31510,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/settlementPolitics.js",
-     "sha256": "971c5331bf89cd572214a0a11d9be041b2bf366b0886df9f61efd7ecdf1ddd6a",
-     "size": 61828,
+     "sha256": "93682b56a645b6fb80cba56c97ed288996e1c81d80ce2fa84fa9ae86acd06c01",
+     "size": 62037,
      "type": "file"
     },
     {
@@ -32340,8 +32364,8 @@
     {
      "mode": "100644",
      "path": "src/generators/economy/foodBalance.js",
-     "sha256": "356c35f4e62803d14f0647bcfe735f3ac85cb190104739a776d7be8783496584",
-     "size": 43052,
+     "sha256": "36b8b70deaac0e8554661942232ace4e1b1e1954b35d9b1c44de8e8b200ef848",
+     "size": 43569,
      "type": "file"
     },
     {
@@ -32424,8 +32448,8 @@
     {
      "mode": "100644",
      "path": "src/generators/foodGenerator.js",
-     "sha256": "5919d7f265f6a409afda32cbefe39336e387f38a901318091f3279c0ab30e09d",
-     "size": 33334,
+     "sha256": "558c11cbd2d9de4beb6c8d5efbbe174eda20055a14de7d091912b33e10122d53",
+     "size": 34753,
      "type": "file"
     },
     {
@@ -32536,8 +32560,8 @@
     {
      "mode": "100644",
      "path": "src/generators/legacyGenerator.js",
-     "sha256": "14f9266d003124764110fa482935e57c7f394796ea886582719e3f3a427568f6",
-     "size": 13727,
+     "sha256": "b5aff1ada5479f75fdb69ac6a00d329c748409fb8a4cc7a429dd5b361a28be9f",
+     "size": 14862,
      "type": "file"
     },
     {
@@ -32578,8 +32602,8 @@
     {
      "mode": "100644",
      "path": "src/generators/narrativeGenerator.js",
-     "sha256": "8b8f3cbba378684a23d44ff6e659213bc2a5e7f0c95be2c31ce1667d5242ee45",
-     "size": 47689,
+     "sha256": "52dff99885d73a5f1267143ed4d6792676557e06efb9f8d8d431053f6bdb2ad9",
+     "size": 48157,
      "type": "file"
     },
     {
@@ -32592,8 +32616,8 @@
     {
      "mode": "100644",
      "path": "src/generators/narrativeText.js",
-     "sha256": "1e8557eafc6352e325757be83050c9fd832a4b3cbdba07a73ef834953f05ec24",
-     "size": 45090,
+     "sha256": "8f6e22c2608e4e7cafd19c235ec3007279dcb72ba0036fd866b9dec1373fa68f",
+     "size": 45993,
      "type": "file"
     },
     {
@@ -32641,8 +32665,8 @@
     {
      "mode": "100644",
      "path": "src/generators/npcGenerator.js",
-     "sha256": "c2cbd5e63e89f1e86c2816a9b9f88a4ca44b7a99b4087707706476ab3b9f6308",
-     "size": 73714,
+     "sha256": "cd48d8f8037480ca65f1782d9cc094f751a6fc4cb11dd5d0785e51f543f0f970",
+     "size": 73925,
      "type": "file"
     },
     {
@@ -32697,8 +32721,8 @@
     {
      "mode": "100644",
      "path": "src/generators/power/governanceNarrative.js",
-     "sha256": "f8b5486df2a9469b1f0205e29830c0622561d162e9762e565fc415e99989a326",
-     "size": 35310,
+     "sha256": "fdba1c30e02b1320ea47977fe409eae3c8d39546d99080026cb6b506870ce929",
+     "size": 35825,
      "type": "file"
     },
     {
@@ -32725,8 +32749,8 @@
     {
      "mode": "100644",
      "path": "src/generators/power/stressFactions.js",
-     "sha256": "0f0e1ff3423c09bdb2bf844516b6d27c13d737aaa2c2c7b787947c2677e6c4f1",
-     "size": 24493,
+     "sha256": "89e09298f1acab82defb17b96833ca37e0420a8e24a2e6e0268a44ec302cc6ca",
+     "size": 24900,
      "type": "file"
     },
     {
@@ -32830,8 +32854,8 @@
     {
      "mode": "100644",
      "path": "src/generators/steps/assembleSettlement.js",
-     "sha256": "cc982d58218d58407d8a4d85ddc192b75a8f89f8d1506637b65f80677dfaa37d",
-     "size": 22397,
+     "sha256": "8c16078efcdb029bcd85e34a8ad2f1f075ad953f7c52bc3b7c111e0c64c37f3f",
+     "size": 22450,
      "type": "file"
     },
     {
@@ -32977,8 +33001,8 @@
     {
      "mode": "100644",
      "path": "src/generators/steps/stressConfirmPass.js",
-     "sha256": "40c7ca12e79cd62a9b77fded7593c3a6a9ee6ebf2333148dd65ce50faebe65d9",
-     "size": 8112,
+     "sha256": "7b92b9d130775390555b9e2610c079a6be37eb0dc89de57e8be668074db1290d",
+     "size": 8970,
      "type": "file"
     },
     {
@@ -32998,15 +33022,15 @@
     {
      "mode": "100644",
      "path": "src/generators/stressGenerator.js",
-     "sha256": "d3cad7ff14a6e766dfc22e7aef7d844a2b14a1fcf9af9a1f506736ea6687f890",
-     "size": 17869,
+     "sha256": "49d9e752eefeddac85589adee0f4ee874ad29b8663a4c18476a30ea2498edef9",
+     "size": 18572,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/generators/stressNarrative.js",
-     "sha256": "89ed40d06e2c9e08aac6470adf8123ba7df176f6413bd8bc4ff242bcdb0a489f",
-     "size": 9766,
+     "sha256": "021bd0dc5cae681787239879d3851462312aef2f3a594c90367932e4798fb01c",
+     "size": 10586,
      "type": "file"
     },
     {
@@ -35336,8 +35360,8 @@
     {
      "mode": "100644",
      "path": "src/store/configSlice.js",
-     "sha256": "27f8302391fb5ef663c90e5f174871d91f4987a34f37205e520a5c3503697070",
-     "size": 12637,
+     "sha256": "1b52cfc1d427abd6fff9f38ab3e91de6b957c0b5979bc9ecbd3656b08deb2381",
+     "size": 12656,
      "type": "file"
     },
     {
@@ -35602,8 +35626,8 @@
     {
      "mode": "100644",
      "path": "src/store/settlementLifecycleHelpers.js",
-     "sha256": "8f9d9ff34aed36af3139bf6ddd93f851183df541c324f738e676ba0c069ac229",
-     "size": 16651,
+     "sha256": "f15a02f2220bda031bd7c78aefc11264c0d33533428907f5e26c3ff87c105a32",
+     "size": 16768,
      "type": "file"
     },
     {
@@ -35792,7 +35816,7 @@
   },
   "sourceTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "588aace852c017bf34236fd11913b312811cbf1439a37175d287e9c274f45202",
+   "digest": "80eca1847521dfdf2bc7306ea42e0a01679ecfe3699d461c8dfc8b8b014ba554",
    "entries": [
     {
      "mode": "100644",
@@ -40613,15 +40637,15 @@
     {
      "mode": "100644",
      "path": "src/data/stressInstitutionEffects.js",
-     "sha256": "d2fdd06e8276c2537bfa6f710995c15f64b87d873540865e777554d8f9020bd5",
-     "size": 27133,
+     "sha256": "26ed6eb85cb6875455c7e7a439fcf3771c417e8e4c4eb0cd30351caf517c9522",
+     "size": 27351,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/data/stressTypes.js",
-     "sha256": "b0c17d7b95bb01678afcef71c9337d2215dd18a0bcc78a934b59b920f0e5fad5",
-     "size": 8129,
+     "sha256": "978ff202642d9ee10a6df74e61c50416a912b219d3c07faf6c3b580651d0e16e",
+     "size": 8658,
      "type": "file"
     },
     {
@@ -40634,8 +40658,8 @@
     {
      "mode": "100644",
      "path": "src/data/stressorSpinePhrases.js",
-     "sha256": "249ef4e00f0285bb68867ef162e5a0f3ed77d66df93e16462d97ef70038946bf",
-     "size": 4577,
+     "sha256": "65714ff114282e0ee44f015d964256976d8898a3f334a0865e3aeadf5242272d",
+     "size": 5003,
      "type": "file"
     },
     {
@@ -43839,6 +43863,13 @@
     },
     {
      "mode": "100644",
+     "path": "src/domain/migrationDirection.js",
+     "sha256": "ed4d43eb76b2f14fe5c2460273b9936b4406e2fd53b7a985321b5342d6646de0",
+     "size": 4774,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/domain/modelRegistry.js",
      "sha256": "be96592ca23a8cb3ad88a7ca3b39c814d40c140b53825d4560c8e90cb753f024",
      "size": 13586,
@@ -44050,7 +44081,7 @@
     {
      "mode": "100644",
      "path": "src/domain/prose/holderTable.js",
-     "sha256": "2849a18851b238329e41af90b2dcdbbdc1f99b42c4a84cba1b6cc4de0a14c4b5",
+     "sha256": "b8c551fff74fa7a65e573f238a6757b18cc03680ca8dcbc5103b65581f9392d9",
      "size": 47441,
      "type": "file"
     },
@@ -44505,8 +44536,8 @@
     {
      "mode": "100644",
      "path": "src/domain/simulationSpine.js",
-     "sha256": "b32fab8585fa24241ee554708bc5cc23f9dfe4a46265ebb9a29a7e524cccfc6b",
-     "size": 36984,
+     "sha256": "ae2b6ecbbd2e458617ee9714ac8fa488390e05fad26281f4a118ba52311d901e",
+     "size": 37627,
      "type": "file"
     },
     {
@@ -48152,8 +48183,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/settlementPolitics.js",
-     "sha256": "971c5331bf89cd572214a0a11d9be041b2bf366b0886df9f61efd7ecdf1ddd6a",
-     "size": 61828,
+     "sha256": "93682b56a645b6fb80cba56c97ed288996e1c81d80ce2fa84fa9ae86acd06c01",
+     "size": 62037,
      "type": "file"
     },
     {
@@ -49006,8 +49037,8 @@
     {
      "mode": "100644",
      "path": "src/generators/economy/foodBalance.js",
-     "sha256": "356c35f4e62803d14f0647bcfe735f3ac85cb190104739a776d7be8783496584",
-     "size": 43052,
+     "sha256": "36b8b70deaac0e8554661942232ace4e1b1e1954b35d9b1c44de8e8b200ef848",
+     "size": 43569,
      "type": "file"
     },
     {
@@ -49090,8 +49121,8 @@
     {
      "mode": "100644",
      "path": "src/generators/foodGenerator.js",
-     "sha256": "5919d7f265f6a409afda32cbefe39336e387f38a901318091f3279c0ab30e09d",
-     "size": 33334,
+     "sha256": "558c11cbd2d9de4beb6c8d5efbbe174eda20055a14de7d091912b33e10122d53",
+     "size": 34753,
      "type": "file"
     },
     {
@@ -49202,8 +49233,8 @@
     {
      "mode": "100644",
      "path": "src/generators/legacyGenerator.js",
-     "sha256": "14f9266d003124764110fa482935e57c7f394796ea886582719e3f3a427568f6",
-     "size": 13727,
+     "sha256": "b5aff1ada5479f75fdb69ac6a00d329c748409fb8a4cc7a429dd5b361a28be9f",
+     "size": 14862,
      "type": "file"
     },
     {
@@ -49244,8 +49275,8 @@
     {
      "mode": "100644",
      "path": "src/generators/narrativeGenerator.js",
-     "sha256": "8b8f3cbba378684a23d44ff6e659213bc2a5e7f0c95be2c31ce1667d5242ee45",
-     "size": 47689,
+     "sha256": "52dff99885d73a5f1267143ed4d6792676557e06efb9f8d8d431053f6bdb2ad9",
+     "size": 48157,
      "type": "file"
     },
     {
@@ -49258,8 +49289,8 @@
     {
      "mode": "100644",
      "path": "src/generators/narrativeText.js",
-     "sha256": "1e8557eafc6352e325757be83050c9fd832a4b3cbdba07a73ef834953f05ec24",
-     "size": 45090,
+     "sha256": "8f6e22c2608e4e7cafd19c235ec3007279dcb72ba0036fd866b9dec1373fa68f",
+     "size": 45993,
      "type": "file"
     },
     {
@@ -49307,8 +49338,8 @@
     {
      "mode": "100644",
      "path": "src/generators/npcGenerator.js",
-     "sha256": "c2cbd5e63e89f1e86c2816a9b9f88a4ca44b7a99b4087707706476ab3b9f6308",
-     "size": 73714,
+     "sha256": "cd48d8f8037480ca65f1782d9cc094f751a6fc4cb11dd5d0785e51f543f0f970",
+     "size": 73925,
      "type": "file"
     },
     {
@@ -49363,8 +49394,8 @@
     {
      "mode": "100644",
      "path": "src/generators/power/governanceNarrative.js",
-     "sha256": "f8b5486df2a9469b1f0205e29830c0622561d162e9762e565fc415e99989a326",
-     "size": 35310,
+     "sha256": "fdba1c30e02b1320ea47977fe409eae3c8d39546d99080026cb6b506870ce929",
+     "size": 35825,
      "type": "file"
     },
     {
@@ -49391,8 +49422,8 @@
     {
      "mode": "100644",
      "path": "src/generators/power/stressFactions.js",
-     "sha256": "0f0e1ff3423c09bdb2bf844516b6d27c13d737aaa2c2c7b787947c2677e6c4f1",
-     "size": 24493,
+     "sha256": "89e09298f1acab82defb17b96833ca37e0420a8e24a2e6e0268a44ec302cc6ca",
+     "size": 24900,
      "type": "file"
     },
     {
@@ -49496,8 +49527,8 @@
     {
      "mode": "100644",
      "path": "src/generators/steps/assembleSettlement.js",
-     "sha256": "cc982d58218d58407d8a4d85ddc192b75a8f89f8d1506637b65f80677dfaa37d",
-     "size": 22397,
+     "sha256": "8c16078efcdb029bcd85e34a8ad2f1f075ad953f7c52bc3b7c111e0c64c37f3f",
+     "size": 22450,
      "type": "file"
     },
     {
@@ -49643,8 +49674,8 @@
     {
      "mode": "100644",
      "path": "src/generators/steps/stressConfirmPass.js",
-     "sha256": "40c7ca12e79cd62a9b77fded7593c3a6a9ee6ebf2333148dd65ce50faebe65d9",
-     "size": 8112,
+     "sha256": "7b92b9d130775390555b9e2610c079a6be37eb0dc89de57e8be668074db1290d",
+     "size": 8970,
      "type": "file"
     },
     {
@@ -49664,15 +49695,15 @@
     {
      "mode": "100644",
      "path": "src/generators/stressGenerator.js",
-     "sha256": "d3cad7ff14a6e766dfc22e7aef7d844a2b14a1fcf9af9a1f506736ea6687f890",
-     "size": 17869,
+     "sha256": "49d9e752eefeddac85589adee0f4ee874ad29b8663a4c18476a30ea2498edef9",
+     "size": 18572,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/generators/stressNarrative.js",
-     "sha256": "89ed40d06e2c9e08aac6470adf8123ba7df176f6413bd8bc4ff242bcdb0a489f",
-     "size": 9766,
+     "sha256": "021bd0dc5cae681787239879d3851462312aef2f3a594c90367932e4798fb01c",
+     "size": 10586,
      "type": "file"
     },
     {
@@ -52002,8 +52033,8 @@
     {
      "mode": "100644",
      "path": "src/store/configSlice.js",
-     "sha256": "27f8302391fb5ef663c90e5f174871d91f4987a34f37205e520a5c3503697070",
-     "size": 12637,
+     "sha256": "1b52cfc1d427abd6fff9f38ab3e91de6b957c0b5979bc9ecbd3656b08deb2381",
+     "size": 12656,
      "type": "file"
     },
     {
@@ -52268,8 +52299,8 @@
     {
      "mode": "100644",
      "path": "src/store/settlementLifecycleHelpers.js",
-     "sha256": "8f9d9ff34aed36af3139bf6ddd93f851183df541c324f738e676ba0c069ac229",
-     "size": 16651,
+     "sha256": "f15a02f2220bda031bd7c78aefc11264c0d33533428907f5e26c3ff87c105a32",
+     "size": 16768,
      "type": "file"
     },
     {
@@ -52458,30 +52489,30 @@
   }
  },
  "migrationReview": {
-  "bundleDigest": "34cd73f4267e4607c7d7c4ff86fea53147be24961c87f52135bca1eab5b66e49",
+  "bundleDigest": "eab05b51f0b936ae3c2d71939873309198286fba4f2efc732968b4e6eaee11fa",
   "corpusDigest": "03a0d64bb8f52217b8aa44e9ec1ed78944d5fdc28bef11f633aa596fe281afff",
-  "currentArtifactDigest": "43bd902feeae65724b114dd1bf20e9dd9cb1b0b29daf2bfad4a2eba132845aa1",
-  "currentDetectorDigest": "bfd92ce7fdc94b550dafe1cc38e462d470fd370a91c4440f2fdc83ba9fd1341e",
-  "currentFindingsDigest": "5e401d33123f1e5bfa6b0160a060e355dcc6d3765d3322ef31ff1edcf89fac0f",
-  "currentScannerSha": "0e7f12b01407c0fba7d56279f85c9a7cc0edd7bf",
-  "currentScannerToolDigest": "1cfe1c83c91b4541ad9b0d456a7941179b801edb54161de6b367a77adb6604c4",
-  "detectorTreeDigest": "bfd92ce7fdc94b550dafe1cc38e462d470fd370a91c4440f2fdc83ba9fd1341e",
-  "executionTreeDigest": "248dc3894fb0c4e7fc371f8ef9f0477ca0002869b78505471e25c68011894df1",
+  "currentArtifactDigest": "da7847f166e82e024e91897180da3f9de64a50337aef9768f284647a8f0ba9c8",
+  "currentDetectorDigest": "8663c9bc28d06b1d4aba14c58882e51f5b378c9a7a5ccb3dc9a5999cedecb089",
+  "currentFindingsDigest": "afe074d8d127dc90c1017f9f4f9fd7401359e6b456a17533e14cd3b116c20dfb",
+  "currentScannerSha": "848dd7dc1951bf5333140b6b6a8f1e7601dfcaeb",
+  "currentScannerToolDigest": "5b330431084d91ed703724f2125841078b869ee7f0baf13e1207245448165710",
+  "detectorTreeDigest": "8663c9bc28d06b1d4aba14c58882e51f5b378c9a7a5ccb3dc9a5999cedecb089",
+  "executionTreeDigest": "138f744e8117ba82e60c590ce0ebac4e35d2571a316bfe709cb93382b2a84490",
   "legacyAlgorithmBaseSha": "6e7acc4dd88a43cb608f40bc77db3b2130a1e2de",
-  "legacyArtifactDigest": "43bd902feeae65724b114dd1bf20e9dd9cb1b0b29daf2bfad4a2eba132845aa1",
-  "legacyDetectorDigest": "bfd92ce7fdc94b550dafe1cc38e462d470fd370a91c4440f2fdc83ba9fd1341e",
-  "legacyScannerSha": "0e7f12b01407c0fba7d56279f85c9a7cc0edd7bf",
-  "legacyScannerToolDigest": "1cfe1c83c91b4541ad9b0d456a7941179b801edb54161de6b367a77adb6604c4",
-  "predecessorBaselineDigest": "b5d98a44638ef5a7a82fc7dbfc7b1d93fec4dc69193e06f527c045474a363bf6",
-  "predecessorBaselineTextSha256": "a46d33b55e50d6f668607c7983f2927babcfd15cfae3c07b511f89185f30cc05",
+  "legacyArtifactDigest": "da7847f166e82e024e91897180da3f9de64a50337aef9768f284647a8f0ba9c8",
+  "legacyDetectorDigest": "8663c9bc28d06b1d4aba14c58882e51f5b378c9a7a5ccb3dc9a5999cedecb089",
+  "legacyScannerSha": "848dd7dc1951bf5333140b6b6a8f1e7601dfcaeb",
+  "legacyScannerToolDigest": "5b330431084d91ed703724f2125841078b869ee7f0baf13e1207245448165710",
+  "predecessorBaselineDigest": "5ef9d5524a2cf3664b7dfee978994aabda1ee578192651c9c941a646942270e8",
+  "predecessorBaselineTextSha256": "d46f8ed6dc3e7b734c359448ca4594d9265239a9ec8e841bb90fddf8db89b62c",
   "predecessorInventoryDigest": "b82c9d9f768b02b0452e59413d7bbc7f29e323d3680c58974ed10c90f5c954e4",
-  "reportDigest": "8e844ee20eccbeb1f8e5410508bb1dec2d23db05c1099883ec056094ce4b79c0",
-  "reviewDigest": "8a359ce5359ad67ed9271f40ee0600bdb9b3dd45504fc58571b7474d6ac935ca",
+  "reportDigest": "07e78f23c27dbe2b946b05efe5650be575c4dabd4c74e03985f204822c5132a8",
+  "reviewDigest": "53e5f28d90fe49b6f35f91729a227126b7146bc186151965c99f7ed5393eead0",
   "scanConfigDigest": "cef0ab59a909576cf6a8820ada14f6afba8acad45fe13dd7b91b60f4c63335fc",
-  "scanTreeDigest": "9463f94207fc52fee4378dd5fbd1148a0b04192647cbe5c2ef200178d6979527",
-  "sourceTreeDigest": "758a94d06aff35c2a2a5623c6b1988a5800271e2f31f9ee1fb0120cba2d27d4a",
-  "subjectSha": "0e7f12b01407c0fba7d56279f85c9a7cc0edd7bf",
-  "targetInventoryDigest": "b82c9d9f768b02b0452e59413d7bbc7f29e323d3680c58974ed10c90f5c954e4"
+  "scanTreeDigest": "2bb0497c551d14ee8bf055c0d4266f041e7e3628acbc28fe853c4e1b72bbb04e",
+  "sourceTreeDigest": "80eca1847521dfdf2bc7306ea42e0a01679ecfe3699d461c8dfc8b8b014ba554",
+  "subjectSha": "848dd7dc1951bf5333140b6b6a8f1e7601dfcaeb",
+  "targetInventoryDigest": "39ae5d072bc760c4765e31664b828f931b6891d03d27d5c5397fab0c7b9ad5b3"
  },
  "minRows": 40,
  "originMinRows": 8,
@@ -52664,6 +52695,12 @@
     "rule": "explained-writer"
    }
   },
+  "src/domain/migrationDirection.js": {
+   "migrationDirection on config": {
+    "reason": "WIRING-W0 — the chair's ruling of 2026-11-07 03:55 UTC (ODQ §934.105)",
+    "rule": "explained-writer"
+   }
+  },
   "src/domain/normalizeSettlement.js": {
    "neighbourNetwork on settlement": {
     "reason": "CR-OSR-FREEZE-6-R2 / M9",
@@ -52774,23 +52811,23 @@
   }
  },
  "scanStats": {
-  "files": 2363,
-  "reads": 136414,
-  "resolved": 10521,
-  "unresolved": 125893
+  "files": 2364,
+  "reads": 136442,
+  "resolved": 10527,
+  "unresolved": 125915
  },
  "scannerProvenance": {
-  "detectorDigest": "bfd92ce7fdc94b550dafe1cc38e462d470fd370a91c4440f2fdc83ba9fd1341e",
-  "executionTreeDigest": "fc5efb07e00865067967de26deb6ea1304e83d00b24a495db2d1abfdd0faf363",
-  "scanTreeDigest": "9463f94207fc52fee4378dd5fbd1148a0b04192647cbe5c2ef200178d6979527",
-  "sourceTreeDigest": "588aace852c017bf34236fd11913b312811cbf1439a37175d287e9c274f45202",
+  "detectorDigest": "8663c9bc28d06b1d4aba14c58882e51f5b378c9a7a5ccb3dc9a5999cedecb089",
+  "executionTreeDigest": "138f744e8117ba82e60c590ce0ebac4e35d2571a316bfe709cb93382b2a84490",
+  "scanTreeDigest": "2bb0497c551d14ee8bf055c0d4266f041e7e3628acbc28fe853c4e1b72bbb04e",
+  "sourceTreeDigest": "80eca1847521dfdf2bc7306ea42e0a01679ecfe3699d461c8dfc8b8b014ba554",
   "unscannedInputDigest": "efd409593db6db675754b4f80433aafe3544ec00d222a75ed2eec03be8e00b1c"
  },
- "schema": 28,
+ "schema": 29,
  "sentinel": {
-  "resolvedReads": 10521,
+  "resolvedReads": 10527,
   "totalKeys": 6691,
   "usableShapes": 355
  },
- "total": 2045
+ "total": 2046
 }
