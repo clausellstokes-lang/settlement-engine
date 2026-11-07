@@ -4202,7 +4202,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [],
       "branchReads": [
         "structureKey"
@@ -58471,7 +58471,7 @@
       "subject": "structure null (nothing organized recognized)",
       "fields": [],
       "readingFunction": "criminalStructurePoolKey",
-      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "COVERED",

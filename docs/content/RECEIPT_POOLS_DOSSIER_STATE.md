@@ -2985,9 +2985,9 @@ the leash is the state, not a fate.
 3. `[visitor]` The danger at {settlement} comes from lone thieves, not a gang: a cut purse or a knife in an alley, but nobody running the streets.
 
 **structure `null` (nothing organized recognized)**
-1. `[ledger · no organised crime]` No criminal infrastructure has been identified at {settlement}. Whatever wrongdoing the town has does not run through anything that could be called an organization.
+1. `[ledger · no organised crime]` {settlement}'s books record no gang, guild or racket: what wrongdoing the town has, people do on their own account.
 2. `[street · colour]` What goes wrong at {settlement} goes wrong one thing at a time and belongs to whoever did it.
-3. `[visitor · colour]` A stranger asking after the arrangements at {settlement} is met with genuine incomprehension, which is either the truth or an unusually good performance of it.
+3. `[visitor · colour]` Ask at {settlement} who runs things on the quiet and you get blank looks; either nobody does, or the town hides it very well.
 
 **capture `none`**
 1. `[ledger · colour]` No criminal's money appears in the {seat}'s accounts at {settlement}, so what the hall spends is spent on the town.

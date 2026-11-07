@@ -21,7 +21,7 @@ const BACKGROUND = { type: 'Background crime', desc: 'Petty theft, minor fraud, 
 const SURVIVAL_NO_NETWORK = { type: 'Survival crime', desc: 'Theft driven by economic desperation rather than organization. No criminal infrastructure: just too many people with too little, doing what they must to survive.' };
 const SURVIVAL_NETWORK = { type: 'Survival crime', desc: 'Hunger-driven theft of food, livestock, and stored goods. Enforcement struggles to distinguish survival crime from organised theft.' };
 const FRAUD = { type: 'religious fraud', desc: 'False conversion declarations sold or arranged for a fee.' };
-const DENIAL = /No criminal infrastructure has been identified|goes wrong one thing at a time and belongs to whoever did it|met with genuine incomprehension|No organized criminal infrastructure detected/;
+const DENIAL = /books record no gang, guild or racket|goes wrong one thing at a time and belongs to whoever did it|who runs things on the quiet and you get blank looks|No organized criminal infrastructure detected/;
 
 describe('R-E1: the denial prints beside a pattern that itself denies organisation', () => {
   it('the predicate: only organisation-denying patterns list no crime; any other pattern, operation or chain does', () => {

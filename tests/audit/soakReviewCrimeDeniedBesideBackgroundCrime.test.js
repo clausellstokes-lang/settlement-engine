@@ -14,7 +14,7 @@ const HEAD = [
 const BACKGROUND = ['Background crime', 'Petty theft, minor fraud, and opportunistic violence are persistent. No single dominant organisation: just the steady pressure of too many people with too little, and too few consequences for taking.…'];
 const SURVIVAL = ['Survival crime', 'Theft driven by economic desperation rather than organization. No criminal infrastructure: just too many people with too little, doing what they must to survive.'];
 const FRAUD = ['religious fraud', 'False conversion declarations sold or arranged for a fee.'];
-const DENIAL = 'No criminal infrastructure has been identified at Drumburn. Whatever wrongdoing the village has does not run through anything that could be called an organization.';
+const DENIAL = 'Drumburn\'s books record no gang, guild or racket: what wrongdoing the village has, people do on their own account.';
 const TAIL = 'Armed Forces & Fortifications 1 wall 1 force ▲';
 const tab = (...rows) => [...HEAD, ...rows.flat(), DENIAL, TAIL].join('\n');
 

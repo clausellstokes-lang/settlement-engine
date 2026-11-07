@@ -42,7 +42,7 @@ describe('magic-absent-prose (soak1k-13, Amarthal)', () => {
   });
 });
 
-const DENIAL = 'No criminal infrastructure has been identified at Innissike. Whatever wrongdoing the city has does not run through anything that could be called an organization.';
+const DENIAL = 'Innissike\'s books record no gang, guild or racket: what wrongdoing the city has, people do on their own account.';
 
 describe('crime-denied-and-listed (soak1k-28, Innissike)', () => {
   it('finds the denial beside a listed operation, or beside a running criminal chain', () => {

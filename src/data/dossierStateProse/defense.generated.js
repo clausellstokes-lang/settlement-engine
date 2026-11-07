@@ -3129,7 +3129,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no organised crime"
           ],
-          "text": "No criminal infrastructure has been identified at {settlement}. Whatever wrongdoing the town has does not run through anything that could be called an organization.",
+          "text": "{settlement}'s books record no gang, guild or racket: what wrongdoing the town has, people do on their own account.",
           "slots": [
             "settlement"
           ],
@@ -3151,7 +3151,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "A stranger asking after the arrangements at {settlement} is met with genuine incomprehension, which is either the truth or an unusually good performance of it.",
+          "text": "Ask at {settlement} who runs things on the quiet and you get blank looks; either nobody does, or the town hides it very well.",
           "slots": [
             "settlement"
           ],

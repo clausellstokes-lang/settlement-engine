@@ -269,7 +269,7 @@ export function migrationDirectionFindings(s, r) {
 }
 
 /** DS-DEF-4's `structure null` variants and the Defense tab's static no-organised-crime line. */
-const DS_DEF4_DENIAL = /No criminal infrastructure has been identified|goes wrong one thing at a time and belongs to whoever did it|met with genuine incomprehension|No organized criminal infrastructure detected\./;
+const DS_DEF4_DENIAL = /books record no gang, guild or racket|goes wrong one thing at a time and belongs to whoever did it|who runs things on the quiet and you get blank looks|No organized criminal infrastructure detected\./;
 /** The Defense block's "Active crime patterns" heading. */
 const CRIME_PATTERNS_HEADING = 'Active crime patterns';
 /** A screen line that closes a sentence (a pattern's description); a pattern's name does not. */
@@ -307,7 +307,7 @@ export function crimePatternRows(tab) {
  * @returns {string|null} the finding's detail, or null
  */
 export function crimeAbsentAndOrganised(screenText, defense) {
-  if (/No criminal infrastructure/i.test(screenText) && /criminal network|thieves['’] guild|crime boss|kingpin/i.test(screenText)) return 'and an organised network elsewhere';
+  if (/No criminal infrastructure|no gang, guild or racket/i.test(screenText) && /criminal network|thieves['’] guild|crime boss|kingpin/i.test(screenText)) return 'and an organised network elsewhere';
   const tab = String(defense || '');
   if (!DS_DEF4_DENIAL.test(tab)) return null;
   const rows = crimePatternRows(tab);

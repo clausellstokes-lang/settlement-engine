@@ -20,7 +20,7 @@ const PATTERNS = [
   { type: 'religious fraud', desc: 'False conversion declarations sold or arranged for a fee.' },
   { type: 'informant networks', desc: 'Enforcement authorities paying for information about non-compliant households.' },
 ];
-const DENIAL = /No criminal infrastructure has been identified|goes wrong one thing at a time and belongs to whoever did it|met with genuine incomprehension|No organized criminal infrastructure detected/;
+const DENIAL = /books record no gang, guild or racket|goes wrong one thing at a time and belongs to whoever did it|who runs things on the quiet and you get blank looks|No organized criminal infrastructure detected/;
 
 describe('R-D2: the criminal-structure denial reads the block\'s own crime patterns', () => {
   it('the predicate: crime patterns, a listed operation or a running criminal chain each list crime', () => {
