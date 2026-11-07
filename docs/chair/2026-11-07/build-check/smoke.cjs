@@ -1,0 +1,38 @@
+const { chromium } = require('playwright');
+const fs = require('fs');
+(async () => {
+  const out = process.argv[2];
+  const b = await chromium.launch();
+  const ctx = await b.newContext({ viewport: { width: 1280, height: 900 }, deviceScaleFactor: 2 });
+  const page = await ctx.newPage();
+  const errs = []; const pageErrs = []; const failed = [];
+  page.on('console', m => { if (m.type() === 'error') errs.push(m.text()); });
+  page.on('pageerror', e => pageErrs.push(String(e)));
+  page.on('requestfailed', r => failed.push(r.url() + ' ' + (r.failure()||{}).errorText));
+  const res = {};
+  const t0 = Date.now();
+  const r = await page.goto('http://localhost:4173/', { waitUntil: 'networkidle' });
+  res.rootStatus = r.status();
+  const cta = page.getByRole('button', { name: /Forge your first settlement/i }).or(page.getByRole('link', { name: /Forge your first settlement/i })).first();
+  await cta.waitFor({ timeout: 15000 });
+  res.rootMs = Date.now() - t0;
+  await page.screenshot({ path: out + '/root.png' });
+  const t1 = Date.now();
+  await cta.click();
+  res.afterCtaUrl = page.url();
+  const forge = page.getByRole('button', { name: /^\s*(Forge|Begin|Generate)\b/i }).first();
+  if (await forge.waitFor({ timeout: 15000 }).then(() => true, () => false)) { res.forgeButton = (await forge.innerText()).trim(); await forge.click(); }
+  await page.keyboard.press('Escape').catch(() => {});
+  const meta = page.locator('main').getByText(/\b(thorp|hamlet|village|town|city|capital|metropolis)\b\s*·\s*pop\.?\s*\d/i).first();
+  await meta.waitFor({ timeout: 60000 });
+  await page.getByText('Loading settlement view...').waitFor({ state: 'detached', timeout: 30000 }).catch(() => {});
+  await page.waitForTimeout(1500);
+  res.dossierMs = Date.now() - t1;
+  res.dossierMeta = await meta.innerText();
+  res.url = page.url();
+  await page.screenshot({ path: out + '/dossier.png' });
+  res.consoleErrors = errs; res.pageErrors = pageErrs; res.failedRequests = failed;
+  fs.writeFileSync(out + '/console-errors.json', JSON.stringify(res, null, 2) + '\n');
+  console.log(JSON.stringify({ ...res, consoleErrors: errs.length, first3: errs.slice(0,3) }, null, 2));
+  await b.close();
+})().catch(e => { console.error('SMOKE FAIL', e); process.exit(1); });
