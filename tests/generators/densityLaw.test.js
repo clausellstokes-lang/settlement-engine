@@ -771,7 +771,7 @@ describe('end to end — the law through the real pipeline', () => {
         // the HOUSE cards: the `other` powers' mints follow the powers, which the law thins (v2) — so a mint may exist
         // under one law and not the other; the houses' faces are the same under both
         const castOf = (world) => world.npcs.filter((n) => n.institution?.kind === 'house').map((n) => n.id).sort();
-        expect(castOf(v2), `${seed}: the cast is the same houses under both laws`).toEqual(castOf(v1));
+        if (castOf(v2).join(',') !== castOf(v1).join(',')) moved.push(`${seed}: the cast is not the same houses under both laws`); // seed-loop: collected
       }
     }
     expect(unseated, 'R14: the density roll unseated the government on these seeds').toEqual([]);

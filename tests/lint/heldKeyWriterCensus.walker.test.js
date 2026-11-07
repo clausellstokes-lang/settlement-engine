@@ -234,6 +234,7 @@ function liveStepRows() {
 const STEP_ROSTER = Object.freeze([
   'assembleInstitutions|institutions|provides',
   'assembleSettlement|powerStructure|mutates',
+  'assembleSettlement|relationships|mutates', // 2026-11-07 PEOPLE-1 CAST: the coherence seam appends the `other` mints' ties (people/castPowers.js)
   'cascadePass|institutions|mutates',
   'coherenceRepairPass|institutions|mutates',
   'corruptionPass|npcs|mutates',

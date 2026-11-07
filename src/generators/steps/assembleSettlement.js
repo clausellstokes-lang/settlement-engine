@@ -98,7 +98,7 @@ registerStep('assembleSettlement', {
   // summary in place with the real name (resolveStress rolled them name-blind) and
   // deletes the transient summaryRoll token — a declared in-place write of `stress`
   // (A+ P1.7 contract).
-  mutates: ['powerStructure', 'stress'],
+  mutates: ['powerStructure', 'stress', 'relationships'], // relationships: PEOPLE-1 CAST — the coherence seam appends the `other` mints' ties (people/castPowers.js)
   phase: 'assembly',
 }, (ctx, rng) => {
   // The runner hands the pins through the context under its reserved key; absent pins mean

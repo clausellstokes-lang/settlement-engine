@@ -29,7 +29,8 @@ describe('generators-domain-2 — structural-NPC office coverage', () => {
       for (const s of ['gm-a', 'gm-b', 'gm-c', 'gm-d']) {
         const settlement = gen({ settType: 'town', terrainOverride }, s);
         const npcs = settlement.npcs || [];
-        const hasGuardCaptain = npcs.some((n) => n.role === 'Guard Captain');
+        // 2026-11-07 PEOPLE-1 CAST (M-1b): the realized guard captain is the militia's or the watch's FACE, by title
+        const hasGuardCaptain = npcs.some((n) => ['Guard Captain', 'the militia captain', 'the watch sergeant', 'the watch captain', 'the watch commander'].includes(n.role));
         if (!hasGuardCaptain) continue;
         sawGuardCaptainSettlements++;
         const synthWatch = npcs.filter(
