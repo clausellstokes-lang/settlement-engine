@@ -317,8 +317,8 @@ describe('safety prose agrees in number and respects settlement scale', () => {
     // of the plural-form negative passing over prose that no longer exists.
     expectAbsentWithAnchor(
       occupiedGarrison.safetyDesc,
-      'garrison, now under occupier command, enforce curfew',
-      'The garrison, now under occupier command, enforces curfew',
+      'garrison, now under occupier command, enforce the curfew',
+      'The garrison, now under occupier command, enforces the curfew',
       'occupied garrison — singular predicate',
     );
 
@@ -327,7 +327,7 @@ describe('safety prose agrees in number and respects settlement scale', () => {
       'town',
       [],
     );
-    expect(occupiedOfficials.safetyDesc).toContain('Occupation authorities enforce curfew');
+    expect(occupiedOfficials.safetyDesc).toContain('Occupation authorities enforce the curfew');
   });
 
   test('state-control and religious-fraud branches retain subject agreement', () => {
