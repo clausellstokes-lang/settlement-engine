@@ -31,14 +31,14 @@
     "keyFunctions": 124,
     "keyFunctionsConsulted": 124,
     "keyTables": 33,
-    "slotless": 69,
+    "slotless": 68,
     "bagless": 136,
     "predicatesOverUnreadFields": 100,
     "syntheticTableFields": 100,
     "tiers": {
       "MISSING": 34,
-      "THIN": 489,
-      "COVERED": 227,
+      "THIN": 490,
+      "COVERED": 226,
       "MISSING-AT-TIER": 45
     },
     "tierSilences": 352,
@@ -40007,7 +40007,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 1,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -40309,7 +40309,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 2,
+      "grammars": 3,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -40539,7 +40539,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -40946,7 +40946,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 2,
+      "grammars": 3,
       "predicate": [],
       "branchReads": [
         "faith.piety.trend",
@@ -41022,7 +41022,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 3,
+      "grammars": 2,
       "predicate": [
         {
           "field": "text(model?.mandate?.phrase) (via MANDATE_POOL_BY_PHRASE in warFaithStateProse.js)",
@@ -41097,7 +41097,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [
         {
           "field": "text(model?.mandate?.phrase) (via MANDATE_POOL_BY_PHRASE in warFaithStateProse.js)",
@@ -41483,12 +41483,9 @@
         "term"
       ],
       "slotsNamed": [
-        "creed",
-        "timeband_span"
+        "creed"
       ],
-      "slotsWithoutProvider": [
-        "timeband_span"
-      ],
+      "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
       "grammars": 2,
@@ -41609,7 +41606,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 3,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -41666,7 +41663,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -42027,7 +42024,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 3,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -42079,7 +42076,8 @@
         "term"
       ],
       "slotsNamed": [
-        "creed"
+        "creed",
+        "settlement"
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
@@ -42549,7 +42547,7 @@
       ],
       "hasBag": true,
       "variants": 3,
-      "grammars": 3,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -42909,7 +42907,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -42971,7 +42969,7 @@
       ],
       "hasBag": true,
       "variants": 3,
-      "grammars": 2,
+      "grammars": 3,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -45026,7 +45024,7 @@
         "DS-FTH-1 :: MANDATE: a measure of divine mandate"
       ],
       "variants": 9,
-      "grammars": 6,
+      "grammars": 4,
       "blocks": [
         "DS-FTH-1"
       ]
@@ -59038,12 +59036,12 @@
       "count": "4 variant(s) · 3 grammar(s) · slots {creed, settlement}"
     },
     {
-      "tier": "THIN",
+      "tier": "COVERED",
       "block": "DS-FTH-1",
       "subject": "PATRON: rankAxis: minor",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 1 grammar(s) · slots {creed, settlement}"
+      "count": "3 variant(s) · 2 grammar(s) · slots {creed, settlement}"
     },
     {
       "tier": "COVERED",
@@ -59083,7 +59081,7 @@
       "subject": "DEVOTION: observant",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 3 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -59110,12 +59108,12 @@
       "count": "3 variant(s) · 2 grammar(s) · slots {none}"
     },
     {
-      "tier": "COVERED",
+      "tier": "THIN",
       "block": "DS-FTH-1",
       "subject": "ARC: trend: falling",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 2 grammar(s) · slots {none}"
+      "count": "3 variant(s) · 1 grammar(s) · slots {none}"
     },
     {
       "tier": "COVERED",
@@ -59165,7 +59163,7 @@
       "subject": "SINK: unaffiliated present, arc rising",
       "fields": [],
       "readingFunction": "sinkPoolKey",
-      "count": "3 variant(s) · 2 grammar(s) · slots {none}"
+      "count": "3 variant(s) · 3 grammar(s) · slots {none}"
     },
     {
       "tier": "COVERED",
@@ -59175,17 +59173,17 @@
         "text(model?.mandate?.phrase) (via MANDATE_POOL_BY_PHRASE in warFaithStateProse.js)"
       ],
       "readingFunction": "MANDATE_POOL_BY_PHRASE",
-      "count": "3 variant(s) · 3 grammar(s) · slots {none}"
+      "count": "3 variant(s) · 2 grammar(s) · slots {none}"
     },
     {
-      "tier": "COVERED",
+      "tier": "THIN",
       "block": "DS-FTH-1",
       "subject": "MANDATE: a dominant church",
       "fields": [
         "text(model?.mandate?.phrase) (via MANDATE_POOL_BY_PHRASE in warFaithStateProse.js)"
       ],
       "readingFunction": "MANDATE_POOL_BY_PHRASE",
-      "count": "3 variant(s) · 2 grammar(s) · slots {none}"
+      "count": "3 variant(s) · 1 grammar(s) · slots {none}"
     },
     {
       "tier": "THIN",
@@ -59235,7 +59233,7 @@
       "subject": "STANDING: established",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 2 grammar(s) · slots {creed, timeband_span}"
+      "count": "3 variant(s) · 2 grammar(s) · slots {creed}"
     },
     {
       "tier": "COVERED",
@@ -59251,7 +59249,7 @@
       "subject": "NICHE: slots saturated at tier capacity",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 3 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -59259,7 +59257,7 @@
       "subject": "NICHE: slots open",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "COVERED",
@@ -59301,7 +59299,7 @@
       "subject": "LEGITIMACY: tenuous",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 3 grammar(s) · slots {creed}"
+      "count": "3 variant(s) · 2 grammar(s) · slots {creed}"
     },
     {
       "tier": "COVERED",
@@ -59309,7 +59307,7 @@
       "subject": "LEGITIMACY: contested",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 2 grammar(s) · slots {creed}"
+      "count": "3 variant(s) · 2 grammar(s) · slots {creed, settlement}"
     },
     {
       "tier": "COVERED",
@@ -59373,7 +59371,7 @@
       "subject": "TEMPLE WEALTH: rich",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 3 grammar(s) · slots {institution, settlement}"
+      "count": "3 variant(s) · 2 grammar(s) · slots {institution, settlement}"
     },
     {
       "tier": "COVERED",
@@ -59421,7 +59419,7 @@
       "subject": "PILGRIM SEASON: suppressed by road danger",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "COVERED",
@@ -59429,7 +59427,7 @@
       "subject": "CONTESTED",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 2 grammar(s) · slots {institution, settlement}"
+      "count": "3 variant(s) · 3 grammar(s) · slots {institution, settlement}"
     },
     {
       "tier": "COVERED",

@@ -289,7 +289,7 @@ describe('the census printed BESIDE the composed-fill census (report-only)', () 
     // ⛔ THE SUPPORTING FIGURES ARE ASSERTED, NOT PRINTED (car 10, cure 5). The lane's own
     // rule was "every count asserted as an integer" and these four were `console.log` — which
     // is to say they could drift under any rebase and the gate would print the drift.
-    expect(summary.slotless.length, 'pools naming a slot the block\'s bag never fills').toBe(69); // W4 PEOPLE 2026-11-07: +7 pools/+18 variants, the faith and great-house construction
+    expect(summary.slotless.length, 'pools naming a slot the block\'s bag never fills').toBe(68); // W4 PEOPLE 2026-11-07: +7 pools/+18 variants, the faith and great-house construction
     expect(summary.bagless.length, 'pools in a block with no bag at all').toBe(136); // W4 PEOPLE 2026-11-07: +7 pools, the faith and great-house construction
     // 100 AND NOT 99 SINCE LANDING-7 lane F (R-F1): that recovered guard is over the bare
     // parameter `magicAbsent`, which no composer holds as a field (as `magicDependency` is not).
@@ -696,8 +696,8 @@ describe('THE MAP READ THE OTHER WAY — fact → text, and the three tiers', ()
     // || the raw sequence)` per pool. The counts are recomputed FRESH from the live modules
     // here, which is why they move with the classifier rather than with the committed JSON.
     expect(counts.get(TIERS.MISSING), 'held facts with no pool keyed on them').toBe(34);
-    expect(counts.get(TIERS.THIN), 'pools with one variant, one grammar, or {settlement} alone').toBe(489); // W4 PEOPLE 2026-11-07: +7 pools/+18 variants, the faith and great-house construction
-    expect(counts.get(TIERS.COVERED), 'and the rest').toBe(227); // W4 PEOPLE 2026-11-07: +7 pools, the faith and great-house construction
+    expect(counts.get(TIERS.THIN), 'pools with one variant, one grammar, or {settlement} alone').toBe(490); // W4 PEOPLE 2026-11-07: +7 pools/+18 variants, the faith and great-house construction
+    expect(counts.get(TIERS.COVERED), 'and the rest').toBe(226); // W4 PEOPLE 2026-11-07: +7 pools, the faith and great-house construction
     expect(counts.get(TIERS.THIN) + counts.get(TIERS.COVERED), 'every pool lands in one of the two pool tiers')
       .toBe(spines.length);
     for (const row of tiers) {

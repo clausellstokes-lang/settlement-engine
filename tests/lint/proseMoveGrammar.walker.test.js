@@ -117,10 +117,10 @@ describe('the four negative controls and the positive one (MOVE-GRAMMAR §4.4, a
     // 405 / 114 -> 404 / 114 at the chair's 06:5x DS-CND-1 boom line (ODQ §934.105): boom v4 is one sentence beside v1-v3's two, so the pool is no
     // longer uniform; its opener ("it is") is new to the pool (the ruled "{settlement} is …" repeated
     // v2's opener and read 115, so the line opens "It is a good stretch for {settlement}").
-    expect(uniformSegments).toBe(410); // W4 PEOPLE 2026-11-07: +7 pools, the faith and great-house construction
-    expect(repeatedOpener).toBe(115); // W4 PEOPLE 2026-11-07: +7 pools, the faith and great-house construction
-    expect(uniformSegments / cells.size).toBeCloseTo(0.573, 3); // W4 PEOPLE 2026-11-07: +7 pools, the faith and great-house construction
-    expect(repeatedOpener / cells.size).toBeCloseTo(0.161, 3);
+    expect(uniformSegments).toBe(408); // W4 PEOPLE 2026-11-07: +7 pools, the faith and great-house construction
+    expect(repeatedOpener).toBe(119); // W4 PEOPLE 2026-11-07: +7 pools, the faith and great-house construction
+    expect(uniformSegments / cells.size).toBeCloseTo(0.570, 3); // W4 PEOPLE 2026-11-07: +7 pools, the faith and great-house construction
+    expect(repeatedOpener / cells.size).toBeCloseTo(0.166, 3); // W4 PEOPLE 2026-11-07: 119/716 repeated openers, re-measured
   });
 
   it('CONTROL 4, SECOND HALF — the R1 leaves RED ON ARM E, which is what the control actually says', async () => {
@@ -143,8 +143,8 @@ describe('the four negative controls and the positive one (MOVE-GRAMMAR §4.4, a
     expect(figures.pools).toBe(716); // W4 PEOPLE 2026-11-07: +7 pools/+18 variants, the faith and great-house construction
     // 406 -> 405 by the same cause as the calibration above (the chair's 06:5x rewording of DS-GEN-17 v3);
     // 405 -> 404 at the chair's 06:5x DS-CND-1 boom line (ODQ §934.105), likewise.
-    expect(Math.round(figures.uniformSegmentShare * 716)).toBe(410); // W4 PEOPLE 2026-11-07: +7 pools, the faith and great-house construction
-    expect(Math.round(figures.repeatedOpenerShare * 709)).toBe(114);
+    expect(Math.round(figures.uniformSegmentShare * 716)).toBe(408); // W4 PEOPLE 2026-11-07: +7 pools, the faith and great-house construction
+    expect(Math.round(figures.repeatedOpenerShare * 709)).toBe(118); // W4 PEOPLE 2026-11-07: re-measured, the faith and great-house construction
   });
 
   it('ARM E is NOT-EXECUTABLE without spread ceilings — never a pass on a number it invented', () => {

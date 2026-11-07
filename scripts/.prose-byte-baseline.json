@@ -67,8 +67,8 @@
       "ceilingGzip": 87513
     },
     "src/data/dossierStateProse/general.generated.js": {
-      "raw": 275322,
-      "gzip": 36858,
+      "raw": 275356,
+      "gzip": 36869,
       "ceilingRaw": 796761,
       "ceilingGzip": 177058
     },
@@ -85,8 +85,8 @@
       "ceilingGzip": 57524
     },
     "src/data/dossierStateProse/warFaith.generated.js": {
-      "raw": 181741,
-      "gzip": 25922,
+      "raw": 179783,
+      "gzip": 25212,
       "ceilingRaw": 505306,
       "ceilingGzip": 112290
     },
@@ -323,6 +323,14 @@
       "toRaw": 181741,
       "gzipAfter": 25922,
       "reason": "+5,299 B raw (gzip level 9: 25,180 -> 25,922): DS-FTH-4 gains five FLAG pools on the birth-time stress flags (crusaderSynthesis, heresySuppression hunted/preached, religiousFraud, mageTheocracy; 10 variants) and is MOUNTED at faith.templeGround; DS-GEN-17 gains the two GREAT HOUSE lenses (cathedral, monastery; 8 variants, four vantages each). Projected through node scripts/generate-dossier-state-prose.mjs; --check exit 0."
+    },
+    {
+      "car": "W4 PEOPLE (2026-11-07): the owner's style law of 2026-11-07 — DS-FTH-1, DS-FTH-3, DS-FTH-4 (48 rewrites); DS-GEN-17 monastery v02",
+      "leaf": "src/data/dossierStateProse/general.generated.js",
+      "fromRaw": 275322,
+      "toRaw": 275356,
+      "gzipAfter": 36869,
+      "reason": "+34 B raw (gzip level 9: 36,858 -> 36,869): the faith blocks' style rows (STYLE-AUDIT §2b-4) rewritten in the plain register; DS-GEN-17 GREAT HOUSE: monastery v02 reworded so it never echoes the cathedral's bells line in a town with both."
     }
   ],
   "ceilingTransfersNewLeaves": [

@@ -10129,7 +10129,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "institution: monastery"
           ],
-          "text": "{settlement} sets its day by the monastery bell.",
+          "text": "The monastery keeps its own hours, and the rest of {settlement} leaves it to them.",
           "slots": [
             "settlement"
           ],
