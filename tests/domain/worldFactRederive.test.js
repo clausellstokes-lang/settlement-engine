@@ -433,10 +433,13 @@ describe('EM-B2b — world facts by consequence: the route, the refusals and the
     // (8 of 1,050 rows). Record 0b, the W0 merge's composition over it (docs/shift-records/2026-11-07-people-land-0b-
     // w0-merge.json), from the stage at fc834a6bd: the generator master b1be65e4.. -> 6b0d226e.. (525 of 525 rows); the
     // prose manifest did not move.
+    // Record 1, PEOPLE-1 CAST (docs/shift-records/2026-11-07-people-1-cast.json), from the stage at dc655f712: the
+    // generator master 6b0d226e.. -> 58fb2164.. (525 of 525 rows) and the prose manifest 63c63a8b.. -> 22e1df2d..
+    // (762 of 1,050 rows).
     expect(shaOfFile(GOLDEN), 'tests/fixtures/generator-golden-master.json moved')
-      .toBe('6b0d226e38e80f7d85c2ea21f050e4cd3bbb93a2730b48153269194deb2305ac');
+      .toBe('58fb2164498c630bbc8913234f6e2288df490fe9787882efb18cf9c92a3d7e3e');
     expect(shaOfFile(PROSE_GOLDEN), 'tests/fixtures/dossier-prose-manifest-golden.json moved')
-      .toBe('63c63a8b47b204ec7c6ab34ebfddeeecb12276e115c9a349ed8fda886aaa7ff3');
+      .toBe('22e1df2dbb06db0e052a46a6416033c07f310342d4d6e0bbe0e3307611372112');
 
     // AND THE REASON THEY CANNOT MOVE: fresh generation passes no layer, so no world fact is ever
     // routed and `config′` is `config` itself. Measured against the committed manifest.
