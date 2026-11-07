@@ -197,10 +197,12 @@ export function liveNeighbourEngagements(settlement) {
       id: settlement.id,
       name: settlement.name || '',
       npcs: settlement.npcs || [],
-      factions: settlement.factions || [],
+      // The POWERS on both sides (PEOPLE-5A, M-2): the NPC grouping is not copied.
+      powerStructure: { factions: settlement.powerStructure?.factions || [] },
     };
     const partner = {
-      id: nr.id, name: nr.name, npcs: nr.npcs || [], factions: nr.factions || [],
+      id: nr.id, name: nr.name, npcs: nr.npcs || [],
+      powerStructure: { factions: nr.powerStructure?.factions || [] },
     };
     const { forA } = generateCrossSettlementConflictsDeterministic(
       own, partner, nr.relationshipType || 'neutral', 'live',
