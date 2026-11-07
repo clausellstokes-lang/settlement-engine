@@ -24,6 +24,7 @@ import { describe, expect, it } from 'vitest';
 import { eligibleVariants } from '../../src/domain/display/stateProse/stateProseKernel.js';
 import { DOSSIER_STATE_PROSE_WAR_FAITH } from '../../src/data/dossierStateProse/warFaith.generated.js';
 import { CALM_FACTS_ADMIT_ALL } from '../helpers/calmFactsDouble.js';
+import { variantByVid } from '../helpers/drawnProse.js';
 
 const LEAF = DOSSIER_STATE_PROSE_WAR_FAITH;
 
@@ -69,6 +70,9 @@ describe('CENSUS-5d unit 3 · the waiting faith lines declare as their atoms lan
   it('CULTS v3 presumes no cult count and no quarter (R-U)', () => {
     const texts = LEAF['DS-FTH-1'].pools['CULTS: cults[] present beneath the patron'].map((v) => v.text);
     expect(texts.some((t) => /Several lesser rites|quarter of the town/.test(t))).toBe(false);
-    expect(texts).toContain("What else is kept here runs alongside the patron's rite, with its own days and its own corner of {settlement}.");
+    // v3 is the reworded line (R-U), computed by its vid rather than quoted (proseDrawnAnchors).
+    const v3 = variantByVid({ leaf: 'warFaith', blockId: 'DS-FTH-1', poolKey: 'CULTS: cults[] present beneath the patron', vid: 3, slots: { settlement: 'X' } });
+    expect(v3.length).toBeGreaterThan(20);
+    expect(v3).not.toMatch(/Several lesser rites|quarter of the town/);
   });
 });
