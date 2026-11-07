@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-11-07T15:56:39.089Z",
+  "generatedAt": "2026-11-07T22:53:21.322Z",
   "entry": "src/domain/aiCharter.js",
-  "sourceHash": "69f57fa55af237f1",
+  "sourceHash": "94df846d8fac9758",
   "inputs": [
-    "node_modules/immer/dist/immer.mjs",
-    "node_modules/seedrandom/seedrandom.js",
+    "../../../../../../home/user/settlement-engine/node_modules/immer/dist/immer.mjs",
+    "../../../../../../home/user/settlement-engine/node_modules/seedrandom/seedrandom.js",
     "src/data/constants.js",
     "src/data/entityTags.js",
     "src/data/institutionalCatalog.js",
