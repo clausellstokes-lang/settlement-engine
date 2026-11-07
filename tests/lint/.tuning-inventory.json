@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "e5e63f4466503eaf188979da3ea5a70986de36dd",
-  "measuredBy": "LANDING-R2 seat I (Opus 5.5)",
+  "measuredAtSha": "4b4c167b88656d887967f5c1502409efba06ef67",
+  "measuredBy": "LANDING-R2 seat J",
   "date": "2026-11-07",
-  "note": "The chair's ruling of 2026-11-07, ODQ §934.105 (B) and its (ii): the unregistered-named ceiling 535 does not rise; POPULATION_GREW answered number by number. RUNG2-F13 (57004aee2, f3131e917, ad47f711c, f7127dd20) and reader R11 (6ea19cfc0): five dials registered as draft rows (FAMINE_STORES_HELD_MONTHS, FAMINE_HELD_STORE_MONTHS, FAMINE_MONTHS_RUN, FAMINE_DRAWDOWN, WANT_MAX_WORDS), the three bare decimals named in src (MIGRATION_GOVERNING_DAMP a draft dial; SMALLEST_ONE_DECIMAL_MONTHS and FEW_WEEKS_AS_MONTHS structural indexes), golden 0/525 and the 600-seed probe unmoved. Named 535, bare 6945 -> 6944 (stressFactions 35 -> 34 banked); METROPOLIS_ROLL_TUNING's dependents re-measured.",
+  "note": "87fdde9a9 (FIRSTPAINT-3): computeActiveChains.js reads goodsHeldByFoodRecord from domain/foodSurplus.js, no longer through economy/foodBalance.js, so it leaves FAMINE_HELD_STORE_MONTHS dependents; no value moved",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -8106,7 +8106,6 @@
         "value": 6
       },
       "dependents": [
-        "src/generators/computeActiveChains.js",
         "src/generators/economy/economicState.js",
         "src/generators/economy/viability.js",
         "src/generators/foodGenerator.js"
