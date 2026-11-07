@@ -141,7 +141,11 @@ const SPEAKING = Object.freeze({
   },
   relationships: [{ flagDriven: false }, { flagDriven: false }],
   config: { terrainType: 'mountain', tradeRouteAccess: 'road' },
-  institutions: [{ name: 'The Stone Market', category: 'economy' }],
+  // A CATALOGUE market row (the producer's own name), since census-1b unit A (d) (427f7b112) homed
+  // DS-GEN-13's key on the market fact (`facts/market.js`: the catalogue's `market` tag on the live
+  // roster) and db3ed88c1 put `declares: ["market"]` on MARKET-OPEN's brace: the old invented
+  // 'The Stone Market' carries no tag, so the desk keyed NO-MARKET and the kernel refused MARKET-OPEN.
+  institutions: [{ name: 'Weekly market', category: 'economy' }],
   economicState: {
     prosperity: 'Comfortable',
     foodSecurity: { label: 'Deficit' },
