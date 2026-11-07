@@ -15105,7 +15105,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 1,
+      "grammars": 2,
       "predicate": [
         {
           "field": "eco.isEntrepot",
@@ -46108,7 +46108,7 @@
         "DS-ECO-12 :: TRADE PROFILE: isEntrepot, transit goods marked among the exports"
       ],
       "variants": 3,
-      "grammars": 1,
+      "grammars": 2,
       "blocks": [
         "DS-ECO-12"
       ]
@@ -57627,7 +57627,7 @@
         "eco.isEntrepot"
       ],
       "readingFunction": "tradeProfilePoolKey",
-      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "COVERED",

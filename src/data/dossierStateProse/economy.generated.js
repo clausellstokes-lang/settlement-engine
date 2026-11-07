@@ -5307,7 +5307,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no hunger"
           ],
-          "text": "{settlement} rests on one earner. Nothing about that is failing; everything about the town's next hard season depends on it not failing.",
+          "text": "{settlement} lives on one trade. It is doing well enough now, but if that trade has a bad year, the whole town has a bad year.",
           "slots": [
             "settlement"
           ],
@@ -5349,7 +5349,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "A stranger cannot say what {settlement} is for, and the reason is that the town is not for any one thing.",
+          "text": "{settlement} is not known for any one trade; it lives on many small ones.",
           "slots": [
             "settlement"
           ],
@@ -5357,7 +5357,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "threshold",
-          "text": "{settlement} would barely notice losing any single trade and could not replace several, which is a different exposure from the obvious one.",
+          "text": "{settlement} would hardly notice losing one trade, but could not stand losing several at once.",
           "slots": [
             "settlement"
           ],
@@ -5370,7 +5370,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "dm-only"
           ],
-          "text": "A real portion of what {settlement} earns is earned by people who would not describe the earning to a clerk, and the books show the difference as a gap rather than a line.",
+          "text": "A real portion of {settlement}'s money is made by people who keep it from the clerks, and it never shows in the town's books.",
           "slots": [
             "settlement"
           ],
@@ -5415,8 +5415,10 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "dm-only"
           ],
-          "text": "What keeps this town solvent is the part of it nobody will name, and the naming is what would cost somebody.",
-          "slots": [],
+          "text": "What keeps {settlement} solvent is a trade nobody names aloud, because naming it would get someone hurt.",
+          "slots": [
+            "settlement"
+          ],
           "vid": 2
         },
         {
@@ -5424,7 +5426,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "dm-only"
           ],
-          "text": "A stranger doing honest business at {settlement} is competing with the town's principal industry and has not been told which one that is.",
+          "text": "Honest traders in {settlement} are up against the town's biggest business, and nobody has told them what it is.",
           "slots": [
             "settlement"
           ],
@@ -5542,8 +5544,10 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "The town makes its own ordinary things and buys its extraordinary ones, which is the arrangement of most towns and is worth stating plainly.",
-          "slots": [],
+          "text": "{settlement} makes its own everyday goods and buys in the rest.",
+          "slots": [
+            "settlement"
+          ],
           "vid": 3
         },
         {
@@ -5561,7 +5565,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "TRADE PROFILE: isEntrepot, transit goods marked among the exports": [
         {
           "angle": "ledger",
-          "text": "Some of what leaves {settlement} as an export never belonged to the town. It arrived, was counted, and went on, and the earnings are in the counting.",
+          "text": "Some of what leaves {settlement} as export was never the town's: it came in and went on again, and the town is paid for handling it.",
           "slots": [
             "settlement"
           ],

@@ -1732,7 +1732,7 @@ shape.
 **INCOME MIX: one source carries the town**
 1. `[ledger · colour]` Well past half of what {settlement} earns comes from a single trade, and the accounts have no second column worth the name.
 2. `[street · colour]` There is one thing this town does for money, and everybody's living is downstream of it whether or not they work in it.
-3. `[threshold · no hunger]` {settlement} rests on one earner. Nothing about that is failing; everything about the town's next hard season depends on it not failing.
+3. `[threshold · no hunger]` {settlement} lives on one trade. It is doing well enough now, but if that trade has a bad year, the whole town has a bad year.
 
 **INCOME MIX: two or three sources between them**
 1. `[ledger]` {settlement}'s earnings come from a handful of trades in roughly comparable portions, and no one of them could carry the town alone.
@@ -1741,18 +1741,18 @@ shape.
 
 **INCOME MIX: a broad spread, no leader**
 1. `[ledger]` Nothing {settlement} does earns a real portion of the whole; the town's income is a great many small columns and no large one.
-2. `[visitor]` A stranger cannot say what {settlement} is for, and the reason is that the town is not for any one thing.
-3. `[threshold]` {settlement} would barely notice losing any single trade and could not replace several, which is a different exposure from the obvious one.
+2. `[visitor]` {settlement} is not known for any one trade; it lives on many small ones.
+3. `[threshold]` {settlement} would hardly notice losing one trade, but could not stand losing several at once.
 
 **INCOME MIX: a criminal line is present** *(every variant `dm-only`)*
-1. `[ledger · dm-only]` A real portion of what {settlement} earns is earned by people who would not describe the earning to a clerk, and the books show the difference as a gap rather than a line.
+1. `[ledger · dm-only]` A real portion of {settlement}'s money is made by people who keep it from the clerks, and it never shows in the town's books.
 2. `[street · dm-only]` Some of this town's money has no honest account of itself, and the town's ordinary trades compete against it without being told.
 3. `[counterforce · dm-only]` The unlawful earnings at {settlement} are real and contained: {faction} takes its portion and has never reached for a second one.
 
 **INCOME MIX: the criminal line leads** *(every variant `dm-only`)*
 1. `[ledger · dm-only]` The largest single earner at {settlement} is the one that is not written down, and every lawful trade in the town is priced against it.
-2. `[street · dm-only]` What keeps this town solvent is the part of it nobody will name, and the naming is what would cost somebody.
-3. `[visitor · dm-only]` A stranger doing honest business at {settlement} is competing with the town's principal industry and has not been told which one that is.
+2. `[street · dm-only]` What keeps {settlement} solvent is a trade nobody names aloud, because naming it would get someone hurt.
+3. `[visitor · dm-only]` Honest traders in {settlement} are up against the town's biggest business, and nobody has told them what it is.
 
 **TRADE PROFILE: exports and imports both present**
 1. `[ledger · colour]` {settlement} sends {good} out and takes other goods in, and the two columns are the whole of the town's dealings with the world.
@@ -1772,11 +1772,11 @@ shape.
 **TRADE PROFILE: local production listed**
 1. `[ledger · walls]` A good portion of what {settlement} consumes is made inside its own walls, and never appears in either trade column.
 2. `[visitor · colour]` Much of what a stranger will buy at {settlement} was made within sight of where it is sold.
-3. `[street · colour]` The town makes its own ordinary things and buys its extraordinary ones, which is the arrangement of most towns and is worth stating plainly.
+3. `[street · colour]` {settlement} makes its own everyday goods and buys in the rest.
 4. `[ledger · no walls]` A good portion of what {settlement} consumes is made within its own bounds, and never appears in either trade column.
 
 **TRADE PROFILE: `isEntrepot`, transit goods marked among the exports**
-1. `[ledger]` Some of what leaves {settlement} as an export never belonged to the town. It arrived, was counted, and went on, and the earnings are in the counting.
+1. `[ledger]` Some of what leaves {settlement} as export was never the town's: it came in and went on again, and the town is paid for handling it.
 2. `[visitor]` The export list at {settlement} is longer than the town's own trades would explain, and the difference is what passes through.
 3. `[street]` Half of what goes out of this town came into it the same season, and the town's part of the business is the yard and the road.
 
