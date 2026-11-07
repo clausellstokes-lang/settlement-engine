@@ -35,7 +35,7 @@ registerStep('generatePower', {
   // DECLARED: this step wants the PROVISIONAL economy. It establishes political intent, and
   // economyReconcilePass re-derives the economy AFTER that intent lands — ordering it later
   // would cycle (the dataFlowContract SCOPE NOTE's own argument).
-  readsVersion: { economicState: 'provisional' },
+  readsVersion: { economicState: 'provisional', stress: 'reconciled' }, // stress: the entries after isolationPass and stressConfirmPass re-derive them (census-1b unit B, 3bed695be, added the read)
   // powerIntent is transient pipeline state. It retains the original power
   // inputs + named RNG stream so the final economy can re-project scores
   // without regenerating political identities or reopening institution pulls.
