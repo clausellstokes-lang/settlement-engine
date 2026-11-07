@@ -1213,16 +1213,16 @@ contradict** it (R-DST-C).
 
 **STRUGGLING** — *chronically short*
 1. `[street · colour]` {settlement} is short more often than not. Some needs are met and some are postponed, and which is which changes month to month.
-2. `[ledger · colour]` The books never quite close. What the town needs and what the town has are near enough to argue about and never near enough to settle.
-3. `[visitor · market]` A stranger sees the shortage in the small things: a repair not made, a stall not restocked, a hall not heated.
+2. `[ledger · colour]` {settlement} never quite makes ends meet. Every month something the town needs waits for money that does not come.
+3. `[visitor · market]` The shortage at {settlement} shows in small things: a repair not made, a stall not restocked, a hall not heated.
 
 **POOR** — *getting by, no surplus* {crisis-scoped}
 1. `[ledger · crisis: any]` {settlement} covers what it must and nothing beyond. Every essential is accounted for and there is no line for anything else.
 2. `[street · no hunger]` The town gets by. Nobody is going without bread and nobody is building anything either.
-3. `[visitor · crisis: any]` {settlement} looks maintained rather than made. What stands is kept standing; nothing new goes up.
+3. `[visitor · crisis: any]` In {settlement} the old buildings are patched and kept standing, and nothing new goes up.
 
 **MODERATE** — *steady, thin margin* {crisis-scoped}
-1. `[ledger · crisis: any]` The accounts come out steady with a narrow margin. It is an ordinary town's arithmetic and it works.
+1. `[ledger · crisis: any]` {settlement}'s accounts come out steady with a narrow margin. It is enough, and no more.
 2. `[street · no crisis]` Things are fine. Not comfortable, not tight: fine, and fine is what people here expect.
 3. `[visitor · no crisis]` Nothing about {settlement}'s condition asks to be remarked on. The town supports itself and has a little in hand.
 4. `[visitor · crisis · crisis: any]` {settlement}'s accounts still balance, and that is the one thing about the town the crisis has not yet reached.
@@ -1233,13 +1233,13 @@ contradict** it (R-DST-C).
 3. `[visitor]` The town is plainly past subsistence. The buildings are finished rather than patched, and the stores are more than the season needs.
 
 **PROSPEROUS** — *surplus funds institutions and defenses*
-1. `[ledger · colour]` The surplus is large enough to be spent rather than merely held, and the spending shows in what the town keeps up.
+1. `[ledger · colour]` {settlement} has money to spend and spends it on its halls and its defences.
 2. `[visitor · walls]` {settlement} is visibly well off. The halls, the walls and the roads are all better than a town this size strictly requires.
 3. `[street · colour]` There is money here and it goes into the town. Nobody argues about whether a thing can be afforded, only about whether it should be done.
 4. `[visitor · no walls]` {settlement} is visibly well off. The halls, the houses and the roads are all better than a town this size strictly requires.
 
 **WEALTHY** — *reserves deep enough to outlast most crises* {crisis-scoped}
-1. `[ledger · crisis: any]` {settlement} holds reserves deep enough to sit out most of what could happen to it. The accounts are not merely positive; they are cushioned.
+1. `[ledger · crisis: any]` {settlement} has reserves deep enough to ride out most of what could happen to it.
 2. `[visitor · gate · market · crisis: any]` The wealth here is not the kind a stranger has to look for. It is in the scale of everything at once: the gates, the halls, the goods on ordinary stalls.
 3. `[street]` The town is rich and behaves like it. What would be a crisis elsewhere is an expense here.
 

@@ -2417,8 +2417,10 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "The books never quite close. What the town needs and what the town has are near enough to argue about and never near enough to settle.",
-          "slots": [],
+          "text": "{settlement} never quite makes ends meet. Every month something the town needs waits for money that does not come.",
+          "slots": [
+            "settlement"
+          ],
           "vid": 2
         },
         {
@@ -2426,8 +2428,10 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "market"
           ],
-          "text": "A stranger sees the shortage in the small things: a repair not made, a stall not restocked, a hall not heated.",
-          "slots": [],
+          "text": "The shortage at {settlement} shows in small things: a repair not made, a stall not restocked, a hall not heated.",
+          "slots": [
+            "settlement"
+          ],
           "vid": 3
         }
       ],
@@ -2457,7 +2461,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "crisis: any"
           ],
-          "text": "{settlement} looks maintained rather than made. What stands is kept standing; nothing new goes up.",
+          "text": "In {settlement} the old buildings are patched and kept standing, and nothing new goes up.",
           "slots": [
             "settlement"
           ],
@@ -2470,8 +2474,10 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "crisis: any"
           ],
-          "text": "The accounts come out steady with a narrow margin. It is an ordinary town's arithmetic and it works.",
-          "slots": [],
+          "text": "{settlement}'s accounts come out steady with a narrow margin. It is enough, and no more.",
+          "slots": [
+            "settlement"
+          ],
           "vid": 1
         },
         {
@@ -2541,8 +2547,10 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "The surplus is large enough to be spent rather than merely held, and the spending shows in what the town keeps up.",
-          "slots": [],
+          "text": "{settlement} has money to spend and spends it on its halls and its defences.",
+          "slots": [
+            "settlement"
+          ],
           "vid": 1
         },
         {
@@ -2583,7 +2591,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "crisis: any"
           ],
-          "text": "{settlement} holds reserves deep enough to sit out most of what could happen to it. The accounts are not merely positive; they are cushioned.",
+          "text": "{settlement} has reserves deep enough to ride out most of what could happen to it.",
           "slots": [
             "settlement"
           ],

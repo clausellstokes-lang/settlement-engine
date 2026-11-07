@@ -117,10 +117,10 @@ describe('the four negative controls and the positive one (MOVE-GRAMMAR §4.4, a
     // 405 / 114 -> 404 / 114 at the chair's 06:5x DS-CND-1 boom line (ODQ §934.105): boom v4 is one sentence beside v1-v3's two, so the pool is no
     // longer uniform; its opener ("it is") is new to the pool (the ruled "{settlement} is …" repeated
     // v2's opener and read 115, so the line opens "It is a good stretch for {settlement}").
-    expect(uniformSegments).toBe(421); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted).
-    expect(repeatedOpener).toBe(117); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted).
-    expect(uniformSegments / cells.size).toBeCloseTo(0.573, 3); // W1 ECO (2026-11-07): re-measured at the lane tip.
-    expect(repeatedOpener / cells.size).toBeCloseTo(0.159, 3); // W1 ECO construction (2026-11-07): 115 / 735.
+    expect(uniformSegments).toBe(419); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted).
+    expect(repeatedOpener).toBe(118); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted).
+    expect(uniformSegments / cells.size).toBeCloseTo(0.57, 3); // W1 ECO (2026-11-07): re-measured at the lane tip.
+    expect(repeatedOpener / cells.size).toBeCloseTo(0.161, 3); // W1 ECO construction (2026-11-07): 115 / 735.
   });
 
   it('CONTROL 4, SECOND HALF — the R1 leaves RED ON ARM E, which is what the control actually says', async () => {
@@ -143,8 +143,8 @@ describe('the four negative controls and the positive one (MOVE-GRAMMAR §4.4, a
     expect(figures.pools).toBe(735); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted).
     // 406 -> 405 by the same cause as the calibration above (the chair's 06:5x rewording of DS-GEN-17 v3);
     // 405 -> 404 at the chair's 06:5x DS-CND-1 boom line (ODQ §934.105), likewise.
-    expect(Math.round(figures.uniformSegmentShare * 709)).toBe(406); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted).
-    expect(Math.round(figures.repeatedOpenerShare * 735)).toBe(117); // W1 ECO construction (2026-11-07): 26 new pools.
+    expect(Math.round(figures.uniformSegmentShare * 709)).toBe(404); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted).
+    expect(Math.round(figures.repeatedOpenerShare * 735)).toBe(118); // W1 ECO construction (2026-11-07): 26 new pools.
   });
 
   it('ARM E is NOT-EXECUTABLE without spread ceilings — never a pass on a number it invented', () => {
