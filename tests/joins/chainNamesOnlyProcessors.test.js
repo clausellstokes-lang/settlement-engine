@@ -25,14 +25,18 @@ const STRUCK = Object.freeze([
 ]);
 
 describe('the chain table names only processors of its input', () => {
-  it.each(STRUCK)('%s does not name %s, which does not process it', (chainKey, house) => {
-    expect(RESOURCE_CHAINS[chainKey], chainKey).toBeTruthy();
-    const processors = RESOURCE_CHAINS[chainKey].processingInstitutions;
-    // A chain left with NO processor (oasisDate: every listed house was a seller or a store) is pinned
-    // exactly empty — a positive pin, not a negative. Otherwise the struck house is absent from a list
-    // anchored by a processor the chain still names, so a vanished list cannot pass.
-    if (processors.length === 0) expect(processors, `${chainKey} names no processor at all`).toEqual([]);
-    else expectAbsentWithAnchor(processors, house, processors[0], `${chainKey} names only processors`);
+  // MERGE-R2 (the each-family park ceiling, ratcheted to 108 on the rung-2 side, holds at the union): the rows loop in
+  // the body of one parameterless test, so this file no longer parks on `each` (the walker's own cure).
+  it('every struck chain does not name the house that does not process it', () => {
+    for (const [chainKey, house] of STRUCK) {
+      expect(RESOURCE_CHAINS[chainKey], chainKey).toBeTruthy();
+      const processors = RESOURCE_CHAINS[chainKey].processingInstitutions;
+      // A chain left with NO processor (oasisDate: every listed house was a seller or a store) is pinned
+      // exactly empty — a positive pin, not a negative. Otherwise the struck house is absent from a list
+      // anchored by a processor the chain still names, so a vanished list cannot pass.
+      if (processors.length === 0) expect(processors, `${chainKey} names no processor at all`).toEqual([]);
+      else expectAbsentWithAnchor(processors, house, processors[0], `${chainKey} names only processors`);
+    }
   });
 
   it('a market square, a granary, a mine and a bathhouse write no "lacks access" line', () => {
