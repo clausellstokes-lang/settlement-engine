@@ -110,7 +110,6 @@ export function generateFoodSecurity(tier, institutions, config) {
   // custom labels and accidentally erasing the native resource.
   const nativeResources = availableNativeResourceKeys(config);
   const route         = config.tradeRouteAccess || 'road';
-  const hasPhysicalTradeRoute = hasTradeRouteConnection(route);
   const terrain       = config.terrainType || 'plains';
   const _threat        = config.monsterThreat || 'heartland';
   const stresses      = config.stressTypes || (config.stressType ? [config.stressType] : []);
@@ -140,7 +139,6 @@ export function generateFoodSecurity(tier, institutions, config) {
   const fishSource        = hasFishing && (hasRes('fishing_grounds', 'river_fish') || fishRowOnWater);
   const hasPastoral       = hasInst('pastoral', 'grazing', 'livestock', 'shepherd', 'common graz');
   const hasHunting        = hasInst('hunting', 'managed forest', 'woodcutter');
-  const hasOrchard        = hasInst('orchard', 'kitchen garden', 'herb garden');
   const hasMarket         = hasInst('market', 'marketplace', 'daily market', 'district market');
   const _hasBakery         = hasInst('baker', 'bakery');
   const hasDruid          = hasInst('druid', 'grove', 'elder grove', 'sacred grove'); // J33: Warden's Lodge is defence, not druid (the owner, 2026-10-01)
@@ -173,12 +171,18 @@ export function generateFoodSecurity(tier, institutions, config) {
 
   // ── Source chain diversity ────────────────────────────────────────────────
   // Each independent chain is a fallback when others fail.
+  // ⛔ ONE FOOD-SOURCE COUNT (WIRING-W0 cause 4b, the chair's R-W7 (c), 2026-11-07). The chains are the food
+  // sources' own TYPES (FOOD-3's `foodSources` is the one truth): grain and the mill are one type, grain; herds,
+  // fish and game are one each. They were judged by looser tests of their own (any granary, bakery or brewery
+  // made a grain chain; a butcher or a tannery a herd chain; an orchard a hunting chain) and counted "Trade &
+  // imports" as a source, so the count disagreed with the record's sources on every one of the golden 525. Trade
+  // is the import share (`importPct`), never a source of the place's own; its key stays, false, so the shape holds.
   const chains = {
-    'Grain & agriculture': hasSubsistence || hasFarmland || hasRes('grain_fields', 'fertile_floodplain') || hasInst('granary', 'grain', 'mill', 'bakery', 'brewery', 'distillery'),
-    'Pastoral & livestock': hasPastoral || hasRes('grazing_land') || hasInst('butcher', 'livestock', 'slaughter', 'dairy', 'cheese', 'tanner', 'tannery'),
-    'Fishing & water':      hasFishing,
-    'Hunting & foraging':   hasHunting || hasOrchard || hasRes('hunting_grounds', 'foraging_areas'),
-    'Trade & imports':      (hasPhysicalTradeRoute || hasTeleport) && hasMarket,
+    'Grain & agriculture': foodSources.includes('grain') || foodSources.includes('mill'),
+    'Pastoral & livestock': foodSources.includes('livestock'),
+    'Fishing & water':      foodSources.includes('fish'),
+    'Hunting & foraging':   foodSources.includes('game'),
+    'Trade & imports':      false,
   };
   const activeChains      = Object.entries(chains).filter(([,v])=>v).map(([k])=>k);
   const activeChainsCount = activeChains.length;
