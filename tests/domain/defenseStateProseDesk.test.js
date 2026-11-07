@@ -29,7 +29,7 @@ import {
   DEF6_C3_BLOCKED_POOLS, DEF6_FACT_SPOKEN_AT, defenseSupportingProse,
   navalDefensePoolKey, supplyLogisticsPoolKey,
   DEF7_DARK_POOLS, DEF10_DARK_POOLS, DEF10_FACT_SPOKEN_AT,
-  defenseMagicDependencyProse, hasNamedMagicChain, magicDependencyPoolKey,
+  defenseMagicDependencyProse, hasNamedMagicChain, magicDependencyPoolKey, magicFlagPoolKey, withSaid,
   namedMagicChainGood,
 } from '../../src/domain/display/stateProse/defenseStateProse.js';
 import {
@@ -1620,7 +1620,26 @@ describe('DS-DEF-9 — magic dependency, and the slot filled from the right ROLE
     // Both directions: the four keys the desk can emit are exactly the corpus's four.
     const emitted = new Set(['magicDependency true', 'magicDependency true, with a NAMED dependent chain', 'magicDependency false',
       'magicDependency false, availability absent']);
-    expect([...emitted].sort()).toEqual(Object.keys(DEF9_POOLS).sort());
+    // W2 DEF (2026-11-07, C1/C2): the two FLAG pools are drawn by their own key function and
+    // said beside the dependency line, so the block holds the four plus the two.
+    const flags = new Set([magicFlagPoolKey({ magicFillsVoid: true }), magicFlagPoolKey({ magicMilitarized: true })]);
+    expect([...emitted, ...flags].sort()).toEqual(Object.keys(DEF9_POOLS).sort());
+  });
+
+  it('W2 DEF C1/C2: a flag is said only when it is true, never alone, and the void reading leads', () => {
+    expect(magicFlagPoolKey({ magicFillsVoid: true, magicMilitarized: true })).toBe('FLAG: magicFillsVoid');
+    expect(magicFlagPoolKey({ magicMilitarized: true })).toBe('FLAG: magicMilitarized');
+    expect(magicFlagPoolKey({ magicFillsVoid: false, magicMilitarized: 'true' })).toBeNull();
+    expect(magicFlagPoolKey(null)).toBeNull();
+    expect(magicFlagPoolKey(undefined)).toBeNull();
+    // never alone: a flag without a dependency line returns the line untouched (null stays null)
+    expect(withSaid(null, { text: 'x', pieces: [] })).toBeNull();
+    const unit = { blockId: 'DS-DEF-9', poolKey: 'magicDependency false', angle: 'ledger', text: 'A.', pieces: [{ role: 'spine', key: 'magicDependency false', vid: 0, index: 0, face: 0 }] };
+    const said = withSaid(unit, { text: 'B.', pieces: [{ role: 'spine', key: 'FLAG: magicFillsVoid', vid: 1, index: 1, face: 0 }] });
+    expect(said.text).toBe('A. B.');
+    expect(said.poolKey).toBe('magicDependency false');
+    expect(said.pieces.map((p) => p.role)).toEqual(['spine', 'modifier']);
+    expect(withSaid(unit, null)).toBe(unit);
   });
 
   it('THE FILL COMES FROM `outputs[0]` AND NEVER FROM `label` — the role, not the field', () => {

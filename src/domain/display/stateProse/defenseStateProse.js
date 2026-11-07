@@ -1745,15 +1745,59 @@ export function defenseMagicDependencyProse(settlement, options = {}) {
     ? magicDependencyPoolKey(reliesOnMagic(settlement), hasNamedMagicChain(chains), noMagicHere(settlement))
     : null;
 
+  const reliance = poolKey
+    ? composeStateProse(CORPUS, 'DS-DEF-9', {
+      ...options,
+      slots,
+      spineKey: poolKey,
+      candidates: defenseStateProseCandidates('DS-DEF-9', settlement),
+    })
+    : null;
+  // THE TWO FLAGS (W2 DEF construction C1, C2): said beside the dependency line, never alone.
+  const flagKey = magicFlagPoolKey(settlement?.economicState?.safetyProfile?.flags);
+  const flagLine = reliance && flagKey
+    ? composeStateProse(CORPUS, 'DS-DEF-9', { ...options, slots, spineKey: flagKey })
+    : null;
+
   return Object.freeze({
-    arcaneReliance: poolKey
-      ? legibilityRung('', composeStateProse(CORPUS, 'DS-DEF-9', {
-        ...options,
-        slots,
-        spineKey: poolKey,
-        candidates: defenseStateProseCandidates('DS-DEF-9', settlement),
-      }), [])
-      : null,
+    arcaneReliance: reliance ? legibilityRung('', withSaid(reliance, flagLine), []) : null,
+  });
+}
+
+/**
+ * DS-DEF-9's FLAG pool — which of the two arcane stress flags the town carries, if either.
+ * `magicFillsVoid` first: it is the reading about the whole town; `magicMilitarized` is about
+ * one arm of it. The two cannot both be said in one box (one fact, one sentence).
+ * @param {{magicFillsVoid?: unknown, magicMilitarized?: unknown}|null|undefined} flags
+ * @returns {string|null}
+ */
+export function magicFlagPoolKey(flags) {
+  if (!flags || typeof flags !== 'object') return null;
+  if (flags.magicFillsVoid === true) return 'FLAG: magicFillsVoid';
+  if (flags.magicMilitarized === true) return 'FLAG: magicMilitarized';
+  return null;
+}
+
+/**
+ * A plain SAY line set beside a block's own line as its SECOND SENTENCE (WIRING-RULINGS R-W9:
+ * the spine car's composition takes these over when it lands; nothing waits on the spine).
+ * The unit keeps its own pool and angle; the said line rides as a second piece, so the
+ * composed-prose manifest reads the cell as ADDITIVE (the spine held, a piece grew).
+ * @param {object|null} unit a composed unit
+ * @param {object|null} said a composed unit from the same block, or null
+ * @returns {object|null}
+ */
+export function withSaid(unit, said) {
+  const base = /** @type {any} */ (unit);
+  const extra = /** @type {any} */ (said);
+  if (!base || !extra || !extra.text) return unit;
+  return Object.freeze({
+    ...base,
+    text: `${base.text} ${extra.text}`,
+    pieces: Object.freeze([
+      ...(base.pieces || []),
+      ...(extra.pieces || []).map((piece) => Object.freeze({ ...piece, role: 'modifier', seat: 'sentence', relation: 'addition' })),
+    ]),
   });
 }
 

@@ -5,7 +5,7 @@
       "src/domain/display/stateProse/generalStateProse.js": "a1d82168bffd08d6aec168b0fd51b4b7ed21fbf67c6f30b2aec8832064e29267",
       "src/domain/display/stateProse/powerStateProse.js": "11c913c83fa1e88d5f75d5415f8723936acf9aae37d6465a87b1ad3cb4d21e7b",
       "src/domain/display/stateProse/economyStateProse.js": "d2bfe8cafa209803f26c83fde83534a7ba45230010ff87c33bd4ac52d831b924",
-      "src/domain/display/stateProse/defenseStateProse.js": "6ebbed0ca4e9125607fde9443b16d4da328cc1481f711f25a22b5d384cec3ce7",
+      "src/domain/display/stateProse/defenseStateProse.js": "ca94a8b2e9b8d01ce95b7b7e15d136dfae9f0eb7dd43b1088ad7ccb71ded786c",
       "src/domain/display/stateProse/stressorsStateProse.js": "13c7f383882acf5bb48267feb4302ced6b9798cec2575470903f1aa88205600d",
       "src/domain/display/stateProse/warFaithStateProse.js": "f1972add38589ee55369fb06e4a5e0a8f90c4d966bf703d4367a3cdca52d6aac",
       "src/domain/display/stateProse/dossierMounts.js": "b8466ea80b09292247baf73e1ab1660c6863362cd623b3b98e002e5ef9fb1f57"
@@ -21,23 +21,23 @@
     "producerIndexFiles": 1300
   },
   "totals": {
-    "pools": 709,
+    "pools": 711,
     "blocks": 68,
-    "variants": 2344,
-    "resolved": 341,
+    "variants": 2348,
+    "resolved": 343,
     "unresolved": 368,
-    "resolvedWithPredicate": 208,
-    "resolvedWithCleanPredicate": 208,
-    "keyFunctions": 118,
-    "keyFunctionsConsulted": 118,
+    "resolvedWithPredicate": 210,
+    "resolvedWithCleanPredicate": 210,
+    "keyFunctions": 119,
+    "keyFunctionsConsulted": 119,
     "keyTables": 33,
     "slotless": 65,
     "bagless": 140,
     "predicatesOverUnreadFields": 100,
     "syntheticTableFields": 100,
     "tiers": {
-      "MISSING": 34,
-      "THIN": 482,
+      "MISSING": 33,
+      "THIN": 484,
       "COVERED": 227,
       "MISSING-AT-TIER": 45
     },
@@ -47,17 +47,17 @@
     "narrowedRows": 0,
     "covertRows": 4,
     "objectClassed": 99,
-    "mountedRows": 567,
+    "mountedRows": 569,
     "absent": {
-      "measured": 373,
+      "measured": 378,
       "default": 3,
       "not-produced": 61,
       "method-call": 18
     },
-    "zeroK": 49,
-    "kExecutable": 341,
+    "zeroK": 50,
+    "kExecutable": 343,
     "kNotExecutable": 368,
-    "branchGrainRows": 311,
+    "branchGrainRows": 313,
     "functionGrainRows": 398,
     "customReachableRows": 21,
     "relationRows": 165,
@@ -66,11 +66,11 @@
     "tableRungRowsWithoutAbsence": 100,
     "modifierEligibleFactsByTab": [
       [
-        "viability",
-        40
+        "economics",
+        39
       ],
       [
-        "economics",
+        "viability",
         39
       ],
       [
@@ -118,12 +118,12 @@
         5
       ]
     ],
-    "sourceLicensedRows": 114,
+    "sourceLicensedRows": 116,
     "sourceOfficeRows": 3,
     "sourceUnresolvedRows": 592,
     "sourceTwoSourceRows": 10,
     "modifierRows": 0,
-    "declaredColumnRows": 709,
+    "declaredColumnRows": 711,
     "tablePools": 50
   },
   "rows": [
@@ -1549,10 +1549,9 @@
       },
       "declares": [],
       "lineDeclares": {
-        "colour": 2,
-        "watch": 1
+        "colour": 2
       },
-      "undeclared": 0,
+      "undeclared": 1,
       "crisisScoped": false
     },
     {
@@ -2538,9 +2537,9 @@
       "declares": [],
       "lineDeclares": {
         "colour": 1,
-        "watch": 2
+        "watch": 1
       },
-      "undeclared": 0,
+      "undeclared": 1,
       "crisisScoped": false
     },
     {
@@ -2588,10 +2587,9 @@
       },
       "declares": [],
       "lineDeclares": {
-        "colour": 2,
-        "watch": 1
+        "colour": 2
       },
-      "undeclared": 0,
+      "undeclared": 1,
       "crisisScoped": false
     },
     {
@@ -5974,7 +5972,7 @@
       ],
       "hasBag": true,
       "variants": 3,
-      "grammars": 2,
+      "grammars": 3,
       "predicate": [],
       "branchReads": [
         "magicDependency"
@@ -6105,7 +6103,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [
         {
           "field": "magicAbsent",
@@ -6163,6 +6161,156 @@
       "declares": [],
       "lineDeclares": {},
       "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-DEF-9",
+      "pool": "FLAG: magicFillsVoid",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 2,
+      "grammars": 2,
+      "predicate": [
+        {
+          "field": "settlement.economicState.safetyProfile.flags.magicFillsVoid",
+          "op": "===",
+          "value": "true"
+        }
+      ],
+      "branchReads": [
+        "settlement.economicState.safetyProfile.flags",
+        "settlement.economicState.safetyProfile.flags.magicFillsVoid"
+      ],
+      "fieldsRead": [
+        "settlement.economicState.safetyProfile.flags",
+        "settlement.economicState.safetyProfile.flags.magicFillsVoid",
+        "settlement.economicState.safetyProfile.flags.magicMilitarized"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "magicFlagPoolKey",
+      "rung": "literal",
+      "reads": [
+        "settlement.economicState.safetyProfile.flags",
+        "settlement.economicState.safetyProfile.flags.magicFillsVoid"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "settlement.economicState.safetyProfile.flags": "measured",
+        "settlement.economicState.safetyProfile.flags.magicFillsVoid": "measured"
+      },
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "viability.magicDependency"
+      ],
+      "attach": [],
+      "k": 1,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "watch",
+        "kinds": [
+          "watch"
+        ],
+        "fields": {
+          "settlement.economicState.safetyProfile.flags": "watch",
+          "settlement.economicState.safetyProfile.flags.magicFillsVoid": "watch"
+        },
+        "holder": null,
+        "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
+        "standing": "LICENSED",
+        "twoSource": false,
+        "stateOrgan": true
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 2,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-DEF-9",
+      "pool": "FLAG: magicMilitarized",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 2,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "settlement.economicState.safetyProfile.flags.magicMilitarized",
+          "op": "===",
+          "value": "true"
+        }
+      ],
+      "branchReads": [
+        "settlement.economicState.safetyProfile.flags",
+        "settlement.economicState.safetyProfile.flags.magicFillsVoid",
+        "settlement.economicState.safetyProfile.flags.magicMilitarized"
+      ],
+      "fieldsRead": [
+        "settlement.economicState.safetyProfile.flags",
+        "settlement.economicState.safetyProfile.flags.magicFillsVoid",
+        "settlement.economicState.safetyProfile.flags.magicMilitarized"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "magicFlagPoolKey",
+      "rung": "literal",
+      "reads": [
+        "settlement.economicState.safetyProfile.flags",
+        "settlement.economicState.safetyProfile.flags.magicFillsVoid",
+        "settlement.economicState.safetyProfile.flags.magicMilitarized"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "settlement.economicState.safetyProfile.flags": "measured",
+        "settlement.economicState.safetyProfile.flags.magicFillsVoid": "measured",
+        "settlement.economicState.safetyProfile.flags.magicMilitarized": "measured"
+      },
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "viability.magicDependency"
+      ],
+      "attach": [],
+      "k": 0,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "watch",
+        "kinds": [
+          "watch"
+        ],
+        "fields": {
+          "settlement.economicState.safetyProfile.flags": "watch",
+          "settlement.economicState.safetyProfile.flags.magicFillsVoid": "watch",
+          "settlement.economicState.safetyProfile.flags.magicMilitarized": "watch"
+        },
+        "holder": null,
+        "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
+        "standing": "LICENSED",
+        "twoSource": false,
+        "stateOrgan": true
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 2,
       "crisisScoped": false
     },
     {
@@ -6541,10 +6689,9 @@
       "declares": [],
       "lineDeclares": {
         "colour": 1,
-        "walls": 1,
-        "watch": 1
+        "walls": 1
       },
-      "undeclared": 0,
+      "undeclared": 1,
       "crisisScoped": false
     },
     {
@@ -6936,10 +7083,9 @@
       },
       "declares": [],
       "lineDeclares": {
-        "colour": 2,
-        "watch": 1
+        "colour": 2
       },
-      "undeclared": 0,
+      "undeclared": 1,
       "crisisScoped": false
     },
     {
@@ -6985,10 +7131,9 @@
       },
       "declares": [],
       "lineDeclares": {
-        "colour": 2,
-        "watch": 1
+        "colour": 2
       },
-      "undeclared": 0,
+      "undeclared": 1,
       "crisisScoped": false
     },
     {
@@ -44292,7 +44437,7 @@
         "DS-DEF-9 :: magicDependency false, availability absent"
       ],
       "variants": 3,
-      "grammars": 2,
+      "grammars": 1,
       "blocks": [
         "DS-DEF-9"
       ]
@@ -44420,6 +44565,28 @@
       "grammars": 1,
       "blocks": [
         "DS-DEF-11"
+      ]
+    },
+    {
+      "fact": "settlement.economicState.safetyProfile.flags.magicFillsVoid",
+      "pools": [
+        "DS-DEF-9 :: FLAG: magicFillsVoid"
+      ],
+      "variants": 2,
+      "grammars": 2,
+      "blocks": [
+        "DS-DEF-9"
+      ]
+    },
+    {
+      "fact": "settlement.economicState.safetyProfile.flags.magicMilitarized",
+      "pools": [
+        "DS-DEF-9 :: FLAG: magicMilitarized"
+      ],
+      "variants": 2,
+      "grammars": 1,
+      "blocks": [
+        "DS-DEF-9"
       ]
     },
     {
@@ -46604,9 +46771,11 @@
       },
       {
         "field": "settlement.economicState",
-        "mountsSpine": 0,
-        "mountsModifier": 29,
-        "spineTabs": [],
+        "mountsSpine": 1,
+        "mountsModifier": 27,
+        "spineTabs": [
+          "viability"
+        ],
         "modifierMounts": [
           "defense.armedForces",
           "defense.criminalStructure",
@@ -46634,9 +46803,7 @@
           "power.stabilityHeader",
           "power.succession",
           "resources.groundAndWorkings",
-          "services.catalogStanding",
-          "viability.magicDependency",
-          "viability.verdict"
+          "services.catalogStanding"
         ]
       },
       {
@@ -46987,11 +47154,11 @@
     ],
     "byTab": [
       [
-        "viability",
-        40
+        "economics",
+        39
       ],
       [
-        "economics",
+        "viability",
         39
       ],
       [
@@ -47100,10 +47267,10 @@
     },
     {
       "block": "DS-DEF-9",
-      "spines": 4,
-      "facts": 2,
-      "spinesReachedBp": 5000,
-      "meanReachBp": 2500
+      "spines": 6,
+      "facts": 5,
+      "spinesReachedBp": 10000,
+      "meanReachBp": 6333
     },
     {
       "block": "DS-ECO-1",
@@ -47876,21 +48043,54 @@
     },
     {
       "block": "DS-DEF-9",
-      "spines": 4,
-      "facts": 2,
-      "spinesReachedBp": 5000,
-      "meanReachBp": 2500,
+      "spines": 6,
+      "facts": 5,
+      "spinesReachedBp": 10000,
+      "meanReachBp": 6333,
       "byFact": [
         {
           "field": "magicAbsent",
           "attach": [
             "magicDependency true",
-            "magicDependency true, with a NAMED dependent chain"
+            "magicDependency true, with a NAMED dependent chain",
+            "FLAG: magicFillsVoid",
+            "FLAG: magicMilitarized"
           ]
         },
         {
           "field": "magicDependency",
-          "attach": []
+          "attach": [
+            "FLAG: magicFillsVoid",
+            "FLAG: magicMilitarized"
+          ]
+        },
+        {
+          "field": "settlement.economicState.safetyProfile.flags",
+          "attach": [
+            "magicDependency true",
+            "magicDependency true, with a NAMED dependent chain",
+            "magicDependency false",
+            "magicDependency false, availability absent"
+          ]
+        },
+        {
+          "field": "settlement.economicState.safetyProfile.flags.magicFillsVoid",
+          "attach": [
+            "magicDependency true",
+            "magicDependency true, with a NAMED dependent chain",
+            "magicDependency false",
+            "magicDependency false, availability absent"
+          ]
+        },
+        {
+          "field": "settlement.economicState.safetyProfile.flags.magicMilitarized",
+          "attach": [
+            "magicDependency true",
+            "magicDependency true, with a NAMED dependent chain",
+            "magicDependency false",
+            "magicDependency false, availability absent",
+            "FLAG: magicFillsVoid"
+          ]
         }
       ]
     },
@@ -49635,8 +49835,8 @@
     }
   ],
   "factBudget": {
-    "zeroK": 49,
-    "executable": 341,
+    "zeroK": 50,
+    "executable": 343,
     "notExecutable": 368,
     "byBlock": [
       [
@@ -49717,6 +49917,13 @@
         }
       ],
       [
+        "DS-DEF-9",
+        {
+          "zeroK": 1,
+          "spines": 6
+        }
+      ],
+      [
         "DS-ECO-9",
         {
           "zeroK": 1,
@@ -49770,13 +49977,6 @@
         {
           "zeroK": 0,
           "spines": 3
-        }
-      ],
-      [
-        "DS-DEF-9",
-        {
-          "zeroK": 0,
-          "spines": 4
         }
       ],
       [
@@ -50001,11 +50201,11 @@
       ],
       [
         0,
-        26
+        27
       ],
       [
         1,
-        82
+        83
       ],
       [
         2,
@@ -50015,8 +50215,8 @@
   },
   "grains": {
     "branch": {
-      "zeroK": 49,
-      "executable": 341,
+      "zeroK": 50,
+      "executable": 343,
       "notExecutable": 368,
       "histogram": [
         [
@@ -50029,11 +50229,11 @@
         ],
         [
           0,
-          26
+          27
         ],
         [
           1,
-          82
+          83
         ],
         [
           2,
@@ -50064,14 +50264,14 @@
         "DS-STR-1",
         "DS-WAR-3"
       ],
-      "readPaths": 555,
+      "readPaths": 560,
       "modifierEligibleFactsByTab": [
         [
-          "viability",
-          40
+          "economics",
+          39
         ],
         [
-          "economics",
+          "viability",
           39
         ],
         [
@@ -50121,8 +50321,8 @@
       ]
     },
     "function": {
-      "zeroK": 125,
-      "executable": 341,
+      "zeroK": 127,
+      "executable": 343,
       "notExecutable": 368,
       "histogram": [
         [
@@ -50143,7 +50343,7 @@
         ],
         [
           0,
-          70
+          72
         ],
         [
           1,
@@ -50158,7 +50358,6 @@
       "cannotAttach": [
         "DS-DEF-11",
         "DS-DEF-6",
-        "DS-DEF-9",
         "DS-ECO-1",
         "DS-ECO-10",
         "DS-ECO-3",
@@ -50182,14 +50381,14 @@
         "DS-STR-1",
         "DS-WAR-3"
       ],
-      "readPaths": 792,
+      "readPaths": 798,
       "modifierEligibleFactsByTab": [
         [
-          "viability",
-          40
+          "economics",
+          39
         ],
         [
-          "economics",
+          "viability",
           39
         ],
         [
@@ -50526,12 +50725,12 @@
     ],
     "summary": {
       "rows": {
-        "LICENSED": 114,
+        "LICENSED": 116,
         "OFFICE": 3,
         "SOURCE-UNRESOLVED": 592
       },
       "fields": {
-        "LICENSED": 191,
+        "LICENSED": 196,
         "OFFICE": 5,
         "SOURCE-UNRESOLVED": 419
       },
@@ -50553,12 +50752,12 @@
           21
         ],
         [
-          "toll-bar",
-          12
+          "watch",
+          14
         ],
         [
-          "watch",
-          9
+          "toll-bar",
+          12
         ],
         [
           "road",
@@ -51937,8 +52136,8 @@
       "leafBoth": 0,
       "leafEither": 2,
       "leafRows": [],
-      "deskRoots": 92,
-      "deskSegments": 194
+      "deskRoots": 93,
+      "deskSegments": 198
     }
   },
   "ratifiedAliases": {
@@ -52271,6 +52470,21 @@
       "wage",
       "wages"
     ],
+    "settlement.economicState.safetyProfile.flags": [
+      "roll",
+      "rolls",
+      "watch"
+    ],
+    "settlement.economicState.safetyProfile.flags.magicFillsVoid": [
+      "roll",
+      "rolls",
+      "watch"
+    ],
+    "settlement.economicState.safetyProfile.flags.magicMilitarized": [
+      "roll",
+      "rolls",
+      "watch"
+    ],
     "settlement.economicViability.viable": [
       "books",
       "chest",
@@ -52574,16 +52788,6 @@
       "subject": "readings.riskLabel",
       "fields": [
         "readings.riskLabel"
-      ],
-      "readingFunction": "(no key function reads it)",
-      "count": "0 pools keyed on this fact"
-    },
-    {
-      "tier": "MISSING",
-      "block": "(composer-wide)",
-      "subject": "settlement.economicState",
-      "fields": [
-        "settlement.economicState"
       ],
       "readingFunction": "(no key function reads it)",
       "count": "0 pools keyed on this fact"
@@ -53563,7 +53767,7 @@
       "subject": "magicDependency true, with a NAMED dependent chain",
       "fields": [],
       "readingFunction": "magicDependencyPoolKey",
-      "count": "3 variant(s) · 2 grammar(s) · slots {good, settlement}"
+      "count": "3 variant(s) · 3 grammar(s) · slots {good, settlement}"
     },
     {
       "tier": "THIN",
@@ -53581,7 +53785,27 @@
         "magicAbsent"
       ],
       "readingFunction": "magicDependencyPoolKey",
-      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-DEF-9",
+      "subject": "FLAG: magicFillsVoid",
+      "fields": [
+        "settlement.economicState.safetyProfile.flags.magicFillsVoid"
+      ],
+      "readingFunction": "magicFlagPoolKey",
+      "count": "2 variant(s) · 2 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-DEF-9",
+      "subject": "FLAG: magicMilitarized",
+      "fields": [
+        "settlement.economicState.safetyProfile.flags.magicMilitarized"
+      ],
+      "readingFunction": "magicFlagPoolKey",
+      "count": "2 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",

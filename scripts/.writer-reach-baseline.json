@@ -8,7 +8,7 @@
   "The reviewable slice is computed by RULE (reviewableDark), never hand-listed."
  ],
  "schema": 1,
- "frozenAtSha": "6c3e2566178b7f75891a8d5a8c8a8337904b9947",
+ "frozenAtSha": "ee3b7a16832d16ad259a303bb6c6615525aac40c",
  "charter": "§18.1 WRWALKER Car 1 (HORIZON) — chair-signed vetoably at the INSTR-WRW pre-stage",
  "minRows": 40,
  "corpusMeta": {
@@ -24,7 +24,7 @@
  },
  "shapesDigest": "9cce955973cac3a42986bcbac2deb92a1901b641e691da98d8462681a48c2cf7",
  "detectorDigest": "cce104e3a7794d95b85fd4df52a649b11fc8ee147f509a3a194412ba3a406fde",
- "verdictDigest": "9a87bd5f642466ccb263d5f543b616836ed5a61cd53462ea55ac3bcc3663542d",
+ "verdictDigest": "fe2cd1c4f163145bc9682cb13862c88a941798626bafdf265fa732a0b494efe7",
  "surfaceRoots": {
   "web": [
    "src/main.jsx"
@@ -83,27 +83,27 @@
  },
  "population": {
   "judged": 6730,
-  "lit": 598,
-  "litName": 4860,
-  "dark": 1272,
+  "lit": 601,
+  "litName": 4859,
+  "dark": 1270,
   "thinKeys": 8776,
   "thinShapes": 904,
   "knownShapes": 356
  },
  "scanStats": {
   "files": 1740,
-  "sites": 40806,
-  "propRead": 38632,
+  "sites": 40811,
+  "propRead": 38637,
   "elemRead": 0,
   "destructure": 2161,
   "inOp": 13,
-  "rGrades": 6328,
-  "nGrades": 984483,
-  "resolvedReceivers": 7108
+  "rGrades": 6333,
+  "nGrades": 984488,
+  "resolvedReceivers": 7113
  },
  "registerDigest": "1e3ab9d6b0023c9fa2cf949f373df29a65d5b7cd88114c866ae3b619dbe098e2",
  "pendingSurfaceCeiling": 3,
- "reviewableDarkCount": 488,
+ "reviewableDarkCount": 486,
  "darkUnregistered": [
   {
    "identity": "Bulk grain and flour on reasons",
@@ -2968,22 +2968,10 @@
    "rows": 472
   },
   {
-   "identity": "magicFillsVoid on flags",
-   "key": "magicFillsVoid",
-   "shape": "flags",
-   "rows": 472
-  },
-  {
    "identity": "magicInfluence on compound",
    "key": "magicInfluence",
    "shape": "compound",
    "rows": 944
-  },
-  {
-   "identity": "magicMilitarized on flags",
-   "key": "magicMilitarized",
-   "shape": "flags",
-   "rows": 472
   },
   {
    "identity": "magicPct on foodRecord",
@@ -8365,8 +8353,8 @@
   "heresyIntensity on flags": "",
   "heresySuppression on flags": "",
   "mageTheocracy on flags": "",
-  "magicFillsVoid on flags": "",
-  "magicMilitarized on flags": "",
+  "magicFillsVoid on flags": "dossier-pdf=R web-display=R",
+  "magicMilitarized on flags": "dossier-pdf=R web-display=R",
   "merchantArmy on flags": "",
   "merchantCriminalBlur on flags": "",
   "religiousFraud on flags": "",
@@ -13689,7 +13677,7 @@
   "crimeTypes on safetyProfile": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R world-book=R",
   "criminalInstitutions on safetyProfile": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
   "economicDragDesc on safetyProfile": "web-display=R",
-  "flags on safetyProfile": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
+  "flags on safetyProfile": "campaign-pdf=N dossier-pdf=R foundry=N web-display=R web-transitive=N world-book=N",
   "guardEffectivenessDesc on safetyProfile": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R world-book=R",
   "plotHooks on safetyProfile": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
   "safetyDesc on safetyProfile": "dossier-pdf=R web-display=R",

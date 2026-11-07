@@ -150,12 +150,12 @@ describe('the wiring census — TOTALITY over the corpus', () => {
     // EMPTY BY CONSTRUCTION until 8b authors the estate's first modifier row. The partition
     // itself is proved on a plant below rather than on a population of zero, so this pair of
     // integers is a state record and never the arm's convicting half.
-    expect(cells.size, 'the R1 loaders enumerate this many pool cells').toBe(709);
-    expect(census.rows.length, 'and the census carries exactly one row for each').toBe(709);
-    expect(spines.length, 'of which SPINES, the population every corpus figure is pinned on').toBe(709);
+    expect(cells.size, 'the R1 loaders enumerate this many pool cells').toBe(711);
+    expect(census.rows.length, 'and the census carries exactly one row for each').toBe(711);
+    expect(spines.length, 'of which SPINES, the population every corpus figure is pinned on').toBe(711);
     expect(modifiers.length, 'and MODIFIERS, none until 8b authors the first').toBe(0);
     const ids = new Set(census.rows.map((r) => `${r.block} :: ${r.pool}`));
-    expect(ids.size, 'no (block, pool) is counted twice').toBe(709);
+    expect(ids.size, 'no (block, pool) is counted twice').toBe(711);
     expect(new Set(census.rows.map((r) => r.block)).size, 'over the leaves\' 68 blocks').toBe(68);
   });
 
@@ -194,7 +194,7 @@ describe('the wiring census — TOTALITY over the corpus', () => {
     // census-3c unit 4 e3295d168 +10; census-5b unit 3 c00b30eb6 +4.
     // 2342 -> 2343 at LANDING-R2 helper G (the chair's §934.105 ruling (1): DS-GEN-17 PROVISIONED v3, the hospital-only line) +1.
     // 2343 -> 2344 at LANDING-R2 helper G2 (the chair's 06:5x DS-CND-1 boom line (ODQ §934.105, ruling (2)): ARCHETYPE: boom v4 `[street · crisis: any]`) +1.
-    expect(summary.variants, 'the R1 corpus holds this many variants').toBe(2344);
+    expect(summary.variants, 'the R1 corpus holds this many variants').toBe(2348);
     // THE MEAN IS THE CALLER'S TO FORMAT (INSTR-912 car 11). The census publishes `variants`
     // and `total` as integers; a `toFixed` inside `src/domain/prose/` is a float
     // interpolation and a two-decimal score against the estate's prose-numerics register, and
@@ -205,22 +205,24 @@ describe('the wiring census — TOTALITY over the corpus', () => {
     // {2: 29, 3: 507} -> {2: 28, 3: 508} at LANDING-R2 helper G (the chair's §934.105 ruling (1): DS-GEN-17 PROVISIONED v3, the hospital-only line): DS-GEN-17 PROVISIONED grew 2 -> 3; the mean holds.
     // {3: 508, 4: 128} -> {3: 507, 4: 129} and the mean 3.30 -> 3.31 (2,344 / 709 = 3.306) at LANDING-R2 helper G2 (the chair's
     // 06:5x DS-CND-1 boom line, ODQ §934.105 ruling (2)): DS-CND-1 ARCHETYPE: boom grew 3 -> 4.
-    expect((summary.variants / summary.total).toFixed(2), 'mean variants per pool').toBe('3.31');
+    // {2: 28} -> {2: 30} and the mean 3.31 -> 3.30 (2,348 / 711 = 3.302) at W2 DEF (2026-11-07, C1/C2, ODQ §934.105):
+    // DS-DEF-9 gains the two FLAG pools of two variants each.
+    expect((summary.variants / summary.total).toFixed(2), 'mean variants per pool').toBe('3.30');
     expect(Object.fromEntries(summary.variantHistogram), 'variants per pool, exactly').toEqual({
-      2: 28, 3: 507, 4: 129, 5: 27, 6: 13, 7: 4, 10: 1,
+      2: 30, 3: 507, 4: 129, 5: 27, 6: 13, 7: 4, 10: 1,
     });
     const summed = summary.variantHistogram.reduce((total, [size, pools]) => total + size * pools, 0);
-    expect(summed, 'and the histogram sums back to the corpus').toBe(2344);
+    expect(summed, 'and the histogram sums back to the corpus').toBe(2348);
     // PER PIECE: the same count rolled up to the block, which is the unit a reader meets.
     const perBlockTotal = summary.perBlock.reduce((total, [, n]) => total + n, 0);
-    expect(perBlockTotal, 'the per-block roll-up carries every variant once').toBe(2344);
+    expect(perBlockTotal, 'the per-block roll-up carries every variant once').toBe(2348);
     expect(summary.perBlock.length, 'across every block').toBe(68);
   });
 
   test('ANTI-VACUITY: the corpus census carries BOTH statuses, in measured integers', () => {
     // A census that resolved nothing and a census that resolved everything are both useless
     // and both look healthy from a distance. The arm pins the split.
-    expect(summary.resolved, 'pools that reached a recovery RUNG').toBe(341);
+    expect(summary.resolved, 'pools that reached a recovery RUNG').toBe(343);
     expect(summary.unresolved, 'pools reported WIRING-UNRESOLVED with a reason').toBe(368);
     expect(summary.resolved + summary.unresolved, 'and the two exhaust the census').toBe(summary.total);
     expect(summary.resolved, 'zero resolved rows would mean the reader is dark').toBeGreaterThan(0);
@@ -240,8 +242,8 @@ describe('the wiring census — TOTALITY over the corpus', () => {
     // green, which is exactly the blindness plant #80 cannot see.
     // 208 AND NOT 207 SINCE LANDING-7 lane F (R-F1): `magicDependencyPoolKey`'s absent pool is
     // returned from an `if (magicAbsent)` now, not a returned ternary, so its guard is recovered.
-    expect(summary.resolvedWithPredicate, 'RESOLVED rows carrying at least one predicate row').toBe(208);
-    expect(summary.resolvedWithCleanPredicate, 'and of those, every row a readable comparison').toBe(208);
+    expect(summary.resolvedWithPredicate, 'RESOLVED rows carrying at least one predicate row').toBe(210);
+    expect(summary.resolvedWithCleanPredicate, 'and of those, every row a readable comparison').toBe(210);
     expect(summary.resolvedWithPredicate, 'a rung reached is never fewer than a predicate read')
       .toBeLessThanOrEqual(summary.resolved);
     expect(summary.resolvedWithCleanPredicate).toBeLessThanOrEqual(summary.resolvedWithPredicate);
@@ -662,7 +664,7 @@ describe('THE MAP READ THE OTHER WAY — fact → text, and the three tiers', ()
     // 63 AND NOT 59 SINCE SEAM car 3h: DS-DEF-2's four exposed key tables add four synthetic
     // table labels to the inverse, one per table, and no ordinary reading moved with them.
     // 64 AND NOT 63 SINCE LANDING-7 lane F (R-F1): `magicAbsent`, DS-DEF-9's absent pool's own guard.
-    expect(facts.length, 'distinct readings a key function conjoins, at this tip').toBe(64);
+    expect(facts.length, 'distinct readings a key function conjoins, at this tip').toBe(66);
     const poolsNamed = new Set(facts.flatMap((f) => f.pools));
     const resolvedWithFields = spines.filter((r) => r.predicate.length > 0);
     expect(poolsNamed.size, 'every pool with a recovered predicate appears in the inverse')
@@ -695,8 +697,8 @@ describe('THE MAP READ THE OTHER WAY — fact → text, and the three tiers', ()
     // crossed the tier line crosses back. `grammars` is `new Set(orderIdOf(classifyMoves(text))
     // || the raw sequence)` per pool. The counts are recomputed FRESH from the live modules
     // here, which is why they move with the classifier rather than with the committed JSON.
-    expect(counts.get(TIERS.MISSING), 'held facts with no pool keyed on them').toBe(34);
-    expect(counts.get(TIERS.THIN), 'pools with one variant, one grammar, or {settlement} alone').toBe(482);
+    expect(counts.get(TIERS.MISSING), 'held facts with no pool keyed on them').toBe(33);
+    expect(counts.get(TIERS.THIN), 'pools with one variant, one grammar, or {settlement} alone').toBe(484);
     expect(counts.get(TIERS.COVERED), 'and the rest').toBe(227);
     expect(counts.get(TIERS.THIN) + counts.get(TIERS.COVERED), 'every pool lands in one of the two pool tiers')
       .toBe(spines.length);
@@ -844,15 +846,15 @@ describe('the source readers themselves', () => {
   test('the pool-key reader finds every key function in the six composers', () => {
     let total = 0;
     for (const [file, src] of composerSources()) total += poolKeyFunctions(src, file).length;
-    expect(total, 'pool-key functions across the six desks').toBe(118);
-    expect(census.functions, 'and the census reads the same set').toBe(118);
+    expect(total, 'pool-key functions across the six desks').toBe(119);
+    expect(census.functions, 'and the census reads the same set').toBe(119);
     // ⛔ FOUND IS NOT CONSULTED (INSTR-912 car 10, cure 8). The ladder's map was keyed on the
     // BARE function name, and two desks both export `foodSecurityPoolKey`
     // (`economyStateProse.js:393`, `generalStateProse.js:353`) — so 118 collapsed to 117 while
     // this line asserted `fns.length` and read healthy. The key is `file::name` now and the
     // two counts are asserted EQUAL, so the next same-named pair cannot go quiet.
     expect(census.consulted, 'and the ladder actually walks every one of them').toBe(census.functions);
-    expect(census.consulted, 'as an integer, not only as an equality').toBe(118);
+    expect(census.consulted, 'as an integer, not only as an equality').toBe(119);
     expect(census.tables, 'module-level key tables (object shape and pair-array shape)').toBe(33);
   });
 
@@ -893,11 +895,11 @@ describe('car 0 — `reads`, and the NARROWS line that may narrow it', () => {
     // INSTRUMENTS and none of its seven annex rows, so every row of the committed register is
     // still a spine and the two integers coincide. They are asserted apart anyway, because the
     // day they diverge is the day a modifier row is born and this line must move deliberately.
-    expect(committed.rows.length, 'the census still covers every pool').toBe(709);
-    expect(committedSpines.length, 'of which SPINES, the population the totals count').toBe(709);
-    expect(committed.totals.branchGrainRows, 'rows whose selecting branch was recovered').toBe(311);
+    expect(committed.rows.length, 'the census still covers every pool').toBe(711);
+    expect(committedSpines.length, 'of which SPINES, the population the totals count').toBe(711);
+    expect(committed.totals.branchGrainRows, 'rows whose selecting branch was recovered').toBe(313);
     expect(committed.totals.functionGrainRows, 'and rows that fall back, fail-closed').toBe(398);
-    expect(committed.totals.branchGrainRows + committed.totals.functionGrainRows).toBe(709);
+    expect(committed.totals.branchGrainRows + committed.totals.functionGrainRows).toBe(711);
     for (const row of committed.rows) {
       expect(['branch', 'function'], `${row.pool} names its grain`).toContain(row.readsGrain);
       if (row.readsGrain === 'branch') expect(row.reads, `${row.pool}`).toEqual(row.branchReads);
@@ -1033,7 +1035,7 @@ describe('car 0 — `absent`: a measurement, or a default wearing a reading\'s c
     // index with them (1158 → 1159 files). Neither is this car's doing; the re-take BANKED
     // a truth the register had not caught up with, and it also cured two of the three
     // standing proseWiringCensus reds (the stale-bytes verdict and the holder register).
-    expect(totals.measured, 'read paths whose absence a predicate can see').toBe(373);
+    expect(totals.measured, 'read paths whose absence a predicate can see').toBe(378);
     expect(totals.default, 'read paths where a fallback hides it').toBe(3);
     // 61 AND NOT 59 SINCE LANDING-7 lane F (R-F1): DS-DEF-9's two `false` pools now read the bare
     // parameter `magicAbsent` at the branch grain, a read path no writer produces.
@@ -1045,7 +1047,7 @@ describe('car 0 — `absent`: a measurement, or a default wearing a reading\'s c
     // eighteen cells, and every one of them was a wrong verdict rather than a finding.
     expect(totals['method-call'], 'read paths whose tail is a builtin, not a field').toBe(18);
     expect(Object.values(totals).reduce((a, b) => a + b, 0), 'and the four labels partition the read paths')
-      .toBe(455);
+      .toBe(460);
     // ⛔ THE TABLE RUNG CARRIES NO ABSENCE RECORD (car 10, cure 4, applied to a new column).
     // Rung 3's field is `"<reader> (via <TABLE> in <file>)"` — this instrument's own label —
     // so asking a producer index about it answers `not-produced` on every table row BY
@@ -1356,7 +1358,7 @@ describe('MEASURE car 3 — the desk-read recipe, the absence readers and the `s
     const blind = fixtureCensus(COMPOSER_ONE_BRANCH, pools).rows;
     expect(blind.filter((r) => (r.sites || []).length > 0), 'a blind census mounts nothing').toEqual([]);
     // AND THE SHIPPED INTEGER, tied to the same column on the same rule.
-    expect(committed.totals.mountedRows, 'rows the mount registry gives a place to speak').toBe(567);
+    expect(committed.totals.mountedRows, 'rows the mount registry gives a place to speak').toBe(569);
     expect(committedSpines.filter((r) => (r.sites || []).length > 0).length,
       'and the total is the column, not a second count').toBe(committed.totals.mountedRows);
     const registryBlocks = new Set(DOSSIER_MOUNTS.map((m) => m.blockId));
@@ -1431,11 +1433,12 @@ describe('car 0 — the derived ATTACH sets, their coverage, and the fact budget
     // STRAINED is reachable at this grain and was not at the last.
     const dark = coverage.filter((c) => c.spinesReachedBp === 0).map((c) => c.block);
     expect(dark.length, 'blocks where no fact of the block can attach to any spine of it').toBe(21);
-    expect(committed.grains.function.cannotAttach.length, 'against the grain the ruling replaced').toBe(25);
+    expect(committed.grains.function.cannotAttach.length, 'against the grain the ruling replaced').toBe(24);
     expect(committed.grains.function.cannotAttach.filter((b) => !dark.includes(b)),
       'and these four are what the branch grain buys (DS-DEF-9 went dark with F9 READER-CONTRADICTIONS\' absent-state pool at LANDING-1,'
-      + ' and came back at LANDING-7 lane F when that pool\'s `magicAbsent` test became an `if` the branch reader sees)')
-      .toEqual(['DS-DEF-11', 'DS-DEF-9', 'DS-ECO-9', 'DS-POW-3']);
+      + ' and came back at LANDING-7 lane F when that pool\'s `magicAbsent` test became an `if` the branch reader sees;'
+      + ' and at W2 DEF C1/C2, 2026-11-07, its two FLAG pools put a second key function in the block, so the FUNCTION grain attaches there too and it leaves this list)')
+      .toEqual(['DS-DEF-11', 'DS-ECO-9', 'DS-POW-3']);
     expectAbsentWithAnchor(dark, 'DS-DEF-11', 'DS-STR-1', 'the blocks that cannot compose');
     // ⭐⭐ AND DS-DEF-2 HAS LEFT THE DARK SET (SEAM car 3h) — A WIRING ACT, NEVER A GRAIN ONE.
     // At the last tip 22 of its 26 pools were WIRING-UNRESOLVED and the 4 that resolved were
@@ -1480,15 +1483,15 @@ describe('car 0 — the derived ATTACH sets, their coverage, and the fact budget
 
   test('the fact budget is counted over RESOLVED rows and refuses the rest', () => {
     const budget = committed.factBudget;
-    expect(budget.zeroK, 'RESOLVED spines that can never take a modifier: k = 3 - |reads| <= 0').toBe(49);
-    expect(budget.executable, 'counted over the RESOLVED rows').toBe(341);
+    expect(budget.zeroK, 'RESOLVED spines that can never take a modifier: k = 3 - |reads| <= 0').toBe(50);
+    expect(budget.executable, 'counted over the RESOLVED rows').toBe(343);
     // ⛔ NOT-EXECUTABLE, NEVER k = 3. An UNRESOLVED row reads `[]`, which would answer "three
     // free seats" on a pool whose predicate nobody has recovered — the friendliest number,
     // and the §908 law forbids exactly that.
     expect(budget.notExecutable, 'and the UNRESOLVED rows declare themselves').toBe(368);
-    expect(budget.executable + budget.notExecutable).toBe(709);
+    expect(budget.executable + budget.notExecutable).toBe(711);
     const summed = budget.histogram.reduce((total, [, n]) => total + n, 0);
-    expect(summed, 'the histogram carries every executable row once').toBe(341);
+    expect(summed, 'the histogram carries every executable row once').toBe(343);
     // The rule itself, on a fixture: a three-field spine has no seat and a one-field spine has two.
     const rows = [
       { block: 'B', pool: 'p1', status: WIRING_STATUS.RESOLVED, reads: ['a', 'b', 'c'] },
@@ -1500,8 +1503,8 @@ describe('car 0 — the derived ATTACH sets, their coverage, and the fact budget
     expect(Object.fromEntries(factBudget(rows).histogram)).toEqual({ 0: 1, 2: 1 });
     // AND THE BRANCH GRAIN IS WHAT THAT 49 IS COUNTED OVER, with the function-wide reading
     // beside it: the ruling's cost is 72 rows that leave k = 0, printed in ONE table.
-    expect(committed.grains.branch.zeroK, 'the shipped grain').toBe(49);
-    expect(committed.grains.function.zeroK, 'and the grain the ruling replaced').toBe(125);
+    expect(committed.grains.branch.zeroK, 'the shipped grain').toBe(50);
+    expect(committed.grains.function.zeroK, 'and the grain the ruling replaced').toBe(127);
   });
 });
 
@@ -1603,7 +1606,7 @@ describe('car 0 — mounts per fact, custom reachability, and the relation table
     // root through other reads; `magicDependency` is the one new root.
     // 92 AND NOT 91 SINCE LANDING-7 lane F (R-F1): the same function's third parameter,
     // `magicAbsent`, reaches the branch grain through its `if`; it is the one new root.
-    expect(join.deskRoots, 'the desks read this many distinct field roots').toBe(92);
+    expect(join.deskRoots, 'the desks read this many distinct field roots').toBe(93);
     expect(join.strictBoth, 'rows a projector could license today').toBe(0);
     expect(join.strictEither, 'and rows sharing even ONE endpoint with a desk read').toBe(0);
     expect(join.leafBoth, 'nor does a leaf-level normalisation reach a row').toBe(0);
@@ -1709,7 +1712,7 @@ describe('car 0f — the ALIAS DRAFT: measured, nothing ratified, no leaf writte
     // `heldKey: (e) => fillSentenceSlots(e.secret, { …, npc: otherNpc?.name }, …)` beside the `stress:` argument), so
     // `system:food_security -> name` gains a generator-write row there. ⚠ A FINDING, NOT A JOIN, like the 7 -> 8 row above:
     // the key builds a held-text comparison, not a write of world state. Nothing joins on it (the join arm stays 0).
-    expect(draft.rows.length, 'candidate rows at this tip, docblock withdrawn').toBe(9);
+    expect(draft.rows.length, 'candidate rows at this tip, docblock withdrawn').toBe(10);
     expect(draft.endpointsWithCandidate, 'endpoints with at least one candidate').toBe(4);
     expect(draft.noCandidate.length, 'and the wiring debt the SEAM and WAVE trains inherit').toBe(85);
     expect(draft.docblockReports.length, 'the withdrawn candidates, reported and never proposed').toBe(28);
@@ -1722,7 +1725,9 @@ describe('car 0f — the ALIAS DRAFT: measured, nothing ratified, no leaf writte
     // string, a comment and a parameter binding can propose nothing.
     const byEvidence = draft.rows.reduce((m, r) => m.set(r.evidence, (m.get(r.evidence) || 0) + 1), new Map());
     // 4 -> 5 at 1d64e08ba (the npcGenerator.js:780 Property key above). 5 -> 6 at MERGE-R2 (the held key's `name` row above).
-    expect(byEvidence.get('generator-write'), 'the four sound citations survive the AST cut').toBe(6);
+    // 6 -> 7 at W2 DEF C1/C2 (2026-11-07): DS-DEF-9's FLAG pools read `safetyProfile.flags`, a new shipped read path, and
+    // the AST cut finds one more npcGenerator.js Property key writing toward it. ⚠ A FINDING, NOT A JOIN, like the rows above.
+    expect(byEvidence.get('generator-write'), 'the four sound citations survive the AST cut').toBe(7);
     expect(draft.rows.filter((r) => r.evidence === 'generator-write').map((r) => r.at.replace(/:\d+$/, '')).sort(),
       'and each is a real write in a generator').toEqual([
       'src/generators/defenseGenerator.js',
@@ -1731,6 +1736,7 @@ describe('car 0f — the ALIAS DRAFT: measured, nothing ratified, no leaf writte
       'src/generators/npcGenerator.js',
       'src/generators/npcGenerator.js',
       'src/generators/npcGenerator.js', // MERGE-R2: the held key's `name` row (npcGenerator.js:791)
+      'src/generators/npcGenerator.js', // W2 DEF C1/C2: one more Property key toward safetyProfile.flags
     ]);
     for (const withdrawn of ['src/generators/structuralValidator.js:588', 'src/generators/stressNarrative.js:80',
       'src/generators/defenseGenerator.js:603', 'src/generators/narrativeText.js:53', // :603 re-derived: generateDefenseProfile's `Disasters & Famine` comment, which EM-R0d shifted -5 from :608
@@ -1853,18 +1859,18 @@ describe('SEAM car 5b — THE HOLDER CENSUS: the source of each construction (SI
     // field). The desk no longer calls it, so the read is the bare `tradeAccess`, and no mapping
     // row resolves it. Traced by lane DEFENSE-2 against the register at da2040ddb.
     expect(summary.rows, 'ROWS by source standing').toEqual({
-      LICENSED: 114, OFFICE: 3, 'SOURCE-UNRESOLVED': 592,
+      LICENSED: 116, OFFICE: 3, 'SOURCE-UNRESOLVED': 592,
     });
     // 190 / 416 AND NOT 191 / 415, the same one row: its third field entry was the toll-bar's
     // `settlement.config.tradeRouteAccess` and is now the unresolved `tradeAccess`. The total
     // of 611 below does not move.
     expect(summary.fields, 'FIELDS by source standing').toEqual({
-      LICENSED: 191, OFFICE: 5, 'SOURCE-UNRESOLVED': 419,
+      LICENSED: 196, OFFICE: 5, 'SOURCE-UNRESOLVED': 419,
     });
     expect(Object.values(summary.rows).reduce((a, b) => a + b, 0),
       'and every pool lands in exactly one row standing').toBe(spines.length);
     expect(Object.values(summary.fields).reduce((a, b) => a + b, 0),
-      'over this many sourced field entries').toBe(615);
+      'over this many sourced field entries').toBe(620);
     expect(summary.twoSourceRows, 'rows whose fields resolve to more than one kind').toBe(10);
     expect(summary.rowsWithNoReading, 'and rows the census recovered no reading for at all').toBe(368);
     // THE TWO UNRESOLVED GROUNDS STAY APART: a field no mapping row names is a different debt
@@ -1875,8 +1881,9 @@ describe('SEAM car 5b — THE HOLDER CENSUS: the source of each construction (SI
     // gain the field entry `magicAbsent`, which no mapping row names. No row's standing moves.
     expect(summary.unresolvedGrounds).toEqual({ 'no-mapping': 419, 'no-institution-in-roster': 0 });
     expect(summary.byKind, 'the licensed field count per kind').toEqual([
-      ['muster', 62], ['market', 49], ['treasury', 22], ['court', 21], ['toll-bar', 12],
-      ['watch', 9], ['road', 7], ['elders', 5], ['office', 5], ['parish', 4],
+      // watch 9 -> 14 at W2 DEF C1/C2 (2026-11-07): DS-DEF-9's FLAG pools read `safetyProfile.flags`, licensed by the watch.
+      ['muster', 62], ['market', 49], ['treasury', 22], ['court', 21], ['watch', 14],
+      ['toll-bar', 12], ['road', 7], ['elders', 5], ['office', 5], ['parish', 4],
     ]);
     expect(summary.byKind.reduce((n, [, k]) => n + k, 0),
       'which must account for every licensed and office field').toBe(summary.fields.LICENSED + summary.fields.OFFICE);
@@ -2021,8 +2028,8 @@ describe('SEAM car 5b — THE HOLDER CENSUS: the source of each construction (SI
     const flagged = spines.filter((row) => row.source.stateOrgan === true);
     // The register knows no town, so its `standing` can never read INTERESTED. What it CAN
     // say is which rows the rule reaches, and it says it on the affected rows only.
-    expect(flagged.length, 'rows a captured ruling structure can make interested').toBe(40);
-    expect(flagged.filter((row) => row.source.standing === 'LICENSED').length).toBe(37);
+    expect(flagged.length, 'rows a captured ruling structure can make interested').toBe(42);
+    expect(flagged.filter((row) => row.source.standing === 'LICENSED').length).toBe(39);
     expect(flagged.filter((row) => row.source.standing === 'OFFICE').length).toBe(3);
     // RE-DERIVED, never read: the flag is exactly `kinds names a state organ`.
     const wrong = census.rows.filter((row) => {

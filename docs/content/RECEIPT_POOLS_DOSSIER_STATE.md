@@ -2692,7 +2692,7 @@ supplies the ancestry.
 
 **`Internal Security`: full legal chain (court AND prison)**
 1. `[ledger · colour]` {settlement} can arrest, try and hold, and having all three means the town's law is a process rather than a threat.
-2. `[street · watch]` A thing done wrong at {settlement} goes somewhere and takes time, and the town has come to rely on that rather than on the watch's temper.
+2. `[street]` A thing done wrong at {settlement} goes somewhere and takes time, and the town has come to rely on that rather than on the watch's temper.
 3. `[visitor · colour]` A stranger who brings a complaint at {settlement} is given a procedure rather than a favour, and the procedure runs.
 
 **`Internal Security`: court without detention** {colour}
@@ -2799,12 +2799,12 @@ reading rather than a settled one.
 4. `[threshold · watch]` The balance at {settlement} sits where either side could take it. A thinner watch or a bolder operator would show up in the returns within the season, and nothing else would need to change.
 
 **`Unsafe`**
-1. `[street · watch]` Crime at {settlement} is outrunning the watch. It is not chaos; it is that the people doing it have stopped expecting to be caught.
+1. `[street]` Crime at {settlement} is outrunning the watch. It is not chaos; it is that the people doing it have stopped expecting to be caught.
 2. `[ledger · colour]` What criminal work is being done at {settlement} measurably exceeds what is being answered, and the gap is legible in the returns rather than merely felt.
 3. `[unfolding · watch]` The balance at {settlement} has tipped and is still tipping. Each season the watch answers a smaller share of what happens.
 
 **`Dangerous`**
-1. `[street · watch]` The watch at {settlement} has been overwhelmed. What happens in this town is decided by whoever is present when it happens.
+1. `[street]` The watch at {settlement} has been overwhelmed. What happens in this town is decided by whoever is present when it happens.
 2. `[ledger · colour]` Organized interests at {settlement} now outweigh enforcement outright; there is no part of the town's order that does not run through somebody's permission.
 3. `[visitor · colour]` A stranger at {settlement} is not warned about particular streets, because the warning would have to cover all of them.
 
@@ -3251,12 +3251,12 @@ relied on by nothing.
 **`magicDependency` true** {colour}
 1. `[ledger]` {settlement} runs on arcane work. What the town produces, and in some measure what the town eats, depends on practitioners continuing to be here and continuing to be willing.
 2. `[street]` A handful of people at {settlement} do work nobody else can do, and the town's whole arrangement rests on them without ever having decided to.
-3. `[unfolding]` The resilience of {settlement} is only as durable as its practitioners are; a hard season for them (conflict, sickness, a falling-out with the hall) becomes a hard season for everyone at once.
-4. `[visitor]` A stranger at {settlement} sees a town doing better than its ground and its roads would explain, and eventually finds out why.
+3. `[unfolding]` {settlement} leans on its practitioners; a hard season for them (a feud, a sickness, a falling-out with the hall) is a hard season for everyone.
+4. `[visitor]` {settlement} does better than its ground and roads would explain, and the reason is its few practitioners.
 
 **`magicDependency` true, with a NAMED dependent chain** {colour}
 1. `[ledger]` The {good} that {settlement} lives on cannot be made here without arcane work, which puts the whole line behind a very small number of people.
-2. `[unfolding]` {settlement}'s trade in {good} is being sustained by practitioners rather than by the country, and nothing about that arrangement is being made more robust.
+2. `[unfolding]` {settlement}'s trade in {good} rests on a few practitioners, not on the land.
 3. `[street]` The town's living at {settlement} passes through a workshop that could not run without the arcane, and everybody in the trade knows which workshop.
 
 **`magicDependency` false**
@@ -3267,7 +3267,23 @@ relied on by nothing.
 **`magicDependency` false, availability absent** {colour}
 1. `[ledger]` No one works magic at {settlement}, and nothing in the town depends on it.
 2. `[street]` Nobody at {settlement} casts, brews or wards for a living, and nothing in the town leans on magic.
-3. `[visitor]` A stranger who comes to {settlement} looking for magic finds none, and finds nothing that misses it.
+3. `[visitor]` Nobody at {settlement} sells spells or charms, and nothing in the town depends on magic.
+
+**THE TWO FLAGS (W2 DEF, 2026-11-07, construction C1 and C2):** each is a second sentence
+beside the dependency line, said ONLY when the flag is true (`safetyProfile.flags`); the flag
+pools never print alone. `magicFillsVoid` is true only where magic runs high, religion and
+trade run low, a mages' guild or wizard's tower stands and no temple does
+(`priorityHelpers.js :: getStressFlags`); `magicMilitarized` only where the military outranks
+magic and both a military and an arcane institution stand. Description position: plain lines,
+one vantage each.
+
+**FLAG: magicFillsVoid**
+1. `[street]` There is no temple at {settlement} and little trade, so people bring their troubles to the mages instead: a sickness, a quarrel, a failed harvest.
+2. `[ledger]` With no temple and a weak market, the arcane houses at {settlement} carry the authority a priesthood or a merchant guild would carry elsewhere.
+
+**FLAG: magicMilitarized**
+1. `[street]` The soldiers at {settlement} command its magic: the arcane houses answer to them, and their work goes first to the town's defence.
+2. `[ledger]` Arcane work at {settlement} is directed by its military, and the practitioners' first duty is to the town's soldiers.
 
 ---
 
@@ -3336,7 +3352,7 @@ rows — the arm and the town. Both stand; **one per page, never both.**
 
 **posture `INTERNAL PRESSURE` (famine)**
 1. `[ledger · colour]` {settlement} is defending a hungry town, which changes what can be asked of anyone in it and how long they will keep answering.
-2. `[street · watch]` The watch stands and the watch is not being fed properly, and both of those facts are the same fact.
+2. `[street]` The watch stands and the watch is not being fed properly, and both of those facts are the same fact.
 3. `[unfolding · walls]` What {settlement} can ask of the people on its walls falls with what it can feed them, and neither is being replenished.
 
 **posture `UNDER OCCUPATION`**
@@ -3376,13 +3392,13 @@ rows — the arm and the town. Both stand; **one per page, never both.**
 
 **posture `BEAST PRESSURE`**
 1. `[ledger · colour]` What is coming out of the country at {settlement} is coming steadily, and the town's arrangements are being spent on it faster than they are being replaced.
-2. `[street · watch]` The watch here is a matter of what is outside rather than who is inside, and it does not stand down.
+2. `[street]` The watch here is a matter of what is outside rather than who is inside, and it does not stand down.
 3. `[unfolding · colour]` The pressure at {settlement} does not pause between attempts, and what the town spends answering it is not being replaced at the same rate.
 
 **posture `INSURGENCY ACTIVE`**
 1. `[ledger · colour]` {settlement} is being defended against people who live in it, which is a different problem from a siege and one the town's arrangements were not built for.
 2. `[unfolding · colour]` Every measure taken against the insurgency at {settlement} makes the next one more necessary, and the cycle is the shape of the problem rather than an accident of it.
-3. `[street · watch]` The watch at {settlement} is walking streets that do not welcome it, and that is more dangerous to it than any ambush.
+3. `[street]` The watch at {settlement} is walking streets that do not welcome it, and that is more dangerous to it than any ambush.
 
 **posture `RELIGIOUS UPHEAVAL`**
 1. `[ledger · colour]` The town's defense at {settlement} has been caught in a question about observance; what is being contested is who may command, and the answer turns on creed.

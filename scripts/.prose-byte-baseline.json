@@ -55,8 +55,8 @@
   },
   "leaves": {
     "src/data/dossierStateProse/defense.generated.js": {
-      "raw": 172793,
-      "gzip": 24602,
+      "raw": 174036,
+      "gzip": 24812,
       "ceilingRaw": 488168,
       "ceilingGzip": 108482
     },
@@ -307,6 +307,14 @@
       "toRaw": 94103,
       "gzipAfter": 15113,
       "reason": "+341 B raw (gzip level 9: 15,067 -> 15,113), one commit: DS-CND-1 ARCHETYPE: boom gains v4 `[street · crisis: any]`, reading only the archetype and the name, so a keyed boom has a printable line under any crisis (v1-v3 each deny hunger, threat and indebted). Projected through `node scripts/generate-dossier-state-prose.mjs`; `--check` exit 0."
+    },
+    {
+      "car": "W2 DEF (the construction-and-wiring wave, 2026-11-07; ODQ §934.105, WIRING-RULINGS R-W1/R-W9): DS-DEF-9 — magic fills the void said; magic militarized said; the owner's style law of 2026-11-07",
+      "leaf": "src/data/dossierStateProse/defense.generated.js",
+      "fromRaw": 172793,
+      "toRaw": 174036,
+      "gzipAfter": 24812,
+      "reason": "+1243 B raw (gzip level 9: 24,602 -> 24,812), one commit: DS-DEF-9 gains the two FLAG pools (magicFillsVoid, magicMilitarized; two variants each, said beside the dependency line only when the flag is true) and four style rewrites (true v3, v4; NAMED chain v2; availability absent v3). Projected through `node scripts/generate-dossier-state-prose.mjs`; `--check` exit 0."
     }
   ],
   "ceilingTransfersNewLeaves": [
