@@ -13,6 +13,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { aggregate } from '../../scripts/audit/soak-review/aggregate.mjs';
 import { mergeShards, packShard, readShards, residueOrder, REPETITION_NOTE } from '../../scripts/audit/soak-merge.mjs';
 
@@ -29,6 +30,8 @@ function row(i) {
     { check: 'X-50:boilerplate-twice', surface: 'economics', quote: `line ${i % 3}`, detail: '2 times' },
     ...(i % 5 === 0 ? [{ check: 'A-10:role-only-npc', surface: 'record', quote: 'The Reeve', detail: 'reeve' }] : []),
     ...(i % 4 === 1 ? [{ check: 'reader:exports-thin', surface: 'economics', quote: '', detail: '[gaps] thin' }] : []),
+    // Two settlements in each shard: under the contradiction line (≥ 3) in each, over it in the union.
+    ...([2, 3, 14, 15].includes(i) ? [{ check: 'A-04:dragon-magic-off', surface: 'screen', quote: 'a dragon', detail: '' }] : []),
     ...(i === 17 ? [{ check: 'cert:broken_reference', surface: 'record', quote: 'npcs[2]', detail: 'dangling' }] : []),
   ];
   return {
@@ -76,7 +79,7 @@ describe('soak-merge: two packed shards merge to the one run', () => {
 
   it('every table the aggregate computes from rows is byte-identical to the one run\'s', () => {
     for (const t of ROW_TABLES) expect(readFileSync(join(merged, t), 'utf-8'), t).toBe(readFileSync(join(root, 'one', t), 'utf-8'));
-    expect(readFileSync(join(merged, 'findings.jsonl'), 'utf-8').split('\n').filter(Boolean)).toHaveLength(24 + 5 + 6 + 1);
+    expect(readFileSync(join(merged, 'findings.jsonl'), 'utf-8').split('\n').filter(Boolean)).toHaveLength(24 + 5 + 6 + 4 + 1);
   });
 
   it('run.json agrees with the one run in every figure but the run\'s own args, duration and repetition', () => {
@@ -86,6 +89,14 @@ describe('soak-merge: two packed shards merge to the one run', () => {
     expect(summary.reasons).toEqual(one.reasons);
     expect(summary.durationMs).toBe(1000 + 1012);
     expect(summary.merge.shards.map((s) => [s.from, s.end, s.verdict])).toEqual([[0, 12, 'STOP'], [12, 24, 'STOP']]);
+  });
+
+  it('applies the stop rule to the summed classes: a class at 2 + 2 is a reason in the union and in neither shard', () => {
+    const reason = 'kind 3 (magic): A-04:dragon-magic-off in 4';
+    expect(summary.reasons).toContain(reason);
+    for (const s of summary.merge.shards) {
+      expectAbsentWithAnchor(s.reasons.map((x) => x.replace(/ in \d+$/, '')), 'kind 3 (magic): A-04:dragon-magic-off', 'repetition: X-50:boilerplate-twice at 1', `shard ${s.from}`);
+    }
   });
 
   it('repetition is reported per shard, with the note, never as a merged figure', () => {
