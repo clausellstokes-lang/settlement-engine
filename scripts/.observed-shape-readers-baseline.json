@@ -172,16 +172,16 @@
  },
  "digests": {
   "corpusMeta": "91c6e9f2e1677d0c3bf587cffb27b69fe554308ff5d9fda1622090c53dfec0b9",
-  "inventory": "5fca9f4ab9394a36548bb6f75be3b9642713dcbda76f86f9d120a3e9379235c9",
-  "manifests": "6ff7f9e8fd68d09ecc289bc7867f076b99809d273f1afb519ceaa8e36a3bbf9a",
+  "inventory": "0a77cc0b1a29d41babeabecbeded0385f72b2876fe36501ab8283b64d8cd3937",
+  "manifests": "2f84c6b51084edbcaf4aff4f747b34649734f12aabcc28f7f1d94161e7620daf",
   "migrationReview": "9f944655e7956a489d5d24a0d6c343a90d651294866f3c9b38c0c67579d57e18",
   "rowTags": "707fe2c0f85a64f89016fd606099f7a8a71fa5ac76b218d8eb2b287a998b7d1d",
-  "scanStats": "94056238f38ad083c60e5eac4269216f3ef864678c0ac35ffdfacb20751596f3",
-  "sentinel": "73357a8bfffe9a41e815daff90fddbe878aed53f7f7cb7c8e1754bbbfbcd73ab"
+  "scanStats": "585ef40ac3c787b7eb6f7ab3e3876d64ce2b9b31202b37188cda3ddfe9903686",
+  "sentinel": "6cccd841039545f5ec7bf62de0f345115b9862125e9ee0e294b106a094ac291f"
  },
  "frozen": "2026-11-07",
- "frozenAtSha": "aaa15f2245b5f2679e5a105d37f8042e9094abae",
- "identities": 1551,
+ "frozenAtSha": "2981f23f62f03d7501a425efe577cadd4f2f5211",
+ "identities": 1545,
  "inventory": {
   "src/components/BuyThisDossier.jsx": {
    "mapEdits on settlement": 1
@@ -2048,8 +2048,6 @@
    "safetyRatio on inst": 1
   },
   "src/generators/factionRoles.js": {
-   "factionAffiliation on npcs": 1,
-   "factions on settlement": 1,
    "id on institutions": 1
   },
   "src/generators/generationContext.js": {
@@ -2071,8 +2069,6 @@
    "magicExists on config": 1
   },
   "src/generators/narrativeGenerator.js": {
-   "factions on settlement": 2,
-   "name on factions": 1,
    "need on foodBalance": 1
   },
   "src/generators/neighbourGenerator.js": {
@@ -2091,10 +2087,6 @@
   "src/generators/power/economyReconciliation.js": {
    "name on factions": 1,
    "source on factions": 1
-  },
-  "src/generators/power/factionGrouping.js": {
-   "factionAffiliation on npcs": 1,
-   "name on factions": 1
   },
   "src/generators/recordBatteryFindings.js": {
    "name on factions": 1
@@ -2673,7 +2665,7 @@
   },
   "executionTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "e01299bc17f6a95d614b065b79077acfcdc83ebdd04738283870857a3b370775",
+   "digest": "36c102a885ba17083342b1ec496bff8b4dfd7762665611d3137549190fdaeaf1",
    "entries": [
     {
      "mode": "100644",
@@ -16069,8 +16061,8 @@
     {
      "mode": "100644",
      "path": "src/generators/factionRoles.js",
-     "sha256": "b0e41995ca373a2b94e3280617088867a6847aa1d68c82c710a963ed9fd7721a",
-     "size": 22410,
+     "sha256": "4bac9f21ab50d5eee8fc8571cdc6b06657a329da28b3e8d81a38c6872c89e1bd",
+     "size": 22092,
      "type": "file"
     },
     {
@@ -16083,8 +16075,8 @@
     {
      "mode": "100644",
      "path": "src/generators/generateSettlementPipeline.js",
-     "sha256": "7b56a713bb5a0bfa77be250c755189b4b224a3b9fb041675a4bd36fdd446f280",
-     "size": 37440,
+     "sha256": "43f8ea767474651cc990e7bc4187115f04c7a58cad188f82f05d80bfe78352fa",
+     "size": 37112,
      "type": "file"
     },
     {
@@ -16230,8 +16222,8 @@
     {
      "mode": "100644",
      "path": "src/generators/narrativeGenerator.js",
-     "sha256": "431bd2cae1ff1fd73f59e607671adafdca55babfce8a8695d9ed1123e634def7",
-     "size": 49848,
+     "sha256": "5c96688110f846ad934dd71ca7044610d21beaf0807f2e4d9625c11e42f2550d",
+     "size": 47207,
      "type": "file"
     },
     {
@@ -16293,8 +16285,8 @@
     {
      "mode": "100644",
      "path": "src/generators/npcGenerator.js",
-     "sha256": "384df8414bbacf2e1f9b9e556a789c73e2ddfcea01f943b4ae62543a661e74f6",
-     "size": 73020,
+     "sha256": "bf01d8c513b176a15861001a70d1997c65fe121f6204573e8480b6f2a266b751",
+     "size": 73203,
      "type": "file"
     },
     {
@@ -16309,13 +16301,6 @@
      "path": "src/generators/people/castPowers.js",
      "sha256": "af2ebd5b169657fd9fc62ea0392b280331fea2534018d1b1e09c1622fc8ed391",
      "size": 16549,
-     "type": "file"
-    },
-    {
-     "mode": "100644",
-     "path": "src/generators/people/legacyShim.js",
-     "sha256": "f54c0471f5d0d1f7a2deb6f93b2d822e1fd4cd7adc2c86344acee5166cc7f7e4",
-     "size": 3213,
      "type": "file"
     },
     {
@@ -16383,13 +16368,6 @@
     },
     {
      "mode": "100644",
-     "path": "src/generators/power/factionGrouping.js",
-     "sha256": "15e4817ac6834953c714367f0db76fb16ae5a6126318fbc1b27f2f840a9805bb",
-     "size": 2276,
-     "type": "file"
-    },
-    {
-     "mode": "100644",
      "path": "src/generators/power/factionStanding.js",
      "sha256": "013de4c3f877c332c19f81faff289707524914e256cbae4672b388f47e12ccef",
      "size": 16185,
@@ -16433,8 +16411,8 @@
     {
      "mode": "100644",
      "path": "src/generators/powerGenerator.js",
-     "sha256": "c45971c60c37e03037379964e06f93cd1eadd6e701fedc4bf116a2714e96ddb5",
-     "size": 709,
+     "sha256": "c0c198eafb60cac73646f3ad1c9e1068535e2ee0fab39f568df43b4ba46c0bc8",
+     "size": 628,
      "type": "file"
     },
     {
@@ -16531,8 +16509,8 @@
     {
      "mode": "100644",
      "path": "src/generators/steps/assembleSettlement.js",
-     "sha256": "bcafa807c5cceb4f655cf2d8195780eb429d77d62ed63038cf5e2443bc3ac4fe",
-     "size": 25464,
+     "sha256": "a471a36ff14e6147d45a5498ad765e206e5947a3a869b340c5957b1150485441",
+     "size": 25237,
      "type": "file"
     },
     {
@@ -19542,7 +19520,7 @@
   },
   "scanTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "6e3690e1dfa5670118c9f81f0468f8d4d018bfd01e48475725fd8aff7070a6f1",
+   "digest": "10059a5f15cea74b0d3355834326cee2fd88712f68a7f58706bba6d07b06ec2e",
    "entries": [
     {
      "mode": "100644",
@@ -32749,8 +32727,8 @@
     {
      "mode": "100644",
      "path": "src/generators/factionRoles.js",
-     "sha256": "b0e41995ca373a2b94e3280617088867a6847aa1d68c82c710a963ed9fd7721a",
-     "size": 22410,
+     "sha256": "4bac9f21ab50d5eee8fc8571cdc6b06657a329da28b3e8d81a38c6872c89e1bd",
+     "size": 22092,
      "type": "file"
     },
     {
@@ -32763,8 +32741,8 @@
     {
      "mode": "100644",
      "path": "src/generators/generateSettlementPipeline.js",
-     "sha256": "7b56a713bb5a0bfa77be250c755189b4b224a3b9fb041675a4bd36fdd446f280",
-     "size": 37440,
+     "sha256": "43f8ea767474651cc990e7bc4187115f04c7a58cad188f82f05d80bfe78352fa",
+     "size": 37112,
      "type": "file"
     },
     {
@@ -32910,8 +32888,8 @@
     {
      "mode": "100644",
      "path": "src/generators/narrativeGenerator.js",
-     "sha256": "431bd2cae1ff1fd73f59e607671adafdca55babfce8a8695d9ed1123e634def7",
-     "size": 49848,
+     "sha256": "5c96688110f846ad934dd71ca7044610d21beaf0807f2e4d9625c11e42f2550d",
+     "size": 47207,
      "type": "file"
     },
     {
@@ -32973,8 +32951,8 @@
     {
      "mode": "100644",
      "path": "src/generators/npcGenerator.js",
-     "sha256": "384df8414bbacf2e1f9b9e556a789c73e2ddfcea01f943b4ae62543a661e74f6",
-     "size": 73020,
+     "sha256": "bf01d8c513b176a15861001a70d1997c65fe121f6204573e8480b6f2a266b751",
+     "size": 73203,
      "type": "file"
     },
     {
@@ -32989,13 +32967,6 @@
      "path": "src/generators/people/castPowers.js",
      "sha256": "af2ebd5b169657fd9fc62ea0392b280331fea2534018d1b1e09c1622fc8ed391",
      "size": 16549,
-     "type": "file"
-    },
-    {
-     "mode": "100644",
-     "path": "src/generators/people/legacyShim.js",
-     "sha256": "f54c0471f5d0d1f7a2deb6f93b2d822e1fd4cd7adc2c86344acee5166cc7f7e4",
-     "size": 3213,
      "type": "file"
     },
     {
@@ -33063,13 +33034,6 @@
     },
     {
      "mode": "100644",
-     "path": "src/generators/power/factionGrouping.js",
-     "sha256": "15e4817ac6834953c714367f0db76fb16ae5a6126318fbc1b27f2f840a9805bb",
-     "size": 2276,
-     "type": "file"
-    },
-    {
-     "mode": "100644",
      "path": "src/generators/power/factionStanding.js",
      "sha256": "013de4c3f877c332c19f81faff289707524914e256cbae4672b388f47e12ccef",
      "size": 16185,
@@ -33113,8 +33077,8 @@
     {
      "mode": "100644",
      "path": "src/generators/powerGenerator.js",
-     "sha256": "c45971c60c37e03037379964e06f93cd1eadd6e701fedc4bf116a2714e96ddb5",
-     "size": 709,
+     "sha256": "c0c198eafb60cac73646f3ad1c9e1068535e2ee0fab39f568df43b4ba46c0bc8",
+     "size": 628,
      "type": "file"
     },
     {
@@ -33211,8 +33175,8 @@
     {
      "mode": "100644",
      "path": "src/generators/steps/assembleSettlement.js",
-     "sha256": "bcafa807c5cceb4f655cf2d8195780eb429d77d62ed63038cf5e2443bc3ac4fe",
-     "size": 25464,
+     "sha256": "a471a36ff14e6147d45a5498ad765e206e5947a3a869b340c5957b1150485441",
+     "size": 25237,
      "type": "file"
     },
     {
@@ -36215,7 +36179,7 @@
   },
   "sourceTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "ff94187ca668c28e4c0d52141b4b13e9f57e5632e9f13d81a305c05430f394e9",
+   "digest": "03d4e5144ea1ccfb696bd2ef6aa4aa2b90ea391b43d35fc26c6d4240da103e3d",
    "entries": [
     {
      "mode": "100644",
@@ -49541,8 +49505,8 @@
     {
      "mode": "100644",
      "path": "src/generators/factionRoles.js",
-     "sha256": "b0e41995ca373a2b94e3280617088867a6847aa1d68c82c710a963ed9fd7721a",
-     "size": 22410,
+     "sha256": "4bac9f21ab50d5eee8fc8571cdc6b06657a329da28b3e8d81a38c6872c89e1bd",
+     "size": 22092,
      "type": "file"
     },
     {
@@ -49555,8 +49519,8 @@
     {
      "mode": "100644",
      "path": "src/generators/generateSettlementPipeline.js",
-     "sha256": "7b56a713bb5a0bfa77be250c755189b4b224a3b9fb041675a4bd36fdd446f280",
-     "size": 37440,
+     "sha256": "43f8ea767474651cc990e7bc4187115f04c7a58cad188f82f05d80bfe78352fa",
+     "size": 37112,
      "type": "file"
     },
     {
@@ -49702,8 +49666,8 @@
     {
      "mode": "100644",
      "path": "src/generators/narrativeGenerator.js",
-     "sha256": "431bd2cae1ff1fd73f59e607671adafdca55babfce8a8695d9ed1123e634def7",
-     "size": 49848,
+     "sha256": "5c96688110f846ad934dd71ca7044610d21beaf0807f2e4d9625c11e42f2550d",
+     "size": 47207,
      "type": "file"
     },
     {
@@ -49765,8 +49729,8 @@
     {
      "mode": "100644",
      "path": "src/generators/npcGenerator.js",
-     "sha256": "384df8414bbacf2e1f9b9e556a789c73e2ddfcea01f943b4ae62543a661e74f6",
-     "size": 73020,
+     "sha256": "bf01d8c513b176a15861001a70d1997c65fe121f6204573e8480b6f2a266b751",
+     "size": 73203,
      "type": "file"
     },
     {
@@ -49781,13 +49745,6 @@
      "path": "src/generators/people/castPowers.js",
      "sha256": "af2ebd5b169657fd9fc62ea0392b280331fea2534018d1b1e09c1622fc8ed391",
      "size": 16549,
-     "type": "file"
-    },
-    {
-     "mode": "100644",
-     "path": "src/generators/people/legacyShim.js",
-     "sha256": "f54c0471f5d0d1f7a2deb6f93b2d822e1fd4cd7adc2c86344acee5166cc7f7e4",
-     "size": 3213,
      "type": "file"
     },
     {
@@ -49855,13 +49812,6 @@
     },
     {
      "mode": "100644",
-     "path": "src/generators/power/factionGrouping.js",
-     "sha256": "15e4817ac6834953c714367f0db76fb16ae5a6126318fbc1b27f2f840a9805bb",
-     "size": 2276,
-     "type": "file"
-    },
-    {
-     "mode": "100644",
      "path": "src/generators/power/factionStanding.js",
      "sha256": "013de4c3f877c332c19f81faff289707524914e256cbae4672b388f47e12ccef",
      "size": 16185,
@@ -49905,8 +49855,8 @@
     {
      "mode": "100644",
      "path": "src/generators/powerGenerator.js",
-     "sha256": "c45971c60c37e03037379964e06f93cd1eadd6e701fedc4bf116a2714e96ddb5",
-     "size": 709,
+     "sha256": "c0c198eafb60cac73646f3ad1c9e1068535e2ee0fab39f568df43b4ba46c0bc8",
+     "size": 628,
      "type": "file"
     },
     {
@@ -50003,8 +49953,8 @@
     {
      "mode": "100644",
      "path": "src/generators/steps/assembleSettlement.js",
-     "sha256": "bcafa807c5cceb4f655cf2d8195780eb429d77d62ed63038cf5e2443bc3ac4fe",
-     "size": 25464,
+     "sha256": "a471a36ff14e6147d45a5498ad765e206e5947a3a869b340c5957b1150485441",
+     "size": 25237,
      "type": "file"
     },
     {
@@ -53329,23 +53279,23 @@
   }
  },
  "scanStats": {
-  "files": 2381,
-  "reads": 137126,
-  "resolved": 10783,
-  "unresolved": 126343
+  "files": 2379,
+  "reads": 137071,
+  "resolved": 10753,
+  "unresolved": 126318
  },
  "scannerProvenance": {
   "detectorDigest": "ae4d7ce6731ad19613cf660abfb004d0c474e166e1ef6e2cc80cc1e2370a1122",
-  "executionTreeDigest": "e01299bc17f6a95d614b065b79077acfcdc83ebdd04738283870857a3b370775",
-  "scanTreeDigest": "6e3690e1dfa5670118c9f81f0468f8d4d018bfd01e48475725fd8aff7070a6f1",
-  "sourceTreeDigest": "ff94187ca668c28e4c0d52141b4b13e9f57e5632e9f13d81a305c05430f394e9",
+  "executionTreeDigest": "36c102a885ba17083342b1ec496bff8b4dfd7762665611d3137549190fdaeaf1",
+  "scanTreeDigest": "10059a5f15cea74b0d3355834326cee2fd88712f68a7f58706bba6d07b06ec2e",
+  "sourceTreeDigest": "03d4e5144ea1ccfb696bd2ef6aa4aa2b90ea391b43d35fc26c6d4240da103e3d",
   "unscannedInputDigest": "ba274abce8a4669ce588c8cbe3a067a8115da0d2d350890b334929f6298cac97"
  },
  "schema": 31,
  "sentinel": {
-  "resolvedReads": 10783,
+  "resolvedReads": 10753,
   "totalKeys": 11991,
   "usableShapes": 516
  },
- "total": 2200
+ "total": 2193
 }
