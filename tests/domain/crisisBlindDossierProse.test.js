@@ -187,13 +187,17 @@ const factsForPool = (pool, read, type) => {
  * never a predicate that could widen silently; and the arm reds if a listed pool stops being mute.
  * At the ruling (2026-11-07) NO pool is mute for want of a COMPOUND read (the synthesis measured
  * 46 mute cells -> 8 with every declared fact held; none of the 8 reads a compound fact). The one
- * entry is not a compound read and is listed for the chair's veto: DS-STR-1's no-banner rung is
- * KEYED on the crisis's own absence (the owner's order of 2026-09-17: it composes only on a town
- * with NO crisis banner, R-DST-K), so no record holds its key and a stress together.
+ * entry is not a compound read: it is an EXEMPTION BY CONSTRUCTION, RATIFIED by the chair's ruling
+ * of 2026-11-07 06:5x (ODQ §934.105): DS-STR-1's no-banner rung is KEYED on the crisis's own
+ * absence (the owner's order of 2026-09-17: it composes only on a town with NO crisis banner,
+ * R-DST-K), so no record holds its key and a stress together.
  * @type {Readonly<Record<string, string>>}
  */
 const SET_ASIDE = Object.freeze({
-  "DS-STR-1 :: Overview's own section framing": 'the empty `stress[]` (the no-banner rung; R-DST-K)',
+  // RATIFIED (the chair, 2026-11-07 06:5x, ODQ §934.105): an exemption by construction. Its key
+  // requires an EMPTY stress[] (the no-banner pool, the owner's order of 2026-09-17), so "never
+  // mute under a crisis" cannot apply to it: a crisis and this key never hold on one record.
+  "DS-STR-1 :: Overview's own section framing": 'the empty `stress[]` (the no-banner rung; R-DST-K): its key requires no crisis, so it cannot be mute under one — ratified by construction, the chair 2026-11-07 06:5x',
 });
 
 /** The instrument's claims about one variant's text under one place. */
