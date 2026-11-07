@@ -848,13 +848,33 @@ describe('the demoted state dimension — the channel the kernel enforces', () =
         }
       }
     }
-    expect({ spoke, mute }).toEqual({ spoke: [], mute: [] });
+    // ⚠ MUTE IS NOW THE FACTS GATE, NOT THE DIMENSION GATE, on exactly these seven states
+    // (census-2b item 2, db3ed88c1; measured on the leaves: 0 at its parent, these 7 at it, the
+    // same 7 at the tip). The calm admit-all double holds every presence and no population band,
+    // so a state whose every line EXCLUDES a presence (`no garrison`, `no ruler: occupier`) or
+    // needs `population: ≥ middling` is refused by the facts, not by the dimension. DS-GEN-1 is
+    // dark (UNMOUNTED_BLOCKS) and DS-GEN-3 glances, so none is a reader's sentence. Pinned
+    // exactly: any NEW mute still reds.
+    expect({ spoke, mute }).toEqual({
+      spoke: [],
+      mute: [
+        'DS-GEN-1 :: economic_disparity :: severity=minor with {"walls":"no walls"}',
+        'DS-GEN-1 :: economic_disparity :: walls=no walls with {"severity":"minor"}',
+        'DS-GEN-1 :: occupation_legacy :: severity=minor',
+        'DS-GEN-1 :: occupation_legacy :: severity=major',
+        'DS-GEN-1 :: occupation_legacy :: severity=catastrophic',
+        'DS-GEN-3 :: defenseProfile.readiness.label: Undefended :: walls=walls',
+        'DS-GEN-3 :: defenseProfile.readiness.label: Undefended :: walls=no walls',
+      ],
+    });
 
     // The named case, spelled out because it is the one a reader can check by eye.
+    // db3ed88c1 made crime_wave crisis-scoped with fact-declaring lines, so the answered read
+    // carries facts, as every desk's does (the unanswered one stays null either way).
     expect(readStateProse(DOSSIER_STATE_PROSE_GENERAL, 'DS-GEN-1', 'crime_wave',
       { slots: { settlement: 'X' }, seed: 's' })).toBeNull();
     expect(readStateProse(DOSSIER_STATE_PROSE_GENERAL, 'DS-GEN-1', 'crime_wave',
-      { slots: { settlement: 'X' }, seed: 's', dimensions: { severity: 'minor' } })?.text)
+      { slots: { settlement: 'X' }, seed: 's', dimensions: { severity: 'minor' }, facts: CALM_FACTS_ADMIT_ALL })?.text)
       .toEqual(expect.any(String));
 
     // Non-vacuity, MEASURED: 24 pools across DS-GEN-1, DS-GEN-6 and DS-GEN-9.
@@ -865,8 +885,11 @@ describe('the demoted state dimension — the channel the kernel enforces', () =
       // CENSUS-3b unit 2 (2026-11-05): DS-ECO-10 (POSTURE established v1 carries `no hunger`).
       // CENSUS-3c unit 4 (2026-11-05): DS-ECO-2 (the FOOD / GRANARY calm lines carry `no hunger`, R-K);
       // DS-POP-1 (QUANTITY thousands v2 "retains its walls" declares `walls`, R-O's one word).
-      .toEqual(['DS-CND-1', 'DS-DEF-1', 'DS-DEF-11', 'DS-DEF-2', 'DS-DEF-4', 'DS-DEF-6', 'DS-ECO-1', 'DS-ECO-10', 'DS-ECO-12', 'DS-ECO-2', 'DS-ECO-3', 'DS-ECO-8', 'DS-ECO-9', 'DS-FTH-1', 'DS-GEN-1', 'DS-GEN-3',
-        'DS-GEN-6', 'DS-GEN-9', 'DS-HK-1', 'DS-POP-1', 'DS-POW-2', 'DS-POW-4', 'DS-POW-6', 'DS-POW-7', 'DS-STR-1', 'DS-STR-2', 'DS-WAR-1', 'DS-WAR-2']);
+      // census-2b item 2 (db3ed88c1): DS-GEN-10 and DS-GEN-17 (walls lines). census-5d unit 2a
+      // (c24d7118e): DS-WAR-5 (three siege pools mark walls). census-5d unit 2b (f260dbac6):
+      // DS-DEF-7 and DS-DEF-10. 28 -> 33, each measured on the leaves parent -> commit.
+      .toEqual(['DS-CND-1', 'DS-DEF-1', 'DS-DEF-10', 'DS-DEF-11', 'DS-DEF-2', 'DS-DEF-4', 'DS-DEF-6', 'DS-DEF-7', 'DS-ECO-1', 'DS-ECO-10', 'DS-ECO-12', 'DS-ECO-2', 'DS-ECO-3', 'DS-ECO-8', 'DS-ECO-9', 'DS-FTH-1', 'DS-GEN-1', 'DS-GEN-10', 'DS-GEN-17', 'DS-GEN-3',
+        'DS-GEN-6', 'DS-GEN-9', 'DS-HK-1', 'DS-POP-1', 'DS-POW-2', 'DS-POW-4', 'DS-POW-6', 'DS-POW-7', 'DS-STR-1', 'DS-STR-2', 'DS-WAR-1', 'DS-WAR-2', 'DS-WAR-5']);
   });
 
   it('never returns a variant that contradicts the state it was asked about', () => {
@@ -878,7 +901,9 @@ describe('the demoted state dimension — the channel the kernel enforces', () =
     for (const audience of [AUDIENCE_DM, AUDIENCE_PLAYER]) {
       for (const { id, key, pool, dimension, value } of DIMENSION_STATES) {
         const slots = bagFor(pool);
-        for (const variant of eligibleVariants(pool, { slots, audience, dimensions: { [dimension]: value } })) {
+        // db3ed88c1 onward pools declare facts and opt into the crisis dimension; without facts
+        // such a pool is [] and the sweep would pass over it unread. The calm admit-all double.
+        for (const variant of eligibleVariants(pool, { slots, audience, dimensions: { [dimension]: value }, facts: CALM_FACTS_ADMIT_ALL })) {
           const own = marksOf(variant, dimension);
           if (own.length > 0 && !own.includes(value)) {
             contradictions.push(`${audience} :: ${id} :: ${key} :: asked ${dimension}=${value} :: got [${own.join(', ')}]`);
@@ -894,8 +919,11 @@ describe('the demoted state dimension — the channel the kernel enforces', () =
     const crimeWave = DOSSIER_STATE_PROSE_GENERAL['DS-GEN-1'].pools.crime_wave;
     const catastrophic = crimeWave.find((v) => (v.marks || []).includes('catastrophic'));
     expect(catastrophic.angle).toBe('unfolding');
+    // db3ed88c1: the minor lines declare `watch` (v1) and `population: ≥ middling` (v5), so the
+    // read is a calm middling town holding every presence; at its parent (no facts) the same two.
     const minorReachable = new Set(eligibleVariants(crimeWave,
-      { slots: { settlement: 'X' }, audience: AUDIENCE_DM, dimensions: { severity: 'minor' } })
+      { slots: { settlement: 'X' }, audience: AUDIENCE_DM, dimensions: { severity: 'minor' },
+        facts: { ...CALM_FACTS_ADMIT_ALL, populationBand: 'middling' } })
       .map((v) => v.text));
     expect(minorReachable.has(catastrophic.text)).toBe(false);
     expect(minorReachable.size).toBeGreaterThanOrEqual(2);
@@ -922,14 +950,29 @@ describe('the demoted state dimension — the channel the kernel enforces', () =
     // at `severity: major` also collapses to one line, because the second `major` variant
     // there is the block's only `major + dm-only` line and the player cannot hear it. The
     // reader-facing number is 14. Both are pinned so neither audience can drift unseen.
-    expect(thin[AUDIENCE_DM]).toBeLessThanOrEqual(13);
-    expect(thin[AUDIENCE_PLAYER]).toBeLessThanOrEqual(14);
+    // 13 -> 26 (DM) and 14 -> 27 (player) at census-2b item 2 (db3ed88c1), measured on the
+    // leaves parent -> commit and unchanged to the tip: the DS-GEN ledger's presence and band
+    // declarations leave one admitted line in 13 more states under the calm admit-all double.
+    // The bill grew by a declared cause; the ceiling still only ratchets DOWN from here.
+    expect(thin[AUDIENCE_DM]).toBeLessThanOrEqual(26);
+    expect(thin[AUDIENCE_PLAYER]).toBeLessThanOrEqual(27);
     // No state may go SILENT: a value with zero eligible variants is a dead branch of the
     // corpus dressed as a town with nothing to say, and the ratchet above would not see it.
     const silent = DIMENSION_STATES.filter(({ pool, dims, dimension, value }) => otherAnswers(dims, dimension).some((others) => eligibleVariants(
       pool, { slots: bagFor(pool), audience: AUDIENCE_DM, dimensions: { ...others, [dimension]: value }, facts: CALM_FACTS_ADMIT_ALL },
     ).length === 0));
-    expect(silent).toEqual([]);
+    // The same seven states the T2 arm pins (census-2b item 2, db3ed88c1; 0 at its parent): under
+    // the calm admit-all double their every line excludes a presence or needs a population band,
+    // so the FACTS gate empties them, not the dimension. Named exactly, so a new silence reds.
+    expect(silent.map(({ id, key, dimension, value }) => `${id} :: ${key} :: ${dimension}=${value}`)).toEqual([
+      'DS-GEN-1 :: economic_disparity :: severity=minor',
+      'DS-GEN-1 :: economic_disparity :: walls=no walls',
+      'DS-GEN-1 :: occupation_legacy :: severity=minor',
+      'DS-GEN-1 :: occupation_legacy :: severity=major',
+      'DS-GEN-1 :: occupation_legacy :: severity=catastrophic',
+      'DS-GEN-3 :: defenseProfile.readiness.label: Undefended :: walls=walls',
+      'DS-GEN-3 :: defenseProfile.readiness.label: Undefended :: walls=no walls',
+    ]);
   });
 
   it('states no duration its pool key does not license — the channel with NO kernel', () => {
