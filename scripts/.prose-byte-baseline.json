@@ -55,38 +55,38 @@
   },
   "leaves": {
     "src/data/dossierStateProse/defense.generated.js": {
-      "raw": 156574,
-      "gzip": 23178,
+      "raw": 172793,
+      "gzip": 24602,
       "ceilingRaw": 488168,
       "ceilingGzip": 108482
     },
     "src/data/dossierStateProse/economy.generated.js": {
-      "raw": 127853,
-      "gzip": 20042,
+      "raw": 141754,
+      "gzip": 21311,
       "ceilingRaw": 393810,
       "ceilingGzip": 87513
     },
     "src/data/dossierStateProse/general.generated.js": {
-      "raw": 252226,
-      "gzip": 34765,
+      "raw": 271758,
+      "gzip": 36378,
       "ceilingRaw": 796761,
       "ceilingGzip": 177058
     },
     "src/data/dossierStateProse/power.generated.js": {
-      "raw": 110998,
-      "gzip": 16599,
+      "raw": 115715,
+      "gzip": 17079,
       "ceilingRaw": 357097,
       "ceilingGzip": 79355
     },
     "src/data/dossierStateProse/stressors.generated.js": {
-      "raw": 88961,
-      "gzip": 14520,
+      "raw": 93762,
+      "gzip": 15067,
       "ceilingRaw": 258858,
       "ceilingGzip": 57524
     },
     "src/data/dossierStateProse/warFaith.generated.js": {
-      "raw": 166003,
-      "gzip": 24378,
+      "raw": 176442,
+      "gzip": 25180,
       "ceilingRaw": 505306,
       "ceilingGzip": 112290
     },
@@ -227,6 +227,54 @@
       "toRaw": 127853,
       "gzipAfter": 20042,
       "reason": "+28 B: DS-ECO-9 BLOCKADED's wall-free twin (v4 `[ledger · no walls]`) re-worded so it no longer cites the road holder: \"The stores are sealed off from the road.\" -> \"The stores are sealed off, and the road brings nothing more to them.\" (the chair's ruling R-F2; the owner's veto class). Projected through `node scripts/generate-dossier-state-prose.mjs` by lane F; attributed by stage at f93c69938 (green at 5fbb339be)."
+    },
+    {
+      "car": "THE POOL CENSUS (census lanes 1b-5, the compose, F12), recorded at the rung-2 landing by LANDING-R2 seat B",
+      "leaf": "src/data/dossierStateProse/defense.generated.js",
+      "fromRaw": 156584,
+      "toRaw": 172793,
+      "gzipAfter": 24602,
+      "reason": "Chains from the last declared row (156,584): LANDING-8 banked a -10 B shrink (b9cd6d598, DS-DEF-9 re-wording) undeclared, as the idiom allows, so this row spans -10 then +16,219 B, by commit (leaf bytes parent -> commit): F12 unit 2 e19e3e4cf +3,818; census-5 unit 1 80d676864 +4,308; census-5b unit 1 a5ee3fb53 +21; census-5b unit 3 c00b30eb6 +657; census-5c unit 3 8b304b8d8 +188; census-5d unit 2b f260dbac6 +7,172; compose unit 8 b8d2c3569 +55 (= +16,219). census-1 unit 0 92ccf936f's +25 is the census lineage's twin of LANDING-1 door 1's +25 already in this row, net 0 through the merge. Projected through `npm run gen:dossier-prose` by each lane; `--check` exit 0 at the tip."
+    },
+    {
+      "car": "THE POOL CENSUS (census lanes 1b-5, the compose, F12), recorded at the rung-2 landing by LANDING-R2 seat B",
+      "leaf": "src/data/dossierStateProse/economy.generated.js",
+      "fromRaw": 127853,
+      "toRaw": 141754,
+      "gzipAfter": 21311,
+      "reason": "+13,901 B, by commit: F12 unit 2 e19e3e4cf +1,520; census-3b(2) 25f7dda41 +184; census-3c unit 4 DS-ECO e3295d168 +8,581; census-3c unit 4 DS-SUP 3a1bb7adc +175; census-3f unit 3 525084dfe +164; census-3g unit 2 b6caa5e1a +21; census-3g unit 3 (R-AO colour marks) b1aab0f21 +3,256 (= +13,901). Projected through `npm run gen:dossier-prose`; `--check` exit 0 at the tip."
+    },
+    {
+      "car": "THE POOL CENSUS (census lanes 1b-5, the compose, F12), recorded at the rung-2 landing by LANDING-R2 seat B",
+      "leaf": "src/data/dossierStateProse/general.generated.js",
+      "fromRaw": 252226,
+      "toRaw": 271758,
+      "gzipAfter": 36378,
+      "reason": "+19,532 B, by commit: census-2b item 2 DS-GEN db3ed88c1 +14,603; census-2b item 2 DS-HK eb2b16a84 +2,037; census-2b item 5 70d05b25b +657; census-5 unit 2 06b59812f +55; census-3c unit 4 DS-POP 586bedd7f +1,177; census-5c unit 2 6dd3f9766 +288; census-3g unit 3 b1aab0f21 +715 (= +19,532). Projected through `npm run gen:dossier-prose`; `--check` exit 0 at the tip."
+    },
+    {
+      "car": "THE POOL CENSUS (census lanes 1b-5, the compose, F12), recorded at the rung-2 landing by LANDING-R2 seat B",
+      "leaf": "src/data/dossierStateProse/power.generated.js",
+      "fromRaw": 110998,
+      "toRaw": 115715,
+      "gzipAfter": 17079,
+      "reason": "+4,717 B, by commit: F12 unit 2 e19e3e4cf +1,011; rung 2D unit 2 1d79e312a +25; census-5 unit 2 06b59812f +850; census-5d unit 2b f260dbac6 +2,828; census-5d unit 2b fix 152a4a06c +3 (= +4,717). Projected through `npm run gen:dossier-prose`; `--check` exit 0 at the tip."
+    },
+    {
+      "car": "THE POOL CENSUS (census lanes 1b-5, the compose, F12), recorded at the rung-2 landing by LANDING-R2 seat B",
+      "leaf": "src/data/dossierStateProse/stressors.generated.js",
+      "fromRaw": 88961,
+      "toRaw": 93762,
+      "gzipAfter": 15067,
+      "reason": "+4,801 B, by commit: census-2b item 2 DS-STR c37c27025 +1,740; census-2b item 2 DS-CND c85d7ec26 +2,172; census-2b item 5 70d05b25b +759; census-2c unit 2 f40e0f82c +130 (= +4,801). Projected through `npm run gen:dossier-prose`; `--check` exit 0 at the tip."
+    },
+    {
+      "car": "THE POOL CENSUS (census lanes 1b-5, the compose, F12), recorded at the rung-2 landing by LANDING-R2 seat B",
+      "leaf": "src/data/dossierStateProse/warFaith.generated.js",
+      "fromRaw": 166003,
+      "toRaw": 176442,
+      "gzipAfter": 25180,
+      "reason": "+10,439 B, by commit: census-5 unit 3 41f2c679a +1,070; census-5b unit 3 c00b30eb6 +1,825; census-5c unit 2 6dd3f9766 +2,424; census-5c unit 3 8b304b8d8 +433; census-5d unit 3 d5b80440b +400; census-5d unit 2a c24d7118e +3,527; compose unit 2 item 5 cd3b6b0e6 +705; compose unit 8 b8d2c3569 +55 (= +10,439). Projected through `npm run gen:dossier-prose`; `--check` exit 0 at the tip."
     }
   ]
 }
