@@ -18,6 +18,13 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-11-07 — RECORD 6, PEOPLE-LAND SHIM OUT, THROUGH THE SIGNED DOOR (ODQ §934.105, THE PEOPLE CAR’S LANDING;
+ *   record docs/shift-records/2026-11-07-people-land-shim-out.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   180 of 525 (thorp 12, hamlet 84, village 72, city 12) rows against the stage of 1adf403e4 (8dc527fd.., record 5b's post-state). THE CAUSE, ONE (first-parent
+ *   step 2981f23f6): the landing's step 1, PEOPLE-LAND SHIM OUT (2981f23f6): the shim deleted (M-2's end), the grouping's generator and the relink gone, the pre-law office path ranking the powers alone. ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree S6 (the tree of 2981f23f6 with the door paths carried from
+ *   the branch, the previous record's writes committed). 8dc527fd.. -> c7c11b0b..
+ *
  * 2026-11-07 — RECORD 5B, PEOPLE-5B EDIT, THROUGH THE SIGNED DOOR (ODQ §934.105, THE PEOPLE CAR’S LANDING;
  *   record docs/shift-records/2026-11-07-people-5b-edit.json; the cloud chair signs under the owner's delegation, vetoable).
  *   525 of 525 (thorp 84, hamlet 84, village 84, town 105, city 84, metropolis 84) rows against the stage of 3c66d320e (47e48e47.., record 5a's post-state). THE CAUSE, ONE (first-parent
