@@ -54,6 +54,11 @@
 /** `Object.freeze` is shallow, so a row's two count triples are frozen by name or not at all. */
 const freezeRow = (/** @type {GenerationTier1Row} */ row) => Object.freeze(Object.assign(row, { onRecord: Object.freeze(row.onRecord), producedOnRecord: Object.freeze(row.producedOnRecord) }));
 
+// ── RE-MEASURED 2026-11-07, the people car (PEOPLE-1 CAST, ODQ §934.105): the cast is the roster's faces, one
+// card per house on its own keyed fork, so three rows moved on the 63-row corpus — generatePopulation|relationships
+// keyMoves 63 -> 53 (the ties are drawn over a cast whose names move on their own forks), corruptionPass|npcs
+// stepDraws 38 -> 36 and keyMoves 19 -> 20 (the pass walks a cast of a different size). No key set changed; the
+// literal is the arm's own printed output, pasted whole.
 // ── RE-MEASURED 2026-10-01, the urban band (ODQ §934.86): the census literal below is the arm's own printed
 // output, pasted whole. Thirteen rows moved because the institution registry rebuild changed what
 // assembleInstitutions, the institution passes and the economy/population/corruption passes draw on the
@@ -149,8 +154,8 @@ export const GENERATION_TIER1 = Object.freeze(/** @type {GenerationTier1Row[]} *
   { step: 'powerEconomyReconcilePass', key: 'powerStructure', via: 'mutates', stepDraws: 0, keyMoves: 0, rows: 63, class: 'pure', onRecord: { absent: 0, same: 0, transformed: 63 }, onRecordClass: 'transformed', producedOnRecord: { absent: 0, same: 0, transformed: 63 }, producedOnRecordClass: 'transformed', recordPath: 'record.powerStructure' },
   { step: 'structuralValidationPass', key: 'structural', via: 'provides', stepDraws: 0, keyMoves: 0, rows: 63, class: 'pure', onRecord: { absent: 63, same: 0, transformed: 0 }, onRecordClass: 'absent', producedOnRecord: { absent: 63, same: 0, transformed: 0 }, producedOnRecordClass: 'absent', recordPath: null },
   { step: 'generatePopulation', key: 'npcs', via: 'provides', stepDraws: 63, keyMoves: 63, rows: 63, class: 'drawn', onRecord: { absent: 0, same: 0, transformed: 63 }, onRecordClass: 'transformed', producedOnRecord: { absent: 0, same: 0, transformed: 63 }, producedOnRecordClass: 'transformed', recordPath: 'record.npcs' },
-  { step: 'generatePopulation', key: 'relationships', via: 'provides', stepDraws: 63, keyMoves: 63, rows: 63, class: 'drawn', onRecord: { absent: 0, same: 63, transformed: 0 }, onRecordClass: 'same', producedOnRecord: { absent: 0, same: 63, transformed: 0 }, producedOnRecordClass: 'same', recordPath: 'record.relationships' },
-  { step: 'corruptionPass', key: 'npcs', via: 'mutates', stepDraws: 38, keyMoves: 19, rows: 63, class: 'drawn', onRecord: { absent: 0, same: 0, transformed: 63 }, onRecordClass: 'transformed', producedOnRecord: { absent: 0, same: 0, transformed: 63 }, producedOnRecordClass: 'transformed', recordPath: 'record.npcs' },
+  { step: 'generatePopulation', key: 'relationships', via: 'provides', stepDraws: 63, keyMoves: 53, rows: 63, class: 'drawn', onRecord: { absent: 0, same: 63, transformed: 0 }, onRecordClass: 'same', producedOnRecord: { absent: 0, same: 63, transformed: 0 }, producedOnRecordClass: 'same', recordPath: 'record.relationships' },
+  { step: 'corruptionPass', key: 'npcs', via: 'mutates', stepDraws: 36, keyMoves: 20, rows: 63, class: 'drawn', onRecord: { absent: 0, same: 0, transformed: 63 }, onRecordClass: 'transformed', producedOnRecord: { absent: 0, same: 0, transformed: 63 }, producedOnRecordClass: 'transformed', recordPath: 'record.npcs' },
   { step: 'generateNarratives', key: 'settlementReason', via: 'provides', stepDraws: 63, keyMoves: 0, rows: 63, class: 'pure', onRecord: { absent: 0, same: 63, transformed: 0 }, onRecordClass: 'same', producedOnRecord: { absent: 0, same: 63, transformed: 0 }, producedOnRecordClass: 'same', recordPath: 'record.settlementReason' },
   { step: 'generateNarratives', key: 'resourceAnalysis', via: 'provides', stepDraws: 63, keyMoves: 0, rows: 63, class: 'pure', onRecord: { absent: 0, same: 63, transformed: 0 }, onRecordClass: 'same', producedOnRecord: { absent: 0, same: 63, transformed: 0 }, producedOnRecordClass: 'same', recordPath: 'record.resourceAnalysis' },
   { step: 'generateNarratives', key: 'economicViability', via: 'provides', stepDraws: 63, keyMoves: 0, rows: 63, class: 'pure', onRecord: { absent: 0, same: 42, transformed: 21 }, onRecordClass: 'varies', producedOnRecord: { absent: 0, same: 42, transformed: 21 }, producedOnRecordClass: 'varies', recordPath: 'record.economicViability' },
@@ -189,8 +194,12 @@ export const GENERATION_TIER2 = Object.freeze(/** @type {GenerationTier2Row[]} *
   { cardShape: 'institution', outputKey: 'institutions[].name', forkId: 'assembleInstitutions', step: 'assembleInstitutions', key: 'institutions', module: 'src/generators/steps/assembleInstitutions.js', symbol: 'assembleInstitutions', origin: 'drawn' },
   { cardShape: 'institution', outputKey: 'institutions[].category', forkId: 'assembleInstitutions', step: 'assembleInstitutions', key: 'institutions', module: 'src/generators/steps/assembleInstitutions.js', symbol: 'assembleInstitutions', origin: 'drawn' },
   { cardShape: 'npc', outputKey: 'npcs[].name', forkId: 'generatePopulation', step: 'generatePopulation', key: 'npcs', module: 'src/generators/steps/generatePopulation.js', symbol: 'generatePopulation', origin: 'drawn' },
-  { cardShape: 'npc', outputKey: 'npcs[].role', forkId: 'generatePopulation', step: 'generatePopulation', key: 'npcs', module: 'src/generators/steps/generatePopulation.js', symbol: 'generatePopulation', origin: 'drawn' },
-  { cardShape: 'npc', outputKey: 'npcs[].status', forkId: 'generatePopulation', step: 'generatePopulation', key: 'npcs', module: 'src/generators/steps/generatePopulation.js', symbol: 'generatePopulation', origin: 'drawn' },
+  // RE-KEYED 2026-11-07 (the people car, PEOPLE-1 CAST): a card's ROLE is its house's (people/poolMap.js, the
+  // title → role map) and the v1 structural placeholder's STATUS is the appender's; neither moves under the
+  // population step's perturbed stream any more (measured 0/42 on the probe grid), so both are `computed`.
+  // The NAME still draws on the card's own keyed fork of this step's stream (42/42).
+  { cardShape: 'npc', outputKey: 'npcs[].role', forkId: 'generatePopulation', step: 'generatePopulation', key: 'npcs', module: 'src/generators/steps/generatePopulation.js', symbol: 'generatePopulation', origin: 'computed' },
+  { cardShape: 'npc', outputKey: 'npcs[].status', forkId: 'generatePopulation', step: 'generatePopulation', key: 'npcs', module: 'src/generators/steps/generatePopulation.js', symbol: 'generatePopulation', origin: 'computed' },
   { cardShape: 'faction', outputKey: 'powerStructure.factions[].faction', forkId: 'generatePower', step: 'generatePower', key: 'powerStructure', module: 'src/generators/steps/generatePower.js', symbol: 'generatePower', origin: 'computed' },
   { cardShape: 'faction', outputKey: 'powerStructure.factions[].category', forkId: 'generatePower', step: 'generatePower', key: 'powerStructure', module: 'src/generators/steps/generatePower.js', symbol: 'generatePower', origin: 'computed' },
   { cardShape: 'faction', outputKey: 'powerStructure.factions[].power', forkId: 'generatePower', step: 'generatePower', key: 'powerStructure', module: 'src/generators/steps/generatePower.js', symbol: 'generatePower', origin: 'computed' },

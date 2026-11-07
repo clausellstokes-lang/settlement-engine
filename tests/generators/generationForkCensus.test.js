@@ -192,7 +192,11 @@ const PICK_VARIANT_CALLS = 31;
 // FOOD-3, food diversity, traced at stage T3 in DOORS-4).
 // 2026-11-05 (LANDING-6, bisected by first-parent stage): 16 -> 17 X-46 car 1 (1264a8152) -> 15 X-46 car 3 (90dc22f18),
 // unmoved to the tip; the register's fnv1a32External moves with it (generationForkRegistry.js).
-const FNV_EXTERNAL_CALLS = 15;
+// RE-KEYED 2026-11-07 (the people car, PEOPLE-1 CAST): 15 -> 17. The external fnv1a32 callers on the probe row are
+// the tie prose (power/relationshipArchetypes.js) and the conflict lines (dossier/hookLines.js), one hash per tie
+// or conflict drawn; the cast is the roster's faces now (the probe town carries more cards than its named roster
+// did), so two more ties hash their prose. The cast's size is the named cause.
+const FNV_EXTERNAL_CALLS = 17;
 /** The fork law A1 pins: the mint wrapper's equivalence rests on this line and nothing else. */
 const FORK_LAW = 'fork: (label) => createPRNG(`${seed}::${label}`),';
 /** §6.4's off-corpus block: a wizard-reachable switch, the keys it moves, and 24 seeds. */
@@ -651,8 +655,10 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
       .filter((row) => row.origin !== (movedUnderHolder.get(row.outputKey) > 0 ? 'drawn' : 'computed'))
       .map((row) => `${row.outputKey}: declared ${row.origin}, moved ${movedUnderHolder.get(row.outputKey)}/${grid.length}`);
     expect(wrongOrigin, 'a declared origin disagrees with its holding-step perturbation').toEqual([]);
+    // RE-KEYED 2026-11-07 (the people car): 5 -> 7. The NPC's role and the placeholder's status no longer move
+    // under the population step's perturbed stream (a card's role is its house's), so they are `computed` too.
     expect(GENERATION_TIER2.filter((row) => row.origin === 'computed').length,
-      'the power structure consumes zero draws, and all ten rows stay editable anyway').toBe(5);
+      'the power structure consumes zero draws, the role and status are the house\'s, and all ten rows stay editable anyway').toBe(7);
 
     // ── THE ANCHORED NEGATIVE. `powerStructure.seats[].holder` is the path the version-2 design
     // joined on and it exists NOWHERE; `powerStructure.governingName` is the real seat and
