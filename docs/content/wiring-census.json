@@ -37,8 +37,8 @@
     "syntheticTableFields": 129,
     "tiers": {
       "MISSING": 32,
-      "THIN": 541,
-      "COVERED": 225,
+      "THIN": 542,
+      "COVERED": 224,
       "MISSING-AT-TIER": 45
     },
     "tierSilences": 352,
@@ -38986,7 +38986,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 2,
+      "grammars": 3,
       "predicate": [
         {
           "field": "war.occupation",
@@ -39636,7 +39636,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 1,
+      "grammars": 2,
       "predicate": [
         {
           "field": "covert",
@@ -40007,7 +40007,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 2,
+      "grammars": 3,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -40239,7 +40239,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 6,
-      "grammars": 5,
+      "grammars": 4,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -40300,7 +40300,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -48024,7 +48024,7 @@
         "DS-WAR-1 :: mobilization: COVERT"
       ],
       "variants": 3,
-      "grammars": 1,
+      "grammars": 2,
       "blocks": [
         "DS-WAR-1"
       ]
@@ -48873,7 +48873,7 @@
         "DS-WAR-1 :: statusLabel: Occupied"
       ],
       "variants": 3,
-      "grammars": 2,
+      "grammars": 3,
       "blocks": [
         "DS-WAR-1"
       ]
@@ -63391,7 +63391,7 @@
         "war.occupation"
       ],
       "readingFunction": "warStatusPoolKey",
-      "count": "3 variant(s) · 2 grammar(s) · slots {counterpart, settlement}"
+      "count": "3 variant(s) · 3 grammar(s) · slots {counterpart, settlement}"
     },
     {
       "tier": "COVERED",
@@ -63465,7 +63465,7 @@
         "covert"
       ],
       "readingFunction": "mobilizationPoolKey",
-      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "COVERED",
@@ -63507,7 +63507,7 @@
       "subject": "feasibility plausible",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 2 grammar(s) · slots {counterpart, settlement}"
+      "count": "3 variant(s) · 3 grammar(s) · slots {counterpart, settlement}"
     },
     {
       "tier": "THIN",
@@ -63539,15 +63539,15 @@
       "subject": "feasibility require_betrayal",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "6 variant(s) · 5 grammar(s) · slots {counterpart, settlement}"
+      "count": "6 variant(s) · 4 grammar(s) · slots {counterpart, settlement}"
     },
     {
-      "tier": "COVERED",
+      "tier": "THIN",
       "block": "DS-WAR-1",
       "subject": "feasibility require_magic",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 2 grammar(s) · slots {counterpart, settlement}"
+      "count": "3 variant(s) · 1 grammar(s) · slots {counterpart, settlement}"
     },
     {
       "tier": "COVERED",

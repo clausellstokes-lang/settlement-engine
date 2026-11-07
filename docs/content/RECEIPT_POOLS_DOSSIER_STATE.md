@@ -3786,13 +3786,13 @@ PEACE, not missing data.
 **`statusLabel: On campaign`**
 1. `[ledger · colour]` {settlement}'s army is in the field against {counterpart}, and everything the town does at home is done with that absence in it.
 2. `[street · gate]` The town is short of the people who would ordinarily be here, and the shortness is felt at the harvest and the gate before it is felt anywhere else.
-3. `[unfolding · colour]` What {settlement} wins from this campaign it will win somewhere else; what it is spending, it is spending here, continuously and in plain view.
-4. `[visitor · colour]` A stranger finds {settlement} quieter than a town this size should be, and finds the reason is arithmetic rather than mood.
+3. `[unfolding · colour]` Whatever {settlement} wins against {counterpart} it will win far away; what it pays, it pays at home, every day.
+4. `[visitor · colour]` You find {settlement} quieter than a town its size should be, because so many of its people are away with the army.
 
 **`statusLabel: Occupied`**
 1. `[street · market]` {settlement} is held by {counterpart}. The hall still sits, the market still opens, and neither of them decides anything that {counterpart} has an opinion about.
 2. `[ledger · colour]` What is decided at {settlement} is decided subject to the occupier; the town's institutions run, and run inside a boundary somebody else drew.
-3. `[visitor · colour]` A stranger at {settlement} deals with the town's own people and notices, eventually, whose soldiers are standing where the town's would be.
+3. `[visitor · colour]` You deal with {settlement}'s own people, and only slowly notice that {counterpart}'s troops stand where the town's would.
 
 **`statusLabel: At war` (no front at the walls, no army abroad)**
 1. `[ledger · colour]` {settlement} is at war with {counterpart} and nothing has yet come of it here. No army has marched and none has arrived, and the town is arranged for both.
@@ -3807,51 +3807,51 @@ PEACE, not missing data.
 4. `[unfolding · crisis: under_siege, occupied]` {settlement} came to this fighting rested, with nothing spent before it began; that reserve is the town's whole advantage, and the fighting now draws on it daily.
 
 **`warExhaustion: near peace`** {colour}
-1. `[ledger]` {settlement} carries a light mark from its fighting and is very nearly clear of it; what remains is a preference rather than a weakness.
+1. `[ledger]` {settlement}'s levy roll is nearly back to full strength; what is left of the war is a reluctance to fight again, not an inability.
 2. `[unfolding]` The town is close to being done with the war it fought, and the last of it is going out of the place slowly.
 3. `[threshold]` {settlement} is at the edge of being clear of its war; another quiet season closes it, and a single hard one would put the town back where it was.
 4. `[street]` The town talks about the fighting in the past tense now, with the occasional slip.
 
 **`warExhaustion: war-weary`** {colour}
 1. `[street]` {settlement} has had enough. The fighting has gone on past what the town believed it agreed to, and the agreement is being withdrawn quietly in a hundred small refusals.
-2. `[ledger]` Sustained fighting has worn {settlement} down to the point where the hall's appetite and the town's have parted; pressure to end it is now internal.
+2. `[ledger]` {settlement}'s levy roll has been called too often: the hall still wants the war and the town no longer does, and the pressure to end it now comes from inside.
 3. `[unfolding]` The town is being pushed toward suing for peace by its own weariness rather than by any defeat, and the pushing gets harder to resist each season.
 4. `[threshold]` {settlement} has reached the point where the next demand is the one that gets refused, and nobody in the hall can say in advance which demand that will be.
 
 **`warExhaustion: exhausted`** {colour}
-1. `[ledger]` {settlement} is spent. There is no further war in this town (not unwillingness, absence), and anything asked of it from here will not arrive.
+1. `[ledger]` {settlement}'s levy roll has no one left to call: there is no fight left in the town, and nothing more asked of it will come.
 2. `[street]` The town has nothing left to give the war and has stopped pretending it might find some.
 3. `[unfolding]` Whatever {settlement} agrees to next it will agree to because it is exhausted, and the terms will show it.
 
 **mobilization: climbing the ramp, still distant** {colour}
 1. `[ledger]` {settlement} is turning toward war and is not near it; the muster has begun and the economy has barely started shifting behind it.
 2. `[street]` The town has begun to prepare in the way towns prepare: quietly, and well ahead of anybody admitting what for.
-3. `[visitor]` A stranger at {settlement} notices the town buying things it does not ordinarily buy, and is told nothing about why.
+3. `[visitor]` You notice {settlement} buying things it does not usually buy, and nobody will say why.
 
 **mobilization: climbing, close to ready** {colour}
 1. `[ledger]` {settlement} is within a season of being able to march. What remains is the last of the provisioning, and the provisioning is nearly done.
 2. `[unfolding]` The town is very close to war-ready now, and nothing about the preparation looks reversible from inside it.
-3. `[street]` The town has stopped pretending at {settlement}; the preparations are visible, and the visibility is now part of the point.
+3. `[street]` {settlement} no longer hides its preparations; its people want them seen.
 
 **mobilization: fully ready** {colour}
 1. `[ledger]` {settlement} is mobilized. The town could march this season, and everything it is doing instead is a choice.
-2. `[street]` The soldiers are ready at {settlement} and are being kept waiting, and being kept waiting is its own kind of pressure.
+2. `[street]` {settlement}'s fighters are ready and kept waiting, and they grow restless.
 3. `[unfolding]` {settlement} is holding a war it has already paid for, and every season it holds it the paying continues without anything being gained.
 
 **mobilization: COVERT** *(every variant `dm-only`)* · **COMPOSITION FENCE (§0h V1-g):** the muster read; `DS-WAR-5`'s covert-*posture* cell is the disposition read. **One per page, never both.** {colour}
 1. `[ledger · dm-only]` {settlement} is preparing for war without saying so. The muster is being taken as something else, and the accounts have been arranged to agree.
 2. `[street · dm-only]` Nothing at {settlement} looks like a town going to war, which at this stage is the intended appearance.
-3. `[counterforce · dm-only]` {settlement} would be visibly arming by now if it intended to be seen, and the absence of any sign is the strongest sign there is.
+3. `[counterforce · dm-only]` {settlement} would be visibly arming by now if it meant to be seen, and there is no sign of it at all.
 
 **`occupation.pays` false (the occupation is a net drain on the holder)** {colour}
 1. `[ledger]` Holding {settlement} is costing {counterpart} more than {settlement} yields; the garrison here is an expense the occupier has not yet found a way to end.
 2. `[unfolding]` {counterpart} is bleeding into {settlement} rather than out of it, and every season of that makes the holding harder to justify at home.
-3. `[street]` The soldiers holding {settlement} are costing whoever sent them more than the town has ever produced, and the town is aware of the arithmetic.
+3. `[street]` The troops holding {settlement} cost {counterpart} more than the town has ever produced, and the townsfolk know it.
 
 **`occupation.pays` true** {colour}
-1. `[ledger]` {settlement} has begun to pay {counterpart} back for taking it; the town's yield now exceeds what the garrison costs, and the arrangement has become worth keeping.
+1. `[ledger]` {counterpart}'s tribute books now show {settlement} paying more than the troops holding it cost, and the occupation has become worth keeping.
 2. `[street]` What the town produces leaves it, and the leaving has become regular enough that the town budgets around it.
-3. `[unfolding]` What leaves {settlement} for {counterpart} has become regular enough to be planned around at both ends, which is what makes an occupation permanent.
+3. `[unfolding]` Goods leave {settlement} for {counterpart} on a regular schedule now, planned for at both ends, and the occupation is settling in for good.
 
 **`occupierHoldings.stretchedThin`** {colour}
 1. `[ledger]` {counterpart} holds more than it can garrison properly, and {settlement} is one of the places where the thinness shows.
@@ -3859,19 +3859,19 @@ PEACE, not missing data.
 3. `[street]` The garrison at {settlement} is smaller than it was and has not been reinforced, and the town has drawn the obvious conclusion about how {counterpart} is doing elsewhere.
 
 **`occupierHoldings.strengthened`** {colour}
-1. `[ledger]` What {counterpart} holds elsewhere is feeding what it holds here; the garrison at {settlement} is stronger for the occupier's other successes rather than in spite of them.
+1. `[ledger]` {counterpart}'s victories elsewhere are feeding the troops it keeps at {settlement}, and the town's own count of them grows each season.
 2. `[unfolding]` The occupier's grip on {settlement} is tightening because the occupier is winning elsewhere, and nothing local is causing it or can undo it.
 3. `[counterforce]` Nothing {settlement} has done has loosened {counterpart}'s hold, because the hold is not being decided here.
 
 **feasibility `plausible`** {colour}
-1. `[ledger]` An attempt on {settlement} by {counterpart} would be a real contest with the outcome genuinely open, which is the most dangerous position a town can be in.
+1. `[ledger]` If {counterpart} came for {settlement}, the fight could go either way: the two muster lists are close enough that an attack is likely.
 2. `[street]` The town believes it could be taken and believes it could hold, and lives with both beliefs at once.
-3. `[unfolding]` Neither {settlement} nor {counterpart} can be confident of the outcome, which is precisely the condition under which somebody eventually tries.
+3. `[unfolding]` Neither {settlement} nor {counterpart} can be sure who would win, so neither is ready to let the matter rest.
 
 **feasibility `auto_fail`** {colour}
-1. `[counterforce]` {counterpart} cannot take {settlement}. The disparity is not close, and everybody on both sides has done the arithmetic.
+1. `[counterforce]` {counterpart} cannot take {settlement}; the gap in strength is wide, and both sides know it.
 2. `[ledger]` An assault on {settlement} by {counterpart} would be hopeless, which is why no assault comes and why the hostility persists in other forms.
-3. `[street]` The town does not lose sleep over {counterpart}, and the not-losing-sleep is well founded.
+3. `[street]` People at {settlement} do not lose sleep over {counterpart}, and they have no need to.
 
 **feasibility `harassment`**
 1. `[counterforce · colour]` {counterpart} is too weak to take {settlement} and strong enough to make the approaches unpleasant, which is precisely what it does.
@@ -3881,21 +3881,21 @@ PEACE, not missing data.
 
 **feasibility `require_coalition`** {colour}
 1. `[counterforce]` {counterpart} could not threaten {settlement} alone and knows it; whether this town is in danger is a question about who else {counterpart} can bring.
-2. `[ledger]` {settlement} is safe from {counterpart} singly and not from {counterpart} in company, and the difference is the whole of the town's diplomacy.
+2. `[ledger]` {settlement} is safe from {counterpart} alone but not from {counterpart} with allies, so the town's letters and treaties are spent on keeping those allies away.
 3. `[unfolding]` What {settlement} watches is not {counterpart}'s army but {counterpart}'s company, and the company has been growing.
 
 **feasibility `require_betrayal`**
 1. `[counterforce · dm-only · colour]` {settlement} cannot be taken from outside by {counterpart}; it would have to fracture first, and the fracturing is what {counterpart} is actually working on.
-2. `[ledger · walls]` The danger to {settlement} from {counterpart} is internal by necessity. The walls are not the way in, and both parties understand which way is.
-3. `[street · dm-only · walls]` {counterpart} has stopped looking at {settlement}'s walls and started looking at its quarrels, and the change of attention is the whole threat.
-4. `[ledger · no walls]` The danger to {settlement} from {counterpart} is internal by necessity. Force is not the way in, and both parties understand which way is.
-5. `[street · dm-only · no walls]` {counterpart} has stopped looking at {settlement}'s defences and started looking at its quarrels, and the change of attention is the whole threat.
-6. `[visitor · colour]` A stranger looking for the way into {settlement} would not find it on the road; what {counterpart} is waiting on is a quarrel inside the town.
+2. `[ledger · walls]` {counterpart} cannot break {settlement}'s walls, so its hope lies in turning someone inside the town, and that threat shows in no count of troops.
+3. `[street · dm-only · walls]` {counterpart} has stopped studying {settlement}'s walls and started studying its quarrels.
+4. `[ledger · no walls]` {counterpart} cannot take {settlement} by force, so its hope lies in turning someone inside the town, and that threat shows in no count of troops.
+5. `[street · dm-only · no walls]` {counterpart} has stopped studying {settlement}'s defences and started studying its quarrels.
+6. `[visitor · colour]` The way into {settlement} is not by the road: {counterpart} is waiting for a quarrel inside the town.
 
 **feasibility `require_magic`** {colour}
 1. `[counterforce]` Nothing conventional {counterpart} could bring would take {settlement}; only decisive arcane force would open this town, and that is a different kind of undertaking entirely.
 2. `[ledger]` {settlement}'s defense against {counterpart} holds against everything except the arcane, which narrows the threat considerably and does not remove it.
-3. `[street]` The town's confidence at {settlement} stops precisely where the arcane begins, and it has no comfortable way of discussing that.
+3. `[street]` People at {settlement} are confident against {counterpart} in everything except magic, and nobody likes to talk about that.
 
 ---
 
