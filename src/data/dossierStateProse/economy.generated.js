@@ -2892,8 +2892,10 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no hunger"
           ],
-          "text": "A stranger will be fed generously and will not be thanked for noticing. There is more than enough and it is unremarkable to anyone local.",
-          "slots": [],
+          "text": "Visitors to {settlement} are fed generously, and nobody local thinks it worth remarking.",
+          "slots": [
+            "settlement"
+          ],
           "vid": 3
         },
         {
@@ -2934,7 +2936,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no hunger"
           ],
-          "text": "{settlement} is fed and only just comfortably. The margin is real and thin enough that a good season and a poor one feel different.",
+          "text": "{settlement} is fed, but only just. A poor harvest is felt at every table; a good one means a little put by.",
           "slots": [
             "settlement"
           ],
@@ -2967,8 +2969,10 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "crisis: any"
           ],
-          "text": "The food counts come up short by a little, and the little has to be found somewhere every season.",
-          "slots": [],
+          "text": "{settlement} grows a little less food than it needs, and every season the difference has to be bought or done without.",
+          "slots": [
+            "settlement"
+          ],
           "vid": 1
         },
         {
@@ -2976,8 +2980,10 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "crisis: any"
           ],
-          "text": "There is enough, mostly. People here have started noticing the word \"mostly\".",
-          "slots": [],
+          "text": "There is enough food in {settlement}, mostly. Portions have got smaller, and people have noticed.",
+          "slots": [
+            "settlement"
+          ],
           "vid": 2
         },
         {
@@ -3050,7 +3056,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "DEFICIT": [
         {
           "angle": "ledger",
-          "text": "{settlement} cannot feed itself and does not come close. The shortfall is large, standing, and covered incompletely.",
+          "text": "{settlement} grows far less food than it needs, and not enough comes in to make up the rest.",
           "slots": [
             "settlement"
           ],
@@ -3072,7 +3078,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "ACTIVE FAMINE": [
         {
           "angle": "ledger",
-          "text": "There is not enough food in {settlement} and no arrangement is bringing enough. The counts have stopped being a margin and started being a total.",
+          "text": "There is not enough food in {settlement} and nothing is bringing enough in. People are going hungry now.",
           "slots": [
             "settlement"
           ],
@@ -3108,8 +3114,10 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "institution: granary"
           ],
-          "text": "Nothing is coming in. The granary is the whole of the argument now and everybody is doing the same arithmetic.",
-          "slots": [],
+          "text": "Nothing is coming in. Everyone in {settlement} talks about the granary and how many weeks it holds.",
+          "slots": [
+            "settlement"
+          ],
           "vid": 2
         },
         {

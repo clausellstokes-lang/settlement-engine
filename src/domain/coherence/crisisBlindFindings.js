@@ -67,7 +67,8 @@ const CLAIMS = Object.freeze([
   // hunger: famine, under siege; any crisis on a deficit food band (crisisFacts.js :: familyActiveIn)
   { claim: 'feeds itself with a margin', re: /\bfeeds itself with a small margin\b/, family: 'hunger' },
   { claim: 'food is not a subject', re: /\bIt is not a subject anyone raises unprompted\b/, family: 'hunger' },
-  { claim: 'fed, comfortably', re: /\bfed and only just comfortably\b/, family: 'hunger' },
+  // W1 ECO (2026-11-07): DS-ECO-9 SECURE v3 reworded under the owner's style law; the claim kept.
+  { claim: 'fed, comfortably', re: /\bis fed, but only just\b/, family: 'hunger' },
   { claim: 'the road staying open', re: /\bNothing about the arrangement is failing; everything about it rests on the road staying open\b/, family: 'hunger' },
   { claim: 'nobody without bread', re: /\bNobody is going without bread\b/, family: 'hunger' },
   { claim: 'nobody talks about bread', re: /\bNobody here talks about the price of bread\b/, family: 'hunger' },

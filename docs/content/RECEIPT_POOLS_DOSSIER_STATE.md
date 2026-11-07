@@ -1287,19 +1287,19 @@ sentence in two voices. **No named deaths.**
 **SURPLUS**
 1. `[ledger · crisis: any]` {settlement} raises well past what it eats. The excess is stored against a bad season and, in a good stretch, sold.
 2. `[street · grain · no hunger]` Food is the least of it here. The fields have been generous and the stores can take a failure without anyone going short.
-3. `[visitor · no hunger]` A stranger will be fed generously and will not be thanked for noticing. There is more than enough and it is unremarkable to anyone local.
+3. `[visitor · no hunger]` Visitors to {settlement} are fed generously, and nobody local thinks it worth remarking.
 4. `[ledger · hunger]` {settlement} raised more than it ate, and what it put by is what the hunger is being met from now.
 
 **SECURE**
 1. `[ledger · no hunger]` {settlement} feeds itself with a small margin. The counts come out ahead by a little, every season, without much drama.
 2. `[street · no hunger]` The town eats. It is not a subject anyone raises unprompted.
-3. `[threshold · no hunger]` {settlement} is fed and only just comfortably. The margin is real and thin enough that a good season and a poor one feel different.
+3. `[threshold · no hunger]` {settlement} is fed, but only just. A poor harvest is felt at every table; a good one means a little put by.
 4. `[street · hunger]` The town ate well enough until the hunger came, and the margin it had is the first thing the hunger has spent.
 5. `[ledger · hunger]` {settlement}'s counts came out ahead before the hunger; they do not now, and nobody at {settlement} calls the town fed.
 
 **PRESSURED**
-1. `[ledger · crisis: any]` The food counts come up short by a little, and the little has to be found somewhere every season.
-2. `[street · crisis: any]` There is enough, mostly. People here have started noticing the word "mostly".
+1. `[ledger · crisis: any]` {settlement} grows a little less food than it needs, and every season the difference has to be bought or done without.
+2. `[street · crisis: any]` There is enough food in {settlement}, mostly. Portions have got smaller, and people have noticed.
 3. `[threshold · grain · no hunger]` {settlement} is not hungry and has no cushion. A shock to the fields or the road would be felt inside a season.
 4. `[ledger · hunger]` The food counts were short by a little before the hunger. Under it the shortfall comes out of the stores, and the stores are being drawn down.
 
@@ -1310,18 +1310,18 @@ sentence in two voices. **No named deaths.**
 4. `[ledger · hunger]` A substantial part of what {settlement} eats is bought, and under the hunger the bought part comes short. The stores cover the gap and are drawn down to do it.
 
 **DEFICIT**
-1. `[ledger]` {settlement} cannot feed itself and does not come close. The shortfall is large, standing, and covered incompletely.
+1. `[ledger]` {settlement} grows far less food than it needs, and not enough comes in to make up the rest.
 2. `[street]` There is not enough here and there has not been for a while. What comes in helps and does not close the gap.
 3. `[unfolding]` What the town raises falls far short of what it needs, and the difference is being taken out of the stores rather than made up from anywhere.
 
 **ACTIVE FAMINE**
-1. `[ledger]` There is not enough food in {settlement} and no arrangement is bringing enough. The counts have stopped being a margin and started being a total.
+1. `[ledger]` There is not enough food in {settlement} and nothing is bringing enough in. People are going hungry now.
 2. `[street]` The town is hungry. Not short, not pressed: hungry, and the ordinary answers have already been tried.
 3. `[visitor]` A stranger is not fed here now. Whatever {settlement} has left is not being offered to anyone who does not belong to it.
 
 **BLOCKADED** *(provenance-bearing — causal clause licensed)*
 1. `[ledger · walls]` The stores are sealed off from the road. What is inside the walls is what the town has, and no count is being added to it.
-2. `[street · institution: granary]` Nothing is coming in. The granary is the whole of the argument now and everybody is doing the same arithmetic.
+2. `[street · institution: granary]` Nothing is coming in. Everyone in {settlement} talks about the granary and how many weeks it holds.
 3. `[unfolding · grain]` {settlement} is cut off from its supply and eating down what it holds. The stores are answering the siege in place of the fields.
 4. `[ledger · no walls]` The stores are sealed off, and the road brings nothing more to them. What is already in the town is what the town has, and no count is being added to it.
 
