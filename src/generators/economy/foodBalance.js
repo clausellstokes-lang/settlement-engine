@@ -86,7 +86,7 @@ const FAILED_SOURCE_WORDS = Object.freeze({ grain: 'grain harvest', livestock: '
  * the situation sentence, the economy line's surplus words, the Foundations food row, and —
  * through the field names below — the Defense stores row (`storageMonths`).
  * Pure: a function of its numbers only.
- * @param {{ dailyNeed: number, dailyProduction: number, importCoverage?: number, magicOffset?: number,
+ * @param {{ dailyNeed: number, dailyProduction: number, importCoverage?: number, normalImportPct?: number, magicOffset?: number,
  *   deficitPct: number, surplusPct: number, stressFamine: boolean, storageMonths: number, hasGranary: boolean,
  *   foodSources?: Array<'grain'|'livestock'|'fish'|'mill'|'game'>, failedSource?: 'grain'|'livestock'|'fish'|'mill'|'game'|null,
  *   famineCutPct?: number, foodwaysLine?: string }} input
@@ -98,7 +98,9 @@ export function deriveFoodRecord(input) {
   const pctOfNeed = (lb) => (need > 0 ? Math.round((Math.max(0, Number(lb) || 0) / need) * 100) : 0);
   return {
     grownPct: pctOfNeed(input.dailyProduction),
-    normalImportPct: pctOfNeed(input.importCoverage),
+    // ONE IMPORT SHARE (WIRING-W0 cause 4a, R-W7 c): the writer's `foodSecurity.importPct`, read; a direct
+    // caller without it gets the same share of the same pounds.
+    normalImportPct: Number.isFinite(input.normalImportPct) ? Number(input.normalImportPct) : pctOfNeed(input.importCoverage),
     magicPct: pctOfNeed(input.magicOffset),
     gapPct: Math.round(input.deficitPct),
     surplusPct: Math.round(input.surplusPct),

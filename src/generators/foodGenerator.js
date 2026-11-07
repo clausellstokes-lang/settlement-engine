@@ -219,8 +219,9 @@ export function generateFoodSecurity(tier, institutions, config) {
     port: 0.58,
   }[route] ?? 0;
   const tierImportNeed = hinterlandShareOf(tier); // the hinterland share, one table (FOOD-2)
+  // The advance loop's import dial (foodLedger.importDependency: what the trade channel can carry when the
+  // world pulse runs), never a share a sentence prints: the ONE import share is `importPct` below (WIRING-W0).
   const importDependency = Math.min(importCapacity, tierImportNeed + (hasMarket ? 0.04 : 0));
-  const importPct        = Math.round(importDependency * 100);
 
   // ── Magic food supplement ─────────────────────────────────────────────────
   // Tier-scaled: negligible at thorp/hamlet, meaningful at town+, significant at metro
@@ -426,6 +427,13 @@ export function generateFoodSecurity(tier, institutions, config) {
                   : magicSupplement > 0 ? 'Trace magical food contribution'
                   : null;
 
+  // ⛔ ONE IMPORT SHARE (WIRING-W0 cause 4a, the chair's R-W7 (c), 2026-11-07). `importPct` is the writer: the
+  // share of the PUBLISHED need that the PUBLISHED ordinary supply carries (the hinterland's carts and the trade
+  // channel, `importCoverage`), the same pounds the food record's grown and magic shares are of; the record's
+  // `normalImportPct` reads it. It was `importDependency` x 100, a route-capacity figure that disagreed with the
+  // record's share on 415 of the golden 525 (a thorp at 0% beside its record's 7%; a town 20% "imported" while
+  // growing a surplus).
+  const importPct = Math.round(dailyNeed) > 0 ? Math.round(Math.max(0, importCoverage) / Math.round(dailyNeed) * 100) : 0;
   const importNote = importPct >= 40 ? `${importPct}% import-dependent: trade disruption = immediate crisis`
                    : importPct >= 20 ? `${importPct}% imported: meaningful external dependency`
                    : importPct >= 5  ? `${importPct}% supplemented by imports`
@@ -434,7 +442,7 @@ export function generateFoodSecurity(tier, institutions, config) {
   // ── THE FOOD RECORD (FOOD-1): derived once, here, from the numbers just published ──
   const foodRecord = deriveFoodRecord({
     dailyNeed: Math.round(dailyNeed), dailyProduction: Math.round(dailyProduction),
-    importCoverage, magicOffset, deficitPct, surplusPct, stressFamine, storageMonths,
+    importCoverage, normalImportPct: importPct, magicOffset, deficitPct, surplusPct, stressFamine, storageMonths,
     hasGranary: hasAnyGranary,
     foodSources,
     failedSource,
