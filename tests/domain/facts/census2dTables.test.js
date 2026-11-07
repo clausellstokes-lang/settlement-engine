@@ -102,26 +102,35 @@ const TABLES = [
   ['CULTURE_ARCHITECTURAL_DETAILS', CULTURE_PROFILES],
 ];
 
-describe.each(TABLES)('%s carries the ledger\'s declarations', (name, root) => {
-  const rows = holdsLedger(name, root);
+// LANDING-R2 seat E: the three tables run as ONE plain suite whose tests read the table list in their
+// bodies (a `describe.each` hands its callback a parameter, which the lighting census measured as a
+// latent closure costing zero estate files: SUITE_CONTEXT_PARAM). Every finding is prefixed by its table.
+describe('STRESS_DESCS, CULTURE_PROFILES_DAILY and CULTURE_ARCHITECTURAL_DETAILS carry the ledger\'s declarations', () => {
+  const ROWS = TABLES.map(([name, root]) => [name, holdsLedger(name, root)]);
   it('every ledger line is at its path, verbatim', () => {
-    const missing = rows.filter((r) => r.node == null).map((r) => r.line.lineId);
-    expect(missing).toEqual([]);
-    const drift = rows.filter((r) => { const t = textOf(r.node); return (typeof t === 'function' ? t('{name}') : t) !== r.line.text; }).map((r) => r.line.lineId);
-    expect(drift).toEqual([]);
+    for (const [name, rows] of ROWS) {
+      const missing = rows.filter((r) => r.node == null).map((r) => r.line.lineId);
+      expect(missing, name).toEqual([]);
+      const drift = rows.filter((r) => { const t = textOf(r.node); return (typeof t === 'function' ? t('{name}') : t) !== r.line.text; }).map((r) => r.line.lineId);
+      expect(drift, name).toEqual([]);
+    }
   });
   it('every row declares what the ledger says (R-B1; scoped calm is silence)', () => {
-    const wrong = rows.filter((r) => {
-      const want = expectedDeclaration(r.pool, r.line);
-      const have = declarationOf(r.node);
-      return JSON.stringify([have.needs, have.excludes, have.crisis]) !== JSON.stringify([want.needs, want.excludes, want.crisis]);
-    }).map((r) => `${r.line.lineId}: ${JSON.stringify(declarationOf(r.node))} ≠ ${JSON.stringify(expectedDeclaration(r.pool, r.line))}`);
-    expect(wrong).toEqual([]);
+    for (const [name, rows] of ROWS) {
+      const wrong = rows.filter((r) => {
+        const want = expectedDeclaration(r.pool, r.line);
+        const have = declarationOf(r.node);
+        return JSON.stringify([have.needs, have.excludes, have.crisis]) !== JSON.stringify([want.needs, want.excludes, want.crisis]);
+      }).map((r) => `${r.line.lineId}: ${JSON.stringify(declarationOf(r.node))} ≠ ${JSON.stringify(expectedDeclaration(r.pool, r.line))}`);
+      expect(wrong, name).toEqual([]);
+    }
   });
   it('every atom written has a home (R-E)', () => {
-    for (const r of rows) {
-      const d = declarationOf(r.node);
-      for (const a of [...d.needs, ...d.excludes]) expect(() => assertDeclarable(a)).not.toThrow();
+    for (const [name, rows] of ROWS) {
+      for (const r of rows) {
+        const d = declarationOf(r.node);
+        for (const a of [...d.needs, ...d.excludes]) expect(() => assertDeclarable(a), `${name} ${r.line.lineId}: ${a}`).not.toThrow();
+      }
     }
   });
 });
@@ -250,16 +259,19 @@ function siblingArm(name, siblings, root) {
   return { wrong, declaring, sets: Object.keys(siblings).length };
 }
 
-describe.each([
-  ['STRESS_TYPE_MAP', STRESS_TYPE_SIBLINGS, STRESS_TYPE_MAP, 4],
-  ['STRESSOR_SPINE_PHRASES', STRESSOR_SPINE_SIBLINGS, STRESSOR_SPINE_PHRASES, 2],
-  ['CONDITION_ARCHETYPE_TEMPLATES', CONDITION_ARCHETYPE_SIBLINGS, CONDITION_ARCHETYPE_TEMPLATES, 6],
-  ['QUICK_GUIDE_CLAUSES', QUICK_GUIDE_SIBLINGS, null, 9], // CENSUS-2g unit 7 (R-AY): the Slavic scope's `river` dropped, 7 → 6; RUNG-2 LANDING phase B: the inland Norse and Slavic forms declare `excludes: navigable`, 6 → 8; phase C unit 4: the Greek inland form aligned, 8 → 9
-])('%s: the declared sibling sets stand beside the table', (name, siblings, root, n) => {
+// LANDING-R2 seat E: the four sibling tables read inside one plain test (no `describe.each` parameter).
+describe('the declared sibling sets stand beside their tables', () => {
   it('every declaring ledger line has its set, exactly; nothing else is declared', () => {
-    const r = siblingArm(name, siblings, root);
-    expect(r.wrong).toEqual([]);
-    expect([r.declaring, r.sets]).toEqual([n, n]);
+    for (const [name, siblings, root, n] of [
+      ['STRESS_TYPE_MAP', STRESS_TYPE_SIBLINGS, STRESS_TYPE_MAP, 4],
+      ['STRESSOR_SPINE_PHRASES', STRESSOR_SPINE_SIBLINGS, STRESSOR_SPINE_PHRASES, 2],
+      ['CONDITION_ARCHETYPE_TEMPLATES', CONDITION_ARCHETYPE_SIBLINGS, CONDITION_ARCHETYPE_TEMPLATES, 6],
+      ['QUICK_GUIDE_CLAUSES', QUICK_GUIDE_SIBLINGS, null, 9], // CENSUS-2g unit 7 (R-AY): the Slavic scope's `river` dropped, 7 → 6; RUNG-2 LANDING phase B: the inland Norse and Slavic forms declare `excludes: navigable`, 6 → 8; phase C unit 4: the Greek inland form aligned, 8 → 9
+    ]) {
+      const r = siblingArm(name, siblings, root);
+      expect(r.wrong, name).toEqual([]);
+      expect([r.declaring, r.sets], name).toEqual([n, n]);
+    }
   });
 });
 
