@@ -61,8 +61,8 @@
       "ceilingGzip": 108482
     },
     "src/data/dossierStateProse/economy.generated.js": {
-      "raw": 165577,
-      "gzip": 24516,
+      "raw": 165587,
+      "gzip": 24488,
       "ceilingRaw": 393810,
       "ceilingGzip": 87513
     },

@@ -1515,7 +1515,7 @@ note that carries it on the six wired surfaces.
 
 **POSTURE: `none`**
 1. `[ledger]` {settlement} sells nothing outward. What the town makes, the town uses, and the accounts have no export column at all.
-2. `[visitor]` Nothing leaves here for trade. A stranger looking to buy in quantity has come to the wrong town.
+2. `[visitor]` Nothing leaves {settlement} for trade. A merchant who came to buy in quantity has come to the wrong place.
 3. `[street]` There is no trade out. Whatever surplus there is stays, and is eaten or worn here.
 
 **POSTURE: `limited`**
@@ -1526,7 +1526,7 @@ note that carries it on the six wired surfaces.
 **POSTURE: `vulnerable`** *(structural only: the approach is unreliable by its nature)*
 1. `[ledger]` {settlement} has goods to sell and no dependable way to move them. The exports are real and the road they leave by is not.
 2. `[visitor]` What the town makes has to get out over the {access}, and the {access} is not the kind of road a trader counts on.
-3. `[threshold]` The trade exists at the sufferance of the approaches. Nothing is wrong with the goods; everything is uncertain about the going.
+3. `[threshold]` {settlement} has goods to sell, but the way out is unreliable, and a trader never knows whether a load will get through.
 
 **POSTURE: `entrepot`**
 1. `[ledger]` {settlement} sells on what it never made. The export column is full of goods that entered the town as imports the same season.
@@ -1539,14 +1539,14 @@ note that carries it on the six wired surfaces.
 3. `[threshold]` The outward trade does not cover the inward. It works while there is something to pay with.
 
 **POSTURE: `established`**
-1. `[ledger · no hunger]` {settlement} sells several things outward and depends on none of them alone. The export column is broad enough to lose a line without losing the trade.
+1. `[ledger · no hunger]` {settlement} sends out {good} and several other goods besides; if one trade fails, the others still go.
 2. `[visitor · colour]` The yards here are full of goods bound out and no two of them are the same. This is a town that sells.
 3. `[street · colour]` There is always something going out. If one trade is quiet, another is not.
 
 **SCARCITY: `shortage`**
-1. `[ledger · market]` The stores of {good} are well under what the market keeps, and the reckoning has climbed accordingly.
-2. `[street · colour]` There is little {good} to be had here, and it costs what little things cost.
-3. `[visitor · colour]` A stranger wanting {good} in {settlement} will find it and will pay for the finding.
+1. `[ledger · market]` {good} is scarce in {settlement} and its price has risen.
+2. `[street · colour]` There is little {good} to be had in {settlement}, and what there is costs dear.
+3. `[visitor · colour]` {good} can still be found in {settlement}, at a price.
 
 **SCARCITY: `adequate`**
 1. `[ledger · colour]` {good} sits at its accustomed level in the stores, and its price sits with it.
@@ -1554,14 +1554,14 @@ note that carries it on the six wired surfaces.
 3. `[visitor · market]` The market holds {good} in the ordinary quantity at the ordinary price.
 
 **SCARCITY: `surplus`**
-1. `[ledger · colour]` {settlement} holds more {good} than it keeps room for, and the reckoning has come down under the weight of it.
+1. `[ledger · colour]` {settlement} has more {good} than it can store, and the price has fallen.
 2. `[street · market]` There is {good} everywhere in this market, and it is going cheap because there is {good} everywhere.
-3. `[visitor · colour]` A stranger stocking {good} does well here. The town has more than it can use.
+3. `[visitor · colour]` {good} is cheap in {settlement}; the town has more than it can use.
 
 **THE FRESHNESS CAVEAT: for any surface printing a derived tally**
-1. `[ledger]` The tallies below are the last survey's. They describe what {settlement} was judged to hold and may not carry what has happened since.
-2. `[unfolding]` These counts stand as the town's own last reckoning of itself, and a later change may not be in them yet.
-3. `[visitor]` What is written here was true at the survey. Nobody has recounted it.
+1. `[ledger]` The figures below for {settlement} were taken some time ago and may not show what has happened since.
+2. `[unfolding]` These counts are {settlement}'s last reckoning, and a later change may not show in them yet.
+3. `[visitor]` What is written here was true when it was written. Nobody has counted again since.
 
 ---
 

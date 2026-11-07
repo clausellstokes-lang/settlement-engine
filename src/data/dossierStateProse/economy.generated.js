@@ -3977,8 +3977,10 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "Nothing leaves here for trade. A stranger looking to buy in quantity has come to the wrong town.",
-          "slots": [],
+          "text": "Nothing leaves {settlement} for trade. A merchant who came to buy in quantity has come to the wrong place.",
+          "slots": [
+            "settlement"
+          ],
           "vid": 2
         },
         {
@@ -4032,8 +4034,10 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "threshold",
-          "text": "The trade exists at the sufferance of the approaches. Nothing is wrong with the goods; everything is uncertain about the going.",
-          "slots": [],
+          "text": "{settlement} has goods to sell, but the way out is unreliable, and a trader never knows whether a load will get through.",
+          "slots": [
+            "settlement"
+          ],
           "vid": 3
         }
       ],
@@ -4087,9 +4091,10 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no hunger"
           ],
-          "text": "{settlement} sells several things outward and depends on none of them alone. The export column is broad enough to lose a line without losing the trade.",
+          "text": "{settlement} sends out {good} and several other goods besides; if one trade fails, the others still go.",
           "slots": [
-            "settlement"
+            "settlement",
+            "good"
           ],
           "vid": 1
         },
@@ -4118,9 +4123,10 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "market"
           ],
-          "text": "The stores of {good} are well under what the market keeps, and the reckoning has climbed accordingly.",
+          "text": "{good} is scarce in {settlement} and its price has risen.",
           "slots": [
-            "good"
+            "good",
+            "settlement"
           ],
           "vid": 1
         },
@@ -4129,9 +4135,10 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "There is little {good} to be had here, and it costs what little things cost.",
+          "text": "There is little {good} to be had in {settlement}, and what there is costs dear.",
           "slots": [
-            "good"
+            "good",
+            "settlement"
           ],
           "vid": 2
         },
@@ -4140,7 +4147,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "A stranger wanting {good} in {settlement} will find it and will pay for the finding.",
+          "text": "{good} can still be found in {settlement}, at a price.",
           "slots": [
             "good",
             "settlement"
@@ -4189,7 +4196,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "{settlement} holds more {good} than it keeps room for, and the reckoning has come down under the weight of it.",
+          "text": "{settlement} has more {good} than it can store, and the price has fallen.",
           "slots": [
             "settlement",
             "good"
@@ -4212,9 +4219,10 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "A stranger stocking {good} does well here. The town has more than it can use.",
+          "text": "{good} is cheap in {settlement}; the town has more than it can use.",
           "slots": [
-            "good"
+            "good",
+            "settlement"
           ],
           "vid": 3
         }
@@ -4222,7 +4230,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "THE FRESHNESS CAVEAT: for any surface printing a derived tally": [
         {
           "angle": "ledger",
-          "text": "The tallies below are the last survey's. They describe what {settlement} was judged to hold and may not carry what has happened since.",
+          "text": "The figures below for {settlement} were taken some time ago and may not show what has happened since.",
           "slots": [
             "settlement"
           ],
@@ -4230,13 +4238,15 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "These counts stand as the town's own last reckoning of itself, and a later change may not be in them yet.",
-          "slots": [],
+          "text": "These counts are {settlement}'s last reckoning, and a later change may not show in them yet.",
+          "slots": [
+            "settlement"
+          ],
           "vid": 2
         },
         {
           "angle": "visitor",
-          "text": "What is written here was true at the survey. Nobody has recounted it.",
+          "text": "What is written here was true when it was written. Nobody has counted again since.",
           "slots": [],
           "vid": 3
         }

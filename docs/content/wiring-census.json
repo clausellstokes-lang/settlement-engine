@@ -37,8 +37,8 @@
     "syntheticTableFields": 100,
     "tiers": {
       "MISSING": 35,
-      "THIN": 502,
-      "COVERED": 233,
+      "THIN": 501,
+      "COVERED": 234,
       "MISSING-AT-TIER": 45
     },
     "tierSilences": 352,
@@ -12744,12 +12744,13 @@
         "settlement"
       ],
       "slotsNamed": [
+        "good",
         "settlement"
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 1,
+      "grammars": 2,
       "predicate": [
         {
           "field": "readings.exportPosture.status",
@@ -12824,7 +12825,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 3,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -46424,7 +46425,7 @@
         "DS-ECO-10 :: POSTURE: established"
       ],
       "variants": 18,
-      "grammars": 8,
+      "grammars": 9,
       "blocks": [
         "DS-ECO-10"
       ]
@@ -57329,14 +57330,14 @@
       "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
-      "tier": "THIN",
+      "tier": "COVERED",
       "block": "DS-ECO-10",
       "subject": "POSTURE: established",
       "fields": [
         "readings.exportPosture.status"
       ],
       "readingFunction": "exportPosturePoolKey",
-      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 2 grammar(s) · slots {good, settlement}"
     },
     {
       "tier": "COVERED",
@@ -57344,7 +57345,7 @@
       "subject": "SCARCITY: shortage",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 3 grammar(s) · slots {good, settlement}"
+      "count": "3 variant(s) · 2 grammar(s) · slots {good, settlement}"
     },
     {
       "tier": "COVERED",
