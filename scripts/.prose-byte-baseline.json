@@ -55,8 +55,8 @@
   },
   "leaves": {
     "src/data/dossierStateProse/defense.generated.js": {
-      "raw": 197079,
-      "gzip": 27733,
+      "raw": 234278,
+      "gzip": 32212,
       "ceilingRaw": 488168,
       "ceilingGzip": 108482
     },
@@ -371,6 +371,14 @@
       "toRaw": 197079,
       "gzipAfter": 27733,
       "reason": "+5325 B raw (gzip level 9: 27,014 -> 27,733), one commit: DS-DEF-2 gains four clause pools (CHAIN: defence supplied / defence short, four lines each; CHAIN: food trades working / failing, three each), said beside the Invasion & War and Economic Survival rows where defenseProfile.chainModifiers moved the score. Projected through `node scripts/generate-dossier-state-prose.mjs`; `--check` exit 0."
+    },
+    {
+      "car": "W2 DEF third seat (2026-11-07; ODQ §934.105, STYLE-RULINGS §1a): DS-DEF-3 and DS-DEF-8 — the stress type in the pool key; their style rows; the owner's style law",
+      "leaf": "src/data/dossierStateProse/defense.generated.js",
+      "fromRaw": 197079,
+      "toRaw": 234278,
+      "gzipAfter": 32212,
+      "reason": "+37199 B raw (gzip level 9: 27,733 -> 32,212), one commit: DS-DEF-3 gains seventeen COMPOUND condition pools and DS-DEF-8 sixteen per-type override pools (three lines each), and both blocks' style rows are rewritten (DS-DEF-3 rows 27-30 and 158-170; DS-DEF-8 rows 49-55, 233, 234). Projected through `node scripts/generate-dossier-state-prose.mjs`; `--check` exit 0."
     }
   ],
   "ceilingTransfersNewLeaves": [

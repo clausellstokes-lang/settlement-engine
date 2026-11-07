@@ -205,8 +205,8 @@ describe('GUARD THE GUARD — the inputs this file judges are the real ones', ()
     // census-2b item 5 70d05b25b +4, census-5 unit 2 06b59812f +1, census-3c unit 4 e3295d168 +10,
     // census-5b unit 3 c00b30eb6 +4. 2342 -> 2343 at LANDING-R2 helper G (the chair's §934.105 ruling (1): DS-GEN-17 PROVISIONED v3, the hospital-only line) +1.
     // 2343 -> 2344 at LANDING-R2 helper G2 (the chair's 06:5x DS-CND-1 boom line (ODQ §934.105, ruling (2)): ARCHETYPE: boom v4 `[street · crisis: any]`) +1.
-    expect(corpus.length, 'the shipped state corpus').toBe(2405); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 2348 -> 2356 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 2356 -> 2362 // W2 DEF C8/C10 (DS-DEF-5 ARCANE pools, 2026-11-07): 2362 -> 2374 // W2 DEF (FIXTURE: gates v3-v4, the referee's frame cure, 2026-11-07): 2374 -> 2376 // W2 DEF C3–C5 (DS-DEF-12, 2026-11-07): 2376 -> 2391 // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 2391 -> 2405
-    expect(census.rows.length, 'the committed wiring census').toBe(733); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 711 -> 715 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 715 -> 718 // W2 DEF C8/C10 (DS-DEF-5 ARCANE pools, 2026-11-07): 718 -> 724 // W2 DEF C3–C5 (DS-DEF-12, 2026-11-07): 724 -> 729 // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 729 -> 733
+    expect(corpus.length, 'the shipped state corpus').toBe(2505); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 2348 -> 2356 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 2356 -> 2362 // W2 DEF C8/C10 (DS-DEF-5 ARCANE pools, 2026-11-07): 2362 -> 2374 // W2 DEF (FIXTURE: gates v3-v4, the referee's frame cure, 2026-11-07): 2374 -> 2376 // W2 DEF C3–C5 (DS-DEF-12, 2026-11-07): 2376 -> 2391 // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 2391 -> 2405 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 2405 -> 2504 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 2504 -> 2505
+    expect(census.rows.length, 'the committed wiring census').toBe(766); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 711 -> 715 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 715 -> 718 // W2 DEF C8/C10 (DS-DEF-5 ARCANE pools, 2026-11-07): 718 -> 724 // W2 DEF C3–C5 (DS-DEF-12, 2026-11-07): 724 -> 729 // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 729 -> 733 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 733 -> 766
     expect(Object.keys(DOSSIER_RELATIONS).length, 'the committed relation leaf').toBe(165);
     // Every arm this module owns is exercised below; a roster that quietly shrank would make
     // a whole describe disappear with nothing red.
@@ -493,7 +493,12 @@ describe('A0b — the text claims every declared field and no other', () => {
     // CHAIN clause pools inherit their declared reads unclaimed — the `chainModifiers` container, and the military pools'
     // `force` guard (the eight military lines 2 each, the six food lines 1 each): 1531 -> 1553 measured line by line
     // against the parent, all twenty-two on the fourteen CHAIN lines; no other line moved.
-    const UNDER_CLAIM_OWED = 271;
+    // 271 -> 289 OWED at W2 DEF's stress-type keys (2026-11-07, the third seat; STYLE-RULINGS §1a): DS-DEF-3's
+    // seventeen COMPOUND condition pools and DS-DEF-8's sixteen override pools; the table-keyed pools claim nothing
+    // new (their one read is the table label), and the four MIGRATION pools inherit their direction reads unclaimed
+    // (DS-DEF-3 arrivals/departures 2 each x 3 lines, DS-DEF-8 1 each x 3): 1553 -> 1571 measured line by line
+    // against the parent, all eighteen on those twelve lines; no other line moved.
+    const UNDER_CLAIM_OWED = 289;
     const UNDER_CLAIM_CEILING = UNDER_CLAIM_BASE + UNDER_CLAIM_OWED;
     // ⛔ THE OVER-CLAIM CEILING, RE-KEYED THE SAME WAY (census-1b unit A (d), 427f7b112). From that
     // commit the wiring census records `settlement` among DS-GEN-17's fieldsRead (the roster key
@@ -540,7 +545,7 @@ describe('A0b — the text claims every declared field and no other', () => {
       + `\n  over-claims          ${tally['over-claim']}   ceiling ${OVER_CLAIM_CEILING}`
       + ` = ${OVER_CLAIM_BASE} + ${OVER_CLAIM_OWED} OWED (427f7b112: DS-GEN-17's name slot)`
       + `\n  under-claims         ${tally['under-claim']}   ceiling ${UNDER_CLAIM_CEILING}`
-      + ` = ${UNDER_CLAIM_BASE} + ${UNDER_CLAIM_OWED} OWED (R-F5 26 + the pool census 34 + DS-GEN-17 PROVISIONED v3 1 + DS-CND-1 boom v4 1 + W2 DEF DS-DEF-9 FLAG pools 8 + W2 DEF DS-DEF-4 FIXTURE pools 17 + W2 DEF DS-DEF-5 FIXTURE pools 10 + W2 DEF DS-DEF-5 ARCANE pools 79 + FIXTURE: gates v3-v4 4 + the ledger rewrite of FIXTURE: gangs v2 3 + W2 DEF DS-DEF-12 isolation support 66 + W2 DEF DS-DEF-2 CHAIN clauses 22: the census wave buys them back)`
+      + ` = ${UNDER_CLAIM_BASE} + ${UNDER_CLAIM_OWED} OWED (R-F5 26 + the pool census 34 + DS-GEN-17 PROVISIONED v3 1 + DS-CND-1 boom v4 1 + W2 DEF DS-DEF-9 FLAG pools 8 + W2 DEF DS-DEF-4 FIXTURE pools 17 + W2 DEF DS-DEF-5 FIXTURE pools 10 + W2 DEF DS-DEF-5 ARCANE pools 79 + FIXTURE: gates v3-v4 4 + the ledger rewrite of FIXTURE: gangs v2 3 + W2 DEF DS-DEF-12 isolation support 66 + W2 DEF DS-DEF-2 CHAIN clauses 22 + W2 DEF stress-type migration pools 18: the census wave buys them back)`
       + `\n  implicit negations   ${tally['implicit-negation']}`
       + `\n  absences claimed by silence (R-F4, REPORT) ${silent}`
       + `\n  NOT-EXECUTABLE reads ${notExecutable}   pools carrying a finding ${pools.size}\n`);
@@ -558,7 +563,8 @@ describe('A0b — the text claims every declared field and no other', () => {
     // 249 -> 255 at W2 DEF C8/C10 (2026-11-07): the six DS-DEF-5 ARCANE pools carry the under-claim debt above.
     // 255 -> 260 at W2 DEF C3–C5 (2026-11-07, the third seat): the five DS-DEF-12 pools carry the under-claim debt above.
     // 260 -> 264 at W2 DEF C6 (2026-11-07, the third seat): the four DS-DEF-2 CHAIN pools carry the under-claim debt above.
-    expect(pools.size).toBeLessThanOrEqual(264);
+    // 264 -> 268 at W2 DEF's stress-type keys (2026-11-07): the four migration pools carry the under-claim debt above.
+    expect(pools.size).toBeLessThanOrEqual(268);
   });
 });
 

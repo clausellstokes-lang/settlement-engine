@@ -448,7 +448,9 @@ describe('the two controls no one-audience manifest can see', () => {
       const covert = variants.filter((v) => v.marks.includes('dm-only')).length;
       if (covert > 0 && covert < variants.length) mixed.add(key);
     }
-    expect(mixed.size, 'mixed pools in the shipped corpus').toBe(12);
+    // 12 -> 13 (W2 DEF stress-type keys, 2026-11-07): DS-DEF-8's `override: INFILTRATION ACTIVE` holds three dm-only lines and
+    // one player-safe line that says no more than the posture banner, so the player face speaks there too.
+    expect(mixed.size, 'mixed pools in the shipped corpus').toBe(13);
     /** @type {Map<string, {dm?: object, player?: object}>} */
     const byPosition = new Map();
     for (const cell of run.cells) {

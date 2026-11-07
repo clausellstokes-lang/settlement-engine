@@ -20,7 +20,8 @@ import {
   defenseForcesProse, defenseStateProse, defenseThreatProse, disasterRowPoolKey,
   defensePostureProse, economicRowPoolKey, firstSurveyPoolKey, forceCorePoolKey,
   fortificationPoolKey, internalRowPoolKey, invasionRowPoolKey, isCompoundSafetyLabel,
-  measuredMonsterFamily, posturePoolKey, publicOrderPoolKey, strategicPrizePoolKey,
+  measuredMonsterFamily, posturePoolKey, publicOrderPoolKey, strategicPrizePoolKey, COMPOUND_CONDITIONS, OVERRIDE_TYPES,
+  compoundSafetyPoolKey,
   terrainDefencePoolKey, activeDefenceStress, defenseMilitaryStatusProse,
   militaryOverridePoolKey, viabilityUnderStressPoolKey, DEF8_UNREACHABLE_POOLS,
   defenseWallRationaleProse, defworkFill, wallRationalePoolKey,
@@ -111,17 +112,51 @@ describe('the defense desk — the label vocabulary is the producer\'s', () => {
     expect(publicOrderPoolKey(undefined)).toBeNull();
   });
 
-  it('a crisis-rewritten label goes to COMPOUND, detected by the dash and not a name list', () => {
+  it('a crisis-rewritten label goes to its CONDITION\'s pool, detected by the dash (STYLE-RULINGS §1a)', () => {
+    // W2 DEF (2026-11-07): the stress type in the pool key — one variant set per condition.
+    const expected = {
+      'Controlled — Occupation Curfew': 'COMPOUND: occupation curfew',
+      'Tense — Active Siege': 'COMPOUND: active siege',
+      'Desperate — Famine Conditions': 'COMPOUND: famine',
+      'Strained — Plague Conditions': 'COMPOUND: plague',
+      'Tense — Wartime': 'COMPOUND: wartime',
+    };
     for (const label of COMPOUND_LABELS) {
       expect(isCompoundSafetyLabel(label), label).toBe(true);
       expect(publicOrderPoolKey(label)).toBe('COMPOUND override (a crisis stress has rewritten the label)');
+      expect(compoundSafetyPoolKey(label, [])).toBe(expected[label]);
+      // …and the desk draws the condition's pool, beside the DM's own line.
+      expect(defenseStateProse(town(label), { seed: 'c' }).publicOrder.rung.provenance.poolKey).toBe(expected[label]);
     }
+    // The lead condition wins, and the plague strain's own dash does not fool the reader.
+    expect(compoundSafetyPoolKey('Dangerous — Plague Unrest — Plague Conditions + Wartime', [])).toBe('COMPOUND: plague');
+    expect(compoundSafetyPoolKey('Strained — Mass Migration', [{ type: 'mass_migration' }])).toBe('COMPOUND: mass migration, arrivals');
+    expect(compoundSafetyPoolKey('Strained — Mass Migration', [{ type: 'mass_migration', direction: 'departures' }]))
+      .toBe('COMPOUND: mass migration, departures');
+    expect(compoundSafetyPoolKey('Controlled — Authoritarian', [])).toBe('COMPOUND: authoritarian rule');
+    expect(compoundSafetyPoolKey('Dangerous — Criminal Governance', null)).toBe('COMPOUND: criminal governance');
+    expect(compoundSafetyPoolKey('Tense — Some Future Crisis', [])).toBe('COMPOUND override (a crisis stress has rewritten the label)');
     for (const label of CLEAN_LABELS) expect(isCompoundSafetyLabel(label), label).toBe(false);
     // Detecting the DASH rather than listing crisis names is deliberate: a new crisis would
     // otherwise read as an ordinary label, which is the quiet-degradation shape. A crisis
     // this suite has never heard of still routes correctly.
     expect(publicOrderPoolKey('Tense — Some Future Crisis'))
       .toBe('COMPOUND override (a crisis stress has rewritten the label)');
+  });
+
+  it('the condition table is TOTAL over the conditions the producer writes, both ways', () => {
+    // Read from the producer's own source: every `condition: '…'` a strain carries, and the two
+    // non-crisis compounds written as whole labels.
+    const src = readFileSync(resolve(SRC, 'generators/safetyProfile.js'), 'utf8');
+    const written = new Set([...src.matchAll(/condition: '([^']+)'/g)].map((m) => m[1]));
+    for (const m of src.matchAll(/safetyLabel = '[^'—]+ — ([^']+)'/g)) written.add(m[1]);
+    expect(written.size, 'the producer reader found the conditions').toBeGreaterThanOrEqual(16);
+    expect([...COMPOUND_CONDITIONS].sort()).toEqual([...written].sort());
+    for (const condition of COMPOUND_CONDITIONS) {
+      const key = compoundSafetyPoolKey(`Tense — ${condition}`, []);
+      expect(key, condition).not.toBe('COMPOUND override (a crisis stress has rewritten the label)');
+      expect(DEF3_POOLS[key], `${condition} -> ${key}`).toBeTruthy();
+    }
   });
 
   it('the declared slot shapes equal the annex register, and the desk owns no fill table', () => {
@@ -153,27 +188,36 @@ describe('the defense desk — the FIRST-SURVEY framing rests on a measurement',
     expect(firstSurveyPoolKey(undefined)).toBeNull();
   });
 
-  it('ALIVENESS: all SEVEN pools speak over labels the generator really writes', () => {
+  it('ALIVENESS: all TWENTY-FOUR pools speak over labels the generator really writes', () => {
+    // 7 -> 24 (W2 DEF, 2026-11-07): the seventeen COMPOUND condition pools (STYLE-RULINGS §1a). Every
+    // condition the producer writes is swept, the migration both ways, and one unknown condition
+    // reaches the generic COMPOUND pool.
     const reached = new Set();
-    for (const label of [...CLEAN_LABELS, ...COMPOUND_LABELS]) {
-      const drawn = defenseStateProse(town(label), { seed: `d-${label}` });
+    const swept = [
+      ...CLEAN_LABELS.map((label) => [label, undefined]),
+      ...COMPOUND_CONDITIONS.map((c) => [`Tense — ${c}`, undefined]),
+      ['Strained — Mass Migration', [{ type: 'mass_migration', direction: 'departures' }]],
+      ['Tense — Some Future Crisis', undefined],
+    ];
+    for (const [label, stress] of swept) {
+      const drawn = defenseStateProse({ ...town(label), ...(stress ? { stress } : {}) }, { seed: `d-${label}`, audience: 'dm' });
       for (const key of ['publicOrder', 'firstSurvey']) {
         const rung = drawn[key]?.rung;
         if (rung?.sentence) {
           reached.add(rung.provenance.poolKey);
           expect(rung.provenance.blockId).toBe(DEF3);
           // This branch is guarded by `if (rung?.sentence)`, so it could run zero times —
-          // but the arm pins `reached.size` at exactly 7 below, which a desk that had gone
+          // but the arm pins `reached.size` at exactly 24 below, which a desk that had gone
           // silent over every label fails.
-          // anchored: `reached.size` is pinned at exactly 7 after this loop
+          // anchored: `reached.size` is pinned at exactly 24 after this loop
           expect(rung.sentence).not.toMatch(/[{}]/);
-          // anchored: same guarded sentence; `reached.size` is pinned at 7 below
+          // anchored: same guarded sentence; `reached.size` is pinned at 24 below
           expect(rung.sentence).not.toMatch(/[0-9]/);
         }
       }
     }
-    expect(reached.size, `reached: ${[...reached]}`).toBe(7);
-    expect(Object.keys(DEF3_POOLS)).toHaveLength(7);
+    expect(reached.size, `reached: ${[...reached]}`).toBe(24);
+    expect(Object.keys(DEF3_POOLS)).toHaveLength(24);
   });
 });
 
@@ -1085,18 +1129,25 @@ describe('DS-DEF-8 — the military-status override, and the pool that must NOT 
   it('the override lens asks the SAME map the banner beside it asks', () => {
     // Not a second opinion about which stresses carry a posture: `DefenseTab` picks
     // `stressTypes.find((t) => DEFENSE_STRESS_STATUS[t])` and so does this desk.
+    // W2 DEF (2026-11-07, STYLE-RULINGS §1a): every posture keys its OWN pool; the per-type table is
+    // total over the banner's map, so the generic framing never draws.
+    expect([...OVERRIDE_TYPES].sort()).toEqual(Object.keys(DEFENSE_STRESS_STATUS).sort());
     for (const type of Object.keys(DEFENSE_STRESS_STATUS)) {
-      expect(militaryOverridePoolKey(pressed([type]).stress), type)
-        .toBe('override active (generic framing)');
+      const key = militaryOverridePoolKey(pressed([type]).stress);
+      expect(key, type).not.toBe('override active (generic framing)');
+      expect(DEF8_POOLS[key], `${type} -> ${key}`).toBeTruthy();
       expect(activeDefenceStress(pressed([type]).stress).type).toBe(type);
     }
+    // The migration posture splits on W0's direction.
+    expect(militaryOverridePoolKey([{ type: 'mass_migration', direction: 'departures' }])).toBe('override: MIGRATION, departures');
+    expect(militaryOverridePoolKey([{ type: 'mass_migration' }])).toBe('override: MIGRATION, arrivals');
     // A stress with no defence posture leaves the banner — and this desk — silent.
     expect(DEFENSE_STRESS_STATUS.no_such_stress).toBeUndefined();
     expect(militaryOverridePoolKey([{ type: 'no_such_stress' }])).toBeNull();
     expect(militaryOverridePoolKey([])).toBeNull();
     expect(militaryOverridePoolKey(undefined)).toBeNull();
     // The field is a bare object on some saves; both shapes normalise.
-    expect(militaryOverridePoolKey({ type: 'under_siege' })).toBe('override active (generic framing)');
+    expect(militaryOverridePoolKey({ type: 'under_siege' })).toBe('override: ACTIVE SIEGE');
   });
 
   it('⛔⛔ `viabilityNote` IS A CONSTANT — every one of the fifteen carries one', () => {
@@ -1122,7 +1173,8 @@ describe('DS-DEF-8 — the military-status override, and the pool that must NOT 
     // named is "the heaviest"/"the loudest" of several. MEASURED: STRESS_TYPE_MAP carries
     // `probability` (rarity) and NO severity, and the banner picks the FIRST stress that
     // maps — roll order, not rank. Printing it would assert a ranking nothing computes.
-    expect(DEF8_UNREACHABLE_POOLS).toEqual(['multiple stresses, one posture shown']);
+    // W2 DEF (2026-11-07): the generic framing joins it — kept (the frame is fixed), drawn by no stress type.
+    expect(DEF8_UNREACHABLE_POOLS).toEqual(['multiple stresses, one posture shown', 'override active (generic framing)']);
     expect(DEF8_POOLS[DEF8_UNREACHABLE_POOLS[0]], 'the declared-dark pool left the corpus').toBeTruthy();
     for (const type of Object.keys(STRESS_TYPE_MAP)) {
       // ⚠ `probability` IS THE ANCHOR BECAUSE IT IS THE ARGUMENT. The claim above is not
@@ -1141,15 +1193,18 @@ describe('DS-DEF-8 — the military-status override, and the pool that must NOT 
     expect(activeDefenceStress(both.stress).type).toBe('mass_migration');
     // And a multi-stress settlement is still described — by the two live lenses.
     const drawn = defenseMilitaryStatusProse({ ...both, economicViability: { viable: false } }, { seed: 'm' });
-    expect(drawn.override.provenance.poolKey).toBe('override active (generic framing)');
+    expect(drawn.override.provenance.poolKey).toBe('override: MIGRATION, arrivals');
     expect(drawn.viability.provenance.poolKey).toBe('override active, viability threatened');
   });
 
-  it('all THREE live pools speak over every stress type × the viability verdict', () => {
+  it('all EIGHTEEN live pools speak over every stress type × the viability verdict', () => {
     const reached = new Set();
-    for (const type of [...Object.keys(STRESS_TYPE_MAP), 'no_such_stress']) {
+    // The departures migration is its own pool (W0's direction), so it is swept as its own case.
+    const departing = (viable) => ({ ...pressed(['mass_migration'], { viable }), stress: [{ type: 'mass_migration', ...STRESS_TYPE_MAP.mass_migration, direction: 'departures' }] });
+    for (const type of [...Object.keys(STRESS_TYPE_MAP), 'no_such_stress', 'departures']) {
       for (const viable of [true, false, undefined]) {
-        const drawn = defenseMilitaryStatusProse(pressed([type], { viable }), { seed: 'sweep8' });
+        const town8 = type === 'departures' ? departing(viable) : pressed([type], { viable });
+        const drawn = defenseMilitaryStatusProse(town8, { seed: 'sweep8', audience: 'dm' });
         for (const lens of ['override', 'viability']) {
           const rung = drawn[lens];
           if (!rung?.sentence) continue;
@@ -1162,8 +1217,9 @@ describe('DS-DEF-8 — the military-status override, and the pool that must NOT 
     }
     const live = Object.keys(DEF8_POOLS).filter((k) => !DEF8_UNREACHABLE_POOLS.includes(k));
     expect([...reached].sort()).toEqual([...live].sort());
-    expect(Object.keys(DEF8_POOLS)).toHaveLength(4);
-    expect(live).toHaveLength(3);
+    // 4 -> 20 and 3 -> 18 (W2 DEF, 2026-11-07): the sixteen per-type override pools; the generic framing declared.
+    expect(Object.keys(DEF8_POOLS)).toHaveLength(20);
+    expect(live).toHaveLength(18);
   });
 
   it('the registry mounts DS-DEF-8 once, as a sentence, on the defense tab', () => {

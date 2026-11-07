@@ -2814,40 +2814,133 @@ reading rather than a settled one.
 
 **`Very Safe`** {crisis-scoped}
 1. `[street · watch · crisis: any · no crisis: threat, unrest]` Nothing much happens to people at {settlement}. The watch is heavier than anything working against it, by a margin the town does not have to think about.
-2. `[visitor · crisis: any · no crisis: threat, unrest]` A stranger walks {settlement} at any hour without being troubled, and notices that the locals do the same without appearing to have decided to.
-3. `[ledger · crisis: any]` Enforcement at {settlement} sits far above whatever criminal presence the town holds; the returns are thin because there is very little to return.
-4. `[counterforce · watch · crisis: any]` There is money at {settlement} and there is opportunity, and neither has produced an organized interest. The watch here is simply too heavy to be worth the arrangement.
+2. `[visitor · crisis: any · no crisis: threat, unrest]` You can walk {settlement} at any hour without trouble, and the people who live there do the same without a second thought.
+3. `[ledger · crisis: any]` The town's record of crimes at {settlement} is short: enforcement far outweighs the criminals, and there is little to write down.
+4. `[counterforce · watch · crisis: any]` There is money at {settlement} and chances to take it, but no gang has formed: the watch is too strong to be worth crossing.
 
 **`Safe`** {crisis-scoped}
 1. `[street · crisis: any · no crisis: threat, unrest]` {settlement} is a quiet town. Things are taken occasionally and the taking does not spread, because the people who would spread it are known.
-2. `[ledger · crisis: any]` Enforcement at {settlement} is clearly the stronger side; criminal work here is suppressed rather than absent, and stays suppressed.
-3. `[visitor · crisis: any · no crisis: threat, unrest]` A stranger is comfortable at {settlement} and is also aware that the comfort has somebody maintaining it.
+2. `[ledger · crisis: any]` The town's record of crimes at {settlement} stays short: there is crime, but enforcement keeps it down and keeps it from growing.
+3. `[visitor · crisis: any · no crisis: threat, unrest]` Visitors feel safe at {settlement}, and it is plain that somebody keeps it that way.
 
 **`Moderate`**
 1. `[street · colour]` {settlement} runs on a working balance: the law is present, crime exists, and neither has the run of the town.
-2. `[ledger · colour]` Enforcement and criminal presence at {settlement} sit close enough that the town's condition is a matter of which way the next few seasons go.
-3. `[visitor · colour]` A stranger at {settlement} is told which streets to avoid and finds the advice specific, short and accurate.
-4. `[threshold · watch]` The balance at {settlement} sits where either side could take it. A thinner watch or a bolder operator would show up in the returns within the season, and nothing else would need to change.
+2. `[ledger · colour]` The town's record of crimes at {settlement} is neither short nor growing: the law and the criminals are close to even, and the next few seasons will decide which way it goes.
+3. `[visitor · colour]` Visitors to {settlement} are told which few streets to avoid, and the advice turns out to be right.
+4. `[threshold · watch]` Order at {settlement} could tip either way: a few fewer watchmen or one bolder gang would be felt on the streets within the season.
 
 **`Unsafe`**
 1. `[street · watch]` Crime at {settlement} is outrunning the watch. It is not chaos; it is that the people doing it have stopped expecting to be caught.
-2. `[ledger · colour]` What criminal work is being done at {settlement} measurably exceeds what is being answered, and the gap is legible in the returns rather than merely felt.
+2. `[ledger · colour]` The town's record of crimes at {settlement} grows faster than its record of arrests, and people pay for the difference in what they lose.
 3. `[unfolding · watch]` The balance at {settlement} has tipped and is still tipping. Each season the watch answers a smaller share of what happens.
 
 **`Dangerous`**
 1. `[street · watch]` The watch at {settlement} has been overwhelmed. What happens in this town is decided by whoever is present when it happens.
-2. `[ledger · colour]` Organized interests at {settlement} now outweigh enforcement outright; there is no part of the town's order that does not run through somebody's permission.
-3. `[visitor · colour]` A stranger at {settlement} is not warned about particular streets, because the warning would have to cover all of them.
+2. `[ledger · colour]` Organized criminals at {settlement} now outweigh the law outright, and nothing in the town gets done without someone's permission and someone's cut.
+3. `[visitor · colour]` Nobody at {settlement} warns visitors about particular streets, because the warning would cover all of them.
 
 **COMPOUND override (a crisis stress has rewritten the label)**
-1. `[street · colour]` The ordinary safety of {settlement} has stopped applying. Whatever the town was, the crisis on it now is what governs the streets.
-2. `[ledger · watch]` The town's usual reading does not describe {settlement} at present; the standing condition has been overtaken by the crisis and the watch is arranged around that instead.
-3. `[unfolding · watch]` Order at {settlement} is being held under a pressure the town's arrangements were not built for, and how long it holds is a question about the pressure rather than about the watch.
+1. `[street · colour]` A crisis now governs the streets of {settlement}, and the town's usual safety no longer holds.
+2. `[ledger · watch]` The watch at {settlement} has set aside its usual rounds for the crisis, so the town's ordinary record of order no longer describes it.
+3. `[unfolding · watch]` Order at {settlement} is held under a pressure the watch was not built for, and how long it holds depends on how long the crisis lasts.
+
+**THE COMPOUND POOLS BY CONDITION (STYLE-RULINGS §1a, W2 DEF, 2026-11-07):** the stress type in the
+pool key. A compound label's LEAD condition (`safetyProfile.js`: the leading strain's condition,
+then ` + ` each further one) picks its own pool; the migration pool splits on W0's
+`stress[].direction`; a condition the table does not carry falls to the generic COMPOUND pool
+above. Each line says what the streets are like under that one condition and nothing the
+condition does not name. Description position, three vantages each (the street, the visitor,
+the ledger).
+
+**COMPOUND: occupation curfew** {colour}
+1. `[street]` There is a curfew at {settlement} now, and checkpoints; ordinary theft has dropped, and people fear informers more than thieves.
+2. `[visitor]` At {settlement} you are stopped and questioned at the checkpoints, and nobody is out after curfew.
+3. `[ledger]` Only those holding the occupiers' passes may be out after dark at {settlement}, and anyone caught without one is taken in.
+
+**COMPOUND: active siege** {colour}
+1. `[street]` With the town under siege, quarrels over rations and theft of food are the trouble on {settlement}'s streets now.
+2. `[visitor]` Inside the siege at {settlement}, people guard their food and keep an eye on their neighbours.
+3. `[ledger]` The ration lists at {settlement} decide who eats while the siege lasts, and the quarrels over them are where the trouble starts.
+
+**COMPOUND: famine** {colour}
+1. `[street]` Hunger has made thieves of ordinary people at {settlement}, and anyone known to have food is a target.
+2. `[visitor]` At {settlement} food is kept out of sight and doors are barred at night.
+3. `[ledger]` The relief lists at {settlement} cannot feed everyone, and theft of food has become too common to punish.
+
+**COMPOUND: plague** {colour}
+1. `[street]` The sickness has people at {settlement} keeping apart, and the sick and their families are shunned or worse.
+2. `[visitor]` Parts of {settlement} are closed off against the sickness, and people cross the street to avoid anyone who coughs.
+3. `[ledger]` The burial register at {settlement} grows every day, and medicine and graves cost whatever the sellers ask, so the poorest go without both.
+
+**COMPOUND: insurgency** {colour}
+1. `[street]` Patrols at {settlement} have changed their routes, and some districts are closed to anyone without business there.
+2. `[visitor]` Nobody at {settlement} will say whose side they are on, and visitors are asked their business at every turn.
+3. `[ledger]` The patrol routes at {settlement} skip districts they once covered, and whatever happens there now goes unrecorded and unpunished.
+
+**COMPOUND: slave revolt** {colour}
+1. `[street]` Fighting between the rebels and the town's guards has closed whole streets of {settlement}.
+2. `[visitor]` People at {settlement} keep away from the streets where the revolt is being fought, and the usual patrols are gone.
+3. `[ledger]` The patrol rota at {settlement} has been emptied to fight the revolt, so the rest of the town keeps its own order.
+
+**COMPOUND: wartime** {colour}
+1. `[street]` The war has made people at {settlement} wary of anyone they do not know, and prices and curfews are set by order.
+2. `[visitor]` Strangers at {settlement} are watched and questioned; the war has made everyone careful.
+3. `[ledger]` War orders at {settlement} fix prices and set curfews, and they are enforced whenever someone is looking.
+
+**COMPOUND: political fracture** {colour}
+1. `[street]` Which faction holds a district of {settlement} decides which rules apply there.
+2. `[visitor]` Cross a street at {settlement} and you may cross from one faction's rules into another's.
+3. `[ledger]` Each faction at {settlement} keeps its own list of offences, so a wrong punished in one district goes unpunished in the next.
+
+**COMPOUND: succession crisis** {colour}
+1. `[street]` With nobody clearly in charge at {settlement}, those who keep order are unsure whose orders to follow, and petty crime has risen in the gap.
+2. `[visitor]` Petty theft at {settlement} has risen since the succession was left open, and nobody seems sure who should stop it.
+3. `[ledger]` The arrest book at {settlement} fills with names that are let go again, because nobody is sure whose authority the arrests were made under.
+
+**COMPOUND: betrayal** {colour}
+1. `[street]` Since the betrayal, people at {settlement} trust no one they do not know, and strangers are watched closely.
+2. `[visitor]` At {settlement} you will be asked who you know and who sent you, and the answers are checked.
+3. `[ledger]` Lists of who can be trusted are being drawn up at {settlement} since the betrayal, and anyone left off them is suspect.
+
+**COMPOUND: monster threat** {colour}
+1. `[street]` Nobody at {settlement} goes out after dark if they can help it, and the outlying houses stand empty at night.
+2. `[visitor]` Doors at {settlement} are shut at dusk, and the edge of town is left empty after dark.
+3. `[ledger]` The night curfew at {settlement} has been lengthened while beasts roam the country, and whatever business needs the night goes undone.
+
+**COMPOUND: debt crisis** {colour}
+1. `[street]` At {settlement} the creditors' agent decides which wrongs are worth pursuing, and the debts come first.
+2. `[visitor]` The law at {settlement} moves quickest when a debt is owed to the town's creditors.
+3. `[ledger]` The creditors' accounts come first at {settlement}: what enforcement the town can afford goes where their agent directs, not where the crime is.
+
+**COMPOUND: religious upheaval** {colour}
+1. `[street]` The change of faith has split {settlement}, and each side suspects the other of informing.
+2. `[visitor]` At {settlement} people are careful what they say about faith, and to whom.
+3. `[ledger]` Each side at {settlement} keeps its own list of who has converted, and those lists, not the law, decide who is trusted.
+
+**COMPOUND: mass migration, arrivals** {colour}
+1. `[street]` {settlement} has more people than it was built for, and quarrels between old residents and newcomers are common.
+2. `[visitor]` New faces are everywhere at {settlement}, and nobody keeping order can tell who belongs.
+3. `[ledger]` The town's count of its people at {settlement} is out of date with so many arriving, and nobody keeping order knows who is new.
+
+**COMPOUND: mass migration, departures** {colour}
+1. `[street]` Families have left {settlement}, and the shuttered houses they left behind draw thieves.
+2. `[visitor]` Whole streets of {settlement} stand half empty now that so many have left, and nobody watches the empty houses.
+3. `[ledger]` The town's count of its people at {settlement} still lists families who have left, and their empty houses go unguarded.
+
+**COMPOUND: authoritarian rule** {colour}
+1. `[street]` The streets of {settlement} are quiet because the authorities are everywhere, and people fear them more than any thief.
+2. `[visitor]` Armed officials stand on the corners at {settlement}, and nobody you speak to says anything about the government.
+3. `[ledger]` Nobody at {settlement} keeps a list of the people the authorities have taken, and nobody asks where they went.
+
+**COMPOUND: criminal governance** {colour}
+1. `[street]` The criminals at {settlement} are the government, and protection is bought from them like anything else.
+2. `[visitor]` At {settlement} you pay the people who run the streets, or nobody protects you.
+3. `[ledger]` The protection money at {settlement} is the town's real tax, and those who cannot pay it go unprotected.
 
 **First-Survey qualification (the reading is a first look)** {colour}
-1. `[visitor]` This is what {settlement} looks like on a first pass; a season here would either confirm it or correct it, and nobody has spent the season yet.
-2. `[ledger]` The safety reading for {settlement} is an initial one. It is honest about what has been seen and says nothing about what has not.
-3. `[street]` What the town says about its own safety at {settlement} is what the town says on a first acquaintance, and a longer one would be a different account.
+1. `[visitor]` This is how {settlement} looks on a first visit; a season there might show it differently.
+2. `[ledger]` This account of {settlement}'s safety comes from a first survey, so trouble the town keeps from newcomers may be missing from it.
+3. `[street]` What people at {settlement} say about their safety is what they tell someone new; they may say more to someone they know.
 
 ---
 
@@ -3312,22 +3405,114 @@ Shared with the PDF `defenseSlice`.
 **PDF PARITY:** parity (pdf-4 shares the set).
 
 **override active (generic framing)** {colour}
-1. `[ledger]` What {settlement}'s defenses are ordinarily worth does not describe the town at present; there is a crisis on it, and the arrangements have been rebuilt around the crisis.
-2. `[street]` The town's usual posture has been set aside at {settlement}. Everything is arranged for the one thing now, and the rest is waiting.
-3. `[unfolding]` {settlement} is not being defended according to its plan; it is being defended according to what is happening, and the two have parted company.
+1. `[ledger]` A crisis has rearranged {settlement}'s defence, and its usual strength is no guide to how it would hold now.
+2. `[street]` {settlement} has set its usual defence aside to meet the crisis, and everything else waits.
+3. `[unfolding]` {settlement}'s defence follows the crisis now, not its plan.
+
+**THE OVERRIDE POOLS BY STRESS TYPE (STYLE-RULINGS §1a, W2 DEF, 2026-11-07):** the stress type in
+the pool key. The framing lens reads the active stress's type (`DEFENSE_STRESS_STATUS`, the posture
+the banner shows) and says what that one crisis does to the town's defence; the migration pool
+splits on W0's `stress[].direction`. The table is total over `STRESS_TYPE_MAP`, so the generic
+framing pool above no longer draws: it is kept (the frame is fixed) and declared in
+`DEF8_UNREACHABLE_POOLS`. The facts are the ones `DS-DEF-10`'s dark posture pools carry, said
+plainly; DS-DEF-10 stays dark (its fact speaks here). Infiltration is a secret: its three telling
+variants are `dm-only`, as DS-DEF-10 rules, and one `[visitor]` line says no more than the posture
+banner a player already sees, so the player face is not silent. Three vantages each (the ledger, the
+street, the unfolding).
+
+**override: ACTIVE SIEGE** {colour}
+1. `[ledger]` With an army outside, {settlement}'s defence is now about holding out: every guard and every store is counted against how long the siege can last.
+2. `[street]` Everyone at {settlement} who can hold a weapon has a place in the defence, and the town's whole day is arranged around the siege.
+3. `[unfolding]` Each week the siege lasts, {settlement} has less to hold out with, and its defence is a race against its stores.
+
+**override: INTERNAL PRESSURE (famine)** {colour}
+1. `[ledger]` The guards' rations at {settlement} are cut like everyone else's, and a hungry guard cannot be asked for much for long.
+2. `[street]` At {settlement} the defence is spent keeping order at the food stores, not watching the roads.
+3. `[unfolding]` The longer the hunger lasts at {settlement}, the less its defenders can do, and nothing is filling the stores again yet.
+
+**override: UNDER OCCUPATION** {colour}
+1. `[ledger]` {settlement}'s defence answers to its occupiers now: the arms in the town are theirs, and whatever the townsfolk could raise themselves would be small beside them.
+2. `[street]` The occupiers' guards at {settlement} protect the town from everyone except the people who sent them.
+3. `[unfolding]` As long as the occupation lasts, {settlement} cannot defend itself on its own terms; its defence is someone else's to order.
+
+**override: COMMAND SPLIT** {colour}
+1. `[ledger]` More than one faction at {settlement} claims to command its defence, and orders are given twice and obeyed once.
+2. `[street]` Those standing guard at {settlement} get orders from two sides and have quietly chosen which to follow.
+3. `[unfolding]` Nothing at {settlement} has failed yet because of the split, but every order takes longer, and in an attack that delay would cost the town.
+
+**override: UNDER TRIBUTE** {colour}
+1. `[ledger]` The town's accounts at {settlement} pay the creditors first and the defence with what is left, and what is left shrinks each year.
+2. `[street]` At {settlement} the debt is paid before the guards are, and every guard knows it.
+3. `[unfolding]` Every year the debt stands, less of {settlement}'s money reaches its defence.
+
+**override: SECURITY COMPROMISED** {colour}
+1. `[ledger]` {settlement} was betrayed recently, and its defence is being rearranged on the assumption that the enemy knows the old arrangements.
+2. `[street]` The guards at {settlement} have changed their rounds and will not say why, and everyone can guess.
+3. `[unfolding]` Until {settlement} has changed everything the traitor knew, its defence is weaker than it looks.
+
+**override: INFILTRATION ACTIVE** {colour}
+1. `[visitor]` Something has changed in how {settlement}'s guards work, and they will not say why; they watch each other as closely as they watch the roads.
+2. `[ledger · dm-only]` Someone inside {settlement}'s defence works for the other side, and nobody has found them yet.
+3. `[unfolding · dm-only]` Every precaution {settlement} takes is reported to the people it is meant to stop, until the spy is found.
+4. `[street · dm-only]` The guards at {settlement} have started keeping secrets from each other; it is the only defence they have against a spy they cannot name.
+
+**override: QUARANTINE ACTIVE** {colour}
+1. `[ledger]` {settlement} is closed against the sickness, not an army: the guards turn back travellers and traders alike.
+2. `[street]` Nobody comes into {settlement} and nobody leaves, and the guards are there to keep the sickness in, not an enemy out.
+3. `[unfolding]` Every week of quarantine costs {settlement} the trade and supplies the country would have brought.
+
+**override: SUCCESSION CONTESTED** {colour}
+1. `[ledger]` Nobody has the clear right to command {settlement}'s defence, so it is kept by people following the last ruler's orders.
+2. `[street]` Several people at {settlement} could order the defence and none can do it alone, so they watch each other instead of the roads.
+3. `[unfolding]` {settlement}'s defence runs on habit until someone settles who rules, and habit will not answer a new threat.
+
+**override: BEAST PRESSURE** {colour}
+1. `[ledger]` Beasts come out of the country at {settlement} steadily, and the town loses guards and gear to them faster than it replaces them.
+2. `[street]` The guards at {settlement} watch the country, not the town, and they do not stand down.
+3. `[unfolding]` The beasts give {settlement} no rest between attacks, and each one costs the town something it cannot quickly replace.
+
+**override: INSURGENCY ACTIVE** {colour}
+1. `[ledger]` {settlement} is defending itself against its own people, and its defence was never built for that.
+2. `[street]` The guards at {settlement} walk streets where they are not welcome, and that is more dangerous to them than any ambush outside.
+3. `[unfolding]` Each crackdown on the insurgents at {settlement} turns more of the town against its guards.
+
+**override: RELIGIOUS UPHEAVAL** {colour}
+1. `[ledger]` Who may command {settlement}'s defence has become a question of faith, and until it is settled every order is questioned.
+2. `[street]` People who would stand guard together at {settlement} are no longer speaking, and the reason is their faith.
+3. `[unfolding]` Until the quarrel over faith is settled at {settlement}, its defenders will not act as one.
+
+**override: REVOLT ACTIVE** {colour}
+1. `[ledger]` Part of {settlement}'s own people have risen, and the town's arms are turned inward against them.
+2. `[street]` Everyone at {settlement} holding a weapon knows exactly whom it is pointed at.
+3. `[unfolding]` How the revolt at {settlement} ends will decide what the town is afterwards, not only who holds it.
+
+**override: WAR FOOTING** {colour}
+1. `[ledger]` {settlement} is on a war footing: what it makes, what it stores and who is free to work are all decided by the war.
+2. `[street]` {settlement} has given up several ordinary things for the war, and people have stopped remarking on it.
+3. `[unfolding]` The war's demands at {settlement} keep reaching further, into trades and households that thought themselves untouched.
+
+**override: MIGRATION, arrivals** {colour}
+1. `[ledger]` More people are arriving at {settlement} than its defence was built to keep in order, so the guards spend their days on crowds, not on the roads.
+2. `[street]` {settlement} is fuller than it was, and there are no more guards than there were.
+3. `[unfolding]` Each new arrival at {settlement} adds to the crowds the guards cannot keep track of.
+
+**override: MIGRATION, departures** {colour}
+1. `[ledger]` The guard rota at {settlement} has gaps where departed families used to stand, and the gaps are not being filled.
+2. `[street]` Families are leaving {settlement}, and every one that goes takes hands the defence will miss.
+3. `[unfolding]` As long as people keep leaving {settlement}, there will be fewer to defend it.
 
 **override active, viability threatened** {colour}
-1. `[unfolding]` The crisis at {settlement} is not merely a posture. It is a question about whether the town continues, and the defensive arrangements are being spent to answer it.
-2. `[ledger]` What is standing at {settlement} is standing against something the town was not built to survive, and the reckoning says so plainly.
+1. `[unfolding]` The crisis at {settlement} threatens the town itself, and its defences are being spent to keep it going.
+2. `[ledger]` By the town's own accounts at {settlement}, this crisis could end the town, and its defences are being spent to buy time.
 3. `[street]` The town is not arguing about its defenses at {settlement}; it is arguing about whether there will be a town to defend.
 
 **override active, viability intact** {colour}
-1. `[ledger]` {settlement} is under real pressure and is not in danger of ending; the posture has changed and the town has not.
-2. `[street]` The town is dealing with something serious and going on being a town while it does.
-3. `[counterforce]` The crisis at {settlement} has changed the posture and not the prospects, and the town has been careful to keep the two separate.
+1. `[ledger]` By the town's own accounts at {settlement}, it will come through this crisis: the defence has changed its arrangements, and the town goes on.
+2. `[street]` The town is dealing with something serious and still goes about its ordinary business.
+3. `[counterforce]` The crisis has changed how {settlement} defends itself, not whether the town will last.
 
 **multiple stresses, one posture shown** {colour}
-1. `[ledger]` More than one thing is pressing {settlement} at once, and the posture named is the heaviest of them rather than the whole account.
+1. `[ledger]` More than one crisis presses on {settlement} at once, and the posture named is only one of them.
 2. `[unfolding]` The town is carrying several pressures together at {settlement}, and it is the combination rather than any single one that is doing the damage.
 3. `[street]` More than one thing is wrong at {settlement} at once, and the town names the loudest of them when asked and means all of them.
 

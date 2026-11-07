@@ -5,7 +5,7 @@
       "src/domain/display/stateProse/generalStateProse.js": "a1d82168bffd08d6aec168b0fd51b4b7ed21fbf67c6f30b2aec8832064e29267",
       "src/domain/display/stateProse/powerStateProse.js": "11c913c83fa1e88d5f75d5415f8723936acf9aae37d6465a87b1ad3cb4d21e7b",
       "src/domain/display/stateProse/economyStateProse.js": "d2bfe8cafa209803f26c83fde83534a7ba45230010ff87c33bd4ac52d831b924",
-      "src/domain/display/stateProse/defenseStateProse.js": "b9834d41e69b89160b01e6a7548f819bc717852b0c897b21c250181fe21aed3d",
+      "src/domain/display/stateProse/defenseStateProse.js": "27538b1c57b2a0afd445d348027c92e047973e442c0cbfd4b8665df48383dea0",
       "src/domain/display/stateProse/stressorsStateProse.js": "13c7f383882acf5bb48267feb4302ced6b9798cec2575470903f1aa88205600d",
       "src/domain/display/stateProse/warFaithStateProse.js": "f1972add38589ee55369fb06e4a5e0a8f90c4d966bf703d4367a3cdca52d6aac",
       "src/domain/display/stateProse/dossierMounts.js": "1d7183757a8fa3527d20cf6e01e1d71e4a7b865e445349f793e51acd40188255"
@@ -21,23 +21,23 @@
     "producerIndexFiles": 1300
   },
   "totals": {
-    "pools": 733,
+    "pools": 766,
     "blocks": 69,
-    "variants": 2405,
-    "resolved": 365,
+    "variants": 2505,
+    "resolved": 398,
     "unresolved": 368,
-    "resolvedWithPredicate": 227,
-    "resolvedWithCleanPredicate": 227,
-    "keyFunctions": 127,
-    "keyFunctionsConsulted": 127,
-    "keyTables": 33,
+    "resolvedWithPredicate": 256,
+    "resolvedWithCleanPredicate": 256,
+    "keyFunctions": 128,
+    "keyFunctionsConsulted": 128,
+    "keyTables": 35,
     "slotless": 65,
     "bagless": 140,
     "predicatesOverUnreadFields": 100,
-    "syntheticTableFields": 100,
+    "syntheticTableFields": 129,
     "tiers": {
-      "MISSING": 33,
-      "THIN": 506,
+      "MISSING": 32,
+      "THIN": 539,
       "COVERED": 227,
       "MISSING-AT-TIER": 45
     },
@@ -47,23 +47,23 @@
     "narrowedRows": 0,
     "covertRows": 4,
     "objectClassed": 103,
-    "mountedRows": 591,
+    "mountedRows": 624,
     "absent": {
-      "measured": 476,
+      "measured": 482,
       "default": 3,
       "not-produced": 61,
       "method-call": 18
     },
     "zeroK": 66,
-    "kExecutable": 365,
+    "kExecutable": 398,
     "kNotExecutable": 368,
-    "branchGrainRows": 335,
-    "functionGrainRows": 398,
+    "branchGrainRows": 369,
+    "functionGrainRows": 397,
     "customReachableRows": 26,
     "relationRows": 165,
     "relationRowsJoinable": 0,
     "ratifiedAliases": 3,
-    "tableRungRowsWithoutAbsence": 100,
+    "tableRungRowsWithoutAbsence": 129,
     "modifierEligibleFactsByTab": [
       [
         "economics",
@@ -115,15 +115,15 @@
       ],
       [
         "defense",
-        5
+        4
       ]
     ],
-    "sourceLicensedRows": 120,
+    "sourceLicensedRows": 122,
     "sourceOfficeRows": 3,
-    "sourceUnresolvedRows": 610,
+    "sourceUnresolvedRows": 641,
     "sourceTwoSourceRows": 10,
     "modifierRows": 0,
-    "declaredColumnRows": 733,
+    "declaredColumnRows": 766,
     "tablePools": 50
   },
   "rows": [
@@ -2852,7 +2852,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 1,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -2893,7 +2893,193 @@
     },
     {
       "block": "DS-DEF-3",
-      "pool": "First-Survey qualification (the reading is a first look)",
+      "pool": "COMPOUND: occupation curfew",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 3,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)",
+          "op": "===",
+          "value": "Occupation Curfew"
+        }
+      ],
+      "branchReads": [
+        "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "COMPOUND_POOL_BY_CONDITION",
+      "rung": "table",
+      "reads": [
+        "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "defense.publicOrder"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "safetyLabel": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-DEF-3",
+      "pool": "COMPOUND: active siege",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 3,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)",
+          "op": "===",
+          "value": "Active Siege"
+        }
+      ],
+      "branchReads": [
+        "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "COMPOUND_POOL_BY_CONDITION",
+      "rung": "table",
+      "reads": [
+        "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "defense.publicOrder"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "safetyLabel": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-DEF-3",
+      "pool": "COMPOUND: famine",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 3,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)",
+          "op": "===",
+          "value": "Famine Conditions"
+        }
+      ],
+      "branchReads": [
+        "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "COMPOUND_POOL_BY_CONDITION",
+      "rung": "table",
+      "reads": [
+        "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "defense.publicOrder"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "safetyLabel": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-DEF-3",
+      "pool": "COMPOUND: plague",
       "slotsFilled": [
         "settlement"
       ],
@@ -2904,6 +3090,882 @@
       "hasBag": true,
       "variants": 3,
       "grammars": 2,
+      "predicate": [
+        {
+          "field": "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)",
+          "op": "===",
+          "value": "Plague Conditions"
+        }
+      ],
+      "branchReads": [
+        "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "COMPOUND_POOL_BY_CONDITION",
+      "rung": "table",
+      "reads": [
+        "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "defense.publicOrder"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "safetyLabel": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-DEF-3",
+      "pool": "COMPOUND: insurgency",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 3,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)",
+          "op": "===",
+          "value": "Insurgency"
+        }
+      ],
+      "branchReads": [
+        "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "COMPOUND_POOL_BY_CONDITION",
+      "rung": "table",
+      "reads": [
+        "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "defense.publicOrder"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "safetyLabel": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-DEF-3",
+      "pool": "COMPOUND: slave revolt",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 3,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)",
+          "op": "===",
+          "value": "Slave Revolt"
+        }
+      ],
+      "branchReads": [
+        "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "COMPOUND_POOL_BY_CONDITION",
+      "rung": "table",
+      "reads": [
+        "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "defense.publicOrder"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "safetyLabel": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-DEF-3",
+      "pool": "COMPOUND: wartime",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 3,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)",
+          "op": "===",
+          "value": "Wartime"
+        }
+      ],
+      "branchReads": [
+        "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "COMPOUND_POOL_BY_CONDITION",
+      "rung": "table",
+      "reads": [
+        "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "defense.publicOrder"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "safetyLabel": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-DEF-3",
+      "pool": "COMPOUND: political fracture",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 3,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)",
+          "op": "===",
+          "value": "Political Fracture"
+        }
+      ],
+      "branchReads": [
+        "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "COMPOUND_POOL_BY_CONDITION",
+      "rung": "table",
+      "reads": [
+        "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "defense.publicOrder"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "safetyLabel": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-DEF-3",
+      "pool": "COMPOUND: succession crisis",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 3,
+      "grammars": 2,
+      "predicate": [
+        {
+          "field": "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)",
+          "op": "===",
+          "value": "Succession Crisis"
+        }
+      ],
+      "branchReads": [
+        "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "COMPOUND_POOL_BY_CONDITION",
+      "rung": "table",
+      "reads": [
+        "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "defense.publicOrder"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "safetyLabel": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-DEF-3",
+      "pool": "COMPOUND: betrayal",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 3,
+      "grammars": 3,
+      "predicate": [
+        {
+          "field": "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)",
+          "op": "===",
+          "value": "Aftermath of Betrayal"
+        }
+      ],
+      "branchReads": [
+        "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "COMPOUND_POOL_BY_CONDITION",
+      "rung": "table",
+      "reads": [
+        "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "defense.publicOrder"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "safetyLabel": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-DEF-3",
+      "pool": "COMPOUND: monster threat",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 3,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)",
+          "op": "===",
+          "value": "Monster Threat"
+        }
+      ],
+      "branchReads": [
+        "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "COMPOUND_POOL_BY_CONDITION",
+      "rung": "table",
+      "reads": [
+        "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "defense.publicOrder"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "safetyLabel": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-DEF-3",
+      "pool": "COMPOUND: debt crisis",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 3,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)",
+          "op": "===",
+          "value": "Debt Crisis"
+        }
+      ],
+      "branchReads": [
+        "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "COMPOUND_POOL_BY_CONDITION",
+      "rung": "table",
+      "reads": [
+        "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "defense.publicOrder"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "safetyLabel": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-DEF-3",
+      "pool": "COMPOUND: religious upheaval",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 3,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)",
+          "op": "===",
+          "value": "Religious Upheaval"
+        }
+      ],
+      "branchReads": [
+        "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "COMPOUND_POOL_BY_CONDITION",
+      "rung": "table",
+      "reads": [
+        "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "defense.publicOrder"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "safetyLabel": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-DEF-3",
+      "pool": "COMPOUND: mass migration, arrivals",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 3,
+      "grammars": 2,
+      "predicate": [],
+      "branchReads": [
+        "settlement.economicState.safetyProfile.safetyLabel",
+        "settlement.stress"
+      ],
+      "fieldsRead": [
+        "settlement.economicState.safetyProfile.safetyLabel",
+        "settlement.stress"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "compoundSafetyPoolKey",
+      "rung": "literal",
+      "reads": [
+        "settlement.economicState.safetyProfile.safetyLabel",
+        "settlement.stress"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "settlement.economicState.safetyProfile.safetyLabel": "measured",
+        "settlement.stress": "measured"
+      },
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "defense.publicOrder"
+      ],
+      "attach": [],
+      "k": 1,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "watch",
+        "kinds": [
+          "watch"
+        ],
+        "fields": {
+          "settlement.economicState.safetyProfile.safetyLabel": "watch",
+          "settlement.stress": ""
+        },
+        "holder": null,
+        "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
+        "standing": "LICENSED",
+        "twoSource": false,
+        "stateOrgan": true
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-DEF-3",
+      "pool": "COMPOUND: mass migration, departures",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 3,
+      "grammars": 1,
+      "predicate": [],
+      "branchReads": [
+        "settlement.economicState.safetyProfile.safetyLabel",
+        "settlement.stress"
+      ],
+      "fieldsRead": [
+        "settlement.economicState.safetyProfile.safetyLabel",
+        "settlement.stress"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "compoundSafetyPoolKey",
+      "rung": "literal",
+      "reads": [
+        "settlement.economicState.safetyProfile.safetyLabel",
+        "settlement.stress"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "settlement.economicState.safetyProfile.safetyLabel": "measured",
+        "settlement.stress": "measured"
+      },
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "defense.publicOrder"
+      ],
+      "attach": [],
+      "k": 1,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "watch",
+        "kinds": [
+          "watch"
+        ],
+        "fields": {
+          "settlement.economicState.safetyProfile.safetyLabel": "watch",
+          "settlement.stress": ""
+        },
+        "holder": null,
+        "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
+        "standing": "LICENSED",
+        "twoSource": false,
+        "stateOrgan": true
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-DEF-3",
+      "pool": "COMPOUND: authoritarian rule",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 3,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)",
+          "op": "===",
+          "value": "Authoritarian"
+        }
+      ],
+      "branchReads": [
+        "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "COMPOUND_POOL_BY_CONDITION",
+      "rung": "table",
+      "reads": [
+        "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "defense.publicOrder"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "safetyLabel": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-DEF-3",
+      "pool": "COMPOUND: criminal governance",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 3,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)",
+          "op": "===",
+          "value": "Criminal Governance"
+        }
+      ],
+      "branchReads": [
+        "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "COMPOUND_POOL_BY_CONDITION",
+      "rung": "table",
+      "reads": [
+        "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "defense.publicOrder"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "safetyLabel": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-DEF-3",
+      "pool": "First-Survey qualification (the reading is a first look)",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 3,
+      "grammars": 1,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -7074,7 +8136,9 @@
       "variants": 3,
       "grammars": 1,
       "predicate": [],
-      "branchReads": [],
+      "branchReads": [
+        "stress"
+      ],
       "fieldsRead": [
         "stress"
       ],
@@ -7085,7 +8149,7 @@
       "reads": [
         "stress"
       ],
-      "readsGrain": "function",
+      "readsGrain": "branch",
       "narrowed": false,
       "absent": {
         "stress": "measured"
@@ -7099,6 +8163,990 @@
       "attach": [],
       "k": 2,
       "rateBp": 3021,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "stress": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-DEF-8",
+      "pool": "override: ACTIVE SIEGE",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 3,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)",
+          "op": "===",
+          "value": "under_siege"
+        }
+      ],
+      "branchReads": [
+        "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "OVERRIDE_POOL_BY_TYPE",
+      "rung": "table",
+      "reads": [
+        "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "defense.militaryStatus"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "active.type": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-DEF-8",
+      "pool": "override: INTERNAL PRESSURE (famine)",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 3,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)",
+          "op": "===",
+          "value": "famine"
+        }
+      ],
+      "branchReads": [
+        "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "OVERRIDE_POOL_BY_TYPE",
+      "rung": "table",
+      "reads": [
+        "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "defense.militaryStatus"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "active.type": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-DEF-8",
+      "pool": "override: UNDER OCCUPATION",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 3,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)",
+          "op": "===",
+          "value": "occupied"
+        }
+      ],
+      "branchReads": [
+        "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "OVERRIDE_POOL_BY_TYPE",
+      "rung": "table",
+      "reads": [
+        "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "defense.militaryStatus"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "active.type": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-DEF-8",
+      "pool": "override: COMMAND SPLIT",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 3,
+      "grammars": 2,
+      "predicate": [
+        {
+          "field": "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)",
+          "op": "===",
+          "value": "politically_fractured"
+        }
+      ],
+      "branchReads": [
+        "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "OVERRIDE_POOL_BY_TYPE",
+      "rung": "table",
+      "reads": [
+        "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "defense.militaryStatus"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "active.type": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-DEF-8",
+      "pool": "override: UNDER TRIBUTE",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 3,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)",
+          "op": "===",
+          "value": "indebted"
+        }
+      ],
+      "branchReads": [
+        "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "OVERRIDE_POOL_BY_TYPE",
+      "rung": "table",
+      "reads": [
+        "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "defense.militaryStatus"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "active.type": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-DEF-8",
+      "pool": "override: SECURITY COMPROMISED",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 3,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)",
+          "op": "===",
+          "value": "recently_betrayed"
+        }
+      ],
+      "branchReads": [
+        "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "OVERRIDE_POOL_BY_TYPE",
+      "rung": "table",
+      "reads": [
+        "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "defense.militaryStatus"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "active.type": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-DEF-8",
+      "pool": "override: INFILTRATION ACTIVE",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 4,
+      "grammars": 2,
+      "predicate": [
+        {
+          "field": "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)",
+          "op": "===",
+          "value": "infiltrated"
+        }
+      ],
+      "branchReads": [
+        "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "OVERRIDE_POOL_BY_TYPE",
+      "rung": "table",
+      "reads": [
+        "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "defense.militaryStatus"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "active.type": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-DEF-8",
+      "pool": "override: QUARANTINE ACTIVE",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 3,
+      "grammars": 2,
+      "predicate": [
+        {
+          "field": "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)",
+          "op": "===",
+          "value": "plague_onset"
+        }
+      ],
+      "branchReads": [
+        "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "OVERRIDE_POOL_BY_TYPE",
+      "rung": "table",
+      "reads": [
+        "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "defense.militaryStatus"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "active.type": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-DEF-8",
+      "pool": "override: SUCCESSION CONTESTED",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 3,
+      "grammars": 2,
+      "predicate": [
+        {
+          "field": "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)",
+          "op": "===",
+          "value": "succession_void"
+        }
+      ],
+      "branchReads": [
+        "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "OVERRIDE_POOL_BY_TYPE",
+      "rung": "table",
+      "reads": [
+        "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "defense.militaryStatus"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "active.type": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-DEF-8",
+      "pool": "override: BEAST PRESSURE",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 3,
+      "grammars": 2,
+      "predicate": [
+        {
+          "field": "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)",
+          "op": "===",
+          "value": "monster_pressure"
+        }
+      ],
+      "branchReads": [
+        "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "OVERRIDE_POOL_BY_TYPE",
+      "rung": "table",
+      "reads": [
+        "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "defense.militaryStatus"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "active.type": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-DEF-8",
+      "pool": "override: INSURGENCY ACTIVE",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 3,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)",
+          "op": "===",
+          "value": "insurgency"
+        }
+      ],
+      "branchReads": [
+        "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "OVERRIDE_POOL_BY_TYPE",
+      "rung": "table",
+      "reads": [
+        "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "defense.militaryStatus"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "active.type": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-DEF-8",
+      "pool": "override: RELIGIOUS UPHEAVAL",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 3,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)",
+          "op": "===",
+          "value": "religious_conversion"
+        }
+      ],
+      "branchReads": [
+        "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "OVERRIDE_POOL_BY_TYPE",
+      "rung": "table",
+      "reads": [
+        "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "defense.militaryStatus"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "active.type": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-DEF-8",
+      "pool": "override: REVOLT ACTIVE",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 3,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)",
+          "op": "===",
+          "value": "slave_revolt"
+        }
+      ],
+      "branchReads": [
+        "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "OVERRIDE_POOL_BY_TYPE",
+      "rung": "table",
+      "reads": [
+        "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "defense.militaryStatus"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "active.type": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-DEF-8",
+      "pool": "override: WAR FOOTING",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 3,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)",
+          "op": "===",
+          "value": "wartime"
+        }
+      ],
+      "branchReads": [
+        "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "OVERRIDE_POOL_BY_TYPE",
+      "rung": "table",
+      "reads": [
+        "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "defense.militaryStatus"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "active.type": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-DEF-8",
+      "pool": "override: MIGRATION, arrivals",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 3,
+      "grammars": 3,
+      "predicate": [],
+      "branchReads": [
+        "stress"
+      ],
+      "fieldsRead": [
+        "stress"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "militaryOverridePoolKey",
+      "rung": "literal",
+      "reads": [
+        "stress"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "stress": "measured"
+      },
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "defense.militaryStatus"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "stress": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-DEF-8",
+      "pool": "override: MIGRATION, departures",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 3,
+      "grammars": 1,
+      "predicate": [],
+      "branchReads": [
+        "stress"
+      ],
+      "fieldsRead": [
+        "stress"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "militaryOverridePoolKey",
+      "rung": "literal",
+      "reads": [
+        "stress"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "stress": "measured"
+      },
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "defense.militaryStatus"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
       "departure": null,
       "source": {
         "kind": "",
@@ -45882,6 +47930,31 @@
       ]
     },
     {
+      "fact": "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)",
+      "pools": [
+        "DS-DEF-3 :: COMPOUND: occupation curfew",
+        "DS-DEF-3 :: COMPOUND: active siege",
+        "DS-DEF-3 :: COMPOUND: famine",
+        "DS-DEF-3 :: COMPOUND: plague",
+        "DS-DEF-3 :: COMPOUND: insurgency",
+        "DS-DEF-3 :: COMPOUND: slave revolt",
+        "DS-DEF-3 :: COMPOUND: wartime",
+        "DS-DEF-3 :: COMPOUND: political fracture",
+        "DS-DEF-3 :: COMPOUND: succession crisis",
+        "DS-DEF-3 :: COMPOUND: betrayal",
+        "DS-DEF-3 :: COMPOUND: monster threat",
+        "DS-DEF-3 :: COMPOUND: debt crisis",
+        "DS-DEF-3 :: COMPOUND: religious upheaval",
+        "DS-DEF-3 :: COMPOUND: authoritarian rule",
+        "DS-DEF-3 :: COMPOUND: criminal governance"
+      ],
+      "variants": 45,
+      "grammars": 19,
+      "blocks": [
+        "DS-DEF-3"
+      ]
+    },
+    {
       "fact": "condition.archetype",
       "pools": [
         "DS-CND-1 :: ARCHETYPE: reconstruction",
@@ -46606,6 +48679,30 @@
       ]
     },
     {
+      "fact": "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)",
+      "pools": [
+        "DS-DEF-8 :: override: ACTIVE SIEGE",
+        "DS-DEF-8 :: override: INTERNAL PRESSURE (famine)",
+        "DS-DEF-8 :: override: UNDER OCCUPATION",
+        "DS-DEF-8 :: override: COMMAND SPLIT",
+        "DS-DEF-8 :: override: UNDER TRIBUTE",
+        "DS-DEF-8 :: override: SECURITY COMPROMISED",
+        "DS-DEF-8 :: override: INFILTRATION ACTIVE",
+        "DS-DEF-8 :: override: QUARANTINE ACTIVE",
+        "DS-DEF-8 :: override: SUCCESSION CONTESTED",
+        "DS-DEF-8 :: override: BEAST PRESSURE",
+        "DS-DEF-8 :: override: INSURGENCY ACTIVE",
+        "DS-DEF-8 :: override: RELIGIOUS UPHEAVAL",
+        "DS-DEF-8 :: override: REVOLT ACTIVE",
+        "DS-DEF-8 :: override: WAR FOOTING"
+      ],
+      "variants": 43,
+      "grammars": 19,
+      "blocks": [
+        "DS-DEF-8"
+      ]
+    },
+    {
       "fact": "text(label) (via FOOD_POOL_OF in generalStateProse.js)",
       "pools": [
         "DS-GEN-3 :: foodSecurity.label: Secure",
@@ -46908,6 +49005,15 @@
         "mountsModifier": 0,
         "spineTabs": [
           "power"
+        ],
+        "modifierMounts": []
+      },
+      {
+        "field": "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse",
+        "mountsSpine": 1,
+        "mountsModifier": 0,
+        "spineTabs": [
+          "defense"
         ],
         "modifierMounts": []
       },
@@ -48818,7 +50924,7 @@
       },
       {
         "field": "settlement.economicState",
-        "mountsSpine": 3,
+        "mountsSpine": 4,
         "mountsModifier": 19,
         "spineTabs": [
           "defense",
@@ -49011,18 +51117,12 @@
       },
       {
         "field": "settlement.stress",
-        "mountsSpine": 0,
-        "mountsModifier": 11,
-        "spineTabs": [],
+        "mountsSpine": 1,
+        "mountsModifier": 3,
+        "spineTabs": [
+          "defense"
+        ],
         "modifierMounts": [
-          "defense.armedForces",
-          "defense.criminalStructure",
-          "defense.militaryStatus",
-          "defense.postureHeader",
-          "defense.publicOrder",
-          "defense.supportingCapabilities",
-          "defense.threatAssessment",
-          "defense.wallRationale",
           "viability.isolationSupport",
           "viability.magicDependency",
           "viability.verdict"
@@ -49077,6 +51177,15 @@
         "mountsModifier": 0,
         "spineTabs": [
           "war"
+        ],
+        "modifierMounts": []
+      },
+      {
+        "field": "text(active",
+        "mountsSpine": 1,
+        "mountsModifier": 0,
+        "spineTabs": [
+          "defense"
         ],
         "modifierMounts": []
       },
@@ -49267,7 +51376,7 @@
       ],
       [
         "defense",
-        5
+        4
       ]
     ],
     "notExecutable": []
@@ -49309,6 +51418,13 @@
       "meanReachBp": 8500
     },
     {
+      "block": "DS-DEF-3",
+      "spines": 17,
+      "facts": 3,
+      "spinesReachedBp": 10000,
+      "meanReachBp": 6275
+    },
+    {
       "block": "DS-DEF-4",
       "spines": 8,
       "facts": 7,
@@ -49331,10 +51447,10 @@
     },
     {
       "block": "DS-DEF-8",
-      "spines": 3,
-      "facts": 2,
-      "spinesReachedBp": 3333,
-      "meanReachBp": 1667
+      "spines": 19,
+      "facts": 3,
+      "spinesReachedBp": 10000,
+      "meanReachBp": 6316
     },
     {
       "block": "DS-DEF-9",
@@ -50057,6 +52173,62 @@
       ]
     },
     {
+      "block": "DS-DEF-3",
+      "spines": 17,
+      "facts": 3,
+      "spinesReachedBp": 10000,
+      "meanReachBp": 6275,
+      "byFact": [
+        {
+          "field": "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)",
+          "attach": [
+            "COMPOUND: mass migration, arrivals",
+            "COMPOUND: mass migration, departures"
+          ]
+        },
+        {
+          "field": "settlement.economicState.safetyProfile.safetyLabel",
+          "attach": [
+            "COMPOUND: occupation curfew",
+            "COMPOUND: active siege",
+            "COMPOUND: famine",
+            "COMPOUND: plague",
+            "COMPOUND: insurgency",
+            "COMPOUND: slave revolt",
+            "COMPOUND: wartime",
+            "COMPOUND: political fracture",
+            "COMPOUND: succession crisis",
+            "COMPOUND: betrayal",
+            "COMPOUND: monster threat",
+            "COMPOUND: debt crisis",
+            "COMPOUND: religious upheaval",
+            "COMPOUND: authoritarian rule",
+            "COMPOUND: criminal governance"
+          ]
+        },
+        {
+          "field": "settlement.stress",
+          "attach": [
+            "COMPOUND: occupation curfew",
+            "COMPOUND: active siege",
+            "COMPOUND: famine",
+            "COMPOUND: plague",
+            "COMPOUND: insurgency",
+            "COMPOUND: slave revolt",
+            "COMPOUND: wartime",
+            "COMPOUND: political fracture",
+            "COMPOUND: succession crisis",
+            "COMPOUND: betrayal",
+            "COMPOUND: monster threat",
+            "COMPOUND: debt crisis",
+            "COMPOUND: religious upheaval",
+            "COMPOUND: authoritarian rule",
+            "COMPOUND: criminal governance"
+          ]
+        }
+      ]
+    },
+    {
       "block": "DS-DEF-4",
       "spines": 8,
       "facts": 7,
@@ -50642,20 +52814,61 @@
     },
     {
       "block": "DS-DEF-8",
-      "spines": 3,
-      "facts": 2,
-      "spinesReachedBp": 3333,
-      "meanReachBp": 1667,
+      "spines": 19,
+      "facts": 3,
+      "spinesReachedBp": 10000,
+      "meanReachBp": 6316,
       "byFact": [
         {
           "field": "settlement.economicViability.viable",
           "attach": [
-            "override active (generic framing)"
+            "override active (generic framing)",
+            "override: ACTIVE SIEGE",
+            "override: INTERNAL PRESSURE (famine)",
+            "override: UNDER OCCUPATION",
+            "override: COMMAND SPLIT",
+            "override: UNDER TRIBUTE",
+            "override: SECURITY COMPROMISED",
+            "override: INFILTRATION ACTIVE",
+            "override: QUARANTINE ACTIVE",
+            "override: SUCCESSION CONTESTED",
+            "override: BEAST PRESSURE",
+            "override: INSURGENCY ACTIVE",
+            "override: RELIGIOUS UPHEAVAL",
+            "override: REVOLT ACTIVE",
+            "override: WAR FOOTING",
+            "override: MIGRATION, arrivals",
+            "override: MIGRATION, departures"
           ]
         },
         {
           "field": "stress",
-          "attach": []
+          "attach": [
+            "override: ACTIVE SIEGE",
+            "override: INTERNAL PRESSURE (famine)",
+            "override: UNDER OCCUPATION",
+            "override: COMMAND SPLIT",
+            "override: UNDER TRIBUTE",
+            "override: SECURITY COMPROMISED",
+            "override: INFILTRATION ACTIVE",
+            "override: QUARANTINE ACTIVE",
+            "override: SUCCESSION CONTESTED",
+            "override: BEAST PRESSURE",
+            "override: INSURGENCY ACTIVE",
+            "override: RELIGIOUS UPHEAVAL",
+            "override: REVOLT ACTIVE",
+            "override: WAR FOOTING"
+          ]
+        },
+        {
+          "field": "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)",
+          "attach": [
+            "override active (generic framing)",
+            "override: MIGRATION, arrivals",
+            "override: MIGRATION, departures",
+            "override active, viability threatened",
+            "override active, viability intact"
+          ]
         }
       ]
     },
@@ -52454,7 +54667,7 @@
   ],
   "factBudget": {
     "zeroK": 66,
-    "executable": 365,
+    "executable": 398,
     "notExecutable": 368,
     "byBlock": [
       [
@@ -52598,10 +54811,17 @@
         }
       ],
       [
+        "DS-DEF-3",
+        {
+          "zeroK": 0,
+          "spines": 17
+        }
+      ],
+      [
         "DS-DEF-8",
         {
           "zeroK": 0,
-          "spines": 3
+          "spines": 19
         }
       ],
       [
@@ -52850,18 +55070,18 @@
       ],
       [
         1,
-        87
+        89
       ],
       [
         2,
-        212
+        243
       ]
     ]
   },
   "grains": {
     "branch": {
       "zeroK": 66,
-      "executable": 365,
+      "executable": 398,
       "notExecutable": 368,
       "histogram": [
         [
@@ -52898,14 +55118,14 @@
         ],
         [
           1,
-          87
+          89
         ],
         [
           2,
-          212
+          243
         ]
       ],
-      "blocksWithSpine": 51,
+      "blocksWithSpine": 52,
       "cannotAttach": [
         "DS-DEF-6",
         "DS-ECO-1",
@@ -52929,7 +55149,7 @@
         "DS-STR-1",
         "DS-WAR-3"
       ],
-      "readPaths": 658,
+      "readPaths": 693,
       "modifierEligibleFactsByTab": [
         [
           "economics",
@@ -52981,13 +55201,13 @@
         ],
         [
           "defense",
-          5
+          4
         ]
       ]
     },
     "function": {
       "zeroK": 144,
-      "executable": 365,
+      "executable": 398,
       "notExecutable": 368,
       "histogram": [
         [
@@ -53016,14 +55236,14 @@
         ],
         [
           1,
-          89
+          91
         ],
         [
           2,
-          132
+          163
         ]
       ],
-      "blocksWithSpine": 51,
+      "blocksWithSpine": 52,
       "cannotAttach": [
         "DS-DEF-11",
         "DS-DEF-12",
@@ -53051,7 +55271,7 @@
         "DS-STR-1",
         "DS-WAR-3"
       ],
-      "readPaths": 923,
+      "readPaths": 958,
       "modifierEligibleFactsByTab": [
         [
           "economics",
@@ -53098,12 +55318,12 @@
           6
         ],
         [
-          "defense",
+          "war",
           5
         ],
         [
-          "war",
-          5
+          "defense",
+          4
         ]
       ]
     }
@@ -53430,14 +55650,14 @@
     ],
     "summary": {
       "rows": {
-        "LICENSED": 120,
+        "LICENSED": 122,
         "OFFICE": 3,
-        "SOURCE-UNRESOLVED": 610
+        "SOURCE-UNRESOLVED": 641
       },
       "fields": {
-        "LICENSED": 200,
+        "LICENSED": 202,
         "OFFICE": 5,
-        "SOURCE-UNRESOLVED": 513
+        "SOURCE-UNRESOLVED": 546
       },
       "byKind": [
         [
@@ -53458,7 +55678,7 @@
         ],
         [
           "watch",
-          14
+          16
         ],
         [
           "toll-bar",
@@ -53482,7 +55702,7 @@
         ]
       ],
       "unresolvedGrounds": {
-        "no-mapping": 513,
+        "no-mapping": 546,
         "no-institution-in-roster": 0
       },
       "twoSourceRows": 10,
@@ -54841,8 +57061,8 @@
       "leafBoth": 0,
       "leafEither": 2,
       "leafRows": [],
-      "deskRoots": 95,
-      "deskSegments": 222
+      "deskRoots": 98,
+      "deskSegments": 227
     }
   },
   "ratifiedAliases": {
@@ -55215,10 +57435,20 @@
       "rolls",
       "watch"
     ],
+    "settlement.economicState.safetyProfile.safetyLabel": [
+      "roll",
+      "rolls",
+      "watch"
+    ],
     "settlement.economicViability.viable": [
       "books",
       "chest",
       "purse"
+    ],
+    "settlement.stress": [
+      "roll",
+      "rolls",
+      "watch"
     ],
     "settlement.tier": [
       "muster",
@@ -55548,16 +57778,6 @@
       "subject": "settlement.resourceAnalysis",
       "fields": [
         "settlement.resourceAnalysis"
-      ],
-      "readingFunction": "(no key function reads it)",
-      "count": "0 pools keyed on this fact"
-    },
-    {
-      "tier": "MISSING",
-      "block": "(composer-wide)",
-      "subject": "settlement.stress",
-      "fields": [
-        "settlement.stress"
       ],
       "readingFunction": "(no key function reads it)",
       "count": "0 pools keyed on this fact"
@@ -56039,6 +58259,172 @@
       "subject": "COMPOUND override (a crisis stress has rewritten the label)",
       "fields": [],
       "readingFunction": "(unresolved)",
+      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-DEF-3",
+      "subject": "COMPOUND: occupation curfew",
+      "fields": [
+        "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)"
+      ],
+      "readingFunction": "COMPOUND_POOL_BY_CONDITION",
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-DEF-3",
+      "subject": "COMPOUND: active siege",
+      "fields": [
+        "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)"
+      ],
+      "readingFunction": "COMPOUND_POOL_BY_CONDITION",
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-DEF-3",
+      "subject": "COMPOUND: famine",
+      "fields": [
+        "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)"
+      ],
+      "readingFunction": "COMPOUND_POOL_BY_CONDITION",
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-DEF-3",
+      "subject": "COMPOUND: plague",
+      "fields": [
+        "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)"
+      ],
+      "readingFunction": "COMPOUND_POOL_BY_CONDITION",
+      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-DEF-3",
+      "subject": "COMPOUND: insurgency",
+      "fields": [
+        "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)"
+      ],
+      "readingFunction": "COMPOUND_POOL_BY_CONDITION",
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-DEF-3",
+      "subject": "COMPOUND: slave revolt",
+      "fields": [
+        "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)"
+      ],
+      "readingFunction": "COMPOUND_POOL_BY_CONDITION",
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-DEF-3",
+      "subject": "COMPOUND: wartime",
+      "fields": [
+        "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)"
+      ],
+      "readingFunction": "COMPOUND_POOL_BY_CONDITION",
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-DEF-3",
+      "subject": "COMPOUND: political fracture",
+      "fields": [
+        "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)"
+      ],
+      "readingFunction": "COMPOUND_POOL_BY_CONDITION",
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-DEF-3",
+      "subject": "COMPOUND: succession crisis",
+      "fields": [
+        "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)"
+      ],
+      "readingFunction": "COMPOUND_POOL_BY_CONDITION",
+      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-DEF-3",
+      "subject": "COMPOUND: betrayal",
+      "fields": [
+        "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)"
+      ],
+      "readingFunction": "COMPOUND_POOL_BY_CONDITION",
+      "count": "3 variant(s) · 3 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-DEF-3",
+      "subject": "COMPOUND: monster threat",
+      "fields": [
+        "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)"
+      ],
+      "readingFunction": "COMPOUND_POOL_BY_CONDITION",
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-DEF-3",
+      "subject": "COMPOUND: debt crisis",
+      "fields": [
+        "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)"
+      ],
+      "readingFunction": "COMPOUND_POOL_BY_CONDITION",
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-DEF-3",
+      "subject": "COMPOUND: religious upheaval",
+      "fields": [
+        "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)"
+      ],
+      "readingFunction": "COMPOUND_POOL_BY_CONDITION",
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-DEF-3",
+      "subject": "COMPOUND: mass migration, arrivals",
+      "fields": [],
+      "readingFunction": "compoundSafetyPoolKey",
+      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-DEF-3",
+      "subject": "COMPOUND: mass migration, departures",
+      "fields": [],
+      "readingFunction": "compoundSafetyPoolKey",
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-DEF-3",
+      "subject": "COMPOUND: authoritarian rule",
+      "fields": [
+        "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)"
+      ],
+      "readingFunction": "COMPOUND_POOL_BY_CONDITION",
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-DEF-3",
+      "subject": "COMPOUND: criminal governance",
+      "fields": [
+        "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)"
+      ],
+      "readingFunction": "COMPOUND_POOL_BY_CONDITION",
       "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
@@ -56047,7 +58433,7 @@
       "subject": "First-Survey qualification (the reading is a first look)",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -56617,6 +59003,162 @@
       "tier": "THIN",
       "block": "DS-DEF-8",
       "subject": "override active (generic framing)",
+      "fields": [],
+      "readingFunction": "militaryOverridePoolKey",
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-DEF-8",
+      "subject": "override: ACTIVE SIEGE",
+      "fields": [
+        "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)"
+      ],
+      "readingFunction": "OVERRIDE_POOL_BY_TYPE",
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-DEF-8",
+      "subject": "override: INTERNAL PRESSURE (famine)",
+      "fields": [
+        "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)"
+      ],
+      "readingFunction": "OVERRIDE_POOL_BY_TYPE",
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-DEF-8",
+      "subject": "override: UNDER OCCUPATION",
+      "fields": [
+        "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)"
+      ],
+      "readingFunction": "OVERRIDE_POOL_BY_TYPE",
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-DEF-8",
+      "subject": "override: COMMAND SPLIT",
+      "fields": [
+        "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)"
+      ],
+      "readingFunction": "OVERRIDE_POOL_BY_TYPE",
+      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-DEF-8",
+      "subject": "override: UNDER TRIBUTE",
+      "fields": [
+        "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)"
+      ],
+      "readingFunction": "OVERRIDE_POOL_BY_TYPE",
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-DEF-8",
+      "subject": "override: SECURITY COMPROMISED",
+      "fields": [
+        "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)"
+      ],
+      "readingFunction": "OVERRIDE_POOL_BY_TYPE",
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-DEF-8",
+      "subject": "override: INFILTRATION ACTIVE",
+      "fields": [
+        "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)"
+      ],
+      "readingFunction": "OVERRIDE_POOL_BY_TYPE",
+      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-DEF-8",
+      "subject": "override: QUARANTINE ACTIVE",
+      "fields": [
+        "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)"
+      ],
+      "readingFunction": "OVERRIDE_POOL_BY_TYPE",
+      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-DEF-8",
+      "subject": "override: SUCCESSION CONTESTED",
+      "fields": [
+        "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)"
+      ],
+      "readingFunction": "OVERRIDE_POOL_BY_TYPE",
+      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-DEF-8",
+      "subject": "override: BEAST PRESSURE",
+      "fields": [
+        "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)"
+      ],
+      "readingFunction": "OVERRIDE_POOL_BY_TYPE",
+      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-DEF-8",
+      "subject": "override: INSURGENCY ACTIVE",
+      "fields": [
+        "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)"
+      ],
+      "readingFunction": "OVERRIDE_POOL_BY_TYPE",
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-DEF-8",
+      "subject": "override: RELIGIOUS UPHEAVAL",
+      "fields": [
+        "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)"
+      ],
+      "readingFunction": "OVERRIDE_POOL_BY_TYPE",
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-DEF-8",
+      "subject": "override: REVOLT ACTIVE",
+      "fields": [
+        "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)"
+      ],
+      "readingFunction": "OVERRIDE_POOL_BY_TYPE",
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-DEF-8",
+      "subject": "override: WAR FOOTING",
+      "fields": [
+        "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)"
+      ],
+      "readingFunction": "OVERRIDE_POOL_BY_TYPE",
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-DEF-8",
+      "subject": "override: MIGRATION, arrivals",
+      "fields": [],
+      "readingFunction": "militaryOverridePoolKey",
+      "count": "3 variant(s) · 3 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-DEF-8",
+      "subject": "override: MIGRATION, departures",
       "fields": [],
       "readingFunction": "militaryOverridePoolKey",
       "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"

@@ -101,6 +101,7 @@ import { deriveMagicReliance, magicDialAbsent } from '../../magicReliance.js';
 import { SMALL_TIERS, TOWN_PLUS_TIERS } from '../../../data/constants.js';
 import { scoreBand } from '../defenseScoreBands.js';
 import { DEFENSE_STRESS_STATUS } from '../defenseDisplay.js';
+import { migrationDirectionOfEntry, migrationDirectionOfStress } from '../../migrationDirection.js';
 import { DOSSIER_STATE_PROSE_DEFENSE } from '../../../data/dossierStateProse/defense.generated.js';
 import {
   DM_FIELD_FRAMED_BY_BLOCK, projectBesideDmField, readProsePath,
@@ -183,6 +184,66 @@ export function publicOrderPoolKey(safetyLabel) {
   if (!label) return null;
   if (isCompoundSafetyLabel(label)) return COMPOUND_POOL;
   return CORPUS['DS-DEF-3'].pools[label] ? label : null;
+}
+
+/**
+ * ── THE STRESS TYPE IN THE POOL KEY (STYLE-RULINGS §1a; W2 DEF, 2026-11-07) ──────────
+ * The COMPOUND pool was ONE variant set for every crisis, and its first line was the most
+ * repeated story frame of the 1,000 (564 towns). Each condition the generator writes into a
+ * compound label (`safetyProfile.js`: the lead strain's condition) now has its own pool; the
+ * two non-crisis compounds (state control, criminal government) have theirs. TOTAL over the
+ * producer's conditions; a condition this table has never heard of still routes to the
+ * generic COMPOUND pool, so a new crisis reads as a crisis rather than as an ordinary label.
+ * @type {Readonly<Record<string, string>>}
+ */
+const COMPOUND_POOL_BY_CONDITION = Object.freeze({
+  'Occupation Curfew': 'COMPOUND: occupation curfew',
+  'Active Siege': 'COMPOUND: active siege',
+  'Famine Conditions': 'COMPOUND: famine',
+  'Plague Conditions': 'COMPOUND: plague',
+  Insurgency: 'COMPOUND: insurgency',
+  'Slave Revolt': 'COMPOUND: slave revolt',
+  Wartime: 'COMPOUND: wartime',
+  'Political Fracture': 'COMPOUND: political fracture',
+  'Succession Crisis': 'COMPOUND: succession crisis',
+  'Aftermath of Betrayal': 'COMPOUND: betrayal',
+  'Monster Threat': 'COMPOUND: monster threat',
+  'Debt Crisis': 'COMPOUND: debt crisis',
+  'Religious Upheaval': 'COMPOUND: religious upheaval',
+  Authoritarian: 'COMPOUND: authoritarian rule',
+  'Criminal Governance': 'COMPOUND: criminal governance',
+});
+
+/** Every condition the table above keys, exported so the desk suite binds it to the producer. */
+export const COMPOUND_CONDITIONS = Object.freeze([...Object.keys(COMPOUND_POOL_BY_CONDITION), 'Mass Migration']);
+
+/**
+ * The LEAD condition of a compound label: the producer writes `<strain> — <condition>` for the
+ * leading strain, then ` + <condition>` for each further one, and one strain (`Dangerous — Plague
+ * Unrest`) carries a dash of its own — so the lead condition is the text after the LAST dash of
+ * the first `+` segment.
+ * @param {unknown} safetyLabel @returns {string}
+ */
+export function compoundConditionOf(safetyLabel) {
+  const lead = text(safetyLabel).split(' + ')[0];
+  const parts = lead.split(/\s[—–]\s/);
+  return parts.length > 1 ? parts[parts.length - 1].trim() : '';
+}
+
+/**
+ * DS-DEF-3's compound pool key, asked by the desk only where `publicOrderPoolKey` answered the
+ * generic COMPOUND pool: the lead condition's own pool; the migration pool by the stressor's
+ * direction (W0's `stress[].direction`); the generic pool for a condition the table does not
+ * carry. The desk hands it the record paths inline, so the census reads the label and the stress.
+ * @param {unknown} safetyLabel @param {unknown} stress @returns {string}
+ */
+export function compoundSafetyPoolKey(safetyLabel, stress) {
+  if (compoundConditionOf(safetyLabel) === 'Mass Migration') {
+    if (migrationDirectionOfStress(stress) === 'departures') return 'COMPOUND: mass migration, departures';
+    return 'COMPOUND: mass migration, arrivals';
+  }
+  if (COMPOUND_POOL_BY_CONDITION[compoundConditionOf(safetyLabel)]) return COMPOUND_POOL_BY_CONDITION[compoundConditionOf(safetyLabel)];
+  return COMPOUND_POOL;
 }
 
 /**
@@ -1145,8 +1206,8 @@ export function defenseWallRationaleProse(settlement, options = {}) {
  */
 const DEF8_DECLARED_DARK_POOL = 'multiple stresses, one posture shown';
 
-/** The pool declared dark above, exported so the desk suite pins the claim. */
-export const DEF8_UNREACHABLE_POOLS = Object.freeze([DEF8_DECLARED_DARK_POOL]);
+/** The pools declared dark: the one above, and the generic framing (kept; the per-type table below is total, W2 DEF 2026-11-07). */
+export const DEF8_UNREACHABLE_POOLS = Object.freeze([DEF8_DECLARED_DARK_POOL, 'override active (generic framing)']);
 
 /**
  * A stress entry as this desk reads it.
@@ -1184,8 +1245,44 @@ export function activeDefenceStress(stress) {
  * @param {unknown} stress @returns {string|null}
  */
 export function militaryOverridePoolKey(stress) {
-  return activeDefenceStress(stress) ? 'override active (generic framing)' : null;
+  const active = activeDefenceStress(stress);
+  if (!active) return null;
+  if (text(active.type) === 'mass_migration') {
+    if (migrationDirectionOfEntry(active) === 'departures') return 'override: MIGRATION, departures';
+    return 'override: MIGRATION, arrivals';
+  }
+  if (OVERRIDE_POOL_BY_TYPE[text(active.type)]) return OVERRIDE_POOL_BY_TYPE[text(active.type)];
+  return 'override active (generic framing)';
 }
+
+/**
+ * ── THE STRESS TYPE IN THE POOL KEY, DS-DEF-8 (STYLE-RULINGS §1a; W2 DEF, 2026-11-07) ─
+ * The framing lens was one variant set for every crisis. Each posture of `DEFENSE_STRESS_STATUS`
+ * now has its own pool (the migration posture split by W0's direction above), so the line says
+ * what THIS crisis does to the town's defence. TOTAL over `STRESS_TYPE_MAP` (the desk suite pins
+ * it), which is why the generic framing pool no longer draws: it is kept (the frame is fixed)
+ * and declared in `DEF8_UNREACHABLE_POOLS`, the fallback for a stress type this table lacks.
+ * @type {Readonly<Record<string, string>>}
+ */
+const OVERRIDE_POOL_BY_TYPE = Object.freeze({
+  under_siege: 'override: ACTIVE SIEGE',
+  famine: 'override: INTERNAL PRESSURE (famine)',
+  occupied: 'override: UNDER OCCUPATION',
+  politically_fractured: 'override: COMMAND SPLIT',
+  indebted: 'override: UNDER TRIBUTE',
+  recently_betrayed: 'override: SECURITY COMPROMISED',
+  infiltrated: 'override: INFILTRATION ACTIVE',
+  plague_onset: 'override: QUARANTINE ACTIVE',
+  succession_void: 'override: SUCCESSION CONTESTED',
+  monster_pressure: 'override: BEAST PRESSURE',
+  insurgency: 'override: INSURGENCY ACTIVE',
+  religious_conversion: 'override: RELIGIOUS UPHEAVAL',
+  slave_revolt: 'override: REVOLT ACTIVE',
+  wartime: 'override: WAR FOOTING',
+});
+
+/** The stress types the per-type table keys, exported so the desk suite binds it to `STRESS_TYPE_MAP`. */
+export const OVERRIDE_TYPES = Object.freeze([...Object.keys(OVERRIDE_POOL_BY_TYPE), 'mass_migration']);
 
 /**
  * DS-DEF-8 lens 2 — IS THE TOWN'S CONTINUATION IN QUESTION?
@@ -1517,7 +1614,10 @@ export function defenseStateProse(settlement, options = {}) {
     })
     : null);
 
-  const orderKey = publicOrderPoolKey(label);
+  // STYLE-RULINGS §1a: a compound label is keyed by its condition (and a migration by its direction).
+  const orderKey = publicOrderPoolKey(label) === COMPOUND_POOL
+    ? compoundSafetyPoolKey(settlement?.economicState?.safetyProfile?.safetyLabel, settlement?.stress)
+    : publicOrderPoolKey(label);
   const surveyKey = firstSurveyPoolKey(label);
   const orderLine = line(orderKey);
   const surveyLine = line(surveyKey);
