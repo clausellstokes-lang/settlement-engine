@@ -79,7 +79,11 @@
 - `tests/lint/observedShapeReaders.walker.test.js` (4 arms) and `tests/lint/writerReach.walker.test.js` "corpusMeta EQUALS" — the observed-shape STOP above.
 - `tests/lint/heldKeyWriterCensus` A3, `recordMerge` A3/A4, `nameHeldThroughAssembly` A1, `rosterFinalUnderHeldRoster` A1, `vendorPdfLazy` (4), `repeatOnceTonightTraditions`, `negativeAssertionAnchor` (2) — red at the base with the same arms, not this lane's.
 
-**The wide sweep** (`tests/generators tests/domain tests/store tests/components tests/lib tests/pdf`, at the tip and at the base worktree): PENDING at this commit — the run is in flight; its attribution lands in the next commit.
+**The wide sweep** (`tests/generators tests/domain tests/store tests/components tests/lib tests/pdf`, at the tip and at the base worktree, the same command): base 36 failing tests; **tip 71 failing tests in 44 files**. 35 tests in 18 files are red at the tip and NOT at the base; none of the base's is cured. All 35 come from two causes of this lane's: (a) the v2 boundary strips the grouping and the five fields from every RETURNED record (§1), and (b) `createNpc` stores `memberships` not `linkedFactionIds`, and `entityLinksFaction` reads `memberships`. By owner:
+
+- **FPZ's (M-6), broken by design: 18 tests in 8 files.** These are the simulation's readers of the retired fields or of `linkedFactionIds` through `createNpc`/`entityLinksFaction`: `densityLaw` (4), `killNpcDoubleImpair` (3: the event layer's impairments read `linkedFactionIds`), `npc/characterConsumers` (3), `clergyTraitPlane` (2), `worldPulseFactionSeating` (2), `deityStanceLane` (1), `religionLegitimacyFactionKey` (1), `regenNpcEnrichment` (1).
+- **Lane 5a's birth and display readers on the returned record: 6 tests in 6 files.** `personaSlicerFactionRoster`, `instantWorld/factionDedup`, `generationReceiptJudgments` (PEOPLE-5-PREP §1 BIRTH/DISPLAY rows: `personaSlicer.js`, `factionDedup.js`, `generationReceiptJudgments.js`), `npcCrimeSignalWriters` (a corruption-pass reader of `secondaryAffiliation`), `dossier/seatHolder` (lane 2's seat read, 1), `people/castPowers` (2: lane 1's arm reads the shim's `factionAffiliation` on the returned record, which the landing deletes).
+- **This lane's, NOT re-keyed (the remainder, §9): 11 tests in 4 files.** `generationCertificationCorpus` (7: the same "conflict parties vs the grouping" reader this lane re-pointed in the soak script, in its test twin), `persistenceAdmission` (2: the save admission's schema-version and local-cache shape at schema 2), `pipelinePinnedChoosers` (1: the pinned key list 18 -> 17, the grouping's chooser key), `pipelinePinnedMode` (1: a pinned run's byte-equality over a record now normalized to v2).
 
 ## 5. FPZ's files, broken by design at birth (M-6)
 
@@ -95,4 +99,12 @@ CONFIRMED: every figure in §2 (the migration test's own assertions; both instru
 
 ## 8. The tip
 
-`lane/people-5b-edit-2026-11-07`, pushed with `--no-verify`. Commits, oldest first: `069c6c7bc` (1) · `57b0de61e` (2) · `15207301f` (3) · `864ae97dd` (4, registers) · `004606b4f` (4, contract and soak cure) · this record's commit. The tip is the commit that carries this file's last edit.
+`lane/people-5b-edit-2026-11-07`, pushed with `--no-verify`. Commits, oldest first: `069c6c7bc` (1) · `57b0de61e` (2) · `15207301f` (3) · `864ae97dd` (4, registers) · `004606b4f` (4, contract and soak cure) · `32dfacaee` (this record, first cut) · the commit that fills §4's wide sweep and §9. The tip is the commit that carries this file's last edit.
+
+## 9. The remainder for a second seat (numbered)
+
+1. Re-key `tests/generators/generationCertificationCorpus.test.js` (7): conflict parties checked against `powerStructure.factions` (as `scripts/audit/generation-certification-soak.mjs` now does); its member check left with the grouping.
+2. Re-key `tests/lib/persistenceAdmission.test.js` (2) to schema 2: measure what the admission now reports and re-key with cause M-7.
+3. Re-key `tests/generators/pipelinePinnedChoosers.test.js` (1) and `pipelinePinnedMode.test.js` (1): measure the pinned key list and the pinned run under the v2 boundary; re-key with cause M-7.
+4. The observed-shape rung 30 -> 31 (§3, the chair's ruling first): a restored predecessor, the migration's v1 reads declared as one class, FPZ's rows admitted with attribution, 5a's re-points landed first.
+5. Hand lane 5a the six birth/display reds above and the export allowlist's three unwritten keys (§3, writer reach).
