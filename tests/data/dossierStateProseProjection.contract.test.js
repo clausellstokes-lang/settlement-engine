@@ -59,7 +59,7 @@ import {
   AUDIENCE_DM, AUDIENCE_PLAYER, STATE_MARK_DIMENSIONS,
   eligibleVariants, poolDimensions, readStateProse,
 } from '../../src/domain/display/stateProse/stateProseKernel.js';
-import { assertDeclarable } from '../../src/domain/facts/factVocabulary.js';
+import { COLOUR_MARK, assertDeclarable } from '../../src/domain/facts/factVocabulary.js';
 import { CALM_FACTS_ADMIT_ALL } from '../helpers/calmFactsDouble.js';
 
 const ROOT = resolve(import.meta.dirname, '../..');
@@ -801,7 +801,10 @@ describe('the demoted state dimension — the channel the kernel enforces', () =
     // a DECLARABLE one (a home answers it): an unknown atom, or one with no reader yet, is
     // unclassified exactly as an unknown mark word is.
     const declarable = (m) => { try { assertDeclarable(m.replace(/^no\s+/, '')); return true; } catch { return false; } };
-    const unclassified = [...stateMarks].filter((m) => m !== 'dm-only' && !vocabulary.includes(m) && !declarable(m));
+    // R-AO (factVocabulary.js :: COLOUR_MARK): the per-line `colour` mark is the vocabulary's own
+    // no-atom declaration ("read; presumes nothing"), classified by name; it first reached the
+    // leaves at census-3g unit 3 (b1aab0f21) and census-5d unit 2a (c24d7118e), parallel lanes.
+    const unclassified = [...stateMarks].filter((m) => m !== 'dm-only' && m !== COLOUR_MARK && !vocabulary.includes(m) && !declarable(m));
     const inTwoDimensions = vocabulary.filter((word, i) => vocabulary.indexOf(word) !== i);
     // The causal register's arm names are family-local and OPEN (92 distinct today), so
     // they cannot be a closed vocabulary and stay outside STATE_MARK_DIMENSIONS. What must
