@@ -131,8 +131,8 @@ const FIXTURE_INPUT_FILES = Object.freeze([
  *     sentence is the walker's input, not a draw.
  *   economyReadModelCoverage:414 — a NEEDLE for a source scan ("this sentence is minted in one
  *     module"). It is looking for the string in `src/`, which is the opposite direction.
- *   envoyKindPools:55 — a different pool family's AUTHORED list, pinned as that family's own
- *     roster.
+ *   envoyKindPools:55 — RETIRED at WIRING W3's second seat (2026-11-07): the power-leaf variant its
+ *     authored list coincided with was rewritten under the owner's style law, so the row is spent.
  *   warRemembranceReader:136 — a UI HEADING used as an `expectAbsentWithAnchor` anchor, which
  *     the matcher aligns against a power-leaf variant by coincidence. Not corpus prose.
  *   treatyVoiceCure:157 — ADDED 2026-10-01 (the urban-band chair, a base red picked up under the
@@ -150,7 +150,6 @@ const FROZEN_LITERAL_ANCHORS = Object.freeze({
   'tests/domain/treatyVoiceCure.test.js': 1,
   'tests/lint/dossierMountRegistry.walker.test.js': 1,
   'tests/lint/economyReadModelCoverage.walker.test.js': 1,
-  'tests/lint/envoyKindPools.walker.test.js': 1,
   'tests/ui/warRemembranceReader.test.jsx': 1,
 });
 

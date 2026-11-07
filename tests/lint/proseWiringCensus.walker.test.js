@@ -199,7 +199,8 @@ describe('the wiring census — TOTALITY over the corpus', () => {
     // 2342 -> 2343 at LANDING-R2 helper G (the chair's §934.105 ruling (1): DS-GEN-17 PROVISIONED v3, the hospital-only line) +1.
     // 2343 -> 2344 at LANDING-R2 helper G2 (the chair's 06:5x DS-CND-1 boom line (ODQ §934.105, ruling (2)): ARCHETYPE: boom v4 `[street · crisis: any]`) +1.
     // WIRING W3 (2026-11-07), C1-C6 said in DS-POW-5/-6 (+8 pools, +19 variants): 2344 -> 2363.
-    expect(summary.variants, 'the R1 corpus holds this many variants').toBe(2363);
+    // WIRING W3 second seat (2026-11-07), the owner's style law over DS-POW-1/-2/-5/-6/-7: the #23 tier twins (DS-POW-1 Endorsed v5, Legitimacy Crisis v5) +2 variants: 2363 -> 2365.
+    expect(summary.variants, 'the R1 corpus holds this many variants').toBe(2365);
     // THE MEAN IS THE CALLER'S TO FORMAT (INSTR-912 car 11). The census publishes `variants`
     // and `total` as integers; a `toFixed` inside `src/domain/prose/` is a float
     // interpolation and a two-decimal score against the estate's prose-numerics register, and
@@ -212,17 +213,21 @@ describe('the wiring census — TOTALITY over the corpus', () => {
     // 06:5x DS-CND-1 boom line, ODQ §934.105 ruling (2)): DS-CND-1 ARCHETYPE: boom grew 3 -> 4.
     // {2: 28, 3: 507} -> {2: 33, 3: 510} and the mean 3.31 -> 3.30 (2,363 / 717 = 3.296) at WIRING W3
     // (2026-11-07): the C1-C6 pools, five of two variants and three of three, in DS-POW-5/-6.
+    // {4: 129, 5: 27} -> {4: 127, 5: 29} at WIRING W3's second seat (2026-11-07, the owner's style law over DS-POW-1):
+    // the #23 tier twins grow Endorsed and Legitimacy Crisis 4 -> 5; the mean holds (2,365 / 717 = 3.298).
     expect((summary.variants / summary.total).toFixed(2), 'mean variants per pool').toBe('3.30');
     expect(Object.fromEntries(summary.variantHistogram), 'variants per pool, exactly').toEqual({
-      2: 33, 3: 510, 4: 129, 5: 27, 6: 13, 7: 4, 10: 1,
+      2: 33, 3: 510, 4: 127, 5: 29, 6: 13, 7: 4, 10: 1,
     });
     const summed = summary.variantHistogram.reduce((total, [size, pools]) => total + size * pools, 0);
     // WIRING W3 (2026-11-07), C1-C6 said in DS-POW-5/-6 (+8 pools, +19 variants): 2344 -> 2363.
-    expect(summed, 'and the histogram sums back to the corpus').toBe(2363);
+    // WIRING W3 second seat (2026-11-07), the owner's style law over DS-POW-1/-2/-5/-6/-7: the #23 tier twins (DS-POW-1 Endorsed v5, Legitimacy Crisis v5) +2 variants: 2363 -> 2365.
+    expect(summed, 'and the histogram sums back to the corpus').toBe(2365);
     // PER PIECE: the same count rolled up to the block, which is the unit a reader meets.
     const perBlockTotal = summary.perBlock.reduce((total, [, n]) => total + n, 0);
     // WIRING W3 (2026-11-07), C1-C6 said in DS-POW-5/-6 (+8 pools, +19 variants): 2344 -> 2363.
-    expect(perBlockTotal, 'the per-block roll-up carries every variant once').toBe(2363);
+    // WIRING W3 second seat (2026-11-07), the owner's style law over DS-POW-1/-2/-5/-6/-7: the #23 tier twins (DS-POW-1 Endorsed v5, Legitimacy Crisis v5) +2 variants: 2363 -> 2365.
+    expect(perBlockTotal, 'the per-block roll-up carries every variant once').toBe(2365);
     expect(summary.perBlock.length, 'across every block').toBe(68);
   });
 
@@ -711,9 +716,11 @@ describe('THE MAP READ THE OTHER WAY — fact → text, and the three tiers', ()
     // WIRING W3 (2026-11-07), C1-C6 said in DS-POW-5/-6 (+8 pools, +19 variants): 34 -> 33.
     expect(counts.get(TIERS.MISSING), 'held facts with no pool keyed on them').toBe(33);
     // WIRING W3 (2026-11-07), C1-C6 said in DS-POW-5/-6 (+8 pools, +19 variants): 482 -> 486.
-    expect(counts.get(TIERS.THIN), 'pools with one variant, one grammar, or {settlement} alone').toBe(486);
+    // WIRING W3 second seat (2026-11-07), the owner's style law over DS-POW-1/-2/-5/-6/-7: two power pools leave THIN at the rewrite (measured): 486 -> 484.
+    expect(counts.get(TIERS.THIN), 'pools with one variant, one grammar, or {settlement} alone').toBe(484);
     // WIRING W3 (2026-11-07), C1-C6 said in DS-POW-5/-6 (+8 pools, +19 variants): 227 -> 231.
-    expect(counts.get(TIERS.COVERED), 'and the rest').toBe(231);
+    // WIRING W3 second seat (2026-11-07), the owner's style law over DS-POW-1/-2/-5/-6/-7: the same two pools land COVERED: 231 -> 233.
+    expect(counts.get(TIERS.COVERED), 'and the rest').toBe(233);
     expect(counts.get(TIERS.THIN) + counts.get(TIERS.COVERED), 'every pool lands in one of the two pool tiers')
       .toBe(spines.length);
     for (const row of tiers) {

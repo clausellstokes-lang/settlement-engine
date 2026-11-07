@@ -60,10 +60,9 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "Crime has little hold at {settlement}. People trust the {seat}, so few of them will take a bribe or keep quiet for one.",
+          "text": "Crime has little hold at {settlement}. People trust their rulers, so few of them will take a bribe or keep quiet for one.",
           "slots": [
-            "settlement",
-            "seat"
+            "settlement"
           ],
           "vid": 4
         },
@@ -363,7 +362,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
       "breakdown dominated by DEFENSE, adverse": [
         {
           "angle": "visitor",
-          "text": "The complaint against the {seat} at {settlement} is not theft but weakness: people do not believe the place could hold off an attack, and they blame the {seat}.",
+          "text": "The complaint against the {seat} at {settlement} is weakness, not theft: people think the town is badly defended, and they blame the {seat}.",
           "slots": [
             "seat",
             "settlement"
@@ -2000,7 +1999,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
       "council": [
         {
           "angle": "ledger",
-          "text": "Decisions at {settlement} take a long time because the whole {seat} must agree, and once made they are rarely undone.",
+          "text": "Decisions at {settlement} are slow because the whole {seat} must agree, and once made they are rarely undone.",
           "slots": [
             "settlement",
             "seat"
@@ -2059,7 +2058,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "At {settlement} the hall and the {institution} are run by the same people; only the hours differ.",
+          "text": "At {settlement} the same people run the {institution} and the hall; only the hours differ.",
           "slots": [
             "settlement",
             "institution"
@@ -2405,7 +2404,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "There is no law at {settlement} but what the criminal bosses enforce. They keep a kind of order and charge for it, and whoever cannot pay goes unprotected.",
+          "text": "There is no law at {settlement} but what the gang bosses enforce. They keep a kind of order and charge for it, and whoever cannot pay goes unprotected.",
           "slots": [
             "settlement"
           ],
@@ -2416,7 +2415,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "The {seat} at {settlement} holds the title and little else. The criminal bosses settle disputes, collect debts and hand out punishments, and the town pays them as it would pay a tax.",
+          "text": "The {seat} at {settlement} holds the title and little else. The gang bosses settle disputes, collect debts and hand out punishments, and the town pays them as it would pay a tax.",
           "slots": [
             "seat",
             "settlement"
@@ -2442,7 +2441,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "The merchant houses at {settlement} pay for their own armed guards, and those guards keep order wherever the houses do business. Where the guards and the {seat} disagree, the guards usually win.",
+          "text": "The trading houses at {settlement} pay for their own armed guards, a private army that keeps order wherever the houses do business. Where the guards and the {seat} disagree, the guards usually win.",
           "slots": [
             "settlement",
             "seat"
@@ -2454,7 +2453,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "marks": [
             "mercenary"
           ],
-          "text": "Order at {settlement} is kept by hired swords on merchant pay. They answer to whoever pays them, not to the {seat}.",
+          "text": "Order at {settlement} is kept by a private army of hired swords on the trading houses' pay. They answer to whoever pays them, not to the {seat}.",
           "slots": [
             "settlement",
             "seat"
@@ -3793,7 +3792,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "marks": [
             "dm-only"
           ],
-          "text": "One member of the majority at {settlement} is being blackmailed, and nobody mentions it. If it comes out, the whole arrangement breaks at once.",
+          "text": "Someone holds a secret over one member of the majority at {settlement}, and nobody mentions it. If it comes out, the whole arrangement breaks at once.",
           "slots": [
             "settlement"
           ],

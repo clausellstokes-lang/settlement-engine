@@ -126,6 +126,10 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 // byte-identical on every one, the census stays at 227 against a 227 ceiling, and no other
 // row in either file could have moved with them. The whole baseline diff is fourteen lines,
 // seven -/+ pairs.
+// WIRING W3 POW (2026-11-07, its second seat) — FOUR PURE LINE MOVES, NO DEBT MOTION. PowerTab.jsx gained the
+// structure-flag and GM-advisory rungs (C1-C6, 2bb81a867) above its banked rows, so `{leg.score}` 310 -> 317,
+// both `{Math.round(instab*100)}` rows 505 -> 512 and `{Math.round(rung.standing*100)}` 543 -> 550 (+7 each);
+// path, category and snippet byte-identical, no other row moved. The baseline diff is four -/+ pairs.
 // T11 · UI LANDING (§805/§807/§815, 2026-08-31) — SEVEN NEW LEAKS HUMANIZED, EIGHT PURE LINE
 // MOVES RE-ADDRESSED, NO CEILING CHANGE. The lane's own gate run was the first instrument to
 // see this file, and it caught both shapes at once. They are recorded separately because they

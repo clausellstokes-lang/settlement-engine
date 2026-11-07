@@ -119,12 +119,17 @@ describe('the four negative controls and the positive one (MOVE-GRAMMAR §4.4, a
     // longer uniform; its opener ("it is") is new to the pool (the ruled "{settlement} is …" repeated
     // v2's opener and read 115, so the line opens "It is a good stretch for {settlement}").
     // WIRING W3 (2026-11-07), C1-C6 said in DS-POW-5/-6 (+8 pools, +19 variants): 404 -> 405.
-    expect(uniformSegments).toBe(405);
+    // WIRING W3 second seat (2026-11-07), the owner's style law over DS-POW-1/-2/-5/-6/-7 (measured at the tip): 405 -> 410 (five power pools'
+    // rewritten variants now carry one sentence count each: the plain register is uniform where the old lines varied).
+    expect(uniformSegments).toBe(410);
     // WIRING W3 (2026-11-07), C1-C6 said in DS-POW-5/-6 (+8 pools, +19 variants): 114 -> 115.
-    expect(repeatedOpener).toBe(115);
+    // 115 -> 118 at the second seat (measured on the leaves): three power pools' rewritten variants now repeat
+    // an opener inside their pool. Calibration, not a ceiling; arm E is red on it either way (the control).
+    expect(repeatedOpener).toBe(118);
     // 0.570 / 0.161 -> 0.565 / 0.160 at WIRING W3 (2026-11-07): 405 / 717 and 115 / 717.
-    expect(uniformSegments / cells.size).toBeCloseTo(0.565, 3);
-    expect(repeatedOpener / cells.size).toBeCloseTo(0.160, 3);
+    // 0.565 -> 0.572 at the second seat: 410 / 717.
+    expect(uniformSegments / cells.size).toBeCloseTo(0.572, 3);
+    expect(repeatedOpener / cells.size).toBeCloseTo(0.165, 3); // 0.160 -> 0.165 at the second seat: 118 / 717.
   });
 
   it('CONTROL 4, SECOND HALF — the R1 leaves RED ON ARM E, which is what the control actually says', async () => {
@@ -150,8 +155,9 @@ describe('the four negative controls and the positive one (MOVE-GRAMMAR §4.4, a
     // 405 -> 404 at the chair's 06:5x DS-CND-1 boom line (ODQ §934.105), likewise.
     // WIRING W3 (2026-11-07), C1-C6 said in DS-POW-5/-6 (+8 pools, +19 variants): the share is now
     // taken over 717 pools, and reads 405 / 115 as the calibration above does.
-    expect(Math.round(figures.uniformSegmentShare * 717)).toBe(405);
-    expect(Math.round(figures.repeatedOpenerShare * 717)).toBe(115);
+    // WIRING W3 second seat (2026-11-07), the owner's style law over DS-POW-1/-2/-5/-6/-7 (measured at the tip): 405 -> 410, as the calibration above.
+    expect(Math.round(figures.uniformSegmentShare * 717)).toBe(410);
+    expect(Math.round(figures.repeatedOpenerShare * 717)).toBe(118); // 115 -> 118 at the second seat, as above.
   });
 
   it('ARM E is NOT-EXECUTABLE without spread ceilings — never a pass on a number it invented', () => {
@@ -787,7 +793,10 @@ describe('the PROVENANCE detector cites the twelve holder kinds and nothing wide
     expect(kindOnly).toBe(7);
     expect(genericOnly).toBe(0);
     expect(both).toBe(0);
-    expect(genericNotCited.length).toBe(11);
+    // WIRING W3 second seat (2026-11-07), the owner's style law over DS-POW-1/-2/-5/-6/-7 (measured at the tip): 11 -> 9: two power variants
+    // carrying the withdrawn generic limb ("the records", "the rolls") lost those words (STYLE-RULINGS §2 law 3 strikes
+    // "the record"; the #23 tier gate strikes the rolls) — the control's population shrank, the limb is still withdrawn.
+    expect(genericNotCited.length).toBe(9);
   });
 
   it('every one of the twelve kinds is live, and the withdrawn vocabulary is refused', () => {

@@ -26079,7 +26079,7 @@
       ],
       "hasBag": true,
       "variants": 5,
-      "grammars": 4,
+      "grammars": 5,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -57182,7 +57182,7 @@
       "subject": "Endorsed",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "5 variant(s) · 4 grammar(s) · slots {seat, settlement}"
+      "count": "5 variant(s) · 5 grammar(s) · slots {seat, settlement}"
     },
     {
       "tier": "COVERED",

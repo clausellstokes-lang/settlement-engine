@@ -316,7 +316,8 @@ describe('the corpus loaders — fail-closed, and counted against the probe', ()
     // LANDING-R2 helper G (the chair's §934.105 ruling (1): DS-GEN-17 PROVISIONED v3, the hospital-only line) +1.
     // 2811 -> 2812 at LANDING-R2 helper G2 (the chair's 06:5x DS-CND-1 boom line (ODQ §934.105, ruling (2)): ARCHETYPE: boom v4 `[street · crisis: any]`) +1.
     // WIRING W3 (2026-11-07), C1-C6 said in DS-POW-5/-6 (+8 pools, +19 variants): 2812 -> 2831.
-    expect(leaves.length + causal.length).toBe(2831);
+    // WIRING W3 second seat (2026-11-07), the owner's style law over DS-POW-1 (the #23 tier twins, Endorsed v5 and Legitimacy Crisis v5, +2 variants): 2831 -> 2833.
+    expect(leaves.length + causal.length).toBe(2833);
     // WIRING W3 (2026-11-07), C1-C6 said in DS-POW-5/-6 (+8 pools, +19 variants): 787 -> 795.
     expect(new Set([...leaves, ...causal].map((e) => e.poolId)).size).toBe(795);
     expect(new Set(leaves.map((e) => e.block)).size).toBe(68);
@@ -334,14 +335,16 @@ describe('the corpus loaders — fail-closed, and counted against the probe', ()
     // 2121 -> 2122 at LANDING-R2 helper G (the chair's §934.105 ruling (1): DS-GEN-17 PROVISIONED v3, the hospital-only line) +1.
     // 2122 -> 2123 at LANDING-R2 helper G2 (the chair's 06:5x DS-CND-1 boom line (ODQ §934.105, ruling (2)): ARCHETYPE: boom v4 `[street · crisis: any]`) +1.
     // WIRING W3 (2026-11-07), C1-C6 said in DS-POW-5/-6 (+8 pools, +19 variants): 2123 -> 2142.
-    expect(joined.length).toBe(2142);
+    // WIRING W3 second seat (2026-11-07), the owner's style law over DS-POW-1 (the #23 tier twins, Endorsed v5 and Legitimacy Crisis v5, +2 variants): 2142 -> 2144.
+    expect(joined.length).toBe(2144);
     expect(unjoined).toEqual([]);
     // The compact-row grammar (a whole pool on one bullet line, 225 variants) carries no
     // per-row address, so not every leaf variant has an annex line. That gap is the ADDRESS
     // reader's, is declared, and is why the pool grammar stays with the projection.
     expect(leafLines.size).toBeLessThan(leaves.length);
     // WIRING W3 (2026-11-07), C1-C6 said in DS-POW-5/-6 (+8 pools, +19 variants): 2123 -> 2142.
-    expect(leafLines.size).toBe(2142); // 2121 -> 2122 at the same cause: the new line is addressed; 2122 -> 2123 at G2's boom v4, likewise
+    // 2142 -> 2144 at WIRING W3's second seat (2026-11-07): the #23 tier twins are addressed lines.
+    expect(leafLines.size).toBe(2144); // 2121 -> 2122 at the same cause: the new line is addressed; 2122 -> 2123 at G2's boom v4, likewise
   });
 });
 
@@ -428,8 +431,10 @@ describe('THE ANTI-VACUITY GUARD — the walker must fail on the corpus it ships
       // edits above it moved the row 27 lines (it now carries its census tag slot too). 5325 -> 5326
       // at LANDING-R2 helper G2 (the chair's 06:5x DS-CND-1 boom line (ODQ §934.105, ruling (2)): ARCHETYPE: boom v4 `[street · crisis: any]`): the boom line sits above it.
       // 5326 -> 5361 at WIRING W3 (2026-11-07): the C1-C6 pools in DS-POW-5/-6 sit above it.
-      .find((row) => row.line === 5361);
-    expect(annexRow, 'RECEIPT_POOLS_DOSSIER_STATE.md:5361 did not load').toBeTruthy();
+      // 5361 -> 5363, re-addressed by its text ("the same trades exempt"): the second seat of WIRING W3 (2026-11-07),
+      // the #23 tier twins (DS-POW-1 Endorsed v5, Legitimacy Crisis v5) sit above it.
+      .find((row) => row.line === 5363);
+    expect(annexRow, 'RECEIPT_POOLS_DOSSIER_STATE.md:5363 did not load').toBeTruthy();
     expect(walkEntry(annexRow, withEntryContext(base, {})).fails.map((f) => f.arm))
       .toContain('exemption on a null column');
   });
@@ -653,7 +658,7 @@ describe('THE ANTI-VACUITY GUARD — the walker must fail on the corpus it ships
     );
   });
 
-  it('THE QUALIFY ARM on the shipped `DS-POW-5::autocrat` variant — a trailing coordinate', async () => {
+  it('THE QUALIFY ARM on the shipped `DS-POW-5::theocracy` variant — a trailing coordinate', async () => {
     // ⛔ THE SECOND ARM CAR 9 OWED (INSTR-912 car 10, cure 13; FOLD-2 P12). Cure 15's code —
     // `armQualify` reading a trailing coordinate inside ONE sentence, where it used to return
     // early on `sentences.length < 2` — shipped with no assertion naming it, so stubbing the
@@ -661,7 +666,11 @@ describe('THE ANTI-VACUITY GUARD — the walker must fail on the corpus it ships
     // control, read from the SHIPPED corpus rather than transcribed.
     const ground = estateGround({ officeRoster: deriveOfficeRoster() });
     const leaves = await loadStateLeaves();
-    const target = leaves.find((e) => /DS-POW-5/.test(e.id) && /autocrat#2$/.test(e.id));
+    // RE-KEYED BY IDENTITY at WIRING W3's second seat (2026-11-07): the owner's style law rewrote `autocrat` v3
+    // ("What the {seat} fears is not the city but the …; …") into two plain sentences, so it no longer carries the
+    // trailing coordinate. `theocracy` v4 ("At {settlement} the hall and the {institution} are run by the same people;
+    // only the hours differ.") is the block's shipped variant that does, measured at the tip.
+    const target = leaves.find((e) => /DS-POW-5/.test(e.id) && /theocracy#3$/.test(e.id));
     expect(target, 'the named variant is still in the corpus').toBeTruthy();
     const walk = walkEntry(target, ground);
     expect(verdictOf(walk), 'a claim the ground cannot settle is WITHHELD, never a pass').toBe('WITHHELD');
@@ -679,7 +688,9 @@ describe('THE ANTI-VACUITY GUARD — the walker must fail on the corpus it ships
     // 336 -> 341, measured per commit on the leaves: F12 unit 2 (e19e3e4cf) +3, census-5b unit 3
     // (c00b30eb6, R-L twins) +2. Report-only, still a minority.
     // WIRING W3 (2026-11-07), C1-C6 said in DS-POW-5/-6 (+8 pools, +19 variants): 341 -> 345.
-    expect(carrying.length, 'entries carrying the trailing-coordinate class, at this tip').toBe(345);
+    // 345 -> 341 at WIRING W3's second seat (2026-11-07), the owner's style law over DS-POW-1/-2/-5/-6/-7: the plain
+    // rewrites drop the "; …" afterthought from four power variants (measured on the leaves). Report-only, still a minority.
+    expect(carrying.length, 'entries carrying the trailing-coordinate class, at this tip').toBe(341);
     expect(carrying.length, 'and it is a minority of the 2,266 R1 variants').toBeLessThan(leaves.length / 2);
     console.log(`  Q · trailing coordinate: ${carrying.length} of ${leaves.length} R1 entries carry the class`);
   });

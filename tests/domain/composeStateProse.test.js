@@ -178,7 +178,8 @@ describe('the composer — the corpus loads, and the merge is legal', () => {
     // 2342 -> 2343 at LANDING-R2 helper G (the chair's §934.105 ruling (1): DS-GEN-17 PROVISIONED v3, the hospital-only line) +1.
     // 2343 -> 2344 at LANDING-R2 helper G2 (the chair's 06:5x DS-CND-1 boom line (ODQ §934.105, ruling (2)): ARCHETYPE: boom v4 `[street · crisis: any]`) +1.
     // WIRING W3 (2026-11-07), C1-C6 said in DS-POW-5/-6 (+8 pools, +19 variants): 2344 -> 2363.
-    expect(SHIPPED_POOLS.reduce((n, row) => n + row.pool.length, 0), 'variants').toBe(2363);
+    // WIRING W3 second seat (2026-11-07), the owner's style law over DS-POW-1 (the #23 tier twins, Endorsed v5 and Legitimacy Crisis v5, +2 variants): 2363 -> 2365.
+    expect(SHIPPED_POOLS.reduce((n, row) => n + row.pool.length, 0), 'variants').toBe(2365);
   });
 });
 
@@ -224,7 +225,8 @@ describe('⭐ THE SEAM COMPOSES TO THE KERNEL — an empty candidate list moves 
     expect(drift.slice(0, 10), 'a pool where the composer and the kernel disagree').toEqual([]);
     expect(drift.length).toBe(0);
     // ANTI-VACUITY: an equality over an empty sweep is free.
-    expect(checks).toBe(709 * 2 * SWEEP_SEEDS.length);
+    // 709 -> 717 at WIRING W3 (2026-11-07), C1-C6 said in DS-POW-5/-6 (+8 pools): owed from the construction commit.
+    expect(checks).toBe(717 * 2 * SWEEP_SEEDS.length);
     expect(composed, 'and most of the sweep really did compose a unit').toBeGreaterThan(6000);
   });
 

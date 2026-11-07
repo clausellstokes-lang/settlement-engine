@@ -206,7 +206,8 @@ describe('GUARD THE GUARD — the inputs this file judges are the real ones', ()
     // census-5b unit 3 c00b30eb6 +4. 2342 -> 2343 at LANDING-R2 helper G (the chair's §934.105 ruling (1): DS-GEN-17 PROVISIONED v3, the hospital-only line) +1.
     // 2343 -> 2344 at LANDING-R2 helper G2 (the chair's 06:5x DS-CND-1 boom line (ODQ §934.105, ruling (2)): ARCHETYPE: boom v4 `[street · crisis: any]`) +1.
     // WIRING W3 (2026-11-07), C1-C6 said in DS-POW-5/-6 (+8 pools, +19 variants): 2344 -> 2363.
-    expect(corpus.length, 'the shipped state corpus').toBe(2363);
+    // WIRING W3 second seat (2026-11-07), the owner's style law over DS-POW-1 (the #23 tier twins, Endorsed v5 and Legitimacy Crisis v5, +2 variants): 2363 -> 2365.
+    expect(corpus.length, 'the shipped state corpus').toBe(2365);
     // WIRING W3 (2026-11-07), C1-C6 said in DS-POW-5/-6 (+8 pools, +19 variants): 709 -> 717.
     expect(census.rows.length, 'the committed wiring census').toBe(717);
     expect(Object.keys(DOSSIER_RELATIONS).length, 'the committed relation leaf').toBe(165);
@@ -460,7 +461,15 @@ describe('A0b — the text claims every declared field and no other', () => {
     // 61 -> 62 OWED at LANDING-R2 helper G2 (the chair's 06:5x DS-CND-1 boom line (ODQ §934.105, ruling (2)): ARCHETYPE: boom v4 `[street · crisis: any]`): the line inherits its pool's per-line debt
     // as boom v1-3 do (`condition.archetype`, the pool's one declared read, unclaimed; 1343 -> 1344
     // measured, the one new under-claim is DS-CND-1 :: ARCHETYPE: boom v4).
-    const UNDER_CLAIM_OWED = 62;
+    // 62 -> 114 OWED at WIRING W3 C1-C6 (2026-11-07, ODQ §934.105, WIRING-RULINGS R-W1; the W2 DEF DS-DEF-9 precedent of
+    // the same day): the six DS-POW-5 FLAG pools and DS-POW-6's commander advisory inherit their pools' declared reads
+    // unclaimed — `safetyProfile.flags`, the flag itself, and the flags `structureFlagPoolKey` tests BEFORE the drawn
+    // one in its gravity order (crimeIsGovt > stateCrime > merchantArmy > merchantCriminalBlur > secularBrutalism),
+    // which no sentence can name: 1344 -> 1396 measured at the second seat, the 52 new under-claims are FLAG:
+    // crimeIsGovt 6, stateCrime 9, stateCrime heavy 9, merchantArmy 6, merchantCriminalBlur 8, secularBrutalism 12,
+    // GM ADVISORY: the commander 2 (`power.factionRelationships`). The four over-claims the same pools first carried
+    // ("criminal"/"merchant" read as merchantCriminalBlur) were CURED in the lines, not owed: 71 -> 67.
+    const UNDER_CLAIM_OWED = 114;
     const UNDER_CLAIM_CEILING = UNDER_CLAIM_BASE + UNDER_CLAIM_OWED;
     // ⛔ THE OVER-CLAIM CEILING, RE-KEYED THE SAME WAY (census-1b unit A (d), 427f7b112). From that
     // commit the wiring census records `settlement` among DS-GEN-17's fieldsRead (the roster key
@@ -507,7 +516,7 @@ describe('A0b — the text claims every declared field and no other', () => {
       + `\n  over-claims          ${tally['over-claim']}   ceiling ${OVER_CLAIM_CEILING}`
       + ` = ${OVER_CLAIM_BASE} + ${OVER_CLAIM_OWED} OWED (427f7b112: DS-GEN-17's name slot)`
       + `\n  under-claims         ${tally['under-claim']}   ceiling ${UNDER_CLAIM_CEILING}`
-      + ` = ${UNDER_CLAIM_BASE} + ${UNDER_CLAIM_OWED} OWED (R-F5 26 + the pool census 34 + DS-GEN-17 PROVISIONED v3 1 + DS-CND-1 boom v4 1: the census wave buys them back)`
+      + ` = ${UNDER_CLAIM_BASE} + ${UNDER_CLAIM_OWED} OWED (R-F5 26 + the pool census 34 + DS-GEN-17 PROVISIONED v3 1 + DS-CND-1 boom v4 1 + W3 POW DS-POW-5/-6 FLAG and advisory pools 52: the census wave buys them back)`
       + `\n  implicit negations   ${tally['implicit-negation']}`
       + `\n  absences claimed by silence (R-F4, REPORT) ${silent}`
       + `\n  NOT-EXECUTABLE reads ${notExecutable}   pools carrying a finding ${pools.size}\n`);
@@ -519,7 +528,8 @@ describe('A0b — the text claims every declared field and no other', () => {
     expect(tally['over-claim']).toBeLessThanOrEqual(OVER_CLAIM_CEILING);
     expect(tally['under-claim']).toBeLessThanOrEqual(UNDER_CLAIM_CEILING);
     expect(tally['implicit-negation']).toBeLessThanOrEqual(13);
-    expect(pools.size).toBeLessThanOrEqual(240);
+    // 240 -> 247 at WIRING W3 C1-C6 (2026-11-07): the seven pools above carry the under-claim debt they owe.
+    expect(pools.size).toBeLessThanOrEqual(247);
   });
 });
 

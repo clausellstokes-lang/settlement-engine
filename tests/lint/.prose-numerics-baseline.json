@@ -499,25 +499,25 @@
   },
   {
     "path": "src/components/new/tabs/PowerTab.jsx",
-    "line": 310,
+    "line": 317,
     "category": "floatInterpolation",
     "snippet": "{leg.score}"
   },
   {
     "path": "src/components/new/tabs/PowerTab.jsx",
-    "line": 505,
+    "line": 512,
     "category": "floatInterpolation",
     "snippet": "{Math.round(instab*100)}"
   },
   {
     "path": "src/components/new/tabs/PowerTab.jsx",
-    "line": 505,
+    "line": 512,
     "category": "percentToken",
     "snippet": "{Math.round(instab*100)}"
   },
   {
     "path": "src/components/new/tabs/PowerTab.jsx",
-    "line": 543,
+    "line": 550,
     "category": "floatInterpolation",
     "snippet": "{Math.round(rung.standing*100)}"
   },

@@ -1954,7 +1954,7 @@ common state.
 1. `[street · colour]` What the {seat} says at {settlement} gets done, and nobody asks why. Dues are paid and disputes go to the {seat} without anyone having to be told twice.
 2. `[ledger · tier: >= town]` {settlement}'s levies come in paid and on time; the {seat}'s clerks have almost nothing to chase.
 3. `[visitor · colour]` Ask anyone at {settlement} who rules and they name the {seat} without a pause; nobody disputes it.
-4. `[counterforce · colour]` Crime has little hold at {settlement}. People trust the {seat}, so few of them will take a bribe or keep quiet for one.
+4. `[counterforce · colour]` Crime has little hold at {settlement}. People trust their rulers, so few of them will take a bribe or keep quiet for one.
 5. `[ledger · tier: <= village]` Every household at {settlement} pays its share when the {seat} asks, and nobody has to go door to door to collect it.
 
 **`Approved`** {colour}
@@ -2000,7 +2000,7 @@ common state.
 3. `[unfolding]` Each season {settlement}'s streets go badly policed, fewer people back the {seat}, and it can do less about it.
 
 **`breakdown` dominated by DEFENSE, adverse** {colour}
-1. `[visitor]` The complaint against the {seat} at {settlement} is not theft but weakness: people do not believe the place could hold off an attack, and they blame the {seat}.
+1. `[visitor]` The complaint against the {seat} at {settlement} is weakness, not theft: people think the town is badly defended, and they blame the {seat}.
 2. `[ledger]` What hurts the {seat} most at {settlement} is that people there feel undefended.
 3. `[street]` {settlement} keeps one plain accusation against the {seat} (that it has left the town open) and brings it out again whenever anything else goes wrong.
 
@@ -2241,7 +2241,7 @@ and never an assertion that the feared thing is happening.
 4. `[visitor]` At {settlement} one audience with the {seat} gets a decision, good or bad, and there is nobody to appeal to afterwards.
 
 **`council`** {colour}
-1. `[ledger]` Decisions at {settlement} take a long time because the whole {seat} must agree, and once made they are rarely undone.
+1. `[ledger]` Decisions at {settlement} are slow because the whole {seat} must agree, and once made they are rarely undone.
 2. `[street]` The town's business goes to a body rather than a person, and everybody has learned how long a body takes.
 3. `[unfolding]` The {seat} at {settlement} worries less about rivals than about the town turning on it.
 4. `[counterforce]` The {seat} at {settlement} has left obvious decisions untaken because its members cannot agree on them.
@@ -2250,7 +2250,7 @@ and never an assertion that the feared thing is happening.
 1. `[ledger]` The {seat} at {settlement} rules by its faith: every decision is checked against doctrine first, and only then against what the town needs.
 2. `[street]` The town takes its civic questions to the same place it takes its spiritual ones, and does not experience the two as separate.
 3. `[unfolding]` What threatens the {seat} at {settlement} is heresy rather than opposition. A rival creed is a challenge to the right to govern, and everybody involved understands it that way.
-4. `[visitor]` At {settlement} the hall and the {institution} are run by the same people; only the hours differ.
+4. `[visitor]` At {settlement} the same people run the {institution} and the hall; only the hours differ.
 
 **`merchant_league`** {colour}
 1. `[ledger]` The {seat} at {settlement} is run by the houses that keep the account books, and it decides things the way a business does: by what pays.
@@ -2309,13 +2309,13 @@ and never an assertion that the feared thing is happening.
 3. `[counterforce · no garrison]` The {seat}'s armed officials at {settlement} take what they want and answer to nobody; people who argue with them are not seen again.
 
 **FLAG: crimeIsGovt** *(WIRING W3 C3: `safetyProfile.flags.crimeIsGovt`)*
-1. `[street · colour]` There is no law at {settlement} but what the criminal bosses enforce. They keep a kind of order and charge for it, and whoever cannot pay goes unprotected.
-2. `[ledger · colour]` The {seat} at {settlement} holds the title and little else. The criminal bosses settle disputes, collect debts and hand out punishments, and the town pays them as it would pay a tax.
+1. `[street · colour]` There is no law at {settlement} but what the gang bosses enforce. They keep a kind of order and charge for it, and whoever cannot pay goes unprotected.
+2. `[ledger · colour]` The {seat} at {settlement} holds the title and little else. The gang bosses settle disputes, collect debts and hand out punishments, and the town pays them as it would pay a tax.
 3. `[visitor · colour]` Newcomers at {settlement} learn quickly that a grievance goes to whoever runs their part of the place, not to the {seat}, and that the hearing has a price.
 
 **FLAG: merchantArmy** *(WIRING W3 C4: `safetyProfile.flags.merchantArmy`)*
-1. `[ledger · colour]` The merchant houses at {settlement} pay for their own armed guards, and those guards keep order wherever the houses do business. Where the guards and the {seat} disagree, the guards usually win.
-2. `[counterforce · mercenary]` Order at {settlement} is kept by hired swords on merchant pay. They answer to whoever pays them, not to the {seat}.
+1. `[ledger · colour]` The trading houses at {settlement} pay for their own armed guards, a private army that keeps order wherever the houses do business. Where the guards and the {seat} disagree, the guards usually win.
+2. `[counterforce · mercenary]` Order at {settlement} is kept by a private army of hired swords on the trading houses' pay. They answer to whoever pays them, not to the {seat}.
 
 **FLAG: merchantCriminalBlur** *(WIRING W3 C5: `safetyProfile.flags.merchantCriminalBlur`)*
 1. `[ledger · guild]` At {settlement} the richest merchants and the criminal bosses are often the same people; a deal struck in the guild hall and a deal struck in a back room look much alike.
@@ -2495,7 +2495,7 @@ cell in this shape.
 4. `[ledger · no walls]` The fractious have closed ranks at {settlement} because of what is outside the town; the combination is real, effective and entirely contingent on the danger continuing.
 
 **glue `compromise` (a corruption leash)** *(every variant `dm-only`)* {colour}
-1. `[ledger · dm-only]` One member of the majority at {settlement} is being blackmailed, and nobody mentions it. If it comes out, the whole arrangement breaks at once.
+1. `[ledger · dm-only]` Someone holds a secret over one member of the majority at {settlement}, and nobody mentions it. If it comes out, the whole arrangement breaks at once.
 2. `[unfolding · dm-only]` What holds the majority at {settlement} together would end it in a single afternoon if it were said out loud, and everybody inside it is arranging their affairs accordingly.
 3. `[street · dm-only]` The hall at {settlement} agrees on more than it should and nobody outside it can account for why.
 
