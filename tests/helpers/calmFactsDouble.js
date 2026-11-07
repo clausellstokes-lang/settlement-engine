@@ -36,4 +36,9 @@ export const CALM_FACTS_ADMIT_ALL = Object.freeze({
   crime: 'organized',
   // CENSUS-5d (2026-11-05): CENSUS-1f's composite `sacredHouse` (R-AE); "every presence atom holds".
   sacredHouse: true,
+  // LANDING-R2 (2026-11-07): the food-source atoms (`fish`, `grain`, `game`, `livestock`; census-3c unit 4, e3295d168) and
+  // `guild` (census-3f unit 3 525084dfe / census-3g unit 2 b6caa5e1a) arrived after the double; "every presence atom
+  // holds" covers them too (`factVocabulary.js :: FOOD_SOURCE_ATOMS`, `guild`).
+  foodSources: Object.freeze(['fish', 'grain', 'game', 'livestock']),
+  guild: true,
 });

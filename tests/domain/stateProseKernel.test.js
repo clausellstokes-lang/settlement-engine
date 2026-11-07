@@ -58,6 +58,7 @@ import { expectAbsentWithAnchor, expectPresentThenAbsent } from '../helpers/anch
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { CALM_FACTS_ADMIT_ALL } from '../helpers/calmFactsDouble.js';
 import { variantFactDeclaration } from '../../src/domain/display/stateProse/stateProseKernel.js';
+import { declarationAdmits } from '../../src/domain/facts/factVocabulary.js';
 
 /**
  * CENSUS-5b unit 3 (re-keyed by that cause): a variant whose OWN declaration needs an active
@@ -75,6 +76,15 @@ const needsCrisis = (variant) => {
  * the calm reference sets it aside, as it sets aside a crisis-needing variant above.
  */
 const excludesPresence = (variant) => variantFactDeclaration(variant).excludes.some((a) => !/^crisis\b/.test(a));
+/**
+ * LANDING-R2 (2026-11-07): a variant that NEEDS one value of a categorical fact — a band or a keyed presence
+ * (`tier: >= town`, `population: small`, `migration: influx`; census-3c unit 4 586bedd7f, census-2b item 2 db3ed88c1) —
+ * is refused by the calm double, which answers no value of any band (every PRESENCE atom holds; a band holds one value
+ * or none — `stores: >= 6` and `war: peace` it does answer, and those stay in); the calm reference sets it aside, as it
+ * sets aside a crisis-needing variant above.
+ */
+const needsCategorical = (variant) => variantFactDeclaration(variant).needs.some((a) => /^(?!institution\b|crisis\b)[a-z ]+:/.test(a)
+  && declarationAdmits({ needs: [a], excludes: [], crisis: [] }, CALM_FACTS_ADMIT_ALL).refused.length > 0);
 
 /**
  * The hash pair, re-spelled here so every key this file checks is checked against an
@@ -466,7 +476,7 @@ describe('the state-prose reader — law 5, and the darkness of it', () => {
       const slots = bagFor(pool);
       for (const audience of [AUDIENCE_DM, AUDIENCE_PLAYER]) {
         const reference = pool.filter(
-          (variant) => variantIsAudible(variant, audience) && variantIsAnchored(variant, slots) && !needsCrisis(variant) && !excludesPresence(variant),
+          (variant) => variantIsAudible(variant, audience) && variantIsAnchored(variant, slots) && !needsCrisis(variant) && !excludesPresence(variant) && !needsCategorical(variant),
         );
         // CENSUS-5: a pool whose lines declare fact atoms reads against `facts`; the calm
         // admit-all double keeps this the pre-cure comparison (`tests/helpers/calmFactsDouble.js`).
@@ -496,8 +506,13 @@ describe('the state-prose reader — law 5, and the darkness of it', () => {
     // (a crisis dimension) and DS-ECO-8 COMFORTABLE declares `no crisis: indebted` (a fact atom), so 713.
     // CENSUS-5b unit 1 (2026-11-05): DS-DEF-1 `readiness WEAK` partitions by `walls` (v2, the
     // perimeter line, declares it; R-O), so 712 (the CENSUS-1e merge composes the two).
-    expect(poolsChecked).toBeGreaterThanOrEqual(712);
-    expect(draws).toBeGreaterThanOrEqual(712 * 2 * SWEEP_SEEDS.length);
+    // LANDING-R2 (2026-11-07, the pool census composed; measured by this sweep's own count, 787 pools less those with
+    // a demoted dimension, on git-archive trees): 716 at the compose base (F12) -> 687 at the tip, by step: census-1b's
+    // merges of census-4 (950b75014) -2, census-5b units 1-2 (ceb83b9c4) -1, census-2 (2b31f33f3) -5, census-3e
+    // (3d3c52f9e) -6, census-5 (5215c4325) -13 (census-1b's tip e36e4916f 689), and the compose's unit 2 item 6
+    // (b8d2c3569, two bare needs take crisis declarations) -2. Rung 1's merge moves none (687 either side of 77ea26af9).
+    expect(poolsChecked).toBeGreaterThanOrEqual(687);
+    expect(draws).toBeGreaterThanOrEqual(687 * 2 * SWEEP_SEEDS.length);
   });
 
   it('leaves the causal register untouched — no arm name is a dimension word', () => {
