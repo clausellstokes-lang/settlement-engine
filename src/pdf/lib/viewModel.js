@@ -732,6 +732,14 @@ function npcsSlice(active) {
       age: n?.age || (n?.physical?.age) || null,
       factionAffiliation: n?.factionAffiliation || n?.faction || n?.category || null,
       factionLabel: labelOfFactionRef(n?.factionAffiliation || n?.faction || n?.category),
+      // THE PEOPLE CAR (PEOPLE-1 CAST, 2026-11-07): the card's house and its ranked powers, the
+      // facts the representative generator writes (`institution`, `memberships`), carried on the
+      // view row so the dossier's NPC section can print "first of X · second of Y" and the house
+      // (PEOPLE-5 wires the print; the fact is lit here). A pre-car record carries neither.
+      house: n?.institution?.title || null,
+      powers: Array.isArray(n?.memberships)
+        ? n.memberships.map((m) => ({ power: m?.power || null, rank: m?.rank ?? null }))
+        : [],
       power: n?.power || 0,
       influence: inf,
       influenceLabel,

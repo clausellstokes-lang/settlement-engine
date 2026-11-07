@@ -51,6 +51,7 @@ import { resolveGenerationWorldLaw } from '../generationContext.js';
 import { disambiguateNPCDisplayNames } from '../npcDisplayNames.js';
 import { onStream, seatHouseOf, SEAT_CARD_ID } from './representatives.js';
 import { otherMintRowFor } from './mintTitles.js';
+import { RUNG_KEYS, rungBandsForTier } from '../../domain/density/densityRungs.js';
 
 /** The keyed fork the mints and the ranks draw under (declared in the fork census). */
 export const POWERS_FORK_LABEL = 'people-powers';
@@ -95,6 +96,10 @@ export function assignCastPowers(settlement, cards, rng) {
   const powerSet = new Set(powers);
   const governing = nameOf(governingFactionOf(settlement)) || null;
   const stream = rng && typeof rng.fork === 'function' ? rng.fork(POWERS_FORK_LABEL) : null;
+  // ONE mint per label (the fork census counts every stream minted): the two families are forked
+  // once here and keyed per power below, never re-forked inside a loop.
+  const mintStream = stream ? stream.fork('mint') : null;
+  const rankStream = stream ? stream.fork('ranks') : null;
   const byHouse = dealDoubledNiches(settlement, houseBacksOf(settlement));
   const houseByName = new Map(institutions.map((inst) => [String(inst?.name || ''), inst]));
   const seat = seatHouseOf(institutions);
@@ -128,7 +133,7 @@ export function assignCastPowers(settlement, cards, rng) {
   const mints = [];
   const config = settlement?.config || {};
   const tier = String(settlement?.tier || 'town');
-  const culture = String(config.culture || settlement?.culture || 'germanic');
+  const culture = String(config.culture || 'germanic');
   const worldLaw = resolveGenerationWorldLaw(null, config);
   const economicState = settlement?.economicState || {};
   const npcConfig = {
@@ -156,7 +161,7 @@ export function assignCastPowers(settlement, cards, rng) {
     existingIds.add(id);
     const row = otherMintRowFor(name);
     const draw = () => generateSingleNPC(row.role, row.titleKey, row.category, culture, tier, npcConfig, institutions, hookRegistry, worldLaw);
-    const card = stream ? onStream(stream.fork('mint').fork(powerSlug(name)), draw) : draw();
+    const card = mintStream ? onStream(mintStream.fork(powerSlug(name)), draw) : draw();
     card.id = id;
     card.title = row.title;
     card.institution = { kind: 'power', key: name, family: null, title: row.title };
@@ -189,7 +194,7 @@ export function assignCastPowers(settlement, cards, rng) {
       take(landmark);
     }
     // the roll, without replacement, on the power's own fork
-    const fork = stream ? stream.fork('ranks').fork(powerSlug(power)) : null;
+    const fork = rankStream ? rankStream.fork(powerSlug(power)) : null;
     while (chosen.length < RANKS && remaining.length) {
       const weights = remaining.map((m) => Math.max(rollWeightOf(m.share, m.weight), 1e-6));
       const pick = fork ? fork.weightedPick(remaining, weights) : remaining[0];
@@ -201,5 +206,20 @@ export function assignCastPowers(settlement, cards, rng) {
     });
   }
 
-  return mints.length ? disambiguateNPCDisplayNames([...cards, ...mints]) : cards;
+  // ── THE IMPORTANCE BAND, from the rank ──────────────────────────────────────────────────
+  // The retired rung roll expressed itself through `importance` on EVERY figure (densityRungs.js:
+  // "ROLLED RUNGS EXPRESS THROUGH NOTABILITY PLACEMENT" — the ladder, the notability dot and
+  // every simulation ledger keyed on eligible members read it through `inferImportance`, whose
+  // role regex otherwise reads a Mayor as minor). The rank is the rung now: a card's best rank
+  // across its powers places it at the tier's head, middle or lowest band (the same signed table
+  // the roll read, densityBands.js untouched); a member ranked nowhere, or a face of no power, is
+  // `minor`. Draw-free; the rung ROLE field is not written (M-5: it is unread).
+  const bands = rungBandsForTier(tier);
+  const all = mints.length ? [...cards, ...mints] : cards;
+  for (const card of all) {
+    if (!card || !Array.isArray(card.memberships)) continue;
+    const best = card.memberships.reduce((acc, m) => (Number.isInteger(m?.rank) && (acc === null || m.rank < acc) ? m.rank : acc), null);
+    card.importance = best === null ? 'minor' : bands[RUNG_KEYS[best - 1]];
+  }
+  return mints.length ? disambiguateNPCDisplayNames(all) : cards;
 }
