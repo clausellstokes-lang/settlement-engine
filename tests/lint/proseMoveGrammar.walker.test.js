@@ -108,10 +108,13 @@ describe('the four negative controls and the positive one (MOVE-GRAMMAR §4.4, a
     expect(cells.size).toBe(709);
     // SITTING B.3 / Part B §14: 407 of 708, not the 408 MOVE-GRAMMAR §0 first printed; 410 / 103 of 709 at the
     // rung-1 landing (LANDING-1: F9 READER-CONTRADICTIONS +1 pool, F10 WALLS-WORD +41 twin variants).
-    expect(uniformSegments).toBe(410);
-    expect(repeatedOpener).toBe(103);
-    expect(uniformSegments / cells.size).toBeCloseTo(0.578, 3);
-    expect(repeatedOpener / cells.size).toBeCloseTo(0.145, 3);
+    // 410 / 103 -> 406 / 114 at the rung-2 landing, measured per commit on the leaves (parent ->
+    // commit): F12 unit 2 e19e3e4cf -2 / +4; census-2b item 5 70d05b25b 0 / +1; census-3c unit 4
+    // e3295d168 -1 / +4; census-5b unit 3 c00b30eb6 -1 / +2 (the twins share their pools' openers).
+    expect(uniformSegments).toBe(406);
+    expect(repeatedOpener).toBe(114);
+    expect(uniformSegments / cells.size).toBeCloseTo(0.573, 3);
+    expect(repeatedOpener / cells.size).toBeCloseTo(0.161, 3);
   });
 
   it('CONTROL 4, SECOND HALF — the R1 leaves RED ON ARM E, which is what the control actually says', async () => {
@@ -132,8 +135,8 @@ describe('the four negative controls and the positive one (MOVE-GRAMMAR §4.4, a
     // The arm reads the SAME pools the calibration counted, to the unit.
     const figures = /** @type {any} */ (report.figures.spread);
     expect(figures.pools).toBe(709);
-    expect(Math.round(figures.uniformSegmentShare * 709)).toBe(410);
-    expect(Math.round(figures.repeatedOpenerShare * 709)).toBe(103);
+    expect(Math.round(figures.uniformSegmentShare * 709)).toBe(406);
+    expect(Math.round(figures.repeatedOpenerShare * 709)).toBe(114);
   });
 
   it('ARM E is NOT-EXECUTABLE without spread ceilings — never a pass on a number it invented', () => {
