@@ -173,14 +173,14 @@
  "digests": {
   "corpusMeta": "91c6e9f2e1677d0c3bf587cffb27b69fe554308ff5d9fda1622090c53dfec0b9",
   "inventory": "0a77cc0b1a29d41babeabecbeded0385f72b2876fe36501ab8283b64d8cd3937",
-  "manifests": "2f84c6b51084edbcaf4aff4f747b34649734f12aabcc28f7f1d94161e7620daf",
+  "manifests": "f146226645e4b0799e49ff8eb9fb080d6fd824e705df905331080d5d050fb4f8",
   "migrationReview": "9f944655e7956a489d5d24a0d6c343a90d651294866f3c9b38c0c67579d57e18",
   "rowTags": "707fe2c0f85a64f89016fd606099f7a8a71fa5ac76b218d8eb2b287a998b7d1d",
-  "scanStats": "585ef40ac3c787b7eb6f7ab3e3876d64ce2b9b31202b37188cda3ddfe9903686",
-  "sentinel": "6cccd841039545f5ec7bf62de0f345115b9862125e9ee0e294b106a094ac291f"
+  "scanStats": "efdd7013e8b8a6d3ad00e6a0cbfa8fe5a348344eaf7e733e1a11b89040cf0998",
+  "sentinel": "923d1d7738b25606d00911ea7ed9e0be147ed1a01df9468f31c9409c8c43ad27"
  },
  "frozen": "2026-11-07",
- "frozenAtSha": "2981f23f62f03d7501a425efe577cadd4f2f5211",
+ "frozenAtSha": "147fa6c3f8e88d060a63f721c182b105ad20b87f",
  "identities": 1545,
  "inventory": {
   "src/components/BuyThisDossier.jsx": {
@@ -2665,7 +2665,7 @@
   },
   "executionTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "36c102a885ba17083342b1ec496bff8b4dfd7762665611d3137549190fdaeaf1",
+   "digest": "b9bf759320aac330817d636b38780771cef5d762786b76f9dbda7839fbb21397",
    "entries": [
     {
      "mode": "100644",
@@ -5694,8 +5694,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/npcComponents.jsx",
-     "sha256": "49b9043f1d6812bbe50529a2e9bf9eb27009b84257dd4f8a38603442ab6735ff",
-     "size": 29884,
+     "sha256": "fbd88e4fe40945ff05943e373155d032bc4f5114d7c6baca84d107ed8bb07a9b",
+     "size": 31280,
      "type": "file"
     },
     {
@@ -5792,8 +5792,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/InstitutionsTab.jsx",
-     "sha256": "eaf1a97a40bfaafadff39f0cdd277cc5d218b8c5d23c796694dd7e7be72d6f48",
-     "size": 22503,
+     "sha256": "ce4f2dc4aa686ec907624193371a1c6551261cba84098f6ddccd39ede1faeb00",
+     "size": 23650,
      "type": "file"
     },
     {
@@ -7292,6 +7292,13 @@
      "path": "src/data/entityTags.js",
      "sha256": "09cd8eee12887996188a3d2db6f467e3f4418cec99fdf10292bf8f5de61e0702",
      "size": 7306,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/data/faceHonorifics.js",
+     "sha256": "524f104b1ece1ed4b194ca9b34f227d5a8f1a9f123f90f8ba041c88afdcbbcdd",
+     "size": 13908,
      "type": "file"
     },
     {
@@ -10950,9 +10957,16 @@
     },
     {
      "mode": "100644",
+     "path": "src/domain/people/cardDoor.js",
+     "sha256": "ef6ea018c9ad6a4cba290aa1bf33e616b7098921289d7f6c83d15c2831ab1820",
+     "size": 3227,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/domain/people/cardPowers.js",
-     "sha256": "d66b412a3c2a625ced2ffcc55c2e77258dd6e0621fbc98ba5c76e868dc95fce2",
-     "size": 6554,
+     "sha256": "11805b0384eb10ff92d9534a8fe52361e32850cbdd06b2292011aedc0c1225fb",
+     "size": 7390,
      "type": "file"
     },
     {
@@ -11014,7 +11028,7 @@
     {
      "mode": "100644",
      "path": "src/domain/prose/holderTable.js",
-     "sha256": "5cb14999a3fd9ce61d6c8fca2cd772fb2c6e6fd542044be5f4c69a775e8e0a5f",
+     "sha256": "ad1730919f6b9a27fbf6aa5a9bcd33ae6528a250241f13af0c81b8cbc183a875",
      "size": 47805,
      "type": "file"
     },
@@ -19520,7 +19534,7 @@
   },
   "scanTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "10059a5f15cea74b0d3355834326cee2fd88712f68a7f58706bba6d07b06ec2e",
+   "digest": "db3b91ae59aa38c20e9af0b0d5ee3ea2587bfc37a4110ae54914b204e84711f9",
    "entries": [
     {
      "mode": "100644",
@@ -22479,8 +22493,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/npcComponents.jsx",
-     "sha256": "49b9043f1d6812bbe50529a2e9bf9eb27009b84257dd4f8a38603442ab6735ff",
-     "size": 29884,
+     "sha256": "fbd88e4fe40945ff05943e373155d032bc4f5114d7c6baca84d107ed8bb07a9b",
+     "size": 31280,
      "type": "file"
     },
     {
@@ -22577,8 +22591,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/InstitutionsTab.jsx",
-     "sha256": "eaf1a97a40bfaafadff39f0cdd277cc5d218b8c5d23c796694dd7e7be72d6f48",
-     "size": 22503,
+     "sha256": "ce4f2dc4aa686ec907624193371a1c6551261cba84098f6ddccd39ede1faeb00",
+     "size": 23650,
      "type": "file"
     },
     {
@@ -24014,6 +24028,13 @@
      "path": "src/data/entityTags.js",
      "sha256": "09cd8eee12887996188a3d2db6f467e3f4418cec99fdf10292bf8f5de61e0702",
      "size": 7306,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/data/faceHonorifics.js",
+     "sha256": "524f104b1ece1ed4b194ca9b34f227d5a8f1a9f123f90f8ba041c88afdcbbcdd",
+     "size": 13908,
      "type": "file"
     },
     {
@@ -27616,9 +27637,16 @@
     },
     {
      "mode": "100644",
+     "path": "src/domain/people/cardDoor.js",
+     "sha256": "ef6ea018c9ad6a4cba290aa1bf33e616b7098921289d7f6c83d15c2831ab1820",
+     "size": 3227,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/domain/people/cardPowers.js",
-     "sha256": "d66b412a3c2a625ced2ffcc55c2e77258dd6e0621fbc98ba5c76e868dc95fce2",
-     "size": 6554,
+     "sha256": "11805b0384eb10ff92d9534a8fe52361e32850cbdd06b2292011aedc0c1225fb",
+     "size": 7390,
      "type": "file"
     },
     {
@@ -27680,7 +27708,7 @@
     {
      "mode": "100644",
      "path": "src/domain/prose/holderTable.js",
-     "sha256": "5cb14999a3fd9ce61d6c8fca2cd772fb2c6e6fd542044be5f4c69a775e8e0a5f",
+     "sha256": "ad1730919f6b9a27fbf6aa5a9bcd33ae6528a250241f13af0c81b8cbc183a875",
      "size": 47805,
      "type": "file"
     },
@@ -36179,7 +36207,7 @@
   },
   "sourceTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "03d4e5144ea1ccfb696bd2ef6aa4aa2b90ea391b43d35fc26c6d4240da103e3d",
+   "digest": "cac6778d523fd5fbfaa61fd6fece61c3b5e43f3a73364b034e3208233e3fd239",
    "entries": [
     {
      "mode": "100644",
@@ -39138,8 +39166,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/npcComponents.jsx",
-     "sha256": "49b9043f1d6812bbe50529a2e9bf9eb27009b84257dd4f8a38603442ab6735ff",
-     "size": 29884,
+     "sha256": "fbd88e4fe40945ff05943e373155d032bc4f5114d7c6baca84d107ed8bb07a9b",
+     "size": 31280,
      "type": "file"
     },
     {
@@ -39236,8 +39264,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/InstitutionsTab.jsx",
-     "sha256": "eaf1a97a40bfaafadff39f0cdd277cc5d218b8c5d23c796694dd7e7be72d6f48",
-     "size": 22503,
+     "sha256": "ce4f2dc4aa686ec907624193371a1c6551261cba84098f6ddccd39ede1faeb00",
+     "size": 23650,
      "type": "file"
     },
     {
@@ -40736,6 +40764,13 @@
      "path": "src/data/entityTags.js",
      "sha256": "09cd8eee12887996188a3d2db6f467e3f4418cec99fdf10292bf8f5de61e0702",
      "size": 7306,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/data/faceHonorifics.js",
+     "sha256": "524f104b1ece1ed4b194ca9b34f227d5a8f1a9f123f90f8ba041c88afdcbbcdd",
+     "size": 13908,
      "type": "file"
     },
     {
@@ -44394,9 +44429,16 @@
     },
     {
      "mode": "100644",
+     "path": "src/domain/people/cardDoor.js",
+     "sha256": "ef6ea018c9ad6a4cba290aa1bf33e616b7098921289d7f6c83d15c2831ab1820",
+     "size": 3227,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/domain/people/cardPowers.js",
-     "sha256": "d66b412a3c2a625ced2ffcc55c2e77258dd6e0621fbc98ba5c76e868dc95fce2",
-     "size": 6554,
+     "sha256": "11805b0384eb10ff92d9534a8fe52361e32850cbdd06b2292011aedc0c1225fb",
+     "size": 7390,
      "type": "file"
     },
     {
@@ -44458,7 +44500,7 @@
     {
      "mode": "100644",
      "path": "src/domain/prose/holderTable.js",
-     "sha256": "5cb14999a3fd9ce61d6c8fca2cd772fb2c6e6fd542044be5f4c69a775e8e0a5f",
+     "sha256": "ad1730919f6b9a27fbf6aa5a9bcd33ae6528a250241f13af0c81b8cbc183a875",
      "size": 47805,
      "type": "file"
     },
@@ -53279,21 +53321,21 @@
   }
  },
  "scanStats": {
-  "files": 2379,
-  "reads": 137071,
-  "resolved": 10753,
-  "unresolved": 126318
+  "files": 2381,
+  "reads": 137101,
+  "resolved": 10756,
+  "unresolved": 126345
  },
  "scannerProvenance": {
   "detectorDigest": "ae4d7ce6731ad19613cf660abfb004d0c474e166e1ef6e2cc80cc1e2370a1122",
-  "executionTreeDigest": "36c102a885ba17083342b1ec496bff8b4dfd7762665611d3137549190fdaeaf1",
-  "scanTreeDigest": "10059a5f15cea74b0d3355834326cee2fd88712f68a7f58706bba6d07b06ec2e",
-  "sourceTreeDigest": "03d4e5144ea1ccfb696bd2ef6aa4aa2b90ea391b43d35fc26c6d4240da103e3d",
+  "executionTreeDigest": "b9bf759320aac330817d636b38780771cef5d762786b76f9dbda7839fbb21397",
+  "scanTreeDigest": "db3b91ae59aa38c20e9af0b0d5ee3ea2587bfc37a4110ae54914b204e84711f9",
+  "sourceTreeDigest": "cac6778d523fd5fbfaa61fd6fece61c3b5e43f3a73364b034e3208233e3fd239",
   "unscannedInputDigest": "ba274abce8a4669ce588c8cbe3a067a8115da0d2d350890b334929f6298cac97"
  },
  "schema": 31,
  "sentinel": {
-  "resolvedReads": 10753,
+  "resolvedReads": 10756,
   "totalKeys": 11991,
   "usableShapes": 516
  },
