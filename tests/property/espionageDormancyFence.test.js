@@ -189,6 +189,17 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * AND NOWHERE ELSE. Most recently at the ENGINE-HYGIENE landing (SHIFT RECORD,
  * 2026-09-01, TE-AGNOSTIC-1 cars `f2c1ad181` / `97d119c9b`); before that at T8.
  *
+ * ── 2026-11-06/07, THE POOL CENSUS COMPOSED (RUNG 2 OF THE SOAK LADDER, the landing stacked on rung 1) ──
+ * THE SIXTY-SECOND MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation of 2026-11-06,
+ * inside a NAMED CHARTERED WINDOW: RUNG 2 OF THE SOAK LADDER, ODQ §934.105; the record is
+ * docs/shift-records/2026-11-06-rung2-02-census-composed-espionage-fence.json. A RULED EXCEPTION to one cause per
+ * record (the chair, 2026-11-07 02:36 UTC): per-cause stages are unbuildable on the landing (the census cross-merges
+ * hand-joined the one-line imports), so the record names all 33 census causes with their OWN-LINEAGE rows on this
+ * corpus (32 move it; measured by scripts/audit/refence.mjs on each lane commit against its first parent). At the tip
+ * against rung 1's final tree 1bff51c6d all 360 of 360 rows move (60 a tier); own-lineage rows, deduplicated, 360;
+ * interaction rows 0. 360/360 hashes stay distinct. Written at the tip (the stage is the tip by the ruling).
+ * FENCE 3 (call-path dormancy) re-run green at the write. `68c107c2…` -> `292ad5e8…`.
+ *
  * ── 2026-11-06, THE VILLAGE WATCH'S ROTA PRESUMES NO GOVERNOR (RUNG 1 OF THE SOAK LADDER) ──
  * THE SIXTY-FIRST MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation of 2026-11-06,
  * inside a NAMED CHARTERED WINDOW: RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the §881.4 STOP's own terms); the
@@ -855,7 +866,7 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * superseded by the ENGINE-HYGIENE re-record above, which is the record of the
  * one chartered window that has been spent since.
  */
-const PRE_COUPLING_CORPUS_SHA = '68c107c25fa76ef105bb447c7a3497d2f6357c414900a32ead856c36791475c9';
+const PRE_COUPLING_CORPUS_SHA = '292ad5e81e108df3f0dac2eedfc66d13ebbeb8e675c5ca3a314c23f4c4af1b65';
 
 const CORPUS_TIERS = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
 const CORPUS_ROUTES = Object.freeze(['road', 'isolated', 'port', 'crossroads']);
