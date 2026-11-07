@@ -563,6 +563,165 @@ export const WRITER_DARK_REGISTER = Object.freeze([
     charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
       + 'W6, section ECO), consumer PLAUSIBLE at src/domain/worldPulse/resourceTaxonomy.js:95',
   }),
+  Object.freeze({
+    identity: 'magicDependent on _isolationSupport',
+    key: 'magicDependent',
+    shape: '_isolationSupport',
+    writer: 'src/generators/isolationSupport.js',
+    reason: 'engine-internal',
+    consumer: Object.freeze({
+      file: 'src/generators/structuralValidator.js',
+      symbol: 'the isolation check, which reads config._isolationSupport and words the magical-transit finding',
+    }),
+    why: 'A pass-through copy of the isolation finding, stashed on the effective config for the validation and '
+      + 'repair passes. The structural validator reads it there (structuralValidator.js:676, :684) inside '
+      + 'src/generators behind the closure STOP. The customer fact is the settlement\'s own isolationSupport, '
+      + 'registered pending-surface under §12 WRW-2; this twin stays internal whatever the owner rules there.',
+    charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
+      + 'W6, section DEF), consumer CONFIRMED at src/generators/structuralValidator.js:684',
+  }),
+  Object.freeze({
+    identity: 'requiredCapacity on _isolationSupport',
+    key: 'requiredCapacity',
+    shape: '_isolationSupport',
+    writer: 'src/generators/isolationSupport.js',
+    reason: 'engine-internal',
+    consumer: Object.freeze({
+      file: 'src/generators/structuralValidator.js',
+      symbol: 'the isolation check, which reads config._isolationSupport and words the capacity shortfall',
+    }),
+    why: 'A pass-through copy of the isolation finding, stashed on the effective config for the validation and '
+      + 'repair passes. The structural validator reads it there (structuralValidator.js:676, :703) inside '
+      + 'src/generators behind the closure STOP. The customer fact is the settlement\'s own isolationSupport, '
+      + 'registered pending-surface under §12 WRW-2; this twin stays internal whatever the owner rules there.',
+    charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
+      + 'W6, section DEF), consumer CONFIRMED at src/generators/structuralValidator.js:703',
+  }),
+  Object.freeze({
+    identity: 'cascadeAdded on charter',
+    key: 'cascadeAdded',
+    shape: 'charter',
+    writer: 'src/generators/cascadeGenerator.js',
+    reason: 'engine-internal',
+    consumer: Object.freeze({
+      file: 'src/domain/generationOwnership.js',
+      symbol: 'hasCascadeProvenance, the provenance law that reads the stamp on an institution record',
+    }),
+    why: 'The cascade provenance stamp, carried on the defence profile\'s charter bucket because that bucket '
+      + 'holds the institution rows themselves (defenseInstitutionBuckets.js filters the roster by '
+      + 'reference). Its reader is the provenance law hasCascadeProvenance, which reads the stamp on an '
+      + 'institution record so regeneration and the borrowed-seat clear know the row arrived by a cascade '
+      + 'roll. Plumbing, not a fact about the town; the bucket\'s own saved copy is not re-read.',
+    charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
+      + 'W6, section DEF), consumer PLAUSIBLE at src/domain/generationOwnership.js:119',
+  }),
+  Object.freeze({
+    identity: 'cascadeAdded on garrison',
+    key: 'cascadeAdded',
+    shape: 'garrison',
+    writer: 'src/generators/cascadeGenerator.js',
+    reason: 'engine-internal',
+    consumer: Object.freeze({
+      file: 'src/domain/generationOwnership.js',
+      symbol: 'hasCascadeProvenance, the provenance law that reads the stamp on an institution record',
+    }),
+    why: 'The cascade provenance stamp, carried on the defence profile\'s garrison bucket because that bucket '
+      + 'holds the institution rows themselves (defenseInstitutionBuckets.js filters the roster by '
+      + 'reference). Its reader is the provenance law hasCascadeProvenance, which reads the stamp on an '
+      + 'institution record so regeneration and the borrowed-seat clear know the row arrived by a cascade '
+      + 'roll. Plumbing, not a fact about the town; the bucket\'s own saved copy is not re-read.',
+    charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
+      + 'W6, section DEF), consumer PLAUSIBLE at src/domain/generationOwnership.js:119',
+  }),
+  Object.freeze({
+    identity: 'cascadeAdded on magicDef',
+    key: 'cascadeAdded',
+    shape: 'magicDef',
+    writer: 'src/generators/cascadeGenerator.js',
+    reason: 'engine-internal',
+    consumer: Object.freeze({
+      file: 'src/domain/generationOwnership.js',
+      symbol: 'hasCascadeProvenance, the provenance law that reads the stamp on an institution record',
+    }),
+    why: 'The cascade provenance stamp, carried on the defence profile\'s magicDef bucket because that bucket '
+      + 'holds the institution rows themselves (defenseInstitutionBuckets.js filters the roster by '
+      + 'reference). Its reader is the provenance law hasCascadeProvenance, which reads the stamp on an '
+      + 'institution record so regeneration and the borrowed-seat clear know the row arrived by a cascade '
+      + 'roll. Plumbing, not a fact about the town; the bucket\'s own saved copy is not re-read.',
+    charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
+      + 'W6, section DEF), consumer PLAUSIBLE at src/domain/generationOwnership.js:119',
+  }),
+  Object.freeze({
+    identity: 'cascadeAdded on walls',
+    key: 'cascadeAdded',
+    shape: 'walls',
+    writer: 'src/generators/cascadeGenerator.js',
+    reason: 'engine-internal',
+    consumer: Object.freeze({
+      file: 'src/domain/generationOwnership.js',
+      symbol: 'hasCascadeProvenance, the provenance law that reads the stamp on an institution record',
+    }),
+    why: 'The cascade provenance stamp, carried on the defence profile\'s walls bucket because that bucket '
+      + 'holds the institution rows themselves (defenseInstitutionBuckets.js filters the roster by '
+      + 'reference). Its reader is the provenance law hasCascadeProvenance, which reads the stamp on an '
+      + 'institution record so regeneration and the borrowed-seat clear know the row arrived by a cascade '
+      + 'roll. Plumbing, not a fact about the town; the bucket\'s own saved copy is not re-read.',
+    charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
+      + 'W6, section DEF), consumer PLAUSIBLE at src/domain/generationOwnership.js:119',
+  }),
+  Object.freeze({
+    identity: 'cellA on gates',
+    key: 'cellA',
+    shape: 'gates',
+    writer: 'src/domain/spatial/spatialDigest.js',
+    reason: 'engine-internal',
+    consumer: Object.freeze({
+      file: 'src/domain/worldPulse/demographicsLand.js',
+      symbol: 'the land-demographics reader, which takes the parent territory\'s own crossing cell from the gate',
+    }),
+    why: 'A map grid cell id: one side of the cheapest border crossing between two territories, built once at '
+      + 'the campaign\'s canonize. The land-demographics reader takes the parent\'s own crossing cell from the '
+      + 'gate (demographicsLand.js:223); grid ids are engine coordinates, and a player is shown the routes '
+      + 'and neighbours they produce, never a cell number.',
+    charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
+      + 'W6, section DEF), consumer CONFIRMED at src/domain/worldPulse/demographicsLand.js:223',
+  }),
+  Object.freeze({
+    identity: 'cellB on gates',
+    key: 'cellB',
+    shape: 'gates',
+    writer: 'src/domain/spatial/spatialDigest.js',
+    reason: 'engine-internal',
+    consumer: Object.freeze({
+      file: 'src/domain/worldPulse/demographicsLand.js',
+      symbol: 'the land-demographics reader, which takes the parent territory\'s own crossing cell from the gate',
+    }),
+    why: 'A map grid cell id: one side of the cheapest border crossing between two territories, built once at '
+      + 'the campaign\'s canonize. The land-demographics reader takes the parent\'s own crossing cell from the '
+      + 'gate (demographicsLand.js:223); grid ids are engine coordinates, and a player is shown the routes '
+      + 'and neighbours they produce, never a cell number.',
+    charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
+      + 'W6, section DEF), consumer CONFIRMED at src/domain/worldPulse/demographicsLand.js:223',
+  }),
+  Object.freeze({
+    identity: 'forbiddenTradeRoutes on magicDef',
+    key: 'forbiddenTradeRoutes',
+    shape: 'magicDef',
+    writer: 'src/data/institutionalCatalog.js',
+    reason: 'engine-internal',
+    consumer: Object.freeze({
+      file: 'src/generators/steps/assembleInstitutions.js',
+      symbol: 'rowRoll, the assembler\'s eligibility roll, which reads the catalog rule before the row is admitted',
+    }),
+    why: 'A catalog eligibility rule, not a fact about the town: the institution catalog carries '
+      + '`forbiddenTradeRoutes` on its row, and the row is spread onto the settlement\'s magical-defence '
+      + 'record whole. Its reader is the roster assembler\'s eligibility roll (rowRoll), which reads the rule '
+      + 'on the catalog row before that row is admitted and copied, inside src/generators behind the closure '
+      + 'STOP. What a player is shown is the roster the rule produced, never the rule; the stored copy itself '
+      + 'is not re-read.',
+    charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
+      + 'W6, section DEF), consumer PLAUSIBLE at src/generators/steps/assembleInstitutions.js:291',
+  }),
 ]);
 
 const SECTION = /§\d+/;

@@ -8,7 +8,7 @@
   "The reviewable slice is computed by RULE (reviewableDark), never hand-listed."
  ],
  "schema": 1,
- "frozenAtSha": "76febf9b0323ee1ba407f07d9118230e6ea58eb3",
+ "frozenAtSha": "ba1737b883e38cbc87fdc751b615b749416ab22a",
  "charter": "§18.1 WRWALKER Car 1 (HORIZON) — chair-signed vetoably at the INSTR-WRW pre-stage",
  "minRows": 40,
  "corpusMeta": {
@@ -23,7 +23,7 @@
   "transitionCount": 14426
  },
  "shapesDigest": "782dcd97c1f8dc63870232f1660c255dfb5f6065c2cf0496e3e66b45823d9d03",
- "detectorDigest": "c41eda420cd5f97a9a154729957ad86b6df4533656006864b9b4bb0c24588366",
+ "detectorDigest": "0562dc31c35b573fba63e801330dd31e5c365d8a29904ac7c4bf875e6715dd9f",
  "verdictDigest": "ac48c453d28890e8747f6136704555d3bc7d86c61f2e3dc6a13c2e7ad75effab",
  "surfaceRoots": {
   "web": [
@@ -101,7 +101,7 @@
   "nGrades": 979601,
   "resolvedReceivers": 7018
  },
- "registerDigest": "762cfe381246fc23ff88be5ec8c007528cb3cd67e938ff4f7f6b8c8e86dd8f34",
+ "registerDigest": "64272d6f71d59161351cc8e0335bbcb8630131f32cc63ee730eeb6491f10d07c",
  "pendingSurfaceCeiling": 3,
  "reviewableDarkCount": 497,
  "darkUnregistered": [
@@ -532,30 +532,6 @@
    "rows": 280
   },
   {
-   "identity": "cascadeAdded on charter",
-   "key": "cascadeAdded",
-   "shape": "charter",
-   "rows": 205
-  },
-  {
-   "identity": "cascadeAdded on garrison",
-   "key": "cascadeAdded",
-   "shape": "garrison",
-   "rows": 353
-  },
-  {
-   "identity": "cascadeAdded on magicDef",
-   "key": "cascadeAdded",
-   "shape": "magicDef",
-   "rows": 236
-  },
-  {
-   "identity": "cascadeAdded on walls",
-   "key": "cascadeAdded",
-   "shape": "walls",
-   "rows": 471
-  },
-  {
    "identity": "cascadeBoost on charter",
    "key": "cascadeBoost",
    "shape": "charter",
@@ -640,22 +616,10 @@
    "rows": 85
   },
   {
-   "identity": "cellA on gates",
-   "key": "cellA",
-   "shape": "gates",
-   "rows": 625
-  },
-  {
    "identity": "cellA on segments",
    "key": "cellA",
    "shape": "segments",
    "rows": 1250
-  },
-  {
-   "identity": "cellB on gates",
-   "key": "cellB",
-   "shape": "gates",
-   "rows": 625
   },
   {
    "identity": "cellB on segments",
@@ -1984,12 +1948,6 @@
    "rows": 472
   },
   {
-   "identity": "forbiddenTradeRoutes on magicDef",
-   "key": "forbiddenTradeRoutes",
-   "shape": "magicDef",
-   "rows": 236
-  },
-  {
    "identity": "forcedByConfig on stress",
    "key": "forcedByConfig",
    "shape": "stress",
@@ -3037,12 +2995,6 @@
    "identity": "mageTheocracy on flags",
    "key": "mageTheocracy",
    "shape": "flags",
-   "rows": 472
-  },
-  {
-   "identity": "magicDependent on _isolationSupport",
-   "key": "magicDependent",
-   "shape": "_isolationSupport",
    "rows": 472
   },
   {
@@ -5954,12 +5906,6 @@
    "key": "renewability",
    "shape": "resourceTaxonomy",
    "rows": 168
-  },
-  {
-   "identity": "requiredCapacity on _isolationSupport",
-   "key": "requiredCapacity",
-   "shape": "_isolationSupport",
-   "rows": 472
   },
   {
    "identity": "residential on stocks",
