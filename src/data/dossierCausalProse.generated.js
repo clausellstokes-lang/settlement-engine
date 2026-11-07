@@ -68,7 +68,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "closer"
           ],
-          "text": "{settlement} keeps the {route} shut against {counterpart} for {reason}, and the closing is {timeband_age}; the clerks who file the gate returns have never filed anything else.",
+          "text": "{settlement} has kept the {route} shut against {counterpart} for {reason}, and the closing is {timeband_age}: nobody now working the gate has seen it open.",
           "slots": [
             "settlement",
             "route",
@@ -82,7 +82,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "closer"
           ],
-          "text": "What {settlement} could not carry off the field it is taking in {term} instead: {counterpart} delivers the {good} by the season, and the deliveries are the war's bill, still being paid.",
+          "text": "{settlement} could not win the war outright, so it takes payment under {term} instead: {counterpart} delivers the {good} every season, and the deliveries will keep coming until the war is paid for.",
           "slots": [
             "settlement",
             "term",
@@ -95,7 +95,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "closer"
           ],
-          "text": "The {route} to {counterpart} is closed and {settlement}'s market does not show it; the tie was never worth the closing, and both towns' ledgers say the same thing about it.",
+          "text": "The {route} to {counterpart} is closed and {settlement}'s market does not miss it: the stalls carry the same goods at the same prices, because little ever came down that road.",
           "slots": [
             "route",
             "counterpart",
@@ -142,12 +142,12 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "aggrieved"
           ],
-          "text": "The town holds that {counterpart} means to take the {good} trade whole and speaks of little else; {house}'s books at {settlement} say otherwise, and the books are not what the street is reading.",
+          "text": "The talk in {settlement} is that {counterpart} means to take the whole {good} trade; {house}'s books say otherwise, but nobody in the market has asked to see them.",
           "slots": [
+            "settlement",
             "counterpart",
             "good",
-            "house",
-            "settlement"
+            "house"
           ]
         },
         {
@@ -178,7 +178,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "aggrieved"
           ],
-          "text": "{settlement} has a cause against {counterpart} that it will not press: too much of what the town eats comes down that road, and the seat has entered its reason for the restraint every season the question was raised.",
+          "text": "{settlement} has a grievance against {counterpart} and will not press it: too much of what the town eats comes down that road, and the hall says so every season the question is raised.",
           "slots": [
             "settlement",
             "counterpart"
@@ -235,7 +235,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "occupied"
           ],
-          "text": "{settlement}'s seat keeps the town and not its good name: the change of observance was imposed, and the market has never once stopped saying by whose order.",
+          "text": "{settlement}'s rulers still hold the town but not its respect: the change of observance was imposed, and the market still says whose order it was.",
           "slots": [
             "settlement"
           ]
@@ -245,10 +245,10 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "occupied"
           ],
-          "text": "A stranger at {settlement} finds {creed}'s house on the main street and {rival_creed}'s feasts on a narrower one; the arrangement is {timeband_age} and dates from the winter the column stayed.",
+          "text": "{creed}'s house stands on {settlement}'s main street and {rival_creed}'s feasts are kept on a narrower one; the arrangement is {timeband_age} and dates from the winter the column stayed.",
           "slots": [
-            "settlement",
             "creed",
+            "settlement",
             "rival_creed",
             "timeband_age"
           ]
@@ -269,7 +269,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "occupied"
           ],
-          "text": "{settlement}'s seat is still paying for the welcome it gave that winter. The standing it lost when the rite changed has not come back, and every season it does not is entered.",
+          "text": "{settlement}'s rulers are still paying for the welcome they gave that winter: they lost the town's trust when the rite changed, and they have not won it back.",
           "slots": [
             "settlement"
           ]
@@ -279,7 +279,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "occupier"
           ],
-          "text": "{settlement}'s own altars stand as they stood, for all that the town took the field and took {counterpart}: no banner ever proved a god, and nothing at all was taken from {creed}.",
+          "text": "{settlement} won its war with {counterpart} and kept its own altars: nobody changed the rite, and {creed} lost nothing to the victory.",
           "slots": [
             "settlement",
             "counterpart",
@@ -327,7 +327,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "claimant"
           ],
-          "text": "The claim {settlement} holds against {counterpart} is good and the {term} is better: the town may abhor its neighbour's rite and may not march on it while the pact stands, and the refusal is entered each time it is asked for.",
+          "text": "{settlement} has a real grievance against {counterpart}'s rite but cannot march while the {term} stands, and the hall refuses each time it is asked.",
           "slots": [
             "settlement",
             "counterpart",
@@ -352,7 +352,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "claimant"
           ],
-          "text": "No claim stands entered at {settlement} against anybody, for {reason}: the town cannot agree at its own altars, and what will not hold a rite together will not carry a banner out.",
+          "text": "{settlement} has made no holy claim against anyone, for {reason}: its own congregations cannot agree on a rite, so they cannot agree on a war either.",
           "slots": [
             "settlement",
             "reason"
@@ -363,7 +363,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "claimant"
           ],
-          "text": "The rite at {settlement} and the rite at {counterpart} have been one rite through {timeband_span}; nothing sacred has ever stood between the two towns to be pressed, and the older hands here take that as a fact of the place rather than a decision anyone made.",
+          "text": "{settlement} and {counterpart} have kept the same rite through {timeband_span}, and no holy quarrel has ever stood between them.",
           "slots": [
             "settlement",
             "counterpart",
@@ -375,7 +375,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "claimant"
           ],
-          "text": "{settlement}'s register names no patron, and {counterpart}'s names none either; the claim that turns a rite into a muster has never had a rite here to start from, and neither town has found a quarrel in the blank.",
+          "text": "Neither {settlement} nor {counterpart} keeps a patron god, so there is no holy cause for either town to march on.",
           "slots": [
             "settlement",
             "counterpart"
@@ -442,7 +442,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "receiving"
           ],
-          "text": "{settlement} has been short of both quiet and bread since it took in what came off the {route} that year; those who arrived had chosen the town for the first of them.",
+          "text": "{settlement} has been short of bread and short of peace since it took in the people who came off the {route} that year; peace was what they came here for.",
           "slots": [
             "settlement",
             "route"
@@ -464,7 +464,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "emptied"
           ],
-          "text": "The roll of {settlement}'s named people is unchanged for all that the town was put to the sack: scattered to {band} roads, every one of them still somewhere, and the register says so.",
+          "text": "{settlement} was sacked and lost none of its people for good: they scattered down {band} roads, and every family can say where its own went.",
           "slots": [
             "settlement",
             "band"
@@ -496,7 +496,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "pressed"
           ],
-          "text": "{settlement}'s court has entered land and grain as its reason against {counterpart} and the reason stands on the record in those words; the survey the court did not read puts the pressure lower.",
+          "text": "{settlement}'s court says it needs {counterpart}'s land and grain; nobody at court has read the survey, which puts the need lower.",
           "slots": [
             "settlement",
             "counterpart"
@@ -507,7 +507,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "pressed"
           ],
-          "text": "The talk at {settlement} is that the realm has run out of room and {counterpart}'s fields are the answer; the pressure the town would march on was believed and not measured, and the receipt says so in plain words.",
+          "text": "The talk in {settlement} is that the realm has run out of room and {counterpart}'s fields are the answer; nobody has counted either the fields or the mouths.",
           "slots": [
             "settlement",
             "counterpart"
@@ -528,7 +528,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "pressed"
           ],
-          "text": "{settlement} has carried the grievance against {counterpart} {timeband_since} without ever spending it, and a grievance with nothing behind it has a way of being remembered longer than one that got spent.",
+          "text": "{settlement} has held its grudge against {counterpart} {timeband_since} and never acted on it, and an unspent grudge is remembered longer than a spent one.",
           "slots": [
             "settlement",
             "counterpart",
@@ -540,7 +540,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "pressed"
           ],
-          "text": "The lean years turned {settlement}'s court toward {counterpart}'s valley and have not turned it back; what carries the argument is the court's own picture of that plenty, and the picture is wrong.",
+          "text": "The lean years turned {settlement}'s court toward {counterpart}'s valley, and it still talks of the plenty there; the valley is not as rich as the court believes.",
           "slots": [
             "settlement",
             "counterpart"
@@ -551,7 +551,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "pressed"
           ],
-          "text": "{settlement} is as lean as it has ever been and holds no cause against anybody for it: the pressure sits on the rolls and in the granary and has never once reached the court's reasons, and the court's own entry gives {reason} and names no enemy.",
+          "text": "{settlement} is as hungry as it has ever been and blames nobody for it; the court gives {reason} and names no enemy.",
           "slots": [
             "settlement",
             "reason"
@@ -583,7 +583,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "discounted"
           ],
-          "text": "Nothing {settlement} says at a table is banked at face any more; the garrison it claimed proved thinner than the claim, and the walls held where the credit did not.",
+          "text": "Nobody takes {settlement}'s word at a table any more: it claimed a garrison it did not have, and its neighbours found out.",
           "slots": [
             "settlement"
           ]
@@ -616,7 +616,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "discounted"
           ],
-          "text": "Every offer {settlement} has made since the bluff was called is read at a discount, and the discount has outlasted the reason for it; the town negotiates against its own record.",
+          "text": "Since its bluff was called, {settlement}'s neighbours check every offer it makes twice, and its envoys come home with worse terms than the town's strength deserves.",
           "slots": [
             "settlement"
           ]
@@ -637,7 +637,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "discounted"
           ],
-          "text": "{settlement} is taken at its word at every table it sits at, for all that it is at war: nothing it has ever claimed about its own strength proved thinner than the claim, and the discount its neighbours carry does not attach here.",
+          "text": "{settlement} is at war and its word is still good at every table: it has never claimed more strength than it had.",
           "slots": [
             "settlement"
           ]
@@ -668,7 +668,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "marching"
           ],
-          "text": "{settlement}'s war against {counterpart} rests on a fact that is in nobody's record: the word that reached the court was shaped before it left, and the whole picture of the affront was built on it.",
+          "text": "{settlement} went to war with {counterpart} over an affront nobody can now show: the report that reached the court was shaped before it was sent.",
           "slots": [
             "settlement",
             "counterpart"
@@ -690,7 +690,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "marching"
           ],
-          "text": "What {settlement} carries out of the season is an enemy it did not have before and an account of the choosing it cannot now unsay; the wall it was told was thin was not thin.",
+          "text": "{settlement} has come out of the season with a new enemy and nothing to show for it: the wall it was told was thin held.",
           "slots": [
             "settlement"
           ]
@@ -700,7 +700,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "marching"
           ],
-          "text": "No column has left {settlement} over this and none will: the town's own people had walked the same ground the tale described, their account was on hand before the tale was, and the {house} that placed it is out of pocket for the trouble.",
+          "text": "No column has left {settlement} over the tale: the town's own people had walked that ground and said otherwise first, and {house}, which paid to spread the tale, is out of pocket.",
           "slots": [
             "settlement",
             "house"
@@ -724,7 +724,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "marching"
           ],
-          "text": "A stranger at {settlement} finds a town at war and nobody in it who can say plainly what the affront was: the court holds a picture of it, the picture arrived already shaped, and there is no record underneath that carries the fact.",
+          "text": "{settlement} is at war and nobody in it can say plainly what the affront was: the court has a story, the story came from outside already shaped, and nobody has checked it.",
           "slots": [
             "settlement"
           ]
@@ -767,7 +767,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "payer"
           ],
-          "text": "The tribute goes out of {settlement} on a schedule the town had no hand in setting and has through {timeband_span}; the clerks who file the receipts stopped noting anything unusual about the arrangement long ago.",
+          "text": "The tribute leaves {settlement} on a schedule the town had no say in and has through {timeband_span}; it goes out on the same day each season and nobody remarks on it now.",
           "slots": [
             "settlement",
             "timeband_span"
@@ -778,7 +778,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "victor"
           ],
-          "text": "{counterpart} has been delivering to {settlement} {timeband_since} what {settlement} could not take on the field, and delivers it under {term}; the document that left that room is the only instrument standing between the two towns.",
+          "text": "{counterpart} has delivered to {settlement} {timeband_since} under {term}, payment for a war {settlement} could not win outright, and that paper is all that keeps the two towns from fighting again.",
           "slots": [
             "counterpart",
             "settlement",
@@ -791,7 +791,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "victor"
           ],
-          "text": "{settlement} holds terms cut to the margin it believed it held, and the belief is written on the document beside them; nobody has since asked whether the margin was real.",
+          "text": "{settlement} signed terms on the strength it thought it had, and nobody has since checked whether it had it.",
           "slots": [
             "settlement"
           ]
@@ -813,7 +813,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "payer"
           ],
-          "text": "The old hands at {settlement} measure a full granary against a year none of them chose: the tribute has gone out through {timeband_span}, and nobody under a certain age here has seen the stores as they stood before the terms.",
+          "text": "The tribute has gone out of {settlement} through {timeband_span}, and nobody under a certain age has ever seen the granary full.",
           "slots": [
             "settlement",
             "timeband_span"
@@ -846,7 +846,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "bound"
           ],
-          "text": "{settlement} has the grievance and the muster and cannot move: the {term} {counterpart} holds forbids it while it stands, and every refusal is on the record with the term that made it.",
+          "text": "{settlement} has the grievance and the muster and cannot march: the {term} with {counterpart} forbids it, and the hall says so each time the question is raised.",
           "slots": [
             "settlement",
             "term",
@@ -882,11 +882,11 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "holder"
           ],
-          "text": "{settlement} has entered {counterpart}'s missed delivery as cause, and a defaulted peace angers here exactly as a broken one would; the delivery refused is the one the {term} was built on.",
+          "text": "{counterpart} missed a delivery under the {term}, and {settlement} is as angry as if the peace had been broken outright: that delivery was the one the whole {term} rested on.",
           "slots": [
-            "settlement",
             "counterpart",
-            "term"
+            "term",
+            "settlement"
           ]
         },
         {
@@ -938,7 +938,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "home"
           ],
-          "text": "The seat at {settlement} is paying for the war out of its own standing: the reinforcements sent to {counterpart}'s front were charged against it, and the hall counts heads differently than it did {timeband_since}.",
+          "text": "The hall at {settlement} sent reinforcements to {counterpart}'s front and the town blames it for every one; its support has been falling {timeband_since}.",
           "slots": [
             "settlement",
             "counterpart",
@@ -972,7 +972,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "home"
           ],
-          "text": "{settlement}'s seat has lost the room and not the hall: the war it is prosecuting is spoken of badly in every quarter of the town, and {faction}, which carries the anger, has never held what it would take to turn anger into a vote.",
+          "text": "{settlement}'s rulers are hated for the war in every quarter, but {faction}, which carries the anger, has never had the votes to bring them down.",
           "slots": [
             "settlement",
             "faction"
@@ -995,7 +995,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "home"
           ],
-          "text": "The hall at {settlement} has not spoken well of a war {timeband_since}, and the caution belongs to the room rather than to the seat in it: the last one cost the seat that fought it, and every seat since has counted heads before it counted enemies.",
+          "text": "The hall at {settlement} has not spoken well of a war {timeband_since}: the last war cost its ruler the seat, and every ruler since has counted votes before counting enemies.",
           "slots": [
             "settlement",
             "timeband_since"
@@ -1031,7 +1031,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "home"
           ],
-          "text": "{settlement} now offers what it refused before the hall changed hands: the new seat read the war with {counterpart} again, and {reason} stands on the entry.",
+          "text": "{settlement} now offers {counterpart} the terms it refused before the hall changed hands; the new ruler looked at the war again and gives {reason}.",
           "slots": [
             "settlement",
             "counterpart",
@@ -1139,7 +1139,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "funding"
           ],
-          "text": "{house} carries a fortune and a stain on the same page: it bought cheap while {settlement} went hungry, gave a share to {temple}, and the reckoning entered against it has not been struck off.",
+          "text": "{house} grew rich buying cheap while {settlement} went hungry, then gave a share to {temple}; the town has not forgiven it.",
           "slots": [
             "house",
             "settlement",
@@ -1188,7 +1188,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "receiving"
           ],
-          "text": "{temple}'s house at {settlement} stands on money the town has never had an account of, and nothing is held against it on that score; the reckoning that would do the holding was never entered, and no reckoning enters itself.",
+          "text": "{temple}'s house at {settlement} was built with money nobody has accounted for, and nobody has asked.",
           "slots": [
             "temple",
             "settlement"
@@ -1271,7 +1271,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "principled"
           ],
-          "text": "{settlement}'s trade with {counterpart} has fallen as far as it is going to fall and has not fallen to nothing; conscience priced the {good} and never got the last word over what the town eats, and the ledger shows plainly where the two of them settled.",
+          "text": "{settlement}'s trade with {counterpart} has shrunk but not stopped: people object to the house there, but they still need the {good}.",
           "slots": [
             "settlement",
             "counterpart",
@@ -1316,7 +1316,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "hungry"
           ],
-          "text": "{settlement} is burying more than it births and the reason entered on the roll is bread and not sickness; the import fell a band when the {route} was taken, and then another.",
+          "text": "{settlement} is burying more than it births, and the roll gives hunger, not sickness, as the cause: the grain coming in fell when the {route} was taken, and has fallen again since.",
           "slots": [
             "settlement",
             "route"
@@ -1350,7 +1350,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "hungry"
           ],
-          "text": "The gap in {settlement}'s register is the granary arithmetic told again in burials, season by season and in the same hand.",
+          "text": "The gap in {settlement}'s register follows the empty granary: the burials rise each season the grain runs short.",
           "slots": [
             "settlement"
           ]
@@ -1360,10 +1360,10 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "hungry"
           ],
-          "text": "{settlement}'s gate still writes down arrivals it cannot account for, with the {route} shut and no house owning the run; what comes in fits in the margin of the page, and it has never once been nothing.",
+          "text": "Even with the {route} shut, a few strangers still turn up at {settlement}'s gate, and the gate writes each one down.",
           "slots": [
-            "settlement",
-            "route"
+            "route",
+            "settlement"
           ]
         },
         {
@@ -1371,7 +1371,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "hungry"
           ],
-          "text": "{settlement} is still burying at the rate the cut {route} set and the rate has not turned with the season: what the import fell by is what the roll falls by, a band behind, and the granary word is still the word that binds.",
+          "text": "{settlement} is still burying at the rate the cut {route} set: the grain that stopped coming is counted in graves a season later.",
           "slots": [
             "settlement",
             "route"
@@ -1405,7 +1405,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "growing"
           ],
-          "text": "{settlement} has {band} more mouths than its last count and the {good} carts come oftener than the road was built for; the column that came up the {route} is entered as a trade flow now: the same feet, in a different book.",
+          "text": "{settlement} has {band} more mouths than its last count and the {good} carts come oftener than the road was built for; the people who came up the {route} now work the trade.",
           "slots": [
             "settlement",
             "band",
@@ -1430,7 +1430,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "growing"
           ],
-          "text": "A stranger at {settlement} looks for the reason a town stands here and does not find it in the ground; the carts were stopping at this meeting of roads before there was anything to stop for, and the town filled in around them.",
+          "text": "Nothing in {settlement}'s ground explains why a town stands here: the carts were stopping at this crossroads before there was anything to stop for, and the town grew up around them.",
           "slots": [
             "settlement"
           ]
@@ -1440,7 +1440,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "growing"
           ],
-          "text": "{settlement} is emptying on the very reckoning that filled it, and the emptying has not slowed; the granary was the true ceiling of the boom, and the roads have been slow to learn it.",
+          "text": "{settlement} is emptying as fast as it filled: the granary could never feed the crowd the roads brought, and people are only now learning it.",
           "slots": [
             "settlement"
           ]
@@ -1461,7 +1461,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "growing"
           ],
-          "text": "{settlement} has a plenty that is real and smaller than the road's account of it, and a column at the gate that came on the account; those who came late are entered as unplaced, with the reason given to them honestly.",
+          "text": "{settlement} has plenty, but less than the stories on the road say, and a crowd at the gate that came on those stories; the late-comers are told plainly there is no room.",
           "slots": [
             "settlement"
           ]
@@ -1517,7 +1517,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "knowing"
           ],
-          "text": "A stranger asking at {settlement} for word off the {route} is given something {timeband_age} and told plainly that it is; the town has had nothing newer since the season turned, and does not wait for it.",
+          "text": "Ask in {settlement} for word off the {route} and you get news {timeband_age}, and are told so; nothing newer has come since the season turned.",
           "slots": [
             "settlement",
             "route",
@@ -1529,7 +1529,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "knowing"
           ],
-          "text": "{house} at {settlement} acted on a letter that was current when it left {counterpart} and old when it arrived, and is paying for the difference still; the town has learned what a hop costs.",
+          "text": "{house} at {settlement} acted on a letter from {counterpart} that was out of date by the time it arrived, and is still paying for it.",
           "slots": [
             "house",
             "settlement",
@@ -1554,7 +1554,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "knowing"
           ],
-          "text": "The old brokers at {settlement} price a report by the road it came up before they price it by the hand that wrote it: the town has been wrong about {counterpart} often enough to have learned exactly what a journey costs a fact.",
+          "text": "{settlement}'s old brokers ask which road a report came by before they ask who wrote it: the town has been wrong about {counterpart} often enough.",
           "slots": [
             "settlement",
             "counterpart"
@@ -1634,7 +1634,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
             "market",
             "dm-only"
           ],
-          "text": "{faction}'s stamp at {settlement} costs it more each season than the {good} it was meant to move: the shortage it announced never appeared on a single manifest.",
+          "text": "{faction} at {settlement} announced that the {good} was running short, though no cargo list ever showed it, and each season people trust its word less.",
           "slots": [
             "faction",
             "settlement",
@@ -1680,11 +1680,11 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "proposer"
           ],
-          "text": "{settlement} sends {good} to {counterpart} and receives its own in return, written into one document with a direction on every line; the want crossed the line the clerks watch, and the seat sent on the strength of it.",
+          "text": "{settlement} and {counterpart} trade {good} under one written agreement; {settlement} needed it badly enough to ask, and its rulers signed.",
           "slots": [
             "settlement",
-            "good",
-            "counterpart"
+            "counterpart",
+            "good"
           ]
         },
         {
@@ -1704,7 +1704,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "proposer"
           ],
-          "text": "A stranger who reads {settlement}'s standing instrument with {counterpart} finds no war anywhere behind it; the want of {good} on one side and the surplus of it on the other are the whole of the reason, and both courts were at peace when they wrote.",
+          "text": "{settlement}'s agreement with {counterpart} has no war behind it: one town lacked {good}, the other had too much, and both were at peace when they signed.",
           "slots": [
             "settlement",
             "counterpart",
@@ -1716,7 +1716,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "proposer"
           ],
-          "text": "The draft {settlement} and {counterpart} exchanged is filed at both ends and signed at neither; each court priced the thing for itself, neither price met the other's, and the two valuations sit in the record where the pact would have been.",
+          "text": "The agreement {settlement} and {counterpart} drafted is signed by neither: each court wanted a better price than the other would give.",
           "slots": [
             "settlement",
             "counterpart"
@@ -1727,7 +1727,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "proposer"
           ],
-          "text": "{settlement} and {counterpart} keep one instrument between them and it carries the {good} term only; the security clause the same want argued for could not stand beside what was already written, and the clerks entered why rather than letting it fall out of the record.",
+          "text": "{settlement} and {counterpart} share one agreement and it covers the {good} only; a defence clause was dropped because it clashed with promises already made.",
           "slots": [
             "settlement",
             "counterpart",
@@ -1739,7 +1739,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "proposer"
           ],
-          "text": "The pact {settlement} proposed to {counterpart} is signed and this town's carters have already arranged their year around it; what crossed the clerks' line was a want, and the want has not gone away because a document answered it.",
+          "text": "The pact {settlement} proposed to {counterpart} is signed and the carters have already planned their year around it; the town still needs what it asked for as much as it did.",
           "slots": [
             "settlement",
             "counterpart"
@@ -1805,7 +1805,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "owed"
           ],
-          "text": "{counterpart}'s default stands at {settlement} as compliance, because nobody was watching the crossing; the town is the poorer for a fiction that suits everybody who could correct it.",
+          "text": "{counterpart} has stopped delivering and {settlement} still counts it as paid, because nobody was watching the crossing; the town is poorer for it, and nobody who could correct it wants to.",
           "slots": [
             "counterpart",
             "settlement"
@@ -1863,11 +1863,11 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "seated"
           ],
-          "text": "The hall at {settlement} seats a merchant and the books show the order plainly and lawfully: the {good} fortune first, the credit extended to the seat second, the contest {house} won third. Each entry proper on its own page, one hand behind all of them.",
+          "text": "A merchant sits in {settlement}'s hall, and the books show how: {house} made a fortune in the {good} trade, lent to the town's rulers, then won the contest for the seat.",
           "slots": [
             "settlement",
-            "good",
-            "house"
+            "house",
+            "good"
           ]
         },
         {
@@ -1875,10 +1875,10 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "seated"
           ],
-          "text": "The hall at {settlement} is a founding in the clerks' book and a purchase in the town's mouth, and {house}'s season in the {good} trade stands behind the seating either way.",
+          "text": "The clerks call {house}'s place in {settlement}'s hall lawful; the town says it was bought with a season's profit in the {good} trade.",
           "slots": [
-            "settlement",
             "house",
+            "settlement",
             "good"
           ]
         },
@@ -1899,7 +1899,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "seated"
           ],
-          "text": "The grievance entered at {settlement} is the bill for a hall that answers to {house}, and {faction} has been asking {timeband_since} who is to answer for a founding.",
+          "text": "{settlement}'s hall answers to {house}, and {faction} has been asking {timeband_since} who gave the house that power.",
           "slots": [
             "settlement",
             "house",
@@ -1912,7 +1912,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "seated"
           ],
-          "text": "There is nothing in {settlement}'s hall record to point at, which is the shape the thing takes here: {house} asks for nothing openly and is refused nothing.",
+          "text": "Nothing in {settlement}'s hall records points to {house}: it asks for nothing openly and is never refused.",
           "slots": [
             "settlement",
             "house"
@@ -1923,7 +1923,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "seated"
           ],
-          "text": "The seat of {settlement} carries a grievance without the creditor that earned it: what ruined {house} did not spare the hall that had leaned on it, and {timeband_since} the second half of that arrangement is all the town has.",
+          "text": "{settlement}'s ruler leaned on {house}'s money, and when {house} was ruined the debts stayed with the hall; {timeband_since} the town has had the grievance and no creditor to blame.",
           "slots": [
             "settlement",
             "house",
@@ -1956,7 +1956,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "court"
           ],
-          "text": "{house} has marked its appetite for {settlement} down a band with the hall's standing written in as the reason; the {good} goes to {counterpart} instead, and the clerks here have an entry for the pricing and none at all for what did not come.",
+          "text": "{house} has cut back its dealings with {settlement} because of the trouble in the hall; the {good} now goes to {counterpart} instead.",
           "slots": [
             "house",
             "settlement",
@@ -1979,7 +1979,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "court"
           ],
-          "text": "Credit closes early at {settlement} and the price is the harder one: the bill for a court in crisis, charged by houses that read the hall before they read the road.",
+          "text": "Credit closes early at {settlement} and costs more: lenders have heard about the trouble in the hall and charge for it.",
           "slots": [
             "settlement"
           ]
@@ -1989,7 +1989,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "court"
           ],
-          "text": "It is the oldest counterweight a town has: the crowd's grievance against the seat is also the countinghouse's discount, scored off one page by two readers; {faction} calls it prudence and the hall calls it desertion, and both are reading the same line.",
+          "text": "The crowd's anger at the hall is also why the lenders are pulling back; {faction} calls it prudence and the hall calls it desertion.",
           "slots": [
             "faction"
           ]
@@ -1999,7 +1999,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "court"
           ],
-          "text": "The seat at {settlement} keeps two books and read the wrong one aloud; {house} keeps a third, and it is the third that decides whether the {good} moves at all.",
+          "text": "{settlement}'s rulers have told the town one thing and their books say another; {house} keeps its own count, and that count decides whether the {good} moves at all.",
           "slots": [
             "settlement",
             "house",
@@ -2055,7 +2055,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "emptying"
           ],
-          "text": "Nothing in {settlement}'s record orders the departure and no column stands anywhere in it; the households went one at a time on the ordinary physics of leaving, and only the tax roll noticed the street had emptied.",
+          "text": "Nobody ordered anyone out of {settlement}: the households left one at a time, and only the tax collector noticed the street had emptied.",
           "slots": [
             "settlement"
           ]
@@ -2076,7 +2076,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "receiving"
           ],
-          "text": "The shrine road at {settlement} fills for the feast and empties after it: the season is two economies wearing one road, and this town counts the beds while {counterpart} counts the offerings.",
+          "text": "The shrine road at {settlement} fills for the feast and empties after it: this town earns from the beds, {counterpart} from the offerings.",
           "slots": [
             "settlement",
             "counterpart"
@@ -2130,7 +2130,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "adopting"
           ],
-          "text": "{settlement} keeps a feast that is not its own: the households out of {counterpart} brought it, and the clerks have entered where it came from honestly and in the same hand as the rest.",
+          "text": "{settlement} keeps a feast that is not its own: the families from {counterpart} brought it, and the town calendar says so.",
           "slots": [
             "settlement",
             "counterpart"
@@ -2152,7 +2152,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "adopting"
           ],
-          "text": "{settlement} keeps days it no longer sorts into its own and other people's; it never converted, it stopped remarking which rite it was keeping, and a stranger cannot now tell which of the days on the calendar the town brought with it.",
+          "text": "{settlement} keeps its newcomers' holy days alongside its own and no longer remembers which are which.",
           "slots": [
             "settlement"
           ]
@@ -2162,7 +2162,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "adopting"
           ],
-          "text": "The pews at {settlement} are where the {reason} left them and nobody decided it: the danger emptied the market and filled {temple}, the danger passed and the comfort did what comfort does, and neither motion was anybody's.",
+          "text": "The pews at {settlement} are still as full as the {reason} left them: fear emptied the market and filled {temple}, and when the danger passed the people kept coming.",
           "slots": [
             "settlement",
             "reason",
@@ -2174,7 +2174,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "adopting"
           ],
-          "text": "A trickle plants nothing: it took {timeband_span} of arrivals out of one place before {settlement}'s calendar would carry their day, and the households that first asked for it had been paying the town's tithes a long while by then.",
+          "text": "It took {timeband_span} of arrivals before {settlement}'s calendar would carry the newcomers' feast, and by then they had been paying the town's tithes for years.",
           "slots": [
             "timeband_span",
             "settlement"
@@ -2185,7 +2185,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "adopting"
           ],
-          "text": "Nobody at {settlement} under a certain age can say which of the town's feasts came in with the newcomers: the calendar took them {timeband_since}, the clerks entered where each of them came from, and that entry is the only place the difference still lives.",
+          "text": "Nobody young in {settlement} can say which feasts came with the newcomers, though the calendar took them {timeband_since}; only the old calendar book still records where each came from.",
           "slots": [
             "settlement",
             "timeband_since"
@@ -2229,10 +2229,10 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "misread"
           ],
-          "text": "Every courtesy that comes to {settlement} out of {counterpart} is addressed to the place the old altar made, and nobody here has thought it worth a letter.",
+          "text": "Letters from {counterpart} still greet {settlement} as a devout town, and nobody here has written to say the old altar is gone.",
           "slots": [
-            "settlement",
-            "counterpart"
+            "counterpart",
+            "settlement"
           ]
         },
         {
@@ -2263,7 +2263,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "reader"
           ],
-          "text": "Belief about a neighbour's gods decays here like belief about anything else: {settlement} is not wrong about {counterpart}, it is late, and the lateness is what the next decision will be made on.",
+          "text": "{settlement} still thinks of {counterpart}'s faith as it was years ago; the picture is out of date, and the next decision will be made on it.",
           "slots": [
             "settlement",
             "counterpart"
@@ -2319,10 +2319,11 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "reading"
           ],
-          "text": "{settlement}'s record carries the {reason} in one entry and the reading of the {reason} in another, side by side and separately attributed; the clerks keep them apart deliberately.",
+          "text": "{settlement}'s chronicle notes the {reason} as it happened and, separately, what {temple} said it meant, and keeps the two apart.",
           "slots": [
             "settlement",
-            "reason"
+            "reason",
+            "temple"
           ]
         },
         {
@@ -2330,7 +2331,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "reading"
           ],
-          "text": "The reading has cost {temple} more standing at {settlement} than the calamity ever cost the fields, and it is costing still; the ledger charges the reader, and never the god.",
+          "text": "The reading has cost {temple} more respect at {settlement} than the calamity cost the fields, and it is costing still.",
           "slots": [
             "temple",
             "settlement"
@@ -2362,7 +2363,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "reading"
           ],
-          "text": "A stranger at {settlement} is told what the hunger meant before being told how bad it was: the reading is {temple}'s and the town offers it as the town's own, and the entry recording the season says only that the season was bad.",
+          "text": "Visitors to {settlement} are told what the hunger meant before they are told how bad it was: the reading is {temple}'s, though the town tells it as its own.",
           "slots": [
             "settlement",
             "temple"
@@ -2417,7 +2418,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "broker-town"
           ],
-          "text": "A stranger notices {settlement}'s chapter house before its guardhouse; the brothers who carry terms down the road to {counterpart} are the busiest men in the place, and nobody here thinks that strange.",
+          "text": "{settlement}'s chapter house is busier than its guardhouse: the brothers who carry terms down the road to {counterpart} are the busiest men in the place.",
           "slots": [
             "settlement",
             "counterpart"
@@ -2505,7 +2506,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "granting"
           ],
-          "text": "A stranger at {settlement} is told twice, unprompted, that the new observance was a condition of peace: the town will keep the term and will not be mistaken for having chosen it.",
+          "text": "Visitors to {settlement} are told twice, unprompted, that the new observance was a condition of peace: the town keeps the term and will not have it said that it chose it.",
           "slots": [
             "settlement"
           ]
@@ -2537,7 +2538,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "granted"
           ],
-          "text": "{settlement} holds its access at {counterpart} and holds nothing else: the pews there fill at the rate they always did, and the term bought a door rather than a believer.",
+          "text": "{settlement} won the right to worship at {counterpart} and nothing more: the pews there fill no faster than before.",
           "slots": [
             "settlement",
             "counterpart"
@@ -2579,7 +2580,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "patron"
           ],
-          "text": "{settlement}'s hall is spending standing it did not have to spend. It set itself against {temple} over {reason}, and every week of the quarrel costs it in the one account it cannot borrow against.",
+          "text": "{settlement}'s hall has set itself against {temple} over {reason}, and every week of the quarrel costs it support it does not have to spare.",
           "slots": [
             "settlement",
             "temple",
@@ -2591,7 +2592,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "patron"
           ],
-          "text": "A stranger works out {settlement}'s order of things quickly: announcements are made at the temple door and the seat stands beside them rather than in front.",
+          "text": "In {settlement}, announcements are made at the temple door, and the ruler stands beside the priests, not in front of them.",
           "slots": [
             "settlement"
           ]
@@ -2621,7 +2622,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "patron"
           ],
-          "text": "The mandate at {settlement} has been sliding {timeband_since} and the seat is holding on by arithmetic rather than by consent; the succession question is being asked aloud now, which is the part that does not go back.",
+          "text": "Support for {settlement}'s ruler has been sliding {timeband_since}, and people now ask aloud who comes next.",
           "slots": [
             "settlement",
             "timeband_since"
@@ -2677,7 +2678,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "home"
           ],
-          "text": "A stranger at {settlement} asking where to make an offering gets two answers and a pause; the town has not agreed on which house speaks for {creed} since the seat pressed the question.",
+          "text": "Ask in {settlement} where to make an offering and you get two answers and a pause: since the ruler pressed the tithe question, the town cannot agree which house speaks for {creed}.",
           "slots": [
             "settlement",
             "creed"
@@ -2699,7 +2700,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "home"
           ],
-          "text": "The tithe at {settlement} stands where it stood and {temple} keeps one congregation: the hall leaned and the temple did not break, and the seat spent standing to learn what it could have counted.",
+          "text": "The tithe at {settlement} is where it was and {temple} still has one congregation: the hall pushed, the temple held, and the hall lost support for nothing.",
           "slots": [
             "settlement",
             "temple"
@@ -2776,7 +2777,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "learning"
           ],
-          "text": "The old hands at {settlement} discount by habit: a {band} departure out of {counterpart} was told here as an exodus, and the town has learned to halve whatever comes in on foot.",
+          "text": "{settlement}'s old hands discount by habit: a {band} departure from {counterpart} was told here as an exodus, and they halve whatever comes in on foot.",
           "slots": [
             "settlement",
             "band",
@@ -2913,7 +2914,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "crowded"
           ],
-          "text": "{settlement} has {band} more hands than work and has taken the matter to a table rather than to the road: the labor compact with {counterpart} is this town exporting a pressure before it becomes a crisis.",
+          "text": "{settlement} has {band} more hands than work, so its rulers have signed a labour agreement to send them to {counterpart} before they take to the road.",
           "slots": [
             "settlement",
             "band",
@@ -2935,7 +2936,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "crowded"
           ],
-          "text": "A stranger finds the compact posted at {settlement} where the levy notices used to be. The town treats a signed right of passage as its own business now, not as foreign business.",
+          "text": "The labour agreement is posted in {settlement} where the levy notices used to hang.",
           "slots": [
             "settlement"
           ]
@@ -2956,7 +2957,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "crowded"
           ],
-          "text": "{settlement} has no settlement provision and not for want of asking: the terms were reachable at the table and the road that would carry anybody there is not, so the thing was refused on the ground rather than on the argument.",
+          "text": "{settlement} has no resettlement agreement, though it asked: the terms could be had, but there is no safe road to take the people there.",
           "slots": [
             "settlement"
           ]
@@ -3009,7 +3010,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "receiving"
           ],
-          "text": "{settlement}'s intake is a contracted figure now: departures, arrivals, the ones turned back and the ones still walking all reconcile against a term, and the hall audits the road the way it audits a granary.",
+          "text": "{settlement} takes in a fixed number of newcomers under its agreement, and the hall counts arrivals, departures and those turned back as closely as it counts grain.",
           "slots": [
             "settlement"
           ]
@@ -3019,7 +3020,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "receiving"
           ],
-          "text": "A newcomer at {settlement} is asked for a permit rather than for a reason; the town charters entry under the compact, and the grade on the paper answers before anyone speaks.",
+          "text": "Newcomers at {settlement} are asked for a permit, not a reason: entry is by agreement, and the paper decides before anyone speaks.",
           "slots": [
             "settlement"
           ]
@@ -3089,7 +3090,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "home"
           ],
-          "text": "{settlement}'s square fills and empties again without anything happening. The grievance is real, and the town is still on the polite rung of it.",
+          "text": "{settlement}'s square fills with people and empties again without anything happening; the grievance is real, and so far it is still polite.",
           "slots": [
             "settlement"
           ]
@@ -3099,7 +3100,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "home"
           ],
-          "text": "A stranger arriving at {settlement} at the wrong hour finds the market closed and the hall doors shut; the town has been gathering rather than trading since the seat stopped answering.",
+          "text": "Arrive at {settlement} at the wrong hour and the market is shut and the hall doors closed: the town has been gathering instead of trading since the hall stopped answering.",
           "slots": [
             "settlement"
           ]
@@ -3109,7 +3110,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "home"
           ],
-          "text": "{settlement} has a grievance and no petition, because the hall answered the first one: the seat gave less than was asked and gave it early, and the ladder never went past its bottom rung.",
+          "text": "{settlement} has a grievance and no petition, because the hall answered the first one early, and gave less than was asked.",
           "slots": [
             "settlement"
           ]
@@ -3129,7 +3130,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "home"
           ],
-          "text": "The gathering at {settlement} has stopped being about {reason} and started being about the refusal to hear it; the town is a rung higher than it was {timeband_since}, and the step down is longer than the step up was.",
+          "text": "The crowd at {settlement} has stopped being about {reason} and started being about the hall's refusal to hear it, and it has grown angrier {timeband_since}.",
           "slots": [
             "settlement",
             "reason",
@@ -3171,7 +3172,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "home"
           ],
-          "text": "Nobody petitions at {settlement} any more. The hall stopped answering {timeband_since}, and the grievance leaves now instead of gathering. The departure rate is the only complaint the seat still receives.",
+          "text": "Nobody petitions at {settlement} any more: the hall stopped answering {timeband_since}, and people leave instead of complaining.",
           "slots": [
             "settlement",
             "timeband_since"
@@ -3182,7 +3183,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "home"
           ],
-          "text": "A stranger at {settlement} notices the works begun and abandoned: the seat proposed them, the town refused the labour, and the half-built thing has stood there since.",
+          "text": "Half-built works stand around {settlement}: the hall proposed them, the town refused the labour, and nobody has touched them since.",
           "slots": [
             "settlement"
           ]
@@ -3192,7 +3193,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "home"
           ],
-          "text": "{settlement} charters nothing at present. The grade its permit reads sits below the founding bar, and the institution the hall wanted has no lane to be founded in.",
+          "text": "{settlement} can found nothing new at present: it lacks the standing to charter it, and what the hall wanted to build sits unbuilt.",
           "slots": [
             "settlement"
           ]
@@ -3213,7 +3214,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "home"
           ],
-          "text": "{settlement}'s seat has never learned what a refused levy costs: it pressed one on a town with nothing standing to refuse with, the levy was simply paid, and the hall has no entry to read.",
+          "text": "{settlement}'s hall has never had a levy refused: the town has never been strong enough to refuse one, so it pays.",
           "slots": [
             "settlement"
           ]
@@ -3243,7 +3244,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "bought"
           ],
-          "text": "The terms {settlement} signed sit heavier than the war ever did: the margin entered on the record is not the margin that existed, and the paper still says what the town believed on the day.",
+          "text": "The terms {settlement} signed weigh heavier than the war did: its envoys signed believing the town weaker than it was, and the paper still says so.",
           "slots": [
             "settlement"
           ]
@@ -3264,7 +3265,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "bought"
           ],
-          "text": "A stranger reading the treaty on {settlement}'s wall finds a clause that makes no sense against the town standing around it; that clause is the price of something the hall was told and did not check.",
+          "text": "The treaty on {settlement}'s wall has a clause that makes no sense for a town this strong: the hall was told something about its enemy and never checked it.",
           "slots": [
             "settlement"
           ]
@@ -3346,7 +3347,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "negotiating"
           ],
-          "text": "A stranger is struck by how much of {settlement}'s business is spent on whom to send; the town puts two on every table now, and the second one is not there to negotiate.",
+          "text": "{settlement} puts two envoys on every table now, and the second one is there to watch the first.",
           "slots": [
             "settlement"
           ]
@@ -3429,7 +3430,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "split"
           ],
-          "text": "A stranger at {settlement} is asked, carefully, what they saw on the road, and then asked again by somebody else; the town is short of trusted eyes and both factions are recruiting them.",
+          "text": "Travellers at {settlement} are asked, carefully, what they saw on the road, and then asked again by someone else: both factions want eyes they can trust.",
           "slots": [
             "settlement"
           ]
@@ -3450,7 +3451,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "split"
           ],
-          "text": "Nothing at {settlement} has moved on what the council knew was coming: the knowing is on the record and so is the sitting still, nothing was decided, and the not-deciding is the entry the season carries.",
+          "text": "{settlement}'s council knew what was coming and did nothing: the warning was heard, and nothing was decided.",
           "slots": [
             "settlement"
           ]
@@ -3460,7 +3461,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "split"
           ],
-          "text": "The faction shouted down at {settlement} was right, and events have been paying it back in standing ever since; the seat that overruled it is discovering that being wrong in public compounds.",
+          "text": "The faction shouted down at {settlement} was right, and it has gained support with every event since; the ruler who overruled it is losing it.",
           "slots": [
             "settlement"
           ]
@@ -3500,7 +3501,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "sweeping"
           ],
-          "text": "{settlement} stands lower at both courts than its size accounts for. The sweep found a real asset, and the finding of it was an accusation the hall had to pay for making.",
+          "text": "{settlement} is less trusted by both courts than its size would suggest: its hall found a real spy, and the accusation cost it all the same.",
           "slots": [
             "settlement"
           ]
@@ -3520,7 +3521,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "sweeping"
           ],
-          "text": "{settlement} has never swept its own hall and the ear is still in it: the seat looks outward for its enemies, which is where it has always looked, and the record shows nothing found because nothing was sought.",
+          "text": "{settlement} has never searched its own hall, and the spy is still in it: the hall looks for its enemies outside.",
           "slots": [
             "settlement"
           ]
@@ -3591,7 +3592,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "payer"
           ],
-          "text": "A stranger sees a prosperous countryside at {settlement} and a thin market and cannot reconcile them; the reconciliation is a term, and it sends the {good} to {counterpart} before any of it is sold.",
+          "text": "The countryside around {settlement} is rich and the market is thin: under a treaty term the {good} goes to {counterpart} before any of it is sold.",
           "slots": [
             "settlement",
             "good",
@@ -3676,7 +3677,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "successor"
           ],
-          "text": "A stranger reading the treaty at {settlement} finds a name on it that appears nowhere else in the town; the place has outlived the faction that signed for it and kept the paper.",
+          "text": "The treaty displayed at {settlement} bears a name found nowhere else in town: the faction that signed it is long gone, and the town kept the paper.",
           "slots": [
             "settlement"
           ]
@@ -3696,7 +3697,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "successor"
           ],
-          "text": "{settlement} keeps every term it kept before its seat fell and rose again: succession voids nothing by itself, the oath stands until somebody chooses, and nobody has chosen.",
+          "text": "{settlement} still keeps every treaty term from before its ruler fell: no new ruler has chosen to break them.",
           "slots": [
             "settlement"
           ]
@@ -3759,7 +3760,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "payer"
           ],
-          "text": "A stranger is surprised by how undefended {settlement} looks for a town that is threatened every year; the place bought its peace instead of building it, and the walls show the choice.",
+          "text": "{settlement} looks undefended for a town threatened every year: it buys its peace instead of building walls.",
           "slots": [
             "settlement"
           ]
@@ -3841,7 +3842,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "contributor"
           ],
-          "text": "A stranger is told, with some pride, that {settlement} was one of the founding towns; the pride and the payment are both true and they no longer sit comfortably in one sentence.",
+          "text": "People in {settlement} tell visitors, with pride, that it was a founding town of the league; they say less about what it pays now.",
           "slots": [
             "settlement"
           ]
@@ -3925,7 +3926,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "recogniser"
           ],
-          "text": "A stranger finds {settlement}'s treaty with {counterpart} displayed more prominently than its size would justify; the document is the argument, and its existing is the claim.",
+          "text": "{settlement}'s treaty with {counterpart} hangs where everyone sees it: being signed as an equal is the town's whole claim to be one.",
           "slots": [
             "settlement",
             "counterpart"
@@ -3936,7 +3937,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "recogniser"
           ],
-          "text": "{settlement} deals with {counterpart} steadily and has never put a name to it: the trade runs, and the grievance has not minted, because nothing was signed for {third_party} to read.",
+          "text": "{settlement} trades with {counterpart} steadily and has never signed anything, so {third_party} has nothing to take offence at.",
           "slots": [
             "settlement",
             "counterpart",
@@ -3958,7 +3959,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "recognised"
           ],
-          "text": "{third_party}'s grievance against {settlement} is standing and unspent: it has not been acted on, it has not decayed, and the hall reads the quiet as a decision that has not been made yet.",
+          "text": "{third_party} still holds its grievance against {settlement} and has not acted on it; the hall takes the quiet as a decision not yet made.",
           "slots": [
             "third_party",
             "settlement"
@@ -4011,7 +4012,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "neutral"
           ],
-          "text": "A stranger arriving at {settlement} with a laden cart is warned before the gate about which stretch of the {route} is being searched; the town has learned the map of a war it is not in.",
+          "text": "Carters arriving at {settlement} are warned before the gate which stretch of the {route} is being searched; the town has learned the map of a war it is not in.",
           "slots": [
             "settlement",
             "route"
@@ -4022,7 +4023,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "neutral"
           ],
-          "text": "{settlement}'s caravans cross a blockaded lane every season and have never been stopped: the seizure right is real and has not been exercised here, and the grievance that would follow has had no cause to mint from.",
+          "text": "{settlement}'s caravans cross a blockaded road every season and have never been stopped, so the town has no grievance against anyone.",
           "slots": [
             "settlement"
           ]
@@ -4042,7 +4043,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "neutral"
           ],
-          "text": "The grievance at {settlement} has ripened past complaining, and the town is being courted by the side it has cause against the other for; the courting is the war arriving by a different door.",
+          "text": "{settlement}'s grievance has grown past complaint, and one side in the war is now courting the town; if it says yes, the war comes to it.",
           "slots": [
             "settlement"
           ]
@@ -4100,7 +4101,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "embargoed"
           ],
-          "text": "A stranger notices that the busiest road out of {settlement} is not the one on the map. The embargo made a second route worth walking, and it has been walked into a real one.",
+          "text": "The busiest road out of {settlement} is not the one on the map: the embargo made a second route worth walking, and now it is a real road.",
           "slots": [
             "settlement"
           ]
@@ -4196,7 +4197,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "host"
           ],
-          "text": "{settlement} shelters a losing side it has never used: the claim has sat in a guest room through {timeband_span} with no war built on it, because a grievance kept is not a grievance spent.",
+          "text": "{settlement} has sheltered a losing claimant through {timeband_span} and never gone to war for the claim.",
           "slots": [
             "settlement",
             "timeband_span"
@@ -4272,7 +4273,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "extracted"
           ],
-          "text": "A stranger is surprised to find {counterpart}'s factors working openly in a town that speaks of them the way {settlement} does; the access is a term, and the feeling about it is not.",
+          "text": "{counterpart}'s factors work openly in {settlement}, though the town speaks of them with contempt: their access is a treaty term.",
           "slots": [
             "counterpart",
             "settlement"
@@ -4283,7 +4284,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "extracted"
           ],
-          "text": "The terms {settlement} carries are {timeband_age} and the resentment under them has not aged at all. The town teaches that war to people who were not born for it, which is how a grudge outlives the hands that made it.",
+          "text": "The terms {settlement} lives under are {timeband_age} and the resentment has not faded: the town teaches that war to children born long after it.",
           "slots": [
             "settlement",
             "timeband_age"
@@ -4356,8 +4357,9 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "home"
           ],
-          "text": "A stranger at {settlement} notices that nobody from the temple stands at the hall's announcements, and that the town is noticing it too.",
+          "text": "Nobody from {temple} stands beside {settlement}'s rulers at the hall's announcements any more, and the whole town has noticed.",
           "slots": [
+            "temple",
             "settlement"
           ]
         },
@@ -4366,7 +4368,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "home"
           ],
-          "text": "{settlement}'s seat keeps no patron, and the temple's disfavour reaches it through no lane at all: the withdrawal was real, was public, and moved nothing the hall depends on.",
+          "text": "{settlement}'s ruler keeps no patron, so the temple's disfavour changed nothing: it was public, and the hall lost no support by it.",
           "slots": [
             "settlement"
           ]
@@ -4386,7 +4388,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "home"
           ],
-          "text": "The standing at {settlement} has crossed the floor it was holding above and the factions that were waiting have stopped waiting; the withdrawal unseated nobody, and it made the unseating cheap.",
+          "text": "Support for {settlement}'s ruler has fallen low enough that the factions who were waiting have stopped waiting; the temple's withdrawal unseated nobody, but it made the unseating easy.",
           "slots": [
             "settlement"
           ]
@@ -4435,7 +4437,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "home"
           ],
-          "text": "A stranger learns quickly not to ask about the war at {settlement}: the question is not painful here, it is contested, and answering it wrongly puts you on a side.",
+          "text": "Do not ask about the war at {settlement}: the question is not painful here, it is contested, and the wrong answer puts you on a side.",
           "slots": [
             "settlement"
           ]
@@ -4455,10 +4457,9 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "home"
           ],
-          "text": "{faction} has taken {band} of the standing {settlement} lost in the defeat and moved it onto somebody else's account; the transfer is legible in the record even where the accusation is not provable.",
+          "text": "{faction} has turned the blame for {settlement}'s defeat onto others and gained the support the hall lost; none of the accusations can be proved.",
           "slots": [
             "faction",
-            "band",
             "settlement"
           ]
         },
@@ -4467,7 +4468,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "home"
           ],
-          "text": "The search at {settlement} has outlived any evidence it began with, and the town is now accusing people who were children in the war year; the story has become the mechanism, and it is still running.",
+          "text": "The hunt for traitors at {settlement} has outlived any evidence it began with: the town now accuses people who were children in the war year.",
           "slots": [
             "settlement"
           ]
@@ -4499,7 +4500,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "called"
           ],
-          "text": "{settlement} is at war with {counterpart} and so is every town it shares an altar with; nobody summoned it. The claims came due together, and the alignment was already there to be read.",
+          "text": "{settlement} is at war with {counterpart}, and so is every town that shares its altar; nobody called them out, the claims simply came due together.",
           "slots": [
             "settlement",
             "counterpart"
@@ -4531,7 +4532,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "called"
           ],
-          "text": "{settlement} shares the claim and has not moved: the road to it runs through a town this one cannot afford to cross, and a calling that cannot be walked to stays a sermon.",
+          "text": "{settlement} shares the holy claim but has not marched: the road runs through a town it cannot afford to cross.",
           "slots": [
             "settlement"
           ]
@@ -4553,7 +4554,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "called"
           ],
-          "text": "The web is holding and the season is turning, and {settlement} is learning the cost of a war chosen by agreement rather than by need. Nobody here can end it alone, because nobody here started it alone.",
+          "text": "The alliance is holding and the season is turning, and {settlement} is learning what a war chosen with others costs: it cannot end it alone.",
           "slots": [
             "settlement"
           ]
@@ -4605,7 +4606,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "refuser"
           ],
-          "text": "Strangers at {settlement} are told about the refusal before they are told about the market; the town would rather be known for what it declined than for what it kept.",
+          "text": "Visitors to {settlement} hear about the refusal before they hear about the market: the town would rather be known for what it turned down.",
           "slots": [
             "settlement"
           ]
@@ -4615,7 +4616,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "refuser"
           ],
-          "text": "The old hands can still recite what was offered, and {timeband_since} the arithmetic has not changed and neither has the answer.",
+          "text": "The old hands can still recite what was offered, and {timeband_since} neither the offer nor the answer has changed.",
           "slots": [
             "timeband_since"
           ]
@@ -4665,7 +4666,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "split"
           ],
-          "text": "The seat's revenue at {settlement} is up and its standing among the neighbouring halls is down, and the tithe contest it won against {temple} is the one entry both movements hang from.",
+          "text": "{settlement}'s rulers won the tithe from {temple}: their income is up, and the neighbouring halls think less of them for it.",
           "slots": [
             "settlement",
             "temple"
@@ -4714,7 +4715,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "split"
           ],
-          "text": "{settlement} keeps one congregation and one long argument about books: the dispute went to the assize instead and was buried there, on the same books and in one honest hearing. A burial is a term like any other, and the town knows what can be done to terms.",
+          "text": "{settlement} keeps one congregation: the dispute over books went to the court and was settled there in one honest hearing, though a settled case can be reopened.",
           "slots": [
             "settlement"
           ]
@@ -4745,7 +4746,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "interdictor"
           ],
-          "text": "The {route} out of {settlement} is shut, and it is shut on two ledgers at once: a grievance in the war book and a sacred tension on the faith axis, scored separately and both standing.",
+          "text": "The {route} out of {settlement} is shut for two reasons at once, a quarrel with its neighbour and a holy one, and either would keep it closed.",
           "slots": [
             "route",
             "settlement"
@@ -4768,7 +4769,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "interdictor"
           ],
-          "text": "The shrine road out of {settlement} is empty when it should be crowded: the town read the {route} as {counterpart}'s artery and closed it, and the picture it read from is filed beside the closing.",
+          "text": "The shrine road out of {settlement} is empty when it should be crowded: the town closed the {route}, believing it fed {counterpart}'s army.",
           "slots": [
             "settlement",
             "route",
@@ -4802,7 +4803,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "interdictor"
           ],
-          "text": "The {route} runs open past {settlement} in the pilgrim season and always has: the artery reading was weighed and not acted on, and the two towns' ledgers carry nothing between them.",
+          "text": "The {route} past {settlement} stays open in the pilgrim season, as it always has: the town talked of closing it and did not.",
           "slots": [
             "route",
             "settlement"
@@ -4948,7 +4949,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "refounded"
           ],
-          "text": "The memory was written at both ends and has not finished decaying at {counterpart}; the elders of {settlement} count that, and not the harvest, as the reason there was money at all.",
+          "text": "The families at {counterpart} still remember {settlement} as home, and its elders know that memory, not the harvest, is where the money came from.",
           "slots": [
             "counterpart",
             "settlement"
@@ -4959,7 +4960,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "refounded"
           ],
-          "text": "A claim stands filed out of {settlement}, sworn on a memory {timeband_age} and priced no differently for its age: the grudge came home with the silver and is entered beside it.",
+          "text": "A claim has gone out of {settlement} on a memory {timeband_age}: the grudge came home with the money.",
           "slots": [
             "settlement",
             "timeband_age"
@@ -5003,7 +5004,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "cornered"
           ],
-          "text": "{temple}'s new chapter stands on credit and the credit came out of the hungry season here; there is no gift anywhere in the house's book, which is what makes the entry legible.",
+          "text": "{temple}'s new chapter was built on credit from the hungry season, and the lender's book shows a loan, not a gift.",
           "slots": [
             "temple"
           ]
@@ -5054,7 +5055,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "cornered"
           ],
-          "text": "{temple}'s chapter owes nobody and carries no stain: the credit was refused at the door on the same provenance the stain would have ridden, and the corner still happened here regardless.",
+          "text": "{temple}'s chapter owes nobody: it turned the merchant's credit away, and the grain was still cornered here that winter.",
           "slots": [
             "temple"
           ]
@@ -5083,7 +5084,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "mover"
           ],
-          "text": "The war {settlement} fought over a creek nobody at its court had seen is closed, and its own opening receipt names a misjudgment as the deciding term; no clerk has softened it since.",
+          "text": "{settlement} fought a war over a creek nobody at its court had seen; it is over now, and the town admits it was a mistake.",
           "slots": [
             "settlement"
           ]
@@ -5093,7 +5094,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "strike"
           ],
-          "text": "People here still argue about how big the strike was. The find was real and small, and what moved the columns was scored off the third telling and not the first.",
+          "text": "People here still argue about how big the strike was: the find was real and small, and the columns came on the third retelling of it.",
           "slots": []
         },
         {
@@ -5111,7 +5112,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "strike"
           ],
-          "text": "The old hands say the creek grew in every mouth it passed through, and they are right. The record keeps the drift relay by relay, which is rarer than being right.",
+          "text": "The old hands say the creek grew in every mouth it passed through, and the chronicle records each telling.",
           "slots": []
         },
         {
@@ -5119,7 +5120,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "strike"
           ],
-          "text": "The arrivals who were turned back are counted home again and {settlement} carries the crowding of the ones who landed; {timeband_since} the roll is still settling.",
+          "text": "Those turned back have gone home, and {settlement} is left crowded with the ones who stayed; {timeband_since} the town has not found room for them all.",
           "slots": [
             "settlement",
             "timeband_since"
@@ -5130,7 +5131,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "mover"
           ],
-          "text": "{settlement} is at peace and no clerk had to soften the reason: the letters home corrected the belief, the reckonings ground together, and the receipt names which of the two closed the war.",
+          "text": "{settlement} is at peace: the letters home told the truth about the strike, and the war ended on it.",
           "slots": [
             "settlement"
           ]
@@ -5161,7 +5162,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "opener"
           ],
-          "text": "{settlement} is at war with {counterpart} on reasons pinned the week it opened (a seizure, a refusal, a border reading), and those are the reasons the book still carries, whatever has been shouted since.",
+          "text": "{settlement} is at war with {counterpart} for the reasons given the week it began (a seizure, a refusal, a border dispute), whatever has been shouted since.",
           "slots": [
             "settlement",
             "counterpart"
@@ -5180,7 +5181,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "opener"
           ],
-          "text": "The gates are watched and the {route} is a soldier's road, and not one of the entries that brought {settlement} to this was a war on its own.",
+          "text": "The gates are watched and the {route} is a soldiers' road now, though none of the quarrels that brought {settlement} here was worth a war by itself.",
           "slots": [
             "route",
             "settlement"
@@ -5191,7 +5192,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "opener"
           ],
-          "text": "The old men date it from the incident on the {route}, and {timeband_since} it is a named reason in the war ledger rather than a story about a bad afternoon.",
+          "text": "The old men date the war from the fight on the {route}; {timeband_since} it has been the reason the town gives.",
           "slots": [
             "route",
             "timeband_since"
@@ -5202,7 +5203,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "answered"
           ],
-          "text": "Each reason pinned against {settlement} is set against the live fold at every re-read, and when the last of them goes out of the fold this war will have nothing left to be about.",
+          "text": "Each reason {settlement} gives for the war weighs less each season, and when the last one is gone the war will have nothing left to be about.",
           "slots": [
             "settlement"
           ]
@@ -5212,10 +5213,10 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "opener"
           ],
-          "text": "The entries against {counterpart} are all still in {settlement}'s book and {timeband_since} nothing has fed them; the fold has not crossed its bar, and the two towns go on trading across it.",
+          "text": "{settlement}'s grievances against {counterpart} are all remembered and nothing new has fed them {timeband_since}; they have not come to war, and the two towns still trade.",
           "slots": [
-            "counterpart",
             "settlement",
+            "counterpart",
             "timeband_since"
           ]
         }
@@ -5245,7 +5246,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "turncoat"
           ],
-          "text": "{settlement} sits in the enemy's council and pays for the chair in every join read that follows: the obligation it walked away from is entered at the severity a betrayal carries.",
+          "text": "{settlement} now sits on its old enemy's council, and its old ally treats the switch as a betrayal in every dealing since.",
           "slots": [
             "settlement"
           ]
@@ -5265,7 +5266,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "turncoat"
           ],
-          "text": "Envoys are received at {settlement} warily and in daylight, and whatever the town offers is priced against one entry no season has taken out of the book.",
+          "text": "Envoys are received at {settlement} warily and only by daylight, and every offer it makes is weighed against the betrayal nobody has forgotten.",
           "slots": [
             "settlement"
           ]
@@ -5285,7 +5286,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "turncoat"
           ],
-          "text": "{counterpart} may bury the row and {third_party} will not: it was never party to that peace, holds its entry untouched and reads it at the join, so the bar {settlement} must clear never quite comes back down.",
+          "text": "{counterpart} may forgive the switch, but {third_party} will not: it was never party to that peace, and {settlement} is still paying for it there.",
           "slots": [
             "counterpart",
             "third_party",
@@ -5330,7 +5331,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "razer"
           ],
-          "text": "Every neighbour {settlement} meant to quiet is armed, and the one license the burning minted is held elsewhere and unspent. Spending it mints nothing back.",
+          "text": "Every neighbour {settlement} meant to frighten into quiet is arming instead, and one of them now has cause to strike.",
           "slots": [
             "settlement"
           ]
@@ -5340,7 +5341,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "razer"
           ],
-          "text": "{timeband_since}, {settlement} is still living inside an arithmetic its captains did the night of the burning: they priced the web that would answer, and marched regardless.",
+          "text": "{timeband_since}, {settlement} has lived with what its captains chose the night of the burning: they knew the neighbours would answer, and marched anyway.",
           "slots": [
             "timeband_since",
             "settlement"
@@ -5361,9 +5362,8 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "razer"
           ],
-          "text": "One road took the lesson and keeps {band} caution to this day and the next hall over entered the ash as a reason to arm; the elders can tell you which did which, and why the {temple} between them keeps a third account.",
+          "text": "One neighbour learned caution from the burning and keeps it; the next town over took it as a reason to arm; the elders can tell you which did which, and {temple} between them remembers it differently again.",
           "slots": [
-            "band",
             "temple"
           ]
         },
@@ -5372,7 +5372,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "razer"
           ],
-          "text": "The claim against {settlement} is filed and the answer to it has not come: {third_party}'s own quarrel had already reached the same extreme, which is why the license went there rather than somewhere it might have sat unused.",
+          "text": "The claim against {settlement} has been made and not yet answered: {third_party} already had its own quarrel at the same pitch, and the right to strike went to it.",
           "slots": [
             "settlement",
             "third_party"
@@ -5383,7 +5383,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "razed"
           ],
-          "text": "{settlement} is a shell the clerks still list by name. The tier fell because the truth of the place fell, the institutions stand empty under their old headings, and the people went out down the roads the column came in on.",
+          "text": "{settlement} is a shell that still keeps its name: the institutions stand empty, and the people left down the roads the column came in on.",
           "slots": [
             "settlement"
           ]
@@ -5463,7 +5463,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "gouged"
           ],
-          "text": "The granary door at {settlement} is on its hinges and the price is off its peak: the dear band advertised itself down every road out, carters who had never worked this market came in off the {route}, and the corner broke on arrivals rather than on stones.",
+          "text": "The granary door at {settlement} is back on its hinges and the price is down: word of high prices spread down every road, carters came in off the {route}, and the corner broke on their arrivals, not on stones.",
           "slots": [
             "settlement",
             "route"
@@ -5496,7 +5496,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "creditor"
           ],
-          "text": "{settlement} holds a betrayal-class severance against {counterpart} with {reason} on the record: credit extended in a good season, called in a bad one, entered where commerce entries live.",
+          "text": "{settlement} has cut ties with {counterpart} as a betrayal, for {reason}: credit given in a good season was called in during a bad one.",
           "slots": [
             "settlement",
             "counterpart",
@@ -5520,7 +5520,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "creditor"
           ],
-          "text": "Bargains at {settlement} are asked for in writing, and {timeband_since} the entry that made that the custom is still open.",
+          "text": "Merchants at {settlement} have asked for every bargain in writing {timeband_since}, since the credit that was called in when the town could least pay.",
           "slots": [
             "settlement",
             "timeband_since"
@@ -5531,7 +5531,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "creditor"
           ],
-          "text": "The guild's older hands remember the relief that came first (granaries opened in a lean month at no profit, entered as a loss) and remember that both towns were reading the same entry and reading it differently the moment the seat came asking again.",
+          "text": "The guild's older hands remember the relief that came first, granaries opened at no profit in a lean month, and that each town read that gift differently the moment the ruler came asking again.",
           "slots": []
         },
         {
@@ -5539,7 +5539,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "creditor"
           ],
-          "text": "A merchant's broken word buys no march: {settlement} has nothing in the war book to set beside the grievance, and no clerk in either town can make one out of what is there.",
+          "text": "A merchant's broken word is no cause for war: {settlement} has a grievance and nothing to march on.",
           "slots": [
             "settlement"
           ]
@@ -5582,7 +5582,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "seat"
           ],
-          "text": "{house}'s interests at {settlement} are struck out one by one and the books close at the bottom band; the stake that did it stood above the house's own standing practice, with {reason} entered beside it.",
+          "text": "{house}'s holdings at {settlement} are being sold off one by one: it staked more than it could afford on one venture, for {reason}, and lost.",
           "slots": [
             "house",
             "settlement",
@@ -5634,7 +5634,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "seat"
           ],
-          "text": "{house} keeps its quay and its bands at {settlement} because somebody read the second stage and declined it; there is nothing here for the ballad-makers, which is the point.",
+          "text": "{house} keeps its quay and its crews at {settlement} because someone saw the risk and refused the venture's second stage; there is nothing here for the ballad-makers.",
           "slots": [
             "house",
             "settlement"
@@ -5665,7 +5665,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "split"
           ],
-          "text": "{temple}'s take is up and its congregation is down, and {settlement}'s roster carries a second congregation the ledger noticed a good while before the pulpit did.",
+          "text": "{temple} takes in more and has fewer at its services, and {settlement}'s tax roll shows a second congregation the priests have not yet admitted to.",
           "slots": [
             "temple",
             "settlement"
@@ -5694,7 +5694,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "split"
           ],
-          "text": "The parish here remembers a render forgiven once, in a worse year than this, and has never let it go, which is why the argument went to the altar instead of to the steward, and why arithmetic could not settle it.",
+          "text": "The parish here once had its tithe forgiven in a worse year than this and has never let it go, which is why the quarrel went to the altar instead of to the steward.",
           "slots": []
         },
         {
@@ -5742,7 +5742,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "suppressor"
           ],
-          "text": "The roster at {settlement} restores {creed} to standing directly beneath the entry calling it extinguished; the earlier entry is uncorrected, and nobody has proposed correcting it.",
+          "text": "{settlement}'s register lists {creed} as stamped out, and a newer line beneath lists it as restored; nobody has corrected the first.",
           "slots": [
             "settlement",
             "creed"
@@ -5782,7 +5782,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "suppressor"
           ],
-          "text": "{creed}'s share here has risen since the making of the example, and {timeband_since} the seat has made no further examples of anything.",
+          "text": "More people keep {creed} here since the public example was made, and {timeband_since} the ruler has made no more examples.",
           "slots": [
             "creed",
             "timeband_since"
@@ -5794,7 +5794,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
             "suppressor",
             "dm-only"
           ],
-          "text": "The roster at {settlement} shows {creed} thinning with no constable anywhere in the entry: nobody here ever stopped them keeping the rite, and so fewer and fewer did.",
+          "text": "Fewer in {settlement} keep {creed} each year, and nobody forbade it: no one stopped them, and fewer and fewer bothered.",
           "slots": [
             "settlement",
             "creed"
@@ -5827,7 +5827,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "charged"
           ],
-          "text": "{temple}'s standing at {settlement} sits below where it stood before the {calamity}, and the ledger closes the reading failed. The entry is against the namer, not against the season.",
+          "text": "{temple} stands lower at {settlement} than before the {calamity}: it named the season the trouble would end, and it was wrong.",
           "slots": [
             "temple",
             "settlement",
@@ -5875,7 +5875,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "held"
           ],
-          "text": "{temple}'s standing at {settlement} sits where it stood or better, and the same {calamity} crossed this parish and the next on one wind; here it was called patience, the ledger closed the reading fulfilled, and {timeband_since} the sceptics have had nothing cheap to say.",
+          "text": "{temple} stands as high at {settlement} as ever: the same {calamity} crossed this parish and the next, the priests here preached patience and were proved right, and {timeband_since} the doubters have had little to say.",
           "slots": [
             "temple",
             "settlement",
@@ -5969,7 +5969,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "destination"
           ],
-          "text": "The stores at {settlement} are counted at the gate and the count refused the column that came for them; the gate was held by men who had to look at them while they held it, and {band} were back on the {route} before the market day came round.",
+          "text": "{settlement}'s stores are counted at the gate, and when a column came for them the guards turned it away face to face; {band} were back on the {route} before market day.",
           "slots": [
             "settlement",
             "band",
@@ -6029,7 +6029,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "petitioned"
           ],
-          "text": "The elders here can name the rungs in order: it was a ladder and every one of them was climbed, and they will point out how little was actually carried away.",
+          "text": "The elders here can tell you every step from petition to riot, and how little was carried away at the end.",
           "slots": []
         },
         {
@@ -6047,7 +6047,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "petitioned"
           ],
-          "text": "{settlement} carries a grievance that closed in the hall where it opened: the seat answered at the first rung, the ledger shows what the answering drained, and it is cheaper by every reckoning than the granary gate.",
+          "text": "{settlement}'s grievance was settled in the hall where it started: the ruler answered the first petition, and it cost less than a broken granary gate would have.",
           "slots": [
             "settlement"
           ]
@@ -6080,10 +6080,10 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "origin"
           ],
-          "text": "{settlement}'s roll carries {band} of arrivals out of {counterpart} and no clerk here had to ask where from: the tie the departure wrote is the same one the road runs back along.",
+          "text": "{band} of {settlement}'s people came from {counterpart}, and everyone knows it: they still travel the same road home.",
           "slots": [
-            "settlement",
             "band",
+            "settlement",
             "counterpart"
           ]
         },
@@ -6103,7 +6103,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "origin"
           ],
-          "text": "New work sits on old foundations here, because the old ones were the shape somebody still had.",
+          "text": "New houses stand on old foundations here: the returning families built where their grandparents had lived.",
           "slots": []
         },
         {
@@ -6124,7 +6124,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "origin"
           ],
-          "text": "The road fills along an entry rather than along a wage, which is why the clerks never have to ask where from, and {timeband_since} the band between the two towns has not thinned.",
+          "text": "People travel this road for family, not wages, and {timeband_since} the traffic between the two towns has not thinned.",
           "slots": [
             "timeband_since"
           ]
@@ -6134,7 +6134,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "origin"
           ],
-          "text": "The rows for {counterpart} are all still in {settlement}'s book and nothing reads them: the names stopped being said at the turning of the season, the band crossed to none, and nothing will read them again.",
+          "text": "The families who left for {counterpart} are still in {settlement}'s register, but nobody speaks their names any more, and nobody travels that road.",
           "slots": [
             "counterpart",
             "settlement"
@@ -6210,7 +6210,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "mark"
           ],
-          "text": "The tale is still in circulation at {settlement} and still unused: the captains had it and had better word off two roads besides, the live muster showed an equal host, the march was refused on the count, and the coin that paid for the telling is not coming back.",
+          "text": "The bought tale is still told at {settlement} and nobody acts on it: the captains had better word from two other roads, and the march was called off.",
           "slots": [
             "settlement"
           ]
@@ -6221,7 +6221,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
             "mark",
             "dm-only"
           ],
-          "text": "The weakness {settlement} moves on was bought for it: coin crossed a table here and a telling about {counterpart} went out under {house}'s seal, and the commission stands discharged in full.",
+          "text": "The weakness {settlement} is marching on was invented and paid for: coin changed hands here, a story about {counterpart} went out under {house}'s seal, and the job is done.",
           "slots": [
             "settlement",
             "counterpart",
@@ -6278,7 +6278,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "author"
           ],
-          "text": "Word out of {settlement} arrives later than it used to, and nothing out of it arrives alone.",
+          "text": "News from {settlement} now arrives late and is checked against other reports before anyone believes it.",
           "slots": [
             "settlement"
           ]
@@ -6288,7 +6288,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "author"
           ],
-          "text": "The bill is not paid at once and never stops being paid; the older factors take {house}'s word in writing where they once took it across a table.",
+          "text": "The older merchants now take {house}'s word only in writing, where they once took it across a table.",
           "slots": [
             "house"
           ]
@@ -6298,7 +6298,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "author"
           ],
-          "text": "{timeband_since}, the thing travels on its own, and the note recording who made it travels in the same packet, so every fresh use of it is a fresh airing of {house}'s name.",
+          "text": "{timeband_since}, the false story still travels, and the note of who paid for it travels with it, so every retelling names {house}.",
           "slots": [
             "timeband_since",
             "house"
@@ -6309,7 +6309,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "misled"
           ],
-          "text": "Nothing in {settlement}'s books carries a mark from the bought story: it arrived at a court already better served off two roads, agreed with neither, and thinned and stopped. {house} was paid all the same, because the coin bought a telling and could not buy a believing.",
+          "text": "The bought story left no mark on {settlement}: the court already had better word from two roads, and the story died out. {house} was paid all the same.",
           "slots": [
             "settlement",
             "house"
@@ -6343,7 +6343,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "seat"
           ],
-          "text": "Both tellings are filed together at {settlement}, the false one first and the true one beneath it, and the gap between the ruling and the clearing word is in the record and has been left there.",
+          "text": "{settlement} keeps both reports together, the false one on top, and anyone can see the hall ruled before the true one arrived.",
           "slots": [
             "settlement"
           ]
@@ -6371,7 +6371,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "seat"
           ],
-          "text": "The town goes on living beside both families: the sweep caught what sweeps catch (some of it the channel, some of it a neighbour with a grudge and a name to offer), and the false accusation stands as reputation and as nothing more.",
+          "text": "The town still lives beside both families: the hunt for the traitor caught the real channel and an innocent neighbour too, and the neighbour's name has never recovered.",
           "slots": []
         },
         {
@@ -6427,7 +6427,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "signatory"
           ],
-          "text": "Nothing written stands between {settlement} and {counterpart}: the {term} reached its date and the clerks struck it, and the book is the only place it was mourned.",
+          "text": "No agreement stands between {settlement} and {counterpart} now: the {term} ran out and nobody renewed it.",
           "slots": [
             "settlement",
             "counterpart",
@@ -6471,7 +6471,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "signatory"
           ],
-          "text": "There is nothing left to renew and nobody moving to renew it: the window opened, the chancery let the season pass, and the clerks entered that as a decision because there was nothing else to enter it as.",
+          "text": "Nobody is moving to renew the agreement: the time to do it came and went, and the chancery let it pass.",
           "slots": []
         },
         {
@@ -6599,7 +6599,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "payer"
           ],
-          "text": "{settlement}'s book carries two columns and joins neither: the instalments to {counterpart} left on time, every time, and the standing of the seat that sent them fell over the very same seasons.",
+          "text": "{settlement} paid {counterpart} every instalment on time, and over the same years its ruler lost the town's support.",
           "slots": [
             "settlement",
             "counterpart"
@@ -6610,7 +6610,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "payer"
           ],
-          "text": "{burden} stands on {settlement} and the standing of the seat that pays has fallen over the same seasons, and it is the hall that has joined the two: the book carries the columns and no line between them, and the book is what was read out at the verdict.",
+          "text": "{burden} weighs on {settlement} and its ruler has lost support for paying it; the hall blamed the ruler for the payments, and that was the case read out at the verdict.",
           "slots": [
             "burden",
             "settlement"
@@ -6621,7 +6621,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "payer"
           ],
-          "text": "A stranger at {settlement} will hear several accounts of what the town pays {counterpart} and no two alike; the terms are sealed, and the town has filled the gap with its own arithmetic.",
+          "text": "Ask in {settlement} what the town pays {counterpart} and you hear several answers: the terms are sealed, and everyone guesses.",
           "slots": [
             "settlement",
             "counterpart"
@@ -6653,7 +6653,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "payer"
           ],
-          "text": "Here the fall has a named cause and the clerks can point to the week: the seat lost standing for {reason}, exposed and entered, and the tribute and the war stood exactly where they had stood.",
+          "text": "Here the ruler's fall has a plain cause the clerks can date: the seat lost support for {reason}, and the tribute and the war had nothing to do with it.",
           "slots": [
             "reason"
           ]
@@ -6687,11 +6687,10 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "burier"
           ],
-          "text": "The rows against {counterpart} are in {settlement}'s book and are not counted when the hall counts {counterpart}: the war party can read them and cannot cite them, and the standing grievance reads {band} lighter for it.",
+          "text": "{settlement}'s old grievances against {counterpart} were buried by decree: the war party remembers them and is not allowed to cite them.",
           "slots": [
-            "counterpart",
             "settlement",
-            "band"
+            "counterpart"
           ]
         },
         {
@@ -6718,7 +6717,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "burier"
           ],
-          "text": "{faction} has waited in the open since the decree was read, and the elders here know the difference between a grudge that is closed and one that is merely uncited.",
+          "text": "{faction} has waited openly since the decree was read, and the elders know a buried grudge is not a closed one.",
           "slots": [
             "faction"
           ]
@@ -6728,7 +6727,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "counterparty"
           ],
-          "text": "A later hall at {counterpart} cited the rows anyway, word for word, and {timeband_since} the old {wound} is back in {settlement}'s book with a new one on top of it for the revoking.",
+          "text": "A later hall at {counterpart} raised the old grievances anyway, and {timeband_since} the old {wound} is back between {counterpart} and {settlement}, with a new one for the broken decree.",
           "slots": [
             "counterpart",
             "timeband_since",
@@ -6741,7 +6740,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "burier"
           ],
-          "text": "{counterpart} keeps its quarrel and {settlement} keeps the receipt: the price was paid in full against the wrong account (the carts went and were taken and thanked for), and the {temple} that witnessed the swearing has been asked about it twice since.",
+          "text": "{counterpart} keeps its quarrel and {settlement} keeps the proof it paid: the carts went, were taken and thanked for, and {temple}, which witnessed the oath, has been asked about it twice since.",
           "slots": [
             "counterpart",
             "settlement",
