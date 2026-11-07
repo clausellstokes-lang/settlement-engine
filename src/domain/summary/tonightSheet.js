@@ -132,8 +132,12 @@ export const ABSTRACT_REGISTER_WORDS = Object.freeze([
   'supply situation', 'commercial relationships', 'distribution network', 'parallel distribution',
   'justification', 'triggering a response', 'consolidate', 'consolidates', 'consolidating',
 ]);
+// The word-boundary guards as REGEX literals, not string literals: the same source characters,
+// and no `!` in a string the voice-mechanics ratchet reads as copy (tests/copy/voiceMechanics).
+const NOT_AFTER_A_WORD = /(?<![\w'])/.source;
+const NOT_BEFORE_A_WORD = /(?![\w])/.source;
 const ABSTRACT_WORD_RE = new RegExp(ABSTRACT_REGISTER_WORDS
-  .map((w) => `${/^\w/.test(w) ? "(?<![\\w'])" : ''}${w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(?![\\w])`)
+  .map((w) => `${/^\w/.test(w) ? NOT_AFTER_A_WORD : ''}${w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}${NOT_BEFORE_A_WORD}`)
   .join('|'), 'i');
 
 /**
