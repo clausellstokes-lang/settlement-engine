@@ -1119,7 +1119,7 @@ register and stand as canonical-at-zero for the two lower tiers (R-DST-C).
 **TIER: a large share off the books (≥30)**
 1. `[ledger · dm-only · colour]` A large share of what {settlement} earns never reaches a ledger. The duties collected fall well short of the trade actually done, and the gap is not an accounting error.
 2. `[street · dm-only · colour]` Half the business of this town is done in the ordinary way and the rest is done quietly. The quiet half is not hiding especially hard.
-3. `[visitor · dm-only · colour]` A stranger who trades honestly here will be undersold and will not immediately understand why. {faction} is not paying what he is paying.
+3. `[visitor · dm-only · colour]` Honest traders in {settlement} are undersold and cannot see why: {faction} pays no duty.
 4. `[unfolding · dm-only · guild]` The guilds are losing their grip a little further each season. Anyone can undercut a guild price by simply not being in the guild.
 
 **TIER: significant off-book activity (≥15)**

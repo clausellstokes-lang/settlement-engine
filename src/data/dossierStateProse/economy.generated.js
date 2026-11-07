@@ -1891,8 +1891,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
             "dm-only",
             "colour"
           ],
-          "text": "A stranger who trades honestly here will be undersold and will not immediately understand why. {faction} is not paying what he is paying.",
+          "text": "Honest traders in {settlement} are undersold and cannot see why: {faction} pays no duty.",
           "slots": [
+            "settlement",
             "faction"
           ],
           "vid": 3
