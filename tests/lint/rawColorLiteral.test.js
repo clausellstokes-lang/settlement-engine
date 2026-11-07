@@ -117,7 +117,7 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 // 1232 -> 1230 (2026-11-04, REGISTERS-4 door 8, measured out of this test's own red run at the composed tip): two raw
 // literals left with the DEFENSE lane's compose (396933ae9), bisected over the integration branch's first-parent chain
 // (1232 at c79891676, 1230 from 396933ae9 on). A shrink, banked.
-const BUDGET = 1230; // committed raw-color-literal occurrences. EXACT. Lower on a shrink; never raise. 1313 -> 1303 on 2026-09-19: the fixes consist's label ladder and the band-primitive deletion removed ten raw literals.
+const BUDGET = 1229; // committed raw-color-literal occurrences. EXACT. Lower on a shrink; never raise. 1230 -> 1229 on 2026-11-07, PEOPLE-3 HOOKS: the `relationship` hook category (unemitted since X-2) left the PLOT_HOOK_CATEGORIES registry with its colour '#5a3a1a'. 1313 -> 1303 on 2026-09-19: the fixes consist's label ladder and the band-primitive deletion removed ten raw literals.
 // Pure-hex TEMPLATE elements are their OWN population with their OWN number. They are NOT
 // folded into BUDGET: one number per population, so a future movement stays attributable to
 // the population that moved. Today's single occurrence is real debt, not a placeholder —

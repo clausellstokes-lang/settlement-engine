@@ -34,7 +34,7 @@
  * Pure data and two pure lookups. No draw, no rng.
  */
 
-import { NPC_FACTION_GOALS } from '../../data/npcData.js';
+import { NPC_FACTION_GOALS, NPC_FACTION_LOYALTY } from '../../data/npcData.js';
 
 /** The seven categories the pools are keyed by. */
 export const POOL_CATEGORIES = Object.freeze(['government', 'military', 'religious', 'economy', 'criminal', 'magic', 'other']);
@@ -309,4 +309,35 @@ export function poolFor(title, shelf) {
 export function seatPoolFor(tier) {
   const role = SEAT_ROLE_BY_TIER[String(tier || '').toLowerCase()] || 'Mayor';
   return { role, category: 'government', titleKey: role === 'Elder' ? 'elder' : 'mayor', fallback: !roleHasGoalPool(role), via: 'seat' };
+}
+
+// ── THE PERSON HOOK'S POOL (PEOPLE-3 HOOKS, 2026-11-07) ────────────────────────────────────
+// The owner: "one plot hook per NPC rather than multiple". The NPC hook pool
+// (data/npcData.js :: NPC_FACTION_LOYALTY — one list per category, plus the small settlement's)
+// was keyed by the NPC's role CATEGORY; it is RE-HOMED here: keyed by the face's TITLE (its row
+// in POOL_BY_TITLE), else by its family's SHELF (POOL_BY_SHELF), so a card draws the hook pool
+// of the house it stands for. No new prose (M-4): the pools are today's; a card that reaches its
+// pool only through the shelf or the generic row is a FALLBACK, listed for the writing wave
+// (W7 HOOKS), which authors hooks by title afterwards.
+
+/** The hook pools a face can be keyed to: the category lists of NPC_FACTION_LOYALTY. */
+export const HOOK_POOLS = Object.freeze(POOL_CATEGORIES.filter((c) => Array.isArray(NPC_FACTION_LOYALTY[c]) && NPC_FACTION_LOYALTY[c].length > 0));
+
+/**
+ * The person hook's pool for a face: by its title, else by its shelf, else the generic row; the
+ * seat (`seat: true`) draws the government pool whatever its house's title says, as its card does.
+ * @param {string | null | undefined} title @param {string | null | undefined} shelf
+ * @param {{ seat?: boolean, category?: string | null }} [options] `category`: a minted face's own
+ *   row category (people/mintTitles.js), which keys its pool the way a title does
+ * @returns {{ pool: string, via: 'title' | 'shelf' | 'generic' | 'seat' | 'mint', fallback: boolean }}
+ */
+export function hookPoolFor(title, shelf, options = {}) {
+  if (options.seat) return { pool: 'government', via: 'seat', fallback: false };
+  if (options.category) {
+    const pool = HOOK_POOLS.includes(options.category) ? options.category : 'other';
+    return { pool, via: 'mint', fallback: pool !== options.category };
+  }
+  const { category, via } = poolFor(title, shelf);
+  const pool = HOOK_POOLS.includes(category) ? category : 'other';
+  return { pool, via, fallback: via !== 'title' || pool !== category };
 }

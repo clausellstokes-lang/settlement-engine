@@ -45,9 +45,11 @@ import { backingArchetypeOf, dealDoubledNiches, houseBacksOf } from '../../domai
 import { BACKING_ARCHETYPES } from '../../data/institutionBacking.js';
 import { generateRelationships } from '../npcGenerator.js';
 import { resolveGenerationWorldLaw } from '../generationContext.js';
+import { deriveTradeCommodity } from '../tradeCommodity.js';
 import { governingFactionOf, nameOf } from '../../domain/rulingPower.js';
 import { isNoPowerInstitution } from '../../data/institutionalCatalog.js';
-import { mintPowerFace, onStream, seatHouseOf, SEAT_CARD_ID } from './representatives.js';
+import { hookPoolFor } from './poolMap.js';
+import { drawCardHooks, HOOKS_FORK_LABEL, mintPowerFace, onStream, seatHouseOf, SEAT_CARD_ID } from './representatives.js';
 import { OTHER_CARD_PREFIX, otherMintRowFor } from './mintTitles.js';
 import { RUNG_KEYS, rungBandsForTier } from '../../domain/density/densityRungs.js';
 
@@ -105,6 +107,8 @@ export function assignCastPowers(settlement, cards, rng) {
   // once here and keyed per power below, never re-forked inside a loop.
   const mintStream = stream ? stream.fork('mint') : null;
   const rankStream = stream ? stream.fork('ranks') : null;
+  // the minted faces' ONE hook each (PEOPLE-3 HOOKS): `people-powers::people-hooks::<card id>`
+  const hookStream = stream ? stream.fork(HOOKS_FORK_LABEL) : null;
   const byHouse = dealDoubledNiches(settlement, houseBacksOf(settlement));
   const houseByName = new Map(institutions.map((inst) => [String(inst?.name || ''), inst]));
   const seat = seatHouseOf(institutions);
@@ -152,7 +156,9 @@ export function assignCastPowers(settlement, cards, rng) {
     const tier = String(settlement?.tier || 'town');
     const culture = String(config.culture || 'germanic');
     const worldLaw = resolveGenerationWorldLaw(null, config);
-    // the roster's texts so far, so a minted face repeats no goal, secret, tell or speech
+    // THE ONE REGISTRY (MERGE-234, the chair's ruling of 10:4x UTC: one writer per fact): the roster's
+    // texts so far, read by the mint's body (no goal, secret, tell or speech repeated) and by the hook
+    // draw below (no line the roster holds) — the mint draws NO hook of its own.
     const hookRegistry = {
       titles: new Set(cards.flatMap((c) => c?.plotHooks || [])),
       themes: new Set(),
@@ -162,12 +168,21 @@ export function assignCastPowers(settlement, cards, rng) {
       secrets: new Set(cards.map((c) => c?.secret?.what).filter(Boolean)),
     };
     const mintCtx = { tier, culture, config, economicState, powerStructure: settlement?.powerStructure, institutions, hookRegistry, worldLaw };
+    // the pipeline's own npcConfig, as the birth seam spells it, for the hook draw's templates
+    const npcConfig = {
+      ...config,
+      _tradeCommodity: deriveTradeCommodity(economicState, { firstWordFallback: true }),
+      _dominantFaction: factions[0]?.faction || null,
+      _prosperity: economicState?.prosperity || null,
+    };
+    /** @type {Map<string, string>} minted card id → the person hook's pool */
+    const mintHookPools = new Map();
     unfaced.forEach((f) => {
       const name = nameOf(f);
       const id = `${OTHER_CARD_PREFIX}${powerSlug(name)}`;
       existingIds.add(id);
       const row = otherMintRowFor(name);
-      const draw = () => mintPowerFace(row, mintCtx);
+      const draw = () => mintPowerFace(row, mintCtx, { hook: false });
       const card = mintStream ? onStream(mintStream.fork(powerSlug(name)), draw) : draw();
       card.id = id;
       card.title = row.title;
@@ -179,6 +194,8 @@ export function assignCastPowers(settlement, cards, rng) {
       const taken = new Set([...cards, ...lateMints].map((c) => String(c?.name || '').trim().toLowerCase()));
       if (taken.has(String(card.name || '').trim().toLowerCase())) card.name = `${String(card.name).trim()} (${row.title})`;
       lateMints.push(card);
+      // the hook's pool from the mint's EFFECTIVE category (no title-table row is `magic`, so no swap here)
+      mintHookPools.set(id, hookPoolFor(row.title, null, { category: row.category }).pool);
       join(card, name, 1, null, true, cards.length + lateMints.length - 1);
       // the tie: one relationship between the mint and the seat's face (the governing power's first,
       // else the first card), appended to the record's ties where the seam holds them
@@ -190,6 +207,12 @@ export function assignCastPowers(settlement, cards, rng) {
         for (const row of tie) ties.push(row);
       }
     });
+    // ONE HOOK PER SEAM-MINTED CARD (PEOPLE-3 HOOKS, composed by MERGE-234): lane 3's writer, in mint
+    // order, each on its own per-card fork of lane 3's family (`people-powers::people-hooks::<card id>`),
+    // so a mint's hook stream is its card's whenever it was minted. Idempotent: a card already holding
+    // its one hook is skipped.
+    const unhooked = lateMints.filter((card) => !(Array.isArray(card.plotHooks) && card.plotHooks.length));
+    drawCardHooks(unhooked, (card) => mintHookPools.get(card.id) || 'other', hookStream, npcConfig, hookRegistry, worldLaw.portKind);
   }
   const all = lateMints.length ? [...cards, ...lateMints] : cards;
 

@@ -44,15 +44,23 @@ import {
 } from '../../data/institutionalCatalog.js';
 import { backingRowFor } from '../../data/institutionBacking.js';
 import { governingFactionOf, nameOf } from '../../domain/rulingPower.js';
-import { generateSingleNPC } from '../npcGenerator.js';
+import { drawPersonHook, generateSingleNPC } from '../npcGenerator.js';
+import { NPC_FACTION_LOYALTY } from '../../data/npcData.js';
+import { inlandHookLine } from '../../data/inlandHookLines.js';
 import { deriveTradeCommodity } from '../tradeCommodity.js';
 import { resolveGenerationWorldLaw } from '../generationContext.js';
 import { disambiguateNPCDisplayNames } from '../npcDisplayNames.js';
-import { poolFor, seatPoolFor } from './poolMap.js';
+import { hookPoolFor, poolFor, seatPoolFor } from './poolMap.js';
 import { seatMintTitleFor } from './mintTitles.js';
 
 /** The keyed fork every card is drawn under (declared in the fork census). */
 export const FACES_FORK_LABEL = 'people-faces';
+/**
+ * The keyed fork every card's ONE hook is drawn under (PEOPLE-3 HOOKS; declared in the fork
+ * census): `people-hooks::<card id>`, minted once per birth seam and keyed per card, drawn in
+ * roster order after the cards, so a card's own body (people-faces) is not moved by its hook.
+ */
+export const HOOKS_FORK_LABEL = 'people-hooks';
 /** The minted seat's stable id. */
 export const SEAT_CARD_ID = 'npc_seat';
 /**
@@ -77,15 +85,17 @@ export const YIELDS_TO = Object.freeze({ 'Priest (resident)': 'Access to parish 
  * @param {{ tier: string, culture: string, config: Record<string, any>, economicState: Record<string, any> | null | undefined,
  *   powerStructure: { factions?: Array<{ faction?: string }> } | null | undefined, institutions: RosterRow[],
  *   hookRegistry: Record<string, Set<string>>, worldLaw: any }} ctx
+ * @param {{ hook?: boolean }} [options] `{ hook: false }`: the seam draws the card's one hook itself
+ *   (lane 3's `drawCardHooks`; MERGE-234, one writer per fact)
  */
-export function mintPowerFace(row, ctx) {
+export function mintPowerFace(row, ctx, options = {}) {
   const npcConfig = {
     ...ctx.config,
     _tradeCommodity: deriveTradeCommodity(ctx.economicState || {}, { firstWordFallback: true }),
     _dominantFaction: ctx.powerStructure?.factions?.[0]?.faction || null,
     _prosperity: ctx.economicState?.prosperity || null,
   };
-  return generateSingleNPC(row.role, row.titleKey, row.category, ctx.culture, ctx.tier, npcConfig, ctx.institutions, ctx.hookRegistry, ctx.worldLaw);
+  return generateSingleNPC(row.role, row.titleKey, row.category, ctx.culture, ctx.tier, npcConfig, ctx.institutions, ctx.hookRegistry, ctx.worldLaw, options);
 }
 
 /** @typedef {{ name?: string, isCustom?: boolean, source?: string }} RosterRow */
@@ -139,6 +149,77 @@ export function onStream(stream, draw) {
 }
 
 /**
+ * THE PERSON HOOK, ONE PER CARD (PEOPLE-3 HOOKS, 2026-11-07; the owner: "one plot hook per NPC
+ * rather than multiple"). Each card in the order given draws exactly one line from the hook pool
+ * its face is keyed to, on `stream.fork(<card id>)`, refusing a text the roster already holds
+ * (the shared registry); the card's `plotHooks` becomes that one line.
+ * @param {Array<Record<string, any>>} cards
+ * @param {(card: Record<string, any>) => string} poolOf the card's hook pool (poolMap.js :: hookPoolFor)
+ * @param {{ fork: (label: string) => any } | null} stream the birth seam's `people-hooks` stream; ambient when null
+ * @param {Record<string, any>} config @param {any} hookRegistry @param {string | null | undefined} portKind
+ */
+export function drawCardHooks(cards, poolOf, stream, config, hookRegistry, portKind) {
+  /** @type {Set<string>} the lines the roster holds so far (the registry's titles, when threaded) */
+  const held = hookRegistry?.titles instanceof Set ? hookRegistry.titles : new Set();
+  for (const card of cards) {
+    const pool = poolOf(card);
+    const before = new Set(held);
+    const draw = () => drawPersonHook(pool, config, hookRegistry, portKind);
+    let line = stream ? onStream(stream.fork(String(card.id)), draw) : draw();
+    // THE POOL RAN DRY (a city holds more faces of one kind than its pool has lines): the line
+    // drawn is one the roster already holds, so the next unheld line is taken, DRAW-FREE, from
+    // the card's own pool, then the other pools in `dryPoolWalk`'s order, each in authored order
+    // from an offset keyed by the card's id. Where every one is held, the repeat stands (the
+    // writing wave's W7 HOOKS authors by title; the lane's record counts them).
+    if (before.has(String(line).trim())) {
+      const spare = spareHookLine(dryPoolWalk(pool), before, String(card.id), portKind);
+      if (spare !== null) line = spare;
+    }
+    held.add(String(line).trim());
+    card.plotHooks = [line];
+  }
+}
+
+/**
+ * The pools a card whose own pool ran dry walks, in order: its own, then the portable pools whose
+ * lines fit any keeper (`other`, the small settlement's, economy, government), then the
+ * specialist ones (criminal, military, religious) — a repeated line on one page is the worse
+ * fault (the soak's X-50). The MAGIC pool is walked by a magic face alone: its lines speak of
+ * spells and wards, which the world law forbids where magic does not work (measured: walking it
+ * put 27 settlements of the soak 1,000 on the receipt's `world_law_magic` check).
+ * @param {string} own @returns {string[]}
+ */
+export function dryPoolWalk(own) {
+  return [...new Set([own, 'other', 'small_settlement', 'economy', 'government', 'criminal', 'military', 'religious'])];
+}
+
+/** A stable non-negative integer from a string (FNV-1a): a walk's offset, no stream read. @param {string} key */
+export function hookOffsetOf(key) {
+  let h = 0x811c9dc5;
+  for (let i = 0; i < key.length; i += 1) { h ^= key.charCodeAt(i); h = Math.imul(h, 0x01000193) >>> 0; }
+  return h;
+}
+
+/**
+ * The first line of `pools` (in order; each walked in authored order from the key's offset) that
+ * `held` does not hold and `accept` admits, given its inland twin (F5); null when none. Draw-free.
+ * @param {string[]} pools @param {Set<string>} held @param {string} key
+ * @param {string | null | undefined} portKind @param {(line: string) => boolean} [accept]
+ * @returns {string | null}
+ */
+export function spareHookLine(pools, held, key, portKind, accept = () => true) {
+  for (const name of [...new Set(pools)]) {
+    const pool = /** @type {string[]} */ (NPC_FACTION_LOYALTY[/** @type {keyof typeof NPC_FACTION_LOYALTY} */ (name)] || []);
+    const start = pool.length ? hookOffsetOf(key) % pool.length : 0;
+    for (let i = 0; i < pool.length; i += 1) {
+      const line = inlandHookLine(pool[(start + i) % pool.length], portKind);
+      if (!held.has(String(line).trim()) && accept(line)) return line;
+    }
+  }
+  return null;
+}
+
+/**
  * THE CAST: one card per face-bearing house in roster order, the seat always faced.
  *
  * @param {{ tier?: string, institutions?: RosterRow[], powerStructure?: { factions?: Array<Record<string, unknown>> } | null,
@@ -183,16 +264,21 @@ export function generateRepresentatives(settlement, culture = 'germanic', config
 
   /**
    * @param {string} id @param {{ role: string, category: string, titleKey: string }} pool
-   * @param {string} title @param {CardInstitution} institution
+   * @param {string} title @param {CardInstitution} institution @param {string} hookPool
    */
   // the world law: where magic does not function, a `magic`-category pool (the alchemist, the fortune teller) draws
   // its body and hooks from the mundane `other` pools, as today's generator kept such roles mundane (allowsRole)
   const magicFunctions = typeof worldLaw?.magicFunctions === 'function' ? worldLaw.magicFunctions() : true;
-  const birth = (id, pool, title, institution) => {
+  /** @type {Map<string, string>} card id → the person hook's pool (poolMap.js :: hookPoolFor) */
+  const hookPools = new Map();
+  const birth = (id, pool, title, institution, hookPool) => {
     const category = pool.category === 'magic' && !magicFunctions ? 'other' : pool.category;
     const card = onStream(faces.fork(id), () => generateSingleNPC(
-      pool.role, pool.titleKey, category, culture, tier, npcConfig, institutions, hookRegistry, worldLaw,
+      pool.role, pool.titleKey, category, culture, tier, npcConfig, institutions, hookRegistry, worldLaw, { hook: false },
     ));
+    // MERGE-234 (the chair's ruling of 10:4x UTC): a magic-swapped face draws its hook from the pool its
+    // EFFECTIVE category maps to after the swap (`other` has its own loyalty list, so no further fallback)
+    hookPools.set(id, category !== pool.category ? hookPoolFor(title, null, { category }).pool : hookPool);
     card.id = id;
     card.title = title;
     // M-1b (the owner, 07:1x UTC): the faction roles dissolve — a representative's ROLE is its
@@ -217,18 +303,19 @@ export function generateRepresentatives(settlement, culture = 'germanic', config
       // governing power.
       if (!isSeat) return;
       const { title } = seatMintTitleFor(governingName || '');
-      birth(cardIdFor(key, taken), seatPoolFor(tier), title, { kind: 'house', key, family: family?.key ?? null, title });
+      birth(cardIdFor(key, taken), seatPoolFor(tier), title, { kind: 'house', key, family: family?.key ?? null, title }, hookPoolFor(title, null, { seat: true }).pool);
       return;
     }
     const pool = isSeat ? seatPoolFor(tier) : poolFor(face, family?.shelf ?? null);
-    birth(cardIdFor(key, taken), pool, face, { kind: 'house', key, family: family?.key ?? null, title: face });
+    birth(cardIdFor(key, taken), pool, face, { kind: 'house', key, family: family?.key ?? null, title: face },
+      hookPoolFor(face, family?.shelf ?? null, { seat: isSeat }).pool);
   });
 
   // R-P2: no seat house and no hall — the seat's face is minted from the governing power.
   if (!seat && governingName) {
     const { title } = seatMintTitleFor(governingName);
     taken.add(SEAT_CARD_ID);
-    birth(SEAT_CARD_ID, seatPoolFor(tier), title, { kind: 'power', key: governingName, family: null, title });
+    birth(SEAT_CARD_ID, seatPoolFor(tier), title, { kind: 'power', key: governingName, family: null, title }, hookPoolFor(title, null, { seat: true }).pool);
   }
 
   // R-P4: the `other` powers' faces are minted at the coherence seam (castPowers.js), where the
@@ -236,6 +323,8 @@ export function generateRepresentatives(settlement, culture = 'germanic', config
   // Newcomers' Settlement is gone by the record; a stress faction arrives), so a mint here faced
   // powers the record does not carry (measured: 'minted other' 4 -> 109 a tier). Each seam mint is
   // tied to the seat so the social graph reaches it.
+  // ONE HOOK PER CARD (PEOPLE-3 HOOKS), in roster order, each on its own keyed fork.
+  drawCardHooks(cards, (card) => hookPools.get(card.id) || 'other', root.fork(HOOKS_FORK_LABEL), npcConfig, hookRegistry, worldLaw.portKind);
 
   // Draw-free: a name shared by two cards takes a role qualifier, never a second draw.
   return disambiguateNPCDisplayNames(cards);
