@@ -143,3 +143,21 @@ export function facesInPower(cards, power) {
 }
 
 export { powerOrderOf, membershipsOf };
+
+/**
+ * THE HOUSE'S FACE (PEOPLE-6 LINKS, the owner's word of 2026-11-07: "a small row in each card
+ * that has the name of their NPC that also acts as a link to the NPC's card"): roster row name →
+ * the card that represents it (`institution.kind === 'house'`, `institution.key` the row's name).
+ * A house with no face (the census's NONE, a fabric row) has no entry. ONE PERSON, ONE FACE: the
+ * first card in roster order wins should a save ever carry two.
+ * @param {unknown[]} cards @returns {Map<string, Record<string, unknown>>}
+ */
+export function facesByHouse(cards) {
+  /** @type {Map<string, Record<string, unknown>>} */
+  const out = new Map();
+  for (const card of Array.isArray(cards) ? cards : []) {
+    const name = cardHouseOf(card);
+    if (name && !out.has(name)) out.set(name, recordOf(card));
+  }
+  return out;
+}

@@ -8,7 +8,7 @@
   "The reviewable slice is computed by RULE (reviewableDark), never hand-listed."
  ],
  "schema": 1,
- "frozenAtSha": "f79e451106422af6cd7c172c62bc918bc09faf58",
+ "frozenAtSha": "1994a2ef52228aab42c07bb7df14f72814955ee4",
  "charter": "§18.1 WRWALKER Car 1 (HORIZON) — chair-signed vetoably at the INSTR-WRW pre-stage",
  "minRows": 40,
  "corpusMeta": {
@@ -24,7 +24,7 @@
  },
  "shapesDigest": "f554e7804c707b99d4710e8fd9006e3100ab6335c15cfcb1d66a8de318a30dd8",
  "detectorDigest": "863d4ac82d2945a7cf84d9948ceb9742dd5ffe08a7d2ae00ca550d6f59645aad",
- "verdictDigest": "0c197a28cf5134ba8e68bc82eb8b57a3eaded410e1e4c5f37d3802c49fab9089",
+ "verdictDigest": "4fcc23e016ffaefb779d7d9a4c6142501608a5640f3cc57b5439877ca94ae63f",
  "surfaceRoots": {
   "web": [
    "src/main.jsx"
@@ -73,7 +73,7 @@
  ],
  "closureSizes": {
   "web-display": 750,
-  "web-transitive": 966,
+  "web-transitive": 968,
   "dossier-pdf": 469,
   "campaign-pdf": 106,
   "world-book": 123,
@@ -91,15 +91,15 @@
   "knownShapes": 516
  },
  "scanStats": {
-  "files": 1717,
-  "sites": 40829,
-  "propRead": 38650,
+  "files": 1719,
+  "sites": 40848,
+  "propRead": 38669,
   "elemRead": 0,
   "destructure": 2163,
   "inOp": 16,
-  "rGrades": 6240,
-  "nGrades": 1607698,
-  "resolvedReceivers": 7115
+  "rGrades": 6243,
+  "nGrades": 1610870,
+  "resolvedReceivers": 7118
  },
  "registerDigest": "4595b8264efb741fcf1517ed8deca7ff3df4e8a4eb021d2e16062af67ff9e3f6",
  "pendingSurfaceCeiling": 3,
@@ -10102,7 +10102,7 @@
   "expectedReturnTick on npcs": "dossier-pdf=N foundry=N web-transitive=N",
   "exposedTick on npcs": "web-transitive=N",
   "family on npcs": "dossier-pdf=N foundry=N news=N web-display=N web-transitive=N",
-  "gender on npcs": "dossier-pdf=R foundry=R web-display=R",
+  "gender on npcs": "dossier-pdf=R foundry=R web-display=R web-transitive=N",
   "generatedAs on npcs": "",
   "goal on npcs": "campaign-pdf=R dossier-pdf=R foundry=R news=N web-display=R web-transitive=R world-book=R",
   "historicizedTick on npcs": "web-transitive=N",

@@ -214,7 +214,9 @@ describe('CONSOLIDATION — one count, one faction label, no tie fold', () => {
 
   test('a card inside its own faction group drops the faction suffix; the role stays', () => {
     const { container } = mountNpcs();
-    const row = [...container.querySelectorAll('button')].find((b) => b.textContent.includes('Alda Reeve'));
+    // PEOPLE-6 LINKS (2026-11-07): the card's line (role, door back, power line) sits UNDER the
+    // toggle, not inside its <button> (the door is a link), so the card is the toggle's parent.
+    const row = [...container.querySelectorAll('button')].find((b) => b.textContent.includes('Alda Reeve')).parentElement;
     expect(row.textContent).toContain('reeve');
     expectAbsentWithAnchor(row.textContent, '· Council', 'reeve', 'N5 faction suffix inside its own group');
   });
