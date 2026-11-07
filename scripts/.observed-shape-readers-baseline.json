@@ -169,14 +169,14 @@
  "digests": {
   "corpusMeta": "1cdc2e25094f986b5593dacbb540bd2ee5e907986b8f9d158ba6c675c815cc51",
   "inventory": "0e041c80d4ba04cf22739f02521c21a39f09bbd52dfb83088eb2c081be192e29",
-  "manifests": "13eb77e30b3e45d7e4fdb1c593d75cf3d6e4e7d7558e3411b67009935cba1f23",
+  "manifests": "76b48a5ba9ee638a4f33dd775a3be9ec3b36cddc14ab77e513cd163999be44c2",
   "migrationReview": "a2bf8d63109cf5e8767eb90336782ccb0ba94c391bfc3e76dc45d94016c96b81",
   "rowTags": "1ebab9f067e5ec39f32a8c38b8e1a18c24d8ad0c66109851551ef84efc314447",
-  "scanStats": "d38ecdee7bf9655f7617a824bffd2fb85e784675f55f7be9c2ddf62c09989747",
-  "sentinel": "124ab76f1d2c307b8f1e3c2f8e5cf22cdb6c2f3b7e9079d6f932f280b269b5cd"
+  "scanStats": "9cbfecb6f0df0c466b7f34841059e6206bab0da61db7523bbdb41c185f6ae3a9",
+  "sentinel": "4e64bed447a6b4e3ef10d77c5845d0af6d532a024d8a9afda5a2cc94365159f8"
  },
  "frozen": "2026-11-07",
- "frozenAtSha": "a709af16d8899c21ffcc0981f4b4332113db5200",
+ "frozenAtSha": "3ea5100c96ef000b37166a9db86be47deb790def",
  "identities": 1450,
  "inventory": {
   "src/components/BuyThisDossier.jsx": {
@@ -2522,7 +2522,7 @@
   },
   "executionTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "a42e041a0e949cf4d9afd231df0284bb4c4477894e63e68dbebe6b572353ab47",
+   "digest": "36034c130c59ecfd1f235ffe8b7651d5743a97833c5b161253fcdf3ffa62592f",
    "entries": [
     {
      "mode": "100644",
@@ -4452,8 +4452,8 @@
     {
      "mode": "100644",
      "path": "src/components/home/landingFixture.js",
-     "sha256": "7e8c305f6c63c70386b4348b4135cd6068ae20b63d61e7924b3df350e8698a32",
-     "size": 9097,
+     "sha256": "305cc0e5d7e149d6e295b32bd5ff5ddaf592c836b3c81df62c807f13303184d1",
+     "size": 9122,
      "type": "file"
     },
     {
@@ -5719,8 +5719,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/RumorsTab.jsx",
-     "sha256": "03299f04bf0c9285b6b57ab89fdb453060b0a9f8cf062d6fd1690f4e9b8d4c16",
-     "size": 10219,
+     "sha256": "bce29a4141b63550215b2b882976b6ebcd8306248e2adf0ee4bc0c804a2684b6",
+     "size": 10210,
      "type": "file"
     },
     {
@@ -5775,8 +5775,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/WarTab.jsx",
-     "sha256": "b4efa91c2477778a46a6ce043583cdb6e207790596d23d3fadfab968dc187643",
-     "size": 38423,
+     "sha256": "1a63758da97d8ed7f8cc9d137f8d4d2b102d1be12c5fdc1038409ffce338f5f9",
+     "size": 38338,
      "type": "file"
     },
     {
@@ -7063,8 +7063,8 @@
     {
      "mode": "100644",
      "path": "src/data/dossierCausalProse.generated.js",
-     "sha256": "f52b9ad9c705c225f2a4bd4292858609f1100665aa11e9e04e661adbbaba06e3",
-     "size": 210260,
+     "sha256": "796baafc23b298353497283fae4802a7863f39e7c5661f9db5db411272a91ff8",
+     "size": 199851,
      "type": "file"
     },
     {
@@ -8722,8 +8722,8 @@
     {
      "mode": "100644",
      "path": "src/domain/crisis/crisisPage.js",
-     "sha256": "99c67ef891f75f3ecd1a34d0694ee745f71b08bf2e99338f91889df4fe2c78f5",
-     "size": 11132,
+     "sha256": "be0fe8cac36d5dc09e42c1e99ce81b2760965572b03490d5eddbbab519c3eff6",
+     "size": 11146,
      "type": "file"
     },
     {
@@ -15932,8 +15932,8 @@
     {
      "mode": "100644",
      "path": "src/foundry/journalPages.js",
-     "sha256": "c6d8c44f55fe38692cd9461965be6db0bb30af43b7f886d038ccdd8a53cc77e4",
-     "size": 26601,
+     "sha256": "f003657b04c04baf316804ad7c161f2f79279fefc9fc88cb2dccb4b9664f0ccc",
+     "size": 27149,
      "type": "file"
     },
     {
@@ -18550,8 +18550,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/lib/headlines.js",
-     "sha256": "c28c2f5a2b140c6271468fcb38b992b93867b71b04db3422cccbdc49c29badfc",
-     "size": 11923,
+     "sha256": "260da446513eb8befb7641db034c7f80d9ee35797d00c774c3a17c3428662385",
+     "size": 20802,
      "type": "file"
     },
     {
@@ -18697,8 +18697,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/sections/Cover.jsx",
-     "sha256": "f1b337815c1c66146e1e431e29bf7305ad5e1338464187abba3c49db7b37248a",
-     "size": 14347,
+     "sha256": "bf62dc90d8bad11c072de8c11592b91f2cd0ee09e71ed122c2a05ab6c0b8f234",
+     "size": 14429,
      "type": "file"
     },
     {
@@ -18711,8 +18711,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/sections/DefenseSecurity.jsx",
-     "sha256": "e9e36516b9f19a3d116b89af8bfddf552dcf93f86b8fd3dc5753387874d00397",
-     "size": 17629,
+     "sha256": "c089b7d511e50f6672065547f1eee088e0382961c3111cdd315e0426fc065453",
+     "size": 17623,
      "type": "file"
     },
     {
@@ -18753,8 +18753,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/sections/NPCQuickRef.jsx",
-     "sha256": "1c6f3a577559388724ae0d39044d09ba899fde4885f8a4b055e4583330848250",
-     "size": 5697,
+     "sha256": "281c3efbe2ebbaf0ec394e381af98522fb95a7962b0a3a017f93432715d832d5",
+     "size": 5756,
      "type": "file"
     },
     {
@@ -18830,8 +18830,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/sections/Timeline.jsx",
-     "sha256": "ca022b5a2ebe6fd67f538d91e0907fe3fe4db700290cc35fc4f12e91fc2a9004",
-     "size": 4160,
+     "sha256": "bee74db571a381085bd568dda4639765ac422856b3fe11963fb00f0941287850",
+     "size": 4144,
      "type": "file"
     },
     {
@@ -19629,7 +19629,7 @@
   },
   "scanTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "6d041d80589df55cbce4b59f1e115922d432c59e0a69213d7e58d7c97859a1e4",
+   "digest": "82f5987cb577eae3e57729fc92ed8a8a6234fc0f65c20a04347191bed77de287",
    "entries": [
     {
      "mode": "100644",
@@ -21489,8 +21489,8 @@
     {
      "mode": "100644",
      "path": "src/components/home/landingFixture.js",
-     "sha256": "7e8c305f6c63c70386b4348b4135cd6068ae20b63d61e7924b3df350e8698a32",
-     "size": 9097,
+     "sha256": "305cc0e5d7e149d6e295b32bd5ff5ddaf592c836b3c81df62c807f13303184d1",
+     "size": 9122,
      "type": "file"
     },
     {
@@ -22756,8 +22756,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/RumorsTab.jsx",
-     "sha256": "03299f04bf0c9285b6b57ab89fdb453060b0a9f8cf062d6fd1690f4e9b8d4c16",
-     "size": 10219,
+     "sha256": "bce29a4141b63550215b2b882976b6ebcd8306248e2adf0ee4bc0c804a2684b6",
+     "size": 10210,
      "type": "file"
     },
     {
@@ -22812,8 +22812,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/WarTab.jsx",
-     "sha256": "b4efa91c2477778a46a6ce043583cdb6e207790596d23d3fadfab968dc187643",
-     "size": 38423,
+     "sha256": "1a63758da97d8ed7f8cc9d137f8d4d2b102d1be12c5fdc1038409ffce338f5f9",
+     "size": 38338,
      "type": "file"
     },
     {
@@ -25647,8 +25647,8 @@
     {
      "mode": "100644",
      "path": "src/domain/crisis/crisisPage.js",
-     "sha256": "99c67ef891f75f3ecd1a34d0694ee745f71b08bf2e99338f91889df4fe2c78f5",
-     "size": 11132,
+     "sha256": "be0fe8cac36d5dc09e42c1e99ce81b2760965572b03490d5eddbbab519c3eff6",
+     "size": 11146,
      "type": "file"
     },
     {
@@ -32850,8 +32850,8 @@
     {
      "mode": "100644",
      "path": "src/foundry/journalPages.js",
-     "sha256": "c6d8c44f55fe38692cd9461965be6db0bb30af43b7f886d038ccdd8a53cc77e4",
-     "size": 26601,
+     "sha256": "f003657b04c04baf316804ad7c161f2f79279fefc9fc88cb2dccb4b9664f0ccc",
+     "size": 27149,
      "type": "file"
     },
     {
@@ -35468,8 +35468,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/lib/headlines.js",
-     "sha256": "c28c2f5a2b140c6271468fcb38b992b93867b71b04db3422cccbdc49c29badfc",
-     "size": 11923,
+     "sha256": "260da446513eb8befb7641db034c7f80d9ee35797d00c774c3a17c3428662385",
+     "size": 20802,
      "type": "file"
     },
     {
@@ -35615,8 +35615,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/sections/Cover.jsx",
-     "sha256": "f1b337815c1c66146e1e431e29bf7305ad5e1338464187abba3c49db7b37248a",
-     "size": 14347,
+     "sha256": "bf62dc90d8bad11c072de8c11592b91f2cd0ee09e71ed122c2a05ab6c0b8f234",
+     "size": 14429,
      "type": "file"
     },
     {
@@ -35629,8 +35629,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/sections/DefenseSecurity.jsx",
-     "sha256": "e9e36516b9f19a3d116b89af8bfddf552dcf93f86b8fd3dc5753387874d00397",
-     "size": 17629,
+     "sha256": "c089b7d511e50f6672065547f1eee088e0382961c3111cdd315e0426fc065453",
+     "size": 17623,
      "type": "file"
     },
     {
@@ -35671,8 +35671,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/sections/NPCQuickRef.jsx",
-     "sha256": "1c6f3a577559388724ae0d39044d09ba899fde4885f8a4b055e4583330848250",
-     "size": 5697,
+     "sha256": "281c3efbe2ebbaf0ec394e381af98522fb95a7962b0a3a017f93432715d832d5",
+     "size": 5756,
      "type": "file"
     },
     {
@@ -35748,8 +35748,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/sections/Timeline.jsx",
-     "sha256": "ca022b5a2ebe6fd67f538d91e0907fe3fe4db700290cc35fc4f12e91fc2a9004",
-     "size": 4160,
+     "sha256": "bee74db571a381085bd568dda4639765ac422856b3fe11963fb00f0941287850",
+     "size": 4144,
      "type": "file"
     },
     {
@@ -36540,7 +36540,7 @@
   },
   "sourceTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "a7b5757177de22344f1467c89d89ff89444b1a4414e499f97a221c102b770dd0",
+   "digest": "ee44308e435a312054f2bb897bc54799df43def6c68e0038569c30adc47998a2",
    "entries": [
     {
      "mode": "100644",
@@ -38400,8 +38400,8 @@
     {
      "mode": "100644",
      "path": "src/components/home/landingFixture.js",
-     "sha256": "7e8c305f6c63c70386b4348b4135cd6068ae20b63d61e7924b3df350e8698a32",
-     "size": 9097,
+     "sha256": "305cc0e5d7e149d6e295b32bd5ff5ddaf592c836b3c81df62c807f13303184d1",
+     "size": 9122,
      "type": "file"
     },
     {
@@ -39667,8 +39667,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/RumorsTab.jsx",
-     "sha256": "03299f04bf0c9285b6b57ab89fdb453060b0a9f8cf062d6fd1690f4e9b8d4c16",
-     "size": 10219,
+     "sha256": "bce29a4141b63550215b2b882976b6ebcd8306248e2adf0ee4bc0c804a2684b6",
+     "size": 10210,
      "type": "file"
     },
     {
@@ -39723,8 +39723,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/WarTab.jsx",
-     "sha256": "b4efa91c2477778a46a6ce043583cdb6e207790596d23d3fadfab968dc187643",
-     "size": 38423,
+     "sha256": "1a63758da97d8ed7f8cc9d137f8d4d2b102d1be12c5fdc1038409ffce338f5f9",
+     "size": 38338,
      "type": "file"
     },
     {
@@ -41011,8 +41011,8 @@
     {
      "mode": "100644",
      "path": "src/data/dossierCausalProse.generated.js",
-     "sha256": "f52b9ad9c705c225f2a4bd4292858609f1100665aa11e9e04e661adbbaba06e3",
-     "size": 210260,
+     "sha256": "796baafc23b298353497283fae4802a7863f39e7c5661f9db5db411272a91ff8",
+     "size": 199851,
      "type": "file"
     },
     {
@@ -42670,8 +42670,8 @@
     {
      "mode": "100644",
      "path": "src/domain/crisis/crisisPage.js",
-     "sha256": "99c67ef891f75f3ecd1a34d0694ee745f71b08bf2e99338f91889df4fe2c78f5",
-     "size": 11132,
+     "sha256": "be0fe8cac36d5dc09e42c1e99ce81b2760965572b03490d5eddbbab519c3eff6",
+     "size": 11146,
      "type": "file"
     },
     {
@@ -49880,8 +49880,8 @@
     {
      "mode": "100644",
      "path": "src/foundry/journalPages.js",
-     "sha256": "c6d8c44f55fe38692cd9461965be6db0bb30af43b7f886d038ccdd8a53cc77e4",
-     "size": 26601,
+     "sha256": "f003657b04c04baf316804ad7c161f2f79279fefc9fc88cb2dccb4b9664f0ccc",
+     "size": 27149,
      "type": "file"
     },
     {
@@ -52498,8 +52498,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/lib/headlines.js",
-     "sha256": "c28c2f5a2b140c6271468fcb38b992b93867b71b04db3422cccbdc49c29badfc",
-     "size": 11923,
+     "sha256": "260da446513eb8befb7641db034c7f80d9ee35797d00c774c3a17c3428662385",
+     "size": 20802,
      "type": "file"
     },
     {
@@ -52645,8 +52645,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/sections/Cover.jsx",
-     "sha256": "f1b337815c1c66146e1e431e29bf7305ad5e1338464187abba3c49db7b37248a",
-     "size": 14347,
+     "sha256": "bf62dc90d8bad11c072de8c11592b91f2cd0ee09e71ed122c2a05ab6c0b8f234",
+     "size": 14429,
      "type": "file"
     },
     {
@@ -52659,8 +52659,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/sections/DefenseSecurity.jsx",
-     "sha256": "e9e36516b9f19a3d116b89af8bfddf552dcf93f86b8fd3dc5753387874d00397",
-     "size": 17629,
+     "sha256": "c089b7d511e50f6672065547f1eee088e0382961c3111cdd315e0426fc065453",
+     "size": 17623,
      "type": "file"
     },
     {
@@ -52701,8 +52701,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/sections/NPCQuickRef.jsx",
-     "sha256": "1c6f3a577559388724ae0d39044d09ba899fde4885f8a4b055e4583330848250",
-     "size": 5697,
+     "sha256": "281c3efbe2ebbaf0ec394e381af98522fb95a7962b0a3a017f93432715d832d5",
+     "size": 5756,
      "type": "file"
     },
     {
@@ -52778,8 +52778,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/sections/Timeline.jsx",
-     "sha256": "ca022b5a2ebe6fd67f538d91e0907fe3fe4db700290cc35fc4f12e91fc2a9004",
-     "size": 4160,
+     "sha256": "bee74db571a381085bd568dda4639765ac422856b3fe11963fb00f0941287850",
+     "size": 4144,
      "type": "file"
     },
     {
@@ -53887,20 +53887,20 @@
  },
  "scanStats": {
   "files": 2415,
-  "reads": 138157,
-  "resolved": 10634,
-  "unresolved": 127523
+  "reads": 138176,
+  "resolved": 10641,
+  "unresolved": 127535
  },
  "scannerProvenance": {
   "detectorDigest": "6cfb9c8153e72e136ee73aae0de2c6342fd3ed80f35fda14fe9e9343e1b8c260",
-  "executionTreeDigest": "a42e041a0e949cf4d9afd231df0284bb4c4477894e63e68dbebe6b572353ab47",
-  "scanTreeDigest": "6d041d80589df55cbce4b59f1e115922d432c59e0a69213d7e58d7c97859a1e4",
-  "sourceTreeDigest": "a7b5757177de22344f1467c89d89ff89444b1a4414e499f97a221c102b770dd0",
-  "unscannedInputDigest": "aecc87d791729dcfa00a43ef5df515d9a0f817235d08efe5db16c4f7b5c0b8ad"
+  "executionTreeDigest": "36034c130c59ecfd1f235ffe8b7651d5743a97833c5b161253fcdf3ffa62592f",
+  "scanTreeDigest": "82f5987cb577eae3e57729fc92ed8a8a6234fc0f65c20a04347191bed77de287",
+  "sourceTreeDigest": "ee44308e435a312054f2bb897bc54799df43def6c68e0038569c30adc47998a2",
+  "unscannedInputDigest": "2e0e70889c1427c0d7b624ad670c5d5ffcfe188974b71c36cd63d79d1791367f"
  },
  "schema": 30,
  "sentinel": {
-  "resolvedReads": 10634,
+  "resolvedReads": 10641,
   "totalKeys": 6730,
   "usableShapes": 356
  },
