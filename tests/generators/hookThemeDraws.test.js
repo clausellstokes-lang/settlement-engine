@@ -274,7 +274,10 @@ describe('HK-3 draws — the corpus, through the real pipeline', () => {
     // set); the count follows the census, as every row above: 860 / 25 → the figures below, measured by this
     // file's own corpus at the lane's tip. The exact-duplicate residual is the SAME pools drawn by a cast the
     // pools were not written for — the writing wave's debt, named in the record's §6.
-    expect(total, 'the corpus NPC-hook total moved — HK-3 must never drop a hook').toBe(3165); // 3164 -> 3165 at the seam-mint tip (the mint tied and named after the cast)
+    // ⭐ RE-KEYED 2026-11-07, PEOPLE-3 HOOKS (0f930ce95; the owner: "one plot hook per NPC rather than multiple"): the
+    // second hook (a coin-flip, μ 0.5 per card) is retired, so the total is the cast — one hook per card — 3165 -> 2157,
+    // and the exact duplicates fall with it, 1335 -> 119, measured by this file's own corpus at the car's tip.
+    expect(total, 'the corpus NPC-hook total moved — HK-3 must never drop a hook').toBe(2157);
     expect(duplicates, 'the exact-duplicate residual is bounded pool EXHAUSTION and must not move').toBe(HOOK_DUPLICATES_AT_TIP);
 
     // A PRE-EXISTING CONDITION, pinned here so HK-3 cannot be blamed for it and so
@@ -345,9 +348,12 @@ describe('HK-3 draws — the corpus, through the real pipeline', () => {
     // unchanged.
     // 2026-11-07 PEOPLE-1 CAST: the denominator is the CAST (598 -> 2159 at the lane's tip, by this file's own corpus);
     // the hookless and hook-bearing figures below follow it and are measured the same way.
-    expect(npcTotal, 'the NPC denominator must be a real corpus').toBe(2159);
-    expect(hookless, 'hookless NPCs grew — a hook-bearing record is being dropped downstream').toBe(16); // 37 -> 16 at the lane's tip: the cast carries no seat placeholders (R-P2: the seat is always faced)
-    expect(npcTotal - hookless, 'a hook-bearing NPC was dropped (561 at every step of the rung-1 window; 2143 = the cast at the lane\'s tip)').toBe(2143);
+    // RE-KEYED 2026-11-07 PEOPLE-3 HOOKS (0f930ce95): every card draws its one hook at its birth seam, so the cast at
+    // the car's tip is 2157 cards, 0 hookless, 2157 hook-bearing (2159 / 16 / 2143 at lane 1), and total === npcTotal.
+    expect(npcTotal, 'the NPC denominator must be a real corpus').toBe(2157);
+    expect(hookless, 'hookless NPCs grew — a hook-bearing record is being dropped downstream').toBe(0);
+    expect(npcTotal - hookless, 'a hook-bearing NPC was dropped (561 at every step of the rung-1 window; 2157 = the cast at the car\'s tip)').toBe(2157);
+    expect(total, 'one plot hook per card (PEOPLE-3): the hook total is the cast').toBe(npcTotal);
   });
 
   test('pin:same-seed-survivors — the same seed draws the same hooks, forever', () => {
@@ -410,7 +416,7 @@ describe('HK-3 draws — the corpus, through the real pipeline', () => {
 //   corpus-wide field delta          personality.tell + .speech ONLY
 // ─────────────────────────────────────────────────────────────────────────────
 /** 2026-11-07 PEOPLE-1 CAST: the two figures the cast moved, measured by this file's own corpus at the lane's tip. */
-const HOOK_DUPLICATES_AT_TIP = 1335; // MEASURED at the lane's tip by this file's own corpus (the arm's received value): the pools' exhaustion by a 3.6× cast, W7 HOOKS' debt
+const HOOK_DUPLICATES_AT_TIP = 119; // PEOPLE-3 HOOKS (0f930ce95): 1335 -> 119, one hook per card. MEASURED at the lane's tip by this file's own corpus (the arm's received value): the pools' exhaustion by a 3.6× cast, W7 HOOKS' debt
 const ABOVE_K_SHARE_AT_TIP = 66.1;
 
 describe('CS-A1 draws — the tell/speech registry accumulates across the population', () => {
