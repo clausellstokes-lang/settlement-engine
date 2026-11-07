@@ -189,6 +189,16 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * AND NOWHERE ELSE. Most recently at the ENGINE-HYGIENE landing (SHIFT RECORD,
  * 2026-09-01, TE-AGNOSTIC-1 cars `f2c1ad181` / `97d119c9b`); before that at T8.
  *
+ * ── 2026-11-07, THE REVIEW-INTAKE LANE'S MOVE, SIGNED AT THE PEOPLE CAR'S LANDING (RECORD 0a) ──
+ * THE SIXTY-SEVENTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation of 2026-11-06,
+ * inside a NAMED CHARTERED WINDOW: ODQ §934.105, the people car's landing; the record is
+ * docs/shift-records/2026-11-07-people-land-0a-review-intake.json. THE MOVER, FOUND: the review-intake lane
+ * (lane/review-intake-2026-11-06, 63a7cd852) merged onto the integration branch at 5b444331a, never re-recorded at its
+ * own tip. On THIS corpus 360 of 360 rows move (60 per tier) against its first parent a1d5ecd0e (68c107c2..); 360/360
+ * hashes stay distinct. Written from the staged tree (5b444331a with the door paths carried from the landing branch,
+ * which carries W0's 66th movement; the stage predates W0's code, so the constant moves from W0's value and record 0b
+ * composes W0 over this one), measured by scripts/audit/refence.mjs before the write. `726ef86a…` -> `0edf3da6…`.
+ *
  * ── 2026-11-07, THE LEGACY ANNOTATION'S DATE IN ONE HOME (THE WIRING WAVE'S WRITER LANE W0) ──
  * THE SIXTY-SIXTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation of 2026-11-06,
  * inside a NAMED CHARTERED WINDOW: ODQ §934.105 (the chair's ruling R-W7 (d)); the record is
@@ -902,7 +912,7 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * superseded by the ENGINE-HYGIENE re-record above, which is the record of the
  * one chartered window that has been spent since.
  */
-const PRE_COUPLING_CORPUS_SHA = '726ef86a695eb842659ccfdcc25c7acea4f4e99561d7f5a4e43df29a095f5bff';
+const PRE_COUPLING_CORPUS_SHA = '0edf3da629c51256338663d59c9edee717b92c1e213f9302062037090510e0f7';
 
 const CORPUS_TIERS = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
 const CORPUS_ROUTES = Object.freeze(['road', 'isolated', 'port', 'crossroads']);
