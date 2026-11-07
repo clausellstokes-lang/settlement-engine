@@ -1828,36 +1828,36 @@ reading of the catalog itself.
 
 **COMPLETE FOR ITS TIER** · **THE GOOD STATE (R-DST-G)**
 1. `[ledger · colour]` {settlement} offers everything a place its size is expected to offer, without gaps and without anything remarkable in either direction.
-2. `[visitor · institution: tavern]` A stranger arriving at {settlement} with an ordinary need (a bed, a meal, a mended strap) finds all three without asking twice.
+2. `[visitor · institution: tavern]` Anyone arriving at {settlement} with an ordinary need (a bed, a meal, a mended strap) finds all three without asking twice.
 3. `[street · colour]` The town can answer what a town this size ought to answer, and does not think about it further.
 
 **ONE EXPECTED CATEGORY MISSING**
 1. `[ledger]` There is one thing a place of {settlement}'s size ought to provide and does not, and the absence is the same one every year.
-2. `[visitor]` A stranger will find everything he expects at {settlement} except one, and will be told, cheerfully, where the nearest one is.
-3. `[threshold]` {settlement} is one house short of being a complete town of its rung, and the missing one is the sort a single arrival would supply.
+2. `[visitor]` Everything a traveller expects at {settlement} is here but one.
+3. `[threshold]` {settlement} lacks one house a place its size usually has.
 
 **SEVERAL EXPECTED CATEGORIES MISSING**
-1. `[ledger]` {settlement} falls short of its own rung in more than one direction; what the town offers is a smaller list than a place this size is assumed to keep.
+1. `[ledger]` {settlement} offers fewer services than a place its size usually does.
 2. `[street]` This town is bigger than the things it can do for you, and the people here are used to going elsewhere for several of them.
-3. `[visitor]` A stranger provisions carefully before leaving {settlement}, because a town this size is normally the last place it is necessary to.
+3. `[visitor]` Travellers stock up before they reach {settlement}; a place this size cannot supply all they would expect.
 
 **THE HEALING GAP** *(the absence that reads as a real deficiency rather than an inconvenience)*
 1. `[ledger]` {settlement} keeps no house of healing at a size where one is assumed; what is done for the badly hurt here is done by whoever is nearest.
 2. `[street]` The sick in this town are tended at home, and everybody knows how far the nearest better answer is.
-3. `[threshold]` The town manages ordinary hurts and has nothing at all for the extraordinary one, and the line between the two is where the arrangement fails.
+3. `[threshold]` {settlement} can set a bone or bind a cut, but has nothing for a serious wound or illness.
 
 **THE FOOD GAP** *(the one absence every tier expects filled)*
 1. `[ledger]` There is nowhere in {settlement} that sells a meal, which is unusual at any size and worth a stranger knowing before dark.
-2. `[visitor]` A stranger at {settlement} eats what he brought or what somebody offers him, and the offering is a favour rather than a trade.
+2. `[visitor]` Visitors to {settlement} eat what they brought or what someone offers; there is nowhere to buy a meal.
 3. `[street]` Nobody here sells food to a stranger, because nobody here has ever had enough strangers to make it a living.
 
 **A CATEGORY PRESENT BUT ITS CHAIN IMPAIRED**
-1. `[ledger]` {institution} at {settlement} is open and short of what it works with; the service stands and what it can actually do has narrowed.
+1. `[ledger]` {settlement}'s {institution} is open but short of supplies, and it can do less than it used to.
 2. `[street]` The house is still there and cannot do half of what it is known for, and the town has adjusted its expectations quietly.
-3. `[unfolding]` What {institution} can offer {settlement} shrinks with each turn the supply behind it stays short, and nothing in hand is turning that round.
+3. `[unfolding]` {settlement}'s {institution} can offer less the longer its supplies stay short, and nobody is putting it right.
 
 **A METROPOLIS-TIER CATALOG, COMPLETE**
-1. `[ledger]` {settlement} keeps every category a settlement can keep (including the ones a town has no business having), and the completeness is itself a fact about the place.
+1. `[ledger]` {settlement} has every kind of service there is, including some no ordinary town would keep.
 2. `[visitor]` Whatever a stranger wants at {settlement}, the answer is that somebody here does it, and the only question is which quarter.
 3. `[street]` There is nothing this town has to send away for, which the people here mention to visitors more often than they realise.
 

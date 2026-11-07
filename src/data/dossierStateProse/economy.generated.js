@@ -5926,7 +5926,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "institution: tavern"
           ],
-          "text": "A stranger arriving at {settlement} with an ordinary need (a bed, a meal, a mended strap) finds all three without asking twice.",
+          "text": "Anyone arriving at {settlement} with an ordinary need (a bed, a meal, a mended strap) finds all three without asking twice.",
           "slots": [
             "settlement"
           ],
@@ -5953,7 +5953,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "A stranger will find everything he expects at {settlement} except one, and will be told, cheerfully, where the nearest one is.",
+          "text": "Everything a traveller expects at {settlement} is here but one.",
           "slots": [
             "settlement"
           ],
@@ -5961,7 +5961,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "threshold",
-          "text": "{settlement} is one house short of being a complete town of its rung, and the missing one is the sort a single arrival would supply.",
+          "text": "{settlement} lacks one house a place its size usually has.",
           "slots": [
             "settlement"
           ],
@@ -5971,7 +5971,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "SEVERAL EXPECTED CATEGORIES MISSING": [
         {
           "angle": "ledger",
-          "text": "{settlement} falls short of its own rung in more than one direction; what the town offers is a smaller list than a place this size is assumed to keep.",
+          "text": "{settlement} offers fewer services than a place its size usually does.",
           "slots": [
             "settlement"
           ],
@@ -5985,7 +5985,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "A stranger provisions carefully before leaving {settlement}, because a town this size is normally the last place it is necessary to.",
+          "text": "Travellers stock up before they reach {settlement}; a place this size cannot supply all they would expect.",
           "slots": [
             "settlement"
           ],
@@ -6009,8 +6009,10 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "threshold",
-          "text": "The town manages ordinary hurts and has nothing at all for the extraordinary one, and the line between the two is where the arrangement fails.",
-          "slots": [],
+          "text": "{settlement} can set a bone or bind a cut, but has nothing for a serious wound or illness.",
+          "slots": [
+            "settlement"
+          ],
           "vid": 3
         }
       ],
@@ -6025,7 +6027,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "A stranger at {settlement} eats what he brought or what somebody offers him, and the offering is a favour rather than a trade.",
+          "text": "Visitors to {settlement} eat what they brought or what someone offers; there is nowhere to buy a meal.",
           "slots": [
             "settlement"
           ],
@@ -6041,10 +6043,10 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "A CATEGORY PRESENT BUT ITS CHAIN IMPAIRED": [
         {
           "angle": "ledger",
-          "text": "{institution} at {settlement} is open and short of what it works with; the service stands and what it can actually do has narrowed.",
+          "text": "{settlement}'s {institution} is open but short of supplies, and it can do less than it used to.",
           "slots": [
-            "institution",
-            "settlement"
+            "settlement",
+            "institution"
           ],
           "vid": 1
         },
@@ -6056,10 +6058,10 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "What {institution} can offer {settlement} shrinks with each turn the supply behind it stays short, and nothing in hand is turning that round.",
+          "text": "{settlement}'s {institution} can offer less the longer its supplies stay short, and nobody is putting it right.",
           "slots": [
-            "institution",
-            "settlement"
+            "settlement",
+            "institution"
           ],
           "vid": 3
         }
@@ -6067,7 +6069,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "A METROPOLIS-TIER CATALOG, COMPLETE": [
         {
           "angle": "ledger",
-          "text": "{settlement} keeps every category a settlement can keep (including the ones a town has no business having), and the completeness is itself a fact about the place.",
+          "text": "{settlement} has every kind of service there is, including some no ordinary town would keep.",
           "slots": [
             "settlement"
           ],

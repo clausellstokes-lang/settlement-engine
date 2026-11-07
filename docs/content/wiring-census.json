@@ -15711,7 +15711,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [],
       "branchReads": [
         "readings.notableAbsences",
@@ -15850,7 +15850,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 3,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [
@@ -57693,7 +57693,7 @@
       "subject": "THE HEALING GAP",
       "fields": [],
       "readingFunction": "serviceCatalogPoolKey",
-      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -57709,7 +57709,7 @@
       "subject": "A CATEGORY PRESENT BUT ITS CHAIN IMPAIRED",
       "fields": [],
       "readingFunction": "impairedServicePoolKey",
-      "count": "3 variant(s) · 3 grammar(s) · slots {institution, settlement}"
+      "count": "3 variant(s) · 2 grammar(s) · slots {institution, settlement}"
     },
     {
       "tier": "THIN",
