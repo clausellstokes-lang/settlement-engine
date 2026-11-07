@@ -426,10 +426,15 @@ describe('EM-B2b — world facts by consequence: the route, the refusals and the
     // from the stage at b893dcda1: the generator master 8141a111.. -> 98f99494.. (525 of 525 rows); the prose manifest did not move.
     // Then record 05, the annotation's date in one home (the asOf field withdrawn), from the stage at b79dfa98b:
     // 98f99494.. -> 06050f53.. (525 of 525 rows); the prose manifest did not move.
+    // Then the people car's landing (ODQ §934.105, 2026-11-07), one signed record per lane-cause, each written from its
+    // stage with the door paths carried from the landing branch and restated here in the same act. Record 0a, the
+    // review-intake lane (docs/shift-records/2026-11-07-people-land-0a-review-intake.json), from the stage at 5b444331a:
+    // the generator master 06050f53.. -> b1be65e4.. (525 of 525 rows) and the prose manifest 777e4b4b.. -> 63c63a8b..
+    // (8 of 1,050 rows).
     expect(shaOfFile(GOLDEN), 'tests/fixtures/generator-golden-master.json moved')
-      .toBe('06050f531a8f55f5d9e54026942dd11336352ea50920843bb7af929f0960623d');
+      .toBe('b1be65e4fbd386c1682df3027770557a6c58fe2a18a3a7789b8e633927b58ead');
     expect(shaOfFile(PROSE_GOLDEN), 'tests/fixtures/dossier-prose-manifest-golden.json moved')
-      .toBe('777e4b4b2968fab6b02a758435c7dcc8c779753942aeab77c4ae8c261e6d990e');
+      .toBe('63c63a8b47b204ec7c6ab34ebfddeeecb12276e115c9a349ed8fda886aaa7ff3');
 
     // AND THE REASON THEY CANNOT MOVE: fresh generation passes no layer, so no world fact is ever
     // routed and `config′` is `config` itself. Measured against the committed manifest.
