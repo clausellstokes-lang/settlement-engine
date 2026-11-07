@@ -29,9 +29,15 @@ describe('the ruling-power door (CENSUS-1f, row 116)', () => {
     expect(ledger.some((e) => e.pool === 'rulingPower:STABILITY_BY_CAUSE')).toBe(true);
   });
 
-  it('no facts handed: the same record as before (no note)', () => {
+  // "(no note)" -> "(each original noted 'kept')" at 28c6d2a80 (census-1g unit 2, R-AM: "the kept-refused
+  // original is ledgered" — resolveSibling with no facts now notes the original it keeps, with its row's atoms,
+  // so the birth self-check sees it). Measured: this arm green at 28c6d2a80^ (c000dd932), red at 28c6d2a80.
+  // The record is still the one before the door: no facts means no resolution, only a 'kept' note per lookup.
+  it('no facts handed: the same record as before (each original noted kept, R-AM)', () => {
     const { result, ledger } = withPresumptionLedger(() => transferRulingPower(settlement(), 'The Faithful Assembly', { cause: 'election' }));
     expect(result.error).toBeNull();
-    expect(ledger.some((e) => String(e.pool).startsWith('rulingPower:'))).toBe(false);
+    const notes = ledger.filter((e) => String(e.pool).startsWith('rulingPower:'));
+    expect(notes.map((e) => e.pool).sort()).toEqual(['rulingPower:GOVERNMENT_DESCS', 'rulingPower:STABILITY_BY_CAUSE']);
+    expect(notes.every((e) => e.resolvedBy === 'kept')).toBe(true);
   });
 });
