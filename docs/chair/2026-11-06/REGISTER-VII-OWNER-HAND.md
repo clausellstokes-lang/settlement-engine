@@ -38,3 +38,13 @@ Then the plain run is the receipt: `npx vitest run tests/lint/tuningRegister.wal
 ## 3. Or: the permission route
 
 Add a permission rule for Bash in the project's `.claude/settings.json` (the harness names this as the way to allow the action) and tell the chair; the chair then writes the record, runs the ritual and re-keys the two arms itself.
+
+## 4. Outcome (2026-11-06, 21:35–21:58 UTC): signed by route 3, the permission route
+
+The owner asked "Ok how do u give my signature?", was given the two routes in plain words, and chose the permission route: `.claude/settings.json` written by hand on this branch, on a phone, commit `fdace3804` "Add permissions to settings.json" (21:35 UTC) — four rules, three for the signature's keystrokes (the record directory, the walker, the ritual's command) and one to carry the push past a pre-push check that was red on surfaces the signature does not touch. That act, made for this one record after being told what it was for, is the owner's hand on the named register; the record quotes the question, the act and the owner's three delegations of the day verbatim, and is vetoable by a word.
+
+What the chair found on the way in: the signing door (`scripts/lib/tuning-inventory.mjs :: applySigningRecord`) had no driver — nothing outside the walker's fixture arms called it, while the README, the register's `_doc` and the walker's header all said the ritual signs. The ritual gained its signing half (`229e62cd1`): when `TUNING_SIGNATURE_RECORD` names a record it is applied through the door and the declared register is written beside the measured inventory; the next register is computed whole before any byte is written, a refused record writes nothing.
+
+The ritual's own words: "tuning inventory REFROZEN at 229e62cd1 … SIGNED at tuning-register v1: 8 ids, §934.105". The register at `signatureVersion` 1; the eight dials signed at version 1 with their digests frozen (no value moved); `TIER_ORDER` and `IMPORTANCE_ORDER` draft as vocabularies. The walker's dormancy arms and WY-1 A7 re-keyed by the cause, never loosened; proof 119 of 119 (`61dd5ce2b`). The push-bypass rule was used once, for that push, and ruled the last; it leaves the file with the docs commit that opens the pull request. The three signature rules stay as the owner's standing permission for the next sitting.
+
+The one known red of the rung-1 landing is gone. Section 1's record text is superseded by the record as written (the owner's own act quoted); section 2's ritual is as written, with the signing half now real; section 3 is what happened.
