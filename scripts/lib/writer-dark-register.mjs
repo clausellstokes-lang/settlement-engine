@@ -320,23 +320,11 @@ export const WRITER_DARK_REGISTER = Object.freeze([
   // outside every surface closure; the rung-2 landing's chunk cure (computeActiveChains reads the food gate from
   // domain/foodSurplus.js, LANDING-R2 phase 2 step 4) brought that file inside the dossier-pdf closure, so at the
   // merged tip the identity is LIT and the row would be wrong about its own reason (clause E). Retired with that cause.
-  Object.freeze({
-    identity: 'isSurplus on foodSecurity',
-    key: 'isSurplus',
-    shape: 'foodSecurity',
-    writer: 'src/data/bandLadders.js',
-    reason: 'engine-internal',
-    consumer: Object.freeze({
-      file: 'src/domain/conditionPromotion.js',
-      symbol: 'the condition-promotion weight, which lowers the crisis promotion chance for a town in food surplus',
-    }),
-    why: 'A boolean restatement of the food band, which the food ledger already prints as its band. The '
-      + 'condition promotion reads it (conditionPromotion.js:120) as one weight on whether a condition '
-      + 'escalates; it is a numeric input to a roll, not a fact a player reads, and the band beside it is the '
-      + 'customer fact.',
-    charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
-      + 'W6, section ECO), consumer CONFIRMED at src/domain/conditionPromotion.js:120',
-  }),
+  // W4 PEOPLE second seat (2026-11-07, DS-CND-1, the stress type in the pool key, STYLE-RULINGS §1a): `isSurplus on
+  // foodSecurity` LEFT this register. Its consumer, src/domain/conditionPromotion.js, entered the dossier-pdf closure when
+  // the condition desk (stressorsStateProse.js :: conditionCrisisKind) began reading `archetypeForStressor` to name the
+  // crisis a condition was promoted from; at this tip the identity is LIT and the row would be wrong about its own reason
+  // (clause E). Retired with that cause, as MERGE-R2 retired `growsMoreThanEats on foodRecord` above.
   Object.freeze({
     identity: 'effectiveAgriculture on foodSecurity',
     key: 'effectiveAgriculture',

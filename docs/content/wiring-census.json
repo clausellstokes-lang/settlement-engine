@@ -6,7 +6,7 @@
       "src/domain/display/stateProse/powerStateProse.js": "11c913c83fa1e88d5f75d5415f8723936acf9aae37d6465a87b1ad3cb4d21e7b",
       "src/domain/display/stateProse/economyStateProse.js": "d2bfe8cafa209803f26c83fde83534a7ba45230010ff87c33bd4ac52d831b924",
       "src/domain/display/stateProse/defenseStateProse.js": "6ebbed0ca4e9125607fde9443b16d4da328cc1481f711f25a22b5d384cec3ce7",
-      "src/domain/display/stateProse/stressorsStateProse.js": "13c7f383882acf5bb48267feb4302ced6b9798cec2575470903f1aa88205600d",
+      "src/domain/display/stateProse/stressorsStateProse.js": "e35010d5433bd9cdbde3f6b67c82302bef32d95f51f5b25cb58b0bb1a063d212",
       "src/domain/display/stateProse/warFaithStateProse.js": "cd457c6496e5d84828e782f46c8a242c395c3636d62b0096469d14c3a1e1e3df",
       "src/domain/display/stateProse/dossierMounts.js": "f5acb5537ba8deca5c96148ef2b8eab9a279951016e000925af550dd276cf47c"
     },
@@ -21,24 +21,24 @@
     "producerIndexFiles": 1300
   },
   "totals": {
-    "pools": 716,
+    "pools": 761,
     "blocks": 68,
-    "variants": 2362,
-    "resolved": 348,
+    "variants": 2490,
+    "resolved": 393,
     "unresolved": 368,
-    "resolvedWithPredicate": 208,
-    "resolvedWithCleanPredicate": 208,
-    "keyFunctions": 124,
-    "keyFunctionsConsulted": 124,
-    "keyTables": 33,
+    "resolvedWithPredicate": 253,
+    "resolvedWithCleanPredicate": 253,
+    "keyFunctions": 125,
+    "keyFunctionsConsulted": 125,
+    "keyTables": 36,
     "slotless": 68,
     "bagless": 136,
     "predicatesOverUnreadFields": 100,
-    "syntheticTableFields": 100,
+    "syntheticTableFields": 145,
     "tiers": {
       "MISSING": 34,
-      "THIN": 490,
-      "COVERED": 226,
+      "THIN": 537,
+      "COVERED": 224,
       "MISSING-AT-TIER": 45
     },
     "tierSilences": 352,
@@ -47,7 +47,7 @@
     "narrowedRows": 0,
     "covertRows": 4,
     "objectClassed": 99,
-    "mountedRows": 578,
+    "mountedRows": 623,
     "absent": {
       "measured": 387,
       "default": 3,
@@ -55,15 +55,15 @@
       "method-call": 18
     },
     "zeroK": 51,
-    "kExecutable": 348,
+    "kExecutable": 393,
     "kNotExecutable": 368,
-    "branchGrainRows": 318,
+    "branchGrainRows": 363,
     "functionGrainRows": 398,
     "customReachableRows": 21,
     "relationRows": 165,
     "relationRowsJoinable": 0,
     "ratifiedAliases": 3,
-    "tableRungRowsWithoutAbsence": 100,
+    "tableRungRowsWithoutAbsence": 145,
     "modifierEligibleFactsByTab": [
       [
         "viability",
@@ -120,10 +120,10 @@
     ],
     "sourceLicensedRows": 114,
     "sourceOfficeRows": 3,
-    "sourceUnresolvedRows": 599,
+    "sourceUnresolvedRows": 644,
     "sourceTwoSourceRows": 10,
     "modifierRows": 0,
-    "declaredColumnRows": 716,
+    "declaredColumnRows": 761,
     "tablePools": 50
   },
   "rows": [
@@ -34157,7 +34157,9 @@
       "slotsFilled": [
         "settlement"
       ],
-      "slotsNamed": [],
+      "slotsNamed": [
+        "settlement"
+      ],
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
@@ -34224,11 +34226,13 @@
       "slotsFilled": [
         "settlement"
       ],
-      "slotsNamed": [],
+      "slotsNamed": [
+        "settlement"
+      ],
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 3,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -34330,6 +34334,3075 @@
       },
       "declares": [],
       "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-CND-1",
+      "pool": "DIRECTION: worsening · CRISIS: under_siege",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 4,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)",
+          "op": "===",
+          "value": "under_siege"
+        }
+      ],
+      "branchReads": [
+        "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "fieldsRead": [
+        "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "CRISIS_WORSENING_POOL_OF",
+      "rung": "table",
+      "reads": [
+        "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "overview.activeConditions"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "the": "",
+          "table": "",
+          "is": "",
+          "never": "",
+          "indexed": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [
+        "crisis: under_siege"
+      ],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-CND-1",
+      "pool": "DIRECTION: stable · CRISIS: under_siege",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 2,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)",
+          "op": "===",
+          "value": "under_siege"
+        }
+      ],
+      "branchReads": [
+        "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)"
+      ],
+      "fieldsRead": [
+        "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "CRISIS_STABLE_POOL_OF",
+      "rung": "table",
+      "reads": [
+        "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "overview.activeConditions"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "the": "",
+          "table": "",
+          "is": "",
+          "never": "",
+          "indexed": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [
+        "crisis: under_siege"
+      ],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-CND-1",
+      "pool": "DIRECTION: easing · CRISIS: under_siege",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 2,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)",
+          "op": "===",
+          "value": "under_siege"
+        }
+      ],
+      "branchReads": [
+        "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "fieldsRead": [
+        "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "CRISIS_EASING_POOL_OF",
+      "rung": "table",
+      "reads": [
+        "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "overview.activeConditions"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "the": "",
+          "table": "",
+          "is": "",
+          "never": "",
+          "indexed": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [
+        "crisis: under_siege"
+      ],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-CND-1",
+      "pool": "DIRECTION: worsening · CRISIS: famine",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 4,
+      "grammars": 2,
+      "predicate": [
+        {
+          "field": "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)",
+          "op": "===",
+          "value": "famine"
+        }
+      ],
+      "branchReads": [
+        "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "fieldsRead": [
+        "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "CRISIS_WORSENING_POOL_OF",
+      "rung": "table",
+      "reads": [
+        "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "overview.activeConditions"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "the": "",
+          "table": "",
+          "is": "",
+          "never": "",
+          "indexed": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [
+        "crisis: famine"
+      ],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-CND-1",
+      "pool": "DIRECTION: stable · CRISIS: famine",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 2,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)",
+          "op": "===",
+          "value": "famine"
+        }
+      ],
+      "branchReads": [
+        "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)"
+      ],
+      "fieldsRead": [
+        "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "CRISIS_STABLE_POOL_OF",
+      "rung": "table",
+      "reads": [
+        "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "overview.activeConditions"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "the": "",
+          "table": "",
+          "is": "",
+          "never": "",
+          "indexed": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [
+        "crisis: famine"
+      ],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-CND-1",
+      "pool": "DIRECTION: easing · CRISIS: famine",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 2,
+      "grammars": 2,
+      "predicate": [
+        {
+          "field": "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)",
+          "op": "===",
+          "value": "famine"
+        }
+      ],
+      "branchReads": [
+        "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "fieldsRead": [
+        "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "CRISIS_EASING_POOL_OF",
+      "rung": "table",
+      "reads": [
+        "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "overview.activeConditions"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "the": "",
+          "table": "",
+          "is": "",
+          "never": "",
+          "indexed": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [
+        "crisis: famine"
+      ],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-CND-1",
+      "pool": "DIRECTION: worsening · CRISIS: occupied",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 2,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)",
+          "op": "===",
+          "value": "occupied"
+        }
+      ],
+      "branchReads": [
+        "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "fieldsRead": [
+        "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "CRISIS_WORSENING_POOL_OF",
+      "rung": "table",
+      "reads": [
+        "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "overview.activeConditions"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "the": "",
+          "table": "",
+          "is": "",
+          "never": "",
+          "indexed": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [
+        "crisis: occupied"
+      ],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-CND-1",
+      "pool": "DIRECTION: stable · CRISIS: occupied",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 4,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)",
+          "op": "===",
+          "value": "occupied"
+        }
+      ],
+      "branchReads": [
+        "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)"
+      ],
+      "fieldsRead": [
+        "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "CRISIS_STABLE_POOL_OF",
+      "rung": "table",
+      "reads": [
+        "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "overview.activeConditions"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "the": "",
+          "table": "",
+          "is": "",
+          "never": "",
+          "indexed": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [
+        "crisis: occupied"
+      ],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-CND-1",
+      "pool": "DIRECTION: easing · CRISIS: occupied",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 2,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)",
+          "op": "===",
+          "value": "occupied"
+        }
+      ],
+      "branchReads": [
+        "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "fieldsRead": [
+        "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "CRISIS_EASING_POOL_OF",
+      "rung": "table",
+      "reads": [
+        "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "overview.activeConditions"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "the": "",
+          "table": "",
+          "is": "",
+          "never": "",
+          "indexed": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [
+        "crisis: occupied"
+      ],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-CND-1",
+      "pool": "DIRECTION: worsening · CRISIS: politically_fractured",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 4,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)",
+          "op": "===",
+          "value": "politically_fractured"
+        }
+      ],
+      "branchReads": [
+        "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "fieldsRead": [
+        "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "CRISIS_WORSENING_POOL_OF",
+      "rung": "table",
+      "reads": [
+        "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "overview.activeConditions"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "the": "",
+          "table": "",
+          "is": "",
+          "never": "",
+          "indexed": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [
+        "crisis: politically_fractured"
+      ],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-CND-1",
+      "pool": "DIRECTION: stable · CRISIS: politically_fractured",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 2,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)",
+          "op": "===",
+          "value": "politically_fractured"
+        }
+      ],
+      "branchReads": [
+        "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)"
+      ],
+      "fieldsRead": [
+        "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "CRISIS_STABLE_POOL_OF",
+      "rung": "table",
+      "reads": [
+        "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "overview.activeConditions"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "the": "",
+          "table": "",
+          "is": "",
+          "never": "",
+          "indexed": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [
+        "crisis: politically_fractured"
+      ],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-CND-1",
+      "pool": "DIRECTION: easing · CRISIS: politically_fractured",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 2,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)",
+          "op": "===",
+          "value": "politically_fractured"
+        }
+      ],
+      "branchReads": [
+        "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "fieldsRead": [
+        "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "CRISIS_EASING_POOL_OF",
+      "rung": "table",
+      "reads": [
+        "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "overview.activeConditions"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "the": "",
+          "table": "",
+          "is": "",
+          "never": "",
+          "indexed": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [
+        "crisis: politically_fractured"
+      ],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-CND-1",
+      "pool": "DIRECTION: worsening · CRISIS: indebted",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 2,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)",
+          "op": "===",
+          "value": "indebted"
+        }
+      ],
+      "branchReads": [
+        "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "fieldsRead": [
+        "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "CRISIS_WORSENING_POOL_OF",
+      "rung": "table",
+      "reads": [
+        "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "overview.activeConditions"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "the": "",
+          "table": "",
+          "is": "",
+          "never": "",
+          "indexed": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [
+        "crisis: indebted"
+      ],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-CND-1",
+      "pool": "DIRECTION: stable · CRISIS: indebted",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 4,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)",
+          "op": "===",
+          "value": "indebted"
+        }
+      ],
+      "branchReads": [
+        "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)"
+      ],
+      "fieldsRead": [
+        "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "CRISIS_STABLE_POOL_OF",
+      "rung": "table",
+      "reads": [
+        "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "overview.activeConditions"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "the": "",
+          "table": "",
+          "is": "",
+          "never": "",
+          "indexed": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [
+        "crisis: indebted"
+      ],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-CND-1",
+      "pool": "DIRECTION: easing · CRISIS: indebted",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 2,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)",
+          "op": "===",
+          "value": "indebted"
+        }
+      ],
+      "branchReads": [
+        "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "fieldsRead": [
+        "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "CRISIS_EASING_POOL_OF",
+      "rung": "table",
+      "reads": [
+        "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "overview.activeConditions"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "the": "",
+          "table": "",
+          "is": "",
+          "never": "",
+          "indexed": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [
+        "crisis: indebted"
+      ],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-CND-1",
+      "pool": "DIRECTION: worsening · CRISIS: recently_betrayed",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 4,
+      "grammars": 2,
+      "predicate": [
+        {
+          "field": "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)",
+          "op": "===",
+          "value": "recently_betrayed"
+        }
+      ],
+      "branchReads": [
+        "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "fieldsRead": [
+        "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "CRISIS_WORSENING_POOL_OF",
+      "rung": "table",
+      "reads": [
+        "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "overview.activeConditions"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "the": "",
+          "table": "",
+          "is": "",
+          "never": "",
+          "indexed": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [
+        "crisis: recently_betrayed"
+      ],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-CND-1",
+      "pool": "DIRECTION: stable · CRISIS: recently_betrayed",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 2,
+      "grammars": 2,
+      "predicate": [
+        {
+          "field": "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)",
+          "op": "===",
+          "value": "recently_betrayed"
+        }
+      ],
+      "branchReads": [
+        "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)"
+      ],
+      "fieldsRead": [
+        "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "CRISIS_STABLE_POOL_OF",
+      "rung": "table",
+      "reads": [
+        "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "overview.activeConditions"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "the": "",
+          "table": "",
+          "is": "",
+          "never": "",
+          "indexed": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [
+        "crisis: recently_betrayed"
+      ],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-CND-1",
+      "pool": "DIRECTION: easing · CRISIS: recently_betrayed",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 2,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)",
+          "op": "===",
+          "value": "recently_betrayed"
+        }
+      ],
+      "branchReads": [
+        "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "fieldsRead": [
+        "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "CRISIS_EASING_POOL_OF",
+      "rung": "table",
+      "reads": [
+        "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "overview.activeConditions"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "the": "",
+          "table": "",
+          "is": "",
+          "never": "",
+          "indexed": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [
+        "crisis: recently_betrayed"
+      ],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-CND-1",
+      "pool": "DIRECTION: worsening · CRISIS: infiltrated",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 4,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)",
+          "op": "===",
+          "value": "infiltrated"
+        }
+      ],
+      "branchReads": [
+        "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "fieldsRead": [
+        "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "CRISIS_WORSENING_POOL_OF",
+      "rung": "table",
+      "reads": [
+        "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "overview.activeConditions"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "the": "",
+          "table": "",
+          "is": "",
+          "never": "",
+          "indexed": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [
+        "crisis: infiltrated"
+      ],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-CND-1",
+      "pool": "DIRECTION: stable · CRISIS: infiltrated",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 2,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)",
+          "op": "===",
+          "value": "infiltrated"
+        }
+      ],
+      "branchReads": [
+        "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)"
+      ],
+      "fieldsRead": [
+        "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "CRISIS_STABLE_POOL_OF",
+      "rung": "table",
+      "reads": [
+        "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "overview.activeConditions"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "the": "",
+          "table": "",
+          "is": "",
+          "never": "",
+          "indexed": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [
+        "crisis: infiltrated"
+      ],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-CND-1",
+      "pool": "DIRECTION: easing · CRISIS: infiltrated",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 2,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)",
+          "op": "===",
+          "value": "infiltrated"
+        }
+      ],
+      "branchReads": [
+        "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "fieldsRead": [
+        "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "CRISIS_EASING_POOL_OF",
+      "rung": "table",
+      "reads": [
+        "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "overview.activeConditions"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "the": "",
+          "table": "",
+          "is": "",
+          "never": "",
+          "indexed": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [
+        "crisis: infiltrated"
+      ],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-CND-1",
+      "pool": "DIRECTION: worsening · CRISIS: plague_onset",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 4,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)",
+          "op": "===",
+          "value": "plague_onset"
+        }
+      ],
+      "branchReads": [
+        "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "fieldsRead": [
+        "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "CRISIS_WORSENING_POOL_OF",
+      "rung": "table",
+      "reads": [
+        "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "overview.activeConditions"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "the": "",
+          "table": "",
+          "is": "",
+          "never": "",
+          "indexed": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [
+        "crisis: plague_onset"
+      ],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-CND-1",
+      "pool": "DIRECTION: stable · CRISIS: plague_onset",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 2,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)",
+          "op": "===",
+          "value": "plague_onset"
+        }
+      ],
+      "branchReads": [
+        "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)"
+      ],
+      "fieldsRead": [
+        "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "CRISIS_STABLE_POOL_OF",
+      "rung": "table",
+      "reads": [
+        "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "overview.activeConditions"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "the": "",
+          "table": "",
+          "is": "",
+          "never": "",
+          "indexed": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [
+        "crisis: plague_onset"
+      ],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-CND-1",
+      "pool": "DIRECTION: easing · CRISIS: plague_onset",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 2,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)",
+          "op": "===",
+          "value": "plague_onset"
+        }
+      ],
+      "branchReads": [
+        "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "fieldsRead": [
+        "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "CRISIS_EASING_POOL_OF",
+      "rung": "table",
+      "reads": [
+        "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "overview.activeConditions"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "the": "",
+          "table": "",
+          "is": "",
+          "never": "",
+          "indexed": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [
+        "crisis: plague_onset"
+      ],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-CND-1",
+      "pool": "DIRECTION: worsening · CRISIS: succession_void",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 2,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)",
+          "op": "===",
+          "value": "succession_void"
+        }
+      ],
+      "branchReads": [
+        "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "fieldsRead": [
+        "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "CRISIS_WORSENING_POOL_OF",
+      "rung": "table",
+      "reads": [
+        "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "overview.activeConditions"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "the": "",
+          "table": "",
+          "is": "",
+          "never": "",
+          "indexed": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [
+        "crisis: succession_void"
+      ],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-CND-1",
+      "pool": "DIRECTION: stable · CRISIS: succession_void",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 4,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)",
+          "op": "===",
+          "value": "succession_void"
+        }
+      ],
+      "branchReads": [
+        "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)"
+      ],
+      "fieldsRead": [
+        "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "CRISIS_STABLE_POOL_OF",
+      "rung": "table",
+      "reads": [
+        "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "overview.activeConditions"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "the": "",
+          "table": "",
+          "is": "",
+          "never": "",
+          "indexed": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [
+        "crisis: succession_void"
+      ],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-CND-1",
+      "pool": "DIRECTION: easing · CRISIS: succession_void",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 2,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)",
+          "op": "===",
+          "value": "succession_void"
+        }
+      ],
+      "branchReads": [
+        "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "fieldsRead": [
+        "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "CRISIS_EASING_POOL_OF",
+      "rung": "table",
+      "reads": [
+        "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "overview.activeConditions"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "the": "",
+          "table": "",
+          "is": "",
+          "never": "",
+          "indexed": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [
+        "crisis: succession_void"
+      ],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-CND-1",
+      "pool": "DIRECTION: worsening · CRISIS: monster_pressure",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 4,
+      "grammars": 2,
+      "predicate": [
+        {
+          "field": "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)",
+          "op": "===",
+          "value": "monster_pressure"
+        }
+      ],
+      "branchReads": [
+        "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "fieldsRead": [
+        "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "CRISIS_WORSENING_POOL_OF",
+      "rung": "table",
+      "reads": [
+        "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "overview.activeConditions"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "the": "",
+          "table": "",
+          "is": "",
+          "never": "",
+          "indexed": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [
+        "crisis: monster_pressure"
+      ],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-CND-1",
+      "pool": "DIRECTION: stable · CRISIS: monster_pressure",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 2,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)",
+          "op": "===",
+          "value": "monster_pressure"
+        }
+      ],
+      "branchReads": [
+        "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)"
+      ],
+      "fieldsRead": [
+        "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "CRISIS_STABLE_POOL_OF",
+      "rung": "table",
+      "reads": [
+        "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "overview.activeConditions"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "the": "",
+          "table": "",
+          "is": "",
+          "never": "",
+          "indexed": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [
+        "crisis: monster_pressure"
+      ],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-CND-1",
+      "pool": "DIRECTION: easing · CRISIS: monster_pressure",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 2,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)",
+          "op": "===",
+          "value": "monster_pressure"
+        }
+      ],
+      "branchReads": [
+        "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "fieldsRead": [
+        "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "CRISIS_EASING_POOL_OF",
+      "rung": "table",
+      "reads": [
+        "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "overview.activeConditions"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "the": "",
+          "table": "",
+          "is": "",
+          "never": "",
+          "indexed": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [
+        "crisis: monster_pressure"
+      ],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-CND-1",
+      "pool": "DIRECTION: worsening · CRISIS: insurgency",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 4,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)",
+          "op": "===",
+          "value": "insurgency"
+        }
+      ],
+      "branchReads": [
+        "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "fieldsRead": [
+        "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "CRISIS_WORSENING_POOL_OF",
+      "rung": "table",
+      "reads": [
+        "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "overview.activeConditions"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "the": "",
+          "table": "",
+          "is": "",
+          "never": "",
+          "indexed": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [
+        "crisis: insurgency"
+      ],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-CND-1",
+      "pool": "DIRECTION: stable · CRISIS: insurgency",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 2,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)",
+          "op": "===",
+          "value": "insurgency"
+        }
+      ],
+      "branchReads": [
+        "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)"
+      ],
+      "fieldsRead": [
+        "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "CRISIS_STABLE_POOL_OF",
+      "rung": "table",
+      "reads": [
+        "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "overview.activeConditions"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "the": "",
+          "table": "",
+          "is": "",
+          "never": "",
+          "indexed": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [
+        "crisis: insurgency"
+      ],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-CND-1",
+      "pool": "DIRECTION: easing · CRISIS: insurgency",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 2,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)",
+          "op": "===",
+          "value": "insurgency"
+        }
+      ],
+      "branchReads": [
+        "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "fieldsRead": [
+        "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "CRISIS_EASING_POOL_OF",
+      "rung": "table",
+      "reads": [
+        "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "overview.activeConditions"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "the": "",
+          "table": "",
+          "is": "",
+          "never": "",
+          "indexed": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [
+        "crisis: insurgency"
+      ],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-CND-1",
+      "pool": "DIRECTION: worsening · CRISIS: religious_conversion",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 2,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)",
+          "op": "===",
+          "value": "religious_conversion"
+        }
+      ],
+      "branchReads": [
+        "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "fieldsRead": [
+        "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "CRISIS_WORSENING_POOL_OF",
+      "rung": "table",
+      "reads": [
+        "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "overview.activeConditions"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "the": "",
+          "table": "",
+          "is": "",
+          "never": "",
+          "indexed": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [
+        "crisis: religious_conversion"
+      ],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-CND-1",
+      "pool": "DIRECTION: stable · CRISIS: religious_conversion",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 4,
+      "grammars": 2,
+      "predicate": [
+        {
+          "field": "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)",
+          "op": "===",
+          "value": "religious_conversion"
+        }
+      ],
+      "branchReads": [
+        "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)"
+      ],
+      "fieldsRead": [
+        "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "CRISIS_STABLE_POOL_OF",
+      "rung": "table",
+      "reads": [
+        "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "overview.activeConditions"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "the": "",
+          "table": "",
+          "is": "",
+          "never": "",
+          "indexed": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [
+        "crisis: religious_conversion"
+      ],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-CND-1",
+      "pool": "DIRECTION: easing · CRISIS: religious_conversion",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 2,
+      "grammars": 2,
+      "predicate": [
+        {
+          "field": "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)",
+          "op": "===",
+          "value": "religious_conversion"
+        }
+      ],
+      "branchReads": [
+        "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "fieldsRead": [
+        "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "CRISIS_EASING_POOL_OF",
+      "rung": "table",
+      "reads": [
+        "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "overview.activeConditions"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "the": "",
+          "table": "",
+          "is": "",
+          "never": "",
+          "indexed": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [
+        "crisis: religious_conversion"
+      ],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-CND-1",
+      "pool": "DIRECTION: worsening · CRISIS: slave_revolt",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 4,
+      "grammars": 2,
+      "predicate": [
+        {
+          "field": "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)",
+          "op": "===",
+          "value": "slave_revolt"
+        }
+      ],
+      "branchReads": [
+        "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "fieldsRead": [
+        "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "CRISIS_WORSENING_POOL_OF",
+      "rung": "table",
+      "reads": [
+        "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "overview.activeConditions"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "the": "",
+          "table": "",
+          "is": "",
+          "never": "",
+          "indexed": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [
+        "crisis: slave_revolt"
+      ],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-CND-1",
+      "pool": "DIRECTION: stable · CRISIS: slave_revolt",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 2,
+      "grammars": 2,
+      "predicate": [
+        {
+          "field": "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)",
+          "op": "===",
+          "value": "slave_revolt"
+        }
+      ],
+      "branchReads": [
+        "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)"
+      ],
+      "fieldsRead": [
+        "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "CRISIS_STABLE_POOL_OF",
+      "rung": "table",
+      "reads": [
+        "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "overview.activeConditions"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "the": "",
+          "table": "",
+          "is": "",
+          "never": "",
+          "indexed": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [
+        "crisis: slave_revolt"
+      ],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-CND-1",
+      "pool": "DIRECTION: easing · CRISIS: slave_revolt",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 2,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)",
+          "op": "===",
+          "value": "slave_revolt"
+        }
+      ],
+      "branchReads": [
+        "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "fieldsRead": [
+        "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "CRISIS_EASING_POOL_OF",
+      "rung": "table",
+      "reads": [
+        "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "overview.activeConditions"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "the": "",
+          "table": "",
+          "is": "",
+          "never": "",
+          "indexed": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [
+        "crisis: slave_revolt"
+      ],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-CND-1",
+      "pool": "DIRECTION: worsening · CRISIS: wartime",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 4,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)",
+          "op": "===",
+          "value": "wartime"
+        }
+      ],
+      "branchReads": [
+        "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "fieldsRead": [
+        "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "CRISIS_WORSENING_POOL_OF",
+      "rung": "table",
+      "reads": [
+        "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "overview.activeConditions"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "the": "",
+          "table": "",
+          "is": "",
+          "never": "",
+          "indexed": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [
+        "crisis: wartime"
+      ],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-CND-1",
+      "pool": "DIRECTION: stable · CRISIS: wartime",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 2,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)",
+          "op": "===",
+          "value": "wartime"
+        }
+      ],
+      "branchReads": [
+        "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)"
+      ],
+      "fieldsRead": [
+        "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "CRISIS_STABLE_POOL_OF",
+      "rung": "table",
+      "reads": [
+        "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "overview.activeConditions"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "the": "",
+          "table": "",
+          "is": "",
+          "never": "",
+          "indexed": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [
+        "crisis: wartime"
+      ],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-CND-1",
+      "pool": "DIRECTION: easing · CRISIS: wartime",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 2,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)",
+          "op": "===",
+          "value": "wartime"
+        }
+      ],
+      "branchReads": [
+        "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "fieldsRead": [
+        "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "CRISIS_EASING_POOL_OF",
+      "rung": "table",
+      "reads": [
+        "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "overview.activeConditions"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "the": "",
+          "table": "",
+          "is": "",
+          "never": "",
+          "indexed": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [
+        "crisis: wartime"
+      ],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-CND-1",
+      "pool": "DIRECTION: worsening · CRISIS: mass_migration",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 8,
+      "grammars": 2,
+      "predicate": [
+        {
+          "field": "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)",
+          "op": "===",
+          "value": "mass_migration"
+        }
+      ],
+      "branchReads": [
+        "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "fieldsRead": [
+        "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "CRISIS_WORSENING_POOL_OF",
+      "rung": "table",
+      "reads": [
+        "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "overview.activeConditions"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "the": "",
+          "table": "",
+          "is": "",
+          "never": "",
+          "indexed": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [
+        "crisis: mass_migration"
+      ],
+      "lineDeclares": {
+        "migration: exodus": 4,
+        "migration: influx": 4
+      },
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-CND-1",
+      "pool": "DIRECTION: stable · CRISIS: mass_migration",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 4,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)",
+          "op": "===",
+          "value": "mass_migration"
+        }
+      ],
+      "branchReads": [
+        "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)"
+      ],
+      "fieldsRead": [
+        "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "CRISIS_STABLE_POOL_OF",
+      "rung": "table",
+      "reads": [
+        "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "overview.activeConditions"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "the": "",
+          "table": "",
+          "is": "",
+          "never": "",
+          "indexed": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [
+        "crisis: mass_migration"
+      ],
+      "lineDeclares": {
+        "migration: exodus": 2,
+        "migration: influx": 2
+      },
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-CND-1",
+      "pool": "DIRECTION: easing · CRISIS: mass_migration",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 4,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)",
+          "op": "===",
+          "value": "mass_migration"
+        }
+      ],
+      "branchReads": [
+        "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "fieldsRead": [
+        "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "CRISIS_EASING_POOL_OF",
+      "rung": "table",
+      "reads": [
+        "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "overview.activeConditions"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "the": "",
+          "table": "",
+          "is": "",
+          "never": "",
+          "indexed": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [
+        "crisis: mass_migration"
+      ],
+      "lineDeclares": {
+        "migration: exodus": 2,
+        "migration: influx": 2
+      },
       "undeclared": 0,
       "crisisScoped": false
     },
@@ -34623,7 +37696,7 @@
       ],
       "hasBag": true,
       "variants": 3,
-      "grammars": 3,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [
         "condition"
@@ -34741,7 +37814,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -34941,7 +38014,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 4,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -44359,6 +47432,81 @@
   },
   "factIndex": [
     {
+      "fact": "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)",
+      "pools": [
+        "DS-CND-1 :: DIRECTION: easing · CRISIS: under_siege",
+        "DS-CND-1 :: DIRECTION: easing · CRISIS: famine",
+        "DS-CND-1 :: DIRECTION: easing · CRISIS: occupied",
+        "DS-CND-1 :: DIRECTION: easing · CRISIS: politically_fractured",
+        "DS-CND-1 :: DIRECTION: easing · CRISIS: indebted",
+        "DS-CND-1 :: DIRECTION: easing · CRISIS: recently_betrayed",
+        "DS-CND-1 :: DIRECTION: easing · CRISIS: infiltrated",
+        "DS-CND-1 :: DIRECTION: easing · CRISIS: plague_onset",
+        "DS-CND-1 :: DIRECTION: easing · CRISIS: succession_void",
+        "DS-CND-1 :: DIRECTION: easing · CRISIS: monster_pressure",
+        "DS-CND-1 :: DIRECTION: easing · CRISIS: insurgency",
+        "DS-CND-1 :: DIRECTION: easing · CRISIS: religious_conversion",
+        "DS-CND-1 :: DIRECTION: easing · CRISIS: slave_revolt",
+        "DS-CND-1 :: DIRECTION: easing · CRISIS: wartime",
+        "DS-CND-1 :: DIRECTION: easing · CRISIS: mass_migration"
+      ],
+      "variants": 32,
+      "grammars": 17,
+      "blocks": [
+        "DS-CND-1"
+      ]
+    },
+    {
+      "fact": "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)",
+      "pools": [
+        "DS-CND-1 :: DIRECTION: stable · CRISIS: under_siege",
+        "DS-CND-1 :: DIRECTION: stable · CRISIS: famine",
+        "DS-CND-1 :: DIRECTION: stable · CRISIS: occupied",
+        "DS-CND-1 :: DIRECTION: stable · CRISIS: politically_fractured",
+        "DS-CND-1 :: DIRECTION: stable · CRISIS: indebted",
+        "DS-CND-1 :: DIRECTION: stable · CRISIS: recently_betrayed",
+        "DS-CND-1 :: DIRECTION: stable · CRISIS: infiltrated",
+        "DS-CND-1 :: DIRECTION: stable · CRISIS: plague_onset",
+        "DS-CND-1 :: DIRECTION: stable · CRISIS: succession_void",
+        "DS-CND-1 :: DIRECTION: stable · CRISIS: monster_pressure",
+        "DS-CND-1 :: DIRECTION: stable · CRISIS: insurgency",
+        "DS-CND-1 :: DIRECTION: stable · CRISIS: religious_conversion",
+        "DS-CND-1 :: DIRECTION: stable · CRISIS: slave_revolt",
+        "DS-CND-1 :: DIRECTION: stable · CRISIS: wartime",
+        "DS-CND-1 :: DIRECTION: stable · CRISIS: mass_migration"
+      ],
+      "variants": 40,
+      "grammars": 18,
+      "blocks": [
+        "DS-CND-1"
+      ]
+    },
+    {
+      "fact": "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)",
+      "pools": [
+        "DS-CND-1 :: DIRECTION: worsening · CRISIS: under_siege",
+        "DS-CND-1 :: DIRECTION: worsening · CRISIS: famine",
+        "DS-CND-1 :: DIRECTION: worsening · CRISIS: occupied",
+        "DS-CND-1 :: DIRECTION: worsening · CRISIS: politically_fractured",
+        "DS-CND-1 :: DIRECTION: worsening · CRISIS: indebted",
+        "DS-CND-1 :: DIRECTION: worsening · CRISIS: recently_betrayed",
+        "DS-CND-1 :: DIRECTION: worsening · CRISIS: infiltrated",
+        "DS-CND-1 :: DIRECTION: worsening · CRISIS: plague_onset",
+        "DS-CND-1 :: DIRECTION: worsening · CRISIS: succession_void",
+        "DS-CND-1 :: DIRECTION: worsening · CRISIS: monster_pressure",
+        "DS-CND-1 :: DIRECTION: worsening · CRISIS: insurgency",
+        "DS-CND-1 :: DIRECTION: worsening · CRISIS: religious_conversion",
+        "DS-CND-1 :: DIRECTION: worsening · CRISIS: slave_revolt",
+        "DS-CND-1 :: DIRECTION: worsening · CRISIS: wartime",
+        "DS-CND-1 :: DIRECTION: worsening · CRISIS: mass_migration"
+      ],
+      "variants": 56,
+      "grammars": 20,
+      "blocks": [
+        "DS-CND-1"
+      ]
+    },
+    {
       "fact": "`${text(note?.type)}|${text(note?.tab)}` (via COHERENCE_POOL_OF in generalStateProse.js)",
       "pools": [
         "DS-GEN-7 :: power_economic: criminal faction in a transit hub",
@@ -45212,6 +48360,33 @@
   ],
   "mountsPerFact": {
     "rows": [
+      {
+        "field": "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse",
+        "mountsSpine": 1,
+        "mountsModifier": 0,
+        "spineTabs": [
+          "overview"
+        ],
+        "modifierMounts": []
+      },
+      {
+        "field": "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse",
+        "mountsSpine": 1,
+        "mountsModifier": 0,
+        "spineTabs": [
+          "overview"
+        ],
+        "modifierMounts": []
+      },
+      {
+        "field": "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse",
+        "mountsSpine": 1,
+        "mountsModifier": 0,
+        "spineTabs": [
+          "overview"
+        ],
+        "modifierMounts": []
+      },
       {
         "field": "`${text(note?",
         "mountsSpine": 1,
@@ -47599,10 +50774,10 @@
   "attachCoverage": [
     {
       "block": "DS-CND-1",
-      "spines": 12,
-      "facts": 5,
+      "spines": 57,
+      "facts": 8,
       "spinesReachedBp": 10000,
-      "meanReachBp": 7500
+      "meanReachBp": 8684
     },
     {
       "block": "DS-DEF-1",
@@ -47958,11 +51133,152 @@
   "attachByFact": [
     {
       "block": "DS-CND-1",
-      "spines": 12,
-      "facts": 5,
+      "spines": 57,
+      "facts": 8,
       "spinesReachedBp": 10000,
-      "meanReachBp": 7500,
+      "meanReachBp": 8684,
       "byFact": [
+        {
+          "field": "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)",
+          "attach": [
+            "SEVERITY: low",
+            "SEVERITY: medium",
+            "SEVERITY: high",
+            "SEVERITY: critical",
+            "DIRECTION: worsening",
+            "DIRECTION: easing",
+            "DIRECTION: worsening · CRISIS: under_siege",
+            "DIRECTION: stable · CRISIS: under_siege",
+            "DIRECTION: worsening · CRISIS: famine",
+            "DIRECTION: stable · CRISIS: famine",
+            "DIRECTION: worsening · CRISIS: occupied",
+            "DIRECTION: stable · CRISIS: occupied",
+            "DIRECTION: worsening · CRISIS: politically_fractured",
+            "DIRECTION: stable · CRISIS: politically_fractured",
+            "DIRECTION: worsening · CRISIS: indebted",
+            "DIRECTION: stable · CRISIS: indebted",
+            "DIRECTION: worsening · CRISIS: recently_betrayed",
+            "DIRECTION: stable · CRISIS: recently_betrayed",
+            "DIRECTION: worsening · CRISIS: infiltrated",
+            "DIRECTION: stable · CRISIS: infiltrated",
+            "DIRECTION: worsening · CRISIS: plague_onset",
+            "DIRECTION: stable · CRISIS: plague_onset",
+            "DIRECTION: worsening · CRISIS: succession_void",
+            "DIRECTION: stable · CRISIS: succession_void",
+            "DIRECTION: worsening · CRISIS: monster_pressure",
+            "DIRECTION: stable · CRISIS: monster_pressure",
+            "DIRECTION: worsening · CRISIS: insurgency",
+            "DIRECTION: stable · CRISIS: insurgency",
+            "DIRECTION: worsening · CRISIS: religious_conversion",
+            "DIRECTION: stable · CRISIS: religious_conversion",
+            "DIRECTION: worsening · CRISIS: slave_revolt",
+            "DIRECTION: stable · CRISIS: slave_revolt",
+            "DIRECTION: worsening · CRISIS: wartime",
+            "DIRECTION: stable · CRISIS: wartime",
+            "DIRECTION: worsening · CRISIS: mass_migration",
+            "DIRECTION: stable · CRISIS: mass_migration",
+            "ARCHETYPE: reconstruction",
+            "ARCHETYPE: boom",
+            "ARCHETYPE: flourishing",
+            "PROVENANCE: causes[] or triggeredAt.sourceEventType populated",
+            "PROVENANCE: no causes[] and no sourceEventType",
+            "DURATION: inside the expiry wind-down window"
+          ]
+        },
+        {
+          "field": "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)",
+          "attach": [
+            "SEVERITY: low",
+            "SEVERITY: medium",
+            "SEVERITY: high",
+            "SEVERITY: critical",
+            "DIRECTION: worsening",
+            "DIRECTION: easing",
+            "DIRECTION: worsening · CRISIS: under_siege",
+            "DIRECTION: easing · CRISIS: under_siege",
+            "DIRECTION: worsening · CRISIS: famine",
+            "DIRECTION: easing · CRISIS: famine",
+            "DIRECTION: worsening · CRISIS: occupied",
+            "DIRECTION: easing · CRISIS: occupied",
+            "DIRECTION: worsening · CRISIS: politically_fractured",
+            "DIRECTION: easing · CRISIS: politically_fractured",
+            "DIRECTION: worsening · CRISIS: indebted",
+            "DIRECTION: easing · CRISIS: indebted",
+            "DIRECTION: worsening · CRISIS: recently_betrayed",
+            "DIRECTION: easing · CRISIS: recently_betrayed",
+            "DIRECTION: worsening · CRISIS: infiltrated",
+            "DIRECTION: easing · CRISIS: infiltrated",
+            "DIRECTION: worsening · CRISIS: plague_onset",
+            "DIRECTION: easing · CRISIS: plague_onset",
+            "DIRECTION: worsening · CRISIS: succession_void",
+            "DIRECTION: easing · CRISIS: succession_void",
+            "DIRECTION: worsening · CRISIS: monster_pressure",
+            "DIRECTION: easing · CRISIS: monster_pressure",
+            "DIRECTION: worsening · CRISIS: insurgency",
+            "DIRECTION: easing · CRISIS: insurgency",
+            "DIRECTION: worsening · CRISIS: religious_conversion",
+            "DIRECTION: easing · CRISIS: religious_conversion",
+            "DIRECTION: worsening · CRISIS: slave_revolt",
+            "DIRECTION: easing · CRISIS: slave_revolt",
+            "DIRECTION: worsening · CRISIS: wartime",
+            "DIRECTION: easing · CRISIS: wartime",
+            "DIRECTION: worsening · CRISIS: mass_migration",
+            "DIRECTION: easing · CRISIS: mass_migration",
+            "ARCHETYPE: reconstruction",
+            "ARCHETYPE: boom",
+            "ARCHETYPE: flourishing",
+            "PROVENANCE: causes[] or triggeredAt.sourceEventType populated",
+            "PROVENANCE: no causes[] and no sourceEventType",
+            "DURATION: inside the expiry wind-down window"
+          ]
+        },
+        {
+          "field": "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)",
+          "attach": [
+            "SEVERITY: low",
+            "SEVERITY: medium",
+            "SEVERITY: high",
+            "SEVERITY: critical",
+            "DIRECTION: worsening",
+            "DIRECTION: easing",
+            "DIRECTION: stable · CRISIS: under_siege",
+            "DIRECTION: easing · CRISIS: under_siege",
+            "DIRECTION: stable · CRISIS: famine",
+            "DIRECTION: easing · CRISIS: famine",
+            "DIRECTION: stable · CRISIS: occupied",
+            "DIRECTION: easing · CRISIS: occupied",
+            "DIRECTION: stable · CRISIS: politically_fractured",
+            "DIRECTION: easing · CRISIS: politically_fractured",
+            "DIRECTION: stable · CRISIS: indebted",
+            "DIRECTION: easing · CRISIS: indebted",
+            "DIRECTION: stable · CRISIS: recently_betrayed",
+            "DIRECTION: easing · CRISIS: recently_betrayed",
+            "DIRECTION: stable · CRISIS: infiltrated",
+            "DIRECTION: easing · CRISIS: infiltrated",
+            "DIRECTION: stable · CRISIS: plague_onset",
+            "DIRECTION: easing · CRISIS: plague_onset",
+            "DIRECTION: stable · CRISIS: succession_void",
+            "DIRECTION: easing · CRISIS: succession_void",
+            "DIRECTION: stable · CRISIS: monster_pressure",
+            "DIRECTION: easing · CRISIS: monster_pressure",
+            "DIRECTION: stable · CRISIS: insurgency",
+            "DIRECTION: easing · CRISIS: insurgency",
+            "DIRECTION: stable · CRISIS: religious_conversion",
+            "DIRECTION: easing · CRISIS: religious_conversion",
+            "DIRECTION: stable · CRISIS: slave_revolt",
+            "DIRECTION: easing · CRISIS: slave_revolt",
+            "DIRECTION: stable · CRISIS: wartime",
+            "DIRECTION: easing · CRISIS: wartime",
+            "DIRECTION: stable · CRISIS: mass_migration",
+            "DIRECTION: easing · CRISIS: mass_migration",
+            "ARCHETYPE: reconstruction",
+            "ARCHETYPE: boom",
+            "ARCHETYPE: flourishing",
+            "PROVENANCE: causes[] or triggeredAt.sourceEventType populated",
+            "PROVENANCE: no causes[] and no sourceEventType",
+            "DURATION: inside the expiry wind-down window"
+          ]
+        },
         {
           "field": "condition",
           "attach": [
@@ -47970,6 +51286,51 @@
             "SEVERITY: medium",
             "SEVERITY: high",
             "SEVERITY: critical",
+            "DIRECTION: worsening · CRISIS: under_siege",
+            "DIRECTION: stable · CRISIS: under_siege",
+            "DIRECTION: easing · CRISIS: under_siege",
+            "DIRECTION: worsening · CRISIS: famine",
+            "DIRECTION: stable · CRISIS: famine",
+            "DIRECTION: easing · CRISIS: famine",
+            "DIRECTION: worsening · CRISIS: occupied",
+            "DIRECTION: stable · CRISIS: occupied",
+            "DIRECTION: easing · CRISIS: occupied",
+            "DIRECTION: worsening · CRISIS: politically_fractured",
+            "DIRECTION: stable · CRISIS: politically_fractured",
+            "DIRECTION: easing · CRISIS: politically_fractured",
+            "DIRECTION: worsening · CRISIS: indebted",
+            "DIRECTION: stable · CRISIS: indebted",
+            "DIRECTION: easing · CRISIS: indebted",
+            "DIRECTION: worsening · CRISIS: recently_betrayed",
+            "DIRECTION: stable · CRISIS: recently_betrayed",
+            "DIRECTION: easing · CRISIS: recently_betrayed",
+            "DIRECTION: worsening · CRISIS: infiltrated",
+            "DIRECTION: stable · CRISIS: infiltrated",
+            "DIRECTION: easing · CRISIS: infiltrated",
+            "DIRECTION: worsening · CRISIS: plague_onset",
+            "DIRECTION: stable · CRISIS: plague_onset",
+            "DIRECTION: easing · CRISIS: plague_onset",
+            "DIRECTION: worsening · CRISIS: succession_void",
+            "DIRECTION: stable · CRISIS: succession_void",
+            "DIRECTION: easing · CRISIS: succession_void",
+            "DIRECTION: worsening · CRISIS: monster_pressure",
+            "DIRECTION: stable · CRISIS: monster_pressure",
+            "DIRECTION: easing · CRISIS: monster_pressure",
+            "DIRECTION: worsening · CRISIS: insurgency",
+            "DIRECTION: stable · CRISIS: insurgency",
+            "DIRECTION: easing · CRISIS: insurgency",
+            "DIRECTION: worsening · CRISIS: religious_conversion",
+            "DIRECTION: stable · CRISIS: religious_conversion",
+            "DIRECTION: easing · CRISIS: religious_conversion",
+            "DIRECTION: worsening · CRISIS: slave_revolt",
+            "DIRECTION: stable · CRISIS: slave_revolt",
+            "DIRECTION: easing · CRISIS: slave_revolt",
+            "DIRECTION: worsening · CRISIS: wartime",
+            "DIRECTION: stable · CRISIS: wartime",
+            "DIRECTION: easing · CRISIS: wartime",
+            "DIRECTION: worsening · CRISIS: mass_migration",
+            "DIRECTION: stable · CRISIS: mass_migration",
+            "DIRECTION: easing · CRISIS: mass_migration",
             "ARCHETYPE: reconstruction",
             "ARCHETYPE: boom",
             "ARCHETYPE: flourishing"
@@ -47984,6 +51345,51 @@
             "SEVERITY: critical",
             "DIRECTION: worsening",
             "DIRECTION: easing",
+            "DIRECTION: worsening · CRISIS: under_siege",
+            "DIRECTION: stable · CRISIS: under_siege",
+            "DIRECTION: easing · CRISIS: under_siege",
+            "DIRECTION: worsening · CRISIS: famine",
+            "DIRECTION: stable · CRISIS: famine",
+            "DIRECTION: easing · CRISIS: famine",
+            "DIRECTION: worsening · CRISIS: occupied",
+            "DIRECTION: stable · CRISIS: occupied",
+            "DIRECTION: easing · CRISIS: occupied",
+            "DIRECTION: worsening · CRISIS: politically_fractured",
+            "DIRECTION: stable · CRISIS: politically_fractured",
+            "DIRECTION: easing · CRISIS: politically_fractured",
+            "DIRECTION: worsening · CRISIS: indebted",
+            "DIRECTION: stable · CRISIS: indebted",
+            "DIRECTION: easing · CRISIS: indebted",
+            "DIRECTION: worsening · CRISIS: recently_betrayed",
+            "DIRECTION: stable · CRISIS: recently_betrayed",
+            "DIRECTION: easing · CRISIS: recently_betrayed",
+            "DIRECTION: worsening · CRISIS: infiltrated",
+            "DIRECTION: stable · CRISIS: infiltrated",
+            "DIRECTION: easing · CRISIS: infiltrated",
+            "DIRECTION: worsening · CRISIS: plague_onset",
+            "DIRECTION: stable · CRISIS: plague_onset",
+            "DIRECTION: easing · CRISIS: plague_onset",
+            "DIRECTION: worsening · CRISIS: succession_void",
+            "DIRECTION: stable · CRISIS: succession_void",
+            "DIRECTION: easing · CRISIS: succession_void",
+            "DIRECTION: worsening · CRISIS: monster_pressure",
+            "DIRECTION: stable · CRISIS: monster_pressure",
+            "DIRECTION: easing · CRISIS: monster_pressure",
+            "DIRECTION: worsening · CRISIS: insurgency",
+            "DIRECTION: stable · CRISIS: insurgency",
+            "DIRECTION: easing · CRISIS: insurgency",
+            "DIRECTION: worsening · CRISIS: religious_conversion",
+            "DIRECTION: stable · CRISIS: religious_conversion",
+            "DIRECTION: easing · CRISIS: religious_conversion",
+            "DIRECTION: worsening · CRISIS: slave_revolt",
+            "DIRECTION: stable · CRISIS: slave_revolt",
+            "DIRECTION: easing · CRISIS: slave_revolt",
+            "DIRECTION: worsening · CRISIS: wartime",
+            "DIRECTION: stable · CRISIS: wartime",
+            "DIRECTION: easing · CRISIS: wartime",
+            "DIRECTION: worsening · CRISIS: mass_migration",
+            "DIRECTION: stable · CRISIS: mass_migration",
+            "DIRECTION: easing · CRISIS: mass_migration",
             "PROVENANCE: causes[] or triggeredAt.sourceEventType populated",
             "PROVENANCE: no causes[] and no sourceEventType",
             "DURATION: inside the expiry wind-down window"
@@ -47998,6 +51404,51 @@
             "SEVERITY: critical",
             "DIRECTION: worsening",
             "DIRECTION: easing",
+            "DIRECTION: worsening · CRISIS: under_siege",
+            "DIRECTION: stable · CRISIS: under_siege",
+            "DIRECTION: easing · CRISIS: under_siege",
+            "DIRECTION: worsening · CRISIS: famine",
+            "DIRECTION: stable · CRISIS: famine",
+            "DIRECTION: easing · CRISIS: famine",
+            "DIRECTION: worsening · CRISIS: occupied",
+            "DIRECTION: stable · CRISIS: occupied",
+            "DIRECTION: easing · CRISIS: occupied",
+            "DIRECTION: worsening · CRISIS: politically_fractured",
+            "DIRECTION: stable · CRISIS: politically_fractured",
+            "DIRECTION: easing · CRISIS: politically_fractured",
+            "DIRECTION: worsening · CRISIS: indebted",
+            "DIRECTION: stable · CRISIS: indebted",
+            "DIRECTION: easing · CRISIS: indebted",
+            "DIRECTION: worsening · CRISIS: recently_betrayed",
+            "DIRECTION: stable · CRISIS: recently_betrayed",
+            "DIRECTION: easing · CRISIS: recently_betrayed",
+            "DIRECTION: worsening · CRISIS: infiltrated",
+            "DIRECTION: stable · CRISIS: infiltrated",
+            "DIRECTION: easing · CRISIS: infiltrated",
+            "DIRECTION: worsening · CRISIS: plague_onset",
+            "DIRECTION: stable · CRISIS: plague_onset",
+            "DIRECTION: easing · CRISIS: plague_onset",
+            "DIRECTION: worsening · CRISIS: succession_void",
+            "DIRECTION: stable · CRISIS: succession_void",
+            "DIRECTION: easing · CRISIS: succession_void",
+            "DIRECTION: worsening · CRISIS: monster_pressure",
+            "DIRECTION: stable · CRISIS: monster_pressure",
+            "DIRECTION: easing · CRISIS: monster_pressure",
+            "DIRECTION: worsening · CRISIS: insurgency",
+            "DIRECTION: stable · CRISIS: insurgency",
+            "DIRECTION: easing · CRISIS: insurgency",
+            "DIRECTION: worsening · CRISIS: religious_conversion",
+            "DIRECTION: stable · CRISIS: religious_conversion",
+            "DIRECTION: easing · CRISIS: religious_conversion",
+            "DIRECTION: worsening · CRISIS: slave_revolt",
+            "DIRECTION: stable · CRISIS: slave_revolt",
+            "DIRECTION: easing · CRISIS: slave_revolt",
+            "DIRECTION: worsening · CRISIS: wartime",
+            "DIRECTION: stable · CRISIS: wartime",
+            "DIRECTION: easing · CRISIS: wartime",
+            "DIRECTION: worsening · CRISIS: mass_migration",
+            "DIRECTION: stable · CRISIS: mass_migration",
+            "DIRECTION: easing · CRISIS: mass_migration",
             "ARCHETYPE: reconstruction",
             "ARCHETYPE: boom",
             "ARCHETYPE: flourishing",
@@ -48010,6 +51461,51 @@
           "attach": [
             "DIRECTION: worsening",
             "DIRECTION: easing",
+            "DIRECTION: worsening · CRISIS: under_siege",
+            "DIRECTION: stable · CRISIS: under_siege",
+            "DIRECTION: easing · CRISIS: under_siege",
+            "DIRECTION: worsening · CRISIS: famine",
+            "DIRECTION: stable · CRISIS: famine",
+            "DIRECTION: easing · CRISIS: famine",
+            "DIRECTION: worsening · CRISIS: occupied",
+            "DIRECTION: stable · CRISIS: occupied",
+            "DIRECTION: easing · CRISIS: occupied",
+            "DIRECTION: worsening · CRISIS: politically_fractured",
+            "DIRECTION: stable · CRISIS: politically_fractured",
+            "DIRECTION: easing · CRISIS: politically_fractured",
+            "DIRECTION: worsening · CRISIS: indebted",
+            "DIRECTION: stable · CRISIS: indebted",
+            "DIRECTION: easing · CRISIS: indebted",
+            "DIRECTION: worsening · CRISIS: recently_betrayed",
+            "DIRECTION: stable · CRISIS: recently_betrayed",
+            "DIRECTION: easing · CRISIS: recently_betrayed",
+            "DIRECTION: worsening · CRISIS: infiltrated",
+            "DIRECTION: stable · CRISIS: infiltrated",
+            "DIRECTION: easing · CRISIS: infiltrated",
+            "DIRECTION: worsening · CRISIS: plague_onset",
+            "DIRECTION: stable · CRISIS: plague_onset",
+            "DIRECTION: easing · CRISIS: plague_onset",
+            "DIRECTION: worsening · CRISIS: succession_void",
+            "DIRECTION: stable · CRISIS: succession_void",
+            "DIRECTION: easing · CRISIS: succession_void",
+            "DIRECTION: worsening · CRISIS: monster_pressure",
+            "DIRECTION: stable · CRISIS: monster_pressure",
+            "DIRECTION: easing · CRISIS: monster_pressure",
+            "DIRECTION: worsening · CRISIS: insurgency",
+            "DIRECTION: stable · CRISIS: insurgency",
+            "DIRECTION: easing · CRISIS: insurgency",
+            "DIRECTION: worsening · CRISIS: religious_conversion",
+            "DIRECTION: stable · CRISIS: religious_conversion",
+            "DIRECTION: easing · CRISIS: religious_conversion",
+            "DIRECTION: worsening · CRISIS: slave_revolt",
+            "DIRECTION: stable · CRISIS: slave_revolt",
+            "DIRECTION: easing · CRISIS: slave_revolt",
+            "DIRECTION: worsening · CRISIS: wartime",
+            "DIRECTION: stable · CRISIS: wartime",
+            "DIRECTION: easing · CRISIS: wartime",
+            "DIRECTION: worsening · CRISIS: mass_migration",
+            "DIRECTION: stable · CRISIS: mass_migration",
+            "DIRECTION: easing · CRISIS: mass_migration",
             "ARCHETYPE: reconstruction",
             "ARCHETYPE: boom",
             "ARCHETYPE: flourishing",
@@ -48025,6 +51521,51 @@
             "SEVERITY: medium",
             "SEVERITY: high",
             "SEVERITY: critical",
+            "DIRECTION: worsening · CRISIS: under_siege",
+            "DIRECTION: stable · CRISIS: under_siege",
+            "DIRECTION: easing · CRISIS: under_siege",
+            "DIRECTION: worsening · CRISIS: famine",
+            "DIRECTION: stable · CRISIS: famine",
+            "DIRECTION: easing · CRISIS: famine",
+            "DIRECTION: worsening · CRISIS: occupied",
+            "DIRECTION: stable · CRISIS: occupied",
+            "DIRECTION: easing · CRISIS: occupied",
+            "DIRECTION: worsening · CRISIS: politically_fractured",
+            "DIRECTION: stable · CRISIS: politically_fractured",
+            "DIRECTION: easing · CRISIS: politically_fractured",
+            "DIRECTION: worsening · CRISIS: indebted",
+            "DIRECTION: stable · CRISIS: indebted",
+            "DIRECTION: easing · CRISIS: indebted",
+            "DIRECTION: worsening · CRISIS: recently_betrayed",
+            "DIRECTION: stable · CRISIS: recently_betrayed",
+            "DIRECTION: easing · CRISIS: recently_betrayed",
+            "DIRECTION: worsening · CRISIS: infiltrated",
+            "DIRECTION: stable · CRISIS: infiltrated",
+            "DIRECTION: easing · CRISIS: infiltrated",
+            "DIRECTION: worsening · CRISIS: plague_onset",
+            "DIRECTION: stable · CRISIS: plague_onset",
+            "DIRECTION: easing · CRISIS: plague_onset",
+            "DIRECTION: worsening · CRISIS: succession_void",
+            "DIRECTION: stable · CRISIS: succession_void",
+            "DIRECTION: easing · CRISIS: succession_void",
+            "DIRECTION: worsening · CRISIS: monster_pressure",
+            "DIRECTION: stable · CRISIS: monster_pressure",
+            "DIRECTION: easing · CRISIS: monster_pressure",
+            "DIRECTION: worsening · CRISIS: insurgency",
+            "DIRECTION: stable · CRISIS: insurgency",
+            "DIRECTION: easing · CRISIS: insurgency",
+            "DIRECTION: worsening · CRISIS: religious_conversion",
+            "DIRECTION: stable · CRISIS: religious_conversion",
+            "DIRECTION: easing · CRISIS: religious_conversion",
+            "DIRECTION: worsening · CRISIS: slave_revolt",
+            "DIRECTION: stable · CRISIS: slave_revolt",
+            "DIRECTION: easing · CRISIS: slave_revolt",
+            "DIRECTION: worsening · CRISIS: wartime",
+            "DIRECTION: stable · CRISIS: wartime",
+            "DIRECTION: easing · CRISIS: wartime",
+            "DIRECTION: worsening · CRISIS: mass_migration",
+            "DIRECTION: stable · CRISIS: mass_migration",
+            "DIRECTION: easing · CRISIS: mass_migration",
             "ARCHETYPE: reconstruction",
             "ARCHETYPE: boom",
             "ARCHETYPE: flourishing",
@@ -50279,7 +53820,7 @@
   ],
   "factBudget": {
     "zeroK": 51,
-    "executable": 348,
+    "executable": 393,
     "notExecutable": 368,
     "byBlock": [
       [
@@ -50622,7 +54163,7 @@
         "DS-CND-1",
         {
           "zeroK": 0,
-          "spines": 12
+          "spines": 57
         }
       ],
       [
@@ -50659,14 +54200,14 @@
       ],
       [
         2,
-        212
+        257
       ]
     ]
   },
   "grains": {
     "branch": {
       "zeroK": 51,
-      "executable": 348,
+      "executable": 393,
       "notExecutable": 368,
       "histogram": [
         [
@@ -50687,7 +54228,7 @@
         ],
         [
           2,
-          212
+          257
         ]
       ],
       "blocksWithSpine": 51,
@@ -50713,7 +54254,7 @@
         "DS-STR-1",
         "DS-WAR-3"
       ],
-      "readPaths": 569,
+      "readPaths": 614,
       "modifierEligibleFactsByTab": [
         [
           "viability",
@@ -50771,7 +54312,7 @@
     },
     "function": {
       "zeroK": 127,
-      "executable": 348,
+      "executable": 393,
       "notExecutable": 368,
       "histogram": [
         [
@@ -50800,7 +54341,7 @@
         ],
         [
           2,
-          132
+          177
         ]
       ],
       "blocksWithSpine": 51,
@@ -50830,7 +54371,7 @@
         "DS-STR-1",
         "DS-WAR-3"
       ],
-      "readPaths": 806,
+      "readPaths": 851,
       "modifierEligibleFactsByTab": [
         [
           "viability",
@@ -51176,12 +54717,12 @@
       "rows": {
         "LICENSED": 114,
         "OFFICE": 3,
-        "SOURCE-UNRESOLVED": 599
+        "SOURCE-UNRESOLVED": 644
       },
       "fields": {
         "LICENSED": 191,
         "OFFICE": 5,
-        "SOURCE-UNRESOLVED": 433
+        "SOURCE-UNRESOLVED": 658
       },
       "byKind": [
         [
@@ -51226,7 +54767,7 @@
         ]
       ],
       "unresolvedGrounds": {
-        "no-mapping": 433,
+        "no-mapping": 658,
         "no-institution-in-roster": 0
       },
       "twoSourceRows": 10,
@@ -52585,8 +56126,8 @@
       "leafBoth": 0,
       "leafEither": 2,
       "leafRows": [],
-      "deskRoots": 93,
-      "deskSegments": 202
+      "deskRoots": 96,
+      "deskSegments": 210
     }
   },
   "ratifiedAliases": {
@@ -58208,22 +61749,22 @@
       "count": "3 variant(s) · 3 grammar(s) · slots {settlement}"
     },
     {
-      "tier": "COVERED",
+      "tier": "THIN",
       "block": "DS-CND-1",
       "subject": "DIRECTION: worsening",
       "fields": [
         "condition.status"
       ],
       "readingFunction": "conditionDirectionPoolKey",
-      "count": "3 variant(s) · 2 grammar(s) · slots {none}"
+      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
-      "tier": "COVERED",
+      "tier": "THIN",
       "block": "DS-CND-1",
       "subject": "DIRECTION: stable, and the FLAT case (no valid directional status)",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 3 grammar(s) · slots {none}"
+      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -58234,6 +61775,456 @@
       ],
       "readingFunction": "conditionDirectionPoolKey",
       "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-CND-1",
+      "subject": "DIRECTION: worsening · CRISIS: under_siege",
+      "fields": [
+        "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readingFunction": "CRISIS_WORSENING_POOL_OF",
+      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-CND-1",
+      "subject": "DIRECTION: stable · CRISIS: under_siege",
+      "fields": [
+        "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readingFunction": "CRISIS_STABLE_POOL_OF",
+      "count": "2 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-CND-1",
+      "subject": "DIRECTION: easing · CRISIS: under_siege",
+      "fields": [
+        "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readingFunction": "CRISIS_EASING_POOL_OF",
+      "count": "2 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-CND-1",
+      "subject": "DIRECTION: worsening · CRISIS: famine",
+      "fields": [
+        "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readingFunction": "CRISIS_WORSENING_POOL_OF",
+      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-CND-1",
+      "subject": "DIRECTION: stable · CRISIS: famine",
+      "fields": [
+        "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readingFunction": "CRISIS_STABLE_POOL_OF",
+      "count": "2 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-CND-1",
+      "subject": "DIRECTION: easing · CRISIS: famine",
+      "fields": [
+        "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readingFunction": "CRISIS_EASING_POOL_OF",
+      "count": "2 variant(s) · 2 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-CND-1",
+      "subject": "DIRECTION: worsening · CRISIS: occupied",
+      "fields": [
+        "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readingFunction": "CRISIS_WORSENING_POOL_OF",
+      "count": "2 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-CND-1",
+      "subject": "DIRECTION: stable · CRISIS: occupied",
+      "fields": [
+        "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readingFunction": "CRISIS_STABLE_POOL_OF",
+      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-CND-1",
+      "subject": "DIRECTION: easing · CRISIS: occupied",
+      "fields": [
+        "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readingFunction": "CRISIS_EASING_POOL_OF",
+      "count": "2 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-CND-1",
+      "subject": "DIRECTION: worsening · CRISIS: politically_fractured",
+      "fields": [
+        "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readingFunction": "CRISIS_WORSENING_POOL_OF",
+      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-CND-1",
+      "subject": "DIRECTION: stable · CRISIS: politically_fractured",
+      "fields": [
+        "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readingFunction": "CRISIS_STABLE_POOL_OF",
+      "count": "2 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-CND-1",
+      "subject": "DIRECTION: easing · CRISIS: politically_fractured",
+      "fields": [
+        "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readingFunction": "CRISIS_EASING_POOL_OF",
+      "count": "2 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-CND-1",
+      "subject": "DIRECTION: worsening · CRISIS: indebted",
+      "fields": [
+        "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readingFunction": "CRISIS_WORSENING_POOL_OF",
+      "count": "2 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-CND-1",
+      "subject": "DIRECTION: stable · CRISIS: indebted",
+      "fields": [
+        "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readingFunction": "CRISIS_STABLE_POOL_OF",
+      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-CND-1",
+      "subject": "DIRECTION: easing · CRISIS: indebted",
+      "fields": [
+        "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readingFunction": "CRISIS_EASING_POOL_OF",
+      "count": "2 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-CND-1",
+      "subject": "DIRECTION: worsening · CRISIS: recently_betrayed",
+      "fields": [
+        "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readingFunction": "CRISIS_WORSENING_POOL_OF",
+      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-CND-1",
+      "subject": "DIRECTION: stable · CRISIS: recently_betrayed",
+      "fields": [
+        "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readingFunction": "CRISIS_STABLE_POOL_OF",
+      "count": "2 variant(s) · 2 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-CND-1",
+      "subject": "DIRECTION: easing · CRISIS: recently_betrayed",
+      "fields": [
+        "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readingFunction": "CRISIS_EASING_POOL_OF",
+      "count": "2 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-CND-1",
+      "subject": "DIRECTION: worsening · CRISIS: infiltrated",
+      "fields": [
+        "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readingFunction": "CRISIS_WORSENING_POOL_OF",
+      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-CND-1",
+      "subject": "DIRECTION: stable · CRISIS: infiltrated",
+      "fields": [
+        "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readingFunction": "CRISIS_STABLE_POOL_OF",
+      "count": "2 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-CND-1",
+      "subject": "DIRECTION: easing · CRISIS: infiltrated",
+      "fields": [
+        "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readingFunction": "CRISIS_EASING_POOL_OF",
+      "count": "2 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-CND-1",
+      "subject": "DIRECTION: worsening · CRISIS: plague_onset",
+      "fields": [
+        "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readingFunction": "CRISIS_WORSENING_POOL_OF",
+      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-CND-1",
+      "subject": "DIRECTION: stable · CRISIS: plague_onset",
+      "fields": [
+        "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readingFunction": "CRISIS_STABLE_POOL_OF",
+      "count": "2 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-CND-1",
+      "subject": "DIRECTION: easing · CRISIS: plague_onset",
+      "fields": [
+        "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readingFunction": "CRISIS_EASING_POOL_OF",
+      "count": "2 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-CND-1",
+      "subject": "DIRECTION: worsening · CRISIS: succession_void",
+      "fields": [
+        "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readingFunction": "CRISIS_WORSENING_POOL_OF",
+      "count": "2 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-CND-1",
+      "subject": "DIRECTION: stable · CRISIS: succession_void",
+      "fields": [
+        "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readingFunction": "CRISIS_STABLE_POOL_OF",
+      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-CND-1",
+      "subject": "DIRECTION: easing · CRISIS: succession_void",
+      "fields": [
+        "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readingFunction": "CRISIS_EASING_POOL_OF",
+      "count": "2 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-CND-1",
+      "subject": "DIRECTION: worsening · CRISIS: monster_pressure",
+      "fields": [
+        "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readingFunction": "CRISIS_WORSENING_POOL_OF",
+      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-CND-1",
+      "subject": "DIRECTION: stable · CRISIS: monster_pressure",
+      "fields": [
+        "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readingFunction": "CRISIS_STABLE_POOL_OF",
+      "count": "2 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-CND-1",
+      "subject": "DIRECTION: easing · CRISIS: monster_pressure",
+      "fields": [
+        "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readingFunction": "CRISIS_EASING_POOL_OF",
+      "count": "2 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-CND-1",
+      "subject": "DIRECTION: worsening · CRISIS: insurgency",
+      "fields": [
+        "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readingFunction": "CRISIS_WORSENING_POOL_OF",
+      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-CND-1",
+      "subject": "DIRECTION: stable · CRISIS: insurgency",
+      "fields": [
+        "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readingFunction": "CRISIS_STABLE_POOL_OF",
+      "count": "2 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-CND-1",
+      "subject": "DIRECTION: easing · CRISIS: insurgency",
+      "fields": [
+        "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readingFunction": "CRISIS_EASING_POOL_OF",
+      "count": "2 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-CND-1",
+      "subject": "DIRECTION: worsening · CRISIS: religious_conversion",
+      "fields": [
+        "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readingFunction": "CRISIS_WORSENING_POOL_OF",
+      "count": "2 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-CND-1",
+      "subject": "DIRECTION: stable · CRISIS: religious_conversion",
+      "fields": [
+        "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readingFunction": "CRISIS_STABLE_POOL_OF",
+      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-CND-1",
+      "subject": "DIRECTION: easing · CRISIS: religious_conversion",
+      "fields": [
+        "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readingFunction": "CRISIS_EASING_POOL_OF",
+      "count": "2 variant(s) · 2 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-CND-1",
+      "subject": "DIRECTION: worsening · CRISIS: slave_revolt",
+      "fields": [
+        "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readingFunction": "CRISIS_WORSENING_POOL_OF",
+      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-CND-1",
+      "subject": "DIRECTION: stable · CRISIS: slave_revolt",
+      "fields": [
+        "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readingFunction": "CRISIS_STABLE_POOL_OF",
+      "count": "2 variant(s) · 2 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-CND-1",
+      "subject": "DIRECTION: easing · CRISIS: slave_revolt",
+      "fields": [
+        "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readingFunction": "CRISIS_EASING_POOL_OF",
+      "count": "2 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-CND-1",
+      "subject": "DIRECTION: worsening · CRISIS: wartime",
+      "fields": [
+        "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readingFunction": "CRISIS_WORSENING_POOL_OF",
+      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-CND-1",
+      "subject": "DIRECTION: stable · CRISIS: wartime",
+      "fields": [
+        "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readingFunction": "CRISIS_STABLE_POOL_OF",
+      "count": "2 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-CND-1",
+      "subject": "DIRECTION: easing · CRISIS: wartime",
+      "fields": [
+        "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readingFunction": "CRISIS_EASING_POOL_OF",
+      "count": "2 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-CND-1",
+      "subject": "DIRECTION: worsening · CRISIS: mass_migration",
+      "fields": [
+        "(the table is never indexed) (via CRISIS_WORSENING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readingFunction": "CRISIS_WORSENING_POOL_OF",
+      "count": "8 variant(s) · 2 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-CND-1",
+      "subject": "DIRECTION: stable · CRISIS: mass_migration",
+      "fields": [
+        "(the table is never indexed) (via CRISIS_STABLE_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readingFunction": "CRISIS_STABLE_POOL_OF",
+      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-CND-1",
+      "subject": "DIRECTION: easing · CRISIS: mass_migration",
+      "fields": [
+        "(the table is never indexed) (via CRISIS_EASING_POOL_OF in stressorsStateProse.js)"
+      ],
+      "readingFunction": "CRISIS_EASING_POOL_OF",
+      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -58279,7 +62270,7 @@
       "subject": "PROVENANCE: no causes[] and no sourceEventType",
       "fields": [],
       "readingFunction": "conditionProvenancePoolKey",
-      "count": "3 variant(s) · 3 grammar(s) · slots {settlement, timeband_age}"
+      "count": "3 variant(s) · 2 grammar(s) · slots {settlement, timeband_age}"
     },
     {
       "tier": "THIN",
@@ -58295,7 +62286,7 @@
       "subject": "FAMILY: acute crisis",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -58327,7 +62318,7 @@
       "subject": "FAMILY: recovery",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "COVERED",

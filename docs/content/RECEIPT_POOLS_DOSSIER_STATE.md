@@ -4476,97 +4476,317 @@ one crisis twice.
 **SLOTS.** `{settlement}` `{reason}` `{timeband_age}`
 
 **SEVERITY: `low`** {colour}
-1. `[ledger]` The condition is present and light. It shows in the accounting rather than the streets.
+1. `[ledger]` The town's account books show this trouble, but the streets hardly do; it is a small one.
 2. `[visitor]` It is a real pressure and a small one; {settlement} absorbs it without changing anything it does.
-3. `[threshold]` The strain registers. It does not yet cost the town anything it would miss.
+3. `[local]` People notice it, but it has not yet cost the town anything it would miss.
 
 **SEVERITY: `medium`** {colour}
 1. `[ledger]` The pressure is genuine now. Choices are being made because of it that would not have been made otherwise.
-2. `[street]` It has stopped being a line in a ledger: {settlement} is spending real capacity on this.
-3. `[visitor]` The condition bites. Not everywhere and not badly, but consistently enough to plan around.
+2. `[trade]` {settlement} now spends real hands and coin on this.
+3. `[local]` It is felt every week, though not everywhere and not badly.
 
 **SEVERITY: `high`** {colour}
-1. `[visitor]` This is one of the defining facts about the town at present. Systems that ought to be independent are all bending around it.
+1. `[traveller]` This is the first thing anyone in {settlement} will tell you about, and most of what is done there now is done around it.
 2. `[counterforce]` The strain is severe. {settlement} is meeting it by giving up things it would rather keep.
-3. `[street]` The condition dominates. Whatever else is true of the town, this is truer.
+3. `[local]` Above everything else, this is what the town is living through now.
 
 **SEVERITY: `critical`** {colour}
 1. `[counterforce]` The town is at its limit. There is no capacity left to absorb this, and nothing behind it that could absorb the next thing.
-2. `[threshold]` This is as far as {settlement} bends. Past this it is not the same settlement, and it is very near past this.
-3. `[ledger]` The condition has run past what the town was built to carry. Everything else here is now downstream of it.
+2. `[local]` {settlement} is at breaking point; one more blow and it will not recover as it was.
+3. `[local]` This is more than the town was built to carry, and everything else waits on it.
 
 **DIRECTION: `worsening`** {colour}
-1. `[unfolding]` It is getting worse, steadily rather than suddenly; each season costs a little more than the one before.
-2. `[ledger]` The trend is the wrong way. Nothing has broken yet, and nothing has stopped deteriorating either.
-3. `[counterforce]` The condition is deepening. The town's response has not caught up with the rate.
+1. `[unfolding]` It is getting worse a little at a time; each season costs more than the one before.
+2. `[local]` Each season it gets worse, and nothing done so far has slowed it.
+3. `[official]` The trouble grows faster than {settlement} can answer it.
 
 **DIRECTION: `stable`, and the FLAT case (no valid directional status)** {colour}
-1. `[ledger]` It holds where it is. Neither the pressure nor the response is gaining, and the balance has become the normal state.
-2. `[visitor]` The condition is level: an ongoing cost rather than a developing crisis.
-3. `[street]` Nothing here is moving. That is not relief, only the absence of change.
+1. `[local]` It is no worse and no better, and people have started treating it as normal.
+2. `[local]` Every week it costs {settlement} something, though it is not getting worse.
+3. `[local]` Nothing about it has changed since last season, for better or for worse.
 
 **DIRECTION: `easing`** {colour}
 1. `[unfolding]` It is lifting. Slowly, and from a level the town remembers clearly, but lifting.
-2. `[ledger]` The pressure is coming off. What remains is the accumulated cost rather than the cause.
-3. `[street]` The condition is receding. {settlement} has begun spending on repair rather than on holding.
+2. `[local]` The pressure is coming off; what the town still carries is the cost of it, not the cause.
+3. `[local]` {settlement} has started spending on repairs instead of on getting by, now that it is easing.
+
+THE STRESS TYPE IN THE POOL KEY (STYLE-RULINGS §1a; W4 PEOPLE, second seat, 2026-11-07). On a crisis card the condition IS the crisis, so the direction line names what is worsening, holding or easing: one variant set per crisis kind, keyed `DIRECTION: <status> · CRISIS: <kind>`, the kind read from the `stress[]` entry the condition was promoted from (the entry whose label the condition carries; `stressorsStateProse.js :: conditionCrisisKind`). Each pool declares its kind as its own atom (the census law), so a page that does not hold that crisis never draws it. The pool for the direction a crisis is BORN with carries four vantages (the crisis card is an intro position, WIRING-RULINGS §8); the two directions only a played world reaches carry two. The migration pools carry both directions as declared marks (`migration: influx` / `migration: exodus`, WAVE-RULINGS item 8): the arrivals set prints at birth, the departures set only on a record that declares departures. A condition with no crisis entry behind it (an event, the world pulse) draws the plain direction pools above.
+
+**DIRECTION: `worsening` · CRISIS: `under_siege`** {crisis: under_siege}
+1. `[traveller]` No cart has reached {settlement} in weeks, and the stores inside run lower every week.
+2. `[official]` Each week of the siege leaves {settlement} with less food and fewer ways out, and those in charge see no relief coming.
+3. `[local]` The siege of {settlement} is tightening: the rations are cut again, and the sick and the old go without first.
+4. `[watch]` The besiegers draw closer to {settlement} each week, and the lookouts count more of them every morning.
+
+**DIRECTION: `stable` · CRISIS: `under_siege`** {crisis: under_siege}
+1. `[local]` The siege of {settlement} has settled into a routine: the lines outside do not move, and nor does the ration inside.
+2. `[official]` Neither side of {settlement}'s siege is gaining; those in charge are making the stores last and waiting for the other side to move.
+
+**DIRECTION: `easing` · CRISIS: `under_siege`** {crisis: under_siege}
+1. `[local]` The besiegers have drawn back from {settlement}, and the first carts have come in, though the stores are far from full.
+2. `[trade]` A little food is reaching {settlement} again as the siege loosens, and its price has started to fall.
+
+**DIRECTION: `worsening` · CRISIS: `famine`** {crisis: famine}
+1. `[local]` The famine in {settlement} is getting worse: the rations shrink each week, and the queues for them grow longer.
+2. `[official]` Each week {settlement} has more hungry mouths and less to give them, and those in charge have no grain left to promise.
+3. `[trade]` Food costs more in {settlement} each week, and less of it comes in than the town needs.
+4. `[traveller]` In {settlement} you see thin faces at every door, and more of them each time you pass through.
+
+**DIRECTION: `stable` · CRISIS: `famine`** {crisis: famine}
+1. `[local]` The famine in {settlement} is no worse than last season and no better: the rations are short, and they stay short.
+2. `[official]` Those in charge of {settlement} are holding the famine where it is with strict rationing, and cannot yet end it.
+
+**DIRECTION: `easing` · CRISIS: `famine`** {crisis: famine}
+1. `[local]` The worst of the famine in {settlement} is over: the rations are growing again, though nobody has eaten well yet.
+2. `[trade]` More food is reaching {settlement} now, and its price has started to fall.
+
+**DIRECTION: `worsening` · CRISIS: `occupied`** {crisis: occupied}
+1. `[local]` The occupiers are tightening their hold on {settlement}: more searches, more seizures, and harsher punishment for anyone who resists.
+2. `[official]` Each season the occupiers ask more of {settlement} and leave its own leaders less to decide.
+
+**DIRECTION: `stable` · CRISIS: `occupied`** {crisis: occupied}
+1. `[local]` The occupation of {settlement} has settled in, and nobody there expects it to end this year.
+2. `[traveller]` The occupiers in {settlement}'s streets are the same faces as last season, and they no longer bother to look about them.
+3. `[official]` {settlement}'s own leaders still protest the occupation, and the occupiers still ignore them; nothing has changed in months.
+4. `[trade]` Merchants in {settlement} pay the occupiers the same share of every sale, season after season, and have learned to price it in.
+
+**DIRECTION: `easing` · CRISIS: `occupied`** {crisis: occupied}
+1. `[local]` The occupiers are easing their grip on {settlement}: fewer patrols walk the streets, and fewer people are taken for questioning.
+2. `[official]` {settlement}'s own leaders have been handed back the small matters of governing.
+
+**DIRECTION: `worsening` · CRISIS: `politically_fractured`** {crisis: politically_fractured}
+1. `[local]` The quarrel among {settlement}'s factions grows sharper each week, and neighbours who took different sides have stopped speaking.
+2. `[official]` Each faction in {settlement} now blocks the others more often than it acts, and less gets decided every season.
+3. `[traveller]` Ask who governs {settlement} and you get a different answer in every street, and the answers are angrier than they were.
+4. `[watch]` Fights between {settlement}'s factions break out more often now, and each side keeps its own people close at hand.
+
+**DIRECTION: `stable` · CRISIS: `politically_fractured`** {crisis: politically_fractured}
+1. `[local]` {settlement}'s factions have settled into a stand-off: none gains ground, and none gives any.
+2. `[official]` Nothing gets decided in {settlement} that more than one faction must agree to, and that has been so for months.
+
+**DIRECTION: `easing` · CRISIS: `politically_fractured`** {crisis: politically_fractured}
+1. `[local]` {settlement}'s factions have begun talking again, and some matters are being settled without a quarrel.
+2. `[official]` One by one, {settlement}'s factions are agreeing on small things, and the business of governing is moving again.
+
+**DIRECTION: `worsening` · CRISIS: `indebted`** {crisis: indebted}
+1. `[trade]` {settlement}'s debt is growing faster than it can pay, and the creditor asks for more each time.
+2. `[official]` Each payment leaves {settlement} deeper in debt, and its leaders have started selling what they cannot buy back.
+
+**DIRECTION: `stable` · CRISIS: `indebted`** {crisis: indebted}
+1. `[trade]` Every season the same share of {settlement}'s earnings goes to its creditor, and nothing is left over to build with.
+2. `[official]` {settlement}'s leaders pay the creditor on time and pay nothing off, so the debt never grows smaller.
+3. `[local]` The debt over {settlement} is neither growing nor shrinking: wages stay low, and the creditor's agent is a familiar face.
+4. `[newcomer]` Newcomers to {settlement} soon learn who the town owes, and that their own dues will go to paying it.
+
+**DIRECTION: `easing` · CRISIS: `indebted`** {crisis: indebted}
+1. `[trade]` {settlement} is paying its debt down, and a little of what it earns now stays at home.
+2. `[official]` The creditor has eased its terms, and {settlement}'s leaders can see the end of the debt.
+
+**DIRECTION: `worsening` · CRISIS: `recently_betrayed`** {crisis: recently_betrayed}
+1. `[local]` Suspicion in {settlement} is spreading: friends stop sharing news, and every family wonders who sold them out.
+2. `[official]` Those in charge of {settlement} trust fewer of their own people each week, and more business is done behind closed doors.
+3. `[watch]` Each week brings a new accusation in {settlement}, and so far none of them has found the traitor.
+4. `[newcomer]` Arrive in {settlement} now and you are questioned before you are welcomed; since the betrayal, every new face is suspect.
+
+**DIRECTION: `stable` · CRISIS: `recently_betrayed`** {crisis: recently_betrayed}
+1. `[local]` The betrayal still sits heavily on {settlement}; no one has been named, and no one has forgotten it.
+2. `[official]` {settlement}'s leaders have closed ranks since the betrayal, and nothing more has come out.
+
+**DIRECTION: `easing` · CRISIS: `recently_betrayed`** {crisis: recently_betrayed}
+1. `[local]` {settlement} is beginning to trust again: old friends are talking, and the accusations have stopped.
+2. `[official]` Those in charge of {settlement} have started bringing people back into their confidence.
+
+**DIRECTION: `worsening` · CRISIS: `infiltrated`** {crisis: infiltrated}
+1. `[official]` More of the decisions made in {settlement} favour someone outside it each season, and nobody in charge has asked why.
+2. `[trade]` Contracts in {settlement} keep going to the same few outsiders, more of them each season.
+3. `[watch]` New faces turn up in {settlement}'s affairs more often each season, and the same ones are seen in too many places.
+4. `[local]` Something in {settlement} is slowly going wrong: a decision that makes no sense, then another, and no one can say who is behind them.
+
+**DIRECTION: `stable` · CRISIS: `infiltrated`** {crisis: infiltrated}
+1. `[official]` Whoever has a hand inside {settlement}'s affairs is holding still, reaching no further and drawing back no further.
+2. `[local]` Nothing new has gone wrong in {settlement} lately, but the odd decisions of last season have not been undone.
+
+**DIRECTION: `easing` · CRISIS: `infiltrated`** {crisis: infiltrated}
+1. `[official]` Fewer of {settlement}'s decisions favour outsiders now, and some of last season's have been reversed.
+2. `[watch]` The faces once seen in too many places in {settlement} are seen less often now.
+
+**DIRECTION: `worsening` · CRISIS: `plague_onset`** {crisis: plague_onset}
+1. `[local]` The sickness in {settlement} spreads further each week, and more households have someone ill.
+2. `[official]` Each week more of {settlement} falls sick, and those in charge still cannot agree on how to stop it.
+3. `[traveller]` More doors in {settlement} are shut each week, and fewer people stop in the street to talk.
+4. `[trade]` Fewer buyers come to {settlement} each week for fear of the sickness, and fewer sellers.
+
+**DIRECTION: `stable` · CRISIS: `plague_onset`** {crisis: plague_onset}
+1. `[local]` The sickness in {settlement} is no longer spreading, but the sick are not yet getting better.
+2. `[official]` Those in charge of {settlement} have the sickness held where it is, though not yet beaten.
+
+**DIRECTION: `easing` · CRISIS: `plague_onset`** {crisis: plague_onset}
+1. `[local]` Fewer people in {settlement} fall sick each week, and the first of the sick are on their feet again.
+2. `[trade]` Buyers are coming back to {settlement} now that the sickness is passing.
+
+**DIRECTION: `worsening` · CRISIS: `succession_void`** {crisis: succession_void}
+1. `[official]` The claimants to {settlement}'s seat are gathering supporters faster than they are talking, and the quarrel is turning bitter.
+2. `[local]` With no one in charge, {settlement}'s officers have started ignoring each other, and small things go undone.
+
+**DIRECTION: `stable` · CRISIS: `succession_void`** {crisis: succession_void}
+1. `[official]` {settlement} still has no one in charge, and no claimant is any closer to taking the seat.
+2. `[local]` Life in {settlement} goes on without a leader: the old officers do what they did before, and nobody does anything new.
+3. `[trade]` Nothing large is agreed in {settlement} until someone is in charge, so merchants deal season to season and promise nothing longer.
+4. `[newcomer]` Ask who leads {settlement} and you hear several names, each from someone who backs a different one.
+
+**DIRECTION: `easing` · CRISIS: `succession_void`** {crisis: succession_void}
+1. `[official]` One claimant is pulling ahead in {settlement}, and the others have begun bargaining for a place.
+2. `[local]` {settlement} expects to have a leader again soon, and the officers already defer to the likeliest.
+
+**DIRECTION: `worsening` · CRISIS: `monster_pressure`** {crisis: monster_pressure}
+1. `[watch]` The attacks around {settlement} come more often now and closer in, and each one is bolder than the last.
+2. `[local]` More of {settlement}'s outlying families have come in from the farms, and fewer people work the far fields.
+3. `[trade]` Fewer carts reach {settlement} each week; the drivers will not take the roads where the attacks have been.
+4. `[traveller]` On the road to {settlement} you pass a farmstead in ashes, and it was not the first this season.
+
+**DIRECTION: `stable` · CRISIS: `monster_pressure`** {crisis: monster_pressure}
+1. `[watch]` The attacks around {settlement} have not grown worse, but they have not stopped, and nobody goes out alone.
+2. `[trade]` Carts still reach {settlement}, but only in company and only by day.
+
+**DIRECTION: `easing` · CRISIS: `monster_pressure`** {crisis: monster_pressure}
+1. `[watch]` The attacks around {settlement} have dropped off, and families have begun to return to the outlying farms.
+2. `[trade]` More carts reach {settlement} again as the roads grow safer.
+
+**DIRECTION: `worsening` · CRISIS: `insurgency`** {crisis: insurgency}
+1. `[official]` Each week more of {settlement}'s officials stop answering to those in charge, and their orders go unheeded.
+2. `[local]` More of {settlement}'s households side openly with the faction against the government now, and stop paying it their dues.
+3. `[trade]` Fewer merchants in {settlement} pay what the government asks, and more pay its rivals instead.
+4. `[watch]` Those in charge of {settlement} trust fewer of their own officers each week, and cannot tell which have changed sides.
+
+**DIRECTION: `stable` · CRISIS: `insurgency`** {crisis: insurgency}
+1. `[official]` The quarrel over who rightly governs {settlement} has stalled: neither side gives ground, and both collect what dues they can.
+2. `[local]` {settlement} lives with two masters now, and most households pay whichever one asks first.
+
+**DIRECTION: `easing` · CRISIS: `insurgency`** {crisis: insurgency}
+1. `[official]` Officials who had turned away from {settlement}'s government are coming back to it one by one.
+2. `[local]` Fewer households in {settlement} side with the faction now, and the dues are being paid again.
+
+**DIRECTION: `worsening` · CRISIS: `religious_conversion`** {crisis: religious_conversion}
+1. `[local]` The quarrel over {settlement}'s faith is turning bitter: families split, and old friends no longer pray together.
+2. `[official]` Each week both faiths in {settlement} ask more of those in charge, and every answer angers one side.
+
+**DIRECTION: `stable` · CRISIS: `religious_conversion`** {crisis: religious_conversion}
+1. `[local]` The quarrel over {settlement}'s faith has settled into habit: each household keeps the rite it has chosen, and the neighbours do not ask.
+2. `[official]` The contest over {settlement}'s faith is neither won nor lost; both rites are kept, and neither is gaining.
+3. `[newcomer]` Newcomers to {settlement} are soon asked which rite they keep, and the answer decides who will deal with them.
+4. `[trade]` Feast days in {settlement} are kept twice over now, once by each faith, and traders have learned to keep both.
+
+**DIRECTION: `easing` · CRISIS: `religious_conversion`** {crisis: religious_conversion}
+1. `[local]` The quarrel over {settlement}'s faith is cooling, and families who split over it have begun to meet again.
+2. `[official]` Fewer disputes over faith reach {settlement}'s leaders now, and the two rites keep to their own days.
+
+**DIRECTION: `worsening` · CRISIS: `slave_revolt`** {crisis: slave_revolt}
+1. `[local]` The revolt in {settlement} spreads to more work gangs each week, and less of the work gets done.
+2. `[official]` Each week of the revolt costs {settlement}'s owners more labour, and those in charge still have no answer.
+3. `[watch]` More of {settlement}'s enslaved join the revolt each week, and those set to watch them are too few.
+4. `[trade]` Less of what {settlement} sells is being made, and buyers have started looking elsewhere.
+
+**DIRECTION: `stable` · CRISIS: `slave_revolt`** {crisis: slave_revolt}
+1. `[official]` The revolt in {settlement} has stalled: the rebels hold out, the owners hold firm, and the work stays undone.
+2. `[local]` Neither side in {settlement}'s revolt gives way, and the downed tools stay where they fell.
+
+**DIRECTION: `easing` · CRISIS: `slave_revolt`** {crisis: slave_revolt}
+1. `[official]` Talks have begun between {settlement}'s owners and the rebels, and some gangs are back at work.
+2. `[local]` The revolt in {settlement} is losing heart, and a few of the rebels have gone back to work.
+
+**DIRECTION: `worsening` · CRISIS: `wartime`** {crisis: wartime}
+1. `[local]` The war asks more of {settlement} each season: more men, more carts, more of the harvest.
+2. `[official]` Each season the war brings new demands to {settlement}, and those in charge are running out of ways to meet them.
+3. `[trade]` More of {settlement}'s goods go to the army every season, and fewer reach ordinary buyers.
+4. `[traveller]` More army carts pass through {settlement} every time you come, and the talk at every door is of the war.
+
+**DIRECTION: `stable` · CRISIS: `wartime`** {crisis: wartime}
+1. `[local]` The war goes on far from {settlement}, neither nearer nor further, and the town has grown used to its demands.
+2. `[trade]` The war's demands on {settlement} have settled: the army takes its share, and trade goes on around it.
+
+**DIRECTION: `easing` · CRISIS: `wartime`** {crisis: wartime}
+1. `[local]` The war asks less of {settlement} now, and fewer of its carts and men go to the army.
+2. `[trade]` As the war winds down, more of {settlement}'s goods are going to ordinary buyers again.
+
+**DIRECTION: `worsening` · CRISIS: `mass_migration`** {crisis: mass_migration}
+1. `[local · migration: influx]` More families reach {settlement} every week, and there are no more roofs or work to share among them.
+2. `[official · migration: influx]` Each week those in charge of {settlement} have more people to house and nothing more to house them with.
+3. `[traveller · migration: influx]` The camp at the edge of {settlement} is bigger every time you pass.
+4. `[newcomer · migration: influx]` Each new family that reaches {settlement} finds the last ones still waiting for a roof and work.
+5. `[local · migration: exodus]` More houses stand empty in {settlement} each season, and those who stay do the work of those who left.
+6. `[official · migration: exodus]` Each season fewer people in {settlement} pay their dues, and those in charge cannot fill the posts they have.
+7. `[traveller · migration: exodus]` Each time you pass {settlement} more of its houses are shuttered, and more carts leave loaded.
+8. `[trade · migration: exodus]` Fewer hands are left in {settlement} each season to do the work, and fewer buyers to trade with.
+
+**DIRECTION: `stable` · CRISIS: `mass_migration`** {crisis: mass_migration}
+1. `[local · migration: influx]` Families still arrive in {settlement}, but no faster than before, and the camp has become a place people live.
+2. `[official · migration: influx]` The number of newcomers in {settlement} has stopped growing, and those in charge are trying to find them work and roofs.
+3. `[local · migration: exodus]` People still leave {settlement}, but no faster than before, and the empty houses are no longer remarked on.
+4. `[official · migration: exodus]` {settlement} loses a few households every season, and those in charge have learned to manage with fewer hands.
+
+**DIRECTION: `easing` · CRISIS: `mass_migration`** {crisis: mass_migration}
+1. `[local · migration: influx]` Fewer families arrive in {settlement} now, and some of those who came have found a roof and work.
+2. `[official · migration: influx]` The arrivals in {settlement} are slowing, and those in charge are starting to catch up with them.
+3. `[local · migration: exodus]` Fewer households are leaving {settlement} now, and a few that left have come back.
+4. `[official · migration: exodus]` The leaving has slowed in {settlement}, and those in charge can see who will stay.
 
 **ARCHETYPE: `reconstruction`** · **THE GOOD STATE (R-DST-G)** {crisis-scoped}
-1. `[unfolding · crisis: any]` The town is rebuilding. What was broken is being replaced, and the race is between the rebuilding and the memory of why it was needed.
+1. `[local · crisis: any]` The town is rebuilding: new work stands beside the old damage, and the job is not done.
 2. `[visitor · no crisis: threat · crisis: any]` {settlement} is in its repair season: scaffolding where there were ruins, and a great deal of work with a visible end.
-3. `[street · no crisis: threat · crisis: any]` The rebuild is going well enough that people have begun arguing about what it should look like rather than whether it will happen.
+3. `[street · no crisis: threat · crisis: any]` The rebuild is going well enough that people now argue about what it should look like, not whether it will happen.
 
 **ARCHETYPE: `boom`** · **THE GOOD STATE (R-DST-G)** {crisis-scoped}
-1. `[ledger · no crisis: hunger · no crisis: threat · no crisis: indebted · crisis: any]` The town is prosperous. Trade runs in its favour, and the expectation of that has become part of the economy rather than a comment on it.
-2. `[threshold · no crisis: hunger · no crisis: threat · no crisis: indebted · crisis: any]` {settlement} is doing well, and quietly depends on the arteries feeding it. The boom is real and it is not self-sustaining.
-3. `[street · no crisis: hunger · no crisis: threat · no crisis: indebted · crisis: any]` Coin is easy here. The warehouses fill, the wages hold, and nobody is much interested in what the routes moving would mean.
+1. `[trade · no crisis: hunger · no crisis: threat · no crisis: indebted · crisis: any]` The town is doing well, and its merchants have started borrowing as if it always will.
+2. `[trade · no crisis: hunger · no crisis: threat · no crisis: indebted · crisis: any]` {settlement} is doing well, but only while its trade keeps coming.
+3. `[local · no crisis: hunger · no crisis: threat · no crisis: indebted · crisis: any]` Coin is easy here: work is plentiful, wages hold, and nobody asks what happens if the trade moves elsewhere.
 4. `[street · crisis: any]` It is a good stretch for {settlement}: coin moves freely and work is easy to find.
 
 **ARCHETYPE: `flourishing`** · **THE GOOD STATE (R-DST-G)** {crisis-scoped}
 1. `[ledger]` This is a good stretch for the town. There is room here for things that are not strictly necessary, and the accounts carry them without strain.
-2. `[visitor · no crisis: hunger · no crisis: threat · no crisis: unrest · no crisis: indebted · no crisis: plague_onset · crisis: any]` {settlement} is in a modest golden age. It is bounded and it is real, and the people living in it mostly know both.
+2. `[local · no crisis: hunger · no crisis: threat · no crisis: unrest · no crisis: indebted · no crisis: plague_onset · crisis: any]` {settlement} is having a good stretch, modest but real, and its people are enjoying it.
 3. `[street · institution: school · no crisis: hunger · no crisis: threat · no crisis: unrest · no crisis: indebted · no crisis: plague_onset · crisis: any]` The town is culturally fertile: workshops, schools, and arguments about art, all of them affordable for the first time in a while.
 4. `[unfolding · crisis: hunger, threat, unrest, indebted, plague_onset]` The good stretch {settlement} was having has not ended, but it is being spent now on the trouble in front of it.
 
 **PROVENANCE: `causes[]` or `triggeredAt.sourceEventType` populated** · the ONLY causal pool in this block {colour}
-1. `[ledger]` The condition traces back to {reason}, and the trace is not disputed. The town knows exactly what did this.
-2. `[elder]` This began with {reason}. What {settlement} carries now is the consequence, and the consequence has outlasted the cause.
-3. `[street]` {reason} put this here. The record is clear enough that the argument in the town is about the response rather than the origin.
+1. `[local]` Everyone in {settlement} knows this began with {reason}.
+2. `[elder]` This began with {reason}, and {settlement} is still paying for it.
+3. `[local]` {reason} caused this, and nobody argues otherwise; the argument is about what to do.
 
 **PROVENANCE: no `causes[]` and no `sourceEventType`** · **PLAIN DESCRIPTION ONLY (R-DST-B)** {colour}
-1. `[ledger]` The condition stands. Nothing in the record explains where it came from, and the town has stopped asking.
+1. `[local]` Nobody remembers how this started, and the town has stopped asking.
 2. `[visitor]` This is simply the state of {settlement}. No single event owns it, and nobody here can point to a beginning.
 3. `[elder]` It is here and it is {timeband_age}. Whatever caused it did so before anyone was writing things down.
 
 **DURATION: inside the expiry wind-down window** {colour}
-1. `[unfolding]` It is nearly over. The condition is winding down on its own schedule rather than anyone's effort.
+1. `[local]` It is nearly over, though nobody here did anything to end it.
 2. `[threshold]` The end of this is in sight. The pressure has begun releasing without anything in particular being fixed.
 3. `[street]` The town is at the tail of it. What is left is lifting, and nobody is treating that as an achievement.
 
 **FAMILY: acute crisis** (`plague` · `famine` · `war_pressure` · `rebellion` · `faction_challenge` · `custom_crisis` · `magical_instability` · `food_anchor_lost`) {colour}
-1. `[visitor]` This is an emergency the town is inside of: not a policy, not a trend, an event with a shape and an end.
-2. `[street]` {settlement} is in crisis. The condition is the town's whole agenda for as long as it lasts.
-3. `[ledger]` The trouble here is acute and undisguised; there is no reading of the state that does not begin with it.
+1. `[local]` This is an emergency, and it will end one way or another.
+2. `[local]` {settlement} is in crisis, and nothing else gets done until it passes.
+3. `[local]` The trouble here is sudden and in plain view, and it is the first thing anyone will mention.
 
 **FAMILY: regional transmission** (every `regional_*` · `cold_war_sanctions` · `trade_route_cut`) {colour}
 1. `[ledger]` The trouble did not begin here. It arrived along a connection {settlement} depends on, and the dependence is why it arrived.
-2. `[visitor]` This is somebody else's crisis reaching the town through the channel that normally carries something better.
-3. `[threshold]` What strains {settlement} is happening elsewhere. The town is exposed because it is well connected, which is the price of being well connected.
+2. `[trade]` This trouble started elsewhere and reached the town the same way its trade comes.
+3. `[traveller]` What hurts {settlement} started somewhere else, and travellers bring news of it with their goods.
 
 **FAMILY: war layer, aggressor side** (`war_drain` · `army_deployed` · `war_exhaustion` · `war_mobilization` · `reinforcement_cost`) {crisis-scoped}
 1. `[ledger · no crisis: under_siege · no crisis: occupied · no war: front · crisis: any]` The war is being fought elsewhere and paid for here. Men, coin and grain leave; nothing comes back on the same schedule.
-2. `[visitor · walls · garrison · no crisis: under_siege · no crisis: occupied · no war: front · crisis: any]` {settlement} is the home of a campaign rather than its battlefield. The cost shows in the treasury and the thin garrison, not in the walls.
-3. `[counterforce · crisis: any]` The town is carrying an army it does not have with it. That is a specific kind of poverty, and it compounds.
-4. `[visitor · no walls · no crisis: under_siege · no crisis: occupied · no war: front · crisis: any]` {settlement} is the home of a campaign rather than its battlefield. The cost shows in the treasury and the missing men, not in the streets.
+2. `[visitor · walls · garrison · no crisis: under_siege · no crisis: occupied · no war: front · crisis: any]` {settlement} sends men and money to a war fought somewhere else. The cost shows in the treasury and the thin garrison, not in the walls.
+3. `[official · crisis: any]` The town is paying for an army that is fighting far away, and every levy leaves it poorer.
+4. `[visitor · no walls · no crisis: under_siege · no crisis: occupied · no war: front · crisis: any]` Men and money leave {settlement} for a war fought somewhere else. The cost shows in the treasury and the missing men, not in the streets.
 
 **FAMILY: occupation layer** (`occupation_resistance` · `occupation_burden` · `war_spoils` · `vassal_extraction` · `vassal_trade_coercion` · `trade_embargo`)
 1. `[counterforce]` Holding this place costs more than it returns. Garrisons, administrators and suppression tie down strength that was meant for elsewhere.
-2. `[unfolding]` {settlement} is administered by a power stretched thin doing it. Noncompliance and sabotage make the arithmetic worse each season.
-3. `[ledger]` The relationship here is extractive and it is expensive; both facts are true, and only one of them is written down.
+2. `[official]` {settlement}'s occupier is stretched thin, and every season of sabotage costs it more to stay.
+3. `[ledger]` The occupier takes more from the town than it gives, but its own accounts never show what holding the town costs it in men and coin.
 
 **FAMILY: recovery** (`siege_lifted` · `occupation_lifted` · `corruption_exposed` · `coup_suppressed` · `government_overthrown` · `stressor_residual` · `trade_realignment`) {crisis-scoped}
 1. `[unfolding]` The worst is behind {settlement}. What remains is the work of being a normal town again, which is slower than it looks.
 2. `[elder]` The crisis ended and left its scars in the ordinary places: trust, institutions, and the habits people formed to survive it.
-3. `[street]` The town is recovering. It is not the town it was before, and it has not decided yet whether it minds.
+3. `[local]` The town is recovering, but it will not be the town it was before.
 4. `[unfolding · crisis · crisis: any]` {settlement} is recovering from one trouble while it carries another, and the repair goes slower for it.
 
 ---

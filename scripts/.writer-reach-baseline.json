@@ -8,7 +8,7 @@
   "The reviewable slice is computed by RULE (reviewableDark), never hand-listed."
  ],
  "schema": 1,
- "frozenAtSha": "86a30fdf270fffa1f1bfe2542c45a48bfcf531d0",
+ "frozenAtSha": "9654c6b65dca6e175c344e1ae71846db26462541",
  "charter": "§18.1 WRWALKER Car 1 (HORIZON) — chair-signed vetoably at the INSTR-WRW pre-stage",
  "minRows": 40,
  "corpusMeta": {
@@ -23,8 +23,8 @@
   "transitionCount": 14454
  },
  "shapesDigest": "9cce955973cac3a42986bcbac2deb92a1901b641e691da98d8462681a48c2cf7",
- "detectorDigest": "cce104e3a7794d95b85fd4df52a649b11fc8ee147f509a3a194412ba3a406fde",
- "verdictDigest": "58f5b277d07f1ba9c0b02eedba4904d482951cfa8e9b8d406916412fffb987bc",
+ "detectorDigest": "713bd3d40c7c7f6cc569f71d934c1ea4bed9b2db4bdcbd8210c5c89e25c5e37f",
+ "verdictDigest": "8ac48af92116df566ae969ad1202ff3b3684b3863f9febab7fd92168aa921fb6",
  "surfaceRoots": {
   "web": [
    "src/main.jsx"
@@ -74,7 +74,7 @@
  "closureSizes": {
   "web-display": 752,
   "web-transitive": 987,
-  "dossier-pdf": 497,
+  "dossier-pdf": 498,
   "campaign-pdf": 134,
   "world-book": 151,
   "foundry": 403,
@@ -83,27 +83,27 @@
  },
  "population": {
   "judged": 6730,
-  "lit": 601,
+  "lit": 602,
   "litName": 4864,
-  "dark": 1265,
+  "dark": 1264,
   "thinKeys": 8776,
   "thinShapes": 904,
   "knownShapes": 356
  },
  "scanStats": {
   "files": 1740,
-  "sites": 40825,
-  "propRead": 38650,
+  "sites": 40829,
+  "propRead": 38654,
   "elemRead": 0,
   "destructure": 2162,
   "inOp": 13,
   "rGrades": 6338,
-  "nGrades": 984642,
+  "nGrades": 984760,
   "resolvedReceivers": 7118
  },
- "registerDigest": "1e3ab9d6b0023c9fa2cf949f373df29a65d5b7cd88114c866ae3b619dbe098e2",
+ "registerDigest": "abd965c844358a2780d83e16c6a2ca3b1ed89867cb9311313b799ba229f1b1c8",
  "pendingSurfaceCeiling": 3,
- "reviewableDarkCount": 481,
+ "reviewableDarkCount": 480,
  "darkUnregistered": [
   {
    "identity": "Bulk grain and flour on reasons",
@@ -8388,7 +8388,7 @@
   "isDeficit on foodSecurity": "",
   "isPressured on foodSecurity": "",
   "isSecure on foodSecurity": "",
-  "isSurplus on foodSecurity": "web-transitive=R",
+  "isSurplus on foodSecurity": "dossier-pdf=R web-transitive=R",
   "label on foodSecurity": "campaign-pdf=R dossier-pdf=R foundry=R json-export=N news=N web-display=R web-transitive=R world-book=R",
   "magicNote on foodSecurity": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
   "magicOffset on foodSecurity": "dossier-pdf=N web-display=N",

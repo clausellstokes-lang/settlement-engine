@@ -105,7 +105,7 @@ describe('the four negative controls and the positive one (MOVE-GRAMMAR §4.4, a
       if (new Set(pool.map((v) => segmentCount(v.text))).size === 1) uniformSegments += 1;
       if (new Set(pool.map((v) => openerOf(v.text))).size < pool.length) repeatedOpener += 1;
     }
-    expect(cells.size).toBe(716); // W4 PEOPLE 2026-11-07: +7 pools/+18 variants, the faith and great-house construction
+    expect(cells.size).toBe(761); // W4 PEOPLE 2026-11-07: +7 pools/+18 variants, the faith and great-house construction; W4 PEOPLE second seat 2026-11-07: re-measured, DS-CND-1 the stress type in the pool key (+45 pools/+128 variants)
     // SITTING B.3 / Part B §14: 407 of 708, not the 408 MOVE-GRAMMAR §0 first printed; 410 / 103 of 709 at the
     // rung-1 landing (LANDING-1: F9 READER-CONTRADICTIONS +1 pool, F10 WALLS-WORD +41 twin variants).
     // 410 / 103 -> 406 / 114 at the rung-2 landing, measured per commit on the leaves (parent ->
@@ -117,10 +117,10 @@ describe('the four negative controls and the positive one (MOVE-GRAMMAR §4.4, a
     // 405 / 114 -> 404 / 114 at the chair's 06:5x DS-CND-1 boom line (ODQ §934.105): boom v4 is one sentence beside v1-v3's two, so the pool is no
     // longer uniform; its opener ("it is") is new to the pool (the ruled "{settlement} is …" repeated
     // v2's opener and read 115, so the line opens "It is a good stretch for {settlement}").
-    expect(uniformSegments).toBe(408); // W4 PEOPLE 2026-11-07: +7 pools, the faith and great-house construction
-    expect(repeatedOpener).toBe(118); // W4 PEOPLE 2026-11-07: +7 pools, the faith and great-house construction
-    expect(uniformSegments / cells.size).toBeCloseTo(0.570, 3); // W4 PEOPLE 2026-11-07: +7 pools, the faith and great-house construction
-    expect(repeatedOpener / cells.size).toBeCloseTo(0.165, 3); // W4 PEOPLE 2026-11-07: 118/716 repeated openers, re-measured
+    expect(uniformSegments).toBe(453); // W4 PEOPLE 2026-11-07: +7 pools, the faith and great-house construction; W4 PEOPLE second seat 2026-11-07: re-measured, DS-CND-1 the stress type in the pool key (+45 pools/+128 variants)
+    expect(repeatedOpener).toBe(117); // W4 PEOPLE 2026-11-07: +7 pools, the faith and great-house construction; W4 PEOPLE second seat 2026-11-07: re-measured, DS-CND-1 the stress type in the pool key (+45 pools)
+    expect(uniformSegments / cells.size).toBeCloseTo(0.595, 3); // W4 PEOPLE 2026-11-07: +7 pools, the faith and great-house construction; W4 PEOPLE second seat 2026-11-07: re-measured 453 / 761, DS-CND-1 the stress type in the pool key (the forty-five crisis pools are one sentence a line)
+    expect(repeatedOpener / cells.size).toBeCloseTo(0.154, 3); // W4 PEOPLE 2026-11-07: 118/716 repeated openers, re-measured; W4 PEOPLE second seat 2026-11-07: re-measured 117 / 761, DS-CND-1 the stress type in the pool key
   });
 
   it('CONTROL 4, SECOND HALF — the R1 leaves RED ON ARM E, which is what the control actually says', async () => {
@@ -140,11 +140,11 @@ describe('the four negative controls and the positive one (MOVE-GRAMMAR §4.4, a
     expect(spreadFails.map((f) => f.detail).join(' ')).toMatch(/repeatedOpener/);
     // The arm reads the SAME pools the calibration counted, to the unit.
     const figures = /** @type {any} */ (report.figures.spread);
-    expect(figures.pools).toBe(716); // W4 PEOPLE 2026-11-07: +7 pools/+18 variants, the faith and great-house construction
+    expect(figures.pools).toBe(761); // W4 PEOPLE 2026-11-07: +7 pools/+18 variants, the faith and great-house construction; W4 PEOPLE second seat 2026-11-07: re-measured, DS-CND-1 the stress type in the pool key (+45 pools/+128 variants)
     // 406 -> 405 by the same cause as the calibration above (the chair's 06:5x rewording of DS-GEN-17 v3);
     // 405 -> 404 at the chair's 06:5x DS-CND-1 boom line (ODQ §934.105), likewise.
-    expect(Math.round(figures.uniformSegmentShare * 716)).toBe(408); // W4 PEOPLE 2026-11-07: +7 pools, the faith and great-house construction
-    expect(Math.round(figures.repeatedOpenerShare * 709)).toBe(117); // W4 PEOPLE 2026-11-07: re-measured, the faith and great-house construction
+    expect(Math.round(figures.uniformSegmentShare * 761)).toBe(453); // W4 PEOPLE 2026-11-07: +7 pools, the faith and great-house construction; W4 PEOPLE second seat 2026-11-07: re-measured, DS-CND-1 the stress type in the pool key (+45 pools/+128 variants)
+    expect(Math.round(figures.repeatedOpenerShare * 761)).toBe(117); // W4 PEOPLE 2026-11-07: re-measured, the faith and great-house construction; W4 PEOPLE second seat 2026-11-07: re-measured, DS-CND-1 the stress type in the pool key (+45 pools): the factor re-pinned to the corpus size, 761
   });
 
   it('ARM E is NOT-EXECUTABLE without spread ceilings — never a pass on a number it invented', () => {
@@ -681,7 +681,7 @@ describe('the walk over the shipped corpus — REPORTED, and the arms that canno
     // Every variant is untagged today, and the walker must say so rather than scoring silence
     // as agreement.
     expect(level1.untagged).toBe(corpus.length);
-    expect(spread.pools).toBe(794); // W4 PEOPLE 2026-11-07: +7 pools/+18 variants, the faith and great-house construction
+    expect(spread.pools).toBe(839); // W4 PEOPLE 2026-11-07: +7 pools/+18 variants, the faith and great-house construction; W4 PEOPLE second seat 2026-11-07: re-measured, DS-CND-1 the stress type in the pool key (+45 pools/+128 variants)
     // The walk must find SOMETHING and must not find everything.
     expect(report.fails.length).toBeGreaterThan(0);
     expect(report.fails.length).toBeLessThan(corpus.length);

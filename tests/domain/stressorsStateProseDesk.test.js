@@ -21,15 +21,17 @@ import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import {
   SLOT_FILL_SHAPES, SLOT_FILL_TABLES, conditionArchetypePoolKey,
-  conditionDirectionPoolKey, conditionDurationPoolKey, conditionProvenancePoolKey,
+  conditionCrisisKind, conditionDirectionPoolKey, conditionDurationPoolKey, conditionProvenancePoolKey,
+  crisisDirectionPoolKey,
   conditionSeverityPoolKey, crisisArityPoolKey, crisisBannerPoolKey, crisisBannerRung,
   crisisFramingPoolKey, stressorLifecyclePoolKey, stressorOriginPoolKey, stressorsStateProse,
 } from '../../src/domain/display/stateProse/stressorsStateProse.js';
 import { STRESS_TYPE_MAP } from '../../src/data/stressTypes.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import {
-  isEventSourcedCondition, severityBand, severityBands, supportedConditionArchetypes,
+  deriveAllActiveConditions, isEventSourcedCondition, severityBand, severityBands, supportedConditionArchetypes,
 } from '../../src/domain/activeConditions.js';
+import { archetypeForStressor, promoteStressorsToConditions } from '../../src/domain/conditionPromotion.js';
 import { DOSSIER_STATE_PROSE_STRESSORS } from '../../src/data/dossierStateProse/stressors.generated.js';
 import { STRESSOR_LIFECYCLE_STAGES, normalizeStressor } from '../../src/domain/worldPulse/stressorsCore.js';
 // ⭐ A TEST IMPORT COSTS NO PRODUCTION BYTES. `stressorDynamics.js` drags 29 modules /
@@ -508,5 +510,83 @@ describe('DS-STR-2 — the ten dark pools, and the coupling measurement behind t
     // THE MILESTONE, asserted rather than claimed: no stressors-leaf block remains dark.
     expect(UNMOUNTED_BLOCKS.filter((b) => b.startsWith('DS-STR-') || b.startsWith('DS-CND-'))).toEqual([]);
     expect(DOSSIER_MOUNTS.filter((row) => row.desk === 'stressors')).toHaveLength(3);
+  });
+});
+
+// ⭐ THE STRESS TYPE IN THE POOL KEY (STYLE-RULINGS §1a; W4 PEOPLE second seat, 2026-11-07). On a
+// crisis card the condition IS the crisis, so the direction line names what is worsening, holding or
+// easing: one variant set per crisis kind. The kind is the banner the condition was PROMOTED from
+// (conditionPromotion.js :: archetypeForStressor), never a guess.
+describe('DS-CND-1 — the stress type in the pool key', () => {
+  const flat = 'DIRECTION: stable, and the FLAT case (no valid directional status)';
+  const KINDS = Object.keys(STRESS_TYPE_MAP);
+  /** A crisis town as generation leaves it: the banner, and the condition promotion mints from it. */
+  const crisisTown = (stress, seed) => {
+    const settlement = promoteStressorsToConditions({ name: 'Thornwall', _seed: seed, stress, activeConditions: [] });
+    return { settlement, conditions: deriveAllActiveConditions(settlement) };
+  };
+
+  it('the crisis kind is the banner the condition was promoted from, and nothing else', () => {
+    const failures = collectSeedFailures(KINDS, (type) => {
+      const archetype = archetypeForStressor(banner(type));
+      expect(archetype, `${type} promotes to an archetype`).toBeTruthy();
+      expect(conditionCrisisKind(condition({ archetype }), [banner(type)])).toBe(type);
+    });
+    expectNoSeedFailures(failures, 'every crisis kind is read back from its own promoted condition');
+    // A condition no banner owns (an event, the world pulse) answers null, so the plain pools speak.
+    expect(conditionCrisisKind(condition({ archetype: 'boom' }), [banner('famine')])).toBeNull();
+    expect(conditionCrisisKind(condition({ archetype: 'famine' }), [])).toBeNull();
+    expect(conditionCrisisKind(condition({ archetype: 'famine' }), null)).toBeNull();
+    // Two banners promote to one archetype (a siege and a war are both war_pressure): promotion keeps
+    // the first unless a later one is strictly more severe, and the kind follows the same rule.
+    const war = condition({ archetype: 'war_pressure' });
+    expect(conditionCrisisKind(war, [banner('under_siege'), banner('wartime')])).toBe('under_siege');
+    expect(conditionCrisisKind(war, [{ ...banner('under_siege'), severity: 0.4 }, { ...banner('wartime'), severity: 0.7 }]))
+      .toBe('wartime');
+  });
+
+  it('every crisis kind owns a pool for each of the three directions; no kind keeps the plain pool', () => {
+    const failures = collectSeedFailures(KINDS, (type) => {
+      expect(crisisDirectionPoolKey(condition({ status: 'worsening' }), type)).toBe(`DIRECTION: worsening · CRISIS: ${type}`);
+      expect(crisisDirectionPoolKey(condition({ status: 'easing' }), type)).toBe(`DIRECTION: easing · CRISIS: ${type}`);
+      expect(crisisDirectionPoolKey(condition({ status: 'stable' }), type)).toBe(`DIRECTION: stable · CRISIS: ${type}`);
+      // the FLAT case (no valid status) is the crisis's stable pool, as it is the plain lens's
+      expect(crisisDirectionPoolKey(condition({ status: undefined }), type)).toBe(`DIRECTION: stable · CRISIS: ${type}`);
+      expect(CND1_POOLS[`DIRECTION: worsening · CRISIS: ${type}`]).toBeTruthy();
+      expect(CND1_POOLS[`DIRECTION: stable · CRISIS: ${type}`]).toBeTruthy();
+      expect(CND1_POOLS[`DIRECTION: easing · CRISIS: ${type}`]).toBeTruthy();
+    });
+    expectNoSeedFailures(failures, 'every crisis kind routes to its own three direction pools');
+    expect(crisisDirectionPoolKey(condition({ status: 'worsening' }), null)).toBe('DIRECTION: worsening');
+    expect(crisisDirectionPoolKey(condition({ status: 'worsening' }), 'not_a_crisis')).toBe('DIRECTION: worsening');
+    expect(crisisDirectionPoolKey(condition({ status: 'stable' }), null)).toBe(flat);
+    expect(crisisDirectionPoolKey(null, 'famine')).toBeNull();
+  });
+
+  it('over a promoted crisis town, the card\'s direction line comes from the crisis\'s own pool', () => {
+    const failures = collectSeedFailures(KINDS, (type) => {
+      const { settlement, conditions } = crisisTown([banner(type)], `cnd-${type}`);
+      expect(conditions.length, `${type} promotes a condition`).toBeGreaterThan(0);
+      const drawn = stressorsStateProse(settlement, { banners: settlement.stress, conditions }, { seed: `cnd-${type}` });
+      expect(drawn.conditionDirection?.provenance?.poolKey).toMatch(new RegExp(`· CRISIS: ${type}$`));
+      expect(drawn.conditionDirection.sentence).toContain('Thornwall');
+    });
+    expectNoSeedFailures(failures, 'every crisis kind prints its own direction line');
+  });
+
+  it('the migration pools speak in the direction the record declares, never both', () => {
+    const pool = CND1_POOLS['DIRECTION: worsening · CRISIS: mass_migration'];
+    const influx = new Set(pool.filter((v) => (v.marks || []).includes('migration: influx')).map((v) => v.text));
+    const exodus = new Set(pool.filter((v) => (v.marks || []).includes('migration: exodus')).map((v) => v.text));
+    expect(influx.size).toBe(4);
+    expect(exodus.size).toBe(4);
+    const cases = ['arrivals', 'departures'].flatMap((direction) => [0, 1, 2, 3, 4, 5, 6, 7].map((i) => ({ direction, i })));
+    const failures = collectSeedFailures(cases, ({ direction, i }) => {
+      const { settlement, conditions } = crisisTown([{ ...banner('mass_migration'), direction }], `mig-${i}`);
+      const drawn = stressorsStateProse(settlement, { banners: settlement.stress, conditions }, { seed: `mig-${direction}-${i}` });
+      const text = drawn.conditionDirection?.sentence?.replace(/Thornwall/g, '{settlement}');
+      expect((direction === 'arrivals' ? influx : exodus).has(text), `${direction} drew ${JSON.stringify(text)}`).toBe(true);
+    });
+    expectNoSeedFailures(failures, 'a migration record draws only its own direction\'s lines');
   });
 });

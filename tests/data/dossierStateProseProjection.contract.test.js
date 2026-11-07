@@ -1088,7 +1088,7 @@ describe('SEAM car 4 — poolMeta, the RENDER half, projected and never hand-edi
     }
     expect({ missing, orphan }).toEqual({ missing: [], orphan: [] });
     // Non-vacuity: the walk found the whole register, not an empty one.
-    expect(META_ROWS.length).toBe(716); // W4 PEOPLE 2026-11-07: +7 pools/+18 variants, the faith and great-house construction
+    expect(META_ROWS.length).toBe(761); // W4 PEOPLE 2026-11-07: +7 pools/+18 variants, the faith and great-house construction; W4 PEOPLE second seat 2026-11-07: re-measured, DS-CND-1 the stress type in the pool key (+45 pools/+128 variants)
     expect(META_ROWS.every((r) => r.meta)).toBe(true);
   });
 
@@ -1201,7 +1201,7 @@ describe('SEAM car 4 — poolMeta, the RENDER half, projected and never hand-edi
     }
     expect(wrong).toEqual([]);
     // MEASURED at this tip: exactly the RESOLVED / WIRING-UNRESOLVED split of the census.
-    expect({ present, absent }).toEqual({ present: 348, absent: 368 }); // W4 PEOPLE 2026-11-07: +7 pools/+18 variants, the faith and great-house construction
+    expect({ present, absent }).toEqual({ present: 393, absent: 368 }); // W4 PEOPLE 2026-11-07: +7 pools/+18 variants, the faith and great-house construction; W4 PEOPLE second seat 2026-11-07: re-measured, DS-CND-1 the stress type in the pool key (+45 pools/+128 variants)
     expect(present).toBe(CENSUS.rows.filter((r) => r.reads.length > 0).length);
   });
 
@@ -2057,8 +2057,8 @@ describe('SEAM car 4d — the seat licence, computed where the census is visible
     }
     // The tally the projector prints, re-derived from the two committed files rather than
     // trusted: 708 pools, every one a sentence, and the reason is that none is a modifier yet.
-    expect(tally).toEqual({ 'sentence/not-a-modifier': 716 }); // W4 PEOPLE 2026-11-07: +7 pools/+18 variants, the faith and great-house construction
-    expect(META_ROWS).toHaveLength(716); // W4 PEOPLE 2026-11-07: +7 pools, the faith and great-house construction
+    expect(tally).toEqual({ 'sentence/not-a-modifier': 761 }); // W4 PEOPLE 2026-11-07: +7 pools/+18 variants, the faith and great-house construction; W4 PEOPLE second seat 2026-11-07: re-measured, DS-CND-1 the stress type in the pool key (+45 pools/+128 variants)
+    expect(META_ROWS).toHaveLength(761); // W4 PEOPLE 2026-11-07: +7 pools, the faith and great-house construction; W4 PEOPLE second seat 2026-11-07: re-measured, DS-CND-1 the stress type in the pool key (+45 pools/+128 variants)
     // ⛔ NO SHIPPED POOL IS A MODIFIER, which is why no clause can seat and why the `seat` key
     // is emitted nowhere: an ABSENT seat reads in the composer as the sentence.
     expect(modifiers, 'no shipped pool declares role modifier').toEqual([]);
@@ -2281,6 +2281,6 @@ describe('⭐⭐ REWRITE car 8a-4 — `kin`, the thread rule\'s typed half (SITT
     // than reasoned, and pinned a second time on the SHIFT REGISTER's comparator row.
     expect(META_ROWS.filter((r) => r.meta.kin !== undefined).map((r) => `${r.id} :: ${r.pool}`))
       .toEqual([]);
-    expect(META_ROWS.length, 'over the whole shipped corpus, not a slice').toBe(716); // W4 PEOPLE 2026-11-07: +7 pools/+18 variants, the faith and great-house construction
+    expect(META_ROWS.length, 'over the whole shipped corpus, not a slice').toBe(761); // W4 PEOPLE 2026-11-07: +7 pools/+18 variants, the faith and great-house construction; W4 PEOPLE second seat 2026-11-07: re-measured, DS-CND-1 the stress type in the pool key (+45 pools/+128 variants)
   });
 });

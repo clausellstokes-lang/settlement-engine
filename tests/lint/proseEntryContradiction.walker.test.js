@@ -315,8 +315,8 @@ describe('the corpus loaders — fail-closed, and counted against the probe', ()
     // c00b30eb6 +4); the causal leaf and the 787 pools unchanged. 2810 -> 2811 at
     // LANDING-R2 helper G (the chair's §934.105 ruling (1): DS-GEN-17 PROVISIONED v3, the hospital-only line) +1.
     // 2811 -> 2812 at LANDING-R2 helper G2 (the chair's 06:5x DS-CND-1 boom line (ODQ §934.105, ruling (2)): ARCHETYPE: boom v4 `[street · crisis: any]`) +1.
-    expect(leaves.length + causal.length).toBe(2830); // W4 PEOPLE 2026-11-07: +7 pools/+18 variants, the faith and great-house construction
-    expect(new Set([...leaves, ...causal].map((e) => e.poolId)).size).toBe(794); // W4 PEOPLE 2026-11-07: re-measured, the faith and great-house construction
+    expect(leaves.length + causal.length).toBe(2958); // W4 PEOPLE 2026-11-07: +7 pools/+18 variants, the faith and great-house construction; W4 PEOPLE second seat 2026-11-07: re-measured, DS-CND-1 the stress type in the pool key (+45 pools/+128 variants)
+    expect(new Set([...leaves, ...causal].map((e) => e.poolId)).size).toBe(839); // W4 PEOPLE 2026-11-07: re-measured, the faith and great-house construction; W4 PEOPLE second seat 2026-11-07: re-measured, DS-CND-1 the stress type in the pool key (+45 pools/+128 variants)
     expect(new Set(leaves.map((e) => e.block)).size).toBe(68);
     expect(crier.length).toBeGreaterThan(300);
     expect(generator.length).toBeGreaterThan(0);
@@ -331,13 +331,13 @@ describe('the corpus loaders — fail-closed, and counted against the probe', ()
     // (6dd3f9766, the {colour} rulings) +21 rows whose text now joins its twin. 0 unjoined.
     // 2121 -> 2122 at LANDING-R2 helper G (the chair's §934.105 ruling (1): DS-GEN-17 PROVISIONED v3, the hospital-only line) +1.
     // 2122 -> 2123 at LANDING-R2 helper G2 (the chair's 06:5x DS-CND-1 boom line (ODQ §934.105, ruling (2)): ARCHETYPE: boom v4 `[street · crisis: any]`) +1.
-    expect(joined.length).toBe(2141); // W4 PEOPLE 2026-11-07: +7 pools/+18 variants, the faith and great-house construction
+    expect(joined.length).toBe(2269); // W4 PEOPLE 2026-11-07: +7 pools/+18 variants, the faith and great-house construction; W4 PEOPLE second seat 2026-11-07: re-measured, DS-CND-1 the stress type in the pool key (+45 pools/+128 variants)
     expect(unjoined).toEqual([]);
     // The compact-row grammar (a whole pool on one bullet line, 225 variants) carries no
     // per-row address, so not every leaf variant has an annex line. That gap is the ADDRESS
     // reader's, is declared, and is why the pool grammar stays with the projection.
     expect(leafLines.size).toBeLessThan(leaves.length);
-    expect(leafLines.size).toBe(2141); // 2121 -> 2122 at the same cause: the new line is addressed; 2122 -> 2123 at G2's boom v4, likewise; 2123 -> 2141 at W4 PEOPLE 2026-11-07 (the faith and great-house construction, 18 new lines, each addressed)
+    expect(leafLines.size).toBe(2269); // 2121 -> 2122 at the same cause: the new line is addressed; 2122 -> 2123 at G2's boom v4, likewise; 2123 -> 2141 at W4 PEOPLE 2026-11-07 (the faith and great-house construction, 18 new lines, each addressed); W4 PEOPLE second seat 2026-11-07: re-measured, DS-CND-1 the stress type in the pool key (+45 pools/+128 variants)
   });
 });
 
@@ -423,8 +423,10 @@ describe('THE ANTI-VACUITY GUARD — the walker must fail on the corpus it ships
       // 5298 -> 5325, re-addressed by its text ("the same trades exempt"): the census lanes' annex
       // edits above it moved the row 27 lines (it now carries its census tag slot too). 5325 -> 5326
       // at LANDING-R2 helper G2 (the chair's 06:5x DS-CND-1 boom line (ODQ §934.105, ruling (2)): ARCHETYPE: boom v4 `[street · crisis: any]`): the boom line sits above it.
-      .find((row) => row.line === 5326);
-    expect(annexRow, 'RECEIPT_POOLS_DOSSIER_STATE.md:5326 did not load').toBeTruthy();
+      // 5326 -> 5546, re-addressed by its text ("the same trades exempt") at W4 PEOPLE second seat 2026-11-07: DS-CND-1's
+      // forty-five crisis-keyed direction pools (STYLE-RULINGS §1a) and their note sit above it, 220 lines.
+      .find((row) => row.line === 5546);
+    expect(annexRow, 'RECEIPT_POOLS_DOSSIER_STATE.md:5546 did not load').toBeTruthy();
     expect(walkEntry(annexRow, withEntryContext(base, {})).fails.map((f) => f.arm))
       .toContain('exemption on a null column');
   });
@@ -673,7 +675,7 @@ describe('THE ANTI-VACUITY GUARD — the walker must fail on the corpus it ships
     // chair's ruling of 2026-11-04; the owner's veto point). Report-only, still a minority.
     // 336 -> 341, measured per commit on the leaves: F12 unit 2 (e19e3e4cf) +3, census-5b unit 3
     // (c00b30eb6, R-L twins) +2. Report-only, still a minority.
-    expect(carrying.length, 'entries carrying the trailing-coordinate class, at this tip').toBe(343); // W4 PEOPLE 2026-11-07: re-measured, the faith and great-house construction
+    expect(carrying.length, 'entries carrying the trailing-coordinate class, at this tip').toBe(350); // W4 PEOPLE 2026-11-07: re-measured, the faith and great-house construction; W4 PEOPLE second seat 2026-11-07: re-measured, DS-CND-1 the stress type in the pool key (+45 pools/+128 variants; report-only, still a minority)
     expect(carrying.length, 'and it is a minority of the 2,266 R1 variants').toBeLessThan(leaves.length / 2);
     console.log(`  Q · trailing coordinate: ${carrying.length} of ${leaves.length} R1 entries carry the class`);
   });

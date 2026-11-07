@@ -205,8 +205,8 @@ describe('GUARD THE GUARD — the inputs this file judges are the real ones', ()
     // census-2b item 5 70d05b25b +4, census-5 unit 2 06b59812f +1, census-3c unit 4 e3295d168 +10,
     // census-5b unit 3 c00b30eb6 +4. 2342 -> 2343 at LANDING-R2 helper G (the chair's §934.105 ruling (1): DS-GEN-17 PROVISIONED v3, the hospital-only line) +1.
     // 2343 -> 2344 at LANDING-R2 helper G2 (the chair's 06:5x DS-CND-1 boom line (ODQ §934.105, ruling (2)): ARCHETYPE: boom v4 `[street · crisis: any]`) +1.
-    expect(corpus.length, 'the shipped state corpus').toBe(2362); // W4 PEOPLE 2026-11-07: +7 pools/+18 variants, the faith and great-house construction
-    expect(census.rows.length, 'the committed wiring census').toBe(716); // W4 PEOPLE 2026-11-07: re-measured, the faith and great-house construction
+    expect(corpus.length, 'the shipped state corpus').toBe(2490); // W4 PEOPLE 2026-11-07: +7 pools/+18 variants, the faith and great-house construction; W4 PEOPLE second seat 2026-11-07: re-measured, DS-CND-1 the stress type in the pool key (+45 pools/+128 variants)
+    expect(census.rows.length, 'the committed wiring census').toBe(761); // W4 PEOPLE 2026-11-07: re-measured, the faith and great-house construction; W4 PEOPLE second seat 2026-11-07: re-measured, DS-CND-1 the stress type in the pool key (+45 pools/+128 variants)
     expect(Object.keys(DOSSIER_RELATIONS).length, 'the committed relation leaf').toBe(165);
     // Every arm this module owns is exercised below; a roster that quietly shrank would make
     // a whole describe disappear with nothing red.
@@ -458,7 +458,14 @@ describe('A0b — the text claims every declared field and no other', () => {
     // 61 -> 62 OWED at LANDING-R2 helper G2 (the chair's 06:5x DS-CND-1 boom line (ODQ §934.105, ruling (2)): ARCHETYPE: boom v4 `[street · crisis: any]`): the line inherits its pool's per-line debt
     // as boom v1-3 do (`condition.archetype`, the pool's one declared read, unclaimed; 1343 -> 1344
     // measured, the one new under-claim is DS-CND-1 :: ARCHETYPE: boom v4).
-    const UNDER_CLAIM_OWED = 62;
+    // 62 -> 67 OWED at W4 PEOPLE second seat 2026-11-07 (the owner's style law of 2026-11-07, DS-CND-1, STYLE-RULINGS
+    // §1a): the style law strikes the machinery word "condition" from the block's plain pools, and that word was the
+    // token this arm read as the claim of the pools' declared `condition` read. 1344 -> 1349 measured, the five new
+    // under-claims are DIRECTION: worsening v3, DIRECTION: easing v3, DURATION v1, PROVENANCE traced v1, PROVENANCE
+    // untraced v1 (`condition` unclaimed); the same five lines' over-claims leave (66 -> 61 below, bought back), so the
+    // debt moves between the two limbs and the sum of the two ceilings falls by one. The forty-five crisis-keyed pools
+    // add none: their one read is the crisis kind, which every line names.
+    const UNDER_CLAIM_OWED = 67;
     const UNDER_CLAIM_CEILING = UNDER_CLAIM_BASE + UNDER_CLAIM_OWED;
     // ⛔ THE OVER-CLAIM CEILING, RE-KEYED THE SAME WAY (census-1b unit A (d), 427f7b112). From that
     // commit the wiring census records `settlement` among DS-GEN-17's fieldsRead (the roster key
@@ -473,7 +480,11 @@ describe('A0b — the text claims every declared field and no other', () => {
     // the same `{settlement}` name slot and inherits the same finding (66 -> 67 measured, the one
     // new over-claim is DS-GEN-17 :: PROVISIONED v3); the same buy-back pays it.
     const OVER_CLAIM_BASE = 55;
-    const OVER_CLAIM_OWED = 12;
+    // 12 -> 6 OWED at W4 PEOPLE second seat 2026-11-07 (DS-CND-1, the same cause as UNDER_CLAIM_OWED's 67): 66 -> 61
+    // measured, the five lines that said "The condition …" (SEVERITY low v1, medium v3, high v3, critical v3;
+    // PROVENANCE traced v2) no longer claim `condition` beside a read they do not hold; the ceiling is lowered to the
+    // measurement (55 + 6), a buy-back.
+    const OVER_CLAIM_OWED = 6;
     const OVER_CLAIM_CEILING = OVER_CLAIM_BASE + OVER_CLAIM_OWED;
     const tally = {
       'over-claim': 0, 'under-claim': 0, 'implicit-negation': 0,
@@ -505,7 +516,7 @@ describe('A0b — the text claims every declared field and no other', () => {
       + `\n  over-claims          ${tally['over-claim']}   ceiling ${OVER_CLAIM_CEILING}`
       + ` = ${OVER_CLAIM_BASE} + ${OVER_CLAIM_OWED} OWED (427f7b112: DS-GEN-17's name slot)`
       + `\n  under-claims         ${tally['under-claim']}   ceiling ${UNDER_CLAIM_CEILING}`
-      + ` = ${UNDER_CLAIM_BASE} + ${UNDER_CLAIM_OWED} OWED (R-F5 26 + the pool census 34 + DS-GEN-17 PROVISIONED v3 1 + DS-CND-1 boom v4 1: the census wave buys them back)`
+      + ` = ${UNDER_CLAIM_BASE} + ${UNDER_CLAIM_OWED} OWED (R-F5 26 + the pool census 34 + DS-GEN-17 PROVISIONED v3 1 + DS-CND-1 boom v4 1 + W4 DS-CND-1 style law 5: the census wave buys them back)`
       + `\n  implicit negations   ${tally['implicit-negation']}`
       + `\n  absences claimed by silence (R-F4, REPORT) ${silent}`
       + `\n  NOT-EXECUTABLE reads ${notExecutable}   pools carrying a finding ${pools.size}\n`);
