@@ -351,7 +351,21 @@ const SENTINEL = 'settlementforge:generation:worker-v1';
 //   18fd6b442 +42 (each a merge of several commits; the bytes are attributed to the step, not inside it) · lanes B, C, G3, F2-4, A, E 0.
 //   The sum closes exactly: 1,573,556 + 492 + 790 = 1,574,838, the tip's generation.worker-MaAIxfqL.js.
 // The ceiling is recorded AT the measured figure. MONOTONE-DOWN from here.
-export const WORKER_BUNDLE_CEILING_BYTES = 1574838;
+// 1,574,838 -> 1,603,564 (2026-11-07, THE PEOPLE CAR'S LANDING, PEOPLE-LAND second seat under the chair's brief step 5,
+// "re-recorded at the measured figures with every byte attributed by first-parent step"; ODQ §934.105, VETOABLE BY THE
+// OWNER): A RISE OF 28,726 B. MEASURED by a fresh `vite build` at every first-parent point of the car's stack, each with
+// the landing's two build cures applied (6c8369071, the backing relation's leaf; f7bb28ef6, powerSupport pinned to
+// coherence-lazy -- without them lane 1 also drags the goods chains and the prose corpus into the worker and first paint),
+// the worker bytes being the file's size:
+//   the integration base 262e8b255: 1,579,660 (+4,822 over the ceiling before the car: the integration merges of
+//   2026-11-07, the review-intake lane and W0 among them; not split further here) ·
+//   lane 1 PEOPLE-1 CAST dc655f712 +17,607 (the cast: castPowers, representatives, the mints) · lane 2 3aa160a70 +420 ·
+//   lane 3 0f930ce95 +3,214 (one hook per card) · lane 4 c7d552370 +327 · 5A 053283dfd -568 · 5B a725df7e4 +4,645
+//   (the v1 -> v2 save migration) · the landing's step 1 2981f23f6 -1,738 (the shim and the grouping out) · L0, the links
+//   lane 147fa6c3f 0 · the landing's cures and records to the tip -3 (6851c4c89, an em dash). The sum closes exactly:
+//   1,574,838 + 4,822 + 17,607 + 420 + 3,214 + 327 - 568 + 4,645 - 1,738 - 3 = 1,603,564, the tip's worker bundle.
+// The ceiling is recorded AT the measured figure. MONOTONE-DOWN from here.
+export const WORKER_BUNDLE_CEILING_BYTES = 1603564;
 
 const source = (path) => readFileSync(join(ROOT, path), 'utf8');
 
