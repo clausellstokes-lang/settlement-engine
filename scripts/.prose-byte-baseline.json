@@ -61,8 +61,8 @@
       "ceilingGzip": 108482
     },
     "src/data/dossierStateProse/economy.generated.js": {
-      "raw": 168001,
-      "gzip": 23777,
+      "raw": 168361,
+      "gzip": 23911,
       "ceilingRaw": 393810,
       "ceilingGzip": 87513
     },
@@ -355,6 +355,22 @@
       "toRaw": 168001,
       "gzipAfter": 23777,
       "reason": "+918 B raw (gzip level 9: 23602 -> 23777), one commit: the block's REWRITE rows of STYLE-AUDIT §2b-1 taken, each read against the block's declaration (record docs/WIRING_W1_2026-11-07.md); projected through node scripts/generate-dossier-state-prose.mjs; --check exit 0."
+    },
+    {
+      "car": "W1 ECO STYLE (2026-11-07, WIRING-RULINGS §5-§8, STYLE-RULINGS §2; ODQ §934.105): the owner's style law of 2026-11-07 — DS-NONE",
+      "leaf": "src/data/dossierStateProse/economy.generated.js",
+      "fromRaw": 168001,
+      "toRaw": 168196,
+      "gzipAfter": 23895,
+      "reason": "+195 B raw (gzip level 9: 23777 -> 23895), one commit: the block's REWRITE rows of STYLE-AUDIT §2b-1 taken, each read against the block's declaration (record docs/WIRING_W1_2026-11-07.md); projected through node scripts/generate-dossier-state-prose.mjs; --check exit 0."
+    },
+    {
+      "car": "W1 ECO STYLE (2026-11-07, WIRING-RULINGS §5-§8, STYLE-RULINGS §2; ODQ §934.105): the owner's style law of 2026-11-07 — DS-NONE",
+      "leaf": "src/data/dossierStateProse/economy.generated.js",
+      "fromRaw": 168196,
+      "toRaw": 168361,
+      "gzipAfter": 23911,
+      "reason": "+165 B raw (gzip level 9: 23895 -> 23911), one commit: the block's REWRITE rows of STYLE-AUDIT §2b-1 taken, each read against the block's declaration (record docs/WIRING_W1_2026-11-07.md); projected through node scripts/generate-dossier-state-prose.mjs; --check exit 0."
     }
   ],
   "ceilingTransfersNewLeaves": [

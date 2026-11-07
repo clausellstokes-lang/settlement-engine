@@ -37,8 +37,8 @@
     "syntheticTableFields": 100,
     "tiers": {
       "MISSING": 35,
-      "THIN": 502,
-      "COVERED": 233,
+      "THIN": 501,
+      "COVERED": 234,
       "MISSING-AT-TIER": 45
     },
     "tierSilences": 352,
@@ -10132,7 +10132,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 2,
-      "grammars": 1,
+      "grammars": 2,
       "predicate": [
         {
           "field": "hiddenRow.facets.clandestine",
@@ -13903,8 +13903,10 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 6,
+      "lineDeclares": {
+        "colour": 3
+      },
+      "undeclared": 3,
       "crisisScoped": false
     },
     {
@@ -46298,7 +46300,7 @@
         "DS-ECO-6 :: FACET: a clandestine house"
       ],
       "variants": 2,
-      "grammars": 1,
+      "grammars": 2,
       "blocks": [
         "DS-ECO-6"
       ]
@@ -57024,14 +57026,14 @@
       "count": "2 variant(s) · 2 grammar(s) · slots {institution, settlement}"
     },
     {
-      "tier": "THIN",
+      "tier": "COVERED",
       "block": "DS-ECO-6",
       "subject": "FACET: a clandestine house",
       "fields": [
         "hiddenRow.facets.clandestine"
       ],
       "readingFunction": "hiddenHousePoolKey",
-      "count": "2 variant(s) · 1 grammar(s) · slots {institution, settlement}"
+      "count": "2 variant(s) · 2 grammar(s) · slots {institution, settlement}"
     },
     {
       "tier": "THIN",

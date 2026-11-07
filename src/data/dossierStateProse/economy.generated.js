@@ -126,7 +126,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "Traffic moves through {settlement}'s {access} every day, and little of the money stays. The stalls are thin and the town still counts short.",
+          "text": "Traffic moves through {settlement}'s {access} every day, and little of the money stays. The market tolls bring in less than the town spends, so the coffers stay short.",
           "slots": [
             "settlement",
             "access"
@@ -514,7 +514,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "institution: granary"
           ],
-          "text": "{settlement}'s granary runs thin this {season}. What is left will last weeks, not seasons, and someone is counting it.",
+          "text": "{settlement}'s granary runs thin this {season}. The granary's tally is checked every week now, and it shows weeks of food left, not seasons.",
           "slots": [
             "settlement",
             "season"
@@ -2140,7 +2140,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
             "dm-only",
             "colour"
           ],
-          "text": "{settlement}'s {institution} does its business out of sight, and nothing it earns reaches the town's books.",
+          "text": "{settlement}'s {institution} does its business out of sight and pays nothing to the town's tax collectors.",
           "slots": [
             "settlement",
             "institution"
@@ -2300,7 +2300,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "These figures for {settlement} were taken some time ago, and anything since may not show in them yet.",
+          "text": "These tallies of {settlement} were taken some time ago; a fire, a death or a new house since may not show in them, so check before relying on them.",
           "slots": [
             "settlement"
           ],
@@ -2344,7 +2344,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "This list of what {settlement} offers was drawn up some time ago. A house opened or closed since may not appear on it yet.",
+          "text": "This list of {settlement}'s houses and services was drawn up some time ago; one opened or closed since may not be on it, so ask before relying on it.",
           "slots": [
             "settlement"
           ],
@@ -2511,7 +2511,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "crisis: any"
           ],
-          "text": "{settlement}'s accounts come out steady with a narrow margin. It is enough, and no more.",
+          "text": "{settlement}'s treasury takes in a little more than it pays out each year. It is enough, and no more.",
           "slots": [
             "settlement"
           ],
@@ -4382,7 +4382,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "THE FRESHNESS CAVEAT: for any surface printing a derived tally": [
         {
           "angle": "ledger",
-          "text": "The figures below for {settlement} were taken some time ago and may not show what has happened since.",
+          "text": "The tallies below for {settlement} were taken some time ago; a raid, a fire or a lost harvest since may not show in them yet.",
           "slots": [
             "settlement"
           ],
@@ -4943,6 +4943,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "threshold",
+          "marks": [
+            "colour"
+          ],
           "text": "A newcomer to {settlement} soon hears what its ground is worth to the powers around it, and how little of that worth stays in the town.",
           "slots": [
             "settlement"
@@ -4951,6 +4954,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
+          "marks": [
+            "colour"
+          ],
           "text": "For as long as others value {settlement}'s position, the town will have to reckon with who wants it and what they will offer for it.",
           "slots": [
             "settlement"
@@ -4959,6 +4965,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "counterforce",
+          "marks": [
+            "colour"
+          ],
           "text": "{settlement}'s position is worth watching over: whoever holds the ground holds what the assessment below names.",
           "slots": [
             "settlement"
@@ -5564,7 +5573,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "dm-only"
           ],
-          "text": "A real portion of {settlement}'s money is made by people who keep it from the clerks, and it never shows in the town's books.",
+          "text": "A real portion of {settlement}'s money is made by people who keep it off the tax lists, so the town collects nothing on it and honest traders carry the tax alone.",
           "slots": [
             "settlement"
           ],

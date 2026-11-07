@@ -825,7 +825,7 @@ the access.
 3. `[visitor · no crisis · market]` There is nothing striking about {settlement}'s condition in either direction: a working {access}, a working market, a town neither building nor selling off.
 
 **COMBINATION C4: a low rung on a working approach**
-1. `[ledger · colour]` Traffic moves through {settlement}'s {access} every day, and little of the money stays. The stalls are thin and the town still counts short.
+1. `[ledger · colour]` Traffic moves through {settlement}'s {access} every day, and little of the money stays. The market tolls bring in less than the town spends, so the coffers stay short.
 2. `[street]` The {access} into {settlement} is busy and the town is poor. That is the first complaint a visitor hears, and the one they hear most.
 3. `[visitor · market]` More goods come off the {access} at {settlement} than are ever sold there. The traffic is busy and the town stays poor.
 
@@ -888,7 +888,7 @@ wants a sentence.
 4. `[ledger · no institution: granary]` The stores hold a working reserve into {season}: enough to carry the town through, not enough to lend.
 
 **GRANARY: thin**
-1. `[ledger · institution: granary]` {settlement}'s granary runs thin this {season}. What is left will last weeks, not seasons, and someone is counting it.
+1. `[ledger · institution: granary]` {settlement}'s granary runs thin this {season}. The granary's tally is checked every week now, and it shows weeks of food left, not seasons.
 2. `[street · institution: granary]` People in {settlement} have begun asking when the granary was last this low. Nobody yet asks what happens when it is empty.
 3. `[unfolding · colour]` {settlement} is eating its stores faster than {season} will refill them. If nothing changes, the granary runs out before the next harvest.
 4. `[ledger · no institution: granary]` The stores run thin this {season}. What is left is measured in weeks rather than seasons.
@@ -1149,7 +1149,7 @@ register and stand as canonical-at-zero for the two lower tiers (R-DST-C).
 2. `[street · dm-only · colour]` The way into {settlement}'s {institution} is through a cellar, and the people who use it come and go by passages under the town.
 
 **FACET: a clandestine house**
-1. `[ledger · dm-only · colour]` {settlement}'s {institution} does its business out of sight, and nothing it earns reaches the town's books.
+1. `[ledger · dm-only · colour]` {settlement}'s {institution} does its business out of sight and pays nothing to the town's tax collectors.
 2. `[street · dm-only · colour]` Plenty of people at {settlement} have used its {institution}; few will say where it meets or who runs it.
 
 ---
@@ -1173,13 +1173,13 @@ veto the owner takes, not an implementer's swap.
 
 **TALLIES**
 0. *(frozen, canonical)* `[colour]` Events recorded after this settlement's last survey may not be fully counted in these tallies yet.
-1. `[ledger · colour]` These figures for {settlement} were taken some time ago, and anything since may not show in them yet.
+1. `[ledger · colour]` These tallies of {settlement} were taken some time ago; a fire, a death or a new house since may not show in them, so check before relying on them.
 2. `[unfolding · colour]` These figures show {settlement} as it was when they were taken. Later events may not show in them yet.
 3. `[visitor · colour]` What follows is the last careful reckoning of {settlement}, and it may not be today's.
 
 **CATALOG**
 0. *(frozen, canonical)* `[colour]` Events recorded after this settlement's last survey may not be fully counted in this catalog yet.
-1. `[ledger · colour]` This list of what {settlement} offers was drawn up some time ago. A house opened or closed since may not appear on it yet.
+1. `[ledger · colour]` This list of {settlement}'s houses and services was drawn up some time ago; one opened or closed since may not be on it, so ask before relying on it.
 2. `[unfolding · colour]` This list shows the services {settlement} had when it was made. Later changes may not show on it yet.
 3. `[street · colour]` What {settlement} could do for a visitor was written down some time ago, and may have changed since.
 
@@ -1222,7 +1222,7 @@ contradict** it (R-DST-C).
 3. `[visitor · crisis: any]` In {settlement} the old buildings are patched and kept standing, and nothing new goes up.
 
 **MODERATE** — *steady, thin margin* {crisis-scoped}
-1. `[ledger · crisis: any]` {settlement}'s accounts come out steady with a narrow margin. It is enough, and no more.
+1. `[ledger · crisis: any]` {settlement}'s treasury takes in a little more than it pays out each year. It is enough, and no more.
 2. `[street · no crisis]` Things are fine. Not comfortable, not tight: fine, and fine is what people here expect.
 3. `[visitor · no crisis]` Nothing about {settlement}'s condition asks to be remarked on. The town supports itself and has a little in hand.
 4. `[visitor · crisis · crisis: any]` {settlement}'s accounts still balance, and that is the one thing about the town the crisis has not yet reached.
@@ -1559,7 +1559,7 @@ note that carries it on the six wired surfaces.
 3. `[visitor · colour]` {good} is cheap in {settlement}; the town has more than it can use.
 
 **THE FRESHNESS CAVEAT: for any surface printing a derived tally**
-1. `[ledger]` The figures below for {settlement} were taken some time ago and may not show what has happened since.
+1. `[ledger]` The tallies below for {settlement} were taken some time ago; a raid, a fire or a lost harvest since may not show in them yet.
 2. `[unfolding]` These counts are {settlement}'s last reckoning, and a later change may not show in them yet.
 3. `[visitor]` What is written here was true when it was written. Nobody has counted again since.
 
@@ -1661,9 +1661,9 @@ A composed page draws one of each grain, never two.
 1. `[ledger]` Others want {settlement} for what it controls. The people who live there see little of that value.
 2. `[visitor]` Anyone who looks at {settlement}'s position can see why someone would want to hold it.
 3. `[street]` The people of {settlement} know what their ground is worth to others, and know they could not keep it against anyone who came for it.
-4. `[threshold]` A newcomer to {settlement} soon hears what its ground is worth to the powers around it, and how little of that worth stays in the town.
-5. `[unfolding]` For as long as others value {settlement}'s position, the town will have to reckon with who wants it and what they will offer for it.
-6. `[counterforce]` {settlement}'s position is worth watching over: whoever holds the ground holds what the assessment below names.
+4. `[threshold · colour]` A newcomer to {settlement} soon hears what its ground is worth to the powers around it, and how little of that worth stays in the town.
+5. `[unfolding · colour]` For as long as others value {settlement}'s position, the town will have to reckon with who wants it and what they will offer for it.
+6. `[counterforce · colour]` {settlement}'s position is worth watching over: whoever holds the ground holds what the assessment below names.
 
 **EXPLOITATION: `unexploited`, `exportValue: high`**
 1. `[ledger]` There is {resource} in {settlement}'s country worth real money and nothing in the town takes it out of the ground.
@@ -1748,7 +1748,7 @@ shape.
 3. `[threshold]` {settlement} would hardly notice losing one trade, but could not stand losing several at once.
 
 **INCOME MIX: a criminal line is present** *(every variant `dm-only`)*
-1. `[ledger · dm-only]` A real portion of {settlement}'s money is made by people who keep it from the clerks, and it never shows in the town's books.
+1. `[ledger · dm-only]` A real portion of {settlement}'s money is made by people who keep it off the tax lists, so the town collects nothing on it and honest traders carry the tax alone.
 2. `[street · dm-only]` Some of this town's money has no honest account of itself, and the town's ordinary trades compete against it without being told.
 3. `[counterforce · dm-only]` The unlawful earnings at {settlement} are real and contained: {faction} takes its portion and has never reached for a second one.
 
