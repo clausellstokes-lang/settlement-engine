@@ -53,7 +53,11 @@ describe('claims-parity — each synopsis is proven by the forged world', () => 
     expect(stressTypes).toContain('plague_onset');
     expect((t.powerStructure?.factions || []).map((f) => f.faction)).toContain('Quarantine Council');
     // Receipt 3: a figure formalising the independent authority the collapse created.
-    expect(goalsOf(t).some((g) => /independent operational authority|exit before the gap between title and authority/i.test(g))).toBe(true);
+    // R11 unit 3 (73fa1a1e7, the 76 registry goals rewritten in the house register) re-worded the two rows this
+    // receipt reads, same registry rows (npcStructure.js): 'Formalize the independent operational authority ...' ->
+    // "Get their trade's new freedoms written down ..." and '... identify an exit before the gap between title and
+    // authority ...' -> '... or find a quiet way out of it.'
+    expect(goalsOf(t).some((g) => /new freedoms written down|find a quiet way out of it/i.test(g))).toBe(true);
     // THE SPECIFICS THE SYNOPSIS QUOTES, re-pinned 2026-11-06 (LANDING-7 G2, the chair's ruling R-G2: crown-3, the
     // first crown seed forging the essential story; the specifics follow its world). The mining town and the
     // siege ten years past were crown-8826's; crown-3's two are the plague (receipt 2 above) and the thieves' guild.
@@ -68,7 +72,7 @@ describe('claims-parity — each synopsis is proven by the forged world', () => 
     // thieves' guild master's.
     expect((Array.isArray(t.npcs) ? t.npcs : []).some((n) => /guild master/i.test(n?.role || '')
       && n?.factionAffiliation === "Thieves' Guild"
-      && /independent operational authority/i.test(n?.goal?.short || ''))).toBe(true);
+      && /new freedoms written down/i.test(n?.goal?.short || ''))).toBe(true); // R11 (73fa1a1e7): the formalising row's wording
   });
 
   it('THE MILL THAT OUTLIVED ITS WARS — a scarred survivor', () => {
@@ -123,7 +127,11 @@ describe('claims-parity — each synopsis is proven by the forged world', () => 
     // Receipt 2: an uprising of the first rank within the last fifteen years.
     expect(eventsOf(t).some((e) => /uprising/i.test(e.name) && e.severity === 'major' && e.yearsAgo <= 15)).toBe(true);
     // Receipt 3: a figure holding the line around criminal/informal arrangements.
-    expect(goalsOf(t).some((g) => /informal arrangements|criminal arrangements|corrupt interests/i.test(g))).toBe(true);
+    // R11 unit 3 (73fa1a1e7) re-worded the three rows this receipt reads, same registry rows (npcStructure.js):
+    // '... the informal arrangements it depends on' -> 'Keep the seat running without crossing the people whose
+    // payments keep it running.'; '... the criminal arrangements ...' -> 'Keep trading without paying the gangs ...';
+    // '... the corrupt interests ...' -> '... the bribers or the inquiry.'
+    expect(goalsOf(t).some((g) => /people whose payments keep it running|without paying the gangs|the bribers or the inquiry/i.test(g))).toBe(true);
   });
 });
 
@@ -135,7 +143,7 @@ describe('claims-parity — each synopsis is proven by the forged world', () => 
 // below, and each field proves exactly one (cause → effect) pair, so a row cannot borrow another link's proof.
 
 const masterOf = (t) => (Array.isArray(t.npcs) ? t.npcs : []).find((n) => /guild master/i.test(n?.role || '')
-  && n?.factionAffiliation === "Thieves' Guild" && /independent operational authority/i.test(n?.goal?.short || ''));
+  && n?.factionAffiliation === "Thieves' Guild" && /new freedoms written down/i.test(n?.goal?.short || '')); // R11 (73fa1a1e7)
 const governingOf = (t) => (t.powerStructure?.factions || []).find((f) => f.isGoverning);
 const thievesOf = (t) => (t.powerStructure?.factions || []).find((f) => f.faction === "Thieves' Guild");
 /** The showcase story's six facts, each a predicate on the forged world (the same truths the claims above pin). */
