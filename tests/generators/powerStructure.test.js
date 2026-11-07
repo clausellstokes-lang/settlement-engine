@@ -43,7 +43,7 @@ const PUBLIC_EXPORTS = [
   'genRelNarrative',
   'genSuccessionNarr',
   'generateConflicts',
-  'generateFactions',
+  // 'generateFactions' left the surface (PEOPLE-LAND, M-2: the NPC grouping and its builder deleted).
   'generatePowerStructure',
 ].sort();
 

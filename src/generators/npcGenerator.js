@@ -1113,8 +1113,10 @@ export const mergeNPCLists = (npcs, factions, institutions, tier, config) => {
       if (!assignedFaction) assignedFaction = pool[0];
     }
 
+    // PEOPLE-LAND (M-2, the shim out): the keyword cascade no longer writes `factionAffiliation`; a
+    // card's powers are its `memberships` (people/castPowers.js). The draw and the capacity count stay,
+    // so the stream after them does not move.
     if (assignedFaction) {
-      enriched.factionAffiliation = assignedFaction.faction;
       factionAssignCount.set(assignedFaction.faction, (factionAssignCount.get(assignedFaction.faction) || 0) + 1);
     }
 
@@ -1259,13 +1261,9 @@ export const mergeNPCLists = (npcs, factions, institutions, tier, config) => {
         !roleLower.includes('thief') &&
         !roleLower.includes('assassin') &&
         !roleLower.includes('criminal');
-      if (isCriminalSecret && notAlreadyCrime && roleIsNotCrime && !noCrime) {
-        enriched.secondaryAffiliation = crimeFaction
-          ? crimeFaction.faction
-          : secretText.includes('thieves')
-            ? "Thieves' Guild"
-            : 'criminal network';
-      }
+      // PEOPLE-LAND (M-2): `secondaryAffiliation` is no longer written (a criminal secret's house
+      // rides on the corruption pass's `corruptTies`); the test above stays a pure read.
+      void (isCriminalSecret && notAlreadyCrime && roleIsNotCrime && !noCrime);
     }
 
     // First NPC inherits governing faction goal context
@@ -1276,7 +1274,7 @@ export const mergeNPCLists = (npcs, factions, institutions, tier, config) => {
         govDesc.toLowerCase().includes('challeng') ||
         govDesc.toLowerCase().includes('compet')
       ) {
-        enriched.factionGoal = `Maintain ${govFaction.faction}'s position against current pressure`;
+        // PEOPLE-LAND (M-2): `factionGoal` is no longer written; the goal itself carries the pressure.
       }
     }
 

@@ -45,12 +45,13 @@ describe('FactionRef production', () => {
     const authoredPriest = generateFactionStructuralNpcs(authoredSeat)[0];
 
     expect(factionRefOf(generatedSeat)).toBe('Religious Authorities');
-    expect(generatedPriest.linkedFactionIds).toEqual(['Religious Authorities']);
-    expect(generatedPriest.factionAffiliation).toBe('Religious Authorities');
+    // PEOPLE-LAND re-key (M-2): the structural priest belongs to its seat by a membership named by the
+    // seat's display name; the retired `linkedFactionIds`/`factionAffiliation` are no longer written.
+    expect(generatedPriest.memberships).toEqual([{ power: 'Religious Authorities', rank: 1, share: 1 }]);
+    expect(Object.hasOwn(generatedPriest, 'linkedFactionIds')).toBe(false);
 
     expect(factionRefOf(authoredSeat)).toBe('faction.temple.stable');
-    expect(authoredPriest.linkedFactionIds).toEqual(['faction.temple.stable']);
-    expect(authoredPriest.factionAffiliation).toBe('Religious Authorities');
+    expect(authoredPriest.memberships).toEqual([{ power: 'Religious Authorities', rank: 1, share: 1 }]);
   });
 });
 

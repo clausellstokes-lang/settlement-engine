@@ -71,7 +71,9 @@ describe('the town this is pinned against', () => {
     // an empty one would make every assertion in this file pass for free.
     expect(settlement.npcs.length).toBeGreaterThan(2);
     expect(parts.relationships.length).toBeGreaterThan(0);
-    expect(parts.factions.length).toBeGreaterThan(0);
+    // PEOPLE-LAND re-key (M-2): the regen no longer returns the NPC grouping; a card's powers are its memberships.
+    expect(Object.hasOwn(parts, 'factions')).toBe(false);
+    expect(parts.npcs.some((/** @type {any} */ n) => (n.memberships || []).length > 0)).toBe(true);
     expect(settlement.npcs[2].id).toBeTruthy();
   });
 
@@ -174,12 +176,13 @@ describe('the reference graph stays resolvable', () => {
     }
   });
 
-  test('every faction member is a live roster object, not a displaced ghost', () => {
-    for (const faction of parts.factions || []) {
-      for (const member of faction.members || []) {
-        expect(ids.has(member.id)).toBe(true);
-        expect(member).toBe(parts.npcs.find((/** @type {{id: string}} */ n) => n.id === member.id));
-      }
+  // PEOPLE-LAND re-key (M-2): the grouping's member copies are gone; the one-source property now reads the
+  // memberships — every power a regenerated card belongs to is a power of the settlement.
+  test('every regenerated card\'s membership names a live power, not a displaced ghost', () => {
+    const powers = new Set((editedSettlement.powerStructure?.factions || []).map((/** @type {any} */ f) => f.faction));
+    expect(powers.size).toBeGreaterThan(0);
+    for (const npc of parts.npcs) {
+      for (const m of npc.memberships || []) expect(powers.has(m.power), `${npc.id} -> ${m.power}`).toBe(true);
     }
   });
 });

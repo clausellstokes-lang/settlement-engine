@@ -14,9 +14,9 @@ import { setActiveRng, clearActiveRng, getActiveRng } from '../kernel/rngContext
 import { runPipeline } from './pipeline.js';
 import { drawTies } from './people/ties.js';
 import { generateRepresentatives } from './people/representatives.js';
-import { generateFactions, generateConflicts } from './powerGenerator.js';
+import { generateConflicts } from './powerGenerator.js';
 import { generateHistory } from './historyGenerator.js';
-import { enrichNpcCoherence, relinkFactionMembers } from './narrativeGenerator.js';
+import { enrichNpcCoherence } from './narrativeGenerator.js';
 import { enrichHistoryCoherence } from './narrative/historyCoherence.js';
 import { withCustomContent } from '../lib/dependencyEngine.js';
 // THE whole-word substitution, shared with the faction-rename convergence. The
@@ -449,7 +449,6 @@ export function carryLockedRosterThroughGenerate(previousSettlement, freshSettle
     ...freshSettlement,
     npcs: roster,
     relationships: refreshRelationshipProjections(freshSettlement.relationships, roster, freshSettlement.institutions),
-    factions: relinkFactionMembers(freshSettlement.factions, roster),
   };
 
   // A departed name that still belongs to somebody in the final cast is not
@@ -568,20 +567,17 @@ export function regenNPCsPipeline(settlement, config, options = {}) {
       ? refreshRosterProse(merged, displacements, new Set(preserved.map(p => p.id)))
       : merged;
 
-    // The faction groups are built FROM the final npcs, so their members are the same records
-    // the roster carries (the one-source property relinkFactionMembers used to repair), and a
-    // displaced stranger can never sit in a group: a preserved character inherits its slot.
+    // The NPC grouping is gone (PEOPLE-LAND, M-2: the shim out): a card's powers are its
+    // memberships, so there is no group to rebuild from the final roster.
     // THE PEOPLE CAR (PEOPLE-4 TIES, R-P7): one outgoing tie per card, drawn over the FINAL roster
     // (the memberships written, the user's canon merged in) on this regen's own keyed family — the
     // pair-saturation writer that drew here before the enrichment is retired. Drawn last, so it
     // moves no draw above it; a fresh tie names the cast as it stands, so no projection refresh.
     const finalRelationships = drawTies(roster, { config, institutions: settlement.institutions || [] }, getActiveRng());
-    const factions = generateFactions(roster, settlement.powerStructure?.factions);
     const conflicts = generateConflicts(settlement.powerStructure?.factions || [], finalRelationships, config, settlement.institutions || [], roster);
     return {
       npcs: roster,
       relationships: finalRelationships,
-      factions,
       conflicts,
       _regenSeed: seed,
       // The preservation REPORT, out of band of the settlement parts. A keeper

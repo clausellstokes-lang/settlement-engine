@@ -10,7 +10,7 @@
 
 import { chooseOrPin, registerStep } from '../pipeline.js';
 import { generateSettlementName } from '../npcGenerator.js';
-import { generateFactions, generateConflicts } from '../powerGenerator.js';
+import { generateConflicts } from '../powerGenerator.js';
 // F8: re-render stress summaries with the real settlement name. resolveStress
 // (step 3) rolled them 16 steps ago with an empty name and stashed the
 // rng-derived choice in each entry's `summaryRoll`; we re-render here now that
@@ -370,7 +370,8 @@ registerStep('assembleSettlement', {
   // stream, so they move nothing generated after them, and a town with no crossing tie has no
   // conflict row. Under a held roster both re-derive from the held NPCs: a pure projection and
   // a seed-stable stream.
-  settlement.factions = generateFactions(settlement.npcs, settlement.powerStructure?.factions);
+  // PEOPLE-LAND (M-2, the shim out): the NPC grouping `settlement.factions` is no longer built; a
+  // card's powers are its memberships and the powers are `powerStructure.factions`.
   settlement.conflicts = inAssemblySubstream(
     rng,
     'faction-conflicts',
@@ -398,12 +399,7 @@ registerStep('assembleSettlement', {
   // re-written, under the same gate.
   if (!npcsHeld) {
     const npcs = truePersonHooks(settlement, resolveGenerationWorldLaw(ctx.generationContext, ctx.effectiveConfig || {}).portKind);
-    if (npcs !== settlement.npcs) {
-      settlement.npcs = npcs;
-      // the grouping (the shim's projection, deleted by PEOPLE-5) copies its members from the
-      // roster: re-projected, so its copies carry the card's redrawn hook (one source)
-      settlement.factions = generateFactions(settlement.npcs, settlement.powerStructure?.factions);
-    }
+    if (npcs !== settlement.npcs) settlement.npcs = npcs;
   }
 
   // Propagate the in-pipeline causal trace onto the settlement so

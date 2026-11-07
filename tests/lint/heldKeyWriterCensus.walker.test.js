@@ -128,7 +128,7 @@ const ROSTER = Object.freeze([
   // the powers' people are written by `assignCastPowers` in the same named child stream, through the same seam.
   { symbol: 'assignCastPowers', file: 'src/generators/people/castPowers.js', cls: 'enricher', stream: NAMED_CHILD, via: 'generateCoherence' },
   { symbol: 'enrichNPCsWithStructure', file: 'src/generators/npcStructure.js', cls: 'enricher', stream: NAMED_CHILD, via: 'generateCoherence' },
-  { symbol: 'relinkFactionMembers', file: NARRATIVE_FILE, cls: 'MIRROR', stream: SHARED, via: 'generateCoherence' },
+  // 2026-11-07 PEOPLE-LAND (M-2, the shim out): `relinkFactionMembers`, the one MIRROR, left with the NPC grouping.
   { symbol: 'ensureFactionStructuralNpcs', file: 'src/generators/factionRoles.js', cls: 'producer', stream: SHARED, via: ASSEMBLY_STEP },
   { symbol: 'reconcilePowerStructure', file: RECONCILE_FILE, cls: 'replay', stream: SHARED, via: ASSEMBLY_STEP },
   { symbol: 'resizePoliticalRoster', file: 'src/generators/density/applyDensityLaw.js', cls: 'replay', stream: SHARED, via: ASSEMBLY_STEP },
@@ -142,7 +142,7 @@ const ROSTER = Object.freeze([
   // rival or enemy tie crosses, drawing its count and issues on its OWN assembly child stream
   // 'faction-conflicts'. NEITHER consults a pin: no step declares either key any more, so the
   // pin bag can never carry them (see A2) and both re-derive on every run.
-  { symbol: 'generateFactions', file: 'src/generators/power/factionGrouping.js', cls: 'producer', stream: SHARED, via: ASSEMBLY_STEP },
+  // 2026-11-07 PEOPLE-LAND (M-2): `generateFactions` (power/factionGrouping.js) deleted with the grouping it built.
   { symbol: 'generateConflicts', file: 'src/generators/power/conflicts.js', cls: 'producer', stream: NAMED_CHILD, via: ASSEMBLY_STEP },
   // ⭐ 13 -> 14 (lane RUNG1-TRUTH unit A, 2026-11-04): `storeTrueHooksOnly` drops a stored hook its
   // own record contradicts, so it WRITES `plotHooks` inside `npcs` and `conflicts` (copy-on-write,
@@ -150,6 +150,10 @@ const ROSTER = Object.freeze([
   // assembly body on `chooseOrPin(pins, 'npcs', …)`, the structural appender's own gate, so a held
   // roster is never re-written; the conflicts are re-derived on every run and never held.
   { symbol: 'storeTrueHooksOnly', file: 'src/domain/coherence/hookTruthRecord.js', cls: 'mutator', stream: SHARED, via: ASSEMBLY_STEP },
+  // PEOPLE-LAND (2026-11-07), lane 3's row the merge never added (A3 red since MERGE-234): ONE TRUE HOOK PER CARD —
+  // a card whose hook the check above refused takes the next true line of its own pool, draw-free, writing `plotHooks`
+  // inside `npcs`; gated in the assembly body on the same `npcsHeld` as storeTrueHooksOnly. A MUTATOR.
+  { symbol: 'truePersonHooks', file: 'src/generators/people/personHooks.js', cls: 'mutator', stream: SHARED, via: ASSEMBLY_STEP },
   // ⭐ 15 -> 16 (the people car, PEOPLE-4 TIES, 2026-11-07; R-P7): `relationships` left
   // generatePopulation's chooser (the step now provides `[]` under it) and is PRODUCED at function
   // level: ONE OUTGOING TIE PER CARD, `drawTies`, called by `generateCoherence` over the final cast
@@ -205,6 +209,8 @@ const DISCOVERY_EXEMPT = Object.freeze([
   { symbol: 'buildGenerationCoherenceReceipt', reason: 'builds `generationCoherenceReceipt`, classed RECEIPT, not HELD.' },
   { symbol: 'refreshPowerGenerationTraces', reason: 're-stamps the power traces in `simulationTrace`, the sanctioned cross-cutting ledger, never `powerStructure` itself.' },
   // RUNG1B-F4 unit 4 (9fd39cf6d), added at the window compose, 2026-11-04.
+  // PEOPLE-LAND (2026-11-07), lane 3's call the merge never listed: a pure resolver of the world law (portKind).
+  { symbol: 'resolveGenerationWorldLaw', reason: 'a pure resolver of the generation world law from the context and config; it writes nothing.' },
   { symbol: 'settleCrimeLinesToSignal', reason: 'rewrites the safety profile crime-line descs inside economicState from the final crime signal; economicState is not a held key.' },
 ]);
 
@@ -519,7 +525,7 @@ describe('EM-R1 — the writer census of every held key', () => {
       if (!cache.has(row.file)) cache.set(row.file, declaredSymbols(rawSource(row.file)));
       if (cache.get(row.file).get(row.symbol) !== 1) unresolved.push(`${row.file} :: ${row.symbol}`);
     }
-    expect(ROSTER).toHaveLength(16); // 15 -> 16 (PEOPLE-4 TIES): drawTies; 11 -> 13 at the GS-2 merge (lane G2): generateFactions, generateConflicts; 13 -> 14 rung 1 N1 (2026-11-04): conserveSeatPower; 14 -> 15: storeTrueHooksOnly (lane RUNG1-TRUTH unit A; the union of both lanes' rows, composed on the window branch)
+    expect(ROSTER).toHaveLength(15); // 16 -> 15 (PEOPLE-LAND): relinkFactionMembers and generateFactions left (M-2), truePersonHooks joined (lane 3's); with the grouping; 15 -> 16 (PEOPLE-4 TIES): drawTies; 11 -> 13 at the GS-2 merge (lane G2): generateFactions, generateConflicts; 13 -> 14 rung 1 N1 (2026-11-04): conserveSeatPower; 14 -> 15: storeTrueHooksOnly (lane RUNG1-TRUTH unit A; the union of both lanes' rows, composed on the window branch)
     expect(unresolved, 'a roster row names a symbol its file no longer declares exactly once').toEqual([]);
 
     // (b) DISCOVERY, both directions, over the assembly step's OWN body.
@@ -569,8 +575,11 @@ describe('EM-R1 — the writer census of every held key', () => {
       .map((row) => row.symbol)
       .sort();
     const declaredMirrors = ROSTER.filter((row) => row.cls === 'MIRROR').map((row) => row.symbol).sort();
-    // ANTI-VACUITY: there IS at least one MIRROR row, so the equality is not two empty sets.
-    expect(declaredMirrors).toEqual(['relinkFactionMembers']);
+    // Re-keyed by identity (PEOPLE-LAND, M-2): the class's one row, `relinkFactionMembers`, left with the NPC
+    // grouping, so the MIRROR class is EMPTY by measurement; the anti-vacuity half is that the measured roster below
+    // still ran over every declared row (the MIRROR filter applied to a non-empty roster).
+    expect(declaredMirrors).toEqual([]);
+    expect(ROSTER.length).toBeGreaterThan(10);
     expect(measuredMirrors, 'a MIRROR row consults a pin, so it does not always run').toEqual(declaredMirrors);
   });
 
@@ -613,8 +622,8 @@ describe('EM-R1 — the writer census of every held key', () => {
     // Every OTHER held writer is SHARED-STREAM and therefore consumes and discards.
     const shared = ROSTER.filter((row) => row.stream === SHARED).map((row) => row.symbol).sort();
     expect(shared).toEqual([
-      'conserveSeatPower', 'ensureFactionStructuralNpcs', 'generateCoherence', 'generateFactions', 'generateSettlementName',
-      'reconcilePowerStructure', 'relinkFactionMembers', 'resizePoliticalRoster', 'storeTrueHooksOnly',
+      'conserveSeatPower', 'ensureFactionStructuralNpcs', 'generateCoherence', 'generateSettlementName',
+      'reconcilePowerStructure', 'resizePoliticalRoster', 'storeTrueHooksOnly', 'truePersonHooks',
     ]);
     // ⛔ generateSettlementName is the row this rule exists for: the mint draws on the assembly
     // step's own shared stream, so a held name is CONSUMED AND DISCARDED, never skipped.
