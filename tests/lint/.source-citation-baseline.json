@@ -47,9 +47,9 @@
     "pastEofCitationsExcluded": 377,
     "byRule": {
       "banner": 9,
-      "dated": 131,
+      "dated": 132,
       "sha-pin": 1,
-      "tree": 100
+      "tree": 111
     },
     "files": {
       "banner": [
@@ -168,7 +168,8 @@
         "docs/census/LANDING_R2_2026-11-06.md",
         "docs/census/VOCABULARY_RULINGS_2026-11-04.md",
         "docs/chair/2026-11-06/BRIEF-LANDING-R2-2026-11-06.md",
-        "docs/INTEGRATION_MERGE_R2_2026-11-07.md"
+        "docs/INTEGRATION_MERGE_R2_2026-11-07.md",
+        "docs/WIRING_W1_2026-11-07.md"
       ],
       "sha-pin": [
         "docs/SETTLEMENT_CAPABILITY_ATLAS.md"
@@ -273,7 +274,18 @@
         "docs/shift-records/2026-11-06-rung2-02-census-composed-espionage-fence.json",
         "docs/shift-records/2026-11-06-rung2-03-census-composed-herald-desk.json",
         "docs/shift-records/2026-11-06-rung2-04-census-composed-prose-manifest.json",
-        "docs/shift-records/2026-11-06-rung2-05-census-composed-lighting-witness.json"
+        "docs/shift-records/2026-11-06-rung2-05-census-composed-lighting-witness.json",
+        "docs/shift-records/2026-11-07-w1-01-construction.json",
+        "docs/shift-records/2026-11-07-w1-02-style-ds-eco-1.json",
+        "docs/shift-records/2026-11-07-w1-03-style-ds-eco-10.json",
+        "docs/shift-records/2026-11-07-w1-04-style-ds-eco-11.json",
+        "docs/shift-records/2026-11-07-w1-05-style-ds-eco-12.json",
+        "docs/shift-records/2026-11-07-w1-06-style-ds-eco-8.json",
+        "docs/shift-records/2026-11-07-w1-07-style-ds-eco-9.json",
+        "docs/shift-records/2026-11-07-w1-08-style-ds-sup-3.json",
+        "docs/shift-records/2026-11-07-w1-09-style-ds-eco-2.json",
+        "docs/shift-records/2026-11-07-w1-10-style-amendments.json",
+        "docs/shift-records/2026-11-07-w1-11-style-ds-eco-11-spread.json"
       ]
     },
     "_rosterGrowth2026-10-30-consolidation": "FIVE documents JOINED the roster by being BORN into it, and they hid NOTHING (re-measured by BUILD-T1 on claude/ux-T1 rebased onto 2acd0206): the integration branch's docs/UX_CONSOLIDATION_2026-10-30.md joined `dated` (5 -> 6) and BUILD-S's docs/shift-records/2026-10-30-service-category-fidelity.json joined `tree` (40 -> 41), both already on the tip; BUILD-T1's three signed records docs/shift-records/2026-10-30-arrival-market-gate.json, -no-market-pool.json and -migration-one-direction.json joined `tree` (41 -> 44). GROWTHS, not class moves: each file entered the tree already archival by rule, and each shift record is a JSON signature with zero path:line citations of its own, so pastEofCitationsExcluded stays at 377.",
@@ -300,7 +312,8 @@
     "_rosterGrowth2026-11-07-people-land-brief": "ONE document JOINED the roster by being BORN into it (the chair): `dated` 106 -> 107, docs/chair/2026-11-07/BRIEF-PEOPLE-LAND-2026-11-07.md, the car's landing brief, born dated, 0 past-EOF citations. A GROWTH, not a re-classification.",
     "_rosterGrowth2026-11-07-landing-r2": "TWENTY-SEVEN documents JOINED the roster by being BORN into it (LANDING-R2 seat E, measured with this walker's own partitionDocs at the rung-2 landing tip, rung 1 final merged with the pool census): `tree` 90 -> 95, the five signed records of the rung-2 landing (docs/shift-records/2026-11-06-rung2-01 .. -05, the census-composed generator master, espionage fence, herald desk, prose manifest and lighting witness, ruled per surface by the chair at 02:36 UTC under §934.105); `dated` 76 -> 98, the pool census's dated records: the six census lane reports (CENSUS_1, 1B, 2, 3, 4, 5 of 2026-11-04), the census rulings and records under docs/census/ (VOCABULARY_RULINGS_2026-11-04, CHAIR_RULINGS_2026-11-05, COMPOSE_2026-11-06, LANDING_R2_2026-11-06), the rung-2 base's lane and soak records (F13_CRISIS_FACTS, READER_R1_VALIDATION_ON_PAGE, READER_R11_TONIGHT_WANTS, RUNG2_F12_CRISIS_BLIND, RUNG2_TUNING, and the six SOAK_10000_RUNG2* soaks) and the chair's brief BRIEF-LANDING-R2-2026-11-06. GROWTHS, not class moves: no live document left the gated corpus, and the twenty-seven carry 0 past-EOF citations between them. The archival corpus as a whole reads 388 past-EOF at this tip against the 377 frozen below; the rise sits in documents already on the roster whose targets have since shrunk, none in the newcomers, and the frozen figure is the freeze, left as recorded.",
     "_rosterGrowth2026-11-07-merge-r2": "MERGE-R2 (2026-11-07, the integration merge of the rung-2 landing fc4cb0b9f into lane/integration-2026-11-07): dated 107 -> 130 and tree 95 -> 100, re-measured ONCE by the walker at the merged tip. dated: the integration side's 107 (76 + 31) united with LANDING-R2 seat E's 22 (76 -> 98), plus docs/INTEGRATION_MERGE_R2_2026-11-07.md, this seat's record, born dated, 0 past-EOF. tree: each side's +5 under the tree rule's paths (90 -> 95 on each side), united; no document changed class.",
-    "_rosterGrowth2026-11-07-wave-rulings": "ONE document JOINED the roster by being BORN into it (the chair): `dated` 130 -> 131, docs/chair/2026-11-07/WAVE-RULINGS-2026-11-07.md, the writing wave's rulings, born dated, 0 past-EOF citations. A GROWTH, not a re-classification."
+    "_rosterGrowth2026-11-07-wave-rulings": "ONE document JOINED the roster by being BORN into it (the chair): `dated` 130 -> 131, docs/chair/2026-11-07/WAVE-RULINGS-2026-11-07.md, the writing wave's rulings, born dated, 0 past-EOF citations. A GROWTH, not a re-classification.",
+    "_rosterGrowth2026-11-07-w1": "W1 ECO (the economy lane of the construction-and-wiring wave, measured with this walker's own arm at the lane tip): ONE document BORN dated, `dated` 131 -> 132, docs/WIRING_W1_2026-11-07.md, the lane's record, 0 past-EOF; and 11 signed shift records BORN into `tree`, 100 -> 111, docs/shift-records/2026-11-07-w1-01 .. -11 (the construction re-record and the style law's re-records of the composed-prose manifest). A GROWTH, not a re-classification."
   },
   "rows": []
 }
