@@ -100,7 +100,11 @@ const CEILINGS = Object.freeze({
   // recordBatteryFindings.js BATTERY_QUOTE_MAX (SELF-VOUCH b7a5f778e), threatAssessment.js 0.4 (RUNG1B-F9 26ed1b259),
   // densityRoll.js 0.5 (X-46 car 4 U2 1c527831a). This counts ATTRIBUTED rows, so it moves with them; the six
   // population ceilings above are not touched.
-  DECLARED_GROWTH_CEILING: 6,
+  // RAISED 6 -> 8 (2026-11-07, PEOPLE-LAND) under the owner's delegation of 2026-11-06 to the chair (ODQ §934.105), the
+  // LANDING-2 idiom ("write the DECLARED_GROWTH rows the ritual admits"): lane 4's src/generators/people/ties.js, the two
+  // values R-P7 rules (0.5 for a weight-0 house's target weight, SHARED_POWER_FACTOR = 3), cited to 141383cd4. This counts
+  // ATTRIBUTED rows, so it moves with them; the six population ceilings above are not touched.
+  DECLARED_GROWTH_CEILING: 8,
 });
 
 const register = loadTuningRegister(ROOT);

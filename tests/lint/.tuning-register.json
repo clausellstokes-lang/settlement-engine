@@ -2821,6 +2821,11 @@
         "sites": 1,
         "introducedAt": "b7a5f778e355c38d439cace06939967f22a8cf8d",
         "cause": "SELF-VOUCH (the eighth formal judgment, record_coherence_battery): the receipt clips a battery finding's quoted evidence at BATTERY_QUOTE_MAX = 160 characters instead of a bare 160; the register scores the act it exists to encourage, as the T13 Car P' and X-51 rows did; the name earns its register row when the owner signs the estate (LANDING-2, the cloud chair's ruling under ODQ §934.105)"
+      },
+      "src/generators/people/ties.js": {
+        "sites": 1,
+        "introducedAt": "141383cd47d2ef8e32be24a01dbd1ad400943e00",
+        "cause": "PEOPLE-4 TIES (R-P7, the chair's one-tie target rule, PEOPLE-RULINGS §1): the target weight is the house's X-45 weight, 0.5 for a weight-0 house, x SHARED_POWER_FACTOR = 3 when the two share a power; the ruled values written where they are read. Attributed by PEOPLE-LAND (2026-11-07) at the landing, the lane having banked neither; the names earn their register row when the owner signs the estate (SHARED_POWER_FACTOR = 3)"
       }
     },
     "bareDecimals": {
@@ -2838,6 +2843,11 @@
         "sites": 1,
         "introducedAt": "1c527831aae8f745de94b7c9d87f0e7a59806a8a",
         "cause": "X-46 car 4 U2 (the population tilt): the settlement's place inside its population band is centred at 0.5 before PARTICULAR_TILTS.population scales it, so a place at the middle of its band tilts by zero; the 0.5 is the band's midpoint, not a tuning value (LANDING-2, ODQ §934.105)"
+      },
+      "src/generators/people/ties.js": {
+        "sites": 1,
+        "introducedAt": "141383cd47d2ef8e32be24a01dbd1ad400943e00",
+        "cause": "PEOPLE-4 TIES (R-P7, the chair's one-tie target rule, PEOPLE-RULINGS §1): the target weight is the house's X-45 weight, 0.5 for a weight-0 house, x SHARED_POWER_FACTOR = 3 when the two share a power; the ruled values written where they are read. Attributed by PEOPLE-LAND (2026-11-07) at the landing, the lane having banked neither; the names earn their register row when the owner signs the estate (the bare 0.5)"
       }
     }
   },
