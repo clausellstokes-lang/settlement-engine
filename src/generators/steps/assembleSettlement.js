@@ -367,7 +367,7 @@ registerStep('assembleSettlement', {
   // as the structural appender above (the conflicts are re-derived on every run, never held).
   Object.assign(settlement, storeTrueHooksOnly(settlement, {
     npcsHeld: chooseOrPin(pins, 'npcs', () => UNPINNED) !== UNPINNED,
-  })); resolveFactionLabelsAtClose(settlement); // CENSUS-1i R-AW: a label whose fact settles late resolves here, against the final roster (no roll; one line, so no cited line moves)
+  })); if (chooseOrPin(pins, 'powerStructure', () => UNPINNED) === UNPINNED) resolveFactionLabelsAtClose(settlement); // CENSUS-1i R-AW: a label whose fact settles late resolves here, against the final roster (no roll; one line, so no cited line moves); a HELD powerStructure is the DM's and is not renamed (EM-R3, LANDING-R2)
 
   // A durable, seed-stable receipt over the FINAL player-facing dossier.
   // Repairs happen in their owning passes; this boundary proves that the
