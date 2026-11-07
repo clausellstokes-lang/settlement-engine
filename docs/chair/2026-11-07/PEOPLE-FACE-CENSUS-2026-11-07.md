@@ -8,7 +8,7 @@ An institution gets a representative when, in the world, someone would be **sent
 
 Verdicts: **FACE** (title) · **NONE** (reason). Per-row verdicts are listed where they differ from the family's; `[F]` marks a fabric row (always NONE: X-46 car 3). The 27 'judgment' families of PEOPLE-0 are judged here with everything else.
 
-## Economy (54 families)
+## Economy (53 families)
 
 | family | rows (tier: name) | verdict | title · reason |
 |---|---|---|---|
@@ -70,7 +70,7 @@ Verdicts: **FACE** (title) · **NONE** (reason). Per-row verdicts are listed whe
 | Listening post | to–me | FACE | the watcher · a post has its keeper |
 | Chroniclers' exchange | ci, me | FACE | the chronicler · a chartered exchange |
 
-## Crafts (37 families)
+## Crafts (36 families)
 
 | family | rows | verdict | title · reason |
 |---|---|---|---|
