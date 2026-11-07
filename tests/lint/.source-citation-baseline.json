@@ -47,9 +47,9 @@
     "pastEofCitationsExcluded": 377,
     "byRule": {
       "banner": 9,
-      "dated": 76,
+      "dated": 77,
       "sha-pin": 1,
-      "tree": 90
+      "tree": 95
     },
     "files": {
       "banner": [
@@ -106,6 +106,7 @@
         "docs/SOAK_1000_RUNG1_2026-11-04.md",
         "docs/SOAK_READER_INSTRUMENTS_2026-11-04.md",
         "docs/UX_CONSOLIDATION_2026-10-30.md",
+        "docs/WIRING_W0_2026-11-07.md",
         "docs/X46_CAR3_BUDGET_REPORT_2026-11-04.md",
         "docs/chair/2026-11-06/BRIEF-CENSUS-COMPOSE-2026-11-06.md",
         "docs/chair/2026-11-06/BRIEF-L7-A-REGISTERS-2026-11-06.md",
@@ -233,6 +234,11 @@
         "docs/shift-records/2026-11-06-rung1-33-vacant-seat-fact.json",
         "docs/shift-records/2026-11-06-rung1-34-food-per-cent-from-pounds.json",
         "docs/shift-records/2026-11-06-rung1-35-village-watch-no-governor.json",
+        "docs/shift-records/2026-11-07-w0-01-migration-direction.json",
+        "docs/shift-records/2026-11-07-w0-02-one-import-share.json",
+        "docs/shift-records/2026-11-07-w0-03-one-food-source-count.json",
+        "docs/shift-records/2026-11-07-w0-04-legacy-annotations-dated.json",
+        "docs/shift-records/2026-11-07-w0-05-annotation-date-one-home.json",
         "docs/shift-records/README.md",
         "docs/shift-records/_TEMPLATE.json"
       ]
@@ -244,7 +250,8 @@
     "_rosterGrowth2026-11-06-landing8": "FORTY-SEVEN documents JOINED the roster by being BORN into it (LANDING-8, measured with this walker's own partitionDocs at the rung-1 landing tip 070347943): `tree` 84 -> 90, the six signed records of the day (docs/shift-records/2026-11-06-rung1-29, -30, -32, -33, -34, -35; record 31 is Register VII's, owed to the owner's hand); `dated` 29 -> 70, the day's forty-one dated documents: the nine LANDING-7 lane and verifier records, this landing's LANDING8_2026-11-06.md, and the thirty-one dated chair briefs under docs/chair/2026-11-06/. GROWTHS, not class moves: no live document left the gated corpus. The forty-seven carry ONE past-EOF citation between them (docs/LANDING7_A_2026-11-06.md line 20 cites viability.js:608, a file of 596 lines at this tip: a record of its own day, which is the exclusion's reason). The archival corpus as a whole reads 390 past-EOF at this tip against the 377 frozen below; the risk is named here rather than re-frozen, as the 2026-11-06 rung-1 note named its 389.",
     "_rosterGrowth2026-11-06-register-vii": "ONE document JOINED the roster by being BORN into it (LANDING-8, re-measured after rebasing onto the chair's 61dd5ce2b): `dated` 70 -> 71, docs/tuning-signatures/2026-11-06-v1.json, the owner's Register VII signature record (229e62cd1). A GROWTH that hid nothing: 0 past-EOF citations.",
     "_rosterGrowth2026-11-06-landing9-corpus": "ONE document JOINED the roster by being BORN into it (LANDING-9 corpus lane, measured with this walker's own arm): `dated` 71 -> 72, docs/LANDING9_CORPUS_2026-11-06.md, the lane's record, born dated, 0 past-EOF citations. A GROWTH, not a re-classification: no document changed class.",
-    "_rosterGrowth2026-11-07-landing9-lanes": "FOUR documents JOINED the roster by being BORN into it (the chair, at the merge of the five LANDING-9 lanes, measured with this walker's own arm): `dated` 72 -> 76, docs/LANDING9_EDGE_2026-11-06.md, docs/LANDING9_DISTILLER_2026-11-06.md, docs/LANDING9_DIGESTS_2026-11-06.md, docs/LANDING9_POWER_2026-11-06.md, the four lanes' records, born dated, 0 past-EOF citations. A GROWTH, not a re-classification: no document changed class."
+    "_rosterGrowth2026-11-07-landing9-lanes": "FOUR documents JOINED the roster by being BORN into it (the chair, at the merge of the five LANDING-9 lanes, measured with this walker's own arm): `dated` 72 -> 76, docs/LANDING9_EDGE_2026-11-06.md, docs/LANDING9_DISTILLER_2026-11-06.md, docs/LANDING9_DIGESTS_2026-11-06.md, docs/LANDING9_POWER_2026-11-06.md, the four lanes' records, born dated, 0 past-EOF citations. A GROWTH, not a re-classification: no document changed class.",
+    "_rosterGrowth2026-11-07-wiring-w0": "SIX documents JOINED the roster by being BORN into it (WIRING-W0, measured with this walker's own arm): dated:docs/WIRING_W0_2026-11-07.md, tree:docs/shift-records/2026-11-07-w0-01-migration-direction.json, tree:docs/shift-records/2026-11-07-w0-02-one-import-share.json, tree:docs/shift-records/2026-11-07-w0-03-one-food-source-count.json, tree:docs/shift-records/2026-11-07-w0-04-legacy-annotations-dated.json, tree:docs/shift-records/2026-11-07-w0-05-annotation-date-one-home.json; byRule {\"banner\":9,\"dated\":76,\"sha-pin\":1,\"tree\":90} -> {\"banner\":9,\"dated\":77,\"sha-pin\":1,\"tree\":95}. A GROWTH, not a re-classification: no document changed class."
   },
   "rows": []
 }
