@@ -162,14 +162,14 @@
  "digests": {
   "corpusMeta": "f30a7900aa2e04c39e9350b8c76fcddd003684f894fdbd27adc931efbecdf4f2",
   "inventory": "e842ea572dbff4ac910ca54245286d7c2231ac7ab6d1bc479fab8eb8845fa5a3",
-  "manifests": "f0f2d8c94cf069e0bebd9e36ecbf37762a60181d0640931655cbe235aca8275e",
+  "manifests": "decfb1f15452deb28a26ff54804d32bb2d878662042a8b41ed016512134158f3",
   "migrationReview": "71a6570feae011c45d4025d3bea279d2ba66237f57f70ca4b3495b50475ac48c",
   "rowTags": "20c9670610c4d2de72eeba8bbe773e600f5459f4bc707e51be215df39992c53b",
   "scanStats": "d6224babb0f3e21d03eb12aedc37093d734e58e84a3324552d26c56440e30e7a",
   "sentinel": "bce055f623656de452fcbae7cc253ffaf824a4967e5c81be3650649dca69b197"
  },
  "frozen": "2026-11-07",
- "frozenAtSha": "ee11854a6176990acb0e24324ac05fe229241e7e",
+ "frozenAtSha": "768f5fb14980eeda60c15e277accc8ad20326dbc",
  "identities": 1449,
  "inventory": {
   "src/components/BuyThisDossier.jsx": {
@@ -2512,7 +2512,7 @@
   },
   "executionTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "ad2cb15eebfec34b093bdec010b8344d000d3fbfe104257ac5a583e9bed6571c",
+   "digest": "f577269c7b83825fbc8c7de22962721449f6da5ccadb0e1edb27fd53f626f445",
    "entries": [
     {
      "mode": "100644",
@@ -7088,8 +7088,8 @@
     {
      "mode": "100644",
      "path": "src/data/dossierStateProse/general.generated.js",
-     "sha256": "60a0cb79658e077ecc7a8414b71cc89d76e4cd03098c340e794168956d34fb16",
-     "size": 271758,
+     "sha256": "87dc0d69a4fdfb575189960e561c0eb70808472273ef659ebdbd80a3a9fe6870",
+     "size": 272147,
      "type": "file"
     },
     {
@@ -7102,8 +7102,8 @@
     {
      "mode": "100644",
      "path": "src/data/dossierStateProse/stressors.generated.js",
-     "sha256": "74f3b3a291c840f9e908af72e8f4a0fc28fe0271c5d1b32b3e7e06686ea132c3",
-     "size": 93762,
+     "sha256": "d0f0bb2c9a81be758790e4b21606415e02a761baecd46f0621cfb2297c398fdc",
+     "size": 94080,
      "type": "file"
     },
     {
@@ -8201,8 +8201,8 @@
     {
      "mode": "100644",
      "path": "src/domain/coherence/crisisFactFindings.js",
-     "sha256": "563eff507f89168b0a32cc18bbbc2099d82683a507cb8f090858cdef38e5528d",
-     "size": 13571,
+     "sha256": "d3f3b011b1ae5b2c327a95c7bd8aad90eb98e59dc4419597ec834a3cd0e38834",
+     "size": 13684,
      "type": "file"
     },
     {
@@ -16139,8 +16139,8 @@
     {
      "mode": "100644",
      "path": "src/generators/foodGenerator.js",
-     "sha256": "48c630d8aafbcc6af7b500cc1a9c714ac9821dd0cf75e08d42bb1230ad4f33df",
-     "size": 36040,
+     "sha256": "7f6650afeda10273981179e63bcc45778603fe7afb13b4f33a33ccb9c5b85282",
+     "size": 36227,
      "type": "file"
     },
     {
@@ -16482,8 +16482,8 @@
     {
      "mode": "100644",
      "path": "src/generators/power/stressFactions.js",
-     "sha256": "d16c7036ecc82b100fcaa58cab3ae89c4fa8fed30b237dffc338e1a0edb748c4",
-     "size": 26082,
+     "sha256": "50316e1a355be30ef57be9a21e232358dd7e4fd43479ef4350ae693c7b394693",
+     "size": 26294,
      "type": "file"
     },
     {
@@ -19563,7 +19563,7 @@
   },
   "scanTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "2269396ab2891de7d89aca6f30615cfb9997d9f0b47555741780ed5edbe8efc0",
+   "digest": "25a9eaccb21c60bebd6a8272dbe927048207159ff00491da06e0460898904ad3",
    "entries": [
     {
      "mode": "100644",
@@ -25098,8 +25098,8 @@
     {
      "mode": "100644",
      "path": "src/domain/coherence/crisisFactFindings.js",
-     "sha256": "563eff507f89168b0a32cc18bbbc2099d82683a507cb8f090858cdef38e5528d",
-     "size": 13571,
+     "sha256": "d3f3b011b1ae5b2c327a95c7bd8aad90eb98e59dc4419597ec834a3cd0e38834",
+     "size": 13684,
      "type": "file"
     },
     {
@@ -33001,8 +33001,8 @@
     {
      "mode": "100644",
      "path": "src/generators/foodGenerator.js",
-     "sha256": "48c630d8aafbcc6af7b500cc1a9c714ac9821dd0cf75e08d42bb1230ad4f33df",
-     "size": 36040,
+     "sha256": "7f6650afeda10273981179e63bcc45778603fe7afb13b4f33a33ccb9c5b85282",
+     "size": 36227,
      "type": "file"
     },
     {
@@ -33344,8 +33344,8 @@
     {
      "mode": "100644",
      "path": "src/generators/power/stressFactions.js",
-     "sha256": "d16c7036ecc82b100fcaa58cab3ae89c4fa8fed30b237dffc338e1a0edb748c4",
-     "size": 26082,
+     "sha256": "50316e1a355be30ef57be9a21e232358dd7e4fd43479ef4350ae693c7b394693",
+     "size": 26294,
      "type": "file"
     },
     {
@@ -36418,7 +36418,7 @@
   },
   "sourceTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "c8ca40ba73f6f66630e05745cadc376092650c3d3e45f2b9a8c593e85dd1d8d7",
+   "digest": "17a2c5851c60c9bfb46045e95245c62f206003f530d93b513600b704a7baca6b",
    "entries": [
     {
      "mode": "100644",
@@ -40924,8 +40924,8 @@
     {
      "mode": "100644",
      "path": "src/data/dossierStateProse/general.generated.js",
-     "sha256": "60a0cb79658e077ecc7a8414b71cc89d76e4cd03098c340e794168956d34fb16",
-     "size": 271758,
+     "sha256": "87dc0d69a4fdfb575189960e561c0eb70808472273ef659ebdbd80a3a9fe6870",
+     "size": 272147,
      "type": "file"
     },
     {
@@ -40938,8 +40938,8 @@
     {
      "mode": "100644",
      "path": "src/data/dossierStateProse/stressors.generated.js",
-     "sha256": "74f3b3a291c840f9e908af72e8f4a0fc28fe0271c5d1b32b3e7e06686ea132c3",
-     "size": 93762,
+     "sha256": "d0f0bb2c9a81be758790e4b21606415e02a761baecd46f0621cfb2297c398fdc",
+     "size": 94080,
      "type": "file"
     },
     {
@@ -42037,8 +42037,8 @@
     {
      "mode": "100644",
      "path": "src/domain/coherence/crisisFactFindings.js",
-     "sha256": "563eff507f89168b0a32cc18bbbc2099d82683a507cb8f090858cdef38e5528d",
-     "size": 13571,
+     "sha256": "d3f3b011b1ae5b2c327a95c7bd8aad90eb98e59dc4419597ec834a3cd0e38834",
+     "size": 13684,
      "type": "file"
     },
     {
@@ -49975,8 +49975,8 @@
     {
      "mode": "100644",
      "path": "src/generators/foodGenerator.js",
-     "sha256": "48c630d8aafbcc6af7b500cc1a9c714ac9821dd0cf75e08d42bb1230ad4f33df",
-     "size": 36040,
+     "sha256": "7f6650afeda10273981179e63bcc45778603fe7afb13b4f33a33ccb9c5b85282",
+     "size": 36227,
      "type": "file"
     },
     {
@@ -50318,8 +50318,8 @@
     {
      "mode": "100644",
      "path": "src/generators/power/stressFactions.js",
-     "sha256": "d16c7036ecc82b100fcaa58cab3ae89c4fa8fed30b237dffc338e1a0edb748c4",
-     "size": 26082,
+     "sha256": "50316e1a355be30ef57be9a21e232358dd7e4fd43479ef4350ae693c7b394693",
+     "size": 26294,
      "type": "file"
     },
     {
@@ -53709,10 +53709,10 @@
  },
  "scannerProvenance": {
   "detectorDigest": "0f90a5a45ac0b330e485f9a87dbf9f26147d3338d0e683a01fb7cce8f61e5e10",
-  "executionTreeDigest": "ad2cb15eebfec34b093bdec010b8344d000d3fbfe104257ac5a583e9bed6571c",
-  "scanTreeDigest": "2269396ab2891de7d89aca6f30615cfb9997d9f0b47555741780ed5edbe8efc0",
-  "sourceTreeDigest": "c8ca40ba73f6f66630e05745cadc376092650c3d3e45f2b9a8c593e85dd1d8d7",
-  "unscannedInputDigest": "d7bb94edcbd8ff72417f81df30f24abfe7e23a03e5db303f759dc5c307235c4f"
+  "executionTreeDigest": "f577269c7b83825fbc8c7de22962721449f6da5ccadb0e1edb27fd53f626f445",
+  "scanTreeDigest": "25a9eaccb21c60bebd6a8272dbe927048207159ff00491da06e0460898904ad3",
+  "sourceTreeDigest": "17a2c5851c60c9bfb46045e95245c62f206003f530d93b513600b704a7baca6b",
+  "unscannedInputDigest": "313733e4f8954dabed013e15acea7cac278760f7d59c01b65bcb06cbb9061a69"
  },
  "schema": 29,
  "sentinel": {
