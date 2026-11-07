@@ -163,9 +163,9 @@ const CONFLICT_LINES = Object.freeze({
  */
 const FOOD_GAP_LINES = Object.freeze([
   { text: 'Grain is coming in, and the people bringing it have worked out exactly how much that is worth. The price has moved twice this month.', excludes: ['crisis: under_siege'] },
-  { text: 'Enough food arrives to keep the place fed, which means whoever controls the carts controls rather more than the carts.', excludes: ['starving', 'famine', 'crisis: famine', 'crisis: under_siege'] },
+  { text: 'Enough food arrives to keep the place fed, and whoever runs the carts has started asking favours in return.', excludes: ['starving', 'famine', 'crisis: famine', 'crisis: under_siege'] },
   'A supplier who has carried the shortfall for years wants the arrangement put on paper now, and the terms have changed.',
-  { text: 'The last two consignments were short by the same amount, and the measure is being blamed rather than the measurer.', excludes: ['crisis: under_siege'] },
+  { text: 'The last two deliveries were short by the same amount; the supplier blames the scales, and nobody has checked the supplier.', excludes: ['crisis: under_siege'] },
   { text: 'Somebody has begun buying grain forward at prices nobody local can match, and will not say who it is for.', needs: ['market'] },
   'A merchant has offered to cover the whole gap from one source, which would solve this season and hand them next season.',
 ]);

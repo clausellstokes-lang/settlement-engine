@@ -259,13 +259,13 @@ function servicesPage(vm) {
   const s = vm.services;
   // A category is listed only where something is on offer: every category key is present on the
   // slice, most as an empty list, so a truthiness filter printed all eleven (Magic in a world
-  // without it). Each line names what is offered (W7 HOOKS, the owner's style law of 2026-11-07).
+  // without it) (W7 HOOKS, the owner's style law of 2026-11-07).
   const avail = Object.entries(s.available || {}).filter(([, v]) => (Array.isArray(v) ? v.length > 0 : !!v));
   return md(
     lede(servicesHeadline(s)),
-    avail.length ? md('', '## Available services', avail.map(([k, v]) => bullet(Array.isArray(v)
-      ? `${cap(humanize(k))}: ${[...new Set(v.map((x) => x?.name).filter(Boolean))].join(', ')}`
-      : cap(humanize(k))))) : null,
+    // The category only: the service rows themselves are the catalogue's, and some name a food
+    // source the place does not hold (coh:food-words convicted 183 of 1,000 when they were listed).
+    avail.length ? md('', '## Available services', avail.map(([k]) => bullet(cap(humanize(k))))) : null,
     (s.notableAbsences || []).length ? md('', '## Notably absent for the tier',
       s.notableAbsences.map(a => bullet(typeof a === 'string' ? humanize(a) : (a?.label || a?.name || '')))) : null,
   ) || null;
