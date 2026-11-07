@@ -31,7 +31,7 @@ import {
   navalDefensePoolKey, supplyLogisticsPoolKey,
   DEF7_DARK_POOLS, DEF10_DARK_POOLS, DEF10_FACT_SPOKEN_AT,
   defenseMagicDependencyProse, hasNamedMagicChain, magicDependencyPoolKey, magicFlagPoolKey, withSaid,
-  defenseIsolationSupportProse, isolationSupportPoolKey,
+  defenseIsolationSupportProse, isolationSupportPoolKey, defenceSupplyPoolKey, foodTradesPoolKey,
   namedMagicChainGood,
 } from '../../src/domain/display/stateProse/defenseStateProse.js';
 import {
@@ -562,9 +562,14 @@ describe('DS-DEF-2 — ALIVENESS over every combination the generator can build'
     // other twenty-one still all speak; the silent five are named, not merely counted.
     const silent = Object.keys(DEF2_POOLS).filter((k) => k.startsWith('Disasters & Famine: '));
     expect(silent).toHaveLength(5);
-    expect(Object.keys(DEF2_POOLS).filter((k) => !reached.has(k))).toEqual(silent);
-    expect(reached.size).toBe(Object.keys(DEF2_POOLS).length - silent.length);
-    expect(Object.keys(DEF2_POOLS)).toHaveLength(26);
+    // ⭐ THE FOUR CHAIN CLAUSE POOLS NEVER SPINE (W2 DEF construction C6, 2026-11-07): each rides as a
+    // SECOND piece beside the Invasion & War or Economic Survival row, so no rung's provenance names
+    // one; the clause arm below proves each prints. Named, not merely counted.
+    const clauses = Object.keys(DEF2_POOLS).filter((k) => k.startsWith('CHAIN: '));
+    expect(clauses).toHaveLength(4);
+    expect(Object.keys(DEF2_POOLS).filter((k) => !reached.has(k))).toEqual([...clauses, ...silent]);
+    expect(reached.size).toBe(Object.keys(DEF2_POOLS).length - silent.length - clauses.length);
+    expect(Object.keys(DEF2_POOLS)).toHaveLength(30); // 26 -> 30 at W2 DEF C6: the four CHAIN clause pools
   });
 
   it('DS-DEF-2 frames no DM field, so it returns plain rungs rather than projections', () => {
@@ -2112,6 +2117,43 @@ describe('DS-DEF-12 · supply in isolation (W2 DEF construction C3–C5, 2026-11
     // ⛔ The support model is not the food record: no line of the block speaks of hunger.
     for (const pool of Object.values(DOSSIER_STATE_PROSE_DEFENSE['DS-DEF-12'].pools)) {
       for (const v of pool) expect(v.text, v.text).not.toMatch(/\bhung(?:er|ry)\b|\bstarv/i);
+    }
+  });
+});
+
+describe('DS-DEF-2 · the supply-chain clauses (W2 DEF construction C6, 2026-11-07)', () => {
+  it('the force clause speaks only where the chains moved the score AND the town has a force to supply', () => {
+    expect(defenceSupplyPoolKey({ military: 11, economic: 0 }, true)).toBe('CHAIN: defence supplied');
+    expect(defenceSupplyPoolKey({ military: -5, economic: 0 }, true)).toBe('CHAIN: defence short');
+    // The positive above makes these silences the key discriminating, not a dead key.
+    expect(defenceSupplyPoolKey({ military: 11, economic: 0 }, false)).toBeNull();
+    expect(defenceSupplyPoolKey({ military: 0, economic: 5 }, true)).toBeNull();
+    expect(defenceSupplyPoolKey(null, true)).toBeNull();
+  });
+
+  it('each clause prints as the second sentence beside its own row, and never alone', () => {
+    const withChains = (mods, over) => ({ ...fort(over), defenseProfile: { scores: { economic: 50 }, chainModifiers: mods } });
+    const bare = defenseThreatProse(fort({ walls: true, garrison: true }), { seed: 'c6' });
+    const supplied = defenseThreatProse(withChains({ military: 11, economic: 5 }, { walls: true, garrison: true }), { seed: 'c6' });
+    // The spine is the same row; the clause is ADDED after it.
+    expect(supplied.invasion.sentence.startsWith(bare.invasion.sentence)).toBe(true);
+    expect(supplied.invasion.sentence.length).toBeGreaterThan(bare.invasion.sentence.length);
+    expect(supplied.economic.sentence.length).toBeGreaterThan(bare.economic.sentence.length);
+    expect(supplied.invasion.provenance.poolKey).toBe(bare.invasion.provenance.poolKey);
+    // No force to supply: the force clause is not said, the food clause still is.
+    const unmanned = defenseThreatProse(withChains({ military: 6, economic: -8 }, { walls: true }), { seed: 'c6' });
+    const unmannedBare = defenseThreatProse(fort({ walls: true }), { seed: 'c6' });
+    expect(unmanned.invasion.sentence).toBe(unmannedBare.invasion.sentence);
+    expect(unmanned.economic.sentence.length).toBeGreaterThan(unmannedBare.economic.sentence.length);
+  });
+
+  it('the food clause reads the food-processing arm alone', () => {
+    expect(foodTradesPoolKey({ military: 0, economic: 5 })).toBe('CHAIN: food trades working');
+    expect(foodTradesPoolKey({ military: 0, economic: -8 })).toBe('CHAIN: food trades failing');
+    expect(foodTradesPoolKey({ military: 15, economic: 0 })).toBeNull();
+    expect(foodTradesPoolKey({ military: 0, economic: 'x' })).toBeNull();
+    for (const key of ['CHAIN: defence supplied', 'CHAIN: defence short', 'CHAIN: food trades working', 'CHAIN: food trades failing']) {
+      expect(DOSSIER_STATE_PROSE_DEFENSE['DS-DEF-2'].pools[key], key).toBeTruthy();
     }
   });
 });

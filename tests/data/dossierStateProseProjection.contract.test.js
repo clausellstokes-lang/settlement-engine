@@ -1088,7 +1088,7 @@ describe('SEAM car 4 — poolMeta, the RENDER half, projected and never hand-edi
     }
     expect({ missing, orphan }).toEqual({ missing: [], orphan: [] });
     // Non-vacuity: the walk found the whole register, not an empty one.
-    expect(META_ROWS.length).toBe(729); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 711 -> 715 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 715 -> 718 // W2 DEF C8/C10 (DS-DEF-5 ARCANE pools, 2026-11-07): 718 -> 724 // W2 DEF C3–C5 (DS-DEF-12, 2026-11-07): 724 -> 729
+    expect(META_ROWS.length).toBe(733); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 711 -> 715 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 715 -> 718 // W2 DEF C8/C10 (DS-DEF-5 ARCANE pools, 2026-11-07): 718 -> 724 // W2 DEF C3–C5 (DS-DEF-12, 2026-11-07): 724 -> 729 // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 729 -> 733
     expect(META_ROWS.every((r) => r.meta)).toBe(true);
   });
 
@@ -1201,7 +1201,7 @@ describe('SEAM car 4 — poolMeta, the RENDER half, projected and never hand-edi
     }
     expect(wrong).toEqual([]);
     // MEASURED at this tip: exactly the RESOLVED / WIRING-UNRESOLVED split of the census.
-    expect({ present, absent }).toEqual({ present: 361, absent: 368 }); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 343 -> 347 // W2 DEF C3–C5 (DS-DEF-12, 2026-11-07): 356 -> 361 (the five DS-DEF-12 pools each read)
+    expect({ present, absent }).toEqual({ present: 365, absent: 368 }); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 343 -> 347 // W2 DEF C3–C5 (DS-DEF-12, 2026-11-07): 356 -> 361 (the five DS-DEF-12 pools each read) // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 361 -> 365
     expect(present).toBe(CENSUS.rows.filter((r) => r.reads.length > 0).length);
   });
 
@@ -2057,8 +2057,8 @@ describe('SEAM car 4d — the seat licence, computed where the census is visible
     }
     // The tally the projector prints, re-derived from the two committed files rather than
     // trusted: 708 pools, every one a sentence, and the reason is that none is a modifier yet.
-    expect(tally).toEqual({ 'sentence/not-a-modifier': 729 }); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 711 -> 715 // W2 DEF C3–C5 (DS-DEF-12, 2026-11-07): 724 -> 729
-    expect(META_ROWS).toHaveLength(729); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 711 -> 715 // W2 DEF C3–C5 (DS-DEF-12, 2026-11-07): 724 -> 729
+    expect(tally).toEqual({ 'sentence/not-a-modifier': 733 }); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 711 -> 715 // W2 DEF C3–C5 (DS-DEF-12, 2026-11-07): 724 -> 729 // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 729 -> 733
+    expect(META_ROWS).toHaveLength(733); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 711 -> 715 // W2 DEF C3–C5 (DS-DEF-12, 2026-11-07): 724 -> 729 // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 729 -> 733
     // ⛔ NO SHIPPED POOL IS A MODIFIER, which is why no clause can seat and why the `seat` key
     // is emitted nowhere: an ABSENT seat reads in the composer as the sentence.
     expect(modifiers, 'no shipped pool declares role modifier').toEqual([]);
@@ -2281,6 +2281,6 @@ describe('⭐⭐ REWRITE car 8a-4 — `kin`, the thread rule\'s typed half (SITT
     // than reasoned, and pinned a second time on the SHIFT REGISTER's comparator row.
     expect(META_ROWS.filter((r) => r.meta.kin !== undefined).map((r) => `${r.id} :: ${r.pool}`))
       .toEqual([]);
-    expect(META_ROWS.length, 'over the whole shipped corpus, not a slice').toBe(729); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 711 -> 715 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 715 -> 718 // W2 DEF C8/C10 (DS-DEF-5 ARCANE pools, 2026-11-07): 718 -> 724 // W2 DEF C3–C5 (DS-DEF-12, 2026-11-07): 724 -> 729
+    expect(META_ROWS.length, 'over the whole shipped corpus, not a slice').toBe(733); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 711 -> 715 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 715 -> 718 // W2 DEF C8/C10 (DS-DEF-5 ARCANE pools, 2026-11-07): 718 -> 724 // W2 DEF C3–C5 (DS-DEF-12, 2026-11-07): 724 -> 729 // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 729 -> 733
   });
 });

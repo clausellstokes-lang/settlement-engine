@@ -55,8 +55,8 @@
   },
   "leaves": {
     "src/data/dossierStateProse/defense.generated.js": {
-      "raw": 191754,
-      "gzip": 27014,
+      "raw": 197079,
+      "gzip": 27733,
       "ceilingRaw": 488168,
       "ceilingGzip": 108482
     },
@@ -363,6 +363,14 @@
       "toRaw": 191754,
       "gzipAfter": 27014,
       "reason": "+7098 B raw (gzip level 9: 26,137 -> 27,014), one commit: the new block DS-DEF-12 (MAGIC-DEPENDENT and the four CAPACITY steps, three lines each), the lane's twenty new pools braced {colour}, six `· watch` declarations restored on DS-DEF-2/3/10 lines (stripped by c66099791), FLAG: magicMilitarized v2 reworded (\"answers to its military\"). Projected through `node scripts/generate-dossier-state-prose.mjs`; `--check` exit 0."
+    },
+    {
+      "car": "W2 DEF third seat (2026-11-07; ODQ §934.105, WIRING-RULINGS R-W1/R-W9): DS-DEF-2 — the supply-chain defence bonus said (construction C6)",
+      "leaf": "src/data/dossierStateProse/defense.generated.js",
+      "fromRaw": 191754,
+      "toRaw": 197079,
+      "gzipAfter": 27733,
+      "reason": "+5325 B raw (gzip level 9: 27,014 -> 27,733), one commit: DS-DEF-2 gains four clause pools (CHAIN: defence supplied / defence short, four lines each; CHAIN: food trades working / failing, three each), said beside the Invasion & War and Economic Survival rows where defenseProfile.chainModifiers moved the score. Projected through `node scripts/generate-dossier-state-prose.mjs`; `--check` exit 0."
     }
   ],
   "ceilingTransfersNewLeaves": [

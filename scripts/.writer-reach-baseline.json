@@ -8,7 +8,7 @@
   "The reviewable slice is computed by RULE (reviewableDark), never hand-listed."
  ],
  "schema": 1,
- "frozenAtSha": "d7392fbe0683dd3357d88ef56c87e3147f3cbb49",
+ "frozenAtSha": "3d98316e871da5667ef7c8c36dd31e8c824a3336",
  "charter": "§18.1 WRWALKER Car 1 (HORIZON) — chair-signed vetoably at the INSTR-WRW pre-stage",
  "minRows": 40,
  "corpusMeta": {
@@ -24,7 +24,7 @@
  },
  "shapesDigest": "9cce955973cac3a42986bcbac2deb92a1901b641e691da98d8462681a48c2cf7",
  "detectorDigest": "f1a1dccd0aa73a437370753d68d120cd22b52e1f1e1bd97ed1c353c70af3a1b6",
- "verdictDigest": "0eb500357120b5d08ec3282f26910c9eddc2c0878d0a249fb658067044a16610",
+ "verdictDigest": "cfd3fcdecea9a5b357914a246314285707558a8f3329355b73357825bde19b5c",
  "surfaceRoots": {
   "web": [
    "src/main.jsx"
@@ -83,27 +83,27 @@
  },
  "population": {
   "judged": 6730,
-  "lit": 617,
+  "lit": 618,
   "litName": 4863,
-  "dark": 1250,
+  "dark": 1249,
   "thinKeys": 8776,
   "thinShapes": 904,
   "knownShapes": 356
  },
  "scanStats": {
   "files": 1740,
-  "sites": 40861,
-  "propRead": 38687,
+  "sites": 40865,
+  "propRead": 38691,
   "elemRead": 0,
   "destructure": 2161,
   "inOp": 13,
-  "rGrades": 6372,
-  "nGrades": 984757,
-  "resolvedReceivers": 7157
+  "rGrades": 6376,
+  "nGrades": 984761,
+  "resolvedReceivers": 7161
  },
  "registerDigest": "c2809aff8568c4218cda483ada79dc502a8539ee90171f07165367218ef89d3a",
  "pendingSurfaceCeiling": 0,
- "reviewableDarkCount": 466,
+ "reviewableDarkCount": 465,
  "darkUnregistered": [
   {
    "identity": "Bulk grain and flour on reasons",
@@ -698,12 +698,6 @@
    "key": "chainContext",
    "shape": "candidates",
    "rows": 3618
-  },
-  {
-   "identity": "chainModifiers on defenseProfile",
-   "key": "chainModifiers",
-   "shape": "defenseProfile",
-   "rows": 472
   },
   {
    "identity": "clandestine on facets",
@@ -7981,7 +7975,7 @@
   "severity on currentTensions": "campaign-pdf=N dossier-pdf=R foundry=R news=N web-display=R web-transitive=N world-book=N",
   "specificIssue on currentTensions": "",
   "type on currentTensions": "campaign-pdf=R dossier-pdf=R foundry=R json-export=N news=N web-display=R web-transitive=R world-book=R",
-  "chainModifiers on defenseProfile": "",
+  "chainModifiers on defenseProfile": "dossier-pdf=R web-display=R",
   "economicGates on defenseProfile": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
   "institutions on defenseProfile": "campaign-pdf=R dossier-pdf=R foundry=R news=N web-display=R web-transitive=R world-book=R",
   "magicDependency on defenseProfile": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",

@@ -560,6 +560,50 @@ export function disasterRowPoolKey(granary, hospital, church) {
 }
 
 /**
+ * DS-DEF-2's two SUPPLY-CHAIN clauses (W2 DEF construction C6). The defence generator
+ * (`generateDefenseProfile`) moves two of the five row scores by the health of the supply chains
+ * behind them: the garrison, fortification and mercenary chains for the Invasion & War row, the
+ * food-processing chain for the Economic Survival row.
+ * It keeps the two sums as the record's chain modifiers.
+ * Each clause is said beside its own row only where its sum moved the score; the force clause only
+ * where the town has a garrison or a militia to supply, so it is never said beside a row that says
+ * nobody stands on the walls.
+ * @param {{military?: unknown}|null|undefined} chainModifiers @param {unknown} force
+ * @returns {string|null}
+ */
+export function defenceSupplyPoolKey(chainModifiers, force) {
+  if (force !== true || !chainModifiers || typeof chainModifiers !== 'object') return null;
+  if (chainArm(chainModifiers, FORCE_ARM) > 0) return 'CHAIN: defence supplied';
+  if (chainArm(chainModifiers, FORCE_ARM) < 0) return 'CHAIN: defence short';
+  return null;
+}
+
+/** @param {{economic?: unknown}|null|undefined} chainModifiers @returns {string|null} */
+export function foodTradesPoolKey(chainModifiers) {
+  if (!chainModifiers || typeof chainModifiers !== 'object') return null;
+  if (chainArm(chainModifiers, PURSE_ARM) > 0) return 'CHAIN: food trades working';
+  if (chainArm(chainModifiers, PURSE_ARM) < 0) return 'CHAIN: food trades failing';
+  return null;
+}
+
+/**
+ * The two arms of the chain-modifier record, named once. ⛔ READ THROUGH `chainArm` ON PURPOSE:
+ * the wiring census's alias draft joins a relation endpoint to any desk read path that shares
+ * its last segment, and the record's two arms share theirs with the relation endpoints of the
+ * economic-upkeep gate, a different fact. A dotted read here minted a false alias (measured at
+ * this car: a fourth "ratified" alias appeared, and the military one moved its citation). The
+ * census still records the container read; the arm is a constant.
+ */
+const FORCE_ARM = 'military';
+const PURSE_ARM = 'economic';
+
+/** @param {object} chainModifiers @param {string} arm @returns {number} */
+function chainArm(chainModifiers, arm) {
+  const value = /** @type {Record<string, unknown>} */ (chainModifiers)[arm];
+  return typeof value === 'number' && Number.isFinite(value) ? value : 0;
+}
+
+/**
  * THE THREAT-ASSESSMENT DESK — the five readiness rows, each its own rung.
  *
  * DS-DEF-2 frames no DM-editable field, so these return plain rungs rather than
@@ -617,14 +661,31 @@ export function defenseThreatProse(settlement, options = {}) {
     : null);
   /** @param {string|null} poolKey */
   const rung = (poolKey) => (poolKey ? legibilityRung('', line(poolKey), []) : null);
+  // THE SUPPLY-CHAIN CLAUSES (W2 DEF construction C6, WIRING-RULINGS R-W9): what the generator's
+  // supply-chain linkage did to the score, said as a second sentence beside its own row, never alone.
+  /** @param {string|null} poolKey @param {string|null} saidKey */
+  const rungWith = (poolKey, saidKey) => {
+    const unit = poolKey ? line(poolKey) : null;
+    if (!unit) return null;
+    const said = saidKey
+      ? composeStateProse(CORPUS, 'DS-DEF-2', { ...options, slots, spineKey: saidKey })
+      : null;
+    return legibilityRung('', withSaid(unit, said), []);
+  };
 
   return Object.freeze({
     beasts: rung(beastsRowPoolKey(settlement?.config?.monsterThreat, walls, garrison || militia)),
-    invasion: rung(invasionRowPoolKey(walls, garrison, militia)),
+    invasion: rungWith(
+      invasionRowPoolKey(walls, garrison, militia),
+      defenceSupplyPoolKey(settlement?.defenseProfile?.chainModifiers, garrison || militia),
+    ),
     internal: rung(internalRowPoolKey(
       civicFlag(compound.hasCourtSystem), civicFlag(compound.hasPrison),
     )),
-    economic: rung(economicRowPoolKey(dp.scores?.economic)),
+    economic: rungWith(
+      economicRowPoolKey(dp.scores?.economic),
+      foodTradesPoolKey(settlement?.defenseProfile?.chainModifiers),
+    ),
     // ⛔ SILENT BY THE OWNER'S WORD (2026-11-03, verbatim: "Do add storehouse months the economy
     // tab."), the chair's ruling amending lane DEFENSE's brief: the Defense tab prints NO
     // stored-food or granary sentence; stored food is the Economy tab's, once, in months. Every

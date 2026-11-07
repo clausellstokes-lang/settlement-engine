@@ -2730,6 +2730,37 @@ supplies the ancestry.
 2. `[unfolding]` The town is not spending its way out of trouble because there is nothing to spend, and each thing that goes wrong makes the next thing cheaper to happen.
 3. `[street]` The town could not pay for a bad month at {settlement}, and the people who would have to be paid know it.
 
+**THE SUPPLY-CHAIN CLAUSES (W2 DEF, 2026-11-07, construction C6):** each is a second sentence
+beside its own row, said ONLY where `defenseProfile.chainModifiers` moved the score
+(`defenseGenerator.js :: generateDefenseProfile`): the military clause beside `Invasion & War`
+(the garrison, fortification and mercenary chains; only where the town has a garrison or a
+militia to supply), the food clause beside `Economic Survival` (the food-processing chain: the
+salted, dried and preserved provisions). The clause pools never print alone. Description
+position: plain lines, one vantage each; the military pools carry four because the clause is said
+in about two towns in five that keep a force.
+
+**CHAIN: defence supplied** {colour}
+1. `[ledger]` The supply book for {settlement}'s defenders balances: the town's own trades feed and equip them, so a call to arms does not begin with a shortage.
+2. `[street]` The trades that feed and equip {settlement}'s defenders are busy and well stocked, and the defenders know it.
+3. `[visitor]` You can see the defence at {settlement} is kept supplied: food and gear come from the town's own workshops.
+4. `[unfolding]` While the trades behind {settlement}'s defence keep working, its defenders will not go short.
+
+**CHAIN: defence short** {colour}
+1. `[ledger]` The supply book for {settlement}'s defenders runs short: the trades that should feed and equip them are failing, so the defence is weaker than its numbers suggest.
+2. `[street]` The trades that should supply {settlement}'s defenders are struggling, and the defenders go short of food or gear.
+3. `[visitor]` The defenders at {settlement} make do: the town's workshops cannot keep them properly fed and equipped.
+4. `[unfolding]` {settlement}'s defenders are a little worse off every month the trades behind them keep failing.
+
+**CHAIN: food trades working** {colour}
+1. `[ledger]` The tally of salted and preserved food at {settlement} is kept up by its working food trades, so the town would not run short at once if it were cut off.
+2. `[street]` The people who salt, dry and preserve food at {settlement} are working steadily, which matters a great deal if the town is ever cut off.
+3. `[unfolding]` As long as {settlement}'s food trades keep salting and drying, the town has provisions to fall back on if it is cut off.
+
+**CHAIN: food trades failing** {colour}
+1. `[ledger]` The tally of preserved food at {settlement} is falling, because the trades that salt and dry it are failing; if the town were cut off, it would run short quickly.
+2. `[street]` The people who salt and dry food at {settlement} cannot keep up, and everyone knows the stores would empty fast if the town were cut off.
+3. `[unfolding]` {settlement}'s food trades are failing, and each season they fail the town has less to fall back on if it is cut off.
+
 **`Disasters & Famine`: granary AND hospital** {colour}
 1. `[ledger]` {settlement} holds food against a bad year and has somewhere to put the sick; between them the town can take a failed harvest or an outbreak without either becoming a catastrophe.
 2. `[street]` The town has a place for grain and a place for the ill, and knows exactly what having both is worth.

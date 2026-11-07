@@ -5,7 +5,7 @@
       "src/domain/display/stateProse/generalStateProse.js": "a1d82168bffd08d6aec168b0fd51b4b7ed21fbf67c6f30b2aec8832064e29267",
       "src/domain/display/stateProse/powerStateProse.js": "11c913c83fa1e88d5f75d5415f8723936acf9aae37d6465a87b1ad3cb4d21e7b",
       "src/domain/display/stateProse/economyStateProse.js": "d2bfe8cafa209803f26c83fde83534a7ba45230010ff87c33bd4ac52d831b924",
-      "src/domain/display/stateProse/defenseStateProse.js": "d08f8f48055247a2efe94b026aaeaeb27d324668f665a28bced00a646b024d14",
+      "src/domain/display/stateProse/defenseStateProse.js": "b9834d41e69b89160b01e6a7548f819bc717852b0c897b21c250181fe21aed3d",
       "src/domain/display/stateProse/stressorsStateProse.js": "13c7f383882acf5bb48267feb4302ced6b9798cec2575470903f1aa88205600d",
       "src/domain/display/stateProse/warFaithStateProse.js": "f1972add38589ee55369fb06e4a5e0a8f90c4d966bf703d4367a3cdca52d6aac",
       "src/domain/display/stateProse/dossierMounts.js": "1d7183757a8fa3527d20cf6e01e1d71e4a7b865e445349f793e51acd40188255"
@@ -21,15 +21,15 @@
     "producerIndexFiles": 1300
   },
   "totals": {
-    "pools": 729,
+    "pools": 733,
     "blocks": 69,
-    "variants": 2391,
-    "resolved": 361,
+    "variants": 2405,
+    "resolved": 365,
     "unresolved": 368,
     "resolvedWithPredicate": 227,
     "resolvedWithCleanPredicate": 227,
-    "keyFunctions": 125,
-    "keyFunctionsConsulted": 125,
+    "keyFunctions": 127,
+    "keyFunctionsConsulted": 127,
     "keyTables": 33,
     "slotless": 65,
     "bagless": 140,
@@ -37,7 +37,7 @@
     "syntheticTableFields": 100,
     "tiers": {
       "MISSING": 33,
-      "THIN": 502,
+      "THIN": 506,
       "COVERED": 227,
       "MISSING-AT-TIER": 45
     },
@@ -47,17 +47,17 @@
     "narrowedRows": 0,
     "covertRows": 4,
     "objectClassed": 103,
-    "mountedRows": 587,
+    "mountedRows": 591,
     "absent": {
-      "measured": 470,
+      "measured": 476,
       "default": 3,
       "not-produced": 61,
       "method-call": 18
     },
     "zeroK": 66,
-    "kExecutable": 361,
+    "kExecutable": 365,
     "kNotExecutable": 368,
-    "branchGrainRows": 331,
+    "branchGrainRows": 335,
     "functionGrainRows": 398,
     "customReachableRows": 26,
     "relationRows": 165,
@@ -118,12 +118,12 @@
         5
       ]
     ],
-    "sourceLicensedRows": 118,
+    "sourceLicensedRows": 120,
     "sourceOfficeRows": 3,
-    "sourceUnresolvedRows": 608,
+    "sourceUnresolvedRows": 610,
     "sourceTwoSourceRows": 10,
     "modifierRows": 0,
-    "declaredColumnRows": 729,
+    "declaredColumnRows": 733,
     "tablePools": 50
   },
   "rows": [
@@ -1992,6 +1992,252 @@
         "kinds": [],
         "fields": {
           "economicScore": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-DEF-2",
+      "pool": "CHAIN: defence supplied",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 4,
+      "grammars": 1,
+      "predicate": [],
+      "branchReads": [
+        "force",
+        "settlement.defenseProfile.chainModifiers"
+      ],
+      "fieldsRead": [
+        "force",
+        "settlement.defenseProfile.chainModifiers"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "defenceSupplyPoolKey",
+      "rung": "literal",
+      "reads": [
+        "force",
+        "settlement.defenseProfile.chainModifiers"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "force": "measured",
+        "settlement.defenseProfile.chainModifiers": "measured"
+      },
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "defense.threatAssessment"
+      ],
+      "attach": [],
+      "k": 1,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "muster",
+        "kinds": [
+          "muster"
+        ],
+        "fields": {
+          "force": "muster",
+          "settlement.defenseProfile.chainModifiers": ""
+        },
+        "holder": null,
+        "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
+        "standing": "LICENSED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-DEF-2",
+      "pool": "CHAIN: defence short",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 4,
+      "grammars": 1,
+      "predicate": [],
+      "branchReads": [
+        "force",
+        "settlement.defenseProfile.chainModifiers"
+      ],
+      "fieldsRead": [
+        "force",
+        "settlement.defenseProfile.chainModifiers"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "defenceSupplyPoolKey",
+      "rung": "literal",
+      "reads": [
+        "force",
+        "settlement.defenseProfile.chainModifiers"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "force": "measured",
+        "settlement.defenseProfile.chainModifiers": "measured"
+      },
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "defense.threatAssessment"
+      ],
+      "attach": [],
+      "k": 1,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "muster",
+        "kinds": [
+          "muster"
+        ],
+        "fields": {
+          "force": "muster",
+          "settlement.defenseProfile.chainModifiers": ""
+        },
+        "holder": null,
+        "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
+        "standing": "LICENSED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-DEF-2",
+      "pool": "CHAIN: food trades working",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 3,
+      "grammars": 1,
+      "predicate": [],
+      "branchReads": [
+        "settlement.defenseProfile.chainModifiers"
+      ],
+      "fieldsRead": [
+        "settlement.defenseProfile.chainModifiers"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "foodTradesPoolKey",
+      "rung": "literal",
+      "reads": [
+        "settlement.defenseProfile.chainModifiers"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "settlement.defenseProfile.chainModifiers": "measured"
+      },
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "defense.threatAssessment"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "settlement.defenseProfile.chainModifiers": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-DEF-2",
+      "pool": "CHAIN: food trades failing",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 3,
+      "grammars": 1,
+      "predicate": [],
+      "branchReads": [
+        "settlement.defenseProfile.chainModifiers"
+      ],
+      "fieldsRead": [
+        "settlement.defenseProfile.chainModifiers"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "foodTradesPoolKey",
+      "rung": "literal",
+      "reads": [
+        "settlement.defenseProfile.chainModifiers"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "settlement.defenseProfile.chainModifiers": "measured"
+      },
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "defense.threatAssessment"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "settlement.defenseProfile.chainModifiers": ""
         },
         "holder": null,
         "holderReason": "no mapping row resolves any field this pool reads",
@@ -46783,6 +47029,15 @@
         "modifierMounts": []
       },
       {
+        "field": "force",
+        "mountsSpine": 1,
+        "mountsModifier": 0,
+        "spineTabs": [
+          "defense"
+        ],
+        "modifierMounts": []
+      },
+      {
         "field": "forces",
         "mountsSpine": 2,
         "mountsModifier": 0,
@@ -48550,7 +48805,7 @@
       },
       {
         "field": "settlement.defenseProfile",
-        "mountsSpine": 2,
+        "mountsSpine": 3,
         "mountsModifier": 3,
         "spineTabs": [
           "defense"
@@ -49048,10 +49303,10 @@
     },
     {
       "block": "DS-DEF-2",
-      "spines": 26,
-      "facts": 6,
+      "spines": 30,
+      "facts": 8,
       "spinesReachedBp": 10000,
-      "meanReachBp": 8077
+      "meanReachBp": 8500
     },
     {
       "block": "DS-DEF-4",
@@ -49550,10 +49805,10 @@
     },
     {
       "block": "DS-DEF-2",
-      "spines": 26,
-      "facts": 6,
+      "spines": 30,
+      "facts": 8,
       "spinesReachedBp": 10000,
-      "meanReachBp": 8077,
+      "meanReachBp": 8500,
       "byFact": [
         {
           "field": "beastsRowSituation(family, perimeter, force) (via BEASTS_ROW_POOL in defenseStateProse.js)",
@@ -49572,6 +49827,10 @@
             "Economic Survival: ADEQUATE",
             "Economic Survival: WEAK",
             "Economic Survival: CRITICAL",
+            "CHAIN: defence supplied",
+            "CHAIN: defence short",
+            "CHAIN: food trades working",
+            "CHAIN: food trades failing",
             "Disasters & Famine: granary AND hospital",
             "Disasters & Famine: granary AND parish care only",
             "Disasters & Famine: granary, NO medical provision",
@@ -49599,6 +49858,10 @@
             "Economic Survival: ADEQUATE",
             "Economic Survival: WEAK",
             "Economic Survival: CRITICAL",
+            "CHAIN: defence supplied",
+            "CHAIN: defence short",
+            "CHAIN: food trades working",
+            "CHAIN: food trades failing",
             "Disasters & Famine: granary AND hospital",
             "Disasters & Famine: granary AND parish care only",
             "Disasters & Famine: granary, NO medical provision",
@@ -49629,7 +49892,44 @@
             "Economic Survival: STRONG",
             "Economic Survival: ADEQUATE",
             "Economic Survival: WEAK",
-            "Economic Survival: CRITICAL"
+            "Economic Survival: CRITICAL",
+            "CHAIN: defence supplied",
+            "CHAIN: defence short",
+            "CHAIN: food trades working",
+            "CHAIN: food trades failing"
+          ]
+        },
+        {
+          "field": "force",
+          "attach": [
+            "Beasts & Monsters: plagued, perimeter AND organized force",
+            "Beasts & Monsters: plagued, perimeter but NO force to hold it",
+            "Beasts & Monsters: plagued, NO perimeter and NO force",
+            "Beasts & Monsters: frontier, credible deterrence",
+            "Beasts & Monsters: frontier, force without a perimeter",
+            "Beasts & Monsters: settled, defenses beyond the need",
+            "Beasts & Monsters: settled, nothing organized",
+            "Invasion & War: walls AND professional garrison",
+            "Invasion & War: walls with citizen militia",
+            "Invasion & War: walls with NO force",
+            "Invasion & War: force with NO walls",
+            "Invasion & War: militia only",
+            "Invasion & War: neither walls nor force",
+            "Internal Security: full legal chain (court AND prison)",
+            "Internal Security: court without detention",
+            "Internal Security: detention without process",
+            "Internal Security: no legal infrastructure",
+            "Economic Survival: STRONG",
+            "Economic Survival: ADEQUATE",
+            "Economic Survival: WEAK",
+            "Economic Survival: CRITICAL",
+            "CHAIN: food trades working",
+            "CHAIN: food trades failing",
+            "Disasters & Famine: granary AND hospital",
+            "Disasters & Famine: granary AND parish care only",
+            "Disasters & Famine: granary, NO medical provision",
+            "Disasters & Famine: NO reserves, hospital present",
+            "Disasters & Famine: NO reserves, NO medical provision"
           ]
         },
         {
@@ -49650,6 +49950,10 @@
             "Economic Survival: ADEQUATE",
             "Economic Survival: WEAK",
             "Economic Survival: CRITICAL",
+            "CHAIN: defence supplied",
+            "CHAIN: defence short",
+            "CHAIN: food trades working",
+            "CHAIN: food trades failing",
             "Disasters & Famine: granary AND hospital",
             "Disasters & Famine: granary AND parish care only",
             "Disasters & Famine: granary, NO medical provision",
@@ -49677,6 +49981,10 @@
             "Economic Survival: ADEQUATE",
             "Economic Survival: WEAK",
             "Economic Survival: CRITICAL",
+            "CHAIN: defence supplied",
+            "CHAIN: defence short",
+            "CHAIN: food trades working",
+            "CHAIN: food trades failing",
             "Disasters & Famine: granary AND hospital",
             "Disasters & Famine: granary AND parish care only",
             "Disasters & Famine: granary, NO medical provision",
@@ -49704,6 +50012,41 @@
             "Internal Security: court without detention",
             "Internal Security: detention without process",
             "Internal Security: no legal infrastructure",
+            "CHAIN: defence supplied",
+            "CHAIN: defence short",
+            "CHAIN: food trades working",
+            "CHAIN: food trades failing",
+            "Disasters & Famine: granary AND hospital",
+            "Disasters & Famine: granary AND parish care only",
+            "Disasters & Famine: granary, NO medical provision",
+            "Disasters & Famine: NO reserves, hospital present",
+            "Disasters & Famine: NO reserves, NO medical provision"
+          ]
+        },
+        {
+          "field": "settlement.defenseProfile.chainModifiers",
+          "attach": [
+            "Beasts & Monsters: plagued, perimeter AND organized force",
+            "Beasts & Monsters: plagued, perimeter but NO force to hold it",
+            "Beasts & Monsters: plagued, NO perimeter and NO force",
+            "Beasts & Monsters: frontier, credible deterrence",
+            "Beasts & Monsters: frontier, force without a perimeter",
+            "Beasts & Monsters: settled, defenses beyond the need",
+            "Beasts & Monsters: settled, nothing organized",
+            "Invasion & War: walls AND professional garrison",
+            "Invasion & War: walls with citizen militia",
+            "Invasion & War: walls with NO force",
+            "Invasion & War: force with NO walls",
+            "Invasion & War: militia only",
+            "Invasion & War: neither walls nor force",
+            "Internal Security: full legal chain (court AND prison)",
+            "Internal Security: court without detention",
+            "Internal Security: detention without process",
+            "Internal Security: no legal infrastructure",
+            "Economic Survival: STRONG",
+            "Economic Survival: ADEQUATE",
+            "Economic Survival: WEAK",
+            "Economic Survival: CRITICAL",
             "Disasters & Famine: granary AND hospital",
             "Disasters & Famine: granary AND parish care only",
             "Disasters & Famine: granary, NO medical provision",
@@ -52111,7 +52454,7 @@
   ],
   "factBudget": {
     "zeroK": 66,
-    "executable": 361,
+    "executable": 365,
     "notExecutable": 368,
     "byBlock": [
       [
@@ -52251,7 +52594,7 @@
         "DS-DEF-2",
         {
           "zeroK": 0,
-          "spines": 26
+          "spines": 30
         }
       ],
       [
@@ -52507,18 +52850,18 @@
       ],
       [
         1,
-        85
+        87
       ],
       [
         2,
-        210
+        212
       ]
     ]
   },
   "grains": {
     "branch": {
       "zeroK": 66,
-      "executable": 361,
+      "executable": 365,
       "notExecutable": 368,
       "histogram": [
         [
@@ -52555,11 +52898,11 @@
         ],
         [
           1,
-          85
+          87
         ],
         [
           2,
-          210
+          212
         ]
       ],
       "blocksWithSpine": 51,
@@ -52586,7 +52929,7 @@
         "DS-STR-1",
         "DS-WAR-3"
       ],
-      "readPaths": 652,
+      "readPaths": 658,
       "modifierEligibleFactsByTab": [
         [
           "economics",
@@ -52644,7 +52987,7 @@
     },
     "function": {
       "zeroK": 144,
-      "executable": 361,
+      "executable": 365,
       "notExecutable": 368,
       "histogram": [
         [
@@ -52673,11 +53016,11 @@
         ],
         [
           1,
-          87
+          89
         ],
         [
           2,
-          130
+          132
         ]
       ],
       "blocksWithSpine": 51,
@@ -52708,7 +53051,7 @@
         "DS-STR-1",
         "DS-WAR-3"
       ],
-      "readPaths": 917,
+      "readPaths": 923,
       "modifierEligibleFactsByTab": [
         [
           "economics",
@@ -53087,19 +53430,19 @@
     ],
     "summary": {
       "rows": {
-        "LICENSED": 118,
+        "LICENSED": 120,
         "OFFICE": 3,
-        "SOURCE-UNRESOLVED": 608
+        "SOURCE-UNRESOLVED": 610
       },
       "fields": {
-        "LICENSED": 198,
+        "LICENSED": 200,
         "OFFICE": 5,
-        "SOURCE-UNRESOLVED": 509
+        "SOURCE-UNRESOLVED": 513
       },
       "byKind": [
         [
           "muster",
-          64
+          66
         ],
         [
           "market",
@@ -53139,7 +53482,7 @@
         ]
       ],
       "unresolvedGrounds": {
-        "no-mapping": 509,
+        "no-mapping": 513,
         "no-institution-in-roster": 0
       },
       "twoSourceRows": 10,
@@ -54498,8 +54841,8 @@
       "leafBoth": 0,
       "leafEither": 2,
       "leafRows": [],
-      "deskRoots": 94,
-      "deskSegments": 221
+      "deskRoots": 95,
+      "deskSegments": 222
     }
   },
   "ratifiedAliases": {
@@ -54638,6 +54981,11 @@
       "book",
       "books",
       "register"
+    ],
+    "force": [
+      "muster",
+      "roll",
+      "rolls"
     ],
     "forces": [
       "muster",
@@ -54822,6 +55170,11 @@
       "books",
       "chest",
       "purse"
+    ],
+    "settlement.defenseProfile.chainModifiers": [
+      "muster",
+      "roll",
+      "rolls"
     ],
     "settlement.defenseProfile.economicGates.military": [
       "muster",
@@ -55556,6 +55909,38 @@
         "scoreBand(economicScore) (via ECONOMIC_ROW_POOL in defenseStateProse.js)"
       ],
       "readingFunction": "ECONOMIC_ROW_POOL",
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-DEF-2",
+      "subject": "CHAIN: defence supplied",
+      "fields": [],
+      "readingFunction": "defenceSupplyPoolKey",
+      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-DEF-2",
+      "subject": "CHAIN: defence short",
+      "fields": [],
+      "readingFunction": "defenceSupplyPoolKey",
+      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-DEF-2",
+      "subject": "CHAIN: food trades working",
+      "fields": [],
+      "readingFunction": "foodTradesPoolKey",
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-DEF-2",
+      "subject": "CHAIN: food trades failing",
+      "fields": [],
+      "readingFunction": "foodTradesPoolKey",
       "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
