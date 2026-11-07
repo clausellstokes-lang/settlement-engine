@@ -40,13 +40,14 @@ import { describe, it, expect } from 'vitest';
 import { createHash } from 'node:crypto';
 import { readFileSync, writeFileSync, mkdtempSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
-import { join, resolve } from 'node:path';
-import { pathToFileURL } from 'node:url';
+import { dirname, join, resolve } from 'node:path';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { goldenCorpus, keyOf } from '../helpers/goldenMasterCorpus.js';
 
-const ROOT = process.cwd();
+// The file's own address, never the working directory (moduleScopeCwdRatchet; TOOL-31's shape).
+const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const BUNDLE = resolve(ROOT, 'supabase', 'functions', '_shared', 'engineBundle.js');
 const FIXTURE = resolve(ROOT, 'tests', 'fixtures', 'generator-golden-master.json');
 const SERVICE_CASES = resolve(ROOT, 'tests', 'fixtures', 'engine-generate-cases.json');
