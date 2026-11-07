@@ -1,0 +1,46 @@
+PROPOSED, NOT APPLIED (GOLDEN-REHEARSAL 2026-11-07). scripts/audit/landing-stage.sh did the forward
+build over lane 1's linear chain at every step without a stop (11 stages, 0 door paths carried). The
+gap is `measure`: it reads 3 of the 5 surfaces the people car moves (gm, herald, fence) and compares
+the gm and herald against the stage's COMMITTED fixture, not the previous stage. The rehearsal measured
+the prose manifest, the witness and the PDF snapshot by hand (prose-manifest-cells.mjs --out,
+witness-stage.mjs, vitest --update copied out and restored). This diff puts those on the tool.
+
+--- a/scripts/audit/landing-stage.sh
++++ b/scripts/audit/landing-stage.sh
+@@ measure)
+-    stage=$2; out=$3; prev=${4:-}
++    stage=$2; out=$3; prev=${4:-}   # prev: the PREVIOUS stage's scratch dir (was: its fence rows.tsv)
+     mkdir -p "$out"
+     node "$here/scripts/audit/golden-master-stage.mjs" "$stage" --out "$out/gm.json" \
+-      --against "$stage/tests/fixtures/generator-golden-master.json"
++      --against "${prev:+$prev/gm.json}${prev:-$stage/tests/fixtures/generator-golden-master.json}"
+     node "$here/scripts/audit/herald-stage.mjs" "$stage" --out "$out/herald.json"
+@@
+-    if [ -n "$prev" ]; then
+-      node "$here/scripts/audit/refence.mjs" "$stage" --rows-out "$out/fence.tsv" --against "$prev"
++    if [ -n "$prev" ]; then
++      node "$here/scripts/audit/refence.mjs" "$stage" --rows-out "$out/fence.tsv" --against "$prev/fence.tsv"
+     else
+       node "$here/scripts/audit/refence.mjs" "$stage" --rows-out "$out/fence.tsv"
+     fi
++    # the composed-prose manifest's rows (the door's bytes carry them under `rows`)
++    ( cd "$stage" && node scripts/prose-manifest-cells.mjs --out "$out/prose-cells.json" >/dev/null )
++    node -e 'const f=require("fs");const p=JSON.parse(f.readFileSync(process.argv[1],"utf8"));f.writeFileSync(process.argv[2],JSON.stringify(p.rows)+"\n");f.unlinkSync(process.argv[1])' \
++      "$out/prose-cells.json" "$out/prose-rows.json"
++    # the preset lighting witness (no capture arm)
++    ( cd "$stage" && node "$here/scripts/audit/witness-stage.mjs" "$stage" --out "$out/witness.json" )
++    # the PDF view-model snapshot: the matcher's own bytes, copied out, the stage restored
++    ( cd "$stage" && npx vitest run tests/pdf/goldenViewModel.test.js --update >/dev/null 2>&1 || true
++      cp tests/pdf/__snapshots__/goldenViewModel.test.js.snap "$out/pdf.snap"
++      git checkout -q -- tests/pdf/__snapshots__/goldenViewModel.test.js.snap )
++    # rows moved against the previous stage, every surface (the rehearsal's chain.cjs, put on the tree)
++    [ -n "$prev" ] && node "$here/scripts/audit/stage-chain.mjs" "$prev" "$out"
+     ;;
+
+(stage-chain.mjs would be new: per surface, keys moved/added/removed between two scratch dirs; the
+rehearsal's 25-line version is the record's §2 instrument. Also: `measure` should name the dormancy
+goldens' suites in a plain run, since none has a measuring tool; at lane 1 every one is green.)
+
+landing-act.mjs, two text defects for the people car (not blockers): transplant() hard-codes
+"RUNG 1 OF THE SOAK LADDER" in the message body and TOTAL has no herald/witness row (the herald's
+title falls back to `s.of`, which the config must then carry).

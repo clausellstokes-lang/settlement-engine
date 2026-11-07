@@ -1,0 +1,61 @@
+# landing-act.mjs run over the DRY stage (8fa9de5b8 + carry), the five acts, door output per act:
+{"surface":"generator-golden-master","from":"06050f531a8f55f5d9e54026942dd11336352ea50920843bb7af929f0960623d","to":"d9f0e75809e992f3eb8683c7afbeead359602d0221e9fb6f58a458fbb000e212","rowsFrom":"525","rowsTo":"525"}
+{"surface":"espionage-dormancy-fence","from":"b48e8b182702c6def55a13270ae2a0f60c3a5d72e8a4668beb10188003e3da76","to":"72284f02269c5654307d511bad8369bcd9e9e9703b81514055772019e02f6a08","rowsFrom":"(unset)","rowsTo":"null"}
+{"surface":"herald-knowledge-desk-golden","from":"3c8790800e3f451ef5f5dc0a21351e7a203897b9be81f87b708bfddddb1f5bbc","to":"b7e22df609df049e32a80cb047966aad91f0169658f7bfbbb8ba5b35b83ae629","rowsFrom":"435","rowsTo":"479"}
+{"surface":"dossier-prose-manifest","from":"777e4b4b2968fab6b02a758435c7dcc8c779753942aeab77c4ae8c261e6d990e","to":"32988b6b8eb1a0c05fff1cd479100b79517b951500e8a8bde2ac8bcbbeca0d9c","rowsFrom":"2","rowsTo":"2"}
+{"surface":"pdf-golden-view-model-snapshot","from":"b1a92886d57bd55bb9d21dfa3ac0930d32955458c0b68b84d062729aa5509d0b","to":"2a785d50710e1bd7efc8d4ceee6e6ba9ed58914ea51febf8a9e28b531e4c0438","rowsFrom":"(unset)","rowsTo":"null"}
+
+# landing-act.mjs figures (rows moved per act, stage commit vs its parent):
+{
+ "generator-golden-master": {
+  "rows": 525,
+  "moved": 525,
+  "added": 0,
+  "removed": 0,
+  "byTier": {
+   "city": 84,
+   "hamlet": 84,
+   "metropolis": 84,
+   "thorp": 84,
+   "town": 105,
+   "village": 84
+  }
+ },
+ "espionage-dormancy-fence": {
+  "note": "not a JSON row manifest"
+ },
+ "herald-knowledge-desk-golden": {
+  "rows": 479,
+  "moved": 2,
+  "added": 222,
+  "removed": 178,
+  "byTier": {
+   "rr-fresh-full": 2
+  }
+ },
+ "dossier-prose-manifest": {
+  "rows": 1050,
+  "moved": 940,
+  "added": 0,
+  "removed": 0,
+  "byTier": {
+   "city": 168,
+   "hamlet": 96,
+   "metropolis": 168,
+   "thorp": 130,
+   "town": 210,
+   "village": 168
+  }
+ },
+ "pdf-golden-view-model-snapshot": {
+  "note": "not a JSON row manifest"
+ }
+}
+
+# the DRY stage's act commits:
+0d572342cd149c5abc21938deb5b025c214109f8 act: pdf-golden-view-model-snapshot
+307b9e22e2de93f3c5569e8e258906543a12a8cd act: dossier-prose-manifest
+a655a050e4cad1e0a8c01c3dc66c2929fa42ef74 act: herald-knowledge-desk-golden
+f880139e7fef90f4f2966f40d71eff7b791b247c act: espionage-dormancy-fence
+419152ec1745227e55f1f3fb8709961b63e5cbb5 act: generator-golden-master
+6553c98f190ca8e005d674fb01c3220bdfba014b stage: tree of 8fa9de5b8fa1316a2454a4040030e2a2d1dd135e with the door paths carried from 8fa9de5b8fa1316a2454a4040030e2a2d1dd135e

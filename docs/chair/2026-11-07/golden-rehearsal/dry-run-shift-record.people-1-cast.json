@@ -1,0 +1,40 @@
+{
+  "_doc": "DRY RUN — GOLDEN-REHEARSAL, 2026-11-07. NOT A SIGNATURE, never committed under docs/shift-records/. A rehearsal of the people car's one signed golden shift (PEOPLE-RULINGS M-1, M-3), written at a scratch stage of lane 1's tip 8fa9de5b8 (the tree of 8fa9de5b8 with the door paths carried from the lane branch: carried nothing, the lane touched no door path). Rows measured before the write by scripts/audit/landing-stage.sh measure, witness-stage.mjs and prose-manifest-cells.mjs --out at the base stage 262e8b255 and at 8fa9de5b8: generator golden master 525 of 525 (all tiers); espionage fence 360 of 360 (f1aa52d8.. at the base -> 1b03f1f3.. at the tip; the committed constant 726ef86a.. was already unproduced at the base); herald desk 435 -> 479 keys (222 added, 178 removed, 2 moved); dossier prose manifest 940 of 1,050 rows (fixture -> tip; 8 already moved at the base); PDF view-model snapshot headcounts.npcs 10 -> 36; preset lighting witness 0; every roster-hashing dormancy golden 0 (green at the tip).",
+  "ownerWords": "for every appropriate institution, we generate one NPC … I think just one person per institution. They act as the face. We are not building all the citizens of a settlement. That's too granular and the DM can do that work themselves. We are simply making representatives.",
+  "ownerDate": "2026-11-07",
+  "odqRow": "§934.105",
+  "cause": "PEOPLE-1 CAST — one face per face-bearing house, the seat always faced, memberships from the backing catalogue, each power's first, second and third (lane/people-1-cast-2026-11-07, 262e8b255..8fa9de5b8)",
+  "seat": "DRY RUN — GOLDEN-REHEARSAL (Opus 5.5) under the cloud chair (Fable 5.1), session 01FE9mEvGxnFx6WTBkEC6ie9, from a scratch stage at 8fa9de5b8",
+  "surfaces": [
+    {
+      "surface": "generator-golden-master",
+      "action": "re-record",
+      "predictedRows": 525,
+      "proofForm": "settlement-hash"
+    },
+    {
+      "surface": "espionage-dormancy-fence",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "in-file corpus constant"
+    },
+    {
+      "surface": "herald-knowledge-desk-golden",
+      "action": "re-record",
+      "predictedRows": 479,
+      "proofForm": "derived-artefact"
+    },
+    {
+      "surface": "dossier-prose-manifest",
+      "action": "re-record",
+      "predictedRows": 2,
+      "proofForm": "derived-artefact"
+    },
+    {
+      "surface": "pdf-golden-view-model-snapshot",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "derived-artefact"
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+# plain receipt at the DRY stage after the five acts: landing-stage.sh suites (registered suites + freeze walker)
+ FAIL  tests/property/dossierProseManifest.test.js > the composed-prose manifest — the DRIFT corpus, both audiences > ⭐⭐ THE DRIFT CORPUS CARRIES FOUR SEEDS, and the tally is derived rather than described
+ FAIL  tests/property/heraldKnowledgeDeskGolden.test.js > the knowledge desk — the non-omniscient Herald golden (captured first, byte-stable after) > the manifest exists and closes at its captured row count
+ FAIL  tests/property/heraldKnowledgeDeskGolden.test.js > the knowledge desk — the non-omniscient Herald golden (captured first, byte-stable after) > THE REFILE MOVES NO CONTENT BYTE, AND EXACTLY THE DECLARED ITEMS CHANGE DESK
+ Test Files  2 failed | 50 passed (52)
+      Tests  3 failed | 470 passed (473)
+
+# the failing assertions (from the six-suite receipt run)
+19: FAIL  tests/property/dossierProseManifest.test.js > the composed-prose manifest — the DRIFT corpus, both audiences > ⭐⭐ THE DRIFT CORPUS CARRIES FOUR SEEDS, and the tally is derived rather than described
+20-AssertionError: the DRIFT corpus by seed, cells and towns: expected { 'golden-master-v3': { …(2) }, …(3) } to deeply equal { 'golden-master-v3': { …(2) }, …(3) }
+22-- Expected
+23-+ Received
+27--     "cells": 372,
+28-+     "cells": 380,
+32--     "cells": 364,
+33-+     "cells": 372,
+41--     "cells": 67754,
+42-+     "cells": 67146,
+47- ❯ tests/property/dossierProseManifest.test.js:186:64
+52: FAIL  tests/property/heraldKnowledgeDeskGolden.test.js > the knowledge desk — the non-omniscient Herald golden (captured first, byte-stable after) > the manifest exists and closes at its captured row count
+53-AssertionError: expected [ …(479) ] to have a length of 435 but got 479
+55-- Expected
+56-+ Received
+58-- 435
+59-+ 479
+61- ❯ tests/property/heraldKnowledgeDeskGolden.test.js:105:35
+66: FAIL  tests/property/heraldKnowledgeDeskGolden.test.js > the knowledge desk — the non-omniscient Herald golden (captured first, byte-stable after) > THE REFILE MOVES NO CONTENT BYTE, AND EXACTLY THE DECLARED ITEMS CHANGE DESK
+67-AssertionError: expected [ Array(1) ] to deeply equal [ …(2) ]
+69-- Expected
+70-+ Received
+74--   "wizard_news.42.belief_misjudgment.soak-a.soak-c",
+77- ❯ tests/property/heraldKnowledgeDeskGolden.test.js:156:25
+
+# tests/domain/worldFactRederive.test.js at the DRY stage (the W0 digest pin; A4 is lane 1's own, red at 8fa9de5b8 without the door)
+ FAIL  tests/domain/worldFactRederive.test.js > EM-B2b — world facts by consequence: the route, the refusals and the stated radius > A4 — THE STATED BLAST RADIUS IS COMPLETE: the culture reader set under src/generators is EXACT in both directions
+AssertionError: the culture reader set under src/generators is EXACT in BOTH directions. An UNLISTED reader means the blast radius of a world-fact change grew without anybody saying so, which is what design §14 final's consequence-by-design ruling forbids this packet to let happen quietly; a MISSING listed one means the roster has aged instead of convicting. The set is STATED here and it is NOT bounded anywhere.: expected [ 'src/generators/aiLayer.js', …(25) ] to deeply equal [ 'src/generators/aiLayer.js', …(23) ]
+ FAIL  tests/domain/worldFactRederive.test.js > EM-B2b — world facts by consequence: the route, the refusals and the stated radius > A7 — THE GOLDENS CANNOT SEE ANY OF IT: both fixtures are byte-identical and a no-layer re-derivation is still the committed golden
+AssertionError: tests/fixtures/generator-golden-master.json moved: expected 'd9f0e75809e992f3eb8683c7afbeead359602…' to be '06050f531a8f55f5d9e54026942dd11336352…' // Object.is equality
+    426|       .toBe('06050f531a8f55f5d9e54026942dd11336352ea50920843bb7af929f0…
+    428|       .toBe('777e4b4b2968fab6b02a758435c7dcc8c779753942aeab77c4ae8c261…
+ Test Files  1 failed (1)
+      Tests  2 failed | 5 passed (7)

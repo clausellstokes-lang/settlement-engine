@@ -1,0 +1,110 @@
+# THE TUNING RITUAL (tests/lint/tuningRegister.walker.test.js with TUNING_SIGNATURE_RECORD) — scratch worktrees only, nothing committed
+## at lane 1's tip 8fa9de5b8 (scratch worktree <scratch>/tune)
+=== ARM A-dirty  record=docs/tuning-signatures/2026-11-07-v2.json  porcelain-before=?? docs/tuning-signatures/2026-11-07-v2.json 
+exit 1
+tuning inventory refreeze REFUSED [DIRTY_TREE] — this inventory measures the WORKING TREE, and in a shared tree those paths may belong to another lane. Commit first, then refreeze at the clean tip. Dirty: docs/tuning-signatures/2026-11-07-v2.json
+tuning inventory refreeze REFUSED [${verdict.refu…
+      Tests  75 skipped (75)
+porcelain-after=?? docs/tuning-signatures/2026-11-07-v2.json 
+=== ARM B-blank  record=../tune-rec/blank.json  porcelain-before=
+exit 1
+tuning inventory refreeze REFUSED [POPULATION_GREW] — unregisteredNamed:src/generators/people/castPowers.js 0 -> 1 (no DECLARED_GROWTH row); bareDecimals:src/generators/people/castPowers.js 0 -> 1 (no DECLARED_GROWTH row)
+tuning inventory refreeze REFUSED [${verdict.refu…
+      Tests  75 skipped (75)
+porcelain-after=
+=== ARM B-v1  record=../tune-rec/v1.json  porcelain-before=
+exit 1
+tuning inventory refreeze REFUSED [POPULATION_GREW] — unregisteredNamed:src/generators/people/castPowers.js 0 -> 1 (no DECLARED_GROWTH row); bareDecimals:src/generators/people/castPowers.js 0 -> 1 (no DECLARED_GROWTH row)
+tuning inventory refreeze REFUSED [${verdict.refu…
+      Tests  75 skipped (75)
+porcelain-after=
+=== ARM B-v3  record=../tune-rec/v3.json  porcelain-before=
+exit 1
+tuning inventory refreeze REFUSED [POPULATION_GREW] — unregisteredNamed:src/generators/people/castPowers.js 0 -> 1 (no DECLARED_GROWTH row); bareDecimals:src/generators/people/castPowers.js 0 -> 1 (no DECLARED_GROWTH row)
+tuning inventory refreeze REFUSED [${verdict.refu…
+      Tests  75 skipped (75)
+porcelain-after=
+=== ARM B-badid  record=../tune-rec/badid.json  porcelain-before=
+exit 1
+tuning inventory refreeze REFUSED [POPULATION_GREW] — unregisteredNamed:src/generators/people/castPowers.js 0 -> 1 (no DECLARED_GROWTH row); bareDecimals:src/generators/people/castPowers.js 0 -> 1 (no DECLARED_GROWTH row)
+tuning inventory refreeze REFUSED [${verdict.refu…
+      Tests  75 skipped (75)
+porcelain-after=
+=== ARM F-v2  record=../tune-rec/v2.json  porcelain-before=
+exit 1
+tuning inventory refreeze REFUSED [POPULATION_GREW] — unregisteredNamed:src/generators/people/castPowers.js 0 -> 1 (no DECLARED_GROWTH row); bareDecimals:src/generators/people/castPowers.js 0 -> 1 (no DECLARED_GROWTH row)
+tuning inventory refreeze REFUSED [${verdict.refu…
+      Tests  75 skipped (75)
+porcelain-after=
+=== G receipt exit 1
+     × no file carries more bare decimals than the inventory banked 22ms
+     × no file carries fewer bare decimals than the inventory banked 1ms
+     × no file carries more unregistered named constants than the inventory banked 1ms
+     × the six ceilings never rise 1ms
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+ FAIL  tests/lint/tuningRegister.walker.test.js > tuning register — the inventory is frozen and honest > no file carries more bare decimals than the inventory banked
+ FAIL  tests/lint/tuningRegister.walker.test.js > tuning register — the inventory is frozen and honest > no file carries fewer bare decimals than the inventory banked
+ FAIL  tests/lint/tuningRegister.walker.test.js > tuning register — the inventory is frozen and honest > no file carries more unregistered named constants than the inventory banked
+ FAIL  tests/lint/tuningRegister.walker.test.js > tuning register — the inventory is frozen and honest > the six ceilings never rise
+      Tests  4 failed | 71 passed (75)
+final porcelain=
+
+## at the base stage S00 (262e8b255)
+=== ARM A-dirty  record=docs/tuning-signatures/2026-11-07-v2.json  porcelain-before=?? docs/tuning-signatures/2026-11-07-v2.json 
+exit 1
+tuning inventory refreeze REFUSED [DIRTY_TREE] — this inventory measures the WORKING TREE, and in a shared tree those paths may belong to another lane. Commit first, then refreeze at the clean tip. Dirty: docs/tuning-signatures/2026-11-07-v2.json
+tuning inventory refreeze REFUSED [${verdict.refu…
+      Tests  75 skipped (75)
+porcelain-after=?? docs/tuning-signatures/2026-11-07-v2.json 
+=== ARM B-blank  record=../../tune-rec/blank.json  porcelain-before=
+exit 1
+tuning inventory REFROZEN at 6a1ac8599702ba864d614a05a02ce53660f1e6e4 by GOLDEN-REHEARSAL (dry run): 262 tables, 535 named, 6945 bare. SIGNED at tuning-register v2: 8 ids, §934.105, by DRY RUN — GOLDEN-REHEARSAL (Opus 5.5) under the cloud chair (Fable 5.1), session 01FE9mEvGxnFx6WTBkEC6ie9; a scratch rehearsal of the landing's Register VII v2 record (PEOPLE-RULINGS M-5), NOT a signature. This run fails BY DESIGN so a refreeze can never be mistaken for a passing gate — re-run this walker without TUNING_INVENTORY_REFREEZE, and THAT green is the proof.
+tuning inventory REFROZEN at ${next.measuredAtSha} …
+      Tests  75 skipped (75)
+porcelain-after= M tests/lint/.tuning-inventory.json  M tests/lint/.tuning-register.json 
+=== ARM B-v1  record=../../tune-rec/v1.json  porcelain-before=
+exit 1
+tuning signature REFUSED [RECORD_VERSION_MISMATCH] — the record is version 1; the register sits at 1, so the next dense version is 2.
+tuning signature REFUSED [${applied.refusal}] —…
+      Tests  75 skipped (75)
+porcelain-after=
+=== ARM B-v3  record=../../tune-rec/v3.json  porcelain-before=
+exit 1
+tuning signature REFUSED [RECORD_VERSION_MISMATCH] — the record is version 3; the register sits at 1, so the next dense version is 2.
+tuning signature REFUSED [${applied.refusal}] —…
+      Tests  75 skipped (75)
+porcelain-after=
+=== ARM B-badid  record=../../tune-rec/badid.json  porcelain-before=
+exit 1
+tuning signature REFUSED [ID_NOT_IN_RECORD] — src/domain/density/densityBands.js#MASS_RETIRED: no declared row
+tuning signature REFUSED [${applied.refusal}] —…
+      Tests  75 skipped (75)
+porcelain-after=
+=== ARM F-v2  record=../../tune-rec/v2.json  porcelain-before=
+exit 1
+tuning inventory REFROZEN at 6a1ac8599702ba864d614a05a02ce53660f1e6e4 by GOLDEN-REHEARSAL (dry run): 262 tables, 535 named, 6945 bare. SIGNED at tuning-register v2: 8 ids, §934.105, by DRY RUN — GOLDEN-REHEARSAL (Opus 5.5) under the cloud chair (Fable 5.1), session 01FE9mEvGxnFx6WTBkEC6ie9; a scratch rehearsal of the landing's Register VII v2 record (PEOPLE-RULINGS M-5), NOT a signature. This run fails BY DESIGN so a refreeze can never be mistaken for a passing gate — re-run this walker without TUNING_INVENTORY_REFREEZE, and THAT green is the proof.
+tuning inventory REFROZEN at ${next.measuredAtSha} …
+      Tests  75 skipped (75)
+porcelain-after= M tests/lint/.tuning-inventory.json  M tests/lint/.tuning-register.json 
+ tests/lint/.tuning-inventory.json |  8 +++----
+ tests/lint/.tuning-register.json  | 46 +++++++++++++++++++++++++++++++--------
+ 2 files changed, 41 insertions(+), 13 deletions(-)
+=== G receipt exit 1
+     × the register is signed at version 1: Register VII's eight tables by the owner's record of 2026-11-06, every other table draft 14ms
+     × the signature state of an unregistered id fails closed to draft 1ms
+     × the register fingerprint reports the version and both file digests 4ms
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+ FAIL  tests/lint/tuningRegister.walker.test.js > tuning register — the signature is a record, not a word > the register is signed at version 1: Register VII's eight tables by the owner's record of 2026-11-06, every other table draft
+ FAIL  tests/lint/tuningRegister.walker.test.js > tuning register — the signature is a record, not a word > the signature state of an unregistered id fails closed to draft
+ FAIL  tests/lint/tuningRegister.walker.test.js > tuning register — the signature is a record, not a word > the register fingerprint reports the version and both file digests
+      Tests  3 failed | 72 passed (75)
+final porcelain=
+
+## the record half, pure (scripts/lib/tuning-inventory.mjs :: applySigningRecord over measureTree at 8fa9de5b8)
+{"tree":"<scratch>/tune","signatureVersion":1,"signedIds":8,"signedDigestsMoved":[]}
+{"record":"v2.json","ok":true,"refusal":null,"detail":"","signatureVersion":2,"ids":8,"digestsEqualV1":true}
+{"record":"blank.json","ok":true,"refusal":null,"detail":"","signatureVersion":2,"ids":8,"digestsEqualV1":true}
+{"record":"v1.json","ok":false,"refusal":"RECORD_VERSION_MISMATCH","detail":"the record is version 1; the register sits at 1, so the next dense version is 2.","signatureVersion":null,"ids":null,"digestsEqualV1":null}
+{"record":"v3.json","ok":false,"refusal":"RECORD_VERSION_MISMATCH","detail":"the record is version 3; the register sits at 1, so the next dense version is 2.","signatureVersion":null,"ids":null,"digestsEqualV1":null}
+{"record":"badid.json","ok":false,"refusal":"ID_NOT_IN_RECORD","detail":"src/domain/density/densityBands.js#MASS_RETIRED: no declared row","signatureVersion":null,"ids":null,"digestsEqualV1":null}
+{"record":"empty.json","ok":false,"refusal":"RECORD_MALFORMED","detail":"'ownerWords' is blank — the owner's word is the record","signatureVersion":null,"ids":null,"digestsEqualV1":null}

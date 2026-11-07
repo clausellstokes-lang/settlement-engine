@@ -1,0 +1,14 @@
+# golden-master-stage.mjs <tree> --against <tree's committed fixture>: produced sha (first 12) and rows moved vs the committed fixture
+# integration first-parent chain (db832c892 .. 262e8b255) and lane tips
+db832c892 "sha256":"e7e8a6ff2cec "moved":0 
+a1d5ecd0e "sha256":"e7e8a6ff2cec "moved":0 
+5b444331a "sha256":"b1be65e4fbd3 "moved":525 
+ff668b9f1 "sha256":"b1be65e4fbd3 "moved":525 
+efe808f4f "sha256":"b1be65e4fbd3 "moved":525 
+7ab8a3909 "sha256":"b1be65e4fbd3 "moved":525 
+60d3305fb "sha256":"b1be65e4fbd3 "moved":525 
+63a7cd852 "sha256":"b1be65e4fbd3 "moved":525  fixture=e7e8a6ff2cec
+2adf4cc8a "sha256":"e7e8a6ff2cec "moved":0  fixture=e7e8a6ff2cec
+fc834a6bd (W0 merge) sha 6b0d226e38e8 moved 525; eb4c508e1 (W0 tip) sha 06050f531a8f moved 0; 780180b08 sha b1be65e4fbd3 moved 525; 262e8b255 (car base) sha 6b0d226e38e8 moved 525
+# espionage fence: W0 tip eb4c508e1 corpus 726ef86a (the committed constant) vs the car base 262e8b255 corpus f1aa52d8: 360 of 360 rows moved
+# prose manifest: committed fixture rows vs produced at 262e8b255: 8 of 1,050 moved (town 8)

@@ -1,0 +1,18 @@
+{
+  "ownerWords": "for every appropriate institution, we generate one NPC … I think just one person per institution. They act as the face. We are not building all the citizens of a settlement. That's too granular and the DM can do that work themselves. We are simply making representatives.",
+  "ownerDate": "2026-11-07",
+  "odqRow": "§934.105",
+  "seat": "DRY RUN — GOLDEN-REHEARSAL (Opus 5.5) under the cloud chair (Fable 5.1), session 01FE9mEvGxnFx6WTBkEC6ie9; a scratch rehearsal of the landing's Register VII v2 record (PEOPLE-RULINGS M-5), NOT a signature",
+  "version": 2,
+  "ids": [
+    "src/domain/density/densityBands.js#DENSITY_BANDS",
+    "src/domain/density/densityBands.js#RANK_CEILING_BY_TIER",
+    "src/domain/density/densityBands.js#VACANCY_WEIGHTS",
+    "src/domain/density/densityBands.js#PARTICULAR_TILTS",
+    "src/domain/density/densityBands.js#RIVAL_ROLL",
+    "src/domain/density/densityBands.js#CONCENTRATION",
+    "src/domain/density/densityBands.js#SUCCESSION_CLOCK_TICKS",
+    "src/domain/density/densityBands.js#SUCCESSION_WEIGHTS"
+  ],
+  "note": "REHEARSAL ONLY, never committed under docs/tuning-signatures/. M-5: the eight tables of src/domain/density/densityBands.js re-signed at version 2 with the mass rows retired from the dial, quoting the owner's charter words (PEOPLE-RULINGS §0, ODQ §934.105) as the owner's specific act on the roster's size; vetoable by a word."
+}

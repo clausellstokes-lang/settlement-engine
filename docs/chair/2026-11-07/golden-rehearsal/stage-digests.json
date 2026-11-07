@@ -1,0 +1,323 @@
+{
+  "_doc": "GOLDEN-REHEARSAL 2026-11-07: the FORWARD stages over lane 1's first-parent chain 262e8b255..8fa9de5b8, built by scripts/audit/landing-stage.sh build (carry = the lane tip 8fa9de5b8; the lane touched no door path, so every stage tree is its step tree). Digests are sha256 of the bytes each measuring tool produced at the stage (golden-master-stage.mjs, refence.mjs corpus sha, herald-stage.mjs, prose-manifest-cells.mjs --out rows, witness-stage.mjs, vitest --update snapshot copied out and restored). movedFromPreviousStage diffs each stage's produced bytes against the previous stage's, NOT against the committed fixture.",
+  "stages": [
+    {
+      "stage": "S00",
+      "lane1Step": "base",
+      "step": "262e8b25540f5c249b3c2160fe6b6891059d2543",
+      "subject": "chore(registers): writer reach folded out one stale dark member at the merged tip (gemstones on reasons, no longer written in the union of the lanes); the edge-",
+      "stageCommit": "6a1ac8599702ba864d614a05a02ce53660f1e6e4",
+      "stageTree": "9c5a27ee41e5a46fd802aefff52d90724ba742d0",
+      "doorPathsCarried": 0,
+      "digests": {
+        "generatorGoldenMasterBytes": "6b0d226e38e80f7d85c2ea21f050e4cd3bbb93a2730b48153269194deb2305ac",
+        "espionageFenceCorpus": "f1aa52d8b1b694c8b6280c616a0ead75b3e81072754bd2176fb6216464e2a0f8",
+        "heraldBytes": "3c8790800e3f451ef5f5dc0a21351e7a203897b9be81f87b708bfddddb1f5bbc",
+        "proseRows": "abe94c206f89bd05dc3a6a0e4cd9601330da593cbabcdccea7cbc774416aa62b",
+        "witnessBytes": "5033cae6d429106447148b6be4f317f08a193c53e966c42083947494f08b12cd",
+        "pdfSnapshot": "b1a92886d57bd55bb9d21dfa3ac0930d32955458c0b68b84d062729aa5509d0b"
+      },
+      "movedFromPreviousStage": null
+    },
+    {
+      "stage": "S01",
+      "lane1Step": "1",
+      "step": "d03bf6d24c06bcd98f1755154072380d59e72218",
+      "subject": "feat(people): the faces in the registry (R-P1) — every family declares `face` beside fabric/rare; the walker pins the ruled 27 and the measured figures; the mar",
+      "stageCommit": "6a2da534abe2b65f0289302b5a608dcd8bfa9c79",
+      "stageTree": "0c38e5afff57c44d14778e2087eaf28198f3c366",
+      "doorPathsCarried": 0,
+      "digests": {
+        "generatorGoldenMasterBytes": "6b0d226e38e80f7d85c2ea21f050e4cd3bbb93a2730b48153269194deb2305ac",
+        "espionageFenceCorpus": "f1aa52d8b1b694c8b6280c616a0ead75b3e81072754bd2176fb6216464e2a0f8",
+        "heraldBytes": "3c8790800e3f451ef5f5dc0a21351e7a203897b9be81f87b708bfddddb1f5bbc",
+        "proseRows": "abe94c206f89bd05dc3a6a0e4cd9601330da593cbabcdccea7cbc774416aa62b",
+        "witnessBytes": "5033cae6d429106447148b6be4f317f08a193c53e966c42083947494f08b12cd",
+        "pdfSnapshot": "b1a92886d57bd55bb9d21dfa3ac0930d32955458c0b68b84d062729aa5509d0b"
+      },
+      "movedFromPreviousStage": {
+        "generator-golden-master": 0,
+        "espionage-dormancy-fence": 0,
+        "herald-knowledge-desk-golden": {
+          "moved": 0,
+          "added": 0,
+          "removed": 0,
+          "rows": 435
+        },
+        "dossier-prose-manifest": 0,
+        "preset-lighting-witness": 0,
+        "pdf-golden-view-model-snapshot (changed lines)": 0
+      }
+    },
+    {
+      "stage": "S02",
+      "lane1Step": "2",
+      "step": "69eef4fe9fcc86118b697ff82feaa7433f7b78c6",
+      "subject": "feat(people): the representative generator — one face per face-bearing house, the seat always faced, the roster's named NPCs and the density law's rungs retired",
+      "stageCommit": "fc89656f557897097e5ead8c1b855ab3904c2c8e",
+      "stageTree": "f9b1a352107e1007038551ceab0add0f40dce630",
+      "doorPathsCarried": 0,
+      "digests": {
+        "generatorGoldenMasterBytes": "11498042d5213b86defcbbee21545d35d6b052e9d4fad6dd6feacd336211d034",
+        "espionageFenceCorpus": "1f9ea12680ccc5d2993c99fbcc7fd08d49c2792e36ac4c325be00e310ebb441d",
+        "heraldBytes": "9358e4180c1b8c233977fb98c873f238aecf0af247c1795e44448410ff720849",
+        "proseRows": "aa58adc9e68f82aff68cc2ea9314882b2325ee198d160275e23215be9dd2ec5a",
+        "witnessBytes": "5033cae6d429106447148b6be4f317f08a193c53e966c42083947494f08b12cd",
+        "pdfSnapshot": "e1b25cce1c55e9516de9ada8ce019751e1e13f3b398fb74001212d681a15cfce"
+      },
+      "movedFromPreviousStage": {
+        "generator-golden-master": 525,
+        "espionage-dormancy-fence": 360,
+        "herald-knowledge-desk-golden": {
+          "moved": 2,
+          "added": 205,
+          "removed": 164,
+          "rows": 476
+        },
+        "dossier-prose-manifest": 950,
+        "preset-lighting-witness": 0,
+        "pdf-golden-view-model-snapshot (changed lines)": 2
+      }
+    },
+    {
+      "stage": "S03",
+      "lane1Step": "3",
+      "step": "ac1a23085adeb345c123e37802cbb0e121fbbc24",
+      "subject": "feat(people): the powers' people — memberships from the backing catalogue, the doubled niches dealt, the `other` powers' minted faces, each power's first, secon",
+      "stageCommit": "e789670021da21dac5532fa5906af6bc78731f53",
+      "stageTree": "dab7aaa2c7d1bfa37e007036e022e9511dea33f1",
+      "doorPathsCarried": 0,
+      "digests": {
+        "generatorGoldenMasterBytes": "51d36bc83328491d04b99a1eceb0d9e988e65c26d64f4aab12a6981ed0dd6424",
+        "espionageFenceCorpus": "ba183786f111aff81d9abdfa6ece3be04cec6a3bd6811b86152e940021332549",
+        "heraldBytes": "e1b430207f70da4f99d52dc9c83f16a3ff1764c447d3e83fd81a06c51f90ae6e",
+        "proseRows": "e06d3574d9ceffbe71773e5af1fa0bd7dc7a77db9ab144b5290411fd232d33c1",
+        "witnessBytes": "5033cae6d429106447148b6be4f317f08a193c53e966c42083947494f08b12cd",
+        "pdfSnapshot": "815a1e7fa42e9a6f571e43ef758e631cbfefbe70068fdfa94cc81e5c408d2d95"
+      },
+      "movedFromPreviousStage": {
+        "generator-golden-master": 525,
+        "espionage-dormancy-fence": 360,
+        "herald-knowledge-desk-golden": {
+          "moved": 2,
+          "added": 79,
+          "removed": 71,
+          "rows": 484
+        },
+        "dossier-prose-manifest": 570,
+        "preset-lighting-witness": 0,
+        "pdf-golden-view-model-snapshot (changed lines)": 2
+      }
+    },
+    {
+      "stage": "S04",
+      "lane1Step": "1b",
+      "step": "d5983d3537e82565afec3af9c04c82ac498e9d0c",
+      "subject": "feat(people): step 1b — the registry marks re-authored from THE REVISED FACE CENSUS (the owner's test); 164 face · 2 seat · 14 null by family, 458 · 4 · 57 by r",
+      "stageCommit": "c1841aaddee72b7020410e1cf9e85cdd95abced2",
+      "stageTree": "e0420a2b5b851e5aa72a6eba9802de600d12bd90",
+      "doorPathsCarried": 0,
+      "digests": {
+        "generatorGoldenMasterBytes": "9739cdcf6301213ede54d6857f6df2b361e7b71ed406a4c0a89212a6353eba66",
+        "espionageFenceCorpus": "354cf081d65d2df1d73975ba68db406ee4dacbeef56e588c21857ee93681583d",
+        "heraldBytes": "6531c4d32eef85a9fe54ee5fbfdfd6fce8612d32cc35f2f2795fd9c6682ee4a6",
+        "proseRows": "c2999d63349460bf383822ed42a113cab58d202e53800f53bb0d1094e8ce7518",
+        "witnessBytes": "5033cae6d429106447148b6be4f317f08a193c53e966c42083947494f08b12cd",
+        "pdfSnapshot": "e1b25cce1c55e9516de9ada8ce019751e1e13f3b398fb74001212d681a15cfce"
+      },
+      "movedFromPreviousStage": {
+        "generator-golden-master": 412,
+        "espionage-dormancy-fence": 290,
+        "herald-knowledge-desk-golden": {
+          "moved": 2,
+          "added": 45,
+          "removed": 70,
+          "rows": 459
+        },
+        "dossier-prose-manifest": 484,
+        "preset-lighting-witness": 0,
+        "pdf-golden-view-model-snapshot (changed lines)": 2
+      }
+    },
+    {
+      "stage": "S05",
+      "lane1Step": "4a",
+      "step": "8d45d8308ae8f53a654ada255f1b950a85018932",
+      "subject": "feat(people): step 4a — the importance band from the rank, the card's house and powers lit on the PDF view row, the mint and rank fork families minted once, the",
+      "stageCommit": "101d01218cf279b18f43e461aa9acf7f689796f6",
+      "stageTree": "7ed583ff4139dfe9cfe9e9734af364126d32d858",
+      "doorPathsCarried": 0,
+      "digests": {
+        "generatorGoldenMasterBytes": "d3c977539b8ca785ceff671dcc2551cd4f623075cadc20c6e7fd091beb7f5c4a",
+        "espionageFenceCorpus": "dcb63ae28edbf6e910d11c218d87d3929bf6410dfffc5984429ac4feed2e9b98",
+        "heraldBytes": "749f1d3c92f222dbb0c48e0ff11a3118907e7c7effdbb00798fd0377558f1c4c",
+        "proseRows": "c2999d63349460bf383822ed42a113cab58d202e53800f53bb0d1094e8ce7518",
+        "witnessBytes": "5033cae6d429106447148b6be4f317f08a193c53e966c42083947494f08b12cd",
+        "pdfSnapshot": "e1b25cce1c55e9516de9ada8ce019751e1e13f3b398fb74001212d681a15cfce"
+      },
+      "movedFromPreviousStage": {
+        "generator-golden-master": 525,
+        "espionage-dormancy-fence": 360,
+        "herald-knowledge-desk-golden": {
+          "moved": 2,
+          "added": 151,
+          "removed": 152,
+          "rows": 458
+        },
+        "dossier-prose-manifest": 0,
+        "preset-lighting-witness": 0,
+        "pdf-golden-view-model-snapshot (changed lines)": 0
+      }
+    },
+    {
+      "stage": "S06",
+      "lane1Step": "4b",
+      "step": "b1d1fb5415a5d79d086bf7f0bd64bc9680685b0b",
+      "subject": "chore(registers): writer reach re-banked through its growth door and the fork census re-derived at the cast's tip (PEOPLE-1 CAST step 4b)",
+      "stageCommit": "09d253763d67b6744d52ba7e259a91ffeefedba1",
+      "stageTree": "4af769b524827b8fccb4bd64f149f3f7dcc08643",
+      "doorPathsCarried": 0,
+      "digests": {
+        "generatorGoldenMasterBytes": "d3c977539b8ca785ceff671dcc2551cd4f623075cadc20c6e7fd091beb7f5c4a",
+        "espionageFenceCorpus": "dcb63ae28edbf6e910d11c218d87d3929bf6410dfffc5984429ac4feed2e9b98",
+        "heraldBytes": "749f1d3c92f222dbb0c48e0ff11a3118907e7c7effdbb00798fd0377558f1c4c",
+        "proseRows": "c2999d63349460bf383822ed42a113cab58d202e53800f53bb0d1094e8ce7518",
+        "witnessBytes": "5033cae6d429106447148b6be4f317f08a193c53e966c42083947494f08b12cd",
+        "pdfSnapshot": "e1b25cce1c55e9516de9ada8ce019751e1e13f3b398fb74001212d681a15cfce"
+      },
+      "movedFromPreviousStage": {
+        "generator-golden-master": 0,
+        "espionage-dormancy-fence": 0,
+        "herald-knowledge-desk-golden": {
+          "moved": 0,
+          "added": 0,
+          "removed": 0,
+          "rows": 458
+        },
+        "dossier-prose-manifest": 0,
+        "preset-lighting-witness": 0,
+        "pdf-golden-view-model-snapshot (changed lines)": 0
+      }
+    },
+    {
+      "stage": "S07",
+      "lane1Step": "4c",
+      "step": "a47bd32855e1b398fde2cdc9192d9132cf88723e",
+      "subject": "docs(people): the lane's record docs/PEOPLE_1_CAST_2026-11-07.md (steps 1–3 and the measurement; the register and red-list sections to be filled at the tip); th",
+      "stageCommit": "6c29faded62036155259c417ef20a96d57ae2a62",
+      "stageTree": "126e862cd39f3cd715c25b231dc530cb2bed4e12",
+      "doorPathsCarried": 0,
+      "digests": {
+        "generatorGoldenMasterBytes": "d3c977539b8ca785ceff671dcc2551cd4f623075cadc20c6e7fd091beb7f5c4a",
+        "espionageFenceCorpus": "dcb63ae28edbf6e910d11c218d87d3929bf6410dfffc5984429ac4feed2e9b98",
+        "heraldBytes": "749f1d3c92f222dbb0c48e0ff11a3118907e7c7effdbb00798fd0377558f1c4c",
+        "proseRows": "c2999d63349460bf383822ed42a113cab58d202e53800f53bb0d1094e8ce7518",
+        "witnessBytes": "5033cae6d429106447148b6be4f317f08a193c53e966c42083947494f08b12cd",
+        "pdfSnapshot": "e1b25cce1c55e9516de9ada8ce019751e1e13f3b398fb74001212d681a15cfce"
+      },
+      "movedFromPreviousStage": {
+        "generator-golden-master": 0,
+        "espionage-dormancy-fence": 0,
+        "herald-knowledge-desk-golden": {
+          "moved": 0,
+          "added": 0,
+          "removed": 0,
+          "rows": 458
+        },
+        "dossier-prose-manifest": 0,
+        "preset-lighting-witness": 0,
+        "pdf-golden-view-model-snapshot (changed lines)": 0
+      }
+    },
+    {
+      "stage": "S08",
+      "lane1Step": "1c",
+      "step": "8fbe270a18833b6f37fa4b744d1d96a35a2933bf",
+      "subject": "people-1 step 1c: the fish market faced, the village church's priest, roles are titles (M-1b)",
+      "stageCommit": "51a7820d1946496d1a1ef18bf6782e2e18b9f8b3",
+      "stageTree": "7f3201941582ba469ecf6971c1b8f539dca3968d",
+      "doorPathsCarried": 0,
+      "digests": {
+        "generatorGoldenMasterBytes": "d9f0e75809e992f3eb8683c7afbeead359602d0221e9fb6f58a458fbb000e212",
+        "espionageFenceCorpus": "1b03f1f3448462393f46b3d87e4c97308af4eab1fe48235b220c7578d3afa9b2",
+        "heraldBytes": "b7e22df609df049e32a80cb047966aad91f0169658f7bfbbb8ba5b35b83ae629",
+        "proseRows": "b51ff264de6b70da1e5425185ccba850fcba19d9a9f5474342620947e479d15e",
+        "witnessBytes": "5033cae6d429106447148b6be4f317f08a193c53e966c42083947494f08b12cd",
+        "pdfSnapshot": "2a785d50710e1bd7efc8d4ceee6e6ba9ed58914ea51febf8a9e28b531e4c0438"
+      },
+      "movedFromPreviousStage": {
+        "generator-golden-master": 525,
+        "espionage-dormancy-fence": 360,
+        "herald-knowledge-desk-golden": {
+          "moved": 2,
+          "added": 95,
+          "removed": 74,
+          "rows": 479
+        },
+        "dossier-prose-manifest": 230,
+        "preset-lighting-witness": 0,
+        "pdf-golden-view-model-snapshot (changed lines)": 2
+      }
+    },
+    {
+      "stage": "S09",
+      "lane1Step": "4d",
+      "step": "1f09ca532ecf2ef1318e46dc35e473603a2b8fa8",
+      "subject": "people-1 step 4d: the observed-shape rung 29 -> 30, act 1; the lighting census refrozen",
+      "stageCommit": "16a45be81f1da42c0da64236292a278cb42fe4c0",
+      "stageTree": "5ed71c611ae537ba6a33e46478439d19368ae36e",
+      "doorPathsCarried": 0,
+      "digests": {
+        "generatorGoldenMasterBytes": "d9f0e75809e992f3eb8683c7afbeead359602d0221e9fb6f58a458fbb000e212",
+        "espionageFenceCorpus": "1b03f1f3448462393f46b3d87e4c97308af4eab1fe48235b220c7578d3afa9b2",
+        "heraldBytes": "b7e22df609df049e32a80cb047966aad91f0169658f7bfbbb8ba5b35b83ae629",
+        "proseRows": "b51ff264de6b70da1e5425185ccba850fcba19d9a9f5474342620947e479d15e",
+        "witnessBytes": "5033cae6d429106447148b6be4f317f08a193c53e966c42083947494f08b12cd",
+        "pdfSnapshot": "2a785d50710e1bd7efc8d4ceee6e6ba9ed58914ea51febf8a9e28b531e4c0438"
+      },
+      "movedFromPreviousStage": {
+        "generator-golden-master": 0,
+        "espionage-dormancy-fence": 0,
+        "herald-knowledge-desk-golden": {
+          "moved": 0,
+          "added": 0,
+          "removed": 0,
+          "rows": 479
+        },
+        "dossier-prose-manifest": 0,
+        "preset-lighting-witness": 0,
+        "pdf-golden-view-model-snapshot (changed lines)": 0
+      }
+    },
+    {
+      "stage": "S10",
+      "lane1Step": "4e",
+      "step": "8fa9de5b8fa1316a2454a4040030e2a2d1dd135e",
+      "subject": "people-1 step 4e: the observed-shape rung 29 -> 30, act 2 -- the register re-minted",
+      "stageCommit": "46b95cb61297fe05f6019259ff271c4c53ddb12b",
+      "stageTree": "417d7cb63ea78a510ec141a50a4f1589a95a1384",
+      "doorPathsCarried": 0,
+      "digests": {
+        "generatorGoldenMasterBytes": "d9f0e75809e992f3eb8683c7afbeead359602d0221e9fb6f58a458fbb000e212",
+        "espionageFenceCorpus": "1b03f1f3448462393f46b3d87e4c97308af4eab1fe48235b220c7578d3afa9b2",
+        "heraldBytes": "b7e22df609df049e32a80cb047966aad91f0169658f7bfbbb8ba5b35b83ae629",
+        "proseRows": "b51ff264de6b70da1e5425185ccba850fcba19d9a9f5474342620947e479d15e",
+        "witnessBytes": "5033cae6d429106447148b6be4f317f08a193c53e966c42083947494f08b12cd",
+        "pdfSnapshot": "2a785d50710e1bd7efc8d4ceee6e6ba9ed58914ea51febf8a9e28b531e4c0438"
+      },
+      "movedFromPreviousStage": {
+        "generator-golden-master": 0,
+        "espionage-dormancy-fence": 0,
+        "herald-knowledge-desk-golden": {
+          "moved": 0,
+          "added": 0,
+          "removed": 0,
+          "rows": 479
+        },
+        "dossier-prose-manifest": 0,
+        "preset-lighting-witness": 0,
+        "pdf-golden-view-model-snapshot (changed lines)": 0
+      }
+    }
+  ]
+}
