@@ -8,7 +8,7 @@
   "The reviewable slice is computed by RULE (reviewableDark), never hand-listed."
  ],
  "schema": 1,
- "frozenAtSha": "a725df7e42df0b58d290357c9488c328acbc9a06",
+ "frozenAtSha": "6c2a9635e727ed00efeb676d784a131dafde55c3",
  "charter": "§18.1 WRWALKER Car 1 (HORIZON) — chair-signed vetoably at the INSTR-WRW pre-stage",
  "minRows": 40,
  "corpusMeta": {
@@ -24,7 +24,7 @@
  },
  "shapesDigest": "8d29b1f973ca323599b841cc7150a2246547cc0cb64e4acc86749eee0e10820f",
  "detectorDigest": "a91972049a21907e56030e7ab5fe16a933a8f7b7ed5eff834c6ecc52b7b4647c",
- "verdictDigest": "0c197a28cf5134ba8e68bc82eb8b57a3eaded410e1e4c5f37d3802c49fab9089",
+ "verdictDigest": "4fcc23e016ffaefb779d7d9a4c6142501608a5640f3cc57b5439877ca94ae63f",
  "surfaceRoots": {
   "web": [
    "src/main.jsx"
@@ -73,7 +73,7 @@
  ],
  "closureSizes": {
   "web-display": 750,
-  "web-transitive": 966,
+  "web-transitive": 968,
   "dossier-pdf": 469,
   "campaign-pdf": 106,
   "world-book": 123,
@@ -91,15 +91,15 @@
   "knownShapes": 516
  },
  "scanStats": {
-  "files": 1717,
-  "sites": 40829,
-  "propRead": 38650,
+  "files": 1719,
+  "sites": 40848,
+  "propRead": 38669,
   "elemRead": 0,
   "destructure": 2163,
   "inOp": 16,
-  "rGrades": 6242,
-  "nGrades": 1607698,
-  "resolvedReceivers": 7117
+  "rGrades": 6245,
+  "nGrades": 1610870,
+  "resolvedReceivers": 7120
  },
  "registerDigest": "4595b8264efb741fcf1517ed8deca7ff3df4e8a4eb021d2e16062af67ff9e3f6",
  "pendingSurfaceCeiling": 3,
@@ -10102,7 +10102,7 @@
   "expectedReturnTick on npcs": "dossier-pdf=N foundry=N web-transitive=N",
   "exposedTick on npcs": "web-transitive=N",
   "family on npcs": "dossier-pdf=N foundry=N news=N web-display=N web-transitive=N",
-  "gender on npcs": "dossier-pdf=R foundry=R web-display=R",
+  "gender on npcs": "dossier-pdf=R foundry=R web-display=R web-transitive=N",
   "generatedAs on npcs": "",
   "goal on npcs": "campaign-pdf=R dossier-pdf=R foundry=R news=N web-display=R web-transitive=R world-book=R",
   "historicizedTick on npcs": "web-transitive=N",
@@ -21357,6 +21357,13 @@
     "lastTargetedTick on osr000:npc_barracks"
    ],
    "previousCohort": 1399,
+   "cohort": 1397
+  },
+  {
+   "charter": "§934.105",
+   "sha": "6c2a9635e727ed00efeb676d784a131dafde55c3",
+   "admitted": [],
+   "previousCohort": 1397,
    "cohort": 1397
   }
  ]
