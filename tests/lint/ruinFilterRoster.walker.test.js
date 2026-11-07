@@ -100,6 +100,10 @@ const RUIN_AGNOSTIC_EXEMPT = Object.freeze({
   'src/domain/mapProfile.js': 'existence-gate (deferred) — .some() walls → hasWalls; a ruined citadel still reads walled (owner glance)',
   'src/domain/contradictions.js': 'existence-gate — narrative QA detectors (.some presence)',
   'src/domain/coherence/readerBattery.js': 'existence-gate/name-lookup — THE READER BATTERY (lane READER-INSTRUMENTS, 2026-11-04) is an INSTRUMENT, not a provider aggregation: the soak runs it over BIRTH records to ask whether rendered prose names a house the roster lacks — `houseNames` maps the roster to catalogue names for the [~strength-no-house] column and the [no-watch] sub-case, and `hasMarketInstitution(s?.institutions)` is the [no-market] existence gate. It credits no institution with capacity and sums nothing; its own header says it cures nothing. The same standing as contradictions.js above (narrative QA detectors). A ruin on a pulsed save would read present here, which is a false negative in an instrument, never an over-credit in the product.',
+  // LANDING-R2 seat E (2026-11-07): the two raw readers the pool census merged in, each classified
+  // by reading its one roster read (neither aggregates providers):
+  'src/domain/facts/factsOf.js': 'delegates — birthFactsOf (census-1c unit 2, fbba809db) only HANDS `partial.institutions` on to factsOf, whose institution facts are answered by facts/institutions.js :: hasInstitution → liveInstitutionNames → liveInstitutions (the ruin filter). The file reads no row itself and credits nothing.',
+  'src/domain/display/validationOnPage.js': 'name-lookup/display — resourceGapLines (reader-r1 unit 2, d3b9280f6) resolves the ONE house a generator gap row already names (`institutions.find(i => i?.name === name)`, falling back to `{ name }`) so the gap line can word that house. It credits no institution with capacity and sums nothing.',
   'src/domain/coherence/hookTruth.js': 'existence-gate — reads `defenseProfile.institutions` ONLY to know whether the record carries a defence roster at all (`defenseKnown`: an unknown roster licenses nothing). Every defence and hospital FACT comes from defenseFacts.js :: defenseFactsOf, which reads the live roster through liveInstitutions(). Lane WIRING-2 (2026-11-03, HOOKS request 6) moved the facts there; before it this file was COMPLIANT through its own isLiveInstitution hospital read.',
   'src/domain/traditions/politics.js': 'existence/candidate — tradition-owner candidate membership (deferred; owner glance)',
   // MF-UC0 (ODQ §311.1, §441, §445.2): the underground SHEET's existence gate reads the RAW
@@ -485,7 +489,14 @@ describe('ruin-filter roster ratchet (structural-prevention Pattern 2)', () => {
     // src/domain/coherence/readerBattery.js, born in lane READER-INSTRUMENTS (c84e9377f) and
     // composed at cf7c6956f; EXEMPT above as an existence-gate/name-lookup instrument. Read from
     // this arm's own failure message ("expected 99 to be 98"), never computed.
-    expect(readers.length).toBe(99);
+    // RE-MEASURED 2026-11-07 BY LANDING-R2 seat E: 99 → 103. FOUR new readers, the pool census's,
+    // measured by this file's own scan at rung 1's final tree (1bff51c6d, 99) and at the R2 tip
+    // (104654b43, 103): src/domain/facts/market.js (census-1 wave 0 fact 5, 1e37144fc) and
+    // src/domain/display/stateProse/generalStateProse.js (census-1b unit A (d), 427f7b112), both
+    // COMPLIANT (isLiveInstitution / the market fact); src/domain/facts/factsOf.js (census-1c unit 2,
+    // fbba809db) and src/domain/display/validationOnPage.js (reader-r1 unit 2, d3b9280f6), both
+    // EXEMPT above with their reasons. The arm's own failure message: "expected 103 to be 99".
+    expect(readers.length).toBe(103);
   });
 
   test('exempt honesty: every exempt entry still reads .institutions and is not already compliant', () => {
