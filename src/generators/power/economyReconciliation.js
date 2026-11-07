@@ -25,6 +25,7 @@ import { deriveFactionProfile } from '../../domain/factionProfile.js';
 import { createPRNG } from '../../kernel/prng.js';
 import { clearActiveRng, setActiveRng } from '../../kernel/rngContext.js';
 import { withLedgerBlock } from '../../domain/facts/presumptionLedger.js';
+import { FACTION_LABEL_SIBLINGS } from '../../data/factionLabelSiblings.js';
 import {
   generatePowerStructure,
   renormalizeFactionPower,
@@ -55,6 +56,14 @@ const TRANSIENT_PROJECTION_FIELDS = [
 // collide with; a unique Symbol cannot.
 const UNPINNED = Symbol('economyReconciliation:unpinned');
 
+// A DECLARED LABEL TWIN IS THE SAME BLOC (CENSUS-1i R-AW). The birth's close relabels a refused
+// label to its declared twin (`Military/Guard` -> `Military Party`, `twinOf` in the sibling table)
+// through the rename cascade; the organization is unchanged. Keyed lower-case, twin -> original.
+const LABEL_TWIN_OF = new Map(
+  /** @type {ReadonlyArray<{ text: string, twinOf?: string }>} */ (Object.values(FACTION_LABEL_SIBLINGS).flat())
+  .filter((row) => typeof row.twinOf === 'string')
+  .map((row) => [row.text.toLowerCase(), row.twinOf.toLowerCase()]));
+
 /**
  * THE ONE SITE THIS CONDITION IS SPELLED. The key is the RECORD PATH the producer writes, per
  * `runPipeline`'s own `Pins` typedef — never a step name, and never a second spelling of the
@@ -77,8 +86,10 @@ function normalizedFactionName(faction) {
     .trim()
     .toLowerCase();
   // Prosperity projects merchant dominance as a display suffix. It is a state
-  // label, not a different organization, so both forms share one intent key.
-  return name.replace(/\s+\(dominant\)$/, '');
+  // label, not a different organization, so both forms share one intent key. A declared label
+  // twin (LABEL_TWIN_OF) is the same rule for R-AW's close-time relabel.
+  const base = name.replace(/\s+\(dominant\)$/, '');
+  return LABEL_TWIN_OF.get(base) || base;
 }
 
 function factionIntentKey(faction) {
