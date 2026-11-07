@@ -1123,13 +1123,13 @@ register and stand as canonical-at-zero for the two lower tiers (R-DST-C).
 4. `[unfolding · dm-only · guild]` The guilds are losing their grip a little further each season. Anyone can undercut a guild price by simply not being in the guild.
 
 **TIER: significant off-book activity (≥15)**
-0. *(canonical)* `[guild]` Significant off-book activity. Merchants operating in the shadow economy have a cost advantage over those paying duties and guild fees.
+0. *(canonical)* `[guild]` A good part of the trade here goes unrecorded, and merchants who pay their duties and guild fees are undersold by those who do not.
 1. `[ledger · dm-only · colour]` A real portion of {settlement}'s trade sits outside the rolls, enough that the men who do pay their duties are competing at a disadvantage.
 2. `[street · dm-only · colour]` There is a cheaper way to do most things here, and most people know somebody who knows it.
 3. `[visitor · dm-only · market]` The prices in this market do not quite add up for a stranger who assumes everyone is paying the same fees. They are not.
 
 **TIER: minor shadow activity (≥3)**
-0. *(canonical)* `[colour]` Minor shadow activity. Petty theft and small-scale unlicensed trade. An inconvenience, not a structural threat.
+0. *(canonical)* `[colour]` Some petty theft goes on here, and some trading without a licence. It is a nuisance, nothing more.
 1. `[ledger · dm-only · colour]` A little of {settlement}'s trade goes unrecorded, small enough to annoy the clerks and too small to change what the town is.
 2. `[street · dm-only · colour]` There is some thieving and some selling without a licence. Every town this size has both.
 3. `[counterforce · dm-only · no organised crime]` What passes for a shadow economy here has never grown into one. There is unlicensed trade and nothing organised behind it.

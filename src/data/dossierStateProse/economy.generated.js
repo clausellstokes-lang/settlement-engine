@@ -1951,7 +1951,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "guild"
           ],
-          "text": "Significant off-book activity. Merchants operating in the shadow economy have a cost advantage over those paying duties and guild fees.",
+          "text": "A good part of the trade here goes unrecorded, and merchants who pay their duties and guild fees are undersold by those who do not.",
           "slots": [],
           "vid": 0
         },
@@ -1994,7 +1994,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "Minor shadow activity. Petty theft and small-scale unlicensed trade. An inconvenience, not a structural threat.",
+          "text": "Some petty theft goes on here, and some trading without a licence. It is a nuisance, nothing more.",
           "slots": [],
           "vid": 0
         },

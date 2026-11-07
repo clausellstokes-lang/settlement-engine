@@ -640,10 +640,10 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
         // Scale context: same % means different things at different tiers
         const _tier = s?.tier || 'village';
         const scaleNote = bmc>=30
-          ? 'A substantial portion of economic activity bypasses legitimate channels. Tax revenue is severely compressed. Guild structures are being undercut.'
+          ? 'Much of the trade here never passes the tax collector, so the duties come in far short and guild members are undersold by traders who pay no fees.'
           : bmc>=15
-          ? 'Significant off-book activity. Merchants operating in the shadow economy have a cost advantage over those paying duties and guild fees.'
-          : 'Minor shadow activity. Petty theft and small-scale unlicensed trade. An inconvenience, not a structural threat.';
+          ? 'A good part of the trade here goes unrecorded, and merchants who pay their duties and guild fees are undersold by those who do not.'
+          : 'Some petty theft goes on here, and some trading without a licence. It is a nuisance, nothing more.';
 
         // What goods flow through the shadow economy (from crime types)
         const _shadowGoods = crimeTypes

@@ -9760,7 +9760,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 4,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [
         {
           "field": "eco.safetyProfile.blackMarketCapture",
@@ -46182,7 +46182,7 @@
         "DS-ECO-6 :: TIER: minor shadow activity (≥3)"
       ],
       "variants": 12,
-      "grammars": 5,
+      "grammars": 4,
       "blocks": [
         "DS-ECO-6"
       ]
@@ -56987,7 +56987,7 @@
         "eco.safetyProfile.blackMarketCapture"
       ],
       "readingFunction": "shadowEconomyPoolKey",
-      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
