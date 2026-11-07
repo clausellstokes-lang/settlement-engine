@@ -63,7 +63,7 @@ const CLAIMS = Object.freeze([
   { claim: 'the present peace', re: /\bthe present peace\b/, family: 'threat' },
   { claim: 'no present need for its works', re: /\bstands ahead of any present need\b/, family: 'threat' },
   { claim: 'its works asked little of', re: /\bnow that it asks little of it\b/, family: 'threat' },
-  { claim: 'nothing has arrived by sea', re: /\bnothing has yet arrived that made the second half matter\b/, family: 'threat' },
+  { claim: 'nothing has arrived by sea', re: /\bnothing hostile has come through it yet\b/, family: 'threat' },
   // hunger: famine, under siege; any crisis on a deficit food band (crisisFacts.js :: familyActiveIn)
   { claim: 'feeds itself with a margin', re: /\bfeeds itself with a small margin\b/, family: 'hunger' },
   { claim: 'food is not a subject', re: /\bIt is not a subject anyone raises unprompted\b/, family: 'hunger' },

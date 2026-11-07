@@ -6907,7 +6907,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -7524,7 +7524,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 4,
-      "grammars": 1,
+      "grammars": 2,
       "predicate": [
         {
           "field": "blockaded",
@@ -47900,7 +47900,7 @@
         "DS-DEF-6 :: Naval Defense: Under blockade"
       ],
       "variants": 4,
-      "grammars": 1,
+      "grammars": 2,
       "blocks": [
         "DS-DEF-6"
       ]
@@ -58819,7 +58819,7 @@
       "subject": "Legal Infrastructure: None",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -58909,7 +58909,7 @@
         "blockaded"
       ],
       "readingFunction": "navalDefensePoolKey",
-      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
