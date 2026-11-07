@@ -39,6 +39,7 @@ import { useStore } from '../../src/store/index.js';
 import { generalDeskLines, siteClause } from '../../src/components/new/generalDeskRead.js';
 import { relationshipsDeskLists } from '../../src/domain/display/stateProse/relationshipsDeskRead.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { factsOf } from '../../src/domain/facts/factsOf.js';
 import { expectAbsentWithAnchor, expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
 import { drawnMember, drawnMembers, poolMemberTexts } from '../helpers/drawnProse.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
@@ -204,7 +205,10 @@ const {
     slots: { ...SPEAKING_SLOTS, govFaction: 'The Council' },
   },
   CONNECTION: { blockId: 'DS-REL-2', poolKey: 'prominentRelationship present' },
-}, { leaf: 'general', seed: SPEAKING._seed, slots: SPEAKING_SLOTS });
+  // CENSUS-2b item 2 (db3ed88c1): MARKET-OPEN's brace group declares `market`, which the kernel
+  // reads against `facts` fail-closed — so the spec hands in `factsOf(SPEAKING)`, exactly what the
+  // desk hands in at its entry (`generalStateProse.js` → `factsAnswered`).
+}, { leaf: 'general', seed: SPEAKING._seed, slots: SPEAKING_SLOTS, facts: factsOf(SPEAKING) });
 
 /** @param {boolean} publicDossier */
 const renderTab = (publicDossier) => render(e(OverviewTab, {
