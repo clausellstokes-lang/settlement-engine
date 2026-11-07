@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "c16d9a6ee48bc9931b39d23c57c8b2121c1a1dfa",
-  "measuredBy": "LANDING-8 (Opus 5.5), cloud chair session 01FE9mEvGxnFx6WTBkEC6ie9",
-  "date": "2026-11-06",
-  "note": "LANDING-8 at the rung-1 landing tip: files 2938 -> 2940 are the two test files born on the landing after LANDING-7 A measured (lane B R-B3 tests/domain/nextTierStampReaders.test.js, lane C tests/pdf/pageChromeFixedLeading.test.jsx); the parked count and the titles move with the lanes B-H merges and this landing re-keys, measured whole.",
-  "files": 2940,
-  "parked": 368,
-  "credited": 2572,
-  "titles": 27868,
-  "suiteTitles": 7414
+  "measuredAtSha": "08dbccd18cedd2987773b1922736919702bb7956",
+  "measuredBy": "LANDING-R2 seat E (Opus 5.5)",
+  "date": "2026-11-07",
+  "note": "LANDING-R2 seat E at the rung-2 landing tip (rung 1 final merged with the pool census): files 2940 -> 3083 are the 143 test files the pool census lanes, the reader lanes, the compose and phases A-E brought in since rung 1 final (1bff51c6d; 143 born, 0 deleted); parked, credited and titles move with those files, this landing's re-keys, and seat E's cures (fourteen each-only files reformatted, each-only 122 -> 108; census2dTables' describe.each removed), measured whole.",
+  "files": 3083,
+  "parked": 381,
+  "credited": 2702,
+  "titles": 28434,
+  "suiteTitles": 7635
 }
