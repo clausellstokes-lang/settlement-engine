@@ -47,7 +47,7 @@ function castFigures(rows) {
 }
 
 function tonightDiff(a, b) {
-  const out = { lines: 0, moved: 0, name: 0, namePerson: 0, title: 0, goal: 0, party: 0, structure: 0, unexplained: 0, samples: [] };
+  const out = { lines: 0, moved: 0, name: 0, namePerson: 0, nameAdded: 0, title: 0, goal: 0, party: 0, cast: 0, order: 0, lever: 0, structure: 0, unexplained: 0, samples: [] };
   const mapOf = (lines) => new Map(lines.map((l) => { const i = l.indexOf(' = '); return [l.slice(0, i), l.slice(i + 3)]; }));
   const A = mapOf(a.tonight);
   const B = mapOf(b.tonight);
@@ -58,17 +58,38 @@ function tonightDiff(a, b) {
   const swapped = new Set();
   for (const [k, v] of A) { const m = k.match(/^(people\[\d+\])\.name$/); if (m && B.has(k) && B.get(k) !== v) swapped.add(m[1]); }
   const keys = new Set([...A.keys(), ...B.keys()]);
+  const nCount = (v) => (names(v).match(/⟨N⟩/g) || []).length;
+  // the multiset of a list's values on each side (a reorder moves values, it does not change them)
+  const listValues = (M, prefix) => [...M].filter(([k]) => k.startsWith(prefix)).map(([, v]) => v).sort().join('\u0000');
   for (const k of keys) {
     out.lines += 1;
     const x = A.get(k); const y = B.get(k);
     if (x === y) continue;
     out.moved += 1;
-    if (x === undefined || y === undefined) { out.structure += 1; if (out.samples.length < 6) out.samples.push(`STRUCTURE ${k}`); continue; }
+    if (x === undefined || y === undefined) {
+      // a slot present on one side only: a person (and their own fields) where none was, or gone
+      if (/^(people|crisis\.persons)\[\d+\]\./.test(k)) { out.nameAdded += 1; continue; }
+      out.structure += 1; if (out.samples.length < 12) out.samples.push(`STRUCTURE ${a.label} ${k}`); continue;
+    }
     if (names(x) === names(y)) { out.name += 1; continue; }
+    // a list's length grew or shrank by the people it names (the seat row filled, a cast role named)
+    if (/^(people|crisis\.persons)\.length$/.test(k) || k === 'crisis.person') { out.nameAdded += 1; continue; }
+    if (nCount(x) !== nCount(y)) { out.nameAdded += 1; continue; }
     const slot = k.match(/^(people\[\d+\])\./)?.[1];
     if (slot && swapped.has(slot)) { out.namePerson += 1; continue; }
     if (titles(names(x)) === titles(names(y))) { out.title += 1; continue; }
+    // the crisis line's people: the cast person the line reads moved, with its own role label
+    const personsMoved = listValues(A, 'crisis.persons[') !== listValues(B, 'crisis.persons[');
+    if (personsMoved && (/^crisis\.persons\[\d+\]\./.test(k) || k === 'crisis.line' || k === 'opening')) { out.namePerson += 1; continue; }
+    // a crisis hook names a cast row: the row moved, its person, power and reason travel together
+    if (/^hooks\[\d+\]\.text$/.test(k) && /^"In the /.test(x) && /^"In the /.test(y) && !/the players can push on/.test(x)) { out.cast += 1; if (out.samples.length < 12) out.samples.push(`CAST ${k}: ${x.slice(0, 90)} → ${y.slice(0, 90)}`); continue; }
+    // a person hook (the cards' own plot hooks) follows the roster's order
+    if (/^hooks\[\d+\]\.(text|source)$/.test(k) && !/^"In the /.test(x) && !/^"In the /.test(y)) { out.order += 1; continue; }
+    const list = k.match(/^(hooks|people)\[\d+\]/)?.[1];
+    if (list && listValues(A, `${list}[`) === listValues(B, `${list}[`)) { out.order += 1; continue; }
+    if (/^people\[\d+\]\.(sourcePath|why)$/.test(k)) { out.order += 1; continue; }
     if (/^people\[\d+\]\.line$/.test(k)) { out.goal += 1; if (out.samples.length < 6) out.samples.push(`GOAL ${k}: ${x.slice(0, 70)} → ${y.slice(0, 70)}`); continue; }
+    if (/the players can push on/.test(x) && /the players can push on/.test(y)) { out.lever += 1; continue; }
     if (powers(titles(names(x))) === powers(titles(names(y)))) { out.party += 1; if (out.samples.length < 6) out.samples.push(`PARTY ${k}: ${x.slice(0, 90)} → ${y.slice(0, 90)}`); continue; }
     out.unexplained += 1;
     if (out.samples.length < 12) out.samples.push(`UNEXPLAINED ${a.label} ${k}: ${x.slice(0, 100)} → ${y.slice(0, 100)}`);
@@ -88,7 +109,7 @@ for (const tier of [...TIERS, 'all']) {
   lines.push(`| ${tier} | ${b.settlements} | ${b.roles} → ${a.roles} | ${b.people} → ${a.people} | ${b.faces} → ${a.faces} | ${b.absent} → ${a.absent} | ${b.held} → ${a.held} (of ${b.levers} → ${a.levers}) | ${b.heldByFace} → ${a.heldByFace} | ${b.houseHasFace} → ${a.houseHasFace} | ${b.seat} → ${a.seat} | ${b.seatRank1} → ${a.seatRank1} |`);
 }
 lines.push('');
-const T = { settlements: 0, sheetsMoved: 0, lines: 0, moved: 0, name: 0, namePerson: 0, title: 0, goal: 0, party: 0, structure: 0, unexplained: 0 };
+const T = { settlements: 0, sheetsMoved: 0, lines: 0, moved: 0, name: 0, namePerson: 0, nameAdded: 0, title: 0, goal: 0, party: 0, cast: 0, order: 0, lever: 0, structure: 0, unexplained: 0 };
 const samples = [];
 for (const b of before.slice(0, limit)) {
   const a = byLabel.get(b.label);
@@ -96,12 +117,13 @@ for (const b of before.slice(0, limit)) {
   const d = tonightDiff(b, a);
   T.settlements += 1;
   if (d.moved) T.sheetsMoved += 1;
-  for (const k of ['lines', 'moved', 'name', 'namePerson', 'title', 'goal', 'party', 'structure', 'unexplained']) T[k] += d[k];
+  for (const k of Object.keys(T)) if (k in d && k !== 'samples') T[k] += d[k];
   for (const s of d.samples) if (samples.length < 24) samples.push(s);
 }
 lines.push(`## Tonight — ${T.settlements} sheets, ${T.sheetsMoved} moved; ${T.lines} lines, ${T.moved} moved`, '');
 lines.push('| class | lines |', '|---|---|');
-lines.push(`| NAME (a roster name) | ${T.name} |`, `| NAME (the moved person's own role, want, secret, source) | ${T.namePerson} |`, `| TITLE | ${T.title} |`);
+lines.push(`| NAME (a roster name) | ${T.name} |`, `| NAME (the moved person's own role, want, secret, source) | ${T.namePerson} |`, `| NAME (a person named where none was, or no longer: the seat row filled, a cast role held by a person) | ${T.nameAdded} |`, `| TITLE | ${T.title} |`);
+lines.push(`| OTHER — ORDER (the same values in another order: the roster's order is npcStructure's relevance order, step 3) | ${T.order} |`, `| OTHER — LEVER (the lever hook names the first lever house with a holder: the house's face, step 1) | ${T.lever} |`, `| OTHER — CAST (a crisis hook's cast row moved: its person, power and the cast's own reason travel together, steps 1–2) | ${T.cast} |`);
 lines.push(`| OTHER — GOAL (the same person's want: the structural template, step 3) | ${T.goal} |`, `| OTHER — PARTY (a hook's "of <power>": the first-rank power, step 3) | ${T.party} |`);
 lines.push(`| OTHER — STRUCTURE (a path on one side only) | ${T.structure} |`, `| OTHER — UNEXPLAINED | ${T.unexplained} |`, '');
 if (samples.length) { lines.push('Samples:', '', ...samples.map((s) => `- ${s}`), ''); }
