@@ -42,14 +42,19 @@ export const MIGRATION_DIRECTIONS = Object.freeze(['arrivals', 'departures']);
 export const MIGRATION_DIRECTION_AT_BIRTH = 'arrivals';
 
 /**
+ * A stored direction, read: 'departures' only when it says so, else the §934.101 default.
+ * @param {unknown} value @returns {'arrivals'|'departures'}
+ */
+const directionOf = (value) => (value === 'departures' ? value : MIGRATION_DIRECTION_AT_BIRTH);
+
+/**
  * The direction one stress entry carries. A `mass_migration` entry without a valid direction
  * (an authored entry, a record saved before this field) reads as arrivals, the §934.101 default.
  * @param {unknown} entry @returns {'arrivals'|'departures'|null} null when the entry is not a migration
  */
 export function migrationDirectionOfEntry(entry) {
   const row = /** @type {{ type?: unknown, direction?: unknown } | null} */ (entry && typeof entry === 'object' ? entry : null);
-  if (!row || row.type !== 'mass_migration') return null;
-  return row.direction === 'departures' ? 'departures' : 'arrivals';
+  return row?.type === 'mass_migration' ? directionOf(row.direction) : null;
 }
 
 /**
@@ -73,6 +78,5 @@ export function migrationDirectionOfStress(stress) {
  */
 export function migrationDirectionOfConfig(config) {
   const types = Array.isArray(config?.stressTypes) ? config.stressTypes : config?.stressType ? [config.stressType] : [];
-  if (!types.includes('mass_migration')) return null;
-  return config?.migrationDirection === 'departures' ? 'departures' : 'arrivals';
+  return types.includes('mass_migration') ? directionOf(config?.migrationDirection) : null;
 }

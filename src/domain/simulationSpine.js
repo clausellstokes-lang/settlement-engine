@@ -410,7 +410,7 @@ function fearPhraseOf(entry) {
  */
 function phrasesOf(entry, type) {
   const pair = /** @type {{ strain: string, fear: string, departures?: { strain: string, fear: string } }} */ (STRESSOR_SPINE_PHRASES[type]);
-  return migrationDirectionOfEntry(entry) === 'departures' && pair.departures ? pair.departures : pair;
+  return (migrationDirectionOfEntry(entry) === 'departures' && pair.departures) || pair;
 }
 
 /** @param {unknown} value @returns {number} */
