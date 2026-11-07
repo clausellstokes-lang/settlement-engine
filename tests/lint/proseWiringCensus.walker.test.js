@@ -1688,7 +1688,13 @@ describe('car 0f — the ALIAS DRAFT: measured, nothing ratified, no leaf writte
     // ⛔ 7 AND NOT 33 SINCE SEAM car 5b: the `docblock` kind is WITHDRAWN from `rows` and
     // survives as a REPORT channel only (SITTING §P.2-27 EXTENDED; the chair's ruling on car
     // 3h §3h.6 item 2). Twenty-six of the thirty-three candidates rested on a comment line.
-    expect(draft.rows.length, 'candidate rows at this tip, docblock withdrawn').toBe(7);
+    // 7 -> 8 at census-1c unit 2 site 4 (1d64e08ba; measured on archives: 7 at its parent, 8 at
+    // it): the stress-secret draw's `factsOf({ npcs: allNpcs, stress: ... })` argument is an AST
+    // Property key `stress`, so `system:food_security -> stress` gains a generator-write row at
+    // src/generators/npcGenerator.js:780. ⚠ A FINDING, NOT A JOIN: that key builds a fact READ's
+    // argument, not a write of world state; the AST cut cannot tell the two apart. Nothing joins
+    // on it (the join arm below stays 0).
+    expect(draft.rows.length, 'candidate rows at this tip, docblock withdrawn').toBe(8);
     expect(draft.endpointsWithCandidate, 'endpoints with at least one candidate').toBe(4);
     expect(draft.noCandidate.length, 'and the wiring debt the SEAM and WAVE trains inherit').toBe(85);
     expect(draft.docblockReports.length, 'the withdrawn candidates, reported and never proposed').toBe(28);
@@ -1700,12 +1706,14 @@ describe('car 0f — the ALIAS DRAFT: measured, nothing ratified, no leaf writte
     // is re-cut to a real Property key or member assignment read from the syntax tree, where a
     // string, a comment and a parameter binding can propose nothing.
     const byEvidence = draft.rows.reduce((m, r) => m.set(r.evidence, (m.get(r.evidence) || 0) + 1), new Map());
-    expect(byEvidence.get('generator-write'), 'the four sound citations survive the AST cut').toBe(4);
+    // 4 -> 5 at 1d64e08ba (the npcGenerator.js:780 Property key above).
+    expect(byEvidence.get('generator-write'), 'the four sound citations survive the AST cut').toBe(5);
     expect(draft.rows.filter((r) => r.evidence === 'generator-write').map((r) => r.at.replace(/:\d+$/, '')).sort(),
       'and each is a real write in a generator').toEqual([
       'src/generators/defenseGenerator.js',
       'src/generators/history/historyEventStrands.js',
       'src/generators/npc/factionLeaderSecret.js',
+      'src/generators/npcGenerator.js',
       'src/generators/npcGenerator.js',
     ]);
     for (const withdrawn of ['src/generators/structuralValidator.js:588', 'src/generators/stressNarrative.js:80',
