@@ -28,6 +28,9 @@ export const TRACE_STEP_ORDER = Object.freeze([
   'neighbourFactions', 'factionCorrelationPass', 'coherenceRepairPass',
   'economyReconcilePass', 'powerEconomyReconcilePass', 'structuralValidationPass',
   'generatePopulation', 'corruptionPass', 'generateNarratives', 'assembleSettlement',
+  // aaa4ba493 (the crisis tab, unit 2) registered the cast step after assembleSettlement. It calls no
+  // recordTrace, so it owns no run and no subject pair; declared so the order stays total.
+  'resolveCrisisCast',
 ]);
 
 /** THE SUBJECT REGISTER: which RECORD KEY an entry is about, keyed `step::targetType`. Total in

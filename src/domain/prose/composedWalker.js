@@ -40,6 +40,22 @@
  * (opener, segment count, content-token overlap) and its FLOOR is unset: the arm REPORTS
  * until the first wording sets exist, which is ARCH §8.4's own channel for it.
  *
+ * ── A DECLARED ABSENCE IS CLAIMED BY SILENCE (A0b's under-claim limb; LANDING-7 R-F4) ──
+ * "The text claims every declared field" is right for a POSITIVE declaration — a line that
+ * declares walls must speak of walls — and wrong for a NEGATIVE one: a line that declares NO
+ * walls is claimed by not mentioning them, and reading its silence as an unclaimed field
+ * convicts the line for doing its job. So an unclaimed declared field that is an ABSENCE
+ * DECLARATION is NOT an under-claim. It is answered on the REPORT channel as `claimed by
+ * silence`, named and counted, never dropped. There are exactly two shapes, both typed:
+ *   1. the field's own name declares an absence (its last segment is `absent` or ends
+ *      `…Absent`, e.g. `magicAbsent`) AND the pool's predicate holds it TRUTHY, so the branch
+ *      reaches this key only where the fact is absent;
+ *   2. the VARIANT carries an authored `no <fact>` mark (the kernel's `no walls`) and the field
+ *      path names that fact (`forces.walls.present`, `hasWalls`): the twin excludes it.
+ * Nothing else is exempt. A positive field, an absence-named field the predicate does NOT hold
+ * truthy, and every over-claim are read exactly as before; a field the predicate holds FALSE
+ * stays an IMPLICIT NEGATION (that limb is checked first and this rule never reaches it).
+ *
  * PURE, HEADLESS. No settlement import, no clock, no RNG, no I/O, no locale API.
  *
  * @enforced-by tests/lint/proseComposed.walker.test.js
@@ -251,6 +267,40 @@ function heldFalse(predicate, field) {
   return false;
 }
 
+/** A field whose own last segment declares an absence: `absent`, or camel-cased `…Absent`. */
+const ABSENCE_FIELD_RE = /(?:^|\.)(?:absent|[a-z][A-Za-z0-9]*Absent)$/;
+/** An authored exclusion mark on a variant: `no <fact>` (the kernel's `no walls`). */
+const EXCLUSION_MARK_RE = /^no ([a-z]+)$/;
+
+/** @param {string} field @returns {string[]} the lower-cased words of a dotted, camel-cased path */
+function pathWordsOf(field) {
+  return String(field).split(/\.|(?=[A-Z])/).map((word) => word.toLowerCase()).filter(Boolean);
+}
+
+/**
+ * Is this unclaimed declared field an ABSENCE DECLARATION, and so CLAIMED BY SILENCE (R-F4)?
+ * The two typed shapes the module header states, and no third.
+ * @param {string} field
+ * @param {ReadonlyArray<{field: string, op: string, value: string}>} predicate
+ * @param {ReadonlyArray<string>} marks the VARIANT's own marks
+ * @returns {string} the declaration that claims it, or '' when the field is not one
+ */
+function absenceDeclarationOf(field, predicate, marks) {
+  if (ABSENCE_FIELD_RE.test(field)
+    && predicate.some((clause) => clause.field === field && clause.op === 'truthy')) {
+    return `${field} held truthy`;
+  }
+  const words = pathWordsOf(field);
+  for (const mark of marks) {
+    const hit = EXCLUSION_MARK_RE.exec(mark);
+    if (!hit) continue;
+    const fact = hit[1];
+    const singular = fact.endsWith('s') ? fact.slice(0, -1) : fact;
+    if (words.includes(fact) || words.includes(singular) || words.includes(`${singular}s`)) return `mark \`${mark}\``;
+  }
+  return '';
+}
+
 /**
  * ⭐ ARM A0b (ARCH §4.4, §8.4; E-F2, T-F7). The text claims every field the pool declares it
  * READS, and no field outside that set. Three limbs, each with its own name because each has
@@ -265,6 +315,11 @@ function heldFalse(predicate, field) {
  *                      `invasionRowPoolKey`'s `walls with citizen militia`, which is reached
  *                      only when `garrison` is false (`defenseStateProse.js:412-425`).
  *
+ * ⛔ AN ABSENCE DECLARATION IS CLAIMED BY SILENCE, NOT UNDER-CLAIMED (LANDING-7 R-F4; the module
+ * header states the two typed shapes). It is answered on the REPORT channel as `claimed by
+ * silence`, so the exemption is counted and printed rather than filtered. The implicit-negation
+ * limb is read FIRST and is untouched by it.
+ *
  * NOT-EXECUTABLE where the census recovered no reading, and — separately named — where the
  * recovered reading is the census's own SYNTHETIC TABLE LABEL rather than a field. The second
  * is not hypothetical: SEAM car 3h tabled DS-DEF-2's four key functions, so the block ARCH
@@ -272,8 +327,10 @@ function heldFalse(predicate, field) {
  * it. Both are printed; neither answers `[]`.
  * @param {{id: string, text: string, reads: ReadonlyArray<string>,
  *   universe?: ReadonlyArray<string>, predicate?: ReadonlyArray<{field: string, op: string,
- *   value: string}>, vocabulary?: Readonly<Record<string, ReadonlyArray<string>>>}} input
+ *   value: string}>, vocabulary?: Readonly<Record<string, ReadonlyArray<string>>>,
+ *   marks?: ReadonlyArray<string>}} input
  *   `universe` is the field set an over-claim is hunted over; the census's `tests` by default.
+ *   `marks` are the VARIANT's own marks, read only for an authored `no <fact>` exclusion.
  * @returns {ComposedResult}
  */
 export function armA0b(input) {
@@ -281,6 +338,7 @@ export function armA0b(input) {
   const reads = input.reads || [];
   const predicate = input.predicate || [];
   const vocabulary = input.vocabulary || {};
+  const marks = input.marks || [];
   if (reads.length === 0) {
     emit(out, row(input.id, 'A0b', 'NOT-EXECUTABLE', '(census reads)', 'not recovered',
       'the wiring census recovered no reading for this pool, so there is no declared field set to reconcile the text against'));
@@ -295,6 +353,12 @@ export function armA0b(input) {
   for (const field of reads) {
     if (claimsField(input.text, field, vocabulary) !== '') continue;
     const negated = heldFalse(predicate, field);
+    const absence = negated ? '' : absenceDeclarationOf(field, predicate, marks);
+    if (absence !== '') {
+      emit(out, row(input.id, 'A0b', 'REPORT', 'claimed by silence', `${field} (${absence})`,
+        `the pool declares \`${field}\` as an ABSENCE, and a line declaring a fact absent claims it by not naming it (R-F4)`));
+      continue;
+    }
     emit(out, row(input.id, 'A0b', 'FAIL',
       negated ? 'implicit-negation' : 'under-claim', field,
       negated

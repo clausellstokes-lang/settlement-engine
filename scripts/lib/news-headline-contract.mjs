@@ -31,7 +31,19 @@ const LANES = Object.freeze({ mechanicalOutcomes: 8, selectedOutcomes: 24 });
 // ── RE-RECORDED 2026-10-01 BY THE URBAN-BAND CHAIR (session 93391427), IN THE SAME ACT AS THE NEWS-VOICE CONTRACT, THE
 // PROSE-FAMILY CONTRACT AND THE OSR WALKER'S PINS: CORPUS 273/1/272/51 → 265/1/264/44 (the provenance and the named homes
 // are recorded once, at the voice contract's copy); ADDRESS_TOTALS, RAW_LIVENESS and REWRITE_TOTALS below, each noted.
-const CORPUS = Object.freeze({ pulseRoots: 12, introductions: 265, retirements: 1, finalEntries: 264, homes: 44 });
+// ── RE-RECORDED 2026-11-04 BY THE REGISTERS-4 SEAT (the chair's ruling C5), IN THE SAME ACT AS THE NEWS-VOICE CONTRACT, THE
+// PROSE-FAMILY CONTRACT AND THE OSR WALKER'S PRODUCERS ARM: CORPUS 265/1/264/44 → 261/1/260/45 (FOOD-1, FOOD-2 and SIZE-3,
+// the stage trace and the named homes recorded once, at the voice contract's copy); ADDRESS_TOTALS and RAW_LIVENESS below,
+// each noted. REWRITE_TOTALS holds (every rule stays inert).
+// ── RE-RECORDED 2026-11-04 BY THE LANDING-2b SEAT (the chair's ruling 5), IN THE SAME ACT AS THE NEWS-VOICE CONTRACT (the
+// 3d50676bb door): CORPUS 261/1/260/45 → 253/0/253/42, moved under the rung-1 window (05897b88d..5dd0f323a; the sample
+// points and the named homes recorded once, at the voice contract's copy); ADDRESS_TOTALS and RAW_LIVENESS below, each noted.
+// REWRITE_TOTALS and KNOWN_INERT_HEADLINE_REWRITES hold (every rule stays inert; the live zero-count set is the declared 26).
+// ── RE-RECORDED 2026-11-06 BY LANDING-7 LANE E (the chair's ruling R-E10, §934.105), IN THE SAME ACT AS THE NEWS-VOICE
+// CONTRACT (the 3d50676bb door): CORPUS 253/0/253/42 → 270/0/270/44, ONE CAUSE, the density ceilings re-derived from the stamp
+// bands (R-E8, 20c0139c5; the single-variable control and the named homes recorded once, at the voice contract's copy);
+// ADDRESS_TOTALS and RAW_LIVENESS below, each noted. REWRITE_TOTALS and KNOWN_INERT_HEADLINE_REWRITES hold (all 26 inert).
+const CORPUS = Object.freeze({ pulseRoots: 12, introductions: 270, retirements: 0, finalEntries: 270, homes: 44 });
 // ── RE-RECORDED 2026-09-01 BY T8 · SHIFT (ODQ §858 + §860) ─────────────────────────────────────
 // 53/106/14/92/400/544 → 51/102/12/90/393/536. `fields` holds at 2, as it must: the address grammar
 // is still headline-and-summary and nothing was added to it.
@@ -65,7 +77,15 @@ const CORPUS = Object.freeze({ pulseRoots: 12, introductions: 265, retirements: 
 // 2026-10-02 (THE VOICE PROGRAM wave 1, the owner: "Updates like these need to reflect actions not to potential"): 44/2/88/14/74/385/530 → 44/2/88/0/88/392/530.
 // The corpus does not move (12/265/1/264/44); every address keeps its home and field and EVERY prospective row turns
 // indicative, because each producer now writes its pending proposal UNDER WAY and its applied twin DONE (heraldDeeds.js).
-const ADDRESS_TOTALS = Object.freeze({ homes: 44, fields: 2, identities: 88, prospectiveIdentities: 0, indicativeIdentities: 88, distinctValues: 392, occurrences: 530 });
+// 2026-11-04 (REGISTERS-4, the chair's ruling C5): 44/2/88/0/88/392/530 → 45/2/90/0/90/385/522, by stage: FOOD-1 (T1)
+// 42/2/84/0/84/380/516, FOOD-2 (T2) 45/2/90/0/90/395/530, SIZE-3 (S5) 45/2/90/0/90/385/522. Every row stays indicative.
+// 2026-11-04 (LANDING-2b, the chair's ruling 5; the rung-1 window): 45/2/90/0/90/385/522 → 42/2/84/0/84/365/506, by sample
+// point: 3420d01e3 46/2/92/0/92/399/532, fe56bddd4 46/2/92/0/92/397/546, 90dc22f18 (X-46 car 3) 42/2/84/0/84/350/492,
+// f9ce225c5 41/2/82/0/82/351/486, 64aeda874 (rung-1B) as now. Ten homes out and seven in, named at the voice contract's
+// copy; every row stays indicative.
+// 2026-11-06 (LANDING-7 R-E10; the density ceilings, 20c0139c5 alone): 42/2/84/0/84/365/506 → 44/2/88/0/88/372/540. One home out
+// and three in, named at the voice contract's copy; 32 surviving rows move a count; every row stays indicative.
+const ADDRESS_TOTALS = Object.freeze({ homes: 44, fields: 2, identities: 88, prospectiveIdentities: 0, indicativeIdentities: 88, distinctValues: 372, occurrences: 540 });
 const RAW_LIVENESS = Object.freeze({
   pulseRecords: 12,
   lanes: Object.freeze([
@@ -84,7 +104,15 @@ const RAW_LIVENESS = Object.freeze({
     // record was a duplicate spelling of one already in the lane.
     // 2026-10-01 (the urban band + the druid rulings): 53/28/49/27/4/1 → 49/22/44/21/5/1, the re-dealt year's mechanical beats.
     // 2026-10-02 (THE VOICE PROGRAM wave 1): every persisted headline in this lane is now a deed; its prospective half is zero.
-    Object.freeze({ field: 'mechanicalOutcomes', capPerPulse: 8, headlineOccurrences: 49, distinctValues: 22, prospectiveOccurrences: 0, prospectiveDistinctValues: 0, indicativeOccurrences: 49, indicativeDistinctValues: 22 }),
+    // 2026-11-04 (REGISTERS-4, the chair's ruling C5): mechanical 49/22 → 41/18, selected 155/84 → 160/81, union 204/84 →
+    // 201/81, by stage: FOOD-1 (T1) 44/20, 158/82, 202/82; FOOD-2 (T2) 47/20, 160/84, 207/84; SIZE-3 (S5) as now. All indicative.
+    // 2026-11-04 (LANDING-2b, the chair's ruling 5; the rung-1 window): mechanical 41/18 → 53/24, selected 160/81 HOLDS,
+    // union 201/81 → 213/81, by sample point: 3420d01e3 48/21, 160/87, 208/87; fe56bddd4 41/18, 167/85, 208/85; 90dc22f18
+    // 50/25, 160/82, 210/82; f9ce225c5 50/24, 160/83, 210/83; 64aeda874 as now. All indicative; the union's distinct count
+    // still equals the selected lane's (81 = 81).
+    // 2026-11-06 (LANDING-7 R-E10; the density ceilings, 20c0139c5 alone): mechanical 53/24 → 45/21, selected 160/81 → 166/82,
+    // union 213/81 → 211/82. All indicative; the union's distinct count still equals the selected lane's (82 = 82).
+    Object.freeze({ field: 'mechanicalOutcomes', capPerPulse: 8, headlineOccurrences: 45, distinctValues: 21, prospectiveOccurrences: 0, prospectiveDistinctValues: 0, indicativeOccurrences: 45, indicativeDistinctValues: 21 }),
     // ⭐ THE CONTROL THAT HELD FOR TWO RE-RECORDS NOW MOVES, AND THAT IS THE POINT OF KEEPING IT.
     // T8 recorded this lane byte-identical twice running because the corruption work never authors
     // into it. WAR LANDING (§876): 151/80/95/66/56/14 → 153/78/95/63/58/15, and the shape names the
@@ -95,7 +123,7 @@ const RAW_LIVENESS = Object.freeze({
     // reach, and the first cause in three re-records that does.
     // 2026-10-01 (the urban band + the druid rulings): 154/78/96/63/58/15 → 155/75/93/59/62/16.
     // 2026-10-02 (THE VOICE PROGRAM wave 1): every persisted headline in this lane is now a deed; its prospective half is zero.
-    Object.freeze({ field: 'selectedOutcomes', capPerPulse: 24, headlineOccurrences: 155, distinctValues: 84, prospectiveOccurrences: 0, prospectiveDistinctValues: 0, indicativeOccurrences: 155, indicativeDistinctValues: 84 }),
+    Object.freeze({ field: 'selectedOutcomes', capPerPulse: 24, headlineOccurrences: 166, distinctValues: 82, prospectiveOccurrences: 0, prospectiveDistinctValues: 0, indicativeOccurrences: 166, indicativeDistinctValues: 82 }),
   ]),
   // TE36: the union follows the mechanical lane alone — 228 → 207 (−21, the same 21),
   // 83 → 80 distinct, 168 → 147 prospective. The indicative halves do not move at all.
@@ -112,7 +140,7 @@ const RAW_LIVENESS = Object.freeze({
   // 2026-10-01 (the urban band + the druid rulings): 207/78/145/63/62/15 → 204/75/137/59/67/16, and THE STRUCTURAL FACT SURVIVES:
   // union.distinctValues equals the selected lane's (75 = 75), so the mechanical spellings are still a subset of the public lane's.
   // 2026-10-02 (THE VOICE PROGRAM wave 1): the union's prospective half is zero for the first time.
-  union: Object.freeze({ headlineOccurrences: 204, distinctValues: 84, prospectiveOccurrences: 0, prospectiveDistinctValues: 0, indicativeOccurrences: 204, indicativeDistinctValues: 84 }),
+  union: Object.freeze({ headlineOccurrences: 211, distinctValues: 82, prospectiveOccurrences: 0, prospectiveDistinctValues: 0, indicativeOccurrences: 211, indicativeDistinctValues: 82 }),
 });
 // TE36 (ODQ §271): 17/9 → 16/10 and 69/168 → 66/147. THE RULE COUNT IS UNCHANGED AT 26 —
 // no rewrite rule was added or deleted; one CROSSED from active to inert because the corpus

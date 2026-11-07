@@ -294,8 +294,9 @@ export function liveSeatCandidatesOf(settlement) {
  *             would paper over the §810.3 seat-floor gap the view must record
  *             instead (the warSeatBooks law — no NPC identity is invented).
  *   absence — when npc is null: a MISSING-SEAT story when the vacancy is the
- *             stressor's (the seat stands empty; claimants circle — read from
- *             the claimant blocs the stressor injects), else the honest
+ *             stressor's (the seat stands empty — read from the governing
+ *             faction's `vacant` modifier; the claimants the record names
+ *             as such circle it), else the honest
  *             pre-density line (§810.3 R12/R15 are not yet generation law;
  *             TE-DENSITY-1 is censusing the gap).
  *
@@ -316,16 +317,19 @@ export function rulingChainOf(settlement) {
   const power = governing
     ? { name: nameOf(governing), archetype: factionArchetype(governing), powerLabel: governing.powerLabel || '', government }
     : null;
-  // THE MISSING-SEAT SIGNAL: the succession_void stressor ALWAYS injects its
-  // claimant blocs ('Claimant …' in the generator's own naming, both branches),
-  // alongside the governing faction's 'vacant' modifier — so claimant-presence
-  // is the same generation-time predicate, read through nameOf alone (the
-  // observed-shape ratchet holds this file to corpus-groundable reads; the
-  // `modifiers` marker has a writer the corpus never exercises). When R13's
-  // typed missing-seat stressor family lands, the view keys on THAT — the gap
-  // is recorded for TE-DENSITY-1, not papered over here.
-  const claimants = factions.map((f) => nameOf(f)).filter((n) => /claimant/i.test(n));
-  const vacant = claimants.length > 0;
+  // THE MISSING-SEAT SIGNAL is the record's own VACANCY FACT: the succession_void
+  // stressor writes 'vacant' onto the governing faction's `modifiers`
+  // (stressFactions.js :: applyStressEventFactions), and that fact, never a name,
+  // says the seat stands empty. This read keyed on claimant NAMES ('Claimant …')
+  // until RUNG1-TRUTH unit D (6da7d3f64) gave a non-royal vacancy's claimants
+  // pool names, after which it never fired: 20 of 1,000 thorps held a vacant seat
+  // and none said so (LANDING-7 lane G, second seat, ruling R-G1, 2026-11-06).
+  // The claimants are still listed only where the record names them as claimants
+  // (the royal branch's 'Noble Claimant …'); a pool-named claimant carries no
+  // claimant marker, so the line then says only that the succession is unsettled.
+  // When R13's typed missing-seat stressor family lands, the view keys on THAT.
+  const vacant = !!governing && Array.isArray(governing.modifiers) && governing.modifiers.includes('vacant');
+  const claimants = vacant ? factions.map((f) => nameOf(f)).filter((n) => /claimant/i.test(n)) : [];
   const faction = governing
     ? { name: nameOf(governing), power: num(governing.power), powerLabel: governing.powerLabel || '', vacant }
     : null;
@@ -356,7 +360,9 @@ export function rulingChainOf(settlement) {
     if (vacant) {
       // The row's own label is "The seat", so the line opens on the verb: the row
       // read "The seat The seat stands empty" while it opened on the noun.
-      const line = `Stands empty; ${claimants.length === 1 ? 'a claimant circles' : `${claimants.length} claimants circle`}: ${claimants.join(', ')}.`;
+      const line = claimants.length === 0
+        ? 'Stands empty; the succession is unsettled.'
+        : `Stands empty; ${claimants.length === 1 ? 'a claimant circles' : `${claimants.length} claimants circle`}: ${claimants.join(', ')}.`;
       absence = { kind: /** @type {'missing_seat'} */ ('missing_seat'), claimants, line };
     } else if (governing) {
       absence = {
@@ -400,6 +406,27 @@ export function outrankingRivalOf(settlement) {
     if (num(f.power) > (best ? num(best.power) : floor)) best = f;
   }
   return best ? nameOf(best) || null : null;
+}
+
+/**
+ * The sentence the Power tab's legitimacy panel prints after "Governance fractured." when
+ * governance is fractured (PowerTab.jsx). The generator's crisis note on the governing
+ * faction carries the same words (factionDynamics.js :: applyLegitimacyMultipliers).
+ */
+export const FRACTURE_PANEL_LINE = 'Real decisions are being made informally.';
+
+/**
+ * X-50 (BOILERPLATE ONCE): a note with every sentence the tab already prints elsewhere
+ * dropped, so a sentence has one home per tab. Only whole sentences, matched verbatim.
+ * @param {string} note
+ * @param {ReadonlyArray<string>} shown sentences the tab prints in another block
+ * @returns {string}
+ */
+export function withoutShownSentences(note, shown) {
+  if (!note || !shown.length) return note;
+  return note.split(/(?<=[.!?])\s+/)
+    .filter((sentence) => !shown.includes(sentence.trim()))
+    .join(' ').trim();
 }
 
 /**

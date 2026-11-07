@@ -1,5 +1,5 @@
 import { clamp01 } from '../../kernel/math.js';
-import { POPULATION_RANGES, TIER_ORDER, popToTier } from '../../data/constants.js';
+import { POPULATION_RANGES, TIER_ORDER, TIER_STAMP_CUTS, popToTier } from '../../data/constants.js';
 import { canonExports, canonImports } from '../canonicalAccessors.js';
 import { SUPPLY_CHAIN_NEEDS } from '../../data/goods/chains.js';
 import { RESOURCE_TO_CHAINS } from '../../data/goods/chains.js';
@@ -126,7 +126,7 @@ function tierEligibility(item, pressureIdx, demography = null) {
   const previousTier = TIER_ORDER[rank - 1] || null;
   // ── EARNED ASCENSION (design §5, wave P1a) ────────────────────────────────────
   // Lit, the population must ALREADY BE THERE: promotion needs the next tier's whole
-  // authored minimum, not 92 percent of it. This is the paired half of removing the
+  // stamp cut (read below), not 92 percent of it. This is the paired half of removing the
   // promotion mint in tierOutcomeApply.js, and the two MUST travel together. The 0.92
   // window exists precisely because the mint covered the gap it opens: promote a
   // settlement at 92 percent of the floor without minting the difference and it lands
@@ -135,8 +135,20 @@ function tierEligibility(item, pressureIdx, demography = null) {
   // Requiring the full floor closes the gap at the source instead of papering it with
   // people who were never born (law 4: damage transmutes, people account).
   const promotionWindow = demography ? 1 : 0.92;
+  // ── THE WINDOW READS THE STAMP (LANDING-7, ruling R-B1; X-46 car 2's law) ──────────────
+  // The population the window is measured against is the next tier's STAMP CUT
+  // (`TIER_STAMP_CUTS`), the one disjoint population → tier law, not that tier's roll-band
+  // minimum. Under the owner's overlapping roll bands (X-46 car 1) the band minimum sits
+  // inside the lower tier's band (a town's 300 inside the village's 75–400), so 0.92 of it
+  // made a calm place eligible across ~38% of the village band and ~30% of the town band.
+  // The factor stays on the window: it is the promotion's lead-in, paired with the mint and
+  // the demotion floor, which read the CURRENT tier's roll-band minimum — a settlement's own
+  // band is where generation may legitimately put it, so those stay on the band. Every
+  // cut's 0.92 lies at or above the next tier's band minimum except metropolis, whose cut is
+  // its band minimum, so the pairing the mint guards is unchanged.
+  const nextCut = nextTier ? /** @type {Record<string, number>} */ (TIER_STAMP_CUTS)[nextTier] : undefined;
 
-  if (nextTier && pop >= (/** @type {any} */ (POPULATION_RANGES)[nextTier]?.min || Infinity) * promotionWindow && support >= 0.62) {
+  if (nextTier && pop >= (nextCut || Infinity) * promotionWindow && support >= 0.62) {
     return {
       direction: 'promotion',
       fromTier: currentTier,

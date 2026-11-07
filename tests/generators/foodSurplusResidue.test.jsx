@@ -56,7 +56,7 @@ describe('the food-surplus residue', () => {
     const { container } = render(<SubstrateTab settlement={s} />);
     const text = textLines(container);
     expect(text).toMatch(/^Food$/m); // the row is on the tab
-    expect(text).not.toMatch(/^Food\nSurplus$/m);
+    expect(text).not.toMatch(/^Food\nSurplus$/m); // anchored: the line above pins the Food row on the tab, and the next pins its Adequate grade
     expect(text).toMatch(/^Food\nAdequate$/m);
   });
 });

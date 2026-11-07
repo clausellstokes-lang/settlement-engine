@@ -41,7 +41,8 @@ describe('I2 — the advisory battery judgment is not a certification failure', 
 
 describe('I3 — the metropolis band is open above 15,000', () => {
   it('a 130,000-person metropolis is in range', () => {
-    expect(codes(record({ population: 130000 }))).not.toContain('population_out_of_range');
+    expect(codes(record({ population: 14000 }))).toContain('population_out_of_range');
+    expect(codes(record({ population: 130000 }))).not.toContain('population_out_of_range'); // anchored: the line above fires the same code on a 14,000 record through the same codes(), so the inspector is live
   });
   it('a 14,000-person "metropolis" is still out of range', () => {
     expect(codes(record({ population: 14000 }))).toContain('population_out_of_range');

@@ -640,10 +640,25 @@ describe('reader-with-no-writer ratchet: the EXECUTED corpus', () => {
     // byte-equal before and after it). ⚠ NOT cross-recorded here: the three news-family walkers are red on FOOD's whole
     // re-deal of the AO-0 year (news-voice homes 44 → 45, prose-family identities 61 → 58, digests), a reference re-record
     // the ruling did not cover; it is reported to the chair, not done piecemeal.
+    // 2026-11-04 (REGISTERS-4, the chair's ruling C5, cross-recorded in news-voice, news-headline and prose-family in the
+    // same act): final 264 → 260, accumulated 1541 → 1521, unique 265 → 261; regional 77/77 HOLD. By stage: FOOD-1 (T1)
+    // 257/1510/258/80, FOOD-2 (T2) 264/1541/265/77, SIZE-3 (S5, the guild market) 260/1521/261/77; nothing after S5 moves.
+    // 2026-11-04 (LANDING-2b, the chair's ruling 5 on its STOP; recorded at the schema-27 rung): final 260 → 253, accumulated
+    // 1521 → 1529, unique 261 → 253, regional 77/77 → 75/74 — RECORDED AS MEASURED at the landing tip 5dd0f323a and
+    // attributed to the RUNG-1 WINDOW's generation lanes, cumulatively rather than to one step: the corpus builder run per
+    // first-parent sha reads 260/1521/261/77 at the freeze 05897b88d, 272/1580/273/87 at 79c442330, 246/1466/246/79 at
+    // 90dc22f18 (lane/x46-3-budget, the density factor) and 253/1529/253/75 at the tip. Producer 1d enters `roots` only, so
+    // the stream is byte-equal before and after the rung. ⚠ Cross-recorded in news-voice, news-headline and prose-family in
+    // the same act.
+    // 2026-11-06 (LANDING-7 R-E10, §934.105; cross-recorded in news-voice, news-headline and prose-family in the same act):
+    // final 253 → 270, accumulated 1529 → 1615, unique 253 → 270, regional 75/75 → 86/86. ONE CAUSE: the density ceilings
+    // re-derived from the stamp bands (R-E8, 20c0139c5). This corpus lights every `*Enabled` flag, demographics included, so
+    // the lit density walls re-deal the AO-0 year. One corpus build per tree: 989219706 (the ceilings' parent) reproduces the
+    // frozen figures exactly, and 20c0139c5 alone measures the whole tip.
     expect(scalarCorpus.scalarMeta).toEqual({
       canonEventLogEntries: 1,
-      wizardNewsFinalEntries: 264,
-      wizardNewsAccumulatedEntries: 1541,
+      wizardNewsFinalEntries: 270,
+      wizardNewsAccumulatedEntries: 1615,
       // FP BATCH 4 (2026-09-24, the FP chair): wizardNewsFinalEntries 240 → 272 and wizardNewsAccumulatedEntries 1567 → 1604 —
       // the Herald lens U2 (32315e384, FP-31): the feed keeps its newest 52 weeks whole under the 240 cap, so the corpus's
       // twelve monthly pulses retire one entry instead of thirty-three; unique 273 HOLDS. Attributed by equality with the U2
@@ -653,7 +668,7 @@ describe('reader-with-no-writer ratchet: the EXECUTED corpus', () => {
       // (a peacetime suit retires when a war opens against its court; its feed reconcile mints the one id). Accumulated 1567
       // and final 240 DO NOT MOVE. Cross-recorded in the same act: news-voice (introductions 273), prose-family
       // (scalarRows 25549, pulseHistory 1055/5097), the OSR register --write at 98e0d8664 (exact, 1970 findings).
-      wizardNewsUnique: 265,
+      wizardNewsUnique: 270,
       pulseHistory: 12,
       // TE36 (ODQ §271): 109 → 73, one cause — the regional event log carries the pulse's
       // selected outcomes, and the retired bare-decline family was 36 of them. That mint's
@@ -661,8 +676,11 @@ describe('reader-with-no-writer ratchet: the EXECUTED corpus', () => {
       // OPPOSITE directions, and 73 → 74 here is the state lane picking up exactly what the
       // Chronicle put down. `wizardNewsFinalEntries` staying at 240 through both mints is
       // the control that keeps the two layers legibly apart.
-      regionalEventLog: 77,
-      regionalEventLogUnique: 77,
+      regionalEventLog: 86,
+      // 2026-11-05 (LANDING-5, the chair's addition (c)): 74 → 75, ONE cause — the residual outcome's id now carries
+      // its tick (stressorsCore.js :: residualOutcome), so osr002's raider pressure, resolved twice, is two regional
+      // records instead of one id minted twice. regionalEventLog holds at 75: no record was added, one stopped colliding.
+      regionalEventLogUnique: 86,
       aiChronicle: 1,
     });
     expect(Object.hasOwn(corpus, 'scalarObservations')).toBe(false);
@@ -1346,7 +1364,10 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
     // did on 2026-09-17, but upward. `decrees on settlement` and `kind on settlement` are
     // DECLARED, so their four new addresses (7 reads) and the one ordinary personaSlicer.js
     // row (1 read) are banked by rule together. MEASURED off this scan.
-    expect(live.explainedWriters.banked).toBe(69);
+    // ⭐ 69 → 76 AT THE SCHEMA-27 RUNG (2026-11-04, LANDING-2b, the chair's ruling 2): the ROSTER
+    // grows by three — the crisis cast's temporary person, `temporary`, `temporaryKind` and
+    // `crisisIds on npcs` — whose five addresses carry seven reads. MEASURED off this scan.
+    expect(live.explainedWriters.banked).toBe(76);
     expect(Object.entries(corpus.shapes)
       .filter(([, shape]) => shape.keys.includes('source'))
       .map(([name]) => name)).toEqual([
@@ -1359,7 +1380,11 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
       // worldPulse/stressors.js and has existed since 7c51ffec8; the corpus first reaches it under FOOD-1 b2aa5f5fa, whose
       // self-feeding worlds reach a recovery that names its sources. A corpus movement, not a new writer.
       'causes', 'changes', 'charter', 'evidence', 'garrison', 'incomeSources',
-      'institutions', 'leadingSources', 'magicDef', 'mercenary', 'militia', 'site', 'stress', 'stressors',
+      // ⛔ `militia` LEFT AT THE SCHEMA-27 RUNG (2026-11-04, LANDING-2b): bisected with the corpus builder over the
+      // window's first-parent commits, the shape is observed through 79c442330 and gone from 90dc22f18 on — the compose
+      // of lane/x46-3-budget, whose density factor stops every corpus world rolling a militia row. A corpus movement,
+      // not a lost writer; no frozen row depended on it (the erasure guard holds).
+      'institutions', 'leadingSources', 'magicDef', 'mercenary', 'site', 'stress', 'stressors',
       'walls', 'watch',
     ]);
 
@@ -1392,6 +1417,8 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
     // membership is hand-declared rather than derived from a rule.
     expect([...live.explainedWriters.bankedIdentities].sort()).toEqual([
       'appliedAt on eventLog',
+      // ⭐ THE SCHEMA-27 RUNG'S `crisisIds on npcs` sorts here (its siblings sort below).
+      'crisisIds on npcs',
       // ⭐ DECLARED AT THE SCHEMA-23 RUNG, and it sorts HERE rather than at the end because
       // this list is alphabetical and not roster-ordered — the register pin above is the
       // one keyed by the roster.
@@ -1412,6 +1439,9 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
       'narrativeSummary on eventLog',
       'neighbourNetwork on settlement',
       'stresses on settlement',
+      // ⭐ THE SCHEMA-27 TRIO (the crisis cast's temporary person), alphabetical, not roster-ordered.
+      'temporary on npcs',
+      'temporaryKind on npcs',
       'worldPulse on campaignState',
     ]);
     // ⚠ AND THE OTHER eventLog IDENTITIES STAY UNBANKED — §346.1 banked four and
@@ -1593,15 +1623,21 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
       // hides a phantom from the viewer's slots.
       'decrees on settlement': { reads: 6, addresses: 3 },
       'kind on settlement': { reads: 2, addresses: 2 },
+      // ⭐ THE SCHEMA-27 TRIO: `temporary` once at each of crisis/crisisCast.js, crisisLifecycle.js
+      // and coherence/crisisCastFindings.js; `temporaryKind` twice at crisis/crisisCast.js;
+      // `crisisIds` twice at crisisLifecycle.js.
+      'temporary on npcs': { reads: 3, addresses: 3 },
+      'temporaryKind on npcs': { reads: 2, addresses: 1 },
+      'crisisIds on npcs': { reads: 2, addresses: 1 },
     });
 
     // A7 guard mutant: the retired clear-outright behavior loses exactly the
     // bank and therefore cannot satisfy the live count asserted above.
     const bankedIdentities = new Set(live.explainedWriters.bankedIdentities);
     const clearOutright = live.findings.filter((finding) => !bankedIdentities.has(identityOf(finding)));
-    // − 69 from the schema-23 rung, moving with the banked figure pinned above rather than
-    // being a second hand-held copy of it.
-    expect(clearOutright).toHaveLength(live.findings.length - 69);
+    // − 69 from the schema-23 rung, − 76 from the schema-27 rung, moving with the banked figure
+    // pinned above rather than being a second hand-held copy of it.
+    expect(clearOutright).toHaveLength(live.findings.length - 76);
     expect(inventoryOf(clearOutright)).not.toEqual(liveInventory);
   });
 
@@ -1778,7 +1814,11 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
       // left the outcome family the corpus observes. Its four reads at src/components/map/WorldPulseData.js
       // (`factionName on stressors` ×4) therefore left the CLEARED set and became one of the 53 ordinary rows
       // the rung admitted: exactly −1 identity / −4 counts on the gap, the file count unmoved.
-      files: 1, identities: 17, counts: 44,
+      // ⭐ 1/17/44 → 1/18/48 AT THE SCHEMA-27 RUNG (2026-11-04, LANDING-2b), RE-DERIVED AND NAMED: the same four reads
+      // come BACK. M6's code is unchanged but its INPUTS moved — theta 0.80 → 0.76 restores the `stressors` family, and
+      // its member `selected` now carries `factionName` — so `factionName on stressors` ×4 at WorldPulseData.js re-enters
+      // the CLEARED set (a GONE row of the rung's reconciliation): exactly +1 identity / +4 counts, the file count unmoved.
+      files: 1, identities: 18, counts: 48,
     });
     expect(UNREVIEWED_UI_COHORT.tag).toBe('UNREVIEWED-UI');
     expect(UNREVIEWED_UI_COHORT.scopes).toEqual([...EXACT_SCAN_EXCLUDED_SCOPE]);

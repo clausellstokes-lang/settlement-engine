@@ -92,7 +92,7 @@ describe('stress factions take the role pool\'s first unused name', () => {
       expect(changed).toBe(true);
       expect(touched).toEqual(expect.arrayContaining(['npcs[].factionAffiliation', 'factions[].name']));
       const { stress: _stress, stressors: _stressors, ...rest } = settlement;
-      expect(JSON.stringify(rest)).not.toContain(claimant);
+      expect(JSON.stringify(rest)).not.toContain(claimant); // anchored: the next line pins the new name in this same record
       expect(JSON.stringify(rest)).toContain('The Iron Pretenders');
     });
   });

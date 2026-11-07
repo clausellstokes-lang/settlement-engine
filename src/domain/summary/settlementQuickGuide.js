@@ -602,7 +602,7 @@ const WATERSIDE_SCOPES = new Set(['greek', 'norse', 'slavic']); // norse "the ha
 
 /** @param {SettlementQuickGuideSource} settlement */
 function isLandlocked(settlement) {
-  const config = /** @type {any} */ (settlement)?.config;
+  const config = /** @type {{ config?: { terrainType?: string | null, tradeRouteAccess?: string | null } | null }} */ (settlement)?.config;
   if (!config || typeof config !== 'object') return false;
   return waterAccessKind(config.terrainType, config.tradeRouteAccess) === 'none';
 }

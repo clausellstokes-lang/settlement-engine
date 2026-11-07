@@ -23,7 +23,9 @@ describe('custom-content command adapter receipt honesty', () => {
     });
   });
 
-  test.each([
+  // Each-family cure (2026-11-05, LANDING-6): one parameterless test looping over the rows in
+  // its body, every row still asserted and named in its failure message.
+  const UNCONFIRMED_SUCCESS_RECEIPTS = [
     ['missing', undefined],
     [
       'unconfirmed',
@@ -41,23 +43,25 @@ describe('custom-content command adapter receipt honesty', () => {
         persistence: { state: 'confirmed' },
       },
     ],
-  ])('classifies a %s success receipt as reconciliation-required', async (
-    _label,
-    writerReceipt,
-  ) => {
-    const receipt = await customContentCreateRevisionSpec.apply({}, {
-      actions: {
-        applyCustomContentCommand: vi.fn(async () => writerReceipt),
-      },
-    });
+  ];
 
-    expect(receipt).toMatchObject({
-      ok: false,
-      status: 'reconcile-required',
-      reason: 'custom_content_persistence_unconfirmed',
-      needsReconciliation: true,
-      persistence: { state: 'unconfirmed' },
-    });
+  test('classifies a missing, unconfirmed or contradictory success receipt as reconciliation-required', async () => {
+    expect(UNCONFIRMED_SUCCESS_RECEIPTS).toHaveLength(3);
+    for (const [label, writerReceipt] of UNCONFIRMED_SUCCESS_RECEIPTS) {
+      const receipt = await customContentCreateRevisionSpec.apply({}, {
+        actions: {
+          applyCustomContentCommand: vi.fn(async () => writerReceipt),
+        },
+      });
+
+      expect(receipt, `a ${label} success receipt`).toMatchObject({
+        ok: false,
+        status: 'reconcile-required',
+        reason: 'custom_content_persistence_unconfirmed',
+        needsReconciliation: true,
+        persistence: { state: 'unconfirmed' },
+      });
+    }
   });
 
   test('preserves an explicit refusal as a safe ordinary failure', async () => {

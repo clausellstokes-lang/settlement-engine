@@ -33,7 +33,7 @@ import { reconcileCultImposition } from '../worldPulse/cultImpositionApply.js';
 // consumers) into first paint for 653 B. Re-widening this specifier re-spends them.
 import { commitDeityEmbed } from '../deityCommitEmbed.js';
 import { applyTierOutcomeToSettlement } from '../worldPulse/tierOutcomeApply.js';
-import { TIER_ORDER, POPULATION_RANGES, popToTier } from '../../data/constants.js';
+import { TIER_ORDER, POPULATION_RANGES, TIER_STAMP_CUTS, popToTier } from '../../data/constants.js';
 import { successorNpc } from '../worldPulse/successorNpc.js';
 import { createPRNG } from '../../kernel/prng.js';
 import { rollsRegisterVii } from '../density/densityLaw.js';
@@ -998,7 +998,7 @@ function imposeCult(s, event) {
 /**
  * SHIFT_TIER — a DM-forced one-step settlement PROMOTION or DEMOTION (an override of the
  * organic tier-drift system, tierResourceDynamics). Rebands population into the target
- * tier's band, then REUSES the world-pulse apply path verbatim so the institution roster
+ * tier's STAMP band, then REUSES the world-pulse apply path verbatim so the institution roster
  * surgery (a promotion adds/reactivates the new tier's required institutions; a demotion
  * leaves over-tier ones as inactive RUINED remnants with their fates) and the tier +
  * institution history are byte-identical to an organic tier change. One tier per call; a
@@ -1013,16 +1013,24 @@ function shiftTier(s, event) {
   if (idx < 0) return vetoMutation('tier_unknown', String(fromTier));
   const toTier = TIER_ORDER[direction === 'promotion' ? idx + 1 : idx - 1];
   if (!toTier) return vetoMutation('tier_at_bound', direction);
-  // Reband population into the target band — a forced shift needs it (the organic path
-  // does not, since population already crossed the threshold). A plain clamp lands a
+  // Reband population into the target STAMP band — a forced shift needs it (the organic
+  // path does not, since population already crossed the threshold). A plain clamp lands a
   // promotion at the band floor and a demotion at the band ceiling, leaving an already
   // in-band population unchanged.
-  const band = /** @type {Record<string, { min: number, max: number }>} */ (POPULATION_RANGES)[toTier];
+  // THE STAMP BAND, NOT THE ROLL BAND (LANDING-7 ruling R-E6). The roll bands overlap (X-46
+  // car 1), so the roll band's ceiling can stamp the tier above: a city forced down to town
+  // clamped to 2,500 and stamped city again, a contradiction the display printed. A forced
+  // shift states what the place IS, so it lands in [cut(toTier), cut(next tier) - 1] (car 2's
+  // law: a next tier begins at its stamp cut). Thorp has no cut: it floors at its own roll
+  // minimum, the least a thorp holds. The top tier is open (X-46 car 1b: "it should not have
+  // a cap"): no ceiling.
+  const cuts = /** @type {Record<string, number>} */ (TIER_STAMP_CUTS);
+  const thorpFloor = /** @type {Record<string, { min: number }>} */ (POPULATION_RANGES)[toTier]?.min;
+  const floor = cuts[toTier] ?? thorpFloor;
+  const nextTier = TIER_ORDER[TIER_ORDER.indexOf(toTier) + 1];
+  const ceiling = nextTier ? cuts[nextTier] - 1 : Infinity;
   const curPop = Number(s.population) || 0;
-  // The top tier's band is open (X-46 car 1b: "it should not have a cap"): its `max` is the
-  // body of the metropolis roll, never a ceiling a promotion may clamp a city down to.
-  const ceiling = toTier === TIER_ORDER[TIER_ORDER.length - 1] ? Infinity : band?.max;
-  const population = band ? Math.min(ceiling, Math.max(band.min, curPop)) : curPop;
+  const population = Number.isFinite(floor) ? Math.min(ceiling, Math.max(floor, curPop)) : curPop;
   // Reuse the organic apply path (institution surgery + history + tier write). Pass
   // tier: fromTier explicitly so its stale-guard (currentTier === fromTier) passes.
   const outcome = { id: `dm_shift_tier:${String(s.id || 'settlement')}:${fromTier}>${toTier}`, tierChange: { fromTier, toTier, direction } };

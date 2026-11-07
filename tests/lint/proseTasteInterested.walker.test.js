@@ -35,7 +35,9 @@ const clean = tasteTown(INTERESTED_TOWNS[1]);
 
 describe('the two fixture towns are the ones §R c-22 names, taken as the generator makes them', () => {
   it('the captured town carries the birth fact and the clean control does not', () => {
-    expect(INTERESTED_TOWNS[0].seed).toBe('rate-11-9'); // re-taken 2026-09-30, see tests/fixtures/tasteTowns.js
+    // re-taken 2026-11-06 (LANDING-7 A, R-A5): rate-11-9 left capture at the X-46 compose 1264a8152;
+    // rate-93-0 is the first RATE-grid town holding every captured precondition, see tests/fixtures/tasteTowns.js
+    expect(INTERESTED_TOWNS[0].seed).toBe('rate-93-0');
     expect(INTERESTED_TOWNS[1].seed).toBe('rate-3-0');
     expect(captured.powerStructure?.criminalCaptureState, 'the chair\'s own worked example').toBe('corrupted');
     expect(clean.powerStructure?.criminalCaptureState, 'and the control').toBe('none');

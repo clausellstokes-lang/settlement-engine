@@ -99,6 +99,7 @@ const RUIN_AGNOSTIC_EXEMPT = Object.freeze({
   'src/domain/edit/pools.js': 'name-lookup/affordance — the `npc.role` pool offers a DM the roles the record\'s OWN institutions roster already carries, as a SELECTION LIST ("what may a human name for this field"), never a live-provider aggregation: it sums nothing and credits no institution with capacity. RULED EXEMPT BY THE CHAIR (judgment 138, EM-A2b version 7) on the same reason src/domain/events/targetRosters.js and src/domain/tableLedger.js already hold. Routing it through liveInstitutions() would DROP a ruined institution from a picker where it is a legitimate answer — the former warden of a burned keep is a role a DM may still name — and would add a THIRTEENTH import to a leaf whose own header forbids one.',
   'src/domain/mapProfile.js': 'existence-gate (deferred) — .some() walls → hasWalls; a ruined citadel still reads walled (owner glance)',
   'src/domain/contradictions.js': 'existence-gate — narrative QA detectors (.some presence)',
+  'src/domain/coherence/readerBattery.js': 'existence-gate/name-lookup — THE READER BATTERY (lane READER-INSTRUMENTS, 2026-11-04) is an INSTRUMENT, not a provider aggregation: the soak runs it over BIRTH records to ask whether rendered prose names a house the roster lacks — `houseNames` maps the roster to catalogue names for the [~strength-no-house] column and the [no-watch] sub-case, and `hasMarketInstitution(s?.institutions)` is the [no-market] existence gate. It credits no institution with capacity and sums nothing; its own header says it cures nothing. The same standing as contradictions.js above (narrative QA detectors). A ruin on a pulsed save would read present here, which is a false negative in an instrument, never an over-credit in the product.',
   'src/domain/coherence/hookTruth.js': 'existence-gate — reads `defenseProfile.institutions` ONLY to know whether the record carries a defence roster at all (`defenseKnown`: an unknown roster licenses nothing). Every defence and hospital FACT comes from defenseFacts.js :: defenseFactsOf, which reads the live roster through liveInstitutions(). Lane WIRING-2 (2026-11-03, HOOKS request 6) moved the facts there; before it this file was COMPLIANT through its own isLiveInstitution hospital read.',
   'src/domain/traditions/politics.js': 'existence/candidate — tradition-owner candidate membership (deferred; owner glance)',
   // MF-UC0 (ODQ §311.1, §441, §445.2): the underground SHEET's existence gate reads the RAW
@@ -480,7 +481,11 @@ describe('ruin-filter roster ratchet (structural-prevention Pattern 2)', () => {
     // read stays raw on purpose and is stated, not laundered by the file-granular compliance
     // documented above: `effectiveCastOf` resolves a DM-named house by name (name-lookup).
     // Read from this arm's own failure message ("expected 98 to be 97"), never computed.
-    expect(readers.length).toBe(98);
+    // RE-MEASURED 2026-11-06 BY LANDING-7 A: 98 → 99. ONE new reader,
+    // src/domain/coherence/readerBattery.js, born in lane READER-INSTRUMENTS (c84e9377f) and
+    // composed at cf7c6956f; EXEMPT above as an existence-gate/name-lookup instrument. Read from
+    // this arm's own failure message ("expected 99 to be 98"), never computed.
+    expect(readers.length).toBe(99);
   });
 
   test('exempt honesty: every exempt entry still reads .institutions and is not already compliant', () => {

@@ -12,6 +12,7 @@
 import { describe, expect, it } from 'vitest';
 
 import { createPRNG } from '../../src/kernel/prng.js';
+import { POPULATION_RANGES } from '../../src/data/constants.js';
 import {
   SETTLEMENT_LIFECYCLE_TUNING,
   mintSteading,
@@ -85,7 +86,9 @@ describe('FORCE_FOUND_STEADING (force ≡ organic through the ONE mint)', () => 
     }));
     expect(forceFoundSteading({ parent: town(), parentId: 'a', sats, tick: 100, forkFn: forkFn() }).refusal).toContain('cap');
     expect(forceFoundSteading({ parent: town({ tier: 'village', population: 800 }), parentId: 'a', sats: [], tick: 100, forkFn: forkFn() }).refusal).toContain('town-or-higher');
-    expect(forceFoundSteading({ parent: town({ population: 905 }), parentId: 'a', sats: [], tick: 100, forkFn: forkFn() }).refusal).toContain('headroom');
+    // Headroom is measured above the parent's OWN roll-band floor (the kernel's parentMin); X-46 car 1
+    // (433289899) moved the town floor 901 -> 300, so the no-headroom parent sits 4 above the new floor.
+    expect(forceFoundSteading({ parent: town({ population: POPULATION_RANGES.town.min + 4 }), parentId: 'a', sats: [], tick: 100, forkFn: forkFn() }).refusal).toContain('headroom');
   });
 });
 

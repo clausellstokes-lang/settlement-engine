@@ -46,12 +46,18 @@ const NESTING_ERROR = /cannot be a descendant of|validateDOMNesting/i;
 // A REAL pipeline settlement: the institution trigger only appears where a
 // service resolves to an institution that yields a derived contribution (the
 // link's own honesty gate), which a hand fixture does not reproduce.
+// Fixture re-seated by identity 'services-institution-card-nesting' -> '…-1' (LANDING-7 lane G,
+// 2026-11-06): X-46 car 2 (175320e56) renamed the city's Housing rows to the owner's household
+// column ("Housing (500-4000 households)"), which PROXY_SERVICE_HOSTS no longer keys, so the old
+// seed surfaced no proxied row (green at 175320e56^, red at 175320e56). Scanned in the order
+// '<seed>', '<seed>-0', '<seed>-1', …: 12 of the first 31 cities surface proxied rows (all through
+// "Sewage system"); '-1' is the first. The assertions are unchanged.
 let town;
 beforeAll(() => {
   town = generateSettlementPipeline(
     { settType: 'city', terrain: 'grassland', tradeRouteAccess: 'road' },
     null,
-    { seed: 'services-institution-card-nesting', customContent: {} },
+    { seed: 'services-institution-card-nesting-1', customContent: {} },
   );
 }, 120_000);
 
@@ -82,7 +88,7 @@ describe('the institution card on the Services tab', () => {
       .toBeGreaterThan(0);
 
     // RS-19 (chair ruling 2026-10-30): a service surfaced through a PROXY host (this city's
-    // Housing rows carry the inn's menu) names no institution. Anchored: the city really
+    // Sewage system rows carry the inn district's menu) names no institution. Anchored: the city really
     // has proxy-surfaced rows, and the same rows' names do render.
     const proxied = Object.values(town.availableServices).flat()
       .filter((svc) => PROXY_SERVICE_HOSTS[String(svc.institution || '').toLowerCase()]);

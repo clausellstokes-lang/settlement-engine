@@ -139,16 +139,56 @@ const EXPECTED_ROOTS = new Map([
 // ⭐ THE REGIONAL LOG'S ROOT REACH IS NOW PINNED AS AN EXACT SET: root 2's pulse logged no regional event (the 79 entries are
 // all unique and all sit on the other eleven roots), so the reach is [0,1,3..11]; it was 0..11. Every root still in the
 // set keeps the contiguity law, and any further change to the set reds with the set named.
+// ── RE-RECORDED 2026-11-04 BY THE REGISTERS-4 SEAT (the chair's ruling C5), IN THE SAME ACT AS THE NEWS-VOICE AND
+// NEWS-HEADLINE CONTRACTS AND THE OSR WALKER'S PRODUCERS ARM (the 0c1fb8dec door; the harness reproduces every frozen
+// figure exactly at c0ef42c13). By stage over the DOORS trace trees:
+//   T1 FOOD-1  scalarRows 25724 → 25123, accumulated 1557 → 1510, final/unique 264/265 → 257/258, regional 79 → 80;
+//              identities 61 → 58: the four pulseHistory metadata.resourceTaxonomy.{kind,type} rows (consequenceOutcomes[]
+//              and selectedOutcomes[]) leave and pulseHistory[].resolvedStressors[].type arrives.
+//   T2 FOOD-2  25123 → 25679, 1510 → 1541, 257/258 → 264/265, regional 80 → 77; identities hold at 58.
+//   S5 SIZE-3  25679 → 25277, 1541 → 1521, 264/265 → 260/261, regional 77; identities hold at 58.
+// Nothing after S5 moves. Families: pulseHistory 48/996/4979 → 45/995/4838, regionalLog 2/8/180 → 2/4/153; chronicle and
+// timeline hold. Totals 61/1019/5178 → 58/1014/5010; bytes 8000 → 7517; digest 59c3bb5a → 1d67e350. The regional root reach
+// [0,1,3..11] holds.
+// ── RE-RECORDED 2026-11-05 BY LANDING-5 (the chair's addition (c), ODQ §934.105), ONE CORPUS BUILD PER TREE MEASURED WITH
+// THIS LIBRARY'S OWN FUNCTIONS (the 0c1fb8dec / 3d50676bb door; a scratch copy of this file with the two corpus-shape
+// throws turned into readings, which reproduces every frozen figure below EXACTLY at the window base 1264a8152^). The
+// walker had died in its beforeAll since X-46 car 1 on a duplicate regional record id, so every movement of the rung-1
+// window was masked; attributed by first-parent stage (scalarRows / regional events / unique; identities, distinct,
+// occurrences; bytes; digest):
+//   1264a8152 X-46 car 1        25277 -> 26488, regional 77/77 -> 82/80; 58/1014/5010 -> 59/1070/5199; 7517 -> 7668; 175fcbba
+//   d4bf6431c car 2             26032, 81/81; 58/1068/5173; 7518; 043e3adf
+//   ac09ea83b TERRAIN-POOLS     25929, 81/81; 58/1073/5200; 9ba75a8e
+//   fe56bddd4 T1/T2             26335, 87/87; 58/1048/5240; a865bf46
+//   90dc22f18 car 3 (budget)    24884, 79/78, the regional root reach gains root 2; 63/1001/5240; 8271; 0148b98d
+//   6129c300d PLACE-NOT-TIER    24698, 78/77; 59/957/5182; 7665; 32c745c3
+//   6ca454d2b car 3 I7          24683, 75/74; 59/982/5167; b2ff37cd
+//   6d84aa834 F6                25185, 74/73; 59/950/5213; 25a59983
+//   5e9ffb220 F1                25614, 75/74; 59/971/5227; c24ac7a8
+//   db8ce5da8 F3                25574 (accumulated 1532 -> 1529); the families hold
+// and nothing else moves. Then THE RESIDUAL OUTCOME'S TICK (bc2a64000, addition (c)): regionalEventLogUnique 74 -> 75 and
+// NOTHING ELSE (measured with and without it at the tip: rows, digest and reach identical). The duplicate it cures was
+// osr002's raider-pressure residual. Families: pulseHistory 45/995/4838 -> 46/952/5051, regionalLog 2/4/153 -> 2/4/157;
+// chronicle and timeline hold. Totals 58/1014/5010 -> 59/971/5227; bytes 7517 -> 7665; digest 1d67e350 -> c24ac7a8;
+// the regional root reach [0,1,3..11] -> 0..11 (root 2 carries regional events again from X-46 car 3).
+// ── RE-RECORDED 2026-11-06 BY LANDING-7 LANE E (the chair's ruling R-E10, §934.105), IN THE SAME ACT AS THE NEWS-VOICE AND
+// NEWS-HEADLINE CONTRACTS AND THE OSR WALKER'S PRODUCERS ARM (the 3d50676bb door; ONE corpus build per tree measured with this
+// library's own functions, which reproduces every frozen figure below EXACTLY at the ceilings' parent 989219706). ONE CAUSE:
+// THE DENSITY CEILINGS RE-DERIVED FROM THE STAMP BANDS (R-E8, 20c0139c5), measured at 20c0139c5 ALONE byte-equal to the tip.
+// scalarRows 25574 -> 26891; wizardNews final/accumulated/unique 253/1529/253 -> 270/1615/270; regional 75/75 -> 86/86.
+// THE SHAPE HOLDS: 59 identities, none added and none removed; 42 rows move a count. Families: pulseHistory 46/952/5051 ->
+// 46/957/5042, regionalLog 2/4/157 -> 2/4/189; chronicle and timeline hold. Totals 59/971/5227 -> 59/976/5250; bytes
+// 7665 -> 7669; digest c24ac7a8 -> 7c53b1cd. The regional root reach 0..11 holds.
 const EXPECTED_CORPUS = Object.freeze({
-  scalarRows: 25724, canonEventLogEntries: 1, wizardNewsFinalEntries: 264,
-  wizardNewsAccumulatedEntries: 1557, wizardNewsUnique: 265, pulseHistory: 12,
-  regionalEventLog: 79, regionalEventLogUnique: 79, aiChronicle: 1,
+  scalarRows: 26891, canonEventLogEntries: 1, wizardNewsFinalEntries: 270,
+  wizardNewsAccumulatedEntries: 1615, wizardNewsUnique: 270, pulseHistory: 12,
+  regionalEventLog: 86, regionalEventLogUnique: 86, aiChronicle: 1,
 });
-const EXPECTED_REGIONAL_ROOTS = Object.freeze([0, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
+const EXPECTED_REGIONAL_ROOTS = Object.freeze([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
 const EXPECTED_FAMILY_TOTALS = Object.freeze([
   { family: 'chronicle', identities: 7, distinctValues: 7, occurrences: 7 },
-  { family: 'pulseHistory', identities: 48, distinctValues: 996, occurrences: 4979 },
-  { family: 'regionalLog', identities: 2, distinctValues: 8, occurrences: 180 },
+  { family: 'pulseHistory', identities: 46, distinctValues: 957, occurrences: 5042 },
+  { family: 'regionalLog', identities: 2, distinctValues: 4, occurrences: 189 },
   { family: 'timeline', identities: 4, distinctValues: 8, occurrences: 12 },
 ]);
 // 2026-10-02 (THE VOICE PROGRAM wave 1, the owner: "Updates like these need to reflect actions not to potential"):
@@ -157,9 +197,9 @@ const EXPECTED_FAMILY_TOTALS = Object.freeze([
 // (+6, +7, +9: both towns named, a deed per kind) and the three SUMMARY rows shrink (−1, −3, −1: the NPC line now states
 // the aim alone, its move having gone to the headline). EXPECTED_ROWS_BYTES holds at 8000 by digit-width coincidence again;
 // the digest below is the pin that convicts.
-const EXPECTED_TOTALS = Object.freeze({ families: 4, identities: 61, distinctValues: 1019, occurrences: 5178 });
-const EXPECTED_ROWS_BYTES = 8000;
-const EXPECTED_ROWS_SHA256 = '59c3bb5aae5768bc1eb875183e7c70bc3d8cc398dfd79f0e6b0e11cf32eb1ce0';
+const EXPECTED_TOTALS = Object.freeze({ families: 4, identities: 59, distinctValues: 976, occurrences: 5250 });
+const EXPECTED_ROWS_BYTES = 7669;
+const EXPECTED_ROWS_SHA256 = '7c53b1cd8f181b7080021bb9c89074bea84a6205cab29ed0b6e491bb8c332832';
 const codepoint = (left, right) => (left < right ? -1 : left > right ? 1 : 0);
 const same = (left, right) => JSON.stringify(left) === JSON.stringify(right);
 const identityOf = (row) => `${row.family}\0${row.path}\0${row.field}`;

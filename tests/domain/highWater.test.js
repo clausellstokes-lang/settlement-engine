@@ -34,7 +34,7 @@ import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
 
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
-import { popToTier } from '../../src/data/constants.js';
+import { popToTier, POPULATION_RANGES } from '../../src/data/constants.js';
 import { forceCalamityStrike } from '../../src/domain/worldPulse/calamityKernel.js';
 import {
   deriveHighWater, HIGH_WATER_CHANNELS, HIGH_WATER_GAPS,
@@ -139,7 +139,10 @@ const FROZEN_TIER_WRITERS = Object.freeze([
 /** A real settlement carried through a lived interval, via the engine's own strike path.
  *  `withStrike:false` is the COUNTERFACTUAL — the same world, the same seed, no calamity. */
 function livedInterval({ withStrike }) {
-  const start = 5100;
+  // X-46 car 1 (433289899): the city stamp is TIER_STAMP_CUTS.city 2250 (was 5001), so the old start 5100
+  // stayed a city after the catastrophic strike (3652). 2500 stamps city, and the strike leaves 1790: town,
+  // and below the city roll band's floor 2000, so a peakTier stamp still proves a higher peak (the §434 arm).
+  const start = 2500;
   const settlement = {
     name: 'Probeholt', tier: popToTier(start), population: start,
     config: { terrainType: 'plains' },
@@ -224,7 +227,9 @@ describe('MF-T2R — the high-water evidence read, and the channels proven whole
     const both = { ...base, tier: 'town', config: { peakTier: 'city' } };
     const bothResult = deriveHighWater(both);
     expect(bothResult.channels).toEqual(['PEAK_TIER_STAMP']);
-    expect(bothResult.population).toBe(5001);
+    // The floor is the peak tier's own roll-band minimum (highWater.js :: TIER_FLOOR, an own-floor reader
+    // in the barePopulationComparison register); X-46 car 1 moved city's from 5001 to 2000.
+    expect(bothResult.population).toBe(POPULATION_RANGES.city.min);
   });
 
   it('channel 2 declares a TWELVE-entry window and understates a peak older than it', () => {

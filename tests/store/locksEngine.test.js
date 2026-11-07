@@ -174,7 +174,12 @@ describe('REGEN — a stored id carries nobody, and follows an authored keeper a
     const { generateSettlementPipeline } = await import('../../src/generators/generateSettlementPipeline.js');
     const town = JSON.parse(JSON.stringify(generateSettlementPipeline(
       { settType: 'town', culture: 'germanic', terrain: 'grassland', tradeRouteAccess: 'road' },
-      null, { seed: 'pins-store-regen-1', customContent: {} },
+      // FIXTURE SEED re-seated `-1` to `-3` on 2026-11-06 (LANDING-7 lane B): X-46 car 3's
+      // density factor (47829c070, U3) reshaped this town's roster and `-1` now leaves the
+      // keeper in npc_2 (the guard below fails as designed). Scanned -0..-60 under this file's
+      // mint: 13 of 61 move the keeper; -3 is the first (npc_6 -> npc_8), the seed the sibling
+      // pinnedNpcRegenRemap.test.js already carries.
+      null, { seed: 'pins-store-regen-3', customContent: {} },
     )));
     // The survival ground is the ENTITY policy (a user-authored character), not the lock.
     town.npcs[2]._authored = true;

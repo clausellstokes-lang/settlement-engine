@@ -304,9 +304,22 @@ describe('1. CONSERVATION — a departure is an arrival or a column on the road'
 
 // ═══════════════════════════════════════════════════════════════════════════════
 describe('2. THE BIFURCATION CURE — the crowded and the empty level toward the middle', () => {
+  // ⚠ RE-KEYED BY IDENTITY (LANDING-7 R-E8, 2026-11-06). DENSITY_CEILINGS was re-derived from
+  // the STAMP-band maxima: town 7,500 -> 3,374 (x 0.4499), village 1,400 -> 543 (x 0.3879).
+  // At the old heads the town stood at 271 percent of its new wall and the village's room had
+  // shrunk to 624, so the pair was a different pair (309 moved; the control's gap closed by
+  // the rates alone). Each settlement's head count and harvest follow its own tier's ceiling
+  // by that factor, so each keeps its share of its wall and its fields per head: Crowdhold
+  // 10,500 / 30,000 -> 4,724 / 13,496 (122 percent of its wall, as before), Emptyvale
+  // 200 / 3,000 -> 78 / 1,164 (12 percent, as before). The magnitude bars below follow the
+  // settlement each one measures by the SAME factor, so every bar keeps its share of the
+  // fixture: moved > 500 -> 225 (4.8 percent of the crowded town's start), crowd < 9,500 ->
+  // 4,274, empty > 700 -> 272. Measured at the re-key: 309 moved, crowd 3,683, empty 412, gap
+  // 1.0925 -> 0.2889 with the road and -> 0.8791 (x 0.805) with it cut. Sections 1, 3, 4 and
+  // 9 to 12 keep their own copies of the old pair: they stayed green and are not re-keyed.
   const pair = () => [
-    { saveId: 'Crowdhold', settlement: place({ id: 'Crowdhold', tier: 'town', population: 10500, dailyProduction: 30000 }) },
-    { saveId: 'Emptyvale', settlement: place({ id: 'Emptyvale', tier: 'village', population: 200, dailyProduction: 3000 }) },
+    { saveId: 'Crowdhold', settlement: place({ id: 'Crowdhold', tier: 'town', population: 4724, dailyProduction: 13496 }) },
+    { saveId: 'Emptyvale', settlement: place({ id: 'Emptyvale', tier: 'village', population: 78, dailyProduction: 1164 }) },
   ];
   const loadOf = (u) => demographicReadings(u.settlement, litWorld(), u.saveId).urbanLoadRatio;
 
@@ -322,12 +335,13 @@ describe('2. THE BIFURCATION CURE — the crowded and the empty level toward the
     const gapAfter = Math.abs(loadOf(crowd) - loadOf(empty));
     const moved = sumOf(joined.accounts, 'departures');
 
-    // 1. THE MOVEMENT IS REAL AND LARGE. MEASURED 2026-08-01: 765 people on this
-    //    fixture, a tenth of the crowded town's whole head count.
-    expect(moved, 'the homeostat moved a trickle rather than a wave').toBeGreaterThan(500);
-    // 2. THE CROWDED SHED AND THE EMPTY FILLED. The village nearly quintupled.
-    expect(crowd.settlement.population).toBeLessThan(9500);
-    expect(empty.settlement.population).toBeGreaterThan(700);
+    // 1. THE MOVEMENT IS REAL AND LARGE. MEASURED 2026-08-01: 765 people on the pre-R-E8
+    //    fixture (10,500 / 200), a fourteenth of the crowded town's whole head count;
+    //    309 on the re-keyed one (4,724 / 78), a fifteenth.
+    expect(moved, 'the homeostat moved a trickle rather than a wave').toBeGreaterThan(225);
+    // 2. THE CROWDED SHED AND THE EMPTY FILLED. The village more than quintupled.
+    expect(crowd.settlement.population).toBeLessThan(4274);
+    expect(empty.settlement.population).toBeGreaterThan(272);
     // 3. AND THE TWO ARE MEASURABLY CLOSER on the reading that separated them.
     expect(gapAfter, `the bifurcation did not close (${gapBefore} to ${gapAfter})`)
       .toBeLessThan(gapBefore * 0.75);
@@ -494,8 +508,13 @@ describe('5. THE APPLICABILITY GUARDS — the owner\'s "where appropriate", as r
 
   test('CROWDING is refused where the GRANARY is the wall, so no cause is counted twice', () => {
     // Same head count and same tier; only the fields differ, so which wall binds does.
-    const walled = place({ id: 'Walled', tier: 'village', population: 1500, dailyProduction: 20000 });
-    const starved = place({ id: 'Starved', tier: 'village', population: 1500, dailyProduction: 2000 });
+    // ⚠ RE-KEYED BY IDENTITY (LANDING-7 R-E8): the village ceiling moved 1,400 -> 543, so the
+    // starved village's granary (1,040 mouths) stood ABOVE its new wall (624) and the walls
+    // bound both. Head count and harvests follow the ceiling by the same factor (x 0.3879):
+    // 1,500 -> 582, 20,000 -> 7,757, 2,000 -> 776 (granary 403 under the wall 624, as 1,040
+    // stood under 1,610).
+    const walled = place({ id: 'Walled', tier: 'village', population: 582, dailyProduction: 7757 });
+    const starved = place({ id: 'Starved', tier: 'village', population: 582, dailyProduction: 776 });
     const wallPush = pushScoreOf({
       readings: demographicReadings(walled, litWorld(), 'Walled'), settlementId: 'Walled', item: null, pIndex: null,
     });
@@ -625,9 +644,13 @@ describe('7. THE THREE READINGS drive DIFFERENT choices (the anti-collapse proof
   test('the three readings are INDEPENDENT: one settlement carries all three at once', () => {
     // Food-short, reserve-deep, and packed, simultaneously. A collapsed diagnosis could
     // not report this settlement at all.
+    // ⚠ RE-KEYED BY IDENTITY (LANDING-7 R-E8): at 1,500 under the village ceiling 543 (wall
+    // 624) the village read overspilled, not packed. Head count and harvest follow the
+    // ceiling by the same factor (x 0.3879): 1,500 -> 582, 2,200 -> 853, so its load (0.93)
+    // and its food flow keep their old ratios.
     const strained = place({
-      id: 'Threefold', tier: 'village', population: 1500,
-      dailyProduction: 2200, storageMonths: 6,
+      id: 'Threefold', tier: 'village', population: 582,
+      dailyProduction: 853, storageMonths: 6,
     });
     const readings = demographicReadings(strained, litWorld(), 'Threefold');
     expect(readings.foodFlowBand, 'the flow reading did not come out short').toBe('short');

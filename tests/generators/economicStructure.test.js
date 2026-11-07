@@ -49,6 +49,9 @@ const PUBLIC_EXPORTS = [
   'generateEconomicViability',
   'getUpgradeOpportunities',
   'isSaltPreserved',
+  // Added deliberately by 93795e93f (the unseated Ecclesiastical Council: the tier's mandated head is minted,
+  // soak 1000 row 20); re-recorded at the rung-1 landing (LANDING-2).
+  'mandatedRoleCandidate',
   'priorityToCategory',
   'sortBySeverity',
 ];
@@ -84,6 +87,7 @@ describe('the surplus words read the food record (FOOD R-economicState)', () => 
     const config = { settType: 'hamlet', culture: 'germanic', terrainOverride: 'mountain', tradeRouteAccess: 'road', monsterThreat: 'civilized' };
     const s = generateSettlementPipeline(config, null, { seed: 'golden-master-v3', customContent: {} });
     expect(s.economicState.foodSecurity.foodRecord.growsMoreThanEats).toBe(false);
-    expect(s.economicState.economicComplexity).not.toMatch(/surplus/i);
+    expect(s.economicState.economicComplexity, 'the surplus words are a live label on this record').toMatch(/[A-Za-z]/);
+    expect(s.economicState.economicComplexity).not.toMatch(/surplus/i); // anchored: the line above proves the label is live on this record
   });
 });

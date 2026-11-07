@@ -189,11 +189,11 @@ function firstText(...values) {
       continue;
     }
     if (typeof value === 'object') {
-      const hit = /** @type {Record<string, any>} */ (value).short
-        || /** @type {Record<string, any>} */ (value).description
-        || /** @type {Record<string, any>} */ (value).long
-        || /** @type {Record<string, any>} */ (value).text
-        || /** @type {Record<string, any>} */ (value).name;
+      const hit = /** @type {Record<string, unknown>} */ (value).short
+        || /** @type {Record<string, unknown>} */ (value).description
+        || /** @type {Record<string, unknown>} */ (value).long
+        || /** @type {Record<string, unknown>} */ (value).text
+        || /** @type {Record<string, unknown>} */ (value).name;
       if (typeof hit === 'string' && hit.trim()) return hit;
     }
   }
@@ -522,11 +522,11 @@ export function buildDossierEntityIndex(settlement = {}) {
   // THE STORES ROW (X-52, lane DEFENSE-3) — the Economy tab's one home for the months in store,
   // a link TARGET for the Defense tab's Food endurance line (defenseDisplay.js ::
   // FOOD_STORES_DOOR). Indexed only where the food record exists, as the row only renders then.
-  /** @type {Record<string, any>[]} */
-  const stores = [];
-  if (/** @type {any} */ (settlement).economicState?.foodSecurity?.foodRecord) {
-    stores.push(decorateEntry('stores', { ...entityLink('stores', { id: 'economy.food-stores', name: 'Stores' }) }, { name: 'Stores' }));
-  }
+  /** @typedef {{ economicState?: { foodSecurity?: { foodRecord?: unknown } | null } | null }} FoodRecordHolder */
+  const foodHolder = /** @type {FoodRecordHolder} */ (settlement);
+  const stores = foodHolder.economicState?.foodSecurity?.foodRecord
+    ? [decorateEntry('stores', { ...entityLink('stores', { id: 'economy.food-stores', name: 'Stores' }) }, { name: 'Stores' })]
+    : [];
 
   // THE CRISES (docs/DESIGN_CRISIS_TAB.md) — each active stress entry, a link TARGET on the Crisis
   // tab, keyed `crisis.<type>` (the record's own crisis id). Read off the one container the dossier
@@ -534,7 +534,7 @@ export function buildDossierEntityIndex(settlement = {}) {
   // record and is not indexed twice. Derived per render; nothing persisted.
   /** @type {Record<string, any>[]} */
   const crises = [];
-  const stressRaw = /** @type {any} */ (settlement).stress;
+  const stressRaw = /** @type {{ stress?: unknown }} */ (settlement).stress;
   for (const entry of Array.isArray(stressRaw) ? stressRaw : (stressRaw && typeof stressRaw === 'object' ? [stressRaw] : [])) {
     const crisisType = entry && typeof entry === 'object' ? String(entry.type || entry.label || '') : '';
     if (!crisisType) continue;

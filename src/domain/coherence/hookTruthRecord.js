@@ -12,6 +12,7 @@ import { crisisHooksOf } from '../crisis/crisisHooks.js';
 
 import { hookTruthViolations, settlementHookFacts } from './hookTruth.js';
 import { crisisEntries } from '../facts/crisisKind.js';
+import { buildViabilitySummary } from '../viabilitySummary.js';
 
 /** @typedef {import('./hookTruth.js').HookTruthRecord} HookTruthRecord */
 
@@ -108,7 +109,7 @@ function hookTextOf(hook) {
  * @property {unknown} [factions] the faction rosters, each `members[]` a copy of its NPCs (F10 unit 4)
  * @property {unknown} [conflicts]
  * @property {{ currentTensions?: unknown, historicalEvents?: unknown }} [history]
- * @property {{ plotHooks?: unknown }} [economicViability]
+ * @property {{ plotHooks?: unknown, summary?: unknown, viable?: unknown, issues?: unknown, dependencies?: unknown, metrics?: { foodBalance?: { dailyNeed?: unknown, deficit?: unknown, rawDeficit?: unknown, deficitPercent?: unknown } } }} [economicViability]
  * @property {{ safetyProfile?: { plotHooks?: unknown } }} [economicState]
  * @property {{ conflicts?: unknown }} [powerStructure]
  */
@@ -206,8 +207,18 @@ export function withoutFalseHooks(settlement, options = {}) {
     }
   }
   if (record.economicViability && typeof record.economicViability === 'object') {
-    const hooks = keep(record.economicViability.plotHooks);
-    if (hooks !== record.economicViability.plotHooks) patch.economicViability = { ...record.economicViability, plotHooks: hooks };
+    const viability = record.economicViability;
+    const hooks = keep(viability.plotHooks);
+    if (hooks !== viability.plotHooks) {
+      // V-SUMMARY-HOOKS (LANDING-6, signed record 28): the summary states a hook count, so it is
+      // RE-DERIVED from the surviving hooks by its one writer, never left at the pre-filter count.
+      // The other inputs are the record's own published fields, the ones the generator handed it.
+      const summary = typeof viability.summary === 'string' && Array.isArray(hooks)
+        ? buildViabilitySummary(viability.viable !== false, Array.isArray(viability.issues) ? viability.issues : [],
+          Array.isArray(viability.dependencies) ? viability.dependencies : [], hooks, viability.metrics?.foodBalance)
+        : viability.summary;
+      patch.economicViability = { ...viability, plotHooks: hooks, ...(summary === viability.summary ? {} : { summary }) };
+    }
   }
   const safety = record.economicState?.safetyProfile;
   if (safety && typeof safety === 'object') {

@@ -1,0 +1,66 @@
+{
+  "_doc": "X-46 CAR 2 (LANE X46-2-THRESHOLDS), ONE SIGNED SHIFT OF RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the cloud chair signs by the owner's delegation, vetoable; a successor chair does not inherit this signature). THE CAUSE, ONE: X-46 car 2 (lane x46-2-thresholds): the thresholds — seventeen bare population comparisons re-based through TIER_STAMP_CUTS, the Dwellings and Housing rows on the owner's household column, Money changers' floor 3,000 -> 2,000. THE MOVER, NAMED: first-parent step d4bf6431c of lane/landing-rung1-2026-11-04 (\"compose: lane/x46-2-thresholds-2026-11-04 onto the window branch\") and nothing else. THE OWNER'S WORDS are quoted verbatim from docs/DESIGN_X46_SCALE_TRAIN.md line 7 (the owner, 2026-11-02, quoted from docs/UX_CONSOLIDATION_2026-10-30.md, the X-46 addendum: the historical-scale commission). HOW (the staged-tree method, DOORS-2 ruling 1; LANDING-3's brief, ruling 1: one record per moving step, in first-parent order): this record's stage S2 is the tree of d4bf6431c with the door paths (the freeze register, every registered manifest and suite, docs/shift-records/, scripts/prose-manifest-cells.mjs and scripts/audit/'s doors) carried from the branch, where the previous record's writes are committed; no lane touched a door path inside the window, so the stage differs from d4bf6431c by those writes alone. MEASURED BEFORE THE WRITE (scripts/audit/golden-master-stage.mjs, refence.mjs, herald-stage.mjs, witness-stage.mjs and the capture arms against a scratch record in a throwaway worktree at d4bf6431c, S1 -> S2): generator-golden-master 525 of 525 rows (thorp 84, hamlet 84, village 84, town 105, city 84, metropolis 84), the key set identical; herald-knowledge-desk-golden 7 of 463 rows, 3 added and 2 removed; cartography-calibration-corpus 484 of 504 rows; dossier-prose-manifest 8 of 1050 rows; espionage-dormancy-fence 360 of 360 rows (thorp 60, hamlet 60, village 60, town 60, city 60, metropolis 60), 360/360 distinct, cab21525.. -> 48e1248a..; pdf-golden-view-model-snapshot, its one snapshot; preset-lighting-witness 6 of 8 witnessed rows. A surface that does not move at this stage is not listed. RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the cloud chair signs by the owner's delegation, vetoable; a successor chair does not inherit this signature).",
+  "ownerWords": "I think we have over blown how large the floor and ceiling is for a Thorpe all the way to a city… historically it should be 50 to 300 residents, grouped into roughly 30 to 90 households. And that scale from our Thorpe to hamlets and town to city. Can you correct that in both the number of institutions and population in our generation pipeline?",
+  "ownerDate": "2026-11-02",
+  "odqRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (RUNG 1 OF THE SOAK LADDER, recorded by the cloud chair, session 019yED1Rc3svZxTNcEJVRr77)",
+  "cause": "X-46 car 2 (lane x46-2-thresholds): the thresholds — seventeen bare population comparisons re-based through TIER_STAMP_CUTS, the Dwellings and Housing rows on the owner's household column, Money changers' floor 3,000 -> 2,000",
+  "seat": "LANDING-3 (Opus 5.5) under the cloud chair (Fable 5.1), session 019yED1Rc3svZxTNcEJVRr77, from the stage at d4bf6431c",
+  "surfaces": [
+    {
+      "surface": "generator-golden-master",
+      "action": "re-record",
+      "predictedRows": 525,
+      "proofForm": "settlement-hash"
+    },
+    {
+      "surface": "herald-knowledge-desk-golden",
+      "action": "re-record",
+      "predictedRows": 463,
+      "proofForm": "derived-artefact"
+    },
+    {
+      "surface": "cartography-calibration-corpus",
+      "action": "re-record",
+      "predictedRows": 504,
+      "proofForm": "derived-artefact"
+    },
+    {
+      "surface": "dossier-prose-manifest",
+      "action": "re-record",
+      "predictedRows": 2,
+      "proofForm": "derived-artefact"
+    },
+    {
+      "surface": "espionage-dormancy-fence",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "in-file corpus constant"
+    },
+    {
+      "surface": "pdf-golden-view-model-snapshot",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "derived-artefact"
+    },
+    {
+      "surface": "preset-lighting-witness",
+      "action": "re-record",
+      "predictedRows": 15,
+      "proofForm": "derived-artefact"
+    },
+    {
+      "surface": "faith-field-dormancy-fence",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "in-file corpus constant",
+      "expected": {
+        "constant": "tests/property/faithFieldDormancyFence.test.js :: DORMANT_GOLDEN",
+        "DORMANT_GOLDEN": {
+          "from": "6e85308b0f396a77",
+          "to": "f80ebc3290869df9"
+        },
+        "amendment": "SECOND ACT, 2026-11-06 (LANDING-7 A, second seat, under the cloud chair Fable 5.1 by the owner's delegation of 2026-11-06, vetoable): this record never predicted this surface. The fence hashes the DORMANT faith corpus, whose 900 / 1,500 / 4,200 / 8,000 rows straddle the TIER_STAMP_CUTS that this cause re-based causalState.js onto (dense >= 2,250, adequate >= 350, thin < 88), so the cuts re-tiered the corpus and moved the golden. Bisected by first-parent stage to d4bf6431c and, inside the lane, to the ONE commit 04c1a3d25. The field itself stays dormant."
+      }
+    }
+  ]
+}

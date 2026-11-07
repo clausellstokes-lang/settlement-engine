@@ -17,8 +17,37 @@
   ],
   "registerVersion": 1,
   "schemaVersion": 1,
-  "signatureVersion": 0,
-  "signatures": [],
+  "signatureVersion": 1,
+  "signatures": [
+    {
+      "version": 1,
+      "date": "2026-11-06",
+      "signedBy": "the owner, by the owner's own act on the named register (the permission file of 2026-11-06, commit fdace3804, written for this record alone), the record written by the cloud chair (Fable 5.1, session 01FE9mEvGxnFx6WTBkEC6ie9); vetoable by a word",
+      "odqRow": "§934.105",
+      "ownerWords": "Ok how do u give my signature? — the owner, 2026-11-06, after the chair had put Register VII to the owner by name (\"Please reply 'sign Register VII' (or veto it)\"). Told in plain words that the way was a permission file on the landing branch whose only purpose is this record, the owner wrote that file by hand: commit fdace3804 \"Add permissions to settings.json\" on lane/landing-rung1-2026-11-04, 2026-11-06 21:35 UTC. The owner's words earlier the same day: \"I leave judgement to you\" · \"I leave all judgement now and in the future to you\" · \"Again stop asking me as I've delegated to you\". The chair's reading of those words and that act, vetoable by a word: Register VII is signed — the named roster and the faction seats follow the population inside every tier; the law rung 1 certified, and the product has run on it since 2026-11-04.",
+      "ids": [
+        "src/domain/density/densityBands.js#DENSITY_BANDS",
+        "src/domain/density/densityBands.js#RANK_CEILING_BY_TIER",
+        "src/domain/density/densityBands.js#VACANCY_WEIGHTS",
+        "src/domain/density/densityBands.js#PARTICULAR_TILTS",
+        "src/domain/density/densityBands.js#RIVAL_ROLL",
+        "src/domain/density/densityBands.js#CONCENTRATION",
+        "src/domain/density/densityBands.js#SUCCESSION_CLOCK_TICKS",
+        "src/domain/density/densityBands.js#SUCCESSION_WEIGHTS"
+      ],
+      "digests": {
+        "src/domain/density/densityBands.js#DENSITY_BANDS": "cfe34b033d05d8ddace082c665d1cbee161adebac397344e7a2966c4dc5db6ee",
+        "src/domain/density/densityBands.js#RANK_CEILING_BY_TIER": "1ebc51688e889ab9dcccb049962193d2158bbbfb777a52a4a3dc6d65f49da8ef",
+        "src/domain/density/densityBands.js#VACANCY_WEIGHTS": "2af9d1ab6619d9b5e3f30be0d79d05616ea7a610a6c39fd070223e88a0141ddf",
+        "src/domain/density/densityBands.js#PARTICULAR_TILTS": "0fcad894eddf31bda5952e3440afb48a6b37334ffc236bdffc6909c5a3d1889e",
+        "src/domain/density/densityBands.js#RIVAL_ROLL": "a4ad2f589d833a90fc0f60b976f2057933d2bb664d60966d8ee038330435ba59",
+        "src/domain/density/densityBands.js#CONCENTRATION": "053163b7b6dedb46f48cfa63f4cc7a1165fc2af738ed21bb32d84db32c6387e2",
+        "src/domain/density/densityBands.js#SUCCESSION_CLOCK_TICKS": "cf12a2a87a946f8b7021c7e71b26eeade80c54a186b53cc2106915e286816e4e",
+        "src/domain/density/densityBands.js#SUCCESSION_WEIGHTS": "3b0b37bb4b82c22ce1945bfeaafa72b02d27b1b37990f4dd48a4575090ba4fa8"
+      },
+      "goldenShiftRecord": null
+    }
+  ],
   "unitVocabulary": [
     "ticks",
     "weeks",
@@ -145,6 +174,30 @@
         "DEFICIT_FRACTION_FROM"
       ],
       "note": "the general desk's food-deficit cut, one module-private scalar indexed by roster. It is the only row in this register whose value MIRRORS a second, unregistered literal in the producer — see the row's own note."
+    },
+    {
+      "kind": "tables",
+      "file": "src/data/foodImportRates.js",
+      "exports": [
+        "SIEGE_PRODUCTION_KEPT"
+      ],
+      "note": "T1 (the soak 1000 dry run §4, adopted by the chair 2026-11-04, fe56bddd): the share of the harvest a besieged place keeps; one home read by foodGenerator, foodBalance and defenseFacts."
+    },
+    {
+      "kind": "tables",
+      "file": "src/data/institutionBudget.js",
+      "exports": [
+        "INSTITUTION_BUDGET_ANCHORS"
+      ],
+      "note": "X-46 car 3 (d224a5a0): the seven [population, houses] anchors of the institution budget curve, log-linear between them; the metropolis anchor 120 -> 93 by the chair’s ruling of 2026-11-04 (rung-1 pins unit 3)."
+    },
+    {
+      "kind": "tables",
+      "file": "src/domain/worldPulse/demographicsRates.js",
+      "exports": [
+        "DENSITY_CEILINGS"
+      ],
+      "note": "LANDING-7 ruling R-E8 (2026-11-06): the lit demographic density ceiling by tier, D_tier. Unsuffixed, so the _TUNING glob cannot see it; the demographic roster (DEMOGRAPHIC_TUNING_COVERAGE) already names it."
     }
   ],
   "moduleSide": [
@@ -265,17 +318,76 @@
     },
     "src/domain/density/densityBands.js#CONCENTRATION": {
       "role": null,
-      "status": "draft",
-      "signedAt": null,
-      "unit": null,
+      "status": "signed",
+      "signedAt": 1,
+      "unit": {
+        "min": "mixed",
+        "max": "mixed",
+        "halvings": "count"
+      },
       "band": null,
       "note": ""
     },
     "src/domain/density/densityBands.js#DENSITY_BANDS": {
       "role": null,
-      "status": "draft",
-      "signedAt": null,
-      "unit": null,
+      "status": "signed",
+      "signedAt": 1,
+      "unit": {
+        "thorp.factions.min": "count",
+        "thorp.factions.max": "count",
+        "thorp.mass.min": "people",
+        "thorp.mass.max": "people",
+        "thorp.doubledNiches.min": "count",
+        "thorp.doubledNiches.max": "count",
+        "thorp.suite.min": "people",
+        "thorp.suite.max": "people",
+        "thorp.rivalBonusSeat": "count",
+        "hamlet.factions.min": "count",
+        "hamlet.factions.max": "count",
+        "hamlet.mass.min": "people",
+        "hamlet.mass.max": "people",
+        "hamlet.doubledNiches.min": "count",
+        "hamlet.doubledNiches.max": "count",
+        "hamlet.suite.min": "people",
+        "hamlet.suite.max": "people",
+        "hamlet.rivalBonusSeat": "count",
+        "village.factions.min": "count",
+        "village.factions.max": "count",
+        "village.mass.min": "people",
+        "village.mass.max": "people",
+        "village.doubledNiches.min": "count",
+        "village.doubledNiches.max": "count",
+        "village.suite.min": "people",
+        "village.suite.max": "people",
+        "village.rivalBonusSeat": "count",
+        "town.factions.min": "count",
+        "town.factions.max": "count",
+        "town.mass.min": "people",
+        "town.mass.max": "people",
+        "town.doubledNiches.min": "count",
+        "town.doubledNiches.max": "count",
+        "town.suite.min": "people",
+        "town.suite.max": "people",
+        "town.rivalBonusSeat": "count",
+        "city.factions.min": "count",
+        "city.factions.max": "count",
+        "city.mass.min": "people",
+        "city.mass.max": "people",
+        "city.doubledNiches.min": "count",
+        "city.doubledNiches.max": "count",
+        "city.suite.min": "people",
+        "city.suite.max": "people",
+        "city.rivalBonusSeat": "count",
+        "metropolis.factions.min": "count",
+        "metropolis.factions.max": "count",
+        "metropolis.mass.min": "people",
+        "metropolis.mass.max": "people",
+        "metropolis.doubledNiches.min": "count",
+        "metropolis.doubledNiches.max": "count",
+        "metropolis.suite.min": "people",
+        "metropolis.suite.max": "people",
+        "metropolis.rivalBonusSeat": "count"
+      },
       "band": null,
       "note": ""
     },
@@ -289,41 +401,73 @@
     },
     "src/domain/density/densityBands.js#PARTICULAR_TILTS": {
       "role": null,
-      "status": "draft",
-      "signedAt": null,
-      "unit": null,
+      "status": "signed",
+      "signedAt": 1,
+      "unit": {
+        "prosperity": "multiplier",
+        "connectivity": "multiplier",
+        "war": "multiplier",
+        "corruption": "multiplier",
+        "vacancyTilt": "multiplier",
+        "population": "multiplier"
+      },
       "band": null,
       "note": ""
     },
     "src/domain/density/densityBands.js#RANK_CEILING_BY_TIER": {
       "role": null,
-      "status": "draft",
-      "signedAt": null,
-      "unit": null,
+      "status": "signed",
+      "signedAt": 1,
+      "unit": {
+        "thorp": "rank",
+        "hamlet": "rank",
+        "village": "rank",
+        "town": "rank",
+        "city": "rank",
+        "metropolis": "rank"
+      },
       "band": null,
       "note": ""
     },
     "src/domain/density/densityBands.js#RIVAL_ROLL": {
       "role": null,
-      "status": "draft",
-      "signedAt": null,
-      "unit": null,
+      "status": "signed",
+      "signedAt": 1,
+      "unit": {
+        "base": "probability",
+        "perGap": "probability",
+        "cap": "probability"
+      },
       "band": null,
       "note": ""
     },
     "src/domain/density/densityBands.js#SUCCESSION_CLOCK_TICKS": {
       "role": null,
-      "status": "draft",
-      "signedAt": null,
-      "unit": null,
+      "status": "signed",
+      "signedAt": 1,
+      "unit": {
+        "ruling_seat": "ticks",
+        "faction_head": "ticks"
+      },
       "band": null,
       "note": ""
     },
     "src/domain/density/densityBands.js#SUCCESSION_WEIGHTS": {
       "role": null,
-      "status": "draft",
-      "signedAt": null,
-      "unit": null,
+      "status": "signed",
+      "signedAt": 1,
+      "unit": {
+        "continuityBase": "probability",
+        "perClaimant": "multiplier",
+        "continuityLegitimacy": "multiplier",
+        "transferBase": "probability",
+        "perLegitimacyGap": "multiplier",
+        "transferLegitimacyFloor": "fraction01",
+        "overthrowBase": "probability",
+        "perCoercionGap": "multiplier",
+        "warTilt": "multiplier",
+        "instabilityTilt": "multiplier"
+      },
       "band": null,
       "note": ""
     },
@@ -337,9 +481,15 @@
     },
     "src/domain/density/densityBands.js#VACANCY_WEIGHTS": {
       "role": null,
-      "status": "draft",
-      "signedAt": null,
-      "unit": null,
+      "status": "signed",
+      "signedAt": 1,
+      "unit": {
+        "head": "probability",
+        "middle": "probability",
+        "lowest": "probability",
+        "yearnerGivenHeadVacant": "probability",
+        "cap": "probability"
+      },
       "band": null,
       "note": ""
     },
@@ -634,7 +784,7 @@
       "signedAt": null,
       "unit": null,
       "band": null,
-      "note": ""
+      "note": "LANDING-7 ruling R-E2 (2026-11-06), DRAFT, vetoable by the owner, who wrote that day: \"I also now give all permissions required now and in the future. I also defer all judgement to you.\" cesspitFailurePopulation 2000 -> 777 and highWaterSaturation 12000 -> 5399: re-based to the stamp cuts X-46 car 1 (433289899) moved (town 901 -> 350, city 5001 -> 2250), each figure keeping its ratio to the cut of the tier it sat in (2000 x 350/901, 12000 x 2250/5001). Under the old figures every town read the high-water cause at about zero and a saturated calamity lifted none. Nothing here is signed."
     },
     "src/domain/worldPulse/anticipatedReactions.js#REACTION_TUNING": {
       "role": null,
@@ -2441,6 +2591,68 @@
       },
       "band": null,
       "note": "Lane CRISIS (2026-11-03, docs/DESIGN_CRISIS_TAB.md): the five occasional-role rates of the crisis cast (exploiter, scapegoat, waverer, profiteer, collaborator; the share of a nature's crises that carry the role, chosen by a hash of seed and crisis id, never a draw) and the per-town caps (one each, one temporary person). The rates are the design's proposal, the owner's dials, open for the owner's veto. DRAFT, registered in the minting commit; nothing here is signed or proposed."
+    },
+    "src/data/constants.js#METROPOLIS_ROLL_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "bodyMin": "people",
+        "bodyMax": "people",
+        "tailMax": "people",
+        "thinning": "multiplier",
+        "tailShare": "share"
+      },
+      "band": null,
+      "note": "X-46 car 1b (270c3ed7, the owner’s metropolis curve): flat to bodyMax, thinning exponentially to tailMax; tailShare of metropolis rolls land in the tail. Declared at the rung-1 landing (LANDING-1 door 3)."
+    },
+    "src/data/foodImportRates.js#SIEGE_PRODUCTION_KEPT": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "value": "share"
+      },
+      "band": null,
+      "note": "T1 0.6 -> 0.3 (fe56bddd; the soak 1000 dry run §4, adopted by the chair under the owner’s word of 2026-11-04, a veto point). Declared at the rung-1 landing (LANDING-1 door 3)."
+    },
+    "src/domain/worldPulse/demographicsRates.js#DENSITY_CEILINGS": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "thorp": "people",
+        "hamlet": "people",
+        "village": "people",
+        "town": "people",
+        "city": "people",
+        "metropolis": "people"
+      },
+      "band": null,
+      "note": "LANDING-7 ruling R-E8 (2026-11-06), DRAFT, vetoable by the owner, who wrote that day: \"I also now give all permissions required now and in the future. I also defer all judgement to you.\" THE RULE: each tier's ceiling = its old ceiling / its old band maximum x its STAMP-band maximum (cut(next) - 1, TIER_STAMP_CUTS, X-46 car 1 433289899 and car 2's law). Per tier: thorp 90 / 60 x 24 = 36; hamlet 600 / 400 x 87 = 131; village 1,400 / 900 x 349 = 543; town 7,500 / 5,000 x 2,249 = 3,374; city 38,000 / 25,000 x 14,999 = 22,798; metropolis 140,000 held (its stamp band is open, so there is no maximum to follow). Under the old contiguous bands the stamp band and the roll band were one band, so the rule reproduces the old table. It holds the P5a interlock (a mountain tier without works stays below the next tier's stamp cut; at maximum works every terrain clears it). Nothing here is signed."
+    },
+    "src/data/institutionBudget.js#INSTITUTION_BUDGET_ANCHORS": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "0.0": "people",
+        "0.1": "count",
+        "1.0": "people",
+        "1.1": "count",
+        "2.0": "people",
+        "2.1": "count",
+        "3.0": "people",
+        "3.1": "count",
+        "4.0": "people",
+        "4.1": "count",
+        "5.0": "people",
+        "5.1": "count",
+        "6.0": "people",
+        "6.1": "count"
+      },
+      "band": null,
+      "note": "X-46 car 3 (d224a5a0): seven [population, expected houses] anchors, log-linear between them; the metropolis anchor 120 -> 93 by the chair’s ruling of 2026-11-04 (rung-1 pins unit 3). Its module header already called it registered; declared here at the rung-1 landing (LANDING-1 door 3)."
     }
   },
   "roles": {
@@ -2591,6 +2803,16 @@
         "sites": 1,
         "introducedAt": "754856b125828dc555359d6df0e0632be9636a09",
         "cause": "T13 Car P-prime replaced a bare computed population bonus with the named constant POPULATION_SATURATION, so this file's +1 unregistered-named is the counterpart of its own -1 bare-decimal win in the same commit. The register is scoring the act it exists to encourage; the name earns its register row when the owner signs the estate, not by a landing."
+      },
+      "src/domain/summary/tonightSheet.js": {
+        "sites": 1,
+        "introducedAt": "7d327ca733c55e0158b1bd4061cabfa14dad5366",
+        "cause": "X-51 (ODQ §934.104): the one Tonight sheet names how many hooks it carries (HOOK_COUNT) instead of a bare 3; the register scores the act it exists to encourage, as the T13 Car P′ row did; the name earns its register row when the owner signs the estate"
+      },
+      "src/generators/recordBatteryFindings.js": {
+        "sites": 1,
+        "introducedAt": "b7a5f778e355c38d439cace06939967f22a8cf8d",
+        "cause": "SELF-VOUCH (the eighth formal judgment, record_coherence_battery): the receipt clips a battery finding's quoted evidence at BATTERY_QUOTE_MAX = 160 characters instead of a bare 160; the register scores the act it exists to encourage, as the T13 Car P' and X-51 rows did; the name earns its register row when the owner signs the estate (LANDING-2, the cloud chair's ruling under ODQ §934.105)"
       }
     },
     "bareDecimals": {
@@ -2598,6 +2820,16 @@
         "sites": 2,
         "introducedAt": "754856b125828dc555359d6df0e0632be9636a09",
         "cause": "T13 Car P-prime retired an eager det-math call site by placement, and the two literals 0.6 and 0.4 arrived on a single placement-cure line beside the already-registered GUILD_TUNING table. No value was chosen here: they are the constants the retired call site already computed with, relocated rather than authored."
+      },
+      "src/domain/display/threatAssessment.js": {
+        "sites": 1,
+        "introducedAt": "26ed1b259e5479716644f3dc0999ba0ab7d5799f",
+        "cause": "RUNG1B-F9 unit 1 (the reader contradictions): disasterReadinessScore's fallback weighs the economic score at 0.4 beside the granary and the hospital, the Defense tab's Disasters & Famine reading moved off the old scattered formula onto the one food record; the weight is the formula's own and was relocated with it, not chosen at this landing (LANDING-2, ODQ §934.105)"
+      },
+      "src/generators/density/densityRoll.js": {
+        "sites": 1,
+        "introducedAt": "1c527831aae8f745de94b7c9d87f0e7a59806a8a",
+        "cause": "X-46 car 4 U2 (the population tilt): the settlement's place inside its population band is centred at 0.5 before PARTICULAR_TILTS.population scales it, so a place at the middle of its band tilts by zero; the 0.5 is the band's midpoint, not a tuning value (LANDING-2, ODQ §934.105)"
       }
     }
   },

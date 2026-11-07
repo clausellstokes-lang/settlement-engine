@@ -232,7 +232,20 @@ export const KEYED_COLLECTIONS = Object.freeze({
   'spatialLayout.quarters': 'name',
 });
 
-/** Collections merged AS ONE VALUE (15) — keyless, key-broken, or under a cross-entry total. */
+/** Collections merged AS ONE VALUE (24) — keyless, key-broken, or under a cross-entry total.
+ *  2026-11-06, LANDING-7 A (re-measured over the 63-row stride at the rung-1 landing tip): NINE JOIN.
+ *  ⭐ THE CRISIS CAST (rung-1 record 03, `crisis-derived-cast`) is born on BOTH `stress` and
+ *  `stressors` as `cast.{roles, absent, levers, stakes}`. Each array carries a key that measured
+ *  unique in every observed array (`roles`/`absent`: `role`; `levers`: `institution`; `stakes`:
+ *  `factionId`), but the four are ONE JOINT ASSIGNMENT: a role is either cast in `roles` or named
+ *  in `absent`, never both, so a keyed merge taking one entry from the re-derivation beside settled
+ *  neighbours could cast a role and list it absent at once — the cross-entry reason, here across
+ *  the four arrays. ATOMIC is also the merge's behaviour for an undeclared array (`mergeNode` takes
+ *  it whole from R1), so the row names what the merge already does and moves no output.
+ *  ⭐ `generationCoherenceReceipt.judgments[].findings` (the battery's findings, first observed
+ *  non-empty at this tip; it was CANNOT-CATCH 2's empty path) is KEY-BROKEN: `path` repeats inside
+ *  24 of 63 arrays and `evidence` inside one, so no field is a sound key — the same standing as its
+ *  sibling `judgments[].evidence`. */
 export const ATOMIC_COLLECTIONS = Object.freeze([
   'activeConditions[].causes',
   'config._isolationSupport.paths',
@@ -241,12 +254,21 @@ export const ATOMIC_COLLECTIONS = Object.freeze([
   'economicViability.suggestions',
   'generationCoherenceReceipt.authoredTensions',
   'generationCoherenceReceipt.judgments[].evidence',
+  'generationCoherenceReceipt.judgments[].findings',
   'isolationSupport.paths',
   'powerStructure.factions',
   'resourceAnalysis.gaps',
   'simulationTrace',
   'simulationTrace[].causes',
   'simulationTrace[].downstreamEffects',
+  'stress.cast.absent',
+  'stress.cast.levers',
+  'stress.cast.roles',
+  'stress.cast.stakes',
+  'stressors.cast.absent',
+  'stressors.cast.levers',
+  'stressors.cast.roles',
+  'stressors.cast.stakes',
   'structuralSuggestions',
   'structuralViolations',
 ]);

@@ -207,11 +207,24 @@ describe('bounded final economy -> power reconciliation', () => {
   // Comfortable at all three steps, so the arm could no longer see the stale join. Re-hunted by the arm's own
   // measurement over `econ-power-freshness-<n>` with the same STALE_SEED_CONFIG: 19, 93, 223 and 262 are the hits in
   // 0..399; 19 is the first, and the only one of the first three whose closeout powers equal the final powers.
-  test('econ-power-freshness-19 consumes Moderate, not provisional Comfortable', () => {
+  // 2026-11-04, the window-end pin re-key (REGISTERS seat, the chair's ruling 1): THE SEED MOVED, 19 -> 349. FOOD-1
+  // turned seed 19's provisional prosperity Moderate and FOOD-2 its final prosperity Comfortable; at the composed tip it
+  // reads Comfortable at generatePower, economyReconcilePass AND the closeout, so the stale join is gone (measured).
+  // Re-hunted exactly as before over `econ-power-freshness-<n>` with the same STALE_SEED_CONFIG, every check of this arm
+  // applied: 349, 547, 587, 817, 1238, 1673, 1690, 2038, 2040, 2152, 2242, 2980 and 2994 are the hits in 0..2999; 349
+  // is the first. The case is kept, never retired.
+  // 2026-11-06, LANDING-7 R-E12: THE SEED MOVED, 349 -> 875, and THE LAW HOLDS. X-46 car 3 U10 (751c05c7c, d is the
+  // inverse of realised(d); first-parent stage 90dc22f18) re-deals seed 349's institutions so it reads Comfortable at
+  // generatePower, economyReconcilePass AND the closeout (traced commit by commit inside car 3): there is no stale join
+  // left on it to see. THE CLOSEOUT STILL CONSUMES THE FINAL ECONOMY: over `econ-power-freshness-0..2999` the record's
+  // publicLegitimacy equals computePublicLegitimacy(final economy, final defense label, tier) in 3,000 of 3,000, so no
+  // defect is hiding behind the move. Re-hunted exactly as before, every check of this arm applied: 875, 1151, 1221,
+  // 1238, 1567, 1690, 2038, 2143, 2813 and 2994 are the hits in 0..2999; 875 is the first.
+  test('econ-power-freshness-875 consumes Moderate, not provisional Comfortable', () => {
     const snapshots = {};
     const settlement = generate(
       STALE_SEED_CONFIG,
-      'econ-power-freshness-19',
+      'econ-power-freshness-875',
       {
         onStep(name, ctx) {
           if (
@@ -252,17 +265,19 @@ describe('bounded final economy -> power reconciliation', () => {
     // bounded closeout re-derives from the FINAL economy. Two powers traded one point
     // (Craft Guilds 9 to 8, Merchant City Council 18 to 19); the total still sums to 100
     // and the prosperity-contribution claim above (0, not the stale +8) is unchanged.
-    // Re-pinned 2026-10-01 for the new seed (the urban band, ODQ §934.86): the table below is seed 19's.
+    // Re-pinned 2026-10-01 for the new seed (the urban band, ODQ §934.86), and again 2026-11-04 for seed 349 (the
+    // window-end pin re-key, above): the table below is seed 349's.
+    // Re-pinned 2026-11-06 for seed 875 (LANDING-7 R-E12, above): the table below is seed 875's.
     expect(snapshots.powerEconomyReconcilePass.powers).toEqual({
-      'Merchant oligarchy': 23,
-      'Merchant Guilds': 17,
-      'Religious Authorities': 14,
-      'Military/Guard': 13,
-      'Craft Guilds': 8,
-      "Thieves' Guild": 8,
-      'Arcane Orders': 6,
-      "Newcomers' Settlement": 6,
+      'Religious Authorities': 26,
+      'Military/Guard': 15,
+      'Merchant City Council': 14,
+      'Merchant Guilds': 9,
+      'Craft Guilds': 9,
+      "Thieves' Guild": 9,
+      'Quarantine Council': 8,
       'Noble Families': 5,
+      'Arcane Orders': 5,
     });
     expect(powerByFaction(settlement)).toEqual(
       snapshots.powerEconomyReconcilePass.powers,
@@ -435,6 +450,21 @@ describe('bounded final economy -> power reconciliation', () => {
   });
 });
 
+/**
+ * THE COINCIDENCE PROOF for A1's control (the chair's ruling C1, REGISTERS-4, 2026-11-04): a row whose control
+ * lands on the held share is run ONCE MORE with a second held share (`want + 1`, or `want - 1` when `want + 1` is
+ * the faction's original share). A counterforce that truly preserves the share follows it to the second figure; a
+ * re-rolled roster that hit the first figure by chance does not. The census corpus is unchanged.
+ */
+function controlFollows(changed, held, name, want, record) {
+  const original = factionNamed(record.powerStructure, name)?.power;
+  const want2 = want + 1 === original ? want - 1 : want + 1;
+  const held2 = structuredClone(held);
+  factionNamed(held2, name).power = want2;
+  const control2 = withoutThePinChannel(changed, held2);
+  return factionNamed(control2.powerStructure, name)?.power === want2;
+}
+
 describe('EM-R3 — the power structure is final under a held pin', () => {
   test('A1 — the replay does not run under a held structure: the DM roster survives a changed world', () => {
     const rows = nonDesertCorpus();
@@ -467,7 +497,9 @@ describe('EM-R3 — the power structure is final under a held pin', () => {
         const control = withoutThePinChannel(changed, held);
         if (text(control.powerStructure) !== before) controlOverwritten.push(row._seed);
         const got = factionNamed(control.powerStructure, name);
-        if (got && got.power === want) controlKept.push(row._seed);
+        if (got && got.power === want && controlFollows(changed, held, name, want, baselineFor(row))) {
+          controlKept.push(row._seed);
+        }
       } catch (error) {
         controlThrew.push(`${row._seed}: ${error.message}`);
       }
@@ -485,8 +517,19 @@ describe('EM-R3 — the power structure is final under a held pin', () => {
     // 2026-10-01, the urban band (ODQ §934.86): was 56 overwritten and 1 refused. The rebuilt institution registry
     // moves more desert worlds' rosters (the replay's refusals went 1 -> 10), and the 57 rows still all land in one
     // of the two columns, so the counterforce is as live as before. Re-measured, not predicted.
-    expect(controlOverwritten).toHaveLength(47);
-    expect(controlThrew).toHaveLength(10);
+    // 2026-11-04, the window-end pin re-key (REGISTERS seat): 47 -> 46 overwritten and 10 -> 11 refused, SIZE-3 (the
+    // guild market), traced by stage in DOORS-4 and re-measured: village|forest|golden-master-v3 moved from the first
+    // column to the second; the 57 rows still all land in one of the two.
+    // 2026-11-04, the chair's ruling C1 (REGISTERS-4): from FOOD-2 the control landed on the held share in ONE row,
+    // town|germanic|mountain|random_trade|civilized|gm-seed-c — Landed Gentry 22 halved to 11, and the desert replay
+    // re-rolls the roster and lands that faction on its own 11. A COINCIDENCE, proved by `controlFollows`: held at 12
+    // instead, the control still lands on 11, so the row leaves `controlKept`. The census corpus is unchanged.
+    // 2026-11-06, LANDING-7 R-E12, re-keyed by identity with the stages (this file's own instruments, per compose on the
+    // window line and commit by commit inside car 3): 46/11 -> 48/9 at X-46 car 1 U2 433289899 (the owner's bands), then
+    // X-46 car 3 (90dc22f18) -> 52/5: U3 47829c070 the density factor 57/0, U9 d207c8136 50/7, U10 751c05c7c 52/5. No
+    // later stage moves them. The 57 rows still all land in one of the two columns.
+    expect(controlOverwritten).toHaveLength(52);
+    expect(controlThrew).toHaveLength(5);
     expect(controlKept, 'the counterforce kept the share, so this arm proves nothing').toEqual([]);
   }, 180_000);
 
@@ -576,7 +619,16 @@ describe('EM-R3 — the power structure is final under a held pin', () => {
     // held receipt is already stale against the changed world's economy when the closeout runs,
     // so an assert that was not pin-aware would refuse there. (42 before the urban band, 2026-10-01, ODQ §934.86.)
     // 46 -> 47 at the druid rulings (2026-10-01, ODQ §934.86 addendum 2, J30–J33), measured.
-    expect(staleAtCloseout).toHaveLength(47);
+    // 47 -> 28 at the window-end pin re-key (2026-11-04, REGISTERS seat): 47 -> 41 FOOD-1 (the food base numbers move
+    // the economy the fingerprint reads) -> 28 FOOD-2, traced by stage in DOORS-4; the counterforce is still live.
+    // 28 -> 31 (2026-11-06, LANDING-7 R-E12, by stage): 29 X-46 car 1 U2 433289899; car 3 inside (U3 19, U5 30, U9 31,
+    // U10 30) composed at 90dc22f18 29; 30 rung-1 pins 37b1e746d; 34 F2 REPEAT-ONCE 272af44f3; 31 F6 BUDGET-FLOOR
+    // 6d84aa834. The counterforce is still live.
+    // 31 -> 32 (2026-11-06, LANDING-9-POWER, bisected by stage): lane H's step 18fd6b442, R-H5 66b1407bd alone
+    // (reverse-applied: 31; 8e92c0440, 5f6d243b2 move 0). One row, thorp|germanic|coastal|port: under the desert
+    // change its 2 lb of 32 now read 6% from the rounded pounds (5% before), so foodLabel Secure -> Pressured and
+    // prosperity Moderate -> Poor, and the held coastal receipt is stale at the closeout. Still live.
+    expect(staleAtCloseout).toHaveLength(32);
     expect(staleWitness, 'no stale row was captured, so the refusal below proves nothing')
       .not.toBeNull();
     expect(() => assertPowerEconomyFreshness(
@@ -715,7 +767,13 @@ describe('EM-R3 — the power structure is final under a held pin', () => {
     // arithmetic. What matters is that the replay DOES recompute this receipt when no pin is held.
     // (41 with one refusal before the urban band, 2026-10-01, ODQ §934.86; A1's control counts the same ten.)
     // 36 -> 37 at the druid rulings (2026-10-01, ODQ §934.86 addendum 2, J30–J33), measured.
-    expect(refreshedAway).toHaveLength(37);
+    // 37 -> 21 at the window-end pin re-key (2026-11-04, REGISTERS seat): 37 -> 31 FOOD-1 -> 21 FOOD-2, traced by stage
+    // in DOORS-4 with A3's same cause; the replay still recomputes the receipt when no pin is held.
+    // 21 -> 28 (2026-11-06, LANDING-7 R-E12, A3's same stages): 22 X-46 car 1 U2 433289899; 26 X-46 car 3 90dc22f18;
+    // 27 rung-1 pins 37b1e746d; 31 F2 272af44f3; 28 F6 6d84aa834.
+    // 28 -> 29 (2026-11-06, LANDING-9-POWER, A3's same cause and row): R-H5 66b1407bd at lane H's step 18fd6b442,
+    // thorp|germanic|coastal|port — the desert world's food reads Pressured, so the unpinned replay recomputes it.
+    expect(refreshedAway).toHaveLength(29);
 
     // ANTI-VACUITY (2): the refresher is not inert in general — skip it on an UNPINNED run and
     // the record moves, so the identity above is a property of the HELD path.

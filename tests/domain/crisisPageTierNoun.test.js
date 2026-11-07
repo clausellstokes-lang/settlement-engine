@@ -32,7 +32,7 @@ describe('the crisis page names a thorp a thorp', () => {
     expect(settlement.tier).toBe('thorp');
     const page = composeCrisisPage(settlement);
     expect(page.length).toBeGreaterThan(0);
-    expect(routed(page)).not.toMatch(/\bthe town\b/i);
+    expect(routed(page)).not.toMatch(/\bthe town\b/i); // anchored: page.length > 0 above, and the next line pins the thorp's own event line in this page
     expect(page.map((s) => s.line).join(' ')).toMatch(/a crisis of the thorp itself/);
   });
 
@@ -40,7 +40,7 @@ describe('the crisis page names a thorp a thorp', () => {
     const { settlement } = birth(85);
     expect(settlement.tier).toBe('hamlet');
     const text = routed(composeCrisisPage(settlement));
-    expect(text).not.toMatch(/\bthe town\b/i);
+    expect(text).not.toMatch(/\bthe town\b/i); // anchored: the next line pins the hamlet's own defender reason in this same text
     expect(text).toMatch(/the hamlet's defence/);
   });
 

@@ -61,7 +61,13 @@ describe('generators-domain-6 — timeline variety + budget', () => {
       const names = (s.history?.historicalEvents || []).map((e) => e.name);
       expect(new Set(names).size, `duplicate title in seed dup-${i}: ${names.join(', ')}`).toBe(names.length);
     }
-  });
+    // 80 full metropolis generations sit at the 20s default testTimeout: MEASURED 20,825 ms on
+    // CI run 42324288547 (2026-11-07, load 4.76 over 4 cores; the same tree passed one run
+    // earlier) — a wall-clock false positive of the budget test's class above, not a
+    // correctness fault. The same explicit allowance, carrying the measured figure, as the
+    // ratchet's own instruction asks ("give it an explicit per-test budget carrying the
+    // measured figure — never bank one in the census, never raise the suite-wide testTimeout").
+  }, 120_000);
 
   it('same-seed determinism — identical timelines across two runs', () => {
     const a = gen({ settType: 'metropolis', terrainOverride: 'plains' }, 'det-x');

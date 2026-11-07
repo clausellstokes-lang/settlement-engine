@@ -132,7 +132,13 @@ describe('complete Wizard News address and headline rewrite contract', () => {
     // 2026-10-01 (the urban band + the druid rulings, ODQ §934.86 and its addendum 2; the urban-band chair): 51/2/102/13/89/395/546 → 44/2/88/14/74/385/530,
     // eleven homes out and four in, named at news-voice-contract.mjs's RE-RECORDED block.
     // 2026-10-02 (THE VOICE PROGRAM wave 1): every prospective identity turns indicative; homes, fields and identities hold.
-    expect(baseline.addressTotality.totals).toEqual({ homes: 44, fields: 2, identities: 88, prospectiveIdentities: 0, indicativeIdentities: 88, distinctValues: 392, occurrences: 530 });
+    // 2026-11-04 (REGISTERS-4, the chair's ruling C5; FOOD-1 T1, FOOD-2 T2, SIZE-3 S5, traced by stage): 44/2/88/0/88/392/530 → 45/2/90/0/90/385/522;
+    // the homes that leave and arrive are named at news-voice-contract.mjs's RE-RECORDED block. Every row stays indicative.
+    // 2026-11-04 (LANDING-2b, the chair's ruling 5; the rung-1 window 05897b88d..5dd0f323a, by first-parent sample point): 45/2/90/0/90/385/522 →
+    // 42/2/84/0/84/365/506; ten homes out and seven in, named at news-voice-contract.mjs's RE-RECORDED block. Every row stays indicative.
+    // 2026-11-06 (LANDING-7 R-E10, the density ceilings re-derived from the stamp bands, 20c0139c5 alone): 42/2/84/0/84/365/506 →
+    // 44/2/88/0/88/372/540; one home out and three in, named at news-voice-contract.mjs's RE-RECORDED block. Every row stays indicative.
+    expect(baseline.addressTotality.totals).toEqual({ homes: 44, fields: 2, identities: 88, prospectiveIdentities: 0, indicativeIdentities: 88, distinctValues: 372, occurrences: 540 });
   });
 
   it('A3 freezes both raw lanes and all 26 exact rewrite counts', () => {

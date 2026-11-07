@@ -40,7 +40,7 @@ describe('Disasters & Famine under an active famine', () => {
   it('names the famine first, and nothing in store (the stores are the Food endurance line\'s)', () => {
     const assess = disasterRow(place('famine'))?.assess || '';
     expect(assess.startsWith(`${FAMINE_SENTENCE} `)).toBe(true);
-    expect(assess).not.toMatch(/\bgranar(?:y|ies)\b|\bstores?\b|\bput by\b|\bmonths?\b|\d/i);
+    expect(assess).not.toMatch(/\bgranar(?:y|ies)\b|\bstores?\b|\bput by\b|\bmonths?\b|\d/i); // anchored: the line above proves assess opens with the famine sentence
   });
 });
 
@@ -49,6 +49,7 @@ describe('Disasters & Famine without an active famine', () => {
     const s = place('deficit');
     expect(disasterReadinessScore(s)).toBe(55);
     expect(scoreBand(disasterReadinessScore(s))).toBe('ADEQUATE');
-    expect(disasterRow(s)?.assess).not.toMatch(/famine/i);
+    expect(disasterRow(s)?.assess).toMatch(/\S/);
+    expect(disasterRow(s)?.assess).not.toMatch(/famine/i); // anchored: the line above proves the row's assess is live text
   });
 });

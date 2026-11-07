@@ -469,7 +469,8 @@ pin reds).
 
 #### ✅ MG-4 BUILT AND LANDED 2026-08-03 — tests/lib/instantWorld/mundaneRealmAcceptance.test.js
 
-21 pins, seed `mg4-acceptance`, small/realistic_regional/highIsland, 5 members.
+21 pins, seed `mg4-acceptance-1` (was `mg4-acceptance` until 2026-11-06; see the first
+re-record below), small/realistic_regional/highIsland, 5 members.
 
 **MEASURED.** The mundane realm: every `world_law_magic` certification row green (5/5);
 zero arcane institutions, factions and services by the canonical MG-3h census; zero
@@ -481,10 +482,35 @@ is a measurement of the world and not of an empty generator.
 
 **THE TWIN-WORLD ENVELOPE (MG-LAW-3) HOLDS, AND HOLDS WELL.** All five compared axes,
 mundane vs magical: members 5 vs 5 (1.000), institutions 147 vs 145 (1.014), factions
-26 vs 28 (0.929), services 215 vs 213 (1.009), history events 21 vs 22 (0.955). A mundane
+25 vs 26 (0.962), services 215 vs 213 (1.009), history events 21 vs 22 (0.955). A mundane
 realm is not a thinner realm — it is at or above parity on three of the five axes and inside
 the provisional bands on the other two, and suppression rides the substitution arms exactly
 as the law requires.
+
+⚠️ **RE-KEYED TO SEED `mg4-acceptance-1` AND RE-RECORDED 2026-11-06 (LANDING-7 lane D).** The
+magical twin of `mg4-acceptance` stopped seating an arcane faction, so MG-4.1's faction control
+read 0. Bisected on the harness by first-parent stage a07ee4e0a..8e60cb2a5 to 3420d01e3, the
+lighting of Register VII (X-46 car 4, ODQ §934.104): the faction seats follow the population, the
+twin's 343-soul town seats 3 houses where it seated 7, and 'Arcane Orders' is the one trimmed —
+the owner-lit law, not the MAGIC lane's over-reach (the mundane census is still EMPTY). The old
+seed's census had moved on every axis in the same window (X-46 bands 1264a8152, X-46-3 budget
+90dc22f18, Register VII 3420d01e3). `mg4-acceptance-1` (same knobs) is the first seed of the family
+whose magical twin carries every denied thing: 2 arcane factions, 1 arcane institution, 1 arcane
+service, 1 magical history event. The census: members `5 vs 5` (1.000), institutions `99 vs 102`
+(0.971), factions `12 vs 12` (1.000), services `127 vs 132` (0.962), history events `18 vs 18`
+(1.000) — inside PENDING_BANDS on every axis, so no band is asked to move. Copied from the MG-4.2
+pin's own measured line; this block and the test header were moved in ONE act. The figures in the
+paragraphs above and below are the old seed's, kept as the record.
+
+⚠️ **RE-RECORDED 2026-11-04 BY SIZE-3 (the small-place guild check requires a real market), ONE
+SAME-SEED SHIFT, AND BOTH TWINS MOVE.** factions `26 vs 28` → `25 vs 26` (0.929 → 0.962); every
+other axis holds. The harness bisects it over PR #72's first-parent window to 8cd65978e (the
+compose of lane/doors-2026-11-03), and inside that lane to 43f9c0dcc: a thorp, hamlet or village
+seats its merchant faction only over a real market, so the realm's smallest members stop seating
+a guild that farming alone used to admit (one in the mundane twin, two in the magical). The
+arcane census over the mundane realm is still EMPTY; the ratio improves and stays inside
+PENDING_BANDS, so no band is asked to move. Copied from the MG-4.2 pin's own measured line by
+REGISTERS-7 (F4). This block and the test header were moved in ONE act.
 
 ⚠️ **RE-RECORDED 2026-10-30 BY THE SERVICE RE-MAP (RS-1..RS-13, ODQ §934.101), ONE DECLARED
 SAME-SEED SHIFT, MUNDANE TWIN ONLY.** services `214 vs 213` → `215 vs 213` (1.005 → 1.009); every

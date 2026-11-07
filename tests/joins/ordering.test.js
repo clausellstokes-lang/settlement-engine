@@ -62,10 +62,14 @@ describe('faction-pulled institutions join services / chains / income', () => {
   // deliberately changed draw placement. Each currently produces a surviving
   // faction_boost addition; the assertions below still test semantic joins,
   // never hashes or an exact institution roster.
+  // Refreshed 2026-11-06 (LANDING-7 lane E) from a scan: none of town-0, city-2, metropolis-71 pulls at the
+  // rung-1 landing (the X-46 institution budget thins the optional draws a faction pull rides on). Over
+  // ord-new-<tier>-0..59, towns pull at 7, 14, 18, 25, 33, 41, 48 (one each) and cities at 7, 9; metropolis
+  // 0..9 first pulls at 9. Each case below is the first that pulls in its tier.
   const FB_CASES = [
-    { seed: 'ord-new-town-0',       config: { settType: 'town',       culture: 'germanic', tradeRouteAccess: 'road' } },
-    { seed: 'ord-new-city-2',       config: { settType: 'city',       culture: 'germanic', tradeRouteAccess: 'road' } },
-    { seed: 'ord-new-metropolis-71', config: { settType: 'metropolis', culture: 'germanic', tradeRouteAccess: 'road' } },
+    { seed: 'ord-new-town-7',       config: { settType: 'town',       culture: 'germanic', tradeRouteAccess: 'road' } },
+    { seed: 'ord-new-city-7',       config: { settType: 'city',       culture: 'germanic', tradeRouteAccess: 'road' } },
+    { seed: 'ord-new-metropolis-9', config: { settType: 'metropolis', culture: 'germanic', tradeRouteAccess: 'road' } },
   ];
 
   it('known seeds still produce faction_boost institutions (full catalog defs, traced)', () => {

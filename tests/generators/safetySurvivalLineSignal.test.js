@@ -27,7 +27,7 @@ describe('the survival line reads the final crime signal', () => {
       expect(settlement.powerStructure.factions.some((f) => f.category === 'criminal')).toBe(true);
       const crimes = settlement.economicState.safetyProfile.crimeTypes;
       expect(crimes.find((c) => c.type === 'Survival crime')?.desc).toBe(DESPERATION);
-      expect(crimes.map((c) => c.desc).join(' ')).not.toMatch(CLAUSE);
+      expect(crimes.map((c) => c.desc).join(' ')).not.toMatch(CLAUSE); // anchored: the line above pins the survival desc in this same list
       expect(crimes.filter((c) => c.desc === DESPERATION)).toHaveLength(1);
     });
   }

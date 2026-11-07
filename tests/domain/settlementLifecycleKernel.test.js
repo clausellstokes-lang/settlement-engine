@@ -23,6 +23,7 @@
  */
 import { describe, expect, it } from 'vitest';
 
+import { POPULATION_RANGES } from '../../src/data/constants.js';
 import { createPRNG } from '../../src/kernel/prng.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { appendWizardNewsEntries } from '../../src/domain/region/index.js';
@@ -207,10 +208,14 @@ describe('seeding (§1: §H-loaded, integrator + cooldown, conserved at birth)',
   });
 
   it('caps by parent tier are enforced and DEFERRAL-VISIBLE when armed at cap', () => {
+    // The steadings hold 8 each, not 20: under the owner's bands (X-46 car 1, 433289899) two 20-soul
+    // thorps sum past the hamlet stamp cut (TIER_STAMP_CUTS.hamlet 25) and the convergence fold merges
+    // them into one hamlet of 42, which takes the ledger under its cap. 8 + 8 (+ the tick's inflow)
+    // stays a pair of thorps, so the cap arm is measured at the cap it claims.
     const steadings = {};
     for (let i = 0; i < T.SATELLITE_CAPS.town; i += 1) {
       steadings[`steading.a.${i}`] = {
-        id: `steading.a.${i}`, name: `S${i}`, parentId: 'a', tier: 'thorp', population: 20,
+        id: `steading.a.${i}`, name: `S${i}`, parentId: 'a', tier: 'thorp', population: 8,
         foundedTick: 100, provenance: 'growth', orbit: i + 2, inflow: 20, backing01: 0.5, history: [],
       };
     }
@@ -236,11 +241,13 @@ describe('seeding (§1: §H-loaded, integrator + cooldown, conserved at birth)',
   it('the founding never drags the parent below its own tier floor', () => {
     // A town sitting AT its floor has no headroom — no founding, even fully armed.
     const { worldState, updates } = drive({
-      settlements: { a: town('a', { population: 905, conditions: [boomCond] }) },
+      // The floor is the town ROLL band's minimum (the kernel's parentMin, an own-floor reader); X-46 car 1
+      // (433289899) moved it 901 -> 300, so the at-floor town holds 304, not 905.
+      settlements: { a: town('a', { population: POPULATION_RANGES.town.min + 4, conditions: [boomCond] }) },
       ticks: 1, ledger: { a: { seedAcc: 0.9, steadings: {} } },
     });
     expect(satellitesOf(worldState.spatialLedgers?.satellites || null, 'a').length).toBe(0);
-    expect(updates[0].settlement.population).toBe(905);
+    expect(updates[0].settlement.population).toBe(POPULATION_RANGES.town.min + 4);
   });
 });
 
