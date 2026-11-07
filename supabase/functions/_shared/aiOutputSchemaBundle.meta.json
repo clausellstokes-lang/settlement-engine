@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-11-07T10:03:58.300Z",
+  "generatedAt": "2026-11-07T14:48:32.458Z",
   "entry": "src/domain/aiOutputSchema.js",
-  "sourceHash": "cbb5078e243c07ba",
+  "sourceHash": "d0c39bbc57f60d64",
   "inputs": [
     "node_modules/immer/dist/immer.mjs",
     "node_modules/seedrandom/seedrandom.js",
@@ -58,6 +58,8 @@
     "src/domain/npc/npcFacetContract.js",
     "src/domain/npc/npcOps.js",
     "src/domain/npcProfile.js",
+    "src/domain/people/cardPowers.js",
+    "src/domain/people/membership.js",
     "src/domain/prosperityRank.js",
     "src/domain/region/deriveRegionalState.js",
     "src/domain/region/goodsCatalog.js",

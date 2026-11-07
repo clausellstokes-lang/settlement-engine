@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-11-07T10:03:58.455Z",
+  "generatedAt": "2026-11-07T14:48:32.597Z",
   "entry": "src/engine/serviceEntry.js",
-  "sourceHash": "3ef5dfdf4b5f4636",
-  "engineVersion": "e63515a26068d92f",
-  "builtFromCommit": "420826f3ac484b81316ef8882a1ea53e14ebd7d0",
+  "sourceHash": "4e07646f064f1a35",
+  "engineVersion": "f97b39340e6e7a08",
+  "builtFromCommit": "06b83a03c1003052eb60f6cf24378e3e998896d1",
   "inputs": [
     "node_modules/seedrandom/seedrandom.js",
     "src/data/arrivalProse.js",
@@ -135,6 +135,7 @@
     "src/domain/marketInstitution.js",
     "src/domain/migrationDirection.js",
     "src/domain/normalizeSettlement.js",
+    "src/domain/people/cardPowers.js",
     "src/domain/people/membership.js",
     "src/domain/priorityBands.js",
     "src/domain/prosperityRank.js",
@@ -228,8 +229,10 @@
     "src/generators/people/castPowers.js",
     "src/generators/people/legacyShim.js",
     "src/generators/people/mintTitles.js",
+    "src/generators/people/personHooks.js",
     "src/generators/people/poolMap.js",
     "src/generators/people/representatives.js",
+    "src/generators/people/ties.js",
     "src/generators/pipeline.js",
     "src/generators/power/conflicts.js",
     "src/generators/power/economyReconciliation.js",
@@ -298,6 +301,7 @@
     "src/lib/generationProtocol.js",
     "src/lib/narrativeMutations.js",
     "src/lib/prebuiltResourceChains.js",
+    "src/lib/proseSeams.js",
     "src/workers/generationRequest.js"
   ]
 }
