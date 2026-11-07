@@ -479,6 +479,13 @@ export const DOSSIER_MOUNTS = Object.freeze([
   Object.freeze({
     mount: 'history.record', tab: 'history', desk: 'general', blockId: 'DS-GEN-16', rung: 'glance',
   }),
+  // W5 construction 2026-11-07 (WIRING-RULINGS R-W1; WAVE-RULINGS item 10, "a line that prints
+  // nowhere is not construction"): DS-GEN-16's ONE speaking position, beneath the events list —
+  // the record's past-to-present link (`legacyAnnotations[]`) and the recent blow still in
+  // living memory (`siegeNarrative`). The record line above stays a glance (H3).
+  Object.freeze({
+    mount: 'history.legacy', tab: 'history', desk: 'general', blockId: 'DS-GEN-16', rung: 'sentence',
+  }),
   Object.freeze({
     mount: 'viability.verdict', tab: 'viability', desk: 'general', blockId: 'DS-GEN-11', rung: 'sentence',
   }),

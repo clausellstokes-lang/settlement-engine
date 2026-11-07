@@ -105,7 +105,7 @@ describe('the four negative controls and the positive one (MOVE-GRAMMAR §4.4, a
       if (new Set(pool.map((v) => segmentCount(v.text))).size === 1) uniformSegments += 1;
       if (new Set(pool.map((v) => openerOf(v.text))).size < pool.length) repeatedOpener += 1;
     }
-    expect(cells.size).toBe(709);
+    expect(cells.size).toBe(714);
     // SITTING B.3 / Part B §14: 407 of 708, not the 408 MOVE-GRAMMAR §0 first printed; 410 / 103 of 709 at the
     // rung-1 landing (LANDING-1: F9 READER-CONTRADICTIONS +1 pool, F10 WALLS-WORD +41 twin variants).
     // 410 / 103 -> 406 / 114 at the rung-2 landing, measured per commit on the leaves (parent ->
@@ -117,10 +117,13 @@ describe('the four negative controls and the positive one (MOVE-GRAMMAR §4.4, a
     // 405 / 114 -> 404 / 114 at the chair's 06:5x DS-CND-1 boom line (ODQ §934.105): boom v4 is one sentence beside v1-v3's two, so the pool is no
     // longer uniform; its opener ("it is") is new to the pool (the ruled "{settlement} is …" repeated
     // v2's opener and read 115, so the line opens "It is a good stretch for {settlement}").
-    expect(uniformSegments).toBe(404);
+    // 404 / 114 -> 409 / 114 at W5 HIS construction (2026-11-07, ODQ §934.105): DS-GEN-16 gains five
+    // two-variant pools (LIVING-MEMORY, LEGACY-*), each variant one sentence, so each pool is uniform;
+    // no opener repeats inside a pool.
+    expect(uniformSegments).toBe(409);
     expect(repeatedOpener).toBe(114);
-    expect(uniformSegments / cells.size).toBeCloseTo(0.570, 3);
-    expect(repeatedOpener / cells.size).toBeCloseTo(0.161, 3);
+    expect(uniformSegments / cells.size).toBeCloseTo(0.573, 3);
+    expect(repeatedOpener / cells.size).toBeCloseTo(0.160, 3);
   });
 
   it('CONTROL 4, SECOND HALF — the R1 leaves RED ON ARM E, which is what the control actually says', async () => {
@@ -140,11 +143,11 @@ describe('the four negative controls and the positive one (MOVE-GRAMMAR §4.4, a
     expect(spreadFails.map((f) => f.detail).join(' ')).toMatch(/repeatedOpener/);
     // The arm reads the SAME pools the calibration counted, to the unit.
     const figures = /** @type {any} */ (report.figures.spread);
-    expect(figures.pools).toBe(709);
+    expect(figures.pools).toBe(714);
     // 406 -> 405 by the same cause as the calibration above (the chair's 06:5x rewording of DS-GEN-17 v3);
     // 405 -> 404 at the chair's 06:5x DS-CND-1 boom line (ODQ §934.105), likewise.
-    expect(Math.round(figures.uniformSegmentShare * 709)).toBe(404);
-    expect(Math.round(figures.repeatedOpenerShare * 709)).toBe(114);
+    expect(Math.round(figures.uniformSegmentShare * 714)).toBe(409);
+    expect(Math.round(figures.repeatedOpenerShare * 714)).toBe(114);
   });
 
   it('ARM E is NOT-EXECUTABLE without spread ceilings — never a pass on a number it invented', () => {
@@ -681,7 +684,7 @@ describe('the walk over the shipped corpus — REPORTED, and the arms that canno
     // Every variant is untagged today, and the walker must say so rather than scoring silence
     // as agreement.
     expect(level1.untagged).toBe(corpus.length);
-    expect(spread.pools).toBe(787);
+    expect(spread.pools).toBe(792);
     // The walk must find SOMETHING and must not find everything.
     expect(report.fails.length).toBeGreaterThan(0);
     expect(report.fails.length).toBeLessThan(corpus.length);

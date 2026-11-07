@@ -67,8 +67,8 @@
       "ceilingGzip": 87513
     },
     "src/data/dossierStateProse/general.generated.js": {
-      "raw": 272147,
-      "gzip": 36445,
+      "raw": 276711,
+      "gzip": 36900,
       "ceilingRaw": 796761,
       "ceilingGzip": 177058
     },
@@ -307,6 +307,14 @@
       "toRaw": 94103,
       "gzipAfter": 15113,
       "reason": "+341 B raw (gzip level 9: 15,067 -> 15,113), one commit: DS-CND-1 ARCHETYPE: boom gains v4 `[street · crisis: any]`, reading only the archetype and the name, so a keyed boom has a printable line under any crisis (v1-v3 each deny hunger, threat and indebted). Projected through `node scripts/generate-dossier-state-prose.mjs`; `--check` exit 0."
+    },
+    {
+      "car": "W5 HIS construction 2026-11-07 (WIRING-RULINGS R-W1, ODQ §934.105): DS-GEN-16's living-memory and legacy lines said",
+      "leaf": "src/data/dossierStateProse/general.generated.js",
+      "fromRaw": 272147,
+      "toRaw": 276711,
+      "gzipAfter": 36900,
+      "reason": "+4564 B raw (gzip level 9: 36,445 -> 36,900), one commit: DS-GEN-16 gains LIVING-MEMORY and four LEGACY-* pools, two variants each (10 variants), reading history.siegeNarrative and history.legacyAnnotations[]; projected through `node scripts/generate-dossier-state-prose.mjs`; `--check` exit 0."
     }
   ],
   "ceilingTransfersNewLeaves": [

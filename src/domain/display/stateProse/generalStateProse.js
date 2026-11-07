@@ -671,6 +671,46 @@ export function eventRecordPoolKey(events) {
 
 
 /**
+ * DS-GEN-16's LEGACY pool (W5 construction, 2026-11-07: "past-to-present link prose said").
+ * The record's own link from a past event to the present is `history.legacyAnnotations[]`,
+ * written once at birth by `legacyGenerator.js :: deriveLegacyAnnotations` and DATED there
+ * ("As of the founding survey, …", W0 cause 5). That text is machinery (it says
+ * "structurally embedded"), so this desk never prints it: it reads WHICH of the generator's
+ * three relationships the top annotation states — the generator's own fixed clauses,
+ * matched here verbatim — and says that relationship plainly. A row whose clause matches
+ * none of the three is still a link, and draws the plain LINKED line.
+ * @param {unknown} annotations @returns {{key: string, row: {eventName?: unknown, yearsAgo?: unknown}}|null}
+ */
+export function legacyPoolKey(annotations) {
+  const top = Array.isArray(annotations) ? annotations[0] : null;
+  const said = text(/** @type {{annotation?: unknown}} */ (top)?.annotation);
+  if (!top || !said) return null;
+  const key = / created pressure that has not been fully resolved: /.test(said) ? 'LEGACY-UNRESOLVED'
+    : / was a disruption the settlement has since moved through: /.test(said) ? 'LEGACY-RECOVERED'
+      : / established conditions that have since shifted: /.test(said) ? 'LEGACY-SHIFTED'
+        : 'LEGACY-LINKED';
+  return CORPUS['DS-GEN-16'].pools[key] ? { key, row: top } : null;
+}
+
+/**
+ * DS-GEN-16's LIVING-MEMORY pool (W5 construction, 2026-11-07: "recent blow in living memory
+ * said"). `history.siegeNarrative` is the generator's frozen pairing of a recent political
+ * or disaster event with the town's first current tension
+ * (`siegeCapability.js :: generateSiegeCapability`); it exists only when recent history
+ * supports it. The event it names is read back from its own fixed opening, so the
+ * `{calamity}` slot and the pairing name the same blow; a town with no current tension is
+ * refused, because the line speaks of the quarrels the town is having now.
+ * @param {{siegeNarrative?: unknown, currentTensions?: unknown}} hist @returns {string|null}
+ */
+export function livingMemoryEventName(hist) {
+  const said = text(hist?.siegeNarrative);
+  const tensions = Array.isArray(hist?.currentTensions) ? hist.currentTensions : [];
+  const m = /^The (.+?) is still present in living memory: /.exec(said);
+  if (!m || tensions.length === 0 || !CORPUS['DS-GEN-16'].pools['LIVING-MEMORY']) return null;
+  return `The ${m[1]}`;
+}
+
+/**
  * The event DS-GEN-16's `{calamity}` names — the one the pool key was decided by, so the
  * sentence and the word inside it describe the same blow. Null where the key is about an
  * absence, which is exactly where no variant names the slot.
@@ -1651,6 +1691,7 @@ export function populationDirectionPoolKey(trend, tradeRouteAccess) {
  *   identity: ReadonlyArray<LegibilityRung|null>,
  *   founded: LegibilityRung|null,
  *   record: LegibilityRung|null,
+ *   legacy: ReadonlyArray<LegibilityRung|null>,
  * }>, viability: Readonly<{
  *   verdict: ReadonlyArray<LegibilityRung|null>,
  * }>, hooks: Readonly<{
@@ -1683,6 +1724,7 @@ export const GENERAL_STATE_PROSE_SILENT = Object.freeze({
     identity: Object.freeze([]),
     founded: null,
     record: null,
+    legacy: Object.freeze([]),
   }),
   viability: Object.freeze({ verdict: Object.freeze([]) }),
   hooks: Object.freeze({ framing: Object.freeze([]) }),
@@ -1875,6 +1917,15 @@ export function generalStateProse(settlement, readings = {}, options = {}) {
   ].filter((l) => l && l.sentence));
 
   const calamityRow = recordCalamityEvent(events);
+  const legacy = legacyPoolKey(hist.legacyAnnotations);
+  const livingMemoryName = livingMemoryEventName(hist);
+  /** @param {string} key @param {Record<string, unknown>} extra */
+  const legacyLine = (key, extra) => legibilityRung('', composeStateProse(CORPUS, 'DS-GEN-16', {
+    ...options,
+    spineKey: key,
+    candidates: generalStateProseCandidates('DS-GEN-16', readings),
+    slots: { ...slots, ...extra },
+  }), []);
   const recordKey = events.length > 0 ? eventRecordPoolKey(events) : null;
 
   // ── DS-GEN-18 ──────────────────────────────────────────────────────────────────────
@@ -2079,6 +2130,15 @@ export function generalStateProse(settlement, readings = {}, options = {}) {
           },
         }), [])
         : null,
+      // W5 construction 2026-11-07: the past-to-present link and the recent blow in living
+      // memory, at DS-GEN-16's one speaking position (`history.legacy`).
+      legacy: Object.freeze([
+        livingMemoryName ? legacyLine('LIVING-MEMORY', { calamity: calamityFill(livingMemoryName) }) : null,
+        legacy ? legacyLine(legacy.key, {
+          calamity: calamityFill(text(legacy.row.eventName)),
+          timeband_age: timebandAgeFill(legacy.row.yearsAgo),
+        }) : null,
+      ].filter((line) => line && line.sentence)),
     }),
   });
 }

@@ -6252,6 +6252,26 @@ compass word, no real-world place, no named analogy.*
 1. `[counterforce]` No great blow stands on {settlement}'s record; the town's history is the quieter kind, and its evenness is the inheritance.
 2. `[ledger · crisis: any]` {settlement}'s books record no disaster worth the word, which is itself a fact about the place worth recording.
 
+**`LIVING-MEMORY`** {colour}
+1. `[street]` People in {settlement} still remember the {calamity}, and it weighs on the quarrels the town is having now.
+2. `[visitor]` Ask about the town's present quarrels in {settlement} and the {calamity} comes up before long.
+
+**`LEGACY-UNRESOLVED`** {colour}
+1. `[ledger]` The {calamity}, {timeband_age}, left a legacy of trouble in {settlement} that has never been fully put right.
+2. `[street]` Nobody in {settlement} has finished putting right the legacy of the {calamity}, {timeband_age}.
+
+**`LEGACY-RECOVERED`** {colour}
+1. `[ledger]` {settlement} came through the {calamity}, {timeband_age}; its legacy is what the town built in answer to it, and that still stands.
+2. `[street]` The legacy of the {calamity}, {timeband_age}, is much of what stands in {settlement} now: it was built in the years after.
+
+**`LEGACY-SHIFTED`** {colour}
+1. `[ledger]` What {settlement} settled in the wake of the {calamity}, {timeband_age}, is a legacy that still shapes the town, though much has changed since.
+2. `[street]` {settlement} still carries the shape it took after the {calamity}, {timeband_age}; that legacy holds, though the times have moved on.
+
+**`LEGACY-LINKED`** {colour}
+1. `[ledger]` The legacy of the {calamity}, {timeband_age}, still bears on how {settlement} lives.
+2. `[street]` {settlement} still lives with the legacy of the {calamity}, {timeband_age}.
+
 ---
 
 **CT-2 SECTION ENDS.** Three blocks, fifteen pools, thirty-seven authored variants:

@@ -2,13 +2,13 @@
   "schema": "wiring-census/1",
   "stamp": {
     "files": {
-      "src/domain/display/stateProse/generalStateProse.js": "a1d82168bffd08d6aec168b0fd51b4b7ed21fbf67c6f30b2aec8832064e29267",
+      "src/domain/display/stateProse/generalStateProse.js": "1ef381bd8c66d75b1d7eaf01b3b4846a2d0a21bbd2b381b8d45c1159374d64f7",
       "src/domain/display/stateProse/powerStateProse.js": "11c913c83fa1e88d5f75d5415f8723936acf9aae37d6465a87b1ad3cb4d21e7b",
       "src/domain/display/stateProse/economyStateProse.js": "d2bfe8cafa209803f26c83fde83534a7ba45230010ff87c33bd4ac52d831b924",
       "src/domain/display/stateProse/defenseStateProse.js": "6ebbed0ca4e9125607fde9443b16d4da328cc1481f711f25a22b5d384cec3ce7",
       "src/domain/display/stateProse/stressorsStateProse.js": "13c7f383882acf5bb48267feb4302ced6b9798cec2575470903f1aa88205600d",
       "src/domain/display/stateProse/warFaithStateProse.js": "f1972add38589ee55369fb06e4a5e0a8f90c4d966bf703d4367a3cdca52d6aac",
-      "src/domain/display/stateProse/dossierMounts.js": "b8466ea80b09292247baf73e1ab1660c6863362cd623b3b98e002e5ef9fb1f57"
+      "src/domain/display/stateProse/dossierMounts.js": "3f279aae77f067b568e51b1b8d243e9486c3ebeda7743babe0ba9576d07e265f"
     },
     "candidateLeaves": {
       "src/domain/display/stateProse/defenseStateProseCandidates.js": "b4833f55274b040dc5627b0eedafe7f98f508cec73ac829ce213adabe8c3e96c",
@@ -21,15 +21,15 @@
     "producerIndexFiles": 1300
   },
   "totals": {
-    "pools": 709,
+    "pools": 714,
     "blocks": 68,
-    "variants": 2344,
-    "resolved": 341,
-    "unresolved": 368,
+    "variants": 2354,
+    "resolved": 345,
+    "unresolved": 369,
     "resolvedWithPredicate": 208,
     "resolvedWithCleanPredicate": 208,
-    "keyFunctions": 118,
-    "keyFunctionsConsulted": 118,
+    "keyFunctions": 119,
+    "keyFunctionsConsulted": 119,
     "keyTables": 33,
     "slotless": 65,
     "bagless": 140,
@@ -37,8 +37,8 @@
     "syntheticTableFields": 100,
     "tiers": {
       "MISSING": 34,
-      "THIN": 482,
-      "COVERED": 227,
+      "THIN": 485,
+      "COVERED": 229,
       "MISSING-AT-TIER": 45
     },
     "tierSilences": 352,
@@ -47,18 +47,18 @@
     "narrowedRows": 0,
     "covertRows": 4,
     "objectClassed": 99,
-    "mountedRows": 567,
+    "mountedRows": 572,
     "absent": {
-      "measured": 373,
+      "measured": 377,
       "default": 3,
       "not-produced": 61,
       "method-call": 18
     },
     "zeroK": 49,
-    "kExecutable": 341,
-    "kNotExecutable": 368,
-    "branchGrainRows": 311,
-    "functionGrainRows": 398,
+    "kExecutable": 345,
+    "kNotExecutable": 369,
+    "branchGrainRows": 315,
+    "functionGrainRows": 399,
     "customReachableRows": 21,
     "relationRows": 165,
     "relationRowsJoinable": 0,
@@ -120,10 +120,10 @@
     ],
     "sourceLicensedRows": 114,
     "sourceOfficeRows": 3,
-    "sourceUnresolvedRows": 592,
+    "sourceUnresolvedRows": 597,
     "sourceTwoSourceRows": 10,
     "modifierRows": 0,
-    "declaredColumnRows": 709,
+    "declaredColumnRows": 714,
     "tablePools": 50
   },
   "rows": [
@@ -25148,6 +25148,7 @@
       "objectClasses": [],
       "objectClass": null,
       "sites": [
+        "history.legacy",
         "history.record"
       ],
       "attach": [],
@@ -25208,6 +25209,7 @@
       "objectClasses": [],
       "objectClass": null,
       "sites": [
+        "history.legacy",
         "history.record"
       ],
       "attach": [],
@@ -25266,6 +25268,7 @@
       "objectClasses": [],
       "objectClass": null,
       "sites": [
+        "history.legacy",
         "history.record"
       ],
       "attach": [],
@@ -25325,6 +25328,7 @@
       "objectClasses": [],
       "objectClass": null,
       "sites": [
+        "history.legacy",
         "history.record"
       ],
       "attach": [],
@@ -25383,6 +25387,7 @@
       "objectClasses": [],
       "objectClass": null,
       "sites": [
+        "history.legacy",
         "history.record"
       ],
       "attach": [],
@@ -25406,6 +25411,310 @@
       },
       "undeclared": 0,
       "crisisScoped": true
+    },
+    {
+      "block": "DS-GEN-16",
+      "pool": "LIVING-MEMORY",
+      "slotsFilled": [
+        "calamity",
+        "settlement",
+        "timeband_age"
+      ],
+      "slotsNamed": [
+        "calamity",
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 2,
+      "grammars": 2,
+      "predicate": [],
+      "branchReads": [],
+      "fieldsRead": [],
+      "status": "WIRING-UNRESOLVED",
+      "reason": "no pool-key function returns this key as a literal, no template of one binds it, and no module-level key table names it",
+      "keyFunction": "",
+      "rung": "none",
+      "reads": [],
+      "readsGrain": "function",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "history.legacy",
+        "history.record"
+      ],
+      "attach": [],
+      "k": null,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {},
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-GEN-16",
+      "pool": "LEGACY-UNRESOLVED",
+      "slotsFilled": [
+        "calamity",
+        "settlement",
+        "timeband_age"
+      ],
+      "slotsNamed": [
+        "calamity",
+        "settlement",
+        "timeband_age"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 2,
+      "grammars": 1,
+      "predicate": [],
+      "branchReads": [
+        "hist.legacyAnnotations"
+      ],
+      "fieldsRead": [
+        "hist.legacyAnnotations"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "legacyPoolKey",
+      "rung": "literal",
+      "reads": [
+        "hist.legacyAnnotations"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "hist.legacyAnnotations": "measured"
+      },
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "history.legacy",
+        "history.record"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "hist.legacyAnnotations": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-GEN-16",
+      "pool": "LEGACY-RECOVERED",
+      "slotsFilled": [
+        "calamity",
+        "settlement",
+        "timeband_age"
+      ],
+      "slotsNamed": [
+        "calamity",
+        "settlement",
+        "timeband_age"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 2,
+      "grammars": 2,
+      "predicate": [],
+      "branchReads": [
+        "hist.legacyAnnotations"
+      ],
+      "fieldsRead": [
+        "hist.legacyAnnotations"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "legacyPoolKey",
+      "rung": "literal",
+      "reads": [
+        "hist.legacyAnnotations"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "hist.legacyAnnotations": "measured"
+      },
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "history.legacy",
+        "history.record"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "hist.legacyAnnotations": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-GEN-16",
+      "pool": "LEGACY-SHIFTED",
+      "slotsFilled": [
+        "calamity",
+        "settlement",
+        "timeband_age"
+      ],
+      "slotsNamed": [
+        "calamity",
+        "settlement",
+        "timeband_age"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 2,
+      "grammars": 1,
+      "predicate": [],
+      "branchReads": [
+        "hist.legacyAnnotations"
+      ],
+      "fieldsRead": [
+        "hist.legacyAnnotations"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "legacyPoolKey",
+      "rung": "literal",
+      "reads": [
+        "hist.legacyAnnotations"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "hist.legacyAnnotations": "measured"
+      },
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "history.legacy",
+        "history.record"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "hist.legacyAnnotations": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-GEN-16",
+      "pool": "LEGACY-LINKED",
+      "slotsFilled": [
+        "calamity",
+        "settlement",
+        "timeband_age"
+      ],
+      "slotsNamed": [
+        "calamity",
+        "settlement",
+        "timeband_age"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 2,
+      "grammars": 1,
+      "predicate": [],
+      "branchReads": [
+        "hist.legacyAnnotations"
+      ],
+      "fieldsRead": [
+        "hist.legacyAnnotations"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "legacyPoolKey",
+      "rung": "literal",
+      "reads": [
+        "hist.legacyAnnotations"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "hist.legacyAnnotations": "measured"
+      },
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "history.legacy",
+        "history.record"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "hist.legacyAnnotations": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
     },
     {
       "block": "DS-GEN-17",
@@ -44804,7 +45113,7 @@
       },
       {
         "field": "events",
-        "mountsSpine": 1,
+        "mountsSpine": 2,
         "mountsModifier": 0,
         "spineTabs": [
           "history"
@@ -44895,7 +45204,7 @@
       },
       {
         "field": "hist",
-        "mountsSpine": 1,
+        "mountsSpine": 3,
         "mountsModifier": 0,
         "spineTabs": [
           "history"
@@ -45087,13 +45396,14 @@
       {
         "field": "readings.activeChains",
         "mountsSpine": 1,
-        "mountsModifier": 20,
+        "mountsModifier": 21,
         "spineTabs": [
           "economics"
         ],
         "modifierMounts": [
           "history.founded",
           "history.identity",
+          "history.legacy",
           "history.record",
           "overview.activeConditions",
           "overview.conflicts",
@@ -45117,7 +45427,7 @@
       {
         "field": "readings.ancientRuin",
         "mountsSpine": 0,
-        "mountsModifier": 30,
+        "mountsModifier": 31,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -45132,6 +45442,7 @@
           "economics.tradeFlow",
           "history.founded",
           "history.identity",
+          "history.legacy",
           "history.record",
           "overview.activeConditions",
           "overview.conflicts",
@@ -45177,7 +45488,7 @@
       {
         "field": "readings.clockIds",
         "mountsSpine": 0,
-        "mountsModifier": 30,
+        "mountsModifier": 31,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -45192,6 +45503,7 @@
           "economics.tradeFlow",
           "history.founded",
           "history.identity",
+          "history.legacy",
           "history.record",
           "overview.activeConditions",
           "overview.conflicts",
@@ -45215,7 +45527,7 @@
       {
         "field": "readings.coherenceNotes",
         "mountsSpine": 0,
-        "mountsModifier": 30,
+        "mountsModifier": 31,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -45230,6 +45542,7 @@
           "economics.tradeFlow",
           "history.founded",
           "history.identity",
+          "history.legacy",
           "history.record",
           "overview.activeConditions",
           "overview.conflicts",
@@ -45275,7 +45588,7 @@
       {
         "field": "readings.conflicts",
         "mountsSpine": 0,
-        "mountsModifier": 30,
+        "mountsModifier": 31,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -45290,6 +45603,7 @@
           "economics.tradeFlow",
           "history.founded",
           "history.identity",
+          "history.legacy",
           "history.record",
           "overview.activeConditions",
           "overview.conflicts",
@@ -45328,7 +45642,7 @@
       {
         "field": "readings.criticalIssueCount",
         "mountsSpine": 1,
-        "mountsModifier": 28,
+        "mountsModifier": 29,
         "spineTabs": [
           "viability"
         ],
@@ -45345,6 +45659,7 @@
           "economics.tradeFlow",
           "history.founded",
           "history.identity",
+          "history.legacy",
           "history.record",
           "overview.activeConditions",
           "overview.conflicts",
@@ -45366,7 +45681,7 @@
       {
         "field": "readings.crossEngagements",
         "mountsSpine": 0,
-        "mountsModifier": 30,
+        "mountsModifier": 31,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -45381,6 +45696,7 @@
           "economics.tradeFlow",
           "history.founded",
           "history.identity",
+          "history.legacy",
           "history.record",
           "overview.activeConditions",
           "overview.conflicts",
@@ -45404,13 +45720,14 @@
       {
         "field": "readings.exploitation",
         "mountsSpine": 1,
-        "mountsModifier": 20,
+        "mountsModifier": 21,
         "spineTabs": [
           "economics"
         ],
         "modifierMounts": [
           "history.founded",
           "history.identity",
+          "history.legacy",
           "history.record",
           "overview.activeConditions",
           "overview.conflicts",
@@ -45473,7 +45790,7 @@
       {
         "field": "readings.foodBalance",
         "mountsSpine": 0,
-        "mountsModifier": 32,
+        "mountsModifier": 33,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -45488,6 +45805,7 @@
           "economics.tradeFlow",
           "history.founded",
           "history.identity",
+          "history.legacy",
           "history.record",
           "overview.activeConditions",
           "overview.conflicts",
@@ -45513,7 +45831,7 @@
       {
         "field": "readings.foodSecurityLabel",
         "mountsSpine": 0,
-        "mountsModifier": 30,
+        "mountsModifier": 31,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -45528,6 +45846,7 @@
           "economics.tradeFlow",
           "history.founded",
           "history.identity",
+          "history.legacy",
           "history.record",
           "overview.activeConditions",
           "overview.conflicts",
@@ -45551,7 +45870,7 @@
       {
         "field": "readings.govFaction",
         "mountsSpine": 0,
-        "mountsModifier": 30,
+        "mountsModifier": 31,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -45566,6 +45885,7 @@
           "economics.tradeFlow",
           "history.founded",
           "history.identity",
+          "history.legacy",
           "history.record",
           "overview.activeConditions",
           "overview.conflicts",
@@ -45589,7 +45909,7 @@
       {
         "field": "readings.governingName",
         "mountsSpine": 0,
-        "mountsModifier": 30,
+        "mountsModifier": 31,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -45604,6 +45924,7 @@
           "economics.tradeFlow",
           "history.founded",
           "history.identity",
+          "history.legacy",
           "history.record",
           "overview.activeConditions",
           "overview.conflicts",
@@ -45662,7 +45983,7 @@
       {
         "field": "readings.history",
         "mountsSpine": 0,
-        "mountsModifier": 30,
+        "mountsModifier": 31,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -45677,6 +45998,7 @@
           "economics.tradeFlow",
           "history.founded",
           "history.identity",
+          "history.legacy",
           "history.record",
           "overview.activeConditions",
           "overview.conflicts",
@@ -45700,7 +46022,7 @@
       {
         "field": "readings.hookCategories",
         "mountsSpine": 0,
-        "mountsModifier": 30,
+        "mountsModifier": 31,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -45715,6 +46037,7 @@
           "economics.tradeFlow",
           "history.founded",
           "history.identity",
+          "history.legacy",
           "history.record",
           "overview.activeConditions",
           "overview.conflicts",
@@ -45759,7 +46082,7 @@
       {
         "field": "readings.inst",
         "mountsSpine": 1,
-        "mountsModifier": 16,
+        "mountsModifier": 17,
         "spineTabs": [
           "overview"
         ],
@@ -45776,6 +46099,7 @@
           "economics.tradeFlow",
           "history.founded",
           "history.identity",
+          "history.legacy",
           "history.record",
           "relationships.network",
           "viability.magicDependency",
@@ -45785,7 +46109,7 @@
       {
         "field": "readings.isEntrepot",
         "mountsSpine": 2,
-        "mountsModifier": 6,
+        "mountsModifier": 7,
         "spineTabs": [
           "economics",
           "overview"
@@ -45793,6 +46117,7 @@
         "modifierMounts": [
           "history.founded",
           "history.identity",
+          "history.legacy",
           "history.record",
           "relationships.network",
           "viability.magicDependency",
@@ -45802,7 +46127,7 @@
       {
         "field": "readings.lifecycleStatus",
         "mountsSpine": 0,
-        "mountsModifier": 30,
+        "mountsModifier": 31,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -45817,6 +46142,7 @@
           "economics.tradeFlow",
           "history.founded",
           "history.identity",
+          "history.legacy",
           "history.record",
           "overview.activeConditions",
           "overview.conflicts",
@@ -45840,7 +46166,7 @@
       {
         "field": "readings.neighbours",
         "mountsSpine": 0,
-        "mountsModifier": 30,
+        "mountsModifier": 31,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -45855,6 +46181,7 @@
           "economics.tradeFlow",
           "history.founded",
           "history.identity",
+          "history.legacy",
           "history.record",
           "overview.activeConditions",
           "overview.conflicts",
@@ -45929,7 +46256,7 @@
       {
         "field": "readings.populationTrend",
         "mountsSpine": 1,
-        "mountsModifier": 16,
+        "mountsModifier": 17,
         "spineTabs": [
           "overview"
         ],
@@ -45946,6 +46273,7 @@
           "economics.tradeFlow",
           "history.founded",
           "history.identity",
+          "history.legacy",
           "history.record",
           "relationships.network",
           "viability.magicDependency",
@@ -45955,13 +46283,14 @@
       {
         "field": "readings.primaryImports",
         "mountsSpine": 1,
-        "mountsModifier": 20,
+        "mountsModifier": 21,
         "spineTabs": [
           "economics"
         ],
         "modifierMounts": [
           "history.founded",
           "history.identity",
+          "history.legacy",
           "history.record",
           "overview.activeConditions",
           "overview.conflicts",
@@ -45994,7 +46323,7 @@
       {
         "field": "readings.prominentRelationship",
         "mountsSpine": 1,
-        "mountsModifier": 16,
+        "mountsModifier": 17,
         "spineTabs": [
           "overview"
         ],
@@ -46011,6 +46340,7 @@
           "economics.tradeFlow",
           "history.founded",
           "history.identity",
+          "history.legacy",
           "history.record",
           "relationships.network",
           "viability.magicDependency",
@@ -46020,7 +46350,7 @@
       {
         "field": "readings.prosperity",
         "mountsSpine": 0,
-        "mountsModifier": 30,
+        "mountsModifier": 31,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -46035,6 +46365,7 @@
           "economics.tradeFlow",
           "history.founded",
           "history.identity",
+          "history.legacy",
           "history.record",
           "overview.activeConditions",
           "overview.conflicts",
@@ -46058,7 +46389,7 @@
       {
         "field": "readings.readinessLabel",
         "mountsSpine": 0,
-        "mountsModifier": 30,
+        "mountsModifier": 31,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -46073,6 +46404,7 @@
           "economics.tradeFlow",
           "history.founded",
           "history.identity",
+          "history.legacy",
           "history.record",
           "overview.activeConditions",
           "overview.conflicts",
@@ -46096,7 +46428,7 @@
       {
         "field": "readings.recordClean",
         "mountsSpine": 1,
-        "mountsModifier": 28,
+        "mountsModifier": 29,
         "spineTabs": [
           "viability"
         ],
@@ -46113,6 +46445,7 @@
           "economics.tradeFlow",
           "history.founded",
           "history.identity",
+          "history.legacy",
           "history.record",
           "overview.activeConditions",
           "overview.conflicts",
@@ -46134,7 +46467,7 @@
       {
         "field": "readings.relationships",
         "mountsSpine": 1,
-        "mountsModifier": 16,
+        "mountsModifier": 17,
         "spineTabs": [
           "overview"
         ],
@@ -46151,6 +46484,7 @@
           "economics.tradeFlow",
           "history.founded",
           "history.identity",
+          "history.legacy",
           "history.record",
           "relationships.network",
           "viability.magicDependency",
@@ -46175,7 +46509,7 @@
       {
         "field": "readings.safetyLabel",
         "mountsSpine": 0,
-        "mountsModifier": 30,
+        "mountsModifier": 31,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -46190,6 +46524,7 @@
           "economics.tradeFlow",
           "history.founded",
           "history.identity",
+          "history.legacy",
           "history.record",
           "overview.activeConditions",
           "overview.conflicts",
@@ -46213,7 +46548,7 @@
       {
         "field": "readings.scores",
         "mountsSpine": 0,
-        "mountsModifier": 30,
+        "mountsModifier": 31,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -46228,6 +46563,7 @@
           "economics.tradeFlow",
           "history.founded",
           "history.identity",
+          "history.legacy",
           "history.record",
           "overview.activeConditions",
           "overview.conflicts",
@@ -46266,7 +46602,7 @@
       {
         "field": "readings.steadings",
         "mountsSpine": 0,
-        "mountsModifier": 30,
+        "mountsModifier": 31,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -46281,6 +46617,7 @@
           "economics.tradeFlow",
           "history.founded",
           "history.identity",
+          "history.legacy",
           "history.record",
           "overview.activeConditions",
           "overview.conflicts",
@@ -46319,7 +46656,7 @@
       {
         "field": "readings.structuralSuggestions",
         "mountsSpine": 1,
-        "mountsModifier": 16,
+        "mountsModifier": 17,
         "spineTabs": [
           "overview"
         ],
@@ -46336,6 +46673,7 @@
           "economics.tradeFlow",
           "history.founded",
           "history.identity",
+          "history.legacy",
           "history.record",
           "relationships.network",
           "viability.magicDependency",
@@ -46345,7 +46683,7 @@
       {
         "field": "readings.structuralViolations",
         "mountsSpine": 1,
-        "mountsModifier": 16,
+        "mountsModifier": 17,
         "spineTabs": [
           "overview"
         ],
@@ -46362,6 +46700,7 @@
           "economics.tradeFlow",
           "history.founded",
           "history.identity",
+          "history.legacy",
           "history.record",
           "relationships.network",
           "viability.magicDependency",
@@ -46371,7 +46710,7 @@
       {
         "field": "readings.terrainType",
         "mountsSpine": 0,
-        "mountsModifier": 30,
+        "mountsModifier": 31,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -46386,6 +46725,7 @@
           "economics.tradeFlow",
           "history.founded",
           "history.identity",
+          "history.legacy",
           "history.record",
           "overview.activeConditions",
           "overview.conflicts",
@@ -46409,7 +46749,7 @@
       {
         "field": "readings.tier",
         "mountsSpine": 1,
-        "mountsModifier": 16,
+        "mountsModifier": 17,
         "spineTabs": [
           "overview"
         ],
@@ -46426,6 +46766,7 @@
           "economics.tradeFlow",
           "history.founded",
           "history.identity",
+          "history.legacy",
           "history.record",
           "relationships.network",
           "viability.magicDependency",
@@ -46435,7 +46776,7 @@
       {
         "field": "readings.tradeRouteAccess",
         "mountsSpine": 2,
-        "mountsModifier": 16,
+        "mountsModifier": 17,
         "spineTabs": [
           "overview"
         ],
@@ -46452,6 +46793,7 @@
           "economics.tradeFlow",
           "history.founded",
           "history.identity",
+          "history.legacy",
           "history.record",
           "relationships.network",
           "viability.magicDependency",
@@ -46461,7 +46803,7 @@
       {
         "field": "readings.viable",
         "mountsSpine": 2,
-        "mountsModifier": 14,
+        "mountsModifier": 15,
         "spineTabs": [
           "overview",
           "viability"
@@ -46479,6 +46821,7 @@
           "economics.tradeFlow",
           "history.founded",
           "history.identity",
+          "history.legacy",
           "history.record",
           "relationships.network"
         ]
@@ -46666,7 +47009,7 @@
       {
         "field": "settlement.name",
         "mountsSpine": 0,
-        "mountsModifier": 54,
+        "mountsModifier": 55,
         "spineTabs": [],
         "modifierMounts": [
           "defense.armedForces",
@@ -46693,6 +47036,7 @@
           "faith.teaser",
           "history.founded",
           "history.identity",
+          "history.legacy",
           "history.record",
           "overview.activeConditions",
           "overview.conflicts",
@@ -47212,10 +47556,10 @@
     },
     {
       "block": "DS-GEN-16",
-      "spines": 5,
-      "facts": 1,
-      "spinesReachedBp": 0,
-      "meanReachBp": 0
+      "spines": 9,
+      "facts": 2,
+      "spinesReachedBp": 10000,
+      "meanReachBp": 5000
     },
     {
       "block": "DS-GEN-17",
@@ -48401,14 +48745,29 @@
     },
     {
       "block": "DS-GEN-16",
-      "spines": 5,
-      "facts": 1,
-      "spinesReachedBp": 0,
-      "meanReachBp": 0,
+      "spines": 9,
+      "facts": 2,
+      "spinesReachedBp": 10000,
+      "meanReachBp": 5000,
       "byFact": [
         {
           "field": "events",
-          "attach": []
+          "attach": [
+            "LEGACY-UNRESOLVED",
+            "LEGACY-RECOVERED",
+            "LEGACY-SHIFTED",
+            "LEGACY-LINKED"
+          ]
+        },
+        {
+          "field": "hist.legacyAnnotations",
+          "attach": [
+            "ANCHORED-RECENT",
+            "ANCHORED-OLD",
+            "LAYERED-ANCHORED",
+            "RECORDED-UNANCHORED",
+            "UNMARKED"
+          ]
         }
       ]
     },
@@ -49636,8 +49995,8 @@
   ],
   "factBudget": {
     "zeroK": 49,
-    "executable": 341,
-    "notExecutable": 368,
+    "executable": 345,
+    "notExecutable": 369,
     "byBlock": [
       [
         "DS-ECO-12",
@@ -49909,7 +50268,7 @@
         "DS-GEN-16",
         {
           "zeroK": 0,
-          "spines": 5
+          "spines": 9
         }
       ],
       [
@@ -50009,15 +50368,15 @@
       ],
       [
         2,
-        210
+        214
       ]
     ]
   },
   "grains": {
     "branch": {
       "zeroK": 49,
-      "executable": 341,
-      "notExecutable": 368,
+      "executable": 345,
+      "notExecutable": 369,
       "histogram": [
         [
           -2,
@@ -50037,7 +50396,7 @@
         ],
         [
           2,
-          210
+          214
         ]
       ],
       "blocksWithSpine": 50,
@@ -50052,7 +50411,6 @@
         "DS-GEN-12",
         "DS-GEN-13",
         "DS-GEN-14",
-        "DS-GEN-16",
         "DS-GEN-17",
         "DS-GEN-18",
         "DS-GEN-2",
@@ -50064,7 +50422,7 @@
         "DS-STR-1",
         "DS-WAR-3"
       ],
-      "readPaths": 555,
+      "readPaths": 559,
       "modifierEligibleFactsByTab": [
         [
           "viability",
@@ -50122,8 +50480,8 @@
     },
     "function": {
       "zeroK": 125,
-      "executable": 341,
-      "notExecutable": 368,
+      "executable": 345,
+      "notExecutable": 369,
       "histogram": [
         [
           -7,
@@ -50151,7 +50509,7 @@
         ],
         [
           2,
-          130
+          134
         ]
       ],
       "blocksWithSpine": 50,
@@ -50169,7 +50527,6 @@
         "DS-GEN-12",
         "DS-GEN-13",
         "DS-GEN-14",
-        "DS-GEN-16",
         "DS-GEN-17",
         "DS-GEN-18",
         "DS-GEN-2",
@@ -50182,7 +50539,7 @@
         "DS-STR-1",
         "DS-WAR-3"
       ],
-      "readPaths": 792,
+      "readPaths": 796,
       "modifierEligibleFactsByTab": [
         [
           "viability",
@@ -50528,12 +50885,12 @@
       "rows": {
         "LICENSED": 114,
         "OFFICE": 3,
-        "SOURCE-UNRESOLVED": 592
+        "SOURCE-UNRESOLVED": 597
       },
       "fields": {
         "LICENSED": 191,
         "OFFICE": 5,
-        "SOURCE-UNRESOLVED": 419
+        "SOURCE-UNRESOLVED": 423
       },
       "byKind": [
         [
@@ -50578,11 +50935,11 @@
         ]
       ],
       "unresolvedGrounds": {
-        "no-mapping": 419,
+        "no-mapping": 423,
         "no-institution-in-roster": 0
       },
       "twoSourceRows": 10,
-      "rowsWithNoReading": 368,
+      "rowsWithNoReading": 369,
       "kindsWithNoInstitution": [
         "tradition"
       ]
@@ -51938,7 +52295,7 @@
       "leafEither": 2,
       "leafRows": [],
       "deskRoots": 92,
-      "deskSegments": 194
+      "deskSegments": 195
     }
   },
   "ratifiedAliases": {
@@ -56298,6 +56655,46 @@
       "fields": [],
       "readingFunction": "eventRecordPoolKey",
       "count": "2 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "COVERED",
+      "block": "DS-GEN-16",
+      "subject": "LIVING-MEMORY",
+      "fields": [],
+      "readingFunction": "(unresolved)",
+      "count": "2 variant(s) · 2 grammar(s) · slots {calamity, settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-GEN-16",
+      "subject": "LEGACY-UNRESOLVED",
+      "fields": [],
+      "readingFunction": "legacyPoolKey",
+      "count": "2 variant(s) · 1 grammar(s) · slots {calamity, settlement, timeband_age}"
+    },
+    {
+      "tier": "COVERED",
+      "block": "DS-GEN-16",
+      "subject": "LEGACY-RECOVERED",
+      "fields": [],
+      "readingFunction": "legacyPoolKey",
+      "count": "2 variant(s) · 2 grammar(s) · slots {calamity, settlement, timeband_age}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-GEN-16",
+      "subject": "LEGACY-SHIFTED",
+      "fields": [],
+      "readingFunction": "legacyPoolKey",
+      "count": "2 variant(s) · 1 grammar(s) · slots {calamity, settlement, timeband_age}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-GEN-16",
+      "subject": "LEGACY-LINKED",
+      "fields": [],
+      "readingFunction": "legacyPoolKey",
+      "count": "2 variant(s) · 1 grammar(s) · slots {calamity, settlement, timeband_age}"
     },
     {
       "tier": "THIN",

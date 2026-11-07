@@ -4,11 +4,11 @@
   "_digestMaterial": "Every `digest` pin is sha256 over one line per pool, the pools ordered by `${block} :: ${pool}` ascending, joined by a single newline with no trailing newline. The line is `${block} :: ${pool} :: ${value}` except for `pool-key-rename`, whose line is `${block} :: ${pool}` alone, and for `norm-bit`, whose line is `${blockId}::${poolKey} ${departure}` over the norm leaf's own rows in key order. A digest is used wherever the mechanism is per-pool: 708 integers cannot be read by a person, and a digest that moves names the mechanism while the diff names the pool.",
   "_shiftClasses": "ARCH §8.6 declares FOUR text-shift classes and nothing else re-rolls a drawn index: 1 the REWRITE + FACES freeze (car 8a-8n, one owner re-record); 2 the list-position keys (car 10); 3 THIN-pool growth (car 9b); 4 TURNS (car 11). Each row below names the class it would land under. A row whose `shift` is `none` names a mechanism that must NEVER move: a renumbering, and a pool-key rename.",
   "measuredAt": {
-    "car": "SEAM car 4 (ARCH §12 row 4) — M2, the schema, added keys only · RE-PINNED 2026-09-18 (owner §934.9, \"do these as well\"): the DS-DEF-6 magic lens was re-keyed `Magical Capability` → `Arcane Support` so the corpus key matches the live display label the review-10 car moved. FIVE DIGESTS MOVED AND NO COUNT DID — variant-count pin 1, face-count pin 2, vids pin 0, pool-key-rename pin 0 and attach-set pin 1 are all joins keyed on the pool NAME, while every quantity pin beside them held (blocks 68, pools 708, variants 2266, unchanged). No variant text, no vid, no face and no attach set was edited: two pool KEYS were spelled differently. The two pools are DS-DEF-6 blocked pools that `defenseSupportingProse` cannot emit over its whole input space (the desk suite proves it), so no cell moves for any town, and tests/property/generatorGoldenMaster.test.js passes plain at 0 rows. · AND AGAIN, SAME CAR, SAME FIVE DIGESTS: the owner folded lane 6's capability row and ruled the presence row's STATUS vocabulary `Present` / `None` (it had become the label again — \"Arcane Support · Arcane support\" — one reading printed twice), so the second pool key is `Arcane Support: Present`. No count moved here either.",
+    "car": "SEAM car 4 (ARCH §12 row 4) — M2, the schema, added keys only · RE-PINNED 2026-09-18 (owner §934.9, \"do these as well\"): the DS-DEF-6 magic lens was re-keyed `Magical Capability` → `Arcane Support` so the corpus key matches the live display label the review-10 car moved. FIVE DIGESTS MOVED AND NO COUNT DID — variant-count pin 1, face-count pin 2, vids pin 0, pool-key-rename pin 0 and attach-set pin 1 are all joins keyed on the pool NAME, while every quantity pin beside them held (blocks 68, pools 708, variants 2266, unchanged). No variant text, no vid, no face and no attach set was edited: two pool KEYS were spelled differently. The two pools are DS-DEF-6 blocked pools that `defenseSupportingProse` cannot emit over its whole input space (the desk suite proves it), so no cell moves for any town, and tests/property/generatorGoldenMaster.test.js passes plain at 0 rows. · AND AGAIN, SAME CAR, SAME FIVE DIGESTS: the owner folded lane 6's capability row and ruled the presence row's STATUS vocabulary `Present` / `None` (it had become the label again — \"Arcane Support · Arcane support\" — one reading printed twice), so the second pool key is `Arcane Support: Present`. No count moved here either. · W5 HIS construction 2026-11-07 (WIRING-RULINGS R-W1, ODQ §934.105): DS-GEN-16 gains five pools of two variants each — LIVING-MEMORY (history.siegeNarrative) and LEGACY-UNRESOLVED / -RECOVERED / -SHIFTED / -LINKED (history.legacyAnnotations[].annotation) — at the new sentence mount history.legacy; pools 709 -> 714, variants 2344 -> 2354; the count, face, vid, key and attach pins re-measured in the same commit",
     "tip": "the six state leaves at the car-4 projection; base c45a46a78",
     "blocks": 68,
-    "pools": 709,
-    "variants": 2344
+    "pools": 714,
+    "variants": 2354
   },
   "mechanisms": [
     {
@@ -21,13 +21,13 @@
         {
           "kind": "integer",
           "over": "the sum of poolMeta.variantCount over all 708 pools",
-          "value": 2344
+          "value": 2354
         },
         {
           "kind": "digest",
           "algo": "sha256",
           "over": "poolMeta.variantCount per pool",
-          "value": "dd83e5e44762351ff337879e4643ceddff4a93ff88ff12b01ea7310c6497caca"
+          "value": "dee3cf2c5664018fcc4c2548a7b662071ad115c09a77beb227ce0e6c01625170"
         }
       ]
     },
@@ -42,7 +42,7 @@
         {
           "kind": "integer",
           "over": "the sum of every faceCounts entry over all 708 pools",
-          "value": 2344
+          "value": 2354
         },
         {
           "kind": "integer",
@@ -53,7 +53,7 @@
           "kind": "digest",
           "algo": "sha256",
           "over": "poolMeta.faceCounts per pool, joined by commas",
-          "value": "7b2930fb52c841f99e6d81adff4f710ad9026e2482140c31c08ab79ff98f40b6"
+          "value": "862b027b7c7f056008d5f4c8c804a885593fecd4418a352307639df7795ab190"
         }
       ]
     },
@@ -68,7 +68,7 @@
           "kind": "digest",
           "algo": "sha256",
           "over": "poolMeta.vids per pool, joined by commas",
-          "value": "c34fd779215ddb54850a337be5fee90520cd394875dde1a3c32190762b720010"
+          "value": "5cd8446257e4d3cdda5970c60d78f0143440d4df883bc5ab94b78ff045fbd61c"
         }
       ]
     },
@@ -83,7 +83,7 @@
           "kind": "digest",
           "algo": "sha256",
           "over": "`${block} :: ${pool}` for all 708 pools, in order",
-          "value": "aa775fddbfd4d2ace8840069ad85120841324c1e30cdbf610d8e448721985a7a"
+          "value": "1e19bee74b29e1ebaa80acb534de2fb06e5219f83b4f430818031715820a45a0"
         }
       ]
     },
@@ -152,7 +152,7 @@
           "kind": "digest",
           "algo": "sha256",
           "over": "poolMeta.attach per pool, joined by pipes",
-          "value": "32422cdf009b2856a33ec3c061daa9c5057ffcc15ce1d122fabb2f9aaf4b1dbc"
+          "value": "cdd9c81694e0fb29f475c36d0c8a2fa64b8501e1dd746dc38e63af77f0d0a65d"
         }
       ]
     },

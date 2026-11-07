@@ -48,6 +48,8 @@ import {
   viabilityVerdictPoolKey,
   eventAnchorDimension,
   eventRecordPoolKey,
+  legacyPoolKey,
+  livingMemoryEventName,
   eventTypePoolKey,
   foundedPoolKey,
   recencyFramingPoolKey,
@@ -110,7 +112,7 @@ const BLOCK_POOLS = Object.freeze({
   'DS-GEN-2': 3, 'DS-GEN-3': 42, 'DS-GEN-5': 5, 'DS-GEN-6': 9, 'DS-GEN-12': 5, 'DS-GEN-13': 4,
   'DS-GEN-7': 8, 'DS-GEN-17': 5,
   // The history chapter (DESK-GEN2 car 1).
-  'DS-GEN-9': 15, 'DS-GEN-14': 3, 'DS-GEN-16': 5,
+  'DS-GEN-9': 15, 'DS-GEN-14': 3, 'DS-GEN-16': 10,
   // The viability verdict and the plot-hook framing (DESK-GEN2 car 2).
   'DS-GEN-11': 6, 'DS-HK-1': 11,
   // The notable connection (DESK-GEN2 car 4).
@@ -728,8 +730,12 @@ describe('the general desk — the mount registry', () => {
     // ⛔ THE CONSOLIDATION CHAIR'S GLANCES (RULINGS-T3, 2026-10-30), on the DS-GEN-3 precedent:
     // each block stays MOUNTED (never parked dark; the unmounted list is shrink-only) at a
     // glance row that strips the sentence.
+    // ⭐ W5 HIS construction (2026-11-07, ODQ §934.105; WAVE-RULINGS item 10): DS-GEN-16 SPEAKS at ONE
+    // new position, `history.legacy` (the past-to-present link and the recent blow in living
+    // memory), while `history.record` — the line H3 glanced — stays a glance.
+    expect(sentenceMountForBlock('DS-GEN-16')?.mount, 'DS-GEN-16 speaks only at history.legacy').toBe('history.legacy');
     for (const [blockId, mount] of [['DS-REL-1', 'relationships.network'], ['DS-GEN-9', 'history.identity'], ['DS-GEN-16', 'history.record']]) {
-      expect(sentenceMountForBlock(blockId), `${blockId} speaks again`).toBeNull();
+      if (blockId !== 'DS-GEN-16') expect(sentenceMountForBlock(blockId), `${blockId} speaks again`).toBeNull();
       expectAbsentWithAnchor(UNMOUNTED_BLOCKS, blockId, UNMOUNTED_BLOCKS[0], `${blockId} was parked dark instead of glanced`);
       const r = { glance: 'x', sentence: 'y', detail: [], provenance: { blockId, poolKey: 'p', angle: 'a' } };
       expect(drawnAtMount(mount, r).glance, `${mount} keeps its glance`).toBe('x');
@@ -1166,7 +1172,21 @@ describe('the history chapter', () => {
     expect([...new Set([
       eventRecordPoolKey([]), eventRecordPoolKey([blow(true, 5)]), eventRecordPoolKey([blow(true, 500)]),
       eventRecordPoolKey([blow(true, 5), blow(true, 9)]), eventRecordPoolKey([blow(false, 5)]),
+      // W5 HIS construction (2026-11-07): the legacy link, keyed by the relationship clause the
+      // generator's own templates write, and the living-memory pairing.
+      ...[' created pressure that has not been fully resolved: ', ' was a disruption the settlement has since moved through: ',
+        ' established conditions that have since shifted: ', ': '].map((clause) => legacyPoolKey(
+        [{ annotation: `As of the founding survey, the siege (40 years ago)${clause}x.`, eventName: 'The Siege', yearsAgo: 40 }],
+      )?.key),
+      livingMemoryEventName({ siegeNarrative: 'The Siege is still present in living memory: x.', currentTensions: [{}] })
+        ? 'LIVING-MEMORY' : null,
     ])].sort()).toEqual(poolsOf('DS-GEN-16').sort());
+    expect(legacyPoolKey([])).toBeNull();
+    expect(legacyPoolKey([{ annotation: '' }])).toBeNull();
+    expect(livingMemoryEventName({ siegeNarrative: 'The Siege is still present in living memory: x.', currentTensions: [] }),
+      'no current tension, no quarrel to speak of').toBeNull();
+    expect(livingMemoryEventName({ siegeNarrative: 'The Siege is still present in living memory: x.', currentTensions: [{}] }))
+      .toBe('The Siege');
     // ⚠ AN ABSENT `anchored` IS NOT A `false`. A record that has not been asked the question
     // reads UNMARKED when it carries no severe row, and counting it as unanchored would state
     // something the record does not.

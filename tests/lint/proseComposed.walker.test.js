@@ -205,8 +205,9 @@ describe('GUARD THE GUARD — the inputs this file judges are the real ones', ()
     // census-2b item 5 70d05b25b +4, census-5 unit 2 06b59812f +1, census-3c unit 4 e3295d168 +10,
     // census-5b unit 3 c00b30eb6 +4. 2342 -> 2343 at LANDING-R2 helper G (the chair's §934.105 ruling (1): DS-GEN-17 PROVISIONED v3, the hospital-only line) +1.
     // 2343 -> 2344 at LANDING-R2 helper G2 (the chair's 06:5x DS-CND-1 boom line (ODQ §934.105, ruling (2)): ARCHETYPE: boom v4 `[street · crisis: any]`) +1.
-    expect(corpus.length, 'the shipped state corpus').toBe(2344);
-    expect(census.rows.length, 'the committed wiring census').toBe(709);
+    // 2344 -> 2354 / 709 -> 714 at W5 HIS construction (2026-11-07, ODQ §934.105): DS-GEN-16 gains five two-variant pools.
+    expect(corpus.length, 'the shipped state corpus').toBe(2354);
+    expect(census.rows.length, 'the committed wiring census').toBe(714);
     expect(Object.keys(DOSSIER_RELATIONS).length, 'the committed relation leaf').toBe(165);
     // Every arm this module owns is exercised below; a roster that quietly shrank would make
     // a whole describe disappear with nothing red.
