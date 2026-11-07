@@ -49,12 +49,17 @@ describe('the one-NPC thorps of rung 2', () => {
   // `{npc}` secret (it declares `other npc`) is REFUSED by its declaration, and the slot prints what
   // the gate resolves to — the recently-betrayed pool's admitted line by hash argmax — never a
   // "Someone" fallback.
+  // The admitted line re-keyed by cause: "They were the betrayer, …" -> "Has the actual evidence of who committed
+  // the betrayal, …" at 24ca3ee49 (census-1i unit 5, R-AT's wider audit: the ten keyless or constant-key
+  // drawDeclared callers keyed on the settlement, so the argmax's tie-break reads this settlement's identity).
+  // Measured: the old line at 24ca3ee49^ (60101f360), the new at 24ca3ee49 and at the tip; narrative_quality
+  // passes at both.
   it('soak1k-1248: the {npc} secret is refused; the slot prints the gate\'s resolution and narrative_quality passes', () => {
     const s = birth(1248).settlement;
     expect(s.npcs).toHaveLength(1);
     expect(s.npcs[0].secret).toEqual({
-      what: 'They were the betrayer, not the person the investigation has been pursuing',
-      stakes: 'The evidence against the other person is circumstantial but strong. Letting it proceed is the easiest thing in the world',
+      what: 'Has the actual evidence of who committed the betrayal. They found it accidentally and immediately hid it',
+      stakes: 'The evidence also implicates Feudal Stewardship, which means the fallout would be much larger than anyone currently expects',
     });
     expect(JSON.stringify(s.npcs[0].secret)).not.toMatch(/\bSomeone\b/);
     expect(narrativeQuality(s)?.findings).toEqual([]);
