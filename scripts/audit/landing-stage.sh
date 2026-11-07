@@ -20,6 +20,7 @@
 #
 # Usage (from the landing branch's checkout):
 #   sh scripts/audit/landing-stage.sh build   <step-commit> <stage-dir>
+#   sh scripts/audit/landing-stage.sh guard   <step-commit>              # the build's door-path guard alone
 #   sh scripts/audit/landing-stage.sh measure <stage-dir> <scratch-dir> [<previous stage's scratch-dir>]
 #   sh scripts/audit/landing-stage.sh suites  <stage-dir>        # the registered suites + walker, plainly
 set -eu
@@ -42,21 +43,36 @@ door_paths() {
 }
 
 case "$cmd" in
-  build)
-    step=$2; stage=$3
+  guard|build)
+    step=$2; stage=${3:-}
     full=$(git rev-parse "$step^{commit}")
     parent=$(git rev-parse "$full^1")
-    # A step that touched a door path cannot be staged by carrying: STOP and name it.
+    carry=$(git rev-parse HEAD)
+    # A step that touched a door path cannot be staged by carrying WHERE THE CARRY WOULD OVERWRITE ITS EDIT: the guard
+    # compares CONTENT, not paths (the chair's ruling on PEOPLE-LAND's STOP at record 0b, 2026-11-07). A touched door
+    # path whose blob at the step equals the carry's is carried with a receipt line (nothing is hidden: the bytes are
+    # the same); any touched door path whose blob differs STOPs the build and is named. A merge's first-parent diff is
+    # the whole lane, so the W0 merge fc834a6bd -- the first stage whose step is itself a signed door write the branch
+    # already carries -- touched ten door paths, each equal to the carry.
     touched=$(git diff --name-only "$parent" "$full" -- $(door_paths "$here") || true)
-    if [ -n "$touched" ]; then
+    differ=''
+    for p in $touched; do
+      if git diff --quiet "$full" "$carry" -- "$p"; then
+        echo "door path touched by the step, equal to the carry — carried: $p" >&2
+      else
+        differ="$differ$p
+"
+      fi
+    done
+    if [ -n "$differ" ]; then
       echo "STOP: step $step touched door paths; the carry would overwrite them:" >&2
-      echo "$touched" >&2
+      printf '%s' "$differ" >&2
       exit 1
     fi
+    [ "$cmd" = guard ] && exit 0
     if [ -d "$stage" ]; then git worktree remove --force "$stage" 2>/dev/null || rm -rf "$stage"; fi
     git worktree prune
     git worktree add --detach "$stage" "$full" >/dev/null 2>&1
-    carry=$(git rev-parse HEAD)
     (
       cd "$stage"
       for p in $(cd "$here" && door_paths "$here"); do
@@ -118,7 +134,7 @@ case "$cmd" in
     npx vitest run --maxWorkers=2 $files 2>&1 | grep -E '^ (FAIL|×)| ✗|Test Files|Tests  ' || true
     ;;
   *)
-    echo 'usage: landing-stage.sh build <step> <stage> | measure <stage> <scratch> [prev-scratch] | suites <stage>' >&2
+    echo 'usage: landing-stage.sh build <step> <stage> | guard <step> | measure <stage> <scratch> [prev-scratch] | suites <stage>' >&2
     exit 2
     ;;
 esac
