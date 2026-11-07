@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "4b4c167b88656d887967f5c1502409efba06ef67",
-  "measuredBy": "LANDING-R2 seat J",
+  "measuredAtSha": "b14223b6b8a0ebfbc32f1f9edebf595b5f7c967e",
+  "measuredBy": "MERGE-R2",
   "date": "2026-11-07",
-  "note": "87fdde9a9 (FIRSTPAINT-3): computeActiveChains.js reads goodsHeldByFoodRecord from domain/foodSurplus.js, no longer through economy/foodBalance.js, so it leaves FAMINE_HELD_STORE_MONTHS dependents; no value moved",
+  "note": "the union of the rung-2 landing (fc4cb0b9f, its census DRAFT and STRUCTURAL rows) and the integration branch (a8daff92c) at the merged tip; both sides refroze, the two signed records and every draft row kept (MERGE-R2, 2026-11-07)",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -8100,7 +8100,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 1,
-      "line": 88,
+      "line": 89,
       "spanDigest": "5d423d06ea6e3cf77788e82c97fa0946ae7c7fbf8d6e6830cb848773ffb8cd0c",
       "leaves": {
         "value": 6
@@ -8116,7 +8116,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 1,
-      "line": 57,
+      "line": 58,
       "spanDigest": "80a30b61941b4ce767eb70294da0e598be1b01e5d109279817fa9898c18c919a",
       "leaves": {
         "value": 12
@@ -8131,7 +8131,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 59,
+      "line": 60,
       "spanDigest": "d70a3c36f3d2b697eda6a63ffcd293fc11e35364c9d6dc4619e552583b9f41a9",
       "leaves": {
         "value": 0.1
@@ -8146,7 +8146,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 4,
-      "line": 60,
+      "line": 61,
       "spanDigest": "d2e49a612404d3d5836706cd0d20b875f6f1f6758ac155284dcebb2f44a36782",
       "leaves": {
         "rationFloorPct": 5,
@@ -8164,7 +8164,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 51,
+      "line": 52,
       "spanDigest": "d10115379d15db065531f35da0cda4eee0e18371ba912cf4b17d88afe788735f",
       "leaves": {
         "value": 0.85
