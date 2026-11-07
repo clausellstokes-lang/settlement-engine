@@ -8,7 +8,7 @@
   "The reviewable slice is computed by RULE (reviewableDark), never hand-listed."
  ],
  "schema": 1,
- "frozenAtSha": "1994a2ef52228aab42c07bb7df14f72814955ee4",
+ "frozenAtSha": "36d2af6a36da5f68874b058385b724bbd0a6ebe7",
  "charter": "§18.1 WRWALKER Car 1 (HORIZON) — chair-signed vetoably at the INSTR-WRW pre-stage",
  "minRows": 40,
  "corpusMeta": {
@@ -24,7 +24,7 @@
  },
  "shapesDigest": "f554e7804c707b99d4710e8fd9006e3100ab6335c15cfcb1d66a8de318a30dd8",
  "detectorDigest": "863d4ac82d2945a7cf84d9948ceb9742dd5ffe08a7d2ae00ca550d6f59645aad",
- "verdictDigest": "4fcc23e016ffaefb779d7d9a4c6142501608a5640f3cc57b5439877ca94ae63f",
+ "verdictDigest": "b325dcafd811134857cff0ee6815f7bf17a4ee1fcee85f06b37535a3ef9fac82",
  "surfaceRoots": {
   "web": [
    "src/main.jsx"
@@ -72,9 +72,9 @@
   "json-export"
  ],
  "closureSizes": {
-  "web-display": 750,
+  "web-display": 751,
   "web-transitive": 968,
-  "dossier-pdf": 469,
+  "dossier-pdf": 460,
   "campaign-pdf": 106,
   "world-book": 123,
   "foundry": 368,
@@ -91,7 +91,7 @@
   "knownShapes": 516
  },
  "scanStats": {
-  "files": 1719,
+  "files": 1720,
   "sites": 40848,
   "propRead": 38669,
   "elemRead": 0,
@@ -9594,7 +9594,7 @@
   "finalProducts on fullyExploited": "dossier-pdf=N foundry=N web-display=N web-transitive=R",
   "intermediateGoods on fullyExploited": "dossier-pdf=N foundry=N web-display=N web-transitive=R",
   "processingInstitutions on fullyExploited": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=R world-book=N",
-  "processingTags on fullyExploited": "dossier-pdf=N web-display=N",
+  "processingTags on fullyExploited": "web-display=N",
   "rawResource on fullyExploited": "dossier-pdf=R foundry=N web-display=R web-transitive=R",
   "chain on gaps": "campaign-pdf=N dossier-pdf=N foundry=N web-display=R web-transitive=N world-book=N",
   "impact on gaps": "dossier-pdf=N web-display=R web-transitive=N",
@@ -19485,7 +19485,7 @@
   "finalProducts on partiallyExploited": "dossier-pdf=N foundry=N web-display=N web-transitive=R",
   "intermediateGoods on partiallyExploited": "dossier-pdf=N foundry=N web-display=N web-transitive=R",
   "processingInstitutions on partiallyExploited": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=R world-book=N",
-  "processingTags on partiallyExploited": "dossier-pdf=N web-display=N",
+  "processingTags on partiallyExploited": "web-display=N",
   "rawResource on partiallyExploited": "dossier-pdf=R foundry=N web-display=R web-transitive=R",
   "capacity on paths": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "evidence on paths": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N",
@@ -19894,7 +19894,7 @@
   "finalProducts on resourceChains": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "intermediateGoods on resourceChains": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "processingInstitutions on resourceChains": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
-  "processingTags on resourceChains": "dossier-pdf=N web-display=N",
+  "processingTags on resourceChains": "web-display=N",
   "rawResource on resourceChains": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "condition on resourceConditions": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
   "conditionDescription on resourceConditions": "dossier-pdf=N foundry=N web-transitive=N",
@@ -20395,7 +20395,7 @@
   "finalProducts on unexploited": "dossier-pdf=N foundry=N web-display=N web-transitive=R",
   "intermediateGoods on unexploited": "dossier-pdf=N foundry=N web-display=N web-transitive=R",
   "processingInstitutions on unexploited": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=R world-book=N",
-  "processingTags on unexploited": "dossier-pdf=N web-display=N",
+  "processingTags on unexploited": "web-display=N",
   "rawResource on unexploited": "dossier-pdf=R foundry=N web-display=R web-transitive=R",
   "drift on urbanFabric": "web-display=N web-transitive=N",
   "led on urbanFabric": "web-transitive=N",
@@ -21357,6 +21357,13 @@
     "lastTargetedTick on osr000:npc_barracks"
    ],
    "previousCohort": 1399,
+   "cohort": 1397
+  },
+  {
+   "charter": "§934.105",
+   "sha": "36d2af6a36da5f68874b058385b724bbd0a6ebe7",
+   "admitted": [],
+   "previousCohort": 1397,
    "cohort": 1397
   }
  ]
