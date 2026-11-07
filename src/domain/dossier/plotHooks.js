@@ -143,6 +143,13 @@ export function groupPlotHooksBySourcePage(hooks) {
 // reads once live and once reframed. A match list, never printed (CENSUS-1e: row 91); the printed copy
 // in historyGenerator.js is ruled {colour} (CENSUS-2e, R-R).
 const ECHO_PREFIXES = [
+  // W5 HIS (2026-11-07): the five tellings the generator now prints, then the five it printed before,
+  // so a saved page's hooks still fold to their family.
+  'an old story from that time: ',
+  'a letter found this year tells it this way: ',
+  'families who lived through it tell it this way: ',
+  'the records of that time say: ',
+  'what survives from that time says: ',
   'old records suggest ',
   'a recently surfaced document implies ',
   'family accounts passed down from the time claim ',

@@ -298,15 +298,17 @@ const generateEventNarrative = (eventTemplate, yearsAgo, extraTokens = {}, descS
       // For older events (last century: 30–80y), reframe present-tense hooks as
       // historical discoveries — things uncovered now, not things actively happening.
       if (yearsAgo > 30 && drawnText) {
+        // W5 HIS (2026-11-07, the owner's style law): each prefix is a TELLING, so the present-tense hook after it
+        // reads as the story told then, not as a document's machinery.
         // {colour} (CENSUS-2e, R-R and R-AD; ledger ECHO_PREFIXES_DOSSIER.json): each prefix frames a past
         // discovery (old records, a document, an archivist's notes from that period); none asserts what the
         // place holds now, so none is a roster claim.
         const ECHO_PREFIXES = [
-          'Old records suggest ',
-          'A recently surfaced document implies ',
-          'Family accounts passed down from the time claim ',
-          "An archivist's notes from that period reveal ",
-          'Evidence that survived the years indicates ',
+          'An old story from that time: ',
+          'A letter found this year tells it this way: ',
+          'Families who lived through it tell it this way: ',
+          'The records of that time say: ',
+          'What survives from that time says: ',
         ];
         // Only prefix hooks that read as present-tense (contain present-tense signals)
         const presentTenseSignals = [' is ', ' are ', ' has ', ' have ', ' exists', ' exist', ' being '];
