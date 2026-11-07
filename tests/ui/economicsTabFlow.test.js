@@ -222,7 +222,8 @@ describe('THE PUBLIC GATE — the economy desk stays silent on a public dossier'
     expect(container.textContent).toContain('Food');
     expect(container.textContent).toContain('lbs/day');
     // And the tab's OWN arithmetic readout below the balance bar is untouched.
-    expect(container.textContent).toContain('Production deficit of');
+    // re-keyed with the narrative's rewrite, the ruled figures verbatim (W1 ECO second seat; the chair's ruling on rows 325/326, ODQ §934.15/§934.20)
+    expect(container.textContent).toContain('of what people need goes unmet');
   });
 
   /**
@@ -273,9 +274,10 @@ describe('THE PUBLIC GATE — the economy desk stays silent on a public dossier'
     const fb = { dailyProduction: 600, dailyNeed: 1000, deficit: 120, deficitPercent: 12, surplus: 0, importCoverage: 200, magicFoodOffset: 80, rawDeficit: 400, agricultureModifier: 1 };
     const { container } = render(e(EconomicsTab, { settlement: withFood(fb), saveId: null, publicDossier: true }));
     const text = container.textContent;
-    expect(text).toContain(`Production covers ${Math.round((fb.dailyProduction / fb.dailyNeed) * 100)}% of food needs`);
-    expect(text).toContain(`Trade imports cover an estimated ${Math.round((fb.importCoverage / fb.rawDeficit) * 100)}% of the gap`);
-    expect(text).toContain(`Residual shortfall is ${fb.deficitPercent}%`);
+    // re-keyed with the narrative's rewrite, the ruled figures verbatim (W1 ECO second seat; the chair's ruling on rows 325/326, ODQ §934.15/§934.20)
+    expect(text).toContain(`What is grown here covers ${Math.round((fb.dailyProduction / fb.dailyNeed) * 100)}% of the food people need`);
+    expect(text).toContain(`Trade brings in about ${Math.round((fb.importCoverage / fb.rawDeficit) * 100)}% of the rest`);
+    expect(text).toContain(`and ${fb.deficitPercent}% of what people need still goes unmet`);
     // ODQ §934.20 — the clause now carries the FIGURE, not just the fact. bc32a5a97 could
     // only say "closes the remainder": a reader could not add up production, imports and the
     // residual and land on the printed number without it. The fixture names no channel, so
@@ -293,17 +295,17 @@ describe('THE PUBLIC GATE — the economy desk stays silent on a public dossier'
       settlement: withFood({ dailyProduction: 600, dailyNeed: 1000, deficit: 200, deficitPercent: 20, surplus: 0, importCoverage: 200, rawDeficit: 400, agricultureModifier: 1 }),
       saveId: null, publicDossier: true,
     })).container.textContent;
-    expect(mundane).toContain('Residual shortfall is 20%');
+    expect(mundane).toContain('and 20% of what people need still goes unmet'); // re-keyed with the narrative's rewrite, the ruled figures verbatim (W1 ECO second seat; the chair's ruling on rows 325/326, ODQ §934.15/§934.20)
     // anchored: the deficit sentence is pinned PRESENT on this same `mundane` payload one line above
     expect(mundane).not.toContain('comes by');
     cleanup();
-    // A severed route takes the OTHER branch — "Production deficit of X%" — where the
+    // A severed route takes the OTHER branch — "No trade brings food in here, and X% …" — where the
     // same silence understated the gap: 40% of need is missing and magic closes half.
     const severed = render(e(EconomicsTab, {
       settlement: withFood({ dailyProduction: 600, dailyNeed: 1000, deficit: 200, deficitPercent: 20, surplus: 0, rawDeficit: 400, magicFoodOffset: 200, agricultureModifier: 1 }),
       saveId: null, publicDossier: true,
     })).container.textContent;
-    expect(severed).toContain('Production deficit of 20%');
+    expect(severed).toContain('No trade brings food in here, and 20% of what people need goes unmet.'); // re-keyed with the narrative's rewrite, the ruled figures verbatim (W1 ECO second seat; the chair's ruling on rows 325/326, ODQ §934.15/§934.20)
     expect(severed).toContain('A further 200 lbs/day comes by magical provision.');
   });
 
@@ -330,7 +332,7 @@ describe('THE PUBLIC GATE — the economy desk stays silent on a public dossier'
     expect(production.style.width).toBe('60%'); // 600 / 1000 — the ratio, spelled out
     // The readout's own percentage is the residual share of NEED, and it is the
     // one the dossier model publishes rather than a second derivation.
-    expect(container.textContent).toContain(`Production deficit of ${Math.round((fb.deficit / fb.dailyNeed) * 100)}%`);
+    expect(container.textContent).toContain(`and ${Math.round((fb.deficit / fb.dailyNeed) * 100)}% of what people need goes unmet`); // re-keyed with the narrative's rewrite, the ruled figures verbatim (W1 ECO second seat; the chair's ruling on rows 325/326, ODQ §934.15/§934.20)
   });
 
   /**
@@ -382,9 +384,10 @@ describe('THE PUBLIC GATE — the economy desk stays silent on a public dossier'
     // ...and the sentence states every figure the reader needs to close the arithmetic:
     // 76% of 1,014 is the production, 70% of the 241 gap is the import, 31 lb is the
     // provision, and 241 − 169 − 31 = 41 lb is the 4% residual it prints.
-    expect(text).toContain('Production covers 76% of food needs');
-    expect(text).toContain(`Trade imports cover an estimated ${Math.round((fb.importCoverage / fb.rawDeficit) * 100)}% of the gap`);
-    expect(text).toContain(`Residual shortfall is ${fb.deficitPercent}%`);
+    // re-keyed with the narrative's rewrite, the ruled figures verbatim (W1 ECO second seat; the chair's ruling on rows 325/326, ODQ §934.15/§934.20)
+    expect(text).toContain('What is grown here covers 76% of the food people need');
+    expect(text).toContain(`Trade brings in about ${Math.round((fb.importCoverage / fb.rawDeficit) * 100)}% of the rest`);
+    expect(text).toContain(`and ${fb.deficitPercent}% of what people need still goes unmet`);
     expect(text).toContain(`A further ${fb.magicFoodOffset} lbs/day comes by divine provision.`);
     expect(fb.rawDeficit - fb.importCoverage - fb.magicFoodOffset).toBe(fb.deficit);
   });
@@ -1022,7 +1025,7 @@ describe('UX consolidation — the Economics page says each fact once', () => {
     expect(exact('Economy'), 'no Economy tile label').toBe(0);
     expect(exact('Food'), 'no Food tile label').toBe(0);
     // The Food Security section is the food home and opens on first paint.
-    expect(text).toContain('Production deficit of');
+    expect(text).toContain('of what people need goes unmet'); // re-keyed with the narrative's rewrite (W1 ECO second seat, rows 325/326)
   });
 
   test('T2-2: the Trade chip stays, because tradeAccess follows the route', () => {
@@ -1056,8 +1059,8 @@ describe('UX consolidation — the Economics page says each fact once', () => {
     const text = render(e(EconomicsTab, { settlement: fed, saveId: 'forge_town', publicDossier: false })).container.textContent;
     expect(text, 'the income-mix lens still draws').toContain('The tolls carry the town.');
     expect(text, 'the trade-profile lens is not drawn').not.toContain('The same carts go out and come back.'); // anchored: toContain income-mix on this render
-    expect(text).toContain('Residual shortfall is');
-    expect(text).not.toContain('trade-dependent for food security'); // anchored: toContain('Residual shortfall is') on this render
+    expect(text).toContain('of what people need still goes unmet'); // re-keyed with the narrative's rewrite (W1 ECO second seat, rows 325/326)
+    expect(text).not.toContain('trade-dependent for food security'); // anchored: toContain('of what people need still goes unmet') on this render
   });
 
   test('T2-5: Market Prices renders only when a quote moved or the crier has a highlight', () => {

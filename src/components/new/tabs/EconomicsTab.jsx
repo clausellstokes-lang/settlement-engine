@@ -583,8 +583,8 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
         <div style={{background:foodDeficit?'#fdf4f4':'#f0faf2',...edged(`1px solid ${foodDeficit?'#e8c0c0':'#a8d8b0'}`,`3px solid ${foodColor}`),padding:'8px 12px',fontSize:proseFontSize(FS.sm, mobile),color:foodDeficit?'#5a1a1a':'#1a3a10',lineHeight:1.5}}>
           {foodDeficit
             ? fb.importCoverage>0
-              ? `Production covers ${Math.round(fb.dailyProduction/fb.dailyNeed*100)}% of food needs. Trade imports cover an estimated ${Math.round(fb.importCoverage/(fb.rawDeficit||1)*100)}% of the gap. Residual shortfall is ${fbal.deficitPct}%.${fb.magicFoodOffset>0?` A further ${formatCount(fb.magicFoodOffset)} lbs/day comes by ${foodBar.magicChannel} provision.`:''}`
-              : ` Production deficit of ${fbal.deficitPct}%. Settlement requires food imports to sustain population.`+(fb.magicFoodOffset>0?` A further ${formatCount(fb.magicFoodOffset)} lbs/day comes by ${foodBar.magicChannel} provision.`:'')
+              ? `What is grown here covers ${Math.round(fb.dailyProduction/fb.dailyNeed*100)}% of the food people need. Trade brings in about ${Math.round(fb.importCoverage/(fb.rawDeficit||1)*100)}% of the rest, and ${fbal.deficitPct}% of what people need still goes unmet.${fb.magicFoodOffset>0?` A further ${formatCount(fb.magicFoodOffset)} lbs/day comes by ${foodBar.magicChannel} provision.`:''}`
+              : `No trade brings food in here, and ${fbal.deficitPct}% of what people need goes unmet.`+(fb.magicFoodOffset>0?` A further ${formatCount(fb.magicFoodOffset)} lbs/day comes by ${foodBar.magicChannel} provision.`:'')
             : foodSurplus ? `Agricultural surplus of ${Math.round((fb.surplus/Math.max(1,fb.dailyNeed))*100)}% above daily needs.` : 'What is grown here and brought in covers each day\'s food, with nothing to spare against a bad year.'
           }
         </div>

@@ -447,31 +447,31 @@
     "path": "src/components/new/tabs/EconomicsTab.jsx",
     "line": 584,
     "category": "floatInterpolation",
-    "snippet": "{foodDeficit ? fb.importCoverage>0 ? `Production covers ${Math.round(fb.dailyProduction/fb.dailyNeed*100)}% of food needs. Trade imports cover an estimated ${Math.round(fb.importCoverage/(fb.rawDeficit||1)*100)}% of the gap. Residual sho..."
+    "snippet": "{foodDeficit ? fb.importCoverage>0 ? `What is grown here covers ${Math.round(fb.dailyProduction/fb.dailyNeed*100)}% of the food people need. Trade brings in about ${Math.round(fb.importCoverage/(fb.rawDeficit||1)*100)}% of the rest, and ..."
   },
   {
     "path": "src/components/new/tabs/EconomicsTab.jsx",
     "line": 586,
     "category": "floatInterpolation",
-    "snippet": "`Production covers ${Math.round(fb.dailyProduction/fb.dailyNeed*100)}% of food needs. Trade imports cover an estimated ${Math.round(fb.importCoverage/(fb.rawDeficit||1)*100)}% of the gap. Residual shortfall is ${fbal.deficitPct}%.${fb.ma..."
+    "snippet": "`What is grown here covers ${Math.round(fb.dailyProduction/fb.dailyNeed*100)}% of the food people need. Trade brings in about ${Math.round(fb.importCoverage/(fb.rawDeficit||1)*100)}% of the rest, and ${fbal.deficitPct}% of what people ne..."
   },
   {
     "path": "src/components/new/tabs/EconomicsTab.jsx",
     "line": 586,
     "category": "percentToken",
-    "snippet": "`Production covers ${Math.round(fb.dailyProduction/fb.dailyNeed*100)}% of food needs. Trade imports cover an estimated ${Math.round(fb.importCoverage/(fb.rawDeficit||1)*100)}% of the gap. Residual shortfall is ${fbal.deficitPct}%.${fb.ma..."
+    "snippet": "`What is grown here covers ${Math.round(fb.dailyProduction/fb.dailyNeed*100)}% of the food people need. Trade brings in about ${Math.round(fb.importCoverage/(fb.rawDeficit||1)*100)}% of the rest, and ${fbal.deficitPct}% of what people ne..."
   },
   {
     "path": "src/components/new/tabs/EconomicsTab.jsx",
     "line": 587,
     "category": "floatInterpolation",
-    "snippet": "` Production deficit of ${fbal.deficitPct}%. Settlement requires food imports to sustain population.`"
+    "snippet": "`No trade brings food in here, and ${fbal.deficitPct}% of what people need goes unmet.`"
   },
   {
     "path": "src/components/new/tabs/EconomicsTab.jsx",
     "line": 587,
     "category": "percentToken",
-    "snippet": "` Production deficit of ${fbal.deficitPct}%. Settlement requires food imports to sustain population.`"
+    "snippet": "`No trade brings food in here, and ${fbal.deficitPct}% of what people need goes unmet.`"
   },
   {
     "path": "src/components/new/tabs/EconomicsTab.jsx",
