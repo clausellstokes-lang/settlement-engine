@@ -9257,10 +9257,12 @@
       "pool": "MAGICALLY SUSTAINED: a large prop (high magicRecovery)",
       "slotsFilled": [],
       "slotsNamed": [
-        "chain"
+        "chain",
+        "settlement"
       ],
       "slotsWithoutProvider": [
-        "chain"
+        "chain",
+        "settlement"
       ],
       "hasBag": false,
       "variants": 3,
@@ -56862,7 +56864,7 @@
       "subject": "MAGICALLY SUSTAINED: a large prop (high magicRecovery)",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 1 grammar(s) · slots {chain}"
+      "count": "3 variant(s) · 1 grammar(s) · slots {chain, settlement}"
     },
     {
       "tier": "COVERED",

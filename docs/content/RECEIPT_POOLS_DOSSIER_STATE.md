@@ -1015,7 +1015,7 @@ vocabulary and the attachable cause-clause library; this block authors the
 **IMPAIRED (canonical `scarce`), with a named dependency**
 1. `[ledger]` The {chain} is running below what it should. It wants {resource} the town cannot supply, and the shortfall reaches the services that draw on it.
 2. `[street]` {institution} is still open and still short. What it needs has not been coming, and the work it cannot do is felt further down.
-3. `[unfolding]` {settlement}'s {chain} produces less with every turn it goes without {resource}, and the trades below it are shortening their own work to match.
+3. `[unfolding]` {settlement}'s {chain} makes less the longer it goes without {resource}, and the trades that rely on it are cutting back too.
 
 **VULNERABLE (canonical `strained`)**
 1. `[ledger]` The {chain} runs, and it runs on no margin. Every input it needs is arriving and none of it is arriving spare.
@@ -1024,7 +1024,7 @@ vocabulary and the attachable cause-clause library; this block authors the
 
 **RUNNING (canonical `stable`): draw only with the note fields empty (R-DST-F)**
 1. `[ledger]` The {chain} runs whole. {institution} has what it needs, the outputs come off as expected, and nothing in the line is being covered for.
-2. `[visitor]` A stranger watching {settlement}'s {chain} sees the ordinary version of it: {resource} in at one end, {good} out at the other, and no gap between.
+2. `[visitor]` {resource} goes into {institution} at {settlement} and comes out as {good}, with no gap in between.
 3. `[street]` Nobody talks about the {chain}. It works, it has worked, and the town's attention is elsewhere.
 
 **ENTREPÔT**
@@ -1038,8 +1038,8 @@ vocabulary and the attachable cause-clause library; this block authors the
 3. `[street]` The {chain} runs on {institution}'s craft and everyone knows the craft is not enough. It buys time; it does not buy supply.
 
 **MAGICALLY SUSTAINED: a large prop (high `magicRecovery`)**
-1. `[ledger]` The {chain} runs almost whole on a working. The books show the output nearly where it belongs and the line beneath it replaced rather than repaired.
-2. `[visitor]` A stranger would see nothing wrong with this {chain}. What is wrong is that the thing carrying it is a craft and not a road.
+1. `[ledger]` {settlement}'s {chain} runs almost as it should, but on a working, not on its own supply.
+2. `[visitor]` Nothing looks wrong with {settlement}'s {chain}. Its supply is gone, and a working is carrying it.
 3. `[counterforce]` The {chain} should have failed and has not. What it lost is being made good by a working strong enough to stand in for nearly all of it.
 
 **OPERATIONAL: the service economy (no line of supply behind it)**

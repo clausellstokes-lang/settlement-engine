@@ -1319,7 +1319,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "{settlement}'s {chain} produces less with every turn it goes without {resource}, and the trades below it are shortening their own work to match.",
+          "text": "{settlement}'s {chain} makes less the longer it goes without {resource}, and the trades that rely on it are cutting back too.",
           "slots": [
             "settlement",
             "chain",
@@ -1366,11 +1366,11 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "A stranger watching {settlement}'s {chain} sees the ordinary version of it: {resource} in at one end, {good} out at the other, and no gap between.",
+          "text": "{resource} goes into {institution} at {settlement} and comes out as {good}, with no gap in between.",
           "slots": [
-            "settlement",
-            "chain",
             "resource",
+            "institution",
+            "settlement",
             "good"
           ],
           "vid": 2
@@ -1439,16 +1439,18 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "MAGICALLY SUSTAINED: a large prop (high magicRecovery)": [
         {
           "angle": "ledger",
-          "text": "The {chain} runs almost whole on a working. The books show the output nearly where it belongs and the line beneath it replaced rather than repaired.",
+          "text": "{settlement}'s {chain} runs almost as it should, but on a working, not on its own supply.",
           "slots": [
+            "settlement",
             "chain"
           ],
           "vid": 1
         },
         {
           "angle": "visitor",
-          "text": "A stranger would see nothing wrong with this {chain}. What is wrong is that the thing carrying it is a craft and not a road.",
+          "text": "Nothing looks wrong with {settlement}'s {chain}. Its supply is gone, and a working is carrying it.",
           "slots": [
+            "settlement",
             "chain"
           ],
           "vid": 2
