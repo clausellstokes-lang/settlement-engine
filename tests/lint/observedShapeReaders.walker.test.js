@@ -766,7 +766,9 @@ describe('reader-with-no-writer ratchet: the EXECUTED corpus', () => {
     // SAME shape, travelling the same walk. Without it "the key is absent" and
     // "the shape drifted away and the census measured nothing" are the same
     // green — which is the exact vacuity this whole walker exists to refuse.
-    expectAbsentWithAnchor(corpus.shapes.factions.keys, 'id', 'name', 'TCD-1');
+    // Re-keyed by identity with its cause (PEOPLE-LAND, schema 31, 2026-11-07): the NPC grouping, whose items carried
+    // `name`, left the record at the v2 boundary (M-2, M-7); the `factions` shape is the POWERS now, named by `faction`.
+    expectAbsentWithAnchor(corpus.shapes.factions.keys, 'id', 'faction', 'TCD-1');
     expectAbsentWithAnchor(corpus.shapes.economicState.keys, 'exports', 'primaryExports', 'TCD-2');
     expectAbsentWithAnchor(corpus.shapes.settlement.keys, 'economy', 'economicState', 'TCD-2');
     expectAbsentWithAnchor(corpus.shapes.settlement.keys, 'trade', 'economicState', 'TCD-2');
