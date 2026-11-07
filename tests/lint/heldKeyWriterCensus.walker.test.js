@@ -124,7 +124,9 @@ const ROSTER = Object.freeze([
   { symbol: 'enrichNpcCoherence', file: NARRATIVE_FILE, cls: 'enricher', stream: NAMED_CHILD, via: 'generateCoherence' },
   { symbol: 'buildPoliticalNarrative', file: NARRATIVE_FILE, cls: 'enricher', stream: NAMED_CHILD, via: 'generateCoherence' },
   { symbol: 'mergeNPCLists', file: 'src/generators/npcGenerator.js', cls: 'enricher', stream: NAMED_CHILD, via: 'generateCoherence' },
-  { symbol: 'disperseNamedRoster', file: 'src/generators/density/applyDensityLaw.js', cls: 'enricher', stream: NAMED_CHILD, via: 'generateCoherence' },
+  // 2026-11-07 PEOPLE-1 CAST (R-P2/R-P3): `disperseNamedRoster` is RETIRED from birth — the cast is the roster's faces;
+  // the powers' people are written by `assignCastPowers` in the same named child stream, through the same seam.
+  { symbol: 'assignCastPowers', file: 'src/generators/people/castPowers.js', cls: 'enricher', stream: NAMED_CHILD, via: 'generateCoherence' },
   { symbol: 'enrichNPCsWithStructure', file: 'src/generators/npcStructure.js', cls: 'enricher', stream: NAMED_CHILD, via: 'generateCoherence' },
   { symbol: 'relinkFactionMembers', file: NARRATIVE_FILE, cls: 'MIRROR', stream: SHARED, via: 'generateCoherence' },
   { symbol: 'ensureFactionStructuralNpcs', file: 'src/generators/factionRoles.js', cls: 'producer', stream: SHARED, via: ASSEMBLY_STEP },
@@ -598,7 +600,7 @@ describe('EM-R1 — the writer census of every held key', () => {
     expect(inside.filter((symbol) => !called(enrichmentBody, symbol)),
       'a named-child row is not called from the one named child stream').toEqual([]);
     expect(inside).toEqual([
-      'buildPoliticalNarrative', 'disperseNamedRoster', 'enrichNPCsWithStructure', 'mergeNPCLists',
+      'assignCastPowers', 'buildPoliticalNarrative', 'enrichNPCsWithStructure', 'mergeNPCLists',
     ]);
 
     // A SECOND named child stream around a held writer reds BY NAME: the substream label set is

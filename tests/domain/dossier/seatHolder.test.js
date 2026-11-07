@@ -64,11 +64,22 @@ describe('the seat over 120 generated settlements (twenty per tier, fixed seeds)
     expect(seated + vacant).toBe(120);
   });
 
-  it('every thorp and hamlet that is not a claimant vacancy seats the governing faction Elder', () => {
+  it('every thorp and hamlet that is not a claimant vacancy seats the governing power\'s FIRST, whose role is its title (M-1b)', () => {
+    // 2026-11-07 PEOPLE-1 CAST (M-1b, the owner: a representative's ROLE is its institution's title and its standing
+    // in each power its RANK): the seat is the card ranked first in the governing power — 'the eldest', 'the headman',
+    // 'the household elder' at a thorp or hamlet (the census's titles and the R-P2 mint table), never 'Elder'.
     const small = corpus.filter(({ tier, s }) => (tier === 'thorp' || tier === 'hamlet') && !isClaimantVacancy(s));
     expect(small.length).toBeGreaterThan(30);
-    const roles = small.map(({ seed, s }) => `${seed}:${rulingChainOf(s).npc?.role ?? 'none'}`);
-    expect(roles.filter((r) => !r.endsWith(':Elder'))).toEqual([]);
+    const misses = [];
+    for (const { seed, s } of small) {
+      const gov = nameOf(governingFactionOf(s));
+      const npc = rulingChainOf(s).npc;
+      const card = npc ? (s.npcs || []).find((n) => n.name === npc.name) : null;
+      if (!card) { misses.push(`${seed}: nobody seated`); continue; }
+      if (card.role !== card.title) misses.push(`${seed}: role ${card.role} is not the title ${card.title}`);
+      if (!(card.memberships || []).some((m) => m.power === gov && m.rank === 1)) misses.push(`${seed}: ${card.name} is not ${gov}'s first`);
+    }
+    expect(misses).toEqual([]);
   });
 
   it('seatHolderFindings is empty over the 120', () => {
@@ -99,12 +110,22 @@ describe('the tier\'s own head wins (chair ruling c, 2026-11-03)', () => {
   // Register VII lit (3420d01e3, X-46 car 4; first-parent bisect: green at fb5edb7f5, red from
   // 3420d01e3) re-draws the city rosters, so the two cities whose governing faction holds a Governor
   // beside its Mayor are now -5 and -9 (2 of the 20, the mechanism still fires); the assertion is unchanged.
-  it('every city seats its required Mayor; rulers-city-5 and rulers-city-9 also hold a Governor', () => {
+  it('every city seats the governing power\'s FIRST (M-1b), and the tier\'s own head wins among seat words', () => {
+    // 2026-11-07 PEOPLE-1 CAST (M-1b): no card carries 'Mayor' or 'Governor' as a role any more — a card's role is its
+    // title ('the mayor' at the hall, a Government-shelf house's title) and the seat is the governing power's first
+    // by rank. The fixture premise of two cities drawing a Governor beside a Mayor dissolved with the rung roles; the
+    // precedence among seat WORDS is kept by the crafted arm below.
     const cities = corpus.filter(({ tier, s }) => tier === 'city' && !isClaimantVacancy(s));
     expect(cities.length).toBe(20);
-    const both = cities.filter(({ s }) => { const gov = nameOf(governingFactionOf(s)); const roles = (s.npcs || []).filter((n) => n.factionAffiliation === gov).map((n) => n.role); return roles.includes('Mayor') && roles.includes('Governor'); });
-    expect(both.map(({ seed }) => seed), 'fixture premise: the two cities that drew a Governor').toEqual(expect.arrayContaining(['rulers-city-5', 'rulers-city-9']));
-    expect(cities.map(({ seed, s }) => `${seed}:${rulingChainOf(s).npc?.role}`).filter((r) => !r.endsWith(':Mayor'))).toEqual([]);
+    const misses = [];
+    for (const { seed, s } of cities) {
+      const gov = nameOf(governingFactionOf(s));
+      const npc = rulingChainOf(s).npc;
+      const card = npc ? (s.npcs || []).find((n) => n.name === npc.name) : null;
+      if (!card) { misses.push(`${seed}: nobody seated`); continue; }
+      if (!(card.memberships || []).some((m) => m.power === gov && m.rank === 1)) misses.push(`${seed}: ${card.name} is not ${gov}'s first`);
+    }
+    expect(misses).toEqual([]);
   });
 
   it('the tier decides: a metropolis seats its Governor, a city its Mayor, and another head seats only when the tier\'s own is absent', () => {

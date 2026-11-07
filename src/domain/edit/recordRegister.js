@@ -211,6 +211,8 @@ export const KEYED_COLLECTIONS = Object.freeze({
   'economicViability.warnings': 'title',
   factions: 'name',
   'factions[].members': 'id',
+  // 2026-11-07 PEOPLE-1 CAST (R-P3/R-P5): a card's powers, one entry per power its house backs, keyed by the power's name.
+  'factions[].members[].memberships': 'power',
   'generationCoherenceReceipt.checks': 'id',
   'generationCoherenceReceipt.judgments': 'id',
   'generationCoherenceReceipt.repairs': Object.freeze(['type', 'subject', 'action']),
@@ -220,6 +222,7 @@ export const KEYED_COLLECTIONS = Object.freeze({
   'history.legacyAnnotations': Object.freeze(['eventName', 'yearsAgo']),
   institutions: 'name',
   npcs: 'id',
+  'npcs[].memberships': 'power',
   'powerStructure.conflicts': Object.freeze(['parties', 'issue']),
   'powerStructure.factionRelationships': 'pair',
   relationships: Object.freeze(['npc1Id', 'npc2Id', 'type']),

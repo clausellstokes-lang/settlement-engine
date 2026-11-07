@@ -221,9 +221,23 @@ export const NPC_HOMES = Object.freeze(['npcs[]', 'factions[].members[]']);
  * holding an ARRAY of names rather than one; `kind` is the declared surface kind
  * (exact-key rewrite vs whole-word prose substitution).
  *
- * @type {ReadonlyArray<{ parent: string | null, key: string, kind: 'key' | 'prose', list?: boolean, why: string }>}
+ * @type {ReadonlyArray<{ parent: string | null, key: string, kind: 'key' | 'prose', list?: boolean, each?: boolean, when?: { key: string, equals: unknown }, why: string }>}
  */
 const NPC_FACTION_FIELDS = Object.freeze([
+  // 2026-11-07 PEOPLE-1 CAST (R-P3): the card's powers — `memberships[]` holds one record per power the
+  // card's house backs, each naming the power by its display name; `each` marks a LIST OF RECORDS whose
+  // `key` is rewritten on every entry (the shim's two affiliation fields below are derived from these).
+  { parent: 'memberships', key: 'power', kind: 'key', each: true,
+    why: 'the people car\'s memberships: every power a representative stands in, by the power\'s name, with its rank there' },
+  // a MINTED face (the seat of R-P2, an `other` power's of R-P4) is the face of the POWER itself:
+  // `institution.key` holds the power's name (`when` kind === 'power'; a house-kind card's key is the
+  // house's roster name, owned by the institution ledger) and its title is built from the name.
+  { parent: 'institution', key: 'key', kind: 'key', when: { key: 'kind', equals: 'power' },
+    why: 'a minted face\'s institution is the power it stands for, keyed by the power\'s name' },
+  { parent: 'institution', key: 'title', kind: 'prose',
+    why: 'a minted face\'s title is built from the power\'s name (people/mintTitles.js headOf: "the head of <power>")' },
+  { parent: null, key: 'title', kind: 'prose',
+    why: 'the card\'s title, the same string as institution.title (M-1b: the role is the title too, and `role` is declared below)' },
   { parent: null, key: 'factionAffiliation', kind: 'key',
     why: 'the display-name link every pipeline NPC carries to its faction' },
   { parent: null, key: 'secondaryAffiliation', kind: 'key',
@@ -260,10 +274,10 @@ const NPC_FACTION_FIELDS = Object.freeze([
 /**
  * The stored path of one NPC field under one of its two homes.
  * @param {string} home
- * @param {{ parent: string|null, key: string, list?: boolean }} field
+ * @param {{ parent: string|null, key: string, list?: boolean, each?: boolean }} field
  */
 function npcFieldPath(home, field) {
-  const owner = field.parent ? `${home}.${field.parent}` : home;
+  const owner = field.parent ? `${home}.${field.parent}${field.each ? '[]' : ''}` : home;
   return `${owner}.${field.key}${field.list ? '[]' : ''}`;
 }
 
@@ -384,6 +398,15 @@ export const NON_CASCADED_SURFACES = Object.freeze([
   // the institution ledger (src/domain/institutionRename.js), which declares the mirror
   // rows; renaming the faction must not silently rename the house.
   { path: 'institutions[].name', why: 'the house record\'s own name, owned by the institution ledger: it equals a faction name only where the power layer names the governing faction after its body' },
+  // 2026-11-07 PEOPLE-1 CAST: the card's catalogue FAMILY key (people/representatives.js) is the catalogue's
+  // identity of the house's family, spelled as the family's first-tier name; it equals a faction name only
+  // where the power layer names the governing faction after its body ('Merchant oligarchy'), as the row above.
+  { path: 'npcs[].institution.family', why: 'the catalogue family key of the face\'s house, owned by the catalogue (src/data/institutionalCatalog.js), never a faction handle' },
+  { path: 'factions[].members[].institution.family', why: 'the member copy of the row above' },
+  // the coherence battery's findings are the generation RECEIPT (design §22.3 item 1: history by path), as
+  // simulationTrace[].causes[].reason above: "seat_unfilled: nobody holds the seat of <power>" is what the
+  // battery judged at birth, under the name the power bore then.
+  { path: 'generationCoherenceReceipt.judgments[].findings[].detail', why: 'the battery\'s finding, a recorded judgment of the birth record; rewriting it would falsify the receipt' },
   { path: 'availableServices.legal[].institution', why: 'the house providing the service, owned by the institution ledger, for the reason the row above gives' },
   // RUNG1B-F7 unit 5 (the chair's ruling; soak1k-35 on the composed window db8ce5da): the same
   // collision on the crisis cast's levers, which the institution ledger cascades as a HOUSE handle.
@@ -698,8 +721,18 @@ function renameNpcRecord(npc, home, oldName, newName, mark) {
   for (const field of NPC_FACTION_FIELDS) {
     // A nested field's parent record must ALREADY exist; this module never
     // mints one, exactly as it never mints a missing name spelling.
+    if (field.each) {
+      // a list of records: the key is rewritten on every entry that carries the old name
+      const entries = Array.isArray(npc[field.parent]) ? npc[field.parent] : null;
+      if (!entries) continue;
+      let movedAny = false;
+      for (const entry of entries) if (isRecord(entry) && rewriteKey(entry, field.key, oldName, newName)) movedAny = true;
+      mark(npcFieldPath(home, field), movedAny);
+      continue;
+    }
     const owner = field.parent ? npc[field.parent] : npc;
     if (!isRecord(owner)) continue;
+    if (field.when && owner[field.when.key] !== field.when.equals) continue;
     const moved = field.list
       ? rewriteNameList(owner, field.key, oldName, newName)
       : field.kind === 'key'

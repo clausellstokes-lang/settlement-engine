@@ -65,7 +65,8 @@ function assertCast(s, label) {
   for (const card of cards) {
     expect(typeof card.title === 'string' && card.title.length > 0, `${label}: ${card.id} carries a title`).toBe(true);
     expect(card.memberships, `${label}: ${card.id} memberships`).toEqual(expect.any(Array));
-    expect(card.id, `${label}: ids derive from the house, never an index`).not.toMatch(/^npc_\d+$/);
+    // anchored positively: an id is the house's slug (or the seat's / a power's mint), never today's `npc_<index>`
+    expect(card.id, `${label}: ids derive from the house, never an index`).toMatch(/^npc_[a-z][a-z0-9_]*$/);
     // today's record body, every field the surfaces read
     expect(card.role, `${label}: ${card.id} role is the title (M-1b)`).toBe(card.title);
     for (const key of ['name', 'gender', 'role', 'category', 'personality', 'physical', 'plotHooks', 'influence', 'power', 'presentation']) {

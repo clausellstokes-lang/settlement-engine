@@ -45,7 +45,7 @@ import { CRISIS_CAST_HOMES, DEFENSE_CATEGORIES, NPC_HOMES as INSTITUTION_HOMES, 
 /** @typedef {{ owner: StoredRecord, key: string, isList: boolean, holder: unknown[]|null, index: number, via: { owner: StoredRecord, key: string }|null }} Site */
 /** A row's record filter: the leaf's owner must carry `key` equal to `equals` (the crisis cast's `kind`). @typedef {{ key: string, equals: string }} SiteFilter */
 /** One declared row of the cascade list. `rewrite` is present only on a `label` row; `where` only on a row whose owner record is shared by several kinds of name. @typedef {{ path: string, match: 'exact'|'label', rewrite?: LabelRewrite, where?: SiteFilter, removal: string, why: string }} SurfaceRow */
-/** One institution-name-bearing field an NPC record carries, before it is spread across the two homes. @typedef {{ parent: string|null, key: string, list: boolean, removal: string, why: string }} HandleField */
+/** One institution-name-bearing field an NPC record carries, before it is spread across the two homes. @typedef {{ parent: string|null, key: string, list: boolean, removal: string, where?: SiteFilter, why: string }} HandleField */
 /** One row of the NON_CASCADED ledger. @typedef {{ path: string, kind: string, readable: boolean, why: string }} LedgerRow */
 
 /** The settlement buckets the cascade can reach, for the immutable form's minimal clone. */
@@ -111,10 +111,10 @@ export const LABEL_REWRITE = Object.freeze({
  * @type {ReadonlyArray<HandleField>}
  */
 const INSTITUTION_HANDLE_FIELDS = Object.freeze([
-  { parent: null, key: 'institution', list: false, removal: 'delete-key',
-    why: 'the employing house a pipeline character is attached to' },
-  { parent: null, key: 'secondaryAffiliation', list: false, removal: 'delete-key',
-    why: 'the second attachment npcGenerator writes for a character with a criminal or civic tie' },
+  // 2026-11-07 PEOPLE-1 CAST (R-P2): `institution` is a RECORD `{ kind, key, family, title }` on every card; the
+  // house's name is its `key` (a `kind: 'house'` card) — a removal deletes the key and the face keeps its title.
+  { parent: 'institution', key: 'key', list: false, removal: 'delete-key', where: Object.freeze({ key: 'kind', equals: 'house' }),
+    why: 'the house a representative is the face of, by the house\'s roster name (people/representatives.js); a `kind: \'power\'` card\'s key is a POWER name, the faction ledger\'s' },
   { parent: 'corruptTies', key: 'thievesGuild', list: false, removal: 'delete-key',
     why: 'the corruption record names the guild house by its own name' },
   { parent: 'corruptTies', key: 'criminalInstitution', list: false, removal: 'delete-key',
@@ -167,6 +167,7 @@ export const INSTITUTION_RENAME_SURFACES = Object.freeze([
     why: 'the second DERIVED DISPLAY LABEL, rendered on Economics under a Via label: deriveInstitutionalServices stores the lowercased name, so the rewrite is lowercased too or the producer invariant breaks' },
   ...INSTITUTION_HOMES.flatMap((home) => INSTITUTION_HANDLE_FIELDS.map((field) => ({
     path: handlePath(home, field), match: /** @type {'exact'} */ ('exact'), removal: field.removal, why: field.why,
+    ...(field.where ? { where: field.where } : {}),
   }))),
   ...CRISIS_CAST_HOMES.flatMap((home) => [
     { path: `${home}.levers[].institution`, match: /** @type {'exact'} */ ('exact'), removal: 'drop-entry',
@@ -189,6 +190,23 @@ export const INSTITUTION_RENAME_SURFACES = Object.freeze([
  * @type {ReadonlyArray<LedgerRow>}
  */
 export const NON_CASCADED_SURFACES = Object.freeze([
+  // 2026-11-07 PEOPLE-1 CAST (M-2, the shim): `secondaryAffiliation` is the card's SECOND POWER (rank 2),
+  // written by people/legacyShim.js from `memberships` — a FACTION name, the faction ledger's — and no
+  // longer the criminal or civic house npcGenerator wrote; PEOPLE-5 deletes the field. It equals a house
+  // name only where the power layer names the governing body after its house ('Merchant oligarchy').
+  { path: 'npcs[].secondaryAffiliation', kind: 'label', readable: true,
+    why: 'the card\'s second power under the people car\'s shim (a faction name, owned by src/domain/factionRename.js), not a house handle' },
+  { path: 'factions[].members[].secondaryAffiliation', kind: 'label', readable: true,
+    why: 'the member copy of the row above' },
+  // 2026-11-07 PEOPLE-1 CAST: the card's fields (people/representatives.js, people/castPowers.js).
+  { path: 'npcs[].institution.family', kind: 'catalogue', readable: false,
+    why: 'the CATALOGUE FAMILY KEY of the face\'s house (src/data/institutionalCatalog.js :: familyOfInstitution), spelled as the family\'s first-tier name: the catalogue\'s identity, not the roster\'s name, and the backing catalogue and the face table are keyed by it' },
+  { path: 'factions[].members[].institution.family', kind: 'catalogue', readable: false,
+    why: 'the member copy of the row above' },
+  { path: 'npcs[].memberships[].power', kind: 'label', readable: true,
+    why: 'a POWER name (the faction ledger\'s, src/domain/factionRename.js): it equals a house name only where the power layer names the governing faction after its body, the reason powerStructure.factions[].faction gives below' },
+  { path: 'factions[].members[].memberships[].power', kind: 'label', readable: true,
+    why: 'the member copy of the row above' },
   { path: 'simulationTrace[].downstreamEffects[].target', kind: 'receipt', readable: false,
     why: 'the generation RECEIPT: it records what the generator decided while the house still bore its old name, so rewriting it would falsify the trace' },
   { path: 'generationCoherenceReceipt.repairs[].subject', kind: 'receipt', readable: false,

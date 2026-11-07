@@ -52,8 +52,10 @@ const CFG = {
 // A pair chosen by probe, not by hope: world A's roster is strictly larger than
 // world B's and several of A's mid-roster characters are absent from B, so a lock
 // that still acted would have somebody to carry.
-const SEED_A = 'lockb-A-1';
-const SEED_B = 'lockb-B-1';
+// 2026-11-07 PEOPLE-1 CAST: re-keyed by identity lockb-A-1 / lockb-B-1 -> lockb-A-8 / lockb-B-8 (probed at the lane's
+// tip over eight seeds a side: A 34 cards, B 14, 30 of A's mid-roster names absent from B); the claims are unchanged.
+const SEED_A = 'lockb-A-8';
+const SEED_B = 'lockb-B-8';
 
 /** @type {Record<string, any>} */
 let worldA;

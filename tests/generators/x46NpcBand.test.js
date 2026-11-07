@@ -226,10 +226,19 @@ describe('X-46 car 4 (iii) — dark, the world is byte-identical; lit (in this t
       const band = DENSITY_BANDS[tier].mass;
       const worlds = litFor(tier);
       const named = worlds.map(w => w.named);
-      expect(Math.min(...named)).toBeGreaterThanOrEqual(band.min);
-      expect(Math.max(...named)).toBeLessThanOrEqual(band.max);
-      // The step function is gone: inside one tier, more people means more named people.
-      expect(spearman(worlds.map(w => w.population), named)).toBeGreaterThan(0.4);
+      // 2026-11-07 PEOPLE-1 CAST (the people car's lane 1; docs/PEOPLE_1_CAST_2026-11-07.md): the named people are the CAST — one card per face-bearing house plus the
+      // seat's and the `other` powers' mints (R-P2, R-P4) — and the `mass` band is unread (M-5; it stays signed in
+      // densityBands.js, byte-identical, read here only to prove it still exists). The roster follows the HOUSES,
+      // and the houses follow the population through the institution budget, so the rank correlation is kept.
+      expect(band.min).toBeGreaterThan(0);
+      expect(Math.min(...named)).toBeGreaterThanOrEqual(1);
+      for (const w of worlds) expect(w.named).toBeLessThanOrEqual((w.s.institutions || []).length + (w.s.powerStructure?.factions || []).length);
+      // The step function is gone: inside one tier, more people means more named people — except at the THORP,
+      // whose cast is one to four faces (a household, an elder's house, a shrine) at every population of the band,
+      // so the population carries no rank signal there (measured 0.085 at the lane's tip; the cast is the roster's,
+      // not the population's). The claim is kept from the hamlet up.
+      if (tier === 'thorp') expect(spearman(worlds.map(w => w.population), named)).toBeGreaterThanOrEqual(0);
+      else expect(spearman(worlds.map(w => w.population), named)).toBeGreaterThan(0.4);
     }, 300_000);
   }
 
@@ -237,11 +246,11 @@ describe('X-46 car 4 (iii) — dark, the world is byte-identical; lit (in this t
     for (const tier of TIER_ORDER) {
       for (const { s } of litFor(tier)) {
         expect(s.npcs.filter(n => n.generatedAs === 'faction_structural')).toHaveLength(0);
-        const crew = new Map();
-        for (const npc of s.npcs) crew.set(npc.factionAffiliation, (crew.get(npc.factionAffiliation) || 0) + 1);
-        for (const f of s.powerStructure?.factions || []) {
-          expect(crew.get(f.faction || f.name) || 0).toBeGreaterThanOrEqual(1);
-        }
+        // 2026-11-07 PEOPLE-1 CAST (the people car's lane 1; docs/PEOPLE_1_CAST_2026-11-07.md): "every house crewed" is retired with the roster law — a power with no
+        // face-bearing house of its archetype is at zero by R-P5 (castPowers.test.js holds the exact claim); the
+        // GOVERNING house is always crewed (the seat, R-P2).
+        const gov = (s.powerStructure?.factions || []).find((f) => f.isGoverning);
+        if (gov) expect(s.npcs.some((n) => (n.memberships || []).some((m) => m.power === (gov.faction || gov.name)))).toBe(true);
       }
     }
   }, 300_000);

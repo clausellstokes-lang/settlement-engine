@@ -20,7 +20,7 @@
 
 import { governingFactionOf, nameOf } from '../rulingPower.js';
 import { rulingChainOf, liveSeatCandidatesOf } from '../dossier/powerStrata.js';
-import { seatTitleRankOf, isOfficeStandIn } from '../dossier/seatHolder.js';
+import { seatTitleRankOf, isOfficeStandIn, SEAT_TITLES, TIER_HEAD } from '../dossier/seatHolder.js';
 import { npcInFaction, ladderFactionKey } from '../worldPulse/npcLadderFactionMembership.js';
 
 /** @typedef {import('../dossier/seatHolder.js').SeatSettlement} SeatSettlement */
@@ -74,8 +74,19 @@ export function seatHolderFindings(settlement) {
     findings.push({ code: 'seat_stand_in', detail: `${seatName} is an office stand-in` });
   }
   const rank = seated ? seatTitleRankOf(seated.npc) : -1;
-  if (rank >= 0) {
-    const peers = liveSeatCandidatesOf(settlement).filter((n) => n !== seated?.npc && seatTitleRankOf(n) === rank);
+  if (seated) {
+    // 2026-11-07 PEOPLE-1 CAST (M-1b): the seat is the governing power's FIRST by rank, and its title need not carry
+    // a seat word ('the eldest', 'the magistrate'). A contest is a SECOND FIRST — another card ranked 1 in the
+    // governing power — or, for a card that carries no memberships (a record born before the car, a planted
+    // fixture), a seat word of the seat's own rank (the tier's head where the seat's title has none).
+    const tierHead = TIER_HEAD[String(settlement?.tier || '').toLowerCase()] || '';
+    const officeRank = rank >= 0 ? rank : (tierHead ? SEAT_TITLES.indexOf(tierHead) : -1);
+    const isFirst = (/** @type {SeatNpc} */ n) => Array.isArray(/** @type {{ memberships?: unknown }} */ (n).memberships)
+      && /** @type {Array<{ power?: unknown, rank?: unknown }>} */ (/** @type {{ memberships?: unknown }} */ (n).memberships)
+        .some((m) => m && typeof m === 'object' && m.power === govName && m.rank === 1);
+    const hasMemberships = (/** @type {SeatNpc} */ n) => Array.isArray(/** @type {{ memberships?: unknown }} */ (n).memberships);
+    const peers = liveSeatCandidatesOf(settlement).filter((n) => n !== seated?.npc
+      && (isFirst(n) || (!hasMemberships(n) && officeRank >= 0 && seatTitleRankOf(n) === officeRank)));
     for (const peer of peers) {
       findings.push({ code: 'seat_contested', detail: `${String(peer.name || '')} holds the same office as ${seatName}` });
     }

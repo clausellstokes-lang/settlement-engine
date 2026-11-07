@@ -305,6 +305,10 @@ describe('faction rename — the declared surface set', () => {
       // The succession-void goal names a faction too (added 2026-09-30 with its surface).
       goal: { short: `Position themselves before ${OLD} moves first`, long: 'Secure authority through the right means, not just the fastest' },
       secret: { what: `Aldis sells ${OLD} manifests to the Militia.`, stakes: `The ${OLD} would drown them for it.` },
+      // PEOPLE-1 CAST (2026-11-07): the card's powers and, for a minted face, the power it stands for.
+      title: `the head of ${OLD}`,
+      institution: { kind: 'power', key: OLD, family: null, title: `the head of ${OLD}` },
+      memberships: [{ power: OLD, rank: 1, share: 1 }, { power: 'Militia', rank: null, share: 0.2 }],
     });
     const settlement = {
       name: 'Bramblewatch',

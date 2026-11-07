@@ -226,18 +226,22 @@ describe('institution rename: the declared cascade over real pipeline saves', ()
       'THE RED CONTROL PASSED: version 2 lists survived the two new arms, so the arms convict nothing',
     ).toBeGreaterThanOrEqual(1);
 
-    // (v) THE DISJOINTNESS ARM: no secondaryAffiliation value is BOTH a roster house and a roster faction.
-    const bothKinds = [];
+    // (v) THE DISJOINTNESS ARM, RE-KEYED 2026-11-07 (PEOPLE-1 CAST, M-2): `secondaryAffiliation` is the card's SECOND
+    // POWER, written by the shim from `memberships` (people/legacyShim.js) — a FACTION name by construction, the
+    // faction ledger's, and no longer the criminal or civic HOUSE npcGenerator wrote (the handle row left this
+    // ledger; the NON_CASCADED row names it). Where the power layer names a governing body after its house
+    // ('Merchant oligarchy', 'Democratic assembly') the value is both a house and a faction name, which the old
+    // exact guard could not tell apart and this ledger no longer reads. The arm now holds the shim's contract.
+    const notAFaction = [];
     for (const world of worlds) {
-      const houses = new Set(rosterOf(world.save));
       const factions = new Set((world.save.powerStructure?.factions || [])
         .map((record) => String(record?.faction || record?.name || '').trim()).filter(Boolean));
       for (const value of [...valuesAt(world.save, 'npcs[].secondaryAffiliation'), ...valuesAt(world.save, 'factions[].members[].secondaryAffiliation')]) {
         const held = value.trim();
-        if (houses.has(held) && factions.has(held)) bothKinds.push(`${world.key}: ${held}`);
+        if (held && !factions.has(held)) notAFaction.push(`${world.key}: ${held}`);
       }
     }
-    expect([...new Set(bothKinds)], 'a secondaryAffiliation value names BOTH a house and a faction, so the exact guard cannot tell them apart').toEqual([]);
+    expect([...new Set(notAFaction)], 'a secondaryAffiliation value is not a roster faction: the shim writes the second power only').toEqual([]);
 
     // (vi) THE LABEL_REWRITE CLOSED-VOCABULARY PIN, in OrphanKind's exact shape.
     const forms = Object.keys(LABEL_REWRITE).sort();
@@ -250,7 +254,9 @@ describe('institution rename: the declared cascade over real pipeline saves', ()
     expect(exactRows.filter((row) => Object.hasOwn(row, 'rewrite')).map((row) => row.path),
       'an exact row carries no rewrite field: the match kind forbids the question').toEqual([]);
     // 34 the packet declared, plus the crisis cast's twelve (RUNG1B-F7: lever, house-kind id and name, at four homes).
-    expect(exactRows.length, 'the exact rows are the 46 the packet and RUNG1B-F7 declare').toBe(46);
+    // 2026-11-07 PEOPLE-1 CAST (M-2): 46 -> 44 — the `secondaryAffiliation` handle row left this ledger at both homes (the
+    // field is the shim's SECOND POWER now, a faction name); `institution.key` (kind: house) took the old `institution` row's place.
+    expect(exactRows.length, 'the exact rows are the 44 the packet and RUNG1B-F7 declare').toBe(44);
 
     // (vi)(d) BOTH MEMBERS OBSERVED FIRING through the cascade, never asserted from the declaration.
     const fired = new Set();
@@ -318,7 +324,9 @@ describe('institution rename: the declared cascade over real pipeline saves', ()
       const members = membersById(save);
       return (save.npcs || []).filter((npc) => {
         const twin = npc?.id ? members.get(npc.id) : null;
-        return twin ? PAIRED_FIELDS.some((field) => npc[field] !== twin[field]) : false;
+        // 2026-11-07 PEOPLE-1 CAST: `institution` is a record `{ kind, key, family, title }` on every card (R-P2), and
+        // the member copy is a COPY, so the pair is compared by value, not by reference.
+        return twin ? PAIRED_FIELDS.some((field) => JSON.stringify(npc[field] ?? null) !== JSON.stringify(twin[field] ?? null)) : false;
       }).length;
     };
     let paired = 0;

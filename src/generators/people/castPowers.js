@@ -41,24 +41,25 @@
  */
 
 import { slugify } from '../../kernel/slugify.js';
-import { backingArchetypeOf, dealDoubledNiches, houseBacksOf } from '../../domain/dossier/powerSupport.js';
-import { BACKING_ARCHETYPES } from '../../data/institutionBacking.js';
+import { dealDoubledNiches, houseBacksOf } from '../../domain/dossier/powerSupport.js';
 import { governingFactionOf, nameOf } from '../../domain/rulingPower.js';
 import { isNoPowerInstitution } from '../../data/institutionalCatalog.js';
-import { generateSingleNPC } from '../npcGenerator.js';
-import { deriveTradeCommodity } from '../tradeCommodity.js';
-import { resolveGenerationWorldLaw } from '../generationContext.js';
-import { disambiguateNPCDisplayNames } from '../npcDisplayNames.js';
-import { onStream, seatHouseOf, SEAT_CARD_ID } from './representatives.js';
-import { otherMintRowFor } from './mintTitles.js';
+import { seatHouseOf, SEAT_CARD_ID } from './representatives.js';
+import { OTHER_CARD_PREFIX } from './mintTitles.js';
 import { RUNG_KEYS, rungBandsForTier } from '../../domain/density/densityRungs.js';
 
-/** The keyed fork the mints and the ranks draw under (declared in the fork census). */
+/** The keyed fork the ranks draw under (declared in the fork census). */
 export const POWERS_FORK_LABEL = 'people-powers';
-/** The one `other` mint's id prefix. */
-export const OTHER_CARD_PREFIX = 'npc_power_';
+/** The one `other` mint's id prefix (owned by people/mintTitles.js; the mint is born in representatives.js). */
+export { OTHER_CARD_PREFIX };
 /** How many a power ranks (R-P5: "up to three"). */
-export const RANKS = 3;
+/**
+ * THE DIALS of the powers' people (R-P5), a tuning table so the register names them (DRAFT rows in
+ * tests/lint/.tuning-register.json until the owner signs the estate): the three ranks a power
+ * seats, and the roll weight a weight-0 house carries (the brief: "0.5 for weight 0").
+ */
+export const CAST_POWERS_TUNING = Object.freeze({ RANKS: 3, WEIGHT_ZERO_HOUSE: 0.5 });
+export const RANKS = CAST_POWERS_TUNING.RANKS;
 
 const powerSlug = (name) => slugify(name, { sep: '_', max: 60, fallback: 'power', empty: 'power' });
 const round4 = (x) => Math.round(x * 10000) / 10000;
@@ -69,7 +70,7 @@ const round4 = (x) => Math.round(x * 10000) / 10000;
  * @param {number} share @param {number | null} weight null for a minted face
  */
 export function rollWeightOf(share, weight) {
-  const w = weight === null ? 1 : (weight === 0 ? 0.5 : weight);
+  const w = weight === null ? 1 : (weight === 0 ? CAST_POWERS_TUNING.WEIGHT_ZERO_HOUSE : weight);
   return share * w;
 }
 
@@ -79,8 +80,8 @@ export function rollWeightOf(share, weight) {
  */
 
 /**
- * THE POWERS' PEOPLE. Mutates the cards' `memberships`, appends the `other` mints, returns the
- * whole cast (display names re-disambiguated over the mints, draw-free).
+ * THE POWERS' PEOPLE. Mutates the cards' `memberships` and `importance`, returns the cast (the
+ * `other` mints are born with it in representatives.js; nothing is appended here).
  *
  * @param {Record<string, any>} settlement the settlement-shaped object at the coherence seam
  *   (tier, institutions, powerStructure, economicState, config, _userEdits for the DM's `backs`)
@@ -96,9 +97,8 @@ export function assignCastPowers(settlement, cards, rng) {
   const powerSet = new Set(powers);
   const governing = nameOf(governingFactionOf(settlement)) || null;
   const stream = rng && typeof rng.fork === 'function' ? rng.fork(POWERS_FORK_LABEL) : null;
-  // ONE mint per label (the fork census counts every stream minted): the two families are forked
+  // ONE mint per label (the fork census counts every stream minted): the ranks' family is forked
   // once here and keyed per power below, never re-forked inside a loop.
-  const mintStream = stream ? stream.fork('mint') : null;
   const rankStream = stream ? stream.fork('ranks') : null;
   const byHouse = dealDoubledNiches(settlement, houseBacksOf(settlement));
   const houseByName = new Map(institutions.map((inst) => [String(inst?.name || ''), inst]));
@@ -119,7 +119,7 @@ export function assignCastPowers(settlement, cards, rng) {
     if (!card || !card.institution) return;
     card.memberships = [];
     if (card.institution.kind === 'power') {
-      // the seat minted at step 2 (R-P2): the governing power's, whole
+      // a minted face (the seat of R-P2, an `other` power's of R-P4): its power's, whole
       if (card.institution.key && powerSet.has(card.institution.key)) join(card, card.institution.key, 1, null, true, at);
       return;
     }
@@ -129,47 +129,8 @@ export function assignCastPowers(settlement, cards, rng) {
     landed.forEach((b, i) => join(card, b.faction, b.share, b.weight, i === 0, at));
   });
 
-  // ── The `other` mint (R-P4) ──────────────────────────────────────────────────────────────
-  const mints = [];
-  const config = settlement?.config || {};
-  const tier = String(settlement?.tier || 'town');
-  const culture = String(config.culture || 'germanic');
-  const worldLaw = resolveGenerationWorldLaw(null, config);
-  const economicState = settlement?.economicState || {};
-  const npcConfig = {
-    ...config,
-    _tradeCommodity: deriveTradeCommodity(economicState, { firstWordFallback: true }),
-    _dominantFaction: factions[0]?.faction || null,
-    _prosperity: economicState?.prosperity || null,
-  };
-  // the roster's texts so far, so a minted face repeats no goal, secret, tell or speech
-  const hookRegistry = {
-    titles: new Set(cards.flatMap((c) => c?.plotHooks || [])),
-    themes: new Set(),
-    tells: new Set(cards.map((c) => c?.personality?.tell).filter(Boolean)),
-    speech: new Set(cards.map((c) => c?.personality?.speech).filter(Boolean)),
-    goals: new Set(cards.map((c) => c?.goal?.short).filter(Boolean)),
-    secrets: new Set(cards.map((c) => c?.secret?.what).filter(Boolean)),
-  };
-  const existingIds = new Set(cards.map((c) => c?.id));
-  factions.forEach((f) => {
-    const name = nameOf(f);
-    // the governing power's face is the seat (housed or minted at step 2), whatever its archetype
-    if (!name || name === governing || BACKING_ARCHETYPES.includes(backingArchetypeOf(f))) return;
-    const id = `${OTHER_CARD_PREFIX}${powerSlug(name)}`;
-    if (existingIds.has(id)) return; // a regen that already carries the mint (held cards) mints it once
-    existingIds.add(id);
-    const row = otherMintRowFor(name);
-    const draw = () => generateSingleNPC(row.role, row.titleKey, row.category, culture, tier, npcConfig, institutions, hookRegistry, worldLaw);
-    const card = mintStream ? onStream(mintStream.fork(powerSlug(name)), draw) : draw();
-    card.id = id;
-    card.title = row.title;
-    card.role = row.title; // M-1b: the role is the title; the pool's role was the draw's key only
-    card.institution = { kind: 'power', key: name, family: null, title: row.title };
-    card.memberships = [];
-    mints.push(card);
-    join(card, name, 1, null, true, cards.length + mints.length - 1);
-  });
+  // ── The `other` mint (R-P4) is born with the cast in representatives.js (`npc_power_<slug>`),
+  // so the population step's ties reach it; here it is its power's whole member, ranked first below.
 
   // ── The three (R-P5), per power ──────────────────────────────────────────────────────────
   for (const power of powers) {
@@ -215,12 +176,11 @@ export function assignCastPowers(settlement, cards, rng) {
   // across its powers places it at the tier's head, middle or lowest band (the same signed table
   // the roll read, densityBands.js untouched); a member ranked nowhere, or a face of no power, is
   // `minor`. Draw-free; the rung ROLE field is not written (M-5: it is unread).
-  const bands = rungBandsForTier(tier);
-  const all = mints.length ? [...cards, ...mints] : cards;
-  for (const card of all) {
+  const bands = rungBandsForTier(String(settlement?.tier || 'town'));
+  for (const card of cards) {
     if (!card || !Array.isArray(card.memberships)) continue;
     const best = card.memberships.reduce((acc, m) => (Number.isInteger(m?.rank) && (acc === null || m.rank < acc) ? m.rank : acc), null);
     card.importance = best === null ? 'minor' : bands[RUNG_KEYS[best - 1]];
   }
-  return mints.length ? disambiguateNPCDisplayNames(all) : cards;
+  return cards;
 }

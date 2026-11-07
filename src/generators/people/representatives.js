@@ -42,14 +42,15 @@ import { clearActiveRng, getActiveRng, setActiveRng } from '../../kernel/rngCont
 import {
   FACE_SEAT, faceOfInstitution, familyOfInstitution, isFabricInstitution,
 } from '../../data/institutionalCatalog.js';
-import { backingRowFor } from '../../data/institutionBacking.js';
+import { BACKING_ARCHETYPES, backingRowFor } from '../../data/institutionBacking.js';
+import { backingArchetypeOf } from '../../domain/dossier/powerSupport.js';
 import { governingFactionOf, nameOf } from '../../domain/rulingPower.js';
 import { generateSingleNPC } from '../npcGenerator.js';
 import { deriveTradeCommodity } from '../tradeCommodity.js';
 import { resolveGenerationWorldLaw } from '../generationContext.js';
 import { disambiguateNPCDisplayNames } from '../npcDisplayNames.js';
 import { poolFor, seatPoolFor } from './poolMap.js';
-import { seatMintTitleFor } from './mintTitles.js';
+import { OTHER_CARD_PREFIX, otherMintRowFor, seatMintTitleFor } from './mintTitles.js';
 
 /** The keyed fork every card is drawn under (declared in the fork census). */
 export const FACES_FORK_LABEL = 'people-faces';
@@ -166,9 +167,13 @@ export function generateRepresentatives(settlement, culture = 'germanic', config
    * @param {string} id @param {{ role: string, category: string, titleKey: string }} pool
    * @param {string} title @param {CardInstitution} institution
    */
+  // the world law: where magic does not function, a `magic`-category pool (the alchemist, the fortune teller) draws
+  // its body and hooks from the mundane `other` pools, as today's generator kept such roles mundane (allowsRole)
+  const magicFunctions = typeof worldLaw?.magicFunctions === 'function' ? worldLaw.magicFunctions() : true;
   const birth = (id, pool, title, institution) => {
+    const category = pool.category === 'magic' && !magicFunctions ? 'other' : pool.category;
     const card = onStream(faces.fork(id), () => generateSingleNPC(
-      pool.role, pool.titleKey, pool.category, culture, tier, npcConfig, institutions, hookRegistry, worldLaw,
+      pool.role, pool.titleKey, category, culture, tier, npcConfig, institutions, hookRegistry, worldLaw,
     ));
     card.id = id;
     card.title = title;
@@ -207,6 +212,23 @@ export function generateRepresentatives(settlement, culture = 'germanic', config
     taken.add(SEAT_CARD_ID);
     birth(SEAT_CARD_ID, seatPoolFor(tier), title, { kind: 'power', key: governingName, family: null, title });
   }
+
+  // R-P4: the `other` mint — a non-governing power whose archetype no backing share can name (an
+  // Independent Bloc, a Revolt Leadership, an Occupation Authority) has no house of its kind to
+  // face it, so ONE face is minted from the power under its title (people/mintTitles.js), a member
+  // of that power whole and its first (castPowers.js ranks it). Minted HERE, with the cast, so the
+  // ties of the population step reach it like any face (a face minted after the ties was isolated).
+  // The governing power is never minted here: its face is the seat, whatever its archetype.
+  const factions = Array.isArray(settlement?.powerStructure?.factions) ? settlement.powerStructure.factions : [];
+  factions.forEach((f) => {
+    const name = nameOf(f);
+    if (!name || name === governingName || BACKING_ARCHETYPES.includes(backingArchetypeOf(f))) return;
+    const id = `${OTHER_CARD_PREFIX}${slugify(name, { sep: '_', max: 60, fallback: 'power', empty: 'power' })}`;
+    if (taken.has(id)) return;
+    taken.add(id);
+    const row = otherMintRowFor(name);
+    birth(id, row, row.title, { kind: 'power', key: name, family: null, title: row.title });
+  });
 
   // Draw-free: a name shared by two cards takes a role qualifier, never a second draw.
   return disambiguateNPCDisplayNames(cards);

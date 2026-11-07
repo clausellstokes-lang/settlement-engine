@@ -631,24 +631,26 @@ describe('end to end — the law through the real pipeline', () => {
         const factions = s.powerStructure?.factions || [];
         expect(factions.length).toBeGreaterThanOrEqual(envelope.min);
         expect(factions.length).toBeLessThanOrEqual(envelope.max);
-        expect(s.npcs.length).toBeGreaterThanOrEqual(bands.mass.min);
-        expect(s.npcs.length).toBeLessThanOrEqual(bands.mass.max);
+        // 2026-11-07 PEOPLE-1 CAST (the people car's lane 1; docs/PEOPLE_1_CAST_2026-11-07.md): the law's NAMED ROSTER is retired from birth (R-P2: the cast is one card per
+        // face-bearing house plus the seat's and the `other` powers' mints), so the `mass` band is unread (M-5) and
+        // the roster's size is the registry's, bounded by the houses and the powers; the powers' count, flags and
+        // bands from the same law STAY (the envelope above). The mass band is `bands.mass` still, signed, unread.
+        expect(bands.mass.min).toBeGreaterThan(0);
+        expect(s.npcs.length).toBeGreaterThanOrEqual(1);
+        expect(s.npcs.length).toBeLessThanOrEqual((s.institutions || []).length + factions.length);
 
-        // R17 — no house without a member, on the real pipeline's own output.
+        // R-P5 on the real pipeline's own output: every card is a face stamped with an importance from its best
+        // rank; the GOVERNING power is always crewed (the seat is always faced, R-P2). A power with no face-bearing
+        // house of its archetype on the roster is at zero by the ruling's truth (R-P5), so "every house crewed" is
+        // no longer the law — tests/generators/people/castPowers.test.js holds the exact claim.
         const crew = new Map();
         for (const npc of s.npcs) {
-          // §817-Q8: the always-affiliated invariant is PRESERVED — the
-          // dispersal ranges over factions only, so no unaffiliated state is
-          // typed into existence.
-          expect(String(npc.factionAffiliation || '')).not.toBe('');
-          // §817-Q5's invariant: every figure stamped, so no rung is decided by
-          // the role regex that reads a Mayor as `minor`.
           expect(IMPORTANCE_ORDER).toContain(npc.importance);
-          crew.set(npc.factionAffiliation, (crew.get(npc.factionAffiliation) || 0) + 1);
+          expect(Array.isArray(npc.memberships)).toBe(true);
+          for (const m of npc.memberships) crew.set(m.power, (crew.get(m.power) || 0) + 1);
         }
-        for (const f of factions) {
-          expect(crew.get(f.faction || f.name) || 0).toBeGreaterThanOrEqual(1);
-        }
+        const gov = factions.find((f) => f.isGoverning) || factions[0];
+        if (gov) expect(crew.get(gov.faction || gov.name) || 0, 'the governing power is faced').toBeGreaterThanOrEqual(1);
       }
     });
   }
@@ -685,25 +687,26 @@ describe('end to end — the law through the real pipeline', () => {
         const members = s.npcs.filter(n => n.factionAffiliation === (gov.faction || gov.name));
         // The floor itself: someone runs something, always.
         expect(members.length).toBeGreaterThanOrEqual(1);
-        // The stronger claim — an OCCUPIED head — holds unless the typed
-        // missing-seat stressor lifted it. No third state (§810.3 R15).
+        // 2026-11-07 PEOPLE-1 CAST (the people car's lane 1; docs/PEOPLE_1_CAST_2026-11-07.md): THE SEAT IS ALWAYS FACED (R-P2: the Government-shelf house's face, the hall's,
+        // or the seat MINT from the governing power), so the head is never vacant at birth — the typed missing-seat
+        // stressor no longer lifts the floor, and the `yearner` rung role is unread (M-5, FPZ: titularSuccession.js
+        // reads it guarded, listed in the record's §5). The exception arm is retired with the roster it read: `lifted`
+        // is pinned at ZERO, and the stressed worlds above still seat their governing power's first.
+        const first = members.find((n) => (n.memberships || []).some((m) => m.power === (gov.faction || gov.name) && m.rank === 1));
+        if (!first) lifted += 1; else seated += 1;
         if (isHeadRungVacant(members, tier)) {
-          lifted += 1;
+          // the OLD reading (rung roles) is vacant on every card now; the typed stressor is still carried where forced
           const carried = [
             s.stress?.type,
             ...(Array.isArray(s.config?.stressTypes) ? s.config.stressTypes : []),
           ].filter(Boolean);
-          expect(carried.some(t => MISSING_SEAT_STRESSORS.includes(String(t)))).toBe(true);
-          // …and it is a succession STORY, not a null: someone reaches for it.
-          expect(members.some(n => n.densityRungRole === 'yearner')).toBe(true);
-        } else {
-          seated += 1;
+          if (stressed.some((row) => row.s === s)) expect(carried.some(t => MISSING_SEAT_STRESSORS.includes(String(t)))).toBe(true);
         }
       }
     }
-    // Both arms must be exercised or this assertion proves nothing.
-    expect(seated).toBeGreaterThan(0);
-    expect(lifted).toBeGreaterThan(0);
+    // Both corpora are exercised; the seat floor holds on every world of both.
+    expect(seated).toBe(corpus.length);
+    expect(lifted).toBe(0);
   });
 
   it('§817-Q1 — the office appender is OFF under v2, and no placeholder survives', () => {
@@ -734,7 +737,6 @@ describe('end to end — the law through the real pipeline', () => {
     // a lower bound and every later seed goes unrun; this control's whole value is the
     // COMPLETE list of seeds where a head of government was moved, because one stray
     // seed and forty stray seeds are different diagnoses of the same red.
-    const HEAD_OF_GOVERNMENT = /\b(mayor|governor|elder|reeve)\b/i;
     /** @type {string[]} */ const unseated = [];
     /** @type {string[]} */ const moved = [];
     let checked = 0;
@@ -749,14 +751,25 @@ describe('end to end — the law through the real pipeline', () => {
         if (gov1?.faction !== gov2?.faction) {
           unseated.push(`${seed}: v1 governed by ${String(gov1?.faction)}, v2 by ${String(gov2?.faction)}`);
         }
-        const leader1 = v1.npcs.find(n => HEAD_OF_GOVERNMENT.test(String(n.role || '')));
-        if (!leader1 || leader1.factionAffiliation !== gov1?.faction) continue;
-        const leader2 = v2.npcs.find(n => n.role === leader1.role);
-        if (!leader2) continue; // the mass band may not have room for this role
+        // 2026-11-07 PEOPLE-1 CAST (the people car's lane 1; docs/PEOPLE_1_CAST_2026-11-07.md): the leader is the SEAT — the card ranked first in the governing power
+        // (M-1b: a card's standing in a power is its rank there; `role` is its title, so the seat-word regex no longer
+        // names the head). The cast is drawn without the density law's roster under both laws, so the stronger claim
+        // holds and is asserted: the v1 and v2 casts are the same people, house for house, rank for rank.
+        const seatOf = (world, gov) => world.npcs.find((n) => (n.memberships || []).some((m) => m.power === gov?.faction && m.rank === 1));
+        const leader1 = seatOf(v1, gov1);
+        if (!leader1) continue;
+        const leader2 = seatOf(v2, gov2);
+        if (!leader2) { moved.push(`${seed}: v2 seats nobody in ${String(gov2?.faction)}`); continue; }
         checked += 1;
-        if (leader2.factionAffiliation !== gov2?.faction) {
-          moved.push(`${seed}: ${String(leader1.role)} sits in ${String(leader2.factionAffiliation)}, government is ${String(gov2?.faction)}`);
+        if (leader2.id !== leader1.id || leader2.factionAffiliation !== gov2?.faction) {
+          moved.push(`${seed}: ${String(leader1.id)} (v1) vs ${String(leader2.id)} (v2) in ${String(leader2.factionAffiliation)}, government is ${String(gov2?.faction)}`);
         }
+        // (the CAST — the cards with an institution; a v1 world may still carry today's `faction_structural` append,
+        // `npc.<faction>_<role>_N`, which §817-Q1 turns OFF under v2: that is the base's roster law, not the cast's)
+        // By HOUSE (the card's id): the law moves the POWERS' count, flags and bands (those STAY), so a card's
+        // memberships and ranks may differ between the laws; its house, and the seat's rank, may not.
+        const castOf = (world) => world.npcs.filter((n) => n.institution).map((n) => n.id).sort(); // the stored order is the relevance sort, which the powers move
+        expect(castOf(v2), `${seed}: the cast is the same houses under both laws`).toEqual(castOf(v1));
       }
     }
     expect(unseated, 'R14: the density roll unseated the government on these seeds').toEqual([]);
@@ -1081,14 +1094,16 @@ describe('D2b — §810.4 R18/R20: a faction exists exactly as long as its roste
           ).toContain(row.state);
           walked++;
         }
-        // R17's atomic mint means a freshly born world has no empty house at
-        // all — every faction is crewed at birth. A dissolved or interregnum
-        // state AT BIRTH would mean the mint failed, so this is the arm that
-        // makes the walker discriminating rather than merely tautological.
-        expect(
-          census.every(c => c.state === 'crewed'),
-          `${tier}#${i} was BORN with an uncrewed house — R17's atomic mint failed`,
-        ).toBe(true);
+        // R17's atomic mint meant a freshly born world had no empty house at all. 2026-11-07 PEOPLE-1 CAST (the people car's lane 1; docs/PEOPLE_1_CAST_2026-11-07.md):
+        // the cast is the roster's FACES (R-P5): a power with no face-bearing house of its archetype on the roster has
+        // no person at birth, by the ruling's truth, so a non-governing house MAY read uncrewed at birth (the
+        // measurement: ~2% of the 1,000's powers; docs/PEOPLE_1_CAST_2026-11-07.md §2). The discriminating arm is
+        // narrowed to the GOVERNING house, which is always faced (the seat, R-P2) — never dissolved or interregnum
+        // at birth. FPZ (M-6): factionLifecycle.js reads the roster as before; its growth seams are PEOPLE-5's.
+        const gov = (s.powerStructure?.factions || []).find((f) => f.isGoverning);
+        const govRow = census.find((c) => c.key === (gov?.faction || gov?.name) || c.name === (gov?.faction || gov?.name));
+        if (govRow) expect(govRow.state, `${tier}#${i} was BORN with an uncrewed GOVERNING house`).toBe('crewed');
+        expect(census.some((c) => c.state === 'crewed'), `${tier}#${i} crews nobody`).toBe(true);
       }
     }
     // Anti-vacuity: a walker that walked nothing passes every assertion.

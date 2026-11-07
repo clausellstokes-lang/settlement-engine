@@ -366,7 +366,10 @@ describe('EM-R8 — the escalation ladder never overwrites a HELD key, and the r
     // 2026-11-05 (LANDING-5, the chair's ruling 4; an anti-vacuity arm, READ and BISECTED by stage): 17 -> 16 TERRAIN-POOLS
     // ac09ea83b -> 9 X-46 car 3 90dc22f18 -> 10 PLACE-NOT-TIER 6129c300d -> 7 car 3 I7 6ca454d2b -> 8 F6 6d84aa834 -> 9 F1
     // 5e9ffb220. Still live (nine trials, six of them the E6 seat edit on the six hamlets), and `foreign` stays empty.
-    expect(all.filter((trial) => trial.conflictsRestated).length, 'trials whose conflict citations the post-pass rebuilt').toBe(9);
+    // 2026-11-07 (PEOPLE-1 CAST, the people car's lane 1; READ off the arm's own received value at the lane's tip): 9 -> 4.
+    // The cast replaces the rung roster, so the conflicts (fought between the powers, derived from the final roster)
+    // and their citations re-deal on the hamlets; the law above is unchanged and `foreign` stays empty.
+    expect(all.filter((trial) => trial.conflictsRestated).length, 'trials whose conflict citations the post-pass rebuilt').toBe(4);
     const foreign = all.filter((trial) => trial.citesOwn === false).map((trial) => `${trial.label} ${trial.key}`);
     // anchored: the line above proves the restatement fires on twelve live trials, so silence here is a cure.
     expect(foreign, `the receipt cites a conflict list that is not the merged record's own:\n${foreign.join('\n')}`).toEqual([]);
@@ -409,6 +412,13 @@ describe('EM-R8 — the escalation ladder never overwrites a HELD key, and the r
     // re-takes the evidence array (atomicTaken held only economicState.primaryImports). Searched over all 63 rows with
     // faction[1] halved: town|germanic|plains|road|civilized|gm-seed-c is the ONE row whose merge still takes the
     // evidence whole from R1 with R1's row differing from the record's, so the arm keeps its subject.
+    // 2026-11-07 PEOPLE-1 CAST (the people car's lane 1): THE SUBJECT ROW DISSOLVED. Searched over all 63 rows with
+    // faction[0], [1] and [2] halved in turn at the lane's tip: NO row's merge takes the evidence array whole any
+    // more — the cast is the roster's faces, one per house, so a power's halving no longer re-deals the roster and
+    // the receipt's evidence rows agree between R0 and R1 on every row. The claim is the MERGE's (ATOMIC_COLLECTIONS
+    // governs the evidence array; the post-pass restates the two digits), so it is proved on a re-derivation whose
+    // evidence row is MADE to differ — R1's finalGraph row re-stated with both digits moved — rather than on a row
+    // the corpus happens to carry; the ROSTER_RE and the register row are the same ones the live subject exercised.
     const row = sample63().find((candidate) => keyOf(candidate) === 'town|germanic|plains|road|civilized|gm-seed-c');
     const { _seed: seed, ...config } = row;
     const base = generateSettlementPipeline(config, null, { seed, customContent: {} });
@@ -418,7 +428,13 @@ describe('EM-R8 — the escalation ladder never overwrites a HELD key, and the r
     record.powerStructure.factions[1].power = Math.max(1, Math.round((factions[1].power || 20) * 0.5));
     renormalizeFactionPower(record.powerStructure.factions);
     const layer = layerOf([[`faction:${factions[1].faction}:power`, record.powerStructure.factions[1].power]]);
-    const R1 = rederive(record, config, layer, ENGINE, DECLARATIONS).record;
+    const R1 = cl(rederive(record, config, layer, ENGINE, DECLARATIONS).record); // cloned: the re-derivation is frozen
+    {
+      const live = rowAt(R1, 'finalGraph');
+      const moved = String(live.evidence).match(ROSTER_RE);
+      expect(moved, 'the finalGraph evidence row carries the two counted digits').toBeTruthy();
+      live.evidence = String(live.evidence).replace(ROSTER_RE, (whole, a, b) => whole.replace(a, String(Number(a) + 1)).replace(b, String(Number(b) + 2)));
+    }
 
     const { value, receipts } = mergeTree(cl(record), cl(R0), cl(R1));
     expect(receipts.atomicTaken, 'ACT ONE: the evidence array has no sound key, so the tree merge takes it from R1 as ONE value')

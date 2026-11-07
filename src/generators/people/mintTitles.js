@@ -104,6 +104,9 @@ export function seatMintTitleFor(power) {
  * @param {string} power the power's display name
  * @returns {MintRow & { fallback: boolean }}
  */
+/** The one `other` mint's id prefix (R-P4). */
+export const OTHER_CARD_PREFIX = 'npc_power_';
+
 export function otherMintRowFor(power) {
   const name = String(power || '').trim();
   const found = OTHER_MINT_ROWS[name];

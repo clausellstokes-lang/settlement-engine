@@ -140,6 +140,8 @@ const stride = (rows, n) => rows.filter((_, index) => index % n === 0);
  * change re-names that one person; CRISIS-1 omitted the row and the chair's ruling of 2026-11-04 adds it.
  */
 const CULTURE_READERS = Object.freeze([
+  // 2026-11-07 PEOPLE-1 CAST: the representative generator reads the culture for every card's name and title
+  'src/generators/people/representatives.js',
   'src/generators/aiLayer.js',
   'src/generators/computeActiveChains.js',
   'src/generators/demandProfile.js',

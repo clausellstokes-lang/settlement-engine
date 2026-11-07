@@ -521,7 +521,9 @@ const genPressureDetail = settlement => {
     stability: powerStructure?.stability || 'Stable',
     recentConflict: powerStructure?.recentConflict || null,
     topNPC: npcs?.[0] || null,
-    topNPCRole: npcs?.[0]?.role || null,
+    // M-1b (PEOPLE-1 CAST): a card's role is its TITLE and carries its article ('the master fishmonger'); the pressure
+    // lines prefix ", the " themselves, so the noun is handed over without it (never "the the").
+    topNPCRole: String(npcs?.[0]?.role || '').replace(/^the\s+/i, '') || null,
     topNPCName: npcs?.[0]?.name || null,
     viabilityIssues: economicViability?.issues || [],
     isViable: economicViability?.viable !== false,

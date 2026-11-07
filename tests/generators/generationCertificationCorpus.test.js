@@ -57,15 +57,21 @@ const ADVISORY_STATUS = new Map();
  *    11467ed57 (the rung-1 PINS compose)              isolated-arcane-town-alder
  *    5e9ffb220 (the F1 DEFENCE-WORDS compose)         criminal-crossroads-town-dun,
  *                                                     isolated-arcane-town-cinder, mundane-river-port-city-bracken */
+/* RE-KEYED 2026-11-07 (PEOPLE-1 CAST, the people car's lane 1): 60 -> 59 of 65, MEASURED at the lane's tip. The cast
+ * replaces the rung roster and the battery over the stored record reads a different cast: criminal-crossroads-town-alder,
+ * -cinder, isolated-arcane-town-ember, mercantile-seaport-town-cinder and religious-river-village-cinder STOPPED
+ * failing; criminal-crossroads-town-dun, isolated-arcane-town-alder and -cinder and religious-river-village-dun STARTED
+ * (the advisory judgment, not the overall status: every specimen still certifies). Not bisected per specimen: one
+ * cause, the cast (R-P2) with its mints born beside it (R-P4), the mundane draw of a magic-category face where magic
+ * does not function, and the pressure line's noun without its article (M-1b) — the battery reads that prose. */
 const ADVISORY_FAILING = Object.freeze([
   'certification-v1-commercial-metropolis-alder',
   'certification-v1-commercial-metropolis-bracken',
   'certification-v1-commercial-metropolis-cinder',
   'certification-v1-commercial-metropolis-dun',
   'certification-v1-commercial-metropolis-ember',
-  'certification-v1-criminal-crossroads-town-alder',
   'certification-v1-criminal-crossroads-town-bracken',
-  'certification-v1-criminal-crossroads-town-cinder',
+  'certification-v1-criminal-crossroads-town-dun',
   'certification-v1-criminal-crossroads-town-ember',
   'certification-v1-frontier-hamlet-alder',
   'certification-v1-frontier-hamlet-bracken',
@@ -77,9 +83,10 @@ const ADVISORY_FAILING = Object.freeze([
   'certification-v1-grim-seaport-metropolis-cinder',
   'certification-v1-grim-seaport-metropolis-dun',
   'certification-v1-grim-seaport-metropolis-ember',
+  'certification-v1-isolated-arcane-town-alder',
   'certification-v1-isolated-arcane-town-bracken',
+  'certification-v1-isolated-arcane-town-cinder',
   'certification-v1-isolated-arcane-town-dun',
-  'certification-v1-isolated-arcane-town-ember',
   'certification-v1-magical-desert-village-alder',
   'certification-v1-magical-desert-village-bracken',
   'certification-v1-magical-desert-village-cinder',
@@ -87,7 +94,6 @@ const ADVISORY_FAILING = Object.freeze([
   'certification-v1-magical-desert-village-ember',
   'certification-v1-mercantile-seaport-town-alder',
   'certification-v1-mercantile-seaport-town-bracken',
-  'certification-v1-mercantile-seaport-town-cinder',
   'certification-v1-mercantile-seaport-town-dun',
   'certification-v1-mercantile-seaport-town-ember',
   'certification-v1-mundane-river-port-city-alder',
@@ -101,7 +107,7 @@ const ADVISORY_FAILING = Object.freeze([
   'certification-v1-plagued-martial-city-ember',
   'certification-v1-religious-river-village-alder',
   'certification-v1-religious-river-village-bracken',
-  'certification-v1-religious-river-village-cinder',
+  'certification-v1-religious-river-village-dun',
   'certification-v1-religious-river-village-ember',
   'certification-v1-subsistence-thorp-alder',
   'certification-v1-subsistence-thorp-bracken',

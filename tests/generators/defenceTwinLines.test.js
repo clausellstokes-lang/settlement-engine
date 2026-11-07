@@ -29,7 +29,7 @@ const BIRTHS = {};
 
 beforeAll(async () => {
   await ensureLaws();
-  for (const i of [452, 15, 213]) {
+  for (const i of [452, 15, 76]) {
     const { settlement } = birth(i);
     BIRTHS[i] = { settlement, text: strings(settlement) };
   }
@@ -50,12 +50,18 @@ describe('F10 unit 4 · the three soak seeds', () => {
     expect(text).toContain('Wells, roads and the common ground');
   });
 
-  it('soak1k-213 gives its wartime Guard Captain a goal with no soldiers in it', () => {
-    const { settlement, text } = BIRTHS[213];
+  // 2026-11-07 PEOPLE-1 CAST: re-keyed by identity 213 -> 76. The cast draws the conscription goal on the cards of
+  // the houses that face the defence ('the garrison commander', 'the watch commander'), so on the 1,000 at the lane's
+  // tip EVERY record carrying the soldiers line carries a garrison or a hired company (probed: 76, 370, 707, 748,
+  // 970 — all with a Garrison; no garrison-less witness exists in the corpus, nor in sixty war-stressed cities born
+  // with the garrison and company houses forbidden). The claim is kept from the other side on a live witness: beside
+  // a garrison the soldiers line is KEPT and the twin does not fire; the twin table below proves the substitution.
+  it('soak1k-76 keeps its soldiers line beside its garrison — the twin fires only where no garrison stands', () => {
+    const { settlement, text } = BIRTHS[76];
     const f = defenseFactsOf(settlement);
-    expect(f.hasGarrison || f.hasMercenary).toBe(false);
-    expect(text.filter((s) => /conscription pulls away experienced soldiers/.test(s))).toEqual([]);
-    expect(text.some((s) => /the call-up pulls away experienced hands/.test(s))).toBe(true);
+    expect(f.hasGarrison || f.hasMercenary).toBe(true);
+    expect(text.some((s) => /conscription pulls away experienced soldiers/.test(s))).toBe(true);
+    expect(text.filter((s) => /the call-up pulls away experienced hands/.test(s))).toEqual([]); // anchored: the line above pins the soldiers line present on this same text
   });
 });
 

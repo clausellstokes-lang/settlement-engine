@@ -39,7 +39,7 @@ import { npcInFaction, ladderFactionKey } from '../worldPulse/npcLadderFactionMe
 
 /**
  * A roster row as the seat reads it.
- * @typedef {{ id?: unknown, name?: unknown, role?: unknown, title?: unknown, factionAffiliation?: unknown }} SeatNpc
+ * @typedef {{ id?: unknown, name?: unknown, role?: unknown, title?: unknown, factionAffiliation?: unknown, memberships?: unknown }} SeatNpc
  */
 
 /**
@@ -108,10 +108,18 @@ export function seatCandidatesOf(settlement) {
   const tierRank = tierHead ? SEAT_TITLES.indexOf(tierHead) : -1;
   /** @type {Array<{ npc: SeatNpc, own: number, rank: number, exact: number, at: number }>} */
   const found = [];
+  const governingName = text(/** @type {{ faction?: unknown, name?: unknown }} */ (governing)?.faction)
+    || text(/** @type {{ name?: unknown }} */ (governing)?.name);
   roster.forEach((row, at) => {
     if (!row || typeof row !== 'object') return;
     const npc = /** @type {SeatNpc} */ (row);
-    const rank = seatTitleRankOf(npc);
+    // 2026-11-07 PEOPLE-1 CAST, M-1b (the owner: a representative's ROLE is its institution's title and its
+    // standing in each power is its RANK there): the seat is the card that ranks FIRST in the governing
+    // power — read from `memberships` — whatever its title says; the seat-word read below stays for the
+    // records born before the car and for a crafted roster. Re-pointed here, the one reader of the seat.
+    const seatByRank = Array.isArray(npc.memberships) && npc.memberships.some((m) => m && typeof m === 'object'
+      && text(/** @type {{ power?: unknown }} */ (m).power) === governingName && /** @type {{ rank?: unknown }} */ (m).rank === 1);
+    const rank = seatByRank ? Math.max(tierRank, 0) : seatTitleRankOf(npc);
     if (rank < 0 || isOfficeStandIn(npc)) return;
     if (!npcInFaction(/** @type {Record<string, unknown>} */ (row), governing, fkey, factions)) return;
     const exact = text(npc.role).toLowerCase() === SEAT_TITLES[rank].toLowerCase() ? 0 : 1;

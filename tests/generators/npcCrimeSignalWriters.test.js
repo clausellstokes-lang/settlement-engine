@@ -28,20 +28,25 @@ describe('the NPC writers read the crime signal', () => {
     expect(npcsNaming(settlement, 'secondaryAffiliation').map((n) => n.secondaryAffiliation)).toEqual([]);
   });
 
-  it("soak1k-22: the thieves'-guild secret takes the pool's own substitution", () => {
-    const { settlement } = birth(22);
+  // 2026-11-07 PEOPLE-1 CAST: re-keyed by identity 22 -> 52 (a city whose cast draws the secret; the probe over the
+  // 1,000 at the lane's tip).
+  it("soak1k-52: the thieves'-guild secret takes the pool's own substitution", () => {
+    const { settlement } = birth(52);
     expect(npcsNaming(settlement, 'secret').map((n) => n.secret.what)).toEqual([]);
     expect(settlement.npcs.some((n) => n.secret?.what === 'On the payroll of a powerful outside interest as a silent informant')).toBe(true);
   });
 
-  it("soak1k-531: the Guard Captain's goal names no thieves' guild", () => {
-    const { settlement } = birth(531);
+  // 2026-11-07 PEOPLE-1 CAST: re-keyed by identity 531 -> 20 and 248 -> 5 (the cast draws different goals on the
+  // same seeds); found by a probe over the 1,000 at the lane's tip: 20 is a village with no Thieves' Guild on the
+  // roster whose cast draws the payroll goal, 5 carries the guild as a power and a card ranked second in it.
+  it("soak1k-20: the watch's goal names no thieves' guild", () => {
+    const { settlement } = birth(20);
     expect(npcsNaming(settlement, 'goal').map((n) => n.goal.short)).toEqual([]);
     expect(settlement.npcs.some((n) => n.goal?.short === 'Identify which of their officers is on the payroll of a powerful outside interest')).toBe(true);
   });
 
-  it("control, soak1k-248: beside a roster Thieves' Guild the affiliation still names it", () => {
-    const { settlement } = birth(248);
+  it("control, soak1k-5: beside a roster Thieves' Guild the affiliation still names it", () => {
+    const { settlement } = birth(5);
     expect(settlement.powerStructure.factions.some((f) => f.faction === "Thieves' Guild")).toBe(true);
     expect(npcsNaming(settlement, 'secondaryAffiliation').map((n) => n.secondaryAffiliation)).toContain("Thieves' Guild");
   });

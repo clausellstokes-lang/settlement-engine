@@ -2674,6 +2674,14 @@
         "note": "one member holds 0.02 and the rest 0.05. Same name, same role, different value, with nothing in the source saying why. The sitting rules; this lane only records."
       }
     },
+    "src/generators/people/castPowers.js#CAST_POWERS_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": "PEOPLE-1 CAST (2026-11-07, R-P5): the ranks a power seats (3) and the roll weight of a weight-0 house (0.5); registered as a draft the day the dial was born, not signed."
+    },
     "max_lookback_ticks": {
       "unit": "ticks",
       "canonical": null,
