@@ -96,7 +96,7 @@ export const INTERESTED = 'INTERESTED';
  * ⛔ THE GROUND, AND WHY IT IS FOUR AND NOT TWELVE. Car 5b reported capture "structurally
  * absent at birth" and measured INTERESTED at 0 on all 768 RATE towns. The figure was right
  * and the ground was false: every generated town carries `powerStructure.criminalCaptureState`
- * (`src/generators/power/rulingStructure.js:797` — the very line this table maps to the WATCH),
+ * (`src/generators/power/rulingStructure.js:814` — the very line this table maps to the WATCH),
  * on the same five-rung ladder `standingOf` already consumes, reading none 495 · adversarial
  * 194 · equilibrium 64 · corrupted 15 over the corpus, with 79 towns carrying a non-`none`
  * `captureState` on a faction entry. The car reported the fact ABSENT rather than asking
@@ -164,8 +164,8 @@ export function capturedRulingStructure(settlement) {
 export const HOLDER_SOURCES = Object.freeze({
   // ── the treasury: the town's coin, its revenue and the arithmetic that closes or does not ──
   incomeSources: Object.freeze({ kind: 'treasury', cite: 'src/generators/economy/economicState.js:828', read: true }),
-  viable: Object.freeze({ kind: 'treasury', cite: 'src/generators/economy/viability.js:544', read: true }),
-  criticalIssueCount: Object.freeze({ kind: 'treasury', cite: 'src/generators/economy/viability.js:564', read: true }),
+  viable: Object.freeze({ kind: 'treasury', cite: 'src/generators/economy/viability.js:545', read: true }),
+  criticalIssueCount: Object.freeze({ kind: 'treasury', cite: 'src/generators/economy/viability.js:565', read: true }),
   economicViability: Object.freeze({ kind: 'treasury', cite: 'src/generators/steps/assembleSettlement.js:113', read: true }),
 
   // ── the market: what the town makes, sends and takes in ──
@@ -181,8 +181,8 @@ export const HOLDER_SOURCES = Object.freeze({
 
   // ── the toll bar: the route, and what may and may not pass along it ──
   tradeRouteAccess: Object.freeze({ kind: 'toll-bar', cite: 'src/generators/steps/resolveConfig.js:201', read: true }),
-  blockaded: Object.freeze({ kind: 'toll-bar', cite: 'src/domain/worldPulse/foodStockpile.js:417', read: true }),
-  blockadeBypass: Object.freeze({ kind: 'toll-bar', cite: 'src/domain/worldPulse/foodStockpile.js:418', read: true }),
+  blockaded: Object.freeze({ kind: 'toll-bar', cite: 'src/domain/worldPulse/foodStockpile.js:422', read: true }),
+  blockadeBypass: Object.freeze({ kind: 'toll-bar', cite: 'src/domain/worldPulse/foodStockpile.js:423', read: true }),
 
   // ── the muster roll: the walls, the men under arms and what the war does to them ──
   walls: Object.freeze({ kind: 'muster', cite: 'src/domain/institutions/defenseInstitutionBuckets.js:84', read: true }),
@@ -207,8 +207,8 @@ export const HOLDER_SOURCES = Object.freeze({
       + ' the token is mapped to the WATCH rather than to the muster on the ruling\'s own'
       + ' grain: the muster roll counts men under arms, and the watch keeps its own count.',
   }),
-  blackMarketCapture: Object.freeze({ kind: 'watch', cite: 'src/generators/safetyProfile.js:721', read: true }),
-  criminalCaptureState: Object.freeze({ kind: 'watch', cite: 'src/generators/power/rulingStructure.js:797', read: true }),
+  blackMarketCapture: Object.freeze({ kind: 'watch', cite: 'src/generators/safetyProfile.js:734', read: true }),
+  criminalCaptureState: Object.freeze({ kind: 'watch', cite: 'src/generators/power/rulingStructure.js:814', read: true }),
   safetyProfile: Object.freeze({ kind: 'watch', cite: 'src/generators/economy/economicState.js:839', read: true }),
 
   // ── the court: the seat, its legitimacy, the blocs under it and the treaties it signs ──
@@ -216,8 +216,8 @@ export const HOLDER_SOURCES = Object.freeze({
   governanceFractured: Object.freeze({ kind: 'court', cite: 'src/generators/factionDynamics.js:115', read: true }),
   breakdown: Object.freeze({ kind: 'court', cite: 'src/generators/factionDynamics.js:161', read: true }),
   blocs: Object.freeze({ kind: 'court', cite: 'src/domain/worldPulse/settlementPolitics.js:992', read: true }),
-  stability: Object.freeze({ kind: 'court', cite: 'src/generators/power/rulingStructure.js:702', read: true }),
-  recentConflict: Object.freeze({ kind: 'court', cite: 'src/generators/power/rulingStructure.js:702', read: true }),
+  stability: Object.freeze({ kind: 'court', cite: 'src/generators/power/rulingStructure.js:718', read: true }),
+  recentConflict: Object.freeze({ kind: 'court', cite: 'src/generators/power/rulingStructure.js:718', read: true }),
   termLines: Object.freeze({ kind: 'court', cite: 'src/domain/display/treatyDocument.js:376', read: true }),
   fraying: Object.freeze({ kind: 'court', cite: 'src/domain/worldPulse/peaceTermsDocument.js:237', read: true }),
   yearsRemaining: Object.freeze({ kind: 'court', cite: 'src/domain/worldPulse/peaceTermsDocument.js:234', read: true }),
@@ -227,7 +227,7 @@ export const HOLDER_SOURCES = Object.freeze({
   unaffiliated: Object.freeze({ kind: 'parish', cite: 'src/domain/worldPulse/religionState.js:644', read: true }),
 
   // ── the elders: how long ago a thing happened ──
-  yearsAgo: Object.freeze({ kind: 'elders', cite: 'src/generators/historyGenerator.js:289', read: true }),
+  yearsAgo: Object.freeze({ kind: 'elders', cite: 'src/generators/historyGenerator.js:326', read: true }),
 
   // ── the road: the look of the country, which anyone travelling it can see ──
   terrainType: Object.freeze({ kind: 'road', cite: 'src/generators/steps/resolveConfig.js:209', read: true }),
@@ -236,7 +236,7 @@ export const HOLDER_SOURCES = Object.freeze({
   // ── the office itself: the record's own audit of the record ──
   structuralViolations: Object.freeze({ kind: 'office', cite: 'src/generators/steps/assembleSettlement.js:132', read: true }),
   structuralSuggestions: Object.freeze({ kind: 'office', cite: 'src/generators/steps/assembleSettlement.js:133', read: true }),
-  prominentRelationship: Object.freeze({ kind: 'office', cite: 'src/generators/narrativeGenerator.js:1031', read: true }),
+  prominentRelationship: Object.freeze({ kind: 'office', cite: 'src/generators/narrativeGenerator.js:1033', read: true }),
 });
 
 /**
