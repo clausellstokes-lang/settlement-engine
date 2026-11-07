@@ -161,7 +161,9 @@ describe('the warFaith corpus join is populated, or every claim below is free', 
     ]);
     const pools = ids.flatMap((id) => Object.values(BLOCK(id).pools));
     expect(pools).toHaveLength(138);
-    expect(pools.reduce((n, pool) => n + pool.length, 0)).toBe(430);
+    // 430 -> 433 at census-5b unit 3 (c00b30eb6, R-L): DS-WAR-1 warExhaustion rested and DS-FTH-3's
+    // two uncontested/secure pools each gain one crisis-safe twin (measured 430 at its parent).
+    expect(pools.reduce((n, pool) => n + pool.length, 0)).toBe(433);
   });
 
   test('the producer-minted fixtures really carry the producer shapes', () => {
