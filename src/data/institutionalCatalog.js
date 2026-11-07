@@ -1875,8 +1875,19 @@ export function isFabricRow(tier, name) {
  * @returns {boolean}
  */
 export function isFabricInstitution(institution) {
-  if (!institution || institution.isCustom === true || institution.source === 'custom') return false;
+  if (isStrangerHouse(institution)) return false;
   return FABRIC_NAMES.has(String(institution.name ?? ''));
+}
+
+/**
+ * A custom or DM-authored roster row (or none): no registry mark reads it. ONE read of the
+ * custom marks for every catalogue lookup, so the observed-shape register's `isCustom on
+ * institutions` row (a key the generator never writes) stays at its one site.
+ * @param {{ isCustom?: unknown, source?: unknown } | null | undefined} institution
+ * @returns {boolean}
+ */
+function isStrangerHouse(institution) {
+  return !institution || institution.isCustom === true || institution.source === 'custom';
 }
 
 /** Every fabric row, `{ tier, name }`, in tier then draw order (for the walker and the report). */
@@ -1925,7 +1936,7 @@ export function faceOfRow(tier, name) {
  * @returns {string | null}
  */
 export function faceOfInstitution(institution) {
-  if (!institution || institution.isCustom === true || institution.source === 'custom') return null;
+  if (isStrangerHouse(institution)) return null;
   return FACE_BY_NAME.get(String(institution.name ?? '')) ?? null;
 }
 
@@ -1935,7 +1946,7 @@ export function faceOfInstitution(institution) {
  * @returns {boolean}
  */
 export function isNoPowerInstitution(institution) {
-  if (!institution || institution.isCustom === true || institution.source === 'custom') return false;
+  if (isStrangerHouse(institution)) return false;
   return NO_POWER_NAMES.has(String(institution.name ?? ''));
 }
 
@@ -1956,7 +1967,7 @@ for (const fam of INSTITUTION_FAMILIES) {
  * @returns {{ key: string, shelf: string } | null}
  */
 export function familyOfInstitution(institution) {
-  if (!institution || institution.isCustom === true || institution.source === 'custom') return null;
+  if (isStrangerHouse(institution)) return null;
   return FAMILY_BY_NAME.get(String(institution.name ?? '').trim().toLowerCase()) ?? null;
 }
 

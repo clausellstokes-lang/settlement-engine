@@ -7,7 +7,16 @@
  *
  * ── ⭐⭐ EIGHT IDENTITY DEFINITIONS LIVE HERE, AND ONLY ONE IS THE AUTHORITY ──
  *
- * `BASELINE_SCHEMA` is **29**: schema 28's tagged numeric heuristic-leaf envelope, tag law, corpus
+ * `BASELINE_SCHEMA` is **30**: schema 29's tagged numeric heuristic-leaf envelope, tag law, roster
+ * and corpus definition UNCHANGED, re-governed to THE PEOPLE CAR'S CAST (the owner's charter, ODQ
+ * §934.105; lane PEOPLE-1 CAST, 2026-11-07): one face per face-bearing house with house-keyed ids,
+ * `institution`, `title`, `memberships` and a rank-placed `importance`; the named roster and the
+ * rung stamps retired from birth. The corpus's year over the new cast fires different simulation
+ * branches, so 19 ordinary rows are admitted with attribution and 0 go (the schema-24
+ * shape); nothing is declared and the bank holds at 77/51. Its full rationale lives beside
+ * `PEOPLE_CAST_TARGET_SCHEMA` in `migrate-observed-shape-readers.mjs`.
+ *
+ * `RETIRED_MIGRATION_DIRECTION_BASELINE_SCHEMA` is **29**: schema 28's tagged numeric heuristic-leaf envelope, tag law, corpus
  * and register, re-governed to THE MIGRATION-DIRECTION DECLARATION (the chair's ruling of
  * 2026-11-07 03:55 UTC, ODQ §934.105, on lane WIRING-W0). R-W7 (e) declared a mass migration's
  * direction once, on `stress[].direction`, and projects it onto the resolved config in
@@ -469,7 +478,13 @@ export const RETIRED_WINDOW_RUNG1_BASELINE_SCHEMA = 27;
  *  a live baseline is validated against BASELINE_SCHEMA, and this constant exists so a schema-28
  *  PREDECESSOR is still validated as schema 28 after the live number moves past it. */
 export const RETIRED_TIER_COVERAGE_BASELINE_SCHEMA = 28;
-export const BASELINE_SCHEMA = 29;
+/** The RETIRED migration-direction definition — schema 30's predecessor. Same tagged topology
+ *  envelope, theta, roster, corpus definition and fence; schema 30 re-governs it to the people
+ *  car's cast and the rows that cast's year admits. Never redefined, never deleted — a live
+ *  baseline is validated against BASELINE_SCHEMA, and this constant exists so a schema-29
+ *  PREDECESSOR is still validated as schema 29 after the live number moves past it. */
+export const RETIRED_MIGRATION_DIRECTION_BASELINE_SCHEMA = 29;
+export const BASELINE_SCHEMA = 30;
 /** The RETIRED exact per-site definition. Never redefined, never deleted. */
 export const RETIRED_EXACT_BASELINE_SCHEMA = 3;
 /** The RETIRED UNFILTERED heuristic-leaf definition — schema 5's predecessor.
@@ -1143,10 +1158,21 @@ export function validateSchema28Baseline(baseline) {
   );
 }
 
+/** The RETIRED authority — schema 29's tagged envelope, re-governed by schema 30 to the people
+ *  car's cast. Re-bound to its own LITERAL now that the authority has moved to 30, for the same
+ *  reason as every retired validator above. */
+export function validateSchema29Baseline(baseline) {
+  return validateLeafBaseline(
+    baseline,
+    RETIRED_MIGRATION_DIRECTION_BASELINE_SCHEMA,
+    { tagged: true },
+  );
+}
+
 /** The LIVE envelope validator. Bound to `BASELINE_SCHEMA` rather than a literal,
  *  so the retired rungs above keep validating their own numbers while this one
  *  always names the authority. */
-export function validateSchema29Baseline(baseline) {
+export function validateSchema30Baseline(baseline) {
   return validateLeafBaseline(baseline, BASELINE_SCHEMA, { tagged: true });
 }
 
