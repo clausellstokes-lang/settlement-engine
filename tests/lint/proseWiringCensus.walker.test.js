@@ -194,7 +194,7 @@ describe('the wiring census — TOTALITY over the corpus', () => {
     // census-3c unit 4 e3295d168 +10; census-5b unit 3 c00b30eb6 +4.
     // 2342 -> 2343 at LANDING-R2 helper G (the chair's §934.105 ruling (1): DS-GEN-17 PROVISIONED v3, the hospital-only line) +1.
     // 2343 -> 2344 at LANDING-R2 helper G2 (the chair's 06:5x DS-CND-1 boom line (ODQ §934.105, ruling (2)): ARCHETYPE: boom v4 `[street · crisis: any]`) +1.
-    expect(summary.variants, 'the R1 corpus holds this many variants').toBe(2418); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted).
+    expect(summary.variants, 'the R1 corpus holds this many variants').toBe(2421); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted).
     // THE MEAN IS THE CALLER'S TO FORMAT (INSTR-912 car 11). The census publishes `variants`
     // and `total` as integers; a `toFixed` inside `src/domain/prose/` is a float
     // interpolation and a two-decimal score against the estate's prose-numerics register, and
@@ -207,13 +207,13 @@ describe('the wiring census — TOTALITY over the corpus', () => {
     // 06:5x DS-CND-1 boom line, ODQ §934.105 ruling (2)): DS-CND-1 ARCHETYPE: boom grew 3 -> 4.
     expect((summary.variants / summary.total).toFixed(2), 'mean variants per pool').toBe('3.29'); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted).
     expect(Object.fromEntries(summary.variantHistogram), 'variants per pool, exactly').toEqual({
-      2: 37, 3: 519, 4: 134, 5: 27, 6: 13, 7: 4, 10: 1, // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted).
+      2: 37, 3: 518, 4: 134, 5: 27, 6: 14, 7: 4, 10: 1, // + DS-ECO-11 STRATEGIC VALUE 3 -> 6 (the referee's top-twenty rule). // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted).
     });
     const summed = summary.variantHistogram.reduce((total, [size, pools]) => total + size * pools, 0);
-    expect(summed, 'and the histogram sums back to the corpus').toBe(2418); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted).
+    expect(summed, 'and the histogram sums back to the corpus').toBe(2421); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted).
     // PER PIECE: the same count rolled up to the block, which is the unit a reader meets.
     const perBlockTotal = summary.perBlock.reduce((total, [, n]) => total + n, 0);
-    expect(perBlockTotal, 'the per-block roll-up carries every variant once').toBe(2418); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted).
+    expect(perBlockTotal, 'the per-block roll-up carries every variant once').toBe(2421); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted).
     expect(summary.perBlock.length, 'across every block').toBe(68);
   });
 

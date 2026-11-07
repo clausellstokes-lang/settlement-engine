@@ -23,7 +23,7 @@
   "totals": {
     "pools": 735,
     "blocks": 68,
-    "variants": 2418,
+    "variants": 2421,
     "resolved": 368,
     "unresolved": 367,
     "resolvedWithPredicate": 220,
@@ -13860,8 +13860,8 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 3,
-      "grammars": 1,
+      "variants": 6,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [
@@ -13904,7 +13904,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 6,
       "crisisScoped": false
     },
     {
@@ -57535,7 +57535,7 @@
       "subject": "STRATEGIC VALUE: the generator's assessment, framed",
       "fields": [],
       "readingFunction": "strategicValuePoolKey",
-      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "6 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "COVERED",

@@ -1661,6 +1661,9 @@ A composed page draws one of each grain, never two.
 1. `[ledger]` Others want {settlement} for what it controls. The people who live there see little of that value.
 2. `[visitor]` Anyone who looks at {settlement}'s position can see why someone would want to hold it.
 3. `[street]` The people of {settlement} know what their ground is worth to others, and know they could not keep it against anyone who came for it.
+4. `[threshold]` A newcomer to {settlement} soon hears what its ground is worth to the powers around it, and how little of that worth stays in the town.
+5. `[unfolding]` For as long as others value {settlement}'s position, the town will have to reckon with who wants it and what they will offer for it.
+6. `[counterforce]` {settlement}'s position is worth watching over: whoever holds the ground holds what the assessment below names.
 
 **EXPLOITATION: `unexploited`, `exportValue: high`**
 1. `[ledger]` There is {resource} in {settlement}'s country worth real money and nothing in the town takes it out of the ground.
