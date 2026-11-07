@@ -211,16 +211,21 @@ describe('deriveViability — isolated import-channel wording matrix', () => {
     config: { tradeRouteAccess: 'isolated' },
   });
 
-  it('covered + channel + magic offset names the channel AND magical provision', () => {
+  it('covered + channel + magic offset names the channel AND the magic', () => {
     const r = deriveViability(isolated({ importCoverage: 300, importChannel: 'teleportation circle', magicFoodOffset: 200 }));
     expect(r.verdict).toBe('strained');
-    expect(r.summary).toMatch(/feeds itself through the teleportation circle, magical provision, and stored reserves/);
+    // #36 (W2 DEF, 2026-11-07): the verdict reads in plain words, from seeded variants; the FACTS held
+    // here are unchanged — the channel is named, magic is credited, the stores are named.
+    expect(r.summary).toMatch(/through the teleportation circle/);
+    expect(r.summary).toMatch(/magic/);
+    expect(r.summary).toMatch(/stores/);
   });
 
   it('covered + channel WITHOUT magic offset never claims magical provision', () => {
     const r = deriveViability(isolated({ importCoverage: 60, importChannel: 'minor routes and sanctioned caravans' }));
-    expect(r.summary).toMatch(/feeds itself through minor routes and sanctioned caravans and stored reserves/);
-    expect(r.summary).not.toMatch(/magical provision/);
+    expect(r.summary).toMatch(/by caravan/);
+    expect(r.summary).toMatch(/stores/);
+    expect(r.summary).not.toMatch(/magic/); // anchored: the channel and the stores are named on the lines above
   });
 
   it('legacy covered + no channel reads as generic trade imports, not "no import channel"', () => {
@@ -228,21 +233,25 @@ describe('deriveViability — isolated import-channel wording matrix', () => {
     // are real (EconomicsTab shows 'Trade covers N% of gap'), so the clause
     // must not deny them.
     const r = deriveViability(isolated({ importCoverage: 120 }));
-    expect(r.summary).toMatch(/feeds itself through trade imports and stored reserves/);
-    expect(r.summary).not.toMatch(/no meaningful import channel/);
-    expect(r.summary).not.toMatch(/magical provision/);
+    expect(r.summary).toMatch(/comes in from outside/);
+    // anchored: the summary names the import on the line above, so it does not deny it here
+    expect(r.summary).not.toMatch(/nothing from outside makes up|Nothing reliable reaches/);
+    expect(r.summary).not.toMatch(/magic/); // anchored: same summary
   });
 
   it('genuinely uncovered keeps the no-import-channel clause', () => {
     const r = deriveViability(isolated({}));
-    expect(r.summary).toMatch(/survives on local production and stored reserves: no meaningful import channel reaches it/);
+    expect(r.summary).toMatch(/nothing from outside makes up the difference|Nothing reliable reaches/);
+    expect(r.summary).toMatch(/stores|in store/);
+    expect(r.summary).not.toMatch(/magic/); // anchored: the denial and the stores are named above
   });
 
   it('uncovered but magic-fed credits magical provision alongside local production', () => {
     // Isolated hamlets can have importCoverage 0 with a druidic offset —
     // magic supplements local production without any import channel.
     const r = deriveViability(isolated({ magicFoodOffset: 200 }));
-    expect(r.summary).toMatch(/survives on local production, magical provision, and stored reserves: no meaningful import channel reaches it/);
+    expect(r.summary).toMatch(/nothing from outside makes up the difference|Nothing reliable reaches/);
+    expect(r.summary).toMatch(/magic/);
   });
 });
 

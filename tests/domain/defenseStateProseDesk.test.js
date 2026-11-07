@@ -978,6 +978,7 @@ describe('DS-DEF-4 — two vocabularies that are EXACT 1:1s, and a covertness ga
     expect(said.structure.sentence.startsWith(plain.structure.sentence)).toBe(true);
     expect(said.structure.sentence).toMatch(/black market/);
     expect(said.structure.provenance.pieces.map((p) => p.role)).toEqual(['spine', 'modifier']);
+    // anchored: the line above proves the said rung carries the modifier piece; this plain rung is the same block
     expect(plain.structure.sentence).not.toMatch(/black market/);
     // never alone: no structure key, no fixture sentence
     const none = defenseCriminalProse(withInst({ hasBlackMarket: true }), 'bogus', { seed: 'fx', audience: 'player' });
@@ -1396,12 +1397,14 @@ describe('DS-DEF-5 — the armed-forces lenses read what still STANDS', () => {
     // a town without walls is never told about its gates
     const open = defenseForcesProse({ ...garrisonTown([]), economicState: { compound: { inst: all } } }, { seed: 'fx5' });
     expect(open.fortification.provenance.poolKey).toBe('walls ABSENT');
+    // anchored: the line above pins this rung to the walls ABSENT pool, so the sentence is live
     expect(open.fortification.sentence).not.toMatch(/gates/);
     // the free company's hall is not in the mercenary bucket: with no contracted line it rides
     // beside the force line, and never twice
     const hall = defenseForcesProse({ ...garrisonTown(['militia']), economicState: { compound: { inst: { hasFreeCompany: true } } } }, { seed: 'fx5' });
     expect(hall.contracted).toBeNull();
     expect(hall.force.sentence).toMatch(/free company/);
+    // anchored: the line above finds the free company on the hall's own line, the same desk call shape
     expect(said.force?.sentence ?? '').not.toMatch(/free company/);
   });
 
@@ -1426,6 +1429,7 @@ describe('DS-DEF-5 — the armed-forces lenses read what still STANDS', () => {
     // never beside the ABSENT line
     const none = defenseForcesProse({ ...garrisonTown([]), economicState: { compound: { inst: { hasWizardTower: true } } } }, { seed: 'ar5' });
     expect(none.arcane.provenance.poolKey).toBe('arcane defense ABSENT');
+    // anchored: the line above pins this rung to the ABSENT pool, so the sentence is live
     expect(none.arcane.sentence).not.toMatch(/wizard/);
   });
 
@@ -2172,7 +2176,10 @@ describe('DS-DEF-12 · supply in isolation (W2 DEF construction C3–C5, 2026-11
     expect(sentenceMountForBlock('DS-DEF-12')?.mount).toBe('viability.isolationSupport');
     // ⛔ The support model is not the food record: no line of the block speaks of hunger.
     for (const pool of Object.values(DOSSIER_STATE_PROSE_DEFENSE['DS-DEF-12'].pools)) {
-      for (const v of pool) expect(v.text, v.text).not.toMatch(/\bhung(?:er|ry)\b|\bstarv/i);
+      for (const v of pool) {
+        // anchored: every DS-DEF-12 pool is asserted present by the key arm above, so this loop reads real lines
+        expect(v.text, v.text).not.toMatch(/\bhung(?:er|ry)\b|\bstarv/i);
+      }
     }
   });
 });
