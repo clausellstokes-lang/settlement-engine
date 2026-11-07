@@ -46,10 +46,11 @@ import { BACKING_ARCHETYPES } from '../../data/institutionBacking.js';
 import { governingFactionOf, nameOf } from '../../domain/rulingPower.js';
 import { isNoPowerInstitution } from '../../data/institutionalCatalog.js';
 import { generateSingleNPC } from '../npcGenerator.js';
+import { hookPoolFor } from './poolMap.js';
 import { deriveTradeCommodity } from '../tradeCommodity.js';
 import { resolveGenerationWorldLaw } from '../generationContext.js';
 import { disambiguateNPCDisplayNames } from '../npcDisplayNames.js';
-import { onStream, seatHouseOf, SEAT_CARD_ID } from './representatives.js';
+import { drawCardHooks, HOOKS_FORK_LABEL, onStream, seatHouseOf, SEAT_CARD_ID } from './representatives.js';
 import { otherMintRowFor } from './mintTitles.js';
 import { RUNG_KEYS, rungBandsForTier } from '../../domain/density/densityRungs.js';
 
@@ -100,6 +101,8 @@ export function assignCastPowers(settlement, cards, rng) {
   // once here and keyed per power below, never re-forked inside a loop.
   const mintStream = stream ? stream.fork('mint') : null;
   const rankStream = stream ? stream.fork('ranks') : null;
+  // the minted faces' ONE hook each (PEOPLE-3 HOOKS): `people-powers::people-hooks::<card id>`
+  const hookStream = stream ? stream.fork(HOOKS_FORK_LABEL) : null;
   const byHouse = dealDoubledNiches(settlement, houseBacksOf(settlement));
   const houseByName = new Map(institutions.map((inst) => [String(inst?.name || ''), inst]));
   const seat = seatHouseOf(institutions);
@@ -152,6 +155,8 @@ export function assignCastPowers(settlement, cards, rng) {
     secrets: new Set(cards.map((c) => c?.secret?.what).filter(Boolean)),
   };
   const existingIds = new Set(cards.map((c) => c?.id));
+  /** @type {Map<string, string>} minted card id → the person hook's pool */
+  const mintHookPools = new Map();
   factions.forEach((f) => {
     const name = nameOf(f);
     // the governing power's face is the seat (housed or minted at step 2), whatever its archetype
@@ -160,7 +165,7 @@ export function assignCastPowers(settlement, cards, rng) {
     if (existingIds.has(id)) return; // a regen that already carries the mint (held cards) mints it once
     existingIds.add(id);
     const row = otherMintRowFor(name);
-    const draw = () => generateSingleNPC(row.role, row.titleKey, row.category, culture, tier, npcConfig, institutions, hookRegistry, worldLaw);
+    const draw = () => generateSingleNPC(row.role, row.titleKey, row.category, culture, tier, npcConfig, institutions, hookRegistry, worldLaw, { hook: false });
     const card = mintStream ? onStream(mintStream.fork(powerSlug(name)), draw) : draw();
     card.id = id;
     card.title = row.title;
@@ -168,8 +173,11 @@ export function assignCastPowers(settlement, cards, rng) {
     card.institution = { kind: 'power', key: name, family: null, title: row.title };
     card.memberships = [];
     mints.push(card);
+    mintHookPools.set(id, hookPoolFor(row.title, null, { category: row.category }).pool);
     join(card, name, 1, null, true, cards.length + mints.length - 1);
   });
+  // ONE HOOK PER MINTED CARD (PEOPLE-3 HOOKS), in mint order, each on its own keyed fork.
+  drawCardHooks(mints, (card) => mintHookPools.get(card.id) || 'other', hookStream, npcConfig, hookRegistry, worldLaw.portKind);
 
   // ── The three (R-P5), per power ──────────────────────────────────────────────────────────
   for (const power of powers) {

@@ -102,7 +102,9 @@ describe('the source page of a hook (chair ruling X-2: Plot Hooks groups its car
     const page = (hook) => plotHookSourcePage(hook).id;
     expect(page({ category: 'npc' })).toBe('npcs');
     expect(page({ category: 'faction' })).toBe('relationships');
-    expect(page({ category: 'relationship' })).toBe('relationships');
+    // RE-KEYED (PEOPLE-3 HOOKS, 2026-11-07): the `relationship` category, unemitted since X-2, is
+    // deleted from the vocabulary; a stored hook still carrying the token falls to the default page.
+    expect(page({ category: 'relationship' })).toBe('history');
     expect(page({ category: 'tension' })).toBe('history');
     expect(page({ category: 'tension', source: 'Traditions' })).toBe('traditions');
     expect(page({ category: 'history' })).toBe('history');

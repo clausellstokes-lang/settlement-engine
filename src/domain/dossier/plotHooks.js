@@ -39,11 +39,10 @@ export const PLOT_HOOK_CATEGORIES = Object.freeze({
   economics: { color: '#a0762a', label: 'Economy' },
   safety: { color: '#5a2a8a', label: 'Safety' },
   history: { color: '#1a4a2a', label: 'History' },
-  // ⚠ KEPT FOR THE VOCABULARY, NO LONGER EMITTED (chair ruling X-2, 2026-10-30): a
-  // relationship's `tension` is a fact of the tie and lives on the Relationships tab beside
-  // it. The entry stays so DS-HK-1's 7-for-7 category identity and any stored hook that
-  // still carries the token keep a colour and a label.
-  relationship: { color: '#5a3a1a', label: 'Relationships' },
+  // ⛔ `relationship` DELETED (PEOPLE-3 HOOKS, 2026-11-07): unemitted since chair ruling X-2
+  // (2026-10-30) — a relationship's `tension` is a fact of the tie and lives on the
+  // Relationships tab beside it. A stored hook that still carries the token renders under the
+  // tension colour (every reader's fallback).
 });
 
 /**
@@ -67,7 +66,6 @@ export const PLOT_HOOK_SOURCE_PAGES = Object.freeze([
 const SOURCE_PAGE_OF_CATEGORY = Object.freeze({
   npc: 'npcs',
   faction: 'relationships',
-  relationship: 'relationships',
   tension: 'history',
   history: 'history',
   economics: 'viability',
@@ -294,6 +292,7 @@ function speakHooks(collected, facts, settlement) {
  * @property {string} [role]
  * @property {string} [title]
  * @property {string} [factionAffiliation]
+ * @property {Array<{ power?: unknown, rank?: unknown }>} [memberships]
  * @property {string} [influence]
  * @property {number} [power]
  * @property {string} [id]
@@ -312,20 +311,6 @@ function speakHooks(collected, facts, settlement) {
  * @property {string} [description]
  */
 /**
- * @typedef {Object} PlotHookRelationship
- * @property {string} [tension]
- * @property {string} [npc1Name]
- * @property {string} [npc2Name]
- * @property {string} [npc1Id]
- * @property {string} [npc2Id]
- * @property {string} [npc1Role]
- * @property {string} [npc2Role]
- * @property {string} [typeName]
- * @property {string} [type]
- * @property {(string|number)} [strength]
- * @property {boolean} [flagDriven]
- */
-/**
  * @typedef {Object} PlotHookEvent
  * @property {PlotHookRaw[]} [plotHooks]
  * @property {string} [type]
@@ -338,7 +323,6 @@ function speakHooks(collected, facts, settlement) {
  * @property {PlotHookNpc[]} [npcs]
  * @property {PlotHookConflict[]} [conflicts]
  * @property {{ currentTensions?: PlotHookTension[], historicalEvents?: PlotHookEvent[], [key: string]: unknown }} [history]
- * @property {PlotHookRelationship[]} [relationships]
  * @property {{ plotHooks?: PlotHookRaw[] }} [economicViability]
  * @property {{ safetyProfile?: { plotHooks?: PlotHookRaw[] } }} [economicState]
  * @property {unknown[]} [traditions]  THE TRADITIONS mirror (T-5) — outcome/relation hooks
@@ -353,6 +337,20 @@ function speakHooks(collected, facts, settlement) {
 function crisisEntriesOf(stress) {
   const list = Array.isArray(stress) ? stress : stress && typeof stress === 'object' ? [stress] : [];
   return list.filter((e) => !!e && typeof e === 'object');
+}
+
+/**
+ * The card's first power — the power it ranks best in. While the people car's shim writes
+ * `factionAffiliation` (people/legacyShim.js, removed by PEOPLE-5) its answer is read, so the
+ * line is the shim's exactly; a card without it (after PEOPLE-5) is read from its memberships.
+ * @param {PlotHookNpc} npc @returns {string | null}
+ */
+function firstPowerOf(npc) {
+  if (typeof npc?.factionAffiliation === 'string' && npc.factionAffiliation) return npc.factionAffiliation;
+  const memberships = Array.isArray(npc?.memberships) ? npc.memberships.filter((m) => m && typeof m.power === 'string') : [];
+  const rankOf = (/** @type {{ rank?: unknown }} */ m) => (Number.isInteger(m.rank) ? Number(m.rank) : Number.MAX_SAFE_INTEGER);
+  const first = [...memberships].sort((x, y) => rankOf(x) - rankOf(y))[0];
+  return first ? String(first.power) : null;
 }
 
 /** The link kinds a hook card can carry. */
@@ -398,19 +396,24 @@ export function collectPlotHooks(settlement = {}, options = {}) {
     });
   });
 
+  // THE PERSON HOOKS (PEOPLE-3 HOOKS; the owner: "one plot hook per NPC rather than multiple"):
+  // each card carries ONE, drawn at birth by its house's title (people/poolMap.js :: hookPoolFor);
+  // its party is the person. `links` stays beside `parties` so the surfaces render until PEOPLE-5
+  // reads `parties`.
   (settlement.npcs || []).forEach((npc) => {
     (npc.plotHooks || []).forEach((hook) => push(hooks, {
       text: plotHookText(hook),
       source: npc.name || 'NPC',
       role: npc.role || npc.title || '',
       sub: [
-        npc.factionAffiliation,
+        firstPowerOf(npc),
         npc.influence === 'high' ? 'High influence' : npc.influence === 'moderate' ? 'Moderate influence' : null,
       ].filter(Boolean).join(' · '),
       category: 'npc',
       priority: npc.power || (npc.influence === 'high' ? 8 : 5),
       accent: npc.influence === 'high',
       links: [{ kind: 'npc', label: npc.name, id: npc.id || npc.name }],
+      parties: [{ kind: 'person', id: npc.id || npc.name }],
     }));
   });
 

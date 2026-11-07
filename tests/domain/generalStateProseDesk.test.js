@@ -1306,17 +1306,24 @@ describe('the viability verdict and the hook framing', () => {
     expect(atRoot, 'the abbreviated path started carrying the count — the trap is cured').toBe(0);
   });
 
-  it('DS-HK-1 is a 7-for-7 and 4-for-4 identity with the two closed producer vocabularies', () => {
+  it('DS-HK-1 is a 6-for-7 and 4-for-4 identity with the two closed producer vocabularies', () => {
     // DIRECTION 1 — every category the registry declares reaches a pool.
+    // RE-KEYED 7 -> 6 (PEOPLE-3 HOOKS, 2026-11-07): the `relationship` category, unemitted since
+    // chair ruling X-2, is deleted from the registry. Its corpus pool ('category relationship: …')
+    // is PROSE, which the people car may not touch (M-4): it stays, unclaimed and unreachable,
+    // named here and in docs/PEOPLE_3_HOOKS_2026-11-07.md for the writing wave (W7 HOOKS) to retire.
     const categories = Object.keys(PLOT_HOOK_CATEGORIES);
-    expect(categories.length, 'the hook category registry moved').toBe(7);
+    expect(categories.length, 'the hook category registry moved').toBe(6);
+    expect(categories).not.toContain('relationship');
     for (const c of categories) {
       expect(hookCategoryPoolKey(c), `no pool claims the '${c}' category`).toBeTruthy();
     }
-    // DIRECTION 2 — every `category ` pool is claimed by a registry member.
+    // DIRECTION 2 — every `category ` pool is claimed by a registry member, but the one retired.
     const categoryPools = poolsOf('DS-HK-1').filter((k) => k.startsWith('category '));
     expect(categoryPools.length).toBe(7);
-    expect(new Set(categories.map((c) => hookCategoryPoolKey(c))).size).toBe(7);
+    expect(new Set(categories.map((c) => hookCategoryPoolKey(c))).size).toBe(6);
+    expect(categoryPools.filter((k) => !categories.some((c) => hookCategoryPoolKey(c) === k)))
+      .toEqual([hookCategoryPoolKey('relationship')]);
     // And the vocabulary is CLOSED: an unknown category renders nothing.
     expect(hookCategoryPoolKey('weather')).toBeNull();
     expect(hookCategoryPoolKey('')).toBeNull();

@@ -101,7 +101,7 @@ export const generateSingleNPC = ( // exported for people/representatives.js (th
   config = {},
   institutions = [],
   hookRegistry,
-  generationContext = null,
+  generationContext = null, options = {}, // options.hook === false: the birth seam draws the card's one hook itself
 ) => {
   const gender = _rng() > 0.5 ? 'male' : 'female';
   const fullName = pickFirst(culture, gender, true, tier);
@@ -131,9 +131,11 @@ export const generateSingleNPC = ( // exported for people/representatives.js (th
   );
   if (goal?.short) hookRegistry?.goals?.add(String(goal.short).trim());
   if (secret?.secret) hookRegistry?.secrets?.add(String(secret.secret).trim());
-  const title1 = inlandHookLine(generatePlotHook(category, config, hookRegistry), worldLaw.portKind);
-  const title2 = _rng() > 0.5 ? inlandHookLine(generatePlotHook(category, config, hookRegistry), worldLaw.portKind) : null;
-  const plotHooks = title2 && title2 !== title1 ? [title1, title2] : [title1];
+  // ONE PLOT HOOK PER PERSON (the owner, 2026-11-07: "one plot hook per NPC rather than multiple";
+  // PEOPLE-3 HOOKS): the second hook (a coin-flip, μ 0.5 per card) is RETIRED. A representative's
+  // hook is drawn by its birth seam on its own keyed fork, keyed by the face's title through the
+  // pool map (people/representatives.js :: drawCardHooks), so that seam asks for none here.
+  const plotHooks = options.hook === false ? [] : [drawPersonHook(category, config, hookRegistry, worldLaw.portKind)];
   const powerLevel = generateNPCPowerLevel(role);
   return {
     id: null,
@@ -640,8 +642,8 @@ const generateNPCGoal = (role, category = 'other', config = {}, held = null, fin
 // roll lands on changes, and that is HK-3's disclosed same-seed shift.
 const drawLoyalty = (pool, reg) => drawUnique(pool, reg?.titles, undefined, reg?.themes, themeOfText);
 
-// generatePlotHook — ONE plot hook. `generateSingleNPC` calls it twice and the pair becomes
-// the NPC's `plotHooks` array.
+// generatePlotHook — ONE plot hook, the person's one (`drawPersonHook`; the second draw that
+// made a pair was retired by PEOPLE-3 HOOKS, 2026-11-07).
 //
 // ⚠ THIS WAS CALLED `generateCharacterTitle` AND RETURNS NO TITLE. The NPC's title comes from
 // `pickTitle(category)` and `pickCulturalTitle`; this draws from NPC_FACTION_LOYALTY, which is
@@ -688,6 +690,12 @@ const generatePlotHook = (category = 'other', config = {}, hookRegistry) => {
 
   return drawLoyalty(NPC_FACTION_LOYALTY[category] || NPC_FACTION_LOYALTY.other, hookRegistry);
 };
+
+/** THE PERSON HOOK — one line of the NPC hook pool under `hookPool` (people/poolMap.js :: hookPoolFor),
+ * refusing a held text, the wet line given its inland twin (F5); on the ambient stream (the card's fork).
+ * @param {string} hookPool @param {Record<string, any>} config @param {any} hookRegistry @param {string | null | undefined} portKind @returns {string} */
+export const drawPersonHook = (hookPool, config = {}, hookRegistry, portKind) =>
+  inlandHookLine(generatePlotHook(hookPool, config, hookRegistry), portKind);
 
 // pickTitle
 const pickTitle = r => {

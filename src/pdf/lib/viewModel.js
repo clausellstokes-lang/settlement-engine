@@ -770,7 +770,6 @@ const HOOK_CATEGORY_TO_SOURCE = Object.freeze({
   economics: 'crisis',
   safety: 'crime',
   history: 'history',
-  relationship: 'relationship',
 });
 
 // collectPlotHooks priority is a 0–9 NUMBER; the PDF section keys its priority

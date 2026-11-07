@@ -47,6 +47,8 @@ import {
   buildGenerationCoherenceReceipt,
 } from '../generationCoherence.js';
 import { storeTrueHooksOnly } from '../../domain/coherence/hookTruthRecord.js';
+import { truePersonHooks } from '../people/personHooks.js';
+import { resolveGenerationWorldLaw } from '../generationContext.js';
 import {
   assertPowerEconomyFreshness,
   reconcilePowerStructure,
@@ -365,9 +367,15 @@ registerStep('assembleSettlement', {
   // too, so the dual-written addresses stay one list.) A HELD ROSTER IS NOT RE-WRITTEN: under a
   // held `npcs` pin the NPCs' hooks are the held record's, gated on the same key and primitive
   // as the structural appender above (the conflicts are re-derived on every run, never held).
-  Object.assign(settlement, storeTrueHooksOnly(settlement, {
-    npcsHeld: chooseOrPin(pins, 'npcs', () => UNPINNED) !== UNPINNED,
-  }));
+  const npcsHeld = chooseOrPin(pins, 'npcs', () => UNPINNED) !== UNPINNED;
+  Object.assign(settlement, storeTrueHooksOnly(settlement, { npcsHeld }));
+  // ONE TRUE HOOK PER CARD (PEOPLE-3 HOOKS): a card whose one hook the check above refused takes
+  // the next true line of its own pool, draw-free (people/personHooks.js); a held roster is not
+  // re-written, under the same gate.
+  if (!npcsHeld) {
+    const npcs = truePersonHooks(settlement, resolveGenerationWorldLaw(ctx.generationContext, ctx.effectiveConfig || {}).portKind);
+    if (npcs !== settlement.npcs) settlement.npcs = npcs;
+  }
 
   // Propagate the in-pipeline causal trace onto the settlement so
   // downstream consumers (PipelineRail, AI overlay, PDF) can read it.
