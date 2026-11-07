@@ -372,7 +372,11 @@ describe('EM-R8 — the escalation ladder never overwrites a HELD key, and the r
     // post-pass restates their citations more often. The law below (no foreign citation) is unchanged.
     // RE-KEYED by MERGE-234 (the union of lanes 1–4, READ off the arm's received value): 40 -> 32 — lane 3's conflicts pair
     // over the powers by memberships, and the seam mints' ties are drawn by drawTies to the seat.
-    expect(all.filter((trial) => trial.conflictsRestated).length, 'trials whose conflict citations the post-pass rebuilt').toBe(32);
+    // RE-KEYED at the people landing (2026-11-07, this arm's count probed with the tip's own trials() at each lane's
+    // tree): 32 at lane 4 c7d552370 -> 30 5A DISPLAY 053283dfd -> 56 5B EDIT a725df7e4 (the v2 boundary strips the
+    // grouping from every returned record) -> 27 the landing's shim out 2981f23f6 (the grouping writer leaves the
+    // pipeline), unmoved to the tip. `foreign` stays empty at every stage.
+    expect(all.filter((trial) => trial.conflictsRestated).length, 'trials whose conflict citations the post-pass rebuilt').toBe(27);
     const foreign = all.filter((trial) => trial.citesOwn === false).map((trial) => `${trial.label} ${trial.key}`);
     // anchored: the line above proves the restatement fires on twelve live trials, so silence here is a cure.
     expect(foreign, `the receipt cites a conflict list that is not the merged record's own:\n${foreign.join('\n')}`).toEqual([]);
