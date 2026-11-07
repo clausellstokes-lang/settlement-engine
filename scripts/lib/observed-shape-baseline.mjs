@@ -7,7 +7,17 @@
  *
  * ── ⭐⭐ EIGHT IDENTITY DEFINITIONS LIVE HERE, AND ONLY ONE IS THE AUTHORITY ──
  *
- * `BASELINE_SCHEMA` is **30**: schema 29's tagged numeric heuristic-leaf envelope, tag law, roster
+ * `BASELINE_SCHEMA` is **31**: schema 30's tagged numeric heuristic-leaf envelope, tag law, roster
+ * and corpus definition UNCHANGED, re-governed to THE PEOPLE CAR'S LANDING (the owner's charter, ODQ
+ * §934.105; lanes 2-5B merged, the landing seat PEOPLE-LAND, 2026-11-07): the NPC grouping
+ * `settlement.factions` and the per-NPC faction fields leave the record at the v2 boundary (M-2, M-7).
+ * A NEW GENESIS: MERGE-234's textually merged schema-30 register (c7d552370) fails the history
+ * walk, so the rung is cut from a restored consistent schema-30 predecessor (8dd30106b's bytes).
+ * Every new row is ADMITTED WITH ATTRIBUTION by lane cause (the schema-24 posture); the migration's
+ * v1 reads are one review class; nothing is declared and the bank holds at 77/51. Its full rationale
+ * lives beside `PEOPLE_LANDING_TARGET_SCHEMA` in `migrate-observed-shape-readers.mjs`.
+ *
+ * `RETIRED_PEOPLE_CAST_BASELINE_SCHEMA` is **30**: schema 29's tagged numeric heuristic-leaf envelope, tag law, roster
  * and corpus definition UNCHANGED, re-governed to THE PEOPLE CAR'S CAST (the owner's charter, ODQ
  * §934.105; lane PEOPLE-1 CAST, 2026-11-07): one face per face-bearing house with house-keyed ids,
  * `institution`, `title`, `memberships` and a rank-placed `importance`; the named roster and the
@@ -484,7 +494,11 @@ export const RETIRED_TIER_COVERAGE_BASELINE_SCHEMA = 28;
  *  baseline is validated against BASELINE_SCHEMA, and this constant exists so a schema-29
  *  PREDECESSOR is still validated as schema 29 after the live number moves past it. */
 export const RETIRED_MIGRATION_DIRECTION_BASELINE_SCHEMA = 29;
-export const BASELINE_SCHEMA = 30;
+/** The RETIRED people-cast definition — schema 31's predecessor. Same tagged topology envelope,
+ *  theta, roster, corpus definition and fence; schema 31 re-governs it to the people car's landing.
+ *  Never redefined, never deleted, so a schema-30 PREDECESSOR is still validated as schema 30. */
+export const RETIRED_PEOPLE_CAST_BASELINE_SCHEMA = 30;
+export const BASELINE_SCHEMA = 31;
 /** The RETIRED exact per-site definition. Never redefined, never deleted. */
 export const RETIRED_EXACT_BASELINE_SCHEMA = 3;
 /** The RETIRED UNFILTERED heuristic-leaf definition — schema 5's predecessor.
@@ -1169,10 +1183,20 @@ export function validateSchema29Baseline(baseline) {
   );
 }
 
+/** The RETIRED authority — schema 30's tagged envelope, re-governed by schema 31 to the people
+ *  car's landing. Re-bound to its own LITERAL now that the authority has moved to 31. */
+export function validateSchema30Baseline(baseline) {
+  return validateLeafBaseline(
+    baseline,
+    RETIRED_PEOPLE_CAST_BASELINE_SCHEMA,
+    { tagged: true },
+  );
+}
+
 /** The LIVE envelope validator. Bound to `BASELINE_SCHEMA` rather than a literal,
  *  so the retired rungs above keep validating their own numbers while this one
  *  always names the authority. */
-export function validateSchema30Baseline(baseline) {
+export function validateSchema31Baseline(baseline) {
   return validateLeafBaseline(baseline, BASELINE_SCHEMA, { tagged: true });
 }
 

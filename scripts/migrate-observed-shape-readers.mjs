@@ -197,7 +197,14 @@
  *     roster 10 -> 13, the bank 69/45 -> 76/50), and ADMITS the window's other rows with
  *     attribution. Its full rationale lives beside `WINDOW_RUNG1_TARGET_SCHEMA` (RETIRED).
  *
- *   schema 29 -> 30 (LIVE)   the same tagged numeric reconciliation, and THE PEOPLE CAR'S CAST (the
+ *   schema 30 -> 31 (LIVE)   the same tagged numeric reconciliation, and THE PEOPLE CAR'S LANDING
+ *     (ODQ §934.105; the landing seat PEOPLE-LAND, 2026-11-07): the NPC grouping and the per-NPC
+ *     faction fields leave the record at the v2 boundary (M-2, M-7). A NEW GENESIS from a restored
+ *     consistent schema-30 predecessor. 90 new rows ADMITTED with attribution by lane cause, 9 go,
+ *     2 decrease; nothing is declared and the bank holds at 77/51. Its full rationale lives beside
+ *     `PEOPLE_LANDING_TARGET_SCHEMA`.
+ *
+ *   schema 29 -> 30 (RETIRED) the same tagged numeric reconciliation, and THE PEOPLE CAR'S CAST (the
  *     owner's charter, ODQ §934.105; lane PEOPLE-1 CAST, 2026-11-07): one face per face-bearing house
  *     with house-keyed ids, `institution`, `title`, `memberships` and a rank-placed `importance`, the
  *     named roster and the rung stamps retired from birth. The corpus's year over the new cast fires
@@ -307,6 +314,7 @@ import {
   validateSchema27Baseline,
   validateSchema28Baseline,
   validateSchema29Baseline,
+  validateSchema30Baseline,
 } from './lib/observed-shape-baseline.mjs';
 
 export const MIGRATION_REPORT_SCHEMA = 2;
@@ -1314,6 +1322,47 @@ export const MIGRATION_DIRECTION_TARGET_SCHEMA = 29;
  *  next. */
 export const PEOPLE_CAST_TARGET_SCHEMA = 30;
 
+/* ⭐⭐ THE SCHEMA 30 → 31 RUNG — THE PEOPLE CAR'S LANDING
+ *
+ *  The owner's charter (ODQ §934.105, quoted in PEOPLE-RULINGS §0): "removing factions entirely" —
+ *  the NPC grouping `settlement.factions` and the per-NPC faction fields go; the POWERS
+ *  (`powerStructure.factions`) stay. Lanes 2-5B of the people car landed on lane 1's cast; lane 5B's
+ *  v2 boundary (`normalizeSettlement`, schema 2, M-7) strips the grouping and `factionAffiliation`,
+ *  `secondaryAffiliation`, `linkedFactionIds`, `factionGoal`, `densityRungRole` from every returned
+ *  record, and its migration moves a v1 save's fields once.
+ *
+ *  ⛔ WHY A NEW GENESIS AND NOT A SCHEMA-30 RE-FREEZE (MERGE-5AB's STOP, ruled by the chair):
+ *  MERGE-234's final merge (c7d552370) resolved the register textually and it was never re-derived;
+ *  `validateBaselineHistory` re-validates every committed schema-30 register on the ancestry path,
+ *  and c7d552370's fails `assertManifest` (executionTree manifest digest mismatch). Only a rung
+ *  escapes: its walk reads schema-31 descendants of its own genesis. The predecessor is the last
+ *  register written through the door, 8dd30106b's bytes, restored and committed first (db5dbb001).
+ *
+ *  WHAT MOVED: the corpus's record shape (the grouping's items, which carried `name` and `members`,
+ *  and the shim's fields no longer observed), so reads of those keys elsewhere become findings.
+ *  MEASURED, at the subject, through `--scan-only --scan-mode=legacy-leaf` against the predecessor:
+ *
+ *      reads 2,068 → 2,200 · identities 1,470 → 1,551 · files 403 → 426
+ *      NEW 90 · GONE 9 · INCREASED 0 · DECREASED 2 · SAME 1,459
+ *
+ *  Scanned at the lane tips (the 234 tip c7d552370, 5A 3d76fb058, 5B f24623a9f): 86 of the 90 rows
+ *  first appear at 5B's tip (the v2 boundary), 2 at 5A's (its display reads), 2 only in the union.
+ *
+ *  ⛔ THE ROWS ARE ADMITTED WITH ATTRIBUTION BY LANE CAUSE (the schema-24 posture), not declared:
+ *    • FPZ's (M-6, broken by design): the simulation's readers of the grouping and the five fields,
+ *      each attributed to `fpz-list.json`'s reason; they read nothing on a v2 record;
+ *    • v1-migration-reads (ONE class): "the migration reads the five legacy fields once, by design,
+ *      to move them" — `settlementMigrations.js`, 5B's;
+ *    • lane 1 (the card's `institution`, `title`, `memberships`); lane 3 (the hook parties);
+ *      5A (the display reads); 5B (the edit layer, and the grouping's builders, retired by M-2);
+ *    • lanes 2 and 4: none measured.
+ *  The 9 GONE and 2 DECREASED are the grouping's readers the boundary and 5A's re-points retired.
+ *
+ *  ⭐ THE BANK DOES NOT MOVE: 77 banked reads across 51 tagged addresses (no moving row is on a
+ *  declared identity). Its delta is the THREE bookkeeping paths every rung moves. This rung lands
+ *  ratchet-red; its re-freeze lands next. */
+export const PEOPLE_LANDING_TARGET_SCHEMA = 31;
+
 export const DECLARED_BANK_BY_TARGET = Object.freeze({
   [EXEMPTION_RETIREMENT_TARGET_SCHEMA]: Object.freeze({ bankedReads: 60, taggedRows: 39 }),
   [BANK_FENCE_TARGET_SCHEMA]: Object.freeze({ bankedReads: 60, taggedRows: 39 }),
@@ -1371,6 +1420,9 @@ export const DECLARED_BANK_BY_TARGET = Object.freeze({
   // pair cannot move. The write refuses if the measurement disagrees with this pair or with the
   // walker's hand-owned literal.
   [PEOPLE_CAST_TARGET_SCHEMA]: Object.freeze({ bankedReads: 77, taggedRows: 51 }),
+  // MEASURED off the restored schema-30 predecessor and the live scan at the subject: no admitted,
+  // gone or decreased row is on a declared identity, so the pair cannot move.
+  [PEOPLE_LANDING_TARGET_SCHEMA]: Object.freeze({ bankedReads: 77, taggedRows: 51 }),
 });
 
 /** The declared post-bank of a target, or `null` for a rung that predates the law. */
@@ -1927,6 +1979,14 @@ export const PEOPLE_CAST_SCANNER_DELTA_PATHS = Object.freeze([
   'scripts/migrate-observed-shape-readers.mjs',
 ]);
 
+/** The schema-30 → 31 delta: the same THREE bookkeeping paths (the live validator moving to
+ *  `validateSchema31Baseline`, the 30 → 31 bump with the retired-30 constant, this rung). */
+export const PEOPLE_LANDING_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
 export const BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS = Object.freeze([
   'package-lock.json',
   'package.json',
@@ -1983,6 +2043,8 @@ const MIGRATION_DIRECTION_SCANNER_TRANSITION_POLICY =
   'schema-28-to-29-exact-scanner-transition-v1';
 const PEOPLE_CAST_SCANNER_TRANSITION_POLICY =
   'schema-29-to-30-exact-scanner-transition-v1';
+const PEOPLE_LANDING_SCANNER_TRANSITION_POLICY =
+  'schema-30-to-31-exact-scanner-transition-v1';
 const CORPUS_COVERAGE_SCANNER_TRANSITION_POLICY =
   'schema-7-to-8-exact-scanner-transition-v1';
 const EPOCH_DARK_CORPUS_SCANNER_TRANSITION_POLICY =
@@ -2031,6 +2093,7 @@ export const LEAF_MIGRATION_PREDECESSOR = Object.freeze({
   [TIER_COVERAGE_TARGET_SCHEMA]: WINDOW_RUNG1_TARGET_SCHEMA,
   [MIGRATION_DIRECTION_TARGET_SCHEMA]: TIER_COVERAGE_TARGET_SCHEMA,
   [PEOPLE_CAST_TARGET_SCHEMA]: MIGRATION_DIRECTION_TARGET_SCHEMA,
+  [PEOPLE_LANDING_TARGET_SCHEMA]: PEOPLE_CAST_TARGET_SCHEMA,
 });
 
 /**
@@ -2121,6 +2184,8 @@ const LEAF_PREDECESSOR_VALIDATOR = Object.freeze({
   // RETIRED literal from this rung onward, so this entry keeps validating schema 29
   // as schema 29 after the live number moves past it.
   [MIGRATION_DIRECTION_TARGET_SCHEMA]: validateSchema29Baseline,
+  // The schema-31 rung's own predecessor, validated as schema 30 by its retired literal.
+  [PEOPLE_CAST_TARGET_SCHEMA]: validateSchema30Baseline,
 });
 
 const RETIRED_EXACT_MIGRATION_KIND = `observed-shape-schema-2-to-${RETIRED_EXACT_TARGET_SCHEMA}-migration`;
@@ -2644,6 +2709,14 @@ const SCANNER_TRANSITION_BY_TARGET = new Map([
     // governed execution inputs (the dossier-state prose, the institution service keys, the prose
     // norms, …) by their documented commands after the predecessor was frozen, and the report
     // records that movement for the review's decision.
+    reviewableUnscannedMovement: true,
+  })],
+  [PEOPLE_LANDING_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: PEOPLE_LANDING_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: PEOPLE_LANDING_SCANNER_TRANSITION_POLICY,
+    // TRUE, matching every rung since 8→9: any governed execution input regenerated by its
+    // documented command since the schema-30 freeze is recorded for the review's decision.
     reviewableUnscannedMovement: true,
   })],
   [PEOPLE_CAST_TARGET_SCHEMA, Object.freeze({
@@ -3772,7 +3845,7 @@ export function run(argv = process.argv.slice(2)) {
   // any mismatch into a refusal rather than a silent mode switch.
   const targetSchema = command.targetSchema
     ? Number(command.targetSchema)
-    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : PEOPLE_CAST_TARGET_SCHEMA);
+    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : PEOPLE_LANDING_TARGET_SCHEMA);
   if (![RETIRED_EXACT_TARGET_SCHEMA, HEURISTIC_TARGET_SCHEMA, FILTERED_TARGET_SCHEMA,
     SURFACE_FILTERED_TARGET_SCHEMA, BANKED_EXPLAINED_WRITER_TARGET_SCHEMA,
     CORPUS_COVERAGE_TARGET_SCHEMA, EPOCH_DARK_CORPUS_TARGET_SCHEMA,
@@ -3785,8 +3858,10 @@ export function run(argv = process.argv.slice(2)) {
     DOMAIN_READER_TARGET_SCHEMA, EDIT_MODE_READERS_TARGET_SCHEMA,
     CORPUS_REDEAL_TARGET_SCHEMA, ADVISORY_LOCKFILE_TARGET_SCHEMA,
     FED_WORLD_TARGET_SCHEMA, WINDOW_RUNG1_TARGET_SCHEMA, TIER_COVERAGE_TARGET_SCHEMA,
-    MIGRATION_DIRECTION_TARGET_SCHEMA, PEOPLE_CAST_TARGET_SCHEMA].includes(targetSchema)) {
-    throw new Error(`observed-shape --target-schema must be ${PEOPLE_CAST_TARGET_SCHEMA} (live people-cast leaf),`
+    MIGRATION_DIRECTION_TARGET_SCHEMA, PEOPLE_CAST_TARGET_SCHEMA,
+    PEOPLE_LANDING_TARGET_SCHEMA].includes(targetSchema)) {
+    throw new Error(`observed-shape --target-schema must be ${PEOPLE_LANDING_TARGET_SCHEMA} (live people-landing leaf),`
+      + ` ${PEOPLE_CAST_TARGET_SCHEMA} (retired people-cast leaf),`
       + ` ${MIGRATION_DIRECTION_TARGET_SCHEMA} (retired migration-direction leaf),`
       + ` ${TIER_COVERAGE_TARGET_SCHEMA} (retired tier-coverage leaf),`
       + ` ${WINDOW_RUNG1_TARGET_SCHEMA} (retired rung-1-window leaf),`
