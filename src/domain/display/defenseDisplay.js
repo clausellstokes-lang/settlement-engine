@@ -152,10 +152,10 @@ export function criminalOpNote(name) {
   if (n.includes('underground'))
     return 'An entire secondary economy operating below street level. Beyond enforcement reach without extraordinary effort.';
   if (n.includes('assassin'))
-    return 'Professional killing for hire. The existence of this market reflects deeply embedded political violence.';
+    return 'Professional killers for hire. That there is work for them says how politics is done here.';
   if (n.includes('fence'))
-    return 'Moves stolen goods into legitimate circulation. The fence is the clearinghouse that makes theft economically viable.';
-  return 'Criminal infrastructure with local territorial or economic influence.';
+    return 'Buys stolen goods and sells them on as honest stock; without the fence, theft would not pay.';
+  return 'A criminal operation with a hold on part of the place or its trade.';
 }
 
 // `criminalOpEcon` LIVED HERE and was a passenger: this module never called it, while the
@@ -166,7 +166,7 @@ export function criminalOpNote(name) {
 const CRIM_STRUCTURE_DATA = Object.freeze({
   organized: {
     key: 'organized', label: 'Organized Syndicate', color: '#8b1a1a', bg: '#fdf4f4',
-    note: 'A structured criminal hierarchy controls what crime is permitted. Predictable rules, a hierarchy to negotiate with. Or cross. Random violence is suppressed because it draws enforcement. The real danger is systematic: protection, extortion, corruption of officials.',
+    note: 'One criminal ring decides what crime is allowed here. Its rules are predictable and it can be bargained with; it puts down random violence because that brings the law, and it lives on protection money and bought officials.',
   },
   'semi-organized': {
     key: 'semi-organized', label: 'Semi-Organized Networks', color: '#8a3010', bg: '#fdf0e8',
@@ -174,7 +174,7 @@ const CRIM_STRUCTURE_DATA = Object.freeze({
   },
   diffuse: {
     key: 'diffuse', label: 'Diffuse Criminal Presence', color: '#7a5010', bg: '#faf8e0',
-    note: 'Opportunistic crime without organizational infrastructure. Fences, bandits, and minor operators work independently. Less politically dangerous but harder to suppress. No single node to threaten or buy off.',
+    note: 'Thieves, fences and bandits each work for themselves; there is no boss to threaten or to bribe, which makes them harder to stamp out.',
   },
 });
 
@@ -408,7 +408,7 @@ export function deriveSupportingCapabilities(settlement) {
       color: facts.hasHospital ? '#1a5a28' : (facts.hasHealer || f.hasChurch) ? '#7a5010' : '#8b1a1a', score: null,
       note: facts.hasHospital ? 'Casualty treatment, outbreak containment, recovery capacity.'
         : facts.hasHealer ? `${facts.healerName}. Wounds and fevers treated one at a time; no beds to contain an outbreak.`
-          : f.hasChurch ? 'Clerical care. Basic wound and disease management.' : 'No dedicated healers. Plague burns unchecked.',
+          : f.hasChurch ? 'Clerical care. Basic wound and disease management.' : 'No healer is kept here; the sick are tended by their own families.',
     },
     // ⛔ THE LOGISTICS & SUPPLY ROW IS GONE FROM THE DEFENSE SURFACES (the owner's word,
     // 2026-11-03: "Do add storehouse months the economy tab."). It was the granary read; stored
@@ -434,7 +434,7 @@ export function deriveSupportingCapabilities(settlement) {
               ? 'A hostile fleet blockades the sea approaches. Airships run the blockade, impaired by siege countermeasures.'
               : 'A hostile fleet blockades the sea approaches. The port is choked, and no magical channel runs the line.')
         : f.hasNavy
-          ? 'Naval force controls sea approaches. Amphibious assault requires fleet superiority.'
+          ? 'The place\'s own ships hold the sea approaches; an attack by water would have to beat them first.'
           : 'Port facility but no naval force. Sea approaches are accessible to any vessel.',
     });
   }
