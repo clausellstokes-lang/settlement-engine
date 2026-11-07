@@ -51,7 +51,7 @@ import { faithPanelModel, trimFaithDeskToPanel } from '../../src/components/sett
 import { settlementWarStatus, settlementWarExhaustion, warExhaustionBand } from '../../src/domain/display/warStatus.js';
 import { settlementMobilization } from '../../src/domain/display/mobilizationStatus.js';
 import { settlementOccupation, occupierHoldings } from '../../src/domain/display/occupationStatus.js';
-import { assertDeclarable } from '../../src/domain/facts/factVocabulary.js';
+import { COLOUR_MARK, assertDeclarable } from '../../src/domain/facts/factVocabulary.js';
 
 const BLOCK = (id) => WAR_FAITH[id];
 const POOLS = (id) => Object.keys(BLOCK(id).pools);
@@ -195,9 +195,19 @@ describe('ONE STATE DIMENSION in the leaf: walls (F10 WALLS-WORD, 2026-11-04)', 
         if (dims.length > 0) partitioned[`${id} :: ${key}`] = dims;
       }
     }
-    expect(Object.values(partitioned).every((dims) => dims.join() === 'walls')).toBe(true);
+    // ONE pool partitions by `crisis`, not walls: census(compose) unit 8 (b8d2c3569, R-I) gave
+    // DS-FTH-1 SINK arc rising v1 the bare `crisis` need ("Crisis has a way of ending
+    // indifference"), a kernel mark word; measured [walls] only at its parent.
+    const CRISIS_POOL = 'DS-FTH-1 :: SINK: unaffiliated present, arc rising';
+    expect(partitioned[CRISIS_POOL]).toEqual(['crisis']);
+    expect(Object.entries(partitioned).filter(([k]) => k !== CRISIS_POOL)
+      .every(([, dims]) => dims.join() === 'walls')).toBe(true);
+    // ['DS-FTH-1', 'DS-WAR-1', 'DS-WAR-2'] -> + 'DS-WAR-5' at census-5d unit 2a (c24d7118e, R-AO):
+    // three DS-WAR-5 pools (the genuine siege, the phantom front, siege_lifted) mark walls.
+    // DS-WAR-5 is dark (UNMOUNTED_BLOCKS), so no mount row owes it.
     expect([...new Set(Object.keys(partitioned).map((k) => k.split(' :: ')[0]))].sort())
-      .toEqual(['DS-FTH-1', 'DS-WAR-1', 'DS-WAR-2']);
+      .toEqual(['DS-FTH-1', 'DS-WAR-1', 'DS-WAR-2', 'DS-WAR-5']);
+    expect(UNMOUNTED_BLOCKS).toContain('DS-WAR-5');
     // Beside the AUDIENCE mark (law 2, not a dimension) the leaf spells only the walls pair.
     const marks = new Set(Object.keys(WAR_FAITH).flatMap((id) => Object.values(BLOCK(id).pools)
       .flat().flatMap((v) => v.marks || [])));
@@ -205,15 +215,28 @@ describe('ONE STATE DIMENSION in the leaf: walls (F10 WALLS-WORD, 2026-11-04)', 
     // atoms (`gate`, `temple`, `war: peace`, `no crisis: …`), which partition no kernel dimension:
     // the kernel's own words stay the walls pair, and every other mark is a declarable atom.
     const KERNEL_WORDS = new Set(Object.values(STATE_MARK_DIMENSIONS).flat());
-    expect([...marks].filter((m) => m === 'dm-only' || KERNEL_WORDS.has(m)).sort()).toEqual(['dm-only', 'no walls', 'walls']);
-    for (const m of [...marks].filter((x) => x !== 'dm-only' && !KERNEL_WORDS.has(x))) {
+    // + 'crisis' at b8d2c3569 (the SINK line's bare need, above).
+    expect([...marks].filter((m) => m === 'dm-only' || KERNEL_WORDS.has(m)).sort()).toEqual(['crisis', 'dm-only', 'no walls', 'walls']);
+    // The per-line `colour` mark (R-AO) is the vocabulary's no-atom declaration ("read; presumes
+    // nothing", factVocabulary.js :: COLOUR_MARK), neither a kernel word nor an atom: 0 -> 60 lines
+    // at census-5d unit 2a (c24d7118e), 69 since cd3b6b0e6 (compose unit 2 item 5).
+    expect(marks.has(COLOUR_MARK), 'the leaf carries no per-line colour mark').toBe(true);
+    for (const m of [...marks].filter((x) => x !== 'dm-only' && x !== COLOUR_MARK && !KERNEL_WORDS.has(x))) {
       expect(() => assertDeclarable(m.replace(/^no\s+/i, '')), m).not.toThrow();
     }
-    const owing = new Set(Object.keys(partitioned).map((k) => k.split(' :: ')[0]));
-    for (const row of DOSSIER_MOUNTS.filter((r) => r.desk === 'warFaith')) {
-      expect(row.dimensions, `${row.mount} declares a dimension its block does not carry`)
-        .toEqual(owing.has(row.blockId) ? ['walls'] : undefined);
+    /** @type {Map<string, Set<string>>} */
+    const owing = new Map();
+    for (const [k, dims] of Object.entries(partitioned)) {
+      const id = k.split(' :: ')[0];
+      if (!owing.has(id)) owing.set(id, new Set());
+      for (const d of dims) owing.get(id).add(d);
     }
+    for (const row of DOSSIER_MOUNTS.filter((r) => r.desk === 'warFaith')) {
+      expect(row.dimensions ? [...row.dimensions].sort() : undefined, `${row.mount} declares a dimension its block does not carry`)
+        .toEqual(owing.has(row.blockId) ? [...owing.get(row.blockId)].sort() : undefined);
+    }
+    // faith.patronSeat lists crisis beside walls since b8d2c3569 (the shipped row, unit 8's own act).
+    expect(DOSSIER_MOUNTS.find((r) => r.mount === 'faith.patronSeat')?.dimensions).toEqual(['walls', 'crisis']);
   });
 });
 
