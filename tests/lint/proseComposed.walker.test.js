@@ -205,8 +205,8 @@ describe('GUARD THE GUARD — the inputs this file judges are the real ones', ()
     // census-2b item 5 70d05b25b +4, census-5 unit 2 06b59812f +1, census-3c unit 4 e3295d168 +10,
     // census-5b unit 3 c00b30eb6 +4. 2342 -> 2343 at LANDING-R2 helper G (the chair's §934.105 ruling (1): DS-GEN-17 PROVISIONED v3, the hospital-only line) +1.
     // 2343 -> 2344 at LANDING-R2 helper G2 (the chair's 06:5x DS-CND-1 boom line (ODQ §934.105, ruling (2)): ARCHETYPE: boom v4 `[street · crisis: any]`) +1.
-    expect(corpus.length, 'the shipped state corpus').toBe(2348);
-    expect(census.rows.length, 'the committed wiring census').toBe(711);
+    expect(corpus.length, 'the shipped state corpus').toBe(2356); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 2348 -> 2356
+    expect(census.rows.length, 'the committed wiring census').toBe(715); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 711 -> 715
     expect(Object.keys(DOSSIER_RELATIONS).length, 'the committed relation leaf').toBe(165);
     // Every arm this module owns is exercised below; a roster that quietly shrank would make
     // a whole describe disappear with nothing red.
@@ -463,7 +463,12 @@ describe('A0b — the text claims every declared field and no other', () => {
     // (`safetyProfile.flags` and the flag itself, which no sentence names as a word): 1344 -> 1352 measured, the eight new
     // under-claims are FLAG: magicFillsVoid v1 and v2 (2 each) and FLAG: magicMilitarized v1 (1) and v2 (3: the flags, the
     // flag, and the key function's first test `magicFillsVoid`, which the militarized branch also evaluates).
-    const UNDER_CLAIM_OWED = 70;
+    // 70 -> 87 OWED at W2 DEF C7 (2026-11-07, ODQ §934.105, WIRING-RULINGS R-W1/R-W3): DS-DEF-4's four FIXTURE pools
+    // (black market, thieves' guild, smuggling, gangs), two lines each, inherit their pools' declared reads unclaimed:
+    // the container `economicState.compound.inst` (8, one per line, no sentence names it as a word) and the key
+    // function's earlier tests, false on the branch that reaches the pool (black market 0; guild 2; smuggling 3; gangs 4):
+    // 1352 -> 1369 measured, the seventeen new under-claims all on the eight FIXTURE lines; no existing line moved.
+    const UNDER_CLAIM_OWED = 87;
     const UNDER_CLAIM_CEILING = UNDER_CLAIM_BASE + UNDER_CLAIM_OWED;
     // ⛔ THE OVER-CLAIM CEILING, RE-KEYED THE SAME WAY (census-1b unit A (d), 427f7b112). From that
     // commit the wiring census records `settlement` among DS-GEN-17's fieldsRead (the roster key
@@ -510,7 +515,7 @@ describe('A0b — the text claims every declared field and no other', () => {
       + `\n  over-claims          ${tally['over-claim']}   ceiling ${OVER_CLAIM_CEILING}`
       + ` = ${OVER_CLAIM_BASE} + ${OVER_CLAIM_OWED} OWED (427f7b112: DS-GEN-17's name slot)`
       + `\n  under-claims         ${tally['under-claim']}   ceiling ${UNDER_CLAIM_CEILING}`
-      + ` = ${UNDER_CLAIM_BASE} + ${UNDER_CLAIM_OWED} OWED (R-F5 26 + the pool census 34 + DS-GEN-17 PROVISIONED v3 1 + DS-CND-1 boom v4 1 + W2 DEF DS-DEF-9 FLAG pools 8: the census wave buys them back)`
+      + ` = ${UNDER_CLAIM_BASE} + ${UNDER_CLAIM_OWED} OWED (R-F5 26 + the pool census 34 + DS-GEN-17 PROVISIONED v3 1 + DS-CND-1 boom v4 1 + W2 DEF DS-DEF-9 FLAG pools 8 + W2 DEF DS-DEF-4 FIXTURE pools 17: the census wave buys them back)`
       + `\n  implicit negations   ${tally['implicit-negation']}`
       + `\n  absences claimed by silence (R-F4, REPORT) ${silent}`
       + `\n  NOT-EXECUTABLE reads ${notExecutable}   pools carrying a finding ${pools.size}\n`);
@@ -523,7 +528,8 @@ describe('A0b — the text claims every declared field and no other', () => {
     expect(tally['under-claim']).toBeLessThanOrEqual(UNDER_CLAIM_CEILING);
     expect(tally['implicit-negation']).toBeLessThanOrEqual(13);
     // 240 -> 242 at W2 DEF C1/C2 (2026-11-07): the two DS-DEF-9 FLAG pools carry the under-claim debt above.
-    expect(pools.size).toBeLessThanOrEqual(242);
+    // 242 -> 246 at W2 DEF C7 (2026-11-07): the four DS-DEF-4 FIXTURE pools carry the under-claim debt above.
+    expect(pools.size).toBeLessThanOrEqual(246);
   });
 });
 

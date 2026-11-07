@@ -8,7 +8,7 @@
   "The reviewable slice is computed by RULE (reviewableDark), never hand-listed."
  ],
  "schema": 1,
- "frozenAtSha": "ee3b7a16832d16ad259a303bb6c6615525aac40c",
+ "frozenAtSha": "1247515502d13358e1545de21f974cada423ac9c",
  "charter": "§18.1 WRWALKER Car 1 (HORIZON) — chair-signed vetoably at the INSTR-WRW pre-stage",
  "minRows": 40,
  "corpusMeta": {
@@ -24,7 +24,7 @@
  },
  "shapesDigest": "9cce955973cac3a42986bcbac2deb92a1901b641e691da98d8462681a48c2cf7",
  "detectorDigest": "cce104e3a7794d95b85fd4df52a649b11fc8ee147f509a3a194412ba3a406fde",
- "verdictDigest": "fe2cd1c4f163145bc9682cb13862c88a941798626bafdf265fa732a0b494efe7",
+ "verdictDigest": "84e87f7b3be3ce5a6581354c40c883c76ebe0f1881f199f90106a21e1180f15e",
  "surfaceRoots": {
   "web": [
    "src/main.jsx"
@@ -83,27 +83,27 @@
  },
  "population": {
   "judged": 6730,
-  "lit": 601,
+  "lit": 605,
   "litName": 4859,
-  "dark": 1270,
+  "dark": 1266,
   "thinKeys": 8776,
   "thinShapes": 904,
   "knownShapes": 356
  },
  "scanStats": {
   "files": 1740,
-  "sites": 40811,
-  "propRead": 38637,
+  "sites": 40818,
+  "propRead": 38644,
   "elemRead": 0,
   "destructure": 2161,
   "inOp": 13,
-  "rGrades": 6333,
-  "nGrades": 984488,
-  "resolvedReceivers": 7113
+  "rGrades": 6340,
+  "nGrades": 984496,
+  "resolvedReceivers": 7120
  },
  "registerDigest": "1e3ab9d6b0023c9fa2cf949f373df29a65d5b7cd88114c866ae3b619dbe098e2",
  "pendingSurfaceCeiling": 3,
- "reviewableDarkCount": 486,
+ "reviewableDarkCount": 482,
  "darkUnregistered": [
   {
    "identity": "Bulk grain and flour on reasons",
@@ -2194,12 +2194,6 @@
    "rows": 944
   },
   {
-   "identity": "hasBlackMarket on inst",
-   "key": "hasBlackMarket",
-   "shape": "inst",
-   "rows": 944
-  },
-  {
    "identity": "hasCathedral on inst",
    "key": "hasCathedral",
    "shape": "inst",
@@ -2226,12 +2220,6 @@
   {
    "identity": "hasFreeCompany on inst",
    "key": "hasFreeCompany",
-   "shape": "inst",
-   "rows": 944
-  },
-  {
-   "identity": "hasGangInfra on inst",
-   "key": "hasGangInfra",
    "shape": "inst",
    "rows": 944
   },
@@ -2268,18 +2256,6 @@
   {
    "identity": "hasMonastery on inst",
    "key": "hasMonastery",
-   "shape": "inst",
-   "rows": 944
-  },
-  {
-   "identity": "hasSmuggling on inst",
-   "key": "hasSmuggling",
-   "shape": "inst",
-   "rows": 944
-  },
-  {
-   "identity": "hasThievesGuild on inst",
-   "key": "hasThievesGuild",
    "shape": "inst",
    "rows": 944
   },
@@ -8567,14 +8543,14 @@
   "name on information": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
   "hasAlchemist on inst": "",
   "hasBank on inst": "",
-  "hasBlackMarket on inst": "",
+  "hasBlackMarket on inst": "dossier-pdf=R web-display=R",
   "hasCathedral on inst": "",
   "hasCharterHall on inst": "",
   "hasChurch on inst": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=N world-book=R",
   "hasCourtSystem on inst": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R world-book=R",
   "hasCriminalInst on inst": "dossier-pdf=N foundry=N web-transitive=N",
   "hasFreeCompany on inst": "",
-  "hasGangInfra on inst": "",
+  "hasGangInfra on inst": "dossier-pdf=R web-display=R",
   "hasGarrison on inst": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
   "hasGates on inst": "",
   "hasGranary on inst": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=N world-book=R",
@@ -8591,8 +8567,8 @@
   "hasNavy on inst": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R world-book=R",
   "hasPort on inst": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R world-book=R",
   "hasPrison on inst": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R world-book=R",
-  "hasSmuggling on inst": "",
-  "hasThievesGuild on inst": "",
+  "hasSmuggling on inst": "dossier-pdf=R web-display=R",
+  "hasThievesGuild on inst": "dossier-pdf=R web-display=R",
   "hasWalls on inst": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
   "hasWarehouse on inst": "",
   "hasWatch on inst": "campaign-pdf=N dossier-pdf=R foundry=N web-display=R web-transitive=N world-book=N",

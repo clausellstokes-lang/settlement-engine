@@ -5,7 +5,7 @@
       "src/domain/display/stateProse/generalStateProse.js": "a1d82168bffd08d6aec168b0fd51b4b7ed21fbf67c6f30b2aec8832064e29267",
       "src/domain/display/stateProse/powerStateProse.js": "11c913c83fa1e88d5f75d5415f8723936acf9aae37d6465a87b1ad3cb4d21e7b",
       "src/domain/display/stateProse/economyStateProse.js": "d2bfe8cafa209803f26c83fde83534a7ba45230010ff87c33bd4ac52d831b924",
-      "src/domain/display/stateProse/defenseStateProse.js": "ca94a8b2e9b8d01ce95b7b7e15d136dfae9f0eb7dd43b1088ad7ccb71ded786c",
+      "src/domain/display/stateProse/defenseStateProse.js": "3414eb1cb4000ec3a38d1f47d57b3436a4fd7cd93bb535eafd90ff013f68e775",
       "src/domain/display/stateProse/stressorsStateProse.js": "13c7f383882acf5bb48267feb4302ced6b9798cec2575470903f1aa88205600d",
       "src/domain/display/stateProse/warFaithStateProse.js": "f1972add38589ee55369fb06e4a5e0a8f90c4d966bf703d4367a3cdca52d6aac",
       "src/domain/display/stateProse/dossierMounts.js": "b8466ea80b09292247baf73e1ab1660c6863362cd623b3b98e002e5ef9fb1f57"
@@ -21,15 +21,15 @@
     "producerIndexFiles": 1300
   },
   "totals": {
-    "pools": 711,
+    "pools": 715,
     "blocks": 68,
-    "variants": 2348,
-    "resolved": 343,
+    "variants": 2356,
+    "resolved": 347,
     "unresolved": 368,
-    "resolvedWithPredicate": 210,
-    "resolvedWithCleanPredicate": 210,
-    "keyFunctions": 119,
-    "keyFunctionsConsulted": 119,
+    "resolvedWithPredicate": 214,
+    "resolvedWithCleanPredicate": 214,
+    "keyFunctions": 120,
+    "keyFunctionsConsulted": 120,
     "keyTables": 33,
     "slotless": 65,
     "bagless": 140,
@@ -37,7 +37,7 @@
     "syntheticTableFields": 100,
     "tiers": {
       "MISSING": 33,
-      "THIN": 484,
+      "THIN": 488,
       "COVERED": 227,
       "MISSING-AT-TIER": 45
     },
@@ -46,18 +46,18 @@
     "narrowsRefused": 0,
     "narrowedRows": 0,
     "covertRows": 4,
-    "objectClassed": 99,
-    "mountedRows": 569,
+    "objectClassed": 101,
+    "mountedRows": 573,
     "absent": {
-      "measured": 378,
+      "measured": 392,
       "default": 3,
       "not-produced": 61,
       "method-call": 18
     },
-    "zeroK": 50,
-    "kExecutable": 343,
+    "zeroK": 53,
+    "kExecutable": 347,
     "kNotExecutable": 368,
-    "branchGrainRows": 313,
+    "branchGrainRows": 317,
     "functionGrainRows": 398,
     "customReachableRows": 21,
     "relationRows": 165,
@@ -115,15 +115,15 @@
       ],
       [
         "defense",
-        5
+        4
       ]
     ],
     "sourceLicensedRows": 116,
     "sourceOfficeRows": 3,
-    "sourceUnresolvedRows": 592,
+    "sourceUnresolvedRows": 596,
     "sourceTwoSourceRows": 10,
     "modifierRows": 0,
-    "declaredColumnRows": 711,
+    "declaredColumnRows": 715,
     "tablePools": 50
   },
   "rows": [
@@ -2768,7 +2768,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [
         {
           "field": "key (via CRIMINAL_STRUCTURE_POOL in defenseStateProse.js)",
@@ -2830,7 +2830,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [
         {
           "field": "key (via CRIMINAL_STRUCTURE_POOL in defenseStateProse.js)",
@@ -3163,7 +3163,7 @@
       ],
       "hasBag": true,
       "variants": 3,
-      "grammars": 3,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -3197,6 +3197,322 @@
       "declares": [],
       "lineDeclares": {},
       "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-DEF-4",
+      "pool": "FIXTURE: black market",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 2,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "settlement.economicState.compound.inst.hasBlackMarket",
+          "op": "===",
+          "value": "true"
+        }
+      ],
+      "branchReads": [
+        "settlement.economicState.compound.inst",
+        "settlement.economicState.compound.inst.hasBlackMarket"
+      ],
+      "fieldsRead": [
+        "settlement.economicState.compound.inst",
+        "settlement.economicState.compound.inst.hasBlackMarket",
+        "settlement.economicState.compound.inst.hasGangInfra",
+        "settlement.economicState.compound.inst.hasSmuggling",
+        "settlement.economicState.compound.inst.hasThievesGuild"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "criminalFixturePoolKey",
+      "rung": "literal",
+      "reads": [
+        "settlement.economicState.compound.inst",
+        "settlement.economicState.compound.inst.hasBlackMarket"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "settlement.economicState.compound.inst": "measured",
+        "settlement.economicState.compound.inst.hasBlackMarket": "measured"
+      },
+      "covert": false,
+      "objectClasses": [
+        "market"
+      ],
+      "objectClass": "market",
+      "sites": [
+        "defense.criminalStructure"
+      ],
+      "attach": [],
+      "k": 1,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "settlement.economicState.compound.inst": "",
+          "settlement.economicState.compound.inst.hasBlackMarket": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 2,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-DEF-4",
+      "pool": "FIXTURE: thieves' guild",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 2,
+      "grammars": 2,
+      "predicate": [
+        {
+          "field": "settlement.economicState.compound.inst.hasThievesGuild",
+          "op": "===",
+          "value": "true"
+        }
+      ],
+      "branchReads": [
+        "settlement.economicState.compound.inst",
+        "settlement.economicState.compound.inst.hasBlackMarket",
+        "settlement.economicState.compound.inst.hasThievesGuild"
+      ],
+      "fieldsRead": [
+        "settlement.economicState.compound.inst",
+        "settlement.economicState.compound.inst.hasBlackMarket",
+        "settlement.economicState.compound.inst.hasGangInfra",
+        "settlement.economicState.compound.inst.hasSmuggling",
+        "settlement.economicState.compound.inst.hasThievesGuild"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "criminalFixturePoolKey",
+      "rung": "literal",
+      "reads": [
+        "settlement.economicState.compound.inst",
+        "settlement.economicState.compound.inst.hasBlackMarket",
+        "settlement.economicState.compound.inst.hasThievesGuild"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "settlement.economicState.compound.inst": "measured",
+        "settlement.economicState.compound.inst.hasBlackMarket": "measured",
+        "settlement.economicState.compound.inst.hasThievesGuild": "measured"
+      },
+      "covert": false,
+      "objectClasses": [
+        "craft"
+      ],
+      "objectClass": "craft",
+      "sites": [
+        "defense.criminalStructure"
+      ],
+      "attach": [],
+      "k": 0,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "settlement.economicState.compound.inst": "",
+          "settlement.economicState.compound.inst.hasBlackMarket": "",
+          "settlement.economicState.compound.inst.hasThievesGuild": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 2,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-DEF-4",
+      "pool": "FIXTURE: smuggling",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 2,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "settlement.economicState.compound.inst.hasSmuggling",
+          "op": "===",
+          "value": "true"
+        }
+      ],
+      "branchReads": [
+        "settlement.economicState.compound.inst",
+        "settlement.economicState.compound.inst.hasBlackMarket",
+        "settlement.economicState.compound.inst.hasSmuggling",
+        "settlement.economicState.compound.inst.hasThievesGuild"
+      ],
+      "fieldsRead": [
+        "settlement.economicState.compound.inst",
+        "settlement.economicState.compound.inst.hasBlackMarket",
+        "settlement.economicState.compound.inst.hasGangInfra",
+        "settlement.economicState.compound.inst.hasSmuggling",
+        "settlement.economicState.compound.inst.hasThievesGuild"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "criminalFixturePoolKey",
+      "rung": "literal",
+      "reads": [
+        "settlement.economicState.compound.inst",
+        "settlement.economicState.compound.inst.hasBlackMarket",
+        "settlement.economicState.compound.inst.hasSmuggling",
+        "settlement.economicState.compound.inst.hasThievesGuild"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "settlement.economicState.compound.inst": "measured",
+        "settlement.economicState.compound.inst.hasBlackMarket": "measured",
+        "settlement.economicState.compound.inst.hasSmuggling": "measured",
+        "settlement.economicState.compound.inst.hasThievesGuild": "measured"
+      },
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "defense.criminalStructure"
+      ],
+      "attach": [],
+      "k": -1,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "settlement.economicState.compound.inst": "",
+          "settlement.economicState.compound.inst.hasBlackMarket": "",
+          "settlement.economicState.compound.inst.hasSmuggling": "",
+          "settlement.economicState.compound.inst.hasThievesGuild": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 2,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-DEF-4",
+      "pool": "FIXTURE: gangs",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 2,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "settlement.economicState.compound.inst.hasGangInfra",
+          "op": "===",
+          "value": "true"
+        }
+      ],
+      "branchReads": [
+        "settlement.economicState.compound.inst",
+        "settlement.economicState.compound.inst.hasBlackMarket",
+        "settlement.economicState.compound.inst.hasGangInfra",
+        "settlement.economicState.compound.inst.hasSmuggling",
+        "settlement.economicState.compound.inst.hasThievesGuild"
+      ],
+      "fieldsRead": [
+        "settlement.economicState.compound.inst",
+        "settlement.economicState.compound.inst.hasBlackMarket",
+        "settlement.economicState.compound.inst.hasGangInfra",
+        "settlement.economicState.compound.inst.hasSmuggling",
+        "settlement.economicState.compound.inst.hasThievesGuild"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "criminalFixturePoolKey",
+      "rung": "literal",
+      "reads": [
+        "settlement.economicState.compound.inst",
+        "settlement.economicState.compound.inst.hasBlackMarket",
+        "settlement.economicState.compound.inst.hasGangInfra",
+        "settlement.economicState.compound.inst.hasSmuggling",
+        "settlement.economicState.compound.inst.hasThievesGuild"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "settlement.economicState.compound.inst": "measured",
+        "settlement.economicState.compound.inst.hasBlackMarket": "measured",
+        "settlement.economicState.compound.inst.hasGangInfra": "measured",
+        "settlement.economicState.compound.inst.hasSmuggling": "measured",
+        "settlement.economicState.compound.inst.hasThievesGuild": "measured"
+      },
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "defense.criminalStructure"
+      ],
+      "attach": [],
+      "k": -2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "settlement.economicState.compound.inst": "",
+          "settlement.economicState.compound.inst.hasBlackMarket": "",
+          "settlement.economicState.compound.inst.hasGangInfra": "",
+          "settlement.economicState.compound.inst.hasSmuggling": "",
+          "settlement.economicState.compound.inst.hasThievesGuild": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 2,
       "crisisScoped": false
     },
     {
@@ -44366,7 +44682,7 @@
         "DS-DEF-4 :: structure diffuse"
       ],
       "variants": 10,
-      "grammars": 5,
+      "grammars": 3,
       "blocks": [
         "DS-DEF-4"
       ]
@@ -44565,6 +44881,50 @@
       "grammars": 1,
       "blocks": [
         "DS-DEF-11"
+      ]
+    },
+    {
+      "fact": "settlement.economicState.compound.inst.hasBlackMarket",
+      "pools": [
+        "DS-DEF-4 :: FIXTURE: black market"
+      ],
+      "variants": 2,
+      "grammars": 1,
+      "blocks": [
+        "DS-DEF-4"
+      ]
+    },
+    {
+      "fact": "settlement.economicState.compound.inst.hasGangInfra",
+      "pools": [
+        "DS-DEF-4 :: FIXTURE: gangs"
+      ],
+      "variants": 2,
+      "grammars": 1,
+      "blocks": [
+        "DS-DEF-4"
+      ]
+    },
+    {
+      "fact": "settlement.economicState.compound.inst.hasSmuggling",
+      "pools": [
+        "DS-DEF-4 :: FIXTURE: smuggling"
+      ],
+      "variants": 2,
+      "grammars": 1,
+      "blocks": [
+        "DS-DEF-4"
+      ]
+    },
+    {
+      "fact": "settlement.economicState.compound.inst.hasThievesGuild",
+      "pools": [
+        "DS-DEF-4 :: FIXTURE: thieves' guild"
+      ],
+      "variants": 2,
+      "grammars": 2,
+      "blocks": [
+        "DS-DEF-4"
       ]
     },
     {
@@ -46771,20 +47131,13 @@
       },
       {
         "field": "settlement.economicState",
-        "mountsSpine": 1,
-        "mountsModifier": 27,
+        "mountsSpine": 2,
+        "mountsModifier": 19,
         "spineTabs": [
+          "defense",
           "viability"
         ],
         "modifierMounts": [
-          "defense.armedForces",
-          "defense.criminalStructure",
-          "defense.militaryStatus",
-          "defense.postureHeader",
-          "defense.publicOrder",
-          "defense.supportingCapabilities",
-          "defense.threatAssessment",
-          "defense.wallRationale",
           "economics.commercialProfile",
           "economics.craftReason",
           "economics.economyTile",
@@ -47203,7 +47556,7 @@
       ],
       [
         "defense",
-        5
+        4
       ]
     ],
     "notExecutable": []
@@ -47239,10 +47592,10 @@
     },
     {
       "block": "DS-DEF-4",
-      "spines": 4,
-      "facts": 2,
+      "spines": 8,
+      "facts": 7,
       "spinesReachedBp": 10000,
-      "meanReachBp": 5000
+      "meanReachBp": 6786
     },
     {
       "block": "DS-DEF-5",
@@ -47866,15 +48219,70 @@
     },
     {
       "block": "DS-DEF-4",
-      "spines": 4,
-      "facts": 2,
+      "spines": 8,
+      "facts": 7,
       "spinesReachedBp": 10000,
-      "meanReachBp": 5000,
+      "meanReachBp": 6786,
       "byFact": [
         {
           "field": "key (via CRIMINAL_STRUCTURE_POOL in defenseStateProse.js)",
           "attach": [
+            "structure null (nothing organized recognized)",
+            "FIXTURE: black market",
+            "FIXTURE: thieves' guild",
+            "FIXTURE: smuggling",
+            "FIXTURE: gangs"
+          ]
+        },
+        {
+          "field": "settlement.economicState.compound.inst",
+          "attach": [
+            "structure organized",
+            "structure semi-organized",
+            "structure diffuse",
             "structure null (nothing organized recognized)"
+          ]
+        },
+        {
+          "field": "settlement.economicState.compound.inst.hasBlackMarket",
+          "attach": [
+            "structure organized",
+            "structure semi-organized",
+            "structure diffuse",
+            "structure null (nothing organized recognized)"
+          ]
+        },
+        {
+          "field": "settlement.economicState.compound.inst.hasGangInfra",
+          "attach": [
+            "structure organized",
+            "structure semi-organized",
+            "structure diffuse",
+            "structure null (nothing organized recognized)",
+            "FIXTURE: black market",
+            "FIXTURE: thieves' guild",
+            "FIXTURE: smuggling"
+          ]
+        },
+        {
+          "field": "settlement.economicState.compound.inst.hasSmuggling",
+          "attach": [
+            "structure organized",
+            "structure semi-organized",
+            "structure diffuse",
+            "structure null (nothing organized recognized)",
+            "FIXTURE: black market",
+            "FIXTURE: thieves' guild"
+          ]
+        },
+        {
+          "field": "settlement.economicState.compound.inst.hasThievesGuild",
+          "attach": [
+            "structure organized",
+            "structure semi-organized",
+            "structure diffuse",
+            "structure null (nothing organized recognized)",
+            "FIXTURE: black market"
           ]
         },
         {
@@ -47882,7 +48290,11 @@
           "attach": [
             "structure organized",
             "structure semi-organized",
-            "structure diffuse"
+            "structure diffuse",
+            "FIXTURE: black market",
+            "FIXTURE: thieves' guild",
+            "FIXTURE: smuggling",
+            "FIXTURE: gangs"
           ]
         }
       ]
@@ -49835,8 +50247,8 @@
     }
   ],
   "factBudget": {
-    "zeroK": 50,
-    "executable": 343,
+    "zeroK": 53,
+    "executable": 347,
     "notExecutable": 368,
     "byBlock": [
       [
@@ -49879,6 +50291,13 @@
         {
           "zeroK": 4,
           "spines": 5
+        }
+      ],
+      [
+        "DS-DEF-4",
+        {
+          "zeroK": 3,
+          "spines": 8
         }
       ],
       [
@@ -49963,13 +50382,6 @@
         {
           "zeroK": 0,
           "spines": 26
-        }
-      ],
-      [
-        "DS-DEF-4",
-        {
-          "zeroK": 0,
-          "spines": 4
         }
       ],
       [
@@ -50193,19 +50605,19 @@
     "histogram": [
       [
         -2,
-        11
-      ],
-      [
-        -1,
         12
       ],
       [
+        -1,
+        13
+      ],
+      [
         0,
-        27
+        28
       ],
       [
         1,
-        83
+        84
       ],
       [
         2,
@@ -50215,25 +50627,25 @@
   },
   "grains": {
     "branch": {
-      "zeroK": 50,
-      "executable": 343,
+      "zeroK": 53,
+      "executable": 347,
       "notExecutable": 368,
       "histogram": [
         [
           -2,
-          11
-        ],
-        [
-          -1,
           12
         ],
         [
+          -1,
+          13
+        ],
+        [
           0,
-          27
+          28
         ],
         [
           1,
-          83
+          84
         ],
         [
           2,
@@ -50264,7 +50676,7 @@
         "DS-STR-1",
         "DS-WAR-3"
       ],
-      "readPaths": 560,
+      "readPaths": 574,
       "modifierEligibleFactsByTab": [
         [
           "economics",
@@ -50316,13 +50728,13 @@
         ],
         [
           "defense",
-          5
+          4
         ]
       ]
     },
     "function": {
-      "zeroK": 127,
-      "executable": 343,
+      "zeroK": 131,
+      "executable": 347,
       "notExecutable": 368,
       "histogram": [
         [
@@ -50335,7 +50747,7 @@
         ],
         [
           -2,
-          9
+          13
         ],
         [
           -1,
@@ -50381,7 +50793,7 @@
         "DS-STR-1",
         "DS-WAR-3"
       ],
-      "readPaths": 798,
+      "readPaths": 818,
       "modifierEligibleFactsByTab": [
         [
           "economics",
@@ -50428,12 +50840,12 @@
           6
         ],
         [
-          "defense",
+          "war",
           5
         ],
         [
-          "war",
-          5
+          "defense",
+          4
         ]
       ]
     }
@@ -50727,12 +51139,12 @@
       "rows": {
         "LICENSED": 116,
         "OFFICE": 3,
-        "SOURCE-UNRESOLVED": 592
+        "SOURCE-UNRESOLVED": 596
       },
       "fields": {
         "LICENSED": 196,
         "OFFICE": 5,
-        "SOURCE-UNRESOLVED": 419
+        "SOURCE-UNRESOLVED": 433
       },
       "byKind": [
         [
@@ -50777,7 +51189,7 @@
         ]
       ],
       "unresolvedGrounds": {
-        "no-mapping": 419,
+        "no-mapping": 433,
         "no-institution-in-roster": 0
       },
       "twoSourceRows": 10,
@@ -52137,7 +52549,7 @@
       "leafEither": 2,
       "leafRows": [],
       "deskRoots": 93,
-      "deskSegments": 198
+      "deskSegments": 203
     }
   },
   "ratifiedAliases": {
@@ -53305,7 +53717,7 @@
         "key (via CRIMINAL_STRUCTURE_POOL in defenseStateProse.js)"
       ],
       "readingFunction": "CRIMINAL_STRUCTURE_POOL",
-      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -53315,7 +53727,7 @@
         "key (via CRIMINAL_STRUCTURE_POOL in defenseStateProse.js)"
       ],
       "readingFunction": "CRIMINAL_STRUCTURE_POOL",
-      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -53363,7 +53775,47 @@
       "subject": "capture capture",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 3 grammar(s) · slots {seat, settlement}"
+      "count": "3 variant(s) · 2 grammar(s) · slots {seat, settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-DEF-4",
+      "subject": "FIXTURE: black market",
+      "fields": [
+        "settlement.economicState.compound.inst.hasBlackMarket"
+      ],
+      "readingFunction": "criminalFixturePoolKey",
+      "count": "2 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-DEF-4",
+      "subject": "FIXTURE: thieves' guild",
+      "fields": [
+        "settlement.economicState.compound.inst.hasThievesGuild"
+      ],
+      "readingFunction": "criminalFixturePoolKey",
+      "count": "2 variant(s) · 2 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-DEF-4",
+      "subject": "FIXTURE: smuggling",
+      "fields": [
+        "settlement.economicState.compound.inst.hasSmuggling"
+      ],
+      "readingFunction": "criminalFixturePoolKey",
+      "count": "2 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-DEF-4",
+      "subject": "FIXTURE: gangs",
+      "fields": [
+        "settlement.economicState.compound.inst.hasGangInfra"
+      ],
+      "readingFunction": "criminalFixturePoolKey",
+      "count": "2 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",

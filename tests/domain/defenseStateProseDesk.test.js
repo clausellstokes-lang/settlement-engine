@@ -23,7 +23,7 @@ import {
   terrainDefencePoolKey, activeDefenceStress, defenseMilitaryStatusProse,
   militaryOverridePoolKey, viabilityUnderStressPoolKey, DEF8_UNREACHABLE_POOLS,
   defenseWallRationaleProse, defworkFill, wallRationalePoolKey,
-  criminalCapturePoolKey, criminalStructurePoolKey, defenseCriminalProse,
+  criminalCapturePoolKey, criminalFixturePoolKey, criminalStructurePoolKey, defenseCriminalProse,
   CRIMINAL_CAPTURE_STATES, RECOGNISED_CRIMINAL_STRUCTURES,
   TERRAIN_DEFENCE_NAMES, TERRAIN_PRIZE_NAMES,
   DEF6_C3_BLOCKED_POOLS, DEF6_FACT_SPOKEN_AT, defenseSupportingProse,
@@ -895,9 +895,42 @@ describe('DS-DEF-4 — two vocabularies that are EXACT 1:1s, and a covertness ga
         }
       }
     }
-    expect(reached.size, `unreached: ${Object.keys(DEF4_POOLS).filter((k) => !reached.has(k))}`)
-      .toBe(Object.keys(DEF4_POOLS).length);
-    expect(Object.keys(DEF4_POOLS)).toHaveLength(9);
+    // W2 DEF C7 (2026-11-07): the four FIXTURE pools are never a rung's own pool; they ride
+    // beside the structure line (the next test), so the sweep's population is the nine.
+    const spines = Object.keys(DEF4_POOLS).filter((k) => !k.startsWith('FIXTURE: '));
+    expect(reached.size, `unreached: ${spines.filter((k) => !reached.has(k))}`)
+      .toBe(spines.length);
+    expect(spines).toHaveLength(9);
+    expect(Object.keys(DEF4_POOLS)).toHaveLength(13);
+  });
+
+  it('W2 DEF C7: a criminal fixture is said beside the structure line, only when the roster carries it, one per box', () => {
+    // The key function, both ways against the corpus: the four keys it can emit are exactly
+    // the four FIXTURE pools, and the black market leads (R-W3).
+    const emitted = [
+      criminalFixturePoolKey({ hasBlackMarket: true, hasThievesGuild: true, hasSmuggling: true, hasGangInfra: true }),
+      criminalFixturePoolKey({ hasThievesGuild: true, hasSmuggling: true, hasGangInfra: true }),
+      criminalFixturePoolKey({ hasSmuggling: true, hasGangInfra: true }),
+      criminalFixturePoolKey({ hasGangInfra: true }),
+    ];
+    expect(emitted).toEqual(['FIXTURE: black market', "FIXTURE: thieves' guild", 'FIXTURE: smuggling', 'FIXTURE: gangs']);
+    expect([...emitted].sort()).toEqual(Object.keys(DEF4_POOLS).filter((k) => k.startsWith('FIXTURE: ')).sort());
+    expect(criminalFixturePoolKey({ hasBlackMarket: 'true' })).toBeNull();
+    expect(criminalFixturePoolKey({})).toBeNull();
+    expect(criminalFixturePoolKey(null)).toBeNull();
+
+    const withInst = (inst) => ({ ...underworld(), economicState: { compound: { inst } } });
+    const plain = defenseCriminalProse(withInst({}), 'semi-organized', { seed: 'fx', audience: 'player' });
+    const said = defenseCriminalProse(withInst({ hasBlackMarket: true }), 'semi-organized', { seed: 'fx', audience: 'player' });
+    // the structure line keeps its pool; the fixture is a second sentence, a modifier piece
+    expect(said.structure.provenance.poolKey).toBe('structure semi-organized');
+    expect(said.structure.sentence.startsWith(plain.structure.sentence)).toBe(true);
+    expect(said.structure.sentence).toMatch(/black market/);
+    expect(said.structure.provenance.pieces.map((p) => p.role)).toEqual(['spine', 'modifier']);
+    expect(plain.structure.sentence).not.toMatch(/black market/);
+    // never alone: no structure key, no fixture sentence
+    const none = defenseCriminalProse(withInst({ hasBlackMarket: true }), 'bogus', { seed: 'fx', audience: 'player' });
+    expect(none.structure).toBeNull();
   });
 
   it('the registry mounts DS-DEF-4 once, as a sentence, on the defense tab', () => {

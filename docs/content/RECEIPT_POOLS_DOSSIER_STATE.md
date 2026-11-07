@@ -2847,18 +2847,18 @@ the leash is the state, not a fate.
 **structure `organized`**
 1. `[street · no unrest]` Crime at {settlement} has an order to it. What is permitted is permitted by somebody, random violence is put down because it draws attention, and the arrangement is stable enough to negotiate with.
 2. `[ledger · colour]` The criminal interest at {settlement} is a hierarchy rather than a nuisance: predictable, rule-bound, and extracting steadily from the same places every season.
-3. `[visitor · colour]` A stranger at {settlement} is not robbed and is quietly told what the arrangement is; the danger here is systematic rather than sudden.
-4. `[counterforce · no unrest]` There is very little street violence at {settlement} and it is not the watch's doing. A structured interest suppresses what draws enforcement, and does it more thoroughly than the watch could.
+3. `[visitor · colour]` Visitors at {settlement} are not robbed; someone quietly explains how things are run here and who runs them.
+4. `[counterforce · no unrest]` There is very little street violence at {settlement}, and the watch is not the reason: the people who run the town's crime put down anything that would bring the law on them.
 
 **structure `semi-organized`** {colour}
 1. `[ledger]` Criminal work at {settlement} is coordinated enough to hold routes and territories and not coordinated enough to have a head; several interests are running, and none of them is the one to talk to.
-2. `[street]` The town knows there are arrangements at {settlement} and cannot say whose, because the answer changes by street and by season.
-3. `[unfolding]` What is being contested at {settlement} is who gets to be the arrangement, and until that settles the town gets the cost of both a syndicate and a scramble.
+2. `[street]` Everyone at {settlement} knows someone takes a cut, but who it is changes by street and by season.
+3. `[unfolding]` Rival crews at {settlement} are fighting over who runs the streets, and until one wins, people pay both the cut and the brawling.
 
 **structure `diffuse`** {colour}
 1. `[ledger]` Crime at {settlement} is opportunistic and unorganized: fences, bandits and small operators working for themselves, with nothing to threaten and nobody to buy.
-2. `[street]` Things go missing at {settlement} and no one profits by it twice; there is no structure here, which makes it less dangerous and much harder to stop.
-3. `[visitor]` A stranger at {settlement} is at risk from individuals rather than from an arrangement, which is worse in the moment and better in every other way.
+2. `[street]` Things go missing at {settlement}, taken by whoever saw the chance; with no gang behind it, it is less dangerous and harder to stop.
+3. `[visitor]` The danger at {settlement} comes from lone thieves, not a gang: a cut purse or a knife in an alley, but nobody running the streets.
 
 **structure `null` (nothing organized recognized)**
 1. `[ledger · no organised crime]` No criminal infrastructure has been identified at {settlement}. Whatever wrongdoing the town has does not run through anything that could be called an organization.
@@ -2866,29 +2866,52 @@ the leash is the state, not a fate.
 3. `[visitor · colour]` A stranger asking after the arrangements at {settlement} is met with genuine incomprehension, which is either the truth or an unusually good performance of it.
 
 **capture `none`**
-1. `[ledger · colour]` Nothing criminal has reached the {seat} at {settlement}. Whatever operates in the town operates outside the hall, and the hall's decisions are the hall's.
+1. `[ledger · colour]` No criminal has reached the {seat} at {settlement}; whatever goes on in the town, the hall decides its own business.
 2. `[counterforce · organised crime]` There is a criminal interest at {settlement} with the means to reach into the hall and it has not; the seat's people are watched too closely for the approach to be worth its risk.
-3. `[street · colour]` Whatever is being run at {settlement} is being run outside the hall, and the town's dealings with the hall are the town's dealings with the hall.
+3. `[street · colour]` Whatever is run at {settlement} is run outside the hall, and business with the hall is straight.
 
 **capture `adversarial`** {colour}
-1. `[ledger]` The {seat} at {settlement} and the criminal interest here are opposed, actively, and the opposition is the arrangement. Each is spending on the other and neither is winning.
+1. `[ledger]` The {seat} at {settlement} and the town's criminals are at open odds, each spending against the other, and neither is winning.
 2. `[street]` The hall at {settlement} moves against the operators and the operators move back, and the town is where the two of them meet.
 3. `[unfolding]` The hall and the operators at {settlement} are each spending on the other and neither is gaining, and the spending is coming out of things the town needed.
 
 **capture `equilibrium`** {colour}
 1. `[ledger]` The {seat} at {settlement} and the criminal interest have found a line and both keep to it; nothing is bought here, and nothing is pressed either.
 2. `[street]` There is an understanding at {settlement} that nobody has written down: what is permitted, and where the permitting stops.
-3. `[unfolding]` The balance at {settlement} holds because both sides prefer it, which is a different thing from either side being restrained.
+3. `[unfolding]` The hall and the criminals at {settlement} keep the peace because it suits them both, not because either is held back.
 
 **capture `corrupted`** *(every variant `dm-only`)* {colour}
-1. `[ledger · dm-only]` Somebody at the {seat} of {settlement} is carrying a leash, and the decisions that come out of the hall now bend around it in ways the rolls will not show.
-2. `[unfolding · dm-only]` The criminal interest at {settlement} has bought into the hall rather than around it, and each decision it shapes makes the next one cheaper to shape.
-3. `[street · dm-only]` The town at {settlement} does not know, and is beginning to notice that certain matters never quite conclude.
+1. `[ledger · dm-only]` Someone at the {seat} of {settlement} is in the criminals' pocket, and the hall's decisions now bend to suit them in ways no ledger shows.
+2. `[unfolding · dm-only]` The criminals at {settlement} have bought their way into the hall, and each favour they get makes the next one easier.
+3. `[street · dm-only]` People at {settlement} do not know the hall has been bought, but they notice certain cases never quite reach an end.
 
 **capture `capture`** *(every variant `dm-only`)* {colour}
-1. `[ledger · dm-only]` The {seat} at {settlement} is held. What the hall decides is decided elsewhere and announced here, and the announcing is the only part the town sees.
-2. `[unfolding · dm-only]` There is no longer a distinction at {settlement} between the criminal interest and the governing one; the town is being administered by its syndicate through the forms of its hall.
-3. `[visitor · dm-only]` A stranger at {settlement} conducts perfectly ordinary business with the hall and never learns whose business it actually was.
+1. `[ledger · dm-only]` The criminals hold the {seat} at {settlement}. The hall announces decisions that were made elsewhere.
+2. `[unfolding · dm-only]` At {settlement} the criminals and the government are the same people; they run the town and use the hall to do it.
+3. `[visitor · dm-only]` Business with the hall at {settlement} goes smoothly, and visitors never learn whose business it really was.
+
+**THE FIXTURES (W2 DEF, 2026-11-07, construction C7; WIRING-RULINGS R-W3 for the black
+market):** a second sentence beside the structure line, said ONLY when the roster carries the
+fixture (`economicState.compound.inst`, the name flags `priorityHelpers.js ::
+getInstitutionNames` writes); the fixture pools never print alone. One fixture per box, in this
+order: the black market, the thieves' guild, the smuggling network, the gangs (`street gang`,
+`multiple criminal factions`, `front business`). Description position: plain lines.
+
+**FIXTURE: black market**
+1. `[ledger]` There is a black market at {settlement}, where contraband and stolen goods are sold outside the town's licences and tolls.
+2. `[street]` Anyone at {settlement} who knows whom to ask can buy contraband or stolen goods at the black market.
+
+**FIXTURE: thieves' guild**
+1. `[ledger]` A thieves' guild operates at {settlement}, and most of the town's theft is organised through it.
+2. `[street]` The thieves at {settlement} answer to a guild, and the guild decides who works which streets.
+
+**FIXTURE: smuggling**
+1. `[ledger]` Smuggling moves goods in and out of {settlement}, around its tolls and its charters.
+2. `[street]` A smuggling network runs through {settlement}, and some of what is sold in the town never paid a toll.
+
+**FIXTURE: gangs**
+1. `[street]` Criminal gangs at {settlement} keep a footing in the town, through the streets they hold or the businesses they front.
+2. `[ledger]` {settlement} has organised gangs: groups that hold ground or run front businesses.
 
 ---
 

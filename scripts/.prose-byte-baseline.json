@@ -55,8 +55,8 @@
   },
   "leaves": {
     "src/data/dossierStateProse/defense.generated.js": {
-      "raw": 174036,
-      "gzip": 24812,
+      "raw": 176749,
+      "gzip": 25174,
       "ceilingRaw": 488168,
       "ceilingGzip": 108482
     },
@@ -315,6 +315,14 @@
       "toRaw": 174036,
       "gzipAfter": 24812,
       "reason": "+1243 B raw (gzip level 9: 24,602 -> 24,812), one commit: DS-DEF-9 gains the two FLAG pools (magicFillsVoid, magicMilitarized; two variants each, said beside the dependency line only when the flag is true) and four style rewrites (true v3, v4; NAMED chain v2; availability absent v3). Projected through `node scripts/generate-dossier-state-prose.mjs`; `--check` exit 0."
+    },
+    {
+      "car": "W2 DEF second seat (the construction-and-wiring wave, 2026-11-07; ODQ §934.105, WIRING-RULINGS R-W1/R-W3): DS-DEF-4 — criminal infrastructure present said; the black market said; the owner's style law of 2026-11-07",
+      "leaf": "src/data/dossierStateProse/defense.generated.js",
+      "fromRaw": 174036,
+      "toRaw": 176749,
+      "gzipAfter": 25174,
+      "reason": "+2713 B raw (gzip level 9: 24,812 -> 25,174), one commit: DS-DEF-4 gains the four FIXTURE pools (black market, thieves' guild, smuggling, gangs; two variants each, said beside the structure line only when the roster carries the fixture) and sixteen style rewrites (structure organized v3, v4; semi-organized v2, v3; diffuse v2, v3; capture none v1, v3; adversarial v1; equilibrium v3; corrupted v1-v3; capture v1-v3). Projected through `node scripts/generate-dossier-state-prose.mjs`; `--check` exit 0."
     }
   ],
   "ceilingTransfersNewLeaves": [

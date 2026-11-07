@@ -883,19 +883,51 @@ export function defenseCriminalProse(settlement, structureKey, options = {}) {
   };
 
   /** @param {string|null} poolKey */
-  const rung = (poolKey) => (poolKey
-    ? legibilityRung('', composeStateProse(CORPUS, 'DS-DEF-4', {
+  const line = (poolKey) => (poolKey
+    ? composeStateProse(CORPUS, 'DS-DEF-4', {
       ...options,
       slots,
       spineKey: poolKey,
       candidates: defenseStateProseCandidates('DS-DEF-4', settlement),
-    }), [])
+    })
     : null);
+  // A key with no printable variant (a dm-only pool for a player) still yields a rung with a
+  // null sentence, as it always has; only a null KEY yields no rung.
+  /** @param {string|null} poolKey @param {object|null} unit */
+  const rung = (poolKey, unit) => (poolKey ? legibilityRung('', unit, []) : null);
+
+  const structureKey4 = criminalStructurePoolKey(structureKey);
+  const captureKey = criminalCapturePoolKey(power.criminalCaptureState);
+  const structure = line(structureKey4);
+  // THE FIXTURES (W2 DEF construction C7; R-W3 for the black market): said beside the
+  // structure line, never alone, and only when the roster carries the fixture.
+  const fixtureKey = criminalFixturePoolKey(settlement?.economicState?.compound?.inst);
+  const fixture = structure && fixtureKey
+    ? composeStateProse(CORPUS, 'DS-DEF-4', { ...options, slots, spineKey: fixtureKey })
+    : null;
 
   return Object.freeze({
-    structure: rung(criminalStructurePoolKey(structureKey)),
-    capture: rung(criminalCapturePoolKey(power.criminalCaptureState)),
+    structure: rung(structureKey4, withSaid(structure, fixture)),
+    capture: rung(captureKey, line(captureKey)),
   });
+}
+
+/**
+ * DS-DEF-4's FIXTURE pool — which criminal fixture the roster carries, if any, read from the
+ * name flags `getInstitutionNames` writes onto `economicState.compound.inst`. The black market
+ * first (WIRING-RULINGS R-W3: a customer fact with no reader gets one), then the guild, the
+ * smuggling network and the gangs. One fixture per box (one fact, one sentence).
+ * @param {{hasBlackMarket?: unknown, hasThievesGuild?: unknown, hasSmuggling?: unknown,
+ *   hasGangInfra?: unknown}|null|undefined} inst
+ * @returns {string|null}
+ */
+export function criminalFixturePoolKey(inst) {
+  if (!inst || typeof inst !== 'object') return null;
+  if (inst.hasBlackMarket === true) return 'FIXTURE: black market';
+  if (inst.hasThievesGuild === true) return "FIXTURE: thieves' guild";
+  if (inst.hasSmuggling === true) return 'FIXTURE: smuggling';
+  if (inst.hasGangInfra === true) return 'FIXTURE: gangs';
+  return null;
 }
 
 /**
