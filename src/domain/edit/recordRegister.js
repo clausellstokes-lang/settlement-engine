@@ -40,6 +40,10 @@ export const RECORD_CLASSES = Object.freeze({
   //    with its three cross-settlement neighbours above and for their reason: it is a
   //    first-hand relational fact the simulation states and generation never re-derives.
   peaceOffers: 'HELD',
+  // PEOPLE-5B (2026-11-07, M-7): what the v1 -> v2 save migration could not map (a `secondaryAffiliation`
+  // naming no power, a grouping entry naming no power) — written ONCE by settlementMigrations.js ::
+  // migrateV1toV2 so nothing the save carried is dropped silently. Lived history: never re-derived.
+  migrationReports: 'HISTORY',
   // THE EDITOR'S (2) — SAVED-ONLY since the editor landed its writers; see SAVED_ONLY_KEYS.
   dmLayer: 'AUTHORED', decrees: 'AUTHORED',
 });
@@ -68,7 +72,7 @@ export const GENERATED_KEYS = Object.freeze([
  *  NOTE-14 through the same door and carries its writers in that same table. */
 export const SAVED_ONLY_KEYS = Object.freeze([
   'neighbourNetwork', 'interSettlementRelationships', 'crossSettlementConflicts', 'populationHistory',
-  'dmLayer', 'decrees', 'peaceOffers',
+  'dmLayer', 'decrees', 'peaceOffers', 'migrationReports',
 ]);
 
 /**
@@ -98,6 +102,11 @@ export const SAVED_ONLY_KEYS = Object.freeze([
  * no writer at all.
  */
 export const SAVED_KEY_WRITERS = Object.freeze([
+  // PEOPLE-5B (M-7): the first real save migration's report of what it could not map.
+  Object.freeze({
+    key: 'migrationReports', file: 'src/domain/settlementMigrations.js', symbol: 'migrateV1toV2',
+    sites: 1, spelling: 'assign', reachedFromSrc: true,
+  }),
   Object.freeze({
     key: 'dmLayer', file: 'src/store/editSlice.js', symbol: 'applyCascadeEdit',
     sites: 1, spelling: 'assign', reachedFromSrc: true,

@@ -21,6 +21,7 @@ import { applyFactionRenameToSettlement } from '../../src/domain/factionRename.j
 import { applyInstitutionRenameToSettlement } from '../../src/domain/institutionRename.js';
 import { inferSuccessors } from '../../src/domain/entities/successors.js';
 import { entityLinksFaction } from '../../src/domain/factionRefs.js';
+import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 
 const planted = () => ({
   name: 'Plantford',
@@ -133,6 +134,20 @@ describe('P3 — rename: the powers and the houses cascade onto the card', () =>
     expect(s.npcs[1].institution.key).toBe('Chapel of First Light');
     expect(s.npcs[0].institution.key).toBe('Counting House');
     expect(s.npcs[2].institution.key, 'a power-kind face is untouched by a house rename').toBe('Thieves\' Guild');
+  });
+
+  test('on a GENERATED v2 record: a power rename leaves no membership naming the dead power', () => {
+    const s = generateSettlementPipeline({ settType: 'town' }, null, { seed: 'people-5b-rename', customContent: {} });
+    expect(s.schemaVersion).toBe(2);
+    expect('factions' in s, 'the v2 record carries no grouping').toBe(false);
+    const target = s.powerStructure.factions.find((f) => s.npcs.some((n) => (n.memberships || []).some((m) => m.power === (f.faction || f.name))));
+    expect(target, 'a power some card stands in').toBeTruthy();
+    const old = target.faction || target.name;
+    const holders = s.npcs.filter((n) => n.memberships.some((m) => m.power === old)).length;
+    expect(holders).toBeGreaterThan(0);
+    applyFactionRenameToSettlement(s, old, 'Renamed Power');
+    expect(s.npcs.filter((n) => n.memberships.some((m) => m.power === old)).length).toBe(0);
+    expect(s.npcs.filter((n) => n.memberships.some((m) => m.power === 'Renamed Power')).length).toBe(holders);
   });
 });
 

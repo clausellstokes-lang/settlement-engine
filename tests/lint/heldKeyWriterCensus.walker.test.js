@@ -433,6 +433,12 @@ const SAVED_KEY_NON_WRITERS = Object.freeze([
       + 'declared in SAVED_KEY_WRITERS.',
   },
   {
+    id: 'migrationReports|src/domain/edit/recordRegister.js|RECORD_CLASSES|literal',
+    reason: 'PEOPLE-5B (M-7): the class row of the save migration\'s report, the fourth of the same kind. The '
+      + 'register classes the key as HISTORY and writes it nowhere; its one writer, settlementMigrations.js :: '
+      + 'migrateV1toV2, is declared in SAVED_KEY_WRITERS.',
+  },
+  {
     id: 'decrees|src/domain/ai/personaSlicer.js|buildPersonaSlice|literal',
     reason: 'a field of the PERSONA SLICE handed to the clerk, capped at six entries and read out '
       + 'of the home record. The slice is a projection built for one prompt and is never written '
@@ -679,8 +685,10 @@ describe('EM-R1 — the writer census of every held key', () => {
     const modules = srcFiles();
     expect(modules.length, 'the src/ walk found no modules: every equality below would be vacuous')
       .toBeGreaterThan(500);
-    expect(WRITTEN_KEYS, 'the roster governs the editor\'s two keys and NOTE-14\'s third')
-      .toEqual(['decrees', 'dmLayer', 'peaceOffers']);
+    // PEOPLE-5B (2026-11-07, M-7): + `migrationReports`, the first real save migration's report of what it
+    // could not map (settlementMigrations.js :: migrateV1toV2).
+    expect(WRITTEN_KEYS, 'the roster governs the editor\'s two keys, NOTE-14\'s third and M-7\'s report')
+      .toEqual(['decrees', 'dmLayer', 'migrationReports', 'peaceOffers']);
 
     // THE ROSTER IS TIED TO THE REGISTER IT LIVES IN: every governed key is SAVED-ONLY and carries
     // a class, so a reclassification cannot leave this roster pointing at a key that moved out.
@@ -720,7 +728,8 @@ describe('EM-R1 — the writer census of every held key', () => {
     // which is the fact the cured claim exists to carry: the row it closes named ONE writer each.
     expect(SAVED_KEY_WRITERS.length, 'the roster is empty').toBeGreaterThan(0);
     const writerFiles = sorted(new Set(SAVED_KEY_WRITERS.map((row) => row.file)));
-    expect(writerFiles, 'the governed keys are written from four homes, not one').toEqual([
+    expect(writerFiles, 'the governed keys are written from five homes, not one (PEOPLE-5B: + the save migration)').toEqual([
+      'src/domain/settlementMigrations.js',
       'src/domain/worldPulse/decreeHook.js',
       'src/domain/worldPulse/peaceTermsDrafting.js',
       'src/store/campaignWorldPulseDeferred.js',
@@ -730,7 +739,8 @@ describe('EM-R1 — the writer census of every held key', () => {
     // RE-RECORDED AT THE TRAIN TIP (2026-09-23, the chair): 10 → 12 — EM-E4d unit 1 (97f18610b) added
     // `stageSealDecreeIntent` and EM-F3d (b5d5ca71f) added `scrubDeletedCounterparty`, two more `decrees`
     // writes in editSlice.js (the register's two new rows name them).
-    expect(totalSites, 'the measured write sites of the governed keys').toBe(12);
+    // PEOPLE-5B (M-7): 12 -> 13, migrateV1toV2's one `migrationReports` write.
+    expect(totalSites, 'the measured write sites of the governed keys').toBe(13);
 
     // (c2) ⭐ NOTE-14's SECOND MEASUREMENT: a DECLARED writer is not a LIVE one. `reachedFromSrc`
     // is re-derived from the call graph, so the register can never imply that `peaceOffers` is
@@ -748,7 +758,8 @@ describe('EM-R1 — the writer census of every held key', () => {
     expect(SAVED_KEY_WRITERS.filter((row) => row.reachedFromSrc === true).length,
       // RE-RECORDED AT THE TRAIN TIP (2026-09-23, the chair): 6 → 8 — E4d's stageSealDecreeIntent and
       // F3d's scrubDeletedCounterparty are both reached from src/ (the seal click; the delete).
-      'every other writer is reached from src/').toBe(8);
+      // PEOPLE-5B (M-7): 8 -> 9, migrateV1toV2 (reached through the v1 -> v2 step of the migration chain).
+      'every other writer is reached from src/').toBe(9);
 
     // (d) EVERY NON-WRITER CARRIES A WRITTEN REASON, so the exempt table cannot become a silent
     // allow-list. anchored: the table is asserted non-empty first, so this is not a vacuous every.
