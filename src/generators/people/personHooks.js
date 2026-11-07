@@ -22,13 +22,7 @@
 import { hookTruthViolations, settlementHookFacts } from '../../domain/coherence/hookTruth.js';
 import { HOOK_POOLS } from './poolMap.js';
 import { spareHookLine } from './representatives.js';
-
-/** @param {unknown} hook @returns {string} */
-function textOf(hook) {
-  if (typeof hook === 'string') return hook;
-  const entry = /** @type {{ hook?: unknown, text?: unknown }} */ (hook);
-  return typeof entry?.hook === 'string' ? entry.hook : typeof entry?.text === 'string' ? entry.text : '';
-}
+import { plotHookText as textOf } from '../../lib/proseSeams.js';
 
 /**
  * The record with every card carrying exactly one hook the record does not contradict: a card

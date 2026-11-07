@@ -447,10 +447,9 @@ function campPartiesOf(tension, powerNames) {
   return camps.map((name) => (powerNames.has(name) ? { kind: 'power', name } : { kind: 'group', name }));
 }
 
-/** A historical event's key: its id where the record gives one, else its name. @param {PlotHookEvent & { id?: unknown, name?: unknown }} event */
+/** A historical event's key: its name (the record writes no event id). @param {PlotHookEvent & { name?: unknown }} event */
 function eventIdOf(event) {
-  const id = event.id ?? event.name;
-  return id === undefined || id === null || id === '' ? null : String(id);
+  return typeof event.name === 'string' && event.name !== '' ? event.name : null;
 }
 
 /** The link kinds a hook card can carry. */
