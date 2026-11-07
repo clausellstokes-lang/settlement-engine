@@ -177,7 +177,8 @@ describe('IdentityDailyLife — the food balance reads as a tri-state, not a bin
   test('a DEFICIT still reads as a deficit (control, unchanged)', () => {
     const text = chapterText(DEFICIT);
     expect(text).toContain('−200 units');
-    expect(text).toContain('depends on imports for daily survival');
+    // re-keyed with the line's rewrite (W1 ECO second seat, the owner's style law of 2026-11-07): the deficit verdict kept.
+    expect(text).toContain('falls short of what people eat each day');
   });
 
   test('a SURPLUS still reads as a surplus (control, unchanged)', () => {

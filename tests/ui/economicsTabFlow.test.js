@@ -257,7 +257,8 @@ describe('THE PUBLIC GATE — the economy desk stays silent on a public dossier'
     // tile was cut and this section is the food fact's one home). It used to be
     // `defaultOpen={!!fb.deficit}`, which hid this very narrative from every fed town
     // until the reader opened it; the sentence is now on first paint with no click.
-    expect(container.textContent).toContain('Daily needs are met, with no surplus');
+    // re-keyed with the line's rewrite (W1 ECO second seat, the owner's style law of 2026-11-07); the claim kept: met, nothing spare.
+    expect(container.textContent).toContain("What is grown here and brought in covers each day's food, with nothing to spare against a bad year.");
     // The sentence above is read out of this very render, so the exclusion below
     // measures the wording rather than an empty tree. // anchored: positive toContain on this same textContent
     expect(container.textContent).not.toContain('Agricultural surplus of');

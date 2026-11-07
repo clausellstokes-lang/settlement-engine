@@ -268,7 +268,7 @@ export function IdentityDailyLife({ settlement, narrativeMode, vm, stateProse })
               >
                 <Text style={{ ...type.body, fontSize: pt['9.5'] }}>
                   {d.foodBalance.deficit > 0
-                    ? `Deficit of ${smart(d.foodBalance.deficit)} units. The settlement depends on imports for daily survival.`
+                    ? 'What is grown here and brought in falls short of what people eat each day, so some households eat less than they need.'
                     : d.foodBalance.surplus > 0
                       ? `Surplus of ${smart(d.foodBalance.surplus)} units. The local food supply is reliable.`
                       : 'Production and need are in balance. The settlement feeds itself, with nothing spare against a bad year.'}

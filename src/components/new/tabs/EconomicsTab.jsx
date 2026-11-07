@@ -585,7 +585,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
             ? fb.importCoverage>0
               ? `Production covers ${Math.round(fb.dailyProduction/fb.dailyNeed*100)}% of food needs. Trade imports cover an estimated ${Math.round(fb.importCoverage/(fb.rawDeficit||1)*100)}% of the gap. Residual shortfall is ${fbal.deficitPct}%.${fb.magicFoodOffset>0?` A further ${formatCount(fb.magicFoodOffset)} lbs/day comes by ${foodBar.magicChannel} provision.`:''}`
               : ` Production deficit of ${fbal.deficitPct}%. Settlement requires food imports to sustain population.`+(fb.magicFoodOffset>0?` A further ${formatCount(fb.magicFoodOffset)} lbs/day comes by ${foodBar.magicChannel} provision.`:'')
-            : foodSurplus ? `Agricultural surplus of ${Math.round((fb.surplus/Math.max(1,fb.dailyNeed))*100)}% above daily needs.` : 'Daily needs are met, with no surplus: production, imports and any magical provision cover the day between them.'
+            : foodSurplus ? `Agricultural surplus of ${Math.round((fb.surplus/Math.max(1,fb.dailyNeed))*100)}% above daily needs.` : 'What is grown here and brought in covers each day\'s food, with nothing to spare against a bad year.'
           }
         </div>
         {drawnFoodGlance?.sentence&&<p style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch.inkMag2,lineHeight:1.5,margin:'8px 0 0',fontStyle:'italic'}}>{drawnFoodGlance.sentence}</p>}
