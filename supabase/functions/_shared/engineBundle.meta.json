@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-11-07T10:03:58.455Z",
+  "generatedAt": "2026-11-07T11:18:19.940Z",
   "entry": "src/engine/serviceEntry.js",
-  "sourceHash": "3ef5dfdf4b5f4636",
-  "engineVersion": "e63515a26068d92f",
-  "builtFromCommit": "420826f3ac484b81316ef8882a1ea53e14ebd7d0",
+  "sourceHash": "2eb67591b481a558",
+  "engineVersion": "78406a33ecf9054c",
+  "builtFromCommit": "d03928f1d352da1f776b1b2899f90877fdcde121",
   "inputs": [
     "node_modules/seedrandom/seedrandom.js",
     "src/data/arrivalProse.js",
@@ -228,8 +228,10 @@
     "src/generators/people/castPowers.js",
     "src/generators/people/legacyShim.js",
     "src/generators/people/mintTitles.js",
+    "src/generators/people/personHooks.js",
     "src/generators/people/poolMap.js",
     "src/generators/people/representatives.js",
+    "src/generators/people/ties.js",
     "src/generators/pipeline.js",
     "src/generators/power/conflicts.js",
     "src/generators/power/economyReconciliation.js",
@@ -298,6 +300,7 @@
     "src/lib/generationProtocol.js",
     "src/lib/narrativeMutations.js",
     "src/lib/prebuiltResourceChains.js",
+    "src/lib/proseSeams.js",
     "src/workers/generationRequest.js"
   ]
 }
