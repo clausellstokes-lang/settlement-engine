@@ -177,6 +177,8 @@ const RULED = Object.freeze({
     'card — a ResourceChainCard, the partial variant of the same card.',
   'src/components/new/tabs/ResourcesTab.jsx :: fullExploited':
     'card — a ResourceChainCard, the fully-worked variant of the same card.',
+  'src/components/new/tabs/power/PowerStrata.jsx :: ranked':
+    'inline-run — a power\'s first, second and third run inline after its member count on one line (PEOPLE-5A).',
   'src/components/new/tabs/power/PowerStrata.jsx :: roster':
     'card — a FactionRow: the faction with its archetype and share, its member count beneath and a fold.',
   // THE CRISIS TAB (docs/DESIGN_CRISIS_TAB.md, the owner 2026-11-03) and X-46 car 3's fabric group,

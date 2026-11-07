@@ -12,6 +12,7 @@
  * index join this car replaced.
  */
 import { describe, test, expect } from 'vitest';
+import { expectAbsentWithAnchor } from '../../helpers/anchoredNegatives.js';
 import {
   runComposerSteps,
   COMPOSER_STEP_CONTRACT,
@@ -47,8 +48,7 @@ describe('ST-3 — the declared contract', () => {
   test('the in-place pass declares `mutates`, never `provides`', () => {
     // The coupling that a `provides`-only reader would miss entirely. (PEOPLE-5A re-keyed: the
     // faction-name de-dup, the other in-place pass, is deleted with the NPC grouping — M-2.)
-    expect(COMPOSER_STEP_ORDER).not.toContain('dedupeFactionNames');
-    expect(COMPOSER_STEP_ORDER).toContain('materializeGenesisTies'); // anchor: the order is live
+    expectAbsentWithAnchor(COMPOSER_STEP_ORDER, 'dedupeFactionNames', 'materializeGenesisTies', 'the deleted de-dup step');
     for (const name of ['materializeGenesisTies']) {
       const step = COMPOSER_STEP_CONTRACT.find(s => s.name === name);
       expect(step, `${name} must be in the contract`).toBeTruthy();
