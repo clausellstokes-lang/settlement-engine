@@ -50,7 +50,7 @@ Merging `f24623a9f` onto the 5A-merged tip conflicts in 11 files.
 | wiring census | `node scripts/wiring-census.mjs --check` | exit 0: 709 pools / 2310 variants / 165 relation rows. Its JSON did not conflict | — |
 | fork registry, held-key census, tuning, writer-reach walker | the walkers, in the wide run | no pin moved by the union; their reds are the base's or the STOP's (§5) | — |
 | dated roster | `sourceCitationIntegrity.walker` | 99 → 101 at the union (PEOPLE_5B_EDIT and this record). Both lanes' notes kept; the `_rosterGrowth2026-11-07-merge-5ab` note and the header's `dated (101)` set; 18 / 18 | `6a23130cc` (`06b83a03c` at the 5A tip) |
-| edge-shared bundles | `npm run build:edge-shared`, once at the end | exit 0 | EDGE_COMMIT |
+| edge-shared bundles | `npm run build:edge-shared`, once at the end | exit 0 | `f2c769d8c` |
 
 **The observed-shape register: a STOP.** The chair's ruling restores a consistent baseline at schema 30. That cannot pass, for the following reasons, measured here.
 
@@ -99,7 +99,7 @@ What it would admit is the chair's to say. Per 5B's scan against `8dd30106b`: NE
 
 **What the union caused.** Only the STOP's arms grew, because both lanes' moved reads now sit on one broken register. No other red is the union's.
 
-**The goldens (M-3), banked, never re-recorded.** PENDING at this commit (the run is in flight).
+**The goldens (M-3), banked, never re-recorded.** One run, `npx vitest run tests/property tests/simulation/presetLightingWitness.test.js`: 96 files / 711 tests, **6 files / 10 tests red**, the same set and counts that 5A, 5B and this seat's 5A-tip run banked: `generatorGoldenMaster` 1, `espionageDormancyFence` 1, `dossierProseManifest` 2, `heraldKnowledgeDeskGolden` 1, `dmLayerGoldenIsolation` 1, `editCorpusRatchet` 4 (A3, A5, A7, A8). `presetLightingWitness` is green.
 
 **5B's other reds**, per its own record §4 and listed, not this seat's: the FPZ casualties (18 tests in 8 files, M-6), lane 5A's birth/display readers on the returned record (6 in 6 files), and its own remainder (§6 below).
 
