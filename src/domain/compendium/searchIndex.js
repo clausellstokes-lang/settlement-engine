@@ -73,7 +73,8 @@ const TIER_KW = {
 };
 const TIER_ENTRIES = CD.tiers.map((t) => ({
   id: `tier-${slug(t.label)}`, term: t.label, category: 'Tier', tab: 'tiers', anchor: 'tiers',
-  keywords: `${TIER_KW[t.id] || ''} ${t.min}-${t.max}`,
+  // The top tier is open (X-46 car 1b): '15000+', never the roll body's edge as a ceiling.
+  keywords: `${TIER_KW[t.id] || ''} ${t.id === 'metropolis' ? `${t.min}+` : `${t.min}-${t.max}`}`,
 }));
 
 const ROUTE_ENTRIES = [

@@ -118,17 +118,26 @@ describe('snapshot shape', () => {
     // npcCount 5 -> 6. Values in an existing shape; no key appeared or vanished. The seed's
     // institution band was rebuilt (hamlet -> village is now cumulative), so the same seed draws a
     // different institution set and the faction and NPC counts follow it. Measured, not predicted.
+    // 2026-11-06 (LANDING-7 lane E, third seat; the rung-1 landing, ODQ §934.105): factionCount 7 -> 4,
+    // institutionCount 39 -> 18, npcCount 6 -> 7. Values in an existing shape; no key appeared or vanished; tier
+    // and population bucket hold (the population 538 -> 164 at 433289899, X-46 car 1, inside the same bucket).
+    // Measured by stage on the first-parent line from the last restatement 3dcb3c6fd (scratch worktrees,
+    // git bisect --first-parent): 39/6/7 through 47829c070^; 16/7/5 at 47829c070 (X-46 car 3 U3, the density
+    // factor scales every non-required chance); factions 5 -> 4 at 6129c300d (the PLACE-NOT-TIER compose,
+    // carrying e9945b632: a village seats no guild power without a market); institutions 16 -> 20 at
+    // 37b1e746d (the rung-1 pins compose) and 20 -> 18 at 6ca454d2b (X-46 car 3's realised table, I7 re-key);
+    // 18/7/4 from there to the branch tip.
     expect(structureFingerprint(s)).toMatchInlineSnapshot(`
       {
-        "factionCount": 7,
+        "factionCount": 4,
         "hasEconomicState": true,
         "hasEconomicViability": true,
         "hasHistory": true,
         "hasPowerStructure": true,
         "hasSpatial": true,
         "hookCount": 0,
-        "institutionCount": 39,
-        "npcCount": 6,
+        "institutionCount": 18,
+        "npcCount": 7,
         "populationBucket": "100-1000",
         "stressCount": 0,
         "tier": "village",

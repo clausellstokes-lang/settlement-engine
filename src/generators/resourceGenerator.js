@@ -15,10 +15,8 @@ import {
   nativeSemanticNames,
   nativeSemanticResourceKeys,
 } from '../domain/content/customContentSemanticAuthority.js';
-import {
-  availableNativeResourceKeys,
-  nativeResourceConditionRecords,
-} from '../domain/resourceSemantics.js';
+import { availableNativeResourceKeys, nativeResourceConditionRecords } from '../domain/resourceSemantics.js';
+import { waterAccessKind } from '../domain/tradeRouteSemantics.js';
 
 // ─── resolveNearbyCommodities ─────────────────────────────────────────────────
 // Turn the settlement's ACTUALLY-rolled nearby resources into the commodity/
@@ -123,7 +121,7 @@ const tokensReconcile = (a, b) => {
   );
 };
 
-const evaluateEconomicActivity = (terrainType, nearbyResources) => {
+const evaluateEconomicActivity = (terrainType, nearbyResources, water = '') => { // A-11: "ships" only where waterAccessKind is not 'none'
   const terrain = TERRAIN_DATA[terrainType];
   if (!terrain) return [];
   const active = [];
@@ -138,7 +136,9 @@ const evaluateEconomicActivity = (terrainType, nearbyResources) => {
       tokensReconcile(r, chain.rawResource) ||
       terrainSynonymsFor(chain.rawResource).some(s => tokensReconcile(r, s)));
     if (terrainAllows && resourcePresent) {
-      active.push({ ...chain, chainKey });
+      active.push(water === 'none' && (chain.finalProducts || []).includes('ships')
+        ? { ...chain, chainKey, finalProducts: chain.finalProducts.filter((product) => product !== 'ships') }
+        : { ...chain, chainKey });
     }
   });
   return active;
@@ -429,7 +429,7 @@ export const generateResourceAnalysis = (
   const nativeInstitutions = institutions.filter(
     institution => !isMaterializedCustomContent(institution),
   );
-  const activeChains   = evaluateEconomicActivity(terrainType, nearbyResources);
+  const activeChains   = evaluateEconomicActivity(terrainType, nearbyResources, waterAccessKind(terrainType, config.tradeRouteAccess));
   const exploitation   = evaluateInstitutions(nativeInstitutions, activeChains);
   const imports        = buildViabilityReport(
     terrainType,

@@ -70,13 +70,30 @@ function world(settType, terrain, tag) {
 /** A city whose roster carries 'Sewage system': UC-1 reads ROSTER_FULL_WEB, so every quarter drains. */
 const FULL_WEB_CITY = world('city', 'plains', '1');
 /** A city WITHOUT the institution: UC-1 reads TIER_FLOOR, so half the quarters stay dry. */
-const FLOOR_CITY = world('city', 'plains', '4');
+// Re-seeded '4' -> '2' on 2026-11-04 (rung-1 pins, unit 6; the Sewage system's rarity mark): the
+// row is exempt from the density factor now, and tag 4's city rolls it (ROSTER_FULL_WEB); of tags
+// 1..40, 2 is the first plains city without it (TIER_FLOOR).
+const FLOOR_CITY = world('city', 'plains', '2');
 /** A village at cesspits: no spine at all, the ARCHIPELAGO case. */
 const CESSPIT_VILLAGE = world('village', 'plains', '2');
 /** A WALLED riverside city: UC-4 digs its bypass and UC-2 licenses a waterside smuggler cellar. */
 const WALLED_HARBOUR = world('city', 'riverside', '1');
 /** A town whose criminal share sits in the 0.35–0.45 band: a tunnel with no cellar to serve. */
-const BAND_TOWN = world('town', 'plains', '1');
+// RE-STATED 2026-11-06 (LANDING-7 ruling R-E4), from two scans of `uc5-acc-town-plains-0..999`.
+// The premise is a WALLED town (UC-4 digs only through a wall) whose stored criminal share
+// (`readCorruptionClimate(s).crime`) sits in [0.35, 0.45): at or above UC-4's tunnel floor and
+// below UC-2's cellar floor. MEASURED: no generated town meets it. The share takes 18 lumpy
+// values (0.275 x457, 0.5 x358, ...), and only 5 towns fall in the window (tags 251, 253, 305,
+// 476 and 603, at 0.413 / 0.371), all of them unwalled. The 92 walled towns that dig a tunnel sit
+// at 0.5 (75) or 0.575 to 0.625 (17). Tag '1', the old seat, now reads 0.5 (a later mover than
+// 433289899, not bisected). Re-deriving the floors from that distribution cannot seat the arm:
+// no walled town sits anywhere between 0.344 and 0.5, so a window that held one would need
+// UC-2's cellar floor above 0.5 and would de-license most of the cellars. So the window and both
+// floors are KEPT, and the arm is driven by ONE stored change on a real walled tunnel town, in
+// UC-2's own `withShare` idiom (undercityMonotoneComponents.test.js): tag 9 (the first walled
+// tunnel town, 0.5) with its stored criminal share set to 40, which reads 0.40.
+const withShare = (s, effective) => ({ ...s, economicState: { ...s.economicState, safetyProfile: { ...(s.economicState?.safetyProfile ?? {}), compound: { criminalEffective: effective } } } });
+const BAND_TOWN = withShare(world('town', 'plains', '9'), 40);
 
 /** UC-4's own spelling of a razed wall (`undercityColonization.test.js`), the ONE stored change. */
 const razed = (s) => ({ ...s, defenseProfile: { ...(s.defenseProfile || {}), hasWalls: false, walls: [], institutions: {} } });
@@ -283,6 +300,8 @@ describe('MF-UC5 — the undercity connectivity graph', () => {
   it('ISOLATION IS A FIRST-CLASS VISIBLE FACT, AND IT SAYS WHY: on a town whose criminal share sits between UC-2’s cellar floor and UC-4’s tunnel floor the bypass is a node with nobody to serve and is reported isolated as UNREACHED, the isolation set is exactly the nodes no edge touches with every reason drawn from the closed list, and marking that one component sealed in UC-4’s own spelling re-reports the same node as SEVERED — the cause rather than the symptom', () => {
     const s = BAND_TOWN;
     const base = undercityOf(s);
+    // The premise, read through UC-4's own driver: the share sits inside the window.
+    expect(base.drivers.criminalShare).toBe(0.4);
     const g = deriveUndercityConnectivity(s, { undercity: base });
     // THE ARITHMETIC OF THE HONESTY CONTRACT: isolations are exactly the unjoined nodes.
     const joined = joinedKeys(g);

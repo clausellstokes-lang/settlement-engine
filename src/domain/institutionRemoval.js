@@ -31,6 +31,7 @@ import {
   listOf,
   matchesName,
   resolveSites,
+  sitesOf,
 } from './institutionRename.js';
 
 /** @typedef {import('./institutionRename.js').StoredRecord} StoredRecord */
@@ -83,7 +84,7 @@ function valuesAt(settlement, path) {
  * @returns {boolean} whether anything moved
  */
 function sweepRow(settlement, row, name) {
-  const sites = resolveSites(settlement, row.path);
+  const sites = sitesOf(settlement, row);
   let moved = false;
   for (let s = sites.length - 1; s >= 0; s -= 1) {
     const site = sites[s];

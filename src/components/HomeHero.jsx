@@ -63,7 +63,7 @@ const ANON_STATIONS = Object.freeze([ANON_FORGE_SIZE]);
 // six-station ladder shows solely for signed-in viewers, where every station is
 // enabled.
 
-/** Old-style population figure for a size token: "8–60", top tier "25,001+". */
+/** Old-style population figure for a size token: "5–30", top tier "15,000+". */
 function popFigure(size) {
   const r = POPULATION_RANGES[size];
   if (!r) return '';
@@ -108,7 +108,7 @@ function GaugeStation({ value, label, active, onClick, onHover }) {
         {label}
       </div>
       <div style={{
-        // The station's population band ("61–400") is the figure the reader compares
+        // The station's population band ("20–100") is the figure the reader compares
         // the sizes BY, and it drew at 10px on a phone. Chrome, not prose: it is a
         // figure under a label, and raising it to the prose step would flatten it into
         // the station name above it.

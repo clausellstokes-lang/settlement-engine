@@ -25,10 +25,10 @@
  *
  * §0b NAMED TWO TRAPS AND BOTH ARE ANSWERED HERE:
  *
- *   1. THE SATURATION TRAP. The existing population contributors are STEPS at
- *      `pop >= 5000` (causalState.js deriveHousingPressure: a flat -4; capacityModel's
- *      demand rows likewise), so every settlement from five thousand to twenty-nine
- *      trillion people lands in one bucket and the entire runaway range reads
+ *   1. THE SATURATION TRAP. The existing population contributors are STEPS at the city
+ *      stamp cut `TIER_STAMP_CUTS.city` (2,250; a bare 5,000 before X-46 car 2) (causalState.js
+ *      deriveHousingPressure: a flat -4; capacityModel's demand rows likewise), so every place
+ *      from that cut to twenty-nine trillion people lands in one bucket and the runaway range reads
  *      identically. Every term in this file is CONTINUOUS in the head count, because
  *      it is driven by `pressure01 = population / min(K_food, D_tier)` — a ratio that
  *      keeps climbing after the tier ordinal has stopped moving. A pin measures the

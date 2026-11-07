@@ -22,7 +22,7 @@
  * property access. That is a contract, not a style: `tests/lint/
  * ruinFilterRoster.walker.test.js` pins its `src/domain` discovery set EXACT, and
  * a roster read written as executable code would enrol this leaf and red it. The
- * declarative form is also what keeps the 36 rows a ledger rather than a program.
+ * declarative form is also what keeps the rows a ledger rather than a program.
  *
  * ⛔ NO EM DASH AND NO EXCLAMATION POINT IN ANY STRING LITERAL HERE. The Tier 2
  * voice walker holds a file with no baseline row at ZERO; the replacement
@@ -32,7 +32,7 @@
  */
 
 import { deepClone } from './clone.js';
-import { NPC_HOMES as INSTITUTION_HOMES } from './factionRename.js';
+import { CRISIS_CAST_HOMES, DEFENSE_CATEGORIES, NPC_HOMES as INSTITUTION_HOMES, rekeyCastEditsOfKind } from './factionRename.js';
 
 /**
  * A stored record as this module sees one. Deliberately `unknown`-valued rather
@@ -43,7 +43,8 @@ import { NPC_HOMES as INSTITUTION_HOMES } from './factionRename.js';
 /** @typedef {{ kind: OrphanKind, path: string, chainId: string|null }} OrphanNote */
 /** ⛔ A CLOSED VOCABULARY OF TWO, in `OrphanKind`'s exact shape. @typedef {'verbatim'|'lower'} LabelRewrite */
 /** @typedef {{ owner: StoredRecord, key: string, isList: boolean, holder: unknown[]|null, index: number, via: { owner: StoredRecord, key: string }|null }} Site */
-/** One declared row of the cascade list. `rewrite` is present only on a `label` row. @typedef {{ path: string, match: 'exact'|'label', rewrite?: LabelRewrite, removal: string, why: string }} SurfaceRow */
+/** A row's record filter: the leaf's owner must carry `key` equal to `equals` (the crisis cast's `kind`). @typedef {{ key: string, equals: string }} SiteFilter */
+/** One declared row of the cascade list. `rewrite` is present only on a `label` row; `where` only on a row whose owner record is shared by several kinds of name. @typedef {{ path: string, match: 'exact'|'label', rewrite?: LabelRewrite, where?: SiteFilter, removal: string, why: string }} SurfaceRow */
 /** One institution-name-bearing field an NPC record carries, before it is spread across the two homes. @typedef {{ parent: string|null, key: string, list: boolean, removal: string, why: string }} HandleField */
 /** One row of the NON_CASCADED ledger. @typedef {{ path: string, kind: string, readable: boolean, why: string }} LedgerRow */
 
@@ -51,6 +52,8 @@ import { NPC_HOMES as INSTITUTION_HOMES } from './factionRename.js';
 const CASCADE_BUCKETS = Object.freeze([
   'institutions', 'availableServices', 'economicState', 'resourceAnalysis',
   'defenseProfile', 'spatialLayout', 'npcs', 'factions',
+  // RUNG1B-F7: the crisis cast at both stress containers (CRISIS_CAST_HOMES).
+  'stress', 'stressors',
 ]);
 
 /** The eleven service categories `servicesGenerator` writes, each entry keyed by its own `institution`. */
@@ -59,10 +62,19 @@ const SERVICE_CATEGORIES = Object.freeze([
   'lodging', 'magic', 'information', 'transport', 'criminal',
 ]);
 
-/** The seven defense buckets, each holding institution RECORDS keyed by `name`. */
-const DEFENSE_CATEGORIES = Object.freeze([
-  'garrison', 'magicDef', 'walls', 'watch', 'charter', 'mercenary', 'militia',
-]);
+// The seven defense buckets, each holding institution RECORDS keyed by `name`, are
+// DEFENSE_CATEGORIES, declared beside NPC_HOMES in factionRename.js since RUNG1B-F7:
+// the faction ledger addresses the same records by their `factionSource`.
+
+/**
+ * ⭐ THE CRISIS CAST'S HOUSE ROWS (RUNG1B-F7, cause crisis3). A cast row's `id` and
+ * `name` are join keys for its OWN kind only: a faction, a house and a person may share
+ * a display name ('Democratic assembly' is a faction and a house), so the two role rows
+ * carry `where` and move only on a `kind: 'institution'` row. A removal drops the row
+ * (the house is gone, so the role it held is too), and the lever with it.
+ * @type {SiteFilter}
+ */
+const HOUSE_ROW = Object.freeze({ key: 'kind', equals: 'institution' });
 
 /**
  * ⭐ FIX-D5, RULED IN. `availableServices.*[].institution` may hold a parenthetical
@@ -121,8 +133,8 @@ function handlePath(home, field) {
 }
 
 /**
- * ⭐ THE ENUMERATED CASCADE DENOMINATOR: 36 declared rows, 33 of them observed
- * carrying an exact roster name. `match` is `exact` on 34 rows (trimmed both
+ * ⭐ THE ENUMERATED CASCADE DENOMINATOR: 48 declared rows (36, then the crisis
+ * cast's twelve at RUNG1B-F7). `match` is `exact` on 46 rows (trimmed both
  * sides, NOT case-folded, because two houses may legitimately differ only in
  * case) and `label` on the two DERIVED DISPLAY LABELS, whose producers write a
  * case-variant of the house's own name by construction. `removal` is the rule the
@@ -156,6 +168,14 @@ export const INSTITUTION_RENAME_SURFACES = Object.freeze([
   ...INSTITUTION_HOMES.flatMap((home) => INSTITUTION_HANDLE_FIELDS.map((field) => ({
     path: handlePath(home, field), match: /** @type {'exact'} */ ('exact'), removal: field.removal, why: field.why,
   }))),
+  ...CRISIS_CAST_HOMES.flatMap((home) => [
+    { path: `${home}.levers[].institution`, match: /** @type {'exact'} */ ('exact'), removal: 'drop-entry',
+      why: 'the house a crisis turns on, beside its office-holder: the lever IS the house, so a removal drops it' },
+    { path: `${home}.roles[].id`, match: /** @type {'exact'} */ ('exact'), where: HOUSE_ROW, removal: 'drop-entry',
+      why: 'a house-kind cast row is identified by the house name; faction and person rows are left to their own ledgers' },
+    { path: `${home}.roles[].name`, match: /** @type {'exact'} */ ('exact'), where: HOUSE_ROW, removal: 'drop-entry',
+      why: 'the house-kind cast row prints the house name beside its role' },
+  ]),
 ]);
 
 /**
@@ -224,6 +244,20 @@ export const NON_CASCADED_SURFACES = Object.freeze([
     why: 'a conflict party is a power faction\'s exact name since GS-2; the faction ledger rewrites it at both conflict homes' },
   { path: 'powerStructure.conflicts[].parties[]', kind: 'label', readable: false,
     why: 'the conflict mirror\'s party key, the same faction name, rewritten by the faction ledger with its twin above' },
+  // RUNG1B-F7 (the walker over 120 soak records): three more homes of a FACTION name that
+  // equals a house name for the governing-body forms, an office title, and a service label.
+  ...CRISIS_CAST_HOMES.map((home) => ({ path: `${home}.stakes[].factionId`, kind: 'label', readable: false,
+    why: 'a crisis stake keys on the FACTION name, owned by the faction rename ledger; it equals a house name only for the forms the power layer names after their body, for the reason the powerFactionName row gives' })),
+  { path: 'history.currentTensions[].factions[]', kind: 'label', readable: false,
+    why: 'the tension party roster holds FACTION names, rewritten by the faction ledger; the same governing-body collision' },
+  { path: 'availableServices.criminal[].name', kind: 'label', readable: false,
+    why: 'the service label, not a handle, the equipment row\'s class: where it names a roster house it names a DIFFERENT house from the entry own institution field (the Black market bazaar service the Underground city provides, beside a Black market bazaar house; 10 of 10 roster-named entries over 240 soak records, RUNG1B-F7)' },
+  ...INSTITUTION_HOMES.map((home) => ({ path: `${home}.role`, kind: 'label', readable: false,
+    why: 'a character\'s office title, which can equal a house name (a Midwife beside a Midwife house); the handle is the institution field' })),
+  { path: 'relationships[].npc1Role', kind: 'label', readable: false,
+    why: 'the first end\'s office title on a relationship edge, copied from the character\'s role' },
+  { path: 'relationships[].npc2Role', kind: 'label', readable: false,
+    why: 'the second end\'s office title on that same edge' },
   { path: 'economicState.safetyProfile.compound.inst.names[]', kind: 'frozen-stamp', readable: false,
     why: 'the SECOND independent stamp, not an alias: economicState and safetyProfile each call getInstFlags, so the two arrays are never the same object. Aliased or duplicated stamps DECLARE ONCE PER PATH by design, because the walk addresses by path and a reloaded save has already split any alias' },
 ]);
@@ -278,6 +312,18 @@ function resolveSites(root, path) {
 }
 
 /**
+ * The sites a DECLARED ROW addresses: its path's sites, kept only where the owner record
+ * passes the row's `where` filter. Both the rename and the removal resolve a row through
+ * this, so a filtered row can never be swept wider than it is renamed.
+ * @param {unknown} root @param {SurfaceRow} row @returns {Site[]}
+ */
+function sitesOf(root, row) {
+  const sites = resolveSites(root, row.path);
+  const where = row.where;
+  return where ? sites.filter((site) => site.owner[where.key] === where.equals) : sites;
+}
+
+/**
  * The row's DECLARED match. `exact` is trimmed on both sides and NOT case-folded:
  * a power-structure FACTION handle can be a case-variant of a house name, and
  * folding would rewrite it on an institution rename, which is a live bug.
@@ -312,7 +358,7 @@ export function applyInstitutionRenameToSettlement(settlement, oldName, newName)
   if (!isRecord(settlement) || !oldName || !newName || oldName === newName) return { changed: false, touched };
   for (const row of INSTITUTION_RENAME_SURFACES) {
     let moved = false;
-    for (const site of resolveSites(settlement, row.path)) {
+    for (const site of sitesOf(settlement, row)) {
       if (site.isList) {
         const list = listOf(site.owner[site.key]);
         if (!list) continue;
@@ -328,6 +374,10 @@ export function applyInstitutionRenameToSettlement(settlement, oldName, newName)
     }
     if (moved && !touched.includes(row.path)) touched.push(row.path);
   }
+  // RUNG1B-F8: the DM's cast edit names a house by its name (`institution:` parts). It is a
+  // DM edit, not a generated path, so it is walked by the edit layer's re-key rather than
+  // declared as a row (factionRename.js :: rekeyCastEditsOfKind says why).
+  for (const path of rekeyCastEditsOfKind(settlement, 'institution', oldName, newName)) if (!touched.includes(path)) touched.push(path);
   return { changed: touched.length > 0, touched };
 }
 
@@ -359,4 +409,4 @@ export function institutionRenameChanges(settlement, oldName, newName) {
   return { changed: true, touched, changes: draft, orphaned: [] };
 }
 
-export { INSTITUTION_HOMES, isRecord, listOf, resolveSites, matchesName };
+export { INSTITUTION_HOMES, isRecord, listOf, resolveSites, sitesOf, matchesName };

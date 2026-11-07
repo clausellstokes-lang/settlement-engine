@@ -5,9 +5,11 @@
  * written reason.
  *
  * ⛔⛔ LIVENESS ONLY, NEVER CORRECTNESS. This file says nothing about whether a match is
- * RIGHT. `/mill/` matching `Milled flour` and drawing a river across a landlocked town is a
- * false positive of the first order — and it is LIVE, so it passes here. Judging it is Wave
- * 4's job and Wave 8's assertion. What this census catches is the opposite defect: an
+ * RIGHT. `/mill/` matching `Milled flour` and drawing a river across a landlocked town WAS a
+ * false positive of the first order — LIVE, so it passed here, until LANDING-7 lane A struck
+ * `mill` from `siteGenesis.js :: WATER_ECONOMY_RE` on the owner's word of 2026-11-06 that a
+ * mill needs no water (livestock or wind will turn it). Judging a match is Wave 4's job and
+ * Wave 8's assertion. What this census catches is the opposite defect: an
  * alternative that matches NOTHING the generator produces, which is a mutation-proof dead
  * branch. Deleting `/pearl|whal|ferry/` today changes zero of 462 models, so a regression
  * test written over those tokens can never fail — the audit's M6.

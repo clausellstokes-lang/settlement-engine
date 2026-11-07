@@ -146,7 +146,7 @@ function SummaryTab({ settlement:r }) {
     const lines=[
       `# ${name}`,
       `*${tierLabel} · Pop. ${formatCount(pop)} · ${tradeAccess} · ${hist?.age||'?'} years old*`,
-      stresses.length?'\n**Active Crisis:** '+stresses.map(v=>`${v.label} - ${v.crisisHook}`).join(' | '):'',
+      stresses.length?'\n**Active Crisis:** '+stresses.map(v=>`${v.label} - ${crisisHookFor(r,v)}`).join(' | '):'',
       r.arrivalScene?`\n> ${r.arrivalScene}`:'',
       `\n**${characterSentence(r)}**`,
       `\n**Power:** ${allFactions.slice(0,3).map(f=>`${f.faction} (${f.power}%)`).join(', ')}. ${ps?.stability||''}`,
@@ -208,7 +208,7 @@ function SummaryTab({ settlement:r }) {
             <p style={{fontSize:FS.md,color:ink,lineHeight:1.55,marginBottom:8}}>{v.summary}</p>
             <div style={{borderTop:`1px solid ${v.colour}35`,paddingTop:8}}>
               <span style={{fontSize:chromeFontSize(FS.xs, isMobile),fontWeight:700,color:v.colour,textTransform:'uppercase',letterSpacing:'0.05em',marginRight:6}}>Hook:</span>
-              <span style={{fontSize:FS.sm,color:swatch['#3A2A10'],fontStyle:'italic',lineHeight:1.45}}>{v.crisisHook}</span>
+              <span style={{fontSize:FS.sm,color:swatch['#3A2A10'],fontStyle:'italic',lineHeight:1.45}}>{crisisHookFor(r,v)}</span>
             </div>
           </div>
         ))}
@@ -408,3 +408,6 @@ function SummaryTab({ settlement:r }) {
 }
 
 export default React.memo(SummaryTab);
+// The crisis hook's {holder} is filled where it is read (the chair's ruling 4, HOOKS-UNDER-STRESS); the
+// import sits here, not at the head, so the line-keyed prose-numerics register's rows above stay put.
+import { crisisHookFor } from '../../domain/crisis/crisisHooks.js';

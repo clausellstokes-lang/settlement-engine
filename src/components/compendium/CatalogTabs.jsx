@@ -43,7 +43,7 @@ function SectionHeading({ id, accent=INK, children }) {
 
 // Per-tier display metadata — the population BANDS render from CD.tiers (the engine
 // POPULATION_RANGES, corrected: the old inline bands were wrong, e.g. Thorp 20-80 vs
-// the real 8-60). Only the colour + institution-count prose stays authored here.
+// the engine's then 8-60; since X-46 car 1 the owner's historical table, Thorp 5-30). Only the colour + institution-count prose stays authored here.
 const TIER_META = {
   thorp:      { color:'#8b1a1a', desc:'Single institution. Subsistence only.' },
   hamlet:     { color:'#a05010', desc:'2-3 institutions. Local subsistence. Minimal trade.' },
@@ -61,7 +61,8 @@ export function TiersTab({ _search='' }) {
     </p>
     {CD.tiers.map((t)=>{
       const meta = TIER_META[t.id] || { color:GOLD, desc:'' };
-      const pop = `${formatCount(t.min)}–${formatCount(t.max)}`;
+      // The top tier is open ("15,000+", X-46 car 1b): its `max` is the roll's body, never a ceiling.
+      const pop = t.id === 'metropolis' ? `${formatCount(t.min)}+` : `${formatCount(t.min)}–${formatCount(t.max)}`;
       return (
       <div key={t.id} style={{ display:'flex', gap:10, padding:'8px 0', borderBottom:`1px solid ${BOR}`, alignItems:'flex-start' }}>
         <div style={{ minWidth:96, flexShrink:0 }}><div style={{fontSize:FS.md,fontWeight:700,color:meta.color}}>{t.label}</div><div style={{fontSize:chromeFontSize(FS.xxs, mobile),color:MUT}}>{pop} pop.</div></div>

@@ -78,12 +78,25 @@
  *     incidental; the faction reference on an institution is `factionSource`,
  *     which IS cascaded.
  *
+ * THE CRISIS CAST (RUNG1B-F7, 2026-11-04). The crisis record's derived cast
+ * (docs/DESIGN_CRISIS_TAB.md, written by generators/steps/resolveCrisisCast.js)
+ * names factions by display name (a faction's cast id IS its name, stakes key on
+ * `factionId` = the name) and people by display name (a role's `name`, a lever's
+ * `holderName`). It lives on every stress entry at up to four homes
+ * (CRISIS_CAST_HOMES: the container is an object for one crisis and an array for
+ * several, and `stressors` is a separate copy on a reloaded save). Both cascades
+ * below walk all four. The cast's reasons are a fixed vocabulary that names nobody,
+ * and the entry's hook is a template filled from the cast where it is shown, so
+ * neither carries a name to move.
+ *
  * PURE. No store, no persistence, no React. Callers own the write-back.
  */
 
 import { substituteWholeWord } from '../lib/narrativeMutations.js';
 import { deepClone } from './clone.js';
 import { nameOf } from './rulingPower.js';
+import { rekeyUserEdit, walkUserEdits } from './userEdits.js';
+import { BACKS_PATH, CAST_EDIT_PATH, rekeyBacksLine, rekeyCastLine } from './userEditLines.js';
 
 /**
  * A stored record as this module sees one: an object whose keys resolve to
@@ -126,6 +139,13 @@ const CASCADE_BUCKETS = Object.freeze([
   // conflict list carries the faction token in its party keys, its sentence and its
   // hooks. Its `powerStructure` mirror is already inside the bucket above.
   'conflicts',
+  // RUNG1B-F7: the crisis cast at both stress containers (CRISIS_CAST_HOMES), the
+  // defence profile's copies of the institution records (their `factionSource`),
+  // and the coherence notes the Overview and the PDF print (prose naming a faction).
+  'stress',
+  'stressors',
+  'defenseProfile',
+  'coherenceNotes',
   // A top-level STRING rather than a bucket. The generated pressure sentence
   // names the governing faction and is rendered on the summary tab, the map
   // quick-inspector, the PDF overview and the Foundry journal page.
@@ -143,6 +163,28 @@ const NPC_CASCADE_BUCKETS = Object.freeze([
   'factions',
   'relationships',
   'interSettlementRelationships',
+  // RUNG1B-F7: the crisis cast names people (CRISIS_CAST_HOMES).
+  'stress',
+  'stressors',
+]);
+
+/**
+ * THE HOMES OF THE CRISIS CAST (RUNG1B-F7). `resolveCrisisCast` writes `cast` on
+ * every entry of the stress container, which is ONE entry object for a single
+ * crisis and an ARRAY for several, and keeps the `stressors` alias in step; a saved
+ * settlement is JSON, so on reload `stressors` is a separate copy. Declared once,
+ * so the faction, NPC and institution ledgers (the last imports it) cannot drift.
+ */
+const CRISIS_CONTAINERS = Object.freeze(['stress', 'stressors']);
+export const CRISIS_CAST_HOMES = Object.freeze(CRISIS_CONTAINERS.flatMap((key) => [`${key}.cast`, `${key}[].cast`]));
+
+/**
+ * The seven defence buckets, each holding copies of institution RECORDS. Declared
+ * here, beside NPC_HOMES, because both ledgers address them: the institution
+ * ledger by each record's `name`, the faction ledger by its `factionSource`.
+ */
+export const DEFENSE_CATEGORIES = Object.freeze([
+  'garrison', 'magicDef', 'walls', 'watch', 'charter', 'mercenary', 'militia',
 ]);
 
 // The two `powerStructure` path prefixes are composed rather than spelled
@@ -267,6 +309,13 @@ export const FACTION_RENAME_SURFACES = Object.freeze([
     why: field.why,
   }))),
   { path: 'institutions[].factionSource', kind: 'key', why: 'the exact marker naming the faction that raised an institution' },
+  // RUNG1B-F7 (walker over 120 soak records): the defence profile stores COPIES of the
+  // institution records, so a house a faction raised carries the same marker there.
+  ...DEFENSE_CATEGORIES.map((category) => ({
+    path: `defenseProfile.institutions.${category}[].factionSource`, kind: /** @type {'key'} */ ('key'),
+    why: `the ${category} defence copy of an institution record keeps the raising faction's exact marker` })),
+  // RUNG1B-F7: a doubled-niche rival names the faction whose niche it contests (density law).
+  { path: `${ROSTER}.contestsNiche`, kind: 'key', why: 'the exact name of the faction whose niche a doubled-niche rival contests; the contest layer finds the pair by it' },
   { path: 'factions[].name', kind: 'key', why: 'the legacy top-level mirror the gallery rename surface renders' },
   { path: 'factions[].powerFactionName', kind: 'key', why: 'the NPC grouping list back-link to its power faction' },
   // The relationship edge list stores each end's TITLE alongside its name, and that
@@ -283,6 +332,15 @@ export const FACTION_RENAME_SURFACES = Object.freeze([
   { path: 'powerStructure.recentConflict', kind: 'prose', why: 'the recent-conflict line is faction-phrased prose' },
   { path: 'history.currentTensions[].factions[]', kind: 'prose', why: 'the tension PARTY roster: the dossier renders each entry as a faction chip and the PDF prints it as a tension party' },
   { path: 'pressureSentence', kind: 'prose', why: 'the generated pressure line names the governing faction on the summary tab, the map inspector, the PDF overview and the Foundry journal' },
+  // RUNG1B-F7: the coherence notes name the crime faction and the governing faction.
+  { path: 'coherenceNotes[].note', kind: 'prose', why: 'a coherence note names the faction it is about; the Overview and the PDF print it' },
+  // RUNG1B-F7 (crisis3): the crisis cast, at each of its homes. A faction's cast id
+  // IS its display name, and every stake keys on that name.
+  ...CRISIS_CAST_HOMES.flatMap((home) => [
+    { path: `${home}.stakes[].factionId`, kind: /** @type {'key'} */ ('key'), why: 'a crisis stake keys on the faction display name; a stale one orphans the stake from its faction on the Crisis tab' },
+    { path: `${home}.roles[].id`, kind: /** @type {'key'} */ ('key'), why: 'a faction-kind cast row is identified by the faction display name (institution and NPC rows are left to their own ledgers)' },
+    { path: `${home}.roles[].name`, kind: /** @type {'key'} */ ('key'), why: 'the faction-kind cast row prints the faction name beside its role' },
+  ]),
   // GS-2 (ODQ §934.101): a conflict is fought between two POWER factions, so both homes of the
   // conflict list hold the faction's exact name as a party key and its token in the prose.
   ...CONFLICT_HOMES.flatMap(home => [
@@ -320,6 +378,17 @@ export const NON_CASCADED_SURFACES = Object.freeze([
   { path: 'townScene manifest labels', why: 'derived per compile from the roster; the scene schema carries no district-to-faction identity at all' },
   { path: 'aiData', why: 'cascaded by the registered applyCosmeticRename operation instead' },
   { path: 'simulationTrace[].causes[].reason', why: 'the generation TRACE, a recorded statement of what the generator decided while the faction still bore its old name; rewriting it would falsify the receipt, the same ruling as previousGovernments. It is also not a live reference: the fingerprint extractors read the trace enums and drop the reason prose' },
+  // RUNG1B-F7 (walker over 120 soak records): the governing body's faction is named after
+  // the body for two forms ('Merchant oligarchy', 'Democratic assembly'), so the HOUSE of
+  // that name carries the same string. These paths hold the INSTITUTION's name, owned by
+  // the institution ledger (src/domain/institutionRename.js), which declares the mirror
+  // rows; renaming the faction must not silently rename the house.
+  { path: 'institutions[].name', why: 'the house record\'s own name, owned by the institution ledger: it equals a faction name only where the power layer names the governing faction after its body' },
+  { path: 'availableServices.legal[].institution', why: 'the house providing the service, owned by the institution ledger, for the reason the row above gives' },
+  // RUNG1B-F7 unit 5 (the chair's ruling; soak1k-35 on the composed window db8ce5da): the same
+  // collision on the crisis cast's levers, which the institution ledger cascades as a HOUSE handle.
+  ...CRISIS_CAST_HOMES.map((home) => ({ path: `${home}.levers[].institution`,
+    why: 'the house a crisis turns on, owned by the institution ledger, which cascades it; it equals a faction name only where the power layer names the governing faction after its body (\'Democratic assembly\')' })),
   { path: 'economicState.safetyProfile.criminalInstitutions[]', why: 'a fixed vocabulary label from the CRIMINAL_INST_LABELS table in generators/safetyProfile.js, naming an INSTITUTION rather than referring to the faction; that a criminal power faction is often generated with a similar name is incidental, and an institution owns its own name' },
   // THE MEMBERSHIP PREDICATE READS A WIDER KEY FAMILY THAN THIS LIST WRITES —
   // see NPC_HANDLE_KEYS_NOT_CASCADED above for the per-key reasons. Only one of
@@ -354,6 +423,12 @@ export const NPC_RENAME_SURFACES = Object.freeze([
   { path: 'relationships[].npc1Name', kind: 'key', why: 'the first end of an NPC relationship edge, joined by display name' },
   { path: 'relationships[].npc2Name', kind: 'key', why: 'the second end of an NPC relationship edge, joined by display name' },
   { path: 'interSettlementRelationships[].npcName', kind: 'key', why: 'this settlement side of a neighbour NPC contact (the partner save holds the same person as partnerName)' },
+  // RUNG1B-F7 (crisis3): the crisis cast names people by display name at each of its homes.
+  // The NPC row's id is the character's durable id and is left alone, as every id is.
+  ...CRISIS_CAST_HOMES.flatMap((home) => [
+    { path: `${home}.roles[].name`, kind: /** @type {'key'} */ ('key'), why: 'an NPC-kind cast row prints the person by name beside the role (faction and institution rows are left to their own ledgers)' },
+    { path: `${home}.levers[].holderName`, kind: /** @type {'key'} */ ('key'), why: 'the office-holder named beside the house a crisis turns on' },
+  ]),
 ]);
 
 /**
@@ -392,6 +467,9 @@ export const NPC_NON_CASCADED_SURFACES = Object.freeze([
   { path: 'prominentRelationship.tension', why: 'the quoted tension line inside that record; prose policy for people is owner-gated' },
   { path: 'prominentRelationship.phrasing', why: 'the overview line drawn from that record; it is also a registered EDITABLE prose path (domain/userEdits.js), so a user may already own its wording' },
   { path: 'pressureSentence', why: 'the generated pressure line can name a character; it is a faction-rename PROSE surface, and extending it to people is the same owner-gated decision' },
+  // RUNG1B-F7: the eighth formal judgment (record_coherence_battery, b7a5f778) quotes the stored
+  // strings its findings read, people's names among them.
+  { path: 'generationCoherenceReceipt.judgments[].findings[].evidence', why: 'the generation RECEIPT quoting what the battery read while the character bore the old name; a receipt is history (the institution ledger classes generationCoherenceReceipt the same way), and the quote is prose about a person, which is owner-gated' },
 ]);
 
 /**
@@ -408,6 +486,88 @@ function isRecord(value) {
  */
 function listOf(value) {
   return Array.isArray(value) ? value : null;
+}
+
+/**
+ * Every crisis cast the settlement stores, each with the home it was reached through
+ * (CRISIS_CAST_HOMES). On a live settlement `stressors` may alias `stress`, and the
+ * second walk is then a no-op; on a reloaded save it is the only thing that moves the
+ * copy.
+ *
+ * @param {StoredRecord} settlement
+ * @returns {Array<[string, StoredRecord]>}
+ */
+function castsOf(settlement) {
+  return crisisEntriesOf(settlement)
+    .filter(([, entry]) => isRecord(entry.cast))
+    .map(([home, entry]) => /** @type {[string, StoredRecord]} */ ([`${home}.cast`, entry.cast]));
+}
+
+/**
+ * Every crisis entry the settlement stores, each with its home (`stress`, `stress[]`,
+ * `stressors`, `stressors[]`): the entry object for one crisis, each entry of the array
+ * for several.
+ *
+ * @param {StoredRecord} settlement
+ * @returns {Array<[string, StoredRecord]>}
+ */
+function crisisEntriesOf(settlement) {
+  /** @type {Array<[string, StoredRecord]>} */
+  const out = [];
+  for (const key of CRISIS_CONTAINERS) {
+    const container = settlement[key];
+    const entries = listOf(container);
+    if (entries) {
+      for (const entry of entries) if (isRecord(entry)) out.push([`${key}[]`, entry]);
+    } else if (isRecord(container)) {
+      out.push([key, container]);
+    }
+  }
+  return out;
+}
+
+/**
+ * THE DM'S CAST EDIT FOLLOWS THE RENAME (RUNG1B-F8). The Crisis tab's edit
+ * (`<entry>._userEdits.castRoles`, one line of `role=kind:id` parts) names a faction
+ * or a house by its display name, the only identity the record gives either, and
+ * the cast reader drops a part whose name the roster no longer answers to. So every
+ * `<kind>:<oldName>` part is re-keyed, at every crisis entry of both containers, through
+ * the edit layer's own writer (`rekeyUserEdit`: the DM's `editedAt` is kept, both homes
+ * of the edit move). Kind-scoped, exactly as the cast rows are (`castRowsOfKind`).
+ *
+ * NOT A LEDGER ROW. FACTION_RENAME_SURFACES and its institution twin declare the paths a
+ * GENERATED record carries a name at, and their walkers read generated records, which
+ * never carry a DM edit. The surface is reported in `touched` as
+ * `<home>._userEdits.castRoles`, so a receipt never understates what a rename moved.
+ *
+ * @param {StoredRecord} settlement
+ * @param {'faction' | 'institution'} kind
+ * @param {string} oldName
+ * @param {string} newName
+ * @returns {string[]} the homes whose edit moved, as touched-surface paths
+ */
+export function rekeyCastEditsOfKind(settlement, kind, oldName, newName) {
+  /** @type {string[]} */
+  const moved = [];
+  for (const [home, entry] of crisisEntriesOf(settlement)) {
+    const path = `${home}._userEdits.${CAST_EDIT_PATH}`;
+    if (rekeyUserEdit(entry, CAST_EDIT_PATH, (value) => rekeyCastLine(value, kind, oldName, newName)) && !moved.includes(path)) moved.push(path);
+  }
+  return moved;
+}
+
+/**
+ * The cast rows of one kind. A row's `id` and `name` are join keys for its own kind
+ * only: a faction, a house and a person may share a display name ('Democratic
+ * assembly' is both a faction and a house), and a rename of one must not move the
+ * others' rows.
+ *
+ * @param {StoredRecord} cast
+ * @param {'npc' | 'faction' | 'institution'} kind
+ * @returns {StoredRecord[]}
+ */
+function castRowsOfKind(cast, kind) {
+  return (listOf(cast.roles) || []).filter((row) => isRecord(row) && row.kind === kind).map((row) => /** @type {StoredRecord} */ (row));
 }
 
 /**
@@ -676,6 +836,8 @@ export function applyFactionRenameToSettlement(settlement, oldName, newName) {
     // mentions the old name is untouched. This runs BEFORE the label check
     // because the check reads the name the two lines below are about to change.
     mark(`${ROSTER}.desc`, rewriteProse(record, 'desc', oldName, newName));
+    // A doubled-niche rival's tie to the faction it contests, on the RIVAL's record.
+    mark(`${ROSTER}.contestsNiche`, rewriteKey(record, 'contestsNiche', oldName, newName));
     if (factionLabel(record) !== oldName) continue;
     // DUAL-WRITE, SHAPE-PRESERVING. Both spellings the record ALREADY carries
     // are set, so a divergent legacy record (`.faction` renamed long ago,
@@ -735,6 +897,15 @@ export function applyFactionRenameToSettlement(settlement, oldName, newName) {
     if (!isRecord(institution)) continue;
     mark('institutions[].factionSource', rewriteKey(institution, 'factionSource', oldName, newName));
   }
+  // 7b. The defence profile's copies of those records carry the same marker.
+  const defense = isRecord(settlement.defenseProfile) && isRecord(settlement.defenseProfile.institutions)
+    ? settlement.defenseProfile.institutions : null;
+  for (const category of DEFENSE_CATEGORIES) {
+    for (const institution of listOf(defense?.[category]) || []) {
+      if (!isRecord(institution)) continue;
+      mark(`defenseProfile.institutions.${category}[].factionSource`, rewriteKey(institution, 'factionSource', oldName, newName));
+    }
+  }
 
   // 8-9. The legacy top-level mirror. This is a DIFFERENT record type (the NPC
   // grouping list): `.name` is its own label and `.powerFactionName` is its
@@ -781,6 +952,11 @@ export function applyFactionRenameToSettlement(settlement, oldName, newName) {
 
   // 13. The generated pressure line, which names the governing faction.
   mark('pressureSentence', rewriteProse(settlement, 'pressureSentence', oldName, newName));
+  // 13b. The coherence notes, which name the faction each is about.
+  for (const note of listOf(settlement.coherenceNotes) || []) {
+    if (!isRecord(note)) continue;
+    mark('coherenceNotes[].note', rewriteProse(note, 'note', oldName, newName));
+  }
 
   // 14. The conflicts, at both homes (GS-2): the parties are exact power-faction names, the
   // sentence and the hooks name them in prose. On a live settlement the two homes are separate
@@ -806,6 +982,31 @@ export function applyFactionRenameToSettlement(settlement, oldName, newName) {
       mark(`${home}.desc`, rewriteProse(conflict, 'desc', oldName, newName));
       mark(`${home}.plotHooks[]`, rewriteProseList(conflict, 'plotHooks', oldName, newName));
     }
+  }
+
+  // 15. The crisis cast (RUNG1B-F7), at every home: each stake's faction key, and the
+  // faction-kind rows' id and name (a faction's cast id IS its display name).
+  for (const [home, cast] of castsOf(settlement)) {
+    for (const stake of listOf(cast.stakes) || []) {
+      if (!isRecord(stake)) continue;
+      mark(`${home}.stakes[].factionId`, rewriteKey(stake, 'factionId', oldName, newName));
+    }
+    for (const row of castRowsOfKind(cast, 'faction')) {
+      mark(`${home}.roles[].id`, rewriteKey(row, 'id', oldName, newName));
+      mark(`${home}.roles[].name`, rewriteKey(row, 'name', oldName, newName));
+    }
+  }
+
+  // 16. The DM's cast edit (RUNG1B-F8): its faction parts follow the faction.
+  for (const path of rekeyCastEditsOfKind(settlement, 'faction', oldName, newName)) mark(path, true);
+
+  // 17. The DM's backing edit (RUNG1B-F8): a house the DM put behind this power still
+  // stands behind it. Read through the settlement-level walk of the edit records (the one
+  // read of `_userEdits` the observed-shape register banks), written through the edit
+  // layer's re-key. A DM edit, not a generated path, so not a ledger row (step 16 says why).
+  for (const edit of walkUserEdits(/** @type {import('./userEdits.js').EditableEntity} */ (settlement))) {
+    if (edit.kind !== 'institution' || edit.path !== BACKS_PATH) continue;
+    mark(`institutions[]._userEdits.${BACKS_PATH}`, rekeyUserEdit(edit.entity, BACKS_PATH, (value) => rekeyBacksLine(value, oldName, newName)));
   }
 
   return { changed: touched.length > 0, touched };
@@ -949,6 +1150,18 @@ export function applyNpcRenameToSettlement(settlement, oldName, newName) {
       if (!isRecord(before) || before.npcName !== oldName) continue;
       links[i] = renameInterSettlementReference(before, oldName, newName);
       mark('interSettlementRelationships[].npcName', true);
+    }
+  }
+
+  // 5. The crisis cast (RUNG1B-F7), at every home: the NPC-kind rows' name and each
+  // lever's office-holder. The row's id is the durable character id and stays.
+  for (const [home, cast] of castsOf(settlement)) {
+    for (const row of castRowsOfKind(cast, 'npc')) {
+      mark(`${home}.roles[].name`, rewriteKey(row, 'name', oldName, newName));
+    }
+    for (const lever of listOf(cast.levers) || []) {
+      if (!isRecord(lever)) continue;
+      mark(`${home}.levers[].holderName`, rewriteKey(lever, 'holderName', oldName, newName));
     }
   }
 

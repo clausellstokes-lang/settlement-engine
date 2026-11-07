@@ -9,7 +9,9 @@ import {
 } from '../../src/components/map/heraldCommandNavigation.js';
 
 describe('Herald command-brief address compatibility', () => {
-  test.each([
+  // Each-family cure (2026-11-05, LANDING-6): one parameterless test looping over the rows,
+  // each failure named by its legacy address.
+  const LEGACY_DESTINATIONS = [
     ['dashboard', 'briefing', null],
     ['war', 'stories', 'war'],
     ['faith', 'stories', 'faith'],
@@ -17,8 +19,13 @@ describe('Herald command-brief address compatibility', () => {
     ['events', 'stories', 'events'],
     ['divination', 'plans', null],
     ['adjudication', 'decisions', null],
-  ])('%s retains its semantic destination', (legacy, view, topic) => {
-    expect(commandLocationOf(legacy)).toEqual({ view, topic });
+  ];
+
+  test('every legacy address retains its semantic destination', () => {
+    expect(LEGACY_DESTINATIONS).toHaveLength(7);
+    for (const [legacy, view, topic] of LEGACY_DESTINATIONS) {
+      expect(commandLocationOf(legacy), legacy).toEqual({ view, topic });
+    }
   });
 
   test('accepts command-view aliases without changing the public callback language', () => {

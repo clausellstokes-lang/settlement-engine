@@ -62,8 +62,10 @@
  *
  * ⭐ A SETTLEMENT WITH NO PATRON IS THE COMMON CASE, NOT THE EDGE. `faithPanelModel`
  * answers `{ hasEmbed: false }` and DS-FTH-2's PRIVATE DOSSIER pool is what speaks: four
- * variants that name no creed and no god, because the block was authored for exactly this
- * town. It is honest and it is NOT empty, which is the whole reason the block exists.
+ * variants that name no creed and no god, each reading the ONE FAITH READING
+ * (`faithPanelModel(...).reading`) through its slots — the houses, the senior cleric, the
+ * religious faction, and the dial — so a variant speaks only where the reading gives its
+ * fact, and the dial's variant speaks on every town (lane FAITH-POOLS, 2026-11-04).
  *
  * ── DECLARED DARK, WITH THE MEASUREMENT (findings, not omissions) ─────────────────────
  * A mounted-but-unreachable POOL is a finding to declare; a BLOCK with no reachable pool
@@ -113,6 +115,8 @@ import { composeStateProse } from './composeStateProse.js';
 import { warFaithStateProseCandidates } from './warFaithStateProseCandidates.js';
 import { legibilityRung } from './legibilityRung.js';
 import { documentSideOf } from '../../worldPulse/treatyOrientation.js';
+import { observancePhraseOf } from '../../dossier/faithReading.js';
+import { wallsAnswered } from '../../defense/defenseFacts.js';
 
 /**
  * The desk's corpus, typed at the import boundary — the generated leaves stay pure data
@@ -127,8 +131,9 @@ const CORPUS = /** @type {import('./stateProseKernel.js').StateProseCorpus} */ (
  * THE SHAPES THIS DESK BELIEVES ITS SLOTS HAVE, mirroring §0c's Shape column. The annex is
  * the authority and the projection contract test asserts this map equals it slot for slot.
  *
- * FIVE SLOTS, AND THE OMISSIONS ARE THE FINDING. This leaf's variants name fourteen slots
- * between them; the five below are the ones a producer can fill honestly. `{institution}`
+ * NINE SLOTS, AND THE OMISSIONS ARE THE FINDING. This leaf's variants name eighteen slots
+ * between them; the nine below are the ones a producer can fill honestly (the last four are
+ * DS-FTH-2's, off the faith reading). `{institution}`
  * has no temple-NAME producer (`inst.hasChurch` is a boolean); `{band}` is RESERVED by the
  * annex; `{season}`, `{good}`, `{route}`, `{reason}` and the three `{timeband_*}` forms
  * have no reading on either host tab. Anchored liveness therefore drops the variants that
@@ -142,6 +147,13 @@ export const SLOT_FILL_SHAPES = Object.freeze({
   creed: 'proper',
   rival_creed: 'proper',
   term: 'proper',
+  // DS-FTH-2's four (lane FAITH-POOLS, 2026-11-04), every one off the ONE FAITH READING
+  // (`faithPanelModel(...).reading`): the houses of worship, the senior cleric's role, the
+  // strongest religious faction, and the religion dial as the people's observance.
+  houses: 'phrase',
+  cleric: 'proper',
+  faction: 'proper',
+  observance: 'phrase',
 });
 
 /**
@@ -156,6 +168,19 @@ export const SLOT_FILL_TABLES = Object.freeze({});
 /** @param {unknown} value @returns {string} */
 function text(value) {
   return typeof value === 'string' ? value.trim() : '';
+}
+
+/**
+ * A `phrase` fill, or `undefined`: a lowercase phrase that carries its own determiner, with
+ * §0c's refusals (a digit, a dash, a sentence stop, a snake_case token).
+ * @param {unknown} value
+ * @returns {string|undefined}
+ */
+function phraseFill(value) {
+  const v = text(value);
+  if (!v) return undefined;
+  if (/[0-9]|[—–]|[.!?]|[a-z]+_[a-z]+/.test(v)) return undefined;
+  return v;
 }
 
 /**
@@ -715,6 +740,8 @@ export function nicheContestPoolKey(ranks) {
  * @property {number|null} [unaffiliated]
  * @property {boolean} [contested]
  * @property {{phrase?: unknown}|null} [mandate]
+ * @property {import('../../dossier/faithReading.js').FaithReading} [reading] the ONE FAITH
+ *   READING the model carries (DS-FTH-2's four slots read it)
  */
 /**
  * @typedef {object} TreatyDocumentView
@@ -776,6 +803,8 @@ export function nicheContestPoolKey(ranks) {
  * @returns {Readonly<Record<string, object|null>>}
  */
 export function warFaithStateProse(settlement, readings = {}, options = {}) {
+  // F10: the walls dimension answered once, from the defence reader (stateProseKernel law 5).
+  options = wallsAnswered(settlement, options);
   const war = readings.war || null;
   const faith = readings.faith || null;
   const name = properFill(settlement?.name);
@@ -796,6 +825,14 @@ export function warFaithStateProse(settlement, readings = {}, options = {}) {
     creed: properFill(patronRank?.name),
     rival_creed: properFill(rivalRank?.name),
     term: properFill(leadingTerm(leadingDocument(war)?.termLines)?.label),
+    // ── DS-FTH-2 (lane FAITH-POOLS): the patron-less town's faith, off the ONE FAITH READING.
+    // Each fill is a fact the reading gives, or nothing: a town without a church has no
+    // `{houses}`, and anchored liveness drops the variants that would have named one.
+    houses: phraseFill(faith?.reading?.hasChurch ? faith.reading.churchWords : undefined),
+    cleric: properFill(faith?.reading?.seniorCleric?.role),
+    faction: properFill(faith?.reading?.religiousFaction?.name),
+    observance: typeof faith?.reading?.dial === 'number'
+      ? phraseFill(observancePhraseOf(faith.reading.dial)) : undefined,
     // `{institution}`, `{band}`, `{season}`, `{good}`, `{route}`, `{reason}` and the three
     // `{timeband_*}` forms are DELIBERATELY UNFILLED — see SLOT_FILL_SHAPES.
   };

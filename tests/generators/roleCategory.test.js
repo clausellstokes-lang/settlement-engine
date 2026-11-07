@@ -236,7 +236,7 @@ describe('institutionInCategory (metadata-driven)', () => {
   });
 
   it('does not cross-categorize a plain market or housing institution', () => {
-    const dwellings = stamp('Dwellings (4-16)');
+    const dwellings = stamp('Dwellings (1-8)');
     expect(institutionInCategory(dwellings, 'criminal')).toBe(false);
     expect(institutionInCategory(dwellings, 'magic')).toBe(false);
     expect(institutionInCategory(dwellings, 'religion')).toBe(false);
@@ -262,7 +262,7 @@ describe('institutionCategoryFlags', () => {
   });
 
   it('reports all-false for a roster with none of the three families', () => {
-    const insts = [stamp('Dwellings (4-16)'), stamp('Water source')];
+    const insts = [stamp('Dwellings (1-8)'), stamp('Water source')];
     expect(institutionCategoryFlags(insts)).toEqual({
       hasCriminal: false,
       hasMagic: false,
@@ -286,7 +286,7 @@ describe('isCommerceGuild', () => {
   });
 
   it('rejects a non-guild institution', () => {
-    expect(isCommerceGuild(stamp('Dwellings (4-16)'))).toBe(false);
+    expect(isCommerceGuild(stamp('Dwellings (1-8)'))).toBe(false);
   });
 });
 

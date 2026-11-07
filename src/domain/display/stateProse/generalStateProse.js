@@ -82,6 +82,7 @@ import { timeBandOf, timeBandWord } from '../heraldCausalGrammar.js';
 import { composeStateProse } from './composeStateProse.js';
 import { generalStateProseCandidates } from './generalStateProseCandidates.js';
 import { legibilityRung } from './legibilityRung.js';
+import { wallsAnswered } from '../../defense/defenseFacts.js';
 
 /** @typedef {import('./legibilityRung.js').LegibilityRung} LegibilityRung */
 
@@ -709,11 +710,21 @@ export function viabilityVerdictPoolKey(viable) {
  * measured the field 0/24 present when it is 48/48. A non-number renders nothing: an absent
  * count is a record that was not asked, and reading it as zero would print "nothing here
  * contradicts anything" over a town nobody checked.
- * @param {unknown} count @returns {string|null}
+ *
+ * ⛔ THE ZERO POOL VOUCHES, SO IT NEEDS THE RECEIPT'S WORD (lane SELF-VOUCH, 2026-11-04;
+ * SOAK-1000 row 9, A-12: printed over 250 of 1,000 contradicted records). All three of its
+ * lines say the record holds together, and a zero `criticalIssueCount` only says viability
+ * found no critical issue. So the zero pool is chosen only when the receipt's
+ * `record_coherence_battery` judgment passed (`recordClean === true`); a judgment that found
+ * contradictions takes the contradiction pool, whose one slot-free line is true of such a
+ * record; a record with no such judgment (a save older than it) was not asked, and renders
+ * nothing.
+ * @param {unknown} count @param {unknown} [recordClean] @returns {string|null}
  */
-export function criticalIssuePoolKey(count) {
+export function criticalIssuePoolKey(count, recordClean) {
   if (typeof count !== 'number' || !Number.isFinite(count)) return null;
-  const key = count > 0
+  if (count <= 0 && recordClean !== true && recordClean !== false) return null;
+  const key = count > 0 || recordClean === false
     ? 'criticalIssueCount: critical contradictions on the record'
     : 'criticalIssueCount zero';
   return CORPUS['DS-GEN-11'].pools[key] ? key : null;
@@ -1691,7 +1702,7 @@ export const GENERAL_STATE_PROSE_SILENT = Object.freeze({
  *     stakes?: unknown}|null>|null,
  *   govFaction?: unknown, structuralViolations?: unknown, structuralSuggestions?: unknown,
  *   coherenceNotes?: Array<{type?: unknown, tab?: unknown}|null>|null,
- *   criticalIssueCount?: unknown, prominentRelationship?: unknown,
+ *   criticalIssueCount?: unknown, recordClean?: unknown, prominentRelationship?: unknown,
  *   relationships?: ReadonlyArray<{flagDriven?: unknown}|null>|null,
  *   hookCategories?: ReadonlyArray<unknown>|null,
  *   clockIds?: ReadonlyArray<unknown>|null, governingName?: unknown,
@@ -1714,10 +1725,13 @@ export const GENERAL_STATE_PROSE_SILENT = Object.freeze({
  *   caller had no typed statement of what the desk needs handed to it. Each row names only
  *   the fields this desk actually reads off it — `intensity` for the pool cut, `parties` /
  *   `issue` / `stakes` for the slots — so a producer change to any of them lands here
- * @param {{seed?: string, audience?: string, tierNoun?: string|null}} [options]
+ * @param {{seed?: string, audience?: string, tierNoun?: string|null,
+ *   dimensions?: Record<string, string>}} [options] `dimensions` is answered for `walls` at entry (F10)
  * @returns {typeof GENERAL_STATE_PROSE_SILENT}
  */
 export function generalStateProse(settlement, readings = {}, options = {}) {
+  // F10: the walls dimension answered once, from the defence reader (stateProseKernel law 5).
+  options = wallsAnswered(settlement, options);
   const slots = { settlement: properFill(text(settlement?.name)) };
 
   // ⭐ ROUTED THROUGH THE COMPOSER (SEAM car 3g), at all eleven of this desk's call sites.
@@ -1752,7 +1766,7 @@ export function generalStateProse(settlement, readings = {}, options = {}) {
   /** @param {string|null} poolKey */
   const originLine = (poolKey) => (poolKey && deficit
     ? legibilityRung('', composeStateProse(CORPUS, 'DS-GEN-6', {
-      ...options, slots, dimensions: { deficit },
+      ...options, slots, dimensions: { ...options.dimensions, deficit },
       spineKey: poolKey, candidates: generalStateProseCandidates('DS-GEN-6', readings),
     }), [])
     : null);
@@ -1835,7 +1849,7 @@ export function generalStateProse(settlement, readings = {}, options = {}) {
   /** @param {string|null} poolKey @param {Record<string, unknown>} [extra] */
   const identityLine = (poolKey, extra = {}) => (poolKey
     ? legibilityRung('', composeStateProse(CORPUS, 'DS-GEN-9', {
-      ...options, slots: { ...identitySlots, ...extra }, ...(anchor ? { dimensions: { anchor } } : {}),
+      ...options, slots: { ...identitySlots, ...extra }, ...(anchor ? { dimensions: { ...options.dimensions, anchor } } : {}),
       spineKey: poolKey, candidates: generalStateProseCandidates('DS-GEN-9', readings),
     }), [])
     : null);
@@ -2015,7 +2029,7 @@ export function generalStateProse(settlement, readings = {}, options = {}) {
     viability: Object.freeze({
       verdict: Object.freeze([
         rung('DS-GEN-11', viabilityVerdictPoolKey(readings.viable), ''),
-        rung('DS-GEN-11', criticalIssuePoolKey(readings.criticalIssueCount), ''),
+        rung('DS-GEN-11', criticalIssuePoolKey(readings.criticalIssueCount, readings.recordClean), ''),
         rung('DS-GEN-11', 'THE FIRST-SURVEY QUALIFICATION', ''),
       ].filter((line) => line && line.sentence)),
     }),

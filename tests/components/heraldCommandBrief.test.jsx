@@ -29,12 +29,14 @@ import {
   peacefulHeraldFixture,
 } from '../fixtures/gameGradeHeraldFixtures.js';
 
-afterEach(() => {
+function resetBetweenRows() {
   cleanup();
   vi.clearAllMocks();
   headlineItems.length = 0;
   legacyBodies.length = 0;
-});
+}
+
+afterEach(resetBetweenRows);
 
 function item({
   id,
@@ -382,9 +384,13 @@ describe('Herald command brief', () => {
     expect(props.activeDecisionItemId).toBe('decision-1');
   });
 
-  test.each(['briefing', 'stories', 'plans', 'decisions'])(
-    'a locked %s address re-enters the established Dashboard gate',
-    (view) => {
+  // Each-family cure (2026-11-05, LANDING-6): the views loop inside one parameterless test,
+  // each view mounted alone (the file's afterEach reset runs between rows) and named in every
+  // failure message.
+  test('a locked briefing, stories, plans or decisions address re-enters the established Dashboard gate', () => {
+    const views = ['briefing', 'stories', 'plans', 'decisions'];
+    expect(views).toHaveLength(4);
+    for (const view of views) {
       render(
         <HeraldCommandBody
           {...baseProps}
@@ -395,18 +401,19 @@ describe('Herald command brief', () => {
         />,
       );
 
-      expect(screen.getByTestId('legacy-dashboard')).toBeTruthy();
-      expect(screen.queryByTestId('herald-command-decisions')).toBeNull();
-      expect(screen.queryByTestId('herald-command-plans')).toBeNull();
-      expect(screen.queryByTestId('command-briefing-item')).toBeNull();
-      expect(legacyBodies).toHaveLength(1);
-      expect(legacyBodies[0]).toEqual(expect.objectContaining({
+      expect(screen.getByTestId('legacy-dashboard'), view).toBeTruthy();
+      expect(screen.queryByTestId('herald-command-decisions'), view).toBeNull();
+      expect(screen.queryByTestId('herald-command-plans'), view).toBeNull();
+      expect(screen.queryByTestId('command-briefing-item'), view).toBeNull();
+      expect(legacyBodies, view).toHaveLength(1);
+      expect(legacyBodies[0], view).toEqual(expect.objectContaining({
         section: 'dashboard',
         canManageCampaigns: false,
         tier: 'free',
       }));
-    },
-  );
+      resetBetweenRows();
+    }
+  });
 
   test('a player or share mount fails closed before a GM-only RealmItem reaches the DOM', () => {
     const secret = {
@@ -438,9 +445,11 @@ describe('Herald command brief', () => {
     expect(screen.getByTestId('legacy-dashboard')).toBeTruthy();
   });
 
-  test.each(['stories', 'plans', 'decisions'])(
-    '%s keeps an explicit route back to the originating briefing item',
-    (view) => {
+  // Each-family cure (2026-11-05, LANDING-6): one parameterless test, the views looped inside.
+  test('stories, plans and decisions each keep an explicit route back to the originating briefing item', () => {
+    const views = ['stories', 'plans', 'decisions'];
+    expect(views).toHaveLength(3);
+    for (const view of views) {
       const onReturnToOrigin = vi.fn();
       render(
         <HeraldCommandBody
@@ -453,7 +462,8 @@ describe('Herald command brief', () => {
       );
 
       fireEvent.click(screen.getByRole('button', { name: 'Return to Briefing' }));
-      expect(onReturnToOrigin).toHaveBeenCalledTimes(1);
-    },
-  );
+      expect(onReturnToOrigin, view).toHaveBeenCalledTimes(1);
+      resetBetweenRows();
+    }
+  });
 });

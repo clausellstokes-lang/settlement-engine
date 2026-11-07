@@ -10,7 +10,7 @@
 import { registerStep } from '../pipeline.js';
 import { applyCascadeInstitutions } from '../cascadeGenerator.js';
 import { applySubsumption } from './subsumptionPass.js';
-import { collapseUpgradeChains } from './assembleInstitutions.js';
+import { collapseUpgradeChains, settlementDensity, shipFreeDesc } from './assembleInstitutions.js';
 import { recordTrace } from '../../domain/trace.js';
 import {
   nativeSemanticName,
@@ -22,7 +22,7 @@ function instId(name) {
 
 registerStep('cascadePass', {
   deps: ['subsumptionPass', 'buildGenerationContext'],
-  reads: ['generationContext', 'institutionToggles', 'institutions', 'population', 'terrainType', 'tier', 'tradeRoute'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
+  reads: ['categoryToggles', 'effectiveConfig', 'generationContext', 'goodsToggles', 'institutionToggles', 'institutions', 'nearbyResources', 'neighbourProfile', 'population', 'terrainType', 'tier', 'tradeRoute'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
   provides: [],
   mutates: ['institutions'], // re-rolls/adds catalog entries on the roster in place (A+ P1.7)
   phase: 'institutions',
@@ -46,8 +46,12 @@ registerStep('cascadePass', {
     institutionToggles,
     worldLaw,
     population: typeof population === 'number' ? population : null,
+    // THE ONE DENSITY FACTOR (RUNG1B-F6): the settlement's own, read as assembleInstitutions reads it.
+    density: settlementDensity(ctx),
   });
   if (cascadeAdditions.length > 0) {
+    // A-11 (chair ruling, round 3, 3b): an added row takes its ship-free text inland.
+    if (worldLaw.portKind === 'none') for (const add of cascadeAdditions) add.desc = shipFreeDesc(add, tier, ctx._seed);
     institutions.push(...cascadeAdditions);
 
     // Tier 2.1 — emit a trace per cascade addition. Cascade additions

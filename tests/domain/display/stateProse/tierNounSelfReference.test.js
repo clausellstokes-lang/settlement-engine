@@ -45,10 +45,11 @@ describe('speakTierNoun — the self-references the corpus writes as "a town"', 
     expect(speakTierNoun(line, noun)).toBe(spoken);
   });
 
-  it('every KEPT phrase survives on a thorp, and the self-reference beside it still moves', () => {
-    for (const { phrase } of TIER_NOUN_KEPT) {
+  it('every KEPT phrase survives on a thorp (a licensed one on its own tier), and the self-reference beside it still moves', () => {
+    for (const { phrase, tiers } of TIER_NOUN_KEPT) {
+      const tier = tiers ? tiers[0] : 'thorp';
       const line = `Nobody here minds ${phrase}, and this town says so.`;
-      expect(speakTierNoun(line, 'thorp'), phrase).toBe(`Nobody here minds ${phrase}, and this thorp says so.`);
+      expect(speakTierNoun(line, tier), phrase).toBe(`Nobody here minds ${phrase}, and this ${tier} says so.`);
     }
   });
 

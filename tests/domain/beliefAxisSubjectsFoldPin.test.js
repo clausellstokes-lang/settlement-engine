@@ -317,8 +317,10 @@ describe('SP-B R1 — the fold arm reached through the REAL beliefMap advance', 
 
   /**
    * Each rung: the fidelity of the one fresh telling, and which families that fidelity
-   * clears the bar for. Registered as CASES rather than looped inside one `it()`, so a
-   * failure at 0.55 does not hide the verdict at 0.65.
+   * clears the bar for. Each-family cure (2026-11-05, LANDING-6): the rungs now loop inside
+   * ONE parameterless test (a `test.each` parks this file in the sovereignty lighting census),
+   * and the verdicts are `expect.soft`, so a failure at 0.55 still does not hide the verdict
+   * at 0.65 — every rung reports, each naming its fidelity.
    */
   const STAIRCASE = [
     { accuracy01: 0.3, adopted: [], summary: 'below every bar — the whole picture stays stale' },
@@ -327,24 +329,27 @@ describe('SP-B R1 — the fold arm reached through the REAL beliefMap advance', 
     { accuracy01: 0.9, adopted: ['conditionsBands', 'devotionBand', 'scarcityBands'], summary: 'over every bar' },
   ];
 
-  test.each(STAIRCASE)('ADOPTION vs STALENESS at fidelity $accuracy01 — $summary', ({ accuracy01, adopted }) => {
-    const rec = familiesOf(legOf(warmAdvance({ world: AFTER, rules: ALL_LIT, prior: PRIOR, accuracy01 })));
+  test('ADOPTION vs STALENESS at every rung of the fidelity staircase (0.3, 0.55, 0.65, 0.9)', () => {
+    expect(STAIRCASE).toHaveLength(4);
     const stalePole = familiesOf(legOf(PRIOR));
     const truthPole = familiesOf(legOf(FRESH_TRUTH));
+    for (const { accuracy01, adopted, summary } of STAIRCASE) {
+      const rec = familiesOf(legOf(warmAdvance({ world: AFTER, rules: ALL_LIT, prior: PRIOR, accuracy01 })));
 
-    for (const field of ['scarcityBands', 'conditionsBands', 'devotionBand']) {
-      if (adopted.includes(field)) {
-        expect(
-          rec[field],
-          `${field} did NOT adopt at fidelity ${accuracy01}, which clears its bar — a telling`
-          + ' faithful enough to be believed left the observer on its old picture',
-        ).toEqual(truthPole[field]);
-      } else {
-        expect(
-          rec[field],
-          `${field} adopted at fidelity ${accuracy01}, which is BELOW its bar — the stale prior`
-          + ' is the fog-of-war feature and a garbled telling must not overturn a settled view',
-        ).toEqual(stalePole[field]);
+      for (const field of ['scarcityBands', 'conditionsBands', 'devotionBand']) {
+        if (adopted.includes(field)) {
+          expect.soft(
+            rec[field],
+            `[${accuracy01} — ${summary}] ${field} did NOT adopt at fidelity ${accuracy01}, which clears its bar — a telling`
+            + ' faithful enough to be believed left the observer on its old picture',
+          ).toEqual(truthPole[field]);
+        } else {
+          expect.soft(
+            rec[field],
+            `[${accuracy01} — ${summary}] ${field} adopted at fidelity ${accuracy01}, which is BELOW its bar — the stale prior`
+            + ' is the fog-of-war feature and a garbled telling must not overturn a settled view',
+          ).toEqual(stalePole[field]);
+        }
       }
     }
   });
@@ -415,22 +420,26 @@ describe('SP-B R1 — the fold arm reached through the REAL beliefMap advance', 
     expect(new Set(flagsNamed).size, 'two rows spell the same family flag').toBe(FLAGS.length);
   });
 
-  test.each(ONE_FAMILY_LIT)('INDEPENDENCE AT THE ENGINE: $family alone yields $field and nothing else', ({ field, rules }) => {
-    const prior = coldStart(worldBefore(), rules);
-    const rec = legOf(warmAdvance({ world: AFTER, rules, prior, accuracy01: 0.9 }));
-    expect(rec, 'the single-family drive dropped the pair entirely').toBeTruthy();
-    expect(rec.lastUpdateTick, 'the single-family drive did not reach the reconcile branch').toBe(RECONCILE_TICK);
-    // PRESENT first: this is what stops the absence below from being the vacuous kind. A
-    // fidelity of 0.9 clears every bar, so the one lit family must have adopted a real word.
-    expect(rec[field], `${field} is absent though its own family is the one flag lit`).toBeDefined();
-    // anchored: the SAME pair on the SAME path is asserted above to carry ALL THREE of these
-    // fields under ALL_LIT, so the two absences here measure the OTHER TWO FLAGS and not the
-    // drive. This is the assertion `if (!lit) continue;` dies on at the engine.
-    expect(
-      SUBJECT_AXIS_FIELDS.filter((f) => rec[f] !== undefined),
-      'a family the drive never lit still wrote its field — the per-family gate in'
-      + ' foldSubjectAxes is not holding, and one flag is lighting three surfaces',
-    ).toEqual([field]);
-    expect(rec.populationTrendBand, 'the host D-1 axis fold stopped running').toBeDefined();
+  // Each-family cure (2026-11-05, LANDING-6): the three families loop inside one parameterless
+  // test; every message names its family.
+  test('INDEPENDENCE AT THE ENGINE: each family alone (SCARCITY, CONDITIONS, DEVOTION) yields its own field and nothing else', () => {
+    for (const { family, field, rules } of ONE_FAMILY_LIT) {
+      const prior = coldStart(worldBefore(), rules);
+      const rec = legOf(warmAdvance({ world: AFTER, rules, prior, accuracy01: 0.9 }));
+      expect(rec, `${family}: the single-family drive dropped the pair entirely`).toBeTruthy();
+      expect(rec.lastUpdateTick, `${family}: the single-family drive did not reach the reconcile branch`).toBe(RECONCILE_TICK);
+      // PRESENT first: this is what stops the absence below from being the vacuous kind. A
+      // fidelity of 0.9 clears every bar, so the one lit family must have adopted a real word.
+      expect(rec[field], `${family}: ${field} is absent though its own family is the one flag lit`).toBeDefined();
+      // anchored: the SAME pair on the SAME path is asserted above to carry ALL THREE of these
+      // fields under ALL_LIT, so the two absences here measure the OTHER TWO FLAGS and not the
+      // drive. This is the assertion `if (!lit) continue;` dies on at the engine.
+      expect(
+        SUBJECT_AXIS_FIELDS.filter((f) => rec[f] !== undefined),
+        `${family}: a family the drive never lit still wrote its field — the per-family gate in`
+        + ' foldSubjectAxes is not holding, and one flag is lighting three surfaces',
+      ).toEqual([field]);
+      expect(rec.populationTrendBand, `${family}: the host D-1 axis fold stopped running`).toBeDefined();
+    }
   });
 });

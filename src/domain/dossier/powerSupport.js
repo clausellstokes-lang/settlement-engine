@@ -51,6 +51,7 @@ import { institutionBackingFactionName } from '../display/institutionProfile.js'
 import { factionArchetype, FACTION_ARCHETYPES as A } from '../factionArchetypes.js';
 import { governingFactionOf, nameOf } from '../rulingPower.js';
 import { walkUserEdits } from '../userEdits.js';
+import { BACKS_SEPARATOR, formatBacksValue, parseBacksValue } from '../userEditLines.js';
 import { backingRowFor } from '../../data/institutionBacking.js';
 
 /**
@@ -123,26 +124,9 @@ const BASIS_RANK = Object.freeze({ authored: 0, founded: 1, aligned: 2, default:
  * a string, because every reader of an edit record (the AI overlay's verbatim pass, the
  * export, the Edited count) reads prose. These two helpers are the only spellers.
  */
-export const BACKS_SEPARATOR = ' · ';
-
-/** @param {unknown} value @returns {string[]} the names, trimmed, deduplicated (first spelling kept) */
-export function parseBacksValue(value) {
-  if (typeof value !== 'string') return [];
-  /** @type {string[]} */ const out = [];
-  const seen = new Set();
-  for (const part of value.split(/[·,;\n]/)) {
-    const name = part.trim();
-    const key = name.toLowerCase();
-    if (!name || seen.has(key)) continue;
-    seen.add(key); out.push(name);
-  }
-  return out;
-}
-
-/** @param {readonly string[]} names @returns {string} */
-export function formatBacksValue(names) {
-  return parseBacksValue((names || []).join(BACKS_SEPARATOR)).join(BACKS_SEPARATOR);
-}
+// RUNG1B-F8: the spelling lives in the leaf the faction rename re-keys it through
+// (domain/userEditLines.js), so a renamed power keeps the house the DM put behind it.
+export { BACKS_SEPARATOR, parseBacksValue, formatBacksValue };
 
 /**
  * @typedef {Object} HouseBack

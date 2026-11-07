@@ -37,6 +37,8 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import { TERRAIN_WEIGHTS } from '../../src/generators/steps/resolveConfig.js';
 
 export const DEFAULT_COUNT = 1_200;
+/** Judgments the receipt carries for the page's own use (SELF-VOUCH's battery verdict), not as certification. */
+export const ADVISORY_JUDGMENT_IDS = Object.freeze(['record_coherence_battery']);
 const MAX_EXAMPLES = 20;
 const FORMAL_JUDGMENT_IDS = Object.freeze([
   'hard_structural_validity',
@@ -46,6 +48,7 @@ const FORMAL_JUDGMENT_IDS = Object.freeze([
   'dramatic_tension',
   'diversity_and_repetition',
   'confidence_and_provenance',
+  'record_coherence_battery',
 ]);
 
 const TERRAIN_VALUES = Object.freeze(
@@ -247,7 +250,9 @@ export function inspectSettlement(settlement, config) {
       );
     }
     for (const judgment of receipt.judgments || []) {
-      if (judgment?.status === 'needs_review') {
+      // I2 (the chair, 2026-11-04): an ADVISORY judgment is not a certification failure; the soak
+      // review counts the battery's verdict on its own line (soak-review/checks.mjs).
+      if (judgment?.status === 'needs_review' && !ADVISORY_JUDGMENT_IDS.includes(judgment?.id)) {
         addFinding(
           findings,
           'receipt_judgment_failed',
@@ -275,11 +280,14 @@ export function inspectSettlement(settlement, config) {
     );
   }
   const range = POPULATION_RANGES[settlement?.tier];
+  // I3 (the chair, 2026-11-04, on X-46 car 1b): the metropolis band is open above its floor; its
+  // `max` is the body of the random roll, not a ceiling (the roll thins past it to a million).
+  const ceiling = settlement?.tier === 'metropolis' ? Infinity : range?.max;
   if (
     !range
     || !Number.isFinite(settlement?.population)
     || settlement.population < range.min
-    || settlement.population > range.max
+    || settlement.population > ceiling
   ) {
     addFinding(
       findings,

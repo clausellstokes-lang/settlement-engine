@@ -113,10 +113,15 @@ describe('tier scaling — population grows with tier', () => {
 // generator contract (400/400 for each tier). Villages may or may not.
 
 describe('enforcement institution prevalence', () => {
+  // RE-KEYED 2026-11-04 (X-46 car 3, the institution budget; the chair's ruling 6(b)): the
+  // premise moved by design. Every town's REQUIRED Town watch is tagged `law_enforcement` /
+  // `defense`, outside TAG_GROUPS.ENFORCEMENT, so this test was always satisfied by OPTIONAL
+  // rows — and a small town now rolls few of those (the count follows the population). The
+  // watch itself is enforcement, so it is read here alongside the group.
   it('every town carries an enforcement institution', () => {
     const towns = generateMany({ settType: 'town', culture: 'germanic' });
     const withEnforcement = towns.filter(s =>
-      s.institutions.some(i => hasAnyTag(i, TAG_GROUPS.ENFORCEMENT))
+      s.institutions.some(i => hasAnyTag(i, TAG_GROUPS.ENFORCEMENT) || hasAnyTag(i, ['law_enforcement']))
     );
     expect(withEnforcement.length).toBe(towns.length);
   });

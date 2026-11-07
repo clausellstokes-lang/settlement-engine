@@ -82,7 +82,27 @@ describe('the knowledge desk — the non-omniscient Herald golden (captured firs
     // 475 → 473 at FOOD-2 (ODQ §934.104, 2026-11-03; record docs/shift-records/2026-11-03-food-2-food-base-numbers.json):
     // the food base numbers read one terrain table and draw the hinterland as supply, so the pulse's food pressure
     // re-deals the year again and the year-one desk carries two fewer items (473 → 471). The misjudgment ids do not move.
-    expect(Object.keys(manifest)).toHaveLength(473);
+    // 473 → 462 at X-46 CAR 1 (THE OWNER'S HISTORICAL BANDS) (ODQ §934.105, RUNG 1 OF THE SOAK LADDER, 2026-11-04; record docs/shift-records/2026-11-04-rung1-01-x46-car-1-bands.json): the step re-deals the realm's year and the year-one desk files
+    // 11 fewer items (473 → 462).
+    // 462 → 463 at X-46 CAR 2 (LANE X46-2-THRESHOLDS) (ODQ §934.105, RUNG 1 OF THE SOAK LADDER, 2026-11-04; record docs/shift-records/2026-11-04-rung1-02-x46-car-2-thresholds.json): the step re-deals the realm's year and the year-one desk files
+    // 1 more items (462 → 463).
+    // 463 → 473 at FOOD-EXPORTS (WITH FOOD-4) (ODQ §934.105, RUNG 1 OF THE SOAK LADDER, 2026-11-04; record docs/shift-records/2026-11-04-rung1-07-food-exports.json): the step re-deals the realm's year and the year-one desk files
+    // 10 more items (463 → 473).
+    // 473 → 475 at T1/T2 (THE DRY RUN §4'S TWO PROPOSALS, ADOPTED BY THE CHAIR) (ODQ §934.105, RUNG 1 OF THE SOAK LADDER, 2026-11-04; record docs/shift-records/2026-11-04-rung1-10-t1-t2-siege-stores.json): the step re-deals the realm's year and the year-one desk files
+    // 2 more items (473 → 475).
+    // 475 → 395 at X-46 CAR 3 (LANE X46-3-BUDGET) (ODQ §934.105, RUNG 1 OF THE SOAK LADDER, 2026-11-04; record docs/shift-records/2026-11-04-rung1-12-x46-car-3-budget.json): the institution budget re-deals the realm's year and the year-one desk files
+    // 80 fewer items (475 → 395).
+    // 395 → 400 at PLACE-NOT-TIER (R6, UNITS 1–2) (ODQ §934.105, RUNG 1 OF THE SOAK LADDER, 2026-11-04; record docs/shift-records/2026-11-04-rung1-15-place-not-tier.json): the step re-deals the realm's year and the year-one desk files
+    // 5 more items (395 → 400).
+    // 400 → 434 at PINS, FIRST STEP (UNITS 1–3 AND THE CHAIR'S ADDENDUM) (ODQ §934.105, RUNG 1 OF THE SOAK LADDER, 2026-11-04; record docs/shift-records/2026-11-04-rung1-17-pins-1-density-exemptions.json): the step re-deals the realm's year and the year-one desk files
+    // 34 more items (400 → 434).
+    // 434 → 436 at X-46 CAR 3, I7 (ODQ §934.105, RUNG 1 OF THE SOAK LADDER, 2026-11-04; record docs/shift-records/2026-11-04-rung1-19-x46-car-3-i7-realised.json): the step re-deals the realm's year and the year-one desk files
+    // 2 more items (434 → 436).
+    // 436 → 434 at F6 BUDGET-FLOOR (UNITS 1–4) (ODQ §934.105, RUNG 1 OF THE SOAK LADDER, 2026-11-04; record docs/shift-records/2026-11-04-rung1-22-f6-budget-floor.json): the step re-deals the realm's year and the year-one desk files
+    // 2 fewer items (436 → 434).
+    // 434 → 435 at F1 DEFENCE-WORDS, FIRST STEP (UNITS 1–5) (ODQ §934.105, RUNG 1 OF THE SOAK LADDER, 2026-11-04; record docs/shift-records/2026-11-04-rung1-23-f1-defence-words.json): the step re-deals the realm's year and the year-one desk files
+    // 1 more items (434 → 435).
+    expect(Object.keys(manifest)).toHaveLength(435);
   });
 
   it('the declared refile set is exactly the knowledge desk the routing table carries', () => {
@@ -125,10 +145,17 @@ describe('the knowledge desk — the non-omniscient Herald golden (captured firs
       // Re-dealt again at J33 (2026-10-01): one beat mints at a new id. Still three, still all on knowledge.
       // Re-dealt at FOOD-1 (2026-11-03, ODQ §934.104): the food pressure re-deals the year; one beat mints at a new id
       // (soak-d -> soak-b, week 47). Still three, still all on knowledge.
+      // Re-dealt at X-46 CAR 1 (THE OWNER'S HISTORICAL BANDS) (ODQ §934.105, RUNG 1 OF THE SOAK LADDER, 2026-11-04; record docs/shift-records/2026-11-04-rung1-01-x46-car-1-bands.json): the step re-deals the year;
+      // the year's misjudgment beats are now 4 (10, 4, 47, 49), all on knowledge.
+      // Re-dealt at X-46 CAR 3 (LANE X46-3-BUDGET) (ODQ §934.105, RUNG 1 OF THE SOAK LADDER, 2026-11-04; record docs/shift-records/2026-11-04-rung1-12-x46-car-3-budget.json):
+      // the institution budget re-deals the year; the year's misjudgment beats are now 2 (4, 45), all on knowledge.
+      // Re-dealt at PINS, FIRST STEP (UNITS 1–3 AND THE CHAIR'S ADDENDUM) (ODQ §934.105, RUNG 1 OF THE SOAK LADDER, 2026-11-04; record docs/shift-records/2026-11-04-rung1-17-pins-1-density-exemptions.json):
+      // the step re-deals the year; the year's misjudgment beats are now 3 (4, 42, 49), all on knowledge.
+      // Re-dealt at F1 DEFENCE-WORDS, FIRST STEP (UNITS 1–5) (ODQ §934.105, RUNG 1 OF THE SOAK LADDER, 2026-11-04; record docs/shift-records/2026-11-04-rung1-23-f1-defence-words.json):
+      // the step re-deals the year; the year's misjudgment beats are now 2 (4, 42), all on knowledge.
       expect(misjudged).toEqual([
-        'wizard_news.10.belief_misjudgment.soak-a.soak-c',
         'wizard_news.4.belief_misjudgment.soak-a.soak-c',
-        'wizard_news.47.belief_misjudgment.soak-d.soak-b',
+        'wizard_news.42.belief_misjudgment.soak-a.soak-c',
       ]);
       for (const id of misjudged) {
         expect(live.sections[id]).toBe('knowledge');

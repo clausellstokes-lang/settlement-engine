@@ -164,7 +164,12 @@ describe('CAPACITY C2 — THE READING: how much room does this town have left', 
       place({ population: 400 }),
       place(),
       place({ tier: 'thorp', population: 200, dailyProduction: 200 }),
-      place({ tier: 'city', population: 40000, dailyProduction: 900000 }),
+      // ⚠ RE-KEYED BY IDENTITY (LANDING-7 R-E8, 2026-11-06): the city's DENSITY_CEILINGS moved
+      // 38,000 -> 22,798 (the ceilings follow the STAMP-band maxima), so the walls-bound city
+      // that read `pressed` at 40,000 / 43,700 (0.915) now overflows. Its population follows
+      // the ceiling by the same factor (40,000 x 22,798 / 38,000 = 23,998 ~ 24,000), and the
+      // fixture keeps its occupancy and its rung.
+      place({ tier: 'city', population: 24000, dailyProduction: 900000 }),
       place({ population: 3000, dailyProduction: 400, deficitPct: 40 }),
       place({ food: false }),
     ];
@@ -187,7 +192,8 @@ describe('CAPACITY C2 — THE READING: how much room does this town have left', 
   });
 
   test('no band token reaches the surface: the four chips render CHIP_LABELS text, never a ladder word', () => {
-    const view = read(place({ tier: 'city', population: 40000, dailyProduction: 900000 }));
+    // the same walls-bound city as the vocabularies arm above, re-keyed with it (R-E8)
+    const view = read(place({ tier: 'city', population: 24000, dailyProduction: 900000 }));
     expect(view).not.toBeNull();
     // anchored: the non-null assertion above proves the chips below come from a real view
     const chips = readingChipsOf(view);

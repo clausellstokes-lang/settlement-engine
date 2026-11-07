@@ -236,7 +236,7 @@ const ROWS = Object.freeze({
   'Town crier': { shares: { [G]: 1 }, weight: 1 },
 
   // ── Infrastructure ──────────────────────────────────────────────────────────────────────
-  'Dwellings (4-16)': { shares: { [G]: 1 }, weight: 0 },
+  'Dwellings (1-8)': { shares: { [G]: 1 }, weight: 0 },
   'Water source': {
     shares: { [G]: 1 }, weight: 0,
     at: { 'Aqueduct or water system': { weight: 2 }, 'Advanced water infrastructure': { weight: 2 } },
@@ -269,6 +269,7 @@ const ROWS = Object.freeze({
       'Professional city watch': { shares: { [W]: 0.8, [G]: 0.2 }, weight: 3 },
     },
   },
+  'Village watch': { shares: { [G]: 0.6, [W]: 0.4 }, fallback: G, weight: 1 }, // F1: the village rung
   'Barracks': {
     shares: { [W]: 1 }, fallback: G, weight: 2,
     at: { 'Garrison': { weight: 3 }, 'Multiple garrisons': { weight: 3 } },

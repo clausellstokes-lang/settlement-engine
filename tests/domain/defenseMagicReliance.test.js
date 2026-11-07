@@ -36,8 +36,15 @@ beforeAll(async () => {
 });
 
 describe('the Arcane Support row reads the practitioner census', () => {
-  it('a village that practises (seed d2-magic-village-66-0) is Present, and its practitioner is named', () => {
-    const s = born('village', 'd2-magic-village-66-0', { magicExists: true, priorityMagic: 66 });
+  // ⭐ RE-KEYED BY IDENTITY (LANDING-7 lane D, 2026-11-06). The seeds below were 66-0 and 30-2.
+  // 66-0's practitioner was its 'Healer (divine, 1st level)' house; the X-46-3 institution budget
+  // (compose 90dc22f18) no longer seats it (34 → 14 houses at 190 souls), so the census found no
+  // one. 30-2 had no practising house; the RUNG1B-F1 defence-words compose (5e9ffb220) re-rolled
+  // its roster and it now seats that same healer, which the census counts. The first seed of each
+  // family meeting the arm's own premise, measured over 66-0..11 and 30-0..7: 66-10 (the same
+  // divine-healer practitioner) and 30-0 (none). The readings are unchanged.
+  it('a village that practises (seed d2-magic-village-66-10) is Present, and its practitioner is named', () => {
+    const s = born('village', 'd2-magic-village-66-10', { magicExists: true, priorityMagic: 66 });
     const practitioners = magicPractitioners(s);
     expect(practitioners.length, 'the census finds a practitioner here').toBeGreaterThan(0);
     const row = arcaneRow(s);
@@ -46,7 +53,7 @@ describe('the Arcane Support row reads the practitioner census', () => {
   });
 
   it('a practising person counts: a Hedge Witch on the rolls of a village with no arcane house', () => {
-    const s = born('village', 'd2-magic-village-30-2', { magicExists: true, priorityMagic: 30 });
+    const s = born('village', 'd2-magic-village-30-0', { magicExists: true, priorityMagic: 30 });
     expect(magicPractitioners(s), 'no practitioner before the witch is added').toEqual([]);
     expect(arcaneRow(s)?.note, 'the no-practitioner note before').toMatch(/^No arcane practitioners on the rolls/);
     const npcs = [...(s.npcs || []), { name: 'Wenna Holt', role: 'Hedge Witch', status: 'active' }];

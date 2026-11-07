@@ -74,7 +74,7 @@ import { ATOMIC_COLLECTIONS, CROSS_ENTRY_TOTALS, KEYED_COLLECTIONS } from '../..
 import { censusCorpus } from '../helpers/generationForkCensus.js';
 
 /** The live roster length, the anti-vacuity floor every set equality here rests on. */
-const REGISTERED_STEPS = 22;
+const REGISTERED_STEPS = 23; // lane CRISIS (2026-11-03): resolveCrisisCast joins (22 -> 23)
 
 /** The census corpus's own declared row count (EM-P2's 63): the floor A3's join figures rest on. */
 const CENSUS_ROWS = 63;

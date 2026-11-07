@@ -321,7 +321,37 @@ const SENTINEL = 'settlementforge:generation:worker-v1';
 // shared leaf module for DM_ID_NS is filed for the next window. MEASURED by a fresh `vite build` at the composed tip
 // abf9338af (generation.worker-DRWBjLQU.js, 1,491,837 B) against a git archive of the lane's previous commit 2e95daeb8.
 // MONOTONE-DOWN from here.
-export const WORKER_BUNDLE_CEILING_BYTES = 1491837;
+// 1,491,837 -> 1,573,556 (2026-11-04, THE RUNG-1 LANDING, door 12 taken by the landing seat under the chair's brief LANDING-1
+// item 11, "re-record ONLY at the measured figure with every byte attributed to a lane"): A RISE OF 81,719 B, VETOABLE BY
+// THE OWNER. MEASURED by a fresh `vite build` of a git archive at EVERY src-moving first-parent step of the rung-1 window
+// (39038801b..bf263a78d), the worker bytes being the file's size; the window base 39038801b builds 1,491,801 and the
+// window tip 54daafda3 1,573,520, and the merge with the integration tip adds only its own attributed +36:
+//   CRISIS compose d3e072368 +131,205 (crisis3 9738e6d21 -132) · SELF-VOUCH compose 0be13b5cb -73,482 ·
+//   F1 defence words 5e9ffb220 +3,862 · F10 walls word 54daafda3 +3,061 · x46-3 budget 90dc22f18 +2,726 ·
+//   terrain-pools ac09ea83b +2,421 · F4 crime signal ba9fde402 +1,788 · rung1-truth ff4448d2e +1,737 (final 844acaccc -20) ·
+//   F6 budget floor 6d84aa834 +1,385 · tier-noun-pools a9982e3b9 +1,211 · F3 food words db8ce5da8 +1,137 ·
+//   Register VII lit 3420d01e3 +646 · F5 instruments 7e28a6331 +605 (unit 6 +8) · R6 place-not-tier 6129c300d +555 ·
+//   the receipt's kind 7 cdc949867 +551 · food-exports 63bb72785 +397 · x46-1b 79c442330 +344, final fb0341b93 +395 ·
+//   x46-4 c7d068169 +373 · rung1-pins 37b1e746d +309, final 11467ed57 +32 · rung1-n1 513e1bf11 +230, final 4fb9cc5e6 +274 ·
+//   x46-train 1264a8152 +100 · x46-2 d4bf6431c -15 · T1/T2 fe56bddd4 +10 · F2 272af44f3 +6 (with the test-only steps
+//   before it) · every other step 0 (soak2, hooks-under-stress, quarters-off, services-once, faith-pools, F7, F8, F9,
+//   READER-INSTRUMENTS, the docs and test steps). The sum closes exactly: 1,491,801 + 81,719 = 1,573,520, and the merge's +36 makes 1,573,556.
+//   The landed tip measures 1,573,556 B (generation.worker-BNd8BSQT.js). The ceiling is recorded AT the measured figure.
+// MONOTONE-DOWN from here.
+// 1,573,556 -> 1,574,838 (2026-11-06, THE RUNG-1 LANDING'S PROOF, LANDING-8 under the chair's brief LANDING-8 unit 4,
+// "the ceiling moves ONLY to the measured figure with every byte attributed by first-parent step"): A RISE OF 1,282 B,
+// VETOABLE BY THE OWNER. MEASURED by a fresh `vite build` of a git archive at every src-moving first-parent step from the
+// last re-record 5dd0f323a (1,573,556, reproduced) to the landing base 3d8a74e4b, and of the staged tree at every
+// src-moving step of LANDING-7 (3d8a74e4b..18fd6b442), the worker bytes being the file's size:
+//   before LANDING-7 (+492, the base already over): the Village watch's category 9cff32dd9 +56 · hasMarketInstitution and the
+//   role catalogue to domain 3b93b9057 +6 · the pre-chain trade lists dbd17ae05 +238 · the V-SUMMARY-HOOKS cure c1cf38bbb
+//   +192 · every other step 0 (the calibration re-records, c5c7454a7, bc2a64000, FIRSTPAINT-2 970adf01d, 69a7d7000,
+//   the types step 3d8a74e4b) — 1,574,048 at the base;
+//   LANDING-7 (+790): lane D b37bbf395 +230 · lane F's first merge 3da1104da +402 · lane G 64ad4fe47 +116 · lane H
+//   18fd6b442 +42 (each a merge of several commits; the bytes are attributed to the step, not inside it) · lanes B, C, G3, F2-4, A, E 0.
+//   The sum closes exactly: 1,573,556 + 492 + 790 = 1,574,838, the tip's generation.worker-MaAIxfqL.js.
+// The ceiling is recorded AT the measured figure. MONOTONE-DOWN from here.
+export const WORKER_BUNDLE_CEILING_BYTES = 1574838;
 
 const source = (path) => readFileSync(join(ROOT, path), 'utf8');
 

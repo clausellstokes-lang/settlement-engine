@@ -23,6 +23,7 @@ import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 // addresses its row by the golden's own key function rather than rebuilding a config, so
 // a corpus edit moves the row here instead of silently selecting a different settlement.
 import { goldenCorpus, keyOf } from '../helpers/goldenMasterCorpus.js';
+import { recordInvariants } from '../../src/domain/edit/recordInvariants.js';
 
 const gen = (config, seed) => generateSettlementPipeline(config, null, { seed, customContent: {} });
 
@@ -390,9 +391,13 @@ describe('FIX-G1 — the viability summary counts the list the record publishes'
 
     // …and the sentence counts the PUBLISHED list, not that second drawer. Pre-cure this
     // read 4 against a list of 3 (measured at b5c28d8e2).
+    // RE-KEYED 4 → 3 BY IDENTITY (LANDING-7 lane D, 2026-11-06): the X-46-3 institution budget
+    // (compose 90dc22f18, lane/x46-3-budget at 4bfd2d698) no longer seats this desert town's
+    // Brewery, so "Brewery: requires water access" left the PUBLISHED list (Mills, Dyer, the
+    // grain import remain) and the sentence followed it, 4 → 3, with the habitat above intact.
     expect(statedCount(v.summary), 'the headline stated no count at all').not.toBeNull();
     expect(statedCount(v.summary)).toBe((v.dependencies || []).length);
-    expect(statedCount(v.summary)).toBe(4);
+    expect(statedCount(v.summary)).toBe(3);
     // The record's three readings of one fact now agree, which is the invariant.
     expect(v.metrics.dependencyCount).toBe((v.dependencies || []).length);
   });
@@ -416,6 +421,59 @@ describe('FIX-G1 — the viability summary counts the list the record publishes'
     // corpus edit cannot red this, while a corpus that stopped producing the sentence does.
     expect(stating, 'no row stated a dependency count — the sweep judged nothing').toBeGreaterThan(300);
     expect(offenders, `\n${offenders.join('\n')}\n`).toEqual([]);
+  }, 120_000);
+});
+
+/**
+ * ── STOP-1 · THE WRITER AND ITS VIEW DERIVE THE PER CENT FROM THE POUNDS THEY PUBLISH ─────
+ * (LANDING-7 lane H, the chair's ruling R-H5, option C, 2026-11-06.)
+ *
+ * Both cards publish integer pounds beside an integer per cent, and a per cent carried
+ * independently of those pounds splits from them on a small need. The WRITER
+ * (`foodGenerator.js :: generateFoodSecurity`) took its share from the UNROUNDED gap: on the
+ * 17 golden thorps whose gap is a third of a pound (`dailyNeed` 32) it published `deficit 0`
+ * beside `deficitPct 1`, which is the sign broken at the single writer itself. Its VIEW
+ * (`foodBalance.js :: deriveFoodBalanceAnalysis`) floored those 0 lb at 1 lb (lane D) and
+ * published `deficit 1` beside `deficitPercent 1`, where 1 lb of 32 is 3%: the record's own
+ * `V-FOOD-PCT` refuses it. MEASURED at the parent (`ba4366c83`) over the 525: the writer's
+ * sign broken on 17 rows, the view's share on 17. A view cannot hold its sign, its share and
+ * the writer's sign together over a writer that contradicts itself, so the cure is at the
+ * writer (its per cent is the share its rounded pounds are of its rounded need) and the view
+ * derives its per cent from the pounds it publishes, by the same rounding. No floor anywhere.
+ * The CONTRADICTION KILLER above holds the cross-card sign on its own 252-config sweep.
+ */
+describe('STOP-1 — the food writer and its view derive the per cent from the pounds they publish', () => {
+  it('over the golden corpus, no card publishes a per cent its own pounds do not give', () => {
+    const offenders = { writerSign: [], viewSign: [], viewShare: [] };
+    let gaps = 0;
+    let smallNeed = 0;
+    for (const row of goldenCorpus()) {
+      const { _seed, ...cfg } = row;
+      const s = generateSettlementPipeline(cfg, null, { seed: _seed, customContent: {} });
+      const fs = s.economicState?.foodSecurity || {};
+      const fb = s.economicViability?.metrics?.foodBalance || {};
+      if ((fs.deficitPct || 0) > 0) gaps += 1;
+      if (fs.dailyNeed > 0 && fs.dailyNeed < 100) smallNeed += 1;
+      // (a) THE WRITER: never 0 lb beside a positive per cent. (The converse, a few pounds
+      // beside 0% on a large need, is the share law holding: 15 lb of 3,216 is 0%, measured on
+      // `town|germanic|mountain|random_trade|civilized|gm-seed-a`, and `V-FOODSEC-PCT` judges it.)
+      if (!((fs.deficit || 0) > 0) && (fs.deficitPct || 0) > 0) {
+        offenders.writerSign.push(`${keyOf(row)}: ${fs.deficit} lb beside ${fs.deficitPct}% of ${fs.dailyNeed}`);
+      }
+      // THE VIEW'S SIGN, the law lane D's floor was laid for, held without the floor.
+      if (((fb.deficit || 0) > 0) !== ((fb.deficitPercent || 0) > 0)) {
+        offenders.viewSign.push(`${keyOf(row)}: ${fb.deficit} lb beside ${fb.deficitPercent}% of ${fb.dailyNeed}`);
+      }
+      // (b) THE VIEW'S SHARE: the record's own invariant, read through its own module.
+      if (recordInvariants(s).some((v) => v.id === 'V-FOOD-PCT')) {
+        offenders.viewShare.push(`${keyOf(row)}: ${fb.deficit} lb beside ${fb.deficitPercent}% of ${fb.dailyNeed}`);
+      }
+    }
+    // NON-VACUITY: the corpus reaches a gap, and the small-need habitat where rounding bites
+    // (measured: 286 rows with a gap at the parent and 257 after the cure, 84 with a need under 100 lb).
+    expect(gaps, 'no golden row carries a food gap, so the sweep judged nothing').toBeGreaterThan(200);
+    expect(smallNeed, 'no golden row has a need under 100 lb, so rounding is never tested').toBeGreaterThan(60);
+    expect(offenders).toEqual({ writerSign: [], viewSign: [], viewShare: [] });
   }, 120_000);
 });
 

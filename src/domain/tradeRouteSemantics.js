@@ -191,3 +191,27 @@ export const GENERATED_ROUTE_VALUES = Object.freeze([
 export const SELECTABLE_ROUTE_VALUES = Object.freeze([
   ...GENERATED_ROUTE_VALUES, 'mountain_pass',
 ]);
+
+/**
+ * THE WATER A BOAT OR A NET COULD USE (soak 1000 row 7, A-11: sea words in landlocked places).
+ * The one reading of whether a settlement sits on the sea, on a river, or on neither, from the
+ * two facts every record carries (`config.terrainType`, `config.tradeRouteAccess`). Moved here
+ * WHOLE from `generationContext.js :: createGenerationWorldLaw` (its `maritimeSupported` /
+ * `riverTradeSupported` pair) so the domain readers — the quick guide's culture line — read the
+ * same rule the world law does, not a second copy of it.
+ *
+ * An explicit port route proves ocean access unless riverside terrain disambiguates it as an
+ * inland river port. Hills and cliffs can still host a seaport; requiring the coarse terrain
+ * label itself to be `coastal` incorrectly invalidated those legitimate port configurations.
+ *
+ * @param {string|null|undefined} terrainType
+ * @param {string|null|undefined} tradeRoute raw route value; absent reads as `road`
+ * @returns {'maritime'|'river'|'none'}
+ */
+export function waterAccessKind(terrainType, tradeRoute) {
+  const terrain = String(terrainType || '').toLowerCase();
+  const route = String(tradeRoute || 'road').toLowerCase();
+  if (terrain === 'coastal' || (route === 'port' && terrain !== 'riverside')) return 'maritime';
+  if (route === 'river' || terrain === 'riverside') return 'river';
+  return 'none';
+}

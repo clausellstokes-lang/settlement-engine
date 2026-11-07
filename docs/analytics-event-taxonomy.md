@@ -17,7 +17,7 @@ email, body, label`.
 |---|---|
 | `duration_band` / `dwell_ms_band` | `lt_5s` · `5_15s` · `15_60s` · `1_5m` · `5_30m` · `gt_30m` |
 | day-gap bands | `same_day` · `1_3d` · `4_7d` · `8_30d` · `gt_30d` |
-| `population_band` | `hamlet_lt100` · `village_100_500` · `small_town_500_2k` · `town_2k_10k` · `city_gt_10k` |
+| `population_band` | `hamlet_lt100` · `village_100_500` · `small_town_500_2k` · `town_2k_10k` · `city_gt_10k` — fixed numeric buckets (<100, <500, <2,000, <10,000, 10,000+) kept stable for trend continuity. The names are bucket labels, not tiers: the settlement tiers follow the owner's historical table (thorp 5–30, hamlet 20–100, village 75–400, town 300–2,500, city 2,000–15,000, metropolis 15,000+; `src/data/constants.js :: POPULATION_RANGES`, X-46 car 1, ODQ §934.104), and the event's `tier` field carries the tier itself. |
 | `credits_remaining_band` | `zero` · `1_5` · `6_20` · `gt_20` |
 | causal bands (`CAUSAL_BANDS`, `src/domain/causalState.js:89`) | `surplus` · `adequate` · `strained` · `critical` · `collapsed` |
 | `power_band` / generic 5-band | quintile banding of the underlying 0–100 / raw score |

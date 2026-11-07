@@ -100,6 +100,11 @@ function fixture() {
     factions: [{ id: 'fac.guild', name: 'Merchant Guild', members: [{ id: NPC_ID, name: 'Lord Varn' }] }],
     relationships: [{ npc1Name: 'Lord Varn', npc2Name: 'Mira' }],
     interSettlementRelationships: [{ npcName: 'Lord Varn', partnerName: 'Ilsa' }],
+    // RUNG1B-F7: the crisis cast names the person on a role row and as a lever's holder; one
+    // record holds each container in ONE shape, so the cast sits at `stress` (an entry object)
+    // and `stressors` (an array) here.
+    stress: { type: 'famine', cast: { roles: [{ role: 'lever', kind: 'npc', id: NPC_ID, name: 'Lord Varn' }], levers: [{ institution: 'Town granary', holderId: NPC_ID, holderName: 'Lord Varn' }] } },
+    stressors: [{ type: 'famine', cast: { roles: [{ role: 'lever', kind: 'npc', id: NPC_ID, name: 'Lord Varn' }], levers: [{ institution: 'Town granary', holderId: NPC_ID, holderName: 'Lord Varn' }] } }],
     powerStructure: { factions: [{ id: 'fac.guild', faction: 'Merchant Guild', power: 40 }], conflicts: [] },
     institutions: [{ id: 'inst.market', name: 'Market' }],
     history: { historicalEvents: [], currentTensions: [] },
@@ -145,8 +150,15 @@ function renameSurfaceValues(settlement) {
     'relationships[].npc1Name': settlement.relationships[0].npc1Name,
     'relationships[].npc2Name': settlement.relationships[0].npc2Name,
     'interSettlementRelationships[].npcName': settlement.interSettlementRelationships[0].npcName,
+    'stress.cast.roles[].name': settlement.stress.cast.roles[0].name,
+    'stress.cast.levers[].holderName': settlement.stress.cast.levers[0].holderName,
+    'stressors[].cast.roles[].name': settlement.stressors[0].cast.roles[0].name,
+    'stressors[].cast.levers[].holderName': settlement.stressors[0].cast.levers[0].holderName,
   };
 }
+
+/** The two cast homes of the OTHER container shape, which one record cannot also carry (RUNG1B-F7). */
+const OTHER_SHAPE_HOMES = Object.freeze(['stress[].cast.', 'stressors.cast.']);
 
 describe('EM-C4a — the store plain-edit half', () => {
   it('A1 — MAIN: a set-field edit on a DRAFT applies through the one adapter, the record carries the value, the layer records one root key, and neither input is mutated', async () => {
@@ -190,7 +202,8 @@ describe('EM-C4a — the store plain-edit half', () => {
     // Anchored on the frozen export: every declared surface has a value here, and the
     // four that name THIS person all moved while the fifth (the other end of the edge)
     // did not, so the cascade is measured rather than a blanket overwrite.
-    expect([...NPC_RENAME_SURFACES].map((surface) => surface.path).sort(compareCodepoint))
+    expect([...NPC_RENAME_SURFACES].map((surface) => surface.path)
+      .filter((path) => !OTHER_SHAPE_HOMES.some((home) => path.startsWith(home))).sort(compareCodepoint))
       .toEqual(Object.keys(after).sort(compareCodepoint));
     expect(after).toEqual({
       'npcs[].name': 'Lady Varn',
@@ -198,6 +211,10 @@ describe('EM-C4a — the store plain-edit half', () => {
       'relationships[].npc1Name': 'Lady Varn',
       'relationships[].npc2Name': 'Mira',
       'interSettlementRelationships[].npcName': 'Lady Varn',
+      'stress.cast.roles[].name': 'Lady Varn',
+      'stress.cast.levers[].holderName': 'Lady Varn',
+      'stressors[].cast.roles[].name': 'Lady Varn',
+      'stressors[].cast.levers[].holderName': 'Lady Varn',
     });
     expect(before['factions[].members[].name']).toBe('Lord Varn');
     // The layer still records the override at exactly ONE root key.

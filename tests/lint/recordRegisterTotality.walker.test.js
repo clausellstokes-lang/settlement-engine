@@ -21,6 +21,22 @@
  * EXECUTION: it yields the same 41 top-level keys, the same 63 collection paths and the same
  * split as the full 525-row corpus, at a fraction of the generation cost.
  *
+ * ⭐ THE CORPUS-COVERAGE RUNG (LANDING-7 A, the chair's R-A2′, 2026-11-06; the precedent is the
+ * observed-shape corpus's schema-26 famine pass, ODQ §934.104). `90dc22f18` (X-46 car 3) took
+ * the militia off every one of the 525 configurations, so `defenseProfile.institutions.militia`
+ * is observed in 0 rows of the stride and A3 read a LIVE row as a dead declaration — twelve thorps
+ * outside the corpus still muster the Household levy, and the DM layer keys its edits through
+ * KEYED_COLLECTIONS. COVERAGE_ROWS adds, after the stride, the FIRST thorp that carries militia in
+ * the corpus's own order: the stride's thorp rows (one per terrain, in corpus order) under the
+ * golden master's own seed family (`gm-seed-a`, `gm-seed-b`, `gm-seed-c`), scanned seed-major —
+ * the sixteenth generation, thorp|germanic|hills|road|civilized|gm-seed-c, lands one Household
+ * levy. The row is DERIVED from the stride's own thorp row with only `_seed` replaced, generated
+ * through the same call, and A3 re-proves on every run that it still covers what it was added
+ * for. Measured at e725c55c1: it adds 11 observed paths, every one under the militia collection,
+ * moves no collection's longest array, and leaves KEY_UNPROVEN_AT_LENGTH_ONE as it was (the
+ * militia row is seen exactly once, at length one, so it STAYS). It is not a golden row: the
+ * golden master and the prose drift corpus read `goldenCorpus()`, which is untouched.
+ *
  * ⛔ THREE CONSTRUCTION RULES (packet §6), each with its own instrument:
  *   1. `it`, `test` and `describe` are bound EXACTLY ONCE each — never re-bound, not even as a
  *      callback parameter. The sovereignty-lighting census resolves an opener only where the
@@ -45,10 +61,11 @@
  *     economicState.activeChains[].externalMillNote · powerStructure.factionRelationships[].dmNote
  * 4.  Uniqueness is VACUOUS for the nine KEY_UNPROVEN_AT_LENGTH_ONE rows; A4 names them, it does
  *     not prove them.
- * 5.  Single-observation paths are one bit: defenseProfile.institutions.militia appears in 1 of 63
- *     rows, as do institutions[].exclusiveGroupCoexists, defenseProfile.institutions.magicDef[]
- *     .nativeTier and .coherenceRepair, and economicViability.warnings[].category/.impact/
- *     .suggestedFixes.
+ * 5.  Single-observation paths are one bit: institutions[].exclusiveGroupCoexists,
+ *     defenseProfile.institutions.magicDef[].nativeTier and .coherenceRepair, and
+ *     economicViability.warnings[].category/.impact/.suggestedFixes appear in 1 of 63 rows (as
+ *     measured when this line was written); defenseProfile.institutions.militia appears in 0 of
+ *     the 63 stride rows since `90dc22f18` and in the 1 coverage row (above).
  * 6.  The wizard's RANDOM modes are OFF-CORPUS (settType:'random', culture:'random_culture',
  *     _randomizePriorities — design §21.5 item 8): a key only those configs produce is unseen.
  * 7.  CUSTOM CONTENT is empty (customContent: {}): a compendium-promoted institution or resource can
@@ -123,8 +140,17 @@ const STRIDE = (() => {
   });
 })();
 
+/**
+ * THE CORPUS-COVERAGE RUNG (header): each row is a stride row with only its `_seed` replaced,
+ * named by the declared collection it is there to cover. A3 re-proves the coverage every run.
+ */
+const COVERAGE_ROWS = (() => {
+  const thorpHills = STRIDE.find((row) => row.settType === 'thorp' && row.terrainOverride === 'hills');
+  return [{ covers: 'defenseProfile.institutions.militia', row: { ...thorpHills, _seed: 'gm-seed-c' } }];
+})();
+
 /** Generated through the real pipeline, exactly as the golden master calls it. */
-const ROWS = STRIDE.map((row) => {
+const ROWS = [...STRIDE, ...COVERAGE_ROWS.map((coverage) => coverage.row)].map((row) => {
   const { _seed: seed, ...cfg } = row;
   return { label: keyOf(row), record: generateSettlementPipeline(cfg, null, { seed, customContent: {} }) };
 });
@@ -293,6 +319,20 @@ describe('the record class register — totality over a generated record, in bot
 
     const dead = DECLARED_COLLECTIONS.filter((path) => !CENSUS.collections.has(path));
     expect(sorted(dead), `a declared collection no record carries (a dead declaration):\n${dead.join('\n')}`).toEqual([]);
+
+    // THE COVERAGE RUNG'S OWN LIVENESS: a coverage row that stops carrying the collection it was
+    // added for would leave that row covered by nothing while the dead-declaration arm above went
+    // on reading green on the stride's behalf.
+    const uncovered = COVERAGE_ROWS
+      .filter((coverage) => {
+        const record = ROWS[STRIDE.length + COVERAGE_ROWS.indexOf(coverage)].record;
+        const value = coverage.covers.split('.').reduce((node, key) => node?.[key], record);
+        return !(Array.isArray(value) && value.length > 0);
+      })
+      .map((coverage) => `${keyOf(coverage.row)} no longer carries ${coverage.covers}`);
+    expect(COVERAGE_ROWS.length, 'the coverage rung adds at least one row').toBeGreaterThan(0);
+    // anchored: the line above refuses an empty rung, so an empty `uncovered` is a measured coverage.
+    expect(uncovered, `a coverage row no longer covers its collection:\n${uncovered.join('\n')}`).toEqual([]);
 
     const overlap = Object.keys(KEYED_COLLECTIONS).filter((path) => ATOMIC_COLLECTIONS.includes(path));
     expect(overlap, `KEYED and ATOMIC are disjoint; these appear in both:\n${overlap.join('\n')}`).toEqual([]);

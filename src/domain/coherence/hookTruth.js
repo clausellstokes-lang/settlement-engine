@@ -78,9 +78,11 @@ const VILLAGER_TIERS = new Set(['thorp', 'hamlet', 'village']);
  * @property {{ institutions?: { walls?: unknown, garrison?: unknown, militia?: unknown,
  *   watch?: unknown, mercenary?: unknown, magicDef?: unknown } }} [defenseProfile]
  * @property {unknown} [npcs]
+ * @property {unknown} [factions] the faction rosters, each `members[]` a copy of its NPCs (F10 unit 4)
  * @property {unknown} [conflicts]
  * @property {{ currentTensions?: unknown, historicalEvents?: unknown }} [history]
  * @property {{ plotHooks?: unknown }} [economicViability]
+ * @property {unknown} [stress] the crisis container (one entry or a list); each entry carries its `cast`
  */
 
 /**
@@ -93,6 +95,7 @@ const VILLAGER_TIERS = new Set(['thorp', 'hamlet', 'village']);
  * @property {boolean} famineLicensed may a hook here say "starving"/"banditry"?
  * @property {boolean} foodGap is there a real gap short of a famine?
  * @property {boolean} hasArmedForce a garrison, militia or mercenary company exists
+ * @property {boolean} hasSoldiers a garrison or a hired company exists: what "soldiers" needs
  * @property {boolean} hasGarrison a standing garrison exists
  * @property {boolean} hasWalls settlement fortification exists
  * @property {boolean} hasWatch a watch or militia exists
@@ -169,6 +172,11 @@ export function settlementHookFacts(settlement) {
     foodGap,
     hasGarrison: defense.hasGarrison,
     hasArmedForce: defense.hasGarrison || defense.hasMilitia || defense.hasMercenary,
+    // F10 unit 4 (rung 1C): a militia is not soldiers and not a garrison. The defence-words
+    // check (`defenseWordsFindings.js :: TERMS`) licenses "soldiers" by a garrison or a hired
+    // company and "garrison" by a garrison alone, so this gate reads the same two answers and the
+    // record stops storing a hook the check then convicts (11 of the 1,000 soak settlements).
+    hasSoldiers: defense.hasGarrison || defense.hasMercenary,
     hasWalls: defense.hasWalls,
     hasWatch: defense.hasWatch || defense.hasMilitia,
     hasHospital: defense.hasHospital,
@@ -200,7 +208,9 @@ export function settlementHookFacts(settlement) {
  */
 const WORDS = Object.freeze({
   famine: /\bstarv(?:ing|ation|es|ed|e)\b|\bbanditry\b|\bfamine\b/i,
-  armedForce: /\bgarrisons?\b|\bbarracks\b|\bsoldiers?\b|\bmen[- ]at[- ]arms\b/i,
+  armedForce: /\bmen[- ]at[- ]arms\b/i,
+  garrison: /\bgarrisons?\b|\bbarracks\b/i,
+  soldiers: /\bsoldiers?\b/i,
   walls: /\b(?:town|city|settlement|curtain) walls?\b|\bthe walls of the (?:town|city|settlement)\b|\bramparts?\b|\bbattlements?\b|\bgatehouse\b|\bpalisade\b/i,
   watch: /\bthe (?:city |town )?watch\b|\bwatchmen\b|\bwatchman\b/i,
   hospital: /\bhospitals?\b/i,
@@ -257,7 +267,11 @@ export function hookTruthViolations(text, facts) {
       add('stored_days_contradict_the_store', `${days[1]} days printed; ${facts.storedMonths} months stored is ${stored} days`);
     }
   }
-  if (facts.defenseKnown && WORDS.armedForce.test(line) && !facts.hasArmedForce) {
+  if (facts.defenseKnown && (
+    (WORDS.armedForce.test(line) && !facts.hasArmedForce)
+    || (WORDS.garrison.test(line) && !facts.hasGarrison)
+    || (WORDS.soldiers.test(line) && !facts.hasSoldiers)
+  )) {
     add('armed_force_without_one', 'no garrison, militia or mercenary company on the defence roster');
   }
   if (facts.defenseKnown && WORDS.walls.test(line) && !facts.hasWalls) {

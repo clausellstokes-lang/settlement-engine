@@ -305,7 +305,52 @@ export const ENGINE_SHARED_DOMAIN_EXCISIONS = [
   '/src/domain/townMap/glyphAssign.js',
   '/src/domain/townScene/customBuildingPresentation.js',
 ];
+// FIRSTPAINT-2 (LANDING-6, 2026-11-05; the chair's ruling on vendorPdfLazy x4, "a cure, not a rise"). The rung-1
+// window's lanes (CRISIS, the coherence findings of TRUTH / SELF-VOUCH / F1 / F3 / F9 / F10, PLACE-NOT-TIER's sea
+// lanes, the faction role catalogue and the market fact LANDING-2 moved domain-ward, record 28's viability summary)
+// gave generators 33 new domain imports, so the derived ESD above routed 33 more modules into EAGER engine-core:
+// engine-core 137,124 -> 237,720 B and the first-paint closure 1,037,485 -> 1,121,693 B (the budget is the window
+// base's own measured figure, reproduced exactly at 1264a8152^). MEASURED, the same premise every excision here
+// rests on: 27 of the 33 are reached by NO module of the true first-paint source graph (main.jsx, lookups.js,
+// kernel/**), and no module that stays in engine-core statically imports any of them (the closed set, computed
+// over the ESD's own import walk). Their consumers are the lazy engine and lazy tabs (Crisis, Power, the
+// dossier's plot hooks, Session, the faith panel). Excised here AND pinned below — the
+// FP-G14 / FP-G16 convention of pinning, into their own `coherence-lazy` chunk below, never left unpinned (the FP-G11
+// incident: an orphan co-locates into the big lazy `engine` chunk and every lazy tab that reads it fetches the generator). The six other new members
+// (foodLedger, rulingPower, stressorPicker and three worldPulse stressor leaves) ARE eager-reached and stay.
+// @guarded-by tests/build/vendorPdfLazy.test.js (the first-paint byte budget) and
+//   tests/build/engineChunkLazy.test.js (no first-paint-reachable excision is left unpinned).
+export const FIRSTPAINT2_LAZY_DOMAIN = [
+  '/src/domain/coherence/defenseWordsFindings.js',
+  '/src/domain/coherence/faithDenialFindings.js',
+  '/src/domain/coherence/foodWordsFindings.js',
+  '/src/domain/coherence/hookTruth.js',
+  '/src/domain/coherence/hookTruthRecord.js',
+  '/src/domain/coherence/magicWordsFindings.js',
+  '/src/domain/coherence/recordBattery.js',
+  '/src/domain/coherence/seatHolderFindings.js',
+  '/src/domain/coherence/tierNounFindings.js',
+  '/src/domain/crimeSignal.js',
+  '/src/domain/crisis/crisisCast.js',
+  '/src/domain/crisis/crisisHooks.js',
+  '/src/domain/defense/defenseFacts.js',
+  '/src/domain/dossier/faithReading.js',
+  '/src/domain/dossier/powerStrata.js',
+  '/src/domain/dossier/seatHolder.js',
+  '/src/domain/entities/factionRoleCatalog.js',
+  '/src/domain/foodSurplus.js',
+  '/src/domain/marketInstitution.js',
+  '/src/domain/rulingPowerCoup.js',
+  '/src/domain/spatial/seaLanes.js',
+  '/src/domain/spatial/spatialCost.js',
+  '/src/domain/spatial/waterBodies.js',
+  '/src/domain/townMap/ladderRead.js',
+  '/src/domain/userEditLines.js',
+  '/src/domain/viabilitySummary.js',
+  '/src/domain/worldPulse/npcLadderFactionMembership.js',
+];
 for (const frag of ENGINE_SHARED_DOMAIN_EXCISIONS) ENGINE_SHARED_DOMAIN.delete(frag);
+for (const frag of FIRSTPAINT2_LAZY_DOMAIN) ENGINE_SHARED_DOMAIN.delete(frag);
 const isEngineSharedDomain = (id) => {
   for (const frag of ENGINE_SHARED_DOMAIN) if (id.includes(frag)) return true;
   return false;
@@ -984,6 +1029,16 @@ export default defineConfig({
             || id.includes('/src/domain/magicFilter.js')
           )
             return 'engine-core-lazy';
+
+          // ── FIRSTPAINT-2: the rung-1 window's lazy domain (its own chunk) ──
+          // The 27 modules excised from ESD above (FIRSTPAINT2_LAZY_DOMAIN): the coherence findings, the crisis
+          // cast and hooks, the dossier's power/faith/seat readings, the sea-lane trio. Their own chunk rather
+          // than engine-core-lazy, whose contract is a small (<50 kB) presentation vocabulary
+          // (tests/build/engineChunkLazy.test.js); pinned rather than orphaned (FP-G11). Its outward edges run
+          // to engine-core / data / kernel only (lazy -> eager, the safe direction); engine-core imports none of
+          // them (the closed set), so no chunk cycle forms (bootSmoke.test.js re-proves it per build).
+          if (FIRSTPAINT2_LAZY_DOMAIN.some((frag) => id.includes(frag)))
+            return 'coherence-lazy';
 
           // ── The number formatter (LAZY LEAF, ~343 B) ──────────────
           // Owner-ratified 2026-07-26. FP-G11 excised formatNumber.js from

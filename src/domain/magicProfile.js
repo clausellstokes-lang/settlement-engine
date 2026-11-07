@@ -27,7 +27,7 @@ import { magicLedger } from './magicLedger.js';
 // Lane MAGIC (chair rulings 2 and 3, 2026-11-03): WHO PRACTISES is the one census in
 // magicReliance.js (catalogue identity, never this module's old private name regex), and
 // HOW MUCH THE PLACE RELIES ON MAGIC is its one reading, which caps every role line below.
-import { deriveMagicReliance, magicPractitioners, practisingInstitutions } from './magicReliance.js';
+import { deriveMagicReliance, magicDialAbsent, magicPractitioners, practisingInstitutions } from './magicReliance.js';
 import { HEALING_INSTITUTION_PATTERN as HEALING_PATTERN } from './healingLedger.js';
 import { nativeSemanticName } from './content/customContentSemanticAuthority.js';
 // Phase 4 W-F5 stage 2 (axis retirement re-plumb): temper is DERIVED from the
@@ -431,9 +431,8 @@ export function deriveMagicProfile(settlement) {
   //     plainly is available there, so the ladder still runs and the tower still shows;
   //     MG-3e's validator warning is what carries the strangeness. Erasing an authored
   //     premise to satisfy a display rule would trade one lie for another.
-  const ledger = magicLedger(settlement);
-  if (ledger.present && ledger.magicLevel === 'none'
-      && practisingInstitutions(settlement).length === 0) {
+  // The one predicate, `magicReliance.js :: magicDialAbsent` (lane RUNG1B-F9 unit 2).
+  if (magicDialAbsent(/** @type {import('./magicReliance.js').MagicRelianceSource} */ (settlement))) {
     return {
       magicExists: true,
       availability: 'absent',

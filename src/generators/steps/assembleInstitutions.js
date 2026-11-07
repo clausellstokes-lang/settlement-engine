@@ -14,8 +14,11 @@ import {
   institutionalCatalog,
   catalogIdForName,
   institutionRowGuardsPass,
+  isFabricRow,
 } from '../../data/institutionalCatalog.js';
+import { densityFactor, isDensityExempt, scaleChance } from '../../data/institutionBudget.js';
 import { INSTITUTION_DESC_VARIANTS } from '../../data/institutionDescVariants.js';
+import { INLAND_DESCRIPTIONS } from '../../data/inlandDescriptions.js'; import { defenceTwinLine } from '../../data/defenceTwinLines.js'; import { defenseFactsOf } from '../../domain/defense/defenseFacts.js'; // F10: one line, so no cited line moves
 import { pickVariant } from '../../kernel/proseHash.js';
 import { TERRAIN_DATA } from '../../data/geographyData.js';
 import { RESOURCE_DATA } from '../../data/goods/identity.js';
@@ -41,6 +44,27 @@ import { isCategoryEnabled as sharedIsCategoryEnabled } from '../categoryToggleR
 import { institutionToggleFor } from '../institutionToggleReader.js';
 import { threatDefensePlan } from '../threatDefensePolicy.js';
 import { UPGRADE_CHAINS } from '../../data/institutionLadders.js';
+/** A description that says a settlement builds, sells or supplies ships, or sells the day's catch (A-11). */
+const SHIP_WORD = /\bships?\b|\bday's catch\b|\bfish (?:doesn't|does not|will not) wait\b|\bkeeps no better than a day\b/i;
+
+/**
+ * A row's ship-free description where the water fact is 'none' (chair ruling, round 3, 3b): the
+ * catalog text and its authored variants (`${tier}|${category}|${name}`), ship-free ones only,
+ * picked draw-free by the same hash; a pool with none keeps the row's text. For rows added
+ * after the variant pick (the cascade), which never met the pool.
+ * @param {{ desc?: unknown, category?: unknown, name?: unknown }} inst
+ * @param {string} tier
+ * @param {unknown} seed
+ * @returns {string|undefined}
+ */
+export function shipFreeDesc(inst, tier, seed) {
+  const desc = typeof inst?.desc === 'string' ? inst.desc : undefined;
+  if (!desc || !SHIP_WORD.test(desc)) return desc;
+  const variants = INSTITUTION_DESC_VARIANTS[`${tier}|${inst.category}|${inst.name}`] || [];
+  const dry = [desc, ...variants].filter((text) => !SHIP_WORD.test(text));
+  if (dry.length) return pickVariant(dry, `${seed}:${inst.name}`);
+  return INLAND_DESCRIPTIONS[`${tier}|${inst.category}|${inst.name}`] || desc;
+}
 
 // Compatibility export: callers historically imported the table from this
 // step module. The single writer now lives in the side-effect-free data leaf.
@@ -212,6 +236,140 @@ export function collapseUpgradeChains(institutions) {
  */
 const UNPINNED = Symbol(); // The description was removed to buy the generation worker's bytes back at train EM-T13's terminal (judgment 187); the sentinel's IDENTITY is what the code compares, never its description, which nothing in src or tests reads.
 
+/**
+ * The settlement facts a catalog row's roll reads, from the pipeline context — the same reads the
+ * step makes, so the expectation below and the draw see one settlement.
+ * @typedef {{
+ *   tier: string, tierIndex: number, tradeRoute: unknown, terrainType: string,
+ *   instModifiers: ReadonlyArray<{ tags?: string[], name?: string, modifier: number }>,
+ *   nativeNearbyResources: string[], population: number | null, neighbour: unknown,
+ *   effectiveConfig: Record<string, unknown>, goodsToggles: unknown,
+ * }} RowEnvironment
+ */
+
+/**
+ * @param {Record<string, any>} ctx the pipeline context (tier, tradeRoute, effectiveConfig, nearbyResources,
+ *   population, neighbourProfile, goodsToggles; importedNeighbour as input)
+ * @returns {RowEnvironment}
+ */
+function rowEnvironment(ctx) {
+  const effectiveConfig = ctx.effectiveConfig || {};
+  const terrainType = getTerrainType(ctx.tradeRoute, effectiveConfig.terrainOverride || null);
+  return {
+    tier: ctx.tier,
+    tierIndex: TIER_ORDER.indexOf(ctx.tier),
+    tradeRoute: ctx.tradeRoute,
+    terrainType,
+    instModifiers: (TERRAIN_DATA[terrainType] || {}).institutionModifiers || [],
+    nativeNearbyResources: nativeSemanticResourceKeys(effectiveConfig, ctx.nearbyResources),
+    population: typeof ctx.population === 'number' ? ctx.population : null,
+    neighbour: ctx.neighbourProfile || ctx.importedNeighbour || null,
+    effectiveConfig,
+    goodsToggles: ctx.goodsToggles,
+  };
+}
+
+/**
+ * Can this non-required catalog row roll here, and at what chance? Every gate the roll has
+ * always applied, in its order, plus the registry's row guards (a stated population floor,
+ * a named prerequisite). A row that cannot roll consumes no draw.
+ * @param {RowEnvironment} env
+ * @param {string} category @param {string} name @param {Record<string, any>} inst
+ * @param {ReadonlyArray<{ name: string }>} institutions the roster so far
+ * @param {number} d the density this row rolls at (1 for an exempt row)
+ * @returns {{ baseChance: number, resourceMult: number, p: number, drawn: boolean } | null}
+ */
+function rowRoll(env, category, name, inst, institutions, d) {
+  const { tier, tierIndex, tradeRoute, terrainType, nativeNearbyResources, population, neighbour, effectiveConfig, goodsToggles } = env;
+  if (inst.minTier && tierIndex < TIER_ORDER.indexOf(inst.minTier)) return null;
+  if (inst.exclusionConditions?.some(ex => institutions.some(i => i.name === ex))) return null;
+  if (inst.tradeRouteRequired) {
+    const routeOk = inst.tradeRouteRequired.includes(tradeRoute);
+    const terrainOk = inst.terrainAccess && inst.terrainAccess.includes(terrainType);
+    if (!routeOk && !terrainOk) return null;
+  }
+  if (inst.forbiddenTradeRoutes && inst.forbiddenTradeRoutes.includes(tradeRoute)) return null;
+  if (inst.terrainRequired && !inst.terrainRequired.includes(terrainType)) return null;
+  // [D6 THE UNDERWAYS] geography-inconsistent-is-impossible: an institution may forbid
+  // itself where a named nearby resource makes it physically impossible — the underways
+  // cannot exist atop a marsh/floodplain (the tunnels flood). Absent the field ⇒ no-op.
+  if (inst.forbiddenResources
+      && inst.forbiddenResources.some(
+        resource => nativeNearbyResources.includes(resource),
+      )) return null;
+  if (!institutionRowGuardsPass(tier, name, {
+    population,
+    presentNames: new Set(institutions.map(i => i.name)),
+  })) return null;
+  const baseChance = getBaseChance(
+    d === 1 ? inst.baseChance : scaleChance(inst.baseChance, d), category, name, effectiveConfig, neighbour, goodsToggles
+  );
+  const resourceMult = getResourceMultiplier(
+    inst.tags || [],
+    name,
+    nativeNearbyResources,
+    env.instModifiers,
+    tier,
+  );
+  // `drawn`: whether the row takes a draw, read at the AUTHORED chance — so a density of zero
+  // lowers a chance to nothing but never removes the draw an exclusive group would have taken.
+  const drawn = d === 1
+    ? baseChance * resourceMult > 0
+    : getBaseChance(inst.baseChance, category, name, effectiveConfig, neighbour, goodsToggles) * resourceMult > 0;
+  return { baseChance, resourceMult, p: Math.min(1, baseChance * resourceMult), drawn };
+}
+
+/**
+ * X, THE EXEMPT ROWS' EXPECTED HOUSES (the chair's ruling, 2026-11-04, RUNG1B-F6): Σ, over the tier's
+ * non-required, non-fabric, density-exempt rows (route-required, terrain-required, rare) that can
+ * stand in THIS settlement, of the chance the draw would give each — the same world-law licence,
+ * category and toggle gates as the main roll, then `rowRoll` (route, terrain, resources, row guards;
+ * getBaseChance's sliders, neighbour and goods; the resource multiplier) at d = 1. A row the toggles
+ * force counts 1. An expectation: no draw is taken and nothing is tabled. The exempt rows carry no
+ * exclusive group, exclusion condition or row guard (pinned in tests/generators/institutionBudgetDensity.test.js),
+ * so the chance read against the empty roster is the draw's own.
+ * @param {Record<string, any>} ctx the pipeline context
+ * @returns {number}
+ */
+export function exemptHouseExpectation(ctx) {
+  const { tier } = ctx;
+  const catalogForTier = institutionalCatalog[tier] || {};
+  const worldLaw = ctx.generationContext?.worldLaw || null;
+  const config = ctx.config || {};
+  const env = rowEnvironment(ctx);
+  let X = 0;
+  for (const [category, categoryInsts] of Object.entries(catalogForTier)) {
+    for (const [name, inst] of Object.entries(categoryInsts)) {
+      if (inst.required || isFabricRow(tier, name) || !isDensityExempt(tier, name)) continue;
+      if (inst.minTier && env.tierIndex < TIER_ORDER.indexOf(inst.minTier)) continue;
+      const toggle = institutionToggleFor(ctx.institutionToggles, [tier], category, name)
+                  || { allow: true, require: false };
+      if (worldLaw && !worldLaw.allowsInstitution({
+        category, name, ...inst,
+        ...(toggle.require ? { source: 'forced', forcedByToggle: true } : {}),
+      })) continue;
+      if (!sharedIsCategoryEnabled(ctx.categoryToggles, config.settType, tier, category)) continue;
+      if (toggle.require) { X += 1; continue; }
+      if (!(toggle.allow ?? true)) continue;
+      const roll = rowRoll(env, category, name, inst, [], 1);
+      if (roll && roll.drawn) X += roll.p;
+    }
+  }
+  return X;
+}
+
+/**
+ * The settlement's ONE density factor, read the same way by assembleInstitutions, the cascade and
+ * the faction pass: `densityFactor(tier, population, exemptHouseExpectation(ctx))`.
+ * @param {Record<string, any>} ctx the pipeline context
+ * @returns {number}
+ */
+export function settlementDensity(ctx) {
+  const population = typeof ctx.population === 'number' ? ctx.population : null;
+  if (population === null) return densityFactor(ctx.tier, population);
+  return densityFactor(ctx.tier, population, exemptHouseExpectation(ctx));
+}
+
 registerStep('assembleInstitutions', {
   deps: ['buildGenerationContext', 'resolveResources', 'resolveStress', 'resolveNeighbour'],
   reads: ['categoryToggles', 'effectiveConfig', 'generationContext', 'goodsToggles', 'institutionToggles', 'nearbyResources', 'neighbourProfile', 'population', 'threat', 'tier', 'tradeRoute'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
@@ -241,12 +399,10 @@ registerStep('assembleInstitutions', {
 
   const {
     tier, tradeRoute, effectiveConfig, nearbyResources,
-    institutionToggles, categoryToggles, goodsToggles,
-    neighbourProfile, generationContext,
+    institutionToggles, categoryToggles, generationContext,
   } = ctx;
   const { worldLaw } = generationContext;
   const config = ctx.config || {};
-  const importedNeighbor = ctx.importedNeighbour || null;
   // The resolved roster intentionally mixes native keys with custom display
   // labels for dossier and explicit custom-mechanics consumers. Native catalog
   // selection must see only proven native keys; otherwise naming a custom
@@ -274,48 +430,25 @@ registerStep('assembleInstitutions', {
   const exclusiveGroups = {};
   const tierIndex = TIER_ORDER.indexOf(tier);
   const terrainType = getTerrainType(tradeRoute, effectiveConfig.terrainOverride || null);
-  const instModifiers = (TERRAIN_DATA[terrainType] || {}).institutionModifiers || [];
-  const population = typeof ctx.population === 'number' ? ctx.population : null;
 
+  // THE INSTITUTION BUDGET (X-46 car 3, docs/DESIGN_X46_SCALE_TRAIN.md §4): the count follows
+  // the population, the tier chooses the kinds. ONE density factor, computed here from the
+  // population before the first draw, multiplies every non-required, non-fabric row's authored
+  // chance; the guards, exclusive groups, resource multipliers, toggles and priority modifiers
+  // apply exactly as before, after it. It never adds, removes or re-orders a draw (THE PROMISE).
+  // The route-required rows (a trade route's or a terrain's own houses: the docks, the harbour
+  // master) are exempt like the fabric (`isDensityExempt`; the chair's ruling, 2026-11-04).
+  // The target is what the anchor leaves above the required rows AND the exempt rows' own expected
+  // draws here (`settlementDensity`; the chair's ruling, 2026-11-04, RUNG1B-F6).
+  const density = settlementDensity(ctx);
+  const densityFor = (name) => (isDensityExempt(tier, name) ? 1 : density);
+
+  const rowEnv = rowEnvironment(ctx);
   /**
-   * Can this non-required catalog row roll here, and at what chance? Every gate the roll has
-   * always applied, in its order, plus the registry's row guards (a stated population floor,
-   * a named prerequisite). A row that cannot roll consumes no draw.
-   * @returns {{ baseChance: number, resourceMult: number, p: number } | null}
+   * Can this non-required catalog row roll here, and at what chance? (`rowRoll`, at this row's density.)
+   * @returns {{ baseChance: number, resourceMult: number, p: number, drawn: boolean } | null}
    */
-  const rollFor = (category, name, inst) => {
-    if (inst.minTier && tierIndex < TIER_ORDER.indexOf(inst.minTier)) return null;
-    if (inst.exclusionConditions?.some(ex => institutions.some(i => i.name === ex))) return null;
-    if (inst.tradeRouteRequired) {
-      const routeOk = inst.tradeRouteRequired.includes(tradeRoute);
-      const terrainOk = inst.terrainAccess && inst.terrainAccess.includes(terrainType);
-      if (!routeOk && !terrainOk) return null;
-    }
-    if (inst.forbiddenTradeRoutes && inst.forbiddenTradeRoutes.includes(tradeRoute)) return null;
-    if (inst.terrainRequired && !inst.terrainRequired.includes(terrainType)) return null;
-    // [D6 THE UNDERWAYS] geography-inconsistent-is-impossible: an institution may forbid
-    // itself where a named nearby resource makes it physically impossible — the underways
-    // cannot exist atop a marsh/floodplain (the tunnels flood). Absent the field ⇒ no-op.
-    if (inst.forbiddenResources
-        && inst.forbiddenResources.some(
-          resource => nativeNearbyResources.includes(resource),
-        )) return null;
-    if (!institutionRowGuardsPass(tier, name, {
-      population,
-      presentNames: new Set(institutions.map(i => i.name)),
-    })) return null;
-    const baseChance = getBaseChance(
-      inst.baseChance, category, name, effectiveConfig, neighbourProfile || importedNeighbor, goodsToggles
-    );
-    const resourceMult = getResourceMultiplier(
-      inst.tags || [],
-      name,
-      nativeNearbyResources,
-      instModifiers,
-      tier,
-    );
-    return { baseChance, resourceMult, p: Math.min(1, baseChance * resourceMult) };
-  };
+  const rollFor = (category, name, inst) => rowRoll(rowEnv, category, name, inst, institutions, densityFor(name));
 
   // THE WEIGHTED EXCLUSIVE GROUP (2026-09-30). A group used to go to whichever member the
   // catalog happened to list first: the first roll that succeeded took it and every later
@@ -431,14 +564,16 @@ registerStep('assembleInstitutions', {
                 && worldLaw.allowsInstitution({ category: member.category, name: member.name, ...member.inst });
             })
             .map(member => ({ ...member, roll: rollFor(member.category, member.name, member.inst) }))
-            .filter(member => member.roll && member.roll.p > 0);
+            .filter(member => member.roll && member.roll.drawn);
           if (candidates.length === 0) return;
           const weightTotal = candidates.reduce((sum, member) => sum + member.roll.p, 0);
           const fillChance = 1 - candidates.reduce((none, member) => none * (1 - member.roll.p), 1);
           const draw = rng.random();
           if (draw >= fillChance) return;
           let remaining = (draw / fillChance) * weightTotal;
-          let winner = candidates[candidates.length - 1];
+          // The rounding fallback is the last member that can hold the seat (every member, at the
+          // authored chances; a density of zero can leave a member drawn at no chance).
+          let winner = candidates.filter(member => member.roll.p > 0).pop() || candidates[candidates.length - 1];
           for (const member of candidates) {
             remaining -= member.roll.p;
             if (remaining < 0) { winner = member; break; }
@@ -860,7 +995,13 @@ registerStep('assembleInstitutions', {
     if (inst.isCustom || inst.source === 'custom' || !inst.desc) continue;
     const variants = INSTITUTION_DESC_VARIANTS[`${tier}|${inst.category}|${inst.name}`];
     if (variants && variants.length) {
-      inst.desc = pickVariant([inst.desc, ...variants], `${ctx._seed}:${inst.name}`);
+      // A-11 (soak 1000 row 7, chair ruling 4b): where the world law's water fact is 'none',
+      // a variant that speaks of ships yields to its pool's ship-free variants; a pool with
+      // none keeps every variant (no sentence is authored here). Still draw-free.
+      const pool = [inst.desc, ...variants];
+      const dry = worldLaw.portKind === 'none' ? pool.filter((desc) => !SHIP_WORD.test(desc)) : pool;
+      const inland = dry.length ? null : INLAND_DESCRIPTIONS[`${tier}|${inst.category}|${inst.name}`];
+      inst.desc = speakTierNoun(defenceTwinLine(inland || pickVariant(dry.length ? dry : pool, `${ctx._seed}:${inst.name}`), defenseFactsOf({ institutions })), tierNounFor(tier)); // F10: a desc that names walls the roster lacks takes its twin (data/defenceTwinLines.js), draw-free
     }
   }
 
@@ -870,3 +1011,15 @@ registerStep('assembleInstitutions', {
   // roster that no longer exists.
   return { institutions, catalogForTier, generationRepairs };
 });
+
+// ─── The drawn description speaks the place's own noun (lane TIER-NOUN-POOLS, 2026-11-04) ────
+// ⚠ AT THE END OF THE FILE ON PURPOSE (imports hoist): the fork census keys the variant draw
+// above by LINE (`generationForkCensus.test.js`, site `assembleInstitutions.js:863`), so nothing
+// is inserted above it. The variants were written with 'town' for the tiers that reuse a town's
+// pair, so a city's chandler read "The town depends on it for lighting" (SOAK_1000_2026-11-03
+// §2 row 4: 205 of 1,000 places, every one a city or metropolis). The drawn string passes
+// through the dossier kernel's own `speakTierNoun`, as SIZE ruling 2 does for the history record
+// (`historyGenerator.js :: speakRecord`): a town is identity, a kept comparison stays, nothing
+// draws, and no pool byte moves. @enforced-by tests/generators/tierNounPoolDraws.test.js
+import { speakTierNoun } from '../../domain/display/stateProse/stateProseKernel.js';
+import { tierNounFor } from '../../domain/display/stateProse/weaveBlock.js';

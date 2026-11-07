@@ -57,7 +57,12 @@ describe('merchant power narrative maritime grounding', () => {
       // already took it on maritime-power-4 and -6 (Merchant Guild Council). -1 is
       // the first sibling whose merchants do not govern; the precondition is now
       // asserted below instead of being implicit in the seed.
-      'maritime-power-1',
+      // Re-pinned maritime-power-1 to maritime-power-2 on 2026-11-06 (LANDING-7 lane D): the
+      // X-46 population bands (compose 1264a8152, bisected by first-parent stage) seated
+      // 'Merchant Guild Council' as -1's government, so the precondition below read true. -2 is
+      // the first sibling whose merchants do not govern (measured 0..9: -2, -4, -8, -9 do not,
+      // and every one of them keeps the maritime wording; the water-fact reader is not at fault).
+      'maritime-power-2',
     );
     const description = merchantDescription(settlement);
     const governing = settlement.powerStructure.factions.find(faction => faction.isGoverning)?.faction || '';

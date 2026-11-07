@@ -1612,8 +1612,14 @@ describe('DS-DEF-9 — magic dependency, and the slot filled from the right ROLE
     expect(magicDependencyPoolKey(undefined, false)).toBeNull();
     expect(magicDependencyPoolKey(null, true)).toBeNull();
     expect(magicDependencyPoolKey('true', false)).toBeNull();
-    // Both directions: the three keys the desk can emit are exactly the corpus's three.
-    const emitted = new Set(['magicDependency true', 'magicDependency true, with a NAMED dependent chain', 'magicDependency false']);
+    // Lane RUNG1B-F9 unit 2: "not relied on" and "absent" are two states; the false reading
+    // takes its own pool where the dial reads absent, and the true reading ignores the flag.
+    expect(magicDependencyPoolKey(false, false, true)).toBe('magicDependency false, availability absent');
+    expect(magicDependencyPoolKey(true, false, true)).toBe('magicDependency true');
+    expect(magicDependencyPoolKey(undefined, false, true)).toBeNull();
+    // Both directions: the four keys the desk can emit are exactly the corpus's four.
+    const emitted = new Set(['magicDependency true', 'magicDependency true, with a NAMED dependent chain', 'magicDependency false',
+      'magicDependency false, availability absent']);
     expect([...emitted].sort()).toEqual(Object.keys(DEF9_POOLS).sort());
   });
 

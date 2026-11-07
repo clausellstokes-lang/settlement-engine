@@ -149,8 +149,8 @@ describe('the composer — the corpus loads, and the merge is legal', () => {
   it('every block lives in exactly one leaf, and the sweep found the whole corpus', () => {
     expect(BLOCK_COLLISIONS, 'a block id emitted by two leaves').toEqual([]);
     expect(Object.keys(CORPUS).length, 'blocks').toBe(68);
-    expect(SHIPPED_POOLS.length, 'pools').toBe(708);
-    expect(SHIPPED_POOLS.reduce((n, row) => n + row.pool.length, 0), 'variants').toBe(2266);
+    expect(SHIPPED_POOLS.length, 'pools').toBe(709);
+    expect(SHIPPED_POOLS.reduce((n, row) => n + row.pool.length, 0), 'variants').toBe(2310);
   });
 });
 
@@ -196,7 +196,7 @@ describe('⭐ THE SEAM COMPOSES TO THE KERNEL — an empty candidate list moves 
     expect(drift.slice(0, 10), 'a pool where the composer and the kernel disagree').toEqual([]);
     expect(drift.length).toBe(0);
     // ANTI-VACUITY: an equality over an empty sweep is free.
-    expect(checks).toBe(708 * 2 * SWEEP_SEEDS.length);
+    expect(checks).toBe(709 * 2 * SWEEP_SEEDS.length);
     expect(composed, 'and most of the sweep really did compose a unit').toBeGreaterThan(6000);
   });
 
@@ -290,12 +290,41 @@ describe('⭐ THE BASE-SIDE SYNTHESIS — every recorded cell, against the compo
     // lost the discrimination again and the arm above went blind; a rise means another pool's
     // player face started drawing past a covert variant, which is a draw movement somebody
     // owes a declared row for.
-    expect(apart.length, 'cells that would tell the two coordinates apart').toBe(36);
-    // And the cells are exactly the pool the draw moved, named rather than counted.
-    expect([...new Set(apart.map((cell) => `${cell.block} :: ${cell.pool}`))])
-      .toEqual(['DS-POW-1 :: governanceFractured true']);
-    expect([...new Set(apart.map((cell) => `vid ${cell.vid} / index ${cell.index}`))])
-      .toEqual(['vid 3 / index 2']);
+    //
+    // ⭐ THE DECLARED ROWS — one per mixed pool whose player face the DRIFT run draws past a
+    // covert variant in, with its cell count and its coordinate pair. A pool absent here that
+    // starts to tell the two coordinates apart reds below until somebody declares its row with
+    // the cause; a declared pool whose count moves reds too.
+    //   • DS-POW-1 :: governanceFractured true — car 8a-1, the index-stable draw (above), 36
+    //     cells. Re-declared 36 -> 72 on 2026-11-06 (LANDING-7 lane E, ruling R-E5). MEASURED:
+    //     the DRAW did not move — every player cell is still vid 3 / index 2 — the REACH did:
+    //     the run now lands on this pool in 72 rows per face instead of 36. `git bisect run`
+    //     over a07ee4e0a..8e60cb2a5 (a probe counting the pool's player cells) moved it twice,
+    //     both in X-46 car 3, the institution budget: 47829c070 (U3, the density factor,
+    //     36 -> 60) and b16a5032c (U5, E calibrated to what is drawn, 60 -> 72). Fewer optional
+    //     houses fracture more governance.
+    //   • DS-ECO-6 :: TIER: minor shadow activity (≥3) is NEWLY REACHED by the run (the report
+    //     line above names it) but declares NO row: its player cells all draw vid 0, before the
+    //     covert variant (measured 208 player cells at vid 0 / index 0), so they cannot tell the
+    //     coordinates apart. The chair's ruling named this pool as the cause; the measurement
+    //     moved the row to DS-POW-1, and the record says so.
+    const DECLARED_APART = {
+      'DS-POW-1 :: governanceFractured true': { cells: 72, coordinates: ['vid 3 / index 2'] },
+    };
+    /** @type {Record<string, { cells: number, coordinates: string[] }>} */
+    const measuredApart = {};
+    for (const cell of apart) {
+      const at = `${cell.block} :: ${cell.pool}`;
+      const row = measuredApart[at] || (measuredApart[at] = { cells: 0, coordinates: [] });
+      row.cells += 1;
+      const coord = `vid ${cell.vid} / index ${cell.index}`;
+      if (!row.coordinates.includes(coord)) row.coordinates.push(coord);
+    }
+    for (const row of Object.values(measuredApart)) row.coordinates.sort();
+    expect(apart.length, 'cells that would tell the two coordinates apart')
+      .toBe(Object.values(DECLARED_APART).reduce((n, row) => n + row.cells, 0));
+    // And the cells are exactly the declared pools, named rather than counted.
+    expect(measuredApart).toEqual(DECLARED_APART);
     // SO THE DISCRIMINATION IS DRIVEN SYNTHETICALLY, on the shape the corpus cannot supply.
     // Without this, nothing in the estate would refuse a composer that recorded `index` as
     // the authored position.
@@ -339,7 +368,7 @@ describe('⭐ THE BASE-SIDE SYNTHESIS — every recorded cell, against the compo
       }
     }
     expect(drift.slice(0, 5), 'a pool where an unseeded read is not the canonical one').toEqual([]);
-    expect(pools).toBe(708);
+    expect(pools).toBe(709);
   });
 });
 

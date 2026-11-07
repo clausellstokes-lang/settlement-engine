@@ -464,8 +464,9 @@ describe('the state-prose reader — law 5, and the darkness of it', () => {
     // Non-vacuity, MEASURED at 2d5112851: 786 pools ship, 24 of them demote a dimension,
     // so 762 are swept here. A sweep that stopped finding pools would satisfy the list above
     // by being empty, which is the failure mode this pair of floors exists to refuse.
-    expect(poolsChecked).toBeGreaterThanOrEqual(762);
-    expect(draws).toBeGreaterThanOrEqual(762 * 2 * SWEEP_SEEDS.length);
+    // F10 WALLS-WORD (2026-11-04): 32 more pools partition by `walls`, so 730 are swept.
+    expect(poolsChecked).toBeGreaterThanOrEqual(730);
+    expect(draws).toBeGreaterThanOrEqual(730 * 2 * SWEEP_SEEDS.length);
   });
 
   it('leaves the causal register untouched — no arm name is a dimension word', () => {
@@ -479,7 +480,8 @@ describe('the state-prose reader — law 5, and the darkness of it', () => {
     expect(dimensioned).toEqual([]);
     expect(causal.length).toBeGreaterThanOrEqual(78);
     const vocabulary = Object.values(STATE_MARK_DIMENSIONS).flat();
-    expect(vocabulary).toEqual(['minor', 'major', 'catastrophic', 'deficit', 'no deficit', 'anchored', 'not anchored']);
+    // F10 WALLS-WORD (2026-11-04) added the `walls` fact dimension; no causal arm spells either word.
+    expect(vocabulary).toEqual(['minor', 'major', 'catastrophic', 'deficit', 'no deficit', 'anchored', 'not anchored', 'walls', 'no walls']);
   });
 });
 

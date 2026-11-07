@@ -105,8 +105,10 @@ describe('four durable prose-family exact-totality contract', () => {
     // 2026-10-01 (the urban band + the druid rulings, ODQ §934.86 and its addendum 2; the urban-band chair): three of the five null homes move with the
     // re-dealt year (consequence 5 → 6, mechanical 4 → 5, rumour seeds 17 → 16); the impact digest holds at 151 and the
     // selected lane at 1, so this is still a RETENTION arm.
+    // 2026-11-05 (LANDING-5, the chair's addition (c); the walker was masked since X-46 car 1 by the duplicate regional id, so these are records 12–26 and the window's earlier records, attributed by stage at prose-family-contract.mjs's RE-RECORDED block; the residual tick itself moves only regionalEventLogUnique): consequence 6 → 5, impact digest 152 → 151, mechanical 5 → 4, rumour seeds 10 → 14; the selected lane holds at 1, so it is still a RETENTION arm.
+    // 2026-11-06 (LANDING-7 R-E10; the density ceilings re-derived from the stamp bands, 20c0139c5 alone, measured byte-equal to the tip; prose-family-contract.mjs's RE-RECORDED block): consequence 5 → 4, impact digest 151 → 158, rumour seeds 14 → 11; the mechanical and selected lanes hold at 4 and 1, so it is still a RETENTION arm.
     expect(Object.fromEntries([...nullHomes].sort(([left], [right]) => codepoint(left, right)))).toEqual({
-      'pulseHistory[].consequenceOutcomes[].type': 6,
+      'pulseHistory[].consequenceOutcomes[].type': 4,
       // WAR LANDING (§876): 148 → 150, and it is the SAME reading of the same arm a third time —
       // the impact digest carries two more records because `5a529f100`'s upheaval gates author
       // two more public beats, and the null-VALUE census follows the records that produced them.
@@ -117,8 +119,8 @@ describe('four durable prose-family exact-totality contract', () => {
       // the other four null homes UNCHANGED. Attributed by bisect to CURE-PEACE-1 U1 (c9b24fe51), see prose-family-contract.mjs.
       // 2026-11-04 (REGISTERS-4, the chair's ruling C5; FOOD-1 T1, FOOD-2 T2, SIZE-3 S5, traced by stage): 151 → 152 (T1 152, T2 154, S5 152); the
       // rumour-seed lane 16 → 10 below (T1 11, T2 11, S5 10); the other three null homes hold, so this is still a RETENTION arm.
-      'pulseHistory[].impactDigest[].channelType': 152,
-      'pulseHistory[].mechanicalOutcomes[].type': 5,
+      'pulseHistory[].impactDigest[].channelType': 158,
+      'pulseHistory[].mechanicalOutcomes[].type': 4,
       // TE36 (ODQ §271): 30 → 19. The retired bare-decline outcomes were seeding rumours;
       // the null-VALUE census follows the outcomes that produced them. Every other null home
       // is unchanged, so this arm still measures null RETENTION and not corpus size.
@@ -126,7 +128,7 @@ describe('four durable prose-family exact-totality contract', () => {
       // metronome cure takes one rumour out of all four ledgers, so the rumour-seed lane authors
       // two fewer records across the twelve roots and the null census follows them. The other
       // four null homes are again unchanged, which is what keeps this a RETENTION arm.
-      'pulseHistory[].mechanicalRumorSeeds[].channelType': 10,
+      'pulseHistory[].mechanicalRumorSeeds[].channelType': 11,
       'pulseHistory[].selectedOutcomes[].type': 1,
     });
     const pathEdit = (row, index, value) => ({ ...row, path: row.path.map((part, offset) => (
@@ -154,7 +156,7 @@ describe('four durable prose-family exact-totality contract', () => {
     expect(() => deriveProseFamilyContract(scalarRows.filter((row) => row !== nested), scalarMeta)).not.toThrow();
   });
 
-  it('A3 freezes all 58 identities counts bytes digest and movement polarities', () => {
+  it('A3 freezes all 59 identities counts bytes digest and movement polarities', () => {
     expect(live.rows).toEqual(baseline.rows);
     expect(compareProseFamilyRows(live.rows, baseline.rows)).toBe(true);
     // TE36 (ODQ §271): 8280 → 8274, six bytes, and they are DIGITS not identities — the
@@ -170,7 +172,9 @@ describe('four durable prose-family exact-totality contract', () => {
     // prose-family-contract.mjs's RE-RECORDED block) and 40 of the remaining rows move a count, so bytes and digest both move.
     // 2026-11-04 (REGISTERS-4, the chair's ruling C5; FOOD-1 T1, FOOD-2 T2, SIZE-3 S5, traced by stage): 8000 → 7517. Three identities leave net (named at
     // prose-family-contract.mjs's RE-RECORDED block: four resourceTaxonomy rows out, resolvedStressors[].type in, all at FOOD-1).
-    expect(Buffer.byteLength(JSON.stringify(live.rows))).toBe(7517);
+    // 2026-11-05 (LANDING-5, the chair's addition (c); the walker was masked since X-46 car 1 by the duplicate regional id, so these are records 12–26 and the window's earlier records, attributed by stage at prose-family-contract.mjs's RE-RECORDED block; the residual tick itself moves only regionalEventLogUnique): 7517 → 7665, one identity in net.
+    // 2026-11-06 (LANDING-7 R-E10; the density ceilings re-derived from the stamp bands, 20c0139c5 alone, measured byte-equal to the tip; prose-family-contract.mjs's RE-RECORDED block): 7665 → 7669, no identity in or out; 42 rows move a count.
+    expect(Buffer.byteLength(JSON.stringify(live.rows))).toBe(7669);
     // TE36 (ODQ §271): the digest follows the counts it hashes. It is re-recorded here and in
     // prose-family-contract.mjs's EXPECTED_ROWS_SHA256 together, which is what keeps the
     // test-side and library-side denominators from ever disagreeing.
@@ -178,7 +182,9 @@ describe('four durable prose-family exact-totality contract', () => {
     // 2026-10-01 (the urban band + the druid rulings, ODQ §934.86 and its addendum 2; the urban-band chair): 438fe9c4… → b172d924…, with EXPECTED_ROWS_SHA256.
     // 2026-10-02 (THE VOICE PROGRAM wave 1): b172d924… → 59c3bb5a…, with EXPECTED_ROWS_SHA256; the bytes hold at 8000.
     // 2026-11-04 (REGISTERS-4, the chair's ruling C5; FOOD-1 T1, FOOD-2 T2, SIZE-3 S5, traced by stage): 59c3bb5a… → 1d67e350…, with EXPECTED_ROWS_SHA256.
-    expect(live.rowsSha256).toBe('1d67e350cdbc52cfcd3447cd70434cc5a7ee1d5f38f5be60faaff6a0a14ce865');
+    // 2026-11-05 (LANDING-5, addition (c), by stage at prose-family-contract.mjs's RE-RECORDED block): 1d67e350… → c24ac7a8…, with EXPECTED_ROWS_SHA256.
+    // 2026-11-06 (LANDING-7 R-E10; the density ceilings re-derived from the stamp bands, 20c0139c5 alone, measured byte-equal to the tip; prose-family-contract.mjs's RE-RECORDED block): c24ac7a8… → 7c53b1cd…, with EXPECTED_ROWS_SHA256.
+    expect(live.rowsSha256).toBe('7c53b1cd8f181b7080021bb9c89074bea84a6205cab29ed0b6e491bb8c332832');
     const counted = live.rows.findIndex((row) => row.occurrences > row.distinctValues);
     const movements = [
       [...clone(live.rows), { family: 'timeline', path: 'zz', field: 'type', distinctValues: 1, occurrences: 1 }],
@@ -207,7 +213,10 @@ describe('four durable prose-family exact-totality contract', () => {
     // `chronicle` byte-identical at 7/7/7 for the sixth re-record running.
     // 2026-11-04 (REGISTERS-4, the chair's ruling C5; FOOD-1 T1, FOOD-2 T2, SIZE-3 S5, traced by stage): 54/1012/5171 → 51/1007/5003, the same seven off the
     // new totals (58 − 7, 1014 − 7, 5010 − 7); `chronicle` byte-identical at 7/7/7 for the seventh re-record running.
-    counterfeit.totals = { families: 3, identities: 51, distinctValues: 1007, occurrences: 5003 };
+    // 2026-11-05 (LANDING-5, addition (c); records 12–26 and the window's earlier records, by stage at prose-family-contract.mjs's RE-RECORDED block): 51/1007/5003 → 52/964/5220, the same seven off the
+    // new totals (59 − 7, 971 − 7, 5227 − 7); `chronicle` byte-identical at 7/7/7 for the eighth re-record running.
+    // 2026-11-06 (LANDING-7 R-E10; the density ceilings re-derived from the stamp bands, 20c0139c5 alone, measured byte-equal to the tip; prose-family-contract.mjs's RE-RECORDED block): 52/964/5220 → 52/969/5243, the same seven off the new totals (59 − 7, 976 − 7, 5250 − 7); `chronicle` byte-identical at 7/7/7 for the ninth re-record running.
+    counterfeit.totals = { families: 3, identities: 52, distinctValues: 969, occurrences: 5243 };
     counterfeit.rowsSha256 = proseFamilyRowsSha256(counterfeit.rows);
     expect(() => validateProseFamilyBaseline(counterfeit)).toThrow(/immutable/);
     for (const mutate of [
@@ -256,7 +265,9 @@ describe('four durable prose-family exact-totality contract', () => {
     // 2026-10-02 (THE VOICE PROGRAM wave 1): 48/979/4979 → 48/996/4979, the deed forms re-spelling the same records.
     // 2026-11-04 (REGISTERS-4, the chair's ruling C5; FOOD-1 T1, FOOD-2 T2, SIZE-3 S5, traced by stage): 48/996/4979 → 45/995/4838 (T1 45/971/4900, T2
     // 45/1023/4961); the three identities are named at prose-family-contract.mjs's RE-RECORDED block.
-    expect(familyTotal(live, 'pulseHistory')).toEqual({ family: 'pulseHistory', identities: 45, distinctValues: 995, occurrences: 4838 });
+    // 2026-11-05 (LANDING-5, the chair's addition (c); the walker was masked since X-46 car 1 by the duplicate regional id, so these are records 12–26 and the window's earlier records, attributed by stage at prose-family-contract.mjs's RE-RECORDED block; the residual tick itself moves only regionalEventLogUnique): 45/995/4838 → 46/952/5051.
+    // 2026-11-06 (LANDING-7 R-E10; the density ceilings re-derived from the stamp bands, 20c0139c5 alone, measured byte-equal to the tip; prose-family-contract.mjs's RE-RECORDED block): 46/952/5051 → 46/957/5042; identities hold.
+    expect(familyTotal(live, 'pulseHistory')).toEqual({ family: 'pulseHistory', identities: 46, distinctValues: 957, occurrences: 5042 });
     const history = scalarRows.filter((row) => row.root === 'worldState');
     expect([...new Set(history.map((row) => row.path[1].value))]).toEqual([...Array(12).keys()]);
     const headline = (home) => live.rows.find((row) => row.path === `pulseHistory[].${home}[].headline`);
@@ -267,7 +278,8 @@ describe('four durable prose-family exact-totality contract', () => {
     // same occurrences (both towns named, a deed per kind); `mechanicalOutcomes` HOLDS at 22/49.
     // 2026-11-04 (REGISTERS-4, the chair's ruling C5; FOOD-1 T1, FOOD-2 T2, SIZE-3 S5, traced by stage): selected 84/155 → 81/160 (T1 82/158, T2 84/160),
     // mechanical 22/49 → 18/41 (T1 20/44, T2 20/47), consequence 74/181 → 71/176 (T1 72/177, T2 74/182).
-    expect(headline('selectedOutcomes')).toMatchObject({ distinctValues: 81, occurrences: 160 });
+    // 2026-11-06 (LANDING-7 R-E10; the density ceilings re-derived from the stamp bands, 20c0139c5 alone, measured byte-equal to the tip; prose-family-contract.mjs's RE-RECORDED block): selected 81/160 → 82/166, mechanical 24/53 → 21/45, consequence 71/189 → 68/167.
+    expect(headline('selectedOutcomes')).toMatchObject({ distinctValues: 82, occurrences: 166 });
     // TE36: the two lanes that carried the retired family move; `selectedOutcomes` above does
     // NOT, because ordinary population drift was already `state_only` and never selected.
     // mechanical distinctValues RISES (24 → 29) while its occurrences fall — the retired
@@ -281,8 +293,9 @@ describe('four durable prose-family exact-totality contract', () => {
     // `mechanicalOutcomes` 28/54 → 28/53, losing one occurrence and no spelling; and
     // `consequenceOutcomes` 73/184 → 72/184, losing one spelling and no occurrence — the exact
     // mirror image, and between them the arithmetic of a re-deal rather than of a gain or a loss.
-    expect(headline('mechanicalOutcomes')).toMatchObject({ distinctValues: 18, occurrences: 41 });
-    expect(headline('consequenceOutcomes')).toMatchObject({ distinctValues: 71, occurrences: 176 });
+    // 2026-11-05 (LANDING-5, addition (c); records 12–26 and the window's earlier records, by stage at prose-family-contract.mjs's RE-RECORDED block): mechanical 18/41 → 24/53, consequence 71/176 → 71/189; selected holds at 81/160.
+    expect(headline('mechanicalOutcomes')).toMatchObject({ distinctValues: 21, occurrences: 45 });
+    expect(headline('consequenceOutcomes')).toMatchObject({ distinctValues: 68, occurrences: 167 });
   });
 
   it('A6 reaches the regional audit log while proving its selected prose zero', () => {
@@ -306,12 +319,15 @@ describe('four durable prose-family exact-totality contract', () => {
     // 2026-11-04 (REGISTERS-4, the chair's ruling C5; FOOD-1 T1, FOOD-2 T2, SIZE-3 S5, traced by stage): 2/8/180 → 2/4/153 and 79 → 77 events (T1 2/4/169
     // and 80, T2 as now). FOR THE FIRST TIME THE DISTINCT COUNT MOVES: the audit log records four kinds of change, not eight,
     // from FOOD-1 on — the food cut-offs leave fewer kinds of regional event in the year. The root reach [0,1,3..11] holds.
-    expect(familyTotal(live, 'regionalLog')).toEqual({ family: 'regionalLog', identities: 2, distinctValues: 4, occurrences: 153 });
-    expect(scalarMeta).toMatchObject({ regionalEventLog: 77, regionalEventLogUnique: 77 });
+    // 2026-11-05 (LANDING-5, the chair's addition (c); the walker was masked since X-46 car 1 by the duplicate regional id, so these are records 12–26 and the window's earlier records, attributed by stage at prose-family-contract.mjs's RE-RECORDED block; the residual tick itself moves only regionalEventLogUnique): 2/4/153 → 2/4/157 and 77/77 → 75/75 events (75/74 before the tick), and ROOT 2 RETURNS TO THE REACH from X-46 car 3 (90dc22f18): the reach is 0..11 again.
+    // 2026-11-06 (LANDING-7 R-E10; the density ceilings re-derived from the stamp bands, 20c0139c5 alone, measured byte-equal to the tip; prose-family-contract.mjs's RE-RECORDED block): 2/4/157 → 2/4/189 and 75/75 → 86/86 events; the root reach 0..11 holds.
+    expect(familyTotal(live, 'regionalLog')).toEqual({ family: 'regionalLog', identities: 2, distinctValues: 4, occurrences: 189 });
+    expect(scalarMeta).toMatchObject({ regionalEventLog: 86, regionalEventLogUnique: 86 });
     const regional = scalarRows.filter((row) => row.root === 'pulseResult'
       && row.path[0]?.value === 'regionalGraph' && row.path[1]?.value === 'eventLog');
-    expect([...new Set(regional.map((row) => row.rootOrdinal))]).toEqual([0, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
-    expect(new Set(regional.map((row) => `${row.rootOrdinal}|${row.path[2].value}`)).size).toBe(77);
+    // 2026-11-05 (LANDING-5, addition (c); records 12–26 and the window's earlier records, by stage at prose-family-contract.mjs's RE-RECORDED block): root 2 returns (X-46 car 3, 90dc22f18), and 77 → 75 distinct records (75 rows; 74 distinct before the residual tick).
+    expect([...new Set(regional.map((row) => row.rootOrdinal))]).toEqual([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
+    expect(new Set(regional.map((row) => `${row.rootOrdinal}|${row.path[2].value}`)).size).toBe(86);
     expect(live.rows.filter((row) => row.family === 'regionalLog')).toEqual([
       // TE36: `changes[].kind` is BYTE-IDENTICAL at 6/92 — the retired outcomes carried a
       // sourceEvent but no graph change, so only the second row moves. That asymmetry is the
@@ -326,8 +342,10 @@ describe('four durable prose-family exact-totality contract', () => {
       // 2026-10-01 (the urban band + the druid rulings, ODQ §934.86 and its addendum 2; the urban-band chair): 7/99 → 7/101 and 1/77 → 1/79; neither distinct count moves.
       // 2026-11-04 (REGISTERS-4, the chair's ruling C5; FOOD-1 T1, FOOD-2 T2, SIZE-3 S5, traced by stage): 7/101 → 3/76 (T1 3/89, T2 as now) and 1/79 → 1/77
       // (T1 1/80); the changes row loses four kinds at FOOD-1.
-      { family: 'regionalLog', path: 'regionalGraph.eventLog[].changes[].kind', field: 'kind', distinctValues: 3, occurrences: 76 },
-      { family: 'regionalLog', path: 'regionalGraph.eventLog[].sourceEvent.type', field: 'type', distinctValues: 1, occurrences: 77 },
+      // 2026-11-05 (LANDING-5, addition (c); records 12–26 and the window's earlier records, by stage at prose-family-contract.mjs's RE-RECORDED block): 3/76 → 3/82 and 1/77 → 1/75; neither distinct count moves.
+      // 2026-11-06 (LANDING-7 R-E10; the density ceilings re-derived from the stamp bands, 20c0139c5 alone, measured byte-equal to the tip; prose-family-contract.mjs's RE-RECORDED block): 3/82 → 3/103 and 1/75 → 1/86; neither distinct count moves.
+      { family: 'regionalLog', path: 'regionalGraph.eventLog[].changes[].kind', field: 'kind', distinctValues: 3, occurrences: 103 },
+      { family: 'regionalLog', path: 'regionalGraph.eventLog[].sourceEvent.type', field: 'type', distinctValues: 1, occurrences: 86 },
     ]);
     const prose = new Set(['headline', 'narrativeSummary', 'reason', 'reasons', 'summary', 'summaryText', 'thesis', 'triggeredBy']);
     expect(live.rows.filter((row) => row.family === 'regionalLog' && prose.has(row.field))).toEqual([]);

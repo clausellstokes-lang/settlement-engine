@@ -1,0 +1,28 @@
+{
+  "_doc": "ADDITION (c), THE RESIDUAL OUTCOME'S TICK, ONE SIGNED SHIFT OF RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the cloud chair signs by the owner's delegation, vetoable; a successor chair does not inherit this signature). THE CAUSE, ONE: stressorsCore.js :: residualOutcome mints world_outcome.residual.<tick>.<stressor>.<target>; it minted world_outcome.residual.<stressor>.<target>, the one minted world outcome with no tick, so osr002's raider pressure resolving twice minted one id twice and the observed corpus's regional event log carried a duplicate record id (the prose-family contract's 'regionalLog record reach disagrees with scalar meta'). The tick sits first because propagation.js :: idPart cuts the regional event id to 80 characters. THE MOVER, NAMED: commit bc2a64000 on lane/landing-rung1-2026-11-04 (\"fix(world-pulse): the residual outcome's id carries its tick ...\") and nothing else; the chair assigned it as addition (c) in LANDING-5's brief (\"give the residual outcome's id a tick (red-first on the duplicate id), count any world-pulse golden rows it moves by cause, freeze the baseline through its door\"). THE OWNER'S WORDS are quoted verbatim from docs/OWNER_DECISION_QUEUE.md line 562 (THE LADDER IS THE LANDING, the owner, 2026-11-04) and line 592 (THE SOAK LADDER, the owner, 2026-11-03), as §934.104 quotes them, the words every fix of the rung carries. HOW: written at the branch tip itself (no later step follows it, so the tip is the stage), the tree clean apart from the register, the three fixtures and this record. WHAT MOVES, measured with and without the tick at the tip before the write: the herald knowledge-desk golden 435 rows (7 section keys renamed by the tick, 7 removed, the content digest), the provenance dormancy golden 3 rows (prov-a|5|one_month moves), the preset lighting witness 15 keys (rows __birth_default__, quiet_local, realistic_regional, dramatic_campaign, living_realm, full_simulation move; their world-state hashes carry the ids). Every other registered golden suite was run with the tick and stays green.",
+  "ownerWords": "well before we do the PRs, do the 1,000 again, the 10,000, the 100,000, and the 1 million with fixes where findings are found. PR in between each · after all of that, run 1000 generated settlements and review each in depth and in aggregate and tune",
+  "ownerDate": "2026-11-04",
+  "odqRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (RUNG 1 OF THE SOAK LADDER, recorded by the cloud chair, session 019yED1Rc3svZxTNcEJVRr77)",
+  "cause": "ADDITION (c), THE RESIDUAL OUTCOME'S TICK: a resolved stressor's residual outcome id carries the resolution's tick (world_outcome.residual.<tick>.<stressor>.<target>), so a stressor that resolves twice at one settlement is two outcomes and two regional records, not one id minted twice",
+  "seat": "LANDING-5 (Opus 5.5) under the cloud chair (Fable 5.1), session 019yED1Rc3svZxTNcEJVRr77, at the branch tip bc2a64000",
+  "surfaces": [
+    {
+      "surface": "herald-knowledge-desk-golden",
+      "action": "re-record",
+      "predictedRows": 435,
+      "proofForm": "derived-artefact"
+    },
+    {
+      "surface": "provenance-dormancy-golden",
+      "action": "re-record",
+      "predictedRows": 3,
+      "proofForm": "derived-artefact"
+    },
+    {
+      "surface": "preset-lighting-witness",
+      "action": "re-record",
+      "predictedRows": 15,
+      "proofForm": "derived-artefact"
+    }
+  ]
+}

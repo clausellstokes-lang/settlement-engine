@@ -104,6 +104,17 @@ import {
   registerLivingContentRosterBuilder,
 } from '../../src/domain/content/livingContentSeam.js';
 import { buildLivingContentRoster } from '../../src/domain/content/livingContentRoster.js';
+// ⭐ THE SECOND LAW AT BIRTH (LANDING-7 lane D, 2026-11-06). Register VII was lit at 3420d01e3
+// (X-46 car 4, the owner's word of 2026-11-04, ODQ §934.104 R6(1)), so `birthConfig` now spreads
+// the DENSITY mint's marker beside this law's — the event the LIT arm's "or the density mint
+// waking up" was written to catch. The four CREATE arms below name that marker by its own mint
+// (`newSettlementDensityLaw()`), so each still asserts that the LIVING-CONTENT law writes exactly
+// its one key and nothing else, and the density half is held to what its own dial mints.
+import {
+  DENSITY_LAW_CONFIG_KEY,
+  REGISTER_VII_DENSITY_LAW_VERSION,
+  newSettlementDensityLaw,
+} from '../../src/domain/density/densityLaw.js';
 
 vi.mock('../../src/lib/saves.js', () => ({
   saves: { update: vi.fn(() => Promise.resolve()), isConfigured: false },
@@ -238,20 +249,24 @@ describe('the living-content law is WIRED, and THE PROMISE survives it', () => {
 
   // ── CREATE ─────────────────────────────────────────────────────────────────
   it('⭐ CREATE (LIT, the product path): birthConfig writes the law marker and NOTHING else', () => {
+    // The density mint woke at 3420d01e3 (Register VII lit): it is named here as exactly the
+    // marker its own lit dial mints, so a THIRD key, or a density mint writing a second field,
+    // still reds this arm.
+    expect(newSettlementDensityLaw()).toEqual({ [DENSITY_LAW_CONFIG_KEY]: REGISTER_VII_DENSITY_LAW_VERSION });
     const minted = birthConfig({ ...CONFIG });
     expect(minted).toEqual({
-      ...CONFIG, [LIVING_CONTENT_LAW_CONFIG_KEY]: ROSTER_LIVING_CONTENT_LAW_VERSION,
+      ...CONFIG, ...newSettlementDensityLaw(), [LIVING_CONTENT_LAW_CONFIG_KEY]: ROSTER_LIVING_CONTENT_LAW_VERSION,
     });
-    // EXACTLY ONE KEY MORE than the config handed in — the arm that would catch a
-    // mint that started writing a second field, or the density mint waking up.
+    // EXACTLY ONE KEY MORE than the config and the density marker — the arm that would catch a
+    // mint that started writing a second field.
     expect(Object.keys(minted).sort())
-      .toEqual([...Object.keys(CONFIG), LIVING_CONTENT_LAW_CONFIG_KEY].sort());
+      .toEqual([...Object.keys(CONFIG), DENSITY_LAW_CONFIG_KEY, LIVING_CONTENT_LAW_CONFIG_KEY].sort());
     // Null/undefined tolerance is the boundary's own contract, unchanged by the
     // second mint being spread beside the first.
     expect(birthConfig(null))
-      .toEqual({ [LIVING_CONTENT_LAW_CONFIG_KEY]: ROSTER_LIVING_CONTENT_LAW_VERSION });
+      .toEqual({ ...newSettlementDensityLaw(), [LIVING_CONTENT_LAW_CONFIG_KEY]: ROSTER_LIVING_CONTENT_LAW_VERSION });
     expect(birthConfig(undefined))
-      .toEqual({ [LIVING_CONTENT_LAW_CONFIG_KEY]: ROSTER_LIVING_CONTENT_LAW_VERSION });
+      .toEqual({ ...newSettlementDensityLaw(), [LIVING_CONTENT_LAW_CONFIG_KEY]: ROSTER_LIVING_CONTENT_LAW_VERSION });
   });
 
   it('CREATE (dark, fired deliberately): at the dormant dial birthConfig still writes not one byte', () => {
@@ -259,12 +274,13 @@ describe('the living-content law is WIRED, and THE PROMISE survives it', () => {
     // THROUGH A MOCKED DARK LAW. It is what makes reverting the dial a one-line
     // act rather than a hope: the mint's dormant branch is exercised, not argued.
     return boundaryWithDarkLaw().then((mod) => {
+      // Not one byte of THIS law; the density marker (lit at 3420d01e3) is its own mint's.
       const minted = mod.birthConfig({ ...CONFIG });
-      expect(minted).toEqual({ ...CONFIG });
-      expect(Object.keys(minted).sort()).toEqual(Object.keys(CONFIG).sort());
+      expect(minted).toEqual({ ...CONFIG, ...newSettlementDensityLaw() });
+      expect(Object.keys(minted).sort()).toEqual([...Object.keys(CONFIG), DENSITY_LAW_CONFIG_KEY].sort());
       expect(minted[LIVING_CONTENT_LAW_CONFIG_KEY]).toBeUndefined();
-      expect(mod.birthConfig(null)).toEqual({});
-      expect(mod.birthConfig(undefined)).toEqual({});
+      expect(mod.birthConfig(null)).toEqual({ ...newSettlementDensityLaw() });
+      expect(mod.birthConfig(undefined)).toEqual({ ...newSettlementDensityLaw() });
       vi.doUnmock('../../src/domain/content/livingContentLaw.js');
       vi.resetModules();
     });
@@ -280,7 +296,10 @@ describe('the living-content law is WIRED, and THE PROMISE survives it', () => {
     // once the marker's two config echoes are removed.
     const seed = 'l-mat-wiring-same-seed';
     const through = generateSettlementPipeline(birthConfig({ ...CONFIG }), null, { seed });
-    const raw = generateSettlementPipeline({ ...CONFIG }, null, { seed });
+    // The raw world carries the density law a birth mints (lit at 3420d01e3), so the
+    // subtraction below isolates the living-content law and nothing else: the density law
+    // rightly moves the world (the named roster and seats follow the population).
+    const raw = generateSettlementPipeline({ ...CONFIG, ...newSettlementDensityLaw() }, null, { seed });
     expect(worldBytesWithoutMarker(through)).toBe(worldBytesWithoutMarker(raw));
     // …and the marker really is there, so the comparison above is a subtraction
     // and not a description of two identical inputs.
@@ -347,10 +366,11 @@ describe('the living-content law is WIRED, and THE PROMISE survives it', () => {
       const world = generateSettlementPipeline(born, pack, { seed: 'l-mat-fix-clamp' });
       expect(world[ROSTER_KEY]).toBeUndefined();
       expect(world.config[LIVING_CONTENT_LAW_CONFIG_KEY]).toBeUndefined();
-      // The clamp takes the marker and NOTHING ELSE.
-      expect(Object.keys(born).sort()).toEqual(
-        Object.keys(hydrated).filter(k => k !== LIVING_CONTENT_LAW_CONFIG_KEY).sort(),
-      );
+      // The clamp takes the marker and NOTHING ELSE (the density mint adds its own, 3420d01e3).
+      expect(Object.keys(born).sort()).toEqual([...new Set([
+        ...Object.keys(hydrated).filter(k => k !== LIVING_CONTENT_LAW_CONFIG_KEY),
+        ...Object.keys(newSettlementDensityLaw()),
+      ])].sort());
       vi.doUnmock('../../src/domain/content/livingContentLaw.js');
       vi.resetModules();
     });
