@@ -850,11 +850,11 @@
       "suite": "tests/property/heraldKnowledgeDeskGolden.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": "3c8790800e3f451ef5f5dc0a21351e7a203897b9be81f87b708bfddddb1f5bbc",
-      "rows": 435,
+      "sha256": "b7e22df609df049e32a80cb047966aad91f0169658f7bfbbb8ba5b35b83ae629",
+      "rows": 479,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation of 2026-11-06 to the cloud chair, session 01FE9mEvGxnFx6WTBkEC6ie9; the construction-and-wiring wave of 2026-11-07, the chair's rulings R-W7)",
+      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's people-model charter of 2026-11-07, PEOPLE-RULINGS §0; the owner's delegation of 2026-11-06 to the cloud chair, session 01FE9mEvGxnFx6WTBkEC6ie9; the people car's landing)",
       "note": "ENROLLED 2026-09-24 by lane FP-I5 (IN-5) under the FP chair's dispatch, record docs/shift-records/2026-09-24-in5-herald-knowledge-desk.json (action enroll, chair-signed). THE NON-OMNISCIENT HERALD GOLDEN of the belief_misjudgment refile (J-INF-6), captured FIRST at the clean base 57b52b510 before the routing table moved: the reader corpus full_simulation row rr-fresh-full after one year, read through buildHeraldFeed campaign lens. Keys: <row>|contentSha256 (every item's content except its desk, sorted by id), <row>|itemCount, and <row>|section|<id> (the desk at capture). tests/property/heraldKnowledgeDeskGolden.test.js holds the digest and count byte-stable and asserts every desk equals its captured desk except the declared refile set, which reads the knowledge desk: the one-time shift, recorded. The single producer is tests/helpers/heraldDeskGolden.js, imported by the suite; the capture ran it byte-identical from outside the tree so the door's clean-tree refusal held."
     }
   ]
