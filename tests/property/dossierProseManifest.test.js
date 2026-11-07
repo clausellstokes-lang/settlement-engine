@@ -184,9 +184,10 @@ describe('the composed-prose manifest — the DRIFT corpus, both audiences', () 
     // 67,754 -> 67,754 (372/360/358 -> 372/364/358) at F1 DEFENCE-WORDS, FIRST STEP (UNITS 1–5) (ODQ §934.105, RUNG 1 OF THE SOAK LADDER, 2026-11-04; record docs/shift-records/2026-11-04-rung1-23-f1-defence-words.json).
     // 67,754 -> 67,754 (372/364/358 -> 378/366/358) at RECORD 0a, THE REVIEW-INTAKE LANE (ODQ §934.105, THE PEOPLE CAR’S LANDING, 2026-11-07; record docs/shift-records/2026-11-07-people-land-0a-review-intake.json).
     // 67,754 -> 67,502 (378/366/358 -> 380/372/358) at RECORD 1, PEOPLE-1 CAST (ODQ §934.105, THE PEOPLE CAR’S LANDING, 2026-11-07; record docs/shift-records/2026-11-07-people-1-cast.json).
+    // 67,502 -> 67,564 (380/372/358 -> 380/372/358) at RECORD 3, PEOPLE-3 HOOKS (ODQ §934.105, THE PEOPLE CAR’S LANDING, 2026-11-07; record docs/shift-records/2026-11-07-people-3-hooks.json).
     // Towns unmoved at 516/3/3/3.
     expect(tally, 'the DRIFT corpus by seed, cells and towns').toEqual({
-      'golden-master-v3': { cells: 67_502, towns: 516 },
+      'golden-master-v3': { cells: 67_564, towns: 516 },
       'gm-seed-a': { cells: 380, towns: 3 },
       'gm-seed-b': { cells: 372, towns: 3 },
       'gm-seed-c': { cells: 358, towns: 3 },
