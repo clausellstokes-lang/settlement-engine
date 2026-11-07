@@ -524,8 +524,9 @@ describe('THE ANTI-VACUITY GUARD — the walker must fail on the corpus it ships
     // 45 -> 44 (W2 DEF fourth seat, 2026-11-07, the DS-DEF-1 style rows): readiness ADEQUATE v3's old wording ("The town
     // believes it could hold ...") carried the class; its rewrite does not, measured on that one entry.
     // 44 -> 43 (W2 DEF fourth seat (DS-DEF-2 style rows, 2026-11-07)), measured on the entries that left the class.
-    expect(notExecutable).toBe(43);
-    expect(fails).toBe(43);
+    // 43 -> 42 (W2 DEF fourth seat (DS-DEF-10 style rows, 2026-11-07)), measured on the entries that left the class.
+    expect(notExecutable).toBe(42);
+    expect(fails).toBe(42);
     // PRESENT-THEN-ABSENT on one of them, so the arm is proved rather than counted.
     const anchor = corpus.find((entry) => walkEntry(entry, withEntryContext(base, { eventProvenance: false }))
       .fails.some((f) => f.klass === 'C3'));
@@ -684,7 +685,7 @@ describe('THE ANTI-VACUITY GUARD — the walker must fail on the corpus it ships
     // chair's ruling of 2026-11-04; the owner's veto point). Report-only, still a minority.
     // 336 -> 341, measured per commit on the leaves: F12 unit 2 (e19e3e4cf) +3, census-5b unit 3
     // (c00b30eb6, R-L twins) +2. Report-only, still a minority.
-    expect(carrying.length, 'entries carrying the trailing-coordinate class, at this tip').toBe(341); // 341 -> 346 over the W2 DEF lane (2026-11-07), measured on the leaves: +3 at the second seat's tip (the DS-DEF-4/5 rewrites and FIXTURE: gates v2), +2 at DS-DEF-12 (CAPACITY: enough v3, MAGIC-DEPENDENT v1). Report-only, still a minority. // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 346 -> 347 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 347 -> 346 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 346 -> 347 // W2 DEF fourth seat (DS-DEF-2 style rows, 2026-11-07): 347 -> 345 (report-only) // W2 DEF fourth seat (DS-DEF-6 style rows, 2026-11-07): 345 -> 342 (report-only) // W2 DEF fourth seat (DS-DEF-7 style rows, 2026-11-07): 342 -> 341 (report-only)
+    expect(carrying.length, 'entries carrying the trailing-coordinate class, at this tip').toBe(336); // 341 -> 346 over the W2 DEF lane (2026-11-07), measured on the leaves: +3 at the second seat's tip (the DS-DEF-4/5 rewrites and FIXTURE: gates v2), +2 at DS-DEF-12 (CAPACITY: enough v3, MAGIC-DEPENDENT v1). Report-only, still a minority. // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 346 -> 347 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 347 -> 346 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 346 -> 347 // W2 DEF fourth seat (DS-DEF-2 style rows, 2026-11-07): 347 -> 345 (report-only) // W2 DEF fourth seat (DS-DEF-6 style rows, 2026-11-07): 345 -> 342 (report-only) // W2 DEF fourth seat (DS-DEF-7 style rows, 2026-11-07): 342 -> 341 (report-only) // W2 DEF fourth seat (DS-DEF-10 style rows, 2026-11-07): 341 -> 336 (report-only)
     expect(carrying.length, 'and it is a minority of the 2,266 R1 variants').toBeLessThan(leaves.length / 2);
     console.log(`  Q · trailing coordinate: ${carrying.length} of ${leaves.length} R1 entries carry the class`);
   });

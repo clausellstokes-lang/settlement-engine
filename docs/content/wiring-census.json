@@ -37,8 +37,8 @@
     "syntheticTableFields": 129,
     "tiers": {
       "MISSING": 32,
-      "THIN": 540,
-      "COVERED": 226,
+      "THIN": 541,
+      "COVERED": 225,
       "MISSING-AT-TIER": 45
     },
     "tierSilences": 352,
@@ -10164,7 +10164,7 @@
       ],
       "hasBag": false,
       "variants": 3,
-      "grammars": 2,
+      "grammars": 3,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -10361,7 +10361,7 @@
       ],
       "hasBag": false,
       "variants": 3,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -10606,7 +10606,7 @@
       ],
       "hasBag": false,
       "variants": 3,
-      "grammars": 3,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -10749,7 +10749,7 @@
       ],
       "hasBag": false,
       "variants": 3,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -59313,7 +59313,7 @@
       "subject": "posture UNDER OCCUPATION",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 2 grammar(s) · slots {counterpart, settlement}"
+      "count": "3 variant(s) · 3 grammar(s) · slots {counterpart, settlement}"
     },
     {
       "tier": "THIN",
@@ -59345,7 +59345,7 @@
       "subject": "posture INFILTRATION ACTIVE",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -59385,7 +59385,7 @@
       "subject": "posture RELIGIOUS UPHEAVAL",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 3 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -59404,12 +59404,12 @@
       "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
-      "tier": "COVERED",
+      "tier": "THIN",
       "block": "DS-DEF-10",
       "subject": "posture MIGRATION SURGE",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 2 grammar(s) · slots {band, settlement}"
+      "count": "3 variant(s) · 1 grammar(s) · slots {band, settlement}"
     },
     {
       "tier": "THIN",

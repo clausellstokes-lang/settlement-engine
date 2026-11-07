@@ -7171,7 +7171,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "Nobody at {settlement} worries about this one, and the not-worrying is founded on something rather than on habit.",
+          "text": "Nobody at {settlement} worries about this one, and with good reason: the town is well prepared for it.",
           "slots": [
             "settlement"
           ],
@@ -7179,7 +7179,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "counterforce",
-          "text": "Nothing gets far with this at {settlement}. What the town holds against it caps how bad it can become, and the cap sits well above anything this pressure brings.",
+          "text": "Nothing of this kind gets far at {settlement}, because the town holds more against it than it is likely to face.",
           "slots": [
             "settlement"
           ],
@@ -7189,7 +7189,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "badge ADEQUATE (any arm)": [
         {
           "angle": "ledger",
-          "text": "{settlement} is covered against this and has very little margin; the arrangements work and would not survive being tested twice.",
+          "text": "{settlement}'s accounts cover this with little to spare: a second blow before the first was dealt with would get through.",
           "slots": [
             "settlement"
           ],
@@ -7203,7 +7203,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "threshold",
-          "text": "What {settlement} has here answers the pressure at its ordinary size; the edge is an unusual one, and nothing about the arrangement would announce that the edge had been reached.",
+          "text": "{settlement} can meet this at its usual size, and nothing would warn the town if it came bigger.",
           "slots": [
             "settlement"
           ],
@@ -7221,7 +7221,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "What {settlement} keeps against this arm has been falling behind what the arm is asked to meet, and no decision taken here has changed that direction.",
+          "text": "{settlement}'s defence against this has been falling behind for some time, and nobody has turned it round.",
           "slots": [
             "settlement"
           ],
@@ -7229,7 +7229,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "threshold",
-          "text": "The arrangement at {settlement} holds against the small instance of this and not the large one, and there is nothing in it that distinguishes the two until the large one arrives.",
+          "text": "{settlement} can handle this when it comes small, not when it comes large, and there is no telling the two apart until it arrives.",
           "slots": [
             "settlement"
           ],
@@ -7253,7 +7253,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "A stranger can see the gap at {settlement} without being told what to look for, and can see that the town has stopped looking at it.",
+          "text": "You can see the gap at {settlement} without being told where to look, and the people there have stopped looking at it.",
           "slots": [
             "settlement"
           ],
@@ -7266,7 +7266,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "{settlement} is a defended town in every direction a stranger would think to look, and in the two he would not.",
+          "text": "Look at {settlement} from any side and it is defended: against beasts, armies, crime, hard times and disaster alike.",
           "slots": [
             "settlement"
           ],
@@ -7277,7 +7277,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "The five pressures on {settlement} are all answered, none of them thinly; there is no obvious way in and no obvious way to starve it out.",
+          "text": "Every line of {settlement}'s defence accounts is met, none of them thinly, so there is no easy way in and no easy way to starve it out.",
           "slots": [
             "settlement"
           ],
@@ -7288,7 +7288,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no crisis: threat"
           ],
-          "text": "Nothing presses {settlement}, and the arrangements are the reason for that rather than the beneficiary of it.",
+          "text": "Nothing presses {settlement}, and its defences are the reason.",
           "slots": [
             "settlement"
           ],
@@ -7301,7 +7301,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "{settlement} has no serious answer to any of the five pressures on it. This is not a weak point, it is the absence of the whole arrangement.",
+          "text": "{settlement}'s accounts show nothing spent against beasts, armies, crime, hard times or disaster: the town is not weak in one place but bare everywhere.",
           "slots": [
             "settlement"
           ],
@@ -7321,7 +7321,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no crisis: threat, unrest"
           ],
-          "text": "A stranger enters {settlement}, crosses it and leaves without meeting anything that would have stopped him doing worse.",
+          "text": "You can enter {settlement}, cross it and leave without meeting anyone who would stop you doing worse.",
           "slots": [
             "settlement"
           ],
@@ -7334,7 +7334,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "An army sits outside {settlement} and the town's defensive arrangements have been reorganized around holding rather than deterring.",
+          "text": "An army sits outside {settlement}, and its defence is about holding out: the town's ration lists decide how long it can.",
           "slots": [
             "settlement"
           ],
@@ -7345,8 +7345,10 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "walls"
           ],
-          "text": "Everything the town does now is measured against the stores and the walls, and nothing else is being measured at all.",
-          "slots": [],
+          "text": "Every day at {settlement} is counted against what is left in the stores and how long the walls will hold.",
+          "slots": [
+            "settlement"
+          ],
           "vid": 2
         },
         {
@@ -7354,7 +7356,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "Every arrangement at {settlement} is now measured against the stores, and the measuring is the town's whole calendar.",
+          "text": "At {settlement} every day is counted against the stores, and each one leaves less to hold out with.",
           "slots": [
             "settlement"
           ],
@@ -7378,8 +7380,10 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "watch"
           ],
-          "text": "The watch stands and the watch is not being fed properly, and both of those facts are the same fact.",
-          "slots": [],
+          "text": "The watch at {settlement} still stands its posts on short rations, and grows weaker for it.",
+          "slots": [
+            "settlement"
+          ],
           "vid": 2
         },
         {
@@ -7400,7 +7404,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "walls"
           ],
-          "text": "{settlement}'s defense is not {settlement}'s. What stands on these walls answers to {counterpart}, and what the town could raise for itself is a separate and much smaller question.",
+          "text": "{settlement}'s walls are held by {counterpart}'s troops now, and the town's own muster lists would raise only a fraction of that.",
           "slots": [
             "settlement",
             "counterpart"
@@ -7412,8 +7416,11 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "The soldiers here defend the town from everything except the people who put them here.",
-          "slots": [],
+          "text": "{counterpart}'s troops defend {settlement} against everyone except {counterpart}.",
+          "slots": [
+            "counterpart",
+            "settlement"
+          ],
           "vid": 2
         },
         {
@@ -7421,9 +7428,10 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "{settlement} is well garrisoned and cannot use the garrison; what stands here defends the town against everything except the arrangement that put it here.",
+          "text": "{settlement} is strongly held and cannot use its own defence: the troops in the town answer to {counterpart}.",
           "slots": [
-            "settlement"
+            "settlement",
+            "counterpart"
           ],
           "vid": 3
         }
@@ -7445,7 +7453,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "Nothing at {settlement} has failed yet because of the split, and everything is taking longer, and the taking-longer is what will fail first.",
+          "text": "Nothing at {settlement} has failed yet because of the split command, but every order takes twice as long to carry out.",
           "slots": [
             "settlement"
           ],
@@ -7539,7 +7547,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "dm-only",
             "colour"
           ],
-          "text": "There is somebody inside {settlement}'s arrangements who does not belong to them, and the defense is being conducted around a hole nobody has located.",
+          "text": "Someone inside {settlement}'s defence works for the other side and has not been found, so every list of posts and rounds the town keeps is in the enemy's hands too.",
           "slots": [
             "settlement"
           ],
@@ -7563,7 +7571,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "dm-only",
             "watch"
           ],
-          "text": "The watch at {settlement} has begun keeping things from itself, which is the only defense available against a hole nobody has found.",
+          "text": "The watch at {settlement} has started keeping its plans from its own members, since nobody knows which of them is the traitor.",
           "slots": [
             "settlement"
           ],
@@ -7620,7 +7628,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "The town's defense is running on momentum at {settlement}, and momentum has a length to it that nobody has measured.",
+          "text": "With no one clearly in charge, {settlement}'s defence runs on habit, and nobody knows how long habit will last.",
           "slots": [
             "settlement"
           ],
@@ -7688,7 +7696,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "Every measure taken against the insurgency at {settlement} makes the next one more necessary, and the cycle is the shape of the problem rather than an accident of it.",
+          "text": "Each crackdown at {settlement} breeds more trouble, and more trouble brings the next crackdown.",
           "slots": [
             "settlement"
           ],
@@ -7712,7 +7720,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "The town's defense at {settlement} has been caught in a question about observance; what is being contested is who may command, and the answer turns on creed.",
+          "text": "{settlement}'s defenders are split by creed, and the duty list is now drawn up by faith: who may give orders depends on which creed a person keeps.",
           "slots": [
             "settlement"
           ],
@@ -7734,7 +7742,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "Who may give an order at {settlement} has become a question about observance, and until it is answered the answer to every other question is delayed.",
+          "text": "At {settlement} the right to give orders now turns on faith, and until that is settled nothing else gets decided.",
           "slots": [
             "settlement"
           ],
@@ -7778,8 +7786,10 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "The town has stopped doing several ordinary things and has stopped remarking on having stopped.",
-          "slots": [],
+          "text": "{settlement} has given up several ordinary things for the war, and nobody mentions them any more.",
+          "slots": [
+            "settlement"
+          ],
           "vid": 2
         },
         {
@@ -7797,7 +7807,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "More people are arriving at {settlement} than the town's arrangements were built for, and the defense of the place has become a question of order rather than of walls.",
+          "text": "The town's count of its people at {settlement} falls further behind each week as newcomers arrive, and keeping order among them now matters more than guarding the roads.",
           "slots": [
             "settlement"
           ],
@@ -7820,7 +7830,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "gate"
           ],
-          "text": "A stranger arriving at {settlement} is not remarkable, because so many people have arrived lately that the gate has stopped treating arrival as an event.",
+          "text": "So many people have come to {settlement} lately that the gate no longer bothers to stop newcomers.",
           "slots": [
             "settlement"
           ],
