@@ -155,14 +155,14 @@
  "digests": {
   "corpusMeta": "9bb16c3ef8ee03e9da654079cb80ca6fa10721759d089fd1cbea5a7a85b05062",
   "inventory": "b82c9d9f768b02b0452e59413d7bbc7f29e323d3680c58974ed10c90f5c954e4",
-  "manifests": "5c6678b978c1e69a289235a9959abaaba83d945095fb0f7ab4b4c4be18d19376",
+  "manifests": "872fa77d5507c0fcbfee2b64d4b64215d64cec9860dcc3f9ecf9619dccbde1a3",
   "migrationReview": "ada908cf672ceffc7cb2d2a3ee15051f3270cdbe0759a6b367742123a39f310b",
   "rowTags": "54feb30c6a02c0444f9ccfa32939089efc93b02dc4c7de75c000ad0489ecfbf1",
   "scanStats": "7570e69679bf4f604f2f92f5e93b51ab3c365fc11aca29d6d0cf7ff38b00c07a",
   "sentinel": "1da2a743afaef2f653d989c53bcdfa15325cd058ad83dfdc821e3e1ee850669d"
  },
- "frozen": "2026-11-06",
- "frozenAtSha": "0e7f12b01407c0fba7d56279f85c9a7cc0edd7bf",
+ "frozen": "2026-11-07",
+ "frozenAtSha": "b35a25ec9d524f1d082e42411792eba98c3b505f",
  "identities": 1450,
  "inventory": {
   "src/components/BuyThisDossier.jsx": {
@@ -2502,7 +2502,7 @@
   },
   "executionTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "248dc3894fb0c4e7fc371f8ef9f0477ca0002869b78505471e25c68011894df1",
+   "digest": "fc5efb07e00865067967de26deb6ea1304e83d00b24a495db2d1abfdd0faf363",
    "entries": [
     {
      "mode": "100644",
@@ -8702,8 +8702,8 @@
     {
      "mode": "100644",
      "path": "src/domain/data/intentAtlas.distillate.json",
-     "sha256": "437f5dc95dbc7b27ccacf5bb79257f43b526e2aa3501a57d3f8bf366fc16d0bd",
-     "size": 20656,
+     "sha256": "79e34a8fde5ee680d72a90faa04e36f19763c11241be30bf42a3f33e979c5e47",
+     "size": 20658,
      "type": "file"
     },
     {
@@ -35792,7 +35792,7 @@
   },
   "sourceTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "758a94d06aff35c2a2a5623c6b1988a5800271e2f31f9ee1fb0120cba2d27d4a",
+   "digest": "588aace852c017bf34236fd11913b312811cbf1439a37175d287e9c274f45202",
    "entries": [
     {
      "mode": "100644",
@@ -41922,8 +41922,8 @@
     {
      "mode": "100644",
      "path": "src/domain/data/intentAtlas.distillate.json",
-     "sha256": "437f5dc95dbc7b27ccacf5bb79257f43b526e2aa3501a57d3f8bf366fc16d0bd",
-     "size": 20656,
+     "sha256": "79e34a8fde5ee680d72a90faa04e36f19763c11241be30bf42a3f33e979c5e47",
+     "size": 20658,
      "type": "file"
     },
     {
@@ -52781,10 +52781,10 @@
  },
  "scannerProvenance": {
   "detectorDigest": "bfd92ce7fdc94b550dafe1cc38e462d470fd370a91c4440f2fdc83ba9fd1341e",
-  "executionTreeDigest": "248dc3894fb0c4e7fc371f8ef9f0477ca0002869b78505471e25c68011894df1",
+  "executionTreeDigest": "fc5efb07e00865067967de26deb6ea1304e83d00b24a495db2d1abfdd0faf363",
   "scanTreeDigest": "9463f94207fc52fee4378dd5fbd1148a0b04192647cbe5c2ef200178d6979527",
-  "sourceTreeDigest": "758a94d06aff35c2a2a5623c6b1988a5800271e2f31f9ee1fb0120cba2d27d4a",
-  "unscannedInputDigest": "9e8895d21dbeca3ae879edadfd1ea4d33886175d763cd8214d54474075f20900"
+  "sourceTreeDigest": "588aace852c017bf34236fd11913b312811cbf1439a37175d287e9c274f45202",
+  "unscannedInputDigest": "efd409593db6db675754b4f80433aafe3544ec00d222a75ed2eec03be8e00b1c"
  },
  "schema": 28,
  "sentinel": {
