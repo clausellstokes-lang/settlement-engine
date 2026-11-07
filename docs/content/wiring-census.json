@@ -23,7 +23,7 @@
   "totals": {
     "pools": 724,
     "blocks": 68,
-    "variants": 2374,
+    "variants": 2376,
     "resolved": 356,
     "unresolved": 368,
     "resolvedWithPredicate": 223,
@@ -4306,7 +4306,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 2,
+      "variants": 4,
       "grammars": 1,
       "predicate": [
         {
@@ -4368,7 +4368,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 2,
+      "undeclared": 4,
       "crisisScoped": false
     },
     {
@@ -45841,7 +45841,7 @@
       "pools": [
         "DS-DEF-5 :: FIXTURE: gates"
       ],
-      "variants": 2,
+      "variants": 4,
       "grammars": 1,
       "blocks": [
         "DS-DEF-5"
@@ -55346,7 +55346,7 @@
         "settlement.economicState.compound.inst.hasGates"
       ],
       "readingFunction": "gatesFixturePoolKey",
-      "count": "2 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",

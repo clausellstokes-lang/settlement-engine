@@ -55,8 +55,8 @@
   },
   "leaves": {
     "src/data/dossierStateProse/defense.generated.js": {
-      "raw": 183357,
-      "gzip": 25818,
+      "raw": 183888,
+      "gzip": 25872,
       "ceilingRaw": 488168,
       "ceilingGzip": 108482
     },
@@ -339,6 +339,14 @@
       "toRaw": 183357,
       "gzipAfter": 25818,
       "reason": "+4563 B raw (gzip level 9: 25,336 -> 25,818), one commit: DS-DEF-5 gains the six ARCANE pools (wizard's tower, mages' guild, alchemists, divine, druidic, practitioners; two variants each, said beside `arcane defense PRESENT` only). Projected through `node scripts/generate-dossier-state-prose.mjs`; `--check` exit 0."
+    },
+    {
+      "car": "W2 DEF second seat (2026-11-07; ODQ §934.105, WIRING-RULINGS §7 / STYLE-RULINGS §2 law 2): DS-DEF-5 FIXTURE: gates gains two variants — the referee's frame cure",
+      "leaf": "src/data/dossierStateProse/defense.generated.js",
+      "fromRaw": 183357,
+      "toRaw": 183888,
+      "gzipAfter": 25872,
+      "reason": "+531 B raw (gzip level 9: 25,818 -> 25,872), one commit: FIXTURE: gates v1 entered the twenty most-repeated story frames on the 1,000 (309 towns); the pool gains v3 (traveller) and v4 (watch) so the frame spreads. Projected through `node scripts/generate-dossier-state-prose.mjs`; `--check` exit 0."
     }
   ],
   "ceilingTransfersNewLeaves": [

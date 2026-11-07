@@ -3002,6 +3002,8 @@ lines.
 **FIXTURE: gates**
 1. `[street]` Traffic in and out of {settlement} goes through its gates, and that is where anyone arriving is first seen.
 2. `[ledger]` The wall at {settlement} is entered by its gates, and the town can shut them.
+3. `[visitor]` You come into {settlement} by a gate, and someone at the gate sees you come.
+4. `[unfolding]` Whatever reaches {settlement} by road reaches it at a gate, and the town can close them against it.
 
 **FIXTURE: charter hall**
 1. `[street]` Adventurers at {settlement} take their contracts at the charter hall, and the town posts its worst problems there.

@@ -194,7 +194,7 @@ describe('the wiring census — TOTALITY over the corpus', () => {
     // census-3c unit 4 e3295d168 +10; census-5b unit 3 c00b30eb6 +4.
     // 2342 -> 2343 at LANDING-R2 helper G (the chair's §934.105 ruling (1): DS-GEN-17 PROVISIONED v3, the hospital-only line) +1.
     // 2343 -> 2344 at LANDING-R2 helper G2 (the chair's 06:5x DS-CND-1 boom line (ODQ §934.105, ruling (2)): ARCHETYPE: boom v4 `[street · crisis: any]`) +1.
-    expect(summary.variants, 'the R1 corpus holds this many variants').toBe(2374); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 2348 -> 2356 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 2356 -> 2362 // W2 DEF C8/C10 (DS-DEF-5 ARCANE pools, 2026-11-07): 2362 -> 2374
+    expect(summary.variants, 'the R1 corpus holds this many variants').toBe(2376); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 2348 -> 2356 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 2356 -> 2362 // W2 DEF C8/C10 (DS-DEF-5 ARCANE pools, 2026-11-07): 2362 -> 2374 // W2 DEF (FIXTURE: gates v3-v4, the referee's frame cure, 2026-11-07): 2374 -> 2376
     // THE MEAN IS THE CALLER'S TO FORMAT (INSTR-912 car 11). The census publishes `variants`
     // and `total` as integers; a `toFixed` inside `src/domain/prose/` is a float
     // interpolation and a two-decimal score against the estate's prose-numerics register, and
@@ -209,13 +209,13 @@ describe('the wiring census — TOTALITY over the corpus', () => {
     // DS-DEF-9 gains the two FLAG pools of two variants each.
     expect((summary.variants / summary.total).toFixed(2), 'mean variants per pool').toBe('3.28'); // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 2356/715 -> 2362/718 // W2 DEF C8/C10 (DS-DEF-5 ARCANE pools, 2026-11-07): 2362/718 -> 2374/724
     expect(Object.fromEntries(summary.variantHistogram), 'variants per pool, exactly').toEqual({
-      2: 43, 3: 507, 4: 129, 5: 27, 6: 13, 7: 4, 10: 1, // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): four two-variant FIXTURE pools // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): three two-variant FIXTURE pools, 34 -> 37 // W2 DEF C8/C10 (DS-DEF-5 ARCANE pools, 2026-11-07): six two-variant ARCANE pools, 37 -> 43
+      2: 42, 3: 507, 4: 130, 5: 27, 6: 13, 7: 4, 10: 1, // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): four two-variant FIXTURE pools // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): three two-variant FIXTURE pools, 34 -> 37 // W2 DEF C8/C10 (DS-DEF-5 ARCANE pools, 2026-11-07): six two-variant ARCANE pools, 37 -> 43 // FIXTURE: gates 2 -> 4 variants (the referee's frame cure)
     });
     const summed = summary.variantHistogram.reduce((total, [size, pools]) => total + size * pools, 0);
-    expect(summed, 'and the histogram sums back to the corpus').toBe(2374); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 2348 -> 2356 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 2356 -> 2362 // W2 DEF C8/C10 (DS-DEF-5 ARCANE pools, 2026-11-07): 2362 -> 2374
+    expect(summed, 'and the histogram sums back to the corpus').toBe(2376); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 2348 -> 2356 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 2356 -> 2362 // W2 DEF C8/C10 (DS-DEF-5 ARCANE pools, 2026-11-07): 2362 -> 2374 // W2 DEF (FIXTURE: gates v3-v4, the referee's frame cure, 2026-11-07): 2374 -> 2376
     // PER PIECE: the same count rolled up to the block, which is the unit a reader meets.
     const perBlockTotal = summary.perBlock.reduce((total, [, n]) => total + n, 0);
-    expect(perBlockTotal, 'the per-block roll-up carries every variant once').toBe(2374); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 2348 -> 2356 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 2356 -> 2362 // W2 DEF C8/C10 (DS-DEF-5 ARCANE pools, 2026-11-07): 2362 -> 2374
+    expect(perBlockTotal, 'the per-block roll-up carries every variant once').toBe(2376); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 2348 -> 2356 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 2356 -> 2362 // W2 DEF C8/C10 (DS-DEF-5 ARCANE pools, 2026-11-07): 2362 -> 2374 // W2 DEF (FIXTURE: gates v3-v4, the referee's frame cure, 2026-11-07): 2374 -> 2376
     expect(summary.perBlock.length, 'across every block').toBe(68);
   });
 
