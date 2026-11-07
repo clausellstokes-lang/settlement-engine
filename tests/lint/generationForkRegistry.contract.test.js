@@ -175,13 +175,15 @@ describe('EM-P2 — the generation fork register: totality, derivation, and Tier
       'the single label row: a key that moves under a zero-draw step').toEqual(['generatePower|powerIntent']);
     // GS-2 (2026-10-31, ODQ §934.101): same 35 -> 34 and transformed 15 -> 13 in BOTH comparands below, the three
     // retired rows (generatePopulation|conflicts same; generatePopulation|factions and corruptionPass|factions transformed).
+    // PEOPLE-4 TIES (2026-11-07, R-P7): same 30 -> 29, transformed 13 -> 14 in BOTH comparands — generatePopulation|relationships
+    // is rewritten on the record by the coherence seam's tie draw (the step provides `[]`); the disagreement count is unmoved.
     expect(tallyOf(GENERATION_TIER1, 'onRecordClass'), 'the FINAL comparand tally')
-      .toEqual({ absent: 20, same: 30, transformed: 13, varies: 11 }); // LANDING-8 (2026-11-06): same 34 -> 30, varies 7 -> 11, the four stress rows under the copy-on-write crisis cast (lane D, 8befe5a0d). LANDING-1 (2026-11-04): one row same -> varies, re-measured by the census at the landed tip. lane CRISIS (2026-11-03): resolveCrisisCast joins: crisisCast absent, settlement same
+      .toEqual({ absent: 20, same: 29, transformed: 14, varies: 11 }); // LANDING-8 (2026-11-06): same 34 -> 30, varies 7 -> 11, the four stress rows under the copy-on-write crisis cast (lane D, 8befe5a0d). LANDING-1 (2026-11-04): one row same -> varies, re-measured by the census at the landed tip. lane CRISIS (2026-11-03): resolveCrisisCast joins: crisisCast absent, settlement same
     // 2026-10-01, the urban band (ODQ §934.86): absent 27 -> 26, same 18 -> 19. The same re-measure moved two rows'
     // post-step comparand (generationRepairs absent -> varies; isolationSupport varies -> same), and both now agree
     // with their final comparand, so the disagreeing rows below go 18 -> 16 (generationForkCensus records the same).
     expect(tallyOf(GENERATION_TIER1, 'producedOnRecordClass'), 'the POST-STEP comparand tally')
-      .toEqual({ absent: 27, same: 17, transformed: 13, varies: 17 }); // LANDING-1 (2026-11-04): one row same -> varies, re-measured at the landed tip. lane CRISIS (2026-11-03): resolveCrisisCast joins; assembleSettlement|stress produced same -> varies
+      .toEqual({ absent: 27, same: 16, transformed: 14, varies: 17 }); // LANDING-1 (2026-11-04): one row same -> varies, re-measured at the landed tip. lane CRISIS (2026-11-03): resolveCrisisCast joins; assembleSettlement|stress produced same -> varies
 
     // §6.2b: the register carries both comparands BECAUSE sixteen rows disagree, and every
     // one of them is a key a LATER step rewrites. The set is derived from the register itself.
