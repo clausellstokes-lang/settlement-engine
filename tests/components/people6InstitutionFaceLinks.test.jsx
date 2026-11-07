@@ -27,7 +27,7 @@ import { DossierEntityContext } from '../../src/components/dossier/DossierEntity
 import { useDossierEntityNav } from '../../src/components/dossier/useNavigateToEntity.js';
 import { entityIdFor } from '../../src/domain/dossier/entityLinks.js';
 import { facesByHouse } from '../../src/domain/people/cardPowers.js';
-import { cardInstitutionDoorOf } from '../../src/domain/people/cardDoor.js';
+import { cardInstitutionDoorOf, cardHonorificOf, faceNameOf } from '../../src/domain/people/cardDoor.js';
 import { applyVeil } from '../../src/domain/display/galleryVeil.js';
 import { toPublicSafe } from '../../src/domain/display/publicSafe.js';
 import { factionIdFromName } from '../../src/lib/entities.js';
@@ -85,11 +85,11 @@ describe('1. the view model joins each house to its face', () => {
 });
 
 describe('2. the Institutions card: the face row is a door to the NPC card', () => {
-  it('prints "<title> — <name>" and the name opens the NPC tab on the card\'s own id', () => {
+  it('prints "<honorific> <name>" and it opens the NPC tab on the card\'s own id', () => {
     const setActiveTab = vi.fn();
     const { container } = render(<Dossier settlement={SETTLEMENT} setActiveTab={setActiveTab}><InstitutionsTab settlement={SETTLEMENT} /></Dossier>);
     const row = within(cardOf(container, 'Mill')).getByTestId('institution-face');
-    expect(row.textContent).toBe('the miller—Edda Marl');
+    expect(row.textContent).toBe('Master Miller Edda Marl'); // the pool's pick for npc_mill::Mill
     fireEvent.click(within(row).getByRole('button', { name: 'Go to Edda Marl' }));
     expect(setActiveTab).toHaveBeenCalledWith('npcs', 'entity_link');
     expect(useStore.getState().focusedEntity?.id).toBe(entityIdFor('npc', MILLER));
@@ -156,5 +156,73 @@ describe('4. the veil and the public projection hide the join as they hide the c
     const rows = institutionsWithServices(pub);
     expect(rows.find((r) => r.inst.name === 'Mill')?.inst.name).toBe('Mill');
     expect(rows.find((r) => r.inst.name === 'Mill')?.face).toBeNull();
+  });
+});
+
+describe('5. step 2: the honorific (the owner: "Pastor Robert Thomas" on the institution card; the name alone on the NPC card, the role on its own row)', () => {
+  const PASTOR = {
+    id: 'npc_parish-church', name: 'Robert Thomas', role: 'the priest', title: 'the priest', category: 'religious', gender: 'male',
+    institution: { kind: 'house', key: 'Parish church', family: 'parish', title: 'the priest' }, memberships: [],
+  };
+  const ABBESS = { ...PASTOR, id: 'npc_abbey', name: 'Hild Wren', gender: 'female', institution: { kind: 'house', key: 'Abbey', family: 'monastery', title: 'the abbot' } };
+  const CHURCHED = { ...SETTLEMENT, institutions: [...SETTLEMENT.institutions, { name: 'Parish church', category: 'Religious', desc: 'Stone and a bell.' }], npcs: [...SETTLEMENT.npcs, PASTOR] };
+
+  it('the resolvers: the registry form, by gender; nothing for a card with no institution', () => {
+    expect(cardHonorificOf(PASTOR)).toBe('Pastor');
+    expect(faceNameOf(PASTOR)).toBe('Pastor Robert Thomas');
+    expect(cardHonorificOf(ABBESS)).toBe('Mother Abbess'); // the pool's pick for npc_abbey::Abbey, the feminine form
+    // the pick is a pure function of the card's id and its house: stable, and the same on every call
+    expect(cardHonorificOf({ ...PASTOR })).toBe(cardHonorificOf(PASTOR));
+    expect(cardHonorificOf({ ...PASTOR, id: 'npc_robert' })).toBe('Reverend');
+    expect(cardHonorificOf(REEVE)).toBe('Reeve');
+    expect(faceNameOf(STRANGER)).toBe('Wynn Tallow');
+    expect(cardHonorificOf(STRANGER)).toBe('');
+  });
+
+  it('the institution card prints "Pastor Robert Thomas" as the door', () => {
+    act(() => { useStore.setState({ settlement: CHURCHED }); });
+    const setActiveTab = vi.fn();
+    const { container } = render(<Dossier settlement={CHURCHED} setActiveTab={setActiveTab}><InstitutionsTab settlement={CHURCHED} /></Dossier>);
+    const row = within(cardOf(container, 'Stone and a bell.')).getByTestId('institution-face');
+    expect(row.textContent).toBe('Pastor Robert Thomas');
+    fireEvent.click(within(row).getByRole('button', { name: 'Go to Robert Thomas' }));
+    expect(useStore.getState().focusedEntity?.id).toBe(entityIdFor('npc', PASTOR));
+  });
+
+  it('the NPC card: the heading is the full name alone; the role row under the door reads the honorific', () => {
+    act(() => { useStore.setState({ settlement: CHURCHED }); });
+    const { getByTestId, getByText } = render(<Dossier settlement={CHURCHED} setActiveTab={vi.fn()}><NPCInlineCard npc={PASTOR} /></Dossier>);
+    const heading = getByText('Robert Thomas');
+    expect(heading.parentElement.textContent.startsWith('Robert Thomas')).toBe(true);
+    expectAbsentWithAnchor([...heading.parentElement.children].map((n) => n.textContent), 'the priest', 'Robert Thomas', 'no title beside the name');
+    // the role row reads the SAME picked form as the institution card's row
+    expect(getByTestId('npc-role').textContent).toBe('Pastor');
+    expect(faceNameOf(PASTOR)).toBe(`${getByTestId('npc-role').textContent} Robert Thomas`);
+    // the role row follows the line holding the door
+    expect(getByTestId('npc-institution-door').closest('div').nextElementSibling).toBe(getByTestId('npc-role'));
+    // the door is a link, so it sits under the toggle, never inside its <button> (invalid HTML)
+    expect(getByTestId('npc-institution-door').closest('[data-testid="npc-card-line"]')).toBeTruthy();
+    expect(getByTestId('npc-institution-door').closest('button[aria-expanded]')).toBeNull();
+  });
+
+  it('a minted face\'s role row reads its mint title\'s honorific; a DM\'s person has no role row', () => {
+    const minted = render(<Dossier settlement={SETTLEMENT} setActiveTab={vi.fn()}><NPCInlineCard npc={REEVE} /></Dossier>);
+    expect(minted.getByTestId('npc-role').textContent).toBe('Reeve');
+    cleanup();
+    const dm = render(<Dossier settlement={SETTLEMENT} setActiveTab={vi.fn()}><NPCInlineCard npc={STRANGER} /></Dossier>);
+    expect(dm.container.textContent).toContain('Wynn Tallow');
+    expect(dm.container.querySelector('[data-testid="npc-role"]')).toBeNull();
+  });
+
+  it('the veil and the public projection take the honorific with the house: the name stays bare', () => {
+    const veiled = applyVeil(CHURCHED, ['field:npc:npc_parish-church:ties']);
+    const v = veiled.npcs.find((n) => n.id === 'npc_parish-church');
+    expect(faceNameOf(v)).toBe('Robert Thomas');
+    expect(cardHonorificOf(v)).toBe('');
+    const pub = toPublicSafe(CHURCHED).npcs.find((n) => n.name === 'Robert Thomas');
+    expect(faceNameOf(pub)).toBe('Robert Thomas');
+    expect(cardHonorificOf(pub)).toBe('');
+    // the unveiled control
+    expect(faceNameOf(CHURCHED.npcs.find((n) => n.id === 'npc_parish-church'))).toBe('Pastor Robert Thomas');
   });
 });

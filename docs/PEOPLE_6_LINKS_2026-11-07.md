@@ -99,6 +99,286 @@ PLAUSIBLE:
 - That a minted face's card line should print its power's name as the door when the power line also reads "first of X". The owner asked for the link; the duplication is one word on the seat's card. The alternative is to link the X inside "first of X" instead.
 - That the public projection dropping the row is the intended "hide". The name itself stays on the NPC card, but the join (`institution`) is not public until STOP 1's migration lands. Then the row and the door return together on a public card unless the veil's ties eye is shut.
 
-## 7. The tip
+## 7. Step 2: the honorifics (the chair's extension of 16:4x UTC, refined at 16:5x UTC)
+
+**The owner's words.**
+- Verbatim: *"can you give appropriate weighty titles/roles to each NPC based on their institution? Like the NPC of a village church is Pastor Robert Thomas. And that's how it's presented on the institution card. Whereas the NPC card says their full name. Without the title but underneath the link to institution it shows their role in another row?"*
+- Refined, verbatim: *"So like a pool of weighty leadership/ownership titles per each institution to choose from."*
+
+**Where it lives.** The registry is `src/data/faceHonorifics.js` (new): `FACE_HONORIFICS`, title → a POOL of honorifics, with the resolver `honorificOfTitle(title, gender, seed)`.
+- It is keyed by the face's TITLE rather than written as a `honorific` mark per family inside `institutionalCatalog.js`. The census's `face` is already a title, and one title takes one pool at every tier, so a per-family mark would only spell the same title twice.
+- The two mints' titles (`mintTitles.js`) have no catalog row, and the title key reaches them through the same table.
+- The catalog's bytes are not moved.
+- It is a registry-only mark: never written onto a card or a save.
+
+**The pool.** 212 titles, 373 forms, one to four per title.
+- Each pool holds the weighty forms that mean leading or owning that institution, period-fitting and never a rank the institution could not hold.
+- Index 0 is the canonical form; the owner's and the chair's named forms are index 0 and are pinned.
+- A title with nothing weightier (the fence, the smuggler, the gang boss, the slaver, …) holds its role capitalised alone. There are 60 such titles; the street knows them by it.
+
+**The pick.** Display-only and deterministic: `pickVariant(pool, '<card id>::<institution key>')`, the kernel's zero-draw FNV-1a (`src/kernel/proseHash.js`, the house's sanctioned zero-draw variant selection).
+- One card reads one form on every surface: the institution card's row and the NPC card's role row call the same `cardHonorificOf`, and any later PDF row would call the same function.
+- No draw, no record field, no generator fork, no golden moves.
+- With no seed, the canonical form is used.
+
+**Resolution on a card.** `src/domain/people/cardDoor.js` has two web-only resolvers:
+- `cardHonorificOf(card)`: the picked form, by the card's `gender`; `''` when the card has no institution.
+- `faceNameOf(card)`: "Pastor Robert Thomas".
+
+**Fallbacks.** The seat mint's fallback "the head of X" resolves to "Head of X". A title the registry does not name (a DM's own) resolves to its own words without the article, capitalised.
+
+**Gendered forms.** These carry `{ male, female }`, written below as "m / f":
+- the priest: Father / Mother
+- the abbot: Abbot / Abbess and Father Abbot / Mother Abbess
+- the senior abbot: Lord Abbot / Lady Abbess and Abbot / Abbess
+- the monarch: King / Queen
+- the high priest: High Priest / High Priestess
+- the elder priest: Father / Mother
+- the lord, and the Highborn Circle's first: Lord / Lady
+
+**The renderings.**
+- **The institution card's row** is now the door alone, in the form `<picked honorific> <full name>` ("Pastor Robert Thomas"). It is `EntityLink … verbatim`, so the link keeps that text, its aria label is "Go to <name>", and it still targets the NPC card's own id.
+- **The NPC card, for a card with an institution.** The heading is the full name alone; the title beside it and the role (the title) in the line are no longer printed. The line keeps the door back and the power line. Under it, a role row reads the same picked honorific alone ("Pastor"). The shorter form is used on every card for consistency.
+- **A minted face's role row** shows its mint title's honorific ("Reeve", "Elder", "Leader of the revolt").
+- **A DM's card (`institution: null`)** is unchanged: its title and role print as before, and it has no role row.
+- **The line moved out of the toggle.** The line (with the door) and the role row now sit under the card's toggle, not inside its `<button>`. The door is itself a `<button>` (EntityLink), and React warned "In HTML, <button> cannot be a descendant of <button>". Step 1 had put the door inside the toggle; this cures it, and a test pins the door outside the toggle.
+
+**The veil.** The honorific is resolved from `institution` alone, so it goes wherever the house goes. Under the veil's ties eye, and in the public-safe projection, the name stays bare ("Robert Thomas"), the institution card shows no row and the NPC card shows no role row. It can never name a hidden criminal house's rank.
+
+**Proofs.**
+- `tests/data/faceHonorifics.test.js` (6):
+  - the registry names exactly the 212 titles a face can be born with (the catalog's faces, the seat mint and the `other` mint) and no other;
+  - every pool holds 1–5 capitalised forms, 373 in all;
+  - the pick is deterministic and reaches every form (the priest's four, by either gender);
+  - the named forms are the canonical ones;
+  - the gendered forms;
+  - the fallbacks.
+- `people6InstitutionFaceLinks` §5 (5 more, 15 in that file):
+  - the picked form, stable per card and moving with the card's id;
+  - "Pastor Robert Thomas" as the door, and its target;
+  - the heading is the name alone, with the role row reading the same picked form under the door, and the door outside the toggle;
+  - a minted face's role row, and a DM card's lack of one;
+  - the veil and the public projection.
+- The goldens: the 525 hash set is unchanged at the step-2 tip (§3's digest, re-run).
+- The observed-shape register: still the base's STOP. The step adds one display read, the card's `gender` (a floor field, on the web card), listed for the landing seat's rung with §4's reads.
+
+**The table, for the owner's veto: title → the pool, canonical form first, every row (212).**
+
+| title | honorifics (the pick is stable per card) |
+|---|---|
+| the boat-headman | Headman · Boat-Master · Skipper |
+| the head shepherd | Head Shepherd · Master Shepherd |
+| the camp foreman | Foreman · Camp Master |
+| the eldest | Elder · Eldest |
+| the eldest householder | Elder · Goodman |
+| the reeve | Reeve |
+| the household elder | Elder · Head of the Household |
+| the fence | Fence |
+| the outlaw host | Captain · Outlaw Chief |
+| the dairy farmer | Dairyman · Dairy Farmer |
+| the collier | Collier · Master Collier |
+| the peat-reeve | Peat-Reeve · Reeve |
+| the mine captain | Mine Captain · Captain · Mine-Master |
+| the quarry master | Quarrymaster · Master Quarrier |
+| the salt master | Saltmaster · Master of the Saltworks |
+| the master of the hunt | Huntmaster · Master of the Hunt |
+| the pawnbroker | Pawnbroker · Pawnmaster |
+| the innkeeper | Innkeeper · Landlord · Host |
+| the alewife | Alewife · Brewster |
+| the caravanserai keeper | Caravanserai Keeper · Host |
+| the horse-coper | Horse-Coper · Horse-Dealer |
+| the stable keeper | Stablekeeper · Ostler |
+| the maltster | Maltster · Master Maltster |
+| the smith | Smith · Blacksmith |
+| the carpenter | Carpenter · Wright |
+| the steward | Steward · Seneschal |
+| the headman | Headman · Chief |
+| the militia captain | Captain · Captain of the Militia |
+| the hedge wizard | Hedge Wizard · Cunning-Man |
+| the charter master | Chartermaster · Master of the Charter |
+| the bandit contact | Go-Between |
+| the smuggler | Smuggler |
+| the fishmonger | Fishmonger |
+| the master fishmonger | Master Fishmonger · Fishmonger |
+| the beekeeper | Beekeeper · Beemaster |
+| the wildfowler | Fowler · Wildfowler |
+| the waystation keeper | Waystation Keeper · Host |
+| the carriers' master | Master Carrier · Carriers' Master |
+| the ferryman | Ferryman · Ferry-Master |
+| the boatwright | Boatwright · Master Boatwright |
+| the toll-keeper | Toll-Keeper · Tollman |
+| the miller | Miller · Master Miller |
+| the thatcher | Thatcher · Master Thatcher |
+| the cooper | Cooper · Master Cooper |
+| the apothecary | Apothecary · Master Apothecary |
+| the bowyer | Bowyer · Master Bowyer |
+| the sawyer | Sawyer · Master Sawyer |
+| the brewer | Brewer · Master Brewer |
+| the tanner | Tanner · Master Tanner |
+| the fuller | Fuller · Master Fuller |
+| the dyer | Dyer · Master Dyer |
+| the potter | Potter · Master Potter |
+| the brickmaker | Brickmaker · Master Brickmaker |
+| the cobbler | Cobbler · Master Cobbler |
+| the tailor | Tailor · Master Tailor |
+| the midwife | Midwife · Goodwife |
+| the woodcarver | Woodcarver · Master Carver |
+| the scribe | Scribe · Clerk |
+| the cartographer | Cartographer · Mapmaker |
+| the priest | Pastor · Father / Mother · Vicar · Reverend |
+| the archdruid | Archdruid |
+| the village elder | Elder · Village Elder |
+| the watch sergeant | Sergeant · Sergeant of the Watch |
+| the lodge master | Lodgemaster · Master of the Lodge |
+| the healer | Healer · Leech |
+| the network's spider | Spider |
+| the musician | Minstrel · Bard |
+| the senior guild master | Guildmaster · Master of the Guild · Warden of the Guild |
+| the banker | Banker · Master of the House |
+| the tavern keeper | Taverner · Landlord · Host |
+| the coaching-inn keeper | Innkeeper · Landlord · Host |
+| the post's master | Postmaster · Master of the Post |
+| the stable master | Stablemaster · Master of Horse |
+| the beast master | Beastmaster · Master of Beasts |
+| the postmaster | Postmaster · Master of the Post |
+| the master shipwright | Master Shipwright · Shipwright |
+| the barge master | Bargemaster · Master of Barges |
+| the wharfinger | Wharfinger · Wharfmaster |
+| the harbour master | Harbourmaster · Master of the Harbour |
+| the customs collector | Collector · Searcher · Collector of Customs |
+| the granary reeve | Granary Reeve · Granger |
+| the warehouse factor | Factor · Warehouse Master |
+| the bath-keeper | Bath-Keeper · Bathmaster |
+| the slaver | Slaver |
+| the auctioneer | Auctioneer · Master of the Block |
+| the assayer | Assayer · Master Assayer |
+| the mint master | Mintmaster · Master of the Mint |
+| the watcher | Watcher |
+| the master smith | Master Smith · Smith-master |
+| the jeweller | Jeweller · Master Jeweller |
+| the master carpenter | Master Carpenter · Master Wright |
+| the vintner | Vintner · Master Vintner |
+| the master tanner | Master Tanner · Tanner |
+| the master weaver | Master Weaver · Weaver-master |
+| the master butcher | Master Butcher · Butcher |
+| the master baker | Master Baker · Baker |
+| the smelt master | Smeltmaster · Master Smelter |
+| the chandler | Chandler · Master Chandler |
+| the glassmaker | Glassmaker · Master Glazier |
+| the ropemaker | Ropemaker · Master Roper |
+| the printer | Printer · Master Printer |
+| the senior craft-guild master | Guildmaster · Master of the Guild |
+| the alchemist | Alchemist · Master Alchemist |
+| the dean | Dean |
+| the abbot | Abbot / Abbess · Father Abbot / Mother Abbess |
+| the hospitaller | Hospitaller · Brother Hospitaller |
+| the almoner | Almoner |
+| the foundling-mother | Mother · Matron |
+| the grove elder | Elder · Grove-Warden |
+| the lord's appointee | Bailiff · Lord's Bailiff |
+| the first councillor | First Councillor · Councillor |
+| the mayor | Mayor · Lord Mayor |
+| the consortium speaker | Speaker · Speaker of the Consortium |
+| the first magnate | Magnate · First Magnate |
+| the crier | Crier · Town Crier |
+| the magistrate | Magistrate · Justice |
+| the gaoler | Gaoler · Keeper |
+| the workhouse master | Workhouse Master · Master of the Workhouse |
+| the watch captain | Captain · Captain of the Watch |
+| the garrison commander | Commander · Captain |
+| the castellan | Castellan · Constable |
+| the company captain | Captain · Company Captain |
+| the warden | Warden |
+| the wizard | Wizard · Magus |
+| the guild archmage | Archmage · Master of the Guild |
+| the scroll scribe | Scribe · Master Scribe |
+| the circle-keeper | Circle-Keeper · Keeper |
+| the hiring master | Hiring Master |
+| the blade captain | Captain · Blade-Captain |
+| the gang boss | Boss |
+| the front man | Frontman |
+| the rookery boss | Boss |
+| the troupe leader | Troupe Leader · Troupe Master |
+| the theatre manager | Theatre Manager · Manager |
+| the house boss | Boss |
+| the madam | Madam |
+| the pit boss | Pit Boss |
+| the lanista | Lanista |
+| the fortune teller | Fortune-Teller · Seer |
+| the master furrier | Master Furrier · Furrier |
+| the exchange's steward | Steward · Steward of the Exchange |
+| the master of granaries | Master of Granaries · Granger |
+| the slave-market master | Slavemaster |
+| the chronicler | Chronicler |
+| the master metalworker | Master Metalworker |
+| the luxury merchant | Merchant · Merchant Prince |
+| the senior abbot | Lord Abbot / Lady Abbess · Abbot / Abbess |
+| the bishop | Bishop · Lord Bishop |
+| the hospital's master | Master · Master of the Hospital |
+| the governor | Governor · Lord Governor |
+| the chief administrator | Chief Administrator · Administrator |
+| the doge | Doge |
+| the speaker of the assembly | Speaker · Speaker of the Assembly |
+| the monarch | King / Queen · Sovereign |
+| the chief magistrate | Chief Magistrate · Chief Justice |
+| the prison warden | Warden · Keeper |
+| the watch commander | Commander · Commander of the Watch |
+| the enchanter | Enchanter · Master Enchanter |
+| the senior charter master | Chartermaster · Master of the Charter |
+| the outfitter | Outfitter |
+| the sage | Sage |
+| the network's head | Spymaster |
+| the guildmaster of thieves | Guildmaster |
+| the whisper broker | Broker |
+| the black marketeer | Black Marketeer |
+| the killer | Killer |
+| the ringleader | Ringleader |
+| the trafficker | Trafficker |
+| the college master | Master · Master of the College |
+| the district madam | Madam |
+| the golem-master | Golem-Master |
+| the necromancer-overseer | Overseer |
+| the exchange master | Exchange Master · Master of the Exchange |
+| the librarian | Librarian · Keeper of the Books |
+| the chancellor | Chancellor · Lord Chancellor |
+| the envoy | Envoy · Emissary |
+| the undercity boss | Boss |
+| the guild's master | Guildmaster · Master of the Guild |
+| the impresario | Impresario |
+| the arena master | Arena Master · Master of the Games |
+| the planar factor | Factor |
+| the dragon | Dragon |
+| the dream-keeper | Dream-Keeper |
+| the skydock master | Dockmaster · Skydock Master |
+| the message-master | Message-Master |
+| the royal governor | Royal Governor · Governor |
+| the commander | Commander · Captain |
+| the war-leader | War-Leader · Warlord |
+| the occupying governor | Governor · Military Governor |
+| the high priest | High Priest / High Priestess |
+| the elder priest | Elder Priest · Father / Mother |
+| the guildmaster | Guildmaster · Master of the Guild |
+| the council's fixer | Fixer |
+| the guild master | Guildmaster · Master of the Guild |
+| the craft-guild master | Guildmaster · Master of the Guild |
+| the grain factor | Factor · Grain Factor |
+| the lord | Lord / Lady |
+| the circle's first | Lord / Lady |
+| the magister | Magister |
+| the council's archmage | Archmage |
+| the revolt's leader | Leader of the revolt |
+| the creditor's agent | Agent |
+| the reformer | Reformer |
+| the investigator | Investigator |
+| the bloc's speaker | Speaker |
+| the newcomers' spokesman | Spokesman |
+| the alliance's convenor | Convenor |
+| the commoners' tribune | Tribune |
+| the neutrals' broker | Broker |
+| the peacemaker | Peacemaker |
+| the abolitionist | Abolitionist |
+| the journeymen's warden | Warden |
+
+## 8. The tip
 
 `lane/people-6-links-2026-11-07`, pushed with `--no-verify`. The tip is the commit that carries this record.

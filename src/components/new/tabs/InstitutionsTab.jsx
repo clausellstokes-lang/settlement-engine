@@ -58,6 +58,7 @@ import { formatBacksValue, houseBacksOf } from '../../../domain/dossier/powerSup
 import { walkUserEdits } from '../../../domain/userEdits.js';
 import { factionIdFromName } from '../../../lib/entities.js';
 import { facesByHouse } from '../../../domain/people/cardPowers.js';
+import { faceNameOf } from '../../../domain/people/cardDoor.js';
 import { nameOf } from '../../../domain/rulingPower.js';
 import { useEntityFocus } from '../../dossier/useEntityFocus.js';
 import { MentionText } from '../../ProseParagraph.jsx';
@@ -265,14 +266,13 @@ export function InstitutionCard({ inst, category, label, services, sets, backs =
       {description && (
         <p data-testid="institution-desc" style={{ fontSize: proseFontSize(FS.xs, mobile), color: swatch.inkMag3, lineHeight: 1.4, margin: '2px 0 0' }}><MentionText text={description} selfId={selfId} /></p>
       )}
-      {/* THE FACE ROW (PEOPLE-6 LINKS, the owner's word of 2026-11-07): the house's representative,
-          its title the label and its name a door to its NPC card (EntityLink, by the card's own
-          id). A house with no face shows no row. */}
+      {/* THE FACE ROW (PEOPLE-6 LINKS, the owner's word of 2026-11-07): the house's representative
+          as "Pastor Robert Thomas" — the honorific of its title (src/data/faceHonorifics.js), then
+          the full name — a door to its NPC card (EntityLink, by the card's own id). A house with no
+          face shows no row. */}
       {face && face.name && (
-        <div data-testid="institution-face" style={{ display: 'flex', alignItems: 'baseline', gap: '2px 6px', flexWrap: 'wrap', marginTop: 4, fontSize: proseFontSize(FS.xs, mobile), color: swatch.inkMag3 }}>
-          <span data-testid="institution-face-title">{String(face.institution?.title || face.title || '')}</span>
-          <span aria-hidden="true">—</span>
-          <EntityLink id={entityIdFor('npc', face, String(face.name))} type="npc" fallback={String(face.name)} style={{ color: swatch.inkMag, fontWeight: 600 }} />
+        <div data-testid="institution-face" style={{ marginTop: 4, fontSize: proseFontSize(FS.xs, mobile), color: swatch.inkMag3 }}>
+          <EntityLink id={entityIdFor('npc', face, String(face.name))} type="npc" fallback={faceNameOf(face)} verbatim style={{ color: swatch.inkMag, fontWeight: 600 }} />
         </div>
       )}
       {/* THE BACKS LINE (X-40, X-45): who the house contributes to, each name a door to the Power

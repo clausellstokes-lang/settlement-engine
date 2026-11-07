@@ -20,7 +20,7 @@ import { npcInteriority } from '../../domain/display/npcInteriorityRead.js';
 import { whereaboutsLine, whereaboutsBadge } from '../../domain/roads/whereaboutsDisplay.js';
 import { cardTieLines } from '../../domain/relationships/cardTies.js';
 import { cardPowerLine, cardPowerNames, cardHouseOf } from '../../domain/people/cardPowers.js';
-import { cardInstitutionDoorOf } from '../../domain/people/cardDoor.js';
+import { cardInstitutionDoorOf, cardHonorificOf } from '../../domain/people/cardDoor.js';
 import {
   NPC_GOALS, NPC_ROLE_ARCHETYPES, npcFacetOf,
 } from '../../domain/npc/npcBank.js';
@@ -257,11 +257,16 @@ export function NPCInlineCard({
   const cardDoor = cardInstitutionDoorOf(npc, settlement);
   const cardPowerTail = cardPowerLine(npc);
   const cardLineTail = cardDoor || cardPowerTail;
-  const nativeRole = NPC_ROLE_ARCHETYPES.includes(npc.role)
+  // PEOPLE-6 LINKS step 2 (the owner's word): a face's heading is its full name alone, and its
+  // role is the honorific of its institution's title, on its own row under the door. The card's
+  // `role`/`title` (the title itself, M-1b) is not printed beside it; a DM's person keeps both.
+  const honorific = cardHonorificOf(npc);
+  const nativeRole = cardDoor ? '' : NPC_ROLE_ARCHETYPES.includes(npc.role)
     ? humanizeNpcFacet(npc.role)
     : (npc.role || '');
   const showRoleArchetype = roleArchetype
     && String(roleFacet) !== String(npc.role || '');
+  const hasSubline = Boolean(nativeRole || showRoleArchetype || cardLineTail || honorific);
   const goalFacet = npcFacetOf(npc, 'goal');
   const goalText = NPC_GOALS.includes(goalFacet)
     ? humanizeNpcFacet(goalFacet)
@@ -333,22 +338,12 @@ export function NPCInlineCard({
       ...edged(`1px solid ${isPinned ? '#c8a8e8' : `${color}20`}`, `3px solid ${isPinned ? pinColor : color}`),
       marginBottom:6,overflow:'hidden',
     }}>
-      <button type="button" aria-expanded={open} onClick={()=>setOpen(v=>!v)} style={{width:'100%',display:'flex',alignItems:'center',gap:8,padding:'8px 12px',background:'none',border:'none',cursor:'pointer',textAlign:'left',WebkitTapHighlightColor:'transparent'}}>
+      <button type="button" aria-expanded={open} onClick={()=>setOpen(v=>!v)} style={{width:'100%',display:'flex',alignItems:'center',gap:8,padding: hasSubline ? '8px 12px 0' : '8px 12px',background:'none',border:'none',cursor:'pointer',textAlign:'left',WebkitTapHighlightColor:'transparent'}}>
         <div style={{flex:1,minWidth:0}}>
           <div style={{display:'flex',alignItems:'baseline',gap:6,flexWrap:'wrap'}}>
             <span style={{...serif,fontSize: FS['14'],fontWeight:700,color:swatch.inkMag}}>{npc.name}</span>
-            <span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED}}>{npc.title}</span>
+            {!cardDoor && <span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED}}>{npc.title}</span>}
             <span style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:infColor,marginLeft:'auto',flexShrink:0}}>{infDots}</span>
-          </div>
-          <div style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag3}}>
-            {nativeRole}
-            {showRoleArchetype ? `${nativeRole ? ' · ' : ''}${roleArchetype} archetype` : ''}
-            {/* THE POWER LINE (PEOPLE-5A, M-1b): the card's house, then its standing in
-                each power by rank — "first of X · second of Y" — read from its memberships. */}
-            {cardLineTail && (nativeRole || showRoleArchetype) ? ' · ' : ''}
-            {cardDoor && <span data-testid="npc-institution-door"><EntityLink id={cardDoor.id} type={cardDoor.type} fallback={cardDoor.name} style={{ color: swatch.inkMag3, fontWeight: 600 }} /></span>}
-            {cardDoor && cardPowerTail ? ' · ' : ''}
-            {cardPowerTail}
           </div>
         </div>
         {pinAvailable && (
@@ -375,6 +370,23 @@ export function NPCInlineCard({
         )}
         <span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED,flexShrink:0}}>{open?'▲':'▼'}</span>
       </button>
+      {/* THE CARD'S LINE, under the toggle (PEOPLE-6 LINKS): it holds the door back, a link, which
+          may not sit inside the toggle's <button>; the role row follows it. */}
+      {hasSubline && (
+        <div data-testid="npc-card-line" style={{padding:'0 12px 8px'}}>
+      <div style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag3}}>
+        {nativeRole}
+        {showRoleArchetype ? `${nativeRole ? ' · ' : ''}${roleArchetype} archetype` : ''}
+        {/* THE POWER LINE (PEOPLE-5A, M-1b): the card's house, then its standing in
+            each power by rank — "first of X · second of Y" — read from its memberships. */}
+        {cardLineTail && (nativeRole || showRoleArchetype) ? ' · ' : ''}
+        {cardDoor && <span data-testid="npc-institution-door"><EntityLink id={cardDoor.id} type={cardDoor.type} fallback={cardDoor.name} style={{ color: swatch.inkMag3, fontWeight: 600 }} /></span>}
+        {cardDoor && cardPowerTail ? ' · ' : ''}
+        {cardPowerTail}
+      </div>
+      {honorific && <div data-testid="npc-role" style={{fontSize:chromeFontSize(FS.xs, mobile),color:MUTED}}>{honorific}</div>}
+        </div>
+      )}
       {open && (
         <div style={{padding:'0 12px 10px',borderTop:`1px solid ${color}15`}}>
           {flag('settlementWorkbench') && canAuthorNpc && npc?.id != null && (
