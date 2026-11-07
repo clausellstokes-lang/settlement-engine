@@ -120,10 +120,13 @@ describe('the four negative controls and the positive one (MOVE-GRAMMAR §4.4, a
     // 404 / 114 -> 409 / 114 at W5 HIS construction (2026-11-07, ODQ §934.105): DS-GEN-16 gains five
     // two-variant pools (LIVING-MEMORY, LEGACY-*), each variant one sentence, so each pool is uniform;
     // no opener repeats inside a pool.
-    expect(uniformSegments).toBe(409);
-    expect(repeatedOpener).toBe(114);
-    expect(uniformSegments / cells.size).toBeCloseTo(0.573, 3);
-    expect(repeatedOpener / cells.size).toBeCloseTo(0.160, 3);
+    // 409 / 114 -> 414 / 111 at W5 HIS's style pass (2026-11-07, the owner's style law): five of the section's pools
+    // lose their one two-sentence variant to a single plain sentence, so each pool is now uniform; the openers were
+    // varied pool by pool, and three pools that repeated one no longer do.
+    expect(uniformSegments).toBe(414);
+    expect(repeatedOpener).toBe(111);
+    expect(uniformSegments / cells.size).toBeCloseTo(0.580, 3);
+    expect(repeatedOpener / cells.size).toBeCloseTo(0.155, 3);
   });
 
   it('CONTROL 4, SECOND HALF — the R1 leaves RED ON ARM E, which is what the control actually says', async () => {
@@ -146,8 +149,8 @@ describe('the four negative controls and the positive one (MOVE-GRAMMAR §4.4, a
     expect(figures.pools).toBe(714);
     // 406 -> 405 by the same cause as the calibration above (the chair's 06:5x rewording of DS-GEN-17 v3);
     // 405 -> 404 at the chair's 06:5x DS-CND-1 boom line (ODQ §934.105), likewise.
-    expect(Math.round(figures.uniformSegmentShare * 714)).toBe(409);
-    expect(Math.round(figures.repeatedOpenerShare * 714)).toBe(114);
+    expect(Math.round(figures.uniformSegmentShare * 714)).toBe(414);
+    expect(Math.round(figures.repeatedOpenerShare * 714)).toBe(111);
   });
 
   it('ARM E is NOT-EXECUTABLE without spread ceilings — never a pass on a number it invented', () => {
@@ -782,7 +785,9 @@ describe('the PROVENANCE detector cites the twelve holder kinds and nothing wide
     expect(kindOnly).toBe(7);
     expect(genericOnly).toBe(0);
     expect(both).toBe(0);
-    expect(genericNotCited.length).toBe(11);
+    // 11 -> 8 at W5 HIS's style pass (2026-11-07): three of the withdrawn limb's sentences were rewritten
+    // without it; eight remain, so the control still has sentences to re-admit.
+    expect(genericNotCited.length).toBe(8);
   });
 
   it('every one of the twelve kinds is live, and the withdrawn vocabulary is refused', () => {

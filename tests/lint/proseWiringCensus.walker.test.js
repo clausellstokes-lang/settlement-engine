@@ -698,8 +698,9 @@ describe('THE MAP READ THE OTHER WAY — fact → text, and the three tiers', ()
     // || the raw sequence)` per pool. The counts are recomputed FRESH from the live modules
     // here, which is why they move with the classifier rather than with the committed JSON.
     expect(counts.get(TIERS.MISSING), 'held facts with no pool keyed on them').toBe(34);
-    expect(counts.get(TIERS.THIN), 'pools with one variant, one grammar, or {settlement} alone').toBe(485);
-    expect(counts.get(TIERS.COVERED), 'and the rest').toBe(229);
+    // 485 -> 484 at W5 HIS's style pass (2026-11-07): one pool's variants no longer share one grammar.
+    expect(counts.get(TIERS.THIN), 'pools with one variant, one grammar, or {settlement} alone').toBe(484);
+    expect(counts.get(TIERS.COVERED), 'and the rest').toBe(230);
     expect(counts.get(TIERS.THIN) + counts.get(TIERS.COVERED), 'every pool lands in one of the two pool tiers')
       .toBe(spines.length);
     for (const row of tiers) {

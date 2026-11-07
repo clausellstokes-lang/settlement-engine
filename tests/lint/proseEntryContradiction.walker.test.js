@@ -423,8 +423,9 @@ describe('THE ANTI-VACUITY GUARD — the walker must fail on the corpus it ships
       // 5298 -> 5325, re-addressed by its text ("the same trades exempt"): the census lanes' annex
       // edits above it moved the row 27 lines (it now carries its census tag slot too). 5325 -> 5326
       // at LANDING-R2 helper G2 (the chair's 06:5x DS-CND-1 boom line (ODQ §934.105, ruling (2)): ARCHETYPE: boom v4 `[street · crisis: any]`): the boom line sits above it.
-      .find((row) => row.line === 5326);
-    expect(annexRow, 'RECEIPT_POOLS_DOSSIER_STATE.md:5326 did not load').toBeTruthy();
+      // 5326 -> 5332 at W5 HIS (2026-11-07): DS-POP-1's re-citation paragraph sits above it.
+      .find((row) => row.line === 5332);
+    expect(annexRow, 'RECEIPT_POOLS_DOSSIER_STATE.md:5332 did not load').toBeTruthy();
     expect(walkEntry(annexRow, withEntryContext(base, {})).fails.map((f) => f.arm))
       .toContain('exemption on a null column');
   });
@@ -513,8 +514,10 @@ describe('THE ANTI-VACUITY GUARD — the walker must fail on the corpus it ships
     // `eventProvenance: false`; NOT-EXECUTABLE without the flag) — measured on that one entry.
     // 47 -> 46 (both) at the chair's 07:1x ruling: the boom line's undated clause ("coin moves
     // freely and work is easy to find") makes no dated claim, so the entry leaves the class.
-    expect(notExecutable).toBe(46);
-    expect(fails).toBe(46);
+    // 46 -> 41 (both) at W5 HIS's style pass (2026-11-07, ODQ §934.105, the owner's style law): the rewritten
+    // history/overview lines drop five provenance-class phrasings (measured over the leaves, parent -> commit).
+    expect(notExecutable).toBe(41);
+    expect(fails).toBe(41);
     // PRESENT-THEN-ABSENT on one of them, so the arm is proved rather than counted.
     const anchor = corpus.find((entry) => walkEntry(entry, withEntryContext(base, { eventProvenance: false }))
       .fails.some((f) => f.klass === 'C3'));
@@ -674,7 +677,9 @@ describe('THE ANTI-VACUITY GUARD — the walker must fail on the corpus it ships
     // 336 -> 341, measured per commit on the leaves: F12 unit 2 (e19e3e4cf) +3, census-5b unit 3
     // (c00b30eb6, R-L twins) +2. Report-only, still a minority.
     // 341 -> 343 at W5 HIS construction (2026-11-07, ODQ §934.105): two of DS-GEN-16's new legacy lines carry the class. Report-only, still a minority.
-    expect(carrying.length, 'entries carrying the trailing-coordinate class, at this tip').toBe(343);
+    // 343 -> 371 at W5 HIS's style pass (2026-11-07, the owner's style law): plain "X, and Y" statements replace the
+    // aphorisms and balances. Report-only, still a minority.
+    expect(carrying.length, 'entries carrying the trailing-coordinate class, at this tip').toBe(371);
     expect(carrying.length, 'and it is a minority of the 2,266 R1 variants').toBeLessThan(leaves.length / 2);
     console.log(`  Q · trailing coordinate: ${carrying.length} of ${leaves.length} R1 entries carry the class`);
   });

@@ -37,8 +37,8 @@
     "syntheticTableFields": 100,
     "tiers": {
       "MISSING": 34,
-      "THIN": 485,
-      "COVERED": 229,
+      "THIN": 484,
+      "COVERED": 230,
       "MISSING-AT-TIER": 45
     },
     "tierSilences": 352,
@@ -14535,7 +14535,7 @@
       ],
       "hasBag": false,
       "variants": 3,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -14683,7 +14683,7 @@
       ],
       "hasBag": false,
       "variants": 3,
-      "grammars": 1,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -14734,7 +14734,7 @@
       ],
       "hasBag": false,
       "variants": 3,
-      "grammars": 2,
+      "grammars": 3,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -14971,7 +14971,7 @@
       ],
       "hasBag": false,
       "variants": 3,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -15481,7 +15481,7 @@
       ],
       "hasBag": false,
       "variants": 5,
-      "grammars": 3,
+      "grammars": 1,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -15640,7 +15640,7 @@
       ],
       "hasBag": false,
       "variants": 5,
-      "grammars": 3,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -16075,7 +16075,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 5,
-      "grammars": 3,
+      "grammars": 4,
       "predicate": [
         {
           "field": "conflict.intensity",
@@ -16148,7 +16148,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 5,
-      "grammars": 3,
+      "grammars": 2,
       "predicate": [
         {
           "field": "conflict.intensity",
@@ -17643,7 +17643,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [
         {
           "field": "text(label) (via PROSPERITY_POOL_OF in generalStateProse.js)",
@@ -17956,7 +17956,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 4,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [
         {
           "field": "head (via SAFETY_POOL_OF in generalStateProse.js)",
@@ -18091,7 +18091,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 1,
+      "grammars": 2,
       "predicate": [
         {
           "field": "head (via SAFETY_POOL_OF in generalStateProse.js)",
@@ -18155,7 +18155,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 4,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [
         {
           "field": "readings.viable",
@@ -18421,7 +18421,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 2,
-      "grammars": 1,
+      "grammars": 2,
       "predicate": [
         {
           "field": "text(label) (via READINESS_POOL_OF in generalStateProse.js)",
@@ -18812,7 +18812,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 4,
-      "grammars": 2,
+      "grammars": 3,
       "predicate": [
         {
           "field": "text(label) (via FOOD_POOL_OF in generalStateProse.js)",
@@ -18880,7 +18880,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 5,
-      "grammars": 2,
+      "grammars": 4,
       "predicate": [
         {
           "field": "text(label) (via FOOD_POOL_OF in generalStateProse.js)",
@@ -19021,7 +19021,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 4,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [
         {
           "field": "text(label) (via FOOD_POOL_OF in generalStateProse.js)",
@@ -19222,7 +19222,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 4,
-      "grammars": 2,
+      "grammars": 3,
       "predicate": [],
       "branchReads": [
         "readings",
@@ -19417,7 +19417,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 4,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [
         {
           "field": "text(tradeRouteAccess) (via ORIGIN_POOL_OF_ROUTE in generalStateProse.js)",
@@ -19617,7 +19617,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 4,
-      "grammars": 1,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [
         "granary",
@@ -20066,7 +20066,7 @@
       ],
       "hasBag": true,
       "variants": 4,
-      "grammars": 2,
+      "grammars": 3,
       "predicate": [
         {
           "field": "`${text(note?.type)}|${text(note?.tab)}` (via COHERENCE_POOL_OF in generalStateProse.js)",
@@ -20136,7 +20136,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 4,
-      "grammars": 2,
+      "grammars": 3,
       "predicate": [
         {
           "field": "`${text(note?.type)}|${text(note?.tab)}` (via COHERENCE_POOL_OF in generalStateProse.js)",
@@ -20277,7 +20277,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 4,
-      "grammars": 4,
+      "grammars": 3,
       "predicate": [
         {
           "field": "`${text(note?.type)}|${text(note?.tab)}` (via COHERENCE_POOL_OF in generalStateProse.js)",
@@ -20420,7 +20420,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 1,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [
@@ -20551,7 +20551,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 4,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -20603,7 +20603,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 4,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -20658,7 +20658,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 4,
-      "grammars": 4,
+      "grammars": 3,
       "predicate": [],
       "branchReads": [
         "ruin",
@@ -21221,7 +21221,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 1,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -21377,7 +21377,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 2,
+      "grammars": 3,
       "predicate": [],
       "branchReads": [
         "link.npcConnections"
@@ -21922,7 +21922,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 4,
-      "grammars": 2,
+      "grammars": 3,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -22921,7 +22921,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 4,
-      "grammars": 3,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -23076,7 +23076,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 4,
-      "grammars": 1,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -23174,7 +23174,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 4,
-      "grammars": 1,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -23227,7 +23227,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 4,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -23280,7 +23280,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 4,
-      "grammars": 4,
+      "grammars": 3,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -23512,7 +23512,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 4,
-      "grammars": 3,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [
@@ -23706,7 +23706,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 1,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -24080,7 +24080,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 4,
-      "grammars": 3,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [
@@ -24374,7 +24374,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [],
       "branchReads": [
         "hist"
@@ -24557,7 +24557,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [],
       "branchReads": [
         "readings.populationTrend.band",
@@ -24752,7 +24752,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [],
       "branchReads": [
         "readings.populationTrend.band",
@@ -25075,7 +25075,7 @@
       ],
       "hasBag": false,
       "variants": 2,
-      "grammars": 1,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -25187,7 +25187,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 1,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [
@@ -25365,7 +25365,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 2,
-      "grammars": 1,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [
@@ -25728,7 +25728,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [],
       "branchReads": [
         "readings.inst"
@@ -25795,7 +25795,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 2,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [],
       "branchReads": [
         "readings.inst"
@@ -26073,7 +26073,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 2,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [
@@ -44142,7 +44142,7 @@
         "DS-GEN-7 :: historical_economic: the recovery narrative"
       ],
       "variants": 24,
-      "grammars": 12,
+      "grammars": 13,
       "blocks": [
         "DS-GEN-7"
       ]
@@ -44688,7 +44688,7 @@
         "DS-GEN-3 :: economicViability.viable: false"
       ],
       "variants": 8,
-      "grammars": 3,
+      "grammars": 2,
       "blocks": [
         "DS-GEN-3"
       ]
@@ -44753,7 +44753,7 @@
         "DS-GEN-3 :: foodSecurity.label: Deficit × Active Famine"
       ],
       "variants": 25,
-      "grammars": 11,
+      "grammars": 13,
       "blocks": [
         "DS-GEN-3"
       ]
@@ -44768,7 +44768,7 @@
         "DS-GEN-3 :: prosperity: Wealthy / Thriving"
       ],
       "variants": 15,
-      "grammars": 7,
+      "grammars": 6,
       "blocks": [
         "DS-GEN-3"
       ]
@@ -44784,7 +44784,7 @@
         "DS-GEN-3 :: defenseProfile.readiness.label: Undefended"
       ],
       "variants": 14,
-      "grammars": 7,
+      "grammars": 8,
       "blocks": [
         "DS-GEN-3"
       ]
@@ -44877,7 +44877,7 @@
         "DS-GEN-6 :: crossroads"
       ],
       "variants": 4,
-      "grammars": 2,
+      "grammars": 1,
       "blocks": [
         "DS-GEN-6"
       ]
@@ -55086,7 +55086,7 @@
       "subject": "QUANTITY: a hundred or so",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -55110,7 +55110,7 @@
       "subject": "QUANTITY: thousands",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "COVERED",
@@ -55118,7 +55118,7 @@
       "subject": "HERALD KIND: hungry_gap",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 2 grammar(s) · slots {season, settlement}"
+      "count": "3 variant(s) · 3 grammar(s) · slots {season, settlement}"
     },
     {
       "tier": "THIN",
@@ -55158,7 +55158,7 @@
       "subject": "CANDIDATE KIND: growth",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -55246,7 +55246,7 @@
       "subject": "crime_wave",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "5 variant(s) · 3 grammar(s) · slots {settlement}"
+      "count": "5 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "COVERED",
@@ -55270,7 +55270,7 @@
       "subject": "infiltration_fear",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "5 variant(s) · 3 grammar(s) · slots {faction, settlement}"
+      "count": "5 variant(s) · 2 grammar(s) · slots {faction, settlement}"
     },
     {
       "tier": "COVERED",
@@ -55338,7 +55338,7 @@
         "conflict.intensity"
       ],
       "readingFunction": "conflictIntensityPoolKey",
-      "count": "5 variant(s) · 3 grammar(s) · slots {faction, faction2, issue, settlement, stakes}"
+      "count": "5 variant(s) · 4 grammar(s) · slots {faction, faction2, issue, settlement, stakes}"
     },
     {
       "tier": "COVERED",
@@ -55348,7 +55348,7 @@
         "conflict.intensity"
       ],
       "readingFunction": "conflictIntensityPoolKey",
-      "count": "5 variant(s) · 3 grammar(s) · slots {faction, faction2, issue, settlement, stakes}"
+      "count": "5 variant(s) · 2 grammar(s) · slots {faction, faction2, issue, settlement, stakes}"
     },
     {
       "tier": "THIN",
@@ -55558,7 +55558,7 @@
         "text(label) (via PROSPERITY_POOL_OF in generalStateProse.js)"
       ],
       "readingFunction": "PROSPERITY_POOL_OF",
-      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -55608,7 +55608,7 @@
         "head (via SAFETY_POOL_OF in generalStateProse.js)"
       ],
       "readingFunction": "SAFETY_POOL_OF",
-      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -55628,7 +55628,7 @@
         "head (via SAFETY_POOL_OF in generalStateProse.js)"
       ],
       "readingFunction": "SAFETY_POOL_OF",
-      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -55638,7 +55638,7 @@
         "readings.viable"
       ],
       "readingFunction": "viabilityPoolKey",
-      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -55678,7 +55678,7 @@
         "text(label) (via READINESS_POOL_OF in generalStateProse.js)"
       ],
       "readingFunction": "READINESS_POOL_OF",
-      "count": "2 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "2 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -55738,7 +55738,7 @@
         "text(label) (via FOOD_POOL_OF in generalStateProse.js)"
       ],
       "readingFunction": "FOOD_POOL_OF",
-      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 3 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -55748,7 +55748,7 @@
         "text(label) (via FOOD_POOL_OF in generalStateProse.js)"
       ],
       "readingFunction": "FOOD_POOL_OF",
-      "count": "5 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "5 variant(s) · 4 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -55768,7 +55768,7 @@
         "text(label) (via FOOD_POOL_OF in generalStateProse.js)"
       ],
       "readingFunction": "FOOD_POOL_OF",
-      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -55794,7 +55794,7 @@
       "subject": "river",
       "fields": [],
       "readingFunction": "situationPoolKey",
-      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 3 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -55824,7 +55824,7 @@
         "text(tradeRouteAccess) (via ORIGIN_POOL_OF_ROUTE in generalStateProse.js)"
       ],
       "readingFunction": "ORIGIN_POOL_OF_ROUTE",
-      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -55848,7 +55848,7 @@
       "subject": "isolated",
       "fields": [],
       "readingFunction": "supplyLogisticsPoolKey",
-      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -55914,7 +55914,7 @@
         "`${text(note?.type)}|${text(note?.tab)}` (via COHERENCE_POOL_OF in generalStateProse.js)"
       ],
       "readingFunction": "COHERENCE_POOL_OF",
-      "count": "4 variant(s) · 2 grammar(s) · slots {band, faction, settlement}"
+      "count": "4 variant(s) · 3 grammar(s) · slots {band, faction, settlement}"
     },
     {
       "tier": "THIN",
@@ -55924,7 +55924,7 @@
         "`${text(note?.type)}|${text(note?.tab)}` (via COHERENCE_POOL_OF in generalStateProse.js)"
       ],
       "readingFunction": "COHERENCE_POOL_OF",
-      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 3 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -55944,7 +55944,7 @@
         "`${text(note?.type)}|${text(note?.tab)}` (via COHERENCE_POOL_OF in generalStateProse.js)"
       ],
       "readingFunction": "COHERENCE_POOL_OF",
-      "count": "4 variant(s) · 4 grammar(s) · slots {govFaction, settlement}"
+      "count": "4 variant(s) · 3 grammar(s) · slots {govFaction, settlement}"
     },
     {
       "tier": "THIN",
@@ -55962,7 +55962,7 @@
       "subject": "structuralViolations[]",
       "fields": [],
       "readingFunction": "structuralViolationsPoolKey",
-      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -55978,7 +55978,7 @@
       "subject": "lifecycleStatus: relic_ruin",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -55986,7 +55986,7 @@
       "subject": "lifecycleStatus: abandoned_site",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "COVERED",
@@ -55994,7 +55994,7 @@
       "subject": "history.ancientRuin present",
       "fields": [],
       "readingFunction": "ancientRuinPoolKey",
-      "count": "4 variant(s) · 4 grammar(s) · slots {ruin, settlement, timeband_age, timeband_since}"
+      "count": "4 variant(s) · 3 grammar(s) · slots {ruin, settlement, timeband_age, timeband_since}"
     },
     {
       "tier": "COVERED",
@@ -56061,12 +56061,12 @@
       "count": "3 variant(s) · 2 grammar(s) · slots {counterpart, settlement}"
     },
     {
-      "tier": "THIN",
+      "tier": "COVERED",
       "block": "DS-REL-1",
       "subject": "cold_war",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 1 grammar(s) · slots {counterpart, settlement}"
+      "count": "3 variant(s) · 2 grammar(s) · slots {counterpart, settlement}"
     },
     {
       "tier": "COVERED",
@@ -56090,7 +56090,7 @@
       "subject": "cross-settlement NPC contacts",
       "fields": [],
       "readingFunction": "crossSettlementNpcPoolKey",
-      "count": "3 variant(s) · 2 grammar(s) · slots {counterpart, npc, settlement}"
+      "count": "3 variant(s) · 3 grammar(s) · slots {counterpart, npc, settlement}"
     },
     {
       "tier": "COVERED",
@@ -56162,7 +56162,7 @@
       "subject": "event type: economic",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "4 variant(s) · 2 grammar(s) · slots {event, settlement, timeband_since}"
+      "count": "4 variant(s) · 3 grammar(s) · slots {event, settlement, timeband_since}"
     },
     {
       "tier": "COVERED",
@@ -56316,7 +56316,7 @@
       "subject": "category tension: the standing quarrels are the opening",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "4 variant(s) · 3 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -56340,7 +56340,7 @@
       "subject": "category history: the past is the opening",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -56356,7 +56356,7 @@
       "subject": "clock bread_riot",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -56364,7 +56364,7 @@
       "subject": "clock smuggling_rise",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "COVERED",
@@ -56372,7 +56372,7 @@
       "subject": "clock legitimacy_crisis",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "4 variant(s) · 4 grammar(s) · slots {governing, settlement}"
+      "count": "4 variant(s) · 3 grammar(s) · slots {governing, settlement}"
     },
     {
       "tier": "COVERED",
@@ -56404,7 +56404,7 @@
       "subject": "viable: false: the arithmetic does not close",
       "fields": [],
       "readingFunction": "viabilityVerdictPoolKey",
-      "count": "4 variant(s) · 3 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -56428,7 +56428,7 @@
       "subject": "THE FIRST-SURVEY QUALIFICATION",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -56486,7 +56486,7 @@
       "subject": "MARKET-OPEN",
       "fields": [],
       "readingFunction": "marketPoolKey",
-      "count": "4 variant(s) · 3 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -56518,7 +56518,7 @@
       "subject": "FOUNDED-YOUNG",
       "fields": [],
       "readingFunction": "foundedPoolKey",
-      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "COVERED",
@@ -56542,7 +56542,7 @@
       "subject": "RISING-OPEN",
       "fields": [],
       "readingFunction": "populationDirectionPoolKey",
-      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -56566,7 +56566,7 @@
       "subject": "FALLING-OPEN",
       "fields": [],
       "readingFunction": "populationDirectionPoolKey",
-      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -56614,7 +56614,7 @@
       "subject": "WORN-PLAIN",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "2 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "2 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "COVERED",
@@ -56625,12 +56625,12 @@
       "count": "3 variant(s) · 2 grammar(s) · slots {calamity, settlement}"
     },
     {
-      "tier": "THIN",
+      "tier": "COVERED",
       "block": "DS-GEN-16",
       "subject": "ANCHORED-OLD",
       "fields": [],
       "readingFunction": "eventRecordPoolKey",
-      "count": "3 variant(s) · 1 grammar(s) · slots {calamity, settlement, timeband_age}"
+      "count": "3 variant(s) · 2 grammar(s) · slots {calamity, settlement, timeband_age}"
     },
     {
       "tier": "THIN",
@@ -56654,7 +56654,7 @@
       "subject": "UNMARKED",
       "fields": [],
       "readingFunction": "eventRecordPoolKey",
-      "count": "2 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "2 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "COVERED",
@@ -56702,7 +56702,7 @@
       "subject": "ADMINISTERED",
       "fields": [],
       "readingFunction": "institutionsPoolKey",
-      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -56710,7 +56710,7 @@
       "subject": "GARRISONED",
       "fields": [],
       "readingFunction": "institutionsPoolKey",
-      "count": "2 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "2 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -56737,12 +56737,12 @@
       "count": "2 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
-      "tier": "COVERED",
+      "tier": "THIN",
       "block": "DS-GEN-18",
       "subject": "STALLED",
       "fields": [],
       "readingFunction": "craftReasonPoolKey",
-      "count": "2 variant(s) · 2 grammar(s) · slots {institution, resource, settlement}"
+      "count": "2 variant(s) · 1 grammar(s) · slots {institution, resource, settlement}"
     },
     {
       "tier": "COVERED",
