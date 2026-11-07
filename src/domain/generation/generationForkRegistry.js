@@ -154,7 +154,7 @@ export const GENERATION_TIER1 = Object.freeze(/** @type {GenerationTier1Row[]} *
   { step: 'powerEconomyReconcilePass', key: 'powerStructure', via: 'mutates', stepDraws: 0, keyMoves: 0, rows: 63, class: 'pure', onRecord: { absent: 0, same: 0, transformed: 63 }, onRecordClass: 'transformed', producedOnRecord: { absent: 0, same: 0, transformed: 63 }, producedOnRecordClass: 'transformed', recordPath: 'record.powerStructure' },
   { step: 'structuralValidationPass', key: 'structural', via: 'provides', stepDraws: 0, keyMoves: 0, rows: 63, class: 'pure', onRecord: { absent: 63, same: 0, transformed: 0 }, onRecordClass: 'absent', producedOnRecord: { absent: 63, same: 0, transformed: 0 }, producedOnRecordClass: 'absent', recordPath: null },
   { step: 'generatePopulation', key: 'npcs', via: 'provides', stepDraws: 63, keyMoves: 63, rows: 63, class: 'drawn', onRecord: { absent: 0, same: 0, transformed: 63 }, onRecordClass: 'transformed', producedOnRecord: { absent: 0, same: 0, transformed: 63 }, producedOnRecordClass: 'transformed', recordPath: 'record.npcs' },
-  { step: 'generatePopulation', key: 'relationships', via: 'provides', stepDraws: 63, keyMoves: 53, rows: 63, class: 'drawn', onRecord: { absent: 0, same: 63, transformed: 0 }, onRecordClass: 'same', producedOnRecord: { absent: 0, same: 63, transformed: 0 }, producedOnRecordClass: 'same', recordPath: 'record.relationships' },
+  { step: 'generatePopulation', key: 'relationships', via: 'provides', stepDraws: 63, keyMoves: 61, rows: 63, class: 'drawn', onRecord: { absent: 0, same: 63, transformed: 0 }, onRecordClass: 'same', producedOnRecord: { absent: 0, same: 63, transformed: 0 }, producedOnRecordClass: 'same', recordPath: 'record.relationships' },
   { step: 'corruptionPass', key: 'npcs', via: 'mutates', stepDraws: 36, keyMoves: 20, rows: 63, class: 'drawn', onRecord: { absent: 0, same: 0, transformed: 63 }, onRecordClass: 'transformed', producedOnRecord: { absent: 0, same: 0, transformed: 63 }, producedOnRecordClass: 'transformed', recordPath: 'record.npcs' },
   { step: 'generateNarratives', key: 'settlementReason', via: 'provides', stepDraws: 63, keyMoves: 0, rows: 63, class: 'pure', onRecord: { absent: 0, same: 63, transformed: 0 }, onRecordClass: 'same', producedOnRecord: { absent: 0, same: 63, transformed: 0 }, producedOnRecordClass: 'same', recordPath: 'record.settlementReason' },
   { step: 'generateNarratives', key: 'resourceAnalysis', via: 'provides', stepDraws: 63, keyMoves: 0, rows: 63, class: 'pure', onRecord: { absent: 0, same: 63, transformed: 0 }, onRecordClass: 'same', producedOnRecord: { absent: 0, same: 63, transformed: 0 }, producedOnRecordClass: 'same', recordPath: 'record.resourceAnalysis' },
@@ -231,7 +231,7 @@ export const GENERATION_CHANNELS = Object.freeze({
   mints: Object.freeze({ instrument: 'src/kernel/prng.js#createPRNG', direct: 4, rootSeedPrefixed: true }),
   // 2026-10-31, tension variety (GS-1, ODQ §934.101): 6 -> 15, the tie-prose draw's per-archetype offsets (measured).
   // 2026-11-04, window-end pin re-key (REGISTERS seat): 15 -> 16, FOOD-3 (food diversity) opens one more offset (measured).
-  hash: Object.freeze({ instrument: 'src/kernel/proseHash.js#pickVariant', fnv1a32External: 15 }),
+  hash: Object.freeze({ instrument: 'src/kernel/proseHash.js#pickVariant', fnv1a32External: 17 /* 2026-11-07 PEOPLE-1 CAST: 15 -> 17, MEASURED by the census (A6) at the lane's tip */ }),
 });
 
 /**
