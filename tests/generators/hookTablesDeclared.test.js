@@ -89,10 +89,16 @@ describe('the history hooks declare what their event does not guarantee', () => 
 
 describe('the outlook hooks carry their declarations beside the branches that print them (R-C)', () => {
   it('each key is a string the branch prints, each atom declarable, each twin answers its original', async () => {
-    const { OUTLOOK_HOOK_SIBLINGS } = await import('../../src/generators/economy/foodBalance.js');
+    // LANDING-R2 (the chair's ruling under ODQ §934.105): the table moved VERBATIM to its own module,
+    // economy/outlookHookSiblings.js, to cure foodBalance.js's cohesion ceiling (921 > 900 raw lines).
+    // So the table is read at its new home, and the branches that PRINT the keys are the whole of
+    // foodBalance.js, which now carries no table (it was the source before the table's declaration).
+    const { OUTLOOK_HOOK_SIBLINGS } = await import('../../src/generators/economy/outlookHookSiblings.js');
     const { readFileSync } = await import('node:fs');
-    const src = readFileSync(new URL('../../src/generators/economy/foodBalance.js', import.meta.url), 'utf8');
-    const printed = src.slice(0, src.indexOf('export const OUTLOOK_HOOK_SIBLINGS'));
+    const printed = readFileSync(new URL('../../src/generators/economy/foodBalance.js', import.meta.url), 'utf8');
+    expect(printed.includes('export const OUTLOOK_HOOK_SIBLINGS'), 'the printer carries no table of its own').toBe(false);
+    // The old path still answers (scripts/lib/table-pools.mjs enrols the channel at foodBalance.js).
+    expect((await import('../../src/generators/economy/foodBalance.js')).OUTLOOK_HOOK_SIBLINGS).toBe(OUTLOOK_HOOK_SIBLINGS);
     expect(Object.keys(OUTLOOK_HOOK_SIBLINGS).length).toBe(3);
     for (const [key, set] of Object.entries(OUTLOOK_HOOK_SIBLINGS)) {
       expect(printed.includes(key), key.slice(0, 40)).toBe(true);
