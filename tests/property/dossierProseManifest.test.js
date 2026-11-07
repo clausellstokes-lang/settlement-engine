@@ -185,10 +185,14 @@ describe('the composed-prose manifest — the DRIFT corpus, both audiences', () 
     // Towns unmoved at 516/3/3/3.
     // 67,754 -> 67,730 (372/364/358 unmoved) at THE POOL CENSUS COMPOSED (ODQ §934.105, RUNG 2 OF THE SOAK LADDER, the landing
     // stacked on rung 1; record docs/shift-records/2026-11-06-rung2-04-census-composed-prose-manifest.json). Towns unmoved at 516/3/3/3.
+    // 67,730 -> 67,802 (372/364/358 -> 378/366/358) CARRIED BY THE INTEGRATION BASE ee3b7a168 (measured there: the base
+    // composes 68,904 cells against the fixture's 68,824 (+80), within the 248 rows that drifted in with the integration merges) and
+    // re-recorded at WIRING W3's first record (ODQ §934.105; record docs/shift-records/2026-11-07-w3-01-construction-c1-c6-said.json);
+    // W3's own six records move no cell (68,904 at every stage). Towns unmoved at 516/3/3/3.
     expect(tally, 'the DRIFT corpus by seed, cells and towns').toEqual({
-      'golden-master-v3': { cells: 67_730, towns: 516 },
-      'gm-seed-a': { cells: 372, towns: 3 },
-      'gm-seed-b': { cells: 364, towns: 3 },
+      'golden-master-v3': { cells: 67_802, towns: 516 },
+      'gm-seed-a': { cells: 378, towns: 3 },
+      'gm-seed-b': { cells: 366, towns: 3 },
       'gm-seed-c': { cells: 358, towns: 3 },
     });
     // The two halves must close against the figures every other arm here reads.
