@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import { crisisHookFor } from '../../../domain/crisis/crisisHooks.js';
 import { stressorsStateProse } from '../../../domain/display/stateProse/stressorsStateProse.js';
 // THE GENERAL DESK IS REACHED THROUGH ITS ONE CALLER, never imported here: its blocks live
 // on seven tabs and the registry's ARM 2 admits exactly one call site per desk. The reader
@@ -37,6 +38,8 @@ import ProseBlock from '../ProseBlock.jsx';
 // The two glance facts the removed DM Summary tab alone carried (X-5 / T1-1).
 import { cultureScopeLine, governsLine } from '../../../domain/summary/settlementQuickGuide.js';
 import { TONIGHT_COPY } from '../../../domain/summary/tonightSheet.js'; // the trigger opens the one Tonight sheet (TRIM-2 request 4)
+// The pointer's label, inline: the crisis page's composer (crisisPage.js :: CRISIS_PAGE_COPY.pointer) is the tab's chunk.
+const CRISIS_POINTER = 'Open the Crisis tab';
 import { edged } from '../../../design/edgedBox.js';
 import { SECTION_HELP } from '../../../copy/sectionHelp.js';
 import { FLUSH, FLUSH_STACK } from '../../../design/flush.js';
@@ -172,6 +175,9 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }).overview, [r, publicDossier, playerView]);
   if (!r) return null;
+  // The Crisis tab is the DM's (OutputContainer registers it off a player or public view): the
+  // pointer opens it there, and only there.
+  const crisisDoor = !publicDossier && !playerView && typeof onNavigateTab === 'function';
 
   const eco = r.economicState || {};
   const dp = r.defenseProfile || {};
@@ -344,25 +350,30 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
         </div>
       )}
 
-      {/* ── ACTIVE CRISIS (compact if present) ───────────────────────────── */}
+      {/* ── ACTIVE CRISIS: THE ONE-LINE POINTER (docs/DESIGN_CRISIS_TAB.md, ONE HOME) ────────
+          The crisis record's page is the Crisis tab; the Overview keeps one line that names the
+          crises and opens it. The DM-only tab is absent from a player or public view, so there
+          the record's own summary and hook stay here, as before. DS-STR-1's per-banner rung stays
+          CUT (T1-3, R2); the condition's direction and the pressure sentence close the block,
+          each once. */}
       {stresses.length>0&&<div style={{...FLUSH_STACK,...FLUSH}}>
-        {stresses.map((v,i)=>(
-          <div key={i} style={{display:'flex',gap:12,alignItems:'flex-start',background:`${v.colour}0e`,border:`2px solid ${v.colour}`,padding:'10px 14px',...FLUSH}}>
-            <div style={{flex:1,minWidth:0}}>
-              <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:4}}>
-                <span style={{...serif,fontSize:FS.lg,fontWeight:700,color:v.colour}}>{v.label}</span>
-                <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:swatch.white,background:v.colour,padding:'1px 6px'}}>Active crisis</span>
-              </div>
-              <p style={{fontSize: proseFontSize(FS['12.5'],mobile),color:swatch.inkMag,lineHeight:1.5,margin:'0 0 4px'}}>{v.summary}</p>
-              <p style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch['#3A2A10'],fontStyle:'italic',margin:0}}><span style={{fontWeight:700,fontStyle:'normal',color:v.colour}}>Hook: </span>{v.crisisHook}</p>
-              {/* DS-STR-1's per-banner rung is CUT (T1-3, R2): it restated the summary above on
-                  every crisis town. The condition's direction and the pressure sentence close
-                  the card instead, each once: the first on the first card, the second on the last. */}
-              {i===0&&conditionCardLine&&<p style={{fontSize: proseFontSize(FS['12.5'],mobile),color:swatch.inkMag2,lineHeight:1.55,margin:'6px 0 0',fontStyle:'italic'}}>{conditionCardLine}</p>}
-              {i===stresses.length-1&&pressureLine&&<p data-testid="overview-crisis-pressure" style={{fontSize: proseFontSize(FS['12.5'],mobile),color:swatch.inkMag2,lineHeight:1.55,margin:'6px 0 0'}}>{pressureLine}</p>}
-            </div>
+        <div data-testid="overview-crisis-pointer" style={{background:swatch['#1B1408'],padding:'10px 14px',...FLUSH}}>
+          <div style={{display:'flex',alignItems:'center',gap:8,flexWrap:'wrap'}}>
+            <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:swatch['#C04040']}}>Active crisis</span>
+            <span style={{...serif,fontSize:FS.lg,fontWeight:700,color:swatch['#C04040']}}>{stresses.map(v=>v.label||v.type).filter(Boolean).join(' and ')}</span>
+            {crisisDoor&&<Button variant="ghost" size="sm" onClick={()=>onNavigateTab('crisis')} style={{marginLeft:'auto',color:swatch['#C04040'],fontWeight:800}}>{CRISIS_POINTER}</Button>}
+          </div>
+        </div>
+        {!crisisDoor&&stresses.map((v,i)=>(
+          <div key={i} style={{border:`2px solid ${v.colour}`,padding:'10px 14px',...FLUSH}}>
+            <p style={{fontSize: proseFontSize(FS['12.5'],mobile),color:swatch.inkMag,lineHeight:1.5,margin:'0 0 4px'}}>{v.summary}</p>
+            <p style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch['#3A2A10'],fontStyle:'italic',margin:0}}><span style={{fontWeight:700,fontStyle:'normal',color:v.colour}}>Hook: </span>{crisisHookFor(r,v)}</p>
           </div>
         ))}
+        {(conditionCardLine||pressureLine)&&<div style={{padding:'0 14px 8px',...FLUSH}}>
+          {conditionCardLine&&<p style={{fontSize: proseFontSize(FS['12.5'],mobile),color:swatch.inkMag2,lineHeight:1.55,margin:'6px 0 0',fontStyle:'italic'}}>{conditionCardLine}</p>}
+          {pressureLine&&<p data-testid="overview-crisis-pressure" style={{fontSize: proseFontSize(FS['12.5'],mobile),color:swatch.inkMag2,lineHeight:1.55,margin:'6px 0 0'}}>{pressureLine}</p>}
+        </div>}
         {crisisSectionLines.length>0&&(
           <div style={{borderTop:'1px solid #e0c890',paddingTop:8}}>
             <ProseBlock lines={crisisSectionLines} settlementName={r.name} tier={r.tier}

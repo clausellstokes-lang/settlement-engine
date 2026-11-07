@@ -112,16 +112,16 @@ const FIXED = Object.freeze([0, 21, 42]);
  */
 const PRE_CHANGE = Object.freeze({
   0: Object.freeze({
-    derived: '40def4c8423c97a47c1faf94670d6e25ca4b106a2973da69545ecf42aa65aa8d',
-    replay: 'fddc250403f880ad57ea6b30675e45458ec22cef8af93b69d293aa57d6de9d59',
+    derived: '93cf79d258df160c71f84512bf9769a9510f4e5c25ada5ffc25c1c26b64dd3bf',
+    replay: '468d7c2a0ee2cbd9106f767027b9756b0b65c5b86bf2cab48b8c36d515a70333',
   }),
   21: Object.freeze({
-    derived: 'b1b9502a37d001f01ea75bbb3bfa22c2a8ae70ba98c27d4067a6198aebef9f51',
-    replay: '8c3c4148f1646dd7276d3abfcd699fb50c3c91d7fb9ed95a128c319a014f6c4c',
+    derived: '0dfd25bc67d146684b685d585b162936ea90ca3144d960deac86985ac97679c0',
+    replay: '44d813b2a2fc9f16c6d4b7a00ad81c476080bb1fe476327e87b5aa0d8941a7cd',
   }),
   42: Object.freeze({
-    derived: 'ec40b473b0753c6f7ded3d3c94d516f65aa93ba737b7467c53d15a8d40b0fe36',
-    replay: '333b3b850a0144e3074f9c9650fe8c6864497944329ee208ba78b958ab385117',
+    derived: '68d98fa01de5d341d10b35c20a83aa7eaa4ba6e4988dcc222c355a91b0f3f15c',
+    replay: 'f47ae41ccb25b361374d79aa88159f8892a974334d910eb233aeae865f2c7b6a',
   }),
 });
 // ── RE-CAPTURED 2026-10-01, the urban band (ODQ §934.86), BY THE SAME PLANT AND NEVER FROM THE LIVE STEP ALONE ─────
@@ -188,6 +188,17 @@ describe('EM-B2b2 — the DM\'s nearby-resources word survives resolveResources'
 // 8cd65978e (a scratchpad copy, never this checkout), and the planted step and the live step produced the SAME six
 // digests, so EM-B2b2 still moves no byte of the no-edit path. Row 21's `derived` is the re-recorded golden's control row
 // (b1b9502a, generationForkCensus GOLDEN_CONTROL_HASH after DOORS record 9).
+// ── RE-CAPTURED 2026-11-05, the rung-1 landing (ODQ §934.105), BY THE SAME PLANT (LANDING-5, the chair's ruling 4) ──
+// All six digests moved. BISECTED BY FIRST-PARENT STAGE, not assumed: the rows' fresh, derived and replay digests were
+// hashed at every stage of the landing — at 1264a8152^ they equal the 2026-11-04 block byte for byte, and at 54daafda3
+// they equal the landed tip's. They move at X-46 car 1 1264a8152, car 2 d4bf6431c, CRISIS d3e072368, TERRAIN-POOLS
+// ac09ea83b (row 21), SELF-VOUCH 0be13b5cb, X-46 car 3 90dc22f18, SELF-VOUCH I5 cdc949867, PLACE-NOT-TIER 6129c300d
+// (rows 21, 42), PINS 37b1e746d (rows 0, 42), TRUTH unit D 844acaccc, X-46 car 3 I7 6ca454d2b, F5 7e28a6331 (row 21),
+// F6 6d84aa834, F1 5e9ffb220 and F10 54daafda3 (row 21); every other stage moves none of them. Re-captured as above: the
+// pre-EM-B2b2 step (12c437de4, sha256 62e16d59...) planted over a COPY of this tree at 9072bca04 (a detached probe
+// worktree, never this checkout), and the planted step and the live step produced the SAME six digests, so EM-B2b2
+// still moves no byte of the no-edit path; on every row the fresh generation equals the dormant re-derivation. Row 21's
+// `derived` (0dfd25bc) is the landed golden's control row.
 
     const layer = layerOf([[ROOT_KEY, [...DM_ROSTER]]]);
 

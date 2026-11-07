@@ -1,0 +1,28 @@
+{
+  "_doc": "THE FOOD WRITER AND ITS VIEW DERIVE THE PER CENT FROM THE POUNDS THEY PUBLISH, ONE SIGNED SHIFT OF RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the cloud chair signs by the owner's delegation of 2026-11-06, vetoable; a successor chair does not inherit this signature). THE CAUSE, ONE, IN TWO STEPS (the second superseding the first, so the first never lands on its own): LANDING-7 lane D (bfd70d809, merged at b37bbf395) floored the viability view's deficit at 1 lb so a 0 lb deficit never printed beside a positive deficit per cent on 17 thorps; the verifier's STOP-1 (CONFIRMED) found the floor traded the sign contradiction for an arithmetic one (1 lb beside 1% on a 32 lb need, refused by V-FOOD-PCT on all 17); the chair's ruling R-H5 option C (lane H, 66b1407bd, merged at 18fd6b442): src/generators/foodGenerator.js :: generateFoodSecurity takes deficitPct = round(deficit) / round(dailyNeed) x 100, the share of the pounds it publishes over the need it publishes, and src/generators/economy/foodBalance.js :: deriveFoodBalanceAnalysis drops the floor and derives deficitPercent from the pounds it publishes; no floor anywhere. The sign law, the share law and the single-writer law hold together on the 525 (lane H's arm: writerSign / viewSign / viewShare 17/0/17 -> 0/0/0). THE MOVERS, FOUND BY STAGE: LANDING-8 measured every registered surface at every first-parent step since 3d8a74e4b; lane D's step moves the generator golden master 17 of 525 (thorp 17), the dossier prose manifest 34 of 1,050 and the espionage fence 2 of 360, and inside that step only bfd70d809 moves anything (each of c903d6326, b18e9b85e, 8befe5a0d reverse-applied leaves all three moves; bfd70d809 reverse-applied leaves none); no step between moves these surfaces; lane H's step moves them again, and inside it 66b1407bd moves the generator golden and the prose manifest alone (8e92c0440, the watch re-wording, moves neither and moves 4 fence rows, its own cause, record 35; 5f6d243b2, crown-3's firstDecade, moves nothing). THE NET MOVE OF THIS CAUSE, MEASURED before the write at the stage: the generator golden master 77 of 525 rows against 3d8a74e4b's manifest (thorp 53: hills|road x12 and coastal|port x5, the 17, and desert|road, forest|isolated, mountain|road x12 each, whose per cent moves by a point; hamlet 12: forest|isolated; village 12: coastal|port), sha 26a02855.. -> e7e8a6ff..; the dossier prose manifest 24 of 1,050 rows (village|*|coastal|port, both audiences; the 17 thorps' prose returns to its base bytes); the espionage fence 20 of 360 rows (thorp 12, hamlet 7, village 1) beyond record 33's constant. The tuning inventory is unmoved (lane H, 0 diffs). THE PIN RESTATED IN THE SAME ACT: tests/domain/worldFactRederive.test.js A7 pins both fixtures' digests (lane E's third seat found record 28 moved the master without restating it); restated with each write. HOW: the staged-tree method: stage = the tree of 18fd6b442 with the door paths carried from the branch (records 29, 32 and 33 committed), and lane H's watch re-wording 8e92c0440 reverse-applied and committed in the scratch stage; one surface per act, each act committed in the stage before the next.",
+  "ownerWords": "I also now give all permissions required now and in the future. I also defer all judgement to you.",
+  "ownerDate": "2026-11-06",
+  "odqRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (RUNG 1 OF THE SOAK LADDER; the owner's delegation of 2026-11-06 to the cloud chair, session 01FE9mEvGxnFx6WTBkEC6ie9)",
+  "cause": "the food writer and its view derive the per cent from the pounds they publish; no floor (LANDING-7 R-H5 option C, 66b1407bd, superseding lane D's 1 lb floor bfd70d809: the food view enforces its sign law and its share law, and a 0 lb deficit never prints beside a positive deficit per cent)",
+  "seat": "LANDING-8 (Opus 5.5) under the cloud chair (Fable 5.1), session 01FE9mEvGxnFx6WTBkEC6ie9, from the stage at 18fd6b442 minus 8e92c0440",
+  "surfaces": [
+    {
+      "surface": "generator-golden-master",
+      "action": "re-record",
+      "predictedRows": 525,
+      "proofForm": "settlement-hash"
+    },
+    {
+      "surface": "dossier-prose-manifest",
+      "action": "re-record",
+      "predictedRows": 2,
+      "proofForm": "derived-artefact"
+    },
+    {
+      "surface": "espionage-dormancy-fence",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "in-file corpus constant"
+    }
+  ]
+}

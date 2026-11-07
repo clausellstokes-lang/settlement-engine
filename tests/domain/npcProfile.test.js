@@ -530,7 +530,9 @@ describe('the criminal institution vocabulary (TE-CH-7)', () => {
     // 280 → 281 (2026-09-30, the urban band, ODQ §934.86): one new distinct name,
     // 'Housing (5000+ structures)' (the metropolis housing rung, which used to read the
     // city's 'Housing (1000-5000 structures)'). Not criminal; the arms below are unmoved.
-    expect(wholeCatalogAsSettlement().count).toBe(281);
+    // 281 → 282 (2026-11-06, LANDING-7 lane E): one new distinct name, 'Village watch' (22ea53ea8, F1 unit 3,
+    // tags law_enforcement + defense). Not criminal; the arms below are unmoved.
+    expect(wholeCatalogAsSettlement().count).toBe(282);
   });
 
   it('criminal name hints reach the criminal catalog institutions and nothing else', () => {

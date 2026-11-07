@@ -3,7 +3,7 @@ import { FS, swatch, MUTED } from '../../theme.js';
 import { serif, Section } from '../Primitives';
 import Button from '../../primitives/Button.jsx';
 
-import {buildThreatAssessment} from '../../../domain/display/threatAssessment.js';
+import {buildThreatAssessment, disasterReadinessScore} from '../../../domain/display/threatAssessment.js';
 import {NarrativeNote} from '../NarrativeNote';
 import { arcaneDefenseOf, criminalOpNote, deriveCriminalStructure, deriveDefenseReadiness, deriveSupportingCapabilities, deriveGuardAssessment, deriveDefenseVulnerabilities, DEFENSE_STRESS_STATUS, FOOD_STORES_DOOR, foodEnduranceLine } from '../../../domain/display/defenseDisplay.js';
 import EntityLink from '../../primitives/EntityLink.jsx';
@@ -142,6 +142,22 @@ export const THREAT_ROW_KEY = Object.freeze({
  */
 export const STATUS_IS_THE_GRADE = Object.freeze(['Economic Backing']);
 
+/**
+ * X-50: `text` without the sentences `printed` already carries verbatim — only a boilerplate
+ * sentence (eight words or more, the soak battery's floor) is dropped, so a short shared phrase
+ * stays where it is. `text` comes back unchanged when nothing repeats.
+ * @param {unknown} text @param {unknown} printed
+ * @returns {string}
+ */
+export function sentencesNotIn(text, printed) {
+  const t = typeof text === 'string' ? text : '';
+  const p = typeof printed === 'string' ? printed : '';
+  if (!t || !p) return t;
+  const sentences = t.split(/(?<=[.!?])\s+/);
+  const kept = sentences.filter((x) => !(x.trim().split(/\s+/).length >= 8 && p.includes(x.trim())));
+  return kept.length === sentences.length ? t : kept.join(' ');
+}
+
 export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false, playerView = false}) {
   const [expandedThreat, setExpandedThreat] = useState(null);
   const [showForces, setShowForces] = useState(true);
@@ -161,7 +177,6 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
   const scores = d.scores || {};
   const readiness = d.readiness || {label:'Unknown',color:'#9c8068',background:'#faf8f4',border:'#e0d0b0'};
   const inst = d.institutions || {};
-  const f = r.economicState?.compound?.inst || {};
   const sp = r.economicState?.safetyProfile || {};
   // ⭐ THE DESK'S OPTION BAG, SPELLED ONCE (ODQ §934.22 addendum). This tab reads eight
   // defense blocks and every one of them was spelling the same three-line literal, so a
@@ -249,12 +264,14 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
 
   // Threat assessment with expandable rows
   const threats = buildThreatAssessment(r);
+  // F9 unit 1: Disasters & Famine takes the row's one score, held to Weak under an active
+  // famine (threatAssessment.js :: disasterReadinessScore, which the PDF's rows read too).
   const threatScores = {
     'Beasts & Monsters': scores.monster||0,
     'Invasion & War': scores.military||0,
     'Internal Security': scores.internal||0,
     'Economic Survival': scores.economic||0,
-    'Disasters & Famine': scores.disaster ?? r.economicState?.foodSecurity?.resilienceScore ?? Math.round(((scores.economic||0)*0.4+(f.hasGranary?60:20)+(f.hasHospital?70:f.hasChurch?40:10))/2),
+    'Disasters & Famine': disasterReadinessScore(r),
   };
   // Funding attribution per readiness row (economicGates consumer) — an
   // underfunded gate explains a lower bar instead of leaving it silent.
@@ -506,12 +523,19 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
           {crimeTypes.length>0&&<div>
             <div style={{fontSize:chromeFontSize(FS.xxs, isMobile),fontWeight:700,color:swatch.inkMag3,marginBottom:6}}>Active crime patterns</div>
             <div style={{display:'flex',flexDirection:'column',gap:5}}>
-              {crimeTypes.map((ct,i)=>(
+              {crimeTypes.map((ct,i)=>{
+                // X-50 (BOILERPLATE ONCE; the soak dry run's R2): a pattern whose description
+                // repeats a sentence the public-order paragraph above already printed (a slave
+                // revolt's "Active armed conflict between revolt participants …") keeps its name
+                // and the rest of its description; the sentence is said once, up there.
+                const desc = sentencesNotIn(ct.desc, sp.safetyDesc);
+                return (
                 <div key={i} style={{background:swatch['#FAF8F4'],border:'1px solid #e0d0b0',padding:'7px 10px'}}>
-                  <div style={{fontSize:chromeFontSize(FS.xs, isMobile),fontWeight:700,color:swatch.inkMag2,marginBottom:2}}>{ct.type}</div>
-                  <div style={{fontSize: proseFontSize(FS['11.5'], isMobile),color:swatch.inkMag3,lineHeight:1.4}}>{truncateAtWord(ct.desc, 200)}</div>
+                  <div style={{fontSize:chromeFontSize(FS.xs, isMobile),fontWeight:700,color:swatch.inkMag2,marginBottom:desc?2:0}}>{ct.type}</div>
+                  {desc&&<div style={{fontSize: proseFontSize(FS['11.5'], isMobile),color:swatch.inkMag3,lineHeight:1.4}}>{truncateAtWord(desc, 200)}</div>}
                 </div>
-              ))}
+                );
+              })}
             </div>
           </div>}
 

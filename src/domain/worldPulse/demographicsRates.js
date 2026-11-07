@@ -143,14 +143,30 @@ export const MOUTHS_PER_FOOD_UNIT = Object.freeze({
  * its own ceiling. METROPOLIS IS INCLUDED and is the design's point: the top of the
  * ladder has a wall, and P2's overflow lane plus P3's migration are the only valves
  * above it.
+ *
+ * ⚠ RE-DERIVED UNDER THE OWNER'S BANDS (LANDING-7 rulings R-E1 and R-E8, 2026-11-06; a DRAFT row
+ * in the tuning register, vetoable). The table followed the band maxima BY CONSTRUCTION: under
+ * the old contiguous bands (thorp ..60, hamlet ..400, village ..900, town ..5,000, city
+ * ..25,000, metropolis ..100,000) the ceilings stood at 1.50 / 1.50 / 1.556 / 1.50 / 1.52 /
+ * 1.40 x the maxima. X-46 car 1 (433289899) made the roll bands OVERLAP and put the one
+ * population -> tier law in TIER_STAMP_CUTS, so "the band a tier fills before it promotes"
+ * is now its STAMP band, [cut(tier), cut(next) - 1] (car 2's law); under the old bands the
+ * two were the same band, so this reading reproduces the old table exactly. Each ratio is
+ * kept and applied to the stamp-band maximum: thorp 1.5 x 24 = 36, hamlet 1.5 x 87 = 131,
+ * village 1.556 x 349 = 543, town 1.5 x 2,249 = 3,374, city 1.52 x 14,999 = 22,798.
+ * METROPOLIS keeps 140,000: its stamp band is open (no next cut) and its roll band's `max`
+ * is "the body of the roll, not a ceiling" (constants.js), so there is no maximum to follow.
+ * Applied to the ROLL-band maxima instead (30 / 100 / 400 / 2,500 / 15,000), the P5a
+ * interlock cannot hold: a desert hamlet before maximum works reaches 96 >= the village
+ * cut 88 (measured; the first seat measured the same class at thorp, village and town).
  * @type {Readonly<Record<string, number>>}
  */
 export const DENSITY_CEILINGS = Object.freeze({
-  thorp: 90,
-  hamlet: 600,
-  village: 1400,
-  town: 7500,
-  city: 38000,
+  thorp: 36,
+  hamlet: 131,
+  village: 543,
+  town: 3374,
+  city: 22798,
   metropolis: 140000,
 });
 

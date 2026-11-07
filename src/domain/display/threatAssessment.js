@@ -13,7 +13,16 @@
  * `domain/defense/defenseFacts.js :: defenseFactsOf` — the live roster — so a row never
  * speaks of garrison pay where no garrison stands, or of a hospital where there is one
  * healer. It prints no stored food: that is the Economy tab's (the owner's word, 2026-11-03).
- * Its only import is that domain leaf, so the no-generator-edge reason below still holds.
+ * Its imports are that domain leaf and the score-band leaf, so the no-generator-edge reason
+ * below still holds.
+ *
+ * ⭐ THE FAMINE ROW READS THE ONE FOOD RECORD (lane RUNG1B-F9 unit 1, 2026-11-04; the chair's
+ * end-to-end reading: Al-karez printed "Food Security Deficit — active famine" on the Overview
+ * and "Disasters & Famine: Adequate" here). `disasterReadinessScore` is the row's ONE score,
+ * read by this tab and the PDF's readiness rows alike: under an ACTIVE FAMINE (the stored
+ * record's `band === 'famine'`, `foodBalance.js :: deriveFoodRecord`) it is held to Weak at
+ * most, and the row's sentence names the famine (never the stores: those are the Food
+ * endurance line's, beside the bars). Without one nothing changes.
  *
  * It lives here (dependency-free leaf) rather than in generators/defenseGenerator
  * so the eager Defense/Economics display path (domain/display/defenseDisplay.js
@@ -26,6 +35,53 @@
  */
 
 import { defenseFactsOf } from '../defense/defenseFacts.js';
+import { SCORE_BAND_CUTS } from './defenseScoreBands.js';
+
+/** The top of the Weak band: the highest a famine-struck place's disaster readiness may read. */
+export const FAMINE_DISASTER_CEILING = SCORE_BAND_CUTS.adequate - 1;
+
+/**
+ * The fields the famine and disaster-readiness readers consult.
+ * @typedef {{
+ *   defenseProfile?: { scores?: { disaster?: number, economic?: number } | null } | null,
+ *   economicState?: {
+ *     foodSecurity?: { foodRecord?: { band?: unknown } | null, resilienceScore?: number } | null,
+ *     compound?: { inst?: { hasGranary?: unknown, hasHospital?: unknown, hasChurch?: unknown } | null } | null,
+ *   } | null,
+ * } | null | undefined} FamineReadinessRecord
+ */
+
+/**
+ * Is the place in an active famine, by the one food record? Read, never re-derived.
+ * @param {FamineReadinessRecord} r
+ * @returns {boolean}
+ */
+export function inActiveFamine(r) {
+  return r?.economicState?.foodSecurity?.foodRecord?.band === 'famine';
+}
+
+/**
+ * The Disasters & Famine row's ONE readiness score — the stored disaster score (re-judged by
+ * the world pulse as the campaign advances), else the food model's resilience score, else the
+ * legacy blend — held to the top of Weak under an active famine.
+ * @param {FamineReadinessRecord} r
+ * @returns {number}
+ */
+export function disasterReadinessScore(r) {
+  const scores = r?.defenseProfile?.scores || {};
+  const f = r?.economicState?.compound?.inst || {};
+  const raw = scores.disaster
+    ?? r?.economicState?.foodSecurity?.resilienceScore
+    ?? Math.round((((scores.economic || 0) * 0.4) + (f.hasGranary ? 60 : 20) + (f.hasHospital ? 70 : f.hasChurch ? 40 : 10)) / 2);
+  return inActiveFamine(r) ? Math.min(raw, FAMINE_DISASTER_CEILING) : raw;
+}
+
+/**
+ * The famine's own sentence. It names the famine and nothing in store: stored food is the
+ * Economy tab's row, and its siege reading is the Food endurance line beside these bars (the
+ * owner's word, 2026-11-03; tests/domain/defenseWordsFindings.test.js pins the tab's silence).
+ */
+export const FAMINE_SENTENCE = 'In famine. Hunger is the disaster this row grades, and it has already come.';
 
 /**
  * The healer named by what it is: a monastic house's infirmary, or a healer.
@@ -205,14 +261,16 @@ export function buildThreatAssessment(r) {
 
   // ⛔ NO STORED-FOOD OR GRANARY SENTENCE ON THE DEFENSE TAB (the owner's word, 2026-11-03:
   // "Do add storehouse months the economy tab."). Stored food is the Economy tab's, printed once
-  // in months; this row speaks only of who tends the sick.
-  const disA = facts.hasHospital
+  // in months; this row speaks of who tends the sick, and of a famine by name (F9 unit 1).
+  // Under an active famine the row's sentence names it first (F9 unit 1).
+  const care = facts.hasHospital
     ? 'Hospital infrastructure enables disease containment and systematic quarantine.'
     : facts.hasHealer
       ? healerSubject(facts.healerName) + ' treats the sick one at a time; an outbreak would outrun it.'
       : f.hasChurch
         ? 'Clergy provide basic wound care: better than nothing, worse than a hospital.'
         : 'No medical infrastructure. Plague spreads until it burns out.';
+  const disA = inActiveFamine(r) ? `${FAMINE_SENTENCE} ${care}` : care;
   result.push({
     label: 'Disasters & Famine',
     color: '#1a4a5a',

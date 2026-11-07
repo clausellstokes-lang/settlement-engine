@@ -4,38 +4,68 @@ import { fileURLToPath } from 'node:url';
 import { describe, expect, test } from 'vitest';
 
 import { tierFor } from '../../src/components/map/TierIcon.jsx';
-import { popToTier, POPULATION_RANGES, TIER_ORDER } from '../../src/data/constants.js';
+import { popToTier, POPULATION_RANGES, TIER_ORDER, TIER_STAMP_CUTS } from '../../src/data/constants.js';
 import { createMapSlice } from '../../src/store/mapSlice.js';
 
-// Regression + invariant: popToTier's boundaries must agree with
-// POPULATION_RANGES exactly, or a settlement is stamped with a tier whose own
-// max it exceeds. The thorp/hamlet boundary was previously 80 (thorp), leaking
-// pop 61-80 into `thorp` while POPULATION_RANGES.thorp maxes at 60.
-describe('popToTier boundaries agree with POPULATION_RANGES', () => {
-  test('the 61-80 window classifies as hamlet, not thorp', () => {
-    expect(popToTier(60)).toBe('thorp');
-    expect(popToTier(61)).toBe('hamlet');
-    expect(popToTier(80)).toBe('hamlet');
-    expect(popToTier(400)).toBe('hamlet');
+// X-46 THE HISTORICAL SCALE, car 1 (ODQ §934.104, 2026-11-03) — the owner's historical table.
+// The ROLL bands overlap by design (a large hamlet and a small village are the same size); the
+// STAMP does not: popToTier cuts each overlap at one point (25 / 88 / 350 / 2,250 / 15,000), so
+// a 'custom' population and every tier-change resolver read ONE disjoint law. The DM's chosen
+// tier always wins at generation; the stamp is never re-applied to a rolled population.
+const OWNER_TABLE = {
+  thorp:      { min: 5,     max: 30 },
+  hamlet:     { min: 20,    max: 100 },
+  village:    { min: 75,    max: 400 },
+  town:       { min: 300,   max: 2500 },
+  city:       { min: 2000,  max: 15000 },
+  metropolis: { min: 15000, max: 50000 }, // the roll's body; it thins past it to 1,000,000 (car 1b, 2026-11-04)
+};
+
+describe('the roll bands are the owner\'s table; the stamp cuts each overlap once', () => {
+  test('POPULATION_RANGES is the owner\'s historical table', () => {
+    expect(POPULATION_RANGES).toEqual(OWNER_TABLE);
   });
 
-  test('every non-metropolis tier max maps to that tier, and max+1 to the next', () => {
+  test('popToTier stamps at the cut points 25 / 88 / 350 / 2,250 / 15,000', () => {
+    const expected = [
+      [24, 'thorp'], [25, 'hamlet'], [87, 'hamlet'], [88, 'village'],
+      [349, 'village'], [350, 'town'], [2249, 'town'], [2250, 'city'],
+      [14999, 'city'], [15000, 'metropolis'],
+    ];
+    expect(expected.map(([pop]) => [pop, popToTier(pop)])).toEqual(expected);
+  });
+
+  test('adjacent roll bands overlap, and every cut point lies inside its overlap', () => {
     for (let i = 0; i < TIER_ORDER.length - 1; i++) {
-      const tier = TIER_ORDER[i];
-      const next = TIER_ORDER[i + 1];
-      const { max } = POPULATION_RANGES[tier];
-      expect(popToTier(max)).toBe(tier);
-      expect(popToTier(max + 1)).toBe(next);
+      const lower = POPULATION_RANGES[TIER_ORDER[i]];
+      const upper = POPULATION_RANGES[TIER_ORDER[i + 1]];
+      expect(upper.min, `${TIER_ORDER[i + 1]} starts inside ${TIER_ORDER[i]}`).toBeLessThanOrEqual(lower.max);
+      const cut = TIER_STAMP_CUTS[TIER_ORDER[i + 1]];
+      expect(cut).toBeGreaterThanOrEqual(upper.min);
+      expect(cut).toBeLessThanOrEqual(lower.max);
+      expect(popToTier(cut - 1)).toBe(TIER_ORDER[i]);
+      expect(popToTier(cut)).toBe(TIER_ORDER[i + 1]);
     }
   });
 
-  test('a resulting tier never has the population above its own range max', () => {
-    for (const pop of [8, 60, 61, 79, 80, 400, 401, 900, 5000, 25000, 25001, 99999]) {
-      const tier = popToTier(pop);
-      const { min, max } = POPULATION_RANGES[tier];
-      expect(pop).toBeGreaterThanOrEqual(min);
-      if (tier !== 'metropolis') expect(pop).toBeLessThanOrEqual(max);
+  test('the stamp is monotone: a larger population never stamps a smaller tier', () => {
+    let previous = 0;
+    const backwards = [];
+    for (let pop = 1; pop <= 70000; pop++) {
+      const rank = TIER_ORDER.indexOf(popToTier(pop));
+      if (rank < previous) backwards.push(pop);
+      previous = rank;
     }
+    expect(backwards).toEqual([]);
+  });
+
+  test('every stamped tier\'s own roll band holds the population it was stamped from', () => {
+    const outside = [];
+    for (let pop = OWNER_TABLE.thorp.min; pop <= OWNER_TABLE.metropolis.max; pop++) {
+      const { min, max } = POPULATION_RANGES[popToTier(pop)];
+      if (pop < min || pop > max) outside.push(pop);
+    }
+    expect(outside).toEqual([]);
   });
 });
 
@@ -48,12 +78,12 @@ describe('popToTier boundaries agree with POPULATION_RANGES', () => {
 // RED rather than silent — the behavioural half proves the answers agree, the
 // structural half proves no NEW inline chain has been introduced beside them.
 const BOUNDARY_POPULATIONS = [
-  60, 61,       // thorp | hamlet
+  24, 25,       // thorp | hamlet
+  87, 88,       // hamlet | village
   240, 241,     // ⚠ the seam: the retired chain's false hamlet cap
-  400, 401,     // hamlet | village
-  900, 901,     // village | town
-  5000, 5001,   // town | city
-  25000, 25001, // city | metropolis
+  349, 350,     // village | town
+  2249, 2250,   // town | city
+  14999, 15000, // city | metropolis
 ];
 
 /** burgToConfig is a pure classifier on the slice — no state, no persistence. */
@@ -72,8 +102,8 @@ describe('producer equality — every tier classifier agrees with popToTier', ()
     }
   });
 
-  test('the 241-400 window is hamlet on every surface, not village', () => {
-    for (const pop of [241, 300, 400]) {
+  test('the 25-87 window is hamlet on every surface, not thorp or village', () => {
+    for (const pop of [25, 60, 87]) {
       expect(popToTier(pop)).toBe('hamlet');
       expect(tierFor({ population: pop })).toBe('hamlet');
       expect(mapSliceActions.burgToConfig({ population: pop }).settType).toBe('hamlet');
@@ -94,7 +124,7 @@ describe('producer equality — every tier classifier agrees with popToTier', ()
   test('an explicit stored tier still wins over the derived one', () => {
     expect(tierFor({ tier: 'city', population: 300 })).toBe('city');
     expect(tierFor({ settType: 'town', population: 300 })).toBe('town');
-    expect(tierFor({ tier: 'nonsense', population: 300 })).toBe('hamlet');
+    expect(tierFor({ tier: 'nonsense', population: 300 })).toBe('village');
   });
 });
 
@@ -111,7 +141,7 @@ describe('structural — no source file re-forks the tier chain', () => {
   // census. A `test.each` here moved the frozen parked-file count 366 -> 367 and
   // RED the gate. Two literal-title tests keep the file statically walkable.
   const THRESHOLD_COMPARISON =
-    /(?:<=|>=|<|>)\s*(?:60|61|240|241|400|401|900|901|5000|5001|25000|25001)\b/g;
+    /(?:<=|>=|<|>)\s*(?:24|25|87|88|240|241|349|350|2249|2250|14999|15000|60|61|400|401|900|901|5000|5001|25000|25001)\b/g;
 
   const repoRoot = fileURLToPath(new URL('../../', import.meta.url));
 

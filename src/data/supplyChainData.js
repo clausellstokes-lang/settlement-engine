@@ -906,6 +906,10 @@ export const SUPPLY_CHAIN_NEEDS = {
         id: 'garrison',
         upstreamChains: ['food_processing'],
         label: 'Standing Garrison',
+        // F1 (rung 1B): the label names a garrison; where only a watch stands it names the watch
+        // (`computeActiveChains.js :: chainLabelFor`, reading `defenseFactsOf`). VETOABLE wording.
+        labelNeeds: 'hasGarrison',
+        labelOtherwise: 'Standing Watch',
         resource: null,
         rawInputs: [QUALITY_TOOLS_AND_WEAPONS, ADVANCED_WEAPONS_AND_ARMOR],
         // Was ['Garrison', 'Barracks (town)', 'City guard district'] at minTier
@@ -1008,6 +1012,9 @@ export const SUPPLY_CHAIN_NEEDS = {
       {
         id: 'hospital',
         label: 'Hospital & Surgery',
+        // F1: an almshouse or a foundling home runs the chain without a hospital. VETOABLE wording.
+        labelNeeds: 'hasHospital',
+        labelOtherwise: 'Almshouse Care',
         resource: null,
         rawInputs: [],
         // The dedicated medical institutions must run this chain (catalog names:
@@ -1357,6 +1364,12 @@ export const SUPPLY_CHAIN_NEEDS = {
         processingInstitutions: ['Arena', 'Gambling den', 'Gambling halls', 'Gambling district'],
         intermediateGoods: [],
         outputs: ['Games of chance', 'Gladiatorial combat', 'Monster exhibitions', 'Public games'],
+        // A-05 (soak 1000 row 13): the arena's own rows (INSTITUTION_SERVICES['Arena'] /
+        // ['Colosseum/arena']) are printed only where the Arena processor is held; a gambling
+        // den alone printed "Gladiatorial combat" in 188 towns and larger.
+        outputsRequiringProcessor: {
+          Arena: ['Gladiatorial combat', 'Monster exhibitions', 'Public games'],
+        },
         services: ['entertainment'],
         exportable: false,
         entrepot: false,

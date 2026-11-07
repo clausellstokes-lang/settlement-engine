@@ -18,6 +18,181 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-11-04 — F10 WALLS-WORD (UNITS 1–4), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
+ *   record docs/shift-records/2026-11-04-rung1-26-f10-walls-word.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   34 OF 525 ROWS MOVED (town 34; thorp, hamlet, village, city, metropolis 0); the key set is identical. THE CAUSE, ONE (first-parent
+ *   step 54daafda3): a line that names walls, soldiers or a garrison takes its twin where the roster lacks the thing — the hook-truth gate reads soldiers as the defence check does, and the service descriptions, the siege and wartime goals, the crisis cast's defence reasons, the waystation description and the power writers' garrison words follow. ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree S26 (the tree of 54daafda3 with the door paths carried from
+ *   the branch, the previous record's writes committed). 2e6482a4.. -> e98702fe..
+ *
+ * 2026-11-04 — F4 CRIME-SIGNAL (UNITS 1–5), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
+ *   record docs/shift-records/2026-11-04-rung1-25-f4-crime-signal.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   99 OF 525 ROWS MOVED (hamlet 12, village 72, town 15; thorp, city, metropolis 0); the key set is identical. THE CAUSE, ONE (first-parent
+ *   step ba9fde402): a relationship does not outlive the trim, affiliations, secrets and goals read the crime signal, no crime-wave tension without crime, and the survival and debt-evasion lines read the final crime signal. ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree S25 (the tree of ba9fde402 with the door paths carried from
+ *   the branch, the previous record's writes committed). e1a30c59.. -> 2e6482a4..
+ *
+ * 2026-11-04 — F3 FOOD-WORDS (UNITS 1–5), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
+ *   record docs/shift-records/2026-11-04-rung1-24-f3-food-words.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   136 OF 525 ROWS MOVED (thorp 19, hamlet 12, village 24, town 30, city 24, metropolis 27); the key set is identical. THE CAUSE, ONE (first-parent
+ *   step db8ce5da8): a secret says people are starving only where the food record goes hungry, an export list is goods ("Game meat" is game), a processed food good from the place's own food is an export only on a surplus, and a fishing row on water is a fish source. ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree S24 (the tree of db8ce5da8 with the door paths carried from
+ *   the branch, the previous record's writes committed). 156dca6a.. -> e1a30c59..
+ *
+ * 2026-11-04 — F1 DEFENCE-WORDS, FIRST STEP (UNITS 1–5), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
+ *   record docs/shift-records/2026-11-04-rung1-23-f1-defence-words.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   309 OF 525 ROWS MOVED (thorp 48, hamlet 72, village 72, town 105, city 12; metropolis 0); the key set is identical. THE CAUSE, ONE (first-parent
+ *   step 5e9ffb220): every defence claim writer reads defenseFactsOf, the standing and siege-pressure lines read the record, a hired company is not called a garrison, and a Village watch row stands below town. ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree S23 (the tree of 5e9ffb220 with the door paths carried from
+ *   the branch, the previous record's writes committed). d6e9fb42.. -> 156dca6a..
+ *
+ * 2026-11-04 — F6 BUDGET-FLOOR (UNITS 1–4), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
+ *   record docs/shift-records/2026-11-04-rung1-22-f6-budget-floor.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   513 OF 525 ROWS MOVED (thorp 84, hamlet 72, village 84, town 105, city 84, metropolis 84); the key set is identical. THE CAUSE, ONE (first-parent
+ *   step 6d84aa834): the institution budget's target gives way — the density factor d answers anchor − R − X over the scalable rows, the realised table re-measured on the scalable definition. ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree S22 (the tree of 6d84aa834 with the door paths carried from
+ *   the branch, the previous record's writes committed). cad7b24e.. -> d6e9fb42..
+ *
+ * 2026-11-04 — F5 INSTRUMENTS, FIRST STEP (UNITS 1–5), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
+ *   record docs/shift-records/2026-11-04-rung1-21-f5-instruments.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   30 OF 525 ROWS MOVED (village 12, town 18; thorp, hamlet, city, metropolis 0); the key set is identical. THE CAUSE, ONE (first-parent
+ *   step 7e28a6331): the hook pools' sea and dock lines are licensed on waterAccessKind (unit 4, the only unit that reaches the generator; units 1–3 are the soak's instruments). ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree S21 (the tree of 7e28a6331 with the door paths carried from
+ *   the branch, the previous record's writes committed). fd89c9cc.. -> cad7b24e..
+ *
+ * 2026-11-04 — PINS, SECOND STEP (UNITS 6–7), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
+ *   record docs/shift-records/2026-11-04-rung1-20-pins-2-rarity-mark.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   99 OF 525 ROWS MOVED (village 39, city 24, metropolis 36; thorp, hamlet, town 0); the key set is identical. THE CAUSE, ONE (first-parent
+ *   step 11467ed57): the rows whose own text calls them rare carry the rarity mark, and availableServices.criminal[].name is a service label, declared NON_CASCADED. ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree S20 (the tree of 11467ed57 with the door paths carried from
+ *   the branch, the previous record's writes committed). 9edc2b5f.. -> fd89c9cc..
+ *
+ * 2026-11-04 — X-46 CAR 3, I7, THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
+ *   record docs/shift-records/2026-11-04-rung1-19-x46-car-3-i7-realised.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   489 OF 525 ROWS MOVED (thorp 60, hamlet 72, village 84, town 105, city 84, metropolis 84); the key set is identical. THE CAUSE, ONE (first-parent
+ *   step 6ca454d2b): the realised table (INSTITUTION_BUDGET_REALISED) re-measured at the composed tip by the lane's own recipe, a metropolis forced through the custom-population path. ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree S19 (the tree of 6ca454d2b with the door paths carried from
+ *   the branch, the previous record's writes committed). 02e881a0.. -> 9edc2b5f..
+ *
+ * 2026-11-04 — TRUTH, SECOND STEP (UNIT D), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
+ *   record docs/shift-records/2026-11-04-rung1-18-truth-2-unit-d.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   480 OF 525 ROWS MOVED (thorp 72, hamlet 72, village 72, town 96, city 84, metropolis 84); the key set is identical. THE CAUSE, ONE (first-parent
+ *   step 844acaccc): the infiltrator takes a real name, hidden in the fiction, and the criminal structure is not null beside a network. ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree S18 (the tree of 844acaccc with the door paths carried from
+ *   the branch, the previous record's writes committed). a4377df3.. -> 02e881a0..
+ *
+ * 2026-11-04 — PINS, FIRST STEP (UNITS 1–3 AND THE CHAIR'S ADDENDUM), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
+ *   record docs/shift-records/2026-11-04-rung1-17-pins-1-density-exemptions.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   288 OF 525 ROWS MOVED (thorp 31, hamlet 48, village 48, town 41, city 36, metropolis 84); the key set is identical. THE CAUSE, ONE (first-parent
+ *   step 37b1e746d): route-required rows and rows with an authored rarity are exempt from X-46 car 3's density factor, and the budget's top anchor is the catalogue's ceiling, 60,000 -> 93. ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree S17 (the tree of 37b1e746d with the door paths carried from
+ *   the branch, the previous record's writes committed). 25d853fd.. -> a4377df3..
+ *
+ * 2026-11-04 — TRUTH, FIRST STEP (UNITS A–C AND UNIT D'S FIRST COMMIT), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
+ *   record docs/shift-records/2026-11-04-rung1-16-truth-1-units-a-c.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   231 OF 525 ROWS MOVED (thorp 24, hamlet 24, village 36, town 63, city 24, metropolis 60); the key set is identical. THE CAUSE, ONE (first-parent
+ *   step ff4448d2e): a hook false on its own record is not stored; the crisis page speaks the place's own tier noun; "no criminal infrastructure" never prints beside a network; stress factions take the role pool's first unused name. ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree S16 (the tree of ff4448d2e with the door paths carried from
+ *   the branch, the previous record's writes committed). b7831025.. -> 25d853fd..
+ *
+ * 2026-11-04 — PLACE-NOT-TIER (R6, UNITS 1–2), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
+ *   record docs/shift-records/2026-11-04-rung1-15-place-not-tier.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   180 OF 525 ROWS MOVED (hamlet 72, village 84, town 24; thorp, city, metropolis 0); the key set is identical. THE CAUSE, ONE (first-parent
+ *   step 6129c300d): the soldiers line, the Guard Captain and "The garrison" read the place's forces, not the tier; a thorp, hamlet or village seats no guild power without a market. ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree S15 (the tree of 6129c300d with the door paths carried from
+ *   the branch, the previous record's writes committed). f0c7321d.. -> b7831025..
+ *
+ * 2026-11-04 — SELF-VOUCH, I5, THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
+ *   record docs/shift-records/2026-11-04-rung1-14-self-vouch-i5-kind-7.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   510 OF 525 ROWS MOVED (thorp 72, hamlet 84, village 84, town 102, city 84, metropolis 84); the key set is identical. THE CAUSE, ONE (first-parent
+ *   step cdc949867): the battery judgment counts kind 7 (a placeholder faction or a role-only person), so the self-vouch line prints only on a record clean of kinds 1-5, 7 and 8. ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree S14 (the tree of cdc949867 with the door paths carried from
+ *   the branch, the previous record's writes committed). ea04a7ca.. -> f0c7321d..
+ *
+ * 2026-11-04 — X-46 CAR 1B, SECOND STEP (U4–U5), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
+ *   record docs/shift-records/2026-11-04-rung1-13-x46-car-1b-2-curve.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   84 OF 525 ROWS MOVED (metropolis 84; thorp, hamlet, village, town, city 0); the key set is identical. THE CAUSE, ONE (first-parent
+ *   step fb0341b93): the owner's metropolis curve — flat to 50,000, thinning exponentially to 1,000,000 — and the rarer variant, 30% of random metropolises past 50,000. ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree S13 (the tree of fb0341b93 with the door paths carried from
+ *   the branch, the previous record's writes committed). b25b0949.. -> ea04a7ca..
+ *
+ * 2026-11-04 — X-46 CAR 3 (LANE X46-3-BUDGET), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
+ *   record docs/shift-records/2026-11-04-rung1-12-x46-car-3-budget.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   525 OF 525 ROWS MOVED (thorp 84, hamlet 84, village 84, town 105, city 84, metropolis 84); the key set is identical. THE CAUSE, ONE (first-parent
+ *   step 90dc22f18): the institution budget follows the population — seven anchors read log-linearly, one density factor d per settlement scaling every non-required, non-fabric chance, the fabric tagged in the registry. ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree S12 (the tree of 90dc22f18 with the door paths carried from
+ *   the branch, the previous record's writes committed). 0dec0a6d.. -> b25b0949..
+ *
+ * 2026-11-04 — X-46 CAR 1B, FIRST STEP (U1–U3), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
+ *   record docs/shift-records/2026-11-04-rung1-11-x46-car-1b-1-no-ceiling.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   84 OF 525 ROWS MOVED (metropolis 84; thorp, hamlet, village, town, city 0); the key set is identical. THE CAUSE, ONE (first-parent
+ *   step 79c442330): the metropolis roll has no ceiling, the custom population input has a floor and no ceiling, and the band position is read on a log scale. ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree S11 (the tree of 79c442330 with the door paths carried from
+ *   the branch, the previous record's writes committed). f0d5b304.. -> 0dec0a6d..
+ *
+ * 2026-11-04 — T1/T2 (THE DRY RUN §4'S TWO PROPOSALS, ADOPTED BY THE CHAIR), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
+ *   record docs/shift-records/2026-11-04-rung1-10-t1-t2-siege-stores.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   84 OF 525 ROWS MOVED (village 84; thorp, hamlet, town, city, metropolis 0); the key set is identical. THE CAUSE, ONE (first-parent
+ *   step fe56bddd4): the siege keeps 0.3 of the harvest; a village stores as a hamlet does. ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree S10 (the tree of fe56bddd4 with the door paths carried from
+ *   the branch, the previous record's writes committed). 59ce8a2e.. -> f0d5b304..
+ *
+ * 2026-11-04 — TERRAIN-POOLS, SECOND STEP (RE-MERGED AT 30141976), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
+ *   record docs/shift-records/2026-11-04-rung1-09-terrain-pools-2.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   51 OF 525 ROWS MOVED (village 1, town 1, city 37, metropolis 12; thorp, hamlet 0); the key set is identical. THE CAUSE, ONE (first-parent
+ *   step fb5edb7f5): inland texts for the pools that speak only of water, and no ship captain or sailor where there is no water. ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree S9 (the tree of fb5edb7f5 with the door paths carried from
+ *   the branch, the previous record's writes committed). 54d3a39a.. -> 59ce8a2e..
+ *
+ * 2026-11-04 — SELF-VOUCH, THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
+ *   record docs/shift-records/2026-11-04-rung1-08-self-vouch.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   525 OF 525 ROWS MOVED (thorp 84, hamlet 84, village 84, town 105, city 84, metropolis 84); the key set is identical. THE CAUSE, ONE (first-parent
+ *   step 0be13b5cb): the eighth formal judgment, record_coherence_battery, over the stored record, and DS-GEN-11's zero pool vouches only when it passed. ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree S8 (the tree of 0be13b5cb with the door paths carried from
+ *   the branch, the previous record's writes committed). 75d4ba2c.. -> 54d3a39a..
+ *
+ * 2026-11-04 — FOOD-EXPORTS (WITH FOOD-4), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
+ *   record docs/shift-records/2026-11-04-rung1-07-food-exports.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   139 OF 525 ROWS MOVED (thorp 12, hamlet 12, village 12, town 31, city 36, metropolis 36); the key set is identical. THE CAUSE, ONE (first-parent
+ *   step 63bb72785): a place short of food sells no food surplus, and the foodways line has one writer on the record. ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree S7 (the tree of 63bb72785 with the door paths carried from
+ *   the branch, the previous record's writes committed). a423903f.. -> 75d4ba2c..
+ *
+ * 2026-11-04 — TERRAIN-POOLS, FIRST STEP (LANE TERRAIN-POOLS AT ITS FIRST MERGE), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
+ *   record docs/shift-records/2026-11-04-rung1-06-terrain-pools-1.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   367 OF 525 ROWS MOVED (thorp 25, hamlet 60, village 60, town 90, city 60, metropolis 72); the key set is identical. THE CAUSE, ONE (first-parent
+ *   step ac09ea83b): the water-speaking pools and lines are licensed on the place's water fact (the A-11 licences; the Defense desk's harbour line reads the water fact). ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree S6 (the tree of ac09ea83b with the door paths carried from
+ *   the branch, the previous record's writes committed). 2cc987d7.. -> a423903f..
+ *
+ * 2026-11-04 — TIER-NOUN-POOLS (UNITS 1–6), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
+ *   record docs/shift-records/2026-11-04-rung1-05-tier-noun-pools.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   48 OF 525 ROWS MOVED (city 48; thorp, hamlet, village, town, metropolis 0); the key set is identical. THE CAUSE, ONE (first-parent
+ *   step a9982e3b9): a city's drawn institution description and its Gate Tolls line speak the place's own tier noun. ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree S5 (the tree of a9982e3b9 with the door paths carried from
+ *   the branch, the previous record's writes committed). 3e4fa156.. -> 2cc987d7..
+ *
+ * 2026-11-04 — CRISIS (LANE CRISIS, UNITS 1–7, DOCS/DESIGN_CRISIS_TAB.MD), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
+ *   record docs/shift-records/2026-11-04-rung1-03-crisis-derived-cast.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   516 OF 525 ROWS MOVED (thorp 84, hamlet 84, village 84, town 96, city 84, metropolis 84); the key set is identical. THE CAUSE, ONE (first-parent
+ *   step d3e072368): the crisis record carries its derived cast. ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree S3 (the tree of d3e072368 with the door paths carried from
+ *   the branch, the previous record's writes committed). eca30d70.. -> 3e4fa156..
+ *
+ * 2026-11-04 — X-46 CAR 2 (LANE X46-2-THRESHOLDS), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
+ *   record docs/shift-records/2026-11-04-rung1-02-x46-car-2-thresholds.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   525 OF 525 ROWS MOVED (thorp 84, hamlet 84, village 84, town 105, city 84, metropolis 84); the key set is identical. THE CAUSE, ONE (first-parent
+ *   step d4bf6431c): the thresholds — seventeen bare population comparisons re-based through TIER_STAMP_CUTS, the Dwellings and Housing rows on the owner's household column, Money changers' floor 3,000 -> 2,000. ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree S2 (the tree of d4bf6431c with the door paths carried from
+ *   the branch, the previous record's writes committed). f5f0edbc.. -> eca30d70..
+ *
+ * 2026-11-04 — X-46 CAR 1 (LANE X46-TRAIN, U1–U4), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
+ *   record docs/shift-records/2026-11-04-rung1-01-x46-car-1-bands.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   525 OF 525 ROWS MOVED (thorp 84, hamlet 84, village 84, town 105, city 84, metropolis 84); the key set is identical. THE CAUSE, ONE (first-parent
+ *   step 1264a8152): the owner's historical population bands and the one disjoint tier stamp; no household count (U4 removed it by the owner's word). ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree S1 (the tree of 1264a8152 with the door paths carried from
+ *   the branch, the previous record's writes committed). 4c42885b.. -> f5f0edbc..
+ *
  * 2026-11-03 — DEFENSE-2: THE DEFENCE GENERATOR'S MAGIC DEPENDENCY DERIVES FROM THE RELIANCE READING, THROUGH THE SIGNED
  *   DOOR (ODQ §934.104, THE COHERENCE AND SCALE WINDOW; record docs/shift-records/2026-11-03-defense-magic-dependency.json;
  *   the cloud chair signs under the owner's delegation, vetoable). 256 OF 525 ROWS MOVED (village 12, town 76, city 84,

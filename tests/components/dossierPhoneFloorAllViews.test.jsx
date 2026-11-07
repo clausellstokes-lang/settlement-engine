@@ -563,18 +563,24 @@ const desktopShape = (perView) => Object.fromEntries(
 // refuses one false hook on the fixture city; moves at 615def16c), Systems/Defense 26 -> 25 (TRIM X-50, two
 // criminal operations that fall to one note print it once; moves at 291e4d876), Systems/Economics 40 -> 39
 // (TRIM-2 X-50, the trade-route impact line prints once; moves at 71541a9e6). sub14 follows measured.
+// ── RE-MEASURED 2026-11-06 (LANDING-7 lane F, at the landing tip 8e60cb2a5): content moved; every floor holds (zero
+// violations). Bisected by stage over the first-parent chain e06899bb6..8e60cb2a5 (the walk run in a scratch worktree
+// per probe): d4bf6431c x46-2 thresholds (Institutions 64 -> 63) · 060273d9c hooks-under-stress (Plot Hooks 36 -> 38) ·
+// ac09ea83b terrain-pools (Relationships 61 -> 64) · 63bb72785 food-exports (Economics 39 -> 40) · 90dc22f18 x46-3
+// budget (Services 97 -> 104, Economics 40 -> 42, Resources 4 -> 2, Defense 26 -> 25) · 6d84aa834 rung1b-f6 budget
+// floor (Plot Hooks 38 -> 37, Institutions 63 -> 65, Services 104 -> 109, Relationships 64 -> 61). sub14 follows measured.
 const DESKTOP_BASELINE = Object.freeze({
   "Summary/Overview":    { measured: 11, sub14: 10 },
   // T2-25 measured it at 1 under Systems/Causes; X-12 moves it here (BUILD-T1), same count.
   "Summary/Foundations": { measured:  1, sub14:  1 },
   // 37 -> 38 (2026-10-31, the G2 + W2-LINKS composition at the integration merge): one conflict line more in
   // the fixture now that conflict parties are power factions (X-26a); no token moved. Relationships likewise 59 -> 60.
-  "Summary/Plot Hooks":  { measured: 36, sub14: 36 },
-  "Systems/Services":    { measured: 97, sub14: 97 },
-  "Systems/Institutions": { measured: 64, sub14: 64 }, // T1-14, measured 2026-10-30 by this walk
+  "Summary/Plot Hooks":  { measured: 37, sub14: 37 },
+  "Systems/Services":    { measured: 109, sub14: 109 },
+  "Systems/Institutions": { measured: 65, sub14: 65 }, // T1-14, measured 2026-10-30 by this walk
   // 47 -> 40 (2026-10-30, UX consolidation U1, RULINGS-T2 T2-1..T2-8): no desktop token moved; the page lost
   // its duplicates (Economy/Food tiles, the Supply Chains rows, the Resource Exploitation chips, the plot hooks).
-  "Systems/Economics":   { measured: 39, sub14: 39 },
+  "Systems/Economics":   { measured: 42, sub14: 42 },
   // 28 -> 22 (2026-10-30, UX consolidation U5, T2-17..T2-19): Current Tensions, Active Conflicts and the
   // duplicate governing rows left the page; no token moved.
   "Systems/Power":       { measured: 22, sub14: 21 },
@@ -584,10 +590,10 @@ const DESKTOP_BASELINE = Object.freeze({
   // hook left the Defense page for the Plot Hooks tab; no token moved (bisected: 317307cc green, 987602c0 moves it).
   // 25 -> 26 (2026-11-04, REGISTERS-4 door 7, measured at the composed tip): DEFENSE-3's X-52 food endurance line
   // (8e9de64b9, the siege reading of the stores) adds one prose line on WIRING-2's re-measure; no token moved.
-  "Systems/Defense":     { measured: 26, sub14: 26 },
+  "Systems/Defense":     { measured: 25, sub14: 25 },
   // 5 -> 4 (2026-10-30, UX consolidation U2, T2-10): the "Depleted. Consumed locally, export potential
   // reduced" label shortened to "Depleted" and fell under the walk's measuring length; no token moved.
-  "Systems/Resources":   { measured:  4, sub14:  4 },
+  "Systems/Resources":   { measured:  2, sub14:  2 },
   // 4 -> 5 (2026-09-19, browser pass 3 car 4): the receipt strip's culture line now reads the
   // identity's LABEL ("South-Asian-inspired") instead of a key, so it crosses the walk's
   // forty-five characters and is measured — and it is prose, so it takes the prose floor.
@@ -664,16 +670,21 @@ const DESKTOP_BASELINE = Object.freeze({
 // Plot Hooks 37 -> 36 (the HOOKS truth gate refuses one false hook), Systems/Defense 24 -> 23 (TRIM X-50, a shared
 // criminal note printed once), Systems/Economics 33 -> 32 (TRIM-2 X-50, the trade-route impact line once). The
 // sub-floor counts hold.
+// ── RE-MEASURED 2026-11-06 (LANDING-7 lane F, at 8e60cb2a5): content moved; sub12 stays zero and the floors arm is
+// green. The same six stages as the desktop note: x46-2 (Institutions 63 -> 62), hooks-under-stress (Plot Hooks
+// 36 -> 38), terrain-pools (Relationships chrome 2 -> 5), food-exports (Economics prose 32 -> 33), x46-3 budget
+// (Services 96 -> 103, Economics 33/7 -> 34/8, Resources 4 -> 2, Defense 24 -> 23, Relationships 59/5 -> 57/7),
+// rung1b-f6 floor (Plot Hooks 38 -> 37, Institutions 62 -> 64, Services 103 -> 108, Relationships 57/7 -> 58/3).
 const MOBILE_BASELINE = Object.freeze({
   "Summary/Overview":    { prose: 10, chrome: 1, sub14: 0, sub12: 0 },
   "Summary/Foundations": { prose:  1, chrome: 0, sub14: 0, sub12: 0 },
   // 37 -> 38 and Relationships 57 -> 58 (2026-10-31, the G2 + W2-LINKS composition at the merge): one conflict
   // line more (X-26a); both sub-floor counts stay where they were.
-  "Summary/Plot Hooks":  { prose: 36, chrome: 0, sub14: 0, sub12: 0 },
-  "Systems/Services":    { prose: 96, chrome: 1, sub14: 0, sub12: 0 },
-  "Systems/Institutions": { prose: 63, chrome: 1, sub14: 0, sub12: 0 },
+  "Summary/Plot Hooks":  { prose: 37, chrome: 0, sub14: 0, sub12: 0 },
+  "Systems/Services":    { prose: 108, chrome: 1, sub14: 0, sub12: 0 },
+  "Systems/Institutions": { prose: 64, chrome: 1, sub14: 0, sub12: 0 },
   // prose 39 -> 33 (2026-10-30, UX consolidation U1): the duplicate blocks left the page; no floor moved.
-  "Systems/Economics":   { prose: 32, chrome: 7, sub14: 7, sub12: 0 },
+  "Systems/Economics":   { prose: 34, chrome: 8, sub14: 8, sub12: 0 },
   // prose 27 -> 21 (2026-10-30, UX consolidation U5): tensions, conflicts and the duplicate rows left.
   "Systems/Power":       { prose: 21, chrome: 1, sub14: 0, sub12: 0 },
   // prose 27 -> 25, chrome 1 -> 2 (2026-10-30, UX consolidation U6): the criminal faction is now one
@@ -681,9 +692,9 @@ const MOBILE_BASELINE = Object.freeze({
   // prose 25 -> 24 (2026-10-30, cure lane T11 U3, VERIFIER F11 / X-2): the inline order & crime hook is cut.
   // prose 23 -> 24 (2026-11-04, REGISTERS-4 door 7, measured at the composed tip): DEFENSE-3's X-52 food endurance
   // line (8e9de64b9) adds one prose line on WIRING-2's re-measure; the sub-floor counts hold.
-  "Systems/Defense":     { prose: 24, chrome: 2, sub14: 2, sub12: 0 },
+  "Systems/Defense":     { prose: 23, chrome: 2, sub14: 2, sub12: 0 },
   // chrome 1 -> 0 (2026-10-30, UX consolidation U2): the long Depleted label is now one word.
-  "Systems/Resources":   { prose:  4, chrome: 0, sub14: 0, sub12: 0 },
+  "Systems/Resources":   { prose:  2, chrome: 0, sub14: 0, sub12: 0 },
   // prose 5 -> 2 (2026-10-30, UX consolidation U3): the caption and the receipt left the page.
   "Systems/Outlook":     { prose:  1, chrome: 0, sub14: 0, sub12: 0 },
   // prose 1, chrome 0 -> 1 (2026-10-30, UX consolidation): the dependence block's line and its title.
@@ -691,7 +702,7 @@ const MOBILE_BASELINE = Object.freeze({
   // reliance reading; its title is the 12px chrome line, its explanation and chain notes take the prose floor.
   "Systems/Magic":       { prose:  3, chrome: 1, sub14: 1, sub12: 0 },
   "World/NPCs":          { prose: 30, chrome: 1, sub14: 0, sub12: 0 },
-  "World/Relationships": { prose: 59, chrome: 2, sub14: 2, sub12: 0 },
+  "World/Relationships": { prose: 58, chrome: 3, sub14: 3, sub12: 0 },
   "World/Faith":         { prose:  1, chrome: 0, sub14: 0, sub12: 0 },
   "World/Daily Life":    { prose:  1, chrome: 0, sub14: 0, sub12: 0 },
   "World/Rumors & News": { prose:  1, chrome: 0, sub14: 0, sub12: 0 },

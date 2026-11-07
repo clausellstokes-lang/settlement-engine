@@ -131,7 +131,11 @@ describe('terrainRequired institution filtering (assembleInstitutions terrainReq
     // positive fixture until the urban-band registry (2026-09-30, ODQ §934.86) re-ordered the
     // catalog draws; hill-0 is the first hills seed that rolls the collective now. Off-terrain
     // exclusion remains swept below.
-    const hills = gen({ settType: 'thorp', culture: 'germanic', terrainOverride: 'hills', tradeRouteAccess: 'road' }, 'hill-0');
+    // Re-pinned `hill-0` to `hill-1` on 2026-11-04 (X-46 car 3, the institution budget; the chair's
+    // rulings): the budget made every optional thorp row unreachable until the anchors were set
+    // above the required baseline; at the new anchors the collective rolls again, and `hill-1` is
+    // the first hills seed that rolls it (hill-1, -5, -7 of the first eight; `s0` still holds).
+    const hills = gen({ settType: 'thorp', culture: 'germanic', terrainOverride: 'hills', tradeRouteAccess: 'road' }, 'hill-1');
     expect(hasInstitution(plains, 'Shepherd collective')).toBe(true);
     expect(hasInstitution(hills, 'Shepherd collective')).toBe(true);
   });
@@ -153,7 +157,10 @@ describe('terrainRequired institution filtering (assembleInstitutions terrainReq
   // (30 generations) — enough to catch a broken filter without a long wall time.
   // The per-terrain zero result is stable well beyond this (verified to 25 seeds).
   test('Caravanserai is admitted on desert and filtered out of every other terrain', () => {
-    const desert = gen({ settType: 'town', culture: 'germanic', terrainOverride: 'desert', tradeRouteAccess: 'road' }, 'k4');
+    // Re-pinned `k4` to `k0` on 2026-11-04 (X-46 car 3, the institution budget; the chair's ruling
+    // 6(b)): the density factor lowers a small town's optional chances, so `k4` no longer rolls
+    // the caravanserai; `k0` is the first desert seed that does (k0, k1, k2 of the first 40).
+    const desert = gen({ settType: 'town', culture: 'germanic', terrainOverride: 'desert', tradeRouteAccess: 'road' }, 'k0');
     expect(hasInstitution(desert, 'Caravanserai')).toBe(true);
 
     const OFF_TERRAIN = [['plains', 'road'], ['hills', 'road'], ['mountain', 'road'], ['forest', 'isolated'], ['coastal', 'port']];

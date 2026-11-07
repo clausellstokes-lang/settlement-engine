@@ -57,9 +57,12 @@
  *
  * ⛔ A LANE MAY NOT FLIP EITHER WORD. Both are the owner's, by nature (tuning signature).
  */
+// 2026-11-04: lit by the chair under the owner's word of 2026-11-04 ('I leave it all to your judgment';
+// ODQ §934.104); the named roster and the faction seats follow the population (X-46 car 4). The flip is
+// the owner's by delegation, not a lane's: the words above still bind every lane.
 export const REGISTER_VII_SIGNATURE = Object.freeze({
-  signed: false,
-  live: false,
+  signed: true,
+  live: true,
 });
 
 /** Tier order, smallest first. The one canonical spelling for this module family. */
@@ -106,13 +109,23 @@ export const IMPORTANCE_ORDER = Object.freeze([
  * metropolises sit BELOW the mass floor. This ladder is a real two-directional
  * move, not a ratification — which is exactly why it lands behind a version
  * gate rather than as an in-place retune.
+ *
+ * X-46 car 4, 2026-11-04 — THE NPC BAND (`docs/DESIGN_X46_SCALE_TRAIN.md` §5). `mass` is
+ * the owner's historical scale: 1–2 / 2–4 / 4–7 / 6–12 / 12–18 / 18–30 named people (the
+ * chair's proposal on the ledger, 2026-11-02, for the owner's veto, not vetoed; the
+ * metropolis ceiling 30 kept from the earlier draft because "18-and-up" needs an edge the
+ * roll can clamp to). It was 1–3 / 2–4 / 3–6 / 6–10 / 12–20 / 18–30. Adjacent bands now
+ * touch or overlap, as the owner's population bands do, and the sizing stage reads the
+ * settlement's place inside its population band (`PARTICULAR_TILTS.population`) so a
+ * large hamlet and a small village roll the same number of named people. Still a draft
+ * under `REGISTER_VII_SIGNATURE`; v1 (`densityLaw.LEGACY_MASS_RANGE`) does not move.
  */
 export const DENSITY_BANDS = Object.freeze({
-  thorp:      Object.freeze({ factions: { min: 1, max: 1 }, mass: { min: 1,  max: 3  }, doubledNiches: { min: 0, max: 0 }, suite: { min: 1, max: 2 }, rivalBonusSeat: 1 }),
+  thorp:      Object.freeze({ factions: { min: 1, max: 1 }, mass: { min: 1,  max: 2  }, doubledNiches: { min: 0, max: 0 }, suite: { min: 1, max: 2 }, rivalBonusSeat: 1 }),
   hamlet:     Object.freeze({ factions: { min: 1, max: 2 }, mass: { min: 2,  max: 4  }, doubledNiches: { min: 0, max: 0 }, suite: { min: 1, max: 2 }, rivalBonusSeat: 0 }),
-  village:    Object.freeze({ factions: { min: 2, max: 3 }, mass: { min: 3,  max: 6  }, doubledNiches: { min: 0, max: 0 }, suite: { min: 1, max: 2 }, rivalBonusSeat: 0 }),
-  town:       Object.freeze({ factions: { min: 3, max: 5 }, mass: { min: 6,  max: 10 }, doubledNiches: { min: 0, max: 0 }, suite: { min: 1, max: 2 }, rivalBonusSeat: 0 }),
-  city:       Object.freeze({ factions: { min: 5, max: 8 }, mass: { min: 12, max: 20 }, doubledNiches: { min: 1, max: 2 }, suite: { min: 2, max: 3 }, rivalBonusSeat: 0 }),
+  village:    Object.freeze({ factions: { min: 2, max: 3 }, mass: { min: 4,  max: 7  }, doubledNiches: { min: 0, max: 0 }, suite: { min: 1, max: 2 }, rivalBonusSeat: 0 }),
+  town:       Object.freeze({ factions: { min: 3, max: 5 }, mass: { min: 6,  max: 12 }, doubledNiches: { min: 0, max: 0 }, suite: { min: 1, max: 2 }, rivalBonusSeat: 0 }),
+  city:       Object.freeze({ factions: { min: 5, max: 8 }, mass: { min: 12, max: 18 }, doubledNiches: { min: 1, max: 2 }, suite: { min: 2, max: 3 }, rivalBonusSeat: 0 }),
   metropolis: Object.freeze({ factions: { min: 7, max: 10 }, mass: { min: 18, max: 30 }, doubledNiches: { min: 1, max: 2 }, suite: { min: 2, max: 3 }, rivalBonusSeat: 0 }),
 });
 
@@ -207,6 +220,17 @@ export const DOUBLED_NICHE_SHARE = 0.55;
  *
  * `vacancyTilt` is §810.2's "a poor or shrinking place runs understaffed; a
  * prosperous one fills its benches" — a multiplier on the vacancy weights.
+ *
+ * `population` (X-46 car 4, 2026-11-04, `docs/DESIGN_X46_SCALE_TRAIN.md` §5) is the
+ * settlement's place inside its tier's POPULATION band (`constants.POPULATION_RANGES`),
+ * read the same way: the bottom of the band tilts by −0.75 of the band's width, the top by
+ * +0.75, the middle not at all. It is the term that makes the roster follow the people —
+ * a 100-person hamlet rolls near the top of its band and a 75-person village near the
+ * bottom of its own, and because the owner's bands touch, the two agree within one person.
+ * MEASURED (400 rolls a point, unremarkable particulars): 0.75 is the smallest of the
+ * candidates tried (0.4 · 0.5 · 0.6 · 0.75 · 1.0) that holds every overlap point inside
+ * one person — 0.6 misses at 15,000 by 1.42 — while 1.0 would leave no variance at all at
+ * a band's ends. A draft, like every value in this file.
  */
 export const PARTICULAR_TILTS = Object.freeze({
   prosperity:   0.20,
@@ -214,6 +238,7 @@ export const PARTICULAR_TILTS = Object.freeze({
   war:         -0.15,
   corruption:  -0.08,
   vacancyTilt:  0.45,
+  population:   0.75,
 });
 
 /**

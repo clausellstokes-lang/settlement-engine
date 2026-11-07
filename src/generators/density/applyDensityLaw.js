@@ -65,6 +65,7 @@ import { rollDensityPlan } from './densityRoll.js';
 // policy (⇒ 0) is unreachable here: a strictly safer floor, never a behaviour change.
 import { clamp01 } from '../../kernel/math.js';
 import { prosperityRank01 } from '../../domain/prosperityRank.js';
+import { renormalizeFactionPower } from '../power/rulingStructure.js';
 
 /** The stressor family that may lift the seat floor (§810.3 R13 / §810.5). ONE
  *  closed vocabulary serves birth and play; `succession_void` already exists in
@@ -186,6 +187,11 @@ function planFor(input, mode = {}) {
       config, stress: input.stress, economicState: input.economicState || {},
     }),
     floorLift: rollFloorLift(lawRng.fork('floor-lift'), config, input.stress),
+    // X-46 car 4: the settlement's population, read by the sizing stage's population tilt.
+    // Not a draw — every seam passes it, so the three plans agree on the same tilt.
+    population: Number.isFinite(Number(input.population)) && input.population != null
+      ? Number(input.population)
+      : null,
     seatAll: mode.seatAll,
     massOverride: mode.massOverride ?? null,
   });
@@ -197,6 +203,7 @@ function planFor(input, mode = {}) {
  *
  * @param {{
  *   tier?: string, config?: Record<string, unknown>, stress?: unknown,
+ *   population?: number|null,
  *   powerStructure?: {factions?: Array<Record<string, unknown>>}|null,
  *   economicState?: Record<string, unknown>|null,
  *   rng: {random: () => number, fork: (l: string) => any},
@@ -223,6 +230,7 @@ export function rollNamedMass(input) {
  *
  * @param {{
  *   tier?: string, config?: Record<string, unknown>, stress?: unknown,
+ *   population?: number|null,
  *   powerStructure?: {factions?: Array<Record<string, unknown>>}|null,
  *   economicState?: Record<string, unknown>|null,
  *   massOverride?: number|null,
@@ -286,8 +294,93 @@ function resizeSeats(powerStructure, plan, rng) {
       power: Math.max(1, Math.round(num(host.power, 1) * DOUBLED_NICHE_SHARE)),
     });
   }
+  // The trim drops the unseated powers' shares and the mint adds each rival's, so this
+  // roster does NOT total 100; `conservePower` restores it after the dispersal (below).
   const factions = [...kept, ...minted];
-  return { ...(powerStructure || {}), factions };
+  const keptNames = new Set(factions.flatMap(seatNamesOf));
+  const removed = new Set(seats.filter(seat => !keep.has(seatKey(seat)))
+    .flatMap(seatNamesOf).filter(name => !keptNames.has(name)));
+  return pruneToRoster({ ...(powerStructure || {}), factions }, removed);
+}
+
+/** Every name a seat is joined on: its key, its `faction`, its `name`.
+ *  @param {Record<string, unknown>} seat @returns {string[]} */
+function seatNamesOf(seat) {
+  return [seatKey(seat), seat?.faction, seat?.name]
+    .filter((/** @type {unknown} */ n) => typeof n === 'string' && n !== '')
+    .map(String);
+}
+
+/**
+ * ⛔ A RELATIONSHIP DOES NOT OUTLIVE A TRIM (lane RUNG1B-F4 unit 2, 2026-11-04;
+ * docs/F4_CRIME_SIGNAL_2026-11-04.md §1, cause i). `power/rulingStructure.js` writes
+ * `factionRelationships` for the whole pre-trim roster, and the resize above used to return
+ * every row with the trimmed roster: 782 of 1,000 soak places kept a row (its narrative and its
+ * dmNote) for a faction the law had removed, 69 for a removed criminal faction (soak1k-4:
+ * "Ask: which specific officials have arrangements with Thieves' Guild?" with no guild). The
+ * rows naming a REMOVED seat go with it here, at the trim, in one place. A row naming any other
+ * faction — a DM's own off the roster included — is kept; nothing draws; a structure with
+ * nothing removed (or no row naming it) is returned by reference.
+ *
+ * @template {{factionRelationships?: unknown}} T
+ * @param {T} powerStructure the resized structure
+ * @param {Set<string>} removed the names of the seats the trim removed
+ * @returns {T}
+ */
+export function pruneToRoster(powerStructure, removed) {
+  const rows = powerStructure?.factionRelationships;
+  if (!removed.size || !Array.isArray(rows)) return powerStructure;
+  const kept = rows.filter(row => !(Array.isArray(row?.pair)
+    && row.pair.some((/** @type {unknown} */ name) => removed.has(String(name)))));
+  return kept.length === rows.length ? powerStructure : { ...powerStructure, factionRelationships: kept };
+}
+
+/**
+ * ⛔ THE ROSTER'S POWER IS CONSERVED AT 100 — AFTER THE DISPERSAL (rung 1 N1, 2026-11-04).
+ *
+ * `resizeSeats` trims the unseated powers' shares and mints each doubled niche's rival on
+ * top, so the v2 roster reached the receipt totalling 20..102 and `conservationFindings`
+ * ("Faction power is not conserved at 100%") failed 940 of 1,000 v2 settlements. The house
+ * largest-remainder renormaliser (`power/rulingStructure.js :: renormalizeFactionPower`)
+ * rescales to integer points totalling exactly 100: proportional, so no strict order
+ * inverts, and no seat is added, dropped or moved.
+ *
+ * ⚠ WHY HERE AND NOT IN `resizeSeats`, MEASURED: renormalising at the resize hands the
+ * dispersal rounded weights, and on soak seeds 0..119 that moved affiliations and rungs in
+ * 13 of 120 births (`soak1k-23`'s Revolt Leadership changed head). After the dispersal the
+ * plan reads exactly the powers it read before this cure, so the rungs and seats do not move.
+ *
+ * Written onto the roster the seam was handed, because the seam's caller keeps only the
+ * npcs — as a NEW array of copied seats, so no seat object another holder shares is
+ * written. An already-conserved roster (any world born after this cure) is left untouched.
+ * @param {{factions?: Array<Record<string, unknown>>}|null|undefined} powerStructure
+ */
+/**
+ * EVERY PATH CONSERVES (rung 1 N1 follow-up, the chair's ruling of 2026-11-04). Under a HELD
+ * roster `generateCoherence` skips `enrichNpcCoherence` (EM-R2), so the dispersal — and the
+ * `conservePower` inside it — never runs, and a v2 world regenerated with held NPCs reached
+ * the receipt with its resized roster off 100 (12 of 12 held regenerations of soak seeds).
+ * Assembly calls this once the coherence tail has finished with the roster, whichever path
+ * that tail took. Returns the input BY REFERENCE for a v1 world and for a roster already at
+ * 100; otherwise a new powerStructure whose seats are copies, renormalised. No draw.
+ *
+ * @param {{config?: Record<string, unknown>,
+ *          powerStructure?: {factions?: Array<Record<string, unknown>>}|null}} input
+ */
+export function conserveSeatPower(input) {
+  const powerStructure = input.powerStructure;
+  if (!rollsRegisterVii(input.config || {}) || !powerStructure) return powerStructure;
+  const copy = { ...powerStructure };
+  conservePower(copy);
+  return copy.factions === powerStructure.factions ? powerStructure : copy;
+}
+
+function conservePower(powerStructure) {
+  const factions = powerStructure?.factions;
+  if (!Array.isArray(factions) || !factions.length) return;
+  const sum = factions.reduce((acc, seat) => acc + num(seat.power, 0), 0);
+  if (sum === 100 && factions.every(seat => Number.isInteger(seat.power))) return;
+  powerStructure.factions = renormalizeFactionPower(factions.map(seat => ({ ...seat })));
 }
 
 /**
@@ -307,6 +400,7 @@ function resizeSeats(powerStructure, plan, rng) {
  *
  * @param {{
  *   tier?: string, config?: Record<string, unknown>, stress?: unknown,
+ *   population?: number|null,
  *   powerStructure?: {factions?: Array<Record<string, unknown>>}|null,
  *   economicState?: Record<string, unknown>|null,
  *   npcs?: Array<Record<string, unknown>>,
@@ -322,13 +416,18 @@ export function disperseNamedRoster(input) {
   const tier = tierKey(input.tier);
   const powers = densityPowersFrom(input.powerStructure);
   if (!powers.length) return { npcs, plan: null, refused: 'no_power_seats' };
-  if (npcs.length < powers.length) return { npcs, plan: null, refused: 'mass_below_faction_count' };
+  if (npcs.length < powers.length) {
+    conservePower(input.powerStructure);
+    return { npcs, plan: null, refused: 'mass_below_faction_count' };
+  }
 
   const plan = planFor(
     { ...input, tier, config },
     { seatAll: true, massOverride: npcs.length },
   );
-  return { npcs: assignRoster(npcs, plan), plan, refused: null };
+  const seated = assignRoster(npcs, plan);
+  conservePower(input.powerStructure);
+  return { npcs: seated, plan, refused: null };
 }
 
 /**

@@ -33,6 +33,12 @@
  * here from a run of THIS file at THIS tip. Nothing gates on them, which is exactly why they
  * could be wrong for three weeks: a comment is a CLAIM until it is measured.
  *
+ * RE-MEASURED AT LANDING-7 R-E8 (2026-11-06), because the shared realm moved: DENSITY_CEILINGS
+ * was re-derived from the STAMP-band maxima and the realm's three wall-bound starts were
+ * re-keyed by identity with it (tests/helpers/demographicsRealmFixture.js). On that realm the
+ * cured kernel moves 169 of 180 transitions (0.9389), spreads its ratios by 0.3065, leaves no
+ * settlement unmoved, and still lands Elderfen in the filling band in year 12. Every bar holds.
+ *
  * @enforced-by this file
  */
 import { describe, expect, test, vi } from 'vitest';

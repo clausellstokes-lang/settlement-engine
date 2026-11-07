@@ -163,24 +163,24 @@ export function capturedRulingStructure(settlement) {
  */
 export const HOLDER_SOURCES = Object.freeze({
   // ── the treasury: the town's coin, its revenue and the arithmetic that closes or does not ──
-  incomeSources: Object.freeze({ kind: 'treasury', cite: 'src/generators/economy/economicState.js:873', read: true }),
-  viable: Object.freeze({ kind: 'treasury', cite: 'src/generators/economy/viability.js:588', read: true }),
-  criticalIssueCount: Object.freeze({ kind: 'treasury', cite: 'src/generators/economy/viability.js:608', read: true }),
-  economicViability: Object.freeze({ kind: 'treasury', cite: 'src/generators/steps/assembleSettlement.js:111', read: true }),
+  incomeSources: Object.freeze({ kind: 'treasury', cite: 'src/generators/economy/economicState.js:828', read: true }),
+  viable: Object.freeze({ kind: 'treasury', cite: 'src/generators/economy/viability.js:544', read: true }),
+  criticalIssueCount: Object.freeze({ kind: 'treasury', cite: 'src/generators/economy/viability.js:564', read: true }),
+  economicViability: Object.freeze({ kind: 'treasury', cite: 'src/generators/steps/assembleSettlement.js:113', read: true }),
 
   // ── the market: what the town makes, sends and takes in ──
-  primaryExports: Object.freeze({ kind: 'market', cite: 'src/generators/economy/economicState.js:812', read: true }),
-  primaryImports: Object.freeze({ kind: 'market', cite: 'src/generators/economy/economicState.js:812', read: true }),
-  localProduction: Object.freeze({ kind: 'market', cite: 'src/generators/economy/economicState.js:822', read: true }),
-  isEntrepot: Object.freeze({ kind: 'market', cite: 'src/generators/economy/economicState.js:878', read: true }),
-  activeChains: Object.freeze({ kind: 'market', cite: 'src/generators/economy/economicState.js:821', read: true }),
+  primaryExports: Object.freeze({ kind: 'market', cite: 'src/generators/economy/economicState.js:766', read: true }),
+  primaryImports: Object.freeze({ kind: 'market', cite: 'src/generators/economy/economicState.js:766', read: true }),
+  localProduction: Object.freeze({ kind: 'market', cite: 'src/generators/economy/economicState.js:776', read: true }),
+  isEntrepot: Object.freeze({ kind: 'market', cite: 'src/generators/economy/economicState.js:833', read: true }),
+  activeChains: Object.freeze({ kind: 'market', cite: 'src/generators/economy/economicState.js:775', read: true }),
   exportPosture: Object.freeze({ kind: 'market', cite: 'src/domain/display/dossierViewModel.js:570', read: true }),
   economicStrengths: Object.freeze({ kind: 'market', cite: 'src/generators/resourceGenerator.js:500', read: true }),
   strategicValue: Object.freeze({ kind: 'market', cite: 'src/generators/resourceGenerator.js:501', read: true }),
   exploitation: Object.freeze({ kind: 'market', cite: 'src/generators/resourceGenerator.js:418', read: true }),
 
   // ── the toll bar: the route, and what may and may not pass along it ──
-  tradeRouteAccess: Object.freeze({ kind: 'toll-bar', cite: 'src/generators/steps/resolveConfig.js:198', read: true }),
+  tradeRouteAccess: Object.freeze({ kind: 'toll-bar', cite: 'src/generators/steps/resolveConfig.js:201', read: true }),
   blockaded: Object.freeze({ kind: 'toll-bar', cite: 'src/domain/worldPulse/foodStockpile.js:417', read: true }),
   blockadeBypass: Object.freeze({ kind: 'toll-bar', cite: 'src/domain/worldPulse/foodStockpile.js:418', read: true }),
 
@@ -188,8 +188,8 @@ export const HOLDER_SOURCES = Object.freeze({
   walls: Object.freeze({ kind: 'muster', cite: 'src/domain/institutions/defenseInstitutionBuckets.js:84', read: true }),
   garrison: Object.freeze({ kind: 'muster', cite: 'src/domain/institutions/defenseInstitutionBuckets.js:88', read: true }),
   militia: Object.freeze({ kind: 'muster', cite: 'src/domain/institutions/defenseInstitutionBuckets.js:92', read: true }),
-  mercenary: Object.freeze({ kind: 'muster', cite: 'src/domain/institutions/defenseInstitutionBuckets.js:98', read: true }),
-  charter: Object.freeze({ kind: 'muster', cite: 'src/domain/institutions/defenseInstitutionBuckets.js:101', read: true }),
+  mercenary: Object.freeze({ kind: 'muster', cite: 'src/domain/institutions/defenseInstitutionBuckets.js:99', read: true }),
+  charter: Object.freeze({ kind: 'muster', cite: 'src/domain/institutions/defenseInstitutionBuckets.js:102', read: true }),
   force: Object.freeze({ kind: 'muster', cite: 'src/generators/threatDefensePolicy.js:13', read: true }),
   magicDependency: Object.freeze({ kind: 'muster', cite: 'src/generators/defenseGenerator.js:467', read: true }),
   economicGates: Object.freeze({ kind: 'muster', cite: 'src/generators/defenseGenerator.js:476', read: true }),
@@ -207,9 +207,9 @@ export const HOLDER_SOURCES = Object.freeze({
       + ' the token is mapped to the WATCH rather than to the muster on the ruling\'s own'
       + ' grain: the muster roll counts men under arms, and the watch keeps its own count.',
   }),
-  blackMarketCapture: Object.freeze({ kind: 'watch', cite: 'src/generators/safetyProfile.js:691', read: true }),
+  blackMarketCapture: Object.freeze({ kind: 'watch', cite: 'src/generators/safetyProfile.js:721', read: true }),
   criminalCaptureState: Object.freeze({ kind: 'watch', cite: 'src/generators/power/rulingStructure.js:797', read: true }),
-  safetyProfile: Object.freeze({ kind: 'watch', cite: 'src/generators/economy/economicState.js:884', read: true }),
+  safetyProfile: Object.freeze({ kind: 'watch', cite: 'src/generators/economy/economicState.js:839', read: true }),
 
   // ── the court: the seat, its legitimacy, the blocs under it and the treaties it signs ──
   govMultiplier: Object.freeze({ kind: 'court', cite: 'src/generators/factionDynamics.js:109', read: true }),
@@ -230,13 +230,13 @@ export const HOLDER_SOURCES = Object.freeze({
   yearsAgo: Object.freeze({ kind: 'elders', cite: 'src/generators/historyGenerator.js:289', read: true }),
 
   // ── the road: the look of the country, which anyone travelling it can see ──
-  terrainType: Object.freeze({ kind: 'road', cite: 'src/generators/steps/resolveConfig.js:206', read: true }),
-  monsterThreat: Object.freeze({ kind: 'road', cite: 'src/generators/steps/resolveConfig.js:201', read: true }),
+  terrainType: Object.freeze({ kind: 'road', cite: 'src/generators/steps/resolveConfig.js:209', read: true }),
+  monsterThreat: Object.freeze({ kind: 'road', cite: 'src/generators/steps/resolveConfig.js:204', read: true }),
 
   // ── the office itself: the record's own audit of the record ──
-  structuralViolations: Object.freeze({ kind: 'office', cite: 'src/generators/steps/assembleSettlement.js:130', read: true }),
-  structuralSuggestions: Object.freeze({ kind: 'office', cite: 'src/generators/steps/assembleSettlement.js:131', read: true }),
-  prominentRelationship: Object.freeze({ kind: 'office', cite: 'src/generators/narrativeGenerator.js:1009', read: true }),
+  structuralViolations: Object.freeze({ kind: 'office', cite: 'src/generators/steps/assembleSettlement.js:132', read: true }),
+  structuralSuggestions: Object.freeze({ kind: 'office', cite: 'src/generators/steps/assembleSettlement.js:133', read: true }),
+  prominentRelationship: Object.freeze({ kind: 'office', cite: 'src/generators/narrativeGenerator.js:1031', read: true }),
 });
 
 /**

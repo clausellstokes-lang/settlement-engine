@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "eb100ddcb722602c64fc4c9d2e1b6a513c80d9cb",
-  "measuredBy": "REGISTERS-3 seat",
-  "date": "2026-11-04",
-  "note": "composed tip of the coherence window: new titles from FAITH, RULERS, MAGIC, DEFENSE(-2,-3), SIZE, FOOD(1-3), HOOKS, TRIM(-2), WIRING(1,2), DOORS, OSR",
-  "files": 2848,
-  "parked": 365,
-  "credited": 2483,
-  "titles": 27326,
-  "suiteTitles": 7230
+  "measuredAtSha": "c16d9a6ee48bc9931b39d23c57c8b2121c1a1dfa",
+  "measuredBy": "LANDING-8 (Opus 5.5), cloud chair session 01FE9mEvGxnFx6WTBkEC6ie9",
+  "date": "2026-11-06",
+  "note": "LANDING-8 at the rung-1 landing tip: files 2938 -> 2940 are the two test files born on the landing after LANDING-7 A measured (lane B R-B3 tests/domain/nextTierStampReaders.test.js, lane C tests/pdf/pageChromeFixedLeading.test.jsx); the parked count and the titles move with the lanes B-H merges and this landing re-keys, measured whole.",
+  "files": 2940,
+  "parked": 368,
+  "credited": 2572,
+  "titles": 27868,
+  "suiteTitles": 7414
 }

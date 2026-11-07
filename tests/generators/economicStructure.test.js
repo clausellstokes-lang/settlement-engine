@@ -49,6 +49,9 @@ const PUBLIC_EXPORTS = [
   'generateEconomicViability',
   'getUpgradeOpportunities',
   'isSaltPreserved',
+  // Added deliberately by 93795e93f (the unseated Ecclesiastical Council: the tier's mandated head is minted,
+  // soak 1000 row 20); re-recorded at the rung-1 landing (LANDING-2).
+  'mandatedRoleCandidate',
   'priorityToCategory',
   'sortBySeverity',
 ];

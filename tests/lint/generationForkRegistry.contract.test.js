@@ -96,12 +96,12 @@ describe('EM-P2 — the generation fork register: totality, derivation, and Tier
     const pairs = registryPairs();
     // ANTI-VACUITY FIRST: an empty registry would make every equality below trivially true.
     expect(pairs.length, 'the live registry produced no pairs').toBeGreaterThan(70);
-    expect(getStepOrder().length, 'the live step order').toBe(22);
+    expect(getStepOrder().length, 'the live step order').toBe(23); // lane CRISIS (2026-11-03): resolveCrisisCast joins (22 -> 23)
 
     expect(GENERATION_TIER1.length, 'the register declares one row per live pair').toBe(pairs.length);
     // GS-2 one faction set (2026-10-31, ODQ §934.101): 75 -> 72; generatePopulation|factions, generatePopulation|conflicts
     // and corruptionPass|factions left with the keys (the groups and conflicts are derived at assembly).
-    expect(GENERATION_TIER1.length, 'the measured denominator at this base').toBe(72);
+    expect(GENERATION_TIER1.length, 'the measured denominator at this base').toBe(74); // lane CRISIS (2026-11-03): resolveCrisisCast joins: two rows (72 -> 74)
 
     const declared = GENERATION_TIER1.map((row) => `${row.step}|${row.key}`);
     const live = pairs.map((pair) => `${pair.step}|${pair.key}`);
@@ -115,8 +115,10 @@ describe('EM-P2 — the generation fork register: totality, derivation, and Tier
       .map((pair) => `${pair.step}|${pair.key}: registry ${pair.via}`);
     expect(viaMismatch, 'a row\'s `via` disagrees with the registry').toEqual([]);
     // GS-2 one faction set (2026-10-31, ODQ §934.101): provides 57 -> 55, mutates 18 -> 17 (the three retired rows).
-    expect(GENERATION_TIER1.filter((row) => row.via === 'provides').length, 'provides entries').toBe(55);
-    expect(GENERATION_TIER1.filter((row) => row.via === 'mutates').length, 'mutates-only entries').toBe(17);
+    // The crisis cast (lane CRISIS, 2026-11-03): provides 55 -> 56 (resolveCrisisCast|crisisCast), mutates 17 -> 18
+    // (resolveCrisisCast|settlement).
+    expect(GENERATION_TIER1.filter((row) => row.via === 'provides').length, 'provides entries').toBe(56);
+    expect(GENERATION_TIER1.filter((row) => row.via === 'mutates').length, 'mutates-only entries').toBe(18);
 
     // The accessors: a miss is `null` and `[]`, never `undefined` and never `null`.
     expect(tier1For('resolveConfig', 'tier'), 'tier1For hit').toBe(GENERATION_TIER1[0]);
@@ -125,7 +127,7 @@ describe('EM-P2 — the generation fork register: totality, derivation, and Tier
     expect(tier2For('npc', 'no.such.key'), 'tier2For miss is [], never null').toEqual([]);
   });
 
-  it('A3s — every derived field is derived: class from its counts, each landing class from its own triple, both comparands, all 72 rows', () => {
+  it('A3s — every derived field is derived: class from its counts, each landing class from its own triple, both comparands, all 74 rows', () => {
     expect(GENERATION_TIER1.length, 'anti-vacuity: the register is populated').toBeGreaterThan(70);
     expect(GENERATION_CENSUS_ROWS, 'the declared denominator').toBe(63);
 
@@ -166,18 +168,18 @@ describe('EM-P2 — the generation fork register: totality, derivation, and Tier
     // 2026-10-01, the urban band (ODQ §934.86): drawn 28 -> 29, pure 46 -> 45. The register's re-measure (fc0e2205f)
     // flipped assembleInstitutions|generationRepairs pure -> drawn (2 of 63 rows), and this tally follows the register.
     // GS-2 one faction set (2026-10-31, ODQ §934.101): drawn 29 -> 26; the three retired rows were all drawn.
-    expect(tallyOf(GENERATION_TIER1, 'class'), 'the entropy tally').toEqual({ drawn: 26, label: 1, pure: 45 });
+    expect(tallyOf(GENERATION_TIER1, 'class'), 'the entropy tally').toEqual({ drawn: 27, label: 1, pure: 46 }); // LANDING-1 (2026-11-04): factionCorrelationPass measures drawn at the landed tip (6 of 63 rows draw); before that, lane CRISIS (2026-11-03): resolveCrisisCast joins: both its rows are pure (45 -> 47)
     expect(GENERATION_TIER1.filter((row) => row.class === 'label').map((row) => `${row.step}|${row.key}`),
       'the single label row: a key that moves under a zero-draw step').toEqual(['generatePower|powerIntent']);
     // GS-2 (2026-10-31, ODQ §934.101): same 35 -> 34 and transformed 15 -> 13 in BOTH comparands below, the three
     // retired rows (generatePopulation|conflicts same; generatePopulation|factions and corruptionPass|factions transformed).
     expect(tallyOf(GENERATION_TIER1, 'onRecordClass'), 'the FINAL comparand tally')
-      .toEqual({ absent: 19, same: 34, transformed: 13, varies: 6 });
+      .toEqual({ absent: 20, same: 30, transformed: 13, varies: 11 }); // LANDING-8 (2026-11-06): same 34 -> 30, varies 7 -> 11, the four stress rows under the copy-on-write crisis cast (lane D, 8befe5a0d). LANDING-1 (2026-11-04): one row same -> varies, re-measured by the census at the landed tip. lane CRISIS (2026-11-03): resolveCrisisCast joins: crisisCast absent, settlement same
     // 2026-10-01, the urban band (ODQ §934.86): absent 27 -> 26, same 18 -> 19. The same re-measure moved two rows'
     // post-step comparand (generationRepairs absent -> varies; isolationSupport varies -> same), and both now agree
     // with their final comparand, so the disagreeing rows below go 18 -> 16 (generationForkCensus records the same).
     expect(tallyOf(GENERATION_TIER1, 'producedOnRecordClass'), 'the POST-STEP comparand tally')
-      .toEqual({ absent: 26, same: 18, transformed: 13, varies: 15 });
+      .toEqual({ absent: 27, same: 17, transformed: 13, varies: 17 }); // LANDING-1 (2026-11-04): one row same -> varies, re-measured at the landed tip. lane CRISIS (2026-11-03): resolveCrisisCast joins; assembleSettlement|stress produced same -> varies
 
     // §6.2b: the register carries both comparands BECAUSE sixteen rows disagree, and every
     // one of them is a key a LATER step rewrites. The set is derived from the register itself.
@@ -185,7 +187,7 @@ describe('EM-P2 — the generation fork register: totality, derivation, and Tier
       .filter((row) => row.onRecordClass !== row.producedOnRecordClass)
       .map((row) => `${row.step}|${row.key}`);
     process.stdout.write(`\n[A3s] the two comparands disagree on ${disagreeing.length} rows: ${disagreeing.join(', ')}\n`);
-    expect(disagreeing.length, 'the disagreement count is the register\'s reason for carrying both').toBe(16);
+    expect(disagreeing.length, 'the disagreement count is the register\'s reason for carrying both').toBe(13); // LANDING-8 (2026-11-06): 17 -> 13, the four stress rows' two comparands agree under the copy-on-write crisis cast (8befe5a0d). lane CRISIS (2026-11-03): resolveCrisisCast joins: assembleSettlement|stress (16 -> 17)
     expect(GENERATION_TIER1.filter((row) => row.key === 'effectiveConfig'
       && row.onRecordClass === 'same' && row.producedOnRecordClass === 'absent').length,
     'the seven effectiveConfig rows: the config IS on the record, and no writer handed it there').toBe(7);
@@ -203,7 +205,7 @@ describe('EM-P2 — the generation fork register: totality, derivation, and Tier
 
     // ── GUARD THE GUARD, FIRST. Nothing below means anything until the resolver is proved.
     const steps = getStepMeta().map((entry) => entry.name);
-    expect(steps.length, 'anti-vacuity: the live step list').toBe(22);
+    expect(steps.length, 'anti-vacuity: the live step list').toBe(23); // lane CRISIS (2026-11-03): resolveCrisisCast joins
     const ourHits = [];
     const modelHits = [];
     for (const step of steps) {
@@ -211,7 +213,7 @@ describe('EM-P2 — the generation fork register: totality, derivation, and Tier
       if ((declaredSymbols(raw).get(step) || 0) === 1) ourHits.push(step);
       if ((modelDeclaredSymbols(raw).get(step) || 0) === 1) modelHits.push(step);
     }
-    expect(ourHits.length, 'every registered step is declared exactly once in its own step file').toBe(22);
+    expect(ourHits.length, 'every registered step is declared exactly once in its own step file').toBe(23); // lane CRISIS (2026-11-03): resolveCrisisCast joins
     expect(modelHits, 'the model\'s form set cannot name a registerStep host, which is why this resolver exists').toEqual([]);
     expect(sourceOf(CHOOSER_WALKER), `${CHOOSER_WALKER} no longer spells the form set this control quotes`)
       .toContain(MODEL_DECL_LINE);

@@ -167,6 +167,8 @@ const ENTITY_ARRAY_PATH_BY_KIND = Object.freeze({
   supplyChain:     ['supplyChains'],
   historicalEvent: ['history', 'historicalEvents'],
   currentTension:  ['history', 'currentTensions'],
+  // The crisis record (docs/DESIGN_CRISIS_TAB.md): a stress entry, edited by the Crisis tab alone.
+  crisis:          ['stress'],
 });
 
 export function _resolveEntity(settlement, kind, entityIndex) {
@@ -178,6 +180,8 @@ export function _resolveEntity(settlement, kind, entityIndex) {
     if (ref == null || typeof ref !== 'object') return null;
     ref = ref[seg];
   }
+  // One crisis is written as a bare object, not a one-entry list; it is the container's entry 0.
+  if (kind === 'crisis' && ref && typeof ref === 'object' && !Array.isArray(ref)) return entityIndex === 0 ? ref : null;
   if (!Array.isArray(ref)) return null;
   return ref[entityIndex] || null;
 }

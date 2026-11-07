@@ -14,14 +14,15 @@ import { nativeSemanticName } from '../../domain/content/customContentSemanticAu
 import { resolveNativeEconomicInputs } from './nativeEconomicInputs.js';
 import { applyFinishedGoodsDemandWithOwnership, applySubsistenceTradeBoundary,
   deriveEarlyTradeOwnership, normalizeFinalTradeLists, restoreStageFiveTrade } from './customTradeEndpointIntegration.js';
-import {
-  resolveGenerationContentProfile,
-} from '../../domain/generationContentProfile.js';
+import { resolveGenerationContentProfile } from '../../domain/generationContentProfile.js';
+import { hasWaterAccessInstitution } from '../../domain/spatial/seaLanes.js';
 import { resourceShortageImport } from '../../domain/resourceSemantics.js';
 import { resolveGenerationWorldLaw } from '../generationContext.js';
 import { applyNeighbourEconomicBias } from './neighbourEconomicBias.js';
 import { isTradeRouteDisconnected } from '../../domain/tradeRouteSemantics.js';
 import { hasLocalAgriculturalSupply } from './localSupplyEvidence.js';
+import { generateFoodSecurity } from '../foodGenerator.js'; import { defenseFactsOf } from '../../domain/defense/defenseFacts.js'; // F1: one line, the file sits at its line cap
+import { goodsHeldByFoodRecord } from './foodBalance.js';
 
 
 export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggles = {}, config = {}) => {
@@ -169,7 +170,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
     incomeBuild.push({
       source: 'Property Rents',
       percentage: propertyRentPct,
-      desc: 'Ground rents on civic-owned buildings, stalls, and residential plots within the walls.',
+      desc: `Ground rents on civic-owned buildings, stalls, and residential plots ${defenseFactsOf({ institutions }).hasWalls ? 'within the walls' : `in the ${tier}`}.`, // F1: walls only where they stand
     });
   }
   // ── Court fees & fines ──
@@ -192,7 +193,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
     incomeBuild.push({
       source: 'Gate Tolls',
       percentage: 10,
-      desc: 'Entry and exit tolls collected at the town gates from merchants and travellers.',
+      desc: speakTierNoun('Entry and exit tolls collected at the town gates from merchants and travellers.', tierNounFor(tier)),
     });
   }
 
@@ -477,7 +478,8 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
           return exp.includes('fish') || exp.includes('herring');
         })) &&
       !hasIncomeSource('fish') &&
-      !hasIncomeSource('maritime')
+      // A-11: a catch lands only from water — the world law's, or a fishing landing on the roster (not aerial docks, not inland salt).
+      !hasIncomeSource('maritime') && (generationWorldLaw.portKind !== 'none' || hasWaterAccessInstitution((institutions || []).filter((i) => /\bfish/i.test(nativeSemanticName(i) || ''))))
     ) {
       incomeBuild.push({
         source: generationWorldLaw.supportsMaritime()
@@ -546,69 +548,14 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
     incomeNormalized[largestIdx].percentage += 100 - percentageSum;
   }
   const stressTypes = config.stressTypes || [];
-  let necessityImports = [...(tradeStreams.necessityImports || [])];
-  if (stressTypes.includes('under_siege') || stressTypes.includes('famine')) {
-    if (!necessityImports.includes('Grain')) necessityImports.push('Grain');
-    if (!necessityImports.includes('Salt')) necessityImports.push('Salt');
-  }
-  if (stressTypes.includes('under_siege') && !necessityImports.includes('Iron')) {
-    necessityImports.push('Iron (weapons)');
-  }
-  if (stressTypes.includes('plague_onset') && !necessityImports.includes('Medicinal herbs')) {
-    necessityImports.push('Medicinal herbs');
-  }
-  const primaryExports = stressTypes.includes('under_siege')
-      ? generationWorldLaw.supportsMaritime()
-        ? tradeStreams.exports.slice(0, 3).map((exp) => `${exp} (naval route only)`)
-        : []
-      : stressTypes.includes('occupied')
-        ? tradeStreams.exports.slice(0, 5).map((exp) => `${exp} (taxed by occupation)`)
-        : [
-            ...(['crossroads', 'port', 'river'].includes(tradeRoute)
-              ? (tradeStreams.transit || []).map((item) => `${item} (transit)`)
-              : []),
-          ],
-    topImports = tradeStreams.imports.slice(0, 8),
-    primaryImports = [
-      ...necessityImports
-        .map((imp) => imp)
-        .filter((imp) => !topImports.some((existing) => existing.toLowerCase().includes(imp.toLowerCase()))),
-      ...topImports,
-    ].slice(0, 10);
+  // The pre-chain trade lists (necessity imports, the stress-shaped exports and imports, the goods toggles):
+  // economy/primaryTradeLists.js, extracted verbatim for the cohesion ceiling (LANDING-3).
+  const { necessityImports, primaryExports, primaryImports } = buildPrimaryTradeLists({
+    stressTypes, tradeStreams, tradeRoute, goodsToggles,
+    supportsMaritime: () => generationWorldLaw.supportsMaritime(),
+  });
   const isEntrepot = tradeStreams.isEntrepot;
   const transit = tradeStreams.transit;
-  if (goodsToggles && Object.keys(goodsToggles).length > 0) {
-    const goodTogglePattern = /_good_(.+)$/;
-    Object.entries(goodsToggles).forEach(function (entry) {
-      const key = entry[0],
-        toggle = entry[1],
-        match = key.match(goodTogglePattern);
-      if (!match) return;
-      const goodName = match[1];
-      if (toggle.force) {
-        if (!primaryExports.some((item) => item.toLowerCase().includes(goodName.toLowerCase()))) {
-          primaryExports.push(goodName);
-        }
-        if (
-          tradeStreams.localProduction &&
-          !tradeStreams.localProduction.some((item) => item.toLowerCase().includes(goodName.toLowerCase()))
-        ) {
-          tradeStreams.localProduction.push(goodName);
-        }
-      } else if (toggle.allow === false) {
-        for (let i = primaryExports.length - 1; i >= 0; i--) {
-          if (primaryExports[i].toLowerCase().includes(goodName.toLowerCase())) primaryExports.splice(i, 1);
-        }
-        if (tradeStreams.localProduction) {
-          for (let i = tradeStreams.localProduction.length - 1; i >= 0; i--) {
-            if (tradeStreams.localProduction[i].toLowerCase().includes(goodName.toLowerCase())) {
-              tradeStreams.localProduction.splice(i, 1);
-            }
-          }
-        }
-      }
-    });
-  }
   const tradeDependencies = [];
   // Stage-5 ledger: what the military/slave-trade stage actually pushed, so the
   // Stage-7 chain override (which rebuilds primaryExports/primaryImports from
@@ -731,6 +678,12 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
     });
   }); // ── Stage 4: Chain derivation — compute before return object ─────────────────
   const depletedResources = nativeDepletedResources;
+  // FOOD-EXPORTS: the food record is written once, here, BEFORE the export writers, so every
+  // chain output and export row can read it (foodBalance.js :: offersFoodSurplus). The same
+  // object is handed to computeBaseProsperity below; its crop-fortune draw is a label-keyed
+  // fork (food.cropFortune), so writing it earlier moves no other stream.
+  const _foodSec = generateFoodSecurity(tier, institutions, { ...config, tradeRouteAccess: tradeRoute });
+  const _foodRecord = _foodSec?.foodRecord ?? null;
   const activeChainsList = computeActiveChains(
     institutions || [],
     nativeNearbyResources,
@@ -742,7 +695,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
     // (mirrors magicLedger) — gates druid/divine/arcane/alchemy substitution.
     config.magicExists === false ? 0 : (config.priorityMagic ?? 50),
   ).map(chain => {
-    const outputs = (chain.outputs || [])
+    const outputs = goodsHeldByFoodRecord(chain.outputs || [], _foodRecord)
       .filter(generationWorldLaw.allowsGeneratedContent);
     return outputs.length === (chain.outputs || []).length
       ? chain
@@ -759,6 +712,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
     depletedResources,
     institutions || [],
     generationWorldLaw,
+    _foodRecord,
   );
   const _hasMagicTrade = hasTeleportationInfra(institutions || [], config);
   const chainImports = deriveImportsFromChains(
@@ -853,13 +807,14 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
   // localeCompare) — this list is persisted in the settlement, so the tiebreak
   // must resolve identically across devices/locales — must be LAST
   incomeNormalized.sort((a, b) => b.percentage - a.percentage || compareCodepoint(a.source, b.source));
-  const { label: baseProsperity, foodSecurity: _foodSec } = computeBaseProsperity(
+  const { label: baseProsperity } = computeBaseProsperity(
     tier,
     tradeRoute,
     institutions,
     config,
     instNames,
-    incomeNormalized
+    incomeNormalized,
+    _foodSec,
   );
   return {
       tier: tier,
@@ -895,3 +850,5 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
       ),
     };
 };
+import { speakTierNoun } from '../../domain/display/stateProse/stateProseKernel.js'; import { tierNounFor } from '../../domain/display/stateProse/weaveBlock.js'; // at the END on purpose: this file's writes are cited by LINE; the Gate Tolls line speaks the tier noun (lane TIER-NOUN-POOLS, tests/generators/tierNounPoolDraws.test.js)
+import { buildPrimaryTradeLists } from './primaryTradeLists.js'; // at the END for the same reason: the pre-chain trade lists, extracted for the cohesion ceiling (LANDING-3)

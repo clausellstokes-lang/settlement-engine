@@ -46,17 +46,17 @@ function judgment(receipt, id) {
 }
 
 describe('formal generation receipt judgments', () => {
-  it('publishes seven evidence-bearing, categorical judgments', () => {
+  it('publishes eight evidence-bearing, categorical judgments', () => {
     const receipt = generate().generationCoherenceReceipt;
 
     expect(receipt.status).not.toBe('needs_review');
     expect(receipt.judgments.map(entry => entry.id)).toEqual(
       GENERATION_JUDGMENT_IDS,
     );
-    expect(receipt.judgments).toHaveLength(7);
+    expect(receipt.judgments).toHaveLength(8);
     for (const entry of receipt.judgments) {
       expect(entry.evidence.length).toBeGreaterThan(0);
-      // The roster is pinned to exactly seven judgments above, and a missing or
+      // The roster is pinned to exactly eight judgments above, and a missing or
       // hollow entry reds on the evidence pin above or the status pin below.
       // anchored: non-empty evidence pinned on this same entry directly above.
       expect(entry).not.toHaveProperty('confidence');

@@ -60,11 +60,15 @@ export default function DossierTabStrip({
               // purchase control and the AI pass button wear (primitives/Button.jsx). The
               // register leaves the tab the moment it has a live body.
               const launch = tone === LAUNCH_TONE;
-              const accent = purple ? '#7a3aa8' : launch ? launchSkin.rule : '#a0762a';
-              const idle   = purple ? '#7a5a92' : launch ? launchSkin.ink : swatch.inkMag3;
+              // THE CRISIS MARK (docs/DESIGN_CRISIS_TAB.md; the owner: "black background with red
+              // bold coloring (the tab) similar to criminal institutions and services"): the
+              // values of tabPalette.js :: TAB_CRISIS_MARK, bold idle and lit alike.
+              const crisis = tone === 'crisis';
+              const accent = purple ? '#7a3aa8' : launch ? launchSkin.rule : crisis ? swatch['#C04040'] : '#a0762a';
+              const idle   = purple ? '#7a5a92' : launch ? launchSkin.ink : crisis ? swatch['#C04040'] : swatch.inkMag3;
               const bg = active
-                ? (purple ? '#f7f0fa' : launch ? launchSkin.ground : '#fffbf5')
-                : (purple ? 'rgba(122,58,168,0.05)' : launch ? launchSkin.ground : 'transparent');
+                ? (purple ? '#f7f0fa' : launch ? launchSkin.ground : crisis ? swatch['#1B1408'] : '#fffbf5')
+                : (purple ? 'rgba(122,58,168,0.05)' : launch ? launchSkin.ground : crisis ? swatch['#1B1408'] : 'transparent');
               return (
                 <button
                   type="button"
@@ -80,7 +84,7 @@ export default function DossierTabStrip({
                   // Roving tabIndex: only the selected tab is tabbable; the rest are
                   // reached via the arrow-key handler on the tablist.
                   tabIndex={active ? 0 : -1}
-                  style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3, padding: '10px 12px 8px', flexShrink: 0, background: bg, borderBottom: '2px solid ' + (active ? accent : 'transparent'), borderTop: launch ? `1px solid ${launchSkin.border}` : active ? '1px solid #e0d0b0' : '1px solid transparent', borderLeft: launch ? `1px solid ${launchSkin.border}` : active ? '1px solid #e0d0b0' : '1px solid transparent', borderRight: launch ? `1px solid ${launchSkin.border}` : active ? '1px solid #e0d0b0' : '1px solid transparent', cursor: 'pointer', color: active ? (launch ? launchSkin.ink : accent) : idle, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: active ? 700 : 500, fontFamily: 'Nunito, sans-serif', marginBottom: -1, whiteSpace: 'nowrap', WebkitTapHighlightColor: 'transparent' }}
+                  style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3, padding: '10px 12px 8px', flexShrink: 0, background: bg, borderBottom: '2px solid ' + (active ? accent : 'transparent'), borderTop: launch ? `1px solid ${launchSkin.border}` : active ? '1px solid #e0d0b0' : '1px solid transparent', borderLeft: launch ? `1px solid ${launchSkin.border}` : active ? '1px solid #e0d0b0' : '1px solid transparent', borderRight: launch ? `1px solid ${launchSkin.border}` : active ? '1px solid #e0d0b0' : '1px solid transparent', cursor: 'pointer', color: active ? (launch ? launchSkin.ink : accent) : idle, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: active || crisis ? 700 : 500, fontFamily: 'Nunito, sans-serif', marginBottom: -1, whiteSpace: 'nowrap', WebkitTapHighlightColor: 'transparent' }}
                 ><Icon size={14} />{launch ? <span data-launch-ink="" style={launchSkin.shimmer}>{label}</span> : label}</button>
               );
             })}

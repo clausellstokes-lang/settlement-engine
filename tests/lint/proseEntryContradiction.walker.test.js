@@ -25,7 +25,7 @@
  * ⛔ THE SUCCESSOR PLAN, WRITTEN DOWN BEFORE IT IS NEEDED — because this file is designed to
  * RED at the moment the reconstruction wave does its job. Every anchor below is a SHIPPED
  * BREACH, and the wave's whole purpose is to cure shipped breaches. The first wave car that
- * rewrites `newsVoice.js:97`, `RECEIPT_POOLS_DOSSIER_STATE.md:5233`, its leaf twin
+ * rewrites `newsVoice.js:97`, `RECEIPT_POOLS_DOSSIER_STATE.md:5298`, its leaf twin
  * `general.generated.js:1323` or `factionDynamics.js :: computeFactionRelationships` reds this file twice: once with the
  * named "the breach text is no longer in the corpus" message, and once at the census bound
  * `failing > FAILING_FLOOR`. Neither red is a defect. THE PROCEDURE, in the order a wave car
@@ -310,8 +310,8 @@ describe('the corpus loaders — fail-closed, and counted against the probe', ()
     const crier = await loadCrierVoice();
     const generator = loadInFunctionNarratives();
     // PROBE_ALL X1: 2,734 leaves in 786 pools over the two dossier corpora.
-    expect(leaves.length + causal.length).toBe(2734);
-    expect(new Set([...leaves, ...causal].map((e) => e.poolId)).size).toBe(786);
+    expect(leaves.length + causal.length).toBe(2778);
+    expect(new Set([...leaves, ...causal].map((e) => e.poolId)).size).toBe(787);
     expect(new Set(leaves.map((e) => e.block)).size).toBe(68);
     expect(crier.length).toBeGreaterThan(300);
     expect(generator.length).toBeGreaterThan(0);
@@ -321,13 +321,13 @@ describe('the corpus loaders — fail-closed, and counted against the probe', ()
     const leaves = await loadStateLeaves();
     const { joined, unjoined, leafLines } = joinAnnexToLeaves(loadStateAnnex(), leaves);
     // PROBE_ALL R-4: 2,030 wired DOSSIER_STATE rows.
-    expect(joined.length).toBe(2030);
+    expect(joined.length).toBe(2069);
     expect(unjoined).toEqual([]);
     // The compact-row grammar (a whole pool on one bullet line, 225 variants) carries no
     // per-row address, so not every leaf variant has an annex line. That gap is the ADDRESS
     // reader's, is declared, and is why the pool grammar stays with the projection.
     expect(leafLines.size).toBeLessThan(leaves.length);
-    expect(leafLines.size).toBe(2030);
+    expect(leafLines.size).toBe(2069);
   });
 });
 
@@ -410,8 +410,8 @@ describe('THE ANTI-VACUITY GUARD — the walker must fail on the corpus it ships
     }
     // The fourth: the ANNEX row, cited by its own line number.
     const annexRow = joinAnnexToLeaves(loadStateAnnex(), leaves).joined
-      .find((row) => row.line === 5233);
-    expect(annexRow, 'RECEIPT_POOLS_DOSSIER_STATE.md:5233 did not load').toBeTruthy();
+      .find((row) => row.line === 5298);
+    expect(annexRow, 'RECEIPT_POOLS_DOSSIER_STATE.md:5298 did not load').toBeTruthy();
     expect(walkEntry(annexRow, withEntryContext(base, {})).fails.map((f) => f.arm))
       .toContain('exemption on a null column');
   });
@@ -461,14 +461,14 @@ describe('THE ANTI-VACUITY GUARD — the walker must fail on the corpus it ships
     const { joined } = joinAnnexToLeaves(loadStateAnnex(), leaves);
 
     // ⛔ THE ANCHOR §2.4.1 NAMES DOES NOT FIRE, AND THAT IS REPORTED RATHER THAN PATCHED.
-    // `RECEIPT_POOLS_DOSSIER_STATE.md:2247` is the `[counterforce]` turtling row under an
+    // `RECEIPT_POOLS_DOSSIER_STATE.md:2256` is the `[counterforce]` turtling row under an
     // `economicBase: extraction` header (SITTING A5). Measured at this tip, against every
     // value of the provenance flag, it fires NO arm of this walker: its defect is a pool-key
     // SCOPE fault (a military-doctrine sentence under an economic-base key — R-DA-19), and
     // this walker carries no scope arm. So it cannot serve as a C3-lexical anchor, and the
     // roster's fifth entry is NOT-EXECUTABLE with its reason rather than silently absent.
-    const row = joined.find((r) => r.line === 2247);
-    expect(row, 'RECEIPT_POOLS_DOSSIER_STATE.md:2247 did not load').toBeTruthy();
+    const row = joined.find((r) => r.line === 2256);
+    expect(row, 'RECEIPT_POOLS_DOSSIER_STATE.md:2256 did not load').toBeTruthy();
     for (const eventProvenance of [true, false]) {
       expect(walkEntry(row, withEntryContext(base, { eventProvenance })).fails).toEqual([]);
     }
@@ -495,8 +495,8 @@ describe('THE ANTI-VACUITY GUARD — the walker must fail on the corpus it ships
       + `  the same entries WITH \`eventProvenance: false\`: ${fails} FAIL\n`
       + `${anchors.map((a) => `    ${a}`).join('\n')}\n`);
     // The two figures are the same 44 entries seen twice, which is the whole explanation.
-    expect(notExecutable).toBe(44);
-    expect(fails).toBe(44);
+    expect(notExecutable).toBe(46);
+    expect(fails).toBe(46);
     // PRESENT-THEN-ABSENT on one of them, so the arm is proved rather than counted.
     const anchor = corpus.find((entry) => walkEntry(entry, withEntryContext(base, { eventProvenance: false }))
       .fails.some((f) => f.klass === 'C3'));
@@ -651,7 +651,9 @@ describe('THE ANTI-VACUITY GUARD — the walker must fail on the corpus it ships
     // 329 -> 328 (2026-10-30, ODQ §934.101, chair ruling T1-13): DS-GEN-13's NO-MARKET variant
     // "Nothing in {settlement} is arranged for buying and selling in quantity, which tells a
     // stranger..." carried a trailing coordinate; its rewrite states the institution fact only.
-    expect(carrying.length, 'entries carrying the trailing-coordinate class, at this tip').toBe(328);
+    // 328 -> 336 (2026-11-04, LANDING-1 door 2): F10 WALLS-WORD's wall-free twins carry the class (the
+    // chair's ruling of 2026-11-04; the owner's veto point). Report-only, still a minority.
+    expect(carrying.length, 'entries carrying the trailing-coordinate class, at this tip').toBe(336);
     expect(carrying.length, 'and it is a minority of the 2,266 R1 variants').toBeLessThan(leaves.length / 2);
     console.log(`  Q · trailing coordinate: ${carrying.length} of ${leaves.length} R1 entries carry the class`);
   });

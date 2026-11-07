@@ -30,8 +30,10 @@ import {
 } from '../pdf/lib/format.js';
 import { gateFaithEvents } from '../domain/display/faithEventFilter.js';
 import { composeTonightSheet, TONIGHT_COPY } from '../domain/summary/tonightSheet.js';
+import { composeCrisisPage, CRISIS_PAGE_COPY } from '../domain/crisis/crisisPage.js';
 import { institutionDisplayName } from '../domain/display/institutionDisplayName.js';
 import { resourceDisplayName } from '../domain/display/resourceDisplayName.js';
+import { foodwaysLineOf } from '../domain/foodways.js';
 import {
   overviewHeadline, powerHeadline, economicsHeadline, defenseHeadline,
   servicesHeadline, resourcesHeadline, viabilityHeadline, historyHeadline,
@@ -138,11 +140,32 @@ function tonightPage(settlement) {
   return md(
     sheet.opening ? md(`## ${sheet.crisis ? TONIGHT_COPY.crisis : TONIGHT_COPY.urgent}`, esc(sheet.opening)) : null,
     sheet.people.length ? md('', `## ${TONIGHT_COPY.people}`, sheet.people.map(p =>
-      `- **${esc(p.name)}** (${esc([p.role, why[p.why]].filter(Boolean).join(' · '))})${p.line ? `: ${p.why === 'secret' ? '' : `${TONIGHT_COPY.wants} `}${esc(p.line)}` : ''}`)) : null,
+      `- **${esc(p.name)}** (${esc([p.role, p.castLabel || why[p.why]].filter(Boolean).join(' · '))})${p.line ? `: ${p.why === 'secret' ? esc(p.line) : p.sameAs ? `${TONIGHT_COPY.wantsSame} ${esc(p.sameAs)}.` : `${TONIGHT_COPY.wants} ${esc(p.line)}`}` : ''}`)) : null,
     sheet.facts.length ? md('', `## ${TONIGHT_COPY.facts}`, sheet.facts.map(f => `- **${esc(f.label)}**: ${esc(f.text)}`)) : null,
     sheet.hooks.length ? md('', `## ${TONIGHT_COPY.hooks}`, sheet.hooks.map(h =>
       `- ${esc(h.text)}${h.source ? ` *(${esc(h.source)})*` : ''}`)) : null,
   ) || null;
+}
+
+/**
+ * THE CRISIS PAGE as a journal page (docs/DESIGN_CRISIS_TAB.md): the Crisis tab's sections from the
+ * same composer (domain/crisis/crisisPage.js), one per active crisis, worst first; none for a calm
+ * town. Rides the Tonight chapter's inclusion.
+ */
+function crisisJournalPage(settlement) {
+  const sections = composeCrisisPage(settlement);
+  if (!sections.length) return null;
+  return md(...sections.map(s => md(
+    '', `## ${esc(s.line)}`,
+    s.summary ? esc(s.summary) : null,
+    '', `### ${CRISIS_PAGE_COPY.cast}`,
+    s.cast.length ? s.cast.map(r => `- **${esc(r.roleLabel)}**: ${esc(r.name)}. ${esc(r.reason)}.`) : `- ${CRISIS_PAGE_COPY.nobody}`,
+    s.stakes.length ? md('', `### ${CRISIS_PAGE_COPY.stakes}`, s.stakes.map(k => `- **${esc(k.factionId)}** ${CRISIS_PAGE_COPY.stake[k.stake]}: ${esc(k.reason)}.`)) : null,
+    '', `### ${CRISIS_PAGE_COPY.levers}`,
+    s.levers.length ? s.levers.map(l => `- ${esc(l.institution)}${l.holderName ? `, held by ${esc(l.holderName)}` : ''}`) : `- ${CRISIS_PAGE_COPY.noLevers}`,
+    s.seeFirst.length ? md('', `### ${CRISIS_PAGE_COPY.seeFirst}`, s.seeFirst.map(f => `- **${esc(f.label)}**: ${esc(f.text)}`)) : null,
+    s.ifNothingIsDone ? md('', `### ${CRISIS_PAGE_COPY.ifNothing}`, esc(s.ifNothingIsDone)) : null,
+  ))) || null;
 }
 
 function npcQuickRefPage(vm) {
@@ -210,7 +233,7 @@ function powerPage(vm) {
   );
 }
 
-function identityPage(vm) {
+function identityPage(vm, settlement = vm.raw) {
   const id = vm.identity;
   return md(
     kv('Layout', id.layout),
@@ -218,8 +241,9 @@ function identityPage(vm) {
     kv('Trade access', id.tradeAccess ? humanize(id.tradeAccess) : null),
     kv('Governing faction', id.anchor.governingName),
     kv('Cultural notes', id.anchor.culturalNotes),
-    id.quarters.length ? md('', '## Quarters', id.quarters.map(q =>
-      `- **${esc(q.name)}**${q.description ? `: ${esc(q.description)}` : ''}${(q.landmarks || []).length ? ` Landmarks: ${q.landmarks.map(lm => esc(institutionDisplayName(lm))).join(', ')}.` : ''}`)) : null,
+    // FOOD-4: the food record's foodways line, through the one reader — the PDF chapter's row.
+    kv('Foodways', foodwaysLineOf(settlement)),
+    // ⛔ No '## Quarters' section before the plat (X-47); the view model keeps `id.quarters`.
   ) || null;
 }
 
@@ -451,6 +475,7 @@ export function buildJournalPages(vm, { variant = 'canon_dossier', faithUnlocked
   if (inc('overview'))            push('Overview', overviewPage(vm));
   if (inc('systemState'))         push('Settlement State', statePage(vm));
   if (inc('tonightAtTheTable'))   push(TONIGHT_COPY.title, tonightPage(settlement));
+  if (inc('tonightAtTheTable'))   push(CRISIS_PAGE_COPY.tab, crisisJournalPage(settlement));
   if (inc('npcQuickRef'))         push('NPC Quick Reference', npcQuickRefPage(vm));
   if (inc('notableNpcs')) {
     for (const n of notableNpcs(vm.npcs.sorted || [])) {
@@ -459,7 +484,7 @@ export function buildJournalPages(vm, { variant = 'canon_dossier', faithUnlocked
   }
   if (inc('plotHooks'))           push('Plot Hooks', plotHooksPage(vm));
   if (inc('powerStructure'))      push('Power & Factions', powerPage(vm));
-  if (inc('identityDailyLife'))   push('Identity & Daily Life', identityPage(vm));
+  if (inc('identityDailyLife'))   push('Identity & Daily Life', identityPage(vm, settlement));
   if (inc('services'))            push('Services', servicesPage(vm));
   if (inc('institutions'))        push('Institutions', institutionsPage(vm));
   if (inc('economicsTrade'))      push('Economics & Trade', economicsPage(vm));

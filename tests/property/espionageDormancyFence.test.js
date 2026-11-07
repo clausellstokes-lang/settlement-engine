@@ -189,6 +189,312 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * AND NOWHERE ELSE. Most recently at the ENGINE-HYGIENE landing (SHIFT RECORD,
  * 2026-09-01, TE-AGNOSTIC-1 cars `f2c1ad181` / `97d119c9b`); before that at T8.
  *
+ * ── 2026-11-06, THE VILLAGE WATCH'S ROTA PRESUMES NO GOVERNOR (RUNG 1 OF THE SOAK LADDER) ──
+ * THE SIXTY-FIRST MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation of 2026-11-06,
+ * inside a NAMED CHARTERED WINDOW: RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the §881.4 STOP's own terms); the
+ * record is docs/shift-records/2026-11-06-rung1-35-village-watch-no-governor.json. THE MOVER, FOUND: commit 8e92c0440
+ * (R-H2) inside first-parent step 18fd6b442 of the rung-1 landing and nothing else (the catalogue desc and both desc
+ * variants re-worded so no line names a headman; 66b1407bd reverse-applied leaves these 4 rows moving, 8e92c0440
+ * reverse-applied leaves 20, record 34's). On THIS corpus 4 of 360 rows move (village 4; every other tier 0);
+ * 360/360 hashes stay distinct. Written from the staged tree (18fd6b442 with the door paths carried from the branch),
+ * measured by scripts/audit/refence.mjs before the write. FENCE 3 (call-path dormancy) re-run green at the write.
+ * `2f6d48b3…` -> `68c107c2…`.
+ *
+ * ── 2026-11-06, THE FOOD PER CENT FROM THE POUNDS (RUNG 1 OF THE SOAK LADDER) ──
+ * THE SIXTIETH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation of 2026-11-06,
+ * inside a NAMED CHARTERED WINDOW: RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the §881.4 STOP's own terms); the
+ * record is docs/shift-records/2026-11-06-rung1-34-food-per-cent-from-pounds.json. THE MOVER, FOUND: one cause in two
+ * steps — lane D's food floor bfd70d809 (step b37bbf395, the only commit of that step to move this corpus: 2 rows),
+ * superseded by lane H's R-H5 66b1407bd (step 18fd6b442: the food writer and its view derive the per cent from the
+ * pounds they publish, no floor; 8e92c0440 moves 4 other rows, its own cause, 5f6d243b2 moves 0). On THIS corpus 20 of
+ * 360 rows move (thorp 12, hamlet 7, village 1; town, city, metropolis 0); 360/360 hashes stay distinct. Written from
+ * the staged tree (18fd6b442 with the door paths carried from the branch, 8e92c0440 reverse-applied), measured by
+ * scripts/audit/refence.mjs before the write. FENCE 3 (call-path dormancy) re-run green at the write.
+ * `5213e9d9…` -> `2f6d48b3…`.
+ *
+ * ── 2026-11-06, THE VACANT SEAT IS SAID FROM ITS FACT (RUNG 1 OF THE SOAK LADDER) ──
+ * THE FIFTY-NINTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation of 2026-11-06,
+ * inside a NAMED CHARTERED WINDOW: RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the §881.4 STOP's own terms); the
+ * record is docs/shift-records/2026-11-06-rung1-33-vacant-seat-fact.json. THE MOVER, FOUND: commit 5d3f7b5cb (R-G1) inside
+ * first-parent step 64ad4fe47 of the rung-1 landing and nothing else (the vacant seat read from the governing faction's
+ * `vacant` modifier, the crisis cast following it; c9be4d1f0 reverse-applied leaves the 8 rows moving, 5d3f7b5cb leaves
+ * 0). On THIS corpus 8 of 360 rows move (thorp 2, hamlet 1, village 2, town 2, metropolis 1; city 0); 360/360 hashes
+ * stay distinct. Written from the staged tree (64ad4fe47 with the door paths carried from the branch, lane D's food
+ * floor bfd70d809 reverse-applied: its own cause, record 34), measured by scripts/audit/refence.mjs before the write.
+ * FENCE 3 (call-path dormancy) re-run green at the write. `f6cccb63…` -> `5213e9d9…`.
+ *
+ * ── 2026-11-06, THE VILLAGE WATCH'S AUTHORED TEXTS (RUNG 1 OF THE SOAK LADDER) ──
+ * THE FIFTY-EIGHTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation of 2026-11-06,
+ * inside a NAMED CHARTERED WINDOW: RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the §881.4 STOP's own terms); the
+ * record is docs/shift-records/2026-11-06-rung1-32-village-watch-texts.json. THE MOVER, FOUND: commit 59237b232 inside
+ * first-parent step 3da1104da of the rung-1 landing and nothing else (the Village watch's identity one-liner and two
+ * desc variants authored; each of the step's other three source commits reverse-applied leaves the 3 rows moving,
+ * 59237b232 reverse-applied leaves 0). On THIS corpus 3 of 360 rows move (village 3; every other tier 0); 360/360
+ * hashes stay distinct. Written from the staged tree (3da1104da with the door paths carried from the branch, lane D's
+ * food floor bfd70d809 reverse-applied: its own cause, record 34), measured by scripts/audit/refence.mjs before the
+ * write. FENCE 3 (call-path dormancy) re-run green at the write. `3302d755…` -> `f6cccb63…`.
+ *
+ * ── 2026-11-05, THE V-SUMMARY-HOOKS CURE (RUNG 1 OF THE SOAK LADDER) ──
+ * THE FIFTY-SEVENTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation,
+ * inside a NAMED CHARTERED WINDOW: RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the §881.4 STOP's own terms); the
+ * record is docs/shift-records/2026-11-05-rung1-28-summary-hook-count.json. THE MOVER, FOUND: commit c1cf38bbb on the rung-1
+ * landing and nothing else (the viability summary's plot-hook count is re-derived from the hooks that survive the truth
+ * filter, hookTruthRecord.js :: withoutFalseHooks; the defect was TRUTH 7eb0bf0ba's). On THIS corpus 44 of 360 rows move
+ * (village 8, town 13, city 13, metropolis 10; thorp, hamlet 0); 360/360 hashes stay distinct. Written at the branch tip
+ * (the cure is the last step), measured by scripts/audit/refence.mjs before the write against the tip without the cure,
+ * which reproduces this file's previous constant. FENCE 3 (call-path dormancy) re-run green at the write.
+ * `dc33f86a…` -> `3302d755…`.
+ *
+ * ── 2026-11-04, F10 WALLS-WORD (units 1–4) (RUNG 1 OF THE SOAK LADDER) ──
+ * THE FIFTY-SIXTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation,
+ * inside a NAMED CHARTERED WINDOW: RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the §881.4 STOP's own terms); the
+ * record is docs/shift-records/2026-11-04-rung1-26-f10-walls-word.json. THE MOVER, FOUND: first-parent step 54daafda3 of the rung-1
+ * landing and nothing else (F10 WALLS-WORD (units 1–4): a line that names walls, soldiers or a garrison takes its twin where the roster lacks the thing — the hook-truth gate reads soldiers as the defence check does, and the service descriptions, the siege and wartime goals, the crisis cast's defence reasons, the waystation description and the power writers' garrison words follow). On THIS corpus 19 of 360 rows move
+ * (thorp 1, hamlet 3, village 7, town 8; city, metropolis 0); 360/360 hashes stay distinct. ATTRIBUTION, ZERO RESIDUE BY CONSTRUCTION: written
+ * from the staged tree S26 (the tree of 54daafda3 with the door paths carried from the branch, the previous
+ * record's writes committed), measured by scripts/audit/refence.mjs before the write. FENCE 3 (call-path
+ * dormancy) re-run green at the write. `4af36e27…` -> `dc33f86a…`.
+ *
+ * ── 2026-11-04, F4 CRIME-SIGNAL (units 1–5) (RUNG 1 OF THE SOAK LADDER) ──
+ * THE FIFTY-FIFTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation,
+ * inside a NAMED CHARTERED WINDOW: RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the §881.4 STOP's own terms); the
+ * record is docs/shift-records/2026-11-04-rung1-25-f4-crime-signal.json. THE MOVER, FOUND: first-parent step ba9fde402 of the rung-1
+ * landing and nothing else (F4 CRIME-SIGNAL (units 1–5): a relationship does not outlive the trim, affiliations, secrets and goals read the crime signal, no crime-wave tension without crime, and the survival and debt-evasion lines read the final crime signal). On THIS corpus 129 of 360 rows move
+ * (thorp 23, hamlet 29, village 38, town 36, city 3; metropolis 0); 360/360 hashes stay distinct. ATTRIBUTION, ZERO RESIDUE BY CONSTRUCTION: written
+ * from the staged tree S25 (the tree of ba9fde402 with the door paths carried from the branch, the previous
+ * record's writes committed), measured by scripts/audit/refence.mjs before the write. FENCE 3 (call-path
+ * dormancy) re-run green at the write. `6d8e01a1…` -> `4af36e27…`.
+ *
+ * ── 2026-11-04, F3 FOOD-WORDS (units 1–5) (RUNG 1 OF THE SOAK LADDER) ──
+ * THE FIFTY-FOURTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation,
+ * inside a NAMED CHARTERED WINDOW: RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the §881.4 STOP's own terms); the
+ * record is docs/shift-records/2026-11-04-rung1-24-f3-food-words.json. THE MOVER, FOUND: first-parent step db8ce5da8 of the rung-1
+ * landing and nothing else (F3 FOOD-WORDS (units 1–5): a secret says people are starving only where the food record goes hungry, an export list is goods ("Game meat" is game), a processed food good from the place's own food is an export only on a surplus, and a fishing row on water is a fish source). On THIS corpus 99 of 360 rows move
+ * (thorp 15, hamlet 13, village 14, town 11, city 23, metropolis 23); 360/360 hashes stay distinct. ATTRIBUTION, ZERO RESIDUE BY CONSTRUCTION: written
+ * from the staged tree S24 (the tree of db8ce5da8 with the door paths carried from the branch, the previous
+ * record's writes committed), measured by scripts/audit/refence.mjs before the write. FENCE 3 (call-path
+ * dormancy) re-run green at the write. `c2261133…` -> `6d8e01a1…`.
+ *
+ * ── 2026-11-04, F1 DEFENCE-WORDS, first step (units 1–5) (RUNG 1 OF THE SOAK LADDER) ──
+ * THE FIFTY-THIRD MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation,
+ * inside a NAMED CHARTERED WINDOW: RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the §881.4 STOP's own terms); the
+ * record is docs/shift-records/2026-11-04-rung1-23-f1-defence-words.json. THE MOVER, FOUND: first-parent step 5e9ffb220 of the rung-1
+ * landing and nothing else (F1 DEFENCE-WORDS, first step (units 1–5): every defence claim writer reads defenseFactsOf, the standing and siege-pressure lines read the record, a hired company is not called a garrison, and a Village watch row stands below town). On THIS corpus 146 of 360 rows move
+ * (thorp 5, hamlet 19, village 37, town 56, city 28, metropolis 1); 360/360 hashes stay distinct. ATTRIBUTION, ZERO RESIDUE BY CONSTRUCTION: written
+ * from the staged tree S23 (the tree of 5e9ffb220 with the door paths carried from the branch, the previous
+ * record's writes committed), measured by scripts/audit/refence.mjs before the write. FENCE 3 (call-path
+ * dormancy) re-run green at the write. `d1269dc0…` -> `c2261133…`.
+ *
+ * ── 2026-11-04, F6 BUDGET-FLOOR (units 1–4) (RUNG 1 OF THE SOAK LADDER) ──
+ * THE FIFTY-SECOND MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation,
+ * inside a NAMED CHARTERED WINDOW: RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the §881.4 STOP's own terms); the
+ * record is docs/shift-records/2026-11-04-rung1-22-f6-budget-floor.json. THE MOVER, FOUND: first-parent step 6d84aa834 of the rung-1
+ * landing and nothing else (F6 BUDGET-FLOOR (units 1–4): the institution budget's target gives way — the density factor d answers anchor − R − X over the scalable rows, the realised table re-measured on the scalable definition). On THIS corpus 318 of 360 rows move
+ * (thorp 38, hamlet 55, village 58, town 60, city 60, metropolis 47); 360/360 hashes stay distinct. ATTRIBUTION, ZERO RESIDUE BY CONSTRUCTION: written
+ * from the staged tree S22 (the tree of 6d84aa834 with the door paths carried from the branch, the previous
+ * record's writes committed), measured by scripts/audit/refence.mjs before the write. FENCE 3 (call-path
+ * dormancy) re-run green at the write. `205c0c40…` -> `d1269dc0…`.
+ *
+ * ── 2026-11-04, F5 INSTRUMENTS, first step (units 1–5) (RUNG 1 OF THE SOAK LADDER) ──
+ * THE FIFTY-FIRST MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation,
+ * inside a NAMED CHARTERED WINDOW: RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the §881.4 STOP's own terms); the
+ * record is docs/shift-records/2026-11-04-rung1-21-f5-instruments.json. THE MOVER, FOUND: first-parent step 7e28a6331 of the rung-1
+ * landing and nothing else (F5 INSTRUMENTS, first step (units 1–5): the hook pools' sea and dock lines are licensed on waterAccessKind (unit 4, the only unit that reaches the generator; units 1–3 are the soak's instruments)). On THIS corpus 38 of 360 rows move
+ * (village 2, town 17, city 11, metropolis 8; thorp, hamlet 0); 360/360 hashes stay distinct. ATTRIBUTION, ZERO RESIDUE BY CONSTRUCTION: written
+ * from the staged tree S21 (the tree of 7e28a6331 with the door paths carried from the branch, the previous
+ * record's writes committed), measured by scripts/audit/refence.mjs before the write. FENCE 3 (call-path
+ * dormancy) re-run green at the write. `4b80df04…` -> `205c0c40…`.
+ *
+ * ── 2026-11-04, PINS, second step (units 6–7) (RUNG 1 OF THE SOAK LADDER) ──
+ * THE FIFTIETH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation,
+ * inside a NAMED CHARTERED WINDOW: RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the §881.4 STOP's own terms); the
+ * record is docs/shift-records/2026-11-04-rung1-20-pins-2-rarity-mark.json. THE MOVER, FOUND: first-parent step 11467ed57 of the rung-1
+ * landing and nothing else (PINS, second step (units 6–7): the rows whose own text calls them rare carry the rarity mark, and availableServices.criminal[].name is a service label, declared NON_CASCADED). On THIS corpus 95 of 360 rows move
+ * (village 11, city 30, metropolis 54; thorp, hamlet, town 0); 360/360 hashes stay distinct. ATTRIBUTION, ZERO RESIDUE BY CONSTRUCTION: written
+ * from the staged tree S20 (the tree of 11467ed57 with the door paths carried from the branch, the previous
+ * record's writes committed), measured by scripts/audit/refence.mjs before the write. FENCE 3 (call-path
+ * dormancy) re-run green at the write. `3f686283…` -> `4b80df04…`.
+ *
+ * ── 2026-11-04, X-46 car 3, I7 (RUNG 1 OF THE SOAK LADDER) ──
+ * THE FORTY-NINTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation,
+ * inside a NAMED CHARTERED WINDOW: RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the §881.4 STOP's own terms); the
+ * record is docs/shift-records/2026-11-04-rung1-19-x46-car-3-i7-realised.json. THE MOVER, FOUND: first-parent step 6ca454d2b of the rung-1
+ * landing and nothing else (X-46 car 3, I7: the realised table (INSTITUTION_BUDGET_REALISED) re-measured at the composed tip by the lane's own recipe, a metropolis forced through the custom-population path). On THIS corpus 325 of 360 rows move
+ * (thorp 52, hamlet 53, village 60, town 60, city 60, metropolis 40); 360/360 hashes stay distinct. ATTRIBUTION, ZERO RESIDUE BY CONSTRUCTION: written
+ * from the staged tree S19 (the tree of 6ca454d2b with the door paths carried from the branch, the previous
+ * record's writes committed), measured by scripts/audit/refence.mjs before the write. FENCE 3 (call-path
+ * dormancy) re-run green at the write. `f95a9d28…` -> `3f686283…`.
+ *
+ * ── 2026-11-04, TRUTH, second step (unit D) (RUNG 1 OF THE SOAK LADDER) ──
+ * THE FORTY-EIGHTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation,
+ * inside a NAMED CHARTERED WINDOW: RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the §881.4 STOP's own terms); the
+ * record is docs/shift-records/2026-11-04-rung1-18-truth-2-unit-d.json. THE MOVER, FOUND: first-parent step 844acaccc of the rung-1
+ * landing and nothing else (TRUTH, second step (unit D): the infiltrator takes a real name, hidden in the fiction, and the criminal structure is not null beside a network). On THIS corpus 5 of 360 rows move
+ * (thorp 1, hamlet 1, city 1, metropolis 2; village, town 0); 360/360 hashes stay distinct. ATTRIBUTION, ZERO RESIDUE BY CONSTRUCTION: written
+ * from the staged tree S18 (the tree of 844acaccc with the door paths carried from the branch, the previous
+ * record's writes committed), measured by scripts/audit/refence.mjs before the write. FENCE 3 (call-path
+ * dormancy) re-run green at the write. `664d79e1…` -> `f95a9d28…`.
+ *
+ * ── 2026-11-04, PINS, first step (units 1–3 and the chair's addendum) (RUNG 1 OF THE SOAK LADDER) ──
+ * THE FORTY-SEVENTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation,
+ * inside a NAMED CHARTERED WINDOW: RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the §881.4 STOP's own terms); the
+ * record is docs/shift-records/2026-11-04-rung1-17-pins-1-density-exemptions.json. THE MOVER, FOUND: first-parent step 37b1e746d of the rung-1
+ * landing and nothing else (PINS, first step (units 1–3 and the chair's addendum): route-required rows and rows with an authored rarity are exempt from X-46 car 3's density factor, and the budget's top anchor is the catalogue's ceiling, 60,000 -> 93). On THIS corpus 197 of 360 rows move
+ * (thorp 60, hamlet 28, village 29, town 15, city 15, metropolis 50); 360/360 hashes stay distinct. ATTRIBUTION, ZERO RESIDUE BY CONSTRUCTION: written
+ * from the staged tree S17 (the tree of 37b1e746d with the door paths carried from the branch, the previous
+ * record's writes committed), measured by scripts/audit/refence.mjs before the write. FENCE 3 (call-path
+ * dormancy) re-run green at the write. `641c300a…` -> `664d79e1…`.
+ *
+ * ── 2026-11-04, TRUTH, first step (units A–C and unit D's first commit) (RUNG 1 OF THE SOAK LADDER) ──
+ * THE FORTY-SIXTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation,
+ * inside a NAMED CHARTERED WINDOW: RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the §881.4 STOP's own terms); the
+ * record is docs/shift-records/2026-11-04-rung1-16-truth-1-units-a-c.json. THE MOVER, FOUND: first-parent step ff4448d2e of the rung-1
+ * landing and nothing else (TRUTH, first step (units A–C and unit D's first commit): a hook false on its own record is not stored; the crisis page speaks the place's own tier noun; "no criminal infrastructure" never prints beside a network; stress factions take the role pool's first unused name). On THIS corpus 102 of 360 rows move
+ * (thorp 13, hamlet 11, village 16, town 22, city 20, metropolis 20); 360/360 hashes stay distinct. ATTRIBUTION, ZERO RESIDUE BY CONSTRUCTION: written
+ * from the staged tree S16 (the tree of ff4448d2e with the door paths carried from the branch, the previous
+ * record's writes committed), measured by scripts/audit/refence.mjs before the write. FENCE 3 (call-path
+ * dormancy) re-run green at the write. `1362f4ce…` -> `641c300a…`.
+ *
+ * ── 2026-11-04, PLACE-NOT-TIER (R6, units 1–2) (RUNG 1 OF THE SOAK LADDER) ──
+ * THE FORTY-FIFTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation,
+ * inside a NAMED CHARTERED WINDOW: RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the §881.4 STOP's own terms); the
+ * record is docs/shift-records/2026-11-04-rung1-15-place-not-tier.json. THE MOVER, FOUND: first-parent step 6129c300d of the rung-1
+ * landing and nothing else (PLACE-NOT-TIER (R6, units 1–2): the soldiers line, the Guard Captain and "The garrison" read the place's forces, not the tier; a thorp, hamlet or village seats no guild power without a market). On THIS corpus 105 of 360 rows move
+ * (thorp 3, hamlet 35, village 53, town 14; city, metropolis 0); 360/360 hashes stay distinct. ATTRIBUTION, ZERO RESIDUE BY CONSTRUCTION: written
+ * from the staged tree S15 (the tree of 6129c300d with the door paths carried from the branch, the previous
+ * record's writes committed), measured by scripts/audit/refence.mjs before the write. FENCE 3 (call-path
+ * dormancy) re-run green at the write. `a126db33…` -> `1362f4ce…`.
+ *
+ * ── 2026-11-04, SELF-VOUCH, I5 (RUNG 1 OF THE SOAK LADDER) ──
+ * THE FORTY-FOURTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation,
+ * inside a NAMED CHARTERED WINDOW: RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the §881.4 STOP's own terms); the
+ * record is docs/shift-records/2026-11-04-rung1-14-self-vouch-i5-kind-7.json. THE MOVER, FOUND: first-parent step cdc949867 of the rung-1
+ * landing and nothing else (SELF-VOUCH, I5: the battery judgment counts kind 7 (a placeholder faction or a role-only person), so the self-vouch line prints only on a record clean of kinds 1-5, 7 and 8). On THIS corpus 183 of 360 rows move
+ * (thorp 8, hamlet 32, village 38, town 28, city 48, metropolis 29); 360/360 hashes stay distinct. ATTRIBUTION, ZERO RESIDUE BY CONSTRUCTION: written
+ * from the staged tree S14 (the tree of cdc949867 with the door paths carried from the branch, the previous
+ * record's writes committed), measured by scripts/audit/refence.mjs before the write. FENCE 3 (call-path
+ * dormancy) re-run green at the write. `2d13cedb…` -> `a126db33…`.
+ *
+ * ── 2026-11-04, X-46 car 1b, second step (U4–U5) (RUNG 1 OF THE SOAK LADDER) ──
+ * THE FORTY-THIRD MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation,
+ * inside a NAMED CHARTERED WINDOW: RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the §881.4 STOP's own terms); the
+ * record is docs/shift-records/2026-11-04-rung1-13-x46-car-1b-2-curve.json. THE MOVER, FOUND: first-parent step fb0341b93 of the rung-1
+ * landing and nothing else (X-46 car 1b, second step (U4–U5): the owner's metropolis curve — flat to 50,000, thinning exponentially to 1,000,000 — and the rarer variant, 30% of random metropolises past 50,000). On THIS corpus 60 of 360 rows move
+ * (metropolis 60; thorp, hamlet, village, town, city 0); 360/360 hashes stay distinct. ATTRIBUTION, ZERO RESIDUE BY CONSTRUCTION: written
+ * from the staged tree S13 (the tree of fb0341b93 with the door paths carried from the branch, the previous
+ * record's writes committed), measured by scripts/audit/refence.mjs before the write. FENCE 3 (call-path
+ * dormancy) re-run green at the write. `0b130673…` -> `2d13cedb…`.
+ *
+ * ── 2026-11-04, X-46 car 3 (lane x46-3-budget) (RUNG 1 OF THE SOAK LADDER) ──
+ * THE FORTY-SECOND MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation,
+ * inside a NAMED CHARTERED WINDOW: RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the §881.4 STOP's own terms); the
+ * record is docs/shift-records/2026-11-04-rung1-12-x46-car-3-budget.json. THE MOVER, FOUND: first-parent step 90dc22f18 of the rung-1
+ * landing and nothing else (X-46 car 3 (lane x46-3-budget): the institution budget follows the population). On THIS corpus 360 of 360 rows move
+ * (thorp 60, hamlet 60, village 60, town 60, city 60, metropolis 60); 360/360 hashes stay distinct. ATTRIBUTION, ZERO RESIDUE BY CONSTRUCTION: written
+ * from the staged tree S12 (the tree of 90dc22f18 with the door paths carried from the branch, the previous
+ * record's writes committed), measured by scripts/audit/refence.mjs before the write. FENCE 3 (call-path
+ * dormancy) re-run green at the write. `fff82c27…` -> `0b130673…`.
+ *
+ * ── 2026-11-04, X-46 car 1b, first step (U1–U3) (RUNG 1 OF THE SOAK LADDER) ──
+ * THE FORTY-FIRST MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation,
+ * inside a NAMED CHARTERED WINDOW: RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the §881.4 STOP's own terms); the
+ * record is docs/shift-records/2026-11-04-rung1-11-x46-car-1b-1-no-ceiling.json. THE MOVER, FOUND: first-parent step 79c442330 of the rung-1
+ * landing and nothing else (X-46 car 1b, first step (U1–U3): the metropolis roll has no ceiling, the custom population input has a floor and no ceiling, and the band position is read on a log scale). On THIS corpus 60 of 360 rows move
+ * (metropolis 60; thorp, hamlet, village, town, city 0); 360/360 hashes stay distinct. ATTRIBUTION, ZERO RESIDUE BY CONSTRUCTION: written
+ * from the staged tree S11 (the tree of 79c442330 with the door paths carried from the branch, the previous
+ * record's writes committed), measured by scripts/audit/refence.mjs before the write. FENCE 3 (call-path
+ * dormancy) re-run green at the write. `64cff250…` -> `fff82c27…`.
+ *
+ * ── 2026-11-04, T1/T2 (the dry run §4's two proposals, adopted by the chair) (RUNG 1 OF THE SOAK LADDER) ──
+ * THE FORTIETH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation,
+ * inside a NAMED CHARTERED WINDOW: RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the §881.4 STOP's own terms); the
+ * record is docs/shift-records/2026-11-04-rung1-10-t1-t2-siege-stores.json. THE MOVER, FOUND: first-parent step fe56bddd4 of the rung-1
+ * landing and nothing else (T1/T2 (the dry run §4's two proposals, adopted by the chair): the siege keeps 0.3 of the harvest; a village stores as a hamlet does). On THIS corpus 66 of 360 rows move
+ * (thorp 1, hamlet 2, village 60, metropolis 3; town, city 0); 360/360 hashes stay distinct. ATTRIBUTION, ZERO RESIDUE BY CONSTRUCTION: written
+ * from the staged tree S10 (the tree of fe56bddd4 with the door paths carried from the branch, the previous
+ * record's writes committed), measured by scripts/audit/refence.mjs before the write. FENCE 3 (call-path
+ * dormancy) re-run green at the write. `5666cc4e…` -> `64cff250…`.
+ *
+ * ── 2026-11-04, TERRAIN-POOLS, second step (re-merged at 30141976) (RUNG 1 OF THE SOAK LADDER) ──
+ * THE THIRTY-NINTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation,
+ * inside a NAMED CHARTERED WINDOW: RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the §881.4 STOP's own terms); the
+ * record is docs/shift-records/2026-11-04-rung1-09-terrain-pools-2.json. THE MOVER, FOUND: first-parent step fb5edb7f5 of the rung-1
+ * landing and nothing else (TERRAIN-POOLS, second step (re-merged at 30141976): inland texts for the pools that speak only of water, and no ship captain or sailor where there is no water). On THIS corpus 62 of 360 rows move
+ * (village 28, town 3, city 10, metropolis 21; thorp, hamlet 0); 360/360 hashes stay distinct. ATTRIBUTION, ZERO RESIDUE BY CONSTRUCTION: written
+ * from the staged tree S9 (the tree of fb5edb7f5 with the door paths carried from the branch, the previous
+ * record's writes committed), measured by scripts/audit/refence.mjs before the write. FENCE 3 (call-path
+ * dormancy) re-run green at the write. `d04a3f23…` -> `5666cc4e…`.
+ *
+ * ── 2026-11-04, SELF-VOUCH (RUNG 1 OF THE SOAK LADDER) ──
+ * THE THIRTY-EIGHTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation,
+ * inside a NAMED CHARTERED WINDOW: RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the §881.4 STOP's own terms); the
+ * record is docs/shift-records/2026-11-04-rung1-08-self-vouch.json. THE MOVER, FOUND: first-parent step 0be13b5cb of the rung-1
+ * landing and nothing else (SELF-VOUCH: the eighth formal judgment, record_coherence_battery, over the stored record, and DS-GEN-11's zero pool vouches only when it passed). On THIS corpus 360 of 360 rows move
+ * (thorp 60, hamlet 60, village 60, town 60, city 60, metropolis 60); 360/360 hashes stay distinct. ATTRIBUTION, ZERO RESIDUE BY CONSTRUCTION: written
+ * from the staged tree S8 (the tree of 0be13b5cb with the door paths carried from the branch, the previous
+ * record's writes committed), measured by scripts/audit/refence.mjs before the write. FENCE 3 (call-path
+ * dormancy) re-run green at the write. `d85b23c3…` -> `d04a3f23…`.
+ *
+ * ── 2026-11-04, FOOD-EXPORTS (with FOOD-4) (RUNG 1 OF THE SOAK LADDER) ──
+ * THE THIRTY-SEVENTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation,
+ * inside a NAMED CHARTERED WINDOW: RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the §881.4 STOP's own terms); the
+ * record is docs/shift-records/2026-11-04-rung1-07-food-exports.json. THE MOVER, FOUND: first-parent step 63bb72785 of the rung-1
+ * landing and nothing else (FOOD-EXPORTS (with FOOD-4): a place short of food sells no food surplus, and the foodways line has one writer on the record). On THIS corpus 44 of 360 rows move
+ * (village 1, town 8, city 16, metropolis 19; thorp, hamlet 0); 360/360 hashes stay distinct. ATTRIBUTION, ZERO RESIDUE BY CONSTRUCTION: written
+ * from the staged tree S7 (the tree of 63bb72785 with the door paths carried from the branch, the previous
+ * record's writes committed), measured by scripts/audit/refence.mjs before the write. FENCE 3 (call-path
+ * dormancy) re-run green at the write. `89dedf71…` -> `d85b23c3…`.
+ *
+ * ── 2026-11-04, TERRAIN-POOLS, first step (lane terrain-pools at its first merge) (RUNG 1 OF THE SOAK LADDER) ──
+ * THE THIRTY-SIXTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation,
+ * inside a NAMED CHARTERED WINDOW: RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the §881.4 STOP's own terms); the
+ * record is docs/shift-records/2026-11-04-rung1-06-terrain-pools-1.json. THE MOVER, FOUND: first-parent step ac09ea83b of the rung-1
+ * landing and nothing else (TERRAIN-POOLS, first step (lane terrain-pools at its first merge): the water-speaking pools and lines are licensed on the place's water fact (the A-11 licences; the Defense desk's harbour line reads the water fact)). On THIS corpus 227 of 360 rows move
+ * (thorp 13, hamlet 19, village 44, town 47, city 52, metropolis 52); 360/360 hashes stay distinct. ATTRIBUTION, ZERO RESIDUE BY CONSTRUCTION: written
+ * from the staged tree S6 (the tree of ac09ea83b with the door paths carried from the branch, the previous
+ * record's writes committed), measured by scripts/audit/refence.mjs before the write. FENCE 3 (call-path
+ * dormancy) re-run green at the write. `8ef28c7f…` -> `89dedf71…`.
+ *
+ * ── 2026-11-04, TIER-NOUN-POOLS (units 1–6) (RUNG 1 OF THE SOAK LADDER) ──
+ * THE THIRTY-FIFTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation,
+ * inside a NAMED CHARTERED WINDOW: RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the §881.4 STOP's own terms); the
+ * record is docs/shift-records/2026-11-04-rung1-05-tier-noun-pools.json. THE MOVER, FOUND: first-parent step a9982e3b9 of the rung-1
+ * landing and nothing else (TIER-NOUN-POOLS (units 1–6): a city's drawn institution description and its Gate Tolls line speak the place's own tier noun). On THIS corpus 76 of 360 rows move
+ * (city 40, metropolis 36; thorp, hamlet, village, town 0); 360/360 hashes stay distinct. ATTRIBUTION, ZERO RESIDUE BY CONSTRUCTION: written
+ * from the staged tree S5 (the tree of a9982e3b9 with the door paths carried from the branch, the previous
+ * record's writes committed), measured by scripts/audit/refence.mjs before the write. FENCE 3 (call-path
+ * dormancy) re-run green at the write. `5103a51e…` -> `8ef28c7f…`.
+ *
+ * ── 2026-11-04, CRISIS (lane crisis, units 1–7, docs/DESIGN_CRISIS_TAB.md) (RUNG 1 OF THE SOAK LADDER) ──
+ * THE THIRTY-FOURTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation,
+ * inside a NAMED CHARTERED WINDOW: RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the §881.4 STOP's own terms); the
+ * record is docs/shift-records/2026-11-04-rung1-03-crisis-derived-cast.json. THE MOVER, FOUND: first-parent step d3e072368 of the rung-1
+ * landing and nothing else (CRISIS (lane crisis, units 1–7, docs/DESIGN_CRISIS_TAB.md): the crisis record carries its derived cast). On THIS corpus 103 of 360 rows move
+ * (thorp 21, hamlet 24, village 16, town 11, city 15, metropolis 16); 360/360 hashes stay distinct. ATTRIBUTION, ZERO RESIDUE BY CONSTRUCTION: written
+ * from the staged tree S3 (the tree of d3e072368 with the door paths carried from the branch, the previous
+ * record's writes committed), measured by scripts/audit/refence.mjs before the write. FENCE 3 (call-path
+ * dormancy) re-run green at the write. `48e1248a…` -> `5103a51e…`.
+ *
+ * ── 2026-11-04, X-46 car 2 (lane x46-2-thresholds) (RUNG 1 OF THE SOAK LADDER) ──
+ * THE THIRTY-THIRD MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation,
+ * inside a NAMED CHARTERED WINDOW: RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the §881.4 STOP's own terms); the
+ * record is docs/shift-records/2026-11-04-rung1-02-x46-car-2-thresholds.json. THE MOVER, FOUND: first-parent step d4bf6431c of the rung-1
+ * landing and nothing else (X-46 car 2 (lane x46-2-thresholds): the thresholds — seventeen bare population comparisons re-based through TIER_STAMP_CUTS, the Dwellings and Housing rows on the owner's household column, Money changers' floor 3,000 -> 2,000). On THIS corpus 360 of 360 rows move
+ * (thorp 60, hamlet 60, village 60, town 60, city 60, metropolis 60); 360/360 hashes stay distinct. ATTRIBUTION, ZERO RESIDUE BY CONSTRUCTION: written
+ * from the staged tree S2 (the tree of d4bf6431c with the door paths carried from the branch, the previous
+ * record's writes committed), measured by scripts/audit/refence.mjs before the write. FENCE 3 (call-path
+ * dormancy) re-run green at the write. `cab21525…` -> `48e1248a…`.
+ *
+ * ── 2026-11-04, X-46 car 1 (lane x46-train, U1–U4) (RUNG 1 OF THE SOAK LADDER) ──
+ * THE THIRTY-SECOND MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation,
+ * inside a NAMED CHARTERED WINDOW: RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the §881.4 STOP's own terms); the
+ * record is docs/shift-records/2026-11-04-rung1-01-x46-car-1-bands.json. THE MOVER, FOUND: first-parent step 1264a8152 of the rung-1
+ * landing and nothing else (X-46 car 1 (lane x46-train, U1–U4): the owner's historical population bands and the one disjoint tier stamp; no household count (U4 removed it by the owner's word)). On THIS corpus 360 of 360 rows move
+ * (thorp 60, hamlet 60, village 60, town 60, city 60, metropolis 60); 360/360 hashes stay distinct. ATTRIBUTION, ZERO RESIDUE BY CONSTRUCTION: written
+ * from the staged tree S1 (the tree of 1264a8152 with the door paths carried from the branch, the previous
+ * record's writes committed), measured by scripts/audit/refence.mjs before the write. FENCE 3 (call-path
+ * dormancy) re-run green at the write. `00440713…` -> `cab21525…`.
+ *
  * ── 2026-11-03, DEFENSE-2: THE DEFENCE GENERATOR'S MAGIC DEPENDENCY DERIVES FROM THE RELIANCE READING (THE COHERENCE AND SCALE WINDOW) ──
  * THE TWENTY-FOURTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation,
  * inside a NAMED CHARTERED WINDOW: THE COHERENCE AND SCALE WINDOW, ODQ §934.104 (the §881.4 STOP's own
@@ -549,7 +855,7 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * superseded by the ENGINE-HYGIENE re-record above, which is the record of the
  * one chartered window that has been spent since.
  */
-const PRE_COUPLING_CORPUS_SHA = '00440713a9a1e3cd0855966247ad560fabca788cd118992b68d8a9811e9052ef';
+const PRE_COUPLING_CORPUS_SHA = '68c107c25fa76ef105bb447c7a3497d2f6357c414900a32ead856c36791475c9';
 
 const CORPUS_TIERS = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
 const CORPUS_ROUTES = Object.freeze(['road', 'isolated', 'port', 'crossroads']);

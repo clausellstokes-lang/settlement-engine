@@ -95,7 +95,7 @@
 import { MONSTER_THREAT_TIERS, normalizeMonsterThreat } from '../../../data/monsterThreat.js';
 import { standingDefenseForces } from '../../institutions/defenseInstitutionBuckets.js';
 import { magicWorksAt } from '../../worldPulse/magicWorksAt.js';
-import { deriveMagicReliance } from '../../magicReliance.js';
+import { deriveMagicReliance, magicDialAbsent } from '../../magicReliance.js';
 import { SMALL_TIERS, TOWN_PLUS_TIERS } from '../../../data/constants.js';
 import { scoreBand } from '../defenseScoreBands.js';
 import { DEFENSE_STRESS_STATUS } from '../defenseDisplay.js';
@@ -106,6 +106,8 @@ import {
 import { composeStateProse } from './composeStateProse.js';
 import { defenseStateProseCandidates } from './defenseStateProseCandidates.js';
 import { legibilityRung } from './legibilityRung.js';
+import { waterAccessKind } from '../../tradeRouteSemantics.js';
+import { wallsAnswered } from '../../defense/defenseFacts.js';
 
 /**
  * The desk's corpus, typed at the import boundary — the generated leaves stay PURE DATA.
@@ -575,6 +577,8 @@ export function disasterRowPoolKey(granary, hospital, church) {
  *   economic: object|null, disaster: object|null}>}
  */
 export function defenseThreatProse(settlement, options = {}) {
+  // F10: the walls dimension answered once, from the defence reader (stateProseKernel law 5).
+  options = wallsAnswered(settlement, options);
   const dp = settlement?.defenseProfile || {};
   const compound = settlement?.economicState?.compound?.inst || {};
   const slots = { settlement: properFill(text(settlement?.name)) };
@@ -753,6 +757,8 @@ export function strategicPrizePoolKey(terrain) {
  * @returns {Readonly<{posture: object|null, terrain: object|null, prize: object|null}>}
  */
 export function defensePostureProse(settlement, options = {}) {
+  // F10: the walls dimension answered once, from the defence reader (stateProseKernel law 5).
+  options = wallsAnswered(settlement, options);
   const slots = { settlement: properFill(text(settlement?.name)) };
   const terrain = settlement?.resourceAnalysis?.terrain;
   // THE DM'S FIELD ALL THREE LENSES SIT BESIDE. Read through the projection's own path
@@ -866,6 +872,8 @@ export function criminalCapturePoolKey(captureState) {
  * @returns {Readonly<{structure: object|null, capture: object|null}>}
  */
 export function defenseCriminalProse(settlement, structureKey, options = {}) {
+  // F10: the walls dimension answered once, from the defence reader (stateProseKernel law 5).
+  options = wallsAnswered(settlement, options);
   const power = settlement?.powerStructure || {};
   const slots = {
     settlement: properFill(text(settlement?.name)),
@@ -991,6 +999,8 @@ export function wallRationalePoolKey(walls, monsterThreat, militaryGate, tier) {
  * @returns {Readonly<{rationale: object|null}>}
  */
 export function defenseWallRationaleProse(settlement, options = {}) {
+  // F10: the walls dimension answered once, from the defence reader (stateProseKernel law 5).
+  options = wallsAnswered(settlement, options);
   const forces = standingDefenseForces(settlement);
   const slots = {
     settlement: properFill(text(settlement?.name)),
@@ -1113,6 +1123,8 @@ export function viabilityUnderStressPoolKey(stress, viable) {
  * @returns {Readonly<{override: object|null, viability: object|null}>}
  */
 export function defenseMilitaryStatusProse(settlement, options = {}) {
+  // F10: the walls dimension answered once, from the defence reader (stateProseKernel law 5).
+  options = wallsAnswered(settlement, options);
   const slots = { settlement: properFill(text(settlement?.name)) };
   const stress = settlement?.stress;
 
@@ -1278,6 +1290,8 @@ export function arcaneDefensePoolKey(forces, magicWorks) {
  *   charter: object|null, arcane: object|null}>}
  */
 export function defenseForcesProse(settlement, options = {}) {
+  // F10: the walls dimension answered once, from the defence reader (stateProseKernel law 5).
+  options = wallsAnswered(settlement, options);
   const forces = standingDefenseForces(settlement);
   const slots = { settlement: properFill(text(settlement?.name)) };
   const config = settlement?.config || {};
@@ -1316,6 +1330,8 @@ export function defenseForcesProse(settlement, options = {}) {
  * @returns {Readonly<{publicOrder: object|null, firstSurvey: object|null}>}
  */
 export function defenseStateProse(settlement, options = {}) {
+  // F10: the walls dimension answered once, from the defence reader (stateProseKernel law 5).
+  options = wallsAnswered(settlement, options);
   const safety = settlement?.economicState?.safetyProfile || {};
   const label = safety.safetyLabel;
   const slots = { settlement: properFill(text(settlement?.name)) };
@@ -1493,6 +1509,16 @@ export function navalDefensePoolKey(navy, port, blockaded) {
 }
 
 /**
+ * @param {{ config?: { terrainType?: unknown, tradeRouteAccess?: unknown } | null } | null | undefined} settlement
+ * @returns {boolean} the record's own config says there is no water
+ */
+const dryRecord = (settlement) => {
+  const config = settlement?.config;
+  if (!config || typeof config !== 'object') return false;
+  return waterAccessKind(/** @type {string | null | undefined} */ (config.terrainType), /** @type {string | null | undefined} */ (config.tradeRouteAccess)) === 'none';
+};
+
+/**
  * THE SUPPORTING-CAPABILITIES DESK — DS-DEF-6's two speaking lenses at ONE position.
  *
  * DS-DEF-6 frames no DM-editable field, so these are plain rungs, on DS-DEF-2's reasoning.
@@ -1504,13 +1530,15 @@ export function navalDefensePoolKey(navy, port, blockaded) {
  * liveness drops that one variant and the pool speaks through the two that never named it.
  * Refusing a fill is the designed behaviour — the `{defwork}` precedent, one block over.
  *
- * @param {{name?: string, config?: {tradeRouteAccess?: unknown}|null,
+ * @param {{name?: string, config?: {tradeRouteAccess?: unknown, terrainType?: unknown}|null,
  *   economicState?: {compound?: {inst?: Record<string, unknown>}|null,
  *   foodSecurity?: {stockpile?: {blockaded?: unknown}|null}|null}|null}|null|undefined} settlement
  * @param {{seed?: string, audience?: string, tierNoun?: string|null}} [options]
  * @returns {Readonly<{logistics: object|null, naval: object|null}>}
  */
 export function defenseSupportingProse(settlement, options = {}) {
+  // F10: the walls dimension answered once, from the defence reader (stateProseKernel law 5).
+  options = wallsAnswered(settlement, options);
   const compound = settlement?.economicState?.compound?.inst || {};
   const stockpile = settlement?.economicState?.foodSecurity?.stockpile || null;
   const slots = { settlement: properFill(text(settlement?.name)) };
@@ -1530,8 +1558,11 @@ export function defenseSupportingProse(settlement, options = {}) {
     // is printed once, in months, on the Economy tab. The logistics lens IS the granary read, so
     // it is not drawn here; `supplyLogisticsPoolKey` and its pools stand, unread by this desk.
     logistics: null,
+    // A-11 (chair ruling, round 4, 2): a harbour only where the water fact gives one. The airship
+    // override seats aerial docks in a dry city, which set `hasPort`; the port flag now also needs
+    // `waterAccessKind` not 'none' (a record with no config reads as before).
     naval: rung(navalDefensePoolKey(
-      civicFlag(compound.hasNavy), civicFlag(compound.hasPort),
+      civicFlag(compound.hasNavy), civicFlag(compound.hasPort) && !dryRecord(settlement),
       stockpile ? stockpile.blockaded === true : false,
     )),
   });
@@ -1634,16 +1665,35 @@ function reliesOnMagic(settlement) {
 }
 
 /**
- * DS-DEF-9's pool key. Total over the producer's boolean; silent when it is absent.
- * @param {unknown} magicDependency @param {boolean} namedChain @returns {string|null}
+ * Is there no magic here at all: the place's own dial reads absent (the Magic tab's envelope
+ * prints "Availability absent") AND the one reliance reading counts nobody practising? Then
+ * "not relied on" is the wrong state: there is nothing to rely on (lane RUNG1B-F9 unit 2,
+ * 2026-11-04; soak1k-13 Amarthal read "There is magic at Amarthal" under "Availability absent").
+ * A practitioner on the rolls under a zero dial keeps the not-relied-on state, which is true.
+ * @param {object} settlement @returns {boolean}
  */
-export function magicDependencyPoolKey(magicDependency, namedChain) {
+function noMagicHere(settlement) {
+  const source = /** @type {import('../../magicReliance.js').MagicRelianceSource} */ (settlement);
+  return magicDialAbsent(source) && deriveMagicReliance(source).reading === 'none';
+}
+
+/**
+ * DS-DEF-9's pool key. Total over the producer's boolean; silent when it is absent. "Not relied
+ * on" and "absent" are two states: with no magic here the false reading takes its own pool.
+ * @param {unknown} magicDependency @param {boolean} namedChain @param {boolean} [magicAbsent]
+ * @returns {string|null}
+ */
+export function magicDependencyPoolKey(magicDependency, namedChain, magicAbsent = false) {
   if (magicDependency === true) {
     return namedChain
       ? 'magicDependency true, with a NAMED dependent chain'
       : 'magicDependency true';
   }
-  return magicDependency === false ? 'magicDependency false' : null;
+  if (magicDependency !== false) return null;
+  // An `if`, not a returned ternary: the wiring census reads a branch's `if` test, so the
+  // absent pool's own field (`magicAbsent`) reaches its declared reads (LANDING-7 lane F, R-F1).
+  if (magicAbsent) return 'magicDependency false, availability absent';
+  return 'magicDependency false';
 }
 
 /**
@@ -1679,6 +1729,8 @@ export function magicDependencyPoolKey(magicDependency, namedChain) {
  * @returns {Readonly<{arcaneReliance: object|null}>}
  */
 export function defenseMagicDependencyProse(settlement, options = {}) {
+  // F10: the walls dimension answered once, from the defence reader (stateProseKernel law 5).
+  options = wallsAnswered(settlement, options);
   const chains = settlement?.economicState?.activeChains;
   const slots = {
     settlement: properFill(text(settlement?.name)),
@@ -1688,7 +1740,7 @@ export function defenseMagicDependencyProse(settlement, options = {}) {
   // relied-upon or integral reads "depends on magic", anything else does not, so this sentence
   // and the Magic tab's reading cannot disagree.
   const poolKey = settlement
-    ? magicDependencyPoolKey(reliesOnMagic(settlement), hasNamedMagicChain(chains))
+    ? magicDependencyPoolKey(reliesOnMagic(settlement), hasNamedMagicChain(chains), noMagicHere(settlement))
     : null;
 
   return Object.freeze({

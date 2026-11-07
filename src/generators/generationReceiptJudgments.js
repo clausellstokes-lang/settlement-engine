@@ -21,7 +21,9 @@ export const GENERATION_JUDGMENT_IDS = Object.freeze([
   'narrative_realization',
   'dramatic_tension',
   'diversity_and_repetition',
-  'confidence_and_provenance',
+  // The eighth, record_coherence_battery, is built by recordBatteryFindings.js and appended
+  // in generationCoherence.js (lane SELF-VOUCH; this file sits at its 800-line ceiling).
+  'confidence_and_provenance', 'record_coherence_battery',
 ]);
 
 function finding(path, detail, evidence = null) {

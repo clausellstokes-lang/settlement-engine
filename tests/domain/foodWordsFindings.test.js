@@ -34,6 +34,15 @@ describe('foodWordsFindings — the food words agree with the food record', () =
     expect(foodWordsFindings({}, 'The settlement is starving.'), 'no record, nothing to hold the words to').toEqual([]);
   });
 
+  it('a "Needs X" row says the place LACKS X, so it is no claim to hold X (soak R7)', () => {
+    const record = deriveFoodRecord({ dailyNeed: 100, dailyProduction: 60, importCoverage: 0, magicOffset: 0, deficitPct: 40, surplusPct: 0, stressFamine: false, storageMonths: 1.5, hasGranary: false, foodSources: ['livestock'] });
+    const s = { economicState: { foodSecurity: { foodRecord: record } } };
+    expect(foodWordsFindings(s, 'Needs Grain · affects: meals')).toEqual([]);
+    expect(foodWordsFindings(s, 'Needs Grain · affects: meals, ale, lodging')).toEqual([]);
+    // The excuse covers the needs clause only: a source claimed after it is still read.
+    expect(foodWordsFindings(s, 'Needs Grain · affects: meals of fish from the local waters').map((f) => f.code)).toEqual(['source_not_held']);
+  });
+
   it('the food lines this lane writes agree with the record across the six tiers', () => {
     const findings = [];
     for (const tier of ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']) {

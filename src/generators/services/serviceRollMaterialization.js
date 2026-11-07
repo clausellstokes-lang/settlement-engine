@@ -22,6 +22,8 @@ import {
   isMaterializedCustomContent,
   nativeSemanticName,
 } from '../../domain/content/customContentSemanticAuthority.js';
+import { defenseFactsOf } from '../../domain/defense/defenseFacts.js';
+import { defenceTwinLine } from '../../data/defenceTwinLines.js';
 
 const CRIMINAL_INSTITUTION_KEYWORDS = Object.freeze([
   'thieves',
@@ -63,12 +65,14 @@ function isCriminalProvider(institution) {
  *
  * @param {Record<string, unknown>} service
  * @param {string} institutionName
+ * @param {import('../../data/defenceTwinLines.js').DefenceTwinFacts} [defence] the place's
+ *   defence facts: a desc that names walls the place lacks takes its twin (F10 unit 4)
  */
-function projectAvailableService(service, institutionName) {
+function projectAvailableService(service, institutionName, defence) {
   /** @type {Record<string, unknown>} */
   const projected = {
     name: service.name,
-    desc: service.desc,
+    desc: defenceTwinLine(service.desc, defence),
     institution: institutionName,
     ...projectCustomDefinitionIdentity(service),
   };
@@ -124,6 +128,7 @@ function availableServiceIdentityKey(service) {
  *     magicFunctions:()=>boolean,
  *     allowsInstitution:(institution:unknown)=>boolean,
  *     allowsService:(service:unknown,provider?:unknown,category?:string)=>boolean,
+ *     portKind?:'maritime'|'river'|'none',
  *   },
  * }} input
  * @returns {{criminalEffective:number,seen:Set<string>}}
@@ -144,9 +149,13 @@ export function materializeInstitutionServiceRolls(input) {
   const ambiguousDefinitionKeys = new Set();
   const mergedOpts = Object.assign({}, opts, {
     _tradeRoute: config._tradeRoute || '',
+    // A-11: the world law's water fact, for a row that names its inland alternative.
+    _waterAccess: worldLaw.portKind || '',
   });
   const filteredInstitutions =
     institutions.filter(worldLaw.allowsInstitution);
+  // F10 unit 4: the roster's defence facts, read once, for the descs that name walls. Draw-free.
+  const defence = defenseFactsOf({ institutions });
 
   for (const institution of filteredInstitutions) {
     const services = getServicesForInstitution(
@@ -233,6 +242,7 @@ export function materializeInstitutionServiceRolls(input) {
         const projected = projectAvailableService(
           service,
           String(institution.name || ''),
+          defence,
         );
         buckets[category].push(projected);
         materializedByIdentity.set(identityKey, [projected]);
@@ -247,6 +257,7 @@ export function materializeInstitutionServiceRolls(input) {
           const foodProjection = projectAvailableService(
             service,
             String(institution.name || ''),
+            defence,
           );
           buckets.food.push(foodProjection);
           const tracked = materializedByIdentity.get(identityKey);

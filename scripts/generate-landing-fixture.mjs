@@ -295,8 +295,16 @@ export function advanceTimelineFor(news, townId = 't', limit = ADVANCE_ENTRIES) 
  * MacCarthys' favour is now known to a third party and the debt has changed
  * hands, so the "his own man" clause, no longer derived, gives way to that.
  * Every clause below is traceable to a field emitted in the same run.
+ *
+ * ⚠ RE-GROUNDED 2026-11-04 (the rung-1 landing, LANDING-2; an OWNER VETO POINT). The rung-1 window
+ * re-scaled the town (population 412 -> 82) and re-dealt its draws: the conflict's second party is now
+ * the Religious Authorities (the same conscription of guild apprentices), the travelers' inn receipt gave
+ * way to the blacksmith, the mayor's goal is to demonstrate governance value without the economic
+ * conditions the place lacks, and the pressure sentence is Hector Gallagher's unreported mistake that
+ * Inghean MacCarthy is bound to report. The inn clause and the old favour are DELETED; each of the four
+ * sentences below is traceable to the receipts, the hooks and the pressure sentence of the same run.
  */
-const STOCK_NARRATION = 'The road made Cnocby by a coin’s width, three chances of it against two of nothing, and the mountain stands that raised the travelers’ inn are being cleared faster than they grow back. The Elder Council wants the guilds’ apprentices for soldiers and the Craft Guilds mean to keep them, and a neutral name is being pressed to choose a side before the council next sits. The mayor still means to mend the structure while the weather holds. He and Inghean MacCarthy are bound by an old favour neither will name, and a third party has just learned what it was. The debt has changed hands.';
+const STOCK_NARRATION = 'The road made Cnocby by a coin’s width, three chances of it against two of nothing, and the mountain stands are being cleared faster than they grow back. The Elder Council and the Religious Authorities are at odds over conscripting the guilds’ apprentices, and a neutral name is being pressed to choose a side before the council next sits. The mayor, Odhrán MacCarthy, means to prove the office is worth having by means that do not wait on money the town does not have. Hector Gallagher has made a mistake that Inghean MacCarthy is bound to report, and Inghean MacCarthy has not reported it.';
 
 /**
  * The frozen fixture object for one seed — every selection COMPUTED from engine

@@ -290,10 +290,11 @@ export function FaithCreedLines({ desk, settlement }) {
  * generated settlement is deity-free (the gods are the DM's custom content). LANE FAITH
  * (2026-11-03): the tab's standing message above this position is now the FAITH LINE
  * (faithPanelModel's `line`, from the ONE FAITH READING), which describes the church that
- * exists. DS-FTH-2's one reachable pool (PRIVATE DOSSIER) denies an organised faith in every
- * variant, which beside a church is the contradiction and beside nothing restates the line,
- * so on a patron-less town `trimFaithDeskToPanel` stands the lens down and this position
- * carries the line alone. No variant names a creed or a god.
+ * exists. DS-FTH-2's one reachable pool (PRIVATE DOSSIER) reads the same reading (lane
+ * FAITH-POOLS, 2026-11-04: the houses, the senior cleric, the religious faction, the dial),
+ * so each variant restates a fact the line prints, and on a patron-less town
+ * `trimFaithDeskToPanel` stands the lens down and this position carries the line alone
+ * (X-50, every fact once). No variant names a creed or a god.
  *
  * `lead` is the faith line itself, which opens this paragraph: the print desk puts the same
  * line at the same position (printProse.js :: buildPrintProse), so the screen and the PDF

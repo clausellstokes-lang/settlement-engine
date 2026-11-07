@@ -16,7 +16,9 @@ describe('faithMass', () => {
     for (let i = 1; i < order.length; i++) expect(order[i]).toBeGreaterThan(order[i - 1]);
   });
   it('falls back to population band when tier is absent, else a neutral default', () => {
-    expect(faithMass({ population: 50 })).toBe(TIER_MASS.thorp);       // popToTier(50) = thorp
+    // X-46 car 1 (433289899): the stamp cuts thorp below TIER_STAMP_CUTS.hamlet (25); 50 stamps hamlet now.
+    expect(faithMass({ population: 20 })).toBe(TIER_MASS.thorp);       // popToTier(20) = thorp
+    expect(faithMass({ population: 50 })).toBe(TIER_MASS.hamlet);      // popToTier(50) = hamlet
     expect(faithMass({ population: 12000 })).toBe(TIER_MASS.city);     // popToTier(12000) = city
     expect(faithMass({})).toBe(TIER_MASS.village);                     // unknown ⇒ neutral middle
   });

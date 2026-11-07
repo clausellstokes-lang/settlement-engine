@@ -31,10 +31,11 @@ beforeAll(async () => {
 }, 120_000);
 
 describe('coherenceBattery — the seven instruments behind one call', () => {
-  it('names the eight checks it runs, one per instrument plus the rendered hook reading', () => {
+  it('names the checks it runs: one per instrument, the rendered hook reading, and the reader\'s three two-tab checks', () => {
     expect([...BATTERY_CHECKS]).toEqual([
       'defense-words', 'faith-denial', 'food-words', 'hook-truth-record', 'hook-truth-page',
       'magic-words', 'seat-holder', 'tier-noun',
+      'grade-vs-food', 'magic-absent-prose', 'crime-denied-and-listed',
     ]);
   });
 

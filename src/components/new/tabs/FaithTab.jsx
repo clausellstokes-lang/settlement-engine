@@ -185,8 +185,9 @@ export default function FaithTab({ settlement, saveId = null, playerView = false
               there is nothing; the god's and the church's names are the DM's, said once. It
               replaced the old standing message, which denied the church that generation wrote
               on every settlement (root-cause failure 2). The print desk puts the same line at
-              the same position. DS-FTH-2's PRIVATE DOSSIER lens denies an organised faith or
-              restates the line, so `trimFaithDeskToPanel` stands it down here (F2/F4). ── */}
+              the same position. DS-FTH-2's PRIVATE DOSSIER lens reads the same reading (lane
+              FAITH-POOLS) and so restates a fact the line prints, so `trimFaithDeskToPanel`
+              stands it down here (F2/F4; X-50, every fact once). ── */}
           <FaithTeaserLines desk={panelDesk} settlement={settlement} lead={[(model.line || []).join(' ')]} />
         </div>
       )}

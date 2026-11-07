@@ -17,7 +17,7 @@ import { random as _rng } from '../kernel/rngContext.js';
 
 import { genArrivalDetail } from './narrativeGenerator.js';
 import { AGE_BY_TIER, HISTORICAL_EVENTS_DATA, EVENT_TYPE_NAMES, historyDescription } from '../data/historyData.js';
-import { resolveGenerationWorldLaw } from './generationContext.js';
+import { resolveGenerationWorldLaw } from './generationContext.js'; import { defenseFactsOf } from '../domain/defense/defenseFacts.js'; import { crimeSignalOf } from '../domain/crimeSignal.js'; // R6 (and F4 unit 3b): one line, so no cited line moves
 import {
   STRESS_TO_TENSION,
   TIMELINE_CATEGORY_TYPES,
@@ -333,6 +333,11 @@ const buildHistoricalEvent = (
   const relFaction =
     factions.find(f => f.faction?.toLowerCase().includes('religious') || f.faction?.toLowerCase().includes('church'))
       ?.faction || null;
+  // R6 (soak 1000 rung 1, kind 4): with no military faction, the enforcing party is the force
+  // the place's record holds, in safetyProfile.js's own words (its `lawRef`), never a garrison
+  // the place lacks.
+  const facts = defenseFactsOf({ institutions });
+  const forceParty = facts.hasGarrison ? 'The garrison' : facts.hasWatch ? 'The watch' : facts.hasMilitia ? 'The militia' : 'Local enforcement';
 
   // Stress → tension type mapping (hoisted to module scope + exported so the
   // stress-registration walker can assert every target resolves to a real
@@ -451,6 +456,15 @@ const buildHistoricalEvent = (
       if (guildTmpl) candidate = guildTmpl;
     }
     pool.splice(pool.indexOf(candidate), 1);
+    // ⛔ NO CRIME WAVE WITHOUT CRIME (lane RUNG1B-F4 unit 3b, 2026-11-04;
+    // docs/F4_CRIME_SIGNAL_2026-11-04.md). The fill drew `crime_wave` in places with no criminal
+    // faction and no criminal house, and its "the criminal network" and "A guard captain is on
+    // the payroll of the criminal network" printed beside "No criminal infrastructure" (soak1k-134,
+    // -830, -842: three of A-06's 16). Where the crime signal's one home reads none, the drawn
+    // template is set aside and the loop draws again, so only those places' streams move. The
+    // roster here is the pre-trim one; the density law's trim only removes a criminal faction,
+    // never adds one, so "none here" is "none on the final record".
+    if (candidate.type === 'crime_wave' && !crimeSignalOf({ seats: factions, estate: institutions }).present) continue;
     selected.push({ ...candidate });
     usedTypes.add(candidate.type);
   }
@@ -463,7 +477,7 @@ const buildHistoricalEvent = (
       .replace(/Wealthy merchants/g, merchantRef)
       .replace(/Legitimate heir/g, govFaction)
       .replace(/Corrupt officials/g, govFaction)
-      .replace(/Official guards/g, milFaction || 'The garrison')
+      .replace(/Official guards/g, milFaction || forceParty)
       .replace(/Criminal organisations/g, crimeFaction || 'the criminal network')
       .replace(/Orthodox believers/g, relFaction || 'the orthodox clergy')
       .replace(/Power behind throne/g, altFaction !== govFaction ? altFaction : merchantRef);
@@ -695,7 +709,7 @@ const generateRelationshipEvent = (age, tier, config, context, worldLaw) => {
     resourceEvents.push({
       name: 'The Great Construction',
       description:
-        "A period of ambitious stone construction transformed the settlement's character. Walls, civic buildings, or a cathedral raised from local quarry stone. The quarry workers became a political force.",
+        defenseFactsOf({ institutions: context?._institutions || [] }).hasWalls ? "A period of ambitious stone construction transformed the settlement's character. Walls, civic buildings, or a cathedral raised from local quarry stone. The quarry workers became a political force." : "A period of ambitious stone construction transformed the settlement's character. Civic buildings or a cathedral raised from local quarry stone. The quarry workers became a political force.", // F1: walls only where they stand
       lastingEffects: [
         "Quarrymen's guild retains unusual civic influence",
         "Architectural legacy of the construction period defines the settlement's visual character",

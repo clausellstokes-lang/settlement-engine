@@ -7,10 +7,14 @@
  * composed here once and rendered by one screen component (components/TonightSheet.jsx), one
  * print chapter (pdf/sections/TonightAtTheTable.jsx) and the Foundry journal's page.
  *
- * The page opens on the ACTIVE CRISIS, then gives:
- *   - the three people to voice: the seat-holder (the ruling chain's named NPC, on
- *     derivePowerStrata's ruler), the NPC whose secret was drawn from the crisis's own pool,
- *     and the senior cleric;
+ * The page opens on the ACTIVE CRISIS, naming its person from the crisis record's cast
+ * (docs/DESIGN_CRISIS_TAB.md: the instigator for a social or engineered kind, the one who bears
+ * the brunt for a natural or external one; the worst crisis first, a second crisis's person only
+ * when different), then gives:
+ *   - the three people to voice: the cast's first, in the fixed order instigator or brunt, lever,
+ *     exploiter or defender; where the cast is short, the seat-holder (the ruling chain's named
+ *     NPC, on derivePowerStrata's ruler), the NPC whose secret was drawn from the crisis's own
+ *     pool, and the senior cleric;
  *   - the two facts the players test first: food (the band and the stores, from the one food
  *     record) and defence (defenseFactsOf);
  *   - the hooks, as the record holds them, highest priority first.
@@ -28,6 +32,7 @@ import { defenseFactsOf } from '../defense/defenseFacts.js';
 import { institutionDisplayName } from '../display/institutionDisplayName.js';
 import { FOOD_SECURITY_BANDS } from '../../data/bandLadders.js';
 import { STRESS_INSTITUTION_EFFECTS } from '../../data/stressInstitutionEffects.js';
+import { CRISIS_ROLE_LABEL, effectiveCastOf } from '../crisis/crisisCast.js';
 
 /**
  * THE ONE COPY CONSTANT for the sheet, on every surface that prints it.
@@ -45,6 +50,7 @@ export const TONIGHT_COPY = Object.freeze({
   secret: 'Secret',
   cleric: 'Senior cleric',
   wants: 'Wants to',
+  wantsSame: 'Wants the same as',
   open: 'Open Tonight',
   close: 'Close Tonight',
 });
@@ -56,14 +62,19 @@ const HOOK_COUNT = 3;
  * @typedef {Object} TonightCrisis
  * @property {string} type          the crisis's own label (e.g. 'Under Siege'), every active one joined
  * @property {string} place         the settlement's name
- * @property {string | null} person the crisis's named person; null until the roster records one
+ * @property {string | null} person the worst crisis's named person (the cast's); null where no cast names one
+ * @property {Array<{ name: string, role: string, roleLabel: string, crisis: string }>} persons every crisis's person, worst first, each once
  * @property {string} line          the one line the sheet opens on
  *
  * @typedef {Object} TonightPerson
  * @property {string} name
  * @property {string} role
- * @property {'seat'|'secret'|'cleric'} why
+ * @property {'seat'|'secret'|'cleric'|'cast'} why
+ * @property {string=} castLabel    the cast's role label, for a person drawn from the crisis cast
  * @property {string} line          the record's sentence for this person: the crisis secret, or what they want
+ * @property {string=} sameAs       set when an earlier person on the sheet wants the same: that person's
+ *                                  name. The want prints once, on the first; this one reads
+ *                                  "Wants the same as {sameAs}." (X-50, F2 REPEAT-ONCE)
  * @property {string} sourcePath
  *
  * @typedef {Object} TonightFact
@@ -86,6 +97,7 @@ const HOOK_COUNT = 3;
 
 /**
  * @typedef {Object} TonightNpc
+ * @property {unknown} [id]
  * @property {unknown} [name]
  * @property {unknown} [role]
  * @property {unknown} [title]
@@ -98,6 +110,8 @@ const HOOK_COUNT = 3;
  * @typedef {Object} TonightStress
  * @property {unknown} [type]
  * @property {unknown} [label]
+ * @property {import('../crisis/crisisCast.js').CrisisCast} [cast]
+ * @property {Record<string, { value?: unknown }>} [_userEdits]
  *
  * @typedef {Object} TonightSource
  * @property {unknown} [name]
@@ -131,9 +145,39 @@ function stressesOf(source) {
   return list.filter((s) => !!s && typeof s === 'object');
 }
 
+/** The roles whose holder is the crisis's person on the opening line, by nature, in preference order. */
+const LINE_ROLES = Object.freeze(/** @type {Record<string, import('../crisis/crisisCast.js').CrisisRole[]>} */ ({
+  social: ['instigator', 'target'],
+  engineered: ['instigator', 'target'],
+  natural: ['brunt', 'lever'],
+  external: ['brunt', 'defender', 'face', 'treater'],
+}));
+
+/** The three people to voice from the cast, slot by slot (the design's fixed order). */
+const VOICE_SLOTS = Object.freeze(/** @type {import('../crisis/crisisCast.js').CrisisRole[][]} */ ([
+  ['instigator', 'brunt'],
+  ['lever'],
+  ['exploiter', 'defender'],
+]));
+
 /**
- * The crisis in one line: its label (every active one) and the settlement's name. The person's
- * slot is null until the roster records the crisis's named person.
+ * Every active crisis's cast as the page shows it (the DM's word where the DM spoke), worst
+ * first: the cast's own casting order, which is the engine's severity ranking.
+ * @param {TonightSource} source
+ * @returns {Array<{ label: string, cast: import('../crisis/crisisCast.js').CrisisCast }>}
+ */
+function castsOf(source) {
+  return stressesOf(source)
+    .map((s, at) => ({ s, at, cast: effectiveCastOf(/** @type {Parameters<typeof effectiveCastOf>[0]} */ (source), s).cast }))
+    .filter((x) => !!x.cast)
+    .sort((a, b) => ((a.s.cast?.rank || 0) - (b.s.cast?.rank || 0)) || (a.at - b.at))
+    .map((x) => ({ label: clean(x.s.label) || clean(x.s.type), cast: /** @type {import('../crisis/crisisCast.js').CrisisCast} */ (x.cast) }));
+}
+
+/**
+ * The crisis in one line: its label (every active one), the settlement's name, and each
+ * crisis's person from its cast (the worst crisis's first; a later crisis's only when it is a
+ * different person). A cast that names no person adds no name.
  * @param {TonightSource} source @returns {TonightCrisis | null}
  */
 function crisisOf(source) {
@@ -141,10 +185,19 @@ function crisisOf(source) {
   if (labels.length === 0) return null;
   const type = labels.join(' and ');
   const place = clean(source.name);
-  /** @type {string | null} */
-  const person = null;
-  const line = place ? `${place}: ${type}` : type;
-  return { type, place, person, line };
+  /** @type {Array<{ name: string, role: string, roleLabel: string, crisis: string }>} */
+  const persons = [];
+  for (const { label, cast } of castsOf(source)) {
+    for (const role of LINE_ROLES[cast.nature] || []) {
+      const row = cast.roles.find((r) => r.role === role && r.kind === 'npc' && clean(r.name));
+      if (!row) continue;
+      if (!persons.some((p) => p.name === clean(row.name))) persons.push({ name: clean(row.name), role, roleLabel: CRISIS_ROLE_LABEL[role], crisis: label });
+      break;
+    }
+  }
+  const head = place ? `${place}: ${type}` : type;
+  const line = persons.length ? `${head}. ${persons.map((p) => `${p.name} (${p.roleLabel})`).join('; ')}.` : head;
+  return { type, place, person: persons[0]?.name || null, persons, line };
 }
 
 /** @param {TonightNpc} npc @returns {number} */
@@ -199,8 +252,8 @@ function peopleOf(source) {
     .sort((a, b) => (powerOf(b.npc) - powerOf(a.npc)) || (a.index - b.index));
   /** @type {TonightPerson[]} */
   const out = [];
-  /** @param {{ npc: TonightNpc, index: number }} row @param {'seat'|'secret'|'cleric'} why @param {string} line */
-  const add = (row, why, line) => {
+  /** @param {{ npc: TonightNpc, index: number }} row @param {'seat'|'secret'|'cleric'|'cast'} why @param {string} line @param {string} [castLabel] */
+  const add = (row, why, line, castLabel) => {
     const name = clean(row.npc.name);
     const at = out.findIndex((p) => p.name === name);
     if (at >= 0) {
@@ -208,8 +261,23 @@ function peopleOf(source) {
       if (why === 'secret') out[at] = { ...out[at], line };
       return;
     }
-    out.push({ name, role: clean(row.npc.role || row.npc.title), why, line, sourcePath: `npcs[${row.index}]` });
+    if (out.length >= VOICE_SLOTS.length) return; // three people; the fallbacks only where the cast is short
+    out.push({ name, role: clean(row.npc.role || row.npc.title), why, ...(castLabel ? { castLabel } : {}), line, sourcePath: `npcs[${row.index}]` });
   };
+
+  // THE CAST FIRST (docs/DESIGN_CRISIS_TAB.md): slot by slot, the worst crisis's holder first.
+  const casts = castsOf(source);
+  for (const slot of VOICE_SLOTS) {
+    let filled = false;
+    for (const { cast } of casts) {
+      for (const role of slot) {
+        const row = cast.roles.find((r) => r.role === role && r.kind === 'npc');
+        const hit = row ? npcs.find(({ npc }) => (clean(/** @type {{ id?: unknown }} */ (npc).id) || clean(npc.name)) === row.id) : undefined;
+        if (hit && !out.some((p) => p.name === clean(hit.npc.name))) { add(hit, 'cast', wantOf(hit.npc), CRISIS_ROLE_LABEL[role]); filled = true; break; }
+      }
+      if (filled) break;
+    }
+  }
 
   const seatName = rulingChainOf(/** @type {Parameters<typeof rulingChainOf>[0]} */ (source)).npc?.name || '';
   const seat = seatName ? npcs.find(({ npc }) => clean(npc.name) === seatName) : undefined;
@@ -223,7 +291,24 @@ function peopleOf(source) {
 
   const cleric = npcs.find(({ npc }) => npc.category === 'religious' && !out.some((p) => p.name === clean(npc.name)));
   if (cleric) add(cleric, 'cleric', wantOf(cleric.npc));
-  return out;
+  return wantsOnce(out);
+}
+
+/**
+ * ONE WANT, ONE HOME (X-50, F2 REPEAT-ONCE): two people on the sheet can carry the same want
+ * (two NPCs given one structural goal, npcStructure.js). The first prints it; a later one names
+ * the first instead of repeating the sentence. A secret line is never folded.
+ * @param {TonightPerson[]} people @returns {TonightPerson[]}
+ */
+function wantsOnce(people) {
+  /** @type {Map<string, string>} */
+  const firstBy = new Map();
+  return people.map((p) => {
+    if (p.why === 'secret' || !p.line) return p;
+    const first = firstBy.get(p.line);
+    if (first === undefined) { firstBy.set(p.line, p.name); return p; }
+    return { ...p, sameAs: first };
+  });
 }
 
 /**

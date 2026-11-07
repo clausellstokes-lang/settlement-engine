@@ -201,13 +201,22 @@ export function variantIsAudible(variant, audience) {
  * nothing: the words are already in the corpus, and the contract test refuses drift
  * between this constant and what the corpus actually spells.
  *
+ * ⭐ `walls` IS A FACT DIMENSION, NOT A DEMOTED STATE KEY (F10 WALLS-WORD, rung 1C,
+ * 2026-11-04). A variant that prints the place's own walls ("the walls have settled the
+ * argument") carries `walls`; its wall-free twin carries `no walls`. Every desk answers it at
+ * its entry from the one defence reader (`defense/defenseFacts.js :: wallsAnswered`), so a
+ * pool that names walls is unreadable to a caller who has not asked whether walls stand —
+ * the same fail-closed law, aimed at the defence-words class.
+ *
  * @enforced-by tests/data/dossierStateProseProjection.contract.test.js
+ * @enforced-by tests/domain/wallsWordDossierProse.test.js
  * @type {Readonly<Record<string, ReadonlyArray<string>>>}
  */
 export const STATE_MARK_DIMENSIONS = Object.freeze({
   severity: Object.freeze(['minor', 'major', 'catastrophic']),
   deficit: Object.freeze(['deficit', 'no deficit']),
   anchor: Object.freeze(['anchored', 'not anchored']),
+  walls: Object.freeze(['walls', 'no walls']),
 });
 
 /**
@@ -549,7 +558,12 @@ const GENERIC_NOUN = /(^|[^\p{L}\p{N}_])(The|the|This|this) town(['’]s)?(?=[^\
  *
  * Matched case-insensitively on word boundaries; a reference inside a kept span is left as
  * written by `speakTierNoun` and is not a finding for `tierNounFindings`.
- * @type {ReadonlyArray<Readonly<{phrase: string, why: string}>>}
+ *
+ * A LICENSED entry carries `tiers`: it is kept only on those tiers and counts everywhere else
+ * (chair ruling 4, TIER-NOUN-POOLS: "the lower town" is a district of a city, and a village has
+ * none). Both readers pass the tier, so the licence cannot drift between them; a reader that
+ * knows no tier keeps only the unlicensed entries.
+ * @type {ReadonlyArray<Readonly<{phrase: string, why: string, tiers?: ReadonlyArray<string>}>>}
  */
 export const TIER_NOUN_KEPT = Object.freeze([
   Object.freeze({ phrase: 'a larger town', why: 'comparison: general DS corpus, "what a larger town does with buildings, this one does with acquaintance"' }),
@@ -569,17 +583,23 @@ export const TIER_NOUN_KEPT = Object.freeze([
   Object.freeze({ phrase: 'through town', why: 'the idiom "the way through town" carries no determiner and no tier (general DS corpus)' }),
   Object.freeze({ phrase: 'in town', why: 'the idiom "in town" (present locally) carries no determiner and no tier' }),
   Object.freeze({ phrase: 'town crier', why: 'an office title (Herald/Town Crier), not the place: the roster names it at every size' }),
+  Object.freeze({ phrase: 'lower town', tiers: Object.freeze(['city', 'metropolis']), why: 'a district of a city (the lower town below the citadel), licensed for city and metropolis only: the mountain city layout in generators/spatialGenerator.js and the DS causal prose (chair ruling 4, TIER-NOUN-POOLS)' }),
+  Object.freeze({ phrase: 'trade station or river town', why: 'the steppe culture\'s settled hinge, not this place: data/cultureProfiles.js steppe builtForm, the same line on every steppe settlement; routed it would call a thorp the hinge of a mobile hinterland. Only this line: a bare "a river town" still moves (chair ruling 3, TIER-NOUN-POOLS)' }),
+  Object.freeze({ phrase: 'town granary', why: 'a catalogue row\'s proper name, named only in the town block (data/institutionalCatalog.js): the grain chain in data/resourceChains.js lists it by name at every tier (chair ruling 2, TIER-NOUN-POOLS)' }),
+  Object.freeze({ phrase: 'crown or town', why: 'the state or the municipality, not the tier: the customs-house variant in data/institutionDescVariants.js, whose canonical says "royal or municipal officials" (chair ruling 1, TIER-NOUN-POOLS)' }),
 ]);
 
 /**
  * The spans of `line` covered by a kept phrase, as [start, end) pairs.
  * @param {string} line
+ * @param {unknown} [tier] the settlement's tier; a licensed entry (`tiers`) is kept only on its tiers
  * @returns {Array<[number, number]>}
  */
-export function tierNounKeptSpans(line) {
+export function tierNounKeptSpans(line, tier) {
   /** @type {Array<[number, number]>} */
   const spans = [];
-  for (const { phrase } of TIER_NOUN_KEPT) {
+  for (const { phrase, tiers } of TIER_NOUN_KEPT) {
+    if (tiers && !(typeof tier === 'string' && tiers.includes(tier))) continue;
     const escaped = phrase.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/'/g, '[\'’]');
     const rx = new RegExp(`(?<=^|[^\\p{L}\\p{N}_])${escaped}(?=[^\\p{L}\\p{N}_]|$)`, 'giu');
     for (const m of line.matchAll(rx)) spans.push([m.index ?? 0, (m.index ?? 0) + m[0].length]);
@@ -626,7 +646,7 @@ export function speakTierNoun(line, tierNoun) {
   if (!noun || noun === 'town') return line;
   // A kept phrase is honoured by the definite rule too ('the town they started in' is the
   // founders' earlier home, not this place).
-  const keptBefore = tierNounKeptSpans(line);
+  const keptBefore = tierNounKeptSpans(line, noun);
   const definite = line.replace(
     GENERIC_NOUN,
     /**
@@ -643,7 +663,7 @@ export function speakTierNoun(line, tierNoun) {
   // sits inside a kept phrase (`TIER_NOUN_KEPT`). A HAND-DRIVEN SCAN, not `replace`: a refused
   // candidate ('the ones a town') must not consume the reference inside it ('a town'), so a
   // refusal steps past its own determiner only and the scan resumes there.
-  const kept = tierNounKeptSpans(definite);
+  const kept = tierNounKeptSpans(definite, noun);
   const scan = new RegExp(MODIFIED_NOUN.source, 'gu');
   let out = '';
   let copied = 0;

@@ -36,6 +36,16 @@
  * @property {string} synopsis    house-voiced pitch (claims ONLY what the probe proves)
  * @property {string} firstDecade one line on what its opening years show
  * @property {string[]} receipts  the claim, itemised — each backed by a probe assertion
+ * @property {ReadonlyArray<FoundingSeedLink>} [links] the synopsis's causal joins, each held by a record field
+ *   (LANDING-7 G3, ruling R-G3): a causal word may join two facts only on a row here, proven by the probe
+ */
+
+/**
+ * @typedef {Object} FoundingSeedLink
+ * @property {string} cause  the cause fact (a fact id the probe defines)
+ * @property {string} effect the effect fact
+ * @property {string} field  the record field that holds the link (a field id the probe defines)
+ * @property {string} words  the synopsis words that state the link, verbatim
  */
 
 /** @type {ReadonlyArray<FoundingSeed>} */
@@ -54,20 +64,45 @@ export const FOUNDING_SEEDS = Object.freeze([
   // chain live, Active Famine, a merchant oligarchy, the guild master formalising), so only the two incidental
   // specifics follow its world: the siege is ten years past (was seven), and a merchant oligarchy governs
   // (was a merchant council).
+  // RE-CHOSEN 2026-11-06 (LANDING-7 lane G, second seat, the chair's ruling R-G2; vetoable by the owner): crown-8826
+  // lost the coup at the X-46 train compose (1264a8152) and the mining chain at the x46-3 budget compose
+  // (90dc22f18), and no crown seed in 0..20000 forges the whole old story. The STORY is the ESSENTIALS: a brewing
+  // coup (a guild master formalising the independent authority) in a legitimacy crisis (fractured). crown-3 is
+  // the first seed in order forging both. Its two most story-bearing specifics replace the old seed's mining and
+  // siege: plague at its onset (a Quarantine Council on the roster), and a Thieves' Guild that outweighs the
+  // governing Guild Council and whose guild master is the one formalising. The governor follows the seed too:
+  // a guild council (was a merchant oligarchy). The harvests still read short (Pressured).
+  // RE-WRITTEN AS A CHAIN 2026-11-06 (LANDING-7 lane G, third seat, the chair's ruling R-G3; vetoable by the owner):
+  // the synopsis now runs in cause order, and every causal word in it stands on a `links` row: a record field
+  // naming one fact as the cause of another, proven by the probe. The record holds plague → short harvests (not
+  // the other way), plague and short harvests → the legitimacy crisis, the crisis → the thieves' guild above the
+  // council, and the crisis and that weight → the guild master's goal. It holds no link from the plague to the
+  // quarantine council, so the council stands beside the other facts with no causal word.
+  // `firstDecade` RE-WORDED 2026-11-06 (LANDING-7 lane H, the verifier's NOTE-5, the chair's ruling R-H3; vetoable by
+  // the owner): "a failing crown" named a governor crown-3 does not seat. The power the master formalises is the
+  // governing guild council's, whose title the streets no longer honour (the synopsis's own held fact).
   Object.freeze({
     id: 'the-contested-crown',
     title: 'The Crown That Will Not Hold',
-    seed: 'crown-8826',
+    seed: 'crown-3',
     archetype: 'besieged_holdout',
     settType: 'town',
     synopsis:
-      'A mining town raised on rich ore and poor harvests, ten years past a siege that broke more than its walls. Its merchant oligarchy holds a title the streets no longer honour; a guild master has begun, quietly, to write the authority the collapse handed the commercial wards into permanent ink. The coup here is not a rumour. It is a matter of paperwork.',
+      "A plague is taking hold in this town, and it has thinned the hands that work the fields, so the harvests come in short. A quarantine council sits among its factions. Between the sickness and the short harvests, the guild council holds a title the streets no longer honour, and the crisis has lifted the thieves' guild above it; that guild's master has begun, quietly, to write the authority the collapse handed it into permanent ink. The coup here is not a rumour. It is a matter of paperwork.",
     firstDecade:
-      'Opens in a legitimacy crisis: fractured governance, a catastrophic siege in living memory, and a guild master formalising the power a failing crown can no longer reclaim.',
+      "Opens in a legitimacy crisis: fractured governance, a plague at its onset, and the thieves' guild master formalising the power the guild council, its title no longer honoured in the streets, can no longer reclaim.",
     receipts: Object.freeze([
       "Its legitimacy reads 'Legitimacy Crisis', with governance fractured.",
-      'A catastrophic siege sits within the last fifteen years of its history.',
+      'Plague is at its onset, and a quarantine council sits among its factions.',
       'A ranking figure means to formalise the independent authority that governance failure created.',
+    ]),
+    links: Object.freeze([
+      Object.freeze({ cause: 'plague', effect: 'poor harvests', field: 'economicViability.issues[stress_consequence]', words: 'it has thinned the hands that work the fields, so the harvests come in short' }),
+      Object.freeze({ cause: 'plague', effect: 'title unhonoured', field: 'powerStructure.publicLegitimacy.breakdown.safety', words: 'Between the sickness and the short harvests, the guild council holds a title the streets no longer honour' }),
+      Object.freeze({ cause: 'poor harvests', effect: 'title unhonoured', field: 'powerStructure.publicLegitimacy.breakdown.food', words: 'Between the sickness and the short harvests, the guild council holds a title the streets no longer honour' }),
+      Object.freeze({ cause: 'title unhonoured', effect: 'thieves outweigh', field: 'factions[].rawPower→power × publicLegitimacy multipliers', words: "the crisis has lifted the thieves' guild above it" }),
+      Object.freeze({ cause: 'thieves outweigh', effect: 'master formalising', field: 'npcs[].structuralRank', words: "the thieves' guild above it; that guild's master" }),
+      Object.freeze({ cause: 'title unhonoured', effect: 'master formalising', field: 'npcs[].settlementCondition', words: 'the authority the collapse handed it' }),
     ]),
   }),
   Object.freeze({

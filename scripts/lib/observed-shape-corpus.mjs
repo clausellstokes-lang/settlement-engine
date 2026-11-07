@@ -872,6 +872,59 @@ export async function buildObservedCorpus({
     }
   }
 
+  // ── Producer 1d: the RUNG-1 WINDOW topology pass (schema 27). TOPOLOGY ONLY. ──
+  //
+  // ⭐ THE SAME LAW AS 1b AND 1c: these settlements enter `roots` and NOT `generated`, so
+  // producer 2's pulse, its saves, its steadings, the scalar stream and all four execution
+  // keys are byte-for-byte untouched.
+  //
+  // WHY IT EXISTS — TWO SHAPES THE WINDOW STOPPED OBSERVING, BOTH MEASURED AT 5dd0f323a
+  // against the schema-26 register frozen at 05897b88d (lane LANDING-2b, the chair's ruling 4
+  // of 2026-11-04):
+  //   · `facets` was observed ONLY as the institution catalog's `{ clandestine, subterranean }`
+  //     map, carried by ONE row — 'Underground network' (institutionalCatalog.js, D6 THE
+  //     UNDERWAYS). The X-46 density factor (car 3 U3 47829c070 and its rung-1 pins) scales
+  //     that row's chance, and at the tip NONE of the 28 corpus settlements rolls it (eight did
+  //     at 05897b88d), so the shape vanished and 29 frozen `… on facets` rows read as GONE
+  //     while every read still stands — the erasure guard's INSTRUMENT EROSION.
+  //   · `issues` fell from 49 rows to 22 (under MIN_ROWS 40): the window's generation lanes
+  //     re-dealt the pulse worlds so that no `pulseResult.settlementUpdates` settlement is short
+  //     any more (24 rows gone from that home), and `institution on issues` (pdf/lib/viewModel.js,
+  //     viewModelBodySlices.js) read as GONE again, as it did before schema 26's producer 1c.
+  // Ten seeds × the four configs, each with famine (the stimulus 1b/1c already use) and the
+  // catalog row FORCED through the shipped `_institutionToggles` `require` door (the
+  // user-authored toggle `resolveConfig.js` reads), bring `facets` back at 40 rows and `issues`
+  // to 78. MEASURED against the frozen register it creates NOTHING new; besides the 31 eroded
+  // rows it brings back, it clears five rows whose writer it now runs — `forbiddenResources on
+  // institutions` (the catalog row carries it), `_institutionToggles on config` ×2 and
+  // `forcedByToggle on institutions` (the toggle door itself) — and nothing else moves.
+  //
+  // ⛔ WHY ROOTS AND NOT A PULSE, AND WHY FORCED. The pulse is the blast radius (1b's law); and
+  // a natural roll over more seeds observes `facets` about once per twenty settlements, so the
+  // shape would need ~800 generations to clear MIN_ROWS. Forcing the one row through the
+  // product's own toggle door costs 40. Widen this pass only with the same before/after row
+  // reconciliation, and never through `generated`.
+  const WINDOW_TOPOLOGY_SEEDS = Object.freeze([
+    ...SEEDS, 'osr-e', 'osr-f', 'osr-g', 'osr-h', 'osr-i', 'osr-j',
+  ]);
+  const WINDOW_TOPOLOGY_FORCED = Object.freeze(['all::Criminal::Underground network']);
+  for (const config of CONFIGS) {
+    for (const seed of WINDOW_TOPOLOGY_SEEDS) {
+      roots.push({
+        name: 'settlement',
+        value: generateSettlementPipeline(
+          {
+            ...config,
+            stressTypes: ['famine'],
+            _institutionToggles: Object.fromEntries(WINDOW_TOPOLOGY_FORCED.map((key) => [key, { require: true }])),
+          },
+          null,
+          { seed, customContent: {} },
+        ),
+      });
+    }
+  }
+
   // ── Producer 2: the campaign world pulse over those REAL saves. ──
   const ids = generated.map((_, i) => `osr${String(i).padStart(3, '0')}`);
   const saves = generated.map((settlement, i) => ({
@@ -941,6 +994,73 @@ export async function buildObservedCorpus({
   });
   roots.push({ name: 'campaign', value: { ...campaign, worldState: undefined, wizardNews: undefined } });
   for (const s of curSaves) roots.push({ name: 'save', value: s });
+
+  // ── Producer 2b: the TIER-CHANGE coverage pulse (LANDING-9, the chair's corpus-coverage ruling
+  //    of 2026-11-06, the militia precedent). ROOTS ONLY, A BOUNDED VIEW. ──
+  //
+  // ⭐ THE SAME LAW AS 1b/1c/1d, CARRIED TO A PULSE: this pass runs ITS OWN one-save campaign and
+  // pushes nothing into `generated`, so producer 2's pulse, its saves, its steadings, the scalar
+  // stream and all four execution keys are byte-for-byte untouched.
+  //
+  // WHY IT EXISTS. Until LANDING-7 lane B's R-B1 (2168ffdba: the promotion window reads the next
+  // tier's STAMP CUT, `TIER_STAMP_CUTS`, not its roll-band minimum) producer 2's pulse minted a
+  // town -> city tier candidate for osr001 and osr013 (towns of 2,168) from interval 5 on, and
+  // those `pulseResult.candidates[]` rows were the corpus's only observation of `tierChange` and of
+  // `fromTier`/`toTier`/`direction` on `proposalPayload`. Lit (demographics), the window is the
+  // whole cut (2,250), no corpus population moves within the twelve intervals, so no save crosses
+  // and seven reader identities read as findings while every reader still stands — instrument
+  // erosion, not a defect. MEASURED: the stamp law itself still promotes; a town GENERATED inside
+  // the town/city overlap (2,250-2,500) and pulsed under these lit rules mints its candidate.
+  //
+  // THE SEED. Searched over `osr-tier-0..39` on the four CONFIGS: towns at or above the city cut
+  // under configs 0 and 3 (osr-tier-14 2,414, -19 2,477, -25 2,394, -28 2,282) mint at interval 5
+  // (osr-tier-25 under config 0 never does, under config 3 at 12); villages over the town cut
+  // (configs 2: 368-397) never do within twelve. osr-tier-14 under CONFIGS[0] is taken.
+  //
+  // ⛔ WHY A BOUNDED VIEW AND NOT THE WHOLE PULSE RESULT. The pulse is the blast radius (1b's
+  // law): a second campaign's full results would add rows to every pulse shape. Only the tier
+  // candidates enter, under their real relative path (the F4 bounded-view precedent below), so
+  // the shapes they touch are the ones the erosion took. Widen this pass only with the same
+  // before/after row reconciliation, and never through `generated`.
+  const TIER_COVERAGE_SEED = 'osr-tier-14';
+  {
+    const tierSettlement = generateSettlementPipeline(CONFIGS[0], null, { seed: TIER_COVERAGE_SEED, customContent: {} });
+    const tierId = 'osr-tier';
+    const tierPack = makeGridPack({ cols: 10, rows: 8 });
+    const [tierPlace] = placeSettlements(tierPack, 1);
+    let tierCampaign = {
+      id: 'observed-shape-corpus-tier', name: 'Observed Shape Corpus (tier coverage)', settlementIds: [tierId],
+      worldState: {
+        rngSeed: 'observed-shape-corpus', tick: 1, simulationRules,
+        calendar: { elapsedWeeks: 20, year: 1 },
+        spatialCanonVersion: 1,
+        spatialDigest: buildSpatialDigest({ pack: tierPack, placements: [{ id: tierId, cellId: tierPlace.cellId }] }),
+        relationshipStates: {},
+        stressors: [],
+      },
+      regionalGraph: ensureRegionalGraph({ edges: [], channels: [] }),
+      wizardNews: { currentTick: 1, entries: [] },
+    };
+    let tierSaves = [{
+      id: tierId, name: 'Observed tier', phase: 'canon', settlement: tierSettlement,
+      campaignState: { phase: 'canon', eventLog: [], locks: {} },
+    }];
+    let tierCandidates = 0;
+    for (let i = 0; i < intervals; i += 1) {
+      const out = simulateCampaignWorldPulse({
+        campaign: tierCampaign, saves: tierSaves, interval: 'one_month', commit: true, now: '2026-01-01T00:00:00.000Z',
+      });
+      if (out?.worldState) tierCampaign = { ...tierCampaign, worldState: out.worldState };
+      if (out?.wizardNews) tierCampaign = { ...tierCampaign, wizardNews: out.wizardNews };
+      if (Array.isArray(out?.saves) && out.saves.length) tierSaves = out.saves;
+      const candidates = (out?.candidates || []).filter((c) => c?.tierChange);
+      tierCandidates += candidates.length;
+      if (candidates.length) roots.push({ name: 'pulseResult', value: { candidates } });
+    }
+    if (!tierCandidates) {
+      throw new Error(`observed-shape corpus: the tier-coverage seed ${TIER_COVERAGE_SEED} minted no tier candidate in ${intervals} intervals — re-search the seed (producer 2b's header)`);
+    }
+  }
 
   // ── AO family 1: one successful post-pulse authoritative canon event. ──
   const canonEventResult = prepareAuthoritativeCanonEvent({

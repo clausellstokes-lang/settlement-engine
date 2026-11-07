@@ -37,7 +37,8 @@ const FRAMES = Object.freeze({
 /** Words that claim a source, for reading the culture's own sentence (and the dossier text). */
 export const SOURCE_WORDS = Object.freeze({
   grain: /\b(?:grain|grains|breads?|barley|rye|wheat|millet|rice|porridge|pottage)\b/i,
-  livestock: /\b(?:meat|milk|dairy|cheese|herds?|livestock|mutton|beef|pork)\b/i,
+  // "Game meat" is the hunt's, not the herds' (F3 FOOD-WORDS unit 2a): its meat names no livestock.
+  livestock: /\b(?:(?<!\bgame )meat|milk|dairy|cheese|herds?|livestock|mutton|beef|pork)\b/i,
   fish: /\b(?:fish|fishing|seafood|catch|shellfish)\b/i,
   mill: /\bmill(?:'s)?\b/i,
   game: /\b(?:game|venison|hunters?(?:')?)\b/i,
@@ -91,6 +92,22 @@ export function composeFoodwaysLine(input) {
   const own = frame.replace('{A}', phrases[0] || '').replace('{B}', phrases[1] || '').replace('{C}', phrases[2] || '');
   const line = capital(own);
   return flavour ? `${line} ${flavour}` : line;
+}
+
+/**
+ * THE ONE READER of the foodways line (FOOD-4, lane food-exports, 2026-11-04). The line is
+ * composed once, at generation (foodGenerator.js :: generateFoodSecurity → composeFoodwaysLine),
+ * and carried on the food record; every surface that prints foodways reads it here — the
+ * Economy tab, the PDF's Identity & Daily Life chapter, the Foundry journal's Identity & Daily
+ * Life page — and none composes its own. A save older than the record yields null (the PDF then
+ * prints the culture's authored line, lane WIRING-2's fallback).
+ * @param {unknown} settlement
+ * @returns {string | null}
+ */
+export function foodwaysLineOf(settlement) {
+  const s = /** @type {{ economicState?: { foodSecurity?: { foodRecord?: { foodwaysLine?: unknown } | null } | null } | null } | null | undefined} */ (settlement);
+  const line = s?.economicState?.foodSecurity?.foodRecord?.foodwaysLine;
+  return typeof line === 'string' && line.trim() ? line.trim() : null;
 }
 
 export default composeFoodwaysLine;

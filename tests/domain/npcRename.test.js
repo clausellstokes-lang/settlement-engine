@@ -269,6 +269,15 @@ describe('NPC rename — the declared surface set', () => {
     const OLD = 'Aldis Vane';
     /** One character record, built fresh at each home — a RELOADED save has no aliases. */
     const npcRecord = () => ({ id: 'npc.1', name: OLD, role: 'Guildmaster' });
+    const castFixture = () => ({
+      nature: 'natural',
+      roles: [
+        { role: 'lever', kind: 'npc', id: 'npc.1', name: OLD, reason: 'runs the granary', temporary: false },
+        { role: 'brunt', kind: 'faction', id: 'Harbour Compact', name: 'Harbour Compact', reason: 'the commons', temporary: false },
+      ],
+      stakes: [{ factionId: 'Harbour Compact', stake: 'loses', reason: 'loses' }],
+      levers: [{ institution: 'Town granary', holderId: 'npc.1', holderName: OLD }],
+    });
     const settlement = {
       name: 'Bramblewatch',
       npcs: [npcRecord()],
@@ -280,23 +289,33 @@ describe('NPC rename — the declared surface set', () => {
       interSettlementRelationships: [
         { partnerSettlement: 'Elsewhere', npcName: OLD, partnerName: 'Odo Wick' },
       ],
+      // RUNG1B-F7: the crisis cast names the person on an NPC-kind row and as a lever's
+      // holder. The object home is at `stress`, the array home at `stressors`; the mirror
+      // holds the other two.
+      stress: { type: 'famine', cast: castFixture() },
+      stressors: [{ type: 'famine', cast: castFixture() }],
     };
+    const mirror = { stress: [{ type: 'famine', cast: castFixture() }], stressors: { type: 'famine', cast: castFixture() } };
+    const fixtures = [settlement, mirror];
+    const anyHits = (surface, name) => fixtures.some(f => exactHits(valuesAtPath(f, surface.path), name) > 0);
     // Anti-vacuity: prove the fixture really holds every surface BEFORE renaming.
     const unheld = NPC_RENAME_SURFACES
-      .filter(surface => exactHits(valuesAtPath(settlement, surface.path), OLD) === 0)
+      .filter(surface => !anyHits(surface, OLD))
       .map(surface => surface.path);
     expect(unheld, `totality fixture does not exercise: ${unheld.join(', ')}`).toEqual([]);
 
     const result = applyNpcRenameToSettlement(settlement, OLD, NEW_NAME);
+    const mirrorResult = applyNpcRenameToSettlement(mirror, OLD, NEW_NAME);
     expect(result.changed).toBe(true);
-    expect([...result.touched].sort()).toEqual([...NPC_RENAME_SURFACES.map(s => s.path)].sort());
+    expect(mirrorResult.changed).toBe(true);
+    expect([...new Set([...result.touched, ...mirrorResult.touched])].sort()).toEqual([...NPC_RENAME_SURFACES.map(s => s.path)].sort());
 
     const stale = NPC_RENAME_SURFACES
-      .filter(surface => exactHits(valuesAtPath(settlement, surface.path), OLD) > 0)
+      .filter(surface => anyHits(surface, OLD))
       .map(surface => surface.path);
     expect(stale, `surfaces STILL holding the old name: ${stale.join(', ')}`).toEqual([]);
     const lost = NPC_RENAME_SURFACES
-      .filter(surface => exactHits(valuesAtPath(settlement, surface.path), NEW_NAME) === 0)
+      .filter(surface => !anyHits(surface, NEW_NAME))
       .map(surface => surface.path);
     expect(lost, `surfaces that did not gain the new name: ${lost.join(', ')}`).toEqual([]);
     // The OTHER end of each edge, and the neighbour's own person, stay put.

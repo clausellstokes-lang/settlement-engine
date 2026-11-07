@@ -18,6 +18,8 @@ import {customDeps} from '../lib/dependencyEngine.js';
 // unregistered — its slug fallback matches — this keeps the enumerated path live.)
 import '../lib/prebuiltResourceChains.js';
 import { compareCodepoint } from '../domain/deterministicSort.js';
+import { goodsHeldByFoodRecord } from './economy/foodBalance.js';
+import { ownFoodGoodsHeldByFoodRecord } from '../domain/foodSurplus.js';
 import {institutionalCatalog, catalogIdForName} from '../data/institutionalCatalog.js';
 import {
   isMaterializedCustomContent,
@@ -25,6 +27,22 @@ import {
 } from '../domain/content/customContentSemanticAuthority.js';
 import { druidicFaithRole } from '../domain/arcaneInstitutionIdentity.js';
 import { resourceKeyForLabel } from '../domain/resourceSemantics.js';
+import { defenseFactsOf } from '../domain/defense/defenseFacts.js';
+
+/**
+ * A chain's printed label (F1, rung 1B): a row that names a house the place may lack declares
+ * `labelNeeds` (a `defenseFactsOf` flag) and `labelOtherwise`, and takes the second where the
+ * record denies the first, so "Standing Garrison" never stands over a town watch alone.
+ * @param {{ label?: string, labelsByResource?: Record<string, string>, labelNeeds?: string, labelOtherwise?: string }} chain
+ * @param {string | null | undefined} resourceInputKey
+ * @param {() => Readonly<Record<string, unknown>>} facts
+ * @returns {string | undefined}
+ */
+function chainLabelFor(chain, resourceInputKey, facts) {
+  const label = (resourceInputKey && chain.labelsByResource?.[resourceInputKey]) || chain.label;
+  if (chain.labelNeeds && chain.labelOtherwise && facts()[chain.labelNeeds] !== true) return chain.labelOtherwise;
+  return label;
+}
 
 // ── Id-first processor matching (Cohesion Wave 8 — structural prevention) ────
 // chain.processingInstitutions patterns are static data written for the fuzzy
@@ -178,6 +196,9 @@ const _INCOME_TO_CHAINS = {
 
 export function computeActiveChains(institutions = [], resources = [], tier = 'village', tradeRoute = 'road', tradeDependencies = [], depletedResources = [], magicPriority = 50) {
   const insts = institutions.filter(Boolean);
+  /** @type {Readonly<Record<string, unknown>> | null} */
+  let facts = null;
+  const factsOnce = () => (facts ??= defenseFactsOf({ institutions: insts }));
 
   // Helper: does this settlement have an institution matching any of the names?
   // Id-first for stamped institutions (rename-proof), substring fallback otherwise.
@@ -360,14 +381,16 @@ export function computeActiveChains(institutions = [], resources = [], tier = 'v
           'Local food security is maintained but surplus flour cannot be exported: ' +
           'the mill toll captures any excess. Loss of mill access would break this chain.'
         : null;
+      // An output a chain ties to one processor (`outputsRequiringProcessor`) is printed only
+      // where that processor matched: the arena's spectacles need the arena (A-05).
+      const heldOnly = chain.outputsRequiringProcessor || null;
       const outputs = (
         chain.outputsByResource?.[resourceInputKey]
         || chain.outputs
-      );
-      const label = (
-        chain.labelsByResource?.[resourceInputKey]
-        || chain.label
-      );
+      ).filter((output) => !heldOnly || Object.entries(heldOnly).every(([processor, tied]) => (
+        !tied.includes(output) || matchedInsts.includes(processor)
+      )));
+      const label = chainLabelFor(chain, resourceInputKey, factsOnce);
 
       activeChains.push({
         needKey,
@@ -684,6 +707,7 @@ export function deriveExportsFromChains(
   depletedResources = [],
   institutions = [],
   worldLaw = null,
+  foodRecord = null,
 ) {
   // Isolated low-tier settlements are subsistence only — nothing leaves, no trade route exists
   const SUBSISTENCE_TIERS = ['thorp', 'hamlet', 'village'];
@@ -731,7 +755,10 @@ export function deriveExportsFromChains(
     if (extractionKws && !extractionKws.some(kw => _hasInstForGate(kw))) return;
     // Processing gate: finished goods within this resource require specific institutions.
     const gatesForResource = RESOURCE_GOOD_INST_GATES[rk] || {};
-    rd.tradeGoods.forEach(g => {
+    // FOOD-EXPORTS: the land's food goods are offered as a surplus only when the food
+    // record says the place grows more than it eats (foodBalance.js :: offersFoodSurplus).
+    // F3 unit 2b: its own-food processed goods (cheese, dried fruit, dairy) only on a surplus too.
+    ownFoodGoodsHeldByFoodRecord(goodsHeldByFoodRecord(rd.tradeGoods, foodRecord), rk, foodRecord).forEach(g => {
       const requiredInst = gatesForResource[g];
       if (requiredInst && !_hasInstForGate(requiredInst)) return; // institution not present
       exports.add(g);
@@ -743,7 +770,7 @@ export function deriveExportsFromChains(
   // Also gate byproduct outputs that require a specific additional institution.
   activeChains
     .filter(ch => ch.exportable && ch.status !== 'impaired' && !chainIsDepleted(ch))
-    .forEach(chain => chain.outputs.slice(0, 2).forEach(o => {
+    .forEach(chain => ownFoodGoodsHeldByFoodRecord(goodsHeldByFoodRecord(chain.outputs, foodRecord), chain.chainId, foodRecord).slice(0, 2).forEach(o => {
       const requiredInst = CHAIN_OUTPUT_INST_GATES[o];
       if (requiredInst) {
         const kws = Array.isArray(requiredInst) ? requiredInst : [requiredInst];
@@ -755,7 +782,7 @@ export function deriveExportsFromChains(
   // 3. Entrepôt transit goods — flagged distinctively
   activeChains
     .filter(c => c.entrepot && c.status !== 'impaired')
-    .forEach(chain => chain.outputs.slice(0, 1).forEach(o => exports.add(`${o} (transit)`)));
+    .forEach(chain => goodsHeldByFoodRecord(chain.outputs, foodRecord).slice(0, 1).forEach(o => exports.add(`${o} (transit)`)));
 
   // Apply stress: siege collapses exports, occupation taxes them
   let list = [...exports];

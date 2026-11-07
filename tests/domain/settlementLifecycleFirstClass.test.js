@@ -615,7 +615,9 @@ describe('geometry survives death (the digest is untouched across a die-and-rese
     // A genuinely dying thorp: under the population floor, famine-stricken,
     // subsistence-poor, once a city (the scarcity law's relic case). Seed 'geo-5'
     // is empirically deterministic: the death draw fires on the first pulse.
-    const dying = thorp('a', { population: 6, peakTier: 'city' });
+    // X-46 car 1 (433289899) moved the thorp floor (the death gate's thorpMin, POPULATION_RANGES.thorp.min)
+    // to 5, so 6 is no longer under it: the dying thorp holds 4, under the floor as the fixture intends.
+    const dying = thorp('a', { population: 4, peakTier: 'city' });
     dying.economicState = { prosperity: 'Subsistence' };
     dying.activeConditions = [{ id: 'c1', archetype: 'famine', label: 'Famine', severity: 0.8, affectedSystems: ['food_security'] }];
     const saves = [

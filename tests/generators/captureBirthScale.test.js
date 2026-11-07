@@ -188,6 +188,9 @@ describe('birth-scale distribution sweep', () => {
     // CITIES: derived. 397/400 read equilibrium+, so the authored 50% floor sat 114
     // sigma below the mean — it could not have reddened on anything short of the
     // mechanism being deleted.
+    // RE-KEYED BY IDENTITY 2026-11-06 (LANDING-7 R-E12): 386/400 at this N, moved 393 → 386
+    // by 433289899 (X-46 car 1 U2, the owner's historical bands), bisected; the floor is
+    // re-derived from the measured rate in the manifest entry, 388 → 372 (alpha 1e-3, 3.809 sigma).
     const cityEquilibrium = envelope('capture.criminalCity.equilibrium');
     expect(
       countAtLeast(criminalCities, 'equilibrium'),

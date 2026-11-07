@@ -61,6 +61,10 @@ import { governanceLedger } from './governanceLedger.js';
 import { magicLedger, ARCANE_INSTITUTION_PATTERN } from './magicLedger.js';
 import { healingLedger } from './healingLedger.js';
 import { nativeSemanticName } from './content/customContentSemanticAuthority.js';
+// X-46 car 2 (3b): the population contributors read the tier stamp's cuts, never a bare figure
+// (was 5,000 / 1,000 / 200, written for the old bands): dense/broad >= city, adequate/moderate/
+// baseline >= town, thin < village. tests/lint/barePopulationComparison.walker.test.js pins it.
+import { TIER_STAMP_CUTS } from '../data/constants.js';
 
 // ── Types ────────────────────────────────────────────────────────────────
 
@@ -301,11 +305,11 @@ function deriveLabor(s, ctx) {
 
   // SUPPLY: population scaling (sub-linear)
   const pop = populationOf(s);
-  if (pop >= 5000) {
+  if (pop >= TIER_STAMP_CUTS.city) {
     supply += 15; push(supplyContributors, 'population', 'broad', +15, `Population ${pop} sustains a deep labor pool.`);
-  } else if (pop >= 1000) {
+  } else if (pop >= TIER_STAMP_CUTS.town) {
     supply += 8; push(supplyContributors, 'population', 'adequate', +8, `Population ${pop} carries enough hands.`);
-  } else if (pop > 0 && pop < 200) {
+  } else if (pop > 0 && pop < TIER_STAMP_CUTS.village) {
     supply -= 10; push(supplyContributors, 'population', 'thin', -10, `Population ${pop} leaves little slack.`);
   }
 
@@ -395,8 +399,8 @@ function deriveHealing(s, ctx) {
 
   // DEMAND: population baseline
   const pop = populationOf(s);
-  if (pop >= 5000) { demand += 10; push(demandContributors, 'population', 'dense', +10, `Population ${pop} elevates baseline demand.`); }
-  else if (pop >= 1000) { demand += 4; push(demandContributors, 'population', 'moderate', +4, `Population ${pop} sustains modest demand.`); }
+  if (pop >= TIER_STAMP_CUTS.city) { demand += 10; push(demandContributors, 'population', 'dense', +10, `Population ${pop} elevates baseline demand.`); }
+  else if (pop >= TIER_STAMP_CUTS.town) { demand += 4; push(demandContributors, 'population', 'moderate', +4, `Population ${pop} sustains modest demand.`); }
 
   // DEMAND boosts from plague + war-like threats
   for (const cond of ctx.conditions) {
@@ -526,8 +530,8 @@ function deriveAdministrative(s, ctx) {
   // DEMAND: population + institution count
   const pop = populationOf(s);
   const instCount = Array.isArray(s.institutions) ? s.institutions.length : 0;
-  if (pop >= 5000) { demand += 12; push(demandContributors, 'population', 'dense', +12, `Population ${pop} needs more bureaucracy.`); }
-  else if (pop >= 1000) { demand += 5; push(demandContributors, 'population', 'moderate', +5, `Population ${pop}.`); }
+  if (pop >= TIER_STAMP_CUTS.city) { demand += 12; push(demandContributors, 'population', 'dense', +12, `Population ${pop} needs more bureaucracy.`); }
+  else if (pop >= TIER_STAMP_CUTS.town) { demand += 5; push(demandContributors, 'population', 'moderate', +5, `Population ${pop}.`); }
   if (instCount >= 15) {
     demand += 6; push(demandContributors, 'institutions', 'dense', +6, `${instCount} institutions to administrate.`);
   }
@@ -626,8 +630,8 @@ function deriveFoodProduction(s, ctx) {
 
   // DEMAND: population
   const pop = populationOf(s);
-  if (pop >= 5000) { demand += 15; push(demandContributors, 'population', 'dense', +15, `Population ${pop} elevates food demand.`); }
-  else if (pop >= 1000) { demand += 6; push(demandContributors, 'population', 'moderate', +6, `Population ${pop}.`); }
+  if (pop >= TIER_STAMP_CUTS.city) { demand += 15; push(demandContributors, 'population', 'dense', +15, `Population ${pop} elevates food demand.`); }
+  else if (pop >= TIER_STAMP_CUTS.town) { demand += 6; push(demandContributors, 'population', 'moderate', +6, `Population ${pop}.`); }
 
   // DEMAND: food_anchor_lost + refugee influx (stressors regex)
   for (const cond of ctx.conditions) {
@@ -683,7 +687,7 @@ function deriveTransport(s, _ctx) {
 
   // DEMAND: settlement size + exports
   const pop = populationOf(s);
-  if (pop >= 5000) { demand += 10; push(demandContributors, 'population', 'dense', +10, `Population ${pop} moves more goods.`); }
+  if (pop >= TIER_STAMP_CUTS.city) { demand += 10; push(demandContributors, 'population', 'dense', +10, `Population ${pop} moves more goods.`); }
   const exports = canonExports(s);
   if (exports.length >= 4) {
     demand += 8; push(demandContributors, 'economicState.exports', 'broad', +8, `${exports.length} exports to move.`);
@@ -728,7 +732,7 @@ function deriveReligiousWelfare(s, ctx) {
 
   // DEMAND: population + crisis-driven relief
   const pop = populationOf(s);
-  if (pop >= 1000) { demand += 5; push(demandContributors, 'population', 'baseline', +5, `Baseline demand from population ${pop}.`); }
+  if (pop >= TIER_STAMP_CUTS.town) { demand += 5; push(demandContributors, 'population', 'baseline', +5, `Baseline demand from population ${pop}.`); }
 
   for (const cond of ctx.conditions) {
     if (cond.archetype === 'plague' || cond.archetype === 'food_anchor_lost') {
@@ -784,8 +788,8 @@ function deriveCraft(s, ctx) {
 
   // DEMAND: population + exports
   const pop = populationOf(s);
-  if (pop >= 5000) { demand += 12; push(demandContributors, 'population', 'dense', +12, `Population ${pop} consumes more.`); }
-  else if (pop >= 1000) { demand += 5; push(demandContributors, 'population', 'moderate', +5, `Population ${pop}.`); }
+  if (pop >= TIER_STAMP_CUTS.city) { demand += 12; push(demandContributors, 'population', 'dense', +12, `Population ${pop} consumes more.`); }
+  else if (pop >= TIER_STAMP_CUTS.town) { demand += 5; push(demandContributors, 'population', 'moderate', +5, `Population ${pop}.`); }
 
   const exports = canonExports(s);
   if (exports.length >= 2) {

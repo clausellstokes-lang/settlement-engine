@@ -1,0 +1,139 @@
+/**
+ * tests/domain/crisisHooks.test.js — the hooks a crisis adds, bound to its cast
+ * (src/domain/crisis/crisisHooks.js; the HOOKS-UNDER-STRESS lane, SOAK-1000 §3): one hook naming a
+ * line role's holder with the role's reason, one naming the lever and the faction that loses, both
+ * spoken only where the record does not contradict them; and the catalog crisis hook's `{holder}`
+ * slot, filled by name only where the sentence names a role the cast holds.
+ */
+import { describe, it, expect } from 'vitest';
+import {
+  CRISIS_HOOK_SLOTS, CRISIS_NOUN, crisisHooksOf, lineRoleHolderOf, slotCrisisHook,
+} from '../../src/domain/crisis/crisisHooks.js';
+import { CAST_REASONS, CRISIS_NATURE, STAKE_REASONS } from '../../src/domain/crisis/crisisCast.js';
+import { STRESS_TYPE_MAP } from '../../src/data/stressTypes.js';
+import { hookTruthViolations, settlementHookFacts } from '../../src/domain/coherence/hookTruth.js';
+
+const npcRow = (role, id, name, reason) => ({ role, kind: 'npc', id, name, reason, temporary: false });
+const cast = (roles, levers = [], stakes = []) => ({
+  nature: 'natural', rank: 1, roles, absent: [], stakes, levers,
+  ifNothingIsDone: { residualEffects: [] }, playersSeeFirst: [], links: [],
+});
+const town = (extra = {}) => ({
+  tier: 'town',
+  npcs: [
+    { id: 'n1', name: 'Mara Vell', role: 'Miller', factionAffiliation: 'Millers’ Guild' },
+    { id: 'n2', name: 'Oswin Hale', role: 'Mayor', factionAffiliation: 'Town Council' },
+  ],
+  ...extra,
+});
+
+describe('crisisHooksOf: one hook bound to the cast, one bound to the lever', () => {
+  it('the cast hook names the line role\'s holder, with their house and the role\'s reason as its fact', () => {
+    const entry = { type: 'famine', cast: cast([npcRow('brunt', 'n1', 'Mara Vell', CAST_REASONS.bruntBase.food_security)]) };
+    const [hook] = crisisHooksOf(town(), entry);
+    expect(hook).toEqual({
+      text: 'In the famine, the brunt falls on Mara Vell of Millers’ Guild: the hunger falls first on its people.',
+      bound: 'cast',
+      link: { kind: 'npc', id: 'n1', label: 'Mara Vell' },
+    });
+  });
+
+  it('the lever hook names the house the players can push, its holder, and the faction that loses with the reason', () => {
+    const entry = {
+      type: 'famine',
+      cast: cast([], [{ institution: 'Town granary', holderId: 'n1', holderName: 'Mara Vell' }],
+        [{ factionId: 'Merchants', stake: 'gains', reason: STAKE_REASONS.gainsHolds }, { factionId: 'Town Council', stake: 'loses', reason: STAKE_REASONS.loses }]),
+    };
+    expect(crisisHooksOf(town(), entry)).toEqual([{
+      text: 'In the famine, the players can push on the Town granary, run by Mara Vell; Town Council loses most if it gives, because the crisis hits its base.',
+      bound: 'lever',
+      link: { kind: 'faction', id: 'Town Council', label: 'Town Council' },
+    }]);
+  });
+
+  it('a person holding a line role is preferred over a house holding an earlier one; the required roles\' order decides among people', () => {
+    const c = cast([
+      { role: 'brunt', kind: 'faction', id: 'Farmers', name: 'Farmers', reason: 'r', temporary: false },
+      npcRow('lever', 'n1', 'Mara Vell', CAST_REASONS.leverRuns),
+      npcRow('exploiter', 'n2', 'Oswin Hale', CAST_REASONS.exploiterPower),
+    ]);
+    expect(lineRoleHolderOf('famine', c)).toMatchObject({ role: 'lever', name: 'Mara Vell' });
+    // an occasional role is never the line role
+    expect(lineRoleHolderOf('famine', cast([npcRow('exploiter', 'n2', 'Oswin Hale', 'r')]))).toBeNull();
+  });
+
+  it('a crisis with no cast, no holder and no lever adds nothing', () => {
+    expect(crisisHooksOf(town(), { type: 'famine' })).toEqual([]);
+    expect(crisisHooksOf(town(), { type: 'famine', cast: cast([]) })).toEqual([]);
+  });
+
+  it('on a place the record calls fed, a famine hook says "the crisis", never the word the classifier refuses', () => {
+    const fed = town({ economicState: { foodSecurity: { label: 'Secure' } } });
+    const entry = { type: 'famine', cast: cast([npcRow('lever', 'n1', 'Mara Vell', CAST_REASONS.leverRuns)]) };
+    const [hook] = crisisHooksOf(fed, entry);
+    expect(hook.text).toBe('In the crisis, the lever is held by Mara Vell of Millers’ Guild: holds the office the crisis turns on.');
+    expect(hookTruthViolations(hook.text, settlementHookFacts(fed))).toEqual([]);
+  });
+
+  it('the tier noun is spoken through the estate\'s one rewrite ("the town" in a hamlet becomes "the hamlet")', () => {
+    const hamlet = town({ tier: 'hamlet' });
+    const entry = { type: 'under_siege', cast: cast([{ role: 'defender', kind: 'institution', id: 'Watch house', name: 'Watch house', reason: CAST_REASONS.defenderInstitution, temporary: false }]) };
+    const [hook] = crisisHooksOf(hamlet, entry);
+    expect(hook.text).toBe("In the siege, the defence is led by the Watch house: the hamlet's defence, with no one on the roster leading it.");
+    expect(hookTruthViolations(hook.text, settlementHookFacts(hamlet))).toEqual([]);
+  });
+
+  it('every kind of the catalog has a noun and a nature', () => {
+    expect(Object.keys(CRISIS_NOUN).sort()).toEqual(Object.keys(STRESS_TYPE_MAP).sort());
+    expect(Object.keys(CRISIS_NATURE).sort()).toEqual(Object.keys(STRESS_TYPE_MAP).sort());
+  });
+});
+
+describe('slotCrisisHook: the catalog sentence gains a {holder} slot only where it names a role the cast holds', () => {
+  it('every slot\'s phrase occurs exactly once in its catalog sentence (a slot in the sentence, never a second sentence)', () => {
+    for (const [kind, slots] of Object.entries(CRISIS_HOOK_SLOTS)) {
+      const text = STRESS_TYPE_MAP[kind].crisisHook;
+      for (const slot of slots) expect(text.split(slot.phrase).length - 1, `${kind}: ${slot.phrase}`).toBe(1);
+    }
+  });
+
+  it('the plague\'s healer is named when the cast holds the lever in a person', () => {
+    const c = cast([npcRow('lever', 'h1', 'Hesk Marrow', CAST_REASONS.leverRuns)]);
+    expect(slotCrisisHook('plague_onset', STRESS_TYPE_MAP.plague_onset.crisisHook, c)).toBe(
+      'Hesk Marrow, the healer who identified the outbreak first, has gone quiet. Their last message suggested the disease is not natural. Accessing them means navigating a quarantine that is not being enforced consistently.',
+    );
+  });
+
+  it('the siege names both the one who would treat and the defender, and one person never fills both slots', () => {
+    const base = STRESS_TYPE_MAP.under_siege.crisisHook;
+    const two = cast([npcRow('defender', 'd', 'Karl Hoffmann', 'r'), npcRow('treater', 't', 'Andreas Hoffmann', 'r')]);
+    expect(slotCrisisHook('under_siege', base, two)).toBe(
+      'The settlement is surrounded. Andreas Hoffmann is considering terms. Karl Hoffmann is considering a desperate sortie. The players arrive as this decision is being forced.',
+    );
+    const one = cast([npcRow('defender', 'd', 'Karl Hoffmann', 'r'), npcRow('treater', 'd', 'Karl Hoffmann', 'r')]);
+    expect(slotCrisisHook('under_siege', base, one)).toBe(
+      'The settlement is surrounded. Karl Hoffmann is considering terms. Someone else is considering a desperate sortie. The players arrive as this decision is being forced.',
+    );
+  });
+
+  it('a crisis with no holder for the slot keeps its sentence as written: a house, an institution, the wrong reason, no cast', () => {
+    const famine = STRESS_TYPE_MAP.famine.crisisHook;
+    const house = cast([{ role: 'lever', kind: 'institution', id: 'Fish market', name: 'Fish market', reason: CAST_REASONS.leverInstitution, temporary: false }]);
+    expect(slotCrisisHook('famine', famine, house)).toBe(famine);
+    expect(slotCrisisHook('famine', famine, null)).toBe(famine);
+    // the governing-faction sentences take no slot (a faction name stored in prose is the rename
+    // cascade's question, held for the chair): the seat and the governing house leave them as written
+    const insurgency = STRESS_TYPE_MAP.insurgency.crisisHook;
+    const seat = cast([npcRow('target', 'n2', 'Oswin Hale', CAST_REASONS.targetSeat)]);
+    expect(slotCrisisHook('insurgency', insurgency, seat)).toBe(insurgency);
+    const governing = cast([{ role: 'target', kind: 'faction', id: 'Town Council', name: 'Town Council', reason: CAST_REASONS.targetGoverning, temporary: false }]);
+    expect(slotCrisisHook('insurgency', insurgency, governing)).toBe(insurgency);
+    expect(Object.keys(CRISIS_HOOK_SLOTS).sort()).toEqual(['famine', 'occupied', 'plague_onset', 'under_siege']);
+  });
+
+  it('a kind with no slot, and a sentence that does not carry the phrase, are returned unchanged', () => {
+    const c = cast([npcRow('lever', 'n1', 'Mara Vell', 'r')]);
+    expect(slotCrisisHook('mass_migration', STRESS_TYPE_MAP.mass_migration.crisisHook, c)).toBe(STRESS_TYPE_MAP.mass_migration.crisisHook);
+    expect(slotCrisisHook('famine', 'The DM’s own words.', c)).toBe('The DM’s own words.');
+  });
+});

@@ -133,6 +133,11 @@ const stride = (rows, n) => rows.filter((_, index) => index % n === 0);
  * reads the culture to choose the arrival scene's PEOPLE beat and its built detail, the reads that lived in
  * narrativeGenerator.js's retired tier template before it (narrativeGenerator.js still reads culture elsewhere).
  * A culture change re-composes the arrival paragraph, which is prose and moves no fact.
+ *
+ * 2026-11-04, lane CRISIS (CRISIS-1, composed on the window branch): TWENTY-FOUR.
+ * `src/generators/steps/resolveCrisisCast.js` reads the culture to name the crisis car's rare
+ * TEMPORARY person (`pickFirst(config.culture, …)`) when a required crisis role has no holder. A culture
+ * change re-names that one person; CRISIS-1 omitted the row and the chair's ruling of 2026-11-04 adds it.
  */
 const CULTURE_READERS = Object.freeze([
   'src/generators/aiLayer.js',
@@ -157,6 +162,7 @@ const CULTURE_READERS = Object.freeze([
   'src/generators/steps/economyReconcilePass.js',
   'src/generators/steps/generatePopulation.js',
   'src/generators/steps/resolveConfig.js',
+  'src/generators/steps/resolveCrisisCast.js',
   'src/generators/steps/stepMetadata.js',
 ]);
 
@@ -394,10 +400,23 @@ describe('EM-B2b — world facts by consequence: the route, the refusals and the
     // 4b28e712.. -> 2865af22.. (512 rows).
     // Then FOOD-print (ODQ §934.104; docs/shift-records/2026-11-03-food-print-comfortable-pool.json), lane DOORS: the
     // prose manifest 2865af22.. -> 95ef4439.. (232 rows); the generator master did not move.
+    // Then records 12–26 of the rung-1 landing (ODQ §934.105; docs/shift-records/2026-11-04-rung1-*.json, and
+    // the window's earlier records under the same landing), re-keyed at the landed tip by LANDING-5 under the chair's
+    // ruling 4 with no per-step census: the generator master 4c42885b.. -> e98702fe.. and the prose manifest
+    // 95ef4439.. -> d43a3ae2.. . The stride below still re-derives every row to its committed digest.
+    // Then record 28 of the rung-1 landing, THE V-SUMMARY-HOOKS CURE (ODQ §934.105;
+    // docs/shift-records/2026-11-05-rung1-28-summary-hook-count.json), through the signed door at 0aea2b010: the
+    // generator master e98702fe.. -> 26a02855.. (183 of 525 rows); the prose manifest did not move. That door act did
+    // not restate this pin; restated here by LANDING-7 lane E (third seat), with the stride below re-deriving every
+    // sampled row, no layer, to its committed digest at the restating tip.
+    // Then record 34 of the rung-1 landing, THE FOOD PER CENT FROM THE POUNDS (ODQ §934.105;
+    // docs/shift-records/2026-11-06-rung1-34-food-per-cent-from-pounds.json), through the signed door by LANDING-8 from
+    // the stage at 18fd6b442: the generator master 26a02855.. -> e7e8a6ff.. (77 of 525 rows); restated in the same act.
+    // The same record's second act: the prose manifest d43a3ae2.. -> 777e4b4b.. (24 of 1,050 rows, village|*|coastal|port).
     expect(shaOfFile(GOLDEN), 'tests/fixtures/generator-golden-master.json moved')
-      .toBe('4c42885b932c67830ac71fb65cef623311a889718f9a648cdaf40870681aa37c');
+      .toBe('e7e8a6ff2cec9ab63bf363335c2ea3563c9f984dfaddd32a643dcc1bda60b457');
     expect(shaOfFile(PROSE_GOLDEN), 'tests/fixtures/dossier-prose-manifest-golden.json moved')
-      .toBe('95ef44394f228a5878861f775e213345b88884c14c82869e92a731ecf76fc53f');
+      .toBe('777e4b4b2968fab6b02a758435c7dcc8c779753942aeab77c4ae8c261e6d990e');
 
     // AND THE REASON THEY CANNOT MOVE: fresh generation passes no layer, so no world fact is ever
     // routed and `config′` is `config` itself. Measured against the committed manifest.

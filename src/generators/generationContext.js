@@ -31,6 +31,7 @@ import {
 // and names, not catalog rows, and must answer for a name the same whatever shelf it is on.
 import { institutionCatalogMagicLicence } from '../domain/arcaneInstitutionIdentity.js';
 import { magicLicenceAtLeast } from '../data/constants.js';
+import { waterAccessKind } from '../domain/tradeRouteSemantics.js';
 // MG-3h: the assertion vocabulary and its denial clauses moved to a domain leaf so the
 // arcane-identity detector reads them too. Re-exported below — the world law's answers
 // are unchanged; only the address of the patterns moved.
@@ -244,21 +245,13 @@ export function createGenerationWorldLaw(config = {}, resolved = {}) {
   const terrainType = String(
     resolved.terrainType || config.terrainType || '',
   ).toLowerCase();
-  // An explicit port route proves ocean access unless riverside terrain
-  // disambiguates it as an inland river port. Hills and cliffs can still host
-  // a seaport; requiring the coarse terrain label itself to be `coastal`
-  // incorrectly invalidated those legitimate port configurations.
-  const maritimeSupported =
-    terrainType === 'coastal'
-    || (tradeRoute === 'port' && terrainType !== 'riverside');
+  // The water rule lives in the domain leaf (`waterAccessKind`), so the record
+  // readers that cannot import a generator read the same rule as this law.
+  const portKind = waterAccessKind(terrainType, tradeRoute);
+  const maritimeSupported = portKind === 'maritime';
   const riverTradeSupported =
     tradeRoute === 'river'
     || terrainType === 'riverside';
-  const portKind = maritimeSupported
-    ? 'maritime'
-    : riverTradeSupported
-      ? 'river'
-      : 'none';
   const generationContentProfile = immutableContentProfile(
     resolved.generationContentProfile
     || resolveGenerationContentProfile(config),
@@ -313,6 +306,13 @@ export function createGenerationWorldLaw(config = {}, resolved = {}) {
       !maritimeSupported
       && isGeneratorOwnedEntity(entity)
       && textAssertsMaritimeCapability(roleText)
+    ) return false;
+    // A-11 (soak 1000 row 7, chair ruling 4b): a fisher, a ship captain or a sailor only where there is water;
+    // a river counts (`portKind` 'river'), so only 'none' refuses.
+    if (
+      portKind === 'none'
+      && isGeneratorOwnedEntity(entity)
+      && /\bfisher(?:man|men|woman|folk)?\b|\bship(?:'s)? captain\b|\bsailors?\b/i.test(roleText)
     ) return false;
     if (magicEnabled) return true;
     if (carriesExplicitMagicMetadata(entity, entity.category)) return false;

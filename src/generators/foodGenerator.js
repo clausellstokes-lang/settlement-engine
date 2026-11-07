@@ -33,6 +33,7 @@ import {
   hasTradeRouteConnection,
   isTradeRouteDisconnected,
   SEASONAL_ROUTE_FOOD_IMPORT_RATE,
+  waterAccessKind,
 } from '../domain/tradeRouteSemantics.js';
 
 // ── THE BASE NUMBERS (FOOD-2, chair ruling 2, 2026-11-03; fix shape E) ──────────────
@@ -131,6 +132,11 @@ export function generateFoodSecurity(tier, institutions, config) {
   const hasCityGranary    = hasInst('city granari');
   const hasStateGranary   = hasInst('state granary');
   const hasFishing        = hasInst('fish', 'fishing') || hasRes('fishing_grounds', 'river_fish');
+  // F3 FOOD-WORDS unit 3 (the chair's ruling, 2026-11-04): a fishing row on water IS the catch —
+  // a Fisher's landing, a fishery or a fish market where the water fact is not 'none' feeds the
+  // place even when the terrain rolled no fishing-grounds resource. A Fishmonger is a trader.
+  const fishRowOnWater    = hasInst('fisher', 'fishery', 'fishing', 'fish market') && waterAccessKind(terrain, route) !== 'none';
+  const fishSource        = hasFishing && (hasRes('fishing_grounds', 'river_fish') || fishRowOnWater);
   const hasPastoral       = hasInst('pastoral', 'grazing', 'livestock', 'shepherd', 'common graz');
   const hasHunting        = hasInst('hunting', 'managed forest', 'woodcutter');
   const hasOrchard        = hasInst('orchard', 'kitchen garden', 'herb garden');
@@ -146,7 +152,7 @@ export function generateFoodSecurity(tier, institutions, config) {
   const foodSources = /** @type {Array<'grain'|'livestock'|'fish'|'mill'|'game'>} */ ([
     ['grain', (hasSubsistence || hasFarmland) && hasRes('grain_fields', 'fertile_floodplain')],
     ['livestock', hasPastoral && hasRes('grazing_land')],
-    ['fish', hasFishing && hasRes('fishing_grounds', 'river_fish')],
+    ['fish', fishSource],
     ['mill', hasMill && hasRes('river_mills')],
     ['game', hasRes('hunting_grounds') && (hasHunting || ['thorp', 'hamlet', 'village'].includes(tier))],
   ].filter(([, fired]) => fired).map(([name]) => name));
@@ -181,7 +187,11 @@ export function generateFoodSecurity(tier, institutions, config) {
   const baseStorage = hasStateGranary ? (tier === 'metropolis' ? 12 : 8)
                     : hasCityGranary  ? (tier === 'city' ? 7 : 5)
                     : hasGranary      ? (tier === 'town' ? 5 : tier === 'village' ? 3.5 : 2.5)
-                    : (['thorp','hamlet'].includes(tier) ? 1.5 : 1.0);
+                    // 2026-11-04 (T2, the soak 1000 dry run §4, adopted by the chair): a village with no
+                    // granary stored 1.0 month to a hamlet's 1.5 (village median 1.3 vs hamlet 1.5 over
+                    // 1,000 places; 0 of 167 villages had a granary), so a village now takes the
+                    // thorp/hamlet value.
+                    : (['thorp','hamlet','village'].includes(tier) ? 1.5 : 1.0);
   // Mill extends storage — flour lasts longer than grain
   const storageMonths = Math.round(((hasMill ? baseStorage * 1.25 : baseStorage) + Math.min(3, preservedSources) / 4) * 10) / 10;
 
@@ -230,7 +240,7 @@ export function generateFoodSecurity(tier, institutions, config) {
   if ((hasSubsistence || hasFarmland) && hasRes('grain_fields','fertile_floodplain')) agriMod += 0.25;
   if (hasFarmland && hasRes('fertile_floodplain'))  agriMod += 0.10;
   if (hasPastoral  && hasRes('grazing_land'))        agriMod += 0.10;
-  if (hasFishing   && hasRes('fishing_grounds','river_fish')) agriMod += 0.09;
+  if (fishSource)                                    agriMod += 0.09;
   if (hasMill      && hasRes('river_mills'))         agriMod += 0.08;
   agriMod = Math.min(agriMod, 0.5);
 
@@ -365,7 +375,13 @@ export function generateFoodSecurity(tier, institutions, config) {
   }
 
   const deficit       = Math.max(0, rawDeficit - importCoverage - magicOffset);
-  const deficitPct    = dailyNeed > 0 ? deficit / dailyNeed * 100 : 0;
+  // ⛔ THE SHARE IS THE SHARE OF THE POUNDS PUBLISHED (LANDING-7 lane H, STOP-1, 2026-11-06). The
+  // card publishes `deficit` and `dailyNeed` as integer pounds, so its per cent is what THOSE pounds
+  // are of THAT need, never the unrounded gap's share carried beside them: carried, a gap of a third
+  // of a pound on a 32 lb thorp published 0 lb beside 1% (17 golden thorps), the sign broken at the
+  // single writer itself, and no view of it could hold both laws. The band, the flags, the
+  // prosperity modifier and the food record all read this one figure. No floor.
+  const deficitPct    = Math.round(dailyNeed) > 0 ? Math.round(deficit) / Math.round(dailyNeed) * 100 : 0;
   const surplusPct    = dailyNeed > 0 ? Math.max(0, rawSurplus / dailyNeed * 100) : 0;
 
   // Normalized food ratio — 1.0 = exactly adequate

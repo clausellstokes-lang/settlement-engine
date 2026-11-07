@@ -45,6 +45,9 @@ import {
   derivedRungOccupancy,
   importanceForRung,
 } from '../../domain/density/densityRungs.js';
+// X-46 car 4: the population tilt reads the tier's POPULATION band from its one home (the
+// owner's table). A table, not a number — this file still carries none.
+import { POPULATION_RANGES } from '../../data/constants.js';
 // ⚠ THE KERNEL'S CLAMP, NOT A LOCAL COPY. `clamp01` had been hand-rolled ~70 times across
 // the engine with THREE divergent non-finite behaviours before `kernel/math.js` became the
 // one home, and `tests/lint/clampPrimitiveBaseline.test.js` forbids a new local copy. Every
@@ -141,6 +144,30 @@ export function particularTilt(particulars) {
     + centred(p.war01)          * PARTICULAR_TILTS.war * 2
     + centred(p.corruption01)   * PARTICULAR_TILTS.corruption * 2
   );
+}
+
+/**
+ * X-46 car 4 — THE POPULATION TILT (`docs/DESIGN_X46_SCALE_TRAIN.md` §5 (ii)). The
+ * settlement's position inside its tier's population band,
+ * `(pop − band.min) / (band.max − band.min)`, clamped to 0..1, centred on the band's middle
+ * and scaled by `PARTICULAR_TILTS.population` exactly as each particular is — so it is
+ * summed with `particularTilt` and, like it, moves the centre of the roll and never its
+ * edges (`rollInBand` clamps whatever the sum).
+ *
+ * An absent or non-finite population tilts NOTHING (0), so a caller that passes none — the
+ * §810.2b distribution-shape corpus among them — draws exactly what it drew before.
+ *
+ * @param {string|null|undefined} tier
+ * @param {unknown} population
+ * @returns {number} signed, in [−PARTICULAR_TILTS.population, +PARTICULAR_TILTS.population]
+ */
+export function populationTilt(tier, population) {
+  if (population == null || !Number.isFinite(Number(population))) return 0;
+  const band = POPULATION_RANGES[tierKey(tier)];
+  const width = num(band?.max, 0) - num(band?.min, 0);
+  if (!(width > 0)) return 0;
+  const position = clamp01((Number(population) - band.min) / width);
+  return (position - 0.5) * PARTICULAR_TILTS.population * 2;
 }
 
 /**
@@ -457,6 +484,7 @@ export function rollRoster(rng, tier, size, vacancyMult, options = {}) {
  *   rng: {random: () => number, fork: (l: string) => any},
  *   powers: DensityPower[],
  *   particulars?: DensityParticulars|null,
+ *   population?: number|null,
  *   floorLift?: {lifted?: boolean, stressor?: string|null}|null,
  *   seatAll?: boolean,
  *   massOverride?: number|null,
@@ -487,7 +515,9 @@ export function rollDensityPlan(input) {
   // the sizing rolls, never their existence — so the sizing stream advances
   // identically on both passes and everything downstream of it stays aligned.
   const sizing = rng.fork('sizing');
-  const tilt = particularTilt(particulars);
+  // X-46 car 4: the population's place inside its band is one more term of the same tilt.
+  // It moves only WHERE in the band the draws land — never their number or order.
+  const tilt = particularTilt(particulars) + populationTilt(tier, input.population);
   const rolledFactionCount = rollInBand(sizing, bands.factions, tilt);
   const rolledMass = rollInBand(sizing, bands.mass, tilt);
   const concentration = CONCENTRATION.min
@@ -511,7 +541,7 @@ export function rollDensityPlan(input) {
   // ⚠ FEASIBILITY, RESOLVED IN THE BAND'S FAVOUR. R17 forbids an NPC-less
   // faction and §810.2b forbids mass outside the band, so when a retune makes
   // the two bands incompatible the FACTION COUNT yields — never the mass. The
-  // candidate ladder is feasible at every tier (thorp 1/1–3 … metropolis
+  // candidate ladder is feasible at every tier (thorp 1/1–2 … metropolis
   // 7–10/18–30); this guard exists so a future retune degrades honestly instead
   // of minting empty houses.
   const factionCeiling = Math.max(1, Math.min(namedMass, ordered.length || 1));

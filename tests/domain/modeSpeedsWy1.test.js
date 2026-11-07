@@ -10,6 +10,7 @@
  * tests/store/campaignWorldPulseSpatialCanon.test.js.
  */
 import { describe, expect, it } from 'vitest';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
@@ -471,7 +472,11 @@ const BASE_DIGEST_HASH = '3ddda43a3ff1421c339a4b1922cb0b48895083c6c824f8f246e898
 // 2026-10-02 (the Voice Program wave 1, ODQ §934.88: the Herald speaks in deeds): 9dfb641e... -> 0937c69d..., TEXT ONLY,
 // leaf-diffed against 8a6f6b9d3: every moved leaf is a headline, summary, applied headline or population-history
 // reason; no id, tick or number moved. An absent datum still reproduces the base's facts byte for byte.
-const BASE_PULSE_HASH = '0937c69d4712cab5c6a21f148d674cfb9c2bc470694ec3f2b032d87957e850dc';
+// 2026-11-06 (LANDING-7 lane E): 0937c69d... -> 865193cf..., ONE ID FAMILY: git bisect 433289899..1f2a8504e^ on this arm,
+// first bad bc2a64000 (LANDING-5, record rung1-27: stressorsCore.js :: residualOutcome's id carries its tick,
+// `world_outcome.residual.<tick>.<stressor>.<target>`); that commit's only source change is the id template. Green at
+// 433289899 (the bands did not move it); unmoved from bc2a64000 to the landing tip. Still no datum: the absent arm holds.
+const BASE_PULSE_HASH = '865193cf0aa87ca03b93294d23880532ea11d9c72b6e6f4b5c907d174aaae582';
 
 describe('WY-1 A5 — dark by ABSENT DATA: the digest and the pulse record are byte-identical to the base', () => {
   it('ABSENT or refused datum: the golden digest hashes to the base, whatever refused shape was supplied', () => {
@@ -518,7 +523,14 @@ describe('WY-1 A6 — the port program\'s flag is not read by any WY-1 code (a t
 describe('WY-1 A7 — the DRAFT tuning rows exist, unsigned, with every leaf united', () => {
   it('both tables carry a draft row whose unit map covers every leaf', () => {
     const register = JSON.parse(readFileSync(join(ROOT, 'tests/lint/.tuning-register.json'), 'utf8'));
-    expect(register.signatureVersion).toBe(0);
+    // The register has been at v1 since the owner's record of 2026-11-06 (Register VII, ODQ
+    // §934.105); the claim here is about THESE rows: no signature names them.
+    const signedIds = (register.signatures ?? []).flatMap((entry) => entry.ids);
+    // The liveness anchor is a signed id that travels the same path (Register VII's DENSITY_BANDS,
+    // signed at v1): the exclusion below cannot pass on an empty or drifted signatures[].
+    const ANCHOR = 'src/domain/density/densityBands.js#DENSITY_BANDS';
+    expectAbsentWithAnchor(signedIds, 'src/domain/spatial/modeSpeeds.js#MODE_SPEED_TUNING', ANCHOR, 'WY-1 A7');
+    expectAbsentWithAnchor(signedIds, 'src/domain/spatial/modeSpeeds.js#KM_SCALE_TUNING', ANCHOR, 'WY-1 A7');
     const mode = register.tables['src/domain/spatial/modeSpeeds.js#MODE_SPEED_TUNING'];
     const scale = register.tables['src/domain/spatial/modeSpeeds.js#KM_SCALE_TUNING'];
     for (const row of [mode, scale]) {
