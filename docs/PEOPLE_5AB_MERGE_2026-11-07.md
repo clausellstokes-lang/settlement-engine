@@ -1,103 +1,133 @@
-# MERGE-5AB: the people car's lanes 5A and 5B onto the 234-merge tip. 5A MERGED; 5B ABORTED (not mechanical) (2026-11-07)
+# MERGE-5AB: the people car's lanes 5A then 5B onto the 234-merge tip. Both MERGED (5B by the chair's ruling); the observed-shape register is a STOP (2026-11-07)
 
-> Archival record of the cloud chair's merge seat MERGE-5AB. The prompt: merge lane 5A, then lane 5B, in that order onto the 234-merge tip; re-derive every register at each merged tip; run the suites; push. A conflict that is not mechanical (two lanes changing the same behaviour differently) is reported, not resolved. That merge is aborted and what is merged is pushed.
+> Archival record of the cloud chair's merge seat MERGE-5AB. The prompt: merge lane 5A, then lane 5B, in that order onto the 234-merge tip; re-derive every register at each merged tip; run the suites; push. A non-mechanical conflict is reported, not resolved. The one principle the seat may apply where both lanes touched one file is ONE WRITER PER FACT.
 
-## 1. The outcome and the tips
+## 1. The tips
 
 - **Base.** `origin/lane/people-234-merge-2026-11-07` at `c7d552370` (lanes 1+2+3+4). The seat branched from it in the shared worktree, which was a clean detached HEAD at that sha, with `git switch -c`. `npm ci` exited 0. The clone was unshallowed.
-- **Lane 5A (`3d76fb058`): MERGED** at `053283dfd`, with no conflicts. 5A was cut from `c7d552370` itself, so the merged tree is byte-identical to 5A's tip (tree `8c8ab7a40`, the same at both).
-- **Lane 5B (`32dfacaee` at the seat's start): ABORTED.** 5B then pushed `f24623a9f`, a docs-only commit to its record. A dry run (`git merge-tree`) against this tip gives the same 11 conflicting paths (its roster note adds `.source-citation-baseline.json`). Its `pendingEditsPreview.js:423` still writes `downstreamCounts.factions`, and its `neighbourBackLink.js:205` still copies `partner.factions`, so the abort stands for that tip too. 10 files conflict. Two of them are behaviour conflicts the one-writer principle cannot settle without editing the other lane's source (§3).
-- **The tip:** `lane/people-5ab-merge-2026-11-07` holds the 234 tip + 5A + this record and its roster step.
+- **Lane 5A (`3d76fb058`): MERGED** at `053283dfd` with no conflicts. 5A was cut from `c7d552370`, so the merged tree is byte-identical to 5A's tip (tree `8c8ab7a40`).
+- **Lane 5B, first attempt (`32dfacaee`): ABORTED.**
+  - It conflicted in 10 files. Two of them change the same behaviour differently (§3).
+  - The seat pushed what was merged, with an interim record (`5dd99ee74` … `3c66d320e`). It ran the wide suite and the goldens at the 5A tip; the union caused no red there.
+- **Lane 5B, final (`f24623a9f`, its tip after "the wide sweep attributed and the remainder listed"): MERGED** at `a725df7e4`. This followed the chair's ruling of 15:3x UTC on the two divergences (§3).
+- **The tip:** `lane/people-5ab-merge-2026-11-07`. It holds 234 + 5A + 5B, the registers in §4, and this record.
 
 ## 2. The merge of 5A (`053283dfd`)
 
 No conflicts. 5A's merge base with the 234 tip is the 234 tip itself.
 
-## 3. The merge of 5B: the conflicts, and why it was aborted
+## 3. The merge of 5B (`a725df7e4`): conflicts and resolutions
 
-`git merge` of `origin/lane/people-5b-edit-2026-11-07` onto `053283dfd` gave 10 conflicting files:
-`scripts/.writer-reach-baseline.json`, `tests/lint/sourceCitationIntegrity.walker.test.js` (registers), `src/components/settlement/EventComposer.jsx`, `src/components/settlementDetail/SettlementDetailEditNames.jsx`, `src/domain/normalizeSettlement.js`, `src/domain/pendingEditsPreview.js`, `src/domain/regenerationMode.js`, `src/domain/relationships/neighbourBackLink.js`, `tests/components/editNamesFactionRoster.test.jsx`, `tests/domain/pendingEdits.test.js`.
+Merging `f24623a9f` onto the 5A-merged tip conflicts in 11 files.
 
-**Who owns the six src files.** PEOPLE-5-PREP §1 classes all six as **EDIT**. 5B's brief says the EDIT rows are 5B's. 5A's brief §1 groups (d) and (g), however, also name five of them by file: `EventComposer.jsx`, `SettlementDetailEditNames.jsx`, `normalizeSettlement.js`, `regenerationMode.js` and `neighbourBackLink.js`. 5A's record also lists `pendingEditsPreview.js:422` in its group (g). So the briefs overlap on these files, and both lanes re-wired the same reads.
+**Who owns the six src files.** PEOPLE-5-PREP §1 classes all six as EDIT, which 5B's brief gives to 5B. 5A's brief §1 groups (d), (f) and (g) also name five of them by file, and 5A's record lists the sixth (`pendingEditsPreview.js:422`). Both lanes re-wired the same reads.
 
-**Mechanical (the same behaviour, different words).** In four files both lanes made the same change, worded differently. Under ONE WRITER PER FACT they would resolve to the EDIT owner (5B), with 5A's tests re-keyed:
-- `EventComposer.jsx`: both group by the first-rank power. 5A uses `cardPowers.js :: firstPowerOf`; 5B uses `membership.js :: firstRankMembershipOf`.
-- `SettlementDetailEditNames.jsx`: both list the powers only.
-- `normalizeSettlement.js`: the comment only.
-- `regenerationMode.js`: both delete the `holder.factions` fallback.
+**The two divergences, ruled by the chair** (15:3x UTC, by the briefs' ownership):
 
-The two test files' conflicts are comment and order only.
+1. **`src/domain/pendingEditsPreview.js` → 5B's side.** The ruling: "the preview is the edit layer's". 5A had renamed the powers' count `downstreamCounts.factions` → `.powers`; 5B kept `.factions`. 5B's writer was taken.
+   - 5A's two readers were re-keyed to `.factions`: `src/components/dossier/CascadePreviewPanel.jsx:288` and `src/lib/editFingerprint.js:63`.
+   - Their tests were re-keyed the same way: `tests/lib/editFingerprint.test.js` and `tests/ui/cascadePreviewLinkedSaves.test.jsx`.
+   - Cause: "MERGE-5AB: the preview is the edit layer's". `tests/domain/pendingEdits.test.js` took 5B's side.
+2. **`src/domain/relationships/neighbourBackLink.js` → 5A's side.** The ruling: "the neighbour link is the display lane's". `own` and `partner` both carry `powerStructure.factions`, which matches 5A's `crossSettlementConflicts.js :: engagingFactions`, now with no grouping fallback.
+   - 5B's `partner.factions` copy was dropped. 5B's JSDoc line (`powerStructure?: unknown` on the settlement) was kept.
+   - No 5B test pinned the partner shape (searched: no test names `liveNeighbourEngagements` or `neighbourBackLink`).
 
-**NOT mechanical: the same behaviour, changed differently.**
-1. **`pendingEditsPreview.js :: previewCascade`, the faction count's key.** 5A renamed the key: `downstreamCounts.factions` → `downstreamCounts.powers`. 5A also re-keyed its two readers to the new name, in 5A-owned files that do not conflict: `src/components/dossier/CascadePreviewPanel.jsx:288` and `src/lib/editFingerprint.js:63`. 5B kept the key as `downstreamCounts.factions`. If the writer goes to 5B as the EDIT owner, 5A's two readers read a key nobody writes: the cascade panel says "0 factions" and the edit fingerprint's `downstream.factions` is undefined. If it goes to 5A, the EDIT row's owner is overruled. Either way, curing it means editing the other lane's src, not re-keying a test.
-2. **`neighbourBackLink.js :: liveNeighbourEngagements`, the partner's shape.** 5A moved both `own` and `partner` to `powerStructure.factions`. 5A also removed the grouping fallback in `crossSettlementConflicts.js :: engagingFactions` (5A's, no conflict), so a shape without `powerStructure` now engages with none. 5B moved only `own` (`powerStructure: settlement.powerStructure || null`) and kept `partner.factions: nr.factions`. With 5B's side and 5A's `engagingFactions`, the partner engages with no faction, so no live neighbour engagement is generated. Taking 5A's side overrules the EDIT owner.
+**Mechanical (the same re-wire in other words).**
+- `EventComposer.jsx`, `SettlementDetailEditNames.jsx`, `normalizeSettlement.js`, `regenerationMode.js`: 5A's text, consistent with ruling (2).
+- `tests/components/editNamesFactionRoster.test.jsx`: 5A's arm in the one conflicting hunk (the same two assertions in another order). 5B's re-keyed rename-cascade arms in the non-conflicting hunks were kept. A first resolution that took 5A's whole file dropped those arms. The touched tests caught it (2 red), and it was redone hunk by hunk: 43 / 43 green.
 
-Both are rulings for the chair. The seat ran `git merge --abort`. Nothing of 5B is on this branch.
+**Registers taken to commit, then re-derived (§4):**
+- `scripts/.writer-reach-baseline.json`: 5A's side.
+- `tests/lint/.source-citation-baseline.json` and its walker header: both lanes' notes kept.
 
-**The ruling the chair could give.** Who writes the counter's key, and therefore which side re-keys its readers. Who writes the neighbour partner's shape. After that, the 5B merge is mechanical. The other eight conflicts resolve as above, and the writer-reach baseline and the roster pin are re-derived through their doors at the merged tip.
-
-## 4. Registers at the merged tip (`053283dfd`, tree = 5A's tip)
+## 4. The registers at the 5A+5B tip
 
 | register | door | result | commit |
 |---|---|---|---|
-| observed-shape readers | `node scripts/check-observed-shape-readers.mjs --write`, then the plain check | **exit 1 both: `observed-shape executionTree manifest digest mismatch`.** The same throw at the base `c7d552370`, before any merge. This is 5A's STOP 2 and 5B's §3 STOP: MERGE-234's lane-4 merge resolved the baseline textually and never re-derived it. `validateBaselineHistory` re-validates that committed file on every descendant, so no schema-30 door can pass. **Not cured here: the chair's ruling (a restored predecessor, then rung 31).** | — |
-| lighting census | 5A re-froze it through its ritual at the identical tree (`535f5f3e0`) | the plain run 34 / 34 green, exit 0; no re-freeze was needed | — |
-| writer reach | `node scripts/check-writer-reach.mjs` | exit 0 (5A re-banked at `783a59398` on the identical tree) | — |
-| wiring census | `node scripts/wiring-census.mjs --check` | exit 0: 709 pools / 2310 variants / 165 relation rows. Its JSON did not conflict, so it was not re-generated. | — |
-| fork registry, held-key census, tuning, writer-reach walker | the walkers, in the wide run | no pin moved by a union. Their reds are the base's (§5) | — |
-| dated roster | `sourceCitationIntegrity.walker` | 99 → 100 (this record), the `_rosterGrowth2026-11-07-merge-5ab` note, the header's `dated (100)`; 18 / 18 green | `06b83a03c` |
-| edge-shared bundles | `npm run build:edge-shared`, once | exit 0 | `56ab1d890` |
+| **observed-shape readers** | `--write`, then the plain check | **STOP: exit 1 both, `executionTree manifest digest mismatch`** (see below) | — |
+| writer reach | `--rebank --charter='§934.105'` (the door both lanes and MERGE-234 used) | cohort 1399 → 1397. 4 admitted (`elected_reeve` / `feudal_stewardship` on `leaderNpcIds`, `lastTargetedBy` / `lastTargetedTick` on `osr000:npc_barracks`: FPZ's per-NPC ledgers re-dealt by card id over the union's roster, M-6). 6 stale folded out (the grouping's fields, gone with 5B's v2 boundary). Then the plain check exits 0 | `f06de9b25` |
+| lighting census | `LIGHTING_CENSUS_REFREEZE` on a clean tree (exit 1 on write, by convention), then the plain run | 34 / 34 | `548709ab0` |
+| wiring census | `node scripts/wiring-census.mjs --check` | exit 0: 709 pools / 2310 variants / 165 relation rows. Its JSON did not conflict | — |
+| fork registry, held-key census, tuning, writer-reach walker | the walkers, in the wide run | no pin moved by the union; their reds are the base's or the STOP's (§5) | — |
+| dated roster | `sourceCitationIntegrity.walker` | 99 → 101 at the union (PEOPLE_5B_EDIT and this record). Both lanes' notes kept; the `_rosterGrowth2026-11-07-merge-5ab` note and the header's `dated (101)` set; 18 / 18 | `6a23130cc` (`06b83a03c` at the 5A tip) |
+| edge-shared bundles | `npm run build:edge-shared`, once at the end | exit 0 | EDGE_COMMIT |
 
-Because the merged tree equals 5A's tip, every register 5A re-derived through its door holds unchanged. The union with 5B did not happen, so nothing else was the seat's to re-derive.
+**The observed-shape register: a STOP.** The chair's ruling restores a consistent baseline at schema 30. That cannot pass, for the following reasons, measured here.
 
-## 5. The suites
+- `validateBaselineHistory` (`scripts/check-observed-shape-readers.mjs:2561`) walks every commit on `subjectSha..HEAD` that touches the baseline. It runs `assertExplainedWriterRowTags` → `validateSchema30Baseline` → `assertManifest` on each one (stack at `:2622`, `observed-shape-baseline.mjs:1390`, `observed-shape-governance.mjs:329`).
+- `c7d552370`'s committed baseline (MERGE-234's textual merge, never re-derived) fails that check, and it is now on every descendant's ancestry path.
+- **Tried:** `8dd30106b`'s consistent file restored in the working tree. The plain check still throws the same mismatch, now from `validateBaselineHistory`, which reads `c7d552370`'s committed file. The restore was reverted; nothing was committed.
+- **Neither lane cut a rung.** 5A's STOP 2 and 5B's §3 both stopped here, so there are no rungs "5A's then 5B's" to compose.
 
-**The wide run at `5dd99ee74`, the 5A-merged tip plus this record** (`sh scripts/gate-tail.sh npx vitest run tests/generators/people tests/domain/dossier tests/domain/crisis tests/domain/edit tests/lint tests/scripts`). **249 files: 15 red. 3,550 tests: 26 red, 16 skipped. Gate exit 1.**
+The only escape is a new genesis: rung 30 → 31, the precedent being `1f09ca532` (act 1, 8 files, +226 / −37) and `8fa9de5b8` (act 2). It would run in three steps:
+- (a) Commit `8dd30106b`'s consistent schema-30 file at a commit X.
+- (b) Act 1: `BASELINE_SCHEMA` 31, `validateSchema30Baseline` re-bound as retired, the 30 → 31 policy and pairing, the CLI allow-list, both headers, and the pins in `observedShapeBaseline` / `observedShapeMigration` / `observedShapeSentinel`.
+- (c) Act 2: the register re-minted through the migration with X as the genesis. Its predecessor is then X's consistent file, and the history walk starts after X.
 
-**Attribution.** The reds were attributed against 5A's own record §4, which ran them at the base `c7d552370`. The two files that record does not list were re-run here in a worktree at the base, and both are red there with the same arms: `editWorldFactResources` (A2, A6) and `heldKeyWriterCensus` (A3). **The union caused no red.** No union with 5B was made, and the 5A merge's tree equals 5A's tip.
+What it would admit is the chair's to say. Per 5B's scan against `8dd30106b`: NEW 113, GONE 8, DECREASED 1. That covers 5A's re-pointed reads, FPZ's simulation reads (M-6), and the migration's deliberate v1 reads, which 5B would DECLARE as one explained-writer class. The schema-24 / rung-30 posture would instead admit every row with attribution and declare nothing. The seat did not cut the rung: it is a design act (declare or admit), and it is beyond a merge seat's budget.
+
+## 5. The suites at the 5A+5B tip
+
+**Wide run at `6a23130cc`.** Command: `sh scripts/gate-tail.sh npx vitest run tests/generators/people tests/domain/dossier tests/domain/crisis tests/domain/edit tests/lint tests/scripts tests/domain/settlementMigrations.test.js`. **250 files: 16 red. 3,573 tests: 30 red, 16 skipped. Exit 1.**
+
+**5B's save museum and migration suites** (`tests/lib/saveMuseum.test.js`, `tests/domain/settlementMigrations.test.js`): **30 / 30 green.**
+
+**The red list, by owner.** Each red was attributed against the 5A-tip run (§1, `5dd99ee74`), the lanes' own records, or a base / lane-tip worktree run.
 
 | suite | red | owner |
 |---|---|---|
-| `tests/lint/sourceCitationIntegrity.walker` | 1 (the archival roster, 99 against 100) | this seat's record. **CURED** by the roster step `06b83a03c` (18 / 18 green) |
-| `tests/lint/observedShapeReaders.walker` | 5 | the base's broken baseline (§4): 2 at the base, and +3 that 5A's moved reads cannot bank (5A's STOP 2) |
-| `tests/lint/writerReach.walker` | 2 | its corpusMeta arms compare against the observed-shape register (the same STOP) |
+| `tests/lint/observedShapeReaders.walker` | 6 | **the STOP (§4).** 2 at the base (the digest error), plus the arms that bank the union's moved reads: 5 at the 5A tip, 4 in 5B's record |
+| `tests/lint/writerReach.walker` | 3 | **the STOP.** Its "producers ran" (1719 live against OSR's frozen 1725 shapes), corpusMeta and shapesDigest arms compare against the observed-shape register's frozen corpus |
+| `tests/generators/people/castPowers` | 2 | 5B's record §4: lane 1's arm reads the shim's `factionAffiliation` on the returned record, which 5B's v2 boundary strips (the landing deletes the shim) |
+| `tests/domain/dossier/seatHolder` | 1 | 5B's record §4: lane 2's seat read on the returned record |
 | `tests/lint/proseFamilyContract.walker` | 5 | the lanes' (the AO-0 corpus re-dealt by the cast) |
 | `tests/lint/tuningRegister.walker` | 4 | the base |
-| `tests/lint/institutionTable.walker` | 2 | the base (lane 1 §4(b)) |
+| `tests/lint/institutionTable.walker` | 2 | the base |
 | `tests/lint/negativeAssertionAnchor.walker` | 2 | the base |
-| `tests/lint/proseWiringCensus.walker` | 1 | the base (3 there) |
-| `tests/lint/heldKeyWriterCensus.walker` | 1 (A3) | the base, re-run here |
+| `tests/domain/editWorldFactResources` | 2 (A2, A6) | the base (re-run in a base worktree) |
+| `tests/lint/heldKeyWriterCensus.walker` | 1 (A3) | the base (re-run in a base worktree) |
 | `tests/lint/mutationCoverageManifest` | 1 | the base |
-| `tests/domain/editWorldFactResources` | 2 (A2, A6) | the base, re-run here |
-| `tests/lint/newsHeadlineContract.walker`, `newsVoiceContract.walker` | suite-level (all arms skipped) | the lanes' (the AO-0 year) |
+| `tests/lint/proseWiringCensus.walker` | 1 | the base |
+| `tests/lint/newsHeadlineContract.walker`, `newsVoiceContract.walker` | suite-level | the lanes' (the AO-0 year) |
 | `tests/lint/ledgerCitationIntegrity`, `tests/scripts/provenanceMap` | suite-level | ENVIRONMENT: there is no local `refs/heads/review-fixes-2026-07-08` |
 
-**The goldens (M-3), banked, never re-recorded.** One run: `npx vitest run tests/property tests/simulation/presetLightingWitness.test.js`, 96 files / 711 tests, **6 files / 10 tests red**. These are the same files and counts 5A and 5B banked:
-- `generatorGoldenMaster` 1
-- `espionageDormancyFence` 1
-- `dossierProseManifest` 2
-- `heraldKnowledgeDeskGolden` 1
-- `dmLayerGoldenIsolation` 1
-- `editCorpusRatchet` 4
+**Outside the wide run, seen while checking the resolution:**
+- `tests/copy/voiceMechanics` (1): `settlementMigrations.js` em 2 → 3. This is 5B's: red at 5B's tip `f24623a9f` in a worktree.
+- `tests/build/vendorPdfLazy` (4), `tests/components/repeatOnceTonightTraditions` (1): the base's (5B's record §4).
 
-`presetLightingWitness` is green.
+**What the union cured.** At the 5A tip: the dated roster, by the roster step. At the merge: `editNamesFactionRoster`'s two rename arms, whose 5B re-keys were restored.
 
-**5B's save-museum and migration suites** were not run: 5B is not merged.
+**What the union caused.** Only the STOP's arms grew, because both lanes' moved reads now sit on one broken register. No other red is the union's.
 
-**The edge-shared bundles:** `npm run build:edge-shared`, once, exit 0. Re-emitted at `56ab1d890`.
+**The goldens (M-3), banked, never re-recorded.** PENDING at this commit (the run is in flight).
 
-## 6. CONFIRMED vs PLAUSIBLE
+**5B's other reds**, per its own record §4 and listed, not this seat's: the FPZ casualties (18 tests in 8 files, M-6), lane 5A's birth/display readers on the returned record (6 in 6 files), and its own remainder (§6 below).
+
+## 6. Lane 5B's remainder, inherited by the landing seat (quoted from `docs/PEOPLE_5B_EDIT_2026-11-07.md` §9)
+
+> 1. Re-key `tests/generators/generationCertificationCorpus.test.js` (7): conflict parties checked against `powerStructure.factions` (as `scripts/audit/generation-certification-soak.mjs` now does); its member check left with the grouping.
+> 2. Re-key `tests/lib/persistenceAdmission.test.js` (2) to schema 2: measure what the admission now reports and re-key with cause M-7.
+> 3. Re-key `tests/generators/pipelinePinnedChoosers.test.js` (1) and `pipelinePinnedMode.test.js` (1): measure the pinned key list and the pinned run under the v2 boundary; re-key with cause M-7.
+> 4. The observed-shape rung 30 -> 31 (§3, the chair's ruling first): a restored predecessor, the migration's v1 reads declared as one class, FPZ's rows admitted with attribution, 5a's re-points landed first.
+> 5. Hand lane 5a the six birth/display reds above and the export allowlist's three unwritten keys (§3, writer reach).
+
+## 7. This seat's remainder
+
+1. The observed-shape rung 30 → 31, as §4 describes: first commit a consistent predecessor, then act 1 and act 2. The chair rules what is declared and what is admitted.
+2. After the rung, re-run `observedShapeReaders.walker` and `writerReach.walker`. Their STOP arms should then go green.
+
+## 8. CONFIRMED vs PLAUSIBLE
 
 CONFIRMED:
-- The conflict list, from git's own merge output.
-- The two behaviour divergences, read in the conflicting hunks and in 5A's non-conflicting readers (`CascadePreviewPanel.jsx:288`, `editFingerprint.js:63`, `crossSettlementConflicts.js :: engagingFactions`).
-- The class of each src file, from PEOPLE-5-PREP §1.
-- The observed-shape digest throw at the base and at the tip.
-- The tree identity of the merge with 5A's tip.
-- Every door's exit code as stated.
+- The conflict lists, from git's merge output, at both 5B tips.
+- The ruling applied file by file.
+- The touched tests green (43 / 43) after the resolution.
+- Every door's exit code.
+- The STOP's mechanism: the stack traces at the restored-file run and the history walk read in source.
+- The red attributions, by the runs named.
 
-PLAUSIBLE: that the other eight conflicts are mechanical exactly as described. They were read, not built or run, because the merge was aborted.
+PLAUSIBLE: that a rung cut from a committed consistent predecessor escapes the history walk. This was read in `validateBaselineHistory` (the walk starts at the genesis `subjectSha`), not run.
 
-## 7. The tip
+## 9. The tip
 
 `lane/people-5ab-merge-2026-11-07`, pushed with `--no-verify`. The tip is the commit that carries this file's last edit.
