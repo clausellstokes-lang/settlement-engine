@@ -370,7 +370,7 @@ describe('EM-R2 — the roster is final inside enrichNpcCoherence under a held r
     const heldCard = (heldRun.settlement?.npcs || []).find((npc) => npc.id === mover.id);
     expect(heldCard?.memberships, 'the held card keeps its held standing').toEqual(moved);
     // THE CONTROL: the unpinned record stands the same card elsewhere, so the line above measured.
-    expect(mover.memberships.map((m) => m.power)).not.toContain(target);
+    expect(mover.memberships.map((m) => m.power)).not.toContain(target); // anchored: mover is the live roster's card whose memberships the held run moved to `moved` (toEqual above)
 
     // (3) THE LINKAGE TRACE IS GONE FROM BOTH RUNS, anchored on the population summary trace.
     const summaryLive = [record, heldRun].map((run) => (Array.isArray(run.simulationTrace) ? run.simulationTrace : [])

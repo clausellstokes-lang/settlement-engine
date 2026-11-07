@@ -95,7 +95,7 @@ describe('landing-stage.sh build guard', () => {
     const r = run('sh', [script, 'guard', step], dir);
     rmSync(dir, { recursive: true, force: true });
     expect(r.status, r.stderr).toBe(0);
-    expect(r.stderr).not.toMatch(/STOP/);
+    expect(r.stderr).not.toMatch(/STOP/); // anchored: the same stderr carries the two receipt lines asserted below
     expect(r.stderr.split('\n').filter((l) => l.startsWith('door path touched by the step, equal to the carry — carried: ')).sort())
       .toEqual([
         'door path touched by the step, equal to the carry — carried: tests/fixtures/g.json',

@@ -63,8 +63,8 @@ describe('P2 — reassign: the three seat mirrors move together', () => {
   test('the op carries memberships and the house; the retired fields are not seat fields', () => {
     expect(SEAT_HELD_FIELDS).toContain('memberships');
     expect(SEAT_HELD_FIELDS).toContain('institution');
-    expect(SEAT_HELD_FIELDS).not.toContain('factionAffiliation');
-    expect(SEAT_HELD_FIELDS).not.toContain('linkedFactionIds');
+    expect(SEAT_HELD_FIELDS).not.toContain('factionAffiliation'); // anchored: the list is live, it holds memberships and institution (above)
+    expect(SEAT_HELD_FIELDS).not.toContain('linkedFactionIds'); // anchored: the list is live, it holds memberships and institution (above)
     const s = planted();
     const target = { memberships: [{ power: 'Temple of Dawn', rank: 2, share: null }], institution: null };
     const out = reassignNpc(s, 0, target);

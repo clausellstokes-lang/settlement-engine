@@ -1314,7 +1314,7 @@ describe('the viability verdict and the hook framing', () => {
     // named here and in docs/PEOPLE_3_HOOKS_2026-11-07.md for the writing wave (W7 HOOKS) to retire.
     const categories = Object.keys(PLOT_HOOK_CATEGORIES);
     expect(categories.length, 'the hook category registry moved').toBe(6);
-    expect(categories).not.toContain('relationship');
+    expect(categories).not.toContain('relationship'); // anchored: the registry is live, its length pinned to 6 on the line above
     for (const c of categories) {
       expect(hookCategoryPoolKey(c), `no pool claims the '${c}' category`).toBeTruthy();
     }
