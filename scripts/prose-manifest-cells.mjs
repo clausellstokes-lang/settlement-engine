@@ -176,7 +176,10 @@ export const MANIFEST_PROVENANCE = Object.freeze({
     + ' 2026-11-07 (PEOPLE-1 CAST, RECORD 1 OF THE PEOPLE CAR\'S LANDING, docs/shift-records/2026-11-07-people-1-cast'
     + '.json, ODQ §934.105): re-recorded at the stage of dc655f712 because one face per face-bearing house replaces t'
     + 'he faction rungs\' NPCs, each power ranking its first, second and third; 762 of the 1,050 rows move, 0 added, '
-    + '0 removed.',
+    + '0 removed.'
+    + ' 2026-11-07 (PEOPLE-3 HOOKS, RECORD 3 OF THE PEOPLE CAR’S LANDING, docs/shift-records/2026-11-07-people-3-hook'
+    + 's.json, ODQ §934.105): re-recorded at the stage of 0f930ce95 because one person hook per card replaces the man'
+    + 'y, the tensions and the history kept; 484 of the 1,050 rows move, 0 added, 0 removed.',
 });
 
 /** This surface's identity in tests/fixtures/.golden-freeze-register.json. */
