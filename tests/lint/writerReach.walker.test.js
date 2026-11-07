@@ -305,7 +305,8 @@ describe('writer-with-no-reader ratchet: the frozen register', () => {
     // section's fifteen GENERATION-origin INTERNAL identities with a reader, engine-internal, each with its consumer
     // named by file and line (docs/WIRING_W6_2026-11-07.md).
     // TWENTY-FIVE BECAME THIRTY-FOUR (2026-11-07, lane W6, WIRING R-W2, ODQ §934.105): the DEF section's nine engine-internal rows.
-    expect(WRITER_DARK_REGISTER.length).toBe(34);
+    // THIRTY-FOUR BECAME THIRTY-SEVEN (2026-11-07, lane W6, WIRING R-W2, ODQ §934.105): the POW section's three engine-internal rows.
+    expect(WRITER_DARK_REGISTER.length).toBe(37);
     expect(liveEvidence.map((row) => row.identity).sort())
       .toEqual(WRITER_DARK_REGISTER.map((row) => row.identity).sort());
     for (const row of liveEvidence) {
@@ -495,7 +496,8 @@ describe('writer-with-no-reader ratchet: the live judgment', () => {
     // 2026-11-07 (lane W6, WIRING R-W2, ODQ §934.105): the ECO section's fifteen engine-internal rows, every one
     // written on every world and DARK: ten became twenty-five.
     // 2026-11-07 (lane W6, WIRING R-W2): the DEF section's nine engine-internal rows, all DARK: twenty-five became thirty-four.
-    expect(registeredAndDark.length).toBe(34);
+    // 2026-11-07 (lane W6, WIRING R-W2): the POW section's three engine-internal rows, all DARK: thirty-four became thirty-seven.
+    expect(registeredAndDark.length).toBe(37);
     expect(baseline.darkUnregistered.length).toBe(cohort.length - registeredAndDark.length);
     expect(reviewableDark(cohort).length).toBe(baseline.reviewableDarkCount);
     expect(reviewableDark(cohort).length).toBeLessThan(cohort.length);

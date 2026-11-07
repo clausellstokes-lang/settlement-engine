@@ -722,6 +722,58 @@ export const WRITER_DARK_REGISTER = Object.freeze([
     charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
       + 'W6, section DEF), consumer PLAUSIBLE at src/generators/steps/assembleInstitutions.js:291',
   }),
+  Object.freeze({
+    identity: 'locks on campaignState',
+    key: 'locks',
+    shape: 'campaignState',
+    writer: 'src/lib/saves.js',
+    reason: 'engine-internal',
+    consumer: Object.freeze({
+      file: 'src/hooks/useReaderAudience.js',
+      symbol: 'the reader-audience hook, which asks whether any save carries a regeneration lock',
+    }),
+    why: 'The user\'s own "keep this" locks for regeneration: editor and regen plumbing, minted empty at save '
+      + 'birth. The reader-audience hook reads campaignState.locks across saves (useReaderAudience.js:173) '
+      + 'and the regen path preserves what they name; a lock is the user\'s instruction to the engine, not a '
+      + 'fact about the town.',
+    charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
+      + 'W6, section POW), consumer CONFIRMED at src/hooks/useReaderAudience.js:173',
+  }),
+  Object.freeze({
+    identity: 'generatedAs on npcs',
+    key: 'generatedAs',
+    shape: 'npcs',
+    writer: 'src/generators/factionRoles.js',
+    reason: 'engine-internal',
+    consumer: Object.freeze({
+      file: 'src/domain/worldPulse/magicFormsPractitioner.js',
+      symbol: 'isMagicPractitioner, which reads the provenance marker before classifying a person by role',
+    }),
+    why: 'A provenance marker naming the generator path that minted the person (faction_structural, instant, '
+      + 'practitioner), written "for migration and debugging". The practitioner law reads it '
+      + '(magicFormsPractitioner.js:127) to recognise a person its own lane minted; the player is shown the '
+      + 'person, their role and their office, never the path that made them.',
+    charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
+      + 'W6, section POW), consumer CONFIRMED at src/domain/worldPulse/magicFormsPractitioner.js:127',
+  }),
+  Object.freeze({
+    identity: 'generatedAs on members',
+    key: 'generatedAs',
+    shape: 'members',
+    writer: 'src/generators/factionRoles.js',
+    reason: 'engine-internal',
+    consumer: Object.freeze({
+      file: 'src/domain/worldPulse/magicFormsPractitioner.js',
+      symbol: 'isMagicPractitioner, which reads the provenance marker before classifying a person by role',
+    }),
+    why: 'A provenance marker naming the generator path that minted the person (faction_structural, instant, '
+      + 'practitioner), written "for migration and debugging". The practitioner law reads it '
+      + '(magicFormsPractitioner.js:127) to recognise a person its own lane minted; the player is shown the '
+      + 'person, their role and their office, never the path that made them. The faction member list carries '
+      + 'the roster\'s records; whether its own saved copy is re-read is not measured.',
+    charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
+      + 'W6, section POW), consumer PLAUSIBLE at src/domain/worldPulse/magicFormsPractitioner.js:127',
+  }),
 ]);
 
 const SECTION = /§\d+/;
