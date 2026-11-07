@@ -86,7 +86,7 @@ describe('G1 — the weighted exclusive group', () => {
     for (const f of forms) expect(tally[f], `${f} governs at least one of 120 cities`).toBeGreaterThan(0);
     const top = Math.max(...Object.values(tally));
     expect(top, `no single form governs half of 120 cities (${JSON.stringify(tally)})`).toBeLessThan(60);
-  });
+  }, 120_000); // 2026-11-07 PEOPLE-1 CAST: an explicit budget — the city sweep births its cities with the cast (59 cards a city), past vitest's 20 s default under a loaded box
 
   it('a group still seats at most one member', () => {
     for (const s of settlements('city', 120)) {

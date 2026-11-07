@@ -366,10 +366,11 @@ describe('EM-R8 — the escalation ladder never overwrites a HELD key, and the r
     // 2026-11-05 (LANDING-5, the chair's ruling 4; an anti-vacuity arm, READ and BISECTED by stage): 17 -> 16 TERRAIN-POOLS
     // ac09ea83b -> 9 X-46 car 3 90dc22f18 -> 10 PLACE-NOT-TIER 6129c300d -> 7 car 3 I7 6ca454d2b -> 8 F6 6d84aa834 -> 9 F1
     // 5e9ffb220. Still live (nine trials, six of them the E6 seat edit on the six hamlets), and `foreign` stays empty.
-    // 2026-11-07 (PEOPLE-1 CAST, the people car's lane 1; READ off the arm's own received value at the lane's tip): 9 -> 4.
+    // 2026-11-07 (PEOPLE-1 CAST, the people car's lane 1; READ off the arm's own received value at the lane's tip): 9 -> 4 -> 7.
     // The cast replaces the rung roster, so the conflicts (fought between the powers, derived from the final roster)
-    // and their citations re-deal on the hamlets; the law above is unchanged and `foreign` stays empty.
-    expect(all.filter((trial) => trial.conflictsRestated).length, 'trials whose conflict citations the post-pass rebuilt').toBe(4);
+    // and their citations re-deal on the hamlets (4 at 5f455dcb9); the `other` mints' ties at the seam (b5da42d23) move
+    // three more trials' conflicts; the law above is unchanged and `foreign` stays empty.
+    expect(all.filter((trial) => trial.conflictsRestated).length, 'trials whose conflict citations the post-pass rebuilt').toBe(7);
     const foreign = all.filter((trial) => trial.citesOwn === false).map((trial) => `${trial.label} ${trial.key}`);
     // anchored: the line above proves the restatement fires on twelve live trials, so silence here is a cure.
     expect(foreign, `the receipt cites a conflict list that is not the merged record's own:\n${foreign.join('\n')}`).toEqual([]);

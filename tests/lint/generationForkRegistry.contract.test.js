@@ -101,7 +101,7 @@ describe('EM-P2 — the generation fork register: totality, derivation, and Tier
     expect(GENERATION_TIER1.length, 'the register declares one row per live pair').toBe(pairs.length);
     // GS-2 one faction set (2026-10-31, ODQ §934.101): 75 -> 72; generatePopulation|factions, generatePopulation|conflicts
     // and corruptionPass|factions left with the keys (the groups and conflicts are derived at assembly).
-    expect(GENERATION_TIER1.length, 'the measured denominator at this base').toBe(74); // lane CRISIS (2026-11-03): resolveCrisisCast joins: two rows (72 -> 74)
+    expect(GENERATION_TIER1.length, 'the measured denominator at this base').toBe(75); // 2026-11-07 PEOPLE-1 CAST: 74 -> 75, `assembleSettlement|relationships|mutates` (the seam's ties) // lane CRISIS (2026-11-03): resolveCrisisCast joins: two rows (72 -> 74)
 
     const declared = GENERATION_TIER1.map((row) => `${row.step}|${row.key}`);
     const live = pairs.map((pair) => `${pair.step}|${pair.key}`);
@@ -118,7 +118,7 @@ describe('EM-P2 — the generation fork register: totality, derivation, and Tier
     // The crisis cast (lane CRISIS, 2026-11-03): provides 55 -> 56 (resolveCrisisCast|crisisCast), mutates 17 -> 18
     // (resolveCrisisCast|settlement).
     expect(GENERATION_TIER1.filter((row) => row.via === 'provides').length, 'provides entries').toBe(56);
-    expect(GENERATION_TIER1.filter((row) => row.via === 'mutates').length, 'mutates-only entries').toBe(18);
+    expect(GENERATION_TIER1.filter((row) => row.via === 'mutates').length, 'mutates-only entries').toBe(19) /* 18 -> 19, PEOPLE-1 CAST: assembleSettlement|relationships|mutates */;
 
     // The accessors: a miss is `null` and `[]`, never `undefined` and never `null`.
     expect(tier1For('resolveConfig', 'tier'), 'tier1For hit').toBe(GENERATION_TIER1[0]);
@@ -168,19 +168,19 @@ describe('EM-P2 — the generation fork register: totality, derivation, and Tier
     // 2026-10-01, the urban band (ODQ §934.86): drawn 28 -> 29, pure 46 -> 45. The register's re-measure (fc0e2205f)
     // flipped assembleInstitutions|generationRepairs pure -> drawn (2 of 63 rows), and this tally follows the register.
     // GS-2 one faction set (2026-10-31, ODQ §934.101): drawn 29 -> 26; the three retired rows were all drawn.
-    expect(tallyOf(GENERATION_TIER1, 'class'), 'the entropy tally').toEqual({ drawn: 27, label: 1, pure: 46 }); // LANDING-1 (2026-11-04): factionCorrelationPass measures drawn at the landed tip (6 of 63 rows draw); before that, lane CRISIS (2026-11-03): resolveCrisisCast joins: both its rows are pure (45 -> 47)
+    expect(tallyOf(GENERATION_TIER1, 'class'), 'the entropy tally').toEqual({ drawn: 28 /* 27 -> 28, PEOPLE-1 CAST: the seam's ties row draws */, label: 1, pure: 46 }); // LANDING-1 (2026-11-04): factionCorrelationPass measures drawn at the landed tip (6 of 63 rows draw); before that, lane CRISIS (2026-11-03): resolveCrisisCast joins: both its rows are pure (45 -> 47)
     expect(GENERATION_TIER1.filter((row) => row.class === 'label').map((row) => `${row.step}|${row.key}`),
       'the single label row: a key that moves under a zero-draw step').toEqual(['generatePower|powerIntent']);
     // GS-2 (2026-10-31, ODQ §934.101): same 35 -> 34 and transformed 15 -> 13 in BOTH comparands below, the three
     // retired rows (generatePopulation|conflicts same; generatePopulation|factions and corruptionPass|factions transformed).
     expect(tallyOf(GENERATION_TIER1, 'onRecordClass'), 'the FINAL comparand tally')
-      .toEqual({ absent: 20, same: 30, transformed: 13, varies: 11 }); // LANDING-8 (2026-11-06): same 34 -> 30, varies 7 -> 11, the four stress rows under the copy-on-write crisis cast (lane D, 8befe5a0d). LANDING-1 (2026-11-04): one row same -> varies, re-measured by the census at the landed tip. lane CRISIS (2026-11-03): resolveCrisisCast joins: crisisCast absent, settlement same
+      .toEqual({ absent: 20, same: 31, transformed: 13, varies: 11 }); // 2026-11-07 PEOPLE-1 CAST: same 30 -> 31, the new relationships row // LANDING-8 (2026-11-06): same 34 -> 30, varies 7 -> 11, the four stress rows under the copy-on-write crisis cast (lane D, 8befe5a0d). LANDING-1 (2026-11-04): one row same -> varies, re-measured by the census at the landed tip. lane CRISIS (2026-11-03): resolveCrisisCast joins: crisisCast absent, settlement same
     // 2026-10-01, the urban band (ODQ §934.86): absent 27 -> 26, same 18 -> 19. The same re-measure moved two rows'
     // post-step comparand (generationRepairs absent -> varies; isolationSupport varies -> same), and both now agree
     // with their final comparand, so the disagreeing rows below go 18 -> 16 (generationForkCensus records the same).
     expect(tallyOf(GENERATION_TIER1, 'producedOnRecordClass'), 'the POST-STEP comparand tally')
       // 2026-11-07 PEOPLE-1 CAST: same 17 -> 16, varies 17 -> 18 — `generatePopulation|relationships` is produced by the step and then APPENDED TO at the coherence seam (the `other` mints' ties, castPowers.js), so the record's value varies from the step's.
-      .toEqual({ absent: 27, same: 16, transformed: 13, varies: 18 }); // LANDING-1 (2026-11-04): one row same -> varies, re-measured at the landed tip. lane CRISIS (2026-11-03): resolveCrisisCast joins; assembleSettlement|stress produced same -> varies
+      .toEqual({ absent: 27, same: 17, transformed: 13, varies: 18 }); // 2026-11-07 PEOPLE-1 CAST: same 16 -> 17, the new relationships row (its post-step comparand is the record's) // LANDING-1 (2026-11-04): one row same -> varies, re-measured at the landed tip. lane CRISIS (2026-11-03): resolveCrisisCast joins; assembleSettlement|stress produced same -> varies
 
     // §6.2b: the register carries both comparands BECAUSE sixteen rows disagree, and every
     // one of them is a key a LATER step rewrites. The set is derived from the register itself.
