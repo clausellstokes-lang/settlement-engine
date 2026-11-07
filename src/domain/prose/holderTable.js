@@ -215,7 +215,7 @@ export const HOLDER_SOURCES = Object.freeze({
   govMultiplier: Object.freeze({ kind: 'court', cite: 'src/generators/factionDynamics.js:109', read: true }),
   governanceFractured: Object.freeze({ kind: 'court', cite: 'src/generators/factionDynamics.js:115', read: true }),
   breakdown: Object.freeze({ kind: 'court', cite: 'src/generators/factionDynamics.js:161', read: true }),
-  blocs: Object.freeze({ kind: 'court', cite: 'src/domain/worldPulse/settlementPolitics.js:992', read: true }),
+  blocs: Object.freeze({ kind: 'court', cite: 'src/domain/worldPulse/settlementPolitics.js:993', read: true }),
   stability: Object.freeze({ kind: 'court', cite: 'src/generators/power/rulingStructure.js:702', read: true }),
   recentConflict: Object.freeze({ kind: 'court', cite: 'src/generators/power/rulingStructure.js:702', read: true }),
   termLines: Object.freeze({ kind: 'court', cite: 'src/domain/display/treatyDocument.js:376', read: true }),
@@ -236,7 +236,7 @@ export const HOLDER_SOURCES = Object.freeze({
   // ── the office itself: the record's own audit of the record ──
   structuralViolations: Object.freeze({ kind: 'office', cite: 'src/generators/steps/assembleSettlement.js:132', read: true }),
   structuralSuggestions: Object.freeze({ kind: 'office', cite: 'src/generators/steps/assembleSettlement.js:133', read: true }),
-  prominentRelationship: Object.freeze({ kind: 'office', cite: 'src/generators/narrativeGenerator.js:1031', read: true }),
+  prominentRelationship: Object.freeze({ kind: 'office', cite: 'src/generators/narrativeGenerator.js:1037', read: true }),
 });
 
 /**
