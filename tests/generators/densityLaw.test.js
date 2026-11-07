@@ -775,7 +775,7 @@ describe('end to end — the law through the real pipeline', () => {
     expect(unseated, 'R14: the density roll unseated the government on these seeds').toEqual([]);
     expect(moved, 'the law moved a head of government out of the governing house on these seeds').toEqual([]);
     expect(checked).toBeGreaterThan(0);
-  });
+  }, 180_000); // 2026-11-07 PEOPLE-1 CAST: an explicit budget — the arm births sixty v1 worlds beside the sixty lit ones (measured 20.3 s under a loaded 4-core box, past vitest's 20 s default)
 });
 
 describe('§817-Q2 — the atomic mint binds the event layer', () => {

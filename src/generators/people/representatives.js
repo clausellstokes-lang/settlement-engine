@@ -70,6 +70,22 @@ const NOT_A_SEAT_HOUSE = Object.freeze(['Town crier']);
  */
 export const YIELDS_TO = Object.freeze({ 'Priest (resident)': 'Access to parish church' });
 
+/**
+ * The transient config every card's pools are drawn through — the ONE spelling of the three tokens
+ * (`_tradeCommodity`, `_dominantFaction`, `_prosperity`) today's `generateNPCs` wrote on its config;
+ * the seam's late mint (castPowers.js) draws through the same object, never a second literal.
+ * @param {Record<string, any>} config @param {Record<string, any> | null | undefined} economicState
+ * @param {{ factions?: Array<{ faction?: string }> } | null | undefined} powerStructure
+ */
+export function transientNpcConfig(config, economicState, powerStructure) {
+  return {
+    ...config,
+    _tradeCommodity: deriveTradeCommodity(economicState || {}, { firstWordFallback: true }),
+    _dominantFaction: powerStructure?.factions?.[0]?.faction || null,
+    _prosperity: economicState?.prosperity || null,
+  };
+}
+
 /** @typedef {{ name?: string, isCustom?: boolean, source?: string }} RosterRow */
 /** @typedef {{ kind: 'house' | 'power', key: string, family: string | null, title: string }} CardInstitution */
 
@@ -145,12 +161,7 @@ export function generateRepresentatives(settlement, culture = 'germanic', config
   const seat = seatHouseOf(institutions);
   // The same config context generateNPCs handed every figure: the goal and secret pools read the
   // trade commodity, the dominant power and the prosperity through it.
-  const npcConfig = {
-    ...config,
-    _tradeCommodity: deriveTradeCommodity(economicState, { firstWordFallback: true }),
-    _dominantFaction: powerStructure?.factions?.[0]?.faction || null,
-    _prosperity: economicState?.prosperity || null,
-  };
+  const npcConfig = transientNpcConfig(config, economicState, powerStructure);
   // The settlement-scoped anti-repetition registry (see generateNPCs): one loyalty string, one
   // beat, one tell, one speech pattern, one goal, one secret per roster.
   const hookRegistry = { titles: new Set(), themes: new Set(), tells: new Set(), speech: new Set(), goals: new Set(), secrets: new Set() };

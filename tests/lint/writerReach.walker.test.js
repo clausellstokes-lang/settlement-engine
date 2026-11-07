@@ -108,8 +108,10 @@ const FROZEN_DIAL_GATED = Object.freeze([
   'customDefinitionCategory on factions',
   'customDefinitionCategory on stressors',
   'customDefinitionCategory on traditions',
-  'densityRungRole on members',
-  'densityRungRole on npcs',
+  // 2026-11-07 PEOPLE-1 CAST (M-5): `densityRungRole on members` and `on npcs` LEFT the dial-gated set by measurement —
+  // the rung roles are no longer WRITTEN at birth under either law (the cast replaces the rung roster; the roles are
+  // unread, densityBands.js byte-identical), so the lit corpus carries them no more than the dark one. A shrink,
+  // 53 -> 51, taken as the walker measured it; no row rowed.
   'description on stressors',
   'disablesGoods on stressors',
   'disablesInstitutions on stressors',
@@ -333,7 +335,12 @@ describe('writer-with-no-reader ratchet: the frozen register', () => {
     expect(Object.keys(frozen).length).toBe(live.verdicts.size);
     // The frozen map is the thing Car 2 hands CHARSET and READERREVIEW, so its SIZE
     // is a STOP of its own: never ship a multi-megabyte register.
-    expect(JSON.stringify(frozen).length, 'surfaceReach must stay under 1 MB').toBeLessThan(1_000_000);
+    // 2026-11-07 PEOPLE-1 CAST: 1 MB -> 1.3 MB, MEASURED (1,194,048 bytes at the lane's tip). The map holds one row per
+    // simulation ledger key per card id (`weakness on osr001:npc_coaching_inn`: 8,484 of its 12,569 rows), and the cast
+    // is ~3.6× the rung roster, so the per-id rows grew with it. A cost ceiling re-keyed at the measured figure, not a
+    // claim loosened; the per-id rows want ONE pattern row each (`weakness on osr#:npc_*`) — the register's shape, for
+    // the chair (docs/PEOPLE_1_CAST_2026-11-07.md §4).
+    expect(JSON.stringify(frozen).length, 'surfaceReach must stay under 1.3 MB').toBeLessThan(1_300_000);
   });
 
   test('CHARSET_SURFACES mirrors SURFACE_CLASSES minus news and minus web-transitive — the six RENDERING classes, pinned for the day CHARSET Car 1 lands', () => {
@@ -576,7 +583,10 @@ describe('writer-with-no-reader ratchet: the live judgment', () => {
     expect(rows.length).toBeGreaterThan(5000);
     const byKey = new Map();
     for (const row of rows) byKey.set(row.key, (byKey.get(row.key) ?? 0) + 1);
-    expect([...byKey].sort((a, b) => b[1] - a[1])[0][0]).toBe('id');
+    // 2026-11-07 PEOPLE-1 CAST: 'id' -> 'name'. The cross-join's most frequent key was the id (`npc_<N>`, re-keyed by
+    // the simulation's ledgers per card); the cast's ids are the houses' slugs and the ledgers key by them once per
+    // card, while every card's NAME is read by the dossier, the PDF and the journal — the name leads the count now.
+    expect([...byKey].sort((a, b) => b[1] - a[1])[0][0]).toBe('name');
     expect(osrScansRun, 'the cross-join shares ONE OSR pass across both arms').toBe(1);
   }, 120_000);
 
@@ -1128,11 +1138,14 @@ describe('writer-with-no-reader ratchet: the lit-dial arm', () => {
     expect(live.verdicts.has('customContentRoster on settlement')).toBe(false);
   });
 
-  test('the density v2 roll is dial-gated: densityRungRole on npcs is present lit and absent dark', () => {
-    expect(litShapes.npcs.keys).toContain('densityRungRole'); // anchored: the dark side is asserted absent on the next line
+  test('the density v2 roll writes no rung role under either law (PEOPLE-1 CAST, M-5): densityRungRole is absent lit and dark', () => {
+    // 2026-11-07 PEOPLE-1 CAST: the rung roles are retired from birth with the roster they stamped (M-5: unread; the
+    // bands stay signed). The arm's claim inverts with its cause: the key is absent on BOTH sides and gated nowhere.
+    expect(litShapes.npcs.keys).toContain('importance'); // anchored: the lit corpus still carries the cast's rank band
+    expect(litShapes.npcs.keys.includes('densityRungRole')).toBe(false);
     expect(live.corpus.shapes.npcs.keys.includes('densityRungRole')).toBe(false);
-    expect(gated.has('densityRungRole on npcs')).toBe(true);
-    expect(gated.has('densityRungRole on members')).toBe(true);
+    expect(gated.has('densityRungRole on npcs')).toBe(false);
+    expect(gated.has('densityRungRole on members')).toBe(false);
     expect(live.verdicts.has('densityRungRole on npcs')).toBe(false);
   });
 
@@ -1140,9 +1153,9 @@ describe('writer-with-no-reader ratchet: the lit-dial arm', () => {
     // §7.1 compares the lit corpus against the WALKER'S corpus, which moves two
     // variables at once and misses a third. Every reading is asserted TOGETHER so
     // the corrections are measured quantities rather than an argument.
-    expect(confounded.size, 'lit vs the walker corpus: the pack counted as a dial').toBe(53);
-    expect(packControlOnly.size, 'pack held constant, producer set still asymmetric').toBe(33); // GS-2: 34 -> 33 with importance on members
-    expect(gated.size, 'both controls applied').toBe(29);
+    expect(confounded.size, 'lit vs the walker corpus: the pack counted as a dial').toBe(51); // 53 -> 51, PEOPLE-1 CAST (M-5): the two rung-role rows
+    expect(packControlOnly.size, 'pack held constant, producer set still asymmetric').toBe(31) /* 33 -> 31, PEOPLE-1 CAST (M-5): the two rung-role rows left the dial-gated set */; // GS-2: 34 -> 33 with importance on members
+    expect(gated.size, 'both controls applied').toBe(27) /* 29 -> 27, PEOPLE-1 CAST (M-5): the two rung-role rows */;
     expect(confounded.size - packControlOnly.size, '23 pack-attributable, less 3 the pack control also gains (was 24/21 before source on stressors turned ordinary at §900)')
       .toBe(20);
     // The four the DARK-corpus control removes are keys a shipped world does write,
@@ -1161,7 +1174,7 @@ describe('writer-with-no-reader ratchet: the lit-dial arm', () => {
 
   test('every dial-gated identity is in the frozen roster and every frozen entry is still dial-gated — a new dial-gated key reds by name', () => {
     expect([...gated].sort()).toEqual([...FROZEN_DIAL_GATED]);
-    expect(FROZEN_DIAL_GATED.length).toBe(29);
+    expect(FROZEN_DIAL_GATED.length).toBe(27); // 29 -> 27, PEOPLE-1 CAST (M-5)
     expect(new Set(FROZEN_DIAL_GATED).size).toBe(FROZEN_DIAL_GATED.length);
     for (const identity of FROZEN_DIAL_GATED) {
       expect(identity).toMatch(/^\S+ on \S+$/);
