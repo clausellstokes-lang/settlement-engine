@@ -150,7 +150,10 @@ const GOLDEN_CONTROL_KEY = 'town|germanic|plains|road|civilized|golden-master-v3
 // dc73b260 car 3 (70fac9ff0) -> ddde4e81 SELF-VOUCH I5 (70e58b6df) -> 498c9bda PLACE-NOT-TIER (dd65cb629) -> 40f855d3
 // TRUTH unit D (dfe79d34e) -> eab06b85 car 3 I7 (c099f0a4d) -> 84f03e52 F5 (efae972d4) -> c8942082 F6 (90218b271) ->
 // 57b4e0e1 F1 (81f690f78) -> 0dfd25bc F10 (fb06483e0); record 28 (the V-SUMMARY-HOOKS cure) does not move it.
-const GOLDEN_CONTROL_HASH = '0dfd25bc67d146684b685d585b162936ea90ca3144d960deac86985ac97679c0';
+// 2026-11-07, the wiring wave's writer lane W0 (ODQ §934.105, R-W7), traced the same way at each record commit: 0dfd25bc
+// held by record 01 (0d440e3a3) -> 02966f46 ONE IMPORT SHARE (098019be7) -> 5598ccec ONE FOOD-SOURCE COUNT (d6d4c49cf) ->
+// 95d0f88a LEGACY ANNOTATIONS DATED (ffacca9e4) -> 27d34617 THE DATE IN ONE HOME (bd55f335e).
+const GOLDEN_CONTROL_HASH = '27d3461765dbf71f03b18c0ecae8b54b1437ffec1c0cc7a7707fbdd5e4a6cea0';
 /** EM-P0's own pinned-mode row and its chooser keys, re-measured here under the mocks. */
 const PIN_ROW = {
   settType: 'town', culture: 'germanic', terrainOverride: 'riverside',
