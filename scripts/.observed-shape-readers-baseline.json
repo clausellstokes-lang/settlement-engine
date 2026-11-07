@@ -169,14 +169,14 @@
  "digests": {
   "corpusMeta": "1cdc2e25094f986b5593dacbb540bd2ee5e907986b8f9d158ba6c675c815cc51",
   "inventory": "0e041c80d4ba04cf22739f02521c21a39f09bbd52dfb83088eb2c081be192e29",
-  "manifests": "76b48a5ba9ee638a4f33dd775a3be9ec3b36cddc14ab77e513cd163999be44c2",
+  "manifests": "d1abf0486897578e7ad36d90413c8fece7308f105872b7cab775c69516aba692",
   "migrationReview": "a2bf8d63109cf5e8767eb90336782ccb0ba94c391bfc3e76dc45d94016c96b81",
   "rowTags": "1ebab9f067e5ec39f32a8c38b8e1a18c24d8ad0c66109851551ef84efc314447",
-  "scanStats": "9cbfecb6f0df0c466b7f34841059e6206bab0da61db7523bbdb41c185f6ae3a9",
+  "scanStats": "d0bbe575cb3744ed823d624c1c16c337776c8a703aa17fcb1b6008b2c4915869",
   "sentinel": "4e64bed447a6b4e3ef10d77c5845d0af6d532a024d8a9afda5a2cc94365159f8"
  },
  "frozen": "2026-11-07",
- "frozenAtSha": "3ea5100c96ef000b37166a9db86be47deb790def",
+ "frozenAtSha": "0610f8da2c32033788cb5d0be283fd30a6f8d4b4",
  "identities": 1450,
  "inventory": {
   "src/components/BuyThisDossier.jsx": {
@@ -2522,7 +2522,7 @@
   },
   "executionTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "36034c130c59ecfd1f235ffe8b7651d5743a97833c5b161253fcdf3ffa62592f",
+   "digest": "820cf799ba98240a3ab5e226f40181e800857c0727097bae9d1193a6a0aef5c3",
    "entries": [
     {
      "mode": "100644",
@@ -7063,8 +7063,8 @@
     {
      "mode": "100644",
      "path": "src/data/dossierCausalProse.generated.js",
-     "sha256": "796baafc23b298353497283fae4802a7863f39e7c5661f9db5db411272a91ff8",
-     "size": 199851,
+     "sha256": "ee5ef2833333157c8fafa6a5ef340d0e95cd22012b37ea8a336304603becee62",
+     "size": 200117,
      "type": "file"
     },
     {
@@ -9877,8 +9877,8 @@
     {
      "mode": "100644",
      "path": "src/domain/dossier/hookLines.js",
-     "sha256": "b6af7da668bd583f8f0a01c0d6f06e14f85acda16b40411d64cd7dfd9ebbcf5b",
-     "size": 16987,
+     "sha256": "c895cb30742f4d0e44d46a431957be6b86ac490fc8bb84e18096ef48fd76d4b7",
+     "size": 16985,
      "type": "file"
     },
     {
@@ -15932,8 +15932,8 @@
     {
      "mode": "100644",
      "path": "src/foundry/journalPages.js",
-     "sha256": "f003657b04c04baf316804ad7c161f2f79279fefc9fc88cb2dccb4b9664f0ccc",
-     "size": 27149,
+     "sha256": "db37debf85a84a4d8531b4c1e373eaa87e28ef04d255588c480933a8304bcf5b",
+     "size": 27647,
      "type": "file"
     },
     {
@@ -18718,8 +18718,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/sections/EconomicsTrade.jsx",
-     "sha256": "6405523320f598c700c4d1a5a41f76d7011d946d064053e7d7dbd2a03df90758",
-     "size": 25941,
+     "sha256": "d6232ecc088f638a6bc3a1073689755741519b59935a5aab77069f5ff01cce60",
+     "size": 27466,
      "type": "file"
     },
     {
@@ -18767,8 +18767,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/sections/Overview.jsx",
-     "sha256": "a7c558e981c15ba1ac48687ada5c2fc415f7b9cbbc2b751938da57db206f9df0",
-     "size": 25129,
+     "sha256": "060d73db2ef735a3389b53d8ce7a8aa2a5a09043184aebedf64ce40cc339ed02",
+     "size": 25747,
      "type": "file"
     },
     {
@@ -19629,7 +19629,7 @@
   },
   "scanTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "82f5987cb577eae3e57729fc92ed8a8a6234fc0f65c20a04347191bed77de287",
+   "digest": "2b69419d332e3036544df6312404cd346f80e09c726e7250aea4911a46d67b69",
    "entries": [
     {
      "mode": "100644",
@@ -26795,8 +26795,8 @@
     {
      "mode": "100644",
      "path": "src/domain/dossier/hookLines.js",
-     "sha256": "b6af7da668bd583f8f0a01c0d6f06e14f85acda16b40411d64cd7dfd9ebbcf5b",
-     "size": 16987,
+     "sha256": "c895cb30742f4d0e44d46a431957be6b86ac490fc8bb84e18096ef48fd76d4b7",
+     "size": 16985,
      "type": "file"
     },
     {
@@ -32850,8 +32850,8 @@
     {
      "mode": "100644",
      "path": "src/foundry/journalPages.js",
-     "sha256": "f003657b04c04baf316804ad7c161f2f79279fefc9fc88cb2dccb4b9664f0ccc",
-     "size": 27149,
+     "sha256": "db37debf85a84a4d8531b4c1e373eaa87e28ef04d255588c480933a8304bcf5b",
+     "size": 27647,
      "type": "file"
     },
     {
@@ -35636,8 +35636,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/sections/EconomicsTrade.jsx",
-     "sha256": "6405523320f598c700c4d1a5a41f76d7011d946d064053e7d7dbd2a03df90758",
-     "size": 25941,
+     "sha256": "d6232ecc088f638a6bc3a1073689755741519b59935a5aab77069f5ff01cce60",
+     "size": 27466,
      "type": "file"
     },
     {
@@ -35685,8 +35685,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/sections/Overview.jsx",
-     "sha256": "a7c558e981c15ba1ac48687ada5c2fc415f7b9cbbc2b751938da57db206f9df0",
-     "size": 25129,
+     "sha256": "060d73db2ef735a3389b53d8ce7a8aa2a5a09043184aebedf64ce40cc339ed02",
+     "size": 25747,
      "type": "file"
     },
     {
@@ -36540,7 +36540,7 @@
   },
   "sourceTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "ee44308e435a312054f2bb897bc54799df43def6c68e0038569c30adc47998a2",
+   "digest": "beba91229f697bebb4a07a17c19195d18e1f771dab5497c8b5566c7bb2a0635c",
    "entries": [
     {
      "mode": "100644",
@@ -41011,8 +41011,8 @@
     {
      "mode": "100644",
      "path": "src/data/dossierCausalProse.generated.js",
-     "sha256": "796baafc23b298353497283fae4802a7863f39e7c5661f9db5db411272a91ff8",
-     "size": 199851,
+     "sha256": "ee5ef2833333157c8fafa6a5ef340d0e95cd22012b37ea8a336304603becee62",
+     "size": 200117,
      "type": "file"
     },
     {
@@ -43825,8 +43825,8 @@
     {
      "mode": "100644",
      "path": "src/domain/dossier/hookLines.js",
-     "sha256": "b6af7da668bd583f8f0a01c0d6f06e14f85acda16b40411d64cd7dfd9ebbcf5b",
-     "size": 16987,
+     "sha256": "c895cb30742f4d0e44d46a431957be6b86ac490fc8bb84e18096ef48fd76d4b7",
+     "size": 16985,
      "type": "file"
     },
     {
@@ -49880,8 +49880,8 @@
     {
      "mode": "100644",
      "path": "src/foundry/journalPages.js",
-     "sha256": "f003657b04c04baf316804ad7c161f2f79279fefc9fc88cb2dccb4b9664f0ccc",
-     "size": 27149,
+     "sha256": "db37debf85a84a4d8531b4c1e373eaa87e28ef04d255588c480933a8304bcf5b",
+     "size": 27647,
      "type": "file"
     },
     {
@@ -52666,8 +52666,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/sections/EconomicsTrade.jsx",
-     "sha256": "6405523320f598c700c4d1a5a41f76d7011d946d064053e7d7dbd2a03df90758",
-     "size": 25941,
+     "sha256": "d6232ecc088f638a6bc3a1073689755741519b59935a5aab77069f5ff01cce60",
+     "size": 27466,
      "type": "file"
     },
     {
@@ -52715,8 +52715,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/sections/Overview.jsx",
-     "sha256": "a7c558e981c15ba1ac48687ada5c2fc415f7b9cbbc2b751938da57db206f9df0",
-     "size": 25129,
+     "sha256": "060d73db2ef735a3389b53d8ce7a8aa2a5a09043184aebedf64ce40cc339ed02",
+     "size": 25747,
      "type": "file"
     },
     {
@@ -53887,16 +53887,16 @@
  },
  "scanStats": {
   "files": 2415,
-  "reads": 138176,
+  "reads": 138178,
   "resolved": 10641,
-  "unresolved": 127535
+  "unresolved": 127537
  },
  "scannerProvenance": {
   "detectorDigest": "6cfb9c8153e72e136ee73aae0de2c6342fd3ed80f35fda14fe9e9343e1b8c260",
-  "executionTreeDigest": "36034c130c59ecfd1f235ffe8b7651d5743a97833c5b161253fcdf3ffa62592f",
-  "scanTreeDigest": "82f5987cb577eae3e57729fc92ed8a8a6234fc0f65c20a04347191bed77de287",
-  "sourceTreeDigest": "ee44308e435a312054f2bb897bc54799df43def6c68e0038569c30adc47998a2",
-  "unscannedInputDigest": "2e0e70889c1427c0d7b624ad670c5d5ffcfe188974b71c36cd63d79d1791367f"
+  "executionTreeDigest": "820cf799ba98240a3ab5e226f40181e800857c0727097bae9d1193a6a0aef5c3",
+  "scanTreeDigest": "2b69419d332e3036544df6312404cd346f80e09c726e7250aea4911a46d67b69",
+  "sourceTreeDigest": "beba91229f697bebb4a07a17c19195d18e1f771dab5497c8b5566c7bb2a0635c",
+  "unscannedInputDigest": "c683bf1b799ecdf7ac118dda1f9947cc5759394e65ecaa31222376a56e108665"
  },
  "schema": 30,
  "sentinel": {
