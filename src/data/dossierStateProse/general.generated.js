@@ -10041,7 +10041,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "institution: hospital"
           ],
-          "text": "There is a house for the sick in {settlement}, so a bad year here is nursed and not only endured.",
+          "text": "There is a house for the sick in {settlement}. In a bad year the ill are taken in and fed from its stores, and fewer die than would otherwise.",
           "slots": [
             "settlement"
           ],

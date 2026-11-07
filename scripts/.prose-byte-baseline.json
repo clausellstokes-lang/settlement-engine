@@ -67,8 +67,8 @@
       "ceilingGzip": 87513
     },
     "src/data/dossierStateProse/general.generated.js": {
-      "raw": 272102,
-      "gzip": 36423,
+      "raw": 272147,
+      "gzip": 36445,
       "ceilingRaw": 796761,
       "ceilingGzip": 177058
     },
@@ -291,6 +291,14 @@
       "toRaw": 272102,
       "gzipAfter": 36423,
       "reason": "+344 B raw (gzip level 9: 36,378 -> 36,423), one commit: DS-GEN-17 PROVISIONED gains v3 `[visitor · institution: hospital]`, the line census-2b item 2 left the hospital-only key without. Projected through `node scripts/generate-dossier-state-prose.mjs`; `--check` exit 0."
+    },
+    {
+      "car": "The chair's ruling of 2026-11-07 06:5x UTC (ODQ §934.105, ruling (1)): DS-GEN-17 PROVISIONED v3 reworded one step plainer under the style law, recorded by LANDING-R2 helper G2",
+      "leaf": "src/data/dossierStateProse/general.generated.js",
+      "fromRaw": 272102,
+      "toRaw": 272147,
+      "gzipAfter": 36445,
+      "reason": "+45 B raw (gzip level 9: 36,423 -> 36,445), one commit: PROVISIONED v3 `[visitor · institution: hospital]` keeps its reads and its slot and takes the chair's wording (the thing seen, then what follows: the ill taken in and fed from its stores, fewer dying). Projected through `node scripts/generate-dossier-state-prose.mjs`; `--check` exit 0."
     }
   ],
   "ceilingTransfersNewLeaves": [

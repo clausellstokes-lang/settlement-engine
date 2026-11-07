@@ -111,9 +111,12 @@ describe('the four negative controls and the positive one (MOVE-GRAMMAR §4.4, a
     // 410 / 103 -> 406 / 114 at the rung-2 landing, measured per commit on the leaves (parent ->
     // commit): F12 unit 2 e19e3e4cf -2 / +4; census-2b item 5 70d05b25b 0 / +1; census-3c unit 4
     // e3295d168 -1 / +4; census-5b unit 3 c00b30eb6 -1 / +2 (the twins share their pools' openers).
-    expect(uniformSegments).toBe(406);
+    // 406 / 114 -> 405 / 114 at the chair's 06:5x rewording of DS-GEN-17 PROVISIONED v3 (ODQ §934.105):
+    // v3 is now two sentences beside v1's and v2's one, so the pool is no longer uniform; its opener
+    // ("there is") is unchanged and still the pool's own.
+    expect(uniformSegments).toBe(405);
     expect(repeatedOpener).toBe(114);
-    expect(uniformSegments / cells.size).toBeCloseTo(0.573, 3);
+    expect(uniformSegments / cells.size).toBeCloseTo(0.571, 3);
     expect(repeatedOpener / cells.size).toBeCloseTo(0.161, 3);
   });
 
@@ -135,7 +138,8 @@ describe('the four negative controls and the positive one (MOVE-GRAMMAR §4.4, a
     // The arm reads the SAME pools the calibration counted, to the unit.
     const figures = /** @type {any} */ (report.figures.spread);
     expect(figures.pools).toBe(709);
-    expect(Math.round(figures.uniformSegmentShare * 709)).toBe(406);
+    // 406 -> 405 by the same cause as the calibration above (the chair's 06:5x rewording of DS-GEN-17 v3).
+    expect(Math.round(figures.uniformSegmentShare * 709)).toBe(405);
     expect(Math.round(figures.repeatedOpenerShare * 709)).toBe(114);
   });
 

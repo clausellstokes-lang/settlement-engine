@@ -6344,7 +6344,7 @@ no compass word, no real-world place, no named analogy.*
 **`PROVISIONED`**
 1. `[ledger · institution: granary · institution: hospital]` {settlement} keeps stores against the bad season and care for the bad year; the town has met scarcity before and built its answer into the roster.
 2. `[elder · institution: granary]` A town does not keep a granary out of optimism; {settlement}'s provision is the polite form of its memory.
-3. `[visitor · institution: hospital]` There is a house for the sick in {settlement}, so a bad year here is nursed and not only endured.
+3. `[visitor · institution: hospital]` There is a house for the sick in {settlement}. In a bad year the ill are taken in and fed from its stores, and fewer die than would otherwise.
 
 **`BARE`** {colour}
 1. `[counterforce]` {settlement} keeps few institutions because it needs few; what a larger town does with buildings, this one does with acquaintance.
