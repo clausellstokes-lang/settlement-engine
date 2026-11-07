@@ -2551,44 +2551,44 @@ margin *arm*. They are different fields on different rows and both are kept;
 **readiness `STRONG`** {crisis-scoped}
 1. `[visitor · crisis: any]` {settlement} reads as a defended place from the road in: the approaches are watched, the works are kept up, and none of it looks like it was thrown together.
 2. `[ledger · crisis: any]` What {settlement} can field and what {settlement} has built are both in good order; the town would take real effort to threaten and knows it.
-3. `[street · no threat · crisis: any · no crisis: unrest]` The town does not spend much time thinking about being attacked, and the reason is not complacency. The arrangements are in place, and the town is not relying on anything else instead.
-4. `[counterforce · no threat]` Nothing presses {settlement} at present, and the absence is not luck: a town this well set is not worth the price of trying.
+3. `[street · no threat · crisis: any · no crisis: unrest]` The town does not spend much time thinking about being attacked: its defences are in good order, and its people know it.
+4. `[counterforce · no threat]` Nothing presses {settlement} at present: its defences would make any attack costly, so raiders and rivals look elsewhere.
 
 **readiness `ADEQUATE`** {colour}
 1. `[ledger]` {settlement} is covered against what it is likely to face, with little left over. The arrangements work and would not survive being tested twice at once.
-2. `[visitor]` A stranger sees the town at {settlement} defended in the ordinary way: enough to be serious, not enough to be reassuring.
-3. `[street]` The town believes it could hold against the usual trouble and does not claim more than that, which is a fair reading of what it has.
+2. `[visitor]` To anyone arriving, {settlement} looks defended in the ordinary way: enough for the usual trouble, and nothing to spare.
+3. `[street]` People at {settlement} expect to hold against the usual trouble, and they claim no more than that.
 4. `[threshold]` {settlement} is at the point where the arrangements are sufficient and nothing is spare. One more demand on them and the town would be choosing which pressure to leave uncovered.
 
 **readiness `WEAK`** {crisis-scoped}
 1. `[ledger · crisis: any]` The defensive arrangements at {settlement} are thin. Something is in place against most pressures and nothing is in place in depth.
-2. `[visitor · walls · crisis: any · no crisis: threat, unrest]` What a stranger notices at {settlement} is how much of the perimeter has nobody on it, and how normal the town seems to find that.
-3. `[unfolding · crisis: any · no crisis: threat, unrest]` {settlement} is getting by on not being tested. The margin has been narrowing rather than widening, and nothing in hand is closing it.
+2. `[visitor · walls · crisis: any · no crisis: threat, unrest]` Much of the perimeter at {settlement} has nobody on it, and the people who live there seem used to that.
+3. `[unfolding · crisis: any · no crisis: threat, unrest]` {settlement} has not been tested lately and would struggle if it were. Its defences are thinning, and nothing now under way will mend them.
 
 **readiness `CRITICAL`** {crisis-scoped}
 1. `[ledger · crisis: any]` {settlement} is effectively undefended. There is no arrangement here that would slow a serious attempt on the town by more than the time it takes to walk in.
-2. `[street · crisis: any]` The town knows perfectly well what it could not survive, and the knowledge shapes what it will and will not provoke.
-3. `[visitor · crisis: any · no crisis: threat, unrest]` A stranger reaches the centre of {settlement} without being stopped, challenged or counted by anybody at all.
+2. `[street · crisis: any]` People at {settlement} know the town could not survive a serious attack, so they take care not to provoke anyone who could mount one.
+3. `[visitor · crisis: any · no crisis: threat, unrest]` You can walk into the centre of {settlement} without being stopped, challenged or counted by anybody at all.
 
 **terrain FAVOURABLE to the defender** {colour}
 1. `[visitor]` The ground does more for {settlement} than the town does. The approach is narrow, and anything coming at it has to come the long way and in the open.
 2. `[ledger]` {settlement} is sited where the terrain carries part of the defense; what the town has built is worth more here than the same works would be on flat ground.
-3. `[counterforce]` The ground here does the arguing. Anything weighing an attempt on {settlement} has to weigh the approach first, and the approach is the part that does not improve with numbers.
+3. `[counterforce]` Any attack on {settlement} must first cross the approach, and bringing more fighters does not make that easier.
 
 **terrain EXPOSED** {colour}
 1. `[visitor]` {settlement} sits open. There is no ground here that helps it, and everything the town has must be built rather than found.
 2. `[ledger]` The site gives {settlement} nothing defensively. Every advantage the town holds is one it has paid for and must keep paying for.
-3. `[street]` The town has no hill and no narrows and does not pretend otherwise; what {settlement} holds it holds by standing on it.
+3. `[street]` People at {settlement} know their ground gives them no help: there is no hill and no narrows, and whatever defends the town had to be built by hand.
 
 **strategic value HIGH** {colour}
-1. `[ledger]` {settlement} holds something worth taking, and that is the whole of the defensive problem: the town must be worth more to keep than it is to seize.
-2. `[street]` The town is aware of what it sits on and aware that others are aware, and the awareness runs underneath a great deal of what it decides.
-3. `[visitor]` A stranger understands within a day why anybody would want {settlement}, and understands shortly afterwards why the town is so careful about who it offends.
+1. `[ledger]` Any map of the region marks {settlement} as worth taking, so the town has to make itself cost more to seize than it is worth.
+2. `[street]` People at {settlement} know what their town sits on and that their neighbours know it too, and it makes them careful whom they cross.
+3. `[visitor]` Spend a day at {settlement} and you see why anyone would want it, and why its people are careful whom they offend.
 
 **strategic value LOW**
 1. `[counterforce · no crisis: under_siege, occupied]` Nothing at {settlement} is worth an army's season, and the town's best defense is that plain fact rather than anything it has built.
-2. `[ledger · no crisis: under_siege, occupied]` {settlement} is not a prize. What it can field matters less here than what it does not have that anyone would come for.
-3. `[street · no crisis: under_siege, occupied]` The town knows it is not worth taking and has made a kind of peace with the knowledge, which is not the same as being comfortable with it.
+2. `[ledger · no crisis: under_siege, occupied]` {settlement} is not a prize: no map of the region marks it as worth taking, and that protects it better than anything the town has built.
+3. `[street · no crisis: under_siege, occupied]` People at {settlement} know the town is not worth taking, and they count on that more than on their own defences.
 4. `[counterforce · crisis: under_siege, occupied]` Nothing at {settlement} was worth an army's season by any sensible reckoning, and somebody has come for it anyway; the town's plainness is no defense now.
 
 ---

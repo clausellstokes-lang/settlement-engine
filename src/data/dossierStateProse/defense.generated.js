@@ -46,7 +46,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "crisis: any",
             "no crisis: unrest"
           ],
-          "text": "The town does not spend much time thinking about being attacked, and the reason is not complacency. The arrangements are in place, and the town is not relying on anything else instead.",
+          "text": "The town does not spend much time thinking about being attacked: its defences are in good order, and its people know it.",
           "slots": [],
           "vid": 3
         },
@@ -55,7 +55,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no threat"
           ],
-          "text": "Nothing presses {settlement} at present, and the absence is not luck: a town this well set is not worth the price of trying.",
+          "text": "Nothing presses {settlement} at present: its defences would make any attack costly, so raiders and rivals look elsewhere.",
           "slots": [
             "settlement"
           ],
@@ -73,7 +73,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "A stranger sees the town at {settlement} defended in the ordinary way: enough to be serious, not enough to be reassuring.",
+          "text": "To anyone arriving, {settlement} looks defended in the ordinary way: enough for the usual trouble, and nothing to spare.",
           "slots": [
             "settlement"
           ],
@@ -81,8 +81,10 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "The town believes it could hold against the usual trouble and does not claim more than that, which is a fair reading of what it has.",
-          "slots": [],
+          "text": "People at {settlement} expect to hold against the usual trouble, and they claim no more than that.",
+          "slots": [
+            "settlement"
+          ],
           "vid": 3
         },
         {
@@ -113,7 +115,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "crisis: any",
             "no crisis: threat, unrest"
           ],
-          "text": "What a stranger notices at {settlement} is how much of the perimeter has nobody on it, and how normal the town seems to find that.",
+          "text": "Much of the perimeter at {settlement} has nobody on it, and the people who live there seem used to that.",
           "slots": [
             "settlement"
           ],
@@ -125,7 +127,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "crisis: any",
             "no crisis: threat, unrest"
           ],
-          "text": "{settlement} is getting by on not being tested. The margin has been narrowing rather than widening, and nothing in hand is closing it.",
+          "text": "{settlement} has not been tested lately and would struggle if it were. Its defences are thinning, and nothing now under way will mend them.",
           "slots": [
             "settlement"
           ],
@@ -149,8 +151,10 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "crisis: any"
           ],
-          "text": "The town knows perfectly well what it could not survive, and the knowledge shapes what it will and will not provoke.",
-          "slots": [],
+          "text": "People at {settlement} know the town could not survive a serious attack, so they take care not to provoke anyone who could mount one.",
+          "slots": [
+            "settlement"
+          ],
           "vid": 2
         },
         {
@@ -159,7 +163,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "crisis: any",
             "no crisis: threat, unrest"
           ],
-          "text": "A stranger reaches the centre of {settlement} without being stopped, challenged or counted by anybody at all.",
+          "text": "You can walk into the centre of {settlement} without being stopped, challenged or counted by anybody at all.",
           "slots": [
             "settlement"
           ],
@@ -185,7 +189,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "counterforce",
-          "text": "The ground here does the arguing. Anything weighing an attempt on {settlement} has to weigh the approach first, and the approach is the part that does not improve with numbers.",
+          "text": "Any attack on {settlement} must first cross the approach, and bringing more fighters does not make that easier.",
           "slots": [
             "settlement"
           ],
@@ -211,7 +215,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "The town has no hill and no narrows and does not pretend otherwise; what {settlement} holds it holds by standing on it.",
+          "text": "People at {settlement} know their ground gives them no help: there is no hill and no narrows, and whatever defends the town had to be built by hand.",
           "slots": [
             "settlement"
           ],
@@ -221,7 +225,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "strategic value HIGH": [
         {
           "angle": "ledger",
-          "text": "{settlement} holds something worth taking, and that is the whole of the defensive problem: the town must be worth more to keep than it is to seize.",
+          "text": "Any map of the region marks {settlement} as worth taking, so the town has to make itself cost more to seize than it is worth.",
           "slots": [
             "settlement"
           ],
@@ -229,13 +233,15 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "The town is aware of what it sits on and aware that others are aware, and the awareness runs underneath a great deal of what it decides.",
-          "slots": [],
+          "text": "People at {settlement} know what their town sits on and that their neighbours know it too, and it makes them careful whom they cross.",
+          "slots": [
+            "settlement"
+          ],
           "vid": 2
         },
         {
           "angle": "visitor",
-          "text": "A stranger understands within a day why anybody would want {settlement}, and understands shortly afterwards why the town is so careful about who it offends.",
+          "text": "Spend a day at {settlement} and you see why anyone would want it, and why its people are careful whom they offend.",
           "slots": [
             "settlement"
           ],
@@ -259,7 +265,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no crisis: under_siege, occupied"
           ],
-          "text": "{settlement} is not a prize. What it can field matters less here than what it does not have that anyone would come for.",
+          "text": "{settlement} is not a prize: no map of the region marks it as worth taking, and that protects it better than anything the town has built.",
           "slots": [
             "settlement"
           ],
@@ -270,8 +276,10 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no crisis: under_siege, occupied"
           ],
-          "text": "The town knows it is not worth taking and has made a kind of peace with the knowledge, which is not the same as being comfortable with it.",
-          "slots": [],
+          "text": "People at {settlement} know the town is not worth taking, and they count on that more than on their own defences.",
+          "slots": [
+            "settlement"
+          ],
           "vid": 3
         },
         {

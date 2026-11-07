@@ -521,8 +521,10 @@ describe('THE ANTI-VACUITY GUARD — the walker must fail on the corpus it ships
     // freely and work is easy to find") makes no dated claim, so the entry leaves the class.
     // 46 -> 45 (W2 DEF, 2026-11-07): DS-DEF-8's generic framing v1 rewritten off its actor claim ("What {settlement}'s defenses
     // are ordinarily worth ... the arrangements have been rebuilt"), measured on that one entry.
-    expect(notExecutable).toBe(45);
-    expect(fails).toBe(45);
+    // 45 -> 44 (W2 DEF fourth seat, 2026-11-07, the DS-DEF-1 style rows): readiness ADEQUATE v3's old wording ("The town
+    // believes it could hold ...") carried the class; its rewrite does not, measured on that one entry.
+    expect(notExecutable).toBe(44);
+    expect(fails).toBe(44);
     // PRESENT-THEN-ABSENT on one of them, so the arm is proved rather than counted.
     const anchor = corpus.find((entry) => walkEntry(entry, withEntryContext(base, { eventProvenance: false }))
       .fails.some((f) => f.klass === 'C3'));

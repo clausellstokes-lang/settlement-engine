@@ -239,7 +239,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -342,7 +342,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 3,
+      "grammars": 2,
       "predicate": [
         {
           "field": "text(terrain) (via TERRAIN_DEFENCE_OF in defenseStateProse.js)",
@@ -404,7 +404,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 3,
+      "grammars": 2,
       "predicate": [
         {
           "field": "text(terrain) (via TERRAIN_DEFENCE_OF in defenseStateProse.js)",
@@ -466,7 +466,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 1,
+      "grammars": 2,
       "predicate": [
         {
           "field": "text(terrain) (via TERRAIN_PRIZE_OF in defenseStateProse.js)",
@@ -48769,7 +48769,7 @@
         "DS-DEF-1 :: terrain EXPOSED"
       ],
       "variants": 6,
-      "grammars": 6,
+      "grammars": 4,
       "blocks": [
         "DS-DEF-1"
       ]
@@ -48781,7 +48781,7 @@
         "DS-DEF-1 :: strategic value LOW"
       ],
       "variants": 7,
-      "grammars": 2,
+      "grammars": 3,
       "blocks": [
         "DS-DEF-1"
       ]
@@ -57874,7 +57874,7 @@
       "subject": "readiness WEAK",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -57892,7 +57892,7 @@
         "text(terrain) (via TERRAIN_DEFENCE_OF in defenseStateProse.js)"
       ],
       "readingFunction": "TERRAIN_DEFENCE_OF",
-      "count": "3 variant(s) · 3 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -57902,7 +57902,7 @@
         "text(terrain) (via TERRAIN_DEFENCE_OF in defenseStateProse.js)"
       ],
       "readingFunction": "TERRAIN_DEFENCE_OF",
-      "count": "3 variant(s) · 3 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -57912,7 +57912,7 @@
         "text(terrain) (via TERRAIN_PRIZE_OF in defenseStateProse.js)"
       ],
       "readingFunction": "TERRAIN_PRIZE_OF",
-      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
