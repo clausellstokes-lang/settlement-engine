@@ -130,7 +130,13 @@ describe('dedicated INSTITUTION_SERVICES entry wins the lookup', () => {
 // ── Behavior: defence services are not crime-gated ───────────────────────────
 
 describe("Garrison 'Defence services' bucket and crime gate", () => {
-  const INSTS = [{ name: 'Garrison', category: 'Defense' }];
+  // The fixture holds the walls and gate its service presumes: 'Garrison' alone -> 'Garrison' + 'Town walls' at
+  // 9eee701c0 (census-1f unit 1c, site 15: the per-definition service roll resolves through drawDeclared, so
+  // "Defence services" — "Patrol, wall-walking, gate duty", declared `needs: ["walls","gate"]` by census-4c unit 5
+  // cd17614f4 — is not materialized where the record has no walls or gate). Measured: this file 12/12 green at
+  // 9eee701c0^ (1e712616f), the EVERY-seed arm red 25/25 at 9eee701c0. Stone walls carry their gates
+  // (defenseFacts.js hasGate). The claim tested — employment, never crime-gated — is unchanged.
+  const INSTS = [{ name: 'Garrison', category: 'Defense' }, { name: 'Town walls', category: 'Defense' }];
   const CONFIG = { settType: 'town', priorityCriminal: 8, priorityMilitary: 70, magicExists: true };
 
   it('the fixture really is a low-crime, well-garrisoned town', () => {
