@@ -3181,6 +3181,16 @@
     "tests/lint/faithTeaserLicence.test.js": {
       "kind": "rationale",
       "rationale": "LANE FAITH-POOLS (2026-11-04): EVERY DS-FTH-2 SENTENCE READS THE ONE FAITH READING. A closed-vocabulary walker over a generated prose block. IT IS A RATIONALE BECAUSE ITS REMOVER-PROOF IS CARRIED IN THE FILE AND RE-RUN ON EVERY GATE RUN: its anti-vacuity arm drives the LIVE detector (unlicensed) with a planted denial, a planted grade and a planted case-bound word out of place, each required to red. EXECUTED IN-PLACE NEGATIVE CONTROL on the shipped corpus as well (LANDING-7 lane F, 2026-11-06): DS-FTH-2 PRIVATE vid 1 in src/data/dossierStateProse/warFaith.generated.js rewritten to a denial (No faith holds {settlement}.) -> the corpus arm red (1 failed / 3); file restored byte-exact (git diff clean), 3/3 green. A standing sweep plant would mutate a generated artefact under its own freshness contract."
+    },
+    "tests/generators/migrationDirection.test.js": {
+      "kind": "rationale",
+      "rationale": "THE MIGRATION DIRECTION PIN (WIRING-W0 cause 1, R-W7 e). Its catching power was EXECUTED as the lane's red-first: the soak check it imports (scripts/audit/soak-review/checks.mjs :: migrationDirectionFindings, kind coh:migration-direction) reported 45 contradictory settlements of the soak 1,000 at 76febf9b0 and 0 at 343bd4eec, and the file's pipeline arm reads the very surfaces that disagreed (the Power vignette's departures, the stability label's hedge, the departure committee). Every reader arm drives the departures value no birth produces, so reverting any one reader's direction read reds its own arm by construction. A standing sweep plant is not offered because the readers live in shared generator modules (governanceNarrative.js, narrativeText.js, stressFactions.js) other lanes edit concurrently, and the sweep's revert is a checkout.",
+      "kindNote": "rationale rather than a standing plant: the red-first was executed and measured (45 -> 0); the targets are shared generator modules."
+    },
+    "tests/generators/w0WriterAgreement.test.js": {
+      "kind": "rationale",
+      "rationale": "THE WRITER-AGREEMENT PINS (WIRING-W0 causes 2-5, R-W7 a-d). Catching power EXECUTED per block as the lane's red-first, the file copied into the PARENT tree of each cure and run there: cause 4a red at 76febf9b0 ('foodSecurity.importPct and foodRecord.normalImportPct are one figure on every birth', 1 failed / 1 passed), cause 4b red at c99531cf9 (1 failed / 3 passed), cause 5 red at 3d1df12d7 (1 failed / 4 passed); each green at its cure. The causes 2-3 block is a guard measured at 0 of 1,525 before any change (no cure to plant against). A standing sweep plant is not offered: the writers are foodGenerator.js, foodBalance.js and legacyGenerator.js, shared generator modules whose revert by checkout would discard concurrent work.",
+      "kindNote": "rationale rather than a standing plant: each block's red was executed on its cure's parent tree and recorded with its counts."
     }
   },
   "meta": {
