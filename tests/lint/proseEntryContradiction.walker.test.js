@@ -310,7 +310,10 @@ describe('the corpus loaders — fail-closed, and counted against the probe', ()
     const crier = await loadCrierVoice();
     const generator = loadInFunctionNarratives();
     // PROBE_ALL X1: 2,734 leaves in 786 pools over the two dossier corpora.
-    expect(leaves.length + causal.length).toBe(2778);
+    // 2778 -> 2810: the state leaves' 2310 -> 2342 (F12 unit 2 e19e3e4cf +13, census-2b item 5
+    // 70d05b25b +4, census-5 unit 2 06b59812f +1, census-3c unit 4 e3295d168 +10, census-5b unit 3
+    // c00b30eb6 +4); the causal leaf and the 787 pools unchanged.
+    expect(leaves.length + causal.length).toBe(2810);
     expect(new Set([...leaves, ...causal].map((e) => e.poolId)).size).toBe(787);
     expect(new Set(leaves.map((e) => e.block)).size).toBe(68);
     expect(crier.length).toBeGreaterThan(300);
@@ -321,13 +324,16 @@ describe('the corpus loaders — fail-closed, and counted against the probe', ()
     const leaves = await loadStateLeaves();
     const { joined, unjoined, leafLines } = joinAnnexToLeaves(loadStateAnnex(), leaves);
     // PROBE_ALL R-4: 2,030 wired DOSSIER_STATE rows.
-    expect(joined.length).toBe(2069);
+    // 2069 -> 2121, measured with this join over each commit's annex and leaves, parent -> commit:
+    // e19e3e4cf +13, 70d05b25b +3, 06b59812f +1, e3295d168 +10, c00b30eb6 +4, and census-5c unit 2
+    // (6dd3f9766, the {colour} rulings) +21 rows whose text now joins its twin. 0 unjoined.
+    expect(joined.length).toBe(2121);
     expect(unjoined).toEqual([]);
     // The compact-row grammar (a whole pool on one bullet line, 225 variants) carries no
     // per-row address, so not every leaf variant has an annex line. That gap is the ADDRESS
     // reader's, is declared, and is why the pool grammar stays with the projection.
     expect(leafLines.size).toBeLessThan(leaves.length);
-    expect(leafLines.size).toBe(2069);
+    expect(leafLines.size).toBe(2121);
   });
 });
 
@@ -410,8 +416,10 @@ describe('THE ANTI-VACUITY GUARD — the walker must fail on the corpus it ships
     }
     // The fourth: the ANNEX row, cited by its own line number.
     const annexRow = joinAnnexToLeaves(loadStateAnnex(), leaves).joined
-      .find((row) => row.line === 5298);
-    expect(annexRow, 'RECEIPT_POOLS_DOSSIER_STATE.md:5298 did not load').toBeTruthy();
+      // 5298 -> 5325, re-addressed by its text ("the same trades exempt"): the census lanes' annex
+      // edits above it moved the row 27 lines (it now carries its census tag slot too).
+      .find((row) => row.line === 5325);
+    expect(annexRow, 'RECEIPT_POOLS_DOSSIER_STATE.md:5325 did not load').toBeTruthy();
     expect(walkEntry(annexRow, withEntryContext(base, {})).fails.map((f) => f.arm))
       .toContain('exemption on a null column');
   });
@@ -653,7 +661,9 @@ describe('THE ANTI-VACUITY GUARD — the walker must fail on the corpus it ships
     // stranger..." carried a trailing coordinate; its rewrite states the institution fact only.
     // 328 -> 336 (2026-11-04, LANDING-1 door 2): F10 WALLS-WORD's wall-free twins carry the class (the
     // chair's ruling of 2026-11-04; the owner's veto point). Report-only, still a minority.
-    expect(carrying.length, 'entries carrying the trailing-coordinate class, at this tip').toBe(336);
+    // 336 -> 341, measured per commit on the leaves: F12 unit 2 (e19e3e4cf) +3, census-5b unit 3
+    // (c00b30eb6, R-L twins) +2. Report-only, still a minority.
+    expect(carrying.length, 'entries carrying the trailing-coordinate class, at this tip').toBe(341);
     expect(carrying.length, 'and it is a minority of the 2,266 R1 variants').toBeLessThan(leaves.length / 2);
     console.log(`  Q · trailing coordinate: ${carrying.length} of ${leaves.length} R1 entries carry the class`);
   });
