@@ -1073,12 +1073,12 @@ clause is licensed, and a variant that needs a dated depletion is marked
 
 **A PROCESSING HOUSE MISSING FROM THE ROSTER**
 1. `[ledger]` {settlement} has the {resource} and not the {institution}. The line ends where the working should begin, and the raw goods go out raw or not at all.
-2. `[visitor]` A stranger looking for {institution} here will not find one. What the town takes out of the ground, it sends on for somebody else to finish.
+2. `[visitor]` There is no {institution} in {settlement}. What the town takes out of the ground, it sends away for others to finish.
 3. `[street]` The step that would make {resource} into {good} is not here. It has to be sent for, or done without.
 
 **UPSTREAM LINK COVERED BY AN IMPORT**
 1. `[ledger]` {settlement} does not raise the {resource} its {chain} runs on. It buys it, and the line works exactly as long as the buying does.
-2. `[threshold]` The {chain} is whole on the town's side and borrowed on the far side; {institution} has everything it needs except the beginning of the line.
+2. `[threshold]` {settlement}'s {institution} has everything it needs except the {resource}, which the town has to buy in.
 3. `[street]` What goes into the {chain} comes from elsewhere. The work is local; the material is not.
 
 **RESOURCE DEPLETED**
@@ -1087,12 +1087,12 @@ clause is licensed, and a variant that needs a dated depletion is marked
 3. `[unfolding]` What {institution} still works, it works on what is left. The {resource} is exhausted and the line is running down the last of it.
 
 **ENTREPÔT PASS-THROUGH (no workshop in the line)**
-1. `[ledger]` Nothing in this {chain} begins or ends here. Goods arrive finished, are counted, and go on, and the town's return is on the counting.
-2. `[visitor]` A stranger tracing {good} through {settlement} finds no workshop in the line at all: only a yard, a clerk, and the next road.
+1. `[ledger]` Nothing in this {chain} is made at {settlement}. Goods arrive finished and go on again, and the town is paid for the handling.
+2. `[visitor]` Follow {good} through {settlement} and you find no workshop at all: only a yard, a clerk, and the next road.
 3. `[street]` The town does not make it and does not use it. The town moves it.
 
 **BLOCKED: nothing can be got away**
-1. `[ledger]` The {chain} is on the rolls and off the road. There is no way to move what it makes, so it is not being made.
+1. `[ledger]` {settlement} has no way to move what its {chain} makes, so nothing is being made.
 2. `[visitor]` The workings above {settlement} sit idle. It is not that there is nothing in them; it is that nothing can be got away from them.
 3. `[street]` The town has the {resource} and no use for it. Without a road out, the ground might as well be empty.
 

@@ -117,9 +117,9 @@ describe('the four negative controls and the positive one (MOVE-GRAMMAR §4.4, a
     // 405 / 114 -> 404 / 114 at the chair's 06:5x DS-CND-1 boom line (ODQ §934.105): boom v4 is one sentence beside v1-v3's two, so the pool is no
     // longer uniform; its opener ("it is") is new to the pool (the ruled "{settlement} is …" repeated
     // v2's opener and read 115, so the line opens "It is a good stretch for {settlement}").
-    expect(uniformSegments).toBe(417); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted).
+    expect(uniformSegments).toBe(416); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted).
     expect(repeatedOpener).toBe(116); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted).
-    expect(uniformSegments / cells.size).toBeCloseTo(0.567, 3); // W1 ECO (2026-11-07): re-measured at the lane tip.
+    expect(uniformSegments / cells.size).toBeCloseTo(0.566, 3); // W1 ECO (2026-11-07): re-measured at the lane tip.
     expect(repeatedOpener / cells.size).toBeCloseTo(0.158, 3); // W1 ECO construction (2026-11-07): 115 / 735.
   });
 
@@ -143,7 +143,7 @@ describe('the four negative controls and the positive one (MOVE-GRAMMAR §4.4, a
     expect(figures.pools).toBe(735); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted).
     // 406 -> 405 by the same cause as the calibration above (the chair's 06:5x rewording of DS-GEN-17 v3);
     // 405 -> 404 at the chair's 06:5x DS-CND-1 boom line (ODQ §934.105), likewise.
-    expect(Math.round(figures.uniformSegmentShare * 709)).toBe(402); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted).
+    expect(Math.round(figures.uniformSegmentShare * 709)).toBe(401); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted).
     expect(Math.round(figures.repeatedOpenerShare * 735)).toBe(116); // W1 ECO construction (2026-11-07): 26 new pools.
   });
 

@@ -1665,9 +1665,10 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "A stranger looking for {institution} here will not find one. What the town takes out of the ground, it sends on for somebody else to finish.",
+          "text": "There is no {institution} in {settlement}. What the town takes out of the ground, it sends away for others to finish.",
           "slots": [
-            "institution"
+            "institution",
+            "settlement"
           ],
           "vid": 2
         },
@@ -1694,10 +1695,11 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "threshold",
-          "text": "The {chain} is whole on the town's side and borrowed on the far side; {institution} has everything it needs except the beginning of the line.",
+          "text": "{settlement}'s {institution} has everything it needs except the {resource}, which the town has to buy in.",
           "slots": [
-            "chain",
-            "institution"
+            "settlement",
+            "institution",
+            "resource"
           ],
           "vid": 2
         },
@@ -1743,15 +1745,16 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "ENTREPÔT PASS-THROUGH (no workshop in the line)": [
         {
           "angle": "ledger",
-          "text": "Nothing in this {chain} begins or ends here. Goods arrive finished, are counted, and go on, and the town's return is on the counting.",
+          "text": "Nothing in this {chain} is made at {settlement}. Goods arrive finished and go on again, and the town is paid for the handling.",
           "slots": [
-            "chain"
+            "chain",
+            "settlement"
           ],
           "vid": 1
         },
         {
           "angle": "visitor",
-          "text": "A stranger tracing {good} through {settlement} finds no workshop in the line at all: only a yard, a clerk, and the next road.",
+          "text": "Follow {good} through {settlement} and you find no workshop at all: only a yard, a clerk, and the next road.",
           "slots": [
             "good",
             "settlement"
@@ -1768,8 +1771,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "BLOCKED: nothing can be got away": [
         {
           "angle": "ledger",
-          "text": "The {chain} is on the rolls and off the road. There is no way to move what it makes, so it is not being made.",
+          "text": "{settlement} has no way to move what its {chain} makes, so nothing is being made.",
           "slots": [
+            "settlement",
             "chain"
           ],
           "vid": 1
