@@ -436,8 +436,10 @@ describe('EM-B2b — world facts by consequence: the route, the refusals and the
     // Record 1, PEOPLE-1 CAST (docs/shift-records/2026-11-07-people-1-cast.json), from the stage at dc655f712: the
     // generator master 6b0d226e.. -> 58fb2164.. (525 of 525 rows) and the prose manifest 63c63a8b.. -> 22e1df2d..
     // (762 of 1,050 rows).
+    // Record 2, PEOPLE-2 CAST-DERIVED (docs/shift-records/2026-11-07-people-2-cast-derived.json), from the stage at
+    // 3aa160a70: the generator master 58fb2164.. -> 0e235c36.. (525 of 525 rows); the prose manifest did not move.
     expect(shaOfFile(GOLDEN), 'tests/fixtures/generator-golden-master.json moved')
-      .toBe('58fb2164498c630bbc8913234f6e2288df490fe9787882efb18cf9c92a3d7e3e');
+      .toBe('0e235c36bfa261076042b09464d772968f1fac3f0a84451cd612243547159193');
     expect(shaOfFile(PROSE_GOLDEN), 'tests/fixtures/dossier-prose-manifest-golden.json moved')
       .toBe('22e1df2dbb06db0e052a46a6416033c07f310342d4d6e0bbe0e3307611372112');
 
