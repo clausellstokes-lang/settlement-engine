@@ -562,7 +562,7 @@ const requireDistRead = process.env.VERIFY_DIST === '1';
 // terms with their costs): **"do what you recommend"** — and the recommendation on the table
 // was this raise. Ledger §880.8; the seam is RECORDED AS PRICED AND NOT TAKEN, its prototype
 // kept out of the tree. Monotone-down and owner-signed discipline unchanged.
-const CLOSURE_BUDGET_BYTES = 1_042_033; // 2026-11-06: re-recorded AT the measured landing-tip closure, LANDING-8, a vetoable rise of 4,548 B (note at file end)
+const CLOSURE_BUDGET_BYTES = 1_042_811; // 2026-11-07: trimmed, then re-recorded AT the measured closure, WIRING-W0-CLOSE, a vetoable rise of 778 B (note at file end)
 // Transfer budgets measure each fetched chunk independently, matching CDN
 // compression rather than compressing an artificial concatenation. Recorded
 // 2026-07-24 from the seven-file closure: raw 1,034,954; gzip 321,341;
@@ -1766,7 +1766,7 @@ describe.runIf(distExists)('ARCH car 2 — the corpus rides data-lazy, and that 
 // ratification histories above each constant are the record of what that costs.
 describe('ARCH car 2 — the three first-paint budgets stay where the owner signed them', () => {
   it('the raw, gzip and Brotli closure budgets are unmoved', () => {
-    expect(CLOSURE_BUDGET_BYTES, 'the raw first-paint budget moved').toBe(1_042_033); // LANDING-8, 2026-11-06 (note at file end)
+    expect(CLOSURE_BUDGET_BYTES, 'the raw first-paint budget moved').toBe(1_042_811); // WIRING-W0-CLOSE, 2026-11-07 (note at file end)
     expect(CLOSURE_GZIP_BUDGET_BYTES, 'the gzip transfer budget moved').toBe(336_286);
     expect(CLOSURE_BROTLI_BUDGET_BYTES, 'the Brotli transfer budget moved').toBe(282_346);
 
@@ -1894,3 +1894,16 @@ describe('ARCH car 2 — the three first-paint budgets stay where the owner sign
 //   LANDING-7: lane E 471780f4a +37 · lane H 18fd6b442 -5 · lanes B, C, D, F, G, G3, F2-4, A 0. 1,042,033 at the tip, the
 //   same eight chunks. The sum closes exactly: 1,037,485 + 4,516 + 32 = 1,042,033. The gzip and Brotli budgets are NOT moved
 //   (both green at the tip). The budget is recorded AT the measured figure. Monotone-down from here; raises stay owner-signed.
+// ── (2026-11-07, WIRING-W0-CLOSE under the chair's ruling on WIRING-W0's record) TRIMMED FIRST, THEN THE RAW BUDGET
+//    RE-RECORDED AT THE MEASURED CLOSURE, 1,042,033 -> 1,042,811: A RISE OF 778 B, VETOABLE BY THE OWNER (with its ARCH car 2 pin) ──
+// A rise stays the owner's (rule 33, §P11.2); this one stands on the chair's ruling under the owner's delegation of 2026-11-06
+// until the owner's word. MEASURED with this file's own closure walk over a fresh `vite build` of a git archive at every
+// src-moving first-parent step of lane/wiring-w0-2026-11-07 from its base 76febf9b0 (1,042,033, this budget exactly):
+//   343bd4eec (the migration direction declared once: the departures spine pair and the viability halves in `data` +323,
+//   domain/migrationDirection.js and the writer/projection in `engine-core` +501, the spine's direction read in `index`
+//   +107) +931 · adae99a10 (the derived-key and allowlist strings, `index`) +19 · c99531cf9, 3d1df12d7, b893dcda1,
+//   02b8da4b3, b79dfa98b, f26949e69 (the food writer, the annotations, the plumbing: outside the closure) 0 · 848dd7dc1
+//   (the projection re-spelled for the observed-shape gate 0) 0 -> 1,042,983. THEN THE TRIMS, no output byte moved:
+//   eb4c508e1 the viability halves cut from the one catalogue note -116 (data), one `directionOf` read -44 (engine-core),
+//   the spine's `|| pair` -12 (index) -> 1,042,811, the same eight chunks. The sum closes exactly: 1,042,033 + 931 + 19 - 172
+//   = 1,042,811. The gzip and Brotli budgets are NOT moved. Recorded AT the measured figure; monotone-down from here.
