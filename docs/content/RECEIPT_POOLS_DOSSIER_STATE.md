@@ -4176,7 +4176,7 @@ inference. `stream: true` is the only thing that licenses *still being paid*.
 **posture `peace`**
 1. `[ledger · colour]` {settlement} is at peace and is arranged for it. Nothing here is being held back for a war, and nothing is being produced against one.
 2. `[street · colour]` The town is doing what it does, and has been doing it long enough that a muster would be a genuine interruption.
-3. `[visitor · no soldiers]` A stranger at {settlement} finds a town with no soldiers to speak of and no anxiety about the absence.
+3. `[visitor · no soldiers]` You will find no soldiers to speak of at {settlement}, and nobody there worries about it.
 
 **posture `alert`** {colour}
 1. `[ledger]` {settlement} is on alert. Nothing has been raised and everything is being watched, and the watching has begun to cost.
@@ -4184,23 +4184,23 @@ inference. `stream: true` is the only thing that licenses *still being paid*.
 3. `[unfolding]` The watching at {settlement} costs a little more each week and has not yet produced anything to watch, and the hall is beginning to be asked about that.
 
 **posture `war_preparation`** {colour}
-1. `[ledger]` {settlement} is gearing for war, with the economy beginning to shift onto a war footing; the change is visible in what is being bought before it is visible in who is being raised.
-2. `[unfolding]` The town is turning, and the turning has not yet reached the point where it could be quietly turned back.
+1. `[ledger]` {settlement}'s market books show the town buying for war: the change shows first in what it buys, and only later in who it calls up.
+2. `[unfolding]` {settlement} has gone far enough toward war that turning back would now be noticed.
 3. `[street]` The town at {settlement} is buying differently, storing differently and hiring differently, and none of it has been announced.
 
 **posture `mobilized`** {colour}
 1. `[ledger]` {settlement} is fully mobilized: a war economy, ready to march, and waiting on a decision rather than on preparation.
 2. `[street]` The town is ready and is being kept ready, and being kept ready is expensive in ways the hall is discovering.
-3. `[unfolding]` {settlement} is ready and idle, which is the most expensive condition a town can hold and the hardest to hold for long.
+3. `[unfolding]` {settlement} is ready to march and sitting idle, and keeping an army waiting drains the town fast.
 
 **posture `deployed`** {colour}
 1. `[ledger]` {settlement}'s army is in the field. What the town has is elsewhere, and what remains here is what could not be taken.
 2. `[street]` The town is short of its own people and will be until the campaign ends, however it ends.
-3. `[visitor]` A stranger finds {settlement} short of exactly the people a town this size should be full of, and does not have to ask where they are.
+3. `[visitor]` {settlement} is short of exactly the people a town its size should be full of, and nobody needs to ask where they are.
 
 **posture `war_exhaustion`** {colour}
 1. `[ledger]` {settlement} is war-weary and its army is spent; what could be raised here now is a fraction of what was raised, and the fraction is falling.
-2. `[unfolding]` The town has reached the end of what it will give and has not formally said so, and the gap between those is where the next few seasons will be spent.
+2. `[unfolding]` {settlement} has given all it will give to the war but has not said so, and the next few seasons will show where the line falls.
 3. `[street]` The town at {settlement} has stopped answering the muster properly and has not formally refused it, and both facts are understood.
 
 **posture `demobilizing`** {colour}
@@ -4209,9 +4209,9 @@ inference. `stream: true` is the only thing that licenses *still being paid*.
 3. `[unfolding]` What {settlement} built for the war is being unbuilt at a loss, and the loss is arriving in the accounts a season after the fighting stopped.
 
 **posture COVERT (any state)** *(every variant `dm-only`)* · **COMPOSITION FENCE (§0h V1-g):** `DS-WAR-1`'s covert-*mobilization* cell is the muster read; this is the *posture* read. Two fields, two rows, and **never both on one page** — a town that is quietly arming and quietly disposed toward war says one of these things, not two. {colour}
-1. `[ledger · dm-only]` What {settlement} is doing about war it is doing without declaring, and the accounts have been arranged so that the doing does not appear.
-2. `[street · dm-only]` Nothing at {settlement} looks like a town preparing for anything, and the looking-like-nothing has taken effort.
-3. `[counterforce · dm-only]` {settlement}'s disposition has moved and its appearance has not, which took one decision at the top of the hall and a great many small silences beneath it.
+1. `[ledger · dm-only]` {settlement} is preparing for war without declaring it, and the hall's ledgers are kept so that the cost does not show.
+2. `[street · dm-only]` Nothing at {settlement} looks like preparation for anything, and keeping it that way takes work.
+3. `[counterforce · dm-only]` {settlement} has changed course and looks no different: the hall decided it, and a great many people are keeping quiet about it.
 
 **`settlementWarStatus` null (peace, not missing data)**
 1. `[ledger · no crisis: unrest]` There is no war at {settlement}: none against it and none of its own. The town's quarrels are the ordinary kind and are settled the ordinary way.
@@ -4219,19 +4219,19 @@ inference. `stream: true` is the only thing that licenses *still being paid*.
 3. `[street · no crisis: unrest]` Nobody at {settlement} is fighting anybody, and the town would find the question of who odd rather than sensitive.
 
 **live `war_front` INTO the settlement (a genuine siege)**
-1. `[ledger · colour]` A live front runs into {settlement}. There is an army here, it is arranged against the town, and the town's condition is now a question of stores and time.
+1. `[ledger · colour]` An army is drawn up against {settlement}, and the town's ration lists decide how long it can hold.
 2. `[street · gate]` The gates are shut and there is something outside them, and the something is not a rumour.
-3. `[unfolding · walls]` What decides {settlement} now is being decided outside its walls, and nothing the town does inside them changes the arithmetic much.
+3. `[unfolding · walls]` {settlement}'s fate is being decided outside its walls, and little the town does inside them changes it.
 
 **phantom front (hostility with no army behind it)**
 1. `[counterforce · walls]` {settlement} and {counterpart} are hostile and nothing is standing outside the walls; the enmity is real and no force has been committed to it.
-2. `[ledger · colour]` What is between {settlement} and {counterpart} is a relationship rather than a campaign, and the town has taken no siege measures because there is no siege.
-3. `[street · colour]` The town names {counterpart} as its enemy at {settlement} and has never seen a soldier of theirs, and both of those things are true at once.
+2. `[ledger · colour]` {settlement} and {counterpart} are enemies, but neither has an army marching, so the town's muster lists show no siege measures.
+3. `[street · colour]` People at {settlement} name {counterpart} as their enemy and have never seen one of its fighters.
 
 **occupation `contested`** {colour}
-1. `[ledger]` {counterpart} holds {settlement} and has not taken hold of it; the occupation is contested, and the garrison spends its strength on the town rather than through it.
+1. `[ledger]` {counterpart} holds {settlement} but has no grip on it: the occupiers' duty lists put every one of their troops to keeping the town down.
 2. `[street]` The soldiers are here and the town has not accepted that they are, and neither side has yet been able to change the other's mind.
-3. `[unfolding]` The garrison at {settlement} spends its strength on holding the town rather than through it, and holding costs more every week it is not accepted.
+3. `[unfolding]` {counterpart}'s troops at {settlement} spend their strength just holding the town, and that costs more each week the town refuses them.
 
 **occupation `unstable`** {colour}
 1. `[ledger]` {counterpart}'s control of {settlement} is precarious. It could be lost to an incident rather than to a campaign, and both sides are conscious of it.
@@ -4241,32 +4241,32 @@ inference. `stream: true` is the only thing that licenses *still being paid*.
 **occupation `extractive`** {colour}
 1. `[ledger]` {counterpart} bleeds {settlement} for everything the town holds. The occupation has begun to pay, and it pays by taking rather than by governing.
 2. `[street]` What the town makes leaves it, and the leaving is thorough enough that the town has stopped planning past the season.
-3. `[unfolding]` What {counterpart} takes from {settlement} it takes without investing anything, which pays now and forecloses everything later.
+3. `[unfolding]` {counterpart} takes from {settlement} and puts nothing back; it pays now, and leaves the town poorer each year.
 
 **occupation `stabilized`** {colour}
-1. `[ledger]` {counterpart} holds {settlement} firmly. The occupation functions, yields more than it costs, and has the look of an arrangement rather than an event.
-2. `[visitor]` A stranger at {settlement} finds the town working normally and takes a day or two to notice whose soldiers are standing in it.
+1. `[ledger]` {counterpart}'s accounts show the occupation of {settlement} paying its way; it runs smoothly and looks set to last.
+2. `[visitor]` {settlement} works normally, and it takes a day or two to notice whose troops stand in its streets.
 3. `[street]` The town at {settlement} has arranged itself around the occupier and stopped calling it an occupation in ordinary conversation.
 
 **occupation `vassalized`** {colour}
-1. `[ledger]` {settlement} serves {counterpart} now. It is a client rather than a conquest, and the distinction is a real one to everybody except the people paying for it.
-2. `[street]` The town belongs to {counterpart} now in the way a town belongs to anybody, and {settlement} has stopped conducting its affairs as though that might be temporary.
-3. `[threshold]` {settlement}'s own institutions now execute {counterpart}'s decisions as their own, which is the difference between a conquest and a client.
+1. `[ledger]` {settlement} pays {counterpart} as a client, not a conquest, and the town's accounts show little difference to the people paying.
+2. `[street]` {settlement} belongs to {counterpart} now, and has stopped acting as though that might be temporary.
+3. `[threshold]` {settlement}'s own hall now carries out {counterpart}'s decisions as if they were its own.
 
 **resistance `largely quiescent`** {colour}
 1. `[ledger]` {settlement} is not resisting. The occupation meets no organized opposition, and what opposition exists is individual and unconnected.
 2. `[street]` The town has decided, for now, that enduring costs less than the alternative.
-3. `[visitor]` A stranger at {settlement} sees a town under somebody else's soldiers going about its business, and has to be told that is not normal.
+3. `[visitor]` {settlement} goes about its business under someone else's troops as if that were normal.
 
 **resistance `restive`** {colour}
 1. `[ledger]` {settlement} is restive: sabotage and noncompliance harry the garrison steadily without ever amounting to a rising.
 2. `[unfolding]` Nothing large is happening at {settlement} and a great many small things are, and the small things are getting less deniable.
-3. `[threshold]` {settlement} is at the point where the small refusals have become a habit rather than a mood, and a habit is what a rising is assembled out of.
+3. `[threshold]` At {settlement} the small refusals have become a habit, and habits like that turn into risings.
 
 **resistance `simmering`** {colour}
 1. `[ledger]` {settlement} simmers. The resistance is organized enough to be called that, and has not yet chosen the moment it is waiting for.
-2. `[street]` The town is not quiet and is not in revolt, and everybody in it can feel which way that is trending.
-3. `[unfolding]` What is organized at {settlement} is waiting rather than idle, and waiting is a decision that can be reversed in an afternoon.
+2. `[street]` {settlement} is neither quiet nor in revolt, and everyone can feel it moving toward revolt.
+3. `[unfolding]` The resistance at {settlement} is organized and waiting, and could rise in an afternoon.
 
 **resistance `in open revolt`** {colour}
 1. `[ledger]` {settlement} is in open revolt against {counterpart}. The occupation is being fought rather than endured, in the streets and in daylight.
@@ -4274,23 +4274,23 @@ inference. `stream: true` is the only thing that licenses *still being paid*.
 3. `[street]` The town at {settlement} is fighting the people holding it, in daylight, and has stopped calculating whether it can win.
 
 **blockade stamped (recorded cause)**
-1. `[ledger · colour]` The transport into {settlement} is impaired and the impairment has a name on it: {counterpart}'s blockade, and nothing about the routes themselves.
+1. `[ledger · colour]` {settlement}'s market books record goods that never arrive, and the cause is {counterpart}'s blockade, not the roads.
 2. `[unfolding · colour]` What reaches {settlement} reaches it around the blockade, in smaller quantities and at prices the town has not seen before.
 3. `[street · navigable]` The town at {settlement} can name what is stopping its supply, and points at the water when it does.
 
 **blockade LIFTED (the impairment is cleared)** {colour}
-1. `[ledger]` The blockade on {settlement} has ended and what it impaired is running again; the town's supply has resumed, and what it lost while it was closed has not.
+1. `[ledger]` The blockade on {settlement} has ended and goods are moving again, but the town's accounts still show what it lost while it was closed, and that has not come back.
 2. `[street]` The road is open at {settlement} and the prices have not come back down, and the town is learning which of those was actually the blockade's doing.
-3. `[counterforce]` The blockade on {settlement} is gone and the town's condition has not returned with it, which tells the town something about what the blockade actually cost.
+3. `[counterforce]` The blockade on {settlement} is gone but the town has not recovered, and only now can people see what the blockade really cost.
 
 **a `stream: true` treaty term (the installment shape)** {colour}
-1. `[ledger]` {settlement} pays {counterpart} by the season under {term}, and the paying executes itself. Nobody has to decide to do it, and stopping would be a decision.
-2. `[street]` What the town owes goes out on a schedule, {timeband_span} of schedule remaining, and it is the bill of the war, still being paid.
-3. `[unfolding]` The obligation at {settlement} executes itself each season, and stopping it would take a decision nobody in the hall has been willing to be the one to make.
+1. `[ledger]` {settlement}'s accounts pay {counterpart} every season under {term}; it goes out without anyone deciding to send it, and stopping would take a decision.
+2. `[street]` {settlement} sends what it owes on schedule, with {timeband_span} still to go: the bill for the war, still being paid.
+3. `[unfolding]` The payment leaves {settlement} each season on its own, and nobody in the hall wants to be the one who stops it.
 
 **a HIGH-burden term** {colour}
-1. `[ledger]` What {term} takes from {settlement} is a real share of what the town has, and the taking is the largest single fact in its accounts.
-2. `[unfolding]` The burden {settlement} carries under {term} is heavy enough to be shaping what the town becomes rather than merely what it can afford.
+1. `[ledger]` What {term} takes from {settlement} is a real share of everything the town has, and it is the heaviest charge in the town's accounts.
+2. `[unfolding]` {term} takes enough from {settlement} to shape what the town becomes, not just what it can afford.
 3. `[street]` What the town sends away at {settlement} is enough that people plan their year around what is left, rather than around what they earn.
 
 **aftermath `siege_lifted`**
@@ -4299,30 +4299,30 @@ inference. `stream: true` is the only thing that licenses *still being paid*.
 3. `[unfolding · colour]` {settlement} is open again and is not yet what it was; the counting has started and nobody has said aloud how long the making-good will take.
 
 **aftermath `occupation_lifted`** {colour}
-1. `[ledger]` {counterpart}'s garrison has left {settlement}. What the occupation arranged remains arranged, and the town is now responsible for arrangements it did not choose.
+1. `[ledger]` {counterpart}'s troops have left {settlement}, but the rules they wrote into the town's books remain, and the town must now run things it never chose.
 2. `[street]` The soldiers are gone from {settlement} and the questions the town avoided while they were here have all arrived at once.
 3. `[unfolding]` The arrangements {counterpart} made at {settlement} have outlived {counterpart}'s presence, and the town now has to decide which of them to keep.
 
 
 **aftermath `war_exhaustion`** {colour}
 1. `[ledger]` {settlement} is carrying the mark of the fighting it did. Nothing here is broken, and nothing here has the strength it had.
-2. `[street]` The town has not recovered and has stopped talking about recovering, which is a stage rather than a mood.
+2. `[street]` {settlement} has not recovered from the war and has stopped talking about recovering.
 3. `[unfolding]` {settlement} is not recovering so much as levelling off, and the level is below where the town started.
 
 **aftermath `war_drain`** {colour}
 1. `[ledger]` The war is still taking from {settlement} after the fighting. The costs did not end where the campaign did, and the town is meeting them out of ordinary revenue.
-2. `[unfolding]` What {settlement} spends on a war that is over is spending it cannot spend on anything else, and the list of anything else is getting longer.
+2. `[unfolding]` Money {settlement} spends on a finished war is money it cannot spend on anything else, and the list of what goes without grows.
 3. `[street]` The town is still paying for a war that is over at {settlement}, and has begun to resent the paying in a way it never resented the fighting.
 
 **aftermath `war_spoils`** {colour}
 1. `[ledger]` {settlement} came out of the fighting with more than it went in with, and the more is in the town: visible, unevenly distributed, and generating its own quarrels.
 2. `[street]` The town profited, and the profit is not shared in the proportions anybody expected before the fighting started.
-3. `[unfolding]` What {settlement} took is being turned into something permanent by the people who hold it, and the town's shape after that will not be the shape it had.
+3. `[unfolding]` The people holding {settlement}'s spoils are making them permanent, and the town will be changed by it.
 
 **aftermath `relief_burden`** {colour}
-1. `[ledger]` {settlement} is carrying people it did not have before; the relief the town gave is now a standing cost, and the cost has outlasted the crisis that produced it.
-2. `[unfolding]` What was generosity at {settlement} has become arithmetic, and the town has begun to say so out loud.
-3. `[street]` The people {settlement} took in are still here, and the town's generosity has become a standing item that somebody has to fund.
+1. `[ledger]` {settlement}'s relief lists still carry the people it took in, long after the crisis that brought them, and the town keeps paying to feed and house them.
+2. `[unfolding]` What began as generosity at {settlement} is now a cost, and people have begun to say so out loud.
+3. `[street]` The people {settlement} took in are still here, and someone has to keep paying to feed them.
 
 **aftermath `trade_realignment`**
 1. `[ledger · colour]` The routes out of {settlement} are not the routes that were; the war moved where things go, and where things go has not moved back.
