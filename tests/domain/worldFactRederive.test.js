@@ -444,10 +444,13 @@ describe('EM-B2b — world facts by consequence: the route, the refusals and the
     // Record 4, PEOPLE-4 TIES (docs/shift-records/2026-11-07-people-4-ties.json), from the stage at c7d552370: the
     // generator master bad219f2.. -> 27de6ac3.. (525 of 525 (thorp 84, hamlet 84, village 84, town 105, city 84,
     // metropolis 84) rows); the prose manifest 4f4e6071.. -> ee573112.. (892 of 1,050 rows).
+    // Record 5a, PEOPLE-5A DISPLAY (docs/shift-records/2026-11-07-people-5a-display.json), from the stage at
+    // 053283dfd: the generator master 27de6ac3.. -> 47e48e47.. (172 of 525 (hamlet 84, village 72, city 12,
+    // metropolis 4) rows); the prose manifest ee573112.. -> 86517b75.. (312 of 1,050 rows).
     expect(shaOfFile(GOLDEN), 'tests/fixtures/generator-golden-master.json moved')
-      .toBe('27de6ac383c6033dfe110f2cf3fcd33e4f73b5e8766958c61a061a41297dd267');
+      .toBe('47e48e4796af11334e0594d065108ffc51f75da09d8cce20b0bcaa1c6203e5a8');
     expect(shaOfFile(PROSE_GOLDEN), 'tests/fixtures/dossier-prose-manifest-golden.json moved')
-      .toBe('ee5731122f7d4648a1ebe932645100e10240113e48a790fa9c9a748540e8f1b2');
+      .toBe('86517b757f3c5e25a415ae9ab6f7ef81d07d950a0b7da3e9415d2eeac8e0df4d');
 
     // AND THE REASON THEY CANNOT MOVE: fresh generation passes no layer, so no world fact is ever
     // routed and `config′` is `config` itself. Measured against the committed manifest.
