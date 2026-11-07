@@ -165,6 +165,13 @@ export const STRESS_TYPE_MAP = {
       "The question is not whether things will change, but who will shape the change and what they will want in return.",
     viabilityNote:
       "Immigration: food balance stressed, labour market disrupted, criminal opportunity elevated. Emigration: tax base shrinking, institutions hollowing, labour shortage emerging.",
+    // WIRING-W0 (2026-11-07, R-W7 e): the catalogue's note above describes the TYPE both ways (the
+    // compendium reads it); a settlement's entry carries the ONE half its own `direction` names
+    // (stressGenerator.js :: buildStressEntry; domain/migrationDirection.js).
+    viabilityNoteByDirection: {
+      arrivals: "Immigration: food balance stressed, labour market disrupted, criminal opportunity elevated.",
+      departures: "Emigration: tax base shrinking, institutions hollowing, labour shortage emerging.",
+    },
     historyColour: "demographic",
   },
 };

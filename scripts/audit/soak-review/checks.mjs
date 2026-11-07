@@ -53,6 +53,9 @@ export const KIND_OF = Object.freeze({
   // F9 (2026-11-04): crime denied beside a listed operation, A-06 in reverse; A-06's own kind
   // (unlisted, so 0, the stop rule's wording kind) — stated, not defaulted.
   'coh:crime-denied-and-listed': 0,
+  // WIRING-W0 (2026-11-07, R-W7 e): a mass migration told as arrivals on one surface and departures
+  // on another — the wording kind, as crime-denied-and-listed.
+  'coh:migration-direction': 0,
   'coh:tier-noun': 8, 'A-14:guild-power-small': 8, 'A-14:lord-mayor-small': 8,
   // Kind 9, reader (lane READER-INSTRUMENTS, 2026-11-04): outside the stop rule until the READER WINDOW lands.
   ...Object.fromEntries(READER_BATTERY_CHECKS.map((c) => [`reader:${c}`, 9])),
@@ -203,6 +206,44 @@ export function guildPowerSmall(s) {
     .find((n) => /guild/i.test(n) && !(market && MARKET_GUILD.test(n)));
 }
 
+/** The vocabulary a migration surface uses for each direction (coh:migration-direction). */
+const MIGRATION_DEPARTS = /\b(?:families left|departures?|departed|the people leaving|people leaving|losing people|is emptying|shuttered houses|fewer hearths|fled|emigrat\w*|exodus|left (?:this|last) week)\b/i;
+const MIGRATION_ARRIVES = /\b(?:arriv\w*|newcomers?|influx|receiving more people|absorbing more people|taking in more people)\b/i;
+
+/** @param {string} text @returns {'arrivals'|'departures'|null} the one direction a text names, or null (both or neither). */
+export function migrationDirectionOfText(text) {
+  const departs = MIGRATION_DEPARTS.test(String(text || ''));
+  const arrives = MIGRATION_ARRIVES.test(String(text || ''));
+  if (departs === arrives) return null;
+  return departs ? 'departures' : 'arrivals';
+}
+
+/**
+ * Every migration surface of a settlement under `mass_migration`, read for the direction it names;
+ * one finding per surface whose direction differs from the first direction read (the record's own
+ * `stress[].direction` first, where it carries one).
+ * @param {any} s @param {any} r
+ * @returns {Array<{surface:string,quote:string,detail:string}>}
+ */
+export function migrationDirectionFindings(s, r) {
+  const rows = Array.isArray(s?.stress) ? s.stress : s?.stress ? [s.stress] : [];
+  const migration = rows.find((x) => x?.type === 'mass_migration');
+  if (!migration) return [];
+  const primary = rows[0]?.type === 'mass_migration';
+  /** @type {Array<[string, string|null, string]>} [surface, direction, quote] */
+  const read = [];
+  if (migration.direction === 'arrivals' || migration.direction === 'departures') read.push(['record:stress.direction', migration.direction, migration.direction]);
+  const said = (surface, text) => { const d = migrationDirectionOfText(text); if (d) read.push([surface, d, String(text)]); };
+  said('record:stress.summary', migration.summary);
+  if (primary) said('record:pressureSentence', s.pressureSentence);
+  said('record:powerStructure.recentConflict', s.powerStructure?.recentConflict);
+  said('record:powerStructure.stability', s.powerStructure?.stability);
+  if (primary && r?.tonightSheet?.opening) said('tonight', r.tonightSheet.opening);
+  if (read.length < 2) return [];
+  const first = read[0];
+  return read.filter(([, d]) => d !== first[1]).map(([surface, d, quote]) => ({ surface, quote, detail: `${d} beside ${first[0]} ${first[1]}` }));
+}
+
 /** Does the place have water a boat or a net could use? */
 function hasWater(s, config) {
   const terrain = String(s?.config?.terrainType ?? s?.terrain ?? config?.terrainOverride ?? s?.resourceAnalysis?.terrain ?? '');
@@ -229,6 +270,13 @@ export function reviewSettlement(s, config, r) {
   // ── X-46 car 1: population inside the owner's band for its tier
   const band = OWNER_BANDS[s.tier];
   if (band && !(s.population >= band[0] && s.population <= band[1])) add('X-46:population-outside-band', 'record', String(s.population), `${s.tier} band ${band[0]}–${band[1]}`);
+
+  // ── coh:migration-direction (lane WIRING-W0, 2026-11-07, R-W7 e): a mass migration runs ONE way.
+  // The crisis text, the pressure line (the Tonight opening when no crisis line exists), the Power
+  // vignette and the stability label each say which way people move; the record's own
+  // `stress[].direction` (where present) is the one fact they read. Two directions on one
+  // settlement is the finding. A surface that names both directions (a hedge) or neither is silent.
+  for (const finding of migrationDirectionFindings(s, r)) add('coh:migration-direction', finding.surface, finding.quote, finding.detail);
 
   if (!r) return out;
   for (const [surface, error] of Object.entries(r.errors || {})) add('render:error', surface, '', error);

@@ -395,6 +395,9 @@ export const STRESS_INSTITUTION_EFFECTS = {
       stakes: "The people they would rule against for lying are lying no more than they once did",
     },
     {
+      // WIRING-W0 (2026-11-07, R-W7 e): a DEPARTURES secret; drawn only where the record's
+      // `stress[].direction` is 'departures' (npcGenerator.js; domain/migrationDirection.js).
+      direction: "departures",
       secret: "Has been quietly buying up the emptied properties of those who fled, through a third party, at a fraction of their worth",
       stakes: "Some of the departed intend to return. The purchases will not survive their claims, or their questions",
     },

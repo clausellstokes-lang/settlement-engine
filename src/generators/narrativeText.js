@@ -173,8 +173,16 @@ export const PRESSURE_SENTENCES = {
           `No one in ${r.name} is marching, and that is what makes it dangerous. The opposition to ${r.govFaction || "the current authority"} is a patient, well-lawyered thing that means to inherit the settlement intact rather than take it by force, and it is close to being able to.`,
         ];
   },
+  // WIRING-W0 (2026-11-07, R-W7 e): THE DIRECTION IS THE RECORD'S (`r.migrationDirection`, from
+  // stress[].direction; domain/migrationDirection.js), never this closure's. The economy branch below
+  // chooses only the TONE of an arrival; a record that declares departures reads the third set.
   mass_migration: (r) => speakTierLines(r, (() => {
     var o;
+    if (r.migrationDirection === 'departures') return [
+      `${r.name} is emptying by the season. The families who could leave have gone, and ${r.govFaction || "the governing authority"} is keeping the same offices running on half the hands.`,
+      `The road out of ${r.name} is busier than the road in. Shuttered houses stand on every street, and the people who stayed are counting who will go next.`,
+      `Every month fewer hearths are lit in ${r.name}. ${capFirst(r.govFaction) || "The governing authority"} has stopped calling it a bad season and has not yet found a word for what it is.`,
+    ];
     return (((o = r.compound) == null ? void 0 : o.economyOutput) || 50) >= 50
       ? [
           `${r.name} is absorbing more people than it was built for. The new arrivals and the old residents are not yet one community. They share streets and markets but not language, custom, or trust. ${capFirst(r.govFaction) || "The governing authority"} is managing the rate of change rather than directing it, and the rate of change is not cooperating.`,

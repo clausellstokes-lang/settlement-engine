@@ -11,6 +11,7 @@ import {tierAtLeast, getTradeRouteFeatures} from './helpers.js';
 import { rollStressSummary, renderStressSummary } from './stressNarrative.js';
 
 import {STRESS_TYPE_MAP} from '../data/stressTypes.js';
+import { MIGRATION_DIRECTION_AT_BIRTH } from '../domain/migrationDirection.js';
 import {
   nativeSemanticNames,
   nativeSemanticResourceKeys,
@@ -45,15 +46,23 @@ const isSmallTier = (tier) => SMALL_TIERS.includes(tier);
  */
 export const buildStressEntry = (settlementName, stressType, stressData) => {
   const summaryRoll = rollStressSummary(stressType, { rng: _rng });
+  // WIRING-W0 (2026-11-07, R-W7 e): THE MIGRATION DIRECTION, WRITTEN ONCE, HERE, where the stressor
+  // is drawn. Every surface that says which way people move reads this field (or its config
+  // projection), never a score of its own; the one rule and why it is not the economy are in
+  // domain/migrationDirection.js. No draw: the rng sequence is unchanged.
+  const direction = stressType === 'mass_migration' ? MIGRATION_DIRECTION_AT_BIRTH : undefined;
   return {
     type:          stressType,
     label:         stressData.label,
     icon:          stressData.icon,
     colour:        stressData.colour,
+    ...(direction ? { direction } : {}),
     summaryRoll,
-    summary:       renderStressSummary(stressType, settlementName, summaryRoll),
+    summary:       renderStressSummary(stressType, settlementName, summaryRoll, direction),
     crisisHook:    stressData.crisisHook,
-    viabilityNote: stressData.viabilityNote,
+    viabilityNote: direction && stressData.viabilityNoteByDirection
+      ? stressData.viabilityNoteByDirection[direction]
+      : stressData.viabilityNote,
     historyColour: stressData.historyColour,
   };
 };

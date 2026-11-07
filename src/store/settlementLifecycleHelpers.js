@@ -45,7 +45,8 @@ export function _dimsSummary(ss) {
 // ── Derived-config strip ────────────────────────────────────────────────
 // settlement.config is the RESOLVED effectiveConfig snapshot: pipeline steps
 // write purely-derived keys onto it (resolveStress → stressType/stressTypes/
-// intendedStressTypes/_population; isolationGenerator → _magicTradeOnly;
+// intendedStressTypes/_population; stressConfirmPass → migrationDirection, the
+// projection of stress[].direction (WIRING-W0); isolationGenerator → _magicTradeOnly;
 // generateEconomy → _neighbourEconBias; resolveConfig → tier/magicLevel/
 // terrainType; resolveNeighbour → neighborRelationship). Display and sim
 // consumers read those keys from
@@ -60,7 +61,7 @@ export function _dimsSummary(ss) {
 // culture) are NOT stripped here — their raw values are unrecoverable from
 // the snapshot and are restored via the _config path instead.
 export const DERIVED_CONFIG_KEYS = Object.freeze([
-  'stressType', 'stressTypes', 'intendedStressTypes',
+  'stressType', 'stressTypes', 'intendedStressTypes', 'migrationDirection',
   '_magicTradeOnly', '_neighbourEconBias', '_neighbourEconMode', '_isolationInfraType',
   '_population',
   'tier', 'magicLevel', 'terrainType',

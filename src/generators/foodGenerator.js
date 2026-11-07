@@ -17,6 +17,7 @@
  */
 
 import { getActiveRng } from '../kernel/rngContext.js';
+import { migrationDirectionOfConfig } from '../domain/migrationDirection.js';
 import { FOOD_IMPORT_RATES, SIEGE_PRODUCTION_KEPT } from '../data/foodImportRates.js';
 import { FOOD_SECURITY_CUTS, foodSecurityBandOf, foodSecurityFlagsOf } from '../data/bandLadders.js';
 import { deriveFoodRecord, grownShareOf, hasImportProcessor, hinterlandShareOf } from './economy/foodBalance.js';
@@ -290,7 +291,8 @@ export function generateFoodSecurity(tier, institutions, config) {
   // would double-count). Golden-shifting (G2).
   if (stresses.includes('wartime'))        { productionMult  *= 0.85; }
   if (stresses.includes('slave_revolt'))   { productionMult  *= 0.80; }
-  if (stresses.includes('mass_migration')) { consumptionMult *= 1.15; }
+  // WIRING-W0 (R-W7 e): more mouths only where the record declares ARRIVALS (domain/migrationDirection.js).
+  if (stresses.includes('mass_migration') && migrationDirectionOfConfig(config) !== 'departures') { consumptionMult *= 1.15; }
 
   const baseDailyNeed = population * PER_CAPITA_NEED;
   const dailyNeed = (

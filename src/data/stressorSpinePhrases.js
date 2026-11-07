@@ -109,5 +109,12 @@ export const STRESSOR_SPINE_PHRASES = Object.freeze({
   mass_migration: {
     strain: 'an arrival of people it was never built to hold',
     fear: 'there not being enough to go round',
+    // WIRING-W0 (2026-11-07, R-W7 e): the phrases above are the ARRIVALS direction, the one a
+    // drawn migration carries at birth; a record whose `stress[].direction` is 'departures' reads
+    // these instead (simulationSpine.js :: strainPhraseOf / fearPhraseOf; domain/migrationDirection.js).
+    departures: {
+      strain: 'a departure of people it cannot spare',
+      fear: 'being among the last ones left',
+    },
   },
 });

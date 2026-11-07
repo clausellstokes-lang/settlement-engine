@@ -69,6 +69,7 @@
  */
 
 import { STRESSOR_SPINE_PHRASES } from '../data/stressorSpinePhrases.js';
+import { migrationDirectionOfEntry } from './migrationDirection.js';
 import { governingFactionOf, nameOf } from './rulingPower.js';
 
 // ── Helpers ────────────────────────────────────────────────────────────────
@@ -384,7 +385,7 @@ function stressorTypeKey(entry) {
  */
 function strainPhraseOf(entry) {
   const type = stressorTypeKey(entry);
-  if (type) return STRESSOR_SPINE_PHRASES[type].strain;
+  if (type) return phrasesOf(entry, type).strain;
   const label = nounPhrase(firstText(entry.label, entry.name));
   return label ? lowerLabel(label) : null;
 }
@@ -399,7 +400,17 @@ function strainPhraseOf(entry) {
  */
 function fearPhraseOf(entry) {
   const type = stressorTypeKey(entry);
-  return type ? STRESSOR_SPINE_PHRASES[type].fear : null;
+  return type ? phrasesOf(entry, type).fear : null;
+}
+
+/**
+ * The phrase pair for a catalogued type: a mass migration reads the direction its own record
+ * declares (WIRING-W0, R-W7 e; domain/migrationDirection.js), every other type its one pair.
+ * @param {Record<string, unknown>} entry @param {string} type @returns {{ strain: string, fear: string }}
+ */
+function phrasesOf(entry, type) {
+  const pair = /** @type {{ strain: string, fear: string, departures?: { strain: string, fear: string } }} */ (STRESSOR_SPINE_PHRASES[type]);
+  return migrationDirectionOfEntry(entry) === 'departures' && pair.departures ? pair.departures : pair;
 }
 
 /** @param {unknown} value @returns {number} */

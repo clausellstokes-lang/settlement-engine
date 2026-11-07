@@ -34,6 +34,7 @@ import { disperseNamedRoster } from './density/applyDensityLaw.js';
 import { pickVariant } from '../kernel/proseHash.js';
 import { selectOriginBody } from './narrative/settlementOriginProse.js';
 import { resolvePrimaryStress } from './stressPriority.js';
+import { migrationDirectionOfStress } from '../domain/migrationDirection.js';
 import { pick, pickRandom, pickRandom2, random01 } from './helpers.js';
 import { resolveTerrain } from '../domain/resolveTerrain.js';
 import { deriveTradeCommodity } from './tradeCommodity.js';
@@ -172,6 +173,8 @@ const genSettSummary = settlement => {
     commodity,
     // F3 FOOD-WORDS: the food record, so a stress secret's food claim reads the one home.
     foodRecord: economicState?.foodSecurity?.foodRecord ?? null,
+    // WIRING-W0 (R-W7 e): the migration direction the record declares, so a crisis secret reads it.
+    migrationDirection: migrationDirectionOfStress(stress),
     prosperity: economicState.prosperity || 'Moderate',
     stability: powerStructure.stability || 'Stable',
     govFaction,
@@ -502,6 +505,9 @@ const genPressureDetail = settlement => {
     milForce,
     healersRef: healerRef,
     stresses: stresses.map(type => ({ type })),
+    // WIRING-W0 (R-W7 e): the migration direction the record declares; the mass_migration pressure
+    // lines read it (narrativeText.js), never a score of their own.
+    migrationDirection: migrationDirectionOfStress(stress),
     commodity,
     // compound: the economic/military/criminal effectiveness triplet the
     // wartime/mass_migration/insurgency PRESSURE_SENTENCES closures branch on

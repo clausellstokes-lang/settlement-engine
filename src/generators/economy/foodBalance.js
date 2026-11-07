@@ -3,6 +3,7 @@
  */
 
 import { SEVERITY, tierAtLeast } from '../../data/constants.js';
+import { migrationDirectionOfConfig } from '../../domain/migrationDirection.js';
 import { FOOD_SECURITY_CUTS, foodSecurityBandKeyOf } from '../../data/bandLadders.js';
 import { FOOD_IMPORT_RATES, SIEGE_PRODUCTION_KEPT } from '../../data/foodImportRates.js';
 import {
@@ -227,7 +228,8 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
     productionMult *= 0.8;
     stressNotes.push('Slave revolt: labour-dependent production is disrupted and outlying fields lie idle.');
   }
-  if (stresses.includes('mass_migration')) {
+  // WIRING-W0 (R-W7 e): more mouths only where the record declares ARRIVALS (domain/migrationDirection.js).
+  if (stresses.includes('mass_migration') && migrationDirectionOfConfig(config) !== 'departures') {
     consumptionMult *= 1.15;
     stressNotes.push('Mass migration: an influx of newcomers stresses the food balance beyond normal needs.');
   }
