@@ -18,6 +18,13 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-11-07 — RECORD 3, PEOPLE-3 HOOKS, THROUGH THE SIGNED DOOR (ODQ §934.105, THE PEOPLE CAR’S LANDING;
+ *   record docs/shift-records/2026-11-07-people-3-hooks.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   525 of 525 rows (thorp 84, hamlet 84, village 84, town 105, city 84, metropolis 84; the key set identical) against the stage of f3912a838 (0e235c36.., record 2's post-state). THE CAUSE, ONE (first-parent
+ *   step 0f930ce95): lane 3, PEOPLE-3 HOOKS (f49311d04, merged at 0f930ce95): one plot hook per representative, the tensions and the history kept, parties of every kind. ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree S3 (the tree of 0f930ce95 with the door paths carried from
+ *   the branch, the previous record's writes committed). 0e235c36.. -> bad219f2..
+ *
  * 2026-11-07 — RECORD 2, PEOPLE-2 CAST-DERIVED, THROUGH THE SIGNED DOOR (ODQ §934.105, THE PEOPLE CAR’S LANDING;
  *   record docs/shift-records/2026-11-07-people-2-cast-derived.json; the cloud chair signs under the owner's delegation, vetoable).
  *   525 of 525 rows (thorp 84, hamlet 84, village 84, town 105, city 84, metropolis 84; the key set identical) against the stage of dc655f712 (58fb2164.., record 1's post-state). THE CAUSE, ONE (first-parent
