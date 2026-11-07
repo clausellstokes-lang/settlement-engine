@@ -1173,15 +1173,15 @@ veto the owner takes, not an implementer's swap.
 
 **TALLIES**
 0. *(frozen, canonical)* `[colour]` Events recorded after this settlement's last survey may not be fully counted in these tallies yet.
-1. `[ledger · colour]` The counts on this page were taken at the last full survey of {settlement}. Anything recorded since then may not have reached them yet.
-2. `[unfolding · colour]` These figures describe {settlement} as it was judged at its last survey. Events entered after that judgement may not be counted in them yet.
+1. `[ledger · colour]` These figures for {settlement} were taken some time ago, and anything since may not show in them yet.
+2. `[unfolding · colour]` These figures show {settlement} as it was when they were taken. Later events may not show in them yet.
 3. `[visitor · colour]` What follows is the last careful reckoning of {settlement}, and it may not be today's.
 
 **CATALOG**
 0. *(frozen, canonical)* `[colour]` Events recorded after this settlement's last survey may not be fully counted in this catalog yet.
-1. `[ledger · colour]` This list of what {settlement} offers was drawn at the last survey. A house opened or closed since then may not appear on it yet.
-2. `[unfolding · colour]` The catalog describes the services {settlement} was judged to hold. Later changes may not be counted in it yet.
-3. `[street · colour]` What the town could do for a visitor was written down at the last survey, and may have moved since.
+1. `[ledger · colour]` This list of what {settlement} offers was drawn up some time ago. A house opened or closed since may not appear on it yet.
+2. `[unfolding · colour]` This list shows the services {settlement} had when it was made. Later changes may not show on it yet.
+3. `[street · colour]` What {settlement} could do for a visitor was written down some time ago, and may have changed since.
 
 ---
 
