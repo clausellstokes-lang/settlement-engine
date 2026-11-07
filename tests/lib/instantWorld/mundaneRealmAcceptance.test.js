@@ -286,9 +286,16 @@ describe('MG-4.1 — the mundane realm, measured across every member', () => {
  * MEASURED (seed 'mg4-acceptance-1', small/realistic_regional/highIsland). ALL FIVE AXES the
  * envelope compares, mundane vs magical, machine-checked by the last pin in MG-4.2 against
  * this very line — see THE RECORD IS CHECKED below:
- *   RECORDED-CENSUS: members 5 vs 5 · institutions 99 vs 102 · factions 12 vs 12 · services 127 vs 132 · historyEvents 18 vs 18
- * Ratios: members 1.000 · institutions 0.971 · factions 1.000 · services 0.962 ·
+ *   RECORDED-CENSUS: members 5 vs 5 · institutions 99 vs 102 · factions 12 vs 12 · services 126 vs 130 · historyEvents 18 vs 18
+ * Ratios: members 1.000 · institutions 0.971 · factions 1.000 · services 0.969 ·
  * historyEvents 1.000 — the mundane realm is at parity on three of five axes.
+ * ⚠️ RE-RECORDED 2026-11-07 (LANDING-R2 seat C2, the pool census composed; ODQ §934.105), ONE SAME-SEED SHIFT, BOTH
+ * TWINS MOVE: services 127 vs 132 → 126 vs 130 (ratio 0.962 → 0.969); every other axis holds. The cause is census-1f
+ * unit 1c (9eee701c0): a rolled service whose definition's declaration the birth's facts refuse is not materialized.
+ * MEASURED at the composed tip with that resolver neutralized (`resolveServiceRow` returning its row): 127 vs 132,
+ * green, so the whole shift is that one cause. The arcane census over the mundane realm is still EMPTY; the ratio
+ * stays inside PENDING_BANDS. Copied from this pin's own measured line; this line and the design doc's MG-4 block
+ * moved in ONE act.
  * ⚠️ RE-KEYED TO SEED 'mg4-acceptance-1' AND RE-RECORDED 2026-11-06 (LANDING-7 lane D), BECAUSE
  * THE MAGICAL TWIN OF 'mg4-acceptance' STOPPED SEATING AN ARCANE FACTION, so MG-4.1's faction
  * control ("the magical twin carries at least one on this seed") read 0 and the mundane realm's
