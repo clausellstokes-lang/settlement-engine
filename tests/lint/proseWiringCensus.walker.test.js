@@ -1769,6 +1769,13 @@ describe('SEAM car 5b — THE HOLDER CENSUS: the source of each construction (SI
     expect((cites.get('incomeSources') || []).includes('src/generators/economy/economicState.js:1'),
       'a fabricated line of a real producer file is refused').toBe(false);
     expect((cites.get('thisTokenIsWrittenNowhere') || []).length, 'and an invented token has no citation').toBe(0);
+    // ⛔ AND THE SYMBOL FORM (`path :: declaration`, rule 32; LANDING-R2, ODQ §934.105) is held to
+    // the same reader: the declaration that WRITES the token resolves, and a real declaration of
+    // the same file that does not write it is refused.
+    expect((cites.get('criminalCaptureState') || []).includes('src/generators/power/rulingStructure.js :: generatePowerStructure'),
+      'the symbol that writes the token resolves').toBe(true);
+    expect((cites.get('criminalCaptureState') || []).includes('src/generators/power/rulingStructure.js :: normalizeAndAnnotateFactions'),
+      'a real symbol that does not write it is refused').toBe(false);
   });
 
   test('the COLUMN_SOURCES arms convict this roster too: every kind is fully cited or names its gaps', () => {
@@ -1878,7 +1885,7 @@ describe('SEAM car 5b — THE HOLDER CENSUS: the source of each construction (SI
   //
   // Car 5b reported capture "structurally absent at birth" and measured INTERESTED at 0 over
   // all 768 RATE towns. THE FIGURE WAS RIGHT AND THE GROUND WAS FALSE: every generated town
-  // carries `powerStructure.criminalCaptureState` (rulingStructure.js:797 — the very line the
+  // carries `powerStructure.criminalCaptureState` (rulingStructure.js :: generatePowerStructure — the write the
   // holder table maps to the WATCH), on the same five-rung ladder `standingOf` consumes,
   // reading none 495 · adversarial 194 · equilibrium 64 · corrupted 15 over the corpus. The
   // car reported the fact ABSENT rather than asking whether it licenses a per-institution

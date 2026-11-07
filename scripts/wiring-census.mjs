@@ -146,15 +146,22 @@ const ESPREE_OPTIONS = Object.freeze({ ecmaVersion: 2024, sourceType: 'module', 
  *
  * FAIL-CLOSED ON A PARSE FAILURE: the file contributes nothing and is NAMED, because a
  * silent fallback to the regex would put the shape this function exists to refuse back in.
+ *
+ * Each write also carries `decl`: the name of the TOP-LEVEL declaration it sits inside (a
+ * function, class or variable declarator, exported or not; '' outside one), so a citation can
+ * name its producer as `path :: declaration` (OPERATING_STANDARD rule 32) and stay true when an
+ * unrelated move above it shifts the line (LANDING-R2, ODQ §934.105).
  * @param {string} source
- * @returns {{writes: Array<{name: string, line: number}>,
+ * @returns {{writes: Array<{name: string, line: number, decl: string}>,
  *   mentions: Array<{name: string, line: number}>, parsed: boolean}}
  */
 export function astTokens(source) {
-  /** @type {Array<{name: string, line: number}>} */
+  /** @type {Array<{name: string, line: number, decl: string}>} */
   const writes = [];
   /** @type {Array<{name: string, line: number}>} */
   const mentions = [];
+  /** The top-level declaration the walk is inside ('' outside one). */
+  let decl = '';
   /** @type {object} */
   let root;
   try { root = parse(String(source), ESPREE_OPTIONS); } catch { return { writes, mentions, parsed: false }; }
@@ -172,12 +179,12 @@ export function astTokens(source) {
     if (typeof row.type !== 'string') return;
     if (row.type === 'Property' && !row.computed && row.key && row.key.loc) {
       const name = nameOf(row.key);
-      if (name) writes.push({ name, line: row.key.loc.start.line });
+      if (name) writes.push({ name, line: row.key.loc.start.line, decl });
     }
     if (row.type === 'AssignmentExpression' && row.left && row.left.type === 'MemberExpression'
       && !row.left.computed && row.left.property && row.left.property.loc) {
       const name = nameOf(row.left.property);
-      if (name) writes.push({ name, line: row.left.property.loc.start.line });
+      if (name) writes.push({ name, line: row.left.property.loc.start.line, decl });
     }
     if (row.type === 'Identifier' && row.loc) mentions.push({ name: row.name, line: row.loc.start.line });
     const isFunction = row.type === 'FunctionDeclaration' || row.type === 'FunctionExpression'
@@ -188,7 +195,24 @@ export function astTokens(source) {
       walk(row[key]);
     }
   };
-  walk(root);
+  /** @param {Record<string, any>} node @returns {Array<[string, object]>} each declared name and the node it covers */
+  const declaredIn = (node) => {
+    const inner = (node.type === 'ExportNamedDeclaration' || node.type === 'ExportDefaultDeclaration') && node.declaration
+      ? node.declaration : node;
+    if ((inner.type === 'FunctionDeclaration' || inner.type === 'ClassDeclaration') && inner.id) return [[inner.id.name, node]];
+    if (inner.type === 'VariableDeclaration') {
+      return inner.declarations.map((/** @type {Record<string, any>} */ d) => [d.id && d.id.type === 'Identifier' ? d.id.name : '', d]);
+    }
+    return [['', node]];
+  };
+  const program = /** @type {Record<string, any>} */ (root);
+  for (const statement of program.body) {
+    for (const [name, node] of declaredIn(statement)) {
+      decl = name;
+      walk(node);
+    }
+  }
+  decl = '';
   return { writes, mentions, parsed: true };
 }
 
@@ -212,6 +236,12 @@ export function producerIndex() {
  * walker can re-derive every citation from the tree rather than believe the table: a row whose
  * `cite` has gone stale, or never existed, reds by name.
  *
+ * ⭐ TWO FORMS, ONE WALK (LANDING-R2, ODQ §934.105). Each write is cited at its `file:line`
+ * AND as `file :: declaration` (OPERATING_STANDARD rule 32), the top-level declaration that
+ * holds it, so a row may cite the SYMBOL and survive a move that shifts its line; a symbol that
+ * writes no such token reds exactly as a stale line does. The KEYS are unchanged, so
+ * `producerIndex` and everything the census computes from it are byte-identical.
+ *
  * ⛔ IT IS THE SAME SCAN AND NOT A SECOND ONE. Two walks over `src/generators/**` and
  * `src/domain/**` that could disagree would be two producer indexes, and the estate's rule is
  * one reader per fact: `producerIndex` is written in terms of this function so a divergence is
@@ -232,9 +262,12 @@ export function producerCitations() {
     const { writes, parsed } = astTokens(readFileSync(abs, 'utf8'));
     if (!parsed) { unparsed.push(rel); continue; }
     for (const write of writes) {
-      const held = cites.get(write.name);
-      if (held) held.push(`${rel}:${write.line}`);
-      else cites.set(write.name, [`${rel}:${write.line}`]);
+      const held = cites.get(write.name) || [];
+      if (!held.length) cites.set(write.name, held);
+      held.push(`${rel}:${write.line}`);
+      // The SYMBOL form of the same write (rule 32): `path :: declaration`, once per declaration.
+      const symbol = write.decl ? `${rel} :: ${write.decl}` : '';
+      if (symbol && !held.includes(symbol)) held.push(symbol);
     }
   }
   return { cites, files: files.length, unparsed };
