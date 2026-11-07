@@ -24,6 +24,7 @@ import { ViabilityTab } from '../../src/components/new/tabs/ViabilityTab.jsx';
 import { buildViewModel } from '../../src/pdf/lib/viewModel.js';
 import { useStore } from '../../src/store/index.js';
 import BIRTHS from '../fixtures/readerValidationOnPage.births.json';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 const e = React.createElement;
 const clone = (x) => JSON.parse(JSON.stringify(x));
@@ -45,7 +46,8 @@ describe('ruling 1 — validation text never renders on a DM surface (non-staff 
     test(`${seed}: Overview, Resources and Viability print no validator sentence`, () => {
       for (const Tab of [OverviewTab, ResourcesTab, ViabilityTab]) {
         const t = text(Tab, clone(BIRTHS[seed]));
-        expect(t, `${Tab.name} on ${seed}`).not.toMatch(VALIDATOR);
+        expect(t.length, `${Tab.name} on ${seed} rendered`).toBeGreaterThan(0);
+        expect(t, `${Tab.name} on ${seed}`).not.toMatch(VALIDATOR); // anchored: the line above proves the tab rendered text
       }
     });
   }
@@ -53,8 +55,11 @@ describe('ruling 1 — validation text never renders on a DM surface (non-staff 
   test('soak1k-0: the structural check is gone from the Overview and from the Viability crises', () => {
     const s = clone(BIRTHS['soak1k-0']);
     expect(s.structuralViolations.map((v) => v.reason)).toContain('Alpine Pastures is not compatible with port access.');
-    expect(text(OverviewTab, s)).not.toContain('Structural Issues');
-    expect(text(ViabilityTab, s)).not.toContain('Structural Crises');
+    const overview = text(OverviewTab, s);
+    const viability = text(ViabilityTab, s);
+    expect([overview.length > 0, viability.length > 0], 'both tabs rendered').toEqual([true, true]);
+    expect(overview).not.toContain('Structural Issues'); // anchored: the line above proves the Overview rendered text
+    expect(viability).not.toContain('Structural Crises'); // anchored: the Viability tab is proven rendered two lines above
   });
 
   test('a staff viewer (elevated) still reads the checks, on the Viability tab\'s staff panel', () => {
@@ -70,13 +75,19 @@ describe('ruling 1 — validation text never renders on a DM surface (non-staff 
   });
 
   test('the PDF view model carries no validator rows for the DM document', () => {
-    for (const seed of Object.keys(BIRTHS)) {
+    let gapLines = 0;
+    const failures = collectSeedFailures(Object.keys(BIRTHS), (seed) => {
       const vm = buildViewModel({ settlement: clone(BIRTHS[seed]), phase: 'canon' });
       expect(vm.viability.structuralViolations, seed).toEqual([]);
       expect(vm.overview.structuralSuggestions, seed).toEqual([]);
       expect(vm.resources.priorityNotes, seed).toEqual([]);
-      for (const g of vm.resources.structuralGaps) expect(g.impact, seed).not.toMatch(VALIDATOR);
-    }
+      const impacts = vm.resources.structuralGaps.map((g) => g.impact);
+      gapLines += impacts.length;
+      // anchored: gapLines > 0 after the collection proves the gap lists are read, not empty
+      for (const impact of impacts) expect(impact, seed).not.toMatch(VALIDATOR);
+    });
+    expectNoSeedFailures(failures, 'every birth\'s PDF view model carries no validator row');
+    expect(gapLines, 'the births carry gap lines: the negatives above are not vacuous').toBeGreaterThan(0);
   });
 });
 
@@ -98,14 +109,14 @@ describe('ruling 2 — the verdict count and the Critical Issues list are one li
 describe('ruling 3 — a gap prints only when the record lacks the input', () => {
   test('soak1k-8: the mill is not short of grain in a village that grows and exports it', () => {
     const t = text(ResourcesTab, clone(BIRTHS['soak1k-8']));
-    expect(t).not.toMatch(/Mill exists but lacks access to grain|grain reaches the mill/i);
     expect(t).toContain('No clay reaches the potter.'); // a true gap, in the house voice
+    expect(t).not.toMatch(/Mill exists but lacks access to grain|grain reaches the mill/i); // anchored: a true gap is matched in this same text on the line above
   });
 
   test('soak1k-22: bakers (Grain imported), bathhouse (hot springs near), salt works (salt produced) are not gaps', () => {
     const t = text(ResourcesTab, clone(BIRTHS['soak1k-22']));
-    expect(t).not.toMatch(/bakers|bathhouse|salt works/i);
     expect(t).toContain('No grapes reach the vintner.');
+    expect(t).not.toMatch(/bakers|bathhouse|salt works/i); // anchored: a true gap is matched in this same text on the line above
   });
 });
 
@@ -123,7 +134,7 @@ test('ruling 3, the plural: "Mineral salts" exported answers the salt works (soa
 describe('ruling 4 — "no dependable trade route" reads the route', () => {
   test('soak1k-24: a crossroads thorp under siege has a route that is cut', () => {
     const t = text(ViabilityTab, clone(BIRTHS['soak1k-24']));
-    expect(t).not.toContain('has no dependable trade route');
     expect(t).toContain('and its trade route is cut.');
+    expect(t).not.toContain('has no dependable trade route'); // anchored: the cut route is matched in this same text on the line above
   });
 });

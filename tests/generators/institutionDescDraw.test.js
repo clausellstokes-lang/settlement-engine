@@ -11,6 +11,7 @@ import { drawInstitutionDesc } from '../../src/generators/steps/institutionDescD
 import { pickVariant } from '../../src/kernel/proseHash.js';
 import { factsOf } from '../../src/domain/facts/factsOf.js';
 import { CALM_FACTS_ADMIT_ALL } from '../helpers/calmFactsDouble.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 const ADMIT_ALL = { ...CALM_FACTS_ADMIT_ALL, guild: true, tier: 'metropolis', terrain: 'forest' };
 /** A village with no market, no guild, no walls, inland plains. */
@@ -37,12 +38,11 @@ describe('the institution description draw resolves through drawDeclared (CENSUS
   });
 
   it('a record that admits every line keeps the old pick, for every table key (byte witness)', () => {
-    for (const [key, variants] of Object.entries(INSTITUTION_DESC_VARIANTS)) {
-      const pool = [...variants];
-      for (const seed of ['a:x', 'b:y', 'c:z']) {
-        expect(drawInstitutionDesc(pool, seed, ADMIT_ALL, key)).toBe(pickVariant(pool, seed));
-      }
-    }
+    const cases = Object.entries(INSTITUTION_DESC_VARIANTS).flatMap(([key, variants]) => ['a:x', 'b:y', 'c:z'].map((seed) => ({ key, pool: [...variants], seed })));
+    const failures = collectSeedFailures(cases, ({ key, pool, seed }) => {
+      expect(drawInstitutionDesc(pool, seed, ADMIT_ALL, key), `${key} @ ${seed}`).toBe(pickVariant(pool, seed));
+    });
+    expectNoSeedFailures(failures, 'every table key keeps its old pick under an admit-all record');
   });
 
   it('a walls sibling still resolves to its twin where the roster has no walls', () => {

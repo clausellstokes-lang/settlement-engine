@@ -12,6 +12,7 @@ import { generateFactionLeaderSecret } from '../../src/generators/npc/factionLea
 import { NPC_CRIMINAL_SECRETS, NPC_CRIMINAL_SECRETS_BY_HOLDER } from '../../src/data/npcData.js';
 import { setActiveRng, clearActiveRng } from '../../src/kernel/rngContext.js';
 import { createPRNG } from '../../src/kernel/prng.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 afterEach(() => clearActiveRng());
 
@@ -31,12 +32,13 @@ const SEEDS = Array.from({ length: 600 }, (_, i) => `rax-${i}`);
 
 describe('R-AX: the criminal secret\'s two rolls read the holder (CENSUS-1i unit 3)', () => {
   it('(a) a holder never draws a row keyed to another role', () => {
-    for (const seed of SEEDS) {
+    const failures = collectSeedFailures(SEEDS, (seed) => {
       const mayor = draw(seed, 'Mayor');
       expect(CLERGY.has(mayor) || MILITARY.has(mayor), `${seed} Mayor: ${mayor}`).toBe(false);
       expect(CLERGY.has(draw(seed, 'Watch Captain')), seed).toBe(false);
       expect(MILITARY.has(draw(seed, 'High Priestess')), seed).toBe(false);
-    }
+    });
+    expectNoSeedFailures(failures, 'no holder draws a row keyed to another role');
   });
 
   it('(b) a religious roll by a non-clergy holder in a visions-barred world is re-mapped over the admitted types, not dropped to the personal secrets', () => {
@@ -50,18 +52,20 @@ describe('R-AX: the criminal secret\'s two rolls read the holder (CENSUS-1i unit
 
   it('(c) a matching holder is unchanged: a clergy holder\'s draw that the flat view gave a clerical or role-free non-military row', () => {
     let compared = 0;
-    for (const seed of SEEDS) {
+    const failures = collectSeedFailures(SEEDS, (seed) => {
       const flat = draw(seed, undefined);
-      if (MILITARY.has(flat)) continue;
+      if (MILITARY.has(flat)) return;
       const anyMilitary = new Set(NPC_CRIMINAL_SECRETS_BY_HOLDER.any.military.map((r) => r.secret));
-      if (anyMilitary.has(flat)) continue;
+      if (anyMilitary.has(flat)) return;
       expect(draw(seed, 'High Priestess'), seed).toBe(flat);
       compared += 1;
-    }
+    });
+    expectNoSeedFailures(failures, 'a matching holder keeps the flat view\'s draw');
     expect(compared).toBeGreaterThan(400);
   });
 
   it('(d) no role: the flat view, byte-identical to the unkeyed draw', () => {
-    for (const seed of SEEDS.slice(0, 50)) expect(draw(seed, undefined)).toBe(draw(seed, undefined));
+    const failures = collectSeedFailures(SEEDS.slice(0, 50), (seed) => { expect(draw(seed, undefined), seed).toBe(draw(seed, undefined)); });
+    expectNoSeedFailures(failures, 'no role draws the flat view, byte-identical');
   });
 });

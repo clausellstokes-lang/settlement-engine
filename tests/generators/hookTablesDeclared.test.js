@@ -16,6 +16,7 @@
 import { beforeAll, describe, expect, it } from 'vitest';
 import { birth, ensureLaws } from '../../scripts/audit/soak-review/corpus.mjs';
 import { factsOf } from '../../src/domain/facts/factsOf.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { assertDeclarable, declarationOf, declarationAdmits } from '../../src/domain/facts/factVocabulary.js';
 import { HISTORICAL_EVENTS_DATA } from '../../src/data/historyData.js';
 
@@ -68,7 +69,7 @@ describe('the history hooks declare what their event does not guarantee', () => 
       ['a rival shrine claims the relic', { needs: ['institution: temple'] }],
     ].map(([t, d]) => [t, { text: t, ...d }]));
     const bad = [];
-    for (const i of SEEDS) {
+    const failures = collectSeedFailures(SEEDS, (i) => {
       const s = birth(i).settlement;
       const facts = factsOf(s);
       for (const ev of s.history?.historicalEvents || []) for (const h of ev.plotHooks || []) expect(typeof h, `soak1k-${i}`).toBe('string');
@@ -82,7 +83,8 @@ describe('the history hooks declare what their event does not guarantee', () => 
           }
         }
       }
-    }
+    });
+    expectNoSeedFailures(failures, 'every stored hook is text');
     expect(bad).toEqual([]);
   }, 120_000);
 });

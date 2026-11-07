@@ -12,6 +12,7 @@
 import { beforeAll, describe, expect, it } from 'vitest';
 import { birth, ensureLaws } from '../../scripts/audit/soak-review/corpus.mjs';
 import { factsOf } from '../../src/domain/facts/factsOf.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 const PILGRIMS = /queue patiently for their turn at the holy places/;
 const SEEDS = [255, 317, 353, 416, 639, 741, 785, 815, 992];
@@ -20,12 +21,13 @@ describe('the arrival scene redraws a refused line once (CENSUS-1f unit 2)', () 
   beforeAll(async () => { await ensureLaws(); });
 
   it('the pilgrims queue never prints under a threat or unrest crisis', () => {
-    for (const i of SEEDS) {
+    const failures = collectSeedFailures(SEEDS, (i) => {
       const s = birth(i).settlement;
       const crisis = factsOf(s).crisis;
       expect(crisis.has('threat') || crisis.has('unrest'), `soak1k-${i} carries threat or unrest`).toBe(true);
       expect(PILGRIMS.test(s.arrivalScene || ''), `soak1k-${i}`).toBe(false);
-    }
+    });
+    expectNoSeedFailures(failures, 'no threat or unrest birth prints the pilgrims queue');
   }, 60_000);
 
   it('the pilgrims queue still prints where nothing refuses it (soak1k-95, indebted)', () => {
