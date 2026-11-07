@@ -197,7 +197,15 @@
  *     roster 10 -> 13, the bank 69/45 -> 76/50), and ADMITS the window's other rows with
  *     attribution. Its full rationale lives beside `WINDOW_RUNG1_TARGET_SCHEMA` (RETIRED).
  *
- *   schema 28 -> 29 (LIVE)   the same tagged numeric reconciliation, and ONE DECLARATION of the fifth
+ *   schema 29 -> 30 (LIVE)   the same tagged numeric reconciliation, and A GOVERNED MIGRATION RUNG FOR A
+ *     SHAPE CHANGE (the chair's ruling of 2026-11-07 06:5x UTC, ODQ §934.105, on LANDING-R2's record;
+ *     cut there as 28 -> 29 and RE-NUMBERED 29 -> 30 at the integration merge MERGE-R2, on top of
+ *     WIRING-W0-CLOSE's 29): the pool census and the reader lanes landed new readers, moved one and
+ *     retired or re-spelled register rows' reads. Nothing is declared (the roster stays fourteen) and
+ *     no detector source moves. Its full rationale and the per-row review, re-derived at the merged
+ *     tip, live beside `CENSUS_READERS_TARGET_SCHEMA`.
+ *
+ *   schema 28 -> 29 (RETIRED) the same tagged numeric reconciliation, and ONE DECLARATION of the fifth
  *     class (the chair's ruling of 2026-11-07 03:55 UTC, ODQ §934.105, lane WIRING-W0): the migration
  *     direction's config projection, `migrationDirection on config` (writer
  *     generators/steps/stressConfirmPass.js), whose writer never runs in the corpus because no corpus
@@ -298,6 +306,7 @@ import {
   validateSchema26Baseline,
   validateSchema27Baseline,
   validateSchema28Baseline,
+  validateSchema29Baseline,
 } from './lib/observed-shape-baseline.mjs';
 
 export const MIGRATION_REPORT_SCHEMA = 2;
@@ -1255,6 +1264,66 @@ export const TIER_COVERAGE_TARGET_SCHEMA = 28;
  *  lands ratchet-red, and its re-freeze lands next. */
 export const MIGRATION_DIRECTION_TARGET_SCHEMA = 29;
 
+/* ⭐⭐ THE SCHEMA 29 → 30 RUNG — THE CENSUS READERS (a governed migration rung for a shape change)
+ *
+ *  The chair's ruling of 2026-11-07 06:5x UTC (ODQ §934.105) on LANDING-R2's record: "(A)
+ *  observedShapeReaders — RULED: a GOVERNED MIGRATION RUNG, the register's own door for a shape
+ *  change, never a widening of the shrink-only law and not the owner's row … whose migration review
+ *  lists EVERY new read with its cause commit and its disposition … none is erased silently."
+ *  LANDING-R2 seat H cut it on the rung-2 landing's tree as 28 -> 29 (ee11854a6 / acdc836d7), where
+ *  WIRING-W0-CLOSE had ALSO cut a 29 on the integration branch (848dd7dc1 / c3e6a3598, the migration
+ *  direction's declaration). The chair composed the two at the integration merge (MERGE-R2, 2026-11-07):
+ *  W0's 29 stands, and this rung is RE-NUMBERED 29 -> 30 ON TOP OF IT, its review RE-DERIVED at the
+ *  merged tip against W0's schema-29 register (seat H's review, measured against schema 28 on the
+ *  rung-2 tree, is the source of every cause below).
+ *
+ *  THE REFUSAL, MEASURED at the merged tip (MERGE-R2's provisional act 1 over 10b8f09b4) against
+ *  W0-CLOSE's schema-29 register (c3e6a3598, re-frozen on the integration branch): the shrink-only
+ *  `--write` refuses on exactly the ten NEW rows below, and the migration report reads Same 1440 ·
+ *  New 10 · Gone 11 · Increased 0 · Decreased 0 — seat H's 21 rows, row for row, and NOTHING the
+ *  merge's composition (the migration direction, the held refusal inside the declared draw, the
+ *  water and market detectors) moved. The scanner transition modifies exactly the three bookkeeping
+ *  paths; the unscanned movement is the eight regenerated execution inputs (the dossier prose
+ *  `.generated.js` x7, the intent-atlas distillate), recorded for the review.
+ *
+ *  THE MIGRATION REVIEW — every moved row, its cause (seat H's bisection on the rung-2 line), its
+ *  disposition:
+ *   NEW (10 rows, 15 reads), each ADMITTED as ordinary debt:
+ *    • display/tradeListDisplay.js `name on incomeSources` x1 — 9e4283eb5 (census-3c R-P 2,
+ *      reader-r1's revenues): `revenuesOffTheLists` reads the trade list's `name` to display it.
+ *    • facts/drawDeclared.js `id` x3, `text` x2, `twinOf` x2 `on merchant` — the reader is 8d5b704a9
+ *      (census-1b wave 1 item 3); the rows SURFACE at f739d37c6 (census-1e unit 2), which routes
+ *      STRESS_GOAL_OVERRIDES' lines through `resolveDeclared`, so the detector carries the
+ *      `merchant` override's binding into it.
+ *    • facts/drawDeclared.js `colour on merchant` x1 — d59b8a37a (census compose, R-AO).
+ *    • facts/factVocabulary.js `crisis`, `excludes`, `needs` x1, `tags` x2 `on merchant` — the reader
+ *      is c84bd6a29 (census-1b wave 1 item 1); surfaced at f739d37c6 by the same binding.
+ *    • roles/roleClass.js `contestsNiche on factions` x1 — A MOVE, NOT A GROWTH: 596cb8b1b (census-4
+ *      R3, the tie rule) re-homed the read from coherence/readerBattery.js (retired below).
+ *   GONE (11 rows, 13 reads), each RETIRED with its cause:
+ *    • coherence/readerBattery.js `contestsNiche on factions` x1 — moved by 596cb8b1b.
+ *    • generators/npcGenerator.js `note` x2 and `short` x1 `on merchant` — f739d37c6: the reads stand
+ *      (`override.note`, `override.short`), but `override` is now `resolveDeclared(…).line`, which
+ *      the detector does not ground; the `merchant` binding MOVED into drawDeclared.js and
+ *      factVocabulary.js (above). W0's schema-29 register held `short` x1, not seat H's x2:
+ *      REVIEW-INTAKE-4 read `override.short` once (into `overrideLine`) before the merge.
+ *    • domain/canonicalAccessors.js `stresses on settlement` x1 (a BANKED row: the bank 77/51 ->
+ *      76/50) and domain/magicLedger.js `magicLevel on settlement` x1 — 7af3c6797 (census-3b(3)):
+ *      both reads stand; the new tradeListDisplay.js passes its `settlement` on to `factsOf`, and
+ *      the detector stops grounding the two receivers. UNCURED INSTRUMENT EROSION, recorded as such
+ *      (the schema-27 `formerSponsorSettlementId` precedent), not as a repair.
+ *    • pdf/lib/viewModel.js `criticalIssues` x1, `structuralSuggestions` x1, `stressConsequences` x2
+ *      `on economicViability`; pdf/lib/viewModelBodySlices.js `priorityNotes on economicViability`
+ *      x1, `structuralGaps on resourceAnalysis` x1, `structuralGaps on settlement` x1 — d3b9280f6
+ *      (reader-r1 unit 2): the reads are gone from both files, a lawful repair.
+ *
+ *  Nothing is declared (the roster stays fourteen; thirteen bank). The identity rows move by exactly
+ *  the review's delta, 1451 + 10 - 11 = 1450. ⛔ The reconciliation must be EXACTLY those 21 rows;
+ *  any other moved row at the mint means the review was not the whole cause and the mint STOPS.
+ *  Its delta is the three bookkeeping paths; see `CENSUS_READERS_SCANNER_DELTA_PATHS`. The commit
+ *  pair holds as at every rung: this rung lands ratchet-red, and its re-freeze lands next. */
+export const CENSUS_READERS_TARGET_SCHEMA = 30;
+
 export const DECLARED_BANK_BY_TARGET = Object.freeze({
   [EXEMPTION_RETIREMENT_TARGET_SCHEMA]: Object.freeze({ bankedReads: 60, taggedRows: 39 }),
   [BANK_FENCE_TARGET_SCHEMA]: Object.freeze({ bankedReads: 60, taggedRows: 39 }),
@@ -1307,6 +1376,13 @@ export const DECLARED_BANK_BY_TARGET = Object.freeze({
   // src/domain/migrationDirection.js). The write refuses if the measurement disagrees with this pair
   // or with the walker's hand-owned literal.
   [MIGRATION_DIRECTION_TARGET_SCHEMA]: Object.freeze({ bankedReads: 77, taggedRows: 51 }),
+  // MEASURED off the live scan at the subject, never predicted from the delta: `bankOf` over the
+  // committed schema-29 register derives 77 reads across 51 addresses, and the live scan banks 76
+  // across 50 — the roster is unchanged (fourteen; thirteen bank), and the one tagged row that goes is
+  // `stresses on settlement` x1 at src/domain/canonicalAccessors.js, whose read still stands and
+  // which the detector no longer grounds (see the rung's review above). The write refuses if the
+  // measurement disagrees with this pair or with the walker's hand-owned literal.
+  [CENSUS_READERS_TARGET_SCHEMA]: Object.freeze({ bankedReads: 76, taggedRows: 50 }),
 });
 
 /** The declared post-bank of a target, or `null` for a rung that predates the law. */
@@ -1845,6 +1921,24 @@ export const MIGRATION_DIRECTION_SCANNER_DELTA_PATHS = Object.freeze([
   'scripts/migrate-observed-shape-readers.mjs',
 ]);
 
+/**
+ * The schema-29 → 30 delta — the bookkeeping set, THREE paths (the schema-23 shape: a rung that
+ * re-governs the register without a detector move):
+ *   • `scripts/check-observed-shape-readers.mjs` — the live-validator binding, `_doc` and schema
+ *     index (no declaration: the roster stays fourteen);
+ *   • `scripts/lib/observed-shape-baseline.mjs` — the 29 → 30 bump and the retired-29 validator;
+ *   • `scripts/migrate-observed-shape-readers.mjs` — this rung, its review and its declared post-bank.
+ * ⛔ THE CORPUS BUILDER DID NOT MOVE, and no other detector source did (seat H measured it on the
+ * rung-2 tree: every moved row is a SUBJECT-file cause, scanned rather than scanning). Regenerated
+ * execution inputs since the schema-29 freeze are recorded by the transition for the review's
+ * decision. The bank literal is test-side.
+ */
+export const CENSUS_READERS_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
 export const BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS = Object.freeze([
   'package-lock.json',
   'package.json',
@@ -1899,6 +1993,8 @@ const TIER_COVERAGE_SCANNER_TRANSITION_POLICY =
   'schema-27-to-28-exact-scanner-transition-v1';
 const MIGRATION_DIRECTION_SCANNER_TRANSITION_POLICY =
   'schema-28-to-29-exact-scanner-transition-v1';
+const CENSUS_READERS_SCANNER_TRANSITION_POLICY =
+  'schema-29-to-30-exact-scanner-transition-v1';
 const CORPUS_COVERAGE_SCANNER_TRANSITION_POLICY =
   'schema-7-to-8-exact-scanner-transition-v1';
 const EPOCH_DARK_CORPUS_SCANNER_TRANSITION_POLICY =
@@ -1946,6 +2042,7 @@ export const LEAF_MIGRATION_PREDECESSOR = Object.freeze({
   [WINDOW_RUNG1_TARGET_SCHEMA]: FED_WORLD_TARGET_SCHEMA,
   [TIER_COVERAGE_TARGET_SCHEMA]: WINDOW_RUNG1_TARGET_SCHEMA,
   [MIGRATION_DIRECTION_TARGET_SCHEMA]: TIER_COVERAGE_TARGET_SCHEMA,
+  [CENSUS_READERS_TARGET_SCHEMA]: MIGRATION_DIRECTION_TARGET_SCHEMA,
 });
 
 /**
@@ -2032,6 +2129,10 @@ const LEAF_PREDECESSOR_VALIDATOR = Object.freeze({
   // RETIRED literal from this rung onward, so this entry keeps validating schema 28
   // as schema 28 after the live number moves past it.
   [TIER_COVERAGE_TARGET_SCHEMA]: validateSchema28Baseline,
+  // The schema-30 rung's own predecessor. `validateSchema29Baseline` is bound to the
+  // RETIRED literal from this rung onward, so this entry keeps validating schema 29
+  // as schema 29 after the live number moves past it.
+  [MIGRATION_DIRECTION_TARGET_SCHEMA]: validateSchema29Baseline,
 });
 
 const RETIRED_EXACT_MIGRATION_KIND = `observed-shape-schema-2-to-${RETIRED_EXACT_TARGET_SCHEMA}-migration`;
@@ -2555,6 +2656,14 @@ const SCANNER_TRANSITION_BY_TARGET = new Map([
     // governed execution inputs (the dossier-state prose, the institution service keys, the prose
     // norms, …) by their documented commands after the predecessor was frozen, and the report
     // records that movement for the review's decision.
+    reviewableUnscannedMovement: true,
+  })],
+  [CENSUS_READERS_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: CENSUS_READERS_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: CENSUS_READERS_SCANNER_TRANSITION_POLICY,
+    // TRUE, matching every rung since 8→9: any governed execution input regenerated by its
+    // documented command since the schema-29 freeze is recorded for the review's decision.
     reviewableUnscannedMovement: true,
   })],
   [MIGRATION_DIRECTION_TARGET_SCHEMA, Object.freeze({
@@ -3675,7 +3784,7 @@ export function run(argv = process.argv.slice(2)) {
   // any mismatch into a refusal rather than a silent mode switch.
   const targetSchema = command.targetSchema
     ? Number(command.targetSchema)
-    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : MIGRATION_DIRECTION_TARGET_SCHEMA);
+    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : CENSUS_READERS_TARGET_SCHEMA);
   if (![RETIRED_EXACT_TARGET_SCHEMA, HEURISTIC_TARGET_SCHEMA, FILTERED_TARGET_SCHEMA,
     SURFACE_FILTERED_TARGET_SCHEMA, BANKED_EXPLAINED_WRITER_TARGET_SCHEMA,
     CORPUS_COVERAGE_TARGET_SCHEMA, EPOCH_DARK_CORPUS_TARGET_SCHEMA,
@@ -3688,8 +3797,9 @@ export function run(argv = process.argv.slice(2)) {
     DOMAIN_READER_TARGET_SCHEMA, EDIT_MODE_READERS_TARGET_SCHEMA,
     CORPUS_REDEAL_TARGET_SCHEMA, ADVISORY_LOCKFILE_TARGET_SCHEMA,
     FED_WORLD_TARGET_SCHEMA, WINDOW_RUNG1_TARGET_SCHEMA, TIER_COVERAGE_TARGET_SCHEMA,
-    MIGRATION_DIRECTION_TARGET_SCHEMA].includes(targetSchema)) {
-    throw new Error(`observed-shape --target-schema must be ${MIGRATION_DIRECTION_TARGET_SCHEMA} (live migration-direction leaf),`
+    MIGRATION_DIRECTION_TARGET_SCHEMA, CENSUS_READERS_TARGET_SCHEMA].includes(targetSchema)) {
+    throw new Error(`observed-shape --target-schema must be ${CENSUS_READERS_TARGET_SCHEMA} (live census-readers leaf),`
+      + ` ${MIGRATION_DIRECTION_TARGET_SCHEMA} (retired migration-direction leaf),`
       + ` ${TIER_COVERAGE_TARGET_SCHEMA} (retired tier-coverage leaf),`
       + ` ${WINDOW_RUNG1_TARGET_SCHEMA} (retired rung-1-window leaf),`
       + ` ${FED_WORLD_TARGET_SCHEMA} (retired fed-world leaf),`

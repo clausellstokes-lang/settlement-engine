@@ -36,8 +36,8 @@
  * figures live here.
  */
 export const OBSERVED_SHAPE_BANK_LITERAL = Object.freeze({
-  reads: 77,
-  addresses: 51,
+  reads: 76,
+  addresses: 50,
   // Keyed BY THE ROSTER (EXPLAINED_WRITER_EXEMPTIONS). A declaration that banks nothing is
   // written 0/0 rather than omitted — "declared and unexercised" and "retired" are
   // different facts, and the walker refuses a map whose keys are not the roster.
@@ -48,7 +48,10 @@ export const OBSERVED_SHAPE_BANK_LITERAL = Object.freeze({
     'isCriminal on incomeSources': Object.freeze({ reads: 0, addresses: 0 }),
     // 38/25 -> 39/26 at rung 21: DS-REL-1's list assembler is a 26th address.
     'neighbourNetwork on settlement': Object.freeze({ reads: 39, addresses: 26 }),
-    'stresses on settlement': Object.freeze({ reads: 4, addresses: 3 }),
+    // 4/3 -> 3/2 at the schema-30 rung (the census readers; LANDING-R2's 29, re-numbered at MERGE-R2;
+    // ODQ §934.105): the read at src/domain/canonicalAccessors.js (`canonStressors`) stands, and the
+    // detector no longer grounds it — the cause is named in the rung's review beside CENSUS_READERS_TARGET_SCHEMA.
+    'stresses on settlement': Object.freeze({ reads: 3, addresses: 2 }),
     'worldPulse on campaignState': Object.freeze({ reads: 2, addresses: 2 }),
     'appliedAt on eventLog': Object.freeze({ reads: 1, addresses: 1 }),
     'deltas on eventLog': Object.freeze({ reads: 2, addresses: 1 }),
