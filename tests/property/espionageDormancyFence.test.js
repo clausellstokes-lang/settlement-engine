@@ -189,6 +189,14 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * AND NOWHERE ELSE. Most recently at the ENGINE-HYGIENE landing (SHIFT RECORD,
  * 2026-09-01, TE-AGNOSTIC-1 cars `f2c1ad181` / `97d119c9b`); before that at T8.
  *
+ * ── 2026-11-07, PEOPLE-3 HOOKS, SIGNED AT THE PEOPLE CAR'S LANDING (RECORD 3) ──
+ * THE SEVENTY-FIRST MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation of 2026-11-06,
+ * inside a NAMED CHARTERED WINDOW: ODQ §934.105, the people car's landing (PEOPLE-RULINGS M-1, M-3); the record is
+ * docs/shift-records/2026-11-07-people-3-hooks.json. THE MOVER, FOUND: lane 3, PEOPLE-3 HOOKS (lane/people-3-hooks-2026-11-07, f49311d04, merged at 0f930ce95): one plot hook per representative, the tensions and the history kept, parties of every kind.
+ * On THIS corpus 360 of 360 (thorp 60, hamlet 60, village 60, town 60, city 60, metropolis 60) rows move against the stage of f3912a838 (12355043…, record 2's post-state); 360/360
+ * hashes stay distinct. Written from the staged tree (0f930ce95 with the door paths carried from the landing branch, the
+ * previous records committed), measured by scripts/audit/refence.mjs before the write. `12355043…` -> `465a1a70…`.
+ *
  * ── 2026-11-07, PEOPLE-2 CAST-DERIVED, SIGNED AT THE PEOPLE CAR'S LANDING (RECORD 2) ──
  * THE SEVENTIETH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation of 2026-11-06,
  * inside a NAMED CHARTERED WINDOW: ODQ §934.105, the people car's landing (PEOPLE-RULINGS M-1, M-3); the record is
@@ -941,7 +949,7 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * superseded by the ENGINE-HYGIENE re-record above, which is the record of the
  * one chartered window that has been spent since.
  */
-const PRE_COUPLING_CORPUS_SHA = '12355043e8b2c86fd8d5547ca684e70e9d3620bf4594b57f2e5206df6070a1ce';
+const PRE_COUPLING_CORPUS_SHA = '465a1a70c9021f0bb55762488277cc2234ef24b16b2e0921452d35836e74200d';
 
 const CORPUS_TIERS = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
 const CORPUS_ROUTES = Object.freeze(['road', 'isolated', 'port', 'crossroads']);
