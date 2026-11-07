@@ -47,6 +47,10 @@ describe('landing-stage.sh measure', () => {
     expect(WITNESS.test(block), 'the preset lighting witness is measured too').toBe(true);
     expect(/stage-chain\.mjs/.test(block), 'with a previous stage, every surface is compared stage to stage').toBe(true);
     expect(/\$prev\/gm\.json/.test(block), 'the 525 compares against the PREVIOUS stage, not the committed fixture').toBe(true);
+    // the second seat's 0b measure died on `${prev:+$prev/gm.json}${prev:-<fixture>}`, which concatenates both paths
+    // when prev is set (ENOTDIR); the comparison base is chosen by an if/else now.
+    expect(/\$\{prev:\+[^}]*\}\$\{prev:-/.test(block), 'no concatenated ${prev:+..}${prev:-..} base').toBe(false); // anchored: the planted control below proves this pattern fires
+    expect(/\$\{prev:\+[^}]*\}\$\{prev:-/.test('--against "${prev:+$prev/gm.json}${prev:-$stage/x.json}"'), 'the planted control: the old form fires').toBe(true);
   });
 });
 

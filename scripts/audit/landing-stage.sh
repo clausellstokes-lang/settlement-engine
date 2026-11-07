@@ -120,8 +120,11 @@ case "$cmd" in
   measure)
     stage=$2; out=$3; prev=${4:-}   # prev: the PREVIOUS stage's scratch dir (was: its fence rows.tsv)
     mkdir -p "$out"
-    node "$here/scripts/audit/golden-master-stage.mjs" "$stage" --out "$out/gm.json" \
-      --against "${prev:+$prev/gm.json}${prev:-$stage/tests/fixtures/generator-golden-master.json}"
+    # the comparison base: the previous stage's bytes when one is named, else the stage's committed fixture
+    # (the old one-line form, prev:+ beside prev:-, concatenated both when prev was set: the second seat's 0b measure, fixed)
+    if [ -n "$prev" ]; then gm_base="$prev/gm.json"; herald_base="$prev/herald.json"
+    else gm_base="$stage/tests/fixtures/generator-golden-master.json"; herald_base="$stage/tests/fixtures/herald-knowledge-desk-golden.json"; fi
+    node "$here/scripts/audit/golden-master-stage.mjs" "$stage" --out "$out/gm.json" --against "$gm_base"
     node "$here/scripts/audit/herald-stage.mjs" "$stage" --out "$out/herald.json"
     node -e '
       const fs = require("fs");
@@ -129,7 +132,7 @@ case "$cmd" in
       let moved = 0, added = 0; for (const k of Object.keys(b)) { if (!(k in a)) added++; else if (JSON.stringify(a[k]) !== JSON.stringify(b[k])) moved++; }
       const removed = Object.keys(a).filter((k) => !(k in b)).length;
       console.log(JSON.stringify({ surface: "herald-knowledge-desk-golden", rows: Object.keys(b).length, moved, added, removed }));
-    ' "${prev:+$prev/herald.json}${prev:-$stage/tests/fixtures/herald-knowledge-desk-golden.json}" "$out/herald.json"
+    ' "$herald_base" "$out/herald.json"
     if [ -n "$prev" ]; then
       node "$here/scripts/audit/refence.mjs" "$stage" --rows-out "$out/fence.tsv" --against "$prev/fence.tsv"
     else
