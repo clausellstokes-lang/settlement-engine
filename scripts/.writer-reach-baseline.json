@@ -8,7 +8,7 @@
   "The reviewable slice is computed by RULE (reviewableDark), never hand-listed."
  ],
  "schema": 1,
- "frozenAtSha": "55d8086f0d5156990b773ee361dadb55aff0fe42",
+ "frozenAtSha": "a725df7e42df0b58d290357c9488c328acbc9a06",
  "charter": "§18.1 WRWALKER Car 1 (HORIZON) — chair-signed vetoably at the INSTR-WRW pre-stage",
  "minRows": 40,
  "corpusMeta": {
@@ -18,13 +18,13 @@
   "pulseIntervals": 12,
   "simulationFlagsLit": 92,
   "steadingsMinted": 12,
-  "shapeCount": 1725,
-  "originCount": 14818,
-  "transitionCount": 22798
+  "shapeCount": 1719,
+  "originCount": 14334,
+  "transitionCount": 21977
  },
- "shapesDigest": "eece056f21435b6fca9d23d99f9829530316530997130acfb6249b7e3eb4b185",
- "detectorDigest": "27b7e953c527bbe84ef69126e659def86b5317d0cbaf6df4fa3bc22dab8f6492",
- "verdictDigest": "aece89de9b593a833cf8bb783637e9ff173916daa13bdc020f79795bd6d4d386",
+ "shapesDigest": "8d29b1f973ca323599b841cc7150a2246547cc0cb64e4acc86749eee0e10820f",
+ "detectorDigest": "a91972049a21907e56030e7ab5fe16a933a8f7b7ed5eff834c6ecc52b7b4647c",
+ "verdictDigest": "0c197a28cf5134ba8e68bc82eb8b57a3eaded410e1e4c5f37d3802c49fab9089",
  "surfaceRoots": {
   "web": [
    "src/main.jsx"
@@ -73,37 +73,37 @@
  ],
  "closureSizes": {
   "web-display": 750,
-  "web-transitive": 965,
-  "dossier-pdf": 468,
+  "web-transitive": 966,
+  "dossier-pdf": 469,
   "campaign-pdf": 106,
   "world-book": 123,
-  "foundry": 367,
+  "foundry": 368,
   "json-export": 8,
   "news": 29
  },
  "population": {
-  "judged": 12050,
-  "lit": 596,
-  "litName": 10010,
-  "dark": 1444,
-  "thinKeys": 17279,
+  "judged": 11991,
+  "lit": 591,
+  "litName": 9959,
+  "dark": 1441,
+  "thinKeys": 17280,
   "thinShapes": 1203,
-  "knownShapes": 522
+  "knownShapes": 516
  },
  "scanStats": {
-  "files": 1716,
-  "sites": 40781,
-  "propRead": 38605,
+  "files": 1717,
+  "sites": 40829,
+  "propRead": 38650,
   "elemRead": 0,
   "destructure": 2163,
-  "inOp": 13,
-  "rGrades": 6295,
-  "nGrades": 1632251,
-  "resolvedReceivers": 7073
+  "inOp": 16,
+  "rGrades": 6242,
+  "nGrades": 1607698,
+  "resolvedReceivers": 7117
  },
- "registerDigest": "06daf64798f47a1114bd3374e3ddb169a47d2ae29e1f65f1f182cce99ddd9155",
+ "registerDigest": "4595b8264efb741fcf1517ed8deca7ff3df4e8a4eb021d2e16062af67ff9e3f6",
  "pendingSurfaceCeiling": 3,
- "reviewableDarkCount": 460,
+ "reviewableDarkCount": 455,
  "darkUnregistered": [
   {
    "identity": "Bulk grain and flour on reasons",
@@ -181,7 +181,7 @@
    "identity": "_timePressure on factions",
    "key": "_timePressure",
    "shape": "factions",
-   "rows": 11019
+   "rows": 8104
   },
   {
    "identity": "accusedNid on commonsVoice",
@@ -205,7 +205,7 @@
    "identity": "accusedNid on osr004",
    "key": "accusedNid",
    "shape": "osr004",
-   "rows": 463
+   "rows": 467
   },
   {
    "identity": "accusedNid on osr005",
@@ -235,7 +235,7 @@
    "identity": "accusedNid on osr015",
    "key": "accusedNid",
    "shape": "osr015",
-   "rows": 354
+   "rows": 371
   },
   {
    "identity": "activeChainsCount on foodSecurity",
@@ -259,7 +259,7 @@
    "identity": "activity on osr004",
    "key": "activity",
    "shape": "osr004",
-   "rows": 463
+   "rows": 467
   },
   {
    "identity": "activity on osr005",
@@ -295,7 +295,7 @@
    "identity": "affinity on metadata",
    "key": "affinity",
    "shape": "metadata",
-   "rows": 10004
+   "rows": 9946
   },
   {
    "identity": "agent_protege on internalSeats",
@@ -313,7 +313,7 @@
    "identity": "alchemical_goods on osr004",
    "key": "alchemical_goods",
    "shape": "osr004",
-   "rows": 463
+   "rows": 467
   },
   {
    "identity": "alchemical_goods on osr005",
@@ -361,7 +361,7 @@
    "identity": "arcane_orders on leaderNpcIds",
    "key": "arcane_orders",
    "shape": "leaderNpcIds",
-   "rows": 1064
+   "rows": 1210
   },
   {
    "identity": "arcane_reagents on osr000",
@@ -379,7 +379,7 @@
    "identity": "arcane_reagents on osr004",
    "key": "arcane_reagents",
    "shape": "osr004",
-   "rows": 463
+   "rows": 467
   },
   {
    "identity": "arcane_reagents on osr005",
@@ -421,7 +421,7 @@
    "identity": "arms on osr004",
    "key": "arms",
    "shape": "osr004",
-   "rows": 463
+   "rows": 467
   },
   {
    "identity": "arms on osr006",
@@ -439,13 +439,13 @@
    "identity": "authoritySignature on metadata",
    "key": "authoritySignature",
    "shape": "metadata",
-   "rows": 10004
+   "rows": 9946
   },
   {
    "identity": "authoritySignature on pulseHistory",
    "key": "authoritySignature",
    "shape": "pulseHistory",
-   "rows": 1407
+   "rows": 1400
   },
   {
    "identity": "authoritySignature on warTerminationReads",
@@ -469,7 +469,7 @@
    "identity": "behaviour on presentation",
    "key": "behaviour",
    "shape": "presentation",
-   "rows": 30790
+   "rows": 15613
   },
   {
    "identity": "belief_convergence on reasons",
@@ -481,7 +481,7 @@
    "identity": "believedBalanceBand on pulseHistory",
    "key": "believedBalanceBand",
    "shape": "pulseHistory",
-   "rows": 1407
+   "rows": 1400
   },
   {
    "identity": "believedBalanceBand on warTerminationReads",
@@ -493,13 +493,13 @@
    "identity": "booksDirection on metadata",
    "key": "booksDirection",
    "shape": "metadata",
-   "rows": 10004
+   "rows": 9946
   },
   {
    "identity": "booksDirection on pulseHistory",
    "key": "booksDirection",
    "shape": "pulseHistory",
-   "rows": 1407
+   "rows": 1400
   },
   {
    "identity": "booksDirection on warTerminationReads",
@@ -511,13 +511,13 @@
    "identity": "booksReason on metadata",
    "key": "booksReason",
    "shape": "metadata",
-   "rows": 10004
+   "rows": 9946
   },
   {
    "identity": "booksReason on pulseHistory",
    "key": "booksReason",
    "shape": "pulseHistory",
-   "rows": 1407
+   "rows": 1400
   },
   {
    "identity": "booksReason on warTerminationReads",
@@ -529,7 +529,7 @@
    "identity": "build on physical",
    "key": "build",
    "shape": "physical",
-   "rows": 30790
+   "rows": 15613
   },
   {
    "identity": "cadence on roads",
@@ -553,7 +553,7 @@
    "identity": "cascadeBoost on institutions",
    "key": "cascadeBoost",
    "shape": "institutions",
-   "rows": 19765
+   "rows": 19641
   },
   {
    "identity": "cascadeBoost on magicDef",
@@ -571,7 +571,7 @@
    "identity": "causeBand on pulseHistory",
    "key": "causeBand",
    "shape": "pulseHistory",
-   "rows": 1407
+   "rows": 1400
   },
   {
    "identity": "causeBand on warTerminationReads",
@@ -583,19 +583,19 @@
    "identity": "causeLifecycleEvents on pulseHistory",
    "key": "causeLifecycleEvents",
    "shape": "pulseHistory",
-   "rows": 1407
+   "rows": 1400
   },
   {
    "identity": "causeState on metadata",
    "key": "causeState",
    "shape": "metadata",
-   "rows": 10004
+   "rows": 9946
   },
   {
    "identity": "causeState on pulseHistory",
    "key": "causeState",
    "shape": "pulseHistory",
-   "rows": 1407
+   "rows": 1400
   },
   {
    "identity": "causeState on warTerminationReads",
@@ -637,7 +637,7 @@
    "identity": "centrality on osr004",
    "key": "centrality",
    "shape": "osr004",
-   "rows": 463
+   "rows": 467
   },
   {
    "identity": "centrality on osr005",
@@ -673,7 +673,7 @@
    "identity": "centrality on osr010",
    "key": "centrality",
    "shape": "osr010",
-   "rows": 233
+   "rows": 245
   },
   {
    "identity": "centrality on osr011",
@@ -715,7 +715,7 @@
    "identity": "clandestine on institutions",
    "key": "clandestine",
    "shape": "institutions",
-   "rows": 19765
+   "rows": 19641
   },
   {
    "identity": "clay on reasons",
@@ -883,7 +883,7 @@
    "identity": "clockStages on osr004",
    "key": "clockStages",
    "shape": "osr004",
-   "rows": 463
+   "rows": 467
   },
   {
    "identity": "clockStages on osr005",
@@ -919,7 +919,7 @@
    "identity": "clockStages on osr010",
    "key": "clockStages",
    "shape": "osr010",
-   "rows": 233
+   "rows": 245
   },
   {
    "identity": "clockStages on osr011",
@@ -949,7 +949,7 @@
    "identity": "clockStages on osr015",
    "key": "clockStages",
    "shape": "osr015",
-   "rows": 354
+   "rows": 371
   },
   {
    "identity": "clockStages on settlementTickStates",
@@ -961,7 +961,7 @@
    "identity": "clothes on physical",
    "key": "clothes",
    "shape": "physical",
-   "rows": 30790
+   "rows": 15613
   },
   {
    "identity": "coal_deposits on depletedSince",
@@ -973,7 +973,7 @@
    "identity": "coherenceRepair on institutions",
    "key": "coherenceRepair",
    "shape": "institutions",
-   "rows": 19765
+   "rows": 19641
   },
   {
    "identity": "coherenceRepair on magicDef",
@@ -991,7 +991,7 @@
    "identity": "committed on pulseHistory",
    "key": "committed",
    "shape": "pulseHistory",
-   "rows": 1407
+   "rows": 1400
   },
   {
    "identity": "conditionNotes on resourceAnalysis",
@@ -1021,13 +1021,13 @@
    "identity": "corruptionEvents on pulseHistory",
    "key": "corruptionEvents",
    "shape": "pulseHistory",
-   "rows": 1407
+   "rows": 1400
   },
   {
    "identity": "costToContinueBand on pulseHistory",
    "key": "costToContinueBand",
    "shape": "pulseHistory",
-   "rows": 1407
+   "rows": 1400
   },
   {
    "identity": "costToContinueBand on warTerminationReads",
@@ -1039,7 +1039,7 @@
    "identity": "costToStopBand on pulseHistory",
    "key": "costToStopBand",
    "shape": "pulseHistory",
-   "rows": 1407
+   "rows": 1400
   },
   {
    "identity": "costToStopBand on warTerminationReads",
@@ -1057,13 +1057,13 @@
    "identity": "craft on stocks",
    "key": "craft",
    "shape": "stocks",
-   "rows": 6100
+   "rows": 6263
   },
   {
    "identity": "craft_guilds on leaderNpcIds",
    "key": "craft_guilds",
    "shape": "leaderNpcIds",
-   "rows": 1064
+   "rows": 1210
   },
   {
    "identity": "crimeIsGovt on flags",
@@ -1093,13 +1093,13 @@
    "identity": "custom.alum on osr015",
    "key": "custom.alum",
    "shape": "osr015",
-   "rows": 354
+   "rows": 371
   },
   {
    "identity": "custom.books_and_manuscripts on osr004",
    "key": "custom.books_and_manuscripts",
    "shape": "osr004",
-   "rows": 463
+   "rows": 467
   },
   {
    "identity": "custom.candles_and_wax on osr000",
@@ -1147,7 +1147,7 @@
    "identity": "custom.cultural_tourism_revenue on osr004",
    "key": "custom.cultural_tourism_revenue",
    "shape": "osr004",
-   "rows": 463
+   "rows": 467
   },
   {
    "identity": "custom.cultural_tourism_revenue on osr005",
@@ -1177,7 +1177,7 @@
    "identity": "custom.fine_metalwork_and_jewelry on osr004",
    "key": "custom.fine_metalwork_and_jewelry",
    "shape": "osr004",
-   "rows": 463
+   "rows": 467
   },
   {
    "identity": "custom.fine_metalwork_and_jewelry on osr005",
@@ -1195,13 +1195,13 @@
    "identity": "custom.fine_wool_cloth on osr015",
    "key": "custom.fine_wool_cloth",
    "shape": "osr015",
-   "rows": 354
+   "rows": 371
   },
   {
    "identity": "custom.glassware on osr004",
    "key": "custom.glassware",
    "shape": "osr004",
-   "rows": 463
+   "rows": 467
   },
   {
    "identity": "custom.guild_manufactured_goods on osr000",
@@ -1225,7 +1225,7 @@
    "identity": "custom.guild_manufactured_goods on osr015",
    "key": "custom.guild_manufactured_goods",
    "shape": "osr015",
-   "rows": 354
+   "rows": 371
   },
   {
    "identity": "custom.herbal_remedies on osr003",
@@ -1243,7 +1243,7 @@
    "identity": "custom.hunting_trophies on osr004",
    "key": "custom.hunting_trophies",
    "shape": "osr004",
-   "rows": 463
+   "rows": 467
   },
   {
    "identity": "custom.pass_transit_trade on osr001",
@@ -1285,7 +1285,7 @@
    "identity": "custom.sulfur on osr015",
    "key": "custom.sulfur",
    "shape": "osr015",
-   "rows": 354
+   "rows": 371
   },
   {
    "identity": "custom.toll_income on osr003",
@@ -1297,7 +1297,7 @@
    "identity": "custom.toll_income on osr015",
    "key": "custom.toll_income",
    "shape": "osr015",
-   "rows": 354
+   "rows": 371
   },
   {
    "identity": "custom.toll_revenue on osr001",
@@ -1327,7 +1327,7 @@
    "identity": "custom.toll_revenue on osr015",
    "key": "custom.toll_revenue",
    "shape": "osr015",
-   "rows": 354
+   "rows": 371
   },
   {
    "identity": "custom.transit_trade on osr001",
@@ -1351,13 +1351,13 @@
    "identity": "custom.transit_trade on osr015",
    "key": "custom.transit_trade",
    "shape": "osr015",
-   "rows": 354
+   "rows": 371
   },
   {
    "identity": "custom.waterborne_freight_services on osr004",
    "key": "custom.waterborne_freight_services",
    "shape": "osr004",
-   "rows": 463
+   "rows": 467
   },
   {
    "identity": "custom.waterborne_freight_services on osr005",
@@ -1447,7 +1447,7 @@
    "identity": "deterministic on conflictResolution",
    "key": "deterministic",
    "shape": "conflictResolution",
-   "rows": 8848
+   "rows": 8701
   },
   {
    "identity": "discoveryAcc on resourceDynamics",
@@ -1466,12 +1466,6 @@
    "key": "dmNote",
    "shape": "factionRelationships",
    "rows": 2554
-  },
-  {
-   "identity": "dominantCategory on factions",
-   "key": "dominantCategory",
-   "shape": "factions",
-   "rows": 11019
   },
   {
    "identity": "downstreamOf on candidates",
@@ -1513,7 +1507,7 @@
    "identity": "economyDrift on osr004",
    "key": "economyDrift",
    "shape": "osr004",
-   "rows": 463
+   "rows": 467
   },
   {
    "identity": "economyDrift on osr005",
@@ -1549,7 +1543,7 @@
    "identity": "economyDrift on osr010",
    "key": "economyDrift",
    "shape": "osr010",
-   "rows": 233
+   "rows": 245
   },
   {
    "identity": "economyDrift on osr011",
@@ -1579,7 +1573,7 @@
    "identity": "economyDrift on osr015",
    "key": "economyDrift",
    "shape": "osr015",
-   "rows": 354
+   "rows": 371
   },
   {
    "identity": "economyDrift on settlementTickStates",
@@ -1597,13 +1591,19 @@
    "identity": "elder_council on leaderNpcIds",
    "key": "elder_council",
    "shape": "leaderNpcIds",
-   "rows": 1064
+   "rows": 1210
+  },
+  {
+   "identity": "elected_reeve on leaderNpcIds",
+   "key": "elected_reeve",
+   "shape": "leaderNpcIds",
+   "rows": 1210
   },
   {
    "identity": "endsTick on osr004",
    "key": "endsTick",
    "shape": "osr004",
-   "rows": 463
+   "rows": 467
   },
   {
    "identity": "endsTick on osr005",
@@ -1627,7 +1627,7 @@
    "identity": "exclusiveTags on autoApplied",
    "key": "exclusiveTags",
    "shape": "autoApplied",
-   "rows": 752
+   "rows": 742
   },
   {
    "identity": "exclusiveTags on candidates",
@@ -1639,7 +1639,7 @@
    "identity": "exclusiveTags on conflictResolution",
    "key": "exclusiveTags",
    "shape": "conflictResolution",
-   "rows": 8848
+   "rows": 8701
   },
   {
    "identity": "exclusiveTags on majors",
@@ -1711,7 +1711,7 @@
    "identity": "fabricLed on osr004",
    "key": "fabricLed",
    "shape": "osr004",
-   "rows": 463
+   "rows": 467
   },
   {
    "identity": "fabricLed on osr005",
@@ -1747,7 +1747,7 @@
    "identity": "fabricLed on osr010",
    "key": "fabricLed",
    "shape": "osr010",
-   "rows": 233
+   "rows": 245
   },
   {
    "identity": "fabricLed on osr012",
@@ -1771,7 +1771,7 @@
    "identity": "fabricLed on osr015",
    "key": "fabricLed",
    "shape": "osr015",
-   "rows": 354
+   "rows": 371
   },
   {
    "identity": "fabricLed on traditions",
@@ -1783,91 +1783,79 @@
    "identity": "fac.craft_guilds on factions",
    "key": "fac.craft_guilds",
    "shape": "factions",
-   "rows": 11019
+   "rows": 8104
   },
   {
    "identity": "fac.elder_council on factions",
    "key": "fac.elder_council",
    "shape": "factions",
-   "rows": 11019
+   "rows": 8104
   },
   {
    "identity": "fac.elected_reeve on factions",
    "key": "fac.elected_reeve",
    "shape": "factions",
-   "rows": 11019
+   "rows": 8104
   },
   {
    "identity": "fac.feudal_appointee on factions",
    "key": "fac.feudal_appointee",
    "shape": "factions",
-   "rows": 11019
+   "rows": 8104
   },
   {
    "identity": "fac.feudal_stewardship on factions",
    "key": "fac.feudal_stewardship",
    "shape": "factions",
-   "rows": 11019
+   "rows": 8104
   },
   {
    "identity": "fac.landed_gentry on factions",
    "key": "fac.landed_gentry",
    "shape": "factions",
-   "rows": 11019
+   "rows": 8104
   },
   {
    "identity": "fac.manor_household on factions",
    "key": "fac.manor_household",
    "shape": "factions",
-   "rows": 11019
+   "rows": 8104
   },
   {
    "identity": "fac.merchant_guilds on factions",
    "key": "fac.merchant_guilds",
    "shape": "factions",
-   "rows": 11019
+   "rows": 8104
   },
   {
    "identity": "fac.military_guard on factions",
    "key": "fac.military_guard",
    "shape": "factions",
-   "rows": 11019
+   "rows": 8104
   },
   {
    "identity": "fac.monster_hunters_adventurers on factions",
    "key": "fac.monster_hunters_adventurers",
    "shape": "factions",
-   "rows": 11019
+   "rows": 8104
   },
   {
    "identity": "fac.religious_authorities on factions",
    "key": "fac.religious_authorities",
    "shape": "factions",
-   "rows": 11019
+   "rows": 8104
   },
   {
    "identity": "fac.town_council on factions",
    "key": "fac.town_council",
    "shape": "factions",
-   "rows": 11019
+   "rows": 8104
   },
   {
    "identity": "factionCaptureEvents on pulseHistory",
    "key": "factionCaptureEvents",
    "shape": "pulseHistory",
-   "rows": 1407
-  },
-  {
-   "identity": "factionGoal on members",
-   "key": "factionGoal",
-   "shape": "members",
-   "rows": 15639
-  },
-  {
-   "identity": "factionGoal on npcs",
-   "key": "factionGoal",
-   "shape": "npcs",
-   "rows": 26419
+   "rows": 1400
   },
   {
    "identity": "failedSource on foodRecord",
@@ -1880,6 +1868,12 @@
    "key": "famineCutPct",
    "shape": "foodRecord",
    "rows": 472
+  },
+  {
+   "identity": "feudal_stewardship on leaderNpcIds",
+   "key": "feudal_stewardship",
+   "shape": "leaderNpcIds",
+   "rows": 1210
   },
   {
    "identity": "flowProfile on relationshipMemory",
@@ -1915,13 +1909,13 @@
    "identity": "fromSaveId on autoApplied",
    "key": "fromSaveId",
    "shape": "autoApplied",
-   "rows": 752
+   "rows": 742
   },
   {
    "identity": "fromSaveId on metadata",
    "key": "fromSaveId",
    "shape": "metadata",
-   "rows": 10004
+   "rows": 9946
   },
   {
    "identity": "fromSaveId on selected",
@@ -1933,7 +1927,7 @@
    "identity": "fromState on metadata",
    "key": "fromState",
    "shape": "metadata",
-   "rows": 10004
+   "rows": 9946
   },
   {
    "identity": "fuel on osr000",
@@ -1951,7 +1945,7 @@
    "identity": "fuel on osr004",
    "key": "fuel",
    "shape": "osr004",
-   "rows": 463
+   "rows": 467
   },
   {
    "identity": "fuel on osr005",
@@ -1999,7 +1993,7 @@
    "identity": "furs on osr004",
    "key": "furs",
    "shape": "osr004",
-   "rows": 463
+   "rows": 467
   },
   {
    "identity": "gapKind on candidates",
@@ -2011,19 +2005,19 @@
    "identity": "gapKind on metadata",
    "key": "gapKind",
    "shape": "metadata",
-   "rows": 10004
+   "rows": 9946
   },
   {
    "identity": "gateEvidence on autoApplied",
    "key": "gateEvidence",
    "shape": "autoApplied",
-   "rows": 752
+   "rows": 742
   },
   {
    "identity": "gateEvidence on metadata",
    "key": "gateEvidence",
    "shape": "metadata",
-   "rows": 10004
+   "rows": 9946
   },
   {
    "identity": "gateEvidence on selected",
@@ -2059,7 +2053,7 @@
    "identity": "graduatedStressors on pulseHistory",
    "key": "graduatedStressors",
    "shape": "pulseHistory",
-   "rows": 1407
+   "rows": 1400
   },
   {
    "identity": "grain on reasons",
@@ -2101,7 +2095,7 @@
    "identity": "grievance on osr004",
    "key": "grievance",
    "shape": "osr004",
-   "rows": 463
+   "rows": 467
   },
   {
    "identity": "grievance on osr005",
@@ -2131,7 +2125,7 @@
    "identity": "grievance on osr015",
    "key": "grievance",
    "shape": "osr015",
-   "rows": 354
+   "rows": 371
   },
   {
    "identity": "grievance on reasons",
@@ -2149,7 +2143,7 @@
    "identity": "hands on pulseHistory",
    "key": "hands",
    "shape": "pulseHistory",
-   "rows": 1407
+   "rows": 1400
   },
   {
    "identity": "hard_drugs on contentBoundaries",
@@ -2329,7 +2323,7 @@
    "identity": "homeFrontDurationBand on pulseHistory",
    "key": "homeFrontDurationBand",
    "shape": "pulseHistory",
-   "rows": 1407
+   "rows": 1400
   },
   {
    "identity": "homeFrontDurationBand on warTerminationReads",
@@ -2371,7 +2365,7 @@
    "identity": "impression on presentation",
    "key": "impression",
    "shape": "presentation",
-   "rows": 30790
+   "rows": 15613
   },
   {
    "identity": "incidents on factionPairStates",
@@ -2383,7 +2377,7 @@
    "identity": "industrial on stocks",
    "key": "industrial",
    "shape": "stocks",
-   "rows": 6100
+   "rows": 6263
   },
   {
    "identity": "inflow on steadings",
@@ -2407,13 +2401,13 @@
    "identity": "interpretedAtTick on autoApplied",
    "key": "interpretedAtTick",
    "shape": "autoApplied",
-   "rows": 752
+   "rows": 742
   },
   {
    "identity": "interpretedAtTick on metadata",
    "key": "interpretedAtTick",
    "shape": "metadata",
-   "rows": 10004
+   "rows": 9946
   },
   {
    "identity": "interpretedAtTick on originContext",
@@ -2455,7 +2449,7 @@
    "identity": "iron on osr004",
    "key": "iron",
    "shape": "osr004",
-   "rows": 463
+   "rows": 467
   },
   {
    "identity": "iron on osr005",
@@ -2497,7 +2491,7 @@
    "identity": "iron on osr015",
    "key": "iron",
    "shape": "osr015",
-   "rows": 354
+   "rows": 371
   },
   {
    "identity": "iron ore on reasons",
@@ -2557,7 +2551,7 @@
    "identity": "landed_gentry on leaderNpcIds",
    "key": "landed_gentry",
    "shape": "leaderNpcIds",
-   "rows": 1064
+   "rows": 1210
   },
   {
    "identity": "landform on site",
@@ -2611,7 +2605,7 @@
    "identity": "lastHeldYear on osr004",
    "key": "lastHeldYear",
    "shape": "osr004",
-   "rows": 463
+   "rows": 467
   },
   {
    "identity": "lastHeldYear on osr005",
@@ -2647,7 +2641,7 @@
    "identity": "lastHeldYear on osr010",
    "key": "lastHeldYear",
    "shape": "osr010",
-   "rows": 233
+   "rows": 245
   },
   {
    "identity": "lastHeldYear on osr011",
@@ -2677,7 +2671,7 @@
    "identity": "lastHeldYear on osr015",
    "key": "lastHeldYear",
    "shape": "osr015",
-   "rows": 354
+   "rows": 371
   },
   {
    "identity": "lastHeldYear on traditions",
@@ -2690,6 +2684,12 @@
    "key": "lastTargetedBy",
    "shape": "npcStates",
    "rows": 13275
+  },
+  {
+   "identity": "lastTargetedBy on osr000:npc_barracks",
+   "key": "lastTargetedBy",
+   "shape": "osr000:npc_barracks",
+   "rows": 87
   },
   {
    "identity": "lastTargetedBy on osr001:npc_merchant_guilds_3_8",
@@ -2725,13 +2725,19 @@
    "identity": "lastTargetedBy on rivalPatch",
    "key": "lastTargetedBy",
    "shape": "rivalPatch",
-   "rows": 113
+   "rows": 109
   },
   {
    "identity": "lastTargetedTick on npcStates",
    "key": "lastTargetedTick",
    "shape": "npcStates",
    "rows": 13275
+  },
+  {
+   "identity": "lastTargetedTick on osr000:npc_barracks",
+   "key": "lastTargetedTick",
+   "shape": "osr000:npc_barracks",
+   "rows": 87
   },
   {
    "identity": "lastTargetedTick on osr001:npc_merchant_guilds_3_8",
@@ -2767,7 +2773,7 @@
    "identity": "lastTargetedTick on rivalPatch",
    "key": "lastTargetedTick",
    "shape": "rivalPatch",
-   "rows": 113
+   "rows": 109
   },
   {
    "identity": "lawPreferences on factionStates",
@@ -2809,7 +2815,7 @@
    "identity": "led on osr004",
    "key": "led",
    "shape": "osr004",
-   "rows": 463
+   "rows": 467
   },
   {
    "identity": "led on osr005",
@@ -2845,7 +2851,7 @@
    "identity": "led on osr010",
    "key": "led",
    "shape": "osr010",
-   "rows": 233
+   "rows": 245
   },
   {
    "identity": "led on osr011",
@@ -2875,7 +2881,7 @@
    "identity": "led on osr015",
    "key": "led",
    "shape": "osr015",
-   "rows": 354
+   "rows": 371
   },
   {
    "identity": "led on urbanFabric",
@@ -2929,7 +2935,7 @@
    "identity": "luxury_goods on osr004",
    "key": "luxury_goods",
    "shape": "osr004",
-   "rows": 463
+   "rows": 467
   },
   {
    "identity": "luxury_goods on osr005",
@@ -2953,7 +2959,7 @@
    "identity": "luxury_goods on osr015",
    "key": "luxury_goods",
    "shape": "osr015",
-   "rows": 354
+   "rows": 371
   },
   {
    "identity": "mag on deposits",
@@ -2995,7 +3001,7 @@
    "identity": "manor_household on leaderNpcIds",
    "key": "manor_household",
    "shape": "leaderNpcIds",
-   "rows": 1064
+   "rows": 1210
   },
   {
    "identity": "markets on homeFrontComponents",
@@ -3007,25 +3013,25 @@
    "identity": "markets on pulseHistory",
    "key": "markets",
    "shape": "pulseHistory",
-   "rows": 1407
+   "rows": 1400
   },
   {
    "identity": "mechanicalOutcomeCount on pulseHistory",
    "key": "mechanicalOutcomeCount",
    "shape": "pulseHistory",
-   "rows": 1407
+   "rows": 1400
   },
   {
    "identity": "mechanicalRumorSeeds on pulseHistory",
    "key": "mechanicalRumorSeeds",
    "shape": "pulseHistory",
-   "rows": 1407
+   "rows": 1400
   },
   {
    "identity": "merchant on stocks",
    "key": "merchant",
    "shape": "stocks",
-   "rows": 6100
+   "rows": 6263
   },
   {
    "identity": "merchantArmy on flags",
@@ -3040,16 +3046,10 @@
    "rows": 472
   },
   {
-   "identity": "merchant_guild_council on leaderNpcIds",
-   "key": "merchant_guild_council",
-   "shape": "leaderNpcIds",
-   "rows": 1064
-  },
-  {
    "identity": "merchant_guilds on leaderNpcIds",
    "key": "merchant_guilds",
    "shape": "leaderNpcIds",
-   "rows": 1064
+   "rows": 1210
   },
   {
    "identity": "metals on reasons",
@@ -3061,13 +3061,13 @@
    "identity": "military_guard on leaderNpcIds",
    "key": "military_guard",
    "shape": "leaderNpcIds",
-   "rows": 1064
+   "rows": 1210
   },
   {
    "identity": "minimumStreak on metadata",
    "key": "minimumStreak",
    "shape": "metadata",
-   "rows": 10004
+   "rows": 9946
   },
   {
    "identity": "mintedAt on proud",
@@ -3079,7 +3079,7 @@
    "identity": "momentumBand on pulseHistory",
    "key": "momentumBand",
    "shape": "pulseHistory",
-   "rows": 1407
+   "rows": 1400
   },
   {
    "identity": "momentumBand on warTerminationReads",
@@ -3091,13 +3091,13 @@
    "identity": "momentumBroken on metadata",
    "key": "momentumBroken",
    "shape": "metadata",
-   "rows": 10004
+   "rows": 9946
   },
   {
    "identity": "momentumBroken on pulseHistory",
    "key": "momentumBroken",
    "shape": "pulseHistory",
-   "rows": 1407
+   "rows": 1400
   },
   {
    "identity": "momentumBroken on warTerminationReads",
@@ -3109,7 +3109,7 @@
    "identity": "monster_hunters_adventurers on leaderNpcIds",
    "key": "monster_hunters_adventurers",
    "shape": "leaderNpcIds",
-   "rows": 1064
+   "rows": 1210
   },
   {
    "identity": "mountain on byTerrain",
@@ -3127,13 +3127,13 @@
    "identity": "noble on stocks",
    "key": "noble",
    "shape": "stocks",
-   "rows": 6100
+   "rows": 6263
   },
   {
    "identity": "noble_families on leaderNpcIds",
    "key": "noble_families",
    "shape": "leaderNpcIds",
-   "rows": 1064
+   "rows": 1210
   },
   {
    "identity": "normalImportPct on foodRecord",
@@ -3145,7 +3145,7 @@
    "identity": "opponentAuthoritySignature on pulseHistory",
    "key": "opponentAuthoritySignature",
    "shape": "pulseHistory",
-   "rows": 1407
+   "rows": 1400
   },
   {
    "identity": "opponentAuthoritySignature on warTerminationReads",
@@ -3157,7 +3157,7 @@
    "identity": "opponentBelievedBalanceBand on pulseHistory",
    "key": "opponentBelievedBalanceBand",
    "shape": "pulseHistory",
-   "rows": 1407
+   "rows": 1400
   },
   {
    "identity": "opponentBelievedBalanceBand on warTerminationReads",
@@ -3169,7 +3169,7 @@
    "identity": "opponentRulerId on pulseHistory",
    "key": "opponentRulerId",
    "shape": "pulseHistory",
-   "rows": 1407
+   "rows": 1400
   },
   {
    "identity": "opponentRulerId on warTerminationReads",
@@ -3181,7 +3181,7 @@
    "identity": "opponentTruthBalanceBand on pulseHistory",
    "key": "opponentTruthBalanceBand",
    "shape": "pulseHistory",
-   "rows": 1407
+   "rows": 1400
   },
   {
    "identity": "opponentTruthBalanceBand on warTerminationReads",
@@ -3199,13 +3199,13 @@
    "identity": "originEvidence on autoApplied",
    "key": "originEvidence",
    "shape": "autoApplied",
-   "rows": 752
+   "rows": 742
   },
   {
    "identity": "originEvidence on metadata",
    "key": "originEvidence",
    "shape": "metadata",
-   "rows": 10004
+   "rows": 9946
   },
   {
    "identity": "originEvidence on selected",
@@ -3289,13 +3289,13 @@
    "identity": "originVariant on autoApplied",
    "key": "originVariant",
    "shape": "autoApplied",
-   "rows": 752
+   "rows": 742
   },
   {
    "identity": "originVariant on metadata",
    "key": "originVariant",
    "shape": "metadata",
-   "rows": 10004
+   "rows": 9946
   },
   {
    "identity": "originVariant on selected",
@@ -3331,7 +3331,7 @@
    "identity": "osr000 on osr004",
    "key": "osr000",
    "shape": "osr004",
-   "rows": 463
+   "rows": 467
   },
   {
    "identity": "osr000 on osr005",
@@ -3367,7 +3367,7 @@
    "identity": "osr000 on osr010",
    "key": "osr000",
    "shape": "osr010",
-   "rows": 233
+   "rows": 245
   },
   {
    "identity": "osr000 on osr011",
@@ -3397,7 +3397,7 @@
    "identity": "osr000 on osr015",
    "key": "osr000",
    "shape": "osr015",
-   "rows": 354
+   "rows": 371
   },
   {
    "identity": "osr000 on tiers",
@@ -3439,7 +3439,7 @@
    "identity": "osr001 on osr004",
    "key": "osr001",
    "shape": "osr004",
-   "rows": 463
+   "rows": 467
   },
   {
    "identity": "osr001 on osr005",
@@ -3475,7 +3475,7 @@
    "identity": "osr001 on osr010",
    "key": "osr001",
    "shape": "osr010",
-   "rows": 233
+   "rows": 245
   },
   {
    "identity": "osr001 on osr011",
@@ -3505,7 +3505,7 @@
    "identity": "osr001 on osr015",
    "key": "osr001",
    "shape": "osr015",
-   "rows": 354
+   "rows": 371
   },
   {
    "identity": "osr001 on tiers",
@@ -3541,7 +3541,7 @@
    "identity": "osr002 on osr004",
    "key": "osr002",
    "shape": "osr004",
-   "rows": 463
+   "rows": 467
   },
   {
    "identity": "osr002 on osr005",
@@ -3577,7 +3577,7 @@
    "identity": "osr002 on osr010",
    "key": "osr002",
    "shape": "osr010",
-   "rows": 233
+   "rows": 245
   },
   {
    "identity": "osr002 on osr011",
@@ -3607,7 +3607,7 @@
    "identity": "osr002 on osr015",
    "key": "osr002",
    "shape": "osr015",
-   "rows": 354
+   "rows": 371
   },
   {
    "identity": "osr002 on tiers",
@@ -3667,7 +3667,7 @@
    "identity": "osr003 on osr004",
    "key": "osr003",
    "shape": "osr004",
-   "rows": 463
+   "rows": 467
   },
   {
    "identity": "osr003 on osr005",
@@ -3703,7 +3703,7 @@
    "identity": "osr003 on osr010",
    "key": "osr003",
    "shape": "osr010",
-   "rows": 233
+   "rows": 245
   },
   {
    "identity": "osr003 on osr011",
@@ -3733,7 +3733,7 @@
    "identity": "osr003 on osr015",
    "key": "osr003",
    "shape": "osr015",
-   "rows": 354
+   "rows": 371
   },
   {
    "identity": "osr003 on tiers",
@@ -3805,7 +3805,7 @@
    "identity": "osr004 on osr010",
    "key": "osr004",
    "shape": "osr010",
-   "rows": 233
+   "rows": 245
   },
   {
    "identity": "osr004 on osr011",
@@ -3835,7 +3835,7 @@
    "identity": "osr004 on osr015",
    "key": "osr004",
    "shape": "osr015",
-   "rows": 354
+   "rows": 371
   },
   {
    "identity": "osr004 on tiers",
@@ -3847,25 +3847,25 @@
    "identity": "osr004:npc_bakers_5_15 on osr004",
    "key": "osr004:npc_bakers_5_15",
    "shape": "osr004",
-   "rows": 463
+   "rows": 467
   },
   {
    "identity": "osr004:npc_fuller on osr004",
    "key": "osr004:npc_fuller",
    "shape": "osr004",
-   "rows": 463
+   "rows": 467
   },
   {
    "identity": "osr004:npc_tailor_s_guild on osr004",
    "key": "osr004:npc_tailor_s_guild",
    "shape": "osr004",
-   "rows": 463
+   "rows": 467
   },
   {
    "identity": "osr004:npc_weavers_textile_workers on osr004",
    "key": "osr004:npc_weavers_textile_workers",
    "shape": "osr004",
-   "rows": 463
+   "rows": 467
   },
   {
    "identity": "osr005 on distanceMatrix",
@@ -3901,7 +3901,7 @@
    "identity": "osr005 on osr004",
    "key": "osr005",
    "shape": "osr004",
-   "rows": 463
+   "rows": 467
   },
   {
    "identity": "osr005 on osr006",
@@ -3931,7 +3931,7 @@
    "identity": "osr005 on osr010",
    "key": "osr005",
    "shape": "osr010",
-   "rows": 233
+   "rows": 245
   },
   {
    "identity": "osr005 on osr011",
@@ -3961,7 +3961,7 @@
    "identity": "osr005 on osr015",
    "key": "osr005",
    "shape": "osr015",
-   "rows": 354
+   "rows": 371
   },
   {
    "identity": "osr005 on tiers",
@@ -4027,7 +4027,7 @@
    "identity": "osr006 on osr004",
    "key": "osr006",
    "shape": "osr004",
-   "rows": 463
+   "rows": 467
   },
   {
    "identity": "osr006 on osr005",
@@ -4057,7 +4057,7 @@
    "identity": "osr006 on osr010",
    "key": "osr006",
    "shape": "osr010",
-   "rows": 233
+   "rows": 245
   },
   {
    "identity": "osr006 on osr011",
@@ -4087,7 +4087,7 @@
    "identity": "osr006 on osr015",
    "key": "osr006",
    "shape": "osr015",
-   "rows": 354
+   "rows": 371
   },
   {
    "identity": "osr006 on tiers",
@@ -4147,7 +4147,7 @@
    "identity": "osr007 on osr004",
    "key": "osr007",
    "shape": "osr004",
-   "rows": 463
+   "rows": 467
   },
   {
    "identity": "osr007 on osr005",
@@ -4177,7 +4177,7 @@
    "identity": "osr007 on osr010",
    "key": "osr007",
    "shape": "osr010",
-   "rows": 233
+   "rows": 245
   },
   {
    "identity": "osr007 on osr011",
@@ -4207,7 +4207,7 @@
    "identity": "osr007 on osr015",
    "key": "osr007",
    "shape": "osr015",
-   "rows": 354
+   "rows": 371
   },
   {
    "identity": "osr007 on tiers",
@@ -4249,7 +4249,7 @@
    "identity": "osr008 on osr004",
    "key": "osr008",
    "shape": "osr004",
-   "rows": 463
+   "rows": 467
   },
   {
    "identity": "osr008 on osr005",
@@ -4279,7 +4279,7 @@
    "identity": "osr008 on osr010",
    "key": "osr008",
    "shape": "osr010",
-   "rows": 233
+   "rows": 245
   },
   {
    "identity": "osr008 on osr011",
@@ -4309,7 +4309,7 @@
    "identity": "osr008 on osr015",
    "key": "osr008",
    "shape": "osr015",
-   "rows": 354
+   "rows": 371
   },
   {
    "identity": "osr008 on tiers",
@@ -4375,7 +4375,7 @@
    "identity": "osr009 on osr004",
    "key": "osr009",
    "shape": "osr004",
-   "rows": 463
+   "rows": 467
   },
   {
    "identity": "osr009 on osr005",
@@ -4405,7 +4405,7 @@
    "identity": "osr009 on osr010",
    "key": "osr009",
    "shape": "osr010",
-   "rows": 233
+   "rows": 245
   },
   {
    "identity": "osr009 on osr011",
@@ -4435,7 +4435,7 @@
    "identity": "osr009 on osr015",
    "key": "osr009",
    "shape": "osr015",
-   "rows": 354
+   "rows": 371
   },
   {
    "identity": "osr009 on tiers",
@@ -4501,7 +4501,7 @@
    "identity": "osr010 on osr004",
    "key": "osr010",
    "shape": "osr004",
-   "rows": 463
+   "rows": 467
   },
   {
    "identity": "osr010 on osr005",
@@ -4561,7 +4561,7 @@
    "identity": "osr010 on osr015",
    "key": "osr010",
    "shape": "osr015",
-   "rows": 354
+   "rows": 371
   },
   {
    "identity": "osr010 on tiers",
@@ -4627,7 +4627,7 @@
    "identity": "osr011 on osr004",
    "key": "osr011",
    "shape": "osr004",
-   "rows": 463
+   "rows": 467
   },
   {
    "identity": "osr011 on osr005",
@@ -4663,7 +4663,7 @@
    "identity": "osr011 on osr010",
    "key": "osr011",
    "shape": "osr010",
-   "rows": 233
+   "rows": 245
   },
   {
    "identity": "osr011 on osr012",
@@ -4687,7 +4687,7 @@
    "identity": "osr011 on osr015",
    "key": "osr011",
    "shape": "osr015",
-   "rows": 354
+   "rows": 371
   },
   {
    "identity": "osr011 on tiers",
@@ -4753,7 +4753,7 @@
    "identity": "osr012 on osr004",
    "key": "osr012",
    "shape": "osr004",
-   "rows": 463
+   "rows": 467
   },
   {
    "identity": "osr012 on osr005",
@@ -4789,7 +4789,7 @@
    "identity": "osr012 on osr010",
    "key": "osr012",
    "shape": "osr010",
-   "rows": 233
+   "rows": 245
   },
   {
    "identity": "osr012 on osr011",
@@ -4813,7 +4813,7 @@
    "identity": "osr012 on osr015",
    "key": "osr012",
    "shape": "osr015",
-   "rows": 354
+   "rows": 371
   },
   {
    "identity": "osr012 on tiers",
@@ -4873,7 +4873,7 @@
    "identity": "osr013 on osr004",
    "key": "osr013",
    "shape": "osr004",
-   "rows": 463
+   "rows": 467
   },
   {
    "identity": "osr013 on osr005",
@@ -4909,7 +4909,7 @@
    "identity": "osr013 on osr010",
    "key": "osr013",
    "shape": "osr010",
-   "rows": 233
+   "rows": 245
   },
   {
    "identity": "osr013 on osr011",
@@ -4933,7 +4933,7 @@
    "identity": "osr013 on osr015",
    "key": "osr013",
    "shape": "osr015",
-   "rows": 354
+   "rows": 371
   },
   {
    "identity": "osr013 on tiers",
@@ -4975,7 +4975,7 @@
    "identity": "osr014 on osr004",
    "key": "osr014",
    "shape": "osr004",
-   "rows": 463
+   "rows": 467
   },
   {
    "identity": "osr014 on osr005",
@@ -5011,7 +5011,7 @@
    "identity": "osr014 on osr010",
    "key": "osr014",
    "shape": "osr010",
-   "rows": 233
+   "rows": 245
   },
   {
    "identity": "osr014 on osr011",
@@ -5035,7 +5035,7 @@
    "identity": "osr014 on osr015",
    "key": "osr014",
    "shape": "osr015",
-   "rows": 354
+   "rows": 371
   },
   {
    "identity": "osr014 on tiers",
@@ -5083,7 +5083,7 @@
    "identity": "osr015 on osr004",
    "key": "osr015",
    "shape": "osr004",
-   "rows": 463
+   "rows": 467
   },
   {
    "identity": "osr015 on osr005",
@@ -5119,7 +5119,7 @@
    "identity": "osr015 on osr010",
    "key": "osr015",
    "shape": "osr010",
-   "rows": 233
+   "rows": 245
   },
   {
    "identity": "osr015 on osr011",
@@ -5179,7 +5179,7 @@
    "identity": "ownerKind on osr004",
    "key": "ownerKind",
    "shape": "osr004",
-   "rows": 463
+   "rows": 467
   },
   {
    "identity": "ownerKind on osr005",
@@ -5215,7 +5215,7 @@
    "identity": "ownerKind on osr010",
    "key": "ownerKind",
    "shape": "osr010",
-   "rows": 233
+   "rows": 245
   },
   {
    "identity": "ownerKind on osr011",
@@ -5245,7 +5245,7 @@
    "identity": "ownerKind on osr015",
    "key": "ownerKind",
    "shape": "osr015",
-   "rows": 354
+   "rows": 371
   },
   {
    "identity": "ownerKind on traditions",
@@ -5299,13 +5299,13 @@
    "identity": "pressureEvidence on autoApplied",
    "key": "pressureEvidence",
    "shape": "autoApplied",
-   "rows": 752
+   "rows": 742
   },
   {
    "identity": "pressureEvidence on metadata",
    "key": "pressureEvidence",
    "shape": "metadata",
-   "rows": 10004
+   "rows": 9946
   },
   {
    "identity": "pressureEvidence on selected",
@@ -5317,13 +5317,13 @@
    "identity": "pressureKind on autoApplied",
    "key": "pressureKind",
    "shape": "autoApplied",
-   "rows": 752
+   "rows": 742
   },
   {
    "identity": "pressureKind on metadata",
    "key": "pressureKind",
    "shape": "metadata",
-   "rows": 10004
+   "rows": 9946
   },
   {
    "identity": "pressureKind on selected",
@@ -5335,13 +5335,13 @@
    "identity": "pressureScore on autoApplied",
    "key": "pressureScore",
    "shape": "autoApplied",
-   "rows": 752
+   "rows": 742
   },
   {
    "identity": "pressureScore on metadata",
    "key": "pressureScore",
    "shape": "metadata",
-   "rows": 10004
+   "rows": 9946
   },
   {
    "identity": "pressureScore on selected",
@@ -5353,7 +5353,7 @@
    "identity": "priorBuilds on metadata",
    "key": "priorBuilds",
    "shape": "metadata",
-   "rows": 10004
+   "rows": 9946
   },
   {
    "identity": "priorCause on causeLifecycleEvents",
@@ -5431,7 +5431,7 @@
    "identity": "probabilityMult on autoApplied",
    "key": "probabilityMult",
    "shape": "autoApplied",
-   "rows": 752
+   "rows": 742
   },
   {
    "identity": "probabilityMult on gateEvidence",
@@ -5443,7 +5443,7 @@
    "identity": "probabilityMult on metadata",
    "key": "probabilityMult",
    "shape": "metadata",
-   "rows": 10004
+   "rows": 9946
   },
   {
    "identity": "probabilityMult on selected",
@@ -5779,7 +5779,7 @@
    "identity": "publicTrust on factions",
    "key": "publicTrust",
    "shape": "factions",
-   "rows": 11019
+   "rows": 8104
   },
   {
    "identity": "purposeKind on npcs",
@@ -5797,7 +5797,7 @@
    "identity": "randomDepletionEligible on metadata",
    "key": "randomDepletionEligible",
    "shape": "metadata",
-   "rows": 10004
+   "rows": 9946
   },
   {
    "identity": "randomDepletionEligible on resourceTaxonomy",
@@ -5833,7 +5833,7 @@
    "identity": "rebirths on osr004",
    "key": "rebirths",
    "shape": "osr004",
-   "rows": 463
+   "rows": 467
   },
   {
    "identity": "rebirths on osr005",
@@ -5869,7 +5869,7 @@
    "identity": "rebirths on osr010",
    "key": "rebirths",
    "shape": "osr010",
-   "rows": 233
+   "rows": 245
   },
   {
    "identity": "rebirths on osr011",
@@ -5899,7 +5899,7 @@
    "identity": "rebirths on osr015",
    "key": "rebirths",
    "shape": "osr015",
-   "rows": 354
+   "rows": 371
   },
   {
    "identity": "rebirths on urbanFabric",
@@ -5911,7 +5911,7 @@
    "identity": "receiptClass on provenance",
    "key": "receiptClass",
    "shape": "provenance",
-   "rows": 3936
+   "rows": 3920
   },
   {
    "identity": "recentAction on factionStates",
@@ -5929,7 +5929,7 @@
    "identity": "recoveryMode on metadata",
    "key": "recoveryMode",
    "shape": "metadata",
-   "rows": 10004
+   "rows": 9946
   },
   {
    "identity": "recoveryMode on resourceConditions",
@@ -5959,7 +5959,7 @@
    "identity": "religious on stocks",
    "key": "religious",
    "shape": "stocks",
-   "rows": 6100
+   "rows": 6263
   },
   {
    "identity": "religiousFraud on flags",
@@ -5971,13 +5971,13 @@
    "identity": "religious_authorities on leaderNpcIds",
    "key": "religious_authorities",
    "shape": "leaderNpcIds",
-   "rows": 1064
+   "rows": 1210
   },
   {
    "identity": "renewability on metadata",
    "key": "renewability",
    "shape": "metadata",
-   "rows": 10004
+   "rows": 9946
   },
   {
    "identity": "renewability on resourceTaxonomy",
@@ -5989,7 +5989,7 @@
    "identity": "residential on stocks",
    "key": "residential",
    "shape": "stocks",
-   "rows": 6100
+   "rows": 6263
   },
   {
    "identity": "resolutionDelta on counterforce",
@@ -6103,7 +6103,7 @@
    "identity": "resourceDynamics on osr004",
    "key": "resourceDynamics",
    "shape": "osr004",
-   "rows": 463
+   "rows": 467
   },
   {
    "identity": "resourceDynamics on osr005",
@@ -6139,7 +6139,7 @@
    "identity": "resourceDynamics on osr010",
    "key": "resourceDynamics",
    "shape": "osr010",
-   "rows": 233
+   "rows": 245
   },
   {
    "identity": "resourceDynamics on osr011",
@@ -6169,7 +6169,7 @@
    "identity": "resourceDynamics on osr015",
    "key": "resourceDynamics",
    "shape": "osr015",
-   "rows": 354
+   "rows": 371
   },
   {
    "identity": "resourceDynamics on settlementTickStates",
@@ -6181,7 +6181,7 @@
    "identity": "resourceTaxonomy on metadata",
    "key": "resourceTaxonomy",
    "shape": "metadata",
-   "rows": 10004
+   "rows": 9946
   },
   {
    "identity": "resource_pressure on reasons",
@@ -6211,13 +6211,13 @@
    "identity": "rulerLawfulnessBand on metadata",
    "key": "rulerLawfulnessBand",
    "shape": "metadata",
-   "rows": 10004
+   "rows": 9946
   },
   {
    "identity": "rulerLawfulnessBand on pulseHistory",
    "key": "rulerLawfulnessBand",
    "shape": "pulseHistory",
-   "rows": 1407
+   "rows": 1400
   },
   {
    "identity": "rulerLawfulnessBand on warTerminationReads",
@@ -6229,13 +6229,13 @@
    "identity": "rulerMoralityBand on metadata",
    "key": "rulerMoralityBand",
    "shape": "metadata",
-   "rows": 10004
+   "rows": 9946
   },
   {
    "identity": "rulerMoralityBand on pulseHistory",
    "key": "rulerMoralityBand",
    "shape": "pulseHistory",
-   "rows": 1407
+   "rows": 1400
   },
   {
    "identity": "rulerMoralityBand on warTerminationReads",
@@ -6277,7 +6277,7 @@
    "identity": "scars on osr004",
    "key": "scars",
    "shape": "osr004",
-   "rows": 463
+   "rows": 467
   },
   {
    "identity": "scars on osr005",
@@ -6313,7 +6313,7 @@
    "identity": "scars on osr010",
    "key": "scars",
    "shape": "osr010",
-   "rows": 233
+   "rows": 245
   },
   {
    "identity": "scars on osr011",
@@ -6343,7 +6343,7 @@
    "identity": "scars on osr015",
    "key": "scars",
    "shape": "osr015",
-   "rows": 354
+   "rows": 371
   },
   {
    "identity": "scars on urbanFabric",
@@ -6391,7 +6391,7 @@
    "identity": "seenTick on osr004",
    "key": "seenTick",
    "shape": "osr004",
-   "rows": 463
+   "rows": 467
   },
   {
    "identity": "seenTick on osr005",
@@ -6427,7 +6427,7 @@
    "identity": "seenTick on osr010",
    "key": "seenTick",
    "shape": "osr010",
-   "rows": 233
+   "rows": 245
   },
   {
    "identity": "seenTick on osr011",
@@ -6457,7 +6457,7 @@
    "identity": "seenTick on osr015",
    "key": "seenTick",
    "shape": "osr015",
-   "rows": 354
+   "rows": 371
   },
   {
    "identity": "seenTick on urbanFabric",
@@ -6469,25 +6469,19 @@
    "identity": "sent on autoApplied",
    "key": "sent",
    "shape": "autoApplied",
-   "rows": 752
+   "rows": 742
   },
   {
    "identity": "sent on metadata",
    "key": "sent",
    "shape": "metadata",
-   "rows": 10004
+   "rows": 9946
   },
   {
    "identity": "sent on selected",
    "key": "sent",
    "shape": "selected",
    "rows": 548
-  },
-  {
-   "identity": "settlementCondition on members",
-   "key": "settlementCondition",
-   "shape": "members",
-   "rows": 15639
   },
   {
    "identity": "settlementCondition on npcs",
@@ -6511,13 +6505,13 @@
    "identity": "sourceNote on autoApplied",
    "key": "sourceNote",
    "shape": "autoApplied",
-   "rows": 752
+   "rows": 742
   },
   {
    "identity": "sourceNote on metadata",
    "key": "sourceNote",
    "shape": "metadata",
-   "rows": 10004
+   "rows": 9946
   },
   {
    "identity": "sourceNote on originEvidence",
@@ -6535,7 +6529,7 @@
    "identity": "sourceNotes on autoApplied",
    "key": "sourceNotes",
    "shape": "autoApplied",
-   "rows": 752
+   "rows": 742
   },
   {
    "identity": "sourceNotes on gateEvidence",
@@ -6547,7 +6541,7 @@
    "identity": "sourceNotes on metadata",
    "key": "sourceNotes",
    "shape": "metadata",
-   "rows": 10004
+   "rows": 9946
   },
   {
    "identity": "sourceNotes on pressureEvidence",
@@ -6571,7 +6565,7 @@
    "identity": "speech on personality",
    "key": "speech",
    "shape": "personality",
-   "rows": 30790
+   "rows": 15613
   },
   {
    "identity": "startedYear on missions",
@@ -6631,7 +6625,7 @@
    "identity": "stocks on osr004",
    "key": "stocks",
    "shape": "osr004",
-   "rows": 463
+   "rows": 467
   },
   {
    "identity": "stocks on osr005",
@@ -6667,7 +6661,7 @@
    "identity": "stocks on osr010",
    "key": "stocks",
    "shape": "osr010",
-   "rows": 233
+   "rows": 245
   },
   {
    "identity": "stocks on osr011",
@@ -6697,7 +6691,7 @@
    "identity": "stocks on osr015",
    "key": "stocks",
    "shape": "osr015",
-   "rows": 354
+   "rows": 371
   },
   {
    "identity": "stocks on urbanFabric",
@@ -6715,7 +6709,7 @@
    "identity": "stone on osr004",
    "key": "stone",
    "shape": "osr004",
-   "rows": 463
+   "rows": 467
   },
   {
    "identity": "stone on osr005",
@@ -6757,7 +6751,7 @@
    "identity": "stores on pulseHistory",
    "key": "stores",
    "shape": "pulseHistory",
-   "rows": 1407
+   "rows": 1400
   },
   {
    "identity": "streak on economyDrift",
@@ -6769,7 +6763,7 @@
    "identity": "streak on metadata",
    "key": "streak",
    "shape": "metadata",
-   "rows": 10004
+   "rows": 9946
   },
   {
    "identity": "subterranean on facets",
@@ -6781,7 +6775,7 @@
    "identity": "subterranean on institutions",
    "key": "subterranean",
    "shape": "institutions",
-   "rows": 19765
+   "rows": 19641
   },
   {
    "identity": "supersessionReason on proposals",
@@ -6793,7 +6787,7 @@
    "identity": "support on metadata",
    "key": "support",
    "shape": "metadata",
-   "rows": 10004
+   "rows": 9946
   },
   {
    "identity": "suppressedInstitutions on factionStates",
@@ -6811,7 +6805,7 @@
    "identity": "tell on personality",
    "key": "tell",
    "shape": "personality",
-   "rows": 30790
+   "rows": 15613
   },
   {
    "identity": "templateType on historicalEvents",
@@ -6865,7 +6859,7 @@
    "identity": "textiles on osr015",
    "key": "textiles",
    "shape": "osr015",
-   "rows": 354
+   "rows": 371
   },
   {
    "identity": "theocraticEconomy on flags",
@@ -6877,13 +6871,7 @@
    "identity": "thievesGuild on corruptTies",
    "key": "thievesGuild",
    "shape": "corruptTies",
-   "rows": 858
-  },
-  {
-   "identity": "thievesGuild on members",
-   "key": "thievesGuild",
-   "shape": "members",
-   "rows": 15639
+   "rows": 430
   },
   {
    "identity": "thievesGuild on npcs",
@@ -6895,7 +6883,7 @@
    "identity": "thieves_guild on leaderNpcIds",
    "key": "thieves_guild",
    "shape": "leaderNpcIds",
-   "rows": 1064
+   "rows": 1210
   },
   {
    "identity": "throughput on osr002",
@@ -6943,7 +6931,7 @@
    "identity": "tierDrift on osr004",
    "key": "tierDrift",
    "shape": "osr004",
-   "rows": 463
+   "rows": 467
   },
   {
    "identity": "tierDrift on osr005",
@@ -6979,7 +6967,7 @@
    "identity": "tierDrift on osr010",
    "key": "tierDrift",
    "shape": "osr010",
-   "rows": 233
+   "rows": 245
   },
   {
    "identity": "tierDrift on osr011",
@@ -7009,7 +6997,7 @@
    "identity": "tierDrift on osr015",
    "key": "tierDrift",
    "shape": "osr015",
-   "rows": 354
+   "rows": 371
   },
   {
    "identity": "tierDrift on settlementTickStates",
@@ -7039,7 +7027,7 @@
    "identity": "timber on osr004",
    "key": "timber",
    "shape": "osr004",
-   "rows": 463
+   "rows": 467
   },
   {
    "identity": "timber on osr005",
@@ -7081,7 +7069,7 @@
    "identity": "timeTicks on pulseHistory",
    "key": "timeTicks",
    "shape": "pulseHistory",
-   "rows": 1407
+   "rows": 1400
   },
   {
    "identity": "tithed on stockpile",
@@ -7093,13 +7081,13 @@
    "identity": "toSaveId on autoApplied",
    "key": "toSaveId",
    "shape": "autoApplied",
-   "rows": 752
+   "rows": 742
   },
   {
    "identity": "toSaveId on metadata",
    "key": "toSaveId",
    "shape": "metadata",
-   "rows": 10004
+   "rows": 9946
   },
   {
    "identity": "toSaveId on selected",
@@ -7111,7 +7099,7 @@
    "identity": "toState on metadata",
    "key": "toState",
    "shape": "metadata",
-   "rows": 10004
+   "rows": 9946
   },
   {
    "identity": "torture on contentBoundaries",
@@ -7123,7 +7111,7 @@
    "identity": "town_council on leaderNpcIds",
    "key": "town_council",
    "shape": "leaderNpcIds",
-   "rows": 1064
+   "rows": 1210
   },
   {
    "identity": "trappedBySiege on missions",
@@ -7141,7 +7129,7 @@
    "identity": "truthBalanceBand on pulseHistory",
    "key": "truthBalanceBand",
    "shape": "pulseHistory",
-   "rows": 1407
+   "rows": 1400
   },
   {
    "identity": "truthBalanceBand on warTerminationReads",
@@ -7165,7 +7153,7 @@
    "identity": "updatedByPulse on factions",
    "key": "updatedByPulse",
    "shape": "factions",
-   "rows": 11019
+   "rows": 8104
   },
   {
    "identity": "upstreamWeak on activeChains",
@@ -7189,13 +7177,13 @@
    "identity": "warEconomy on autoApplied",
    "key": "warEconomy",
    "shape": "autoApplied",
-   "rows": 752
+   "rows": 742
   },
   {
    "identity": "warEconomy on metadata",
    "key": "warEconomy",
    "shape": "metadata",
-   "rows": 10004
+   "rows": 9946
   },
   {
    "identity": "warEconomy on selected",
@@ -7207,7 +7195,7 @@
    "identity": "warRulingRead on metadata",
    "key": "warRulingRead",
    "shape": "metadata",
-   "rows": 10004
+   "rows": 9946
   },
   {
    "identity": "weakness on npcStates",
@@ -8491,7 +8479,7 @@
    "identity": "wealth on factions",
    "key": "wealth",
    "shape": "factions",
-   "rows": 11019
+   "rows": 8104
   },
   {
    "identity": "wetland on byTerrain",
@@ -8572,9 +8560,6 @@
   "severityBand on activeConditions": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
   "status on activeConditions": "campaign-pdf=R dossier-pdf=R foundry=R json-export=N news=N web-display=N web-transitive=R world-book=R",
   "triggeredAt on activeConditions": "campaign-pdf=R dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=R",
-  "dotRank on agent_protege": "campaign-pdf=N dossier-pdf=N foundry=N web-transitive=N world-book=N",
-  "name on agent_protege": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
-  "npcId on agent_protege": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N",
   "require on all::Criminal::Underground network": "campaign-pdf=N dossier-pdf=N web-display=N web-transitive=N world-book=N",
   "last on arcane": "web-display=N web-transitive=N",
   "since on arcane": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
@@ -9191,7 +9176,7 @@
   "settlementId on corruptionEvents": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N",
   "corrupted on corruptionProfile": "",
   "vector on corruptionProfile": "dossier-pdf=N foundry=N web-transitive=N",
-  "criminalInstitution on corruptTies": "dossier-pdf=R foundry=R web-display=N web-transitive=R",
+  "criminalInstitution on corruptTies": "dossier-pdf=R foundry=R web-display=R web-transitive=R",
   "thievesGuild on corruptTies": "",
   "decayMultiplier on counterforce": "web-transitive=N",
   "floorsMet on counterforce": "web-display=R web-transitive=N",
@@ -9437,10 +9422,6 @@
   "rungs on fac.town_council": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
   "clandestine on facets": "",
   "subterranean on facets": "",
-  "from on factionCaptureEvents": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N web-display=N web-transitive=N world-book=N",
-  "name on factionCaptureEvents": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
-  "settlementId on factionCaptureEvents": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N",
-  "to on factionCaptureEvents": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N web-display=N web-transitive=N world-book=N",
   "incidents on factionPairStates": "web-transitive=N",
   "resentment on factionPairStates": "dossier-pdf=N foundry=N web-transitive=N",
   "trust on factionPairStates": "dossier-pdf=N foundry=N web-transitive=N",
@@ -9453,14 +9434,13 @@
   "ratio on factionRelationships": "dossier-pdf=N foundry=N web-transitive=N",
   "type on factionRelationships": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
   "_timePressure on factions": "web-transitive=R",
-  "appliedAt on factions": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
+  "appliedAt on factions": "campaign-pdf=N dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=N",
   "captureState on factions": "dossier-pdf=R foundry=R web-transitive=R",
   "category on factions": "campaign-pdf=R dossier-pdf=R foundry=R json-export=N web-display=R web-transitive=R world-book=R",
-  "causeEventId on factions": "dossier-pdf=N foundry=N web-transitive=N",
+  "causeEventId on factions": "dossier-pdf=R foundry=R web-transitive=R",
   "crisisNote on factions": "campaign-pdf=R dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=R",
   "desc on factions": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
   "description on factions": "campaign-pdf=R dossier-pdf=R foundry=R news=N web-display=R web-transitive=R world-book=R",
-  "dominantCategory on factions": "",
   "fac.craft_guilds on factions": "",
   "fac.elder_council on factions": "",
   "fac.elected_reeve on factions": "",
@@ -9479,10 +9459,8 @@
   "lastPower on factions": "dossier-pdf=N foundry=N web-transitive=N",
   "legitimacyCrisis on factions": "web-display=N",
   "manpower on factions": "dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
-  "members on factions": "dossier-pdf=R foundry=R web-display=N web-transitive=R",
   "modifier on factions": "campaign-pdf=N dossier-pdf=R foundry=N web-display=R web-transitive=N world-book=N",
   "modifiers on factions": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
-  "name on factions": "campaign-pdf=R dossier-pdf=R foundry=R json-export=N news=R web-display=R web-transitive=R world-book=R",
   "power on factions": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
   "powerLabel on factions": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
   "powerModifier on factions": "campaign-pdf=R dossier-pdf=R foundry=R web-transitive=R world-book=R",
@@ -9717,11 +9695,6 @@
   "significance on impactDigest": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N",
   "summary on impactDigest": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
   "tags on impactDigest": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N",
-  "appliedAt on impairments": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
-  "causeEventId on impairments": "dossier-pdf=R foundry=R web-transitive=R",
-  "description on impairments": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N",
-  "severity on impairments": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=R world-book=N",
-  "type on impairments": "campaign-pdf=R dossier-pdf=R foundry=R json-export=N news=N web-display=N web-transitive=R world-book=R",
   "critical on imports": "campaign-pdf=N dossier-pdf=R foundry=R web-display=R web-transitive=N world-book=N",
   "reasons on imports": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N",
   "recommended on imports": "dossier-pdf=R web-display=R",
@@ -9776,7 +9749,7 @@
   "family on institution": "dossier-pdf=N foundry=N news=N web-display=N web-transitive=N",
   "key on institution": "campaign-pdf=R dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=R",
   "kind on institution": "campaign-pdf=R dossier-pdf=R foundry=R json-export=N news=N web-display=N web-transitive=R world-book=R",
-  "title on institution": "campaign-pdf=R dossier-pdf=R foundry=R json-export=N web-display=N web-transitive=R world-book=R",
+  "title on institution": "campaign-pdf=R dossier-pdf=R foundry=R json-export=N web-display=R web-transitive=R world-book=R",
   "color on institutionalServices": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
   "exportLabel on institutionalServices": "campaign-pdf=N dossier-pdf=N foundry=N web-transitive=N world-book=N",
   "exportable on institutionalServices": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
@@ -9786,14 +9759,14 @@
   "output on institutionalServices": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
   "status on institutionalServices": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
   "type on institutionalServices": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
-  "appliedAt on institutions": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
+  "appliedAt on institutions": "campaign-pdf=N dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=N",
   "band on institutions": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N",
   "baseChance on institutions": "campaign-pdf=N dossier-pdf=N foundry=N web-transitive=N world-book=N",
   "cascadeAdded on institutions": "web-transitive=R",
   "cascadeBoost on institutions": "",
   "catalogId on institutions": "campaign-pdf=R dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=R",
   "category on institutions": "campaign-pdf=R dossier-pdf=R foundry=R json-export=N web-display=R web-transitive=R world-book=R",
-  "causeEventId on institutions": "dossier-pdf=N foundry=N web-transitive=N",
+  "causeEventId on institutions": "dossier-pdf=R foundry=R web-transitive=R",
   "charter on institutions": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
   "clandestine on institutions": "",
   "coherenceRepair on institutions": "",
@@ -9858,15 +9831,13 @@
   "scope on judgments": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N",
   "status on judgments": "campaign-pdf=N dossier-pdf=R foundry=N json-export=N news=N web-display=R web-transitive=N world-book=N",
   "summary on judgments": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=R web-transitive=N world-book=N",
-  "dotRank on leader_champion": "campaign-pdf=N dossier-pdf=N foundry=N web-transitive=N world-book=N",
-  "name on leader_champion": "campaign-pdf=N dossier-pdf=R foundry=R json-export=N news=N web-display=N web-transitive=R world-book=N",
-  "npcId on leader_champion": "campaign-pdf=N dossier-pdf=R foundry=R news=N web-display=N web-transitive=R world-book=N",
   "arcane_orders on leaderNpcIds": "",
   "craft_guilds on leaderNpcIds": "",
   "elder_council on leaderNpcIds": "",
+  "elected_reeve on leaderNpcIds": "",
+  "feudal_stewardship on leaderNpcIds": "",
   "landed_gentry on leaderNpcIds": "",
   "manor_household on leaderNpcIds": "",
-  "merchant_guild_council on leaderNpcIds": "",
   "merchant_guilds on leaderNpcIds": "",
   "military_guard on leaderNpcIds": "",
   "monster_hunters_adventurers on leaderNpcIds": "",
@@ -9885,9 +9856,6 @@
   "holderId on levers": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-transitive=N world-book=N",
   "holderName on levers": "campaign-pdf=R dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=R",
   "institution on levers": "campaign-pdf=R dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=R",
-  "dotRank on lieutenant_operator": "campaign-pdf=N dossier-pdf=N foundry=N web-transitive=N world-book=N",
-  "name on lieutenant_operator": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
-  "npcId on lieutenant_operator": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N",
   "desc on lodging": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
   "institution on lodging": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
   "name on lodging": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
@@ -9982,42 +9950,6 @@
   "summary on mechanicalRumorSeeds": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
   "tags on mechanicalRumorSeeds": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N",
   "tick on mechanicalRumorSeeds": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
-  "activeConstraint on members": "web-display=N web-transitive=N",
-  "category on members": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N web-display=N web-transitive=N world-book=N",
-  "corrupt on members": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
-  "corruptTies on members": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
-  "corruptionVector on members": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
-  "criminalInstitution on members": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
-  "factionAffiliation on members": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N web-display=N web-transitive=N world-book=N",
-  "factionGoal on members": "",
-  "gender on members": "dossier-pdf=N foundry=N web-display=N",
-  "generatedAs on members": "",
-  "goal on members": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N",
-  "id on members": "campaign-pdf=N dossier-pdf=R foundry=R json-export=N news=N web-display=N web-transitive=R world-book=N",
-  "importance on members": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
-  "influence on members": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N web-display=N web-transitive=N world-book=N",
-  "institution on members": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
-  "legitimacyContribution on members": "dossier-pdf=N foundry=N web-transitive=N",
-  "linkedFactionIds on members": "campaign-pdf=N dossier-pdf=N foundry=N web-transitive=N world-book=N",
-  "linkedInstitutionIds on members": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
-  "memberships on members": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
-  "name on members": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
-  "personality on members": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N web-display=N web-transitive=N world-book=N",
-  "physical on members": "dossier-pdf=N foundry=N json-export=N web-display=N world-book=N",
-  "plotHooks on members": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
-  "power on members": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
-  "presentation on members": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N web-display=N web-transitive=N world-book=N",
-  "role on members": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
-  "secondaryAffiliation on members": "json-export=N web-display=N web-transitive=N world-book=N",
-  "secret on members": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
-  "settlementCondition on members": "",
-  "stabilityContribution on members": "dossier-pdf=N foundry=N web-transitive=N",
-  "status on members": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
-  "stressNote on members": "dossier-pdf=N foundry=N web-display=N",
-  "structuralPosition on members": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
-  "structuralRank on members": "campaign-pdf=N dossier-pdf=N foundry=N web-transitive=N world-book=N",
-  "thievesGuild on members": "",
-  "title on members": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N web-display=N web-transitive=N world-book=N",
   "power on memberships": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
   "rank on memberships": "campaign-pdf=N dossier-pdf=R foundry=R web-display=R web-transitive=N world-book=N",
   "share on memberships": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
@@ -10169,8 +10101,6 @@
   "criminalInstitution on npcs": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "expectedReturnTick on npcs": "dossier-pdf=N foundry=N web-transitive=N",
   "exposedTick on npcs": "web-transitive=N",
-  "factionAffiliation on npcs": "campaign-pdf=R dossier-pdf=R foundry=R json-export=A web-display=N web-transitive=R world-book=R",
-  "factionGoal on npcs": "",
   "family on npcs": "dossier-pdf=N foundry=N news=N web-display=N web-transitive=N",
   "gender on npcs": "dossier-pdf=R foundry=R web-display=R",
   "generatedAs on npcs": "",
@@ -10182,7 +10112,6 @@
   "institution on npcs": "campaign-pdf=R dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=R",
   "lastExposed on npcs": "dossier-pdf=N foundry=N web-transitive=N",
   "legitimacyContribution on npcs": "dossier-pdf=N foundry=N web-transitive=N",
-  "linkedFactionIds on npcs": "campaign-pdf=R dossier-pdf=R foundry=R web-transitive=R world-book=R",
   "linkedInstitutionIds on npcs": "dossier-pdf=N foundry=N web-display=N web-transitive=R",
   "memberships on npcs": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
   "missionId on npcs": "dossier-pdf=N foundry=N web-transitive=N",
@@ -10213,7 +10142,6 @@
   "purposeKind on npcs": "web-transitive=N",
   "resolvedTick on npcs": "dossier-pdf=N foundry=N web-transitive=N",
   "role on npcs": "campaign-pdf=R dossier-pdf=R foundry=R json-export=A news=N web-display=R web-transitive=R world-book=R",
-  "secondaryAffiliation on npcs": "json-export=A web-display=N web-transitive=R world-book=N",
   "secret on npcs": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
   "settlementCondition on npcs": "",
   "since on npcs": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
@@ -10422,6 +10350,8 @@
   "influenceBasis on osr000:npc_barracks": "dossier-pdf=N foundry=N web-transitive=N",
   "lastActedTick on osr000:npc_barracks": "dossier-pdf=N foundry=N web-transitive=N",
   "lastAction on osr000:npc_barracks": "dossier-pdf=N foundry=N web-transitive=N",
+  "lastTargetedBy on osr000:npc_barracks": "",
+  "lastTargetedTick on osr000:npc_barracks": "",
   "leverage on osr000:npc_barracks": "campaign-pdf=N dossier-pdf=N foundry=N web-transitive=N world-book=N",
   "longGoal on osr000:npc_barracks": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
   "loyalty on osr000:npc_barracks": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
@@ -10790,6 +10720,7 @@
   "factionSeat on osr000:npc_town_watch": "dossier-pdf=N foundry=N web-transitive=N",
   "flaw on osr000:npc_town_watch": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N",
   "goal on osr000:npc_town_watch": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N",
+  "goalHistory on osr000:npc_town_watch": "dossier-pdf=N foundry=N web-transitive=N",
   "goalProgress on osr000:npc_town_watch": "dossier-pdf=N foundry=N web-transitive=N",
   "ideal on osr000:npc_town_watch": "dossier-pdf=N foundry=N news=N web-display=N web-transitive=N",
   "influenceBasis on osr000:npc_town_watch": "dossier-pdf=N foundry=N web-transitive=N",
@@ -13825,7 +13756,6 @@
   "factionSeat on osr005:npc_coaching_inn": "dossier-pdf=N foundry=N web-transitive=N",
   "flaw on osr005:npc_coaching_inn": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N",
   "goal on osr005:npc_coaching_inn": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N",
-  "goalHistory on osr005:npc_coaching_inn": "dossier-pdf=N foundry=N web-transitive=N",
   "goalProgress on osr005:npc_coaching_inn": "dossier-pdf=N foundry=N web-transitive=N",
   "ideal on osr005:npc_coaching_inn": "dossier-pdf=N foundry=N news=N web-display=N web-transitive=N",
   "influenceBasis on osr005:npc_coaching_inn": "dossier-pdf=N foundry=N web-transitive=N",
@@ -19857,7 +19787,7 @@
   "description on relationships": "campaign-pdf=R dossier-pdf=R foundry=R news=N web-display=N web-transitive=R world-book=R",
   "flagDriven on relationships": "dossier-pdf=R web-display=R",
   "from on relationships": "campaign-pdf=R dossier-pdf=R foundry=R json-export=N web-display=N web-transitive=R world-book=R",
-  "id on relationships": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
+  "id on relationships": "campaign-pdf=N dossier-pdf=R foundry=R json-export=N news=N web-display=N web-transitive=R world-book=N",
   "npc1Name on relationships": "campaign-pdf=R dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=R",
   "npc1Role on relationships": "web-display=N web-transitive=R",
   "npc2Name on relationships": "campaign-pdf=R dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=R",
@@ -20208,7 +20138,6 @@
   "defenseProfile on settlement": "campaign-pdf=R dossier-pdf=R foundry=R json-export=A web-display=R web-transitive=R world-book=R",
   "economicState on settlement": "campaign-pdf=R dossier-pdf=R foundry=R json-export=A news=R web-display=R web-transitive=R world-book=R",
   "economicViability on settlement": "campaign-pdf=R dossier-pdf=R foundry=R json-export=A web-display=R web-transitive=R world-book=R",
-  "factions on settlement": "campaign-pdf=N dossier-pdf=R foundry=R json-export=A news=R web-display=N web-transitive=R world-book=N",
   "generationCoherenceReceipt on settlement": "dossier-pdf=R foundry=R web-display=R",
   "generatorVersion on settlement": "campaign-pdf=R dossier-pdf=R foundry=R json-export=A web-transitive=R world-book=R",
   "history on settlement": "campaign-pdf=R dossier-pdf=R foundry=R json-export=A news=R web-display=R web-transitive=R world-book=R",
@@ -21417,6 +21346,18 @@
    ],
    "previousCohort": 1400,
    "cohort": 1399
+  },
+  {
+   "charter": "§934.105",
+   "sha": "a725df7e42df0b58d290357c9488c328acbc9a06",
+   "admitted": [
+    "elected_reeve on leaderNpcIds",
+    "feudal_stewardship on leaderNpcIds",
+    "lastTargetedBy on osr000:npc_barracks",
+    "lastTargetedTick on osr000:npc_barracks"
+   ],
+   "previousCohort": 1399,
+   "cohort": 1397
   }
  ]
 }
