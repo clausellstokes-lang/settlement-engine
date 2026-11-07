@@ -10,6 +10,7 @@
  * tests/store/campaignWorldPulseSpatialCanon.test.js.
  */
 import { describe, expect, it } from 'vitest';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
@@ -525,8 +526,11 @@ describe('WY-1 A7 — the DRAFT tuning rows exist, unsigned, with every leaf uni
     // The register has been at v1 since the owner's record of 2026-11-06 (Register VII, ODQ
     // §934.105); the claim here is about THESE rows: no signature names them.
     const signedIds = (register.signatures ?? []).flatMap((entry) => entry.ids);
-    expect(signedIds).not.toContain('src/domain/spatial/modeSpeeds.js#MODE_SPEED_TUNING');
-    expect(signedIds).not.toContain('src/domain/spatial/modeSpeeds.js#KM_SCALE_TUNING');
+    // The liveness anchor is a signed id that travels the same path (Register VII's DENSITY_BANDS,
+    // signed at v1): the exclusion below cannot pass on an empty or drifted signatures[].
+    const ANCHOR = 'src/domain/density/densityBands.js#DENSITY_BANDS';
+    expectAbsentWithAnchor(signedIds, 'src/domain/spatial/modeSpeeds.js#MODE_SPEED_TUNING', ANCHOR, 'WY-1 A7');
+    expectAbsentWithAnchor(signedIds, 'src/domain/spatial/modeSpeeds.js#KM_SCALE_TUNING', ANCHOR, 'WY-1 A7');
     const mode = register.tables['src/domain/spatial/modeSpeeds.js#MODE_SPEED_TUNING'];
     const scale = register.tables['src/domain/spatial/modeSpeeds.js#KM_SCALE_TUNING'];
     for (const row of [mode, scale]) {
