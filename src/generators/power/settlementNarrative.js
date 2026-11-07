@@ -25,7 +25,9 @@ export const STRESS_FLAVOR = {
   slave_revolt: ['enemy', 'rival', 'debtor_creditor'],
 };
 
-// STRESS_RUMORS — each renders a rumour phrasing from a relationship object
+// STRESS_RUMORS — each renders a rumour phrasing from a relationship object. THE TIE IS DIRECTED
+// (PEOPLE-4 TIES, R-P7; people/ties.js): `npc1Name` is the `from` end's name and leads every
+// phrasing, `npc2Name` the `to` end's — the existing templates, the direction choosing who leads (M-4).
 const STRESS_RUMORS = [
   (rel) => {
     var detail;
@@ -225,6 +227,7 @@ export const genRelNarrative = (input) => {
   const topRel = (topScored = scored[0]) == null ? void 0 : topScored.r;
   if (!topRel) return null;
   const phrasing = pickRandom2(STRESS_RUMORS)(topRel);
+  // the tie's `from` end leads (`npc1`), its `to` end follows (`npc2`)
   return {
     npc1: topRel.npc1Name,
     npc2: topRel.npc2Name,

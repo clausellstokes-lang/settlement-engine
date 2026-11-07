@@ -31,6 +31,7 @@ import { summarizeMagic, deriveMagicProfile } from '../../domain/magicProfile.js
 import { humanize } from './format.js';
 import { buildPdfLiveWorld } from './liveWorld.js';
 import { directionalRelationshipLabel } from '../../domain/relationships/canonicalRelationship.js';
+import { cardTieLines } from '../../domain/relationships/cardTies.js';
 import { relationshipEngagementCards } from '../../domain/display/stateProse/relationshipsDeskRead.js';
 import { buildDossierEntityIndex, entityIdFor, slugifyEntity } from '../../domain/dossier/entityLinks.js';
 import { factionIdFromName } from '../../lib/entities.js';
@@ -749,7 +750,14 @@ function npcsSlice(active) {
       motivation: motivationStr,
       secrets: cleanSecrets,
       plotHooks: cleanHooks(n?.plotHooks),
-      relationships: cleanRelationships(n?.relationships),
+      // THE PEOPLE CAR (PEOPLE-4 TIES, R-P7): the card's OWN directed tie first, then the ties
+      // naming it ("called by"), each from the settlement's one tie list. The card's own
+      // `relationships` field this row used to read is written by no producer (a dead arm, cut).
+      relationships: cleanRelationships(cardTieLines(s?.relationships, n?.id).map((t) => ({
+        with: t.withName,
+        type: t.direction === 'own' ? t.kind : `called by${t.kind ? ` · ${t.kind}` : ''}`,
+        description: t.direction === 'own' ? t.description : '',
+      }))),
     };
   });
   return {
