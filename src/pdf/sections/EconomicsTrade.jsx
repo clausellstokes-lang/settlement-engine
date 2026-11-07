@@ -507,8 +507,8 @@ function FoodBalanceBlock({ fb }) {
       </View>
       {(fb.agricultureModifier != null || fb.stressModifier != null) && (
         <Text style={{ ...type.caption, fontSize: pt['8'], color: palette.muted, marginTop: 3 }}>
-          {fb.agricultureModifier != null && `Ag mod ${smart(fb.agricultureModifier)}  ·  `}
-          {fb.stressModifier != null && `Stress mod ${smart(fb.stressModifier)}`}
+          {[farmlandWords(fb.agricultureModifier), crisisYieldWords(fb.stressModifier)].filter(Boolean).join(' ')}
+          {/* The two multipliers in words (the owner's style law of 2026-11-07); no dangling "·". */}
         </Text>
       )}
       {fb.summary && (
@@ -556,3 +556,31 @@ function depText(d) {
 }
 
 export default EconomicsTrade;
+
+/**
+ * The farmland multiplier in words (W7 HOOKS, the owner's style law of 2026-11-07): "Ag mod 0.4" was
+ * machinery. The number stays the engine's; the page says what it means for the fields.
+ * @param {number|null|undefined} mod @returns {string|null}
+ */
+function farmlandWords(mod) {
+  if (mod == null || !Number.isFinite(mod)) return null;
+  if (mod < 0.6) return 'Poor farmland: the fields yield well under the usual.';
+  if (mod < 0.9) return 'Thin farmland: the fields yield a little under the usual.';
+  if (mod <= 1.1) return 'Ordinary farmland.';
+  if (mod <= 1.4) return 'Good farmland: the fields yield more than the usual.';
+  return 'Rich farmland: the fields yield well over the usual.';
+}
+
+/**
+ * The crisis multiplier on local food in words: the share of the usual production the crisis leaves.
+ * @param {number|null|undefined} mod @returns {string|null}
+ */
+function crisisYieldWords(mod) {
+  if (mod == null || !Number.isFinite(mod)) return null;
+  if (mod >= 1) return 'The crisis has not cut local food production.';
+  if (mod >= 0.9) return 'The crisis has cut local food production a little.';
+  if (mod >= 0.6) return 'The crisis has left most of the usual local food production.';
+  if (mod >= 0.4) return 'The crisis has left about half of the usual local food production.';
+  if (mod >= 0.25) return 'The crisis has left about a third of the usual local food production.';
+  return 'The crisis has left little of the usual local food production.';
+}

@@ -257,10 +257,15 @@ function identityPage(vm, settlement = vm.raw) {
 
 function servicesPage(vm) {
   const s = vm.services;
-  const avail = Object.entries(s.available || {}).filter(([, v]) => v);
+  // A category is listed only where something is on offer: every category key is present on the
+  // slice, most as an empty list, so a truthiness filter printed all eleven (Magic in a world
+  // without it). Each line names what is offered (W7 HOOKS, the owner's style law of 2026-11-07).
+  const avail = Object.entries(s.available || {}).filter(([, v]) => (Array.isArray(v) ? v.length > 0 : !!v));
   return md(
     lede(servicesHeadline(s)),
-    avail.length ? md('', '## Available services', avail.map(([k]) => bullet(humanize(k)))) : null,
+    avail.length ? md('', '## Available services', avail.map(([k, v]) => bullet(Array.isArray(v)
+      ? `${cap(humanize(k))}: ${[...new Set(v.map((x) => x?.name).filter(Boolean))].join(', ')}`
+      : cap(humanize(k))))) : null,
     (s.notableAbsences || []).length ? md('', '## Notably absent for the tier',
       s.notableAbsences.map(a => bullet(typeof a === 'string' ? humanize(a) : (a?.label || a?.name || '')))) : null,
   ) || null;
