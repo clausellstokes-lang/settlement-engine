@@ -49,7 +49,7 @@
       "banner": 9,
       "dated": 132,
       "sha-pin": 1,
-      "tree": 111
+      "tree": 112
     },
     "files": {
       "banner": [
@@ -285,7 +285,8 @@
         "docs/shift-records/2026-11-07-w1-08-style-ds-sup-3.json",
         "docs/shift-records/2026-11-07-w1-09-style-ds-eco-2.json",
         "docs/shift-records/2026-11-07-w1-10-style-amendments.json",
-        "docs/shift-records/2026-11-07-w1-11-style-ds-eco-11-spread.json"
+        "docs/shift-records/2026-11-07-w1-11-style-ds-eco-11-spread.json",
+        "docs/shift-records/2026-11-07-w1-12-style-ds-eco-6-scalenote.json"
       ]
     },
     "_rosterGrowth2026-10-30-consolidation": "FIVE documents JOINED the roster by being BORN into it, and they hid NOTHING (re-measured by BUILD-T1 on claude/ux-T1 rebased onto 2acd0206): the integration branch's docs/UX_CONSOLIDATION_2026-10-30.md joined `dated` (5 -> 6) and BUILD-S's docs/shift-records/2026-10-30-service-category-fidelity.json joined `tree` (40 -> 41), both already on the tip; BUILD-T1's three signed records docs/shift-records/2026-10-30-arrival-market-gate.json, -no-market-pool.json and -migration-one-direction.json joined `tree` (41 -> 44). GROWTHS, not class moves: each file entered the tree already archival by rule, and each shift record is a JSON signature with zero path:line citations of its own, so pastEofCitationsExcluded stays at 377.",
