@@ -35,7 +35,7 @@ import { disperseNamedRoster } from './density/applyDensityLaw.js';
 import { pickVariant } from '../kernel/proseHash.js';
 import { selectOriginBody } from './narrative/settlementOriginProse.js';
 import { resolvePrimaryStress } from './stressPriority.js';
-import { migrationDirectionOfStress } from '../domain/migrationDirection.js';
+import { migrationDirectionOfStress, migrationDirectionOfConfig } from '../domain/migrationDirection.js';
 import { pick, pickRandom, pickRandom2, random01 } from './helpers.js';
 import { resolveTerrain } from '../domain/resolveTerrain.js';
 import { deriveTradeCommodity } from './tradeCommodity.js';
@@ -44,6 +44,7 @@ import {
   TERRAIN_NARRATIVE_HOOKS,
   STRESS_DESCS,
   STRESS_NOTES,
+  MASS_MIGRATION_DEPARTURE_NOTES,
 } from '../data/narrativeData.js';
 // The runner's ONE pin primitive (EM-B2a2's landed export). This module consults a pin
 // through it and nowhere else: no local clone (EM-R1 clones the bag on entry at the runner)
@@ -419,7 +420,14 @@ export const genArrivalDetail = (
     overcoming: pick(OVERCOMING_BY_PROSPERITY[prosperity] || OVERCOMING_BY_PROSPERITY.Moderate),
     stressNote: primaryStress
       ? pickVariant(
-        licensedNotes(STRESS_NOTES[primaryStress], economicContext?._institutions), // F1: walls only where they stand
+        licensedNotes(
+          // R-W7 (e), W5 HIS 2026-11-07: the migration note reads the declared direction; a
+          // departures town draws the departures set, never the arrivals one.
+          primaryStress === 'mass_migration' && migrationDirectionOfConfig(config) === 'departures'
+            ? MASS_MIGRATION_DEPARTURE_NOTES
+            : STRESS_NOTES[primaryStress],
+          economicContext?._institutions,
+        ), // F1: walls only where they stand
         config?._seed ? `${config._seed}::stressNote::${primaryStress}` : null,
       ) ?? null
       : null,
@@ -715,6 +723,19 @@ const buildPoliticalNarrative = (npc, index, summary, allNpcs, held = null) => {
   return enriched;
 };
 
+/**
+ * The small-place tier line, five vantages (local, traveller, official, trade, newcomer). Five, not
+ * four: a power-of-two pool aliases under the FNV pick (the origin pools' own pin). Index 0 is the
+ * seedless line.
+ */
+export const SMALL_PLACE_TIER_LINES = Object.freeze([
+  'Every household here has its work, and there is little to spare.',
+  'A handful of houses; you could greet everyone in it before noon.',
+  'Everyone here knows every household by name, and none has much put by.',
+  'What little the place grows or makes is mostly used at home; there is not much left to sell.',
+  'A newcomer is noticed by the second day here, and asked what work they mean to do.',
+]);
+
 // ─── generateSettlementReason ─────────────────────────────────────────────────
 /**
  * Generate the founding reason description for the settlement header.
@@ -729,9 +750,11 @@ const buildPoliticalNarrative = (npc, index, summary, allNpcs, held = null) => {
  *                                 When it records a meaningful deficit, the isolated
  *                                 wording acknowledges the gap instead of seeding the
  *                                 AI pass with a self-sufficiency claim.
+ * @param {{ hasDocks?: boolean }} [roster] - #10: the roster's docks/wharf flag; an explicit false
+ *                                 takes the terrain's arm, absent keeps the port arm.
  * @returns {string[]} Array of reason strings (shown as bullet list)
  */
-export const generateSettlementReason = (tier, route, neighbor, _config = {}, foodBalance = null) => {
+export const generateSettlementReason = (tier, route, neighbor, _config = {}, foodBalance = null, roster = {}) => {
   const lines = [];
 
   // Meaningful food deficit? rawDeficit is the pre-import gap (need − production);
@@ -759,25 +782,28 @@ export const generateSettlementReason = (tier, route, neighbor, _config = {}, fo
     terrainType: _config.terrainType ?? null,
     hasFoodDeficit,
     // #10: the port reason reads the roster's docks/wharf flag (undefined from a caller that does not say).
-    hasDocks: _config.hasDocks,
+    // A parameter of its own, never a config key: the config is the DM's saved input, the roster is not.
+    hasDocks: roster?.hasDocks,
     supportChannels,
     specialResources: _config.specialResources ?? null,
     seed: _config._seed ?? null,
   }));
 
-  // Tier-specific context
+  // Tier-specific context. THE OWNER'S STYLE LAW (W5 HIS 2026-11-07, STYLE-AUDIT §2a #11 and §2b-5):
+  // plain statement, no mechanism. The small-place line was the second most-repeated frame on the
+  // 1,000 (334 towns), so it is a pool of five vantages chosen DRAW-FREE by the settlement's seed
+  // (the same town keeps its line; a sibling prints another); a seedless caller gets index 0.
   if (tier === 'metropolis') {
-    lines.push(
-      'At this scale, the settlement no longer serves a single economic function. It IS the economic function for its region.',
-    );
+    lines.push('Everything in the region is bought, sold or decided here.');
   } else if (tier === 'city') {
     lines.push(
       hasFoodDeficit
         ? 'Large enough that its appetites outrun its fields. What the city consumes, it cannot fully produce.'
-        : 'Large enough to produce what it consumes and consume what it produces. External trade amplifies rather than sustains.',
+        : 'Large enough to feed itself; its trade brings extras, not the essentials.',
     );
   } else if (['thorp', 'hamlet'].includes(tier)) {
-    lines.push('Small enough that every household knows its purpose. Surplus, if any, is modest.');
+    const seed = typeof _config._seed === 'string' ? _config._seed.trim() : '';
+    lines.push(pickVariant(SMALL_PLACE_TIER_LINES, seed ? `${seed}::settlement-tier-line::${tier}` : null));
   }
 
   return lines;

@@ -398,78 +398,91 @@ export const STRESS_DESCS = {
 
 export const STRESS_NOTES = {
     under_siege: [
-      'What the founders built is now being tested by forces they could not have anticipated. The original reasons for settling here have become irrelevant to immediate survival.',
+      'The founders chose this place for its trade, water and good ground. Now it is under siege, and none of that matters until the siege is broken.',
       'The site was chosen for trade, water, and good ground, none of which matters to the people now deciding whether its walls can hold.',
-      'Every founding is a bet that a place can be kept. The wager has finally been called, generations after the founders stopped being able to lose it.',
+      'The founders built walls in case they were ever needed. They are needed now.',
     ],
     famine: [
-      'The settlers who chose this land did so because it seemed fertile and promising. The current harvest failures would be unrecognisable to them.',
-      'This ground fed the founders well enough to make them stay. The people living on it now measure it by a different arithmetic: not what it gave, but what it still owes.',
-      'The land that drew the first families here has not changed. The weather, the yields, and the margins have, and the founders left no instructions for this.',
+      'The settlers chose this land because it fed them well. Now the harvests are failing and families are going hungry.',
+      'This ground fed the founders well enough to make them stay. This year it has not fed their grandchildren.',
+      'The land that drew the first families here is the same land, but the harvests have come in short, and the winter ahead will be hard.',
     ],
     occupied: [
-      'The original settlement was founded with a degree of independence that no longer exists. The current administration answers to outside authority.',
-      "The founders came here, in part, to be far from other people's authority. The distance is unchanged; the authority arrived anyway.",
-      "Whatever charter or courage the founding rested on, it assumed the settlement's decisions would be its own. That assumption has been formally corrected.",
+      'The founders governed themselves. Now foreign officers give the orders, and the settlement\'s own rulers answer to them.',
+      "The founders came here to be far from other people's rule. Other people rule it now.",
+      'The founders assumed the settlement would always make its own decisions. Under occupation, it no longer does.',
     ],
     politically_fractured: [
       'The settlement was founded by people who agreed on its purpose. That consensus no longer exists.',
-      'The founding required its people to pull in one direction. The pulling continues; the direction is now the dispute.',
-      'What the founders shared (a purpose, a danger, a road out of somewhere worse) held their descendants together only as long as it was remembered. It is no longer remembered the same way twice.',
+      'The founders pulled together in one direction. Their descendants work as hard, but no longer agree on where they are going.',
+      'A shared purpose held the founders together. Their descendants remember that purpose differently, and the settlement has split along those lines.',
     ],
     indebted: [
-      'The original settlers built something valuable. Their descendants have borrowed against it until the debt outweighs the asset.',
-      'The founders left an inheritance; each generation since has drawn on it a little more easily than the last. The ease was the warning nobody read.',
-      'What was built here was solid enough to borrow against, which is precisely what happened, repeatedly, until the building belonged to the borrowing.',
+      'The first settlers built something worth having. Their descendants have borrowed against it until the settlement owes more than it owns.',
+      'Each generation since the founding has borrowed a little more against what the founders left. Now the lenders want it back.',
+      'What the founders built was solid enough to borrow against, and it has been, again and again; the lenders now own much of it.',
     ],
     recently_betrayed: [
-      "The founding required trust among a small group of people. That trust has recently been violated in a way that echoes the founding's original fragility.",
-      'Settlements begin as promises kept between a few families. This one has just been reminded what it costs when the promise is broken from inside.',
+      'The settlement was founded by a few families who trusted each other. One of their own has just broken that trust.',
+      'This settlement began as a promise between a few families, and someone inside has just broken it.',
       'The founders survived by trusting each other because they had no alternative. Their descendants had an alternative, and one of them took it.',
     ],
     infiltrated: [
-      'The settlement was founded by people who knew each other. Somewhere in the current population, that familiarity is being exploited.',
-      'A town this size still runs on recognising faces. Someone has learned exactly how much that recognition can be made to carry.',
-      'The founding families could account for every soul inside the walls. That accounting is still the settlement\'s habit, which is what makes the error in it so useful to whoever is the error.',
+      'The founders all knew each other, and the settlement still trusts familiar faces. Someone living here now is using that trust to hide.',
+      'A place this size still trusts faces it knows, and one of those faces is not what it seems.',
+      'The founding families could name every soul inside the walls, and the settlement still assumes it can. That is how someone who does not belong goes unnoticed.',
     ],
     plague_onset: [
-      'The settlers chose this location for its resources and access. Disease does not respect those original calculations.',
-      'The roads and river that made this a good place to settle are the same roads and river the sickness travelled. The founding advantage has changed sides.',
-      'The site was picked so that things would arrive here easily. Things still do.',
+      'The settlers chose this place for its roads and water. The sickness came in the same way.',
+      'The roads and river that made this a good place to settle are the ones the sickness travelled.',
+      'The site was picked so trade could reach it easily. The sickness reached it just as easily.',
     ],
     succession_void: [
-      'The founding generation is gone. What remains is contested, in ways the founders did not anticipate and did not plan for.',
-      'The founders decided many things, but never who decides once they were gone; that gap has finally reached the head of the table.',
-      'Every institution here descends from someone who is dead, and the descent is precisely what is now in question.',
+      'The founding generation is gone, and nobody agrees who should lead now.',
+      'The founders settled many things but never who would rule after them. Now the seat is empty, and rivals are fighting over it.',
+      'Every office here was handed down from the founders, and now nobody can agree who it passes to.',
     ],
     monster_pressure: [
-      'The founding required pushing into terrain that was not entirely safe. That calculation is being revisited.',
-      'The first settlers weighed the danger of this ground against its worth and chose to stay. The weighing has reopened, and this time the ground gets a vote.',
-      'The land gave the founders room on terms nobody wrote down. Something out there has started enforcing them.',
+      'The founders knew this ground was dangerous and settled anyway. Now the danger has come back to the fields.',
+      'The first settlers judged this land worth its dangers. With something coming out of the wild again, people are asking whether they were right.',
+      'The founders cleared this land from the wild. Now something from the wild is coming back for it.',
     ],
     insurgency: [
       'The settlement was founded on an authority its people once accepted. That acceptance has been withdrawn, and no one has agreed on what should replace it.',
-      "Whoever founded this place assumed that governing it would remain possible. Governing has quietly become the settlement's least settled question.",
-      'The order the founders established outlived their reasons for it. What remains is the order alone, and orders alone do not hold.',
+      'The founders assumed the settlement could always be governed. Now some of its own people are refusing to be.',
+      'The rules the founders set have outlived the reasons for them, and people have stopped obeying.',
     ],
     mass_migration: [
-      'The founders built for a fixed number of people who knew each other. The population that now fills these walls is neither fixed nor familiar.',
-      'The settlement was measured, at its founding, for the families that made it. The measurement is still visible everywhere (in streets, wells, and patience), and everything about it is now too small.',
-      'The founders knew every name inside the walls. The walls remain; the arithmetic of names has broken.',
+      'The founders built for a few families who knew each other. Now newcomers crowd the streets, and half the faces are strangers.',
+      'The settlement was laid out for the families that founded it. Its streets and wells were never meant for this many people.',
+      'The founders knew every name inside the walls. Now no one does: too many have arrived too fast.',
     ],
     wartime: [
-      'The settlement was founded for trade and quiet increase. It now serves a war effort that its founders never imagined and would not recognise.',
-      'Nothing in the founding of this place anticipated a war. Its site, its trades, its debts were all chosen for peace. The war did not consult the founders.',
-      'The founders built a market town. Somewhere far away, a quartermaster reclassified it.',
+      'The settlement was founded for trade and quiet growth. Now it feeds and arms a war.',
+      'Everything here was chosen for peace: the site, the trades, the debts. Now there is a war, and the settlement is paying for it.',
+      'The founders built a place to trade. Now the army takes what the market used to sell.',
     ],
     religious_conversion: [
       'The founding was blessed under a faith that is no longer ascendant here. The oaths and endowments made in its name are now contested ground.',
-      'The first stones were laid with prayers this settlement no longer says. What was promised in those prayers (land, duty, protection) has outlasted the saying of them.',
-      'The settlement was consecrated once, thoroughly, in a faith now out of favour. Consecration, it turns out, is easier to perform than to transfer.',
+      'The first stones were laid with prayers the settlement no longer says, and the land and duties promised in them are now in dispute.',
+      'The settlement was consecrated in a faith now out of favour, and nobody agrees what that old blessing still binds them to.',
     ],
     slave_revolt: [
-      'The settlement was built on a labour it did not count as its people. That reckoning, deferred since the founding, has arrived all at once.',
-      'From its first season this place ran on hands it never numbered among its own. The ledger was always going to be opened; the founding merely set the date.',
-      'The founders built with labour they owned and prosperity they kept. Both clauses of that arrangement are now being renegotiated by the other party.',
+      'The settlement was built by slaves it never counted as its own people. Now they have risen.',
+      'From its first season this place ran on enslaved hands. Those hands have turned against it.',
+      'The founders built with slaves and kept the profits. The slaves have risen, and they mean to take back both.',
     ],
   };
+
+/**
+ * THE DEPARTURES SET of the migration founding note (R-W7 e; STYLE-RULINGS §1(b); WAVE-RULINGS
+ * item 8; W5 HIS 2026-11-07). `STRESS_NOTES.mass_migration` is the ARRIVALS set; a settlement whose
+ * declared `stress[].direction` is `departures` (read through the config's projection,
+ * `migrationDirectionOfConfig`) draws from these instead, so a town that is emptying is never told
+ * as one that is crowding. Same register and length as the arrivals set; index 0 is canonical.
+ */
+export const MASS_MIGRATION_DEPARTURE_NOTES = [
+  'The founders built for the families that would stay. Now those families are leaving, and houses stand empty on every street.',
+  'The settlement was laid out for more people than it now holds; whole rows the founders filled are shuttered.',
+  'The founders knew every name in the settlement. Fewer names are left each season, as household after household takes the road.',
+];

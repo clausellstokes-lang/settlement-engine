@@ -58,8 +58,9 @@ registerStep('generateNarratives', {
   // #10 (W5 HIS 2026-11-07): the port reason reads whether a docks or wharf institution exists.
   const hasDocks = Boolean(getInstFlags(effectiveConfig, institutions).hasPort);
   const settlementReason = generateSettlementReason(
-    tier, tradeRoute, null, { ...effectiveConfig, _seed: ctx._seed, hasDocks },
-    economicViability?.metrics?.foodBalance || null
+    tier, tradeRoute, null, { ...effectiveConfig, _seed: ctx._seed },
+    economicViability?.metrics?.foodBalance || null,
+    { hasDocks },
   );
   // Stamp the pipeline seed onto the config so generateHistory's prose-variant selection
   // (draw-free) is stable per settlement — effectiveConfig itself carries no _seed.

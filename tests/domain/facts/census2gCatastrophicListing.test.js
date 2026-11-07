@@ -31,6 +31,7 @@ describe('POLITICAL_FLAVOR catastrophic[1] — listed, not split (R-AS amended)'
     expect(typeof row).toBe('function');
     const event = (type) => [{ severity: 'catastrophic', type, name: 'Long Night' }];
     expect(/** @type {any} */ (row)(event('monster_incursion'))).toMatch(/has walls where others do not/);
-    expect(/** @type {any} */ (row)(event('disaster'))).toMatch(/founding trauma/);
+    // Re-keyed at W5 HIS's style pass (2026-11-07): the non-monster branch, plainly worded.
+    expect(/** @type {any} */ (row)(event('disaster'))).toMatch(/people here date everything from it/);
   });
 });

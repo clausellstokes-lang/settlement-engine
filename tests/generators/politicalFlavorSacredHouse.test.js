@@ -13,7 +13,8 @@ import { beforeAll, describe, expect, it } from 'vitest';
 import { birth, ensureLaws } from '../../scripts/audit/soak-review/corpus.mjs';
 import { factsOf } from '../../src/domain/facts/factsOf.js';
 
-const INSTITUTION_PERSISTED = /the institution persisted; the unity didn't/;
+// Re-keyed at W5 HIS's style pass (2026-11-07): the row still presumes the house of worship; its words are plain now.
+const INSTITUTION_PERSISTED = /its house of worship survived, but the congregation never came back together/;
 const LOCAL_CLERGY = /local clergy and the civic authority/;
 
 describe('POLITICAL_FLAVOR religious_heavy declares sacredHouse (CENSUS-2f unit 5)', () => {

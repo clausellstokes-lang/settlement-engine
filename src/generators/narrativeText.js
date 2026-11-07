@@ -251,10 +251,20 @@ export const PRESSURE_SENTENCES = {
 // any kind, not a temple: waiting on sacredHouse, R-AE).
 /** The ledger's `{crisis-scoped}` pools (R-AF): the cascade's wiring passes `crisisScoped: true`. */
 export const POLITICAL_FLAVOR_CRISIS_SCOPED = Object.freeze(['stable']);
+/**
+ * #9 (STYLE-RULINGS §1, W5 HIS 2026-11-07): THE HISTORICAL CHARACTER READS THE MAJOR EVENTS. The
+ * `stable` pool is drawn at 15 per cent on ANY record, so its lines that deny a great event ("no
+ * dramatic history", "events that left no monuments") printed over towns whose History tab lists a
+ * major or catastrophic row. A row whose severity is `major` or `catastrophic` is a major event
+ * (historyData's ladder: minor · major · catastrophic); with one on the record those lines name it.
+ * @param {{severity?: unknown}} e @returns {boolean}
+ */
+const isMajorEvent = (e) => e?.severity === 'major' || e?.severity === 'catastrophic';
+
 export const POLITICAL_FLAVOR = {
   political_heavy: [
     (r) =>
-      `A settlement where power has changed hands ${r.length > 2 ? "repeatedly" : "at least once"} within living memory. ${pickRandom2(r.filter((s) => s.type === "political"))?.name || "this event"} left a governing structure that still hasn't fully settled`,
+      `Power here has changed hands ${r.length > 2 ? "more than once " : ""}within living memory, and since the ${pickRandom2(r.filter((s) => s.type === "political"))?.name || "last upheaval"} nobody has been sure who really rules`,
     (r) =>
       `Politically restless: the ${pickRandom2(r.filter((s) => s.type === "political"))?.name || "this event"} is still treated as recent history by those who were there, and recent enough to be a warning by those who weren't`,
     (r) =>
@@ -314,7 +324,7 @@ export const POLITICAL_FLAVOR = {
       const s = r.find((o) => o.severity === "catastrophic") || r[0];
       return s.type === "monster_incursion"
         ? `The ${s.name} is why this settlement has walls where others do not, why the militia drills when other villages have forgotten how, and why certain paths through the surrounding territory are still considered inadvisable`
-        : `The ${s.name} is the settlement's founding trauma, not the actual founding, which is older, but the event that made everything before it feel like a different place`;
+        : `This place is older than the ${s.name}, but people here date everything from it: before it, and after`;
     },
     (r) => {
       const s = r.find((o) => o.severity === "catastrophic") || r[0];
@@ -326,7 +336,7 @@ export const POLITICAL_FLAVOR = {
       const s = r.find((o) => o.severity === "catastrophic") || r[0];
       return s.type === "economic"
         ? `The ${s.name} is why this settlement has no patience for debt, no tolerance for speculation, and a merchant class that keeps more coin in hand than any comparable settlement. Prosperity here is treated as temporary until proven otherwise`
-        : `The ${s.name} did not destroy the settlement. It destroyed the settlement's sense of itself. What came after was rebuilt from the ground up, including what people believed about where they lived`;
+        : `The ${s.name} left the buildings standing and changed everything else; the place was rebuilt afterwards, down to what people believe about it`;
     },
     (r) =>
       `Older residents still distinguish between 'the original settlement' and 'what we have now'. The ${(r.find((o) => o.severity === "catastrophic") || r[0]).name} is where that line falls, not a clean line, but a real one`,
@@ -337,7 +347,7 @@ export const POLITICAL_FLAVOR = {
         : `The ${s.name} is the reason this settlement is here at all, in its current form, not because it was founded then, but because it was remade then, and what was remade is what we have`;
     },
     (r) =>
-      `The people here carry the ${(r.find((o) => o.severity === "catastrophic") || r[0]).name} the way other places carry a founding myth, except this one is remembered accurately, by people who were there, which makes it a heavier thing to live beside`,
+      `The ${(r.find((o) => o.severity === "catastrophic") || r[0]).name} is this place's defining story, and the people who lived through it are still here to tell it`,
     (r) => {
       const s = r.find((o) => o.severity === "catastrophic") || r[0];
       return s.type === "disaster" || s.type === "monster_incursion"
@@ -365,12 +375,15 @@ export const POLITICAL_FLAVOR = {
       "This is a settlement of accommodations and half-repairs, where every institution bears the compromise that let it survive the era before this one. It works, in the way a much-mended tool works: not elegantly, but reliably, and no one can quite remember what it looked like new",
   ],
   stable: [
+    // #9: the denial reads the major events first (see isMajorEvent above).
     (r) =>
-      "Unremarkable in its history, which is itself a kind of distinction: no catastrophe, no conquest, no great disruption. It simply continued, which required more work than it looks",
+      (r.some(isMajorEvent)
+        ? `Apart from the ${r.find(isMajorEvent).name}, its history is steady: it simply continued, and that took more work than it looks`
+        : "Unremarkable in its history: no catastrophe, no conquest, no great disruption. It simply continued, and that took more work than it looks"),
     { text: (r) =>
-      "An ordinary settlement that has outlasted several less ordinary ones nearby: through no single great decision, but through the accumulated effect of many small adequate ones", crisis: ['any'] },
+      "An ordinary place that has outlasted grander neighbours by getting the small things right, year after year", crisis: ['any'] },
     { text: (r) =>
-      "The kind of place that historians overlook and travellers remember fondly: no dramatic history, but a persistent one", crisis: ['any'] },
+      (r.some(isMajorEvent) ? `The ${r.find(isMajorEvent).name} aside, the history here is long and steady, and travellers remember the place kindly` : "No dramatic history here, only a long steady one, and travellers remember the place kindly"), crisis: ['any'] },
     (r) =>
       "Stable enough that its tensions are the slow kind: inherited grievances, unresolved inheritances, debts that have been rolled over so many times no one remembers the original amount",
     { text: (r) =>
@@ -381,11 +394,13 @@ export const POLITICAL_FLAVOR = {
             .join(
               ", ",
             )} and ${r[r.length - 1].name}: no single defining moment, but enough of them that the character formed anyway`
-        : "Shaped by events that left no monuments but changed things nonetheless: the kind of history that only becomes visible in the way people behave", crisis: ['any'] },
+        : r.some(isMajorEvent)
+          ? `The ${r.find(isMajorEvent).name} is the one event people here still date things by; the rest of its history is quieter`
+          : "No great event marks this place; its history shows in people's habits, not in monuments", crisis: ['any'] },
     { text: (r) =>
       r.some((s) => s.type === "economic")
         ? `A settlement that has built its identity around commerce rather than conflict. The ${(r.find((s) => s.type === "economic") || r[0]).name} proved that economic power endures longer than military prestige`
-        : "The kind of place where records are well-kept and disputes are resolved through precedent, not because the people are unusually reasonable, but because they have learned the cost of the alternative", crisis: ['any'] },
+        : "Records here are kept carefully and disputes settled by precedent; people here learned the hard way what happens otherwise", crisis: ['any'] },
     { text: (r) =>
       "More complex than it appears from the road. Outsiders see a functioning market settlement. Residents know the version that has footnotes.", needs: ['market'], crisis: ['any'] },
     (r) =>
@@ -399,7 +414,7 @@ export const POLITICAL_FLAVOR = {
     // CENSUS-2f unit 5: [0]'s persisting institution and [2]'s local clergy presume a house of worship of any kind (R-AE's
     // `sacredHouse`, settled at this draw on all 1,000 soak births — R-V, R-AN); a refused row moves to the admitted argmax.
     { text: (r) =>
-      `The ${pickRandom2(r.filter((s) => s.type === "religious"))?.name || "this event"} divided this settlement's relationship to faith in ways that never fully healed: the institution persisted; the unity didn't`, needs: ['sacredHouse'] },
+      `The ${pickRandom2(r.filter((s) => s.type === "religious"))?.name || "this event"} split the faith here; its house of worship survived, but the congregation never came back together`, needs: ['sacredHouse'] },
     { text: (r) =>
       `Religious history here is complicated: the ${pickRandom2(r.filter((s) => s.type === "religious"))?.name || "this event"} left an official account and an unofficial one, and which version you know says something about who you are`, colour: true },
     { text: (r) =>

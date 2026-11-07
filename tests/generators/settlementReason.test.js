@@ -11,6 +11,7 @@
 import { describe, it, expect } from 'vitest';
 import { generateSettlementReason } from '../../src/generators/narrativeGenerator.js';
 import { ORIGIN_POOLS } from '../../src/generators/narrative/settlementOriginProse.js';
+import { SMALL_PLACE_TIER_LINES } from '../../src/generators/narrativeGenerator.js';
 
 describe('generateSettlementReason deficit honesty', () => {
   it('an isolated settlement with a meaningful deficit acknowledges it', () => {
@@ -41,7 +42,8 @@ describe('generateSettlementReason deficit honesty', () => {
     const deficit = generateSettlementReason('city', 'road', null, {}, { dailyNeed: 20000, rawDeficit: 4000 });
     expect(deficit[1]).toMatch(/appetites outrun its fields/);
     const fed = generateSettlementReason('city', 'road', null, {}, { dailyNeed: 20000, rawDeficit: 0 });
-    expect(fed[1]).toMatch(/produce what it consumes/);
+    // The style law (W5 HIS 2026-11-07): the mechanism wording "produce what it consumes" became plain.
+    expect(fed[1]).toMatch(/feed itself/);
   });
 });
 
@@ -55,17 +57,32 @@ describe('#10 — the port reason is gated on a docks or wharf institution', () 
     .filter(([arm]) => arm.startsWith('port.')).flatMap(([, pool]) => pool));
   it('a port route WITHOUT docks prints no port reason', () => {
     for (const terrainType of [null, 'mountains', 'coastal', 'plains']) {
-      const [reason] = generateSettlementReason('thorp', 'port', null, { hasDocks: false, terrainType });
+      const [reason] = generateSettlementReason('thorp', 'port', null, { terrainType }, null, { hasDocks: false });
       expect(PORT_BODIES.has(reason), `terrain ${terrainType}: ${reason}`).toBe(false);
     }
   });
   it('a riverside port route without docks takes the river reason', () => {
-    const [reason] = generateSettlementReason('village', 'port', null, { hasDocks: false, terrainType: 'riverside' });
+    const [reason] = generateSettlementReason('village', 'port', null, { terrainType: 'riverside' }, null, { hasDocks: false });
     expect(ORIGIN_POOLS.river).toContain(reason);
   });
   it('a port route WITH docks keeps its port reason, and a caller that does not say keeps it too', () => {
-    expect(PORT_BODIES.has(generateSettlementReason('town', 'port', null, { hasDocks: true })[0])).toBe(true);
+    expect(PORT_BODIES.has(generateSettlementReason('town', 'port', null, {}, null, { hasDocks: true })[0])).toBe(true);
     expect(PORT_BODIES.has(generateSettlementReason('town', 'port', null, {})[0])).toBe(true);
+  });
+});
+
+// #11 (STYLE-AUDIT §2a, W5 HIS 2026-11-07): the small-place tier line is a pool of five vantages,
+// chosen by the settlement's seed, so the 334-town frame no longer prints one sentence everywhere.
+describe('#11 — the small-place tier line is a seeded pool of five vantages', () => {
+  it('a seedless caller keeps index 0, and a seeded one keeps its own line forever', () => {
+    expect(generateSettlementReason('thorp', 'road', null, {})[1]).toBe(SMALL_PLACE_TIER_LINES[0]);
+    const once = generateSettlementReason('hamlet', 'road', null, { _seed: 'w5-a' })[1];
+    expect(generateSettlementReason('hamlet', 'road', null, { _seed: 'w5-a' })[1]).toBe(once);
+  });
+  it('the seed family reaches every one of the five', () => {
+    const seen = new Set();
+    for (let i = 0; i < 200; i += 1) seen.add(generateSettlementReason('thorp', 'road', null, { _seed: `w5-${i}` })[1]);
+    expect([...seen].sort()).toEqual([...SMALL_PLACE_TIER_LINES].sort());
   });
 });
 

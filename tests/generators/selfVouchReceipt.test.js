@@ -16,7 +16,8 @@ import { beforeAll, describe, expect, it } from 'vitest';
 import { birth, ensureLaws } from '../../scripts/audit/soak-review/corpus.mjs';
 import { generalDeskLines } from '../../src/components/new/generalDeskRead.js';
 
-const VOUCH = /contradicts anything else in it|finds no seam|holds together regardless/;
+// Re-keyed at W5 HIS's style pass (2026-11-07): the three vouch lines of DS-GEN-11 `criticalIssueCount zero`, plainly worded.
+const VOUCH = /contradicts anything else|nothing about it fails to add up|account of itself (?:is|stays) clean/;
 
 function battery(settlement) {
   return settlement.generationCoherenceReceipt.judgments
@@ -47,7 +48,7 @@ describe('the self-vouch line follows the receipt\'s battery judgment', () => {
   it('soak1k-6: a record the battery finds clean still prints the line', () => {
     const { settlement } = birth(6);
     expect(battery(settlement)).toMatchObject({ status: 'pass', findings: [] });
-    expect(verdict(settlement)).toMatch(/contradicts anything else in it/);
+    expect(verdict(settlement)).toMatch(VOUCH);
   });
 
   // 2026-11-04 (chair's ruling P1): SOAK-3 re-dealt the corpus (the de-aliased cellFor), so the old seed no longer carries this case's premise; re-pointed to the first seed of the new corpus that does (the clean record above): was soak1k-278.
