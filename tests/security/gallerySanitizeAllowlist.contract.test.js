@@ -161,7 +161,9 @@ describe.runIf(migExists)('public sanitizer allowlist — drift pin (SQL ⇄ JS)
   // delta guard that lived here (asserting the KNOWN {seed/config} vs {4 render
   // keys} lag) was DELETED at the same time — its whole purpose was to stay green
   // while the twin lagged; both arrays are now equal.
-  it('net-current SQL allowlist == JS PUBLIC_TOPLEVEL_KEYS', () => {
+  // The title keeps its historical "123" byte for byte: landed packet EM-B3a pins it in requiredSymbols
+  // (tests/scripts/implementationPackets.test.js). The SQL it reads is the NET-CURRENT definition (205 today).
+  it('SQL 123 allowlist == JS PUBLIC_TOPLEVEL_KEYS', () => {
     expect(parseSqlAllowlist(sql).sort()).toEqual([...PUBLIC_TOPLEVEL_KEYS].sort());
   });
 });
