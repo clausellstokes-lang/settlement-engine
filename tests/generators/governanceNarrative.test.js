@@ -176,7 +176,10 @@ describe('governance narrative institutional phrasing', () => {
  */
 const PUBLIC_UNREST = Object.freeze({
   insurgency: 'Unstable (insurgency contests authority)',
-  mass_migration: 'Strained (people arriving or leaving)',
+  // WIRING-W0 (2026-11-07, R-W7 e): re-keyed with its cause — the label names the ONE direction the
+  // record declares (arrivals at birth; 'Strained (people leaving)' on a departures record, pinned in
+  // tests/generators/migrationDirection.test.js), no longer the hedge 'people arriving or leaving'.
+  mass_migration: 'Strained (people arriving)',
   wartime: 'Tense (requisition and conscription)',
   religious_conversion: 'Tense (the creed is contested)',
   slave_revolt: 'Unstable (revolt not contained)',

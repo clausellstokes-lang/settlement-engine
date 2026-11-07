@@ -1367,7 +1367,11 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
     // ⭐ 69 → 76 AT THE SCHEMA-27 RUNG (2026-11-04, LANDING-2b, the chair's ruling 2): the ROSTER
     // grows by three — the crisis cast's temporary person, `temporary`, `temporaryKind` and
     // `crisisIds on npcs` — whose five addresses carry seven reads. MEASURED off this scan.
-    expect(live.explainedWriters.banked).toBe(76);
+    // ⭐ 76 → 77 AT THE SCHEMA-29 RUNG (2026-11-07, WIRING-W0, the chair's ruling of 03:55 UTC):
+    // the ROSTER grows by one — `migrationDirection on config`, the migration direction's config
+    // projection — whose one address (src/domain/migrationDirection.js) carries one read.
+    // MEASURED off this scan.
+    expect(live.explainedWriters.banked).toBe(77);
     expect(Object.entries(corpus.shapes)
       .filter(([, shape]) => shape.keys.includes('source'))
       .map(([name]) => name)).toEqual([
@@ -1436,6 +1440,8 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
       // declared, always.
       // ⭐ THE SCHEMA-23 RUNG'S OTHER DECLARATION: the phantom counterparty's discriminant.
       'kind on settlement',
+      // ⭐ THE SCHEMA-29 RUNG'S ONE (the migration direction's config projection; WIRING-W0).
+      'migrationDirection on config',
       'narrativeSummary on eventLog',
       'neighbourNetwork on settlement',
       'stresses on settlement',
@@ -1629,15 +1635,17 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
       'temporary on npcs': { reads: 3, addresses: 3 },
       'temporaryKind on npcs': { reads: 2, addresses: 1 },
       'crisisIds on npcs': { reads: 2, addresses: 1 },
+      // ⭐ THE SCHEMA-29 ONE: `migrationDirectionOfConfig`'s one read in src/domain/migrationDirection.js.
+      'migrationDirection on config': { reads: 1, addresses: 1 },
     });
 
     // A7 guard mutant: the retired clear-outright behavior loses exactly the
     // bank and therefore cannot satisfy the live count asserted above.
     const bankedIdentities = new Set(live.explainedWriters.bankedIdentities);
     const clearOutright = live.findings.filter((finding) => !bankedIdentities.has(identityOf(finding)));
-    // − 69 from the schema-23 rung, − 76 from the schema-27 rung, moving with the banked figure
-    // pinned above rather than being a second hand-held copy of it.
-    expect(clearOutright).toHaveLength(live.findings.length - 76);
+    // − 69 from the schema-23 rung, − 76 from the schema-27 rung, − 77 from the schema-29 rung,
+    // moving with the banked figure pinned above rather than being a second hand-held copy of it.
+    expect(clearOutright).toHaveLength(live.findings.length - 77);
     expect(inventoryOf(clearOutright)).not.toEqual(liveInventory);
   });
 

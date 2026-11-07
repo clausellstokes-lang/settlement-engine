@@ -208,7 +208,7 @@ registerStep('assembleSettlement', {
     for (const e of entries) {
       if (e && typeof e === 'object'
           && Object.prototype.hasOwnProperty.call(e, 'summaryRoll')) {
-        e.summary = renderStressSummary(e.type, settlement.name, e.summaryRoll);
+        e.summary = renderStressSummary(e.type, settlement.name, e.summaryRoll, e.direction); // WIRING-W0: the entry's own direction
         delete e.summaryRoll;
       }
     }

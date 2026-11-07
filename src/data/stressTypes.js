@@ -7,6 +7,12 @@
 // the src/data purity lint (eslint.config.js) + tests/domain/dataPurity.test.js.
 // De-minified from original minified identifiers.
 
+// WIRING-W0 (2026-11-07, R-W7 e): the mass migration's ONE catalogue note, written once; its two
+// halves (arrivals, departures) are cut from it below rather than restated (WIRING-W0-CLOSE trim).
+const MIGRATION_VIABILITY_NOTE =
+  "Immigration: food balance stressed, labour market disrupted, criminal opportunity elevated. Emigration: tax base shrinking, institutions hollowing, labour shortage emerging.";
+const MIGRATION_NOTE_CUT = MIGRATION_VIABILITY_NOTE.indexOf(" Emigration:");
+
 export const STRESS_TYPE_MAP = {
   under_siege: {
     label: "Under Siege",
@@ -163,8 +169,15 @@ export const STRESS_TYPE_MAP = {
     requiresTier: null,
     crisisHook:
       "The question is not whether things will change, but who will shape the change and what they will want in return.",
-    viabilityNote:
-      "Immigration: food balance stressed, labour market disrupted, criminal opportunity elevated. Emigration: tax base shrinking, institutions hollowing, labour shortage emerging.",
+    viabilityNote: MIGRATION_VIABILITY_NOTE,
+    // WIRING-W0 (2026-11-07, R-W7 e): the catalogue's note above describes the TYPE both ways (the
+    // compendium reads it); a settlement's entry carries the ONE half its own `direction` names
+    // (stressGenerator.js :: buildStressEntry; domain/migrationDirection.js). The halves are the
+    // note's own two parts, cut at " Emigration:", so the strings exist once.
+    viabilityNoteByDirection: {
+      arrivals: MIGRATION_VIABILITY_NOTE.slice(0, MIGRATION_NOTE_CUT),
+      departures: MIGRATION_VIABILITY_NOTE.slice(MIGRATION_NOTE_CUT + 1),
+    },
     historyColour: "demographic",
   },
 };

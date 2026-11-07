@@ -1,0 +1,22 @@
+{
+  "_doc": "ONE IMPORT SHARE, ONE SIGNED SHIFT OF THE CONSTRUCTION-AND-WIRING WAVE'S WRITER LANE W0, ODQ §934.105 (the cloud chair signs by the owner's delegation of 2026-11-06, vetoable; a successor chair does not inherit this signature; the chair's ruling R-W7 (c), docs/chair/2026-11-07/WIRING-RULINGS-2026-11-07.md). THE CAUSE, ONE (commit c99531cf9 on lane/wiring-w0-2026-11-07): foodSecurity.importPct is the one writer of the import share, now the share of the PUBLISHED need that the PUBLISHED ordinary supply carries (the hinterland's carts and the trade channel, importCoverage; the same pounds the food record's grown and magic shares are of), and the food record's normalImportPct reads it; importNote follows it. It was importDependency x 100, a route-capacity figure that disagreed with the record's share on 415 of the golden 525. importDependency stays as the advance loop's import dial (foodLedger), never a printed share. MEASURED over the 525 before the write: 415 disagreements -> 0; red-first tests/generators/w0WriterAgreement.test.js, red at 76febf9b0, green at c99531cf9. THE MOVE, MEASURED before the write at the stage (the tree of c99531cf9 with the door paths carried from the branch, record 01's writes committed; nothing reverse-applied: the step is this one cause, its parent adae99a10 measured at record 01): the generator golden master 415 of 525 rows (thorp 48, hamlet 36, village 72, town 91, city 84, metropolis 84; the key set identical), e7e8a6ff.. -> 1847e8b7..; the espionage fence's driven corpus 241 of 360 rows (thorp 2, hamlet 9, village 54, town 60, city 57, metropolis 59), 360/360 distinct, 1bb9e7a2.. -> 281ca040..; the dossier prose manifest 0 (its suite green at the stage), the herald desk 0 of 435. No new words: importNote's three templates are unchanged; only the figure they carry moves.",
+  "ownerWords": "I also now give all permissions required now and in the future. I also defer all judgement to you. · Deploy after the construction and wiring. · Regarding construction, I only meant for the facts from generation only. Nothing from advance time or simulation as that has to wait until after we build FPZ.",
+  "ownerDate": "2026-11-07",
+  "odqRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation of 2026-11-06 to the cloud chair, session 01FE9mEvGxnFx6WTBkEC6ie9; the construction-and-wiring wave of 2026-11-07, the chair's rulings R-W7)",
+  "cause": "WIRING-W0 cause 4a, R-W7 (c): one import share — foodSecurity.importPct is the writer, of the published pounds, and the food record's normalImportPct reads it (commit c99531cf9)",
+  "seat": "WIRING-W0 (Opus 5.5) under the cloud chair (Fable 5.1), session 01FE9mEvGxnFx6WTBkEC6ie9, from the stage at c99531cf9",
+  "surfaces": [
+    {
+      "surface": "generator-golden-master",
+      "action": "re-record",
+      "predictedRows": 525,
+      "proofForm": "settlement-hash"
+    },
+    {
+      "surface": "espionage-dormancy-fence",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "in-file corpus constant"
+    }
+  ]
+}

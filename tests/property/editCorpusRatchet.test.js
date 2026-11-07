@@ -494,7 +494,11 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // → [699, 63, 1217] PLACE-NOT-TIER (6129c300d) → [699, 63, 1199] TRUTH (ff4448d2e) → [705, 73, 1638] PINS (37b1e746d)
     // → [705, 71, 1688] TRUTH (844acaccc) → [703, 65, 1847] car 3 I7 (6ca454d2b) → [717, 66, 1810] F6 (6d84aa834) →
     // [709, 66, 1810] F1 (5e9ffb220), unmoved to the tip. Uncured, E6 read 1814 from F6 on (the 18 towns' summaries).
-    expect([taken.E1, taken.E5, taken.E6], 'the edits that DO reach a reading').toEqual([709, 66, 1810]);
+    // 2026-11-07 (WIRING-W0, re-keyed BY IDENTITY with its cause; bisected by this arm over the lane's stages): [709, 66, 1810]
+    // held at 76febf9b0 and at cause 1 (343bd4eec) → [709, 66, 1821] at cause 4a, ONE IMPORT SHARE (c99531cf9, record 02:
+    // foodSecurity.importPct is now the share of the published pounds, so E6's re-dealt economy reaches 11 more readings
+    // through it), unmoved by 4b (3d1df12d7) and by cause 5.
+    expect([taken.E1, taken.E5, taken.E6], 'the edits that DO reach a reading').toEqual([709, 66, 1821]);
     // an npc ROLE reached ZERO readings over the whole corpus until CRISIS, recorded so the figure is not silence.
     // 2026-11-05 (LANDING-6, the same bisection): 0 → 48 CRISIS (d3e072368: the crisis record carries its derived cast,
     // and the cast is chosen by role) → 63 SELF-VOUCH (0be13b5cb) → 32 car 3 (90dc22f18) → 24 PINS (37b1e746d) → 28 F6

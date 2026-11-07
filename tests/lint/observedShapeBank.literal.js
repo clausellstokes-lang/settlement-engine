@@ -36,8 +36,8 @@
  * figures live here.
  */
 export const OBSERVED_SHAPE_BANK_LITERAL = Object.freeze({
-  reads: 76,
-  addresses: 50,
+  reads: 77,
+  addresses: 51,
   // Keyed BY THE ROSTER (EXPLAINED_WRITER_EXEMPTIONS). A declaration that banks nothing is
   // written 0/0 rather than omitted — "declared and unexercised" and "retired" are
   // different facts, and the walker refuses a map whose keys are not the roster.
@@ -65,5 +65,8 @@ export const OBSERVED_SHAPE_BANK_LITERAL = Object.freeze({
     'temporary on npcs': Object.freeze({ reads: 3, addresses: 3 }),
     'temporaryKind on npcs': Object.freeze({ reads: 2, addresses: 1 }),
     'crisisIds on npcs': Object.freeze({ reads: 2, addresses: 1 }),
+    // ⭐ THE SCHEMA-29 RUNG'S ONE (the migration direction's config projection; WIRING-W0, the
+    // chair's ruling of 2026-11-07 03:55 UTC): the one accessor in src/domain/migrationDirection.js.
+    'migrationDirection on config': Object.freeze({ reads: 1, addresses: 1 }),
   }),
 });

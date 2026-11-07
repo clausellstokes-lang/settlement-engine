@@ -101,11 +101,12 @@ import {
   RETIRED_ADVISORY_LOCKFILE_BASELINE_SCHEMA,
   RETIRED_FED_WORLD_BASELINE_SCHEMA,
   RETIRED_WINDOW_RUNG1_BASELINE_SCHEMA,
+  RETIRED_TIER_COVERAGE_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA,
   RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
-  validateSchema28Baseline,
+  validateSchema29Baseline,
 } from './lib/observed-shape-baseline.mjs';
 import {
   parseExactFlags,
@@ -220,7 +221,13 @@ const BASELINE = join(ROOT, 'scripts/.observed-shape-readers-baseline.json');
  *     cut) left producer 2's pulse no tier candidate, so the corpus builder gains producer 2b
  *     (its own one-save pulse over `osr-tier-14`, a town generated over the city cut; a bounded
  *     view of its tier candidates, roots only) and the seven eroded identities are observed again.
- *     Verdict-only like 25: it moves NO row. THE LIVE AUTHORITY.
+ *     Verdict-only like 25: it moves NO row (RETIRED).
+ * 29 = schema 28's topology, tag law, corpus and register, re-governed to THE MIGRATION-DIRECTION
+ *     DECLARATION (the chair's ruling of 2026-11-07 03:55 UTC, ODQ §934.105, on lane WIRING-W0):
+ *     ONE declaration of the fifth class, `migrationDirection on config` (writer
+ *     generators/steps/stressConfirmPass.js; no corpus world draws a `mass_migration`, so the
+ *     projection's writer never runs in the corpus); the roster 13 -> 14, the bank 76/50 -> 77/51,
+ *     and the one new row (src/domain/migrationDirection.js x1) admitted TAGGED. THE LIVE AUTHORITY.
  * ⚠ THIS LIST WENT STALE FOR EIGHT RUNGS — it marked 10 as "THE LIVE AUTHORITY" while
  *   the number stood at 18 — so it is filled in here rather than extended by one. Each
  *   rung's full rationale lives beside its own target constant in
@@ -244,6 +251,7 @@ export {
   RETIRED_ADVISORY_LOCKFILE_BASELINE_SCHEMA,
   RETIRED_FED_WORLD_BASELINE_SCHEMA,
   RETIRED_WINDOW_RUNG1_BASELINE_SCHEMA,
+  RETIRED_TIER_COVERAGE_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA, RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
@@ -1418,6 +1426,28 @@ export const EXPLAINED_WRITER_EXEMPTIONS = Object.freeze([
       + ' crisis the temporary person serves, on the vacant-lever branch the corpus never'
       + ' takes; read twice by crisisLifecycle.js, which drops the person when its crises end.',
   }),
+  // ⭐⭐ THE SCHEMA-29 RUNG'S ONE DECLARATION — the migration direction's config projection (lane
+  // WIRING-W0, R-W7 (e); docs/WIRING_W0_2026-11-07.md), under the chair's ruling of 2026-11-07
+  // 03:55 UTC (ODQ §934.105). The FIFTH class, the `isCriminal` and crisis-cast precedent: the
+  // corpus RUNS stressConfirmPass and still never sees the key, because the projection is stamped
+  // only when a `mass_migration` entry survives the confirm pass, and MEASURED at 4f7ac80a9 no
+  // corpus world draws one — the read has no observed writer by construction, not by defect.
+  // ⚠ GATE 0 WAS BLIND TO THE WRITER AS FIRST SPELLED (`effectiveConfig.migrationDirection = …`,
+  // the member assignment that kept `_userEdits on stress` ordinary at schema 27), so the writer
+  // was re-spelled, behaviour-identical, as `Object.assign(effectiveConfig, { migrationDirection })`
+  // and the probe now sees the real write (shorthand). Gate 1 is a triage obligation only: one
+  // commit (343bd4eec) touches `migrationDirection:` in src/ — narrativeGenerator.js's context
+  // literal, the same lane's — so an authored-input story is not refuted, and none is claimed.
+  Object.freeze({
+    identity: 'migrationDirection on config',
+    mechanism: 'conditional-generator-branch',
+    writer: 'src/generators/steps/stressConfirmPass.js',
+    ruling: 'WIRING-W0 — the chair\'s ruling of 2026-11-07 03:55 UTC (ODQ §934.105)',
+    why: 'The confirm pass stamps the config projection (from stress[].direction, written at the'
+      + ' draw) only when a mass_migration entry survives; no corpus world draws a mass_migration,'
+      + ' so the writer never runs in the corpus and the read has no observed writer by'
+      + ' construction, not by defect. Read once by src/domain/migrationDirection.js.',
+  }),
 ]);
 
 /** The mechanisms an entry may claim. TOTAL positive predicate: an unlisted
@@ -1533,7 +1563,7 @@ export function assertExplainedWriterRowTags(
   baseline,
   entries = EXPLAINED_WRITER_EXEMPTIONS,
 ) {
-  validateSchema28Baseline(baseline);
+  validateSchema29Baseline(baseline);
   assertExplainedWriterExemptions(entries);
   const declarations = new Map(entries.map((entry) => [entry.identity, entry]));
   const genesis = baseline.frozenAtSha === baseline.migrationReview.subjectSha;
@@ -3014,7 +3044,7 @@ export function baselineOf({
       'untouched) brings both shapes back and creates nothing new. The crisis cast\'s temporary person',
       'is DECLARED (`temporary`, `temporaryKind`, `crisisIds on npcs`; the fifth class), and the',
       'window\'s other new and grown rows are ADMITTED as ordinary debt under attributed review notes.',
-      'SCHEMA 28 = schema 27\'s topology, tag law, thirteen-identity roster and register, ALL UNCHANGED,',
+      'SCHEMA 28 (RETIRED) held schema 27\'s topology, tag law, thirteen-identity roster and register, ALL UNCHANGED,',
       're-governed to THE TIER-CHANGE COVERAGE PASS (the chair\'s corpus-coverage ruling of 2026-11-06,',
       'the militia precedent). LANDING-7 lane B\'s R-B1 (2168ffdba) made the promotion window read the',
       'next tier\'s stamp cut; producer 2\'s populations never move within twelve intervals, so its pulse',
@@ -3024,7 +3054,14 @@ export function baselineOf({
       'own one-save pulse over `osr-tier-14`, a town generated over the city cut that the stamp law',
       'promotes at interval 5, entering roots only as a bounded view of its tier candidates. The live',
       'scan reproduces the schema-27 register: the reconciliation is EMPTY, so no row moves.',
-      'Of the thirteen declared bank entries TWELVE bank reads today; `isCriminal on incomeSources`',
+      'SCHEMA 29 = schema 28\'s topology, tag law, corpus and register, re-governed to THE MIGRATION-',
+      'DIRECTION DECLARATION (the chair\'s ruling of 2026-11-07 03:55 UTC, ODQ §934.105, lane WIRING-W0).',
+      'R-W7 (e) declared a mass migration\'s direction once, on `stress[].direction`, and projects it onto',
+      'the resolved config in steps/stressConfirmPass.js for the readers that hold only the config; the',
+      'one guarded read of that projection (src/domain/migrationDirection.js) has no observed writer,',
+      'because no corpus world draws a `mass_migration`. The fifth class explains it: ONE declaration,',
+      '`migrationDirection on config`, the roster 13 -> 14; the one new row is admitted TAGGED.',
+      'Of the fourteen declared bank entries THIRTEEN bank reads today; `isCriminal on incomeSources`',
       'has banked nothing since schema 17 made its writer observable, and banked is always a',
       `subset of declared. This envelope banks ${bankPhrase(bankOf(inventory, rowTags))}.`,
       'The byte-frozen detector is unchanged; its output is narrowed by THREE clearing filters —',
@@ -3034,7 +3071,7 @@ export function baselineOf({
       'An untagged row means: a guarded read, of a real record rather than browser or language surface,',
       'of a key no writer the corpus runs produces and no declared out-of-corpus writer explains.',
       'A tagged row stays visible as governed explained-writer debt under its numeric ceiling and reason.',
-      'Schemas 4–27 are the RETIRED numeric predecessors.',
+      'Schemas 4–28 are the RETIRED numeric predecessors.',
     ],
     schema: BASELINE_SCHEMA,
     frozen: new Date().toISOString().slice(0, 10),
@@ -3208,7 +3245,7 @@ export async function run(argv = [], overrides = {}) {
     createScanArtifact,
     validateScanArtifact,
     assertFindingSourceEvidence,
-    validateBaseline: validateSchema28Baseline,
+    validateBaseline: validateSchema29Baseline,
     // ⭐ THE BANK FENCE'S TWO HAND-OWNED SIDES, overridable so the sentinel can drive
     // every refusal: the literal module and the migration script's declared post-bank.
     readBankLiteral: readBankLiteralModule,

@@ -3,6 +3,7 @@
  */
 
 import { SEVERITY, tierAtLeast } from '../../data/constants.js';
+import { migrationDirectionOfConfig } from '../../domain/migrationDirection.js';
 import { FOOD_SECURITY_CUTS, foodSecurityBandKeyOf } from '../../data/bandLadders.js';
 import { FOOD_IMPORT_RATES, SIEGE_PRODUCTION_KEPT } from '../../data/foodImportRates.js';
 import {
@@ -85,7 +86,7 @@ const FAILED_SOURCE_WORDS = Object.freeze({ grain: 'grain harvest', livestock: '
  * the situation sentence, the economy line's surplus words, the Foundations food row, and —
  * through the field names below — the Defense stores row (`storageMonths`).
  * Pure: a function of its numbers only.
- * @param {{ dailyNeed: number, dailyProduction: number, importCoverage?: number, magicOffset?: number,
+ * @param {{ dailyNeed: number, dailyProduction: number, importCoverage?: number, normalImportPct?: number, magicOffset?: number,
  *   deficitPct: number, surplusPct: number, stressFamine: boolean, storageMonths: number, hasGranary: boolean,
  *   foodSources?: Array<'grain'|'livestock'|'fish'|'mill'|'game'>, failedSource?: 'grain'|'livestock'|'fish'|'mill'|'game'|null,
  *   famineCutPct?: number, foodwaysLine?: string }} input
@@ -97,7 +98,9 @@ export function deriveFoodRecord(input) {
   const pctOfNeed = (lb) => (need > 0 ? Math.round((Math.max(0, Number(lb) || 0) / need) * 100) : 0);
   return {
     grownPct: pctOfNeed(input.dailyProduction),
-    normalImportPct: pctOfNeed(input.importCoverage),
+    // ONE IMPORT SHARE (WIRING-W0 cause 4a, R-W7 c): the writer's `foodSecurity.importPct`, read; a direct
+    // caller without it gets the same share of the same pounds.
+    normalImportPct: Number.isFinite(input.normalImportPct) ? Number(input.normalImportPct) : pctOfNeed(input.importCoverage),
     magicPct: pctOfNeed(input.magicOffset),
     gapPct: Math.round(input.deficitPct),
     surplusPct: Math.round(input.surplusPct),
@@ -227,7 +230,8 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
     productionMult *= 0.8;
     stressNotes.push('Slave revolt: labour-dependent production is disrupted and outlying fields lie idle.');
   }
-  if (stresses.includes('mass_migration')) {
+  // WIRING-W0 (R-W7 e): more mouths only where the record declares ARRIVALS (domain/migrationDirection.js).
+  if (stresses.includes('mass_migration') && migrationDirectionOfConfig(config) !== 'departures') {
     consumptionMult *= 1.15;
     stressNotes.push('Mass migration: an influx of newcomers stresses the food balance beyond normal needs.');
   }

@@ -22,6 +22,7 @@ import {
   FED_WORLD_TARGET_SCHEMA,
   WINDOW_RUNG1_TARGET_SCHEMA,
   TIER_COVERAGE_TARGET_SCHEMA,
+  MIGRATION_DIRECTION_TARGET_SCHEMA,
   declaredBankOf,
   DEAD_DEPENDENCY_TARGET_SCHEMA,
   PRESET_LIGHT_TARGET_SCHEMA,
@@ -1184,7 +1185,8 @@ describe('observed-shape schema-2 -> schema-4 heuristic migration', () => {
       // ⭐ AND AGAIN AT THE FED-WORLD RUNG: 26 takes a schema-25 predecessor.
       // ⭐ AND AGAIN AT THE RUNG-1-WINDOW RUNG: 27 takes a schema-26 predecessor.
       // ⭐ AND AGAIN AT THE TIER-COVERAGE RUNG: 28 takes a schema-27 predecessor.
-      ])).toThrow(/predecessor baseline must be a schema-27 object/);
+      // ⭐ AND AGAIN AT THE MIGRATION-DIRECTION RUNG: 29 takes a schema-28 predecessor.
+      ])).toThrow(/predecessor baseline must be a schema-28 object/);
       // …and the RETIRED live target of the previous mint is still reachable by
       // name, still refusing the same schema-2 predecessor for its own reason.
       expect(() => runMigration([
@@ -1228,10 +1230,12 @@ describe('observed-shape schema-2 -> schema-4 heuristic migration', () => {
       // ⭐ AND UP AGAIN AT THE RUNG-1-WINDOW RUNG: 27 became a defined rung on 2026-11-04,
       // so the probe moved to 28 and the message named 27 as the live leaf.
       // ⭐ AND UP AGAIN AT THE TIER-COVERAGE RUNG: 28 became a defined rung on 2026-11-06,
-      // so the probe moves to 29 and the message names 28 as the live leaf.
+      // so the probe moved to 29 and the message named 28 as the live leaf.
+      // ⭐ AND UP AGAIN AT THE MIGRATION-DIRECTION RUNG: 29 became a defined rung on 2026-11-07,
+      // so the probe moves to 30 and the message names 29 as the live leaf.
       expect(() => runMigration([
-        `--predecessor=${predecessorPath}`, `--legacy=${legacyPath}`, '--target-schema=29',
-      ])).toThrow(/--target-schema must be 28/);
+        `--predecessor=${predecessorPath}`, `--legacy=${legacyPath}`, '--target-schema=30',
+      ])).toThrow(/--target-schema must be 29/);
       expect(() => runMigration([`--predecessor=${predecessorPath}`, '--target-schema=3']))
         .toThrow(/usage:/);
     } finally {
@@ -1293,7 +1297,9 @@ describe('observed-shape schema-2 -> schema-4 heuristic migration', () => {
     expect(FED_WORLD_TARGET_SCHEMA).toBe(26);
     // ⚠ 27 IS NOW A RETIRED TARGET AND KEEPS ITS NUMBER, by the same law as 8 above.
     expect(WINDOW_RUNG1_TARGET_SCHEMA).toBe(27);
+    // ⚠ 28 IS NOW A RETIRED TARGET AND KEEPS ITS NUMBER, by the same law as 8 above.
     expect(TIER_COVERAGE_TARGET_SCHEMA).toBe(28);
+    expect(MIGRATION_DIRECTION_TARGET_SCHEMA).toBe(29);
     // ⭐ FROM 19 ONWARD A RUNG DECLARES ITS POST-BANK AS DATA, and the checker's write
     // refuses a migration whose measured bank disagrees (`assertBankTwins`). 19's figure
     // is read off the register `fe021a487` froze; 20 moves no row and declares the same.
@@ -1332,6 +1338,9 @@ describe('observed-shape schema-2 -> schema-4 heuristic migration', () => {
     expect(declaredBankOf(WINDOW_RUNG1_TARGET_SCHEMA)).toEqual({ bankedReads: 76, taggedRows: 50 });
     // ⭐ 28 MOVES NO ROW (a verdict-only coverage rung), so the pair cannot move.
     expect(declaredBankOf(TIER_COVERAGE_TARGET_SCHEMA)).toEqual({ bankedReads: 76, taggedRows: 50 });
+    // ⭐ 29 DECLARES ONE IDENTITY (the migration direction's config projection) whose one live address
+    // carries one read, so the pair moves 76/50 -> 77/51. MEASURED off the live scan at the subject.
+    expect(declaredBankOf(MIGRATION_DIRECTION_TARGET_SCHEMA)).toEqual({ bankedReads: 77, taggedRows: 51 });
     expect(declaredBankOf(LINEAGE_REANCHOR_TARGET_SCHEMA)).toBeNull();
     expect(Object.isFrozen(declaredBankOf(BANK_FENCE_TARGET_SCHEMA))).toBe(true);
     expect(Object.isFrozen(declaredBankOf(RELATIONSHIPS_MOUNT_TARGET_SCHEMA))).toBe(true);
@@ -1342,6 +1351,7 @@ describe('observed-shape schema-2 -> schema-4 heuristic migration', () => {
     expect(Object.isFrozen(declaredBankOf(FED_WORLD_TARGET_SCHEMA))).toBe(true);
     expect(Object.isFrozen(declaredBankOf(WINDOW_RUNG1_TARGET_SCHEMA))).toBe(true);
     expect(Object.isFrozen(declaredBankOf(TIER_COVERAGE_TARGET_SCHEMA))).toBe(true);
+    expect(Object.isFrozen(declaredBankOf(MIGRATION_DIRECTION_TARGET_SCHEMA))).toBe(true);
     // ⚠⚠ THE CHAIN IS SINGLE-STEP, PINNED AS AN EXACT TABLE. A skipped rung —
     // 2 → 6, which would re-bank a two-mints-old inventory as if four filters
     // had run — is not expressible, because no such pairing exists.
@@ -1389,6 +1399,8 @@ describe('observed-shape schema-2 -> schema-4 heuristic migration', () => {
       27: 26,
       // ⭐ 28 -> 27, the tier-coverage rung. The chain stays SINGLE-STEP: 28 pairs only with 27.
       28: 27,
+      // ⭐ 29 -> 28, the migration-direction rung. The chain stays SINGLE-STEP: 29 pairs only with 28.
+      29: 28,
     });
     // The kind is DERIVED from the table, so a target can never name a migration
     // it did not perform.
@@ -1422,13 +1434,13 @@ describe('observed-shape schema-2 -> schema-4 heuristic migration', () => {
     // schema 10 became live. A probe left pointing at a number the table has
     // since adopted stops proving the predicate is total and starts proving
     // nothing at all, while still passing for the wrong reason.
-    expect(() => heuristicMigrationReport(fixture.predecessor, fixture.legacy, text, 29))
-      .toThrow(/leaf migration target must be 4 or 5 or 6 or 7 or 8 or 9 or 10 or 11 or 12 or 13 or 14 or 15 or 16 or 17 or 18 or 19 or 20 or 21 or 22 or 23 or 24 or 25 or 26 or 27 or 28;/);
+    expect(() => heuristicMigrationReport(fixture.predecessor, fixture.legacy, text, 30))
+      .toThrow(/leaf migration target must be 4 or 5 or 6 or 7 or 8 or 9 or 10 or 11 or 12 or 13 or 14 or 15 or 16 or 17 or 18 or 19 or 20 or 21 or 22 or 23 or 24 or 25 or 26 or 27 or 28 or 29;/);
     // ⚠ AND OMITTING IT IS THE SAME REFUSAL, WHICH IS WHY THERE IS NO DEFAULT:
     // a defaulted target is the one input in this chain a caller could get wrong
     // silently, and it would decide which migration ran.
     expect(() => heuristicMigrationReport(fixture.predecessor, fixture.legacy, text))
-      .toThrow(/leaf migration target must be 4 or 5 or 6 or 7 or 8 or 9 or 10 or 11 or 12 or 13 or 14 or 15 or 16 or 17 or 18 or 19 or 20 or 21 or 22 or 23 or 24 or 25 or 26 or 27 or 28;/);
+      .toThrow(/leaf migration target must be 4 or 5 or 6 or 7 or 8 or 9 or 10 or 11 or 12 or 13 or 14 or 15 or 16 or 17 or 18 or 19 or 20 or 21 or 22 or 23 or 24 or 25 or 26 or 27 or 28 or 29;/);
 
     // A6 positive arm: one valid schema-6 envelope can advance exactly one rung
     // to 7, retaining the numeric inventory alphabet and reconciliation ledger.

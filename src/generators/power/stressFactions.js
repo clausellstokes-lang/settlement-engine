@@ -6,6 +6,7 @@
 import { random as _rng } from '../../kernel/rngContext.js';
 import { getInstFlags } from '../helpers.js'; import { defenseFactsOf, forceWordsOf } from '../../domain/defense/defenseFacts.js'; // F1: one line, so no cited line moves
 import { FACTION_DESCRIPTORS, FACTION_DESCRIPTORS_EXTRA } from '../../data/powerData.js';
+import { migrationDirectionOfConfig } from '../../domain/migrationDirection.js'; // WIRING-W0 (R-W7 e)
 
 /** A roster name compared loosely: case and a leading article set aside. */
 const nameKey = (name) => String(name || '').trim().toLowerCase().replace(/^the\s+/, '');
@@ -243,8 +244,11 @@ export const applyStressEventFactions = (factions, ke, P, S, config, institution
       })(),
     ke('mass_migration') &&
       (function () {
-        ((typeof getInstFlags == 'function' ? getInstFlags(config || {}, institutions || []) : {}).economyOutput ||
-          50) >= 50
+        // WIRING-W0 (2026-11-07, R-W7 e): the newcomers' faction or the departure committee follows the
+        // direction the record declares (domain/migrationDirection.js), no longer its own
+        // `getInstFlags(...).economyOutput >= 50` test, which told a departure committee beside a crisis
+        // card of arrivals wherever the institution economy scored under 50.
+        migrationDirectionOfConfig(config) !== 'departures'
           ? (factions.push({
               faction: "Newcomers' Settlement",
               power: 12,

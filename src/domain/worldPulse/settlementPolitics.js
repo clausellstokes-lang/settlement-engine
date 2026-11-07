@@ -987,8 +987,9 @@ export function advanceSettlementPolitics({ snapshot, worldState, rng = null, ti
     }
 
     if (blocs.length) {
-      // Strip the internal leaderNpcIds bookkeeping key order stays stable; codepoint-
-      // sort blocs by id for byte-stable serialization.
+      // Codepoint-sort blocs by id for byte-stable serialization. Each bloc KEEPS its leaderNpcIds snapshot: the next
+      // tick reads it (the succession check above, `prevLeaders`) to fracture a people-held bloc whose leader left.
+      // (WIRING-W0, 2026-11-07: this comment once promised a strip that, made code, would end succession defection.)
       nextLedgers[cid] = { blocs: blocs.sort((x, y) => compareCodepoint(x.id, y.id)) };
     }
   }

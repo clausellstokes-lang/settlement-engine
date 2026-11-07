@@ -1080,6 +1080,20 @@ describe('writer-with-no-reader ratchet: the MUTANTS', () => {
     expect(refused).toContain('nothing to ratchet against');
     expect(scansRun, 'a refusing door must not spend a scan').toBe(before);
   });
+
+  test('THE --report-to DOOR PUBLISHES: the report lands, whole, at a scratch path outside the repository', async () => {
+    // WIRING-W0 (2026-11-07, the chair's R-W7 (g)): the door handed publishJsonExclusive the PLAN ARRAY that
+    // planExternalArtifactOutputs returns (one plan per output), so every --report-to refused with "governed
+    // publication requires a plan returned by planExternalArtifactOutputs" and no report ever landed. One output,
+    // one plan: plan[0]. Driven here on the walker's own measurement, so it spends no scan.
+    const before = scansRun;
+    const target = join(mkdtempSync(join(tmpdir(), 'wrw-report-to-')), 'writer-reach-report.json');
+    const result = await run([`--report-to=${target}`], { root: ROOT, log: () => {}, measured: live });
+    const published = JSON.parse(readFileSync(target, 'utf8'));
+    expect(published).toEqual(JSON.parse(JSON.stringify(result.report)));
+    expect(published.population.judged).toBe(liveReport.population.judged);
+    expect(scansRun, 'the door drove the walker\'s own measurement').toBe(before);
+  });
 });
 
 describe('writer-with-no-reader ratchet: the lit-dial arm', () => {

@@ -793,7 +793,8 @@ export const generateCrimeLevel = (npc, npcIndex, summary, allNpcs, held = null)
 
   // 45% chance: stress-driven institutional secret
   // F3 FOOD-WORDS: a secret that says people are starving only where the food record goes hungry
-  const stressEffects = secretsHeldByFoodRecord((summary.stressTypes || (stressType ? [stressType] : [])).flatMap(s => STRESS_INSTITUTION_EFFECTS[s] || []), summary.foodRecord);
+  // WIRING-W0 (R-W7 e): a secret tagged with a migration direction is drawn only where the record declares that direction
+  const stressEffects = secretsHeldByFoodRecord((summary.stressTypes || (stressType ? [stressType] : [])).flatMap(s => STRESS_INSTITUTION_EFFECTS[s] || []).filter(e => !e.direction || e.direction === (summary.migrationDirection || 'arrivals')), summary.foodRecord);
   if (stressEffects.length > 0 && random01(0.45)) {
     const otherNpc = allNpcs.filter((_, idx) => idx !== npcIndex)[0];
     const effect = drawRefusingHeld(stressEffects, held, (e) => replaceTokens(e.secret, { faction: topFaction, commodity, npc: otherNpc?.name || 'someone' }));

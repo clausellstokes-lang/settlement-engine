@@ -52,11 +52,13 @@ export function rollStressSummary(type, { rng } = {}) {
  * @param {string} type - key from STRESS_TYPE_MAP
  * @param {string} [name] - the real settlement name (empty/undefined at roll time)
  * @param {?Object} [roll] - token from rollStressSummary (only wartime uses it)
+ * @param {'arrivals'|'departures'} [direction] - the entry's own `direction` (mass_migration only;
+ *   WIRING-W0, domain/migrationDirection.js); absent reads as arrivals, the §934.101 default
  * @returns {string|undefined}
  */
-export function renderStressSummary(type, name, roll) {
+export function renderStressSummary(type, name, roll, direction) {
   const fn = RENDERERS[type];
-  return fn ? fn(name, roll) : undefined;
+  return fn ? fn(name, roll, direction) : undefined;
 }
 
 /**
@@ -159,8 +161,17 @@ const RENDERERS = {
   // and NEVER evaluated. data-schema.6: the dead getInstFlags branch is removed AND
   // the never-reached rng term is dropped, so `d` is always true. This preserves both
   // the rendered text AND the rng draw count (the old `_rng()` never ran here).
-  mass_migration: (name) => {
+  // WIRING-W0 (2026-11-07, R-W7 e): the text reads the entry's declared direction, never a score.
+  // Arrivals is the one direction a drawn migration carries at birth; the departures text is for a
+  // record that declares one (an authored entry, the campaign's ledger re-derive).
+  mass_migration: (name, _roll, direction) => {
     const l = name || "The settlement";
+    if (direction === "departures") {
+      return (
+        l +
+        " is losing people faster than it can replace them. Households leave by the season, and those who go are the ones who could afford to. Fields, shops and offices are worked by fewer hands than they were built for."
+      );
+    }
     return (
       l +
       " is receiving more people than its infrastructure was built for. New arrivals come faster than housing, food, and employment can absorb them. The old residents and the new ones are not yet the same community."

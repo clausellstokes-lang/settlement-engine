@@ -7,7 +7,18 @@
  *
  * ── ⭐⭐ EIGHT IDENTITY DEFINITIONS LIVE HERE, AND ONLY ONE IS THE AUTHORITY ──
  *
- * `BASELINE_SCHEMA` is **28**: schema 27's tagged numeric heuristic-leaf envelope, tag law,
+ * `BASELINE_SCHEMA` is **29**: schema 28's tagged numeric heuristic-leaf envelope, tag law, corpus
+ * and register, re-governed to THE MIGRATION-DIRECTION DECLARATION (the chair's ruling of
+ * 2026-11-07 03:55 UTC, ODQ §934.105, on lane WIRING-W0). R-W7 (e) declared a mass migration's
+ * direction once, on `stress[].direction`, and projects it onto the resolved config in
+ * `generators/steps/stressConfirmPass.js`; the one guarded read of that projection
+ * (`src/domain/migrationDirection.js`) has no observed writer because no corpus world draws a
+ * `mass_migration`. ONE declaration of the fifth class (`migrationDirection on config`), the
+ * roster 13 -> 14, the bank 76/50 -> 77/51; the one new row is admitted tagged and nothing else
+ * moves. Its full rationale lives beside `MIGRATION_DIRECTION_TARGET_SCHEMA` in
+ * `migrate-observed-shape-readers.mjs`.
+ *
+ * `RETIRED_TIER_COVERAGE_BASELINE_SCHEMA` is **28**: schema 27's tagged numeric heuristic-leaf envelope, tag law,
  * thirteen-identity roster and register ALL UNCHANGED, re-governed to THE TIER-CHANGE COVERAGE
  * PASS (the chair's corpus-coverage ruling of 2026-11-06 on LANDING-8's record, the militia
  * precedent). LANDING-7 lane B's R-B1 (2168ffdba) made the promotion window read the next tier's
@@ -452,7 +463,13 @@ export const RETIRED_FED_WORLD_BASELINE_SCHEMA = 26;
  *  a live baseline is validated against BASELINE_SCHEMA, and this constant exists so a schema-27
  *  PREDECESSOR is still validated as schema 27 after the live number moves past it. */
 export const RETIRED_WINDOW_RUNG1_BASELINE_SCHEMA = 27;
-export const BASELINE_SCHEMA = 28;
+/** The RETIRED tier-coverage definition — schema 29's predecessor. Same tagged topology
+ *  envelope, theta, corpus and fence; schema 29 re-governs it to one more declared identity
+ *  (`migrationDirection on config`) and that identity's one row. Never redefined, never deleted —
+ *  a live baseline is validated against BASELINE_SCHEMA, and this constant exists so a schema-28
+ *  PREDECESSOR is still validated as schema 28 after the live number moves past it. */
+export const RETIRED_TIER_COVERAGE_BASELINE_SCHEMA = 28;
+export const BASELINE_SCHEMA = 29;
 /** The RETIRED exact per-site definition. Never redefined, never deleted. */
 export const RETIRED_EXACT_BASELINE_SCHEMA = 3;
 /** The RETIRED UNFILTERED heuristic-leaf definition — schema 5's predecessor.
@@ -1115,10 +1132,21 @@ export function validateSchema27Baseline(baseline) {
   );
 }
 
+/** The RETIRED authority — schema 28's tagged envelope, re-governed by schema 29 to the
+ *  migration-direction declaration. Re-bound to its own LITERAL now that the authority has moved
+ *  to 29, for the same reason as every retired validator above. */
+export function validateSchema28Baseline(baseline) {
+  return validateLeafBaseline(
+    baseline,
+    RETIRED_TIER_COVERAGE_BASELINE_SCHEMA,
+    { tagged: true },
+  );
+}
+
 /** The LIVE envelope validator. Bound to `BASELINE_SCHEMA` rather than a literal,
  *  so the retired rungs above keep validating their own numbers while this one
  *  always names the authority. */
-export function validateSchema28Baseline(baseline) {
+export function validateSchema29Baseline(baseline) {
   return validateLeafBaseline(baseline, BASELINE_SCHEMA, { tagged: true });
 }
 

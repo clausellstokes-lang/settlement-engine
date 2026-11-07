@@ -1009,37 +1009,37 @@
   },
   {
     "path": "src/generators/steps/stressConfirmPass.js",
-    "line": 126,
+    "line": 127,
     "category": "floatInterpolation",
     "snippet": "`${suppressors.join(', ')} reduce${suppressors.length === 1 ? 's' : ''} the odds of \"${type}\" (×${ratio.toFixed(2)} vs the roster-blind roll): the re-weighted roll dropped it.`"
   },
   {
     "path": "src/generators/steps/stressConfirmPass.js",
-    "line": 126,
+    "line": 127,
     "category": "multiplier",
     "snippet": "`${suppressors.join(', ')} reduce${suppressors.length === 1 ? 's' : ''} the odds of \"${type}\" (×${ratio.toFixed(2)} vs the roster-blind roll): the re-weighted roll dropped it.`"
   },
   {
     "path": "src/generators/steps/stressConfirmPass.js",
-    "line": 126,
+    "line": 127,
     "category": "twoDecimalScore",
     "snippet": "`${suppressors.join(', ')} reduce${suppressors.length === 1 ? 's' : ''} the odds of \"${type}\" (×${ratio.toFixed(2)} vs the roster-blind roll): the re-weighted roll dropped it.`"
   },
   {
     "path": "src/generators/steps/stressConfirmPass.js",
-    "line": 127,
+    "line": 128,
     "category": "floatInterpolation",
     "snippet": "`The settlement's institutions reduce the odds of \"${type}\" (×${ratio.toFixed(2)} vs the roster-blind roll): the re-weighted roll dropped it.`"
   },
   {
     "path": "src/generators/steps/stressConfirmPass.js",
-    "line": 127,
+    "line": 128,
     "category": "multiplier",
     "snippet": "`The settlement's institutions reduce the odds of \"${type}\" (×${ratio.toFixed(2)} vs the roster-blind roll): the re-weighted roll dropped it.`"
   },
   {
     "path": "src/generators/steps/stressConfirmPass.js",
-    "line": 127,
+    "line": 128,
     "category": "twoDecimalScore",
     "snippet": "`The settlement's institutions reduce the odds of \"${type}\" (×${ratio.toFixed(2)} vs the roster-blind roll): the re-weighted roll dropped it.`"
   },

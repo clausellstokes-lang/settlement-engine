@@ -112,16 +112,16 @@ const FIXED = Object.freeze([0, 21, 42]);
  */
 const PRE_CHANGE = Object.freeze({
   0: Object.freeze({
-    derived: '93cf79d258df160c71f84512bf9769a9510f4e5c25ada5ffc25c1c26b64dd3bf',
-    replay: '468d7c2a0ee2cbd9106f767027b9756b0b65c5b86bf2cab48b8c36d515a70333',
+    derived: '83931c801bf6fdef88312ee65d87ae2b2170f01d359f62916c88ec522f269435',
+    replay: '8601f7e290399af0e17d78e8fc1940f36453fcef933c75abbf116906dd68fe1d',
   }),
   21: Object.freeze({
-    derived: '0dfd25bc67d146684b685d585b162936ea90ca3144d960deac86985ac97679c0',
-    replay: '44d813b2a2fc9f16c6d4b7a00ad81c476080bb1fe476327e87b5aa0d8941a7cd',
+    derived: '27d3461765dbf71f03b18c0ecae8b54b1437ffec1c0cc7a7707fbdd5e4a6cea0',
+    replay: 'e812b50cbf7e9e6453eec63414efafa1f84db5798aecfc5536c3f114e32e94ae',
   }),
   42: Object.freeze({
-    derived: '68d98fa01de5d341d10b35c20a83aa7eaa4ba6e4988dcc222c355a91b0f3f15c',
-    replay: 'f47ae41ccb25b361374d79aa88159f8892a974334d910eb233aeae865f2c7b6a',
+    derived: '0a603fcd7feccbd0e94124ddbe69897f99dd9fe5b478315ee2904f761abdd71f',
+    replay: 'f58ff611715a1d2e1607cbda52122d21b21050436d3907fa960c464dd969b258',
   }),
 });
 // ── RE-CAPTURED 2026-10-01, the urban band (ODQ §934.86), BY THE SAME PLANT AND NEVER FROM THE LIVE STEP ALONE ─────
@@ -199,6 +199,15 @@ describe('EM-B2b2 — the DM\'s nearby-resources word survives resolveResources'
 // worktree, never this checkout), and the planted step and the live step produced the SAME six digests, so EM-B2b2
 // still moves no byte of the no-edit path; on every row the fresh generation equals the dormant re-derivation. Row 21's
 // `derived` (0dfd25bc) is the landed golden's control row.
+
+// ── RE-CAPTURED 2026-11-07, the wiring wave's writer lane W0 (ODQ §934.105, R-W7), BY THE SAME PLANT ─────────────────
+// All six digests moved with the lane's records 02-05 (one import share, one food-source count, the legacy annotations
+// dated at birth and the date in one home; record 01 moves none of the three rows, which draw no migration). Row 21's
+// `derived` is the golden control row, traced record by record in generationForkCensus.test.js (0dfd25bc -> 27d34617);
+// rows 0 and 42 measured at the lane tip. Re-captured as above: the pre-EM-B2b2 step (12c437de4, sha256 62e16d59...)
+// planted over a COPY of this tree at 1dd31a377 (a detached probe worktree, never this checkout), and the planted step
+// and the live step produced the SAME six digests, so EM-B2b2 still moves no byte of the no-edit path; on every row the
+// fresh generation equals the dormant re-derivation.
 
     const layer = layerOf([[ROOT_KEY, [...DM_ROSTER]]]);
 
