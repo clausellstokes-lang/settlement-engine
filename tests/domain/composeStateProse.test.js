@@ -102,6 +102,26 @@ function bagFor(pool) {
   return slots;
 }
 
+/**
+ * THE POOL'S OWN BRACE GROUP, the way the composer reads it (`composeStateProse.js :: poolReadOf`,
+ * CENSUS-1b wave 1): `poolMeta.declares` -> `poolDeclares`, `poolMeta.crisisScoped` -> `crisisScoped`.
+ * The composer draws a pool under the desk's read PLUS this brace; `readStateProse` takes it only
+ * from its caller. So the kernel side of an equality sweep is handed the same brace, and both sides
+ * the calm admit-all facts double (the 80d676864 idiom), or the sweep compares a gated read with an
+ * ungated one. Measured: the sweeps below drift 0 at db3ed88c1^ and first drift at db3ed88c1
+ * (census-2b item 2), whose brace groups put pool-level atoms on pools whose lines declare none.
+ * @param {string} blockId @param {string} poolKey
+ * @returns {{poolDeclares?: ReadonlyArray<string>, crisisScoped?: true, facts: object}}
+ */
+function poolBraceFor(blockId, poolKey) {
+  const meta = /** @type {{declares?: string[], crisisScoped?: boolean}} */ (CORPUS[blockId]?.poolMeta?.[poolKey] || {});
+  return {
+    facts: CALM_FACTS_ADMIT_ALL,
+    ...(Array.isArray(meta.declares) && meta.declares.length ? { poolDeclares: meta.declares } : {}),
+    ...(meta.crisisScoped === true ? { crisisScoped: true } : {}),
+  };
+}
+
 /** An answer for every dimension the pool partitions itself by (law 5). */
 function dimensionsFor(pool) {
   /** @type {Record<string, string>} */
@@ -174,8 +194,8 @@ describe('⭐ THE SEAM COMPOSES TO THE KERNEL — an empty candidate list moves 
       for (const audience of ['dm', 'player']) {
         for (const key of SWEEP_SEEDS) {
           checks += 1;
-          const read = { slots, seed: key, audience, dimensions };
-          const base = readStateProse(CORPUS, blockId, poolKey, read);
+          const read = { slots, seed: key, audience, dimensions, facts: CALM_FACTS_ADMIT_ALL };
+          const base = readStateProse(CORPUS, blockId, poolKey, { ...read, ...poolBraceFor(blockId, poolKey) });
           const unit = composeStateProse(CORPUS, blockId, {
             ...read, spineKey: poolKey, candidates: [], turns: [],
           });
@@ -357,9 +377,9 @@ describe('⭐ THE BASE-SIDE SYNTHESIS — every recorded cell, against the compo
     let pools = 0;
     for (const { blockId, poolKey, pool } of SHIPPED_POOLS) {
       const read = {
-        slots: bagFor(pool), audience: 'dm', dimensions: dimensionsFor(pool),
+        slots: bagFor(pool), audience: 'dm', dimensions: dimensionsFor(pool), facts: CALM_FACTS_ADMIT_ALL,
       };
-      const base = readStateProse(CORPUS, blockId, poolKey, { ...read, seed: '' });
+      const base = readStateProse(CORPUS, blockId, poolKey, { ...read, ...poolBraceFor(blockId, poolKey), seed: '' });
       const spellings = [undefined, null, ''].map((given) => composeStateProse(CORPUS, blockId, {
         ...read, seed: given, spineKey: poolKey, candidates: [], turns: [],
       }));
@@ -1351,11 +1371,15 @@ describe('the six candidates leaves (ARCH §4.1, M-F7)', () => {
     const unit = composeStateProse(CORPUS, block.blockId, {
       spineKey: block.poolKey, candidates, turns: [], slots: bagFor(block.pool),
       seed: 'leaf-probe', audience: 'dm', dimensions: dimensionsFor(block.pool),
+      // db3ed88c1 (census-2b item 2): DS-GEN-3's first pool (scores.military: STRONG) is
+      // crisis-scoped, so the read carries facts, as every desk's does; the kernel the brace.
+      facts: CALM_FACTS_ADMIT_ALL,
     });
     const base = readStateProse(CORPUS, block.blockId, block.poolKey, {
       slots: bagFor(block.pool), seed: 'leaf-probe', audience: 'dm',
-      dimensions: dimensionsFor(block.pool),
+      dimensions: dimensionsFor(block.pool), ...poolBraceFor(block.blockId, block.poolKey),
     });
+    expect(unit, 'the probe composed nothing; the equality below would be vacuous').not.toBeNull();
     expect(unit.text).toBe(base.text);
     expect(unit.pieces.length).toBe(1);
   });
