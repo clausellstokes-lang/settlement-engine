@@ -154,15 +154,15 @@
  },
  "digests": {
   "corpusMeta": "9bb16c3ef8ee03e9da654079cb80ca6fa10721759d089fd1cbea5a7a85b05062",
-  "inventory": "b82c9d9f768b02b0452e59413d7bbc7f29e323d3680c58974ed10c90f5c954e4",
-  "manifests": "b2a8de292bc7ecc114d5f237cc70bac37bcb31aa3c7f6b6f553cf241dda8e8b6",
+  "inventory": "517f20f4d34e464c638538799fcacddb7f1270cebec2587eca71411bb4d13900",
+  "manifests": "aee8450e78967904bc03e2e9300a3e1cd1b96677de716a4b1711562086a6af80",
   "migrationReview": "ada908cf672ceffc7cb2d2a3ee15051f3270cdbe0759a6b367742123a39f310b",
   "rowTags": "54feb30c6a02c0444f9ccfa32939089efc93b02dc4c7de75c000ad0489ecfbf1",
-  "scanStats": "27b7bd99c869175796920b7758c8b3ae8ff30efa9a83e4db95a914b19599598d",
-  "sentinel": "1da2a743afaef2f653d989c53bcdfa15325cd058ad83dfdc821e3e1ee850669d"
+  "scanStats": "ff3629beaa276f39a142617ac7c3fc3a624b485bf76661f4a138d74dfa53b2e1",
+  "sentinel": "ef0848f93bd15c43ce94b0afb3c6f728dd0732435c1dd27c9e31d0c8476a8e71"
  },
  "frozen": "2026-11-07",
- "frozenAtSha": "696ea58b60261a02e61f2474193ca17961197530",
+ "frozenAtSha": "9ae0609e4a0fcb3d44a93e9a417aee74cf538737",
  "identities": 1450,
  "inventory": {
   "src/components/BuyThisDossier.jsx": {
@@ -1933,7 +1933,7 @@
   },
   "src/generators/npcGenerator.js": {
    "note on merchant": 2,
-   "short on merchant": 2
+   "short on merchant": 1
   },
   "src/generators/power/economyReconciliation.js": {
    "source on factions": 1
@@ -2502,7 +2502,7 @@
   },
   "executionTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "38f1013490f6d89b100290e9f151c118a8e454970d5682d0eab2e25e1ade39f2",
+   "digest": "adea46a1ef5f74c1dd3b0b7038129faed97e64621edaeb50a3795241da5615f5",
    "entries": [
     {
      "mode": "100644",
@@ -15947,8 +15947,8 @@
     {
      "mode": "100644",
      "path": "src/generators/hookVariety.js",
-     "sha256": "74ea3db6bf2ca56cf63c8b816164ae8220c3d633f948891ee86a0f25056a08b2",
-     "size": 6698,
+     "sha256": "b05137f9f5be7f6adba56c24221df6db9986f933fc36de07cc572ac39ac2919e",
+     "size": 9751,
      "type": "file"
     },
     {
@@ -16024,8 +16024,8 @@
     {
      "mode": "100644",
      "path": "src/generators/narrativeGenerator.js",
-     "sha256": "8b8f3cbba378684a23d44ff6e659213bc2a5e7f0c95be2c31ce1667d5242ee45",
-     "size": 47689,
+     "sha256": "93ba2c64c30425d757a0a8f3437eca3a295845148605cdd30a0e84b696872df5",
+     "size": 48093,
      "type": "file"
     },
     {
@@ -16052,8 +16052,8 @@
     {
      "mode": "100644",
      "path": "src/generators/npc/factionLeaderSecret.js",
-     "sha256": "726d7f50b7471224ec7a59c16128246eb63620b7c2c342b380a6dfd42fc94722",
-     "size": 4766,
+     "sha256": "e34b6ef6338ebbe2ee1fc1d6ae1c588b1e64f7683b1da40d024b9b1f27d978d9",
+     "size": 5570,
      "type": "file"
     },
     {
@@ -16087,15 +16087,15 @@
     {
      "mode": "100644",
      "path": "src/generators/npcGenerator.js",
-     "sha256": "c2cbd5e63e89f1e86c2816a9b9f88a4ca44b7a99b4087707706476ab3b9f6308",
-     "size": 73714,
+     "sha256": "d1806777d28040e0050f6ffbd5c481b7adf264f10b993a5a8504b6289c786201",
+     "size": 76275,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/generators/npcStructure.js",
-     "sha256": "e4ebd2b586607dc57d207c87cb6aad547421ceba3f309d698c8163f4d13833b0",
-     "size": 41384,
+     "sha256": "27fbadc0dc2e4a86e407f7f3302d6b0c02bd9e2c101ae40b4e2d37c938ad2979",
+     "size": 41891,
      "type": "file"
     },
     {
@@ -16304,8 +16304,8 @@
     {
      "mode": "100644",
      "path": "src/generators/steps/corruptionPass.js",
-     "sha256": "c2841f760dbf28f6add502a27d3f7d190f829bfa22a8a909ed2e2be369cdd8b7",
-     "size": 5332,
+     "sha256": "ac530e1e3219f06d752d91463833bfe992599dc444ec86285df3775b053ab53d",
+     "size": 5772,
      "type": "file"
     },
     {
@@ -19245,7 +19245,7 @@
   },
   "scanTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "a53aeaa71ad88242283f7c9bacd1d619c781bf9b55d9ee8aeeabc2026c936426",
+   "digest": "7ef1995f8a63e2ea4cd50a31228feac02c7c7dec1fc733ef8c55e1fac9a882c1",
    "entries": [
     {
      "mode": "100644",
@@ -32501,8 +32501,8 @@
     {
      "mode": "100644",
      "path": "src/generators/hookVariety.js",
-     "sha256": "74ea3db6bf2ca56cf63c8b816164ae8220c3d633f948891ee86a0f25056a08b2",
-     "size": 6698,
+     "sha256": "b05137f9f5be7f6adba56c24221df6db9986f933fc36de07cc572ac39ac2919e",
+     "size": 9751,
      "type": "file"
     },
     {
@@ -32578,8 +32578,8 @@
     {
      "mode": "100644",
      "path": "src/generators/narrativeGenerator.js",
-     "sha256": "8b8f3cbba378684a23d44ff6e659213bc2a5e7f0c95be2c31ce1667d5242ee45",
-     "size": 47689,
+     "sha256": "93ba2c64c30425d757a0a8f3437eca3a295845148605cdd30a0e84b696872df5",
+     "size": 48093,
      "type": "file"
     },
     {
@@ -32606,8 +32606,8 @@
     {
      "mode": "100644",
      "path": "src/generators/npc/factionLeaderSecret.js",
-     "sha256": "726d7f50b7471224ec7a59c16128246eb63620b7c2c342b380a6dfd42fc94722",
-     "size": 4766,
+     "sha256": "e34b6ef6338ebbe2ee1fc1d6ae1c588b1e64f7683b1da40d024b9b1f27d978d9",
+     "size": 5570,
      "type": "file"
     },
     {
@@ -32641,15 +32641,15 @@
     {
      "mode": "100644",
      "path": "src/generators/npcGenerator.js",
-     "sha256": "c2cbd5e63e89f1e86c2816a9b9f88a4ca44b7a99b4087707706476ab3b9f6308",
-     "size": 73714,
+     "sha256": "d1806777d28040e0050f6ffbd5c481b7adf264f10b993a5a8504b6289c786201",
+     "size": 76275,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/generators/npcStructure.js",
-     "sha256": "e4ebd2b586607dc57d207c87cb6aad547421ceba3f309d698c8163f4d13833b0",
-     "size": 41384,
+     "sha256": "27fbadc0dc2e4a86e407f7f3302d6b0c02bd9e2c101ae40b4e2d37c938ad2979",
+     "size": 41891,
      "type": "file"
     },
     {
@@ -32858,8 +32858,8 @@
     {
      "mode": "100644",
      "path": "src/generators/steps/corruptionPass.js",
-     "sha256": "c2841f760dbf28f6add502a27d3f7d190f829bfa22a8a909ed2e2be369cdd8b7",
-     "size": 5332,
+     "sha256": "ac530e1e3219f06d752d91463833bfe992599dc444ec86285df3775b053ab53d",
+     "size": 5772,
      "type": "file"
     },
     {
@@ -35792,7 +35792,7 @@
   },
   "sourceTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "c37cdc67f87967817fb7e6519bab903f1db07089c50d939eeea7639435a87b2f",
+   "digest": "f0569d3e879ae6e92e8a8b0231e061b88bc86d8a5bff85217c8dcb341c99dae7",
    "entries": [
     {
      "mode": "100644",
@@ -49167,8 +49167,8 @@
     {
      "mode": "100644",
      "path": "src/generators/hookVariety.js",
-     "sha256": "74ea3db6bf2ca56cf63c8b816164ae8220c3d633f948891ee86a0f25056a08b2",
-     "size": 6698,
+     "sha256": "b05137f9f5be7f6adba56c24221df6db9986f933fc36de07cc572ac39ac2919e",
+     "size": 9751,
      "type": "file"
     },
     {
@@ -49244,8 +49244,8 @@
     {
      "mode": "100644",
      "path": "src/generators/narrativeGenerator.js",
-     "sha256": "8b8f3cbba378684a23d44ff6e659213bc2a5e7f0c95be2c31ce1667d5242ee45",
-     "size": 47689,
+     "sha256": "93ba2c64c30425d757a0a8f3437eca3a295845148605cdd30a0e84b696872df5",
+     "size": 48093,
      "type": "file"
     },
     {
@@ -49272,8 +49272,8 @@
     {
      "mode": "100644",
      "path": "src/generators/npc/factionLeaderSecret.js",
-     "sha256": "726d7f50b7471224ec7a59c16128246eb63620b7c2c342b380a6dfd42fc94722",
-     "size": 4766,
+     "sha256": "e34b6ef6338ebbe2ee1fc1d6ae1c588b1e64f7683b1da40d024b9b1f27d978d9",
+     "size": 5570,
      "type": "file"
     },
     {
@@ -49307,15 +49307,15 @@
     {
      "mode": "100644",
      "path": "src/generators/npcGenerator.js",
-     "sha256": "c2cbd5e63e89f1e86c2816a9b9f88a4ca44b7a99b4087707706476ab3b9f6308",
-     "size": 73714,
+     "sha256": "d1806777d28040e0050f6ffbd5c481b7adf264f10b993a5a8504b6289c786201",
+     "size": 76275,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/generators/npcStructure.js",
-     "sha256": "e4ebd2b586607dc57d207c87cb6aad547421ceba3f309d698c8163f4d13833b0",
-     "size": 41384,
+     "sha256": "27fbadc0dc2e4a86e407f7f3302d6b0c02bd9e2c101ae40b4e2d37c938ad2979",
+     "size": 41891,
      "type": "file"
     },
     {
@@ -49524,8 +49524,8 @@
     {
      "mode": "100644",
      "path": "src/generators/steps/corruptionPass.js",
-     "sha256": "c2841f760dbf28f6add502a27d3f7d190f829bfa22a8a909ed2e2be369cdd8b7",
-     "size": 5332,
+     "sha256": "ac530e1e3219f06d752d91463833bfe992599dc444ec86285df3775b053ab53d",
+     "size": 5772,
      "type": "file"
     },
     {
@@ -52775,22 +52775,22 @@
  },
  "scanStats": {
   "files": 2363,
-  "reads": 136426,
-  "resolved": 10521,
-  "unresolved": 125905
+  "reads": 136457,
+  "resolved": 10529,
+  "unresolved": 125928
  },
  "scannerProvenance": {
   "detectorDigest": "bfd92ce7fdc94b550dafe1cc38e462d470fd370a91c4440f2fdc83ba9fd1341e",
-  "executionTreeDigest": "38f1013490f6d89b100290e9f151c118a8e454970d5682d0eab2e25e1ade39f2",
-  "scanTreeDigest": "a53aeaa71ad88242283f7c9bacd1d619c781bf9b55d9ee8aeeabc2026c936426",
-  "sourceTreeDigest": "c37cdc67f87967817fb7e6519bab903f1db07089c50d939eeea7639435a87b2f",
+  "executionTreeDigest": "adea46a1ef5f74c1dd3b0b7038129faed97e64621edaeb50a3795241da5615f5",
+  "scanTreeDigest": "7ef1995f8a63e2ea4cd50a31228feac02c7c7dec1fc733ef8c55e1fac9a882c1",
+  "sourceTreeDigest": "f0569d3e879ae6e92e8a8b0231e061b88bc86d8a5bff85217c8dcb341c99dae7",
   "unscannedInputDigest": "ba274abce8a4669ce588c8cbe3a067a8115da0d2d350890b334929f6298cac97"
  },
  "schema": 28,
  "sentinel": {
-  "resolvedReads": 10521,
+  "resolvedReads": 10529,
   "totalKeys": 6691,
   "usableShapes": 355
  },
- "total": 2045
+ "total": 2044
 }
