@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "7eeef76bc927e7e58b541fb212bbfe8a8bc57bbc",
-  "measuredBy": "MERGE-R2",
+  "measuredAtSha": "226fa534eba4b0960e65694a2b414fb88f9b12e8",
+  "measuredBy": "W7 HOOKS",
   "date": "2026-11-07",
-  "note": "the union of the rung-2 landing (fc4cb0b9f) and the integration branch (a8daff92c) at the merged tip: both sides test files counted once, MERGE-R2 (2026-11-07)",
+  "note": "W7 HOOKS (2026-11-07): seven chrome-headline tests added in tests/pdf/headlines.test.js",
   "files": 3107,
   "parked": 384,
   "credited": 2723,
-  "titles": 28535,
-  "suiteTitles": 7671
+  "titles": 28542,
+  "suiteTitles": 7672
 }
