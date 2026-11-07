@@ -34,6 +34,9 @@ import { factionIdFromName } from '../../../../lib/entities.js';
 import { deriveFactionSupport } from '../../../../domain/dossier/powerSupport.js';
 import { derivePowerStrata, groupRelationships, crisisNoteFor, withoutShownSentences } from '../../../../domain/dossier/powerStrata.js';
 import useIsMobile from '../../../../hooks/useIsMobile.js';
+import { membersByRank, rankIn } from '../../../../domain/people/membership.js';
+import { RANK_WORD } from '../../../../domain/people/cardPowers.js';
+import { entityIdFor } from '../../../../domain/dossier/entityLinks.js';
 import { chromeFontSize, proseFontSize } from '../../../../design/proseScale.js';
 
 // The parchment seam between flush cards. Imported (never a re-declared hex) so
@@ -293,9 +296,11 @@ export function FactionRow({ settlement, r, i, last = false, isExp, onToggle, ro
   const mobile = useIsMobile();
   const c = FACTION_COLORS[i % FACTION_COLORS.length];
   const f = r.faction || {};
-  // GS-2 (ODQ §934.101): the members are the named NPCs whose own power affiliation is this faction; the minted
-  // tie-component group this row used to print beneath it is gone with the second faction vocabulary.
-  const memberCount = (settlement?.npcs || []).filter((npc) => npc?.factionAffiliation === r.name).length;
+  // PEOPLE-5A (M-1b): the members are the faces holding a membership in this power (any rank), read from the
+  // cards' memberships; the power's first, second and third are named beneath the count.
+  const members = membersByRank(settlement?.npcs || [], r.name);
+  const memberCount = members.length;
+  const ranked = members.map((npc) => ({ npc, rank: rankIn(npc, r.name) })).filter((x) => x.rank).slice(0, 3);
   // The crisis note as the dossier prints it (powerStrata.js :: crisisNoteFor), less any sentence the tab prints in another
   // block (X-50, BOILERPLATE ONCE: the legitimacy panel's fracture line has one home; the search mount passes none).
   const crisisNote = withoutShownSentences(crisisNoteFor(settlement, f), shownOnTab);
@@ -327,7 +332,11 @@ export function FactionRow({ settlement, r, i, last = false, isExp, onToggle, ro
       {memberCount > 0 && (
         <div style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '3px 9px 3px 24px', background: `${c}08`, borderLeft: `2px solid ${c}30` }}>
           <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: c }}>{'↳'}</span>
-          <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: swatch.inkMag3 }}>{memberCount} member{memberCount !== 1 ? 's' : ''}</span>
+          <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: swatch.inkMag3 }}>{memberCount} member{memberCount !== 1 ? 's' : ''}
+            {ranked.map(({ npc, rank }) => (
+              <span key={npc.id || npc.name}>{` · ${RANK_WORD[rank]} `}<EntityLink id={entityIdFor('npc', npc, npc.name)} type="npc" fallback={npc.name} style={{ color: swatch.inkMag }} /></span>
+            ))}
+          </span>
         </div>
       )}
 
