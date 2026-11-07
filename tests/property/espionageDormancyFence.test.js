@@ -189,6 +189,15 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * AND NOWHERE ELSE. Most recently at the ENGINE-HYGIENE landing (SHIFT RECORD,
  * 2026-09-01, TE-AGNOSTIC-1 cars `f2c1ad181` / `97d119c9b`); before that at T8.
  *
+ * ── 2026-11-07, PEOPLE-2 CAST-DERIVED, SIGNED AT THE PEOPLE CAR'S LANDING (RECORD 2) ──
+ * THE SEVENTIETH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation of 2026-11-06,
+ * inside a NAMED CHARTERED WINDOW: ODQ §934.105, the people car's landing (PEOPLE-RULINGS M-1, M-3); the record is
+ * docs/shift-records/2026-11-07-people-2-cast-derived.json. THE MOVER, FOUND: lane 2 (lane/people-2-cast-2026-11-07,
+ * ebcf85fc7, merged at 3aa160a70): the crisis cast and the seat rows read from the powers' people. On THIS corpus 360 of
+ * 360 rows move (60 per tier) against the stage of dc655f712 (03a5a47e…, record 1's post-state); 360/360 hashes stay
+ * distinct. Written from the staged tree (3aa160a70 with the door paths carried from the landing branch, records 0a, 0b
+ * and 1 committed), measured by scripts/audit/refence.mjs before the write. `03a5a47e…` -> `12355043…`.
+ *
  * ── 2026-11-07, PEOPLE-1 CAST, SIGNED AT THE PEOPLE CAR'S LANDING (RECORD 1) ──
  * THE SIXTY-NINTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation of 2026-11-06,
  * inside a NAMED CHARTERED WINDOW: ODQ §934.105, the people car's landing (PEOPLE-RULINGS M-1, M-3); the record is
@@ -932,7 +941,7 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * superseded by the ENGINE-HYGIENE re-record above, which is the record of the
  * one chartered window that has been spent since.
  */
-const PRE_COUPLING_CORPUS_SHA = '03a5a47e98c19ae327c4245e5f4b377d94e4f3623748e8cf5bec65808ddde12c';
+const PRE_COUPLING_CORPUS_SHA = '12355043e8b2c86fd8d5547ca684e70e9d3620bf4594b57f2e5206df6070a1ce';
 
 const CORPUS_TIERS = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
 const CORPUS_ROUTES = Object.freeze(['road', 'isolated', 'port', 'crossroads']);
