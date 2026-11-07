@@ -5,7 +5,7 @@
       "src/domain/display/stateProse/generalStateProse.js": "a1d82168bffd08d6aec168b0fd51b4b7ed21fbf67c6f30b2aec8832064e29267",
       "src/domain/display/stateProse/powerStateProse.js": "11c913c83fa1e88d5f75d5415f8723936acf9aae37d6465a87b1ad3cb4d21e7b",
       "src/domain/display/stateProse/economyStateProse.js": "d2bfe8cafa209803f26c83fde83534a7ba45230010ff87c33bd4ac52d831b924",
-      "src/domain/display/stateProse/defenseStateProse.js": "3414eb1cb4000ec3a38d1f47d57b3436a4fd7cd93bb535eafd90ff013f68e775",
+      "src/domain/display/stateProse/defenseStateProse.js": "d6875e288b8f47c9d7e6b81fbd27b8189a0d949439f034e22ba4f62f5e23189a",
       "src/domain/display/stateProse/stressorsStateProse.js": "13c7f383882acf5bb48267feb4302ced6b9798cec2575470903f1aa88205600d",
       "src/domain/display/stateProse/warFaithStateProse.js": "f1972add38589ee55369fb06e4a5e0a8f90c4d966bf703d4367a3cdca52d6aac",
       "src/domain/display/stateProse/dossierMounts.js": "b8466ea80b09292247baf73e1ab1660c6863362cd623b3b98e002e5ef9fb1f57"
@@ -21,15 +21,15 @@
     "producerIndexFiles": 1300
   },
   "totals": {
-    "pools": 715,
+    "pools": 718,
     "blocks": 68,
-    "variants": 2356,
-    "resolved": 347,
+    "variants": 2362,
+    "resolved": 350,
     "unresolved": 368,
-    "resolvedWithPredicate": 214,
-    "resolvedWithCleanPredicate": 214,
-    "keyFunctions": 120,
-    "keyFunctionsConsulted": 120,
+    "resolvedWithPredicate": 217,
+    "resolvedWithCleanPredicate": 217,
+    "keyFunctions": 123,
+    "keyFunctionsConsulted": 123,
     "keyTables": 33,
     "slotless": 65,
     "bagless": 140,
@@ -37,7 +37,7 @@
     "syntheticTableFields": 100,
     "tiers": {
       "MISSING": 33,
-      "THIN": 488,
+      "THIN": 491,
       "COVERED": 227,
       "MISSING-AT-TIER": 45
     },
@@ -46,18 +46,18 @@
     "narrowsRefused": 0,
     "narrowedRows": 0,
     "covertRows": 4,
-    "objectClassed": 101,
-    "mountedRows": 573,
+    "objectClassed": 102,
+    "mountedRows": 576,
     "absent": {
-      "measured": 392,
+      "measured": 400,
       "default": 3,
       "not-produced": 61,
       "method-call": 18
     },
-    "zeroK": 53,
-    "kExecutable": 347,
+    "zeroK": 55,
+    "kExecutable": 350,
     "kNotExecutable": 368,
-    "branchGrainRows": 317,
+    "branchGrainRows": 320,
     "functionGrainRows": 398,
     "customReachableRows": 21,
     "relationRows": 165,
@@ -118,12 +118,12 @@
         4
       ]
     ],
-    "sourceLicensedRows": 116,
+    "sourceLicensedRows": 118,
     "sourceOfficeRows": 3,
-    "sourceUnresolvedRows": 596,
+    "sourceUnresolvedRows": 597,
     "sourceTwoSourceRows": 10,
     "modifierRows": 0,
-    "declaredColumnRows": 715,
+    "declaredColumnRows": 718,
     "tablePools": 50
   },
   "rows": [
@@ -3980,7 +3980,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 2,
+      "grammars": 3,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [
@@ -4116,7 +4116,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 1,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [
         "forces",
@@ -4247,7 +4247,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [],
       "branchReads": [
         "magicWorks"
@@ -4293,6 +4293,229 @@
       "declares": [],
       "lineDeclares": {},
       "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-DEF-5",
+      "pool": "FIXTURE: gates",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 2,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "settlement.economicState.compound.inst.hasGates",
+          "op": "===",
+          "value": "true"
+        }
+      ],
+      "branchReads": [
+        "forces.walls.present",
+        "settlement.economicState.compound.inst",
+        "settlement.economicState.compound.inst.hasGates"
+      ],
+      "fieldsRead": [
+        "forces.walls.present",
+        "settlement.economicState.compound.inst",
+        "settlement.economicState.compound.inst.hasGates"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "gatesFixturePoolKey",
+      "rung": "literal",
+      "reads": [
+        "forces.walls.present",
+        "settlement.economicState.compound.inst",
+        "settlement.economicState.compound.inst.hasGates"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "forces.walls.present": "measured",
+        "settlement.economicState.compound.inst": "measured",
+        "settlement.economicState.compound.inst.hasGates": "measured"
+      },
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "defense.armedForces"
+      ],
+      "attach": [],
+      "k": 0,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "muster",
+        "kinds": [
+          "muster"
+        ],
+        "fields": {
+          "forces.walls.present": "muster",
+          "settlement.economicState.compound.inst": "",
+          "settlement.economicState.compound.inst.hasGates": ""
+        },
+        "holder": null,
+        "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
+        "standing": "LICENSED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 2,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-DEF-5",
+      "pool": "FIXTURE: charter hall",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 2,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "settlement.economicState.compound.inst.hasCharterHall",
+          "op": "===",
+          "value": "true"
+        }
+      ],
+      "branchReads": [
+        "forces.charter.present",
+        "settlement.economicState.compound.inst",
+        "settlement.economicState.compound.inst.hasCharterHall"
+      ],
+      "fieldsRead": [
+        "forces.charter.present",
+        "settlement.economicState.compound.inst",
+        "settlement.economicState.compound.inst.hasCharterHall"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "charterFixturePoolKey",
+      "rung": "literal",
+      "reads": [
+        "forces.charter.present",
+        "settlement.economicState.compound.inst",
+        "settlement.economicState.compound.inst.hasCharterHall"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "forces.charter.present": "measured",
+        "settlement.economicState.compound.inst": "measured",
+        "settlement.economicState.compound.inst.hasCharterHall": "measured"
+      },
+      "covert": false,
+      "objectClasses": [
+        "hall"
+      ],
+      "objectClass": "hall",
+      "sites": [
+        "defense.armedForces"
+      ],
+      "attach": [],
+      "k": 0,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "muster",
+        "kinds": [
+          "muster"
+        ],
+        "fields": {
+          "forces.charter.present": "muster",
+          "settlement.economicState.compound.inst": "",
+          "settlement.economicState.compound.inst.hasCharterHall": ""
+        },
+        "holder": null,
+        "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
+        "standing": "LICENSED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 2,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-DEF-5",
+      "pool": "FIXTURE: free company",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 2,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "settlement.economicState.compound.inst.hasFreeCompany",
+          "op": "===",
+          "value": "true"
+        }
+      ],
+      "branchReads": [
+        "settlement.economicState.compound.inst",
+        "settlement.economicState.compound.inst.hasFreeCompany"
+      ],
+      "fieldsRead": [
+        "settlement.economicState.compound.inst",
+        "settlement.economicState.compound.inst.hasFreeCompany"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "freeCompanyFixturePoolKey",
+      "rung": "literal",
+      "reads": [
+        "settlement.economicState.compound.inst",
+        "settlement.economicState.compound.inst.hasFreeCompany"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "settlement.economicState.compound.inst": "measured",
+        "settlement.economicState.compound.inst.hasFreeCompany": "measured"
+      },
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "defense.armedForces"
+      ],
+      "attach": [],
+      "k": 1,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "settlement.economicState.compound.inst": "",
+          "settlement.economicState.compound.inst.hasFreeCompany": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 2,
       "crisisScoped": false
     },
     {
@@ -44895,6 +45118,28 @@
       ]
     },
     {
+      "fact": "settlement.economicState.compound.inst.hasCharterHall",
+      "pools": [
+        "DS-DEF-5 :: FIXTURE: charter hall"
+      ],
+      "variants": 2,
+      "grammars": 1,
+      "blocks": [
+        "DS-DEF-5"
+      ]
+    },
+    {
+      "fact": "settlement.economicState.compound.inst.hasFreeCompany",
+      "pools": [
+        "DS-DEF-5 :: FIXTURE: free company"
+      ],
+      "variants": 2,
+      "grammars": 1,
+      "blocks": [
+        "DS-DEF-5"
+      ]
+    },
+    {
       "fact": "settlement.economicState.compound.inst.hasGangInfra",
       "pools": [
         "DS-DEF-4 :: FIXTURE: gangs"
@@ -44903,6 +45148,17 @@
       "grammars": 1,
       "blocks": [
         "DS-DEF-4"
+      ]
+    },
+    {
+      "fact": "settlement.economicState.compound.inst.hasGates",
+      "pools": [
+        "DS-DEF-5 :: FIXTURE: gates"
+      ],
+      "variants": 2,
+      "grammars": 1,
+      "blocks": [
+        "DS-DEF-5"
       ]
     },
     {
@@ -47131,7 +47387,7 @@
       },
       {
         "field": "settlement.economicState",
-        "mountsSpine": 2,
+        "mountsSpine": 3,
         "mountsModifier": 19,
         "spineTabs": [
           "defense",
@@ -47599,10 +47855,10 @@
     },
     {
       "block": "DS-DEF-5",
-      "spines": 11,
-      "facts": 8,
+      "spines": 14,
+      "facts": 12,
       "spinesReachedBp": 10000,
-      "meanReachBp": 7386
+      "meanReachBp": 8155
     },
     {
       "block": "DS-DEF-6",
@@ -48301,10 +48557,10 @@
     },
     {
       "block": "DS-DEF-5",
-      "spines": 11,
-      "facts": 8,
+      "spines": 14,
+      "facts": 12,
       "spinesReachedBp": 10000,
-      "meanReachBp": 7386,
+      "meanReachBp": 8155,
       "byFact": [
         {
           "field": "forces",
@@ -48312,7 +48568,10 @@
             "walls PRESENT",
             "walls ABSENT",
             "arcane defense PRESENT",
-            "arcane defense ABSENT"
+            "arcane defense ABSENT",
+            "FIXTURE: gates",
+            "FIXTURE: charter hall",
+            "FIXTURE: free company"
           ]
         },
         {
@@ -48326,7 +48585,9 @@
             "NO organized force at all",
             "mercenary / contracted forces PRESENT",
             "arcane defense PRESENT",
-            "arcane defense ABSENT"
+            "arcane defense ABSENT",
+            "FIXTURE: gates",
+            "FIXTURE: free company"
           ]
         },
         {
@@ -48338,7 +48599,10 @@
             "charter hall PRESENT (specialist monster response)",
             "charter hall ABSENT where the country warrants one",
             "arcane defense PRESENT",
-            "arcane defense ABSENT"
+            "arcane defense ABSENT",
+            "FIXTURE: gates",
+            "FIXTURE: charter hall",
+            "FIXTURE: free company"
           ]
         },
         {
@@ -48353,7 +48617,10 @@
             "charter hall PRESENT (specialist monster response)",
             "charter hall ABSENT where the country warrants one",
             "arcane defense PRESENT",
-            "arcane defense ABSENT"
+            "arcane defense ABSENT",
+            "FIXTURE: gates",
+            "FIXTURE: charter hall",
+            "FIXTURE: free company"
           ]
         },
         {
@@ -48366,7 +48633,10 @@
             "charter hall PRESENT (specialist monster response)",
             "charter hall ABSENT where the country warrants one",
             "arcane defense PRESENT",
-            "arcane defense ABSENT"
+            "arcane defense ABSENT",
+            "FIXTURE: gates",
+            "FIXTURE: charter hall",
+            "FIXTURE: free company"
           ]
         },
         {
@@ -48380,7 +48650,9 @@
             "charter hall PRESENT (specialist monster response)",
             "charter hall ABSENT where the country warrants one",
             "arcane defense PRESENT",
-            "arcane defense ABSENT"
+            "arcane defense ABSENT",
+            "FIXTURE: charter hall",
+            "FIXTURE: free company"
           ]
         },
         {
@@ -48394,7 +48666,10 @@
             "charter hall PRESENT (specialist monster response)",
             "charter hall ABSENT where the country warrants one",
             "arcane defense PRESENT",
-            "arcane defense ABSENT"
+            "arcane defense ABSENT",
+            "FIXTURE: gates",
+            "FIXTURE: charter hall",
+            "FIXTURE: free company"
           ]
         },
         {
@@ -48408,7 +48683,80 @@
             "NO organized force at all",
             "mercenary / contracted forces PRESENT",
             "charter hall PRESENT (specialist monster response)",
-            "charter hall ABSENT where the country warrants one"
+            "charter hall ABSENT where the country warrants one",
+            "FIXTURE: gates",
+            "FIXTURE: charter hall",
+            "FIXTURE: free company"
+          ]
+        },
+        {
+          "field": "settlement.economicState.compound.inst",
+          "attach": [
+            "walls PRESENT",
+            "walls ABSENT",
+            "garrison PRESENT",
+            "militia PRESENT (no garrison)",
+            "watch PRESENT",
+            "NO organized force at all",
+            "mercenary / contracted forces PRESENT",
+            "charter hall PRESENT (specialist monster response)",
+            "charter hall ABSENT where the country warrants one",
+            "arcane defense PRESENT",
+            "arcane defense ABSENT"
+          ]
+        },
+        {
+          "field": "settlement.economicState.compound.inst.hasCharterHall",
+          "attach": [
+            "walls PRESENT",
+            "walls ABSENT",
+            "garrison PRESENT",
+            "militia PRESENT (no garrison)",
+            "watch PRESENT",
+            "NO organized force at all",
+            "mercenary / contracted forces PRESENT",
+            "charter hall PRESENT (specialist monster response)",
+            "charter hall ABSENT where the country warrants one",
+            "arcane defense PRESENT",
+            "arcane defense ABSENT",
+            "FIXTURE: gates",
+            "FIXTURE: free company"
+          ]
+        },
+        {
+          "field": "settlement.economicState.compound.inst.hasFreeCompany",
+          "attach": [
+            "walls PRESENT",
+            "walls ABSENT",
+            "garrison PRESENT",
+            "militia PRESENT (no garrison)",
+            "watch PRESENT",
+            "NO organized force at all",
+            "mercenary / contracted forces PRESENT",
+            "charter hall PRESENT (specialist monster response)",
+            "charter hall ABSENT where the country warrants one",
+            "arcane defense PRESENT",
+            "arcane defense ABSENT",
+            "FIXTURE: gates",
+            "FIXTURE: charter hall"
+          ]
+        },
+        {
+          "field": "settlement.economicState.compound.inst.hasGates",
+          "attach": [
+            "walls PRESENT",
+            "walls ABSENT",
+            "garrison PRESENT",
+            "militia PRESENT (no garrison)",
+            "watch PRESENT",
+            "NO organized force at all",
+            "mercenary / contracted forces PRESENT",
+            "charter hall PRESENT (specialist monster response)",
+            "charter hall ABSENT where the country warrants one",
+            "arcane defense PRESENT",
+            "arcane defense ABSENT",
+            "FIXTURE: charter hall",
+            "FIXTURE: free company"
           ]
         }
       ]
@@ -50247,8 +50595,8 @@
     }
   ],
   "factBudget": {
-    "zeroK": 53,
-    "executable": 347,
+    "zeroK": 55,
+    "executable": 350,
     "notExecutable": 368,
     "byBlock": [
       [
@@ -50263,6 +50611,13 @@
         {
           "zeroK": 7,
           "spines": 7
+        }
+      ],
+      [
+        "DS-DEF-5",
+        {
+          "zeroK": 5,
+          "spines": 14
         }
       ],
       [
@@ -50298,13 +50653,6 @@
         {
           "zeroK": 3,
           "spines": 8
-        }
-      ],
-      [
-        "DS-DEF-5",
-        {
-          "zeroK": 3,
-          "spines": 11
         }
       ],
       [
@@ -50613,11 +50961,11 @@
       ],
       [
         0,
-        28
+        30
       ],
       [
         1,
-        84
+        85
       ],
       [
         2,
@@ -50627,8 +50975,8 @@
   },
   "grains": {
     "branch": {
-      "zeroK": 53,
-      "executable": 347,
+      "zeroK": 55,
+      "executable": 350,
       "notExecutable": 368,
       "histogram": [
         [
@@ -50641,11 +50989,11 @@
         ],
         [
           0,
-          28
+          30
         ],
         [
           1,
-          84
+          85
         ],
         [
           2,
@@ -50676,7 +51024,7 @@
         "DS-STR-1",
         "DS-WAR-3"
       ],
-      "readPaths": 574,
+      "readPaths": 582,
       "modifierEligibleFactsByTab": [
         [
           "economics",
@@ -50733,8 +51081,8 @@
       ]
     },
     "function": {
-      "zeroK": 131,
-      "executable": 347,
+      "zeroK": 133,
+      "executable": 350,
       "notExecutable": 368,
       "histogram": [
         [
@@ -50755,11 +51103,11 @@
         ],
         [
           0,
-          72
+          74
         ],
         [
           1,
-          86
+          87
         ],
         [
           2,
@@ -50793,7 +51141,7 @@
         "DS-STR-1",
         "DS-WAR-3"
       ],
-      "readPaths": 818,
+      "readPaths": 826,
       "modifierEligibleFactsByTab": [
         [
           "economics",
@@ -51137,19 +51485,19 @@
     ],
     "summary": {
       "rows": {
-        "LICENSED": 116,
+        "LICENSED": 118,
         "OFFICE": 3,
-        "SOURCE-UNRESOLVED": 596
+        "SOURCE-UNRESOLVED": 597
       },
       "fields": {
-        "LICENSED": 196,
+        "LICENSED": 198,
         "OFFICE": 5,
-        "SOURCE-UNRESOLVED": 433
+        "SOURCE-UNRESOLVED": 439
       },
       "byKind": [
         [
           "muster",
-          62
+          64
         ],
         [
           "market",
@@ -51189,7 +51537,7 @@
         ]
       ],
       "unresolvedGrounds": {
-        "no-mapping": 433,
+        "no-mapping": 439,
         "no-institution-in-roster": 0
       },
       "twoSourceRows": 10,
@@ -52549,7 +52897,7 @@
       "leafEither": 2,
       "leafRows": [],
       "deskRoots": 93,
-      "deskSegments": 203
+      "deskSegments": 206
     }
   },
   "ratifiedAliases": {
@@ -52881,6 +53229,21 @@
       "rolls",
       "wage",
       "wages"
+    ],
+    "settlement.economicState.compound.inst": [
+      "muster",
+      "roll",
+      "rolls"
+    ],
+    "settlement.economicState.compound.inst.hasCharterHall": [
+      "muster",
+      "roll",
+      "rolls"
+    ],
+    "settlement.economicState.compound.inst.hasGates": [
+      "muster",
+      "roll",
+      "rolls"
     ],
     "settlement.economicState.safetyProfile.flags": [
       "roll",
@@ -53877,7 +54240,7 @@
       "subject": "mercenary / contracted forces PRESENT",
       "fields": [],
       "readingFunction": "contractedForcePoolKey",
-      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 3 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -53895,7 +54258,7 @@
       "subject": "charter hall ABSENT where the country warrants one",
       "fields": [],
       "readingFunction": "charterPoolKey",
-      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -53911,7 +54274,37 @@
       "subject": "arcane defense ABSENT",
       "fields": [],
       "readingFunction": "arcaneDefensePoolKey",
-      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-DEF-5",
+      "subject": "FIXTURE: gates",
+      "fields": [
+        "settlement.economicState.compound.inst.hasGates"
+      ],
+      "readingFunction": "gatesFixturePoolKey",
+      "count": "2 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-DEF-5",
+      "subject": "FIXTURE: charter hall",
+      "fields": [
+        "settlement.economicState.compound.inst.hasCharterHall"
+      ],
+      "readingFunction": "charterFixturePoolKey",
+      "count": "2 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-DEF-5",
+      "subject": "FIXTURE: free company",
+      "fields": [
+        "settlement.economicState.compound.inst.hasFreeCompany"
+      ],
+      "readingFunction": "freeCompanyFixturePoolKey",
+      "count": "2 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",

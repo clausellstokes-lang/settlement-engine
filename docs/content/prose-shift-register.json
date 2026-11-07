@@ -21,13 +21,13 @@
         {
           "kind": "integer",
           "over": "the sum of poolMeta.variantCount over all 708 pools",
-          "value": 2356
+          "value": 2362
         },
         {
           "kind": "digest",
           "algo": "sha256",
           "over": "poolMeta.variantCount per pool",
-          "value": "42bf536623150bf4b523b7dac694d6c04989873ca7ed1e80820c1bd51d168d01"
+          "value": "36b1abd1649f333f28cfcc8be6561c8d79a0f21e359adb6b0d34d509538985ba"
         }
       ]
     },
@@ -42,7 +42,7 @@
         {
           "kind": "integer",
           "over": "the sum of every faceCounts entry over all 708 pools",
-          "value": 2356
+          "value": 2362
         },
         {
           "kind": "integer",
@@ -53,7 +53,7 @@
           "kind": "digest",
           "algo": "sha256",
           "over": "poolMeta.faceCounts per pool, joined by commas",
-          "value": "eddc8bfb570ed091871bc63734167190fb22f635fb557fd81499b18f7e1bbc61"
+          "value": "2194b67a6f685bf1de1270c0efe4e57c4f9335b7bcce69c63c13c0aedcf19ccc"
         }
       ]
     },
@@ -68,7 +68,7 @@
           "kind": "digest",
           "algo": "sha256",
           "over": "poolMeta.vids per pool, joined by commas",
-          "value": "f5f8f8bd588f95076086a09218b40ed389f2960baf167b475fa6875aadaa5ec0"
+          "value": "fd4e7fd5ad047ecbcc665e613d165cf13dd032000a12321f0f07791b74483e75"
         }
       ]
     },
@@ -83,7 +83,7 @@
           "kind": "digest",
           "algo": "sha256",
           "over": "`${block} :: ${pool}` for all 708 pools, in order",
-          "value": "fb73eaf6972442f3be769f64694715d8d4feb0f769d872026850979abf37e39c"
+          "value": "8ed5f880c806439791fcbe120ab3c2729ebdad3f81b1797525165c9475adc19d"
         }
       ]
     },
@@ -152,7 +152,7 @@
           "kind": "digest",
           "algo": "sha256",
           "over": "poolMeta.attach per pool, joined by pipes",
-          "value": "ac3925a6b9e550b946859c2bd5b095c8962c52e30e54c53d93afc2a3229d8e7e"
+          "value": "e33762bd0489c5c129e36660e591c15009f8f3612a60632406362a06aecdd999"
         }
       ]
     },

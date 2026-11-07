@@ -55,8 +55,8 @@
   },
   "leaves": {
     "src/data/dossierStateProse/defense.generated.js": {
-      "raw": 176749,
-      "gzip": 25174,
+      "raw": 178794,
+      "gzip": 25336,
       "ceilingRaw": 488168,
       "ceilingGzip": 108482
     },
@@ -323,6 +323,14 @@
       "toRaw": 176749,
       "gzipAfter": 25174,
       "reason": "+2713 B raw (gzip level 9: 24,812 -> 25,174), one commit: DS-DEF-4 gains the four FIXTURE pools (black market, thieves' guild, smuggling, gangs; two variants each, said beside the structure line only when the roster carries the fixture) and sixteen style rewrites (structure organized v3, v4; semi-organized v2, v3; diffuse v2, v3; capture none v1, v3; adversarial v1; equilibrium v3; corrupted v1-v3; capture v1-v3). Projected through `node scripts/generate-dossier-state-prose.mjs`; `--check` exit 0."
+    },
+    {
+      "car": "W2 DEF second seat (the construction-and-wiring wave, 2026-11-07; ODQ §934.105, WIRING-RULINGS R-W1/R-W3): DS-DEF-5 — armed and fortified fixtures said; the free company said; the owner's style law of 2026-11-07",
+      "leaf": "src/data/dossierStateProse/defense.generated.js",
+      "fromRaw": 176749,
+      "toRaw": 178794,
+      "gzipAfter": 25336,
+      "reason": "+2045 B raw (gzip level 9: 25,174 -> 25,336), one commit: DS-DEF-5 gains the three FIXTURE pools (gates, charter hall, free company; two variants each, said beside their group's line only when the roster carries the fixture) and fifteen style rewrites (walls PRESENT v2; walls ABSENT v2; garrison v2, v3; militia v2; watch v3; NO force v2, v3; mercenary v3; charter PRESENT v3; charter ABSENT v2, v3; arcane PRESENT v2; arcane ABSENT v2, v3). Projected through `node scripts/generate-dossier-state-prose.mjs`; `--check` exit 0."
     }
   ],
   "ceilingTransfersNewLeaves": [

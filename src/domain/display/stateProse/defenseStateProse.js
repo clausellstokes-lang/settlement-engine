@@ -1340,13 +1340,62 @@ export function defenseForcesProse(settlement, options = {}) {
     }), [])
     : null);
 
+  // THE FIXTURES (W2 DEF construction C9; R-W3 for the free company): each said beside its
+  // own group's line, never alone, and only when the roster carries the fixture.
+  /** @param {string|null} poolKey @param {string|null} fixtureKey */
+  const rungWith = (poolKey, fixtureKey) => {
+    if (!poolKey) return null;
+    const unit = composeStateProse(CORPUS, 'DS-DEF-5', {
+      ...options, slots, spineKey: poolKey, candidates: defenseStateProseCandidates('DS-DEF-5', settlement),
+    });
+    const said = unit && fixtureKey
+      ? composeStateProse(CORPUS, 'DS-DEF-5', { ...options, slots, spineKey: fixtureKey })
+      : null;
+    return legibilityRung('', withSaid(unit, said), []);
+  };
+
+  // The free company's hall is not in the mercenary bucket (`defenseInstitutionBuckets.js`), so
+  // its clause rides beside the contracted line where one speaks and beside the force line
+  // otherwise — never twice.
+  const contractedKey = contractedForcePoolKey(forces);
+  const freeCompanyKey = freeCompanyFixturePoolKey(settlement?.economicState?.compound?.inst);
+
   return Object.freeze({
-    fortification: rung(fortificationPoolKey(forces.walls.present)),
-    force: rung(forceCorePoolKey(forces)),
-    contracted: rung(contractedForcePoolKey(forces)),
-    charter: rung(charterPoolKey(forces, config.monsterThreat)),
+    fortification: rungWith(fortificationPoolKey(forces.walls.present), gatesFixturePoolKey(settlement?.economicState?.compound?.inst, forces.walls.present)),
+    force: rungWith(forceCorePoolKey(forces), contractedKey ? null : freeCompanyKey),
+    contracted: rungWith(contractedKey, freeCompanyKey),
+    charter: rungWith(charterPoolKey(forces, config.monsterThreat), charterFixturePoolKey(settlement?.economicState?.compound?.inst, forces.charter.present)),
     arcane: rung(arcaneDefensePoolKey(forces, magicWorksAt({ settlement }))),
   });
+}
+
+/**
+ * DS-DEF-5's three FIXTURE pools (W2 DEF construction C9), each keyed by one name flag
+ * `getInstitutionNames` writes onto `economicState.compound.inst` AND by its group's own
+ * presence, so a fixture is never said beside a line that denies its group (no gates beside
+ * `walls ABSENT`). The free company's hall is the exception: it is its own group, and the desk
+ * seats it beside the contracted line or, where none speaks, the force line.
+ * @param {{hasGates?: unknown}|null|undefined} inst @param {unknown} walls
+ * @returns {string|null}
+ */
+export function gatesFixturePoolKey(inst, walls) {
+  if (walls !== true || !inst || typeof inst !== 'object') return null;
+  if (inst.hasGates === true) return 'FIXTURE: gates';
+  return null;
+}
+
+/** @param {{hasCharterHall?: unknown}|null|undefined} inst @param {unknown} charter @returns {string|null} */
+export function charterFixturePoolKey(inst, charter) {
+  if (charter !== true || !inst || typeof inst !== 'object') return null;
+  if (inst.hasCharterHall === true) return 'FIXTURE: charter hall';
+  return null;
+}
+
+/** @param {{hasFreeCompany?: unknown}|null|undefined} inst @returns {string|null} */
+export function freeCompanyFixturePoolKey(inst) {
+  if (!inst || typeof inst !== 'object') return null;
+  if (inst.hasFreeCompany === true) return 'FIXTURE: free company';
+  return null;
 }
 
 /**

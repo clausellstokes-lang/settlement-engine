@@ -150,12 +150,12 @@ describe('the wiring census — TOTALITY over the corpus', () => {
     // EMPTY BY CONSTRUCTION until 8b authors the estate's first modifier row. The partition
     // itself is proved on a plant below rather than on a population of zero, so this pair of
     // integers is a state record and never the arm's convicting half.
-    expect(cells.size, 'the R1 loaders enumerate this many pool cells').toBe(715); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 711 -> 715
-    expect(census.rows.length, 'and the census carries exactly one row for each').toBe(715); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 711 -> 715
-    expect(spines.length, 'of which SPINES, the population every corpus figure is pinned on').toBe(715); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 711 -> 715
+    expect(cells.size, 'the R1 loaders enumerate this many pool cells').toBe(718); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 711 -> 715 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 715 -> 718
+    expect(census.rows.length, 'and the census carries exactly one row for each').toBe(718); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 711 -> 715 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 715 -> 718
+    expect(spines.length, 'of which SPINES, the population every corpus figure is pinned on').toBe(718); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 711 -> 715 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 715 -> 718
     expect(modifiers.length, 'and MODIFIERS, none until 8b authors the first').toBe(0);
     const ids = new Set(census.rows.map((r) => `${r.block} :: ${r.pool}`));
-    expect(ids.size, 'no (block, pool) is counted twice').toBe(715); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 711 -> 715
+    expect(ids.size, 'no (block, pool) is counted twice').toBe(718); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 711 -> 715 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 715 -> 718
     expect(new Set(census.rows.map((r) => r.block)).size, 'over the leaves\' 68 blocks').toBe(68);
   });
 
@@ -194,7 +194,7 @@ describe('the wiring census — TOTALITY over the corpus', () => {
     // census-3c unit 4 e3295d168 +10; census-5b unit 3 c00b30eb6 +4.
     // 2342 -> 2343 at LANDING-R2 helper G (the chair's §934.105 ruling (1): DS-GEN-17 PROVISIONED v3, the hospital-only line) +1.
     // 2343 -> 2344 at LANDING-R2 helper G2 (the chair's 06:5x DS-CND-1 boom line (ODQ §934.105, ruling (2)): ARCHETYPE: boom v4 `[street · crisis: any]`) +1.
-    expect(summary.variants, 'the R1 corpus holds this many variants').toBe(2356); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 2348 -> 2356
+    expect(summary.variants, 'the R1 corpus holds this many variants').toBe(2362); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 2348 -> 2356 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 2356 -> 2362
     // THE MEAN IS THE CALLER'S TO FORMAT (INSTR-912 car 11). The census publishes `variants`
     // and `total` as integers; a `toFixed` inside `src/domain/prose/` is a float
     // interpolation and a two-decimal score against the estate's prose-numerics register, and
@@ -207,22 +207,22 @@ describe('the wiring census — TOTALITY over the corpus', () => {
     // 06:5x DS-CND-1 boom line, ODQ §934.105 ruling (2)): DS-CND-1 ARCHETYPE: boom grew 3 -> 4.
     // {2: 28} -> {2: 30} and the mean 3.31 -> 3.30 (2,348 / 711 = 3.302) at W2 DEF (2026-11-07, C1/C2, ODQ §934.105):
     // DS-DEF-9 gains the two FLAG pools of two variants each.
-    expect((summary.variants / summary.total).toFixed(2), 'mean variants per pool').toBe('3.30');
+    expect((summary.variants / summary.total).toFixed(2), 'mean variants per pool').toBe('3.29'); // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 2356/715 -> 2362/718
     expect(Object.fromEntries(summary.variantHistogram), 'variants per pool, exactly').toEqual({
-      2: 34, 3: 507, 4: 129, 5: 27, 6: 13, 7: 4, 10: 1, // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): four two-variant FIXTURE pools
+      2: 37, 3: 507, 4: 129, 5: 27, 6: 13, 7: 4, 10: 1, // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): four two-variant FIXTURE pools // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): three two-variant FIXTURE pools, 34 -> 37
     });
     const summed = summary.variantHistogram.reduce((total, [size, pools]) => total + size * pools, 0);
-    expect(summed, 'and the histogram sums back to the corpus').toBe(2356); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 2348 -> 2356
+    expect(summed, 'and the histogram sums back to the corpus').toBe(2362); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 2348 -> 2356 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 2356 -> 2362
     // PER PIECE: the same count rolled up to the block, which is the unit a reader meets.
     const perBlockTotal = summary.perBlock.reduce((total, [, n]) => total + n, 0);
-    expect(perBlockTotal, 'the per-block roll-up carries every variant once').toBe(2356); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 2348 -> 2356
+    expect(perBlockTotal, 'the per-block roll-up carries every variant once').toBe(2362); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 2348 -> 2356 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 2356 -> 2362
     expect(summary.perBlock.length, 'across every block').toBe(68);
   });
 
   test('ANTI-VACUITY: the corpus census carries BOTH statuses, in measured integers', () => {
     // A census that resolved nothing and a census that resolved everything are both useless
     // and both look healthy from a distance. The arm pins the split.
-    expect(summary.resolved, 'pools that reached a recovery RUNG').toBe(347); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 343 -> 347
+    expect(summary.resolved, 'pools that reached a recovery RUNG').toBe(350); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 343 -> 347 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 347 -> 350
     expect(summary.unresolved, 'pools reported WIRING-UNRESOLVED with a reason').toBe(368);
     expect(summary.resolved + summary.unresolved, 'and the two exhaust the census').toBe(summary.total);
     expect(summary.resolved, 'zero resolved rows would mean the reader is dark').toBeGreaterThan(0);
@@ -242,8 +242,8 @@ describe('the wiring census — TOTALITY over the corpus', () => {
     // green, which is exactly the blindness plant #80 cannot see.
     // 208 AND NOT 207 SINCE LANDING-7 lane F (R-F1): `magicDependencyPoolKey`'s absent pool is
     // returned from an `if (magicAbsent)` now, not a returned ternary, so its guard is recovered.
-    expect(summary.resolvedWithPredicate, 'RESOLVED rows carrying at least one predicate row').toBe(214); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 210 -> 214
-    expect(summary.resolvedWithCleanPredicate, 'and of those, every row a readable comparison').toBe(214); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 210 -> 214
+    expect(summary.resolvedWithPredicate, 'RESOLVED rows carrying at least one predicate row').toBe(217); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 210 -> 214 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 214 -> 217
+    expect(summary.resolvedWithCleanPredicate, 'and of those, every row a readable comparison').toBe(217); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 210 -> 214 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 214 -> 217
     expect(summary.resolvedWithPredicate, 'a rung reached is never fewer than a predicate read')
       .toBeLessThanOrEqual(summary.resolved);
     expect(summary.resolvedWithCleanPredicate).toBeLessThanOrEqual(summary.resolvedWithPredicate);
@@ -664,7 +664,7 @@ describe('THE MAP READ THE OTHER WAY — fact → text, and the three tiers', ()
     // 63 AND NOT 59 SINCE SEAM car 3h: DS-DEF-2's four exposed key tables add four synthetic
     // table labels to the inverse, one per table, and no ordinary reading moved with them.
     // 64 AND NOT 63 SINCE LANDING-7 lane F (R-F1): `magicAbsent`, DS-DEF-9's absent pool's own guard.
-    expect(facts.length, 'distinct readings a key function conjoins, at this tip').toBe(70); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 66 -> 70
+    expect(facts.length, 'distinct readings a key function conjoins, at this tip').toBe(73); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 66 -> 70 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 70 -> 73
     const poolsNamed = new Set(facts.flatMap((f) => f.pools));
     const resolvedWithFields = spines.filter((r) => r.predicate.length > 0);
     expect(poolsNamed.size, 'every pool with a recovered predicate appears in the inverse')
@@ -698,7 +698,7 @@ describe('THE MAP READ THE OTHER WAY — fact → text, and the three tiers', ()
     // || the raw sequence)` per pool. The counts are recomputed FRESH from the live modules
     // here, which is why they move with the classifier rather than with the committed JSON.
     expect(counts.get(TIERS.MISSING), 'held facts with no pool keyed on them').toBe(33);
-    expect(counts.get(TIERS.THIN), 'pools with one variant, one grammar, or {settlement} alone').toBe(488); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 484 -> 488
+    expect(counts.get(TIERS.THIN), 'pools with one variant, one grammar, or {settlement} alone').toBe(491); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 484 -> 488 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 488 -> 491
     expect(counts.get(TIERS.COVERED), 'and the rest').toBe(227);
     expect(counts.get(TIERS.THIN) + counts.get(TIERS.COVERED), 'every pool lands in one of the two pool tiers')
       .toBe(spines.length);
@@ -846,15 +846,15 @@ describe('the source readers themselves', () => {
   test('the pool-key reader finds every key function in the six composers', () => {
     let total = 0;
     for (const [file, src] of composerSources()) total += poolKeyFunctions(src, file).length;
-    expect(total, 'pool-key functions across the six desks').toBe(120); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 119 -> 120
-    expect(census.functions, 'and the census reads the same set').toBe(120); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 119 -> 120
+    expect(total, 'pool-key functions across the six desks').toBe(123); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 119 -> 120 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 120 -> 123
+    expect(census.functions, 'and the census reads the same set').toBe(123); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 119 -> 120 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 120 -> 123
     // ⛔ FOUND IS NOT CONSULTED (INSTR-912 car 10, cure 8). The ladder's map was keyed on the
     // BARE function name, and two desks both export `foodSecurityPoolKey`
     // (`economyStateProse.js:393`, `generalStateProse.js:353`) — so 118 collapsed to 117 while
     // this line asserted `fns.length` and read healthy. The key is `file::name` now and the
     // two counts are asserted EQUAL, so the next same-named pair cannot go quiet.
     expect(census.consulted, 'and the ladder actually walks every one of them').toBe(census.functions);
-    expect(census.consulted, 'as an integer, not only as an equality').toBe(120); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 119 -> 120
+    expect(census.consulted, 'as an integer, not only as an equality').toBe(123); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 119 -> 120 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 120 -> 123
     expect(census.tables, 'module-level key tables (object shape and pair-array shape)').toBe(33);
   });
 
@@ -895,11 +895,11 @@ describe('car 0 — `reads`, and the NARROWS line that may narrow it', () => {
     // INSTRUMENTS and none of its seven annex rows, so every row of the committed register is
     // still a spine and the two integers coincide. They are asserted apart anyway, because the
     // day they diverge is the day a modifier row is born and this line must move deliberately.
-    expect(committed.rows.length, 'the census still covers every pool').toBe(715); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 711 -> 715
-    expect(committedSpines.length, 'of which SPINES, the population the totals count').toBe(715); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 711 -> 715
-    expect(committed.totals.branchGrainRows, 'rows whose selecting branch was recovered').toBe(317); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 313 -> 317
+    expect(committed.rows.length, 'the census still covers every pool').toBe(718); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 711 -> 715 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 715 -> 718
+    expect(committedSpines.length, 'of which SPINES, the population the totals count').toBe(718); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 711 -> 715 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 715 -> 718
+    expect(committed.totals.branchGrainRows, 'rows whose selecting branch was recovered').toBe(320); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 313 -> 317 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 317 -> 320
     expect(committed.totals.functionGrainRows, 'and rows that fall back, fail-closed').toBe(398);
-    expect(committed.totals.branchGrainRows + committed.totals.functionGrainRows).toBe(715); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 711 -> 715
+    expect(committed.totals.branchGrainRows + committed.totals.functionGrainRows).toBe(718); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 711 -> 715 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 715 -> 718
     for (const row of committed.rows) {
       expect(['branch', 'function'], `${row.pool} names its grain`).toContain(row.readsGrain);
       if (row.readsGrain === 'branch') expect(row.reads, `${row.pool}`).toEqual(row.branchReads);
@@ -1035,7 +1035,7 @@ describe('car 0 — `absent`: a measurement, or a default wearing a reading\'s c
     // index with them (1158 → 1159 files). Neither is this car's doing; the re-take BANKED
     // a truth the register had not caught up with, and it also cured two of the three
     // standing proseWiringCensus reds (the stale-bytes verdict and the holder register).
-    expect(totals.measured, 'read paths whose absence a predicate can see').toBe(392); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 378 -> 392
+    expect(totals.measured, 'read paths whose absence a predicate can see').toBe(400); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 378 -> 392 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 392 -> 400
     expect(totals.default, 'read paths where a fallback hides it').toBe(3);
     // 61 AND NOT 59 SINCE LANDING-7 lane F (R-F1): DS-DEF-9's two `false` pools now read the bare
     // parameter `magicAbsent` at the branch grain, a read path no writer produces.
@@ -1047,7 +1047,7 @@ describe('car 0 — `absent`: a measurement, or a default wearing a reading\'s c
     // eighteen cells, and every one of them was a wrong verdict rather than a finding.
     expect(totals['method-call'], 'read paths whose tail is a builtin, not a field').toBe(18);
     expect(Object.values(totals).reduce((a, b) => a + b, 0), 'and the four labels partition the read paths')
-      .toBe(474); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 460 -> 474
+      .toBe(482); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 460 -> 474 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 474 -> 482
     // ⛔ THE TABLE RUNG CARRIES NO ABSENCE RECORD (car 10, cure 4, applied to a new column).
     // Rung 3's field is `"<reader> (via <TABLE> in <file>)"` — this instrument's own label —
     // so asking a producer index about it answers `not-produced` on every table row BY
@@ -1106,7 +1106,7 @@ describe('car 0 — `covert`, `objectClass` and the numeric key', () => {
     expect(objectClassOf(spine), 'so the projector refuses this attach').toBe('store');
     // The paired negative: a modifier over a DIFFERENT object attaches lawfully.
     expect(objectClassOf('watch: bought (covert)')).not.toBe(objectClassOf(spine));
-    expect(committed.totals.objectClassed, 'and the corpus count is an integer').toBe(101); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 99 -> 101
+    expect(committed.totals.objectClassed, 'and the corpus count is an integer').toBe(102); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 99 -> 101 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 101 -> 102
     // ⭐ THE AMBIGUITY, NAMED (the fold's P3, cure 9). A key can name TWO civic objects and the
     // first-wins reading hid it: `granary AND hospital` answered `store`, so T-F12 — whose whole
     // job is to refuse an attach whose spine and modifier name the same object — would have
@@ -1358,7 +1358,7 @@ describe('MEASURE car 3 — the desk-read recipe, the absence readers and the `s
     const blind = fixtureCensus(COMPOSER_ONE_BRANCH, pools).rows;
     expect(blind.filter((r) => (r.sites || []).length > 0), 'a blind census mounts nothing').toEqual([]);
     // AND THE SHIPPED INTEGER, tied to the same column on the same rule.
-    expect(committed.totals.mountedRows, 'rows the mount registry gives a place to speak').toBe(573); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 569 -> 573
+    expect(committed.totals.mountedRows, 'rows the mount registry gives a place to speak').toBe(576); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 569 -> 573 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 573 -> 576
     expect(committedSpines.filter((r) => (r.sites || []).length > 0).length,
       'and the total is the column, not a second count').toBe(committed.totals.mountedRows);
     const registryBlocks = new Set(DOSSIER_MOUNTS.map((m) => m.blockId));
@@ -1483,15 +1483,15 @@ describe('car 0 — the derived ATTACH sets, their coverage, and the fact budget
 
   test('the fact budget is counted over RESOLVED rows and refuses the rest', () => {
     const budget = committed.factBudget;
-    expect(budget.zeroK, 'RESOLVED spines that can never take a modifier: k = 3 - |reads| <= 0').toBe(53); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 50 -> 53
-    expect(budget.executable, 'counted over the RESOLVED rows').toBe(347); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 343 -> 347
+    expect(budget.zeroK, 'RESOLVED spines that can never take a modifier: k = 3 - |reads| <= 0').toBe(55); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 50 -> 53 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 53 -> 55
+    expect(budget.executable, 'counted over the RESOLVED rows').toBe(350); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 343 -> 347 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 347 -> 350
     // ⛔ NOT-EXECUTABLE, NEVER k = 3. An UNRESOLVED row reads `[]`, which would answer "three
     // free seats" on a pool whose predicate nobody has recovered — the friendliest number,
     // and the §908 law forbids exactly that.
     expect(budget.notExecutable, 'and the UNRESOLVED rows declare themselves').toBe(368);
-    expect(budget.executable + budget.notExecutable).toBe(715); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 711 -> 715
+    expect(budget.executable + budget.notExecutable).toBe(718); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 711 -> 715 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 715 -> 718
     const summed = budget.histogram.reduce((total, [, n]) => total + n, 0);
-    expect(summed, 'the histogram carries every executable row once').toBe(347); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 343 -> 347
+    expect(summed, 'the histogram carries every executable row once').toBe(350); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 343 -> 347 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 347 -> 350
     // The rule itself, on a fixture: a three-field spine has no seat and a one-field spine has two.
     const rows = [
       { block: 'B', pool: 'p1', status: WIRING_STATUS.RESOLVED, reads: ['a', 'b', 'c'] },
@@ -1503,8 +1503,8 @@ describe('car 0 — the derived ATTACH sets, their coverage, and the fact budget
     expect(Object.fromEntries(factBudget(rows).histogram)).toEqual({ 0: 1, 2: 1 });
     // AND THE BRANCH GRAIN IS WHAT THAT 49 IS COUNTED OVER, with the function-wide reading
     // beside it: the ruling's cost is 72 rows that leave k = 0, printed in ONE table.
-    expect(committed.grains.branch.zeroK, 'the shipped grain').toBe(53); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 50 -> 53
-    expect(committed.grains.function.zeroK, 'and the grain the ruling replaced').toBe(131); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 127 -> 131
+    expect(committed.grains.branch.zeroK, 'the shipped grain').toBe(55); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 50 -> 53 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 53 -> 55
+    expect(committed.grains.function.zeroK, 'and the grain the ruling replaced').toBe(133); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 127 -> 131 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 131 -> 133
   });
 });
 
@@ -1859,18 +1859,18 @@ describe('SEAM car 5b — THE HOLDER CENSUS: the source of each construction (SI
     // field). The desk no longer calls it, so the read is the bare `tradeAccess`, and no mapping
     // row resolves it. Traced by lane DEFENSE-2 against the register at da2040ddb.
     expect(summary.rows, 'ROWS by source standing').toEqual({
-      LICENSED: 116, OFFICE: 3, 'SOURCE-UNRESOLVED': 596, // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 592 -> 596
+      LICENSED: 118, OFFICE: 3, 'SOURCE-UNRESOLVED': 597, // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 592 -> 596 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): the gates and charter-hall FIXTURE rows' forces.* reads are muster-sourced, 116 -> 118; the free company's reads no mapping row names, 596 -> 597
     });
     // 190 / 416 AND NOT 191 / 415, the same one row: its third field entry was the toll-bar's
     // `settlement.config.tradeRouteAccess` and is now the unresolved `tradeAccess`. The total
     // of 611 below does not move.
     expect(summary.fields, 'FIELDS by source standing').toEqual({
-      LICENSED: 196, OFFICE: 5, 'SOURCE-UNRESOLVED': 433, // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): the four FIXTURE rows read economicState.compound.inst, which no mapping row names: 419 -> 433
+      LICENSED: 198, OFFICE: 5, 'SOURCE-UNRESOLVED': 439, // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): the four FIXTURE rows read economicState.compound.inst, which no mapping row names: 419 -> 433 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 196 -> 198 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 433 -> 439 (economicState.compound.inst and the flag, per FIXTURE row)
     });
     expect(Object.values(summary.rows).reduce((a, b) => a + b, 0),
       'and every pool lands in exactly one row standing').toBe(spines.length);
     expect(Object.values(summary.fields).reduce((a, b) => a + b, 0),
-      'over this many sourced field entries').toBe(634); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 620 -> 634
+      'over this many sourced field entries').toBe(642); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 620 -> 634 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 634 -> 642
     expect(summary.twoSourceRows, 'rows whose fields resolve to more than one kind').toBe(10);
     expect(summary.rowsWithNoReading, 'and rows the census recovered no reading for at all').toBe(368);
     // THE TWO UNRESOLVED GROUNDS STAY APART: a field no mapping row names is a different debt
@@ -1879,10 +1879,10 @@ describe('SEAM car 5b — THE HOLDER CENSUS: the source of each construction (SI
     // entry of DS-GEN-6 :: isolated, traced at 'FIELDS by source standing' above.
     // 419 / 615 AND NOT 417 / 613 SINCE LANDING-7 lane F (R-F1): DS-DEF-9's two `false` pools each
     // gain the field entry `magicAbsent`, which no mapping row names. No row's standing moves.
-    expect(summary.unresolvedGrounds).toEqual({ 'no-mapping': 433, 'no-institution-in-roster': 0 }); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 419 -> 433, the same fourteen field entries
+    expect(summary.unresolvedGrounds).toEqual({ 'no-mapping': 439, 'no-institution-in-roster': 0 }); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 419 -> 433, the same fourteen field entries // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 433 -> 439
     expect(summary.byKind, 'the licensed field count per kind').toEqual([
       // watch 9 -> 14 at W2 DEF C1/C2 (2026-11-07): DS-DEF-9's FLAG pools read `safetyProfile.flags`, licensed by the watch.
-      ['muster', 62], ['market', 49], ['treasury', 22], ['court', 21], ['watch', 14],
+      ['muster', 64], ['market', 49], ['treasury', 22], ['court', 21], ['watch', 14], // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): the two forces.*.present guards, 62 -> 64
       ['toll-bar', 12], ['road', 7], ['elders', 5], ['office', 5], ['parish', 4],
     ]);
     expect(summary.byKind.reduce((n, [, k]) => n + k, 0),
@@ -2040,7 +2040,7 @@ describe('SEAM car 5b — THE HOLDER CENSUS: the source of each construction (SI
     expect(wrong, 'the column must equal its own definition').toEqual([]);
     // ABSENT IS THE ANSWER `no`, the `readsCount` idiom: no row carries `stateOrgan: false`.
     expect(census.rows.filter((row) => row.source.stateOrgan === false)).toEqual([]);
-    expect(spines.length - flagged.length, 'and the rest carry no key at all').toBe(673); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 669 -> 673
+    expect(spines.length - flagged.length, 'and the rest carry no key at all').toBe(676); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 669 -> 673 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 673 -> 676
   });
 
   test('⭐⭐ A TABLED KEY FUNCTION RESOLVES THROUGH THE TABLE\'S OWN FIELDS — A0b\'s blindness is NOT inherited', () => {

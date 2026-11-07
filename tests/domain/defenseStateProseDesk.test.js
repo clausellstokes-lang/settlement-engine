@@ -16,6 +16,7 @@ import { describe, expect, it } from 'vitest';
 import {
   RECOGNISED_MONSTER_TIERS, SLOT_FILL_SHAPES, SLOT_FILL_TABLES, arcaneDefensePoolKey,
   beastsRowPoolKey, charterPoolKey, contractedForcePoolKey, countryWarrantsCharter,
+  charterFixturePoolKey, freeCompanyFixturePoolKey, gatesFixturePoolKey,
   defenseForcesProse, defenseStateProse, defenseThreatProse, disasterRowPoolKey,
   defensePostureProse, economicRowPoolKey, firstSurveyPoolKey, forceCorePoolKey,
   fortificationPoolKey, internalRowPoolKey, invasionRowPoolKey, isCompoundSafetyLabel,
@@ -1296,9 +1297,49 @@ describe('DS-DEF-5 — the armed-forces lenses read what still STANDS', () => {
         }
       }
     }
-    expect(reached.size, `unreached: ${Object.keys(DEF5_POOLS).filter((k) => !reached.has(k))}`)
-      .toBe(Object.keys(DEF5_POOLS).length);
-    expect(Object.keys(DEF5_POOLS)).toHaveLength(11);
+    // W2 DEF C9 (2026-11-07): the three FIXTURE pools are never a rung's own pool; they ride
+    // beside their group's line (the next test), so the sweep's population is the eleven.
+    const spines = Object.keys(DEF5_POOLS).filter((k) => !k.startsWith('FIXTURE: '));
+    expect(reached.size, `unreached: ${spines.filter((k) => !reached.has(k))}`)
+      .toBe(spines.length);
+    expect(spines).toHaveLength(11);
+    expect(Object.keys(DEF5_POOLS)).toHaveLength(14);
+  });
+
+  it('W2 DEF C9: a fixture is said beside its own group\'s line, only when the group stands and the roster carries it', () => {
+    const all = { hasGates: true, hasCharterHall: true, hasFreeCompany: true };
+    expect(gatesFixturePoolKey(all, true)).toBe('FIXTURE: gates');
+    expect(charterFixturePoolKey(all, true)).toBe('FIXTURE: charter hall');
+    expect(freeCompanyFixturePoolKey(all)).toBe('FIXTURE: free company');
+    // never beside a line that denies the group, never on a non-boolean flag
+    expect(gatesFixturePoolKey(all, false)).toBeNull();
+    expect(charterFixturePoolKey(all, false)).toBeNull();
+    expect(freeCompanyFixturePoolKey({ hasFreeCompany: 1 })).toBeNull();
+    expect(gatesFixturePoolKey({ hasGates: 'true' }, true)).toBeNull();
+    expect(charterFixturePoolKey(null, true)).toBeNull();
+    // the three keys are exactly the corpus's three FIXTURE pools
+    expect(['FIXTURE: gates', 'FIXTURE: charter hall', 'FIXTURE: free company'].sort())
+      .toEqual(Object.keys(DEF5_POOLS).filter((k) => k.startsWith('FIXTURE: ')).sort());
+
+    const town = (inst) => ({ ...garrisonTown(['walls', 'mercenary', 'charter']), economicState: { compound: { inst } } });
+    const plain = defenseForcesProse(town({}), { seed: 'fx5' });
+    const said = defenseForcesProse(town(all), { seed: 'fx5' });
+    for (const [lens, word] of [['fortification', /gates/], ['charter', /charter hall/], ['contracted', /free company/]]) {
+      expect(said[lens].provenance.poolKey).toBe(plain[lens].provenance.poolKey);
+      expect(said[lens].sentence.startsWith(plain[lens].sentence)).toBe(true);
+      expect(said[lens].sentence).toMatch(word);
+      expect(said[lens].provenance.pieces.map((p) => p.role)).toEqual(['spine', 'modifier']);
+    }
+    // a town without walls is never told about its gates
+    const open = defenseForcesProse({ ...garrisonTown([]), economicState: { compound: { inst: all } } }, { seed: 'fx5' });
+    expect(open.fortification.provenance.poolKey).toBe('walls ABSENT');
+    expect(open.fortification.sentence).not.toMatch(/gates/);
+    // the free company's hall is not in the mercenary bucket: with no contracted line it rides
+    // beside the force line, and never twice
+    const hall = defenseForcesProse({ ...garrisonTown(['militia']), economicState: { compound: { inst: { hasFreeCompany: true } } } }, { seed: 'fx5' });
+    expect(hall.contracted).toBeNull();
+    expect(hall.force.sentence).toMatch(/free company/);
+    expect(said.force?.sentence ?? '').not.toMatch(/free company/);
   });
 
   it('the registry mounts DS-DEF-5 once, as a sentence, on the defense tab', () => {

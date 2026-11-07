@@ -2937,58 +2937,79 @@ may not say the contract is failing unless the economic arm supplies that.
 
 **walls PRESENT**
 1. `[visitor · gate]` There is a line around {settlement} and it is kept: the gates shut, the works are repaired, and a stranger enters where the town intends him to.
-2. `[ledger · colour]` {settlement} controls its own entry points. That is what a perimeter buys: not invulnerability, but the choice of where anything happens.
+2. `[ledger · colour]` {settlement} is walled, and anyone coming in must use the way the town allows; trouble can only get in where the town decides.
 3. `[street · gate]` The town has a wall and arranges its day around the gates without noticing that it does.
 
 **walls ABSENT** {colour}
 1. `[ledger]` {settlement} is unfortified. There is no perimeter, which means the town cannot control entry and cannot make a chokepoint of anything.
-2. `[visitor]` A stranger arrives at {settlement} from whichever direction suits him and is not obliged to pass anybody on the way in.
+2. `[visitor]` You can walk into {settlement} from any direction and pass nobody on the way in.
 3. `[street]` The town has an edge rather than a boundary at {settlement}, and the edge is wherever the last building happens to be.
 
 **garrison PRESENT**
 1. `[ledger · colour]` {settlement} keeps a standing force: people whose work is the defense of this town and who are answerable for it as work.
-2. `[street · colour]` The soldiers at {settlement} belong to the town rather than to a season; they are a fixture, with all the friction and all the reliability of one.
-3. `[visitor · gate]` A stranger at {settlement} is counted at the gate by somebody whose job that is, and is counted again on the way out.
+2. `[street · colour]` {settlement}'s soldiers serve all year, not for a season; the town relies on them and grumbles about them in equal measure.
+3. `[visitor · gate]` Everyone entering {settlement} is counted at the gate by a soldier whose job it is, and counted again on the way out.
 
 **militia PRESENT (no garrison)** {colour}
 1. `[ledger]` {settlement}'s defense is its own people under arms. They know the ground, they can be raised, and raising them stops everything else the town was doing.
-2. `[street]` The town turns out when it must and goes back to work after, and understands that this is a different thing from having soldiers.
+2. `[street]` {settlement}'s people take up arms when they must and go back to work after, and nobody mistakes them for soldiers.
 3. `[counterforce]` {settlement} could keep soldiers and does not; the town has decided that arming itself when needed costs less than paying anybody to be armed all year.
 
 **watch PRESENT**
 1. `[ledger · colour]` {settlement} keeps a watch, which is a matter of order rather than of war. It answers what happens inside the town and is not built for what arrives from outside it.
 2. `[street · gate]` There are people walking the town at {settlement} at night, and the town's sense of itself rests more on that than on anything at the gate.
-3. `[visitor · colour]` A stranger walking {settlement} late is looked at rather than stopped, and the looking is systematic enough to notice.
+3. `[visitor · colour]` Anyone walking {settlement} late is watched, not stopped, and the watchmen make sure you know it.
 
 **NO organized force at all** {colour}
 1. `[ledger]` {settlement} has no organized force. Defense here is individual armed citizens, with no command, no training and no way to coordinate a response.
-2. `[street]` The town would defend itself as a crowd defends itself, which is to say briefly and in several directions at once.
-3. `[visitor]` A stranger at {settlement} can find nobody whose responsibility the town's defense is, because it is not anybody's.
+2. `[street]` If {settlement} were attacked, its people would fight with no leaders and no plan, each household for itself.
+3. `[visitor]` Nobody at {settlement} is responsible for defending the town; ask who is, and nobody can name anyone.
 
 **mercenary / contracted forces PRESENT** {colour}
 1. `[ledger]` Part of what defends {settlement} is contracted rather than owed: competent, available, and loyal for exactly as long as the terms run.
 2. `[street]` The town pays for some of its soldiers and knows which ones, and treats them accordingly.
-3. `[unfolding]` The contracted companies at {settlement} are doing the work they were engaged for, and the engagement has an end written into it that the town has not yet had to think about.
+3. `[unfolding]` The hired companies at {settlement} are doing the job they were paid for, and their contracts will run out one day.
 
 **charter hall PRESENT (specialist monster response)** {colour}
 1. `[ledger]` {settlement} keeps a charter for specialist work. The things ordinary arms are wrong for go to people retained to handle exactly them.
 2. `[street]` There is somewhere at {settlement} to take the problems that are not soldiers' problems, and the town uses it more than it likes to say.
-3. `[visitor]` A stranger at {settlement} finds a hall whose business is the sort of trouble ordinary arms are the wrong instrument for, and finds it busy.
+3. `[visitor]` {settlement} keeps a chartered hall for trouble that soldiers cannot handle, and the hall is busy.
 
 **charter hall ABSENT where the country warrants one** {colour}
 1. `[ledger]` {settlement} retains no specialists. Whatever comes out of the country is met by whoever the town has, whether or not they are the right answer to it.
-2. `[counterforce]` {settlement} keeps no chartered hall and is not unaware of the need; what stands between the town and one is the cost of retaining specialists rather than any doubt about wanting them.
-3. `[street]` The town sends whoever it has to things they are wrong for at {settlement}, and pays for the wrongness each time.
+2. `[counterforce]` {settlement} knows it needs specialists against the creatures and cannot afford to keep them.
+3. `[street]` {settlement} sends whoever it can against things they are not trained for, and pays for it each time.
 
 **arcane defense PRESENT**
 1. `[ledger · colour]` {settlement} keeps arcane provision in its defenses: detection, wards, and an answer to things that conventional arrangements cannot see coming.
-2. `[visitor · gate]` A stranger at {settlement} is measured at the gate in a way he cannot quite identify, and is not told about it.
+2. `[visitor · gate]` Something at {settlement}'s gate takes the measure of everyone who enters, and nobody tells them so.
 3. `[street · colour]` There are wards at {settlement} the town does not discuss and would notice immediately if they stopped.
 
 **arcane defense ABSENT** {colour}
 1. `[ledger]` {settlement}'s defense is conventional throughout. What arrives unseen here goes undetected and therefore unanswered.
-2. `[street]` The town has no answer to anything it cannot see, and is unprepared rather than protected in that respect.
-3. `[counterforce]` Nothing unseen has come at {settlement}, and nothing here would know if it had; the record of safety and the capacity to detect are two different things.
+2. `[street]` {settlement} keeps no defence against anything it cannot see.
+3. `[counterforce]` Nothing unseen is known to have come at {settlement}, but the town keeps no wards or seers that would notice if it had.
+
+**THE FIXTURES (W2 DEF, 2026-11-07, construction C9; WIRING-RULINGS R-W3 for the free
+company):** each a second sentence beside its own group's line, said ONLY when that line
+speaks AND the roster carries the fixture (`economicState.compound.inst`, the name flags
+`priorityHelpers.js :: getInstitutionNames` writes): the gates beside `walls PRESENT`, the
+charter hall beside `charter hall PRESENT`, the free company's hall beside `mercenary /
+contracted forces PRESENT` or, where that line is silent (the hall is not in the mercenary
+bucket), beside the force line. The fixture pools never print alone. Description position: plain
+lines.
+
+**FIXTURE: gates**
+1. `[street]` Traffic in and out of {settlement} goes through its gates, and that is where anyone arriving is first seen.
+2. `[ledger]` The wall at {settlement} is entered by its gates, and the town can shut them.
+
+**FIXTURE: charter hall**
+1. `[street]` Adventurers at {settlement} take their contracts at the charter hall, and the town posts its worst problems there.
+2. `[ledger]` The hall at {settlement} is an adventurers' charter hall: parties sign on there for work the town will pay for.
+
+**FIXTURE: free company**
+1. `[street]` A free company keeps a hall at {settlement} and hires out its soldiers to whoever pays.
+2. `[ledger]` The free company at {settlement} answers to its captain and its contracts, not to the town.
 
 ---
 
