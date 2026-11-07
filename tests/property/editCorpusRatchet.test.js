@@ -374,7 +374,8 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // census-1b's first parent, git-archive trees): not idle 277 -> 280 at census-1i unit 1 R-AW (ba7887862, the label
     // resolved at the birth's close: three more rows take a leaf live); groups judged 133 unmoved. Rung 1's final tip and
     // the merge base both read 277 / 133, the composed tip 280 / 133: no interaction. mixedOutside stays empty.
-    expect(census().rows.filter((row) => row.takenLive > 0).length, 'the instrument is not idle').toBe(280);
+    // WIRING W3 (2026-11-07), C1-C6 said in DS-POW-5/-6 (+8 pools, +19 variants): 280 -> 283.
+    expect(census().rows.filter((row) => row.takenLive > 0).length, 'the instrument is not idle').toBe(283);
     expect(census().rows.filter((row) => row.groupsJudged > 0).length, 'declared groups ARE judged').toBe(133);
     // THE POSITIVE CONTROL, CONSTRUCTED: one object holding a leaf taken from R1 beside a leaf kept
     // where the record had settled away from R0 IS a MIXED object, and enclosingGroup classes it.

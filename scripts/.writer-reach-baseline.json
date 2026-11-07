@@ -8,7 +8,7 @@
   "The reviewable slice is computed by RULE (reviewableDark), never hand-listed."
  ],
  "schema": 1,
- "frozenAtSha": "6c3e2566178b7f75891a8d5a8c8a8337904b9947",
+ "frozenAtSha": "ee3b7a16832d16ad259a303bb6c6615525aac40c",
  "charter": "§18.1 WRWALKER Car 1 (HORIZON) — chair-signed vetoably at the INSTR-WRW pre-stage",
  "minRows": 40,
  "corpusMeta": {
@@ -24,7 +24,7 @@
  },
  "shapesDigest": "9cce955973cac3a42986bcbac2deb92a1901b641e691da98d8462681a48c2cf7",
  "detectorDigest": "cce104e3a7794d95b85fd4df52a649b11fc8ee147f509a3a194412ba3a406fde",
- "verdictDigest": "9a87bd5f642466ccb263d5f543b616836ed5a61cd53462ea55ac3bcc3663542d",
+ "verdictDigest": "ef09b309388e4862e61d8fff405b9d41e67a73c3420a5aeae7f230088230d330",
  "surfaceRoots": {
   "web": [
    "src/main.jsx"
@@ -83,27 +83,27 @@
  },
  "population": {
   "judged": 6730,
-  "lit": 598,
-  "litName": 4860,
-  "dark": 1272,
+  "lit": 606,
+  "litName": 4859,
+  "dark": 1265,
   "thinKeys": 8776,
   "thinShapes": 904,
   "knownShapes": 356
  },
  "scanStats": {
   "files": 1740,
-  "sites": 40806,
-  "propRead": 38632,
+  "sites": 40823,
+  "propRead": 38649,
   "elemRead": 0,
   "destructure": 2161,
   "inOp": 13,
-  "rGrades": 6328,
-  "nGrades": 984483,
-  "resolvedReceivers": 7108
+  "rGrades": 6342,
+  "nGrades": 984543,
+  "resolvedReceivers": 7125
  },
  "registerDigest": "1e3ab9d6b0023c9fa2cf949f373df29a65d5b7cd88114c866ae3b619dbe098e2",
  "pendingSurfaceCeiling": 3,
- "reviewableDarkCount": 488,
+ "reviewableDarkCount": 481,
  "darkUnregistered": [
   {
    "identity": "Bulk grain and flour on reasons",
@@ -1102,12 +1102,6 @@
    "rows": 1190
   },
   {
-   "identity": "crimeIsGovt on flags",
-   "key": "crimeIsGovt",
-   "shape": "flags",
-   "rows": 472
-  },
-  {
    "identity": "crusaderSynthesis on flags",
    "key": "crusaderSynthesis",
    "shape": "flags",
@@ -1496,12 +1490,6 @@
    "key": "diversityNote",
    "shape": "foodSecurity",
    "rows": 472
-  },
-  {
-   "identity": "dmNote on factionRelationships",
-   "key": "dmNote",
-   "shape": "factionRelationships",
-   "rows": 2554
   },
   {
    "identity": "downstreamOf on candidates",
@@ -3044,18 +3032,6 @@
    "key": "merchant",
    "shape": "stocks",
    "rows": 6263
-  },
-  {
-   "identity": "merchantArmy on flags",
-   "key": "merchantArmy",
-   "shape": "flags",
-   "rows": 472
-  },
-  {
-   "identity": "merchantCriminalBlur on flags",
-   "key": "merchantCriminalBlur",
-   "shape": "flags",
-   "rows": 472
   },
   {
    "identity": "merchant_guilds on leaderNpcIds",
@@ -6160,12 +6136,6 @@
    "rows": 384
   },
   {
-   "identity": "secularBrutalism on flags",
-   "key": "secularBrutalism",
-   "shape": "flags",
-   "rows": 472
-  },
-  {
    "identity": "seenTick on osr000",
    "key": "seenTick",
    "shape": "osr000",
@@ -6386,18 +6356,6 @@
    "key": "startupCost",
    "shape": "plan",
    "rows": 800
-  },
-  {
-   "identity": "stateCrime on flags",
-   "key": "stateCrime",
-   "shape": "flags",
-   "rows": 472
-  },
-  {
-   "identity": "stateCrimeIntensity on flags",
-   "key": "stateCrimeIntensity",
-   "shape": "flags",
-   "rows": 472
   },
   {
    "identity": "stayWeeks on missions",
@@ -8285,16 +8243,16 @@
   "resentment on factionPairStates": "dossier-pdf=N foundry=N web-transitive=N",
   "trust on factionPairStates": "dossier-pdf=N foundry=N web-transitive=N",
   "week on factionPairStates": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
-  "captureState on factionRelationships": "dossier-pdf=N foundry=N web-transitive=N",
+  "captureState on factionRelationships": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "direction on factionRelationships": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N",
-  "dmNote on factionRelationships": "",
+  "dmNote on factionRelationships": "dossier-pdf=R web-display=R",
   "narrative on factionRelationships": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
   "pair on factionRelationships": "campaign-pdf=R dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=R",
   "ratio on factionRelationships": "dossier-pdf=N foundry=N web-transitive=N",
   "type on factionRelationships": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
   "_timePressure on factions": "web-transitive=R",
   "appliedAt on factions": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
-  "captureState on factions": "dossier-pdf=R foundry=R web-transitive=R",
+  "captureState on factions": "dossier-pdf=R foundry=R web-display=N web-transitive=R",
   "category on factions": "campaign-pdf=R dossier-pdf=R foundry=R json-export=N web-display=R web-transitive=R world-book=R",
   "causeEventId on factions": "dossier-pdf=N foundry=N web-transitive=N",
   "crisisNote on factions": "campaign-pdf=R dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=R",
@@ -8337,7 +8295,7 @@
   "updatedByPulse on factions": "",
   "wealth on factions": "web-transitive=N",
   "archetype on factionStates": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N",
-  "captureState on factionStates": "dossier-pdf=N foundry=N web-transitive=N",
+  "captureState on factionStates": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "controlledInstitutions on factionStates": "dossier-pdf=N foundry=N web-transitive=N",
   "exhaustion on factionStates": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "factionId on factionStates": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N",
@@ -8360,19 +8318,19 @@
   "path on findings": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
   "anyActive on flags": "",
   "arcaneBlackMarket on flags": "",
-  "crimeIsGovt on flags": "",
+  "crimeIsGovt on flags": "dossier-pdf=R web-display=R",
   "crusaderSynthesis on flags": "",
   "heresyIntensity on flags": "",
   "heresySuppression on flags": "",
   "mageTheocracy on flags": "",
   "magicFillsVoid on flags": "",
   "magicMilitarized on flags": "",
-  "merchantArmy on flags": "",
-  "merchantCriminalBlur on flags": "",
+  "merchantArmy on flags": "dossier-pdf=R web-display=R",
+  "merchantCriminalBlur on flags": "dossier-pdf=R web-display=R",
   "religiousFraud on flags": "",
-  "secularBrutalism on flags": "",
-  "stateCrime on flags": "",
-  "stateCrimeIntensity on flags": "",
+  "secularBrutalism on flags": "dossier-pdf=R web-display=R",
+  "stateCrime on flags": "dossier-pdf=R web-display=R",
+  "stateCrimeIntensity on flags": "dossier-pdf=R web-display=R",
   "theocraticEconomy on flags": "",
   "authority on flowProfile": "web-display=N web-transitive=N",
   "information on flowProfile": "",
@@ -13134,7 +13092,7 @@
   "conflicts on powerStructure": "campaign-pdf=R dossier-pdf=R foundry=N web-display=R web-transitive=R world-book=R",
   "criminalCaptureState on powerStructure": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
   "economyInputFingerprint on powerStructure": "",
-  "factionRelationships on powerStructure": "campaign-pdf=R dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=R",
+  "factionRelationships on powerStructure": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
   "factions on powerStructure": "campaign-pdf=R dossier-pdf=R foundry=R news=R web-display=R web-transitive=R world-book=R",
   "governingName on powerStructure": "campaign-pdf=R dossier-pdf=R foundry=R news=R web-display=R web-transitive=R world-book=R",
   "government on powerStructure": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
@@ -13689,7 +13647,7 @@
   "crimeTypes on safetyProfile": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R world-book=R",
   "criminalInstitutions on safetyProfile": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
   "economicDragDesc on safetyProfile": "web-display=R",
-  "flags on safetyProfile": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
+  "flags on safetyProfile": "campaign-pdf=N dossier-pdf=R foundry=N web-display=R web-transitive=N world-book=N",
   "guardEffectivenessDesc on safetyProfile": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R world-book=R",
   "plotHooks on safetyProfile": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
   "safetyDesc on safetyProfile": "dossier-pdf=R web-display=R",

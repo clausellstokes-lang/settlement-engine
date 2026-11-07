@@ -3,7 +3,7 @@
   "stamp": {
     "files": {
       "src/domain/display/stateProse/generalStateProse.js": "a1d82168bffd08d6aec168b0fd51b4b7ed21fbf67c6f30b2aec8832064e29267",
-      "src/domain/display/stateProse/powerStateProse.js": "11c913c83fa1e88d5f75d5415f8723936acf9aae37d6465a87b1ad3cb4d21e7b",
+      "src/domain/display/stateProse/powerStateProse.js": "034ceabc22cf2861075a9083d31f6be93aec2b67e5cce251334ee01529b66e89",
       "src/domain/display/stateProse/economyStateProse.js": "d2bfe8cafa209803f26c83fde83534a7ba45230010ff87c33bd4ac52d831b924",
       "src/domain/display/stateProse/defenseStateProse.js": "6ebbed0ca4e9125607fde9443b16d4da328cc1481f711f25a22b5d384cec3ce7",
       "src/domain/display/stateProse/stressorsStateProse.js": "13c7f383882acf5bb48267feb4302ced6b9798cec2575470903f1aa88205600d",
@@ -21,24 +21,24 @@
     "producerIndexFiles": 1300
   },
   "totals": {
-    "pools": 709,
+    "pools": 717,
     "blocks": 68,
-    "variants": 2344,
-    "resolved": 341,
+    "variants": 2363,
+    "resolved": 349,
     "unresolved": 368,
-    "resolvedWithPredicate": 208,
-    "resolvedWithCleanPredicate": 208,
-    "keyFunctions": 118,
-    "keyFunctionsConsulted": 118,
+    "resolvedWithPredicate": 212,
+    "resolvedWithCleanPredicate": 212,
+    "keyFunctions": 120,
+    "keyFunctionsConsulted": 120,
     "keyTables": 33,
     "slotless": 65,
     "bagless": 140,
     "predicatesOverUnreadFields": 100,
     "syntheticTableFields": 100,
     "tiers": {
-      "MISSING": 34,
-      "THIN": 482,
-      "COVERED": 227,
+      "MISSING": 33,
+      "THIN": 486,
+      "COVERED": 231,
       "MISSING-AT-TIER": 45
     },
     "tierSilences": 352,
@@ -47,17 +47,17 @@
     "narrowedRows": 0,
     "covertRows": 4,
     "objectClassed": 99,
-    "mountedRows": 567,
+    "mountedRows": 575,
     "absent": {
-      "measured": 373,
+      "measured": 398,
       "default": 3,
       "not-produced": 61,
       "method-call": 18
     },
-    "zeroK": 49,
-    "kExecutable": 341,
+    "zeroK": 54,
+    "kExecutable": 349,
     "kNotExecutable": 368,
-    "branchGrainRows": 311,
+    "branchGrainRows": 319,
     "functionGrainRows": 398,
     "customReachableRows": 21,
     "relationRows": 165,
@@ -103,7 +103,7 @@
       ],
       [
         "power",
-        7
+        6
       ],
       [
         "war",
@@ -118,12 +118,12 @@
         5
       ]
     ],
-    "sourceLicensedRows": 114,
+    "sourceLicensedRows": 120,
     "sourceOfficeRows": 3,
-    "sourceUnresolvedRows": 592,
+    "sourceUnresolvedRows": 594,
     "sourceTwoSourceRows": 10,
     "modifierRows": 0,
-    "declaredColumnRows": 709,
+    "declaredColumnRows": 717,
     "tablePools": 50
   },
   "rows": [
@@ -28863,6 +28863,528 @@
       "crisisScoped": false
     },
     {
+      "block": "DS-POW-5",
+      "pool": "FLAG: stateCrime",
+      "slotsFilled": [
+        "seat",
+        "settlement"
+      ],
+      "slotsNamed": [
+        "seat",
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 3,
+      "grammars": 2,
+      "predicate": [],
+      "branchReads": [
+        "settlement.economicState.safetyProfile.flags",
+        "settlement.economicState.safetyProfile.flags.crimeIsGovt",
+        "settlement.economicState.safetyProfile.flags.stateCrime"
+      ],
+      "fieldsRead": [
+        "settlement.economicState.safetyProfile.flags",
+        "settlement.economicState.safetyProfile.flags.crimeIsGovt",
+        "settlement.economicState.safetyProfile.flags.merchantArmy",
+        "settlement.economicState.safetyProfile.flags.merchantCriminalBlur",
+        "settlement.economicState.safetyProfile.flags.secularBrutalism",
+        "settlement.economicState.safetyProfile.flags.stateCrime",
+        "settlement.economicState.safetyProfile.flags.stateCrimeIntensity"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "structureFlagPoolKey",
+      "rung": "literal",
+      "reads": [
+        "settlement.economicState.safetyProfile.flags",
+        "settlement.economicState.safetyProfile.flags.crimeIsGovt",
+        "settlement.economicState.safetyProfile.flags.stateCrime"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "settlement.economicState.safetyProfile.flags": "measured",
+        "settlement.economicState.safetyProfile.flags.crimeIsGovt": "measured",
+        "settlement.economicState.safetyProfile.flags.stateCrime": "measured"
+      },
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "power.rulingStructure"
+      ],
+      "attach": [],
+      "k": 0,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "watch",
+        "kinds": [
+          "watch"
+        ],
+        "fields": {
+          "settlement.economicState.safetyProfile.flags": "watch",
+          "settlement.economicState.safetyProfile.flags.crimeIsGovt": "watch",
+          "settlement.economicState.safetyProfile.flags.stateCrime": "watch"
+        },
+        "holder": null,
+        "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
+        "standing": "LICENSED",
+        "twoSource": false,
+        "stateOrgan": true
+      },
+      "declares": [],
+      "lineDeclares": {
+        "garrison": 2,
+        "no garrison": 1
+      },
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-POW-5",
+      "pool": "FLAG: stateCrime, heavy",
+      "slotsFilled": [
+        "seat",
+        "settlement"
+      ],
+      "slotsNamed": [
+        "seat",
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 3,
+      "grammars": 3,
+      "predicate": [],
+      "branchReads": [
+        "settlement.economicState.safetyProfile.flags",
+        "settlement.economicState.safetyProfile.flags.crimeIsGovt",
+        "settlement.economicState.safetyProfile.flags.stateCrime"
+      ],
+      "fieldsRead": [
+        "settlement.economicState.safetyProfile.flags",
+        "settlement.economicState.safetyProfile.flags.crimeIsGovt",
+        "settlement.economicState.safetyProfile.flags.merchantArmy",
+        "settlement.economicState.safetyProfile.flags.merchantCriminalBlur",
+        "settlement.economicState.safetyProfile.flags.secularBrutalism",
+        "settlement.economicState.safetyProfile.flags.stateCrime",
+        "settlement.economicState.safetyProfile.flags.stateCrimeIntensity"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "structureFlagPoolKey",
+      "rung": "literal",
+      "reads": [
+        "settlement.economicState.safetyProfile.flags",
+        "settlement.economicState.safetyProfile.flags.crimeIsGovt",
+        "settlement.economicState.safetyProfile.flags.stateCrime"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "settlement.economicState.safetyProfile.flags": "measured",
+        "settlement.economicState.safetyProfile.flags.crimeIsGovt": "measured",
+        "settlement.economicState.safetyProfile.flags.stateCrime": "measured"
+      },
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "power.rulingStructure"
+      ],
+      "attach": [],
+      "k": 0,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "watch",
+        "kinds": [
+          "watch"
+        ],
+        "fields": {
+          "settlement.economicState.safetyProfile.flags": "watch",
+          "settlement.economicState.safetyProfile.flags.crimeIsGovt": "watch",
+          "settlement.economicState.safetyProfile.flags.stateCrime": "watch"
+        },
+        "holder": null,
+        "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
+        "standing": "LICENSED",
+        "twoSource": false,
+        "stateOrgan": true
+      },
+      "declares": [],
+      "lineDeclares": {
+        "garrison": 2,
+        "no garrison": 1
+      },
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-POW-5",
+      "pool": "FLAG: crimeIsGovt",
+      "slotsFilled": [
+        "seat",
+        "settlement"
+      ],
+      "slotsNamed": [
+        "seat",
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 3,
+      "grammars": 2,
+      "predicate": [
+        {
+          "field": "settlement.economicState.safetyProfile.flags.crimeIsGovt",
+          "op": "===",
+          "value": "true"
+        }
+      ],
+      "branchReads": [
+        "settlement.economicState.safetyProfile.flags",
+        "settlement.economicState.safetyProfile.flags.crimeIsGovt"
+      ],
+      "fieldsRead": [
+        "settlement.economicState.safetyProfile.flags",
+        "settlement.economicState.safetyProfile.flags.crimeIsGovt",
+        "settlement.economicState.safetyProfile.flags.merchantArmy",
+        "settlement.economicState.safetyProfile.flags.merchantCriminalBlur",
+        "settlement.economicState.safetyProfile.flags.secularBrutalism",
+        "settlement.economicState.safetyProfile.flags.stateCrime",
+        "settlement.economicState.safetyProfile.flags.stateCrimeIntensity"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "structureFlagPoolKey",
+      "rung": "literal",
+      "reads": [
+        "settlement.economicState.safetyProfile.flags",
+        "settlement.economicState.safetyProfile.flags.crimeIsGovt"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "settlement.economicState.safetyProfile.flags": "measured",
+        "settlement.economicState.safetyProfile.flags.crimeIsGovt": "measured"
+      },
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "power.rulingStructure"
+      ],
+      "attach": [],
+      "k": 1,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "watch",
+        "kinds": [
+          "watch"
+        ],
+        "fields": {
+          "settlement.economicState.safetyProfile.flags": "watch",
+          "settlement.economicState.safetyProfile.flags.crimeIsGovt": "watch"
+        },
+        "holder": null,
+        "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
+        "standing": "LICENSED",
+        "twoSource": false,
+        "stateOrgan": true
+      },
+      "declares": [],
+      "lineDeclares": {
+        "colour": 3
+      },
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-POW-5",
+      "pool": "FLAG: merchantArmy",
+      "slotsFilled": [
+        "seat",
+        "settlement"
+      ],
+      "slotsNamed": [
+        "seat",
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 2,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "settlement.economicState.safetyProfile.flags.merchantArmy",
+          "op": "===",
+          "value": "true"
+        }
+      ],
+      "branchReads": [
+        "settlement.economicState.safetyProfile.flags",
+        "settlement.economicState.safetyProfile.flags.crimeIsGovt",
+        "settlement.economicState.safetyProfile.flags.merchantArmy",
+        "settlement.economicState.safetyProfile.flags.stateCrime"
+      ],
+      "fieldsRead": [
+        "settlement.economicState.safetyProfile.flags",
+        "settlement.economicState.safetyProfile.flags.crimeIsGovt",
+        "settlement.economicState.safetyProfile.flags.merchantArmy",
+        "settlement.economicState.safetyProfile.flags.merchantCriminalBlur",
+        "settlement.economicState.safetyProfile.flags.secularBrutalism",
+        "settlement.economicState.safetyProfile.flags.stateCrime",
+        "settlement.economicState.safetyProfile.flags.stateCrimeIntensity"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "structureFlagPoolKey",
+      "rung": "literal",
+      "reads": [
+        "settlement.economicState.safetyProfile.flags",
+        "settlement.economicState.safetyProfile.flags.crimeIsGovt",
+        "settlement.economicState.safetyProfile.flags.merchantArmy",
+        "settlement.economicState.safetyProfile.flags.stateCrime"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "settlement.economicState.safetyProfile.flags": "measured",
+        "settlement.economicState.safetyProfile.flags.crimeIsGovt": "measured",
+        "settlement.economicState.safetyProfile.flags.merchantArmy": "measured",
+        "settlement.economicState.safetyProfile.flags.stateCrime": "measured"
+      },
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "power.rulingStructure"
+      ],
+      "attach": [],
+      "k": -1,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "watch",
+        "kinds": [
+          "watch"
+        ],
+        "fields": {
+          "settlement.economicState.safetyProfile.flags": "watch",
+          "settlement.economicState.safetyProfile.flags.crimeIsGovt": "watch",
+          "settlement.economicState.safetyProfile.flags.merchantArmy": "watch",
+          "settlement.economicState.safetyProfile.flags.stateCrime": "watch"
+        },
+        "holder": null,
+        "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
+        "standing": "LICENSED",
+        "twoSource": false,
+        "stateOrgan": true
+      },
+      "declares": [],
+      "lineDeclares": {
+        "colour": 1,
+        "mercenary": 1
+      },
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-POW-5",
+      "pool": "FLAG: merchantCriminalBlur",
+      "slotsFilled": [
+        "seat",
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 2,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "settlement.economicState.safetyProfile.flags.merchantCriminalBlur",
+          "op": "===",
+          "value": "true"
+        }
+      ],
+      "branchReads": [
+        "settlement.economicState.safetyProfile.flags",
+        "settlement.economicState.safetyProfile.flags.crimeIsGovt",
+        "settlement.economicState.safetyProfile.flags.merchantArmy",
+        "settlement.economicState.safetyProfile.flags.merchantCriminalBlur",
+        "settlement.economicState.safetyProfile.flags.stateCrime"
+      ],
+      "fieldsRead": [
+        "settlement.economicState.safetyProfile.flags",
+        "settlement.economicState.safetyProfile.flags.crimeIsGovt",
+        "settlement.economicState.safetyProfile.flags.merchantArmy",
+        "settlement.economicState.safetyProfile.flags.merchantCriminalBlur",
+        "settlement.economicState.safetyProfile.flags.secularBrutalism",
+        "settlement.economicState.safetyProfile.flags.stateCrime",
+        "settlement.economicState.safetyProfile.flags.stateCrimeIntensity"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "structureFlagPoolKey",
+      "rung": "literal",
+      "reads": [
+        "settlement.economicState.safetyProfile.flags",
+        "settlement.economicState.safetyProfile.flags.crimeIsGovt",
+        "settlement.economicState.safetyProfile.flags.merchantArmy",
+        "settlement.economicState.safetyProfile.flags.merchantCriminalBlur",
+        "settlement.economicState.safetyProfile.flags.stateCrime"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "settlement.economicState.safetyProfile.flags": "measured",
+        "settlement.economicState.safetyProfile.flags.crimeIsGovt": "measured",
+        "settlement.economicState.safetyProfile.flags.merchantArmy": "measured",
+        "settlement.economicState.safetyProfile.flags.merchantCriminalBlur": "measured",
+        "settlement.economicState.safetyProfile.flags.stateCrime": "measured"
+      },
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "power.rulingStructure"
+      ],
+      "attach": [],
+      "k": -2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "watch",
+        "kinds": [
+          "watch"
+        ],
+        "fields": {
+          "settlement.economicState.safetyProfile.flags": "watch",
+          "settlement.economicState.safetyProfile.flags.crimeIsGovt": "watch",
+          "settlement.economicState.safetyProfile.flags.merchantArmy": "watch",
+          "settlement.economicState.safetyProfile.flags.merchantCriminalBlur": "watch",
+          "settlement.economicState.safetyProfile.flags.stateCrime": "watch"
+        },
+        "holder": null,
+        "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
+        "standing": "LICENSED",
+        "twoSource": false,
+        "stateOrgan": true
+      },
+      "declares": [],
+      "lineDeclares": {
+        "colour": 1,
+        "guild": 1
+      },
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-POW-5",
+      "pool": "FLAG: secularBrutalism",
+      "slotsFilled": [
+        "seat",
+        "settlement"
+      ],
+      "slotsNamed": [
+        "seat",
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 2,
+      "grammars": 2,
+      "predicate": [
+        {
+          "field": "settlement.economicState.safetyProfile.flags.secularBrutalism",
+          "op": "===",
+          "value": "true"
+        }
+      ],
+      "branchReads": [
+        "settlement.economicState.safetyProfile.flags",
+        "settlement.economicState.safetyProfile.flags.crimeIsGovt",
+        "settlement.economicState.safetyProfile.flags.merchantArmy",
+        "settlement.economicState.safetyProfile.flags.merchantCriminalBlur",
+        "settlement.economicState.safetyProfile.flags.secularBrutalism",
+        "settlement.economicState.safetyProfile.flags.stateCrime"
+      ],
+      "fieldsRead": [
+        "settlement.economicState.safetyProfile.flags",
+        "settlement.economicState.safetyProfile.flags.crimeIsGovt",
+        "settlement.economicState.safetyProfile.flags.merchantArmy",
+        "settlement.economicState.safetyProfile.flags.merchantCriminalBlur",
+        "settlement.economicState.safetyProfile.flags.secularBrutalism",
+        "settlement.economicState.safetyProfile.flags.stateCrime",
+        "settlement.economicState.safetyProfile.flags.stateCrimeIntensity"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "structureFlagPoolKey",
+      "rung": "literal",
+      "reads": [
+        "settlement.economicState.safetyProfile.flags",
+        "settlement.economicState.safetyProfile.flags.crimeIsGovt",
+        "settlement.economicState.safetyProfile.flags.merchantArmy",
+        "settlement.economicState.safetyProfile.flags.merchantCriminalBlur",
+        "settlement.economicState.safetyProfile.flags.secularBrutalism",
+        "settlement.economicState.safetyProfile.flags.stateCrime"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "settlement.economicState.safetyProfile.flags": "measured",
+        "settlement.economicState.safetyProfile.flags.crimeIsGovt": "measured",
+        "settlement.economicState.safetyProfile.flags.merchantArmy": "measured",
+        "settlement.economicState.safetyProfile.flags.merchantCriminalBlur": "measured",
+        "settlement.economicState.safetyProfile.flags.secularBrutalism": "measured",
+        "settlement.economicState.safetyProfile.flags.stateCrime": "measured"
+      },
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "power.rulingStructure"
+      ],
+      "attach": [],
+      "k": -3,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "watch",
+        "kinds": [
+          "watch"
+        ],
+        "fields": {
+          "settlement.economicState.safetyProfile.flags": "watch",
+          "settlement.economicState.safetyProfile.flags.crimeIsGovt": "watch",
+          "settlement.economicState.safetyProfile.flags.merchantArmy": "watch",
+          "settlement.economicState.safetyProfile.flags.merchantCriminalBlur": "watch",
+          "settlement.economicState.safetyProfile.flags.secularBrutalism": "watch",
+          "settlement.economicState.safetyProfile.flags.stateCrime": "watch"
+        },
+        "holder": null,
+        "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
+        "standing": "LICENSED",
+        "twoSource": false,
+        "stateOrgan": true
+      },
+      "declares": [],
+      "lineDeclares": {
+        "garrison": 2,
+        "no sacredHouse": 1
+      },
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
       "block": "DS-POW-6",
       "pool": "present: false (no legitimacy reading)",
       "slotsFilled": [
@@ -29703,6 +30225,133 @@
       "lineDeclares": {
         "colour": 2,
         "market": 1
+      },
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-POW-6",
+      "pool": "GM ADVISORY: the commander is a political actor",
+      "slotsFilled": [
+        "faction",
+        "seat",
+        "settlement"
+      ],
+      "slotsNamed": [
+        "seat",
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 2,
+      "grammars": 1,
+      "predicate": [],
+      "branchReads": [
+        "power.factionRelationships"
+      ],
+      "fieldsRead": [
+        "power.factionRelationships"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "gmAdvisoryPoolKey",
+      "rung": "literal",
+      "reads": [
+        "power.factionRelationships"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "power.factionRelationships": "measured"
+      },
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "power.criminalUnderside"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "power.factionRelationships": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {
+        "commander": 2
+      },
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-POW-6",
+      "pool": "GM ADVISORY: officials with criminal arrangements",
+      "slotsFilled": [
+        "faction",
+        "seat",
+        "settlement"
+      ],
+      "slotsNamed": [
+        "faction",
+        "seat",
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 2,
+      "grammars": 1,
+      "predicate": [],
+      "branchReads": [
+        "power.factionRelationships"
+      ],
+      "fieldsRead": [
+        "power.factionRelationships"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "gmAdvisoryPoolKey",
+      "rung": "literal",
+      "reads": [
+        "power.factionRelationships"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "power.factionRelationships": "measured"
+      },
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "power.criminalUnderside"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "power.factionRelationships": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {
+        "colour": 2
       },
       "undeclared": 0,
       "crisisScoped": false
@@ -44423,6 +45072,50 @@
       ]
     },
     {
+      "fact": "settlement.economicState.safetyProfile.flags.crimeIsGovt",
+      "pools": [
+        "DS-POW-5 :: FLAG: crimeIsGovt"
+      ],
+      "variants": 3,
+      "grammars": 2,
+      "blocks": [
+        "DS-POW-5"
+      ]
+    },
+    {
+      "fact": "settlement.economicState.safetyProfile.flags.merchantArmy",
+      "pools": [
+        "DS-POW-5 :: FLAG: merchantArmy"
+      ],
+      "variants": 2,
+      "grammars": 1,
+      "blocks": [
+        "DS-POW-5"
+      ]
+    },
+    {
+      "fact": "settlement.economicState.safetyProfile.flags.merchantCriminalBlur",
+      "pools": [
+        "DS-POW-5 :: FLAG: merchantCriminalBlur"
+      ],
+      "variants": 2,
+      "grammars": 1,
+      "blocks": [
+        "DS-POW-5"
+      ]
+    },
+    {
+      "fact": "settlement.economicState.safetyProfile.flags.secularBrutalism",
+      "pools": [
+        "DS-POW-5 :: FLAG: secularBrutalism"
+      ],
+      "variants": 2,
+      "grammars": 2,
+      "blocks": [
+        "DS-POW-5"
+      ]
+    },
+    {
       "fact": "settlement.economicViability.viable",
       "pools": [
         "DS-DEF-8 :: override active, viability threatened"
@@ -46604,9 +47297,11 @@
       },
       {
         "field": "settlement.economicState",
-        "mountsSpine": 0,
-        "mountsModifier": 29,
-        "spineTabs": [],
+        "mountsSpine": 1,
+        "mountsModifier": 22,
+        "spineTabs": [
+          "power"
+        ],
         "modifierMounts": [
           "defense.armedForces",
           "defense.criminalStructure",
@@ -46626,13 +47321,6 @@
           "economics.seasonTile",
           "economics.shadowEconomy",
           "economics.tradeFlow",
-          "power.blocs",
-          "power.criminalUnderside",
-          "power.factionLadder",
-          "power.legitimacyBanner",
-          "power.rulingStructure",
-          "power.stabilityHeader",
-          "power.succession",
           "resources.groundAndWorkings",
           "services.catalogStanding",
           "viability.magicDependency",
@@ -47024,7 +47712,7 @@
       ],
       [
         "power",
-        7
+        6
       ],
       [
         "war",
@@ -47317,17 +48005,17 @@
     },
     {
       "block": "DS-POW-5",
-      "spines": 1,
-      "facts": 1,
-      "spinesReachedBp": 0,
-      "meanReachBp": 0
+      "spines": 7,
+      "facts": 7,
+      "spinesReachedBp": 10000,
+      "meanReachBp": 5102
     },
     {
       "block": "DS-POW-6",
-      "spines": 7,
-      "facts": 8,
+      "spines": 9,
+      "facts": 9,
       "spinesReachedBp": 10000,
-      "meanReachBp": 7143
+      "meanReachBp": 7778
     },
     {
       "block": "DS-POW-7",
@@ -49161,23 +49849,79 @@
     },
     {
       "block": "DS-POW-5",
-      "spines": 1,
-      "facts": 1,
-      "spinesReachedBp": 0,
-      "meanReachBp": 0,
+      "spines": 7,
+      "facts": 7,
+      "spinesReachedBp": 10000,
+      "meanReachBp": 5102,
       "byFact": [
         {
           "field": "politics.blocs",
-          "attach": []
+          "attach": [
+            "FLAG: stateCrime",
+            "FLAG: stateCrime, heavy",
+            "FLAG: crimeIsGovt",
+            "FLAG: merchantArmy",
+            "FLAG: merchantCriminalBlur",
+            "FLAG: secularBrutalism"
+          ]
+        },
+        {
+          "field": "settlement.economicState.safetyProfile.flags",
+          "attach": [
+            "autocrat"
+          ]
+        },
+        {
+          "field": "settlement.economicState.safetyProfile.flags.crimeIsGovt",
+          "attach": [
+            "autocrat"
+          ]
+        },
+        {
+          "field": "settlement.economicState.safetyProfile.flags.merchantArmy",
+          "attach": [
+            "autocrat",
+            "FLAG: stateCrime",
+            "FLAG: stateCrime, heavy",
+            "FLAG: crimeIsGovt"
+          ]
+        },
+        {
+          "field": "settlement.economicState.safetyProfile.flags.merchantCriminalBlur",
+          "attach": [
+            "autocrat",
+            "FLAG: stateCrime",
+            "FLAG: stateCrime, heavy",
+            "FLAG: crimeIsGovt",
+            "FLAG: merchantArmy"
+          ]
+        },
+        {
+          "field": "settlement.economicState.safetyProfile.flags.secularBrutalism",
+          "attach": [
+            "autocrat",
+            "FLAG: stateCrime",
+            "FLAG: stateCrime, heavy",
+            "FLAG: crimeIsGovt",
+            "FLAG: merchantArmy",
+            "FLAG: merchantCriminalBlur"
+          ]
+        },
+        {
+          "field": "settlement.economicState.safetyProfile.flags.stateCrime",
+          "attach": [
+            "autocrat",
+            "FLAG: crimeIsGovt"
+          ]
         }
       ]
     },
     {
       "block": "DS-POW-6",
-      "spines": 7,
-      "facts": 8,
+      "spines": 9,
+      "facts": 9,
       "spinesReachedBp": 10000,
-      "meanReachBp": 7143,
+      "meanReachBp": 7778,
       "byFact": [
         {
           "field": "breakdown",
@@ -49186,7 +49930,9 @@
             "neutral baseline (nothing pulling either way)",
             "capture reached an AGENT of a faction",
             "capture reached a LEADER",
-            "operation role criminal revenue stream (unclassified)"
+            "operation role criminal revenue stream (unclassified)",
+            "GM ADVISORY: the commander is a political actor",
+            "GM ADVISORY: officials with criminal arrangements"
           ]
         },
         {
@@ -49196,7 +49942,9 @@
             "neutral baseline (nothing pulling either way)",
             "capture reached an AGENT of a faction",
             "capture reached a LEADER",
-            "operation role criminal revenue stream (unclassified)"
+            "operation role criminal revenue stream (unclassified)",
+            "GM ADVISORY: the commander is a political actor",
+            "GM ADVISORY: officials with criminal arrangements"
           ]
         },
         {
@@ -49206,7 +49954,9 @@
             "neutral baseline (nothing pulling either way)",
             "capture reached an AGENT of a faction",
             "capture reached a LEADER",
-            "operation role criminal revenue stream (unclassified)"
+            "operation role criminal revenue stream (unclassified)",
+            "GM ADVISORY: the commander is a political actor",
+            "GM ADVISORY: officials with criminal arrangements"
           ]
         },
         {
@@ -49216,7 +49966,9 @@
             "capture pressure RECOVERING (strong security, prosperity)",
             "capture reached an AGENT of a faction",
             "capture reached a LEADER",
-            "operation role criminal revenue stream (unclassified)"
+            "operation role criminal revenue stream (unclassified)",
+            "GM ADVISORY: the commander is a political actor",
+            "GM ADVISORY: officials with criminal arrangements"
           ]
         },
         {
@@ -49226,7 +49978,9 @@
             "capture pressure RECOVERING (strong security, prosperity)",
             "capture reached an AGENT of a faction",
             "capture reached a LEADER",
-            "operation role criminal revenue stream (unclassified)"
+            "operation role criminal revenue stream (unclassified)",
+            "GM ADVISORY: the commander is a political actor",
+            "GM ADVISORY: officials with criminal arrangements"
           ]
         },
         {
@@ -49237,7 +49991,9 @@
             "capture pressure RECOVERING (strong security, prosperity)",
             "capture reached an AGENT of a faction",
             "capture reached a LEADER",
-            "operation role criminal revenue stream (unclassified)"
+            "operation role criminal revenue stream (unclassified)",
+            "GM ADVISORY: the commander is a political actor",
+            "GM ADVISORY: officials with criminal arrangements"
           ]
         },
         {
@@ -49248,7 +50004,9 @@
             "capture pressure ADVANCING (weak security, poor prosperity)",
             "capture pressure RECOVERING (strong security, prosperity)",
             "capture reached an AGENT of a faction",
-            "capture reached a LEADER"
+            "capture reached a LEADER",
+            "GM ADVISORY: the commander is a political actor",
+            "GM ADVISORY: officials with criminal arrangements"
           ]
         },
         {
@@ -49256,6 +50014,20 @@
           "attach": [
             "present: false (no legitimacy reading)",
             "neutral baseline (nothing pulling either way)",
+            "operation role criminal revenue stream (unclassified)",
+            "GM ADVISORY: the commander is a political actor",
+            "GM ADVISORY: officials with criminal arrangements"
+          ]
+        },
+        {
+          "field": "power.factionRelationships",
+          "attach": [
+            "present: false (no legitimacy reading)",
+            "neutral baseline (nothing pulling either way)",
+            "capture pressure ADVANCING (weak security, poor prosperity)",
+            "capture pressure RECOVERING (strong security, prosperity)",
+            "capture reached an AGENT of a faction",
+            "capture reached a LEADER",
             "operation role criminal revenue stream (unclassified)"
           ]
         }
@@ -49635,8 +50407,8 @@
     }
   ],
   "factBudget": {
-    "zeroK": 49,
-    "executable": 341,
+    "zeroK": 54,
+    "executable": 349,
     "notExecutable": 368,
     "byBlock": [
       [
@@ -49650,6 +50422,13 @@
         "DS-ECO-2",
         {
           "zeroK": 7,
+          "spines": 7
+        }
+      ],
+      [
+        "DS-POW-5",
+        {
+          "zeroK": 5,
           "spines": 7
         }
       ],
@@ -49699,7 +50478,7 @@
         "DS-POW-6",
         {
           "zeroK": 3,
-          "spines": 7
+          "spines": 9
         }
       ],
       [
@@ -49941,13 +50720,6 @@
         }
       ],
       [
-        "DS-POW-5",
-        {
-          "zeroK": 0,
-          "spines": 1
-        }
-      ],
-      [
         "DS-POW-7",
         {
           "zeroK": 0,
@@ -49992,52 +50764,60 @@
     ],
     "histogram": [
       [
-        -2,
-        11
+        -3,
+        1
       ],
       [
-        -1,
+        -2,
         12
       ],
       [
+        -1,
+        13
+      ],
+      [
         0,
-        26
+        28
       ],
       [
         1,
-        82
+        83
       ],
       [
         2,
-        210
+        212
       ]
     ]
   },
   "grains": {
     "branch": {
-      "zeroK": 49,
-      "executable": 341,
+      "zeroK": 54,
+      "executable": 349,
       "notExecutable": 368,
       "histogram": [
         [
-          -2,
-          11
+          -3,
+          1
         ],
         [
-          -1,
+          -2,
           12
         ],
         [
+          -1,
+          13
+        ],
+        [
           0,
-          26
+          28
         ],
         [
           1,
-          82
+          83
         ],
         [
           2,
-          210
+          212
         ]
       ],
       "blocksWithSpine": 50,
@@ -50059,12 +50839,11 @@
         "DS-GEN-9",
         "DS-POP-3",
         "DS-POW-1",
-        "DS-POW-5",
         "DS-POW-7",
         "DS-STR-1",
         "DS-WAR-3"
       ],
-      "readPaths": 555,
+      "readPaths": 580,
       "modifierEligibleFactsByTab": [
         [
           "viability",
@@ -50104,7 +50883,7 @@
         ],
         [
           "power",
-          7
+          6
         ],
         [
           "war",
@@ -50121,8 +50900,8 @@
       ]
     },
     "function": {
-      "zeroK": 125,
-      "executable": 341,
+      "zeroK": 131,
+      "executable": 349,
       "notExecutable": 368,
       "histogram": [
         [
@@ -50131,7 +50910,7 @@
         ],
         [
           -4,
-          7
+          13
         ],
         [
           -2,
@@ -50151,7 +50930,7 @@
         ],
         [
           2,
-          130
+          132
         ]
       ],
       "blocksWithSpine": 50,
@@ -50177,12 +50956,11 @@
         "DS-POP-3",
         "DS-POW-1",
         "DS-POW-3",
-        "DS-POW-5",
         "DS-POW-7",
         "DS-STR-1",
         "DS-WAR-3"
       ],
-      "readPaths": 792,
+      "readPaths": 836,
       "modifierEligibleFactsByTab": [
         [
           "viability",
@@ -50221,12 +50999,12 @@
           9
         ],
         [
-          "power",
+          "faith",
           6
         ],
         [
-          "faith",
-          6
+          "power",
+          5
         ],
         [
           "defense",
@@ -50526,14 +51304,14 @@
     ],
     "summary": {
       "rows": {
-        "LICENSED": 114,
+        "LICENSED": 120,
         "OFFICE": 3,
-        "SOURCE-UNRESOLVED": 592
+        "SOURCE-UNRESOLVED": 594
       },
       "fields": {
-        "LICENSED": 191,
+        "LICENSED": 214,
         "OFFICE": 5,
-        "SOURCE-UNRESOLVED": 419
+        "SOURCE-UNRESOLVED": 421
       },
       "byKind": [
         [
@@ -50543,6 +51321,10 @@
         [
           "market",
           49
+        ],
+        [
+          "watch",
+          32
         ],
         [
           "treasury",
@@ -50555,10 +51337,6 @@
         [
           "toll-bar",
           12
-        ],
-        [
-          "watch",
-          9
         ],
         [
           "road",
@@ -50578,7 +51356,7 @@
         ]
       ],
       "unresolvedGrounds": {
-        "no-mapping": 419,
+        "no-mapping": 421,
         "no-institution-in-roster": 0
       },
       "twoSourceRows": 10,
@@ -51937,8 +52715,8 @@
       "leafBoth": 0,
       "leafEither": 2,
       "leafRows": [],
-      "deskRoots": 92,
-      "deskSegments": 194
+      "deskRoots": 93,
+      "deskSegments": 202
     }
   },
   "ratifiedAliases": {
@@ -52271,6 +53049,36 @@
       "wage",
       "wages"
     ],
+    "settlement.economicState.safetyProfile.flags": [
+      "roll",
+      "rolls",
+      "watch"
+    ],
+    "settlement.economicState.safetyProfile.flags.crimeIsGovt": [
+      "roll",
+      "rolls",
+      "watch"
+    ],
+    "settlement.economicState.safetyProfile.flags.merchantArmy": [
+      "roll",
+      "rolls",
+      "watch"
+    ],
+    "settlement.economicState.safetyProfile.flags.merchantCriminalBlur": [
+      "roll",
+      "rolls",
+      "watch"
+    ],
+    "settlement.economicState.safetyProfile.flags.secularBrutalism": [
+      "roll",
+      "rolls",
+      "watch"
+    ],
+    "settlement.economicState.safetyProfile.flags.stateCrime": [
+      "roll",
+      "rolls",
+      "watch"
+    ],
     "settlement.economicViability.viable": [
       "books",
       "chest",
@@ -52574,16 +53382,6 @@
       "subject": "readings.riskLabel",
       "fields": [
         "readings.riskLabel"
-      ],
-      "readingFunction": "(no key function reads it)",
-      "count": "0 pools keyed on this fact"
-    },
-    {
-      "tier": "MISSING",
-      "block": "(composer-wide)",
-      "subject": "settlement.economicState",
-      "fields": [
-        "settlement.economicState"
       ],
       "readingFunction": "(no key function reads it)",
       "count": "0 pools keyed on this fact"
@@ -56765,6 +57563,62 @@
     },
     {
       "tier": "COVERED",
+      "block": "DS-POW-5",
+      "subject": "FLAG: stateCrime",
+      "fields": [],
+      "readingFunction": "structureFlagPoolKey",
+      "count": "3 variant(s) · 2 grammar(s) · slots {seat, settlement}"
+    },
+    {
+      "tier": "COVERED",
+      "block": "DS-POW-5",
+      "subject": "FLAG: stateCrime, heavy",
+      "fields": [],
+      "readingFunction": "structureFlagPoolKey",
+      "count": "3 variant(s) · 3 grammar(s) · slots {seat, settlement}"
+    },
+    {
+      "tier": "COVERED",
+      "block": "DS-POW-5",
+      "subject": "FLAG: crimeIsGovt",
+      "fields": [
+        "settlement.economicState.safetyProfile.flags.crimeIsGovt"
+      ],
+      "readingFunction": "structureFlagPoolKey",
+      "count": "3 variant(s) · 2 grammar(s) · slots {seat, settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-POW-5",
+      "subject": "FLAG: merchantArmy",
+      "fields": [
+        "settlement.economicState.safetyProfile.flags.merchantArmy"
+      ],
+      "readingFunction": "structureFlagPoolKey",
+      "count": "2 variant(s) · 1 grammar(s) · slots {seat, settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-POW-5",
+      "subject": "FLAG: merchantCriminalBlur",
+      "fields": [
+        "settlement.economicState.safetyProfile.flags.merchantCriminalBlur"
+      ],
+      "readingFunction": "structureFlagPoolKey",
+      "count": "2 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "COVERED",
+      "block": "DS-POW-5",
+      "subject": "FLAG: secularBrutalism",
+      "fields": [
+        "settlement.economicState.safetyProfile.flags.secularBrutalism"
+      ],
+      "readingFunction": "structureFlagPoolKey",
+      "count": "2 variant(s) · 2 grammar(s) · slots {seat, settlement}"
+    },
+    {
+      "tier": "COVERED",
       "block": "DS-POW-6",
       "subject": "present: false (no legitimacy reading)",
       "fields": [
@@ -56874,6 +57728,22 @@
       "fields": [],
       "readingFunction": "operationRolePoolKey",
       "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-POW-6",
+      "subject": "GM ADVISORY: the commander is a political actor",
+      "fields": [],
+      "readingFunction": "gmAdvisoryPoolKey",
+      "count": "2 variant(s) · 1 grammar(s) · slots {seat, settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-POW-6",
+      "subject": "GM ADVISORY: officials with criminal arrangements",
+      "fields": [],
+      "readingFunction": "gmAdvisoryPoolKey",
+      "count": "2 variant(s) · 1 grammar(s) · slots {faction, seat, settlement}"
     },
     {
       "tier": "THIN",

@@ -515,9 +515,11 @@ export function buildPrintProse(settlement, ctx = {}) {
     printed('power.criminalUnderside', power.legitimacyReading),
     printed('power.criminalUnderside', power.captureReading),
     printed('power.criminalUnderside', power.operationReading),
+    printed('power.criminalUnderside', power.gmAdvisory),
   ]);
   put('power', 'power.rulingStructure', [
     printed('power.rulingStructure', power.rulingStructure),
+    printed('power.rulingStructure', power.structureFlag),
   ]);
   put('power', 'power.succession', [
     printed('power.succession', power.successionRisk),

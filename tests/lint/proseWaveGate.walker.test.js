@@ -955,7 +955,8 @@ describe('THE ROSTER — a desk section is a LEAF, and the partition is asserted
     // partition makes "impossible" a measurement.
     const cover = sectionsCoverEveryPool();
     expect(cover.sections).toBe(6);
-    expect(cover.pools, 'every shipped pool').toBe(709);
+    // WIRING W3 (2026-11-07), C1-C6 said in DS-POW-5/-6 (+8 pools, +19 variants): 709 -> 717.
+    expect(cover.pools, 'every shipped pool').toBe(717);
     expect(cover.unreached, 'a pool no section reaches').toEqual([]);
     expect(cover.twice, 'a pool two sections claim').toEqual([]);
   });
@@ -971,7 +972,8 @@ describe('THE ROSTER — a desk section is a LEAF, and the partition is asserted
           .toMatch(/^[a-z0-9-]+$/);
       }
     }
-    expect(total, 'and the six sum to the corpus').toBe(709);
+    // WIRING W3 (2026-11-07), C1-C6 said in DS-POW-5/-6 (+8 pools, +19 variants): 709 -> 717.
+    expect(total, 'and the six sum to the corpus').toBe(717);
     expect(poolRosterOf({ section: 'no-such-desk' }).rows).toEqual([]);
     expect(poolRosterOf({ section: 'no-such-desk' }).why).toContain('NOT-EXECUTABLE');
     expect(poolRosterOf({}).rows.length, 'and no flag at all is the taste\'s seven').toBe(7);

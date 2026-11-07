@@ -2296,6 +2296,34 @@ and never an assertion that the feared thing is happening.
 2. `[visitor]` A stranger who addresses the {seat} at {settlement} by any other title is corrected, politely and immediately.
 3. `[street]` The town at {settlement} calls the hall by its proper title in public and something shorter everywhere else, and both usages are precise.
 
+**FLAG: stateCrime** *(WIRING W3 C2: `safetyProfile.flags.stateCrime`, intensity below the heavy band)*
+1. `[street · garrison]` The garrison keeps {settlement}'s streets quiet and takes its own cut for doing it: dues collected twice, goods taken without payment, and no complaint made where a soldier can hear.
+2. `[counterforce · garrison]` Common thieves are rare at {settlement}; the danger is the garrison. Soldiers take what they please in the {seat}'s name, and people who object are not talked about afterwards.
+3. `[counterforce · no garrison]` Common thieves are rare at {settlement}; the danger is the {seat}'s own armed officials, who take what they please in its name.
+
+**FLAG: stateCrime, heavy** *(WIRING W3 C2: `safetyProfile.flags.stateCrime` with `stateCrimeIntensity` in the heavy band)*
+1. `[street · garrison]` The garrison at {settlement} no longer keeps the peace for anyone but itself. Soldiers set the dues, take what they want, and people who argue with them are not seen again.
+2. `[visitor · garrison]` Travellers reach {settlement} and find empty streets and soldiers on every corner. Nobody will talk about the {seat}, and nobody will say where the missing went.
+3. `[counterforce · no garrison]` The {seat}'s armed officials at {settlement} take what they want and answer to nobody; people who argue with them are not seen again.
+
+**FLAG: crimeIsGovt** *(WIRING W3 C3: `safetyProfile.flags.crimeIsGovt`)*
+1. `[street · colour]` There is no law at {settlement} but what the criminal bosses enforce. They keep a kind of order and charge for it, and whoever cannot pay goes unprotected.
+2. `[ledger · colour]` The {seat} at {settlement} holds the title and little else. The criminal bosses settle disputes, collect debts and hand out punishments, and the town pays them as it would pay a tax.
+3. `[visitor · colour]` Newcomers at {settlement} learn quickly that a grievance goes to whoever runs their part of the place, not to the {seat}, and that the hearing has a price.
+
+**FLAG: merchantArmy** *(WIRING W3 C4: `safetyProfile.flags.merchantArmy`)*
+1. `[ledger · colour]` The merchant houses at {settlement} pay for their own armed guards, and those guards keep order wherever the houses do business. Where the guards and the {seat} disagree, the guards usually win.
+2. `[counterforce · mercenary]` Order at {settlement} is kept by hired swords on merchant pay. They answer to whoever pays them, not to the {seat}.
+
+**FLAG: merchantCriminalBlur** *(WIRING W3 C5: `safetyProfile.flags.merchantCriminalBlur`)*
+1. `[ledger · guild]` At {settlement} the richest merchants and the criminal bosses are often the same people; a deal struck in the guild hall and a deal struck in a back room look much alike.
+2. `[street · colour]` Ask at {settlement} which traders are honest and people laugh. The money behind the trade and the money behind the rackets is the same money.
+
+**FLAG: secularBrutalism** *(WIRING W3 C6: `safetyProfile.flags.secularBrutalism`)*
+1. `[street · garrison · no sacredHouse]` {settlement} is ruled by force. Soldiers carry out the {seat}'s orders, and no temple or priest stands between the town and the punishment.
+2. `[counterforce · garrison]` Punishment at {settlement} is quick and public, handed out by soldiers, and there is nobody to appeal to but the {seat}.
+
+
 ---
 
 ### DS-POW-6: `POWER: public legitimacy, criminal capture, safety (the ladder cells the surfaces do not reach)` · `governanceLedger(settlement) + factionStates[].captureState + safetyProfile`
@@ -2386,6 +2414,15 @@ own entailment and licenses nothing about who runs it.
 1. `[ledger · colour]` There is criminal infrastructure at {settlement} with local weight, territorial or economic, and no clearer description of it than that.
 2. `[street · colour]` There is somebody at {settlement} who does well out of arrangements the town does not enquire into, and the doing-well is the only visible part.
 3. `[visitor · market]` A stranger at {settlement} is told there is money in the town that does not come from the market, and is told no more than that.
+
+**GM ADVISORY: the commander is a political actor** *(WIRING W3 C1: `factionRelationships[].dmNote` on a competitive governing-military pair; every variant `dm-only`)*
+1. `[ledger · dm-only · commander]` The commander at {settlement} is a political player in their own right. Whatever the {seat} plans needs the commander's backing, and that backing has to be kept, bought or worked around.
+2. `[counterforce · dm-only · commander]` Treat the commander at {settlement} as a power, not a servant: the {seat} cannot act against the soldiers' wishes, and anyone who wins the commander over wins the town's muscle.
+
+**GM ADVISORY: officials with criminal arrangements** *(WIRING W3 C1: `factionRelationships[].dmNote` on a governing-criminal pair whose capture state is past adversarial; every variant `dm-only`)*
+1. `[ledger · dm-only · colour]` Settle before play which officials of the {seat} at {settlement} have an understanding with {faction}, and what each one owes; every name is a thread the party can pull.
+2. `[street · dm-only · colour]` Some of the {seat}'s people at {settlement} are in {faction}'s pocket. Decide who they are and what they would lose if it came out, and the hooks write themselves.
+
 
 ---
 

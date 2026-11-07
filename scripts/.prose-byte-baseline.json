@@ -73,8 +73,8 @@
       "ceilingGzip": 177058
     },
     "src/data/dossierStateProse/power.generated.js": {
-      "raw": 115715,
-      "gzip": 17079,
+      "raw": 125681,
+      "gzip": 18543,
       "ceilingRaw": 357097,
       "ceilingGzip": 79355
     },
@@ -307,6 +307,14 @@
       "toRaw": 94103,
       "gzipAfter": 15113,
       "reason": "+341 B raw (gzip level 9: 15,067 -> 15,113), one commit: DS-CND-1 ARCHETYPE: boom gains v4 `[street · crisis: any]`, reading only the archetype and the name, so a keyed boom has a printable line under any crisis (v1-v3 each deny hunger, threat and indebted). Projected through `node scripts/generate-dossier-state-prose.mjs`; `--check` exit 0."
+    },
+    {
+      "car": "WIRING W3 POW (2026-11-07), the construction: C1-C6 said in DS-POW-5 / DS-POW-6",
+      "leaf": "src/data/dossierStateProse/power.generated.js",
+      "fromRaw": 115715,
+      "toRaw": 125681,
+      "gzipAfter": 18543,
+      "reason": "+9,966 B: eight new pools (the five structure flags, stateCrime banded by intensity, in DS-POW-5; the GM advisory's two in DS-POW-6), 19 variants with their poolMeta. Projected through node scripts/generate-dossier-state-prose.mjs; --check exit 0 at the tip."
     }
   ],
   "ceilingTransfersNewLeaves": [

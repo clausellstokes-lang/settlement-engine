@@ -60,6 +60,15 @@ const LADDER_MOUNT = 'power.factionLadder';
 
 /** Ruling structure: the ruling-power word, the economic base, and the body's own title. */
 const STRUCTURE_MOUNT = 'power.rulingStructure';
+// The public dossier draws no corpus prose (§885.3): every rung null. WIRING W3 (2026-11-07)
+// added `structureFlag` and `gmAdvisory` and lifted the record here, out of the gated call.
+const PUBLIC_DOSSIER_PROSE = Object.freeze({
+  legitimacyBanner: null, legitimacyLens: null, stabilityHeader: null, stabilityLens: null,
+  legitimacyReading: null, captureReading: null, operationReading: null,
+  successionRisk: null, successionHold: null,
+  rulingStructure: null, governingTitle: null, structureFlag: null, gmAdvisory: null,
+  blocPresence: null, blocGlue: null, blocEnd: null,
+});
 
 /** Blocs and the divided court. Three draws at one position. */
 const BLOCS_MOUNT = 'power.blocs';
@@ -245,13 +254,7 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
     }),
   };
   const deskProse = publicDossier
-    ? Object.freeze({
-      legitimacyBanner: null, legitimacyLens: null, stabilityHeader: null, stabilityLens: null,
-      legitimacyReading: null, captureReading: null, operationReading: null,
-      successionRisk: null, successionHold: null,
-      rulingStructure: null, governingTitle: null,
-      blocPresence: null, blocGlue: null, blocEnd: null,
-    })
+    ? PUBLIC_DOSSIER_PROSE
     : powerStateProse(s, deskReadings, {
       seed: String(s?._seed ?? s?.id ?? ''), audience, tierNoun: tierNounFor(s?.tier),
     });
@@ -261,7 +264,9 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
   const drawnReading  = drawnAtMount(UNDERSIDE_MOUNT, deskProse.legitimacyReading);
   const drawnCapture  = drawnAtMount(UNDERSIDE_MOUNT, deskProse.captureReading);
   const drawnOperation = drawnAtMount(UNDERSIDE_MOUNT, deskProse.operationReading);
-  const undersideLines = [drawnReading, drawnCapture, drawnOperation]
+  // WIRING W3: the GM advisory (DS-POW-6, every variant dm-only) speaks last at the underside.
+  const drawnAdvisory = drawnAtMount(UNDERSIDE_MOUNT, deskProse.gmAdvisory);
+  const undersideLines = [drawnReading, drawnCapture, drawnOperation, drawnAdvisory]
     .map((d) => d?.sentence).filter(Boolean);
   // T2-18: the DORMANT presence line ("the hall is not organized into sides") is true of every
   // unplayed world and plays nothing, so off-campaign the bloc position is silent (R4).
@@ -273,6 +278,8 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
   ].map((d) => d?.sentence).filter(Boolean);
   const structureLines = [
     drawnAtMount(STRUCTURE_MOUNT, deskProse.rulingStructure),
+    // WIRING W3: the structure flag (who actually holds the force), under the ruling power.
+    drawnAtMount(STRUCTURE_MOUNT, deskProse.structureFlag),
     // T2-17: the governing-title lens (the hall's NAME, which the ruling chain prints) is cut.
   ].map((d) => d?.sentence).filter(Boolean);
   const successionLines = [
@@ -450,7 +457,7 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
           dm-only, so it follows the coupling prose (the block law, X-16 rung 4). */}
       {undersideLines.length > 0 && (
         <div style={{background:swatch['#FAF8F4'],border:'1px solid #e0c890',borderLeft:'4px solid #4a1a4a',padding:'10px 14px',...FLUSH}}>
-          <div style={{...LITERARY_TITLE,color:swatch.inkMag,marginBottom:5}}>The quieter arithmetic</div>
+          <div style={{...LITERARY_TITLE,color:swatch.inkMag,marginBottom:5}}>Crime and the hall</div>
           <ProseBlock lines={undersideLines} settlementName={s?.name} tier={s?.tier}
             style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}/>
         </div>
