@@ -49,6 +49,11 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 // 36, 49 (66b1407bd, the food per cent from the pounds, record 34) and 8, 14, 20, 44 (8e92c0440, the Village watch
 // presumes no governor, record 35); 5f6d243b2 and every other step move none. Re-captured at 3c62e8ef5 with the factor
 // forced to 1.0, twice and equal.
+// RE-KEYED BY IDENTITY 2026-11-07 (WIRING-W0 cause 1, THE MIGRATION DIRECTION DECLARED ONCE, the chair's R-W7 (e); record
+// docs/shift-records/2026-11-07-w0-01-migration-direction.json): 1 of 60 moved, 57 (c71c3f22a9a9ff75 → a9588a373c64d70f), a
+// mass_migration place (its record gains stress[].direction and the config projection, the stability label names the one
+// direction, the arrivals vignette and secret pool); not the budget. Measured by this file's own loop at 343bd4eec against
+// its parent 76febf9b0 (0 moved there); re-captured with the factor forced to 1.0, twice and equal.
 const BEFORE = Object.freeze([
   'e6ac9242fde826c5', // 0
   '538078cfed56f711', // 1
@@ -107,7 +112,7 @@ const BEFORE = Object.freeze([
   '180216611784fa28', // 54
   '5ae67ffa0872db75', // 55
   '449037fc9ff9de04', // 56
-  'c71c3f22a9a9ff75', // 57
+  'a9588a373c64d70f', // 57
   'f3f392c41a641472', // 58
   'b212c921fe91d52a', // 59
 ]);

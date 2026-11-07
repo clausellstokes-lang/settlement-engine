@@ -80,7 +80,7 @@ const STRESSOR_EDITS_KEY = 'stressor' + 'Edits';
 const CONFIG_PATCH_EXTRA_KEYS = new Set(('consumers contentProfileId cultureProfileId '
   + 'cultureProfileKey customTradeGoods eventConditions exportBonus faith '
   + 'generationContentProfile has importLabels intendedStressTypes latentPantheon '
-  + 'magicLevel minTier nearbyResourceDefinitions nearbyResourceDefinitionsDepleted '
+  + 'magicLevel migrationDirection minTier nearbyResourceDefinitions nearbyResourceDefinitionsDepleted '
   + 'nearbyResourcesCustom nearbyResourcesNative nearbyResourcesNativeDepleted '
   + 'neighborRelationship neighbourRelType primaryDeityRef primaryDeitySnapshot '
   + 'resourceEdits routeRequired seed specialResources stressType stressTypes '

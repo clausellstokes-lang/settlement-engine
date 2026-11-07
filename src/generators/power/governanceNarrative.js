@@ -12,8 +12,7 @@
  * those precedence rules explicit when adding new narrative cases.
  */
 
-import { migrationDirectionOfConfig } from '../../domain/migrationDirection.js'; // WIRING-W0: the record's migration direction
-import { resolveGenerationWorldLaw } from '../generationContext.js'; import { defenceTwinLine } from '../../data/defenceTwinLines.js'; import { defenseFactsOf } from '../../domain/defense/defenseFacts.js'; // F10: one line, so no cited line moves
+import { resolveGenerationWorldLaw } from '../generationContext.js'; import { migrationDirectionOfConfig } from '../../domain/migrationDirection.js'; import { defenceTwinLine } from '../../data/defenceTwinLines.js'; import { defenseFactsOf } from '../../domain/defense/defenseFacts.js'; // F10: one line, so no cited line moves
 
 const SMALL_SETTLEMENT_TIERS = new Set(['thorp', 'hamlet', 'village']);
 
@@ -314,7 +313,6 @@ const applyStressStability = (baselineStability, hasStress, migrationDirection =
   }
   // ⛔ THE SIX NO-FALL-THROUGH ARMS (owner order 2026-09-17, "fix the remaining contradictions"; the argument, the measurement and the JUDGMENT on these words are in docs/FIRST_CONTACT_BACKLOG.md under DOSSIER AND REALM POLISH, part 3 (C) and part 4). Before them a town under one of these six read the baseline `Stable` beside its own ACTIVE CRISIS banner. Band words are the producer's own vocabulary; the order is PRIMARY_STRESS_PRECEDENCE's, so `infiltrated` is LAST and every public crisis beside it still names itself.
   if (hasStress('insurgency')) return 'Unstable (insurgency contests authority)';
-  // WIRING-W0 (R-W7 e): the label names the ONE direction the record declares, no longer a hedge.
   if (hasStress('mass_migration')) return migrationDirection === 'departures' ? 'Strained (people leaving)' : 'Strained (people arriving)';
   if (hasStress('wartime')) return 'Tense (requisition and conscription)';
   if (hasStress('religious_conversion')) return 'Tense (the creed is contested)';
@@ -591,10 +589,7 @@ const buildReligiousConversionNarrative = (governingFactionName) => {
   );
 };
 
-// WIRING-W0 (2026-11-07, R-W7 e): the vignette reads the direction the record declares
-// (stress[].direction through its config projection; domain/migrationDirection.js). It decided the
-// direction itself on `economyOutput >= 50`, telling departures beside a crisis card of arrivals
-// in 45 of the soak 1,000's 71 migration places; the economy no longer chooses the direction.
+// WIRING-W0 (R-W7 e): the vignette and the stability label read the direction the record declares (domain/migrationDirection.js), never `economyOutput >= 50`.
 const buildMigrationNarrative = (migrationDirection, governingFactionName) => {
   if (migrationDirection !== 'departures') {
     return (
@@ -620,8 +615,7 @@ const buildSlaveRevoltNarrative = (institutionNames) => {
 };
 
 const buildStressNarratives = ({
-  baselineConflict,
-  migrationDirection,
+  baselineConflict, migrationDirection,
   institutionFlags,
   institutionNames,
   institutionSignals,
@@ -721,8 +715,7 @@ export const buildGovernanceLabels = ({
   const magicWorks = resolveGenerationWorldLaw(worldLaw, config).magicFunctions();
   const hasStress = stressType => stressTypes.includes(stressType);
   const monsterThreat = config?.monsterThreat || 'frontier';
-  // WIRING-W0 (R-W7 e): the one declared direction; absent (a config without the projection) is arrivals.
-  const migrationDirection = migrationDirectionOfConfig(config) || 'arrivals';
+  const migrationDirection = migrationDirectionOfConfig(config) || 'arrivals'; // WIRING-W0 (R-W7 e): the one declared direction
 
   const baselineStability = deriveBaselineStability({
     stressFlags,
@@ -731,8 +724,7 @@ export const buildGovernanceLabels = ({
   });
   const stressStability = applyStressStability(
     baselineStability,
-    hasStress,
-    migrationDirection,
+    hasStress, migrationDirection,
   );
   const stability = annotateMonsterThreat(stressStability, monsterThreat);
 
@@ -773,8 +765,7 @@ export const buildGovernanceLabels = ({
     tier,
   );
   const stressNarratives = buildStressNarratives({
-    baselineConflict: recentConflict,
-    migrationDirection,
+    baselineConflict: recentConflict, migrationDirection,
     institutionFlags,
     institutionNames,
     institutionSignals,
