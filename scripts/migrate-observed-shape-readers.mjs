@@ -197,12 +197,20 @@
  *     roster 10 -> 13, the bank 69/45 -> 76/50), and ADMITS the window's other rows with
  *     attribution. Its full rationale lives beside `WINDOW_RUNG1_TARGET_SCHEMA` (RETIRED).
  *
- *   schema 27 -> 28 (LIVE)   the same tagged numeric reconciliation, and THE SECOND CORPUS-COVERAGE
+ *   schema 28 -> 29 (LIVE)   the same tagged numeric reconciliation, and A GOVERNED MIGRATION RUNG FOR A
+ *     SHAPE CHANGE (the chair's ruling of 2026-11-07 06:5x UTC, ODQ §934.105, on LANDING-R2's record):
+ *     the pool census and the reader lanes landed new readers, moved one and retired or re-spelled
+ *     eleven register rows' reads. Nothing is declared (the roster stays thirteen) and no detector
+ *     source moves: New 10 (contestsNiche on factions a MOVE) · Gone 11 · Increased 0 · Decreased 0,
+ *     the bank 76/50 -> 75/49. Its full rationale and per-row review live beside
+ *     `CENSUS_READERS_TARGET_SCHEMA`.
+ *
+ *   schema 27 -> 28 (RETIRED) the same tagged numeric reconciliation, and THE SECOND CORPUS-COVERAGE
  *     RUNG CUT FOR A PULSE SHAPE: R-B1 (2168ffdba, the promotion window reads the stamp cut) left
  *     producer 2's pulse no tier candidate, so the corpus builder gains producer 2b (its own one-save
  *     pulse over `osr-tier-14`, a town generated over the city cut; a bounded view of its tier
  *     candidates, roots only). Verdict-only like 25: the reconciliation is EMPTY, nothing is declared,
- *     the bank holds at 76/50. Its full rationale lives beside `TIER_COVERAGE_TARGET_SCHEMA`.
+ *     the bank holds at 76/50. Its full rationale lives beside `TIER_COVERAGE_TARGET_SCHEMA` (RETIRED).
  *
  *   schema 25 -> 26 (RETIRED) the same tagged numeric reconciliation, and THE FIRST RUNG THAT IS BOTH
  *     OF ITS PRECEDENTS AT ONCE: the schema-17 corpus-coverage shape (a famine TOPOLOGY pass that
@@ -290,6 +298,7 @@ import {
   validateSchema25Baseline,
   validateSchema26Baseline,
   validateSchema27Baseline,
+  validateSchema28Baseline,
 } from './lib/observed-shape-baseline.mjs';
 
 export const MIGRATION_REPORT_SCHEMA = 2;
@@ -1208,6 +1217,70 @@ export const WINDOW_RUNG1_TARGET_SCHEMA = 27;
  *  ratchet-red, and its re-freeze lands next. */
 export const TIER_COVERAGE_TARGET_SCHEMA = 28;
 
+/* ⭐⭐ THE SCHEMA 28 → 29 RUNG — THE CENSUS READERS (a governed migration rung for a shape change)
+ *
+ *  The chair's ruling of 2026-11-07 06:5x UTC (ODQ §934.105) on LANDING-R2's record: "(A)
+ *  observedShapeReaders — RULED: a GOVERNED MIGRATION RUNG, the register's own door for a shape
+ *  change, never a widening of the shrink-only law and not the owner's row … whose migration review
+ *  lists EVERY new read with its cause commit and its disposition … the erosion arm's 7 lost rows
+ *  named one by one with the commit that moved or retired each … none is erased silently." The
+ *  WIRING-W0-CLOSE rung (848dd7dc1 / c3e6a3598, the migration direction's declaration) is ALSO
+ *  numbered 29, on the integration branch; the chair composes the two at the merge (the later one
+ *  re-numbered 30 and re-derived at the merged tip). This rung is cut on LANDING-R2's tree only.
+ *
+ *  THE REFUSAL, MEASURED at 9221c4ffa against the schema-28 register frozen at b35a25ec9: the
+ *  shrink-only `--write` refuses (4 files over ceiling), New 10 · Gone 11 · Increased 0 ·
+ *  Decreased 0, Same 1439; the walker's erasure guard names 11 vanished rows (7 labelled INSTRUMENT
+ *  EROSION, 4 lawful repairs). NO DETECTOR SOURCE MOVED: the tip's source scanned with the freeze's
+ *  corpus loses all eleven and the freeze's source scanned with the tip's corpus keeps them, so every
+ *  row is a subject-file cause. Each cause below is a corpus-and-scan build per tree, bisected along
+ *  the first-parent line and into the census merges (0856c09d3 the census-1b compose, 56d5ccb2a the
+ *  reader-r1 compose).
+ *
+ *  THE MIGRATION REVIEW — every moved row, its cause, its disposition:
+ *   NEW (10 rows, 15 reads), each ADMITTED as ordinary debt:
+ *    • display/tradeListDisplay.js `name on incomeSources` x1 — 9e4283eb5 (census-3c R-P 2,
+ *      reader-r1's revenues): `revenuesOffTheLists` reads the trade list's `name` to display it.
+ *    • facts/drawDeclared.js `id` x3, `text` x2, `twinOf` x2 `on merchant` — the reader is 8d5b704a9
+ *      (census-1b wave 1 item 3: it reads the declared draws for the census); the rows SURFACE at
+ *      f739d37c6 (census-1e unit 2), which routes STRESS_GOAL_OVERRIDES' lines through
+ *      `resolveDeclared`, so the detector carries the `merchant` override's binding into it.
+ *    • facts/drawDeclared.js `colour on merchant` x1 — d59b8a37a (census compose, R-AO: the
+ *      declared-share counts a colour mark as declared).
+ *    • facts/factVocabulary.js `crisis`, `excludes`, `needs` x1, `tags` x2 `on merchant` — the reader
+ *      is c84bd6a29 (census-1b wave 1 item 1, the closed atom vocabulary); surfaced at f739d37c6 by
+ *      the same binding.
+ *    • roles/roleClass.js `contestsNiche on factions` x1 — A MOVE, NOT A GROWTH: 596cb8b1b (census-4
+ *      R3, the tie rule) re-homed the read from coherence/readerBattery.js; the old row is retired
+ *      by the move (below).
+ *   GONE (11 rows, 14 reads), each RETIRED with its cause:
+ *    • coherence/readerBattery.js `contestsNiche on factions` x1 — moved by 596cb8b1b (re-keyed to
+ *      roles/roleClass.js above).
+ *    • generators/npcGenerator.js `note` x2, `short` x2 `on merchant` — f739d37c6: the reads stand
+ *      (`override.note`, `override.short`), but `override` is now `resolveDeclared(…).line`, which
+ *      the detector does not ground; the `merchant` binding MOVED with the line into drawDeclared.js
+ *      and factVocabulary.js (the f739d37c6 rows above, re-keyed there). Measured: across f739d37c6
+ *      alone, New 7 (those rows) and Gone 2 (these), nothing else.
+ *    • domain/canonicalAccessors.js `stresses on settlement` x1 (a BANKED row: the bank 76/50 ->
+ *      75/49) and domain/magicLedger.js `magicLevel on settlement` x1 — 7af3c6797 (census-3b(3), the
+ *      A lists): neither file moved and both reads stand; the new tradeListDisplay.js passes its
+ *      `settlement` on to `factsOf`, and the detector stops grounding the two receivers (measured:
+ *      the tip scanned without that one file restores both rows). UNCURED INSTRUMENT EROSION,
+ *      recorded as such (the schema-27 `formerSponsorSettlementId` precedent), not as a repair.
+ *    • pdf/lib/viewModel.js `criticalIssues` x1, `structuralSuggestions` x1, `stressConsequences` x2
+ *      `on economicViability`; pdf/lib/viewModelBodySlices.js `priorityNotes on economicViability`
+ *      x1, `structuralGaps on resourceAnalysis` x1, `structuralGaps on settlement` x1 — d3b9280f6
+ *      (reader-r1 unit 2: one critical list, gaps read the record): the reads are gone from both
+ *      files, a lawful repair. Three of them the erasure guard labels "still written" only because
+ *      the key survives as the view model's own OUTPUT key (`criticalIssues: …`), not as a read.
+ *
+ *  Nothing is declared (the roster stays thirteen; twelve bank). The identity rows move by exactly
+ *  the review's delta, 1450 + 10 - 11 = 1449. ⛔ The reconciliation must be EXACTLY those 21 rows;
+ *  any other moved row at the mint means the review was not the whole cause and the mint STOPS.
+ *  Its delta is the three bookkeeping paths; see `CENSUS_READERS_SCANNER_DELTA_PATHS`. The commit
+ *  pair holds as at every rung: this rung lands ratchet-red, and its re-freeze lands next. */
+export const CENSUS_READERS_TARGET_SCHEMA = 29;
+
 export const DECLARED_BANK_BY_TARGET = Object.freeze({
   [EXEMPTION_RETIREMENT_TARGET_SCHEMA]: Object.freeze({ bankedReads: 60, taggedRows: 39 }),
   [BANK_FENCE_TARGET_SCHEMA]: Object.freeze({ bankedReads: 60, taggedRows: 39 }),
@@ -1254,6 +1327,13 @@ export const DECLARED_BANK_BY_TARGET = Object.freeze({
   // walker's literal), and a verdict-only rung moves no row, so the pair cannot move. The write
   // refuses if the live measurement disagrees with this pair or with the walker's hand-owned literal.
   [TIER_COVERAGE_TARGET_SCHEMA]: Object.freeze({ bankedReads: 76, taggedRows: 50 }),
+  // MEASURED off the live scan at the subject, never predicted from the delta: `bankOf` over the
+  // committed schema-28 register derives 76 reads across 50 addresses, and the live scan banks 75
+  // across 49 — the roster is unchanged (thirteen; twelve bank), and the one tagged row that goes is
+  // `stresses on settlement` x1 at src/domain/canonicalAccessors.js, whose read still stands and
+  // which the detector no longer grounds (see the rung's review above). The write refuses if the
+  // measurement disagrees with this pair or with the walker's hand-owned literal.
+  [CENSUS_READERS_TARGET_SCHEMA]: Object.freeze({ bankedReads: 75, taggedRows: 49 }),
 });
 
 /** The declared post-bank of a target, or `null` for a rung that predates the law. */
@@ -1775,6 +1855,26 @@ export const TIER_COVERAGE_SCANNER_DELTA_PATHS = Object.freeze([
   'scripts/migrate-observed-shape-readers.mjs',
 ]);
 
+/**
+ * The schema-28 → 29 delta — the bookkeeping set, THREE paths (the schema-23 shape: a rung that
+ * re-governs the register without a detector move):
+ *   • `scripts/check-observed-shape-readers.mjs` — the live-validator binding, `_doc` and schema
+ *     index (no declaration: the roster stays thirteen);
+ *   • `scripts/lib/observed-shape-baseline.mjs` — the 28 → 29 bump and the retired-28 validator;
+ *   • `scripts/migrate-observed-shape-readers.mjs` — this rung, its review and its declared post-bank.
+ * ⛔ THE CORPUS BUILDER DID NOT MOVE, and no other detector source did: MEASURED, the tip's source
+ * scanned with the schema-28 freeze's corpus loses all eleven gone rows and the freeze's source
+ * scanned with the tip's corpus keeps them, so every moved row is a SUBJECT-file cause (the census
+ * and reader lanes), scanned rather than scanning. The eight regenerated execution inputs since the
+ * freeze (the dossier prose `.generated.js` files and the intent-atlas distillate) are recorded by
+ * the transition for the review's decision. The bank literal is test-side.
+ */
+export const CENSUS_READERS_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
 export const BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS = Object.freeze([
   'package-lock.json',
   'package.json',
@@ -1827,6 +1927,8 @@ const WINDOW_RUNG1_SCANNER_TRANSITION_POLICY =
   'schema-26-to-27-exact-scanner-transition-v1';
 const TIER_COVERAGE_SCANNER_TRANSITION_POLICY =
   'schema-27-to-28-exact-scanner-transition-v1';
+const CENSUS_READERS_SCANNER_TRANSITION_POLICY =
+  'schema-28-to-29-exact-scanner-transition-v1';
 const CORPUS_COVERAGE_SCANNER_TRANSITION_POLICY =
   'schema-7-to-8-exact-scanner-transition-v1';
 const EPOCH_DARK_CORPUS_SCANNER_TRANSITION_POLICY =
@@ -1873,6 +1975,7 @@ export const LEAF_MIGRATION_PREDECESSOR = Object.freeze({
   [FED_WORLD_TARGET_SCHEMA]: ADVISORY_LOCKFILE_TARGET_SCHEMA,
   [WINDOW_RUNG1_TARGET_SCHEMA]: FED_WORLD_TARGET_SCHEMA,
   [TIER_COVERAGE_TARGET_SCHEMA]: WINDOW_RUNG1_TARGET_SCHEMA,
+  [CENSUS_READERS_TARGET_SCHEMA]: TIER_COVERAGE_TARGET_SCHEMA,
 });
 
 /**
@@ -1955,6 +2058,10 @@ const LEAF_PREDECESSOR_VALIDATOR = Object.freeze({
   // RETIRED literal from this rung onward, so this entry keeps validating schema 27
   // as schema 27 after the live number moves past it.
   [WINDOW_RUNG1_TARGET_SCHEMA]: validateSchema27Baseline,
+  // The schema-29 rung's own predecessor. `validateSchema28Baseline` is bound to the
+  // RETIRED literal from this rung onward, so this entry keeps validating schema 28
+  // as schema 28 after the live number moves past it.
+  [TIER_COVERAGE_TARGET_SCHEMA]: validateSchema28Baseline,
 });
 
 const RETIRED_EXACT_MIGRATION_KIND = `observed-shape-schema-2-to-${RETIRED_EXACT_TARGET_SCHEMA}-migration`;
@@ -2478,6 +2585,14 @@ const SCANNER_TRANSITION_BY_TARGET = new Map([
     // governed execution inputs (the dossier-state prose, the institution service keys, the prose
     // norms, …) by their documented commands after the predecessor was frozen, and the report
     // records that movement for the review's decision.
+    reviewableUnscannedMovement: true,
+  })],
+  [CENSUS_READERS_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: CENSUS_READERS_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: CENSUS_READERS_SCANNER_TRANSITION_POLICY,
+    // TRUE, matching every rung since 8→9: any governed execution input regenerated by its
+    // documented command since the schema-28 freeze is recorded for the review's decision.
     reviewableUnscannedMovement: true,
   })],
   [TIER_COVERAGE_TARGET_SCHEMA, Object.freeze({
@@ -3590,7 +3705,7 @@ export function run(argv = process.argv.slice(2)) {
   // any mismatch into a refusal rather than a silent mode switch.
   const targetSchema = command.targetSchema
     ? Number(command.targetSchema)
-    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : TIER_COVERAGE_TARGET_SCHEMA);
+    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : CENSUS_READERS_TARGET_SCHEMA);
   if (![RETIRED_EXACT_TARGET_SCHEMA, HEURISTIC_TARGET_SCHEMA, FILTERED_TARGET_SCHEMA,
     SURFACE_FILTERED_TARGET_SCHEMA, BANKED_EXPLAINED_WRITER_TARGET_SCHEMA,
     CORPUS_COVERAGE_TARGET_SCHEMA, EPOCH_DARK_CORPUS_TARGET_SCHEMA,
@@ -3602,8 +3717,10 @@ export function run(argv = process.argv.slice(2)) {
     BANK_FENCE_TARGET_SCHEMA, RELATIONSHIPS_MOUNT_TARGET_SCHEMA,
     DOMAIN_READER_TARGET_SCHEMA, EDIT_MODE_READERS_TARGET_SCHEMA,
     CORPUS_REDEAL_TARGET_SCHEMA, ADVISORY_LOCKFILE_TARGET_SCHEMA,
-    FED_WORLD_TARGET_SCHEMA, WINDOW_RUNG1_TARGET_SCHEMA, TIER_COVERAGE_TARGET_SCHEMA].includes(targetSchema)) {
-    throw new Error(`observed-shape --target-schema must be ${TIER_COVERAGE_TARGET_SCHEMA} (live tier-coverage leaf),`
+    FED_WORLD_TARGET_SCHEMA, WINDOW_RUNG1_TARGET_SCHEMA, TIER_COVERAGE_TARGET_SCHEMA,
+    CENSUS_READERS_TARGET_SCHEMA].includes(targetSchema)) {
+    throw new Error(`observed-shape --target-schema must be ${CENSUS_READERS_TARGET_SCHEMA} (live census-readers leaf),`
+      + ` ${TIER_COVERAGE_TARGET_SCHEMA} (retired tier-coverage leaf),`
       + ` ${WINDOW_RUNG1_TARGET_SCHEMA} (retired rung-1-window leaf),`
       + ` ${FED_WORLD_TARGET_SCHEMA} (retired fed-world leaf),`
       + ` ${ADVISORY_LOCKFILE_TARGET_SCHEMA} (retired advisory-lockfile leaf),`
