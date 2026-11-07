@@ -57,7 +57,7 @@ export const CULTURE_PROFILES = Object.freeze({
   germanic: profile({
     key: 'germanic',
     label: 'Germanic-inspired',
-    scope: 'A timber-and-stone, guild-and-estate design grammar.',
+    scope: 'Towns of timber and stone, run by guilds and estates.',
     builtForm: [
       { text: 'Timber-framed street houses cluster around a market green, with stone reserved for halls, bridges, and defenses.', needs: ['market', 'walls'] },
       'Farmsteads and craft yards form compact wards around a hall, church, or fortified manor.',
@@ -100,7 +100,7 @@ export const CULTURE_PROFILES = Object.freeze({
   latin: profile({
     key: 'latin',
     label: 'Latin-inspired',
-    scope: 'A masonry, civic-square, patronage-and-law design grammar.',
+    scope: 'Stone towns built round civic squares, run by patrons and lawyers.',
     builtForm: [
       'Masonry courtyard buildings and tiled roofs gather around public squares and processional streets.',
       { text: 'Dense street blocks open into arcades, fountains, markets, and reused monumental precincts.', needs: ['market'] },
@@ -143,7 +143,7 @@ export const CULTURE_PROFILES = Object.freeze({
   celtic: profile({
     key: 'celtic',
     label: 'Celtic-inspired',
-    scope: 'A kin-district, assembly, pastoral-and-earthwork design grammar.',
+    scope: 'Kin districts and open assemblies, with pasture and earthworks around them.',
     builtForm: [
       'Older round or oval compounds sit among later rectangular halls, linked by lanes rather than a rigid grid.',
       'A dispersed settlement has grown inward around an assembly green, defended height, or sacred enclosure.',
@@ -186,7 +186,7 @@ export const CULTURE_PROFILES = Object.freeze({
   arabic: profile({
     key: 'arabic',
     label: 'Arabic-inspired',
-    scope: 'A courtyard, waterworks, endowed-institution-and-caravan design grammar.',
+    scope: 'Courtyard houses, waterworks, endowed institutions and caravan trade.',
     builtForm: [
       { text: 'Shaded lanes connect inward-looking courtyard buildings, market arcades, gardens, and managed water points.', needs: ['market'] },
       { text: 'Dense masonry quarters open onto caravan courts, covered markets, bathhouses, and planted courtyards.', needs: ['market', 'institution: bathhouse'] },
@@ -229,7 +229,7 @@ export const CULTURE_PROFILES = Object.freeze({
   norse: profile({
     key: 'norse',
     label: 'Norse-inspired',
-    scope: 'A hall, maritime, assembly-and-seasonal-survival design grammar.',
+    scope: 'Great halls and the sea, open assemblies, and a year planned around the hard season.',
     builtForm: [
       { text: 'Long halls, boat sheds, turf-roofed outbuildings, and timber yards face a landing or sheltered common.', needs: ['navigable'] },
       'A compact hall-centered settlement stretches along the best shoreline, roadstead, or defensible ridge.',
@@ -272,7 +272,7 @@ export const CULTURE_PROFILES = Object.freeze({
   slavic: profile({
     key: 'slavic',
     label: 'Slavic-inspired',
-    scope: 'A timber-compound, communal-land, river-and-forest design grammar.',
+    scope: 'Timber compounds and common land, between river and forest.',
     builtForm: [
       'Timber compounds, kitchen gardens, workshops, and communal greens spread along a riverbank or defensible rise.',
       { text: 'A palisaded core is surrounded by farm lanes, bathhouses, sheds, and later market streets.', needs: ['palisade', 'institution: bathhouse', 'market'] },
@@ -315,7 +315,7 @@ export const CULTURE_PROFILES = Object.freeze({
   east_asian: profile({
     key: 'east_asian',
     label: 'East-Asian-inspired',
-    scope: 'A ward, courtyard, bureaucratic-and-lineage design grammar.',
+    scope: 'Walled wards and courtyards, run by officials and old families.',
     builtForm: [
       'Walled compounds, tiled roofs, axial streets, shop houses, and garden courts organize distinct wards.',
       { text: 'A planned civic axis links gate, market, administrative compound, temple precinct, and waterworks.', needs: ['gate', 'market', 'institution: temple'] },
@@ -358,7 +358,7 @@ export const CULTURE_PROFILES = Object.freeze({
   mesoamerican: profile({
     key: 'mesoamerican',
     label: 'Mesoamerican-inspired',
-    scope: 'A civic-ritual plaza, tribute, market-and-waterworks design grammar.',
+    scope: 'A ritual plaza at the centre, tribute coming in, and markets and waterworks around it.',
     builtForm: [
       { text: 'Residential compounds and gardens radiate from a raised civic-ritual precinct and broad market plaza.', needs: ['market'] },
       'Causeways, terraces, canals or reservoirs connect dense neighborhoods to monumental public space.',
@@ -401,7 +401,7 @@ export const CULTURE_PROFILES = Object.freeze({
   south_asian: profile({
     key: 'south_asian',
     label: 'South-Asian-inspired',
-    scope: 'A tank-and-bazaar, occupational-quarter, temple-and-guild design grammar.',
+    scope: 'Temple tanks and bazaars, with a quarter for each trade and guilds to run them.',
     builtForm: [
       { text: 'Dense bazaar streets, occupational quarters, courtyard homes, shrines, tanks, and shaded arcades interlock.', needs: ['market'] },
       { text: 'A temple, court, or fortified precinct anchors neighborhoods organized around wells, workshops, and markets.', needs: ['market'] },
@@ -444,7 +444,7 @@ export const CULTURE_PROFILES = Object.freeze({
   steppe: profile({
     key: 'steppe',
     label: 'Steppe-inspired',
-    scope: 'A pastoral, mobile-sedentary, clan-and-caravan design grammar.',
+    scope: 'Herds and caravans, part settled and part on the move, held together by clans.',
     builtForm: [
       'Permanent halls, corrals, storehouses, and workshops stand beside seasonal encampment space.',
       'A fortified trade station or river town acts as the settled hinge of a much wider mobile hinterland.',
@@ -487,7 +487,7 @@ export const CULTURE_PROFILES = Object.freeze({
   greek: profile({
     key: 'greek',
     label: 'Greek-inspired',
-    scope: 'An agora, harbor, civic-association-and-hillside design grammar.',
+    scope: 'An agora by the harbor, civic associations, and houses climbing the hillside.',
     builtForm: [
       { text: 'Stone and plaster courtyard houses rise around an agora, stoas, shrines, and steep connecting lanes.', needs: ['market'] },
       { text: 'A fortified high precinct overlooks the market, theater, and workshops; where geography permits, it also overlooks a working harbor.', needs: ['market'] },
@@ -604,7 +604,7 @@ export function materializeCulturalIdentity(culture, rng = null) {
   return Object.freeze({
     key: 'mixed',
     label: `${first.label} + ${second.label}`,
-    scope: 'A locally blended design grammar; both traditions remain visible rather than collapsing into a generic fallback.',
+    scope: 'A local blend in which both traditions stay visible.',
     sourceKeys: Object.freeze([first.key, second.key]),
     builtForm: `${first.builtForm} ${second.builtForm}`,
     civicPattern: `${first.civicPattern} ${second.civicPattern}`,
