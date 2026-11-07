@@ -43117,8 +43117,7 @@
       },
       "declares": [],
       "lineDeclares": {
-        "clergy": 1,
-        "colour": 2
+        "colour": 3
       },
       "undeclared": 0,
       "crisisScoped": false
@@ -45956,8 +45955,7 @@
       },
       "declares": [],
       "lineDeclares": {
-        "colour": 2,
-        "institution: tavern": 1
+        "colour": 3
       },
       "undeclared": 0,
       "crisisScoped": false

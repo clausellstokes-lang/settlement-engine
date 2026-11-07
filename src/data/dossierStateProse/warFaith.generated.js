@@ -4170,7 +4170,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         {
           "angle": "visitor",
           "marks": [
-            "clergy"
+            "colour"
           ],
           "text": "{settlement} keeps {creed}, a faith travellers from far off will not have heard of.",
           "slots": [
@@ -5822,7 +5822,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         {
           "angle": "visitor",
           "marks": [
-            "institution: tavern"
+            "colour"
           ],
           "text": "Few pilgrims come at this time of year; this is not their season.",
           "slots": [],

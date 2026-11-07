@@ -33,7 +33,7 @@ function drawable(leaf, blockId, poolKey, facts) {
 }
 
 const LINES = Object.freeze([
-  [DOSSIER_STATE_PROSE_WAR_FAITH, 'DS-FTH-1', 'SINK: unaffiliated present, arc rising', /Crisis has a way of ending indifference/],
+  [DOSSIER_STATE_PROSE_WAR_FAITH, 'DS-FTH-1', 'SINK: unaffiliated present, arc rising', /now that times are hard/], // W4 PEOPLE second seat 2026-11-07: re-keyed to the line's text after the first seat's faith style pass (05da0e050, the owner's style law)
   [DOSSIER_STATE_PROSE_DEFENSE, 'DS-DEF-2', 'Economic Survival: STRONG', /has not turned into a collapse/],
 ]);
 

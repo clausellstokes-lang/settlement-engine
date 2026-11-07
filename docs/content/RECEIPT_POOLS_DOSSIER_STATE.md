@@ -4830,7 +4830,7 @@ reads what the panel renders. A page draws at most one of each.
 **PATRON: `rankAxis: minor`**
 1. `[ledger · colour]` {creed} is the patron here, kept in a handful of settlements and nowhere near all of them; its reach ends not far past the district.
 2. `[street · colour]` The town's rite is {creed}'s: established, unremarkable elsewhere, and entirely sufficient here.
-3. `[visitor · clergy]` {settlement} keeps {creed}, a faith travellers from far off will not have heard of.
+3. `[visitor · colour]` {settlement} keeps {creed}, a faith travellers from far off will not have heard of.
 
 **PATRON: `rankAxis: cult`**
 1. `[visitor · colour]` The patron of {settlement} is {creed}, a creed with few other homes. What it lacks in reach it holds in intensity.
@@ -5134,7 +5134,7 @@ panel does not surface at all.
 3. `[street]` The rite draws pilgrims from well outside the district, and for weeks each year they fill {settlement}'s beds.
 
 **PILGRIM SEASON: thin**
-1. `[visitor · institution: tavern]` Few pilgrims come at this time of year; this is not their season.
+1. `[visitor · colour]` Few pilgrims come at this time of year; this is not their season.
 2. `[ledger · colour]` Few travellers keep the rite here now. The calendar has moved past the occasion, and the town has gone back to itself.
 3. `[threshold · colour]` The pilgrim trade is at its low ebb. What remains is the local congregation, which is smaller than the town's provisioning suggests.
 

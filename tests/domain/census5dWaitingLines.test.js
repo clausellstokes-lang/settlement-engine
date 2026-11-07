@@ -41,7 +41,6 @@ function drawable(blockId, poolKey, facts) {
 }
 
 const withFacts = (over) => ({ ...CALM_FACTS_ADMIT_ALL, ...over });
-const noTavern = withFacts({ hasInstitution: (/** @type {string} */ k) => k !== 'tavern' });
 
 const WAITING = Object.freeze([
   ['DS-FTH-3', 'STANDING: cult', /Its shrine is real/, 'sacredHouse', withFacts({ sacredHouse: false })],
@@ -50,8 +49,9 @@ const WAITING = Object.freeze([
   // CENSUS-5e unit 3 (re-keyed by that cause, R-AE): the two "clergy" lines declare `clergy` (priest ∨
   // sacredHouse, CENSUS-1h `712ac7694`), so they are refused only where neither a cleric nor a house stands.
   ['DS-FTH-1', 'DEVOTION: lukewarm', /the clergy preach to the same few households/, 'clergy', withFacts({ faith: { seniorCleric: null }, sacredHouse: false })],
-  ['DS-FTH-1', 'ARC: trend: rising', /What the clergy record/, 'clergy', withFacts({ faith: { seniorCleric: null }, sacredHouse: false })],
-  ['DS-FTH-3', 'PILGRIM SEASON: thin', /the town's inns are honest/, 'institution: tavern', noTavern],
+  ['DS-FTH-1', 'ARC: trend: rising', /The clergy's register counts more people/, 'clergy', withFacts({ faith: { seniorCleric: null }, sacredHouse: false })], // W4 PEOPLE second seat 2026-11-07: re-keyed to the line's text after the first seat's faith style pass (05da0e050, the owner's style law)
+  // The PILGRIM SEASON: thin inns row is retired with the claim: the first seat's rewrite (05da0e050) no longer names
+  // the inns, so the line presumes no tavern and is marked colour (W4 PEOPLE second seat 2026-11-07).
 ]);
 
 describe('CENSUS-5d unit 3 · the waiting faith lines declare as their atoms land', () => {
