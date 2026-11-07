@@ -31,9 +31,10 @@ import { deepClone } from '../clone.js';
 import { veilDeep } from '../../lib/civility.js';
 
 // ── Public top-level allowlist ──────────────────────────────────────────────
-// Character-identical (order-independent) to the FUSED migration 123's
-// public_toplevel array inside _gallery_sanitize_public_json (our 050
-// fail-closed allowlist reconciled against their post-088 public surface).
+// Character-identical (order-independent) to the NET-CURRENT public_toplevel
+// array inside _gallery_sanitize_public_json (the fused 123 list, our 050
+// fail-closed allowlist reconciled against their post-088 public surface,
+// recreated through 189; migration 205 drops 'factions').
 // Derived from what the public dossier / gallery renders (gallery RPCs 020–033,
 // publicChronicle, OutputContainer playerView) plus the two narrated-public
 // fields (thesis, dailyLife) that the shareNarrated base (ai_data.aiSettlement)
@@ -45,6 +46,9 @@ import { veilDeep } from '../../lib/civility.js';
 //     gallery surface — dropped from the allowlist AND folded into the deeper
 //     denylist below (so nested config._seed cannot leak). Visible to the
 //     settlement's owner as provenance, never on a public projection.
+//   • 'factions' — the people car's retired NPC grouping (ODQ §934.105, PEOPLE-RULINGS
+//     M-1b/M-2; migration 205): no generator writes it and no public reader reads it;
+//     the POWERS are `powerStructure.factions`, public under `powerStructure`.
 //   • aiData, aiSettlement, aiDailyLife, aiOverlays, userCanon, dmNotes,
 //     dmCompass, dossierNotes, notes, narrativeNotes, tabNotes, plotHooks,
 //     pinnedNpc, identityMarkers, frictionPoints, connectionsMap,
@@ -52,7 +56,7 @@ import { veilDeep } from '../../lib/civility.js';
 export const PUBLIC_TOPLEVEL_KEYS = Object.freeze([
   'activeConditions', 'arrivalScene', 'availableServices', 'coherenceNotes', 'config',
   'conflicts', 'crossSettlementConflicts', 'dailyLife', 'defenseProfile', 'economicState',
-  'economicViability', 'factions', 'generatorVersion', 'history', 'id',
+  'economicViability', 'generatorVersion', 'history', 'id',
   'institutions', 'interSettlementRelationships', 'name', 'neighborRelationship', 'neighbourNetwork',
   'npcs', 'population', 'populationHistory', 'powerStructure', 'pressureSentence',
   'prominentRelationship', 'relationships', 'resourceAnalysis', 'schemaVersion', 'settlementReason',
@@ -111,17 +115,21 @@ export const PRIVATE_KEY_RE = /(secret|private|\bdm|\bgm|guidance|dossierNotes|t
 
 // ── Public NPC field allowlist ──────────────────────────────────────────────
 // Character-identical (order-independent) to the SQL npc_allowed array in
-// _gallery_sanitize_public_json (033, recreated net-current through 189) and to
+// _gallery_sanitize_public_json (033, recreated net-current through 205) and to
 // the publicNpc() object literal below. KEEP publicNpc a plain object literal —
 // tests/security/gallerySanitizer.pglite.test.js parses that literal by regex
 // and pins it to the SQL npc_allowed; this constant is behaviourally pinned to
 // both by tests/security/factionMemberPublicParity.pglite.test.js (same input
 // record must project to the same key set as npcs[] members, client == server).
-// Used by sanitizePublicValue to reduce FACTION-ROSTER member records — see the
-// faction-member gate there (migration 189 twin).
+// Used by sanitizePublicValue to reduce ROSTER member records — see the member
+// gate there (migration 189 twin). Migration 205 drops 'factionAffiliation' and
+// 'secondaryAffiliation', the people car's retired per-NPC faction fields (a card's
+// standing in the powers is its `memberships`, which is not public); the card's
+// `institution` and `memberships` stay off this list until the chair rules how a
+// hidden or criminal house is told apart per row (docs/FIX_EXPORT_KEYS_2026-11-07.md §3).
 export const NPC_PUBLIC_KEYS = Object.freeze([
   'id', 'name', 'role', 'title', 'category', 'personality', 'physical',
-  'factionAffiliation', 'secondaryAffiliation', 'presentation', 'influence',
+  'presentation', 'influence',
 ]);
 
 /**
@@ -156,17 +164,16 @@ export function sanitizePublicValue(value, path = []) {
   // gallery_share_dm full mode keeps its own DM content — see toPublicSafe.)
   if (/** @type {Record<string, unknown>} */ (value).covert === true) return undefined;
 
-  // FACTION-MEMBER ALLOWLIST (migration 189 twin): factions[].members[] embed the
-  // SAME full NPC records as npcs[] (factionGrouping pushes roster references;
-  // relinkFactionMembers re-points them at the enriched roster), but a member's
-  // path never contains an 'npcs' segment, so the npcs-path strip below missed
-  // them — `goal` (the NPC's DM motivation) and every non-allowlisted NPC field
-  // (gender, power, …) rode through to public / anon / preview projections
-  // (secret/plotHooks were already caught at depth by PRIVATE_KEY_RE). Reduce
-  // member objects to the public NPC allowlist, exactly as the server's
-  // is_npc_obj gate does for paths ending in 'members' under a 'factions'
-  // ancestor. The ancestor rule deliberately also covers deeper rosters (e.g. a
-  // powerStructure.factions[].members) — fail-closed, hiding more.
+  // ROSTER-MEMBER ALLOWLIST (migration 189 twin, kept at 205): a member's path never
+  // contains an 'npcs' segment, so the npcs-path strip below would miss an NPC record
+  // embedded in a roster — `goal` (the NPC's DM motivation) and every non-allowlisted
+  // NPC field (gender, power, …) would ride through to public / anon / preview
+  // projections. Reduce member objects to the public NPC allowlist, exactly as the
+  // server's is_npc_obj gate does for paths ending in 'members' under a 'factions'
+  // ancestor. 205: the retired grouping `factions[].members[]` (the people car) is no
+  // longer reached — its top-level key left PUBLIC_TOPLEVEL_KEYS — so the rule now
+  // guards a deeper roster under a 'factions' ancestor (powerStructure.factions[].members:
+  // no generator writes one, a DM edit or a legacy record may) — fail-closed, hiding more.
   const isFactionMember = path.length > 0
     && path[path.length - 1] === 'members'
     && path.includes('factions');
@@ -219,8 +226,6 @@ function publicNpc(npc) {
     category: npc.category,
     personality: npc.personality,
     physical: npc.physical,
-    factionAffiliation: npc.factionAffiliation,
-    secondaryAffiliation: npc.secondaryAffiliation,
     presentation: npc.presentation,
     influence: npc.influence,
   };

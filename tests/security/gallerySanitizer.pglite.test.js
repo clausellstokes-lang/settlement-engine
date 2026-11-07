@@ -159,6 +159,25 @@ describe('gallery public-JSON sanitizer — net-current execution (pglite)', () 
     expect(out.judgment).toBeUndefined();
   });
 
+  // THE PEOPLE CAR'S THREE RETIRED KEYS, EXECUTED (migration 205, FIX-EXPORT-KEYS 2026-11-07; the
+  // owner's word: the export allowlist's dead keys go before the deploy). A record published before
+  // the car still carries them in its stored row; the projection must not. Anchored: the record's
+  // live neighbours (the powers, the card's name and role) survive the same call.
+  it('drops the retired grouping and the two retired NPC faction fields; the powers and the card stay (205)', async () => {
+    const out = await sanitize({
+      name: 'Brackwater',
+      factions: [{ name: 'The Salt Circle', dominantCategory: 'government', members: [{ name: 'Aldric' }] }],
+      powerStructure: { factions: [{ faction: 'The Salt Circle', category: 'economy', power: 60 }] },
+      npcs: [{ id: 'n1', name: 'Aldric', role: 'the mayor', factionAffiliation: 'The Salt Circle', secondaryAffiliation: 'The Harbour Bench' }],
+    });
+    expect(out.powerStructure.factions[0].faction).toBe('The Salt Circle');
+    expect(out.npcs[0]).toEqual({ id: 'n1', name: 'Aldric', role: 'the mayor' });
+    expect('factions' in out).toBe(false);
+    expect('factionAffiliation' in out.npcs[0]).toBe(false);
+    expect('secondaryAffiliation' in out.npcs[0]).toBe(false);
+    expect(JSON.stringify(out)).not.toContain('The Harbour Bench');
+  });
+
   it('SQL npc_allowed[] stays in sync with the JS mirror (publicSafe.js)', () => {
     const sql = sqlNpcAllowed(SANITIZER.sql);
     const js = jsNpcAllowed();
