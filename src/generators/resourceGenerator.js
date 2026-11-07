@@ -317,10 +317,43 @@ const evaluateInstitutionDeps = (exploitation) => {
   return exports;
 };
 
+// ─── supplyOfInput ────────────────────────────────────────────────────────────
+// ⭐ A GAP SAYS WHICH KIND (REVIEW-INTAKE-3 R9, 2026-11-06). Where a house's input comes from,
+// read from the record's own evidence and never from chain ACTIVATION alone. The lacks-access
+// line below used to fire whenever the input's chain was inactive (terrain allows it AND it was
+// rolled nearby), while `buildViabilityReport` reads terrain OR a local producer OR the roster:
+// the two disagreed by construction: on the 1,000 soak settlements 1,237 of the 5,166 lines named
+// an input the place holds (now unwritten), 1,095 one it imports, 2,834 one it lacks. Classes:
+//   'local'    — the non-depleted nearby roster, the economy's `localProduction`, or a local
+//                producer (`localInstitutionSupplies`) holds it: NOT a gap, so no line;
+//   'imported' — the economy's `primaryImports` names it, or (grain) the food record imports a
+//                share of the staple: the house runs on bought input;
+//   'missing'  — none of these: the line as before.
+// A record entry's parenthetical is its reason ("Iron ore (local mines exhausted)"), not a good.
+const FOOD_STAPLE_INPUTS = new Set(['grain']);
+const recordHoldsGood = (list, rawResource) => {
+  const goods = [rawResource, ...terrainSynonymsFor(rawResource)];
+  return (Array.isArray(list) ? list : [])
+    .map((entry) => String(entry || '').replace(/\([^)]*\)/g, ' '))
+    .some((entry) => goods.some((good) => tokensReconcile(entry, good)));
+};
+const supplyOfInput = (rawResource, institutions, evidence = {}) => {
+  if (
+    recordHoldsGood(evidence.availableResources, rawResource)
+    || recordHoldsGood(evidence.localProduction, rawResource)
+    || localInstitutionSupplies(rawResource, institutions)
+  ) return 'local';
+  if (
+    recordHoldsGood(evidence.primaryImports, rawResource)
+    || (FOOD_STAPLE_INPUTS.has(normalizeToken(rawResource)) && Number(evidence.foodImportPct) > 0)
+  ) return 'imported';
+  return 'missing';
+};
+
 // ─── evaluateInstitutionChain ─────────────────────────────────────────────────
 // Identify gaps: missing processing links and institutions lacking their inputs.
 
-const evaluateInstitutionChain = (exploitation, institutions) => {
+const evaluateInstitutionChain = (exploitation, institutions, evidence = {}) => {
   const gaps = [];
 
   exploitation.partiallyExploited?.forEach(chain => {
@@ -352,14 +385,19 @@ const evaluateInstitutionChain = (exploitation, institutions) => {
       const alreadyInGaps =
         exploitation.fullyExploited?.some(c => c.rawResource === chain.rawResource) ||
         exploitation.partiallyExploited?.some(c => c.rawResource === chain.rawResource);
-      if (!alreadyInGaps) {
-        gaps.push({
-          chain:       chain.rawResource,
-          institution: institution.name,
-          impact:      `${institutionDisplayName(institution.name)} exists but lacks access to ${chain.rawResource}`,
-          severity:    'high',
-        });
-      }
+      if (alreadyInGaps) return;
+      const kind = supplyOfInput(chain.rawResource, institutions, evidence);
+      if (kind === 'local') return; // the place holds the input: an inactive chain is not a gap
+      const name = institutionDisplayName(institution.name);
+      gaps.push({
+        chain:       chain.rawResource,
+        institution: institution.name,
+        kind,
+        impact:      kind === 'imported'
+          ? `${name} runs on imported ${chain.rawResource}`
+          : `${name} exists but lacks access to ${chain.rawResource}`,
+        severity:    kind === 'imported' ? 'low' : 'high',
+      });
     });
   });
 
@@ -400,6 +438,8 @@ const evaluateResourceChain = (specialResourceKeys) => {
  * @param {Array}  specialResources - Special resource feature keys
  * @param {Array}  institutions     - Institution objects
  * @param {Object} config           - Settlement config with priorities
+ * @param {Object|null} [economicState] - The reconciled economy: its `primaryImports`,
+ *   `localProduction` and food record's import share tell a gap's kind (supplyOfInput)
  * @returns {Object} Full resource analysis
  */
 export const generateResourceAnalysis = (
@@ -408,6 +448,7 @@ export const generateResourceAnalysis = (
   specialResources,
   institutions,
   config = {},
+  economicState = null,
 ) => {
   const terrain = TERRAIN_DATA[terrainType];
   if (!terrain) {
@@ -440,6 +481,12 @@ export const generateResourceAnalysis = (
   const gaps           = evaluateInstitutionChain(
     exploitation,
     nativeInstitutions,
+    {
+      availableResources: nearbyResources,
+      localProduction:    economicState?.localProduction,
+      primaryImports:     economicState?.primaryImports,
+      foodImportPct:      economicState?.foodSecurity?.importPct,
+    },
   );
   const featureEffects = evaluateResourceChain(specialResources);
 

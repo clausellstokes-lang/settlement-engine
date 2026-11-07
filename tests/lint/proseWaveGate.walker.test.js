@@ -898,10 +898,11 @@ describe('(d) THE FIXTURE SECTION — the interested fact BOTH WAYS (SITTING §T
     expect(fixture.towns.map((t) => t.label)).toEqual(['captured', 'clean']);
     const captured = fixture.towns[0];
     const clean = fixture.towns[1];
-    // rate-11-9 -> rate-93-0 (LANDING-7 A, R-A5): the X-46 compose 1264a8152 moved rate-11-9 out of
-    // capture; tests/fixtures/tasteTowns.js :: INTERESTED_TOWNS re-seats by identity, the scan named there.
-    expect(captured.standing, 'rate-93-0 is the captured town').toBe('INTERESTED');
-    expect(clean.standing, 'rate-3-0 is the control and it is NOT interested').toBe('LICENSED');
+    // Re-keyed by identity 2026-11-07 (REVIEW-INTAKE-LAND): the captured town is rate-69-0 and the
+    // control rate-9-2 at the merged tip of the review-intake lane and rung 1, the two 2026-11-06
+    // causes composed (tests/fixtures/tasteTowns.js names the scan).
+    expect(captured.standing, 'rate-69-0 is the captured town').toBe('INTERESTED');
+    expect(clean.standing, 'rate-9-2 is the control and it is NOT interested').toBe('LICENSED');
     expect(captured.holder, 'and the holder is the census\'s own answer').toBeTruthy();
   });
 

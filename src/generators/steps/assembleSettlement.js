@@ -369,6 +369,18 @@ registerStep('assembleSettlement', {
     npcsHeld: chooseOrPin(pins, 'npcs', () => UNPINNED) !== UNPINNED,
   }));
 
+  // Propagate the in-pipeline causal trace onto the settlement so
+  // downstream consumers (PipelineRail, AI overlay, PDF) can read it.
+  // The trace is built up across the run by `recordTrace(ctx, ...)`
+  // calls inside individual steps; we copy it through here so the
+  // settlement carries the receipt of its own generation. ⛔ BEFORE THE RECEIPT
+  // (lane REVIEW-INTAKE-2 unit 6): the receipt's provenance reads the trace off the
+  // settlement, so a copy made after it reported "No step trace was persisted" on
+  // every world that carried one (tests/generators/receiptReadsPersistedTrace.test.js).
+  if (Array.isArray(ctx.simulationTrace) && ctx.simulationTrace.length) {
+    settlement.simulationTrace = ctx.simulationTrace;
+  }
+
   // A durable, seed-stable receipt over the FINAL player-facing dossier.
   // Repairs happen in their owning passes; this boundary proves that the
   // resulting world law, prose, structure, food verdict, identity roster, and
@@ -382,15 +394,6 @@ registerStep('assembleSettlement', {
       generationRepairs: ctx.generationRepairs,
     },
   );
-
-  // Propagate the in-pipeline causal trace onto the settlement so
-  // downstream consumers (PipelineRail, AI overlay, PDF) can read it.
-  // The trace is built up across the run by `recordTrace(ctx, ...)`
-  // calls inside individual steps; we copy it through here so the
-  // settlement carries the receipt of its own generation.
-  if (Array.isArray(ctx.simulationTrace) && ctx.simulationTrace.length) {
-    settlement.simulationTrace = ctx.simulationTrace;
-  }
 
   // Deterministic id: normalizeSettlement uses `_seed` to mint a stable
   // settlement id (idFromSeed). Without _seed on the object at the

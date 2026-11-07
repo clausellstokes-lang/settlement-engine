@@ -38,7 +38,7 @@ vi.mock('../../src/lib/supabase.js', () => ({ supabase: {}, isConfigured: false 
 
 import { ServicesTab } from '../../src/components/new/tabs/ServicesTab.jsx';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
-import { PROXY_SERVICE_HOSTS } from '../../src/data/servicesData.js';
+import { INSTITUTION_SERVICES } from '../../src/data/institutionServices.js';
 
 /** React's own wording for the defect, in every version that has shipped it. */
 const NESTING_ERROR = /cannot be a descendant of|validateDOMNesting/i;
@@ -76,6 +76,8 @@ beforeEach(() => {
 });
 afterEach(() => { vi.restoreAllMocks(); cleanup(); });
 
+const FORMER_PROXY_HOSTS = new Set(['dwellings (1-8)', 'dwellings (5-25)', 'dwellings (15-100)', 'housing (75-650 households)', 'housing (500-4000 households)', 'water source', 'multiple water sources', 'sewage system', 'farmland', 'common grazing land', 'access to external mill', 'massive prison']);
+
 describe('the institution card on the Services tab', () => {
   test('opens without nesting a dialog inside a paragraph', () => {
     const { container } = render(
@@ -87,16 +89,16 @@ describe('the institution card on the Services tab', () => {
     expect(triggers.length, 'the Services tab offered no institution to expand')
       .toBeGreaterThan(0);
 
-    // RS-19 (chair ruling 2026-10-30): a service surfaced through a PROXY host (this city's
-    // Sewage system rows carry the inn district's menu) names no institution. Anchored: the city really
-    // has proxy-surfaced rows, and the same rows' names do render.
-    const proxied = Object.values(town.availableServices).flat()
-      .filter((svc) => PROXY_SERVICE_HOSTS[String(svc.institution || '').toLowerCase()]);
-    expect(proxied.length, 'the fixture city surfaced nothing through a proxy host').toBeGreaterThan(0);
-    for (const svc of proxied) {
-      expect(container.textContent, `the proxied row "${svc.name}" did not render`).toContain(svc.name);
-      // anchored: the line above proves this proxied row's name renders on the same page.
-      expect(container.textContent, `"${svc.name}" still credits its proxy host`).not.toContain(svc.institution);
+    // RS-19, kept in the RECORD since lane REVIEW-INTAKE unit 2 (2026-11-06): a row naming a
+    // former proxy host (this city's Housing rows) is that house's OWN service, so the tab may
+    // name it. Anchored: the city really has such rows, and their names render.
+    const hosted = Object.values(town.availableServices).flat()
+      .filter((svc) => FORMER_PROXY_HOSTS.has(String(svc.institution || '').toLowerCase()));
+    expect(hosted.length, 'the fixture city has no row naming a former proxy house').toBeGreaterThan(0);
+    for (const svc of hosted) {
+      expect(container.textContent, `the row "${svc.name}" did not render`).toContain(svc.name);
+      // anchored: the line above proves this row's name renders on the same page.
+      expect(Object.keys(INSTITUTION_SERVICES[svc.institution] || {}), `${svc.institution} credited with ${svc.name}`).toContain(svc.name);
     }
 
     fireEvent.click(triggers[0]);

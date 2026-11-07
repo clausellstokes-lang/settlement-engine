@@ -1975,7 +1975,14 @@ describe('SEAM car 5b — THE HOLDER CENSUS: the source of each construction (SI
     // find a holder in this town, and no row left. The window passed through 50 between the X-46
     // car 3 stage (6ca454d2b) and the F6 BUDGET-FLOOR stage (6d84aa834), which restored exactly
     // the rung1-pins row set; the tip's 66 rows are that set, row for row.
-    expect(held.length, 'and it really does keep the records').toBe(66);
+    // 61 AND NOT 66 SINCE THE MERGE OF THE REVIEW-INTAKE LANE ONTO RUNG 1's TIP (REVIEW-INTAKE-LAND,
+    // 2026-11-07), one cause, "a proxy is not a provider": at 77bfd3535 this town's renamed
+    // 'Housing (75-650 households)' had no menu of its own and fuzzy-borrowed one ('Record of
+    // custom', 'Dispute mediation'), which held the five DS-GEN-9 recency rows; it now rolls its
+    // own one row ('Lodging (rooms to let)'), so those five leave, and the forked service stream
+    // costs the Town hall its 'Tax payment', so the treasury rows (DS-DEF-8 ×2, DS-ECO-12 ×5,
+    // DS-GEN-11 ×5, DS-GEN-3 ×2) are held by the Weekly market instead — same count. No row gained.
+    expect(held.length, 'and it really does keep the records').toBe(61);
     expect(licensed.filter((row) => sourceOfForTown(row, clean).standing === 'INTERESTED')).toEqual([]);
   });
 

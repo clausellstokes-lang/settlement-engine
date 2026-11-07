@@ -287,5 +287,18 @@ export const INSTITUTION_SERVICE_KEYS = Object.freeze([
   "Listening post",
   "Chroniclers' exchange",
   "Rookery",
-  "Whisper market"
+  "Whisper market",
+  "Dwellings (1-8)",
+  "Dwellings (5-25)",
+  "Dwellings (15-100)",
+  "Housing (75-650 households)",
+  "Housing (500-4000 households)",
+  "Housing (3500+ households)",
+  "Water source",
+  "Multiple water sources",
+  "Sewage system",
+  "Massive prison",
+  "Farmland",
+  "Common grazing land",
+  "Access to external mill"
 ]);

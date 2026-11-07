@@ -24,7 +24,6 @@ import { Relationships } from '../../src/pdf/sections/Relationships.jsx';
 import { Institutions } from '../../src/pdf/sections/Institutions.jsx';
 import { NotableNPCs } from '../../src/pdf/sections/NotableNPCs.jsx';
 import { Overview } from '../../src/pdf/sections/Overview.jsx';
-import { PROXY_SERVICE_HOSTS } from '../../src/data/servicesData.js';
 import { institutionBackers } from '../../src/domain/dossier/powerSupport.js';
 import { institutionDisplayName } from '../../src/domain/display/institutionDisplayName.js';
 
@@ -224,15 +223,16 @@ describe('F13 / X-2 — the PDF Relationships chapter prints each tie with its t
   });
 });
 
-describe('F14 / RS-19 — the PDF Institutions chapter lists no proxy-surfaced menu under a proxy house', () => {
-  it('a menu surfaced through a proxy host prints in the Services chapter only', () => {
+// RS-19, kept in the RECORD since lane REVIEW-INTAKE unit 2 (2026-11-06): the former proxy
+// houses own their menus, so a row naming one prints under that house like any other.
+const FORMER_PROXY_HOSTS = new Set(['dwellings (1-8)', 'dwellings (5-25)', 'dwellings (15-100)', 'housing (75-650 households)', 'housing (500-4000 households)', 'water source', 'multiple water sources', 'sewage system', 'farmland', 'common grazing land', 'access to external mill', 'massive prison']);
+describe('F14 / RS-19 — the PDF Institutions chapter prints a former proxy house\'s own menu', () => {
+  it('a row naming a former proxy house prints under it', () => {
     const rows = Object.values(settlement.availableServices || {}).flat();
-    const proxied = rows.filter((r) => r && PROXY_SERVICE_HOSTS[String(r.institution || '').toLowerCase()]);
-    const owned = rows.filter((r) => r && r.institution && !PROXY_SERVICE_HOSTS[String(r.institution).toLowerCase()] && r.desc);
-    expect(proxied.length, 'fixture premise: the city surfaces a menu through a proxy host').toBeGreaterThan(0);
+    const hosted = rows.filter((r) => r && r.desc && FORMER_PROXY_HOSTS.has(String(r.institution || '').toLowerCase()));
+    expect(hosted.length, 'fixture premise: the city has a row naming a former proxy house').toBeGreaterThan(0);
     const on = joined(Institutions({ settlement, vm }));
-    expect(on, 'a real house still lists its menu').toContain(owned[0].desc);
-    for (const r of proxied) if (r.desc && !owned.some((o) => o.desc === r.desc)) expect(on).not.toContain(r.desc); // anchored: a real menu row is asserted on this render
+    for (const r of hosted) expect(on, `${r.institution}: ${r.name}`).toContain(r.desc);
   });
 });
 

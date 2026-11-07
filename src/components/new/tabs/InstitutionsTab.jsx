@@ -52,7 +52,6 @@ import EconomyFreshnessNote from '../EconomyFreshnessNote.jsx';
 import { institutionDisplayName } from '../../../domain/display/institutionDisplayName.js';
 import { identityForInstitution } from '../../../domain/display/institutionVocabulary.js';
 import { institutionProvenanceOf } from '../../../domain/provenance/rosterProvenance.js';
-import { PROXY_SERVICE_HOSTS } from '../../../data/servicesData.js';
 import { isFabricInstitution } from '../../../data/institutionalCatalog.js';
 import { entityAnchor, entityIdFor, serviceEntityOf } from '../../../domain/dossier/entityLinks.js';
 import { formatBacksValue, houseBacksOf } from '../../../domain/dossier/powerSupport.js';
@@ -126,11 +125,8 @@ export function institutionsWithServices(settlement) {
   for (const svc of rows) {
     const key = String(svc.institution || '');
     if (!key) continue;
-    // VERIFIER F14 (RS-19): a PROXY host (a Sewage system, a Housing row, a Massive prison)
-    // only surfaces another house's menu. The Services tab names no institution for those rows,
-    // so this page lists none of them under the proxy; the house keeps its own card. The host's
-    // name alone answers it, as in serviceComponents.jsx :: viaProxy.
-    if (PROXY_SERVICE_HOSTS[key.toLowerCase()]) continue;
+    // RS-19 is now kept in the RECORD (lane REVIEW-INTAKE unit 2): no row credits a proxy
+    // host, because the twelve former proxies own their menus, so every row joins its house.
     if (!byInstitution.has(key)) byInstitution.set(key, []);
     byInstitution.get(key).push(svc);
   }

@@ -7,7 +7,8 @@
  *   cert:*   the certification soak's own receipts (`generation-certification-soak.mjs ::
  *            inspectSettlement`: unresolved receipt, broken reference, conservation, non-finite).
  *   coh:*    the seven coherence instruments behind `src/domain/coherence/coherenceBattery.js ::
- *            coherenceBattery`, over every rendered surface.
+ *            coherenceBattery`, over every rendered surface; and two record checks of this
+ *            module's own, `coh:roster-duplicate-secret` / `-goal` (`rosterDuplicate`).
  *   X-nn:*   the owner's experience rulings (docs/UX_CONSOLIDATION_2026-10-30.md X-46..X-52).
  *   reader:* the READER battery (`src/domain/coherence/readerBattery.js :: readerBattery`): the
  *            plausibility observations a DM makes reading end to end — validators and pools that
@@ -47,6 +48,10 @@ export const KIND_OF = Object.freeze({
   'coh:seat-holder': 5, 'A-08:hidden-ruler-note': 5,
   'X-50:boilerplate-twice': 6, 'A-09:behaviour-line-share': 6,
   'A-10:role-only-npc': 7, 'A-10:placeholder-faction': 7, 'A-03:tonight-they': 7,
+  // REVIEW-INTAKE-3 R10: two people of one roster carrying one secret or one goal is a
+  // contradiction about WHO (the chair: a contradiction kind the stop rule reads, not repetition
+  // 6); keyed with the people family, 7.
+  'coh:roster-duplicate-secret': 7, 'coh:roster-duplicate-goal': 7,
   'A-05:lacks-access-lines': -2,
   // I2: the advisory battery judgment's verdict — "records the battery would not vouch for" — informational.
   'info:battery-would-not-vouch': -2,
@@ -211,6 +216,35 @@ function hasWater(s, config) {
 }
 
 /**
+ * THE SAME TEXT ON TWO NPCs OF ONE ROSTER (REVIEW-INTAKE-3 R10; X-50's defect inside one dossier —
+ * across dossiers a shared line is a feature, the owner's word of 2026-11-04). An instrument only:
+ * the draw sites belong to the census compose, which owns the cure.
+ * @param {ReadonlyArray<any>} npcs
+ * @param {(npc: any) => unknown} textOf
+ * @returns {{text: string, first: string, second: string, repeated: number}|null} the first text
+ *   two NPCs share, who carries it, and how many distinct texts repeat on the roster
+ */
+export function rosterDuplicate(npcs, textOf) {
+  /** @type {Map<string, string>} */
+  const seen = new Map();
+  /** @type {Set<string>} */
+  const repeated = new Set();
+  /** @type {{text: string, first: string, second: string}|null} */
+  let hit = null;
+  for (const npc of Array.isArray(npcs) ? npcs : []) {
+    const raw = textOf(npc);
+    const text = typeof raw === 'string' ? raw.trim() : '';
+    if (!text) continue;
+    if (!seen.has(text)) { seen.set(text, String(npc?.name ?? '')); continue; }
+    repeated.add(text);
+    hit ??= { text, first: seen.get(text) || '', second: String(npc?.name ?? '') };
+  }
+  return hit ? { ...hit, repeated: repeated.size } : null;
+}
+const secretTextOf = (npc) => (typeof npc?.secret === 'string' ? npc.secret : npc?.secret?.what);
+const goalTextOf = (npc) => (typeof npc?.goal === 'string' ? npc.goal : npc?.goal?.short);
+
+/**
  * The full per-settlement review.
  * @param {object} s the generated record
  * @param {object} config the config it was born from
@@ -229,6 +263,12 @@ export function reviewSettlement(s, config, r) {
   // ── X-46 car 1: population inside the owner's band for its tier
   const band = OWNER_BANDS[s.tier];
   if (band && !(s.population >= band[0] && s.population <= band[1])) add('X-46:population-outside-band', 'record', String(s.population), `${s.tier} band ${band[0]}–${band[1]}`);
+
+  // ── R10: one roster, the same secret or goal on two NPCs (record checks; no render needed)
+  for (const [check, textOf] of [['coh:roster-duplicate-secret', secretTextOf], ['coh:roster-duplicate-goal', goalTextOf]]) {
+    const dup = rosterDuplicate(s.npcs, textOf);
+    if (dup) add(check, 'record', dup.text, `${dup.first} and ${dup.second}; ${dup.repeated} text(s) repeat on this roster`);
+  }
 
   if (!r) return out;
   for (const [surface, error] of Object.entries(r.errors || {})) add('render:error', surface, '', error);

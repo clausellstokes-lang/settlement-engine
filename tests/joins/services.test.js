@@ -15,7 +15,7 @@ import { describe, it, expect } from 'vitest';
 import { setActiveRng, clearActiveRng } from '../../src/kernel/rngContext.js';
 import { createPRNG } from '../../src/kernel/prng.js';
 import { INSTITUTION_SERVICES } from '../../src/data/institutionServices.js';
-import { LOCALE_SERVICE_OVERRIDES, PROXY_SERVICE_HOSTS } from '../../src/data/servicesData.js';
+import { LOCALE_SERVICE_OVERRIDES } from '../../src/data/servicesData.js';
 import { generateAvailableServices } from '../../src/generators/servicesGenerator.js';
 import { getInstFlags } from '../../src/generators/priorityHelpers.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
@@ -49,18 +49,24 @@ describe('LOCALE_SERVICE_OVERRIDES join integrity', () => {
       .filter(([, target]) => !INSTITUTION_SERVICES[target])
       .map(([src, target]) => `${src} -> ${target}`);
     expect(dangling).toEqual([]);
-    // RS-19 (chair ruling 2026-10-30): the proxy rows the Services tab reads to withhold a
-    // false attribution ARE the locale rows the generator resolves through, same targets,
-    // and none names an institution that has a menu of its own.
-    const proxyRows = Object.entries(PROXY_SERVICE_HOSTS);
-    expect(proxyRows.length).toBeGreaterThanOrEqual(12);
-    // The chair's follow-up (2026-10-30): a Massive prison surfaces the courthouse menu but
-    // is not credited with "Criminal trials".
-    expect(PROXY_SERVICE_HOSTS['massive prison']).toBe('Courthouse');
-    for (const [src, target] of proxyRows) {
-      expect(LOCALE_SERVICE_OVERRIDES[src], src).toBe(target);
-      expect(KEYS_LC.has(src), `${src} has a menu of its own, so it is no proxy`).toBe(false);
+  });
+
+  it('a proxy is not a provider: the twelve former proxy rows are dedicated entries, not redirects', () => {
+    // RS-19 (2026-10-30) hid the false attribution on the displays; lane REVIEW-INTAKE unit 2
+    // (2026-11-06) made the RECORD true: each former proxy owns its menu (Water source and
+    // Sewage system an empty one) and no override row redirects it to another house's.
+    const former = [
+      'access to external mill', 'common grazing land', 'farmland', 'dwellings (1-8)',
+      'dwellings (5-25)', 'dwellings (15-100)', 'housing (75-650 households)',
+      'housing (500-4000 households)', 'multiple water sources', 'water source',
+      'sewage system', 'massive prison',
+    ];
+    for (const src of former) {
+      expect(LOCALE_SERVICE_OVERRIDES[src], `${src} should have no override row`).toBeUndefined();
+      expect(KEYS_LC.has(src), `${src} should have a dedicated INSTITUTION_SERVICES entry`).toBe(true);
     }
+    // A prison holds the condemned; it does not try them (the chair's follow-up, 2026-10-30).
+    expect(Object.keys(INSTITUTION_SERVICES['Massive prison'])).not.toContain('Criminal trials');
   });
 
   it('no override row shadows a dedicated INSTITUTION_SERVICES entry', () => {

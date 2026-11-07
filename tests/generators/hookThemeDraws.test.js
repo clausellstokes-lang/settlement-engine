@@ -328,8 +328,15 @@ describe('HK-3 draws — the corpus, through the real pipeline', () => {
     // 588/27 · RUNG1B-F6 6d84aa834 595/34. At EVERY step the hook-bearing count (npcs − hookless) is 561: each mover
     // is a hookless seat placeholder, seated or struck as the scale re-dealt the offices. Asserted below, so the
     // day a hook-bearing record is dropped this pin says so by name.
-    expect(npcTotal, 'the NPC denominator must be a real corpus').toBe(595);
-    expect(hookless, 'hookless NPCs grew — a hook-bearing record is being dropped downstream').toBe(34);
+    // RE-BASED 2026-11-07 (REVIEW-INTAKE-4, "no roster carries one secret or one goal twice"): 595 -> 598 NPCs and
+    // 34 -> 37 hookless, the movers LISTED against the merged review-intake tip 5fa38798a: city-2 gains The
+    // Archmagister, The Kingpin and The Lieutenant, three hookless seat placeholders. The cure changes which secret a
+    // figure holds, the coherence overlay's presentation draw reads the secret's text, so the npc-enrichment stream
+    // re-deals city-2's faction filing (its Hedge Witch leaves the Thieves' Guild) and the guild's and the arcane
+    // seat's offices are honestly unled. No hook-bearing NPC was dropped: 561 at both trees; total and duplicates
+    // unchanged.
+    expect(npcTotal, 'the NPC denominator must be a real corpus').toBe(598);
+    expect(hookless, 'hookless NPCs grew — a hook-bearing record is being dropped downstream').toBe(37);
     expect(npcTotal - hookless, 'a hook-bearing NPC was dropped (561 at every step of the rung-1 window)').toBe(561);
   });
 

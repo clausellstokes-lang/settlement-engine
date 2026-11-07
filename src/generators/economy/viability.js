@@ -157,43 +157,41 @@ const deriveResourceChainAnalysis = (institutions, terrain, nearbyResources, con
 
 
 // deriveWaterDependencyAnalysis
+//
+// ⚠ WATER IS READ FROM THE RECORD (lane REVIEW-INTAKE unit 3, 2026-11-06). A place has water
+// when ANY of these holds: (i) the record carries a water row (WATER_ROW_NAMES, by native
+// name), (ii) its terrain is riverside or coastal, (iii) it trades by river or port. It used to
+// read the terrain alone (the route only when no terrain was given) and never the record's own
+// rows, so 1,569 warnings in 476 of the 1,000 soak settlements sat beside a water row. Only a
+// PROCESS-water industry (resourceChains.js :: INDUSTRY_WATER_NEEDS, matched by exact name) can
+// lack a supply; a mill's MOTIVE power is the DM's to picture and raises nothing.
+const WATER_ROW_NAMES = new Set(['Water source', 'Multiple water sources', 'Aqueduct or water system', 'Advanced water infrastructure']);
+const PROCESS_WATER_BY_NAME = new Map(
+  Object.values(INDUSTRY_WATER_NEEDS).flatMap((need) => (need.names || []).map((name) => [name, need])),
+);
 const deriveWaterDependencyAnalysis = (institutions, terrain, config) => {
   const issues = [];
   const warnings = [];
   const suggestions = [];
   const route = config?.tradeRouteAccess || 'unknown';
-  const hasWater = terrain ? WATER_ROUTES.includes(terrain.name.toLowerCase()) : route === 'river' || route === 'port';
+  const native = (institutions || []).filter((inst) => !isMaterializedCustomContent(inst));
+  const hasWater = native.some((inst) => WATER_ROW_NAMES.has(nativeSemanticName(inst)))
+    || (terrain ? WATER_ROUTES.includes(terrain.name.toLowerCase()) : false)
+    || route === 'river' || route === 'port';
+  if (hasWater) return { issues, warnings, suggestions };
 
-  institutions.forEach((inst) => {
-    if (isMaterializedCustomContent(inst)) return;
-    // This record is access to somebody else's mill, not a local water-powered
-    // industry. Its water source belongs at the remote site; evaluating it as
-    // an on-site mill invented a local river dependency.
-    if (/^access to external mill\b/i.test(nativeSemanticName(inst))) return;
-    const waterNeed = Object.entries(INDUSTRY_WATER_NEEDS).find(
-      ([key]) =>
-        inst.name.toLowerCase().includes(key.toLowerCase()) ||
-        key.toLowerCase().includes(inst.name.toLowerCase().split(' ')[0])
-    )?.[1];
-
-    if (waterNeed?.required) {
-      const hasAlternative = waterNeed.alternatives.some(
-        alternative => institutions.some(institution => (
-          nativeSemanticName(institution).includes(alternative)
-        )),
-      );
-      if (!hasWater && !hasAlternative) {
-        const alternatives = waterNeed.alternatives.map((alt) => `Add ${alt}`);
-        warnings.push({
-          severity: SEVERITY.DEPENDENCY,
-          category: 'Water Dependency',
-          title: `${institutionDisplayName(inst.name)}: requires water access`,
-          description: `${institutionDisplayName(inst.name)} requires ${waterNeed.description || 'water access'} but settlement has no river or port.`,
-          impact: 'Severely reduced productivity without water access.',
-          suggestedFixes: alternatives.length ? alternatives : ['Establish a river or port trade route'],
-        });
-      }
-    }
+  native.forEach((inst) => {
+    const waterNeed = PROCESS_WATER_BY_NAME.get(nativeSemanticName(inst));
+    if (!waterNeed?.required) return;
+    const name = institutionDisplayName(inst.name);
+    warnings.push({
+      severity: SEVERITY.DEPENDENCY,
+      category: 'Water Dependency',
+      title: `${name}: no water supply`,
+      description: `${name} has no water supply: ${waterNeed.reason.charAt(0).toLowerCase()}${waterNeed.reason.slice(1)}, and the settlement has no water source, no river or coast, and no river or port route.`,
+      impact: 'Severely reduced productivity without water access.',
+      suggestedFixes: waterNeed.alternatives.map((alt) => `Add ${alt}`),
+    });
   });
 
   return { issues, warnings, suggestions };
@@ -581,8 +579,8 @@ export { hasMarketInstitution } from '../../domain/marketInstitution.js';
  * neither is not city-scale. At that ruling's bands the readings agreed (tests/generators/smallPlaceMarket.test.js). The
  * assembler passes the settlement's OWN tier, never its 'village' default.
  *
- * ⚠ THESE HELPERS SIT AT THE END OF THE FILE ON PURPOSE: the prose wiring census's holder
- * citations name this file's producer writes by LINE, so nothing is inserted above them.
+ * (The prose wiring census's holder citations into this file name their writes by SYMBOL since
+ * REVIEW-INTAKE-3 R8 (rule 32), so a line inserted above no longer drifts them.)
  * @param {unknown} tier
  * @param {unknown} population
  * @returns {boolean}

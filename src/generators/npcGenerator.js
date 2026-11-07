@@ -14,7 +14,7 @@ import {
 import { nativeSemanticName } from '../domain/content/customContentSemanticAuthority.js';
 import { getUpgradeOpportunities, mandatedRoleCandidate } from './economicGenerator.js';
 import { random as _rng, pick as ctxPick } from '../kernel/rngContext.js';
-import { drawUnique } from './hookVariety.js';
+import { drawRefusingHeld, drawRefusingHeldThrough, drawUnique, heldByOthers } from './hookVariety.js';
 import { themeOfText } from '../domain/hookThemes.js';
 import { disambiguateNPCDisplayNames } from './npcDisplayNames.js';
 import { resolveGenerationWorldLaw } from './generationContext.js';
@@ -115,14 +115,22 @@ const generateSingleNPC = (
   });
   const religion = generateReligionType(hookRegistry);
   const appearance = generateNPCAppearance(category);
-  const goal = ((g, d) => (g && typeof g === 'object' ? { ...g, short: defenceTwinLine(inlandHookLine(g.short, worldLaw.portKind), d), long: defenceTwinLine(inlandHookLine(g.long, worldLaw.portKind), d) } : defenceTwinLine(inlandHookLine(g, worldLaw.portKind), d)))(generateNPCGoal(role, category, config), defenseFactsOf({ institutions })); // F5: a wet pool line gives its inland twin where there is no water (data/inlandHookLines.js); F10: a defence line its defence-free twin where the roster lacks the thing (data/defenceTwinLines.js); both draw-free
+  const defence = defenseFactsOf({ institutions });
+  const finalLine = (text) => defenceTwinLine(inlandHookLine(text, worldLaw.portKind), defence); // F5 + F10, draw-free
+  const goal = ((g) => (g && typeof g === 'object' ? { ...g, short: finalLine(g.short), long: finalLine(g.long) } : (g ? finalLine(g) : null)))(generateNPCGoal(role, category, config, hookRegistry?.goals, finalLine)); // F5: a wet pool line gives its inland twin where there is no water (data/inlandHookLines.js); F10: a defence line its defence-free twin where the roster lacks the thing (data/defenceTwinLines.js); both draw-free
   // institutions drives generateFactionLeader's secret-type weighting (criminal/
   // magic/religion presence). Without it the weighting was stuck in "absent" mode.
+  // REVIEW-INTAKE-4: both draws refuse a text the roster already holds (hookRegistry.goals /
+  // .secrets), falling through their pool in seed order with no further roll; a pool with every
+  // row held leaves this figure without one rather than repeating it.
   const secret = generateFactionLeaderSecret(
     config,
     institutions,
     worldLaw,
+    hookRegistry?.secrets,
   );
+  if (goal?.short) hookRegistry?.goals?.add(String(goal.short).trim());
+  if (secret?.secret) hookRegistry?.secrets?.add(String(secret.secret).trim());
   const title1 = inlandHookLine(generatePlotHook(category, config, hookRegistry), worldLaw.portKind);
   const title2 = _rng() > 0.5 ? inlandHookLine(generatePlotHook(category, config, hookRegistry), worldLaw.portKind) : null;
   const plotHooks = title2 && title2 !== title1 ? [title1, title2] : [title1];
@@ -147,8 +155,8 @@ const generateSingleNPC = (
       feature: appearance.feature,
       clothes: appearance.clothes,
     },
-    goal: { short: goal.short, long: goal.long },
-    secret: { what: secret.secret, stakes: secret.stakes },
+    goal: goal ? { short: goal.short, long: goal.long } : null,
+    secret: secret ? { what: secret.secret, stakes: secret.stakes } : null,
     plotHooks,
     influence: powerLevel.level,
     power: powerLevel.power,
@@ -363,7 +371,12 @@ const generateNPCAppearance = (r = 'other') => ({
 // `{ short, long, driven_by }`, which `generateSingleNPC` assigns to `goal` — and
 // `domain/npc/npcFacets.js` already registered it as the SOURCE of the `goal` facet while
 // calling it by the wrong name. It now carries the name the facet registry always gave it.
-const generateNPCGoal = (role, category = 'other', config = {}) => {
+// REVIEW-INTAKE-4: `held` is the roster's goals so far and `finalOf` the draw-free rewrite the
+// caller puts on the text (inland and defence twins); each draw below refuses a row whose final
+// text is held and falls through its pool in seed order, then on the SAME roll through the
+// function's own fallback chain (stress → role → category → the generic 'other' pool;
+// `drawRefusingHeldThrough`); every pool exhausted answers null, a figure without a goal.
+const generateNPCGoal = (role, category = 'other', config = {}, held = null, finalOf = (text) => text) => {
   const stressType = config.stressType || null;
   const commodity = config.tradeCommodity || config._tradeCommodity || null;
   const topFaction = config._dominantFaction || null;
@@ -605,26 +618,28 @@ const generateNPCGoal = (role, category = 'other', config = {}) => {
 
   // 40% chance to use a stress-specific goal
   const stressGoals = stresses.flatMap(s => STRESS_GOALS[s] || []);
-  if (stressGoals.length > 0 && _rng() < 0.4) return pickFromArray(stressGoals);
+  // Substitute commodity/faction tokens into the role goals up front (draw-free, order kept), so
+  // the refusal reads the text the figure would carry.
+  const roleGoals = NPC_FACTION_GOALS[role];
+  const substitute = text =>
+    text
+      .replace(/\{commodity\}/g, commodity || 'key goods')
+      .replace(/\{faction\}/g, topFaction || 'the dominant faction')
+      .replace(/grain/g, commodity === 'grain' ? 'grain' : commodity || 'grain');
+  const roleRows = roleGoals && roleGoals.length > 0
+    ? (commodity || topFaction ? roleGoals.map(goal => ({ ...goal, short: substitute(goal.short), long: substitute(goal.long) })) : roleGoals)
+    : null;
+  const categoryRows = NPC_SECRETS[category] || NPC_SECRETS.other;
+  const genericRows = categoryRows === NPC_SECRETS.other ? null : NPC_SECRETS.other;
+  const keyOf = (g) => finalOf(g.short);
+
+  if (stressGoals.length > 0 && _rng() < 0.4) return drawRefusingHeldThrough([stressGoals, roleRows, categoryRows, genericRows], held, keyOf) || null;
 
   // Use role-specific goal from NPC_FACTION_GOALS
-  const roleGoals = NPC_FACTION_GOALS[role];
-  if (roleGoals && roleGoals.length > 0) {
-    const goal = pickFromArray(roleGoals);
-    // Substitute commodity/faction tokens
-    if (commodity || topFaction) {
-      const substitute = text =>
-        text
-          .replace(/\{commodity\}/g, commodity || 'key goods')
-          .replace(/\{faction\}/g, topFaction || 'the dominant faction')
-          .replace(/grain/g, commodity === 'grain' ? 'grain' : commodity || 'grain');
-      return { ...goal, short: substitute(goal.short), long: substitute(goal.long) };
-    }
-    return goal;
-  }
+  if (roleRows) return drawRefusingHeldThrough([roleRows, categoryRows, genericRows], held, keyOf) || null;
 
   // Fallback to category secrets
-  return pickFromArray(NPC_SECRETS[category] || NPC_SECRETS.other);
+  return drawRefusingHeldThrough([categoryRows, genericRows], held, keyOf) || null;
 };
 
 // drawLoyalty — the ONE spelling of a themed loyalty draw (wave HK-3).
@@ -747,13 +762,16 @@ const random01 = r => _rng() < r,
 // generateCrimeLevel
 // NPC_PRESENTATION_MODES
 
-export const generateCrimeLevel = (npc, npcIndex, summary, allNpcs) => {
+// REVIEW-INTAKE-4: `held` is the secrets the rest of the roster carries; both draws refuse a text
+// it holds and fall through their pool in seed order; every row held answers null (the figure
+// keeps its own secret).
+export const generateCrimeLevel = (npc, npcIndex, summary, allNpcs, held = null) => {
   const { stressType, commodity, govFaction, topFaction } = summary;
 
   // 25% chance: NPC knows something compromising about another NPC
   if (random01(0.25) && allNpcs.length > 1) {
     const otherNpc = pickRandom2(allNpcs.filter((_, idx) => idx !== npcIndex));
-    return pickRandom2([
+    return drawRefusingHeld([
       {
         what: `Knows something about ${otherNpc.name} that ${otherNpc.name} believes no one else knows, and has been deciding for months whether to use it`,
         stakes: `${otherNpc.name} would move against them immediately if they suspected`,
@@ -770,15 +788,16 @@ export const generateCrimeLevel = (npc, npcIndex, summary, allNpcs) => {
         what: `Has been reading ${otherNpc.name}'s correspondence through an intermediary. Nothing damaging yet. But they keep looking`,
         stakes: 'The intermediary has recently started asking for more money',
       },
-    ]);
+    ], held, (s) => s.what) || null;
   }
 
   // 45% chance: stress-driven institutional secret
   // F3 FOOD-WORDS: a secret that says people are starving only where the food record goes hungry
   const stressEffects = secretsHeldByFoodRecord((summary.stressTypes || (stressType ? [stressType] : [])).flatMap(s => STRESS_INSTITUTION_EFFECTS[s] || []), summary.foodRecord);
   if (stressEffects.length > 0 && random01(0.45)) {
-    const effect = pickRandom2(stressEffects);
     const otherNpc = allNpcs.filter((_, idx) => idx !== npcIndex)[0];
+    const effect = drawRefusingHeld(stressEffects, held, (e) => replaceTokens(e.secret, { faction: topFaction, commodity, npc: otherNpc?.name || 'someone' }));
+    if (!effect) return null;
     return {
       what: replaceTokens(effect.secret, { faction: topFaction, commodity, npc: otherNpc?.name || 'someone' }),
       stakes: replaceTokens(effect.stakes, { faction: govFaction, commodity, npc: otherNpc?.name || 'someone' }),
@@ -1065,6 +1084,9 @@ export const mergeNPCLists = (npcs, factions, institutions, tier, config) => {
     other: null, // generalists — no restriction
   };
 
+  // REVIEW-INTAKE-4: the roster's goals as they stand, so a stress override is never a goal another
+  // figure already carries (the figure keeps its own instead); updated as each figure is written.
+  const goalsNow = npcs.map((n) => n?.goal?.short);
   return npcs.map((npc, idx) => {
     const enriched = { ...npc };
     const roleLower = (npc.role || '').toLowerCase();
@@ -1231,8 +1253,10 @@ export const mergeNPCLists = (npcs, factions, institutions, tier, config) => {
               : isMerchant
                 ? stressOverrides.merchant
                 : null;
-        if (override) {
-          const defence = defenseFactsOf({ institutions }); enriched.goal = { short: defenceTwinLine(override.short, defence), long: enriched.goal.long || defenceTwinLine(override.short, defence) }; // F10: data/defenceTwinLines.js, draw-free
+        const defence = defenseFactsOf({ institutions }); // F10: data/defenceTwinLines.js, draw-free
+        const overrideLine = override ? defenceTwinLine(override.short, defence) : null;
+        if (override && !heldByOthers(goalsNow, idx).has(overrideLine.trim())) {
+          enriched.goal = { short: overrideLine, long: enriched.goal.long || overrideLine };
           if (override.note) enriched.stressNote = defenceTwinLine(override.note, defence);
         }
       }
@@ -1308,6 +1332,7 @@ export const mergeNPCLists = (npcs, factions, institutions, tier, config) => {
       enriched.goal = { ...enriched.goal, short: withoutCriminalGuild(enriched.goal.short), long: withoutCriminalGuild(enriched.goal.long) };
     }
 
+    goalsNow[idx] = enriched.goal?.short;
     return enriched;
   });
 };
@@ -1408,7 +1433,9 @@ export const generateNPCs = (
   // 128/240 a speech pattern. drawUnique spends exactly one seeded roll in every
   // arm (HK-LAW-6), so routing these two draws through it is roll-for-roll
   // neutral — measured 0 of 32 seeds shifting their total roll count.
-  const hookRegistry = { titles: new Set(), themes: new Set(), tells: new Set(), speech: new Set() };
+  // `goals` and `secrets` join it for REVIEW-INTAKE-4: a figure's goal or secret is never a text
+  // another figure of this roster already carries (drawRefusingHeld; no extra roll).
+  const hookRegistry = { titles: new Set(), themes: new Set(), tells: new Set(), speech: new Set(), goals: new Set(), secrets: new Set() };
   // R6 (soak 1000 rung 1, kind 4): a Guard Captain captains a standing force on the place's own
   // record, not the tier's (domain/defense/defenseFacts.js :: defenceRoleGate).
   const candidates = getUpgradeOpportunities(institutions, tier, weights)

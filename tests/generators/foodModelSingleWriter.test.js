@@ -397,7 +397,12 @@ describe('FIX-G1 — the viability summary counts the list the record publishes'
     // grain import remain) and the sentence followed it, 4 → 3, with the habitat above intact.
     expect(statedCount(v.summary), 'the headline stated no count at all').not.toBeNull();
     expect(statedCount(v.summary)).toBe((v.dependencies || []).length);
-    expect(statedCount(v.summary)).toBe(3);
+    // RE-KEYED 3 → 1 BY IDENTITY (REVIEW-INTAKE-LAND, 2026-11-07, the merge onto rung 1's tip),
+    // one cause, "water is read from the record; a mill is not a water dependency" (REVIEW-INTAKE
+    // unit 3): the Mills entry is motive water and raises nothing, and the Dyer's process water
+    // is met by the town's own water row, so both leave the PUBLISHED list; the grain import
+    // remains, and the sentence follows the list, 3 → 1, with the habitat above intact.
+    expect(statedCount(v.summary)).toBe(1);
     // The record's three readings of one fact now agree, which is the invariant.
     expect(v.metrics.dependencyCount).toBe((v.dependencies || []).length);
   });

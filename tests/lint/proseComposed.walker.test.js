@@ -1273,10 +1273,10 @@ describe('A13 — the PROVENANCE move, EXECUTABLE since the holder census landed
   const CAPTURED_TREASURY_TOWN = Object.freeze({
     config: {
       settType: 'town',
-      tradeRouteAccess: 'none',
+      tradeRouteAccess: 'port',
       monsterThreat: 'heartland',
-      culture: 'slavic',
-      terrainOverride: 'forest',
+      culture: 'arabic',
+      terrainOverride: 'desert',
     },
     // rate-9-2 -> rate-11-9 on 2026-09-30, with tests/fixtures/tasteTowns.js INTERESTED_TOWNS: the
     // same-seed shift left rate-9-2's Town hall without a tax service (urban band, ODQ §934.86).
@@ -1285,7 +1285,12 @@ describe('A13 — the PROVENANCE move, EXECUTABLE since the holder census landed
     // (criminalCaptureState 'none'). Scanned at the landing tip in rateGrid's own order, taken with
     // the grid's own config: 2 of the 128 town cells hold every captured precondition (rate-93-0 at
     // index 372, rate-135-1); rate-93-0 is the first. The assertions are unchanged.
-    seed: 'rate-93-0',
+    // rate-93-0 / soak1k-9 -> rate-69-0 on 2026-11-07 (REVIEW-INTAKE-LAND), by identity with its
+    // cause: the two 2026-11-06 re-keys (this arm to soak1k-9 by "a proxy is not a provider", and
+    // to rate-93-0 by the X-46 compose) met at the merge onto rung 1's tip; the same scan in
+    // rateGrid's order at the merged tip names rate-69-0 (index 276) first of three (rate-93-0,
+    // rate-135-1). The arm returns to the grid shape. The assertions are unchanged.
+    seed: 'rate-69-0',
   });
 
   it('⭐⭐ THE FAIL LIMB IS REACHABLE ON REAL INPUT: a citing variant whose holder this town has captured', () => {

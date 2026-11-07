@@ -13,7 +13,7 @@
  * this town. This module carries the two hops the ruling names, and nothing else:
  *
  *   (1) FIELD -> HOLDER KIND. A frozen table keyed on the producing field's own token, each
- *       row citing the PRODUCER that writes it (file:line) and carrying a `read` flag the gate
+ *       row citing the PRODUCER that writes it (file:line or file :: symbol), with a `read` flag the gate
  *       can catch lying about. A field no row names is SOURCE-UNRESOLVED, never guessed.
  *   (2) HOLDER KIND -> THIS TOWN'S INSTITUTION, through the institution table's own reader:
  *       an institution whose INSTANTIATED service rows carry one of the kind's record-keeping
@@ -144,7 +144,7 @@ export function capturedRulingStructure(settlement) {
 
 /**
  * ⭐ THE MAPPING TABLE — one row per producing FIELD TOKEN, each cited to the writer that
- * produces it. The `cite` is a `file:line` inside the producer index's own two trees
+ * produces it. The `cite` is a `file:line` (or, once drifted, `file :: symbol`) inside the producer index's own two trees
  * (`src/generators/**` and `src/domain/**`), and the walker re-derives every one of them from
  * a LIVE `astTokens` pass: a citation that has gone stale, or that never existed, reds by name.
  *
@@ -164,8 +164,9 @@ export function capturedRulingStructure(settlement) {
 export const HOLDER_SOURCES = Object.freeze({
   // ── the treasury: the town's coin, its revenue and the arithmetic that closes or does not ──
   incomeSources: Object.freeze({ kind: 'treasury', cite: 'src/generators/economy/economicState.js:828', read: true }),
-  viable: Object.freeze({ kind: 'treasury', cite: 'src/generators/economy/viability.js:544', read: true }),
-  criticalIssueCount: Object.freeze({ kind: 'treasury', cite: 'src/generators/economy/viability.js:564', read: true }),
+  // ⭐ CITED BY SYMBOL (rule 32; REVIEW-INTAKE-3 R8): these two drifted from :588/:608 to :586/:606.
+  viable: Object.freeze({ kind: 'treasury', cite: 'src/generators/economy/viability.js :: generateEconomicViability', read: true }),
+  criticalIssueCount: Object.freeze({ kind: 'treasury', cite: 'src/generators/economy/viability.js :: generateEconomicViability', read: true }),
   economicViability: Object.freeze({ kind: 'treasury', cite: 'src/generators/steps/assembleSettlement.js:113', read: true }),
 
   // ── the market: what the town makes, sends and takes in ──
@@ -175,9 +176,10 @@ export const HOLDER_SOURCES = Object.freeze({
   isEntrepot: Object.freeze({ kind: 'market', cite: 'src/generators/economy/economicState.js:833', read: true }),
   activeChains: Object.freeze({ kind: 'market', cite: 'src/generators/economy/economicState.js:775', read: true }),
   exportPosture: Object.freeze({ kind: 'market', cite: 'src/domain/display/dossierViewModel.js:570', read: true }),
-  economicStrengths: Object.freeze({ kind: 'market', cite: 'src/generators/resourceGenerator.js:500', read: true }),
-  strategicValue: Object.freeze({ kind: 'market', cite: 'src/generators/resourceGenerator.js:501', read: true }),
-  exploitation: Object.freeze({ kind: 'market', cite: 'src/generators/resourceGenerator.js:418', read: true }),
+  // ⭐ CITED BY SYMBOL (rule 32): REVIEW-INTAKE-3 R9 moved :500/:501/:418 down the file.
+  economicStrengths: Object.freeze({ kind: 'market', cite: 'src/generators/resourceGenerator.js :: generateResourceAnalysis', read: true }),
+  strategicValue: Object.freeze({ kind: 'market', cite: 'src/generators/resourceGenerator.js :: generateResourceAnalysis', read: true }),
+  exploitation: Object.freeze({ kind: 'market', cite: 'src/generators/resourceGenerator.js :: generateResourceAnalysis', read: true }),
 
   // ── the toll bar: the route, and what may and may not pass along it ──
   tradeRouteAccess: Object.freeze({ kind: 'toll-bar', cite: 'src/generators/steps/resolveConfig.js:201', read: true }),

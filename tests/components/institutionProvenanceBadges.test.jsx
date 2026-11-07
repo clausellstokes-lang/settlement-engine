@@ -160,30 +160,25 @@ describe('InstitutionsTab cards — the provenance badge', () => {
 });
 
 /**
- * VERIFIER F14 (RS-19 regressed through T1-14): a PROXY host (servicesData.js ::
- * PROXY_SERVICE_HOSTS: Dwellings, Housing, Water source, Sewage system, Farmland, Massive
- * prison ...) surfaces another house's menu; the Services tab names no institution for those
- * rows, and the Institutions page must not list them under the proxy either. The house itself
- * stays on the roster with its own description.
+ * VERIFIER F14 / RS-19, now kept in the RECORD (lane REVIEW-INTAKE unit 2, 2026-11-06): the
+ * twelve former PROXY hosts (Dwellings, Housing, Water source, Sewage system, Farmland, Massive
+ * prison ...) no longer surface another house's menu. Each owns its entry, so every row naming
+ * one is that house's own service, and the Institutions page lists it under the house.
  */
-describe('F14 / RS-19 — no proxy-surfaced menu under a proxy house', () => {
-  test('the proxy house keeps its card and lists none of the menu it only surfaces', async () => {
+const FORMER_PROXY_HOSTS = new Set(['dwellings (1-8)', 'dwellings (5-25)', 'dwellings (15-100)', 'housing (75-650 households)', 'housing (500-4000 households)', 'water source', 'multiple water sources', 'sewage system', 'farmland', 'common grazing land', 'access to external mill', 'massive prison']);
+describe('F14 / RS-19 — a former proxy house lists only its own menu', () => {
+  test('rows naming a former proxy are its own services and join its card', async () => {
     const { institutionsWithServices } = await import('../../src/components/new/tabs/InstitutionsTab.jsx');
-    const { PROXY_SERVICE_HOSTS } = await import('../../src/data/servicesData.js');
+    const { INSTITUTION_SERVICES } = await import('../../src/data/institutionServices.js');
     const rows = Object.values(base.availableServices || {}).flat();
-    const proxied = rows.filter((r) => r && PROXY_SERVICE_HOSTS[String(r.institution || '').toLowerCase()]);
-    expect(proxied.length, 'fixture premise: the town surfaces a menu through a proxy host').toBeGreaterThan(0);
+    const hosted = rows.filter((r) => r && FORMER_PROXY_HOSTS.has(String(r.institution || '').toLowerCase()));
+    expect(hosted.length, 'fixture premise: the town has a row naming a former proxy house').toBeGreaterThan(0);
+    for (const r of hosted) expect(Object.keys(INSTITUTION_SERVICES[r.institution] || {}), `${r.institution} credited with ${r.name}`).toContain(r.name);
     const houses = institutionsWithServices(base);
-    const proxyHouses = houses.filter((h) => PROXY_SERVICE_HOSTS[String(h.inst.name || '').toLowerCase()]);
-    expect(proxyHouses.length, 'the proxy houses stay on the roster').toBeGreaterThan(0);
-    for (const h of proxyHouses) expect(h.services, `${h.inst.name} lists a proxied menu`).toEqual([]);
-    expect(houses.some((h) => h.services.length > 0), 'real houses keep their menus').toBe(true);
-    const container = renderInstitutions(base);
-    for (const r of proxied) {
-      const card = [...container.querySelectorAll('[data-testid="institution-card"]')]
-        .find((el) => el.firstElementChild?.firstElementChild?.textContent === proxyHouses.find((h) => h.inst.name === r.institution)?.label);
-      expect(card, `${r.institution} card`).toBeTruthy();
-      expect(card.querySelectorAll('[data-testid="institution-service"]').length).toBe(0); // anchored: the card itself is asserted present
+    for (const r of hosted) {
+      const house = houses.find((h) => h.inst.name === r.institution);
+      expect(house, `${r.institution} stays on the roster`).toBeTruthy();
+      expect(house.services.map((s) => s.name)).toContain(r.name); // anchored: the house is asserted present above
     }
   });
 });

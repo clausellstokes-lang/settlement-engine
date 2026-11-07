@@ -43,17 +43,22 @@ export const PAIRED_TOWN = Object.freeze({
 });
 
 /**
- * ⭐ RE-TAKEN 2026-11-06 (LANDING-7 A, chair ruling R-A5), RE-KEYED BY IDENTITY WITH ITS CAUSE:
- * the X-46 scale train's compose `1264a8152` (first-parent stage 2 of the rung-1 landing) moved
- * `rate-11-9` under its paired config out of capture — its `criminalCaptureState` reads `none`
- * and the DS-GEN-11 treasury row LICENSED, so it is no longer INTERESTED. The captured town is
- * now `rate-93-0` with its OWN grid config: the FIRST town of `prose-rate-corpus.mjs :: rateGrid`,
- * in the grid's own order (index 372; 373 positions scanned, 61 town-tier cells generated), on
- * which every precondition the captured pins assert holds — corrupted, tier town, the treasury
- * row INTERESTED with the Town hall as holder and the captured-at-birth mark, interested on the
- * state organs only, every non-organ row not interested. The one corrupted town before it,
- * `rate-69-0`, reads LICENSED with no holder. The clean control `rate-3-0` still holds its own
- * preconditions at this tip and is unchanged.
+ * ⭐ RE-TAKEN 2026-11-07 (REVIEW-INTAKE-LAND, the merge of the review-intake lane onto rung 1's
+ * final tip `77bfd3535`), RE-KEYED BY IDENTITY WITH ITS CAUSE. Both sides had re-keyed `rate-11-9`
+ * on 2026-11-06, each by its own cause: the review-intake lane (R7: "a proxy is not a provider", a
+ * Housing row rolls one service, so later service rolls fork) to `rate-57-3`, and the rung-1
+ * landing (LANDING-7 A, R-A5: the X-46 compose `1264a8152` moved `rate-11-9` out of capture) to
+ * `rate-93-0`. At the merged tip the two causes compose, and the same rule re-applied —
+ * `prose-rate-corpus.mjs :: rateGrid` in the grid's own order, all 128 town cells generated —
+ * names `rate-69-0` (index 276; port/heartland/arabic/desert) the FIRST town on which every
+ * captured precondition holds: corrupted, tier town, the treasury row INTERESTED with the Town
+ * hall as holder and the captured-at-birth mark, interested on the state organs only, no
+ * non-organ row interested. Three grid towns hold them (`rate-69-0`, `rate-93-0`, `rate-135-1`);
+ * `rate-57-3` reads corrupted no longer at this tip. THE CLEAN CONTROL moves by the same rule:
+ * `rate-3-0`'s treasury is kept by its Weekly market and `rate-3-2`'s by nobody, so the first grid
+ * town that is uncaptured, a town, interested on nothing, and has its Town hall keep the treasury
+ * is `rate-9-2` (index 38) — PAIRED_TOWN's own seed and config, a coincidence of the scan, not a
+ * choice (the paired arm reads walls and a security house, the interested arm reads capture).
  *
  * ⭐ RE-TAKEN 2026-09-30 (the urban band, ODQ §934.86): `rate-9-2` is still corrupted, but the
  * same-seed shift left its Town hall without a tax service, so its treasury record has no
@@ -69,16 +74,21 @@ export const PAIRED_TOWN = Object.freeze({
 export const INTERESTED_TOWNS = Object.freeze([
   Object.freeze({
     label: 'captured',
-    seed: 'rate-93-0',
+    // was 'rate-11-9' (town/road/random_threat/germanic/hills); re-keyed 2026-11-07, cause above.
+    seed: 'rate-69-0',
     config: Object.freeze({
-      settType: 'town', tradeRouteAccess: 'none', monsterThreat: 'heartland', culture: 'slavic', terrainOverride: 'forest',
+      settType: 'town', tradeRouteAccess: 'port', monsterThreat: 'heartland', culture: 'arabic', terrainOverride: 'desert',
     }),
   }),
   Object.freeze({
     label: 'clean',
-    seed: 'rate-3-0',
+    // was 'rate-3-0' (arabic/riverside); re-keyed 2026-11-07 by the rule above: rate-3-0's treasury
+    // is kept by its Weekly market, so the pair would not differ by the capture alone. rate-9-2 is
+    // the FIRST grid town (index 38) uncaptured, a town, interested on nothing, Town hall keeping
+    // the treasury.
+    seed: 'rate-9-2',
     config: Object.freeze({
-      settType: 'town', tradeRouteAccess: 'random_trade', monsterThreat: 'random_threat', culture: 'arabic', terrainOverride: 'riverside',
+      settType: 'town', tradeRouteAccess: 'road', monsterThreat: 'random_threat', culture: 'germanic', terrainOverride: 'hills',
     }),
   }),
 ]);

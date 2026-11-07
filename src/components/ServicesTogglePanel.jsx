@@ -67,7 +67,8 @@ export default function ServicesTogglePanel() {
     Object.values(currentCatalog).forEach(cat => {
       Object.keys(cat).forEach(instName => {
         const svcKey = resolveServiceCatalogKey(instName);
-        if (!svcKey || !INSTITUTION_SERVICES[svcKey]) return;
+        // A house with an EMPTY menu (a Water source, a Sewage system) has nothing to toggle.
+        if (!svcKey || !INSTITUTION_SERVICES[svcKey] || !Object.keys(INSTITUTION_SERVICES[svcKey]).length) return;
         if (!map[svcKey]) map[svcKey] = { catalogNames:[], services:INSTITUTION_SERVICES[svcKey] };
         if (!map[svcKey].catalogNames.includes(instName)) map[svcKey].catalogNames.push(instName);
       });

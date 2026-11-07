@@ -55,6 +55,7 @@ vi.mock('../../src/store/selectors.js', async (importOriginal) => {
 import { useStore } from '../../src/store/index.js';
 import ServicesTogglePanel from '../../src/components/ServicesTogglePanel.jsx';
 import { resolveServiceCatalogKey } from '../../src/generators/services/institutionServices.js';
+import { INSTITUTION_SERVICES } from '../../src/data/institutionServices.js';
 
 /**
  * RS-20's red-first set: the 29 of 268 live institution names (the 1000-settlement corpus,
@@ -132,7 +133,10 @@ describe('ServicesTogglePanel toggle-key contract', () => {
       const written = new Set(Object.keys(useStore.getState().servicesToggles)
         .map((k) => k.slice(0, k.indexOf('_service_'))));
       const expected = new Set(['Grand Market', 'Market', ...MISMATCHED_29]
-        .map((name) => resolveServiceCatalogKey(name)).filter(Boolean));
+        .map((name) => resolveServiceCatalogKey(name))
+        // A house with an EMPTY menu (Water source, Sewage system: lane REVIEW-INTAKE unit 2)
+        // has nothing to toggle, so the panel writes no key for it.
+        .filter((key) => key && Object.keys(INSTITUTION_SERVICES[key] || {}).length > 0));
       expect(expected.size, 'the generator resolves none of the 29, so the arm is vacuous').toBeGreaterThan(10);
       expect([...written].sort(), 'the panel keys toggles by a menu the generator does not read')
         .toEqual([...expected].sort());
