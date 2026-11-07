@@ -682,9 +682,9 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
 
   let economicDragDesc = null;
   if (blackMarketCapture > 15) {
-    economicDragDesc = `The shadow economy captures an estimated ${blackMarketCapture}% of economic activity. Goods moving through unofficial channels, taxes unpaid, and legitimate merchants undercut by operators with no overhead costs.`;
+    economicDragDesc = 'Goods change hands here in back rooms and after dark, the duty on them goes unpaid, and the stalls that pay their fees lose custom to the ones that do not.';
   } else if (blackMarketCapture > 5) {
-    economicDragDesc = `A modest shadow economy (~${blackMarketCapture}% of activity) operates alongside legitimate commerce. Noticeable but not yet structurally damaging.`;
+    economicDragDesc = 'Some goods change hands here without a licence or a duty paid. It is noticed, and so far it does little harm.';
   }
 
   // ── Plot hooks ────────────────────────────────────────────────────────────
