@@ -4297,7 +4297,7 @@ the mechanism behind it.
 **LIFECYCLE: `emerging`** {colour}
 1. `[unfolding]` The trouble is new here. It shows in small displacements (a schedule slipping, a price moving) and has not yet been named out loud.
 2. `[street]` Something has begun. The town is not yet organized around it, and the people worst placed for it have not worked that out.
-3. `[threshold]` This is the early part: legible to anyone paying attention, deniable to anyone who would rather not.
+3. `[threshold]` It is early yet: anyone paying attention can see it, and anyone who would rather not can still look away.
 
 **LIFECYCLE: `active`** {colour}
 1. `[visitor]` The crisis is fully underway and the town is arranged around it. Everything ordinary now happens in its margins.
@@ -4306,42 +4306,42 @@ the mechanism behind it.
 
 **LIFECYCLE: `peaking`** {colour}
 1. `[counterforce]` It is as bad as it has been. Whatever the town had in reserve is being spent, and there is no obvious second reserve.
-2. `[unfolding]` This is the worst of it. The strain has stopped compounding and started simply holding at a level nothing here was built for.
-3. `[threshold]` The pressure is at its height. What is going to survive this part is surviving it; what is not is failing now.
+2. `[unfolding]` This is the worst of it. Things are no longer getting worse, but they are holding at a level nothing here was built to bear.
+3. `[threshold]` The pressure is at its height. Whatever is going to fail here is failing now, and whatever gets through this will last.
 
 **LIFECYCLE: `easing`** {colour}
 1. `[unfolding]` The worst has passed. The town is not recovered, but it has begun to plan past the trouble rather than around it.
-2. `[ledger]` Pressure is coming off. The improvisations are being retired one at a time, in the order they were least useful.
+2. `[ledger]` Pressure is coming off. The emergency measures are being dropped one at a time, the least useful first.
 3. `[visitor]` It is receding. What remains is the damage rather than the danger.
 
 **LIFECYCLE: `residual`** (the echo, weighted by `memoryStrength`) {colour}
 1. `[elder]` The crisis is over and the town still moves as though it were not. The habits it forced have outlived the reason for them.
-2. `[street]` What is left is memory doing the work of pressure. The trouble has ended; its weight has not entirely lifted.
+2. `[street]` The trouble has ended, but people here still talk and act as if it might come back.
 3. `[visitor]` {settlement} still carries the mark. The event is finished; the caution it taught is not.
 
 **COUNTERFORCE: `floorsMet` with a strong score** · **THE GOOD STATE (R-DST-G)** {colour}
-1. `[counterforce]` The town is meeting this well. Its strengths line up against exactly this kind of trouble, and the trouble is losing ground faster than it would elsewhere.
-2. `[ledger]` {settlement} has what this crisis requires and has it in the right combination; recovery here is a schedule rather than a hope.
-3. `[elder]` Every leg the town needed, it has. That is rarer than it sounds, and it is why this is ending sooner than it began.
+1. `[counterforce]` {settlement} is meeting this well: its strengths are the right ones for this kind of trouble, and the trouble is ending faster here than it would elsewhere.
+2. `[ledger]` {settlement} has everything this crisis calls for, and recovery here is a matter of time, not luck.
+3. `[elder]` Few places have every strength this trouble called for; {settlement} does, and that is why the trouble is ending early.
 
 **COUNTERFORCE: `floorsMet: false`** (partial strength, capped at neutral) {colour}
-1. `[threshold]` The town is strong in most of what this demands and short in one part, and the short part sets the pace.
-2. `[counterforce]` {settlement} has resources against this and not the full set. The missing leg means its strengths hold rather than push.
-3. `[ledger]` The response here is adequate without being decisive. One gap is enough to turn a recovery into an endurance.
+1. `[threshold]` {settlement} is strong in most of what this demands and short in one thing, and that one thing sets the pace.
+2. `[counterforce]` {settlement} has strengths against this, but not in every part, so they keep the trouble in check but do not drive it out.
+3. `[ledger]` The response here is good enough but not decisive; one gap is enough to turn a recovery into a long wait.
 
 **COUNTERFORCE: a named leading source** · `{reason}` fills from a `SOURCE_LABEL` present in `sourceBreakdown[]` {colour}
 1. `[counterforce]` What is carrying {settlement} through this is {reason}. The rest of the town's strengths are following that one.
-2. `[ledger]` The recovery here rests on {reason}, which is doing more work than anyone sized it for.
-3. `[threshold]` {reason} is why this has not been worse. Take it out and the arithmetic is a different arithmetic.
+2. `[ledger]` The recovery here rests on {reason}, more heavily than anyone planned.
+3. `[threshold]` {reason} is why this has not been worse; without it, {settlement} would be in real trouble.
 
 **COUNTERFORCE: weak or absent** {colour}
 1. `[street]` The town has little to bring against this. It will end when it ends, and not because of anything {settlement} does.
-2. `[counterforce]` There is no lever here. The strengths that would shorten this crisis are the strengths the town does not have.
+2. `[counterforce]` Nothing here can shorten this crisis: {settlement} lacks the very strengths it would need.
 3. `[elder]` {settlement} is enduring rather than resisting. The trouble decays at its own pace, and the town waits it out.
 
 **SYNERGY: famine × disease_outbreak**
 1. `[ledger]` Hunger and sickness are compounding here. The ill cannot work the fields, and the fields are why they are ill.
-2. `[street]` The two troubles feed each other: what the sickness takes from the harvest, the shortfall returns to the sickbeds.
+2. `[street]` The hungry fall sick more easily here, and every sick family leaves another field untended.
 3. `[counterforce]` {settlement} is short of food and short of the health to grow it, and neither shortage lifts before the other.
 
 **SYNERGY: famine × siege** · `blocksResolution: true` (a HARD causal dependency)
@@ -4352,48 +4352,48 @@ the mechanism behind it.
 
 **SYNERGY: occupation × insurgency** · the one ACCELERATING pair
 1. `[unfolding]` The resistance is bleeding the garrison. Occupation and revolt feed each other here, and the arrangement costs the occupier more each season.
-2. `[street]` {settlement} is held and it is fighting; the holding is expensive in a way that is shortening it.
-3. `[threshold]` The occupation made the resistance and the resistance is unmaking the occupation: an ugly equilibrium, and an expensive one for whoever is paying to hold it.
+2. `[street]` {settlement} is occupied and fighting back, and the occupiers no longer walk its streets alone.
+3. `[threshold]` The occupation gave rise to the resistance, and now the resistance is wearing the occupation down; both sides are paying dearly for it.
 
 **SYNERGY: mass_migration × disease_outbreak**
 1. `[visitor]` The camps and the contagion are one problem. People packed close enough to shelter each other are packed close enough to infect each other.
 2. `[unfolding]` Flight from the sickness is spreading the sickness; every column that leaves carries some of it forward.
-3. `[counterforce]` {settlement} is absorbing arrivals faster than it can space them, and the illness is taking the difference.
+3. `[counterforce]` {settlement} is taking in newcomers faster than it can find room for them, and the sickness spreads through the crowding.
 
 **SYNERGY: coup_detat × succession_void**
 1. `[threshold]` An empty seat invites the knives. The vacancy did not cause the conspiracy, but it removed every reason not to have one.
-2. `[street]` There is no undisputed claim, and there are several people acting as though there might be. The void is doing the plotting's recruiting for it.
+2. `[street]` There is no undisputed claim to the seat, and several people are acting as if it were theirs; every month it stays empty, the plotters find more friends.
 3. `[counterforce]` The unresolved succession keeps the plot alive; a settled claim would have ended it without a fight.
 
 **SYNERGY: market_shock × indebtedness**
 1. `[ledger]` The crash and the debt are one problem now. Creditors are calling in what they are owed precisely because they doubt it is collectable.
 2. `[street]` {settlement} owes coin it could have paid before the market turned; each week the obligation grows against the means.
-3. `[unfolding]` The panic made the debts unpayable, and the debts are making the panic worse; neither settles in isolation.
+3. `[unfolding]` The panic made the debts unpayable, and the unpaid debts are making the panic worse; neither will mend on its own.
 
 **ORIGIN: `foreign_sponsored`**
 1. `[ledger]` The trouble here has a foreign hand behind it: coin that traces back across a border, and someone local living better than their station explains.
-2. `[street]` This was paid for elsewhere. {settlement} is the place it happens, not the place it was decided.
+2. `[street]` This was paid for from abroad: it happens in {settlement}, but it was decided somewhere else.
 3. `[threshold]` The conspiracy is domestic in its faces and foreign in its funding; naming the sponsor aloud would be an act of war.
 
 **ORIGIN: `abandoned_agent`**
 1. `[unfolding]` Whoever set this in motion has stopped paying for it. The work continues out of habit and desperation rather than instruction.
 2. `[ledger]` The handler is gone and the asset remains. What was an operation is now a person with dangerous knowledge and no protection.
-3. `[threshold]` The arrangement outlived its purpose. Nobody is directing this any more, which makes it less predictable rather than less dangerous.
+3. `[threshold]` Nobody is directing this any more; whoever is still doing it acts alone, and that makes them harder to predict, not less dangerous.
 
 **ORIGIN: `internal_conspiracy`**
-1. `[counterforce]` No border explains this. The knife came from inside {settlement}, and the loyalty tests spreading through the council say so more clearly than any evidence.
+1. `[counterforce]` No outsider is behind this. The threat came from inside {settlement}, and the loyalty tests now going round the council show that its members know it.
 2. `[ledger]` There is no foreign sponsor and no recent feud. Whatever is being planned here was planned by people who already had a seat at the table.
 3. `[visitor]` The plot is entirely local. That is why it is difficult to find. Nothing about it looks out of place.
 
 **ORIGIN: `declared_war`**
 1. `[visitor]` The hostility here is open. {counterpart}'s banners are shown, its intentions stated, and its supply lines are the only part not on display.
 2. `[street]` This is a declared quarrel rather than a shadow one. The town knows exactly who is pressing it and why.
-3. `[ledger]` The pressure on {settlement} comes from a named and openly hostile neighbour; there is nothing to uncover, only something to answer.
+3. `[ledger]` The pressure on {settlement} comes from a neighbour that has openly declared itself an enemy; nothing needs uncovering, only an answer.
 
 **ORIGIN: `unattributed`** · **E-1 GOVERNS: NAME NOBODY**
 1. `[street]` No banner has been raised. The town knows it is under pressure and does not know from whom.
 2. `[threshold · walls]` Whoever is doing this has not troubled to identify themselves, and knew precisely where the walls are weakest.
-3. `[ledger]` The attacker is unnamed. Scouts could put a name to it; nobody has yet, and the not-knowing is its own kind of weight.
+3. `[ledger]` Nobody knows who the attacker is. Scouts could find out; nobody has yet, and people here live with not knowing.
 4. `[threshold · no walls]` Whoever is doing this has not troubled to identify themselves, and knew precisely where the town is weakest.
 
 **ORIGIN: `resistance`**
@@ -4416,11 +4416,11 @@ the mechanism behind it.
 **ORIGIN: `merchant_cabal`**
 1. `[ledger]` The money has turned against the seat. Credit has dried up for anyone aligned with the ruling power, and no house will say why.
 2. `[street]` The plot here is commercial: a warehouse that never opens has started taking deliveries at night, and several ledgers stopped balancing in the same season.
-3. `[threshold]` What threatens the government is not force but liquidity; the houses that finance {settlement} have decided to finance something else.
+3. `[threshold]` The threat to the government is not force but money: the houses that lend to {settlement} have stopped lending to its rulers.
 
 **ORIGIN: `temple_putsch`**
 1. `[street · institution: temple]` The sermons have changed. Obedience to unworthy rulers is suddenly a live question, and it is being asked from a pulpit.
-2. `[unfolding]` The challenge to the seat comes from the observances. Sanctuary has been promised to anyone who acts according to conscience, and conscience has been defined helpfully.
+2. `[unfolding]` The challenge to the seat comes from the observances. The faith's leaders have promised sanctuary to anyone who acts according to conscience, and they decide what conscience requires.
 3. `[counterforce]` Religious authority here has stopped propping the government and started replacing it.
 
 **ORIGIN: `arcane_ascendancy`**
@@ -4441,12 +4441,12 @@ the mechanism behind it.
 **ORIGIN: `servile_uprising`**
 1. `[street]` The bound labour of {settlement} has risen against the households that held it. The work songs in the fields changed first, and the overseers did not understand the new words.
 2. `[unfolding]` This is the rising of people who were never asked. Manumission papers, real and forged, change hands at night.
-3. `[elder]` What broke here was not a policy but an arrangement. The town's prosperity rested on labour that has stopped consenting to be labour.
+3. `[elder]` What broke here was the old order itself: the wealth of {settlement} rested on bound labour, and that labour has stopped obeying.
 
 **ORIGIN: `tax_revolt`**
 1. `[ledger]` The levies of a drowning treasury finally broke the commons. Collectors travel in pairs, then in fours, and lately not at all.
 2. `[street · institution: tavern]` The revolt here is about coin and only coin. The tally of every levy taken is being read aloud in the taverns.
-3. `[threshold]` {settlement} did not rise against its government. It rose against its bill, which the government has not yet noticed is a different thing.
+3. `[threshold]` {settlement} did not rise against its government, only against its taxes, and the government has not yet seen the difference.
 
 **ORIGIN: `arcane_burnout`**
 1. `[visitor]` The magic here is gone because it was spent. Where the surge burned hottest, candles gutter and wards lie cold.
@@ -4455,7 +4455,7 @@ the mechanism behind it.
 
 **ORIGIN: `leyline_silence`**
 1. `[unfolding]` The magic simply stopped answering. No omen, no surge, no warning: only the silence, and nobody yet knows why.
-2. `[threshold]` Nothing failed here. The arcane substrate went quiet on its own and has stayed quiet, which is worse than a disaster because it cannot be pointed at.
+2. `[threshold]` Nothing broke here. The magic simply went quiet on its own and has stayed quiet, and with nothing to blame, nobody knows what to do.
 3. `[street]` Hedge wizards are leaving {settlement} quietly; the ones who stay have started learning herbcraft.
 
 ---

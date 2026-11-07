@@ -79,8 +79,8 @@
       "ceilingGzip": 79355
     },
     "src/data/dossierStateProse/stressors.generated.js": {
-      "raw": 147408,
-      "gzip": 20851,
+      "raw": 147470,
+      "gzip": 20773,
       "ceilingRaw": 258858,
       "ceilingGzip": 57524
     },
@@ -347,6 +347,14 @@
       "toRaw": 147408,
       "gzipAfter": 20851,
       "reason": "+1,449 B raw (gzip level 9: 20,614 -> 20,851): DS-STR-1's 27 style rows and eleven tic strikes rewritten in the plain register; MASS MIGRATION's seven arrivals lines declare `migration: influx` and four departures lines (`migration: exodus`) join them, so a departures record never prints an arrival. Projected through node scripts/generate-dossier-state-prose.mjs; --check exit 0."
+    },
+    {
+      "car": "W4 PEOPLE second seat (2026-11-07): the owner's style law of 2026-11-07 — DS-STR-2 (rows 154-183)",
+      "leaf": "src/data/dossierStateProse/stressors.generated.js",
+      "fromRaw": 147408,
+      "toRaw": 147470,
+      "gzipAfter": 20773,
+      "reason": "+62 B raw (gzip level 9: 20,851 -> 20,773, smaller): DS-STR-2's 30 style rows (lifecycle, counterforce, synergy and origin lines) rewritten in the plain register; no pool, variant, mark or slot added. Projected through node scripts/generate-dossier-state-prose.mjs; --check exit 0."
     }
   ],
   "ceilingTransfersNewLeaves": [

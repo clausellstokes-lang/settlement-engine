@@ -117,9 +117,9 @@ describe('the four negative controls and the positive one (MOVE-GRAMMAR §4.4, a
     // 405 / 114 -> 404 / 114 at the chair's 06:5x DS-CND-1 boom line (ODQ §934.105): boom v4 is one sentence beside v1-v3's two, so the pool is no
     // longer uniform; its opener ("it is") is new to the pool (the ruled "{settlement} is …" repeated
     // v2's opener and read 115, so the line opens "It is a good stretch for {settlement}").
-    expect(uniformSegments).toBe(455); // W4 PEOPLE 2026-11-07: +7 pools, the faith and great-house construction; W4 PEOPLE second seat 2026-11-07: re-measured, DS-CND-1 the stress type in the pool key (+45 pools/+128 variants); W4 PEOPLE second seat 2026-11-07: re-measured, DS-STR-1 the style law (+4 departures lines)
+    expect(uniformSegments).toBe(453); // W4 PEOPLE 2026-11-07: +7 pools, the faith and great-house construction; W4 PEOPLE second seat 2026-11-07: re-measured, DS-CND-1 the stress type in the pool key (+45 pools/+128 variants); W4 PEOPLE second seat 2026-11-07: re-measured, DS-STR-1 the style law (+4 departures lines); W4 PEOPLE second seat 2026-11-07: re-measured, DS-STR-2 the style law (455 -> 453: two pools no longer uniform, no pool added)
     expect(repeatedOpener).toBe(117); // W4 PEOPLE 2026-11-07: +7 pools, the faith and great-house construction; W4 PEOPLE second seat 2026-11-07: re-measured, DS-CND-1 the stress type in the pool key (+45 pools)
-    expect(uniformSegments / cells.size).toBeCloseTo(0.598, 3); // W4 PEOPLE 2026-11-07: +7 pools, the faith and great-house construction; W4 PEOPLE second seat 2026-11-07: re-measured 453 / 761, DS-CND-1 the stress type in the pool key (the forty-five crisis pools are one sentence a line)
+    expect(uniformSegments / cells.size).toBeCloseTo(0.595, 3); // W4 PEOPLE 2026-11-07: +7 pools, the faith and great-house construction; W4 PEOPLE second seat 2026-11-07: re-measured 453 / 761, DS-CND-1 the stress type in the pool key (the forty-five crisis pools are one sentence a line); W4 PEOPLE second seat 2026-11-07: re-measured 453 / 761 = 0.595, DS-STR-2 the style law
     expect(repeatedOpener / cells.size).toBeCloseTo(0.154, 3); // W4 PEOPLE 2026-11-07: 118/716 repeated openers, re-measured; W4 PEOPLE second seat 2026-11-07: re-measured 117 / 761, DS-CND-1 the stress type in the pool key
   });
 
@@ -143,7 +143,7 @@ describe('the four negative controls and the positive one (MOVE-GRAMMAR §4.4, a
     expect(figures.pools).toBe(761); // W4 PEOPLE 2026-11-07: +7 pools/+18 variants, the faith and great-house construction; W4 PEOPLE second seat 2026-11-07: re-measured, DS-CND-1 the stress type in the pool key (+45 pools/+128 variants)
     // 406 -> 405 by the same cause as the calibration above (the chair's 06:5x rewording of DS-GEN-17 v3);
     // 405 -> 404 at the chair's 06:5x DS-CND-1 boom line (ODQ §934.105), likewise.
-    expect(Math.round(figures.uniformSegmentShare * 761)).toBe(455); // W4 PEOPLE 2026-11-07: +7 pools, the faith and great-house construction; W4 PEOPLE second seat 2026-11-07: re-measured, DS-CND-1 the stress type in the pool key (+45 pools/+128 variants)
+    expect(Math.round(figures.uniformSegmentShare * 761)).toBe(453); // W4 PEOPLE 2026-11-07: +7 pools, the faith and great-house construction; W4 PEOPLE second seat 2026-11-07: re-measured, DS-CND-1 the stress type in the pool key (+45 pools/+128 variants); W4 PEOPLE second seat 2026-11-07: re-measured, DS-STR-2 the style law (455 -> 453: two pools no longer uniform, no pool added)
     expect(Math.round(figures.repeatedOpenerShare * 761)).toBe(117); // W4 PEOPLE 2026-11-07: re-measured, the faith and great-house construction; W4 PEOPLE second seat 2026-11-07: re-measured, DS-CND-1 the stress type in the pool key (+45 pools): the factor re-pinned to the corpus size, 761
   });
 

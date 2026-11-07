@@ -1373,7 +1373,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "threshold",
-          "text": "This is the early part: legible to anyone paying attention, deniable to anyone who would rather not.",
+          "text": "It is early yet: anyone paying attention can see it, and anyone who would rather not can still look away.",
           "slots": [],
           "vid": 3
         }
@@ -1409,13 +1409,13 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "This is the worst of it. The strain has stopped compounding and started simply holding at a level nothing here was built for.",
+          "text": "This is the worst of it. Things are no longer getting worse, but they are holding at a level nothing here was built to bear.",
           "slots": [],
           "vid": 2
         },
         {
           "angle": "threshold",
-          "text": "The pressure is at its height. What is going to survive this part is surviving it; what is not is failing now.",
+          "text": "The pressure is at its height. Whatever is going to fail here is failing now, and whatever gets through this will last.",
           "slots": [],
           "vid": 3
         }
@@ -1429,7 +1429,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "Pressure is coming off. The improvisations are being retired one at a time, in the order they were least useful.",
+          "text": "Pressure is coming off. The emergency measures are being dropped one at a time, the least useful first.",
           "slots": [],
           "vid": 2
         },
@@ -1449,7 +1449,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "What is left is memory doing the work of pressure. The trouble has ended; its weight has not entirely lifted.",
+          "text": "The trouble has ended, but people here still talk and act as if it might come back.",
           "slots": [],
           "vid": 2
         },
@@ -1465,13 +1465,15 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
       "COUNTERFORCE: floorsMet with a strong score": [
         {
           "angle": "counterforce",
-          "text": "The town is meeting this well. Its strengths line up against exactly this kind of trouble, and the trouble is losing ground faster than it would elsewhere.",
-          "slots": [],
+          "text": "{settlement} is meeting this well: its strengths are the right ones for this kind of trouble, and the trouble is ending faster here than it would elsewhere.",
+          "slots": [
+            "settlement"
+          ],
           "vid": 1
         },
         {
           "angle": "ledger",
-          "text": "{settlement} has what this crisis requires and has it in the right combination; recovery here is a schedule rather than a hope.",
+          "text": "{settlement} has everything this crisis calls for, and recovery here is a matter of time, not luck.",
           "slots": [
             "settlement"
           ],
@@ -1479,21 +1481,25 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "elder",
-          "text": "Every leg the town needed, it has. That is rarer than it sounds, and it is why this is ending sooner than it began.",
-          "slots": [],
+          "text": "Few places have every strength this trouble called for; {settlement} does, and that is why the trouble is ending early.",
+          "slots": [
+            "settlement"
+          ],
           "vid": 3
         }
       ],
       "COUNTERFORCE: floorsMet: false": [
         {
           "angle": "threshold",
-          "text": "The town is strong in most of what this demands and short in one part, and the short part sets the pace.",
-          "slots": [],
+          "text": "{settlement} is strong in most of what this demands and short in one thing, and that one thing sets the pace.",
+          "slots": [
+            "settlement"
+          ],
           "vid": 1
         },
         {
           "angle": "counterforce",
-          "text": "{settlement} has resources against this and not the full set. The missing leg means its strengths hold rather than push.",
+          "text": "{settlement} has strengths against this, but not in every part, so they keep the trouble in check but do not drive it out.",
           "slots": [
             "settlement"
           ],
@@ -1501,7 +1507,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "The response here is adequate without being decisive. One gap is enough to turn a recovery into an endurance.",
+          "text": "The response here is good enough but not decisive; one gap is enough to turn a recovery into a long wait.",
           "slots": [],
           "vid": 3
         }
@@ -1518,7 +1524,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "The recovery here rests on {reason}, which is doing more work than anyone sized it for.",
+          "text": "The recovery here rests on {reason}, more heavily than anyone planned.",
           "slots": [
             "reason"
           ],
@@ -1526,9 +1532,10 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "threshold",
-          "text": "{reason} is why this has not been worse. Take it out and the arithmetic is a different arithmetic.",
+          "text": "{reason} is why this has not been worse; without it, {settlement} would be in real trouble.",
           "slots": [
-            "reason"
+            "reason",
+            "settlement"
           ],
           "vid": 3
         }
@@ -1544,8 +1551,10 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "counterforce",
-          "text": "There is no lever here. The strengths that would shorten this crisis are the strengths the town does not have.",
-          "slots": [],
+          "text": "Nothing here can shorten this crisis: {settlement} lacks the very strengths it would need.",
+          "slots": [
+            "settlement"
+          ],
           "vid": 2
         },
         {
@@ -1566,7 +1575,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "The two troubles feed each other: what the sickness takes from the harvest, the shortfall returns to the sickbeds.",
+          "text": "The hungry fall sick more easily here, and every sick family leaves another field untended.",
           "slots": [],
           "vid": 2
         },
@@ -1620,7 +1629,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "{settlement} is held and it is fighting; the holding is expensive in a way that is shortening it.",
+          "text": "{settlement} is occupied and fighting back, and the occupiers no longer walk its streets alone.",
           "slots": [
             "settlement"
           ],
@@ -1628,7 +1637,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "threshold",
-          "text": "The occupation made the resistance and the resistance is unmaking the occupation: an ugly equilibrium, and an expensive one for whoever is paying to hold it.",
+          "text": "The occupation gave rise to the resistance, and now the resistance is wearing the occupation down; both sides are paying dearly for it.",
           "slots": [],
           "vid": 3
         }
@@ -1648,7 +1657,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "counterforce",
-          "text": "{settlement} is absorbing arrivals faster than it can space them, and the illness is taking the difference.",
+          "text": "{settlement} is taking in newcomers faster than it can find room for them, and the sickness spreads through the crowding.",
           "slots": [
             "settlement"
           ],
@@ -1664,7 +1673,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "There is no undisputed claim, and there are several people acting as though there might be. The void is doing the plotting's recruiting for it.",
+          "text": "There is no undisputed claim to the seat, and several people are acting as if it were theirs; every month it stays empty, the plotters find more friends.",
           "slots": [],
           "vid": 2
         },
@@ -1692,7 +1701,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "The panic made the debts unpayable, and the debts are making the panic worse; neither settles in isolation.",
+          "text": "The panic made the debts unpayable, and the unpaid debts are making the panic worse; neither will mend on its own.",
           "slots": [],
           "vid": 3
         }
@@ -1706,7 +1715,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "This was paid for elsewhere. {settlement} is the place it happens, not the place it was decided.",
+          "text": "This was paid for from abroad: it happens in {settlement}, but it was decided somewhere else.",
           "slots": [
             "settlement"
           ],
@@ -1734,7 +1743,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "threshold",
-          "text": "The arrangement outlived its purpose. Nobody is directing this any more, which makes it less predictable rather than less dangerous.",
+          "text": "Nobody is directing this any more; whoever is still doing it acts alone, and that makes them harder to predict, not less dangerous.",
           "slots": [],
           "vid": 3
         }
@@ -1742,7 +1751,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
       "ORIGIN: internal_conspiracy": [
         {
           "angle": "counterforce",
-          "text": "No border explains this. The knife came from inside {settlement}, and the loyalty tests spreading through the council say so more clearly than any evidence.",
+          "text": "No outsider is behind this. The threat came from inside {settlement}, and the loyalty tests now going round the council show that its members know it.",
           "slots": [
             "settlement"
           ],
@@ -1778,7 +1787,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "The pressure on {settlement} comes from a named and openly hostile neighbour; there is nothing to uncover, only something to answer.",
+          "text": "The pressure on {settlement} comes from a neighbour that has openly declared itself an enemy; nothing needs uncovering, only an answer.",
           "slots": [
             "settlement"
           ],
@@ -1803,7 +1812,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "The attacker is unnamed. Scouts could put a name to it; nobody has yet, and the not-knowing is its own kind of weight.",
+          "text": "Nobody knows who the attacker is. Scouts could find out; nobody has yet, and people here live with not knowing.",
           "slots": [],
           "vid": 3
         },
@@ -1927,7 +1936,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "threshold",
-          "text": "What threatens the government is not force but liquidity; the houses that finance {settlement} have decided to finance something else.",
+          "text": "The threat to the government is not force but money: the houses that lend to {settlement} have stopped lending to its rulers.",
           "slots": [
             "settlement"
           ],
@@ -1946,7 +1955,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "The challenge to the seat comes from the observances. Sanctuary has been promised to anyone who acts according to conscience, and conscience has been defined helpfully.",
+          "text": "The challenge to the seat comes from the observances. The faith's leaders have promised sanctuary to anyone who acts according to conscience, and they decide what conscience requires.",
           "slots": [],
           "vid": 2
         },
@@ -2048,8 +2057,10 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "elder",
-          "text": "What broke here was not a policy but an arrangement. The town's prosperity rested on labour that has stopped consenting to be labour.",
-          "slots": [],
+          "text": "What broke here was the old order itself: the wealth of {settlement} rested on bound labour, and that labour has stopped obeying.",
+          "slots": [
+            "settlement"
+          ],
           "vid": 3
         }
       ],
@@ -2071,7 +2082,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "threshold",
-          "text": "{settlement} did not rise against its government. It rose against its bill, which the government has not yet noticed is a different thing.",
+          "text": "{settlement} did not rise against its government, only against its taxes, and the government has not yet seen the difference.",
           "slots": [
             "settlement"
           ],
@@ -2109,7 +2120,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "threshold",
-          "text": "Nothing failed here. The arcane substrate went quiet on its own and has stayed quiet, which is worse than a disaster because it cannot be pointed at.",
+          "text": "Nothing broke here. The magic simply went quiet on its own and has stayed quiet, and with nothing to blame, nobody knows what to do.",
           "slots": [],
           "vid": 2
         },
