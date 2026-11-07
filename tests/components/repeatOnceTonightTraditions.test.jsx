@@ -33,13 +33,18 @@ afterEach(cleanup);
 const countOf = (hay, needle) => hay.split(needle).length - 1;
 
 describe('F2: a sentence printed once per tab', () => {
-  it('soak1k-12: the Tonight sheet prints the shared want once, and the second person names the first', async () => {
+  // soak1k-12 -> soak1k-202 at 1e28faf1f (lane RUNG2-F13 unit 3, CRISIS-CAST-SENSE, the chair's ruling rung 2 §3c: a
+  // person voiced from the crisis cast wants what the ROLE wants, CAST_WANTS). soak1k-12's first voice is now a cast
+  // person with the role's want, so its two people no longer share one; measured: this arm green at 1e28faf1f^
+  // (f7127dd20), red at 1e28faf1f. The tip voices a shared want on ONE of soak1k-0..299, soak1k-202 (searched by
+  // composeTonightSheet over the corpus), so the arm now reads that birth; the assertions are unchanged.
+  it('soak1k-202: the Tonight sheet prints the shared want once, and the second person names the first', async () => {
     await ensureLaws();
-    const s = normalizeSettlement(birth(12).settlement);
+    const s = normalizeSettlement(birth(202).settlement);
     const sheet = composeTonightSheet(s);
     const { container } = render(<TonightSheet sheet={sheet} palette={{}} />);
     const text = container.textContent || '';
-    const WANT = 'convert governance instability into a restoration of prerogatives that formal governance had constrained.';
+    const WANT = 'identify who the betrayer was before they do further damage.';
     expect(countOf(text, WANT)).toBe(1);
     const first = sheet.people.find((p) => p.line === WANT && !p.sameAs);
     const second = sheet.people.find((p) => p.sameAs);
