@@ -168,6 +168,9 @@ describe('X-46 car 4 (iii) — dark, the world is byte-identical; lit (in this t
   // x46-dark-metropolis-009 (d1e18894… → 32a6052b…), the two mass_migration places of the sixty (their record gains
   // stress[].direction and its config projection, the stability label names the one direction, the arrivals vignette
   // and secret pool). Re-captured by this file's recipe at 343bd4eec, twice and equal.
+  // RE-KEYED BY IDENTITY again at the lane tip (WIRING-W0 records 02-05: one import share, one food-source count, the legacy
+  // annotations dated at birth and the date in one home; every v1 world carries a food record and annotations): 60 of 60
+  // moved. Re-captured by this file's recipe at 1dd31a377, twice and equal.
   const DARK = /** @type {Record<string, string>} */ (JSON.parse(readFileSync(
     fileURLToPath(new URL('../fixtures/x46-npc-band-dark-digests.json', import.meta.url)), 'utf8',
   )));
