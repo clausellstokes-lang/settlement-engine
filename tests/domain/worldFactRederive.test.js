@@ -430,9 +430,11 @@ describe('EM-B2b — world facts by consequence: the route, the refusals and the
     // stage with the door paths carried from the landing branch and restated here in the same act. Record 0a, the
     // review-intake lane (docs/shift-records/2026-11-07-people-land-0a-review-intake.json), from the stage at 5b444331a:
     // the generator master 06050f53.. -> b1be65e4.. (525 of 525 rows) and the prose manifest 777e4b4b.. -> 63c63a8b..
-    // (8 of 1,050 rows).
+    // (8 of 1,050 rows). Record 0b, the W0 merge's composition over it (docs/shift-records/2026-11-07-people-land-0b-
+    // w0-merge.json), from the stage at fc834a6bd: the generator master b1be65e4.. -> 6b0d226e.. (525 of 525 rows); the
+    // prose manifest did not move.
     expect(shaOfFile(GOLDEN), 'tests/fixtures/generator-golden-master.json moved')
-      .toBe('b1be65e4fbd386c1682df3027770557a6c58fe2a18a3a7789b8e633927b58ead');
+      .toBe('6b0d226e38e80f7d85c2ea21f050e4cd3bbb93a2730b48153269194deb2305ac');
     expect(shaOfFile(PROSE_GOLDEN), 'tests/fixtures/dossier-prose-manifest-golden.json moved')
       .toBe('63c63a8b47b204ec7c6ab34ebfddeeecb12276e115c9a349ed8fda886aaa7ff3');
 
