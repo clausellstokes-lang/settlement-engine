@@ -14,6 +14,7 @@ import { birth, ensureLaws } from '../../scripts/audit/soak-review/corpus.mjs';
 import { composeTonightSheet, isVoiceableWant, printsAsWant, voicedLineOf } from '../../src/domain/summary/tonightSheet.js';
 import { composeSettlementQuickGuide } from '../../src/domain/summary/settlementQuickGuide.js';
 import { crisisCastSenseFindings } from '../../src/domain/coherence/crisisFactFindings.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 const SEEDS = [20, 26, 55, 57];
 /** @type {Record<number, any>} */
@@ -24,12 +25,16 @@ beforeAll(async () => {
 }, 300_000);
 
 describe('R11 · the Tonight sheet prefers the concrete', () => {
-  it.each(SEEDS)('soak1k-%i: every line printed after "Wants to" is voiceable (an empty line prints nothing)', (i) => {
-    const sheet = composeTonightSheet(born[i]);
-    expect(sheet.people.length).toBeGreaterThan(0);
-    for (const p of sheet.people) {
-      if (printsAsWant(p) && !p.sameAs && p.line) expect(isVoiceableWant(p.line), `${p.name}: ${p.line}`).toBe(true);
-    }
+  // LANDING-R2 seat E: the three seed tables run as plain parameterless tests, every seed collected.
+  it('soak1k-20, -26, -55, -57: every line printed after "Wants to" is voiceable (an empty line prints nothing)', () => {
+    const failures = collectSeedFailures(SEEDS, (i) => {
+      const sheet = composeTonightSheet(born[i]);
+      expect(sheet.people.length, `soak1k-${i}`).toBeGreaterThan(0);
+      for (const p of sheet.people) {
+        if (printsAsWant(p) && !p.sameAs && p.line) expect(isVoiceableWant(p.line), `soak1k-${i} ${p.name}: ${p.line}`).toBe(true);
+      }
+    });
+    expectNoSeedFailures(failures, 'every printed want is voiceable');
   });
 
   it('soak1k-26: the seat (the revolt\'s target) with an abstract goal, the crisis secret withheld and no temperament on the record is voiced with nothing, never the abstract goal', () => {
@@ -37,15 +42,21 @@ describe('R11 · the Tonight sheet prefers the concrete', () => {
     expect(seat).toMatchObject({ name: 'Rhiannon Sullivan', says: 'want', line: '' });
   });
 
-  it.each([26, 55])('soak1k-%i: a crisis target whose own line falls back never voices that crisis\'s secret (F13 target_runs_plot)', (i) => {
-    expect(crisisCastSenseFindings(born[i]).filter((f) => f.detail.startsWith('target_runs_plot'))).toEqual([]);
+  it('soak1k-26 and -55: a crisis target whose own line falls back never voices that crisis\'s secret (F13 target_runs_plot)', () => {
+    const failures = collectSeedFailures([26, 55], (i) => {
+      expect(crisisCastSenseFindings(born[i]).filter((f) => f.detail.startsWith('target_runs_plot')), `soak1k-${i}`).toEqual([]);
+    });
+    expectNoSeedFailures(failures, 'no fallen-back crisis target voices the crisis secret');
   });
 
-  it.each(SEEDS)('soak1k-%i: the Quick Guide reads the same choice', (i) => {
-    for (const p of composeSettlementQuickGuide(born[i]).importantPeople) {
-      const m = p.detail.match(/^Wants to (.*)$/);
-      if (m) expect(isVoiceableWant(m[1]), `${p.name}: ${p.detail}`).toBe(true);
-    }
+  it('soak1k-20, -26, -55, -57: the Quick Guide reads the same choice', () => {
+    const failures = collectSeedFailures(SEEDS, (i) => {
+      for (const p of composeSettlementQuickGuide(born[i]).importantPeople) {
+        const m = p.detail.match(/^Wants to (.*)$/);
+        if (m) expect(isVoiceableWant(m[1]), `soak1k-${i} ${p.name}: ${p.detail}`).toBe(true);
+      }
+    });
+    expectNoSeedFailures(failures, 'the Quick Guide voices only voiceable wants');
   });
 });
 

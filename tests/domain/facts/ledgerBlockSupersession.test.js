@@ -16,6 +16,7 @@ import {
 } from '../../../src/domain/facts/presumptionLedger.js';
 import { presumptionFindings } from '../../../src/domain/facts/presumptionCheck.js';
 import { birth, ensureLaws } from '../../../scripts/audit/soak-review/corpus.mjs';
+import { collectSeedFailures, expectNoSeedFailures } from '../../helpers/seedFailures.js';
 
 /** @param {string} lineId */
 const note = (lineId) => notePresumption({ pool: 'planted', lineId, atoms: [], surface: 'dossier', drawKind: 'K', resolvedBy: 'drawn' });
@@ -48,10 +49,14 @@ describe('R-D1 unit 1: the ledger holds one note set per block', () => {
     expect(outer.ledger.map((e) => e.lineId)).toEqual(['outer-first']);
   });
 
-  it.each([1185, 1221, 2595])('soak1k-%i: the replaced economy pass leaves no \'no walls\' note', async (i) => {
+  // LANDING-R2 seat E: one parameterless test over the three seeds, every seed run and collected.
+  it('soak1k-1185, -1221, -2595: the replaced economy pass leaves no \'no walls\' note', async () => {
     await ensureLaws();
-    const born = withPresumptionLedger(() => birth(i));
-    const findings = presumptionFindings(born.result.settlement, born.ledger);
-    expect(findings.map((p) => `${p.pool} #${p.lineId}: ${p.atom}`)).toEqual([]);
-  }, 120_000);
+    const failures = collectSeedFailures([1185, 1221, 2595], (i) => {
+      const born = withPresumptionLedger(() => birth(i));
+      const findings = presumptionFindings(born.result.settlement, born.ledger);
+      expect(findings.map((p) => `${p.pool} #${p.lineId}: ${p.atom}`), `soak1k-${i}`).toEqual([]);
+    });
+    expectNoSeedFailures(failures, 'no replaced economy pass leaves a no-walls note');
+  }, 360_000);
 });

@@ -18,6 +18,7 @@ import { foodStoresWords } from '../../src/domain/summary/tonightSheet.js';
 import { migrationDirectionOf } from '../../src/domain/crisis/migrationDirection.js';
 import { FAMINE_DRAWDOWN, famineStoresLeft } from '../../src/generators/foodGenerator.js';
 import { STOCKPILE_TUNING } from '../../src/domain/worldPulse/foodStockpile.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 /** Every string the record stores, one per line (the prose the generators wrote). @param {unknown} v @returns {string} */
 function recordText(v) {
@@ -89,15 +90,22 @@ describe('the rung-2 seeds, re-born', () => {
     expect(famineStoresFindings(s, foodStoresWords(record))).toEqual([]);
   });
 
-  it.each([0, 4204])('MIGRATION-DIRECTION — soak1k-%i: no migration line tells the influx as a departure', (i) => {
-    const s = birth(i).settlement;
-    const entry = (Array.isArray(s.stress) ? s.stress : [s.stress]).find((e) => e?.type === 'mass_migration');
-    expect(entry?.direction).toBe('influx');
-    expect(migrationDirectionFindings(s, recordText(s)).map((f) => f.quote)).toEqual([]);
-  });
+  // LANDING-R2 seat E: the two seed tables run as plain parameterless tests, every seed collected.
+  it('MIGRATION-DIRECTION — soak1k-0 and -4204: no migration line tells the influx as a departure', () => {
+    const failures = collectSeedFailures([0, 4204], (i) => {
+      const s = birth(i).settlement;
+      const entry = (Array.isArray(s.stress) ? s.stress : [s.stress]).find((e) => e?.type === 'mass_migration');
+      expect(entry?.direction, `soak1k-${i}`).toBe('influx');
+      expect(migrationDirectionFindings(s, recordText(s)).map((f) => f.quote), `soak1k-${i}`).toEqual([]);
+    });
+    expectNoSeedFailures(failures, 'no influx is told as a departure');
+  }, 120_000);
 
-  it.each([1805, 4200, 3000, 2404, 3005, 4203])('CRISIS-CAST-SENSE — soak1k-%i: the cast\'s wants fit its roles and no one holds two opposed roles', (i) => {
-    const s = birth(i).settlement;
-    expect(crisisCastSenseFindings(s, { record: recordText(s) }).map((f) => `${f.detail} | ${f.quote}`)).toEqual([]);
-  });
+  it('CRISIS-CAST-SENSE — soak1k-1805, -4200, -3000, -2404, -3005, -4203: the cast\'s wants fit its roles and no one holds two opposed roles', () => {
+    const failures = collectSeedFailures([1805, 4200, 3000, 2404, 3005, 4203], (i) => {
+      const s = birth(i).settlement;
+      expect(crisisCastSenseFindings(s, { record: recordText(s) }).map((f) => `${f.detail} | ${f.quote}`), `soak1k-${i}`).toEqual([]);
+    });
+    expectNoSeedFailures(failures, 'every crisis cast makes sense');
+  }, 240_000);
 });

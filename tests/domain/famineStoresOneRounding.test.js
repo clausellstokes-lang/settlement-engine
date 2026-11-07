@@ -18,6 +18,7 @@ import { deriveFoodRecord, FAMINE_HELD_STORE_MONTHS } from '../../src/generators
 import { foodStoresWords } from '../../src/domain/summary/tonightSheet.js';
 import { HELD_STORES_WORDS } from '../../src/domain/defense/defenseFacts.js';
 import { foodEnduranceLine } from '../../src/domain/display/defenseDisplay.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 /** @type {Record<number, any>} */
 const born = {};
@@ -32,17 +33,21 @@ const recordAt = (storageMonths, stressFamine = true) => deriveFoodRecord({
 });
 
 describe('rung 2D · the held granary and the stores line read one rounding', () => {
-  it.each([1582, 1846, 2962])('soak1k-%i: a famine granary printed as six months is held, and the page says so', (i) => {
-    const s = born[i];
-    const record = s.economicState.foodSecurity.foodRecord;
-    expect(record).toMatchObject({ band: 'famine', hasGranary: true });
-    expect(record.storageMonths).toBeGreaterThanOrEqual(5.5);
-    expect(record.storageMonths).toBeLessThan(FAMINE_HELD_STORE_MONTHS);
-    expect(record.storesHeld).toBe(true);
-    const words = foodStoresWords(record);
-    expect(words).toBe(`Stores: a granary of six months that ${HELD_STORES_WORDS}.`);
-    expect(famineStoresFindings(s, words)).toHaveLength(0);
-    expect(foodEnduranceLine(s)?.sentence).toContain(HELD_STORES_WORDS);
+  // LANDING-R2 seat E: one parameterless test over the three seeds, every seed run and collected.
+  it('soak1k-1582, -1846, -2962: a famine granary printed as six months is held, and the page says so', () => {
+    const failures = collectSeedFailures([1582, 1846, 2962], (i) => {
+      const s = born[i];
+      const record = s.economicState.foodSecurity.foodRecord;
+      expect(record, `soak1k-${i}`).toMatchObject({ band: 'famine', hasGranary: true });
+      expect(record.storageMonths, `soak1k-${i}`).toBeGreaterThanOrEqual(5.5);
+      expect(record.storageMonths, `soak1k-${i}`).toBeLessThan(FAMINE_HELD_STORE_MONTHS);
+      expect(record.storesHeld, `soak1k-${i}`).toBe(true);
+      const words = foodStoresWords(record);
+      expect(words, `soak1k-${i}`).toBe(`Stores: a granary of six months that ${HELD_STORES_WORDS}.`);
+      expect(famineStoresFindings(s, words), `soak1k-${i}`).toHaveLength(0);
+      expect(foodEnduranceLine(s)?.sentence, `soak1k-${i}`).toContain(HELD_STORES_WORDS);
+    });
+    expectNoSeedFailures(failures, 'every six-month famine granary reads as held');
   });
 
   it('soak1k-3605 (the control): twelve months, held before and after', () => {

@@ -41,32 +41,36 @@ const TOWN = { tier: 'town', population: 2400, institutions: [] };
 const CALM = factsOf(TOWN);
 const SIEGE = factsOf({ ...TOWN, stress: [{ type: 'under_siege' }] });
 
-describe.each(Object.entries(FAMILIES))('%s: the annex carries the ledger', (_family, ids) => {
-  it.each(ids)('%s: every pool ruling and every line atom is projected', (id) => {
-    const block = LEAVES[id];
-    const meta = block.poolMeta || {};
+// LANDING-R2 seat E: the family x block table runs as ONE plain parameterless test (the lighting census
+// credits a table read inside the body, never an `each` callback); every finding is prefixed by its block.
+describe('the annex carries the ledger, for every family', () => {
+  it('every block of DS-GEN, DS-HK, DS-STR and DS-CND: every pool ruling and every line atom is projected', () => {
     /** @type {string[]} */ const missing = [];
-    for (const p of ledger(id).pools) {
-      const m = meta[p.pool] || {};
-      const scoped = p.crisisScoped === true && !keyed(p);
-      if (scoped && m.crisisScoped !== true) missing.push(`${p.pool}: {crisis-scoped}`);
-      if (keyed(p) && m.crisisScoped === true) missing.push(`${p.pool}: keyed pool opted in`);
-      if (p.colour === true && m.colour !== true) missing.push(`${p.pool}: {colour}`);
-      const poolAtoms = [...(p.poolNeeds || []).map(poolRename), ...(p.poolExcludes || []).map((a) => `no ${poolRename(a)}`)];
-      // a keyed pool's own crisis (DS-STR-2 wrote it as a pool atom) is the key's guarantee, not re-declared
-      for (const a of poolAtoms.filter((x) => !(keyed(p) && /^crisis:/.test(x)))) if (!(m.declares || []).includes(a)) missing.push(`${p.pool}: pool atom ${a}`);
-      for (const l of p.lines) {
-        const v = block.pools[p.pool].find((x) => x.vid === Number(l.lineId.replace('vid:', '')));
-        const marks = v.marks || [];
-        const want = [...(l.needs || []).map(rename), ...(l.excludes || []).map((a) => `no ${rename(a)}`)];
-        if (scoped && l.crisis === 'any') want.push('crisis: any');
-        for (const a of want) if (!marks.includes(a)) missing.push(`${p.pool} ${l.lineId}: ${a}`);
-        // a keyed pool's line re-declares its KEY only by repeating it; a NARROWER presumption (one
-        // kind of the key's conjunction, which can resolve after stamping: DS-STR-2 ORIGIN:
-        // resistance vid 2 and 3) declares `crisis: <kind>` (CENSUS-2c unit 2, the chair's R-I)
-        const narrower = keyed(p) && Array.isArray(l.crisis) && l.crisis.length > 0 && l.crisis.length < p.poolCrisis.length;
-        if (narrower) for (const k of l.crisis) if (!marks.includes(`crisis: ${k}`)) missing.push(`${p.pool} ${l.lineId}: crisis: ${k}`);
-        if (keyed(p) && !narrower && marks.some((x) => /^crisis:/.test(x))) missing.push(`${p.pool} ${l.lineId}: re-declares its key`);
+    for (const id of Object.values(FAMILIES).flat()) {
+      const block = LEAVES[id];
+      const meta = block.poolMeta || {};
+      for (const p of ledger(id).pools) {
+        const m = meta[p.pool] || {};
+        const scoped = p.crisisScoped === true && !keyed(p);
+        if (scoped && m.crisisScoped !== true) missing.push(`${id} ${p.pool}: {crisis-scoped}`);
+        if (keyed(p) && m.crisisScoped === true) missing.push(`${id} ${p.pool}: keyed pool opted in`);
+        if (p.colour === true && m.colour !== true) missing.push(`${id} ${p.pool}: {colour}`);
+        const poolAtoms = [...(p.poolNeeds || []).map(poolRename), ...(p.poolExcludes || []).map((a) => `no ${poolRename(a)}`)];
+        // a keyed pool's own crisis (DS-STR-2 wrote it as a pool atom) is the key's guarantee, not re-declared
+        for (const a of poolAtoms.filter((x) => !(keyed(p) && /^crisis:/.test(x)))) if (!(m.declares || []).includes(a)) missing.push(`${id} ${p.pool}: pool atom ${a}`);
+        for (const l of p.lines) {
+          const v = block.pools[p.pool].find((x) => x.vid === Number(l.lineId.replace('vid:', '')));
+          const marks = v.marks || [];
+          const want = [...(l.needs || []).map(rename), ...(l.excludes || []).map((a) => `no ${rename(a)}`)];
+          if (scoped && l.crisis === 'any') want.push('crisis: any');
+          for (const a of want) if (!marks.includes(a)) missing.push(`${id} ${p.pool} ${l.lineId}: ${a}`);
+          // a keyed pool's line re-declares its KEY only by repeating it; a NARROWER presumption (one
+          // kind of the key's conjunction, which can resolve after stamping: DS-STR-2 ORIGIN:
+          // resistance vid 2 and 3) declares `crisis: <kind>` (CENSUS-2c unit 2, the chair's R-I)
+          const narrower = keyed(p) && Array.isArray(l.crisis) && l.crisis.length > 0 && l.crisis.length < p.poolCrisis.length;
+          if (narrower) for (const k of l.crisis) if (!marks.includes(`crisis: ${k}`)) missing.push(`${id} ${p.pool} ${l.lineId}: crisis: ${k}`);
+          if (keyed(p) && !narrower && marks.some((x) => /^crisis:/.test(x))) missing.push(`${id} ${p.pool} ${l.lineId}: re-declares its key`);
+        }
       }
     }
     expect(missing).toEqual([]);

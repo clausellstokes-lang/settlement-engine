@@ -20,6 +20,7 @@ import { eligibleVariants } from '../../src/domain/display/stateProse/stateProse
 import { DOSSIER_STATE_PROSE_POWER } from '../../src/data/dossierStateProse/power.generated.js';
 // CENSUS-5: DS-POW-4 v1/v2 declare `no crisis: unrest` (R-F 1), so the pool reads against the record's facts, as the desk's does.
 import { factsOf } from '../../src/domain/facts/factsOf.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 const POOL = DOSSIER_STATE_PROSE_POWER['DS-POW-4'].pools['riskLabel: Stable (no challengers)'];
 /** The pool's own seat-safety variant, found by the instrument under a succession crisis. */
@@ -38,19 +39,26 @@ describe('rung 2D · the seat-safety line is denied by unrest as well as success
     expect(SEAT_SAFE).toBeDefined();
   });
 
-  it.each([[1, 'slave_revolt'], [3001, 'insurgency']])('soak1k-%i (%s): the instrument reads the line as crisis-blind under the unrest family', (i, type) => {
-    const s = born[i];
-    expect((Array.isArray(s.stress) ? s.stress : [s.stress]).map((x) => x?.type)).toContain(type);
-    const hits = crisisBlindFindings(s, { power: SEAT_SAFE.text });
-    expect(hits.map((f) => [f.claim, f.family])).toEqual([['the seat is safe', 'unrest']]);
+  // LANDING-R2 seat E: the two seed tables run as plain parameterless tests, every seed collected.
+  it('soak1k-1 (slave_revolt) and -3001 (insurgency): the instrument reads the line as crisis-blind under the unrest family', () => {
+    const failures = collectSeedFailures([[1, 'slave_revolt'], [3001, 'insurgency']], ([i, type]) => {
+      const s = born[i];
+      expect((Array.isArray(s.stress) ? s.stress : [s.stress]).map((x) => x?.type), `soak1k-${i}`).toContain(type);
+      const hits = crisisBlindFindings(s, { power: SEAT_SAFE.text });
+      expect(hits.map((f) => [f.claim, f.family]), `soak1k-${i} (${type})`).toEqual([['the seat is safe', 'unrest']]);
+    });
+    expectNoSeedFailures(failures, 'the seat-safety line reads crisis-blind under each unrest crisis');
   });
 
-  it.each([1, 3001])('soak1k-%i: the desk pool never draws the line under its unrest crisis, and is not mute', (i) => {
-    const s = born[i];
-    const slots = Object.fromEntries(POOL.flatMap((v) => v.slots || []).map((slot) => [slot, 'X']));
-    const eligible = eligibleVariants(POOL, { slots, audience: 'dm', dimensions: { walls: 'no walls', ...crisisDimensionsOf(s) }, facts: factsOf(s) });
-    expect(eligible.length).toBeGreaterThan(0);
-    expect(eligible.filter((v) => crisisBlindFindings(s, { power: v.text }).length)).toEqual([]);
+  it('soak1k-1 and -3001: the desk pool never draws the line under its unrest crisis, and is not mute', () => {
+    const failures = collectSeedFailures([1, 3001], (i) => {
+      const s = born[i];
+      const slots = Object.fromEntries(POOL.flatMap((v) => v.slots || []).map((slot) => [slot, 'X']));
+      const eligible = eligibleVariants(POOL, { slots, audience: 'dm', dimensions: { walls: 'no walls', ...crisisDimensionsOf(s) }, facts: factsOf(s) });
+      expect(eligible.length, `soak1k-${i}: the pool is not mute`).toBeGreaterThan(0);
+      expect(eligible.filter((v) => crisisBlindFindings(s, { power: v.text }).length), `soak1k-${i}`).toEqual([]);
+    });
+    expectNoSeedFailures(failures, 'the desk pool never draws the seat-safety line under its unrest crisis');
   });
 
   it('a crisis-free place still draws it (the walled control)', () => {

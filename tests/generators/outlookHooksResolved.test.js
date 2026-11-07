@@ -51,10 +51,13 @@ describe('the starving outlook set (CENSUS-3g unit 5)', () => {
     expect(starvingHooks('town', 'famine')).toEqual([STARVING]);
   });
 
-  it.each(['importDependent', 'pressured'])('a %s gap reads the twin, with no famine words', (band) => {
-    const [hook] = starvingHooks('hamlet', band);
-    expect(hook).toBe(SET[1].text);
-    expect(hook).not.toMatch(/\bstarv|\bbanditry\b|\bfamine\b|villagers?/i); // anchored: the hook is pinned to the twin's exact text on the line above
+  // LANDING-R2 seat E: the band tables below run as plain parameterless tests, each row labelled.
+  it('an importDependent or pressured gap reads the twin, with no famine words', () => {
+    for (const band of ['importDependent', 'pressured']) {
+      const [hook] = starvingHooks('hamlet', band);
+      expect(hook, band).toBe(SET[1].text);
+      expect(hook, band).not.toMatch(/\bstarv|\bbanditry\b|\bfamine\b|villagers?/i); // anchored: the hook is pinned to the twin's exact text on the line above
+    }
   });
 
   it('the twin answers the moderate gap only', () => {
@@ -73,14 +76,18 @@ describe('the moderate-gap twin carries the band the record reads (CENSUS-3h, R-
     { deficit: 50, dailyProduction: 50, dailyNeed: 100 },
     () => factsOf({ tier: 'hamlet', institutions: [], economicState: { foodSecurity: { foodRecord: { band } } } })).plotHooks[0];
 
-  it.each([
-    ['importDependent', 'Import-Dependent', 'medium'],
-    ['pressured', 'Pressured', 'low'],
-  ])('a %s gap: category %s, severity %s', (band, category, severity) => {
-    expect(graded(band)).toMatchObject({ category, severity });
+  it('an importDependent gap reads Import-Dependent / medium; a pressured gap, Pressured / low', () => {
+    for (const [band, category, severity] of [
+      ['importDependent', 'Import-Dependent', 'medium'],
+      ['pressured', 'Pressured', 'low'],
+    ]) {
+      expect(graded(band), band).toMatchObject({ category, severity });
+    }
   });
 
-  it.each(['famine', 'deficit'])('a %s band keeps the original at Survival Crisis / critical', (band) => {
-    expect(graded(band)).toMatchObject({ hook: STARVING, category: 'Survival Crisis', severity: 'critical' });
+  it('a famine or deficit band keeps the original at Survival Crisis / critical', () => {
+    for (const band of ['famine', 'deficit']) {
+      expect(graded(band), band).toMatchObject({ hook: STARVING, category: 'Survival Crisis', severity: 'critical' });
+    }
   });
 });

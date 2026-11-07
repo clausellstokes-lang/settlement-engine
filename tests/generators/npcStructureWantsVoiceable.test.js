@@ -54,8 +54,9 @@ describe('R11 · every registry goal reads in the house register', () => {
     expect(new Set(Object.values(goals)).size).toBe(76);
   });
 
-  it.each(Object.entries(goals))('%s is voiceable', (_key, goal) => {
-    expect(isVoiceableWant(goal), goal).toBe(true);
+  // LANDING-R2 seat E: the 96 keys run inside one plain parameterless test, each labelled by key.
+  it('every key\'s goal is voiceable', () => {
+    for (const [key, goal] of Object.entries(goals)) expect(isVoiceableWant(goal), `${key}: ${goal}`).toBe(true);
   });
 
   it('the dominant and the subordinate of one cell never share a line (ONE WANT, ONE HOME)', () => {

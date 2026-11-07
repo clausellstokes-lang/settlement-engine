@@ -17,6 +17,7 @@ import { birth, ensureLaws } from '../../scripts/audit/soak-review/corpus.mjs';
 import { crisisBlindFindings } from '../../src/domain/coherence/crisisBlindFindings.js';
 import { DOSSIER_STATE_PROSE_ECONOMY } from '../../src/data/dossierStateProse/economy.generated.js';
 import { DOSSIER_STATE_PROSE_DEFENSE } from '../../src/data/dossierStateProse/defense.generated.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 /** The one leaf variant whose text holds a fragment, slots filled with the place's name. */
 function leafLine(leaf, fragment, name) {
@@ -74,9 +75,13 @@ beforeAll(async () => {
 const readOn = (i, line) => crisisBlindFindings(born[i], { page: line(born[i]) }).map((f) => [f.claim, f.family]);
 
 describe('rung 2D · the crisis-blind instrument reads the twelve sampled rows', () => {
-  it.each([604, 1804, 2404, 3604])('soak1k-%i: the ruler\'s "current stability" want under a fracture or a debt', (i) => {
-    expect(holdsWant(born[i], GOAL.stability), 'the census refuses the calm-only want under the crisis').toBe(false);
-    expect(readOn(i, () => printed(WANT.stability))).toEqual([['current stability', 'crisis']]);
+  // LANDING-R2 seat E: one parameterless test over the four seeds, every seed run and collected.
+  it('soak1k-604, -1804, -2404, -3604: the ruler\'s "current stability" want under a fracture or a debt', () => {
+    const failures = collectSeedFailures([604, 1804, 2404, 3604], (i) => {
+      expect(holdsWant(born[i], GOAL.stability), `soak1k-${i}: the census refuses the calm-only want under the crisis`).toBe(false);
+      expect(readOn(i, () => printed(WANT.stability)), `soak1k-${i}`).toEqual([['current stability', 'crisis']]);
+    });
+    expectNoSeedFailures(failures, 'the stability want reads as crisis-blind under each fracture or debt');
   });
 
   // CENSUS-2c (the chair's R-P 1): the food record counts the influx (×1.15, CENSUS-1c unit 7), so
