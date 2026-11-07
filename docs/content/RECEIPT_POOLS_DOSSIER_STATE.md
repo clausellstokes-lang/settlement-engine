@@ -2952,7 +2952,7 @@ may not say the contract is failing unless the economic arm supplies that.
 
 **militia PRESENT (no garrison)** {colour}
 1. `[ledger]` {settlement}'s defense is its own people under arms. They know the ground, they can be raised, and raising them stops everything else the town was doing.
-2. `[street]` {settlement}'s people take up arms when they must and go back to work after, and nobody mistakes them for soldiers.
+2. `[street]` {settlement}'s people take up arms when they must and go back to work after; they are not soldiers by trade.
 3. `[counterforce]` {settlement} could keep soldiers and does not; the town has decided that arming itself when needed costs less than paying anybody to be armed all year.
 
 **watch PRESENT**
@@ -2973,7 +2973,7 @@ may not say the contract is failing unless the economic arm supplies that.
 **charter hall PRESENT (specialist monster response)** {colour}
 1. `[ledger]` {settlement} keeps a charter for specialist work. The things ordinary arms are wrong for go to people retained to handle exactly them.
 2. `[street]` There is somewhere at {settlement} to take the problems that are not soldiers' problems, and the town uses it more than it likes to say.
-3. `[visitor]` {settlement} keeps a chartered hall for trouble that soldiers cannot handle, and the hall is busy.
+3. `[visitor]` {settlement} keeps a chartered hall for trouble that ordinary arms cannot handle, and the hall is busy.
 
 **charter hall ABSENT where the country warrants one** {colour}
 1. `[ledger]` {settlement} retains no specialists. Whatever comes out of the country is met by whoever the town has, whether or not they are the right answer to it.
@@ -3008,7 +3008,7 @@ lines.
 2. `[ledger]` The hall at {settlement} is an adventurers' charter hall: parties sign on there for work the town will pay for.
 
 **FIXTURE: free company**
-1. `[street]` A free company keeps a hall at {settlement} and hires out its soldiers to whoever pays.
+1. `[street]` A free company keeps a hall at {settlement} and hires out its swords to whoever pays.
 2. `[ledger]` The free company at {settlement} answers to its captain and its contracts, not to the town.
 
 **THE ARCANE FIXTURES AND TRADITIONS (W2 DEF, 2026-11-07, construction C8 and C10):** a second
@@ -3021,7 +3021,7 @@ blocked (`DEF6_C3_BLOCKED_POOLS`: this line already speaks that fact, so a DS-DE
 print nowhere). Description position: plain lines.
 
 **ARCANE: wizard's tower**
-1. `[street]` The wizard's tower at {settlement} is where the town turns when a threat is beyond its soldiers.
+1. `[street]` The wizard's tower at {settlement} is where the town turns when a threat is beyond its ordinary defences.
 2. `[ledger]` The town's defence against magic rests on the wizard's tower at {settlement}.
 
 **ARCANE: mages' guild**
@@ -3037,7 +3037,7 @@ print nowhere). Description position: plain lines.
 2. `[ledger]` Divine magic stands behind {settlement}'s defence: its priests heal the wounded and bless the defenders.
 
 **ARCANE: druidic**
-1. `[street]` Druids at {settlement} ward the land around the town and know its ground better than any soldier.
+1. `[street]` Druids at {settlement} ward the land around the town and know its ground better than anyone.
 2. `[ledger]` {settlement}'s defence draws on its druids, who keep watch over the country around it.
 
 **ARCANE: practitioners**

@@ -2758,7 +2758,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "{settlement}'s people take up arms when they must and go back to work after, and nobody mistakes them for soldiers.",
+          "text": "{settlement}'s people take up arms when they must and go back to work after; they are not soldiers by trade.",
           "slots": [
             "settlement"
           ],
@@ -2877,7 +2877,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "{settlement} keeps a chartered hall for trouble that soldiers cannot handle, and the hall is busy.",
+          "text": "{settlement} keeps a chartered hall for trouble that ordinary arms cannot handle, and the hall is busy.",
           "slots": [
             "settlement"
           ],
@@ -3010,7 +3010,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "FIXTURE: free company": [
         {
           "angle": "street",
-          "text": "A free company keeps a hall at {settlement} and hires out its soldiers to whoever pays.",
+          "text": "A free company keeps a hall at {settlement} and hires out its swords to whoever pays.",
           "slots": [
             "settlement"
           ],
@@ -3028,7 +3028,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "ARCANE: wizard's tower": [
         {
           "angle": "street",
-          "text": "The wizard's tower at {settlement} is where the town turns when a threat is beyond its soldiers.",
+          "text": "The wizard's tower at {settlement} is where the town turns when a threat is beyond its ordinary defences.",
           "slots": [
             "settlement"
           ],
@@ -3100,7 +3100,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "ARCANE: druidic": [
         {
           "angle": "street",
-          "text": "Druids at {settlement} ward the land around the town and know its ground better than any soldier.",
+          "text": "Druids at {settlement} ward the land around the town and know its ground better than anyone.",
           "slots": [
             "settlement"
           ],
