@@ -150,7 +150,12 @@ const GOLDEN_CONTROL_KEY = 'town|germanic|plains|road|civilized|golden-master-v3
 // dc73b260 car 3 (70fac9ff0) -> ddde4e81 SELF-VOUCH I5 (70e58b6df) -> 498c9bda PLACE-NOT-TIER (dd65cb629) -> 40f855d3
 // TRUTH unit D (dfe79d34e) -> eab06b85 car 3 I7 (c099f0a4d) -> 84f03e52 F5 (efae972d4) -> c8942082 F6 (90218b271) ->
 // 57b4e0e1 F1 (81f690f78) -> 0dfd25bc F10 (fb06483e0); record 28 (the V-SUMMARY-HOOKS cure) does not move it.
-const GOLDEN_CONTROL_HASH = '0dfd25bc67d146684b685d585b162936ea90ca3144d960deac86985ac97679c0';
+// 2026-11-07, the pool census composed (ODQ §934.105, LANDING-R2), through the signed door: 0dfd25bc... -> b933a9c0... at
+// c488022cf (record docs/shift-records/2026-11-06-rung2-01-census-composed-generator-master.json, 525 of 525 rows, the
+// 33 census causes inside it; the chair's ruled exception). Measured: the committed manifest reads 0dfd25bc at
+// c488022cf^ and b933a9c0 at c488022cf; this row's own lineage mover, 73fa1a1e7 (reader-tonight-wants R11 unit 3), moves
+// it alone (0dfd25bc at its parent 7f0632463, da214b26 at 73fa1a1e7, by editWorldFactResources' row-21 probe).
+const GOLDEN_CONTROL_HASH = 'b933a9c0cc863c7cdd5a806b5d593d0c996675973b251dcc0839a83bab8bc7ce';
 /** EM-P0's own pinned-mode row and its chooser keys, re-measured here under the mocks. */
 const PIN_ROW = {
   settType: 'town', culture: 'germanic', terrainOverride: 'riverside',
@@ -189,7 +194,11 @@ const PICK_VARIANT_CALLS = 31;
 // FOOD-3, food diversity, traced at stage T3 in DOORS-4).
 // 2026-11-05 (LANDING-6, bisected by first-parent stage): 16 -> 17 X-46 car 1 (1264a8152) -> 15 X-46 car 3 (90dc22f18),
 // unmoved to the tip; the register's fnv1a32External moves with it (generationForkRegistry.js).
-const FNV_EXTERNAL_CALLS = 15;
+// 2026-11-07 (LANDING-R2, the pool census composed; bisected with this arm alone over the census lineage from the merge
+// base bf263a78d, 15): 15 -> 24 census-4 R3 (596cb8b1b, the tie rule: one role-class rule for the tie step and the
+// instrument) -> 32 census-4 R12 (acd70a977, faction-role-fit), both reaching census-1b through the merge 950b75014,
+// unmoved to the tip (pickVariant 31, every one a real choice, unmoved). The register's fnv1a32External moves with it.
+const FNV_EXTERNAL_CALLS = 32;
 /** The fork law A1 pins: the mint wrapper's equivalence rests on this line and nothing else. */
 const FORK_LAW = 'fork: (label) => createPRNG(`${seed}::${label}`),';
 /** §6.4's off-corpus block: a wizard-reachable switch, the keys it moves, and 24 seeds. */
@@ -217,7 +226,7 @@ const OFF_CORPUS_STEP = 'resolveConfig';
  */
 const DISPLAY_NAME_KEYED_SITES = [
   { site: 'src/generators/steps/assembleInstitutions.js:1004', channel: 'hash', marker: 'inst.name' }, // 2026-10-01, the urban band (ODQ §934.86): a pure line move, 774 -> 863; 2026-11-05 (LANDING-6, read per first-parent step): the same pickVariant line, 863 -> 888 terrain-pools (ac09ea83b) -> 891 its re-merge (fb5edb7f5) -> 910 car 3 (90dc22f18) -> 911 PINS (37b1e746d) -> 1004 F6 (6d84aa834)
-  { site: 'src/data/npcData.js:1334', channel: 'hash', marker: '?.name' },
+  { site: 'src/data/npcData.js:1435', channel: 'hash', marker: '?.name' }, // 2026-11-07 (LANDING-R2, the pool census composed): a pure line move, 1334 -> 1342 census-4c unit 4 (99fbe262f) -> 1400 census-4g unit 2 (6e9cbc676) -> 1435 census-4h unit 4 (ea6b9e1eb), traced through every census commit touching the file; the pickVariant call and its marker unchanged (99fbe262f adds a `lines` field to the wrapper's trailer only)
   { site: 'src/domain/townMap/glyphAssign.js:125', channel: 'mint', marker: 'createPRNG(`glyph:${seedId}`)' },
 ];
 

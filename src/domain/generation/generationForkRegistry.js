@@ -70,6 +70,11 @@ const freezeRow = (/** @type {GenerationTier1Row} */ row) => Object.freeze(Objec
 // The food writer and its view derive the per cent from the pounds they publish (record 34: lane H's 66b1407bd,
 // superseding lane D's floor bfd70d809, which alone read 41 -> 39): generateNarratives|economicViability, both triples,
 // same 41 / transformed 22 -> same 42 / transformed 21.
+// The pool census composed on rung 1 (LANDING-R2, 2026-11-07): generateNarratives|economicViability, both triples, same
+// 42 / transformed 21 -> same 61 / transformed 2, measured by `classify()` per stage of the census lineage (from the merge
+// base bf263a78d, 41 / 22): census-3g unit 5 167c95700 (the starving outlook set reworded and twinned; reached census-1b
+// through the merge 3a7173151) 22 -> 9, and census-1h R-AU d035cf840 (the outlook-hook site drops a refused hook with no
+// admitted twin) 9 -> 3; at the tip rung 1's record-34 row (-1) composes with them, 2. Classes unmoved ('varies' both).
 /**
  * ⛔ TWO COMPARANDS, BECAUSE THEY ARE DIFFERENT CLAIMS (design §22; chair ruling Q-6).
  * `onRecord` answers whether the key's FINAL value lands on the record. `producedOnRecord`
@@ -153,7 +158,7 @@ export const GENERATION_TIER1 = Object.freeze(/** @type {GenerationTier1Row[]} *
   { step: 'corruptionPass', key: 'npcs', via: 'mutates', stepDraws: 38, keyMoves: 19, rows: 63, class: 'drawn', onRecord: { absent: 0, same: 0, transformed: 63 }, onRecordClass: 'transformed', producedOnRecord: { absent: 0, same: 0, transformed: 63 }, producedOnRecordClass: 'transformed', recordPath: 'record.npcs' },
   { step: 'generateNarratives', key: 'settlementReason', via: 'provides', stepDraws: 63, keyMoves: 0, rows: 63, class: 'pure', onRecord: { absent: 0, same: 63, transformed: 0 }, onRecordClass: 'same', producedOnRecord: { absent: 0, same: 63, transformed: 0 }, producedOnRecordClass: 'same', recordPath: 'record.settlementReason' },
   { step: 'generateNarratives', key: 'resourceAnalysis', via: 'provides', stepDraws: 63, keyMoves: 0, rows: 63, class: 'pure', onRecord: { absent: 0, same: 63, transformed: 0 }, onRecordClass: 'same', producedOnRecord: { absent: 0, same: 63, transformed: 0 }, producedOnRecordClass: 'same', recordPath: 'record.resourceAnalysis' },
-  { step: 'generateNarratives', key: 'economicViability', via: 'provides', stepDraws: 63, keyMoves: 0, rows: 63, class: 'pure', onRecord: { absent: 0, same: 42, transformed: 21 }, onRecordClass: 'varies', producedOnRecord: { absent: 0, same: 42, transformed: 21 }, producedOnRecordClass: 'varies', recordPath: 'record.economicViability' },
+  { step: 'generateNarratives', key: 'economicViability', via: 'provides', stepDraws: 63, keyMoves: 0, rows: 63, class: 'pure', onRecord: { absent: 0, same: 61, transformed: 2 }, onRecordClass: 'varies', producedOnRecord: { absent: 0, same: 61, transformed: 2 }, producedOnRecordClass: 'varies', recordPath: 'record.economicViability' },
   { step: 'generateNarratives', key: 'history', via: 'provides', stepDraws: 63, keyMoves: 63, rows: 63, class: 'drawn', onRecord: { absent: 0, same: 0, transformed: 63 }, onRecordClass: 'transformed', producedOnRecord: { absent: 0, same: 0, transformed: 63 }, producedOnRecordClass: 'transformed', recordPath: 'record.history' },
   { step: 'assembleSettlement', key: 'settlement', via: 'provides', stepDraws: 63, keyMoves: 63, rows: 63, class: 'drawn', onRecord: { absent: 0, same: 63, transformed: 0 }, onRecordClass: 'same', producedOnRecord: { absent: 0, same: 63, transformed: 0 }, producedOnRecordClass: 'same', recordPath: 'record' },
   { step: 'assembleSettlement', key: 'powerStructure', via: 'mutates', stepDraws: 63, keyMoves: 0, rows: 63, class: 'pure', onRecord: { absent: 0, same: 0, transformed: 63 }, onRecordClass: 'transformed', producedOnRecord: { absent: 0, same: 0, transformed: 63 }, producedOnRecordClass: 'transformed', recordPath: 'record.powerStructure' },
@@ -222,7 +227,7 @@ export const GENERATION_CHANNELS = Object.freeze({
   mints: Object.freeze({ instrument: 'src/kernel/prng.js#createPRNG', direct: 4, rootSeedPrefixed: true }),
   // 2026-10-31, tension variety (GS-1, ODQ §934.101): 6 -> 15, the tie-prose draw's per-archetype offsets (measured).
   // 2026-11-04, window-end pin re-key (REGISTERS seat): 15 -> 16, FOOD-3 (food diversity) opens one more offset (measured).
-  hash: Object.freeze({ instrument: 'src/kernel/proseHash.js#pickVariant', fnv1a32External: 15 }),
+  hash: Object.freeze({ instrument: 'src/kernel/proseHash.js#pickVariant', fnv1a32External: 32 }), // 15 -> 32: census-4 R3 596cb8b1b (24), R12 acd70a977 (32); LANDING-R2
 });
 
 /**
