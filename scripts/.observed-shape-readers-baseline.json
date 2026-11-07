@@ -169,14 +169,14 @@
  "digests": {
   "corpusMeta": "1cdc2e25094f986b5593dacbb540bd2ee5e907986b8f9d158ba6c675c815cc51",
   "inventory": "0e041c80d4ba04cf22739f02521c21a39f09bbd52dfb83088eb2c081be192e29",
-  "manifests": "13eb77e30b3e45d7e4fdb1c593d75cf3d6e4e7d7558e3411b67009935cba1f23",
+  "manifests": "c93669c935cf64b7450b09aad6f17dff037a8d9bad53e7851385ac9be914e153",
   "migrationReview": "a2bf8d63109cf5e8767eb90336782ccb0ba94c391bfc3e76dc45d94016c96b81",
   "rowTags": "1ebab9f067e5ec39f32a8c38b8e1a18c24d8ad0c66109851551ef84efc314447",
-  "scanStats": "d38ecdee7bf9655f7617a824bffd2fb85e784675f55f7be9c2ddf62c09989747",
-  "sentinel": "124ab76f1d2c307b8f1e3c2f8e5cf22cdb6c2f3b7e9079d6f932f280b269b5cd"
+  "scanStats": "e330316d4a462733a8959cf2655e46be36177592923c82e7f5914c4600db42c8",
+  "sentinel": "d870f1c88fcc0c570309784fd52caf15d9bd9278a0ad72caee4489c7599f305f"
  },
  "frozen": "2026-11-07",
- "frozenAtSha": "a709af16d8899c21ffcc0981f4b4332113db5200",
+ "frozenAtSha": "0fbd7c4aefb137491f1cb520d522b90c569f04df",
  "identities": 1450,
  "inventory": {
   "src/components/BuyThisDossier.jsx": {
@@ -2522,7 +2522,7 @@
   },
   "executionTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "a42e041a0e949cf4d9afd231df0284bb4c4477894e63e68dbebe6b572353ab47",
+   "digest": "fef34cb167faf48a1ebbeab30ae564c109b0a4f0a12410b0340e84b04eb02c6c",
    "entries": [
     {
      "mode": "100644",
@@ -4452,8 +4452,8 @@
     {
      "mode": "100644",
      "path": "src/components/home/landingFixture.js",
-     "sha256": "7e8c305f6c63c70386b4348b4135cd6068ae20b63d61e7924b3df350e8698a32",
-     "size": 9097,
+     "sha256": "305cc0e5d7e149d6e295b32bd5ff5ddaf592c836b3c81df62c807f13303184d1",
+     "size": 9122,
      "type": "file"
     },
     {
@@ -5698,8 +5698,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/PowerTab.jsx",
-     "sha256": "16abfd3fe99d8f597a5efc19670a8861d902bd6ecca2dc04e2e3fd785ddb6bd0",
-     "size": 34551,
+     "sha256": "aed3ace1e5dda63c538f2c41dd33284c5f66e583a49c4f415257e6decf15a9d3",
+     "size": 35142,
      "type": "file"
     },
     {
@@ -7105,8 +7105,8 @@
     {
      "mode": "100644",
      "path": "src/data/dossierStateProse/power.generated.js",
-     "sha256": "829244b6bf2b485a7d6afb5c6d29cdea7836cdc89bd53141d1b4274d30eb39b2",
-     "size": 115715,
+     "sha256": "df06714658e772509a449dee29e5c276f784594bdbcd5fb59c990cef50c3fd7e",
+     "size": 123082,
      "type": "file"
     },
     {
@@ -7357,7 +7357,7 @@
     {
      "mode": "100644",
      "path": "src/data/proseNorms.generated.js",
-     "sha256": "1f5764df867a739c470bf3c78acbf350eeb3297a11b2d3110cf823097b223a29",
+     "sha256": "849c0cc60281984361d55825dd510f11f2e97243bce03ffd819654cbcb7ad02d",
      "size": 19938,
      "type": "file"
     },
@@ -9625,8 +9625,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/stateProse/powerStateProse.js",
-     "sha256": "11c913c83fa1e88d5f75d5415f8723936acf9aae37d6465a87b1ad3cb4d21e7b",
-     "size": 58278,
+     "sha256": "034ceabc22cf2861075a9083d31f6be93aec2b67e5cce251334ee01529b66e89",
+     "size": 63156,
      "type": "file"
     },
     {
@@ -9639,8 +9639,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/stateProse/printProse.js",
-     "sha256": "ae57f93c3d53e1ad33b44ea29705fd0b71aa19de4a44a0544c7b81a27a2c074b",
-     "size": 40385,
+     "sha256": "29e5ffd139e4a63d901f012bf217f69b6202780830781a7f65267ef5524de36c",
+     "size": 40502,
      "type": "file"
     },
     {
@@ -18676,8 +18676,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/primitives/StateProse.jsx",
-     "sha256": "05f910df28e6deae3cf3873cbacdca3e1be69367b7fa7406ffe7b7cbc3995e46",
-     "size": 9465,
+     "sha256": "1d837068caa638fb3e60dd36253856f413706ac5bd892780943253756cd5fb57",
+     "size": 9461,
      "type": "file"
     },
     {
@@ -18781,8 +18781,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/sections/PowerStructure.jsx",
-     "sha256": "3d157d7bdd19e9a153f2c40c7c479ac334c8b2528f734f97db7f8088bc751a19",
-     "size": 12800,
+     "sha256": "3c4e8f83a12c840326ee74aab2a1eff005dcc48c1e2be335bd68dd2a1b2429c2",
+     "size": 12767,
      "type": "file"
     },
     {
@@ -19629,7 +19629,7 @@
   },
   "scanTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "6d041d80589df55cbce4b59f1e115922d432c59e0a69213d7e58d7c97859a1e4",
+   "digest": "db54843fb254b5bac9bb89f06d09820ed0214c83d8e73de24a0759906586a1de",
    "entries": [
     {
      "mode": "100644",
@@ -21489,8 +21489,8 @@
     {
      "mode": "100644",
      "path": "src/components/home/landingFixture.js",
-     "sha256": "7e8c305f6c63c70386b4348b4135cd6068ae20b63d61e7924b3df350e8698a32",
-     "size": 9097,
+     "sha256": "305cc0e5d7e149d6e295b32bd5ff5ddaf592c836b3c81df62c807f13303184d1",
+     "size": 9122,
      "type": "file"
     },
     {
@@ -22735,8 +22735,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/PowerTab.jsx",
-     "sha256": "16abfd3fe99d8f597a5efc19670a8861d902bd6ecca2dc04e2e3fd785ddb6bd0",
-     "size": 34551,
+     "sha256": "aed3ace1e5dda63c538f2c41dd33284c5f66e583a49c4f415257e6decf15a9d3",
+     "size": 35142,
      "type": "file"
     },
     {
@@ -26543,8 +26543,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/stateProse/powerStateProse.js",
-     "sha256": "11c913c83fa1e88d5f75d5415f8723936acf9aae37d6465a87b1ad3cb4d21e7b",
-     "size": 58278,
+     "sha256": "034ceabc22cf2861075a9083d31f6be93aec2b67e5cce251334ee01529b66e89",
+     "size": 63156,
      "type": "file"
     },
     {
@@ -26557,8 +26557,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/stateProse/printProse.js",
-     "sha256": "ae57f93c3d53e1ad33b44ea29705fd0b71aa19de4a44a0544c7b81a27a2c074b",
-     "size": 40385,
+     "sha256": "29e5ffd139e4a63d901f012bf217f69b6202780830781a7f65267ef5524de36c",
+     "size": 40502,
      "type": "file"
     },
     {
@@ -35594,8 +35594,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/primitives/StateProse.jsx",
-     "sha256": "05f910df28e6deae3cf3873cbacdca3e1be69367b7fa7406ffe7b7cbc3995e46",
-     "size": 9465,
+     "sha256": "1d837068caa638fb3e60dd36253856f413706ac5bd892780943253756cd5fb57",
+     "size": 9461,
      "type": "file"
     },
     {
@@ -35699,8 +35699,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/sections/PowerStructure.jsx",
-     "sha256": "3d157d7bdd19e9a153f2c40c7c479ac334c8b2528f734f97db7f8088bc751a19",
-     "size": 12800,
+     "sha256": "3c4e8f83a12c840326ee74aab2a1eff005dcc48c1e2be335bd68dd2a1b2429c2",
+     "size": 12767,
      "type": "file"
     },
     {
@@ -36540,7 +36540,7 @@
   },
   "sourceTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "a7b5757177de22344f1467c89d89ff89444b1a4414e499f97a221c102b770dd0",
+   "digest": "cf7e047cd62c15de718eb9d6ebd0414f3bc1a95d038d9e3efd97a170577e4d34",
    "entries": [
     {
      "mode": "100644",
@@ -38400,8 +38400,8 @@
     {
      "mode": "100644",
      "path": "src/components/home/landingFixture.js",
-     "sha256": "7e8c305f6c63c70386b4348b4135cd6068ae20b63d61e7924b3df350e8698a32",
-     "size": 9097,
+     "sha256": "305cc0e5d7e149d6e295b32bd5ff5ddaf592c836b3c81df62c807f13303184d1",
+     "size": 9122,
      "type": "file"
     },
     {
@@ -39646,8 +39646,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/PowerTab.jsx",
-     "sha256": "16abfd3fe99d8f597a5efc19670a8861d902bd6ecca2dc04e2e3fd785ddb6bd0",
-     "size": 34551,
+     "sha256": "aed3ace1e5dda63c538f2c41dd33284c5f66e583a49c4f415257e6decf15a9d3",
+     "size": 35142,
      "type": "file"
     },
     {
@@ -41053,8 +41053,8 @@
     {
      "mode": "100644",
      "path": "src/data/dossierStateProse/power.generated.js",
-     "sha256": "829244b6bf2b485a7d6afb5c6d29cdea7836cdc89bd53141d1b4274d30eb39b2",
-     "size": 115715,
+     "sha256": "df06714658e772509a449dee29e5c276f784594bdbcd5fb59c990cef50c3fd7e",
+     "size": 123082,
      "type": "file"
     },
     {
@@ -41305,7 +41305,7 @@
     {
      "mode": "100644",
      "path": "src/data/proseNorms.generated.js",
-     "sha256": "1f5764df867a739c470bf3c78acbf350eeb3297a11b2d3110cf823097b223a29",
+     "sha256": "849c0cc60281984361d55825dd510f11f2e97243bce03ffd819654cbcb7ad02d",
      "size": 19938,
      "type": "file"
     },
@@ -43573,8 +43573,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/stateProse/powerStateProse.js",
-     "sha256": "11c913c83fa1e88d5f75d5415f8723936acf9aae37d6465a87b1ad3cb4d21e7b",
-     "size": 58278,
+     "sha256": "034ceabc22cf2861075a9083d31f6be93aec2b67e5cce251334ee01529b66e89",
+     "size": 63156,
      "type": "file"
     },
     {
@@ -43587,8 +43587,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/stateProse/printProse.js",
-     "sha256": "ae57f93c3d53e1ad33b44ea29705fd0b71aa19de4a44a0544c7b81a27a2c074b",
-     "size": 40385,
+     "sha256": "29e5ffd139e4a63d901f012bf217f69b6202780830781a7f65267ef5524de36c",
+     "size": 40502,
      "type": "file"
     },
     {
@@ -52624,8 +52624,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/primitives/StateProse.jsx",
-     "sha256": "05f910df28e6deae3cf3873cbacdca3e1be69367b7fa7406ffe7b7cbc3995e46",
-     "size": 9465,
+     "sha256": "1d837068caa638fb3e60dd36253856f413706ac5bd892780943253756cd5fb57",
+     "size": 9461,
      "type": "file"
     },
     {
@@ -52729,8 +52729,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/sections/PowerStructure.jsx",
-     "sha256": "3d157d7bdd19e9a153f2c40c7c479ac334c8b2528f734f97db7f8088bc751a19",
-     "size": 12800,
+     "sha256": "3c4e8f83a12c840326ee74aab2a1eff005dcc48c1e2be335bd68dd2a1b2429c2",
+     "size": 12767,
      "type": "file"
     },
     {
@@ -53887,20 +53887,20 @@
  },
  "scanStats": {
   "files": 2415,
-  "reads": 138157,
-  "resolved": 10634,
-  "unresolved": 127523
+  "reads": 138180,
+  "resolved": 10651,
+  "unresolved": 127529
  },
  "scannerProvenance": {
   "detectorDigest": "6cfb9c8153e72e136ee73aae0de2c6342fd3ed80f35fda14fe9e9343e1b8c260",
-  "executionTreeDigest": "a42e041a0e949cf4d9afd231df0284bb4c4477894e63e68dbebe6b572353ab47",
-  "scanTreeDigest": "6d041d80589df55cbce4b59f1e115922d432c59e0a69213d7e58d7c97859a1e4",
-  "sourceTreeDigest": "a7b5757177de22344f1467c89d89ff89444b1a4414e499f97a221c102b770dd0",
-  "unscannedInputDigest": "aecc87d791729dcfa00a43ef5df515d9a0f817235d08efe5db16c4f7b5c0b8ad"
+  "executionTreeDigest": "fef34cb167faf48a1ebbeab30ae564c109b0a4f0a12410b0340e84b04eb02c6c",
+  "scanTreeDigest": "db54843fb254b5bac9bb89f06d09820ed0214c83d8e73de24a0759906586a1de",
+  "sourceTreeDigest": "cf7e047cd62c15de718eb9d6ebd0414f3bc1a95d038d9e3efd97a170577e4d34",
+  "unscannedInputDigest": "2abece4dc05f72da8f90ae835ecfbbbb73f0c729f012e0a9efd9d73b81240ff8"
  },
  "schema": 30,
  "sentinel": {
-  "resolvedReads": 10634,
+  "resolvedReads": 10651,
   "totalKeys": 6730,
   "usableShapes": 356
  },
