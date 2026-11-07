@@ -92,11 +92,14 @@ const HELD = /\bwill not open\b|\bwithh(?:eld|olds?)\b|\bhoard/i;
 /** The months a famine's stores line may print without saying they are held. */
 export const FAMINE_STORES_HELD_MONTHS = 6;
 
+/** The months 'a few weeks' reads back as (ODQ §934.105). */
+const FEW_WEEKS_AS_MONTHS = 0.5;
+
 /** @param {string} w @returns {number} */
 function monthsOfWord(w) {
   const lower = w.toLowerCase();
   if (lower === 'about a month') return 1;
-  if (lower === 'a few weeks') return 0.5;
+  if (lower === 'a few weeks') return FEW_WEEKS_AS_MONTHS;
   const at = NUMBER_WORDS.indexOf(lower);
   return at >= 0 ? at : Number(lower);
 }

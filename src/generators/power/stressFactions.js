@@ -47,6 +47,9 @@ const pushPoolNamed = (factions, category, power, desc, extra = {}) => {
   if (faction !== null) factions.push({ faction, power, desc, category, ...extra });
 };
 
+/** The migration arms' damp on the governing faction's power (exodus and influx: one dial; RUNG2-F13 f7127dd20, ODQ §934.105). */
+const MIGRATION_GOVERNING_DAMP = 0.85;
+
 // applyStressEventFactions — apply every active stress type's power reweighting
 // and faction injection to `factions` (mutates in place).
 export const applyStressEventFactions = (factions, ke, P, S, config, institutions, stressEntries = []) => { const force = forceWordsOf(defenseFactsOf({ institutions: institutions || [] })), soldiersStand = force.members === 'soldiers'; // F1 (rung 1B): the force words read the record
@@ -277,7 +280,7 @@ export const applyStressEventFactions = (factions, ke, P, S, config, institution
             }),
             factions.forEach(function (he) {
               he.isGoverning &&
-                ((he.power = Math.round(he.power * 0.85)),
+                ((he.power = Math.round(he.power * MIGRATION_GOVERNING_DAMP)),
                 (he.desc =
                   (he.desc || '') +
                   ' Managing the emigration crisis while maintaining the appearance that it is not a crisis.'));
@@ -289,7 +292,7 @@ export const applyStressEventFactions = (factions, ke, P, S, config, institution
             }),
             factions.forEach(function (he) {
               he.isGoverning &&
-                ((he.power = Math.round(he.power * 0.85)),
+                ((he.power = Math.round(he.power * MIGRATION_GOVERNING_DAMP)),
                 (he.desc =
                   (he.desc || '') +
                   ' Managing the influx while maintaining the appearance that it is not a crisis.'));

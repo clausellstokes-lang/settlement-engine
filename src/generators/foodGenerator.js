@@ -55,6 +55,8 @@ const PER_CAPITA_NEED   = 2;   // lbs/day per person
 // tests/domain/crisisFactFindings.test.js; kept here so the generation bundle loads no pulse graph).
 // Lane RUNG2-F13; see THE STORES A FAMINE LEAVES below.
 export const FAMINE_MONTHS_RUN = 12;
+/** The smallest value the one-decimal rounding prints (a drawn granary prints 0.1 months, never zero; ODQ §934.105). */
+const SMALLEST_ONE_DECIMAL_MONTHS = 0.1;
 export const FAMINE_DRAWDOWN = Object.freeze({
   rationFloorPct: 5,
   maxReleaseFraction: 0.5,
@@ -427,7 +429,7 @@ export function generateFoodSecurity(tier, institutions, config) {
   // (famineStoresLeft). What is printed is what is in hand. Zero draws; outside a famine the full
   // granary (storageMonthsFull) is untouched.
   const storageMonths = stressFamine
-    ? Math.max(0.1, Math.round(famineStoresLeft(storageMonthsFull, deficitPct, FAMINE_MONTHS_RUN) * 10) / 10)
+    ? Math.max(SMALLEST_ONE_DECIMAL_MONTHS, Math.round(famineStoresLeft(storageMonthsFull, deficitPct, FAMINE_MONTHS_RUN) * 10) / 10)
     : storageMonthsFull;
 
   // Normalized food ratio — 1.0 = exactly adequate
