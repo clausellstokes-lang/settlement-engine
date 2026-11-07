@@ -787,7 +787,8 @@ describe('the PROVENANCE detector cites the twelve holder kinds and nothing wide
     expect(both).toBe(0);
     // 11 -> 8 at W5 HIS's style pass (2026-11-07): three of the withdrawn limb's sentences were rewritten
     // without it; eight remain, so the control still has sentences to re-admit.
-    expect(genericNotCited.length).toBe(8);
+    // 8 -> 7 at the owner's reading (2026-11-07): one of the seven ledger-vantage lines reworded to name its record left the limb.
+    expect(genericNotCited.length).toBe(7);
   });
 
   it('every one of the twelve kinds is live, and the withdrawn vocabulary is refused', () => {

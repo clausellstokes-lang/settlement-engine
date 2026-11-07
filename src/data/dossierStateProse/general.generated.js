@@ -106,7 +106,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "On the realm's rolls, the dozens who have left {settlement} still live here.",
+          "text": "Though dozens have left {settlement}, the realm's tax lists still count them as living here.",
           "slots": [
             "settlement"
           ],
@@ -879,8 +879,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "WINDOW under two readings": [
         {
           "angle": "ledger",
-          "text": "No one here has kept count long enough to say whether the town is growing or shrinking.",
-          "slots": [],
+          "text": "No one has counted heads in {settlement} long enough to say whether it is growing or shrinking, so nobody can plan for more mouths or fewer.",
+          "slots": [
+            "settlement"
+          ],
           "vid": 1
         },
         {
@@ -903,7 +905,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "NET MAGNITUDE, banded": [
         {
           "angle": "ledger",
-          "text": "Several hundred have come or gone in recent years, and the realm's count no longer matches the town's.",
+          "text": "Several hundred have come or gone in recent years, and the realm's tax lists no longer match the people actually living here.",
           "slots": [],
           "vid": 1
         },
@@ -5168,7 +5170,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "dm-only"
           ],
-          "text": "{faction} holds {band} of the power in {settlement}, a town goods pass through; part of what passes is smuggled, so the real trade is larger than the books show.",
+          "text": "{faction} holds {band} of the power in {settlement}, a town goods pass through; part of what passes is smuggled, so more trade moves than the market tallies show, and the town collects nothing on the rest.",
           "slots": [
             "faction",
             "band",
@@ -5212,7 +5214,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
             "dm-only",
             "crisis: any"
           ],
-          "text": "{faction} holds {band} of the power in {settlement}, and much of the town's wealth never reaches the tax rolls.",
+          "text": "{faction} holds {band} of the power in {settlement}, and much of the town's wealth never reaches the tax lists, so the treasury is poorer than the town looks.",
           "slots": [
             "faction",
             "band",
@@ -8518,7 +8520,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "criticalIssueCount: critical contradictions on the record": [
         {
           "angle": "ledger",
-          "text": "{band} of things about {settlement} cannot all be true at once; its account of itself is far from clean.",
+          "text": "{band} of things you hear about {settlement} cannot all be true at once; its story is far from clean, and a visitor should check what they are told.",
           "slots": [
             "band",
             "settlement"
@@ -8544,7 +8546,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "criticalIssueCount zero": [
         {
           "angle": "ledger",
-          "text": "Nothing about {settlement} contradicts anything else; its account of itself is clean.",
+          "text": "Everything you hear about {settlement} holds up; its story is clean, with nothing contradicting anything else.",
           "slots": [
             "settlement"
           ],

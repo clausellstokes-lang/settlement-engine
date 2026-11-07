@@ -4963,7 +4963,7 @@ spatial ledger supplies the counts, never the direction.
 
 **QUANTITY: `dozens`**
 1. `[visitor]` Dozens have left {settlement}. The workshops run with gaps in them, and the gaps are not being filled.
-2. `[ledger]` On the realm's rolls, the dozens who have left {settlement} still live here.
+2. `[ledger]` Though dozens have left {settlement}, the realm's tax lists still count them as living here.
 3. `[counterforce]` Dozens of people are gone from a place that could not spare them. What they were doing is largely not being done.
 
 **QUANTITY: `a hundred or so`**
@@ -5087,12 +5087,12 @@ variant explaining *why* the town is thinning would be inventing history.
 3. `[visitor]` Population here has climbed sharply. Whatever is drawing people, it is drawing them faster than {settlement} is absorbing them.
 
 **WINDOW under two readings** — **NO TREND CLAIM IS LAWFUL HERE**
-1. `[ledger]` No one here has kept count long enough to say whether the town is growing or shrinking.
+1. `[ledger]` No one has counted heads in {settlement} long enough to say whether it is growing or shrinking, so nobody can plan for more mouths or fewer.
 2. `[visitor]` Nobody has counted {settlement} often enough to say which way it is going.
 3. `[threshold]` {settlement} has had one head count and no second; whether it is growing is anyone's guess.
 
 **NET MAGNITUDE, banded** (the digit-free form of the lens's raw net clause)
-1. `[ledger]` Several hundred have come or gone in recent years, and the realm's count no longer matches the town's.
+1. `[ledger]` Several hundred have come or gone in recent years, and the realm's tax lists no longer match the people actually living here.
 2. `[visitor]` A few dozen have come or gone in recent years; the town looks much as it did.
 3. `[elder]` Many hundreds have come or gone in recent years; this is not the town it was.
 
@@ -5544,13 +5544,13 @@ unchanged.
 **TWO DEFECTS CURED (R-DST-W4-e):** the existing notes leak percentage **digits** (`holds {N}% of power`) and refer to the **page layout** (*"Trade income **above** reflects pre-siege operations"*). The register's forms replace the digit with `{band}` and the layout reference with a statement about the world. Wiring these is a disclosed same-seed prose shift.
 
 **`power_economic`: criminal faction in a transit hub**
-1. `[ledger · dm-only]` {faction} holds {band} of the power in {settlement}, a town goods pass through; part of what passes is smuggled, so the real trade is larger than the books show.
+1. `[ledger · dm-only]` {faction} holds {band} of the power in {settlement}, a town goods pass through; part of what passes is smuggled, so more trade moves than the market tallies show, and the town collects nothing on the rest.
 2. `[street · dm-only]` More moves through {settlement} than is written down, and someone takes a cut of the difference.
 3. `[visitor]` {settlement} handles more goods than its books show; some leakage is normal in a crossing town, but here it is large.
 4. `[counterforce]` {faction} is strong in {settlement} and the transit trade is clean; whatever the faction takes, it does not take it off the road.
 
 **`power_economic`: powerful criminal faction in a prosperous settlement** {crisis-scoped}
-1. `[ledger · dm-only · crisis: any]` {faction} holds {band} of the power in {settlement}, and much of the town's wealth never reaches the tax rolls.
+1. `[ledger · dm-only · crisis: any]` {faction} holds {band} of the power in {settlement}, and much of the town's wealth never reaches the tax lists, so the treasury is poorer than the town looks.
 2. `[street · no crisis: hunger · no crisis: threat · crisis: any]` {settlement} is doing well, and doing well here includes arrangements the hall would rather not itemise.
 3. `[visitor · no crisis: hunger · no crisis: threat · crisis: any]` {settlement} is visibly wealthy, yet its public accounts are modest; someone is keeping the difference off the books.
 4. `[counterforce · dm-only · crisis: any]` {faction} is powerful in prosperous {settlement} and takes its share in goods and favours, not coin, so the tax rolls never see it.
@@ -5944,12 +5944,12 @@ unchanged.
 4. `[threshold]` Someone must be carrying {settlement}: it spends more than it earns and still stands, and the question is who.
 
 **`criticalIssueCount`: critical contradictions on the record** {colour}
-1. `[ledger]` {band} of things about {settlement} cannot all be true at once; its account of itself is far from clean.
+1. `[ledger]` {band} of things you hear about {settlement} cannot all be true at once; its story is far from clean, and a visitor should check what they are told.
 2. `[visitor]` What {settlement} says about itself does not match the rest in {band} of places.
 3. `[street]` A handful of things about this town cannot all be true at once, and everyone here has their own explanation.
 
 **`criticalIssueCount` zero** · **THE GOOD STATE (R-DST-G)** {colour}
-1. `[ledger]` Nothing about {settlement} contradicts anything else; its account of itself is clean.
+1. `[ledger]` Everything you hear about {settlement} holds up; its story is clean, with nothing contradicting anything else.
 2. `[visitor]` Look as closely as you like at {settlement}: nothing about it fails to add up.
 3. `[counterforce]` {settlement} is under real pressure, yet its account of itself stays clean.
 

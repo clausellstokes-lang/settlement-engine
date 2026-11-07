@@ -17,7 +17,7 @@ import { birth, ensureLaws } from '../../scripts/audit/soak-review/corpus.mjs';
 import { generalDeskLines } from '../../src/components/new/generalDeskRead.js';
 
 // Re-keyed at W5 HIS's style pass (2026-11-07): the three vouch lines of DS-GEN-11 `criticalIssueCount zero`, plainly worded.
-const VOUCH = /contradicts anything else|nothing about it fails to add up|account of itself (?:is|stays) clean/;
+const VOUCH = /contradicts anything else|nothing contradicting anything else|nothing about it fails to add up|account of itself (?:is|stays) clean/;
 
 function battery(settlement) {
   return settlement.generationCoherenceReceipt.judgments
