@@ -101,11 +101,12 @@ import {
   RETIRED_ADVISORY_LOCKFILE_BASELINE_SCHEMA,
   RETIRED_FED_WORLD_BASELINE_SCHEMA,
   RETIRED_WINDOW_RUNG1_BASELINE_SCHEMA,
+  RETIRED_TIER_COVERAGE_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA,
   RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
-  validateSchema28Baseline,
+  validateSchema29Baseline,
 } from './lib/observed-shape-baseline.mjs';
 import {
   parseExactFlags,
@@ -220,7 +221,14 @@ const BASELINE = join(ROOT, 'scripts/.observed-shape-readers-baseline.json');
  *     cut) left producer 2's pulse no tier candidate, so the corpus builder gains producer 2b
  *     (its own one-save pulse over `osr-tier-14`, a town generated over the city cut; a bounded
  *     view of its tier candidates, roots only) and the seven eroded identities are observed again.
- *     Verdict-only like 25: it moves NO row. THE LIVE AUTHORITY.
+ *     Verdict-only like 25: it moves NO row (RETIRED).
+ * 29 = schema 28's topology, tag law, theta, corpus and thirteen-identity roster, its REGISTER
+ *     re-governed to THE CENSUS READERS (the chair's ruling of 2026-11-07 06:5x UTC, ODQ §934.105, on
+ *     LANDING-R2's record): a governed migration rung for a shape change, never a widening of the
+ *     shrink-only law. Ten rows admitted with attribution (tradeListDisplay.js, facts/drawDeclared.js,
+ *     facts/factVocabulary.js, and `contestsNiche on factions` MOVED readerBattery.js ->
+ *     roles/roleClass.js), eleven gone rows retired with cause, the bank 76/50 -> 75/49, the rows
+ *     1450 -> 1449. THE LIVE AUTHORITY.
  * ⚠ THIS LIST WENT STALE FOR EIGHT RUNGS — it marked 10 as "THE LIVE AUTHORITY" while
  *   the number stood at 18 — so it is filled in here rather than extended by one. Each
  *   rung's full rationale lives beside its own target constant in
@@ -244,6 +252,7 @@ export {
   RETIRED_ADVISORY_LOCKFILE_BASELINE_SCHEMA,
   RETIRED_FED_WORLD_BASELINE_SCHEMA,
   RETIRED_WINDOW_RUNG1_BASELINE_SCHEMA,
+  RETIRED_TIER_COVERAGE_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA, RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
@@ -1533,7 +1542,7 @@ export function assertExplainedWriterRowTags(
   baseline,
   entries = EXPLAINED_WRITER_EXEMPTIONS,
 ) {
-  validateSchema28Baseline(baseline);
+  validateSchema29Baseline(baseline);
   assertExplainedWriterExemptions(entries);
   const declarations = new Map(entries.map((entry) => [entry.identity, entry]));
   const genesis = baseline.frozenAtSha === baseline.migrationReview.subjectSha;
@@ -3014,7 +3023,7 @@ export function baselineOf({
       'untouched) brings both shapes back and creates nothing new. The crisis cast\'s temporary person',
       'is DECLARED (`temporary`, `temporaryKind`, `crisisIds on npcs`; the fifth class), and the',
       'window\'s other new and grown rows are ADMITTED as ordinary debt under attributed review notes.',
-      'SCHEMA 28 = schema 27\'s topology, tag law, thirteen-identity roster and register, ALL UNCHANGED,',
+      'SCHEMA 28 (RETIRED) held schema 27\'s topology, tag law, thirteen-identity roster and register, ALL UNCHANGED,',
       're-governed to THE TIER-CHANGE COVERAGE PASS (the chair\'s corpus-coverage ruling of 2026-11-06,',
       'the militia precedent). LANDING-7 lane B\'s R-B1 (2168ffdba) made the promotion window read the',
       'next tier\'s stamp cut; producer 2\'s populations never move within twelve intervals, so its pulse',
@@ -3024,6 +3033,13 @@ export function baselineOf({
       'own one-save pulse over `osr-tier-14`, a town generated over the city cut that the stamp law',
       'promotes at interval 5, entering roots only as a bounded view of its tier candidates. The live',
       'scan reproduces the schema-27 register: the reconciliation is EMPTY, so no row moves.',
+      'SCHEMA 29 = schema 28\'s topology, tag law, theta, corpus and thirteen-identity roster, its register',
+      're-governed to THE CENSUS READERS (the chair\'s ruling of 2026-11-07 06:5x UTC, ODQ §934.105, on',
+      'LANDING-R2\'s record): a governed migration rung for a shape change. The pool census and the reader',
+      'lanes landed new readers (tradeListDisplay.js, facts/drawDeclared.js, facts/factVocabulary.js) and',
+      'MOVED one (`contestsNiche on factions`, readerBattery.js -> roles/roleClass.js); ten rows are',
+      'admitted with attribution and eleven gone rows retired with cause, each named in the review; no',
+      'detector source moved. The bank moves 76/50 -> 75/49 (one `stresses on settlement` address).',
       'Of the thirteen declared bank entries TWELVE bank reads today; `isCriminal on incomeSources`',
       'has banked nothing since schema 17 made its writer observable, and banked is always a',
       `subset of declared. This envelope banks ${bankPhrase(bankOf(inventory, rowTags))}.`,
@@ -3034,7 +3050,7 @@ export function baselineOf({
       'An untagged row means: a guarded read, of a real record rather than browser or language surface,',
       'of a key no writer the corpus runs produces and no declared out-of-corpus writer explains.',
       'A tagged row stays visible as governed explained-writer debt under its numeric ceiling and reason.',
-      'Schemas 4–27 are the RETIRED numeric predecessors.',
+      'Schemas 4–28 are the RETIRED numeric predecessors.',
     ],
     schema: BASELINE_SCHEMA,
     frozen: new Date().toISOString().slice(0, 10),
@@ -3208,7 +3224,7 @@ export async function run(argv = [], overrides = {}) {
     createScanArtifact,
     validateScanArtifact,
     assertFindingSourceEvidence,
-    validateBaseline: validateSchema28Baseline,
+    validateBaseline: validateSchema29Baseline,
     // ⭐ THE BANK FENCE'S TWO HAND-OWNED SIDES, overridable so the sentinel can drive
     // every refusal: the literal module and the migration script's declared post-bank.
     readBankLiteral: readBankLiteralModule,

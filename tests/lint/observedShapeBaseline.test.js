@@ -31,6 +31,7 @@ import {
   RETIRED_ADVISORY_LOCKFILE_BASELINE_SCHEMA,
   RETIRED_FED_WORLD_BASELINE_SCHEMA,
   RETIRED_WINDOW_RUNG1_BASELINE_SCHEMA,
+  RETIRED_TIER_COVERAGE_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA,
   validateSchema3Baseline,
   RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
@@ -61,6 +62,7 @@ import {
   validateSchema26Baseline,
   validateSchema27Baseline,
   validateSchema28Baseline,
+  validateSchema29Baseline,
 } from '../../scripts/lib/observed-shape-baseline.mjs';
 import {
   digestOf,
@@ -360,7 +362,9 @@ describe('observed-shape schema-3 baseline envelope', () => {
     // ⭐ SCHEMA 26: THE FED WORLD (the chair's ruling (i) on lane OSR-RUNG's STOP, 2026-11-03, ODQ §934.104): schema 25's envelope, tag law and roster UNCHANGED, re-governed to a corpus with a famine topology pass (the schema-17 shape) and a register that admits 22 rows the self-feeding worlds of FOOD-1/FOOD-2 no longer resolve (the schema-24 shape); four rows go, two shrink, the bank holds at 69/45.
     // ⭐ SCHEMA 27: THE RUNG-1 WINDOW (the chair's rulings on lane LANDING-2b's STOP, 2026-11-04): schema 26's envelope and tag law re-governed to the shape-family theta 0.76 (the crisis cast on `stressors`), a corpus topology pass that cures the window's `facets`/`issues` erosion, three crisis declarations (the roster 10 -> 13, the bank 69/45 -> 76/50) and the window's rows admitted with attribution.
     // ⭐ SCHEMA 28: THE TIER-CHANGE COVERAGE PASS (the chair's corpus-coverage ruling of 2026-11-06, the militia precedent): schema 27's envelope, tag law, roster and register UNCHANGED, re-governed to a corpus builder whose producer 2b pulses one town generated over the city cut (osr-tier-14) so the stamp law mints the tier candidate R-B1 took from producer 2. Like 25, its reconciliation is EMPTY, and measured so.
-    expect(BASELINE_SCHEMA).toBe(28);
+    // ⭐ SCHEMA 29: THE CENSUS READERS (the chair's ruling of 2026-11-07 06:5x UTC, ODQ §934.105, on LANDING-R2's record): a governed migration rung, the register's own door for a shape change — schema 28's envelope, tag law, theta, corpus and roster UNCHANGED; the census and reader lanes' ten new rows admitted with attribution (contestsNiche on factions a MOVE, readerBattery.js -> roles/roleClass.js), eleven gone rows retired with cause, the bank 76/50 -> 75/49.
+    expect(BASELINE_SCHEMA).toBe(29);
+    expect(RETIRED_TIER_COVERAGE_BASELINE_SCHEMA).toBe(28);
     expect(RETIRED_WINDOW_RUNG1_BASELINE_SCHEMA).toBe(27);
     expect(RETIRED_FED_WORLD_BASELINE_SCHEMA).toBe(26);
     expect(RETIRED_ADVISORY_LOCKFILE_BASELINE_SCHEMA).toBe(25);
@@ -660,6 +664,14 @@ function validSchema27Baseline_fixture() {
   return baseline;
 }
 
+/** The RETIRED schema-28 envelope, pinned to its own LITERAL number for the reason the
+ *  schema-10 through schema-27 fixtures above record. */
+function validSchema28Baseline_fixture() {
+  const baseline = validSchema7Baseline();
+  baseline.schema = RETIRED_TIER_COVERAGE_BASELINE_SCHEMA;
+  return baseline;
+}
+
 /** The LIVE envelope, whatever number is in force. */
 function validLiveBaseline() {
   const baseline = validSchema7Baseline();
@@ -948,7 +960,15 @@ describe('observed-shape schema-7 bank-by-rule envelope', () => {
     // as a current one.
     const windowRung1 = validSchema27Baseline_fixture();
     expect(validateSchema27Baseline(windowRung1)).toBe(windowRung1);
-    expect(validateSchema28Baseline(live)).toBe(live);
+    // ⭐ 28 IS RETIRED at the schema-29 rung and now validates its OWN literal, so it too
+    // is paired with a fixture rather than with `live`. `live` belongs to 29 now.
+    const tierCoverage = validSchema28Baseline_fixture();
+    expect(validateSchema28Baseline(tierCoverage)).toBe(tierCoverage);
+    expect(validateSchema29Baseline(live)).toBe(live);
+    expect(() => validateSchema28Baseline(live)).toThrow(/is not schema 28/);
+    expect(() => validateSchema29Baseline(tierCoverage)).toThrow(/is not schema 29/);
+    expect(() => validateSchema29Baseline(windowRung1)).toThrow(/is not schema 29/);
+    expect(() => validateSchema27Baseline(tierCoverage)).toThrow(/is not schema 27/);
     expect(() => validateSchema27Baseline(live)).toThrow(/is not schema 27/);
     expect(() => validateSchema28Baseline(windowRung1)).toThrow(/is not schema 28/);
     expect(() => validateSchema28Baseline(fedWorld)).toThrow(/is not schema 28/);
