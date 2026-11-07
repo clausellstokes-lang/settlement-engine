@@ -401,38 +401,26 @@ export function inspectSettlement(settlement, config) {
     );
   }
 
+  // PEOPLE-5B (2026-11-07, M-7; GENERATION_CONTRACTS §8): a v2 card names its powers in `memberships`, and every
+  // membership names a power on the roster — "broken NPC/faction references" now means a membership naming no
+  // power. The grouping (`settlement.factions`) left the record, so its member check has no subject and left with it.
   const powerFactionSet = new Set(powerFactionNames);
   for (const npc of npcs) {
-    if (
-      npc?.factionAffiliation
-      && !powerFactionSet.has(npc.factionAffiliation)
-    ) {
-      addFinding(
-        findings,
-        'npc_faction_missing',
-        `npcs.${npc.id || 'unknown'}.factionAffiliation`,
-        npc.factionAffiliation,
-      );
-    }
-  }
-
-  const narrativeFactions = settlement?.factions || [];
-  const narrativeFactionNames = narrativeFactions
-    .map(faction => faction?.name)
-    .filter(Boolean);
-  const narrativeFactionSet = new Set(narrativeFactionNames);
-  for (const [index, faction] of narrativeFactions.entries()) {
-    for (const member of faction?.members || []) {
-      if (!npcById.has(member?.id)) {
+    for (const membership of Array.isArray(npc?.memberships) ? npc.memberships : []) {
+      if (membership?.power && !powerFactionSet.has(membership.power)) {
         addFinding(
           findings,
-          'faction_member_missing',
-          `factions[${index}].members`,
-          member?.id || 'missing',
+          'npc_faction_missing',
+          `npcs.${npc.id || 'unknown'}.memberships`,
+          membership.power,
         );
       }
     }
   }
+
+  // GS-2 (ODQ §934.101): a conflict is fought between POWER factions, so its parties are checked against the
+  // powers (PEOPLE-5B: the grouping this read before is gone from a v2 record).
+  const narrativeFactionSet = powerFactionSet;
   for (const [index, conflict] of (
     settlement?.conflicts || []
   ).entries()) {
