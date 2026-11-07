@@ -549,7 +549,7 @@ offered by default; the second is where a section composer may also draw.
 **ARMS:** `hungry` (the town the road fed) · `surplus`
 **SLOTS:** `{settlement}` `{band}` `{route}` `{timeband_since}`
 
-1. `[ledger · hungry]` {settlement} is burying more than it births, and the roll gives hunger, not sickness, as the cause: the grain coming in fell when the {route} was taken, and has fallen again since.
+1. `[ledger · hungry]` {settlement} is burying more than it births, and the burial register gives hunger, not sickness, as the cause: the grain coming in fell when the {route} was taken, and has fallen again since.
 2. `[street · hungry]` Every question at {settlement} this season ends at the granary door, and it ends there because the {route} that fed the town is cut and nothing has taken its place.
 3. `[visitor · surplus]` {settlement} has a surplus and a road, and {band} have walked to it {timeband_since}; the town took in what it had room for and turned the rest back at the landing, each with the reason written down and given to them.
 4. `[elder · hungry]` The gap in {settlement}'s register follows the empty granary: the burials rise each season the grain runs short.
@@ -651,7 +651,7 @@ house bought the office or owns the road — the wealth is the named cause on a
 contest the house won, and "purchase" appears only as the crowd's own word for
 a ledgered credit, attributed as such.
 
-1. `[ledger · seated]` A merchant sits in {settlement}'s hall, and the books show how: {house} made a fortune in the {good} trade, lent to the town's rulers, then won the contest for the seat.
+1. `[ledger · seated]` A merchant sits in {settlement}'s hall, and the hall's account books show how: {house} made a fortune in the {good} trade, lent to the town's rulers, then won the contest for the seat.
 2. `[street · seated]` The clerks call {house}'s place in {settlement}'s hall lawful; the town says it was bought with a season's profit in the {good} trade.
 3. `[visitor · seated]` There is no vote worth the calling at {settlement} that {house} has not already counted; the takings off the {route} are what put it in a position to count them.
 4. `[unfolding · seated]` {settlement}'s hall answers to {house}, and {faction} has been asking {timeband_since} who gave the house that power.
@@ -747,7 +747,7 @@ dossier shows both; no variant below joins them as fact, and the ledger charges
 the reader.
 
 1. `[street · reading]` {temple} at {settlement} reads the hunger as wrath and the town believed the reading through {timeband_span}; the granaries emptied all the same, and the harvest that followed was ordinary.
-2. `[ledger · reading]` {settlement}'s chronicle notes the {reason} as it happened and, separately, what {temple} said it meant, and keeps the two apart.
+2. `[ledger · reading]` {settlement}'s chronicle notes the {reason} as it happened and, separately, what {temple} said it meant, so anyone who reads it can see where the priests' telling parts from the season itself.
 3. `[unfolding · reading]` The reading has cost {temple} more respect at {settlement} than the calamity cost the fields, and it is costing still.
 4. `[elder · reading]` Nothing {temple} said that year has been revisited at {settlement}, though the rain came when the temple said it would not; the town has gone on keeping the feast.
 5. `[counterforce · unlensed]` {settlement} keeps no altar and reads no omen: the bad season is entered here as weather, and the town was neither comforted nor charged for it.
@@ -1279,7 +1279,7 @@ the reader.
 **SLOTS:** `{settlement}` `{counterpart}` `{house}` `{temple}` `{timeband_since}`
 **Fence (from the sibling family):** the house act set is **closed and no verb endows a temple** — credit extended, relief granted, a faction propped. **{house} sits at {counterpart} by construction**, since the covert leash admits foreign patrons only. **Exposed state only:** no variant gestures at an unexposed leash.
 
-1. `[ledger · cornered]` {temple}'s new chapter was built on credit from the hungry season, and the lender's book shows a loan, not a gift.
+1. `[ledger · cornered]` {temple}'s new chapter was built on credit from the hungry season, and the lender's book shows a loan, not a gift: {temple} owes its new walls to {house}.
 2. `[street · cornered]` The town has worked out whose money seated its minister, and the anger has gone to the altar rather than to the merchant.
 3. `[visitor · cornered]` The chapter house is the newest building in {settlement} and the one people here are least willing to discuss.
 4. `[elder · cornered]` Those who queued that winter remember who was selling into the gap, and remember that {house} keeps its books a town over at {counterpart}, where nobody from {settlement} can read them.
@@ -1422,7 +1422,7 @@ the reader.
 **SLOTS:** `{settlement}` `{temple}` `{creed}` `{timeband_since}`
 **Fence (from the sibling family):** **Law One** — no god acts in any variant; the render, the dispute and the reading are human and receipted. The **capacity floor** is the whole difference between a schism and a suppression, and the record says which fired.
 
-1. `[ledger · split]` {temple} takes in more and has fewer at its services, and {settlement}'s tax roll shows a second congregation the priests have not yet admitted to.
+1. `[ledger · split]` {temple} takes in more and has fewer at its services: {settlement}'s tithe lists already show a second congregation, and the priests are still preaching to pews that have emptied.
 2. `[street · split]` The old rite keeps the nave and the newer keeps the crypt; both halves claim {creed}, both send to the same chapter house, and neither will call itself the new thing.
 3. `[visitor · split]` You will be asked which observance you want before you are told where to find it.
 4. `[elder · split]` The parish here once had its tithe forgiven in a worse year than this and has never let it go, which is why the quarrel went to the altar instead of to the steward.
@@ -1439,7 +1439,7 @@ the reader.
 **SLOTS:** `{settlement}` `{creed}` `{timeband_since}`
 **⚠ SELECTION RULE (fail-closed, J-CPL-5) — the sibling family's truncation note, restated because it changes what the DOSSIER may offer.** The middle of this chain is covert. Variants 1–5 select **only** on a chain carrying a public surfacing, exposure or restoration receipt; on a still-covert chain the page offers nothing from this family at all — no stub, no gap, no line a reader could take for concealment. Variant 6 is `[dm-only]` per R-DOS-G and never reaches a player-projected page.
 
-1. `[ledger · suppressor]` {settlement}'s register lists {creed} as stamped out, and a newer line beneath lists it as restored; nobody has corrected the first.
+1. `[ledger · suppressor]` {settlement}'s parish register still lists {creed} as stamped out, with a newer line beneath it restoring the faith; nobody has struck the first, so any clerk who reads only that line treats its believers as outlaws.
 2. `[street · suppressor]` Nobody in this parish is a stranger to the ministers who came forward when the suppression lifted.
 3. `[visitor · suppressor]` {settlement} will tell you it put {creed} down; the pews have been telling you otherwise since the doors opened again.
 4. `[elder · suppressor]` The elders here call the purge the mistake and say it twice over, for being thorough and for being public: the watching crowd went home knowing more of {creed} than it had come with.

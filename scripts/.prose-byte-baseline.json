@@ -91,8 +91,8 @@
       "ceilingGzip": 112290
     },
     "src/data/dossierCausalProse.generated.js": {
-      "raw": 199851,
-      "gzip": 33686,
+      "raw": 200117,
+      "gzip": 33996,
       "ceilingRaw": 210260,
       "ceilingGzip": 36700
     },

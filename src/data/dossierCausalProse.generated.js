@@ -1316,7 +1316,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "hungry"
           ],
-          "text": "{settlement} is burying more than it births, and the roll gives hunger, not sickness, as the cause: the grain coming in fell when the {route} was taken, and has fallen again since.",
+          "text": "{settlement} is burying more than it births, and the burial register gives hunger, not sickness, as the cause: the grain coming in fell when the {route} was taken, and has fallen again since.",
           "slots": [
             "settlement",
             "route"
@@ -1863,7 +1863,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "seated"
           ],
-          "text": "A merchant sits in {settlement}'s hall, and the books show how: {house} made a fortune in the {good} trade, lent to the town's rulers, then won the contest for the seat.",
+          "text": "A merchant sits in {settlement}'s hall, and the hall's account books show how: {house} made a fortune in the {good} trade, lent to the town's rulers, then won the contest for the seat.",
           "slots": [
             "settlement",
             "house",
@@ -2319,7 +2319,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "reading"
           ],
-          "text": "{settlement}'s chronicle notes the {reason} as it happened and, separately, what {temple} said it meant, and keeps the two apart.",
+          "text": "{settlement}'s chronicle notes the {reason} as it happened and, separately, what {temple} said it meant, so anyone who reads it can see where the priests' telling parts from the season itself.",
           "slots": [
             "settlement",
             "reason",
@@ -5004,9 +5004,10 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "cornered"
           ],
-          "text": "{temple}'s new chapter was built on credit from the hungry season, and the lender's book shows a loan, not a gift.",
+          "text": "{temple}'s new chapter was built on credit from the hungry season, and the lender's book shows a loan, not a gift: {temple} owes its new walls to {house}.",
           "slots": [
-            "temple"
+            "temple",
+            "house"
           ]
         },
         {
@@ -5665,7 +5666,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "split"
           ],
-          "text": "{temple} takes in more and has fewer at its services, and {settlement}'s tax roll shows a second congregation the priests have not yet admitted to.",
+          "text": "{temple} takes in more and has fewer at its services: {settlement}'s tithe lists already show a second congregation, and the priests are still preaching to pews that have emptied.",
           "slots": [
             "temple",
             "settlement"
@@ -5742,7 +5743,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "suppressor"
           ],
-          "text": "{settlement}'s register lists {creed} as stamped out, and a newer line beneath lists it as restored; nobody has corrected the first.",
+          "text": "{settlement}'s parish register still lists {creed} as stamped out, with a newer line beneath it restoring the faith; nobody has struck the first, so any clerk who reads only that line treats its believers as outlaws.",
           "slots": [
             "settlement",
             "creed"
