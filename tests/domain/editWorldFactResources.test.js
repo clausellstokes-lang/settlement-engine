@@ -112,16 +112,16 @@ const FIXED = Object.freeze([0, 21, 42]);
  */
 const PRE_CHANGE = Object.freeze({
   0: Object.freeze({
-    derived: '93cf79d258df160c71f84512bf9769a9510f4e5c25ada5ffc25c1c26b64dd3bf',
-    replay: '468d7c2a0ee2cbd9106f767027b9756b0b65c5b86bf2cab48b8c36d515a70333',
+    derived: '6c8e521c5f80586eb259d5db267c5d4349f8e5c8d56fdbb1d3b5b2b5b29ea3ef',
+    replay: '69c0d62324d0e671dd1c8df27b826cb32667ee0f3446f94067cd51b0db390788',
   }),
   21: Object.freeze({
-    derived: '0dfd25bc67d146684b685d585b162936ea90ca3144d960deac86985ac97679c0',
-    replay: '44d813b2a2fc9f16c6d4b7a00ad81c476080bb1fe476327e87b5aa0d8941a7cd',
+    derived: 'b933a9c0cc863c7cdd5a806b5d593d0c996675973b251dcc0839a83bab8bc7ce',
+    replay: '10b257acf49d8135cb34644cd261c0adbb8f11b902b329c676065f626ce01c78',
   }),
   42: Object.freeze({
-    derived: '68d98fa01de5d341d10b35c20a83aa7eaa4ba6e4988dcc222c355a91b0f3f15c',
-    replay: 'f47ae41ccb25b361374d79aa88159f8892a974334d910eb233aeae865f2c7b6a',
+    derived: '0b8e96c8f6f46b2f696355c46dd962d3ea5e3a03dd72dcccf10dc2a864e073c8',
+    replay: 'fb4f85af237ac129c5f669d406beca033807670d10d77c696dd7499405baacbc',
   }),
 });
 // ── RE-CAPTURED 2026-10-01, the urban band (ODQ §934.86), BY THE SAME PLANT AND NEVER FROM THE LIVE STEP ALONE ─────
@@ -199,6 +199,16 @@ describe('EM-B2b2 — the DM\'s nearby-resources word survives resolveResources'
 // worktree, never this checkout), and the planted step and the live step produced the SAME six digests, so EM-B2b2
 // still moves no byte of the no-edit path; on every row the fresh generation equals the dormant re-derivation. Row 21's
 // `derived` (0dfd25bc) is the landed golden's control row.
+// ── RE-CAPTURED 2026-11-07, the pool census composed on rung 1's final 1bff51c6d (LANDING-R2, ODQ §934.105), BY THE SAME
+// PLANT ── All six digests moved. Rung 1's final reads the block above (this file green there); the census side f5dc50c6b
+// red. The cause is the census's generator changes, the same 33 lane commits the generator golden's record names
+// (docs/shift-records/2026-11-06-rung2-01-census-composed-generator-master.json, the chair's ruled exception: per-cause
+// stages are unbuildable on this landing); MEASURED on its own lineage, 73fa1a1e7 (reader-tonight-wants R11 unit 3, the
+// all-525 golden mover) moves all six against its parent 7f0632463, whose six digests equal the block above byte for
+// byte. Re-captured: the pre-EM-B2b2 step (12c437de4, sha256 62e16d59...) planted over a COPY of the tip dd2aab21d (a
+// scratch archive, never this checkout) and the live step produced the SAME six digests, so EM-B2b2 still moves no byte
+// of the no-edit path; on every row the fresh generation equals the dormant re-derivation. Row 21's `derived`
+// (b933a9c0) is the re-recorded golden's control row.
 
     const layer = layerOf([[ROOT_KEY, [...DM_ROSTER]]]);
 
