@@ -190,7 +190,7 @@ export function ResourcesTab({settlement:r, narrativeNote, publicDossier = false
           block law, X-16: prose never above the fact it explains). The terrain lens
           is cut (the Overview's place passage owns the ground, X-1) and the strengths lens is
           cut (the chips above are the strengths, R2). */}
-      <DeskLines mount={GROUND_MOUNT} settlementName={r?.name} tier={r?.tier} rungs={[deskProse.strategicValue, deskProse.exploitation]} />
+      <DeskLines mount={GROUND_MOUNT} settlementName={r?.name} tier={r?.tier} rungs={[deskProse.strategicValue, deskProse.exploitation, deskProse.resourceCondition]} />
 
       {/* ── AVAILABLE RAW RESOURCES ───────────────────────────────────────── */}
       {(r?.config?.nearbyResources?.length>0||res.availableResources?.length>0)&&<Section title="Nearby Resources" collapsible defaultOpen={true}>

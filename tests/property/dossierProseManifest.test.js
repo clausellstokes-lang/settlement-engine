@@ -185,11 +185,14 @@ describe('the composed-prose manifest — the DRIFT corpus, both audiences', () 
     // Towns unmoved at 516/3/3/3.
     // 67,754 -> 67,730 (372/364/358 unmoved) at THE POOL CENSUS COMPOSED (ODQ §934.105, RUNG 2 OF THE SOAK LADDER, the landing
     // stacked on rung 1; record docs/shift-records/2026-11-06-rung2-04-census-composed-prose-manifest.json). Towns unmoved at 516/3/3/3.
+    // 67,730 -> 71,470 (372/364/358 -> 400/386/382) at W1 ECO CONSTRUCTION (ODQ §934.105, the construction-and-wiring
+    // wave, 2026-11-07; record docs/shift-records/2026-11-07-w1-01-construction.json): fourteen generation facts said,
+    // each a lens at its block's mount, so the towns whose record holds them compose more cells. Towns unmoved at 516/3/3/3.
     expect(tally, 'the DRIFT corpus by seed, cells and towns').toEqual({
-      'golden-master-v3': { cells: 67_730, towns: 516 },
-      'gm-seed-a': { cells: 372, towns: 3 },
-      'gm-seed-b': { cells: 364, towns: 3 },
-      'gm-seed-c': { cells: 358, towns: 3 },
+      'golden-master-v3': { cells: 71_470, towns: 516 },
+      'gm-seed-a': { cells: 400, towns: 3 },
+      'gm-seed-b': { cells: 386, towns: 3 },
+      'gm-seed-c': { cells: 382, towns: 3 },
     });
     // The two halves must close against the figures every other arm here reads.
     expect(Object.values(tally).reduce((n, r) => n + r.cells, 0)).toBe(run.cells.length);
@@ -384,9 +387,9 @@ describe('the composed-prose manifest — the DRIFT corpus, both audiences', () 
     const absent = registered.filter((m) => !recorded.has(m));
     expect(absent, 'every mount the corpus does not reach carries a reason, and no other does')
       .toEqual(reasoned);
-    expect(registered.length, 'the registry\'s distinct mounts').toBe(56);
+    expect(registered.length, 'the registry\'s distinct mounts').toBe(57); // W1 ECO (2026-11-07): economics.upstreamSupply, DS-SUP-2 mounted.
     expect(registered.filter((m) => recorded.has(m)).length, 'and the manifest records this many')
-      .toBe(42);
+      .toBe(43); // W1 ECO (2026-11-07): economics.upstreamSupply composes (93 of 525 towns mark an upstream chain weak).
     // ⛔ AND THE REASONS ARE RE-MEASURED, NEVER TAKEN ON FAITH: every reasoned mount sits on a
     // block that fires on NO town of the RATE grid either, so its silence here is the world's
     // and not this recipe's. A block that starts speaking reds this arm until someone re-states
@@ -533,7 +536,9 @@ describe('the two controls no one-audience manifest can see', () => {
     // audience only, which is a leak in the other direction and has no lawful reading.
     expect(playerOnly, 'a position on the PLAYER face only, which no audience filter can produce')
       .toEqual([]);
-    expect(dmOnly.length, 'positions the DM sees and the player does not, pinned as lawful').toBe(36);
+    // 36 -> 194 at W1 ECO CONSTRUCTION (2026-11-07): DS-ECO-6's new lenses (the hidden house, the two
+    // flags) are dm-only like the whole block, so 158 positions open on the DM face alone — lawful.
+    expect(dmOnly.length, 'positions the DM sees and the player does not, pinned as lawful').toBe(194);
     // The paired control on the direction split itself, so it cannot go vacuous.
     const synthetic = new Map([['a', { dm: {} }], ['b', { player: {} }], ['c', { dm: {}, player: {} }]]);
     expect([...synthetic].filter(([, seat]) => seat.player && !seat.dm).map(([at]) => at),

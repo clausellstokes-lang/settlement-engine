@@ -20,6 +20,9 @@ const INK = swatch['#1C1409'], MUTED = swatch['#9C8068'], SECOND = swatch['#6B53
 
 // ── Data extraction ── (moved to dailyLifeLogic.js)
 
+/** The standing-of-living position, spelled once: two draws share it (the registry's one-site rule). */
+const STANDING_MOUNT = 'daily_life.standingOfLiving';
+
 function AnchorFact({ label, value, accent }) {
   const mobile = useIsMobile();
   return (
@@ -179,7 +182,10 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
           there, R-DST-A) and it does NOT speak on overview (DS-GEN-3's five `prosperity:`
           pools already speak about the rung at overview.systemsHealth — measured, not
           assumed). Additive: every anchor fact and the AI narrative below are untouched. */}
-      <DeskLines mount="daily_life.standingOfLiving" settlementName={r?.name} tier={r?.tier} rungs={[deskProse.prosperityRung]} />
+      <DeskLines mount={STANDING_MOUNT} settlementName={r?.name} tier={r?.tier} rungs={[deskProse.prosperityRung]} />
+      {/* W1 ECO construction (2026-11-07, C12): food's grip on prosperity, the coupled food field
+          the ladder block may join in its own pool, drawn at the same position under the rung. */}
+      <DeskLines mount={STANDING_MOUNT} settlementName={r?.name} tier={r?.tier} rungs={[deskProse.foodOnProsperity]} />
 
       {/* ── ONE LINE AND THE BUTTON (chair ruling D3 + D6, 2026-10-30) ──────────
           The unsaved hint and the empty state were one pitch told twice; they are one plain

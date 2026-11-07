@@ -101,6 +101,10 @@ const CORPUS = /** @type {import('./stateProseKernel.js').StateProseCorpus} */ (
  * @typedef {object} FoodSecurityView
  * @property {string} [label]
  * @property {{blockaded?: unknown, blockadeBypass?: unknown}|null} [stockpile]
+ * @property {unknown} [activeChainsCount]
+ * @property {{type?: unknown}|null} [prosperityMod]
+ * @property {{band?: unknown, failedSource?: unknown, famineCutPct?: unknown, normalImportPct?: unknown,
+ *   magicPct?: unknown, foodSources?: unknown}|null} [foodRecord]
  */
 /**
  * @typedef {object} IncomeSourceView
@@ -118,7 +122,9 @@ const CORPUS = /** @type {import('./stateProseKernel.js').StateProseCorpus} */ (
  * @property {ReadonlyArray<unknown>} [primaryImports]
  * @property {ReadonlyArray<unknown>} [localProduction]
  * @property {unknown} [isEntrepot]
- * @property {{blackMarketCapture?: unknown}|null} [safetyProfile]
+ * @property {ReadonlyArray<{upstreamWeak?: unknown}>} [activeChains]
+ * @property {{blackMarketCapture?: unknown, flags?: {arcaneBlackMarket?: unknown, theocraticEconomy?: unknown}|null,
+ *   compound?: {religionInfluence?: unknown, magicInfluence?: unknown}|null}|null} [safetyProfile]
  */
 /**
  * One row of `resourceAnalysis.exploitation.*`, as the resource generator writes it.
@@ -138,6 +144,8 @@ const CORPUS = /** @type {import('./stateProseKernel.js').StateProseCorpus} */ (
  * @property {{unexploited?: ReadonlyArray<ExploitationRow>,
  *   partiallyExploited?: ReadonlyArray<ExploitationRow>,
  *   fullyExploited?: ReadonlyArray<ExploitationRow>}|null} [exploitation]
+ * @property {ReadonlyArray<{condition?: unknown, recoveryMode?: unknown, label?: unknown}>} [resourceConditions]
+ * @property {{critical?: unknown, reasons?: Record<string, unknown>|null}|null} [imports]
  */
 /**
  * @typedef {object} EconomyDeskSettlement
@@ -147,6 +155,7 @@ const CORPUS = /** @type {import('./stateProseKernel.js').StateProseCorpus} */ (
  * @property {ResourceAnalysisView|null} [resourceAnalysis]
  * @property {{terrainType?: string}|null} [config]
  * @property {string} [tier]
+ * @property {ReadonlyArray<{name?: unknown, facets?: {clandestine?: unknown, subterranean?: unknown}|null}>} [institutions]
  */
 /**
  * The two canonical derived readings, as the view model returns them.
@@ -568,6 +577,231 @@ export function shadowEconomyPoolKey(safetyProfile) {
 }
 
 /**
+ * DS-ECO-6's two compound-flag lenses (W1 ECO, construction C1 and C2, 2026-11-07). Each pool
+ * is said ONLY when its flag is true on the stored safety profile (R-W1: a fact worth saying
+ * only when it is not the default is said only then); a false or missing flag is silence.
+ * @param {{arcaneBlackMarket?: unknown}|null|undefined} flags `safetyProfile.flags`
+ * @returns {string|null}
+ */
+export function arcaneMarketPoolKey(flags) {
+  return flags?.arcaneBlackMarket === true ? 'FLAG: arcaneBlackMarket' : null;
+}
+
+/**
+ * @param {{theocraticEconomy?: unknown}|null|undefined} flags `safetyProfile.flags`
+ * @returns {string|null}
+ */
+export function theocraticEconomyPoolKey(flags) {
+  return flags?.theocraticEconomy === true ? 'FLAG: theocraticEconomy' : null;
+}
+
+/**
+ * DS-ECO-6's hidden house (construction C14): the FIRST named house on the roster whose facets
+ * mark it underground or clandestine. The economy half only: the siege half of these facets
+ * (DS-WAR-5) reads `clandestineFacet.js` under worldPulse and is SIMULATION, deferred.
+ * @param {ReadonlyArray<{name?: unknown, facets?: {clandestine?: unknown, subterranean?: unknown}|null}>|null|undefined} institutions
+ * @returns {{name?: unknown, facets?: {clandestine?: unknown, subterranean?: unknown}|null}|null}
+ */
+export function hiddenHouseRow(institutions) {
+  if (!Array.isArray(institutions)) return null;
+  return institutions.find((row) => properFill(text(row?.name))
+    && (row?.facets?.subterranean || row?.facets?.clandestine)) || null;
+}
+
+/**
+ * The hidden house's pool. Underground outranks clandestine because it is the facet a visitor
+ * can see evidence of (a cellar door, a tunnel); a house carrying both takes the underground pool.
+ * @param {{facets?: {clandestine?: unknown, subterranean?: unknown}|null}|null} row
+ * @returns {string|null}
+ */
+export function hiddenHousePoolKey(row) {
+  if (row?.facets?.subterranean) return 'FACET: an underground house';
+  if (row?.facets?.clandestine) return 'FACET: a clandestine house';
+  return null;
+}
+
+/**
+ * The food-source words the DS-ECO-9 seams take (`the {good} failed`, `lives off its {good}`),
+ * by the food record's own source token. PRIVATE: a pool's slot words, not a fill table any
+ * other block shares; the same five tokens the food record declares (`FoodRecord.foodSources`).
+ * @type {Readonly<Record<string, string>>}
+ */
+const FOOD_SOURCE_WORDS = Object.freeze({
+  grain: 'grain harvest', livestock: 'herds', fish: 'fishing', mill: 'mill', game: 'hunting',
+});
+
+/** The famine cut, banded: at or past this share of the harvest the pool says "most". */
+const FAMINE_MOST_FROM = 50;
+
+/**
+ * DS-ECO-9's famine-source lens (construction C3): only on the famine band and only when the
+ * record names the source the famine failed. The cut is a BAND in the pool key, never a figure.
+ * @param {{band?: unknown, failedSource?: unknown, famineCutPct?: unknown}|null|undefined} foodRecord
+ * @returns {string|null}
+ */
+export function famineSourcePoolKey(foodRecord) {
+  if (text(foodRecord?.band) !== 'famine') return null;
+  if (!FOOD_SOURCE_WORDS[text(foodRecord?.failedSource)]) return null;
+  return share(foodRecord?.famineCutPct) >= FAMINE_MOST_FROM
+    ? 'ACTIVE FAMINE: the failed source, most of the harvest'
+    : 'ACTIVE FAMINE: the failed source, part of the harvest';
+}
+
+/** The ordinary-supply share at which "much of it is brought in" is worth saying. */
+const BROUGHT_IN_FROM = 20;
+
+/**
+ * DS-ECO-9's how-the-need-is-met lens (construction C4). Magic first: any magic share is the
+ * rarer and more telling fact. The brought-in pool is withheld where the food-security rung is
+ * already IMPORT-DEPENDENT, because that rung's own pool says the same thing (one fact, one
+ * sentence at one position).
+ * @param {{normalImportPct?: unknown, magicPct?: unknown}|null|undefined} foodRecord
+ * @param {string|null} securityKey the DS-ECO-9 rung key drawn beside it
+ * @returns {string|null}
+ */
+export function foodMeansPoolKey(foodRecord, securityKey) {
+  if (!foodRecord) return null;
+  if (share(foodRecord.magicPct) > 0) return 'HOW THE NEED IS MET: part of it by magic';
+  if (share(foodRecord.normalImportPct) >= BROUGHT_IN_FROM && securityKey !== 'IMPORT-DEPENDENT') {
+    return 'HOW THE NEED IS MET: much of it brought in';
+  }
+  return null;
+}
+
+/**
+ * DS-ECO-9's food-sources lens (constructions C5 and C11): the food record's own source list
+ * (FOOD-3, the truth `activeChainsCount` now derives from), largest first. An empty list, or
+ * a leading source with no seam word, is silence.
+ * @param {unknown} foodSources `foodRecord.foodSources`
+ * @returns {string|null}
+ */
+export function foodSourcesPoolKey(foodSources) {
+  if (!Array.isArray(foodSources) || foodSources.length === 0) return null;
+  if (!FOOD_SOURCE_WORDS[text(foodSources[0])]) return null;
+  if (foodSources.length === 1) return 'FOOD SOURCES: one source';
+  return foodSources.length >= 4 ? 'FOOD SOURCES: four or more' : 'FOOD SOURCES: several, the largest named';
+}
+
+/**
+ * DS-ECO-8's food-and-prosperity lens (construction C12), keyed on the coupled food field's
+ * own type token (`foodSecurity.prosperityMod.type`); null when the food record lays no
+ * modifier on prosperity. The reason string is the generator's and is never restated.
+ * @param {{type?: unknown}|null|undefined} prosperityMod
+ * @returns {string|null}
+ */
+export function foodProsperityPoolKey(prosperityMod) {
+  const type = text(prosperityMod?.type);
+  if (type === 'cap') return 'FOOD AND PROSPERITY: hunger holds the town down';
+  if (type === 'penalty') return 'FOOD AND PROSPERITY: the cost of food weighs on the town';
+  if (type === 'bonus') return 'FOOD AND PROSPERITY: full stores lift the town';
+  return null;
+}
+
+/**
+ * DS-ECO-11's resource condition (constructions C7 and C8): the first resource the analysis
+ * marks `depleted` with a recovery mode the corpus speaks to and a label that fills `{resource}`
+ * in bare-common form (the seams are number-neutral).
+ * @param {ReadonlyArray<{condition?: unknown, recoveryMode?: unknown, label?: unknown}>|null|undefined} conditions
+ * @returns {{condition?: unknown, recoveryMode?: unknown, label?: unknown}|null}
+ */
+export function depletedResourceRow(conditions) {
+  if (!Array.isArray(conditions)) return null;
+  return conditions.find((row) => text(row?.condition) === 'depleted'
+    && ['natural', 'manual'].includes(text(row?.recoveryMode))
+    && !!bareCommonFill(text(row?.label).toLowerCase())) || null;
+}
+
+/**
+ * The depleted resource's pool, by its recovery mode.
+ * @param {{condition?: unknown, recoveryMode?: unknown}|null} row
+ * @returns {string|null}
+ */
+export function resourceConditionPoolKey(row) {
+  if (text(row?.condition) !== 'depleted') return null;
+  if (text(row?.recoveryMode) === 'natural') return 'RESOURCE CONDITION: worked out, recovers in time';
+  if (text(row?.recoveryMode) === 'manual') return 'RESOURCE CONDITION: worked out, recovers only with work';
+  return null;
+}
+
+/** The generator's own reason shape for a house-required import: `Required by <House> but …`. */
+const REQUIRED_BY_RE = /^Required by (.+?) but not available\b/;
+
+/** The generator's own reason shape for a terrain-only import. */
+const TERRAIN_ONLY_RE = /terrain cannot produce this locally$/;
+
+/**
+ * DS-ECO-12's critical import (construction C6): ONE critical import with its reason, the
+ * house-requires form first (the worklist's lead), then the terrain form. `{good}` is the
+ * import's own key in bare-common form (a parenthesised gloss is refused), never the export bag.
+ * @param {{critical?: unknown, reasons?: Record<string, unknown>|null}|null|undefined} imports
+ * @returns {{good: string, reason: string, institution: string|undefined}|null}
+ */
+export function criticalImportRow(imports) {
+  const critical = Array.isArray(imports?.critical) ? imports.critical : [];
+  const rows = critical.map((item) => {
+    const raw = text(item);
+    const reason = text(imports?.reasons?.[raw]);
+    const house = REQUIRED_BY_RE.exec(reason);
+    return { good: raw.includes('(') ? '' : bareCommonFill(raw) || '', reason, institution: house ? properFill(house[1]) : undefined };
+  }).filter((row) => row.good && row.reason);
+  return rows.find((row) => row.institution) || rows.find((row) => TERRAIN_ONLY_RE.test(row.reason)) || null;
+}
+
+/**
+ * The critical import's pool, by the form of its reason.
+ * @param {{reason?: string, institution?: string}|null} row
+ * @returns {string|null}
+ */
+export function criticalImportPoolKey(row) {
+  if (row?.institution) return 'CRITICAL IMPORT: a house needs what the land lacks';
+  if (TERRAIN_ONLY_RE.test(text(row?.reason))) return 'CRITICAL IMPORT: the land cannot give it';
+  return null;
+}
+
+/** The influence score (0..100) at which faith or magic is said to weigh on the town's money. */
+const INFLUENCE_WEIGHS_FROM = 60;
+
+/**
+ * DS-ECO-12's income-weight lens (construction C10): the compound's religion and magic
+ * influence scores, read where the income lines rest on them. Faith first when both weigh.
+ * @param {{religionInfluence?: unknown, magicInfluence?: unknown}|null|undefined} compound
+ * @returns {string|null}
+ */
+export function incomeWeightPoolKey(compound) {
+  if (share(compound?.religionInfluence) >= INFLUENCE_WEIGHS_FROM) return 'INCOME WEIGHT: the religious houses';
+  if (share(compound?.magicInfluence) >= INFLUENCE_WEIGHS_FROM) return 'INCOME WEIGHT: the practice of magic';
+  return null;
+}
+
+/**
+ * DS-SUP-2's upstream-weak lens (construction C9, mounted by this lane at
+ * `economics.upstreamSupply`): the first active chain whose upstream the record marks weak.
+ * `{chain}` is the UPSTREAM chain's own token in bare-common form (`smelting`), never the
+ * title-cased display label that keeps the rest of this block dark.
+ * @param {ReadonlyArray<{upstreamWeak?: unknown}>|null|undefined} chains `economicState.activeChains`
+ * @returns {string|undefined} the upstream chain's bare noun, or undefined
+ */
+export function weakUpstreamNoun(chains) {
+  if (!Array.isArray(chains)) return undefined;
+  for (const chain of chains) {
+    const weak = Array.isArray(chain?.upstreamWeak) ? chain.upstreamWeak : [];
+    for (const token of weak) {
+      const noun = bareCommonFill(text(token).replace(/_/g, ' '));
+      if (noun) return noun;
+    }
+  }
+  return undefined;
+}
+
+/**
+ * @param {string|undefined} upstreamNoun
+ * @returns {string|null}
+ */
+export function upstreamWeakPoolKey(upstreamNoun) {
+  return upstreamNoun ? "UPSTREAM WEAK: a chain the town's work draws on is failing" : null;
+}
+
+/**
  * DS-ECO-3's pool key, from the canonical live-flow reading.
  *
  * A DRIFT IS A MEASUREMENT OR IT IS NOTHING. `flowDerivedDependency` returns null on
@@ -879,7 +1113,7 @@ export function leadingGoodNoun(exports_) {
  * promised a record it is not, and the first consumer to read `.sentence` off it was
  * convicted for it. A key that lies about its own shape is a defect at the seam, not at
  * the call site.
- * @returns {Readonly<{prosperityHeader: object|null, prosperityRung: object|null, foodTile: object|null, granaryTile: object|null, foodSecurityRung: object|null, incomeMix: object|null, criminalLine: object|null, tradeProfile: object|null, shadowEconomy: object|null, tradeFlow: object|null, exportPosture: object|null, terrainIdentity: object|null, economicStrengths: object|null, strategicValue: object|null, exploitation: object|null, catalogStanding: object|null, impairedService: object|null}>}
+ * @returns {Readonly<{prosperityHeader: object|null, prosperityRung: object|null, foodTile: object|null, granaryTile: object|null, foodSecurityRung: object|null, incomeMix: object|null, criminalLine: object|null, tradeProfile: object|null, shadowEconomy: object|null, tradeFlow: object|null, exportPosture: object|null, terrainIdentity: object|null, economicStrengths: object|null, strategicValue: object|null, exploitation: object|null, catalogStanding: object|null, impairedService: object|null, arcaneMarket: object|null, theocraticEconomy: object|null, hiddenHouse: object|null, famineSource: object|null, foodMeans: object|null, foodSources: object|null, foodOnProsperity: object|null, resourceCondition: object|null, criticalImport: object|null, incomeWeight: object|null, upstreamWeak: object|null}>}
  */
 export function economyStateProse(settlement, readings = {}, options = {}) {
   // F10 + F12: the walls and the five crisis dimensions answered once, from the defence and crisis readers (stateProseKernel law 5).
@@ -1004,6 +1238,39 @@ export function economyStateProse(settlement, readings = {}, options = {}) {
     ? { institution: properFill(text(readings.impairedInstitution)) }
     : null;
 
+  // ── W1 ECO CONSTRUCTION (2026-11-07): generation facts said, each lens at its block's own
+  // mount, each with its own slot bag where its slot means something else than the shared one.
+  const arcaneKey = arcaneMarketPoolKey(eco.safetyProfile?.flags);
+  const theocraticKey = theocraticEconomyPoolKey(eco.safetyProfile?.flags);
+  const hiddenRow = hiddenHouseRow(settlement?.institutions);
+  const hiddenKey = hiddenHousePoolKey(hiddenRow);
+  const foodRecord = eco.foodSecurity?.foodRecord || null;
+  const famineKey = famineSourcePoolKey(foodRecord);
+  const meansKey = foodMeansPoolKey(foodRecord, securityKey);
+  // The count is the food security's own `activeChainsCount` (W0 cause 4b: it now derives from
+  // the record's sources); the NAME is the record's largest source. They agree by construction.
+  const recordSources = Array.isArray(foodRecord?.foodSources) ? foodRecord.foodSources : null;
+  const chainsCount = Number(eco.foodSecurity?.activeChainsCount);
+  const sourcesKey = recordSources && (!Number.isFinite(chainsCount) || chainsCount === recordSources.length)
+    ? foodSourcesPoolKey(eco.foodSecurity?.foodRecord?.foodSources)
+    : null;
+  const foodProsperityKey = foodProsperityPoolKey(eco.foodSecurity?.prosperityMod);
+  const depletedRow = depletedResourceRow(analysis?.resourceConditions);
+  const conditionKey = resourceConditionPoolKey(depletedRow);
+  const criticalRow = criticalImportRow(analysis?.imports);
+  const criticalKey = criticalImportPoolKey(criticalRow);
+  const weightKey = incomeWeightPoolKey(eco.safetyProfile?.compound);
+  const upstreamNoun = weakUpstreamNoun(eco.activeChains);
+  const upstreamKey = upstreamWeakPoolKey(upstreamNoun);
+  // Each lens's own slot bag (the R-DST-ROLE rule the exploitation lens set): the slot means
+  // THIS lens's fact here, never the shared bag's leading export.
+  const hiddenSlots = hiddenKey ? { institution: properFill(text(hiddenRow?.name)) } : null;
+  const famineSlots = famineKey ? { good: FOOD_SOURCE_WORDS[text(foodRecord?.failedSource)] } : null;
+  const sourcesSlots = sourcesKey ? { good: FOOD_SOURCE_WORDS[text(recordSources?.[0])] } : null;
+  const conditionSlots = conditionKey ? { resource: bareCommonFill(text(depletedRow?.label).toLowerCase()) } : null;
+  const criticalSlots = criticalKey ? { good: criticalRow?.good, institution: criticalRow?.institution } : null;
+  const upstreamSlots = upstreamKey ? { chain: upstreamNoun } : null;
+
   return Object.freeze({
     prosperityHeader: headerKey
       ? legibilityRung(prosperity, line('DS-ECO-1', headerKey), headerDetail)
@@ -1069,5 +1336,17 @@ export function economyStateProse(settlement, readings = {}, options = {}) {
       ? commercialRung(line('DS-SUP-3', catalogKey))
       : null,
     impairedService: commercialRung(line('DS-SUP-3', impairedKey, impairedSlots)),
+    // W1 ECO construction lenses (2026-11-07), each drawn at its block's existing mount.
+    arcaneMarket: commercialRung(line('DS-ECO-6', arcaneKey)),
+    theocraticEconomy: commercialRung(line('DS-ECO-6', theocraticKey)),
+    hiddenHouse: commercialRung(line('DS-ECO-6', hiddenKey, hiddenSlots)),
+    famineSource: commercialRung(line('DS-ECO-9', famineKey, famineSlots)),
+    foodMeans: commercialRung(line('DS-ECO-9', meansKey)),
+    foodSources: commercialRung(line('DS-ECO-9', sourcesKey, sourcesSlots)),
+    foodOnProsperity: commercialRung(line('DS-ECO-8', foodProsperityKey)),
+    resourceCondition: commercialRung(line('DS-ECO-11', conditionKey, conditionSlots)),
+    criticalImport: commercialRung(line('DS-ECO-12', criticalKey, criticalSlots)),
+    incomeWeight: commercialRung(line('DS-ECO-12', weightKey)),
+    upstreamWeak: commercialRung(line('DS-SUP-2', upstreamKey, upstreamSlots)),
   });
 }

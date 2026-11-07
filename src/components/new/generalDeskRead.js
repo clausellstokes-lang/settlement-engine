@@ -324,6 +324,8 @@ export function generalDeskLines(settlement, options = {}) {
       siteLines: Object.freeze([
         line(GROUND_MOUNT, prose.overview.ground),
         line(MARKET_MOUNT, prose.overview.market),
+        line(MARKET_MOUNT, prose.overview.commerce),
+        line(MARKET_MOUNT, prose.overview.warehouses),
         line(INSTITUTIONS_MOUNT, prose.overview.institutions),
       ].filter(Boolean).map(siteClause)),
       situationLine: line(SITUATION_MOUNT, prose.overview.situation),

@@ -1173,6 +1173,31 @@ export function marketPoolKey(state) {
   return CORPUS['DS-GEN-13'].pools[key] ? key : null;
 }
 
+/**
+ * DS-GEN-13's commerce lens (W1 ECO construction C13, 2026-11-07): the commercial houses the
+ * live roster's booleans name (`economicState.compound.inst`), the strongest one said. A bank
+ * outranks a merchant guild, a merchant guild outranks craft guilds alone, and a bare market
+ * speaks only with none of the three. No commercial house at all is silence (NO-MARKET says it).
+ * @param {{hasMarket?: unknown, hasGuild?: unknown, hasMerchantGuild?: unknown, hasBank?: unknown}|null|undefined} inst
+ * @returns {string|null}
+ */
+export function commercePoolKey(inst) {
+  if (inst?.hasBank === true) return 'COMMERCE: a bank';
+  if (inst?.hasMerchantGuild === true) return 'COMMERCE: a merchant guild, no bank';
+  if (inst?.hasGuild === true) return 'COMMERCE: craft guilds, no merchant guild';
+  if (inst?.hasMarket === true) return 'COMMERCE: a market, no guild';
+  return null;
+}
+
+/**
+ * DS-GEN-13's warehouses clause (R-W3: a customer fact gets a reader; one clause, only when true).
+ * @param {{hasWarehouse?: unknown}|null|undefined} inst
+ * @returns {string|null}
+ */
+export function warehousesPoolKey(inst) {
+  return inst?.hasWarehouse === true ? 'WAREHOUSES' : null;
+}
+
 // ── DS-GEN-17 · Overview/Power › The company the town keeps ─────────────────────────
 
 /**
@@ -1644,6 +1669,8 @@ export function populationDirectionPoolKey(trend, tradeRouteAccess) {
  *   warnings: ReadonlyArray<LegibilityRung|null>,
  *   ground: LegibilityRung|null,
  *   market: LegibilityRung|null,
+ *   commerce: LegibilityRung|null,
+ *   warehouses: LegibilityRung|null,
  *   institutions: LegibilityRung|null,
  *   notableConnection: ReadonlyArray<LegibilityRung|null>,
  *   populationDirection: LegibilityRung|null,
@@ -1675,6 +1702,8 @@ export const GENERAL_STATE_PROSE_SILENT = Object.freeze({
     warnings: Object.freeze([]),
     ground: null,
     market: null,
+    commerce: null,
+    warehouses: null,
     institutions: null,
     notableConnection: Object.freeze([]),
     populationDirection: null,
@@ -2019,6 +2048,8 @@ export function generalStateProse(settlement, readings = {}, options = {}) {
       warnings,
       ground: rung('DS-GEN-12', groundPoolKey(readings.terrainType), ''),
       market: rung('DS-GEN-13', marketPoolKey(readings), ''),
+      commerce: rung('DS-GEN-13', commercePoolKey(readings.inst), ''),
+      warehouses: rung('DS-GEN-13', warehousesPoolKey(readings.inst), ''),
       institutions: rung('DS-GEN-17', institutionsPoolKey(readings.inst, settlement), ''),
       // DS-REL-2's two lenses at ONE position: the tie the town names first, then how much
       // of its roll this town's own conditions made. The connection line leads because the

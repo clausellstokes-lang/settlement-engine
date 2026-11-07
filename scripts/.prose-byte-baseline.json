@@ -61,14 +61,14 @@
       "ceilingGzip": 108482
     },
     "src/data/dossierStateProse/economy.generated.js": {
-      "raw": 141754,
-      "gzip": 21311,
+      "raw": 165709,
+      "gzip": 24590,
       "ceilingRaw": 393810,
       "ceilingGzip": 87513
     },
     "src/data/dossierStateProse/general.generated.js": {
-      "raw": 272147,
-      "gzip": 36445,
+      "raw": 278983,
+      "gzip": 37388,
       "ceilingRaw": 796761,
       "ceilingGzip": 177058
     },
@@ -109,8 +109,8 @@
       "ceilingGzip": 6751
     },
     "src/data/dossierRelations.generated.js": {
-      "raw": 28236,
-      "gzip": 2661,
+      "raw": 28249,
+      "gzip": 2664,
       "ceilingRaw": 43888,
       "ceilingGzip": 9753
     }
@@ -307,6 +307,30 @@
       "toRaw": 94103,
       "gzipAfter": 15113,
       "reason": "+341 B raw (gzip level 9: 15,067 -> 15,113), one commit: DS-CND-1 ARCHETYPE: boom gains v4 `[street · crisis: any]`, reading only the archetype and the name, so a keyed boom has a printable line under any crisis (v1-v3 each deny hunger, threat and indebted). Projected through `node scripts/generate-dossier-state-prose.mjs`; `--check` exit 0."
+    },
+    {
+      "car": "W1 ECO CONSTRUCTION (2026-11-07, WIRING-RULINGS R-W1/R-W3/R-W9; ODQ §934.105): fourteen generation facts said in DS-ECO-6/-8/-9/-11/-12, DS-SUP-2 (mounted) and DS-GEN-13",
+      "leaf": "src/data/dossierStateProse/economy.generated.js",
+      "fromRaw": 141754,
+      "toRaw": 165709,
+      "gzipAfter": 24590,
+      "reason": "+23955 B raw (gzip level 9: 21311 -> 24590), one commit: 26 new pools (74 variants) authored in the state annex with their key functions on the economy and general desks; projected through node scripts/generate-dossier-state-prose.mjs; --check exit 0."
+    },
+    {
+      "car": "W1 ECO CONSTRUCTION (2026-11-07, WIRING-RULINGS R-W1/R-W3/R-W9; ODQ §934.105): fourteen generation facts said in DS-ECO-6/-8/-9/-11/-12, DS-SUP-2 (mounted) and DS-GEN-13",
+      "leaf": "src/data/dossierStateProse/general.generated.js",
+      "fromRaw": 272147,
+      "toRaw": 278983,
+      "gzipAfter": 37388,
+      "reason": "+6836 B raw (gzip level 9: 36445 -> 37388), one commit: 26 new pools (74 variants) authored in the state annex with their key functions on the economy and general desks; projected through node scripts/generate-dossier-state-prose.mjs; --check exit 0."
+    },
+    {
+      "car": "W1 ECO CONSTRUCTION (2026-11-07, WIRING-RULINGS R-W1/R-W3/R-W9; ODQ §934.105): fourteen generation facts said in DS-ECO-6/-8/-9/-11/-12, DS-SUP-2 (mounted) and DS-GEN-13",
+      "leaf": "src/data/dossierRelations.generated.js",
+      "fromRaw": 28236,
+      "toRaw": 28249,
+      "gzipAfter": 2664,
+      "reason": "+13 B raw (gzip level 9: 2661 -> 2664), one commit: 26 new pools (74 variants) authored in the state annex with their key functions on the economy and general desks; projected through node scripts/generate-dossier-state-prose.mjs; --check exit 0."
     }
   ],
   "ceilingTransfersNewLeaves": [

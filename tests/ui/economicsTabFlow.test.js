@@ -942,7 +942,10 @@ describe('DeskLines — the name props reach the real call sites, non-vacuously'
     const daily = readFileSync(join(HERE, '../../src/components/new/tabs/DailyLifeTab.jsx'), 'utf8');
     const services = readFileSync(join(HERE, '../../src/components/new/tabs/ServicesTab.jsx'), 'utf8');
     expect(econ).toContain('mount="economics.exportPosture" settlementName={s?.name} tier={s?.tier} rungs={[deskProse.exportPosture]}');
-    expect(daily).toContain('mount="daily_life.standingOfLiving" settlementName={r?.name} tier={r?.tier} rungs={[deskProse.prosperityRung]}');
+    // W1 ECO (2026-11-07): the standing-of-living site spells its mount as a const too (a second
+    // single-rung draw, food's grip on prosperity, shares the position), so the arm reads the rung lists.
+    expect(daily).toContain('mount={STANDING_MOUNT} settlementName={r?.name} tier={r?.tier} rungs={[deskProse.prosperityRung]}');
+    expect(daily).toContain('rungs={[deskProse.foodOnProsperity]}');
     // ⚠ THE SERVICES SITE SPELLS ITS MOUNT AS A CONST, and the reason is the mount registry's
     // own reachability arm: that id may appear ONCE as a whole string literal under
     // src/components, and this tab now draws the position at two places. So the assertion is

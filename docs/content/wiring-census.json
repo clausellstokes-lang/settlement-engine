@@ -2,13 +2,13 @@
   "schema": "wiring-census/1",
   "stamp": {
     "files": {
-      "src/domain/display/stateProse/generalStateProse.js": "a1d82168bffd08d6aec168b0fd51b4b7ed21fbf67c6f30b2aec8832064e29267",
+      "src/domain/display/stateProse/generalStateProse.js": "b8006aa1cf5644aa6a2fafa5cee8312a09fabeb35bea41a2a727a6c475b0ce1f",
       "src/domain/display/stateProse/powerStateProse.js": "11c913c83fa1e88d5f75d5415f8723936acf9aae37d6465a87b1ad3cb4d21e7b",
-      "src/domain/display/stateProse/economyStateProse.js": "d2bfe8cafa209803f26c83fde83534a7ba45230010ff87c33bd4ac52d831b924",
+      "src/domain/display/stateProse/economyStateProse.js": "4338681a6ebb687315187094bf06893b8d07b3b8a9d7a4c4f03f5eea2c01d3bb",
       "src/domain/display/stateProse/defenseStateProse.js": "6ebbed0ca4e9125607fde9443b16d4da328cc1481f711f25a22b5d384cec3ce7",
       "src/domain/display/stateProse/stressorsStateProse.js": "13c7f383882acf5bb48267feb4302ced6b9798cec2575470903f1aa88205600d",
       "src/domain/display/stateProse/warFaithStateProse.js": "f1972add38589ee55369fb06e4a5e0a8f90c4d966bf703d4367a3cdca52d6aac",
-      "src/domain/display/stateProse/dossierMounts.js": "b8466ea80b09292247baf73e1ab1660c6863362cd623b3b98e002e5ef9fb1f57"
+      "src/domain/display/stateProse/dossierMounts.js": "a5f0b201447378df2171a850093e175ece4025bdd43c5f1ce12687b2210aa43f"
     },
     "candidateLeaves": {
       "src/domain/display/stateProse/defenseStateProseCandidates.js": "b4833f55274b040dc5627b0eedafe7f98f508cec73ac829ce213adabe8c3e96c",
@@ -21,24 +21,24 @@
     "producerIndexFiles": 1300
   },
   "totals": {
-    "pools": 709,
+    "pools": 735,
     "blocks": 68,
-    "variants": 2344,
-    "resolved": 341,
-    "unresolved": 368,
-    "resolvedWithPredicate": 208,
-    "resolvedWithCleanPredicate": 208,
-    "keyFunctions": 118,
-    "keyFunctionsConsulted": 118,
-    "keyTables": 33,
-    "slotless": 65,
-    "bagless": 140,
-    "predicatesOverUnreadFields": 100,
+    "variants": 2418,
+    "resolved": 368,
+    "unresolved": 367,
+    "resolvedWithPredicate": 220,
+    "resolvedWithCleanPredicate": 220,
+    "keyFunctions": 131,
+    "keyFunctionsConsulted": 131,
+    "keyTables": 34,
+    "slotless": 67,
+    "bagless": 133,
+    "predicatesOverUnreadFields": 108,
     "syntheticTableFields": 100,
     "tiers": {
-      "MISSING": 34,
-      "THIN": 482,
-      "COVERED": 227,
+      "MISSING": 35,
+      "THIN": 502,
+      "COVERED": 233,
       "MISSING-AT-TIER": 45
     },
     "tierSilences": 352,
@@ -46,32 +46,32 @@
     "narrowsRefused": 0,
     "narrowedRows": 0,
     "covertRows": 4,
-    "objectClassed": 99,
-    "mountedRows": 567,
+    "objectClassed": 108,
+    "mountedRows": 600,
     "absent": {
-      "measured": 373,
+      "measured": 430,
       "default": 3,
-      "not-produced": 61,
+      "not-produced": 71,
       "method-call": 18
     },
-    "zeroK": 49,
-    "kExecutable": 341,
-    "kNotExecutable": 368,
-    "branchGrainRows": 311,
-    "functionGrainRows": 398,
-    "customReachableRows": 21,
+    "zeroK": 61,
+    "kExecutable": 368,
+    "kNotExecutable": 367,
+    "branchGrainRows": 334,
+    "functionGrainRows": 401,
+    "customReachableRows": 23,
     "relationRows": 165,
     "relationRowsJoinable": 0,
     "ratifiedAliases": 3,
     "tableRungRowsWithoutAbsence": 100,
     "modifierEligibleFactsByTab": [
       [
-        "viability",
+        "economics",
         40
       ],
       [
-        "economics",
-        39
+        "viability",
+        40
       ],
       [
         "history",
@@ -91,15 +91,15 @@
       ],
       [
         "resources",
-        12
+        13
       ],
       [
         "daily_life",
-        12
+        13
       ],
       [
         "services",
-        10
+        11
       ],
       [
         "power",
@@ -118,12 +118,12 @@
         5
       ]
     ],
-    "sourceLicensedRows": 114,
+    "sourceLicensedRows": 118,
     "sourceOfficeRows": 3,
-    "sourceUnresolvedRows": 592,
+    "sourceUnresolvedRows": 614,
     "sourceTwoSourceRows": 10,
     "modifierRows": 0,
-    "declaredColumnRows": 709,
+    "declaredColumnRows": 735,
     "tablePools": 50
   },
   "rows": [
@@ -9668,6 +9668,7 @@
         "access",
         "complexity",
         "good",
+        "institution",
         "season",
         "settlement"
       ],
@@ -9746,6 +9747,7 @@
         "access",
         "complexity",
         "good",
+        "institution",
         "season",
         "settlement"
       ],
@@ -9822,6 +9824,7 @@
         "access",
         "complexity",
         "good",
+        "institution",
         "season",
         "settlement"
       ],
@@ -9886,6 +9889,306 @@
       "lineDeclares": {
         "colour": 3,
         "no organised crime": 1
+      },
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-ECO-6",
+      "pool": "FLAG: arcaneBlackMarket",
+      "slotsFilled": [
+        "access",
+        "complexity",
+        "good",
+        "institution",
+        "season",
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 3,
+      "grammars": 1,
+      "predicate": [],
+      "branchReads": [],
+      "fieldsRead": [
+        "eco.safetyProfile.flags",
+        "eco.safetyProfile.flags.arcaneBlackMarket"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "arcaneMarketPoolKey",
+      "rung": "literal",
+      "reads": [
+        "eco.safetyProfile.flags",
+        "eco.safetyProfile.flags.arcaneBlackMarket"
+      ],
+      "readsGrain": "function",
+      "narrowed": false,
+      "absent": {
+        "eco.safetyProfile.flags": "measured",
+        "eco.safetyProfile.flags.arcaneBlackMarket": "measured"
+      },
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "economics.shadowEconomy"
+      ],
+      "attach": [],
+      "k": 1,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "watch",
+        "kinds": [
+          "watch"
+        ],
+        "fields": {
+          "eco.safetyProfile.flags": "watch",
+          "eco.safetyProfile.flags.arcaneBlackMarket": "watch"
+        },
+        "holder": null,
+        "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
+        "standing": "LICENSED",
+        "twoSource": false,
+        "stateOrgan": true
+      },
+      "declares": [],
+      "lineDeclares": {
+        "colour": 3
+      },
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-ECO-6",
+      "pool": "FLAG: theocraticEconomy",
+      "slotsFilled": [
+        "access",
+        "complexity",
+        "good",
+        "institution",
+        "season",
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 3,
+      "grammars": 1,
+      "predicate": [],
+      "branchReads": [],
+      "fieldsRead": [
+        "eco.safetyProfile.flags",
+        "eco.safetyProfile.flags.theocraticEconomy"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "theocraticEconomyPoolKey",
+      "rung": "literal",
+      "reads": [
+        "eco.safetyProfile.flags",
+        "eco.safetyProfile.flags.theocraticEconomy"
+      ],
+      "readsGrain": "function",
+      "narrowed": false,
+      "absent": {
+        "eco.safetyProfile.flags": "measured",
+        "eco.safetyProfile.flags.theocraticEconomy": "measured"
+      },
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "economics.shadowEconomy"
+      ],
+      "attach": [],
+      "k": 1,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "watch",
+        "kinds": [
+          "watch"
+        ],
+        "fields": {
+          "eco.safetyProfile.flags": "watch",
+          "eco.safetyProfile.flags.theocraticEconomy": "watch"
+        },
+        "holder": null,
+        "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
+        "standing": "LICENSED",
+        "twoSource": false,
+        "stateOrgan": true
+      },
+      "declares": [],
+      "lineDeclares": {
+        "colour": 3
+      },
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-ECO-6",
+      "pool": "FACET: an underground house",
+      "slotsFilled": [
+        "access",
+        "complexity",
+        "good",
+        "institution",
+        "season",
+        "settlement"
+      ],
+      "slotsNamed": [
+        "institution",
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 2,
+      "grammars": 2,
+      "predicate": [
+        {
+          "field": "hiddenRow.facets.subterranean",
+          "op": "truthy",
+          "value": "(no literal)"
+        }
+      ],
+      "branchReads": [
+        "hiddenRow",
+        "hiddenRow.facets.subterranean"
+      ],
+      "fieldsRead": [
+        "hiddenRow",
+        "hiddenRow.facets.clandestine",
+        "hiddenRow.facets.subterranean"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "hiddenHousePoolKey",
+      "rung": "literal",
+      "reads": [
+        "hiddenRow",
+        "hiddenRow.facets.subterranean"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "hiddenRow": "not-produced",
+        "hiddenRow.facets.subterranean": "measured"
+      },
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "economics.shadowEconomy"
+      ],
+      "attach": [],
+      "k": 1,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "hiddenRow": "",
+          "hiddenRow.facets.subterranean": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {
+        "colour": 2
+      },
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-ECO-6",
+      "pool": "FACET: a clandestine house",
+      "slotsFilled": [
+        "access",
+        "complexity",
+        "good",
+        "institution",
+        "season",
+        "settlement"
+      ],
+      "slotsNamed": [
+        "institution",
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 2,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "hiddenRow.facets.clandestine",
+          "op": "truthy",
+          "value": "(no literal)"
+        }
+      ],
+      "branchReads": [
+        "hiddenRow",
+        "hiddenRow.facets.clandestine",
+        "hiddenRow.facets.subterranean"
+      ],
+      "fieldsRead": [
+        "hiddenRow",
+        "hiddenRow.facets.clandestine",
+        "hiddenRow.facets.subterranean"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "hiddenHousePoolKey",
+      "rung": "literal",
+      "reads": [
+        "hiddenRow",
+        "hiddenRow.facets.clandestine",
+        "hiddenRow.facets.subterranean"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "hiddenRow": "not-produced",
+        "hiddenRow.facets.clandestine": "not-produced",
+        "hiddenRow.facets.subterranean": "measured"
+      },
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "economics.shadowEconomy"
+      ],
+      "attach": [],
+      "k": 0,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "hiddenRow": "",
+          "hiddenRow.facets.clandestine": "",
+          "hiddenRow.facets.subterranean": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {
+        "colour": 2
       },
       "undeclared": 0,
       "crisisScoped": false
@@ -10379,6 +10682,218 @@
       "crisisScoped": true
     },
     {
+      "block": "DS-ECO-8",
+      "pool": "FOOD AND PROSPERITY: hunger holds the town down",
+      "slotsFilled": [
+        "access",
+        "complexity",
+        "good",
+        "season",
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 3,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "eco.foodSecurity.prosperityMod.type",
+          "op": "===",
+          "value": "cap"
+        }
+      ],
+      "branchReads": [
+        "eco.foodSecurity.prosperityMod.type"
+      ],
+      "fieldsRead": [
+        "eco.foodSecurity.prosperityMod",
+        "eco.foodSecurity.prosperityMod.type"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "foodProsperityPoolKey",
+      "rung": "literal",
+      "reads": [
+        "eco.foodSecurity.prosperityMod.type"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "eco.foodSecurity.prosperityMod.type": "measured"
+      },
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "daily_life.standingOfLiving",
+        "economics.economyTile"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "eco.foodSecurity.prosperityMod.type": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 3,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-ECO-8",
+      "pool": "FOOD AND PROSPERITY: the cost of food weighs on the town",
+      "slotsFilled": [
+        "access",
+        "complexity",
+        "good",
+        "season",
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 3,
+      "grammars": 3,
+      "predicate": [
+        {
+          "field": "eco.foodSecurity.prosperityMod.type",
+          "op": "===",
+          "value": "penalty"
+        }
+      ],
+      "branchReads": [
+        "eco.foodSecurity.prosperityMod.type"
+      ],
+      "fieldsRead": [
+        "eco.foodSecurity.prosperityMod",
+        "eco.foodSecurity.prosperityMod.type"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "foodProsperityPoolKey",
+      "rung": "literal",
+      "reads": [
+        "eco.foodSecurity.prosperityMod.type"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "eco.foodSecurity.prosperityMod.type": "measured"
+      },
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "daily_life.standingOfLiving",
+        "economics.economyTile"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "eco.foodSecurity.prosperityMod.type": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 3,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-ECO-8",
+      "pool": "FOOD AND PROSPERITY: full stores lift the town",
+      "slotsFilled": [
+        "access",
+        "complexity",
+        "good",
+        "season",
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 3,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "eco.foodSecurity.prosperityMod.type",
+          "op": "===",
+          "value": "bonus"
+        }
+      ],
+      "branchReads": [
+        "eco.foodSecurity.prosperityMod.type"
+      ],
+      "fieldsRead": [
+        "eco.foodSecurity.prosperityMod",
+        "eco.foodSecurity.prosperityMod.type"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "foodProsperityPoolKey",
+      "rung": "literal",
+      "reads": [
+        "eco.foodSecurity.prosperityMod.type"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "eco.foodSecurity.prosperityMod.type": "measured"
+      },
+      "covert": false,
+      "objectClasses": [
+        "store"
+      ],
+      "objectClass": "store",
+      "sites": [
+        "daily_life.standingOfLiving",
+        "economics.economyTile"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "eco.foodSecurity.prosperityMod.type": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 3,
+      "crisisScoped": false
+    },
+    {
       "block": "DS-ECO-9",
       "pool": "SURPLUS",
       "slotsFilled": [
@@ -10565,16 +11080,36 @@
       "variants": 4,
       "grammars": 2,
       "predicate": [],
-      "branchReads": [],
-      "fieldsRead": [],
-      "status": "WIRING-UNRESOLVED",
-      "reason": "no pool-key function returns this key as a literal, no template of one binds it, and no module-level key table names it",
-      "keyFunction": "",
-      "rung": "none",
-      "reads": [],
-      "readsGrain": "function",
+      "branchReads": [
+        "foodRecord",
+        "foodRecord.magicPct",
+        "foodRecord.normalImportPct",
+        "securityKey"
+      ],
+      "fieldsRead": [
+        "foodRecord",
+        "foodRecord.magicPct",
+        "foodRecord.normalImportPct",
+        "securityKey"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "foodMeansPoolKey",
+      "rung": "literal",
+      "reads": [
+        "foodRecord",
+        "foodRecord.magicPct",
+        "foodRecord.normalImportPct",
+        "securityKey"
+      ],
+      "readsGrain": "branch",
       "narrowed": false,
-      "absent": {},
+      "absent": {
+        "foodRecord": "measured",
+        "foodRecord.magicPct": "measured",
+        "foodRecord.normalImportPct": "measured",
+        "securityKey": "not-produced"
+      },
       "covert": false,
       "objectClasses": [
         "market"
@@ -10584,13 +11119,18 @@
         "economics.foodSecurity"
       ],
       "attach": [],
-      "k": null,
+      "k": -1,
       "rateBp": 4010,
       "departure": null,
       "source": {
         "kind": "",
         "kinds": [],
-        "fields": {},
+        "fields": {
+          "foodRecord": "",
+          "foodRecord.magicPct": "",
+          "foodRecord.normalImportPct": "",
+          "securityKey": ""
+        },
         "holder": null,
         "holderReason": "no mapping row resolves any field this pool reads",
         "standing": "SOURCE-UNRESOLVED",
@@ -10877,25 +11417,543 @@
       "crisisScoped": false
     },
     {
+      "block": "DS-ECO-9",
+      "pool": "ACTIVE FAMINE: the failed source, most of the harvest",
+      "slotsFilled": [
+        "access",
+        "complexity",
+        "good",
+        "season",
+        "settlement"
+      ],
+      "slotsNamed": [
+        "good",
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 3,
+      "grammars": 1,
+      "predicate": [],
+      "branchReads": [
+        "foodRecord",
+        "foodRecord.band",
+        "foodRecord.failedSource"
+      ],
+      "fieldsRead": [
+        "foodRecord",
+        "foodRecord.band",
+        "foodRecord.failedSource",
+        "foodRecord.famineCutPct"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "famineSourcePoolKey",
+      "rung": "literal",
+      "reads": [
+        "foodRecord",
+        "foodRecord.band",
+        "foodRecord.failedSource"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "foodRecord": "measured",
+        "foodRecord.band": "measured",
+        "foodRecord.failedSource": "measured"
+      },
+      "covert": false,
+      "objectClasses": [
+        "store"
+      ],
+      "objectClass": "store",
+      "sites": [
+        "economics.foodSecurity"
+      ],
+      "attach": [],
+      "k": 0,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "foodRecord": "",
+          "foodRecord.band": "",
+          "foodRecord.failedSource": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 3,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-ECO-9",
+      "pool": "ACTIVE FAMINE: the failed source, part of the harvest",
+      "slotsFilled": [
+        "access",
+        "complexity",
+        "good",
+        "season",
+        "settlement"
+      ],
+      "slotsNamed": [
+        "good",
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 3,
+      "grammars": 1,
+      "predicate": [],
+      "branchReads": [
+        "foodRecord",
+        "foodRecord.band",
+        "foodRecord.failedSource"
+      ],
+      "fieldsRead": [
+        "foodRecord",
+        "foodRecord.band",
+        "foodRecord.failedSource",
+        "foodRecord.famineCutPct"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "famineSourcePoolKey",
+      "rung": "literal",
+      "reads": [
+        "foodRecord",
+        "foodRecord.band",
+        "foodRecord.failedSource"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "foodRecord": "measured",
+        "foodRecord.band": "measured",
+        "foodRecord.failedSource": "measured"
+      },
+      "covert": false,
+      "objectClasses": [
+        "store"
+      ],
+      "objectClass": "store",
+      "sites": [
+        "economics.foodSecurity"
+      ],
+      "attach": [],
+      "k": 0,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "foodRecord": "",
+          "foodRecord.band": "",
+          "foodRecord.failedSource": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 3,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-ECO-9",
+      "pool": "HOW THE NEED IS MET: much of it brought in",
+      "slotsFilled": [
+        "access",
+        "complexity",
+        "good",
+        "season",
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 3,
+      "grammars": 2,
+      "predicate": [
+        {
+          "field": "securityKey",
+          "op": "!==",
+          "value": "IMPORT-DEPENDENT"
+        }
+      ],
+      "branchReads": [
+        "foodRecord",
+        "foodRecord.magicPct",
+        "foodRecord.normalImportPct",
+        "securityKey"
+      ],
+      "fieldsRead": [
+        "foodRecord",
+        "foodRecord.magicPct",
+        "foodRecord.normalImportPct",
+        "securityKey"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "foodMeansPoolKey",
+      "rung": "literal",
+      "reads": [
+        "foodRecord",
+        "foodRecord.magicPct",
+        "foodRecord.normalImportPct",
+        "securityKey"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "foodRecord": "measured",
+        "foodRecord.magicPct": "measured",
+        "foodRecord.normalImportPct": "measured",
+        "securityKey": "not-produced"
+      },
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "economics.foodSecurity"
+      ],
+      "attach": [],
+      "k": -1,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "foodRecord": "",
+          "foodRecord.magicPct": "",
+          "foodRecord.normalImportPct": "",
+          "securityKey": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 3,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-ECO-9",
+      "pool": "HOW THE NEED IS MET: part of it by magic",
+      "slotsFilled": [
+        "access",
+        "complexity",
+        "good",
+        "season",
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 3,
+      "grammars": 1,
+      "predicate": [],
+      "branchReads": [
+        "foodRecord",
+        "foodRecord.magicPct"
+      ],
+      "fieldsRead": [
+        "foodRecord",
+        "foodRecord.magicPct",
+        "foodRecord.normalImportPct",
+        "securityKey"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "foodMeansPoolKey",
+      "rung": "literal",
+      "reads": [
+        "foodRecord",
+        "foodRecord.magicPct"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "foodRecord": "measured",
+        "foodRecord.magicPct": "measured"
+      },
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "economics.foodSecurity"
+      ],
+      "attach": [],
+      "k": 1,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "foodRecord": "",
+          "foodRecord.magicPct": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 3,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-ECO-9",
+      "pool": "FOOD SOURCES: one source",
+      "slotsFilled": [
+        "access",
+        "complexity",
+        "good",
+        "season",
+        "settlement"
+      ],
+      "slotsNamed": [
+        "good",
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 3,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "eco.foodSecurity.foodRecord.foodSources.length",
+          "op": "===",
+          "value": "1"
+        }
+      ],
+      "branchReads": [
+        "eco.foodSecurity.foodRecord.foodSources",
+        "eco.foodSecurity.foodRecord.foodSources.length"
+      ],
+      "fieldsRead": [
+        "eco.foodSecurity.foodRecord.foodSources",
+        "eco.foodSecurity.foodRecord.foodSources.length"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "foodSourcesPoolKey",
+      "rung": "literal",
+      "reads": [
+        "eco.foodSecurity.foodRecord.foodSources",
+        "eco.foodSecurity.foodRecord.foodSources.length"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "eco.foodSecurity.foodRecord.foodSources": "measured",
+        "eco.foodSecurity.foodRecord.foodSources.length": "measured"
+      },
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "economics.foodSecurity"
+      ],
+      "attach": [],
+      "k": 1,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "eco.foodSecurity.foodRecord.foodSources": "",
+          "eco.foodSecurity.foodRecord.foodSources.length": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 3,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-ECO-9",
+      "pool": "FOOD SOURCES: several, the largest named",
+      "slotsFilled": [
+        "access",
+        "complexity",
+        "good",
+        "season",
+        "settlement"
+      ],
+      "slotsNamed": [
+        "good",
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 3,
+      "grammars": 2,
+      "predicate": [],
+      "branchReads": [
+        "eco.foodSecurity.foodRecord.foodSources",
+        "eco.foodSecurity.foodRecord.foodSources.length"
+      ],
+      "fieldsRead": [
+        "eco.foodSecurity.foodRecord.foodSources",
+        "eco.foodSecurity.foodRecord.foodSources.length"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "foodSourcesPoolKey",
+      "rung": "literal",
+      "reads": [
+        "eco.foodSecurity.foodRecord.foodSources",
+        "eco.foodSecurity.foodRecord.foodSources.length"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "eco.foodSecurity.foodRecord.foodSources": "measured",
+        "eco.foodSecurity.foodRecord.foodSources.length": "measured"
+      },
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "economics.foodSecurity"
+      ],
+      "attach": [],
+      "k": 1,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "eco.foodSecurity.foodRecord.foodSources": "",
+          "eco.foodSecurity.foodRecord.foodSources.length": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 3,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-ECO-9",
+      "pool": "FOOD SOURCES: four or more",
+      "slotsFilled": [
+        "access",
+        "complexity",
+        "good",
+        "season",
+        "settlement"
+      ],
+      "slotsNamed": [
+        "good",
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 3,
+      "grammars": 2,
+      "predicate": [],
+      "branchReads": [
+        "eco.foodSecurity.foodRecord.foodSources",
+        "eco.foodSecurity.foodRecord.foodSources.length"
+      ],
+      "fieldsRead": [
+        "eco.foodSecurity.foodRecord.foodSources",
+        "eco.foodSecurity.foodRecord.foodSources.length"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "foodSourcesPoolKey",
+      "rung": "literal",
+      "reads": [
+        "eco.foodSecurity.foodRecord.foodSources",
+        "eco.foodSecurity.foodRecord.foodSources.length"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "eco.foodSecurity.foodRecord.foodSources": "measured",
+        "eco.foodSecurity.foodRecord.foodSources.length": "measured"
+      },
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "economics.foodSecurity"
+      ],
+      "attach": [],
+      "k": 1,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "eco.foodSecurity.foodRecord.foodSources": "",
+          "eco.foodSecurity.foodRecord.foodSources.length": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 3,
+      "crisisScoped": false
+    },
+    {
       "block": "DS-SUP-2",
       "pool": "STABLE",
-      "slotsFilled": [],
+      "slotsFilled": [
+        "access",
+        "chain",
+        "complexity",
+        "good",
+        "season",
+        "settlement"
+      ],
       "slotsNamed": [
         "chain",
         "settlement"
       ],
-      "slotsWithoutProvider": [
-        "chain",
-        "settlement"
-      ],
-      "hasBag": false,
+      "slotsWithoutProvider": [],
+      "hasBag": true,
       "variants": 3,
       "grammars": 2,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
       "status": "WIRING-UNRESOLVED",
-      "reason": "the block is UNMOUNTED (dossierMounts.UNMOUNTED_BLOCKS): no composer reads it, so no predicate selects this pool",
+      "reason": "no pool-key function returns this key as a literal, no template of one binds it, and no module-level key table names it",
       "keyFunction": "",
       "rung": "none",
       "reads": [],
@@ -10905,7 +11963,9 @@
       "covert": false,
       "objectClasses": [],
       "objectClass": null,
-      "sites": [],
+      "sites": [
+        "economics.upstreamSupply"
+      ],
       "attach": [],
       "k": null,
       "rateBp": null,
@@ -10927,21 +11987,26 @@
     {
       "block": "DS-SUP-2",
       "pool": "STRAINED",
-      "slotsFilled": [],
+      "slotsFilled": [
+        "access",
+        "chain",
+        "complexity",
+        "good",
+        "season",
+        "settlement"
+      ],
       "slotsNamed": [
         "chain"
       ],
-      "slotsWithoutProvider": [
-        "chain"
-      ],
-      "hasBag": false,
+      "slotsWithoutProvider": [],
+      "hasBag": true,
       "variants": 3,
       "grammars": 2,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
       "status": "WIRING-UNRESOLVED",
-      "reason": "the block is UNMOUNTED (dossierMounts.UNMOUNTED_BLOCKS): no composer reads it, so no predicate selects this pool",
+      "reason": "no pool-key function returns this key as a literal, no template of one binds it, and no module-level key table names it",
       "keyFunction": "",
       "rung": "none",
       "reads": [],
@@ -10951,7 +12016,9 @@
       "covert": false,
       "objectClasses": [],
       "objectClass": null,
-      "sites": [],
+      "sites": [
+        "economics.upstreamSupply"
+      ],
       "attach": [],
       "k": null,
       "rateBp": null,
@@ -10973,21 +12040,26 @@
     {
       "block": "DS-SUP-2",
       "pool": "SCARCE",
-      "slotsFilled": [],
+      "slotsFilled": [
+        "access",
+        "chain",
+        "complexity",
+        "good",
+        "season",
+        "settlement"
+      ],
       "slotsNamed": [
         "chain"
       ],
-      "slotsWithoutProvider": [
-        "chain"
-      ],
-      "hasBag": false,
+      "slotsWithoutProvider": [],
+      "hasBag": true,
       "variants": 3,
       "grammars": 1,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
       "status": "WIRING-UNRESOLVED",
-      "reason": "the block is UNMOUNTED (dossierMounts.UNMOUNTED_BLOCKS): no composer reads it, so no predicate selects this pool",
+      "reason": "no pool-key function returns this key as a literal, no template of one binds it, and no module-level key table names it",
       "keyFunction": "",
       "rung": "none",
       "reads": [],
@@ -10997,7 +12069,9 @@
       "covert": false,
       "objectClasses": [],
       "objectClass": null,
-      "sites": [],
+      "sites": [
+        "economics.upstreamSupply"
+      ],
       "attach": [],
       "k": null,
       "rateBp": null,
@@ -11019,23 +12093,29 @@
     {
       "block": "DS-SUP-2",
       "pool": "BLOCKED",
-      "slotsFilled": [],
+      "slotsFilled": [
+        "access",
+        "chain",
+        "complexity",
+        "good",
+        "season",
+        "settlement"
+      ],
       "slotsNamed": [
         "chain",
         "institution"
       ],
       "slotsWithoutProvider": [
-        "chain",
         "institution"
       ],
-      "hasBag": false,
+      "hasBag": true,
       "variants": 3,
       "grammars": 2,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
       "status": "WIRING-UNRESOLVED",
-      "reason": "the block is UNMOUNTED (dossierMounts.UNMOUNTED_BLOCKS): no composer reads it, so no predicate selects this pool",
+      "reason": "no pool-key function returns this key as a literal, no template of one binds it, and no module-level key table names it",
       "keyFunction": "",
       "rung": "none",
       "reads": [],
@@ -11045,7 +12125,9 @@
       "covert": false,
       "objectClasses": [],
       "objectClass": null,
-      "sites": [],
+      "sites": [
+        "economics.upstreamSupply"
+      ],
       "attach": [],
       "k": null,
       "rateBp": null,
@@ -11067,25 +12149,30 @@
     {
       "block": "DS-SUP-2",
       "pool": "CAPTURED",
-      "slotsFilled": [],
+      "slotsFilled": [
+        "access",
+        "chain",
+        "complexity",
+        "good",
+        "season",
+        "settlement"
+      ],
       "slotsNamed": [
         "chain",
         "faction",
         "settlement"
       ],
       "slotsWithoutProvider": [
-        "chain",
-        "faction",
-        "settlement"
+        "faction"
       ],
-      "hasBag": false,
+      "hasBag": true,
       "variants": 3,
       "grammars": 2,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
       "status": "WIRING-UNRESOLVED",
-      "reason": "the block is UNMOUNTED (dossierMounts.UNMOUNTED_BLOCKS): no composer reads it, so no predicate selects this pool",
+      "reason": "no pool-key function returns this key as a literal, no template of one binds it, and no module-level key table names it",
       "keyFunction": "",
       "rung": "none",
       "reads": [],
@@ -11095,7 +12182,9 @@
       "covert": false,
       "objectClasses": [],
       "objectClass": null,
-      "sites": [],
+      "sites": [
+        "economics.upstreamSupply"
+      ],
       "attach": [],
       "k": null,
       "rateBp": null,
@@ -11117,21 +12206,26 @@
     {
       "block": "DS-SUP-2",
       "pool": "SUBSTITUTED",
-      "slotsFilled": [],
+      "slotsFilled": [
+        "access",
+        "chain",
+        "complexity",
+        "good",
+        "season",
+        "settlement"
+      ],
       "slotsNamed": [
         "chain"
       ],
-      "slotsWithoutProvider": [
-        "chain"
-      ],
-      "hasBag": false,
+      "slotsWithoutProvider": [],
+      "hasBag": true,
       "variants": 3,
       "grammars": 1,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
       "status": "WIRING-UNRESOLVED",
-      "reason": "the block is UNMOUNTED (dossierMounts.UNMOUNTED_BLOCKS): no composer reads it, so no predicate selects this pool",
+      "reason": "no pool-key function returns this key as a literal, no template of one binds it, and no module-level key table names it",
       "keyFunction": "",
       "rung": "none",
       "reads": [],
@@ -11141,7 +12235,9 @@
       "covert": false,
       "objectClasses": [],
       "objectClass": null,
-      "sites": [],
+      "sites": [
+        "economics.upstreamSupply"
+      ],
       "attach": [],
       "k": null,
       "rateBp": null,
@@ -11166,21 +12262,26 @@
     {
       "block": "DS-SUP-2",
       "pool": "COLLAPSING",
-      "slotsFilled": [],
+      "slotsFilled": [
+        "access",
+        "chain",
+        "complexity",
+        "good",
+        "season",
+        "settlement"
+      ],
       "slotsNamed": [
         "chain"
       ],
-      "slotsWithoutProvider": [
-        "chain"
-      ],
-      "hasBag": false,
+      "slotsWithoutProvider": [],
+      "hasBag": true,
       "variants": 3,
       "grammars": 1,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
       "status": "WIRING-UNRESOLVED",
-      "reason": "the block is UNMOUNTED (dossierMounts.UNMOUNTED_BLOCKS): no composer reads it, so no predicate selects this pool",
+      "reason": "no pool-key function returns this key as a literal, no template of one binds it, and no module-level key table names it",
       "keyFunction": "",
       "rung": "none",
       "reads": [],
@@ -11190,7 +12291,9 @@
       "covert": false,
       "objectClasses": [],
       "objectClass": null,
-      "sites": [],
+      "sites": [
+        "economics.upstreamSupply"
+      ],
       "attach": [],
       "k": null,
       "rateBp": null,
@@ -11207,6 +12310,68 @@
       "declares": [],
       "lineDeclares": {},
       "undeclared": 3,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-SUP-2",
+      "pool": "UPSTREAM WEAK: a chain the town's work draws on is failing",
+      "slotsFilled": [
+        "access",
+        "chain",
+        "complexity",
+        "good",
+        "season",
+        "settlement"
+      ],
+      "slotsNamed": [
+        "chain",
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 2,
+      "grammars": 1,
+      "predicate": [],
+      "branchReads": [],
+      "fieldsRead": [
+        "upstreamNoun"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "upstreamWeakPoolKey",
+      "rung": "literal",
+      "reads": [
+        "upstreamNoun"
+      ],
+      "readsGrain": "function",
+      "narrowed": false,
+      "absent": {
+        "upstreamNoun": "not-produced"
+      },
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "economics.upstreamSupply"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "upstreamNoun": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 2,
       "crisisScoped": false
     },
     {
@@ -13023,12 +14188,163 @@
       "crisisScoped": false
     },
     {
+      "block": "DS-ECO-11",
+      "pool": "RESOURCE CONDITION: worked out, recovers in time",
+      "slotsFilled": [
+        "access",
+        "complexity",
+        "good",
+        "institution",
+        "resource",
+        "season",
+        "settlement"
+      ],
+      "slotsNamed": [
+        "resource",
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 2,
+      "grammars": 2,
+      "predicate": [],
+      "branchReads": [
+        "depletedRow",
+        "depletedRow.condition",
+        "depletedRow.recoveryMode"
+      ],
+      "fieldsRead": [
+        "depletedRow",
+        "depletedRow.condition",
+        "depletedRow.recoveryMode"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "resourceConditionPoolKey",
+      "rung": "literal",
+      "reads": [
+        "depletedRow",
+        "depletedRow.condition",
+        "depletedRow.recoveryMode"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "depletedRow": "not-produced",
+        "depletedRow.condition": "measured",
+        "depletedRow.recoveryMode": "measured"
+      },
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "resources.groundAndWorkings"
+      ],
+      "attach": [],
+      "k": 0,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "depletedRow": "",
+          "depletedRow.condition": "",
+          "depletedRow.recoveryMode": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 2,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-ECO-11",
+      "pool": "RESOURCE CONDITION: worked out, recovers only with work",
+      "slotsFilled": [
+        "access",
+        "complexity",
+        "good",
+        "institution",
+        "resource",
+        "season",
+        "settlement"
+      ],
+      "slotsNamed": [
+        "resource",
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 2,
+      "grammars": 1,
+      "predicate": [],
+      "branchReads": [
+        "depletedRow",
+        "depletedRow.condition",
+        "depletedRow.recoveryMode"
+      ],
+      "fieldsRead": [
+        "depletedRow",
+        "depletedRow.condition",
+        "depletedRow.recoveryMode"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "resourceConditionPoolKey",
+      "rung": "literal",
+      "reads": [
+        "depletedRow",
+        "depletedRow.condition",
+        "depletedRow.recoveryMode"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "depletedRow": "not-produced",
+        "depletedRow.condition": "measured",
+        "depletedRow.recoveryMode": "measured"
+      },
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "resources.groundAndWorkings"
+      ],
+      "attach": [],
+      "k": 0,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "depletedRow": "",
+          "depletedRow.condition": "",
+          "depletedRow.recoveryMode": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 2,
+      "crisisScoped": false
+    },
+    {
       "block": "DS-ECO-12",
       "pool": "INCOME MIX: one source carries the town",
       "slotsFilled": [
         "access",
         "complexity",
         "good",
+        "institution",
         "season",
         "settlement"
       ],
@@ -13113,6 +14429,7 @@
         "access",
         "complexity",
         "good",
+        "institution",
         "season",
         "settlement"
       ],
@@ -13194,6 +14511,7 @@
         "access",
         "complexity",
         "good",
+        "institution",
         "season",
         "settlement"
       ],
@@ -13269,6 +14587,7 @@
         "access",
         "complexity",
         "good",
+        "institution",
         "season",
         "settlement"
       ],
@@ -13342,6 +14661,7 @@
         "access",
         "complexity",
         "good",
+        "institution",
         "season",
         "settlement"
       ],
@@ -13412,6 +14732,7 @@
         "access",
         "complexity",
         "good",
+        "institution",
         "season",
         "settlement"
       ],
@@ -13508,6 +14829,7 @@
         "access",
         "complexity",
         "good",
+        "institution",
         "season",
         "settlement"
       ],
@@ -13594,6 +14916,7 @@
         "access",
         "complexity",
         "good",
+        "institution",
         "season",
         "settlement"
       ],
@@ -13680,6 +15003,7 @@
         "access",
         "complexity",
         "good",
+        "institution",
         "season",
         "settlement"
       ],
@@ -13770,6 +15094,7 @@
         "access",
         "complexity",
         "good",
+        "institution",
         "season",
         "settlement"
       ],
@@ -13853,6 +15178,309 @@
       "declares": [],
       "lineDeclares": {},
       "undeclared": 3,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-ECO-12",
+      "pool": "CRITICAL IMPORT: a house needs what the land lacks",
+      "slotsFilled": [
+        "access",
+        "complexity",
+        "good",
+        "institution",
+        "season",
+        "settlement"
+      ],
+      "slotsNamed": [
+        "good",
+        "institution",
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 2,
+      "grammars": 2,
+      "predicate": [
+        {
+          "field": "criticalRow.institution",
+          "op": "truthy",
+          "value": "(no literal)"
+        }
+      ],
+      "branchReads": [
+        "criticalRow",
+        "criticalRow.institution"
+      ],
+      "fieldsRead": [
+        "criticalRow",
+        "criticalRow.institution",
+        "criticalRow.reason"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "criticalImportPoolKey",
+      "rung": "literal",
+      "reads": [
+        "criticalRow",
+        "criticalRow.institution"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "criticalRow": "not-produced",
+        "criticalRow.institution": "measured"
+      },
+      "covert": false,
+      "objectClasses": [
+        "market"
+      ],
+      "objectClass": "market",
+      "sites": [
+        "economics.commercialProfile"
+      ],
+      "attach": [],
+      "k": 1,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "criticalRow": "",
+          "criticalRow.institution": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 2,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-ECO-12",
+      "pool": "CRITICAL IMPORT: the land cannot give it",
+      "slotsFilled": [
+        "access",
+        "complexity",
+        "good",
+        "institution",
+        "season",
+        "settlement"
+      ],
+      "slotsNamed": [
+        "good",
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 2,
+      "grammars": 2,
+      "predicate": [],
+      "branchReads": [
+        "criticalRow",
+        "criticalRow.institution",
+        "criticalRow.reason"
+      ],
+      "fieldsRead": [
+        "criticalRow",
+        "criticalRow.institution",
+        "criticalRow.reason"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "criticalImportPoolKey",
+      "rung": "literal",
+      "reads": [
+        "criticalRow",
+        "criticalRow.institution",
+        "criticalRow.reason"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "criticalRow": "not-produced",
+        "criticalRow.institution": "measured",
+        "criticalRow.reason": "measured"
+      },
+      "covert": false,
+      "objectClasses": [
+        "market"
+      ],
+      "objectClass": "market",
+      "sites": [
+        "economics.commercialProfile"
+      ],
+      "attach": [],
+      "k": 0,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "criticalRow": "",
+          "criticalRow.institution": "",
+          "criticalRow.reason": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 2,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-ECO-12",
+      "pool": "INCOME WEIGHT: the religious houses",
+      "slotsFilled": [
+        "access",
+        "complexity",
+        "good",
+        "institution",
+        "season",
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 2,
+      "grammars": 1,
+      "predicate": [],
+      "branchReads": [
+        "eco.safetyProfile.compound",
+        "eco.safetyProfile.compound.religionInfluence"
+      ],
+      "fieldsRead": [
+        "eco.safetyProfile.compound",
+        "eco.safetyProfile.compound.magicInfluence",
+        "eco.safetyProfile.compound.religionInfluence"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "incomeWeightPoolKey",
+      "rung": "literal",
+      "reads": [
+        "eco.safetyProfile.compound",
+        "eco.safetyProfile.compound.religionInfluence"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "eco.safetyProfile.compound": "measured",
+        "eco.safetyProfile.compound.religionInfluence": "measured"
+      },
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "economics.commercialProfile"
+      ],
+      "attach": [],
+      "k": 1,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "watch",
+        "kinds": [
+          "watch"
+        ],
+        "fields": {
+          "eco.safetyProfile.compound": "watch",
+          "eco.safetyProfile.compound.religionInfluence": "watch"
+        },
+        "holder": null,
+        "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
+        "standing": "LICENSED",
+        "twoSource": false,
+        "stateOrgan": true
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 2,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-ECO-12",
+      "pool": "INCOME WEIGHT: the practice of magic",
+      "slotsFilled": [
+        "access",
+        "complexity",
+        "good",
+        "institution",
+        "season",
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 2,
+      "grammars": 2,
+      "predicate": [],
+      "branchReads": [
+        "eco.safetyProfile.compound",
+        "eco.safetyProfile.compound.magicInfluence",
+        "eco.safetyProfile.compound.religionInfluence"
+      ],
+      "fieldsRead": [
+        "eco.safetyProfile.compound",
+        "eco.safetyProfile.compound.magicInfluence",
+        "eco.safetyProfile.compound.religionInfluence"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "incomeWeightPoolKey",
+      "rung": "literal",
+      "reads": [
+        "eco.safetyProfile.compound",
+        "eco.safetyProfile.compound.magicInfluence",
+        "eco.safetyProfile.compound.religionInfluence"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "eco.safetyProfile.compound": "measured",
+        "eco.safetyProfile.compound.magicInfluence": "measured",
+        "eco.safetyProfile.compound.religionInfluence": "measured"
+      },
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "economics.commercialProfile"
+      ],
+      "attach": [],
+      "k": 0,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "watch",
+        "kinds": [
+          "watch"
+        ],
+        "fields": {
+          "eco.safetyProfile.compound": "watch",
+          "eco.safetyProfile.compound.magicInfluence": "watch",
+          "eco.safetyProfile.compound.religionInfluence": "watch"
+        },
+        "holder": null,
+        "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
+        "standing": "LICENSED",
+        "twoSource": false,
+        "stateOrgan": true
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 2,
       "crisisScoped": false
     },
     {
@@ -24360,6 +25988,389 @@
         "institution: tavern": 2
       },
       "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-GEN-13",
+      "pool": "COMMERCE: a bank",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 4,
+      "grammars": 2,
+      "predicate": [
+        {
+          "field": "readings.inst.hasBank",
+          "op": "===",
+          "value": "true"
+        }
+      ],
+      "branchReads": [
+        "readings.inst",
+        "readings.inst.hasBank"
+      ],
+      "fieldsRead": [
+        "readings.inst",
+        "readings.inst.hasBank",
+        "readings.inst.hasGuild",
+        "readings.inst.hasMarket",
+        "readings.inst.hasMerchantGuild"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "commercePoolKey",
+      "rung": "literal",
+      "reads": [
+        "readings.inst",
+        "readings.inst.hasBank"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "readings.inst": "measured",
+        "readings.inst.hasBank": "measured"
+      },
+      "covert": false,
+      "objectClasses": [
+        "market"
+      ],
+      "objectClass": "market",
+      "sites": [
+        "overview.market"
+      ],
+      "attach": [],
+      "k": 1,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "readings.inst": "",
+          "readings.inst.hasBank": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 4,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-GEN-13",
+      "pool": "COMMERCE: a merchant guild, no bank",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 4,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "readings.inst.hasMerchantGuild",
+          "op": "===",
+          "value": "true"
+        }
+      ],
+      "branchReads": [
+        "readings.inst",
+        "readings.inst.hasBank",
+        "readings.inst.hasMerchantGuild"
+      ],
+      "fieldsRead": [
+        "readings.inst",
+        "readings.inst.hasBank",
+        "readings.inst.hasGuild",
+        "readings.inst.hasMarket",
+        "readings.inst.hasMerchantGuild"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "commercePoolKey",
+      "rung": "literal",
+      "reads": [
+        "readings.inst",
+        "readings.inst.hasBank",
+        "readings.inst.hasMerchantGuild"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "readings.inst": "measured",
+        "readings.inst.hasBank": "measured",
+        "readings.inst.hasMerchantGuild": "measured"
+      },
+      "covert": false,
+      "objectClasses": [
+        "market",
+        "craft"
+      ],
+      "objectClass": "market",
+      "sites": [
+        "overview.market"
+      ],
+      "attach": [],
+      "k": 0,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "readings.inst": "",
+          "readings.inst.hasBank": "",
+          "readings.inst.hasMerchantGuild": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 4,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-GEN-13",
+      "pool": "COMMERCE: craft guilds, no merchant guild",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 4,
+      "grammars": 2,
+      "predicate": [
+        {
+          "field": "readings.inst.hasGuild",
+          "op": "===",
+          "value": "true"
+        }
+      ],
+      "branchReads": [
+        "readings.inst",
+        "readings.inst.hasBank",
+        "readings.inst.hasGuild",
+        "readings.inst.hasMerchantGuild"
+      ],
+      "fieldsRead": [
+        "readings.inst",
+        "readings.inst.hasBank",
+        "readings.inst.hasGuild",
+        "readings.inst.hasMarket",
+        "readings.inst.hasMerchantGuild"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "commercePoolKey",
+      "rung": "literal",
+      "reads": [
+        "readings.inst",
+        "readings.inst.hasBank",
+        "readings.inst.hasGuild",
+        "readings.inst.hasMerchantGuild"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "readings.inst": "measured",
+        "readings.inst.hasBank": "measured",
+        "readings.inst.hasGuild": "measured",
+        "readings.inst.hasMerchantGuild": "measured"
+      },
+      "covert": false,
+      "objectClasses": [
+        "market",
+        "craft"
+      ],
+      "objectClass": "market",
+      "sites": [
+        "overview.market"
+      ],
+      "attach": [],
+      "k": -1,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "readings.inst": "",
+          "readings.inst.hasBank": "",
+          "readings.inst.hasGuild": "",
+          "readings.inst.hasMerchantGuild": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 4,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-GEN-13",
+      "pool": "COMMERCE: a market, no guild",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 4,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "readings.inst.hasMarket",
+          "op": "===",
+          "value": "true"
+        }
+      ],
+      "branchReads": [
+        "readings.inst",
+        "readings.inst.hasBank",
+        "readings.inst.hasGuild",
+        "readings.inst.hasMarket",
+        "readings.inst.hasMerchantGuild"
+      ],
+      "fieldsRead": [
+        "readings.inst",
+        "readings.inst.hasBank",
+        "readings.inst.hasGuild",
+        "readings.inst.hasMarket",
+        "readings.inst.hasMerchantGuild"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "commercePoolKey",
+      "rung": "literal",
+      "reads": [
+        "readings.inst",
+        "readings.inst.hasBank",
+        "readings.inst.hasGuild",
+        "readings.inst.hasMarket",
+        "readings.inst.hasMerchantGuild"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "readings.inst": "measured",
+        "readings.inst.hasBank": "measured",
+        "readings.inst.hasGuild": "measured",
+        "readings.inst.hasMarket": "measured",
+        "readings.inst.hasMerchantGuild": "measured"
+      },
+      "covert": false,
+      "objectClasses": [
+        "market",
+        "craft"
+      ],
+      "objectClass": "market",
+      "sites": [
+        "overview.market"
+      ],
+      "attach": [],
+      "k": -2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "readings.inst": "",
+          "readings.inst.hasBank": "",
+          "readings.inst.hasGuild": "",
+          "readings.inst.hasMarket": "",
+          "readings.inst.hasMerchantGuild": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 4,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-GEN-13",
+      "pool": "WAREHOUSES",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 4,
+      "grammars": 2,
+      "predicate": [],
+      "branchReads": [],
+      "fieldsRead": [
+        "readings.inst",
+        "readings.inst.hasWarehouse"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "warehousesPoolKey",
+      "rung": "literal",
+      "reads": [
+        "readings.inst",
+        "readings.inst.hasWarehouse"
+      ],
+      "readsGrain": "function",
+      "narrowed": false,
+      "absent": {
+        "readings.inst": "measured",
+        "readings.inst.hasWarehouse": "measured"
+      },
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "overview.market"
+      ],
+      "attach": [],
+      "k": 1,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "readings.inst": "",
+          "readings.inst.hasWarehouse": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 4,
       "crisisScoped": false
     },
     {
@@ -43996,6 +46007,17 @@
       ]
     },
     {
+      "fact": "criticalRow.institution",
+      "pools": [
+        "DS-ECO-12 :: CRITICAL IMPORT: a house needs what the land lacks"
+      ],
+      "variants": 2,
+      "grammars": 2,
+      "blocks": [
+        "DS-ECO-12"
+      ]
+    },
+    {
       "fact": "disasterRowSituation(granary, hospital, church) (via DISASTER_ROW_POOL in defenseStateProse.js)",
       "pools": [
         "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
@@ -44019,6 +46041,30 @@
       "grammars": 3,
       "blocks": [
         "DS-WAR-2"
+      ]
+    },
+    {
+      "fact": "eco.foodSecurity.foodRecord.foodSources.length",
+      "pools": [
+        "DS-ECO-9 :: FOOD SOURCES: one source"
+      ],
+      "variants": 3,
+      "grammars": 1,
+      "blocks": [
+        "DS-ECO-9"
+      ]
+    },
+    {
+      "fact": "eco.foodSecurity.prosperityMod.type",
+      "pools": [
+        "DS-ECO-8 :: FOOD AND PROSPERITY: hunger holds the town down",
+        "DS-ECO-8 :: FOOD AND PROSPERITY: the cost of food weighs on the town",
+        "DS-ECO-8 :: FOOD AND PROSPERITY: full stores lift the town"
+      ],
+      "variants": 9,
+      "grammars": 5,
+      "blocks": [
+        "DS-ECO-8"
       ]
     },
     {
@@ -44198,6 +46244,28 @@
       ]
     },
     {
+      "fact": "hiddenRow.facets.clandestine",
+      "pools": [
+        "DS-ECO-6 :: FACET: a clandestine house"
+      ],
+      "variants": 2,
+      "grammars": 1,
+      "blocks": [
+        "DS-ECO-6"
+      ]
+    },
+    {
+      "fact": "hiddenRow.facets.subterranean",
+      "pools": [
+        "DS-ECO-6 :: FACET: an underground house"
+      ],
+      "variants": 2,
+      "grammars": 2,
+      "blocks": [
+        "DS-ECO-6"
+      ]
+    },
+    {
       "fact": "invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in defenseStateProse.js)",
       "pools": [
         "DS-DEF-2 :: Invasion & War: walls AND professional garrison",
@@ -44373,6 +46441,50 @@
       ]
     },
     {
+      "fact": "readings.inst.hasBank",
+      "pools": [
+        "DS-GEN-13 :: COMMERCE: a bank"
+      ],
+      "variants": 4,
+      "grammars": 2,
+      "blocks": [
+        "DS-GEN-13"
+      ]
+    },
+    {
+      "fact": "readings.inst.hasGuild",
+      "pools": [
+        "DS-GEN-13 :: COMMERCE: craft guilds, no merchant guild"
+      ],
+      "variants": 4,
+      "grammars": 2,
+      "blocks": [
+        "DS-GEN-13"
+      ]
+    },
+    {
+      "fact": "readings.inst.hasMarket",
+      "pools": [
+        "DS-GEN-13 :: COMMERCE: a market, no guild"
+      ],
+      "variants": 4,
+      "grammars": 1,
+      "blocks": [
+        "DS-GEN-13"
+      ]
+    },
+    {
+      "fact": "readings.inst.hasMerchantGuild",
+      "pools": [
+        "DS-GEN-13 :: COMMERCE: a merchant guild, no bank"
+      ],
+      "variants": 4,
+      "grammars": 1,
+      "blocks": [
+        "DS-GEN-13"
+      ]
+    },
+    {
       "fact": "readings.viable",
       "pools": [
         "DS-GEN-3 :: economicViability.viable: true",
@@ -44409,6 +46521,17 @@
       "grammars": 5,
       "blocks": [
         "DS-DEF-2"
+      ]
+    },
+    {
+      "fact": "securityKey",
+      "pools": [
+        "DS-ECO-9 :: HOW THE NEED IS MET: much of it brought in"
+      ],
+      "variants": 3,
+      "grammars": 2,
+      "blocks": [
+        "DS-ECO-9"
       ]
     },
     {
@@ -44776,6 +46899,24 @@
         "modifierMounts": []
       },
       {
+        "field": "criticalRow",
+        "mountsSpine": 1,
+        "mountsModifier": 0,
+        "spineTabs": [
+          "economics"
+        ],
+        "modifierMounts": []
+      },
+      {
+        "field": "depletedRow",
+        "mountsSpine": 1,
+        "mountsModifier": 0,
+        "spineTabs": [
+          "resources"
+        ],
+        "modifierMounts": []
+      },
+      {
         "field": "disasterRowSituation(granary, hospital, church) (via DISASTER_ROW_POOL in defenseStateProse",
         "mountsSpine": 1,
         "mountsModifier": 0,
@@ -44795,9 +46936,10 @@
       },
       {
         "field": "eco",
-        "mountsSpine": 3,
+        "mountsSpine": 5,
         "mountsModifier": 0,
         "spineTabs": [
+          "daily_life",
           "economics"
         ],
         "modifierMounts": []
@@ -44857,6 +46999,15 @@
         "modifierMounts": []
       },
       {
+        "field": "foodRecord",
+        "mountsSpine": 1,
+        "mountsModifier": 0,
+        "spineTabs": [
+          "economics"
+        ],
+        "modifierMounts": []
+      },
+      {
         "field": "forces",
         "mountsSpine": 2,
         "mountsModifier": 0,
@@ -44890,6 +47041,15 @@
         "mountsModifier": 0,
         "spineTabs": [
           "overview"
+        ],
+        "modifierMounts": []
+      },
+      {
+        "field": "hiddenRow",
+        "mountsSpine": 1,
+        "mountsModifier": 0,
+        "spineTabs": [
+          "economics"
         ],
         "modifierMounts": []
       },
@@ -45117,7 +47277,7 @@
       {
         "field": "readings.ancientRuin",
         "mountsSpine": 0,
-        "mountsModifier": 30,
+        "mountsModifier": 31,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -45130,6 +47290,7 @@
           "economics.seasonTile",
           "economics.shadowEconomy",
           "economics.tradeFlow",
+          "economics.upstreamSupply",
           "history.founded",
           "history.identity",
           "history.record",
@@ -45177,7 +47338,7 @@
       {
         "field": "readings.clockIds",
         "mountsSpine": 0,
-        "mountsModifier": 30,
+        "mountsModifier": 31,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -45190,6 +47351,7 @@
           "economics.seasonTile",
           "economics.shadowEconomy",
           "economics.tradeFlow",
+          "economics.upstreamSupply",
           "history.founded",
           "history.identity",
           "history.record",
@@ -45215,7 +47377,7 @@
       {
         "field": "readings.coherenceNotes",
         "mountsSpine": 0,
-        "mountsModifier": 30,
+        "mountsModifier": 31,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -45228,6 +47390,7 @@
           "economics.seasonTile",
           "economics.shadowEconomy",
           "economics.tradeFlow",
+          "economics.upstreamSupply",
           "history.founded",
           "history.identity",
           "history.record",
@@ -45275,7 +47438,7 @@
       {
         "field": "readings.conflicts",
         "mountsSpine": 0,
-        "mountsModifier": 30,
+        "mountsModifier": 31,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -45288,6 +47451,7 @@
           "economics.seasonTile",
           "economics.shadowEconomy",
           "economics.tradeFlow",
+          "economics.upstreamSupply",
           "history.founded",
           "history.identity",
           "history.record",
@@ -45328,7 +47492,7 @@
       {
         "field": "readings.criticalIssueCount",
         "mountsSpine": 1,
-        "mountsModifier": 28,
+        "mountsModifier": 29,
         "spineTabs": [
           "viability"
         ],
@@ -45343,6 +47507,7 @@
           "economics.seasonTile",
           "economics.shadowEconomy",
           "economics.tradeFlow",
+          "economics.upstreamSupply",
           "history.founded",
           "history.identity",
           "history.record",
@@ -45366,7 +47531,7 @@
       {
         "field": "readings.crossEngagements",
         "mountsSpine": 0,
-        "mountsModifier": 30,
+        "mountsModifier": 31,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -45379,6 +47544,7 @@
           "economics.seasonTile",
           "economics.shadowEconomy",
           "economics.tradeFlow",
+          "economics.upstreamSupply",
           "history.founded",
           "history.identity",
           "history.record",
@@ -45434,11 +47600,12 @@
       {
         "field": "readings.exportPosture",
         "mountsSpine": 1,
-        "mountsModifier": 2,
+        "mountsModifier": 3,
         "spineTabs": [
           "economics"
         ],
         "modifierMounts": [
+          "daily_life.standingOfLiving",
           "resources.groundAndWorkings",
           "services.catalogStanding"
         ]
@@ -45461,11 +47628,12 @@
       {
         "field": "readings.flowDrift",
         "mountsSpine": 1,
-        "mountsModifier": 2,
+        "mountsModifier": 3,
         "spineTabs": [
           "economics"
         ],
         "modifierMounts": [
+          "daily_life.standingOfLiving",
           "resources.groundAndWorkings",
           "services.catalogStanding"
         ]
@@ -45473,9 +47641,10 @@
       {
         "field": "readings.foodBalance",
         "mountsSpine": 0,
-        "mountsModifier": 32,
+        "mountsModifier": 34,
         "spineTabs": [],
         "modifierMounts": [
+          "daily_life.standingOfLiving",
           "economics.commercialProfile",
           "economics.craftReason",
           "economics.economyTile",
@@ -45486,6 +47655,7 @@
           "economics.seasonTile",
           "economics.shadowEconomy",
           "economics.tradeFlow",
+          "economics.upstreamSupply",
           "history.founded",
           "history.identity",
           "history.record",
@@ -45513,7 +47683,7 @@
       {
         "field": "readings.foodSecurityLabel",
         "mountsSpine": 0,
-        "mountsModifier": 30,
+        "mountsModifier": 31,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -45526,6 +47696,7 @@
           "economics.seasonTile",
           "economics.shadowEconomy",
           "economics.tradeFlow",
+          "economics.upstreamSupply",
           "history.founded",
           "history.identity",
           "history.record",
@@ -45551,7 +47722,7 @@
       {
         "field": "readings.govFaction",
         "mountsSpine": 0,
-        "mountsModifier": 30,
+        "mountsModifier": 31,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -45564,6 +47735,7 @@
           "economics.seasonTile",
           "economics.shadowEconomy",
           "economics.tradeFlow",
+          "economics.upstreamSupply",
           "history.founded",
           "history.identity",
           "history.record",
@@ -45589,7 +47761,7 @@
       {
         "field": "readings.governingName",
         "mountsSpine": 0,
-        "mountsModifier": 30,
+        "mountsModifier": 31,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -45602,6 +47774,7 @@
           "economics.seasonTile",
           "economics.shadowEconomy",
           "economics.tradeFlow",
+          "economics.upstreamSupply",
           "history.founded",
           "history.identity",
           "history.record",
@@ -45627,9 +47800,10 @@
       {
         "field": "readings.granaryOutlook",
         "mountsSpine": 0,
-        "mountsModifier": 12,
+        "mountsModifier": 14,
         "spineTabs": [],
         "modifierMounts": [
+          "daily_life.standingOfLiving",
           "economics.commercialProfile",
           "economics.craftReason",
           "economics.economyTile",
@@ -45640,6 +47814,7 @@
           "economics.seasonTile",
           "economics.shadowEconomy",
           "economics.tradeFlow",
+          "economics.upstreamSupply",
           "resources.groundAndWorkings",
           "services.catalogStanding"
         ]
@@ -45662,7 +47837,7 @@
       {
         "field": "readings.history",
         "mountsSpine": 0,
-        "mountsModifier": 30,
+        "mountsModifier": 31,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -45675,6 +47850,7 @@
           "economics.seasonTile",
           "economics.shadowEconomy",
           "economics.tradeFlow",
+          "economics.upstreamSupply",
           "history.founded",
           "history.identity",
           "history.record",
@@ -45700,7 +47876,7 @@
       {
         "field": "readings.hookCategories",
         "mountsSpine": 0,
-        "mountsModifier": 30,
+        "mountsModifier": 31,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -45713,6 +47889,7 @@
           "economics.seasonTile",
           "economics.shadowEconomy",
           "economics.tradeFlow",
+          "economics.upstreamSupply",
           "history.founded",
           "history.identity",
           "history.record",
@@ -45738,11 +47915,12 @@
       {
         "field": "readings.impairedInstitution",
         "mountsSpine": 1,
-        "mountsModifier": 11,
+        "mountsModifier": 13,
         "spineTabs": [
           "services"
         ],
         "modifierMounts": [
+          "daily_life.standingOfLiving",
           "economics.commercialProfile",
           "economics.craftReason",
           "economics.economyTile",
@@ -45753,13 +47931,14 @@
           "economics.seasonTile",
           "economics.shadowEconomy",
           "economics.tradeFlow",
+          "economics.upstreamSupply",
           "resources.groundAndWorkings"
         ]
       },
       {
         "field": "readings.inst",
-        "mountsSpine": 1,
-        "mountsModifier": 16,
+        "mountsSpine": 2,
+        "mountsModifier": 17,
         "spineTabs": [
           "overview"
         ],
@@ -45774,6 +47953,7 @@
           "economics.seasonTile",
           "economics.shadowEconomy",
           "economics.tradeFlow",
+          "economics.upstreamSupply",
           "history.founded",
           "history.identity",
           "history.record",
@@ -45802,7 +47982,7 @@
       {
         "field": "readings.lifecycleStatus",
         "mountsSpine": 0,
-        "mountsModifier": 30,
+        "mountsModifier": 31,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -45815,6 +47995,7 @@
           "economics.seasonTile",
           "economics.shadowEconomy",
           "economics.tradeFlow",
+          "economics.upstreamSupply",
           "history.founded",
           "history.identity",
           "history.record",
@@ -45840,7 +48021,7 @@
       {
         "field": "readings.neighbours",
         "mountsSpine": 0,
-        "mountsModifier": 30,
+        "mountsModifier": 31,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -45853,6 +48034,7 @@
           "economics.seasonTile",
           "economics.shadowEconomy",
           "economics.tradeFlow",
+          "economics.upstreamSupply",
           "history.founded",
           "history.identity",
           "history.record",
@@ -45878,11 +48060,12 @@
       {
         "field": "readings.notableAbsences",
         "mountsSpine": 1,
-        "mountsModifier": 11,
+        "mountsModifier": 13,
         "spineTabs": [
           "services"
         ],
         "modifierMounts": [
+          "daily_life.standingOfLiving",
           "economics.commercialProfile",
           "economics.craftReason",
           "economics.economyTile",
@@ -45893,6 +48076,7 @@
           "economics.seasonTile",
           "economics.shadowEconomy",
           "economics.tradeFlow",
+          "economics.upstreamSupply",
           "resources.groundAndWorkings"
         ]
       },
@@ -45929,7 +48113,7 @@
       {
         "field": "readings.populationTrend",
         "mountsSpine": 1,
-        "mountsModifier": 16,
+        "mountsModifier": 17,
         "spineTabs": [
           "overview"
         ],
@@ -45944,6 +48128,7 @@
           "economics.seasonTile",
           "economics.shadowEconomy",
           "economics.tradeFlow",
+          "economics.upstreamSupply",
           "history.founded",
           "history.identity",
           "history.record",
@@ -45994,7 +48179,7 @@
       {
         "field": "readings.prominentRelationship",
         "mountsSpine": 1,
-        "mountsModifier": 16,
+        "mountsModifier": 17,
         "spineTabs": [
           "overview"
         ],
@@ -46009,6 +48194,7 @@
           "economics.seasonTile",
           "economics.shadowEconomy",
           "economics.tradeFlow",
+          "economics.upstreamSupply",
           "history.founded",
           "history.identity",
           "history.record",
@@ -46020,7 +48206,7 @@
       {
         "field": "readings.prosperity",
         "mountsSpine": 0,
-        "mountsModifier": 30,
+        "mountsModifier": 31,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -46033,6 +48219,7 @@
           "economics.seasonTile",
           "economics.shadowEconomy",
           "economics.tradeFlow",
+          "economics.upstreamSupply",
           "history.founded",
           "history.identity",
           "history.record",
@@ -46058,7 +48245,7 @@
       {
         "field": "readings.readinessLabel",
         "mountsSpine": 0,
-        "mountsModifier": 30,
+        "mountsModifier": 31,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -46071,6 +48258,7 @@
           "economics.seasonTile",
           "economics.shadowEconomy",
           "economics.tradeFlow",
+          "economics.upstreamSupply",
           "history.founded",
           "history.identity",
           "history.record",
@@ -46096,7 +48284,7 @@
       {
         "field": "readings.recordClean",
         "mountsSpine": 1,
-        "mountsModifier": 28,
+        "mountsModifier": 29,
         "spineTabs": [
           "viability"
         ],
@@ -46111,6 +48299,7 @@
           "economics.seasonTile",
           "economics.shadowEconomy",
           "economics.tradeFlow",
+          "economics.upstreamSupply",
           "history.founded",
           "history.identity",
           "history.record",
@@ -46134,7 +48323,7 @@
       {
         "field": "readings.relationships",
         "mountsSpine": 1,
-        "mountsModifier": 16,
+        "mountsModifier": 17,
         "spineTabs": [
           "overview"
         ],
@@ -46149,6 +48338,7 @@
           "economics.seasonTile",
           "economics.shadowEconomy",
           "economics.tradeFlow",
+          "economics.upstreamSupply",
           "history.founded",
           "history.identity",
           "history.record",
@@ -46175,7 +48365,7 @@
       {
         "field": "readings.safetyLabel",
         "mountsSpine": 0,
-        "mountsModifier": 30,
+        "mountsModifier": 31,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -46188,6 +48378,7 @@
           "economics.seasonTile",
           "economics.shadowEconomy",
           "economics.tradeFlow",
+          "economics.upstreamSupply",
           "history.founded",
           "history.identity",
           "history.record",
@@ -46213,7 +48404,7 @@
       {
         "field": "readings.scores",
         "mountsSpine": 0,
-        "mountsModifier": 30,
+        "mountsModifier": 31,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -46226,6 +48417,7 @@
           "economics.seasonTile",
           "economics.shadowEconomy",
           "economics.tradeFlow",
+          "economics.upstreamSupply",
           "history.founded",
           "history.identity",
           "history.record",
@@ -46266,7 +48458,7 @@
       {
         "field": "readings.steadings",
         "mountsSpine": 0,
-        "mountsModifier": 30,
+        "mountsModifier": 31,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -46279,6 +48471,7 @@
           "economics.seasonTile",
           "economics.shadowEconomy",
           "economics.tradeFlow",
+          "economics.upstreamSupply",
           "history.founded",
           "history.identity",
           "history.record",
@@ -46319,7 +48512,7 @@
       {
         "field": "readings.structuralSuggestions",
         "mountsSpine": 1,
-        "mountsModifier": 16,
+        "mountsModifier": 17,
         "spineTabs": [
           "overview"
         ],
@@ -46334,6 +48527,7 @@
           "economics.seasonTile",
           "economics.shadowEconomy",
           "economics.tradeFlow",
+          "economics.upstreamSupply",
           "history.founded",
           "history.identity",
           "history.record",
@@ -46345,7 +48539,7 @@
       {
         "field": "readings.structuralViolations",
         "mountsSpine": 1,
-        "mountsModifier": 16,
+        "mountsModifier": 17,
         "spineTabs": [
           "overview"
         ],
@@ -46360,6 +48554,7 @@
           "economics.seasonTile",
           "economics.shadowEconomy",
           "economics.tradeFlow",
+          "economics.upstreamSupply",
           "history.founded",
           "history.identity",
           "history.record",
@@ -46371,7 +48566,7 @@
       {
         "field": "readings.terrainType",
         "mountsSpine": 0,
-        "mountsModifier": 30,
+        "mountsModifier": 31,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -46384,6 +48579,7 @@
           "economics.seasonTile",
           "economics.shadowEconomy",
           "economics.tradeFlow",
+          "economics.upstreamSupply",
           "history.founded",
           "history.identity",
           "history.record",
@@ -46409,7 +48605,7 @@
       {
         "field": "readings.tier",
         "mountsSpine": 1,
-        "mountsModifier": 16,
+        "mountsModifier": 17,
         "spineTabs": [
           "overview"
         ],
@@ -46424,6 +48620,7 @@
           "economics.seasonTile",
           "economics.shadowEconomy",
           "economics.tradeFlow",
+          "economics.upstreamSupply",
           "history.founded",
           "history.identity",
           "history.record",
@@ -46435,7 +48632,7 @@
       {
         "field": "readings.tradeRouteAccess",
         "mountsSpine": 2,
-        "mountsModifier": 16,
+        "mountsModifier": 17,
         "spineTabs": [
           "overview"
         ],
@@ -46450,6 +48647,7 @@
           "economics.seasonTile",
           "economics.shadowEconomy",
           "economics.tradeFlow",
+          "economics.upstreamSupply",
           "history.founded",
           "history.identity",
           "history.record",
@@ -46461,7 +48659,7 @@
       {
         "field": "readings.viable",
         "mountsSpine": 2,
-        "mountsModifier": 14,
+        "mountsModifier": 15,
         "spineTabs": [
           "overview",
           "viability"
@@ -46477,6 +48675,7 @@
           "economics.seasonTile",
           "economics.shadowEconomy",
           "economics.tradeFlow",
+          "economics.upstreamSupply",
           "history.founded",
           "history.identity",
           "history.record",
@@ -46567,13 +48766,23 @@
         "modifierMounts": []
       },
       {
+        "field": "securityKey",
+        "mountsSpine": 1,
+        "mountsModifier": 0,
+        "spineTabs": [
+          "economics"
+        ],
+        "modifierMounts": []
+      },
+      {
         "field": "settlement.config",
         "mountsSpine": 1,
-        "mountsModifier": 14,
+        "mountsModifier": 16,
         "spineTabs": [
           "defense"
         ],
         "modifierMounts": [
+          "daily_life.standingOfLiving",
           "economics.commercialProfile",
           "economics.craftReason",
           "economics.economyTile",
@@ -46584,6 +48793,7 @@
           "economics.seasonTile",
           "economics.shadowEconomy",
           "economics.tradeFlow",
+          "economics.upstreamSupply",
           "resources.groundAndWorkings",
           "services.catalogStanding",
           "viability.magicDependency",
@@ -46605,9 +48815,10 @@
       {
         "field": "settlement.economicState",
         "mountsSpine": 0,
-        "mountsModifier": 29,
+        "mountsModifier": 31,
         "spineTabs": [],
         "modifierMounts": [
+          "daily_life.standingOfLiving",
           "defense.armedForces",
           "defense.criminalStructure",
           "defense.militaryStatus",
@@ -46626,6 +48837,7 @@
           "economics.seasonTile",
           "economics.shadowEconomy",
           "economics.tradeFlow",
+          "economics.upstreamSupply",
           "power.blocs",
           "power.criminalUnderside",
           "power.factionLadder",
@@ -46642,11 +48854,12 @@
       {
         "field": "settlement.economicViability",
         "mountsSpine": 1,
-        "mountsModifier": 14,
+        "mountsModifier": 16,
         "spineTabs": [
           "defense"
         ],
         "modifierMounts": [
+          "daily_life.standingOfLiving",
           "economics.commercialProfile",
           "economics.craftReason",
           "economics.economyTile",
@@ -46657,6 +48870,7 @@
           "economics.seasonTile",
           "economics.shadowEconomy",
           "economics.tradeFlow",
+          "economics.upstreamSupply",
           "resources.groundAndWorkings",
           "services.catalogStanding",
           "viability.magicDependency",
@@ -46664,11 +48878,34 @@
         ]
       },
       {
-        "field": "settlement.name",
+        "field": "settlement.institutions",
         "mountsSpine": 0,
-        "mountsModifier": 54,
+        "mountsModifier": 14,
         "spineTabs": [],
         "modifierMounts": [
+          "daily_life.standingOfLiving",
+          "economics.commercialProfile",
+          "economics.craftReason",
+          "economics.economyTile",
+          "economics.exportPosture",
+          "economics.foodSecurity",
+          "economics.foodTile",
+          "economics.prosperityHeader",
+          "economics.seasonTile",
+          "economics.shadowEconomy",
+          "economics.tradeFlow",
+          "economics.upstreamSupply",
+          "resources.groundAndWorkings",
+          "services.catalogStanding"
+        ]
+      },
+      {
+        "field": "settlement.name",
+        "mountsSpine": 0,
+        "mountsModifier": 56,
+        "spineTabs": [],
+        "modifierMounts": [
+          "daily_life.standingOfLiving",
           "defense.armedForces",
           "defense.criminalStructure",
           "defense.militaryStatus",
@@ -46687,6 +48924,7 @@
           "economics.seasonTile",
           "economics.shadowEconomy",
           "economics.tradeFlow",
+          "economics.upstreamSupply",
           "faith.creedStanding",
           "faith.nicheRow",
           "faith.patronSeat",
@@ -46753,9 +48991,10 @@
       {
         "field": "settlement.resourceAnalysis",
         "mountsSpine": 0,
-        "mountsModifier": 22,
+        "mountsModifier": 24,
         "spineTabs": [],
         "modifierMounts": [
+          "daily_life.standingOfLiving",
           "defense.armedForces",
           "defense.criminalStructure",
           "defense.militaryStatus",
@@ -46774,6 +49013,7 @@
           "economics.seasonTile",
           "economics.shadowEconomy",
           "economics.tradeFlow",
+          "economics.upstreamSupply",
           "resources.groundAndWorkings",
           "services.catalogStanding",
           "viability.magicDependency",
@@ -46801,11 +49041,12 @@
       {
         "field": "settlement.tier",
         "mountsSpine": 1,
-        "mountsModifier": 14,
+        "mountsModifier": 16,
         "spineTabs": [
           "defense"
         ],
         "modifierMounts": [
+          "daily_life.standingOfLiving",
           "economics.commercialProfile",
           "economics.craftReason",
           "economics.economyTile",
@@ -46816,6 +49057,7 @@
           "economics.seasonTile",
           "economics.shadowEconomy",
           "economics.tradeFlow",
+          "economics.upstreamSupply",
           "resources.groundAndWorkings",
           "services.catalogStanding",
           "viability.magicDependency",
@@ -46958,6 +49200,15 @@
         "modifierMounts": []
       },
       {
+        "field": "upstreamNoun",
+        "mountsSpine": 1,
+        "mountsModifier": 0,
+        "spineTabs": [
+          "economics"
+        ],
+        "modifierMounts": []
+      },
+      {
         "field": "war",
         "mountsSpine": 1,
         "mountsModifier": 0,
@@ -46987,12 +49238,12 @@
     ],
     "byTab": [
       [
-        "viability",
+        "economics",
         40
       ],
       [
-        "economics",
-        39
+        "viability",
+        40
       ],
       [
         "history",
@@ -47012,15 +49263,15 @@
       ],
       [
         "resources",
-        12
+        13
       ],
       [
         "daily_life",
-        12
+        13
       ],
       [
         "services",
-        10
+        11
       ],
       [
         "power",
@@ -47121,17 +49372,17 @@
     },
     {
       "block": "DS-ECO-11",
-      "spines": 14,
-      "facts": 5,
+      "spines": 16,
+      "facts": 8,
       "spinesReachedBp": 10000,
-      "meanReachBp": 7429
+      "meanReachBp": 8125
     },
     {
       "block": "DS-ECO-12",
-      "spines": 10,
-      "facts": 9,
+      "spines": 14,
+      "facts": 15,
       "spinesReachedBp": 10000,
-      "meanReachBp": 5778
+      "meanReachBp": 7714
     },
     {
       "block": "DS-ECO-2",
@@ -47149,6 +49400,13 @@
     },
     {
       "block": "DS-ECO-6",
+      "spines": 7,
+      "facts": 7,
+      "spinesReachedBp": 10000,
+      "meanReachBp": 7551
+    },
+    {
+      "block": "DS-ECO-8",
       "spines": 3,
       "facts": 1,
       "spinesReachedBp": 0,
@@ -47156,10 +49414,10 @@
     },
     {
       "block": "DS-ECO-9",
-      "spines": 2,
-      "facts": 3,
-      "spinesReachedBp": 5000,
-      "meanReachBp": 1667
+      "spines": 10,
+      "facts": 11,
+      "spinesReachedBp": 10000,
+      "meanReachBp": 7545
     },
     {
       "block": "DS-FTH-1",
@@ -47198,10 +49456,10 @@
     },
     {
       "block": "DS-GEN-13",
-      "spines": 4,
-      "facts": 3,
-      "spinesReachedBp": 0,
-      "meanReachBp": 0
+      "spines": 9,
+      "facts": 9,
+      "spinesReachedBp": 10000,
+      "meanReachBp": 6543
     },
     {
       "block": "DS-GEN-14",
@@ -47363,6 +49621,13 @@
       "facts": 2,
       "spinesReachedBp": 10000,
       "meanReachBp": 5000
+    },
+    {
+      "block": "DS-SUP-2",
+      "spines": 1,
+      "facts": 1,
+      "spinesReachedBp": 0,
+      "meanReachBp": 0
     },
     {
       "block": "DS-SUP-3",
@@ -47922,10 +50187,10 @@
     },
     {
       "block": "DS-ECO-11",
-      "spines": 14,
-      "facts": 5,
+      "spines": 16,
+      "facts": 8,
       "spinesReachedBp": 10000,
-      "meanReachBp": 7429,
+      "meanReachBp": 8125,
       "byFact": [
         {
           "field": "analysis.economicStrengths",
@@ -47941,7 +50206,9 @@
             "EXPLOITATION: unexploited, exportValue: high",
             "EXPLOITATION: unexploited, exportValue: medium or low",
             "EXPLOITATION: partiallyExploited",
-            "EXPLOITATION: fullyExploited"
+            "EXPLOITATION: fullyExploited",
+            "RESOURCE CONDITION: worked out, recovers in time",
+            "RESOURCE CONDITION: worked out, recovers only with work"
           ]
         },
         {
@@ -47956,6 +50223,65 @@
             "TERRAIN: Desert",
             "ECONOMIC STRENGTHS: the roster is populated",
             "ECONOMIC STRENGTHS: none recorded",
+            "EXPLOITATION: unexploited, exportValue: high",
+            "EXPLOITATION: unexploited, exportValue: medium or low",
+            "EXPLOITATION: partiallyExploited",
+            "EXPLOITATION: fullyExploited",
+            "RESOURCE CONDITION: worked out, recovers in time",
+            "RESOURCE CONDITION: worked out, recovers only with work"
+          ]
+        },
+        {
+          "field": "depletedRow",
+          "attach": [
+            "TERRAIN: Coastal",
+            "TERRAIN: Plains",
+            "TERRAIN: Forest",
+            "TERRAIN: Hills",
+            "TERRAIN: Mountains",
+            "TERRAIN: River",
+            "TERRAIN: Desert",
+            "ECONOMIC STRENGTHS: the roster is populated",
+            "ECONOMIC STRENGTHS: none recorded",
+            "STRATEGIC VALUE: the generator's assessment, framed",
+            "EXPLOITATION: unexploited, exportValue: high",
+            "EXPLOITATION: unexploited, exportValue: medium or low",
+            "EXPLOITATION: partiallyExploited",
+            "EXPLOITATION: fullyExploited"
+          ]
+        },
+        {
+          "field": "depletedRow.condition",
+          "attach": [
+            "TERRAIN: Coastal",
+            "TERRAIN: Plains",
+            "TERRAIN: Forest",
+            "TERRAIN: Hills",
+            "TERRAIN: Mountains",
+            "TERRAIN: River",
+            "TERRAIN: Desert",
+            "ECONOMIC STRENGTHS: the roster is populated",
+            "ECONOMIC STRENGTHS: none recorded",
+            "STRATEGIC VALUE: the generator's assessment, framed",
+            "EXPLOITATION: unexploited, exportValue: high",
+            "EXPLOITATION: unexploited, exportValue: medium or low",
+            "EXPLOITATION: partiallyExploited",
+            "EXPLOITATION: fullyExploited"
+          ]
+        },
+        {
+          "field": "depletedRow.recoveryMode",
+          "attach": [
+            "TERRAIN: Coastal",
+            "TERRAIN: Plains",
+            "TERRAIN: Forest",
+            "TERRAIN: Hills",
+            "TERRAIN: Mountains",
+            "TERRAIN: River",
+            "TERRAIN: Desert",
+            "ECONOMIC STRENGTHS: the roster is populated",
+            "ECONOMIC STRENGTHS: none recorded",
+            "STRATEGIC VALUE: the generator's assessment, framed",
             "EXPLOITATION: unexploited, exportValue: high",
             "EXPLOITATION: unexploited, exportValue: medium or low",
             "EXPLOITATION: partiallyExploited",
@@ -47974,7 +50300,9 @@
             "TERRAIN: Desert",
             "ECONOMIC STRENGTHS: the roster is populated",
             "ECONOMIC STRENGTHS: none recorded",
-            "STRATEGIC VALUE: the generator's assessment, framed"
+            "STRATEGIC VALUE: the generator's assessment, framed",
+            "RESOURCE CONDITION: worked out, recovers in time",
+            "RESOURCE CONDITION: worked out, recovers only with work"
           ]
         },
         {
@@ -47989,7 +50317,9 @@
             "TERRAIN: Desert",
             "ECONOMIC STRENGTHS: the roster is populated",
             "ECONOMIC STRENGTHS: none recorded",
-            "STRATEGIC VALUE: the generator's assessment, framed"
+            "STRATEGIC VALUE: the generator's assessment, framed",
+            "RESOURCE CONDITION: worked out, recovers in time",
+            "RESOURCE CONDITION: worked out, recovers only with work"
           ]
         },
         {
@@ -48001,18 +50331,72 @@
             "EXPLOITATION: unexploited, exportValue: high",
             "EXPLOITATION: unexploited, exportValue: medium or low",
             "EXPLOITATION: partiallyExploited",
-            "EXPLOITATION: fullyExploited"
+            "EXPLOITATION: fullyExploited",
+            "RESOURCE CONDITION: worked out, recovers in time",
+            "RESOURCE CONDITION: worked out, recovers only with work"
           ]
         }
       ]
     },
     {
       "block": "DS-ECO-12",
-      "spines": 10,
-      "facts": 9,
+      "spines": 14,
+      "facts": 15,
       "spinesReachedBp": 10000,
-      "meanReachBp": 5778,
+      "meanReachBp": 7714,
       "byFact": [
+        {
+          "field": "criticalRow",
+          "attach": [
+            "INCOME MIX: one source carries the town",
+            "INCOME MIX: two or three sources between them",
+            "INCOME MIX: a broad spread, no leader",
+            "INCOME MIX: a criminal line is present",
+            "INCOME MIX: the criminal line leads",
+            "TRADE PROFILE: exports and imports both present",
+            "TRADE PROFILE: no significant exports",
+            "TRADE PROFILE: imports only, nothing outward",
+            "TRADE PROFILE: local production listed",
+            "TRADE PROFILE: isEntrepot, transit goods marked among the exports",
+            "INCOME WEIGHT: the religious houses",
+            "INCOME WEIGHT: the practice of magic"
+          ]
+        },
+        {
+          "field": "criticalRow.institution",
+          "attach": [
+            "INCOME MIX: one source carries the town",
+            "INCOME MIX: two or three sources between them",
+            "INCOME MIX: a broad spread, no leader",
+            "INCOME MIX: a criminal line is present",
+            "INCOME MIX: the criminal line leads",
+            "TRADE PROFILE: exports and imports both present",
+            "TRADE PROFILE: no significant exports",
+            "TRADE PROFILE: imports only, nothing outward",
+            "TRADE PROFILE: local production listed",
+            "TRADE PROFILE: isEntrepot, transit goods marked among the exports",
+            "INCOME WEIGHT: the religious houses",
+            "INCOME WEIGHT: the practice of magic"
+          ]
+        },
+        {
+          "field": "criticalRow.reason",
+          "attach": [
+            "INCOME MIX: one source carries the town",
+            "INCOME MIX: two or three sources between them",
+            "INCOME MIX: a broad spread, no leader",
+            "INCOME MIX: a criminal line is present",
+            "INCOME MIX: the criminal line leads",
+            "TRADE PROFILE: exports and imports both present",
+            "TRADE PROFILE: no significant exports",
+            "TRADE PROFILE: imports only, nothing outward",
+            "TRADE PROFILE: local production listed",
+            "TRADE PROFILE: isEntrepot, transit goods marked among the exports",
+            "CRITICAL IMPORT: a house needs what the land lacks",
+            "INCOME WEIGHT: the religious houses",
+            "INCOME WEIGHT: the practice of magic"
+          ]
+        },
         {
           "field": "eco",
           "attach": [
@@ -48020,7 +50404,11 @@
             "INCOME MIX: two or three sources between them",
             "INCOME MIX: a broad spread, no leader",
             "INCOME MIX: a criminal line is present",
-            "INCOME MIX: the criminal line leads"
+            "INCOME MIX: the criminal line leads",
+            "CRITICAL IMPORT: a house needs what the land lacks",
+            "CRITICAL IMPORT: the land cannot give it",
+            "INCOME WEIGHT: the religious houses",
+            "INCOME WEIGHT: the practice of magic"
           ]
         },
         {
@@ -48030,7 +50418,11 @@
             "TRADE PROFILE: no significant exports",
             "TRADE PROFILE: imports only, nothing outward",
             "TRADE PROFILE: local production listed",
-            "TRADE PROFILE: isEntrepot, transit goods marked among the exports"
+            "TRADE PROFILE: isEntrepot, transit goods marked among the exports",
+            "CRITICAL IMPORT: a house needs what the land lacks",
+            "CRITICAL IMPORT: the land cannot give it",
+            "INCOME WEIGHT: the religious houses",
+            "INCOME WEIGHT: the practice of magic"
           ]
         },
         {
@@ -48043,7 +50435,11 @@
             "TRADE PROFILE: no significant exports",
             "TRADE PROFILE: imports only, nothing outward",
             "TRADE PROFILE: local production listed",
-            "TRADE PROFILE: isEntrepot, transit goods marked among the exports"
+            "TRADE PROFILE: isEntrepot, transit goods marked among the exports",
+            "CRITICAL IMPORT: a house needs what the land lacks",
+            "CRITICAL IMPORT: the land cannot give it",
+            "INCOME WEIGHT: the religious houses",
+            "INCOME WEIGHT: the practice of magic"
           ]
         },
         {
@@ -48055,7 +50451,11 @@
             "TRADE PROFILE: no significant exports",
             "TRADE PROFILE: imports only, nothing outward",
             "TRADE PROFILE: local production listed",
-            "TRADE PROFILE: isEntrepot, transit goods marked among the exports"
+            "TRADE PROFILE: isEntrepot, transit goods marked among the exports",
+            "CRITICAL IMPORT: a house needs what the land lacks",
+            "CRITICAL IMPORT: the land cannot give it",
+            "INCOME WEIGHT: the religious houses",
+            "INCOME WEIGHT: the practice of magic"
           ]
         },
         {
@@ -48067,7 +50467,11 @@
             "TRADE PROFILE: no significant exports",
             "TRADE PROFILE: imports only, nothing outward",
             "TRADE PROFILE: local production listed",
-            "TRADE PROFILE: isEntrepot, transit goods marked among the exports"
+            "TRADE PROFILE: isEntrepot, transit goods marked among the exports",
+            "CRITICAL IMPORT: a house needs what the land lacks",
+            "CRITICAL IMPORT: the land cannot give it",
+            "INCOME WEIGHT: the religious houses",
+            "INCOME WEIGHT: the practice of magic"
           ]
         },
         {
@@ -48077,7 +50481,11 @@
             "INCOME MIX: two or three sources between them",
             "INCOME MIX: a broad spread, no leader",
             "INCOME MIX: a criminal line is present",
-            "INCOME MIX: the criminal line leads"
+            "INCOME MIX: the criminal line leads",
+            "CRITICAL IMPORT: a house needs what the land lacks",
+            "CRITICAL IMPORT: the land cannot give it",
+            "INCOME WEIGHT: the religious houses",
+            "INCOME WEIGHT: the practice of magic"
           ]
         },
         {
@@ -48087,7 +50495,11 @@
             "INCOME MIX: two or three sources between them",
             "INCOME MIX: a broad spread, no leader",
             "INCOME MIX: a criminal line is present",
-            "INCOME MIX: the criminal line leads"
+            "INCOME MIX: the criminal line leads",
+            "CRITICAL IMPORT: a house needs what the land lacks",
+            "CRITICAL IMPORT: the land cannot give it",
+            "INCOME WEIGHT: the religious houses",
+            "INCOME WEIGHT: the practice of magic"
           ]
         },
         {
@@ -48097,7 +50509,11 @@
             "INCOME MIX: two or three sources between them",
             "INCOME MIX: a broad spread, no leader",
             "INCOME MIX: a criminal line is present",
-            "INCOME MIX: the criminal line leads"
+            "INCOME MIX: the criminal line leads",
+            "CRITICAL IMPORT: a house needs what the land lacks",
+            "CRITICAL IMPORT: the land cannot give it",
+            "INCOME WEIGHT: the religious houses",
+            "INCOME WEIGHT: the practice of magic"
           ]
         },
         {
@@ -48107,7 +50523,63 @@
             "INCOME MIX: two or three sources between them",
             "INCOME MIX: a broad spread, no leader",
             "INCOME MIX: a criminal line is present",
-            "INCOME MIX: the criminal line leads"
+            "INCOME MIX: the criminal line leads",
+            "CRITICAL IMPORT: a house needs what the land lacks",
+            "CRITICAL IMPORT: the land cannot give it",
+            "INCOME WEIGHT: the religious houses",
+            "INCOME WEIGHT: the practice of magic"
+          ]
+        },
+        {
+          "field": "eco.safetyProfile.compound",
+          "attach": [
+            "INCOME MIX: one source carries the town",
+            "INCOME MIX: two or three sources between them",
+            "INCOME MIX: a broad spread, no leader",
+            "INCOME MIX: a criminal line is present",
+            "INCOME MIX: the criminal line leads",
+            "TRADE PROFILE: exports and imports both present",
+            "TRADE PROFILE: no significant exports",
+            "TRADE PROFILE: imports only, nothing outward",
+            "TRADE PROFILE: local production listed",
+            "TRADE PROFILE: isEntrepot, transit goods marked among the exports",
+            "CRITICAL IMPORT: a house needs what the land lacks",
+            "CRITICAL IMPORT: the land cannot give it"
+          ]
+        },
+        {
+          "field": "eco.safetyProfile.compound.magicInfluence",
+          "attach": [
+            "INCOME MIX: one source carries the town",
+            "INCOME MIX: two or three sources between them",
+            "INCOME MIX: a broad spread, no leader",
+            "INCOME MIX: a criminal line is present",
+            "INCOME MIX: the criminal line leads",
+            "TRADE PROFILE: exports and imports both present",
+            "TRADE PROFILE: no significant exports",
+            "TRADE PROFILE: imports only, nothing outward",
+            "TRADE PROFILE: local production listed",
+            "TRADE PROFILE: isEntrepot, transit goods marked among the exports",
+            "CRITICAL IMPORT: a house needs what the land lacks",
+            "CRITICAL IMPORT: the land cannot give it",
+            "INCOME WEIGHT: the religious houses"
+          ]
+        },
+        {
+          "field": "eco.safetyProfile.compound.religionInfluence",
+          "attach": [
+            "INCOME MIX: one source carries the town",
+            "INCOME MIX: two or three sources between them",
+            "INCOME MIX: a broad spread, no leader",
+            "INCOME MIX: a criminal line is present",
+            "INCOME MIX: the criminal line leads",
+            "TRADE PROFILE: exports and imports both present",
+            "TRADE PROFILE: no significant exports",
+            "TRADE PROFILE: imports only, nothing outward",
+            "TRADE PROFILE: local production listed",
+            "TRADE PROFILE: isEntrepot, transit goods marked among the exports",
+            "CRITICAL IMPORT: a house needs what the land lacks",
+            "CRITICAL IMPORT: the land cannot give it"
           ]
         }
       ]
@@ -48197,36 +50669,241 @@
     },
     {
       "block": "DS-ECO-6",
+      "spines": 7,
+      "facts": 7,
+      "spinesReachedBp": 10000,
+      "meanReachBp": 7551,
+      "byFact": [
+        {
+          "field": "eco.safetyProfile.blackMarketCapture",
+          "attach": [
+            "FLAG: arcaneBlackMarket",
+            "FLAG: theocraticEconomy",
+            "FACET: an underground house",
+            "FACET: a clandestine house"
+          ]
+        },
+        {
+          "field": "eco.safetyProfile.flags",
+          "attach": [
+            "TIER: a large share off the books (≥30)",
+            "TIER: significant off-book activity (≥15)",
+            "TIER: minor shadow activity (≥3)",
+            "FACET: an underground house",
+            "FACET: a clandestine house"
+          ]
+        },
+        {
+          "field": "eco.safetyProfile.flags.arcaneBlackMarket",
+          "attach": [
+            "TIER: a large share off the books (≥30)",
+            "TIER: significant off-book activity (≥15)",
+            "TIER: minor shadow activity (≥3)",
+            "FLAG: theocraticEconomy",
+            "FACET: an underground house",
+            "FACET: a clandestine house"
+          ]
+        },
+        {
+          "field": "eco.safetyProfile.flags.theocraticEconomy",
+          "attach": [
+            "TIER: a large share off the books (≥30)",
+            "TIER: significant off-book activity (≥15)",
+            "TIER: minor shadow activity (≥3)",
+            "FLAG: arcaneBlackMarket",
+            "FACET: an underground house",
+            "FACET: a clandestine house"
+          ]
+        },
+        {
+          "field": "hiddenRow",
+          "attach": [
+            "TIER: a large share off the books (≥30)",
+            "TIER: significant off-book activity (≥15)",
+            "TIER: minor shadow activity (≥3)",
+            "FLAG: arcaneBlackMarket",
+            "FLAG: theocraticEconomy"
+          ]
+        },
+        {
+          "field": "hiddenRow.facets.clandestine",
+          "attach": [
+            "TIER: a large share off the books (≥30)",
+            "TIER: significant off-book activity (≥15)",
+            "TIER: minor shadow activity (≥3)",
+            "FLAG: arcaneBlackMarket",
+            "FLAG: theocraticEconomy",
+            "FACET: an underground house"
+          ]
+        },
+        {
+          "field": "hiddenRow.facets.subterranean",
+          "attach": [
+            "TIER: a large share off the books (≥30)",
+            "TIER: significant off-book activity (≥15)",
+            "TIER: minor shadow activity (≥3)",
+            "FLAG: arcaneBlackMarket",
+            "FLAG: theocraticEconomy"
+          ]
+        }
+      ]
+    },
+    {
+      "block": "DS-ECO-8",
       "spines": 3,
       "facts": 1,
       "spinesReachedBp": 0,
       "meanReachBp": 0,
       "byFact": [
         {
-          "field": "eco.safetyProfile.blackMarketCapture",
+          "field": "eco.foodSecurity.prosperityMod.type",
           "attach": []
         }
       ]
     },
     {
       "block": "DS-ECO-9",
-      "spines": 2,
-      "facts": 3,
-      "spinesReachedBp": 5000,
-      "meanReachBp": 1667,
+      "spines": 10,
+      "facts": 11,
+      "spinesReachedBp": 10000,
+      "meanReachBp": 7545,
       "byFact": [
         {
+          "field": "eco.foodSecurity.foodRecord.foodSources",
+          "attach": [
+            "IMPORT-DEPENDENT",
+            "BLOCKADED",
+            "BLOCKADE BYPASSED",
+            "ACTIVE FAMINE: the failed source, most of the harvest",
+            "ACTIVE FAMINE: the failed source, part of the harvest",
+            "HOW THE NEED IS MET: much of it brought in",
+            "HOW THE NEED IS MET: part of it by magic"
+          ]
+        },
+        {
+          "field": "eco.foodSecurity.foodRecord.foodSources.length",
+          "attach": [
+            "IMPORT-DEPENDENT",
+            "BLOCKADED",
+            "BLOCKADE BYPASSED",
+            "ACTIVE FAMINE: the failed source, most of the harvest",
+            "ACTIVE FAMINE: the failed source, part of the harvest",
+            "HOW THE NEED IS MET: much of it brought in",
+            "HOW THE NEED IS MET: part of it by magic"
+          ]
+        },
+        {
           "field": "eco.foodSecurity.stockpile",
-          "attach": []
+          "attach": [
+            "IMPORT-DEPENDENT",
+            "ACTIVE FAMINE: the failed source, most of the harvest",
+            "ACTIVE FAMINE: the failed source, part of the harvest",
+            "HOW THE NEED IS MET: much of it brought in",
+            "HOW THE NEED IS MET: part of it by magic",
+            "FOOD SOURCES: one source",
+            "FOOD SOURCES: several, the largest named",
+            "FOOD SOURCES: four or more"
+          ]
         },
         {
           "field": "eco.foodSecurity.stockpile.blockadeBypass",
-          "attach": []
+          "attach": [
+            "IMPORT-DEPENDENT",
+            "ACTIVE FAMINE: the failed source, most of the harvest",
+            "ACTIVE FAMINE: the failed source, part of the harvest",
+            "HOW THE NEED IS MET: much of it brought in",
+            "HOW THE NEED IS MET: part of it by magic",
+            "FOOD SOURCES: one source",
+            "FOOD SOURCES: several, the largest named",
+            "FOOD SOURCES: four or more"
+          ]
         },
         {
           "field": "eco.foodSecurity.stockpile.blockaded",
           "attach": [
-            "BLOCKADE BYPASSED"
+            "IMPORT-DEPENDENT",
+            "BLOCKADE BYPASSED",
+            "ACTIVE FAMINE: the failed source, most of the harvest",
+            "ACTIVE FAMINE: the failed source, part of the harvest",
+            "HOW THE NEED IS MET: much of it brought in",
+            "HOW THE NEED IS MET: part of it by magic",
+            "FOOD SOURCES: one source",
+            "FOOD SOURCES: several, the largest named",
+            "FOOD SOURCES: four or more"
+          ]
+        },
+        {
+          "field": "foodRecord",
+          "attach": [
+            "BLOCKADED",
+            "BLOCKADE BYPASSED",
+            "FOOD SOURCES: one source",
+            "FOOD SOURCES: several, the largest named",
+            "FOOD SOURCES: four or more"
+          ]
+        },
+        {
+          "field": "foodRecord.band",
+          "attach": [
+            "IMPORT-DEPENDENT",
+            "BLOCKADED",
+            "BLOCKADE BYPASSED",
+            "HOW THE NEED IS MET: much of it brought in",
+            "HOW THE NEED IS MET: part of it by magic",
+            "FOOD SOURCES: one source",
+            "FOOD SOURCES: several, the largest named",
+            "FOOD SOURCES: four or more"
+          ]
+        },
+        {
+          "field": "foodRecord.failedSource",
+          "attach": [
+            "IMPORT-DEPENDENT",
+            "BLOCKADED",
+            "BLOCKADE BYPASSED",
+            "HOW THE NEED IS MET: much of it brought in",
+            "HOW THE NEED IS MET: part of it by magic",
+            "FOOD SOURCES: one source",
+            "FOOD SOURCES: several, the largest named",
+            "FOOD SOURCES: four or more"
+          ]
+        },
+        {
+          "field": "foodRecord.magicPct",
+          "attach": [
+            "BLOCKADED",
+            "BLOCKADE BYPASSED",
+            "ACTIVE FAMINE: the failed source, most of the harvest",
+            "ACTIVE FAMINE: the failed source, part of the harvest",
+            "FOOD SOURCES: one source",
+            "FOOD SOURCES: several, the largest named",
+            "FOOD SOURCES: four or more"
+          ]
+        },
+        {
+          "field": "foodRecord.normalImportPct",
+          "attach": [
+            "BLOCKADED",
+            "BLOCKADE BYPASSED",
+            "ACTIVE FAMINE: the failed source, most of the harvest",
+            "ACTIVE FAMINE: the failed source, part of the harvest",
+            "HOW THE NEED IS MET: part of it by magic",
+            "FOOD SOURCES: one source",
+            "FOOD SOURCES: several, the largest named",
+            "FOOD SOURCES: four or more"
+          ]
+        },
+        {
+          "field": "securityKey",
+          "attach": [
+            "BLOCKADED",
+            "BLOCKADE BYPASSED",
+            "ACTIVE FAMINE: the failed source, most of the harvest",
+            "ACTIVE FAMINE: the failed source, part of the harvest",
+            "HOW THE NEED IS MET: part of it by magic",
+            "FOOD SOURCES: one source",
+            "FOOD SOURCES: several, the largest named",
+            "FOOD SOURCES: four or more"
           ]
         }
       ]
@@ -48367,22 +51044,108 @@
     },
     {
       "block": "DS-GEN-13",
-      "spines": 4,
-      "facts": 3,
-      "spinesReachedBp": 0,
-      "meanReachBp": 0,
+      "spines": 9,
+      "facts": 9,
+      "spinesReachedBp": 10000,
+      "meanReachBp": 6543,
       "byFact": [
         {
           "field": "readings",
-          "attach": []
+          "attach": [
+            "COMMERCE: a bank",
+            "COMMERCE: a merchant guild, no bank",
+            "COMMERCE: craft guilds, no merchant guild",
+            "COMMERCE: a market, no guild",
+            "WAREHOUSES"
+          ]
+        },
+        {
+          "field": "readings.inst",
+          "attach": [
+            "MARKET-OPEN",
+            "MARKET-NARROW",
+            "ENTREPOT",
+            "NO-MARKET"
+          ]
+        },
+        {
+          "field": "readings.inst.hasBank",
+          "attach": [
+            "MARKET-OPEN",
+            "MARKET-NARROW",
+            "ENTREPOT",
+            "NO-MARKET",
+            "WAREHOUSES"
+          ]
+        },
+        {
+          "field": "readings.inst.hasGuild",
+          "attach": [
+            "MARKET-OPEN",
+            "MARKET-NARROW",
+            "ENTREPOT",
+            "NO-MARKET",
+            "COMMERCE: a bank",
+            "COMMERCE: a merchant guild, no bank",
+            "WAREHOUSES"
+          ]
+        },
+        {
+          "field": "readings.inst.hasMarket",
+          "attach": [
+            "MARKET-OPEN",
+            "MARKET-NARROW",
+            "ENTREPOT",
+            "NO-MARKET",
+            "COMMERCE: a bank",
+            "COMMERCE: a merchant guild, no bank",
+            "COMMERCE: craft guilds, no merchant guild",
+            "WAREHOUSES"
+          ]
+        },
+        {
+          "field": "readings.inst.hasMerchantGuild",
+          "attach": [
+            "MARKET-OPEN",
+            "MARKET-NARROW",
+            "ENTREPOT",
+            "NO-MARKET",
+            "COMMERCE: a bank",
+            "WAREHOUSES"
+          ]
+        },
+        {
+          "field": "readings.inst.hasWarehouse",
+          "attach": [
+            "MARKET-OPEN",
+            "MARKET-NARROW",
+            "ENTREPOT",
+            "NO-MARKET",
+            "COMMERCE: a bank",
+            "COMMERCE: a merchant guild, no bank",
+            "COMMERCE: craft guilds, no merchant guild",
+            "COMMERCE: a market, no guild"
+          ]
         },
         {
           "field": "readings.isEntrepot",
-          "attach": []
+          "attach": [
+            "COMMERCE: a bank",
+            "COMMERCE: a merchant guild, no bank",
+            "COMMERCE: craft guilds, no merchant guild",
+            "COMMERCE: a market, no guild",
+            "WAREHOUSES"
+          ]
         },
         {
           "field": "readings.tradeRouteAccess",
-          "attach": []
+          "attach": [
+            "COMMERCE: a bank",
+            "COMMERCE: a merchant guild, no bank",
+            "COMMERCE: craft guilds, no merchant guild",
+            "COMMERCE: a market, no guild",
+            "WAREHOUSES"
+          ]
         }
       ]
     },
@@ -49397,6 +52160,19 @@
       ]
     },
     {
+      "block": "DS-SUP-2",
+      "spines": 1,
+      "facts": 1,
+      "spinesReachedBp": 0,
+      "meanReachBp": 0,
+      "byFact": [
+        {
+          "field": "upstreamNoun",
+          "attach": []
+        }
+      ]
+    },
+    {
       "block": "DS-SUP-3",
       "spines": 7,
       "facts": 3,
@@ -49635,15 +52411,15 @@
     }
   ],
   "factBudget": {
-    "zeroK": 49,
-    "executable": 341,
-    "notExecutable": 368,
+    "zeroK": 61,
+    "executable": 368,
+    "notExecutable": 367,
     "byBlock": [
       [
         "DS-ECO-12",
         {
-          "zeroK": 8,
-          "spines": 10
+          "zeroK": 10,
+          "spines": 14
         }
       ],
       [
@@ -49654,17 +52430,24 @@
         }
       ],
       [
+        "DS-GEN-13",
+        {
+          "zeroK": 7,
+          "spines": 9
+        }
+      ],
+      [
+        "DS-ECO-9",
+        {
+          "zeroK": 5,
+          "spines": 10
+        }
+      ],
+      [
         "DS-WAR-1",
         {
           "zeroK": 5,
           "spines": 11
-        }
-      ],
-      [
-        "DS-GEN-13",
-        {
-          "zeroK": 4,
-          "spines": 4
         }
       ],
       [
@@ -49710,6 +52493,13 @@
         }
       ],
       [
+        "DS-ECO-11",
+        {
+          "zeroK": 2,
+          "spines": 16
+        }
+      ],
+      [
         "DS-FTH-3",
         {
           "zeroK": 2,
@@ -49717,10 +52507,10 @@
         }
       ],
       [
-        "DS-ECO-9",
+        "DS-ECO-6",
         {
           "zeroK": 1,
-          "spines": 2
+          "spines": 7
         }
       ],
       [
@@ -49794,10 +52584,17 @@
         }
       ],
       [
-        "DS-ECO-6",
+        "DS-ECO-8",
         {
           "zeroK": 0,
           "spines": 3
+        }
+      ],
+      [
+        "DS-SUP-2",
+        {
+          "zeroK": 0,
+          "spines": 1
         }
       ],
       [
@@ -49805,13 +52602,6 @@
         {
           "zeroK": 0,
           "spines": 6
-        }
-      ],
-      [
-        "DS-ECO-11",
-        {
-          "zeroK": 0,
-          "spines": 14
         }
       ],
       [
@@ -49993,64 +52783,63 @@
     "histogram": [
       [
         -2,
-        11
-      ],
-      [
-        -1,
         12
       ],
       [
+        -1,
+        15
+      ],
+      [
         0,
-        26
+        34
       ],
       [
         1,
-        82
+        93
       ],
       [
         2,
-        210
+        214
       ]
     ]
   },
   "grains": {
     "branch": {
-      "zeroK": 49,
-      "executable": 341,
-      "notExecutable": 368,
+      "zeroK": 61,
+      "executable": 368,
+      "notExecutable": 367,
       "histogram": [
         [
           -2,
-          11
-        ],
-        [
-          -1,
           12
         ],
         [
+          -1,
+          15
+        ],
+        [
           0,
-          26
+          34
         ],
         [
           1,
-          82
+          93
         ],
         [
           2,
-          210
+          214
         ]
       ],
-      "blocksWithSpine": 50,
+      "blocksWithSpine": 52,
       "cannotAttach": [
         "DS-DEF-6",
         "DS-ECO-1",
         "DS-ECO-10",
         "DS-ECO-3",
-        "DS-ECO-6",
+        "DS-ECO-8",
         "DS-FTH-2",
         "DS-FTH-3",
         "DS-GEN-12",
-        "DS-GEN-13",
         "DS-GEN-14",
         "DS-GEN-16",
         "DS-GEN-17",
@@ -50062,17 +52851,18 @@
         "DS-POW-5",
         "DS-POW-7",
         "DS-STR-1",
+        "DS-SUP-2",
         "DS-WAR-3"
       ],
-      "readPaths": 555,
+      "readPaths": 622,
       "modifierEligibleFactsByTab": [
         [
-          "viability",
+          "economics",
           40
         ],
         [
-          "economics",
-          39
+          "viability",
+          40
         ],
         [
           "history",
@@ -50092,15 +52882,15 @@
         ],
         [
           "resources",
-          12
+          13
         ],
         [
           "daily_life",
-          12
+          13
         ],
         [
           "services",
-          10
+          11
         ],
         [
           "power",
@@ -50121,9 +52911,9 @@
       ]
     },
     "function": {
-      "zeroK": 125,
-      "executable": 341,
-      "notExecutable": 368,
+      "zeroK": 142,
+      "executable": 368,
+      "notExecutable": 367,
       "histogram": [
         [
           -7,
@@ -50135,26 +52925,26 @@
         ],
         [
           -2,
-          9
+          13
         ],
         [
           -1,
-          34
+          39
         ],
         [
           0,
-          70
+          78
         ],
         [
           1,
-          86
+          95
         ],
         [
           2,
-          130
+          131
         ]
       ],
-      "blocksWithSpine": 50,
+      "blocksWithSpine": 52,
       "cannotAttach": [
         "DS-DEF-11",
         "DS-DEF-6",
@@ -50162,12 +52952,10 @@
         "DS-ECO-1",
         "DS-ECO-10",
         "DS-ECO-3",
-        "DS-ECO-6",
-        "DS-ECO-9",
+        "DS-ECO-8",
         "DS-FTH-2",
         "DS-FTH-3",
         "DS-GEN-12",
-        "DS-GEN-13",
         "DS-GEN-14",
         "DS-GEN-16",
         "DS-GEN-17",
@@ -50180,17 +52968,18 @@
         "DS-POW-5",
         "DS-POW-7",
         "DS-STR-1",
+        "DS-SUP-2",
         "DS-WAR-3"
       ],
-      "readPaths": 792,
+      "readPaths": 875,
       "modifierEligibleFactsByTab": [
         [
-          "viability",
+          "economics",
           40
         ],
         [
-          "economics",
-          39
+          "viability",
+          40
         ],
         [
           "history",
@@ -50210,15 +52999,15 @@
         ],
         [
           "resources",
-          12
+          13
         ],
         [
           "daily_life",
-          12
+          13
         ],
         [
           "services",
-          9
+          10
         ],
         [
           "power",
@@ -50242,16 +53031,16 @@
   "customReachable": {
     "byKind": [
       [
+        "institutions",
+        7
+      ],
+      [
         "services",
         6
       ],
       [
         "resources",
         6
-      ],
-      [
-        "institutions",
-        5
       ],
       [
         "tradeGoods",
@@ -50302,6 +53091,20 @@
         "kind": "tradeGoods",
         "via": "value",
         "on": "none"
+      },
+      {
+        "block": "DS-ECO-12",
+        "pool": "CRITICAL IMPORT: a house needs what the land lacks",
+        "kind": "institutions",
+        "via": "bucket",
+        "on": "institution"
+      },
+      {
+        "block": "DS-ECO-12",
+        "pool": "CRITICAL IMPORT: the land cannot give it",
+        "kind": "institutions",
+        "via": "bucket",
+        "on": "institution"
       },
       {
         "block": "DS-GEN-2",
@@ -50526,14 +53329,14 @@
     ],
     "summary": {
       "rows": {
-        "LICENSED": 114,
+        "LICENSED": 118,
         "OFFICE": 3,
-        "SOURCE-UNRESOLVED": 592
+        "SOURCE-UNRESOLVED": 614
       },
       "fields": {
-        "LICENSED": 191,
+        "LICENSED": 200,
         "OFFICE": 5,
-        "SOURCE-UNRESOLVED": 419
+        "SOURCE-UNRESOLVED": 477
       },
       "byKind": [
         [
@@ -50553,12 +53356,12 @@
           21
         ],
         [
-          "toll-bar",
-          12
+          "watch",
+          18
         ],
         [
-          "watch",
-          9
+          "toll-bar",
+          12
         ],
         [
           "road",
@@ -50578,11 +53381,11 @@
         ]
       ],
       "unresolvedGrounds": {
-        "no-mapping": 419,
+        "no-mapping": 477,
         "no-institution-in-roster": 0
       },
       "twoSourceRows": 10,
-      "rowsWithNoReading": 368,
+      "rowsWithNoReading": 367,
       "kindsWithNoInstitution": [
         "tradition"
       ]
@@ -51937,8 +54740,8 @@
       "leafBoth": 0,
       "leafEither": 2,
       "leafRows": [],
-      "deskRoots": 92,
-      "deskSegments": 194
+      "deskRoots": 98,
+      "deskSegments": 222
     }
   },
   "ratifiedAliases": {
@@ -51962,8 +54765,8 @@
         "endpoint": "system:food_security",
         "readRoot": "eco",
         "evidence": "identifier",
-        "at": "eco.foodSecurity.stockpile",
-        "line": "eco.foodSecurity.stockpile"
+        "at": "eco.foodSecurity.foodRecord.foodSources",
+        "line": "eco.foodSecurity.foodRecord.foodSources"
       }
     ]
   },
@@ -52064,6 +54867,36 @@
       "stall"
     ],
     "eco.safetyProfile.blackMarketCapture": [
+      "roll",
+      "rolls",
+      "watch"
+    ],
+    "eco.safetyProfile.compound": [
+      "roll",
+      "rolls",
+      "watch"
+    ],
+    "eco.safetyProfile.compound.magicInfluence": [
+      "roll",
+      "rolls",
+      "watch"
+    ],
+    "eco.safetyProfile.compound.religionInfluence": [
+      "roll",
+      "rolls",
+      "watch"
+    ],
+    "eco.safetyProfile.flags": [
+      "roll",
+      "rolls",
+      "watch"
+    ],
+    "eco.safetyProfile.flags.arcaneBlackMarket": [
+      "roll",
+      "rolls",
+      "watch"
+    ],
+    "eco.safetyProfile.flags.theocraticEconomy": [
       "roll",
       "rolls",
       "watch"
@@ -52604,6 +55437,16 @@
       "subject": "readings.granaryOutlook",
       "fields": [
         "readings.granaryOutlook"
+      ],
+      "readingFunction": "(no key function reads it)",
+      "count": "0 pools keyed on this fact"
+    },
+    {
+      "tier": "MISSING",
+      "block": "(composer-wide)",
+      "subject": "settlement.institutions",
+      "fields": [
+        "settlement.institutions"
       ],
       "readingFunction": "(no key function reads it)",
       "count": "0 pools keyed on this fact"
@@ -54107,6 +56950,42 @@
     },
     {
       "tier": "THIN",
+      "block": "DS-ECO-6",
+      "subject": "FLAG: arcaneBlackMarket",
+      "fields": [],
+      "readingFunction": "arcaneMarketPoolKey",
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-ECO-6",
+      "subject": "FLAG: theocraticEconomy",
+      "fields": [],
+      "readingFunction": "theocraticEconomyPoolKey",
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "COVERED",
+      "block": "DS-ECO-6",
+      "subject": "FACET: an underground house",
+      "fields": [
+        "hiddenRow.facets.subterranean"
+      ],
+      "readingFunction": "hiddenHousePoolKey",
+      "count": "2 variant(s) · 2 grammar(s) · slots {institution, settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-ECO-6",
+      "subject": "FACET: a clandestine house",
+      "fields": [
+        "hiddenRow.facets.clandestine"
+      ],
+      "readingFunction": "hiddenHousePoolKey",
+      "count": "2 variant(s) · 1 grammar(s) · slots {institution, settlement}"
+    },
+    {
+      "tier": "THIN",
       "block": "DS-ECO-7",
       "subject": "TALLIES",
       "fields": [],
@@ -54179,6 +57058,36 @@
     },
     {
       "tier": "THIN",
+      "block": "DS-ECO-8",
+      "subject": "FOOD AND PROSPERITY: hunger holds the town down",
+      "fields": [
+        "eco.foodSecurity.prosperityMod.type"
+      ],
+      "readingFunction": "foodProsperityPoolKey",
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-ECO-8",
+      "subject": "FOOD AND PROSPERITY: the cost of food weighs on the town",
+      "fields": [
+        "eco.foodSecurity.prosperityMod.type"
+      ],
+      "readingFunction": "foodProsperityPoolKey",
+      "count": "3 variant(s) · 3 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-ECO-8",
+      "subject": "FOOD AND PROSPERITY: full stores lift the town",
+      "fields": [
+        "eco.foodSecurity.prosperityMod.type"
+      ],
+      "readingFunction": "foodProsperityPoolKey",
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
       "block": "DS-ECO-9",
       "subject": "SURPLUS",
       "fields": [],
@@ -54206,7 +57115,7 @@
       "block": "DS-ECO-9",
       "subject": "IMPORT-DEPENDENT",
       "fields": [],
-      "readingFunction": "(unresolved)",
+      "readingFunction": "foodMeansPoolKey",
       "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
@@ -54244,6 +57153,66 @@
       ],
       "readingFunction": "foodSecurityPoolKey",
       "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-ECO-9",
+      "subject": "ACTIVE FAMINE: the failed source, most of the harvest",
+      "fields": [],
+      "readingFunction": "famineSourcePoolKey",
+      "count": "3 variant(s) · 1 grammar(s) · slots {good, settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-ECO-9",
+      "subject": "ACTIVE FAMINE: the failed source, part of the harvest",
+      "fields": [],
+      "readingFunction": "famineSourcePoolKey",
+      "count": "3 variant(s) · 1 grammar(s) · slots {good, settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-ECO-9",
+      "subject": "HOW THE NEED IS MET: much of it brought in",
+      "fields": [
+        "securityKey"
+      ],
+      "readingFunction": "foodMeansPoolKey",
+      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-ECO-9",
+      "subject": "HOW THE NEED IS MET: part of it by magic",
+      "fields": [],
+      "readingFunction": "foodMeansPoolKey",
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-ECO-9",
+      "subject": "FOOD SOURCES: one source",
+      "fields": [
+        "eco.foodSecurity.foodRecord.foodSources.length"
+      ],
+      "readingFunction": "foodSourcesPoolKey",
+      "count": "3 variant(s) · 1 grammar(s) · slots {good, settlement}"
+    },
+    {
+      "tier": "COVERED",
+      "block": "DS-ECO-9",
+      "subject": "FOOD SOURCES: several, the largest named",
+      "fields": [],
+      "readingFunction": "foodSourcesPoolKey",
+      "count": "3 variant(s) · 2 grammar(s) · slots {good, settlement}"
+    },
+    {
+      "tier": "COVERED",
+      "block": "DS-ECO-9",
+      "subject": "FOOD SOURCES: four or more",
+      "fields": [],
+      "readingFunction": "foodSourcesPoolKey",
+      "count": "3 variant(s) · 2 grammar(s) · slots {good, settlement}"
     },
     {
       "tier": "COVERED",
@@ -54300,6 +57269,14 @@
       "fields": [],
       "readingFunction": "(unresolved)",
       "count": "3 variant(s) · 1 grammar(s) · slots {chain}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-SUP-2",
+      "subject": "UPSTREAM WEAK: a chain the town's work draws on is failing",
+      "fields": [],
+      "readingFunction": "upstreamWeakPoolKey",
+      "count": "2 variant(s) · 1 grammar(s) · slots {chain, settlement}"
     },
     {
       "tier": "THIN",
@@ -54548,6 +57525,22 @@
       "count": "3 variant(s) · 2 grammar(s) · slots {good, institution, resource, settlement}"
     },
     {
+      "tier": "COVERED",
+      "block": "DS-ECO-11",
+      "subject": "RESOURCE CONDITION: worked out, recovers in time",
+      "fields": [],
+      "readingFunction": "resourceConditionPoolKey",
+      "count": "2 variant(s) · 2 grammar(s) · slots {resource, settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-ECO-11",
+      "subject": "RESOURCE CONDITION: worked out, recovers only with work",
+      "fields": [],
+      "readingFunction": "resourceConditionPoolKey",
+      "count": "2 variant(s) · 1 grammar(s) · slots {resource, settlement}"
+    },
+    {
       "tier": "THIN",
       "block": "DS-ECO-12",
       "subject": "INCOME MIX: one source carries the town",
@@ -54634,6 +57627,40 @@
       ],
       "readingFunction": "tradeProfilePoolKey",
       "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "COVERED",
+      "block": "DS-ECO-12",
+      "subject": "CRITICAL IMPORT: a house needs what the land lacks",
+      "fields": [
+        "criticalRow.institution"
+      ],
+      "readingFunction": "criticalImportPoolKey",
+      "count": "2 variant(s) · 2 grammar(s) · slots {good, institution, settlement}"
+    },
+    {
+      "tier": "COVERED",
+      "block": "DS-ECO-12",
+      "subject": "CRITICAL IMPORT: the land cannot give it",
+      "fields": [],
+      "readingFunction": "criticalImportPoolKey",
+      "count": "2 variant(s) · 2 grammar(s) · slots {good, settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-ECO-12",
+      "subject": "INCOME WEIGHT: the religious houses",
+      "fields": [],
+      "readingFunction": "incomeWeightPoolKey",
+      "count": "2 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-ECO-12",
+      "subject": "INCOME WEIGHT: the practice of magic",
+      "fields": [],
+      "readingFunction": "incomeWeightPoolKey",
+      "count": "2 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -56154,6 +59181,54 @@
       "fields": [],
       "readingFunction": "marketPoolKey",
       "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-GEN-13",
+      "subject": "COMMERCE: a bank",
+      "fields": [
+        "readings.inst.hasBank"
+      ],
+      "readingFunction": "commercePoolKey",
+      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-GEN-13",
+      "subject": "COMMERCE: a merchant guild, no bank",
+      "fields": [
+        "readings.inst.hasMerchantGuild"
+      ],
+      "readingFunction": "commercePoolKey",
+      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-GEN-13",
+      "subject": "COMMERCE: craft guilds, no merchant guild",
+      "fields": [
+        "readings.inst.hasGuild"
+      ],
+      "readingFunction": "commercePoolKey",
+      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-GEN-13",
+      "subject": "COMMERCE: a market, no guild",
+      "fields": [
+        "readings.inst.hasMarket"
+      ],
+      "readingFunction": "commercePoolKey",
+      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-GEN-13",
+      "subject": "WAREHOUSES",
+      "fields": [],
+      "readingFunction": "warehousesPoolKey",
+      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",

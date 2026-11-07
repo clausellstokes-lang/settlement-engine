@@ -578,14 +578,23 @@ export function buildPrintProse(settlement, ctx = {}) {
   ]);
   put('economics', 'economics.foodSecurity', [
     printed('economics.foodSecurity', economy.foodSecurityRung),
+    printed('economics.foodSecurity', economy.famineSource),
+    printed('economics.foodSecurity', economy.foodMeans),
+    printed('economics.foodSecurity', economy.foodSources),
   ]);
   put('economics', 'economics.commercialProfile', [
     printed('economics.commercialProfile', economy.incomeMix),
     printed('economics.commercialProfile', economy.criminalLine),
+    printed('economics.commercialProfile', economy.incomeWeight),
+    printed('economics.commercialProfile', economy.criticalImport),
   ]);
   put('economics', 'economics.shadowEconomy', [
     printed('economics.shadowEconomy', economy.shadowEconomy),
+    printed('economics.shadowEconomy', economy.arcaneMarket),
+    printed('economics.shadowEconomy', economy.theocraticEconomy),
+    printed('economics.shadowEconomy', economy.hiddenHouse),
   ]);
+  put('economics', 'economics.upstreamSupply', [printed('economics.upstreamSupply', economy.upstreamWeak)]);
   put('economics', 'economics.tradeFlow', [printed('economics.tradeFlow', economy.tradeFlow)]);
   put('economics', 'economics.exportPosture', [
     printed('economics.exportPosture', economy.exportPosture),
@@ -597,6 +606,7 @@ export function buildPrintProse(settlement, ctx = {}) {
   // replaces it on the screen is not printed beside it; the exploitation lens frames the chains.
   put('resources', 'resources.groundAndWorkings', [
     printed('resources.groundAndWorkings', economy.exploitation),
+    printed('resources.groundAndWorkings', economy.resourceCondition),
   ]);
 
   put('services', 'services.catalogStanding', [
@@ -606,6 +616,7 @@ export function buildPrintProse(settlement, ctx = {}) {
 
   put('daily_life', 'daily_life.standingOfLiving', [
     printed('daily_life.standingOfLiving', economy.prosperityRung),
+    printed('daily_life.standingOfLiving', economy.foodOnProsperity),
   ]);
 
   // DESTRUCTURED RATHER THAN CHAINED — `generalDeskRead.js:260-268` records this exact false
