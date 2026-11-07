@@ -73,7 +73,7 @@ const FUNDED_DEFENSES = [
 ];
 
 describe('economic survival respects the actual economy', () => {
-  test('a struggling economy no longer scores "Strong economic base" off its buildings', () => {
+  test('a struggling economy no longer earns the strong economic verdict off its buildings', () => {
     const poor = generateDefenseProfile(town({ priorityEconomy: 15 }));
     expect(poor.scores.economic).toBeLessThanOrEqual(55);
     const assessment = buildThreatAssessment(poor);
@@ -82,7 +82,9 @@ describe('economic survival respects the actual economy', () => {
     // whose verdict is under test, so an assessment that stopped emitting that
     // dimension reds here instead of passing the exclusion vacuously.
     expectAbsentWithAnchor(
-      economicLine, 'Strong economic base', 'Economic Survival',
+      // Re-keyed by identity (W2 DEF fourth seat, 2026-11-07): the strong verdict now reads "Money enough to ride
+      // out a long crisis" (the owner's style law); the negative follows the words.
+      economicLine, 'Money enough to ride out a long crisis', 'Economic Survival',
       'a struggling economy never earns the strong-base verdict',
     );
   });
