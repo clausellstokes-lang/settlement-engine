@@ -26,10 +26,12 @@
 import { defenseWordsFindings } from '../domain/coherence/defenseWordsFindings.js';
 import {
   clearActiveRng,
+  getActiveRng,
   random as _rng,
   setActiveRng,
 } from '../kernel/rngContext.js';
 import { shimLegacyFactionFields } from './people/legacyShim.js';
+import { assignCastPowers } from './people/castPowers.js';
 import { pickVariant } from '../kernel/proseHash.js';
 import { selectOriginBody } from './narrative/settlementOriginProse.js';
 import { resolvePrimaryStress } from './stressPriority.js';
@@ -884,13 +886,21 @@ export const enrichNpcCoherence = (settlement) => {
   );
   // ── THE PEOPLE CAR (PEOPLE-1 CAST, 2026-11-07). The density law's DISPERSAL and its rung
   // stamps (`applyDensityLaw.js :: disperseNamedRoster`, the §810 seam 2 that used to sit here)
-  // are RETIRED FROM BIRTH: a card's standing in the powers is its `memberships`, and the two old
-  // fields every reader still keys on are derived from them by the ONE shim (people/legacyShim.js,
-  // M-2), AFTER mergeNPCLists' keyword cascade (overwritten) and BEFORE the structural pass
-  // (which reads `factionAffiliation` for its rank). This tail is still the one BOTH full
-  // assembly and NPC section-regen run, so a regenerated cast carries the same fields as a born
-  // one. Draw-free.
-  const shimmed = rawMergedNpcs.map((card) => shimLegacyFactionFields(card));
+  // are RETIRED FROM BIRTH: a card's standing in the powers is its `memberships`, written here
+  // from the backing catalogue with the `other` powers' minted faces and each power's first,
+  // second and third (people/castPowers.js, R-P3–R-P5; the mints and the ranks draw on keyed
+  // forks of this seam's stream, `people-powers::…`, so nothing after them moves), and the two
+  // old fields every reader still keys on are derived from the ranks by the ONE shim
+  // (people/legacyShim.js, M-2), AFTER mergeNPCLists' keyword cascade (overwritten) and BEFORE
+  // the structural pass (which reads `factionAffiliation` for its rank). This tail is still
+  // the one BOTH full assembly and NPC section-regen run, so a regenerated cast carries the
+  // same powers as a born one.
+  const withPowers = assignCastPowers(settlement, rawMergedNpcs, getActiveRng());
+  // the tie-break's order: the governing seat first, then the roster's (ranked by power figure)
+  const rosterOrder = (settlement.powerStructure?.factions || []).map((f) => String(f?.faction || f?.name || '')).filter(Boolean);
+  const governingName = String(settlement.powerStructure?.factions?.find((f) => f?.isGoverning)?.faction || '');
+  const powerOrder = governingName ? [governingName, ...rosterOrder.filter((n) => n !== governingName)] : rosterOrder;
+  const shimmed = withPowers.map((card) => shimLegacyFactionFields(card, powerOrder));
   return enrichNPCsWithStructure(shimmed, settlement);
 };
 

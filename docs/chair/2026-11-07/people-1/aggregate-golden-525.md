@@ -1,0 +1,22 @@
+Corpus: p1-golden.jsonl · 525 settlements · cells read min / median / max (μ mean)
+
+| tier | n | cards | house faces | powers | powers at zero faces | powers with ≥3 | governing power faced | minted seats | minted other | fallback titles fired | pool fallbacks (cards) | faces in 2+ powers | faces in no power | ties | groups |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| thorp | 84 | 1 / 2 / 3 (μ 2.0) | 1 / 1 / 2 (μ 1.1) | 2 / 2 / 2 (μ 2.0) | 12/168 (12 towns) | 0/168 (0%) | 84/84 | 0 | 72 | 0 | 1 / 1 / 2 (μ 1.1) | 0 / 0 / 0 (μ 0.0) | 0 / 0 / 0 (μ 0.0) | 0 / 0 / 1 (μ 0.1) | 2 / 2 / 2 (μ 2.0) |
+| hamlet | 84 | 1 / 2 / 5 (μ 2.5) | 0 / 1 / 4 (μ 1.2) | 3 / 4 / 4 (μ 3.9) | 96/324 (84 towns) | 10/324 (3%) | 84/84 | 36 | 72 | 0 | 0 / 1 / 4 (μ 1.2) | 0 / 1 / 1 (μ 0.6) | 0 / 0 / 0 (μ 0.0) | 0 / 0 / 5 (μ 0.8) | 3 / 4 / 4 (μ 3.9) |
+| village | 84 | 6 / 7 / 9 (μ 7.3) | 5 / 6 / 7 (μ 5.8) | 4 / 4 / 4 (μ 4.0) | 72/336 (72 towns) | 60/336 (18%) | 84/84 | 60 | 72 | 0 | 3 / 3 / 5 (μ 3.3) | 0 / 0 / 1 (μ 0.3) | 0 / 1 / 3 (μ 1.5) | 11 / 11 / 17 (μ 12.0) | 4 / 4 / 4 (μ 4.0) |
+| town | 105 | 11 / 19 / 35 (μ 19.6) | 11 / 18 / 35 (μ 18.7) | 6 / 7 / 7 (μ 6.9) | 0/726 (0 towns) | 355/726 (49%) | 105/105 | 0 | 96 | 0 | 4 / 12 / 26 (μ 12.6) | 1 / 4 / 8 (μ 3.7) | 0 / 2 / 3 (μ 1.5) | 25 / 43 / 87 (μ 45.8) | 6 / 7 / 7 (μ 6.9) |
+| city | 84 | 45 / 50 / 57 (μ 51.2) | 44 / 49 / 56 (μ 50.2) | 9 / 9 / 9 (μ 9.0) | 12/756 (12 towns) | 571/756 (76%) | 84/84 | 0 | 84 | 0 | 35 / 40 / 46 (μ 40.2) | 8 / 11 / 14 (μ 11.2) | 0 / 0 / 1 (μ 0.4) | 106 / 124 / 139 (μ 123.8) | 9 / 9 / 9 (μ 9.0) |
+| metropolis | 84 | 67 / 73 / 76 (μ 72.0) | 66 / 72 / 75 (μ 71.0) | 9 / 9 / 9 (μ 9.0) | 0/756 (0 towns) | 672/756 (89%) | 84/84 | 0 | 84 | 0 | 53 / 58 / 61 (μ 57.7) | 16 / 18 / 20 (μ 18.0) | 1 / 1 / 1 (μ 1.0) | 162 / 174 / 182 (μ 172.5) | 9 / 9 / 9 (μ 9.0) |
+
+Powers at zero faces, by archetype (corpus): merchant 24 · military 156 · arcane 12
+
+Zero-face powers, by name (top 20): Military/Guard 156 · Grain Holders 24 · Arcane Orders 12
+
+Seat mints fired (power → title: count): Elder Council → the eldest: 96
+
+Other mints fired (power → title: count): The Independent Bloc → the bloc's speaker: 480
+
+Pool-map fallback titles (title: cards): the miller 357 · the granary reeve 273 · the innkeeper 273 · the bowyer 224 · the cartographer 222 · the carpenter 221 · the master weaver 214 · the sawyer 206 · the apothecary 201 · the master baker 194 · the brewer 192 · the smith 186 · the tailor 185 · the smelt master 182 · the master butcher 178 · the ropemaker 177 · the bath-keeper 177 · the charter master 170 · the beast trainer 160 · the cobbler 159 · the network's spider 158 · the hospitaller 157 · the potter 148 · the fuller 145 · the front man 145 · the house boss 144 · the master metalworker 144 · the theatre manager 144 · the gaoler 140 · the midwife 136 · the brickmaker 135 · the fortune teller 133 · the castellan 128 · the chandler 128 · the enchanter 128 · the glassmaker 126 · the dyer 123 · the lanista 121 · the mint master 121 · the customs collector 120 · the cooper 117 · the tanner 112 · the scroll scribe 106 · the master tanner 102 · the madam 98 · the coaching-inn keeper 97 · the college master 96 · the black marketeer 92 · the printer 91 · the smuggler 87 · the toll-keeper 86 · the pit boss 85 · the gang boss 85 · the woodcarver 85 · the rookery boss 84 · the market warden 84 · the pawnbroker 80 · the vintner 73 · the chancellor 73 · the whisper broker 72 · the lodge master 69 · the ferryman 66 · the crier 66 · the eldest householder 60 · the caravanserai keeper 60 · the caravan master 60 · the musician 60 · the auctioneer 60 · the postmaster 60 · the arena master 60 · the collier 60 · the grove elder 54 · the harbour master 49 · the steward 48 · the guildmaster of thieves 47 · the librarian 43 · the impresario 39 · the salt master 38 · the master shipwright 36 · the foundling-mother 36 · the guild's master 36 · the chronicler 32 · the workhouse master 26 · the household elder 24 · the shrine-keeper 24 · the killer 24 · the assayer 20 · the jeweller 15 · the fence 13 · the head shepherd 12 · the camp foreman 12 · the barge master 12 · the almoner 5 · the horse-coper 4 · the carriers' master 3 · the quarry master 3 · the boatwright 1 · the hiring master 1 · the master of the hunt 1
+
+Card categories (corpus): other 6398 · government 2244 · criminal 1206 · economy 1171 · military 948 · religious 921 · magic 504

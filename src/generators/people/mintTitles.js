@@ -65,11 +65,24 @@ export const headOf = (power) => `the head of ${power}`;
  * @type {Readonly<Record<string, MintRow>>}
  */
 export const OTHER_MINT_ROWS = Object.freeze({
+  // the chair's table (R-P4)
   'Revolt Leadership': row("the revolt's leader", 'Revolt Leader', 'other', 'lord'),
   "Creditor's Representative": row("the creditor's agent", 'Moneylender', 'economy', 'banker'),
   'Reformist Faction': row('the reformer', 'Council Member', 'government', 'council'),
   'Investigation Faction': row('the investigator', 'Chief Magistrate', 'government', 'magistrate'),
   'The Independent Bloc': row("the bloc's speaker", 'Council Member', 'government', 'council'),
+  // the names the soak 1,000 measured beyond the chair's five (PEOPLE-1, the instrument's
+  // "Other mints fired" row at the lane's first measurement: 14 · 10 · 10 · 6 · 4 · 4 · 2 firings)
+  "Newcomers' Settlement": row("the newcomers' spokesman", 'Spokesman', 'other', 'elder'),
+  'The Free Alliance': row("the alliance's convenor", 'Council Member', 'government', 'council'),
+  'The Common Interest': row("the commoners' tribune", 'Council Member', 'government', 'council'),
+  'Third Bloc (Neutrals)': row("the neutrals' broker", 'Council Member', 'government', 'council'),
+  'Peace Faction': row('the peacemaker', 'Council Member', 'government', 'council'),
+  'Abolitionist Network': row('the abolitionist', 'Street Preacher', 'other', 'priest'),
+  "Journeymen's League": row("the journeymen's warden", 'Journeyman Overseer', 'other', 'overseer'),
+  // a power whose archetype the backing catalogue has no row for (occupation): no house can
+  // back it, so it mints like a stress-born power (4 firings on the 1,000)
+  'Occupation Authority': row('the occupying governor', 'Governor', 'government', 'mayor'),
 });
 
 /** The row an `other` power the table does not name takes: the fallback title, the generic pools. */

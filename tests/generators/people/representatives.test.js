@@ -72,8 +72,9 @@ function assertCast(s, label) {
     const seatRole = SEAT_ROLE_BY_TIER[s.tier];
     const seated = cards.filter((n) => n.role === seatRole && (seat ? n.institution.key === seat.house.name : n.institution.kind === 'power'));
     expect(seated.length, `${label}: exactly one seat face (${seat ? seat.kind : 'minted'})`).toBe(1);
-    const mint = cards.find((n) => n.institution.kind === 'power');
-    if (seat) expect(mint, `${label}: no mint beside a seat house`).toBeUndefined();
+    // the SEAT mint by its id (the `other` powers' mints of step 3 are `kind: 'power'` too)
+    const mint = cards.find((n) => n.id === SEAT_CARD_ID);
+    if (seat) expect(mint, `${label}: no seat mint beside a seat house`).toBeUndefined();
     else {
       expect(mint.id).toBe(SEAT_CARD_ID);
       expect(mint.institution).toEqual({ kind: 'power', key: governing, family: null, title: seatMintTitleFor(governing).title });
