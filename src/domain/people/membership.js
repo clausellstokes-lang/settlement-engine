@@ -15,8 +15,10 @@
 
 /** @typedef {{ power: string, rank: 1 | 2 | 3 | null, share?: number }} Membership */
 
+/** @param {unknown} v @returns {Record<string, unknown>} */
+const recordOf = (v) => (v && typeof v === 'object' ? /** @type {Record<string, unknown>} */ (v) : {});
 /** @param {unknown} m @returns {m is Membership} */
-const isMembership = (m) => !!m && typeof m === 'object' && typeof (/** @type {any} */ (m).power) === 'string' && !!(/** @type {any} */ (m).power);
+const isMembership = (m) => { const p = recordOf(m).power; return typeof p === 'string' && !!p; };
 /** @param {Membership} m @returns {number} a rank's sort key: 1, 2, 3, then the unranked */
 const rankKey = (m) => (Number.isInteger(m.rank) ? /** @type {number} */ (m.rank) : Number.MAX_SAFE_INTEGER);
 
@@ -25,7 +27,7 @@ const rankKey = (m) => (Number.isInteger(m.rank) ? /** @type {number} */ (m.rank
  * @param {unknown} card @returns {Membership[]}
  */
 export function membershipsOf(card) {
-  const ms = card && typeof card === 'object' ? /** @type {any} */ (card).memberships : null;
+  const ms = recordOf(card).memberships;
   return Array.isArray(ms) ? ms.filter(isMembership) : [];
 }
 
@@ -88,10 +90,10 @@ export function firstRankMembershipOf(card, powerOrder = []) {
  * @param {unknown} settlement @returns {string[]}
  */
 export function powerOrderOf(settlement) {
-  const fs = /** @type {any} */ (settlement)?.powerStructure?.factions;
-  const roster = (Array.isArray(fs) ? fs : [])
-    .map((f) => String(f?.faction || f?.name || '')).filter(Boolean);
-  const governing = String((Array.isArray(fs) ? fs : []).find((f) => f?.isGoverning)?.faction || '');
+  const fs = recordOf(recordOf(settlement).powerStructure).factions;
+  const list = (Array.isArray(fs) ? fs : []).map(recordOf);
+  const roster = list.map((f) => String(f.faction || f.name || '')).filter(Boolean);
+  const governing = String(list.find((f) => f.isGoverning)?.faction || '');
   return governing ? [governing, ...roster.filter((n) => n !== governing)] : roster;
 }
 

@@ -660,10 +660,17 @@ describe('reader-with-no-writer ratchet: the EXECUTED corpus', () => {
     // rung roster (one card per face-bearing house, the seat always faced, the powers' first/second/third), so the corpus's
     // twelve pulses run over a roster of a different size and shape and the AO-0 year is re-dealt. ⚠ NOT cross-recorded in
     // news-voice, news-headline and prose-family here: those are listed in the lane's red list for the chair (M-3's door).
+    // 2026-11-07 (PEOPLE-2 CAST-DERIVED, the people car's lane 2; docs/PEOPLE_2_CAST_2026-11-07.md): final 378 → 399,
+    // accumulated 2394 → 2518, unique 379 → 400, regional 80/80 → 81/81. TWO CAUSES, MEASURED PER STEP (the corpus builder
+    // run at each of the lane's commits): step 1 0efc296fa (the crisis cast reads memberships) HOLDS 378/2394/379/80; step 2
+    // aafc99a54 (`npcInFaction` reads memberships — FPZ's shared membership match now sees a card's every power, not only
+    // its first — and the seat row is the governing power's rank-1 face) 417/2626/418/80; step 3 07e027b0c (structuralRank
+    // from the standing; the roster's order is the structural pass's relevance order, the powers' heads first)
+    // 399/2518/400/81. ⚠ NOT cross-recorded in news-voice, news-headline and prose-family (red at the base, lane 1's list).
     expect(scalarCorpus.scalarMeta).toEqual({
       canonEventLogEntries: 1,
-      wizardNewsFinalEntries: 378,
-      wizardNewsAccumulatedEntries: 2394,
+      wizardNewsFinalEntries: 399,
+      wizardNewsAccumulatedEntries: 2518,
       // FP BATCH 4 (2026-09-24, the FP chair): wizardNewsFinalEntries 240 → 272 and wizardNewsAccumulatedEntries 1567 → 1604 —
       // the Herald lens U2 (32315e384, FP-31): the feed keeps its newest 52 weeks whole under the 240 cap, so the corpus's
       // twelve monthly pulses retire one entry instead of thirty-three; unique 273 HOLDS. Attributed by equality with the U2
@@ -673,7 +680,7 @@ describe('reader-with-no-writer ratchet: the EXECUTED corpus', () => {
       // (a peacetime suit retires when a war opens against its court; its feed reconcile mints the one id). Accumulated 1567
       // and final 240 DO NOT MOVE. Cross-recorded in the same act: news-voice (introductions 273), prose-family
       // (scalarRows 25549, pulseHistory 1055/5097), the OSR register --write at 98e0d8664 (exact, 1970 findings).
-      wizardNewsUnique: 379,
+      wizardNewsUnique: 400,
       pulseHistory: 12,
       // TE36 (ODQ §271): 109 → 73, one cause — the regional event log carries the pulse's
       // selected outcomes, and the retired bare-decline family was 36 of them. That mint's
@@ -681,11 +688,11 @@ describe('reader-with-no-writer ratchet: the EXECUTED corpus', () => {
       // OPPOSITE directions, and 73 → 74 here is the state lane picking up exactly what the
       // Chronicle put down. `wizardNewsFinalEntries` staying at 240 through both mints is
       // the control that keeps the two layers legibly apart.
-      regionalEventLog: 80, // 2026-11-07 PEOPLE-1 CAST: 86 → 80, the cast re-deals the AO-0 year (see the note above)
+      regionalEventLog: 81, // 2026-11-07 PEOPLE-2 CAST-DERIVED step 3: 80 → 81 (see the note above); PEOPLE-1 CAST: 86 → 80
       // 2026-11-05 (LANDING-5, the chair's addition (c)): 74 → 75, ONE cause — the residual outcome's id now carries
       // its tick (stressorsCore.js :: residualOutcome), so osr002's raider pressure, resolved twice, is two regional
       // records instead of one id minted twice. regionalEventLog holds at 75: no record was added, one stopped colliding.
-      regionalEventLogUnique: 80,
+      regionalEventLogUnique: 81,
       aiChronicle: 1,
     });
     expect(Object.hasOwn(corpus, 'scalarObservations')).toBe(false);
