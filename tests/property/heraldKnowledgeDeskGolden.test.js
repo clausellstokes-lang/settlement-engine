@@ -104,7 +104,9 @@ describe('the knowledge desk — the non-omniscient Herald golden (captured firs
     // 1 more items (434 → 435).
     // 435 → 479 at RECORD 1, PEOPLE-1 CAST (ODQ §934.105, THE PEOPLE CAR’S LANDING, 2026-11-07; record docs/shift-records/2026-11-07-people-1-cast.json): the cast re-deals the wizard news over the year: one face per face-bearing house replaces the faction rungs' NPCs (222 items added, 178 removed, 2 moved)
     // 44 more items (435 → 479).
-    expect(Object.keys(manifest)).toHaveLength(479);
+    // 479 → 478 at RECORD 2, PEOPLE-2 CAST-DERIVED (ODQ §934.105, THE PEOPLE CAR’S LANDING, 2026-11-07; record docs/shift-records/2026-11-07-people-2-cast-derived.json): the crisis cast re-deals the wizard news over the year (9 items added, 10 removed, 2 moved)
+    // 1 fewer items (479 → 478).
+    expect(Object.keys(manifest)).toHaveLength(478);
   });
 
   it('the declared refile set is exactly the knowledge desk the routing table carries', () => {
