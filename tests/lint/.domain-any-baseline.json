@@ -1,6 +1,6 @@
 {
-  "total": 2202,
-  "totalAny": 2164,
+  "total": 2200,
+  "totalAny": 2162,
   "totalSuppress": 38,
   "files": {
     "src/domain/activeConditions.js": {
@@ -84,7 +84,7 @@
       "suppress": 1
     },
     "src/domain/display/institutionProfile.js": {
-      "any": 6,
+      "any": 4,
       "suppress": 0
     },
     "src/domain/display/mobilizationStatus.js": {
