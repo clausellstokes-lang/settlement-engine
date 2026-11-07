@@ -24,40 +24,7 @@ import {
 } from '../../domain/content/customContentSemanticAuthority.js';
 import { resolveGenerationWorldLaw } from '../generationContext.js'; import { hasMarketInstitution } from '../economy/viability.js'; import { defenseFactsOf, forceWordsOf } from '../../domain/defense/defenseFacts.js'; import { resolveSibling } from '../../domain/facts/drawDeclared.js'; import { factsOf } from '../../domain/facts/factsOf.js'; import { textOf } from '../../domain/facts/textOf.js'; import { MILITARY_GUARD_LABEL } from '../../data/factionLabelSiblings.js'; import { FACTION_DESC_SIBLINGS } from '../../data/powerSiblings.js'; export { FACTION_DESC_SIBLINGS }; // SIZE-3, R6, F1, F10, CENSUS-1c, CENSUS-4f, CENSUS-5c and CENSUS-5e (R-AB: the tables moved to data/powerSiblings.js, re-exported): one line, so no cited line moves
 
-// renormalizeFactionPower — rescale every faction's `power` to integer
-// percentage points summing to exactly 100, using largest-remainder rounding
-// so the rounded points always total 100 (never 99 or 101). Mutates in place
-// and preserves rank order. Reused by the neighbourFactions step, which injects
-// raw-scale powers into the already-percentage-normalized roster and must
-// restore the power-share invariant. No-op for an empty/zero-power roster.
-// (factionDynamics carries a file-local copy — it cannot import from here
-// without closing an import cycle the architecture test bans.)
-export const renormalizeFactionPower = (factions) => {
-  if (!factions || !factions.length) return factions;
-  const total = factions.reduce((sum, f) => sum + (f.power || 0), 0);
-  if (total <= 0) return factions;
-  // Floor each share, track remainders, then distribute the leftover points to
-  // the largest remainders (ties broken by current order) so the sum is 100.
-  const shares = factions.map((f, i) => {
-    const exact = ((f.power || 0) / total) * 100;
-    const floor = Math.floor(exact);
-    return { i, floor, remainder: exact - floor };
-  });
-  let leftover = 100 - shares.reduce((sum, s) => sum + s.floor, 0);
-  shares
-    .slice()
-    .sort((a, b) => b.remainder - a.remainder || a.i - b.i)
-    .forEach((s) => {
-      if (leftover > 0) {
-        s.floor += 1;
-        leftover -= 1;
-      }
-    });
-  shares.forEach((s) => {
-    factions[s.i].power = s.floor;
-  });
-  return factions;
-};
+import { renormalizeFactionPower } from './renormalizeFactionPower.js'; export { renormalizeFactionPower }; // LANDING-R2 (ODQ §934.105): moved verbatim to power/renormalizeFactionPower.js, re-exported for its importers
 
 // normalizeAndAnnotateFactions — renormalise faction powers to percentages,
 // sort governing-first then by descending power, and append inter-faction
