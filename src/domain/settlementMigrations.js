@@ -262,7 +262,7 @@ const MIGRATIONS = Object.freeze([
   {
     from: 1,
     to:   2,
-    description: 'M-7 (PEOPLE-5B): the people car — per-card faction fields -> ranked memberships, the card\'s house, the grouping dropped, ties directed.',
+    description: 'M-7 (PEOPLE-5B): the people car: per-card faction fields -> ranked memberships, the card\'s house, the grouping dropped, ties directed.',
     /**
      * @param {Record<string, unknown>} settlement
      * @returns {Record<string, unknown>}
