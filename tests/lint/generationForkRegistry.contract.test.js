@@ -179,7 +179,8 @@ describe('EM-P2 — the generation fork register: totality, derivation, and Tier
     // post-step comparand (generationRepairs absent -> varies; isolationSupport varies -> same), and both now agree
     // with their final comparand, so the disagreeing rows below go 18 -> 16 (generationForkCensus records the same).
     expect(tallyOf(GENERATION_TIER1, 'producedOnRecordClass'), 'the POST-STEP comparand tally')
-      .toEqual({ absent: 27, same: 17, transformed: 13, varies: 17 }); // LANDING-1 (2026-11-04): one row same -> varies, re-measured at the landed tip. lane CRISIS (2026-11-03): resolveCrisisCast joins; assembleSettlement|stress produced same -> varies
+      // 2026-11-07 PEOPLE-1 CAST: same 17 -> 16, varies 17 -> 18 — `generatePopulation|relationships` is produced by the step and then APPENDED TO at the coherence seam (the `other` mints' ties, castPowers.js), so the record's value varies from the step's.
+      .toEqual({ absent: 27, same: 16, transformed: 13, varies: 18 }); // LANDING-1 (2026-11-04): one row same -> varies, re-measured at the landed tip. lane CRISIS (2026-11-03): resolveCrisisCast joins; assembleSettlement|stress produced same -> varies
 
     // §6.2b: the register carries both comparands BECAUSE sixteen rows disagree, and every
     // one of them is a key a LATER step rewrites. The set is derived from the register itself.
@@ -187,7 +188,7 @@ describe('EM-P2 — the generation fork register: totality, derivation, and Tier
       .filter((row) => row.onRecordClass !== row.producedOnRecordClass)
       .map((row) => `${row.step}|${row.key}`);
     process.stdout.write(`\n[A3s] the two comparands disagree on ${disagreeing.length} rows: ${disagreeing.join(', ')}\n`);
-    expect(disagreeing.length, 'the disagreement count is the register\'s reason for carrying both').toBe(13); // LANDING-8 (2026-11-06): 17 -> 13, the four stress rows' two comparands agree under the copy-on-write crisis cast (8befe5a0d). lane CRISIS (2026-11-03): resolveCrisisCast joins: assembleSettlement|stress (16 -> 17)
+    expect(disagreeing.length, 'the disagreement count is the register\'s reason for carrying both').toBe(14); /* 13 -> 14, PEOPLE-1 CAST: the relationships row (the seam's ties) */ // LANDING-8 (2026-11-06): 17 -> 13, the four stress rows' two comparands agree under the copy-on-write crisis cast (8befe5a0d). lane CRISIS (2026-11-03): resolveCrisisCast joins: assembleSettlement|stress (16 -> 17)
     expect(GENERATION_TIER1.filter((row) => row.key === 'effectiveConfig'
       && row.onRecordClass === 'same' && row.producedOnRecordClass === 'absent').length,
     'the seven effectiveConfig rows: the config IS on the record, and no writer handed it there').toBe(7);

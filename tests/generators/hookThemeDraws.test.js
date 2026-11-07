@@ -274,7 +274,7 @@ describe('HK-3 draws — the corpus, through the real pipeline', () => {
     // set); the count follows the census, as every row above: 860 / 25 → the figures below, measured by this
     // file's own corpus at the lane's tip. The exact-duplicate residual is the SAME pools drawn by a cast the
     // pools were not written for — the writing wave's debt, named in the record's §6.
-    expect(total, 'the corpus NPC-hook total moved — HK-3 must never drop a hook').toBe(3164);
+    expect(total, 'the corpus NPC-hook total moved — HK-3 must never drop a hook').toBe(3165); // 3164 -> 3165 at the seam-mint tip (the mint tied and named after the cast)
     expect(duplicates, 'the exact-duplicate residual is bounded pool EXHAUSTION and must not move').toBe(HOOK_DUPLICATES_AT_TIP);
 
     // A PRE-EXISTING CONDITION, pinned here so HK-3 cannot be blamed for it and so
@@ -410,7 +410,7 @@ describe('HK-3 draws — the corpus, through the real pipeline', () => {
 //   corpus-wide field delta          personality.tell + .speech ONLY
 // ─────────────────────────────────────────────────────────────────────────────
 /** 2026-11-07 PEOPLE-1 CAST: the two figures the cast moved, measured by this file's own corpus at the lane's tip. */
-const HOOK_DUPLICATES_AT_TIP = 1334; // MEASURED at the lane's tip by this file's own corpus (the arm's received value): the pools' exhaustion by a 3.6× cast, W7 HOOKS' debt
+const HOOK_DUPLICATES_AT_TIP = 1335; // MEASURED at the lane's tip by this file's own corpus (the arm's received value): the pools' exhaustion by a 3.6× cast, W7 HOOKS' debt
 const ABOVE_K_SHARE_AT_TIP = 66.1;
 
 describe('CS-A1 draws — the tell/speech registry accumulates across the population', () => {
