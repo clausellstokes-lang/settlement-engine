@@ -5946,7 +5946,7 @@ unchanged.
 **`criticalIssueCount`: critical contradictions on the record** {colour}
 1. `[ledger]` {band} of things about {settlement} cannot all be true at once; its account of itself is far from clean.
 2. `[visitor]` What {settlement} says about itself does not match the rest in {band} of places.
-3. `[street]` A handful of things about {settlement} cannot all be true at once, and everyone here has their own explanation.
+3. `[street]` A handful of things about this town cannot all be true at once, and everyone here has their own explanation.
 
 **`criticalIssueCount` zero** · **THE GOOD STATE (R-DST-G)** {colour}
 1. `[ledger]` Nothing about {settlement} contradicts anything else; its account of itself is clean.

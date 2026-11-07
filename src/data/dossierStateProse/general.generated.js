@@ -8536,10 +8536,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "A handful of things about {settlement} cannot all be true at once, and everyone here has their own explanation.",
-          "slots": [
-            "settlement"
-          ],
+          "text": "A handful of things about this town cannot all be true at once, and everyone here has their own explanation.",
+          "slots": [],
           "vid": 3
         }
       ],

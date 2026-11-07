@@ -315,7 +315,7 @@ export const CULTURE_PROFILES = Object.freeze({
   east_asian: profile({
     key: 'east_asian',
     label: 'East-Asian-inspired',
-    scope: 'Walled wards and courtyards, run by officials and old families.',
+    scope: 'Wards and courtyards, run by officials and old families.',
     builtForm: [
       'Walled compounds, tiled roofs, axial streets, shop houses, and garden courts organize distinct wards.',
       { text: 'A planned civic axis links gate, market, administrative compound, temple precinct, and waterworks.', needs: ['gate', 'market', 'institution: temple'] },
