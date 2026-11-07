@@ -1037,9 +1037,10 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "{good} is the price everyone here quotes first, and it quotes high. The stores are short of it and the crier's reckoning follows the shortage rather than any rate.",
+          "text": "{good} is the price everyone in {settlement} quotes first, and it is high: the stores are short of it.",
           "slots": [
-            "good"
+            "good",
+            "settlement"
           ],
           "vid": 1
         },
@@ -1059,7 +1060,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "market"
           ],
-          "text": "A stranger's coin goes furthest on everything in {settlement} except {good}, which is scarce enough that the market prices it out loud.",
+          "text": "Everything in {settlement}'s market is fairly priced except {good}, which is scarce and dear.",
           "slots": [
             "settlement",
             "good"
@@ -1071,8 +1072,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "market"
           ],
-          "text": "The market is ordinary but for {good}: stocks of it have fallen far enough to move the crier's coarse reckoning, and nothing else has.",
+          "text": "{settlement}'s market is ordinary except for {good}: stocks are low enough that its price has risen, and nothing else has moved.",
           "slots": [
+            "settlement",
             "good"
           ],
           "vid": 4
@@ -1084,9 +1086,10 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "{good} sells for little here. The stores are heavy with it and the reckoning has come down to meet the pile.",
+          "text": "{good} sells for little in {settlement}. The stores are heavy with it and the price has dropped.",
           "slots": [
-            "good"
+            "good",
+            "settlement"
           ],
           "vid": 1
         },
@@ -1107,9 +1110,10 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "market"
           ],
-          "text": "A stranger buying {good} does well in this market. Nothing else is priced kindly.",
+          "text": "{good} is cheap in {settlement}'s market; nothing else is.",
           "slots": [
-            "good"
+            "good",
+            "settlement"
           ],
           "vid": 3
         },
@@ -1151,8 +1155,10 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "market"
           ],
-          "text": "A stranger will find no bargains and no robberies. The market is level across the board.",
-          "slots": [],
+          "text": "There are no bargains and no robberies in {settlement}'s market; prices are level across the board.",
+          "slots": [
+            "settlement"
+          ],
           "vid": 3
         },
         {
@@ -1160,8 +1166,10 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "market"
           ],
-          "text": "No good is scarce enough or heavy enough to move its price, so every stall sits inside its ordinary reckoning, and it would take a real movement in the stores to put any of them outside it.",
-          "slots": [],
+          "text": "No good in {settlement} is scarce or piled up, so prices sit where they usually do.",
+          "slots": [
+            "settlement"
+          ],
           "vid": 4
         }
       ],
@@ -1171,8 +1179,10 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "market"
           ],
-          "text": "The two halves of this market disagree. What the town sells is dear and what the town buys is cheap, and both readings come off the same week's stocks.",
-          "slots": [],
+          "text": "In {settlement} what the town sells is dear and what it buys is cheap.",
+          "slots": [
+            "settlement"
+          ],
           "vid": 1
         },
         {
@@ -1200,8 +1210,10 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "The town's own goods are running short while what it imports keeps piling up, and the crier prices both movements in the same breath.",
-          "slots": [],
+          "text": "{settlement}'s own goods are running short while imports pile up, and the crier calls both prices together.",
+          "slots": [
+            "settlement"
+          ],
           "vid": 4
         }
       ]

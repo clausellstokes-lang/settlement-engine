@@ -969,28 +969,28 @@ the market's shape as a whole.
 **SLOTS.** `{settlement}` `{good}`
 
 **HIGHLIGHT: dear**
-1. `[ledger · colour]` {good} is the price everyone here quotes first, and it quotes high. The stores are short of it and the crier's reckoning follows the shortage rather than any rate.
+1. `[ledger · colour]` {good} is the price everyone in {settlement} quotes first, and it is high: the stores are short of it.
 2. `[street · market]` What this market talks about is the cost of {good}. It is dear, it has been dear, and the crier says so before he says anything else.
-3. `[visitor · market]` A stranger's coin goes furthest on everything in {settlement} except {good}, which is scarce enough that the market prices it out loud.
-4. `[threshold · market]` The market is ordinary but for {good}: stocks of it have fallen far enough to move the crier's coarse reckoning, and nothing else has.
+3. `[visitor · market]` Everything in {settlement}'s market is fairly priced except {good}, which is scarce and dear.
+4. `[threshold · market]` {settlement}'s market is ordinary except for {good}: stocks are low enough that its price has risen, and nothing else has moved.
 
 **HIGHLIGHT: cheap**
-1. `[ledger · colour]` {good} sells for little here. The stores are heavy with it and the reckoning has come down to meet the pile.
+1. `[ledger · colour]` {good} sells for little in {settlement}. The stores are heavy with it and the price has dropped.
 2. `[street · colour]` Anyone selling {good} in {settlement} is selling it badly. There is too much of it and the price says so.
-3. `[visitor · market]` A stranger buying {good} does well in this market. Nothing else is priced kindly.
+3. `[visitor · market]` {good} is cheap in {settlement}'s market; nothing else is.
 4. `[unfolding · colour]` {good} keeps arriving faster than it leaves, and the price has been giving way to it.
 
 **NO HIGHLIGHT: everything steady**
 1. `[ledger · market]` Nothing in {settlement}'s market is priced out of the ordinary. Every good the town trades sits within its accustomed reckoning.
 2. `[street · colour]` The crier has nothing to make a noise about. Prices here are what prices here usually are.
-3. `[visitor · market]` A stranger will find no bargains and no robberies. The market is level across the board.
-4. `[threshold · market]` No good is scarce enough or heavy enough to move its price, so every stall sits inside its ordinary reckoning, and it would take a real movement in the stores to put any of them outside it.
+3. `[visitor · market]` There are no bargains and no robberies in {settlement}'s market; prices are level across the board.
+4. `[threshold · market]` No good in {settlement} is scarce or piled up, so prices sit where they usually do.
 
 **MIXED: exports dear, imports cheap**
-1. `[ledger · market]` The two halves of this market disagree. What the town sells is dear and what the town buys is cheap, and both readings come off the same week's stocks.
+1. `[ledger · market]` In {settlement} what the town sells is dear and what it buys is cheap.
 2. `[street · market]` Sellers here are doing well and so are buyers, which is not the ordinary shape of a market and is the first thing a trader will remark on.
 3. `[visitor · colour]` A trader arriving at {settlement} pays dear for what the town makes and gets little for what he brought.
-4. `[unfolding · colour]` The town's own goods are running short while what it imports keeps piling up, and the crier prices both movements in the same breath.
+4. `[unfolding · colour]` {settlement}'s own goods are running short while imports pile up, and the crier calls both prices together.
 
 ---
 
