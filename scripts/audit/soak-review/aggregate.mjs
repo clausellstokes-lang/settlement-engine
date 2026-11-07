@@ -37,7 +37,14 @@ const r3 = (x) => (x == null || !Number.isFinite(x) ? x : Math.round(x * 1000) /
 
 export { spearman, cramersV, eta, dependence } from './dependence-measures.mjs';
 
-export function aggregate(out, meta) {
+/**
+ * @param {string} out the output directory
+ * @param {object} meta spread first into run.json
+ * @param {() => Iterable<any>} [source] the rows, in run order; a single run reads its own
+ *   `<out>/shards/*.jsonl` (the default). The merge driver (scripts/audit/soak-merge.mjs) passes
+ *   the union of N shard runs' moved files instead, ordered as one run would have read them.
+ */
+export function aggregate(out, meta, source = () => shardLines(out)) {
   const rows = [];
   writeFileSync(join(out, 'findings.jsonl'), '');
   writeFileSync(join(out, 'settlements.jsonl'), '');
@@ -69,7 +76,7 @@ export function aggregate(out, meta) {
     const n = row.reader?.exports; if (Number.isFinite(n)) (exportsByTier[row.tier] ??= []).push(n);
     if (row.reader?.dailyLifeLine) dailyLineByTier[row.tier] = (dailyLineByTier[row.tier] || 0) + 1;
   };
-  for (const row of shardLines(out)) {
+  for (const row of source()) {
     const k = rows.length;
     if (row.error) errors += 1;
     for (const f of row.findings || []) {
