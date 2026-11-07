@@ -130,8 +130,19 @@ const TOTAL_KEYS = Object.freeze(['identities', 'distinctValues', 'occurrences']
 // ALONE it measures the whole tip, byte for byte (nothing after the ceilings moves the corpus). One home leaves
 // (queued|npc_reform) and three arrive (applied|stressor_birth_rebellion, realm|realm_insurgency, realm|realm_mass_migration).
 // Conservation closes: 270 − 0 = 270. No surviving row flips its voice class; the voice debt stays EMPTY.
+// ── RE-RECORDED 2026-11-07 BY LANDING-R2 (helper seat D2, the chair's ruling of 02:36 UTC, §934.105: where per-cause stages are
+// unbuildable — the census lanes' cross-merges — a pin is re-taken AT THE TIP with its movement ATTRIBUTED BY STEP and the residual
+// named as interaction with rung 1), IN THE SAME ACT AS THE NEWS-HEADLINE AND PROSE-FAMILY CONTRACTS (the 3d50676bb door) ──────
+// 270/0/270/44 → 262/0/262/43. ONE CORPUS BUILD PER TREE, every field measured (the throw below disabled in a scratch copy only):
+// rung 1 final 1bff51c6d reproduces the frozen tuple exactly; the census base f28689600 reads 12/252/0/252/42; the rung-2 tip
+// f5dc50c6b 12/245/0/245/41. Of the rung-2 line's 19 first-parent src steps ONLY the census-1b merge 0856c09d3 (e36e4916f) moves
+// it, and census-1b's own first-parent line, bisected, attributes it by step: d35532850 (census-1c unit 6b, water-keyed tradition
+// elements weigh 0 inland) 252 → 249; 950b75014 (the census-4 merge) 249 → 247; 597866207 (census-1i unit 3, R-AX: both rolls of
+// the criminal secret read the holder's role) 247 → 245 and queued|npc_suppress LEAVES (42 → 41 homes). At the tip 3d03dc723:
+// 262/0/262/43 — rung 2's steps −7 and the one home out; −1 introduction is INTERACTION with rung 1; no home in. Conservation closes:
+// 262 − 0 = 262. No surviving row flips its voice class; the voice debt stays EMPTY.
 const CORPUS = Object.freeze({
-  pulseRoots: 12, introductions: 270, retirements: 0, finalEntries: 270, homes: 44,
+  pulseRoots: 12, introductions: 262, retirements: 0, finalEntries: 262, homes: 43,
 });
 
 export const NEWS_VOICE_PROTECTED_SUBSTRATE = Object.freeze([

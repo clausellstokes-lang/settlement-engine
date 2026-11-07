@@ -2,10 +2,10 @@
   "schemaVersion": 1,
   "corpus": {
     "pulseRoots": 12,
-    "introductions": 270,
+    "introductions": 262,
     "retirements": 0,
-    "finalEntries": 270,
-    "homes": 44
+    "finalEntries": 262,
+    "homes": 43
   },
   "addressTotality": {
     "rows": [
@@ -97,15 +97,15 @@
         "home": "applied|npc_contest",
         "field": "headline",
         "voiceClass": "indicative",
-        "distinctValues": 10,
-        "occurrences": 12
+        "distinctValues": 8,
+        "occurrences": 10
       },
       {
         "home": "applied|npc_contest",
         "field": "summary",
         "voiceClass": "indicative",
-        "distinctValues": 12,
-        "occurrences": 12
+        "distinctValues": 10,
+        "occurrences": 10
       },
       {
         "home": "applied|npc_exploit",
@@ -209,15 +209,15 @@
         "home": "applied|roads",
         "field": "headline",
         "voiceClass": "indicative",
-        "distinctValues": 43,
-        "occurrences": 43
+        "distinctValues": 41,
+        "occurrences": 41
       },
       {
         "home": "applied|roads",
         "field": "summary",
         "voiceClass": "indicative",
-        "distinctValues": 43,
-        "occurrences": 43
+        "distinctValues": 41,
+        "occurrences": 41
       },
       {
         "home": "applied|strategy_deploy",
@@ -349,15 +349,15 @@
         "home": "applied|tradition",
         "field": "headline",
         "voiceClass": "indicative",
-        "distinctValues": 22,
-        "occurrences": 22
+        "distinctValues": 18,
+        "occurrences": 18
       },
       {
         "home": "applied|tradition",
         "field": "summary",
         "voiceClass": "indicative",
-        "distinctValues": 22,
-        "occurrences": 22
+        "distinctValues": 18,
+        "occurrences": 18
       },
       {
         "home": "applied|urban_fabric",
@@ -517,29 +517,15 @@
         "home": "queued|npc_seek_promotion",
         "field": "headline",
         "voiceClass": "indicative",
-        "distinctValues": 3,
-        "occurrences": 3
+        "distinctValues": 4,
+        "occurrences": 4
       },
       {
         "home": "queued|npc_seek_promotion",
         "field": "summary",
         "voiceClass": "indicative",
-        "distinctValues": 3,
-        "occurrences": 3
-      },
-      {
-        "home": "queued|npc_suppress",
-        "field": "headline",
-        "voiceClass": "indicative",
-        "distinctValues": 1,
-        "occurrences": 1
-      },
-      {
-        "home": "queued|npc_suppress",
-        "field": "summary",
-        "voiceClass": "indicative",
-        "distinctValues": 1,
-        "occurrences": 1
+        "distinctValues": 4,
+        "occurrences": 4
       },
       {
         "home": "queued|strategy_sue_for_peace",
@@ -626,15 +612,15 @@
         "occurrences": 1
       }
     ],
-    "rowsSha256": "6214cb83e8047ecaf7697d2d917ce047c198d8fcfb742de1fcfe9df812072679",
+    "rowsSha256": "88b04c5a9c80605f54f576452af88192fc9a3f1976585437fe96ea57585f0a79",
     "totals": {
-      "homes": 44,
+      "homes": 43,
       "fields": 2,
-      "identities": 88,
+      "identities": 86,
       "prospectiveIdentities": 0,
-      "indicativeIdentities": 88,
-      "distinctValues": 372,
-      "occurrences": 540
+      "indicativeIdentities": 86,
+      "distinctValues": 356,
+      "occurrences": 524
     }
   },
   "rewriteLiveness": {
@@ -644,11 +630,11 @@
         {
           "field": "mechanicalOutcomes",
           "capPerPulse": 8,
-          "headlineOccurrences": 45,
+          "headlineOccurrences": 46,
           "distinctValues": 21,
           "prospectiveOccurrences": 0,
           "prospectiveDistinctValues": 0,
-          "indicativeOccurrences": 45,
+          "indicativeOccurrences": 46,
           "indicativeDistinctValues": 21
         },
         {
@@ -663,11 +649,11 @@
         }
       ],
       "union": {
-        "headlineOccurrences": 211,
+        "headlineOccurrences": 212,
         "distinctValues": 82,
         "prospectiveOccurrences": 0,
         "prospectiveDistinctValues": 0,
-        "indicativeOccurrences": 211,
+        "indicativeOccurrences": 212,
         "indicativeDistinctValues": 82
       }
     },
