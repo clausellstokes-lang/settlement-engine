@@ -314,7 +314,7 @@ export function hookTruthViolations(text, facts) {
  * @returns {{ rosterPersonIds: Set<string> | null, rosterPowerNames: Set<string> | null }} null: the record carries no such roster
  */
 export function hookPartyRosterOf(settlement) {
-  const record = /** @type {{ npcs?: unknown, powerStructure?: { factions?: unknown } }} */ (
+  const record = /** @type {{ npcs?: Array<{ id?: unknown, name?: unknown } | null>, powerStructure?: { factions?: Array<{ faction?: unknown, name?: unknown } | null> } }} */ (
     settlement && typeof settlement === 'object' ? settlement : {}
   );
   // AN UNKNOWN ROSTER REFUSES NOTHING (the defence half's `defenseKnown` rule): a record that
@@ -322,8 +322,8 @@ export function hookPartyRosterOf(settlement) {
   const npcs = Array.isArray(record.npcs) && record.npcs.length ? record.npcs : null;
   const powers = Array.isArray(record.powerStructure?.factions) && record.powerStructure.factions.length ? record.powerStructure.factions : null;
   return {
-    rosterPersonIds: npcs ? new Set(npcs.map((/** @type {any} */ n) => String(n?.id ?? n?.name ?? '')).filter(Boolean)) : null,
-    rosterPowerNames: powers ? new Set(powers.map((/** @type {any} */ f) => String(f?.faction || f?.name || '').trim()).filter(Boolean)) : null,
+    rosterPersonIds: npcs ? new Set(npcs.map((n) => String(n?.id ?? n?.name ?? '')).filter(Boolean)) : null,
+    rosterPowerNames: powers ? new Set(powers.map((f) => String(f?.faction || f?.name || '').trim()).filter(Boolean)) : null,
   };
 }
 
