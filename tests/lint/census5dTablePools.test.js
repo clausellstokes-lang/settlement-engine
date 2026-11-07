@@ -10,10 +10,12 @@
  */
 import { describe, expect, it } from 'vitest';
 import { readFileSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { dirname, join } from 'node:path';
 import { TABLE_POOLS } from '../../scripts/lib/table-pools.mjs';
 
-const CENSUS = JSON.parse(readFileSync(resolve(process.cwd(), 'docs', 'content', 'wiring-census.json'), 'utf8'));
+const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
+const CENSUS = JSON.parse(readFileSync(join(ROOT, 'docs', 'content', 'wiring-census.json'), 'utf8'));
 
 describe('CENSUS-5d unit 3 · the off-census colour tables are enrolled colour', () => {
   for (const id of ['warRemembrance.WAR_ENDING_TELLINGS', 'deityEffects.DEITY_AXIS_EFFECTS']) {
