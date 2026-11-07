@@ -179,7 +179,10 @@ export const MANIFEST_PROVENANCE = Object.freeze({
     + '0 removed.'
     + ' 2026-11-07 (PEOPLE-3 HOOKS, RECORD 3 OF THE PEOPLE CAR’S LANDING, docs/shift-records/2026-11-07-people-3-hook'
     + 's.json, ODQ §934.105): re-recorded at the stage of 0f930ce95 because one person hook per card replaces the man'
-    + 'y, the tensions and the history kept; 484 of the 1,050 rows move, 0 added, 0 removed.',
+    + 'y, the tensions and the history kept; 484 of the 1,050 rows move, 0 added, 0 removed.'
+    + ' 2026-11-07 (PEOPLE-4 TIES, RECORD 4 OF THE PEOPLE CAR’S LANDING, docs/shift-records/2026-11-07-people-4-ties.'
+    + 'json, ODQ §934.105): re-recorded at the stage of c7d552370 because one outgoing tie per card replaces the pair'
+    + ' writer; 892 of the 1,050 rows move, 0 added, 0 removed.',
 });
 
 /** This surface's identity in tests/fixtures/.golden-freeze-register.json. */
