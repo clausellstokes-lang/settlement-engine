@@ -355,7 +355,7 @@
   },
   {
     "path": "src/components/new/tabs/DailyLifeTab.jsx",
-    "line": 236,
+    "line": 242,
     "category": "floatInterpolation",
     "snippet": "{storeAiProgress || 'Regenerating…'}"
   },
@@ -367,133 +367,133 @@
   },
   {
     "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 230,
+    "line": 238,
     "category": "floatInterpolation",
     "snippet": "{Math.round(chain.magicRecovery * 100)}"
   },
   {
     "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 230,
+    "line": 238,
     "category": "percentToken",
     "snippet": "{Math.round(chain.magicRecovery * 100)}"
   },
   {
     "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 238,
+    "line": 246,
     "category": "floatInterpolation",
     "snippet": "{incomeEntry.percentage}"
   },
   {
     "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 238,
+    "line": 246,
     "category": "percentToken",
     "snippet": "{incomeEntry.percentage}"
   },
   {
     "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 433,
+    "line": 441,
     "category": "floatInterpolation",
     "snippet": "{src.percentage}"
   },
   {
     "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 433,
+    "line": 441,
     "category": "percentToken",
     "snippet": "{src.percentage}"
   },
   {
     "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 435,
+    "line": 443,
     "category": "floatInterpolation",
     "snippet": "{src.percentage}"
   },
   {
     "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 435,
+    "line": 443,
     "category": "percentToken",
     "snippet": "{src.percentage}"
   },
   {
     "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 569,
+    "line": 577,
     "category": "floatInterpolation",
     "snippet": "{Math.round((fb.agricultureModifier||1)*100)}"
   },
   {
     "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 569,
+    "line": 577,
     "category": "percentToken",
     "snippet": "{Math.round((fb.agricultureModifier||1)*100)}"
   },
   {
     "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 570,
+    "line": 578,
     "category": "multiplier",
     "snippet": "{fb.stressModifier}"
   },
   {
     "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 571,
+    "line": 579,
     "category": "floatInterpolation",
     "snippet": "{Math.round(fb.importCoverage/(fb.rawDeficit||fb.importCoverage)*100)}"
   },
   {
     "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 571,
+    "line": 579,
     "category": "percentToken",
     "snippet": "{Math.round(fb.importCoverage/(fb.rawDeficit||fb.importCoverage)*100)}"
   },
   {
     "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 576,
+    "line": 584,
     "category": "floatInterpolation",
     "snippet": "{foodDeficit ? fb.importCoverage>0 ? `Production covers ${Math.round(fb.dailyProduction/fb.dailyNeed*100)}% of food needs. Trade imports cover an estimated ${Math.round(fb.importCoverage/(fb.rawDeficit||1)*100)}% of the gap. Residual sho..."
   },
   {
     "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 578,
+    "line": 586,
     "category": "floatInterpolation",
     "snippet": "`Production covers ${Math.round(fb.dailyProduction/fb.dailyNeed*100)}% of food needs. Trade imports cover an estimated ${Math.round(fb.importCoverage/(fb.rawDeficit||1)*100)}% of the gap. Residual shortfall is ${fbal.deficitPct}%.${fb.ma..."
   },
   {
     "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 578,
+    "line": 586,
     "category": "percentToken",
     "snippet": "`Production covers ${Math.round(fb.dailyProduction/fb.dailyNeed*100)}% of food needs. Trade imports cover an estimated ${Math.round(fb.importCoverage/(fb.rawDeficit||1)*100)}% of the gap. Residual shortfall is ${fbal.deficitPct}%.${fb.ma..."
   },
   {
     "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 579,
+    "line": 587,
     "category": "floatInterpolation",
     "snippet": "` Production deficit of ${fbal.deficitPct}%. Settlement requires food imports to sustain population.`"
   },
   {
     "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 579,
+    "line": 587,
     "category": "percentToken",
     "snippet": "` Production deficit of ${fbal.deficitPct}%. Settlement requires food imports to sustain population.`"
   },
   {
     "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 580,
+    "line": 588,
     "category": "floatInterpolation",
     "snippet": "`Agricultural surplus of ${Math.round((fb.surplus/Math.max(1,fb.dailyNeed))*100)}% above daily needs.`"
   },
   {
     "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 580,
+    "line": 588,
     "category": "percentToken",
     "snippet": "`Agricultural surplus of ${Math.round((fb.surplus/Math.max(1,fb.dailyNeed))*100)}% above daily needs.`"
   },
   {
     "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 654,
+    "line": 668,
     "category": "percentToken",
     "snippet": "`Shadow Economy: ${bmc}% capture`"
   },
   {
     "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 660,
+    "line": 674,
     "category": "percentToken",
     "snippet": "{bmc}"
   },
