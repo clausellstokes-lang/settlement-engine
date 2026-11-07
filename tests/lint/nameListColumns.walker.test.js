@@ -138,8 +138,8 @@ const RULED = Object.freeze({
     'card — a ForceCard; a chartered company carries its terms under its name.',
   'src/components/new/tabs/DefenseTab.jsx :: magicDef':
     'card — a ForceCard for an arcane defence, with the same inside as its siblings.',
-  'src/components/new/tabs/NPCsTab.jsx :: presentFactions':
-    'card — an NPCCategoryGroup is a whole faction\'s roster, not a row.',
+  'src/components/new/tabs/NPCsTab.jsx :: groups':
+    'card — an NPCCategoryGroup is a whole power\'s roster (its first-rank faces; PEOPLE-5A re-keyed the subject), not a row.',
   'src/components/new/tabs/RelationshipsTab.jsx :: neighbours':
     'card — a NeighbourLinkCard is a whole neighbour standing with its own fold (cause, status, '
     + 'tensions, connections); the desk line that rode beside it glances since 2026-10-30.',
