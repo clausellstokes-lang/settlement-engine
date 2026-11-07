@@ -69,7 +69,7 @@ export function EngineGenerationsLine({ read = readEngineGenerations } = {}) {
   const parts = state.rows.map((r) => `${r.op} ${r.outcome} ${n(r.generations_today)} / ${n(r.generations_month)}`);
   return (
     <p data-testid="engine-generations-line" style={style}>
-      Engine generations (today / this month): {today} / {month}{parts.length ? ` — ${parts.join(' · ')}` : ''}
+      Engine generations (today / this month): {today} / {month}{parts.length ? `; ${parts.join(' · ')}` : ''}
     </p>
   );
 }

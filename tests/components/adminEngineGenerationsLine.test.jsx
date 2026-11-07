@@ -26,7 +26,7 @@ describe('the engine generations line', () => {
     ]);
     render(<EngineGenerationsLine read={read} />);
     await waitFor(() => expect(screen.getByTestId('engine-generations-line').textContent).toBe(
-      'Engine generations (today / this month): 4 / 24 — derive ok 1 / 3 · generate ok 2 / 20 · generate rate_limited 1 / 1',
+      'Engine generations (today / this month): 4 / 24; derive ok 1 / 3 · generate ok 2 / 20 · generate rate_limited 1 / 1',
     ));
     expect(read).toHaveBeenCalledTimes(1);
   });
