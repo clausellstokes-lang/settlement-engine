@@ -19,7 +19,7 @@ import { describeCompromiseConjunction } from '../../domain/display/causeConjunc
 import { npcInteriority } from '../../domain/display/npcInteriorityRead.js';
 import { whereaboutsLine, whereaboutsBadge } from '../../domain/roads/whereaboutsDisplay.js';
 import { cardTieLines } from '../../domain/relationships/cardTies.js';
-import { cardPowerLine, cardPowerNames, cardHouseOf } from '../../domain/people/cardPowers.js';
+import { cardPowerLine, cardPowerNames, cardHouseOf, cardInstitutionDoorOf } from '../../domain/people/cardPowers.js';
 import {
   NPC_GOALS, NPC_ROLE_ARCHETYPES, npcFacetOf,
 } from '../../domain/npc/npcBank.js';
@@ -251,8 +251,11 @@ export function NPCInlineCard({
   const roleArchetype = NPC_ROLE_ARCHETYPES.includes(roleFacet)
     ? humanizeNpcFacet(roleFacet)
     : '';
-  // The card's house, then its standing in each power by rank (PEOPLE-5A, M-1b).
-  const cardLineTail = [cardHouseOf(npc), cardPowerLine(npc)].filter(Boolean).join(' · ');
+  // The card's house, then its standing in each power by rank (PEOPLE-5A, M-1b). PEOPLE-6 LINKS:
+  // the house is a door to its Institutions card; a minted face's door is its power's card.
+  const cardDoor = cardInstitutionDoorOf(npc, settlement);
+  const cardPowerTail = cardPowerLine(npc);
+  const cardLineTail = cardDoor || cardPowerTail;
   const nativeRole = NPC_ROLE_ARCHETYPES.includes(npc.role)
     ? humanizeNpcFacet(npc.role)
     : (npc.role || '');
@@ -341,7 +344,10 @@ export function NPCInlineCard({
             {showRoleArchetype ? `${nativeRole ? ' · ' : ''}${roleArchetype} archetype` : ''}
             {/* THE POWER LINE (PEOPLE-5A, M-1b): the card's house, then its standing in
                 each power by rank — "first of X · second of Y" — read from its memberships. */}
-            {cardLineTail ? `${nativeRole || showRoleArchetype ? ' · ' : ''}${cardLineTail}` : ''}
+            {cardLineTail && (nativeRole || showRoleArchetype) ? ' · ' : ''}
+            {cardDoor && <span data-testid="npc-institution-door"><EntityLink id={cardDoor.id} type={cardDoor.type} fallback={cardDoor.name} style={{ color: swatch.inkMag3, fontWeight: 600 }} /></span>}
+            {cardDoor && cardPowerTail ? ' · ' : ''}
+            {cardPowerTail}
           </div>
         </div>
         {pinAvailable && (

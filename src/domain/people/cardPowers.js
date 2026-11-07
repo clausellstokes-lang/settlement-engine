@@ -12,6 +12,8 @@
  */
 import { powersByRankOf, powerOrderOf, membershipsOf, holdsMembership } from './membership.js';
 import { compareCodepoint } from '../deterministicSort.js';
+import { entityIdFor } from '../dossier/entityLinks.js';
+import { factionIdFromName } from '../../lib/entities.js';
 
 /** @param {unknown} v @returns {Record<string, unknown>} */
 const recordOf = (v) => (v && typeof v === 'object' ? /** @type {Record<string, unknown>} */ (v) : {});
@@ -143,3 +145,40 @@ export function facesInPower(cards, power) {
 }
 
 export { powerOrderOf, membershipsOf };
+
+/**
+ * THE HOUSE'S FACE (PEOPLE-6 LINKS, the owner's word of 2026-11-07: "a small row in each card
+ * that has the name of their NPC that also acts as a link to the NPC's card"): roster row name →
+ * the card that represents it (`institution.kind === 'house'`, `institution.key` the row's name).
+ * A house with no face (the census's NONE, a fabric row) has no entry. ONE PERSON, ONE FACE: the
+ * first card in roster order wins should a save ever carry two.
+ * @param {unknown[]} cards @returns {Map<string, Record<string, unknown>>}
+ */
+export function facesByHouse(cards) {
+  /** @type {Map<string, Record<string, unknown>>} */
+  const out = new Map();
+  for (const card of Array.isArray(cards) ? cards : []) {
+    const name = cardHouseOf(card);
+    if (name && !out.has(name)) out.set(name, recordOf(card));
+  }
+  return out;
+}
+
+/**
+ * THE CARD'S DOOR BACK (PEOPLE-6 LINKS): where the NPC card's institution line leads, by the
+ * dossier's own ids (`entityIdFor('institution', row)` — the id the Institutions card focuses
+ * on — and `factionIdFromName(power)` — the id the Power card focuses on). A house face leads to
+ * its roster row's card; a MINTED face (kind 'power', no row) leads to its power's card; a card
+ * with no institution (a DM's person) has no door. A house whose row the roster no longer holds
+ * keeps its name with no target (the link degrades to plain text, as EntityLink does).
+ * @param {unknown} card @param {unknown} settlement
+ * @returns {{ type: 'institution' | 'faction', id: string, name: string } | null}
+ */
+export function cardInstitutionDoorOf(card, settlement) {
+  const inst = cardInstitutionOf(card);
+  if (!inst) return null;
+  if (inst.kind === 'power') return { type: 'faction', id: factionIdFromName(inst.name) || '', name: inst.name };
+  const roster = recordOf(settlement).institutions;
+  const row = (Array.isArray(roster) ? roster : []).find((r) => r && typeof r === 'object' && String(r.name || '') === inst.name);
+  return { type: 'institution', id: row ? entityIdFor('institution', row) : '', name: inst.name };
+}
