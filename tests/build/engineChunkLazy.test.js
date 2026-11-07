@@ -14,8 +14,9 @@
  *      pre-fetch it on first paint — while the EAGER engine-core chunk KEEPS
  *      its hint. Stripping an eager chunk's hint cannot make it lazy; it only
  *      serializes that chunk's fetch behind the entry's download and parse.
- *   3. settlementSlice reaches the heavy generators via dynamic import()
- *      (loadEngine), not a top-level static import.
+ *   3. settlementSlice reaches the heavy generators via dynamic import() only
+ *      (its regeneration lane, then the local engine seam localPipeline.js),
+ *      never a top-level static import.
  *   4. Pipeline receipt metadata is a small independent lazy chunk. Generation
  *      acquires it through the same memoized loader, and the lazy PipelineRail
  *      can read it without fetching the complete generation engine.
@@ -258,10 +259,29 @@ describe('engine chunk — no first-paint-reachable excision is left unpinned', 
 });
 
 describe('engine chunk — source uses dynamic import for the heavy generators', () => {
-  it('settlementSlice loadEngine() dynamic-imports generateSettlementPipeline (not a static top-level import)', () => {
+  // ⭐ RE-ANCHORED, NOT PATCHED (ENGINE-MERGE-2, 2026-11-07). This arm pinned the dynamic
+  // `import()` of the pipeline on the SLICE's own loadEngine(). The engine service lanes
+  // moved it: ENGINE-5 lifted section regeneration into settlementRegenAction.js (the slice
+  // reaches that lane by its own dynamic import), and ENGINE-3 moved the pipeline's one
+  // main-thread `import()` into the local engine seam src/lib/localPipeline.js ::
+  // loadLocalPipeline, the module a VITE_ENGINE_REMOTE build resolves away
+  // (vite.config.js :: engineAbsentWhenRemote). The CLAIM is unchanged — the slice never
+  // carries the generator in its static graph, and the pipeline is reached only through a
+  // dynamic boundary — and is now read where the boundary lives. The presence regex is
+  // anchored at a `return import(` statement on the RAW source, so the seam's own
+  // `@returns {Promise<typeof import(...)>}` docblock cannot satisfy it.
+  it('the pipeline is reached only through a dynamic import — the seam localPipeline.js imports it lazily, and settlementSlice never statically', () => {
     const src = readFileSync(resolve(process.cwd(), 'src/store/settlementSlice.js'), 'utf-8');
-    expect(src).toMatch(/import\(['"][^'"]*generateSettlementPipeline[^'"]*['"]\)/);
+    const seam = readFileSync(resolve(process.cwd(), 'src/lib/localPipeline.js'), 'utf-8');
+    const regenLane = readFileSync(resolve(process.cwd(), 'src/store/settlementRegenAction.js'), 'utf-8');
+    expect(seam).toMatch(/^\s*return import\(['"]\.\.\/generators\/generateSettlementPipeline\.js['"]\);/m);
+    expect(src).toMatch(/import\(['"]\.\/settlementRegenAction\.js['"]\)/);
+    expect(regenLane).toMatch(/import\(['"]\.\.\/lib\/localPipeline\.js['"]\)/);
     expect(src).not.toMatch(/^import\s.*from\s+['"][^'"]*generators\/generateSettlementPipeline[^'"]*['"]/m);
+    // anchored: the slice's positive regen-lane edge above proves this file was read, so its lack of a static seam import cannot be vacuous.
+    expect(src).not.toMatch(/^import\s.*from\s+['"][^'"]*localPipeline[^'"]*['"]/m);
+    // anchored: the regen lane's positive localPipeline import() above proves the file was read, so its lack of a static pipeline import cannot be vacuous.
+    expect(regenLane).not.toMatch(/^import\s.*from\s+['"][^'"]*generators\/generateSettlementPipeline[^'"]*['"]/m);
   });
 
   // ⭐ RE-ANCHORED, NOT PATCHED. This arm used to pin four regexes on the SLICE:
