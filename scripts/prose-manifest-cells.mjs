@@ -185,7 +185,10 @@ export const MANIFEST_PROVENANCE = Object.freeze({
     + ' writer; 892 of the 1,050 rows move, 0 added, 0 removed.'
     + ' 2026-11-07 (PEOPLE-5A DISPLAY, RECORD 5a OF THE PEOPLE CAR’S LANDING, docs/shift-records/2026-11-07-people-5a'
     + '-display.json, ODQ §934.105): re-recorded at the stage of 053283dfd because the legacy grouping’s member lists'
-    + ' are read from the memberships; 312 of the 1,050 rows move, 0 added, 0 removed.',
+    + ' are read from the memberships; 312 of the 1,050 rows move, 0 added, 0 removed.'
+    + ' 2026-11-07 (PEOPLE-LAND SHIM OUT, RECORD 6 OF THE PEOPLE CAR’S LANDING, docs/shift-records/2026-11-07-people-'
+    + 'land-shim-out.json, ODQ §934.105): re-recorded at the stage of 2981f23f6 because the pre-law office path ranks'
+    + ' the powers alone once the shim is out; 312 of the 1,050 rows move, 0 added, 0 removed.',
 });
 
 /** This surface's identity in tests/fixtures/.golden-freeze-register.json. */
