@@ -105,7 +105,7 @@ describe('the four negative controls and the positive one (MOVE-GRAMMAR §4.4, a
       if (new Set(pool.map((v) => segmentCount(v.text))).size === 1) uniformSegments += 1;
       if (new Set(pool.map((v) => openerOf(v.text))).size < pool.length) repeatedOpener += 1;
     }
-    expect(cells.size).toBe(718); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 711 -> 715 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 715 -> 718
+    expect(cells.size).toBe(724); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 711 -> 715 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 715 -> 718 // W2 DEF C8/C10 (DS-DEF-5 ARCANE pools, 2026-11-07): 718 -> 724
     // SITTING B.3 / Part B §14: 407 of 708, not the 408 MOVE-GRAMMAR §0 first printed; 410 / 103 of 709 at the
     // rung-1 landing (LANDING-1: F9 READER-CONTRADICTIONS +1 pool, F10 WALLS-WORD +41 twin variants).
     // 410 / 103 -> 406 / 114 at the rung-2 landing, measured per commit on the leaves (parent ->
@@ -117,11 +117,11 @@ describe('the four negative controls and the positive one (MOVE-GRAMMAR §4.4, a
     // 405 / 114 -> 404 / 114 at the chair's 06:5x DS-CND-1 boom line (ODQ §934.105): boom v4 is one sentence beside v1-v3's two, so the pool is no
     // longer uniform; its opener ("it is") is new to the pool (the ruled "{settlement} is …" repeated
     // v2's opener and read 115, so the line opens "It is a good stretch for {settlement}").
-    expect(uniformSegments).toBe(416); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 406 -> 412 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 412 -> 416
+    expect(uniformSegments).toBe(422); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 406 -> 412 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 412 -> 416 // W2 DEF C8/C10 (DS-DEF-5 ARCANE pools, 2026-11-07): 416 -> 422
     expect(repeatedOpener).toBe(116); // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 115 -> 116
     // 404 / 114 -> 406 / 115 over 709 -> 711 cells at W2 DEF C1/C2 (2026-11-07): DS-DEF-9's two FLAG pools, uniform, one opener repeated.
-    expect(uniformSegments / cells.size).toBeCloseTo(0.579, 3); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 406/711 -> 412/715 (the four FIXTURE pools uniform; two rewritten DS-DEF-4 pools now uniform) // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 416/718
-    expect(repeatedOpener / cells.size).toBeCloseTo(0.162, 3); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 115/711 -> 115/715 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 116/718
+    expect(uniformSegments / cells.size).toBeCloseTo(0.583, 3); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 406/711 -> 412/715 (the four FIXTURE pools uniform; two rewritten DS-DEF-4 pools now uniform) // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 416/718 // W2 DEF C8/C10 (DS-DEF-5 ARCANE pools, 2026-11-07): 422/724
+    expect(repeatedOpener / cells.size).toBeCloseTo(0.160, 3); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 115/711 -> 115/715 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 116/718 // W2 DEF C8/C10 (DS-DEF-5 ARCANE pools, 2026-11-07): 116/724
   });
 
   it('CONTROL 4, SECOND HALF — the R1 leaves RED ON ARM E, which is what the control actually says', async () => {
@@ -141,11 +141,11 @@ describe('the four negative controls and the positive one (MOVE-GRAMMAR §4.4, a
     expect(spreadFails.map((f) => f.detail).join(' ')).toMatch(/repeatedOpener/);
     // The arm reads the SAME pools the calibration counted, to the unit.
     const figures = /** @type {any} */ (report.figures.spread);
-    expect(figures.pools).toBe(718); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 711 -> 715 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 715 -> 718
+    expect(figures.pools).toBe(724); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 711 -> 715 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 715 -> 718 // W2 DEF C8/C10 (DS-DEF-5 ARCANE pools, 2026-11-07): 718 -> 724
     // 406 -> 405 by the same cause as the calibration above (the chair's 06:5x rewording of DS-GEN-17 v3);
     // 405 -> 404 at the chair's 06:5x DS-CND-1 boom line (ODQ §934.105), likewise.
-    expect(Math.round(figures.uniformSegmentShare * 709)).toBe(411); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 405 -> 409 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 409 -> 411
-    expect(Math.round(figures.repeatedOpenerShare * 709)).toBe(115); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 115 -> 114 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 114 -> 115
+    expect(Math.round(figures.uniformSegmentShare * 709)).toBe(413); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 405 -> 409 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 409 -> 411 // W2 DEF C8/C10 (DS-DEF-5 ARCANE pools, 2026-11-07): 411 -> 413
+    expect(Math.round(figures.repeatedOpenerShare * 709)).toBe(114); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 115 -> 114 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 114 -> 115 // W2 DEF C8/C10 (DS-DEF-5 ARCANE pools, 2026-11-07): 115 -> 114
   });
 
   it('ARM E is NOT-EXECUTABLE without spread ceilings — never a pass on a number it invented', () => {
@@ -682,7 +682,7 @@ describe('the walk over the shipped corpus — REPORTED, and the arms that canno
     // Every variant is untagged today, and the walker must say so rather than scoring silence
     // as agreement.
     expect(level1.untagged).toBe(corpus.length);
-    expect(spread.pools).toBe(796); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 789 -> 793 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 793 -> 796
+    expect(spread.pools).toBe(802); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 789 -> 793 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 793 -> 796 // W2 DEF C8/C10 (DS-DEF-5 ARCANE pools, 2026-11-07): 796 -> 802
     // The walk must find SOMETHING and must not find everything.
     expect(report.fails.length).toBeGreaterThan(0);
     expect(report.fails.length).toBeLessThan(corpus.length);

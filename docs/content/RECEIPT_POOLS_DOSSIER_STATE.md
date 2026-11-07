@@ -3011,6 +3011,39 @@ lines.
 1. `[street]` A free company keeps a hall at {settlement} and hires out its soldiers to whoever pays.
 2. `[ledger]` The free company at {settlement} answers to its captain and its contracts, not to the town.
 
+**THE ARCANE FIXTURES AND TRADITIONS (W2 DEF, 2026-11-07, construction C8 and C10):** a second
+sentence beside `arcane defense PRESENT` only (never beside the ABSENT line), naming WHO the
+town's arcane defence is, one per box: a wizard's tower, a mages' guild (the roster's
+`hasMagesGuild` or the defence profile's `traditions.hasArcaneGuild`), alchemists (`hasAlchemist`
+or `traditions.hasAlchemy`), then the defence profile's divine, druidic and arcane traditions
+(`defenseProfile.traditions`). Said here and not in DS-DEF-6, whose `Arcane Support` pools are
+blocked (`DEF6_C3_BLOCKED_POOLS`: this line already speaks that fact, so a DS-DEF-6 line would
+print nowhere). Description position: plain lines.
+
+**ARCANE: wizard's tower**
+1. `[street]` The wizard's tower at {settlement} is where the town turns when a threat is beyond its soldiers.
+2. `[ledger]` The town's defence against magic rests on the wizard's tower at {settlement}.
+
+**ARCANE: mages' guild**
+1. `[street]` The mages' guild at {settlement} keeps the town's wards and answers hostile spells.
+2. `[ledger]` {settlement}'s magical defence is organised through its mages' guild.
+
+**ARCANE: alchemists**
+1. `[street]` The magical help at {settlement} comes from its alchemists, who brew for the defenders.
+2. `[ledger]` {settlement}'s magical support is its alchemists and what they brew.
+
+**ARCANE: divine**
+1. `[street]` The clergy at {settlement} heal and ward by prayer, and the town counts them among its defences.
+2. `[ledger]` Divine magic stands behind {settlement}'s defence: its priests heal the wounded and bless the defenders.
+
+**ARCANE: druidic**
+1. `[street]` Druids at {settlement} ward the land around the town and know its ground better than any soldier.
+2. `[ledger]` {settlement}'s defence draws on its druids, who keep watch over the country around it.
+
+**ARCANE: practitioners**
+1. `[street]` Practitioners of the arcane at {settlement} are called on when the town is threatened.
+2. `[ledger]` {settlement} counts a few practitioners of the arcane among its defenders.
+
 ---
 
 ### DS-DEF-6: `Defense › Supporting capabilities` · `scores.economic/magical + compound.inst{hasMagicInst,hasCourtSystem,hasPrison,hasHospital,hasChurch,hasGranary,hasPort,hasNavy} + tradeAccess + blockade`

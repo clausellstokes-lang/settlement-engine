@@ -16,7 +16,7 @@ import { describe, expect, it } from 'vitest';
 import {
   RECOGNISED_MONSTER_TIERS, SLOT_FILL_SHAPES, SLOT_FILL_TABLES, arcaneDefensePoolKey,
   beastsRowPoolKey, charterPoolKey, contractedForcePoolKey, countryWarrantsCharter,
-  charterFixturePoolKey, freeCompanyFixturePoolKey, gatesFixturePoolKey,
+  arcaneFixturePoolKey, charterFixturePoolKey, freeCompanyFixturePoolKey, gatesFixturePoolKey,
   defenseForcesProse, defenseStateProse, defenseThreatProse, disasterRowPoolKey,
   defensePostureProse, economicRowPoolKey, firstSurveyPoolKey, forceCorePoolKey,
   fortificationPoolKey, internalRowPoolKey, invasionRowPoolKey, isCompoundSafetyLabel,
@@ -1299,11 +1299,12 @@ describe('DS-DEF-5 — the armed-forces lenses read what still STANDS', () => {
     }
     // W2 DEF C9 (2026-11-07): the three FIXTURE pools are never a rung's own pool; they ride
     // beside their group's line (the next test), so the sweep's population is the eleven.
-    const spines = Object.keys(DEF5_POOLS).filter((k) => !k.startsWith('FIXTURE: '));
+    // W2 DEF C8/C10: likewise the six ARCANE pools, beside `arcane defense PRESENT`.
+    const spines = Object.keys(DEF5_POOLS).filter((k) => !k.startsWith('FIXTURE: ') && !k.startsWith('ARCANE: '));
     expect(reached.size, `unreached: ${spines.filter((k) => !reached.has(k))}`)
       .toBe(spines.length);
     expect(spines).toHaveLength(11);
-    expect(Object.keys(DEF5_POOLS)).toHaveLength(14);
+    expect(Object.keys(DEF5_POOLS)).toHaveLength(20);
   });
 
   it('W2 DEF C9: a fixture is said beside its own group\'s line, only when the group stands and the roster carries it', () => {
@@ -1340,6 +1341,30 @@ describe('DS-DEF-5 — the armed-forces lenses read what still STANDS', () => {
     expect(hall.contracted).toBeNull();
     expect(hall.force.sentence).toMatch(/free company/);
     expect(said.force?.sentence ?? '').not.toMatch(/free company/);
+  });
+
+  it('W2 DEF C8/C10: who the arcane defence is, said beside the PRESENT line only, establishments before traditions', () => {
+    expect(arcaneFixturePoolKey({ hasWizardTower: true, hasMagesGuild: true }, { hasDivine: true }, true)).toBe("ARCANE: wizard's tower");
+    expect(arcaneFixturePoolKey({}, { hasArcaneGuild: true }, true)).toBe("ARCANE: mages' guild");
+    expect(arcaneFixturePoolKey({ hasAlchemist: true }, null, true)).toBe('ARCANE: alchemists');
+    expect(arcaneFixturePoolKey(null, { hasAlchemy: true }, true)).toBe('ARCANE: alchemists');
+    expect(arcaneFixturePoolKey(null, { hasDivine: true, hasDruid: true }, true)).toBe('ARCANE: divine');
+    expect(arcaneFixturePoolKey(null, { hasDruid: true, hasArcane: true }, true)).toBe('ARCANE: druidic');
+    expect(arcaneFixturePoolKey(null, { hasArcane: true }, true)).toBe('ARCANE: practitioners');
+    expect(arcaneFixturePoolKey({ hasWizardTower: true }, null, false)).toBeNull();
+    expect(arcaneFixturePoolKey(null, null, true)).toBeNull();
+    const emitted = ["ARCANE: wizard's tower", "ARCANE: mages' guild", 'ARCANE: alchemists', 'ARCANE: divine', 'ARCANE: druidic', 'ARCANE: practitioners'];
+    expect([...emitted].sort()).toEqual(Object.keys(DEF5_POOLS).filter((k) => k.startsWith('ARCANE: ')).sort());
+    const tower = { ...garrisonTown(['magicDef']), economicState: { compound: { inst: { hasWizardTower: true } } } };
+    const plain = defenseForcesProse(garrisonTown(['magicDef']), { seed: 'ar5' });
+    const said = defenseForcesProse(tower, { seed: 'ar5' });
+    expect(said.arcane.provenance.poolKey).toBe('arcane defense PRESENT');
+    expect(said.arcane.sentence.startsWith(plain.arcane.sentence)).toBe(true);
+    expect(said.arcane.sentence).toMatch(/wizard's tower/);
+    // never beside the ABSENT line
+    const none = defenseForcesProse({ ...garrisonTown([]), economicState: { compound: { inst: { hasWizardTower: true } } } }, { seed: 'ar5' });
+    expect(none.arcane.provenance.poolKey).toBe('arcane defense ABSENT');
+    expect(none.arcane.sentence).not.toMatch(/wizard/);
   });
 
   it('the registry mounts DS-DEF-5 once, as a sentence, on the defense tab', () => {

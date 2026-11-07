@@ -205,8 +205,8 @@ describe('GUARD THE GUARD — the inputs this file judges are the real ones', ()
     // census-2b item 5 70d05b25b +4, census-5 unit 2 06b59812f +1, census-3c unit 4 e3295d168 +10,
     // census-5b unit 3 c00b30eb6 +4. 2342 -> 2343 at LANDING-R2 helper G (the chair's §934.105 ruling (1): DS-GEN-17 PROVISIONED v3, the hospital-only line) +1.
     // 2343 -> 2344 at LANDING-R2 helper G2 (the chair's 06:5x DS-CND-1 boom line (ODQ §934.105, ruling (2)): ARCHETYPE: boom v4 `[street · crisis: any]`) +1.
-    expect(corpus.length, 'the shipped state corpus').toBe(2362); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 2348 -> 2356 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 2356 -> 2362
-    expect(census.rows.length, 'the committed wiring census').toBe(718); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 711 -> 715 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 715 -> 718
+    expect(corpus.length, 'the shipped state corpus').toBe(2374); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 2348 -> 2356 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 2356 -> 2362 // W2 DEF C8/C10 (DS-DEF-5 ARCANE pools, 2026-11-07): 2362 -> 2374
+    expect(census.rows.length, 'the committed wiring census').toBe(724); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 711 -> 715 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 715 -> 718 // W2 DEF C8/C10 (DS-DEF-5 ARCANE pools, 2026-11-07): 718 -> 724
     expect(Object.keys(DOSSIER_RELATIONS).length, 'the committed relation leaf').toBe(165);
     // Every arm this module owns is exercised below; a roster that quietly shrank would make
     // a whole describe disappear with nothing red.
@@ -473,7 +473,12 @@ describe('A0b — the text claims every declared field and no other', () => {
     // `economicState.compound.inst` (6, one per line) and, for the gates and the charter hall, the group's
     // `forces.*.present` guard, which every DS-DEF-5 line already leaves unclaimed (4): 1369 -> 1379 measured, the ten
     // new under-claims all on the six FIXTURE lines.
-    const UNDER_CLAIM_OWED = 97;
+    // 97 -> 176 OWED at W2 DEF C8/C10 (2026-11-07, ODQ §934.105, WIRING-RULINGS R-W1/R-W9): DS-DEF-5's six ARCANE pools
+    // (wizard's tower, mages' guild, alchemists, divine, druidic, practitioners), two lines each, inherit their declared
+    // reads unclaimed: the two containers and the magicDef guard on every line, and on each later pool the key
+    // function's earlier tests, false on the branch that reaches it (no sentence names a flag as a word): 1379 -> 1458
+    // measured, the seventy-nine new under-claims all on the twelve ARCANE lines.
+    const UNDER_CLAIM_OWED = 176;
     const UNDER_CLAIM_CEILING = UNDER_CLAIM_BASE + UNDER_CLAIM_OWED;
     // ⛔ THE OVER-CLAIM CEILING, RE-KEYED THE SAME WAY (census-1b unit A (d), 427f7b112). From that
     // commit the wiring census records `settlement` among DS-GEN-17's fieldsRead (the roster key
@@ -520,7 +525,7 @@ describe('A0b — the text claims every declared field and no other', () => {
       + `\n  over-claims          ${tally['over-claim']}   ceiling ${OVER_CLAIM_CEILING}`
       + ` = ${OVER_CLAIM_BASE} + ${OVER_CLAIM_OWED} OWED (427f7b112: DS-GEN-17's name slot)`
       + `\n  under-claims         ${tally['under-claim']}   ceiling ${UNDER_CLAIM_CEILING}`
-      + ` = ${UNDER_CLAIM_BASE} + ${UNDER_CLAIM_OWED} OWED (R-F5 26 + the pool census 34 + DS-GEN-17 PROVISIONED v3 1 + DS-CND-1 boom v4 1 + W2 DEF DS-DEF-9 FLAG pools 8 + W2 DEF DS-DEF-4 FIXTURE pools 17 + W2 DEF DS-DEF-5 FIXTURE pools 10: the census wave buys them back)`
+      + ` = ${UNDER_CLAIM_BASE} + ${UNDER_CLAIM_OWED} OWED (R-F5 26 + the pool census 34 + DS-GEN-17 PROVISIONED v3 1 + DS-CND-1 boom v4 1 + W2 DEF DS-DEF-9 FLAG pools 8 + W2 DEF DS-DEF-4 FIXTURE pools 17 + W2 DEF DS-DEF-5 FIXTURE pools 10 + W2 DEF DS-DEF-5 ARCANE pools 79: the census wave buys them back)`
       + `\n  implicit negations   ${tally['implicit-negation']}`
       + `\n  absences claimed by silence (R-F4, REPORT) ${silent}`
       + `\n  NOT-EXECUTABLE reads ${notExecutable}   pools carrying a finding ${pools.size}\n`);
@@ -535,7 +540,8 @@ describe('A0b — the text claims every declared field and no other', () => {
     // 240 -> 242 at W2 DEF C1/C2 (2026-11-07): the two DS-DEF-9 FLAG pools carry the under-claim debt above.
     // 242 -> 246 at W2 DEF C7 (2026-11-07): the four DS-DEF-4 FIXTURE pools carry the under-claim debt above.
     // 246 -> 249 at W2 DEF C9 (2026-11-07): the three DS-DEF-5 FIXTURE pools carry the under-claim debt above.
-    expect(pools.size).toBeLessThanOrEqual(249);
+    // 249 -> 255 at W2 DEF C8/C10 (2026-11-07): the six DS-DEF-5 ARCANE pools carry the under-claim debt above.
+    expect(pools.size).toBeLessThanOrEqual(255);
   });
 });
 

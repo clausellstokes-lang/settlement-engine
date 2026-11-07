@@ -8,7 +8,7 @@
   "The reviewable slice is computed by RULE (reviewableDark), never hand-listed."
  ],
  "schema": 1,
- "frozenAtSha": "ec73f09f3dfd3c826096f88ddd5143c3c8e64389",
+ "frozenAtSha": "e4cbe50db728154ce0d903994bff0666bc6e0a20",
  "charter": "§18.1 WRWALKER Car 1 (HORIZON) — chair-signed vetoably at the INSTR-WRW pre-stage",
  "minRows": 40,
  "corpusMeta": {
@@ -24,7 +24,7 @@
  },
  "shapesDigest": "9cce955973cac3a42986bcbac2deb92a1901b641e691da98d8462681a48c2cf7",
  "detectorDigest": "cce104e3a7794d95b85fd4df52a649b11fc8ee147f509a3a194412ba3a406fde",
- "verdictDigest": "39219e95fe5d9fc6fcd293c0ee87357bfd9a5838f26adc79107e5ce29167b759",
+ "verdictDigest": "97ae0d556663aea9fd058f730eab5b634a5ef256760f9af1542f725ebce5f3d4",
  "surfaceRoots": {
   "web": [
    "src/main.jsx"
@@ -83,27 +83,27 @@
  },
  "population": {
   "judged": 6730,
-  "lit": 608,
-  "litName": 4859,
-  "dark": 1263,
+  "lit": 612,
+  "litName": 4863,
+  "dark": 1255,
   "thinKeys": 8776,
   "thinShapes": 904,
   "knownShapes": 356
  },
  "scanStats": {
   "files": 1740,
-  "sites": 40832,
-  "propRead": 38658,
+  "sites": 40846,
+  "propRead": 38672,
   "elemRead": 0,
   "destructure": 2161,
   "inOp": 13,
-  "rGrades": 6352,
-  "nGrades": 984513,
-  "resolvedReceivers": 7132
+  "rGrades": 6360,
+  "nGrades": 984530,
+  "resolvedReceivers": 7145
  },
  "registerDigest": "1e3ab9d6b0023c9fa2cf949f373df29a65d5b7cd88114c866ae3b619dbe098e2",
  "pendingSurfaceCeiling": 3,
- "reviewableDarkCount": 479,
+ "reviewableDarkCount": 471,
  "darkUnregistered": [
   {
    "identity": "Bulk grain and flour on reasons",
@@ -2164,30 +2164,6 @@
    "rows": 472
   },
   {
-   "identity": "hasAlchemist on inst",
-   "key": "hasAlchemist",
-   "shape": "inst",
-   "rows": 944
-  },
-  {
-   "identity": "hasAlchemy on traditions",
-   "key": "hasAlchemy",
-   "shape": "traditions",
-   "rows": 2794
-  },
-  {
-   "identity": "hasArcane on traditions",
-   "key": "hasArcane",
-   "shape": "traditions",
-   "rows": 2794
-  },
-  {
-   "identity": "hasArcaneGuild on traditions",
-   "key": "hasArcaneGuild",
-   "shape": "traditions",
-   "rows": 2794
-  },
-  {
    "identity": "hasBank on inst",
    "key": "hasBank",
    "shape": "inst",
@@ -2200,26 +2176,8 @@
    "rows": 944
   },
   {
-   "identity": "hasDivine on traditions",
-   "key": "hasDivine",
-   "shape": "traditions",
-   "rows": 2794
-  },
-  {
-   "identity": "hasDruid on traditions",
-   "key": "hasDruid",
-   "shape": "traditions",
-   "rows": 2794
-  },
-  {
    "identity": "hasGuild on inst",
    "key": "hasGuild",
-   "shape": "inst",
-   "rows": 944
-  },
-  {
-   "identity": "hasMagesGuild on inst",
-   "key": "hasMagesGuild",
    "shape": "inst",
    "rows": 944
   },
@@ -2244,12 +2202,6 @@
   {
    "identity": "hasWarehouse on inst",
    "key": "hasWarehouse",
-   "shape": "inst",
-   "rows": 944
-  },
-  {
-   "identity": "hasWizardTower on inst",
-   "key": "hasWizardTower",
    "shape": "inst",
    "rows": 944
   },
@@ -8035,7 +7987,7 @@
   "magicDependency on defenseProfile": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
   "readiness on defenseProfile": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
   "scores on defenseProfile": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
-  "traditions on defenseProfile": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
+  "traditions on defenseProfile": "campaign-pdf=N dossier-pdf=R foundry=N web-display=R web-transitive=N world-book=N",
   "band on demographicPlans": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N",
   "plan on demographicPlans": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "category on dependencies": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N web-display=N web-transitive=N world-book=N",
@@ -8523,7 +8475,7 @@
   "desc on information": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
   "institution on information": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
   "name on information": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
-  "hasAlchemist on inst": "",
+  "hasAlchemist on inst": "dossier-pdf=R web-display=R",
   "hasBank on inst": "",
   "hasBlackMarket on inst": "dossier-pdf=R web-display=R",
   "hasCathedral on inst": "",
@@ -8538,7 +8490,7 @@
   "hasGranary on inst": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=N world-book=R",
   "hasGuild on inst": "",
   "hasHospital on inst": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=N world-book=R",
-  "hasMagesGuild on inst": "",
+  "hasMagesGuild on inst": "dossier-pdf=R web-display=R",
   "hasMagicInst on inst": "dossier-pdf=R web-display=R",
   "hasMarket on inst": "web-transitive=N",
   "hasMercenary on inst": "campaign-pdf=N dossier-pdf=N foundry=N web-transitive=N world-book=N",
@@ -8554,7 +8506,7 @@
   "hasWalls on inst": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
   "hasWarehouse on inst": "",
   "hasWatch on inst": "campaign-pdf=N dossier-pdf=R foundry=N web-display=R web-transitive=N world-book=N",
-  "hasWizardTower on inst": "",
+  "hasWizardTower on inst": "dossier-pdf=R web-display=R",
   "names on inst": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
   "color on institutionalServices": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
   "exportLabel on institutionalServices": "campaign-pdf=N dossier-pdf=N foundry=N web-transitive=N world-book=N",
@@ -14047,11 +13999,11 @@
   "expression on traditions": "dossier-pdf=R web-display=R web-transitive=N",
   "fabricLed on traditions": "web-transitive=N",
   "foundedYear on traditions": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
-  "hasAlchemy on traditions": "",
-  "hasArcane on traditions": "",
-  "hasArcaneGuild on traditions": "",
-  "hasDivine on traditions": "",
-  "hasDruid on traditions": "",
+  "hasAlchemy on traditions": "dossier-pdf=N web-display=N",
+  "hasArcane on traditions": "dossier-pdf=N web-display=N",
+  "hasArcaneGuild on traditions": "dossier-pdf=N web-display=N",
+  "hasDivine on traditions": "dossier-pdf=N web-display=N",
+  "hasDruid on traditions": "dossier-pdf=N web-display=N",
   "id on traditions": "campaign-pdf=R dossier-pdf=R foundry=R json-export=N news=N web-display=R web-transitive=R world-book=R",
   "lastHeldYear on traditions": "web-transitive=N",
   "lastOutcome on traditions": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",

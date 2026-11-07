@@ -1365,8 +1365,33 @@ export function defenseForcesProse(settlement, options = {}) {
     force: rungWith(forceCorePoolKey(forces), contractedKey ? null : freeCompanyKey),
     contracted: rungWith(contractedKey, freeCompanyKey),
     charter: rungWith(charterPoolKey(forces, config.monsterThreat), charterFixturePoolKey(settlement?.economicState?.compound?.inst, forces.charter.present)),
-    arcane: rung(arcaneDefensePoolKey(forces, magicWorksAt({ settlement }))),
+    arcane: rungWith(
+      arcaneDefensePoolKey(forces, magicWorksAt({ settlement })),
+      arcaneFixturePoolKey(settlement?.economicState?.compound?.inst, settlement?.defenseProfile?.traditions, forces.magicDef.present),
+    ),
   });
+}
+
+/**
+ * DS-DEF-5's ARCANE pools (W2 DEF construction C8, C10): WHO the town's arcane defence is, said
+ * beside `arcane defense PRESENT` only. The roster's establishments first (the name flags on
+ * `economicState.compound.inst`), then the defence profile's traditions
+ * (`defenseProfile.traditions`, written by `defenseGenerator.js`). One per box.
+ * @param {{hasWizardTower?: unknown, hasMagesGuild?: unknown, hasAlchemist?: unknown}|null|undefined} inst
+ * @param {{hasArcaneGuild?: unknown, hasAlchemy?: unknown, hasDivine?: unknown, hasDruid?: unknown,
+ *   hasArcane?: unknown}|null|undefined} traditions
+ * @param {unknown} present the magicDef bucket stands
+ * @returns {string|null}
+ */
+export function arcaneFixturePoolKey(inst, traditions, present) {
+  if (present !== true) return null;
+  if (inst?.hasWizardTower === true) return "ARCANE: wizard's tower";
+  if (inst?.hasMagesGuild === true || traditions?.hasArcaneGuild === true) return "ARCANE: mages' guild";
+  if (inst?.hasAlchemist === true || traditions?.hasAlchemy === true) return 'ARCANE: alchemists';
+  if (traditions?.hasDivine === true) return 'ARCANE: divine';
+  if (traditions?.hasDruid === true) return 'ARCANE: druidic';
+  if (traditions?.hasArcane === true) return 'ARCANE: practitioners';
+  return null;
 }
 
 /**
