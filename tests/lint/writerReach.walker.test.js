@@ -307,7 +307,10 @@ describe('writer-with-no-reader ratchet: the frozen register', () => {
     // TWENTY-FIVE BECAME THIRTY-FOUR (2026-11-07, lane W6, WIRING R-W2, ODQ §934.105): the DEF section's nine engine-internal rows.
     // THIRTY-FOUR BECAME THIRTY-SEVEN (2026-11-07, lane W6, WIRING R-W2, ODQ §934.105): the POW section's three engine-internal rows.
     // THIRTY-SEVEN BECAME FORTY-FIVE (2026-11-07, lane W6, WIRING R-W2, ODQ §934.105): the META section's eight engine-internal rows.
-    expect(WRITER_DARK_REGISTER.length).toBe(45);
+    // 45 -> 43 at MERGE-R2 (2026-11-07): two rows struck with cause — growsMoreThanEats on foodRecord (clause E,
+    // domain/foodSurplus.js inside the dossier-pdf closure since the rung-2 chunk cure) and randomDepletionEligible on
+    // resourceConditions (clause S, LIT-NAME at the merged tip); scripts/lib/writer-dark-register.mjs names both.
+    expect(WRITER_DARK_REGISTER.length).toBe(43);
     expect(liveEvidence.map((row) => row.identity).sort())
       .toEqual(WRITER_DARK_REGISTER.map((row) => row.identity).sort());
     for (const row of liveEvidence) {
@@ -499,7 +502,10 @@ describe('writer-with-no-reader ratchet: the live judgment', () => {
     // 2026-11-07 (lane W6, WIRING R-W2): the DEF section's nine engine-internal rows, all DARK: twenty-five became thirty-four.
     // 2026-11-07 (lane W6, WIRING R-W2): the POW section's three engine-internal rows, all DARK: thirty-four became thirty-seven.
     // 2026-11-07 (lane W6, WIRING R-W2): the META section's eight engine-internal rows, all DARK: thirty-seven became forty-five.
-    expect(registeredAndDark.length).toBe(45);
+    // 45 -> 43 at MERGE-R2 (2026-11-07): two rows struck with cause — growsMoreThanEats on foodRecord (clause E,
+    // domain/foodSurplus.js inside the dossier-pdf closure since the rung-2 chunk cure) and randomDepletionEligible on
+    // resourceConditions (clause S, LIT-NAME at the merged tip); scripts/lib/writer-dark-register.mjs names both.
+    expect(registeredAndDark.length).toBe(43);
     expect(baseline.darkUnregistered.length).toBe(cohort.length - registeredAndDark.length);
     expect(reviewableDark(cohort).length).toBe(baseline.reviewableDarkCount);
     expect(reviewableDark(cohort).length).toBeLessThan(cohort.length);

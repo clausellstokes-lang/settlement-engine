@@ -47,9 +47,9 @@
     "pastEofCitationsExcluded": 377,
     "byRule": {
       "banner": 9,
-      "dated": 98,
+      "dated": 130,
       "sha-pin": 1,
-      "tree": 95
+      "tree": 100
     },
     "files": {
       "banner": [
@@ -167,7 +167,8 @@
         "docs/census/COMPOSE_2026-11-06.md",
         "docs/census/LANDING_R2_2026-11-06.md",
         "docs/census/VOCABULARY_RULINGS_2026-11-04.md",
-        "docs/chair/2026-11-06/BRIEF-LANDING-R2-2026-11-06.md"
+        "docs/chair/2026-11-06/BRIEF-LANDING-R2-2026-11-06.md",
+        "docs/INTEGRATION_MERGE_R2_2026-11-07.md"
       ],
       "sha-pin": [
         "docs/SETTLEMENT_CAPABILITY_ATLAS.md"
@@ -297,7 +298,8 @@
     "_rosterGrowth2026-11-07-five-seats-merge": "FOUR documents JOINED the roster by being BORN into it (the chair, at the merge of five finished seats into lane/integration-2026-11-07, measured with this walker's own arm — each seat's note above measured its count on its own branch, so the union is re-measured here once): `dated` 100 -> 104, docs/chair/2026-11-07/PEOPLE-5-PREP-2026-11-07.md, BUILD-CHECK-2026-11-07.md, WAVE-PREP-2026-11-07.md and docs/REVIEW_INTAKE_PLANTS_2026-11-07.md, born dated, 0 past-EOF citations; W0-CLOSE's record was already counted. A GROWTH, not a re-classification.",
     "_rosterGrowth2026-11-07-people-5-briefs": "TWO documents JOINED the roster by being BORN into it (the chair, on the integration branch): `dated` 104 -> 106, docs/chair/2026-11-07/BRIEF-PEOPLE-5A-DISPLAY-2026-11-07.md and BRIEF-PEOPLE-5B-EDIT-2026-11-07.md, the surfaces lanes' briefs, born dated, 0 past-EOF citations. A GROWTH, not a re-classification.",
     "_rosterGrowth2026-11-07-people-land-brief": "ONE document JOINED the roster by being BORN into it (the chair): `dated` 106 -> 107, docs/chair/2026-11-07/BRIEF-PEOPLE-LAND-2026-11-07.md, the car's landing brief, born dated, 0 past-EOF citations. A GROWTH, not a re-classification.",
-    "_rosterGrowth2026-11-07-landing-r2": "TWENTY-SEVEN documents JOINED the roster by being BORN into it (LANDING-R2 seat E, measured with this walker's own partitionDocs at the rung-2 landing tip, rung 1 final merged with the pool census): `tree` 90 -> 95, the five signed records of the rung-2 landing (docs/shift-records/2026-11-06-rung2-01 .. -05, the census-composed generator master, espionage fence, herald desk, prose manifest and lighting witness, ruled per surface by the chair at 02:36 UTC under §934.105); `dated` 76 -> 98, the pool census's dated records: the six census lane reports (CENSUS_1, 1B, 2, 3, 4, 5 of 2026-11-04), the census rulings and records under docs/census/ (VOCABULARY_RULINGS_2026-11-04, CHAIR_RULINGS_2026-11-05, COMPOSE_2026-11-06, LANDING_R2_2026-11-06), the rung-2 base's lane and soak records (F13_CRISIS_FACTS, READER_R1_VALIDATION_ON_PAGE, READER_R11_TONIGHT_WANTS, RUNG2_F12_CRISIS_BLIND, RUNG2_TUNING, and the six SOAK_10000_RUNG2* soaks) and the chair's brief BRIEF-LANDING-R2-2026-11-06. GROWTHS, not class moves: no live document left the gated corpus, and the twenty-seven carry 0 past-EOF citations between them. The archival corpus as a whole reads 388 past-EOF at this tip against the 377 frozen below; the rise sits in documents already on the roster whose targets have since shrunk, none in the newcomers, and the frozen figure is the freeze, left as recorded."
+    "_rosterGrowth2026-11-07-landing-r2": "TWENTY-SEVEN documents JOINED the roster by being BORN into it (LANDING-R2 seat E, measured with this walker's own partitionDocs at the rung-2 landing tip, rung 1 final merged with the pool census): `tree` 90 -> 95, the five signed records of the rung-2 landing (docs/shift-records/2026-11-06-rung2-01 .. -05, the census-composed generator master, espionage fence, herald desk, prose manifest and lighting witness, ruled per surface by the chair at 02:36 UTC under §934.105); `dated` 76 -> 98, the pool census's dated records: the six census lane reports (CENSUS_1, 1B, 2, 3, 4, 5 of 2026-11-04), the census rulings and records under docs/census/ (VOCABULARY_RULINGS_2026-11-04, CHAIR_RULINGS_2026-11-05, COMPOSE_2026-11-06, LANDING_R2_2026-11-06), the rung-2 base's lane and soak records (F13_CRISIS_FACTS, READER_R1_VALIDATION_ON_PAGE, READER_R11_TONIGHT_WANTS, RUNG2_F12_CRISIS_BLIND, RUNG2_TUNING, and the six SOAK_10000_RUNG2* soaks) and the chair's brief BRIEF-LANDING-R2-2026-11-06. GROWTHS, not class moves: no live document left the gated corpus, and the twenty-seven carry 0 past-EOF citations between them. The archival corpus as a whole reads 388 past-EOF at this tip against the 377 frozen below; the rise sits in documents already on the roster whose targets have since shrunk, none in the newcomers, and the frozen figure is the freeze, left as recorded.",
+    "_rosterGrowth2026-11-07-merge-r2": "MERGE-R2 (2026-11-07, the integration merge of the rung-2 landing fc4cb0b9f into lane/integration-2026-11-07): dated 107 -> 130 and tree 95 -> 100, re-measured ONCE by the walker at the merged tip. dated: the integration side's 107 (76 + 31) united with LANDING-R2 seat E's 22 (76 -> 98), plus docs/INTEGRATION_MERGE_R2_2026-11-07.md, this seat's record, born dated, 0 past-EOF. tree: each side's +5 under the tree rule's paths (90 -> 95 on each side), united; no document changed class."
   },
   "rows": []
 }
