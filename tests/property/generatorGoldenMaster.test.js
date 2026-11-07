@@ -18,6 +18,13 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-11-07 — RECORD 5B, PEOPLE-5B EDIT, THROUGH THE SIGNED DOOR (ODQ §934.105, THE PEOPLE CAR’S LANDING;
+ *   record docs/shift-records/2026-11-07-people-5b-edit.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   525 of 525 (thorp 84, hamlet 84, village 84, town 105, city 84, metropolis 84) rows against the stage of 3c66d320e (47e48e47.., record 5a's post-state). THE CAUSE, ONE (first-parent
+ *   step a725df7e4): lane 5B, PEOPLE-5B EDIT (lane/people-5b-edit-2026-11-07, f24623a9f, merged at a725df7e4): the edit layer, the schema, the first real save migration and the contract. ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree S5b (the tree of a725df7e4 with the door paths carried from
+ *   the branch, the previous record's writes committed). 47e48e47.. -> 8dc527fd..
+ *
  * 2026-11-07 — RECORD 5A, PEOPLE-5A DISPLAY, THROUGH THE SIGNED DOOR (ODQ §934.105, THE PEOPLE CAR’S LANDING;
  *   record docs/shift-records/2026-11-07-people-5a-display.json; the cloud chair signs under the owner's delegation, vetoable).
  *   172 of 525 (hamlet 84, village 72, city 12, metropolis 4) rows against the stage of c7d552370 (27de6ac3.., record 4's post-state). THE CAUSE, ONE (first-parent
