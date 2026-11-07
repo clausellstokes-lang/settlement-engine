@@ -231,7 +231,7 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
   }
   if (stresses.includes('occupied')) {
     consumptionMult *= 1.2;
-    stressNotes.push('The occupying soldiers are fed from local stores, so the food has to stretch about a fifth further than before.');
+    stressNotes.push('The occupiers are fed from local stores, so the food has to stretch about a fifth further than before.');
   }
   // [generators-domain-1] second-wave stress types with a food-relevant viabilityNote.
   // (Defense stays coupled via the priorityHelpers effective-score multipliers — no inline
