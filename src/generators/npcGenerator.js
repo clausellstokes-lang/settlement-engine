@@ -693,7 +693,7 @@ const generatePlotHook = (category = 'other', config = {}, hookRegistry) => {
  * refusing a held text, the wet line given its inland twin (F5); on the ambient stream (the card's fork).
  * @param {string} hookPool @param {Record<string, any>} config @param {any} hookRegistry @param {string | null | undefined} portKind @returns {string} */
 export const drawPersonHook = (hookPool, config = {}, hookRegistry, portKind) =>
-  inlandHookLine(generatePlotHook(hookPool, config, hookRegistry), portKind);
+  /** @type {string} */ (inlandHookLine(generatePlotHook(hookPool, config, hookRegistry), portKind));
 
 // pickTitle
 const pickTitle = r => {

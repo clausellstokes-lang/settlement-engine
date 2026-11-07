@@ -714,7 +714,7 @@ function renameNpcRecord(npc, home, oldName, newName, mark) {
     // mints one, exactly as it never mints a missing name spelling.
     if (field.each) {
       // a list of records: the key is rewritten on every entry that carries the old name
-      const entries = Array.isArray(npc[field.parent]) ? npc[field.parent] : null;
+      const entries = /** @type {unknown[] | null} */ (Array.isArray(npc[field.parent]) ? npc[field.parent] : null);
       if (!entries) continue;
       let movedAny = false;
       for (const entry of entries) if (isRecord(entry) && rewriteKey(entry, field.key, oldName, newName)) movedAny = true;
