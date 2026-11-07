@@ -125,6 +125,10 @@ const FROZEN_DIAL_GATED = Object.freeze([
   'methods on factions',
   'motifAct on traditions',
   'motifElement on traditions',
+  // 2026-11-07 PEOPLE-5B EDIT (M-7): `name on factions` JOINED by measurement — the grouping (`settlement.factions`,
+  // whose `name` was written on every world) left the v2 record at the normalize boundary, so the only `factions`
+  // shape left is the powers', whose legacy `name` alias is written under the custom-content dial alone.
+  'name on factions',
   'name on stressors',
   'scale on factions',
   'source on factions',
@@ -309,7 +313,9 @@ describe('writer-with-no-reader ratchet: the frozen register', () => {
     // TWENTY-FIVE BECAME THIRTY-FOUR (2026-11-07, lane W6, WIRING R-W2, ODQ §934.105): the DEF section's nine engine-internal rows.
     // THIRTY-FOUR BECAME THIRTY-SEVEN (2026-11-07, lane W6, WIRING R-W2, ODQ §934.105): the POW section's three engine-internal rows.
     // THIRTY-SEVEN BECAME FORTY-FIVE (2026-11-07, lane W6, WIRING R-W2, ODQ §934.105): the META section's eight engine-internal rows.
-    expect(WRITER_DARK_REGISTER.length).toBe(45);
+    // FORTY-FIVE BECAME FORTY-FOUR (2026-11-07, PEOPLE-5B EDIT, M-7): `generatedAs on members` LEFT with the grouping's
+    // member copy — no shape carries the identity once the grouping leaves the record.
+    expect(WRITER_DARK_REGISTER.length).toBe(44);
     expect(liveEvidence.map((row) => row.identity).sort())
       .toEqual(WRITER_DARK_REGISTER.map((row) => row.identity).sort());
     for (const row of liveEvidence) {
@@ -506,7 +512,8 @@ describe('writer-with-no-reader ratchet: the live judgment', () => {
     // 2026-11-07 (lane W6, WIRING R-W2): the DEF section's nine engine-internal rows, all DARK: twenty-five became thirty-four.
     // 2026-11-07 (lane W6, WIRING R-W2): the POW section's three engine-internal rows, all DARK: thirty-four became thirty-seven.
     // 2026-11-07 (lane W6, WIRING R-W2): the META section's eight engine-internal rows, all DARK: thirty-seven became forty-five.
-    expect(registeredAndDark.length).toBe(45);
+    // 2026-11-07 (PEOPLE-5B EDIT, M-7): `generatedAs on members` left with the grouping: forty-five became forty-four.
+    expect(registeredAndDark.length).toBe(44);
     expect(baseline.darkUnregistered.length).toBe(cohort.length - registeredAndDark.length);
     expect(reviewableDark(cohort).length).toBe(baseline.reviewableDarkCount);
     expect(reviewableDark(cohort).length).toBeLessThan(cohort.length);
@@ -642,11 +649,17 @@ describe('writer-with-no-reader ratchet: the live judgment', () => {
     // naming keys the engine does not produce is a finding for the review's backlog.
     const unwritten = [...live.allowlist].filter((identity) => !live.verdicts.has(identity)).sort();
     expect(graded.length).toBe(live.allowlist.size - unwritten.length);
+    // 2026-11-07 PEOPLE-5B EDIT (M-7): + three — the grouping and the shim's two fields left the v2 record at the
+    // normalize boundary; the export allowlist that still names them is lane 5a's display surface (publicSafe.js), the
+    // report this arm exists to make.
     expect(unwritten).toEqual([
       'crossSettlementConflicts on settlement',
       'dailyLife on settlement',
+      'factionAffiliation on npcs',
+      'factions on settlement',
       'interSettlementRelationships on settlement',
       'neighbourNetwork on settlement',
+      'secondaryAffiliation on npcs',
       'thesis on settlement',
     ]);
     expect(REPORT_ONLY_CLASSES).toContain('json-export');
@@ -1153,9 +1166,9 @@ describe('writer-with-no-reader ratchet: the lit-dial arm', () => {
     // §7.1 compares the lit corpus against the WALKER'S corpus, which moves two
     // variables at once and misses a third. Every reading is asserted TOGETHER so
     // the corrections are measured quantities rather than an argument.
-    expect(confounded.size, 'lit vs the walker corpus: the pack counted as a dial').toBe(51); // 53 -> 51, PEOPLE-1 CAST (M-5): the two rung-role rows
-    expect(packControlOnly.size, 'pack held constant, producer set still asymmetric').toBe(31) /* 33 -> 31, PEOPLE-1 CAST (M-5): the two rung-role rows left the dial-gated set */; // GS-2: 34 -> 33 with importance on members
-    expect(gated.size, 'both controls applied').toBe(27) /* 29 -> 27, PEOPLE-1 CAST (M-5): the two rung-role rows */;
+    expect(confounded.size, 'lit vs the walker corpus: the pack counted as a dial').toBe(52); // 53 -> 51, PEOPLE-1 CAST (M-5): the two rung-role rows; 51 -> 52, PEOPLE-5B (M-7): `name on factions`
+    expect(packControlOnly.size, 'pack held constant, producer set still asymmetric').toBe(32) /* 33 -> 31, PEOPLE-1 CAST (M-5): the two rung-role rows left the dial-gated set; 31 -> 32, PEOPLE-5B (M-7): `name on factions` */; // GS-2: 34 -> 33 with importance on members
+    expect(gated.size, 'both controls applied').toBe(28) /* 29 -> 27, PEOPLE-1 CAST (M-5): the two rung-role rows; 27 -> 28, PEOPLE-5B (M-7): `name on factions` */;
     expect(confounded.size - packControlOnly.size, '23 pack-attributable, less 3 the pack control also gains (was 24/21 before source on stressors turned ordinary at §900)')
       .toBe(20);
     // The four the DARK-corpus control removes are keys a shipped world does write,
@@ -1174,7 +1187,7 @@ describe('writer-with-no-reader ratchet: the lit-dial arm', () => {
 
   test('every dial-gated identity is in the frozen roster and every frozen entry is still dial-gated — a new dial-gated key reds by name', () => {
     expect([...gated].sort()).toEqual([...FROZEN_DIAL_GATED]);
-    expect(FROZEN_DIAL_GATED.length).toBe(27); // 29 -> 27, PEOPLE-1 CAST (M-5)
+    expect(FROZEN_DIAL_GATED.length).toBe(28); // 29 -> 27, PEOPLE-1 CAST (M-5); 27 -> 28, PEOPLE-5B (M-7)
     expect(new Set(FROZEN_DIAL_GATED).size).toBe(FROZEN_DIAL_GATED.length);
     for (const identity of FROZEN_DIAL_GATED) {
       expect(identity).toMatch(/^\S+ on \S+$/);

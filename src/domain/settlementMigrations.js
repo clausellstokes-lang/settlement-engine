@@ -41,7 +41,21 @@ import { factionIdFromName } from '../lib/entities.js';
 const V1_CARD_FIELDS = Object.freeze(['factionAffiliation', 'secondaryAffiliation', 'linkedFactionIds', 'factionGoal', 'densityRungRole']);
 const INSTITUTION_KINDS = new Set(['house', 'power']);
 
-/** @param {unknown} v @returns {v is Record<string, any>} */
+/** A record read from a save: every key is unknown until it is narrowed. @typedef {{ [key: string]: unknown }} SaveRecord */
+/** One value the v1 -> v2 step could not map. @typedef {{ id: unknown, field: string, value: unknown, names?: string }} Unmapped */
+/**
+ * What the v1 -> v2 step did to one record.
+ * @typedef {{
+ *   cards: number, cardsUntouched: number, dmCards: Array<{ id: unknown, why: string[] }>,
+ *   moved: { factionAffiliation: number, secondaryAffiliation: number, linkedFactionIds: number },
+ *   deleted: { factionGoal: number, densityRungRole: number }, structuralRankCarried: number,
+ *   houseLinked: number, dmHouseCleared: number, membershipsPerCard: Record<string, number>,
+ *   unmapped: Unmapped[], groupingDropped: number,
+ *   groupingOrphans: Array<{ name: string, eventId: unknown, members: unknown[] }>,
+ *   ties: number, tiesMoved: number, outDegreeOver1: number,
+ * }} MigrationReport
+ */
+/** @param {unknown} v @returns {v is SaveRecord} */
 const isObj = (v) => v !== null && typeof v === 'object' && !Array.isArray(v);
 /** @param {unknown} p @returns {string} the power's display name (the FACTION-ACCESS LAW's precedence) */
 const powerNameOf = (p) => (isObj(p) ? String(p.faction || p.name || '') : '');
@@ -49,12 +63,12 @@ const powerNameOf = (p) => (isObj(p) ? String(p.faction || p.name || '') : '');
 /**
  * The power a v1 handle (a display name or an id) addresses, or null — the name or id first
  * (factionRefs.js :: resolveFactionRef), then the id `factionIdFromName` derives from a name.
- * @param {Array<Record<string, any>>} powers @param {unknown} ref @returns {Record<string, any> | null}
+ * @param {Array<SaveRecord>} powers @param {unknown} ref @returns {SaveRecord | null}
  */
 function powerFor(powers, ref) {
   if (ref == null || ref === '') return null;
   const hit = resolveFactionRef(powers, ref);
-  if (hit) return /** @type {Record<string, any>} */ (hit);
+  if (hit) return /** @type {SaveRecord} */ (hit);
   const byId = powers.filter((p) => factionIdFromName(powerNameOf(p)) === String(ref));
   return byId.length === 1 ? byId[0] : null;
 }
@@ -65,7 +79,7 @@ function powerFor(powers, ref) {
  * own lock (`locked`/`pinned`), or a DM edit on it (`_userEdits`). The envelope's lock map
  * (`campaignState.locks`) is outside the settlement object: this step never sees it and never
  * touches it.
- * @param {Record<string, any>} npc @returns {string[]} the reasons, empty for a generated card
+ * @param {SaveRecord} npc @returns {string[]} the reasons, empty for a generated card
  */
 export function dmCardReasons(npc) {
   const tag = tagEntityCanon(/** @type {import('./canonStatus.js').CanonTaggable} */ (npc));
@@ -99,14 +113,17 @@ export function dmCardReasons(npc) {
  * custom content ...). What the step cannot map is never dropped silently: it is written to the record's
  * `migrationReports` (HISTORY, saved-only) and returned in `report`.
  *
- * @param {Record<string, any>} settlement
- * @returns {{ settlement: Record<string, any>, report: Record<string, any> }}
+ * @param {SaveRecord} settlement
+ * @returns {{ settlement: SaveRecord, report: MigrationReport }}
  */
 export function migrateV1toV2(settlement) {
   const s = settlement;
-  const powers = Array.isArray(s.powerStructure?.factions) ? s.powerStructure.factions.filter(isObj) : [];
-  const houses = new Set((Array.isArray(s.institutions) ? s.institutions : []).map((i) => String(i?.name || '')).filter(Boolean));
-  /** @type {Record<string, any>} */
+  const powerStructure = isObj(s.powerStructure) ? s.powerStructure : {};
+  /** @type {SaveRecord[]} */
+  const powers = Array.isArray(powerStructure.factions) ? powerStructure.factions.filter(isObj) : [];
+  const houses = new Set((Array.isArray(s.institutions) ? s.institutions : [])
+    .map((i) => (isObj(i) ? String(i.name || '') : '')).filter(Boolean));
+  /** @type {MigrationReport} */
   const report = {
     cards: 0, cardsUntouched: 0, dmCards: [], moved: { factionAffiliation: 0, secondaryAffiliation: 0, linkedFactionIds: 0 },
     deleted: { factionGoal: 0, densityRungRole: 0 }, structuralRankCarried: 0, houseLinked: 0, dmHouseCleared: 0,
@@ -125,9 +142,9 @@ export function migrateV1toV2(settlement) {
       if (!dm.length) return npc;
       return { ...npc, institution: null };
     }
-    /** @type {Array<Record<string, any>>} */
+    /** @type {Array<SaveRecord>} */
     const memberships = Array.isArray(npc.memberships) ? npc.memberships.slice() : [];
-    /** @param {Record<string, any>} p */
+    /** @param {SaveRecord} p */
     const add = (p) => {
       const name = powerNameOf(p);
       if (!name || memberships.some((m) => isObj(m) && m.power === name)) return;
@@ -160,7 +177,7 @@ export function migrateV1toV2(settlement) {
     if (dm.length) {
       if (inst != null) report.dmHouseCleared += 1;
       next.institution = null;
-    } else if (isObj(inst) && INSTITUTION_KINDS.has(inst.kind) && typeof inst.key === 'string' && inst.key) {
+    } else if (isObj(inst) && typeof inst.kind === 'string' && INSTITUTION_KINDS.has(inst.kind) && typeof inst.key === 'string' && inst.key) {
       next.institution = inst;
     } else if (typeof inst === 'string' && houses.has(inst)) {
       next.institution = { kind: 'house', key: inst, family: null, title: null };
@@ -203,7 +220,7 @@ export function migrateV1toV2(settlement) {
     return { ...rest, from: npc1Id, to: npc2Id };
   });
   report.outDegreeOver1 = [...outDegree.values()].filter((n) => n > 1).length;
-  /** @type {Record<string, any>} */
+  /** @type {SaveRecord} */
   const out = { ...s, npcs, relationships, schemaVersion: 2 };
   if (!Array.isArray(s.npcs)) delete out.npcs;
   if (!Array.isArray(s.relationships)) delete out.relationships;
@@ -251,7 +268,7 @@ const MIGRATIONS = Object.freeze([
      * @returns {Record<string, unknown>}
      */
     migrate(settlement) {
-      return migrateV1toV2(/** @type {Record<string, any>} */ (settlement)).settlement;
+      return migrateV1toV2(/** @type {SaveRecord} */ (settlement)).settlement;
     },
   },
   // Future:

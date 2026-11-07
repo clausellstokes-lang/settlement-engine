@@ -90,7 +90,9 @@ const SEAT_FIELDS = new Set([
   'institution',
 ]);
 const SEAT_ARRAY_FIELDS = new Set(['linkedInstitutionIds']);
+/** @type {Set<unknown>} */
 const MEMBERSHIP_RANKS = new Set([1, 2, 3, null]);
+/** @type {Set<unknown>} */
 const INSTITUTION_KINDS = new Set(['house', 'power']);
 /** One membership `{ power, rank, share }`, or null when it is not one. @param {unknown} entry */
 function membershipOf(entry) {

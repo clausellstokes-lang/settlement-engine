@@ -60,6 +60,12 @@
  *  @property {(number|null)=} stabilityContribution  0-100 — how much their absence destabilizes
  *  @property {string[]=} serviceContribution  e.g. ["healing", "charity", "funerary_rites"]
  *  @property {string[]=} potentialSuccessors  npc ids the engine pre-suggests on death
+ *  @property {string=} factionAffiliation  RETIRED from the v2 record (PEOPLE-5B, M-7: the card's powers are
+ *    `memberships`); and with it `linkedFactionIds` below. Both still DECLARED here, typedef-only, because the simulation's two writers of it
+ *    (events/mutateEntities.js, worldPulse/factionDensityKernel.js — FPZ's, M-6, not rewritten by the car)
+ *    cross this boundary; it is not written by anything in the edit layer.
+ *  @property {string[]=} linkedFactionIds  RETIRED from the v2 record, as `factionAffiliation` above: createNpc
+ *    no longer stores it (the simulation's callers still pass it; FPZ's, M-6).
  *  @property {string=} removedByEventId
  *  @property {string=} createdByEventId       event that created this NPC (ADD_NPC); undo drops it
  *  @property {string=} notes                  free-form DM annotation
