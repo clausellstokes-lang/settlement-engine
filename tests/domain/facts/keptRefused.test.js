@@ -16,7 +16,7 @@ const SET = Object.freeze({ 'The gate is shut.': Object.freeze([{ text: 'The gat
 const PAIR = Object.freeze({
   'The gate is shut.': Object.freeze([
     { text: 'The gate is shut.', needs: ['gate'] },
-    { text: 'The road is quiet.', twinOf: 'The gate is shut.', excludes: ['gate'] },
+    { text: 'The lane stands empty.', twinOf: 'The gate is shut.', excludes: ['gate'] },
   ]),
 });
 const noGate = { defence: { gate: false } };
@@ -37,7 +37,7 @@ describe('resolveSibling notes the original it keeps (R-AM)', () => {
     const a = withPresumptionLedger(() => resolveSibling('The gate is shut.', PAIR, { facts: withGate, poolId: 'p', surface: 's' }));
     expect(a.ledger.map((e) => e.resolvedBy)).toEqual(['drawn']);
     const b = withPresumptionLedger(() => resolveSibling('The gate is shut.', PAIR, { facts: noGate, poolId: 'p', surface: 's' }));
-    expect(b.result).toBe('The road is quiet.');
+    expect(b.result).toBe('The lane stands empty.');
     expect(b.ledger.map((e) => e.resolvedBy)).toEqual(['twin']);
   });
   it('a line that is no key is neither resolved nor noted', () => {
