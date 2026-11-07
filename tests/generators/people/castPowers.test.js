@@ -18,6 +18,7 @@ import { generateSettlementPipeline } from '../../../src/generators/generateSett
 import { birth, ensureLaws } from '../../../scripts/audit/soak-review/corpus.mjs';
 import { backingArchetypeOf, dealDoubledNiches, houseBacksOf } from '../../../src/domain/dossier/powerSupport.js';
 import { backingRowFor } from '../../../src/data/institutionBacking.js';
+import { faceOfInstitution } from '../../../src/data/institutionalCatalog.js';
 import { FACTION_ARCHETYPES as A } from '../../../src/domain/factionArchetypes.js';
 import { governingFactionOf, nameOf } from '../../../src/domain/rulingPower.js';
 import { OTHER_CARD_PREFIX, RANKS, assignCastPowers, rollWeightOf } from '../../../src/generators/people/castPowers.js';
@@ -176,8 +177,10 @@ describe('the people car — the powers\' people (step 3)', () => {
       for (const f of factions) {
         const name = nameOf(f); const arch = backingArchetypeOf(f);
         if (name === ruler || arch === A.OTHER || archCount.get(arch) !== 1) continue;
+        // a house with no face gives no person (the revised census: the wayside shrine is untended, a
+        // market is the town's own function), so only a FACE-bearing house of the archetype counts
         const hasHouse = (s.institutions || []).some((inst) => {
-          const r = backingRowFor(inst?.name); if (!r) return false;
+          const r = backingRowFor(inst?.name); if (!r || !faceOfInstitution(inst)) return false;
           const largest = Object.entries(r.shares).sort((x, y) => y[1] - x[1])[0];
           return largest && largest[0] === arch && !inst.factionSource;
         });
