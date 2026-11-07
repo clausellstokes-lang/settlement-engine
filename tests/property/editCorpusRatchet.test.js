@@ -370,7 +370,10 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // car 3 90dc22f18 -> 275 car 1b-2 fb0341b93 -> 276 PLACE-NOT-TIER 6129c300d -> 275 car 3 I7 6ca454d2b -> 277 F6
     // 6d84aa834; groups judged 130 -> 132 -> 130 (cars 1, 2) -> 132 PINS 37b1e746d -> 133 F6. mixedOutside and
     // settledLive stay empty at every stage.
-    expect(census().rows.filter((row) => row.takenLive > 0).length, 'the instrument is not idle').toBe(277);
+    // 2026-11-07 (the people landing; re-keyed BY IDENTITY, this census probed at each lane's tree): not idle 277 -> 276
+    // PEOPLE-1 CAST dc655f712 -> 271 CAST-DERIVED 3aa160a70 -> 305 TIES c7d552370 -> 306 5B EDIT a725df7e4, unmoved to the
+    // tip; groups judged 133 at every stage. mixedOutside and settledLive stay empty at every stage.
+    expect(census().rows.filter((row) => row.takenLive > 0).length, 'the instrument is not idle').toBe(306);
     expect(census().rows.filter((row) => row.groupsJudged > 0).length, 'declared groups ARE judged').toBe(133);
     // THE POSITIVE CONTROL, CONSTRUCTED: one object holding a leaf taken from R1 beside a leaf kept
     // where the record had settled away from R0 IS a MIXED object, and enclosingGroup classes it.
@@ -380,7 +383,7 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     expect(parentOf(control.settled[0])).toBe(parentOf(control.taken[0]));
     expect(enclosingGroup('population')).toBe(null);
     expect(enclosingGroup('economicState.foodSecurity.deficit').id).toBe('food-security');
-    expect(CONSISTENCY_GROUPS.length).toBe(7);
+    expect(CONSISTENCY_GROUPS.length).toBe(8); // 7 -> 8 PEOPLE-5B EDIT (069c6c7bc): the per-card group `card-standing` (memberships + importance)
   }, ARM_TIMEOUT);
 
   it('A4 the town keeps its invariants, the layer channel escalates nothing, and the config channel is named', () => {
@@ -443,7 +446,12 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // first-parent stages by the chain census): the four non-commuting pairs (trace-only, E1|E5 E2|E5 E5|E1 E5|E2) hold
     // through 79c442330 and are GONE from X-46 car 3 90dc22f18 (the institution budget): every ordered pair now commutes.
     // Determinism, undo and the 252/126/1890 denominators hold at every probed stage.
-    expect(tally(chains().pairs)).toEqual({});
+    // 2026-11-07 (the people landing; re-keyed BY IDENTITY, probed at each lane's tree): FOUR towns' seat pairs stop
+    // commuting at PEOPLE-1 CAST dc655f712 and hold unchanged to the tip (the metropolis on plains, hills and mountain,
+    // the plains port town, golden-master-v3). TRACE-ONLY, diffed leaf by leaf: the ONLY differing leaf in either order is
+    // the population step's summary trace `simulationTrace[].causes[0].effect` ("78 npcs" | "79 npcs": the cast that
+    // step counted; why the order moves it is not traced); every world field, the roster included, is identical in both orders.
+    expect(tally(chains().pairs)).toEqual({ 'E1|E6': 4, 'E2|E6': 4, 'E6|E1': 4, 'E6|E2': 4 });
     expect(() => mergeConsequence({}, {}, {}, { edit: [] })).toThrow(TypeError);
   }, ARM_TIMEOUT);
 
@@ -575,14 +583,19 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // 2026-11-05 (LANDING-6, measured by import at each first-parent stage that touches the ledger): 25 → 26 PINS
     // (11467ed57) → 35 F7 RENAME-CASCADE (a373129ee: the duplicate NON_CASCADED rows and the criminal services' and crisis
     // cast's paths), every one declaring `readable`.
-    expect([INSTITUTION_NON_CASCADED.length, declaring(INSTITUTION_NON_CASCADED).length]).toEqual([35, 35]);
+    // 2026-11-07 (the people landing, measured by import at each lane's tree): 35 -> 41 PEOPLE-1 CAST dc655f712 (the card's
+    // `institution.family`, `memberships[].power` and `secondaryAffiliation` rows, each on npcs[] and the grouping's
+    // members) -> 32 PEOPLE-5B EDIT a725df7e4 (the grouping's and the shim's label rows leave), every one declaring `readable`.
+    expect([INSTITUTION_NON_CASCADED.length, declaring(INSTITUTION_NON_CASCADED).length]).toEqual([32, 32]);
     expect(INSTITUTION_NON_CASCADED.filter((row) => row.kind === 'matched-pattern' && row.readable).map((row) => row.path)).toEqual(['economicState.activeChains[].processingInstitutions[]']);
     expect(typeof institutionRemovalChanges).toBe('function');
     // EXIT 2, the UNDECLARED ledger: EM-R6's LANDED ruling is that none of its rows has a reader,
     // and the prose rule is ENFORCED by the scan rather than trusted, at zero src/ bytes.
     // 2026-11-05 (LANDING-6, measured by import at each first-parent stage that touches the ledger): [16, 13] → [18, 14]
     // F7 RENAME-CASCADE (a373129ee) → [22, 14] F7 unit 5 (09295e420); none of the new rows declares `readable`.
-    expect([FACTION_NON_CASCADED.length, NPC_NON_CASCADED_SURFACES.length]).toEqual([22, 14]);
+    // 2026-11-07 (the people landing, by import at each lane's tree): [22, 14] -> [25, 14] PEOPLE-1 CAST dc655f712 ->
+    // [20, 12] PEOPLE-5B EDIT a725df7e4 (the grouping walks and the affiliation rows leave); none declares `readable`.
+    expect([FACTION_NON_CASCADED.length, NPC_NON_CASCADED_SURFACES.length]).toEqual([20, 12]);
     expect(declaring(FACTION_NON_CASCADED).length + declaring(NPC_NON_CASCADED_SURFACES).length).toBe(0);
     const importers = srcModules()
       .map((rel) => ({ rel, clause: /import\s*\{([^}]*)\}\s*from\s*'[^']*factionRename\.js'/s.exec(readFileSync(resolve(ROOT, 'src', rel), 'utf8')) }))
