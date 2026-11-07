@@ -28,7 +28,7 @@
  */
 
 import { governingFactionOf } from '../rulingPower.js';
-import { npcInFaction, ladderFactionKey } from '../worldPulse/npcLadderState.js';
+import { npcInFaction, ladderFactionKey } from '../worldPulse/npcLadderFactionMembership.js';
 
 /** @typedef {import('../rulingPower.js').RulingPowerSettlement} RulingPowerSettlement */
 

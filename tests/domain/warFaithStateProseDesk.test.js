@@ -32,7 +32,7 @@ import { describe, expect, test } from 'vitest';
 
 import { DOSSIER_STATE_PROSE_WAR_FAITH as WAR_FAITH } from '../../src/data/dossierStateProse/warFaith.generated.js';
 import { poolDimensions } from '../../src/domain/display/stateProse/stateProseKernel.js';
-import { drawnMember } from '../helpers/drawnProse.js';
+import { drawnMember, poolMemberTexts } from '../helpers/drawnProse.js';
 import {
   DOSSIER_MOUNTS, UNMOUNTED_BLOCKS, drawnAtMount, sentenceMountForBlock,
 } from '../../src/domain/display/stateProse/dossierMounts.js';
@@ -160,7 +160,7 @@ describe('the warFaith corpus join is populated, or every claim below is free', 
     ]);
     const pools = ids.flatMap((id) => Object.values(BLOCK(id).pools));
     expect(pools).toHaveLength(138);
-    expect(pools.reduce((n, pool) => n + pool.length, 0)).toBe(418);
+    expect(pools.reduce((n, pool) => n + pool.length, 0)).toBe(430);
   });
 
   test('the producer-minted fixtures really carry the producer shapes', () => {
@@ -180,24 +180,29 @@ describe('the warFaith corpus join is populated, or every claim below is free', 
 
 // ── THE DIMENSION MEASUREMENT THAT LICENSES THE MOUNT ROWS ───────────────────────────
 
-describe('NO STATE DIMENSION anywhere in the leaf', () => {
-  test('every one of the 138 pools is dimension-free, so no mount row owes a declaration', () => {
-    const partitioned = [];
+describe('ONE STATE DIMENSION in the leaf: walls (F10 WALLS-WORD, 2026-11-04)', () => {
+  test('only the wall-variant pools partition, only by walls, and only their mount rows declare it', () => {
+    // Until F10 every one of the 138 pools was dimension-free. F10 marked the variants that
+    // print the place's own walls (`walls`) and gave each a wall-free twin (`no walls`); the
+    // desk answers the dimension at its entry from `defenseFacts.js :: wallsAnswered`.
+    const partitioned = {};
     for (const id of Object.keys(WAR_FAITH)) {
       for (const [key, pool] of Object.entries(BLOCK(id).pools)) {
-        if (poolDimensions(pool).length > 0) partitioned.push(`${id} :: ${key}`);
+        const dims = poolDimensions(pool);
+        if (dims.length > 0) partitioned[`${id} :: ${key}`] = dims;
       }
     }
-    expect(partitioned).toEqual([]);
-    // The only mark the leaf uses at all is the AUDIENCE mark, which is law 2 and not a
-    // dimension. Stated as a measurement so a corpus that grows a dimension word reds here
-    // AND at the walker's honesty arm rather than only at the second one.
+    expect(Object.values(partitioned).every((dims) => dims.join() === 'walls')).toBe(true);
+    expect([...new Set(Object.keys(partitioned).map((k) => k.split(' :: ')[0]))].sort())
+      .toEqual(['DS-FTH-1', 'DS-WAR-1', 'DS-WAR-2']);
+    // Beside the AUDIENCE mark (law 2, not a dimension) the leaf spells only the walls pair.
     const marks = new Set(Object.keys(WAR_FAITH).flatMap((id) => Object.values(BLOCK(id).pools)
       .flat().flatMap((v) => v.marks || [])));
-    expect([...marks]).toEqual(['dm-only']);
+    expect([...marks].sort()).toEqual(['dm-only', 'no walls', 'walls']);
+    const owing = new Set(Object.keys(partitioned).map((k) => k.split(' :: ')[0]));
     for (const row of DOSSIER_MOUNTS.filter((r) => r.desk === 'warFaith')) {
-      expect(row.dimensions, `${row.mount} declares a dimension the leaf does not carry`)
-        .toBeUndefined();
+      expect(row.dimensions, `${row.mount} declares a dimension its block does not carry`)
+        .toEqual(owing.has(row.blockId) ? ['walls'] : undefined);
     }
   });
 });
@@ -655,6 +660,40 @@ describe('⭐ THE PATRON-LESS TOWN — what the deity-free review corpus renders
     expect(faithPanelModel(church).reading.hasChurch).toBe(true);
   });
 
+  test('LANE FAITH-POOLS: DS-FTH-2 speaks only the facts the one faith reading gives', () => {
+    // A church town: the houses, the senior cleric and the religious faction are the
+    // reading's, and every variant the desk can draw states one of them, or the dial.
+    const church = { id: 'kirkby', name: 'Kirkby', tier: 'village', config: { priorityReligion: 50 },
+      institutions: [{ name: 'Parish church', category: 'Religious' }],
+      npcs: [{ name: 'Aldous Wren', role: 'Village Priest' }],
+      powerStructure: { factions: [{ faction: 'Parish Council', category: 'religious', power: 20 }] } };
+    const reading = faithPanelModel(church).reading;
+    expect(reading).toMatchObject({ hasChurch: true, churchWords: 'a parish church',
+      seniorCleric: { role: 'Village Priest' }, religiousFaction: { name: 'Parish Council' } });
+    // The four members, computed through the shipped pool and filled with the READING's own facts
+    // (proseDrawnAnchors: a literal state-prose sentence may not be an anchor).
+    const allowed = poolMemberTexts({
+      leaf: 'warFaith', blockId: 'DS-FTH-2', poolKey: 'PRIVATE DOSSIER',
+      slots: { settlement: 'Kirkby', houses: 'a parish church', cleric: 'Village Priest',
+        faction: 'Parish Council', observance: 'through the year' },
+    });
+    expect(allowed, 'every member of the pool renders from the reading').toHaveLength(4);
+    const drawn = new Set();
+    for (const seed of ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l']) {
+      const desk = warFaithStateProse(church, { faith: faithPanelModel(church), hasPatron: false },
+        { seed, audience: 'player' });
+      drawn.add(desk.faithTeaser.sentence);
+    }
+    for (const line of drawn) expect(allowed).toContain(line);
+    expect(drawn.size, 'one seed family draws more than one variant').toBeGreaterThan(1);
+    // The quietest town: no church, no cleric, no faction. Only the dial's variant is live.
+    const quiet = patronLessTown();
+    const desk = warFaithStateProse(quiet.settlement, { faith: quiet.model, hasPatron: false },
+      { seed: 'greyford', audience: 'player' });
+    expect(desk.faithTeaser.sentence).toMatch(/keep their observances/);
+    expect(desk.faithTeaser.sentence).not.toMatch(/church|cleric|faction|faith/i); // anchored: the line above proves the teaser is the live observances sentence
+  });
+
   test('a town WITH a patron draws no teaser — the page cannot say both', () => {
     const { settlement, model } = faithTown();
     expect(warFaithStateProse(settlement, { faith: model, hasPatron: true }, DM).faithTeaser).toBeNull();
@@ -700,11 +739,17 @@ describe('the audience, the rung depth, and the promise', () => {
   });
 
   test('the desk declares its slot shapes and owns no fill table', () => {
-    expect(Object.keys(SLOT_FILL_SHAPES).sort())
-      .toEqual(['counterpart', 'creed', 'rival_creed', 'settlement', 'term']);
-    for (const shape of Object.values(SLOT_FILL_SHAPES)) expect(shape).toBe('proper');
-    // Every fill this desk supplies is a NAME a producer already carries, never a word the
-    // desk chose — so there is no literal table to hold to a shape.
+    expect(Object.keys(SLOT_FILL_SHAPES).sort()).toEqual([
+      'cleric', 'counterpart', 'creed', 'faction', 'houses', 'observance', 'rival_creed',
+      'settlement', 'term',
+    ]);
+    // DS-FTH-2's two phrases (lane FAITH-POOLS) are the faith reading's own words; every
+    // other fill is a NAME.
+    for (const [slot, shape] of Object.entries(SLOT_FILL_SHAPES)) {
+      expect(shape, slot).toBe(slot === 'houses' || slot === 'observance' ? 'phrase' : 'proper');
+    }
+    // Every fill this desk supplies is a NAME or a phrase a producer already carries, never a
+    // word the desk chose — so there is no literal table to hold to a shape.
     expect(SLOT_FILL_TABLES).toEqual({});
   });
 

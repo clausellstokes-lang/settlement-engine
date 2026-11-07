@@ -19,9 +19,9 @@ import { generateAvailableServices } from '../../src/generators/servicesGenerato
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 const FORMER_PROXY_HOSTS = Object.freeze([
-  ['Dwellings (4-16)', 'Infrastructure'], ['Dwellings (17-80)', 'Infrastructure'],
-  ['Dwellings (80-180)', 'Infrastructure'], ['Housing (180-1000 structures)', 'Infrastructure'],
-  ['Housing (1000-5000 structures)', 'Infrastructure'], ['Water source', 'Infrastructure'],
+  ['Dwellings (1-8)', 'Infrastructure'], ['Dwellings (5-25)', 'Infrastructure'],
+  ['Dwellings (15-100)', 'Infrastructure'], ['Housing (75-650 households)', 'Infrastructure'],
+  ['Housing (500-4000 households)', 'Infrastructure'], ['Water source', 'Infrastructure'],
   ['Multiple water sources', 'Infrastructure'], ['Sewage system', 'Infrastructure'],
   ['Farmland', 'Economy'], ['Common grazing land', 'Economy'],
   ['Access to external mill', 'Economy'], ['Massive prison', 'Defense'],
@@ -65,7 +65,7 @@ describe('a former proxy host offers only its own menu', () => {
   // draw. Red at the parent: Hospitality 0.5, Lodging (rooms to let) / Grain at harvest /
   // Pasturage 0.6.
   it('a former host whose menu is one row offers it at p 1.0', () => {
-    const oneRow = FORMER_PROXY_HOSTS.map(([name]) => name).concat('Housing (5000+ structures)')
+    const oneRow = FORMER_PROXY_HOSTS.map(([name]) => name).concat('Housing (3500+ households)')
       .filter((name) => Object.keys(INSTITUTION_SERVICES[name] || {}).length === 1);
     expect(oneRow).toHaveLength(9);
     for (const name of oneRow) {

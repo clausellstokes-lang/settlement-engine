@@ -34,9 +34,9 @@ export const getUpgradeOpportunities = (institutions, tier, config = {}) => {
         const hasWaterInst = nativeInstitutions.some(
           (i) =>
             i.tags?.includes('port') ||
-            (i.name || '').toLowerCase().includes('port') ||
-            (i.name || '').toLowerCase().includes('harbour') ||
-            (i.name || '').toLowerCase().includes('harbor') ||
+            /\bport\b/.test((i.name || '').toLowerCase()) || // F5 unit 6: word-bounded; the substring read "Teleportation circle" as a port
+            /\bharbour\b/.test((i.name || '').toLowerCase()) ||
+            /\bharbor\b/.test((i.name || '').toLowerCase()) ||
             ((i.name || '').toLowerCase().includes('dock') && waterRoute)
         );
         if (!waterRoute && !hasWaterInst) return;
@@ -59,4 +59,22 @@ export const getUpgradeOpportunities = (institutions, tier, config = {}) => {
     role.effectivePriority = role.priority * (config?.[role.category] ?? 1);
   });
   return result.sort((a, b) => b.effectivePriority - a.effectivePriority);
+};
+
+/**
+ * A mandated role's own row, outside the pool's institution filters (soak 1000 row 20). The
+ * generator mints its tier's head of government first (npcGenerator.js ::
+ * TIER_MANDATORY_ROLES); `getUpgradeOpportunities` offers a 'government' role only where a
+ * government-shelf institution stands, so a city whose City hall sits on infrastructure and
+ * that holds no government row dropped its Mayor and seated nobody. The caller asks for this
+ * row only when the pool dropped the head.
+ * @param {string} role
+ * @returns {Record<string, unknown> & { role: string, category: string } | undefined}
+ */
+export const mandatedRoleCandidate = (role) => {
+  for (const [category, roles] of Object.entries(POWER_ROLES_BY_CATEGORY)) {
+    const row = roles.find((r) => r.role === role);
+    if (row) return { ...row, category: row.category || category };
+  }
+  return undefined;
 };

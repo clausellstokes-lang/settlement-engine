@@ -49,7 +49,7 @@ const getInstitutionNames = (institutions = []) => {
     hasMilitaryInst:  hasAny(names, ['garrison','barracks','guard','watch','citadel','walls','militia','mercenary','navy','charter hall']),
     hasGarrison:      hasAny(names, ['garrison','barracks','professional guard',PROFESSIONAL_CITY_WATCH,'multiple garrison']),
     hasMilitia:       hasAny(names, ['citizen militia','militia']),
-    hasWatch:         hasAny(names, ['town watch','city watch',PROFESSIONAL_CITY_WATCH]),
+    hasWatch:         hasAny(names, ['town watch','city watch',PROFESSIONAL_CITY_WATCH,'village watch']), // F1: the village rung
     hasMercenary:     hasAny(names, ['mercenary company','mercenary quarter','hired muscle','hireling hall','free company hall','veteran\'s lodge']),
     hasFreeCompany:   hasAny(names, ['free company hall']),
     hasCharterHall:   hasAny(names, ["adventurers' charter hall","adventurers' guild hall","multiple adventurers'","adventurers' guild","hireling hall"]),

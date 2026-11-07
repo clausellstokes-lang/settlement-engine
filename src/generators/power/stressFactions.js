@@ -4,11 +4,50 @@
  * existing factions and injecting the crisis-specific ones.
  */
 import { random as _rng } from '../../kernel/rngContext.js';
-import { getInstFlags } from '../helpers.js';
+import { getInstFlags } from '../helpers.js'; import { defenseFactsOf, forceWordsOf } from '../../domain/defense/defenseFacts.js'; // F1: one line, so no cited line moves
+import { FACTION_DESCRIPTORS, FACTION_DESCRIPTORS_EXTRA } from '../../data/powerData.js';
+
+/** A roster name compared loosely: case and a leading article set aside. */
+const nameKey = (name) => String(name || '').trim().toLowerCase().replace(/^the\s+/, '');
+
+/**
+ * A STRESS FACTION'S REAL NAME (lane RUNG1-TRUTH unit D, 2026-11-04;
+ * docs/SOAK_1000_RUNG1_2026-11-04.md §2 row 12; the chair's ruling D): the FIRST name of the
+ * roster's own role pool (`FACTION_DESCRIPTORS[category]`, then the dedup pool
+ * `FACTION_DESCRIPTORS_EXTRA[category]`) that no faction already on the roster carries. It
+ * replaces the placeholders "Claimant Bloc A/B" and "Rival Faction B". No draw is taken; the
+ * pools are keyed by role only (no faction pool keyed by the settlement's people exists in the estate).
+ *
+ * ⚠ AN EXHAUSTED POOL (every one of the role's ten names already on the roster, which no
+ * generated roster reaches) answers null and the caller injects nothing rather than a
+ * placeholder.
+ * @param {Array<{ faction: string }>} factions the roster as it stands
+ * @param {string} category the role's pool key
+ * @returns {string | null}
+ */
+const firstUnusedPoolName = (factions, category) => {
+  const used = new Set(factions.map((f) => nameKey(f.faction)));
+  const pool = [...(FACTION_DESCRIPTORS[category] || []), ...(FACTION_DESCRIPTORS_EXTRA[category] || [])];
+  return pool.find((name) => !used.has(nameKey(name))) ?? null;
+};
+
+/**
+ * Push a pool-named stress faction with its role's category stamped, so the category the
+ * placeholder's name inferred (claimants noble, the rival other) does not move with the name.
+ * @param {Array<Record<string, unknown> & { faction: string }>} factions
+ * @param {string} category
+ * @param {number} power
+ * @param {string} desc
+ * @param {Record<string, unknown>} [extra] further fields the faction carries (the infiltrator's `hidden`)
+ */
+const pushPoolNamed = (factions, category, power, desc, extra = {}) => {
+  const faction = firstUnusedPoolName(factions, category);
+  if (faction !== null) factions.push({ faction, power, desc, category, ...extra });
+};
 
 // applyStressEventFactions — apply every active stress type's power reweighting
 // and faction injection to `factions` (mutates in place).
-export const applyStressEventFactions = (factions, ke, P, S, config, institutions) => {
+export const applyStressEventFactions = (factions, ke, P, S, config, institutions) => { const force = forceWordsOf(defenseFactsOf({ institutions: institutions || [] })), soldiersStand = force.members === 'soldiers'; // F1 (rung 1B): the force words read the record
   (ke('under_siege') &&
     (factions.forEach((N) => {
       ((N.faction.toLowerCase().includes('military') || N.faction.toLowerCase().includes('guard')) &&
@@ -42,7 +81,7 @@ export const applyStressEventFactions = (factions, ke, P, S, config, institution
       factions.push({
         faction: 'Occupation Authority',
         power: 20,
-        desc: 'External administrative body; all significant decisions require approval or reversal. Locally hated. Their actual power depends on how many soldiers they have here, which varies.',
+        desc: 'External administrative body; all significant decisions require approval or reversal. Locally hated. ' + (soldiersStand ? 'Their actual power depends on how many soldiers they have here, which varies.' : 'Their actual power depends on how much force they can bring here, which varies.'),
       }),
       factions.push({
         faction: 'Resistance Network',
@@ -56,14 +95,13 @@ export const applyStressEventFactions = (factions, ke, P, S, config, institution
           (N.faction === 'Noble Families' || N.faction === 'Noble Houses' || N.faction === 'Landed Gentry') &&
             (N.power = Math.round(N.power * 1.4)));
       }),
-      factions.push({
-        faction: P && P.includes('Royal Authority') ? 'Loyalist Noble Bloc' : 'Rival Faction B',
-        power: 20,
-        desc:
-          P && P.includes('Royal Authority')
-            ? 'Noble houses backing the current crown line; their support is conditional on continued royal favour and land grants.'
-            : 'Claims legitimate authority through different means; controls a distinct district or institution.',
-      }),
+      P && P.includes('Royal Authority')
+        ? factions.push({
+          faction: 'Loyalist Noble Bloc',
+          power: 20,
+          desc: 'Noble houses backing the current crown line; their support is conditional on continued royal favour and land grants.',
+        })
+        : pushPoolNamed(factions, 'other', 20, 'Claims legitimate authority through different means; controls a distinct district or institution.'),
       factions.push({
         faction: P && P.includes('Royal Authority') ? 'Reform Noble Bloc' : 'Third Bloc (Neutrals)',
         power: 15,
@@ -100,12 +138,14 @@ export const applyStressEventFactions = (factions, ke, P, S, config, institution
       factions.forEach((N) => {
         N.isGoverning && (N.power = Math.round(N.power * 0.7));
       })),
+    // THE INFILTRATOR (lane RUNG1-TRUTH unit E1; the chair's ruling 1, 2026-11-04): hidden IN
+    // THE FICTION ("Its presence is not known to the settlement"), never from the DM, whose page
+    // the record is. It takes a real name like every stress faction, from the `other` pool: the
+    // stress is political and "strategic, not extractive", so neither the merchant nor the noble
+    // pool's framing fits, and `other` is the category the old placeholder inferred.
+    // `hidden: true` carries the fiction's fact; the description is unchanged.
     ke('infiltrated') &&
-      factions.push({
-        faction: 'Unknown Faction (hidden)',
-        power: 15,
-        desc: 'An external interest with embedded assets in at least two factions. Its presence is not known to the settlement.',
-      }),
+      pushPoolNamed(factions, 'other', 15, 'An external interest with embedded assets in at least two factions. Its presence is not known to the settlement.', { hidden: true }),
     ke('succession_void') &&
       (factions.forEach((N) => {
         (N.isGoverning && ((N.power = Math.round(N.power * 0.5)), (N.modifiers = [...(N.modifiers || []), 'vacant'])),
@@ -118,22 +158,19 @@ export const applyStressEventFactions = (factions, ke, P, S, config, institution
               (N.desc || '') +
               ' The succession crisis has transformed latent noble power into active leverage. Every claimant needs their backing.')));
       }),
-      factions.push({
-        faction: P && P.includes('Royal Authority') ? 'Noble Claimant (Senior Line)' : 'Claimant Bloc A',
-        power: P && P.includes('Royal Authority') ? 22 : 18,
-        desc:
-          P && P.includes('Royal Authority')
-            ? 'A noble house with a plausible hereditary claim; controls several key military levies. Legally strongest. Not universally liked.'
-            : 'Hereditary or institutional claim; has legal arguments; lacks popular support.',
-      }),
-      factions.push({
-        faction: P && P.includes('Royal Authority') ? 'Noble Claimant (Reform Faction)' : 'Claimant Bloc B',
-        power: P && P.includes('Royal Authority') ? 17 : 15,
-        desc:
-          P && P.includes('Royal Authority')
-            ? 'A rival noble house backed by popular sentiment and merchant capital; weaker bloodline claim but stronger coalition. Moving fast.'
-            : 'Popular support; questionable legitimacy; moving fast.',
-      })),
+      (P && P.includes('Royal Authority')
+        ? (factions.push({
+          faction: 'Noble Claimant (Senior Line)',
+          power: 22,
+          desc: 'A noble house with a plausible hereditary claim; controls several key military levies. Legally strongest. Not universally liked.',
+        }),
+        factions.push({
+          faction: 'Noble Claimant (Reform Faction)',
+          power: 17,
+          desc: 'A rival noble house backed by popular sentiment and merchant capital; weaker bloodline claim but stronger coalition. Moving fast.',
+        }))
+        : (pushPoolNamed(factions, 'noble', 18, 'Hereditary or institutional claim; has legal arguments; lacks popular support.'),
+        pushPoolNamed(factions, 'noble', 15, 'Popular support; questionable legitimacy; moving fast.')))),
     ke('famine') &&
       (factions.push({
         faction: 'Grain Holders',
@@ -271,7 +308,7 @@ export const applyStressEventFactions = (factions, ke, P, S, config, institution
               ((he.power = Math.round(he.power * 1.2)),
               (he.desc =
                 (he.desc || '') +
-                " The pastoral burden of wartime (soldiers praying before departure, families grieving) has made the institution indispensable in a way it wasn't before.")));
+                (soldiersStand ? " The pastoral burden of wartime (soldiers praying before departure, families grieving) has made the institution indispensable in a way it wasn't before." : " The pastoral burden of wartime (the called-up praying before departure, families grieving) has made the institution indispensable in a way it wasn't before."))));
         }),
           // Siege pushes its own 'War Council' first (see the under_siege block);
           // siege AND wartime together minted TWO War Councils in one roster.
@@ -364,7 +401,7 @@ export const applyStressEventFactions = (factions, ke, P, S, config, institution
                 ((N.power = Math.round(N.power * 1.5)),
                 (N.desc =
                   (N.desc || '') +
-                  ' Fully deployed for containment. Soldiers are being asked to do things that will complicate their relationship with the civilian population.')),
+                  ` Fully deployed for containment. ${force.members[0].toUpperCase()}${force.members.slice(1)} are being asked to do things that will complicate their relationship with the civilian population.`)),
               (N.faction.toLowerCase().includes('merchant') || N.faction.toLowerCase().includes('guild')) &&
                 ((N.power = Math.round(N.power * 0.85)),
                 (N.desc =

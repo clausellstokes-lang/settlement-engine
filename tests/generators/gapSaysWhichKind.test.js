@@ -53,14 +53,25 @@ describe('a gap says which kind — planted on one roster (a desert Potter, no c
   });
 });
 
+// RE-KEYED BY IDENTITY (REVIEW-INTAKE-LAND, 2026-11-07, the merge onto rung 1's tip `77bfd3535`),
+// one cause: rung 1's institution budget (X-46-3) re-draws the rosters, so soak1k-4 no longer
+// seats Bakers (5-15) or a Vintner and soak1k-8 no longer seats a Dairy farmer (the dairy arm
+// would have passed vacuously). Each moved pair is re-seated on the FIRST birth, in the soak's
+// own order, that seats the house and reads the asserted kind at the merged tip: soak1k-5 for
+// the Bakers' imported grain and the Vintner's missing grapes; soak1k-289 (a hamlet; the first
+// of 11 Dairy farmers in soak1k-0..289 whose herds are rolled nearby) for the local dairy.
+// Every other pair holds on its original birth. The assertions are unchanged.
 describe('a gap says which kind — READER R1\'s named births', () => {
   /** @type {Map<number, Array<{institution: string, chain: string, kind?: string, impact: string}>>} */
   const lines = new Map();
+  /** @type {Map<number, Set<string>>} the roster, so a local arm proves its house is seated */
+  const seats = new Map();
   beforeAll(async () => {
     await ensureLaws();
-    for (const i of [0, 4, 8, 12, 22, 24]) {
+    for (const i of [0, 4, 5, 8, 12, 22, 24, 289]) {
       const { settlement } = birth(i);
       lines.set(i, (settlement.resourceAnalysis?.gaps || []).filter((g) => g.institution));
+      seats.set(i, new Set((settlement.institutions || []).map((inst) => inst.name)));
     }
   }, 120_000);
   const at = (i, institution, chain) => (lines.get(i) || [])
@@ -71,12 +82,13 @@ describe('a gap says which kind — READER R1\'s named births', () => {
       [24, 'Access to external mill'], [8, 'Mill']]) {
       expect(at(i, house, 'grain'), `soak1k-${i} ${house} -> grain`).toEqual([]);
     }
-    expect(at(8, 'Dairy farmer', 'livestock'), 'soak1k-8: the dairy\'s herds are rolled nearby').toEqual([]);
+    expect(seats.get(289)?.has('Dairy farmer'), 'soak1k-289 seats a Dairy farmer, so the arm is not vacuous').toBe(true);
+    expect(at(289, 'Dairy farmer', 'livestock'), 'soak1k-289: the dairy\'s herds are rolled nearby').toEqual([]);
   });
 
   it('imported: the smelter\'s iron ore and the city bakers\' grain run on imports', () => {
     for (const [i, house, good] of [[4, 'Smelter', 'iron ore'], [22, 'Smelter', 'iron ore'],
-      [4, 'Bakers (5-15)', 'grain'], [22, 'Bakers (5-15)', 'grain']]) {
+      [5, 'Bakers (5-15)', 'grain'], [22, 'Bakers (5-15)', 'grain']]) {
       const hit = at(i, house, good);
       expect(hit.map((g) => g.kind), `soak1k-${i} ${house} -> ${good}`).toEqual(['imported']);
       expect(hit[0].impact).toContain(`runs on imported ${good}`);
@@ -85,7 +97,7 @@ describe('a gap says which kind — READER R1\'s named births', () => {
 
   it('missing: the TRUE gaps stay written — the potter\'s and brickmaker\'s clay, the vintner\'s grapes, the sawmill\'s timber', () => {
     for (const [i, house, good] of [[4, 'Potter', 'clay'], [4, 'Brickmaker', 'clay'],
-      [4, 'Vintner', 'grapes'], [8, 'Sawmill', 'timber']]) {
+      [5, 'Vintner', 'grapes'], [8, 'Sawmill', 'timber']]) {
       const hit = at(i, house, good);
       expect(hit.map((g) => g.kind), `soak1k-${i} ${house} -> ${good}`).toEqual(['missing']);
       expect(hit[0].impact).toMatch(LACKS);

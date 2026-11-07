@@ -221,15 +221,24 @@ describe('no load-bearing AI — the typed world is complete with zero AI', () =
 });
 
 describe('no load-bearing AI — every AI surface has a coherent AI-off fallback', () => {
-  it.each(Object.entries(SURFACE_FALLBACK))(
-    '%s degrades to a coherent deterministic fallback (no crash, no empty, no raw error)',
-    async (surface, { drive, check }) => {
-      const result = await drive(); // a throw here fails the test — an AI-off crash is a real defect
-      expect(result !== undefined, `${surface}: the AI-off path returns a defined result`).toBe(true);
-      expect(hasNoRawLeak(result), `${surface}: no raw [object Object]/undefined leaks to the user`).toBe(true);
-      check(result);
-    },
-  );
+  // Each-family cure (2026-11-05, LANDING-6): one parameterless test looping over every
+  // surface in its body; a failure inside a surface's drive or check is prefixed with the
+  // surface's name, so a red row still names itself.
+  it('every AI surface degrades to a coherent deterministic fallback (no crash, no empty, no raw error)', async () => {
+    const surfaces = Object.entries(SURFACE_FALLBACK);
+    expect(surfaces.length, 'SURFACE_FALLBACK is empty — the loop below would assert nothing').toBeGreaterThan(0);
+    for (const [surface, { drive, check }] of surfaces) {
+      try {
+        const result = await drive(); // a throw here fails the test — an AI-off crash is a real defect
+        expect(result !== undefined, `${surface}: the AI-off path returns a defined result`).toBe(true);
+        expect(hasNoRawLeak(result), `${surface}: no raw [object Object]/undefined leaks to the user`).toBe(true);
+        check(result);
+      } catch (error) {
+        if (error instanceof Error) error.message = `[surface ${surface}] ${error.message}`;
+        throw error;
+      }
+    }
+  });
 
   it('the fallback drivers cover the full discovered AI-surface roster (a new surface reds)', () => {
     const covered = new Set(Object.keys(SURFACE_FALLBACK));

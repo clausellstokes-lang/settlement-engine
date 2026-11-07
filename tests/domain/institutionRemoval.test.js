@@ -41,6 +41,7 @@ import {
   applyInstitutionRenameToSettlement,
   listOf,
   resolveSites,
+  sitesOf,
 } from '../../src/domain/institutionRename.js';
 import { applyInstitutionRemovalToSettlement, institutionRemovalChanges } from '../../src/domain/institutionRemoval.js';
 
@@ -55,9 +56,13 @@ function reloaded(settlement) {
   return JSON.parse(JSON.stringify(settlement));
 }
 
+/** A declared cascade row by its path, so a row's `where` filter is read as the module reads it (RUNG1B-F7). */
+const ROW_BY_PATH = new Map(INSTITUTION_RENAME_SURFACES.map((row) => [row.path, row]));
+
 function valuesAt(root, path) {
   const out = [];
-  for (const site of resolveSites(root, path)) {
+  const row = ROW_BY_PATH.get(path);
+  for (const site of row ? sitesOf(root, row) : resolveSites(root, path)) {
     const held = site.owner[site.key];
     if (site.isList) { for (const item of listOf(held) || []) if (typeof item === 'string') out.push(item); }
     else if (typeof held === 'string') out.push(held);
@@ -93,7 +98,9 @@ function withDeclaredDropsApplied(save, name) {
     const handle = row.path.slice(cut + 3);
     for (const site of resolveSites(copy, row.path.slice(0, cut))) {
       const list = site.owner[site.key];
-      if (Array.isArray(list)) site.owner[site.key] = list.filter((entry) => String(entry?.[handle] ?? '').trim() !== name);
+      // A row's `where` filter (RUNG1B-F7: the crisis cast's kind) scopes the drop as it scopes the sweep.
+      const scoped = (entry) => !row.where || entry?.[row.where.key] === row.where.equals;
+      if (Array.isArray(list)) site.owner[site.key] = list.filter((entry) => !scoped(entry) || String(entry?.[handle] ?? '').trim() !== name);
     }
   }
   return copy;

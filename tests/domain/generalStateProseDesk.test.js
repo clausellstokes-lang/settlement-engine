@@ -128,7 +128,8 @@ const BLOCK_POOLS = Object.freeze({
  * so the arm below can hold every OTHER block to `[]` and this one to its dimension, rather
  * than exempting it — an exemption is how a block quietly grows a dimension nobody answers.
  */
-const DIMENSIONED = Object.freeze({ 'DS-GEN-6': 'deficit', 'DS-GEN-9': 'anchor' });
+// F10 WALLS-WORD (2026-11-04): DS-GEN-3 and DS-HK-1 carry wall variants and their twins.
+const DIMENSIONED = Object.freeze({ 'DS-GEN-6': 'deficit', 'DS-GEN-9': 'anchor', 'DS-GEN-3': 'walls', 'DS-HK-1': 'walls' });
 
 /** @param {string} id @returns {string[]} */
 const poolsOf = (id) => Object.keys(DOSSIER_STATE_PROSE_GENERAL[id].pools);
@@ -1263,13 +1264,19 @@ describe('the viability verdict and the hook framing', () => {
     );
     // The contradiction count: two pools, and a non-number is NOT a zero.
     expect(criticalIssuePoolKey(2)).toBe('criticalIssueCount: critical contradictions on the record');
-    expect(criticalIssuePoolKey(0)).toBe('criticalIssueCount zero');
+    expect(criticalIssuePoolKey(2, true)).toBe('criticalIssueCount: critical contradictions on the record');
+    // The zero pool vouches for the record, so it needs the receipt's battery judgment
+    // (lane SELF-VOUCH): passed → zero; contradicted → the contradiction pool; unasked → nothing.
+    expect(criticalIssuePoolKey(0, true)).toBe('criticalIssueCount zero');
+    expect(criticalIssuePoolKey(0, false)).toBe('criticalIssueCount: critical contradictions on the record');
+    expect(criticalIssuePoolKey(0), 'a record the battery never read vouched for').toBeNull();
     expect(criticalIssuePoolKey(undefined), 'an unmeasured record read as zero').toBeNull();
+    expect(criticalIssuePoolKey(undefined, true), 'an unmeasured record read as zero').toBeNull();
     expect(criticalIssuePoolKey('2')).toBeNull();
     // TOTAL the other way: the six pools are claimed by these three lenses and no other.
     expect([...new Set([
       viabilityVerdictPoolKey(true), viabilityVerdictPoolKey(false), viabilityVerdictPoolKey(undefined),
-      criticalIssuePoolKey(1), criticalIssuePoolKey(0), 'THE FIRST-SURVEY QUALIFICATION',
+      criticalIssuePoolKey(1), criticalIssuePoolKey(0, true), 'THE FIRST-SURVEY QUALIFICATION',
     ])].sort()).toEqual(poolsOf('DS-GEN-11').sort());
   });
 

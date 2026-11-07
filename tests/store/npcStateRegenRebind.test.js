@@ -27,6 +27,11 @@
  * generateSeed(), and under an unpinned mint the keeper's slot move — the whole
  * precondition of the defect — would be a coin flip per run.
  *
+ * FIXTURE SEED re-seated `pins-store-regen-1` to `-3` on 2026-11-06 (LANDING-7 lane B), the
+ * sibling's own re-pin: X-46 car 3's density factor (47829c070, U3) reshaped this town's
+ * roster and `-1` now leaves the keeper in npc_2. Scanned -0..-60 under this mint: 11 of 61
+ * move the keeper; -3 is the first (npc_6 -> npc_8).
+ *
  * @enforced-by this test
  */
 import { describe, test, expect, beforeEach, vi } from 'vitest';
@@ -114,7 +119,7 @@ beforeEach(() => {
 describe('REGEN — a person\'s world state follows the person, and the stranger inherits nothing', () => {
   test('npcStates re-key the keeper, drop everyone replaced, and never cross settlements', async () => {
     const { generateSettlementPipeline } = await import('../../src/generators/generateSettlementPipeline.js');
-    const town = reloaded(generateSettlementPipeline(CFG, null, { seed: 'pins-store-regen-1', customContent: {} }));
+    const town = reloaded(generateSettlementPipeline(CFG, null, { seed: 'pins-store-regen-3', customContent: {} }));
     town.npcs[2]._authored = true;
     const target = town.npcs[2];
     const bystander = town.npcs[0];
@@ -202,7 +207,7 @@ describe('REGEN — a person\'s world state follows the person, and the stranger
 
   test('a graduated keeper keeps ONE durable identity across the slot move', async () => {
     const { generateSettlementPipeline } = await import('../../src/generators/generateSettlementPipeline.js');
-    const town = reloaded(generateSettlementPipeline(CFG, null, { seed: 'pins-store-regen-1', customContent: {} }));
+    const town = reloaded(generateSettlementPipeline(CFG, null, { seed: 'pins-store-regen-3', customContent: {} }));
     town.npcs[2]._authored = true;
     const target = town.npcs[2];
 
@@ -210,7 +215,7 @@ describe('REGEN — a person\'s world state follows the person, and the stranger
     // consequence economy is dark, so the graduation below needs the flag.
     const graduation = graduateNpc({
       worldState: { tick: 12, simulationRules: { npcConsequencesEnabled: true } },
-      settlementSeed: 'pins-store-regen-1',
+      settlementSeed: 'pins-store-regen-3',
       settlementId: SAVE_ID,
       rosterIdentity: { rosterId: String(target.id), name: String(target.name), role: String(target.role || '') },
       tick: 12,
@@ -223,7 +228,7 @@ describe('REGEN — a person\'s world state follows the person, and the stranger
     // new slot — inventing the rebind the name in the lookup key exists to refuse.
     const departed = graduateNpc({
       worldState: graduation.worldState,
-      settlementSeed: 'pins-store-regen-1',
+      settlementSeed: 'pins-store-regen-3',
       settlementId: SAVE_ID,
       rosterIdentity: { rosterId: String(target.id), name: 'Adelheid Vorgänger', role: 'Former Occupant' },
       tick: 9,

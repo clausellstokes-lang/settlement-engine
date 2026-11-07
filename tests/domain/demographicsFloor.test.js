@@ -45,6 +45,7 @@ import { fileURLToPath } from 'node:url';
 import { dirname, join, relative } from 'node:path';
 import { describe, expect, test, vi } from 'vitest';
 import { createPRNG } from '../../src/kernel/prng.js';
+import { POPULATION_RANGES, TIER_STAMP_CUTS } from '../../src/data/constants.js';
 import {
   evaluatePopulationDynamics, applyPopulationOutcomeToSettlement,
 } from '../../src/domain/worldPulse/populationDynamics.js';
@@ -411,6 +412,13 @@ describe('3. THE DESCENT — the floored-six shape walks the ladder to the termi
   // measuring the horizon rather than the cure. The terminal candidate is measured at
   // tick 434 on this fixture, which is the derivation confirmed by execution.
   const HORIZON = 700;
+  // RE-KEYED 2026-11-06 (LANDING-7 lane E, by identity with X-46 car 1, 433289899). Under the
+  // old bands a hamlet held 61 to 400 and this fixture was a hamlet of 120 fed for 46. Under
+  // the owner's bands a hamlet rolls 20 to 100 and is STAMPED 25 to 87, so 120 is a village
+  // in fact and the lit ladder never read it as failing a hamlet. The shape is kept at the
+  // same ratio: a hamlet of 60 (inside its stamp band) whose granary (20 a day) feeds about
+  // a third of it.
+  const HAMLET_POP = 60;
 
   test('LIT: a settlement whose GRANARY fails walks the ladder down and the terminal candidate fires', () => {
     // ⭐ WAVE P4 MOVED WHAT DRIVES THE DESCENT, and refusing to move this fixture with it
@@ -418,12 +426,13 @@ describe('3. THE DESCENT — the floored-six shape walks the ladder to the termi
     // settlement to its death, including a settlement with food to spare — that is the
     // ratchet, and a cure that kept it would not be a cure. What must still be true, and
     // is, is that a settlement whose CAPACITY genuinely fails still dies: the granary here
-    // feeds 46 and 120 people are at the table, so the claim is corroborated, mortality
-    // runs at its authored strength, and the viability ladder does the rest. Measured:
-    // hamlet to thorp, terminal candidate at tick 106.
+    // holds a bound of 22 and 60 people are at the table, so the claim is corroborated,
+    // mortality runs at its authored strength, and the viability ladder does the rest.
+    // Measured (2026-11-06, the owner's bands): hamlet to thorp, terminal candidate at tick
+    // 497, inside the 700-tick horizon (it was tick 106 for the old 120-person fixture).
     const failed = walk({
-      pressure: 0.70, lit: true, ticks: HORIZON, tier: 'hamlet', population: 120,
-      dailyProduction: 40, named: 0, conditions: FAMINE,
+      pressure: 0.70, lit: true, ticks: HORIZON, tier: 'hamlet', population: HAMLET_POP,
+      dailyProduction: 20, named: 0, conditions: FAMINE,
     });
     expect(failed.tiers, 'the descent is the claim, in order').toEqual(['hamlet', 'thorp']);
     expect(failed.deathTick, 'the terminal lane was never reached').not.toBeNull();
@@ -438,7 +447,7 @@ describe('3. THE DESCENT — the floored-six shape walks the ladder to the termi
     // this horizon, which is precisely the reading the old lane earned. One number apart —
     // the fields' output — and the same fixture under the same famine lives.
     const sound = walk({
-      pressure: 0.70, lit: true, ticks: HORIZON, tier: 'hamlet', population: 120,
+      pressure: 0.70, lit: true, ticks: HORIZON, tier: 'hamlet', population: HAMLET_POP,
       dailyProduction: 300, named: 0, conditions: FAMINE,
     });
     expect(sound.deathTick, 'a well-fed settlement was killed by a story').toBeNull();
@@ -446,13 +455,17 @@ describe('3. THE DESCENT — the floored-six shape walks the ladder to the termi
     expect(sound.population, 'the well-fed settlement emptied anyway').toBeGreaterThan(0);
   });
 
-  test('DARK (the control): the same fixture stalls at hamlet at exactly 300 people, forever', () => {
+  test('DARK (the control): the same fixture stalls at its own tier at exactly 300 people, forever', () => {
     const dark = walk({ pressure: 0.70, lit: false, ticks: HORIZON });
-    // Dark the ladder DOES move twice, on the existing population-failure tests, and then
-    // stops: at 300 people a hamlet is inside its own band (61 to 400) and its support of
-    // 0.30 is above the structural-failure floor of 0.25, so nothing else can demote it
-    // and the frozen population can never fall to where something would.
-    expect(dark.tiers).toEqual(['town', 'village', 'hamlet']);
+    // RE-KEYED 2026-11-06 (LANDING-7 lane E; X-46 car 1, 433289899). Under the old bands the
+    // dark ladder moved twice on the population-failure tests (town 901+, village 401+) and
+    // stalled at hamlet, whose band held 61 to 400. Under the owner's bands 300 is the town
+    // roll band's own floor (300 to 2,500), so no population-failure test fires at all and
+    // the dark ladder never moves: the frozen town stays a town of 300. Its support of 0.30
+    // is above the structural-failure floor of 0.25, so nothing else can demote it, and the
+    // frozen population can never fall to where something would. The claim (dark, the
+    // frozen place is immortal) is unchanged; only the rung it freezes on moved.
+    expect(dark.tiers).toEqual(['town']);
     expect(dark.population).toBe(300);
     expect(dark.deathTick, 'dark, a nonviable settlement must remain immortal').toBeNull();
     expect(dark.died).toBe(false);
@@ -479,20 +492,25 @@ describe('4. THE LABEL LAG — a tier label that cannot follow its census', () =
   // exists for, isolated: tier drift is OFF in both arms, so the label never moves and
   // the only difference between them is which fact the death gate consults.
   const OFF = { tierDriftEnabled: false };
+  // RE-KEYED 2026-11-06 (LANDING-7 lane E; X-46 car 1, 433289899). "Thorp-scale in fact" is
+  // the stamp (popToTier), and the owner's bands put the hamlet cut at 25: forty people now
+  // stamp HAMLET, so the label no longer lags the census at all and the lit death correctly
+  // refused. Fifteen people (inside the thorp stamp band, under the cut) restore the case.
+  const THORP_SCALE = 15;
 
-  test('DARK: forty people wearing a hamlet label are immortal', () => {
+  test('DARK: fifteen people wearing a hamlet label are immortal', () => {
     const dark = walk({
-      pressure: 0.70, lit: false, ticks: 200, tier: 'hamlet', population: 40,
+      pressure: 0.70, lit: false, ticks: 200, tier: 'hamlet', population: THORP_SCALE,
       dailyProduction: 300, rules: OFF,
     });
     expect(dark.tier).toBe('hamlet');
-    expect(dark.population).toBe(40);
+    expect(dark.population).toBe(THORP_SCALE);
     expect(dark.deathTick).toBeNull();
   });
 
   test('LIT: the same settlement is thorp-scale in fact, and it reaches the terminal lane', () => {
     const lit = walk({
-      pressure: 0.70, lit: true, ticks: 200, tier: 'hamlet', population: 40,
+      pressure: 0.70, lit: true, ticks: 200, tier: 'hamlet', population: THORP_SCALE,
       dailyProduction: 300, rules: OFF,
     });
     expect(lit.tier, 'the death gate must not mint a tier: the label is still the drift lane\'s to write')
@@ -505,7 +523,7 @@ describe('4. THE LABEL LAG — a tier label that cannot follow its census', () =
     // The applier's staleness contract is unchanged in substance. Without the stamp a
     // non-thorp settlement is refused exactly as before, which is what keeps every dark
     // outcome and every parked legacy proposal reading the way it always did.
-    const hamlet = place({ tier: 'hamlet', population: 40, dailyProduction: 300 });
+    const hamlet = place({ tier: 'hamlet', population: THORP_SCALE, dailyProduction: 300 });
     const unstamped = { id: 'x', lifecyclePatch: { kind: 'terminal_death', saveId: 'Ashford' }, metadata: { tick: 9 } };
     const stamped = {
       id: 'x',
@@ -526,9 +544,20 @@ describe('4. THE LABEL LAG — a tier label that cannot follow its census', () =
 
 // ═══════════════════════════════════════════════════════════════════════════════
 describe('5. PROMOTION — law 4 on both arms', () => {
+  // RE-SEATED 2026-11-06 (LANDING-7 lane E), by identity with two causes. X-46 car 1
+  // (433289899) moved the bands, so the old hamlet of 380 stamps TOWN and promoted twice in
+  // eight ticks. LANDING-7 R-B1 made the dark window read the next tier's STAMP CUT (0.92 x
+  // cut), and every such window except the metropolis one lies at or above the next tier's
+  // roll-band floor, which is where the dark mint clamps. So the mint can now fire only on
+  // city -> metropolis: 0.92 x 15,000 = 13,800 <= pop < 15,000. The fixture is a city of
+  // 14,000 (the first seat re-keyed tierResourceDynamics' floor bump to the same rung).
+  const FROM = 'city';
+  const TO = 'metropolis';
+  const BELOW = 14000;                          // inside the dark window, under the cut
+  const CUT = TIER_STAMP_CUTS[TO];              // 15,000: the full floor earned ascension needs
   const promoteFixture = (population) => ({
-    population, tier: 'hamlet', name: 'Ashford',
-    config: { tier: 'hamlet', terrainType: 'plains' },
+    population, tier: FROM, name: 'Ashford',
+    config: { tier: FROM, terrainType: 'plains' },
     economicState: {
       foodSecurity: {
         dailyNeed: population * 2, dailyProduction: population * 6, deficitPct: 0,
@@ -562,56 +591,56 @@ describe('5. PROMOTION — law 4 on both arms', () => {
   }
 
   test('DARK: the legacy mint is intact, and a golden depends on it', () => {
-    // 380 is inside the old window (0.92 x 401 = 368.9), so dark it promotes and the
-    // applier raises the head count to the village floor: 21 people out of nothing.
-    const dark = promote({ lit: false, population: 380 });
+    // 14,000 is inside the window (0.92 x 15,000 = 13,800), so dark it promotes and the
+    // applier raises the head count to the metropolis floor: 1,000 people out of nothing.
+    const dark = promote({ lit: false, population: BELOW });
     expect(dark.change.direction).toBe('promotion');
-    expect(dark.settlement.tier).toBe('village');
-    expect(dark.settlement.population, 'the dark mint must be byte-for-byte the legacy behaviour').toBe(401);
+    expect(dark.settlement.tier).toBe(TO);
+    expect(dark.settlement.population, 'the dark mint must be byte-for-byte the legacy behaviour').toBe(POPULATION_RANGES[TO].min);
     const bump = dark.settlement.populationHistory.at(-1);
-    expect(bump.delta).toBe(21);
+    expect(bump.delta).toBe(POPULATION_RANGES[TO].min - BELOW);
     expect(String(bump.reason)).toContain('population floor');
   });
 
   test('LIT: earned ascension refuses the same promotion outright, so nobody is invented', () => {
-    const lit = promote({ lit: true, population: 380 });
+    const lit = promote({ lit: true, population: BELOW });
     expect(lit.change, 'lit, a settlement below its next tier floor may not rise').toBeNull();
-    expect(lit.settlement.tier).toBe('hamlet');
-    expect(lit.settlement.population).toBe(380);
+    expect(lit.settlement.tier).toBe(FROM);
+    expect(lit.settlement.population).toBe(BELOW);
   });
 
   test('LIT: at the full floor it promotes, conserving exactly, and stamps the law it rose under', () => {
-    const lit = promote({ lit: true, population: 401 });
+    const lit = promote({ lit: true, population: CUT });
     expect(lit.change.direction).toBe('promotion');
     expect(lit.change.populationConserved).toBe(true);
-    expect(lit.settlement.tier).toBe('village');
-    expect(lit.settlement.population, 'a tier change created somebody').toBe(401);
+    expect(lit.settlement.tier).toBe(TO);
+    expect(lit.settlement.population, 'a tier change created somebody').toBe(CUT);
     expect(lit.settlement.populationHistory || [], 'a conserved promotion leaves no bump breadcrumb').toEqual([]);
   });
 
   test('THE APPLIER, both arms on ONE settlement: the stamp is the whole difference', () => {
     // The crispest form of the pin: the same settlement, the same outcome, one key apart.
-    const settlement = promoteFixture(380);
-    const base = { id: 'x', generatedAtTick: 4, tierChange: { saveId: 'Ashford', fromTier: 'hamlet', toTier: 'village', direction: 'promotion' } };
+    const settlement = promoteFixture(BELOW);
+    const base = { id: 'x', generatedAtTick: 4, tierChange: { saveId: 'Ashford', fromTier: FROM, toTier: TO, direction: 'promotion' } };
     const minted = applyTierOutcomeToSettlement(settlement, base);
     const conserved = applyTierOutcomeToSettlement(settlement, {
       ...base, tierChange: { ...base.tierChange, populationConserved: true },
     });
-    expect(minted.population).toBe(401);
-    expect(conserved.population).toBe(380);
-    expect(minted.tier).toBe('village');
-    expect(conserved.tier, 'the tier must still rise: only the mint is dispositioned').toBe('village');
+    expect(minted.population).toBe(POPULATION_RANGES[TO].min);
+    expect(conserved.population).toBe(BELOW);
+    expect(minted.tier).toBe(TO);
+    expect(conserved.tier, 'the tier must still rise: only the mint is dispositioned').toBe(TO);
     expect((minted.populationHistory || []).length).toBe(1);
     expect((conserved.populationHistory || []).length).toBe(0);
   });
 
   test('DEMOTION was already conservation-exact and stays so on both arms', () => {
-    const settlement = promoteFixture(380);
-    const demote = { id: 'x', generatedAtTick: 4, tierChange: { saveId: 'Ashford', fromTier: 'hamlet', toTier: 'thorp', direction: 'demotion' } };
-    expect(applyTierOutcomeToSettlement(settlement, demote).population).toBe(380);
+    const settlement = promoteFixture(BELOW);
+    const demote = { id: 'x', generatedAtTick: 4, tierChange: { saveId: 'Ashford', fromTier: FROM, toTier: 'town', direction: 'demotion' } };
+    expect(applyTierOutcomeToSettlement(settlement, demote).population).toBe(BELOW);
     expect(applyTierOutcomeToSettlement(settlement, {
       ...demote, tierChange: { ...demote.tierChange, populationConserved: true },
-    }).population).toBe(380);
+    }).population).toBe(BELOW);
   });
 });
 
@@ -737,11 +766,23 @@ describe('8. THE DARK FENCE — measured against HEAD, not recorded from the new
   // ⚠ The discriminator is the same one this wave used at the AO-5 denominator and at the
   // rumor-ledger golden: BEHAVIOUR HELD, WORDING MOVED. Where behaviour moved instead — the
   // npcAgency:914 metronome case — the site was STOPPED, not re-recorded.
+  // ── RE-RECORDED 2026-11-06 BY LANDING-7 LANE E (second seat), BY STAGE, NOT FROM THE TIP ──
+  // THE DARK PATH MOVED, AND IT MOVED FOR TWO NAMED, RULED CAUSES — measured, not assumed. The
+  // same trace was extracted into a probe and run in scratch worktrees at each stage:
+  //     433289899^ (before X-46 car 1)   42b514c1.. · 992cccb5.. · 389b242a.. · 1f5a367f..  (= the old FROZEN: the probe is faithful)
+  //     433289899  (X-46 car 1, the owner's bands and the stamp)
+  //                                      065c9d74.. · a6accfbe.. · acf81305.. · 4f3e5f83..
+  //     2168ffdba  (LANDING-7 R-B1, the dark window reads the next tier's STAMP CUT)
+  //                                      85cbc0cb.. · a6accfbe.. · acf81305.. · 4f3e5f83..
+  // `git bisect run` over 433289899..8e60cb2a5 on the 0.15 digest named 2168ffdba as its only
+  // later mover; the other three have not moved since car 1. Both causes rebuild what the dark
+  // ladder reads (the realm's bands, then the window), which is exactly what this fence was
+  // built to see. Neither is a defect. The owner's bands are §934.105's; R-B1 is the chair's.
   const FROZEN = Object.freeze({
-    0.15: '42b514c1e896342b',
-    0.45: '992cccb50f00081d',
-    0.70: '389b242ad966a03a',
-    0.90: '1f5a367f4dd622d3',
+    0.15: '85cbc0cbb13d8b65',
+    0.45: 'a6accfbebd1def48',
+    0.70: 'acf81305f27626a0',
+    0.90: '4f3e5f8387da61b1',
   });
   const REALM = Object.freeze([
     ['Ashford', 'town', 300, 900], ['Brack', 'hamlet', 380, 1200], ['Cairn', 'thorp', 40, 300],

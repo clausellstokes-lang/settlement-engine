@@ -105,12 +105,13 @@ describe('the four negative controls and the positive one (MOVE-GRAMMAR §4.4, a
       if (new Set(pool.map((v) => segmentCount(v.text))).size === 1) uniformSegments += 1;
       if (new Set(pool.map((v) => openerOf(v.text))).size < pool.length) repeatedOpener += 1;
     }
-    expect(cells.size).toBe(708);
-    // SITTING B.3 / Part B §14: 407 of 708, not the 408 MOVE-GRAMMAR §0 first printed.
-    expect(uniformSegments).toBe(407);
-    expect(repeatedOpener).toBe(79);
-    expect(uniformSegments / cells.size).toBeCloseTo(0.575, 3);
-    expect(repeatedOpener / cells.size).toBeCloseTo(0.112, 3);
+    expect(cells.size).toBe(709);
+    // SITTING B.3 / Part B §14: 407 of 708, not the 408 MOVE-GRAMMAR §0 first printed; 410 / 103 of 709 at the
+    // rung-1 landing (LANDING-1: F9 READER-CONTRADICTIONS +1 pool, F10 WALLS-WORD +41 twin variants).
+    expect(uniformSegments).toBe(410);
+    expect(repeatedOpener).toBe(103);
+    expect(uniformSegments / cells.size).toBeCloseTo(0.578, 3);
+    expect(repeatedOpener / cells.size).toBeCloseTo(0.145, 3);
   });
 
   it('CONTROL 4, SECOND HALF — the R1 leaves RED ON ARM E, which is what the control actually says', async () => {
@@ -130,9 +131,9 @@ describe('the four negative controls and the positive one (MOVE-GRAMMAR §4.4, a
     expect(spreadFails.map((f) => f.detail).join(' ')).toMatch(/repeatedOpener/);
     // The arm reads the SAME pools the calibration counted, to the unit.
     const figures = /** @type {any} */ (report.figures.spread);
-    expect(figures.pools).toBe(708);
-    expect(Math.round(figures.uniformSegmentShare * 708)).toBe(407);
-    expect(Math.round(figures.repeatedOpenerShare * 708)).toBe(79);
+    expect(figures.pools).toBe(709);
+    expect(Math.round(figures.uniformSegmentShare * 709)).toBe(410);
+    expect(Math.round(figures.repeatedOpenerShare * 709)).toBe(103);
   });
 
   it('ARM E is NOT-EXECUTABLE without spread ceilings — never a pass on a number it invented', () => {
@@ -669,7 +670,7 @@ describe('the walk over the shipped corpus — REPORTED, and the arms that canno
     // Every variant is untagged today, and the walker must say so rather than scoring silence
     // as agreement.
     expect(level1.untagged).toBe(corpus.length);
-    expect(spread.pools).toBe(786);
+    expect(spread.pools).toBe(787);
     // The walk must find SOMETHING and must not find everything.
     expect(report.fails.length).toBeGreaterThan(0);
     expect(report.fails.length).toBeLessThan(corpus.length);
@@ -760,6 +761,9 @@ describe('the PROVENANCE detector cites the twelve holder kinds and nothing wide
       + `  kind-only ${kindOnly} · generic-only ${genericOnly} · both ${both}\n`
       + `  carrying the WITHDRAWN generic limb but NOT cited: ${genericNotCited.length}\n`
       + `${cited.map((v) => `    ${v.block} :: ${v.pool} | ${(v.text.match(PROVENANCE_KIND_LIMB) || [''])[0]}`).join('\n')}\n`);
+    // 8 -> 7, re-keyed by identity (LANDING-8): F10 WALLS-WORD's wall-free twin of DS-ECO-9 BLOCKADED (4a49ae5bb) kept
+    // v1's "sealed off from the road" and was an eighth citing variant; LANDING-7 lane F's R-F2 (282891162) re-worded it
+    // ("sealed off, and the road brings nothing more to them"), so the seven citing variants are this title's seven again.
     expect(cited.length).toBe(7);
     expect(kindOnly).toBe(7);
     expect(genericOnly).toBe(0);
@@ -824,6 +828,7 @@ describe('the PROVENANCE detector cites the twelve holder kinds and nothing wide
         }
       }
     }
+    // 8 -> 7 by the same cause as the split arm above (282891162, R-F2).
     expect(cited.length).toBe(7);
     expect(ties).toEqual([]);
   });

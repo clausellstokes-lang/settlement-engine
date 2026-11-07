@@ -1,0 +1,16 @@
+{
+  "_doc": "THE VILLAGE WATCH'S AUTHORED TEXTS, ONE SIGNED SHIFT OF RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the cloud chair signs by the owner's delegation of 2026-11-06, vetoable; a successor chair does not inherit this signature). THE CAUSE, ONE: LANDING-7 lane F, commit 59237b232 (merged at 3da1104da): the Village watch row (shipped by F1 unit 3, 22ea53ea8, without either text) gains its identity one-liner (institutionVocabulary.js) and its two desc variants (institutionDescVariants.js, 'village|Defense|Village watch' = PAIRS[332]); a village that raises a watch now draws its description from the two variants. THE TEXTS, VERBATIM (the owner's veto class; the variants were re-worded by lane H's R-H2 under record 35, so these exact words stand only between the two records): identity 'Unpaid neighbours who take turns walking the lanes after dark. Their whole duty is to see trouble first and wake everyone else to it.'; variant 1 'Each household takes its turn walking the lanes after dark, a lantern kept burning at the crossroads and the alarm raised at the first sign of trouble. Nobody is paid, and the headman holds the rota.'; variant 2 'A rota of unpaid householders who walk the lanes by night, keep a lantern lit at the crossroads, and raise the alarm. Whose turn it is, the headman decides.' (old: no identity line and no variants; the catalogue desc alone). THE MOVER, FOUND BY STAGE: LANDING-8 measured every registered surface at every first-parent step since 3d8a74e4b; at the lane-F step 3da1104da the espionage fence's driven corpus moves 3 of 360 rows (village 3: SUBw4-fence1-village-crossroads-004, -crossroads-010, -port-006) beyond the previous step; inside the step each of the four source commits reverse-applied in the scratch stage: without 59237b232 0 rows move, without any of the other three (1741d9dfd, 0534c8507, ca2f0516e) the 3 still move. The generator golden master moves 0 of 525 and the dossier prose manifest 0 of 1,050 at this step (no golden village raises a watch; the desc sits in no composed cell). HOW: the staged-tree method: stage = the tree of 3da1104da with the door paths carried from the branch (record 29 committed), and lane D's food floor bfd70d809 reverse-applied and committed in the scratch stage (its own cause, recorded under record 34 with lane H's cure it is superseded by), so the produced constant differs from the previous one by this cause alone. 360/360 hashes stay distinct.",
+  "ownerWords": "I also now give all permissions required now and in the future. I also defer all judgement to you.",
+  "ownerDate": "2026-11-06",
+  "odqRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (RUNG 1 OF THE SOAK LADDER; the owner's delegation of 2026-11-06 to the cloud chair, session 01FE9mEvGxnFx6WTBkEC6ie9)",
+  "cause": "LANDING-7 lane F: the Village watch's identity one-liner and its two desc variants authored in the house voice (institutionVocabulary.js, institutionDescVariants.js 'village|Defense|Village watch'; commit 59237b232)",
+  "seat": "LANDING-8 (Opus 5.5) under the cloud chair (Fable 5.1), session 01FE9mEvGxnFx6WTBkEC6ie9, from the stage at 3da1104da minus bfd70d809",
+  "surfaces": [
+    {
+      "surface": "espionage-dormancy-fence",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "in-file corpus constant"
+    }
+  ]
+}

@@ -30,8 +30,12 @@ const openGoverning = (s) => fireEvent.click(screen.getByRole('button', { name: 
 beforeAll(async () => { await loadGenerationLawPayloads(); });
 
 describe('"Holds power" is the ruler\'s word alone', () => {
+  // Fixture re-seated by identity thorp 1 -> thorp 12 (LANDING-7 lane G, 2026-11-06): Register VII lit (3420d01e3, X-46 car 4)
+  // re-draws the thorp rosters to one faction in most draws, so thorp 1 holds no contender (first-parent
+  // bisect: green at fb5edb7f5, red from 3420d01e3).
+  // Scanned rulers-thorp-0..59 in order: 4 thorps hold a contender (12, 28, 33, 42); 12 is the first.
   it('a thorp with a ruler and contenders marks the ruler once and each contender "Contests the seat"', () => {
-    const s = born('thorp', 1);
+    const s = born('thorp', 12);
     const { powers } = derivePowerStrata(s);
     const contenders = powers.filter((p) => p.role === 'contender');
     expect(contenders.length, 'fixture premise: contenders press the seat').toBeGreaterThan(0);
@@ -48,16 +52,21 @@ describe('the governs note names the rival or goes', () => {
   // fractured and the generator writes no crisis note for it (Religious Authorities 53 still outrank
   // the Elder Council 22). Thorp 3 is the first rulers-thorp-<i> whose governing faction carries the
   // note AND is outranked: People's Council 39 over the Elder Council 26.
-  it('names the outranking rival when one outranks the governing faction (thorp 3: People\'s Council)', () => {
-    const s = born('thorp', 3);
+  // Re-seated by identity thorp 3 -> thorp 12 (LANDING-7 lane G, 2026-11-06): Register VII lit (3420d01e3, X-46 car 4)
+  // re-draws the thorp rosters, and thorp 3 is now its Elder Council alone, so no rival outranks it
+  // (first-parent bisect: green at fb5edb7f5, red from 3420d01e3).
+  // Scanned rulers-thorp-0..59 in order: 2 thorps carry the note AND an outranking rival (12: Grain
+  // Holders 56 over the Elder Council 44; 42: Religious Authorities 76 over 24); 12 is the first.
+  it('names the outranking rival when one outranks the governing faction (thorp 12: Grain Holders)', () => {
+    const s = born('thorp', 12);
     const gov = governingFactionOf(s);
     expect(String(gov.crisisNote), 'fixture premise: the generator wrote the note').toContain(NOTE);
-    const rival = (s.powerStructure.factions || []).find((f) => nameOf(f) === "People's Council");
+    const rival = (s.powerStructure.factions || []).find((f) => nameOf(f) === 'Grain Holders');
     expect(rival?.power, 'fixture premise: the rival outranks the governing faction on power').toBeGreaterThan(gov.power);
     tab(s);
     openGoverning(s);
     const text = document.body.textContent;
-    expect(text).toContain(`${NOTE}; the real decisions rest with People's Council.`);
+    expect(text).toContain(`${NOTE}; the real decisions rest with Grain Holders.`);
   });
 
   it('drops the claim when no rival outranks the governing faction (thorp 13), keeping the fracture reading', () => {
@@ -72,13 +81,19 @@ describe('the governs note names the rival or goes', () => {
 });
 
 describe('the vacant seat reads once', () => {
+  // Premise re-stated by identity with its cause (LANDING-7 lane G, second seat, ruling R-G1, 2026-11-06):
+  // since 6da7d3f64 (RUNG1-TRUTH unit D) a non-royal succession_void names its claimants from the
+  // noble pool, so no faction is named "Claimant…" and the old name premise held on 0 of 1,000 thorps.
+  // The vacancy is the record's own fact, the governing faction's `vacant` modifier, which
+  // powerStrata.js :: rulingChainOf now reads. Scanned rulers-thorp-0..999 in order: 20 carry it;
+  // thorp 11 is still the first. Its roster names no claimant, so the absence line is the unsettled one.
   it('thorp 11 (a claimant vacancy) never renders "The seat The seat"', () => {
     const s = born('thorp', 11);
-    expect((s.powerStructure.factions || []).some((f) => /claimant/i.test(nameOf(f))), 'fixture premise: claimant vacancy').toBe(true);
+    expect(governingFactionOf(s)?.modifiers || [], 'fixture premise: the governing seat is vacant').toContain('vacant');
     tab(s);
     const chain = screen.getByTestId('ruling-chain');
     const words = chain.innerText ?? chain.textContent;
-    expect(screen.getByTestId('ruling-chain-absence').textContent).toMatch(/^Stands empty; 2 claimants circle: Claimant Bloc A, Claimant Bloc B\.$/);
+    expect(screen.getByTestId('ruling-chain-absence').textContent).toMatch(/^Stands empty; the succession is unsettled\.$/);
     expect(words.replace(/\s+/g, ' ')).not.toMatch(/The seat ?The seat/); // anchored: the absence row is asserted on this render
   });
 

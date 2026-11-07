@@ -56,9 +56,9 @@ describe('LOCALE_SERVICE_OVERRIDES join integrity', () => {
     // (2026-11-06) made the RECORD true: each former proxy owns its menu (Water source and
     // Sewage system an empty one) and no override row redirects it to another house's.
     const former = [
-      'access to external mill', 'common grazing land', 'farmland', 'dwellings (4-16)',
-      'dwellings (17-80)', 'dwellings (80-180)', 'housing (180-1000 structures)',
-      'housing (1000-5000 structures)', 'multiple water sources', 'water source',
+      'access to external mill', 'common grazing land', 'farmland', 'dwellings (1-8)',
+      'dwellings (5-25)', 'dwellings (15-100)', 'housing (75-650 households)',
+      'housing (500-4000 households)', 'multiple water sources', 'water source',
       'sewage system', 'massive prison',
     ];
     for (const src of former) {

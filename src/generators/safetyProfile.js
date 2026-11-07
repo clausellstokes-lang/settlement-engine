@@ -10,6 +10,26 @@ import {
   institutionMatchesNativeName,
   institutionMatchesRegex,
 } from '../domain/institutionClassify.js';
+import { institutionCategoryFlags } from './roleCategory.js';
+import { crimeSignalOf } from '../domain/crimeSignal.js';
+
+/**
+ * The pool's own "desperation theft" line, held once because two entries print it: the famine
+ * and siege crime type below, and (lane RUNG1-TRUTH unit C) the survival-crime entry where the
+ * record carries a criminal network.
+ */
+const DESPERATION_THEFT_DESC =
+  'Hunger-driven theft of food, livestock, and stored goods. Enforcement struggles to distinguish survival crime from organised theft.';
+/** The survival-crime line where no network exists (the economy step's own text, held once for
+ *  `settleCrimeLinesToSignal` below). */
+const SURVIVAL_NO_NETWORK_DESC =
+  'Theft driven by economic desperation rather than organization. No criminal infrastructure: just too many people with too little, doing what they must to survive.';
+/** The indebted stress's debt-evasion line, and the same line without the network it names
+ *  (lane RUNG1B-F4 unit 4b: the clause is dropped, no word is added). */
+const DEBT_EVASION_DESC =
+  'Residents fleeing creditor obligations, transferring assets fraudulently, or using criminal networks to avoid collection.';
+const DEBT_EVASION_NO_NETWORK_DESC =
+  'Residents fleeing creditor obligations or transferring assets fraudulently to avoid collection.';
 
 // ─── generateSafetyProfile ────────────────────────────────────────────────────
 
@@ -443,10 +463,19 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
   // Survival crime: requires either a criminal institution OR a settlement large enough
   // that community self-regulation breaks down. Clean thorps/hamlets don't have fences
   // or hired muscle networks — desperate people steal from neighbors quietly, not organizationally.
+  //
+  // ⛔ "NO CRIMINAL INFRASTRUCTURE" IS FALSE BESIDE A NETWORK (lane RUNG1-TRUTH unit C, 2026-11-04;
+  // docs/SOAK_1000_RUNG1_2026-11-04.md §2 row 16, A-06; the chair's ruling C). Where the roster
+  // carries a criminal-category institution (the Institutions tab's own mark,
+  // `institutionCategoryFlags`), the entry prints the pool's existing desperation-theft line
+  // instead. The TYPE is kept, so the services menu that reads it (the fence by word of mouth)
+  // is unchanged; nothing here draws.
   if (flags.criminalEffective >= 48 && pri.economy < 35 && !_isSmallCommunity) {
     crimeTypes.push({
       type: 'Survival crime',
-      desc: 'Theft driven by economic desperation rather than organization. No criminal infrastructure: just too many people with too little, doing what they must to survive.',
+      desc: institutionCategoryFlags(institutions).hasCriminal
+        ? DESPERATION_THEFT_DESC
+        : SURVIVAL_NO_NETWORK_DESC,
     });
   }
   if (flags.criminalEffective >= 45 && pri.magic >= 48 &&
@@ -520,8 +549,10 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
   };
 
   if (hasStress('famine') || hasStress('under_siege')) {
-    addCrimeIfMissing('desperation theft',
-      'Hunger-driven theft of food, livestock, and stored goods. Enforcement struggles to distinguish survival crime from organised theft.');
+    // The survival entry may already print this line (unit C above): printed once, never twice.
+    if (!crimeTypes.some((c) => c.desc === DESPERATION_THEFT_DESC)) {
+      addCrimeIfMissing('desperation theft', DESPERATION_THEFT_DESC);
+    }
     addCrimeIfMissing('black market food',
       'Controlled goods (grain, salt, preserved meat) changing hands at extortionate prices through unofficial channels.');
   }
@@ -538,8 +569,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
       'Price gouging on medicines, protective herbs, and burial services. Often conducted by otherwise respectable merchants.');
   }
   if (hasStress('indebted')) {
-    addCrimeIfMissing('debt evasion',
-      'Residents fleeing creditor obligations, transferring assets fraudulently, or using criminal networks to avoid collection.');
+    addCrimeIfMissing('debt evasion', DEBT_EVASION_DESC);
   }
   if (hasStress('insurgency')) {
     const insurgentDriven = (flags.criminalEffective || 0) > (flags.militaryEffective || 0);
@@ -695,3 +725,42 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
     compound:      flags,
   };
 };
+
+/**
+ * ⛔ THE CRIME LINES READ THE FINAL CRIME SIGNAL (lane RUNG1B-F4 unit 4, 2026-11-04;
+ * docs/F4_CRIME_SIGNAL_2026-11-04.md; soak1k-393 and -248). The safety profile is born at the
+ * economy step, BEFORE the power roster exists, and the density law trims that roster only at
+ * assembly, so two of its crime lines could not read whether organised crime exists here: the
+ * survival-crime line printed "No criminal infrastructure" beside a roster Thieves' Guild (4
+ * places), and the indebted stress's debt-evasion line named "criminal networks" where none
+ * existed (38 places; nine of A-06's 16). Assembly calls this once, after the trim, and each line
+ * takes its text from the crime signal's one home (`domain/crimeSignal.js :: crimeSignalOf`):
+ *   - survival crime: the pool's desperation-theft line beside a network, the clause without one
+ *     (unit C's rule, now on the final record); the famine/siege desperation-theft entry is then
+ *     printed once, never twice, as at the economy step;
+ *   - debt evasion: the same line without its "criminal networks" clause where none exists.
+ * Every entry's TYPE is kept (the services menu reads types). No draw. Returns the input
+ * `economicState` BY REFERENCE when no line changes, else a copy with a copied crime list.
+ *
+ * @template {{ safetyProfile?: { crimeTypes?: Array<{ type?: unknown, desc?: unknown }> } | null } | null | undefined} E
+ * @param {E} economicState
+ * @param {Parameters<typeof crimeSignalOf>[0]} lists the FINAL roster's seats and the estate
+ * @returns {E}
+ */
+export function settleCrimeLinesToSignal(economicState, lists) {
+  const safetyProfile = economicState?.safetyProfile;
+  const crimes = safetyProfile?.crimeTypes;
+  if (!Array.isArray(crimes) || !crimes.length) return economicState;
+  const present = crimeSignalOf(lists).present;
+  const lineFor = { 'Survival crime': present ? DESPERATION_THEFT_DESC : SURVIVAL_NO_NETWORK_DESC,
+    'debt evasion': present ? DEBT_EVASION_DESC : DEBT_EVASION_NO_NETWORK_DESC };
+  let settled = crimes.map((entry) => {
+    const desc = lineFor[/** @type {keyof typeof lineFor} */ (String(entry?.type))];
+    return desc !== undefined && entry.desc !== desc ? { ...entry, desc } : entry;
+  });
+  if (present && settled.some((entry) => entry?.type === 'Survival crime')) {
+    settled = settled.filter((entry) => !(entry?.type === 'desperation theft' && entry.desc === DESPERATION_THEFT_DESC));
+  }
+  if (settled.length === crimes.length && settled.every((entry, i) => entry === crimes[i])) return economicState;
+  return { ...economicState, safetyProfile: { ...safetyProfile, crimeTypes: settled } };
+}

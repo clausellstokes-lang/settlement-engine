@@ -1,15 +1,12 @@
 /**
- * IdentityDailyLife — chapter 02. Three-band layout:
+ * IdentityDailyLife — chapter 02. Three-band layout (no quarters before the plat, X-47):
  *   1. Anchor facts panel — mirror DailyLifeTab anchor (governing, prosperity,
  *      safety, food, magic, stress).
  *   2. Identity rows — name/tier/population/race/terrain/layout/age/gov/founded.
- *   3. Quarters — name + description (editable) + landmarks list.
- *   4. Daily Life — five AI passages (Dawn→Night) editable, or food balance
+ *   3. Daily Life — five AI passages (Dawn→Night) editable, or food balance
  *      fallback when AI prose is missing.
  *
  * Editable fields:
- *   - identity.quarter.<i>.description
- *   - identity.quarter.<i>.landmark.<j>
  *   - daily.<time>
  *   - daily.cultureNotes
  */
@@ -23,9 +20,9 @@ import {
 import { Callout } from '../primitives/Callout.jsx';
 import { EditableText, EditableProse } from '../primitives/Editable.jsx';
 import { type, palette, space, pt } from '../theme.js';
-import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
 import { smart, humanize, num } from '../lib/format.js';
 import { StateProse } from '../primitives/StateProse.jsx';
+import { foodwaysLineOf } from '../../domain/foodways.js';
 
 export function IdentityDailyLife({ settlement, narrativeMode, vm, stateProse }) {
   const id = vm.identity;
@@ -225,18 +222,9 @@ export function IdentityDailyLife({ settlement, narrativeMode, vm, stateProse })
         <GenerationCoherence receipt={coherence} />
       )}
 
-      {/* ── Quarters ─────────────────────────────────────────── */}
-      {id.quarters?.length > 0 && (
-        <View style={{ marginBottom: space.sm }}>
-          <HairRule />
-          <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>
-            QUARTERS · {id.quarters.length}
-          </Text>
-          {id.quarters.map((q, i) => (
-            <QuarterCard key={`q-${i}`} q={q} idx={i} />
-          ))}
-        </View>
-      )}
+      {/* ⛔ NO QUARTERS BLOCK BEFORE THE PLAT (X-47, the owner, 2026-11-03: "No districts or
+          taverns until we get the PLAT working"). The view model keeps `id.quarters` for the
+          plat to read; no text surface prints a quarter's name. tests/pdf/quartersNotPrinted.test.jsx */}
 
       {/* ── Daily Life ───────────────────────────────────────── */}
       {(d.hasPassages || d.foodBalance) && (
@@ -296,15 +284,9 @@ export function IdentityDailyLife({ settlement, narrativeMode, vm, stateProse })
 
 // ── Sub-components ─────────────────────────────────────────────
 
-/**
- * The foodways sentence has ONE home: the food record's line, composed from the sources the
- * place really has (economicState.foodSecurity.foodRecord.foodwaysLine, FOOD-3). The culture's
- * authored line is printed only for a save older than that record (lane WIRING-2, FOOD R-print).
- */
-function foodwaysLineOf(settlement) {
-  const line = settlement?.economicState?.foodSecurity?.foodRecord?.foodwaysLine;
-  return typeof line === 'string' && line.trim() ? line.trim() : null;
-}
+// The foodways sentence has ONE home: the food record's line, read through the one reader
+// (domain/foodways.js :: foodwaysLineOf, FOOD-4). The culture's authored line is printed only
+// for a save older than that record (lane WIRING-2, FOOD R-print).
 
 function CultureRows({ culture, foodwaysLine }) {
   const rows = [
@@ -420,56 +402,6 @@ function GenerationCoherence({ receipt }) {
           </Text>
         </View>
       ))}
-    </View>
-  );
-}
-
-function QuarterCard({ q, idx }) {
-  return (
-    <View
-      style={{
-        marginBottom: 4,
-        padding: 5,
-        border: `0.4pt solid ${palette.border}`,
-        borderRadius: 2,
-        backgroundColor: palette.card,
-      }}
-      wrap={false}
-    >
-      <Text style={{ ...type.body_em, color: palette.ink, fontSize: pt['10'] }}>
-        {humanize(q.name || `Quarter ${idx + 1}`)}
-      </Text>
-      {q.description && (
-        <View style={{ marginTop: 2 }}>
-          <EditableProse
-            name={`identity.quarter.${idx}.description`}
-            defaultValue={q.description}
-            lines={2}
-            style={{ ...type.body, fontSize: pt['9'] }}
-          />
-        </View>
-      )}
-      {q.landmarks?.length > 0 && (
-        <View style={{ marginTop: 3 }}>
-          <Text style={{ ...type.label, fontSize: pt['7'], color: palette.muted, marginBottom: 1 }}>
-            LANDMARKS
-          </Text>
-          {q.landmarks.map((lm, j) => (
-            <View key={`lm-${idx}-${j}`} style={{ flexDirection: 'row', marginBottom: 1 }}>
-              <Text style={{ color: palette.gold, marginRight: 4, fontSize: pt['8'] }}>·</Text>
-              <View style={{ flex: 1 }}>
-                <EditableText
-                  name={`identity.quarter.${idx}.landmark.${j}`}
-                  // The seam, not the raw key: a landmark is an institution name and this is
-                  // the value the DM reads AND writes over in the fillable field.
-                  defaultValue={institutionDisplayName(typeof lm === 'string' ? lm : lm)}
-                  style={{ ...type.body, fontSize: pt['8.5'] }}
-                />
-              </View>
-            </View>
-          ))}
-        </View>
-      )}
     </View>
   );
 }

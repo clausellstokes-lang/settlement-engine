@@ -5,6 +5,8 @@ import { normalizePlotHook, plotHookText } from '../../lib/proseSeams.js';
 import { themeOfText } from '../hookThemes.js';
 import { createConflictHookDraw, foodGapHookLine } from './hookLines.js';
 import { retainHooks, retentionKey, editedHookTextKeys } from './hookRetention.js';
+import { crisisHooksOf } from '../crisis/crisisHooks.js';
+import { effectiveCastOf } from '../crisis/crisisCast.js';
 
 const TENSION_LABELS = Object.freeze({
   crime_wave: 'Crime Wave',
@@ -121,6 +123,7 @@ export function groupPlotHooksBySourcePage(hooks) {
  * @property {number} priority
  * @property {boolean} [accent]
  * @property {Array<{ kind: string, label: unknown, id: unknown }>} [links]
+ * @property {string} [crisis] the crisis kind a crisis hook belongs to (absent on every other hook)
  */
 
 // Hook-prefix cleanup is the shared display chokepoint (src/lib/proseSeams.js);
@@ -339,7 +342,21 @@ function speakHooks(collected, facts, settlement) {
  * @property {{ plotHooks?: PlotHookRaw[] }} [economicViability]
  * @property {{ safetyProfile?: { plotHooks?: PlotHookRaw[] } }} [economicState]
  * @property {unknown[]} [traditions]  THE TRADITIONS mirror (T-5) — outcome/relation hooks
+ * @property {unknown} [stress]  the crisis container: one entry or a list, each carrying its `cast`
  */
+
+/**
+ * The crisis container as a list of entries (one entry, a list, or nothing).
+ * @param {unknown} stress
+ * @returns {Array<{ type?: unknown, label?: unknown, cast?: unknown }>}
+ */
+function crisisEntriesOf(stress) {
+  const list = Array.isArray(stress) ? stress : stress && typeof stress === 'object' ? [stress] : [];
+  return list.filter((e) => !!e && typeof e === 'object');
+}
+
+/** The link kinds a hook card can carry. */
+const CRISIS_LINK_KINDS = new Set(['npc', 'faction']);
 
 /**
  * @param {PlotHookSettlement} [settlement]
@@ -354,6 +371,32 @@ export function collectPlotHooks(settlement = {}, options = {}) {
   const hooks = [];
   const facts = settlementHookFacts(settlement);
   const drawConflictHook = createConflictHookDraw();
+
+  // ── THE CRISIS HOOKS, FIRST (the HOOKS-UNDER-STRESS lane, SOAK-1000 §3) ─────────────────
+  // Each active crisis adds the hooks its cast derives (`src/domain/crisis/crisisHooks.js ::
+  // crisisHooksOf`): one naming a line role's holder with the role's reason, one naming the lever
+  // and the faction that loses. They are read off the cast HERE, never stored, and off the cast
+  // the page shows (`effectiveCastOf`: the DM's word where the DM spoke). They are collected
+  // ahead of every other source and marked `crisis`, and the sort below keeps them first, so the
+  // place's own hooks are the floor of the count and not the whole. A calm place has no entry,
+  // so nothing here runs for it.
+  crisisEntriesOf(settlement.stress).forEach((entry) => {
+    const kind = typeof entry.type === 'string' ? entry.type : '';
+    const label = typeof entry.label === 'string' && entry.label ? entry.label : 'Crisis';
+    const { cast } = effectiveCastOf(/** @type {never} */ (settlement), /** @type {never} */ (entry));
+    crisisHooksOf(settlement, { type: kind, cast }, facts).forEach((hook) => {
+      push(hooks, {
+        text: hook.text,
+        source: label,
+        role: '',
+        category: 'tension',
+        priority: 10,
+        accent: true,
+        crisis: kind,
+        links: hook.link && CRISIS_LINK_KINDS.has(hook.link.kind) ? [{ kind: hook.link.kind, label: hook.link.label, id: hook.link.id }] : [],
+      });
+    });
+  });
 
   (settlement.npcs || []).forEach((npc) => {
     (npc.plotHooks || []).forEach((hook) => push(hooks, {
@@ -467,8 +510,11 @@ export function collectPlotHooks(settlement = {}, options = {}) {
   const spoken = speakHooks(hooks, facts, settlement);
 
   // Sort by priority (then category, for a stable tiebreak), THEN dedupe so the
-  // kept instance of any repeated hook is always the highest-priority one.
-  const sorted = spoken.sort((a, b) => b.priority - a.priority || compareCodepoint(a.category, b.category));
+  // kept instance of any repeated hook is always the highest-priority one. A crisis hook
+  // leads every other (the first key); between two hooks that are not crisis hooks the first
+  // key is 0, so a calm place's order is the order it always had.
+  const sorted = spoken.sort((a, b) => (Number(Boolean(b.crisis)) - Number(Boolean(a.crisis)))
+    || b.priority - a.priority || compareCodepoint(a.category, b.category));
   const deduped = dedupeHooks(sorted);
 
   // ── HK-2 SEAM (dark by default) ────────────────────────────────────────────

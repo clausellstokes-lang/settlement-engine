@@ -40,6 +40,7 @@ import { ownerGenerationContracts } from './generationContracts.js';
 // same order with the same arguments.
 import { economicsSlice, defenseSlice, servicesSlice, resourcesSlice } from './viewModelBodySlices.js';
 import { stressArray, foodCore, avgScore } from './viewModelPrimitives.js';
+import { crisisHookFor } from '../../domain/crisis/crisisHooks.js';
 
 // Human labels for the publicLegitimacy breakdown factors
 // (factionDynamics.computePublicLegitimacy emits { prosperity, safety, defense,
@@ -216,7 +217,7 @@ function summarySlice(active, ai, useAi, aiDailyLife) {
     crisis: stress.length > 0 ? {
       active: true,
       chips: stress.map(x => ({
-        icon: x?.icon, label: x?.label, summary: x?.summary, hook: x?.crisisHook,
+        icon: x?.icon, label: x?.label, summary: x?.summary, hook: crisisHookFor(s, x),
       })),
     } : { active: false, chips: [] },
     arrivalScene: useAi ? (ai?.arrivalScene || ai?.aiNarrative?.arrivalScene || null) : null,
@@ -320,7 +321,7 @@ function overviewSlice(active, ai, useAi) {
     icon:    x?.icon,
     label:   x?.label,
     summary: x?.summary,
-    hook:    x?.crisisHook,
+    hook:    crisisHookFor(s, x),
   }));
   const tensions = (s?.history?.currentTensions || []).map(t => ({
     label: t?.label || t?.type,
@@ -615,7 +616,7 @@ function viabilitySlice(active) {
     // pdf-3 (main): by_design tensions are surfaced as plot seeds (byDesignContradictions),
     // so exclude them here — they must not double-print as apparent defects.
     structuralViolations:  (s?.structuralViolations || []).filter(x => x?.severity !== 'by_design'),
-    stress:                stress.map(x => ({ label: x?.label || x?.icon, summary: x?.summary, hook: x?.crisisHook })),
+    stress:                stress.map(x => ({ label: x?.label || x?.icon, summary: x?.summary, hook: crisisHookFor(s, x) })),
     stressConsequences:    v?.stressConsequences?.length ? v.stressConsequences : stressConsequences,
     magicDependency:       !!dp?.magicDependency,
     activeMagicChains:     v?.activeMagicChains?.length ? v.activeMagicChains : activeMagicChains,

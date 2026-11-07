@@ -95,7 +95,7 @@ describe('QUEUE_WIRED_PROSE_PATHS stays in lockstep with EDITABLE_FIELDS', () =>
     }
   });
 
-  test('the non-queue complement is exactly 9 paths: the 8 documented hazards plus the card-served npc secret', () => {
+  test('the non-queue complement is exactly 10 paths: the 8 documented hazards, the card-served npc secret and the tab-served crisis cast', () => {
     const wiredKinds = new Set(Object.keys(QUEUE_WIRED_PROSE_PATHS));
     const deferred = [];
     for (const [kind, paths] of Object.entries(EDITABLE_FIELDS)) {
@@ -112,6 +112,7 @@ describe('QUEUE_WIRED_PROSE_PATHS stays in lockstep with EDITABLE_FIELDS', () =>
       'npc.personality',                  // object shape + temperament-facet spread corruption
       'npc.role',                         // reassign-npc overwrites with no record sync
       'npc.secret.what',                  // already served by the inline card path
+      'crisis.castRoles',                 // served by the Crisis tab alone (docs/DESIGN_CRISIS_TAB.md), no prose to polish
     ].sort());
   });
 

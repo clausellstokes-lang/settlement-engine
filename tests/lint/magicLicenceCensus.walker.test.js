@@ -165,7 +165,8 @@ const DECLARED_LICENCES = Object.freeze({
   "metropolis|Magic|Teleportation circle": 'high',
   "metropolis|Magic|Planar embassy": 'high',
   "metropolis|Exotic|Planar traders": 'high',
-  "metropolis|Exotic|Dragon resident": 'none',
+  // 2026-11-04, X-04 the dragon re-licensed (chair ruling 2, 2026-11-04: "a dragon is a creature of magic in this world"): 'none' → 'high', the Exotic shelf's licence.
+  "metropolis|Exotic|Dragon resident": 'high',
   "metropolis|Exotic|Golem workforce": 'high',
   "metropolis|Exotic|Undead labor": 'high',
   "metropolis|Exotic|Dream parlors (high magic)": 'high',
@@ -204,6 +205,8 @@ const DECLARED_LICENCES = Object.freeze({
  */
 const LICENCE_OVERRIDES_TAG = Object.freeze({
   'Healer (divine, 1st level)': { tag: 'mundane', licence: 'low', arcane: true },
+  // 2026-11-04, X-04 the dragon re-licensed (chair ruling 2, 2026-11-04: "a dragon is a creature of magic in this world"): its tags are empty (mundane), and the licence now makes it arcane.
+  'Dragon resident': { tag: 'mundane', licence: 'high', arcane: true },
 });
 
 /**
@@ -212,6 +215,12 @@ const LICENCE_OVERRIDES_TAG = Object.freeze({
  * circle finds the reason beside the value instead of in a commit message.
  */
 const DEITY_DOCTRINE_RELICENSED = Object.freeze(['Druid Circle', 'Elder Grove Council']);
+
+/**
+ * THE ROW X-04 RE-LICENSED (chair ruling 2, 2026-11-04: "a dragon is a creature of magic in this
+ * world; magic off is the historical mode"): `none` → `high`, the Exotic shelf's licence.
+ */
+const X04_RELICENSED = Object.freeze(['Dragon resident']);
 
 /**
  * THE THREE ROWS THE URBAN BAND ADDED ONLY BY MAKING A TIER BLOCK COMPLETE (ODQ §934.86). Each is
@@ -292,8 +301,9 @@ describe('MF-CH2a — the magic licence is declared, single-vocabulary and inert
     // rows (the eight faith, craft, defence and library rows left them) and ELEVEN licensed rows
     // stand off-shelf, every one `none` — eight re-shelved, three cumulative repeats. Counted by
     // a walk of the catalog (above), the closure now reads: licensed = shelf rows + off-shelf rows.
-    expect(dist).toEqual({ none: 12, low: 3, medium: 8, high: 16 });
-    expect(shelfDist).toEqual({ none: 1, low: 3, medium: 8, high: 16 });
+    // 2026-11-04, X-04 the dragon re-licensed (chair ruling 2, 2026-11-04: "a dragon is a creature of magic in this world"): one row none → high: 12/3/8/16 → 11/3/8/17, shelf 1/3/8/16 → 0/3/8/17.
+    expect(dist).toEqual({ none: 11, low: 3, medium: 8, high: 17 });
+    expect(shelfDist).toEqual({ none: 0, low: 3, medium: 8, high: 17 });
     expect(shelfDist.none + shelfDist.low + shelfDist.medium + shelfDist.high).toBe(SHELF_ROWS.length);
     expect(dist.none + dist.low + dist.medium + dist.high).toBe(SHELF_ROWS.length + offShelfKeys.length);
     expect(offShelfKeys.length).toBe(11);
@@ -314,7 +324,11 @@ describe('MF-CH2a — the magic licence is declared, single-vocabulary and inert
       expect(offShelfKeys, key).toContain(key);
       expect(DECLARED_LICENCES[key], key).toBe('none');
     }
-    expect(dist.none - CUMULATIVE_REPEATS.length + 4 - DEITY_DOCTRINE_RELICENSED.length).toBe(11);
+    // 2026-11-04, X-04 the dragon re-licensed: the dossier rules it `none` and the estate now
+    // overrules it to `high`, so it is ADDED back here — attributed by name, asserted `high`.
+    expect(X04_RELICENSED).toEqual(['Dragon resident']);
+    for (const name of X04_RELICENSED) expect(institutionCatalogMagicLicence(name), name).toBe('high');
+    expect(dist.none - CUMULATIVE_REPEATS.length + 4 - DEITY_DOCTRINE_RELICENSED.length + X04_RELICENSED.length).toBe(11);
   });
 
   it('A3 — the licence is keyed by NAME, and every repeated name agrees across its tiers', () => {
@@ -363,7 +377,7 @@ describe('MF-CH2a — the magic licence is declared, single-vocabulary and inert
     expect(() => magicLicenceAtLeast(null, null)).not.toThrow();
   });
 
-  it('A5 — the licence outranks the tag on EXACTLY one row, and it is the divine healer', () => {
+  it('A5 — the licence outranks the tag on EXACTLY two rows: the divine healer and (since 2026-11-04, X-04) the dragon', () => {
     const observed = {};
     for (const { category, name, def } of ROWS) {
       const licence = institutionCatalogMagicLicence(name);
@@ -409,12 +423,12 @@ describe('MF-CH2a — the magic licence is declared, single-vocabulary and inert
     const LICENSED = ROWS.filter(r => normaliseMagicLicence(r.def.magicLicense) !== null);
     const allowed = LICENSED.filter(r => law.allowsInstitution(record(r)));
     const struck = LICENSED.filter(r => !law.allowsInstitution(record(r)));
-    // STATED, by NAME: the eight names a magic-free world now keeps.
+    // STATED, by NAME: the seven names a magic-free world now keeps (2026-11-04, X-04 the dragon re-licensed (chair ruling 2, 2026-11-04: "a dragon is a creature of magic in this world"):
+    // the dragon left the list).
     expect([...new Set(allowed.map(r => r.name))].sort()).toEqual([
       "Adventurers' charter hall",
       'Alchemist quarter',
       'Alchemist shop',
-      'Dragon resident',
       'Druid Circle',
       'Elder Grove Council',
       'Great library',

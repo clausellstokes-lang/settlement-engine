@@ -27,3 +27,4 @@ import './generatePopulation.js';
 import './corruptionPass.js';
 import './generateNarratives.js';
 import './assembleSettlement.js';
+import './resolveCrisisCast.js';

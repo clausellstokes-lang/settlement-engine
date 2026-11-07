@@ -85,6 +85,10 @@ import { faithChannelLift, FAITH_CHANNEL_BINDINGS } from './worldPulse/faithChan
 // deityEffects re-exports the same leaf object for display consumers, so the
 // major/minor/cult religious-authority lift still has exactly one source.
 import { DEITY_RANK_AUTHORITY } from './deityConstants.js';
+// X-46 car 2 (3b): the population contributors read the tier stamp's cuts, never a bare figure
+// (was 5,000 / 1,000 / 200, written for the old bands): dense/broad >= city, adequate/moderate/
+// baseline >= town, thin < village. tests/lint/barePopulationComparison.walker.test.js pins it.
+import { TIER_STAMP_CUTS } from '../data/constants.js';
 
 // Phase 4 W-F4 (piety sites #6/#9): the LOCAL piety amplifier, read straight off
 // the projected read-model (config.faithProfile.piety, minted by the pulse at
@@ -590,9 +594,9 @@ function deriveLaborCapacity(s) {
 
   // Population scaling
   const pop = populationOf(s);
-  if (pop >= 5000) { score += 10; push(contributors, 'population', 'broad', +10, `Population ${pop} provides a deep labor pool.`); }
-  else if (pop >= 1000) { score += 5; push(contributors, 'population', 'adequate', +5, `Population ${pop} carries enough hands.`); }
-  else if (pop > 0 && pop < 200) { score -= 5; push(contributors, 'population', 'thin', -5, `Population ${pop} leaves little slack.`); }
+  if (pop >= TIER_STAMP_CUTS.city) { score += 10; push(contributors, 'population', 'broad', +10, `Population ${pop} provides a deep labor pool.`); }
+  else if (pop >= TIER_STAMP_CUTS.town) { score += 5; push(contributors, 'population', 'adequate', +5, `Population ${pop} carries enough hands.`); }
+  else if (pop > 0 && pop < TIER_STAMP_CUTS.village) { score -= 5; push(contributors, 'population', 'thin', -5, `Population ${pop} leaves little slack.`); }
 
   score += applyConditions(s, contributors, 'labor_capacity', {
     scale: 20, mode: 'drain', effect: 'pressure', tail: 'reduces available labor.',
@@ -1216,7 +1220,7 @@ function deriveHousingPressure(s) {
       scale: 12, mode: 'drain', effect: 'influx', tail: 'pushes arrivals into limited housing.',
     });
   }
-  if (pop >= 5000) { score -= 4; push(contributors, 'population', 'dense', -4, `Population ${pop} pushes housing demand.`); }
+  if (pop >= TIER_STAMP_CUTS.city) { score -= 4; push(contributors, 'population', 'dense', -4, `Population ${pop} pushes housing demand.`); }
   return { score, contributors };
 }
 

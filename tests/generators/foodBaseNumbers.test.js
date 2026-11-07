@@ -51,6 +51,13 @@ describe('FOOD-2 — the food base numbers', () => {
     expect(town.foodRecord.normalImportPct, 'the hinterland arrives as normal imports').toBeGreaterThanOrEqual(19);
   });
 
+  // T2 (soak 1000 dry run §4, adopted by the chair 2026-11-04): a village with no granary stored 1.0
+  // month to a hamlet's 1.5 (village median 1.3 against hamlet 1.5 across 1,000 places).
+  it('a village with no granary stores no less than a hamlet (T2)', () => {
+    const months = (tier) => generateFoodSecurity(tier, [], { _population: POPULATION_RANGES[tier].min * 2, tradeRouteAccess: 'road', terrainType: 'plains', magicExists: false }).storageMonths;
+    expect(months('village'), 'village months in store vs hamlet').toBeGreaterThanOrEqual(months('hamlet'));
+  });
+
   it('the stand-in "Access to external mill" extends no stores', () => {
     const fs = generateFoodSecurity('hamlet', [{ name: 'Access to external mill' }], { _population: 200, tradeRouteAccess: 'road', terrainType: 'plains', magicExists: false });
     expect(fs.storageMonths).toBe(1.5);

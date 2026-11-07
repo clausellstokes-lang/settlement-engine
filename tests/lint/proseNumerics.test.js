@@ -383,7 +383,7 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 // outside the literal, leaving that node's 101 bytes untouched; and `formatCount(...)` is not
 // a numeric-formatting call to this detector, which is why the sibling "+ N imported" chip has
 // never been a row either. The PDF chapters take the same clause through `smart(...)` with no
-// per-cent token, so Overview.jsx:566 and EconomicsTrade.jsx:534/:539 do not move at all.
+// per-cent token, so Overview.jsx :: the `fb.deficit` line (at :541 since X-47) and EconomicsTrade.jsx:534/:539 do not move at all.
 // THE OTHER EIGHT MOVES are the faction share bars, and they are the same shape. SummaryTab
 // and PowerStrata each re-normalised `factions[].power` — a DECLARED unit
 // (domain/factionPowerShare.js: an integer percent share, renormalised by
@@ -413,7 +413,7 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 // measured rather than alleged: scanning 2ac3c9c5f's own `src/` against 2ac3c9c5f's own
 // committed baseline yields 224 live rows against 224 banked and ELEVEN STALE ADDRESSES —
 // DefenseTab.jsx:510, PowerStrata.jsx:239/:241/:282, SessionMode.jsx:442,
-// DefenseSecurity.jsx:235 and Overview.jsx:566 (three rows). The label-seam cars moved lines
+// DefenseSecurity.jsx:235 and Overview.jsx :: the `fb.deficit` line (three rows; then at 566). The label-seam cars moved lines
 // above them and did not re-address. Nothing was added and nothing fell; it is the address
 // rot this file's CR-FP-2 note already names, inherited rather than authored. It is cured
 // here because a lane cannot leave its own branch red on a ratchet it can close mechanically,
@@ -519,6 +519,9 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 // AT THE MERGE OF T3 AND T2 (the chair, 2026-10-30): both lanes' cures are summed from the
 // 218 base — T3 total -6 / float -3 / percent -3, T2 total -5 / float -4 / percent -1 — so the
 // ceilings are 207 / 140 / 50; the live scan at the merged tree is the receipt.
+// CRISIS-2 unit 4 (2026-11-03, docs/DESIGN_CRISIS_TAB.md): OutputContainer.jsx 985 -> 994, a pure line
+// move (the Crisis tab's registration lines above it). Path, category and snippet byte-identical; the
+// TableView.jsx row this walker also reds on at this tip is not this lane's.
 // BUILD-W2-BLOCKLAW U1 (wave 2, X-17): OutputContainer.jsx 969 -> 973, a pure line move (the
 // tab-order comment lines above TAB_GROUPS). Path, category and snippet byte-identical.
 // BUILD-W2-BLOCKLAW U4 (wave 2, the block law X-16; MOVE ONLY): twenty-two pure line moves and
@@ -547,6 +550,12 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 // quick guide's Tonight block. The 23 rows door 6 re-addressed at the composed tip (16e3086b4) were pure
 // line moves. The ceilings follow the baseline down, as TE-STRIP-1's note demands: at 207 the +1 leak
 // control below went vacuous (205 + 1 = 206 sits under a stale 207).
+// LANDING-7 lane F (2026-11-06) — FOUR PURE RELOCATIONS, NO DEBT MOTION, NO CEILING CHANGE. c1cf38bbb (LANDING-6,
+// the chair's ruling 2) MOVED buildViabilitySummary out of src/generators/economy/viability.js into
+// src/domain/viabilitySummary.js, so its two sentences' four rows (floatInterpolation + percentToken on each)
+// re-address viability.js:121 -> viabilitySummary.js:64 and :123 -> :66. Category and snippet byte-identical on
+// all four; the regenerated census is 205 against 205 (138 / 50 / 8 / 9 / 0) and no other row moved. The two
+// sentences stay owed their humanization; a move is not a cure.
 const REVIEWED_TOTAL_CEILING = 205;
 const REVIEWED_CATEGORY_CEILINGS = Object.freeze({
   floatInterpolation: 138,

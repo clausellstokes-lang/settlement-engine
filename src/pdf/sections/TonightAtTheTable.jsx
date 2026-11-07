@@ -17,6 +17,7 @@ import { ChapterBand, GoldRule, HairRule } from '../primitives/Dense.jsx';
 import { NotesField } from '../primitives/Editable.jsx';
 import { type, palette, space, pt } from '../theme.js';
 import { composeTonightSheet, TONIGHT_COPY } from '../../domain/summary/tonightSheet.js';
+import { CrisisSections } from './CrisisSections.jsx';
 
 /** @param {{ children: string, color: string }} props */
 function Eyebrow({ children, color }) {
@@ -60,11 +61,11 @@ export function TonightAtTheTable({ settlement, narrativeMode }) {
             <View key={p.name} style={{ marginBottom: 5, paddingLeft: 6, borderLeft: `1.5pt solid ${palette.border}` }} wrap={false}>
               <Text style={{ ...type.body_em, color: palette.ink, fontSize: pt['10.5'] }}>{p.name}</Text>
               <Text style={{ ...type.italic, color: palette.muted, fontSize: pt['8.5'] }}>
-                {[p.role, why[p.why]].filter(Boolean).join(' · ')}
+                {[p.role, p.castLabel || why[p.why]].filter(Boolean).join(' · ')}
               </Text>
               {p.line ? (
                 <Text style={{ ...type.body, color: palette.second, fontSize: pt['9'], lineHeight: 1.3 }}>
-                  {p.why === 'secret' ? p.line : `${TONIGHT_COPY.wants} ${p.line}`}
+                  {p.why === 'secret' ? p.line : p.sameAs ? `${TONIGHT_COPY.wantsSame} ${p.sameAs}.` : `${TONIGHT_COPY.wants} ${p.line}`}
                 </Text>
               ) : null}
             </View>
@@ -101,6 +102,9 @@ export function TonightAtTheTable({ settlement, narrativeMode }) {
           ))}
         </View>
       ) : null}
+
+      {/* THE CRISIS PAGE IN PRINT (docs/DESIGN_CRISIS_TAB.md): the Crisis tab's sections, one per crisis. */}
+      <CrisisSections settlement={settlement} />
 
       <GoldRule />
 

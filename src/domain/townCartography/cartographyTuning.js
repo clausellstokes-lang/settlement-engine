@@ -90,9 +90,23 @@ export function cartographyTierIndex(tier) {
  * `tests/domain/townCartographyCalibration.test.js` W6 re-measures the ratio from the
  * manifest on every run and reds if this number ever falls below it.
  *
+ * ── 2026-11-05, RAISED BY ITS OWN CRITERION: 1600 -> 2300 (the cloud chair's ruling 2 in LANDING-4's
+ * addendum, recorded under ODQ §934.105 and vetoable; the owner's BAND 21, ODQ §515: "map headroom
+ * sufficient that towns and hamlets draw at all, with margin"). X-46 car 3's institution budget makes a
+ * settlement's roster follow its population, so a seed slice whose towns all rolled small reads far below
+ * the tier's maximum: at the landed tip of the rung-1 window the worst slice reads 2.3000 (`town`: one
+ * seed's slice reads 20 canonical institutions where the whole corpus reads 46; car 3's own step read
+ * 2.4444 at `village`, 9 -> 22, and the budget's fix-window amendments, PINS' exemptions and I7's
+ * re-measured realised table, moved it to 2.3). 1600 no longer clears the criterion above, so the number
+ * becomes the smallest multiple of 100 permille at or above the ratio measured at the tip: 2300. ONE
+ * declared parameter still; no per-tier table. The derived caps rise with it (bindings
+ * 18/26/39/74/144/167 -> 26/37/56/106/207/240, buildings 26/42/71/138/264/327 -> 34/53/88/170/327/400,
+ * the per-row byte band 716 -> 1029); no cap bound before the rise (the corpus's drawn maxima
+ * 12/19/30/118/216/258 sit under every old cap), so the calibration corpus does not move a byte.
+ *
  * Permille, matching DWELLING_HEIGHT_PERMILLE and FOOTPRINT_SHRINK_PERMILLE.
  */
-export const CARTOGRAPHY_HEADROOM_PERMILLE = 1600;
+export const CARTOGRAPHY_HEADROOM_PERMILLE = 2300;
 
 /**
  * THE CALIBRATION GROUND — the measured worst cases the caps are DERIVED FROM.
@@ -109,7 +123,7 @@ export const CARTOGRAPHY_HEADROOM_PERMILLE = 1600;
 export const CARTOGRAPHY_CALIBRATION = Object.freeze({
   /** The largest canonical institution roster the pipeline produced, per tier. */
   MAX_INSTITUTIONS: Object.freeze({
-    thorp: 12, hamlet: 25, village: 42, town: 69, city: 83, metropolis: 86,
+    thorp: 11, hamlet: 16, village: 24, town: 46, city: 90, metropolis: 104,
   }),
   /**
    * The largest UTF-8 bytes-per-emitted-row the TC-4 layer produced, over every tier.
@@ -130,7 +144,7 @@ export const CARTOGRAPHY_CALIBRATION = Object.freeze({
    * roughly two rows in three should leave. The derived band rises with it
    * (ceil(450 x 1.6) = 720 from 709), which only ever loosens a ceiling.
    */
-  MAX_BUILDING_ROW_BYTES: 448,
+  MAX_BUILDING_ROW_BYTES: 447,
   /** The corpus this was read from. A row count that moves invalidates the reading. */
   CORPUS_ROWS: 504,
 });
@@ -400,11 +414,13 @@ export const TOWN_CARTOGRAPHY_TUNING = Object.freeze({
     // POPULATION_RANGES, RE-DECLARED. Importing src/data/constants.js here would
     // drag a foreign payload into the bounded compiler closure (CR-TC3B-BYTES), so
     // the mirror is guarded by C2's producer-equality assertion rather than by an
-    // import edge. Drift reds a test; it never silently re-bands a town.
+    // import edge. Drift reds a test; it never silently re-bands a town. Re-banded to the
+    // owner's historical table at X-46 car 1 (ODQ §934.104, 2026-11-03); the metropolis
+    // roll's body edge 50,000 at car 1b (the owner's compromise, 2026-11-04).
     POPULATION_SPAN: Object.freeze({
-      thorp: Object.freeze([8, 60]), hamlet: Object.freeze([61, 400]),
-      village: Object.freeze([401, 900]), town: Object.freeze([901, 5000]),
-      city: Object.freeze([5001, 25000]), metropolis: Object.freeze([25001, 100000]),
+      thorp: Object.freeze([5, 30]), hamlet: Object.freeze([20, 100]),
+      village: Object.freeze([75, 400]), town: Object.freeze([300, 2500]),
+      city: Object.freeze([2000, 15000]), metropolis: Object.freeze([15000, 50000]),
     }),
   }),
   // The per-parcel occupancy BAND for instances and dwellings — a density dial, not

@@ -174,6 +174,15 @@ const LIT_COVERED_BY = {
   // ("`${mech}` now has direct-import lit coverage — strike its registry entry") fires on
   // its own instruction. Striking the row is that instruction obeyed: the module is no
   // less covered than it was, it is covered by a stronger road.
+  // LANDING-7 A (2026-11-06): lane SELF-VOUCH's d084cb1ee moved ladderFactionKey and npcInFaction
+  // VERBATIM out of npcLadderState.js into this leaf (composed at 0be13b5cb), and npcLadderState.js
+  // re-exports both — so the module is driven through the re-export seam, the INDIRECT kind this
+  // registry exists for, by the FACTION-KEY regression pin that feeds them the real faction shape.
+  npcLadderFactionMembership: {
+    file: 'tests/domain/npcLadderFactionKey.test.js',
+    evidence: 'npcInFaction',
+    note: 'drives ladderFactionKey and npcInFaction (the leaf’s two exports) through npcLadderState.js’s re-export, on the REAL powerStructure.factions shape, write side and end-to-end through advanceNpcLadder',
+  },
   reconcile: {
     file: 'tests/domain/chronicleAndReconcile.test.js',
     evidence: 'preserveWorldConditions',

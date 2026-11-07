@@ -64,9 +64,9 @@ import { INSTITUTION_SERVICES } from '../../src/data/institutionServices.js';
  */
 const MISMATCHED_29 = Object.freeze([
   'Alehouse', 'Apothecary', "Assassins' guild", 'Beast trainers', 'Brothel', 'Carpenter',
-  'Common grazing land', 'Craft guilds (30-80)', 'District markets (5-10)', 'Dwellings (17-80)',
-  'Dwellings (4-16)', 'Dwellings (80-180)', 'Farmland', 'Housing (1000-5000 structures)',
-  'Housing (180-1000 structures)', 'International trade center', "Mages' district",
+  'Common grazing land', 'Craft guilds (30-80)', 'District markets (5-10)', 'Dwellings (5-25)',
+  'Dwellings (1-8)', 'Dwellings (15-100)', 'Farmland', 'Housing (500-4000 households)',
+  'Housing (75-650 households)', 'International trade center', "Mages' district",
   'Massive prison', 'Merchant guilds (15-40)', 'Merchant guilds (50-100+)',
   'Multiple courthouses', 'Multiple water sources', 'Parish churches (10-30)',
   'Red light district', 'Sewage system', 'Taverns (5-20)', 'Theaters', 'Water source',

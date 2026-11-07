@@ -86,7 +86,10 @@ describe('generateSettlement — sentinel ("random"/"custom") tier re-gate', () 
   });
 
   test('custom population inside the tier cap still generates', async () => {
-    store.setState(s => { s.config.settType = 'custom'; s.config.population = 800; }); // → village
+    // 200 sits inside the owner's village stamp band [88, 350) (X-46 car 1, shift record
+    // rung1-01, TIER_STAMP_CUTS); the old 800 was village under the retired 401–900 band and
+    // stamps 'town' under the owner's bands.
+    store.setState(s => { s.config.settType = 'custom'; s.config.population = 200; }); // → village
     const result = await store.getState().generateSettlement();
     expect(result).not.toBeNull();
     expect(result.tier).toBe('village');

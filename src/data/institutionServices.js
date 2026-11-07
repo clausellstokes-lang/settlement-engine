@@ -407,7 +407,8 @@ export const INSTITUTION_SERVICES = {
     "Mead (small batch)": { on: false, p: 0.5, desc: "Honey wine brewed in small batches." }
   },
   "Fishmonger": {
-    "Fresh fish": { on: true, p: 1.0, desc: "Today's catch. Buy early." },
+    // A-11: inland the morning catch is this pool's own "Salted fish" (the catalog's "Inland: dried or salted").
+    "Fresh fish": { on: true, p: 1.0, inlandAlternative: "Salted fish", desc: "Today's catch. Buy early." },
     "Salted fish": { on: true, p: 0.9, desc: "Salt-cured fish. Weeks of shelf life." },
     "Smoked fish": { on: false, p: 0.6, desc: "Cold-smoked. Longest shelf life, richest flavour." }
   },
@@ -921,7 +922,11 @@ export const INSTITUTION_SERVICES = {
   "Dragon resident": {
     "Draconic consultation": { on: false, p: 0.4, desc: "If the dragon is cooperative, its knowledge of history and magic is unmatched." },
     "Treasure appraisal": { on: false, p: 0.3, desc: "Dragons know the value of everything. They will insist on telling you." },
-    "Aerial deterrence": { on: true, p: 0.8, desc: "No raiding force approaches a settlement with a visible dragon. Powerful deterrent." }
+    // A-04 (soak 1000 row 19): the dragon line is printed only where magic works. `magical`
+    // is the world law's explicit magic metadata (generationContext.js ::
+    // carriesExplicitMagicMetadata), so `allowsService` drops the row in a magic-off world;
+    // the pool's non-magical sibling ("Treasure appraisal") is off by default, so no line.
+    "Aerial deterrence": { on: true, p: 0.8, magical: true, desc: "No raiding force approaches a settlement with a visible dragon. Powerful deterrent." }
   },
   "Dream parlors (high magic)": {
     "Dream walking": { on: true,  p: 1.0, desc: "Guided experience in manufactured dream environments. Recreation or therapy." },
@@ -942,7 +947,9 @@ export const INSTITUTION_SERVICES = {
     "Recruitment screening": { on: false, p: 0.3, desc: "Talent scouts watch the pits for capable fighters." }
   },
   "Fish market": {
-    "Fresh fish retail": { on: true,  p: 1.0, desc: "Fish sold daily from the morning catch. Selection varies by season." },
+    // A-11 (soak 1000 row 7): a morning catch only where there is water; inland the row is
+    // this pool's own "Preserved fish" (the salted barrels the Fish market's catalog text names).
+    "Fresh fish retail": { on: true,  p: 1.0, inlandAlternative: "Preserved fish", desc: "Fish sold daily from the morning catch. Selection varies by season." },
     "Wholesale trade": { on: true, p: 0.8, desc: "Bulk purchase by taverns, institutions, and inland traders." },
     "Preserved fish": { on: false, p: 0.6, desc: "Smoked, dried, and salt-preserved fish for storage and inland trade." }
   },
@@ -1367,6 +1374,10 @@ export const INSTITUTION_SERVICES = {
     "Music and entertainment": { on: true,  p: 1.0, desc: "Songs, dances, and music for celebrations and gatherings." },
     "Music lessons": { on: false, p: 0.3, desc: "Basic instruction for interested students." }
   },
+  "Village watch": {
+    "Night watch": { on: true,  p: 1.0, desc: "Walk the lanes after dark and raise the alarm at trouble." },
+    "Hue and cry": { on: false, p: 0.6, desc: "Turn the village out after a thief or a stray beast." }
+  },
   "Village reeve": {
     "Administrative oversight": { on: true,  p: 1.0, desc: "Manage village affairs on behalf of the lord. Allocate strips and common access." },
     [DISPUTE_RESOLUTION]: { on: true, p: 0.8, desc: "Settle minor disputes before they require higher authority." },
@@ -1716,24 +1727,27 @@ export const INSTITUTION_SERVICES = {
   // lends it one), rolls nothing and has no fallback (tests/joins/proxyIsNotProvider.test.js).
   // A ONE-ROW MENU IS ROLLED AT p 1.0 (chair ruling R1, 2026-11-06): a lower p on a house's only
   // row is a fake roll, since the generator's fallback grants it anyway, and it spends a draw.
-  "Dwellings (4-16)": {
+  "Dwellings (1-8)": {
     "Hospitality": { on: true, p: 1.0, desc: "A bed by the hearth and a place at a shared table, for a traveller who asks." }
   },
-  "Dwellings (17-80)": {
+  "Dwellings (5-25)": {
     "Hospitality": { on: true, p: 1.0, desc: "A bed by the hearth and a place at a shared table, for a traveller who asks." }
   },
-  "Dwellings (80-180)": {
+  "Dwellings (15-100)": {
     "Hospitality": { on: true, p: 1.0, desc: "A bed by the hearth and a place at a shared table, for a traveller who asks." }
   },
-  "Housing (180-1000 structures)": {
+  "Housing (75-650 households)": {
     "Lodging (rooms to let)": { on: true, p: 1.0, desc: "A room let in a private house, by the night or the week." }
   },
-  "Housing (1000-5000 structures)": {
+  "Housing (500-4000 households)": {
     "Lodging (rooms to let)": { on: true, p: 1.0, desc: "A room let in a private house, by the night or the week." }
   },
   // The largest housing row had no menu and no proxy; with the rows above it would now
-  // fuzzy-match the 1000-5000 menu, so it is named here, with the same one service.
-  "Housing (5000+ structures)": {
+  // fuzzy-match the city's menu, so it is named here, with the same one service. RE-KEYED
+  // 2026-11-07 (REVIEW-INTAKE-LAND, the merge onto rung 1's tip): X-46 3c renamed the six
+  // Dwellings/Housing rows to the owner's household column (tests/data/dwellingsHouseholdNames
+  // .test.js), so these six entries carry the new names; the menus are unchanged.
+  "Housing (3500+ households)": {
     "Lodging (rooms to let)": { on: true, p: 1.0, desc: "A room let in a private house, by the night or the week." }
   },
   "Water source": {},

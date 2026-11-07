@@ -16,6 +16,13 @@
  *   hook-truth-record  hookTruthFindings         once, surface 'record' (what the writers store)
  *   hook-truth-page    renderedHookTruthFindings once, surface 'page' (what the page reads)
  *   seat-holder        seatHolderFindings        once, surface 'record'
+ *   grade-vs-food            gradeVsFoodFindings          once, surface 'defense' (Overview × Defense)
+ *   magic-absent-prose       magicAbsentProseFindings     once, surface 'magic'
+ *   crime-denied-and-listed  crimeDeniedAndListedFindings once, surface 'defense' (Defense × Economics)
+ *
+ * The last three (lane RUNG1B-F9, readerContradictionFindings.js) read two rendered tabs side by
+ * side, so like `hook-truth-page` they are the page battery's alone: the record battery the
+ * generation receipt runs never sees them, and no receipt moves.
  *
  * UNSTORED: nothing is written into the record and nothing is read from a clock or a seed,
  * so no golden moves and the same inputs give the same findings. An instrument that throws
@@ -24,13 +31,11 @@
  * Pure.
  */
 
-import { defenseWordsFindings } from './defenseWordsFindings.js';
-import { faithDenialFindings } from './faithDenialFindings.js';
-import { foodWordsFindings } from './foodWordsFindings.js';
-import { hookTruthFindings, renderedHookTruthFindings } from './hookTruthFindings.js';
-import { magicWordsFindings } from './magicWordsFindings.js';
-import { seatHolderFindings } from './seatHolderFindings.js';
-import { tierNounFindings } from './tierNounFindings.js';
+import { renderedHookTruthFindings } from './hookTruthFindings.js';
+import { collect, recordBattery, str } from './recordBattery.js';
+import {
+  crimeDeniedAndListedFindings, gradeVsFoodFindings, magicAbsentProseFindings,
+} from './readerContradictionFindings.js';
 
 /**
  * @typedef {object} BatteryFinding
@@ -44,73 +49,47 @@ import { tierNounFindings } from './tierNounFindings.js';
 export const BATTERY_CHECKS = Object.freeze([
   'defense-words', 'faith-denial', 'food-words', 'hook-truth-record', 'hook-truth-page',
   'magic-words', 'seat-holder', 'tier-noun',
+  'grade-vs-food', 'magic-absent-prose', 'crime-denied-and-listed',
 ]);
 
-/** @param {unknown} v @returns {string} */
-const str = (v) => (typeof v === 'string' ? v : v == null ? '' : String(v));
+/** The page checks that read two rendered tabs together: check → [surface, instrument]. */
+const READER_CHECKS = Object.freeze(/** @type {const} */ ([
+  ['grade-vs-food', 'defense', gradeVsFoodFindings],
+  ['magic-absent-prose', 'magic', magicAbsentProseFindings],
+  ['crime-denied-and-listed', 'defense', crimeDeniedAndListedFindings],
+]));
+const PAGE_ONLY = new Set(['hook-truth-page', ...READER_CHECKS.map(([check]) => check)]);
 
 /**
- * Run one instrument, mapping its findings into the battery's shape.
- * @param {string} check
- * @param {string} surface
- * @param {() => ReadonlyArray<unknown>} run
- * @param {(f: Record<string, unknown>) => { quote: string, detail: string }} map
- * @param {BatteryFinding[]} out
- */
-function collect(check, surface, run, map, out) {
-  /** @type {ReadonlyArray<unknown>} */
-  let found;
-  try {
-    found = run();
-  } catch (error) {
-    out.push({ check, surface, quote: '', detail: `instrument threw: ${str(error instanceof Error ? error.message : error)}` });
-    return;
-  }
-  for (const f of found) {
-    const { quote, detail } = map(/** @type {Record<string, unknown>} */ (f ?? {}));
-    out.push({ check, surface, quote: quote.trim(), detail });
-  }
-}
-
-/**
- * Every coherence finding for one settlement and its rendered surfaces.
+ * Every coherence finding for one settlement and its rendered surfaces: recordBattery.js's
+ * checks plus `hook-truth-page`, placed after `hook-truth-record` as it always was.
  * @param {unknown} settlement the generated record
  * @param {Readonly<Record<string, string>>} surfaces surface id → the text a reader sees there
+ * @param {{ only?: ReadonlyArray<string> }} [options] `only`: run just these checks
  * @returns {BatteryFinding[]}
  */
-export function coherenceBattery(settlement, surfaces) {
+export function coherenceBattery(settlement, surfaces, options = {}) {
   if (settlement == null || typeof settlement !== 'object') return [];
-  // Each instrument types its own narrow read of the record; the battery hands each the
-  // record under that instrument's parameter type and reads nothing of it itself.
-  const hookRecord = /** @type {Parameters<typeof hookTruthFindings>[0]} */ (settlement);
-  const seatRecord = /** @type {Parameters<typeof seatHolderFindings>[0]} */ (settlement);
-  const faithRecord = /** @type {Parameters<typeof faithDenialFindings>[0]} */ (settlement);
-  const defenseRecord = /** @type {Parameters<typeof defenseWordsFindings>[0]} */ (settlement);
-  const tierRecord = /** @type {Parameters<typeof tierNounFindings>[0]} */ (settlement);
-  const tier = str(/** @type {{ tier?: unknown }} */ (settlement).tier);
+  const wanted = Array.isArray(options?.only) ? options.only : null;
+  const out = recordBattery(settlement, surfaces, {
+    only: (wanted ?? BATTERY_CHECKS).filter((check) => !PAGE_ONLY.has(check)),
+  });
+  /** @param {string} check */
+  const runs = (check) => wanted == null || wanted.includes(check);
   /** @type {BatteryFinding[]} */
-  const out = [];
-  collect('hook-truth-record', 'record', () => hookTruthFindings(hookRecord),
-    (f) => ({ quote: str(f.text), detail: `${str(f.code)}: ${str(f.detail)}` }), out);
-  collect('hook-truth-page', 'page', () => renderedHookTruthFindings(hookRecord),
-    (f) => ({ quote: str(f.text), detail: `${str(f.code)}: ${str(f.detail)}` }), out);
-  collect('seat-holder', 'record', () => seatHolderFindings(seatRecord),
-    (f) => ({ quote: '', detail: `${str(f.code)}: ${str(f.detail)}` }), out);
-  for (const [surface, raw] of Object.entries(surfaces ?? {})) {
-    const text = str(raw);
-    if (text === '') continue;
-    collect('defense-words', surface, () => defenseWordsFindings(defenseRecord, text),
-      (f) => ({ quote: str(f.sentence), detail: `${str(f.term)} without ${str(f.needs)}` }), out);
-    collect('faith-denial', surface, () => faithDenialFindings(faithRecord, text),
-      (f) => ({ quote: str(f.denial), detail: `church evidence: ${Array.isArray(f.evidence) ? f.evidence.join(', ') : ''}` }), out);
-    collect('food-words', surface, () => foodWordsFindings(settlement, text),
-      (f) => ({ quote: str(f.sentence), detail: `${str(f.code)}: ${str(f.detail)}` }), out);
-    collect('magic-words', surface, () => magicWordsFindings(settlement, text),
-      (f) => ({ quote: str(f.excerpt), detail: `${str(f.code)}: ${str(f.message)}` }), out);
-    collect('tier-noun', surface, () => tierNounFindings(tierRecord, text),
-      (f) => ({ quote: str(f.context), detail: `"${str(f.phrase)}" for a ${tier}` }), out);
+  const page = [];
+  if (runs('hook-truth-page')) {
+    const hookRecord = /** @type {Parameters<typeof renderedHookTruthFindings>[0]} */ (settlement);
+    collect('hook-truth-page', 'page', () => renderedHookTruthFindings(hookRecord),
+      (f) => ({ quote: str(f.text), detail: `${str(f.code)}: ${str(f.detail)}` }), page);
   }
-  return out;
+  /** @type {BatteryFinding[]} */
+  const reader = [];
+  for (const [check, surface, instrument] of READER_CHECKS) {
+    if (runs(check)) collect(check, surface, () => instrument(surfaces ?? {}), (f) => ({ quote: str(f.quote), detail: str(f.detail) }), reader);
+  }
+  const at = out.filter((f) => f.check === 'hook-truth-record').length;
+  return [...out.slice(0, at), ...page, ...out.slice(at), ...reader];
 }
 
 export default coherenceBattery;

@@ -41,13 +41,24 @@ export function place({ id, tier, terrain, population, dailyProduction }) {
 }
 
 /** A realm shaped like the failing soak's: every tier, every terrain class, mixed
- *  granary-bound and wall-bound, from a thorp to a metropolis. */
+ *  granary-bound and wall-bound, from a thorp to a metropolis.
+ *
+ *  ⚠ THE THREE WALL-BOUND STARTS RE-KEYED BY IDENTITY (LANDING-7 R-E8, 2026-11-06), and the
+ *  finding each suite measures is unchanged. DENSITY_CEILINGS was re-derived from the STAMP
+ *  band maxima (thorp 90 -> 36, hamlet 600 -> 131, village 1,400 -> 543), so Brackwater
+ *  (320), Cairnhold (40) and Elderfen (700) started ABOVE their new walls and could only
+ *  shrink, which breaks the realm's premise that every settlement is born below its bound and
+ *  grows into it. Each start follows its tier's ceiling by the same factor the ceiling moved
+ *  (320 x 131/600 = 70, 40 x 36/90 = 16, 700 x 543/1,400 = 272), so each keeps its share of
+ *  its own wall, and each now also stamps the tier it wears (hamlet 25-87, thorp < 25,
+ *  village 88-349), which the old starts did not. The granary-bound three never read the
+ *  ceiling and are untouched. */
 export const REALM = Object.freeze([
   ['Ashford', { tier: 'town', terrain: 'plains', population: 1200, dailyProduction: 6000 }],
-  ['Brackwater', { tier: 'hamlet', terrain: 'riverside', population: 320, dailyProduction: 1600 }],
-  ['Cairnhold', { tier: 'thorp', terrain: 'mountain', population: 40, dailyProduction: 300 }],
+  ['Brackwater', { tier: 'hamlet', terrain: 'riverside', population: 70, dailyProduction: 1600 }],
+  ['Cairnhold', { tier: 'thorp', terrain: 'mountain', population: 16, dailyProduction: 300 }],
   ['Dunmarch', { tier: 'city', terrain: 'hills', population: 7000, dailyProduction: 30000 }],
-  ['Elderfen', { tier: 'village', terrain: 'forest', population: 700, dailyProduction: 2600 }],
+  ['Elderfen', { tier: 'village', terrain: 'forest', population: 272, dailyProduction: 2600 }],
   ['Fallowmere', { tier: 'metropolis', terrain: 'coastal', population: 30000, dailyProduction: 130000 }],
 ]);
 

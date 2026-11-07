@@ -185,7 +185,9 @@ describe('P4.2 CAUSAL RISK — continuous, and never a governor', () => {
     // changed. (Measured 2026-08-01: bound 43700 walls, pressures 0.6865 / 0.9153 /
     // 1.1442 — all above the crowding ease point and all under the pressure ceiling,
     // which is what makes three DISTINCT readings a statement about continuity rather
-    // than about clamping.)
+    // than about clamping. RE-MEASURED at LANDING-7 R-E8, 2026-11-06, after the city's
+    // DENSITY_CEILINGS moved 38,000 -> 22,798: bound 26218 walls, pressures 1.1443 /
+    // 1.5257 / 1.9071, still all above the ease point and under the ceiling of 2.)
     settlement: place({ tier: 'city', population, dailyProduction: 200000 }),
     worldState: litWorld(),
     settlementId: 'ashford',
@@ -202,8 +204,10 @@ describe('P4.2 CAUSAL RISK — continuous, and never a governor', () => {
     expect(readings[2]).toBeGreaterThan(readings[1]);
     // CONTROL, the trap made visible: the existing housing contributor is flat across
     // exactly the same three populations, which is the defect this pin exists against.
+    // (X-46 car 2, 3b: the step now reads the city stamp cut, 2,250, not a bare 5000; it is
+    // still one step, flat across all three populations.)
     const housingStep = read('src/domain/causalState.js');
-    expect(housingStep).toContain("if (pop >= 5000) { score -= 4;");
+    expect(housingStep).toContain("if (pop >= TIER_STAMP_CUTS.city) { score -= 4;");
   });
 
   test('crowding is the CONDITION; sanitation and traffic are accelerants on it', () => {
@@ -243,14 +247,19 @@ describe('P4.2 CAUSAL RISK — continuous, and never a governor', () => {
   });
 
   test('raid exposure rises with a thin watch and with sprawl, and is capped', () => {
+    // ⚠ RE-KEYED BY IDENTITY (LANDING-7 R-E8, 2026-11-06): the thorp's DENSITY_CEILINGS moved
+    // 90 -> 36 (the ceilings follow the STAMP-band maxima), so 30 people on plains filled 73
+    // percent of the new 41-soul wall and the holding no longer sprawled (0.2683). The head
+    // count follows the ceiling by the same factor (30 x 36 / 90 = 12): sprawl 0.7073 against
+    // the old 0.7115, raid lift 0.1872 under the cap.
     const watched = demographicRiskOf({
-      settlement: place({ tier: 'thorp', population: 30, dailyProduction: 400 }),
+      settlement: place({ tier: 'thorp', population: 12, dailyProduction: 400 }),
       worldState: litWorld(),
       settlementId: 'edge',
       scores: { defense_readiness: 90, healing_capacity: 50, infrastructure_condition: 50, trade_connectivity: 20 },
     });
     const bare = demographicRiskOf({
-      settlement: place({ tier: 'thorp', population: 30, dailyProduction: 400 }),
+      settlement: place({ tier: 'thorp', population: 12, dailyProduction: 400 }),
       worldState: litWorld(),
       settlementId: 'edge',
       scores: { defense_readiness: 2, healing_capacity: 50, infrastructure_condition: 50, trade_connectivity: 20 },
@@ -566,14 +575,16 @@ describe('P4.4 THE VIABILITY LADDER — five rungs, and a mover it actually stop
       ground: { applicable: true, saturated: false, sites: 6 },
       satelliteLaneLit: true, satelliteCap: 2,
     }).find((s) => s.response === 'satellite');
-    // A town whose bound clears its own floor of 901 may break ground.
+    // A town whose bound clears its own floor may break ground. The floor is the town ROLL band's
+    // minimum (demographicsResponses.js :: tierFloorOf, an own-floor reader); X-46 car 1 (433289899)
+    // moved it 901 -> 300, so the refused arm's bound moves 400 -> 200 (400 now clears a town).
     expect(founding(4000).refusal).toBe('available');
     expect(founding(4000).available).toBe(true);
     // The SAME town whose granaries and ground together no longer support a town is
     // refused BY NAME, and its weight is zero rather than merely small.
-    expect(founding(400).refusal).toBe('nonviable');
-    expect(founding(400).available).toBe(false);
-    expect(founding(400).weight).toBe(0);
+    expect(founding(200).refusal).toBe('nonviable');
+    expect(founding(200).available).toBe(false);
+    expect(founding(200).weight).toBe(0);
 
     const gate = read('src/domain/worldPulse/demographicsResponses.js');
     expect(gate).toContain("!foundingPermitted ? 'nonviable'");

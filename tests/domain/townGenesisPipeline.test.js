@@ -51,6 +51,25 @@ describe('site — SUBSTANCE from the dossier, never invented (realm-coherence)'
     const oasis = town({ terrain: 'desert', seed: 'oasis', config: { terrainType: 'desert', tradeRouteAccess: 'road', biome: 'desert' }, economicState: { prosperity: { label: 'modest' }, exports: ['river fish', 'pearls'] } });
     expect(buildTownMapModel(oasis, V2).frame.water).toBeTruthy();
   });
+
+  // ⭐ A MILL IS NO WATER ECONOMY (LANDING-7 A, R-A3′). The owner, 2026-11-06, verbatim: "Also
+  // mills don't necessarily need water access as some mills use physical force from livestock
+  // or wind." `mill` stood in siteGenesis.js :: WATER_ECONOMY_RE, so a dry-terrain town whose
+  // export read "Milled flour" was drawn a river (twelve such towns in the site-coherence
+  // corpus at the rung-1 landing tip). Water must come from the dossier's real water: a river
+  // or coast route, a wet biome, or a water trade.
+  it('a mill is no water economy: a dry-terrain town exporting milled flour draws NO river', () => {
+    const millTown = (terrain, seed) => town({ terrain, seed, config: { terrainType: terrain, tradeRouteAccess: 'road', biome: terrain }, economicState: { prosperity: { label: 'modest' }, exports: ['Milled flour'] } });
+    for (const terrain of ['plains', 'hills', 'forest', 'desert']) {
+      const m = buildTownMapModel(millTown(terrain, `mill-${terrain}`), V2);
+      expect(m.frame.water, `a ${terrain} town exporting milled flour was drawn water`).toBeNull();
+      expect(m.meta.siteKind, `a ${terrain} town exporting milled flour was sited on water`).not.toBe('river');
+    }
+    // anchored: the same dossier with a fishery export IS drawn water, so the nulls above are
+    // a property of the mill and not of a deriver that has stopped drawing rivers at all.
+    const fishTown = town({ terrain: 'plains', seed: 'mill-plains', config: { terrainType: 'plains', tradeRouteAccess: 'road', biome: 'plains' }, economicState: { prosperity: { label: 'modest' }, exports: ['Milled flour', 'smoked fish'] } });
+    expect(buildTownMapModel(fishTown, V2).frame.water).toBeTruthy();
+  });
 });
 
 describe('site — EXPRESSION from the seed (same substance, different geometry)', () => {

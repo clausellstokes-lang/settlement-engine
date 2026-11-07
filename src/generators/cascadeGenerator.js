@@ -4,6 +4,7 @@
 
 import { random as _rng } from '../kernel/rngContext.js';
 import { institutionalCatalog, institutionRowGuardsPass } from '../data/institutionalCatalog.js';
+import { densityFactor, isDensityExempt, scaleChance } from '../data/institutionBudget.js';
 import { institutionToggleFor } from './institutionToggleReader.js';
 import { SUPPLY_CHAIN_NEEDS } from '../data/goods/chains.js';
 import {
@@ -76,6 +77,7 @@ function applyCascadeInstitutions(institutions, tier, opts = {}) {
     institutionToggles = null,
     worldLaw = null,
     population = null,
+    density: settlementFactor = null,
   } = opts;
   const TIER_ORD  = ['thorp','hamlet','village','town','city','metropolis'];
   const tierIdx   = TIER_ORD.indexOf(tier);
@@ -91,6 +93,10 @@ function applyCascadeInstitutions(institutions, tier, opts = {}) {
   };
   const mk        = n => n.toLowerCase().slice(0, 16);
   const cascadeMap = getCascadeMap();
+  // THE INSTITUTION BUDGET (X-46 car 3): the same density factor assembleInstitutions applies,
+  // read once before the first draw: the pipeline hands the settlement's own factor in
+  // (`settlementDensity`, RUNG1B-F6); a headless call reads the bare curve. 1 with no population.
+  const density = typeof settlementFactor === 'number' ? settlementFactor : densityFactor(tier, population);
 
   // What's already present (match keys)
   const nativeNames = institutions
@@ -191,7 +197,8 @@ function applyCascadeInstitutions(institutions, tier, opts = {}) {
 
         // Catalog probability field is `baseChance` — institutionalCatalog
         // defines no `p` field, so any other read silently yields 0.
-        const baseChance   = data.baseChance || 0;
+        const d            = isDensityExempt(t, name) ? 1 : density;
+        const baseChance   = d === 1 ? (data.baseChance || 0) : scaleChance(data.baseChance || 0, d);
         // Cap: cascade gives a second chance but can't guarantee appearances
         // Lower cap means cascades supplement rather than dominate generation
         const cascadeChance = Math.min(baseChance * boost, 0.45);

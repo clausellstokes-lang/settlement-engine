@@ -403,23 +403,27 @@ describe('applyTierOutcomeToSettlement — apply-time tier re-verify', () => {
   });
 
   it('resolves an implicit tier from population before comparing', () => {
-    const implicit = settlement('Ashford', { tier: undefined, population: 4700 });
+    // X-46 car 1 (433289899): 4700 stamps city now (TIER_STAMP_CUTS.city 2250); 2100 stamps town.
+    const implicit = settlement('Ashford', { tier: undefined, population: 2100 });
 
     expect(applyTierOutcomeToSettlement(implicit, tierOutcome('town', 'city', 'promotion')).tier).toBe('city');
     expect(applyTierOutcomeToSettlement(implicit, tierOutcome('village', 'town', 'promotion'))).toBe(implicit);
   });
 
   it('the anti-churn promotion floor bump leaves a populationHistory breadcrumb', () => {
-    // Eligibility promotes at pop >= nextTier.min * 0.92, so a 4700-strong town is
-    // promoted BELOW the city floor (5001) and bumped up to it. That mint is
-    // deliberate, but it must be visible to the chronicle/audit surfaces.
-    const town = settlement('Ashford', { tier: 'town', population: 4700 });
-    const next = applyTierOutcomeToSettlement(town, tierOutcome('town', 'city', 'promotion'));
+    // Eligibility promotes at pop >= 0.92 x the next tier's STAMP cut (LANDING-7 R-B1), and the mint
+    // lifts to the next tier's ROLL-band floor. Under the owner's bands (X-46 car 1, 433289899) the bump
+    // is reachable at one rung only: 0.92 x each lower cut sits at or above the next band's min, while the
+    // metropolis cut equals its band min (15,000). So a 14,000-strong city is promoted BELOW the
+    // metropolis floor and bumped up to it (the old fixture: a 4,700 town bumped to the city floor 5,001).
+    // That mint is deliberate, but it must be visible to the chronicle/audit surfaces.
+    const city = settlement('Ashford', { tier: 'city', population: 14000 });
+    const next = applyTierOutcomeToSettlement(city, tierOutcome('city', 'metropolis', 'promotion'));
 
-    expect(next.population).toBe(5001);
+    expect(next.population).toBe(15000);
     expect(next.populationHistory.at(-1)).toMatchObject({
-      delta: 301,
-      population: 5001,
+      delta: 1000,
+      population: 15000,
       outcomeId: 'candidate.tier.promotion.a.4',
     });
 
@@ -642,7 +646,8 @@ describe('evaluateTierResourceDynamics — pending tier proposal dedupe', () => 
       proposals: [],
     };
     const snapshot = {
-      settlements: [item('a', settlement('Ashford', { tier: 'town', population: 500 }), 0)],
+      // Below the town's demotion floor (0.82 x POPULATION_RANGES.town.min 300 = 246; X-46 car 1 moved it from 901).
+      settlements: [item('a', settlement('Ashford', { tier: 'town', population: 200 }), 0)],
     };
 
     const result = evaluateTierResourceDynamics(worldState, snapshot, undefined, { tick: 9 });

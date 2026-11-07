@@ -364,8 +364,14 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // composed tip): not idle 268 → 266 at SIZE-3 (the guild market, stage S5); groups judged 98 → 101 (FOOD-1, the food
     // record) → 99 (FOOD-2, the food base numbers) → 130 (FOOD-3, food diversity: the food-security group is judged on
     // more rows as the record grows sources). The law of the arm is unchanged: mixedOutside is still empty.
-    expect(census().rows.filter((row) => row.takenLive > 0).length, 'the instrument is not idle').toBe(266);
-    expect(census().rows.filter((row) => row.groupsJudged > 0).length, 'declared groups ARE judged').toBe(130);
+    // 2026-11-05, the rung-1 landing (ODQ §934.105; LANDING-5 under the chair's ruling 4, READ and BISECTED over the
+    // landing's first-parent stages, this file's census at each; at 1264a8152^ every figure is the frozen one): not idle
+    // 266 -> 268 X-46 car 1 1264a8152 -> 265 car 2 d4bf6431c -> 284 CRISIS d3e072368 -> 286 SELF-VOUCH 0be13b5cb -> 276
+    // car 3 90dc22f18 -> 275 car 1b-2 fb0341b93 -> 276 PLACE-NOT-TIER 6129c300d -> 275 car 3 I7 6ca454d2b -> 277 F6
+    // 6d84aa834; groups judged 130 -> 132 -> 130 (cars 1, 2) -> 132 PINS 37b1e746d -> 133 F6. mixedOutside and
+    // settledLive stay empty at every stage.
+    expect(census().rows.filter((row) => row.takenLive > 0).length, 'the instrument is not idle').toBe(277);
+    expect(census().rows.filter((row) => row.groupsJudged > 0).length, 'declared groups ARE judged').toBe(133);
     // THE POSITIVE CONTROL, CONSTRUCTED: one object holding a leaf taken from R1 beside a leaf kept
     // where the record had settled away from R0 IS a MIXED object, and enclosingGroup classes it.
     const control = mergeTree({ population: { total: 10, note: 'kept' } }, { population: { total: 5, note: 'kept' } }, { population: { total: 5, note: 'moved' } }).receipts;
@@ -393,7 +399,13 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // 48 → 40 rows, V-DEFENSE-INST 31 → 35 and V-EVIDENCE-CONFLICT 22 → 8 (mergeLadderHeldKeys A2 reads the same re-deal).
     // 2026-11-04, the window-end pin re-key (REGISTERS seat, traced by stage in DOORS-4): declared-only {47, 7} → {41, 6}
     // (FOOD-1) → {28, 2} (FOOD-2); the escalation figures below did not move.
-    expect(tally(census().rows.filter((row) => row.declaredOnly.length > 0).map((row) => row.label))).toEqual({ E7: 28, E8: 2 });
+    // 2026-11-05 (LANDING-5, by stage as A3): declared-only {28, 2} -> {29, 2} car 1 1264a8152 -> {29, 3} car 3 90dc22f18 ->
+    // {30, 7} PINS 37b1e746d -> {34, 12} car 3 I7 6ca454d2b -> {31, 6} F6 6d84aa834.
+    // 2026-11-06 (LANDING-7 lane H, the chair's ruling R-H5: re-keyed by identity with its cause, measured by a probe of
+    // this census's E7 half at the parent ba4366c83 and after): {31, 6} -> {32, 6}. The one new row is
+    // thorp|germanic|coastal|port|civilized|golden-master-v3, declared-only on powerStructure (its economy fingerprint
+    // receipt), one of the 17 thorps whose food writer read 0 lb beside 1% and now derives its per cent from its pounds.
+    expect(tally(census().rows.filter((row) => row.declaredOnly.length > 0).map((row) => row.label))).toEqual({ E7: 32, E8: 6 });
     // anchored: the layer channel is clean on all three counts, and a widening reds here.
     expect(layerRows.filter((row) => row.escalations.length > 0)).toEqual([]);
     expect(layerRows.filter((row) => row.live.length > 0)).toEqual([]);
@@ -404,11 +416,15 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // from the merged record (mergeConsequence.js :: restateConflictCitations), so the layer channel is clean again and
     // config rows {31, 9} → {26, 9}, steps {140, 36} → {104, 36}, every one still EXHAUSTED; the live residue 40 → 35,
     // V-EVIDENCE-CONFLICT 8 → 0, V-DEFENSE-INST unmoved at 35 (mergeLadderHeldKeys A2 reads the same figures).
-    expect(tally(configRows.filter((row) => row.escalations.length > 0).map((row) => row.label))).toEqual({ E7: 26, E8: 9 });
-    expect(tally(configRows.flatMap((row) => Array(row.escalations.length).fill(row.label)))).toEqual({ E7: 104, E8: 36 });
-    expect(tally(configRows.filter((row) => row.escalations.some((each) => each.step === 'EXHAUSTED')).map((row) => row.label))).toEqual({ E7: 26, E8: 9 });
-    expect(census().rows.filter((row) => row.live.length > 0).length, 'EM-B2b seam, asserted AT the figure').toBe(35);
-    expect(tally(census().rows.flatMap((row) => row.live))).toEqual({ 'V-DEFENSE-INST': 35 });
+    // 2026-11-05 (LANDING-5, by stage as A3; mergeLadderHeldKeys A2 reads the same figures): config rows {26, 9} -> {28, 9}
+    // car 1 -> {28, 8} car 2 -> {14, 2} car 3 90dc22f18 -> {15, 2} car 1b-2 -> {19, 4} PINS -> {22, 4} car 3 I7 -> {18, 3}
+    // F6; steps {104, 36} -> {72, 12} at the same steps; every one still EXHAUSTED; the live residue 35 -> 21, all
+    // V-DEFENSE-INST. The layer channel is clean at every stage.
+    expect(tally(configRows.filter((row) => row.escalations.length > 0).map((row) => row.label))).toEqual({ E7: 18, E8: 3 });
+    expect(tally(configRows.flatMap((row) => Array(row.escalations.length).fill(row.label)))).toEqual({ E7: 72, E8: 12 });
+    expect(tally(configRows.filter((row) => row.escalations.some((each) => each.step === 'EXHAUSTED')).map((row) => row.label))).toEqual({ E7: 18, E8: 3 });
+    expect(census().rows.filter((row) => row.live.length > 0).length, 'EM-B2b seam, asserted AT the figure').toBe(21);
+    expect(tally(census().rows.flatMap((row) => row.live))).toEqual({ 'V-DEFENSE-INST': 21 });
   }, ARM_TIMEOUT);
 
   it('A5 a chain is deterministic, undo then re-edit reproduces the town, and the ordered pairs are counted', () => {
@@ -422,14 +438,36 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // town|germanic|plains|road|civilized|gm-seed-c, E1|E5 and E2|E5 differ ONLY in simulationTrace[92..93], the relationship
     // derivation's narrative ("25 edges" | "23 edges", "Direct=1 … scatter=0" | "Direct=0 …"); every world field is identical
     // in both orders. At the base the seat pairs differed in exactly that kind of trace reason on gm-seed-a's town.
-    expect(tally(chains().pairs)).toEqual({ 'E1|E5': 1, 'E2|E5': 1, 'E5|E1': 1, 'E5|E2': 1 });
+    // 2026-11-05 (LANDING-5, the chair's ruling 4; re-keyed BY IDENTITY with its step, bisected over the landing's
+    // first-parent stages by the chain census): the four non-commuting pairs (trace-only, E1|E5 E2|E5 E5|E1 E5|E2) hold
+    // through 79c442330 and are GONE from X-46 car 3 90dc22f18 (the institution budget): every ordered pair now commutes.
+    // Determinism, undo and the 252/126/1890 denominators hold at every probed stage.
+    expect(tally(chains().pairs)).toEqual({});
     expect(() => mergeConsequence({}, {}, {}, { edit: [] })).toThrow(TypeError);
   }, ARM_TIMEOUT);
 
   it('A6 the order rule second arm is zero on the layer channel and counted on the config channel', () => {
-    // anchored: the layer channel moves no key order at all, and a regression there is a real defect.
-    expect(byChannel('layer', 'membership').filter((row) => row.orderMoved.length > 0)).toEqual([]);
-    expect(byChannel('config').filter((row) => row.orderMoved.length > 0).length, 'a counted diagnostic with a LIVE population, so the branch is not asserted on nothing').toBe(52); // 2026-10-01: 51 → 54, the same re-deal; 2026-11-04 (REGISTERS seat, traced in DOORS-4): 54 → 53 FOOD-2 → 52 SIZE-3
+    // anchored: the layer channel moves no key order except the ONE consequence named below, and any other
+    // order move there is a real defect.
+    // 2026-11-05 (LANDING-6, the chair's ruling 1 on LANDING-5's A6 STOP; re-keyed by identity with its step): two
+    // rows, history.legacyAnnotations on the coastal-port village under E5 and E6, from X-46 car 3 (90dc22f18, the
+    // institution budget). A CONSEQUENCE, not a defect: legacyGenerator.js :: deriveLegacyAnnotations ranks by its
+    // own rule, and a political event scores 70 while legitimacy is under 45 ('contested') but 30 ('drift') at 45 or
+    // over, below the disaster's 40 and the religious event's 35. The rank inputs the history step reads, measured:
+    // at 79c442330 (the stage before car 3) the generation reads legitimacy 39 and the edited re-derivation 42, both
+    // contested, so political leads both and nothing re-ranks; at the tip car 3's faction set (Elected Reeve 32/45,
+    // Religious Authorities 35/19) reads 44 at generation (contested, political first) and 47 under E5 and E6 (stable,
+    // political last), so the layer edit crosses the cut in exactly the direction the new order shows.
+    expect(byChannel('layer', 'membership').filter((row) => row.orderMoved.length > 0).map((row) => [row.key, row.label, row.orderMoved]))
+      .toEqual([
+        ['village|germanic|coastal|port|civilized|golden-master-v3', 'E5', ['history.legacyAnnotations']],
+        ['village|germanic|coastal|port|civilized|golden-master-v3', 'E6', ['history.legacyAnnotations']],
+      ]);
+    // 2026-11-05 (LANDING-6, masked behind the first assertion until ruling 1 re-keyed it; bisected over every first-parent
+    // stage of the landing with this count alone): 52 → 50 X-46 car 1 (1264a8152) → 39 X-46 car 3 (90dc22f18) → 41 PINS
+    // (37b1e746d) → 44 X-46 car 3, I7 (6ca454d2b) → 46 PINS (11467ed57) → 40 F6 BUDGET-FLOOR (6d84aa834), unmoved since and by
+    // record 28's cure (the same 40 rows).
+    expect(byChannel('config').filter((row) => row.orderMoved.length > 0).length, 'a counted diagnostic with a LIVE population, so the branch is not asserted on nothing').toBe(40); // 2026-10-01: 51 → 54, the same re-deal; 2026-11-04 (REGISTERS seat, traced in DOORS-4): 54 → 53 FOOD-2 → 52 SIZE-3
   }, ARM_TIMEOUT);
 
   it('A7 the honesty figures are re-measured and the ride-along has its first population in the chain', () => {
@@ -447,9 +485,21 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // 2026-11-04, the window-end pin re-key (REGISTERS seat, traced by stage in DOORS-4): [719, 200, 927] → [717, 200, 930]
     // (FOOD-1) → [715, 200, 1402] (FOOD-2: E6 reaches the food record's readings through the re-dealt economy) →
     // [717, 197, 1405] (SIZE-3).
-    expect([taken.E1, taken.E5, taken.E6], 'the edits that DO reach a reading').toEqual([717, 197, 1405]);
-    // an npc ROLE reaches ZERO readings over the whole corpus, recorded so the zero is not silence
-    expect([taken.E2, taken.E3, taken.E4], 'a role and a dormant membership edit reach none').toEqual([0, 0, 0]);
+    // 2026-11-05 (LANDING-6, the chair's ruling 2: read and re-banked on the tree record 28 cured; bisected over every
+    // first-parent stage with a probe of this census, record 28's cure scripted into the stages from TRUTH ff4448d2e to
+    // F10 54daafda3 so no stage carries the V-SUMMARY-HOOKS contamination, steps touching no src/ skipped):
+    // [717, 197, 1405] → [731, 570, 1616] X-46 car 1 (1264a8152) → [715, 742, 1073] car 2 (d4bf6431c) → [741, 772, 1587]
+    // CRISIS (d3e072368) → [721, 772, 1588] terrain-pools (ac09ea83b) → [721, 802, 1606] SELF-VOUCH (0be13b5cb) →
+    // [695, 45, 1235] car 3 (90dc22f18) → [697, 41, 1233] car 1b (fb0341b93) → [697, 49, 1242] SELF-VOUCH I5 (cdc949867)
+    // → [699, 63, 1217] PLACE-NOT-TIER (6129c300d) → [699, 63, 1199] TRUTH (ff4448d2e) → [705, 73, 1638] PINS (37b1e746d)
+    // → [705, 71, 1688] TRUTH (844acaccc) → [703, 65, 1847] car 3 I7 (6ca454d2b) → [717, 66, 1810] F6 (6d84aa834) →
+    // [709, 66, 1810] F1 (5e9ffb220), unmoved to the tip. Uncured, E6 read 1814 from F6 on (the 18 towns' summaries).
+    expect([taken.E1, taken.E5, taken.E6], 'the edits that DO reach a reading').toEqual([709, 66, 1810]);
+    // an npc ROLE reached ZERO readings over the whole corpus until CRISIS, recorded so the figure is not silence.
+    // 2026-11-05 (LANDING-6, the same bisection): 0 → 48 CRISIS (d3e072368: the crisis record carries its derived cast,
+    // and the cast is chosen by role) → 63 SELF-VOUCH (0be13b5cb) → 32 car 3 (90dc22f18) → 24 PINS (37b1e746d) → 28 F6
+    // (6d84aa834), unmoved to the tip. The two dormant membership edits still reach none.
+    expect([taken.E2, taken.E3, taken.E4], 'a role reaches the crisis cast; a dormant membership edit reaches none').toEqual([28, 0, 0]);
     // AND THE MACHINERY'S FIRST POPULATION, in the chain: the restatement at the first merge lets
     // the record settle away from R0 at a leaf, so the second merge's receipts carry a ride-along.
     // 2026-10-31 (chair ruling X-29, cure lane T13; measured at the GS-2 tree WITHOUT it, where this reads [12, 12]):
@@ -457,7 +507,14 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // record settles away from R0 at that evidence leaf in nine more chains, and the second merge carries it along.
     // 2026-11-04, the window-end pin re-key (REGISTERS seat; masked behind A7's first figure in DOORS-4, traced by this
     // seat over the same stage trees): [21, 23] → [18, 20] (FOOD-2, stage T2) → [12, 12] (SIZE-3, stage S5).
-    expect([chains().rideAlongChains, chains().rideAlongLeaves], 'the honesty machinery firing').toEqual([12, 12]);
+    // 2026-11-06 (LANDING-7 A, the chair's ruling R-A6: LANDING-6's "ride-along still bisecting", finished; re-keyed by
+    // identity with its step, bisected over the rung-1 landing's first-parent stages with a probe of this census's pair
+    // half and the tip's own EDITS, in scratch trees; every src-touching stage measured or bracketed by equal neighbours):
+    // [12, 12] at a07ee4e0a and soak2 (a8739327e) → [16, 16] X-46 car 1 (1264a8152) → [14, 14] terrain-pools (ac09ea83b)
+    // → [31, 31] X-46 car 3 (90dc22f18, the institution budget) → [24, 24] PLACE-NOT-TIER (6129c300d) → [27, 27] PINS
+    // (37b1e746d) → [21, 21] car 3 I7 (6ca454d2b), unmoved to the tip (F6, F1, F10, the residual tick bc2a64000, the
+    // summary-hook cure c1cf38bbb). Chains and leaves stay equal: every ride-along chain carries exactly one leaf.
+    expect([chains().rideAlongChains, chains().rideAlongLeaves], 'the honesty machinery firing').toEqual([21, 21]);
   }, ARM_TIMEOUT);
 
   it('A8 the family declared instruments hold at this seam', () => {
@@ -487,10 +544,14 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // legitimacy now reaches 0 (the clamped village the V-LEGIT-SUM check mirrors) and readiness spans 8..82 (was 11..81).
     // 2026-11-04, the window-end pin re-key (REGISTERS seat, traced by stage in DOORS-4): 28/37 → 26/37 (FOOD-1) → 23/36
     // (FOOD-2) → 23/37 (FOOD-3); the ranges below did not move.
-    expect([witnessed.legitimacy.size, witnessed.readiness.size], 'the scores are WITNESSED, not assumed').toEqual([23, 37]);
+    // 2026-11-05 (LANDING-6, bisected as A7 above): 23/37 → 24/38 X-46 car 1 (1264a8152) → 23/38 car 2 (d4bf6431c) →
+    // 24/38 terrain-pools (ac09ea83b) → 24/37 T1/T2 (fe56bddd4) → 22/36 car 3 (90dc22f18; readiness now spans 7..83) →
+    // 22/35 car 1b (fb0341b93; 7..81) → 22/37 PINS (37b1e746d; 7..83) → 23/37 car 3 I7 (6ca454d2b) → 21/36 F6 (6d84aa834),
+    // unmoved to the tip; legitimacy's range never moved.
+    expect([witnessed.legitimacy.size, witnessed.readiness.size], 'the scores are WITNESSED, not assumed').toEqual([21, 36]);
     // (b) the witnessed score set of the ladders, RECORDED (charter addenda 71 and 73)
     expect([Math.min(...witnessed.legitimacy), Math.max(...witnessed.legitimacy)]).toEqual([0, 75]);
-    expect([Math.min(...witnessed.readiness), Math.max(...witnessed.readiness)]).toEqual([8, 82]);
+    expect([Math.min(...witnessed.readiness), Math.max(...witnessed.readiness)]).toEqual([7, 83]);
     // (c) the duplicated-leaf sweep, RECORDED (charter addendum 38), over the table's own producer
     const leafReaders = {};
     for (const [id, meta] of Object.entries(CHECK_META)) for (const path of meta.paths || []) leafReaders[path] = [...(leafReaders[path] || []), id];
@@ -506,12 +567,17 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // 2026-10-31 (the GS-2 merge, lane G2, ODQ §934.101; re-measured by cure lane T13): 22 → 25, the three paths the
     // register sweep 3511e283 declared because a power-faction name now reaches them (`factions[].name`,
     // `conflicts[].parties[]`, `powerStructure.conflicts[].parties[]`), every one declaring `readable: false`.
-    expect([INSTITUTION_NON_CASCADED.length, declaring(INSTITUTION_NON_CASCADED).length]).toEqual([25, 25]);
+    // 2026-11-05 (LANDING-6, measured by import at each first-parent stage that touches the ledger): 25 → 26 PINS
+    // (11467ed57) → 35 F7 RENAME-CASCADE (a373129ee: the duplicate NON_CASCADED rows and the criminal services' and crisis
+    // cast's paths), every one declaring `readable`.
+    expect([INSTITUTION_NON_CASCADED.length, declaring(INSTITUTION_NON_CASCADED).length]).toEqual([35, 35]);
     expect(INSTITUTION_NON_CASCADED.filter((row) => row.kind === 'matched-pattern' && row.readable).map((row) => row.path)).toEqual(['economicState.activeChains[].processingInstitutions[]']);
     expect(typeof institutionRemovalChanges).toBe('function');
     // EXIT 2, the UNDECLARED ledger: EM-R6's LANDED ruling is that none of its rows has a reader,
     // and the prose rule is ENFORCED by the scan rather than trusted, at zero src/ bytes.
-    expect([FACTION_NON_CASCADED.length, NPC_NON_CASCADED_SURFACES.length]).toEqual([16, 13]);
+    // 2026-11-05 (LANDING-6, measured by import at each first-parent stage that touches the ledger): [16, 13] → [18, 14]
+    // F7 RENAME-CASCADE (a373129ee) → [22, 14] F7 unit 5 (09295e420); none of the new rows declares `readable`.
+    expect([FACTION_NON_CASCADED.length, NPC_NON_CASCADED_SURFACES.length]).toEqual([22, 14]);
     expect(declaring(FACTION_NON_CASCADED).length + declaring(NPC_NON_CASCADED_SURFACES).length).toBe(0);
     const importers = srcModules()
       .map((rel) => ({ rel, clause: /import\s*\{([^}]*)\}\s*from\s*'[^']*factionRename\.js'/s.exec(readFileSync(resolve(ROOT, 'src', rel), 'utf8')) }))

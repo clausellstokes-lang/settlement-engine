@@ -61,6 +61,10 @@ const COHERENCE_JUDGMENTS = [
   'dramatic_tension',
   'diversity_and_repetition',
   'confidence_and_provenance',
+  // The eighth (b7a5f778e, lane SELF-VOUCH, SOAK-1000 R5): the coherence battery over the STORED record,
+  // built by recordBatteryFindings.js :: recordBatteryJudgment and appended last by
+  // generationCoherence.js :: buildGenerationCoherenceReceipt. A judgment, not a check: the status is unchanged.
+  'record_coherence_battery',
 ];
 
 describe('final settlement generation contracts', () => {

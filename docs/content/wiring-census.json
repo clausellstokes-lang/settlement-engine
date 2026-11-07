@@ -2,13 +2,13 @@
   "schema": "wiring-census/1",
   "stamp": {
     "files": {
-      "src/domain/display/stateProse/generalStateProse.js": "628d26a9e76b0d776171e2caee2fb83126414dba138905f0c610a7898f94720b",
-      "src/domain/display/stateProse/powerStateProse.js": "78d22210d6d2ca5d44a4af32cf3a13b7c123d0577850458e9ce36ec893e3d2c8",
-      "src/domain/display/stateProse/economyStateProse.js": "5cfc0125aecbc0f14211dd9b9d5713b50866f26d01dfbdd370c678f178b1f8ea",
-      "src/domain/display/stateProse/defenseStateProse.js": "220eb0947f1b6a5b9e31f1d14d41bc50f7113ebc5995fc2df7ac3139d777b519",
-      "src/domain/display/stateProse/stressorsStateProse.js": "e128aa4ece932c8eae009c22eb9ad9f77f47b3967b5652687f80c76933027fd1",
-      "src/domain/display/stateProse/warFaithStateProse.js": "95882ecdf30f617f44ed3f460c4a67109107f5e645fc7e9820a60de0e67b1fb0",
-      "src/domain/display/stateProse/dossierMounts.js": "6f1b82274e0a255041af154d8050391b0d4d02efa1149a52d9f1eecb843290fa"
+      "src/domain/display/stateProse/generalStateProse.js": "c67780262a7362640254d6fd04e302c0fd9b6bd3062cec69df021df6f93bd3ca",
+      "src/domain/display/stateProse/powerStateProse.js": "17162968061353b811e61220c3306dcfd784b1110b93f75b1442dff0811294e3",
+      "src/domain/display/stateProse/economyStateProse.js": "42d10cb7a3f25483c80b7f328c7f778617e628d7148d7d357b09ee45536c1908",
+      "src/domain/display/stateProse/defenseStateProse.js": "9504850e223c86681c6f89f6f55d90239cc732a1860a5687be725351b0e14234",
+      "src/domain/display/stateProse/stressorsStateProse.js": "c876f4bd17ebf8d07701caf28f7c90262772e222183a5c01311d5814cb1b0bdb",
+      "src/domain/display/stateProse/warFaithStateProse.js": "1a880f001c4ab469cbc6d2ca4ba0028587606c5bac6eb1676ed1fe2b0ea1ca52",
+      "src/domain/display/stateProse/dossierMounts.js": "1c65db21ab6f7e7e56148490bf7cf49ba136bd6ed6aeaf504bdef9661e5d11be"
     },
     "candidateLeaves": {
       "src/domain/display/stateProse/defenseStateProseCandidates.js": "b4833f55274b040dc5627b0eedafe7f98f508cec73ac829ce213adabe8c3e96c",
@@ -18,27 +18,27 @@
       "src/domain/display/stateProse/stressorsStateProseCandidates.js": "ee0548fc8b662da76e4bf85a1fae30433e9f738277c774e16c6a7abd7fb93552",
       "src/domain/display/stateProse/warFaithStateProseCandidates.js": "b5b193dd2a2c83d077da5f82fd4a5fc5f5ad15a3b6a214725daf41ede442324b"
     },
-    "producerIndexFiles": 1242
+    "producerIndexFiles": 1260
   },
   "totals": {
-    "pools": 708,
+    "pools": 709,
     "blocks": 68,
-    "variants": 2266,
-    "resolved": 340,
+    "variants": 2310,
+    "resolved": 341,
     "unresolved": 368,
-    "resolvedWithPredicate": 207,
-    "resolvedWithCleanPredicate": 207,
+    "resolvedWithPredicate": 208,
+    "resolvedWithCleanPredicate": 208,
     "keyFunctions": 118,
     "keyFunctionsConsulted": 118,
     "keyTables": 33,
     "slotless": 65,
     "bagless": 140,
-    "predicatesOverUnreadFields": 99,
+    "predicatesOverUnreadFields": 100,
     "syntheticTableFields": 100,
     "tiers": {
       "MISSING": 34,
-      "THIN": 483,
-      "COVERED": 225,
+      "THIN": 482,
+      "COVERED": 227,
       "MISSING-AT-TIER": 45
     },
     "tierSilences": 352,
@@ -47,18 +47,18 @@
     "narrowedRows": 0,
     "covertRows": 4,
     "objectClassed": 99,
-    "mountedRows": 566,
+    "mountedRows": 567,
     "absent": {
-      "measured": 372,
+      "measured": 373,
       "default": 3,
-      "not-produced": 58,
+      "not-produced": 61,
       "method-call": 18
     },
     "zeroK": 49,
-    "kExecutable": 340,
+    "kExecutable": 341,
     "kNotExecutable": 368,
-    "branchGrainRows": 309,
-    "functionGrainRows": 399,
+    "branchGrainRows": 311,
+    "functionGrainRows": 398,
     "customReachableRows": 21,
     "relationRows": 165,
     "relationRowsJoinable": 0,
@@ -71,23 +71,23 @@
       ],
       [
         "economics",
-        38
+        39
       ],
       [
         "history",
-        34
+        35
       ],
       [
         "plot_hooks",
-        34
+        35
       ],
       [
         "relationships",
-        34
+        35
       ],
       [
         "overview",
-        27
+        28
       ],
       [
         "resources",
@@ -118,7 +118,7 @@
         5
       ]
     ],
-    "sourceLicensedRows": 113,
+    "sourceLicensedRows": 114,
     "sourceOfficeRows": 3,
     "sourceUnresolvedRows": 592,
     "sourceTwoSourceRows": 10,
@@ -3663,7 +3663,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 3,
+      "variants": 4,
       "grammars": 1,
       "predicate": [],
       "branchReads": [],
@@ -3839,7 +3839,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 3,
+      "variants": 4,
       "grammars": 2,
       "predicate": [],
       "branchReads": [],
@@ -5397,6 +5397,7 @@
         "magicDependency"
       ],
       "fieldsRead": [
+        "magicAbsent",
         "magicDependency",
         "namedChain"
       ],
@@ -5457,6 +5458,7 @@
         "magicDependency"
       ],
       "fieldsRead": [
+        "magicAbsent",
         "magicDependency",
         "namedChain"
       ],
@@ -5510,8 +5512,12 @@
       "variants": 3,
       "grammars": 1,
       "predicate": [],
-      "branchReads": [],
+      "branchReads": [
+        "magicAbsent",
+        "magicDependency"
+      ],
       "fieldsRead": [
+        "magicAbsent",
         "magicDependency",
         "namedChain"
       ],
@@ -5520,14 +5526,14 @@
       "keyFunction": "magicDependencyPoolKey",
       "rung": "literal",
       "reads": [
-        "magicDependency",
-        "namedChain"
+        "magicAbsent",
+        "magicDependency"
       ],
-      "readsGrain": "function",
+      "readsGrain": "branch",
       "narrowed": false,
       "absent": {
-        "magicDependency": "measured",
-        "namedChain": "not-produced"
+        "magicAbsent": "not-produced",
+        "magicDependency": "measured"
       },
       "covert": false,
       "objectClasses": [],
@@ -5545,8 +5551,76 @@
           "muster"
         ],
         "fields": {
-          "magicDependency": "muster",
-          "namedChain": ""
+          "magicAbsent": "",
+          "magicDependency": "muster"
+        },
+        "holder": null,
+        "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
+        "standing": "LICENSED",
+        "twoSource": false
+      }
+    },
+    {
+      "block": "DS-DEF-9",
+      "pool": "magicDependency false, availability absent",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 3,
+      "grammars": 2,
+      "predicate": [
+        {
+          "field": "magicAbsent",
+          "op": "truthy",
+          "value": "(no literal)"
+        }
+      ],
+      "branchReads": [
+        "magicAbsent",
+        "magicDependency"
+      ],
+      "fieldsRead": [
+        "magicAbsent",
+        "magicDependency",
+        "namedChain"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "magicDependencyPoolKey",
+      "rung": "literal",
+      "reads": [
+        "magicAbsent",
+        "magicDependency"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "magicAbsent": "not-produced",
+        "magicDependency": "measured"
+      },
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "viability.magicDependency"
+      ],
+      "attach": [],
+      "k": 1,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "muster",
+        "kinds": [
+          "muster"
+        ],
+        "fields": {
+          "magicAbsent": "",
+          "magicDependency": "muster"
         },
         "holder": null,
         "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
@@ -7698,7 +7772,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 3,
+      "variants": 4,
       "grammars": 1,
       "predicate": [],
       "branchReads": [],
@@ -9225,7 +9299,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 3,
+      "variants": 4,
       "grammars": 2,
       "predicate": [],
       "branchReads": [],
@@ -9613,7 +9687,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 3,
+      "variants": 4,
       "grammars": 2,
       "predicate": [
         {
@@ -12350,7 +12424,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 3,
+      "variants": 4,
       "grammars": 1,
       "predicate": [],
       "branchReads": [
@@ -14617,7 +14691,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 3,
+      "variants": 4,
       "grammars": 2,
       "predicate": [
         {
@@ -14682,7 +14756,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 3,
+      "variants": 4,
       "grammars": 2,
       "predicate": [
         {
@@ -16507,7 +16581,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 2,
+      "variants": 3,
       "grammars": 1,
       "predicate": [
         {
@@ -16681,7 +16755,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 2,
+      "variants": 3,
       "grammars": 1,
       "predicate": [
         {
@@ -17029,7 +17103,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 4,
+      "variants": 5,
       "grammars": 2,
       "predicate": [
         {
@@ -20836,7 +20910,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 4,
+      "variants": 5,
       "grammars": 2,
       "predicate": [],
       "branchReads": [],
@@ -21328,22 +21402,26 @@
       "grammars": 1,
       "predicate": [],
       "branchReads": [
-        "readings.criticalIssueCount"
+        "readings.criticalIssueCount",
+        "readings.recordClean"
       ],
       "fieldsRead": [
-        "readings.criticalIssueCount"
+        "readings.criticalIssueCount",
+        "readings.recordClean"
       ],
       "status": "RESOLVED",
       "reason": "",
       "keyFunction": "criticalIssuePoolKey",
       "rung": "literal",
       "reads": [
-        "readings.criticalIssueCount"
+        "readings.criticalIssueCount",
+        "readings.recordClean"
       ],
       "readsGrain": "branch",
       "narrowed": false,
       "absent": {
-        "readings.criticalIssueCount": "measured"
+        "readings.criticalIssueCount": "measured",
+        "readings.recordClean": "not-produced"
       },
       "covert": false,
       "objectClasses": [],
@@ -21352,7 +21430,7 @@
         "viability.verdict"
       ],
       "attach": [],
-      "k": 2,
+      "k": 1,
       "rateBp": 2057,
       "departure": null,
       "source": {
@@ -21361,7 +21439,8 @@
           "treasury"
         ],
         "fields": {
-          "readings.criticalIssueCount": "treasury"
+          "readings.criticalIssueCount": "treasury",
+          "readings.recordClean": ""
         },
         "holder": null,
         "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
@@ -21385,22 +21464,26 @@
       "grammars": 1,
       "predicate": [],
       "branchReads": [
-        "readings.criticalIssueCount"
+        "readings.criticalIssueCount",
+        "readings.recordClean"
       ],
       "fieldsRead": [
-        "readings.criticalIssueCount"
+        "readings.criticalIssueCount",
+        "readings.recordClean"
       ],
       "status": "RESOLVED",
       "reason": "",
       "keyFunction": "criticalIssuePoolKey",
       "rung": "literal",
       "reads": [
-        "readings.criticalIssueCount"
+        "readings.criticalIssueCount",
+        "readings.recordClean"
       ],
       "readsGrain": "branch",
       "narrowed": false,
       "absent": {
-        "readings.criticalIssueCount": "measured"
+        "readings.criticalIssueCount": "measured",
+        "readings.recordClean": "not-produced"
       },
       "covert": false,
       "objectClasses": [],
@@ -21409,7 +21492,7 @@
         "viability.verdict"
       ],
       "attach": [],
-      "k": 2,
+      "k": 1,
       "rateBp": 7878,
       "departure": null,
       "source": {
@@ -21418,7 +21501,8 @@
           "treasury"
         ],
         "fields": {
-          "readings.criticalIssueCount": "treasury"
+          "readings.criticalIssueCount": "treasury",
+          "readings.recordClean": ""
         },
         "holder": null,
         "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
@@ -24376,8 +24460,8 @@
         "seat"
       ],
       "hasBag": true,
-      "variants": 4,
-      "grammars": 4,
+      "variants": 6,
+      "grammars": 5,
       "predicate": [],
       "branchReads": [
         "power.stability"
@@ -26290,8 +26374,8 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 3,
-      "grammars": 3,
+      "variants": 4,
+      "grammars": 4,
       "predicate": [],
       "branchReads": [
         "ledger",
@@ -27299,7 +27383,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 3,
+      "variants": 4,
       "grammars": 2,
       "predicate": [],
       "branchReads": [],
@@ -27978,8 +28062,8 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 6,
-      "grammars": 4,
+      "variants": 10,
+      "grammars": 5,
       "predicate": [
         {
           "field": "token (via CRISIS_POOL_OF in stressorsStateProse.js)",
@@ -28097,7 +28181,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 6,
+      "variants": 7,
       "grammars": 3,
       "predicate": [
         {
@@ -28213,7 +28297,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 6,
+      "variants": 7,
       "grammars": 2,
       "predicate": [
         {
@@ -28503,7 +28587,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 6,
+      "variants": 7,
       "grammars": 3,
       "predicate": [
         {
@@ -28796,7 +28880,7 @@
         "band"
       ],
       "hasBag": true,
-      "variants": 6,
+      "variants": 7,
       "grammars": 2,
       "predicate": [
         {
@@ -29462,7 +29546,7 @@
       "slotsNamed": [],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 3,
+      "variants": 4,
       "grammars": 2,
       "predicate": [],
       "branchReads": [],
@@ -29925,7 +30009,7 @@
       "slotsNamed": [],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 3,
+      "variants": 4,
       "grammars": 3,
       "predicate": [
         {
@@ -30104,7 +30188,7 @@
       "slotsNamed": [],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 3,
+      "variants": 5,
       "grammars": 2,
       "predicate": [
         {
@@ -31575,8 +31659,8 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 3,
-      "grammars": 3,
+      "variants": 4,
+      "grammars": 4,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -31700,8 +31784,12 @@
       "block": "DS-WAR-1",
       "pool": "statusLabel: On campaign",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -31785,8 +31873,12 @@
       "block": "DS-WAR-1",
       "pool": "statusLabel: Occupied",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -31874,8 +31966,12 @@
       "block": "DS-WAR-1",
       "pool": "statusLabel: At war (no front at the walls, no army abroad)",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -31886,7 +31982,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 3,
+      "variants": 4,
       "grammars": 2,
       "predicate": [],
       "branchReads": [
@@ -31957,8 +32053,12 @@
       "block": "DS-WAR-1",
       "pool": "warExhaustion: rested",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -32005,8 +32105,12 @@
       "block": "DS-WAR-1",
       "pool": "warExhaustion: near peace",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -32053,8 +32157,12 @@
       "block": "DS-WAR-1",
       "pool": "warExhaustion: war-weary",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -32101,8 +32209,12 @@
       "block": "DS-WAR-1",
       "pool": "warExhaustion: exhausted",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -32149,8 +32261,12 @@
       "block": "DS-WAR-1",
       "pool": "mobilization: climbing the ramp, still distant",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -32219,8 +32335,12 @@
       "block": "DS-WAR-1",
       "pool": "mobilization: climbing, close to ready",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -32289,8 +32409,12 @@
       "block": "DS-WAR-1",
       "pool": "mobilization: fully ready",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -32353,8 +32477,12 @@
       "block": "DS-WAR-1",
       "pool": "mobilization: COVERT",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -32423,8 +32551,12 @@
       "block": "DS-WAR-1",
       "pool": "occupation.pays false (the occupation is a net drain on the holder)",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -32483,8 +32615,12 @@
       "block": "DS-WAR-1",
       "pool": "occupation.pays true",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -32543,8 +32679,12 @@
       "block": "DS-WAR-1",
       "pool": "occupierHoldings.stretchedThin",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -32616,8 +32756,12 @@
       "block": "DS-WAR-1",
       "pool": "occupierHoldings.strengthened",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -32683,8 +32827,12 @@
       "block": "DS-WAR-1",
       "pool": "feasibility plausible",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -32732,8 +32880,12 @@
       "block": "DS-WAR-1",
       "pool": "feasibility auto_fail",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -32781,8 +32933,12 @@
       "block": "DS-WAR-1",
       "pool": "feasibility harassment",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -32793,7 +32949,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 3,
+      "variants": 4,
       "grammars": 2,
       "predicate": [],
       "branchReads": [],
@@ -32830,8 +32986,12 @@
       "block": "DS-WAR-1",
       "pool": "feasibility require_coalition",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -32879,8 +33039,12 @@
       "block": "DS-WAR-1",
       "pool": "feasibility require_betrayal",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -32891,8 +33055,8 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 3,
-      "grammars": 3,
+      "variants": 6,
+      "grammars": 5,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -32928,8 +33092,12 @@
       "block": "DS-WAR-1",
       "pool": "feasibility require_magic",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -32977,8 +33145,12 @@
       "block": "DS-WAR-2",
       "pool": "economic · honored",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -33029,8 +33201,12 @@
       "block": "DS-WAR-2",
       "pool": "economic · strained",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -33078,8 +33254,12 @@
       "block": "DS-WAR-2",
       "pool": "economic · defaulted",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -33127,8 +33307,12 @@
       "block": "DS-WAR-2",
       "pool": "relational · honored",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -33176,8 +33360,12 @@
       "block": "DS-WAR-2",
       "pool": "relational · strained",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -33225,8 +33413,12 @@
       "block": "DS-WAR-2",
       "pool": "relational · defaulted",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -33274,8 +33466,12 @@
       "block": "DS-WAR-2",
       "pool": "security · honored",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -33323,8 +33519,12 @@
       "block": "DS-WAR-2",
       "pool": "security · strained",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -33371,8 +33571,12 @@
       "block": "DS-WAR-2",
       "pool": "security · defaulted",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -33420,8 +33624,12 @@
       "block": "DS-WAR-2",
       "pool": "territorial · honored",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -33432,8 +33640,8 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 3,
-      "grammars": 3,
+      "variants": 5,
+      "grammars": 5,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -33469,8 +33677,12 @@
       "block": "DS-WAR-2",
       "pool": "territorial · strained",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -33480,8 +33692,8 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 3,
-      "grammars": 3,
+      "variants": 5,
+      "grammars": 4,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -33517,8 +33729,12 @@
       "block": "DS-WAR-2",
       "pool": "territorial · defaulted",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -33528,7 +33744,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 3,
+      "variants": 4,
       "grammars": 1,
       "predicate": [],
       "branchReads": [],
@@ -33565,8 +33781,12 @@
       "block": "DS-WAR-2",
       "pool": "political · honored",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -33613,8 +33833,12 @@
       "block": "DS-WAR-2",
       "pool": "political · strained",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -33661,8 +33885,12 @@
       "block": "DS-WAR-2",
       "pool": "political · defaulted",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -33710,8 +33938,12 @@
       "block": "DS-WAR-2",
       "pool": "informational · honored",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -33759,8 +33991,12 @@
       "block": "DS-WAR-2",
       "pool": "informational · strained",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -33807,8 +34043,12 @@
       "block": "DS-WAR-2",
       "pool": "informational · defaulted",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -33856,8 +34096,12 @@
       "block": "DS-WAR-2",
       "pool": "sovereignty · honored",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -33905,8 +34149,12 @@
       "block": "DS-WAR-2",
       "pool": "sovereignty · strained",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -33953,8 +34201,12 @@
       "block": "DS-WAR-2",
       "pool": "sovereignty · defaulted",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -34001,8 +34253,12 @@
       "block": "DS-WAR-2",
       "pool": "generic floor · honored",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -34049,8 +34305,12 @@
       "block": "DS-WAR-2",
       "pool": "generic floor · strained",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -34097,8 +34357,12 @@
       "block": "DS-WAR-2",
       "pool": "generic floor · defaulted",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -34145,8 +34409,12 @@
       "block": "DS-WAR-2",
       "pool": "fraying set on a term with time still to run",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -34215,8 +34483,12 @@
       "block": "DS-WAR-2",
       "pool": "document-level: the treaty runs out within the year",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -34289,8 +34561,12 @@
       "block": "DS-WAR-2",
       "pool": "document-level: the town is the LOSER side",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -34359,8 +34635,12 @@
       "block": "DS-WAR-2",
       "pool": "document-level: the town is the VICTOR side",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -34427,8 +34707,12 @@
       "block": "DS-WAR-3",
       "pool": "*",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -36033,8 +36317,12 @@
       "block": "DS-FTH-1",
       "pool": "PATRON: rankAxis: major",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -36045,7 +36333,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 3,
+      "variants": 4,
       "grammars": 3,
       "predicate": [],
       "branchReads": [],
@@ -36084,8 +36372,12 @@
       "block": "DS-FTH-1",
       "pool": "PATRON: rankAxis: minor",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -36135,8 +36427,12 @@
       "block": "DS-FTH-1",
       "pool": "PATRON: rankAxis: cult",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -36147,7 +36443,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 3,
+      "variants": 4,
       "grammars": 2,
       "predicate": [],
       "branchReads": [],
@@ -36186,8 +36482,12 @@
       "block": "DS-FTH-1",
       "pool": "CULTS: cults[] present beneath the patron",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -36237,8 +36537,12 @@
       "block": "DS-FTH-1",
       "pool": "DEVOTION: devout",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -36285,8 +36589,12 @@
       "block": "DS-FTH-1",
       "pool": "DEVOTION: faithful",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -36333,8 +36641,12 @@
       "block": "DS-FTH-1",
       "pool": "DEVOTION: observant",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -36381,8 +36693,12 @@
       "block": "DS-FTH-1",
       "pool": "DEVOTION: lukewarm",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -36429,8 +36745,12 @@
       "block": "DS-FTH-1",
       "pool": "DEVOTION: secular",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -36477,8 +36797,12 @@
       "block": "DS-FTH-1",
       "pool": "ARC: trend: rising",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -36523,8 +36847,12 @@
       "block": "DS-FTH-1",
       "pool": "ARC: trend: falling",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -36569,8 +36897,12 @@
       "block": "DS-FTH-1",
       "pool": "ARC: trend: steady",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -36615,8 +36947,12 @@
       "block": "DS-FTH-1",
       "pool": "STANDINGS: the patron dominant",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -36678,8 +37014,12 @@
       "block": "DS-FTH-1",
       "pool": "STANDINGS: the patron pressed by a near rival",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -36741,8 +37081,12 @@
       "block": "DS-FTH-1",
       "pool": "STANDINGS: a plural field, no majority",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -36801,8 +37145,12 @@
       "block": "DS-FTH-1",
       "pool": "SINK: unaffiliated present, arc falling",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -36873,8 +37221,12 @@
       "block": "DS-FTH-1",
       "pool": "SINK: unaffiliated present, arc rising",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -36937,8 +37289,12 @@
       "block": "DS-FTH-1",
       "pool": "MANDATE: contested, or patron security below the floor",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -37001,8 +37357,12 @@
       "block": "DS-FTH-1",
       "pool": "MANDATE: a dominant church",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -37065,8 +37425,12 @@
       "block": "DS-FTH-1",
       "pool": "MANDATE: a measure of divine mandate",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -37127,8 +37491,12 @@
       "block": "DS-FTH-1",
       "pool": "live: false",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -37175,13 +37543,21 @@
       "block": "DS-FTH-2",
       "pool": "PRIVATE DOSSIER",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
       ],
       "slotsNamed": [
+        "cleric",
+        "faction",
+        "houses",
+        "observance",
         "settlement"
       ],
       "slotsWithoutProvider": [],
@@ -37231,14 +37607,21 @@
       "block": "DS-FTH-2",
       "pool": "PUBLIC / SHARED DOSSIER",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
       ],
       "slotsNamed": [
-        "settlement"
+        "cleric",
+        "faction",
+        "houses",
+        "observance"
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
@@ -37279,8 +37662,12 @@
       "block": "DS-FTH-3",
       "pool": "STANDING: cult",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -37329,8 +37716,12 @@
       "block": "DS-FTH-3",
       "pool": "STANDING: established",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -37381,8 +37772,12 @@
       "block": "DS-FTH-3",
       "pool": "STANDING: ascendant",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -37431,8 +37826,12 @@
       "block": "DS-FTH-3",
       "pool": "NICHE: slots saturated at tier capacity",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -37480,8 +37879,12 @@
       "block": "DS-FTH-3",
       "pool": "NICHE: slots open",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -37529,8 +37932,12 @@
       "block": "DS-FTH-3",
       "pool": "NICHE: the patron's niche carries a contestant",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -37613,8 +38020,12 @@
       "block": "DS-FTH-3",
       "pool": "NICHE: every niche uncontested",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -37687,8 +38098,12 @@
       "block": "DS-FTH-3",
       "pool": "LEGITIMACY: secure",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -37740,8 +38155,12 @@
       "block": "DS-FTH-3",
       "pool": "LEGITIMACY: established",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -37789,8 +38208,12 @@
       "block": "DS-FTH-3",
       "pool": "LEGITIMACY: tenuous",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -37838,8 +38261,12 @@
       "block": "DS-FTH-3",
       "pool": "LEGITIMACY: contested",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -37887,8 +38314,12 @@
       "block": "DS-FTH-3",
       "pool": "FALL: displaced",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -37938,8 +38369,12 @@
       "block": "DS-FTH-3",
       "pool": "FALL: discredited",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -37987,8 +38422,12 @@
       "block": "DS-FTH-3",
       "pool": "FALL: imposed",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -38037,8 +38476,12 @@
       "block": "DS-FTH-3",
       "pool": "FALL: suppressed",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -38086,8 +38529,12 @@
       "block": "DS-FTH-3",
       "pool": "PANTHEON RANK: Cult",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -38135,8 +38582,12 @@
       "block": "DS-FTH-3",
       "pool": "PANTHEON RANK: Minor",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -38184,8 +38635,12 @@
       "block": "DS-FTH-3",
       "pool": "PANTHEON RANK: Major",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -38233,8 +38688,12 @@
       "block": "DS-FTH-3",
       "pool": "TEMPLE WEALTH: rich",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -38287,8 +38746,12 @@
       "block": "DS-FTH-3",
       "pool": "TEMPLE WEALTH: modest",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -38340,8 +38803,12 @@
       "block": "DS-FTH-3",
       "pool": "TEMPLE WEALTH: drawn down",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -38393,8 +38860,12 @@
       "block": "DS-FTH-3",
       "pool": "COVERT CONGREGATION: deities[ref].covert present",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -38443,8 +38914,12 @@
       "block": "DS-FTH-3",
       "pool": "PILGRIM SEASON: heavy",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -38495,8 +38970,12 @@
       "block": "DS-FTH-3",
       "pool": "PILGRIM SEASON: thin",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -38542,8 +39021,12 @@
       "block": "DS-FTH-3",
       "pool": "PILGRIM SEASON: suppressed by road danger",
       "slotsFilled": [
+        "cleric",
         "counterpart",
         "creed",
+        "faction",
+        "houses",
+        "observance",
         "rival_creed",
         "settlement",
         "term"
@@ -38817,7 +39300,7 @@
         "DS-GEN-3 :: scores.magical: WEAK",
         "DS-GEN-3 :: scores.magical: CRITICAL"
       ],
-      "variants": 60,
+      "variants": 62,
       "grammars": 30,
       "blocks": [
         "DS-GEN-3"
@@ -38992,7 +39475,7 @@
       "pools": [
         "DS-ECO-9 :: BLOCKADED"
       ],
-      "variants": 3,
+      "variants": 4,
       "grammars": 2,
       "blocks": [
         "DS-ECO-9"
@@ -39242,6 +39725,17 @@
       ]
     },
     {
+      "fact": "magicAbsent",
+      "pools": [
+        "DS-DEF-9 :: magicDependency false, availability absent"
+      ],
+      "variants": 3,
+      "grammars": 2,
+      "blocks": [
+        "DS-DEF-9"
+      ]
+    },
+    {
       "fact": "marker.yearsAgo",
       "pools": [
         "DS-GEN-9 :: recency framing: Recent",
@@ -39387,7 +39881,7 @@
         "DS-GEN-3 :: foodSecurity.label: Deficit",
         "DS-GEN-3 :: foodSecurity.label: Deficit × Active Famine"
       ],
-      "variants": 24,
+      "variants": 25,
       "grammars": 11,
       "blocks": [
         "DS-GEN-3"
@@ -39418,7 +39912,7 @@
         "DS-GEN-3 :: defenseProfile.readiness.label: Vulnerable",
         "DS-GEN-3 :: defenseProfile.readiness.label: Undefended"
       ],
-      "variants": 12,
+      "variants": 14,
       "grammars": 7,
       "blocks": [
         "DS-GEN-3"
@@ -39536,8 +40030,8 @@
         "DS-STR-1 :: WARTIME",
         "DS-STR-1 :: MASS MIGRATION"
       ],
-      "variants": 90,
-      "grammars": 36,
+      "variants": 98,
+      "grammars": 37,
       "blocks": [
         "DS-STR-1"
       ]
@@ -39611,7 +40105,7 @@
         "DS-STR-2 :: ORIGIN: arcane_burnout",
         "DS-STR-2 :: ORIGIN: leyline_silence"
       ],
-      "variants": 51,
+      "variants": 54,
       "grammars": 28,
       "blocks": [
         "DS-STR-2"
@@ -39910,6 +40404,15 @@
         "modifierMounts": []
       },
       {
+        "field": "magicAbsent",
+        "mountsSpine": 1,
+        "mountsModifier": 0,
+        "spineTabs": [
+          "viability"
+        ],
+        "modifierMounts": []
+      },
+      {
         "field": "magicDependency",
         "mountsSpine": 1,
         "mountsModifier": 0,
@@ -39942,15 +40445,6 @@
         "mountsModifier": 0,
         "spineTabs": [
           "power"
-        ],
-        "modifierMounts": []
-      },
-      {
-        "field": "namedChain",
-        "mountsSpine": 1,
-        "mountsModifier": 0,
-        "spineTabs": [
-          "viability"
         ],
         "modifierMounts": []
       },
@@ -41038,6 +41532,44 @@
         ]
       },
       {
+        "field": "readings.recordClean",
+        "mountsSpine": 1,
+        "mountsModifier": 28,
+        "spineTabs": [
+          "viability"
+        ],
+        "modifierMounts": [
+          "economics.commercialProfile",
+          "economics.craftReason",
+          "economics.economyTile",
+          "economics.exportPosture",
+          "economics.foodSecurity",
+          "economics.foodTile",
+          "economics.prosperityHeader",
+          "economics.seasonTile",
+          "economics.shadowEconomy",
+          "economics.tradeFlow",
+          "history.founded",
+          "history.identity",
+          "history.record",
+          "overview.activeConditions",
+          "overview.conflicts",
+          "overview.crisisBanners",
+          "overview.ground",
+          "overview.institutions",
+          "overview.market",
+          "overview.notableConnection",
+          "overview.origin",
+          "overview.populationDirection",
+          "overview.situation",
+          "overview.steadings",
+          "overview.stressorLifecycle",
+          "overview.systemsHealth",
+          "overview.warnings",
+          "relationships.network"
+        ]
+      },
+      {
         "field": "readings.relationships",
         "mountsSpine": 1,
         "mountsModifier": 16,
@@ -41898,23 +42430,23 @@
       ],
       [
         "economics",
-        38
+        39
       ],
       [
         "history",
-        34
+        35
       ],
       [
         "plot_hooks",
-        34
+        35
       ],
       [
         "relationships",
-        34
+        35
       ],
       [
         "overview",
-        27
+        28
       ],
       [
         "resources",
@@ -42006,10 +42538,10 @@
     },
     {
       "block": "DS-DEF-9",
-      "spines": 3,
+      "spines": 4,
       "facts": 2,
-      "spinesReachedBp": 6667,
-      "meanReachBp": 3333
+      "spinesReachedBp": 5000,
+      "meanReachBp": 2500
     },
     {
       "block": "DS-ECO-1",
@@ -42091,9 +42623,9 @@
     {
       "block": "DS-GEN-11",
       "spines": 5,
-      "facts": 2,
+      "facts": 3,
       "spinesReachedBp": 10000,
-      "meanReachBp": 5000
+      "meanReachBp": 5333
     },
     {
       "block": "DS-GEN-12",
@@ -42782,21 +43314,21 @@
     },
     {
       "block": "DS-DEF-9",
-      "spines": 3,
+      "spines": 4,
       "facts": 2,
-      "spinesReachedBp": 6667,
-      "meanReachBp": 3333,
+      "spinesReachedBp": 5000,
+      "meanReachBp": 2500,
       "byFact": [
         {
-          "field": "magicDependency",
-          "attach": []
-        },
-        {
-          "field": "namedChain",
+          "field": "magicAbsent",
           "attach": [
             "magicDependency true",
             "magicDependency true, with a NAMED dependent chain"
           ]
+        },
+        {
+          "field": "magicDependency",
+          "attach": []
         }
       ]
     },
@@ -43229,12 +43761,20 @@
     {
       "block": "DS-GEN-11",
       "spines": 5,
-      "facts": 2,
+      "facts": 3,
       "spinesReachedBp": 10000,
-      "meanReachBp": 5000,
+      "meanReachBp": 5333,
       "byFact": [
         {
           "field": "readings.criticalIssueCount",
+          "attach": [
+            "viable: true: the arithmetic closes",
+            "the MARGINAL arm: neither verdict returned",
+            "viable: false: the arithmetic does not close"
+          ]
+        },
+        {
+          "field": "readings.recordClean",
           "attach": [
             "viable: true: the arithmetic closes",
             "the MARGINAL arm: neither verdict returned",
@@ -44534,7 +45074,7 @@
   ],
   "factBudget": {
     "zeroK": 49,
-    "executable": 340,
+    "executable": 341,
     "notExecutable": 368,
     "byBlock": [
       [
@@ -44674,7 +45214,7 @@
         "DS-DEF-9",
         {
           "zeroK": 0,
-          "spines": 3
+          "spines": 4
         }
       ],
       [
@@ -44903,18 +45443,18 @@
       ],
       [
         1,
-        79
+        82
       ],
       [
         2,
-        212
+        210
       ]
     ]
   },
   "grains": {
     "branch": {
       "zeroK": 49,
-      "executable": 340,
+      "executable": 341,
       "notExecutable": 368,
       "histogram": [
         [
@@ -44931,11 +45471,11 @@
         ],
         [
           1,
-          79
+          82
         ],
         [
           2,
-          212
+          210
         ]
       ],
       "blocksWithSpine": 50,
@@ -44962,7 +45502,7 @@
         "DS-STR-1",
         "DS-WAR-3"
       ],
-      "readPaths": 551,
+      "readPaths": 555,
       "modifierEligibleFactsByTab": [
         [
           "viability",
@@ -44970,23 +45510,23 @@
         ],
         [
           "economics",
-          38
+          39
         ],
         [
           "history",
-          34
+          35
         ],
         [
           "plot_hooks",
-          34
+          35
         ],
         [
           "relationships",
-          34
+          35
         ],
         [
           "overview",
-          27
+          28
         ],
         [
           "resources",
@@ -45019,8 +45559,8 @@
       ]
     },
     "function": {
-      "zeroK": 121,
-      "executable": 340,
+      "zeroK": 125,
+      "executable": 341,
       "notExecutable": 368,
       "histogram": [
         [
@@ -45041,15 +45581,15 @@
         ],
         [
           0,
-          66
+          70
         ],
         [
           1,
-          87
+          86
         ],
         [
           2,
-          132
+          130
         ]
       ],
       "blocksWithSpine": 50,
@@ -45080,7 +45620,7 @@
         "DS-STR-1",
         "DS-WAR-3"
       ],
-      "readPaths": 779,
+      "readPaths": 787,
       "modifierEligibleFactsByTab": [
         [
           "viability",
@@ -45088,23 +45628,23 @@
         ],
         [
           "economics",
-          38
+          39
         ],
         [
           "history",
-          34
+          35
         ],
         [
           "plot_hooks",
-          34
+          35
         ],
         [
           "relationships",
-          34
+          35
         ],
         [
           "overview",
-          26
+          27
         ],
         [
           "resources",
@@ -45424,19 +45964,19 @@
     ],
     "summary": {
       "rows": {
-        "LICENSED": 113,
+        "LICENSED": 114,
         "OFFICE": 3,
         "SOURCE-UNRESOLVED": 592
       },
       "fields": {
-        "LICENSED": 190,
+        "LICENSED": 191,
         "OFFICE": 5,
-        "SOURCE-UNRESOLVED": 416
+        "SOURCE-UNRESOLVED": 419
       },
       "byKind": [
         [
           "muster",
-          61
+          62
         ],
         [
           "market",
@@ -45476,7 +46016,7 @@
         ]
       ],
       "unresolvedGrounds": {
-        "no-mapping": 416,
+        "no-mapping": 419,
         "no-institution-in-roster": 0
       },
       "twoSourceRows": 10,
@@ -46835,8 +47375,8 @@
       "leafBoth": 0,
       "leafEither": 2,
       "leafRows": [],
-      "deskRoots": 91,
-      "deskSegments": 193
+      "deskRoots": 92,
+      "deskSegments": 194
     }
   },
   "ratifiedAliases": {
@@ -47041,6 +47581,11 @@
       "roll",
       "rolls"
     ],
+    "magicAbsent": [
+      "muster",
+      "roll",
+      "rolls"
+    ],
     "magicDependency": [
       "muster",
       "roll",
@@ -47049,11 +47594,6 @@
     "marker.yearsAgo": [
       "memory",
       "word"
-    ],
-    "namedChain": [
-      "muster",
-      "roll",
-      "rolls"
     ],
     "navy": [
       "book",
@@ -47124,6 +47664,11 @@
       "book",
       "books",
       "record"
+    ],
+    "readings.recordClean": [
+      "books",
+      "chest",
+      "purse"
     ],
     "readings.structuralSuggestions": [
       "book",
@@ -48156,7 +48701,7 @@
       "subject": "Economic Backing: Well-funded",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -48188,7 +48733,7 @@
       "subject": "Arcane Support: Present",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -48465,6 +49010,16 @@
       "fields": [],
       "readingFunction": "magicDependencyPoolKey",
       "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-DEF-9",
+      "subject": "magicDependency false, availability absent",
+      "fields": [
+        "magicAbsent"
+      ],
+      "readingFunction": "magicDependencyPoolKey",
+      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -48794,7 +49349,7 @@
       "subject": "SHORTAGE × not trade-dependent",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -49050,7 +49605,7 @@
       "subject": "PROSPEROUS",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -49116,7 +49671,7 @@
         "eco.foodSecurity.stockpile.blockaded"
       ],
       "readingFunction": "foodSecurityPoolKey",
-      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -49506,7 +50061,7 @@
       "subject": "TRADE PROFILE: local production listed",
       "fields": [],
       "readingFunction": "tradeProfilePoolKey",
-      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -49884,7 +50439,7 @@
         "axis"
       ],
       "readingFunction": "systemsHealthScorePoolKey",
-      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -49894,7 +50449,7 @@
         "axis"
       ],
       "readingFunction": "systemsHealthScorePoolKey",
-      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -50184,7 +50739,7 @@
         "text(label) (via READINESS_POOL_OF in generalStateProse.js)"
       ],
       "readingFunction": "READINESS_POOL_OF",
-      "count": "2 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -50214,7 +50769,7 @@
         "text(label) (via READINESS_POOL_OF in generalStateProse.js)"
       ],
       "readingFunction": "READINESS_POOL_OF",
-      "count": "2 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -50274,7 +50829,7 @@
         "text(label) (via FOOD_POOL_OF in generalStateProse.js)"
       ],
       "readingFunction": "FOOD_POOL_OF",
-      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "5 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -50858,7 +51413,7 @@
       "subject": "category safety: the streets are the opening",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "5 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -51380,7 +51935,7 @@
       "subject": "siege matched",
       "fields": [],
       "readingFunction": "stabilityPoolKey",
-      "count": "4 variant(s) · 4 grammar(s) · slots {faction, seat, settlement}"
+      "count": "6 variant(s) · 5 grammar(s) · slots {faction, seat, settlement}"
     },
     {
       "tier": "COVERED",
@@ -51662,7 +52217,7 @@
       "subject": "neutral baseline (nothing pulling either way)",
       "fields": [],
       "readingFunction": "legitimacyReadingPoolKey",
-      "count": "3 variant(s) · 3 grammar(s) · slots {seat, settlement}"
+      "count": "4 variant(s) · 4 grammar(s) · slots {seat, settlement}"
     },
     {
       "tier": "THIN",
@@ -51814,7 +52369,7 @@
       "subject": "glue threat (a common danger at the walls)",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -51928,7 +52483,7 @@
         "token (via CRISIS_POOL_OF in stressorsStateProse.js)"
       ],
       "readingFunction": "CRISIS_POOL_OF",
-      "count": "6 variant(s) · 4 grammar(s) · slots {settlement}"
+      "count": "10 variant(s) · 5 grammar(s) · slots {settlement}"
     },
     {
       "tier": "COVERED",
@@ -51948,7 +52503,7 @@
         "token (via CRISIS_POOL_OF in stressorsStateProse.js)"
       ],
       "readingFunction": "CRISIS_POOL_OF",
-      "count": "6 variant(s) · 3 grammar(s) · slots {settlement}"
+      "count": "7 variant(s) · 3 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -51968,7 +52523,7 @@
         "token (via CRISIS_POOL_OF in stressorsStateProse.js)"
       ],
       "readingFunction": "CRISIS_POOL_OF",
-      "count": "6 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "7 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -52018,7 +52573,7 @@
         "token (via CRISIS_POOL_OF in stressorsStateProse.js)"
       ],
       "readingFunction": "CRISIS_POOL_OF",
-      "count": "6 variant(s) · 3 grammar(s) · slots {settlement}"
+      "count": "7 variant(s) · 3 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -52068,7 +52623,7 @@
         "token (via CRISIS_POOL_OF in stressorsStateProse.js)"
       ],
       "readingFunction": "CRISIS_POOL_OF",
-      "count": "6 variant(s) · 2 grammar(s) · slots {band, settlement}"
+      "count": "7 variant(s) · 2 grammar(s) · slots {band, settlement}"
     },
     {
       "tier": "THIN",
@@ -52182,7 +52737,7 @@
       "subject": "SYNERGY: famine × siege",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 2 grammar(s) · slots {none}"
+      "count": "4 variant(s) · 2 grammar(s) · slots {none}"
     },
     {
       "tier": "THIN",
@@ -52264,7 +52819,7 @@
         "worldStressor.originContext.variant"
       ],
       "readingFunction": "stressorOriginPoolKey",
-      "count": "3 variant(s) · 3 grammar(s) · slots {none}"
+      "count": "4 variant(s) · 3 grammar(s) · slots {none}"
     },
     {
       "tier": "THIN",
@@ -52294,7 +52849,7 @@
         "worldStressor.originContext.variant"
       ],
       "readingFunction": "stressorOriginPoolKey",
-      "count": "3 variant(s) · 2 grammar(s) · slots {none}"
+      "count": "5 variant(s) · 2 grammar(s) · slots {none}"
     },
     {
       "tier": "THIN",
@@ -52530,7 +53085,7 @@
       "subject": "FAMILY: war layer, aggressor side",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 3 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 4 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -52574,7 +53129,7 @@
       "subject": "statusLabel: At war (no front at the walls, no army abroad)",
       "fields": [],
       "readingFunction": "warStatusPoolKey",
-      "count": "3 variant(s) · 2 grammar(s) · slots {counterpart, settlement}"
+      "count": "4 variant(s) · 2 grammar(s) · slots {counterpart, settlement}"
     },
     {
       "tier": "THIN",
@@ -52698,7 +53253,7 @@
       "subject": "feasibility harassment",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 2 grammar(s) · slots {counterpart, settlement}"
+      "count": "4 variant(s) · 2 grammar(s) · slots {counterpart, settlement}"
     },
     {
       "tier": "COVERED",
@@ -52714,7 +53269,7 @@
       "subject": "feasibility require_betrayal",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 3 grammar(s) · slots {counterpart, settlement}"
+      "count": "6 variant(s) · 5 grammar(s) · slots {counterpart, settlement}"
     },
     {
       "tier": "COVERED",
@@ -52802,7 +53357,7 @@
       "subject": "territorial · honored",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 3 grammar(s) · slots {counterpart, settlement}"
+      "count": "5 variant(s) · 5 grammar(s) · slots {counterpart, settlement}"
     },
     {
       "tier": "THIN",
@@ -52810,7 +53365,7 @@
       "subject": "territorial · strained",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 3 grammar(s) · slots {settlement}"
+      "count": "5 variant(s) · 4 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -52818,7 +53373,7 @@
       "subject": "territorial · defaulted",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -53252,7 +53807,7 @@
       "subject": "PATRON: rankAxis: major",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 3 grammar(s) · slots {creed, settlement}"
+      "count": "4 variant(s) · 3 grammar(s) · slots {creed, settlement}"
     },
     {
       "tier": "THIN",
@@ -53268,7 +53823,7 @@
       "subject": "PATRON: rankAxis: cult",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 2 grammar(s) · slots {creed, settlement}"
+      "count": "4 variant(s) · 2 grammar(s) · slots {creed, settlement}"
     },
     {
       "tier": "COVERED",
@@ -53423,20 +53978,20 @@
       "count": "3 variant(s) · 3 grammar(s) · slots {settlement}"
     },
     {
-      "tier": "THIN",
+      "tier": "COVERED",
       "block": "DS-FTH-2",
       "subject": "PRIVATE DOSSIER",
       "fields": [],
       "readingFunction": "faithTeaserPoolKey",
-      "count": "4 variant(s) · 3 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 3 grammar(s) · slots {cleric, faction, houses, observance, settlement}"
     },
     {
-      "tier": "THIN",
+      "tier": "COVERED",
       "block": "DS-FTH-2",
       "subject": "PUBLIC / SHARED DOSSIER",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "4 variant(s) · 3 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 3 grammar(s) · slots {cleric, faction, houses, observance}"
     },
     {
       "tier": "COVERED",

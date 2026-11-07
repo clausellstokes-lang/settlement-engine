@@ -117,19 +117,22 @@ describe('WR-2 — Wizard News audience projection', () => {
       .toEqual(expect.arrayContaining(['suppressed-reading', 'explicit-dm-only']));
   });
 
-  it.each(['player', 'public'])('removes covert and explicit DM-only beats for %s readers', (audience) => {
-    const projected = projectWizardNewsForAudience(privacyFeed, audience);
-    expect(projected).toMatchObject({
-      schemaVersion: privacyFeed.schemaVersion,
-      currentTick: privacyFeed.currentTick,
-      updatedAt: privacyFeed.updatedAt,
-    });
-    expect(projected.entries.map((entry) => entry.id)).toEqual(['public-crossing']);
+  // Each-family cure (2026-11-05, LANDING-6): both audiences loop inside one parameterless test.
+  it('removes covert and explicit DM-only beats for player and public readers', () => {
+    for (const audience of ['player', 'public']) {
+      const projected = projectWizardNewsForAudience(privacyFeed, audience);
+      expect(projected, audience).toMatchObject({
+        schemaVersion: privacyFeed.schemaVersion,
+        currentTick: privacyFeed.currentTick,
+        updatedAt: privacyFeed.updatedAt,
+      });
+      expect(projected.entries.map((entry) => entry.id), audience).toEqual(['public-crossing']);
 
-    const letter = composeChroniclersLetter({ wizardNews: privacyFeed, audience });
-    const ids = letter.sections.flatMap((section) => section.lines).map((line) => line.id);
-    expect(ids).toEqual(['public-crossing']);
-    expect(letterToPlainText(letter)).not.toMatch(/books refuse|private reading/i);
+      const letter = composeChroniclersLetter({ wizardNews: privacyFeed, audience });
+      const ids = letter.sections.flatMap((section) => section.lines).map((line) => line.id);
+      expect(ids, audience).toEqual(['public-crossing']);
+      expect(letterToPlainText(letter), audience).not.toMatch(/books refuse|private reading/i);
+    }
   });
 });
 

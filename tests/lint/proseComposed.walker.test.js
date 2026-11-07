@@ -24,6 +24,28 @@
  * rather than as an exact integer, because a heuristic pinned exactly becomes a re-record every
  * car pays and nobody reads.
  *
+ * ── OWED (LANDING-7 R-F5, the byte ceiling's idiom, rule 38): the under-claim ceiling is
+ * 1,282 + 26 = 1,308, and the 26 are OWED, not forgiven. 26 under-claims owed by the pools
+ * whose declared reads exceed what their lines say; bought back by the census wave that narrows
+ * per-line reads for the economics, axis, score and war surfaces (DESIGN_POOL_CENSUS §4.2 steps
+ * 4–5). Cause: F10's WALLS-WORD twins (`4a49ae5bb`) inherit their pools' per-line debt — each
+ * fails on the same ordinary fields (`eco.*`, `axis`, `score`, `war.status.*`) that three to
+ * five unmarked sibling lines of its pool also fail on (+25), with +3 / +1 / +1 positive reads
+ * beside them, less R-F4's one silence and R-F6's one reword. The arm prints the owed figure
+ * beside the ceiling on every run; the buy-back lowers OWED, never the base.
+ *
+ * ── A DECLARED ABSENCE IS CLAIMED BY SILENCE (LANDING-7 R-F4) ──────────────────────
+ * A0b's under-claim limb reads "the text claims every declared field", which is right for a
+ * POSITIVE declaration and wrong for a NEGATIVE one: a line declaring a fact ABSENT is claimed
+ * by not naming it. `composedWalker.js` states the two typed shapes in its header (an
+ * absence-named field the predicate holds truthy; an authored `no <fact>` mark on the variant).
+ * Such a field is answered on the REPORT channel as `claimed by silence`, counted and printed
+ * below, never filtered; plants convict both shapes' positive twins. Measured at R-F4's landing
+ * it answers ONE row (DS-DEF-9's `availability absent` pool); the WALLS-WORD twins' under-claims
+ * are all POSITIVE reads of their pools, so the `no walls` shape answers none of them. R-F6
+ * then reworded that one row's line (vid 2) to name the dependency it reads, so on the shipped
+ * corpus the rule answers NONE today; plants 4 and 5 hold it.
+ *
  * @enforced-by scripts/mutation-sweep.sh (plant 97)
  */
 import { readFileSync } from 'node:fs';
@@ -49,7 +71,6 @@ import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { DOSSIER_RELATIONS } from '../../src/data/dossierRelations.generated.js';
 import { capturedRulingStructure, HOLDER_RECORDS, sourceOfForTown } from '../../src/domain/prose/holderTable.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
-import { birth, ensureLaws } from '../../scripts/audit/soak-review/corpus.mjs';
 import { INSTITUTION_SERVICES } from '../../src/data/institutionServices.js';
 import { FACTION_ROLES } from '../../src/generators/factionRoles.js';
 import * as ROLE_CATALOG from '../../src/generators/npc/factionRoleCatalog.js';
@@ -180,8 +201,8 @@ function unitRowOf(unit, texts) {
 
 describe('GUARD THE GUARD — the inputs this file judges are the real ones', () => {
   it('the corpus, the census and the relation leaf are the shipped ones, not empty stubs', () => {
-    expect(corpus.length, 'the shipped state corpus').toBe(2266);
-    expect(census.rows.length, 'the committed wiring census').toBe(708);
+    expect(corpus.length, 'the shipped state corpus').toBe(2310);
+    expect(census.rows.length, 'the committed wiring census').toBe(709);
     expect(Object.keys(DOSSIER_RELATIONS).length, 'the committed relation leaf').toBe(165);
     // Every arm this module owns is exercised below; a roster that quietly shrank would make
     // a whole describe disappear with nothing red.
@@ -349,6 +370,53 @@ describe('A0b — the text claims every declared field and no other', () => {
     expect(negation[0].description).toMatch(/discriminates on a fact it does not state/);
   });
 
+  it('⛔ PLANT 4 — AN ABSENCE IS CLAIMED BY SILENCE, and only an absence (R-F4)', () => {
+    // A line reached only where magic is ABSENT says nothing of magic, and that is its whole
+    // point: the field is answered on the REPORT channel, never as an under-claim.
+    const absent = armA0b({
+      id: 'absent',
+      text: 'Nobody here works wards for a living.',
+      reads: ['magicAbsent'],
+      universe: ['magicAbsent'],
+      predicate: [{ field: 'magicAbsent', op: 'truthy', value: '(no literal)' }],
+    });
+    expect(absent.fails).toEqual([]);
+    expect(absent.reports.map((f) => `${f.subject}:${f.value}`))
+      .toEqual(['claimed by silence:magicAbsent (magicAbsent held truthy)']);
+    // ⛔ THE POSITIVE TWIN: the SAME field with no predicate holding it truthy declares nothing
+    // absent, so its silence is an under-claim exactly as before.
+    const unheld = armA0b({ id: 'unheld', text: 'Nobody here works wards for a living.', reads: ['magicAbsent'], predicate: [] });
+    expect(unheld.fails.map((f) => `${f.subject}:${f.value}`)).toEqual(['under-claim:magicAbsent']);
+    // ⛔ A POSITIVE FIELD HELD TRUTHY IS NOT AN ABSENCE, whatever the predicate says.
+    const positive = armA0b({
+      id: 'positive', text: 'The town is quiet.', reads: ['walls'],
+      predicate: [{ field: 'walls', op: 'truthy', value: '(no literal)' }],
+    });
+    expect(positive.fails.map((f) => f.subject)).toEqual(['under-claim']);
+  });
+
+  it('⛔ PLANT 5 — the authored `no <fact>` twin excludes its fact, and nothing else', () => {
+    const twin = (marks) => armA0b({
+      id: 'twin', text: 'The stores are sealed off.', reads: ['forces.walls.present', 'eco.stockpile'], marks,
+    });
+    // The wall-free twin is silent on walls by construction: claimed by silence.
+    expect(twin(['no walls']).reports.map((f) => f.value)).toEqual(['forces.walls.present (mark `no walls`)']);
+    // ...but a POSITIVE read of its pool the text never makes is still the twin's under-claim.
+    expect(twin(['no walls']).fails.map((f) => `${f.subject}:${f.value}`)).toEqual(['under-claim:eco.stockpile']);
+    // ⛔ AND THE SIBLING MARKED `walls` CLAIMS NOTHING BY SILENCE.
+    expect(twin(['walls']).reports).toEqual([]);
+    expect(twin(['walls']).fails.map((f) => f.value)).toEqual(['forces.walls.present', 'eco.stockpile']);
+  });
+
+  it('⛔ AN ABSENCE THE PREDICATE HOLDS FALSE STAYS AN IMPLICIT NEGATION — the limb is read first', () => {
+    const out = armA0b({
+      id: 'neg', text: 'The town is quiet.', reads: ['walls'], marks: ['no walls'],
+      predicate: [{ field: 'walls', op: 'falsy', value: '(no literal)' }],
+    });
+    expect(out.fails.map((f) => f.subject)).toEqual(['implicit-negation']);
+    expect(out.reports).toEqual([]);
+  });
+
   it('NOT-EXECUTABLE twice over, each naming its own column', () => {
     const noReading = armA0b({ id: 'none', text: 'The walls stand.', reads: [] });
     expect(noReading.fails).toEqual([]);
@@ -364,10 +432,20 @@ describe('A0b — the text claims every declared field and no other', () => {
   });
 
   it('⭐ THE SHIPPED CORPUS READING, printed and held SHRINK-ONLY', () => {
+    // ⛔ THE UNDER-CLAIM CEILING IS RE-KEYED WITH ITS CAUSE, NEVER SILENTLY RAISED (LANDING-7
+    // R-F5). 1,282 is the debt as it stood before the window; the 26 above it are F10's
+    // WALLS-WORD twins inheriting their pools' per-line debt (the twins fail on the same
+    // `eco.*` / `axis` / `score` / `war.status.*` fields as their unmarked siblings), and they
+    // are OWED to the census wave that narrows per-line reads (DESIGN_POOL_CENSUS §4.2 steps
+    // 4–5). The ceiling is the base plus the owed figure, both printed; a buy-back lowers OWED.
+    const UNDER_CLAIM_BASE = 1282;
+    const UNDER_CLAIM_OWED = 26;
+    const UNDER_CLAIM_CEILING = UNDER_CLAIM_BASE + UNDER_CLAIM_OWED;
     const tally = {
       'over-claim': 0, 'under-claim': 0, 'implicit-negation': 0,
     };
     let notExecutable = 0;
+    let silent = 0;
     /** @type {Set<string>} */
     const pools = new Set();
     for (const entry of corpus) {
@@ -378,18 +456,23 @@ describe('A0b — the text claims every declared field and no other', () => {
         reads: row ? row.reads : [],
         universe: row ? row.fieldsRead : [],
         predicate: row ? row.predicate : [],
+        // R-F4: the variant's own marks, so an authored `no <fact>` twin is read as one.
+        marks: entry.marks,
       });
       for (const finding of out.fails) {
         tally[finding.subject] += 1;
         pools.add(finding.id);
       }
+      silent += out.reports.filter((finding) => finding.subject === 'claimed by silence').length;
       notExecutable += out.notExecutable.length;
     }
     console.log(`\nA0b · the AUTHORING debt on the shipped corpus, before a byte of the rewrite moves`
       + `\n  variants walked      ${corpus.length}`
       + `\n  over-claims          ${tally['over-claim']}`
-      + `\n  under-claims         ${tally['under-claim']}`
+      + `\n  under-claims         ${tally['under-claim']}   ceiling ${UNDER_CLAIM_CEILING}`
+      + ` = ${UNDER_CLAIM_BASE} + ${UNDER_CLAIM_OWED} OWED (R-F5: the census wave buys them back)`
       + `\n  implicit negations   ${tally['implicit-negation']}`
+      + `\n  absences claimed by silence (R-F4, REPORT) ${silent}`
       + `\n  NOT-EXECUTABLE reads ${notExecutable}   pools carrying a finding ${pools.size}\n`);
     // NON-VACUITY FIRST: an arm reporting nothing on 2,266 variants has stopped reading.
     expect(tally['under-claim']).toBeGreaterThan(0);
@@ -397,7 +480,7 @@ describe('A0b — the text claims every declared field and no other', () => {
     // SHRINK-ONLY, and NOT an exact pin. The rewrite wave pays this debt down; a car that
     // ADDS a claim the census does not license reds here on the day it lands.
     expect(tally['over-claim']).toBeLessThanOrEqual(55);
-    expect(tally['under-claim']).toBeLessThanOrEqual(1282);
+    expect(tally['under-claim']).toBeLessThanOrEqual(UNDER_CLAIM_CEILING);
     expect(tally['implicit-negation']).toBeLessThanOrEqual(13);
     expect(pools.size).toBeLessThanOrEqual(240);
   });
@@ -1182,28 +1265,38 @@ describe('A13 — the PROVENANCE move, EXECUTABLE since the holder census landed
   // What changed at car 5c is that the TOWN path can now mint INTERESTED from a typed birth
   // fact, so the limb is reachable on real input and this arm reaches it with one.
   //
-  // ⚠ THE TOWN AND THE VARIANT ARE BOTH NAMED, AND BOTH ARE SHIPPED. The town is a soak-corpus
-  // town named by its index and seed; the variant is a real citing variant of the real corpus
-  // whose census row resolves to the TREASURY — a state organ. Before the re-key below, 17 of
-  // the 768 RATE towns put this exact row into INTERESTED; after it, 1 of the first 300 soak
-  // towns does, so the arm sits on a measured (and now rare) population, not a coincidence.
-  // RE-KEYED BY IDENTITY, WITH ITS CAUSE (lane REVIEW-INTAKE-2, chair ruling R2, 2026-11-06):
-  // rate-11-9 no longer reaches the limb. Cause: "a proxy is not a provider" (REVIEW-INTAKE
-  // unit 2) — the former proxy hosts (a Housing row, the Dwellings) roll their own one-row
-  // menu instead of an inn's five, so every later roll of the service stream forks, and on
-  // rate-11-9 the treasury row now resolves LICENSED. The arm is re-seated on the FIRST town of
-  // the soak corpus (`scripts/audit/soak-review/corpus.mjs`, soak1k-0 onward) on which the limb
-  // is still reached: soak1k-9 (a corrupted hills town whose Town hall holds the treasury; the
-  // only one of soak1k-0..299). The composed tip may move it again; that re-key is the
-  // landing seat's.
-  const CAPTURED_TREASURY_TOWN = Object.freeze({ soakIndex: 9, seed: 'soak1k-9' });
+  // ⚠ THE TOWN AND THE VARIANT ARE BOTH NAMED, AND BOTH ARE SHIPPED. The town is a rateGrid
+  // spec quoted with its seed; the variant is a real citing variant of the real corpus whose
+  // census row resolves to the TREASURY — a state organ. 17 of the 768 RATE towns put this
+  // exact row into INTERESTED, so the arm sits on a measured population and not on a
+  // coincidence.
+  const CAPTURED_TREASURY_TOWN = Object.freeze({
+    config: {
+      settType: 'town',
+      tradeRouteAccess: 'port',
+      monsterThreat: 'heartland',
+      culture: 'arabic',
+      terrainOverride: 'desert',
+    },
+    // rate-9-2 -> rate-11-9 on 2026-09-30, with tests/fixtures/tasteTowns.js INTERESTED_TOWNS: the
+    // same-seed shift left rate-9-2's Town hall without a tax service (urban band, ODQ §934.86).
+    // rate-11-9 -> rate-93-0 on 2026-11-06 (LANDING-7 lane G), with INTERESTED_TOWNS again and by
+    // identity with its cause: the X-46 train's compose 1264a8152 moved rate-11-9 out of capture
+    // (criminalCaptureState 'none'). Scanned at the landing tip in rateGrid's own order, taken with
+    // the grid's own config: 2 of the 128 town cells hold every captured precondition (rate-93-0 at
+    // index 372, rate-135-1); rate-93-0 is the first. The assertions are unchanged.
+    // rate-93-0 / soak1k-9 -> rate-69-0 on 2026-11-07 (REVIEW-INTAKE-LAND), by identity with its
+    // cause: the two 2026-11-06 re-keys (this arm to soak1k-9 by "a proxy is not a provider", and
+    // to rate-93-0 by the X-46 compose) met at the merge onto rung 1's tip; the same scan in
+    // rateGrid's order at the merged tip names rate-69-0 (index 276) first of three (rate-93-0,
+    // rate-135-1). The arm returns to the grid shape. The assertions are unchanged.
+    seed: 'rate-69-0',
+  });
 
-  it('⭐⭐ THE FAIL LIMB IS REACHABLE ON REAL INPUT: a citing variant whose holder this town has captured', async () => {
-    // Born exactly as the soak births it (the laws loaded once, then `birthConfig`).
-    await ensureLaws();
-    const born = birth(CAPTURED_TREASURY_TOWN.soakIndex);
-    expect(born.seed, 'the soak index names the seed the arm is pinned to').toBe(CAPTURED_TREASURY_TOWN.seed);
-    const town = born.settlement;
+  it('⭐⭐ THE FAIL LIMB IS REACHABLE ON REAL INPUT: a citing variant whose holder this town has captured', () => {
+    const town = generateSettlementPipeline(
+      CAPTURED_TREASURY_TOWN.config, null, { seed: CAPTURED_TREASURY_TOWN.seed, customContent: {} },
+    );
     expect(capturedRulingStructure(town).criminal, 'the named town\'s ruling structure is corrupted').toBe('corrupted');
     // A REAL SHIPPED CITING VARIANT, found in the corpus rather than written here.
     const entry = corpus.find((row) => row.block === 'DS-GEN-11'

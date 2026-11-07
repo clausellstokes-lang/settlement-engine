@@ -35,11 +35,11 @@ const clean = tasteTown(INTERESTED_TOWNS[1]);
 
 describe('the two fixture towns are the ones §R c-22 names, taken as the generator makes them', () => {
   it('the captured town carries the birth fact and the clean control does not', () => {
-    // Re-keyed by identity 2026-11-06 (REVIEW-INTAKE-3 R7): rate-11-9 -> rate-57-3. Cause: "a proxy
-    // is not a provider" — a Housing row rolls one service, so later rolls fork and rate-11-9's
-    // treasury lost its Town hall holder. See tests/fixtures/tasteTowns.js.
-    expect(INTERESTED_TOWNS[0].seed).toBe('rate-57-3');
-    expect(INTERESTED_TOWNS[1].seed).toBe('rate-3-2'); // was rate-3-0, re-keyed 2026-11-06 by the same cause
+    // Re-keyed by identity 2026-11-07 (REVIEW-INTAKE-LAND, the merge onto rung 1's tip): both
+    // sides' 2026-11-06 re-keys (rate-57-3 / rate-93-0) compose at the merged tip into rate-69-0
+    // and the control rate-9-2, by the rule and scan named in tests/fixtures/tasteTowns.js.
+    expect(INTERESTED_TOWNS[0].seed).toBe('rate-69-0');
+    expect(INTERESTED_TOWNS[1].seed).toBe('rate-9-2');
     expect(captured.powerStructure?.criminalCaptureState, 'the chair\'s own worked example').toBe('corrupted');
     expect(clean.powerStructure?.criminalCaptureState, 'and the control').toBe('none');
     // The tier matters: §R c-22 measured INTERESTED on town and above, and both are towns, so

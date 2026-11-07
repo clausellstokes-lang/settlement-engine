@@ -11,6 +11,7 @@ import { getPriorities, getTradeRouteFeatures, hasTeleportationInfra, evaluateWa
 import { priorityToCategory } from './prosperity.js';
 import { deriveFoodBalanceAnalysis, deriveSupplyRiskAnalysis } from './foodBalance.js';
 import { formatCount } from '../../domain/formatNumber.js';
+import { buildViabilitySummary } from '../../domain/viabilitySummary.js';
 // A PRINT goes through the label seam, a match never does (domain/display/institutionDisplayName.js):
 // the sentences below name institutions to a reader, and a city's 'Bakers (5-15)' is its bakers.
 import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
@@ -76,53 +77,8 @@ const processorAvailableAtTier = (processor, tier) =>
 const MAX_CHAIN_SUGGESTIONS = 3;
 
 
-// buildViabilitySummary
-//
-// ⛔ THE SENTENCE COUNTS THE LIST THE RECORD PUBLISHES, AND IT IS HANDED THAT LIST
-// RATHER THAN A POPULATION TO RE-DERIVE (ODQ §934.57, FIX-G1). It used to count
-// DEPENDENCY-severity rows across `[...issues, ...warnings]` while the record
-// published `dependencies` from `warnings` ALONE, so every DEPENDENCY a deriver
-// filed under `issues` was counted by the headline and absent from the list beneath
-// it. `foodBalance.js` has two such arms (Heavy / Severe Food Import Dependency, on
-// the deficitPercent > 40 branch of a connected non-road route), and on
-// `town|germanic|mountain|mountain_pass|civilized` the sentence said SIX beside a
-// list of FIVE. Measured over the 525-row golden corpus: 370 rows state the count,
-// exactly 1 disagreed, and the LIST was right on all 525 (the record's own second
-// counter, `metrics.dependencyCount`, agreed with it everywhere).
-//
-// The parameter is now the published list itself, not the warnings bucket, so the
-// two can no longer be spelled differently: the caller computes `dependencies` ONCE
-// and the publication, the metric and this sentence all read that one array. The
-// 571-574 note below still binds and is honoured — the summary must see dependency
-// warnings so a food-import dependency is never contradicted by a "self-sufficient"
-// headline. It was the `...issues` term that was wrong, never the warnings term.
-const buildViabilitySummary = (isViable, issues, dependencies, plotHooks, foodBalance) => {
-  const criticalCount = issues.filter((i) => i.severity === SEVERITY.CRITICAL).length;
-  const implausibleCount = issues.filter((i) => i.severity === SEVERITY.IMPLAUSIBLE).length;
-  const dependencyCount = dependencies.length;
-  const dailyNeed = Number(foodBalance?.dailyNeed) || 0;
-  const uncoveredDeficit = Math.max(0, Number(foodBalance?.deficit) || 0);
-  const rawDeficit = Math.max(uncoveredDeficit, Number(foodBalance?.rawDeficit) || 0);
-  const deficitPercent = dailyNeed > 0
-    ? Math.round((uncoveredDeficit / dailyNeed) * 100)
-    : Math.max(0, Math.round(Number(foodBalance?.deficitPercent) || 0));
-  const rawDeficitPercent = dailyNeed > 0
-    ? Math.round((rawDeficit / dailyNeed) * 100)
-    : deficitPercent;
-  if (criticalCount > 0) {
-    const issueLabel = criticalCount === 1 ? 'issue' : 'issues';
-    const verb = criticalCount === 1 ? 'prevents' : 'prevent';
-    return `✗ NOT VIABLE: ${criticalCount} critical ${issueLabel} ${verb} settlement survival.`;
-  }
-  if (implausibleCount > 3) return ` IMPLAUSIBLE: ${implausibleCount} historical inconsistencies break believability.`;
-  if (dependencyCount > 0)
-    return `✓ VIABLE: Settlement can survive but has ${dependencyCount} operational dependenc${dependencyCount > 1 ? 'ies' : 'y'} that require active management. ${plotHooks.length} plot hooks available.`;
-  if (uncoveredDeficit > 0)
-    return `△ VIABLE WITH PROVISIONING STRAIN: ${deficitPercent}% of daily food need remains uncovered.`;
-  if (rawDeficit > 0)
-    return `✓ VIABLE WITH PROVISIONING SUPPORT: imports, reserves, or extraordinary supply cover ${rawDeficitPercent}% of daily food need.`;
-  return '✓ VIABLE: Settlement is economically self-sufficient and historically plausible.';
-};
+// buildViabilitySummary MOVED to src/domain/viabilitySummary.js (LANDING-6, record 28), so the hook
+// filter re-derives the same sentence after it drops a false hook.
 
 
 // deriveResourceChainAnalysis
@@ -610,62 +566,17 @@ export const generateEconomicViability = (settlement, terrainType = null, nearby
   };
 };
 
-/**
- * The catalogue's own tags for every institution name it knows, across all tiers (a name
- * keeps its tags at every rung it appears on). Read by `hasMarketInstitution`.
- * @type {ReadonlyMap<string, ReadonlyArray<string>>}
- */
-const CATALOGUE_TAGS_BY_NAME = (() => {
-  /** @type {Map<string, string[]>} */
-  const byName = new Map();
-  const tiers = /** @type {Record<string, Record<string, Record<string, {tags?: unknown}>>>} */ (
-    /** @type {unknown} */ (institutionalCatalog));
-  for (const shelves of Object.values(tiers)) {
-    for (const rows of Object.values(shelves || {})) {
-      for (const [name, row] of Object.entries(rows || {})) {
-        const tags = Array.isArray(row?.tags) ? row.tags.filter((t) => typeof t === 'string') : [];
-        const key = name.toLowerCase();
-        byName.set(key, [...new Set([...(byName.get(key) || []), ...tags])]);
-      }
-    }
-  }
-  return byName;
-})();
-
-/**
- * IS THERE A REAL MARKET HERE? (SIZE lane, 2026-11-03, root-cause failure 8, ruling 3.)
- *
- * A market is an institution the catalogue tags 'market' (a periodic, weekly or fish market,
- * a market square, a fair, an auction house) or a trading house it tags both 'guild' and
- * 'trade' (merchant guilds, carriers, a caravaneer's post). NEVER "any Economy-shelf
- * building": every thorp and hamlet must have "Subsistence farming", which is filed on that
- * shelf, and it is not commerce. An institution that carries its own `tags` (authored
- * content) is read by them; otherwise its native name is looked up in the catalogue.
- *
- * The roster's guild seat (`generators/power/rulingStructure.js :: generatePowerStructure`)
- * is the consumer this was written for; that call site is engine-side, not this lane's.
- *
- * @param {ReadonlyArray<unknown> | null | undefined} institutions
- * @returns {boolean}
- */
-export function hasMarketInstitution(institutions) {
-  return (Array.isArray(institutions) ? institutions : []).some((inst) => {
-    if (!inst || typeof inst !== 'object') return false;
-    const own = /** @type {{tags?: unknown}} */ (inst).tags;
-    const tags = Array.isArray(own)
-      ? own
-      : (CATALOGUE_TAGS_BY_NAME.get(nativeSemanticName(/** @type {any} */ (inst)).toLowerCase()) || []);
-    return tags.includes('market') || (tags.includes('guild') && tags.includes('trade'));
-  });
-}
+// hasMarketInstitution MOVED to src/domain/marketInstitution.js (LANDING-2, the domain -> generators
+// boundary); re-exported here so the generator callers keep their import.
+export { hasMarketInstitution } from '../../domain/marketInstitution.js';
 
 /**
  * IS THIS A CITY-SCALE PLACE? The two structural cuts below ("no trade infrastructure",
- * "insufficient craft industries") used to read a fixed `population > 5000`, which is today's
- * town/city band edge spelled as a literal. They read the TIER now, so when the scale program
- * moves the bands the cuts move with them. A place with no known tier falls back to its
- * population's tier (`popToTier`), and a place with neither is not city-scale. At today's
- * bands the two readings agree everywhere (tests/generators/smallPlaceMarket.test.js). The
+ * "insufficient craft industries") used to read a fixed 5,000-person cut, the old bands'
+ * town/city edge spelled as a literal. They read the TIER now, so when the scale program
+ * moves the bands the cuts move with them (X-46 moved them; the stamp's city cut is 2,250). A
+ * place with no known tier falls back to its population's tier (`popToTier`), and a place with
+ * neither is not city-scale. At that ruling's bands the readings agreed (tests/generators/smallPlaceMarket.test.js). The
  * assembler passes the settlement's OWN tier, never its 'village' default.
  *
  * (The prose wiring census's holder citations into this file name their writes by SYMBOL since

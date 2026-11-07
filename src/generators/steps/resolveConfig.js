@@ -8,7 +8,7 @@
  */
 
 import { registerStep } from '../pipeline.js';
-import { TIER_ORDER, POPULATION_RANGES, getMagicLevel, TOWN_PLUS_TIERS, popToTier } from '../../data/constants.js';
+import { TIER_ORDER, POPULATION_RANGES, getMagicLevel, TOWN_PLUS_TIERS, popToTier, rollMetropolisPopulation } from '../../data/constants.js';
 import { MONSTER_THREAT_RANDOM_POOL, normalizeMonsterThreat } from '../../data/monsterThreat.js';
 import { getTerrainType } from '../terrainHelpers.js';
 import { recordTrace } from '../../domain/trace.js';
@@ -95,9 +95,12 @@ registerStep('resolveConfig', {
 
   // Population
   const popRange = POPULATION_RANGES[tier];
+  // The metropolis roll thins past its body to 1,000,000 (X-46 car 1b): one draw, as before.
   const population = config.settType === 'custom'
     ? config.population
-    : rng.randInt(popRange.min, popRange.max);
+    : tier === 'metropolis'
+      ? rollMetropolisPopulation(rng)
+      : rng.randInt(popRange.min, popRange.max);
 
   // Derive noMagic from the already-resolved effective priority so the two can't
   // drift: previously an absent priorityMagic counted as 0 here (noMagic=true) while
@@ -228,7 +231,7 @@ registerStep('resolveConfig', {
           : 'Tier set directly by user choice.',
     }],
     downstreamEffects: [
-      { target: 'population', effect: `range ${popRange.min}–${popRange.max}` },
+      { target: 'population', effect: tier === 'metropolis' ? `range ${popRange.min}+` : `range ${popRange.min}–${popRange.max}` },
       { target: 'institutionPool', effect: 'scaling tier' },
     ],
   });

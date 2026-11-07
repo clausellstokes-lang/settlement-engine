@@ -29,6 +29,7 @@ const KIND_PREFIX = Object.freeze({
   event: 'event',
   hook: 'hook',
   condition: 'condition',
+  crisis: 'crisis',
 });
 
 /** @param {unknown} value @returns {string} */
@@ -188,11 +189,11 @@ function firstText(...values) {
       continue;
     }
     if (typeof value === 'object') {
-      const hit = /** @type {Record<string, any>} */ (value).short
-        || /** @type {Record<string, any>} */ (value).description
-        || /** @type {Record<string, any>} */ (value).long
-        || /** @type {Record<string, any>} */ (value).text
-        || /** @type {Record<string, any>} */ (value).name;
+      const hit = /** @type {Record<string, unknown>} */ (value).short
+        || /** @type {Record<string, unknown>} */ (value).description
+        || /** @type {Record<string, unknown>} */ (value).long
+        || /** @type {Record<string, unknown>} */ (value).text
+        || /** @type {Record<string, unknown>} */ (value).name;
       if (typeof hit === 'string' && hit.trim()) return hit;
     }
   }
@@ -255,6 +256,8 @@ export const TYPE_TO_TAB = Object.freeze({
   service: 'services',
   // X-52 (lane DEFENSE-3): the Economy tab's stores row, the Defense tab's Food endurance door.
   stores: 'economics',
+  // The crisis record's one page (docs/DESIGN_CRISIS_TAB.md): the Crisis tab, present only in a crisis.
+  crisis: 'crisis',
 });
 
 /**
@@ -525,6 +528,19 @@ export function buildDossierEntityIndex(settlement = {}) {
     ? [decorateEntry('stores', { ...entityLink('stores', { id: 'economy.food-stores', name: 'Stores' }) }, { name: 'Stores' })]
     : [];
 
+  // THE CRISES (docs/DESIGN_CRISIS_TAB.md) — each active stress entry, a link TARGET on the Crisis
+  // tab, keyed `crisis.<type>` (the record's own crisis id). Read off the one container the dossier
+  // reads (`stress`: an array, or a bare object for one crisis); the `stressors` alias is the same
+  // record and is not indexed twice. Derived per render; nothing persisted.
+  /** @type {Record<string, any>[]} */
+  const crises = [];
+  const stressRaw = /** @type {{ stress?: unknown }} */ (settlement).stress;
+  for (const entry of Array.isArray(stressRaw) ? stressRaw : (stressRaw && typeof stressRaw === 'object' ? [stressRaw] : [])) {
+    const crisisType = entry && typeof entry === 'object' ? String(entry.type || entry.label || '') : '';
+    if (!crisisType) continue;
+    crises.push(decorateEntry('crisis', { ...entityLink('crisis', { id: `crisis.${crisisType}`, name: String(entry.label || crisisType) }) }, entry));
+  }
+
   // The settlement itself is addressable (overview tab).
   /** @type {Record<string, any>[]} */
   const settlementEntries = [];
@@ -538,7 +554,7 @@ export function buildDossierEntityIndex(settlement = {}) {
   const all = [
     ...npcs, ...factions, ...institutions,
     ...resources, ...services, ...neighbourEntries, ...eventEntries,
-    ...stores, ...deities, ...settlementEntries,
+    ...stores, ...crises, ...deities, ...settlementEntries,
   ];
 
   // Same-family identity reuse is ambiguous. Preserve every readable entry in
@@ -582,6 +598,7 @@ export function buildDossierEntityIndex(settlement = {}) {
     neighbours: neighbourEntries,
     events: eventEntries,
     deities,
+    crises,
     settlement: settlementEntries[0] || null,
     byId,
     /**

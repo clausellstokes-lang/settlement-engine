@@ -70,8 +70,9 @@ const CONFIG = {
  *  2026-10-01, the urban band (ODQ §934.86): 62 + 2 + 3 = 67 -> 67 + 2 + 2 = 71. The probe settlement is
  *  the same seed, and its institution set (hence its roster of relationship pairs) moved with the rebuilt
  *  registry; re-measured by the arm's own recipe, not predicted.
- *  GS-2 (ODQ §934.101): 67 + 2 + 2 = 71 -> 67. The name picks and the conflict draws left the step. */
-const DERIVE_HALF_DRAWS = 67;
+ *  GS-2 (ODQ §934.101): 67 + 2 + 2 = 71 -> 67. The name picks and the conflict draws left the step.
+ *  2026-11-05, records 12–26 (the rung-1 landing's signed shifts, ODQ §934.105; re-keyed at the landed tip by LANDING-5 under the chair's ruling 4): 67 -> 46, the probe settlement's roster of relationship pairs moved with its world. */
+const DERIVE_HALF_DRAWS = 46;
 /** The seed §0R.1's derive-half probe was measured on, and the settlement it measured over. */
 const DERIVE_PROBE_STREAM = 'em-p0-probe-derive';
 const DERIVE_PROBE_SEED = 'em-p0-probe';
@@ -240,7 +241,7 @@ describe('EM-P0 — the pipeline seam: pins are consulted per chooser, on one st
         total: counter.calls - start,
       };
     });
-    expect(budget.relationships).toBe(67);
+    expect(budget.relationships).toBe(46);
     expect(budget.total).toBe(DERIVE_HALF_DRAWS);
   }, 180_000);
 
@@ -323,7 +324,7 @@ describe('EM-P0 — the pipeline seam: pins are consulted per chooser, on one st
 
 /** The step's own unpinned draw count at SEED and CONFIG. AS-OF `bdbf7c89c`, re-measured at
  *  EM-B2a2's base; A2 and A3 both re-measure it rather than trusting the numeral. */
-const UNPINNED_STEP_DRAWS = 306; // 2026-10-01, the urban band (ODQ §934.86): 315 -> 307; the druid rulings (2026-10-01, ODQ §934.86 addendum 2, J30–J33): 307 -> 310; each re-measured at this seed and config; GS-2 one faction set (ODQ §934.101): 310 -> 306, the name picks and the conflict draws left the step
+const UNPINNED_STEP_DRAWS = 303; // 2026-10-01, the urban band (ODQ §934.86): 315 -> 307; the druid rulings (2026-10-01, ODQ §934.86 addendum 2, J30–J33): 307 -> 310; each re-measured at this seed and config; GS-2 one faction set (ODQ §934.101): 310 -> 306, the name picks and the conflict draws left the step 2026-11-05, records 12–26 (the rung-1 landing's signed shifts, ODQ §934.105; re-keyed at the landed tip by LANDING-5 under the chair's ruling 4): 306 -> 303;
 /** The overridden VALUE A3 carries through the pin channel into the assembled record. It is
  *  planted by the arm and appears nowhere in the generator's vocabulary. */
 const OVERRIDE_SENTINEL = 'EM-B2a2 SENTINEL BURGRAVE';
@@ -482,7 +483,7 @@ describe('EM-B2a2 — the pin primitive has ONE exported home: chooseOrPin lives
 /** The census corpus's own row count (EM-P2's declared 63). The floor every A7 figure rests on. */
 const CENSUS_ROWS = 63;
 /** The rows §0.1 measured the leak in, and the two keys it moved. RE-MEASURED by A7, never trusted. */
-const LEAKED_ROWS = 44; // 2026-10-01, the urban band (ODQ §934.86): 42 -> 44 (corruptionPass mutates npcs and factions on two more rows)
+const LEAKED_ROWS = 38; // 2026-10-01, the urban band (ODQ §934.86): 42 -> 44 (corruptionPass mutates npcs and factions on two more rows); 2026-11-05, records 12–26 (the rung-1 landing's signed shifts, ODQ §934.105; re-keyed at the landed tip by LANDING-5 under the chair's ruling 4): 44 -> 38
 /** The three pin channels A8 walks: every registered step that provides a held record key. */
 const PIN_CHANNELS = ['generatePopulation', 'assembleInstitutions', 'generatePower'];
 
@@ -569,7 +570,7 @@ describe('EM-R1 — the pin bag is cloned on entry, at the runner', () => {
     expect(through.perKey).toEqual({});
 
     // THE NEGATIVE CONTROL: the same bag with every runner clone defeated is written through on
-    // 44 rows, by npcs alone (GS-2: factions left the bag), so the zero above can never go silently vacuous.
+    // 38 rows (44 before records 12–26), by npcs alone (GS-2: factions left the bag), so the zero above can never go silently vacuous.
     expect(bypassed.moved, 'the control came back clean: the bypass no longer defeats the clones')
       .toBe(LEAKED_ROWS);
     expect(bypassed.perKey).toEqual({ npcs: LEAKED_ROWS });

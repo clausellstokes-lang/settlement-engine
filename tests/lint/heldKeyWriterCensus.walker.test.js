@@ -130,6 +130,9 @@ const ROSTER = Object.freeze([
   { symbol: 'ensureFactionStructuralNpcs', file: 'src/generators/factionRoles.js', cls: 'producer', stream: SHARED, via: ASSEMBLY_STEP },
   { symbol: 'reconcilePowerStructure', file: RECONCILE_FILE, cls: 'replay', stream: SHARED, via: ASSEMBLY_STEP },
   { symbol: 'resizePoliticalRoster', file: 'src/generators/density/applyDensityLaw.js', cls: 'replay', stream: SHARED, via: ASSEMBLY_STEP },
+  // Rung 1 N1 (2026-11-04): conserves faction power at 100 after the coherence tail, on the
+  // held-roster path too. No draw; gated off under a held powerStructure.
+  { symbol: 'conserveSeatPower', file: 'src/generators/density/applyDensityLaw.js', cls: 'mutator', stream: SHARED, via: ASSEMBLY_STEP },
   // ⭐ 11 -> 13 AT THE GS-2 MERGE (lane G2, ODQ §934.101, one faction set; rows added by cure lane
   // T13). `factions` and `conflicts` left generatePopulation's choosers and are DERIVED in the
   // assembly body from the final roster: `generateFactions` projects the roster onto the power
@@ -139,6 +142,12 @@ const ROSTER = Object.freeze([
   // pin bag can never carry them (see A2) and both re-derive on every run.
   { symbol: 'generateFactions', file: 'src/generators/power/factionGrouping.js', cls: 'producer', stream: SHARED, via: ASSEMBLY_STEP },
   { symbol: 'generateConflicts', file: 'src/generators/power/conflicts.js', cls: 'producer', stream: NAMED_CHILD, via: ASSEMBLY_STEP },
+  // ⭐ 13 -> 14 (lane RUNG1-TRUTH unit A, 2026-11-04): `storeTrueHooksOnly` drops a stored hook its
+  // own record contradicts, so it WRITES `plotHooks` inside `npcs` and `conflicts` (copy-on-write,
+  // no draw). A MUTATOR: it changes no row's identity and adds none. The NPC half is gated in the
+  // assembly body on `chooseOrPin(pins, 'npcs', …)`, the structural appender's own gate, so a held
+  // roster is never re-written; the conflicts are re-derived on every run and never held.
+  { symbol: 'storeTrueHooksOnly', file: 'src/domain/coherence/hookTruthRecord.js', cls: 'mutator', stream: SHARED, via: ASSEMBLY_STEP },
 ]);
 
 /**
@@ -185,6 +194,8 @@ const DISCOVERY_EXEMPT = Object.freeze([
   { symbol: 'culturalNotesFor', reason: 'a pure lookup over the culture profile table; it writes nothing at all.' },
   { symbol: 'buildGenerationCoherenceReceipt', reason: 'builds `generationCoherenceReceipt`, classed RECEIPT, not HELD.' },
   { symbol: 'refreshPowerGenerationTraces', reason: 're-stamps the power traces in `simulationTrace`, the sanctioned cross-cutting ledger, never `powerStructure` itself.' },
+  // RUNG1B-F4 unit 4 (9fd39cf6d), added at the window compose, 2026-11-04.
+  { symbol: 'settleCrimeLinesToSignal', reason: 'rewrites the safety profile crime-line descs inside economicState from the final crime signal; economicState is not a held key.' },
 ]);
 
 /** The held denominator, DERIVED from its producers and never re-typed. */
@@ -479,7 +490,7 @@ describe('EM-R1 — the writer census of every held key', () => {
     expect(live, 'a held-key writer step appeared or retired').toEqual([...STEP_ROSTER]);
     const writerSteps = [...new Set(STEP_ROSTER.map((row) => row.split('|')[0]))];
     expect(writerSteps).toHaveLength(12);
-    expect(getStepMeta()).toHaveLength(22);
+    expect(getStepMeta()).toHaveLength(23); // 22 -> 23: resolveCrisisCast (lane CRISIS, 2026-11-03); its roster write is gated on chooseOrPin(pins, 'npcs')
   });
 
   it('A3 — the FUNCTION-LEVEL roster is live and exact, and its discovery set is closed', () => {
@@ -490,7 +501,7 @@ describe('EM-R1 — the writer census of every held key', () => {
       if (!cache.has(row.file)) cache.set(row.file, declaredSymbols(rawSource(row.file)));
       if (cache.get(row.file).get(row.symbol) !== 1) unresolved.push(`${row.file} :: ${row.symbol}`);
     }
-    expect(ROSTER).toHaveLength(13); // 11 -> 13 at the GS-2 merge (lane G2): generateFactions, generateConflicts
+    expect(ROSTER).toHaveLength(15); // 11 -> 13 at the GS-2 merge (lane G2): generateFactions, generateConflicts; 13 -> 14 rung 1 N1 (2026-11-04): conserveSeatPower; 14 -> 15: storeTrueHooksOnly (lane RUNG1-TRUTH unit A; the union of both lanes' rows, composed on the window branch)
     expect(unresolved, 'a roster row names a symbol its file no longer declares exactly once').toEqual([]);
 
     // (b) DISCOVERY, both directions, over the assembly step's OWN body.
@@ -572,8 +583,8 @@ describe('EM-R1 — the writer census of every held key', () => {
     // Every OTHER held writer is SHARED-STREAM and therefore consumes and discards.
     const shared = ROSTER.filter((row) => row.stream === SHARED).map((row) => row.symbol).sort();
     expect(shared).toEqual([
-      'ensureFactionStructuralNpcs', 'generateCoherence', 'generateFactions', 'generateSettlementName',
-      'reconcilePowerStructure', 'relinkFactionMembers', 'resizePoliticalRoster',
+      'conserveSeatPower', 'ensureFactionStructuralNpcs', 'generateCoherence', 'generateFactions', 'generateSettlementName',
+      'reconcilePowerStructure', 'relinkFactionMembers', 'resizePoliticalRoster', 'storeTrueHooksOnly',
     ]);
     // ⛔ generateSettlementName is the row this rule exists for: the mint draws on the assembly
     // step's own shared stream, so a held name is CONSUMED AND DISCARDED, never skipped.

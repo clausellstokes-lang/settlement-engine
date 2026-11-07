@@ -1,0 +1,18 @@
+// 60 calm seeds: sha256 of the whole record and of collectPlotHooks + the Tonight sheet's hooks.
+import { createHash } from 'node:crypto';
+import { writeFileSync } from 'node:fs';
+const [root, out] = process.argv.slice(2);
+const { generateSettlementPipeline } = await import(`${root}/src/generators/generateSettlementPipeline.js`);
+const { collectPlotHooks } = await import(`${root}/src/domain/dossier/plotHooks.js`);
+const TIERS = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
+const h = (v) => createHash('sha256').update(JSON.stringify(v)).digest('hex');
+const rows = [];
+for (let i = 0; i < 60; i += 1) {
+  const seed = `calm-hooks-${i}`;
+  const s = generateSettlementPipeline({ settType: TIERS[i % 6], selectedStressesRandom: false, selectedStresses: [] }, null, { seed, customContent: {} });
+  if (s.stress) throw new Error(`${seed} is not calm`);
+  const hooks = collectPlotHooks(s);
+  rows.push({ seed, tier: TIERS[i % 6], record: h(s), hooks: h(hooks), n: hooks.length });
+}
+writeFileSync(out, JSON.stringify(rows, null, 1));
+console.log(rows.length, 'calm; hooks', rows.reduce((a, r) => a + r.n, 0), 'combined', h(rows));

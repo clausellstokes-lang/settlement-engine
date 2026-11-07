@@ -11,15 +11,15 @@ import {
   roleToCategory,
   roleTakesMerchantStress,
 } from './roleCategory.js';
-import { nativeSemanticName, nativeSemanticNames } from '../domain/content/customContentSemanticAuthority.js';
-import { getUpgradeOpportunities } from './economicGenerator.js';
+import { nativeSemanticName } from '../domain/content/customContentSemanticAuthority.js';
+import { getUpgradeOpportunities, mandatedRoleCandidate } from './economicGenerator.js';
 import { random as _rng, pick as ctxPick } from '../kernel/rngContext.js';
 import { drawUnique } from './hookVariety.js';
 import { themeOfText } from '../domain/hookThemes.js';
 import { disambiguateNPCDisplayNames } from './npcDisplayNames.js';
 import { resolveGenerationWorldLaw } from './generationContext.js';
-import { legacyMassRange } from '../domain/density/densityLaw.js';
-import { generateFactionLeaderSecret } from './npc/factionLeaderSecret.js';
+import { legacyMassRange } from '../domain/density/densityLaw.js'; import { defenceRoleGate, defenseFactsOf, forceWordsOf } from '../domain/defense/defenseFacts.js'; import { crimeSignalOf, namesCriminalGuild, withoutCriminalGuild } from '../domain/crimeSignal.js'; // R6 (and F4 unit 3): one line, so no cited line moves
+import { generateFactionLeaderSecret } from './npc/factionLeaderSecret.js'; import { inlandHookLine } from '../data/inlandHookLines.js'; import { defenceTwinLine } from '../data/defenceTwinLines.js'; // F5, F10: one line, so no cited line moves
 import { CRAFTS_ROLES, NOBLE_ROLES } from './npc/factionRoleCatalog.js';
 import { resolveGeneratedNpcTitle } from './npc/generatedNpcTitle.js';
 import { deriveThorpSecondRole } from './npc/thorpSecondRole.js';
@@ -30,6 +30,7 @@ import { STRESS_ECONOMIC_EFFECTS , TRAIT_PRESENCE_DISTRIBUTION } from '../data/n
 import { computeRelTension, createTieProseDraw } from './powerGenerator.js';
 import { pickRandom2 } from './helpers.js';
 import { STRESS_INSTITUTION_EFFECTS } from '../data/stressInstitutionEffects.js';
+import { secretsHeldByFoodRecord } from '../domain/foodSurplus.js';
 import {
   MANNERISMS,
   SPEECH_PATTERNS,
@@ -114,7 +115,7 @@ const generateSingleNPC = (
   });
   const religion = generateReligionType(hookRegistry);
   const appearance = generateNPCAppearance(category);
-  const goal = generateNPCGoal(role, category, config);
+  const goal = ((g, d) => (g && typeof g === 'object' ? { ...g, short: defenceTwinLine(inlandHookLine(g.short, worldLaw.portKind), d), long: defenceTwinLine(inlandHookLine(g.long, worldLaw.portKind), d) } : defenceTwinLine(inlandHookLine(g, worldLaw.portKind), d)))(generateNPCGoal(role, category, config), defenseFactsOf({ institutions })); // F5: a wet pool line gives its inland twin where there is no water (data/inlandHookLines.js); F10: a defence line its defence-free twin where the roster lacks the thing (data/defenceTwinLines.js); both draw-free
   // institutions drives generateFactionLeader's secret-type weighting (criminal/
   // magic/religion presence). Without it the weighting was stuck in "absent" mode.
   const secret = generateFactionLeaderSecret(
@@ -122,8 +123,8 @@ const generateSingleNPC = (
     institutions,
     worldLaw,
   );
-  const title1 = generatePlotHook(category, config, hookRegistry);
-  const title2 = _rng() > 0.5 ? generatePlotHook(category, config, hookRegistry) : null;
+  const title1 = inlandHookLine(generatePlotHook(category, config, hookRegistry), worldLaw.portKind);
+  const title2 = _rng() > 0.5 ? inlandHookLine(generatePlotHook(category, config, hookRegistry), worldLaw.portKind) : null;
   const plotHooks = title2 && title2 !== title1 ? [title1, title2] : [title1];
   const powerLevel = generateNPCPowerLevel(role);
   return {
@@ -237,7 +238,9 @@ const resolveNameCulture = culture => {
   return NAMING_DATA[culture] ? culture : 'germanic';
 };
 
-const pickFirst = (culture = 'germanic', gender = 'male', withSurname = true, tier = 'town') => {
+// Exported for one more caller: the crisis cast step's temporary person
+// (src/generators/steps/resolveCrisisCast.js), named the way every roster NPC is.
+export const pickFirst = (culture = 'germanic', gender = 'male', withSurname = true, tier = 'town') => {
   const firstCulture = resolveNameCulture(culture);
   const surnameCulture = culture === 'mixed' ? resolveNameCulture(culture) : firstCulture;
   const data = NAMING_DATA[firstCulture] || NAMING_DATA.germanic;
@@ -771,8 +774,8 @@ export const generateCrimeLevel = (npc, npcIndex, summary, allNpcs) => {
   }
 
   // 45% chance: stress-driven institutional secret
-  const activeStresses = summary.stressTypes || (stressType ? [stressType] : []);
-  const stressEffects = activeStresses.flatMap(s => STRESS_INSTITUTION_EFFECTS[s] || []);
+  // F3 FOOD-WORDS: a secret that says people are starving only where the food record goes hungry
+  const stressEffects = secretsHeldByFoodRecord((summary.stressTypes || (stressType ? [stressType] : [])).flatMap(s => STRESS_INSTITUTION_EFFECTS[s] || []), summary.foodRecord);
   if (stressEffects.length > 0 && random01(0.45)) {
     const effect = pickRandom2(stressEffects);
     const otherNpc = allNpcs.filter((_, idx) => idx !== npcIndex)[0];
@@ -860,9 +863,6 @@ const _pickFactionName = r => {
 export const mergeNPCLists = (npcs, factions, institutions, tier, config) => {
   if (!npcs || !factions || npcs.length === 0 || factions.length === 0) return npcs;
 
-  const instNames = nativeSemanticNames(institutions)
-    .map(name => name.toLowerCase());
-  const hasInst = kw => instNames.some(n => n.includes(kw));
 
   // Find key faction references — category-first so generic names like "Religious Authorities" still match
   const govFaction = factions.find(f => f.isGoverning) || factions[0];
@@ -874,6 +874,13 @@ export const mergeNPCLists = (npcs, factions, institutions, tier, config) => {
       f.faction?.toLowerCase().includes('smuggl') ||
       f.faction?.toLowerCase().includes('underworld'),
   );
+  // ⛔ NO NETWORK IS NAMED WHERE NONE EXISTS (lane RUNG1B-F4 unit 3, 2026-11-04;
+  // docs/F4_CRIME_SIGNAL_2026-11-04.md). This tail runs after the density law's trim, on the FINAL
+  // roster and estate, so it reads the crime signal's one home (`domain/crimeSignal.js`): with no
+  // criminal faction and no criminal house, no NPC is filed under a "criminal network" or a
+  // "Thieves' Guild" (471 and 17 NPCs in 1,000 soak places), and a secret or goal naming a
+  // thieves' guild takes the pool's own "a powerful outside interest". No draw.
+  const noCrime = !crimeFaction && !crimeSignalOf({ seats: factions, estate: institutions }).present;
   const milFaction = factions.find(
     f =>
       f.category === 'military' ||
@@ -1225,8 +1232,8 @@ export const mergeNPCLists = (npcs, factions, institutions, tier, config) => {
                 ? stressOverrides.merchant
                 : null;
         if (override) {
-          enriched.goal = { short: override.short, long: enriched.goal.long || override.short };
-          if (override.note) enriched.stressNote = override.note;
+          const defence = defenseFactsOf({ institutions }); enriched.goal = { short: defenceTwinLine(override.short, defence), long: enriched.goal.long || defenceTwinLine(override.short, defence) }; // F10: data/defenceTwinLines.js, draw-free
+          if (override.note) enriched.stressNote = defenceTwinLine(override.note, defence);
         }
       }
     }
@@ -1258,7 +1265,7 @@ export const mergeNPCLists = (npcs, factions, institutions, tier, config) => {
         !roleLower.includes('thief') &&
         !roleLower.includes('assassin') &&
         !roleLower.includes('criminal');
-      if (isCriminalSecret && notAlreadyCrime && roleIsNotCrime) {
+      if (isCriminalSecret && notAlreadyCrime && roleIsNotCrime && !noCrime) {
         enriched.secondaryAffiliation = crimeFaction
           ? crimeFaction.faction
           : secretText.includes('thieves')
@@ -1285,14 +1292,20 @@ export const mergeNPCLists = (npcs, factions, institutions, tier, config) => {
       const mentionsCriminalGuild =
         secretText.toLowerCase().includes('thieves') ||
         (secretText.toLowerCase().includes('guild') && secretText.toLowerCase().includes('criminal'));
-      if (mentionsCriminalGuild && !hasInst('thieves') && !hasInst('criminal') && !crimeFaction) {
+      // F4 unit 3: the guard reads the crime signal (it implies the old institution-name test), and
+      // the pattern reads "the thieves' guild" too: the pool spells it with the apostrophe, which
+      // `/thieves guild/` never matched, so the secret printed unsanitised in 17 soak places.
+      if (mentionsCriminalGuild && noCrime) {
         enriched.secret = {
-          what: (npc.secret.what || '')
-            .replace(/thieves guild/gi, 'a powerful outside interest')
-            .replace(/criminal guild/gi, 'a powerful outside interest'),
+          what: withoutCriminalGuild(npc.secret.what || ''),
           stakes: npc.secret.stakes,
         };
       }
+    }
+    // F4 unit 3: the role goal ("Identify which of their officers is on the thieves' guild payroll",
+    // drawn at the population step) takes the same substitution where no network exists.
+    if (noCrime && enriched.goal && typeof enriched.goal === 'object' && namesCriminalGuild(enriched.goal)) {
+      enriched.goal = { ...enriched.goal, short: withoutCriminalGuild(enriched.goal.short), long: withoutCriminalGuild(enriched.goal.long) };
     }
 
     return enriched;
@@ -1396,8 +1409,10 @@ export const generateNPCs = (
   // arm (HK-LAW-6), so routing these two draws through it is roll-for-roll
   // neutral — measured 0 of 32 seeds shifting their total roll count.
   const hookRegistry = { titles: new Set(), themes: new Set(), tells: new Set(), speech: new Set() };
+  // R6 (soak 1000 rung 1, kind 4): a Guard Captain captains a standing force on the place's own
+  // record, not the tier's (domain/defense/defenseFacts.js :: defenceRoleGate).
   const candidates = getUpgradeOpportunities(institutions, tier, weights)
-    .filter(worldLaw.allowsRole);
+    .filter(worldLaw.allowsRole).filter(defenceRoleGate({ institutions }));
 
   // ── Inject faction-gated NPC roles ────────────────────────────────────────
   // Noble and crafts roles only appear when those faction types exist in the
@@ -1426,7 +1441,7 @@ export const generateNPCs = (
       waterRoute ||
       institutions.some(
         i =>
-          /port|harbou?r/.test(nativeSemanticName(i).toLowerCase()),
+          /\b(?:port|harbou?r)\b/.test(nativeSemanticName(i).toLowerCase()), // F5 unit 6: word-bounded — the substring read "Teleportation circle" as a port
       );
     CRAFTS_ROLES
       .filter(role => worldLaw.allowsRole(role))
@@ -1480,7 +1495,7 @@ export const generateNPCs = (
   const tierRoleSet = new Set(tierRolesU);
   const stressContribution = stressRoles.filter(r => !tierRoleSet.has(r));
   const mandatoryRoles = [...tierRolesU, ...stressContribution]
-    .filter(worldLaw.allowsRole);
+    .filter(worldLaw.allowsRole).filter(defenceRoleGate({ institutions })); // R6, as the pool above
 
   // Build config context for NPC generation
   const npcConfig = {
@@ -1490,9 +1505,16 @@ export const generateNPCs = (
     _prosperity: settlement.economicState?.prosperity || null,
   };
 
+  // THE SEAT IS MANDATED (soak 1000 row 20, soak1k-694; the seat read is
+  // domain/dossier/seatHolder.js :: TIER_HEAD, a mirror of this table's first roles). The
+  // candidate pool offers a 'government' role only where a government-shelf institution
+  // stands, and since the 2026-09-30 reshelving the City hall is on infrastructure, so a city
+  // with no government row minted no Mayor and its council sat unseated. The tier's head is
+  // minted from its own row (mandatedRoleCandidate) when the pool dropped it; every other
+  // settlement's pool already holds it, so no other draw moves.
   // Generate mandatory role NPCs first
   mandatoryRoles.forEach(role => {
-    const candidate = candidates.find(c => c.role === role);
+    const candidate = candidates.find(c => c.role === role) || (role === tierRolesU[0] ? mandatedRoleCandidate(role) : undefined);
     if (candidate && npcs.length < targetCount) {
       npcs.push(generateSingleNPC(
         candidate.role,
@@ -1588,7 +1610,7 @@ export const generateRelationships = (npcs, config = {}, institutions = []) => {
   const seen = new Set();
   // GS-1: each tie's description and tension are drawn WITHOUT REPLACEMENT across this town,
   // draw-free; the index rides on the tie as `proseVariant` (see createTieProseDraw).
-  const drawTieProse = createTieProseDraw();
+  const drawTieProse = createTieProseDraw(forceWordsOf(defenseFactsOf({ institutions }))); // F1: the place's force words
 
   npcs.forEach(npc => {
     const maxRelationships = randInt(2, 3);

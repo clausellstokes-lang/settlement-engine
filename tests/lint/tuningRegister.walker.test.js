@@ -3,9 +3,11 @@
  *
  * ⛔⛔ THE VALUES IN THIS ESTATE ARE THE OWNER'S, AND NOTHING HERE PROPOSES ONE.
  * This walker measures the tuning estate and refuses writes. It does not tune. Every row of
- * the declared register lands `draft`, `signatureVersion` is 0, and a row becomes `signed`
+ * the declared register lands `draft`, `signatureVersion` starts at 0, and a row becomes `signed`
  * only through the refreeze ritual driven by a signing record the owner wrote at the tuning
- * sitting — the carve-out by nature that no delegation covers (THE PROMISE; §763.1).
+ * sitting — the carve-out by nature that no delegation covers (THE PROMISE; §763.1). The first
+ * such record is docs/tuning-signatures/2026-11-06-v1.json (Register VII, v1, ODQ §934.105):
+ * the ritual, naming it, applied it through `applySigningRecord` and wrote the declared register.
  *
  * ⭐ STATE YOUR SURFACE BEFORE YOUR ARMS (FOLD 25). Three populations, every measurement a
  * TEXT measurement over `codeOnly`-stripped source:
@@ -36,6 +38,7 @@
  * is report-only and has no `--update`.
  *
  *   TUNING_INVENTORY_REFREEZE='<seat>' TUNING_INVENTORY_NOTE='<why it moved>' \
+ *     [TUNING_SIGNATURE_RECORD=docs/tuning-signatures/<date>-v<N>.json] \
  *     npx vitest run tests/lint/tuningRegister.walker.test.js
  *
  * ⭐ AND IT EXITS NON-ZERO ON SUCCESS, BY DESIGN. A mode that both rewrites a register and
@@ -62,6 +65,7 @@ import {
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const INVENTORY_PATH = join(ROOT, INVENTORY_REL);
+const REGISTER_PATH = join(ROOT, REGISTER_REL);
 
 /**
  * THE SIX CEILINGS. Every one is a banked MEASUREMENT, never a guess and never a target:
@@ -91,7 +95,12 @@ const CEILINGS = Object.freeze({
   // RAISED 2 -> 3 (2026-11-04, REGISTERS-4 door 10) BY THE CHAIR'S RULING, ODQ §934.104 (the ceiling is the chair's act,
   // attributed): the third DECLARED_GROWTH row, src/domain/summary/tonightSheet.js, cites TRIM-2's X-51 (7d327ca73), the
   // one Tonight sheet's HOOK_COUNT = 3 named instead of a bare 3. Still ATTRIBUTED rows only.
-  DECLARED_GROWTH_CEILING: 3,
+  // RAISED 3 -> 6 (2026-11-04, LANDING-2) BY THE CHAIR'S RULING at the rung-1 landing, ODQ §934.105 ("NOT a ceiling
+  // raise. Write the three DECLARED_GROWTH rows the ritual admits"): the three rows, each cited to its real commit —
+  // recordBatteryFindings.js BATTERY_QUOTE_MAX (SELF-VOUCH b7a5f778e), threatAssessment.js 0.4 (RUNG1B-F9 26ed1b259),
+  // densityRoll.js 0.5 (X-46 car 4 U2 1c527831a). This counts ATTRIBUTED rows, so it moves with them; the six
+  // population ceilings above are not touched.
+  DECLARED_GROWTH_CEILING: 6,
 });
 
 const register = loadTuningRegister(ROOT);
@@ -121,6 +130,24 @@ function refreezeInventory(measured) {
   if (!verdict.ok) {
     throw new Error(`tuning inventory refreeze REFUSED [${verdict.refusal}] — ${verdict.detail}`);
   }
+  // ⭐ THE SIGNING HALF OF THE RITUAL (first exercised 2026-11-06, Register VII v1, ODQ §934.105).
+  // When the run names a record, the record is applied through `applySigningRecord` — the ONE
+  // path that may ever write `status: 'signed'` — and the DECLARED register is written beside
+  // the measured inventory: the named rows signed at version N, `signatureVersion` N, and the
+  // `signatures[N-1]` entry carrying the owner's words, the seat, the row and the digests frozen
+  // at this tip. The next register is computed IN FULL before any byte is written, so a refused
+  // record (blank fields, a version out of sequence, an id with no row, no unit, or module-side)
+  // writes nothing at all. The declared file goes first, so an inventory whose `measuredAtSha`
+  // names this tip never exists without the signature it was measured beside.
+  let signedRegister = null;
+  if (process.env.TUNING_SIGNATURE_RECORD) {
+    const record = JSON.parse(readFileSync(join(ROOT, process.env.TUNING_SIGNATURE_RECORD), 'utf8'));
+    const applied = applySigningRecord({ register, inventory: measured, record });
+    if (!applied.ok) {
+      throw new Error(`tuning signature REFUSED [${applied.refusal}] — ${applied.detail}`);
+    }
+    signedRegister = applied.register;
+  }
   const next = {
     _doc: committed?._doc ?? [
       'THE MEASURED TUNING INVENTORY — MACHINE-WRITTEN, NEVER HAND-EDITED.',
@@ -136,11 +163,20 @@ function refreezeInventory(measured) {
     note: process.env.TUNING_INVENTORY_NOTE.trim(),
     ...measured,
   };
+  if (signedRegister) {
+    const signing = `${REGISTER_PATH}.sign-${process.pid}`;
+    writeFileSync(signing, `${JSON.stringify(signedRegister, null, 2)}\n`, 'utf8');
+    renameSync(signing, REGISTER_PATH);
+  }
   const temporary = `${INVENTORY_PATH}.refreeze-${process.pid}`;
   writeFileSync(temporary, `${JSON.stringify(next, null, 2)}\n`, 'utf8');
   renameSync(temporary, INVENTORY_PATH);
+  const signedNote = signedRegister
+    ? ` SIGNED at tuning-register v${signedRegister.signatureVersion}: ${signedRegister.signatures.at(-1).ids.length} ids,`
+      + ` ${signedRegister.signatures.at(-1).odqRow}, by ${signedRegister.signatures.at(-1).signedBy}.`
+    : '';
   throw new Error(`tuning inventory REFROZEN at ${next.measuredAtSha} by ${next.measuredBy}:`
-    + ` ${next.totals.tables} tables, ${next.totals.unregisteredNamed} named, ${next.totals.bareDecimals} bare.`
+    + ` ${next.totals.tables} tables, ${next.totals.unregisteredNamed} named, ${next.totals.bareDecimals} bare.${signedNote}`
     + ' This run fails BY DESIGN so a refreeze can never be mistaken for a passing gate —'
     + ' re-run this walker without TUNING_INVENTORY_REFREEZE, and THAT green is the proof.');
 }
@@ -764,10 +800,13 @@ describe('tuning register — one value, one home', () => {
       }
     }
     expect(problems, 'signing a table whose value is computed from an UNSIGNED source signs a'
-      + ' number that can still move underneath it. Vacuous today because nothing is signed —'
-      + ' and armed now so it is not written after the first signature makes it matter.').toEqual([]);
-    expect(Object.values(register.tables).every((row) => row.status === 'draft'),
-      'and the vacuity is in the data: every row is draft').toBe(true);
+      + ' number that can still move underneath it. Armed before the first signature; it has'
+      + ' had a subject since tuning-register v1 (2026-11-06, Register VII, ODQ §934.105).').toEqual([]);
+    // anchored: the arm has a subject — the signed rows exist and were walked above — and the
+    // eight Register VII tables carry no computed leaf (MEASURED at the signing tip: no `expr`
+    // among their 89 leaves), so an empty problems list is a finding rather than vacuity.
+    const signedRows = Object.values(register.tables).filter((row) => row.status === 'signed');
+    expect(signedRows.length, 'the signed rows exist').toBeGreaterThan(0);
   });
 });
 
@@ -1131,14 +1170,31 @@ describe('tuning register — the desk sheet', () => {
 /* ================================================================= describe F */
 
 describe('tuning register — the signature is a record, not a word', () => {
-  test('the register is unsigned today: signatureVersion 0 and every table draft', () => {
-    expect(register.signatureVersion, 'the estate is UNSIGNED until the owner signs it at the'
-      + ' tuning sitting. This arm is the dormancy bit for that claim, and it is a BIT claim:'
-      + ' no lane may write a signature, and this reds the moment one does.').toBe(0);
-    expect(register.signatures, 'and no signature entry exists yet').toEqual([]);
-    const signed = Object.entries(register.tables).filter(([, row]) => row.status !== 'draft');
-    expect(signed.map(([id]) => id), 'every declared row is DRAFT. A row that is not draft'
-      + ' before the sitting was written by something that had no authority to write it.').toEqual([]);
+  test('the register is signed at version 1: Register VII\'s eight tables by the owner\'s record of 2026-11-06, every other table draft', () => {
+    // The dormancy bit of the pre-sitting claim ("signatureVersion 0 and every table draft")
+    // flipped on 2026-11-06 through the door alone: the ritual, naming
+    // docs/tuning-signatures/2026-11-06-v1.json, applied it through `applySigningRecord`
+    // (ODQ §934.105). This arm is the same BIT claim the other way: exactly ONE signature,
+    // naming exactly the ids the record names, and no lane may add one — a second entry, a
+    // ninth signed row, or a digest that differs from the committed inventory's reds here.
+    const RECORD_REL = 'docs/tuning-signatures/2026-11-06-v1.json';
+    const record = JSON.parse(readFileSync(join(ROOT, RECORD_REL), 'utf8'));
+    expect(register.signatureVersion).toBe(1);
+    expect(register.signatures.map((entry) => entry.version), 'one signature, version 1').toEqual([1]);
+    const [signature] = register.signatures;
+    expect(signature.odqRow).toBe('§934.105');
+    expect(signature.date).toBe('2026-11-06');
+    expect(signature.ownerWords, 'the entry carries the owner\'s words verbatim from the record').toBe(record.ownerWords);
+    expect(signature.signedBy).toBe(record.seat);
+    expect([...signature.ids].sort()).toEqual([...record.ids].sort());
+    expect(record.ids.length, 'Register VII: the eight dials of densityBands.js').toBe(8);
+    expect(record.ids.every((id) => id.startsWith('src/domain/density/densityBands.js#'))).toBe(true);
+    const signed = Object.entries(register.tables).filter(([, row]) => row.status !== 'draft').map(([id]) => id).sort();
+    expect(signed, 'the signed rows are exactly the ids the record names and never one more').toEqual([...record.ids].sort());
+    for (const id of record.ids) {
+      expect(register.tables[id].signedAt, `${id} signed at version 1`).toBe(1);
+      expect(signature.digests[id], `${id}: the frozen digest is the committed inventory's`).toBe(committed.tables[id].spanDigest);
+    }
   });
 
   test('the signature state of an unregistered id fails closed to draft', () => {
@@ -1148,25 +1204,48 @@ describe('tuning register — the signature is a record, not a word', () => {
     expect(state.signedAt).toBeNull();
     const real = signatureStateOf(register, Object.keys(register.tables)[0]);
     // anchored: a real registered id resolves through the same call on the line above, so a
-    // function that returned `draft` for everything unconditionally could not pass both.
-    expect(real.version).toBe(0);
+    // function that returned `draft` for everything unconditionally could not pass both. The
+    // first row is a DRAFT row carrying the register's version, 1 since the owner's record of
+    // 2026-11-06; a SIGNED row reads signed through the same call.
+    expect(real.status).toBe('draft');
+    expect(real.version).toBe(1);
+    const signedReal = signatureStateOf(register, 'src/domain/density/densityBands.js#DENSITY_BANDS');
+    expect(signedReal.status, 'a signed row reads signed').toBe('signed');
+    expect(signedReal.signedAt).toBe(1);
   });
 
-  test('the three signature records read unsigned while their tables are draft', () => {
+  test('each signature record in code reads as its register rows do: Register VII signed, the faith surface draft', () => {
+    // Two views of ONE act: the code's record (`signed: true|false`) and the register's rows for
+    // that file. Before 2026-11-06 both read unsigned. Since the owner's record of 2026-11-06
+    // (tuning-register v1, ODQ §934.105) REGISTER_VII_SIGNATURE reads signed while the eight
+    // unit-bearing rows of densityBands.js are signed; the faith surface reads draft while its
+    // rows are. A code record reading signed over draft rows, or draft over signed rows, means
+    // the estate was signed somewhere this walker cannot see — the red this arm stood on from
+    // 2026-11-04 to 2026-11-06, when the code flipped first and the register followed.
     const problems = [];
     const records = [
       ['src/domain/density/densityBands.js', 'REGISTER_VII_SIGNATURE'],
       ['src/domain/worldPulse/faithTuningSurface.js', 'FAITH_TUNING_SIGNATURE'],
     ];
+    const readings = {};
     for (const [file, name] of records) {
       const source = codeOnly(readFileSync(join(ROOT, file), 'utf8'));
       const match = new RegExp(`const\\s+${name}\\s*=\\s*Object\\.freeze\\(\\{([^}]*)\\}`).exec(source);
       if (!match) { problems.push(`${file}#${name}: not found`); continue; }
-      if (!/signed:\s*false/.test(match[1])) problems.push(`${file}#${name}: signed is not false`);
+      const codeSigned = /signed:\s*true/.test(match[1]);
+      if (!codeSigned && !/signed:\s*false/.test(match[1])) { problems.push(`${file}#${name}: signed is neither true nor false`); continue; }
+      const rows = Object.entries(register.tables).filter(([id, row]) => id.startsWith(`${file}#`) && row.unit !== null);
+      const signedRows = rows.filter(([, row]) => row.status === 'signed');
+      const registerSigned = rows.length > 0 && signedRows.length === rows.length;
+      if (codeSigned !== registerSigned) {
+        problems.push(`${file}#${name}: the code reads signed: ${codeSigned} while ${signedRows.length} of ${rows.length} unit-bearing rows are signed`);
+      }
+      readings[name] = codeSigned;
     }
-    expect(problems, 'the record and the register row are two views of ONE act. A record'
-      + ' reading signed while every register row is draft would mean the estate was signed'
-      + ' somewhere this walker cannot see.').toEqual([]);
+    expect(problems, 'the record and the register rows are two views of ONE act and must agree.').toEqual([]);
+    // anchored both ways, so an arm that read every record the same way could not pass:
+    expect(readings.REGISTER_VII_SIGNATURE, 'Register VII reads signed (v1, 2026-11-06)').toBe(true);
+    expect(readings.FAITH_TUNING_SIGNATURE, 'and the faith surface still reads draft').toBe(false);
     // DEMOGRAPHIC_TUNING_SIGNATURE is CAPACITY C1's and is not in this tree yet; the roster
     // gains it when that car lands. Its absence is measured, not assumed.
     expect(existsSync(join(ROOT, 'src/domain/worldPulse/demographicsRates.js'))).toBe(true);
@@ -1240,7 +1319,7 @@ describe('tuning register — the signature is a record, not a word', () => {
 
   test('the register fingerprint reports the version and both file digests', () => {
     const fingerprint = tuningRegisterFingerprint(ROOT);
-    expect(fingerprint.signatureVersion).toBe(0);
+    expect(fingerprint.signatureVersion, 'v1 since the owner\'s record of 2026-11-06 (Register VII, ODQ §934.105)').toBe(1);
     expect(fingerprint.declaredSha256, 'the declared file must digest').toMatch(/^[0-9a-f]{64}$/);
     expect(fingerprint.inventorySha256, 'and so must the measured one').toMatch(/^[0-9a-f]{64}$/);
     expect(fingerprint.measuredAtSha, 'and the fingerprint names the sha the inventory was'

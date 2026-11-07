@@ -30,6 +30,7 @@ import {
   foldSubjectAxes,
 } from '../../src/domain/worldPulse/beliefAxisSubjects.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { advanceFoodStockpile } from '../../src/domain/worldPulse/foodStockpile.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 const ALL = Object.freeze({ scarcity: true, conditions: true, devotion: true });
@@ -61,6 +62,27 @@ for (const settType of TIERS) {
     for (const culture of CULTURES) CORPUS.push(realSettlement(settType, route, culture));
   }
 }
+
+/**
+ * THE STORES RUNG `bare` IS A PLAYED RUNG, NOT A BORN ONE (LANDING-7 ruling R-E3, 2026-11-06).
+ * T2 (fe56bddd4, chair-adopted) gave a granary-less village a hamlet's 1.5 months, the same
+ * figure as the `bare`/`thin` edge (STORES_THIN_MONTHS 1.5), so no corpus world is born below
+ * it any more: 0 of the 72 here, and 0 of 300 famine and siege births measured over the soak
+ * corpus's own matrix (`scripts/audit/soak-review/corpus.mjs :: cellFor`, min exactly 1.5). The
+ * rung is still LIVE: the world pulse's real stockpile tick drains stores under a famine, and
+ * a born famine thorp reads `bare` after its FIRST month (measured on the soak matrix index 6:
+ * 1.5 -> 1.39 months; this file's own thorp is asserted below). So the corpus
+ * is re-seated with that world, born by the pipeline and advanced by the real tick, never
+ * hand-built; the edge is not lowered.
+ */
+const FAMINE_THORP = generateSettlementPipeline(
+  { settType: 'thorp', culture: 'germanic', tradeRouteAccess: 'isolated', stressType: 'famine', stressTypes: ['famine'] },
+  null,
+  { seed: 'spb-axis-thorp-famine', customContent: {} },
+);
+const PLAYED = Object.freeze([
+  advanceFoodStockpile(FAMINE_THORP, { interval: 'one_month', tick: 1 }).settlement,
+]);
 
 describe('SP-B reachability — every band edge is produced by a REAL world', () => {
   test('the corpus is real and non-trivial (guard the guard)', () => {
@@ -107,7 +129,7 @@ describe('SP-B reachability — every band edge is produced by a REAL world', ()
     const routes = new Set();
     const pulls = new Set();
     const tiers = new Set();
-    for (const settlement of CORPUS) {
+    for (const settlement of [...CORPUS, ...PLAYED]) {
       const bands = conditionsGroundTruth(settlement);
       if (!bands) continue;
       if (bands.storesBand) stores.add(bands.storesBand);
@@ -117,6 +139,9 @@ describe('SP-B reachability — every band edge is produced by a REAL world', ()
     }
     expect([...routes].sort()).toEqual([...ROUTE_POSITION_BANDS].sort());
     expect([...stores].sort()).toEqual([...STORES_BANDS].sort());
+    // The played world is what carries `bare`: born at the edge, below it one month on.
+    expect(conditionsGroundTruth(FAMINE_THORP).storesBand, 'the famine thorp was born below the edge').not.toBe('bare');
+    expect(conditionsGroundTruth(PLAYED[0]).storesBand).toBe('bare');
     expect([...tiers].sort()).toEqual([...TIERS].sort());
     // Pull is the one MINTED ladder, so its reachability claim is the load-bearing one.
     expect(

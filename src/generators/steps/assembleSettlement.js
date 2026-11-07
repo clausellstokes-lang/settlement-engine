@@ -18,6 +18,7 @@ import { generateFactions, generateConflicts } from '../powerGenerator.js';
 import { renderStressSummary } from '../stressNarrative.js';
 import { generatePressureSentence, generateArrivalScene, generateCoherence } from '../narrativeGenerator.js';
 import { generateDefenseProfile } from '../defenseGenerator.js';
+import { settleCrimeLinesToSignal } from '../safetyProfile.js';
 // Faction-to-NPC coupling: synthesizes structural NPCs (high priestess,
 // watch captain, etc.) for any faction archetype that lacks them. Runs
 // at assembly so existing pipeline NPCs are deduplicated against.
@@ -25,7 +26,7 @@ import { ensureFactionStructuralNpcs } from '../factionRoles.js';
 // ODQ §810's tier-gated density law: sizes the political roster to the tier's
 // faction band. Dormant (returns its input by reference, no draw) for any world
 // whose own config carries no density-law marker.
-import { resizePoliticalRoster } from '../density/applyDensityLaw.js';
+import { conserveSeatPower, resizePoliticalRoster } from '../density/applyDensityLaw.js';
 // Canonical-shape adapter (Tier 1.3). Stamps version fields, mints a
 // stable id, defaults canonical containers. Pure — does not restructure
 // legacy fields. Every freshly-generated settlement passes through here
@@ -45,6 +46,7 @@ import { culturalNotesFor } from '../../domain/cultureProfiles.js';
 import {
   buildGenerationCoherenceReceipt,
 } from '../generationCoherence.js';
+import { storeTrueHooksOnly } from '../../domain/coherence/hookTruthRecord.js';
 import {
   assertPowerEconomyFreshness,
   reconcilePowerStructure,
@@ -266,6 +268,8 @@ registerStep('assembleSettlement', {
   // marker gets its powerStructure back by reference, with no draw taken.
   const resized = resizePoliticalRoster({
     tier,
+    // X-46 car 4: the population tilt (read only under Register VII; no draw).
+    population,
     config: settlement.config,
     stress: settlement.stress,
     powerStructure: settlement.powerStructure,
@@ -280,6 +284,19 @@ registerStep('assembleSettlement', {
     settlement.powerStructure = resized.powerStructure;
   }
 
+  // ── THE CRIME LINES READ THE FINAL CRIME SIGNAL (lane RUNG1B-F4 unit 4, 2026-11-04). The safety
+  // profile was written at the economy step, before the power roster existed; this is the first
+  // point where the FINAL roster (after the trim above) and the estate both exist, so its
+  // survival-crime and debt-evasion lines take their text from the crime signal here
+  // (`safetyProfile.js :: settleCrimeLinesToSignal`). No step is re-ordered; no draw; the
+  // economicState is copied only when a line changes (the power fingerprint reads the safety
+  // LABEL, which this never touches).
+  const settledEconomy = settleCrimeLinesToSignal(
+    settlement.economicState,
+    { seats: settlement.powerStructure?.factions, estate: settlement.institutions },
+  );
+  if (settledEconomy !== settlement.economicState) settlement.economicState = settledEconomy;
+
   // Coherence mutates canonical NPC/faction mechanics. Give it a dedicated
   // stream so variable draw counts in pressure/arrival/defense presentation
   // cannot silently rewrite those mechanics.
@@ -289,6 +306,15 @@ registerStep('assembleSettlement', {
     coherenceRng => generateCoherence(settlement, coherenceRng, pins),
   );
   Object.assign(settlement, coherenceUpdates);
+  // Rung 1 N1: faction power totals 100 on every path, the held-roster one included (whose
+  // coherence tail skips the dispersal that conserves it). By reference for v1 and for a
+  // roster already at 100; no draw. A HELD powerStructure is the DM's and is not rewritten.
+  if (chooseOrPin(pins, 'powerStructure', () => UNPINNED) === UNPINNED) {
+    const conserved = conserveSeatPower({
+      config: settlement.config, powerStructure: settlement.powerStructure,
+    });
+    if (conserved !== settlement.powerStructure) settlement.powerStructure = conserved;
+  }
 
   // Faction-to-NPC coupling. Walks every faction; for each archetype
   // (temple, watch, merchant, thieves, noble, arcane) ensures the
@@ -327,6 +353,21 @@ registerStep('assembleSettlement', {
   if (settlement.powerStructure) {
     settlement.powerStructure = { ...settlement.powerStructure, conflicts: settlement.conflicts };
   }
+
+  // ── A HOOK FALSE ON ITS OWN RECORD IS NOT STORED (lane RUNG1-TRUTH unit A, 2026-11-04;
+  // docs/SOAK_1000_RUNG1_2026-11-04.md §2 row 11). Every hook writer has drawn by now and the
+  // facts a hook can lie about are final (the food band, the defence roster above, the tier,
+  // the world law), so the record-level check runs here, before the receipt reads the record,
+  // and a contradicted hook is dropped: the list keeps its next candidate, or none. It draws
+  // nothing and copies only the containers it changes, so a record whose hooks are all true is
+  // byte-identical to before.
+  // (`storeTrueHooksOnly` carries a filtered conflict list onto `powerStructure.conflicts`
+  // too, so the dual-written addresses stay one list.) A HELD ROSTER IS NOT RE-WRITTEN: under a
+  // held `npcs` pin the NPCs' hooks are the held record's, gated on the same key and primitive
+  // as the structural appender above (the conflicts are re-derived on every run, never held).
+  Object.assign(settlement, storeTrueHooksOnly(settlement, {
+    npcsHeld: chooseOrPin(pins, 'npcs', () => UNPINNED) !== UNPINNED,
+  }));
 
   // Propagate the in-pipeline causal trace onto the settlement so
   // downstream consumers (PipelineRail, AI overlay, PDF) can read it.

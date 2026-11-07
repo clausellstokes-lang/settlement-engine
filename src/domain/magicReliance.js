@@ -161,6 +161,22 @@ export function magicDependents(settlement) {
 }
 
 /**
+ * MAGIC IS ABSENT HERE BY THE PLACE'S OWN DIAL (MG-3d; lifted to this leaf by lane RUNG1B-F9
+ * unit 2, 2026-11-04, so the Magic tab's envelope and the DS-DEF-9 reliance desk ask one
+ * predicate): the world has magic, the settlement carries a magic axis that reads zero, and no
+ * live house practises. `magicProfile.js :: deriveMagicProfile` prints "Availability absent"
+ * on exactly this answer. A zero dial with an arcane house standing is an authored premise and
+ * reads false (MG-LAW-4). A dead-magic world is `magicWorksAt`'s answer, not this one.
+ * @param {MagicRelianceSource | null | undefined} settlement
+ * @returns {boolean}
+ */
+export function magicDialAbsent(settlement) {
+  if (!settlement || settlement.config?.magicExists === false) return false;
+  const ledger = magicLedger(settlement);
+  return ledger.present && ledger.magicLevel === 'none' && practisingInstitutions(settlement).length === 0;
+}
+
+/**
  * THE ONE READING.
  * @param {MagicRelianceSource | null | undefined} settlement
  * @returns {MagicReliance}

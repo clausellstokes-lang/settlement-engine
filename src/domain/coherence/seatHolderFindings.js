@@ -21,7 +21,7 @@
 import { governingFactionOf, nameOf } from '../rulingPower.js';
 import { rulingChainOf, liveSeatCandidatesOf } from '../dossier/powerStrata.js';
 import { seatTitleRankOf, isOfficeStandIn } from '../dossier/seatHolder.js';
-import { npcInFaction, ladderFactionKey } from '../worldPulse/npcLadderState.js';
+import { npcInFaction, ladderFactionKey } from '../worldPulse/npcLadderFactionMembership.js';
 
 /** @typedef {import('../dossier/seatHolder.js').SeatSettlement} SeatSettlement */
 /** @typedef {import('../dossier/seatHolder.js').SeatNpc} SeatNpc */

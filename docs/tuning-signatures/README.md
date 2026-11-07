@@ -40,13 +40,21 @@ keeps a live subject to refuse, so the blank file must never be a valid record.
 }
 ```
 
-Then run the ritual, naming the record:
+Commit the record first — the ritual refuses a dirty tree — then run the ritual, naming it:
 
 ```
 TUNING_INVENTORY_REFREEZE='<seat>' TUNING_INVENTORY_NOTE='<why it moved>' \
   TUNING_SIGNATURE_RECORD=docs/tuning-signatures/<date>-v<N>.json \
   npx vitest run tests/lint/tuningRegister.walker.test.js
 ```
+
+When the record is named, the ritual applies it through `applySigningRecord` — the one path
+that may ever write `status: 'signed'` — and writes the declared register beside the measured
+inventory: the named rows `signed` at version N, `signatureVersion` N, and the `signatures[N-1]`
+entry carrying the owner's words, the seat, the row and the digests frozen at the signing tip.
+A record the door refuses (blank fields, a version out of sequence, an id with no row or no
+unit, a module-side id) writes nothing at all. The first signature is `2026-11-06-v1.json`:
+Register VII, the eight dials of `src/domain/density/densityBands.js`, ODQ §934.105.
 
 The run reports failure when it writes. That is deliberate, and it is the same convention
 the lighting census uses: a mode that rewrote a register and also reported green could

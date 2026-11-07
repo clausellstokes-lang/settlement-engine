@@ -84,6 +84,21 @@ export const SIMULATION_FLAG_PATTERN = /^[a-z][A-Za-z0-9]*Enabled$/;
  * reviewed environment holds a living-content definition, and the walker's
  * corpus is generated under `customContent: {}`.
  *
+ * ⭐⭐ ROW 2 IS RETIRED TOO, BY ITS OWN PREMISE (2026-11-05, LANDING-5 under the cloud chair's ruling 2 on
+ * LANDING-4's report, ODQ §934.105). `densityRungRole on npcs` was dark-by-construction while
+ * `NEW_SETTLEMENT_DENSITY_LAW_VERSION` shipped at 1 against Register VII's 2. X-46 car 4's density law
+ * (1c527831a, the densityRoll cause) lit the dial everywhere: the shipped dial EQUALS the lit version (2), the
+ * key is written on every world, and clause D-dial convicted the row in the walker's beforeAll ("Retire the row
+ * rather than outliving its own premise"). The dark path the row and its walker arms walked no longer exists,
+ * so the row is struck rather than kept alive on a constructed dial (dead stays dead), and the identity is now
+ * judged normally.
+ *
+ * ⭐ THE SIXTH ROW IS RETIRED BY CLAUSE S (2026-11-05, LANDING-5 under the cloud chair's ruling 3, ODQ §934.105),
+ * with the cause as measured: the executed corpus's 327 proposals carry no `supersessionReason` at all, the writer
+ * (proposalAdmission.js, last changed by CURE-PEACE-2 400e8e5a6 / d5eda0aa0) is unchanged, and the identity left
+ * the judged population. COVERAGE WAS LOST, NOT REACH: no corpus seed now drives a supersession, so the walker
+ * cannot judge the key; the reconcile that reads it is unchanged. "A corpus seed whose proposal is superseded" is
+ * owed coverage (LANDING-5's report lists it), so the loss is not silent. Its history, as it was:
  * The sixth row (2026-09-24, CURE-PEACE-1) is `supersessionReason on proposals`, engine-internal: the
  * lane's docket retirement (FP-17) is the first supersession writer the executed corpus runs, so the
  * reason code every supersession writer stamps became judgeable, and its one reader is the feed
@@ -103,29 +118,6 @@ export const SIMULATION_FLAG_PATTERN = /^[a-z][A-Za-z0-9]*Enabled$/;
  * `worldState` identity is judgeable).
  */
 export const WRITER_DARK_REGISTER = Object.freeze([
-  Object.freeze({
-    identity: 'densityRungRole on npcs',
-    key: 'densityRungRole',
-    shape: 'npcs',
-    writer: 'src/generators/density/applyDensityLaw.js',
-    reason: 'dark-by-construction',
-    door: Object.freeze({
-      kind: 'generation-dial',
-      configKey: '_densityLawVersion',
-      dialModule: 'src/domain/density/densityLaw.js',
-      dialExport: 'NEW_SETTLEMENT_DENSITY_LAW_VERSION',
-      litModule: 'src/domain/density/densityLaw.js',
-      litExport: 'REGISTER_VII_DENSITY_LAW_VERSION',
-    }),
-    lighting: 'The Register VII density roll writes each seated member\'s rung role, and the shipped dial is 1 '
-      + 'against a register version of 2, so no world a player generates carries the key at all. The estate has '
-      + 'known this key was unread since D1 and says so in its own source at '
-      + 'src/generators/density/titularSuccession.js:29; what it lacked was an instrument that could hold the '
-      + 'claim, because the write is a computed property key behind RUNG_ROLE_FIELD and no text probe can see it. '
-      + 'The dormancy is now an executed bit rather than a comment.',
-    car: '§7 WRWALKER Car 4, the reason-aware clauses ruled at ledger §882.15',
-    charter: '§7 WRWALKER, the drafted register row 2, writer CONFIRMED at applyDensityLaw.js:428',
-  }),
   Object.freeze({
     identity: 'cultureProfileKey on config',
     key: 'cultureProfileKey',
@@ -227,24 +219,6 @@ export const WRITER_DARK_REGISTER = Object.freeze([
       + 'would fix it is the half-told version of the fact, so this key rides with the container to the same owner '
       + 'ruling rather than being banked as unreviewed.',
     charter: '§7 WRWALKER, the drafted register row 6, measured DARK by Car 0 at C-prime',
-  }),
-  Object.freeze({
-    identity: 'supersessionReason on proposals',
-    key: 'supersessionReason',
-    shape: 'proposals',
-    writer: 'src/domain/worldPulse/proposalAdmission.js',
-    reason: 'engine-internal',
-    consumer: Object.freeze({
-      file: 'src/domain/worldPulse/worldPulseFeedCuration.js',
-      symbol: 'reconcileSupersededProposalNews, which retires the queued question of a superseded row by its reason',
-    }),
-    why: 'Why a docket row was superseded is plumbing. The engine writes a closed reason code (record_mode_upgrade,'
-      + ' bilateral_peace_lapsed, peacetime_suit_overtaken_by_war) so the feed reconcile can retire the queued'
-      + ' question of a row whose premise died, and that reconcile is its only reader. What the DM is shown is the'
-      + ' row itself in the Herald resolved log, timed by supersededAt, which that log reads. A surface that wants to'
-      + ' explain a supersession would voice the cause in words, never print this code.',
-    charter: '§7 WRWALKER, the row CURE-PEACE-1 owes for U1 (the chair ruling FP-17): the retirement writer is the'
-      + ' first the executed corpus runs, measured DARK at the integration tip 6cf6920d4',
   }),
   Object.freeze({
     identity: 'appliedHeadline on candidates',

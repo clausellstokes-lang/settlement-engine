@@ -179,10 +179,19 @@ const RULED = Object.freeze({
     'card — a ResourceChainCard, the fully-worked variant of the same card.',
   'src/components/new/tabs/power/PowerStrata.jsx :: roster':
     'card — a FactionRow: the faction with its archetype and share, its member count beneath and a fold.',
+  // THE CRISIS TAB (docs/DESIGN_CRISIS_TAB.md, the owner 2026-11-03) and X-46 car 3's fabric group,
+  // both arrivals of the rung-1 window, ruled at LANDING-7 (lane F, 2026-11-06).
+  'src/components/new/tabs/CrisisTab.jsx :: sections':
+    'card — a CrisisSection is a whole crisis: its event line, cast, stakes, levers, what is seen first and the escalation.',
+  'src/components/new/tabs/InstitutionsTab.jsx :: fabric':
+    'card — an InstitutionCard, the same card as the houses above it, gathered under "The fabric of the place".',
 
   // ── NOT ROWS, OR TOO FEW TO BE ─────────────────────────────────────────────
   'src/components/new/tabs/ResourcesTab.jsx :: chain.finalProducts':
     'inline-run — the chain\'s final products run inline with arrow separators, as one flow.',
+  'src/components/new/tabs/CrisisTab.jsx :: roster':
+    'inline-run — the rows are the <option>s of the cast editor\'s two <select>s: each control is one line '
+    + 'on the page and the browser draws its list, so there is nothing to column.',
 });
 
 // ── the walk ─────────────────────────────────────────────────────────────────

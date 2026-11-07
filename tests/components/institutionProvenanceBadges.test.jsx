@@ -165,7 +165,7 @@ describe('InstitutionsTab cards — the provenance badge', () => {
  * prison ...) no longer surface another house's menu. Each owns its entry, so every row naming
  * one is that house's own service, and the Institutions page lists it under the house.
  */
-const FORMER_PROXY_HOSTS = new Set(['dwellings (4-16)', 'dwellings (17-80)', 'dwellings (80-180)', 'housing (180-1000 structures)', 'housing (1000-5000 structures)', 'water source', 'multiple water sources', 'sewage system', 'farmland', 'common grazing land', 'access to external mill', 'massive prison']);
+const FORMER_PROXY_HOSTS = new Set(['dwellings (1-8)', 'dwellings (5-25)', 'dwellings (15-100)', 'housing (75-650 households)', 'housing (500-4000 households)', 'water source', 'multiple water sources', 'sewage system', 'farmland', 'common grazing land', 'access to external mill', 'massive prison']);
 describe('F14 / RS-19 — a former proxy house lists only its own menu', () => {
   test('rows naming a former proxy are its own services and join its card', async () => {
     const { institutionsWithServices } = await import('../../src/components/new/tabs/InstitutionsTab.jsx');

@@ -411,11 +411,13 @@ describe('MF-CH2B — the magic gates read the declared licence, never the shelf
       .filter(line => !/^\s*(?:\/\/|\*|\/\*)/.test(line));
     expect(executable.filter(l => /NON_MAGIC_EXOTICS|'dragon resident'|'underground city'/.test(l)))
       .toEqual([]);
-    // `Dragon resident` needs no exemption: it declares `none`, so the licence keeps it off the
-    // exotic scaler and off the magic multiplier wherever it is filed
-    expect(institutionCatalogMagicLicence('Dragon resident')).toBe('none');
+    // `Dragon resident` still needs no exemption: its DECLARED licence decides. 2026-11-04, X-04
+    // the dragon re-licensed (chair ruling 2: "a dragon is a creature of magic in this world"):
+    // 'none' → 'high', so it now rides the exotic scaler like its shelf-mates, and its draw was
+    // divided by the scaler's factor for it (baseChance 0.1 → 0.06, round 3, 2).
+    expect(institutionCatalogMagicLicence('Dragon resident')).toBe('high');
     for (const r of rowsNamed('Dragon resident')) {
-      expect(ridesTheDial(r.category, r.name, r.tier), `${r.tier}/${r.category}`).toBe(false);
+      expect(ridesTheDial(r.category, r.name, r.tier), `${r.tier}/${r.category}`).toBe(true);
     }
     // and the exemption's OTHER member was inert all along: no catalog row of that name sits on
     // a shelf the exotic scaler ever read, so the test it was exempted from never fired

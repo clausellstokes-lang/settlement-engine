@@ -58,8 +58,11 @@ async function runWorker({ indices, out, w, renderedSubset, count }) {
   const { birth, ensureLaws, sha } = await import('./soak-review/corpus.mjs');
   const { reviewSettlement } = await import('./soak-review/checks.mjs');
   const { walkRecord, chainFacts } = await import('./soak-review/features.mjs');
-  const { sentencesOf } = await import('./soak-review/checks.mjs');
+  const { housesReading } = await import('./soak-review/bands.mjs');
+  const { sentencesOf, isReaderCheck } = await import('./soak-review/checks.mjs');
+  const { readerDistributions } = await import('../../src/domain/coherence/readerBattery.js');
   const { normalizeRenderedSentence } = await import('./phrase-repetition.mjs');
+  const { storySentencesOf, skeletonOf } = await import('./soak-review/prose.mjs');
   await ensureLaws();
   const needRender = indices.some((i) => isRendered(i, renderedSubset) || isSampled(i, count));
   const H = needRender ? await import('./soak-review/renderHarness.mjs') : null;
@@ -83,6 +86,9 @@ async function runWorker({ indices, out, w, renderedSubset, count }) {
       // corpus repetition: every screen sentence, exact and with this place's own names masked
       const sentences = [];
       const texts = {};
+      // prose-only repetition: story sentences (the surface filter), their skeletons, the hooks
+      const story = { items: [], hooks: [] };
+      const storyTexts = {};
       if (r) {
         const names = [s.name, ...(s.npcs || []).map((n) => n?.name), ...(s.powerStructure?.factions || []).map((f) => f?.faction ?? f?.name)]
           .filter((n) => typeof n === 'string' && n.length > 2).sort((a, z) => z.length - a.length);
@@ -95,13 +101,32 @@ async function runWorker({ indices, out, w, renderedSubset, count }) {
           sentences.push(h);
           if (!seenText.has(h)) { seenText.add(h); texts[h] = skel.slice(0, 300); }
         }
+        // [exact hash, skeleton hash] per distinct story sentence, so the aggregate can set
+        // aside a skeleton (the tabs' own copy) and the exact sentences under it together.
+        const exact = new Set();
+        for (const [tab, blocks] of Object.entries(r.prose || {})) {
+          for (const sent of storySentencesOf(blocks)) {
+            const e = sha(sent); if (exact.has(e)) continue; exact.add(e);
+            const skel = skeletonOf(sent, names); const h = sha(`story|${skel}`);
+            story.items.push([e, h]);
+            if (!seenText.has(h)) { seenText.add(h); storyTexts[h] = { s: skel.slice(0, 300), tab }; }
+          }
+        }
+        story.hooks = storySentencesOf(String(r.tabs.plot_hooks || '').split('\n')).map((x) => sha(x));
       }
       const features = walkRecord(s);
-      const chains = chainFacts(s, { stressCell: b.stressCell, findings });
+      // The reader findings stay off the chain facts (chain.findingCount), so the field walk and
+      // the dependence scan read exactly what they read before the READER battery.
+      const chains = chainFacts(s, { stressCell: b.stressCell, findings: findings.filter((f) => !isReaderCheck(f.check)) });
       line = {
         i, seed: b.seed, tier: s.tier, population: s.population, stressCell: b.stressCell, matrix: b.matrix,
         hashes: { record: sha(s), config: sha(b.config) }, rendered, replay,
-        findings, chains, features, sentences, texts,
+        findings, chains, features, sentences, texts, story, storyTexts,
+        // I4's houses ÷ anchor (bands.mjs): kept off `chains` and `features` so the field walk
+        // and the dependence scan read exactly what they read before.
+        houses: housesReading(s),
+        // The READER battery's distributions (2c: the Exports count; 10: the Daily Life line at all), apart.
+        reader: readerDistributions(s, r ? r.tabs : null),
       };
       if (isSampled(i, count) && r) {
         const body = [

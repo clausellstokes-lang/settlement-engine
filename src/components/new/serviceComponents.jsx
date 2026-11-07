@@ -13,7 +13,27 @@ import { entityAnchor, entityIdFor, serviceEntityOf } from '../../domain/dossier
 import { useEntityFocus } from '../dossier/useEntityFocus.js';
 
 // ── ServiceItem ───────────────────────────────────────────────────────────────
-export function ServiceItem({ svc, accent='#6b5340', isCriminal=false, _tradeDeps, impaired, degraded, vulnerable, depReasons, chainDepth=null, settlement=null }) {
+/**
+ * The dependency reason a service row prints under its name, or null: the row is impaired or
+ * reduced and its service or institution has a recorded dependency. ONE spelling of that read,
+ * shared by the row and by the Services tab's X-50 plan below, so the tab cannot plan an impact
+ * line for a row that would not print one.
+ * @param {unknown} svc
+ * @param {{ impaired?: Set<string>, degraded?: Set<string>, depReasons?: Map<string, { resource: string, impact: string, inst: string }> }} sets
+ */
+export function serviceImpactReason(svc, { impaired, degraded, depReasons }) {
+  const name = typeof svc === 'string' ? svc : /** @type {any} */ (svc)?.name || '';
+  const inst = typeof svc === 'object' ? (/** @type {any} */ (svc)?.institution || '') : '';
+  const isImp = impaired?.has(name) || impaired?.has(inst);
+  const isDeg = !isImp && (degraded?.has(name) || degraded?.has(inst));
+  if (!(isImp || isDeg) || !depReasons) return null;
+  return depReasons.get(name) || depReasons.get(inst) || null;
+}
+
+// X-50 (BOILERPLATE ONCE): `impactShown` — an earlier row already printed this row's impact
+// sentence, so the row keeps its own need and prints no impact; `impactCovers` — the row that
+// prints the impact names the chains it covers after it. Both default to the old row.
+export function ServiceItem({ svc, accent='#6b5340', isCriminal=false, _tradeDeps, impaired, degraded, vulnerable, depReasons, chainDepth=null, settlement=null, impactShown=false, impactCovers=null }) {
   // THE PHONE PROSE FLOOR — the description sentence and the impairment reason.
   // The service name, the ✦ custom mark, the status pill, the chain-depth chip
   // and the institution attribution keep their own steps: they are the row's
@@ -77,14 +97,16 @@ export function ServiceItem({ svc, accent='#6b5340', isCriminal=false, _tradeDep
             keep their `<p>`: their children are inline-only.
             @enforced-by tests/components/servicesInstitutionCardNesting.test.jsx */}
         {inst&&<div style={{fontSize:chromeFontSize(FS.xxs, mobile),color:isCriminal?'#7a4040':'#9c8068',margin:'1px 0 0',fontStyle:'italic'}}><InstitutionLink name={inst} settlement={settlement} /></div>}
-        {(isImp||isDeg)&&depReasons&&(depReasons.get(name)||depReasons.get(inst))&&(()=>{
-          const r=depReasons.get(name)||depReasons.get(inst);
+        {(()=>{
+          const r=serviceImpactReason(svc, { impaired, degraded, depReasons });
+          if (!r) return null;
           return <p style={{fontSize:proseFontSize(FS.xxs,mobile),color:isImp?'#8b1a1a':'#8a4010',margin:'3px 0 0',lineHeight:1.3}}>
             {/* The dependency's `resource` is a catalogue KEY on thirteen of this tab's rows
                 (`oasis_water`, `camel_herds`, `glass_sand`); `depReasons` is keyed by the raw
                 name above and stays that way — only the printed word goes through the seam. */}
              Needs <strong>{resourceDisplayName(r.resource)}</strong>
-            {r.impact&&<span style={{fontStyle:'italic',marginLeft:4}}>{truncateAtWord(r.impact, 70)}</span>}
+            {r.impact&&!impactShown&&<span style={{fontStyle:'italic',marginLeft:4}}>{truncateAtWord(r.impact, 70)}</span>}
+            {r.impact&&!impactShown&&impactCovers?.length>0&&<span style={{marginLeft:4}}>· covers {impactCovers.join(', ')}</span>}
           </p>;
         })()}
       </div>

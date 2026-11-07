@@ -22,7 +22,7 @@ import {
   nativeSemanticName,
   nativeSemanticNames,
 } from '../../domain/content/customContentSemanticAuthority.js';
-import { resolveGenerationWorldLaw } from '../generationContext.js'; import { hasMarketInstitution } from '../economy/viability.js'; // SIZE-3: one line, so no cited line moves
+import { resolveGenerationWorldLaw } from '../generationContext.js'; import { hasMarketInstitution } from '../economy/viability.js'; import { defenseFactsOf, forceWordsOf } from '../../domain/defense/defenseFacts.js'; import { defenceTwinLine } from '../../data/defenceTwinLines.js'; // SIZE-3, R6, F1 and F10: one line, so no cited line moves
 
 // renormalizeFactionPower — rescale every faction's `power` to integer
 // percentage points summing to exactly 100, using largest-remainder rounding
@@ -66,13 +66,13 @@ export const renormalizeFactionPower = (factions) => {
 // Math.round(NaN) = NaN corrupts every share, the sort, and the standing
 // annotation — it degrades to 0 shares instead. Byte-identical on the normal
 // path (totalPower > 0). Exported for the focused degenerate-roster test.
-export const normalizeAndAnnotateFactions = (factions) => {
+export const normalizeAndAnnotateFactions = (factions, force) => {
   const totalPower = factions.reduce((sum, faction) => sum + (faction.power || 0), 0);
   factions.forEach((faction) => {
     faction.power = totalPower > 0 ? Math.round(((faction.power || 0) / totalPower) * 100) : 0;
   });
   factions.sort((a, b) => (a.isGoverning ? -1 : b.isGoverning ? 1 : b.power - a.power));
-  annotateFactionStanding(factions);
+  annotateFactionStanding(factions, force);
   return factions;
 };
 
@@ -113,11 +113,11 @@ export const generatePowerStructure = (
     militaryPower = Math.round(23 * priorityToMultiplier(instFlags.militaryEffective)),
     religiousPower = Math.round(22 * priorityToMultiplier(instFlags.religionInfluence)),
     criminalPower =
-      instFlags.criminalEffective > 42 && (tier === 'city' || tier === 'metropolis' || instFlags.criminalEffective > 58)
+      instFlags.criminalEffective > 42 && (tier === 'city' || tier === 'metropolis' || instFlags.criminalEffective > 58) && (!['thorp', 'hamlet', 'village'].includes(tier) || hasMarketInstitution(nativeInstitutions)) // R6: a small place's guild power needs a market
         ? Math.round(12 * priorityToMultiplier(instFlags.criminalEffective))
         : 0,
     craftPower =
-      tier !== 'thorp' && tier !== 'hamlet'
+      tier !== 'thorp' && tier !== 'hamlet' && (tier !== 'village' || hasMarketInstitution(nativeInstitutions)) // R6: as the Thieves' Guild above
         ? Math.round(17 * priorityToMultiplier(instFlags.economyOutput * 0.75 + 10))
         : 0,
     arcanePower =
@@ -352,7 +352,7 @@ export const generatePowerStructure = (
         topPriority <= 65 &&
         (informalModifier =
           {
-            military: 'garrison-backed',
+            military: defenceTwinLine('garrison-backed', defenseFactsOf({ institutions: nativeInstitutions })), // F10: data/defenceTwinLines.js
             religion: 'church-guided',
             economy: 'commerce-driven',
             criminal: 'corruption-riddled',
@@ -589,7 +589,7 @@ export const generatePowerStructure = (
       militaryDescFinal =
         governingFaction && (governingFaction.toLowerCase().includes('military council') || governingFaction.toLowerCase().includes('martial'))
           ? militaryDesc +
-            ' Operationally distinct from the command council: these are the soldiers and watchmen, not the officers who govern.'
+            (forceWordsOf(defenseFactsOf({ institutions: nativeInstitutions })).members === 'soldiers' ? ' Operationally distinct from the command council: these are the soldiers and watchmen, not the officers who govern.' : ` Operationally distinct from the command council: these are the ${forceWordsOf(defenseFactsOf({ institutions: nativeInstitutions })).members}, not the officers who govern.`)
           : militaryDesc,
       militaryCap = governingFaction && governingFaction.includes('Merchant oligarchy') ? Math.round(merchantPower * 0.85) : 9999;
     factions.push({
@@ -625,7 +625,7 @@ export const generatePowerStructure = (
                 : "Church holds substantial temporal power; tithes fund civic works and the clergy's opinion on appointments carries decisive weight."
               : religiousPower > 17
                 ? ['city', 'metropolis'].includes(tier)
-                  ? 'Major church institutions hold structural influence. Land grants, hospital networks, and moral authority give them leverage across multiple civic domains.'
+                  ? (defenseFactsOf({ institutions: nativeInstitutions }).hasHospital ? 'Major church institutions hold structural influence. Land grants, hospital networks, and moral authority give them leverage across multiple civic domains.' : 'Major church institutions hold structural influence. Land grants, charity, and moral authority give them leverage across multiple civic domains.')
                   : ['hamlet', 'village'].includes(tier)
                     ? 'The village priest is the most educated person for miles; moral authority and practical influence are inseparable at this scale.'
                     : 'Church institutions are well-embedded in civic life; their opinion on appointments, taxation, and law is sought and usually influential.'
@@ -694,7 +694,7 @@ export const generatePowerStructure = (
     stressTypes = (config == null ? void 0 : config.stressTypes) || (stressType ? [stressType] : []),
     hasStress = (s) => stressTypes.includes(s);
   applyStressEventFactions(factions, hasStress, governingFaction, hasNobleInst, config, institutions);
-  normalizeAndAnnotateFactions(factions);
+  normalizeAndAnnotateFactions(factions, forceWordsOf(defenseFactsOf({ institutions: nativeInstitutions }))); // F1: the standing lines name the force that stands
   // Tag each faction with a category for power-economy correlation
   factions.forEach((f) => {
     if (!f.category) f.category = inferFactionCategory(f.faction || '');
@@ -775,7 +775,7 @@ export const generatePowerStructure = (
       safetyRatio,
     },
     publicLegitimacy,
-    stressTypesArr
+    stressTypesArr, defenseFactsOf({ institutions: nativeInstitutions }), // R6: the soldiers line reads the place's forces
   );
 
   return {

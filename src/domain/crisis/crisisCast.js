@@ -1,0 +1,1025 @@
+/**
+ * domain/crisis/crisisCast.js — WHO A CRISIS TOUCHES, DERIVED, NEVER INVENTED.
+ *
+ * The design is docs/DESIGN_CRISIS_TAB.md (the owner, 2026-11-03: "Do it"). A crisis is a
+ * singular event; its stress-container entry is its one record, and this module writes the
+ * record's one new field, `cast`: the nature of the kind, the roles assigned to EXISTING people
+ * (or houses, or institutions) with the rule that fired for each, a stake for every faction,
+ * the institutions the crisis turns on, and the escalation the catalog already names.
+ *
+ * ⭐ THE TOWN IS CAST, NOT THE CRISIS. `deriveCrisisCast` takes every active entry, in the
+ * engine's own severity order (the caller passes them ranked; `generateStress` already sorts
+ * by `STRESS_SEVERITY_WEIGHT`, which lives on the generator side of the layering boundary),
+ * and casts them worst first: a person never holds two roles of a contradictory pair across
+ * the crises; the occasional roles are capped per town; one temporary person at most; and a
+ * crisis the catalog links to an earlier one reads that earlier cast.
+ *
+ * ⛔ NO RANDOM DRAW. The occasional roles are chosen by a hash of the seed, the crisis id and
+ * the role against the rate in `CRISIS_CAST_TUNING`, so nothing else's draw order moves. The
+ * one exception, the temporary person's name, is minted by the CALLER (the pipeline step)
+ * through the `mintTemporary` option; this module only says that one is needed.
+ *
+ * Every rule is total: when nothing matches, the role is absent and `absent` says why. No
+ * row ever carries a placeholder name.
+ *
+ * Pure: no store, no React, no I/O, no rng.
+ */
+
+import { STRESSOR_CATALOG } from '../worldPulse/stressorsCore.js';
+import { GEN_TO_PULSE_TYPE } from '../stressorPicker.js';
+import { factionArchetype, FACTION_ARCHETYPES } from '../factionArchetypes.js';
+import { governingFactionOf } from '../rulingPower.js';
+import { outrankingRivalOf, rulingChainOf } from '../dossier/powerStrata.js';
+import { isOfficeStandIn } from '../dossier/seatHolder.js';
+import { liveInstitutions } from '../institutions/institutionRoster.js';
+import { defenseFactsOf } from '../defense/defenseFacts.js';
+import { defenceTwinLine } from '../../data/defenceTwinLines.js';
+import { CAST_EDIT_PATH, CAST_EDIT_SEPARATOR } from '../userEditLines.js';
+import { nativeSemanticName } from '../content/customContentSemanticAuthority.js';
+
+// ── The tuning (the owner's dials; docs/DESIGN_CRISIS_TAB.md "Open for the owner's veto") ──
+
+/**
+ * The five occasional-role rates and the per-town caps. A rate is the share of the crises of
+ * the role's nature that carry the role; WHICH crisis is decided by `castHash`, never a draw.
+ */
+export const CRISIS_CAST_TUNING = Object.freeze({
+  rates: Object.freeze({
+    exploiter: 1 / 3,
+    scapegoat: 1 / 4,
+    waverer: 1 / 2,
+    profiteer: 1 / 3,
+    collaborator: 1 / 2,
+  }),
+  townCaps: Object.freeze({
+    exploiter: 1,
+    scapegoat: 1,
+    profiteer: 1,
+    collaborator: 1,
+    temporary: 1,
+  }),
+});
+
+// ── The vocabulary ────────────────────────────────────────────────────────────────────────
+
+/** @typedef {'natural' | 'social' | 'engineered' | 'external'} CrisisNature */
+/**
+ * @typedef {'brunt' | 'lever' | 'exploiter' | 'scapegoat' | 'instigator' | 'target' | 'waverer'
+ *   | 'collaborator' | 'defender' | 'treater' | 'face' | 'profiteer'} CrisisRole
+ */
+
+/** The nature of each kind: a property of the kind, not a draw. */
+export const CRISIS_NATURE = Object.freeze(/** @type {Record<string, CrisisNature>} */ ({
+  famine: 'natural',
+  plague_onset: 'natural',
+  mass_migration: 'natural',
+  monster_pressure: 'natural',
+  politically_fractured: 'social',
+  succession_void: 'social',
+  insurgency: 'social',
+  slave_revolt: 'social',
+  religious_conversion: 'social',
+  recently_betrayed: 'social',
+  infiltrated: 'engineered',
+  under_siege: 'external',
+  occupied: 'external',
+  wartime: 'external',
+  indebted: 'external',
+}));
+
+/** The role names as the page prints them. */
+export const CRISIS_ROLE_LABEL = Object.freeze(/** @type {Record<CrisisRole, string>} */ ({
+  brunt: 'bears the brunt',
+  lever: 'holds the lever',
+  exploiter: 'exploits it',
+  scapegoat: 'takes the fall',
+  instigator: 'instigator',
+  target: 'target',
+  waverer: 'wavers',
+  collaborator: 'collaborates',
+  defender: 'defends',
+  treater: 'would treat',
+  face: "the occupier's local face",
+  profiteer: 'profits',
+}));
+
+/** Every role the vocabulary holds, in the page's order. */
+export const CRISIS_ROLES = Object.freeze(/** @type {CrisisRole[]} */ (Object.keys(CRISIS_ROLE_LABEL)));
+
+/** Pairs no one person holds across the crises of one town. */
+export const CONTRADICTORY_ROLE_PAIRS = Object.freeze(/** @type {Array<readonly [CrisisRole, CrisisRole]>} */ ([
+  Object.freeze(/** @type {const} */ (['exploiter', 'brunt'])),
+  Object.freeze(/** @type {const} */ (['instigator', 'target'])),
+  Object.freeze(/** @type {const} */ (['defender', 'collaborator'])),
+  Object.freeze(/** @type {const} */ (['profiteer', 'brunt'])),
+  Object.freeze(/** @type {const} */ (['scapegoat', 'instigator'])),
+]));
+
+/** The roles a crisis of each nature must try to fill (external varies by kind; see below). */
+const REQUIRED_BY_NATURE = Object.freeze(/** @type {Record<CrisisNature, CrisisRole[]>} */ ({
+  natural: ['brunt', 'lever'],
+  social: ['instigator', 'target'],
+  engineered: ['instigator'],
+  external: [],
+}));
+
+/** The external kinds' required roles, kind by kind (the design's table). */
+const REQUIRED_EXTERNAL = Object.freeze(/** @type {Record<string, CrisisRole[]>} */ ({
+  under_siege: ['defender', 'treater'],
+  wartime: ['defender'],
+  indebted: ['treater'],
+  occupied: ['face'],
+}));
+
+/** The occasional roles by nature; a kind-specific gate narrows collaborator to occupation. */
+const OCCASIONAL_BY_NATURE = Object.freeze(/** @type {Record<CrisisNature, Array<keyof typeof CRISIS_CAST_TUNING.rates>>} */ ({
+  natural: ['exploiter', 'scapegoat'],
+  social: ['waverer', 'scapegoat'],
+  engineered: ['collaborator'],
+  external: ['profiteer', 'collaborator'],
+}));
+
+/** The fixed reason vocabulary. Every `reason` on the record is one of these sentences, or its defence-free twin (`data/defenceTwinLines.js`, F10). */
+export const CAST_REASONS = Object.freeze({
+  bruntBase: Object.freeze(/** @type {Record<string, string>} */ ({
+    food_security: 'the hunger falls first on its people',
+    labor_capacity: 'its hands do the work the crisis takes',
+    trade_connectivity: 'its trade is cut',
+    defense_readiness: 'its people stand on the walls',
+    public_legitimacy: 'its standing is what the crisis spends',
+    healing_capacity: 'its people tend the sick',
+    tax_revenue: 'its revenue is what the crisis drains',
+    housing_pressure: 'its people take in the newcomers',
+    social_trust: 'its people stop trusting their neighbours',
+    faction_stability: 'its own ranks begin to split',
+    law_order: 'its people keep an order that is failing',
+    criminal_opportunity: 'its streets are where the crime lands',
+  })),
+  bruntLeast: 'the least powerful of the house the crisis hits',
+  leverRuns: 'holds the office the crisis turns on',
+  leverInstitution: 'the crisis turns on this house, and no one on the roster runs it',
+  leverTemporary: 'no one on the roster could; here for this crisis',
+  instigatorRival: 'outranks the seat while it weakens',
+  instigatorGains: 'its faction gains from the crisis',
+  instigatorLinked: 'drawn from the house that bore the famine',
+  targetSeat: 'holds the seat',
+  targetSeatContested: 'holds the seat, with legitimacy already contested',
+  targetGoverning: 'the governing house',
+  targetLinked: "the occupation's resistance turns on its local face",
+  exploiterCorrupt: 'corrupt, with ties to the underworld',
+  exploiterTrait: 'grasping by nature, in a faction that gains',
+  exploiterPower: 'the most powerful of a faction that gains',
+  exploiterLinked: "the siege's profiteer, still selling what the siege cut off",
+  scapegoatSeat: 'holds the seat, blamed while legitimacy is contested',
+  scapegoatLever: 'holds the lever, blamed while legitimacy is contested',
+  defenderMilitary: 'leads the military',
+  defenderOffice: "holds the garrison's office",
+  defenderInstitution: "the town's defence, with no one on the roster leading it",
+  treaterMerchant: 'leads the merchants, the seat being contested',
+  treaterSeat: 'holds the seat',
+  collaboratorCorrupt: 'corrupt, with ties to the underworld',
+  collaboratorAmbition: 'the most ambitious of a faction that gains',
+  collaboratorLinked: "the famine's exploiter, first to deal with the occupier",
+  waverer: 'its faction could go either way',
+  face: 'leads the occupying power',
+  nextInLine: 'next in line, the first choice already holding a role that contradicts this one',
+  dm: "the DM's word",
+});
+
+/** The fixed absence vocabulary: why a role has no holder. */
+export const CAST_ABSENCES = Object.freeze({
+  noBase: "no house's base is hit",
+  noLever: 'no house the crisis turns on stands here',
+  noGains: 'no faction gains',
+  outsideHand: 'an outside hand, unnamed',
+  noSeat: 'no seat or governing house stands',
+  noMilitary: 'no military, garrison or watch stands',
+  noMerchantOrSeat: 'no merchant house and no seat stands',
+  noOccupier: 'no occupying power on the roster',
+  noSplit: 'no faction could go either way',
+  notContested: 'legitimacy is not contested',
+  noLoser: "neither the seat's house nor the lever's loses by it",
+  townCap: 'the town already has one',
+  noCandidate: 'everyone who could already holds a role that contradicts this one',
+});
+
+/** The stake reasons (rule 11). */
+export const STAKE_REASONS = Object.freeze({
+  gainsVacuum: 'the military gains in a vacuum of governance',
+  gainsChurch: 'the church gains while the seat struggles',
+  gainsMerchants: 'the merchants gain while the seat is endorsed',
+  gainsCrime: 'crime gains from the disorder',
+  gainsRival: 'outranks the seat while it weakens',
+  gainsClaim: 'a rival claim to govern gains by it',
+  gainsHolds: 'holds what the crisis makes scarce',
+  gainsOccupier: 'the occupier gains by it',
+  loses: 'the crisis hits its base',
+  losesSeat: 'the seat bears the blame',
+  split: 'gains and loses by it at once',
+  untouched: 'no direct stake; it could go either way',
+});
+
+// ── The levers: the houses each kind turns on, and the offices that run them ──────────────
+
+/**
+ * The institutions a kind turns on (by name) and the offices that run them (by role, the
+ * most specific office first). This
+ * is the lever table the design expected `STRESS_INSTITUTION_EFFECTS` to be; that table holds
+ * NPC secrets, not institutions, so the lever lives here (reported to the chair).
+ * `temporary` names the kind of person minted when a natural kind's lever has neither a house
+ * nor an office-holder; the same kind serves two crises (one temporary person per town).
+ */
+export const CRISIS_LEVERS = Object.freeze(/** @type {Record<string, { house: RegExp, office: RegExp[], temporary: string | null }>} */ ({
+  famine: { house: /granar|market|mill|baker|storehouse|warehouse/i, office: [/grain/i, /granar/i, /miller/i, /baker/i, /market/i, /merchant/i, /farmer/i, /quartermaster/i, /steward/i], temporary: 'grain' },
+  plague_onset: { house: /healer|hospital|apothec|infirm|hospice|temple|church|shrine/i, office: [/healer/i, /physician/i, /apothecar/i, /herbal/i, /surgeon/i, /midwife/i], temporary: 'healer' },
+  mass_migration: { house: /almshouse|hospital|hospice|healer|temple|church|inn/i, office: [/healer/i, /almoner/i, /physician/i, /steward/i], temporary: 'healer' },
+  monster_pressure: { house: /watch|garrison|militia|guard|barracks|wall|ranger|palisade/i, office: [/captain/i, /guard/i, /warden/i, /ranger/i, /hunter/i, /sheriff/i, /marshal/i], temporary: 'warden' },
+  under_siege: { house: /wall|garrison|barracks|watch|militia|guard|palisade|granar/i, office: [/captain/i, /guard/i, /marshal/i, /commander/i, /warden/i, /sergeant/i], temporary: null },
+  wartime: { house: /barracks|garrison|militia|armou?r|smith|watch|guard/i, office: [/captain/i, /guard/i, /marshal/i, /commander/i, /smith/i, /quartermaster/i], temporary: null },
+  occupied: { house: /garrison|council|court|barracks|watch|hall/i, office: [/captain/i, /mayor/i, /reeve/i, /steward/i, /magistrate/i], temporary: null },
+  indebted: { house: /mint|customs|bank|money|treasury|exchequer|counting/i, office: [/treasurer/i, /banker/i, /collector/i, /money/i, /merchant/i, /steward/i], temporary: null },
+  politically_fractured: { house: /council|court|hall|assembly/i, office: [/mayor/i, /reeve/i, /magistrate/i, /councillor/i, /steward/i, /elder/i], temporary: null },
+  succession_void: { house: /council|court|hall|keep|palace|manor/i, office: [/steward/i, /chancellor/i, /magistrate/i, /herald/i, /elder/i], temporary: null },
+  insurgency: { house: /council|court|hall|watch|customs/i, office: [/mayor/i, /reeve/i, /magistrate/i, /captain/i, /collector/i], temporary: null },
+  slave_revolt: { house: /slave|mine|quarr|plantation|watch|guard/i, office: [/overseer/i, /slaver/i, /captain/i, /guard/i], temporary: null },
+  religious_conversion: { house: /temple|church|shrine|chapel|cathedral|monaster/i, office: [/priest/i, /cleric/i, /abbot/i, /bishop/i, /preacher/i], temporary: null },
+  recently_betrayed: { house: /council|court|watch|hall/i, office: [/mayor/i, /reeve/i, /magistrate/i, /captain/i, /spymaster/i], temporary: null },
+  infiltrated: { house: /watch|guard|court|council|customs/i, office: [/captain/i, /magistrate/i, /spymaster/i, /guard/i, /collector/i], temporary: null },
+}));
+
+// ── The base each affected system hits (rule 1) ───────────────────────────────────────────
+
+const A = FACTION_ARCHETYPES;
+
+/** Which faction archetypes each affected system hits, and which roles touch that base. */
+const SYSTEM_BASE = Object.freeze(/** @type {Record<string, { archetypes: string[], governing?: boolean, role: RegExp }>} */ ({
+  food_security: { archetypes: [A.LABOR, A.CIVIC, A.CRAFT], role: /farm|baker|miller|grain|butcher|fisher|herd|cook|labou?r/i },
+  labor_capacity: { archetypes: [A.CRAFT, A.LABOR], role: /smith|mason|carpent|weaver|tanner|labou?r|craft|apprentice|miner/i },
+  trade_connectivity: { archetypes: [A.MERCHANT], role: /merchant|trader|factor|carter|carrier|broker|innkeep/i },
+  defense_readiness: { archetypes: [A.MILITARY], role: /guard|soldier|sergeant|watch|militia|captain|archer/i },
+  public_legitimacy: { archetypes: [A.GOVERNMENT], governing: true, role: /clerk|official|council|magistrate|steward|reeve|collector|mayor/i },
+  faction_stability: { archetypes: [A.GOVERNMENT], governing: true, role: /clerk|official|council|steward|reeve/i },
+  tax_revenue: { archetypes: [A.GOVERNMENT], governing: true, role: /collector|clerk|treasurer|steward/i },
+  healing_capacity: { archetypes: [A.RELIGIOUS], role: /healer|priest|acolyte|physician|herbal|midwife/i },
+  housing_pressure: { archetypes: [A.LABOR, A.CIVIC], role: /labou?r|innkeep|builder|mason|almoner/i },
+  law_order: { archetypes: [A.MILITARY], role: /guard|watch|sergeant|constable/i },
+  social_trust: { archetypes: [A.CIVIC, A.RELIGIOUS], role: /priest|elder|innkeep|healer/i },
+  criminal_opportunity: { archetypes: [], role: /^$/ },
+}));
+
+/** The greed and ambition slots of the personality register (rule 5, rule 9). */
+export const GRASPING_TRAITS = Object.freeze(['greedy', 'self-serving', 'corrupt', 'envious', 'opportunistic', 'ambitious', 'calculating']);
+const AMBITION_TRAITS = Object.freeze(['ambitious', 'opportunistic', 'calculating', 'self-serving']);
+
+// ── Linked kinds (the catalog's spread channels and residual effects) ─────────────────────
+
+/**
+ * How a later crisis reads an earlier one. `via` is the catalog token that carries the link
+ * (a spread channel or residual effect of the EARLIER kind; a test holds each to the catalog).
+ * @type {ReadonlyArray<{ from: string, to: string, via: string, read: 'instigatorFromBrunt' | 'targetFromFace' | 'exploiterFromProfiteer' | 'collaboratorFromExploiter' }>}
+ */
+export const CRISIS_LINKS = Object.freeze([
+  Object.freeze({ from: 'famine', to: 'insurgency', via: 'hoarding_grievance', read: /** @type {const} */ ('instigatorFromBrunt') }),
+  Object.freeze({ from: 'occupied', to: 'insurgency', via: 'resistance_cells', read: /** @type {const} */ ('targetFromFace') }),
+  Object.freeze({ from: 'under_siege', to: 'famine', via: 'trade_route', read: /** @type {const} */ ('exploiterFromProfiteer') }),
+  Object.freeze({ from: 'famine', to: 'occupied', via: 'trade_dependency', read: /** @type {const} */ ('collaboratorFromExploiter') }),
+]);
+
+// ── Types ─────────────────────────────────────────────────────────────────────────────────
+
+/**
+ * @typedef {Object} CastRow
+ * @property {CrisisRole} role
+ * @property {'npc' | 'faction' | 'institution'} kind
+ * @property {string} id      the NPC id, the faction's name, or the institution's name
+ * @property {string} name
+ * @property {string} reason  one sentence from CAST_REASONS
+ * @property {boolean} temporary
+ */
+/** @typedef {{ role: CrisisRole, reason: string }} CastAbsence */
+/** @typedef {{ factionId: string, stake: 'gains' | 'loses' | 'split', reason: string }} CastStake */
+/** @typedef {{ institution: string, holderId: string | null, holderName: string | null }} CastLever */
+/**
+ * @typedef {Object} CrisisCast
+ * @property {CrisisNature} nature
+ * @property {number} rank          1 for the worst crisis, in casting order
+ * @property {CastRow[]} roles
+ * @property {CastAbsence[]} absent
+ * @property {CastStake[]} stakes
+ * @property {CastLever[]} levers
+ * @property {{ residualEffects: string[] }} ifNothingIsDone   the entry's own viabilityNote is the line; these are the catalog's residues
+ * @property {string[]} playersSeeFirst  the Tonight sheet's two facts, by reference
+ * @property {string[]} links           the earlier crises this one reads, by kind
+ */
+/**
+ * @typedef {Object} CastNpc
+ * @property {string=} id
+ * @property {string=} name
+ * @property {string=} role
+ * @property {unknown=} power
+ * @property {string | null=} factionAffiliation
+ * @property {boolean=} corrupt
+ * @property {{ criminalInstitution?: string, thievesGuild?: string } | null=} corruptTies
+ * @property {{ dominant?: string | null, flaw?: string | null, modifier?: string | null } | null=} personality
+ * @property {boolean=} temporary
+ * @property {string=} temporaryKind
+ * @property {string[]=} crisisIds
+ * @property {unknown=} ousted
+ */
+/** @typedef {{ faction?: string, name?: string, category?: string, power?: unknown, isGoverning?: boolean }} CastFaction */
+/**
+ * @typedef {Object} CastSettlement
+ * @property {string=} tier
+ * @property {CastNpc[]=} npcs
+ * @property {Array<{ name?: string, status?: string }>=} institutions
+ * @property {{ factions?: CastFaction[], governingName?: string, publicLegitimacy?: { isContested?: boolean, isLegitimacyCrisis?: boolean } | null }=} powerStructure
+ */
+/** @typedef {{ type?: string, label?: string }} CastEntry */
+/**
+ * @typedef {Object} CastOptions
+ * @property {(kind: string, crisisId: string) => ({ id: string, name: string } | null)=} mintTemporary
+ *   the caller's mint for a temporary person; absent → the role is absent with its reason
+ */
+
+// ── Small readers ─────────────────────────────────────────────────────────────────────────
+
+/** @param {unknown} v @returns {string} */
+const str = (v) => (typeof v === 'string' ? v : '');
+/** @param {unknown} v @returns {number} */
+const numOf = (v) => (typeof v === 'number' && Number.isFinite(v) ? v : 0);
+/** @param {CastFaction} f @returns {string} */
+const factionName = (f) => str(f.faction) || str(f.name);
+
+/**
+ * A deterministic fraction in [0, 1) over the seed, the crisis id and the role (FNV-1a).
+ * @param {string} seed @param {string} crisisId @param {string} role
+ * @returns {number}
+ */
+export function castHash(seed, crisisId, role) {
+  const text = `${seed}|${crisisId}|${role}`;
+  let h = 2166136261;
+  for (let i = 0; i < text.length; i += 1) {
+    h ^= text.charCodeAt(i);
+    h = Math.imul(h, 16777619) >>> 0;
+  }
+  return h / 4294967296;
+}
+
+/** @param {CastNpc} n @returns {string[]} */
+function traitsOf(n) {
+  const p = n.personality || {};
+  return [str(p.dominant), str(p.flaw), str(p.modifier)].filter(Boolean).map((t) => t.toLowerCase());
+}
+
+/**
+ * The live roster: no temporary person, nobody ousted, and no office stand-in ("The Watch
+ * Captain" names an office, not a person; the ruling chain refuses one for the same reason).
+ * @param {CastSettlement} s @returns {CastNpc[]}
+ */
+function rosterOf(s) {
+  return (Array.isArray(s.npcs) ? s.npcs : [])
+    .filter((n) => !!n && typeof n === 'object' && !n.temporary && !n.ousted && !!str(n.name) && !isOfficeStandIn(/** @type {never} */ (n)));
+}
+
+/**
+ * An occupying power. The generator files its "Occupation Authority" under the military
+ * category, so the archetype alone (category first) misses it; the name decides too.
+ * @param {CastFaction} f @returns {boolean}
+ */
+function isOccupier(f) {
+  return factionArchetype(f) === A.OCCUPATION || /occupation|occupying|garrison\s+rule|imperial\s+presence|annex/i.test(factionName(f));
+}
+
+/** @param {CastSettlement} s @returns {CastFaction[]} */
+function factionsOf(s) {
+  const fs = s.powerStructure?.factions;
+  return (Array.isArray(fs) ? fs : []).filter((f) => !!f && typeof f === 'object' && !!factionName(f));
+}
+
+/** A faction's members, the most powerful first (roster order on a tie). @param {CastSettlement} s @param {string} fname */
+function membersOf(s, fname) {
+  return rosterOf(s)
+    .map((n, at) => ({ n, at }))
+    .filter(({ n }) => str(n.factionAffiliation) === fname)
+    .sort((a, b) => (numOf(b.n.power) - numOf(a.n.power)) || (a.at - b.at))
+    .map(({ n }) => n);
+}
+
+/** @param {CastNpc} n @param {CrisisRole} role @param {string} reason @returns {CastRow} */
+function npcRow(n, role, reason) {
+  return { role, kind: 'npc', id: str(n.id) || str(n.name), name: str(n.name), reason, temporary: !!n.temporary };
+}
+/** @param {CastFaction} f @param {CrisisRole} role @param {string} reason @returns {CastRow} */
+function factionRow(f, role, reason) {
+  const name = factionName(f);
+  return { role, kind: 'faction', id: name, name, reason, temporary: false };
+}
+
+/** @param {CastSettlement} s */
+function legitimacyContested(s) {
+  const pl = s.powerStructure?.publicLegitimacy;
+  return !!pl && (!!pl.isContested || !!pl.isLegitimacyCrisis);
+}
+
+/** @param {string} kind @returns {{ spreadChannels: string[], residualEffects: string[], affectedSystems: string[] }} */
+export function catalogFor(kind) {
+  const pulse = /** @type {Record<string, string>} */ (GEN_TO_PULSE_TYPE)[kind] || kind;
+  const def = /** @type {Record<string, { spreadChannels?: string[], residualEffects?: string[], affectedSystems?: string[] }>} */ (/** @type {unknown} */ (STRESSOR_CATALOG))[pulse];
+  return {
+    spreadChannels: def?.spreadChannels ? [...def.spreadChannels] : [],
+    residualEffects: def?.residualEffects ? [...def.residualEffects] : [],
+    affectedSystems: def?.affectedSystems ? [...def.affectedSystems] : [],
+  };
+}
+
+/** The nature of a kind; an unknown (custom) kind reads as social. @param {string} kind @returns {CrisisNature} */
+export function natureOf(kind) {
+  return CRISIS_NATURE[kind] || 'social';
+}
+
+// ── Rule 11: stakes ───────────────────────────────────────────────────────────────────────
+
+/**
+ * Every faction's one stake in a crisis of `kind`.
+ * @param {CastSettlement} s @param {string} kind
+ * @returns {CastStake[]}
+ */
+export function deriveStakes(s, kind) {
+  const factions = factionsOf(s);
+  const governing = governingFactionOf(/** @type {never} */ (s));
+  const govName = governing ? factionName(/** @type {CastFaction} */ (governing)) : '';
+  const rival = outrankingRivalOf(/** @type {never} */ (s)) || '';
+  const pl = s.powerStructure?.publicLegitimacy || {};
+  const systems = catalogFor(kind).affectedSystems;
+  const nature = natureOf(kind);
+  const scarce = kind === 'famine' ? /grain|food|granar|harvest/i : kind === 'plague_onset' ? /heal|apothec|physic/i : null;
+  return factions.map((f) => {
+    const name = factionName(f);
+    const arch = factionArchetype(f);
+    const isGov = name === govName;
+    /** @type {string | null} */
+    let gains = null;
+    if (isOccupier(f) && kind === 'occupied') gains = STAKE_REASONS.gainsOccupier;
+    else if (scarce && scarce.test(name)) gains = STAKE_REASONS.gainsHolds;
+    else if ((nature === 'social' || nature === 'engineered') && name === rival) gains = STAKE_REASONS.gainsRival;
+    else if (nature === 'social' && !isGov && arch === A.GOVERNMENT) gains = STAKE_REASONS.gainsClaim;
+    else if (arch === A.CRIMINAL && (systems.includes('criminal_opportunity') || numOf(/** @type {{ crimMultiplier?: unknown }} */ (pl).crimMultiplier) > 1)) gains = STAKE_REASONS.gainsCrime;
+    else if (arch === A.MILITARY && pl.isLegitimacyCrisis) gains = STAKE_REASONS.gainsVacuum;
+    else if (arch === A.RELIGIOUS && (pl.isContested || pl.isLegitimacyCrisis)) gains = STAKE_REASONS.gainsChurch;
+    else if (arch === A.MERCHANT && /** @type {{ isEndorsed?: boolean }} */ (pl).isEndorsed) gains = STAKE_REASONS.gainsMerchants;
+
+    let loses = false;
+    const occupierHere = kind === 'occupied' && isOccupier(f);
+    for (const sys of occupierHere ? [] : systems) {
+      const base = SYSTEM_BASE[sys];
+      if (!base) continue;
+      if ((base.governing && isGov) || base.archetypes.includes(arch)) { loses = true; break; }
+    }
+    const losesSeat = !loses && isGov && (nature === 'social' || nature === 'engineered');
+    /** @type {CastStake} */
+    let stake;
+    if (gains && (loses || losesSeat)) stake = { factionId: name, stake: 'split', reason: STAKE_REASONS.split };
+    else if (gains) stake = { factionId: name, stake: 'gains', reason: gains };
+    else if (loses) stake = { factionId: name, stake: 'loses', reason: STAKE_REASONS.loses };
+    else if (losesSeat) stake = { factionId: name, stake: 'loses', reason: STAKE_REASONS.losesSeat };
+    else stake = { factionId: name, stake: 'split', reason: STAKE_REASONS.untouched };
+    return stake;
+  });
+}
+
+// ── The rules (each returns its candidates in order; the town caster takes the first fit) ──
+
+/** @typedef {{ row: CastRow } | { absent: string }} RuleOut */
+/** @typedef {{ candidates: CastRow[], absent: string }} Candidates */
+
+/**
+ * Rule 1 — bears the brunt.
+ * @param {CastSettlement} s @param {string} kind @param {CastStake[]} stakes
+ * @returns {Candidates}
+ */
+export function bruntCandidates(s, kind, stakes) {
+  const factions = factionsOf(s);
+  const governing = governingFactionOf(/** @type {never} */ (s));
+  const govName = governing ? factionName(/** @type {CastFaction} */ (governing)) : '';
+  const losers = new Set(stakes.filter((k) => k.stake !== 'gains').map((k) => k.factionId));
+  /** @type {CastRow[]} */
+  const out = [];
+  // F10 unit 4: a reason that names walls the place lacks takes its twin (data/defenceTwinLines.js).
+  const defence = defenseFactsOf(/** @type {Parameters<typeof defenseFactsOf>[0]} */ (s));
+  for (const sys of catalogFor(kind).affectedSystems) {
+    const base = SYSTEM_BASE[sys];
+    if (!base) continue;
+    const hit = factions.filter((f) => losers.has(factionName(f)) && ((base.governing && factionName(f) === govName) || base.archetypes.includes(factionArchetype(f))));
+    for (const f of hit) {
+      const members = membersOf(s, factionName(f)).reverse(); // the least powerful first
+      const touching = members.filter((n) => base.role.test(str(n.role)));
+      for (const n of touching) out.push(npcRow(n, 'brunt', defenceTwinLine(CAST_REASONS.bruntBase[sys] || CAST_REASONS.bruntLeast, defence)));
+      for (const n of members) if (!touching.includes(n)) out.push(npcRow(n, 'brunt', CAST_REASONS.bruntLeast));
+      out.push(factionRow(f, 'brunt', defenceTwinLine(CAST_REASONS.bruntBase[sys] || CAST_REASONS.bruntLeast, defence)));
+    }
+    if (out.length) break;
+  }
+  if (!out.length && factions.length === 1) {
+    const f = factions[0];
+    for (const n of membersOf(s, factionName(f)).reverse()) out.push(npcRow(n, 'brunt', CAST_REASONS.bruntLeast));
+    out.push(factionRow(f, 'brunt', CAST_REASONS.bruntLeast));
+  }
+  return { candidates: out, absent: CAST_ABSENCES.noBase };
+}
+
+/**
+ * The roster's office-holders for a kind's lever, the most specific office first.
+ * @param {CastSettlement} s @param {RegExp[]} offices
+ * @returns {CastNpc[]}
+ */
+function officeHoldersOf(s, offices) {
+  /** @type {CastNpc[]} */
+  const out = [];
+  const roster = rosterOf(s);
+  for (const re of offices) for (const n of roster) if (re.test(str(n.role)) && !out.includes(n)) out.push(n);
+  return out;
+}
+
+/**
+ * The STANDING houses a kind turns on (`liveInstitutions`), each with its holder where the
+ * roster has one.
+ * @param {CastSettlement} s @param {string} kind
+ * @returns {CastLever[]}
+ */
+export function deriveLevers(s, kind) {
+  const lever = CRISIS_LEVERS[kind];
+  if (!lever) return [];
+  // The STANDING roster only (the ruin filter's one door): a calamity's ruin, an economic or
+  // magic close, an abolition, an abandonment or a demotion leaves the row on the roster,
+  // stamped, and a closed house holds no lever.
+  // ⛔ A CUSTOM HOUSE IS NEVER A LEVER BY ITS NAME. The kind's house table is a native
+  // catalog-name heuristic; a materialized custom institution's `name` is presentation only
+  // (domain/content/customContentSemanticAuthority.js), so it is read through
+  // `nativeSemanticName` exactly as the services generator reads it: a bespoke hall called
+  // "State Granary" grants no famine lever.
+  const houses = liveInstitutions(s)
+    .filter((i) => !!i && lever.house.test(nativeSemanticName(i)));
+  const holders = officeHoldersOf(s, lever.office);
+  const seen = new Set();
+  /** @type {CastLever[]} */
+  const out = [];
+  houses.forEach((h, i) => {
+    const name = str(h.name);
+    if (seen.has(name)) return;
+    seen.add(name);
+    const holder = holders[i] || null;
+    out.push({ institution: name, holderId: holder ? (str(holder.id) || str(holder.name)) : null, holderName: holder ? str(holder.name) : null });
+  });
+  return out;
+}
+
+/**
+ * Rule 2 — holds the lever: the office-holder, else the house itself.
+ * @param {CastSettlement} s @param {string} kind
+ * @returns {Candidates}
+ */
+export function leverCandidates(s, kind) {
+  const lever = CRISIS_LEVERS[kind];
+  if (!lever) return { candidates: [], absent: CAST_ABSENCES.noLever };
+  /** @type {CastRow[]} */
+  const out = officeHoldersOf(s, lever.office).map((n) => npcRow(n, 'lever', CAST_REASONS.leverRuns));
+  for (const l of deriveLevers(s, kind)) {
+    out.push({ role: 'lever', kind: 'institution', id: l.institution, name: l.institution, reason: CAST_REASONS.leverInstitution, temporary: false });
+  }
+  return { candidates: out, absent: CAST_ABSENCES.noLever };
+}
+
+/**
+ * Rule 3 — the instigator.
+ * @param {CastSettlement} s @param {string} kind @param {CastStake[]} stakes
+ * @returns {Candidates}
+ */
+export function instigatorCandidates(s, kind, stakes) {
+  const nature = natureOf(kind);
+  // An occupying power is never the town's own instigator (the design's "never a local
+  // instigator"): a rising against the occupier is cast against it, not by it.
+  const factions = factionsOf(s).filter((f) => !isOccupier(f));
+  const rivalName = outrankingRivalOf(/** @type {never} */ (s));
+  const rival = factions.some((f) => factionName(f) === rivalName) ? rivalName : null;
+  const gainers = stakes.filter((k) => k.stake === 'gains')
+    .map((k) => factions.find((f) => factionName(f) === k.factionId))
+    .filter((f) => !!f)
+    .sort((a, b) => numOf(/** @type {CastFaction} */ (b).power) - numOf(/** @type {CastFaction} */ (a).power));
+  /** @type {Array<{ f: CastFaction, reason: string }>} */
+  const picks = [];
+  if (nature === 'engineered') {
+    const g = /** @type {CastFaction[]} */ (gainers);
+    const r = g.find((f) => factionName(f) === rival);
+    if (r) picks.push({ f: r, reason: CAST_REASONS.instigatorRival });
+    for (const f of g) if (f !== r) picks.push({ f, reason: CAST_REASONS.instigatorGains });
+  } else {
+    const r = rival ? factions.find((f) => factionName(f) === rival) : null;
+    if (r) picks.push({ f: r, reason: CAST_REASONS.instigatorRival });
+    for (const f of /** @type {CastFaction[]} */ (gainers)) if (f !== r) picks.push({ f, reason: CAST_REASONS.instigatorGains });
+  }
+  /** @type {CastRow[]} */
+  const out = [];
+  for (const { f, reason } of picks) {
+    for (const n of membersOf(s, factionName(f))) out.push(npcRow(n, 'instigator', reason));
+    out.push(factionRow(f, 'instigator', reason));
+  }
+  return { candidates: out, absent: nature === 'engineered' ? CAST_ABSENCES.outsideHand : CAST_ABSENCES.noGains };
+}
+
+/**
+ * The seat as a row: the named holder, else the governing house.
+ * @param {CastSettlement} s @param {CrisisRole} role @param {string} seatReason @param {string} houseReason
+ * @returns {CastRow[]}
+ */
+function seatRows(s, role, seatReason, houseReason) {
+  /** @type {CastRow[]} */
+  const out = [];
+  const chain = rulingChainOf(/** @type {never} */ (s));
+  if (chain.npc) {
+    const n = rosterOf(s).find((x) => str(x.name) === chain.npc?.name);
+    if (n) out.push(npcRow(n, role, seatReason));
+  }
+  const governing = governingFactionOf(/** @type {never} */ (s));
+  if (governing) out.push(factionRow(/** @type {CastFaction} */ (governing), role, houseReason));
+  return out;
+}
+
+/**
+ * Rule 4 — the target: the seat, else the governing house.
+ * @param {CastSettlement} s
+ * @returns {Candidates}
+ */
+export function targetCandidates(s) {
+  const seatReason = legitimacyContested(s) ? CAST_REASONS.targetSeatContested : CAST_REASONS.targetSeat;
+  return { candidates: seatRows(s, 'target', seatReason, CAST_REASONS.targetGoverning), absent: CAST_ABSENCES.noSeat };
+}
+
+/**
+ * Rule 5 — the exploiter (natural) or profiteer (external): a faction that gains, the corrupt
+ * first, then the grasping by trait, then by power.
+ * @param {CastSettlement} s @param {CastStake[]} stakes @param {'exploiter' | 'profiteer'} role
+ * @returns {Candidates}
+ */
+export function exploiterCandidates(s, stakes, role) {
+  const gainers = new Set(stakes.filter((k) => k.stake === 'gains').map((k) => k.factionId));
+  const pool = rosterOf(s).map((n, at) => ({ n, at })).filter(({ n }) => gainers.has(str(n.factionAffiliation)));
+  /** @param {CastNpc} n */
+  const grade = (n) => (n.corrupt ? 0 : traitsOf(n).some((t) => GRASPING_TRAITS.includes(t)) ? 1 : 2);
+  pool.sort((a, b) => (grade(a.n) - grade(b.n)) || (numOf(b.n.power) - numOf(a.n.power)) || (a.at - b.at));
+  const reasons = [CAST_REASONS.exploiterCorrupt, CAST_REASONS.exploiterTrait, CAST_REASONS.exploiterPower];
+  return { candidates: pool.map(({ n }) => npcRow(n, role, reasons[grade(n)])), absent: CAST_ABSENCES.noGains };
+}
+
+/**
+ * Rule 6 — the scapegoat: only under contested legitimacy; the seat, else the lever, whichever's
+ * faction loses.
+ * @param {CastSettlement} s @param {CastStake[]} stakes @param {CastRow | null} leverRow
+ * @returns {Candidates}
+ */
+export function scapegoatCandidates(s, stakes, leverRow) {
+  if (!legitimacyContested(s)) return { candidates: [], absent: CAST_ABSENCES.notContested };
+  const losers = new Set(stakes.filter((k) => k.stake === 'loses').map((k) => k.factionId));
+  const roster = rosterOf(s);
+  /** @param {CastRow} r */
+  const factionOfRow = (r) => (r.kind === 'faction' ? r.id : str(roster.find((n) => (str(n.id) || str(n.name)) === r.id)?.factionAffiliation));
+  /** @type {CastRow[]} */
+  const out = seatRows(s, 'scapegoat', CAST_REASONS.scapegoatSeat, CAST_REASONS.scapegoatSeat)
+    .filter((r) => r.kind === 'npc' && losers.has(factionOfRow(r)));
+  if (leverRow && leverRow.kind === 'npc' && !leverRow.temporary && losers.has(factionOfRow(leverRow))) {
+    out.push({ ...leverRow, role: 'scapegoat', reason: CAST_REASONS.scapegoatLever });
+  }
+  return { candidates: out, absent: CAST_ABSENCES.noLoser };
+}
+
+/**
+ * Rule 7 — the defender.
+ * @param {CastSettlement} s
+ * @returns {Candidates}
+ */
+export function defenderCandidates(s) {
+  /** @type {CastRow[]} */
+  const out = [];
+  for (const f of factionsOf(s).filter((x) => factionArchetype(x) === A.MILITARY)) {
+    for (const n of membersOf(s, factionName(f))) out.push(npcRow(n, 'defender', CAST_REASONS.defenderMilitary));
+  }
+  for (const n of rosterOf(s).filter((x) => /captain|guard|watch|marshal|warden|sergeant|commander/i.test(str(x.role)))) {
+    // F10 unit 4: "holds the garrison's office" only where a garrison stands (data/defenceTwinLines.js).
+    out.push(npcRow(n, 'defender', defenceTwinLine(CAST_REASONS.defenderOffice, defenseFactsOf(/** @type {Parameters<typeof defenseFactsOf>[0]} */ (s)))));
+  }
+  // The house fallback credits a house with the town's defence, so it reads the STANDING roster
+  // only (`liveInstitutions`): a closed garrison defends nothing.
+  // A custom house's name is presentation only (`nativeSemanticName`, as in `deriveLevers`).
+  for (const i of liveInstitutions(s).filter((x) => /garrison|barracks|watch|militia|wall|guard/i.test(nativeSemanticName(x)))) {
+    out.push({ role: 'defender', kind: 'institution', id: str(i.name), name: str(i.name), reason: CAST_REASONS.defenderInstitution, temporary: false });
+  }
+  return { candidates: out, absent: CAST_ABSENCES.noMilitary };
+}
+
+/**
+ * Rule 8 — the one who would treat.
+ * @param {CastSettlement} s
+ * @returns {Candidates}
+ */
+export function treaterCandidates(s) {
+  /** @type {CastRow[]} */
+  const out = [];
+  if (legitimacyContested(s)) {
+    for (const f of factionsOf(s).filter((x) => factionArchetype(x) === A.MERCHANT)) {
+      for (const n of membersOf(s, factionName(f))) out.push(npcRow(n, 'treater', CAST_REASONS.treaterMerchant));
+    }
+  }
+  out.push(...seatRows(s, 'treater', CAST_REASONS.treaterSeat, CAST_REASONS.treaterSeat));
+  return { candidates: out, absent: CAST_ABSENCES.noMerchantOrSeat };
+}
+
+/**
+ * Rule 9 — the collaborator.
+ * @param {CastSettlement} s @param {CastStake[]} stakes
+ * @returns {Candidates}
+ */
+export function collaboratorCandidates(s, stakes) {
+  const roster = rosterOf(s);
+  /** @type {CastRow[]} */
+  const out = roster.filter((n) => n.corrupt && !!n.corruptTies).map((n) => npcRow(n, 'collaborator', CAST_REASONS.collaboratorCorrupt));
+  const gainers = new Set(stakes.filter((k) => k.stake === 'gains').map((k) => k.factionId));
+  const ambitious = roster.map((n, at) => ({ n, at }))
+    .filter(({ n }) => gainers.has(str(n.factionAffiliation)) && !n.corrupt)
+    .sort((a, b) => {
+      const am = (/** @type {CastNpc} */ n) => (traitsOf(n).some((t) => AMBITION_TRAITS.includes(t)) ? 0 : 1);
+      return (am(a.n) - am(b.n)) || (numOf(b.n.power) - numOf(a.n.power)) || (a.at - b.at);
+    });
+  for (const { n } of ambitious) out.push(npcRow(n, 'collaborator', CAST_REASONS.collaboratorAmbition));
+  return { candidates: out, absent: CAST_ABSENCES.noGains };
+}
+
+/**
+ * Rule 10 — the waverer: a member of a faction whose stake is split.
+ * @param {CastSettlement} s @param {CastStake[]} stakes
+ * @returns {Candidates}
+ */
+export function wavererCandidates(s, stakes) {
+  /** @type {CastRow[]} */
+  const out = [];
+  for (const k of stakes.filter((x) => x.stake === 'split')) {
+    for (const n of membersOf(s, k.factionId)) out.push(npcRow(n, 'waverer', CAST_REASONS.waverer));
+  }
+  return { candidates: out, absent: CAST_ABSENCES.noSplit };
+}
+
+/**
+ * The occupier's local face: the occupying house's leading member, else the house.
+ * @param {CastSettlement} s
+ * @returns {Candidates}
+ */
+export function faceCandidates(s) {
+  /** @type {CastRow[]} */
+  const out = [];
+  for (const f of factionsOf(s).filter(isOccupier)) {
+    for (const n of membersOf(s, factionName(f))) out.push(npcRow(n, 'face', CAST_REASONS.face));
+    out.push(factionRow(f, 'face', CAST_REASONS.face));
+  }
+  return { candidates: out, absent: CAST_ABSENCES.noOccupier };
+}
+
+// ── The town caster ───────────────────────────────────────────────────────────────────────
+
+/** @param {CrisisRole} a @param {CrisisRole} b */
+function contradicts(a, b) {
+  return CONTRADICTORY_ROLE_PAIRS.some(([x, y]) => (x === a && y === b) || (x === b && y === a));
+}
+
+/**
+ * The roles a crisis must try to fill.
+ * @param {string} kind
+ * @returns {CrisisRole[]}
+ */
+export function requiredRolesOf(kind) {
+  const nature = natureOf(kind);
+  return nature === 'external' ? [...(REQUIRED_EXTERNAL[kind] || [])] : [...REQUIRED_BY_NATURE[nature]];
+}
+
+/**
+ * The occasional roles a crisis may carry (before the rate and the cap).
+ * @param {string} kind
+ * @returns {Array<keyof typeof CRISIS_CAST_TUNING.rates>}
+ */
+export function occasionalRolesOf(kind) {
+  const nature = natureOf(kind);
+  return OCCASIONAL_BY_NATURE[nature].filter((r) => r !== 'collaborator' || kind === 'occupied' || kind === 'infiltrated');
+}
+
+/**
+ * Cast the whole town. `entries` are the active crises, worst first (the caller's order is
+ * the casting order). Returns one cast per entry, keyed by the entry's type (its crisis id).
+ *
+ * @param {CastSettlement} settlement
+ * @param {CastEntry[]} entries
+ * @param {string} seed
+ * @param {CastOptions} [options]
+ * @returns {Map<string, CrisisCast>}
+ */
+export function deriveCrisisCast(settlement, entries, seed, options = {}) {
+  /** @type {Map<string, CrisisCast>} */
+  const casts = new Map();
+  /** @type {Map<string, Array<{ role: CrisisRole, crisis: string }>>} who holds what, by row key */
+  const held = new Map();
+  /** @type {Record<string, number>} */
+  const capUsed = {};
+  /** @type {Map<string, { id: string, name: string }>} temporary people by kind */
+  const temporaries = new Map();
+  for (const n of Array.isArray(settlement.npcs) ? settlement.npcs : []) {
+    if (n && n.temporary && n.temporaryKind && str(n.name)) temporaries.set(n.temporaryKind, { id: str(n.id) || str(n.name), name: str(n.name) });
+  }
+  const caps = /** @type {Record<string, number>} */ (CRISIS_CAST_TUNING.townCaps);
+  /** @type {Map<string, Map<CrisisRole, CastRow>>} rows of the crises already cast, by kind */
+  const earlier = new Map();
+
+  entries.forEach((entry) => {
+    const kind = str(entry?.type);
+    if (!kind || casts.has(kind)) return;
+    const nature = natureOf(kind);
+    const stakes = deriveStakes(settlement, kind);
+    /** @type {CastRow[]} */
+    const roles = [];
+    /** @type {CastAbsence[]} */
+    const absent = [];
+    /** @type {string[]} */
+    const links = [];
+
+    /** @param {CastRow} r */
+    const keyOf = (r) => `${r.kind}:${r.id}`;
+    /** @param {CastRow} r */
+    const fits = (r) => !(held.get(keyOf(r)) || []).some((h) => contradicts(h.role, r.role));
+
+    /**
+     * Take the first candidate that fits; say so when the first choice was passed over.
+     * @param {CrisisRole} role @param {Candidates} c @param {CastRow | null} [linked]
+     * @returns {CastRow | null}
+     */
+    const take = (role, c, linked = null) => {
+      const list = linked ? [linked, ...c.candidates] : c.candidates;
+      if (!list.length) { absent.push({ role, reason: c.absent }); return null; }
+      const pick = list.find(fits);
+      if (!pick) { absent.push({ role, reason: CAST_ABSENCES.noCandidate }); return null; }
+      const row = pick === list[0] ? { ...pick, role } : { ...pick, role, reason: `${pick.reason}; ${CAST_REASONS.nextInLine}` };
+      roles.push(row);
+      const k = keyOf(row);
+      held.set(k, [...(held.get(k) || []), { role, crisis: kind }]);
+      return row;
+    };
+
+    /** @param {'instigatorFromBrunt' | 'targetFromFace' | 'exploiterFromProfiteer' | 'collaboratorFromExploiter'} read @returns {CastRow | null} */
+    const linkedRow = (read) => {
+      for (const link of CRISIS_LINKS) {
+        if (link.to !== kind || link.read !== read || !earlier.has(link.from)) continue;
+        const prev = /** @type {Map<CrisisRole, CastRow>} */ (earlier.get(link.from));
+        if (read === 'instigatorFromBrunt') {
+          const b = prev.get('brunt');
+          if (!b) continue;
+          const fname = b.kind === 'faction' ? b.id : str(rosterOf(settlement).find((n) => (str(n.id) || str(n.name)) === b.id)?.factionAffiliation);
+          const lead = fname ? membersOf(settlement, fname).find((n) => (str(n.id) || str(n.name)) !== b.id) || null : null;
+          if (lead) { links.push(link.from); return npcRow(lead, 'instigator', CAST_REASONS.instigatorLinked); }
+        } else if (read === 'targetFromFace') {
+          const f = prev.get('face');
+          if (f) { links.push(link.from); return { ...f, role: 'target', reason: CAST_REASONS.targetLinked }; }
+        } else if (read === 'exploiterFromProfiteer') {
+          const p = prev.get('profiteer');
+          if (p) { links.push(link.from); return { ...p, role: 'exploiter', reason: CAST_REASONS.exploiterLinked }; }
+        } else {
+          const e = prev.get('exploiter');
+          if (e) { links.push(link.from); return { ...e, role: 'collaborator', reason: CAST_REASONS.collaboratorLinked }; }
+        }
+      }
+      return null;
+    };
+
+    /** @type {CastRow | null} */
+    let leverRow = null;
+    for (const role of requiredRolesOf(kind)) {
+      if (role === 'brunt') take('brunt', bruntCandidates(settlement, kind, stakes));
+      else if (role === 'lever') {
+        const c = leverCandidates(settlement, kind);
+        const tempKind = CRISIS_LEVERS[kind]?.temporary || null;
+        if (!c.candidates.length && tempKind) {
+          let temp = temporaries.get(tempKind) || null;
+          if (!temp && (capUsed.temporary || 0) < caps.temporary && options.mintTemporary) {
+            temp = options.mintTemporary(tempKind, kind);
+            if (temp) { temporaries.set(tempKind, temp); capUsed.temporary = (capUsed.temporary || 0) + 1; }
+          }
+          if (temp) {
+            /** @type {CastRow} */
+            const row = { role: 'lever', kind: 'npc', id: temp.id, name: temp.name, reason: CAST_REASONS.leverTemporary, temporary: true };
+            leverRow = take('lever', { candidates: [row], absent: c.absent });
+            continue;
+          }
+        }
+        leverRow = take('lever', c);
+      } else if (role === 'instigator') take('instigator', instigatorCandidates(settlement, kind, stakes), linkedRow('instigatorFromBrunt'));
+      else if (role === 'target') take('target', targetCandidates(settlement), linkedRow('targetFromFace'));
+      else if (role === 'defender') take('defender', defenderCandidates(settlement));
+      else if (role === 'treater') take('treater', treaterCandidates(settlement));
+      else if (role === 'face') take('face', faceCandidates(settlement));
+    }
+
+    for (const role of occasionalRolesOf(kind)) {
+      if (castHash(seed, kind, role) >= CRISIS_CAST_TUNING.rates[role]) continue;
+      if (role in caps && (capUsed[role] || 0) >= caps[role]) { absent.push({ role, reason: CAST_ABSENCES.townCap }); continue; }
+      /** @type {CastRow | null} */
+      let row;
+      if (role === 'exploiter') row = take('exploiter', exploiterCandidates(settlement, stakes, 'exploiter'), linkedRow('exploiterFromProfiteer'));
+      else if (role === 'profiteer') row = take('profiteer', exploiterCandidates(settlement, stakes, 'profiteer'));
+      else if (role === 'scapegoat') row = take('scapegoat', scapegoatCandidates(settlement, stakes, leverRow));
+      else if (role === 'collaborator') row = take('collaborator', collaboratorCandidates(settlement, stakes), linkedRow('collaboratorFromExploiter'));
+      else row = take('waverer', wavererCandidates(settlement, stakes));
+      if (row && role in caps) capUsed[role] = (capUsed[role] || 0) + 1;
+    }
+
+    earlier.set(kind, new Map(roles.map((r) => [r.role, r])));
+    casts.set(kind, {
+      nature,
+      rank: casts.size + 1,
+      roles,
+      absent,
+      stakes,
+      levers: deriveLevers(settlement, kind),
+      ifNothingIsDone: { residualEffects: catalogFor(kind).residualEffects },
+      playersSeeFirst: ['food', 'defence'],
+      links: [...new Set(links)],
+    });
+  });
+  return casts;
+}
+
+// ── The DM's word (EDITABLE_FIELDS.crisis) ────────────────────────────────────────────────
+
+/**
+ * The crisis entry's editable path. The DM's cast is spelled as ONE line of
+ * `role=kind:id` parts joined by `CAST_EDIT_SEPARATOR` (the X-45 idiom: a list spelled as one
+ * string, so every reader of an edit record still reads a string), and it lives beside the
+ * engine's `cast`, never over it, so "As the engine has it" reverts to the derived record.
+ */
+// RUNG1B-F8: the line's grammar lives in the leaf the rename modules re-key it through
+// (domain/userEditLines.js), so a renamed faction or house keeps the DM's part.
+export { CAST_EDIT_PATH, CAST_EDIT_SEPARATOR };
+
+/**
+ * @param {Array<{ role: string, kind: string, id: string }>} rows
+ * @returns {string}
+ */
+export function formatCastRoles(rows) {
+  return rows.map((r) => `${r.role}=${r.kind}:${r.id}`).join(CAST_EDIT_SEPARATOR);
+}
+
+/**
+ * The DM's line read back: only roles of the vocabulary and kinds of the record survive.
+ * @param {unknown} value
+ * @returns {Array<{ role: CrisisRole, kind: 'npc' | 'faction' | 'institution', id: string }>}
+ */
+export function parseCastRoles(value) {
+  if (typeof value !== 'string' || !value.trim()) return [];
+  /** @type {Array<{ role: CrisisRole, kind: 'npc' | 'faction' | 'institution', id: string }>} */
+  const out = [];
+  for (const part of value.split(CAST_EDIT_SEPARATOR)) {
+    const m = /^([a-z]+)=(npc|faction|institution):(.+)$/.exec(part.trim());
+    if (!m || !CRISIS_ROLES.includes(/** @type {CrisisRole} */ (m[1]))) continue;
+    out.push({ role: /** @type {CrisisRole} */ (m[1]), kind: /** @type {'npc' | 'faction' | 'institution'} */ (m[2]), id: m[3] });
+  }
+  return out;
+}
+
+/**
+ * The cast as the page shows it: the DM's word where the DM spoke (each row resolved against
+ * the roster, the faction set and the houses; a row whose holder is gone is dropped, never
+ * shown nameless), else the engine's record.
+ * @param {CastSettlement} settlement
+ * @param {{ cast?: CrisisCast, _userEdits?: Record<string, { value?: unknown }> } | null | undefined} entry
+ * @returns {{ cast: CrisisCast | null, edited: boolean }}
+ */
+export function effectiveCastOf(settlement, entry) {
+  const engine = entry?.cast || null;
+  const record = entry?._userEdits?.[CAST_EDIT_PATH];
+  if (!record) return { cast: engine, edited: false };
+  const npcs = Array.isArray(settlement?.npcs) ? settlement.npcs : [];
+  const factions = factionsOf(settlement || {});
+  const houses = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
+  /** @type {CastRow[]} */
+  const roles = [];
+  for (const r of parseCastRoles(record.value)) {
+    /** @type {string} */
+    let name;
+    let temporary = false;
+    if (r.kind === 'npc') {
+      const n = npcs.find((x) => !!x && (str(x.id) || str(x.name)) === r.id);
+      name = n ? str(n.name) : '';
+      temporary = !!n?.temporary;
+    } else if (r.kind === 'faction') {
+      name = factions.some((f) => factionName(f) === r.id) ? r.id : '';
+    } else {
+      name = houses.some((h) => str(h?.name) === r.id) ? r.id : '';
+    }
+    if (name) roles.push({ role: r.role, kind: r.kind, id: r.id, name, reason: CAST_REASONS.dm, temporary });
+  }
+  /** @type {CrisisCast} */
+  const base = engine || { nature: natureOf(''), rank: 0, roles: [], absent: [], stakes: [], levers: [], ifNothingIsDone: { residualEffects: [] }, playersSeeFirst: [], links: [] };
+  return { cast: { ...base, roles, absent: [] }, edited: true };
+}

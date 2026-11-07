@@ -104,7 +104,7 @@ describe('no rendered surface prints a copy key', () => {
     for (const real of [
       'A founding place, held until launch', 'Opens with the launch',
       'By invitation', 'Free', 'forever', '$5.99', 'per month',
-      'You’ve explored hamlet, village, town.', 'Wanderer', '61–400',
+      'You’ve explored hamlet, village, town.', 'Wanderer', '20–100',
       'Start free', 'Most popular',
     ]) {
       expect(RAW_KEY.test(real), `"${real}" reads as a raw key`).toBe(false);

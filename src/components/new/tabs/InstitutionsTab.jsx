@@ -26,6 +26,12 @@
  * by service category, and this page's one job is the other axis, house by house. An
  * institution with no service row still appears, with its description and no subtitle.
  *
+ * THE FABRIC OF THE PLACE (X-46 car 3; the chair's ruling, 2026-11-04): the rows that are the
+ * place rather than a house with a power behind it (the dwellings, the well, the walk to another
+ * village's church: `institutionalCatalog.js :: isFabricInstitution`) are not houses. They stay
+ * on this page, in their own group at the foot of the list under "The fabric of the place",
+ * without a Backs line; the houses' stack above holds houses only.
+ *
  * The provenance badges and their legend moved here from the Overview's Institutions
  * block, which is CUT (T1-15): this tab is the roster's one home (R2), and the badges are
  * the engine's answer to "who put this here" (R7). Same audience as the Services tab: every
@@ -46,6 +52,7 @@ import EconomyFreshnessNote from '../EconomyFreshnessNote.jsx';
 import { institutionDisplayName } from '../../../domain/display/institutionDisplayName.js';
 import { identityForInstitution } from '../../../domain/display/institutionVocabulary.js';
 import { institutionProvenanceOf } from '../../../domain/provenance/rosterProvenance.js';
+import { isFabricInstitution } from '../../../data/institutionalCatalog.js';
 import { entityAnchor, entityIdFor, serviceEntityOf } from '../../../domain/dossier/entityLinks.js';
 import { formatBacksValue, houseBacksOf } from '../../../domain/dossier/powerSupport.js';
 import { walkUserEdits } from '../../../domain/userEdits.js';
@@ -137,6 +144,8 @@ export function institutionsWithServices(settlement) {
         backs: backers.get(key) || [],
         // X-45: the DM spoke, even to say nobody (the mark outlives an emptied list)
         authored: spoken.has(i),
+        // X-46 car 3: the place, not a house (its own group at the foot of the tab)
+        fabric: isFabricInstitution(inst),
       };
     })
     .sort((a, b) => a.category.localeCompare(b.category) || a.label.localeCompare(b.label));
@@ -212,9 +221,10 @@ function BacksEditor({ label, powers, selected, authored, onDone, onRevert, onCl
  * One institution: what it is, the powers it backs, then the doors to the services it renders
  * (X-35, X-40, X-45). Mounted by the tab and, through its own card, by the dossier search
  * (BUILD-W2-SEARCH U2). `sets` is the tab's chain-status reading (`computeChainSets`); `backs`
- * is the house's list from `houseBacksOf`; `canAuthor` and `index` arm the editor.
+ * is the house's list from `houseBacksOf`; `canAuthor` and `index` arm the editor. `fabric` (X-46
+ * car 3) marks the place rather than a house: no Backs line and no editor.
  */
-export function InstitutionCard({ inst, category, label, services, sets, backs = [], authored = false, canAuthor = false, index = -1, powers = [] }) {
+export function InstitutionCard({ inst, category, label, services, sets, backs = [], authored = false, canAuthor = false, index = -1, powers = [], fabric = false }) {
   const mobile = useIsMobile();
   const isCustom = inst.source === 'custom' || inst.isCustom === true;
   const badge = institutionBadge(inst);
@@ -229,7 +239,7 @@ export function InstitutionCard({ inst, category, label, services, sets, backs =
   const applyUserEditAction = useStore((s) => s.applyUserEditAction);
   const revertUserEditAction = useStore((s) => s.revertUserEditAction);
   const [editingBacks, setEditingBacks] = useState(false);
-  const mayEditBacks = canAuthor && editMode && index >= 0 && powers.length > 0;
+  const mayEditBacks = !fabric && canAuthor && editMode && index >= 0 && powers.length > 0;
   return (
     <section ref={focusRef} id={entityAnchor('institution', inst)} data-testid="institution-card" style={{
       ...FLUSH, padding: '8px 11px', background: swatch['#FAF8F4'],
@@ -253,7 +263,7 @@ export function InstitutionCard({ inst, category, label, services, sets, backs =
       {/* THE BACKS LINE (X-40, X-45): who the house contributes to, each name a door to the Power
           tab; the ✎ mark when the DM named them; the pencil when the DM may. A wrapping row like
           the doors below (the name-list census reads it as no list). */}
-      {(backs.length > 0 || authored || mayEditBacks) && (
+      {!fabric && (backs.length > 0 || authored || mayEditBacks) && (
         <div data-testid="institution-backs" style={{ display: 'flex', alignItems: 'baseline', gap: '2px 8px', flexWrap: 'wrap', marginTop: 4, fontSize: proseFontSize(FS.xs, mobile), color: swatch.inkMag3 }}>
           <span>Backs</span>
           {backs.map((back) => (
@@ -301,12 +311,14 @@ export function InstitutionCard({ inst, category, label, services, sets, backs =
 }
 
 export default function InstitutionsTab({ settlement, canAuthor = false }) {
-  const houses = useMemo(() => institutionsWithServices(settlement), [settlement]);
+  const entries = useMemo(() => institutionsWithServices(settlement), [settlement]);
+  const houses = useMemo(() => entries.filter((entry) => !entry.fabric), [entries]);
+  const fabric = useMemo(() => entries.filter((entry) => entry.fabric), [entries]);
   const sets = useMemo(() => computeChainSets(settlement || {}), [settlement]);
   // X-45: the editor's choices and each house's address in the roster (the edit action's index).
   const powers = useMemo(() => rosterPowerNames(settlement), [settlement]);
   const roster = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
-  if (!houses.length) return <Empty message="No institutions are recorded for this settlement." />;
+  if (!entries.length) return <Empty message="No institutions are recorded for this settlement." />;
 
   return (
     <div style={FLUSH_PAGE}>
@@ -322,6 +334,18 @@ export default function InstitutionsTab({ settlement, canAuthor = false }) {
             canAuthor={canAuthor} index={roster.indexOf(inst)} powers={powers} />
         ))}
       </div>
+      {/* THE FABRIC OF THE PLACE (X-46 car 3): the dwellings, the well, the church walk — the place
+          itself, not a house; its own group at the foot, no Backs line. */}
+      {fabric.length > 0 && (
+        <section data-testid="institutions-fabric">
+          <div data-testid="institutions-fabric-heading" style={{ ...literaryTitle(FS.sm), color: MUTED, padding: '10px 12px 4px' }}>The fabric of the place</div>
+          <div style={FLUSH_STACK}>
+            {fabric.map(({ inst, category, label, services }, i) => (
+              <InstitutionCard key={`fabric-${i}`} inst={inst} category={category} label={label} services={services} sets={sets} fabric />
+            ))}
+          </div>
+        </section>
+      )}
       {/* The campaign-only stale-window note closes the page (the block law, X-16 rung 6). */}
       <EconomyFreshnessNote settlement={settlement} variant="catalog" />
     </div>

@@ -91,7 +91,17 @@ describe('deterministic generation coherence repair', () => {
       // (one of them the old pin's Fighting pits) and leaves the final roster free of hard
       // violations — of the forty siblings, only -21, -38, -39 and -40 do both. The
       // effect corpus keeps `-24` for its own strata, so the two files no longer share it.
-    }, 'effect-reach-v1-iso-metro-39');
+      // Re-pinned `-39` to `-28` on 2026-11-04 (X-46 car 3, the institution budget; the chair's
+      // ruling 6(b)): the density factor changes which rows a metropolis rolls, so `-39` no longer
+      // adds two; of `-0`..`-59` only `-28` adds two hard dependencies AND leaves the final roster
+      // free of hard violations. The claim is unchanged; the subjects follow the seed.
+      // Re-pinned `-28` to `-116` the same day, same cause (the chair's inverse calibration of the
+      // density factor): none of -0..-59 does both now; -116 is the first above them that does.
+      // Re-pinned `-116` to `-245` on 2026-11-04 (rung-1 pins, unit 1; the composed base): composed
+      // onto the window branch, x46-1b's tailed metropolis roll moves this seed's population and so
+      // its density factor, and `-116` adds none; of -0..-399 only -245 (Fighting pits, Underground
+      // city — the same two subjects) and -318 add two AND leave no hard violation.
+    }, 'effect-reach-v1-iso-metro-245');
     const names = new Set(
       settlement.institutions.map(institution => institution.name),
     );
@@ -104,11 +114,11 @@ describe('deterministic generation coherence repair', () => {
       // unchanged: MORE THAN ONE newly visible hard dependency is added and reported.
       expect.objectContaining({
         type: 'hard_dependency',
-        subject: 'Hireling hall',
+        subject: 'Fighting pits',
       }),
       expect.objectContaining({
         type: 'hard_dependency',
-        subject: 'Fighting pits',
+        subject: 'Underground city',
       }),
     ]));
     for (const repair of additions) {

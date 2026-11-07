@@ -31,6 +31,93 @@ const FORMAL_JUDGMENT_IDS = Object.freeze([
   'dramatic_tension',
   'diversity_and_repetition',
   'confidence_and_provenance',
+  'record_coherence_battery',
+]);
+
+/**
+ * THE EIGHTH JUDGMENT IS ADVISORY (the chair's ruling on lane SELF-VOUCH, 2026-11-04):
+ * `record_coherence_battery` reads the coherence battery over the stored record, and the
+ * receipt's overall status does not follow it. The seven original judgments are held to
+ * "not needs_review" exactly as before; the eighth's failures are PINNED BY IDENTITY below
+ * (an instrument, not an allowance), so a specimen that starts or stops failing moves the pin.
+ */
+const ADVISORY_JUDGMENT = 'record_coherence_battery';
+/** specimen label → the advisory judgment's status, filled as the specimens certify. */
+const ADVISORY_STATUS = new Map();
+/** The specimens whose advisory judgment fails today: 65 of 65, RE-KEYED 2026-11-04 on the window
+ *  branch (lane/window-rung1-2026-11-04, the chair's follow-up (b)). Was 62 of 65. Causes: X-46's bands
+ *  moved POPULATION_BOUNDARIES (ten boundary labels changed: 60/61, 400/401, 900/901, 5000/5001,
+ *  25000/25001 became 24/25, 87/88, 349/350, 2249/2250, 14999/15000), and the composed lanes plus the
+ *  kind-7 judgment (I5) made three more specimens fail (criminal-crossroads-town-dun,
+ *  isolated-arcane-town-cinder, mercantile-seaport-town-dun). See the pin's own comment for the cause.
+ *  RE-KEYED 2026-11-06 (LANDING-7 lane E, third seat): 65 -> 60 of 65. FIVE SPECIMENS STOPPED FAILING, the
+ *  direction the ladder drives this list; nothing started. Bisected on the first-parent line from the last
+ *  re-key 09fe09b8d (git bisect --first-parent, one run per specimen, each flip monotone):
+ *    ff4448d2e (the rung-1 TRUTH compose)            religious-river-village-dun
+ *    11467ed57 (the rung-1 PINS compose)              isolated-arcane-town-alder
+ *    5e9ffb220 (the F1 DEFENCE-WORDS compose)         criminal-crossroads-town-dun,
+ *                                                     isolated-arcane-town-cinder, mundane-river-port-city-bracken */
+const ADVISORY_FAILING = Object.freeze([
+  'certification-v1-commercial-metropolis-alder',
+  'certification-v1-commercial-metropolis-bracken',
+  'certification-v1-commercial-metropolis-cinder',
+  'certification-v1-commercial-metropolis-dun',
+  'certification-v1-commercial-metropolis-ember',
+  'certification-v1-criminal-crossroads-town-alder',
+  'certification-v1-criminal-crossroads-town-bracken',
+  'certification-v1-criminal-crossroads-town-cinder',
+  'certification-v1-criminal-crossroads-town-ember',
+  'certification-v1-frontier-hamlet-alder',
+  'certification-v1-frontier-hamlet-bracken',
+  'certification-v1-frontier-hamlet-cinder',
+  'certification-v1-frontier-hamlet-dun',
+  'certification-v1-frontier-hamlet-ember',
+  'certification-v1-grim-seaport-metropolis-alder',
+  'certification-v1-grim-seaport-metropolis-bracken',
+  'certification-v1-grim-seaport-metropolis-cinder',
+  'certification-v1-grim-seaport-metropolis-dun',
+  'certification-v1-grim-seaport-metropolis-ember',
+  'certification-v1-isolated-arcane-town-bracken',
+  'certification-v1-isolated-arcane-town-dun',
+  'certification-v1-isolated-arcane-town-ember',
+  'certification-v1-magical-desert-village-alder',
+  'certification-v1-magical-desert-village-bracken',
+  'certification-v1-magical-desert-village-cinder',
+  'certification-v1-magical-desert-village-dun',
+  'certification-v1-magical-desert-village-ember',
+  'certification-v1-mercantile-seaport-town-alder',
+  'certification-v1-mercantile-seaport-town-bracken',
+  'certification-v1-mercantile-seaport-town-cinder',
+  'certification-v1-mercantile-seaport-town-dun',
+  'certification-v1-mercantile-seaport-town-ember',
+  'certification-v1-mundane-river-port-city-alder',
+  'certification-v1-mundane-river-port-city-cinder',
+  'certification-v1-mundane-river-port-city-dun',
+  'certification-v1-mundane-river-port-city-ember',
+  'certification-v1-plagued-martial-city-alder',
+  'certification-v1-plagued-martial-city-bracken',
+  'certification-v1-plagued-martial-city-cinder',
+  'certification-v1-plagued-martial-city-dun',
+  'certification-v1-plagued-martial-city-ember',
+  'certification-v1-religious-river-village-alder',
+  'certification-v1-religious-river-village-bracken',
+  'certification-v1-religious-river-village-cinder',
+  'certification-v1-religious-river-village-ember',
+  'certification-v1-subsistence-thorp-alder',
+  'certification-v1-subsistence-thorp-bracken',
+  'certification-v1-subsistence-thorp-cinder',
+  'certification-v1-subsistence-thorp-dun',
+  'certification-v1-subsistence-thorp-ember',
+  'population-14999',
+  'population-15000',
+  'population-2249',
+  'population-2250',
+  'population-24',
+  'population-25',
+  'population-349',
+  'population-350',
+  'population-87',
+  'population-88',
 ]);
 
 const PROFILE_SEEDS = Object.freeze([
@@ -166,17 +253,19 @@ const PROFILES = Object.freeze([
   },
 ]);
 
+// X-46 THE HISTORICAL SCALE, car 1 (ODQ §934.104): the stamp's cut points 25 / 88 / 350 /
+// 2,250 / 15,000 (src/data/constants.js :: TIER_STAMP_CUTS), each population either side of one.
 const POPULATION_BOUNDARIES = Object.freeze([
-  [60, 'thorp'],
-  [61, 'hamlet'],
-  [400, 'hamlet'],
-  [401, 'village'],
-  [900, 'village'],
-  [901, 'town'],
-  [5000, 'town'],
-  [5001, 'city'],
-  [25000, 'city'],
-  [25001, 'metropolis'],
+  [24, 'thorp'],
+  [25, 'hamlet'],
+  [87, 'hamlet'],
+  [88, 'village'],
+  [349, 'village'],
+  [350, 'town'],
+  [2249, 'town'],
+  [2250, 'city'],
+  [14999, 'city'],
+  [15000, 'metropolis'],
 ]);
 
 function generate(config, seed) {
@@ -361,10 +450,15 @@ function expectCertified(settlement, label) {
     `${label} formal judgment contract`,
   ).toEqual(FORMAL_JUDGMENT_IDS);
   for (const judgment of receipt.judgments) {
-    expect(
-      judgment.status,
-      `${label}: ${judgment.id}`,
-    ).not.toBe('needs_review');
+    if (judgment.id === ADVISORY_JUDGMENT) {
+      expect(judgment.status, `${label}: ${judgment.id}`).toMatch(/^(pass|needs_review)$/);
+      ADVISORY_STATUS.set(label, judgment.status);
+    } else {
+      expect(
+        judgment.status,
+        `${label}: ${judgment.id}`,
+      ).not.toBe('needs_review');
+    }
     expect(
       judgment.evidence?.length,
       `${label}: ${judgment.id} has no evidence`,
@@ -379,7 +473,8 @@ function expectCertified(settlement, label) {
   expect(
     settlement.population,
     `${label} population outside ${settlement.tier}`,
-  ).toBeLessThanOrEqual(range.max);
+    // I3 (the chair, 2026-11-04, on X-46 car 1b): the metropolis band is open above its floor.
+  ).toBeLessThanOrEqual(settlement.tier === 'metropolis' ? Infinity : range.max);
   expectFiniteNumbers(settlement);
   expectIndependentIntegrity(settlement, label);
 }
@@ -466,4 +561,36 @@ describe('seeded generation certification cohort', () => {
       expectCertified(settlement, `population-${population}`);
     },
   );
+
+  it('pins the advisory record_coherence_battery failures BY IDENTITY', () => {
+    // A filtered run certifies only some specimens; the rest are read here.
+    for (const profile of PROFILES) {
+      for (const seed of PROFILE_SEEDS) {
+        const label = `certification-v1-${profile.id}-${seed}`;
+        if (!ADVISORY_STATUS.has(label)) {
+          const judgment = generate(profile.config, label).generationCoherenceReceipt.judgments
+            .find((entry) => entry.id === ADVISORY_JUDGMENT);
+          ADVISORY_STATUS.set(label, judgment?.status);
+        }
+      }
+    }
+    for (const [population] of POPULATION_BOUNDARIES) {
+      const label = `population-${population}`;
+      if (!ADVISORY_STATUS.has(label)) {
+        const judgment = generate({
+          settType: 'custom', population, culture: 'germanic', terrainOverride: 'plains', tradeRouteAccess: 'road',
+        }, `certification-v1-boundary-${population}`).generationCoherenceReceipt.judgments
+          .find((entry) => entry.id === ADVISORY_JUDGMENT);
+        ADVISORY_STATUS.set(label, judgment?.status);
+      }
+    }
+    const failing = [...ADVISORY_STATUS].filter(([, status]) => status === 'needs_review')
+      .map(([label]) => label).sort();
+    expect(ADVISORY_STATUS.size).toBe(65);
+    // MEASURED 2026-11-04 at lane/self-vouch-2026-11-04: CAUSE — the battery reads, in the
+    // stored record, contradictions the fix lanes are curing (surplus exports on short food,
+    // defence and hospital words without the thing, "town" for a place that is not one,
+    // hooks false on the record). The ladder drives this list to empty; shrink it as it does.
+    expect(failing).toEqual(ADVISORY_FAILING);
+  }, 120_000);
 });

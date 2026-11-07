@@ -43,18 +43,22 @@ export const PAIRED_TOWN = Object.freeze({
 });
 
 /**
- * ⭐ RE-TAKEN 2026-11-06 (REVIEW-INTAKE-3, chair ruling R7), RE-KEYED BY IDENTITY WITH ITS CAUSE:
- * "a proxy is not a provider" (REVIEW-INTAKE unit 2) — a Housing row now rolls ONE service, so
- * the later service rolls fork in the generated town, and `rate-11-9`'s Town hall no longer
- * keeps the treasury (its DS-GEN-11 row reads LICENSED with no holder). The captured town is now
- * `rate-57-3` with its OWN grid config: the FIRST town of `prose-rate-corpus.mjs :: rateGrid`, in
- * the grid's own order (index 231 of 768; the whole grid scanned, 128 town-tier cells generated),
- * on which every precondition the four pins assert holds — `criminalCaptureState: corrupted`,
- * tier town, the treasury row INTERESTED with the Town hall as its holder, interested on the
- * state organs only. It is the ONLY grid town that holds all of them at this tip (`rate-9-2`
- * reads LICENSED with no holder, `rate-57-0` names the Weekly market, `rate-69-0` the Lord's
- * appointee). Unlike `rate-11-9` (a grid seed string under the paired config, off the grid's
- * four seeds per cell) it is a real grid town, taken as the generator makes it.
+ * ⭐ RE-TAKEN 2026-11-07 (REVIEW-INTAKE-LAND, the merge of the review-intake lane onto rung 1's
+ * final tip `77bfd3535`), RE-KEYED BY IDENTITY WITH ITS CAUSE. Both sides had re-keyed `rate-11-9`
+ * on 2026-11-06, each by its own cause: the review-intake lane (R7: "a proxy is not a provider", a
+ * Housing row rolls one service, so later service rolls fork) to `rate-57-3`, and the rung-1
+ * landing (LANDING-7 A, R-A5: the X-46 compose `1264a8152` moved `rate-11-9` out of capture) to
+ * `rate-93-0`. At the merged tip the two causes compose, and the same rule re-applied —
+ * `prose-rate-corpus.mjs :: rateGrid` in the grid's own order, all 128 town cells generated —
+ * names `rate-69-0` (index 276; port/heartland/arabic/desert) the FIRST town on which every
+ * captured precondition holds: corrupted, tier town, the treasury row INTERESTED with the Town
+ * hall as holder and the captured-at-birth mark, interested on the state organs only, no
+ * non-organ row interested. Three grid towns hold them (`rate-69-0`, `rate-93-0`, `rate-135-1`);
+ * `rate-57-3` reads corrupted no longer at this tip. THE CLEAN CONTROL moves by the same rule:
+ * `rate-3-0`'s treasury is kept by its Weekly market and `rate-3-2`'s by nobody, so the first grid
+ * town that is uncaptured, a town, interested on nothing, and has its Town hall keep the treasury
+ * is `rate-9-2` (index 38) — PAIRED_TOWN's own seed and config, a coincidence of the scan, not a
+ * choice (the paired arm reads walls and a security house, the interested arm reads capture).
  *
  * ⭐ RE-TAKEN 2026-09-30 (the urban band, ODQ §934.86): `rate-9-2` is still corrupted, but the
  * same-seed shift left its Town hall without a tax service, so its treasury record has no
@@ -70,21 +74,21 @@ export const PAIRED_TOWN = Object.freeze({
 export const INTERESTED_TOWNS = Object.freeze([
   Object.freeze({
     label: 'captured',
-    // was 'rate-11-9' (town/road/random_threat/germanic/hills); re-keyed 2026-11-06, cause above.
-    seed: 'rate-57-3',
+    // was 'rate-11-9' (town/road/random_threat/germanic/hills); re-keyed 2026-11-07, cause above.
+    seed: 'rate-69-0',
     config: Object.freeze({
-      settType: 'town', tradeRouteAccess: 'road', monsterThreat: 'heartland', culture: 'slavic', terrainOverride: 'riverside',
+      settType: 'town', tradeRouteAccess: 'port', monsterThreat: 'heartland', culture: 'arabic', terrainOverride: 'desert',
     }),
   }),
   Object.freeze({
     label: 'clean',
-    // was 'rate-3-0' (arabic/riverside); re-keyed 2026-11-06 by the same cause and rule as the
-    // captured town: rate-3-0's treasury is kept by its Weekly market again, so the pair no
-    // longer differs by the capture alone. rate-3-2 is the FIRST grid town (index 14; 3 town
-    // cells generated) that is uncaptured, a town, and has its Town hall keep the treasury.
-    seed: 'rate-3-2',
+    // was 'rate-3-0' (arabic/riverside); re-keyed 2026-11-07 by the rule above: rate-3-0's treasury
+    // is kept by its Weekly market, so the pair would not differ by the capture alone. rate-9-2 is
+    // the FIRST grid town (index 38) uncaptured, a town, interested on nothing, Town hall keeping
+    // the treasury.
+    seed: 'rate-9-2',
     config: Object.freeze({
-      settType: 'town', tradeRouteAccess: 'random_trade', monsterThreat: 'random_threat', culture: 'slavic', terrainOverride: 'forest',
+      settType: 'town', tradeRouteAccess: 'road', monsterThreat: 'random_threat', culture: 'germanic', terrainOverride: 'hills',
     }),
   }),
 ]);
