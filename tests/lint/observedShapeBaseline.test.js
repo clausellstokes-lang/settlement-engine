@@ -30,6 +30,7 @@ import {
   RETIRED_CORPUS_REDEAL_BASELINE_SCHEMA,
   RETIRED_ADVISORY_LOCKFILE_BASELINE_SCHEMA,
   RETIRED_FED_WORLD_BASELINE_SCHEMA,
+  RETIRED_WINDOW_RUNG1_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA,
   validateSchema3Baseline,
   RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
@@ -59,6 +60,7 @@ import {
   validateSchema25Baseline,
   validateSchema26Baseline,
   validateSchema27Baseline,
+  validateSchema28Baseline,
 } from '../../scripts/lib/observed-shape-baseline.mjs';
 import {
   digestOf,
@@ -357,7 +359,9 @@ describe('observed-shape schema-3 baseline envelope', () => {
     // ⭐ SCHEMA 25: THE 2026-10 ADVISORY LOCKFILE BUMP (the chair's ruling of 2026-10-23, under the schema-13 precedent TE-MINT-1, ODQ §783.3/§821/§825): schema 24's envelope, tag law, roster and register UNCHANGED, re-governed to a lockfile that moves dompurify 3.4.12 -> 3.4.17 and fflate 0.8.2 -> 0.8.3 with package.json byte-identical. Like 13, its reconciliation is EMPTY by construction, and measured so.
     // ⭐ SCHEMA 26: THE FED WORLD (the chair's ruling (i) on lane OSR-RUNG's STOP, 2026-11-03, ODQ §934.104): schema 25's envelope, tag law and roster UNCHANGED, re-governed to a corpus with a famine topology pass (the schema-17 shape) and a register that admits 22 rows the self-feeding worlds of FOOD-1/FOOD-2 no longer resolve (the schema-24 shape); four rows go, two shrink, the bank holds at 69/45.
     // ⭐ SCHEMA 27: THE RUNG-1 WINDOW (the chair's rulings on lane LANDING-2b's STOP, 2026-11-04): schema 26's envelope and tag law re-governed to the shape-family theta 0.76 (the crisis cast on `stressors`), a corpus topology pass that cures the window's `facets`/`issues` erosion, three crisis declarations (the roster 10 -> 13, the bank 69/45 -> 76/50) and the window's rows admitted with attribution.
-    expect(BASELINE_SCHEMA).toBe(27);
+    // ⭐ SCHEMA 28: THE TIER-CHANGE COVERAGE PASS (the chair's corpus-coverage ruling of 2026-11-06, the militia precedent): schema 27's envelope, tag law, roster and register UNCHANGED, re-governed to a corpus builder whose producer 2b pulses one town generated over the city cut (osr-tier-14) so the stamp law mints the tier candidate R-B1 took from producer 2. Like 25, its reconciliation is EMPTY, and measured so.
+    expect(BASELINE_SCHEMA).toBe(28);
+    expect(RETIRED_WINDOW_RUNG1_BASELINE_SCHEMA).toBe(27);
     expect(RETIRED_FED_WORLD_BASELINE_SCHEMA).toBe(26);
     expect(RETIRED_ADVISORY_LOCKFILE_BASELINE_SCHEMA).toBe(25);
     expect(RETIRED_CORPUS_REDEAL_BASELINE_SCHEMA).toBe(24);
@@ -648,6 +652,14 @@ function validSchema26Baseline_fixture() {
   return baseline;
 }
 
+/** The RETIRED schema-27 envelope, pinned to its own LITERAL number for the reason the
+ *  schema-10 through schema-26 fixtures above record. */
+function validSchema27Baseline_fixture() {
+  const baseline = validSchema7Baseline();
+  baseline.schema = RETIRED_WINDOW_RUNG1_BASELINE_SCHEMA;
+  return baseline;
+}
+
 /** The LIVE envelope, whatever number is in force. */
 function validLiveBaseline() {
   const baseline = validSchema7Baseline();
@@ -929,7 +941,17 @@ describe('observed-shape schema-7 bank-by-rule envelope', () => {
     // is paired with a fixture rather than with `live`. `live` belongs to 27 now.
     const fedWorld = validSchema26Baseline_fixture();
     expect(validateSchema26Baseline(fedWorld)).toBe(fedWorld);
-    expect(validateSchema27Baseline(live)).toBe(live);
+    // ⭐ 27 IS RETIRED at the schema-28 rung and now validates its OWN literal, so it too
+    // is paired with a fixture rather than with `live`. `live` belongs to 28 now.
+    // ⚠ THE 27/28 PAIR IS AS TIGHT AS 24/25 WAS: schema 28 re-governs schema 27's register with
+    // NOT ONE row moved, so the number is the ONLY thing keeping a stale freeze from validating
+    // as a current one.
+    const windowRung1 = validSchema27Baseline_fixture();
+    expect(validateSchema27Baseline(windowRung1)).toBe(windowRung1);
+    expect(validateSchema28Baseline(live)).toBe(live);
+    expect(() => validateSchema27Baseline(live)).toThrow(/is not schema 27/);
+    expect(() => validateSchema28Baseline(windowRung1)).toThrow(/is not schema 28/);
+    expect(() => validateSchema28Baseline(fedWorld)).toThrow(/is not schema 28/);
     expect(() => validateSchema26Baseline(live)).toThrow(/is not schema 26/);
     expect(() => validateSchema27Baseline(fedWorld)).toThrow(/is not schema 27/);
     expect(() => validateSchema27Baseline(advisoryLockfile)).toThrow(/is not schema 27/);

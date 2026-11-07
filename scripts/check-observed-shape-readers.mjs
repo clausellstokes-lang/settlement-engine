@@ -100,11 +100,12 @@ import {
   RETIRED_CORPUS_REDEAL_BASELINE_SCHEMA,
   RETIRED_ADVISORY_LOCKFILE_BASELINE_SCHEMA,
   RETIRED_FED_WORLD_BASELINE_SCHEMA,
+  RETIRED_WINDOW_RUNG1_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA,
   RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
-  validateSchema27Baseline,
+  validateSchema28Baseline,
 } from './lib/observed-shape-baseline.mjs';
 import {
   parseExactFlags,
@@ -212,7 +213,14 @@ const BASELINE = join(ROOT, 'scripts/.observed-shape-readers-baseline.json');
  *     (famine + the forced Underground network, 40 roots) that brings the eroded `facets` and
  *     `issues` shapes back, THREE declarations (the crisis cast's temporary person: `temporary`,
  *     `temporaryKind`, `crisisIds on npcs`; the roster 10 -> 13), and the window's ordinary rows
- *     admitted with attribution. THE LIVE AUTHORITY.
+ *     admitted with attribution (RETIRED).
+ * 28 = schema 27's topology, tag law, thirteen-identity roster and register ALL UNCHANGED,
+ *     re-governed to THE TIER-CHANGE COVERAGE PASS (the chair's corpus-coverage ruling of
+ *     2026-11-06, the militia precedent): R-B1 (2168ffdba, the promotion window reads the stamp
+ *     cut) left producer 2's pulse no tier candidate, so the corpus builder gains producer 2b
+ *     (its own one-save pulse over `osr-tier-14`, a town generated over the city cut; a bounded
+ *     view of its tier candidates, roots only) and the seven eroded identities are observed again.
+ *     Verdict-only like 25: it moves NO row. THE LIVE AUTHORITY.
  * ⚠ THIS LIST WENT STALE FOR EIGHT RUNGS — it marked 10 as "THE LIVE AUTHORITY" while
  *   the number stood at 18 — so it is filled in here rather than extended by one. Each
  *   rung's full rationale lives beside its own target constant in
@@ -235,6 +243,7 @@ export {
   RETIRED_CORPUS_REDEAL_BASELINE_SCHEMA,
   RETIRED_ADVISORY_LOCKFILE_BASELINE_SCHEMA,
   RETIRED_FED_WORLD_BASELINE_SCHEMA,
+  RETIRED_WINDOW_RUNG1_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA, RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
@@ -1524,7 +1533,7 @@ export function assertExplainedWriterRowTags(
   baseline,
   entries = EXPLAINED_WRITER_EXEMPTIONS,
 ) {
-  validateSchema27Baseline(baseline);
+  validateSchema28Baseline(baseline);
   assertExplainedWriterExemptions(entries);
   const declarations = new Map(entries.map((entry) => [entry.identity, entry]));
   const genesis = baseline.frozenAtSha === baseline.migrationReview.subjectSha;
@@ -2995,7 +3004,7 @@ export function baselineOf({
       'every writer still exists in source, and every stimulus that reaches them re-deals 13-197 rows',
       'and still misses `outcome.tierChange`, so the rows are ADMITTED as ordinary debt under the',
       'review\'s notes for an engine lane to cure. Four rows go and two shrink; nothing is declared.',
-      'SCHEMA 27 = schema 26\'s topology and tag law, re-governed to THE RUNG-1 WINDOW (the chair\'s',
+      'SCHEMA 27 (RETIRED) held schema 26\'s topology and tag law, re-governed to THE RUNG-1 WINDOW (the chair\'s',
       'rulings on lane LANDING-2b\'s STOP, 2026-11-04): the window the landing lands (the crisis car and',
       'the rung-1 fix lanes). The CRISIS car\'s `cast` on every stress entry dropped `stressors` off its',
       'three proposal-clone siblings (28/35 = 0.8000 -> 28/36 = 0.7778), so the shape-family theta goes',
@@ -3005,6 +3014,16 @@ export function baselineOf({
       'untouched) brings both shapes back and creates nothing new. The crisis cast\'s temporary person',
       'is DECLARED (`temporary`, `temporaryKind`, `crisisIds on npcs`; the fifth class), and the',
       'window\'s other new and grown rows are ADMITTED as ordinary debt under attributed review notes.',
+      'SCHEMA 28 = schema 27\'s topology, tag law, thirteen-identity roster and register, ALL UNCHANGED,',
+      're-governed to THE TIER-CHANGE COVERAGE PASS (the chair\'s corpus-coverage ruling of 2026-11-06,',
+      'the militia precedent). LANDING-7 lane B\'s R-B1 (2168ffdba) made the promotion window read the',
+      'next tier\'s stamp cut; producer 2\'s populations never move within twelve intervals, so its pulse',
+      'stopped minting the town -> city candidate that was the corpus\'s only observation of `tierChange`',
+      'and of `fromTier`/`toTier`/`direction` on `proposalPayload`, and seven reader identities read as',
+      'findings while every reader stands. The corpus builder (a detector source) gains producer 2b: its',
+      'own one-save pulse over `osr-tier-14`, a town generated over the city cut that the stamp law',
+      'promotes at interval 5, entering roots only as a bounded view of its tier candidates. The live',
+      'scan reproduces the schema-27 register: the reconciliation is EMPTY, so no row moves.',
       'Of the thirteen declared bank entries TWELVE bank reads today; `isCriminal on incomeSources`',
       'has banked nothing since schema 17 made its writer observable, and banked is always a',
       `subset of declared. This envelope banks ${bankPhrase(bankOf(inventory, rowTags))}.`,
@@ -3015,7 +3034,7 @@ export function baselineOf({
       'An untagged row means: a guarded read, of a real record rather than browser or language surface,',
       'of a key no writer the corpus runs produces and no declared out-of-corpus writer explains.',
       'A tagged row stays visible as governed explained-writer debt under its numeric ceiling and reason.',
-      'Schemas 4–26 are the RETIRED numeric predecessors.',
+      'Schemas 4–27 are the RETIRED numeric predecessors.',
     ],
     schema: BASELINE_SCHEMA,
     frozen: new Date().toISOString().slice(0, 10),
@@ -3189,7 +3208,7 @@ export async function run(argv = [], overrides = {}) {
     createScanArtifact,
     validateScanArtifact,
     assertFindingSourceEvidence,
-    validateBaseline: validateSchema27Baseline,
+    validateBaseline: validateSchema28Baseline,
     // ⭐ THE BANK FENCE'S TWO HAND-OWNED SIDES, overridable so the sentinel can drive
     // every refusal: the literal module and the migration script's declared post-bank.
     readBankLiteral: readBankLiteralModule,

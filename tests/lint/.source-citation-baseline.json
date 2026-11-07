@@ -47,7 +47,7 @@
     "pastEofCitationsExcluded": 377,
     "byRule": {
       "banner": 9,
-      "dated": 71,
+      "dated": 76,
       "sha-pin": 1,
       "tree": 90
     },
@@ -85,6 +85,11 @@
         "docs/LANDING7_PDF_2026-11-06.md",
         "docs/LANDING7_VERIFIER_2026-11-06.md",
         "docs/LANDING8_2026-11-06.md",
+        "docs/LANDING9_CORPUS_2026-11-06.md",
+        "docs/LANDING9_DIGESTS_2026-11-06.md",
+        "docs/LANDING9_DISTILLER_2026-11-06.md",
+        "docs/LANDING9_EDGE_2026-11-06.md",
+        "docs/LANDING9_POWER_2026-11-06.md",
         "docs/R6_PLACE_NOT_TIER_2026-11-04.md",
         "docs/RUNG1B_F6_BUDGET_FLOOR_2026-11-04.after.json",
         "docs/RUNG1B_F6_BUDGET_FLOOR_2026-11-04.calibration.json",
@@ -237,7 +242,9 @@
     "_rosterGrowth2026-11-04-rung1-window": "NINETEEN documents JOINED `dated` by being BORN into it, and they hid NOTHING: the rung-1 window’s lane reports and soak records (F1-F4, F6-F8, F10, HOOKS-UNDER-STRESS, R6 PLACE-NOT-TIER, X46 car 3, READER-INSTRUMENTS, and SOAK rungs 1, 1B, 1B-F5, 1C, 1D; two of them F6’s .after/.calibration JSON), 9 -> 28, measured at the landing (LANDING-1 door 7). Each carries 0 path:line citations. WHY dated: each is a point-in-time record of its own tip, stated in its header; re-addressing would falsify it. A GROWTH, not a class move: no live document left the gated corpus.",
     "_rosterGrowth2026-11-06-rung1-landing": "TWENTY-NINE documents JOINED the roster by being BORN into it, and they hid NOTHING (LANDING-7 A, measured by this walker at the rung-1 landing tip 3d8a74e4b): `tree` 56 -> 84, the twenty-eight signed records of the rung-1 landing (docs/shift-records/2026-11-04-rung1-01-x46-car-1-bands.json through 2026-11-05-rung1-28-summary-hook-count.json), each the signature of a golden re-record under ODQ §934.104/§934.105; `dated` 28 -> 29, docs/SOAK_1000_RUNG1E_2026-11-04.md, the rung 1E soak re-run at the landed tip (c99dcff1e), a point-in-time record of its own tip. GROWTHS, not class moves: no live document left the gated corpus, and the twenty-nine carry 0 past-EOF citations between them. (The archival corpus as a whole reads 389 past-EOF at this tip against the 377 frozen below; the 12-row rise sits in documents ALREADY on the roster whose targets have since shrunk, none in the newcomers, and the frozen figure is the freeze, left as recorded.)",
     "_rosterGrowth2026-11-06-landing8": "FORTY-SEVEN documents JOINED the roster by being BORN into it (LANDING-8, measured with this walker's own partitionDocs at the rung-1 landing tip 070347943): `tree` 84 -> 90, the six signed records of the day (docs/shift-records/2026-11-06-rung1-29, -30, -32, -33, -34, -35; record 31 is Register VII's, owed to the owner's hand); `dated` 29 -> 70, the day's forty-one dated documents: the nine LANDING-7 lane and verifier records, this landing's LANDING8_2026-11-06.md, and the thirty-one dated chair briefs under docs/chair/2026-11-06/. GROWTHS, not class moves: no live document left the gated corpus. The forty-seven carry ONE past-EOF citation between them (docs/LANDING7_A_2026-11-06.md line 20 cites viability.js:608, a file of 596 lines at this tip: a record of its own day, which is the exclusion's reason). The archival corpus as a whole reads 390 past-EOF at this tip against the 377 frozen below; the risk is named here rather than re-frozen, as the 2026-11-06 rung-1 note named its 389.",
-    "_rosterGrowth2026-11-06-register-vii": "ONE document JOINED the roster by being BORN into it (LANDING-8, re-measured after rebasing onto the chair's 61dd5ce2b): `dated` 70 -> 71, docs/tuning-signatures/2026-11-06-v1.json, the owner's Register VII signature record (229e62cd1). A GROWTH that hid nothing: 0 past-EOF citations."
+    "_rosterGrowth2026-11-06-register-vii": "ONE document JOINED the roster by being BORN into it (LANDING-8, re-measured after rebasing onto the chair's 61dd5ce2b): `dated` 70 -> 71, docs/tuning-signatures/2026-11-06-v1.json, the owner's Register VII signature record (229e62cd1). A GROWTH that hid nothing: 0 past-EOF citations.",
+    "_rosterGrowth2026-11-06-landing9-corpus": "ONE document JOINED the roster by being BORN into it (LANDING-9 corpus lane, measured with this walker's own arm): `dated` 71 -> 72, docs/LANDING9_CORPUS_2026-11-06.md, the lane's record, born dated, 0 past-EOF citations. A GROWTH, not a re-classification: no document changed class.",
+    "_rosterGrowth2026-11-07-landing9-lanes": "FOUR documents JOINED the roster by being BORN into it (the chair, at the merge of the five LANDING-9 lanes, measured with this walker's own arm): `dated` 72 -> 76, docs/LANDING9_EDGE_2026-11-06.md, docs/LANDING9_DISTILLER_2026-11-06.md, docs/LANDING9_DIGESTS_2026-11-06.md, docs/LANDING9_POWER_2026-11-06.md, the four lanes' records, born dated, 0 past-EOF citations. A GROWTH, not a re-classification: no document changed class."
   },
   "rows": []
 }

@@ -195,7 +195,14 @@
  *     a corpus TOPOLOGY pass (producer 1d) that cures two instrument erosions the window caused
  *     (`facets`, `issues`), DECLARES the crisis cast's temporary person (three identities, the
  *     roster 10 -> 13, the bank 69/45 -> 76/50), and ADMITS the window's other rows with
- *     attribution. Its full rationale lives beside `WINDOW_RUNG1_TARGET_SCHEMA`.
+ *     attribution. Its full rationale lives beside `WINDOW_RUNG1_TARGET_SCHEMA` (RETIRED).
+ *
+ *   schema 27 -> 28 (LIVE)   the same tagged numeric reconciliation, and THE SECOND CORPUS-COVERAGE
+ *     RUNG CUT FOR A PULSE SHAPE: R-B1 (2168ffdba, the promotion window reads the stamp cut) left
+ *     producer 2's pulse no tier candidate, so the corpus builder gains producer 2b (its own one-save
+ *     pulse over `osr-tier-14`, a town generated over the city cut; a bounded view of its tier
+ *     candidates, roots only). Verdict-only like 25: the reconciliation is EMPTY, nothing is declared,
+ *     the bank holds at 76/50. Its full rationale lives beside `TIER_COVERAGE_TARGET_SCHEMA`.
  *
  *   schema 25 -> 26 (RETIRED) the same tagged numeric reconciliation, and THE FIRST RUNG THAT IS BOTH
  *     OF ITS PRECEDENTS AT ONCE: the schema-17 corpus-coverage shape (a famine TOPOLOGY pass that
@@ -282,6 +289,7 @@ import {
   validateSchema24Baseline,
   validateSchema25Baseline,
   validateSchema26Baseline,
+  validateSchema27Baseline,
 } from './lib/observed-shape-baseline.mjs';
 
 export const MIGRATION_REPORT_SCHEMA = 2;
@@ -1154,6 +1162,52 @@ export const FED_WORLD_TARGET_SCHEMA = 26;
  *  lands ratchet-red, and its re-freeze lands next. */
 export const WINDOW_RUNG1_TARGET_SCHEMA = 27;
 
+/* ⭐⭐ THE SCHEMA 27 → 28 RUNG — THE TIER-CHANGE COVERAGE PASS
+ *
+ *  The chair's ruling of 2026-11-06 on LANDING-8's record (under the owner's full delegation of
+ *  2026-11-06, vetoable): a CORPUS-COVERAGE rung, the militia precedent (LANDING-7 A, R-A2′,
+ *  cd30f7004) — the executed corpus gains a seed that crosses a stamp cut under the stamp law; the
+ *  eroded identities are NEVER admitted.
+ *
+ *  THE EROSION, MEASURED. Through ⟨BASE⟩ 3d8a74e4b producer 2's pulse minted a town -> city tier
+ *  candidate for osr001 and osr013 (towns of 2,168) at every interval from 5 to 12, and those
+ *  `pulseResult.candidates[]` rows were the corpus's only observation of `tierChange` and of
+ *  `fromTier`/`toTier`/`direction` on `proposalPayload`. LANDING-7 lane B's R-B1 (2168ffdba, the
+ *  first-parent step 103b1db81) made the promotion window read the next tier's STAMP CUT; lit
+ *  (demographics), the window is the whole cut (2,250), and no corpus population moves within the
+ *  twelve intervals (measured: every one of the sixteen saves ends at its generated head count), so
+ *  the pulse mints no tier candidate at any interval and SEVEN reader identities — `tierChange on
+ *  outcome` in six files, `direction`/`fromTier`/`toTier on proposalPayload` — read as findings
+ *  while every reader still stands. The shrink-only `--write` correctly refuses to add them.
+ *
+ *  THE SEED, SEARCHED. `osr-tier-0..39` on the four CONFIGS, each generated settlement whose head
+ *  count already stands at or above the next tier's cut pulsed alone under the corpus's own lit rules
+ *  for twelve intervals: under configs 0 and 3 the towns osr-tier-14 (2,414), -19 (2,477) and -28
+ *  (2,282) mint at interval 5 (-25, 2,394, mints under config 3 at 12 and under config 0 never);
+ *  the villages over the town cut under config 2 (368–397) never mint within twelve. osr-tier-14
+ *  under CONFIGS[0] is taken.
+ *
+ *  ⭐ PRODUCER 2b, THE 1b/1c/1d LAW CARRIED TO A PULSE. It runs ITS OWN one-save campaign, pushes
+ *  nothing into `generated`, and enters `roots` only as a BOUNDED VIEW of its tier candidates
+ *  under their real relative path (`pulseResult.candidates[]`, the F4 bounded-view precedent), so
+ *  producer 2's pulse, its saves, its steadings, the scalar stream and the four EXECUTION keys
+ *  (seeds 4, configs 4, generations 16, pulseIntervals 12) are byte-for-byte untouched. It throws
+ *  if the seed ever stops minting, so the coverage cannot erode silently.
+ *
+ *  ⛔ AND THE RECONCILIATION MUST BE EMPTY, which is this rung's claim: MEASURED before the rung
+ *  was cut, with producer 2b in the builder, the walker's 47 arms read 46 green — every growth,
+ *  erasure and inventory arm — and the one red was the live-estate drift arm naming
+ *  `scripts/lib/observed-shape-corpus.mjs` as the only moved detector source. Any moved row,
+ *  ceiling or identity at the mint means the pass was not pure coverage and the mint STOPS.
+ *
+ *  ⭐ THE BANK DOES NOT MOVE: 76 banked reads across 50 tagged addresses, the committed register's
+ *  and the walker's literal; no row moves, so the literal module stands still.
+ *
+ *  Its delta is the corpus builder (the subject) plus the three bookkeeping paths. See
+ *  `TIER_COVERAGE_SCANNER_DELTA_PATHS`. The commit pair holds as at every rung: this rung lands
+ *  ratchet-red, and its re-freeze lands next. */
+export const TIER_COVERAGE_TARGET_SCHEMA = 28;
+
 export const DECLARED_BANK_BY_TARGET = Object.freeze({
   [EXEMPTION_RETIREMENT_TARGET_SCHEMA]: Object.freeze({ bankedReads: 60, taggedRows: 39 }),
   [BANK_FENCE_TARGET_SCHEMA]: Object.freeze({ bankedReads: 60, taggedRows: 39 }),
@@ -1196,6 +1250,10 @@ export const DECLARED_BANK_BY_TARGET = Object.freeze({
   // crisisLifecycle.js. No other moving row sits on a declared identity. The write refuses if the
   // measurement disagrees with this pair or with the walker's hand-owned literal.
   [WINDOW_RUNG1_TARGET_SCHEMA]: Object.freeze({ bankedReads: 76, taggedRows: 50 }),
+  // MEASURED off the committed schema-27 register (`bankOf` → 76 reads across 50 addresses, the
+  // walker's literal), and a verdict-only rung moves no row, so the pair cannot move. The write
+  // refuses if the live measurement disagrees with this pair or with the walker's hand-owned literal.
+  [TIER_COVERAGE_TARGET_SCHEMA]: Object.freeze({ bankedReads: 76, taggedRows: 50 }),
 });
 
 /** The declared post-bank of a target, or `null` for a rung that predates the law. */
@@ -1700,6 +1758,23 @@ export const WINDOW_RUNG1_SCANNER_DELTA_PATHS = Object.freeze([
   'scripts/migrate-observed-shape-readers.mjs',
 ]);
 
+/**
+ * The schema-27 → 28 detector delta — FOUR paths, the fed-world rung's set:
+ *   • `scripts/lib/observed-shape-corpus.mjs` — THE SUBJECT: producer 2b, the tier-change coverage
+ *     pulse;
+ *   • the three instrument files — the 27 → 28 bump and the retired-27 validator, this rung and its
+ *     declared post-bank, and the checker's live-validator binding, `_doc` and schema index.
+ * ⛔ NOTHING ELSE MOVED among the eleven governed detector inputs, measured rather than assumed: the
+ * walker's live-estate drift arm named the corpus builder as the ONLY moved detector source before
+ * the three instrument files were touched.
+ */
+export const TIER_COVERAGE_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/lib/observed-shape-corpus.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
 export const BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS = Object.freeze([
   'package-lock.json',
   'package.json',
@@ -1750,6 +1825,8 @@ const FED_WORLD_SCANNER_TRANSITION_POLICY =
   'schema-25-to-26-exact-scanner-transition-v1';
 const WINDOW_RUNG1_SCANNER_TRANSITION_POLICY =
   'schema-26-to-27-exact-scanner-transition-v1';
+const TIER_COVERAGE_SCANNER_TRANSITION_POLICY =
+  'schema-27-to-28-exact-scanner-transition-v1';
 const CORPUS_COVERAGE_SCANNER_TRANSITION_POLICY =
   'schema-7-to-8-exact-scanner-transition-v1';
 const EPOCH_DARK_CORPUS_SCANNER_TRANSITION_POLICY =
@@ -1795,6 +1872,7 @@ export const LEAF_MIGRATION_PREDECESSOR = Object.freeze({
   [ADVISORY_LOCKFILE_TARGET_SCHEMA]: CORPUS_REDEAL_TARGET_SCHEMA,
   [FED_WORLD_TARGET_SCHEMA]: ADVISORY_LOCKFILE_TARGET_SCHEMA,
   [WINDOW_RUNG1_TARGET_SCHEMA]: FED_WORLD_TARGET_SCHEMA,
+  [TIER_COVERAGE_TARGET_SCHEMA]: WINDOW_RUNG1_TARGET_SCHEMA,
 });
 
 /**
@@ -1873,6 +1951,10 @@ const LEAF_PREDECESSOR_VALIDATOR = Object.freeze({
   // RETIRED literal from this rung onward, so this entry keeps validating schema 26
   // as schema 26 after the live number moves past it.
   [FED_WORLD_TARGET_SCHEMA]: validateSchema26Baseline,
+  // The schema-28 rung's own predecessor. `validateSchema27Baseline` is bound to the
+  // RETIRED literal from this rung onward, so this entry keeps validating schema 27
+  // as schema 27 after the live number moves past it.
+  [WINDOW_RUNG1_TARGET_SCHEMA]: validateSchema27Baseline,
 });
 
 const RETIRED_EXACT_MIGRATION_KIND = `observed-shape-schema-2-to-${RETIRED_EXACT_TARGET_SCHEMA}-migration`;
@@ -2396,6 +2478,16 @@ const SCANNER_TRANSITION_BY_TARGET = new Map([
     // governed execution inputs (the dossier-state prose, the institution service keys, the prose
     // norms, …) by their documented commands after the predecessor was frozen, and the report
     // records that movement for the review's decision.
+    reviewableUnscannedMovement: true,
+  })],
+  [TIER_COVERAGE_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: TIER_COVERAGE_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: TIER_COVERAGE_SCANNER_TRANSITION_POLICY,
+    // TRUE, matching every rung since 8→9 — and THIS rung exercises it: the landing regenerated
+    // governed execution inputs (the dossier-state prose, the compendium data) by their documented
+    // commands after the schema-27 register was last re-frozen, and the report records that
+    // movement for the review's decision.
     reviewableUnscannedMovement: true,
   })],
   [FED_WORLD_TARGET_SCHEMA, Object.freeze({
@@ -3498,7 +3590,7 @@ export function run(argv = process.argv.slice(2)) {
   // any mismatch into a refusal rather than a silent mode switch.
   const targetSchema = command.targetSchema
     ? Number(command.targetSchema)
-    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : WINDOW_RUNG1_TARGET_SCHEMA);
+    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : TIER_COVERAGE_TARGET_SCHEMA);
   if (![RETIRED_EXACT_TARGET_SCHEMA, HEURISTIC_TARGET_SCHEMA, FILTERED_TARGET_SCHEMA,
     SURFACE_FILTERED_TARGET_SCHEMA, BANKED_EXPLAINED_WRITER_TARGET_SCHEMA,
     CORPUS_COVERAGE_TARGET_SCHEMA, EPOCH_DARK_CORPUS_TARGET_SCHEMA,
@@ -3510,8 +3602,9 @@ export function run(argv = process.argv.slice(2)) {
     BANK_FENCE_TARGET_SCHEMA, RELATIONSHIPS_MOUNT_TARGET_SCHEMA,
     DOMAIN_READER_TARGET_SCHEMA, EDIT_MODE_READERS_TARGET_SCHEMA,
     CORPUS_REDEAL_TARGET_SCHEMA, ADVISORY_LOCKFILE_TARGET_SCHEMA,
-    FED_WORLD_TARGET_SCHEMA, WINDOW_RUNG1_TARGET_SCHEMA].includes(targetSchema)) {
-    throw new Error(`observed-shape --target-schema must be ${WINDOW_RUNG1_TARGET_SCHEMA} (live rung-1-window leaf),`
+    FED_WORLD_TARGET_SCHEMA, WINDOW_RUNG1_TARGET_SCHEMA, TIER_COVERAGE_TARGET_SCHEMA].includes(targetSchema)) {
+    throw new Error(`observed-shape --target-schema must be ${TIER_COVERAGE_TARGET_SCHEMA} (live tier-coverage leaf),`
+      + ` ${WINDOW_RUNG1_TARGET_SCHEMA} (retired rung-1-window leaf),`
       + ` ${FED_WORLD_TARGET_SCHEMA} (retired fed-world leaf),`
       + ` ${ADVISORY_LOCKFILE_TARGET_SCHEMA} (retired advisory-lockfile leaf),`
       + ` ${CORPUS_REDEAL_TARGET_SCHEMA} (retired corpus-redeal leaf),`

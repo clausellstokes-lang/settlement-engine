@@ -157,6 +157,11 @@ describe('X-46 car 4 (iii) — dark, the world is byte-identical; lit (in this t
   // (all sixty moved). The sixty digests were re-captured by the same recipe at the composed tip
   // (lane/window-rung1-2026-11-04, re-captured once more at RUNG1D after F9, READER-INSTRUMENTS and F10 composed, at 54daafda; each born twice and equal), so the arm now guards
   // the DARK PATH against future drift, which is its purpose.
+  // RE-KEYED BY IDENTITY 2026-11-06 (LANDING-9, the rung-1 landing at 3c62e8ef5): 2 of 60 moved, x46-dark-thorp-005
+  // (b18f5fcf… → d926eacd…) and x46-dark-thorp-009 (fa6b4b35… → 64023a9b…), by THE FOOD PER CENT FROM THE POUNDS,
+  // record 34 (docs/shift-records/2026-11-06-rung1-34-food-per-cent-from-pounds.json), lane H's 66b1407bd. MEASURED by
+  // this file's recipe per first-parent stage from 3d8a74e4b (0 moved): 0 at every step to 471780f4a; 2 at 18fd6b442,
+  // and that stage minus 66b1407bd moves 0 (minus 8e92c0440 or 5f6d243b2 still 2). Re-captured at 3c62e8ef5, twice and equal.
   const DARK = /** @type {Record<string, string>} */ (JSON.parse(readFileSync(
     fileURLToPath(new URL('../fixtures/x46-npc-band-dark-digests.json', import.meta.url)), 'utf8',
   )));

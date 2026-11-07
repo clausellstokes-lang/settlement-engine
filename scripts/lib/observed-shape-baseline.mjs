@@ -7,7 +7,21 @@
  *
  * ── ⭐⭐ EIGHT IDENTITY DEFINITIONS LIVE HERE, AND ONLY ONE IS THE AUTHORITY ──
  *
- * `BASELINE_SCHEMA` is **27**: schema 26's tagged numeric heuristic-leaf envelope and tag law,
+ * `BASELINE_SCHEMA` is **28**: schema 27's tagged numeric heuristic-leaf envelope, tag law,
+ * thirteen-identity roster and register ALL UNCHANGED, re-governed to THE TIER-CHANGE COVERAGE
+ * PASS (the chair's corpus-coverage ruling of 2026-11-06 on LANDING-8's record, the militia
+ * precedent). LANDING-7 lane B's R-B1 (2168ffdba) made the promotion window read the next tier's
+ * stamp cut, so producer 2's pulse — whose populations never move within twelve intervals — no
+ * longer mints the town -> city candidate that was the corpus's only observation of `tierChange`
+ * and of `fromTier`/`toTier`/`direction` on `proposalPayload`: seven reader identities read as
+ * findings while every reader still stands. The corpus builder gains producer 2b (its own
+ * one-save pulse over `osr-tier-14`, a town generated over the city cut; a bounded view of its
+ * tier candidates, roots only), which restores the observation; the live scan then reproduces the
+ * schema-27 register. The builder is a detector source, so only a migration binds its new bytes.
+ * Its full rationale lives beside `TIER_COVERAGE_TARGET_SCHEMA` in
+ * `migrate-observed-shape-readers.mjs`.
+ *
+ * `RETIRED_WINDOW_RUNG1_BASELINE_SCHEMA` is **27**: schema 26's tagged numeric heuristic-leaf envelope and tag law,
  * re-governed to THE RUNG-1 WINDOW (the chair's rulings on lane LANDING-2b's STOP, 2026-11-04):
  * the window the landing lands — the CRISIS car and the rung-1 fix lanes. Four things move at
  * once. The crisis car's derived `cast` on every stress entry dropped `stressors` off its three
@@ -432,7 +446,13 @@ export const RETIRED_ADVISORY_LOCKFILE_BASELINE_SCHEMA = 25;
  *  constant exists so a schema-26 PREDECESSOR is still validated as schema 26 after the live
  *  number moves past it. */
 export const RETIRED_FED_WORLD_BASELINE_SCHEMA = 26;
-export const BASELINE_SCHEMA = 27;
+/** The RETIRED rung-1-window definition — schema 28's predecessor. Same tagged topology
+ *  envelope, theta, roster, fence and the SAME register row for row; schema 28 re-governs it to
+ *  the corpus builder's tier-change coverage pass (producer 2b). Never redefined, never deleted —
+ *  a live baseline is validated against BASELINE_SCHEMA, and this constant exists so a schema-27
+ *  PREDECESSOR is still validated as schema 27 after the live number moves past it. */
+export const RETIRED_WINDOW_RUNG1_BASELINE_SCHEMA = 27;
+export const BASELINE_SCHEMA = 28;
 /** The RETIRED exact per-site definition. Never redefined, never deleted. */
 export const RETIRED_EXACT_BASELINE_SCHEMA = 3;
 /** The RETIRED UNFILTERED heuristic-leaf definition — schema 5's predecessor.
@@ -1084,10 +1104,21 @@ export function validateSchema26Baseline(baseline) {
   );
 }
 
+/** The RETIRED authority — schema 27's tagged envelope, re-governed by schema 28 to the
+ *  tier-change coverage pass. Re-bound to its own LITERAL now that the authority has moved to
+ *  28, for the same reason as every retired validator above. */
+export function validateSchema27Baseline(baseline) {
+  return validateLeafBaseline(
+    baseline,
+    RETIRED_WINDOW_RUNG1_BASELINE_SCHEMA,
+    { tagged: true },
+  );
+}
+
 /** The LIVE envelope validator. Bound to `BASELINE_SCHEMA` rather than a literal,
  *  so the retired rungs above keep validating their own numbers while this one
  *  always names the authority. */
-export function validateSchema27Baseline(baseline) {
+export function validateSchema28Baseline(baseline) {
   return validateLeafBaseline(baseline, BASELINE_SCHEMA, { tagged: true });
 }
 
