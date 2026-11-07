@@ -11,7 +11,7 @@
  * the pool map gave it — poolMap.js :: hookPoolFor) that the record does not contradict and no
  * other card holds, walked in authored order from an offset keyed by the card's id. DRAW-FREE:
  * no stream is read, so nothing after it moves. A pool with no true unheld line left falls
- * through to the generic pools (`other`, then the small settlement's); where every true line is
+ * through to the other pools in `dryPoolWalk`'s order (representatives.js); where every true line is
  * held, a held one is taken (a repeat beats no hook); a card no pool can serve keeps none.
  *
  * A HELD ROSTER IS NOT RE-WRITTEN (the same gate as storeTrueHooksOnly): the caller skips it.
@@ -21,7 +21,7 @@
 
 import { hookTruthViolations, settlementHookFacts } from '../../domain/coherence/hookTruth.js';
 import { HOOK_POOLS } from './poolMap.js';
-import { spareHookLine } from './representatives.js';
+import { dryPoolWalk, spareHookLine } from './representatives.js';
 import { plotHookText as textOf } from '../../lib/proseSeams.js';
 
 /**
@@ -45,7 +45,7 @@ export function truePersonHooks(settlement, portKind) {
     const hooks = Array.isArray(npc.plotHooks) ? npc.plotHooks : [];
     if (hooks.length === 1 && isTrue(textOf(hooks[0]))) return npc;
     const own = HOOK_POOLS.includes(npc.category) ? npc.category : 'other';
-    const pools = [own, 'other', 'small_settlement'];
+    const pools = dryPoolWalk(own);
     const key = String(npc.id ?? npc.name ?? '');
     // an unheld true line first; where every true line is held, a held one (a repeat beats none)
     const line = spareHookLine(pools, held, key, portKind, isTrue) ?? spareHookLine(pools, new Set(), key, portKind, isTrue);

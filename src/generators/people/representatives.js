@@ -147,16 +147,29 @@ export function drawCardHooks(cards, poolOf, stream, config, hookRegistry, portK
     let line = stream ? onStream(stream.fork(String(card.id)), draw) : draw();
     // THE POOL RAN DRY (a city holds more faces of one kind than its pool has lines): the line
     // drawn is one the roster already holds, so the next unheld line is taken, DRAW-FREE, from
-    // the card's own pool, then the generic pools — `other`, then the small settlement's — in
-    // authored order from an offset keyed by the card's id. Where every one is held, the repeat
-    // stands (the writing wave's W7 HOOKS authors by title; the lane's record counts them).
+    // the card's own pool, then the other pools in `dryPoolWalk`'s order, each in authored order
+    // from an offset keyed by the card's id. Where every one is held, the repeat stands (the
+    // writing wave's W7 HOOKS authors by title; the lane's record counts them).
     if (before.has(String(line).trim())) {
-      const spare = spareHookLine([pool, 'other', 'small_settlement'], before, String(card.id), portKind);
+      const spare = spareHookLine(dryPoolWalk(pool), before, String(card.id), portKind);
       if (spare !== null) line = spare;
     }
     held.add(String(line).trim());
     card.plotHooks = [line];
   }
+}
+
+/**
+ * The pools a card whose own pool ran dry walks, in order: its own, then the portable pools whose
+ * lines fit any keeper (`other`, the small settlement's, economy, government), then the
+ * specialist ones (criminal, military, religious) — a repeated line on one page is the worse
+ * fault (the soak's X-50). The MAGIC pool is walked by a magic face alone: its lines speak of
+ * spells and wards, which the world law forbids where magic does not work (measured: walking it
+ * put 27 settlements of the soak 1,000 on the receipt's `world_law_magic` check).
+ * @param {string} own @returns {string[]}
+ */
+export function dryPoolWalk(own) {
+  return [...new Set([own, 'other', 'small_settlement', 'economy', 'government', 'criminal', 'military', 'religious'])];
 }
 
 /** A stable non-negative integer from a string (FNV-1a): a walk's offset, no stream read. @param {string} key */

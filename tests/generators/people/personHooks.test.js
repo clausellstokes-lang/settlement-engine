@@ -93,7 +93,7 @@ describe('every card of the soak carries exactly one hook, from the pool map\'s 
         const [line] = card.plotHooks;
         // below the city the pools hold a line for every face; a city or metropolis can hold more
         // faces of one kind than its pool and the generic pools together have lines (measured on
-        // these 120: 544 repeats, all city/metropolis — the writing wave's W7 HOOKS)
+        // these 120: 145 repeats, all city/metropolis — the writing wave's W7 HOOKS)
         if (seen.has(line)) repeats[s.tier] = (repeats[s.tier] || 0) + 1;
         seen.add(line);
         if (ALL_LINES.has(line)) authored += 1;
@@ -104,6 +104,6 @@ describe('every card of the soak carries exactly one hook, from the pool map\'s 
     // every line is the pool's own, or its inland twin (F5) where the place has no water
     expect(authored / cards).toBeGreaterThan(0.9);
     expect(Object.keys(repeats).filter((tier) => !['city', 'metropolis'].includes(tier))).toEqual([]);
-    expect((repeats.city || 0) + (repeats.metropolis || 0)).toBeLessThanOrEqual(544);
+    expect((repeats.city || 0) + (repeats.metropolis || 0)).toBeLessThanOrEqual(145);
   }, 90_000);
 });
