@@ -183,8 +183,10 @@ describe('the composed-prose manifest — the DRIFT corpus, both audiences', () 
     // Towns unmoved at 516/3/3/3.
     // 67,754 -> 67,754 (372/360/358 -> 372/364/358) at F1 DEFENCE-WORDS, FIRST STEP (UNITS 1–5) (ODQ §934.105, RUNG 1 OF THE SOAK LADDER, 2026-11-04; record docs/shift-records/2026-11-04-rung1-23-f1-defence-words.json).
     // Towns unmoved at 516/3/3/3.
+    // 67,754 -> 67,730 (372/364/358 unmoved) at THE POOL CENSUS COMPOSED (ODQ §934.105, RUNG 2 OF THE SOAK LADDER, the landing
+    // stacked on rung 1; record docs/shift-records/2026-11-06-rung2-04-census-composed-prose-manifest.json). Towns unmoved at 516/3/3/3.
     expect(tally, 'the DRIFT corpus by seed, cells and towns').toEqual({
-      'golden-master-v3': { cells: 67_754, towns: 516 },
+      'golden-master-v3': { cells: 67_730, towns: 516 },
       'gm-seed-a': { cells: 372, towns: 3 },
       'gm-seed-b': { cells: 364, towns: 3 },
       'gm-seed-c': { cells: 358, towns: 3 },

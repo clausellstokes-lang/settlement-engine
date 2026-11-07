@@ -416,11 +416,12 @@ describe('EM-B2b — world facts by consequence: the route, the refusals and the
     // Then rung 2, THE POOL CENSUS COMPOSED (ODQ §934.105; docs/shift-records/2026-11-06-rung2-01-census-composed-generator-master.json,
     // 33 causes with their own-lineage rows inside, a ruled exception to one-cause-per-record — the chair, 2026-11-07),
     // through the signed door at the rung-2 landing's tip by LANDING-R2: the generator master e7e8a6ff.. -> d1429bcc..
-    // (525 of 525 rows); restated in the same act.
+    // (525 of 525 rows); restated in the same act. Its fourth record (docs/shift-records/2026-11-06-rung2-04-census-
+    // composed-prose-manifest.json): the prose manifest 777e4b4b.. -> 373f2d55.. (1,050 of 1,050 rows); restated in that act.
     expect(shaOfFile(GOLDEN), 'tests/fixtures/generator-golden-master.json moved')
       .toBe('d1429bcc228d3dfb3f394c9745ae23313a6f7143cd73f8271fb74b5c894adc5a');
     expect(shaOfFile(PROSE_GOLDEN), 'tests/fixtures/dossier-prose-manifest-golden.json moved')
-      .toBe('777e4b4b2968fab6b02a758435c7dcc8c779753942aeab77c4ae8c261e6d990e');
+      .toBe('373f2d55ce53d23e0613f3658becc1d94ee8c2592c3cf1561581d86ff3ddba1f');
 
     // AND THE REASON THEY CANNOT MOVE: fresh generation passes no layer, so no world fact is ever
     // routed and `config′` is `config` itself. Measured against the committed manifest.
