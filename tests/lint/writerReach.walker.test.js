@@ -310,7 +310,9 @@ describe('writer-with-no-reader ratchet: the frozen register', () => {
     // 45 -> 43 at MERGE-R2 (2026-11-07): two rows struck with cause — growsMoreThanEats on foodRecord (clause E,
     // domain/foodSurplus.js inside the dossier-pdf closure since the rung-2 chunk cure) and randomDepletionEligible on
     // resourceConditions (clause S, LIT-NAME at the merged tip); scripts/lib/writer-dark-register.mjs names both.
-    expect(WRITER_DARK_REGISTER.length).toBe(43);
+    // 43 -> 42 at W7 HOOKS (2026-11-07): `dependencyCount on metrics` struck with cause (clause S, LIT: the viability
+    // headline says the count in words); scripts/lib/writer-dark-register.mjs names it.
+    expect(WRITER_DARK_REGISTER.length).toBe(42);
     expect(liveEvidence.map((row) => row.identity).sort())
       .toEqual(WRITER_DARK_REGISTER.map((row) => row.identity).sort());
     for (const row of liveEvidence) {
@@ -505,7 +507,8 @@ describe('writer-with-no-reader ratchet: the live judgment', () => {
     // 45 -> 43 at MERGE-R2 (2026-11-07): two rows struck with cause — growsMoreThanEats on foodRecord (clause E,
     // domain/foodSurplus.js inside the dossier-pdf closure since the rung-2 chunk cure) and randomDepletionEligible on
     // resourceConditions (clause S, LIT-NAME at the merged tip); scripts/lib/writer-dark-register.mjs names both.
-    expect(registeredAndDark.length).toBe(43);
+    // 43 -> 42 at W7 HOOKS (2026-11-07): `dependencyCount on metrics` struck, LIT by the viability headline (clause S).
+    expect(registeredAndDark.length).toBe(42);
     expect(baseline.darkUnregistered.length).toBe(cohort.length - registeredAndDark.length);
     expect(reviewableDark(cohort).length).toBe(baseline.reviewableDarkCount);
     expect(reviewableDark(cohort).length).toBeLessThan(cohort.length);

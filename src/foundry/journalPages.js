@@ -199,20 +199,25 @@ function notableNpcPage(n) {
   ) || null;
 }
 
+/** The hook groups a reader knows, for the catalogue's category keys. */
+const HOOK_GROUP_WORDS = Object.freeze({ npc: 'People', npcs: 'People' });
+
 function plotHooksPage(vm) {
   const all = vm.hooks.all || [];
   if (!all.length) return null;
   const byCategory = new Map();
   for (const h of all) {
     const cat = h.category || h.source || 'other';
+    // The category key is the catalogue's ("npc"); the page prints the group a reader knows.
     if (!byCategory.has(cat)) byCategory.set(cat, []);
     byCategory.get(cat).push(h);
   }
   return md(
     lede(hooksHeadline(vm.hooks)),
     [...byCategory.entries()].map(([cat, hooks]) => md(
-      '', `## ${esc(cap(humanize(cat)))}`,
-      hooks.map(h => `- ${esc(hookText(h.hook))} *(${esc(h.sourceName)}${h.priority ? ` · ${esc(h.priority)}` : ''})*`),
+      '', `## ${esc(HOOK_GROUP_WORDS[String(cat).toLowerCase()] || cap(humanize(cat)))}`,
+      // The source in words, no priority key (the owner's style law of 2026-11-07: the machinery out).
+      hooks.map(h => `- ${esc(hookText(h.hook))}${h.sourceName ? ` *(${esc(cap(humanize(h.sourceName)))})*` : ''}`),
     )),
   );
 }
@@ -226,9 +231,11 @@ function powerPage(vm) {
     kv('Stability', typeof p.stability === 'object' ? (p.stability?.label ?? p.stability?.value) : p.stability),
     p.legitimacy?.score != null ? kv('Public legitimacy', p.legitimacy.score) : null,
     p.factions.length ? md('', '## Factions', p.factions.map(f =>
-      `- **${esc(f.name)}**${f.isGoverning ? ' *(governing)*' : ''}: power ${esc(f.power)}${f.description ? `. ${esc(f.description)}` : ''}`)) : null,
+      // No "power N": the score is the engine's, not the reader's (the owner's style law of 2026-11-07).
+      `- **${esc(f.name)}**${f.isGoverning ? ' *(governing)*' : ''}${f.description ? `: ${esc(f.description)}` : ''}`)) : null,
     p.tensions.length ? md('', '## Tensions', p.tensions.map(tn =>
-      `- **${esc(tn.label || 'Tension')}**${tn.severity ? ` (${esc(tn.severity)})` : ''}${tn.description ? `: ${esc(tn.description)}` : ''}`)) : null,
+      // The tension's key in words ("Resource scarcity"), no severity range ("minor / major").
+      `- **${esc(tn.label ? cap(humanize(tn.label)) : 'Tension')}**${tn.description ? `: ${esc(tn.description)}` : ''}`)) : null,
     p.conflicts.length ? md('', '## Conflicts', p.conflicts.map(c =>
       `- **${esc((c.parties || []).join(' vs '))}**${c.intensity ? ` (${esc(c.intensity)})` : ''}${c.issue ? `: ${esc(c.issue)}` : ''}${c.stakes ? ` Stakes: ${esc(c.stakes)}` : ''}`)) : null,
   );

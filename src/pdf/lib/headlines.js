@@ -11,6 +11,7 @@
  */
 import { cap, humanize, label as labelOf } from './format.js';
 import { coverageRatioPct } from './foodCoverage.js';
+import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
 
 // ── Shared plain-word helpers (the owner's style law of 2026-11-07: the label stays as the
 // first word, the machinery leaves, the town's own nouns fill the slots) ──────────────────
@@ -65,7 +66,8 @@ export function overviewHeadline(o, identity) {
   // crisis's own label. The safety label and the chip count were machinery (STYLE-AUDIT §2a #1).
   // The crisis is named and never described, so the line holds for arrivals and departures alike.
   const name = identity?.name || null;
-  const tierWord = (identity?.tierKey || identity?.tier || '').toLowerCase() || null;
+  // "Thorpe" on every reader surface (ODQ §934.63 F14): the tier LABEL, never the token.
+  const tierWord = (identity?.tier || identity?.tierKey || '').toLowerCase() || null;
   const pop = Number(identity?.population);
   const place = tierWord
     ? `${name ? `${name}, ` : ''}a ${tierWord}${Number.isFinite(pop) && pop > 0 ? ` of ${pop.toLocaleString('en-US')}` : ''}${name ? ',' : ''}`
@@ -149,9 +151,9 @@ export function economicsHeadline(eco) {
   let food = null;
   if (fb?.deficit > 0) {
     // Shared coverage formula (foodCoverage), banded into words.
-    const share = coverageWords(coverageRatioPct(fb.importCoverage, fb.rawDeficit) ?? 0);
-    food = share
-      ? `it grows less food than it eats, and imports make up ${share} of the gap`
+    const shareWords = coverageWords(coverageRatioPct(fb.importCoverage, fb.rawDeficit) ?? 0);
+    food = shareWords
+      ? `it grows less food than it eats, and imports make up ${shareWords} of the gap`
       : 'it grows less food than it eats, and nothing comes in to make up the gap';
   } else if (fb?.surplus > 0) {
     food = 'it grows more food than it eats';
@@ -200,9 +202,9 @@ export function defenseHeadline(def, _identity) {
   const avg = def.scoreAvg ?? null;
   if (!readiness && avg == null) return null;
   const inst = def.institutions || {};
-  const wallName = plainName(inst.walls?.[0]?.name || '') || null;
+  const wallName = plainName(institutionDisplayName(inst.walls?.[0] || '')) || null;
   const forceRow = [inst.garrison, inst.watch, inst.militia, inst.mercenary, inst.charter]
-    .map((rows) => rows?.[0]?.name).find(Boolean);
+    .map((rows) => institutionDisplayName(rows?.[0] || '')).find(Boolean);
   const force = forceRow ? `the ${plainName(forceRow)}` : null;
   const wall = wallName ? withArticle(wallName) : null;
   let what;
@@ -210,10 +212,11 @@ export function defenseHeadline(def, _identity) {
   else if (wall) what = `${wall}, and no one trained to hold it`;
   else if (force) what = `no walls; ${force} is all that stands guard`;
   else what = 'no walls and no one under arms';
+  // The readiness label carries the grade; the 0-100 mean stays in the section's bars (a digit
+  // in prose is the machinery the owner struck).
   const head = readiness ? sentenceCase(readiness) : 'Defences';
-  const score = avg != null ? ` (${avg} of 100)` : '';
   const magic = def.magicDependency ? ' It leans on magic to hold.' : '';
-  return `${head}${score}: ${what}.${magic}`;
+  return `${head}: ${what}.${magic}`;
 }
 
 export function defenseTone(def) {
@@ -239,7 +242,8 @@ export function servicesHeadline(services) {
   // large one names its two largest groups with their counts. "On the books" and "heaviest in"
   // were machinery.
   if (total <= 8) {
-    const names = [...new Set(list.map((inst) => plainName(inst?.name)).filter(Boolean))];
+    // Each house by its display name, through the one institution label seam.
+    const names = [...new Set(list.map((inst) => plainName(institutionDisplayName(inst))).filter(Boolean))];
     return `${capFirst(countWord(total))} institution${total === 1 ? '' : 's'}: ${listOf(names)}.`;
   }
   const byCat = {};
@@ -295,10 +299,10 @@ export function viabilityHeadline(viability) {
   const fb = viability.metrics?.foodBalance || {};
   const deps = viability.metrics?.dependencyCount || 0;
   if (fb.deficit > 0) {
-    const share = coverageWords(coverageRatioPct(fb.importCoverage, fb.rawDeficit) ?? 0);
+    const shareWords = coverageWords(coverageRatioPct(fb.importCoverage, fb.rawDeficit) ?? 0);
     const channel = fb.importChannel ? plainName(fb.importChannel) : 'trade';
-    return share
-      ? `Viable, but it cannot feed itself: ${share} of the food it lacks comes in by ${channel}.`
+    return shareWords
+      ? `Viable, but it cannot feed itself: ${shareWords} of the food it lacks comes in by ${channel}.`
       : 'Viable, but it cannot feed itself, and nothing comes in to close the gap; it lives on its stores.';
   }
   if (deps > 0) {

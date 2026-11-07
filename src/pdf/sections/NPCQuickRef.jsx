@@ -99,7 +99,7 @@ export function NPCQuickRef({ settlement, narrativeMode, vm }) {
       />
 
       <ChapterHeadline tone="gold">
-        Every named figure on one page. Power tints flag who's worth caring about. Detailed sheets in chapter 13.
+        Everyone named in the dossier, on one page; the number beside each name is how much power they hold, and the warmer its colour, the more. Full sheets in chapter 13.
       </ChapterHeadline>
 
       {all.length === 0 && (

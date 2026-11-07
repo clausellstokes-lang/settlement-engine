@@ -305,7 +305,7 @@ describe('WarTab — believed units, staleness bands, and the DM-truth divergenc
     expect(screen.queryByTestId('war-units')).toBeNull();
     const teaser = screen.getByTestId('war-teaser');
     expect(teaser.textContent).toContain('Available at launch');
-    expect(teaser.textContent).toMatch(/control center for Lonetop's troops and units out in the world: raise them, deploy them, recall them, and read what came home/);
+    expect(teaser.textContent).toMatch(/From here you raise Lonetop's troops, send them out, call them home, and read what they report back\./);
     expect(teaser.querySelectorAll('button, a, [role="button"]')).toHaveLength(0);
     // The old explainer and plain line are gone.
     expectAbsentWithAnchor(container.textContent, 'War is a campaign story', 'Available at launch', 'the W10 explainer');
@@ -656,7 +656,7 @@ describe('RumorsTab — the launch teaser (X-7b); the DM-truth sentence keeps it
     const priv = render(<RumorsTab settlement={{ id: 'quiet', name: 'Stillwater' }} saveId="quiet" />);
     const teaser = screen.getByTestId('rumors-teaser').textContent;
     expect(teaser).toContain('Available at launch');
-    expect(teaser).toContain('What Stillwater hears from the rest of the realm, as it believes it, as word moves along the roads.');
+    expect(teaser).toContain('What Stillwater has heard from the rest of the realm, true or not, as the news reaches it.');
     const dm = 'Beside each telling, what the DM knows to be true.';
     expect(teaser).toContain(dm);
     expect(screen.getByTestId('rumors-teaser').querySelectorAll('button, a, [role="button"]')).toHaveLength(0);
@@ -666,7 +666,7 @@ describe('RumorsTab — the launch teaser (X-7b); the DM-truth sentence keeps it
       useStore.__set({ auth: { tier: 'premium' }, campaigns: [], savedSettlements: [] });
       const { container } = render(<RumorsTab settlement={{ id: 'quiet', name: 'Stillwater' }} saveId="quiet" {...props} />);
       expectPresentThenAbsent(privText, container.textContent, dm, `the DM sentence under ${Object.keys(props)[0]}`);
-      expect(container.textContent).toContain('What Stillwater hears');
+      expect(container.textContent).toContain('What Stillwater has heard');
       cleanup();
     }
     expectAbsentWithAnchor(privText, 'the moment it happens', 'Available at launch', 'U3 contradiction');

@@ -1069,7 +1069,7 @@
   },
   {
     "path": "src/pdf/lib/headlines.js",
-    "line": 206,
+    "line": 346,
     "category": "floatInterpolation",
     "snippet": "`${total} named figure${total === 1 ? '' : 's'}: ${top.name}${top.title ? `, ${top.title}` : ''}, the most powerful (power ${top.power}).`"
   },
