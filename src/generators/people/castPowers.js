@@ -164,6 +164,7 @@ export function assignCastPowers(settlement, cards, rng) {
     const card = mintStream ? onStream(mintStream.fork(powerSlug(name)), draw) : draw();
     card.id = id;
     card.title = row.title;
+    card.role = row.title; // M-1b: the role is the title; the pool's role was the draw's key only
     card.institution = { kind: 'power', key: name, family: null, title: row.title };
     card.memberships = [];
     mints.push(card);

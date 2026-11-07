@@ -20,6 +20,12 @@
  * record lists every one for the writing wave (W4 PEOPLE), which authors for the new cards
  * afterwards (the owner: "Do the writing lanes after these changes as well.").
  *
+ * M-1b (the owner's word of 2026-11-07, 07:1x UTC, PEOPLE-RULINGS §2): the faction roles dissolve;
+ * a representative's ROLE is its institution's title and its standing in each power its rank.
+ * The role this map names is therefore ONLY the key the card's pools are drawn through — it is
+ * never written onto the card (people/representatives.js writes `role = title`); the old role
+ * vocabulary survives here until the writing wave authors pools by title.
+ *
  * THE SEAT is the one title the tier decides: the governing house's face (and the seat MINT where
  * no house carries it) takes the seat role the seat read expects (domain/dossier/seatHolder.js ::
  * TIER_HEAD — Elder below the village, Mayor to the city, Governor at the metropolis), whatever
@@ -49,6 +55,7 @@ export const SEAT_ROLE_BY_TIER = Object.freeze({
 export const POOL_BY_TITLE = Object.freeze({
   // ── Economy ──────────────────────────────────────────────────────────────────────────────
   'the fishmonger': ['Fishmonger', 'economy', 'merchant'],
+  'the master fishmonger': ['Fishmonger', 'economy', 'merchant'], // Fish market (the owner's amendment, 07:3x UTC)
   'the head shepherd': ['Shepherd', 'other', 'owner'],
   'the dairy farmer': ['Dairy Farmer', 'other', 'owner'],
   'the beekeeper': ['Beekeeper', 'other', 'owner'],

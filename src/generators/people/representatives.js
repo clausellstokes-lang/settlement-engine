@@ -60,6 +60,14 @@ export const SEAT_CARD_ID = 'npc_seat';
  * (PEOPLE-0 §0 fact 2 measured the seat houses "the Government shelf, crier excluded").
  */
 const NOT_A_SEAT_HOUSE = Object.freeze(['Town crier']);
+/**
+ * ONE PERSON, ONE FACE (the revised census at 68851cdd4, M-1b): a row that is the old faction ROLE
+ * as an institution yields to the house whose person it names — the village's 'Priest (resident)'
+ * row is a face only where no 'Parish church' row (the Access-to-parish-church family) is on the
+ * roster; where the church rolls, the row says only that the church's priest is resident.
+ * Keyed by the yielding family -> the family it yields to.
+ */
+export const YIELDS_TO = Object.freeze({ 'Priest (resident)': 'Access to parish church' });
 
 /** @typedef {{ name?: string, isCustom?: boolean, source?: string }} RosterRow */
 /** @typedef {{ kind: 'house' | 'power', key: string, family: string | null, title: string }} CardInstitution */
@@ -148,6 +156,11 @@ export function generateRepresentatives(settlement, culture = 'germanic', config
   const taken = new Set();
   /** @type {Array<Record<string, any>>} */
   const cards = [];
+  // the face-bearing families on this roster, for the yield rule
+  const facedFamilies = new Set(institutions
+    .filter((house) => house && !isFabricInstitution(house) && typeof faceOfInstitution(house) === 'string' && faceOfInstitution(house) !== FACE_SEAT)
+    .map((house) => familyOfInstitution(house)?.key)
+    .filter(Boolean));
 
   /**
    * @param {string} id @param {{ role: string, category: string, titleKey: string }} pool
@@ -159,6 +172,9 @@ export function generateRepresentatives(settlement, culture = 'germanic', config
     ));
     card.id = id;
     card.title = title;
+    // M-1b (the owner, 07:1x UTC): the faction roles dissolve — a representative's ROLE is its
+    // institution's title; the pool's role was only the key the card's pools were drawn through.
+    card.role = title;
     card.institution = institution;
     card.memberships = [];
     cards.push(card);
@@ -169,6 +185,7 @@ export function generateRepresentatives(settlement, culture = 'germanic', config
     const face = faceOfInstitution(house);
     if (!face) return;
     const family = familyOfInstitution(house);
+    if (family && YIELDS_TO[family.key] && facedFamilies.has(YIELDS_TO[family.key])) return;
     const key = String(house.name || '');
     const isSeat = seat !== null && seat.index === index;
     if (face === FACE_SEAT) {

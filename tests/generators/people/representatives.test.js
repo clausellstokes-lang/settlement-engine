@@ -16,10 +16,9 @@ import { describe, expect, it } from 'vitest';
 import { goldenCorpus } from '../../helpers/goldenMasterCorpus.js';
 import { generateSettlementPipeline } from '../../../src/generators/generateSettlementPipeline.js';
 import { birth, ensureLaws } from '../../../scripts/audit/soak-review/corpus.mjs';
-import { FACE_SEAT, faceOfInstitution, isFabricInstitution } from '../../../src/data/institutionalCatalog.js';
+import { FACE_SEAT, faceOfInstitution, familyOfInstitution, isFabricInstitution } from '../../../src/data/institutionalCatalog.js';
 import { governingFactionOf, nameOf } from '../../../src/domain/rulingPower.js';
-import { SEAT_CARD_ID, seatHouseOf } from '../../../src/generators/people/representatives.js';
-import { SEAT_ROLE_BY_TIER } from '../../../src/generators/people/poolMap.js';
+import { SEAT_CARD_ID, YIELDS_TO, seatHouseOf } from '../../../src/generators/people/representatives.js';
 import { seatMintTitleFor } from '../../../src/generators/people/mintTitles.js';
 
 const TIERS = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
@@ -37,11 +36,17 @@ const ENVELOPE = Object.freeze({
 function expectedFaceHouses(settlement) {
   const seat = seatHouseOf(settlement.institutions);
   const names = [];
+  const houses = (settlement.institutions || []).filter((house) => house && !isFabricInstitution(house));
+  const facedFamilies = new Set(houses.filter((h) => typeof faceOfInstitution(h) === 'string' && faceOfInstitution(h) !== FACE_SEAT)
+    .map((h) => familyOfInstitution(h)?.key));
   (settlement.institutions || []).forEach((house, index) => {
     if (!house || isFabricInstitution(house)) return;
     const face = faceOfInstitution(house);
     if (!face) return;
     if (face === FACE_SEAT) { if (seat && seat.index === index) names.push(house.name); return; }
+    // one person, one face (M-1b): the resident priest yields to the church where the church rolls
+    const family = familyOfInstitution(house)?.key;
+    if (family && YIELDS_TO[family] && facedFamilies.has(YIELDS_TO[family])) return;
     names.push(house.name);
   });
   return { names, seat };
@@ -62,6 +67,7 @@ function assertCast(s, label) {
     expect(card.memberships, `${label}: ${card.id} memberships`).toEqual(expect.any(Array));
     expect(card.id, `${label}: ids derive from the house, never an index`).not.toMatch(/^npc_\d+$/);
     // today's record body, every field the surfaces read
+    expect(card.role, `${label}: ${card.id} role is the title (M-1b)`).toBe(card.title);
     for (const key of ['name', 'gender', 'role', 'category', 'personality', 'physical', 'plotHooks', 'influence', 'power', 'presentation']) {
       expect(card, `${label}: ${card.id} carries ${key}`).toHaveProperty(key);
     }
@@ -69,8 +75,10 @@ function assertCast(s, label) {
   // the seat is always faced: the governing house's face, the hall's, or the mint
   const governing = nameOf(governingFactionOf(s));
   if (governing) {
-    const seatRole = SEAT_ROLE_BY_TIER[s.tier];
-    const seated = cards.filter((n) => n.role === seatRole && (seat ? n.institution.key === seat.house.name : n.institution.kind === 'power'));
+    // M-1b (the owner, 07:1x UTC): the card's ROLE is its title — the pool's seat role is the key
+    // the seat's pools were drawn through, so the seat is found by its house (or its mint), not by role
+    const seated = cards.filter((n) => (seat ? n.institution.key === seat.house.name : n.id === SEAT_CARD_ID));
+    for (const n of seated) expect(n.role, `${label}: the seat's role is its title (M-1b)`).toBe(n.title);
     expect(seated.length, `${label}: exactly one seat face (${seat ? seat.kind : 'minted'})`).toBe(1);
     // the SEAT mint by its id (the `other` powers' mints of step 3 are `kind: 'power'` too)
     const mint = cards.find((n) => n.id === SEAT_CARD_ID);

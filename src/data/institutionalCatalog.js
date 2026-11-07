@@ -153,7 +153,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       successor: 'Fish market',
     },
     {
-      shared: { name: 'Fish market', face: null, desc: "A covered fish market under the market wardens. The morning's catch or the week's salted barrels, sold by weight and inspected for rot.", tags: ['market', 'trade'], priorityCategory: 'government' },
+      shared: { name: 'Fish market', face: 'the master fishmonger', desc: "A covered fish market under the market wardens. The morning's catch or the week's salted barrels, sold by weight and inspected for rot.", tags: ['market', 'trade'], priorityCategory: 'government' },
       at: {
         village: { baseChance: 0.3, desc: "An open-air stall or small covered market where the day's catch is sold. Prices drop fast. Fish doesn't wait." },
         town: { baseChance: 0.45 },
@@ -913,7 +913,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       at: {
         thorp: { baseChance: 0.78, fabric: true, desc: 'Walk 2-5km to the village house of worship for services.' },
         hamlet: { required: true, fabric: true, desc: 'Travel to the village house of worship. 2-5km distance typical.' },
-        village: { face: null, name: 'Parish church', required: true, exclusiveGroup: 'religiousCenter', desc: 'Center of village life. Stone construction. Mandatory tithes.' },
+        village: { face: 'the priest', name: 'Parish church', required: true, exclusiveGroup: 'religiousCenter', desc: 'Center of village life. Stone construction. Mandatory tithes.' },
         town: { name: 'Parish churches (2-5)', required: true, desc: 'Several houses of worship within town.' },
         city: { name: 'Parish churches (10-30)', required: true, desc: 'One per neighborhood.' },
         metropolis: { name: 'Parish churches (50-100+)', required: true, desc: 'Hundreds of houses of worship across all districts. The faith is woven into every neighbourhood.', tags: ['religious', 'church'], priorityCategory: 'infrastructure' },

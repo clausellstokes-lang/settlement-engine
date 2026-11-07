@@ -29,15 +29,15 @@ import {
 import { backingRowFor } from '../../src/data/institutionBacking.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
-/** The census's NONE families (14, wholly), by the family's name. */
+/** The census's NONE families (13, wholly, after the owner's fish-market amendment), by the family's name. */
 const NONE_FAMILIES = Object.freeze([
   'Subsistence farming', 'Common grazing land', 'Communal root cellar',
-  'Weekly market', 'Multiple market squares', 'Major annual fairs', 'Fish market',
+  'Weekly market', 'Multiple market squares', 'Major annual fairs',
   'Burial ground', 'Dwellings (1-8)', 'Water source', 'Sewage system', 'Palisade or earthworks', 'Gates (if walled)',
   'Wayside shrine',
 ]);
 /** The census's row-level NONEs inside FACE families (the fabric rows aside). */
-const NONE_ROWS = Object.freeze([['thorp', 'Household levy'], ['village', 'Parish church']]);
+const NONE_ROWS = Object.freeze([['thorp', 'Household levy']]);
 /** The seat's two buildings. */
 const SEAT_FAMILIES = Object.freeze(['City hall', 'Palace/government complex']);
 /** The per-tier-row titles where the row's kind changes (a sample of the 36; the rest are the senior forms). */
@@ -62,10 +62,10 @@ const ROW_TITLES = Object.freeze({
   'thorp/Fishing community': 'the boat-headman', 'town/Street gang': 'the gang boss', 'town/Free company hall': 'the company captain',
 });
 const NO_POWER = Object.freeze(['Village musician', 'Charlatan fortune tellers', 'Dragon resident']);
-const FAMILY_FIGURES = Object.freeze({ face: 164, seat: 2, none: 14 });
-const ROW_FIGURES = Object.freeze({ rows: 519, face: 458, seat: 4, none: 57 });
+const FAMILY_FIGURES = Object.freeze({ face: 165, seat: 2, none: 13 });
+const ROW_FIGURES = Object.freeze({ rows: 519, face: 463, seat: 4, none: 52 });
 const OVERRIDES = 36;
-const DISTINCT_TITLES = 184;
+const DISTINCT_TITLES = 185;
 
 const familyKey = (fam) => fam.shared?.name || familyNamesByTier(fam)[0].name;
 const classOf = (face) => (face === null ? 'none' : face === FACE_SEAT ? 'seat' : 'face');
@@ -129,7 +129,7 @@ describe('the people car — the faces in the registry (the revised census)', ()
     const stray = nulls.filter((r) => !NONE_ROWS.some(([t, n]) => t === r.tier && n === r.name)
       && !noneKeys.has(familyKeyOfName(r.name)));
     expect(stray.map((r) => `${r.tier}/${r.name}`), 'no other row is faceless').toEqual([]);
-    expect(nulls.length).toBe(ROW_FIGURES.none - 14);
+    expect(nulls.length).toBe(ROW_FIGURES.none - 14); // 14 fabric rows resolve null and are not census NONEs
   });
 
   it('the seat word is on the two government buildings and nowhere else', () => {

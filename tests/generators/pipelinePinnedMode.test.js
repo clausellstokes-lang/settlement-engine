@@ -71,8 +71,9 @@ const CONFIG = {
  *  the same seed, and its institution set (hence its roster of relationship pairs) moved with the rebuilt
  *  registry; re-measured by the arm's own recipe, not predicted.
  *  GS-2 (ODQ §934.101): 67 + 2 + 2 = 71 -> 67. The name picks and the conflict draws left the step.
- *  2026-11-05, records 12–26 (the rung-1 landing's signed shifts, ODQ §934.105; re-keyed at the landed tip by LANDING-5 under the chair's ruling 4): 67 -> 46, the probe settlement's roster of relationship pairs moved with its world. */
-const DERIVE_HALF_DRAWS = 46;
+ *  2026-11-05, records 12–26 (the rung-1 landing's signed shifts, ODQ §934.105; re-keyed at the landed tip by LANDING-5 under the chair's ruling 4): 67 -> 46, the probe settlement's roster of relationship pairs moved with its world.
+ *  2026-11-07, PEOPLE-1 CAST (R-P2, the representative generator: one face per face-bearing house, the rung roster retired): 46 -> 36, the probe roster is the cast and its relationship pairs moved with it; re-measured by the arm's own recipe. */
+const DERIVE_HALF_DRAWS = 36;
 /** The seed §0R.1's derive-half probe was measured on, and the settlement it measured over. */
 const DERIVE_PROBE_STREAM = 'em-p0-probe-derive';
 const DERIVE_PROBE_SEED = 'em-p0-probe';
@@ -241,7 +242,7 @@ describe('EM-P0 — the pipeline seam: pins are consulted per chooser, on one st
         total: counter.calls - start,
       };
     });
-    expect(budget.relationships).toBe(46);
+    expect(budget.relationships).toBe(36);
     expect(budget.total).toBe(DERIVE_HALF_DRAWS);
   }, 180_000);
 
@@ -280,7 +281,10 @@ describe('EM-P0 — the pipeline seam: pins are consulted per chooser, on one st
     const labels = instrumented.record.forkLabels.filter((label) => label === POPULATION_STEP);
     expect(labels, 'the runner forks the step exactly once').toEqual([POPULATION_STEP]);
     expect(instrumented.record.streams, 'exactly one stream object serves the step').toHaveLength(1);
-    expect(instrumented.record.innerForks, 'nothing inside the step mints a second stream').toBe(0);
+    // 2026-11-07, PEOPLE-1 CAST: the brief's R-P2 draws the faces "on its own keyed fork (declare it in the
+    // fork census)" — the step mints exactly ONE inner stream, `people-faces` (the cards sub-fork off it,
+    // never off the step's stream); a second inner fork would be the split this arm was written against.
+    expect(instrumented.record.innerForks, 'the step mints exactly the one `people-faces` stream (R-P2)').toBe(1);
     // Both halves drew on that ONE object: the derive half's 67 cannot fit alone in a count
     // that also carries the root half's density band and roster draws.
     expect(instrumented.record.draws).toBeGreaterThan(DERIVE_HALF_DRAWS);
@@ -324,7 +328,7 @@ describe('EM-P0 — the pipeline seam: pins are consulted per chooser, on one st
 
 /** The step's own unpinned draw count at SEED and CONFIG. AS-OF `bdbf7c89c`, re-measured at
  *  EM-B2a2's base; A2 and A3 both re-measure it rather than trusting the numeral. */
-const UNPINNED_STEP_DRAWS = 303; // 2026-10-01, the urban band (ODQ §934.86): 315 -> 307; the druid rulings (2026-10-01, ODQ §934.86 addendum 2, J30–J33): 307 -> 310; each re-measured at this seed and config; GS-2 one faction set (ODQ §934.101): 310 -> 306, the name picks and the conflict draws left the step 2026-11-05, records 12–26 (the rung-1 landing's signed shifts, ODQ §934.105; re-keyed at the landed tip by LANDING-5 under the chair's ruling 4): 306 -> 303;
+const UNPINNED_STEP_DRAWS = 281; // 2026-10-01, the urban band (ODQ §934.86): 315 -> 307; the druid rulings (2026-10-01, ODQ §934.86 addendum 2, J30–J33): 307 -> 310; each re-measured at this seed and config; GS-2 one faction set (ODQ §934.101): 310 -> 306, the name picks and the conflict draws left the step 2026-11-05, records 12–26 (the rung-1 landing's signed shifts, ODQ §934.105; re-keyed at the landed tip by LANDING-5 under the chair's ruling 4): 306 -> 303; 2026-11-07, PEOPLE-1 CAST (R-P2: the cast replaces the rung roster; the faces draw on the step's `people-faces` fork, so the step's OWN stream carries fewer draws): 303 -> 281, re-measured at this seed and config.
 /** The overridden VALUE A3 carries through the pin channel into the assembled record. It is
  *  planted by the arm and appears nowhere in the generator's vocabulary. */
 const OVERRIDE_SENTINEL = 'EM-B2a2 SENTINEL BURGRAVE';
@@ -413,7 +417,10 @@ describe('EM-B2a2 — the pin primitive has ONE exported home: chooseOrPin lives
     expectAbsentWithAnchor(order, 'drawPopulation', POPULATION_STEP, 'A2: one registration');
     expectAbsentWithAnchor(order, 'derivePopulation', POPULATION_STEP, 'A2: one registration');
     expect(instrumented.record.streams, 'exactly one stream object serves the step').toHaveLength(1);
-    expect(instrumented.record.innerForks, 'nothing inside the step mints a second stream').toBe(0);
+    // 2026-11-07, PEOPLE-1 CAST: the brief's R-P2 draws the faces "on its own keyed fork (declare it in the
+    // fork census)" — the step mints exactly ONE inner stream, `people-faces` (the cards sub-fork off it,
+    // never off the step's stream); a second inner fork would be the split this arm was written against.
+    expect(instrumented.record.innerForks, 'the step mints exactly the one `people-faces` stream (R-P2)').toBe(1);
   }, 180_000);
 
   it('A3 — the pin is live: an overridden pin value reaches the settlement, and a pinned step draws zero', () => {
