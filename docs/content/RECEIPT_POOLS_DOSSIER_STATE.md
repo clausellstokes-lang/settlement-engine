@@ -4938,6 +4938,12 @@ the demographic receipt and the migration ledger ARE provenance and license a
 cause clause; the head count alone is not. Sibling: `DS-POP-2` reads the trend
 band over the ring; this block reads the movement that produced it.
 
+**THE MIGRATION TAGS READ THE KEY (R-W7 e, re-cited by W5 HIS, 2026-11-07, WAVE-RULINGS item 9).**
+Every `migration: influx` / `migration: exodus` mark below reads the ONE declared direction
+`stress[].direction` (`arrivals` → influx, `departures` → exodus), written where the stressor is
+drawn and read through `src/domain/crisis/migrationDirection.js :: migrationDirectionOf`; the
+spatial ledger supplies the counts, never the direction.
+
 **SLOTS.** `{settlement}` `{counterpart}` `{season}`
 
 **QUANTITY: `nobody`** · **THE GOOD STATE (R-DST-G)** {crisis-scoped}
