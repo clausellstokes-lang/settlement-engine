@@ -90,11 +90,21 @@ describe('the corruption closure is re-measured, and refused above the precedent
   it('the DESK\'s closure is what actually ships, and the import adds the same six files to it', () => {
     const leafCost = closureCost(CANDIDATES_LEAF, CORRUPTION);
     const deskCost = closureCost(DEFENSE_DESK, CORRUPTION);
-    // The leaf is imported ONLY by its desk, so the two answers must agree: nothing new
-    // reaches a bundle through the leaf that would not reach it through the desk.
-    expect(deskCost.files.map((f) => f.replace(`${ROOT}/`, '')).sort())
-      .toEqual(leafCost.files.map((f) => f.replace(`${ROOT}/`, '')).sort());
-    expect(deskCost.bytes).toBe(leafCost.bytes);
+    // The leaf is imported ONLY by its desk, so nothing new reaches a bundle through the leaf
+    // that would not reach it through the desk: the desk's added set is the leaf's, LESS what the
+    // desk's own closure already ships. Equal until the census's fact homes reached the desk:
+    // census-1 wave 0 fact 1 (fda620b75, the crisis-kind home) brought settlement.schema.js into
+    // the desk's closure (desk adds 6 -> 5 at it, measured on archives), and census-3b(1)
+    // (0fab7c35a, the delegated getters) brought prosperityRank.js (5 -> 4). So the import costs
+    // the shipped desk 4 files / 65,983 B, not the leaf's 6 / 153,025 B.
+    const desk = deskCost.files.map((f) => f.replace(`${ROOT}/`, '')).sort();
+    const leaf = leafCost.files.map((f) => f.replace(`${ROOT}/`, '')).sort();
+    expect(desk.filter((f) => !leaf.includes(f)), 'the desk adds nothing the leaf does not').toEqual([]);
+    expect(leaf.filter((f) => !desk.includes(f)), 'what the desk already ships').toEqual([
+      'src/domain/prosperityRank.js',
+      'src/domain/settlement.schema.js',
+    ]);
+    expect(deskCost.bytes).toBeLessThanOrEqual(leafCost.bytes);
     expect(deskCost.bytes).toBeLessThanOrEqual(PRECEDENT_BYTES);
   });
 });
