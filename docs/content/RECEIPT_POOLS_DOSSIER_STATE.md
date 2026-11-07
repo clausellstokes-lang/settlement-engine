@@ -4089,9 +4089,9 @@ existence of content elsewhere.
 all it renders this).
 
 1. `[street · war: peace]` This settlement is at peace and keeps no named faith.
-2. `[ledger · war: peace]` Nothing is being fought here and nothing is being kept here; the town's quarrels and its observances are both private matters.
-3. `[visitor · war: peace]` A stranger finds neither soldiers nor temples worth remarking on at {settlement}, and finds the town entirely unbothered by the absence of both.
-4. `[elder · war: peace]` {settlement} has neither a war nor a creed to its name at present, and has been in that condition long enough to have forgotten it is a condition.
+2. `[ledger · war: peace]` {settlement} keeps no muster lists and no parish books: it is fighting no one, and faith is a private matter here.
+3. `[visitor · war: peace]` You will find nothing military and no temple worth remarking on at {settlement}, and nobody there misses either.
+4. `[elder · war: peace]` {settlement} has had no war and no creed for so long that nobody thinks about either.
 5. `[counterforce · war: peace]` There are quarrels {settlement} could be part of and observances it could keep, and it is part of none and keeps none.
 
 ---

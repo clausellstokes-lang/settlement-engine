@@ -42049,7 +42049,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 5,
-      "grammars": 3,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [
@@ -63782,7 +63782,7 @@
       "subject": "*",
       "fields": [],
       "readingFunction": "dormantNotePoolKey",
-      "count": "5 variant(s) · 3 grammar(s) · slots {settlement}"
+      "count": "5 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",

@@ -2439,8 +2439,10 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "marks": [
             "war: peace"
           ],
-          "text": "Nothing is being fought here and nothing is being kept here; the town's quarrels and its observances are both private matters.",
-          "slots": [],
+          "text": "{settlement} keeps no muster lists and no parish books: it is fighting no one, and faith is a private matter here.",
+          "slots": [
+            "settlement"
+          ],
           "vid": 2
         },
         {
@@ -2448,7 +2450,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "marks": [
             "war: peace"
           ],
-          "text": "A stranger finds neither soldiers nor temples worth remarking on at {settlement}, and finds the town entirely unbothered by the absence of both.",
+          "text": "You will find nothing military and no temple worth remarking on at {settlement}, and nobody there misses either.",
           "slots": [
             "settlement"
           ],
@@ -2459,7 +2461,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "marks": [
             "war: peace"
           ],
-          "text": "{settlement} has neither a war nor a creed to its name at present, and has been in that condition long enough to have forgotten it is a condition.",
+          "text": "{settlement} has had no war and no creed for so long that nobody thinks about either.",
           "slots": [
             "settlement"
           ],
