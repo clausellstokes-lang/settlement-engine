@@ -556,6 +556,8 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 // re-address viability.js:121 -> viabilitySummary.js:64 and :123 -> :66. Category and snippet byte-identical on
 // all four; the regenerated census is 205 against 205 (138 / 50 / 8 / 9 / 0) and no other row moved. The two
 // sentences stay owed their humanization; a move is not a cure.
+// PEOPLE-4 TIES (2026-11-07, R-P7) — TWO PURE LINE MOVES, NO DEBT MOTION. npcComponents.jsx 149 -> 150 and 155 -> 156
+// (the card-ties import line above the tie card). Path, category and snippet byte-identical; 205 / 138 / 50 unmoved.
 const REVIEWED_TOTAL_CEILING = 205;
 const REVIEWED_CATEGORY_CEILINGS = Object.freeze({
   floatInterpolation: 138,

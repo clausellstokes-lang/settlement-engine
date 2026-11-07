@@ -120,7 +120,7 @@ const bothNamedTensions = (archetype) => {
 
 /**
  * GS-1 (ODQ §934.101): THE TIE-PROSE DRAW, WITHOUT REPLACEMENT PER SETTLEMENT. One draw per
- * `generateRelationships` call (one town). The first tie of an archetype opens at a draw-free
+ * `drawTies` call (one town; people/ties.js — the retired `generateRelationships` drew here before). The first tie of an archetype opens at a draw-free
  * fnv offset keyed on its own directed pair; each further tie of that archetype in the town takes
  * the next variant, so no description or tension line repeats on the page until the archetype's
  * whole pool is spent. Past that point the draw cycles through the lines that name BOTH parties

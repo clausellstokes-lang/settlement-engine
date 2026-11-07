@@ -10,9 +10,9 @@
  */
 
 import { createPRNG, generateSeed } from '../kernel/prng.js';
-import { setActiveRng, clearActiveRng } from '../kernel/rngContext.js';
+import { setActiveRng, clearActiveRng, getActiveRng } from '../kernel/rngContext.js';
 import { runPipeline } from './pipeline.js';
-import { generateRelationships } from './npcGenerator.js';
+import { drawTies } from './people/ties.js';
 import { generateRepresentatives } from './people/representatives.js';
 import { generateFactions, generateConflicts } from './powerGenerator.js';
 import { generateHistory } from './historyGenerator.js';
@@ -203,7 +203,7 @@ export function generateSettlementPipeline(config = {}, importedNeighbour = null
 /**
  * Refresh everything a relationship denormalizes about its two NPCs.
  *
- * An edge stores npc1Name/npc1Role beside npc1Id so readers can render it
+ * An edge stores npc1Name/npc1Role beside its `from` id so readers can render it
  * without loading the roster, AND it stores `description`/`tension` — prose the
  * archetype closures build by interpolating both names. All of it is a snapshot
  * taken at generation time that nothing re-derives, so once a preserved
@@ -232,8 +232,10 @@ function refreshRelationshipProjections(relationships, npcs, institutions) {
   if (!Array.isArray(relationships)) return relationships;
   const byId = new Map(npcs.map(npc => [npc?.id, npc]));
   return relationships.map(rel => {
-    const first  = byId.get(/** @type {string} */ (rel?.npc1Id));
-    const second = byId.get(/** @type {string} */ (rel?.npc2Id));
+    // PEOPLE-4 TIES: a tie is directed — `from` is the first end, `to` the second (R-P7).
+    // TODO(PEOPLE-5): a v1 save's `npc1Id`/`npc2Id` pair is read as `from`/`to` by the migration.
+    const first  = byId.get(/** @type {string} */ (rel?.from));
+    const second = byId.get(/** @type {string} */ (rel?.to));
     if (!first && !second) return rel;
     /** @type {Record<string, unknown>} */
     const next = {
@@ -531,7 +533,6 @@ export function regenNPCsPipeline(settlement, config, options = {}) {
       powerStructure: settlement.powerStructure,
       economicState: settlement.economicState,
     }, config.culture || 'germanic', config, generationContext);
-    const relationships = generateRelationships(npcs, config, settlement.institutions || []);
     // GS-2 (ODQ §934.101): the faction groups and the conflicts are derived from the FINAL
     // roster below, exactly as assembly derives them, because an NPC's power affiliation is
     // decided by the enrichment tail. The tier-1-only re-link that used to sit here (the
@@ -542,8 +543,9 @@ export function regenNPCsPipeline(settlement, config, options = {}) {
     // structuralPosition — not the poorer raw generateNPCs shape. The enrichment
     // reads the live settlement state (legitimacy/capture/food/prosperity) plus the
     // freshly generated npcs; give it a settlement-shaped view with the new roster.
-    // (the seam mints the `other` powers' faces and ties each to the seat: it is handed THIS regen's ties)
-    const enrichedNpcs = enrichNpcCoherence({ ...settlement, npcs, relationships, config });
+    // (the seam mints the `other` powers' faces; their ties to the seat are drawn by drawTies below —
+    // MERGE-234, one tie writer — so the seam is handed no ties)
+    const enrichedNpcs = enrichNpcCoherence({ ...settlement, npcs, config });
 
     // The user's canon rides OVER the finished roll rather than through it. Every
     // draw above has already happened, so preservation cannot perturb a seeded
@@ -569,9 +571,11 @@ export function regenNPCsPipeline(settlement, config, options = {}) {
     // The faction groups are built FROM the final npcs, so their members are the same records
     // the roster carries (the one-source property relinkFactionMembers used to repair), and a
     // displaced stranger can never sit in a group: a preserved character inherits its slot.
-    const finalRelationships = preserved.length
-      ? refreshRelationshipProjections(relationships, roster, settlement.institutions)
-      : relationships;
+    // THE PEOPLE CAR (PEOPLE-4 TIES, R-P7): one outgoing tie per card, drawn over the FINAL roster
+    // (the memberships written, the user's canon merged in) on this regen's own keyed family — the
+    // pair-saturation writer that drew here before the enrichment is retired. Drawn last, so it
+    // moves no draw above it; a fresh tie names the cast as it stands, so no projection refresh.
+    const finalRelationships = drawTies(roster, { config, institutions: settlement.institutions || [] }, getActiveRng());
     const factions = generateFactions(roster, settlement.powerStructure?.factions);
     const conflicts = generateConflicts(settlement.powerStructure?.factions || [], finalRelationships, config, settlement.institutions || [], roster);
     return {

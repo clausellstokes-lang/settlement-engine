@@ -149,7 +149,7 @@ export const WRITER_DARK_REGISTER = Object.freeze([
     identity: 'archetypeKey on relationships',
     key: 'archetypeKey',
     shape: 'relationships',
-    writer: 'src/generators/npcGenerator.js',
+    writer: 'src/generators/people/ties.js', // PEOPLE-4 TIES (2026-11-07, R-P7): the tie writer moved here; npcGenerator.js :: generateRelationships retired
     reason: 'engine-internal',
     consumer: Object.freeze({
       file: 'src/generators/generateSettlementPipeline.js',
@@ -161,13 +161,13 @@ export const WRITER_DARK_REGISTER = Object.freeze([
       + 'theme relationship-tension cards; the chair\'s ruling X-2 (2026-10-30, under the owner\'s delegation) moved '
       + 'a tie\'s tension back to the Relationships tab beside its tie and dropped that card category, so what a '
       + 'player is shown is the tension and type name the key produced, never the key.',
-    charter: 'ODQ §934.101 (the chair, 2026-10-30, ruling X-2 in docs/UX_CONSOLIDATION_2026-10-30.md), consumer CONFIRMED at generateSettlementPipeline.js:245',
+    charter: 'ODQ §934.101 (the chair, 2026-10-30, ruling X-2 in docs/UX_CONSOLIDATION_2026-10-30.md), consumer CONFIRMED at generateSettlementPipeline.js:250',
   }),
   Object.freeze({
     identity: 'proseVariant on relationships',
     key: 'proseVariant',
     shape: 'relationships',
-    writer: 'src/generators/npcGenerator.js',
+    writer: 'src/generators/people/ties.js', // PEOPLE-4 TIES (2026-11-07, R-P7): the tie writer moved here; npcGenerator.js :: generateRelationships retired
     reason: 'engine-internal',
     consumer: Object.freeze({
       file: 'src/generators/generateSettlementPipeline.js',
@@ -179,7 +179,7 @@ export const WRITER_DARK_REGISTER = Object.freeze([
       + 'index it drew, and the rename path re-renders both sentences at that index for the new names; that read sits '
       + 'inside src/generators, behind the closure STOP. What a player is shown is the description and tension the '
       + 'index selected, never the index.',
-    charter: 'ODQ §934.101 (the chair, 2026-10-31, ruling GS-1 on G-SEAMS S1 and the G3 item-1 ruling), consumer CONFIRMED at generateSettlementPipeline.js:247',
+    charter: 'ODQ §934.101 (the chair, 2026-10-31, ruling GS-1 on G-SEAMS S1 and the G3 item-1 ruling), consumer CONFIRMED at generateSettlementPipeline.js:250',
   }),
   Object.freeze({
     identity: 'isolationSupport on settlement',
@@ -867,15 +867,15 @@ export const WRITER_DARK_REGISTER = Object.freeze([
     writer: 'src/generators/priorityHelpers.js',
     reason: 'engine-internal',
     consumer: Object.freeze({
-      file: 'src/generators/npcGenerator.js',
-      symbol: 'the relationship-tension draw, which reads the compound-situation summary flag before weighting ties',
+      file: 'src/generators/people/ties.js',
+      symbol: 'the one-tie draw (drawTies), which reads the compound-situation summary flag to mark a stress-born tie',
     }),
     why: 'A derived gate: the OR of the compound-situation flags beside it. getStressFlags writes it, and the '
-      + 'NPC relationship draw reads it on its own call of the same producer (npcGenerator.js:1608, :1653); '
+      + 'NPC tie draw reads it on its own call of the same producer (ties.js:111, :143; PEOPLE-4 TIES moved it from npcGenerator.js); '
       + 'the stored copy on the safety profile is not itself re-read. The flags it summarises are the facts '
       + '(W2, W34 say them); their OR is not.',
     charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
-      + 'W6, section META), consumer PLAUSIBLE at src/generators/npcGenerator.js:1653',
+      + 'W6, section META), consumer PLAUSIBLE at src/generators/people/ties.js:143',
   }),
   Object.freeze({
     identity: 'religion on raw',

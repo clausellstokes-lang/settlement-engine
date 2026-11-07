@@ -23,6 +23,7 @@ import { settleCrimeLinesToSignal } from '../safetyProfile.js';
 // watch captain, etc.) for any faction archetype that lacks them. Runs
 // at assembly so existing pipeline NPCs are deduplicated against.
 import { ensureFactionStructuralNpcs } from '../factionRoles.js';
+import { drawTies } from '../people/ties.js';
 // ODQ §810's tier-gated density law: sizes the political roster to the tier's
 // faction band. Dormant (returns its input by reference, no draw) for any world
 // whose own config carries no density-law marker.
@@ -222,7 +223,9 @@ registerStep('assembleSettlement', {
   // named child stream (THE VOICE PROGRAM wave 2, 2026-10-02): their pools and beats can
   // grow or reorder without any fact moving, because no later draw reads the position
   // they leave behind. The defense profile takes no draw.
-  settlement.pressureSentence = inAssemblySubstream(rng, 'pressure-sentence', () => generatePressureSentence(settlement));
+  // THE PEOPLE CAR (PEOPLE-4 TIES, R-P7): `pressureSentence` is written BELOW, after the ties are
+  // drawn (its relationship branch reads them; it runs on its own named child, so the move shifts
+  // no other draw).
   settlement.arrivalScene     = inAssemblySubstream(rng, 'arrival-scene', () => generateArrivalScene(settlement));
   settlement.defenseProfile   = generateDefenseProfile(settlement);
 
@@ -331,12 +334,32 @@ registerStep('assembleSettlement', {
   // disagree about what "held" means. It takes NO draw at any tier, so skipping it consumes
   // nothing and moves no stream.
   if (chooseOrPin(pins, 'npcs', () => UNPINNED) === UNPINNED) {
+    const castIds = new Set((settlement.npcs || []).map((npc) => npc?.id));
     const withStructural = ensureFactionStructuralNpcs(
       settlement,
       ctx.generationContext,
     );
     Object.assign(settlement, withStructural);
+    // THE PEOPLE CAR (PEOPLE-4 TIES, R-P7): a card the PRE-LAW appender adds (a v1 world only;
+    // under the density law it appends nothing) arrives after the coherence seam drew the ties,
+    // so it draws its ONE outgoing tie here, over the whole roster, on its own keyed fork
+    // (`people-ties-late::people-ties::<card id>`), and so does a card the seam left untied
+    // because it was alone there. The cards tied at the seam cannot name a late card.
+    const ids = (settlement.npcs || []).map((npc) => npc?.id);
+    if (ids.some((id) => !castIds.has(id)) && chooseOrPin(pins, 'relationships', () => UNPINNED) === UNPINNED) {
+      const tied = new Set((settlement.relationships || []).map((tie) => tie?.from));
+      const late = new Set(ids.filter((id) => !tied.has(id)));
+      settlement.relationships = [
+        ...(settlement.relationships || []),
+        ...inAssemblySubstream(rng, 'people-ties-late', (lateRng) => drawTies(
+          settlement.npcs, { config: settlement.config || effectiveConfig, institutions: settlement.institutions || [] }, lateRng, { sources: late },
+        )),
+      ];
+    }
   }
+
+  // The pressure line, on its own 'pressure-sentence' child, now that the ties exist (PEOPLE-4 TIES).
+  settlement.pressureSentence = inAssemblySubstream(rng, 'pressure-sentence', () => generatePressureSentence(settlement));
 
   // ── GS-2 ONE FACTION SET (chair ruling on G-SEAMS S2, ODQ §934.101). The power factions are
   // the factions. `factions` groups the FINAL roster by each NPC's power affiliation and mints

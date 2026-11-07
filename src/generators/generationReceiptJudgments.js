@@ -88,20 +88,22 @@ export function finalGraphFindings(settlement) {
   for (const [index, relationship] of (
     settlement?.relationships || []
   ).entries()) {
-    const first = npcById.get(relationship?.npc1Id);
-    const second = npcById.get(relationship?.npc2Id);
+    // PEOPLE-4 TIES (R-P7): a tie is directed, `from` → `to`. TODO(PEOPLE-5): a v1 save's
+    // `npc1Id`/`npc2Id` pair is read as `from`/`to` by the migration.
+    const first = npcById.get(relationship?.from);
+    const second = npcById.get(relationship?.to);
     if (!first) {
       findings.push(finding(
-        `relationships[${index}].npc1Id`,
+        `relationships[${index}].from`,
         'Relationship references a missing first NPC.',
-        relationship?.npc1Id,
+        relationship?.from,
       ));
     }
     if (!second) {
       findings.push(finding(
-        `relationships[${index}].npc2Id`,
+        `relationships[${index}].to`,
         'Relationship references a missing second NPC.',
-        relationship?.npc2Id,
+        relationship?.to,
       ));
     }
     if (
@@ -580,10 +582,11 @@ export function repetitionFindings(settlement) {
     ),
   ];
   const relationshipPairs = (settlement?.relationships || []).map(entry => (
-    [entry?.npc1Id, entry?.npc2Id]
+    // DIRECTED (PEOPLE-4 TIES, R-P7): A → B and B → A are two ties, each its card's own; a
+    // duplicate is the same directed pair twice.
+    [entry?.from, entry?.to]
       .filter(Boolean)
-      .sort()
-      .join('::')
+      .join('>')
   ));
   findings.push(...duplicateFindings(
     relationshipPairs,

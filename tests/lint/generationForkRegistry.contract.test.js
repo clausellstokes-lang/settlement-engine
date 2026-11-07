@@ -168,19 +168,22 @@ describe('EM-P2 — the generation fork register: totality, derivation, and Tier
     // 2026-10-01, the urban band (ODQ §934.86): drawn 28 -> 29, pure 46 -> 45. The register's re-measure (fc0e2205f)
     // flipped assembleInstitutions|generationRepairs pure -> drawn (2 of 63 rows), and this tally follows the register.
     // GS-2 one faction set (2026-10-31, ODQ §934.101): drawn 29 -> 26; the three retired rows were all drawn.
-    expect(tallyOf(GENERATION_TIER1, 'class'), 'the entropy tally').toEqual({ drawn: 28 /* 27 -> 28, PEOPLE-1 CAST: the seam's ties row draws */, label: 1, pure: 46 }); // LANDING-1 (2026-11-04): factionCorrelationPass measures drawn at the landed tip (6 of 63 rows draw); before that, lane CRISIS (2026-11-03): resolveCrisisCast joins: both its rows are pure (45 -> 47)
+    // PEOPLE-4 TIES (2026-11-07, R-P7): drawn 27 -> 26, pure 46 -> 47 — generatePopulation|relationships measures pure (the step
+    // provides `[]`; the ties are drawn at the coherence seam on their own family), the register's own re-measure.
+    expect(tallyOf(GENERATION_TIER1, 'class'), 'the entropy tally').toEqual({ drawn: 26, label: 1, pure: 48 /* MERGE-234 (one tie writer): 47 -> 48, assembleSettlement|relationships measures pure (the seam mint's `::tie` fork retired) */ }); // LANDING-1 (2026-11-04): factionCorrelationPass measures drawn at the landed tip (6 of 63 rows draw); before that, lane CRISIS (2026-11-03): resolveCrisisCast joins: both its rows are pure (45 -> 47)
     expect(GENERATION_TIER1.filter((row) => row.class === 'label').map((row) => `${row.step}|${row.key}`),
       'the single label row: a key that moves under a zero-draw step').toEqual(['generatePower|powerIntent']);
     // GS-2 (2026-10-31, ODQ §934.101): same 35 -> 34 and transformed 15 -> 13 in BOTH comparands below, the three
     // retired rows (generatePopulation|conflicts same; generatePopulation|factions and corruptionPass|factions transformed).
+    // PEOPLE-4 TIES (2026-11-07, R-P7): same 30 -> 29, transformed 13 -> 14 in BOTH comparands — generatePopulation|relationships
+    // is rewritten on the record by the coherence seam's tie draw (the step provides `[]`); the disagreement count is unmoved.
     expect(tallyOf(GENERATION_TIER1, 'onRecordClass'), 'the FINAL comparand tally')
-      .toEqual({ absent: 20, same: 31, transformed: 13, varies: 11 }); // 2026-11-07 PEOPLE-1 CAST: same 30 -> 31, the new relationships row // LANDING-8 (2026-11-06): same 34 -> 30, varies 7 -> 11, the four stress rows under the copy-on-write crisis cast (lane D, 8befe5a0d). LANDING-1 (2026-11-04): one row same -> varies, re-measured by the census at the landed tip. lane CRISIS (2026-11-03): resolveCrisisCast joins: crisisCast absent, settlement same
+      .toEqual({ absent: 20, same: 29, transformed: 15, varies: 11 }); // MERGE-234 (one tie writer): transformed 14 -> 15, assembleSettlement|relationships same -> transformed (the seam mint's `::tie` fork retired) // LANDING-8 (2026-11-06): same 34 -> 30, varies 7 -> 11, the four stress rows under the copy-on-write crisis cast (lane D, 8befe5a0d). LANDING-1 (2026-11-04): one row same -> varies, re-measured by the census at the landed tip. lane CRISIS (2026-11-03): resolveCrisisCast joins: crisisCast absent, settlement same
     // 2026-10-01, the urban band (ODQ §934.86): absent 27 -> 26, same 18 -> 19. The same re-measure moved two rows'
     // post-step comparand (generationRepairs absent -> varies; isolationSupport varies -> same), and both now agree
     // with their final comparand, so the disagreeing rows below go 18 -> 16 (generationForkCensus records the same).
     expect(tallyOf(GENERATION_TIER1, 'producedOnRecordClass'), 'the POST-STEP comparand tally')
-      // 2026-11-07 PEOPLE-1 CAST: same 17 -> 16, varies 17 -> 18 — `generatePopulation|relationships` is produced by the step and then APPENDED TO at the coherence seam (the `other` mints' ties, castPowers.js), so the record's value varies from the step's.
-      .toEqual({ absent: 27, same: 17, transformed: 13, varies: 18 }); // 2026-11-07 PEOPLE-1 CAST: same 16 -> 17, the new relationships row (its post-step comparand is the record's) // LANDING-1 (2026-11-04): one row same -> varies, re-measured at the landed tip. lane CRISIS (2026-11-03): resolveCrisisCast joins; assembleSettlement|stress produced same -> varies
+      .toEqual({ absent: 27, same: 16, transformed: 15, varies: 17 }); // MERGE-234 (one tie writer): transformed 14 -> 15, the same row // LANDING-1 (2026-11-04): one row same -> varies, re-measured at the landed tip. lane CRISIS (2026-11-03): resolveCrisisCast joins; assembleSettlement|stress produced same -> varies
 
     // §6.2b: the register carries both comparands BECAUSE sixteen rows disagree, and every
     // one of them is a key a LATER step rewrites. The set is derived from the register itself.
@@ -188,7 +191,7 @@ describe('EM-P2 — the generation fork register: totality, derivation, and Tier
       .filter((row) => row.onRecordClass !== row.producedOnRecordClass)
       .map((row) => `${row.step}|${row.key}`);
     process.stdout.write(`\n[A3s] the two comparands disagree on ${disagreeing.length} rows: ${disagreeing.join(', ')}\n`);
-    expect(disagreeing.length, 'the disagreement count is the register\'s reason for carrying both').toBe(14); /* 13 -> 14, PEOPLE-1 CAST: the relationships row (the seam's ties) */ // LANDING-8 (2026-11-06): 17 -> 13, the four stress rows' two comparands agree under the copy-on-write crisis cast (8befe5a0d). lane CRISIS (2026-11-03): resolveCrisisCast joins: assembleSettlement|stress (16 -> 17)
+    expect(disagreeing.length, 'the disagreement count is the register\'s reason for carrying both').toBe(13); /* MERGE-234 (one tie writer): 14 -> 13, the seam's tie retired; 13 -> 14, PEOPLE-1 CAST: the relationships row (the seam's ties) */ // LANDING-8 (2026-11-06): 17 -> 13, the four stress rows' two comparands agree under the copy-on-write crisis cast (8befe5a0d). lane CRISIS (2026-11-03): resolveCrisisCast joins: assembleSettlement|stress (16 -> 17)
     expect(GENERATION_TIER1.filter((row) => row.key === 'effectiveConfig'
       && row.onRecordClass === 'same' && row.producedOnRecordClass === 'absent').length,
     'the seven effectiveConfig rows: the config IS on the record, and no writer handed it there').toBe(7);

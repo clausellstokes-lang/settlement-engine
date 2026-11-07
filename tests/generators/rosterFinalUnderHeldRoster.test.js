@@ -58,13 +58,18 @@ const CONFIG = {
  *  that holds the roster holds both (`pipeline.js :: runPipeline`'s chooser rule). GS-2 (ODQ
  *  §934.101): four -> two; the groups and the conflicts are derived at assembly. */
 const POPULATION_KEYS = ['npcs', 'relationships'];
-/** The coherence tail's five child streams, in the order `generateCoherence` forks them. */
+/** The coherence tail's six child streams, in the order `generateCoherence` forks them.
+ *  RE-KEYED 2026-11-07 (PEOPLE-4 TIES, R-P7): five -> six. `people-ties` is the ties' own family
+ *  (`people/ties.js :: drawTies`, ONE outgoing tie per card over the final cast), forked after the
+ *  roster and skipped under a held `relationships` key — the population step provides `[]` now. */
 const COHERENCE_LABELS = [
-  'npc-enrichment', 'historical-character', 'prominent-relationship',
+  'npc-enrichment', 'people-ties', 'historical-character', 'prominent-relationship',
   'coherence-notes', 'siege-capability',
 ];
 /** The label the held roster retires. Read from the register in A7, spelled here for the forks. */
 const HELD_ROSTER_LABEL = 'npc-enrichment';
+/** The ties' family, skipped under the held `relationships` key every bag here carries with the roster. */
+const HELD_TIES_LABEL = 'people-ties';
 /** A sibling label that travels the SAME fork path, so an absence cannot pass vacuously. */
 const ANCHOR_LABEL = 'prominent-relationship';
 /** Planted by the arms; it appears nowhere in the generator's own vocabulary. */
@@ -221,9 +226,9 @@ describe('EM-R2 — the roster is final inside enrichNpcCoherence under a held r
       'a skipped child stream takes no draw at all').toBeUndefined();
     // The other four are forked in the same order and take the SAME counts, which is A3's
     // subject and is re-asserted here so this arm cannot pass by having broken them.
-    expect(gated.record.labels).toEqual(COHERENCE_LABELS.filter((l) => l !== HELD_ROSTER_LABEL));
+    expect(gated.record.labels).toEqual(COHERENCE_LABELS.filter((l) => l !== HELD_ROSTER_LABEL && l !== HELD_TIES_LABEL));
     const sameCounts = COHERENCE_LABELS
-      .filter((label) => label !== HELD_ROSTER_LABEL)
+      .filter((label) => label !== HELD_ROSTER_LABEL && label !== HELD_TIES_LABEL)
       .map((label) => [label, unpinned.record.draws[label], gated.record.draws[label]]);
     expect(sameCounts.filter(([, u, g]) => u !== g), 'a sibling stream moved').toEqual([]);
     expect(before.prominentRelationship).toBeDefined();
@@ -236,8 +241,12 @@ describe('EM-R2 — the roster is final inside enrichNpcCoherence under a held r
     const held = structuredClone(settlement.npcs || []).map((npc, index) => (
       index === 0 ? { ...npc, role: SENTINEL_ROLE } : npc
     ));
+    // RE-KEYED 2026-11-07 (PEOPLE-4 TIES, R-P7): the ties are drawn at this seam now, and the
+    // prominent relationship reads them, so the control run holds the record's own ties too; the
+    // arm's subject — the held ROSTER moves no sibling — is unchanged.
     const plain = generateCoherence(
       structuredClone(settlement), createPRNG(SEED).fork('canonical-coherence'),
+      { relationships: settlement.relationships },
     );
     const withHeld = generateCoherence(
       structuredClone(settlement), createPRNG(SEED).fork('canonical-coherence'),

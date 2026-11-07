@@ -1323,7 +1323,7 @@ export const NPC_PRESENTATION_MODES = {
 
 // CONTENT-GT-FINAL (Charge 3) + GS-1 (ODQ §934.101): draw-free variety for the relationship
 // archetype prose. The generator draws each tie's line WITHOUT REPLACEMENT per settlement
-// (npcGenerator.js :: generateRelationships) and passes the drawn index as the third argument;
+// (people/ties.js :: drawTies) and passes the drawn index as the third argument;
 // the tie stores it as `proseVariant`, so a re-render (refreshRelationshipProjections) keeps the
 // same line under new names. With no index (a legacy edge, a seedless caller) the closure falls
 // back to the pure fnv hash of the DIRECTED pair key, salted per field. ZERO rng draws either

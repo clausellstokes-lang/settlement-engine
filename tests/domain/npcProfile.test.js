@@ -368,8 +368,11 @@ describe('primaryRelationship', () => {
       typeName: 'Pragmatic Alliance',
       description: 'They work together because the alternative is worse.',
       tension: 'A third party is destabilizing the calculation.',
-      npc1Id: 'npc_2', npc2Id: 'npc_3',
-      npc1N: 'Beatrix Becker', npc2N: 'Sister Vaela',
+      // RE-KEYED 2026-11-07 (PEOPLE-4 TIES, R-P7): the tie is directed (`from` → `to`; the
+      // undirected npc1Id/npc2Id pair is not written), and its names are the producer's own
+      // `npc1Name`/`npc2Name` (the `npc1N`/`npc2N` arm read a key no producer writes: cut).
+      from: 'npc_2', to: 'npc_3',
+      npc1Name: 'Beatrix Becker', npc2Name: 'Sister Vaela',
     },
   ];
 

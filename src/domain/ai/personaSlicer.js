@@ -32,7 +32,7 @@ import { derivedAlignment } from '../npc/characterConsumers.js';
  *            personality?: PersonalityLite, goal?: { short?: string }|string,
  *            factionAffiliation?: unknown, factionLink?: unknown, factionArchetype?: unknown,
  *            blocs?: BlocLite[] }} EntityLite
- * @typedef {{ npc1Id?: string|number, npc2Id?: string|number, type?: string }} RelationshipLite
+ * @typedef {{ from?: string|number, to?: string|number, type?: string }} RelationshipLite
  * @typedef {{ prosperity?: unknown, foodSecurity?: unknown,
  *            primaryExports?: unknown[], primaryImports?: unknown[] }} EconomyLite
  * @typedef {{ id?: string|number, name?: string, _seed?: number,
@@ -198,8 +198,11 @@ export function buildPersonaSlice({
   // (g) the NPC web — the entity's own patron/rival/kin/bloc edges (people-held travel here)
   facets.push(facet('npc_web', entityId, 'Ties', safe(() => ({
     ties: (home?.relationships || [])
-      .filter((r) => r && (String(r.npc1Id) === entityId || String(r.npc2Id) === entityId))
-      .map((r) => ({ type: r.type, with: String(r.npc1Id) === entityId ? r.npc2Id : r.npc1Id }))
+      // PEOPLE-4 TIES (R-P7): directed — the entity's own tie, then the ties naming it.
+      // TODO(PEOPLE-5): a v1 save's `npc1Id`/`npc2Id` pair is read as `from`/`to` by the migration.
+      .filter((r) => r && (String(r.from) === entityId || String(r.to) === entityId))
+      .sort((a, b) => Number(String(b.from) === entityId) - Number(String(a.from) === entityId))
+      .map((r) => ({ type: r.type, with: String(r.from) === entityId ? r.to : r.from }))
       .slice(0, 10),
     rivalries: (npcState?.rivalryTargets || []).slice(0, 6),
   }))));

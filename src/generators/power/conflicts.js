@@ -73,7 +73,7 @@ const homePowerOf = (npc) => {
  * Ranked by tie count, then by the powers' order on the power roster, so the ranking is a pure
  * function of the record. Pure: no draw.
  * @param {Array<{ name: string }>} powers the powers, `{ name }`, in roster order
- * @param {Array<{ type?: string, npc1Id?: unknown, npc2Id?: unknown }>} relationships
+ * @param {Array<{ type?: string, from?: unknown, to?: unknown }>} relationships
  * @param {Array<Record<string, any>>} npcs the cast
  * @returns {Array<{ factionA: { name: string }, factionB: { name: string }, ties: number }>}
  */
@@ -88,7 +88,7 @@ const crossFactionRivalPairs = (powers, relationships, npcs) => {
   const pairs = new Map();
   for (const rel of relationships || []) {
     if (!['rival', 'enemy'].includes(rel?.type)) continue;
-    const a = homeOf.get(rel.npc1Id), b = homeOf.get(rel.npc2Id);
+    const a = homeOf.get(rel.from), b = homeOf.get(rel.to); // PEOPLE-4 TIES: the directed ends (R-P7)
     if (!a || !b || a === b) continue;
     const [first, second] = rank.get(a) < rank.get(b) ? [a, b] : [b, a];
     const key = `${rank.get(first)}:${rank.get(second)}`;
