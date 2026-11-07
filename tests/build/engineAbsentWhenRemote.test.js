@@ -107,7 +107,7 @@ describe('the protection step — the mechanism', () => {
     expect(twin).toContain("ENGINE_LOCAL_ABSENT_CODE = 'engine_local_absent'");
     // anchored: the file was read (the export surface above is non-empty); it must reach nothing.
     expect(twin).not.toMatch(/^\s*import\s/m);
-    expect(twin).not.toMatch(/\bimport\s*\(/);
+    expect(twin).not.toMatch(/\bimport\s*\(/); // anchored: the same file read as the line above, its export surface proven non-empty; no dynamic import either.
   });
 
   it('the seam is the one src module that constructs the generation worker', () => {
