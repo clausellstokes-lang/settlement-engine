@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-11-07T22:53:21.693Z",
+  "generatedAt": "2026-11-07T23:10:02.705Z",
   "entry": "src/engine/serviceEntry.js",
-  "sourceHash": "bfc5deaac1b849e8",
-  "engineVersion": "84b4ce69966bfb4e",
-  "builtFromCommit": "6851c4c89c2ce3d0be5b77904bc600b3e13d9f4f",
+  "sourceHash": "284d25d40477a81e",
+  "engineVersion": "c0e85198abf537eb",
+  "builtFromCommit": "ad076f6a53e022e4417dafdb47e45ab831e960ce",
   "inputs": [
-    "../../../../../../home/user/settlement-engine/node_modules/seedrandom/seedrandom.js",
+    "node_modules/seedrandom/seedrandom.js",
     "src/data/arrivalProse.js",
     "src/data/bandLadders.js",
     "src/data/constants.js",
