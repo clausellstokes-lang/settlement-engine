@@ -133,6 +133,9 @@ MUTATED_FILES=(
   src/generators/foodGenerator.js
   src/generators/economy/foodBalance.js
   src/generators/economy/viability.js
+  src/generators/resourceGenerator.js
+  src/generators/steps/assembleSettlement.js
+  src/generators/hookVariety.js
 )
 if [ "${MUTATION_SWEEP_ALLOW_DIRTY:-}" != "1" ]; then
   dirty="$(git status --porcelain -- "${MUTATED_FILES[@]}" 2>/dev/null)"
@@ -1653,6 +1656,33 @@ check_caught "food/the record's surplus condition is grows-more-than-eats" src/g
 #      tests/generators/smallPlaceMarket.test.js must red.
 perl -0pi -e "s/return tags\.includes\('market'\) \|\| \(tags\.includes/return tags.length > 0 || tags.includes('market') || (tags.includes/" src/generators/economy/viability.js
 check_caught "size/the catalogue decides what is a market" src/generators/economy/viability.js "npx vitest run tests/generators/smallPlaceMarket.test.js --no-file-parallelism"
+
+# 119-123. THE REVIEW-INTAKE LANE'S FIVE CURE PINS (lane/review-intake-2026-11-06; plants landed
+#      2026-11-07 on lane/review-intake-plants-2026-11-07). Each plant is the inverse of its cure.
+# 119. A GAP SAYS WHICH KIND (f8f0afe0f). An imported input is classed missing again, so the
+#      "runs on imported" line is written as "lacks access"; gapSaysWhichKind must red.
+perl -0pi -e "s/  \) return 'imported';\n  return 'missing';/  ) return 'missing';\n  return 'missing';/" src/generators/resourceGenerator.js
+check_caught "review-intake/a gap says which kind" src/generators/resourceGenerator.js "npx vitest run tests/generators/gapSaysWhichKind.test.js --no-file-parallelism"
+
+# 120. THE RECEIPT READS THE TRACE IT PERSISTED (67cafec07). The trace copy moves back AFTER the
+#      receipt, so the receipt reports "No step trace was persisted" on a world that carries one.
+perl -0pi -e 's/(  if \(Array\.isArray\(ctx\.simulationTrace\) && ctx\.simulationTrace\.length\) \{\n    settlement\.simulationTrace = ctx\.simulationTrace;\n  \}\n)(.*?      generationRepairs: ctx\.generationRepairs,\n    \},\n  \);\n)/$2$1/s' src/generators/steps/assembleSettlement.js
+check_caught "review-intake/the receipt reads the trace it persisted" src/generators/steps/assembleSettlement.js "npx vitest run tests/generators/receiptReadsPersistedTrace.test.js --no-file-parallelism"
+
+# 121. NO ROSTER CARRIES ONE SECRET OR ONE GOAL TWICE (9ae0609e4). The draw-site primitive stops
+#      refusing what the roster holds, so the population draws repeat again over the 1,000 births.
+perl -0pi -e 's/    if \(!held \|\| held\.size === 0\) return pool\[start\];/    if (true) return pool[start];/' src/generators/hookVariety.js
+check_caught "review-intake/no roster carries one secret or one goal twice" src/generators/hookVariety.js "npx vitest run tests/generators/rosterDuplicateDraws.test.js --no-file-parallelism"
+
+# 122. WATER IS READ FROM THE RECORD (9f7867088). The record's water rows stop counting as a
+#      supply, so a hills town with Multiple water sources is told its Brewery lacks water.
+perl -0pi -e 's/  const hasWater = native\.some\(\(inst\) => WATER_ROW_NAMES\.has\(nativeSemanticName\(inst\)\)\)\n/  const hasWater = false\n/' src/generators/economy/viability.js
+check_caught "review-intake/water is read from the record" src/generators/economy/viability.js "npx vitest run tests/generators/waterDependencyFromRecord.test.js --no-file-parallelism"
+
+# 123. A HOLDER CITATION RESOLVES BY SYMBOL (0d4731d98). The producer index stops emitting the
+#      `path :: symbol` form, so the two symbol-cited holder rows resolve to nothing.
+perl -0pi -e 's/      const bySymbol = write\.symbol \? `\$\{rel\} :: \$\{write\.symbol\}` : .{2};/      const bySymbol = "";/' scripts/wiring-census.mjs
+check_caught "review-intake/a holder citation resolves by symbol" scripts/wiring-census.mjs "npx vitest run tests/lint/holderCitesBySymbol.test.js --no-file-parallelism"
 
 echo ""
 echo "── Mutation sweep results ──────────────────────────────"
