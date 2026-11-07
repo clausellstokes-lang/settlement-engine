@@ -493,6 +493,8 @@ describe('⭐⭐ AN UNWRITTEN SET MUST NOT READ AS A CLEAN ONE, and the rule sta
  * arranges it (`spine + ' ' + modifier`, verbatim). A fixture whose shape drifted from the
  * shipped one would exercise nothing, which is the way an arm goes blind while reading green.
  */
+// The clause is the RETIRED wording of DS-DEF-11 WALLED-STRAINED v1 (rewritten at W2 DEF fourth seat, 2026-11-07,
+// under the owner's style law); kept here as synthetic fixture text, since the arms read its SHAPE, not the corpus.
 const SPINE_TEXT = 'The wall is kept up out of the town\'s own purse; stone keeps itself, and wages do not.';
 const FACE_TEXT = 'The watch is bought where the muster fell short.';
 const fixtureUnit = () => ({

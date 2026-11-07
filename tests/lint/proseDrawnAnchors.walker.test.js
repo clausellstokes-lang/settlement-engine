@@ -81,7 +81,11 @@ const MIN_LITERAL = 18;
  * draw rule can move them, because nothing here is drawn.
  */
 const FIXTURE_INPUT_FILES = Object.freeze([
-  'tests/lint/proseWaveGate.walker.test.js',
+  // 'tests/lint/proseWaveGate.walker.test.js' LEFT this list at W2 DEF fourth seat (2026-11-07): its fixture
+  // clauses ("stone keeps itself, and wages do not.", "the threat is on the town's books ...") were DS-DEF-11's
+  // WALLED-STRAINED v1 / WALLED-THREATENED v1, rewritten under the owner's style law; the corpus no longer carries
+  // them, so the file is synthetic fixture text and is scanned like any other (the exemption arm below would
+  // otherwise red on an exempt file with no corpus text).
   'tests/lint/proseEntryContradiction.walker.test.js',
   'tests/lint/proseComposed.walker.test.js',
   // This file itself: its planted sentence is the DETECTOR'S OWN CONTROL, which the

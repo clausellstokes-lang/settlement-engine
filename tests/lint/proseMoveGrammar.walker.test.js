@@ -782,7 +782,7 @@ describe('the PROVENANCE detector cites the twelve holder kinds and nothing wide
     expect(kindOnly).toBe(6);
     expect(genericOnly).toBe(0);
     expect(both).toBe(0);
-    expect(genericNotCited.length).toBe(11);
+    expect(genericNotCited.length).toBe(10); // W2 DEF fourth seat (DS-DEF-11 style rows, 2026-11-07): 11 -> 10 (UNWALLED-LARGE v2's old "the books say what" carried the withdrawn generic limb; the rewrite does not)
   });
 
   it('every one of the twelve kinds is live, and the withdrawn vocabulary is refused', () => {

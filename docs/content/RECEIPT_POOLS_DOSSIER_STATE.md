@@ -6435,29 +6435,29 @@ analogy. No variant carries a digit, an em dash or an exclamation point.*
 **PROVENANCE:** The enclosure mechanism is engine-native TWICE OVER, and both halves are structural reads of live fields: the threat side (walls score against the threat axes) and the purse side (the upkeep gate, whose asymmetry between stone and wages is the generator's own recorded rule, not an authored flourish). The one historical clause this block might want — WHEN the wall was raised — has NO backing fact at this tip and is deliberately absent; it arrives with the fabric epochs (CT-1b). R-DST-A: `DS-DEF-5` is the armed-forces SURFACE and `DS-DEF-10` the arms LADDER; this block is the why-frame for the fortification fact alone and composes BESIDE them, never over the same cell twice. `UNWALLED-LARGE` is the mandatory `[counterforce]` arm (§0b): the engine records a gate, so the dossier must be able to say the wall did NOT get built.
 
 **`WALLED-THREATENED`** {colour}
-1. `[ledger]` {settlement} keeps its {defwork} because the country requires it; the threat is on the town's books as plainly as the grain.
+1. `[ledger]` {settlement}'s accounts pay for the upkeep of its {defwork} as surely as for grain, because the country around the town is dangerous.
 2. `[street]` Nobody in {settlement} thinks of the {defwork} as ornament; the town knows what it is for and checks it.
-3. `[visitor]` {settlement} is enclosed the way working things are enclosed: against something, and recently attended to.
+3. `[visitor]` Fresh repairs show on {settlement}'s {defwork}; the town keeps its defences in working order against a real threat.
 
 **`WALLED-QUIET`** {crisis-scoped}
-1. `[visitor · no threat · crisis: any · no crisis: unrest]` {settlement} keeps a {defwork} the present peace does not obviously require, and keeping it is cheaper than ever needing it again.
-2. `[elder · no threat · crisis: any]` The {defwork} stands ahead of any present need; walls are easier to keep than to raise, and {settlement} keeps this one.
-3. `[ledger · no threat · crisis: any]` The town pays little for its {defwork} now that it asks little of it; built work stands on its own patience.
+1. `[visitor · no threat · crisis: any · no crisis: unrest]` Though the present peace asks nothing of its defences, {settlement} keeps its {defwork} in repair: mending costs less than building again.
+2. `[elder · no threat · crisis: any]` The older people of {settlement} say defences are easier to keep than to raise, so what the town built stands ahead of any present need.
+3. `[ledger · no threat · crisis: any]` {settlement}'s accounts show little spent on its {defwork} now that it asks little of it, since built work needs little upkeep.
 4. `[visitor · threat · crisis: any]` {settlement} kept its {defwork} through the quiet years, and the {defwork} is earning its keep now.
 5. `[ledger · threat · crisis: any]` What {settlement} spent on its {defwork} in the quiet years is what stands between the town and the threat at hand.
 
 **`WALLED-STRAINED`**
-1. `[ledger · watch]` {settlement}'s {defwork} stands better than the watch that should man it; stone keeps itself, and wages do not.
-2. `[unfolding · colour]` The {defwork} around {settlement} is sound and the muster behind it is thinning, which is the kind of arithmetic a town notices late.
+1. `[ledger · watch]` {settlement}'s accounts keep its {defwork} in repair but fall short on the watch's wages, so the defences are sound and too few people man them.
+2. `[unfolding · colour]` {settlement}'s defences are sound, but fewer people turn out each season to man the {defwork}, and the town is slow to notice.
 
 **`UNWALLED-SMALL`** {crisis-scoped}
 1. `[street · no threat · crisis: any]` {settlement} is too small to wall and knows it; the town's safety is its neighbours, its distance, and its unimportance.
-2. `[visitor · crisis: any]` No wall marks where {settlement} ends; at this size the country and the town simply agree to differ.
+2. `[visitor · crisis: any]` No wall marks where {settlement} ends; the last houses simply give way to open country.
 3. `[street · threat · crisis: any]` {settlement} is too small to wall, and what has come for it now makes the smallness a danger rather than a protection.
 
 **`UNWALLED-LARGE`** {colour}
-1. `[counterforce]` {settlement} has reached a size that usually buys stone, and has not bought it; whether that is confidence or thrift, the openness is itself a statement.
-2. `[ledger]` A town of {settlement}'s weight without a circuit is spending its defense money on something else, and the books say what.
+1. `[counterforce]` {settlement} is as big as places that usually raise a wall of stone, and it never has; whether from confidence or thrift, the town lies open.
+2. `[ledger]` {settlement}'s accounts show nothing spent on a wall: the money a place its size would put into stone goes to other needs, and the town stays open.
 
 ---
 

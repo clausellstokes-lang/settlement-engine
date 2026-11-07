@@ -11208,7 +11208,7 @@
       ],
       "hasBag": true,
       "variants": 3,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [],
       "branchReads": [
         "forces.walls.present",
@@ -11285,7 +11285,7 @@
       ],
       "hasBag": true,
       "variants": 5,
-      "grammars": 1,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [
         "forces.walls.present",
@@ -59460,20 +59460,20 @@
       "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
-      "tier": "COVERED",
+      "tier": "THIN",
       "block": "DS-DEF-11",
       "subject": "WALLED-THREATENED",
       "fields": [],
       "readingFunction": "wallRationalePoolKey",
-      "count": "3 variant(s) · 2 grammar(s) · slots {defwork, settlement}"
+      "count": "3 variant(s) · 1 grammar(s) · slots {defwork, settlement}"
     },
     {
-      "tier": "THIN",
+      "tier": "COVERED",
       "block": "DS-DEF-11",
       "subject": "WALLED-QUIET",
       "fields": [],
       "readingFunction": "wallRationalePoolKey",
-      "count": "5 variant(s) · 1 grammar(s) · slots {defwork, settlement}"
+      "count": "5 variant(s) · 2 grammar(s) · slots {defwork, settlement}"
     },
     {
       "tier": "THIN",

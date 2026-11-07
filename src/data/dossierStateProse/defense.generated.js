@@ -8404,7 +8404,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "WALLED-THREATENED": [
         {
           "angle": "ledger",
-          "text": "{settlement} keeps its {defwork} because the country requires it; the threat is on the town's books as plainly as the grain.",
+          "text": "{settlement}'s accounts pay for the upkeep of its {defwork} as surely as for grain, because the country around the town is dangerous.",
           "slots": [
             "settlement",
             "defwork"
@@ -8422,9 +8422,10 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "{settlement} is enclosed the way working things are enclosed: against something, and recently attended to.",
+          "text": "Fresh repairs show on {settlement}'s {defwork}; the town keeps its defences in working order against a real threat.",
           "slots": [
-            "settlement"
+            "settlement",
+            "defwork"
           ],
           "vid": 3
         }
@@ -8437,7 +8438,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "crisis: any",
             "no crisis: unrest"
           ],
-          "text": "{settlement} keeps a {defwork} the present peace does not obviously require, and keeping it is cheaper than ever needing it again.",
+          "text": "Though the present peace asks nothing of its defences, {settlement} keeps its {defwork} in repair: mending costs less than building again.",
           "slots": [
             "settlement",
             "defwork"
@@ -8450,9 +8451,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "no threat",
             "crisis: any"
           ],
-          "text": "The {defwork} stands ahead of any present need; walls are easier to keep than to raise, and {settlement} keeps this one.",
+          "text": "The older people of {settlement} say defences are easier to keep than to raise, so what the town built stands ahead of any present need.",
           "slots": [
-            "defwork",
             "settlement"
           ],
           "vid": 2
@@ -8463,8 +8463,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "no threat",
             "crisis: any"
           ],
-          "text": "The town pays little for its {defwork} now that it asks little of it; built work stands on its own patience.",
+          "text": "{settlement}'s accounts show little spent on its {defwork} now that it asks little of it, since built work needs little upkeep.",
           "slots": [
+            "settlement",
             "defwork"
           ],
           "vid": 3
@@ -8502,7 +8503,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "watch"
           ],
-          "text": "{settlement}'s {defwork} stands better than the watch that should man it; stone keeps itself, and wages do not.",
+          "text": "{settlement}'s accounts keep its {defwork} in repair but fall short on the watch's wages, so the defences are sound and too few people man them.",
           "slots": [
             "settlement",
             "defwork"
@@ -8514,10 +8515,10 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "The {defwork} around {settlement} is sound and the muster behind it is thinning, which is the kind of arithmetic a town notices late.",
+          "text": "{settlement}'s defences are sound, but fewer people turn out each season to man the {defwork}, and the town is slow to notice.",
           "slots": [
-            "defwork",
-            "settlement"
+            "settlement",
+            "defwork"
           ],
           "vid": 2
         }
@@ -8540,7 +8541,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "crisis: any"
           ],
-          "text": "No wall marks where {settlement} ends; at this size the country and the town simply agree to differ.",
+          "text": "No wall marks where {settlement} ends; the last houses simply give way to open country.",
           "slots": [
             "settlement"
           ],
@@ -8562,7 +8563,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "UNWALLED-LARGE": [
         {
           "angle": "counterforce",
-          "text": "{settlement} has reached a size that usually buys stone, and has not bought it; whether that is confidence or thrift, the openness is itself a statement.",
+          "text": "{settlement} is as big as places that usually raise a wall of stone, and it never has; whether from confidence or thrift, the town lies open.",
           "slots": [
             "settlement"
           ],
@@ -8570,7 +8571,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "A town of {settlement}'s weight without a circuit is spending its defense money on something else, and the books say what.",
+          "text": "{settlement}'s accounts show nothing spent on a wall: the money a place its size would put into stone goes to other needs, and the town stays open.",
           "slots": [
             "settlement"
           ],
