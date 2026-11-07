@@ -655,10 +655,15 @@ describe('reader-with-no-writer ratchet: the EXECUTED corpus', () => {
     // re-derived from the stamp bands (R-E8, 20c0139c5). This corpus lights every `*Enabled` flag, demographics included, so
     // the lit density walls re-deal the AO-0 year. One corpus build per tree: 989219706 (the ceilings' parent) reproduces the
     // frozen figures exactly, and 20c0139c5 alone measures the whole tip.
+    // 2026-11-07 (PEOPLE-1 CAST, the people car's lane 1, recorded at the schema-30 rung; docs/PEOPLE_1_CAST_2026-11-07.md):
+    // final 270 → 378, accumulated 1615 → 2394, unique 270 → 379, regional 86/86 → 80/80. ONE CAUSE: the cast replaces the
+    // rung roster (one card per face-bearing house, the seat always faced, the powers' first/second/third), so the corpus's
+    // twelve pulses run over a roster of a different size and shape and the AO-0 year is re-dealt. ⚠ NOT cross-recorded in
+    // news-voice, news-headline and prose-family here: those are listed in the lane's red list for the chair (M-3's door).
     expect(scalarCorpus.scalarMeta).toEqual({
       canonEventLogEntries: 1,
-      wizardNewsFinalEntries: 270,
-      wizardNewsAccumulatedEntries: 1615,
+      wizardNewsFinalEntries: 378,
+      wizardNewsAccumulatedEntries: 2394,
       // FP BATCH 4 (2026-09-24, the FP chair): wizardNewsFinalEntries 240 → 272 and wizardNewsAccumulatedEntries 1567 → 1604 —
       // the Herald lens U2 (32315e384, FP-31): the feed keeps its newest 52 weeks whole under the 240 cap, so the corpus's
       // twelve monthly pulses retire one entry instead of thirty-three; unique 273 HOLDS. Attributed by equality with the U2
@@ -668,7 +673,7 @@ describe('reader-with-no-writer ratchet: the EXECUTED corpus', () => {
       // (a peacetime suit retires when a war opens against its court; its feed reconcile mints the one id). Accumulated 1567
       // and final 240 DO NOT MOVE. Cross-recorded in the same act: news-voice (introductions 273), prose-family
       // (scalarRows 25549, pulseHistory 1055/5097), the OSR register --write at 98e0d8664 (exact, 1970 findings).
-      wizardNewsUnique: 270,
+      wizardNewsUnique: 379,
       pulseHistory: 12,
       // TE36 (ODQ §271): 109 → 73, one cause — the regional event log carries the pulse's
       // selected outcomes, and the retired bare-decline family was 36 of them. That mint's
@@ -676,11 +681,11 @@ describe('reader-with-no-writer ratchet: the EXECUTED corpus', () => {
       // OPPOSITE directions, and 73 → 74 here is the state lane picking up exactly what the
       // Chronicle put down. `wizardNewsFinalEntries` staying at 240 through both mints is
       // the control that keeps the two layers legibly apart.
-      regionalEventLog: 86,
+      regionalEventLog: 80, // 2026-11-07 PEOPLE-1 CAST: 86 → 80, the cast re-deals the AO-0 year (see the note above)
       // 2026-11-05 (LANDING-5, the chair's addition (c)): 74 → 75, ONE cause — the residual outcome's id now carries
       // its tick (stressorsCore.js :: residualOutcome), so osr002's raider pressure, resolved twice, is two regional
       // records instead of one id minted twice. regionalEventLog holds at 75: no record was added, one stopped colliding.
-      regionalEventLogUnique: 86,
+      regionalEventLogUnique: 80,
       aiChronicle: 1,
     });
     expect(Object.hasOwn(corpus, 'scalarObservations')).toBe(false);
@@ -1826,7 +1831,12 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
       // come BACK. M6's code is unchanged but its INPUTS moved — theta 0.80 → 0.76 restores the `stressors` family, and
       // its member `selected` now carries `factionName` — so `factionName on stressors` ×4 at WorldPulseData.js re-enters
       // the CLEARED set (a GONE row of the rung's reconciliation): exactly +1 identity / +4 counts, the file count unmoved.
-      files: 1, identities: 18, counts: 48,
+      // ⭐ 1/18/48 → 1/17/44 AT THE SCHEMA-30 RUNG (2026-11-07, PEOPLE-1 CAST), RE-DERIVED AND NAMED: the schema-24 story
+      // again. No filter's CODE moved, its INPUT did: the cast re-deals the AO-0 year and the corpus's year raises no
+      // government challenge, so `factionName` left the `stressors` family the corpus observes; the four reads at
+      // src/components/map/WorldPulseData.js (`factionName on stressors` ×4) left the CLEARED set and are one of the 19
+      // ordinary rows the rung admitted (a NEW row of its reconciliation): exactly −1 identity / −4 counts, the file unmoved.
+      files: 1, identities: 17, counts: 44,
     });
     expect(UNREVIEWED_UI_COHORT.tag).toBe('UNREVIEWED-UI');
     expect(UNREVIEWED_UI_COHORT.scopes).toEqual([...EXACT_SCAN_EXCLUDED_SCOPE]);
