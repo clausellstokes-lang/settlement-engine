@@ -41,18 +41,50 @@ Both are rulings for the chair. The seat ran `git merge --abort`. Nothing of 5B 
 | register | door | result | commit |
 |---|---|---|---|
 | observed-shape readers | `node scripts/check-observed-shape-readers.mjs --write`, then the plain check | **exit 1 both: `observed-shape executionTree manifest digest mismatch`.** The same throw at the base `c7d552370`, before any merge. This is 5A's STOP 2 and 5B's §3 STOP: MERGE-234's lane-4 merge resolved the baseline textually and never re-derived it. `validateBaselineHistory` re-validates that committed file on every descendant, so no schema-30 door can pass. **Not cured here: the chair's ruling (a restored predecessor, then rung 31).** | — |
-| lighting census | 5A re-froze it through its ritual at the identical tree (`535f5f3e0`); the plain run is in the wide run below | see §5 | — |
+| lighting census | 5A re-froze it through its ritual at the identical tree (`535f5f3e0`) | the plain run 34 / 34 green, exit 0; no re-freeze was needed | — |
 | writer reach | `node scripts/check-writer-reach.mjs` | exit 0 (5A re-banked at `783a59398` on the identical tree) | — |
 | wiring census | `node scripts/wiring-census.mjs --check` | exit 0: 709 pools / 2310 variants / 165 relation rows. Its JSON did not conflict, so it was not re-generated. | — |
-| fork registry, held-key census, tuning, writer-reach walker | the walkers, in the wide run | see §5 | — |
-| dated roster | `sourceCitationIntegrity.walker` | 99 → 100 (this record), the `_rosterGrowth2026-11-07-merge-5ab` note | this record's commit |
-| edge-shared bundles | `npm run build:edge-shared`, once | see §5 | — |
+| fork registry, held-key census, tuning, writer-reach walker | the walkers, in the wide run | no pin moved by a union. Their reds are the base's (§5) | — |
+| dated roster | `sourceCitationIntegrity.walker` | 99 → 100 (this record), the `_rosterGrowth2026-11-07-merge-5ab` note, the header's `dated (100)`; 18 / 18 green | `06b83a03c` |
+| edge-shared bundles | `npm run build:edge-shared`, once | exit 0 | `56ab1d890` |
 
 Because the merged tree equals 5A's tip, every register 5A re-derived through its door holds unchanged. The union with 5B did not happen, so nothing else was the seat's to re-derive.
 
 ## 5. The suites
 
-PENDING at this commit: the wide run (`tests/generators/people tests/domain/dossier tests/domain/crisis tests/domain/edit tests/lint tests/scripts`) is in flight; its verdict and the red list land in the next commit.
+**The wide run at `5dd99ee74`, the 5A-merged tip plus this record** (`sh scripts/gate-tail.sh npx vitest run tests/generators/people tests/domain/dossier tests/domain/crisis tests/domain/edit tests/lint tests/scripts`). **249 files: 15 red. 3,550 tests: 26 red, 16 skipped. Gate exit 1.**
+
+**Attribution.** The reds were attributed against 5A's own record §4, which ran them at the base `c7d552370`. The two files that record does not list were re-run here in a worktree at the base, and both are red there with the same arms: `editWorldFactResources` (A2, A6) and `heldKeyWriterCensus` (A3). **The union caused no red.** No union with 5B was made, and the 5A merge's tree equals 5A's tip.
+
+| suite | red | owner |
+|---|---|---|
+| `tests/lint/sourceCitationIntegrity.walker` | 1 (the archival roster, 99 against 100) | this seat's record. **CURED** by the roster step `06b83a03c` (18 / 18 green) |
+| `tests/lint/observedShapeReaders.walker` | 5 | the base's broken baseline (§4): 2 at the base, and +3 that 5A's moved reads cannot bank (5A's STOP 2) |
+| `tests/lint/writerReach.walker` | 2 | its corpusMeta arms compare against the observed-shape register (the same STOP) |
+| `tests/lint/proseFamilyContract.walker` | 5 | the lanes' (the AO-0 corpus re-dealt by the cast) |
+| `tests/lint/tuningRegister.walker` | 4 | the base |
+| `tests/lint/institutionTable.walker` | 2 | the base (lane 1 §4(b)) |
+| `tests/lint/negativeAssertionAnchor.walker` | 2 | the base |
+| `tests/lint/proseWiringCensus.walker` | 1 | the base (3 there) |
+| `tests/lint/heldKeyWriterCensus.walker` | 1 (A3) | the base, re-run here |
+| `tests/lint/mutationCoverageManifest` | 1 | the base |
+| `tests/domain/editWorldFactResources` | 2 (A2, A6) | the base, re-run here |
+| `tests/lint/newsHeadlineContract.walker`, `newsVoiceContract.walker` | suite-level (all arms skipped) | the lanes' (the AO-0 year) |
+| `tests/lint/ledgerCitationIntegrity`, `tests/scripts/provenanceMap` | suite-level | ENVIRONMENT: there is no local `refs/heads/review-fixes-2026-07-08` |
+
+**The goldens (M-3), banked, never re-recorded.** One run: `npx vitest run tests/property tests/simulation/presetLightingWitness.test.js`, 96 files / 711 tests, **6 files / 10 tests red**. These are the same files and counts 5A and 5B banked:
+- `generatorGoldenMaster` 1
+- `espionageDormancyFence` 1
+- `dossierProseManifest` 2
+- `heraldKnowledgeDeskGolden` 1
+- `dmLayerGoldenIsolation` 1
+- `editCorpusRatchet` 4
+
+`presetLightingWitness` is green.
+
+**5B's save-museum and migration suites** were not run: 5B is not merged.
+
+**The edge-shared bundles:** `npm run build:edge-shared`, once, exit 0. Re-emitted at `56ab1d890`.
 
 ## 6. CONFIRMED vs PLAUSIBLE
 
