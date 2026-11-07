@@ -13260,7 +13260,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 1,
+      "grammars": 2,
       "predicate": [
         {
           "field": "text(terrainKey) (via TERRAIN_POOL_BY_KEY in economyStateProse.js)",
@@ -13901,7 +13901,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 4,
-      "grammars": 4,
+      "grammars": 3,
       "predicate": [],
       "branchReads": [
         "leading.bucket",
@@ -13972,7 +13972,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 2,
+      "grammars": 3,
       "predicate": [],
       "branchReads": [
         "leading.bucket",
@@ -14127,7 +14127,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 2,
+      "grammars": 3,
       "predicate": [
         {
           "field": "leading.bucket",
@@ -46316,7 +46316,7 @@
         "DS-ECO-11 :: EXPLOITATION: fullyExploited"
       ],
       "variants": 7,
-      "grammars": 5,
+      "grammars": 6,
       "blocks": [
         "DS-ECO-11"
       ]
@@ -46653,7 +46653,7 @@
         "DS-ECO-11 :: TERRAIN: Desert"
       ],
       "variants": 21,
-      "grammars": 13,
+      "grammars": 14,
       "blocks": [
         "DS-ECO-11"
       ]
@@ -57409,7 +57409,7 @@
         "text(terrainKey) (via TERRAIN_POOL_BY_KEY in economyStateProse.js)"
       ],
       "readingFunction": "TERRAIN_POOL_BY_KEY",
-      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -57495,7 +57495,7 @@
       "subject": "EXPLOITATION: unexploited, exportValue: high",
       "fields": [],
       "readingFunction": "exploitationPoolKey",
-      "count": "4 variant(s) · 4 grammar(s) · slots {institution, resource, settlement}"
+      "count": "4 variant(s) · 3 grammar(s) · slots {institution, resource, settlement}"
     },
     {
       "tier": "COVERED",
@@ -57503,7 +57503,7 @@
       "subject": "EXPLOITATION: unexploited, exportValue: medium or low",
       "fields": [],
       "readingFunction": "exploitationPoolKey",
-      "count": "3 variant(s) · 2 grammar(s) · slots {resource, settlement}"
+      "count": "3 variant(s) · 3 grammar(s) · slots {resource, settlement}"
     },
     {
       "tier": "COVERED",
@@ -57523,7 +57523,7 @@
         "leading.bucket"
       ],
       "readingFunction": "exploitationPoolKey",
-      "count": "3 variant(s) · 2 grammar(s) · slots {good, institution, resource, settlement}"
+      "count": "3 variant(s) · 3 grammar(s) · slots {good, institution, resource, settlement}"
     },
     {
       "tier": "COVERED",

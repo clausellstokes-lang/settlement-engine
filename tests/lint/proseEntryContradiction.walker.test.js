@@ -514,8 +514,8 @@ describe('THE ANTI-VACUITY GUARD — the walker must fail on the corpus it ships
     // `eventProvenance: false`; NOT-EXECUTABLE without the flag) — measured on that one entry.
     // 47 -> 46 (both) at the chair's 07:1x ruling: the boom line's undated clause ("coin moves
     // freely and work is easy to find") makes no dated claim, so the entry leaves the class.
-    expect(notExecutable).toBe(47); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted).
-    expect(fails).toBe(47); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted).
+    expect(notExecutable).toBe(48); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted).
+    expect(fails).toBe(48); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted).
     // PRESENT-THEN-ABSENT on one of them, so the arm is proved rather than counted.
     const anchor = corpus.find((entry) => walkEntry(entry, withEntryContext(base, { eventProvenance: false }))
       .fails.some((f) => f.klass === 'C3'));
@@ -674,7 +674,7 @@ describe('THE ANTI-VACUITY GUARD — the walker must fail on the corpus it ships
     // chair's ruling of 2026-11-04; the owner's veto point). Report-only, still a minority.
     // 336 -> 341, measured per commit on the leaves: F12 unit 2 (e19e3e4cf) +3, census-5b unit 3
     // (c00b30eb6, R-L twins) +2. Report-only, still a minority.
-    expect(carrying.length, 'entries carrying the trailing-coordinate class, at this tip').toBe(349); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted).
+    expect(carrying.length, 'entries carrying the trailing-coordinate class, at this tip').toBe(348); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted).
     expect(carrying.length, 'and it is a minority of the 2,266 R1 variants').toBeLessThan(leaves.length / 2);
     console.log(`  Q · trailing coordinate: ${carrying.length} of ${leaves.length} R1 entries carry the class`);
   });
