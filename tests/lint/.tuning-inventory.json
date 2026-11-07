@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "cbaa94879f2e2b4c31d9bf415a47aba2cef678d3",
-  "measuredBy": "PEOPLE-1 CAST",
+  "measuredAtSha": "75df41336adb5ef57b39d1ad2e6038c6d6169c25",
+  "measuredBy": "PEOPLE-LAND (the people car landing seat, under the chair)",
   "date": "2026-11-07",
-  "note": "the people car lane 1: the dead _formatNPCForDisplay deleted from npcGenerator.js (one bare decimal fewer, 71 -> 70); the new people/castPowers.js names its two dials in CAST_POWERS_TUNING (a draft register row), so it carries no bare decimal and no unregistered constant",
+  "note": "Register VII v2 (M-5); the npcGenerator win 70 -> 60 (lane 1 and the shim out) banked; lane 4 ties.js growth declared",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -610,7 +610,7 @@
       "exported": true,
       "idiom": "mixed",
       "keys": 2,
-      "line": 46,
+      "line": 47,
       "spanDigest": "6b3d0a1b34604e0b09ffa63b1642dffa44a7552fa114d2ca602253156c8db98e",
       "leaves": {
         "rates.exploiter": {
@@ -8046,7 +8046,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 2,
-      "line": 61,
+      "line": 65,
       "spanDigest": "27e8cae7f714b6255ed46d5145a6bb53f4257fda9c347798c877bf6108baa529",
       "leaves": {
         "RANKS": 3,
@@ -8305,6 +8305,7 @@
     "src/generators/foodGenerator.js": 5,
     "src/generators/generationReceiptJudgments.js": 1,
     "src/generators/historyGenerator.js": 1,
+    "src/generators/people/ties.js": 1,
     "src/generators/power/economyReconciliation.js": 2,
     "src/generators/recordBatteryFindings.js": 1
   },
@@ -8661,8 +8662,9 @@
     "src/generators/narrativeGenerator.js": 2,
     "src/generators/neighbourGenerator.js": 43,
     "src/generators/npc/factionLeaderSecret.js": 48,
-    "src/generators/npcGenerator.js": 70,
+    "src/generators/npcGenerator.js": 60,
     "src/generators/npcStructure.js": 2,
+    "src/generators/people/ties.js": 1,
     "src/generators/power/relationshipArchetypes.js": 13,
     "src/generators/power/rulingStructure.js": 13,
     "src/generators/power/settlementNarrative.js": 3,
@@ -8686,8 +8688,8 @@
   "totals": {
     "tables": 263,
     "keys": 2211,
-    "unregisteredNamed": 535,
-    "bareDecimals": 6944,
+    "unregisteredNamed": 536,
+    "bareDecimals": 6935,
     "zeroDependentTables": 10,
     "zeroNamedDependentTables": 172
   }

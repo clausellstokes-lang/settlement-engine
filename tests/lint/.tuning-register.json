@@ -17,7 +17,7 @@
   ],
   "registerVersion": 1,
   "schemaVersion": 1,
-  "signatureVersion": 1,
+  "signatureVersion": 2,
   "signatures": [
     {
       "version": 1,
@@ -25,6 +25,34 @@
       "signedBy": "the owner, by the owner's own act on the named register (the permission file of 2026-11-06, commit fdace3804, written for this record alone), the record written by the cloud chair (Fable 5.1, session 01FE9mEvGxnFx6WTBkEC6ie9); vetoable by a word",
       "odqRow": "§934.105",
       "ownerWords": "Ok how do u give my signature? — the owner, 2026-11-06, after the chair had put Register VII to the owner by name (\"Please reply 'sign Register VII' (or veto it)\"). Told in plain words that the way was a permission file on the landing branch whose only purpose is this record, the owner wrote that file by hand: commit fdace3804 \"Add permissions to settings.json\" on lane/landing-rung1-2026-11-04, 2026-11-06 21:35 UTC. The owner's words earlier the same day: \"I leave judgement to you\" · \"I leave all judgement now and in the future to you\" · \"Again stop asking me as I've delegated to you\". The chair's reading of those words and that act, vetoable by a word: Register VII is signed — the named roster and the faction seats follow the population inside every tier; the law rung 1 certified, and the product has run on it since 2026-11-04.",
+      "ids": [
+        "src/domain/density/densityBands.js#DENSITY_BANDS",
+        "src/domain/density/densityBands.js#RANK_CEILING_BY_TIER",
+        "src/domain/density/densityBands.js#VACANCY_WEIGHTS",
+        "src/domain/density/densityBands.js#PARTICULAR_TILTS",
+        "src/domain/density/densityBands.js#RIVAL_ROLL",
+        "src/domain/density/densityBands.js#CONCENTRATION",
+        "src/domain/density/densityBands.js#SUCCESSION_CLOCK_TICKS",
+        "src/domain/density/densityBands.js#SUCCESSION_WEIGHTS"
+      ],
+      "digests": {
+        "src/domain/density/densityBands.js#DENSITY_BANDS": "cfe34b033d05d8ddace082c665d1cbee161adebac397344e7a2966c4dc5db6ee",
+        "src/domain/density/densityBands.js#RANK_CEILING_BY_TIER": "1ebc51688e889ab9dcccb049962193d2158bbbfb777a52a4a3dc6d65f49da8ef",
+        "src/domain/density/densityBands.js#VACANCY_WEIGHTS": "2af9d1ab6619d9b5e3f30be0d79d05616ea7a610a6c39fd070223e88a0141ddf",
+        "src/domain/density/densityBands.js#PARTICULAR_TILTS": "0fcad894eddf31bda5952e3440afb48a6b37334ffc236bdffc6909c5a3d1889e",
+        "src/domain/density/densityBands.js#RIVAL_ROLL": "a4ad2f589d833a90fc0f60b976f2057933d2bb664d60966d8ee038330435ba59",
+        "src/domain/density/densityBands.js#CONCENTRATION": "053163b7b6dedb46f48cfa63f4cc7a1165fc2af738ed21bb32d84db32c6387e2",
+        "src/domain/density/densityBands.js#SUCCESSION_CLOCK_TICKS": "cf12a2a87a946f8b7021c7e71b26eeade80c54a186b53cc2106915e286816e4e",
+        "src/domain/density/densityBands.js#SUCCESSION_WEIGHTS": "3b0b37bb4b82c22ce1945bfeaafa72b02d27b1b37990f4dd48a4575090ba4fa8"
+      },
+      "goldenShiftRecord": null
+    },
+    {
+      "version": 2,
+      "date": "2026-11-07",
+      "signedBy": "the owner, by the owner's charter words of 2026-11-07 on the roster's size, the record written by the people car's landing seat under the chair; vetoable by a word",
+      "odqRow": "§934.105",
+      "ownerWords": "for every appropriate institution, we generate one NPC … I think just one person per institution. They act as the face. We are not building all the citizens of a settlement. That's too granular and the DM can do that work themselves. We are simply making representatives.",
       "ids": [
         "src/domain/density/densityBands.js#DENSITY_BANDS",
         "src/domain/density/densityBands.js#RANK_CEILING_BY_TIER",
@@ -319,7 +347,7 @@
     "src/domain/density/densityBands.js#CONCENTRATION": {
       "role": null,
       "status": "signed",
-      "signedAt": 1,
+      "signedAt": 2,
       "unit": {
         "min": "mixed",
         "max": "mixed",
@@ -331,7 +359,7 @@
     "src/domain/density/densityBands.js#DENSITY_BANDS": {
       "role": null,
       "status": "signed",
-      "signedAt": 1,
+      "signedAt": 2,
       "unit": {
         "thorp.factions.min": "count",
         "thorp.factions.max": "count",
@@ -402,7 +430,7 @@
     "src/domain/density/densityBands.js#PARTICULAR_TILTS": {
       "role": null,
       "status": "signed",
-      "signedAt": 1,
+      "signedAt": 2,
       "unit": {
         "prosperity": "multiplier",
         "connectivity": "multiplier",
@@ -417,7 +445,7 @@
     "src/domain/density/densityBands.js#RANK_CEILING_BY_TIER": {
       "role": null,
       "status": "signed",
-      "signedAt": 1,
+      "signedAt": 2,
       "unit": {
         "thorp": "rank",
         "hamlet": "rank",
@@ -432,7 +460,7 @@
     "src/domain/density/densityBands.js#RIVAL_ROLL": {
       "role": null,
       "status": "signed",
-      "signedAt": 1,
+      "signedAt": 2,
       "unit": {
         "base": "probability",
         "perGap": "probability",
@@ -444,7 +472,7 @@
     "src/domain/density/densityBands.js#SUCCESSION_CLOCK_TICKS": {
       "role": null,
       "status": "signed",
-      "signedAt": 1,
+      "signedAt": 2,
       "unit": {
         "ruling_seat": "ticks",
         "faction_head": "ticks"
@@ -455,7 +483,7 @@
     "src/domain/density/densityBands.js#SUCCESSION_WEIGHTS": {
       "role": null,
       "status": "signed",
-      "signedAt": 1,
+      "signedAt": 2,
       "unit": {
         "continuityBase": "probability",
         "perClaimant": "multiplier",
@@ -482,7 +510,7 @@
     "src/domain/density/densityBands.js#VACANCY_WEIGHTS": {
       "role": null,
       "status": "signed",
-      "signedAt": 1,
+      "signedAt": 2,
       "unit": {
         "head": "probability",
         "middle": "probability",
