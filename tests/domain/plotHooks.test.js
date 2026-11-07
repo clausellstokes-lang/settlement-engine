@@ -134,9 +134,10 @@ describe('collectPlotHooks: a crisis\'s cast hooks come first', () => {
     absent: [], stakes: [{ factionId: 'Town Council', stake: 'loses', reason: 'the crisis hits its base' }],
     levers: [{ institution: 'Town granary', holderId: 'n1', holderName: 'Mara Vell' }],
   };
+  // RE-KEYED (PEOPLE-2 CAST-DERIVED, 3aa160a70): a person's house is read from its first-rank membership; the retired `factionAffiliation` became `memberships`.
   const npcs = [
-    { id: 'n1', name: 'Mara Vell', role: 'Miller', power: 10, influence: 'high', factionAffiliation: 'Millers', plotHooks: ['Mara keeps a second ledger.'] },
-    { id: 'n2', name: 'Oswin Hale', role: 'Mayor', power: 4, factionAffiliation: 'Town Council', plotHooks: ['Oswin owes a debt he cannot name.'] },
+    { id: 'n1', name: 'Mara Vell', role: 'Miller', power: 10, influence: 'high', memberships: [{ power: 'Millers', rank: 1 }], plotHooks: ['Mara keeps a second ledger.'] },
+    { id: 'n2', name: 'Oswin Hale', role: 'Mayor', power: 4, memberships: [{ power: 'Town Council', rank: 1 }], plotHooks: ['Oswin owes a debt he cannot name.'] },
   ];
   const crisisTown = () => ({ name: 'Vellbrook', tier: 'town', npcs, stress: [{ type: 'famine', label: 'Famine', cast }] });
   const OWN = ['Mara keeps a second ledger.', 'Oswin owes a debt he cannot name.'];
