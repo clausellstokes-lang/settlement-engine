@@ -1540,6 +1540,11 @@ describe('tuning register — the refreeze ritual refuses', () => {
       version: 1, ids: ['src/domain/a.js#A_TUNING'], note: '',
     };
     if (signingRecordMalformations(wellFormed)) problems.push('a well-formed record was refused');
+    // GOLDEN-REHEARSAL finding 4: a bare numeral is refused as the golden door refuses it; words carrying a numeral pass.
+    for (const bare of ['1', ' 1 ', '42']) {
+      if (!signingRecordMalformations({ ...wellFormed, ownerWords: bare })) problems.push(`a bare numeral ${JSON.stringify(bare)} was accepted as the owner's words`);
+    }
+    if (signingRecordMalformations({ ...wellFormed, ownerWords: 'the 8 ids, as signed' })) problems.push('words carrying a numeral were refused');
     expect(problems, 'the blank template is a LIVE SUBJECT, not decoration: it ships blank so'
       + ' that this arm always has something real to refuse.').toEqual([]);
   });
