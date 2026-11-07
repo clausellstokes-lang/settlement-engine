@@ -196,7 +196,7 @@ function deriveVolatility(s) {
 
   /** @type {PowerLike} */
   const power = s.powerStructure || {};
-  const factions = power.factions || s.factions || [];
+  const factions = power.factions || [];
   if (factions.length >= 5) {
     value += 10;
     risks.push(`${factions.length} active factions competing`);

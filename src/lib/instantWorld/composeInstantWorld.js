@@ -72,7 +72,6 @@ import { SIMULATION_RULE_PRESETS } from '../../domain/worldPulse/simulationRules
 import { validateDossier } from '../../domain/validation/consistency.js';
 import { extractReducedFingerprint, stableStringify } from '../structuralFingerprint.js';
 import { deriveWorldPlan, normalizeBasicConfig } from '../../domain/instantWorld/worldPlan.js';
-import { dedupeWorldFactionNames } from './factionDedup.js';
 import { materializeGenesisRelations, genesisRelationsSection } from '../../domain/instantWorld/genesisDiplomacy.js';
 import { runComposerSteps } from './composerPipeline.js';
 
@@ -279,22 +278,15 @@ export function composeInstantWorld({
       settlements: mintMembers(c, mkId),
     }) },
 
-    // ── World-scoped faction-name de-dup (CONTENT-GT-DOSSIER) ────────────────
-    // Settlement generation dedups faction names only settlement-locally, so a realm
-    // collides (many members each name a faction "The Trade Compact"). This PURE,
-    // rng-free post-pass renames cross-settlement collisions deterministically — the
-    // members are already minted, so per-settlement generation is untouched (zero
-    // rng/golden impact); only the composed bundle's faction names (and the derived
-    // fingerprint) change. IN-PLACE (coupling `in_place_mutation`). See ./factionDedup.js.
-    { name: 'dedupeFactionNames', fn: (/** @type {any} */ c) => { dedupeWorldFactionNames(c.settlements); } },
+    // (The world-scoped faction-name de-dup step is DELETED — PEOPLE-5A, M-2: it renamed only the
+    // NPC grouping's minted names, a no-op since GS-2; see ./factionDedup.js.)
 
     // ── The realm's FOUNDING TIES, materialized onto the members ─────────────
     // POLIS-2 (DESIGN_FMG_WEAVE D6, ordered by A1.2.12). The plan decides which ties
     // a realm is born holding, SLOT-addressed; this turns those slots into save-id
     // links on the members themselves. IN-PLACE (coupling `in_place_mutation`).
     //
-    // THE POSITION IS THE CONTRACT. It must run AFTER the faction de-dup, so a link
-    // stores each neighbour's FINAL name; and BEFORE channel discovery, because
+    // THE POSITION IS THE CONTRACT. It must run BEFORE channel discovery, because
     // discovery INGESTS `neighbourNetwork` — a founding tie materialized after it
     // would exist on the members and be invisible to the regional graph. The step
     // list makes that order checkable instead of merely stated.

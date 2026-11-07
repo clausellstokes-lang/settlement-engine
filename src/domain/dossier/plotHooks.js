@@ -7,6 +7,7 @@ import { createConflictHookDraw, foodGapHookLine } from './hookLines.js';
 import { retainHooks, retentionKey, editedHookTextKeys } from './hookRetention.js';
 import { crisisHooksOf, leverAndLoserOf } from '../crisis/crisisHooks.js';
 import { effectiveCastOf } from '../crisis/crisisCast.js';
+import { firstPowerOf as cardFirstPowerOf, powerOrderOf } from '../people/cardPowers.js';
 
 const TENSION_LABELS = Object.freeze({
   crime_wave: 'Crime Wave',
@@ -391,17 +392,13 @@ function crisisEntriesOf(stress) {
 }
 
 /**
- * The card's first power — the power it ranks best in. While the people car's shim writes
- * `factionAffiliation` (people/legacyShim.js, removed by PEOPLE-5) its answer is read, so the
- * line is the shim's exactly; a card without it (after PEOPLE-5) is read from its memberships.
- * @param {PlotHookNpc} npc @returns {string | null}
+ * The card's first power — the power it ranks best in, read from its memberships (PEOPLE-5A: the
+ * shim's `factionAffiliation` is no longer read), ties by the powers' order — the order the shim
+ * derived its field by, so the line is the same.
+ * @param {PlotHookNpc} npc @param {PlotHookSettlement} settlement @returns {string | null}
  */
-function firstPowerOf(npc) {
-  if (typeof npc?.factionAffiliation === 'string' && npc.factionAffiliation) return npc.factionAffiliation;
-  const memberships = Array.isArray(npc?.memberships) ? npc.memberships.filter((m) => m && typeof m.power === 'string') : [];
-  const rankOf = (/** @type {{ rank?: unknown }} */ m) => (Number.isInteger(m.rank) ? Number(m.rank) : Number.MAX_SAFE_INTEGER);
-  const first = [...memberships].sort((x, y) => rankOf(x) - rankOf(y))[0];
-  return first ? String(first.power) : null;
+function firstPowerOf(npc, settlement) {
+  return cardFirstPowerOf(npc, powerOrderOf(settlement));
 }
 
 /**
@@ -419,7 +416,7 @@ function crisisPartiesOf(hook, cast, settlement) {
     if (id === null || id === undefined || id === '') return;
     out.push({ kind: 'person', id: String(id) });
     const npc = npcs.find((n) => String(n?.id ?? n?.name) === String(id));
-    const power = npc ? firstPowerOf(npc) : null;
+    const power = npc ? firstPowerOf(npc, settlement) : null;
     if (power) out.push({ kind: 'power', name: power });
   };
   if (hook.bound === 'lever') {
@@ -507,7 +504,7 @@ export function collectPlotHooks(settlement = {}, options = {}) {
       source: npc.name || 'NPC',
       role: npc.role || npc.title || '',
       sub: [
-        firstPowerOf(npc),
+        firstPowerOf(npc, settlement),
         npc.influence === 'high' ? 'High influence' : npc.influence === 'moderate' ? 'Moderate influence' : null,
       ].filter(Boolean).join(' · '),
       category: 'npc',

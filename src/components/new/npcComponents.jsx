@@ -19,6 +19,7 @@ import { describeCompromiseConjunction } from '../../domain/display/causeConjunc
 import { npcInteriority } from '../../domain/display/npcInteriorityRead.js';
 import { whereaboutsLine, whereaboutsBadge } from '../../domain/roads/whereaboutsDisplay.js';
 import { cardTieLines } from '../../domain/relationships/cardTies.js';
+import { cardPowerLine, cardPowerNames, cardHouseOf } from '../../domain/people/cardPowers.js';
 import {
   NPC_GOALS, NPC_ROLE_ARCHETYPES, npcFacetOf,
 } from '../../domain/npc/npcBank.js';
@@ -83,7 +84,8 @@ export function NPCCategoryGroup({
       const q = search.toLowerCase();
       return (npc.name||'').toLowerCase().includes(q) ||
              (npc.role||'').toLowerCase().includes(q) ||
-             (npc.factionAffiliation||'').toLowerCase().includes(q);
+             cardPowerNames(npc).some(p => p.toLowerCase().includes(q)) ||
+             (cardHouseOf(npc)||'').toLowerCase().includes(q);
     }
     return true;
   });
@@ -108,7 +110,6 @@ export function NPCCategoryGroup({
         <NPCInlineCard
           key={durableNpcId(npc) || `legacy-presentation-${index}`}
           npc={npc}
-          groupLabel={displayLabel}
           pinnedIds={pinnedIds}
           onTogglePin={onTogglePin}
           canAuthorNpc={canAuthorNpc}
@@ -186,7 +187,6 @@ export function ConflictCard({conflict:c}) {
 // (BUILD-W2-SEARCH U2), which mounts a person through this same card.
 export function NPCInlineCard({
   npc,
-  groupLabel = '',
   pinnedIds,
   onTogglePin,
   canAuthorNpc = false,
@@ -251,6 +251,8 @@ export function NPCInlineCard({
   const roleArchetype = NPC_ROLE_ARCHETYPES.includes(roleFacet)
     ? humanizeNpcFacet(roleFacet)
     : '';
+  // The card's house, then its standing in each power by rank (PEOPLE-5A, M-1b).
+  const cardLineTail = [cardHouseOf(npc), cardPowerLine(npc)].filter(Boolean).join(' · ');
   const nativeRole = NPC_ROLE_ARCHETYPES.includes(npc.role)
     ? humanizeNpcFacet(npc.role)
     : (npc.role || '');
@@ -337,9 +339,9 @@ export function NPCInlineCard({
           <div style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag3}}>
             {nativeRole}
             {showRoleArchetype ? `${nativeRole ? ' · ' : ''}${roleArchetype} archetype` : ''}
-            {/* The group header above already names the faction (chair ruling N5): the
-                suffix prints only where the card stands outside its own faction's group. */}
-            {npc.factionAffiliation && npc.factionAffiliation !== groupLabel ? ` · ${npc.factionAffiliation}` : ''}
+            {/* THE POWER LINE (PEOPLE-5A, M-1b): the card's house, then its standing in
+                each power by rank — "first of X · second of Y" — read from its memberships. */}
+            {cardLineTail ? `${nativeRole || showRoleArchetype ? ' · ' : ''}${cardLineTail}` : ''}
           </div>
         </div>
         {pinAvailable && (

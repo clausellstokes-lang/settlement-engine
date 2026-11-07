@@ -176,9 +176,9 @@ const KNOWN_UNCONVERTED = Object.freeze({
   // rot, not a new site — exactly the 57 → 58 case recorded below. ⚠ These two rows are
   // a SEVENTH arcane spelling living in this file, name-based and untouched by the tag
   // split; the split moved neither their tokens nor their verdicts.
-  'src/domain/npcProfile.js:334':
+  'src/domain/npcProfile.js:335':
     'TRUE MEMBER. NPC workplace venue → domain; tower/college/library/laboratory decide alone.',
-  'src/domain/npcProfile.js:375':
+  'src/domain/npcProfile.js:381':
     'TRUE MEMBER. The second copy of the same table in the same file — a fork of a fork.',
   'src/domain/contradictions.js:222':
     'CONTEXTUALLY SCOPED, not the class — but only just. ARCANE_INST is selected by `p.archetype === \'arcane\'`, so it searches for an already-arcane faction\'s seat rather than deciding arcane-ness. It is entirely ambiguous tokens, though, so it will happily accept a masonry tower as an arcane order\'s home and report no contradiction. A real (small) false negative, recorded rather than fixed: the fix is the same conversion the TRUE MEMBERS need.',

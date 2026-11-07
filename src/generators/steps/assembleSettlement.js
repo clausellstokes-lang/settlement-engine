@@ -139,7 +139,8 @@ registerStep('assembleSettlement', {
       tier: rawNeighbour.tier,
       relationshipType: config._neighbourRelType || 'neutral',
       npcs:    rawNeighbour.npcs    || [],
-      factions: rawNeighbour.factions || [],
+      // The partner's POWERS (PEOPLE-5A, M-2), never its NPC grouping.
+      powerStructure: { factions: rawNeighbour.powerStructure?.factions || [] },
     } : null),
     economicState,
     spatialLayout,

@@ -622,7 +622,6 @@ const FROZEN_UNANCHORED_NEGATIVES = Object.freeze({
   'tests/lib/importReconciliationRecovery.test.js': 6,
   'tests/lib/importScrub.test.js': 1,
   'tests/lib/instantWorld/composeInstantWorld.test.js': 1,
-  'tests/lib/instantWorld/factionDedup.test.js': 3,
   'tests/lib/instantWorld/mundaneRealmProjection.test.js': 2,
   'tests/lib/mapLayerAnalytics.test.js': 1,
   'tests/lib/mapRuntimeConfig.test.js': 2,

@@ -52,17 +52,17 @@ const buildConflictPlotHooks = (factionA, factionB, conflict, instFlags, stressF
 
 /**
  * A person's home power, by NAME: the power it ranks best in (its memberships, the people car's
- * shape), else the legacy affiliation a pre-car record carries. Pure.
- * @param {{ memberships?: Array<{ power?: unknown, rank?: unknown }>, factionAffiliation?: unknown } | null | undefined} npc
+ * shape); none for a card in no power. Pure.
+ * @param {{ memberships?: Array<{ power?: unknown, rank?: unknown }> } | null | undefined} npc
  * @returns {string | null}
  */
 const homePowerOf = (npc) => {
+  // PEOPLE-5A (M-2): the memberships only — the legacy `factionAffiliation` fallback is deleted
+  // (a pre-car record gets its memberships from the save migration, M-7).
   const memberships = Array.isArray(npc?.memberships) ? npc.memberships.filter((m) => m && typeof m.power === 'string') : [];
-  if (memberships.length) {
-    const rankOf = (m) => (Number.isInteger(m.rank) ? m.rank : Number.MAX_SAFE_INTEGER);
-    return String([...memberships].sort((x, y) => rankOf(x) - rankOf(y))[0].power);
-  }
-  return typeof npc?.factionAffiliation === 'string' && npc.factionAffiliation ? npc.factionAffiliation : null;
+  if (!memberships.length) return null;
+  const rankOf = (m) => (Number.isInteger(m.rank) ? m.rank : Number.MAX_SAFE_INTEGER);
+  return String([...memberships].sort((x, y) => rankOf(x) - rankOf(y))[0].power);
 };
 
 /**

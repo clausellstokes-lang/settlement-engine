@@ -25,7 +25,7 @@ const active = [
 
 const cascade = {
   summaryLines: ['The cascade will ripple to the spymaster'],
-  downstreamCounts: { npcs: 3, hooks: 1, factions: 2, linkedSaves: 0 },
+  downstreamCounts: { npcs: 3, hooks: 1, powers: 2, linkedSaves: 0 },
   narrativeImpact: 'regenerate-needed',
 };
 

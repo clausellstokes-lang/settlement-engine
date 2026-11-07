@@ -1409,7 +1409,7 @@ describe('THE FIRST-PAINT LAW — a sentence behind a shut fold reaches no reade
    * THIS FILE GETTING IT WRONG. `Section` is a plain header UNLESS it is passed
    * `collapsible`; `Collapsible` IS the fold and takes no such prop. Keying on the
    * attribute alone graded every `<Collapsible defaultOpen={false}>` as OPEN — there are
-   * three in the tree today (`HistoryTab.jsx:230`/`:252`, `NPCsTab.jsx:162`) and the first
+   * three in the tree then (`HistoryTab.jsx:230`/`:252`, and the NPCs tab's tie fold, cut by N8) and the first
    * mount to land inside one would have passed this arm in silence.
    *
    * A fold is open only when `defaultOpen` is STATICALLY true — bare, `{true}`, or absent
