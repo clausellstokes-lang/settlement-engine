@@ -278,7 +278,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "FOOD: deficit": [
         {
           "angle": "ledger",
-          "text": "{settlement} does not grow what it eats. The daily count comes up short and the shortfall is made good off the road, week on week, as a standing line in the accounts.",
+          "text": "{settlement} does not grow enough to eat. Food comes in from outside every week, and the town pays for it every week.",
           "slots": [
             "settlement"
           ],
@@ -299,8 +299,10 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
             "institution: granary",
             "grain"
           ],
-          "text": "The granary doors open more often than they shut, and what comes out is not what the fields put in.",
-          "slots": [],
+          "text": "The granary at {settlement} is filled from carts, not from the town's own fields.",
+          "slots": [
+            "settlement"
+          ],
           "vid": 3
         }
       ],
@@ -331,7 +333,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no hunger"
           ],
-          "text": "A stranger notices the loaded carts leaving {settlement} rather than arriving. What the town grows, the town cannot finish.",
+          "text": "Loaded carts leave {settlement} for other markets. The town grows more food than it can eat.",
           "slots": [
             "settlement"
           ],
@@ -342,7 +344,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "hunger"
           ],
-          "text": "On the counts {settlement} still raises more than it eats. Under the hunger the stores are what the town is drawing on, and the drawing is what gets counted now.",
+          "text": "{settlement}'s fields still raise more than the town eats, but the hunger is real and the town is living off its stores.",
           "slots": [
             "settlement"
           ],
@@ -426,8 +428,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
             "institution: granary",
             "no hunger"
           ],
-          "text": "The stores here are the reassuring kind: a granary standing deep in {season}, and a town that plainly expects to stay that way.",
+          "text": "The granary at {settlement} is near full going into {season}, and nobody is worried about it.",
           "slots": [
+            "settlement",
             "season"
           ],
           "vid": 3
@@ -437,8 +440,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "hunger"
           ],
-          "text": "The stores went into {season} deep, and the hunger is what they are being drawn down against now.",
+          "text": "{settlement}'s stores went into {season} full, and the town is eating them down now because of the hunger.",
           "slots": [
+            "settlement",
             "season"
           ],
           "vid": 4
@@ -485,8 +489,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "institution: granary"
           ],
-          "text": "The granary is stocked and not deep. It answers {season} as things stand and would not answer {season} plus a failure.",
+          "text": "{settlement}'s granary is stocked but not deep. It will carry the town through {season} if nothing else goes wrong.",
           "slots": [
+            "settlement",
             "season"
           ],
           "vid": 3
@@ -509,8 +514,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "institution: granary"
           ],
-          "text": "The granary runs thin this {season}. What is left is measured in a stretch of weeks rather than a stretch of seasons, and the measuring is being done.",
+          "text": "{settlement}'s granary runs thin this {season}. What is left will last weeks, not seasons, and someone is counting it.",
           "slots": [
+            "settlement",
             "season"
           ],
           "vid": 1
@@ -520,7 +526,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "institution: granary"
           ],
-          "text": "People in {settlement} have begun asking when the granary was last this low, which is the question that comes before the harder ones.",
+          "text": "People in {settlement} have begun asking when the granary was last this low. Nobody yet asks what happens when it is empty.",
           "slots": [
             "settlement"
           ],
@@ -531,8 +537,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "The stores are drawing down faster than {season} will replace them, and the gap between the two is the town's whole immediate problem.",
+          "text": "{settlement} is eating its stores faster than {season} will refill them. If nothing changes, the granary runs out before the next harvest.",
           "slots": [
+            "settlement",
             "season"
           ],
           "vid": 3
@@ -573,8 +580,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "institution: granary"
           ],
-          "text": "A stranger who asks about the stores gets a short answer and a changed subject. The granary is all but empty and {season} has not turned.",
+          "text": "Ask about the stores in {settlement} and you get a short answer and a changed subject. The granary is all but empty and {season} has not turned.",
           "slots": [
+            "settlement",
             "season"
           ],
           "vid": 3

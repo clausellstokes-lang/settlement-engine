@@ -7925,7 +7925,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 2,
+      "grammars": 3,
       "predicate": [],
       "branchReads": [
         "foodBalance",
@@ -8425,7 +8425,8 @@
         "settlement"
       ],
       "slotsNamed": [
-        "season"
+        "season",
+        "settlement"
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
@@ -56683,7 +56684,7 @@
       "subject": "FOOD: deficit",
       "fields": [],
       "readingFunction": "foodTilePoolKey",
-      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 3 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -56739,7 +56740,7 @@
         "granary.band"
       ],
       "readingFunction": "granaryPoolKey",
-      "count": "4 variant(s) · 1 grammar(s) · slots {season}"
+      "count": "4 variant(s) · 1 grammar(s) · slots {season, settlement}"
     },
     {
       "tier": "THIN",

@@ -858,15 +858,15 @@ wants a sentence.
 **SLOTS.** `{settlement}` `{season}`
 
 **FOOD: deficit**
-1. `[ledger]` {settlement} does not grow what it eats. The daily count comes up short and the shortfall is made good off the road, week on week, as a standing line in the accounts.
+1. `[ledger]` {settlement} does not grow enough to eat. Food comes in from outside every week, and the town pays for it every week.
 2. `[street · grain]` Bread here is bought, not simply had. The fields do not cover the town and everyone knows which day the carts come.
-3. `[visitor · institution: granary · grain]` The granary doors open more often than they shut, and what comes out is not what the fields put in.
+3. `[visitor · institution: granary · grain]` The granary at {settlement} is filled from carts, not from the town's own fields.
 
 **FOOD: surplus**
 1. `[ledger · crisis: any]` {settlement} eats well below what it raises. The excess is counted, stored, and argued over rather than needed.
 2. `[street · grain · no hunger]` The talk about food here is about price, not about enough. The fields have been good to the town and the stores show it.
-3. `[visitor · no hunger]` A stranger notices the loaded carts leaving {settlement} rather than arriving. What the town grows, the town cannot finish.
-4. `[ledger · hunger]` On the counts {settlement} still raises more than it eats. Under the hunger the stores are what the town is drawing on, and the drawing is what gets counted now.
+3. `[visitor · no hunger]` Loaded carts leave {settlement} for other markets. The town grows more food than it can eat.
+4. `[ledger · hunger]` {settlement}'s fields still raise more than the town eats, but the hunger is real and the town is living off its stores.
 
 **FOOD: balanced**
 1. `[ledger · crisis: any]` What {settlement} raises and what {settlement} eats come out level. There is no shortfall to cover and nothing spare to sell.
@@ -877,26 +877,26 @@ wants a sentence.
 **GRANARY: well stocked**
 1. `[ledger · institution: granary · crisis: any]` The granary stands near its capacity going into {season}. The stores reach past the turn of the year with room to spare.
 2. `[street · institution: granary · no hunger]` Nobody is counting sacks in {settlement} this {season}. The granary is full and the argument is about the overflow.
-3. `[visitor · institution: granary · no hunger]` The stores here are the reassuring kind: a granary standing deep in {season}, and a town that plainly expects to stay that way.
-4. `[ledger · hunger]` The stores went into {season} deep, and the hunger is what they are being drawn down against now.
+3. `[visitor · institution: granary · no hunger]` The granary at {settlement} is near full going into {season}, and nobody is worried about it.
+4. `[ledger · hunger]` {settlement}'s stores went into {season} full, and the town is eating them down now because of the hunger.
 5. `[ledger · no hunger · no institution: granary]` The stores go into {season} deep, and they reach past the turn of the year with room to spare.
 
 **GRANARY: stocked**
 1. `[ledger · institution: granary]` The granary holds a working reserve into {season}: enough to carry the town through, not enough to lend.
 2. `[street · institution: granary]` The stores will do. That is the whole of what {settlement} says about its granary this {season}.
-3. `[threshold · institution: granary]` The granary is stocked and not deep. It answers {season} as things stand and would not answer {season} plus a failure.
+3. `[threshold · institution: granary]` {settlement}'s granary is stocked but not deep. It will carry the town through {season} if nothing else goes wrong.
 4. `[ledger · no institution: granary]` The stores hold a working reserve into {season}: enough to carry the town through, not enough to lend.
 
 **GRANARY: thin**
-1. `[ledger · institution: granary]` The granary runs thin this {season}. What is left is measured in a stretch of weeks rather than a stretch of seasons, and the measuring is being done.
-2. `[street · institution: granary]` People in {settlement} have begun asking when the granary was last this low, which is the question that comes before the harder ones.
-3. `[unfolding · colour]` The stores are drawing down faster than {season} will replace them, and the gap between the two is the town's whole immediate problem.
+1. `[ledger · institution: granary]` {settlement}'s granary runs thin this {season}. What is left will last weeks, not seasons, and someone is counting it.
+2. `[street · institution: granary]` People in {settlement} have begun asking when the granary was last this low. Nobody yet asks what happens when it is empty.
+3. `[unfolding · colour]` {settlement} is eating its stores faster than {season} will refill them. If nothing changes, the granary runs out before the next harvest.
 4. `[ledger · no institution: granary]` The stores run thin this {season}. What is left is measured in weeks rather than seasons.
 
 **GRANARY: nearly empty**
 1. `[ledger · institution: granary]` The granary is very nearly out. What remains is counted daily and issued against a list.
 2. `[street · institution: granary]` The granary door is watched now. There is little behind it and everybody knows roughly how little.
-3. `[visitor · institution: granary]` A stranger who asks about the stores gets a short answer and a changed subject. The granary is all but empty and {season} has not turned.
+3. `[visitor · institution: granary]` Ask about the stores in {settlement} and you get a short answer and a changed subject. The granary is all but empty and {season} has not turned.
 4. `[ledger · no institution: granary]` The stores are very nearly out this {season}. What remains is counted daily and issued against a list.
 
 ---
