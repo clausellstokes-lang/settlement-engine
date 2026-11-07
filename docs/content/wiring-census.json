@@ -37,8 +37,8 @@
     "syntheticTableFields": 100,
     "tiers": {
       "MISSING": 35,
-      "THIN": 501,
-      "COVERED": 234,
+      "THIN": 502,
+      "COVERED": 233,
       "MISSING-AT-TIER": 45
     },
     "tierSilences": 352,
@@ -10750,8 +10750,10 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 3,
+      "lineDeclares": {
+        "colour": 3
+      },
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -10820,8 +10822,10 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 3,
+      "lineDeclares": {
+        "colour": 3
+      },
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -10892,8 +10896,10 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 3,
+      "lineDeclares": {
+        "colour": 3
+      },
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -11491,8 +11497,10 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 3,
+      "lineDeclares": {
+        "colour": 3
+      },
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -11567,8 +11575,10 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 3,
+      "lineDeclares": {
+        "colour": 3
+      },
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -11650,8 +11660,10 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 3,
+      "lineDeclares": {
+        "colour": 3
+      },
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -11719,8 +11731,10 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 3,
+      "lineDeclares": {
+        "colour": 3
+      },
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -11793,8 +11807,10 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 3,
+      "lineDeclares": {
+        "colour": 3
+      },
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -11861,8 +11877,10 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 3,
+      "lineDeclares": {
+        "colour": 3
+      },
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -11929,8 +11947,10 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 3,
+      "lineDeclares": {
+        "colour": 3
+      },
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -12375,8 +12395,10 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 2,
+      "lineDeclares": {
+        "colour": 2
+      },
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -12749,13 +12771,12 @@
         "settlement"
       ],
       "slotsNamed": [
-        "good",
         "settlement"
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [
         {
           "field": "readings.exportPosture.status",
@@ -14264,8 +14285,10 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 2,
+      "lineDeclares": {
+        "colour": 2
+      },
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -14339,8 +14362,10 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 2,
+      "lineDeclares": {
+        "colour": 2
+      },
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -15261,8 +15286,10 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 2,
+      "lineDeclares": {
+        "colour": 2
+      },
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -15337,8 +15364,10 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 2,
+      "lineDeclares": {
+        "colour": 2
+      },
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -15409,8 +15438,10 @@
         "stateOrgan": true
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 2,
+      "lineDeclares": {
+        "colour": 2
+      },
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -15485,8 +15516,10 @@
         "stateOrgan": true
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 2,
+      "lineDeclares": {
+        "colour": 2
+      },
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -26066,8 +26099,10 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 4,
+      "lineDeclares": {
+        "colour": 4
+      },
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -26145,8 +26180,10 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 4,
+      "lineDeclares": {
+        "colour": 4
+      },
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -26228,8 +26265,10 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 4,
+      "lineDeclares": {
+        "colour": 4
+      },
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -26315,8 +26354,10 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 4,
+      "lineDeclares": {
+        "colour": 4
+      },
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -26375,8 +26416,10 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 4,
+      "lineDeclares": {
+        "colour": 4
+      },
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -46430,7 +46473,7 @@
         "DS-ECO-10 :: POSTURE: established"
       ],
       "variants": 18,
-      "grammars": 9,
+      "grammars": 8,
       "blocks": [
         "DS-ECO-10"
       ]
@@ -57335,14 +57378,14 @@
       "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
-      "tier": "COVERED",
+      "tier": "THIN",
       "block": "DS-ECO-10",
       "subject": "POSTURE: established",
       "fields": [
         "readings.exportPosture.status"
       ],
       "readingFunction": "exportPosturePoolKey",
-      "count": "3 variant(s) · 2 grammar(s) · slots {good, settlement}"
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "COVERED",

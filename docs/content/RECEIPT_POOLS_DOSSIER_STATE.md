@@ -1213,7 +1213,7 @@ contradict** it (R-DST-C).
 
 **STRUGGLING** — *chronically short*
 1. `[street · colour]` {settlement} is short more often than not. Some needs are met and some are postponed, and which is which changes month to month.
-2. `[ledger · colour]` {settlement} never quite makes ends meet. Every month something the town needs waits for money that does not come.
+2. `[ledger · colour]` The town never quite makes ends meet. Every month something it needs waits for money that does not come.
 3. `[visitor · market]` The shortage at {settlement} shows in small things: a repair not made, a stall not restocked, a hall not heated.
 
 **POOR** — *getting by, no surplus* {crisis-scoped}
@@ -1244,19 +1244,19 @@ contradict** it (R-DST-C).
 3. `[street]` The town is rich and behaves like it. What would be a crisis elsewhere is an expense here.
 
 **FOOD AND PROSPERITY: hunger holds the town down** *(the coupled food field `foodSecurity.prosperityMod`, type cap: the one cause this block may join, said in its own pool)*
-1. `[ledger]` Food is what holds {settlement} back. However its trades do, the town cannot grow richer while it cannot feed itself.
-2. `[street]` Whatever {settlement} earns goes first on food, and until the town can feed itself there is little left over for anything else.
-3. `[unfolding]` {settlement} will stay poor for as long as it stays hungry; the next good harvest matters more to its fortunes than any trade.
+1. `[ledger · colour]` Food is what holds {settlement} back. However its trades do, the town cannot grow richer while it cannot feed itself.
+2. `[street · colour]` Whatever {settlement} earns goes first on food, and until the town can feed itself there is little left over for anything else.
+3. `[unfolding · colour]` {settlement} will stay poor for as long as it stays hungry; the next good harvest matters more to its fortunes than any trade.
 
 **FOOD AND PROSPERITY: the cost of food weighs on the town** *(type penalty)*
-1. `[ledger]` Feeding {settlement} costs it. The money spent bringing food in or making up the shortfall is money the town does not keep.
-2. `[street]` A good part of what households at {settlement} earn goes on food, and that leaves the town a little poorer than its trades alone would make it.
-3. `[unfolding]` As long as food costs {settlement} this much, the town's fortunes will sit a step lower than its work deserves.
+1. `[ledger · colour]` Feeding {settlement} costs it. The money spent bringing food in or making up the shortfall is money the town does not keep.
+2. `[street · colour]` A good part of what households at {settlement} earn goes on food, and that leaves the town a little poorer than its trades alone would make it.
+3. `[unfolding · colour]` As long as food costs {settlement} this much, the town's fortunes will sit a step lower than its work deserves.
 
 **FOOD AND PROSPERITY: full stores lift the town** *(type bonus)*
-1. `[ledger]` Full stores help {settlement}'s fortunes. With food to spare and a granary to keep it in, the town has more to trade and less to fear from a bad year.
-2. `[street]` Nobody at {settlement} worries much about the next meal, and the spare food in the granary is part of why the town does as well as it does.
-3. `[unfolding]` With its granary full, {settlement} can meet a lean season without selling what it cannot spare.
+1. `[ledger · colour]` Full stores help {settlement}'s fortunes. With food to spare and a granary to keep it in, the town has more to trade and less to fear from a bad year.
+2. `[street · colour]` Nobody at {settlement} worries much about the next meal, and the spare food in the granary is part of why the town does as well as it does.
+3. `[unfolding · colour]` With its granary full, {settlement} can meet a lean season without selling what it cannot spare.
 
 ---
 
@@ -1331,39 +1331,39 @@ sentence in two voices. **No named deaths.**
 3. `[street · market]` The town is meant to be shut and the market is not empty. Nobody local will explain that, and everybody local has noticed it.
 
 **ACTIVE FAMINE: the failed source, most of the harvest**
-1. `[ledger]` The {good} failed this year and took most of {settlement}'s own food with it. What the town does not grow now has to be bought or done without until the next harvest.
-2. `[street]` The families who lived off the {good} have lost most of what they eat, and the rest of {settlement} is sharing what little it has left.
-3. `[unfolding]` With the {good} gone, {settlement} faces the season ahead on its stores and whatever it can buy, and neither will last long.
+1. `[ledger · colour]` The {good} failed this year and took most of {settlement}'s own food with it. What the town does not grow now has to be bought or done without until the next harvest.
+2. `[street · colour]` The families who lived off the {good} have lost most of what they eat, and the rest of {settlement} is sharing what little it has left.
+3. `[unfolding · colour]` With the {good} gone, {settlement} faces the season ahead on its stores and whatever it can buy, and neither will last long.
 
 **ACTIVE FAMINE: the failed source, part of the harvest**
-1. `[ledger]` The {good} failed this year and took a large part of {settlement}'s own food with it. The town's other food and its stores are carrying the loss.
-2. `[street]` The {good} failed, and the households that lived off it are now eating from everyone else's share.
-3. `[unfolding]` The loss of the {good} will be felt all through the season ahead: less on every table at {settlement} and less put by against the next bad year.
+1. `[ledger · colour]` The {good} failed this year and took a large part of {settlement}'s own food with it. The town's other food and its stores are carrying the loss.
+2. `[street · colour]` The {good} failed, and the households that lived off it are now eating from everyone else's share.
+3. `[unfolding · colour]` The loss of the {good} will be felt all through the season ahead: less on every table at {settlement} and less put by against the next bad year.
 
 **HOW THE NEED IS MET: much of it brought in**
-1. `[visitor]` Food carts come into {settlement} most days, and they matter: a good part of what the town eats is grown elsewhere and brought in.
-2. `[ledger]` {settlement} grows only part of what it eats; the rest comes in from the farms around it and from trade.
-3. `[street]` Bread at {settlement} is as likely to come from somebody else's fields as from the town's own, and everyone knows which days the carts arrive.
+1. `[visitor · colour]` Food carts come into {settlement} most days, and they matter: a good part of what the town eats is grown elsewhere and brought in.
+2. `[ledger · colour]` {settlement} grows only part of what it eats; the rest comes in from the farms around it and from trade.
+3. `[street · colour]` Bread at {settlement} is as likely to come from somebody else's fields as from the town's own, and everyone knows which days the carts arrive.
 
 **HOW THE NEED IS MET: part of it by magic**
-1. `[ledger]` Not all of {settlement}'s food is grown or bought: some of what the town eats is made or kept by magic, and the town would go shorter without it.
-2. `[street]` Part of {settlement}'s food comes from spellwork, and the people who do that work matter to the town's table as much as its farmers.
-3. `[visitor]` A visitor may not see it, but some of the food on {settlement}'s tables is there by magic, and the town counts on it.
+1. `[ledger · colour]` Not all of {settlement}'s food is grown or bought: some of what the town eats is made or kept by magic, and the town would go shorter without it.
+2. `[street · colour]` Part of {settlement}'s food comes from spellwork, and the people who do that work matter to the town's table as much as its farmers.
+3. `[visitor · colour]` A visitor may not see it, but some of the food on {settlement}'s tables is there by magic, and the town counts on it.
 
 **FOOD SOURCES: one source**
-1. `[ledger]` {settlement} lives off its {good} and little else. One bad year for the {good} would be a hungry year for the whole town.
-2. `[street]` Nearly every meal at {settlement} goes back to the {good}, and after a poor season for the {good}, everyone eats less.
-3. `[unfolding]` With only its {good} to fall back on, {settlement} would feel a single failure there at every table within the season.
+1. `[ledger · colour]` {settlement} lives off its {good} and little else. One bad year for the {good} would be a hungry year for the whole town.
+2. `[street · colour]` Nearly every meal at {settlement} goes back to the {good}, and after a poor season for the {good}, everyone eats less.
+3. `[unfolding · colour]` With only its {good} to fall back on, {settlement} would feel a single failure there at every table within the season.
 
 **FOOD SOURCES: several, the largest named**
-1. `[ledger]` {settlement}'s food comes from more than one source, the {good} most of all, so a poor year in one does not empty the town's tables.
-2. `[street]` The {good} feeds {settlement} first, but not alone; when one source has a lean year, the others carry it.
-3. `[unfolding]` With more than its {good} to rely on, {settlement} can take a bad season in one source without going hungry.
+1. `[ledger · colour]` {settlement}'s food comes from more than one source, the {good} most of all, so a poor year in one does not empty the town's tables.
+2. `[street · colour]` The {good} feeds {settlement} first, but not alone; when one source has a lean year, the others carry it.
+3. `[unfolding · colour]` With more than its {good} to rely on, {settlement} can take a bad season in one source without going hungry.
 
 **FOOD SOURCES: four or more**
-1. `[ledger]` {settlement} eats from many sources at once, the {good} first among them, and no single failure can empty its tables.
-2. `[street]` Meals at {settlement} come from all sides, the {good} and much besides, so a bad year in one is barely felt.
-3. `[unfolding]` {settlement} draws its food from so many sources that a failure in the {good} or any other would be a hardship, not a hunger.
+1. `[ledger · colour]` {settlement} eats from many sources at once, the {good} first among them, and no single failure can empty its tables.
+2. `[street · colour]` Meals at {settlement} come from all sides, the {good} and much besides, so a bad year in one is barely felt.
+3. `[unfolding · colour]` {settlement} draws its food from so many sources that a failure in the {good} or any other would be a hardship, not a hunger.
 
 ---
 
@@ -1435,8 +1435,8 @@ block reads the canonical status and supplies clauses any surface can attach.
 3. `[street]` People are leaving the {chain}'s trades. That is usually the last thing that happens, not the first.
 
 **UPSTREAM WEAK: a chain the town's work draws on is failing** *(`activeChains[].upstreamWeak`, the upstream chain named; R-W9: authored as a plain line in this block, the cause it names declared, mounted at `economics.upstreamSupply`)*
-1. `[ledger]` Some of {settlement}'s work depends on {chain} done elsewhere, and that supply is failing: what should come down the line arrives short.
-2. `[street]` Work is slowing at {settlement} for a fault that is not the town's own: the {chain} it relies on upstream has gone short.
+1. `[ledger · colour]` Some of {settlement}'s work depends on {chain} done elsewhere, and that supply is failing: what should come down the line arrives short.
+2. `[street · colour]` Work is slowing at {settlement} for a fault that is not the town's own: the {chain} it relies on upstream has gone short.
 
 #### The cause-clause library — each clause REQUIRES its field
 
@@ -1539,7 +1539,7 @@ note that carries it on the six wired surfaces.
 3. `[threshold]` The outward trade does not cover the inward. It works while there is something to pay with.
 
 **POSTURE: `established`**
-1. `[ledger · no hunger]` {settlement} sends out {good} and several other goods besides; if one trade fails, the others still go.
+1. `[ledger · no hunger]` {settlement} sends several different goods out to market; if one trade fails, the others still go.
 2. `[visitor · colour]` The yards here are full of goods bound out and no two of them are the same. This is a town that sells.
 3. `[street · colour]` There is always something going out. If one trade is quiet, another is not.
 
@@ -1691,12 +1691,12 @@ R-DST-K forbids. The terrain and strengths pools above still stand, because
 their surface does render.
 
 **RESOURCE CONDITION: worked out, recovers in time** *(`resourceConditions[]` with condition `depleted` and recoveryMode `natural`; `conditionNotes` holds the same fact as the generator's sentence)*
-1. `[ledger]` {settlement} has worked out its {resource}. Left alone, the ground will come back in time; until it does, the town buys what it used to take, or goes without.
-2. `[street]` Nobody at {settlement} bothers with the {resource} this year: there is nothing left worth taking, and the people who lived off the {resource} have turned to other work until the ground recovers.
+1. `[ledger · colour]` {settlement} has worked out its {resource}. Left alone, the ground will come back in time; until it does, the town buys what it used to take, or goes without.
+2. `[street · colour]` Nobody at {settlement} bothers with the {resource} this year: there is nothing left worth taking, and the people who lived off the {resource} have turned to other work until the ground recovers.
 
 **RESOURCE CONDITION: worked out, recovers only with work** *(condition `depleted`, recoveryMode `manual`)*
-1. `[ledger]` {settlement} has worked out its {resource}, and it will not come back on its own: someone has to put labour and money into it before it yields again.
-2. `[street]` Nothing more can be taken from the {resource} at {settlement}. Until somebody pays to open new workings, the hands that worked there are idle or gone elsewhere.
+1. `[ledger · colour]` {settlement} has worked out its {resource}, and it will not come back on its own: someone has to put labour and money into it before it yields again.
+2. `[street · colour]` Nothing more can be taken from the {resource} at {settlement}. Until somebody pays to open new workings, the hands that worked there are idle or gone elsewhere.
 
 ---
 
@@ -1781,20 +1781,20 @@ shape.
 3. `[street]` Half of what goes out of this town came into it the same season, and the town's part of the business is the yard and the road.
 
 **CRITICAL IMPORT: a house needs what the land lacks** *(`resourceAnalysis.imports.critical[]` with its `reasons` entry naming the house; slots from that one import, never the export bag)*
-1. `[ledger]` {settlement}'s {institution} cannot work without {good}, and the country around the town produces none, so the town buys from outside or the work stops.
-2. `[visitor]` All the {good} that {settlement}'s {institution} uses comes in from elsewhere; a closed road would stop its work within the season.
+1. `[ledger · colour]` {settlement}'s {institution} cannot work without {good}, and the country around the town produces none, so the town buys from outside or the work stops.
+2. `[visitor · colour]` All the {good} that {settlement}'s {institution} uses comes in from elsewhere; a closed road would stop its work within the season.
 
 **CRITICAL IMPORT: the land cannot give it** *(the `reasons` entry names the terrain alone)*
-1. `[ledger]` {settlement} has to buy its {good} from outside: the country around the town produces none.
-2. `[street]` All the {good} used at {settlement} comes from elsewhere, because the country here produces none.
+1. `[ledger · colour]` {settlement} has to buy its {good} from outside: the country around the town produces none.
+2. `[street · colour]` All the {good} used at {settlement} comes from elsewhere, because the country here produces none.
 
 **INCOME WEIGHT: the religious houses** *(`compound.religionInfluence` high)*
-1. `[ledger]` Faith carries real weight in {settlement}'s money. What the religious houses take in and spend is a large part of the town's business.
-2. `[street]` The religious houses at {settlement} are among its biggest buyers and employers, and a bad year for them is a bad year for the town.
+1. `[ledger · colour]` Faith carries real weight in {settlement}'s money. What the religious houses take in and spend is a large part of the town's business.
+2. `[street · colour]` The religious houses at {settlement} are among its biggest buyers and employers, and a bad year for them is a bad year for the town.
 
 **INCOME WEIGHT: the practice of magic** *(`compound.magicInfluence` high)*
-1. `[ledger]` Magic carries real weight in {settlement}'s money. What the town's practitioners charge for, and what they buy, is a large part of its business.
-2. `[street]` The people who work magic at {settlement} are among its biggest buyers and employers, and much of the town's trade turns on their custom.
+1. `[ledger · colour]` Magic carries real weight in {settlement}'s money. What the town's practitioners charge for, and what they buy, is a large part of its business.
+2. `[street · colour]` The people who work magic at {settlement} are among its biggest buyers and employers, and much of the town's trade turns on their custom.
 
 ---
 
@@ -1857,7 +1857,7 @@ reading of the catalog itself.
 3. `[unfolding]` {settlement}'s {institution} can offer less the longer its supplies stay short, and nobody is putting it right.
 
 **A METROPOLIS-TIER CATALOG, COMPLETE**
-1. `[ledger]` {settlement} has every kind of service there is, including some no ordinary town would keep.
+1. `[ledger]` {settlement} has every kind of service there is, including some no ordinary place would keep.
 2. `[visitor]` Whatever a stranger wants at {settlement}, the answer is that somebody here does it, and the only question is which quarter.
 3. `[street]` There is nothing this town has to send away for, which the people here mention to visitors more often than they realise.
 
@@ -6149,34 +6149,34 @@ analogy. No variant carries a digit, an em dash or an exclamation point.*
 3. `[street]` No market or fair stands in {settlement}: what trade the town does is done house to house and on the road.
 
 **`COMMERCE: a bank`** *(the commercial houses on the live roster, `compound.inst`: `hasBank`)*
-1. `[visitor]` A merchant passing through {settlement} can change coin, borrow or settle a debt at the town's bank without carrying the silver home.
-2. `[ledger]` {settlement}'s larger dealings, from cargoes to building work, are paid for through its bank.
-3. `[street]` Townsfolk at {settlement} keep their savings at the bank and go there when they need to borrow.
-4. `[threshold]` A trader wanting credit at {settlement} has to satisfy the bank about who they are before it lends.
+1. `[visitor · colour]` A merchant passing through {settlement} can change coin, borrow or settle a debt at the town's bank without carrying the silver home.
+2. `[ledger · colour]` {settlement}'s larger dealings, from cargoes to building work, are paid for through its bank.
+3. `[street · colour]` Townsfolk at {settlement} keep their savings at the bank and go there when they need to borrow.
+4. `[threshold · colour]` A trader wanting credit at {settlement} has to satisfy the bank about who they are before it lends.
 
 **`COMMERCE: a merchant guild, no bank`** *(`hasMerchantGuild`, not `hasBank`)*
-1. `[visitor]` A merchant who wants to sell at {settlement} goes first to its merchant guild to learn where, when and for what fee.
-2. `[ledger]` {settlement}'s merchant guild sets the terms of trade and its members carry the town's dealings outward.
-3. `[street]` Members of {settlement}'s merchant guild do most of the buying and selling that matters.
-4. `[threshold]` An outside trader at {settlement} either accepts its merchant guild's terms or sells to the guild's members at their price.
+1. `[visitor · colour]` A merchant who wants to sell at {settlement} goes first to its merchant guild to learn where, when and for what fee.
+2. `[ledger · colour]` {settlement}'s merchant guild sets the terms of trade and its members carry the town's dealings outward.
+3. `[street · colour]` Members of {settlement}'s merchant guild do most of the buying and selling that matters.
+4. `[threshold · colour]` An outside trader at {settlement} either accepts its merchant guild's terms or sells to the guild's members at their price.
 
 **`COMMERCE: craft guilds, no merchant guild`** *(`hasGuild`, neither `hasMerchantGuild` nor `hasBank`)*
-1. `[visitor]` A buyer at {settlement} deals with each craft guild on its own, with no merchant guild above them.
-2. `[ledger]` Each craft at {settlement} keeps a guild of its own that sets the rules for its work.
-3. `[street]` Craftspeople at {settlement} answer to their guilds and the guilds settle their quarrels among themselves.
-4. `[threshold]` A newcomer with a trade at {settlement} must be taken on by its guild before they can work here.
+1. `[visitor · colour]` A buyer at {settlement} deals with each craft guild on its own, with no merchant guild above them.
+2. `[ledger · colour]` Each craft at {settlement} keeps a guild of its own that sets the rules for its work.
+3. `[street · colour]` Craftspeople at {settlement} answer to their guilds and the guilds settle their quarrels among themselves.
+4. `[threshold · colour]` A newcomer with a trade at {settlement} must be taken on by its guild before they can work here.
 
 **`COMMERCE: a market, no guild`** *(`hasMarket`, none of the other three)*
-1. `[visitor]` Anyone with goods and the stall fee can sell at {settlement}'s market without a guild's leave.
-2. `[ledger]` No guild runs {settlement}'s market: the town's only hold on trade is the stall fee.
-3. `[street]` Buying and selling at {settlement} is done face to face at the market with no guild between seller and buyer.
-4. `[threshold]` A stranger can set up and sell at {settlement} on the next market day with nobody's leave but the stall-keeper's.
+1. `[visitor · colour]` Anyone with goods and the stall fee can sell at {settlement}'s market without a guild's leave.
+2. `[ledger · colour]` No guild runs {settlement}'s market: the town's only hold on trade is the stall fee.
+3. `[street · colour]` Buying and selling at {settlement} is done face to face at the market with no guild between seller and buyer.
+4. `[threshold · colour]` A stranger can set up and sell at {settlement} on the next market day with nobody's leave but the stall-keeper's.
 
 **`WAREHOUSES`** *(`hasWarehouse`, R-W3: one clause, only when true)*
-1. `[visitor]` Goods wait in {settlement}'s warehouses between the road and the buyer until the price is right.
-2. `[ledger]` A merchant at {settlement} can store a cargo in the town's warehouses and sell it when the price suits.
-3. `[street]` {settlement}'s warehouses fill after the harvest and empty through the year as the town trades out of them.
-4. `[threshold]` A trader at {settlement} can rent warehouse space and leave goods there between journeys.
+1. `[visitor · colour]` Goods wait in {settlement}'s warehouses between the road and the buyer until the price is right.
+2. `[ledger · colour]` A merchant at {settlement} can store a cargo in the town's warehouses and sell it when the price suits.
+3. `[street · colour]` {settlement}'s warehouses fill after the harvest and empty through the year as the town trades out of them.
+4. `[threshold · colour]` A trader at {settlement} can rent warehouse space and leave goods there between journeys.
 ---
 
 ### DS-GEN-14 · History › Founded once, grown since (the first cause, and the accretion over it) · `history.founding` presence × `history.age` banded

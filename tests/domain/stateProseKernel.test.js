@@ -196,6 +196,9 @@ describe('the state-prose reader — the corpus keys on bands the ladder can rea
     const emitted = [...emittedProsperityLabels()].map((label) => String(label).toUpperCase()).sort();
     const pooled = Object.keys(DOSSIER_STATE_PROSE_ECONOMY[REACHABLE_RUNG.block].pools)
       .filter((key) => key !== LEGACY_RUNG.pool)
+      // W1 ECO (2026-11-07): the FOOD AND PROSPERITY pools are a coupled lens (construction C12),
+      // keyed on the food field's type token, not on a prosperity band.
+      .filter((key) => !key.startsWith('FOOD AND PROSPERITY:'))
       .sort();
     expect(
       emitted,

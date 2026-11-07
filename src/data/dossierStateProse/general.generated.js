@@ -9094,6 +9094,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "COMMERCE: a bank": [
         {
           "angle": "visitor",
+          "marks": [
+            "colour"
+          ],
           "text": "A merchant passing through {settlement} can change coin, borrow or settle a debt at the town's bank without carrying the silver home.",
           "slots": [
             "settlement"
@@ -9102,6 +9105,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
+          "marks": [
+            "colour"
+          ],
           "text": "{settlement}'s larger dealings, from cargoes to building work, are paid for through its bank.",
           "slots": [
             "settlement"
@@ -9110,6 +9116,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "colour"
+          ],
           "text": "Townsfolk at {settlement} keep their savings at the bank and go there when they need to borrow.",
           "slots": [
             "settlement"
@@ -9118,6 +9127,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "threshold",
+          "marks": [
+            "colour"
+          ],
           "text": "A trader wanting credit at {settlement} has to satisfy the bank about who they are before it lends.",
           "slots": [
             "settlement"
@@ -9128,6 +9140,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "COMMERCE: a merchant guild, no bank": [
         {
           "angle": "visitor",
+          "marks": [
+            "colour"
+          ],
           "text": "A merchant who wants to sell at {settlement} goes first to its merchant guild to learn where, when and for what fee.",
           "slots": [
             "settlement"
@@ -9136,6 +9151,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
+          "marks": [
+            "colour"
+          ],
           "text": "{settlement}'s merchant guild sets the terms of trade and its members carry the town's dealings outward.",
           "slots": [
             "settlement"
@@ -9144,6 +9162,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "colour"
+          ],
           "text": "Members of {settlement}'s merchant guild do most of the buying and selling that matters.",
           "slots": [
             "settlement"
@@ -9152,6 +9173,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "threshold",
+          "marks": [
+            "colour"
+          ],
           "text": "An outside trader at {settlement} either accepts its merchant guild's terms or sells to the guild's members at their price.",
           "slots": [
             "settlement"
@@ -9162,6 +9186,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "COMMERCE: craft guilds, no merchant guild": [
         {
           "angle": "visitor",
+          "marks": [
+            "colour"
+          ],
           "text": "A buyer at {settlement} deals with each craft guild on its own, with no merchant guild above them.",
           "slots": [
             "settlement"
@@ -9170,6 +9197,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
+          "marks": [
+            "colour"
+          ],
           "text": "Each craft at {settlement} keeps a guild of its own that sets the rules for its work.",
           "slots": [
             "settlement"
@@ -9178,6 +9208,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "colour"
+          ],
           "text": "Craftspeople at {settlement} answer to their guilds and the guilds settle their quarrels among themselves.",
           "slots": [
             "settlement"
@@ -9186,6 +9219,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "threshold",
+          "marks": [
+            "colour"
+          ],
           "text": "A newcomer with a trade at {settlement} must be taken on by its guild before they can work here.",
           "slots": [
             "settlement"
@@ -9196,6 +9232,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "COMMERCE: a market, no guild": [
         {
           "angle": "visitor",
+          "marks": [
+            "colour"
+          ],
           "text": "Anyone with goods and the stall fee can sell at {settlement}'s market without a guild's leave.",
           "slots": [
             "settlement"
@@ -9204,6 +9243,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
+          "marks": [
+            "colour"
+          ],
           "text": "No guild runs {settlement}'s market: the town's only hold on trade is the stall fee.",
           "slots": [
             "settlement"
@@ -9212,6 +9254,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "colour"
+          ],
           "text": "Buying and selling at {settlement} is done face to face at the market with no guild between seller and buyer.",
           "slots": [
             "settlement"
@@ -9220,6 +9265,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "threshold",
+          "marks": [
+            "colour"
+          ],
           "text": "A stranger can set up and sell at {settlement} on the next market day with nobody's leave but the stall-keeper's.",
           "slots": [
             "settlement"
@@ -9230,6 +9278,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "WAREHOUSES": [
         {
           "angle": "visitor",
+          "marks": [
+            "colour"
+          ],
           "text": "Goods wait in {settlement}'s warehouses between the road and the buyer until the price is right.",
           "slots": [
             "settlement"
@@ -9238,6 +9289,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
+          "marks": [
+            "colour"
+          ],
           "text": "A merchant at {settlement} can store a cargo in the town's warehouses and sell it when the price suits.",
           "slots": [
             "settlement"
@@ -9246,6 +9300,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "colour"
+          ],
           "text": "{settlement}'s warehouses fill after the harvest and empty through the year as the town trades out of them.",
           "slots": [
             "settlement"
@@ -9254,6 +9311,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "threshold",
+          "marks": [
+            "colour"
+          ],
           "text": "A trader at {settlement} can rent warehouse space and leave goods there between journeys.",
           "slots": [
             "settlement"
