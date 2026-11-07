@@ -8,7 +8,7 @@
   "The reviewable slice is computed by RULE (reviewableDark), never hand-listed."
  ],
  "schema": 1,
- "frozenAtSha": "56e9233cff53692fb3f6ea442c6f6bf3e370ad57",
+ "frozenAtSha": "2a7b1728e748579be129f7b0bcc1cff4adb41156",
  "charter": "§18.1 WRWALKER Car 1 (HORIZON) — chair-signed vetoably at the INSTR-WRW pre-stage",
  "minRows": 40,
  "corpusMeta": {
@@ -19,12 +19,12 @@
   "simulationFlagsLit": 92,
   "steadingsMinted": 12,
   "shapeCount": 1725,
-  "originCount": 14834,
-  "transitionCount": 22826
+  "originCount": 14830,
+  "transitionCount": 22819
  },
- "shapesDigest": "24271b75ddd1d9523a52695753a4fb887090cea883b611686b574f4129c7e5ff",
+ "shapesDigest": "1adeb08c9bdca2fdfd4ed2d9903f513e0ec5623b247c10c0c2c7a7d4059c4590",
  "detectorDigest": "2d480ebd9e0a1b372703e39773e1732218024e1520088fdbb67d1be65b05ef25",
- "verdictDigest": "81a8b54a35f68a4b271b3ff0f43e17c4a911e67e95723a4f6a2925e8cd6e3075",
+ "verdictDigest": "7880fb7d381e8a82f2339717430fbcb44955d638a36c7d9b1cb8606d916c5fd0",
  "surfaceRoots": {
   "web": [
    "src/main.jsx"
@@ -92,14 +92,14 @@
  },
  "scanStats": {
   "files": 1714,
-  "sites": 40709,
-  "propRead": 38535,
+  "sites": 40766,
+  "propRead": 38592,
   "elemRead": 0,
   "destructure": 2161,
   "inOp": 13,
-  "rGrades": 6289,
-  "nGrades": 1620439,
-  "resolvedReceivers": 7069
+  "rGrades": 6318,
+  "nGrades": 1624538,
+  "resolvedReceivers": 7098
  },
  "registerDigest": "44edd67a4f8bf47e507539ef6fe2e1a5da75ec18197a02a42fff91d213ba9520",
  "pendingSurfaceCeiling": 3,
@@ -199,13 +199,13 @@
    "identity": "accusedNid on osr003",
    "key": "accusedNid",
    "shape": "osr003",
-   "rows": 392
+   "rows": 393
   },
   {
    "identity": "accusedNid on osr004",
    "key": "accusedNid",
    "shape": "osr004",
-   "rows": 467
+   "rows": 463
   },
   {
    "identity": "accusedNid on osr005",
@@ -229,13 +229,13 @@
    "identity": "accusedNid on osr012",
    "key": "accusedNid",
    "shape": "osr012",
-   "rows": 420
+   "rows": 418
   },
   {
    "identity": "accusedNid on osr015",
    "key": "accusedNid",
    "shape": "osr015",
-   "rows": 370
+   "rows": 369
   },
   {
    "identity": "activeChainsCount on foodSecurity",
@@ -259,7 +259,7 @@
    "identity": "activity on osr004",
    "key": "activity",
    "shape": "osr004",
-   "rows": 467
+   "rows": 463
   },
   {
    "identity": "activity on osr005",
@@ -289,7 +289,7 @@
    "identity": "activity on osr014",
    "key": "activity",
    "shape": "osr014",
-   "rows": 326
+   "rows": 325
   },
   {
    "identity": "affinity on metadata",
@@ -307,13 +307,13 @@
    "identity": "alchemical_goods on osr003",
    "key": "alchemical_goods",
    "shape": "osr003",
-   "rows": 392
+   "rows": 393
   },
   {
    "identity": "alchemical_goods on osr004",
    "key": "alchemical_goods",
    "shape": "osr004",
-   "rows": 467
+   "rows": 463
   },
   {
    "identity": "alchemical_goods on osr005",
@@ -361,7 +361,7 @@
    "identity": "arcane_orders on leaderNpcIds",
    "key": "arcane_orders",
    "shape": "leaderNpcIds",
-   "rows": 1274
+   "rows": 1280
   },
   {
    "identity": "arcane_reagents on osr000",
@@ -379,7 +379,7 @@
    "identity": "arcane_reagents on osr004",
    "key": "arcane_reagents",
    "shape": "osr004",
-   "rows": 467
+   "rows": 463
   },
   {
    "identity": "arcane_reagents on osr005",
@@ -403,7 +403,7 @@
    "identity": "arcane_reagents on osr014",
    "key": "arcane_reagents",
    "shape": "osr014",
-   "rows": 326
+   "rows": 325
   },
   {
    "identity": "arms on osr000",
@@ -421,7 +421,7 @@
    "identity": "arms on osr004",
    "key": "arms",
    "shape": "osr004",
-   "rows": 467
+   "rows": 463
   },
   {
    "identity": "arms on osr006",
@@ -631,13 +631,13 @@
    "identity": "centrality on osr003",
    "key": "centrality",
    "shape": "osr003",
-   "rows": 392
+   "rows": 393
   },
   {
    "identity": "centrality on osr004",
    "key": "centrality",
    "shape": "osr004",
-   "rows": 467
+   "rows": 463
   },
   {
    "identity": "centrality on osr005",
@@ -673,19 +673,19 @@
    "identity": "centrality on osr010",
    "key": "centrality",
    "shape": "osr010",
-   "rows": 245
+   "rows": 233
   },
   {
    "identity": "centrality on osr011",
    "key": "centrality",
    "shape": "osr011",
-   "rows": 241
+   "rows": 242
   },
   {
    "identity": "centrality on osr012",
    "key": "centrality",
    "shape": "osr012",
-   "rows": 420
+   "rows": 418
   },
   {
    "identity": "centrality on osr013",
@@ -877,13 +877,13 @@
    "identity": "clockStages on osr003",
    "key": "clockStages",
    "shape": "osr003",
-   "rows": 392
+   "rows": 393
   },
   {
    "identity": "clockStages on osr004",
    "key": "clockStages",
    "shape": "osr004",
-   "rows": 467
+   "rows": 463
   },
   {
    "identity": "clockStages on osr005",
@@ -919,19 +919,19 @@
    "identity": "clockStages on osr010",
    "key": "clockStages",
    "shape": "osr010",
-   "rows": 245
+   "rows": 233
   },
   {
    "identity": "clockStages on osr011",
    "key": "clockStages",
    "shape": "osr011",
-   "rows": 241
+   "rows": 242
   },
   {
    "identity": "clockStages on osr012",
    "key": "clockStages",
    "shape": "osr012",
-   "rows": 420
+   "rows": 418
   },
   {
    "identity": "clockStages on osr013",
@@ -943,13 +943,13 @@
    "identity": "clockStages on osr014",
    "key": "clockStages",
    "shape": "osr014",
-   "rows": 326
+   "rows": 325
   },
   {
    "identity": "clockStages on osr015",
    "key": "clockStages",
    "shape": "osr015",
-   "rows": 370
+   "rows": 369
   },
   {
    "identity": "clockStages on settlementTickStates",
@@ -1063,7 +1063,7 @@
    "identity": "craft_guilds on leaderNpcIds",
    "key": "craft_guilds",
    "shape": "leaderNpcIds",
-   "rows": 1274
+   "rows": 1280
   },
   {
    "identity": "crimeIsGovt on flags",
@@ -1081,7 +1081,7 @@
    "identity": "custom.alum on osr012",
    "key": "custom.alum",
    "shape": "osr012",
-   "rows": 420
+   "rows": 418
   },
   {
    "identity": "custom.alum on osr013",
@@ -1093,13 +1093,13 @@
    "identity": "custom.alum on osr015",
    "key": "custom.alum",
    "shape": "osr015",
-   "rows": 370
+   "rows": 369
   },
   {
    "identity": "custom.books_and_manuscripts on osr004",
    "key": "custom.books_and_manuscripts",
    "shape": "osr004",
-   "rows": 467
+   "rows": 463
   },
   {
    "identity": "custom.candles_and_wax on osr000",
@@ -1111,7 +1111,7 @@
    "identity": "custom.candles_and_wax on osr003",
    "key": "custom.candles_and_wax",
    "shape": "osr003",
-   "rows": 392
+   "rows": 393
   },
   {
    "identity": "custom.candles_and_wax on osr005",
@@ -1147,7 +1147,7 @@
    "identity": "custom.cultural_tourism_revenue on osr004",
    "key": "custom.cultural_tourism_revenue",
    "shape": "osr004",
-   "rows": 467
+   "rows": 463
   },
   {
    "identity": "custom.cultural_tourism_revenue on osr005",
@@ -1177,7 +1177,7 @@
    "identity": "custom.fine_metalwork_and_jewelry on osr004",
    "key": "custom.fine_metalwork_and_jewelry",
    "shape": "osr004",
-   "rows": 467
+   "rows": 463
   },
   {
    "identity": "custom.fine_metalwork_and_jewelry on osr005",
@@ -1189,19 +1189,19 @@
    "identity": "custom.fine_wool_cloth on osr014",
    "key": "custom.fine_wool_cloth",
    "shape": "osr014",
-   "rows": 326
+   "rows": 325
   },
   {
    "identity": "custom.fine_wool_cloth on osr015",
    "key": "custom.fine_wool_cloth",
    "shape": "osr015",
-   "rows": 370
+   "rows": 369
   },
   {
    "identity": "custom.glassware on osr004",
    "key": "custom.glassware",
    "shape": "osr004",
-   "rows": 467
+   "rows": 463
   },
   {
    "identity": "custom.guild_manufactured_goods on osr000",
@@ -1219,19 +1219,19 @@
    "identity": "custom.guild_manufactured_goods on osr014",
    "key": "custom.guild_manufactured_goods",
    "shape": "osr014",
-   "rows": 326
+   "rows": 325
   },
   {
    "identity": "custom.guild_manufactured_goods on osr015",
    "key": "custom.guild_manufactured_goods",
    "shape": "osr015",
-   "rows": 370
+   "rows": 369
   },
   {
    "identity": "custom.herbal_remedies on osr003",
    "key": "custom.herbal_remedies",
    "shape": "osr003",
-   "rows": 392
+   "rows": 393
   },
   {
    "identity": "custom.hunting_trophies on osr000",
@@ -1243,7 +1243,7 @@
    "identity": "custom.hunting_trophies on osr004",
    "key": "custom.hunting_trophies",
    "shape": "osr004",
-   "rows": 467
+   "rows": 463
   },
   {
    "identity": "custom.pass_transit_trade on osr001",
@@ -1255,7 +1255,7 @@
    "identity": "custom.pass_transit_trade on osr003",
    "key": "custom.pass_transit_trade",
    "shape": "osr003",
-   "rows": 392
+   "rows": 393
   },
   {
    "identity": "custom.pass_transit_trade on osr013",
@@ -1267,13 +1267,13 @@
    "identity": "custom.quality_tools_and_weapons on osr003",
    "key": "custom.quality_tools_and_weapons",
    "shape": "osr003",
-   "rows": 392
+   "rows": 393
   },
   {
    "identity": "custom.sulfur on osr012",
    "key": "custom.sulfur",
    "shape": "osr012",
-   "rows": 420
+   "rows": 418
   },
   {
    "identity": "custom.sulfur on osr013",
@@ -1285,19 +1285,19 @@
    "identity": "custom.sulfur on osr015",
    "key": "custom.sulfur",
    "shape": "osr015",
-   "rows": 370
+   "rows": 369
   },
   {
    "identity": "custom.toll_income on osr003",
    "key": "custom.toll_income",
    "shape": "osr003",
-   "rows": 392
+   "rows": 393
   },
   {
    "identity": "custom.toll_income on osr015",
    "key": "custom.toll_income",
    "shape": "osr015",
-   "rows": 370
+   "rows": 369
   },
   {
    "identity": "custom.toll_revenue on osr001",
@@ -1315,7 +1315,7 @@
    "identity": "custom.toll_revenue on osr003",
    "key": "custom.toll_revenue",
    "shape": "osr003",
-   "rows": 392
+   "rows": 393
   },
   {
    "identity": "custom.toll_revenue on osr013",
@@ -1327,7 +1327,7 @@
    "identity": "custom.toll_revenue on osr015",
    "key": "custom.toll_revenue",
    "shape": "osr015",
-   "rows": 370
+   "rows": 369
   },
   {
    "identity": "custom.transit_trade on osr001",
@@ -1345,19 +1345,19 @@
    "identity": "custom.transit_trade on osr003",
    "key": "custom.transit_trade",
    "shape": "osr003",
-   "rows": 392
+   "rows": 393
   },
   {
    "identity": "custom.transit_trade on osr015",
    "key": "custom.transit_trade",
    "shape": "osr015",
-   "rows": 370
+   "rows": 369
   },
   {
    "identity": "custom.waterborne_freight_services on osr004",
    "key": "custom.waterborne_freight_services",
    "shape": "osr004",
-   "rows": 467
+   "rows": 463
   },
   {
    "identity": "custom.waterborne_freight_services on osr005",
@@ -1393,7 +1393,7 @@
    "identity": "custom.wild_honey on osr003",
    "key": "custom.wild_honey",
    "shape": "osr003",
-   "rows": 392
+   "rows": 393
   },
   {
    "identity": "custom.wild_honey on osr005",
@@ -1501,13 +1501,13 @@
    "identity": "economyDrift on osr003",
    "key": "economyDrift",
    "shape": "osr003",
-   "rows": 392
+   "rows": 393
   },
   {
    "identity": "economyDrift on osr004",
    "key": "economyDrift",
    "shape": "osr004",
-   "rows": 467
+   "rows": 463
   },
   {
    "identity": "economyDrift on osr005",
@@ -1543,19 +1543,19 @@
    "identity": "economyDrift on osr010",
    "key": "economyDrift",
    "shape": "osr010",
-   "rows": 245
+   "rows": 233
   },
   {
    "identity": "economyDrift on osr011",
    "key": "economyDrift",
    "shape": "osr011",
-   "rows": 241
+   "rows": 242
   },
   {
    "identity": "economyDrift on osr012",
    "key": "economyDrift",
    "shape": "osr012",
-   "rows": 420
+   "rows": 418
   },
   {
    "identity": "economyDrift on osr013",
@@ -1567,13 +1567,13 @@
    "identity": "economyDrift on osr014",
    "key": "economyDrift",
    "shape": "osr014",
-   "rows": 326
+   "rows": 325
   },
   {
    "identity": "economyDrift on osr015",
    "key": "economyDrift",
    "shape": "osr015",
-   "rows": 370
+   "rows": 369
   },
   {
    "identity": "economyDrift on settlementTickStates",
@@ -1591,19 +1591,19 @@
    "identity": "elder_council on leaderNpcIds",
    "key": "elder_council",
    "shape": "leaderNpcIds",
-   "rows": 1274
+   "rows": 1280
   },
   {
    "identity": "elected_reeve on leaderNpcIds",
    "key": "elected_reeve",
    "shape": "leaderNpcIds",
-   "rows": 1274
+   "rows": 1280
   },
   {
    "identity": "endsTick on osr004",
    "key": "endsTick",
    "shape": "osr004",
-   "rows": 467
+   "rows": 463
   },
   {
    "identity": "endsTick on osr005",
@@ -1705,13 +1705,13 @@
    "identity": "fabricLed on osr003",
    "key": "fabricLed",
    "shape": "osr003",
-   "rows": 392
+   "rows": 393
   },
   {
    "identity": "fabricLed on osr004",
    "key": "fabricLed",
    "shape": "osr004",
-   "rows": 467
+   "rows": 463
   },
   {
    "identity": "fabricLed on osr005",
@@ -1747,13 +1747,13 @@
    "identity": "fabricLed on osr010",
    "key": "fabricLed",
    "shape": "osr010",
-   "rows": 245
+   "rows": 233
   },
   {
    "identity": "fabricLed on osr012",
    "key": "fabricLed",
    "shape": "osr012",
-   "rows": 420
+   "rows": 418
   },
   {
    "identity": "fabricLed on osr013",
@@ -1765,13 +1765,13 @@
    "identity": "fabricLed on osr014",
    "key": "fabricLed",
    "shape": "osr014",
-   "rows": 326
+   "rows": 325
   },
   {
    "identity": "fabricLed on osr015",
    "key": "fabricLed",
    "shape": "osr015",
-   "rows": 370
+   "rows": 369
   },
   {
    "identity": "fabricLed on traditions",
@@ -1885,7 +1885,7 @@
    "identity": "feudal_appointee on leaderNpcIds",
    "key": "feudal_appointee",
    "shape": "leaderNpcIds",
-   "rows": 1274
+   "rows": 1280
   },
   {
    "identity": "flowProfile on relationshipMemory",
@@ -1957,7 +1957,7 @@
    "identity": "fuel on osr004",
    "key": "fuel",
    "shape": "osr004",
-   "rows": 467
+   "rows": 463
   },
   {
    "identity": "fuel on osr005",
@@ -1981,7 +1981,7 @@
    "identity": "fuel on osr012",
    "key": "fuel",
    "shape": "osr012",
-   "rows": 420
+   "rows": 418
   },
   {
    "identity": "fuel on osr013",
@@ -1993,7 +1993,7 @@
    "identity": "fuel on osr014",
    "key": "fuel",
    "shape": "osr014",
-   "rows": 326
+   "rows": 325
   },
   {
    "identity": "furs on osr000",
@@ -2005,7 +2005,7 @@
    "identity": "furs on osr004",
    "key": "furs",
    "shape": "osr004",
-   "rows": 467
+   "rows": 463
   },
   {
    "identity": "gapKind on candidates",
@@ -2101,13 +2101,13 @@
    "identity": "grievance on osr003",
    "key": "grievance",
    "shape": "osr003",
-   "rows": 392
+   "rows": 393
   },
   {
    "identity": "grievance on osr004",
    "key": "grievance",
    "shape": "osr004",
-   "rows": 467
+   "rows": 463
   },
   {
    "identity": "grievance on osr005",
@@ -2131,13 +2131,13 @@
    "identity": "grievance on osr012",
    "key": "grievance",
    "shape": "osr012",
-   "rows": 420
+   "rows": 418
   },
   {
    "identity": "grievance on osr015",
    "key": "grievance",
    "shape": "osr015",
-   "rows": 370
+   "rows": 369
   },
   {
    "identity": "grievance on reasons",
@@ -2455,13 +2455,13 @@
    "identity": "iron on osr003",
    "key": "iron",
    "shape": "osr003",
-   "rows": 392
+   "rows": 393
   },
   {
    "identity": "iron on osr004",
    "key": "iron",
    "shape": "osr004",
-   "rows": 467
+   "rows": 463
   },
   {
    "identity": "iron on osr005",
@@ -2485,7 +2485,7 @@
    "identity": "iron on osr012",
    "key": "iron",
    "shape": "osr012",
-   "rows": 420
+   "rows": 418
   },
   {
    "identity": "iron on osr013",
@@ -2497,13 +2497,13 @@
    "identity": "iron on osr014",
    "key": "iron",
    "shape": "osr014",
-   "rows": 326
+   "rows": 325
   },
   {
    "identity": "iron on osr015",
    "key": "iron",
    "shape": "osr015",
-   "rows": 370
+   "rows": 369
   },
   {
    "identity": "iron ore on reasons",
@@ -2563,7 +2563,7 @@
    "identity": "landed_gentry on leaderNpcIds",
    "key": "landed_gentry",
    "shape": "leaderNpcIds",
-   "rows": 1274
+   "rows": 1280
   },
   {
    "identity": "landform on site",
@@ -2611,13 +2611,13 @@
    "identity": "lastHeldYear on osr003",
    "key": "lastHeldYear",
    "shape": "osr003",
-   "rows": 392
+   "rows": 393
   },
   {
    "identity": "lastHeldYear on osr004",
    "key": "lastHeldYear",
    "shape": "osr004",
-   "rows": 467
+   "rows": 463
   },
   {
    "identity": "lastHeldYear on osr005",
@@ -2653,19 +2653,19 @@
    "identity": "lastHeldYear on osr010",
    "key": "lastHeldYear",
    "shape": "osr010",
-   "rows": 245
+   "rows": 233
   },
   {
    "identity": "lastHeldYear on osr011",
    "key": "lastHeldYear",
    "shape": "osr011",
-   "rows": 241
+   "rows": 242
   },
   {
    "identity": "lastHeldYear on osr012",
    "key": "lastHeldYear",
    "shape": "osr012",
-   "rows": 420
+   "rows": 418
   },
   {
    "identity": "lastHeldYear on osr013",
@@ -2677,13 +2677,13 @@
    "identity": "lastHeldYear on osr014",
    "key": "lastHeldYear",
    "shape": "osr014",
-   "rows": 326
+   "rows": 325
   },
   {
    "identity": "lastHeldYear on osr015",
    "key": "lastHeldYear",
    "shape": "osr015",
-   "rows": 370
+   "rows": 369
   },
   {
    "identity": "lastHeldYear on traditions",
@@ -2809,13 +2809,13 @@
    "identity": "led on osr003",
    "key": "led",
    "shape": "osr003",
-   "rows": 392
+   "rows": 393
   },
   {
    "identity": "led on osr004",
    "key": "led",
    "shape": "osr004",
-   "rows": 467
+   "rows": 463
   },
   {
    "identity": "led on osr005",
@@ -2851,19 +2851,19 @@
    "identity": "led on osr010",
    "key": "led",
    "shape": "osr010",
-   "rows": 245
+   "rows": 233
   },
   {
    "identity": "led on osr011",
    "key": "led",
    "shape": "osr011",
-   "rows": 241
+   "rows": 242
   },
   {
    "identity": "led on osr012",
    "key": "led",
    "shape": "osr012",
-   "rows": 420
+   "rows": 418
   },
   {
    "identity": "led on osr013",
@@ -2875,13 +2875,13 @@
    "identity": "led on osr014",
    "key": "led",
    "shape": "osr014",
-   "rows": 326
+   "rows": 325
   },
   {
    "identity": "led on osr015",
    "key": "led",
    "shape": "osr015",
-   "rows": 370
+   "rows": 369
   },
   {
    "identity": "led on urbanFabric",
@@ -2935,7 +2935,7 @@
    "identity": "luxury_goods on osr004",
    "key": "luxury_goods",
    "shape": "osr004",
-   "rows": 467
+   "rows": 463
   },
   {
    "identity": "luxury_goods on osr005",
@@ -2959,7 +2959,7 @@
    "identity": "luxury_goods on osr015",
    "key": "luxury_goods",
    "shape": "osr015",
-   "rows": 370
+   "rows": 369
   },
   {
    "identity": "mag on deposits",
@@ -3001,7 +3001,7 @@
    "identity": "manor_household on leaderNpcIds",
    "key": "manor_household",
    "shape": "leaderNpcIds",
-   "rows": 1274
+   "rows": 1280
   },
   {
    "identity": "markets on homeFrontComponents",
@@ -3049,7 +3049,7 @@
    "identity": "merchant_guilds on leaderNpcIds",
    "key": "merchant_guilds",
    "shape": "leaderNpcIds",
-   "rows": 1274
+   "rows": 1280
   },
   {
    "identity": "metals on reasons",
@@ -3061,7 +3061,7 @@
    "identity": "military_guard on leaderNpcIds",
    "key": "military_guard",
    "shape": "leaderNpcIds",
-   "rows": 1274
+   "rows": 1280
   },
   {
    "identity": "minimumStreak on metadata",
@@ -3109,7 +3109,7 @@
    "identity": "monster_hunters_adventurers on leaderNpcIds",
    "key": "monster_hunters_adventurers",
    "shape": "leaderNpcIds",
-   "rows": 1274
+   "rows": 1280
   },
   {
    "identity": "mountain on byTerrain",
@@ -3133,7 +3133,7 @@
    "identity": "noble_families on leaderNpcIds",
    "key": "noble_families",
    "shape": "leaderNpcIds",
-   "rows": 1274
+   "rows": 1280
   },
   {
    "identity": "normalImportPct on foodRecord",
@@ -3325,13 +3325,13 @@
    "identity": "osr000 on osr003",
    "key": "osr000",
    "shape": "osr003",
-   "rows": 392
+   "rows": 393
   },
   {
    "identity": "osr000 on osr004",
    "key": "osr000",
    "shape": "osr004",
-   "rows": 467
+   "rows": 463
   },
   {
    "identity": "osr000 on osr005",
@@ -3367,19 +3367,19 @@
    "identity": "osr000 on osr010",
    "key": "osr000",
    "shape": "osr010",
-   "rows": 245
+   "rows": 233
   },
   {
    "identity": "osr000 on osr011",
    "key": "osr000",
    "shape": "osr011",
-   "rows": 241
+   "rows": 242
   },
   {
    "identity": "osr000 on osr012",
    "key": "osr000",
    "shape": "osr012",
-   "rows": 420
+   "rows": 418
   },
   {
    "identity": "osr000 on osr013",
@@ -3391,13 +3391,13 @@
    "identity": "osr000 on osr014",
    "key": "osr000",
    "shape": "osr014",
-   "rows": 326
+   "rows": 325
   },
   {
    "identity": "osr000 on osr015",
    "key": "osr000",
    "shape": "osr015",
-   "rows": 370
+   "rows": 369
   },
   {
    "identity": "osr000 on tiers",
@@ -3433,13 +3433,13 @@
    "identity": "osr001 on osr003",
    "key": "osr001",
    "shape": "osr003",
-   "rows": 392
+   "rows": 393
   },
   {
    "identity": "osr001 on osr004",
    "key": "osr001",
    "shape": "osr004",
-   "rows": 467
+   "rows": 463
   },
   {
    "identity": "osr001 on osr005",
@@ -3475,19 +3475,19 @@
    "identity": "osr001 on osr010",
    "key": "osr001",
    "shape": "osr010",
-   "rows": 245
+   "rows": 233
   },
   {
    "identity": "osr001 on osr011",
    "key": "osr001",
    "shape": "osr011",
-   "rows": 241
+   "rows": 242
   },
   {
    "identity": "osr001 on osr012",
    "key": "osr001",
    "shape": "osr012",
-   "rows": 420
+   "rows": 418
   },
   {
    "identity": "osr001 on osr013",
@@ -3499,13 +3499,13 @@
    "identity": "osr001 on osr014",
    "key": "osr001",
    "shape": "osr014",
-   "rows": 326
+   "rows": 325
   },
   {
    "identity": "osr001 on osr015",
    "key": "osr001",
    "shape": "osr015",
-   "rows": 370
+   "rows": 369
   },
   {
    "identity": "osr001 on tiers",
@@ -3535,13 +3535,13 @@
    "identity": "osr002 on osr003",
    "key": "osr002",
    "shape": "osr003",
-   "rows": 392
+   "rows": 393
   },
   {
    "identity": "osr002 on osr004",
    "key": "osr002",
    "shape": "osr004",
-   "rows": 467
+   "rows": 463
   },
   {
    "identity": "osr002 on osr005",
@@ -3577,19 +3577,19 @@
    "identity": "osr002 on osr010",
    "key": "osr002",
    "shape": "osr010",
-   "rows": 245
+   "rows": 233
   },
   {
    "identity": "osr002 on osr011",
    "key": "osr002",
    "shape": "osr011",
-   "rows": 241
+   "rows": 242
   },
   {
    "identity": "osr002 on osr012",
    "key": "osr002",
    "shape": "osr012",
-   "rows": 420
+   "rows": 418
   },
   {
    "identity": "osr002 on osr013",
@@ -3601,13 +3601,13 @@
    "identity": "osr002 on osr014",
    "key": "osr002",
    "shape": "osr014",
-   "rows": 326
+   "rows": 325
   },
   {
    "identity": "osr002 on osr015",
    "key": "osr002",
    "shape": "osr015",
-   "rows": 370
+   "rows": 369
   },
   {
    "identity": "osr002 on tiers",
@@ -3667,7 +3667,7 @@
    "identity": "osr003 on osr004",
    "key": "osr003",
    "shape": "osr004",
-   "rows": 467
+   "rows": 463
   },
   {
    "identity": "osr003 on osr005",
@@ -3703,19 +3703,19 @@
    "identity": "osr003 on osr010",
    "key": "osr003",
    "shape": "osr010",
-   "rows": 245
+   "rows": 233
   },
   {
    "identity": "osr003 on osr011",
    "key": "osr003",
    "shape": "osr011",
-   "rows": 241
+   "rows": 242
   },
   {
    "identity": "osr003 on osr012",
    "key": "osr003",
    "shape": "osr012",
-   "rows": 420
+   "rows": 418
   },
   {
    "identity": "osr003 on osr013",
@@ -3727,13 +3727,13 @@
    "identity": "osr003 on osr014",
    "key": "osr003",
    "shape": "osr014",
-   "rows": 326
+   "rows": 325
   },
   {
    "identity": "osr003 on osr015",
    "key": "osr003",
    "shape": "osr015",
-   "rows": 370
+   "rows": 369
   },
   {
    "identity": "osr003 on tiers",
@@ -3769,7 +3769,7 @@
    "identity": "osr004 on osr003",
    "key": "osr004",
    "shape": "osr003",
-   "rows": 392
+   "rows": 393
   },
   {
    "identity": "osr004 on osr005",
@@ -3805,19 +3805,19 @@
    "identity": "osr004 on osr010",
    "key": "osr004",
    "shape": "osr010",
-   "rows": 245
+   "rows": 233
   },
   {
    "identity": "osr004 on osr011",
    "key": "osr004",
    "shape": "osr011",
-   "rows": 241
+   "rows": 242
   },
   {
    "identity": "osr004 on osr012",
    "key": "osr004",
    "shape": "osr012",
-   "rows": 420
+   "rows": 418
   },
   {
    "identity": "osr004 on osr013",
@@ -3829,13 +3829,13 @@
    "identity": "osr004 on osr014",
    "key": "osr004",
    "shape": "osr014",
-   "rows": 326
+   "rows": 325
   },
   {
    "identity": "osr004 on osr015",
    "key": "osr004",
    "shape": "osr015",
-   "rows": 370
+   "rows": 369
   },
   {
    "identity": "osr004 on tiers",
@@ -3847,25 +3847,25 @@
    "identity": "osr004:npc_bakers_5_15 on osr004",
    "key": "osr004:npc_bakers_5_15",
    "shape": "osr004",
-   "rows": 467
+   "rows": 463
   },
   {
    "identity": "osr004:npc_fuller on osr004",
    "key": "osr004:npc_fuller",
    "shape": "osr004",
-   "rows": 467
+   "rows": 463
   },
   {
    "identity": "osr004:npc_tailor_s_guild on osr004",
    "key": "osr004:npc_tailor_s_guild",
    "shape": "osr004",
-   "rows": 467
+   "rows": 463
   },
   {
    "identity": "osr004:npc_weavers_textile_workers on osr004",
    "key": "osr004:npc_weavers_textile_workers",
    "shape": "osr004",
-   "rows": 467
+   "rows": 463
   },
   {
    "identity": "osr005 on distanceMatrix",
@@ -3895,13 +3895,13 @@
    "identity": "osr005 on osr003",
    "key": "osr005",
    "shape": "osr003",
-   "rows": 392
+   "rows": 393
   },
   {
    "identity": "osr005 on osr004",
    "key": "osr005",
    "shape": "osr004",
-   "rows": 467
+   "rows": 463
   },
   {
    "identity": "osr005 on osr006",
@@ -3931,19 +3931,19 @@
    "identity": "osr005 on osr010",
    "key": "osr005",
    "shape": "osr010",
-   "rows": 245
+   "rows": 233
   },
   {
    "identity": "osr005 on osr011",
    "key": "osr005",
    "shape": "osr011",
-   "rows": 241
+   "rows": 242
   },
   {
    "identity": "osr005 on osr012",
    "key": "osr005",
    "shape": "osr012",
-   "rows": 420
+   "rows": 418
   },
   {
    "identity": "osr005 on osr013",
@@ -3955,13 +3955,13 @@
    "identity": "osr005 on osr014",
    "key": "osr005",
    "shape": "osr014",
-   "rows": 326
+   "rows": 325
   },
   {
    "identity": "osr005 on osr015",
    "key": "osr005",
    "shape": "osr015",
-   "rows": 370
+   "rows": 369
   },
   {
    "identity": "osr005 on tiers",
@@ -4021,13 +4021,13 @@
    "identity": "osr006 on osr003",
    "key": "osr006",
    "shape": "osr003",
-   "rows": 392
+   "rows": 393
   },
   {
    "identity": "osr006 on osr004",
    "key": "osr006",
    "shape": "osr004",
-   "rows": 467
+   "rows": 463
   },
   {
    "identity": "osr006 on osr005",
@@ -4057,19 +4057,19 @@
    "identity": "osr006 on osr010",
    "key": "osr006",
    "shape": "osr010",
-   "rows": 245
+   "rows": 233
   },
   {
    "identity": "osr006 on osr011",
    "key": "osr006",
    "shape": "osr011",
-   "rows": 241
+   "rows": 242
   },
   {
    "identity": "osr006 on osr012",
    "key": "osr006",
    "shape": "osr012",
-   "rows": 420
+   "rows": 418
   },
   {
    "identity": "osr006 on osr013",
@@ -4081,13 +4081,13 @@
    "identity": "osr006 on osr014",
    "key": "osr006",
    "shape": "osr014",
-   "rows": 326
+   "rows": 325
   },
   {
    "identity": "osr006 on osr015",
    "key": "osr006",
    "shape": "osr015",
-   "rows": 370
+   "rows": 369
   },
   {
    "identity": "osr006 on tiers",
@@ -4141,13 +4141,13 @@
    "identity": "osr007 on osr003",
    "key": "osr007",
    "shape": "osr003",
-   "rows": 392
+   "rows": 393
   },
   {
    "identity": "osr007 on osr004",
    "key": "osr007",
    "shape": "osr004",
-   "rows": 467
+   "rows": 463
   },
   {
    "identity": "osr007 on osr005",
@@ -4177,19 +4177,19 @@
    "identity": "osr007 on osr010",
    "key": "osr007",
    "shape": "osr010",
-   "rows": 245
+   "rows": 233
   },
   {
    "identity": "osr007 on osr011",
    "key": "osr007",
    "shape": "osr011",
-   "rows": 241
+   "rows": 242
   },
   {
    "identity": "osr007 on osr012",
    "key": "osr007",
    "shape": "osr012",
-   "rows": 420
+   "rows": 418
   },
   {
    "identity": "osr007 on osr013",
@@ -4201,13 +4201,13 @@
    "identity": "osr007 on osr014",
    "key": "osr007",
    "shape": "osr014",
-   "rows": 326
+   "rows": 325
   },
   {
    "identity": "osr007 on osr015",
    "key": "osr007",
    "shape": "osr015",
-   "rows": 370
+   "rows": 369
   },
   {
    "identity": "osr007 on tiers",
@@ -4243,13 +4243,13 @@
    "identity": "osr008 on osr003",
    "key": "osr008",
    "shape": "osr003",
-   "rows": 392
+   "rows": 393
   },
   {
    "identity": "osr008 on osr004",
    "key": "osr008",
    "shape": "osr004",
-   "rows": 467
+   "rows": 463
   },
   {
    "identity": "osr008 on osr005",
@@ -4279,19 +4279,19 @@
    "identity": "osr008 on osr010",
    "key": "osr008",
    "shape": "osr010",
-   "rows": 245
+   "rows": 233
   },
   {
    "identity": "osr008 on osr011",
    "key": "osr008",
    "shape": "osr011",
-   "rows": 241
+   "rows": 242
   },
   {
    "identity": "osr008 on osr012",
    "key": "osr008",
    "shape": "osr012",
-   "rows": 420
+   "rows": 418
   },
   {
    "identity": "osr008 on osr013",
@@ -4303,13 +4303,13 @@
    "identity": "osr008 on osr014",
    "key": "osr008",
    "shape": "osr014",
-   "rows": 326
+   "rows": 325
   },
   {
    "identity": "osr008 on osr015",
    "key": "osr008",
    "shape": "osr015",
-   "rows": 370
+   "rows": 369
   },
   {
    "identity": "osr008 on tiers",
@@ -4369,13 +4369,13 @@
    "identity": "osr009 on osr003",
    "key": "osr009",
    "shape": "osr003",
-   "rows": 392
+   "rows": 393
   },
   {
    "identity": "osr009 on osr004",
    "key": "osr009",
    "shape": "osr004",
-   "rows": 467
+   "rows": 463
   },
   {
    "identity": "osr009 on osr005",
@@ -4405,19 +4405,19 @@
    "identity": "osr009 on osr010",
    "key": "osr009",
    "shape": "osr010",
-   "rows": 245
+   "rows": 233
   },
   {
    "identity": "osr009 on osr011",
    "key": "osr009",
    "shape": "osr011",
-   "rows": 241
+   "rows": 242
   },
   {
    "identity": "osr009 on osr012",
    "key": "osr009",
    "shape": "osr012",
-   "rows": 420
+   "rows": 418
   },
   {
    "identity": "osr009 on osr013",
@@ -4429,13 +4429,13 @@
    "identity": "osr009 on osr014",
    "key": "osr009",
    "shape": "osr014",
-   "rows": 326
+   "rows": 325
   },
   {
    "identity": "osr009 on osr015",
    "key": "osr009",
    "shape": "osr015",
-   "rows": 370
+   "rows": 369
   },
   {
    "identity": "osr009 on tiers",
@@ -4495,13 +4495,13 @@
    "identity": "osr010 on osr003",
    "key": "osr010",
    "shape": "osr003",
-   "rows": 392
+   "rows": 393
   },
   {
    "identity": "osr010 on osr004",
    "key": "osr010",
    "shape": "osr004",
-   "rows": 467
+   "rows": 463
   },
   {
    "identity": "osr010 on osr005",
@@ -4537,13 +4537,13 @@
    "identity": "osr010 on osr011",
    "key": "osr010",
    "shape": "osr011",
-   "rows": 241
+   "rows": 242
   },
   {
    "identity": "osr010 on osr012",
    "key": "osr010",
    "shape": "osr012",
-   "rows": 420
+   "rows": 418
   },
   {
    "identity": "osr010 on osr013",
@@ -4555,13 +4555,13 @@
    "identity": "osr010 on osr014",
    "key": "osr010",
    "shape": "osr014",
-   "rows": 326
+   "rows": 325
   },
   {
    "identity": "osr010 on osr015",
    "key": "osr010",
    "shape": "osr015",
-   "rows": 370
+   "rows": 369
   },
   {
    "identity": "osr010 on tiers",
@@ -4621,13 +4621,13 @@
    "identity": "osr011 on osr003",
    "key": "osr011",
    "shape": "osr003",
-   "rows": 392
+   "rows": 393
   },
   {
    "identity": "osr011 on osr004",
    "key": "osr011",
    "shape": "osr004",
-   "rows": 467
+   "rows": 463
   },
   {
    "identity": "osr011 on osr005",
@@ -4663,13 +4663,13 @@
    "identity": "osr011 on osr010",
    "key": "osr011",
    "shape": "osr010",
-   "rows": 245
+   "rows": 233
   },
   {
    "identity": "osr011 on osr012",
    "key": "osr011",
    "shape": "osr012",
-   "rows": 420
+   "rows": 418
   },
   {
    "identity": "osr011 on osr013",
@@ -4681,13 +4681,13 @@
    "identity": "osr011 on osr014",
    "key": "osr011",
    "shape": "osr014",
-   "rows": 326
+   "rows": 325
   },
   {
    "identity": "osr011 on osr015",
    "key": "osr011",
    "shape": "osr015",
-   "rows": 370
+   "rows": 369
   },
   {
    "identity": "osr011 on tiers",
@@ -4747,13 +4747,13 @@
    "identity": "osr012 on osr003",
    "key": "osr012",
    "shape": "osr003",
-   "rows": 392
+   "rows": 393
   },
   {
    "identity": "osr012 on osr004",
    "key": "osr012",
    "shape": "osr004",
-   "rows": 467
+   "rows": 463
   },
   {
    "identity": "osr012 on osr005",
@@ -4789,13 +4789,13 @@
    "identity": "osr012 on osr010",
    "key": "osr012",
    "shape": "osr010",
-   "rows": 245
+   "rows": 233
   },
   {
    "identity": "osr012 on osr011",
    "key": "osr012",
    "shape": "osr011",
-   "rows": 241
+   "rows": 242
   },
   {
    "identity": "osr012 on osr013",
@@ -4807,13 +4807,13 @@
    "identity": "osr012 on osr014",
    "key": "osr012",
    "shape": "osr014",
-   "rows": 326
+   "rows": 325
   },
   {
    "identity": "osr012 on osr015",
    "key": "osr012",
    "shape": "osr015",
-   "rows": 370
+   "rows": 369
   },
   {
    "identity": "osr012 on tiers",
@@ -4825,19 +4825,19 @@
    "identity": "osr012:npc_cooper on osr012",
    "key": "osr012:npc_cooper",
    "shape": "osr012",
-   "rows": 420
+   "rows": 418
   },
   {
    "identity": "osr012:npc_parish_churches_2_5 on osr012",
    "key": "osr012:npc_parish_churches_2_5",
    "shape": "osr012",
-   "rows": 420
+   "rows": 418
   },
   {
    "identity": "osr012:npc_warden_s_lodge on osr012",
    "key": "osr012:npc_warden_s_lodge",
    "shape": "osr012",
-   "rows": 420
+   "rows": 418
   },
   {
    "identity": "osr013 on distanceMatrix",
@@ -4867,13 +4867,13 @@
    "identity": "osr013 on osr003",
    "key": "osr013",
    "shape": "osr003",
-   "rows": 392
+   "rows": 393
   },
   {
    "identity": "osr013 on osr004",
    "key": "osr013",
    "shape": "osr004",
-   "rows": 467
+   "rows": 463
   },
   {
    "identity": "osr013 on osr005",
@@ -4909,31 +4909,31 @@
    "identity": "osr013 on osr010",
    "key": "osr013",
    "shape": "osr010",
-   "rows": 245
+   "rows": 233
   },
   {
    "identity": "osr013 on osr011",
    "key": "osr013",
    "shape": "osr011",
-   "rows": 241
+   "rows": 242
   },
   {
    "identity": "osr013 on osr012",
    "key": "osr013",
    "shape": "osr012",
-   "rows": 420
+   "rows": 418
   },
   {
    "identity": "osr013 on osr014",
    "key": "osr013",
    "shape": "osr014",
-   "rows": 326
+   "rows": 325
   },
   {
    "identity": "osr013 on osr015",
    "key": "osr013",
    "shape": "osr015",
-   "rows": 370
+   "rows": 369
   },
   {
    "identity": "osr013 on tiers",
@@ -4969,13 +4969,13 @@
    "identity": "osr014 on osr003",
    "key": "osr014",
    "shape": "osr003",
-   "rows": 392
+   "rows": 393
   },
   {
    "identity": "osr014 on osr004",
    "key": "osr014",
    "shape": "osr004",
-   "rows": 467
+   "rows": 463
   },
   {
    "identity": "osr014 on osr005",
@@ -5011,19 +5011,19 @@
    "identity": "osr014 on osr010",
    "key": "osr014",
    "shape": "osr010",
-   "rows": 245
+   "rows": 233
   },
   {
    "identity": "osr014 on osr011",
    "key": "osr014",
    "shape": "osr011",
-   "rows": 241
+   "rows": 242
   },
   {
    "identity": "osr014 on osr012",
    "key": "osr014",
    "shape": "osr012",
-   "rows": 420
+   "rows": 418
   },
   {
    "identity": "osr014 on osr013",
@@ -5035,7 +5035,7 @@
    "identity": "osr014 on osr015",
    "key": "osr014",
    "shape": "osr015",
-   "rows": 370
+   "rows": 369
   },
   {
    "identity": "osr014 on tiers",
@@ -5047,7 +5047,7 @@
    "identity": "osr014:npc_tailor_s_guild on osr014",
    "key": "osr014:npc_tailor_s_guild",
    "shape": "osr014",
-   "rows": 326
+   "rows": 325
   },
   {
    "identity": "osr015 on distanceMatrix",
@@ -5077,13 +5077,13 @@
    "identity": "osr015 on osr003",
    "key": "osr015",
    "shape": "osr003",
-   "rows": 392
+   "rows": 393
   },
   {
    "identity": "osr015 on osr004",
    "key": "osr015",
    "shape": "osr004",
-   "rows": 467
+   "rows": 463
   },
   {
    "identity": "osr015 on osr005",
@@ -5119,19 +5119,19 @@
    "identity": "osr015 on osr010",
    "key": "osr015",
    "shape": "osr010",
-   "rows": 245
+   "rows": 233
   },
   {
    "identity": "osr015 on osr011",
    "key": "osr015",
    "shape": "osr011",
-   "rows": 241
+   "rows": 242
   },
   {
    "identity": "osr015 on osr012",
    "key": "osr015",
    "shape": "osr012",
-   "rows": 420
+   "rows": 418
   },
   {
    "identity": "osr015 on osr013",
@@ -5143,7 +5143,7 @@
    "identity": "osr015 on osr014",
    "key": "osr015",
    "shape": "osr014",
-   "rows": 326
+   "rows": 325
   },
   {
    "identity": "osr015 on tiers",
@@ -5173,13 +5173,13 @@
    "identity": "ownerKind on osr003",
    "key": "ownerKind",
    "shape": "osr003",
-   "rows": 392
+   "rows": 393
   },
   {
    "identity": "ownerKind on osr004",
    "key": "ownerKind",
    "shape": "osr004",
-   "rows": 467
+   "rows": 463
   },
   {
    "identity": "ownerKind on osr005",
@@ -5215,19 +5215,19 @@
    "identity": "ownerKind on osr010",
    "key": "ownerKind",
    "shape": "osr010",
-   "rows": 245
+   "rows": 233
   },
   {
    "identity": "ownerKind on osr011",
    "key": "ownerKind",
    "shape": "osr011",
-   "rows": 241
+   "rows": 242
   },
   {
    "identity": "ownerKind on osr012",
    "key": "ownerKind",
    "shape": "osr012",
-   "rows": 420
+   "rows": 418
   },
   {
    "identity": "ownerKind on osr013",
@@ -5239,13 +5239,13 @@
    "identity": "ownerKind on osr014",
    "key": "ownerKind",
    "shape": "osr014",
-   "rows": 326
+   "rows": 325
   },
   {
    "identity": "ownerKind on osr015",
    "key": "ownerKind",
    "shape": "osr015",
-   "rows": 370
+   "rows": 369
   },
   {
    "identity": "ownerKind on traditions",
@@ -5827,13 +5827,13 @@
    "identity": "rebirths on osr003",
    "key": "rebirths",
    "shape": "osr003",
-   "rows": 392
+   "rows": 393
   },
   {
    "identity": "rebirths on osr004",
    "key": "rebirths",
    "shape": "osr004",
-   "rows": 467
+   "rows": 463
   },
   {
    "identity": "rebirths on osr005",
@@ -5869,19 +5869,19 @@
    "identity": "rebirths on osr010",
    "key": "rebirths",
    "shape": "osr010",
-   "rows": 245
+   "rows": 233
   },
   {
    "identity": "rebirths on osr011",
    "key": "rebirths",
    "shape": "osr011",
-   "rows": 241
+   "rows": 242
   },
   {
    "identity": "rebirths on osr012",
    "key": "rebirths",
    "shape": "osr012",
-   "rows": 420
+   "rows": 418
   },
   {
    "identity": "rebirths on osr013",
@@ -5893,13 +5893,13 @@
    "identity": "rebirths on osr014",
    "key": "rebirths",
    "shape": "osr014",
-   "rows": 326
+   "rows": 325
   },
   {
    "identity": "rebirths on osr015",
    "key": "rebirths",
    "shape": "osr015",
-   "rows": 370
+   "rows": 369
   },
   {
    "identity": "rebirths on urbanFabric",
@@ -5971,7 +5971,7 @@
    "identity": "religious_authorities on leaderNpcIds",
    "key": "religious_authorities",
    "shape": "leaderNpcIds",
-   "rows": 1274
+   "rows": 1280
   },
   {
    "identity": "renewability on metadata",
@@ -6097,13 +6097,13 @@
    "identity": "resourceDynamics on osr003",
    "key": "resourceDynamics",
    "shape": "osr003",
-   "rows": 392
+   "rows": 393
   },
   {
    "identity": "resourceDynamics on osr004",
    "key": "resourceDynamics",
    "shape": "osr004",
-   "rows": 467
+   "rows": 463
   },
   {
    "identity": "resourceDynamics on osr005",
@@ -6139,19 +6139,19 @@
    "identity": "resourceDynamics on osr010",
    "key": "resourceDynamics",
    "shape": "osr010",
-   "rows": 245
+   "rows": 233
   },
   {
    "identity": "resourceDynamics on osr011",
    "key": "resourceDynamics",
    "shape": "osr011",
-   "rows": 241
+   "rows": 242
   },
   {
    "identity": "resourceDynamics on osr012",
    "key": "resourceDynamics",
    "shape": "osr012",
-   "rows": 420
+   "rows": 418
   },
   {
    "identity": "resourceDynamics on osr013",
@@ -6163,13 +6163,13 @@
    "identity": "resourceDynamics on osr014",
    "key": "resourceDynamics",
    "shape": "osr014",
-   "rows": 326
+   "rows": 325
   },
   {
    "identity": "resourceDynamics on osr015",
    "key": "resourceDynamics",
    "shape": "osr015",
-   "rows": 370
+   "rows": 369
   },
   {
    "identity": "resourceDynamics on settlementTickStates",
@@ -6271,13 +6271,13 @@
    "identity": "scars on osr003",
    "key": "scars",
    "shape": "osr003",
-   "rows": 392
+   "rows": 393
   },
   {
    "identity": "scars on osr004",
    "key": "scars",
    "shape": "osr004",
-   "rows": 467
+   "rows": 463
   },
   {
    "identity": "scars on osr005",
@@ -6313,19 +6313,19 @@
    "identity": "scars on osr010",
    "key": "scars",
    "shape": "osr010",
-   "rows": 245
+   "rows": 233
   },
   {
    "identity": "scars on osr011",
    "key": "scars",
    "shape": "osr011",
-   "rows": 241
+   "rows": 242
   },
   {
    "identity": "scars on osr012",
    "key": "scars",
    "shape": "osr012",
-   "rows": 420
+   "rows": 418
   },
   {
    "identity": "scars on osr013",
@@ -6337,13 +6337,13 @@
    "identity": "scars on osr014",
    "key": "scars",
    "shape": "osr014",
-   "rows": 326
+   "rows": 325
   },
   {
    "identity": "scars on osr015",
    "key": "scars",
    "shape": "osr015",
-   "rows": 370
+   "rows": 369
   },
   {
    "identity": "scars on urbanFabric",
@@ -6385,13 +6385,13 @@
    "identity": "seenTick on osr003",
    "key": "seenTick",
    "shape": "osr003",
-   "rows": 392
+   "rows": 393
   },
   {
    "identity": "seenTick on osr004",
    "key": "seenTick",
    "shape": "osr004",
-   "rows": 467
+   "rows": 463
   },
   {
    "identity": "seenTick on osr005",
@@ -6427,19 +6427,19 @@
    "identity": "seenTick on osr010",
    "key": "seenTick",
    "shape": "osr010",
-   "rows": 245
+   "rows": 233
   },
   {
    "identity": "seenTick on osr011",
    "key": "seenTick",
    "shape": "osr011",
-   "rows": 241
+   "rows": 242
   },
   {
    "identity": "seenTick on osr012",
    "key": "seenTick",
    "shape": "osr012",
-   "rows": 420
+   "rows": 418
   },
   {
    "identity": "seenTick on osr013",
@@ -6451,13 +6451,13 @@
    "identity": "seenTick on osr014",
    "key": "seenTick",
    "shape": "osr014",
-   "rows": 326
+   "rows": 325
   },
   {
    "identity": "seenTick on osr015",
    "key": "seenTick",
    "shape": "osr015",
-   "rows": 370
+   "rows": 369
   },
   {
    "identity": "seenTick on urbanFabric",
@@ -6625,13 +6625,13 @@
    "identity": "stocks on osr003",
    "key": "stocks",
    "shape": "osr003",
-   "rows": 392
+   "rows": 393
   },
   {
    "identity": "stocks on osr004",
    "key": "stocks",
    "shape": "osr004",
-   "rows": 467
+   "rows": 463
   },
   {
    "identity": "stocks on osr005",
@@ -6667,19 +6667,19 @@
    "identity": "stocks on osr010",
    "key": "stocks",
    "shape": "osr010",
-   "rows": 245
+   "rows": 233
   },
   {
    "identity": "stocks on osr011",
    "key": "stocks",
    "shape": "osr011",
-   "rows": 241
+   "rows": 242
   },
   {
    "identity": "stocks on osr012",
    "key": "stocks",
    "shape": "osr012",
-   "rows": 420
+   "rows": 418
   },
   {
    "identity": "stocks on osr013",
@@ -6691,13 +6691,13 @@
    "identity": "stocks on osr014",
    "key": "stocks",
    "shape": "osr014",
-   "rows": 326
+   "rows": 325
   },
   {
    "identity": "stocks on osr015",
    "key": "stocks",
    "shape": "osr015",
-   "rows": 370
+   "rows": 369
   },
   {
    "identity": "stocks on urbanFabric",
@@ -6715,7 +6715,7 @@
    "identity": "stone on osr004",
    "key": "stone",
    "shape": "osr004",
-   "rows": 467
+   "rows": 463
   },
   {
    "identity": "stone on osr005",
@@ -6859,13 +6859,13 @@
    "identity": "textiles on osr014",
    "key": "textiles",
    "shape": "osr014",
-   "rows": 326
+   "rows": 325
   },
   {
    "identity": "textiles on osr015",
    "key": "textiles",
    "shape": "osr015",
-   "rows": 370
+   "rows": 369
   },
   {
    "identity": "theocraticEconomy on flags",
@@ -6895,7 +6895,7 @@
    "identity": "thieves_guild on leaderNpcIds",
    "key": "thieves_guild",
    "shape": "leaderNpcIds",
-   "rows": 1274
+   "rows": 1280
   },
   {
    "identity": "throughput on osr002",
@@ -6937,13 +6937,13 @@
    "identity": "tierDrift on osr003",
    "key": "tierDrift",
    "shape": "osr003",
-   "rows": 392
+   "rows": 393
   },
   {
    "identity": "tierDrift on osr004",
    "key": "tierDrift",
    "shape": "osr004",
-   "rows": 467
+   "rows": 463
   },
   {
    "identity": "tierDrift on osr005",
@@ -6979,19 +6979,19 @@
    "identity": "tierDrift on osr010",
    "key": "tierDrift",
    "shape": "osr010",
-   "rows": 245
+   "rows": 233
   },
   {
    "identity": "tierDrift on osr011",
    "key": "tierDrift",
    "shape": "osr011",
-   "rows": 241
+   "rows": 242
   },
   {
    "identity": "tierDrift on osr012",
    "key": "tierDrift",
    "shape": "osr012",
-   "rows": 420
+   "rows": 418
   },
   {
    "identity": "tierDrift on osr013",
@@ -7003,13 +7003,13 @@
    "identity": "tierDrift on osr014",
    "key": "tierDrift",
    "shape": "osr014",
-   "rows": 326
+   "rows": 325
   },
   {
    "identity": "tierDrift on osr015",
    "key": "tierDrift",
    "shape": "osr015",
-   "rows": 370
+   "rows": 369
   },
   {
    "identity": "tierDrift on settlementTickStates",
@@ -7039,7 +7039,7 @@
    "identity": "timber on osr004",
    "key": "timber",
    "shape": "osr004",
-   "rows": 467
+   "rows": 463
   },
   {
    "identity": "timber on osr005",
@@ -7069,7 +7069,7 @@
    "identity": "timber on osr014",
    "key": "timber",
    "shape": "osr014",
-   "rows": 326
+   "rows": 325
   },
   {
    "identity": "timber on reasons",
@@ -7123,7 +7123,7 @@
    "identity": "town_council on leaderNpcIds",
    "key": "town_council",
    "shape": "leaderNpcIds",
-   "rows": 1274
+   "rows": 1280
   },
   {
    "identity": "trappedBySiege on missions",
@@ -9221,7 +9221,7 @@
   "socialTexture on culturalIdentity": "dossier-pdf=N web-display=R web-transitive=N",
   "sourceKeys on culturalIdentity": "dossier-pdf=R foundry=R web-display=R",
   "description on currentTensions": "campaign-pdf=R dossier-pdf=R foundry=R news=N web-display=R web-transitive=R world-book=R",
-  "factions on currentTensions": "campaign-pdf=N dossier-pdf=R foundry=R news=N web-display=R web-transitive=N world-book=N",
+  "factions on currentTensions": "campaign-pdf=R dossier-pdf=R foundry=R news=N web-display=R web-transitive=R world-book=R",
   "lastingEffects on currentTensions": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "plotHooks on currentTensions": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
   "severity on currentTensions": "campaign-pdf=N dossier-pdf=R foundry=R news=N web-display=R web-transitive=N world-book=N",
@@ -9682,7 +9682,7 @@
   "anchored on historicalEvents": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
   "description on historicalEvents": "campaign-pdf=N dossier-pdf=R foundry=R news=R web-display=R web-transitive=R world-book=N",
   "lastingEffects on historicalEvents": "dossier-pdf=R foundry=R web-display=R web-transitive=R",
-  "name on historicalEvents": "campaign-pdf=N dossier-pdf=R foundry=R json-export=N news=R web-display=R web-transitive=R world-book=N",
+  "name on historicalEvents": "campaign-pdf=R dossier-pdf=R foundry=R json-export=N news=R web-display=R web-transitive=R world-book=R",
   "plotHooks on historicalEvents": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
   "severity on historicalEvents": "campaign-pdf=N dossier-pdf=R foundry=R news=N web-display=R web-transitive=R world-book=N",
   "templateType on historicalEvents": "",
