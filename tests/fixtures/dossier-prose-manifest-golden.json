@@ -11,7 +11,7 @@
       "scripts/prose-rate-corpus.mjs": "9d5d9f6ddfa7a6933fa2ec6a8e949066aacffad0d614caf22bb51e6efe39a399"
     },
     "rows": 1050,
-    "rowsSha": "cac1619174a8e1639757461532c40e9176303764d0bd402e1dcf37b088425260"
+    "rowsSha": "1c4c403b8a7ef810d5368005631d3572317a9d49931104fe7991dfea87f6d2d2"
   },
   "rows": {
     "city|arabic|coastal|port|civilized|golden-master-v3::dm": "035931885ce3614f56871f963f0c674c2a688f3f93f6b04c027897ddc1277771",
@@ -732,8 +732,8 @@
     "town|germanic|auto|random_trade|civilized|gm-seed-a::player": "e093a94c3f3636b18fad8944e69b6ea2a4415a89f6ebb9075fad25c831f12b8d",
     "town|germanic|auto|random_trade|civilized|gm-seed-b::dm": "fcb4af4576cd441fb8dda781c70d51b6c316df98b9d0703bb8d75dc1001ed5d8",
     "town|germanic|auto|random_trade|civilized|gm-seed-b::player": "29b0faae098a840a3b4c4b8b7493898c4d27bee50fdfc8f892f2a6af1fc432a3",
-    "town|germanic|auto|random_trade|civilized|gm-seed-c::dm": "2813ec49e847e7ff970533956cba4a9ff73feecd9f66840fc7293af80cc1250a",
-    "town|germanic|auto|random_trade|civilized|gm-seed-c::player": "a8c28aa13f64fffb26b05b443b99145c07af202f89e4b839af3c6284ab0b0f38",
+    "town|germanic|auto|random_trade|civilized|gm-seed-c::dm": "24a9e16b8968934e7e92ad9b754654791f68b4c84cfb5c668c6428a79033cb7a",
+    "town|germanic|auto|random_trade|civilized|gm-seed-c::player": "60f9aecea8623355ef612fbbf9296f232d8eb34eaf3df8af6b1a43ff31fa7220",
     "town|germanic|auto|random_trade|civilized|golden-master-v3::dm": "56ed7ccb77b96e7e3746aa1bf064b01e327030b348f7ce50b8b650e0119e7fa9",
     "town|germanic|auto|random_trade|civilized|golden-master-v3::player": "e5a1e8a66539cd2fb4dea1477d7806ed4cab250d035f3606103163ccec48f0fa",
     "town|germanic|coastal|port|civilized|golden-master-v3::dm": "0998ae795670e364ab4ee5b1bb51e0d554508a9b6272cbc52076d23491eb06f0",
@@ -750,8 +750,8 @@
     "town|germanic|mountain|random_trade|civilized|gm-seed-a::player": "badbafa2d560768fb9a5497d3c86aac605e917a970085338c6c246e34d62ce09",
     "town|germanic|mountain|random_trade|civilized|gm-seed-b::dm": "d6f2dfe3609df0c9fe6f84ca0b98e3c3a5ebba007865a8ec0f269cf5c519564a",
     "town|germanic|mountain|random_trade|civilized|gm-seed-b::player": "d066078cac6a45d48a23aec15036a935b39866f4fb47f6da962548e250d79038",
-    "town|germanic|mountain|random_trade|civilized|gm-seed-c::dm": "a67cdd7996cc6a6e9959e4a6ddbeb801584f4aedc2039a0af883db20dc04a348",
-    "town|germanic|mountain|random_trade|civilized|gm-seed-c::player": "2762fad58d1fa1197b423ee53730a04f13c52efd0fc1d2abd09aca18f1f90505",
+    "town|germanic|mountain|random_trade|civilized|gm-seed-c::dm": "f53bc40624044bdbd03db1c030918d5a6e00ee3915c55c6f3139974dca07efd2",
+    "town|germanic|mountain|random_trade|civilized|gm-seed-c::player": "6065078015b807b43a72b4a33f896aaa32f51d1805c93625f2f478b88c40c043",
     "town|germanic|mountain|random_trade|civilized|golden-master-v3::dm": "3721d85c9e77b60f22e0e59f398e17d7de53ed3af866efb20d7d64c432d3c6d8",
     "town|germanic|mountain|random_trade|civilized|golden-master-v3::player": "9098185a5a6798b96d102f24e66862f90b9861e6a612a9d2072a5753189910b1",
     "town|germanic|mountain|road|civilized|golden-master-v3::dm": "8374931cbbc302c6aee997a0c6908628de5fe85738406785fe99084cd2bafc10",
@@ -772,8 +772,8 @@
     "town|germanic|plains|road|civilized|gm-seed-a::player": "768b338aa3beb35c19224a74d28c08dc6a2a7097141c5c7805a67be9c55fc1a2",
     "town|germanic|plains|road|civilized|gm-seed-b::dm": "9f3f83a6b6255e3272495ee9b7426479229f64008cc17c69d72a350c4f222ae7",
     "town|germanic|plains|road|civilized|gm-seed-b::player": "78c113141e69682033076d64afe7d8d61b7c187ba23bde93b5bb8626ddb739de",
-    "town|germanic|plains|road|civilized|gm-seed-c::dm": "91c41778e4f1fb26e464aa441d0f58d20a2d4d9821d17703e5a9954055fc9bbf",
-    "town|germanic|plains|road|civilized|gm-seed-c::player": "aaad7481c904f0ce650bb133079c93a0b7da2bbbaa1b4e2b2869e58e1b04a30b",
+    "town|germanic|plains|road|civilized|gm-seed-c::dm": "b55b83139439afb06f9f3ba09180bb3c905224ef5f5c195a97e3fe24763f0b05",
+    "town|germanic|plains|road|civilized|gm-seed-c::player": "5c84ddd3e06a3a2ceca13bf561447a698ef5add1d7a3fa582b75a150cc910fc0",
     "town|germanic|plains|road|civilized|golden-master-v3::dm": "2f7478cf5c09712fd8cf69c8d204c7e021f025157622e4ee046e4d9ff2d49219",
     "town|germanic|plains|road|civilized|golden-master-v3::player": "3a8a58996c2ba628562b59b5199fe58ae54191af0630aff30b850d7939683f64",
     "town|germanic|plains|road|frontier|golden-master-v3::dm": "cd7bfd47bc6e467c3ccdf0c7a0c12ae108d97d5bd81411402440936f83c20508",
