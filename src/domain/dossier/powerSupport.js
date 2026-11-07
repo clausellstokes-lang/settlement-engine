@@ -47,7 +47,7 @@
  * reads before letting the catalogue feed the power figures) are all read off it.
  */
 
-import { institutionBackingFactionName } from '../display/institutionProfile.js';
+import { institutionBackingFactionName } from '../display/institutionBackingFaction.js';
 import { factionArchetype, FACTION_ARCHETYPES as A } from '../factionArchetypes.js';
 import { governingFactionOf, nameOf } from '../rulingPower.js';
 import { walkUserEdits } from '../userEdits.js';
