@@ -695,21 +695,29 @@ export function discoverTables(root, register = null, sourceOf = makeSourceCache
       }
       if (!exportName) continue;
 
+      const id = tuningIdFor(file, exportName);
+      // A scalar roster home (`export const CAUSAL_SWING = 20;`) is not a failure — it is
+      // a one-leaf table, and refusing it would push a real dial out of the register.
+      // ⛔ IT IS READ BEFORE THE SPAN MACHINE, NOT AFTER IT FAILS. `tableSpan` searches for the
+      // first `{` or `[` after the `=` ANYWHERE in the rest of the file, so a scalar whose next
+      // declaration is `Object.freeze({`/`([` read as THAT table: its `;` and the next line's head
+      // sit between, the head test matches `Object.freeze(` at the end, and the scalar measured
+      // its neighbour's keys, leaves and digest. MEASURED 2026-11-07 (LANDING-R2 seat I) on the
+      // first two such homes: foodGenerator.js#FAMINE_MONTHS_RUN = 12 read as FAMINE_DRAWDOWN's
+      // four keys, tonightSheet.js#WANT_MAX_WORDS = 18 as ABSTRACT_LEAD_VERBS' array. Every
+      // scalar home measured before then sat before no frozen table and reads identically.
+      const scalar = /^\s*(export\s+)?const\s+[A-Za-z0-9_]+\s*=\s*(-?\d+(?:\.\d+)?)\s*;/.exec(line);
+      if (scalar) {
+        tables.push({
+          id, file, export: exportName, exported, idiom: 'literal', keys: 1, line: i + 1,
+          spanText: line, spanStart: lineOffsets[i], spanDigest: spanDigest(line), leaves: { value: Number(scalar[2]) },
+          wrapper: 'scalar', lineSpan: 1,
+        });
+        continue;
+      }
       const from = lines.slice(i).join('\n');
       const span = tableSpan(from);
-      const id = tuningIdFor(file, exportName);
       if (!span.ok) {
-        // A scalar roster home (`export const CAUSAL_SWING = 20;`) is not a failure — it is
-        // a one-leaf table, and refusing it would push a real dial out of the register.
-        const scalar = /^\s*(export\s+)?const\s+[A-Za-z0-9_]+\s*=\s*(-?\d+(?:\.\d+)?)\s*;/.exec(line);
-        if (scalar) {
-          tables.push({
-            id, file, export: exportName, exported, idiom: 'literal', keys: 1, line: i + 1,
-            spanText: line, spanStart: lineOffsets[i], spanDigest: spanDigest(line), leaves: { value: Number(scalar[2]) },
-            wrapper: 'scalar', lineSpan: 1,
-          });
-          continue;
-        }
         unclosed.push({ id, residue: span.residue });
         continue;
       }

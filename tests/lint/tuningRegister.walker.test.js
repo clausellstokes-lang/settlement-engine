@@ -235,6 +235,22 @@ describe('tuning register — the detectors are honest', () => {
       + ' every consumer that parses it reads the whole estate as unparseable').toBe(true);
   });
 
+  test('a scalar roster home followed by a frozen table reads as its own one leaf', () => {
+    // MEASURED 2026-11-07 (LANDING-R2 seat I): the span machine looks for the first `{`/`[`
+    // after the `=` anywhere below, so a scalar sitting above `Object.freeze({` read as that
+    // table. foodGenerator.js#FAMINE_MONTHS_RUN and tonightSheet.js#WANT_MAX_WORDS were the first.
+    const source = 'export const SCALAR_DIAL = 12;\nexport const NEXT_TABLE = Object.freeze({\n  A: 1,\n  B: 2,\n});\n';
+    inTempTree({ 'src/domain/probe.js': source }, (dir) => {
+      const register = { homes: [{ kind: 'tables', file: 'src/domain/probe.js', exports: ['SCALAR_DIAL', 'NEXT_TABLE'] }] };
+      const { tables } = discoverTables(dir, register);
+      const scalar = tables.find((t) => t.export === 'SCALAR_DIAL');
+      expect(scalar.leaves, 'the scalar is its own one leaf, never its neighbour\'s keys').toEqual({ value: 12 });
+      expect(scalar.keys).toBe(1);
+      // anchored: the neighbour itself still spans to its own two keys through the same call.
+      expect(tables.find((t) => t.export === 'NEXT_TABLE').leaves).toEqual({ A: 1, B: 2 });
+    });
+  });
+
   test('a shorthand aggregator leaf resolves one hop to its module const', () => {
     const span = tableSpan(FIXTURE_AGGREGATOR.split('\n').slice(1).join('\n'));
     const { leaves, idiom } = flattenLeaves(span.spanText);
