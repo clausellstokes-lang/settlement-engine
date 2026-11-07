@@ -413,8 +413,12 @@ describe('EM-B2b — world facts by consequence: the route, the refusals and the
     // docs/shift-records/2026-11-06-rung1-34-food-per-cent-from-pounds.json), through the signed door by LANDING-8 from
     // the stage at 18fd6b442: the generator master 26a02855.. -> e7e8a6ff.. (77 of 525 rows); restated in the same act.
     // The same record's second act: the prose manifest d43a3ae2.. -> 777e4b4b.. (24 of 1,050 rows, village|*|coastal|port).
+    // Then rung 2, THE POOL CENSUS COMPOSED (ODQ §934.105; docs/shift-records/2026-11-06-rung2-01-census-composed-generator-master.json,
+    // 33 causes with their own-lineage rows inside, a ruled exception to one-cause-per-record — the chair, 2026-11-07),
+    // through the signed door at the rung-2 landing's tip by LANDING-R2: the generator master e7e8a6ff.. -> d1429bcc..
+    // (525 of 525 rows); restated in the same act.
     expect(shaOfFile(GOLDEN), 'tests/fixtures/generator-golden-master.json moved')
-      .toBe('e7e8a6ff2cec9ab63bf363335c2ea3563c9f984dfaddd32a643dcc1bda60b457');
+      .toBe('d1429bcc228d3dfb3f394c9745ae23313a6f7143cd73f8271fb74b5c894adc5a');
     expect(shaOfFile(PROSE_GOLDEN), 'tests/fixtures/dossier-prose-manifest-golden.json moved')
       .toBe('777e4b4b2968fab6b02a758435c7dcc8c779753942aeab77c4ae8c261e6d990e');
 
