@@ -5499,7 +5499,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "band adequate": [
         {
           "angle": "ledger",
-          "text": "What {settlement} can field today matches what the town needs today, with the margin that implies and no more.",
+          "text": "{settlement}'s duty list covers what the town needs today and little more, so one more demand would leave a post empty.",
           "slots": [
             "settlement"
           ],
@@ -5515,7 +5515,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "counterforce",
-          "text": "Nothing has had to be set aside at {settlement} to keep the line manned, which is the only real test of whether a defense is affordable.",
+          "text": "{settlement} keeps its line manned without taking hands from the fields or coin from anything else.",
           "slots": [
             "settlement"
           ],
@@ -5533,7 +5533,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "The strain at {settlement} is being carried rather than relieved, and carrying it is what is producing the next season's shortfall.",
+          "text": "{settlement} is carrying the strain on its defence, not easing it, and next season will pay for it.",
           "slots": [
             "settlement"
           ],
@@ -5541,13 +5541,15 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "The town is managing, and everybody involved in the managing knows precisely how thin it is.",
-          "slots": [],
+          "text": "{settlement} is managing its defence, but only just, and the people doing the managing know how thin it is.",
+          "slots": [
+            "settlement"
+          ],
           "vid": 3
         },
         {
           "angle": "threshold",
-          "text": "{settlement} is at the point where holding the line and running the town have become the same budget, and each further call on one is taken from the other.",
+          "text": "At {settlement} every hand in the line is a hand missing from the fields and workshops, and each new demand on one is taken from the other.",
           "slots": [
             "settlement"
           ],
@@ -5565,7 +5567,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "One more call on {settlement}'s defense and there will be nothing to answer it with; the town has reached the point of hoping rather than planning.",
+          "text": "One more call on {settlement}'s defence and there will be nobody to answer it.",
           "slots": [
             "settlement"
           ],
@@ -5583,7 +5585,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "band collapsed": [
         {
           "angle": "ledger",
-          "text": "{settlement} can no longer field a defense. The arrangements exist on the rolls and do not exist in the town.",
+          "text": "{settlement}'s muster lists still carry the names, but the people are gone: the town can no longer field a defence.",
           "slots": [
             "settlement"
           ],
@@ -5599,7 +5601,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "A stranger at {settlement} finds the posts unmanned and the muster books current, and the gap between the two is the whole of the town's condition.",
+          "text": "You find {settlement}'s posts empty while its muster books are kept up to date.",
           "slots": [
             "settlement"
           ],
@@ -5617,7 +5619,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "A stranger sees serious defenses at {settlement} and very few defenders, and is right to read the gap as recent.",
+          "text": "You see serious defences at {settlement} and very few defenders: the works are kept up and the posts are empty, and it has not been so for long.",
           "slots": [
             "settlement"
           ],
@@ -5625,7 +5627,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "The distance between what {settlement} has and what {settlement} can use is widening, and the works do not narrow it by standing there.",
+          "text": "{settlement}'s works are as good as ever, and each season there are fewer people to hold them.",
           "slots": [
             "settlement"
           ],
@@ -5643,8 +5645,10 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "The town has put more into the line than it was ever set up to, and the arrangement is temporary in a way nobody has named yet.",
-          "slots": [],
+          "text": "{settlement} has put more people in its line than it was ever built for, and everyone knows it cannot keep them there long.",
+          "slots": [
+            "settlement"
+          ],
           "vid": 2
         },
         {
@@ -5662,7 +5666,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "What {settlement} has lost from its readiness it has lost to {reason}, and the loss is entered rather than inferred.",
+          "text": "{settlement}'s muster lists show what {reason} has cost the town: fewer names fit to stand, and nobody to replace them.",
           "slots": [
             "settlement",
             "reason"
@@ -5674,7 +5678,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "{reason} is still taking from what {settlement} can field, season on season, and nothing in hand has been set against it.",
+          "text": "{reason} is still costing {settlement} defenders each season, and nothing is being done about it.",
           "slots": [
             "reason",
             "settlement"
@@ -5699,7 +5703,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "{settlement}'s readiness stands where it does because of {reason}; take that away and the town's line is a different arrangement entirely.",
+          "text": "{settlement}'s muster lists are fuller because of {reason}; take that away and the line would be thinly held.",
           "slots": [
             "settlement",
             "reason"
@@ -5720,10 +5724,10 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "walls"
           ],
-          "text": "{settlement} would be thinner on the walls without {reason}, and the difference is entered rather than assumed.",
+          "text": "Without {reason}, {settlement} would have fewer people on its walls.",
           "slots": [
-            "settlement",
-            "reason"
+            "reason",
+            "settlement"
           ],
           "vid": 3
         }
@@ -5758,7 +5762,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "Nobody reaches {settlement} at present. What can be seen of the town is seen from outside a line that is not the town's own.",
+          "text": "Nobody can reach {settlement} now; you can see the town only from behind the besiegers' lines.",
           "slots": [
             "settlement"
           ],
@@ -5792,7 +5796,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "walls"
           ],
-          "text": "What {settlement} is spending on {counterpart} it is spending out of its own walls; the campaign is being paid for in the town's own readiness.",
+          "text": "What {settlement} sends against {counterpart} it takes from its own walls, and fewer guard home while the campaign lasts.",
           "slots": [
             "settlement",
             "counterpart"

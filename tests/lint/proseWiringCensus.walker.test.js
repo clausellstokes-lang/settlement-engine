@@ -698,8 +698,8 @@ describe('THE MAP READ THE OTHER WAY — fact → text, and the three tiers', ()
     // || the raw sequence)` per pool. The counts are recomputed FRESH from the live modules
     // here, which is why they move with the classifier rather than with the committed JSON.
     expect(counts.get(TIERS.MISSING), 'held facts with no pool keyed on them').toBe(32); // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 33 -> 32
-    expect(counts.get(TIERS.THIN), 'pools with one variant, one grammar, or {settlement} alone').toBe(539); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 484 -> 488 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 488 -> 491 // W2 DEF C8/C10 (DS-DEF-5 ARCANE pools, 2026-11-07): 491 -> 497 // W2 DEF C3–C5 (DS-DEF-12, 2026-11-07): 497 -> 502 // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 502 -> 506 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 506 -> 539
-    expect(counts.get(TIERS.COVERED), 'and the rest').toBe(227);
+    expect(counts.get(TIERS.THIN), 'pools with one variant, one grammar, or {settlement} alone').toBe(540); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 484 -> 488 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 488 -> 491 // W2 DEF C8/C10 (DS-DEF-5 ARCANE pools, 2026-11-07): 491 -> 497 // W2 DEF C3–C5 (DS-DEF-12, 2026-11-07): 497 -> 502 // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 502 -> 506 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 506 -> 539 // W2 DEF fourth seat (DS-DEF-7 style rows, 2026-11-07): 539 -> 540 (DS-DEF-7's plain rewrites share one move order across a pool)
+    expect(counts.get(TIERS.COVERED), 'and the rest').toBe(226); // W2 DEF fourth seat (DS-DEF-7 style rows, 2026-11-07): 227 -> 226 (the one pool that moved to THIN)
     expect(counts.get(TIERS.THIN) + counts.get(TIERS.COVERED), 'every pool lands in one of the two pool tiers')
       .toBe(spines.length);
     for (const row of tiers) {

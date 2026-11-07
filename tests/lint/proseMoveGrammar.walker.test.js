@@ -118,10 +118,10 @@ describe('the four negative controls and the positive one (MOVE-GRAMMAR §4.4, a
     // longer uniform; its opener ("it is") is new to the pool (the ruled "{settlement} is …" repeated
     // v2's opener and read 115, so the line opens "It is a good stretch for {settlement}").
     expect(uniformSegments).toBe(479); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 406 -> 412 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 412 -> 416 // W2 DEF C8/C10 (DS-DEF-5 ARCANE pools, 2026-11-07): 416 -> 422 // W2 DEF C3–C5 (DS-DEF-12, 2026-11-07): 422 -> 427 (the five DS-DEF-12 pools uniform) // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 427 -> 431 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 431 -> 469 // W2 DEF fourth seat (DS-DEF-1 style rows, 2026-11-07): 469 -> 471 (two DS-DEF-1 pools now uniform) // W2 DEF fourth seat (DS-DEF-2 style rows, 2026-11-07): 471 -> 474 // W2 DEF fourth seat (DS-DEF-4 rows 34-35, 2026-11-07): 474 -> 475 // W2 DEF fourth seat (DS-DEF-6 style rows, 2026-11-07): 475 -> 479
-    expect(repeatedOpener).toBe(114); // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 115 -> 116 // W2 DEF fourth seat (DS-DEF-1 style rows, 2026-11-07): 116 -> 115 (a repeated opener rewritten away) // W2 DEF fourth seat (DS-DEF-2 style rows, 2026-11-07): 115 -> 113 // W2 DEF fourth seat (DS-DEF-6 style rows, 2026-11-07): 113 -> 114
+    expect(repeatedOpener).toBe(115); // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 115 -> 116 // W2 DEF fourth seat (DS-DEF-1 style rows, 2026-11-07): 116 -> 115 (a repeated opener rewritten away) // W2 DEF fourth seat (DS-DEF-2 style rows, 2026-11-07): 115 -> 113 // W2 DEF fourth seat (DS-DEF-6 style rows, 2026-11-07): 113 -> 114 // W2 DEF fourth seat (DS-DEF-7 style rows, 2026-11-07): 114 -> 115
     // 404 / 114 -> 406 / 115 over 709 -> 711 cells at W2 DEF C1/C2 (2026-11-07): DS-DEF-9's two FLAG pools, uniform, one opener repeated.
     expect(uniformSegments / cells.size).toBeCloseTo(0.625, 3); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 406/711 -> 412/715 (the four FIXTURE pools uniform; two rewritten DS-DEF-4 pools now uniform) // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 416/718 // W2 DEF C8/C10 (DS-DEF-5 ARCANE pools, 2026-11-07): 422/724 // W2 DEF C3–C5 (DS-DEF-12, 2026-11-07): 427/729 // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 431/733 (the four CHAIN pools uniform) // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 469/766 (the thirty-three new pools uniform) // W2 DEF fourth seat (DS-DEF-1 style rows, 2026-11-07): 471/766 // W2 DEF fourth seat (DS-DEF-2 style rows, 2026-11-07): 0.615 -> 0.619 // W2 DEF fourth seat (DS-DEF-4 rows 34-35, 2026-11-07): 0.619 -> 0.620 // W2 DEF fourth seat (DS-DEF-6 style rows, 2026-11-07): 0.620 -> 0.625
-    expect(repeatedOpener / cells.size).toBeCloseTo(0.149, 3); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 115/711 -> 115/715 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 116/718 // W2 DEF C8/C10 (DS-DEF-5 ARCANE pools, 2026-11-07): 116/724 // W2 DEF C3–C5 (DS-DEF-12, 2026-11-07): 116/729 (no DS-DEF-12 pool repeats an opener) // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 116/733 (no CHAIN pool repeats an opener; defence short v4 reworded to keep it so) // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 116/766 (no new pool repeats an opener) // W2 DEF fourth seat (DS-DEF-1 style rows, 2026-11-07): 115/766 // W2 DEF fourth seat (DS-DEF-2 style rows, 2026-11-07): 0.150 -> 0.148 // W2 DEF fourth seat (DS-DEF-6 style rows, 2026-11-07): 0.148 -> 0.149
+    expect(repeatedOpener / cells.size).toBeCloseTo(0.150, 3); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 115/711 -> 115/715 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 116/718 // W2 DEF C8/C10 (DS-DEF-5 ARCANE pools, 2026-11-07): 116/724 // W2 DEF C3–C5 (DS-DEF-12, 2026-11-07): 116/729 (no DS-DEF-12 pool repeats an opener) // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 116/733 (no CHAIN pool repeats an opener; defence short v4 reworded to keep it so) // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 116/766 (no new pool repeats an opener) // W2 DEF fourth seat (DS-DEF-1 style rows, 2026-11-07): 115/766 // W2 DEF fourth seat (DS-DEF-2 style rows, 2026-11-07): 0.150 -> 0.148 // W2 DEF fourth seat (DS-DEF-6 style rows, 2026-11-07): 0.148 -> 0.149 // W2 DEF fourth seat (DS-DEF-7 style rows, 2026-11-07): 0.149 -> 0.150
   });
 
   it('CONTROL 4, SECOND HALF — the R1 leaves RED ON ARM E, which is what the control actually says', async () => {
@@ -776,8 +776,10 @@ describe('the PROVENANCE detector cites the twelve holder kinds and nothing wide
     // 8 -> 7, re-keyed by identity (LANDING-8): F10 WALLS-WORD's wall-free twin of DS-ECO-9 BLOCKADED (4a49ae5bb) kept
     // v1's "sealed off from the road" and was an eighth citing variant; LANDING-7 lane F's R-F2 (282891162) re-worded it
     // ("sealed off, and the road brings nothing more to them"), so the seven citing variants are this title's seven again.
-    expect(cited.length).toBe(7);
-    expect(kindOnly).toBe(7);
+    // 7 -> 6, re-keyed by identity (W2 DEF fourth seat (DS-DEF-7 style rows, 2026-11-07)): DS-DEF-7 band collapsed v3's old "the muster books current" cited the
+    // muster kind; its rewrite ("its muster books are kept up to date") names the town's own books and does not.
+    expect(cited.length).toBe(6);
+    expect(kindOnly).toBe(6);
     expect(genericOnly).toBe(0);
     expect(both).toBe(0);
     expect(genericNotCited.length).toBe(11);
@@ -840,8 +842,8 @@ describe('the PROVENANCE detector cites the twelve holder kinds and nothing wide
         }
       }
     }
-    // 8 -> 7 by the same cause as the split arm above (282891162, R-F2).
-    expect(cited.length).toBe(7);
+    // 8 -> 7 by the same cause as the split arm above (282891162, R-F2); 7 -> 6 likewise (W2 DEF fourth seat, DS-DEF-7).
+    expect(cited.length).toBe(6);
     expect(ties).toEqual([]);
   });
 });

@@ -3332,55 +3332,55 @@ self-gates the live world); parity for the band cells.
 3. `[counterforce · no crisis: threat]` Nothing threatens {settlement} and the town is at full strength anyway, which is a choice somebody made and is still paying for.
 
 **band `adequate`** {colour}
-1. `[ledger]` What {settlement} can field today matches what the town needs today, with the margin that implies and no more.
+1. `[ledger]` {settlement}'s duty list covers what the town needs today and little more, so one more demand would leave a post empty.
 2. `[street]` The arrangements are holding at {settlement} and nobody is being asked for anything extraordinary.
-3. `[counterforce]` Nothing has had to be set aside at {settlement} to keep the line manned, which is the only real test of whether a defense is affordable.
+3. `[counterforce]` {settlement} keeps its line manned without taking hands from the fields or coin from anything else.
 
 **band `strained`** {colour}
 1. `[ledger]` {settlement} can still field a defense and it is costing the town elsewhere; what is standing in the line is standing because something else was set down.
-2. `[unfolding]` The strain at {settlement} is being carried rather than relieved, and carrying it is what is producing the next season's shortfall.
-3. `[street]` The town is managing, and everybody involved in the managing knows precisely how thin it is.
-4. `[threshold]` {settlement} is at the point where holding the line and running the town have become the same budget, and each further call on one is taken from the other.
+2. `[unfolding]` {settlement} is carrying the strain on its defence, not easing it, and next season will pay for it.
+3. `[street]` {settlement} is managing its defence, but only just, and the people doing the managing know how thin it is.
+4. `[threshold]` At {settlement} every hand in the line is a hand missing from the fields and workshops, and each new demand on one is taken from the other.
 
 **band `critical`** {colour}
 1. `[ledger]` {settlement} is at the edge of being able to field anything. What remains is committed, and there is nothing behind it.
-2. `[unfolding]` One more call on {settlement}'s defense and there will be nothing to answer it with; the town has reached the point of hoping rather than planning.
+2. `[unfolding]` One more call on {settlement}'s defence and there will be nobody to answer it.
 3. `[street]` What is left at {settlement} is committed, and the town has stopped discussing what it would do if more were asked.
 
 **band `collapsed`** {colour}
-1. `[ledger]` {settlement} can no longer field a defense. The arrangements exist on the rolls and do not exist in the town.
+1. `[ledger]` {settlement}'s muster lists still carry the names, but the people are gone: the town can no longer field a defence.
 2. `[street]` There is nobody left at {settlement} to be called out, and the calling has stopped.
-3. `[visitor]` A stranger at {settlement} finds the posts unmanned and the muster books current, and the gap between the two is the whole of the town's condition.
+3. `[visitor]` You find {settlement}'s posts empty while its muster books are kept up to date.
 
 **live band FALLS SHORT of the built profile** {colour}
 1. `[ledger]` {settlement} was built to be defended better than it presently can be; the works are what they were and the people to hold them are not.
-2. `[visitor]` A stranger sees serious defenses at {settlement} and very few defenders, and is right to read the gap as recent.
-3. `[unfolding]` The distance between what {settlement} has and what {settlement} can use is widening, and the works do not narrow it by standing there.
+2. `[visitor]` You see serious defences at {settlement} and very few defenders: the works are kept up and the posts are empty, and it has not been so for long.
+3. `[unfolding]` {settlement}'s works are as good as ever, and each season there are fewer people to hold them.
 
 **live band EXCEEDS the built profile** {colour}
 1. `[ledger]` {settlement} is fielding more than its works would suggest. What is holding this town is people rather than stone, and it is holding.
-2. `[street]` The town has put more into the line than it was ever set up to, and the arrangement is temporary in a way nobody has named yet.
+2. `[street]` {settlement} has put more people in its line than it was ever built for, and everyone knows it cannot keep them there long.
 3. `[counterforce]` {settlement} is holding more than its works should permit, and what is holding it is people under no obligation to be there.
 
 **a contributor with a RECORDED reason, adverse**
-1. `[ledger · colour]` What {settlement} has lost from its readiness it has lost to {reason}, and the loss is entered rather than inferred.
-2. `[unfolding · colour]` {reason} is still taking from what {settlement} can field, season on season, and nothing in hand has been set against it.
+1. `[ledger · colour]` {settlement}'s muster lists show what {reason} has cost the town: fewer names fit to stand, and nobody to replace them.
+2. `[unfolding · colour]` {reason} is still costing {settlement} defenders each season, and nothing is being done about it.
 3. `[street · walls]` The town can name what has cost it at {settlement}, exactly, and names it whenever the subject of the walls comes up.
 
 **a contributor with a RECORDED reason, favourable**
-1. `[ledger · colour]` {settlement}'s readiness stands where it does because of {reason}; take that away and the town's line is a different arrangement entirely.
+1. `[ledger · colour]` {settlement}'s muster lists are fuller because of {reason}; take that away and the line would be thinly held.
 2. `[street · colour]` The town is better defended than it was, and can name the thing that did it.
-3. `[counterforce · walls]` {settlement} would be thinner on the walls without {reason}, and the difference is entered rather than assumed.
+3. `[counterforce · walls]` Without {reason}, {settlement} would have fewer people on its walls.
 
 **`besiegedBy` present** *(the shared siege row — minted once, per R-W2-C)*
 1. `[street · walls · gate]` There is an army at {settlement}'s walls. Everything the town does now is done inside them, and the gates have stopped being a matter of routine.
 2. `[ledger · colour]` {counterpart} holds the approaches to {settlement}. Nothing enters and nothing leaves, and the town's condition from here is a question of stores and time.
-3. `[visitor · colour]` Nobody reaches {settlement} at present. What can be seen of the town is seen from outside a line that is not the town's own.
+3. `[visitor · colour]` Nobody can reach {settlement} now; you can see the town only from behind the besiegers' lines.
 
 **`besiegingTargets` present (the army is abroad)**
 1. `[ledger · garrison]` {settlement}'s force is away besieging {counterpart}, and the home garrison is thinned for exactly as long as the campaign runs.
 2. `[street · colour]` The town has sent its soldiers to sit outside somebody else's walls, and is quieter and emptier and more exposed for it.
-3. `[unfolding · walls]` What {settlement} is spending on {counterpart} it is spending out of its own walls; the campaign is being paid for in the town's own readiness.
+3. `[unfolding · walls]` What {settlement} sends against {counterpart} it takes from its own walls, and fewer guard home while the campaign lasts.
 
 ---
 

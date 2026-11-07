@@ -37,8 +37,8 @@
     "syntheticTableFields": 129,
     "tiers": {
       "MISSING": 32,
-      "THIN": 539,
-      "COVERED": 227,
+      "THIN": 540,
+      "COVERED": 226,
       "MISSING-AT-TIER": 45
     },
     "tierSilences": 352,
@@ -7790,7 +7790,7 @@
       ],
       "hasBag": false,
       "variants": 3,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -7882,7 +7882,7 @@
       ],
       "hasBag": false,
       "variants": 3,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -7981,7 +7981,7 @@
       ],
       "hasBag": false,
       "variants": 3,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -8084,7 +8084,7 @@
       ],
       "hasBag": false,
       "variants": 3,
-      "grammars": 3,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -58949,7 +58949,7 @@
       "subject": "band collapsed",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -58965,7 +58965,7 @@
       "subject": "live band EXCEEDS the built profile",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "COVERED",
@@ -58976,12 +58976,12 @@
       "count": "3 variant(s) · 3 grammar(s) · slots {reason, settlement}"
     },
     {
-      "tier": "COVERED",
+      "tier": "THIN",
       "block": "DS-DEF-7",
       "subject": "a contributor with a RECORDED reason, favourable",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 2 grammar(s) · slots {reason, settlement}"
+      "count": "3 variant(s) · 1 grammar(s) · slots {reason, settlement}"
     },
     {
       "tier": "COVERED",
@@ -58997,7 +58997,7 @@
       "subject": "besiegingTargets present (the army is abroad)",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 3 grammar(s) · slots {counterpart, settlement}"
+      "count": "3 variant(s) · 2 grammar(s) · slots {counterpart, settlement}"
     },
     {
       "tier": "THIN",
