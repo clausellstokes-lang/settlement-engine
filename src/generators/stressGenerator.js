@@ -60,9 +60,7 @@ export const buildStressEntry = (settlementName, stressType, stressData) => {
     summaryRoll,
     summary:       renderStressSummary(stressType, settlementName, summaryRoll, direction),
     crisisHook:    stressData.crisisHook,
-    viabilityNote: direction && stressData.viabilityNoteByDirection
-      ? stressData.viabilityNoteByDirection[direction]
-      : stressData.viabilityNote,
+    viabilityNote: (direction && stressData.viabilityNoteByDirection?.[direction]) || stressData.viabilityNote,
     historyColour: stressData.historyColour,
   };
 };
