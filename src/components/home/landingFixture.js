@@ -77,7 +77,7 @@ export const fixture = {
     "tier": "village",
     "eyebrow": "road village · mountain",
     "prose": "The first person you meet on the road into Cnocby wants to know your business, and the second already knows it. Earth-banked enclosures and older rounded foundations remain visible between newer halls.",
-    "pressure": "Hector Gallagher and Inghean MacCarthy are connected by something neither discusses openly: They are about to be on opposite sides of a significant decision.",
+    "pressure": "Hector Gallagher and Aengus Walsh are connected by something neither discusses openly: The council has asked Hector Gallagher and Aengus Walsh to audit each other's accounts. Both agreed, and neither is comfortable.",
     "hooks": [
       {
         "kind": "NPC",
@@ -93,7 +93,7 @@ export const fixture = {
         "text": "A neutral figure is being pressured by both Elder Council and Religious Authorities to take a side before the next council session."
       }
     ],
-    "hooksMore": 7
+    "hooksMore": 4
   },
   "voice": {
     "receipts": [
@@ -156,8 +156,8 @@ export const fixture = {
       {
         "week": "Week 8",
         "season": "the spring of year 1",
-        "headline": "Inghean MacCarthy pushes through reforms",
-        "text": "Inghean MacCarthy is out to come through the crisis."
+        "headline": "Ciarán Kennedy strikes a bargain",
+        "text": "Ciarán Kennedy is out to come through the crisis."
       },
       {
         "week": "Week 8",
@@ -168,14 +168,14 @@ export const fixture = {
       {
         "week": "Week 9",
         "season": "the spring of year 1",
-        "headline": "Elder Council captures an institution",
-        "text": "Elder Council sees an opening to press council rule interests."
+        "headline": "Nuada Walsh pushes through reforms",
+        "text": "Nuada Walsh is out to come through the crisis."
       },
       {
-        "week": "Week 12",
+        "week": "Week 9",
         "season": "the spring of year 1",
-        "headline": "Cnocby's trade routes break down",
-        "text": "Caravans are passing Cnocby by, and its market stalls stand half empty."
+        "headline": "Elder Council captures an institution",
+        "text": "Elder Council sees an opening to press council rule interests."
       }
     ],
     "chronicle": [

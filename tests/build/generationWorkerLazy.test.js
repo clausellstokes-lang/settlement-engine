@@ -376,7 +376,18 @@ const SENTINEL = 'settlementforge:generation:worker-v1';
 //   THE MERGE WITH RUNG 1 AND THIS LANDING'S CURES +5,567 (the two lineages' interaction, the module splits, the chunk cure).
 //   The sum closes exactly on the measured figures: 1,574,838 + 110,009 + 5,567 = 1,690,414.
 // The ceiling is recorded AT the measured figure. MONOTONE-DOWN from here.
-export const WORKER_BUNDLE_CEILING_BYTES = 1690414;
+// 1,690,414 -> 1,695,569 (2026-11-07, MERGE-R2, the integration merge of the rung-2 landing; the chair's standing ruling
+// "trim where no output byte moves, then re-record at the measured figure", under the owner's delegation of 2026-11-06):
+// A RISE OF 5,155 B, VETOABLE BY THE OWNER. No trim that moves no output byte was found in this seat. MEASURED by a fresh
+// `vite build` of a git archive of each tree, the worker bytes being the file's size. The merge 10b8f09b4 has two parents:
+//   FIRST PARENT a8daff92c (the integration branch) 1,579,636: from the shared base 76febf9b0 (1,574,838) its W0 lane
+//     +1,803 (recorded above) and the review-intake / engine-merge lines after W0-CLOSE +2,995 = +4,798 (its own ceiling
+//     1,576,641 was deferred, docs/chair/2026-11-07/BUILD-CHECK-2026-11-07.md §2);
+//   SECOND PARENT fc4cb0b9f (the rung-2 landing) 1,690,414, reproduced to the byte (+115,576, attributed above);
+//   THE MERGE ITSELF (both lines composed: the migration direction, the held refusal inside drawDeclared, the water and
+//     market detectors) +357 of interaction. Every commit after the merge moves no src byte.
+//   The sum closes exactly: 1,574,838 + 4,798 + 115,576 + 357 = 1,695,569. Recorded AT the measured figure; monotone-down.
+export const WORKER_BUNDLE_CEILING_BYTES = 1695569;
 
 const source = (path) => readFileSync(join(ROOT, path), 'utf8');
 
@@ -702,7 +713,7 @@ describe.runIf(DIST_EXISTS)('generation worker — production boundary', () => {
     expect(
       bytes,
       `generation worker bundle ${workers[0]} is ${bytes} B; the ceiling is `
-      + `${WORKER_BUNDLE_CEILING_BYTES} B (re-recorded at the measured figure by the chair's ruling, 2026-11-07, ODQ §934.105). `
+      + `${WORKER_BUNDLE_CEILING_BYTES} B (re-recorded at the measured figure by the chair's ruling, 2026-11-07, MERGE-R2, ODQ §934.105). `
       + 'A RISE IS NEVER A LANE\'S EDIT: buy the bytes back, or take the ruling.',
     ).toBeLessThanOrEqual(WORKER_BUNDLE_CEILING_BYTES);
   });

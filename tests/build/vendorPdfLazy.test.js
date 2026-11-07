@@ -592,8 +592,8 @@ const CLOSURE_BUDGET_BYTES = 1_062_940; // 2026-11-07: re-recorded AT the measur
 //     it spends ~11.3 kB / ~9.5 kB of headroom no measurement asks for.
 // Leaving both untouched is the only one of the three that neither spends owner headroom
 // nor weakens the instrument. Monotone-down unchanged; raises stay owner-signed.
-const CLOSURE_GZIP_BUDGET_BYTES = 338_385; // 2026-11-07: re-recorded AT the measured 338,385, LANDING-R2 seat J by the chair's 08:4x ruling, a vetoable rise of 2,099 B (note at file end)
-const CLOSURE_BROTLI_BUDGET_BYTES = 284_778; // 2026-11-07: re-recorded AT the measured 284,778, LANDING-R2 seat J by the chair's 08:4x ruling, a vetoable rise of 2,432 B (note at file end)
+const CLOSURE_GZIP_BUDGET_BYTES = 338_535; // 2026-11-07: re-recorded AT the measured 338,535, MERGE-R2 under the chair's standing ruling, a vetoable rise of 150 B over the rung-2 parent's 338,385 (note at file end)
+const CLOSURE_BROTLI_BUDGET_BYTES = 284_950; // 2026-11-07: re-recorded AT the measured 284,950, MERGE-R2 under the chair's standing ruling, a vetoable rise of 172 B over the rung-2 parent's 284,778 (note at file end)
 
 // Parse the top-level *static* module edges out of a built chunk. Static
 // edges use the `from` keyword — `import{..}from"./x.js"` and re-exports
@@ -838,7 +838,13 @@ describe.runIf(distExists)('Tier 9.7 — vendor-pdf lazy load contract', () => {
     // fallback, a trim) -24. The sum closes exactly: 678,351 + 1,271 = 679,622. Generation code, where it belongs; the
     // first-paint closure arm above is green on the same build.
     expect(size).toBeGreaterThan(300_000);
-    expect(size).toBeLessThan(704_657); // 2026-11-07: re-recorded AT the measured 704,656, LANDING-R2 seat J by the chair's 08:4x ruling (note at file end)
+    // 2026-11-07, MERGE-R2 (the chair's standing ruling: trim where no output byte moves, then re-record; vetoable by the
+    // owner): 704,657 -> 707,703, measured 707,702 by fresh `vite build`s of git archives. Shared base 76febf9b0 678,351;
+    // FIRST PARENT a8daff92c (the integration branch) 681,779 (+3,428: W0 +1,271 recorded above, the review-intake and
+    // later lines +2,157); SECOND PARENT fc4cb0b9f (the rung-2 landing) 704,656, reproduced (+26,305, attributed at file
+    // end); the merge 10b8f09b4's composition -382 of interaction. Sum: 678,351 + 3,428 + 26,305 - 382 = 707,702. No trim
+    // that moves no output byte was found; the first-paint closure arm is green on the same build.
+    expect(size).toBeLessThan(707_703); // 2026-11-07: re-recorded AT the measured 707,702, MERGE-R2 (note above)
   });
 
   // ── T13 TRANS: the transcendental kernel's CHUNK PLACEMENT ───────────────
@@ -1777,8 +1783,8 @@ describe.runIf(distExists)('ARCH car 2 — the corpus rides data-lazy, and that 
 describe('ARCH car 2 — the three first-paint budgets stay where the owner signed them', () => {
   it('the raw, gzip and Brotli closure budgets are unmoved', () => {
     expect(CLOSURE_BUDGET_BYTES, 'the raw first-paint budget moved').toBe(1_062_940); // LANDING-R2 seat J, 2026-11-07 (note at file end)
-    expect(CLOSURE_GZIP_BUDGET_BYTES, 'the gzip transfer budget moved').toBe(338_385);
-    expect(CLOSURE_BROTLI_BUDGET_BYTES, 'the Brotli transfer budget moved').toBe(284_778);
+    expect(CLOSURE_GZIP_BUDGET_BYTES, 'the gzip transfer budget moved').toBe(338_535);
+    expect(CLOSURE_BROTLI_BUDGET_BYTES, 'the Brotli transfer budget moved').toBe(284_950);
 
     // ⭐ THE SETTLEMENT-EDITOR TRAIN'S SUMMED FIRST-PAINT PRICE, recorded by the member that
     // holds this file's row. The three budgets above are unmoved because the train's MEMBERSHIP
@@ -1942,3 +1948,17 @@ describe('ARCH car 2 — the three first-paint budgets stay where the owner sign
 // less roleCategory.js -3.3k and governanceNarrative.js -3.7k. ⚠ The people car's lane 1 retires the density roster from
 // npcGenerator.js, so this band is RE-MEASURED at that car's landing. Recorded AT the measured figures (the band one byte above,
 // its `<` being strict). Monotone-down from here; raises stay owner-signed.
+
+// ── (2026-11-07, MERGE-R2: the integration merge 10b8f09b4 of the rung-2 landing; the chair's standing ruling "trim where
+//    no output byte moves, then re-record at the measured figure"; VETOABLE BY THE OWNER) THE TWO TRANSFER BUDGETS AND THE
+//    ENGINE BAND RE-RECORDED AT THE MEASURED FIGURES ──
+// Measured with this file's own closure walk and compression settings over fresh `vite build`s of git archives:
+//   FIRST PARENT a8daff92c (the integration branch): raw 1,041,311 · gzip 332,915 · Brotli 279,630 (its budgets deferred,
+//     BUILD-CHECK-2026-11-07 §2);
+//   SECOND PARENT fc4cb0b9f (the rung-2 landing): raw 1,062,940 · gzip 338,385 · Brotli 284,778, reproduced to the byte;
+//   THE MERGED TIP (10b8f09b4; nothing after it moves a src byte): raw 1,062,668 · gzip 338,535 · Brotli 284,950.
+// The raw closure stands under its budget (1,062,940, held). The two transfer figures rise over the second parent by
+// +150 gzip and +172 Brotli: the integration line's first-paint bytes (W0's migration direction in engine-core and
+// data, the review-intake's index strings) composed into the census's closure, which compresses less well although its
+// raw total is 272 B smaller. No trim that moves no output byte was found in this seat. Recorded AT the measured figures;
+// monotone-down from here.
