@@ -55,7 +55,10 @@ describe('the seat over 120 generated settlements (twenty per tier, fixed seeds)
       }
       const npc = chain.npc ? (s.npcs || []).find((n) => n.name === chain.npc.name) : null;
       if (!npc) { misses.push(`${seed}: nobody seated`); continue; }
-      if (npc.factionAffiliation !== gov) misses.push(`${seed}: ${npc.name} is of ${npc.factionAffiliation}, not ${gov}`);
+      // PEOPLE-LAND re-key, cause M-2/M-7 (the shim out, the v2 boundary): a card's powers are its MEMBERSHIPS; the
+      // retired `factionAffiliation` is no field of a returned card. The seat is a member of the governing power.
+      const powers = (npc.memberships || []).map((m) => m.power);
+      if (!powers.includes(gov)) misses.push(`${seed}: ${npc.name} is of ${powers.join('/') || 'no power'}, not ${gov}`);
       if (/^The\s/.test(npc.name)) misses.push(`${seed}: stand-in ${npc.name}`);
       seated += 1;
     }

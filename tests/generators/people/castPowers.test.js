@@ -95,10 +95,14 @@ function assertPowers(s, label) {
     expect(mint.title).toBe(otherMintRowFor(name).title);
     expect(mint.memberships).toEqual([{ power: name, rank: 1, share: 1 }]);
   }
-  // the shim: the first power is the one the card ranks best in; the seat's is the governing one
+  // PEOPLE-LAND re-key, cause M-2 (the shim out): the shim's `factionAffiliation` / `secondaryAffiliation` are no
+  // fields of a returned card; the memberships are the card's powers, each naming a power on the roster.
+  const rosterNames = new Set((s.powerStructure?.factions || []).map(nameOf));
   for (const card of cards) {
-    if (!card.memberships.length) { expect(card.factionAffiliation).toBeUndefined(); continue; }
-    expect(card.memberships.map((m) => m.power), `${label}: ${card.id} affiliation is a membership`).toContain(card.factionAffiliation);
+    for (const field of ['factionAffiliation', 'secondaryAffiliation', 'linkedFactionIds', 'factionGoal', 'densityRungRole']) {
+      expect(Object.hasOwn(card, field), `${label}: ${card.id} still carries the retired ${field}`).toBe(false);
+    }
+    for (const m of card.memberships) expect(rosterNames.has(m.power), `${label}: ${card.id} membership ${m.power} is on the roster`).toBe(true);
   }
   return cards;
 }
@@ -198,7 +202,7 @@ describe('the people car — the powers\' people (step 3)', () => {
     await ensureLaws();
     for (const i of [4, 5, 17]) {
       const a = birth(i).settlement; const b = birth(i).settlement;
-      const sig = (s) => JSON.stringify(s.npcs.map((n) => [n.id, n.memberships, n.factionAffiliation, n.secondaryAffiliation]));
+      const sig = (s) => JSON.stringify(s.npcs.map((n) => [n.id, n.memberships, n.title])); // PEOPLE-LAND: the shim's fields retired (M-2)
       expect(sig(b)).toBe(sig(a));
       assertPowers(a, `soak1k-${i}`);
     }

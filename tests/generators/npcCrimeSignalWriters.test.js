@@ -45,9 +45,11 @@ describe('the NPC writers read the crime signal', () => {
     expect(settlement.npcs.some((n) => n.goal?.short === 'Identify which of their officers is on the payroll of a powerful outside interest')).toBe(true);
   });
 
-  it("control, soak1k-5: beside a roster Thieves' Guild the affiliation still names it", () => {
+  // PEOPLE-LAND re-key, cause M-2 (the shim out): a card's powers are its memberships; the shim's
+  // `secondaryAffiliation` is no field of a returned card, so the control reads the membership.
+  it("control, soak1k-5: beside a roster Thieves' Guild a card's membership still names it", () => {
     const { settlement } = birth(5);
     expect(settlement.powerStructure.factions.some((f) => f.faction === "Thieves' Guild")).toBe(true);
-    expect(npcsNaming(settlement, 'secondaryAffiliation').map((n) => n.secondaryAffiliation)).toContain("Thieves' Guild");
+    expect(settlement.npcs.flatMap((n) => (n.memberships || []).map((m) => m.power))).toContain("Thieves' Guild");
   });
 });
