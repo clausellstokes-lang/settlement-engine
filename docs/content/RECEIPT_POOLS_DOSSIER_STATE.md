@@ -1172,13 +1172,13 @@ veto the owner takes, not an implementer's swap.
 **SLOTS.** `{settlement}`
 
 **TALLIES**
-0. *(frozen, canonical)* `[colour]` Events recorded after this settlement's last survey may not be fully counted in these tallies yet.
+0. *(frozen, canonical)* `[colour]` Something has changed in this town since these tallies were taken, and it may not show in them yet.
 1. `[ledger · colour]` These tallies of {settlement} were taken some time ago; a fire, a death or a new house since may not show in them, so check before relying on them.
 2. `[unfolding · colour]` These figures show {settlement} as it was when they were taken. Later events may not show in them yet.
 3. `[visitor · colour]` What follows is the last careful reckoning of {settlement}, and it may not be today's.
 
 **CATALOG**
-0. *(frozen, canonical)* `[colour]` Events recorded after this settlement's last survey may not be fully counted in this catalog yet.
+0. *(frozen, canonical)* `[colour]` Something has changed in this town since this list of houses and services was drawn up, and it may not show on it yet.
 1. `[ledger · colour]` This list of {settlement}'s houses and services was drawn up some time ago; one opened or closed since may not be on it, so ask before relying on it.
 2. `[unfolding · colour]` This list shows the services {settlement} had when it was made. Later changes may not show on it yet.
 3. `[street · colour]` What {settlement} could do for a visitor was written down some time ago, and may have changed since.

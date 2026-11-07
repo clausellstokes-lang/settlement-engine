@@ -425,7 +425,7 @@ describe('each bucket means what it says', () => {
 
 describe('the sentence and the paragraph each have exactly ONE home', () => {
   test('the freshness sentence is minted only in the detector module', () => {
-    const NEEDLE = 'last survey may not be fully counted';
+    const NEEDLE = 'since these tallies were taken, and it may not show'; // re-keyed with the sentence (W1 ECO second seat, 2026-11-07)
     const minting = walk(join(ROOT, 'src'))
       .map((abs) => relative(ROOT, abs).replace(/\\/g, '/'))
       .filter((rel) => read(rel).includes(NEEDLE));
