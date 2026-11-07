@@ -28,6 +28,7 @@ The owner's word (2026-11-07, verbatim): *"I would like for the institution card
 | `tests/components/phoneChromeFloor.census.test.js` | Re-keyed with cause (§4). |
 | `tests/lint/.lighting-census-baseline.json` | Re-frozen (§4). |
 | `tests/lint/ruinFilterRoster.walker.test.js` | `cardDoor.js` is EXEMPT as a name-lookup (it reads the roster only to compute a link id, and a ruined house keeps its card and its face); readers 100 → 101, with cause. |
+| `tests/lint/.prose-numerics-baseline.json` | Two `npcComponents.jsx` rows re-keyed by line, 151 → 152 and 157 → 158; same path, category and snippet. Cause: the door's one import line. |
 | `docs/content/wiring-census.json` | Re-derived: `producerIndexFiles` 1271 → 1272 (`cardDoor.js`); pools and relation rows unmoved. |
 | `tests/lint/.source-citation-baseline.json`, `tests/lint/sourceCitationIntegrity.walker.test.js` | The dated roster, +1 (§4). |
 
@@ -81,6 +82,7 @@ The owner's word (2026-11-07, verbatim): *"I would like for the institution card
 **The touched suites** (every test importing `InstitutionsTab`, `npcComponents`, `cardPowers`, `cardDoor` or `NPCsTab`): the base's two only.
 - `phoneChromeFloor.census`: /admin and /world +1, the base's; this lane's +1 on three routes is re-keyed.
 - `tabSentencesOnce`: X-50 PlotHooks repeats, the base's.
+- `proseNumerics` went red once, through the door's import shifting two rows of `npcComponents.jsx` by one line. Re-keyed by line with that cause; now green.
 
 **Mine: none.**
 
