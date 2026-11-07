@@ -18,6 +18,13 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-11-07 — RECORD 0B, THE W0 MERGE'S COMPOSITION, THROUGH THE SIGNED DOOR (ODQ §934.105, THE PEOPLE CAR’S LANDING;
+ *   record docs/shift-records/2026-11-07-people-land-0b-w0-merge.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   525 of 525 rows (thorp 84, hamlet 84, village 84, town 105, city 84, metropolis 84; the key set identical) against the stage of the first parent 780180b08 (b1be65e4.., equal to record 0a's stage). THE CAUSE, ONE (first-parent
+ *   step fc834a6bd): the W0 merge (eb4c508e1, its own five records w0-01..w0-05 signed on a branch without the review-intake code) composed over record 0a's move; the herald desk and the PDF snapshot land on W0's own committed bytes and are not written. ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree S0b (the tree of fc834a6bd with the door paths carried from
+ *   the branch, the previous record's writes committed). b1be65e4.. -> 6b0d226e..
+ *
  * 2026-11-07 — RECORD 0A, THE REVIEW-INTAKE LANE, THROUGH THE SIGNED DOOR (ODQ §934.105, THE PEOPLE CAR’S LANDING;
  *   record docs/shift-records/2026-11-07-people-land-0a-review-intake.json; the cloud chair signs under the owner's delegation, vetoable).
  *   525 of 525 rows (thorp 84, hamlet 84, village 84, town 105, city 84, metropolis 84; the key set identical) against the stage of the first parent a1d5ecd0e (e7e8a6ff..). THE CAUSE, ONE (first-parent
