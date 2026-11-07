@@ -139,8 +139,8 @@ describe('GS-2: one faction set, the power factions', () => {
         seen += 1;
         const [a, b] = c.parties;
         const tie = (s.relationships || []).some((r) => ['rival', 'enemy'].includes(r.type)
-          && ((home.get(r.npc1Id) === a && home.get(r.npc2Id) === b)
-            || (home.get(r.npc1Id) === b && home.get(r.npc2Id) === a)));
+          && ((home.get(r.from) === a && home.get(r.to) === b)
+            || (home.get(r.from) === b && home.get(r.to) === a)));
         if (a === b || !tie) ungrounded.push(`${seed} ${a} / ${b}`);
       }
     }
@@ -163,17 +163,17 @@ describe('GS-2: generateConflicts pairs power factions across a rival or enemy t
 
   test('a town whose rivalries never cross two factions has no conflict row', () => {
     const rels = [
-      { npc1Id: 'i', npc2Id: 'j', type: 'rival' },
-      { npc1Id: 'a', npc2Id: 'm', type: 'ally' },
+      { from: 'i', to: 'j', type: 'rival' },
+      { from: 'a', to: 'm', type: 'ally' },
     ];
     expect(seeded('gs2-none', () => generateConflicts(groups(), rels, {}, []))).toEqual([]);
   });
 
   test('the crossing pairs become the conflicts, strongest first, intensity from the tie count', () => {
     const rels = [
-      { npc1Id: 'i', npc2Id: 'm', type: 'rival' },
-      { npc1Id: 'j', npc2Id: 'm', type: 'enemy' },
-      { npc1Id: 'a', npc2Id: 'i', type: 'rival' },
+      { from: 'i', to: 'm', type: 'rival' },
+      { from: 'j', to: 'm', type: 'enemy' },
+      { from: 'a', to: 'i', type: 'rival' },
     ];
     const conflicts = seeded('gs2-pairs', () => generateConflicts(groups(), rels, {}, []));
     expect(conflicts.length).toBeGreaterThan(0);

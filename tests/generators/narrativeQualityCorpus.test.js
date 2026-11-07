@@ -27,10 +27,10 @@ import { readEnvelope } from '../helpers/distributionEnvelope.js';
 import { HISTORICAL_EVENTS_DATA } from '../../src/data/historyData.js';
 import { generateHistory } from '../../src/generators/historyGenerator.js';
 import { renderHistoryTemplate } from '../../src/generators/historyTemplate.js';
-import {
-  generateNPCs,
-  generateRelationships,
-} from '../../src/generators/npcGenerator.js';
+import { generateNPCs } from '../../src/generators/npcGenerator.js';
+// RE-KEYED 2026-11-07 (PEOPLE-4 TIES, R-P7): the pair-saturation writer `generateRelationships` is
+// retired; the ties are ONE outgoing per card, `drawTies`, on its own stream, directed (`from`/`to`).
+import { drawTies } from '../../src/generators/people/ties.js';
 import { disambiguateNPCDisplayNames } from '../../src/generators/npcDisplayNames.js';
 import { STRESS_ECONOMIC_EFFECTS } from '../../src/data/npcData.js';
 import {
@@ -432,7 +432,7 @@ describe('NPC display identity is unique without perturbing RNG', () => {
           );
           return {
             npcs: generatedNPCs,
-            relationships: generateRelationships(generatedNPCs, {}, institutions),
+            relationships: drawTies(generatedNPCs, { config: {}, institutions }, createPRNG(`${seed}::ties`)),
           };
         });
 
@@ -443,7 +443,7 @@ describe('NPC display identity is unique without perturbing RNG', () => {
         ).toBe(names.length);
 
         for (const relationship of relationships) {
-          if (relationship.npc1Id === relationship.npc2Id) continue;
+          if (relationship.from === relationship.to) continue;
           expect(
             normalize(relationship.npc1Name),
             `${tier}/${seed} relationship endpoints are visually ambiguous`,
@@ -496,10 +496,22 @@ describe('relationship tie prose is drawn without replacement per settlement (GS
           'germanic',
           { stressTypes: ['politically_fractured'], priorityMilitary: 60, priorityEconomy: 60 },
         );
-        return { seed, npcs, relationships: generateRelationships(npcs, {}, institutions) };
+        return { seed, npcs, relationships: drawTies(npcs, { config: {}, institutions }, createPRNG(`${seed}::ties`)) };
       }));
     }
   }
+  // RE-KEYED 2026-11-07 (PEOPLE-4 TIES, R-P7): one outgoing tie per card draws about half the ties the
+  // pair saturation drew, so no roster above holds more ties of one archetype than its pool has
+  // variants and the cycle arm's liveness went dark. The pool-exhaustion case is kept live by ONE
+  // large town: the twelve metropolis rosters above as one cast (ids and names made unique), whose
+  // ~300 ties overflow every common archetype's pool. It feeds the cycle arm only; the claim is unchanged.
+  const metropolisCast = corpus.filter(row => row.seed.includes('metropolis'))
+    .flatMap((row, r) => row.npcs.map(npc => ({ ...npc, id: `${npc.id}_m${r}`, name: `${npc.name} of ${['Ash', 'Bree', 'Cole', 'Dun', 'Eld', 'Fenn', 'Gale', 'Holt', 'Ive', 'Jarl', 'Kell', 'Lorn'][r]}` })));
+  const overflowCorpus = [{
+    seed: 'tie-prose-draw-overflow',
+    npcs: metropolisCast,
+    relationships: drawTies(metropolisCast, { config: {}, institutions }, createPRNG('tie-prose-draw-overflow::ties')),
+  }];
 
   test('every tie stores the variant it drew, and that index renders its own lines', () => {
     // Collected, not asserted inline (seedLoopTotality, cure lane T13): the first bad tie would
@@ -513,8 +525,8 @@ describe('relationship tie prose is drawn without replacement per settlement (GS
         const archetype = STRESS_ECONOMIC_EFFECTS[rel.archetypeKey];
         if (!archetype) { misdrawn.push(`${seed}: ${rel.archetypeKey} is not a real archetype`); continue; }
         if (!Number.isInteger(rel.proseVariant)) { misdrawn.push(`${seed}: tie carries no integer proseVariant`); continue; }
-        const first = byId.get(rel.npc1Id);
-        const second = byId.get(rel.npc2Id);
+        const first = byId.get(rel.from);
+        const second = byId.get(rel.to);
         if (rel.tension !== archetype.tension(first, second, rel.proseVariant)) misdrawn.push(`${seed}: tension is not variant ${rel.proseVariant}`);
         if (rel.description !== archetype.desc(first, second, rel.proseVariant)) misdrawn.push(`${seed}: description is not variant ${rel.proseVariant}`);
       }
@@ -535,7 +547,7 @@ describe('relationship tie prose is drawn without replacement per settlement (GS
   test('ties of one archetype never share a line until the pool is exhausted, then cycle', () => {
     let overflowing = 0;
     const offenders = [];
-    for (const { seed, relationships } of corpus) {
+    for (const { seed, relationships } of [...corpus, ...overflowCorpus]) {
       const byKey = new Map();
       for (const rel of relationships) {
         if (!byKey.has(rel.archetypeKey)) byKey.set(rel.archetypeKey, []);

@@ -77,7 +77,8 @@ describe('formal generation receipt judgments', () => {
 
   it('rejects a broken final NPC reference after all producers have run', () => {
     const settlement = generate({}, 'receipt-broken-reference');
-    settlement.relationships[0].npc1Id = 'missing-final-npc';
+    // RE-KEYED 2026-11-07 (PEOPLE-4 TIES, R-P7): the tie's first end is `from` (directed).
+    settlement.relationships[0].from = 'missing-final-npc';
 
     const receipt = recertify(settlement);
 
@@ -86,7 +87,7 @@ describe('formal generation receipt judgments', () => {
       status: 'fail',
       findings: expect.arrayContaining([
         expect.objectContaining({
-          path: 'relationships[0].npc1Id',
+          path: 'relationships[0].from',
         }),
       ]),
     });

@@ -148,6 +148,14 @@ const ROSTER = Object.freeze([
   // assembly body on `chooseOrPin(pins, 'npcs', …)`, the structural appender's own gate, so a held
   // roster is never re-written; the conflicts are re-derived on every run and never held.
   { symbol: 'storeTrueHooksOnly', file: 'src/domain/coherence/hookTruthRecord.js', cls: 'mutator', stream: SHARED, via: ASSEMBLY_STEP },
+  // ⭐ 15 -> 16 (the people car, PEOPLE-4 TIES, 2026-11-07; R-P7): `relationships` left
+  // generatePopulation's chooser (the step now provides `[]` under it) and is PRODUCED at function
+  // level: ONE OUTGOING TIE PER CARD, `drawTies`, called by `generateCoherence` over the final cast
+  // and by the assembly body for the cards the pre-law appender adds after it. It draws on its OWN
+  // named family (`people-ties`, forked from the coherence stream; `people-ties-late`, an assembly
+  // child), keyed per card, and BOTH call sites consult the `relationships` pin: the family's second
+  // lawful SKIP, lawful for the reason the first is (a child never created moves no sibling).
+  { symbol: 'drawTies', file: 'src/generators/people/ties.js', cls: 'producer', stream: NAMED_CHILD, via: ASSEMBLY_STEP },
 ]);
 
 /**
@@ -501,7 +509,7 @@ describe('EM-R1 — the writer census of every held key', () => {
       if (!cache.has(row.file)) cache.set(row.file, declaredSymbols(rawSource(row.file)));
       if (cache.get(row.file).get(row.symbol) !== 1) unresolved.push(`${row.file} :: ${row.symbol}`);
     }
-    expect(ROSTER).toHaveLength(15); // 11 -> 13 at the GS-2 merge (lane G2): generateFactions, generateConflicts; 13 -> 14 rung 1 N1 (2026-11-04): conserveSeatPower; 14 -> 15: storeTrueHooksOnly (lane RUNG1-TRUTH unit A; the union of both lanes' rows, composed on the window branch)
+    expect(ROSTER).toHaveLength(16); // 15 -> 16 (PEOPLE-4 TIES): drawTies; 11 -> 13 at the GS-2 merge (lane G2): generateFactions, generateConflicts; 13 -> 14 rung 1 N1 (2026-11-04): conserveSeatPower; 14 -> 15: storeTrueHooksOnly (lane RUNG1-TRUTH unit A; the union of both lanes' rows, composed on the window branch)
     expect(unresolved, 'a roster row names a symbol its file no longer declares exactly once').toEqual([]);
 
     // (b) DISCOVERY, both directions, over the assembly step's OWN body.
@@ -580,6 +588,18 @@ describe('EM-R1 — the writer census of every held key', () => {
     expect(wrapper, 'enrichNpcCoherence is no longer wrapped by its named child stream').toBe(true);
     expect(declaredNamed).toContain('enrichNpcCoherence');
 
+    // ⭐ THE PEOPLE-4 TIES ROW (R-P7): `drawTies` forks its OWN family once (`people-ties`) and keys
+    // it per card; at the coherence seam it is called under the `relationships` pin, in the assembly
+    // body under the same pin inside its own child ('people-ties-late'). The family's SECOND lawful
+    // skip: a held `relationships` key never creates the child, so no sibling moves.
+    expect(rawSource('src/generators/people/ties.js'), 'drawTies no longer forks its own family once')
+      .toMatch(/const family = rng\.fork\(TIES_FORK_LABEL\);/);
+    expect(rawSource(NARRATIVE_FILE), 'the seam\'s tie draw is no longer gated on the relationships pin')
+      .toMatch(/chooseOrPin\(pins, 'relationships', \(\) => drawTies\(/);
+    expect(rawSource(ASSEMBLY_FILE).match(/'people-ties-late'/g) || [], 'the late tie child stream moved or multiplied').toHaveLength(1);
+    expect(rawSource(ASSEMBLY_FILE), 'the late tie draw is no longer gated on the relationships pin')
+      .toMatch(/chooseOrPin\(pins, 'relationships', \(\) => UNPINNED\) === UNPINNED\) \{[\s\S]{0,400}inAssemblySubstream\(rng, 'people-ties-late'/);
+
     // Every OTHER held writer is SHARED-STREAM and therefore consumes and discards.
     const shared = ROSTER.filter((row) => row.stream === SHARED).map((row) => row.symbol).sort();
     expect(shared).toEqual([
@@ -592,7 +612,7 @@ describe('EM-R1 — the writer census of every held key', () => {
 
     // THE OTHER NAMED-CHILD ROWS ARE INSIDE THAT ONE STREAM, not streams of their own: each is
     // called from `enrichNpcCoherence`'s own body, so they inherit its child stream.
-    const inside = declaredNamed.filter((symbol) => symbol !== 'enrichNpcCoherence' && symbol !== 'generateConflicts');
+    const inside = declaredNamed.filter((symbol) => symbol !== 'enrichNpcCoherence' && symbol !== 'generateConflicts' && symbol !== 'drawTies');
     const enrichmentBody = bodyOf(NARRATIVE_FILE, 'enrichNpcCoherence');
     expect(enrichmentBody.length, 'enrichNpcCoherence was not found: the claim below is vacuous').toBeGreaterThan(500);
     expect(inside.filter((symbol) => !called(enrichmentBody, symbol)),

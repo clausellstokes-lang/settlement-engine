@@ -331,8 +331,9 @@ function expectIndependentIntegrity(settlement, label) {
   for (const [index, relationship] of (
     settlement.relationships || []
   ).entries()) {
-    const first = npcById.get(relationship?.npc1Id);
-    const second = npcById.get(relationship?.npc2Id);
+    // RE-KEYED 2026-11-07 (PEOPLE-4 TIES, R-P7): a tie's ends are `from`/`to` (directed).
+    const first = npcById.get(relationship?.from);
+    const second = npcById.get(relationship?.to);
     expect(first, `${label} relationship[${index}] has no first NPC`).toBeTruthy();
     expect(second, `${label} relationship[${index}] has no second NPC`).toBeTruthy();
     expect(

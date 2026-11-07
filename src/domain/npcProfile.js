@@ -503,8 +503,13 @@ function inferPrimaryRelationship(npc, settlement) {
   const rels = Array.isArray(settlement?.relationships) ? settlement.relationships : [];
   if (!npc?.id || rels.length === 0) return null;
 
-  // Find any relationship involving this NPC.
-  const candidates = rels.filter((r) => r.npc1Id === npc.id || r.npc2Id === npc.id);
+  // Find any relationship involving this NPC: its OWN directed tie first, then the ties naming
+  // it (PEOPLE-4 TIES, R-P7). TODO(PEOPLE-5): a v1 save's `npc1Id`/`npc2Id` pair is read as
+  // `from`/`to` by the migration.
+  const candidates = [
+    ...rels.filter((r) => r.from === npc.id),
+    ...rels.filter((r) => r.to === npc.id && r.from !== npc.id),
+  ];
   if (candidates.length === 0) return null;
 
   // Prefer relationships with explicit tension over plain alliances —
@@ -512,10 +517,10 @@ function inferPrimaryRelationship(npc, settlement) {
   const withTension = candidates.find((r) => typeof r.tension === 'string' && r.tension);
   const chosen = withTension || candidates[0];
 
-  const otherId = chosen.npc1Id === npc.id ? chosen.npc2Id : chosen.npc1Id;
-  const otherName = chosen.npc1Id === npc.id
-    ? (chosen.npc2N || chosen.npc2Name || otherId)
-    : (chosen.npc1N || chosen.npc1Name || otherId);
+  const otherId = chosen.from === npc.id ? chosen.to : chosen.from;
+  const otherName = chosen.from === npc.id
+    ? (chosen.npc2Name || otherId)
+    : (chosen.npc1Name || otherId);
 
   return {
     otherId,

@@ -222,7 +222,10 @@ export const KEYED_COLLECTIONS = Object.freeze({
   npcs: 'id',
   'powerStructure.conflicts': Object.freeze(['parties', 'issue']),
   'powerStructure.factionRelationships': 'pair',
-  relationships: Object.freeze(['npc1Id', 'npc2Id', 'type']),
+  // PEOPLE-4 TIES (2026-11-07; R-P7): the tie is DIRECTED, one outgoing per card, so its identity
+  // is `from,to,type` (the undirected `npc1Id,npc2Id` pair is not written). Still HELD. TODO(PEOPLE-5):
+  // a v1 save's `npc1Id`/`npc2Id` pair is read as `from`/`to` by the migration, not by a shim here.
+  relationships: Object.freeze(['from', 'to', 'type']),
   'resourceAnalysis.exploitation.fullyExploited': 'chainKey',
   'resourceAnalysis.exploitation.partiallyExploited': 'chainKey',
   'resourceAnalysis.exploitation.unexploited': 'chainKey',

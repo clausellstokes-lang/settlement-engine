@@ -196,7 +196,10 @@ const PICK_VARIANT_CALLS = 31;
 // the tie prose (power/relationshipArchetypes.js) and the conflict lines (dossier/hookLines.js), one hash per tie
 // or conflict drawn; the cast is the roster's faces now (the probe town carries more cards than its named roster
 // did), so two more ties hash their prose. The cast's size is the named cause.
-const FNV_EXTERNAL_CALLS = 17;
+// RE-KEYED 2026-11-07 (the people car, PEOPLE-4 TIES, R-P7): 17 -> 16, measured. One tie per card replaces the
+// pair saturation, so the probe row's tie prose hashes once per card's own tie; the register's fnv1a32External
+// (15 at this lane's base, never re-keyed by PEOPLE-1) moves to the same measured figure.
+const FNV_EXTERNAL_CALLS = 16;
 /** The fork law A1 pins: the mint wrapper's equivalence rests on this line and nothing else. */
 const FORK_LAW = 'fork: (label) => createPRNG(`${seed}::${label}`),';
 /** §6.4's off-corpus block: a wizard-reachable switch, the keys it moves, and 24 seeds. */

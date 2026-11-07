@@ -18,16 +18,15 @@ import { drawRefusingHeld, drawRefusingHeldThrough, drawUnique, heldByOthers } f
 import { themeOfText } from '../domain/hookThemes.js';
 import { disambiguateNPCDisplayNames } from './npcDisplayNames.js';
 import { resolveGenerationWorldLaw } from './generationContext.js';
-import { legacyMassRange } from '../domain/density/densityLaw.js'; import { defenceRoleGate, defenseFactsOf, forceWordsOf } from '../domain/defense/defenseFacts.js'; import { crimeSignalOf, namesCriminalGuild, withoutCriminalGuild } from '../domain/crimeSignal.js'; // R6 (and F4 unit 3): one line, so no cited line moves
+import { legacyMassRange } from '../domain/density/densityLaw.js'; import { defenceRoleGate, defenseFactsOf } from '../domain/defense/defenseFacts.js'; import { crimeSignalOf, namesCriminalGuild, withoutCriminalGuild } from '../domain/crimeSignal.js'; // R6 (and F4 unit 3): one line, so no cited line moves
 import { generateFactionLeaderSecret } from './npc/factionLeaderSecret.js'; import { inlandHookLine } from '../data/inlandHookLines.js'; import { defenceTwinLine } from '../data/defenceTwinLines.js'; // F5, F10: one line, so no cited line moves
 import { CRAFTS_ROLES, NOBLE_ROLES } from './npc/factionRoleCatalog.js';
 import { resolveGeneratedNpcTitle } from './npc/generatedNpcTitle.js';
 import { deriveThorpSecondRole } from './npc/thorpSecondRole.js';
 
 import { NAMING_DATA } from '../data/namingData.js';
-import { STRESS_ECONOMIC_EFFECTS , TRAIT_PRESENCE_DISTRIBUTION } from '../data/npcData.js';
+import { TRAIT_PRESENCE_DISTRIBUTION } from '../data/npcData.js';
 
-import { computeRelTension, createTieProseDraw } from './powerGenerator.js';
 import { pickRandom2 } from './helpers.js';
 import { STRESS_INSTITUTION_EFFECTS } from '../data/stressInstitutionEffects.js';
 import { secretsHeldByFoodRecord } from '../domain/foodSurplus.js';
@@ -41,7 +40,6 @@ import {
   NPC_FEATURES,
   NPC_WANTS,
   NPC_FACTION_GOALS,
-  FACTION_CONFLICT_TYPES,
   NPC_FACTION_LOYALTY,
   NPC_SECRETS,
   NPC_PLOT_HOOKS_DATA,
@@ -697,30 +695,6 @@ const pickTitle = r => {
     disposition: s.disposition,
     behaviour: NPC_PLOT_HOOKS_DATA[s.disposition] || NPC_PLOT_HOOKS_DATA.transactional,
   };
-};
-
-// generateFactionGoal
-const generateFactionGoal = (npcA, npcB, stressFlags) => {
-  let score = 0.28;
-  const cats = [npcA.category, npcB.category];
-
-  // Same category factions have natural rivalry
-  if (npcA.category === npcB.category) score += 0.3;
-
-  // Known conflict type pairs
-  if (FACTION_CONFLICT_TYPES[npcA.category]?.includes(npcB.category)) score += 0.22;
-
-  // Power differential: similar power → more likely to interact
-  const powerGap = Math.abs(npcA.power - npcB.power);
-  if (powerGap <= 1) score += 0.18;
-  else if (powerGap <= 3) score += 0.1;
-
-  // Stress flag boosts for specific category pairs
-  if (stressFlags.merchantCriminalBlur && cats.includes('economy') && cats.includes('criminal')) score += 0.25;
-  if (stressFlags.crusaderSynthesis && cats.includes('military') && cats.includes('religious')) score += 0.3;
-  if (stressFlags.arcaneBlackMarket && cats.includes('magic') && cats.includes('criminal')) score += 0.25;
-
-  return Math.min(score, 0.95);
 };
 
 // NPC_BUILDS
@@ -1601,86 +1575,9 @@ export const generateNPCs = (
   return disambiguateNPCDisplayNames(npcs);
 };
 
-// generateRelationships
-export const generateRelationships = (npcs, config = {}, institutions = []) => {
-  // Relationship type definitions (for the strength labels)
-  const RELATIONSHIP_STRENGTHS = {
-    ally: ['weak', 'moderate', 'strong'],
-    rival: ['professional', 'personal', 'bitter'],
-    enemy: ['mild', 'serious', 'mortal'],
-    family: ['distant', 'close', 'inseparable'],
-    patron_client: ['nominal', 'significant', 'total dependence'],
-    lover: ['casual', 'serious', 'passionate'],
-    mentor_student: ['formal', 'devoted', 'lifelong'],
-    debtor_creditor: ['minor', 'substantial', 'crushing'],
-    political: ['convenience', 'stable', 'unbreakable'],
-    respect: ['grudging', 'genuine', 'deep'],
-  };
-
-  if (!npcs || npcs.length < 2) return [];
-
-  const instFlags = getInstFlags(config, institutions);
-  const stressFlags = getStressFlags(config, institutions);
-  const relationships = [];
-  const seen = new Set();
-  // GS-1: each tie's description and tension are drawn WITHOUT REPLACEMENT across this town,
-  // draw-free; the index rides on the tie as `proseVariant` (see createTieProseDraw).
-  const drawTieProse = createTieProseDraw(forceWordsOf(defenseFactsOf({ institutions }))); // F1: the place's force words
-
-  npcs.forEach(npc => {
-    const maxRelationships = randInt(2, 3);
-    let count = 0;
-
-    // Sort potential partners by relationship score (most likely first)
-    const candidates = npcs
-      .filter(other => other.id !== npc.id)
-      .map(other => ({ npc: other, score: generateFactionGoal(npc, other, stressFlags) }))
-      .sort((a, b) => b.score - a.score);
-
-    for (const { npc: partner, score } of candidates) {
-      if (count >= maxRelationships) break;
-
-      // Deduplicate by pair (regardless of direction)
-      const pairKey = [npc.id, partner.id].sort().join('::');
-      if (seen.has(pairKey)) continue;
-      if (_rng() >= score && count > 0) continue;
-
-      const archetype = computeRelTension(npc, partner, stressFlags, instFlags);
-      const strength = pick(RELATIONSHIP_STRENGTHS[archetype.type] || RELATIONSHIP_STRENGTHS.respect);
-
-      // The archetype key (for UI rendering) and the tie's prose, drawn without replacement.
-      const { archetypeKey, proseVariant, description, tension } = drawTieProse(archetype, npc, partner);
-
-      relationships.push({
-        type: archetype.type,
-        typeName: archetype.label,
-        description,
-        tension,
-        strength,
-        npc1Id: npc.id,
-        npc2Id: partner.id,
-        npc1Name: npc.name,
-        npc2Name: partner.name,
-        npc1Role: npc.role,
-        npc2Role: partner.role,
-        archetypeKey, proseVariant,
-        flagDriven:
-          stressFlags.anyActive &&
-          (archetype === STRESS_ECONOMIC_EFFECTS.econ_crim_blur ||
-            archetype === STRESS_ECONOMIC_EFFECTS.mil_crim_corruption ||
-            archetype === STRESS_ECONOMIC_EFFECTS.rel_crim_fraud ||
-            archetype === STRESS_ECONOMIC_EFFECTS.mag_crim_market ||
-            archetype === STRESS_ECONOMIC_EFFECTS.rel_mil_crusader ||
-            archetype === STRESS_ECONOMIC_EFFECTS.econ_mil_contract),
-      });
-
-      seen.add(pairKey);
-      count++;
-    }
-  });
-
-  return relationships;
-};
+// generateRelationships — RETIRED (the people car, PEOPLE-4 TIES, 2026-11-07; R-P7): the pair
+// saturation (every NPC in two or three undirected ties) gave way to ONE outgoing tie per card,
+// drawn at the coherence seam by people/ties.js :: drawTies.
 
 // generateSettlementName
 export const generateSettlementName = (r = 'germanic') => {

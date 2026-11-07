@@ -32,6 +32,7 @@ import {
 } from '../kernel/rngContext.js';
 import { shimLegacyFactionFields } from './people/legacyShim.js';
 import { assignCastPowers } from './people/castPowers.js';
+import { drawTies } from './people/ties.js';
 import { pickVariant } from '../kernel/proseHash.js';
 import { selectOriginBody } from './narrative/settlementOriginProse.js';
 import { resolvePrimaryStress } from './stressPriority.js';
@@ -979,6 +980,18 @@ export const generateCoherence = (settlement, coherenceRng = null, pins = null) 
     () => enrichNpcCoherence(settlement),
   ));
 
+  // ── THE PEOPLE CAR (PEOPLE-4 TIES, 2026-11-07; R-P7): ONE OUTGOING TIE PER CARD, drawn HERE over
+  // the final cast — after the memberships the target rule reads ("× 3 when the two share a
+  // power") and the `other` mints — on the seam's own keyed family (`people-ties::<card id>`,
+  // people/ties.js). The population step's pair-saturation writer is retired. A held
+  // `relationships` key is the DM's and is not redrawn.
+  const relationships = chooseOrPin(pins, 'relationships', () => drawTies(
+    mergedNpcs,
+    { config: settlement.config || {}, institutions: settlement.institutions || [] },
+    coherenceRng?.fork ? coherenceRng : getActiveRng(),
+  ));
+  const withTies = { ...settlement, npcs: mergedNpcs, relationships };
+
   const history = settlement.history || {};
 
   // Historical character string
@@ -996,7 +1009,7 @@ export const generateCoherence = (settlement, coherenceRng = null, pins = null) 
   const prominentRelationship = inCoherenceSubstream(
     coherenceRng,
     'prominent-relationship',
-    () => genRelNarrative(settlement),
+    () => genRelNarrative(withTies),
   );
 
   // Coherence contradiction notes
@@ -1019,6 +1032,7 @@ export const generateCoherence = (settlement, coherenceRng = null, pins = null) 
   return {
     ...settlement,
     npcs: mergedNpcs,
+    relationships,
     // Re-link faction rosters to the enriched npcs so members are not stale pre-enrichment
     // copies (only when the settlement already carries faction groups). [faction-member-staleness]
     ...(Array.isArray(settlement.factions)

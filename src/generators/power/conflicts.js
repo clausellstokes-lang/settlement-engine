@@ -57,7 +57,7 @@ const buildConflictPlotHooks = (factionA, factionB, conflict, instFlags, stressF
  * the factions' order on the power roster, so the ranking is a pure function of the record.
  * Pure: no draw.
  * @param {Array<{ name: string, members?: Array<{ id?: unknown }> }>} factions
- * @param {Array<{ type?: string, npc1Id?: unknown, npc2Id?: unknown }>} relationships
+ * @param {Array<{ type?: string, from?: unknown, to?: unknown }>} relationships
  * @returns {Array<{ factionA: object, factionB: object, ties: number }>}
  */
 const crossFactionRivalPairs = (factions, relationships) => {
@@ -72,7 +72,7 @@ const crossFactionRivalPairs = (factions, relationships) => {
   const pairs = new Map();
   for (const rel of relationships || []) {
     if (!['rival', 'enemy'].includes(rel?.type)) continue;
-    const a = homeOf.get(rel.npc1Id), b = homeOf.get(rel.npc2Id);
+    const a = homeOf.get(rel.from), b = homeOf.get(rel.to); // PEOPLE-4 TIES: the directed ends (R-P7)
     if (!a || !b || a === b) continue;
     const [first, second] = rank.get(a) < rank.get(b) ? [a, b] : [b, a];
     const key = `${rank.get(first)}:${rank.get(second)}`;

@@ -366,7 +366,11 @@ describe('EM-R8 — the escalation ladder never overwrites a HELD key, and the r
     // 2026-11-05 (LANDING-5, the chair's ruling 4; an anti-vacuity arm, READ and BISECTED by stage): 17 -> 16 TERRAIN-POOLS
     // ac09ea83b -> 9 X-46 car 3 90dc22f18 -> 10 PLACE-NOT-TIER 6129c300d -> 7 car 3 I7 6ca454d2b -> 8 F6 6d84aa834 -> 9 F1
     // 5e9ffb220. Still live (nine trials, six of them the E6 seat edit on the six hamlets), and `foreign` stays empty.
-    expect(all.filter((trial) => trial.conflictsRestated).length, 'trials whose conflict citations the post-pass rebuilt').toBe(9);
+    // 2026-11-07 (PEOPLE-4 TIES, R-P7; measured on the lane's base 8fa9de5b8 at 7, red there): 7 -> 40. The ties
+    // are drawn at the coherence seam now and keyed `from,to,type` (directed) in the register, so the
+    // conflicts a rival or enemy tie grounds are re-derived from a different tie list on more trials and the
+    // post-pass restates their citations more often. The law below (no foreign citation) is unchanged.
+    expect(all.filter((trial) => trial.conflictsRestated).length, 'trials whose conflict citations the post-pass rebuilt').toBe(40);
     const foreign = all.filter((trial) => trial.citesOwn === false).map((trial) => `${trial.label} ${trial.key}`);
     // anchored: the line above proves the restatement fires on twelve live trials, so silence here is a cure.
     expect(foreign, `the receipt cites a conflict list that is not the merged record's own:\n${foreign.join('\n')}`).toEqual([]);

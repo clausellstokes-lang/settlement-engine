@@ -1377,7 +1377,9 @@ describe('the notable connection', () => {
     // because the value is a multi-line boolean and the key sits alone on its line. A count
     // of zero over a field a producer WRITES is a measurement; over a field nothing writes it
     // is a default in a reading's clothes. This one is the first.
-    mustExtract(src('src/generators/npcGenerator.js'), 'flagDriven:', 'the flagDriven writer in npcGenerator.js');
+    // RE-KEYED 2026-11-07 (PEOPLE-4 TIES, R-P7): the writer moved with the tie draw — npcGenerator.js's
+    // pair-saturation writer is retired, and people/ties.js :: drawTies writes the flag on every tie.
+    mustExtract(src('src/generators/people/ties.js'), 'flagDriven:', 'the flagDriven writer in people/ties.js');
     // BOTH pools are routed, and the third state — no roll at all — is neither.
     expect(flagDrivenPoolKey([{ flagDriven: true }, { flagDriven: false }])).toBe('flagDriven count > 0');
     expect(flagDrivenPoolKey([{ flagDriven: false }])).toBe('flagDriven count zero');

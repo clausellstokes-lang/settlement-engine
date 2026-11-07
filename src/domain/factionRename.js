@@ -155,7 +155,7 @@ const CASCADE_BUCKETS = Object.freeze([
 /**
  * The same minimal-clone contract for the NPC cascade. `relationships` is the
  * in-settlement edge list (a DIFFERENT bucket from the neighbour links), and it
- * is joined by display name even though every edge also carries npc1Id/npc2Id.
+ * is joined by display name even though every edge also carries its from/to ids.
  */
 const NPC_CASCADE_BUCKETS = Object.freeze([
   'npcs',
