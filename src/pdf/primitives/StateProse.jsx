@@ -79,7 +79,7 @@ const SCREEN_KICKER = Object.freeze({
   // PowerTab.jsx
   'power.legitimacyBanner': 'Public Legitimacy',
   'power.stabilityHeader': 'Stability',
-  'power.criminalUnderside': 'The quieter arithmetic',
+  'power.criminalUnderside': 'Crime and the hall',
   'power.rulingStructure': 'The shape of authority',
   'power.succession': 'Rule and succession',
   // DefenseTab.jsx

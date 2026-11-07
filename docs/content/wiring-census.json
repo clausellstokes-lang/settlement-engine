@@ -23,7 +23,7 @@
   "totals": {
     "pools": 717,
     "blocks": 68,
-    "variants": 2363,
+    "variants": 2365,
     "resolved": 349,
     "unresolved": 368,
     "resolvedWithPredicate": 212,
@@ -37,8 +37,8 @@
     "syntheticTableFields": 100,
     "tiers": {
       "MISSING": 33,
-      "THIN": 486,
-      "COVERED": 231,
+      "THIN": 484,
+      "COVERED": 233,
       "MISSING-AT-TIER": 45
     },
     "tierSilences": 352,
@@ -26078,7 +26078,7 @@
         "seat"
       ],
       "hasBag": true,
-      "variants": 4,
+      "variants": 5,
       "grammars": 4,
       "predicate": [],
       "branchReads": [],
@@ -26112,7 +26112,9 @@
       },
       "declares": [],
       "lineDeclares": {
-        "colour": 4
+        "colour": 3,
+        "tier: <= village": 1,
+        "tier: >= town": 1
       },
       "undeclared": 0,
       "crisisScoped": false
@@ -26134,7 +26136,7 @@
       ],
       "hasBag": true,
       "variants": 4,
-      "grammars": 2,
+      "grammars": 3,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -26187,7 +26189,7 @@
       ],
       "hasBag": true,
       "variants": 5,
-      "grammars": 3,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -26240,7 +26242,7 @@
       ],
       "hasBag": true,
       "variants": 5,
-      "grammars": 2,
+      "grammars": 3,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -26292,7 +26294,7 @@
         "seat"
       ],
       "hasBag": true,
-      "variants": 4,
+      "variants": 5,
       "grammars": 3,
       "predicate": [],
       "branchReads": [],
@@ -26325,7 +26327,11 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
+      "lineDeclares": {
+        "colour": 3,
+        "tier: <= village": 1,
+        "tier: >= town": 1
+      },
       "undeclared": 0,
       "crisisScoped": false
     },
@@ -26399,7 +26405,7 @@
       ],
       "hasBag": true,
       "variants": 3,
-      "grammars": 2,
+      "grammars": 3,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -26505,7 +26511,7 @@
       ],
       "hasBag": true,
       "variants": 3,
-      "grammars": 3,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -26558,7 +26564,7 @@
       ],
       "hasBag": true,
       "variants": 3,
-      "grammars": 1,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -26693,7 +26699,7 @@
       ],
       "hasBag": true,
       "variants": 4,
-      "grammars": 3,
+      "grammars": 4,
       "predicate": [
         {
           "field": "first (via STABILITY_LADDER in powerStateProse.js)",
@@ -26956,6 +26962,7 @@
         "settlement"
       ],
       "slotsNamed": [
+        "faction",
         "seat",
         "settlement"
       ],
@@ -27215,7 +27222,7 @@
       ],
       "hasBag": true,
       "variants": 3,
-      "grammars": 3,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [
         "power.recentConflict"
@@ -28369,7 +28376,7 @@
       ],
       "hasBag": true,
       "variants": 4,
-      "grammars": 3,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -28471,7 +28478,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 2,
+      "grammars": 3,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -28776,7 +28783,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 1,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -28826,7 +28833,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 3,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -29399,7 +29406,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 3,
+      "grammars": 2,
       "predicate": [
         {
           "field": "ledger.present",
@@ -29735,7 +29742,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 3,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [
         "power.criminalCaptureState"
@@ -29802,7 +29809,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 1,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [
         "power.criminalCaptureState"
@@ -29974,7 +29981,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 1,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -30548,7 +30555,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -44770,7 +44777,7 @@
         "DS-POW-2 :: Desperate matched"
       ],
       "variants": 15,
-      "grammars": 14,
+      "grammars": 15,
       "blocks": [
         "DS-POW-2"
       ]
@@ -44907,7 +44914,7 @@
         "DS-POW-6 :: present: false (no legitimacy reading)"
       ],
       "variants": 3,
-      "grammars": 3,
+      "grammars": 2,
       "blocks": [
         "DS-POW-6"
       ]
@@ -57175,7 +57182,7 @@
       "subject": "Endorsed",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "4 variant(s) · 4 grammar(s) · slots {seat, settlement}"
+      "count": "5 variant(s) · 4 grammar(s) · slots {seat, settlement}"
     },
     {
       "tier": "COVERED",
@@ -57183,7 +57190,7 @@
       "subject": "Approved",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "4 variant(s) · 2 grammar(s) · slots {seat, settlement}"
+      "count": "4 variant(s) · 3 grammar(s) · slots {seat, settlement}"
     },
     {
       "tier": "COVERED",
@@ -57191,7 +57198,7 @@
       "subject": "Tolerated",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "5 variant(s) · 3 grammar(s) · slots {seat, settlement}"
+      "count": "5 variant(s) · 2 grammar(s) · slots {seat, settlement}"
     },
     {
       "tier": "COVERED",
@@ -57199,7 +57206,7 @@
       "subject": "Contested",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "5 variant(s) · 2 grammar(s) · slots {seat, settlement}"
+      "count": "5 variant(s) · 3 grammar(s) · slots {seat, settlement}"
     },
     {
       "tier": "COVERED",
@@ -57207,7 +57214,7 @@
       "subject": "Legitimacy Crisis",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "4 variant(s) · 3 grammar(s) · slots {seat, settlement}"
+      "count": "5 variant(s) · 3 grammar(s) · slots {seat, settlement}"
     },
     {
       "tier": "THIN",
@@ -57223,7 +57230,7 @@
       "subject": "breakdown dominated by PROSPERITY, adverse",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 2 grammar(s) · slots {seat, settlement}"
+      "count": "3 variant(s) · 3 grammar(s) · slots {seat, settlement}"
     },
     {
       "tier": "COVERED",
@@ -57239,15 +57246,15 @@
       "subject": "breakdown dominated by DEFENSE, adverse",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 3 grammar(s) · slots {seat, settlement}"
+      "count": "3 variant(s) · 2 grammar(s) · slots {seat, settlement}"
     },
     {
-      "tier": "THIN",
+      "tier": "COVERED",
       "block": "DS-POW-1",
       "subject": "breakdown dominated by FOOD, adverse",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 1 grammar(s) · slots {seat, settlement}"
+      "count": "3 variant(s) · 2 grammar(s) · slots {seat, settlement}"
     },
     {
       "tier": "COVERED",
@@ -57267,7 +57274,7 @@
         "first (via STABILITY_LADDER in powerStateProse.js)"
       ],
       "readingFunction": "STABILITY_LADDER",
-      "count": "4 variant(s) · 3 grammar(s) · slots {faction, seat, settlement}"
+      "count": "4 variant(s) · 4 grammar(s) · slots {faction, seat, settlement}"
     },
     {
       "tier": "COVERED",
@@ -57305,7 +57312,7 @@
         "first (via STABILITY_LADDER in powerStateProse.js)"
       ],
       "readingFunction": "STABILITY_LADDER",
-      "count": "3 variant(s) · 3 grammar(s) · slots {seat, settlement}"
+      "count": "3 variant(s) · 3 grammar(s) · slots {faction, seat, settlement}"
     },
     {
       "tier": "COVERED",
@@ -57337,7 +57344,7 @@
       "subject": "recentConflict present",
       "fields": [],
       "readingFunction": "stabilityLensPoolKey",
-      "count": "3 variant(s) · 3 grammar(s) · slots {seat, settlement}"
+      "count": "3 variant(s) · 2 grammar(s) · slots {seat, settlement}"
     },
     {
       "tier": "THIN",
@@ -57487,7 +57494,7 @@
       "subject": "theocracy",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "4 variant(s) · 3 grammar(s) · slots {institution, seat, settlement}"
+      "count": "4 variant(s) · 2 grammar(s) · slots {institution, seat, settlement}"
     },
     {
       "tier": "COVERED",
@@ -57503,7 +57510,7 @@
       "subject": "criminal",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 2 grammar(s) · slots {seat, settlement}"
+      "count": "3 variant(s) · 3 grammar(s) · slots {seat, settlement}"
     },
     {
       "tier": "COVERED",
@@ -57551,7 +57558,7 @@
       "subject": "economicBase: mixed",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "COVERED",
@@ -57559,7 +57566,7 @@
       "subject": "governing body name: a SLOT, never a baked noun",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 3 grammar(s) · slots {seat, settlement}"
+      "count": "3 variant(s) · 2 grammar(s) · slots {seat, settlement}"
     },
     {
       "tier": "COVERED",
@@ -57625,7 +57632,7 @@
         "ledger.present"
       ],
       "readingFunction": "legitimacyReadingPoolKey",
-      "count": "3 variant(s) · 3 grammar(s) · slots {seat, settlement}"
+      "count": "3 variant(s) · 2 grammar(s) · slots {seat, settlement}"
     },
     {
       "tier": "COVERED",
@@ -57663,15 +57670,15 @@
       "subject": "capture reached an AGENT of a faction",
       "fields": [],
       "readingFunction": "capturePoolKey",
-      "count": "3 variant(s) · 3 grammar(s) · slots {faction, settlement}"
+      "count": "3 variant(s) · 2 grammar(s) · slots {faction, settlement}"
     },
     {
-      "tier": "THIN",
+      "tier": "COVERED",
       "block": "DS-POW-6",
       "subject": "capture reached a LEADER",
       "fields": [],
       "readingFunction": "capturePoolKey",
-      "count": "3 variant(s) · 1 grammar(s) · slots {faction, settlement}"
+      "count": "3 variant(s) · 2 grammar(s) · slots {faction, settlement}"
     },
     {
       "tier": "THIN",
@@ -57695,7 +57702,7 @@
       "subject": "operation role unlicensed revenue",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -57777,7 +57784,7 @@
       "subject": "glue concession (seats and revenue traded)",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
