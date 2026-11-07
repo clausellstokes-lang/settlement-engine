@@ -4330,7 +4330,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "People in {settlement} keep the feast days and not much more.",
+          "text": "The clergy's register shows {settlement} at the feast days and little else; the tithe book is paid up, and nothing more is given.",
           "slots": [
             "settlement"
           ],
@@ -4423,7 +4423,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "marks": [
             "clergy"
           ],
-          "text": "The clergy count more people at every rite than the time before.",
+          "text": "The clergy's register counts more people at every rite than at the one before.",
           "slots": [],
           "vid": 3
         }
@@ -4651,7 +4651,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "The clergy back the ruler openly, and their backing carries weight here.",
+          "text": "The clergy name the ruler in their prayers and in their books, and that backing carries weight here.",
           "slots": [],
           "vid": 1
         },
@@ -5284,7 +5284,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "{settlement} has as many faiths as it can support; a new one would have to push one out.",
+          "text": "Every household in {settlement}'s temple rolls is already entered under one faith or another, so a new creed would have to take its people from an old one.",
           "slots": [
             "settlement"
           ],
@@ -5412,7 +5412,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no crisis: religious_conversion"
           ],
-          "text": "Nobody in {settlement} questions this creed's right to be first.",
+          "text": "The clergy's register in {settlement} names this creed first, and nobody disputes the entry.",
           "slots": [
             "settlement"
           ],
@@ -5487,7 +5487,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "The patron has the numbers, but few believe it deserves first place.",
+          "text": "The clergy's register still counts the patron's people as the most, but few believe it deserves first place, so its word carries less than its numbers.",
           "slots": [],
           "vid": 3
         }
@@ -5495,7 +5495,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
       "LEGITIMACY: contested": [
         {
           "angle": "ledger",
-          "text": "Most people reject the patron's claim; it is first only by headcount, and that could change.",
+          "text": "The patron is first in the clergy's register by headcount alone; most people reject its claim, and the next count could change the entry.",
           "slots": [],
           "vid": 1
         },
@@ -5527,7 +5527,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "{creed} is no longer first in {settlement}; its people drifted to another rite until the other was larger.",
+          "text": "{creed} is no longer first in {settlement}'s temple rolls; its people drifted to another rite until the other was larger.",
           "slots": [
             "creed",
             "settlement"
@@ -5544,7 +5544,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
       "FALL: discredited": [
         {
           "angle": "ledger",
-          "text": "The old patron lost first place over a question of right, not numbers, and its people left with it.",
+          "text": "The old patron lost first place over a question of right, not numbers; the temple rolls show its people leaving with it.",
           "slots": [],
           "vid": 1
         },
@@ -5611,7 +5611,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
       "PANTHEON RANK: Cult": [
         {
           "angle": "ledger",
-          "text": "The creed is kept almost nowhere else: a small following, fiercely held.",
+          "text": "The temple rolls of other towns hardly name this creed: a small following, kept almost nowhere else, and fiercely held.",
           "slots": [],
           "vid": 1
         },
@@ -5633,7 +5633,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
       "PANTHEON RANK: Minor": [
         {
           "angle": "ledger",
-          "text": "The faith is kept in a few towns across the realm, and known among the travellers between them.",
+          "text": "The faith is entered in the temple rolls of a few towns across the realm, and known among the travellers between them.",
           "slots": [],
           "vid": 1
         },
@@ -6343,7 +6343,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
       "ENDOWED": [
         {
           "angle": "ledger",
-          "text": "{institution} at {settlement} owns land, so it can outlast bad seasons, thin years and unfriendly officers.",
+          "text": "The deeds and rent book of {institution} show land at {settlement}, so it can outlast bad seasons, thin years and unfriendly officers.",
           "slots": [
             "institution",
             "settlement"
@@ -6363,7 +6363,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
       "THIN": [
         {
           "angle": "ledger",
-          "text": "{creed} is kept at {settlement}, but by few, and without much weight.",
+          "text": "The clergy's register keeps {creed} at {settlement}, but its pages are thin, and the faith carries little weight.",
           "slots": [
             "creed",
             "settlement"

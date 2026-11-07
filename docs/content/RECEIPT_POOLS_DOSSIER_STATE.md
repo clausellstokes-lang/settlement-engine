@@ -4632,7 +4632,7 @@ reads what the panel renders. A page draws at most one of each.
 **DEVOTION: `observant`** {colour}
 1. `[street]` Faith here is habit more than fervour. The rites are kept, and kept without much heat.
 2. `[visitor]` The town observes. It marks the days, attends the required occasions, and does not think about it much between them.
-3. `[ledger]` People in {settlement} keep the feast days and not much more.
+3. `[ledger]` The clergy's register shows {settlement} at the feast days and little else; the tithe book is paid up, and nothing more is given.
 
 **DEVOTION: `lukewarm`**
 1. `[visitor · temple]` The benches are thinly filled. The rites survive as custom rather than conviction, and the custom is wearing.
@@ -4647,7 +4647,7 @@ reads what the panel renders. A page draws at most one of each.
 **ARC: `trend: rising`** · a cause clause is licensed ONLY where `piety.causes[]` carries `conduct_alignment`
 1. `[unfolding · colour]` More people attend the rites each season, because the town is living as its creed asks.
 2. `[street · colour]` The tide is coming back in. Attendance has not caught up with belief yet (it rarely does), but it is moving.
-3. `[ledger · clergy]` The clergy count more people at every rite than the time before.
+3. `[ledger · clergy]` The clergy's register counts more people at every rite than at the one before.
 
 **ARC: `trend: falling`** · a cause clause is licensed ONLY where `piety.causes[]` carries `conduct_drift` or `clergy_distortion`
 1. `[unfolding · colour]` Fewer people attend each season, and the clergy have stopped trying to call them back.
@@ -4690,7 +4690,7 @@ reads what the panel renders. A page draws at most one of each.
 3. `[street · clergy]` The faith and the government stand apart. Neither is strengthened by the other, and the ruler feels it more than the clergy do.
 
 **MANDATE: a dominant church**
-1. `[ledger · colour]` The clergy back the ruler openly, and their backing carries weight here.
+1. `[ledger · colour]` The clergy name the ruler in their prayers and in their books, and that backing carries weight here.
 2. `[street · clergy]` Authority here is doubled: what the ruling power asks, the patron's clergy have already asked.
 3. `[visitor · colour]` The faith is strong and it is aligned; the ruler's writ carries a weight the office alone would not give it.
 
@@ -4809,7 +4809,7 @@ panel does not surface at all.
 
 **NICHE: slots saturated at tier capacity** {colour}
 1. `[counterforce]` The town sustains as many faiths as it can. A new creed arriving here does not join the field; it displaces something.
-2. `[ledger]` {settlement} has as many faiths as it can support; a new one would have to push one out.
+2. `[ledger]` Every household in {settlement}'s temple rolls is already entered under one faith or another, so a new creed would have to take its people from an old one.
 3. `[threshold]` There is no room. Any rite that takes hold here takes hold at another's expense, and the other knows it.
 
 **NICHE: slots open**
@@ -4830,7 +4830,7 @@ panel does not surface at all.
 
 **LEGITIMACY: `secure`**
 1. `[elder · no crisis: religious_conversion]` The patron's claim is not questioned here. Whatever the shares say, the town regards {creed} as the rightful faith of this place, and has for {timeband_span}. *— requires `tenure`*
-2. `[ledger · no crisis: religious_conversion]` Nobody in {settlement} questions this creed's right to be first.
+2. `[ledger · no crisis: religious_conversion]` The clergy's register in {settlement} names this creed first, and nobody disputes the entry.
 3. `[threshold · no crisis: religious_conversion]` The patron's place is secure; even a larger rival would not be thought its equal.
 4. `[ledger · crisis: religious_conversion]` The patron's claim was settled long before the conversion reached {settlement}, and it is being tested now by people who never thought to question it.
 
@@ -4842,20 +4842,20 @@ panel does not surface at all.
 **LEGITIMACY: `tenuous`** {colour}
 1. `[counterforce]` The patron still fills the benches, but more people now say it has no right to be first.
 2. `[threshold]` {creed}'s claim here is weak enough to be contested by anyone with a better one, and better claims are not scarce.
-3. `[ledger]` The patron has the numbers, but few believe it deserves first place.
+3. `[ledger]` The clergy's register still counts the patron's people as the most, but few believe it deserves first place, so its word carries less than its numbers.
 
 **LEGITIMACY: `contested`** {colour}
-1. `[ledger]` Most people reject the patron's claim; it is first only by headcount, and that could change.
+1. `[ledger]` The patron is first in the clergy's register by headcount alone; most people reject its claim, and the next count could change the entry.
 2. `[street]` Nobody here believes {creed} has the right to the place it occupies. The observance continues and the deference has stopped.
 3. `[counterforce]` The patron's claim to be first is openly disputed in {settlement}.
 
 **FALL: `displaced`** (an organic share flip) {colour}
 1. `[unfolding]` The seat changed hands. {rival_creed} drew away enough of the town's adherence to take it, steadily and without any single decisive week.
-2. `[ledger]` {creed} is no longer first in {settlement}; its people drifted to another rite until the other was larger.
+2. `[ledger]` {creed} is no longer first in {settlement}'s temple rolls; its people drifted to another rite until the other was larger.
 3. `[elder]` The old patron was outnumbered rather than defeated. The houses are the same houses, and the name over the calendar has changed.
 
 **FALL: `discredited`** (a legitimacy-floor contest loss) {colour}
-1. `[ledger]` The old patron lost first place over a question of right, not numbers, and its people left with it.
+1. `[ledger]` The old patron lost first place over a question of right, not numbers; the temple rolls show its people leaving with it.
 2. `[street]` {creed} was found wanting here. What unseated it was a judgment about rightfulness, and the congregation did not argue.
 3. `[counterforce]` A rival with a better claim took first place from a creed that could no longer defend its own.
 
@@ -4870,12 +4870,12 @@ panel does not surface at all.
 3. `[threshold]` The old faith was put down on purpose, and nobody here will talk about it.
 
 **PANTHEON RANK: `Cult`** (fewer than a couple of settlement seats) {colour}
-1. `[ledger]` The creed is kept almost nowhere else: a small following, fiercely held.
+1. `[ledger]` The temple rolls of other towns hardly name this creed: a small following, kept almost nowhere else, and fiercely held.
 2. `[visitor]` Beyond {settlement} this faith is scarcely kept.
 3. `[street]` The rite has almost no reach. Its clergy travel little because there is nowhere to travel to.
 
 **PANTHEON RANK: `Minor`** (two or three seats) {colour}
-1. `[ledger]` The faith is kept in a few towns across the realm, and known among the travellers between them.
+1. `[ledger]` The faith is entered in the temple rolls of a few towns across the realm, and known among the travellers between them.
 2. `[visitor]` {creed} is a regional creed. A traveller from the next province will recognize the name and not the calendar.
 3. `[street]` It is a real faith with a real spread and no pretensions past its district.
 
@@ -6422,11 +6422,11 @@ no compass word, no real-world place, no named analogy.*
 3. `[ledger]` {institution}'s standing at {settlement} is old and entered everywhere: in the rolls, in the feast days, in who is buried where.
 
 **`ENDOWED`** {colour}
-1. `[ledger]` {institution} at {settlement} owns land, so it can outlast bad seasons, thin years and unfriendly officers. *— requires `templeWealth`*
+1. `[ledger]` The deeds and rent book of {institution} show land at {settlement}, so it can outlast bad seasons, thin years and unfriendly officers. *— requires `templeWealth`*
 2. `[visitor]` {institution} owns land and houses in {settlement}, and has held them through every change. *— requires `templeWealth`*
 
 **`THIN`** {colour}
-1. `[ledger]` {creed} is kept at {settlement}, but by few, and without much weight.
+1. `[ledger]` The clergy's register keeps {creed} at {settlement}, but its pages are thin, and the faith carries little weight.
 2. `[street]` {institution} at {settlement} is one part of the town's week, not the centre of it.
 
 ⭐ **THE GENERATION LENS — THE CHURCH'S STANDING WITH THE TOWN'S OTHER POWERS (W4 PEOPLE, 2026-11-07; the wiring inventory's C1–C4, WAVE-RULINGS item 10: the block MOUNTED at `faith.templeGround` in the same commit).** Four pools keyed on the birth-time stress flags `safetyProfile.flags.{crusaderSynthesis, heresySuppression, heresyIntensity, religiousFraud, mageTheocracy}` (`priorityHelpers.js`), each drawn ONLY WHEN its flag is true and silent otherwise. These are GENERATION facts and hold on every settlement, deity or none, so they speak where `CONTESTED`/`ROOTED`/`ENDOWED`/`THIN` cannot (those four stay dark until the religion state and `templeWealth` reach the record). `heresyIntensity` bands the heresy pool: at or above one half the church hunts, below it the church preaches. Each flag already requires a church on the roster (and a garrison, a criminal house or a magic house as its own antecedent names), and each variant declares the house it presumes. Description position: plain lines, two vantages each (the projection's floor refuses a single-voiced pool). No variant names a creed or a god.
