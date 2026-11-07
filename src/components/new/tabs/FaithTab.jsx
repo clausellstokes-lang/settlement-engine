@@ -138,7 +138,7 @@ export default function FaithTab({ settlement, saveId = null, playerView = false
         ? Object.keys(FALL_SENTENCE).find((c) => FALL_SENTENCE[c] === model.patronFallSentence)
         : undefined,
       // DS-FTH-4's generation lens (W4 PEOPLE, 2026-11-07): the birth-time stress flags.
-      faithFlags: settlement?.safetyProfile?.flags || null,
+      faithFlags: settlement?.economicState?.safetyProfile?.flags || null,
     },
   });
 

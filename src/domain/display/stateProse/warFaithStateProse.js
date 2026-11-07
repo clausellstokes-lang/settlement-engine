@@ -806,7 +806,7 @@ export function nicheContestPoolKey(ranks) {
  * @property {unknown} [patronFallCause] `faithProfile.patronFall.cause`, when the world
  *   materialised one (it only exists behind the `faithUnseatingEnabled` fence)
  * @property {unknown} [settlementId]
- * @property {Record<string, unknown>|null} [faithFlags] `safetyProfile.flags` (DS-FTH-4's
+ * @property {Record<string, unknown>|null} [faithFlags] `economicState.safetyProfile.flags` (DS-FTH-4's
  *   generation lens: crusaderSynthesis, heresySuppression, heresyIntensity, religiousFraud,
  *   mageTheocracy)
  */

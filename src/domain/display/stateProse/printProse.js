@@ -437,7 +437,7 @@ export function buildPrintProse(settlement, ctx = {}) {
     faith: faithModel,
     hasPatron: !!faithModel.hasEmbed,
     patronFallCause: patronFallCauseOf(faithModel.patronFallSentence),
-    faithFlags: r?.safetyProfile?.flags || null,
+    faithFlags: r?.economicState?.safetyProfile?.flags || null,
   }, opts), faithModel);
 
   // ── THE POSITIONS, IN PAGE ORDER ────────────────────────────────────────────────────

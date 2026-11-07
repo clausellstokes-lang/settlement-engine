@@ -8,7 +8,7 @@
   "The reviewable slice is computed by RULE (reviewableDark), never hand-listed."
  ],
  "schema": 1,
- "frozenAtSha": "ee3b7a16832d16ad259a303bb6c6615525aac40c",
+ "frozenAtSha": "86a30fdf270fffa1f1bfe2542c45a48bfcf531d0",
  "charter": "§18.1 WRWALKER Car 1 (HORIZON) — chair-signed vetoably at the INSTR-WRW pre-stage",
  "minRows": 40,
  "corpusMeta": {
@@ -24,7 +24,7 @@
  },
  "shapesDigest": "9cce955973cac3a42986bcbac2deb92a1901b641e691da98d8462681a48c2cf7",
  "detectorDigest": "cce104e3a7794d95b85fd4df52a649b11fc8ee147f509a3a194412ba3a406fde",
- "verdictDigest": "00eb7f21a55be51dee24b7ac15084be0ed70956c19e0b48b443350e27a0aadf8",
+ "verdictDigest": "58f5b277d07f1ba9c0b02eedba4904d482951cfa8e9b8d406916412fffb987bc",
  "surfaceRoots": {
   "web": [
    "src/main.jsx"
@@ -83,8 +83,8 @@
  },
  "population": {
   "judged": 6730,
-  "lit": 600,
-  "litName": 4865,
+  "lit": 601,
+  "litName": 4864,
   "dark": 1265,
   "thinKeys": 8776,
   "thinShapes": 904,
@@ -92,14 +92,14 @@
  },
  "scanStats": {
   "files": 1740,
-  "sites": 40823,
-  "propRead": 38648,
+  "sites": 40825,
+  "propRead": 38650,
   "elemRead": 0,
   "destructure": 2162,
   "inOp": 13,
-  "rGrades": 6332,
-  "nGrades": 984640,
-  "resolvedReceivers": 7114
+  "rGrades": 6338,
+  "nGrades": 984642,
+  "resolvedReceivers": 7118
  },
  "registerDigest": "1e3ab9d6b0023c9fa2cf949f373df29a65d5b7cd88114c866ae3b619dbe098e2",
  "pendingSurfaceCeiling": 3,
@@ -13647,7 +13647,7 @@
   "crimeTypes on safetyProfile": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R world-book=R",
   "criminalInstitutions on safetyProfile": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
   "economicDragDesc on safetyProfile": "web-display=R",
-  "flags on safetyProfile": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
+  "flags on safetyProfile": "campaign-pdf=N dossier-pdf=R foundry=N web-display=R web-transitive=N world-book=N",
   "guardEffectivenessDesc on safetyProfile": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R world-book=R",
   "plotHooks on safetyProfile": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
   "safetyDesc on safetyProfile": "dossier-pdf=R web-display=R",

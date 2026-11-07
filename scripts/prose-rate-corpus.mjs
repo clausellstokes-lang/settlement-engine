@@ -313,7 +313,7 @@ export function deskReturns(s, opts, onThrow) {
     const model = faithPanelModel(s);
     // W4 PEOPLE 2026-11-07: the birth-time stress flags, as FaithTab and printProse hand them (DS-FTH-4).
     return warFaith.warFaithStateProse(s, {
-      faith: model, hasPatron: !!model.hasEmbed, faithFlags: s?.safetyProfile?.flags || null,
+      faith: model, hasPatron: !!model.hasEmbed, faithFlags: s?.economicState?.safetyProfile?.flags || null,
     }, opts);
   });
   return out;

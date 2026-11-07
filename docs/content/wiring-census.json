@@ -7,7 +7,7 @@
       "src/domain/display/stateProse/economyStateProse.js": "d2bfe8cafa209803f26c83fde83534a7ba45230010ff87c33bd4ac52d831b924",
       "src/domain/display/stateProse/defenseStateProse.js": "6ebbed0ca4e9125607fde9443b16d4da328cc1481f711f25a22b5d384cec3ce7",
       "src/domain/display/stateProse/stressorsStateProse.js": "13c7f383882acf5bb48267feb4302ced6b9798cec2575470903f1aa88205600d",
-      "src/domain/display/stateProse/warFaithStateProse.js": "d9d33a57f2da0b2281e2d0eb3476bcbae3221f11b5fa7db39ac6f6d32102244e",
+      "src/domain/display/stateProse/warFaithStateProse.js": "cd457c6496e5d84828e782f46c8a242c395c3636d62b0096469d14c3a1e1e3df",
       "src/domain/display/stateProse/dossierMounts.js": "f5acb5537ba8deca5c96148ef2b8eab9a279951016e000925af550dd276cf47c"
     },
     "candidateLeaves": {
