@@ -315,23 +315,11 @@ export const WRITER_DARK_REGISTER = Object.freeze([
     charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
       + 'W6, section ECO), consumer CONFIRMED at src/generators/economy/prosperity.js:83',
   }),
-  Object.freeze({
-    identity: 'growsMoreThanEats on foodRecord',
-    key: 'growsMoreThanEats',
-    shape: 'foodRecord',
-    writer: 'src/generators/economy/foodBalance.js',
-    reason: 'engine-internal',
-    consumer: Object.freeze({
-      file: 'src/domain/foodSurplus.js',
-      symbol: 'the surplus gate, which allows food-export and surplus words only where the place grows more than it '
-        + 'eats',
-    }),
-    why: 'A gate, not a sentence: whether the place produces more food than it needs. The surplus law reads it '
-      + '(foodSurplus.js:23) to decide whether any surplus or food-export word may be printed at all; what a '
-      + 'player sees is the outcome of the gate (a surplus said or not said), never the boolean.',
-    charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
-      + 'W6, section ECO), consumer CONFIRMED at src/domain/foodSurplus.js:23',
-  }),
+  // MERGE-R2 (2026-11-07, the integration merge of the rung-2 landing): `growsMoreThanEats on foodRecord` LEFT this
+  // register. W6 (section ECO) convicted it engine-internal because its consumer, src/domain/foodSurplus.js, sat
+  // outside every surface closure; the rung-2 landing's chunk cure (computeActiveChains reads the food gate from
+  // domain/foodSurplus.js, LANDING-R2 phase 2 step 4) brought that file inside the dossier-pdf closure, so at the
+  // merged tip the identity is LIT and the row would be wrong about its own reason (clause E). Retired with that cause.
   Object.freeze({
     identity: 'isSurplus on foodSecurity',
     key: 'isSurplus',
@@ -545,24 +533,10 @@ export const WRITER_DARK_REGISTER = Object.freeze([
     charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
       + 'W6, section ECO), consumer CONFIRMED at src/domain/edit/recordInvariants.js:338',
   }),
-  Object.freeze({
-    identity: 'randomDepletionEligible on resourceConditions',
-    key: 'randomDepletionEligible',
-    shape: 'resourceConditions',
-    writer: 'src/domain/resourceSemantics.js',
-    reason: 'engine-internal',
-    consumer: Object.freeze({
-      file: 'src/domain/worldPulse/resourceTaxonomy.js',
-      symbol: 'the resource taxonomy, which carries the semantics table\'s random-depletion gate into the depletion '
-        + 'roll',
-    }),
-    why: 'An rng gate: whether random depletion may strike this kind of resource. The resource semantics table '
-      + 'writes it onto the condition row at birth, and the taxonomy reads the same table entry '
-      + '(resourceTaxonomy.js:95) to gate the depletion roll; the player is shown the resource\'s condition, '
-      + 'never the gate. The stored copy on the condition row is not itself re-read.',
-    charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
-      + 'W6, section ECO), consumer PLAUSIBLE at src/domain/worldPulse/resourceTaxonomy.js:95',
-  }),
+  // MERGE-R2 (2026-11-07): `randomDepletionEligible on resourceConditions` LEFT this register by clause S (BANK THE WIN):
+  // at the merged tip the identity is LIT-NAME — the rung-2 landing's closures reach a reader that names the key
+  // (its writer-reach row reads dossier-pdf=N foundry=N on that side, web-transitive=N alone on the integration side
+  // that registered it, W6 ECO ba1737b88). Struck with that cause (PLAUSIBLE: the surface that names it is the tool's).
   Object.freeze({
     identity: 'magicDependent on _isolationSupport',
     key: 'magicDependent',
