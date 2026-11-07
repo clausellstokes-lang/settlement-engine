@@ -418,8 +418,10 @@ describe('EM-B2b — world facts by consequence: the route, the refusals and the
     // the generator master e7e8a6ff.. -> 1847e8b7.. (415 of 525 rows); the prose manifest did not move. Restated in the same act.
     // Then WIRING-W0 record 03, ONE FOOD-SOURCE COUNT (docs/shift-records/2026-11-07-w0-03-one-food-source-count.json), from
     // the stage at 3d1df12d7: the generator master 1847e8b7.. -> 8141a111.. (525 of 525 rows); the prose manifest did not move.
+    // Then WIRING-W0 record 04, LEGACY ANNOTATIONS DATED AT BIRTH (docs/shift-records/2026-11-07-w0-04-legacy-annotations-dated.json),
+    // from the stage at b893dcda1: the generator master 8141a111.. -> 98f99494.. (525 of 525 rows); the prose manifest did not move.
     expect(shaOfFile(GOLDEN), 'tests/fixtures/generator-golden-master.json moved')
-      .toBe('8141a11150f53726955e9141705c0cdc47c02f131220e271ab42c2c749e8a3c1');
+      .toBe('98f994948fe1a8c0146d8e1cfe9e9e4a86e50289b8c83680590d28d54c77ae0c');
     expect(shaOfFile(PROSE_GOLDEN), 'tests/fixtures/dossier-prose-manifest-golden.json moved')
       .toBe('777e4b4b2968fab6b02a758435c7dcc8c779753942aeab77c4ae8c261e6d990e');
 
