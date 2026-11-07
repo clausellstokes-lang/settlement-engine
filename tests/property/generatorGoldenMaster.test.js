@@ -18,6 +18,13 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-11-07 — RECORD 0A, THE REVIEW-INTAKE LANE, THROUGH THE SIGNED DOOR (ODQ §934.105, THE PEOPLE CAR’S LANDING;
+ *   record docs/shift-records/2026-11-07-people-land-0a-review-intake.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   525 of 525 rows (thorp 84, hamlet 84, village 84, town 105, city 84, metropolis 84; the key set identical) against the stage of the first parent a1d5ecd0e (e7e8a6ff..). THE CAUSE, ONE (first-parent
+ *   step 5b444331a): the review-intake lane (63a7cd852) merged onto the integration branch, never re-recorded at its own tip: a proxy is not a provider, water read from the record, the receipt reads its trace, the chain table names only processors, a gap says which kind, no roster carries one secret or goal twice; the from-bytes are W0's (06050f53..), whose code this stage predates, and record 0b composes W0 over this one. ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree S0a (the tree of 5b444331a with the door paths carried from
+ *   the branch, the previous record's writes committed). 06050f53.. -> b1be65e4..
+ *
  * 2026-11-04 — F10 WALLS-WORD (UNITS 1–4), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
  *   record docs/shift-records/2026-11-04-rung1-26-f10-walls-word.json; the cloud chair signs under the owner's delegation, vetoable).
  *   34 OF 525 ROWS MOVED (town 34; thorp, hamlet, village, city, metropolis 0); the key set is identical. THE CAUSE, ONE (first-parent
