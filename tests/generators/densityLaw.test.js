@@ -768,7 +768,9 @@ describe('end to end — the law through the real pipeline', () => {
         // `npc.<faction>_<role>_N`, which §817-Q1 turns OFF under v2: that is the base's roster law, not the cast's)
         // By HOUSE (the card's id): the law moves the POWERS' count, flags and bands (those STAY), so a card's
         // memberships and ranks may differ between the laws; its house, and the seat's rank, may not.
-        const castOf = (world) => world.npcs.filter((n) => n.institution).map((n) => n.id).sort(); // the stored order is the relevance sort, which the powers move
+        // the HOUSE cards: the `other` powers' mints follow the powers, which the law thins (v2) — so a mint may exist
+        // under one law and not the other; the houses' faces are the same under both
+        const castOf = (world) => world.npcs.filter((n) => n.institution?.kind === 'house').map((n) => n.id).sort();
         expect(castOf(v2), `${seed}: the cast is the same houses under both laws`).toEqual(castOf(v1));
       }
     }

@@ -34,12 +34,14 @@ Seat: PEOPLE-1 CAST (this seat runs on Fable 5.1, as the chair ruled the trailer
 |---|---|---|---|---|---|---|---|
 | thorp | 1 → 2 | 23 → 15 | 8 % → 3 % | — → 167/167 | 23 | 4 | 0 |
 | hamlet | 3 → 3 | 62 → 20 | 35 % → 44 % | — → 167/167 | 83 | 12 | 0 |
-| village | 5 → 9 | 47 → 25 | 52 % → 47 % | — → 167/167 | 97 | 19 | 0 |
-| town | 8 → 24 | 70 → 15 | 66 % → 65 % | — → 167/167 | 0 | 39 | 0 |
-| city | 14 → 58 | 165 → 20 | 65 % → 76 % | — → 166/166 | 0 | 47 | 0 |
-| metropolis | 26 → 78 | 165 → 7 | 68 % → 83 % | — → 166/166 | 0 | 74 | 0 |
+| village | 5 → 9 | 47 → 26 | 52 % → 48 % | — → 167/167 | 97 | 19 | 0 |
+| town | 8 → 25 | 70 → 15 | 66 % → 65 % | — → 167/167 | 0 | 39 | 0 |
+| city | 14 → 59 | 165 → 25 | 65 % → 77 % | — → 166/166 | 0 | 47 | 0 |
+| metropolis | 26 → 79 | 165 → 9 | 68 % → 83 % | — → 166/166 | 0 | 74 | 0 |
 
-"Before" is PEOPLE-0 §0 and §2 (today's NPCs; the powers at zero and ≥ 3 counted on its proposed face landing). The cards exceed PEOPLE-0's face column at the medians (2/2/9/23/51/68) by the revised census's returns (the inns, the districts, the gangs, the transients: 31 rows back to FACE) and the mints; the hamlet's median holds at 3 with the mint. The residue at zero on the 1,000, by archetype: military 37, religious 33, noble 25, government 9, criminal 3, merchant 2, arcane 1 — powers with no face-bearing house of their own kind on the roster (a War Council beside a militia whose largest share is the seat's; a religious power whose only house of its kind is the untended wayside shrine; a noble power in a city without the mine, the mills or the vintner): the ruling's truth (R-P5), no borrowing. The golden 525 (v1 worlds, 2–4 powers at a thorp) is in `people-1/aggregate-golden-525.md`.
+MEASURED AT THE LANE'S TIP (the instrument's `aggregate-soak-1000.md`, re-run after every change that moved a card: steps 3, 1c, 4f, 4j and the seam mint of 4k). "Before" is PEOPLE-0 §0 and §2 (today's NPCs; the powers at zero and ≥ 3 counted on its proposed face landing). The cards exceed PEOPLE-0's face column at the medians (2/2/9/23/51/68) by the revised census's returns (the inns, the districts, the gangs, the transients: 31 rows back to FACE), the fish market and the village church (1c), and the mints; the hamlet's median holds at 3 with the mint. The residue at zero on the 1,000, by archetype: military 37, religious 33, noble 25, government 9, criminal 3, merchant 2, arcane 1 — powers with no face-bearing house of their own kind on the roster (a War Council beside a militia whose largest share is the seat's; a religious power whose only house of its kind is the untended wayside shrine; a noble power in a city without the mine, the mills or the vintner): the ruling's truth (R-P5), no borrowing. No `other` power is at zero: every one is minted (the seam, once the powers are final — §1). The golden 525 (v1 worlds, 2–4 powers at a thorp) is in `people-1/aggregate-golden-525.md`: thorp 12/168 at zero, hamlet 120/324 (the v1 hamlet carries four powers over two or three faces), village 72/336, town 0/726, city 12/756, metropolis 0/756.
+
+**The seam mint, measured twice over (why it sits where it sits).** Step 4f moved the `other` mint into the representative generator so the population step's ties reached it (a mint born after the ties was isolated in the social graph, convicted by `regenPreservesUserCanon`); the instrument then read 'minted other' 4 → 109 at the thorp and 74 → 114 at the metropolis, and the by-name list showed why: the assembly's replay THINS and ADDS powers after the population step (`resizePoliticalRoster`, `reconcilePowerStructure`; the stress factions), so the generator minted faces for powers the record does not carry (soak1k-0: a Newcomers' spokesman beside one power, the Elder Council). The mint went back to the seam (4k), where the powers are final, and each mint is TIED to the seat there through today's tie generator on its own keyed fork — the instrument reads 4 / 12 / 19 / 39 / 47 / 74 again, no `other` power at zero, and no mint isolated.
 
 ## 3. The registers re-derived, each with its cause and its commit
 
@@ -61,7 +63,15 @@ Every register with a door was re-derived THROUGH its door at the lane's tip, th
 
 ## 4. The red list
 
-_(filled at step 4)_
+Banked from the whole runs at the lane's tip (§8), each red attributed by a run of the same file at the base `262e8b255` (a plain copy of the base tree, `scratchpad/base-copy`), never by argument. Three classes:
+
+**(a) RED BY CONSTRUCTION — the goldens and every suite that hashes a roster (M-3; red at the base too, on 525/525 since the base's last re-record `bd55f335e`, re-listed here with the counts the lane's tip prints).** _(the suites and counts: filled from the final runs below)_
+
+**(b) RED AT THE BASE, NOT THE LANE'S** (the chair cured five base reds at `d71e7d00d` on the integration branch, not merged here): `tests/lint/institutionTable.walker.test.js` (1,853 service rows / 22 orphans against the pins 1,925 / 21 — the same figures at the base), `tests/domain/display/stateProse/tierNounKeptRulings.test.js` ('Town granary' left `RESOURCE_CHAINS.grain.processingInstitutions`), `tests/domain/legacyGeneratorQuarantine.test.js` (`settlementSlice.js`), `tests/lint/mutationCoverageManifest.test.js` (five base files without a manifest entry: gapSaysWhichKind, receiptReadsPersistedTrace, rosterDuplicateDraws, waterDependencyFromRecord, holderCitesBySymbol), `tests/lint/negativeAssertionAnchor.walker.test.js` (four base files' un-anchored negatives), `tests/lint/ledgerCitationIntegrity.test.js` (the local branch ref `review-fixes-2026-07-08` is absent in a fresh clone — an environment red, cured locally with `git branch`), the fork census's A1 golden control hash.
+
+**(c) RED BY DESIGN AT BIRTH, THE LANE'S, LISTED NOT CURED:** `tests/generators/corruptionPass.integration.test.js` — `src/domain/corruption.js` (M-6's named file) reads the old ROLE vocabulary to pick a corrupt card's vector; under M-1b the role is the title, so the pass marks `corrupt: true` and finds no vector (6 of 6 seeds). FPZ re-points the reader (§5).
+
+**Cured (re-keyed with cause, every one green from its own run at the tip):** listed in the commit `5f455dcb9` and §1; and the timeouts under the loaded box given explicit budgets where the arm's own work earned one (`densityLaw`'s leader arm, 180 s).
 
 ## 5. FPZ's files, broken by design at birth (M-6)
 

@@ -43,12 +43,11 @@
 import { slugify } from '../../kernel/slugify.js';
 import { backingArchetypeOf, dealDoubledNiches, houseBacksOf } from '../../domain/dossier/powerSupport.js';
 import { BACKING_ARCHETYPES } from '../../data/institutionBacking.js';
-import { generateSingleNPC } from '../npcGenerator.js';
+import { generateRelationships } from '../npcGenerator.js';
 import { resolveGenerationWorldLaw } from '../generationContext.js';
-import { disambiguateNPCDisplayNames } from '../npcDisplayNames.js';
 import { governingFactionOf, nameOf } from '../../domain/rulingPower.js';
 import { isNoPowerInstitution } from '../../data/institutionalCatalog.js';
-import { onStream, seatHouseOf, transientNpcConfig, SEAT_CARD_ID } from './representatives.js';
+import { mintPowerFace, onStream, seatHouseOf, SEAT_CARD_ID } from './representatives.js';
 import { OTHER_CARD_PREFIX, otherMintRowFor } from './mintTitles.js';
 import { RUNG_KEYS, rungBandsForTier } from '../../domain/density/densityRungs.js';
 
@@ -86,7 +85,7 @@ export function rollWeightOf(share, weight) {
 /**
  * THE POWERS' PEOPLE. Mutates the cards' `memberships` and `importance`, returns the cast (the
  * `other` mints are born with it in representatives.js; a power born after the population step is
- * minted here, appended).
+ * minted here, appended, each tied to the seat).
  *
  * @param {Record<string, any>} settlement the settlement-shaped object at the coherence seam
  *   (tier, institutions, powerStructure, economicState, config, _userEdits for the DM's `backs`)
@@ -135,12 +134,11 @@ export function assignCastPowers(settlement, cards, rng) {
     landed.forEach((b, i) => join(card, b.faction, b.share, b.weight, i === 0, at));
   });
 
-  // ── The `other` mint (R-P4) is born with the cast in representatives.js (`npc_power_<slug>`), so
-  // the population step's ties reach it. A power BORN AFTER the population step — the stress factions
-  // the assembly's replay adds (The Free Alliance, The Common Interest, Newcomers' Settlement, an
-  // Occupation Authority: `power/stressFactions.js` through `reconcilePowerStructure`) — is minted
-  // HERE, at the seam, under the same table and on its own keyed fork (`people-powers::mint::<slug>`);
-  // such a face carries no ties at birth (the record's §5 names it; PEOPLE-5's seam).
+  // ── The `other` mint (R-P4) ──────────────────────────────────────────────────────────────
+  // Minted HERE, where the powers are FINAL (the assembly's replay thins and adds powers after the
+  // population step), under the title table and on its own keyed fork (`people-powers::mint::<slug>`),
+  // and TIED to the seat on a second fork (`…::tie`) through today's tie generator, so the social
+  // graph reaches it (a face born after the ties was isolated: regenPreservesUserCanon convicted it).
   const lateMints = [];
   const config = settlement?.config || {};
   const economicState = settlement?.economicState || {};
@@ -154,7 +152,6 @@ export function assignCastPowers(settlement, cards, rng) {
     const tier = String(settlement?.tier || 'town');
     const culture = String(config.culture || 'germanic');
     const worldLaw = resolveGenerationWorldLaw(null, config);
-    const npcConfig = transientNpcConfig(config, economicState, settlement?.powerStructure);
     // the roster's texts so far, so a minted face repeats no goal, secret, tell or speech
     const hookRegistry = {
       titles: new Set(cards.flatMap((c) => c?.plotHooks || [])),
@@ -164,20 +161,34 @@ export function assignCastPowers(settlement, cards, rng) {
       goals: new Set(cards.map((c) => c?.goal?.short).filter(Boolean)),
       secrets: new Set(cards.map((c) => c?.secret?.what).filter(Boolean)),
     };
+    const mintCtx = { tier, culture, config, economicState, powerStructure: settlement?.powerStructure, institutions, hookRegistry, worldLaw };
     unfaced.forEach((f) => {
       const name = nameOf(f);
       const id = `${OTHER_CARD_PREFIX}${powerSlug(name)}`;
       existingIds.add(id);
       const row = otherMintRowFor(name);
-      const draw = () => generateSingleNPC(row.role, row.titleKey, row.category, culture, tier, npcConfig, institutions, hookRegistry, worldLaw);
+      const draw = () => mintPowerFace(row, mintCtx);
       const card = mintStream ? onStream(mintStream.fork(powerSlug(name)), draw) : draw();
       card.id = id;
       card.title = row.title;
       card.role = row.title; // M-1b
       card.institution = { kind: 'power', key: name, family: null, title: row.title };
       card.memberships = [];
+      // a name a card already bears takes the mint's TITLE as its qualifier — the MINT's name moves,
+      // never an existing card's (the population step's ties store the names they were drawn with)
+      const taken = new Set([...cards, ...lateMints].map((c) => String(c?.name || '').trim().toLowerCase()));
+      if (taken.has(String(card.name || '').trim().toLowerCase())) card.name = `${String(card.name).trim()} (${row.title})`;
       lateMints.push(card);
       join(card, name, 1, null, true, cards.length + lateMints.length - 1);
+      // the tie: one relationship between the mint and the seat's face (the governing power's first,
+      // else the first card), appended to the record's ties where the seam holds them
+      const ties = settlement?.relationships;
+      const seatCard = cards.find((c) => (seatKey ? c?.institution?.kind === 'house' && c?.institution?.key === seatKey : c?.id === SEAT_CARD_ID)) || cards[0];
+      if (Array.isArray(ties) && seatCard && seatCard.id !== card.id) {
+        const drawTie = () => generateRelationships([seatCard, card], config, institutions);
+        const tie = mintStream ? onStream(mintStream.fork(`${powerSlug(name)}::tie`), drawTie) : drawTie();
+        for (const row of tie) ties.push(row);
+      }
     });
   }
   const all = lateMints.length ? [...cards, ...lateMints] : cards;
@@ -232,5 +243,5 @@ export function assignCastPowers(settlement, cards, rng) {
     const best = card.memberships.reduce((acc, m) => (Number.isInteger(m?.rank) && (acc === null || m.rank < acc) ? m.rank : acc), null);
     card.importance = best === null ? 'minor' : bands[RUNG_KEYS[best - 1]];
   }
-  return lateMints.length ? disambiguateNPCDisplayNames(all) : cards;
+  return all;
 }

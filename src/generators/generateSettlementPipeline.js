@@ -542,7 +542,8 @@ export function regenNPCsPipeline(settlement, config, options = {}) {
     // structuralPosition — not the poorer raw generateNPCs shape. The enrichment
     // reads the live settlement state (legitimacy/capture/food/prosperity) plus the
     // freshly generated npcs; give it a settlement-shaped view with the new roster.
-    const enrichedNpcs = enrichNpcCoherence({ ...settlement, npcs, config });
+    // (the seam mints the `other` powers' faces and ties each to the seat: it is handed THIS regen's ties)
+    const enrichedNpcs = enrichNpcCoherence({ ...settlement, npcs, relationships, config });
 
     // The user's canon rides OVER the finished roll rather than through it. Every
     // draw above has already happened, so preservation cannot perturb a seeded

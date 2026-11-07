@@ -42,15 +42,14 @@ import { clearActiveRng, getActiveRng, setActiveRng } from '../../kernel/rngCont
 import {
   FACE_SEAT, faceOfInstitution, familyOfInstitution, isFabricInstitution,
 } from '../../data/institutionalCatalog.js';
-import { BACKING_ARCHETYPES, backingRowFor } from '../../data/institutionBacking.js';
-import { backingArchetypeOf } from '../../domain/dossier/powerSupport.js';
+import { backingRowFor } from '../../data/institutionBacking.js';
 import { governingFactionOf, nameOf } from '../../domain/rulingPower.js';
 import { generateSingleNPC } from '../npcGenerator.js';
 import { deriveTradeCommodity } from '../tradeCommodity.js';
 import { resolveGenerationWorldLaw } from '../generationContext.js';
 import { disambiguateNPCDisplayNames } from '../npcDisplayNames.js';
 import { poolFor, seatPoolFor } from './poolMap.js';
-import { OTHER_CARD_PREFIX, otherMintRowFor, seatMintTitleFor } from './mintTitles.js';
+import { seatMintTitleFor } from './mintTitles.js';
 
 /** The keyed fork every card is drawn under (declared in the fork census). */
 export const FACES_FORK_LABEL = 'people-faces';
@@ -71,19 +70,22 @@ const NOT_A_SEAT_HOUSE = Object.freeze(['Town crier']);
 export const YIELDS_TO = Object.freeze({ 'Priest (resident)': 'Access to parish church' });
 
 /**
- * The transient config every card's pools are drawn through — the ONE spelling of the three tokens
- * (`_tradeCommodity`, `_dominantFaction`, `_prosperity`) today's `generateNPCs` wrote on its config;
- * the seam's late mint (castPowers.js) draws through the same object, never a second literal.
- * @param {Record<string, any>} config @param {Record<string, any> | null | undefined} economicState
- * @param {{ factions?: Array<{ faction?: string }> } | null | undefined} powerStructure
+ * THE `other` MINT's card (R-P4), drawn here — the one file whose two `generateSingleNPC` call sites
+ * the observed-shape register reads with the transient config spelled inline — for the seam
+ * (castPowers.js), which decides WHICH powers are minted once the powers are final.
+ * @param {{ role: string, titleKey: string, category: string }} row the title table's row
+ * @param {{ tier: string, culture: string, config: Record<string, any>, economicState: Record<string, any> | null | undefined,
+ *   powerStructure: { factions?: Array<{ faction?: string }> } | null | undefined, institutions: RosterRow[],
+ *   hookRegistry: Record<string, Set<string>>, worldLaw: any }} ctx
  */
-export function transientNpcConfig(config, economicState, powerStructure) {
-  return {
-    ...config,
-    _tradeCommodity: deriveTradeCommodity(economicState || {}, { firstWordFallback: true }),
-    _dominantFaction: powerStructure?.factions?.[0]?.faction || null,
-    _prosperity: economicState?.prosperity || null,
+export function mintPowerFace(row, ctx) {
+  const npcConfig = {
+    ...ctx.config,
+    _tradeCommodity: deriveTradeCommodity(ctx.economicState || {}, { firstWordFallback: true }),
+    _dominantFaction: ctx.powerStructure?.factions?.[0]?.faction || null,
+    _prosperity: ctx.economicState?.prosperity || null,
   };
+  return generateSingleNPC(row.role, row.titleKey, row.category, ctx.culture, ctx.tier, npcConfig, ctx.institutions, ctx.hookRegistry, ctx.worldLaw);
 }
 
 /** @typedef {{ name?: string, isCustom?: boolean, source?: string }} RosterRow */
@@ -161,7 +163,12 @@ export function generateRepresentatives(settlement, culture = 'germanic', config
   const seat = seatHouseOf(institutions);
   // The same config context generateNPCs handed every figure: the goal and secret pools read the
   // trade commodity, the dominant power and the prosperity through it.
-  const npcConfig = transientNpcConfig(config, economicState, powerStructure);
+  const npcConfig = {
+    ...config,
+    _tradeCommodity: deriveTradeCommodity(economicState, { firstWordFallback: true }),
+    _dominantFaction: powerStructure?.factions?.[0]?.faction || null,
+    _prosperity: economicState?.prosperity || null,
+  };
   // The settlement-scoped anti-repetition registry (see generateNPCs): one loyalty string, one
   // beat, one tell, one speech pattern, one goal, one secret per roster.
   const hookRegistry = { titles: new Set(), themes: new Set(), tells: new Set(), speech: new Set(), goals: new Set(), secrets: new Set() };
@@ -224,22 +231,11 @@ export function generateRepresentatives(settlement, culture = 'germanic', config
     birth(SEAT_CARD_ID, seatPoolFor(tier), title, { kind: 'power', key: governingName, family: null, title });
   }
 
-  // R-P4: the `other` mint — a non-governing power whose archetype no backing share can name (an
-  // Independent Bloc, a Revolt Leadership, an Occupation Authority) has no house of its kind to
-  // face it, so ONE face is minted from the power under its title (people/mintTitles.js), a member
-  // of that power whole and its first (castPowers.js ranks it). Minted HERE, with the cast, so the
-  // ties of the population step reach it like any face (a face minted after the ties was isolated).
-  // The governing power is never minted here: its face is the seat, whatever its archetype.
-  const factions = Array.isArray(settlement?.powerStructure?.factions) ? settlement.powerStructure.factions : [];
-  factions.forEach((f) => {
-    const name = nameOf(f);
-    if (!name || name === governingName || BACKING_ARCHETYPES.includes(backingArchetypeOf(f))) return;
-    const id = `${OTHER_CARD_PREFIX}${slugify(name, { sep: '_', max: 60, fallback: 'power', empty: 'power' })}`;
-    if (taken.has(id)) return;
-    taken.add(id);
-    const row = otherMintRowFor(name);
-    birth(id, row, row.title, { kind: 'power', key: name, family: null, title: row.title });
-  });
+  // R-P4: the `other` powers' faces are minted at the coherence seam (castPowers.js), where the
+  // POWERS ARE FINAL — the assembly's replay thins and adds powers after this step (a thorp's
+  // Newcomers' Settlement is gone by the record; a stress faction arrives), so a mint here faced
+  // powers the record does not carry (measured: 'minted other' 4 -> 109 a tier). Each seam mint is
+  // tied to the seat so the social graph reaches it.
 
   // Draw-free: a name shared by two cards takes a role qualifier, never a second draw.
   return disambiguateNPCDisplayNames(cards);
