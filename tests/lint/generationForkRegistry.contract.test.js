@@ -168,7 +168,9 @@ describe('EM-P2 — the generation fork register: totality, derivation, and Tier
     // 2026-10-01, the urban band (ODQ §934.86): drawn 28 -> 29, pure 46 -> 45. The register's re-measure (fc0e2205f)
     // flipped assembleInstitutions|generationRepairs pure -> drawn (2 of 63 rows), and this tally follows the register.
     // GS-2 one faction set (2026-10-31, ODQ §934.101): drawn 29 -> 26; the three retired rows were all drawn.
-    expect(tallyOf(GENERATION_TIER1, 'class'), 'the entropy tally').toEqual({ drawn: 27, label: 1, pure: 46 }); // LANDING-1 (2026-11-04): factionCorrelationPass measures drawn at the landed tip (6 of 63 rows draw); before that, lane CRISIS (2026-11-03): resolveCrisisCast joins: both its rows are pure (45 -> 47)
+    // PEOPLE-4 TIES (2026-11-07, R-P7): drawn 27 -> 26, pure 46 -> 47 — generatePopulation|relationships measures pure (the step
+    // provides `[]`; the ties are drawn at the coherence seam on their own family), the register's own re-measure.
+    expect(tallyOf(GENERATION_TIER1, 'class'), 'the entropy tally').toEqual({ drawn: 26, label: 1, pure: 47 }); // LANDING-1 (2026-11-04): factionCorrelationPass measures drawn at the landed tip (6 of 63 rows draw); before that, lane CRISIS (2026-11-03): resolveCrisisCast joins: both its rows are pure (45 -> 47)
     expect(GENERATION_TIER1.filter((row) => row.class === 'label').map((row) => `${row.step}|${row.key}`),
       'the single label row: a key that moves under a zero-draw step').toEqual(['generatePower|powerIntent']);
     // GS-2 (2026-10-31, ODQ §934.101): same 35 -> 34 and transformed 15 -> 13 in BOTH comparands below, the three
