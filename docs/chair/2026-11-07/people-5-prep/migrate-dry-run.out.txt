@@ -1,0 +1,153 @@
+# PEOPLE-5-PREP — the M-7 save-migration DRY RUN (v1 → v2), measure-only
+# soak births: 60; committed v1 files: 4 (+ the forward exhibit); planted DM variants: 6
+
+## COMMITTED (6)
+legacy-saves/april-2026-v1.json#0: npcs 1 (kept 1) · moved fa 0/sa 0/lf 0 · memberships/card {"0":1} · deleted goal 0/rung 0 · house-linked 0 · structuralRank carried 0 · grouping dropped 0 (orphans 0, diverged member copies 0) · ties 0/0 → from/to (cards with out-degree>1: 0)
+legacy-saves/april-2026-v1.json#1: npcs 2 (kept 2) · moved fa 0/sa 0/lf 0 · memberships/card {"0":2} · deleted goal 0/rung 0 · house-linked 0 · structuralRank carried 0 · grouping dropped 0 (orphans 0, diverged member copies 0) · ties 0/0 → from/to (cards with out-degree>1: 0)
+legacy-saves/april-2026-v1.json#2: npcs 0 (kept 0) · moved fa 0/sa 0/lf 0 · memberships/card {} · deleted goal 0/rung 0 · house-linked 0 · structuralRank carried 0 · grouping dropped 0 (orphans 0, diverged member copies 0) · ties 0/0 → from/to (cards with out-degree>1: 0)
+save-museum/02-v2-draft-2026-06.json#0: npcs 1 (kept 1) · moved fa 0/sa 0/lf 0 · memberships/card {"0":1} · deleted goal 0/rung 0 · house-linked 0 · structuralRank carried 0 · grouping dropped 0 (orphans 0, diverged member copies 0) · ties 0/0 → from/to (cards with out-degree>1: 0)
+save-museum/03-campaign-canon-2026-07.json#0: npcs 2 (kept 2) · moved fa 0/sa 0/lf 0 · memberships/card {"0":2} · deleted goal 0/rung 0 · house-linked 0 · structuralRank carried 0 · grouping dropped 0 (orphans 0, diverged member copies 0) · ties 0/0 → from/to (cards with out-degree>1: 0)
+save-museum/04-forward-version-vNext.json#0: schemaVersion 99 > 1 — the runner passes it through unchanged (no down-migration), not migrated
+
+## GENERATED (60)
+soak1k-0 (thorp): npcs 3 (kept 3) · moved fa 2/sa 0/lf 0 · memberships/card {"0":1,"1":2} · deleted goal 0/rung 2 · house-linked 0 · structuralRank carried 2 · grouping dropped 1 (orphans 0, diverged member copies 0) · ties 1/1 → from/to (cards with out-degree>1: 0)
+soak1k-1 (hamlet): npcs 3 (kept 3) · moved fa 3/sa 0/lf 0 · memberships/card {"1":3} · deleted goal 0/rung 3 · house-linked 0 · structuralRank carried 2 · grouping dropped 1 (orphans 0, diverged member copies 0) · ties 3/3 → from/to (cards with out-degree>1: 0)
+soak1k-2 (village): npcs 7 (kept 7) · moved fa 7/sa 0/lf 0 · memberships/card {"1":7} · deleted goal 0/rung 7 · house-linked 0 · structuralRank carried 3 · grouping dropped 3 (orphans 0, diverged member copies 0) · ties 15/15 → from/to (cards with out-degree>1: 6)
+soak1k-3 (town): npcs 6 (kept 6) · moved fa 6/sa 1/lf 0 · memberships/card {"1":5,"2":1} · deleted goal 0/rung 6 · house-linked 1 · structuralRank carried 2 · grouping dropped 3 (orphans 0, diverged member copies 0) · ties 10/10 → from/to (cards with out-degree>1: 4)
+soak1k-4 (city): npcs 12 (kept 12) · moved fa 12/sa 0/lf 0 · memberships/card {"1":12} · deleted goal 0/rung 12 · house-linked 1 · structuralRank carried 5 · grouping dropped 6 (orphans 0, diverged member copies 0) · ties 26/26 → from/to (cards with out-degree>1: 11)
+   cannot map: npc_5.secondaryAffiliation="criminal network" (neither a power nor a roster institution); npc_10.secondaryAffiliation="criminal network" (neither a power nor a roster institution); npc_7.secondaryAffiliation="criminal network" (neither a power nor a roster institution); npc_6.secondaryAffiliation="criminal network" (neither a power nor a roster institution)
+soak1k-5 (metropolis): npcs 30 (kept 30) · moved fa 30/sa 6/lf 0 · memberships/card {"1":24,"2":6} · deleted goal 0/rung 30 · house-linked 1 · structuralRank carried 5 · grouping dropped 8 (orphans 0, diverged member copies 0) · ties 75/75 → from/to (cards with out-degree>1: 30)
+soak1k-6 (thorp): npcs 1 (kept 1) · moved fa 1/sa 0/lf 0 · memberships/card {"1":1} · deleted goal 0/rung 1 · house-linked 0 · structuralRank carried 1 · grouping dropped 1 (orphans 0, diverged member copies 0) · ties 0/0 → from/to (cards with out-degree>1: 0)
+soak1k-7 (hamlet): npcs 4 (kept 4) · moved fa 4/sa 0/lf 0 · memberships/card {"1":4} · deleted goal 0/rung 4 · house-linked 0 · structuralRank carried 2 · grouping dropped 2 (orphans 0, diverged member copies 0) · ties 6/6 → from/to (cards with out-degree>1: 3)
+soak1k-8 (village): npcs 6 (kept 6) · moved fa 6/sa 0/lf 0 · memberships/card {"1":6} · deleted goal 0/rung 6 · house-linked 0 · structuralRank carried 2 · grouping dropped 3 (orphans 0, diverged member copies 0) · ties 12/12 → from/to (cards with out-degree>1: 5)
+soak1k-9 (town): npcs 11 (kept 11) · moved fa 11/sa 2/lf 0 · memberships/card {"1":9,"2":2} · deleted goal 0/rung 11 · house-linked 1 · structuralRank carried 4 · grouping dropped 5 (orphans 0, diverged member copies 0) · ties 26/26 → from/to (cards with out-degree>1: 11)
+   cannot map: npc_10.secondaryAffiliation="Rookery" (an institution on the roster)
+soak1k-10 (city): npcs 17 (kept 17) · moved fa 17/sa 0/lf 0 · memberships/card {"1":17} · deleted goal 0/rung 17 · house-linked 1 · structuralRank carried 5 · grouping dropped 7 (orphans 0, diverged member copies 0) · ties 39/39 → from/to (cards with out-degree>1: 17)
+   cannot map: npc_10.secondaryAffiliation="criminal network" (neither a power nor a roster institution); npc_7.secondaryAffiliation="criminal network" (neither a power nor a roster institution)
+soak1k-11 (metropolis): npcs 30 (kept 30) · moved fa 30/sa 0/lf 0 · memberships/card {"1":30} · deleted goal 0/rung 30 · house-linked 1 · structuralRank carried 5 · grouping dropped 7 (orphans 0, diverged member copies 0) · ties 78/78 → from/to (cards with out-degree>1: 30)
+   cannot map: npc_7.secondaryAffiliation="Thieves' Guild" (neither a power nor a roster institution); npc_17.secondaryAffiliation="criminal network" (neither a power nor a roster institution); npc_18.secondaryAffiliation="criminal network" (neither a power nor a roster institution); npc_26.secondaryAffiliation="criminal network" (neither a power nor a roster institution)
+soak1k-12 (thorp): npcs 2 (kept 2) · moved fa 2/sa 0/lf 0 · memberships/card {"1":2} · deleted goal 0/rung 2 · house-linked 0 · structuralRank carried 2 · grouping dropped 1 (orphans 0, diverged member copies 0) · ties 1/1 → from/to (cards with out-degree>1: 0)
+soak1k-13 (hamlet): npcs 3 (kept 3) · moved fa 3/sa 0/lf 0 · memberships/card {"1":3} · deleted goal 0/rung 3 · house-linked 0 · structuralRank carried 2 · grouping dropped 2 (orphans 0, diverged member copies 0) · ties 3/3 → from/to (cards with out-degree>1: 1)
+   cannot map: npc_2.secondaryAffiliation="criminal network" (neither a power nor a roster institution)
+soak1k-14 (village): npcs 4 (kept 4) · moved fa 4/sa 0/lf 0 · memberships/card {"1":4} · deleted goal 0/rung 4 · house-linked 0 · structuralRank carried 2 · grouping dropped 2 (orphans 0, diverged member copies 0) · ties 6/6 → from/to (cards with out-degree>1: 2)
+soak1k-15 (town): npcs 7 (kept 7) · moved fa 7/sa 1/lf 0 · memberships/card {"1":6,"2":1} · deleted goal 1/rung 7 · house-linked 1 · structuralRank carried 3 · grouping dropped 4 (orphans 0, diverged member copies 0) · ties 13/13 → from/to (cards with out-degree>1: 5)
+   cannot map: npc_3.secondaryAffiliation="Smuggling operation" (an institution on the roster); npc_6.secondaryAffiliation="Smuggling operation" (an institution on the roster)
+soak1k-16 (city): npcs 12 (kept 12) · moved fa 12/sa 0/lf 0 · memberships/card {"1":12} · deleted goal 0/rung 12 · house-linked 1 · structuralRank carried 5 · grouping dropped 5 (orphans 0, diverged member copies 0) · ties 27/27 → from/to (cards with out-degree>1: 11)
+soak1k-17 (metropolis): npcs 30 (kept 30) · moved fa 30/sa 5/lf 0 · memberships/card {"1":25,"2":5} · deleted goal 0/rung 30 · house-linked 1 · structuralRank carried 5 · grouping dropped 8 (orphans 0, diverged member copies 0) · ties 75/75 → from/to (cards with out-degree>1: 30)
+   cannot map: npc_6.secondaryAffiliation="Smuggling network" (an institution on the roster)
+soak1k-18 (thorp): npcs 2 (kept 2) · moved fa 2/sa 0/lf 0 · memberships/card {"1":2} · deleted goal 0/rung 2 · house-linked 0 · structuralRank carried 2 · grouping dropped 1 (orphans 0, diverged member copies 0) · ties 1/1 → from/to (cards with out-degree>1: 0)
+soak1k-19 (hamlet): npcs 3 (kept 3) · moved fa 3/sa 0/lf 0 · memberships/card {"1":3} · deleted goal 0/rung 3 · house-linked 0 · structuralRank carried 2 · grouping dropped 1 (orphans 0, diverged member copies 0) · ties 3/3 → from/to (cards with out-degree>1: 1)
+soak1k-20 (village): npcs 6 (kept 6) · moved fa 6/sa 0/lf 0 · memberships/card {"1":6} · deleted goal 0/rung 6 · house-linked 0 · structuralRank carried 2 · grouping dropped 3 (orphans 0, diverged member copies 0) · ties 12/12 → from/to (cards with out-degree>1: 4)
+soak1k-21 (town): npcs 12 (kept 12) · moved fa 12/sa 0/lf 0 · memberships/card {"1":12} · deleted goal 0/rung 12 · house-linked 1 · structuralRank carried 5 · grouping dropped 5 (orphans 0, diverged member copies 0) · ties 29/29 → from/to (cards with out-degree>1: 12)
+soak1k-22 (city): npcs 18 (kept 18) · moved fa 18/sa 0/lf 0 · memberships/card {"1":18} · deleted goal 0/rung 18 · house-linked 1 · structuralRank carried 5 · grouping dropped 7 (orphans 0, diverged member copies 0) · ties 47/47 → from/to (cards with out-degree>1: 18)
+soak1k-23 (metropolis): npcs 19 (kept 19) · moved fa 19/sa 0/lf 0 · memberships/card {"1":19} · deleted goal 1/rung 19 · house-linked 1 · structuralRank carried 5 · grouping dropped 7 (orphans 0, diverged member copies 0) · ties 48/48 → from/to (cards with out-degree>1: 19)
+   cannot map: npc_6.secondaryAffiliation="criminal network" (neither a power nor a roster institution); npc_1.secondaryAffiliation="criminal network" (neither a power nor a roster institution); npc_10.secondaryAffiliation="Smuggling network" (an institution on the roster); npc_15.secondaryAffiliation="criminal network" (neither a power nor a roster institution)
+soak1k-24 (thorp): npcs 1 (kept 1) · moved fa 1/sa 0/lf 0 · memberships/card {"1":1} · deleted goal 0/rung 1 · house-linked 0 · structuralRank carried 1 · grouping dropped 1 (orphans 0, diverged member copies 0) · ties 0/0 → from/to (cards with out-degree>1: 0)
+soak1k-25 (hamlet): npcs 3 (kept 3) · moved fa 3/sa 0/lf 0 · memberships/card {"1":3} · deleted goal 0/rung 3 · house-linked 0 · structuralRank carried 2 · grouping dropped 2 (orphans 0, diverged member copies 0) · ties 3/3 → from/to (cards with out-degree>1: 0)
+soak1k-26 (village): npcs 4 (kept 4) · moved fa 4/sa 0/lf 0 · memberships/card {"1":4} · deleted goal 0/rung 4 · house-linked 0 · structuralRank carried 2 · grouping dropped 2 (orphans 0, diverged member copies 0) · ties 5/5 → from/to (cards with out-degree>1: 2)
+soak1k-27 (town): npcs 6 (kept 6) · moved fa 6/sa 0/lf 0 · memberships/card {"1":6} · deleted goal 0/rung 6 · house-linked 1 · structuralRank carried 2 · grouping dropped 4 (orphans 0, diverged member copies 0) · ties 11/11 → from/to (cards with out-degree>1: 5)
+soak1k-28 (city): npcs 16 (kept 16) · moved fa 16/sa 0/lf 0 · memberships/card {"1":16} · deleted goal 0/rung 16 · house-linked 1 · structuralRank carried 5 · grouping dropped 5 (orphans 0, diverged member copies 0) · ties 40/40 → from/to (cards with out-degree>1: 16)
+soak1k-29 (metropolis): npcs 27 (kept 27) · moved fa 27/sa 0/lf 0 · memberships/card {"1":27} · deleted goal 0/rung 27 · house-linked 1 · structuralRank carried 5 · grouping dropped 6 (orphans 0, diverged member copies 0) · ties 73/73 → from/to (cards with out-degree>1: 27)
+   cannot map: npc_1.secondaryAffiliation="criminal network" (neither a power nor a roster institution); npc_9.secondaryAffiliation="criminal network" (neither a power nor a roster institution); npc_14.secondaryAffiliation="criminal network" (neither a power nor a roster institution); npc_16.secondaryAffiliation="criminal network" (neither a power nor a roster institution); npc_20.secondaryAffiliation="criminal network" (neither a power nor a roster institution)
+soak1k-30 (thorp): npcs 1 (kept 1) · moved fa 1/sa 0/lf 0 · memberships/card {"1":1} · deleted goal 0/rung 1 · house-linked 0 · structuralRank carried 1 · grouping dropped 1 (orphans 0, diverged member copies 0) · ties 0/0 → from/to (cards with out-degree>1: 0)
+soak1k-31 (hamlet): npcs 3 (kept 3) · moved fa 3/sa 0/lf 0 · memberships/card {"1":3} · deleted goal 0/rung 3 · house-linked 0 · structuralRank carried 2 · grouping dropped 1 (orphans 0, diverged member copies 0) · ties 3/3 → from/to (cards with out-degree>1: 1)
+soak1k-32 (village): npcs 4 (kept 4) · moved fa 4/sa 0/lf 0 · memberships/card {"1":4} · deleted goal 0/rung 4 · house-linked 0 · structuralRank carried 2 · grouping dropped 2 (orphans 0, diverged member copies 0) · ties 5/5 → from/to (cards with out-degree>1: 1)
+   cannot map: npc_4.secondaryAffiliation="criminal network" (neither a power nor a roster institution)
+soak1k-33 (town): npcs 12 (kept 12) · moved fa 12/sa 1/lf 0 · memberships/card {"1":11,"2":1} · deleted goal 1/rung 12 · house-linked 1 · structuralRank carried 5 · grouping dropped 5 (orphans 0, diverged member copies 0) · ties 28/28 → from/to (cards with out-degree>1: 12)
+   cannot map: npc_4.secondaryAffiliation="Street gang" (an institution on the roster)
+soak1k-34 (city): npcs 12 (kept 12) · moved fa 12/sa 0/lf 0 · memberships/card {"1":12} · deleted goal 0/rung 12 · house-linked 1 · structuralRank carried 5 · grouping dropped 5 (orphans 0, diverged member copies 0) · ties 30/30 → from/to (cards with out-degree>1: 12)
+soak1k-35 (metropolis): npcs 30 (kept 30) · moved fa 30/sa 0/lf 0 · memberships/card {"1":30} · deleted goal 0/rung 30 · house-linked 1 · structuralRank carried 5 · grouping dropped 6 (orphans 0, diverged member copies 0) · ties 75/75 → from/to (cards with out-degree>1: 30)
+   cannot map: npc_27.secondaryAffiliation="criminal network" (neither a power nor a roster institution); npc_3.secondaryAffiliation="criminal network" (neither a power nor a roster institution); npc_14.secondaryAffiliation="criminal network" (neither a power nor a roster institution); npc_5.secondaryAffiliation="criminal network" (neither a power nor a roster institution); npc_13.secondaryAffiliation="criminal network" (neither a power nor a roster institution)
+soak1k-36 (thorp): npcs 2 (kept 2) · moved fa 2/sa 0/lf 0 · memberships/card {"1":2} · deleted goal 0/rung 2 · house-linked 0 · structuralRank carried 2 · grouping dropped 1 (orphans 0, diverged member copies 0) · ties 1/1 → from/to (cards with out-degree>1: 0)
+soak1k-37 (hamlet): npcs 2 (kept 2) · moved fa 2/sa 0/lf 0 · memberships/card {"1":2} · deleted goal 0/rung 2 · house-linked 0 · structuralRank carried 2 · grouping dropped 1 (orphans 0, diverged member copies 0) · ties 1/1 → from/to (cards with out-degree>1: 0)
+soak1k-38 (village): npcs 7 (kept 7) · moved fa 7/sa 0/lf 0 · memberships/card {"1":7} · deleted goal 0/rung 7 · house-linked 0 · structuralRank carried 3 · grouping dropped 3 (orphans 0, diverged member copies 0) · ties 14/14 → from/to (cards with out-degree>1: 6)
+soak1k-39 (town): npcs 8 (kept 8) · moved fa 8/sa 2/lf 0 · memberships/card {"1":6,"2":2} · deleted goal 0/rung 8 · house-linked 1 · structuralRank carried 3 · grouping dropped 4 (orphans 0, diverged member copies 0) · ties 19/19 → from/to (cards with out-degree>1: 7)
+soak1k-40 (city): npcs 15 (kept 15) · moved fa 15/sa 0/lf 0 · memberships/card {"1":15} · deleted goal 0/rung 15 · house-linked 1 · structuralRank carried 5 · grouping dropped 5 (orphans 0, diverged member copies 0) · ties 37/37 → from/to (cards with out-degree>1: 15)
+   cannot map: npc_2.secondaryAffiliation="criminal network" (neither a power nor a roster institution); npc_4.secondaryAffiliation="Front businesses" (an institution on the roster); npc_5.secondaryAffiliation="Thieves' Guild" (neither a power nor a roster institution); npc_12.secondaryAffiliation="Multiple criminal factions" (an institution on the roster); npc_7.secondaryAffiliation="criminal network" (neither a power nor a roster institution); npc_8.secondaryAffiliation="criminal network" (neither a power nor a roster institution)
+soak1k-41 (metropolis): npcs 18 (kept 18) · moved fa 18/sa 0/lf 0 · memberships/card {"1":18} · deleted goal 0/rung 18 · house-linked 1 · structuralRank carried 5 · grouping dropped 7 (orphans 0, diverged member copies 0) · ties 46/46 → from/to (cards with out-degree>1: 18)
+   cannot map: npc_1.secondaryAffiliation="criminal network" (neither a power nor a roster institution); npc_6.secondaryAffiliation="criminal network" (neither a power nor a roster institution)
+soak1k-42 (thorp): npcs 1 (kept 1) · moved fa 1/sa 0/lf 0 · memberships/card {"1":1} · deleted goal 0/rung 1 · house-linked 0 · structuralRank carried 1 · grouping dropped 1 (orphans 0, diverged member copies 0) · ties 0/0 → from/to (cards with out-degree>1: 0)
+soak1k-43 (hamlet): npcs 3 (kept 3) · moved fa 2/sa 0/lf 0 · memberships/card {"0":1,"1":2} · deleted goal 0/rung 2 · house-linked 0 · structuralRank carried 2 · grouping dropped 1 (orphans 0, diverged member copies 0) · ties 1/1 → from/to (cards with out-degree>1: 0)
+soak1k-44 (village): npcs 4 (kept 4) · moved fa 4/sa 0/lf 0 · memberships/card {"1":4} · deleted goal 0/rung 4 · house-linked 0 · structuralRank carried 2 · grouping dropped 1 (orphans 0, diverged member copies 0) · ties 6/6 → from/to (cards with out-degree>1: 2)
+soak1k-45 (town): npcs 10 (kept 10) · moved fa 10/sa 0/lf 0 · memberships/card {"1":10} · deleted goal 0/rung 10 · house-linked 1 · structuralRank carried 4 · grouping dropped 4 (orphans 0, diverged member copies 0) · ties 25/25 → from/to (cards with out-degree>1: 10)
+soak1k-46 (city): npcs 18 (kept 18) · moved fa 18/sa 2/lf 0 · memberships/card {"1":16,"2":2} · deleted goal 0/rung 18 · house-linked 1 · structuralRank carried 5 · grouping dropped 8 (orphans 0, diverged member copies 0) · ties 47/47 → from/to (cards with out-degree>1: 18)
+   cannot map: npc_9.secondaryAffiliation="Smuggling network" (an institution on the roster)
+soak1k-47 (metropolis): npcs 18 (kept 18) · moved fa 18/sa 1/lf 0 · memberships/card {"1":17,"2":1} · deleted goal 0/rung 18 · house-linked 1 · structuralRank carried 5 · grouping dropped 7 (orphans 0, diverged member copies 0) · ties 46/46 → from/to (cards with out-degree>1: 18)
+   cannot map: npc_15.secondaryAffiliation="Underground city" (an institution on the roster); npc_4.secondaryAffiliation="Thieves' guild (powerful)" (an institution on the roster); npc_11.secondaryAffiliation="Front businesses" (an institution on the roster)
+soak1k-48 (thorp): npcs 1 (kept 1) · moved fa 1/sa 0/lf 0 · memberships/card {"1":1} · deleted goal 0/rung 1 · house-linked 0 · structuralRank carried 1 · grouping dropped 1 (orphans 0, diverged member copies 0) · ties 0/0 → from/to (cards with out-degree>1: 0)
+soak1k-49 (hamlet): npcs 2 (kept 2) · moved fa 2/sa 0/lf 0 · memberships/card {"1":2} · deleted goal 0/rung 2 · house-linked 0 · structuralRank carried 2 · grouping dropped 1 (orphans 0, diverged member copies 0) · ties 1/1 → from/to (cards with out-degree>1: 0)
+soak1k-50 (village): npcs 6 (kept 6) · moved fa 6/sa 0/lf 0 · memberships/card {"1":6} · deleted goal 0/rung 6 · house-linked 0 · structuralRank carried 2 · grouping dropped 2 (orphans 0, diverged member copies 0) · ties 12/12 → from/to (cards with out-degree>1: 5)
+soak1k-51 (town): npcs 7 (kept 7) · moved fa 7/sa 0/lf 0 · memberships/card {"1":7} · deleted goal 0/rung 7 · house-linked 1 · structuralRank carried 3 · grouping dropped 3 (orphans 0, diverged member copies 0) · ties 15/15 → from/to (cards with out-degree>1: 5)
+   cannot map: npc_1.secondaryAffiliation="Smuggling operation" (an institution on the roster); npc_2.secondaryAffiliation="criminal network" (neither a power nor a roster institution)
+soak1k-52 (city): npcs 15 (kept 15) · moved fa 15/sa 0/lf 0 · memberships/card {"1":15} · deleted goal 0/rung 15 · house-linked 1 · structuralRank carried 5 · grouping dropped 4 (orphans 0, diverged member copies 0) · ties 36/36 → from/to (cards with out-degree>1: 15)
+soak1k-53 (metropolis): npcs 28 (kept 28) · moved fa 28/sa 0/lf 0 · memberships/card {"1":28} · deleted goal 0/rung 28 · house-linked 1 · structuralRank carried 5 · grouping dropped 8 (orphans 0, diverged member copies 0) · ties 74/74 → from/to (cards with out-degree>1: 28)
+   cannot map: npc_9.secondaryAffiliation="criminal network" (neither a power nor a roster institution); npc_8.secondaryAffiliation="criminal network" (neither a power nor a roster institution); npc_2.secondaryAffiliation="criminal network" (neither a power nor a roster institution); npc_4.secondaryAffiliation="criminal network" (neither a power nor a roster institution); npc_7.secondaryAffiliation="criminal network" (neither a power nor a roster institution); npc_16.secondaryAffiliation="criminal network" (neither a power nor a roster institution); npc_15.secondaryAffiliation="Smuggling network" (an institution on the roster); npc_19.secondaryAffiliation="Thieves' Guild" (neither a power nor a roster institution); npc_23.secondaryAffiliation="criminal network" (neither a power nor a roster institution)
+soak1k-54 (thorp): npcs 2 (kept 2) · moved fa 2/sa 0/lf 0 · memberships/card {"1":2} · deleted goal 0/rung 2 · house-linked 0 · structuralRank carried 2 · grouping dropped 1 (orphans 0, diverged member copies 0) · ties 1/1 → from/to (cards with out-degree>1: 0)
+   cannot map: npc_1.secondaryAffiliation="criminal network" (neither a power nor a roster institution)
+soak1k-55 (hamlet): npcs 4 (kept 4) · moved fa 4/sa 0/lf 0 · memberships/card {"1":4} · deleted goal 0/rung 4 · house-linked 0 · structuralRank carried 2 · grouping dropped 2 (orphans 0, diverged member copies 0) · ties 6/6 → from/to (cards with out-degree>1: 1)
+soak1k-56 (village): npcs 5 (kept 5) · moved fa 5/sa 0/lf 0 · memberships/card {"1":5} · deleted goal 0/rung 5 · house-linked 0 · structuralRank carried 2 · grouping dropped 2 (orphans 0, diverged member copies 0) · ties 8/8 → from/to (cards with out-degree>1: 3)
+soak1k-57 (town): npcs 6 (kept 6) · moved fa 6/sa 0/lf 0 · memberships/card {"1":6} · deleted goal 0/rung 6 · house-linked 1 · structuralRank carried 2 · grouping dropped 3 (orphans 0, diverged member copies 0) · ties 13/13 → from/to (cards with out-degree>1: 5)
+soak1k-58 (city): npcs 18 (kept 18) · moved fa 18/sa 0/lf 0 · memberships/card {"1":18} · deleted goal 0/rung 18 · house-linked 1 · structuralRank carried 5 · grouping dropped 7 (orphans 0, diverged member copies 0) · ties 44/44 → from/to (cards with out-degree>1: 18)
+   cannot map: npc_11.secondaryAffiliation="criminal network" (neither a power nor a roster institution); npc_4.secondaryAffiliation="criminal network" (neither a power nor a roster institution); npc_16.secondaryAffiliation="criminal network" (neither a power nor a roster institution)
+soak1k-59 (metropolis): npcs 30 (kept 30) · moved fa 30/sa 0/lf 0 · memberships/card {"1":30} · deleted goal 1/rung 30 · house-linked 1 · structuralRank carried 5 · grouping dropped 5 (orphans 0, diverged member copies 0) · ties 74/74 → from/to (cards with out-degree>1: 30)
+   cannot map: npc_4.secondaryAffiliation="criminal network" (neither a power nor a roster institution); npc_6.secondaryAffiliation="criminal network" (neither a power nor a roster institution); npc_5.secondaryAffiliation="criminal network" (neither a power nor a roster institution); npc_11.secondaryAffiliation="criminal network" (neither a power nor a roster institution); npc_12.secondaryAffiliation="criminal network" (neither a power nor a roster institution); npc_23.secondaryAffiliation="criminal network" (neither a power nor a roster institution); npc_8.secondaryAffiliation="criminal network" (neither a power nor a roster institution); npc_24.secondaryAffiliation="criminal network" (neither a power nor a roster institution); npc_26.secondaryAffiliation="criminal network" (neither a power nor a roster institution); npc_7.secondaryAffiliation="criminal network" (neither a power nor a roster institution); npc_9.secondaryAffiliation="criminal network" (neither a power nor a roster institution)
+
+## PLANTED (6)
+planted<soak1k-0 (thorp)>: npcs 4 (kept 4) · moved fa 2/sa 0/lf 1 · memberships/card {"0":1,"1":3} · deleted goal 0/rung 2 · house-linked 0 · structuralRank carried 2 · grouping dropped 2 (orphans 1, diverged member copies 2) · ties 1/1 → from/to (cards with out-degree>1: 0)
+   DM cards → institution null, card kept: npc_1[authored+entity-locked], npc_2[entity-locked], npc_temp_healer[lock-map-id], npc.planted_0_2pr9q8[event-born+entity-locked]
+   grouping entries naming no power (lost if dropped): [{"name":"Planted Grouping-Only Faction","members":0,"createdByEventId":"evt_fac"}]
+   planted: userEdits allows 'factionAffiliation' on an npc: false
+planted<soak1k-1 (hamlet)>: npcs 4 (kept 4) · moved fa 3/sa 0/lf 1 · memberships/card {"1":4} · deleted goal 0/rung 3 · house-linked 0 · structuralRank carried 2 · grouping dropped 1 (orphans 0, diverged member copies 2) · ties 3/3 → from/to (cards with out-degree>1: 0)
+   DM cards → institution null, card kept: npc_1[authored+entity-locked], npc_2[entity-locked], npc_3[lock-map-id], npc.planted_1_2pr9q7[event-born+entity-locked]
+   planted: userEdits allows 'factionAffiliation' on an npc: false
+planted<soak1k-2 (village)>: npcs 8 (kept 8) · moved fa 7/sa 0/lf 1 · memberships/card {"1":8} · deleted goal 0/rung 7 · house-linked 0 · structuralRank carried 3 · grouping dropped 3 (orphans 0, diverged member copies 2) · ties 15/15 → from/to (cards with out-degree>1: 6)
+   DM cards → institution null, card kept: npc_4[authored+entity-locked], npc_1[entity-locked], npc_6[lock-map-id], npc.planted_2_2pr9q6[event-born+entity-locked]
+   planted: userEdits allows 'factionAffiliation' on an npc: false
+planted<soak1k-3 (town)>: npcs 7 (kept 7) · moved fa 6/sa 1/lf 1 · memberships/card {"1":6,"2":1} · deleted goal 0/rung 6 · house-linked 1 · structuralRank carried 2 · grouping dropped 3 (orphans 0, diverged member copies 2) · ties 10/10 → from/to (cards with out-degree>1: 4)
+   DM cards → institution null, card kept: npc_1[authored+entity-locked], npc_2[entity-locked], npc_5[lock-map-id], npc.planted_3_2pr9q5[event-born+entity-locked]
+   planted: userEdits allows 'factionAffiliation' on an npc: false
+planted<soak1k-4 (city)>: npcs 13 (kept 13) · moved fa 12/sa 0/lf 1 · memberships/card {"1":13} · deleted goal 0/rung 12 · house-linked 1 · structuralRank carried 5 · grouping dropped 6 (orphans 0, diverged member copies 2) · ties 26/26 → from/to (cards with out-degree>1: 11)
+   DM cards → institution null, card kept: npc_2[authored+entity-locked], npc_5[entity-locked], npc_1[lock-map-id], npc.planted_4_2pr9q4[event-born+entity-locked]
+   cannot map: npc_5.secondaryAffiliation="criminal network" (neither a power nor a roster institution); npc_10.secondaryAffiliation="criminal network" (neither a power nor a roster institution); npc_7.secondaryAffiliation="criminal network" (neither a power nor a roster institution); npc_6.secondaryAffiliation="criminal network" (neither a power nor a roster institution)
+   planted: userEdits allows 'factionAffiliation' on an npc: false
+planted<soak1k-5 (metropolis)>: npcs 31 (kept 31) · moved fa 30/sa 6/lf 1 · memberships/card {"1":25,"2":6} · deleted goal 0/rung 30 · house-linked 1 · structuralRank carried 5 · grouping dropped 8 (orphans 0, diverged member copies 2) · ties 75/75 → from/to (cards with out-degree>1: 30)
+   DM cards → institution null, card kept: npc_1[authored+entity-locked], npc_5[entity-locked], npc_8[lock-map-id], npc.planted_5_2pr9q3[event-born+entity-locked]
+   planted: userEdits allows 'factionAffiliation' on an npc: false
+
+## TOTALS
+{
+ "fixtures": 72,
+ "npcs": 670,
+ "dmCards": 24,
+ "cardsKept": 670,
+ "unmapped": 73,
+ "unmappedByField": {
+  "secondaryAffiliation (neither a power nor a roster institution)": 59,
+  "secondaryAffiliation (an institution on the roster)": 14
+ },
+ "moved": {
+  "factionAffiliation": 655,
+  "secondaryAffiliation": 28,
+  "linkedFactionIds": 6
+ },
+ "deleted": {
+  "factionGoal": 4,
+  "densityRungRole": 655
+ },
+ "structuralRankCarried": 209,
+ "groupingDropped": 238,
+ "groupingOrphans": 1,
+ "memberCopyDiverged": 12,
+ "relationships": 1486,
+ "relMoved": 1486,
+ "outDegreeOver1Cards": 581,
+ "membershipsPerCard": {
+  "0": 9,
+  "1": 633,
+  "2": 28
+ },
+ "fieldsLeft": 0,
+ "forwardPassThrough": 1,
+ "houseLinked": 33,
+ "dmHouseDropped": 0
+}

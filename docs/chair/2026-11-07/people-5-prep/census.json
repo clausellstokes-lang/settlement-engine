@@ -1,0 +1,4530 @@
+{
+ "summary": {
+  "srcFilesScanned": 2386,
+  "srcUnparsed": [],
+  "testFilesScanned": 3024,
+  "testUnparsed": [],
+  "srcReadSites": 247,
+  "srcWriteSites": 34,
+  "srcReadFiles": 106,
+  "readsBySubject": {
+   "factions": 90,
+   "factionAffiliation": 63,
+   "dominantCategory": 9,
+   "structuralRank": 6,
+   "members": 17,
+   "npcInFaction": 18,
+   "npcHomeInstitution": 7,
+   "densityRungRole": 1,
+   "factionRosterOf": 7,
+   "secondaryAffiliation": 9,
+   "factionGoal": 2,
+   "linkedFactionIds": 18
+  },
+  "readsByClass": {
+   "DISPLAY": 54,
+   "EDIT": 43,
+   "BIRTH": 53,
+   "FPZ": 90,
+   "RETIRED": 7
+  },
+  "readFilesByClass": {
+   "DISPLAY": 29,
+   "EDIT": 17,
+   "BIRTH": 21,
+   "FPZ": 35,
+   "RETIRED": 4
+  },
+  "readsByClassOwner": {
+   "DISPLAY · PEOPLE-5": 53,
+   "EDIT · PEOPLE-5": 43,
+   "BIRTH · PEOPLE-2": 14,
+   "BIRTH · PEOPLE-3": 8,
+   "BIRTH · PEOPLE-5": 31,
+   "FPZ · FPZ": 90,
+   "RETIRED · PEOPLE-1": 7,
+   "DISPLAY · PEOPLE-3": 1
+  },
+  "unclassified": [],
+  "testFiles": 145,
+  "testFilesReadingAField": 127,
+  "testFilesGroupingOnly": 18,
+  "testByClass": {
+   "asserts a surface → rewire": 21,
+   "FPZ's → list": 63,
+   "pins a field by identity → re-key": 34,
+   "golden door's → bank": 27
+  }
+ },
+ "srcSites": [
+  {
+   "file": "src/components/OutputContainer.jsx",
+   "name": "factions",
+   "kind": "read",
+   "line": 561,
+   "receiver": "rawSettlement",
+   "subject": "factions",
+   "cls": "DISPLAY",
+   "owner": "PEOPLE-5",
+   "replacement": "the powers",
+   "note": "grouping length"
+  },
+  {
+   "file": "src/components/dossier/CascadePreviewPanel.jsx",
+   "name": "factions",
+   "kind": "read",
+   "line": 288,
+   "receiver": "preview.downstreamCounts",
+   "subject": "factions",
+   "indirect": "downstreamCounts.factions ← pendingEditsPreview.js:422",
+   "cls": "DISPLAY",
+   "owner": "PEOPLE-5",
+   "replacement": "the powers",
+   "note": "a count (INDIRECT)"
+  },
+  {
+   "file": "src/components/dossier/SettlementWorkbench.jsx",
+   "name": "factionAffiliation",
+   "kind": "read",
+   "line": 109,
+   "receiver": "raw",
+   "subject": "factionAffiliation",
+   "cls": "DISPLAY",
+   "owner": "PEOPLE-5",
+   "replacement": "rank-1 membership",
+   "note": ""
+  },
+  {
+   "file": "src/components/library/LibraryToolbar.jsx",
+   "name": "factions",
+   "kind": "read",
+   "line": 105,
+   "receiver": "s.settlement",
+   "subject": "factions",
+   "cls": "DISPLAY",
+   "owner": "PEOPLE-5",
+   "replacement": "the powers",
+   "note": "search names"
+  },
+  {
+   "file": "src/components/library/LibraryToolbar.jsx",
+   "name": "factions",
+   "kind": "read",
+   "line": 106,
+   "receiver": "s.settlement",
+   "subject": "factions",
+   "cls": "DISPLAY",
+   "owner": "PEOPLE-5",
+   "replacement": "the powers",
+   "note": "search names"
+  },
+  {
+   "file": "src/components/new/SummaryTab.jsx",
+   "name": "factions",
+   "kind": "destructure",
+   "line": 122,
+   "receiver": "r",
+   "subject": "factions",
+   "cls": "DISPLAY",
+   "owner": "PEOPLE-5",
+   "replacement": "delete",
+   "note": ":122 destructures the grouping as `_factionGroups` and never reads it"
+  },
+  {
+   "file": "src/components/new/npcComponents.jsx",
+   "name": "factionAffiliation",
+   "kind": "read",
+   "line": 85,
+   "receiver": "npc",
+   "subject": "factionAffiliation",
+   "cls": "DISPLAY",
+   "owner": "PEOPLE-5",
+   "replacement": "rank-1 membership (+ the rank list, the institution)",
+   "note": ":85 search (any membership), :337 the faction line"
+  },
+  {
+   "file": "src/components/new/npcComponents.jsx",
+   "name": "factionAffiliation",
+   "kind": "read",
+   "line": 337,
+   "receiver": "npc",
+   "subject": "factionAffiliation",
+   "cls": "DISPLAY",
+   "owner": "PEOPLE-5",
+   "replacement": "rank-1 membership (+ the rank list, the institution)",
+   "note": ":85 search (any membership), :337 the faction line"
+  },
+  {
+   "file": "src/components/new/tabs/NPCsTab.jsx",
+   "name": "factionAffiliation",
+   "kind": "read",
+   "line": 74,
+   "receiver": "n",
+   "subject": "factionAffiliation",
+   "cls": "DISPLAY",
+   "owner": "PEOPLE-5",
+   "replacement": "rank-1 membership",
+   "note": "group by first-rank power"
+  },
+  {
+   "file": "src/components/new/tabs/power/PowerStrata.jsx",
+   "name": "factionAffiliation",
+   "kind": "read",
+   "line": 298,
+   "receiver": "npc",
+   "subject": "factionAffiliation",
+   "cls": "DISPLAY",
+   "owner": "PEOPLE-5",
+   "replacement": "any membership",
+   "note": "member count (+ the top three)"
+  },
+  {
+   "file": "src/components/settlement/EventComposer.jsx",
+   "name": "factionAffiliation",
+   "kind": "read",
+   "line": 215,
+   "receiver": "npc",
+   "subject": "factionAffiliation",
+   "cls": "EDIT",
+   "owner": "PEOPLE-5",
+   "replacement": "rank-1 membership",
+   "note": ":215 the event's faction"
+  },
+  {
+   "file": "src/components/settlementDetail/SettlementDetailEditNames.jsx",
+   "name": "factions",
+   "kind": "read",
+   "line": 32,
+   "receiver": "settlement",
+   "subject": "factions",
+   "cls": "EDIT",
+   "owner": "PEOPLE-5",
+   "replacement": "the powers",
+   "note": "the rename list over the grouping"
+  },
+  {
+   "file": "src/components/settlementDetail/SettlementDetailEditNames.jsx",
+   "name": "dominantCategory",
+   "kind": "read",
+   "line": 37,
+   "receiver": "fac",
+   "subject": "dominantCategory",
+   "cls": "EDIT",
+   "owner": "PEOPLE-5",
+   "replacement": "the powers",
+   "note": "the rename list over the grouping"
+  },
+  {
+   "file": "src/components/settlementDetail/SettlementDetailEditNames.jsx",
+   "name": "dominantCategory",
+   "kind": "read",
+   "line": 38,
+   "receiver": "fac",
+   "subject": "dominantCategory",
+   "cls": "EDIT",
+   "owner": "PEOPLE-5",
+   "replacement": "the powers",
+   "note": "the rename list over the grouping"
+  },
+  {
+   "file": "src/data/foundingSeeds.js",
+   "name": "structuralRank",
+   "kind": "path-string",
+   "line": 104,
+   "receiver": "",
+   "subject": "structuralRank",
+   "cls": "BIRTH",
+   "owner": "PEOPLE-2",
+   "replacement": "rank-1 membership (its rank)",
+   "note": "a founding-seed causal row cites `npcs[].structuralRank` as its effect field (a path string); it moves with PEOPLE-2's writer"
+  },
+  {
+   "file": "src/domain/ai/personaSlicer.js",
+   "name": "factionAffiliation",
+   "kind": "read",
+   "line": 159,
+   "receiver": "e",
+   "subject": "factionAffiliation",
+   "cls": "DISPLAY",
+   "owner": "PEOPLE-5",
+   "replacement": "rank-1 membership · the powers",
+   "note": ""
+  },
+  {
+   "file": "src/domain/ai/personaSlicer.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 161,
+   "receiver": "home",
+   "subject": "factions",
+   "cls": "DISPLAY",
+   "owner": "PEOPLE-5",
+   "replacement": "rank-1 membership · the powers",
+   "note": ""
+  },
+  {
+   "file": "src/domain/ai/suggestedQuestions.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 40,
+   "receiver": "settlement",
+   "subject": "factions",
+   "cls": "DISPLAY",
+   "owner": "PEOPLE-5",
+   "replacement": "the powers",
+   "note": ""
+  },
+  {
+   "file": "src/domain/coherence/crisisCastFindings.js",
+   "name": "factionAffiliation",
+   "kind": "read",
+   "line": 61,
+   "receiver": "npcs.find((n) => !!n && (str(n.id) || str(n.name)) === id)",
+   "subject": "factionAffiliation",
+   "cls": "BIRTH",
+   "owner": "PEOPLE-2",
+   "replacement": "any membership",
+   "note": ""
+  },
+  {
+   "file": "src/domain/coherence/hookTruthRecord.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 51,
+   "receiver": "record",
+   "subject": "factions",
+   "cls": "BIRTH",
+   "owner": "PEOPLE-3",
+   "replacement": "the powers / any membership",
+   "note": "the hook-truth record's grouping copy"
+  },
+  {
+   "file": "src/domain/coherence/hookTruthRecord.js",
+   "name": "members",
+   "kind": "read",
+   "line": 53,
+   "receiver": "faction",
+   "subject": "members",
+   "cls": "BIRTH",
+   "owner": "PEOPLE-3",
+   "replacement": "the powers / any membership",
+   "note": "the hook-truth record's grouping copy"
+  },
+  {
+   "file": "src/domain/coherence/hookTruthRecord.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 187,
+   "receiver": "record",
+   "subject": "factions",
+   "cls": "BIRTH",
+   "owner": "PEOPLE-3",
+   "replacement": "the powers / any membership",
+   "note": "the hook-truth record's grouping copy"
+  },
+  {
+   "file": "src/domain/coherence/hookTruthRecord.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 189,
+   "receiver": "record",
+   "subject": "factions",
+   "cls": "BIRTH",
+   "owner": "PEOPLE-3",
+   "replacement": "the powers / any membership",
+   "note": "the hook-truth record's grouping copy"
+  },
+  {
+   "file": "src/domain/coherence/hookTruthRecord.js",
+   "name": "members",
+   "kind": "read",
+   "line": 191,
+   "receiver": "entry",
+   "subject": "members",
+   "cls": "BIRTH",
+   "owner": "PEOPLE-3",
+   "replacement": "the powers / any membership",
+   "note": "the hook-truth record's grouping copy"
+  },
+  {
+   "file": "src/domain/coherence/hookTruthRecord.js",
+   "name": "members",
+   "kind": "read",
+   "line": 192,
+   "receiver": "entry",
+   "subject": "members",
+   "cls": "BIRTH",
+   "owner": "PEOPLE-3",
+   "replacement": "the powers / any membership",
+   "note": "the hook-truth record's grouping copy"
+  },
+  {
+   "file": "src/domain/coherence/hookTruthRecord.js",
+   "name": "members",
+   "kind": "read",
+   "line": 193,
+   "receiver": "entry",
+   "subject": "members",
+   "cls": "BIRTH",
+   "owner": "PEOPLE-3",
+   "replacement": "the powers / any membership",
+   "note": "the hook-truth record's grouping copy"
+  },
+  {
+   "file": "src/domain/coherence/hookTruthRecord.js",
+   "name": "members",
+   "kind": "write",
+   "line": 195,
+   "receiver": "{literal}",
+   "subject": "members",
+   "cls": "BIRTH",
+   "owner": "PEOPLE-3",
+   "replacement": "the powers / any membership",
+   "note": "the hook-truth record's grouping copy"
+  },
+  {
+   "file": "src/domain/coherence/hookTruthRecord.js",
+   "name": "factions",
+   "kind": "write",
+   "line": 197,
+   "receiver": "patch",
+   "subject": "factions",
+   "cls": "BIRTH",
+   "owner": "PEOPLE-3",
+   "replacement": "the powers / any membership",
+   "note": "the hook-truth record's grouping copy"
+  },
+  {
+   "file": "src/domain/coherence/readerBattery.js",
+   "name": "factionAffiliation",
+   "kind": "read",
+   "line": 320,
+   "receiver": "a.npc",
+   "subject": "factionAffiliation",
+   "cls": "BIRTH",
+   "owner": "PEOPLE-5",
+   "replacement": "any membership (shared power)",
+   "note": ":320 two NPCs' factions"
+  },
+  {
+   "file": "src/domain/coherence/readerBattery.js",
+   "name": "factionAffiliation",
+   "kind": "read",
+   "line": 320,
+   "receiver": "b.npc",
+   "subject": "factionAffiliation",
+   "cls": "BIRTH",
+   "owner": "PEOPLE-5",
+   "replacement": "any membership (shared power)",
+   "note": ":320 two NPCs' factions"
+  },
+  {
+   "file": "src/domain/coherence/seatHolderFindings.js",
+   "name": "npcInFaction",
+   "kind": "import",
+   "line": 24,
+   "subject": "npcInFaction",
+   "cls": "BIRTH",
+   "owner": "PEOPLE-2",
+   "replacement": "rank-1 membership",
+   "note": "through npcInFaction"
+  },
+  {
+   "file": "src/domain/coherence/seatHolderFindings.js",
+   "name": "npcInFaction",
+   "kind": "call",
+   "line": 53,
+   "subject": "npcInFaction",
+   "cls": "BIRTH",
+   "owner": "PEOPLE-2",
+   "replacement": "rank-1 membership",
+   "note": "through npcInFaction"
+  },
+  {
+   "file": "src/domain/content/contentSampleCategoryFixtures.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 268,
+   "receiver": "root",
+   "subject": "factions",
+   "cls": "DISPLAY",
+   "owner": "PEOPLE-5",
+   "replacement": "the powers",
+   "note": "NOT in PEOPLE-0 §5"
+  },
+  {
+   "file": "src/domain/content/settlementContentProvenance.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 216,
+   "receiver": "value",
+   "subject": "factions",
+   "cls": "DISPLAY",
+   "owner": "PEOPLE-5",
+   "replacement": "the powers",
+   "note": "NOT in PEOPLE-0 §5"
+  },
+  {
+   "file": "src/domain/corruption.js",
+   "name": "npcHomeInstitution",
+   "kind": "def",
+   "line": 648,
+   "subject": "npcHomeInstitution",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "the institution",
+   "note": ""
+  },
+  {
+   "file": "src/domain/corruption.js",
+   "name": "factionAffiliation",
+   "kind": "read",
+   "line": 649,
+   "receiver": "npc",
+   "subject": "factionAffiliation",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "rank-1 membership",
+   "note": ""
+  },
+  {
+   "file": "src/domain/corruption.js",
+   "name": "npcHomeInstitution",
+   "kind": "call",
+   "line": 685,
+   "subject": "npcHomeInstitution",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "the institution",
+   "note": ""
+  },
+  {
+   "file": "src/domain/crisis/crisisCast.js",
+   "name": "factionAffiliation",
+   "kind": "read",
+   "line": 403,
+   "receiver": "n",
+   "subject": "factionAffiliation",
+   "cls": "BIRTH",
+   "owner": "PEOPLE-2",
+   "replacement": "any membership, by rank",
+   "note": "membersOf + exploiter/scapegoat/collaborator/brunt"
+  },
+  {
+   "file": "src/domain/crisis/crisisCast.js",
+   "name": "factionAffiliation",
+   "kind": "read",
+   "line": 665,
+   "receiver": "n",
+   "subject": "factionAffiliation",
+   "cls": "BIRTH",
+   "owner": "PEOPLE-2",
+   "replacement": "any membership, by rank",
+   "note": "membersOf + exploiter/scapegoat/collaborator/brunt"
+  },
+  {
+   "file": "src/domain/crisis/crisisCast.js",
+   "name": "factionAffiliation",
+   "kind": "read",
+   "line": 684,
+   "receiver": "roster.find((n) => (str(n.id) || str(n.name)) === r.id)",
+   "subject": "factionAffiliation",
+   "cls": "BIRTH",
+   "owner": "PEOPLE-2",
+   "replacement": "any membership, by rank",
+   "note": "membersOf + exploiter/scapegoat/collaborator/brunt"
+  },
+  {
+   "file": "src/domain/crisis/crisisCast.js",
+   "name": "factionAffiliation",
+   "kind": "read",
+   "line": 746,
+   "receiver": "n",
+   "subject": "factionAffiliation",
+   "cls": "BIRTH",
+   "owner": "PEOPLE-2",
+   "replacement": "any membership, by rank",
+   "note": "membersOf + exploiter/scapegoat/collaborator/brunt"
+  },
+  {
+   "file": "src/domain/crisis/crisisCast.js",
+   "name": "factionAffiliation",
+   "kind": "read",
+   "line": 879,
+   "receiver": "rosterOf(settlement).find((n) => (str(n.id) || str(n.name)) === b.id)",
+   "subject": "factionAffiliation",
+   "cls": "BIRTH",
+   "owner": "PEOPLE-2",
+   "replacement": "any membership, by rank",
+   "note": "membersOf + exploiter/scapegoat/collaborator/brunt"
+  },
+  {
+   "file": "src/domain/crisis/crisisHooks.js",
+   "name": "factionAffiliation",
+   "kind": "read",
+   "line": 101,
+   "receiver": "npc",
+   "subject": "factionAffiliation",
+   "cls": "BIRTH",
+   "owner": "PEOPLE-2",
+   "replacement": "rank-1 membership",
+   "note": "the \"X of House\" party"
+  },
+  {
+   "file": "src/domain/customContent.js",
+   "name": "factionAffiliation",
+   "kind": "read",
+   "line": 388,
+   "receiver": "rawEntity",
+   "subject": "factionAffiliation",
+   "cls": "EDIT",
+   "owner": "PEOPLE-5",
+   "replacement": "rank-1 membership",
+   "note": "controlledBy"
+  },
+  {
+   "file": "src/domain/density/densityRungs.js",
+   "name": "densityRungRole",
+   "kind": "string",
+   "line": 92,
+   "receiver": "",
+   "subject": "densityRungRole",
+   "cls": "RETIRED",
+   "owner": "PEOPLE-1",
+   "replacement": "delete",
+   "note": "RUNG_ROLE_FIELD"
+  },
+  {
+   "file": "src/domain/density/factionLifecycle.js",
+   "name": "factionRosterOf",
+   "kind": "def",
+   "line": 113,
+   "subject": "factionRosterOf",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "any membership",
+   "note": ""
+  },
+  {
+   "file": "src/domain/density/factionLifecycle.js",
+   "name": "factionAffiliation",
+   "kind": "read",
+   "line": 117,
+   "receiver": "n",
+   "subject": "factionAffiliation",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "rank-1 membership",
+   "note": ""
+  },
+  {
+   "file": "src/domain/density/factionLifecycle.js",
+   "name": "factionRosterOf",
+   "kind": "call",
+   "line": 130,
+   "subject": "factionRosterOf",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "any membership",
+   "note": ""
+  },
+  {
+   "file": "src/domain/density/factionLifecycle.js",
+   "name": "factionRosterOf",
+   "kind": "call",
+   "line": 174,
+   "subject": "factionRosterOf",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "any membership",
+   "note": ""
+  },
+  {
+   "file": "src/domain/display/dossierViewModel.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 510,
+   "receiver": "s",
+   "subject": "factions",
+   "cls": "DISPLAY",
+   "owner": "PEOPLE-5",
+   "replacement": "the powers (delete the fallback)",
+   "note": ""
+  },
+  {
+   "file": "src/domain/display/galleryVeil.js",
+   "name": "factionAffiliation",
+   "kind": "string",
+   "line": 151,
+   "receiver": "",
+   "subject": "factionAffiliation",
+   "cls": "DISPLAY",
+   "owner": "PEOPLE-5",
+   "replacement": "veil `memberships` + `institution`",
+   "note": "key lists by string"
+  },
+  {
+   "file": "src/domain/display/galleryVeil.js",
+   "name": "secondaryAffiliation",
+   "kind": "string",
+   "line": 151,
+   "receiver": "",
+   "subject": "secondaryAffiliation",
+   "cls": "DISPLAY",
+   "owner": "PEOPLE-5",
+   "replacement": "veil `memberships` + `institution`",
+   "note": "key lists by string"
+  },
+  {
+   "file": "src/domain/display/galleryVeil.js",
+   "name": "factionGoal",
+   "kind": "string",
+   "line": 155,
+   "receiver": "",
+   "subject": "factionGoal",
+   "cls": "DISPLAY",
+   "owner": "PEOPLE-5",
+   "replacement": "veil `memberships` + `institution`",
+   "note": "key lists by string"
+  },
+  {
+   "file": "src/domain/display/galleryVeil.js",
+   "name": "linkedFactionIds",
+   "kind": "string",
+   "line": 159,
+   "receiver": "",
+   "subject": "linkedFactionIds",
+   "cls": "DISPLAY",
+   "owner": "PEOPLE-5",
+   "replacement": "veil `memberships` + `institution`",
+   "note": "key lists by string"
+  },
+  {
+   "file": "src/domain/display/galleryVeil.js",
+   "name": "secondaryAffiliation",
+   "kind": "string",
+   "line": 729,
+   "receiver": "",
+   "subject": "secondaryAffiliation",
+   "cls": "DISPLAY",
+   "owner": "PEOPLE-5",
+   "replacement": "veil `memberships` + `institution`",
+   "note": "key lists by string"
+  },
+  {
+   "file": "src/domain/display/galleryVeil.js",
+   "name": "factionAffiliation",
+   "kind": "string",
+   "line": 729,
+   "receiver": "",
+   "subject": "factionAffiliation",
+   "cls": "DISPLAY",
+   "owner": "PEOPLE-5",
+   "replacement": "veil `memberships` + `institution`",
+   "note": "key lists by string"
+  },
+  {
+   "file": "src/domain/display/publicSafe.js",
+   "name": "factionAffiliation",
+   "kind": "string",
+   "line": 124,
+   "receiver": "",
+   "subject": "factionAffiliation",
+   "cls": "DISPLAY",
+   "owner": "PEOPLE-5",
+   "replacement": "veil `memberships` + `institution`",
+   "note": "key lists + the projected copy"
+  },
+  {
+   "file": "src/domain/display/publicSafe.js",
+   "name": "secondaryAffiliation",
+   "kind": "string",
+   "line": 124,
+   "receiver": "",
+   "subject": "secondaryAffiliation",
+   "cls": "DISPLAY",
+   "owner": "PEOPLE-5",
+   "replacement": "veil `memberships` + `institution`",
+   "note": "key lists + the projected copy"
+  },
+  {
+   "file": "src/domain/display/publicSafe.js",
+   "name": "factionAffiliation",
+   "kind": "write",
+   "line": 222,
+   "receiver": "{literal}",
+   "subject": "factionAffiliation",
+   "cls": "DISPLAY",
+   "owner": "PEOPLE-5",
+   "replacement": "veil `memberships` + `institution`",
+   "note": "key lists + the projected copy"
+  },
+  {
+   "file": "src/domain/display/publicSafe.js",
+   "name": "factionAffiliation",
+   "kind": "read",
+   "line": 222,
+   "receiver": "npc",
+   "subject": "factionAffiliation",
+   "cls": "DISPLAY",
+   "owner": "PEOPLE-5",
+   "replacement": "veil `memberships` + `institution`",
+   "note": "key lists + the projected copy"
+  },
+  {
+   "file": "src/domain/display/publicSafe.js",
+   "name": "secondaryAffiliation",
+   "kind": "write",
+   "line": 223,
+   "receiver": "{literal}",
+   "subject": "secondaryAffiliation",
+   "cls": "DISPLAY",
+   "owner": "PEOPLE-5",
+   "replacement": "veil `memberships` + `institution`",
+   "note": "key lists + the projected copy"
+  },
+  {
+   "file": "src/domain/display/publicSafe.js",
+   "name": "secondaryAffiliation",
+   "kind": "read",
+   "line": 223,
+   "receiver": "npc",
+   "subject": "secondaryAffiliation",
+   "cls": "DISPLAY",
+   "owner": "PEOPLE-5",
+   "replacement": "veil `memberships` + `institution`",
+   "note": "key lists + the projected copy"
+  },
+  {
+   "file": "src/domain/districtProfile.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 260,
+   "receiver": "settlement",
+   "subject": "factions",
+   "cls": "DISPLAY",
+   "owner": "PEOPLE-5",
+   "replacement": "the powers (delete the fallback)",
+   "note": ""
+  },
+  {
+   "file": "src/domain/dossier/dossierSearch.js",
+   "name": "factionAffiliation",
+   "kind": "read",
+   "line": 275,
+   "receiver": "npc",
+   "subject": "factionAffiliation",
+   "cls": "DISPLAY",
+   "owner": "PEOPLE-5",
+   "replacement": "any membership · the powers",
+   "note": ""
+  },
+  {
+   "file": "src/domain/dossier/dossierSearch.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 327,
+   "receiver": "view",
+   "subject": "factions",
+   "cls": "DISPLAY",
+   "owner": "PEOPLE-5",
+   "replacement": "any membership · the powers",
+   "note": ""
+  },
+  {
+   "file": "src/domain/dossier/entityLinks.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 408,
+   "receiver": "settlement",
+   "subject": "factions",
+   "cls": "DISPLAY",
+   "owner": "PEOPLE-5",
+   "replacement": "the powers (delete the fallback)",
+   "note": ""
+  },
+  {
+   "file": "src/domain/dossier/plotHooks.js",
+   "name": "factionAffiliation",
+   "kind": "read",
+   "line": 407,
+   "receiver": "npc",
+   "subject": "factionAffiliation",
+   "cls": "DISPLAY",
+   "owner": "PEOPLE-3",
+   "replacement": "rank-1 membership",
+   "note": "the NPC sub-line (PEOPLE-3 keeps `links`; PEOPLE-5 reads `parties`)"
+  },
+  {
+   "file": "src/domain/dossier/realmEntityWeb.js",
+   "name": "npcInFaction",
+   "kind": "import",
+   "line": 42,
+   "subject": "npcInFaction",
+   "cls": "DISPLAY",
+   "owner": "PEOPLE-5",
+   "replacement": "any membership",
+   "note": "through npcInFaction"
+  },
+  {
+   "file": "src/domain/dossier/realmEntityWeb.js",
+   "name": "npcInFaction",
+   "kind": "call",
+   "line": 234,
+   "subject": "npcInFaction",
+   "cls": "DISPLAY",
+   "owner": "PEOPLE-5",
+   "replacement": "any membership",
+   "note": "through npcInFaction"
+  },
+  {
+   "file": "src/domain/dossier/seatHolder.js",
+   "name": "npcInFaction",
+   "kind": "import",
+   "line": 31,
+   "subject": "npcInFaction",
+   "cls": "BIRTH",
+   "owner": "PEOPLE-2",
+   "replacement": "rank-1 membership (of the governing power)",
+   "note": "through npcInFaction"
+  },
+  {
+   "file": "src/domain/dossier/seatHolder.js",
+   "name": "npcInFaction",
+   "kind": "call",
+   "line": 116,
+   "subject": "npcInFaction",
+   "cls": "BIRTH",
+   "owner": "PEOPLE-2",
+   "replacement": "rank-1 membership (of the governing power)",
+   "note": "through npcInFaction"
+  },
+  {
+   "file": "src/domain/edit/mergeConsequence.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 88,
+   "receiver": "merged",
+   "subject": "factions",
+   "cls": "EDIT",
+   "owner": "PEOPLE-5",
+   "replacement": "delete",
+   "note": "recomputeMirrors (the MIRROR row)"
+  },
+  {
+   "file": "src/domain/edit/mergeConsequence.js",
+   "name": "members",
+   "kind": "read",
+   "line": 96,
+   "receiver": "faction",
+   "subject": "members",
+   "cls": "EDIT",
+   "owner": "PEOPLE-5",
+   "replacement": "delete",
+   "note": "recomputeMirrors (the MIRROR row)"
+  },
+  {
+   "file": "src/domain/edit/mergeConsequence.js",
+   "name": "members",
+   "kind": "write",
+   "line": 97,
+   "receiver": "faction",
+   "subject": "members",
+   "cls": "EDIT",
+   "owner": "PEOPLE-5",
+   "replacement": "delete",
+   "note": "recomputeMirrors (the MIRROR row)"
+  },
+  {
+   "file": "src/domain/edit/mergeConsequence.js",
+   "name": "members",
+   "kind": "read",
+   "line": 97,
+   "receiver": "faction",
+   "subject": "members",
+   "cls": "EDIT",
+   "owner": "PEOPLE-5",
+   "replacement": "delete",
+   "note": "recomputeMirrors (the MIRROR row)"
+  },
+  {
+   "file": "src/domain/entities/npcs.js",
+   "name": "linkedFactionIds",
+   "kind": "read",
+   "line": 170,
+   "receiver": "input",
+   "subject": "linkedFactionIds",
+   "cls": "EDIT",
+   "owner": "PEOPLE-5",
+   "replacement": "any membership",
+   "note": "createNpc / kill / assign"
+  },
+  {
+   "file": "src/domain/entities/npcs.js",
+   "name": "linkedFactionIds",
+   "kind": "write",
+   "line": 179,
+   "receiver": "{literal}",
+   "subject": "linkedFactionIds",
+   "cls": "EDIT",
+   "owner": "PEOPLE-5",
+   "replacement": "any membership",
+   "note": "createNpc / kill / assign"
+  },
+  {
+   "file": "src/domain/entities/npcs.js",
+   "name": "linkedFactionIds",
+   "kind": "read",
+   "line": 179,
+   "receiver": "input",
+   "subject": "linkedFactionIds",
+   "cls": "EDIT",
+   "owner": "PEOPLE-5",
+   "replacement": "any membership",
+   "note": "createNpc / kill / assign"
+  },
+  {
+   "file": "src/domain/entities/npcs.js",
+   "name": "linkedFactionIds",
+   "kind": "read",
+   "line": 240,
+   "receiver": "npc",
+   "subject": "linkedFactionIds",
+   "cls": "EDIT",
+   "owner": "PEOPLE-5",
+   "replacement": "any membership",
+   "note": "createNpc / kill / assign"
+  },
+  {
+   "file": "src/domain/entities/npcs.js",
+   "name": "linkedFactionIds",
+   "kind": "write",
+   "line": 301,
+   "receiver": "{literal}",
+   "subject": "linkedFactionIds",
+   "cls": "EDIT",
+   "owner": "PEOPLE-5",
+   "replacement": "any membership",
+   "note": "createNpc / kill / assign"
+  },
+  {
+   "file": "src/domain/entities/npcs.js",
+   "name": "linkedFactionIds",
+   "kind": "read",
+   "line": 302,
+   "receiver": "npc",
+   "subject": "linkedFactionIds",
+   "cls": "EDIT",
+   "owner": "PEOPLE-5",
+   "replacement": "any membership",
+   "note": "createNpc / kill / assign"
+  },
+  {
+   "file": "src/domain/entities/npcs.js",
+   "name": "linkedFactionIds",
+   "kind": "read",
+   "line": 303,
+   "receiver": "npc",
+   "subject": "linkedFactionIds",
+   "cls": "EDIT",
+   "owner": "PEOPLE-5",
+   "replacement": "any membership",
+   "note": "createNpc / kill / assign"
+  },
+  {
+   "file": "src/domain/entities/propagate.js",
+   "name": "linkedFactionIds",
+   "kind": "read",
+   "line": 350,
+   "receiver": "npc",
+   "subject": "linkedFactionIds",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "any membership",
+   "note": ""
+  },
+  {
+   "file": "src/domain/entities/propagate.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 460,
+   "receiver": "settlement",
+   "subject": "factions",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "the powers",
+   "note": ""
+  },
+  {
+   "file": "src/domain/entities/propagate.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 461,
+   "receiver": "settlement",
+   "subject": "factions",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "the powers",
+   "note": ""
+  },
+  {
+   "file": "src/domain/entities/propagate.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 483,
+   "receiver": "s",
+   "subject": "factions",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "the powers",
+   "note": ""
+  },
+  {
+   "file": "src/domain/entities/successors.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 58,
+   "receiver": "settlement",
+   "subject": "factions",
+   "cls": "EDIT",
+   "owner": "PEOPLE-5",
+   "replacement": "any membership · the powers",
+   "note": "inferSuccessors"
+  },
+  {
+   "file": "src/domain/entities/successors.js",
+   "name": "linkedFactionIds",
+   "kind": "read",
+   "line": 59,
+   "receiver": "outgoing",
+   "subject": "linkedFactionIds",
+   "cls": "EDIT",
+   "owner": "PEOPLE-5",
+   "replacement": "any membership · the powers",
+   "note": "inferSuccessors"
+  },
+  {
+   "file": "src/domain/entities/successors.js",
+   "name": "linkedFactionIds",
+   "kind": "read",
+   "line": 110,
+   "receiver": "candidate",
+   "subject": "linkedFactionIds",
+   "cls": "EDIT",
+   "owner": "PEOPLE-5",
+   "replacement": "any membership · the powers",
+   "note": "inferSuccessors"
+  },
+  {
+   "file": "src/domain/events/affordanceManifest.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 206,
+   "receiver": "s",
+   "subject": "factions",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "the powers",
+   "note": ""
+  },
+  {
+   "file": "src/domain/events/affordanceManifest.js",
+   "name": "factionAffiliation",
+   "kind": "read",
+   "line": 211,
+   "receiver": "npc",
+   "subject": "factionAffiliation",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "rank-1 membership",
+   "note": ""
+  },
+  {
+   "file": "src/domain/events/batch.js",
+   "name": "linkedFactionIds",
+   "kind": "read",
+   "line": 150,
+   "receiver": "p",
+   "subject": "linkedFactionIds",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "any membership",
+   "note": ""
+  },
+  {
+   "file": "src/domain/events/batch.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 396,
+   "receiver": "s",
+   "subject": "factions",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "the powers",
+   "note": ""
+  },
+  {
+   "file": "src/domain/events/factionResponses.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 35,
+   "receiver": "settlement",
+   "subject": "factions",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "the powers",
+   "note": ""
+  },
+  {
+   "file": "src/domain/events/mutateEntities.js",
+   "name": "npcHomeInstitution",
+   "kind": "import",
+   "line": 43,
+   "subject": "npcHomeInstitution",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "the institution",
+   "note": ""
+  },
+  {
+   "file": "src/domain/events/mutateEntities.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 382,
+   "receiver": "s",
+   "subject": "factions",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "the powers",
+   "note": ""
+  },
+  {
+   "file": "src/domain/events/mutateEntities.js",
+   "name": "factionAffiliation",
+   "kind": "write",
+   "line": 476,
+   "receiver": "{literal}",
+   "subject": "factionAffiliation",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "rank-1 membership",
+   "note": ""
+  },
+  {
+   "file": "src/domain/events/mutateEntities.js",
+   "name": "linkedFactionIds",
+   "kind": "write",
+   "line": 477,
+   "receiver": "{literal}",
+   "subject": "linkedFactionIds",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "any membership",
+   "note": ""
+  },
+  {
+   "file": "src/domain/events/mutateEntities.js",
+   "name": "factionAffiliation",
+   "kind": "write",
+   "line": 488,
+   "receiver": "npc",
+   "subject": "factionAffiliation",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "rank-1 membership",
+   "note": ""
+  },
+  {
+   "file": "src/domain/events/mutateEntities.js",
+   "name": "linkedFactionIds",
+   "kind": "write",
+   "line": 504,
+   "receiver": "{literal}",
+   "subject": "linkedFactionIds",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "any membership",
+   "note": ""
+  },
+  {
+   "file": "src/domain/events/mutateEntities.js",
+   "name": "linkedFactionIds",
+   "kind": "read",
+   "line": 504,
+   "receiver": "event.payload",
+   "subject": "linkedFactionIds",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "any membership",
+   "note": ""
+  },
+  {
+   "file": "src/domain/events/mutateEntities.js",
+   "name": "factionAffiliation",
+   "kind": "read",
+   "line": 750,
+   "receiver": "npc",
+   "subject": "factionAffiliation",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "rank-1 membership",
+   "note": ""
+  },
+  {
+   "file": "src/domain/events/mutateEntities.js",
+   "name": "npcHomeInstitution",
+   "kind": "call",
+   "line": 827,
+   "subject": "npcHomeInstitution",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "the institution",
+   "note": ""
+  },
+  {
+   "file": "src/domain/events/mutateEntities.js",
+   "name": "structuralRank",
+   "kind": "string",
+   "line": 848,
+   "receiver": "",
+   "subject": "structuralRank",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "rank-1 membership (its rank)",
+   "note": ""
+  },
+  {
+   "file": "src/domain/events/mutateEntities.js",
+   "name": "factionAffiliation",
+   "kind": "read",
+   "line": 879,
+   "receiver": "a",
+   "subject": "factionAffiliation",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "rank-1 membership",
+   "note": ""
+  },
+  {
+   "file": "src/domain/events/mutateEntities.js",
+   "name": "factionAffiliation",
+   "kind": "read",
+   "line": 879,
+   "receiver": "b",
+   "subject": "factionAffiliation",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "rank-1 membership",
+   "note": ""
+  },
+  {
+   "file": "src/domain/events/mutateEntities.js",
+   "name": "factionAffiliation",
+   "kind": "read",
+   "line": 880,
+   "receiver": "a",
+   "subject": "factionAffiliation",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "rank-1 membership",
+   "note": ""
+  },
+  {
+   "file": "src/domain/events/mutateEntities.js",
+   "name": "factionAffiliation",
+   "kind": "read",
+   "line": 880,
+   "receiver": "b",
+   "subject": "factionAffiliation",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "rank-1 membership",
+   "note": ""
+  },
+  {
+   "file": "src/domain/events/mutateEntities.js",
+   "name": "factionAffiliation",
+   "kind": "read",
+   "line": 902,
+   "receiver": "a",
+   "subject": "factionAffiliation",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "rank-1 membership",
+   "note": ""
+  },
+  {
+   "file": "src/domain/events/mutateEntities.js",
+   "name": "factionAffiliation",
+   "kind": "read",
+   "line": 902,
+   "receiver": "b",
+   "subject": "factionAffiliation",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "rank-1 membership",
+   "note": ""
+  },
+  {
+   "file": "src/domain/events/mutateHelpers.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 52,
+   "receiver": "s",
+   "subject": "factions",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "the powers",
+   "note": ""
+  },
+  {
+   "file": "src/domain/events/mutateHelpers.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 167,
+   "receiver": "s",
+   "subject": "factions",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "the powers",
+   "note": ""
+  },
+  {
+   "file": "src/domain/events/mutateHelpers.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 168,
+   "receiver": "s",
+   "subject": "factions",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "the powers",
+   "note": ""
+  },
+  {
+   "file": "src/domain/events/mutateHelpers.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 170,
+   "receiver": "s",
+   "subject": "factions",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "the powers",
+   "note": ""
+  },
+  {
+   "file": "src/domain/events/registry.js",
+   "name": "factionAffiliation",
+   "kind": "read",
+   "line": 805,
+   "receiver": "npc",
+   "subject": "factionAffiliation",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "rank-1 membership",
+   "note": ""
+  },
+  {
+   "file": "src/domain/events/registry.js",
+   "name": "factionAffiliation",
+   "kind": "read",
+   "line": 820,
+   "receiver": "npc",
+   "subject": "factionAffiliation",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "rank-1 membership",
+   "note": ""
+  },
+  {
+   "file": "src/domain/events/undoEvent.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 487,
+   "receiver": "next",
+   "subject": "factions",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "the powers",
+   "note": ""
+  },
+  {
+   "file": "src/domain/events/undoEvent.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 488,
+   "receiver": "next",
+   "subject": "factions",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "the powers",
+   "note": ""
+  },
+  {
+   "file": "src/domain/factionProfile.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 351,
+   "receiver": "settlement",
+   "subject": "factions",
+   "cls": "DISPLAY",
+   "owner": "PEOPLE-5",
+   "replacement": "the powers (delete the fallback)",
+   "note": ""
+  },
+  {
+   "file": "src/domain/factionRefs.js",
+   "name": "linkedFactionIds",
+   "kind": "read",
+   "line": 104,
+   "receiver": "entity",
+   "subject": "linkedFactionIds",
+   "cls": "EDIT",
+   "owner": "PEOPLE-5",
+   "replacement": "any membership",
+   "note": "entityLinksFaction"
+  },
+  {
+   "file": "src/domain/factionRename.js",
+   "name": "factionAffiliation",
+   "kind": "string",
+   "line": 227,
+   "receiver": "",
+   "subject": "factionAffiliation",
+   "cls": "EDIT",
+   "owner": "PEOPLE-5",
+   "replacement": "delete (the second home) · the powers",
+   "note": "NPC_FACTION_FIELDS + the grouping walks"
+  },
+  {
+   "file": "src/domain/factionRename.js",
+   "name": "secondaryAffiliation",
+   "kind": "string",
+   "line": 229,
+   "receiver": "",
+   "subject": "secondaryAffiliation",
+   "cls": "EDIT",
+   "owner": "PEOPLE-5",
+   "replacement": "delete (the second home) · the powers",
+   "note": "NPC_FACTION_FIELDS + the grouping walks"
+  },
+  {
+   "file": "src/domain/factionRename.js",
+   "name": "linkedFactionIds",
+   "kind": "string",
+   "line": 231,
+   "receiver": "",
+   "subject": "linkedFactionIds",
+   "cls": "EDIT",
+   "owner": "PEOPLE-5",
+   "replacement": "delete (the second home) · the powers",
+   "note": "NPC_FACTION_FIELDS + the grouping walks"
+  },
+  {
+   "file": "src/domain/factionRename.js",
+   "name": "factionGoal",
+   "kind": "string",
+   "line": 249,
+   "receiver": "",
+   "subject": "factionGoal",
+   "cls": "EDIT",
+   "owner": "PEOPLE-5",
+   "replacement": "delete (the second home) · the powers",
+   "note": "NPC_FACTION_FIELDS + the grouping walks"
+  },
+  {
+   "file": "src/domain/factionRename.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 738,
+   "receiver": "settlement",
+   "subject": "factions",
+   "cls": "EDIT",
+   "owner": "PEOPLE-5",
+   "replacement": "delete (the second home) · the powers",
+   "note": "NPC_FACTION_FIELDS + the grouping walks"
+  },
+  {
+   "file": "src/domain/factionRename.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 913,
+   "receiver": "settlement",
+   "subject": "factions",
+   "cls": "EDIT",
+   "owner": "PEOPLE-5",
+   "replacement": "delete (the second home) · the powers",
+   "note": "NPC_FACTION_FIELDS + the grouping walks"
+  },
+  {
+   "file": "src/domain/factionRename.js",
+   "name": "members",
+   "kind": "read",
+   "line": 922,
+   "receiver": "group",
+   "subject": "members",
+   "cls": "EDIT",
+   "owner": "PEOPLE-5",
+   "replacement": "delete (the second home) · the powers",
+   "note": "NPC_FACTION_FIELDS + the grouping walks"
+  },
+  {
+   "file": "src/domain/factionRename.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 1125,
+   "receiver": "settlement",
+   "subject": "factions",
+   "cls": "EDIT",
+   "owner": "PEOPLE-5",
+   "replacement": "delete (the second home) · the powers",
+   "note": "NPC_FACTION_FIELDS + the grouping walks"
+  },
+  {
+   "file": "src/domain/factionRename.js",
+   "name": "members",
+   "kind": "read",
+   "line": 1127,
+   "receiver": "group",
+   "subject": "members",
+   "cls": "EDIT",
+   "owner": "PEOPLE-5",
+   "replacement": "delete (the second home) · the powers",
+   "note": "NPC_FACTION_FIELDS + the grouping walks"
+  },
+  {
+   "file": "src/domain/factions/factionCatalog.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 57,
+   "receiver": "settlement",
+   "subject": "factions",
+   "cls": "DISPLAY",
+   "owner": "PEOPLE-5",
+   "replacement": "the powers (delete the fallback)",
+   "note": "NOT in PEOPLE-0 §5 (the compendium's present-names read)"
+  },
+  {
+   "file": "src/domain/institutionRename.js",
+   "name": "secondaryAffiliation",
+   "kind": "string",
+   "line": 116,
+   "receiver": "",
+   "subject": "secondaryAffiliation",
+   "cls": "EDIT",
+   "owner": "PEOPLE-5",
+   "replacement": "the institution",
+   "note": "secondaryAffiliation as an institution handle + two faction-ledger label rows"
+  },
+  {
+   "file": "src/domain/institutionRename.js",
+   "name": "factionAffiliation",
+   "kind": "path-string",
+   "line": 222,
+   "receiver": "",
+   "subject": "factionAffiliation",
+   "cls": "EDIT",
+   "owner": "PEOPLE-5",
+   "replacement": "the institution",
+   "note": "secondaryAffiliation as an institution handle + two faction-ledger label rows"
+  },
+  {
+   "file": "src/domain/institutionRename.js",
+   "name": "factionAffiliation",
+   "kind": "path-string",
+   "line": 237,
+   "receiver": "",
+   "subject": "factionAffiliation",
+   "cls": "EDIT",
+   "owner": "PEOPLE-5",
+   "replacement": "the institution",
+   "note": "secondaryAffiliation as an institution handle + two faction-ledger label rows"
+  },
+  {
+   "file": "src/domain/intent/opVocabulary.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 182,
+   "receiver": "s",
+   "subject": "factions",
+   "cls": "EDIT",
+   "owner": "PEOPLE-5",
+   "replacement": "the powers",
+   "note": "protected ids"
+  },
+  {
+   "file": "src/domain/normalizeSettlement.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 103,
+   "receiver": "holder",
+   "subject": "factions",
+   "cls": "EDIT",
+   "owner": "PEOPLE-5",
+   "replacement": "the powers (delete the fallback)",
+   "note": "the load path"
+  },
+  {
+   "file": "src/domain/npc/npcOps.js",
+   "name": "factionAffiliation",
+   "kind": "string",
+   "line": 72,
+   "receiver": "",
+   "subject": "factionAffiliation",
+   "cls": "EDIT",
+   "owner": "PEOPLE-5",
+   "replacement": "memberships + institution (seat fields)",
+   "note": "SEAT_HELD_FIELDS"
+  },
+  {
+   "file": "src/domain/npc/npcOps.js",
+   "name": "linkedFactionIds",
+   "kind": "string",
+   "line": 73,
+   "receiver": "",
+   "subject": "linkedFactionIds",
+   "cls": "EDIT",
+   "owner": "PEOPLE-5",
+   "replacement": "memberships + institution (seat fields)",
+   "note": "SEAT_HELD_FIELDS"
+  },
+  {
+   "file": "src/domain/npcProfile.js",
+   "name": "structuralRank",
+   "kind": "read",
+   "line": 558,
+   "receiver": "npc",
+   "subject": "structuralRank",
+   "cls": "DISPLAY",
+   "owner": "PEOPLE-5",
+   "replacement": "rank-1 membership",
+   "note": "factionLink + rank"
+  },
+  {
+   "file": "src/domain/npcProfile.js",
+   "name": "factionAffiliation",
+   "kind": "read",
+   "line": 572,
+   "receiver": "npc",
+   "subject": "factionAffiliation",
+   "cls": "DISPLAY",
+   "owner": "PEOPLE-5",
+   "replacement": "rank-1 membership",
+   "note": "factionLink + rank"
+  },
+  {
+   "file": "src/domain/pendingEditIntents.js",
+   "name": "factionAffiliation",
+   "kind": "string",
+   "line": 84,
+   "receiver": "",
+   "subject": "factionAffiliation",
+   "cls": "EDIT",
+   "owner": "PEOPLE-5",
+   "replacement": "memberships + institution (seat fields)",
+   "note": "SEAT_FIELDS / SEAT_ARRAY_FIELDS"
+  },
+  {
+   "file": "src/domain/pendingEditIntents.js",
+   "name": "linkedFactionIds",
+   "kind": "string",
+   "line": 88,
+   "receiver": "",
+   "subject": "linkedFactionIds",
+   "cls": "EDIT",
+   "owner": "PEOPLE-5",
+   "replacement": "memberships + institution (seat fields)",
+   "note": "SEAT_FIELDS / SEAT_ARRAY_FIELDS"
+  },
+  {
+   "file": "src/domain/pendingEditIntents.js",
+   "name": "linkedFactionIds",
+   "kind": "string",
+   "line": 90,
+   "receiver": "",
+   "subject": "linkedFactionIds",
+   "cls": "EDIT",
+   "owner": "PEOPLE-5",
+   "replacement": "memberships + institution (seat fields)",
+   "note": "SEAT_FIELDS / SEAT_ARRAY_FIELDS"
+  },
+  {
+   "file": "src/domain/pendingEditsPreview.js",
+   "name": "factions",
+   "kind": "write",
+   "line": 422,
+   "receiver": "preview.downstreamCounts",
+   "subject": "factions",
+   "cls": "EDIT",
+   "owner": "PEOPLE-5",
+   "replacement": "the powers",
+   "note": "downstreamCounts.factions"
+  },
+  {
+   "file": "src/domain/pendingEditsPreview.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 422,
+   "receiver": "settlement",
+   "subject": "factions",
+   "cls": "EDIT",
+   "owner": "PEOPLE-5",
+   "replacement": "the powers",
+   "note": "downstreamCounts.factions"
+  },
+  {
+   "file": "src/domain/pendingEditsPreview.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 423,
+   "receiver": "settlement",
+   "subject": "factions",
+   "cls": "EDIT",
+   "owner": "PEOPLE-5",
+   "replacement": "the powers",
+   "note": "downstreamCounts.factions"
+  },
+  {
+   "file": "src/domain/regenerationMode.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 189,
+   "receiver": "holder",
+   "subject": "factions",
+   "cls": "EDIT",
+   "owner": "PEOPLE-5",
+   "replacement": "the powers (delete the fallback)",
+   "note": "NOT in PEOPLE-0 §5"
+  },
+  {
+   "file": "src/domain/relationships/neighbourBackLink.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 200,
+   "receiver": "settlement",
+   "subject": "factions",
+   "cls": "EDIT",
+   "owner": "PEOPLE-5",
+   "replacement": "delete",
+   "note": "the back-link copies the grouping onto the partner save"
+  },
+  {
+   "file": "src/domain/relationships/neighbourBackLink.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 203,
+   "receiver": "nr",
+   "subject": "factions",
+   "cls": "EDIT",
+   "owner": "PEOPLE-5",
+   "replacement": "delete",
+   "note": "the back-link copies the grouping onto the partner save"
+  },
+  {
+   "file": "src/domain/state/deriveSystemState.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 199,
+   "receiver": "s",
+   "subject": "factions",
+   "cls": "DISPLAY",
+   "owner": "PEOPLE-5",
+   "replacement": "the powers (delete the fallback)",
+   "note": ""
+  },
+  {
+   "file": "src/domain/tableLedger.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 308,
+   "receiver": "s",
+   "subject": "factions",
+   "cls": "DISPLAY",
+   "owner": "PEOPLE-5",
+   "replacement": "the powers (delete the fallback)",
+   "note": ""
+  },
+  {
+   "file": "src/domain/worldPulse/assizeKernel.js",
+   "name": "npcInFaction",
+   "kind": "import",
+   "line": 48,
+   "subject": "npcInFaction",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "any membership",
+   "note": ""
+  },
+  {
+   "file": "src/domain/worldPulse/assizeKernel.js",
+   "name": "npcInFaction",
+   "kind": "call",
+   "line": 145,
+   "subject": "npcInFaction",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "any membership",
+   "note": ""
+  },
+  {
+   "file": "src/domain/worldPulse/assizeKernel.js",
+   "name": "npcInFaction",
+   "kind": "call",
+   "line": 149,
+   "subject": "npcInFaction",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "any membership",
+   "note": ""
+  },
+  {
+   "file": "src/domain/worldPulse/assizeKernel.js",
+   "name": "npcInFaction",
+   "kind": "call",
+   "line": 173,
+   "subject": "npcInFaction",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "any membership",
+   "note": ""
+  },
+  {
+   "file": "src/domain/worldPulse/beliefMap.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 828,
+   "receiver": "s",
+   "subject": "factions",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "the powers",
+   "note": ""
+  },
+  {
+   "file": "src/domain/worldPulse/brokeragePatronage.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 123,
+   "receiver": "settlement",
+   "subject": "factions",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "the powers",
+   "note": ""
+  },
+  {
+   "file": "src/domain/worldPulse/causeLifecycle.js",
+   "name": "secondaryAffiliation",
+   "kind": "read",
+   "line": 172,
+   "receiver": "npc",
+   "subject": "secondaryAffiliation",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "any membership (rank 2)",
+   "note": ""
+  },
+  {
+   "file": "src/domain/worldPulse/corruptionImpair.js",
+   "name": "npcHomeInstitution",
+   "kind": "import",
+   "line": 14,
+   "subject": "npcHomeInstitution",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "the institution",
+   "note": ""
+  },
+  {
+   "file": "src/domain/worldPulse/corruptionImpair.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 54,
+   "receiver": "settlement",
+   "subject": "factions",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "the powers",
+   "note": ""
+  },
+  {
+   "file": "src/domain/worldPulse/corruptionImpair.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 80,
+   "receiver": "settlement",
+   "subject": "factions",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "the powers",
+   "note": ""
+  },
+  {
+   "file": "src/domain/worldPulse/corruptionImpair.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 81,
+   "receiver": "settlement",
+   "subject": "factions",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "the powers",
+   "note": ""
+  },
+  {
+   "file": "src/domain/worldPulse/corruptionImpair.js",
+   "name": "npcHomeInstitution",
+   "kind": "call",
+   "line": 153,
+   "subject": "npcHomeInstitution",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "the institution",
+   "note": ""
+  },
+  {
+   "file": "src/domain/worldPulse/factionCompetition.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 149,
+   "receiver": "item.settlement",
+   "subject": "factions",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "the powers",
+   "note": ""
+  },
+  {
+   "file": "src/domain/worldPulse/factionDensityKernel.js",
+   "name": "factionRosterOf",
+   "kind": "import",
+   "line": 93,
+   "subject": "factionRosterOf",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "any membership",
+   "note": ""
+  },
+  {
+   "file": "src/domain/worldPulse/factionDensityKernel.js",
+   "name": "factionRosterOf",
+   "kind": "call",
+   "line": 262,
+   "subject": "factionRosterOf",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "any membership",
+   "note": ""
+  },
+  {
+   "file": "src/domain/worldPulse/factionDensityKernel.js",
+   "name": "factionAffiliation",
+   "kind": "write",
+   "line": 487,
+   "receiver": "{literal}",
+   "subject": "factionAffiliation",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "rank-1 membership",
+   "note": ""
+  },
+  {
+   "file": "src/domain/worldPulse/factionDensityKernel.js",
+   "name": "linkedFactionIds",
+   "kind": "write",
+   "line": 488,
+   "receiver": "{literal}",
+   "subject": "linkedFactionIds",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "any membership",
+   "note": ""
+  },
+  {
+   "file": "src/domain/worldPulse/factionDensityKernel.js",
+   "name": "factionAffiliation",
+   "kind": "write",
+   "line": 491,
+   "receiver": "npc",
+   "subject": "factionAffiliation",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "rank-1 membership",
+   "note": ""
+  },
+  {
+   "file": "src/domain/worldPulse/factionDensityKernel.js",
+   "name": "factionAffiliation",
+   "kind": "read",
+   "line": 640,
+   "receiver": "npc",
+   "subject": "factionAffiliation",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "rank-1 membership",
+   "note": ""
+  },
+  {
+   "file": "src/domain/worldPulse/factionDensityKernel.js",
+   "name": "factionAffiliation",
+   "kind": "write",
+   "line": 642,
+   "receiver": "{literal}",
+   "subject": "factionAffiliation",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "rank-1 membership",
+   "note": ""
+  },
+  {
+   "file": "src/domain/worldPulse/houseLedger.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 283,
+   "receiver": "settlement",
+   "subject": "factions",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "the powers",
+   "note": ""
+  },
+  {
+   "file": "src/domain/worldPulse/houseLedger.js",
+   "name": "factionAffiliation",
+   "kind": "read",
+   "line": 324,
+   "receiver": "npc",
+   "subject": "factionAffiliation",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "rank-1 membership",
+   "note": ""
+  },
+  {
+   "file": "src/domain/worldPulse/npcAgency.js",
+   "name": "npcHomeInstitution",
+   "kind": "import",
+   "line": 7,
+   "subject": "npcHomeInstitution",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "the institution",
+   "note": ""
+  },
+  {
+   "file": "src/domain/worldPulse/npcAgency.js",
+   "name": "factionAffiliation",
+   "kind": "read",
+   "line": 301,
+   "receiver": "npc",
+   "subject": "factionAffiliation",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "rank-1 membership",
+   "note": ""
+  },
+  {
+   "file": "src/domain/worldPulse/npcAgency.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 303,
+   "receiver": "item.settlement",
+   "subject": "factions",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "the powers",
+   "note": ""
+  },
+  {
+   "file": "src/domain/worldPulse/npcAgency.js",
+   "name": "npcHomeInstitution",
+   "kind": "call",
+   "line": 777,
+   "subject": "npcHomeInstitution",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "the institution",
+   "note": ""
+  },
+  {
+   "file": "src/domain/worldPulse/npcAgency.js",
+   "name": "factionAffiliation",
+   "kind": "read",
+   "line": 821,
+   "receiver": "npc",
+   "subject": "factionAffiliation",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "rank-1 membership",
+   "note": ""
+  },
+  {
+   "file": "src/domain/worldPulse/npcCirculationTable.js",
+   "name": "members",
+   "kind": "read",
+   "line": 198,
+   "receiver": "asObject(faction)",
+   "subject": "members",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "any membership",
+   "note": ""
+  },
+  {
+   "file": "src/domain/worldPulse/npcCirculationTable.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 282,
+   "receiver": "s",
+   "subject": "factions",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "the powers",
+   "note": ""
+  },
+  {
+   "file": "src/domain/worldPulse/npcLadderFactionMembership.js",
+   "name": "factionAffiliation",
+   "kind": "string",
+   "line": 54,
+   "receiver": "",
+   "subject": "factionAffiliation",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "rank-1 membership",
+   "note": ""
+  },
+  {
+   "file": "src/domain/worldPulse/npcLadderFactionMembership.js",
+   "name": "npcInFaction",
+   "kind": "def",
+   "line": 66,
+   "subject": "npcInFaction",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "any membership",
+   "note": ""
+  },
+  {
+   "file": "src/domain/worldPulse/npcLadderState.js",
+   "name": "npcInFaction",
+   "kind": "import",
+   "line": 18,
+   "subject": "npcInFaction",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "any membership",
+   "note": ""
+  },
+  {
+   "file": "src/domain/worldPulse/npcLadderState.js",
+   "name": "npcInFaction",
+   "kind": "export",
+   "line": 117,
+   "subject": "npcInFaction",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "any membership",
+   "note": ""
+  },
+  {
+   "file": "src/domain/worldPulse/npcLadderState.js",
+   "name": "structuralRank",
+   "kind": "read",
+   "line": 122,
+   "receiver": "npc",
+   "subject": "structuralRank",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "rank-1 membership (its rank)",
+   "note": ""
+  },
+  {
+   "file": "src/domain/worldPulse/npcLadderState.js",
+   "name": "npcInFaction",
+   "kind": "call",
+   "line": 158,
+   "subject": "npcInFaction",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "any membership",
+   "note": ""
+  },
+  {
+   "file": "src/domain/worldPulse/npcLedger.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 1051,
+   "receiver": "s",
+   "subject": "factions",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "the powers",
+   "note": ""
+  },
+  {
+   "file": "src/domain/worldPulse/npcLedger.js",
+   "name": "members",
+   "kind": "read",
+   "line": 1054,
+   "receiver": "asObject(faction)",
+   "subject": "members",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "any membership",
+   "note": ""
+  },
+  {
+   "file": "src/domain/worldPulse/npcVerdictApply.js",
+   "name": "structuralRank",
+   "kind": "string",
+   "line": 95,
+   "receiver": "",
+   "subject": "structuralRank",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "rank-1 membership (its rank)",
+   "note": ""
+  },
+  {
+   "file": "src/domain/worldPulse/npcVerdictApply.js",
+   "name": "factionAffiliation",
+   "kind": "string",
+   "line": 104,
+   "receiver": "",
+   "subject": "factionAffiliation",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "rank-1 membership",
+   "note": ""
+  },
+  {
+   "file": "src/domain/worldPulse/npcVerdictApply.js",
+   "name": "secondaryAffiliation",
+   "kind": "string",
+   "line": 105,
+   "receiver": "",
+   "subject": "secondaryAffiliation",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "any membership (rank 2)",
+   "note": ""
+  },
+  {
+   "file": "src/domain/worldPulse/npcVerdictApply.js",
+   "name": "linkedFactionIds",
+   "kind": "string",
+   "line": 111,
+   "receiver": "",
+   "subject": "linkedFactionIds",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "any membership",
+   "note": ""
+  },
+  {
+   "file": "src/domain/worldPulse/npcVerdictApply.js",
+   "name": "members",
+   "kind": "read",
+   "line": 212,
+   "receiver": "record",
+   "subject": "members",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "any membership",
+   "note": ""
+  },
+  {
+   "file": "src/domain/worldPulse/npcVerdictApply.js",
+   "name": "members",
+   "kind": "read",
+   "line": 214,
+   "receiver": "record",
+   "subject": "members",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "any membership",
+   "note": ""
+  },
+  {
+   "file": "src/domain/worldPulse/npcVerdictApply.js",
+   "name": "members",
+   "kind": "write",
+   "line": 220,
+   "receiver": "{literal}",
+   "subject": "members",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "any membership",
+   "note": ""
+  },
+  {
+   "file": "src/domain/worldPulse/npcVerdictApply.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 260,
+   "receiver": "source",
+   "subject": "factions",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "the powers",
+   "note": ""
+  },
+  {
+   "file": "src/domain/worldPulse/npcVerdictApply.js",
+   "name": "factions",
+   "kind": "write",
+   "line": 271,
+   "receiver": "next",
+   "subject": "factions",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "the powers",
+   "note": ""
+  },
+  {
+   "file": "src/domain/worldPulse/npcVerdictTable.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 273,
+   "receiver": "s",
+   "subject": "factions",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "the powers",
+   "note": ""
+  },
+  {
+   "file": "src/domain/worldPulse/npcVerdictTable.js",
+   "name": "members",
+   "kind": "read",
+   "line": 702,
+   "receiver": "faction",
+   "subject": "members",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "any membership",
+   "note": ""
+  },
+  {
+   "file": "src/domain/worldPulse/npcVerdictTable.js",
+   "name": "factionAffiliation",
+   "kind": "string",
+   "line": 709,
+   "receiver": "",
+   "subject": "factionAffiliation",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "rank-1 membership",
+   "note": ""
+  },
+  {
+   "file": "src/domain/worldPulse/oathHolder.js",
+   "name": "npcInFaction",
+   "kind": "import",
+   "line": 88,
+   "subject": "npcInFaction",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "any membership",
+   "note": ""
+  },
+  {
+   "file": "src/domain/worldPulse/oathHolder.js",
+   "name": "npcInFaction",
+   "kind": "call",
+   "line": 156,
+   "subject": "npcInFaction",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "any membership",
+   "note": ""
+  },
+  {
+   "file": "src/domain/worldPulse/religionLegitimacy.js",
+   "name": "npcInFaction",
+   "kind": "import",
+   "line": 51,
+   "subject": "npcInFaction",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "any membership",
+   "note": ""
+  },
+  {
+   "file": "src/domain/worldPulse/religionLegitimacy.js",
+   "name": "npcInFaction",
+   "kind": "call",
+   "line": 279,
+   "subject": "npcInFaction",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "any membership",
+   "note": ""
+  },
+  {
+   "file": "src/domain/worldPulse/settlementPolitics.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 197,
+   "receiver": "s",
+   "subject": "factions",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "the powers",
+   "note": ""
+  },
+  {
+   "file": "src/domain/worldPulse/successorNpc.js",
+   "name": "factionAffiliation",
+   "kind": "write",
+   "line": 37,
+   "receiver": "{literal}",
+   "subject": "factionAffiliation",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "rank-1 membership",
+   "note": ""
+  },
+  {
+   "file": "src/domain/worldPulse/successorNpc.js",
+   "name": "factionAffiliation",
+   "kind": "read",
+   "line": 37,
+   "receiver": "ousted",
+   "subject": "factionAffiliation",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "rank-1 membership",
+   "note": ""
+  },
+  {
+   "file": "src/domain/worldPulse/supplyKernel.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 772,
+   "receiver": "bearing",
+   "subject": "factions",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "the powers",
+   "note": ""
+  },
+  {
+   "file": "src/domain/worldPulse/supplyKernel.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 805,
+   "receiver": "s",
+   "subject": "factions",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "the powers",
+   "note": ""
+  },
+  {
+   "file": "src/domain/worldPulse/thievesGuild.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 57,
+   "receiver": "item.settlement",
+   "subject": "factions",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "the powers",
+   "note": ""
+  },
+  {
+   "file": "src/domain/worldPulse/warPoliticalLoop.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 60,
+   "receiver": "settlement",
+   "subject": "factions",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "the powers",
+   "note": ""
+  },
+  {
+   "file": "src/domain/worldPulse/warRulingsNews.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 176,
+   "receiver": "settlement",
+   "subject": "factions",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "the powers",
+   "note": ""
+  },
+  {
+   "file": "src/domain/worldPulse/warSeatBooks.js",
+   "name": "npcInFaction",
+   "kind": "import",
+   "line": 41,
+   "subject": "npcInFaction",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "any membership",
+   "note": ""
+  },
+  {
+   "file": "src/domain/worldPulse/warSeatBooks.js",
+   "name": "npcInFaction",
+   "kind": "call",
+   "line": 215,
+   "subject": "npcInFaction",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "any membership",
+   "note": ""
+  },
+  {
+   "file": "src/generators/crossSettlementConflicts.js",
+   "name": "dominantCategory",
+   "kind": "write",
+   "line": 177,
+   "receiver": "{literal}",
+   "subject": "dominantCategory",
+   "cls": "BIRTH",
+   "owner": "PEOPLE-5",
+   "replacement": "the powers",
+   "note": "grouping + dominantCategory"
+  },
+  {
+   "file": "src/generators/crossSettlementConflicts.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 180,
+   "receiver": "settlement",
+   "subject": "factions",
+   "cls": "BIRTH",
+   "owner": "PEOPLE-5",
+   "replacement": "the powers",
+   "note": "grouping + dominantCategory"
+  },
+  {
+   "file": "src/generators/crossSettlementConflicts.js",
+   "name": "dominantCategory",
+   "kind": "read",
+   "line": 268,
+   "receiver": "fa",
+   "subject": "dominantCategory",
+   "cls": "BIRTH",
+   "owner": "PEOPLE-5",
+   "replacement": "the powers",
+   "note": "grouping + dominantCategory"
+  },
+  {
+   "file": "src/generators/crossSettlementConflicts.js",
+   "name": "dominantCategory",
+   "kind": "read",
+   "line": 270,
+   "receiver": "fb",
+   "subject": "dominantCategory",
+   "cls": "BIRTH",
+   "owner": "PEOPLE-5",
+   "replacement": "the powers",
+   "note": "grouping + dominantCategory"
+  },
+  {
+   "file": "src/generators/crossSettlementConflicts.js",
+   "name": "dominantCategory",
+   "kind": "read",
+   "line": 284,
+   "receiver": "bestA",
+   "subject": "dominantCategory",
+   "cls": "BIRTH",
+   "owner": "PEOPLE-5",
+   "replacement": "the powers",
+   "note": "grouping + dominantCategory"
+  },
+  {
+   "file": "src/generators/crossSettlementConflicts.js",
+   "name": "dominantCategory",
+   "kind": "read",
+   "line": 285,
+   "receiver": "bestB",
+   "subject": "dominantCategory",
+   "cls": "BIRTH",
+   "owner": "PEOPLE-5",
+   "replacement": "the powers",
+   "note": "grouping + dominantCategory"
+  },
+  {
+   "file": "src/generators/crossSettlementConflicts.js",
+   "name": "dominantCategory",
+   "kind": "read",
+   "line": 291,
+   "receiver": "bestB",
+   "subject": "dominantCategory",
+   "cls": "BIRTH",
+   "owner": "PEOPLE-5",
+   "replacement": "the powers",
+   "note": "grouping + dominantCategory"
+  },
+  {
+   "file": "src/generators/crossSettlementConflicts.js",
+   "name": "dominantCategory",
+   "kind": "read",
+   "line": 292,
+   "receiver": "bestA",
+   "subject": "dominantCategory",
+   "cls": "BIRTH",
+   "owner": "PEOPLE-5",
+   "replacement": "the powers",
+   "note": "grouping + dominantCategory"
+  },
+  {
+   "file": "src/generators/density/applyDensityLaw.js",
+   "name": "factionAffiliation",
+   "kind": "read",
+   "line": 490,
+   "receiver": "npc",
+   "subject": "factionAffiliation",
+   "cls": "RETIRED",
+   "owner": "PEOPLE-1",
+   "replacement": "delete",
+   "note": "the density roster's affiliation"
+  },
+  {
+   "file": "src/generators/density/applyDensityLaw.js",
+   "name": "factionAffiliation",
+   "kind": "write",
+   "line": 526,
+   "receiver": "{literal}",
+   "subject": "factionAffiliation",
+   "cls": "RETIRED",
+   "owner": "PEOPLE-1",
+   "replacement": "delete",
+   "note": "the density roster's affiliation"
+  },
+  {
+   "file": "src/generators/density/titularSuccession.js",
+   "name": "factionRosterOf",
+   "kind": "import",
+   "line": 86,
+   "subject": "factionRosterOf",
+   "cls": "RETIRED",
+   "owner": "PEOPLE-1",
+   "replacement": "any membership",
+   "note": "rung reads via factionRosterOf (an FPZ helper)"
+  },
+  {
+   "file": "src/generators/density/titularSuccession.js",
+   "name": "factionRosterOf",
+   "kind": "call",
+   "line": 189,
+   "subject": "factionRosterOf",
+   "cls": "RETIRED",
+   "owner": "PEOPLE-1",
+   "replacement": "any membership",
+   "note": "rung reads via factionRosterOf (an FPZ helper)"
+  },
+  {
+   "file": "src/generators/density/titularSuccession.js",
+   "name": "factionRosterOf",
+   "kind": "call",
+   "line": 243,
+   "subject": "factionRosterOf",
+   "cls": "RETIRED",
+   "owner": "PEOPLE-1",
+   "replacement": "any membership",
+   "note": "rung reads via factionRosterOf (an FPZ helper)"
+  },
+  {
+   "file": "src/generators/factionRoles.js",
+   "name": "factionAffiliation",
+   "kind": "write",
+   "line": 257,
+   "receiver": "{literal}",
+   "subject": "factionAffiliation",
+   "cls": "RETIRED",
+   "owner": "PEOPLE-1",
+   "replacement": "delete",
+   "note": "legacy office NPCs (pre-law worlds)"
+  },
+  {
+   "file": "src/generators/factionRoles.js",
+   "name": "linkedFactionIds",
+   "kind": "write",
+   "line": 262,
+   "receiver": "{literal}",
+   "subject": "linkedFactionIds",
+   "cls": "RETIRED",
+   "owner": "PEOPLE-1",
+   "replacement": "delete",
+   "note": "legacy office NPCs (pre-law worlds)"
+  },
+  {
+   "file": "src/generators/factionRoles.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 323,
+   "receiver": "settlement",
+   "subject": "factions",
+   "cls": "RETIRED",
+   "owner": "PEOPLE-1",
+   "replacement": "delete",
+   "note": "legacy office NPCs (pre-law worlds)"
+  },
+  {
+   "file": "src/generators/factionRoles.js",
+   "name": "factionAffiliation",
+   "kind": "read",
+   "line": 342,
+   "receiver": "npc",
+   "subject": "factionAffiliation",
+   "cls": "RETIRED",
+   "owner": "PEOPLE-1",
+   "replacement": "delete",
+   "note": "legacy office NPCs (pre-law worlds)"
+  },
+  {
+   "file": "src/generators/generateSettlementPipeline.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 449,
+   "receiver": "freshSettlement",
+   "subject": "factions",
+   "cls": "BIRTH",
+   "owner": "PEOPLE-5",
+   "replacement": "delete",
+   "note": ":449 relink + :579-584 the regen roster's grouping"
+  },
+  {
+   "file": "src/generators/generationCoherence.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 70,
+   "receiver": "settlement",
+   "subject": "factions",
+   "cls": "BIRTH",
+   "owner": "PEOPLE-5",
+   "replacement": "delete",
+   "note": "the grouping copy in the receipt input"
+  },
+  {
+   "file": "src/generators/generationCoherence.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 71,
+   "receiver": "settlement",
+   "subject": "factions",
+   "cls": "BIRTH",
+   "owner": "PEOPLE-5",
+   "replacement": "delete",
+   "note": "the grouping copy in the receipt input"
+  },
+  {
+   "file": "src/generators/generationCoherence.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 75,
+   "receiver": "settlement",
+   "subject": "factions",
+   "cls": "BIRTH",
+   "owner": "PEOPLE-5",
+   "replacement": "delete",
+   "note": "the grouping copy in the receipt input"
+  },
+  {
+   "file": "src/generators/generationReceiptJudgments.js",
+   "name": "factionAffiliation",
+   "kind": "read",
+   "line": 157,
+   "receiver": "npc",
+   "subject": "factionAffiliation",
+   "cls": "BIRTH",
+   "owner": "PEOPLE-5",
+   "replacement": "any membership (each ∈ powers)",
+   "note": "affiliation ∈ powers; grouping identity/members"
+  },
+  {
+   "file": "src/generators/generationReceiptJudgments.js",
+   "name": "factionAffiliation",
+   "kind": "read",
+   "line": 158,
+   "receiver": "npc",
+   "subject": "factionAffiliation",
+   "cls": "BIRTH",
+   "owner": "PEOPLE-5",
+   "replacement": "any membership (each ∈ powers)",
+   "note": "affiliation ∈ powers; grouping identity/members"
+  },
+  {
+   "file": "src/generators/generationReceiptJudgments.js",
+   "name": "factionAffiliation",
+   "kind": "path-string",
+   "line": 161,
+   "receiver": "",
+   "subject": "factionAffiliation",
+   "cls": "BIRTH",
+   "owner": "PEOPLE-5",
+   "replacement": "any membership (each ∈ powers)",
+   "note": "affiliation ∈ powers; grouping identity/members"
+  },
+  {
+   "file": "src/generators/generationReceiptJudgments.js",
+   "name": "factionAffiliation",
+   "kind": "read",
+   "line": 163,
+   "receiver": "npc",
+   "subject": "factionAffiliation",
+   "cls": "BIRTH",
+   "owner": "PEOPLE-5",
+   "replacement": "any membership (each ∈ powers)",
+   "note": "affiliation ∈ powers; grouping identity/members"
+  },
+  {
+   "file": "src/generators/generationReceiptJudgments.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 168,
+   "receiver": "settlement",
+   "subject": "factions",
+   "cls": "BIRTH",
+   "owner": "PEOPLE-5",
+   "replacement": "any membership (each ∈ powers)",
+   "note": "affiliation ∈ powers; grouping identity/members"
+  },
+  {
+   "file": "src/generators/generationReceiptJudgments.js",
+   "name": "members",
+   "kind": "read",
+   "line": 177,
+   "receiver": "faction",
+   "subject": "members",
+   "cls": "BIRTH",
+   "owner": "PEOPLE-5",
+   "replacement": "any membership (each ∈ powers)",
+   "note": "affiliation ∈ powers; grouping identity/members"
+  },
+  {
+   "file": "src/generators/narrativeGenerator.js",
+   "name": "members",
+   "kind": "read",
+   "line": 939,
+   "receiver": "f",
+   "subject": "members",
+   "cls": "BIRTH",
+   "owner": "PEOPLE-5",
+   "replacement": "delete",
+   "note": "relinkFactionMembers"
+  },
+  {
+   "file": "src/generators/narrativeGenerator.js",
+   "name": "members",
+   "kind": "write",
+   "line": 940,
+   "receiver": "{literal}",
+   "subject": "members",
+   "cls": "BIRTH",
+   "owner": "PEOPLE-5",
+   "replacement": "delete",
+   "note": "relinkFactionMembers"
+  },
+  {
+   "file": "src/generators/narrativeGenerator.js",
+   "name": "members",
+   "kind": "read",
+   "line": 940,
+   "receiver": "f",
+   "subject": "members",
+   "cls": "BIRTH",
+   "owner": "PEOPLE-5",
+   "replacement": "delete",
+   "note": "relinkFactionMembers"
+  },
+  {
+   "file": "src/generators/narrativeGenerator.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 1034,
+   "receiver": "settlement",
+   "subject": "factions",
+   "cls": "BIRTH",
+   "owner": "PEOPLE-5",
+   "replacement": "delete",
+   "note": "relinkFactionMembers"
+  },
+  {
+   "file": "src/generators/narrativeGenerator.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 1035,
+   "receiver": "settlement",
+   "subject": "factions",
+   "cls": "BIRTH",
+   "owner": "PEOPLE-5",
+   "replacement": "delete",
+   "note": "relinkFactionMembers"
+  },
+  {
+   "file": "src/generators/neighbourGenerator.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 123,
+   "receiver": "neighbour",
+   "subject": "factions",
+   "cls": "BIRTH",
+   "owner": "PEOPLE-5",
+   "replacement": "the powers (delete the fallback)",
+   "note": ""
+  },
+  {
+   "file": "src/generators/neighbourGenerator.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 186,
+   "receiver": "neighbour",
+   "subject": "factions",
+   "cls": "BIRTH",
+   "owner": "PEOPLE-5",
+   "replacement": "the powers (delete the fallback)",
+   "note": ""
+  },
+  {
+   "file": "src/generators/npcGenerator.js",
+   "name": "factionAffiliation",
+   "kind": "write",
+   "line": 1148,
+   "receiver": "enriched",
+   "subject": "factionAffiliation",
+   "cls": "BIRTH",
+   "owner": "PEOPLE-1",
+   "replacement": "any membership (W memberships); factionGoal delete",
+   "note": "the old affiliation writers; PEOPLE-1 writes memberships + the shim"
+  },
+  {
+   "file": "src/generators/npcGenerator.js",
+   "name": "secondaryAffiliation",
+   "kind": "write",
+   "line": 1294,
+   "receiver": "enriched",
+   "subject": "secondaryAffiliation",
+   "cls": "BIRTH",
+   "owner": "PEOPLE-1",
+   "replacement": "any membership (W memberships); factionGoal delete",
+   "note": "the old affiliation writers; PEOPLE-1 writes memberships + the shim"
+  },
+  {
+   "file": "src/generators/npcGenerator.js",
+   "name": "factionGoal",
+   "kind": "write",
+   "line": 1310,
+   "receiver": "enriched",
+   "subject": "factionGoal",
+   "cls": "BIRTH",
+   "owner": "PEOPLE-1",
+   "replacement": "any membership (W memberships); factionGoal delete",
+   "note": "the old affiliation writers; PEOPLE-1 writes memberships + the shim"
+  },
+  {
+   "file": "src/generators/npcStructure.js",
+   "name": "factionAffiliation",
+   "kind": "read",
+   "line": 39,
+   "receiver": "npc",
+   "subject": "factionAffiliation",
+   "cls": "BIRTH",
+   "owner": "PEOPLE-2",
+   "replacement": "rank-1 membership",
+   "note": "structuralRank/structuralPosition/goal.short from the first-rank power"
+  },
+  {
+   "file": "src/generators/npcStructure.js",
+   "name": "factionAffiliation",
+   "kind": "read",
+   "line": 398,
+   "receiver": "npc",
+   "subject": "factionAffiliation",
+   "cls": "BIRTH",
+   "owner": "PEOPLE-2",
+   "replacement": "rank-1 membership",
+   "note": "structuralRank/structuralPosition/goal.short from the first-rank power"
+  },
+  {
+   "file": "src/generators/npcStructure.js",
+   "name": "structuralRank",
+   "kind": "write",
+   "line": 449,
+   "receiver": "{literal}",
+   "subject": "structuralRank",
+   "cls": "BIRTH",
+   "owner": "PEOPLE-2",
+   "replacement": "rank-1 membership",
+   "note": "structuralRank/structuralPosition/goal.short from the first-rank power"
+  },
+  {
+   "file": "src/generators/power/conflicts.js",
+   "name": "members",
+   "kind": "read",
+   "line": 68,
+   "receiver": "faction",
+   "subject": "members",
+   "cls": "BIRTH",
+   "owner": "PEOPLE-3",
+   "replacement": "the powers",
+   "note": "pairs from grouping members"
+  },
+  {
+   "file": "src/generators/power/factionGrouping.js",
+   "name": "factionAffiliation",
+   "kind": "read",
+   "line": 37,
+   "receiver": "npc",
+   "subject": "factionAffiliation",
+   "cls": "BIRTH",
+   "owner": "PEOPLE-5",
+   "replacement": "delete",
+   "note": "the grouping's builder"
+  },
+  {
+   "file": "src/generators/recordBatteryFindings.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 78,
+   "receiver": "settlement",
+   "subject": "factions",
+   "cls": "BIRTH",
+   "owner": "PEOPLE-5",
+   "replacement": "the powers",
+   "note": "grouping names; PEOPLE-3 touches this file for hook classes"
+  },
+  {
+   "file": "src/generators/steps/assembleSettlement.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 139,
+   "receiver": "rawNeighbour",
+   "subject": "factions",
+   "cls": "BIRTH",
+   "owner": "PEOPLE-5",
+   "replacement": "delete (grouping) · the powers (generateConflicts, PEOPLE-3)",
+   "note": ":347 writes the grouping; :351 conflicts over it (PEOPLE-3 re-pairs over powers); :139 the neighbour copy"
+  },
+  {
+   "file": "src/generators/steps/assembleSettlement.js",
+   "name": "factions",
+   "kind": "write",
+   "line": 347,
+   "receiver": "settlement",
+   "subject": "factions",
+   "cls": "BIRTH",
+   "owner": "PEOPLE-5",
+   "replacement": "delete (grouping) · the powers (generateConflicts, PEOPLE-3)",
+   "note": ":347 writes the grouping; :351 conflicts over it (PEOPLE-3 re-pairs over powers); :139 the neighbour copy"
+  },
+  {
+   "file": "src/generators/steps/assembleSettlement.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 351,
+   "receiver": "settlement",
+   "subject": "factions",
+   "cls": "BIRTH",
+   "owner": "PEOPLE-5",
+   "replacement": "delete (grouping) · the powers (generateConflicts, PEOPLE-3)",
+   "note": ":347 writes the grouping; :351 conflicts over it (PEOPLE-3 re-pairs over powers); :139 the neighbour copy"
+  },
+  {
+   "file": "src/generators/steps/corruptionPass.js",
+   "name": "secondaryAffiliation",
+   "kind": "read",
+   "line": 78,
+   "receiver": "npc",
+   "subject": "secondaryAffiliation",
+   "cls": "BIRTH",
+   "owner": "PEOPLE-5",
+   "replacement": "the institution (corruptTies already carries the house) / delete",
+   "note": "writes secondaryAffiliation = a criminal INSTITUTION name; the shim overwrites with rank-2 — PEOPLE-1 must order it"
+  },
+  {
+   "file": "src/generators/steps/corruptionPass.js",
+   "name": "secondaryAffiliation",
+   "kind": "write",
+   "line": 78,
+   "receiver": "npc",
+   "subject": "secondaryAffiliation",
+   "cls": "BIRTH",
+   "owner": "PEOPLE-5",
+   "replacement": "the institution (corruptTies already carries the house) / delete",
+   "note": "writes secondaryAffiliation = a criminal INSTITUTION name; the shim overwrites with rank-2 — PEOPLE-1 must order it"
+  },
+  {
+   "file": "src/generators/steps/resolveCrisisCast.js",
+   "name": "factionAffiliation",
+   "kind": "write",
+   "line": 83,
+   "receiver": "{literal}",
+   "subject": "factionAffiliation",
+   "cls": "BIRTH",
+   "owner": "PEOPLE-2",
+   "replacement": "delete (the temp NPC carries memberships: [])",
+   "note": ""
+  },
+  {
+   "file": "src/lib/editFingerprint.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 63,
+   "receiver": "dc",
+   "subject": "factions",
+   "indirect": "dc.factions ← the same downstream count",
+   "cls": "DISPLAY",
+   "owner": "PEOPLE-5",
+   "replacement": "the powers",
+   "note": "a count (INDIRECT)"
+  },
+  {
+   "file": "src/lib/instantWorld/factionDedup.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 202,
+   "receiver": "s",
+   "subject": "factions",
+   "cls": "DISPLAY",
+   "owner": "PEOPLE-5",
+   "replacement": "the powers",
+   "note": "instant world dedup over the grouping"
+  },
+  {
+   "file": "src/lib/instantWorld/factionDedup.js",
+   "name": "factions",
+   "kind": "write",
+   "line": 213,
+   "receiver": "s",
+   "subject": "factions",
+   "cls": "DISPLAY",
+   "owner": "PEOPLE-5",
+   "replacement": "the powers",
+   "note": "instant world dedup over the grouping"
+  },
+  {
+   "file": "src/lib/instantWorld/factionDedup.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 213,
+   "receiver": "s",
+   "subject": "factions",
+   "cls": "DISPLAY",
+   "owner": "PEOPLE-5",
+   "replacement": "the powers",
+   "note": "instant world dedup over the grouping"
+  },
+  {
+   "file": "src/lib/instantWorld/factionDedup.js",
+   "name": "dominantCategory",
+   "kind": "read",
+   "line": 217,
+   "receiver": "f",
+   "subject": "dominantCategory",
+   "cls": "DISPLAY",
+   "owner": "PEOPLE-5",
+   "replacement": "the powers",
+   "note": "instant world dedup over the grouping"
+  },
+  {
+   "file": "src/lib/structuralFingerprint.js",
+   "name": "structuralRank",
+   "kind": "string",
+   "line": 103,
+   "receiver": "",
+   "subject": "structuralRank",
+   "cls": "BIRTH",
+   "owner": "PEOPLE-5",
+   "replacement": "rank-1 membership (rank distribution)",
+   "note": "structural_rank_dist"
+  },
+  {
+   "file": "src/pdf/lib/viewModel.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 186,
+   "receiver": "active",
+   "subject": "factions",
+   "cls": "DISPLAY",
+   "owner": "PEOPLE-5",
+   "replacement": "rank-1 membership (label) · the powers (fallbacks)",
+   "note": ""
+  },
+  {
+   "file": "src/pdf/lib/viewModel.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 201,
+   "receiver": "s",
+   "subject": "factions",
+   "cls": "DISPLAY",
+   "owner": "PEOPLE-5",
+   "replacement": "rank-1 membership (label) · the powers (fallbacks)",
+   "note": ""
+  },
+  {
+   "file": "src/pdf/lib/viewModel.js",
+   "name": "factionAffiliation",
+   "kind": "read",
+   "line": 249,
+   "receiver": "npc",
+   "subject": "factionAffiliation",
+   "cls": "DISPLAY",
+   "owner": "PEOPLE-5",
+   "replacement": "rank-1 membership (label) · the powers (fallbacks)",
+   "note": ""
+  },
+  {
+   "file": "src/pdf/lib/viewModel.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 397,
+   "receiver": "s",
+   "subject": "factions",
+   "cls": "DISPLAY",
+   "owner": "PEOPLE-5",
+   "replacement": "rank-1 membership (label) · the powers (fallbacks)",
+   "note": ""
+  },
+  {
+   "file": "src/pdf/lib/viewModel.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 454,
+   "receiver": "s",
+   "subject": "factions",
+   "cls": "DISPLAY",
+   "owner": "PEOPLE-5",
+   "replacement": "rank-1 membership (label) · the powers (fallbacks)",
+   "note": ""
+  },
+  {
+   "file": "src/pdf/lib/viewModel.js",
+   "name": "factionAffiliation",
+   "kind": "read",
+   "line": 724,
+   "receiver": "n",
+   "subject": "factionAffiliation",
+   "cls": "DISPLAY",
+   "owner": "PEOPLE-5",
+   "replacement": "rank-1 membership (label) · the powers (fallbacks)",
+   "note": ""
+  },
+  {
+   "file": "src/pdf/lib/viewModel.js",
+   "name": "factionAffiliation",
+   "kind": "write",
+   "line": 733,
+   "receiver": "{literal}",
+   "subject": "factionAffiliation",
+   "cls": "DISPLAY",
+   "owner": "PEOPLE-5",
+   "replacement": "rank-1 membership (label) · the powers (fallbacks)",
+   "note": ""
+  },
+  {
+   "file": "src/pdf/lib/viewModel.js",
+   "name": "factionAffiliation",
+   "kind": "read",
+   "line": 733,
+   "receiver": "n",
+   "subject": "factionAffiliation",
+   "cls": "DISPLAY",
+   "owner": "PEOPLE-5",
+   "replacement": "rank-1 membership (label) · the powers (fallbacks)",
+   "note": ""
+  },
+  {
+   "file": "src/pdf/lib/viewModel.js",
+   "name": "factionAffiliation",
+   "kind": "read",
+   "line": 734,
+   "receiver": "n",
+   "subject": "factionAffiliation",
+   "cls": "DISPLAY",
+   "owner": "PEOPLE-5",
+   "replacement": "rank-1 membership (label) · the powers (fallbacks)",
+   "note": ""
+  },
+  {
+   "file": "src/pdf/lib/viewModel.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 750,
+   "receiver": "s",
+   "subject": "factions",
+   "cls": "DISPLAY",
+   "owner": "PEOPLE-5",
+   "replacement": "rank-1 membership (label) · the powers (fallbacks)",
+   "note": ""
+  },
+  {
+   "file": "src/pdf/lib/viewModel.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 840,
+   "receiver": "s",
+   "subject": "factions",
+   "cls": "DISPLAY",
+   "owner": "PEOPLE-5",
+   "replacement": "rank-1 membership (label) · the powers (fallbacks)",
+   "note": ""
+  },
+  {
+   "file": "src/pdf/lib/viewModelBodySlices.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 156,
+   "receiver": "s",
+   "subject": "factions",
+   "cls": "DISPLAY",
+   "owner": "PEOPLE-5",
+   "replacement": "the powers (delete the fallback)",
+   "note": ""
+  },
+  {
+   "file": "src/store/settlementPendingEditWriters.js",
+   "name": "factionAffiliation",
+   "kind": "string",
+   "line": 38,
+   "receiver": "",
+   "subject": "factionAffiliation",
+   "cls": "EDIT",
+   "owner": "PEOPLE-5",
+   "replacement": "memberships + institution (seat fields)",
+   "note": "SEAT_FIELDS"
+  },
+  {
+   "file": "src/store/settlementPendingEditWriters.js",
+   "name": "linkedFactionIds",
+   "kind": "string",
+   "line": 42,
+   "receiver": "",
+   "subject": "linkedFactionIds",
+   "cls": "EDIT",
+   "owner": "PEOPLE-5",
+   "replacement": "memberships + institution (seat fields)",
+   "note": "SEAT_FIELDS"
+  },
+  {
+   "file": "src/store/settlementSlice.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 1326,
+   "receiver": "state.settlement",
+   "subject": "factions",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "the powers",
+   "note": ""
+  },
+  {
+   "file": "src/store/settlementSlice.js",
+   "name": "factions",
+   "kind": "write",
+   "line": 1327,
+   "receiver": "state.settlement",
+   "subject": "factions",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "the powers",
+   "note": ""
+  },
+  {
+   "file": "src/store/settlementSlice.js",
+   "name": "factions",
+   "kind": "read",
+   "line": 1327,
+   "receiver": "state.settlement",
+   "subject": "factions",
+   "cls": "FPZ",
+   "owner": "FPZ",
+   "replacement": "the powers",
+   "note": ""
+  }
+ ],
+ "testRows": [
+  {
+   "file": "tests/components/editNamesFactionRoster.test.jsx",
+   "subjects": [
+    "dominantCategory",
+    "factionAffiliation"
+   ],
+   "cls": "asserts a surface → rewire"
+  },
+  {
+   "file": "tests/components/npcAuthoringScope.test.jsx",
+   "subjects": [
+    "factionAffiliation"
+   ],
+   "cls": "asserts a surface → rewire"
+  },
+  {
+   "file": "tests/components/npcRowLockToggle.test.jsx",
+   "subjects": [
+    "factionAffiliation"
+   ],
+   "cls": "asserts a surface → rewire"
+  },
+  {
+   "file": "tests/components/powerStrata.test.jsx",
+   "subjects": [
+    "factionAffiliation"
+   ],
+   "cls": "asserts a surface → rewire"
+  },
+  {
+   "file": "tests/components/powerTabSupport.test.jsx",
+   "subjects": [
+    "factionAffiliation"
+   ],
+   "cls": "asserts a surface → rewire"
+  },
+  {
+   "file": "tests/components/realmAddressChainNav.test.jsx",
+   "subjects": [
+    "factionAffiliation"
+   ],
+   "cls": "asserts a surface → rewire"
+  },
+  {
+   "file": "tests/components/settlementWorkbench.test.jsx",
+   "subjects": [
+    "factionAffiliation"
+   ],
+   "cls": "asserts a surface → rewire"
+  },
+  {
+   "file": "tests/data/foundingSeeds.probe.test.js",
+   "subjects": [
+    "factionAffiliation",
+    "structuralRank"
+   ],
+   "cls": "asserts a surface → rewire"
+  },
+  {
+   "file": "tests/domain/advanceNpcCorruption.test.js",
+   "subjects": [
+    "factionAffiliation"
+   ],
+   "cls": "FPZ's → list"
+  },
+  {
+   "file": "tests/domain/aiGrounding.test.js",
+   "subjects": [
+    "structuralRank"
+   ],
+   "cls": "asserts a surface → rewire"
+  },
+  {
+   "file": "tests/domain/assignNpcPreservesSheet.test.js",
+   "subjects": [
+    "linkedFactionIds",
+    "factionAffiliation"
+   ],
+   "cls": "pins a field by identity → re-key"
+  },
+  {
+   "file": "tests/domain/clergyTraitPlane.test.js",
+   "subjects": [
+    "linkedFactionIds"
+   ],
+   "cls": "FPZ's → list"
+  },
+  {
+   "file": "tests/domain/coherence/readerBattery.test.js",
+   "subjects": [
+    "factionAffiliation"
+   ],
+   "cls": "pins a field by identity → re-key"
+  },
+  {
+   "file": "tests/domain/contestBluffCharge.test.js",
+   "subjects": [
+    "factionAffiliation"
+   ],
+   "cls": "FPZ's → list"
+  },
+  {
+   "file": "tests/domain/corruptionWebPins.test.js",
+   "subjects": [
+    "factionAffiliation"
+   ],
+   "cls": "golden door's → bank"
+  },
+  {
+   "file": "tests/domain/crisisCast.test.js",
+   "subjects": [
+    "factionAffiliation"
+   ],
+   "cls": "golden door's → bank"
+  },
+  {
+   "file": "tests/domain/crisisCastFindings.test.js",
+   "subjects": [
+    "factionAffiliation"
+   ],
+   "cls": "pins a field by identity → re-key"
+  },
+  {
+   "file": "tests/domain/crisisHooks.test.js",
+   "subjects": [
+    "factionAffiliation"
+   ],
+   "cls": "golden door's → bank"
+  },
+  {
+   "file": "tests/domain/customContentTierGates.test.js",
+   "subjects": [
+    "factions"
+   ],
+   "cls": "pins a field by identity → re-key"
+  },
+  {
+   "file": "tests/domain/deityStanceLane.test.js",
+   "subjects": [
+    "linkedFactionIds"
+   ],
+   "cls": "FPZ's → list"
+  },
+  {
+   "file": "tests/domain/display/publicSafe.test.js",
+   "subjects": [
+    "factionAffiliation",
+    "secondaryAffiliation"
+   ],
+   "cls": "asserts a surface → rewire"
+  },
+  {
+   "file": "tests/domain/distribution.test.js",
+   "subjects": [
+    "factionAffiliation"
+   ],
+   "cls": "pins a field by identity → re-key"
+  },
+  {
+   "file": "tests/domain/dossier/entityIndex.test.js",
+   "subjects": [
+    "factionAffiliation"
+   ],
+   "cls": "asserts a surface → rewire"
+  },
+  {
+   "file": "tests/domain/dossier/realmEntityWeb.test.js",
+   "subjects": [
+    "factionAffiliation"
+   ],
+   "cls": "FPZ's → list"
+  },
+  {
+   "file": "tests/domain/dossier/seatHolder.test.js",
+   "subjects": [
+    "factionAffiliation"
+   ],
+   "cls": "asserts a surface → rewire"
+  },
+  {
+   "file": "tests/domain/editorRosterEvents.test.js",
+   "subjects": [
+    "factionAffiliation",
+    "structuralRank"
+   ],
+   "cls": "FPZ's → list"
+  },
+  {
+   "file": "tests/domain/entities.test.js",
+   "subjects": [
+    "linkedFactionIds",
+    "factions"
+   ],
+   "cls": "pins a field by identity → re-key"
+  },
+  {
+   "file": "tests/domain/envoyChanceMeetingLedger.test.js",
+   "subjects": [
+    "structuralRank",
+    "factionAffiliation",
+    "factions"
+   ],
+   "cls": "golden door's → bank"
+  },
+  {
+   "file": "tests/domain/envoyChanceMeetingStage.test.js",
+   "subjects": [
+    "structuralRank"
+   ],
+   "cls": "golden door's → bank"
+  },
+  {
+   "file": "tests/domain/espionageCareerCredit.test.js",
+   "subjects": [
+    "structuralRank",
+    "factionAffiliation"
+   ],
+   "cls": "FPZ's → list"
+  },
+  {
+   "file": "tests/domain/eventPipeline.test.js",
+   "subjects": [
+    "factionAffiliation"
+   ],
+   "cls": "FPZ's → list"
+  },
+  {
+   "file": "tests/domain/events.test.js",
+   "subjects": [
+    "factions"
+   ],
+   "cls": "FPZ's → list"
+  },
+  {
+   "file": "tests/domain/events/composerDocketRoundTrip.test.js",
+   "subjects": [
+    "factionAffiliation"
+   ],
+   "cls": "FPZ's → list"
+  },
+  {
+   "file": "tests/domain/events/exposeCorruptionNpc.test.js",
+   "subjects": [
+    "factionAffiliation"
+   ],
+   "cls": "FPZ's → list"
+  },
+  {
+   "file": "tests/domain/events/imposeCorruption.test.js",
+   "subjects": [
+    "factionAffiliation"
+   ],
+   "cls": "FPZ's → list"
+  },
+  {
+   "file": "tests/domain/events/killNpcDoubleImpair.test.js",
+   "subjects": [
+    "linkedFactionIds"
+   ],
+   "cls": "FPZ's → list"
+  },
+  {
+   "file": "tests/domain/events/undoRoundTrip.test.js",
+   "subjects": [
+    "factions",
+    "structuralRank",
+    "factionAffiliation"
+   ],
+   "cls": "FPZ's → list"
+  },
+  {
+   "file": "tests/domain/events/undoSnapshotSubtree.test.js",
+   "subjects": [
+    "structuralRank",
+    "factionAffiliation"
+   ],
+   "cls": "FPZ's → list"
+  },
+  {
+   "file": "tests/domain/events/vetoChannel.test.js",
+   "subjects": [
+    "factionAffiliation"
+   ],
+   "cls": "FPZ's → list"
+  },
+  {
+   "file": "tests/domain/events/wave2Producers.test.js",
+   "subjects": [
+    "factionAffiliation"
+   ],
+   "cls": "FPZ's → list"
+  },
+  {
+   "file": "tests/domain/eventsSubsystemFixes.test.js",
+   "subjects": [
+    "structuralRank",
+    "factionAffiliation"
+   ],
+   "cls": "FPZ's → list"
+  },
+  {
+   "file": "tests/domain/explanation.test.js",
+   "subjects": [
+    "factionAffiliation"
+   ],
+   "cls": "pins a field by identity → re-key"
+  },
+  {
+   "file": "tests/domain/factionNamePrecedence.test.js",
+   "subjects": [
+    "linkedFactionIds",
+    "factionAffiliation"
+   ],
+   "cls": "FPZ's → list"
+  },
+  {
+   "file": "tests/domain/factionRefContract.test.js",
+   "subjects": [
+    "npcInFaction",
+    "linkedFactionIds",
+    "factionAffiliation"
+   ],
+   "cls": "FPZ's → list"
+  },
+  {
+   "file": "tests/domain/factionRename.test.js",
+   "subjects": [
+    "factionAffiliation",
+    "secondaryAffiliation",
+    "linkedFactionIds",
+    "factionGoal",
+    "factions"
+   ],
+   "cls": "golden door's → bank"
+  },
+  {
+   "file": "tests/domain/faithSpreadGate.test.js",
+   "subjects": [
+    "linkedFactionIds"
+   ],
+   "cls": "FPZ's → list"
+  },
+  {
+   "file": "tests/domain/gratitudeBonds.test.js",
+   "subjects": [
+    "structuralRank",
+    "factionAffiliation"
+   ],
+   "cls": "FPZ's → list"
+  },
+  {
+   "file": "tests/domain/houseLedgerTr2.test.js",
+   "subjects": [
+    "factionAffiliation"
+   ],
+   "cls": "golden door's → bank"
+  },
+  {
+   "file": "tests/domain/institutionFactionFallback.test.js",
+   "subjects": [
+    "factions"
+   ],
+   "cls": "pins a field by identity → re-key"
+  },
+  {
+   "file": "tests/domain/institutionRemoval.test.js",
+   "subjects": [
+    "secondaryAffiliation"
+   ],
+   "cls": "pins a field by identity → re-key"
+  },
+  {
+   "file": "tests/domain/institutionRename.test.js",
+   "subjects": [
+    "secondaryAffiliation"
+   ],
+   "cls": "golden door's → bank"
+  },
+  {
+   "file": "tests/domain/irreversibleRawRoster.contract.test.js",
+   "subjects": [
+    "factionAffiliation"
+   ],
+   "cls": "golden door's → bank"
+  },
+  {
+   "file": "tests/domain/neighbourBackLink.test.js",
+   "subjects": [
+    "dominantCategory"
+   ],
+   "cls": "pins a field by identity → re-key"
+  },
+  {
+   "file": "tests/domain/npc/characterConsumers.test.js",
+   "subjects": [
+    "linkedFactionIds"
+   ],
+   "cls": "FPZ's → list"
+  },
+  {
+   "file": "tests/domain/npc/knownCharacter.test.js",
+   "subjects": [
+    "linkedFactionIds"
+   ],
+   "cls": "FPZ's → list"
+  },
+  {
+   "file": "tests/domain/npc/npcOps.test.js",
+   "subjects": [
+    "factionAffiliation"
+   ],
+   "cls": "pins a field by identity → re-key"
+  },
+  {
+   "file": "tests/domain/npcCredibilityLadderHook.test.js",
+   "subjects": [
+    "factionAffiliation"
+   ],
+   "cls": "FPZ's → list"
+  },
+  {
+   "file": "tests/domain/npcCredibilityLitWalkthrough.test.js",
+   "subjects": [
+    "structuralRank",
+    "factionAffiliation"
+   ],
+   "cls": "FPZ's → list"
+  },
+  {
+   "file": "tests/domain/npcLadderFactionKey.test.js",
+   "subjects": [
+    "npcInFaction",
+    "factionAffiliation",
+    "structuralRank",
+    "factions"
+   ],
+   "cls": "FPZ's → list"
+  },
+  {
+   "file": "tests/domain/npcLadderHeirs.test.js",
+   "subjects": [
+    "structuralRank",
+    "factionAffiliation",
+    "factions"
+   ],
+   "cls": "FPZ's → list"
+  },
+  {
+   "file": "tests/domain/npcLadderKernel.test.js",
+   "subjects": [
+    "structuralRank",
+    "factionAffiliation",
+    "factions"
+   ],
+   "cls": "golden door's → bank"
+  },
+  {
+   "file": "tests/domain/npcLadderSeatTransitions.test.js",
+   "subjects": [
+    "structuralRank",
+    "factionAffiliation",
+    "factions"
+   ],
+   "cls": "FPZ's → list"
+  },
+  {
+   "file": "tests/domain/npcLedgerState.test.js",
+   "subjects": [
+    "factionAffiliation"
+   ],
+   "cls": "FPZ's → list"
+  },
+  {
+   "file": "tests/domain/npcProfile.test.js",
+   "subjects": [
+    "factionAffiliation",
+    "structuralRank"
+   ],
+   "cls": "asserts a surface → rewire"
+  },
+  {
+   "file": "tests/domain/npcRename.test.js",
+   "subjects": [
+    "factions"
+   ],
+   "cls": "pins a field by identity → re-key"
+  },
+  {
+   "file": "tests/domain/npcVerdictApply.test.js",
+   "subjects": [
+    "structuralRank",
+    "factionAffiliation",
+    "linkedFactionIds",
+    "factions"
+   ],
+   "cls": "FPZ's → list"
+  },
+  {
+   "file": "tests/domain/npcVerdictTable.test.js",
+   "subjects": [
+    "factionAffiliation"
+   ],
+   "cls": "FPZ's → list"
+  },
+  {
+   "file": "tests/domain/oathHolderGr1.test.js",
+   "subjects": [
+    "factionAffiliation"
+   ],
+   "cls": "FPZ's → list"
+  },
+  {
+   "file": "tests/domain/pactConversionGr5d.test.js",
+   "subjects": [
+    "factionAffiliation"
+   ],
+   "cls": "golden door's → bank"
+  },
+  {
+   "file": "tests/domain/pactRenegotiationGr5c.test.js",
+   "subjects": [
+    "factionAffiliation"
+   ],
+   "cls": "FPZ's → list"
+  },
+  {
+   "file": "tests/domain/pactRenegotiationNegotiated.test.js",
+   "subjects": [
+    "factionAffiliation"
+   ],
+   "cls": "FPZ's → list"
+  },
+  {
+   "file": "tests/domain/pactRenewalGr5b.test.js",
+   "subjects": [
+    "factionAffiliation"
+   ],
+   "cls": "FPZ's → list"
+  },
+  {
+   "file": "tests/domain/pactRenewalOrganic.test.js",
+   "subjects": [
+    "factionAffiliation"
+   ],
+   "cls": "FPZ's → list"
+  },
+  {
+   "file": "tests/domain/personaSlicer.test.js",
+   "subjects": [
+    "factionAffiliation"
+   ],
+   "cls": "pins a field by identity → re-key"
+  },
+  {
+   "file": "tests/domain/personaSlicerFactionRoster.test.js",
+   "subjects": [
+    "factions"
+   ],
+   "cls": "pins a field by identity → re-key"
+  },
+  {
+   "file": "tests/domain/plotHooks.test.js",
+   "subjects": [
+    "factionAffiliation"
+   ],
+   "cls": "golden door's → bank"
+  },
+  {
+   "file": "tests/domain/promoteDemoteMerge.test.js",
+   "subjects": [
+    "factionAffiliation",
+    "structuralRank"
+   ],
+   "cls": "FPZ's → list"
+  },
+  {
+   "file": "tests/domain/recordMerge.test.js",
+   "subjects": [
+    "factions"
+   ],
+   "cls": "pins a field by identity → re-key"
+  },
+  {
+   "file": "tests/domain/religionCorruption.test.js",
+   "subjects": [
+    "factionAffiliation"
+   ],
+   "cls": "FPZ's → list"
+  },
+  {
+   "file": "tests/domain/religionLegitimacy.test.js",
+   "subjects": [
+    "linkedFactionIds"
+   ],
+   "cls": "FPZ's → list"
+  },
+  {
+   "file": "tests/domain/religionLegitimacyFactionKey.test.js",
+   "subjects": [
+    "factionAffiliation"
+   ],
+   "cls": "FPZ's → list"
+  },
+  {
+   "file": "tests/domain/roadsParticipation.test.js",
+   "subjects": [
+    "factionAffiliation",
+    "structuralRank",
+    "factionRosterOf"
+   ],
+   "cls": "FPZ's → list"
+  },
+  {
+   "file": "tests/domain/rulingPower.test.js",
+   "subjects": [
+    "factionAffiliation"
+   ],
+   "cls": "FPZ's → list"
+  },
+  {
+   "file": "tests/domain/settlementLifecycleKernel.test.js",
+   "subjects": [
+    "factions"
+   ],
+   "cls": "FPZ's → list"
+  },
+  {
+   "file": "tests/domain/settlementStrategy.test.js",
+   "subjects": [
+    "factionAffiliation"
+   ],
+   "cls": "FPZ's → list"
+  },
+  {
+   "file": "tests/domain/sovereigntyIntentWr10.test.js",
+   "subjects": [
+    "factionAffiliation"
+   ],
+   "cls": "FPZ's → list"
+  },
+  {
+   "file": "tests/domain/successorNpc.test.js",
+   "subjects": [
+    "factionAffiliation"
+   ],
+   "cls": "FPZ's → list"
+  },
+  {
+   "file": "tests/domain/successors.test.js",
+   "subjects": [
+    "linkedFactionIds"
+   ],
+   "cls": "pins a field by identity → re-key"
+  },
+  {
+   "file": "tests/domain/treatySuccessionApproval.test.js",
+   "subjects": [
+    "structuralRank",
+    "factionAffiliation"
+   ],
+   "cls": "FPZ's → list"
+  },
+  {
+   "file": "tests/domain/treatySuccessionOpeningVoice.test.js",
+   "subjects": [
+    "structuralRank",
+    "factionAffiliation"
+   ],
+   "cls": "FPZ's → list"
+  },
+  {
+   "file": "tests/domain/warCoalitionSettlement.test.js",
+   "subjects": [
+    "factionAffiliation"
+   ],
+   "cls": "FPZ's → list"
+  },
+  {
+   "file": "tests/domain/warCoalitionWr6.test.js",
+   "subjects": [
+    "factionAffiliation"
+   ],
+   "cls": "FPZ's → list"
+  },
+  {
+   "file": "tests/domain/warH2VerdictComposition.test.js",
+   "subjects": [
+    "structuralRank",
+    "factionAffiliation",
+    "linkedFactionIds"
+   ],
+   "cls": "FPZ's → list"
+  },
+  {
+   "file": "tests/domain/warPeaceDecision.test.js",
+   "subjects": [
+    "factionAffiliation"
+   ],
+   "cls": "FPZ's → list"
+  },
+  {
+   "file": "tests/domain/warSeatBooks.test.js",
+   "subjects": [
+    "factionAffiliation"
+   ],
+   "cls": "FPZ's → list"
+  },
+  {
+   "file": "tests/domain/warSeatBooksPartition.test.js",
+   "subjects": [
+    "factionAffiliation"
+   ],
+   "cls": "FPZ's → list"
+  },
+  {
+   "file": "tests/domain/warSeatTermination.test.js",
+   "subjects": [
+    "factionAffiliation"
+   ],
+   "cls": "FPZ's → list"
+  },
+  {
+   "file": "tests/domain/worldPulseFactionSeating.test.js",
+   "subjects": [
+    "factionAffiliation"
+   ],
+   "cls": "FPZ's → list"
+  },
+  {
+   "file": "tests/domain/worldPulseSoak.test.js",
+   "subjects": [
+    "factionAffiliation"
+   ],
+   "cls": "golden door's → bank"
+  },
+  {
+   "file": "tests/generators/assemblyCoherenceRngIsolation.test.js",
+   "subjects": [
+    "factions"
+   ],
+   "cls": "pins a field by identity → re-key"
+  },
+  {
+   "file": "tests/generators/crossSettlementConflicts.test.js",
+   "subjects": [
+    "dominantCategory"
+   ],
+   "cls": "pins a field by identity → re-key"
+  },
+  {
+   "file": "tests/generators/densityLaw.test.js",
+   "subjects": [
+    "factionRosterOf",
+    "factionAffiliation",
+    "densityRungRole",
+    "linkedFactionIds"
+   ],
+   "cls": "FPZ's → list"
+  },
+  {
+   "file": "tests/generators/densityPowerConservation.test.js",
+   "subjects": [
+    "factionAffiliation",
+    "densityRungRole"
+   ],
+   "cls": "pins a field by identity → re-key"
+  },
+  {
+   "file": "tests/generators/densityTrimRelationships.test.js",
+   "subjects": [
+    "factions"
+   ],
+   "cls": "pins a field by identity → re-key"
+  },
+  {
+   "file": "tests/generators/factionStructuralOfficeCoverage.test.js",
+   "subjects": [
+    "factionAffiliation",
+    "linkedFactionIds"
+   ],
+   "cls": "pins a field by identity → re-key"
+  },
+  {
+   "file": "tests/generators/generationCertificationCorpus.test.js",
+   "subjects": [
+    "factionAffiliation",
+    "factions"
+   ],
+   "cls": "golden door's → bank"
+  },
+  {
+   "file": "tests/generators/generationCertificationSoak.test.js",
+   "subjects": [
+    "factionAffiliation"
+   ],
+   "cls": "pins a field by identity → re-key"
+  },
+  {
+   "file": "tests/generators/generationReceiptJudgments.test.js",
+   "subjects": [
+    "factions"
+   ],
+   "cls": "pins a field by identity → re-key"
+  },
+  {
+   "file": "tests/generators/neighbourFactionRenorm.test.js",
+   "subjects": [
+    "factions"
+   ],
+   "cls": "pins a field by identity → re-key"
+  },
+  {
+   "file": "tests/generators/npcCrimeSignalWriters.test.js",
+   "subjects": [
+    "secondaryAffiliation"
+   ],
+   "cls": "pins a field by identity → re-key"
+  },
+  {
+   "file": "tests/generators/powerEconomyFreshness.test.js",
+   "subjects": [
+    "factions"
+   ],
+   "cls": "golden door's → bank"
+  },
+  {
+   "file": "tests/generators/regenNpcEnrichment.test.js",
+   "subjects": [
+    "factionAffiliation"
+   ],
+   "cls": "pins a field by identity → re-key"
+  },
+  {
+   "file": "tests/generators/regenPreservesUserCanon.test.js",
+   "subjects": [
+    "factions"
+   ],
+   "cls": "pins a field by identity → re-key"
+  },
+  {
+   "file": "tests/generators/rosterFinalUnderHeldRoster.test.js",
+   "subjects": [
+    "factions",
+    "factionAffiliation"
+   ],
+   "cls": "golden door's → bank"
+  },
+  {
+   "file": "tests/generators/stressFactionNames.test.js",
+   "subjects": [
+    "factions",
+    "factionAffiliation"
+   ],
+   "cls": "pins a field by identity → re-key"
+  },
+  {
+   "file": "tests/generators/x46NpcBand.test.js",
+   "subjects": [
+    "factionAffiliation"
+   ],
+   "cls": "pins a field by identity → re-key"
+  },
+  {
+   "file": "tests/joins/conflictsSeam.test.js",
+   "subjects": [
+    "factions",
+    "factionAffiliation",
+    "dominantCategory"
+   ],
+   "cls": "asserts a surface → rewire"
+  },
+  {
+   "file": "tests/lib/instantWorld/factionDedup.test.js",
+   "subjects": [
+    "dominantCategory"
+   ],
+   "cls": "pins a field by identity → re-key"
+  },
+  {
+   "file": "tests/lib/instantWorld/mundaneRealmAcceptance.test.js",
+   "subjects": [
+    "factions"
+   ],
+   "cls": "FPZ's → list"
+  },
+  {
+   "file": "tests/lib/structuralFingerprint.test.js",
+   "subjects": [
+    "factionAffiliation"
+   ],
+   "cls": "pins a field by identity → re-key"
+  },
+  {
+   "file": "tests/lint/realmEntityWebNoFabrication.walker.test.js",
+   "subjects": [
+    "factionAffiliation"
+   ],
+   "cls": "asserts a surface → rewire"
+  },
+  {
+   "file": "tests/lint/recordRegisterTotality.walker.test.js",
+   "subjects": [
+    "factions"
+   ],
+   "cls": "pins a field by identity → re-key"
+  },
+  {
+   "file": "tests/lint/seatVocabularyUnification.walker.test.js",
+   "subjects": [
+    "factionAffiliation"
+   ],
+   "cls": "FPZ's → list"
+  },
+  {
+   "file": "tests/lint/statusUnionTotality.walker.test.js",
+   "subjects": [
+    "factionAffiliation"
+   ],
+   "cls": "golden door's → bank"
+  },
+  {
+   "file": "tests/lint/writerReach.walker.test.js",
+   "subjects": [
+    "densityRungRole"
+   ],
+   "cls": "asserts a surface → rewire"
+  },
+  {
+   "file": "tests/property/contestedGoalsDormancyGolden.test.js",
+   "subjects": [
+    "factionAffiliation",
+    "structuralRank",
+    "factions"
+   ],
+   "cls": "golden door's → bank"
+  },
+  {
+   "file": "tests/property/espionageCareerCreditDormancy.test.js",
+   "subjects": [
+    "structuralRank",
+    "factionAffiliation"
+   ],
+   "cls": "golden door's → bank"
+  },
+  {
+   "file": "tests/property/espionageLeakDormancy.test.js",
+   "subjects": [
+    "structuralRank",
+    "factionAffiliation"
+   ],
+   "cls": "golden door's → bank"
+  },
+  {
+   "file": "tests/property/mechanismLitCoverage.test.js",
+   "subjects": [
+    "npcInFaction"
+   ],
+   "cls": "golden door's → bank"
+  },
+  {
+   "file": "tests/property/mutate.property.test.js",
+   "subjects": [
+    "linkedFactionIds",
+    "factions"
+   ],
+   "cls": "FPZ's → list"
+  },
+  {
+   "file": "tests/property/npcCredibilityDormancyGolden.test.js",
+   "subjects": [
+    "structuralRank",
+    "factionAffiliation"
+   ],
+   "cls": "golden door's → bank"
+  },
+  {
+   "file": "tests/property/npcLadderDormancyGolden.test.js",
+   "subjects": [
+    "factionAffiliation",
+    "structuralRank"
+   ],
+   "cls": "golden door's → bank"
+  },
+  {
+   "file": "tests/property/npcLedgerDormancyGolden.test.js",
+   "subjects": [
+    "structuralRank",
+    "factionAffiliation"
+   ],
+   "cls": "golden door's → bank"
+  },
+  {
+   "file": "tests/property/npcs.property.test.js",
+   "subjects": [
+    "linkedFactionIds"
+   ],
+   "cls": "pins a field by identity → re-key"
+  },
+  {
+   "file": "tests/property/oathHolderDormancyFence.test.js",
+   "subjects": [
+    "factionAffiliation"
+   ],
+   "cls": "golden door's → bank"
+  },
+  {
+   "file": "tests/property/propagate.property.test.js",
+   "subjects": [
+    "factions"
+   ],
+   "cls": "FPZ's → list"
+  },
+  {
+   "file": "tests/property/settlementPoliticsDormancyGolden.test.js",
+   "subjects": [
+    "factionAffiliation"
+   ],
+   "cls": "golden door's → bank"
+  },
+  {
+   "file": "tests/security/factionMemberPublicParity.pglite.test.js",
+   "subjects": [
+    "factionAffiliation",
+    "secondaryAffiliation",
+    "dominantCategory",
+    "factions"
+   ],
+   "cls": "asserts a surface → rewire"
+  },
+  {
+   "file": "tests/security/gallerySanitizer.pglite.test.js",
+   "subjects": [
+    "factionAffiliation",
+    "secondaryAffiliation"
+   ],
+   "cls": "asserts a surface → rewire"
+  },
+  {
+   "file": "tests/simulation/feedDistribution.test.js",
+   "subjects": [
+    "factionAffiliation"
+   ],
+   "cls": "FPZ's → list"
+  },
+  {
+   "file": "tests/store/editSlice.test.js",
+   "subjects": [
+    "factions"
+   ],
+   "cls": "golden door's → bank"
+  },
+  {
+   "file": "tests/store/factionRenameConvergence.test.js",
+   "subjects": [
+    "factionAffiliation",
+    "dominantCategory",
+    "factions"
+   ],
+   "cls": "pins a field by identity → re-key"
+  },
+  {
+   "file": "tests/store/regenPreservation.test.js",
+   "subjects": [
+    "factions"
+   ],
+   "cls": "asserts a surface → rewire"
+  },
+  {
+   "file": "tests/ui/dossierEntityLink.test.jsx",
+   "subjects": [
+    "factionAffiliation"
+   ],
+   "cls": "asserts a surface → rewire"
+  },
+  {
+   "file": "tests/ui/relationshipsTab.determinism.test.js",
+   "subjects": [
+    "dominantCategory"
+   ],
+   "cls": "asserts a surface → rewire"
+  }
+ ]
+}
