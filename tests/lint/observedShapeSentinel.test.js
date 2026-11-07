@@ -50,6 +50,7 @@ import {
   RETIRED_ADVISORY_LOCKFILE_BASELINE_SCHEMA,
   RETIRED_FED_WORLD_BASELINE_SCHEMA,
   RETIRED_WINDOW_RUNG1_BASELINE_SCHEMA,
+  RETIRED_TIER_COVERAGE_BASELINE_SCHEMA,
   RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
@@ -85,6 +86,7 @@ import {
   validateSchema26Baseline,
   validateSchema27Baseline,
   validateSchema28Baseline,
+  validateSchema29Baseline,
 } from '../../scripts/lib/observed-shape-baseline.mjs';
 import {
   artifactBaselineSchemaOf,
@@ -109,6 +111,7 @@ import {
   FED_WORLD_TARGET_SCHEMA,
   WINDOW_RUNG1_TARGET_SCHEMA,
   TIER_COVERAGE_TARGET_SCHEMA,
+  MIGRATION_DIRECTION_TARGET_SCHEMA,
 } from '../../scripts/migrate-observed-shape-readers.mjs';
 
 const HASH_A = 'a'.repeat(64);
@@ -1155,6 +1158,11 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
       'temporary on npcs',
       'temporaryKind on npcs',
       'crisisIds on npcs',
+      // ⭐⭐ THE FOURTEENTH, DECLARED AT THE SCHEMA-29 RUNG (the chair's ruling of 2026-11-07
+      // 03:55 UTC, ODQ §934.105, lane WIRING-W0): the migration direction's config projection,
+      // stamped by generators/steps/stressConfirmPass.js only when a mass migration survives,
+      // which no corpus world draws — the fifth class again.
+      'migrationDirection on config',
     ]);
     // ⚠ INDEX-ALIGNED WITH THE ROSTER ABOVE, one entry per line so a removal cannot
     // silently re-pair the survivors. The retired `factions on locks` was the OTHER
@@ -1173,6 +1181,7 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
       'conditional-generator-branch', // temporary on npcs
       'conditional-generator-branch', // temporaryKind on npcs
       'conditional-generator-branch', // crisisIds on npcs
+      'conditional-generator-branch', // migrationDirection on config
     ]);
     expect(EXPLAINED_WRITER_EXEMPTIONS.map(({ writer }) => writer)).toEqual([
       'src/generators/economy/economicState.js',
@@ -1199,6 +1208,9 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
       'src/generators/steps/resolveCrisisCast.js',
       'src/generators/steps/resolveCrisisCast.js',
       'src/generators/steps/resolveCrisisCast.js',
+      // The confirm pass's projection, re-spelled at the schema-29 rung as the object-literal
+      // write `Object.assign(effectiveConfig, { migrationDirection })` so gate 0 sees it.
+      'src/generators/steps/stressConfirmPass.js',
     ]);
     // ⚠ THE M9 eventLog BANK NAMES ONE RULING, AND THE SAME ONE FOR ALL FOUR.
     // At genesis this exact string is stamped into every tagged row's `reason`,
@@ -1297,6 +1309,8 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
       'temporary on npcs',
       'temporaryKind on npcs',
       'crisisIds on npcs',
+      // ⭐ THE SCHEMA-29 ONE, re-proved out of the scanned stressConfirmPass.js on every scan.
+      'migrationDirection on config',
     ]);
     expect(evidence.map(({ key }) => key)).toEqual([
       'isCriminal',
@@ -1304,6 +1318,7 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
       'appliedAt', 'deltas', 'event', 'narrativeSummary',
       'decrees', 'kind',
       'temporary', 'temporaryKind', 'crisisIds',
+      'migrationDirection',
     ]);
     // ⚠ THE M9 SPLIT IS MACHINE-DRAWN, NOT ARGUED. The same probe that admits
     // the four banked keys on `applyEvent.js` REFUSES the two nearest
@@ -1575,7 +1590,11 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     expect(declaredBankOf(WINDOW_RUNG1_TARGET_SCHEMA)).toEqual({ bankedReads: 76, taggedRows: 50 });
     // ⭐ AND 28 HOLDS IT: the tier-coverage rung moves no row, so the pair stays 76/50.
     expect(declaredBankOf(TIER_COVERAGE_TARGET_SCHEMA)).toEqual({ bankedReads: 76, taggedRows: 50 });
-    expect(declaredBankOf(BASELINE_SCHEMA)).toEqual(declaredBankOf(TIER_COVERAGE_TARGET_SCHEMA));
+    // ⭐ AND 29 GROWS IT BY ONE: one declaration (the migration direction's config projection),
+    // one address, one read, so the pair goes 76/50 -> 77/51. MEASURED off the live scan.
+    expect(declaredBankOf(MIGRATION_DIRECTION_TARGET_SCHEMA)).toEqual({ bankedReads: 77, taggedRows: 51 });
+    expect(declaredBankOf(BASELINE_SCHEMA)).toEqual(declaredBankOf(MIGRATION_DIRECTION_TARGET_SCHEMA));
+    expect(declaredBankOf(RETIRED_TIER_COVERAGE_BASELINE_SCHEMA)).toEqual({ bankedReads: 76, taggedRows: 50 });
     expect(declaredBankOf(RETIRED_WINDOW_RUNG1_BASELINE_SCHEMA)).toEqual({ bankedReads: 76, taggedRows: 50 });
     expect(declaredBankOf(RETIRED_FED_WORLD_BASELINE_SCHEMA)).toEqual({ bankedReads: 69, taggedRows: 45 });
     expect(declaredBankOf(RETIRED_ADVISORY_LOCKFILE_BASELINE_SCHEMA)).toEqual({ bankedReads: 69, taggedRows: 45 });
@@ -1663,7 +1682,9 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     // ⭐ SCHEMA 26: THE FED WORLD (the chair's ruling (i) on lane OSR-RUNG's STOP, 2026-11-03, ODQ §934.104): a famine topology pass in the corpus and 22 admitted rows the self-feeding worlds no longer resolve; four rows go, two shrink, the bank holds at 69/45.
     // ⭐ SCHEMA 27: THE RUNG-1 WINDOW (the chair's rulings on lane LANDING-2b's STOP, 2026-11-04): the shape-family theta 0.80 -> 0.76, a topology pass that cures the window's `facets`/`issues` erosion, three crisis declarations (the roster 10 -> 13, the bank 76/50) and the window's rows admitted with attribution.
     // ⭐ SCHEMA 28: THE TIER-CHANGE COVERAGE PASS (the chair's corpus-coverage ruling of 2026-11-06, the militia precedent): schema 27's envelope, tag law, roster and register UNCHANGED, re-governed to a corpus builder whose producer 2b pulses one town generated over the city cut so the stamp law mints the tier candidate R-B1 took from producer 2; its reconciliation must be, and measurably is, EMPTY.
-    expect(BASELINE_SCHEMA).toBe(28);
+    // ⭐ SCHEMA 29: THE MIGRATION-DIRECTION DECLARATION (the chair's ruling of 2026-11-07 03:55 UTC, ODQ §934.105, lane WIRING-W0): schema 28's envelope, tag law, corpus and register re-governed to ONE declaration of the fifth class, `migrationDirection on config` (the roster 13 -> 14, the bank 77/51); its one new row is admitted tagged and nothing else moves.
+    expect(BASELINE_SCHEMA).toBe(29);
+    expect(RETIRED_TIER_COVERAGE_BASELINE_SCHEMA).toBe(28);
     expect(RETIRED_WINDOW_RUNG1_BASELINE_SCHEMA).toBe(27);
     expect(RETIRED_FED_WORLD_BASELINE_SCHEMA).toBe(26);
     expect(RETIRED_ADVISORY_LOCKFILE_BASELINE_SCHEMA).toBe(25);
@@ -1690,7 +1711,8 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     // ⭐ 15 retired at §893.4, 16 at the stress-topology rung, 17 at the lineage-reanchor
     // rung, 18 at the exemption-retirement rung, 19 at the bank-fence rung; the LIVE
     // envelope is validated by 20 now.
-    expect(validateSchema28Baseline(live)).toBe(live);
+    expect(validateSchema29Baseline(live)).toBe(live);
+    expect(() => validateSchema28Baseline(live)).toThrow(/is not schema 28/);
     expect(() => validateSchema27Baseline(live)).toThrow(/is not schema 27/);
     expect(() => validateSchema26Baseline(live)).toThrow(/is not schema 26/);
     // … and 18, 19, 20, 21 and 22 keep their own literals, so each refuses the live envelope
@@ -1836,7 +1858,7 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     // `artifactBaselineSchemaOf` exists to prevent.
     expect(artifactBaselineSchemaOf('legacy-leaf')).toBe(2);
     expect(artifactBaselineSchemaOf('exact-origin')).toBe(3);
-    expect(BASELINE_SCHEMA).toBe(28);
+    expect(BASELINE_SCHEMA).toBe(29);
     expect(() => artifactBaselineSchemaOf('heuristic')).toThrow(/scan mode is unsupported/);
   });
 

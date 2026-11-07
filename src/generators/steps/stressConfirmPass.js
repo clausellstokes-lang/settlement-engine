@@ -156,9 +156,10 @@ registerStep('stressConfirmPass', {
   // stamped from the confirmed container's own `stress[].direction` (written once, at the draw, by
   // stressGenerator.js :: buildStressEntry), so the economy and power readers that hold only the
   // config read the record's one fact (domain/migrationDirection.js). A derived key
-  // (DERIVED_CONFIG_KEYS); absent when no migration survived.
+  // (DERIVED_CONFIG_KEYS); absent when no migration survived. Spelled as an object-literal write
+  // so the observed-shape instrument's gate 0 sees it (the schema-29 declaration names this file).
   const migrationDirection = migrationDirectionOfStress(kept);
-  if (migrationDirection) effectiveConfig.migrationDirection = migrationDirection;
+  if (migrationDirection) Object.assign(effectiveConfig, { migrationDirection });
   else delete effectiveConfig.migrationDirection;
 
   // Preserve generateStress's output shape convention: null / object / array.
