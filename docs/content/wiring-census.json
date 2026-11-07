@@ -8,7 +8,7 @@
       "src/domain/display/stateProse/defenseStateProse.js": "6ebbed0ca4e9125607fde9443b16d4da328cc1481f711f25a22b5d384cec3ce7",
       "src/domain/display/stateProse/stressorsStateProse.js": "13c7f383882acf5bb48267feb4302ced6b9798cec2575470903f1aa88205600d",
       "src/domain/display/stateProse/warFaithStateProse.js": "f1972add38589ee55369fb06e4a5e0a8f90c4d966bf703d4367a3cdca52d6aac",
-      "src/domain/display/stateProse/dossierMounts.js": "2cd1262a0865b7babe7c5af63666f41daa2b1d367ba8144a601852e6946d372d"
+      "src/domain/display/stateProse/dossierMounts.js": "b8466ea80b09292247baf73e1ab1660c6863362cd623b3b98e002e5ef9fb1f57"
     },
     "candidateLeaves": {
       "src/domain/display/stateProse/defenseStateProseCandidates.js": "b4833f55274b040dc5627b0eedafe7f98f508cec73ac829ce213adabe8c3e96c",

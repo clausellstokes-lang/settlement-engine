@@ -306,7 +306,7 @@ export const DOSSIER_MOUNTS = Object.freeze([
     mount: 'overview.crisisBanners', tab: 'overview', desk: 'stressors', blockId: 'DS-STR-1', rung: 'sentence', dimensions: ['walls'],
   }),
   Object.freeze({
-    mount: 'overview.activeConditions', tab: 'overview', desk: 'stressors', blockId: 'DS-CND-1', rung: 'sentence', dimensions: ['walls'],
+    mount: 'overview.activeConditions', tab: 'overview', desk: 'stressors', blockId: 'DS-CND-1', rung: 'sentence', dimensions: ['walls', 'crisis'], // census-2b item 5 (70d05b25b): FAMILY: recovery v4 carries the kernel `crisis` mark
   }),
   Object.freeze({
     mount: 'overview.stressorLifecycle', tab: 'overview', desk: 'stressors', blockId: 'DS-STR-2', rung: 'sentence', dimensions: ['walls'],
