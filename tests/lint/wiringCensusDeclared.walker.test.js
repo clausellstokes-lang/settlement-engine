@@ -60,10 +60,10 @@ describe('the state rows\' declared columns', () => {
   it('the census reads the annex through the projector\'s own parse, never the leaves', () => {
     const src = readFileSync(new URL('../../scripts/lib/census-declared.mjs', import.meta.url), 'utf8');
     expect(src).toMatch(/import \{ parseAnnex, STATE_HEADER \} from '\.\/dossier-annex-parse\.mjs';/);
-    expect(src).not.toMatch(/generated\.js/);
+    expect(src).not.toMatch(/generated\.js/); // anchored: the parseAnnex import is matched in this same source on the line above
     const projector = readFileSync(new URL('../../scripts/generate-dossier-state-prose.mjs', import.meta.url), 'utf8');
     expect(projector).toMatch(/parseAnnex, STATE_HEADER,\n\} from '\.\/lib\/dossier-annex-parse\.mjs';/);
-    expect(projector).not.toMatch(/^function parseAnnex/m);
+    expect(projector).not.toMatch(/^function parseAnnex/m); // anchored: the parseAnnex import is matched in this same projector source on the line above
   });
 });
 

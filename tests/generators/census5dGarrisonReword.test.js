@@ -23,8 +23,9 @@ const COMMANDERS = 'Military commanders and their officers hold decisive politic
 describe('CENSUS-5d · the garrison sets reworded to presume nothing about the unsettled garrison (R-AN, R-U)', () => {
   it('no FACTION_DESC_SIBLINGS set declares the unsettled garrison (or militia) any more', () => {
     const atoms = Object.values(FACTION_DESC_SIBLINGS).flat().flatMap((l) => [...(l.needs || []), ...(l.excludes || [])]);
-    expect(atoms).not.toContain('garrison');
-    expect(atoms).not.toContain('militia');
+    expect(atoms.length, 'the sets still declare atoms').toBeGreaterThan(0);
+    expect(atoms).not.toContain('garrison'); // anchored: the line above proves the declared atoms are read
+    expect(atoms).not.toContain('militia'); // anchored: the same atoms are proven non-empty two lines above
   });
 
   it('the two city watch lines are declared sets on the settled watch alone', () => {
@@ -41,7 +42,7 @@ describe('CENSUS-5d · the garrison sets reworded to presume nothing about the u
       const desc = (result.factions || []).find((f) => f.faction === 'Military/Guard')?.desc;
       if (desc === undefined) continue;
       expect(desc.startsWith(WELL_FUNDED) || desc.startsWith(STRETCHED), desc).toBe(true);
-      expect(desc).not.toMatch(/garrison/i);
+      expect(desc).not.toMatch(/garrison/i); // anchored: the same desc is proven to open with a city-watch line on the line above
     }
   });
 });

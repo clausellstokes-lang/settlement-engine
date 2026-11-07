@@ -61,7 +61,7 @@ describe('the one-NPC thorps of rung 2', () => {
       what: 'Has the actual evidence of who committed the betrayal. They found it accidentally and immediately hid it',
       stakes: 'The evidence also implicates Feudal Stewardship, which means the fallout would be much larger than anyone currently expects',
     });
-    expect(JSON.stringify(s.npcs[0].secret)).not.toMatch(/\bSomeone\b/);
+    expect(JSON.stringify(s.npcs[0].secret)).not.toMatch(/\bSomeone\b/); // anchored: the secret is pinned to its exact text above
     expect(narrativeQuality(s)?.findings).toEqual([]);
   });
   it('the other eleven seeds clear narrative_quality', () => {

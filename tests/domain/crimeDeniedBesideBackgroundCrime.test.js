@@ -49,7 +49,8 @@ describe('R-E1: the denial prints beside a pattern that itself denies organisati
     const s = birth(1801).settlement;
     const r = renderSurfaces(await bootHarness(), s);
     expect(r.tabs.defense).toMatch(/Active crime patterns/);
-    expect(r.tabs.defense).not.toMatch(DENIAL);
-    expect(buildPrintProse(s).defense?.['defense.criminalStructure'] ?? '').not.toMatch(DENIAL);
+    expect(r.tabs.defense).not.toMatch(DENIAL); // anchored: the patterns line is matched in this same tab on the line above
+    expect(Object.keys(buildPrintProse(s).defense || {}).length, 'the print chapter\'s defence prose was built').toBeGreaterThan(0);
+    expect(buildPrintProse(s).defense?.['defense.criminalStructure'] ?? '').not.toMatch(DENIAL); // anchored: the line above proves the defence prose is built for this record
   }, 120_000);
 });

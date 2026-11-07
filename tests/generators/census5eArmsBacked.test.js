@@ -32,7 +32,7 @@ describe('CENSUS-5e unit 2 · the town military modifier presumes no garrison (R
     expect('MILITARY_MODIFIER_SIBLINGS' in powerSiblings).toBe(false);
     expect('MILITARY_MODIFIER_SIBLINGS' in rulingStructure).toBe(false);
     for (const f of ['src/generators/power/rulingStructure.js', 'src/data/powerSiblings.js']) {
-      expect(readFileSync(f, 'utf8')).not.toContain("'garrison-backed'");
+      expect(readFileSync(f, 'utf8')).not.toContain("'garrison-backed'"); // anchored: readFileSync throws on a vanished file, and both modules are imported live above
     }
   });
 });

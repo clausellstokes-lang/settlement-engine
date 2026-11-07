@@ -42,6 +42,7 @@ describe('CENSUS-5c · the militia sets reworded to presume nothing about the gu
 
   it('no FACTION_DESC_SIBLINGS set declares the unsettled militia any more', () => {
     const atoms = Object.values(FACTION_DESC_SIBLINGS).flat().flatMap((l) => [...(l.needs || []), ...(l.excludes || [])]);
-    expect(atoms).not.toContain('militia');
+    expect(atoms.length, 'the sets still declare atoms').toBeGreaterThan(0);
+    expect(atoms).not.toContain('militia'); // anchored: the line above proves the declared atoms are read
   });
 });

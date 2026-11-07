@@ -79,7 +79,7 @@ describe('DAILY_LIFE_CONTEXT — DEFENSE_CONTEXT declared at CENSUS-1e\'s wired 
     expect(found.has(line.text)).toBe(false);
     const reworded = [...found.entries()].find(([k]) => k.startsWith('There are defenses, but nobody'));
     expect(reworded?.[1]).toEqual([{ needs: ['watch'], excludes: ['crisis: threat'], crisis: ['any'] }]);
-    expect(reworded?.[0]).not.toMatch(/palisade|militia/);
+    expect(reworded?.[0]).not.toMatch(/palisade|militia/); // anchored: the reworded line is found and its declaration pinned on the line above
   });
   it('a Fortress label on a record with no walls prints nothing; Undefended on an open record prints and is noted with its atoms', () => {
     const fort = withPresumptionLedger(() => extractSettlementContext({ tier: 'town', defenseProfile: { readiness: { label: 'Fortress' } } }));
@@ -108,8 +108,8 @@ describe('DAILY_LIFE_TAB — LOAD_MSGS and the local narrative (carried through 
   });
   it('the anchors fallback names nothing the place must hold (R-W)', () => {
     const src = readFileSync(new URL('../../../src/components/new/tabs/DailyLifeTab.jsx', import.meta.url), 'utf8');
-    expect(src).not.toContain('the market, shrine, workshop, and watch post');
     expect(src).toContain("listText(institutions, 'the wells, the lanes, and the common ground')");
+    expect(src).not.toContain('the market, shrine, workshop, and watch post'); // anchored: the new fallback is matched in this same source on the line above
   });
 });
 

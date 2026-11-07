@@ -16,7 +16,7 @@ describe('waterside scopes', () => {
   it('norse and slavic: no water line in a landlocked place, kept by water', () => {
     for (const key of ['norse', 'slavic']) {
       expect(line(key, 'plains', 'road'), `${key}: an inland line in a landlocked place`).not.toBe('');
-      expect(line(key, 'plains', 'road'), `${key}: no water line in a landlocked place`).not.toMatch(/water|river/);
+      expect(line(key, 'plains', 'road'), `${key}: no water line in a landlocked place`).not.toMatch(/water|river/); // anchored: the same call is proven non-empty on the line above, and the water line is matched by water below
       expect(line(key, 'riverside', 'road'), `${key}: kept by water`).toMatch(/water|river/);
     }
   });

@@ -33,7 +33,8 @@ describe('NPC_WANTS declarations (CENSUS-4f unit 6)', () => {
     await ensureLaws();
     const { settlement } = birth(9);
     const clothes = (settlement.npcs || []).map((n) => n?.physical?.clothes);
-    expect(clothes).not.toContain("a dockhand's oilskins over hands too clean for the work");
+    expect(clothes.length, 'the birth is crewed').toBeGreaterThan(0);
+    expect(clothes).not.toContain("a dockhand's oilskins over hands too clean for the work"); // anchored: the line above proves the clothes are read
     expect(clothes.every((c) => typeof c === 'string')).toBe(true);
   });
 });

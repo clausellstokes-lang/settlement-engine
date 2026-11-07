@@ -28,7 +28,7 @@ describe('unit B: the power step reads the migration direction from the stress e
       return list.map((f) => f.faction);
     };
     expect(factions(MIGRATION('exodus'))).toContain('Departure Committee');
-    expect(factions(MIGRATION('influx'))).not.toContain('Departure Committee');
+    expect(factions(MIGRATION('influx'))).not.toContain('Departure Committee'); // anchored: the same reader mints the committee under exodus on the line above
   });
 
   it('RED-FIRST: the governance narrative tells the departure under an exodus entry', () => {
@@ -39,7 +39,7 @@ describe('unit B: the power step reads the migration direction from the stress e
       stressTypes: ['mass_migration'], stressEntries: entries, fallbackStressType: 'mass_migration',
     }).recentConflict;
     expect(conflict(MIGRATION('exodus'))).toMatch(/families left/);
-    expect(conflict(MIGRATION('influx'))).not.toMatch(/families left/);
+    expect(conflict(MIGRATION('influx'))).not.toMatch(/families left/); // anchored: the same reader tells the departure under exodus on the line above
   });
 
   it('the intent carries the entries (kind and direction only); a legacy caller carries none', () => {

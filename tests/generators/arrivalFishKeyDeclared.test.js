@@ -44,7 +44,8 @@ describe('the fish beat on the soak (R-AP)', () => {
 
   it('soak1k-152 (no catch) prints no fish beat', () => {
     const s = birth(152).settlement;
-    expect(factsOf(s).foodSources).not.toContain('fish');
+    expect(factsOf(s).foodSources.length, 'the record names its food sources').toBeGreaterThan(0);
+    expect(factsOf(s).foodSources).not.toContain('fish'); // anchored: the line above proves the food sources are read
     expect(FISH_LINES.test(s.arrivalScene || ''), s.arrivalScene).toBe(false);
   }, 30_000);
 

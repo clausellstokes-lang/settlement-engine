@@ -24,7 +24,7 @@ describe('row 95: the scope clause is read against the record', () => {
   // re-keyed by cause; the false market is still never printed.
   it('a mesoamerican place with NO market prints the twin, never the market', () => {
     expect(cultureScopeLine(meso([]))).toMatch(/on tribute and the ritual calendar/);
-    expect(cultureScopeLine(meso([]))).not.toMatch(/market/);
+    expect(cultureScopeLine(meso([]))).not.toMatch(/market/); // anchored: the same call is proven to print its twin on the line above
   });
   it('an undeclared scope prints as before', () => {
     expect(cultureScopeLine({ ...meso([]), culturalIdentity: { key: 'germanic', label: 'Germanic' } }))

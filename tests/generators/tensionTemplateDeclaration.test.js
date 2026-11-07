@@ -26,7 +26,8 @@ describe('the tension template declaration (R-AL)', () => {
     const { settlement } = birth(8);
     expect(migrationOf(settlement).active).toBe(false);
     const tensions = settlement.history?.currentTensions || [];
-    expect(tensions.map((t) => t.type)).not.toContain('demographic_pressure');
+    expect(tensions.length, 'the birth carries current tensions').toBeGreaterThan(0);
+    expect(tensions.map((t) => t.type)).not.toContain('demographic_pressure'); // anchored: the line above proves the tensions are read
     expect(tensions.filter((t) => Array.isArray(t.plotHooks) && t.plotHooks.length === 0)).toEqual([]);
   }, 60_000);
 

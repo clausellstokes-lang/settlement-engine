@@ -21,7 +21,7 @@ describe('the outlook hooks resolve (CENSUS-1f unit 3)', () => {
   it('a plains road town is not told its shipbuilding stalls', () => {
     const hooks = hooksFor({ tradeRouteAccess: 'road', terrainType: 'plains', tier: 'town' });
     expect(hooks).toContain(TWIN);
-    expect(hooks).not.toContain(TIMBER);
+    expect(hooks).not.toContain(TIMBER); // anchored: the same hooks are proven to carry the twin on the line above
   });
 
   it('a coastal port keeps the shipbuilding line', () => {
@@ -43,7 +43,7 @@ describe('the starving outlook set (CENSUS-3g unit 5)', () => {
     () => factsOf({ tier, institutions: [], economicState: { foodSecurity: { foodRecord: { band } } } })).plotHooks.map((h) => h.hook);
 
   it('the original presumes only the famine band: no residents called villagers', () => {
-    expect(STARVING).not.toMatch(/villagers?/i);
+    expect(STARVING).not.toMatch(/villagers?/i); // anchored: STARVING is the key found by its opening words above; toMatch type-checks it as a string
     expect(SET[0].needs).toEqual(['food: ≤ deficit']);
   });
 
@@ -54,7 +54,7 @@ describe('the starving outlook set (CENSUS-3g unit 5)', () => {
   it.each(['importDependent', 'pressured'])('a %s gap reads the twin, with no famine words', (band) => {
     const [hook] = starvingHooks('hamlet', band);
     expect(hook).toBe(SET[1].text);
-    expect(hook).not.toMatch(/\bstarv|\bbanditry\b|\bfamine\b|villagers?/i);
+    expect(hook).not.toMatch(/\bstarv|\bbanditry\b|\bfamine\b|villagers?/i); // anchored: the hook is pinned to the twin's exact text on the line above
   });
 
   it('the twin answers the moderate gap only', () => {

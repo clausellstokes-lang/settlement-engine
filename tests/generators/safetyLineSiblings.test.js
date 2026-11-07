@@ -31,7 +31,7 @@ describe('safetyProfile SAFETY_LINE_SIBLINGS (CENSUS-1e unit 2)', () => {
   it('(b) no watch: the declared twin prints in its place', () => {
     const { result, ledger } = withPresumptionLedger(() => generateSafetyProfile(config, 'town', WITHOUT));
     expect(result.safetyDesc).toContain(TWIN);
-    expect(result.safetyDesc).not.toContain('The watch is uncertain');
+    expect(result.safetyDesc).not.toContain('The watch is uncertain'); // anchored: the twin is matched in this same desc on the line above
     expect(ledger.filter((e) => e.pool === 'safetyProfile:SAFETY_LINE_SIBLINGS')).toEqual([expect.objectContaining({ resolvedBy: 'twin' })]);
   });
 });

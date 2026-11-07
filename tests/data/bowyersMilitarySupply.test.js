@@ -16,7 +16,7 @@ describe('the bowyers\' military supply presumes a guard, not two forces', () =>
     expect(ROW.excludes).toBeUndefined();
   });
   it('its text names no particular force', () => {
-    expect(ROW.desc).not.toMatch(/\b(?:garrison|militia|watch|mercenar\w*)\b/i);
     expect(ROW.desc).toBe('Contract supply of bows and arrows to the local guard. Volume pricing.');
+    expect(ROW.desc).not.toMatch(/\b(?:garrison|militia|watch|mercenar\w*)\b/i); // anchored: the exact desc is pinned on the line above
   });
 });

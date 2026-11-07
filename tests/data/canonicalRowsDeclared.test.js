@@ -73,7 +73,9 @@ describe('the seven canonical v0 rows declare through the tag slot (CENSUS-3f un
 
   it('the slot never reaches the text', () => {
     for (const [b, p] of [['DS-ECO-3', 'SHORTAGE × trade-dependent'], ['DS-ECO-3', 'SURPLUS × trade-dependent'], ['DS-ECO-6', 'TIER: significant off-book activity (≥15)']]) {
-      expect(canonical(b, p).text).not.toMatch(/[`[\]]/);
+      const text = canonical(b, p).text;
+      expect(text, `${b} :: ${p}`).toMatch(/\w{4}/);
+      expect(text).not.toMatch(/[`[\]]/); // anchored: the line above proves the canonical line carries text
     }
   });
 });

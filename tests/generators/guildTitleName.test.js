@@ -19,7 +19,8 @@ describe('guildTitleName — the guild in a guild master title', () => {
   });
   it('never prints a doubled possessive', () => {
     for (const n of ["Tailor's guild", "Quarrymen's guild", "Weavers' guild", "Dyers' guild", "Salters' guild"]) {
-      expect(guildTitleName(n)).not.toMatch(/['’]s['’]/);
+      expect(guildTitleName(n), n).toMatch(/^\w+/);
+      expect(guildTitleName(n)).not.toMatch(/['’]s['’]/); // anchored: the line above proves a name is printed
     }
   });
 });

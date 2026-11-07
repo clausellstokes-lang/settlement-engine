@@ -48,7 +48,7 @@ describe('the per-site fork is retired', () => {
   it('hookVariety exports no freshAdmittedTwin; the loyalty site hands drawDeclared its registry', () => {
     expect(/** @type {any} */ (hookVariety).freshAdmittedTwin).toBeUndefined();
     const src = readFileSync(new URL('../../../src/generators/npcGenerator.js', import.meta.url), 'utf8');
-    expect(src).not.toMatch(/freshAdmittedTwin\(/);
     expect(src).toMatch(/const drawLoyalty = [^\n]*registry: \{ used: reg\?\.titles/);
+    expect(src).not.toMatch(/freshAdmittedTwin\(/); // anchored: the loyalty site's registry hand-off is matched in this same source on the line above
   });
 });

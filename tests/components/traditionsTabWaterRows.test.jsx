@@ -28,8 +28,8 @@ describe('the water-keyed rows print only where the water is', () => {
     render(<TraditionsTab settlement={{ ...BASE, traditions: MIRROR }} />);
     const text = screen.getByTestId('traditions-tab').textContent;
     expect(text).toMatch(/The Hearth Night/);
-    expect(text).not.toMatch(/The Fair of the Tide/);
-    expect(text).not.toMatch(/The River Blessing/);
+    expect(text).not.toMatch(/The Fair of the Tide/); // anchored: The Hearth Night is matched in this same tab text above
+    expect(text).not.toMatch(/The River Blessing/); // anchored: same tab text as the Hearth Night match above
   });
   it('a coast prints the Tide; a river prints the River', () => {
     render(<TraditionsTab settlement={{ ...BASE, config: { ...BASE.config, terrainType: 'coastal', tradeRouteAccess: 'port' }, traditions: MIRROR }} />);
@@ -38,6 +38,6 @@ describe('the water-keyed rows print only where the water is', () => {
     render(<TraditionsTab settlement={{ ...BASE, config: { ...BASE.config, terrainType: 'riverside', tradeRouteAccess: 'river' }, traditions: MIRROR }} />);
     const t = screen.getByTestId('traditions-tab').textContent;
     expect(t).toMatch(/The River Blessing/);
-    expect(t).not.toMatch(/The Fair of the Tide/);
+    expect(t).not.toMatch(/The Fair of the Tide/); // anchored: The River Blessing is matched in this same tab text on the line above
   });
 });

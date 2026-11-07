@@ -20,12 +20,13 @@ const CALM = { monsterThreat: 'civilized' };
 
 describe('unit A (a): the safety profile reads the militia atom from the home', () => {
   it('RED-FIRST: a ruined militia patrols nothing; a household levy is a militia', () => {
-    const ruined = generateSafetyProfile(CALM, 'village', [{ name: 'Citizen militia', category: 'Defense', status: 'ruined' }]);
-    expect(ruined.safetyDesc).not.toMatch(/militia/i);
     const levy = generateSafetyProfile(CALM, 'village', [{ name: 'Household levy', category: 'Defense' }]);
     expect(levy.safetyDesc).toMatch(/militia/i);
     const live = generateSafetyProfile(CALM, 'village', [{ name: 'Citizen militia', category: 'Defense' }]);
     expect(live.safetyDesc).toMatch(/militia/i);
+    const ruined = generateSafetyProfile(CALM, 'village', [{ name: 'Citizen militia', category: 'Defense', status: 'ruined' }]);
+    // anchored: the same desc prints the militia for a live row and a levy above; only the ruin differs
+    expect(ruined.safetyDesc).not.toMatch(/militia/i);
   });
 });
 

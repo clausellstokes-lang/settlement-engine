@@ -73,6 +73,6 @@ describe('CENSUS-5d unit 3 · the waiting faith lines declare as their atoms lan
     // v3 is the reworded line (R-U), computed by its vid rather than quoted (proseDrawnAnchors).
     const v3 = variantByVid({ leaf: 'warFaith', blockId: 'DS-FTH-1', poolKey: 'CULTS: cults[] present beneath the patron', vid: 3, slots: { settlement: 'X' } });
     expect(v3.length).toBeGreaterThan(20);
-    expect(v3).not.toMatch(/Several lesser rites|quarter of the town/);
+    expect(v3).not.toMatch(/Several lesser rites|quarter of the town/); // anchored: v3 is proven a live line of more than 20 characters on the line above
   });
 });

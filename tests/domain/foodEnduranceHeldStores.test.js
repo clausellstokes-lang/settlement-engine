@@ -32,7 +32,7 @@ describe('rung-2 window · the Food endurance line reads the held stores', () =>
     expect(record).toMatchObject({ band: 'famine', hasGranary: true, storesHeld: true });
     const line = foodEnduranceLine(s3605);
     expect(line?.sentence).toContain(FACTS.HELD_STORES_WORDS);
-    expect(line?.sentence).not.toMatch(/\bthe granary carries\b/);
+    expect(line?.sentence).not.toMatch(/\bthe granary carries\b/); // anchored: the held-stores words are matched in this same sentence on the line above
     expect(line?.door).toBe('the granary');
   });
 
@@ -45,7 +45,7 @@ describe('rung-2 window · the Food endurance line reads the held stores', () =>
   it('an open granary reads as it did: it carries the place', () => {
     const line = foodEnduranceLine(placeWith({ storageMonths: 12 }));
     expect(line?.sentence).toMatch(/\bthe granary carries the town\b/);
-    expect(line?.sentence).not.toContain(FACTS.HELD_STORES_WORDS);
+    expect(line?.sentence).not.toContain(FACTS.HELD_STORES_WORDS); // anchored: 'the granary carries the town' is matched in this same sentence on the line above
   });
 
   it('a held granary that the harvest alone would cover still says the hall holds it', () => {

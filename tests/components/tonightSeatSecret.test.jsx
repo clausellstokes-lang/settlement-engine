@@ -46,8 +46,8 @@ describe('R11 · R7: a kept secret never prints after "Wants to"', () => {
     const seat = composeTonightSheet(s).people.find((p) => p.why === 'seat');
     const page = JSON.stringify(buildJournalPages(buildViewModel({ settlement: s }))).replace(/\\'|&#39;|&#x27;/g, "'");
     expect(page).toContain(`${TONIGHT_COPY.secret}: ${seat.line.slice(0, 40)}`);
-    expect(page).not.toContain(`${TONIGHT_COPY.wants} ${seat.line}`);
-    expect(page).not.toMatch(/Wants to [A-Z]/);
+    expect(page).not.toContain(`${TONIGHT_COPY.wants} ${seat.line}`); // anchored: the secret line is matched in this same page on the line above
+    expect(page).not.toMatch(/Wants to [A-Z]/); // anchored: this same page is proven to carry the seat's secret line two lines above
     expect(page).toContain(TONIGHT_COPY.title);
   });
 

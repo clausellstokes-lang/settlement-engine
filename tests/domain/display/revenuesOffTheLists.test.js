@@ -37,8 +37,9 @@ describe('revenuesOffTheLists — R-P 2', () => {
 
   it('never homes a label with no fact behind it, nor an import of a service', () => {
     const texts = revenuesOffTheLists(town()).map((r) => r.text);
-    expect(texts).not.toContain('Cultural tourism revenue');
-    expect(texts.join(' ')).not.toMatch(/warehous/i);
+    expect(texts).toContain('Transit trade');
+    expect(texts).not.toContain('Cultural tourism revenue'); // anchored: the line above proves the same list holds its fact-backed revenue
+    expect(texts.join(' ')).not.toMatch(/warehous/i); // anchored: the same list is proven to hold 'Transit trade' two lines above
   });
 
   it('a record with no list reads empty', () => {

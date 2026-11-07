@@ -21,7 +21,7 @@ describe('the four mislabelled rows carry no guild tag', () => {
     const rows = rowsOf(name);
     expect(rows.length).toBeGreaterThan(0);
     for (const [tier, group, def] of rows) {
-      expect(def.tags || [], `${tier}/${group}`).not.toContain('guild');
+      expect(def.tags || [], `${tier}/${group}`).not.toContain('guild'); // anchored: the row is proven present in the catalogue (rows.length > 0 above); its tags are its own
       expect(isCommerceGuild({ ...def, name, category: group }), `${tier}/${group}`).toBe(false);
     }
   });
@@ -38,7 +38,7 @@ describe('the five further mislabelled rows carry no guild tag (CENSUS-4e)', () 
     const rows = rowsOf(name);
     expect(rows.length).toBeGreaterThan(0);
     for (const [tier, group, def] of rows) {
-      expect(def.tags || [], `${tier}/${group}`).not.toContain('guild');
+      expect(def.tags || [], `${tier}/${group}`).not.toContain('guild'); // anchored: the row is proven present in the catalogue (rows.length > 0 above); its tags are its own
       expect(isCommerceGuild({ ...def, name, category: group }), `${tier}/${group}`).toBe(false);
     }
   });
@@ -58,13 +58,15 @@ describe('the three villages of CENSUS-4c unit 1', () => {
     const { settlement: s } = birth(i);
     expect(s.tier).toBe('village');
     expect(factsOf(s).guild).toBe(false);
-    expect((s.npcs || []).map((n) => n.role)).not.toContain('Guild Master');
+    expect((s.npcs || []).length, 'the village is crewed').toBeGreaterThan(0);
+    expect((s.npcs || []).map((n) => n.role)).not.toContain('Guild Master'); // anchored: the line above proves the roster is crewed
   }, 120000);
   // the third holds a guild POWER ("Merchant Guilds", guild.js's power branch), so the atom stays
   // true by the record; only the false Guild Master of its village scribe goes
   it('soak1k-452: no Guild Master of the scribe; the guild atom holds by its guild faction', () => {
     const { settlement: s } = birth(452);
-    expect((s.npcs || []).map((n) => n.role)).not.toContain('Guild Master');
+    expect((s.npcs || []).length, 'the village is crewed').toBeGreaterThan(0);
+    expect((s.npcs || []).map((n) => n.role)).not.toContain('Guild Master'); // anchored: the line above proves the roster is crewed
     expect((s.powerStructure?.factions || []).map((f) => f.faction)).toContain('Merchant Guilds');
     expect(factsOf(s).guild).toBe(true);
   }, 120000);

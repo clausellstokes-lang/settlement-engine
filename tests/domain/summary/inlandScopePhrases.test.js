@@ -27,12 +27,12 @@ describe('an inland Norse or Slavic birth prints a scope phrase (was mute)', () 
   it('soak1k-1, a Norse hamlet inland: the inland phrase, no water', () => {
     const line = cultureScopeLine(soak1k1);
     expect(line).toBe('Norse-inspired, built around the hall, on kin, oath and the assembly.');
-    expect(line).not.toMatch(SEA_WORDS);
+    expect(line).not.toMatch(SEA_WORDS); // anchored: the exact line is pinned on the line above
   });
   it('soak1k-52, a Slavic city inland: the inland phrase, no river', () => {
     const line = cultureScopeLine(soak1k52);
     expect(line).toBe('Slavic-inspired, built in timber compounds on land held in common, kin by kin.');
-    expect(line).not.toMatch(SEA_WORDS);
+    expect(line).not.toMatch(SEA_WORDS); // anchored: the exact line is pinned on the line above
   });
   it('the identity sentence carries it too, and the seat takes its real name', () => {
     expect(composeSettlementQuickGuide(soak1k1).identitySentence)

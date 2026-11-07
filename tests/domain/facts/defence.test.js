@@ -21,11 +21,12 @@ const PLAGUE = { stressTypes: ['plague_onset'], monsterThreat: 'civilized' };
 
 describe('the defence-presence home (CENSUS-1 fact 3)', () => {
   it('RED-FIRST: a ruined watch does not manage the quarantine', () => {
-    const ruined = [{ name: 'Town watch', category: 'Defense', status: 'ruined' }];
-    const text = JSON.stringify(generateSafetyProfile(PLAGUE, 'town', ruined));
-    expect(text).not.toContain('The watch manages quarantine compliance');
     const live = [{ name: 'Town watch', category: 'Defense' }];
     expect(JSON.stringify(generateSafetyProfile(PLAGUE, 'town', live))).toContain('The watch manages quarantine compliance');
+    const ruined = [{ name: 'Town watch', category: 'Defense', status: 'ruined' }];
+    const text = JSON.stringify(generateSafetyProfile(PLAGUE, 'town', ruined));
+    // anchored: the same profile prints the line for the live watch above; only the ruin differs
+    expect(text).not.toContain('The watch manages quarantine compliance');
   });
 
   it('RED-FIRST: watch and militia are two atoms, and the watch word is still licensed by either', () => {

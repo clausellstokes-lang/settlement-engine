@@ -29,8 +29,8 @@ describe('CENSUS-5b unit 1 · DS-DEF-1 readiness WEAK v2 presumes the perimeter'
 
   it('is refused where the record has no perimeter, and the pool stays readable there', () => {
     const vids = drawable('no walls');
-    expect(vids).not.toContain(PERIMETER.vid);
     expect(vids.length, 'the pool went mute without walls').toBeGreaterThan(0);
+    expect(vids).not.toContain(PERIMETER.vid); // anchored: the line above proves the pool still draws without walls
   });
 
   it('is drawable where the perimeter stands', () => {

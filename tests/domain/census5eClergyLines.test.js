@@ -43,7 +43,7 @@ describe('CENSUS-5e unit 3 · "the clergy" declares `clergy` (R-AE)', () => {
       const variant = LEAF['DS-FTH-1'].pools[poolKey].find((v) => line.test(v.text));
       expect(variant, 'the line is in the leaf').toBeTruthy();
       expect(variant.marks || []).toContain('clergy');
-      expect(variant.marks || []).not.toContain('priest');
+      expect(variant.marks || []).not.toContain('priest'); // anchored: the same marks are proven to carry 'clergy' on the line above
       for (const facts of [HOUSE_ONLY, CLERIC_ONLY]) expect(drawable('DS-FTH-1', poolKey, facts).some((t) => line.test(t))).toBe(true);
       const refused = drawable('DS-FTH-1', poolKey, NEITHER);
       expect(refused.some((t) => line.test(t)), 'refused where neither a cleric nor a house stands').toBe(false);

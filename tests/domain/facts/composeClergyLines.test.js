@@ -61,7 +61,7 @@ describe('the compose · "the clergy" re-read by R-AD', () => {
     it(`${blockId} :: ${poolKey}: the faith's reach stays colour (${line.source})`, () => {
       const variant = LEAF[blockId].pools[poolKey].find((v) => line.test(v.text));
       expect(variant).toBeTruthy();
-      expect(variant.marks || []).not.toContain('clergy');
+      expect(variant.marks || []).not.toContain('clergy'); // anchored: the variant is proven present above and proven drawable with neither atom on the line below
       expect(drawable(blockId, poolKey, NEITHER).some((t) => line.test(t))).toBe(true);
     });
   }

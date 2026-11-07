@@ -56,7 +56,7 @@ describe('NPC_FACTION_LOYALTY declarations (CENSUS-3e)', () => {
       for (const npc of npcs) {
         for (const hook of npc.plotHooks || []) {
           expect(typeof hook, 'a hook is stored as text').toBe('string');
-          expect(hook).not.toMatch(GUARD);
+          expect(hook).not.toMatch(GUARD); // anchored: military > 0 after the loop proves the hooks are drawn and read
         }
         military += (npc.plotHooks || []).filter((h) => militaryRows.has(h)).length;
       }

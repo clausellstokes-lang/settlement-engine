@@ -30,7 +30,7 @@ describe('the survival line reads the block\'s own operations list', () => {
     const profile = settlement.economicState.safetyProfile;
     expect(profile.criminalInstitutions).toContain('Gambling Den');
     expect(profile.crimeTypes.find((c) => c.type === 'Survival crime')?.desc).toBe(DESPERATION);
-    expect(profile.crimeTypes.map((c) => c.desc).join(' ')).not.toMatch(CLAUSE);
+    expect(profile.crimeTypes.map((c) => c.desc).join(' ')).not.toMatch(CLAUSE); // anchored: the survival row's desc is pinned on the line above
   });
 
   it('a listed operation turns the clause into the desperation-theft line, printed once', () => {

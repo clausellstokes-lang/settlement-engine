@@ -54,6 +54,6 @@ describe('one guild reader (answer 3)', () => {
     const { readFileSync } = await import('node:fs');
     const src = readFileSync(new URL('../../../src/domain/facts/guild.js', import.meta.url), 'utf8');
     expect(src).toMatch(/import \{[^}]*isCommerceGuild[^}]*\} from '\.\.\/institutions\/institutionCategory\.js'/);
-    expect(src).not.toMatch(/liveInstitutionNames/);
+    expect(src).not.toMatch(/liveInstitutionNames/); // anchored: the isCommerceGuild import is matched in this same source on the line above
   });
 });
