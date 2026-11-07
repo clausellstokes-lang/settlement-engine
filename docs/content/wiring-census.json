@@ -5,10 +5,10 @@
       "src/domain/display/stateProse/generalStateProse.js": "a1d82168bffd08d6aec168b0fd51b4b7ed21fbf67c6f30b2aec8832064e29267",
       "src/domain/display/stateProse/powerStateProse.js": "11c913c83fa1e88d5f75d5415f8723936acf9aae37d6465a87b1ad3cb4d21e7b",
       "src/domain/display/stateProse/economyStateProse.js": "d2bfe8cafa209803f26c83fde83534a7ba45230010ff87c33bd4ac52d831b924",
-      "src/domain/display/stateProse/defenseStateProse.js": "240c203d9dfafc191db04d7d25e5f4de7f60d6641ee69cf8e67e7cf5f780def0",
+      "src/domain/display/stateProse/defenseStateProse.js": "d08f8f48055247a2efe94b026aaeaeb27d324668f665a28bced00a646b024d14",
       "src/domain/display/stateProse/stressorsStateProse.js": "13c7f383882acf5bb48267feb4302ced6b9798cec2575470903f1aa88205600d",
       "src/domain/display/stateProse/warFaithStateProse.js": "f1972add38589ee55369fb06e4a5e0a8f90c4d966bf703d4367a3cdca52d6aac",
-      "src/domain/display/stateProse/dossierMounts.js": "b8466ea80b09292247baf73e1ab1660c6863362cd623b3b98e002e5ef9fb1f57"
+      "src/domain/display/stateProse/dossierMounts.js": "1d7183757a8fa3527d20cf6e01e1d71e4a7b865e445349f793e51acd40188255"
     },
     "candidateLeaves": {
       "src/domain/display/stateProse/defenseStateProseCandidates.js": "b4833f55274b040dc5627b0eedafe7f98f508cec73ac829ce213adabe8c3e96c",
@@ -21,15 +21,15 @@
     "producerIndexFiles": 1300
   },
   "totals": {
-    "pools": 724,
-    "blocks": 68,
-    "variants": 2376,
-    "resolved": 356,
+    "pools": 729,
+    "blocks": 69,
+    "variants": 2391,
+    "resolved": 361,
     "unresolved": 368,
-    "resolvedWithPredicate": 223,
-    "resolvedWithCleanPredicate": 223,
-    "keyFunctions": 124,
-    "keyFunctionsConsulted": 124,
+    "resolvedWithPredicate": 227,
+    "resolvedWithCleanPredicate": 227,
+    "keyFunctions": 125,
+    "keyFunctionsConsulted": 125,
     "keyTables": 33,
     "slotless": 65,
     "bagless": 140,
@@ -37,7 +37,7 @@
     "syntheticTableFields": 100,
     "tiers": {
       "MISSING": 33,
-      "THIN": 497,
+      "THIN": 502,
       "COVERED": 227,
       "MISSING-AT-TIER": 45
     },
@@ -47,17 +47,17 @@
     "narrowedRows": 0,
     "covertRows": 4,
     "objectClassed": 103,
-    "mountedRows": 582,
+    "mountedRows": 587,
     "absent": {
-      "measured": 447,
+      "measured": 470,
       "default": 3,
       "not-produced": 61,
       "method-call": 18
     },
-    "zeroK": 61,
-    "kExecutable": 356,
+    "zeroK": 66,
+    "kExecutable": 361,
     "kNotExecutable": 368,
-    "branchGrainRows": 326,
+    "branchGrainRows": 331,
     "functionGrainRows": 398,
     "customReachableRows": 26,
     "relationRows": 165,
@@ -115,15 +115,15 @@
       ],
       [
         "defense",
-        4
+        5
       ]
     ],
     "sourceLicensedRows": 118,
     "sourceOfficeRows": 3,
-    "sourceUnresolvedRows": 603,
+    "sourceUnresolvedRows": 608,
     "sourceTwoSourceRows": 10,
     "modifierRows": 0,
-    "declaredColumnRows": 724,
+    "declaredColumnRows": 729,
     "tablePools": 50
   },
   "rows": [
@@ -1549,9 +1549,10 @@
       },
       "declares": [],
       "lineDeclares": {
-        "colour": 2
+        "colour": 2,
+        "watch": 1
       },
-      "undeclared": 1,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -2537,9 +2538,9 @@
       "declares": [],
       "lineDeclares": {
         "colour": 1,
-        "watch": 1
+        "watch": 2
       },
-      "undeclared": 1,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -2587,9 +2588,10 @@
       },
       "declares": [],
       "lineDeclares": {
-        "colour": 2
+        "colour": 2,
+        "watch": 1
       },
-      "undeclared": 1,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -3270,7 +3272,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -3348,7 +3350,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -3428,7 +3430,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -3512,7 +3514,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -4368,7 +4370,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 4,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -4446,7 +4448,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -4515,7 +4517,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -4597,7 +4599,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -4698,7 +4700,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -4805,7 +4807,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -4911,7 +4913,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -5021,7 +5023,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -5135,7 +5137,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -7392,7 +7394,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -7469,7 +7471,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -7848,9 +7850,10 @@
       "declares": [],
       "lineDeclares": {
         "colour": 1,
-        "walls": 1
+        "walls": 1,
+        "watch": 1
       },
-      "undeclared": 1,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -8242,9 +8245,10 @@
       },
       "declares": [],
       "lineDeclares": {
-        "colour": 2
+        "colour": 2,
+        "watch": 1
       },
-      "undeclared": 1,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -8290,9 +8294,10 @@
       },
       "declares": [],
       "lineDeclares": {
-        "colour": 2
+        "colour": 2,
+        "watch": 1
       },
-      "undeclared": 1,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -8485,6 +8490,412 @@
         "gate": 2,
         "watch": 1
       },
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-DEF-12",
+      "pool": "MAGIC-DEPENDENT",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 3,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "settlement.isolationSupport.magicDependent",
+          "op": "===",
+          "value": "true"
+        }
+      ],
+      "branchReads": [
+        "settlement.isolationSupport",
+        "settlement.isolationSupport.applicable",
+        "settlement.isolationSupport.magicDependent"
+      ],
+      "fieldsRead": [
+        "settlement.isolationSupport",
+        "settlement.isolationSupport.applicable",
+        "settlement.isolationSupport.capacity",
+        "settlement.isolationSupport.magicDependent",
+        "settlement.isolationSupport.requiredCapacity"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "isolationSupportPoolKey",
+      "rung": "literal",
+      "reads": [
+        "settlement.isolationSupport",
+        "settlement.isolationSupport.applicable",
+        "settlement.isolationSupport.magicDependent"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "settlement.isolationSupport": "measured",
+        "settlement.isolationSupport.applicable": "measured",
+        "settlement.isolationSupport.magicDependent": "measured"
+      },
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "viability.isolationSupport"
+      ],
+      "attach": [],
+      "k": 0,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "settlement.isolationSupport": "",
+          "settlement.isolationSupport.applicable": "",
+          "settlement.isolationSupport.magicDependent": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-DEF-12",
+      "pool": "CAPACITY: ample",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 3,
+      "grammars": 2,
+      "predicate": [
+        {
+          "field": "settlement.isolationSupport.capacity",
+          "op": ">=",
+          "value": "support.requiredCapacity + 15"
+        }
+      ],
+      "branchReads": [
+        "settlement.isolationSupport",
+        "settlement.isolationSupport.applicable",
+        "settlement.isolationSupport.capacity",
+        "settlement.isolationSupport.magicDependent",
+        "settlement.isolationSupport.requiredCapacity"
+      ],
+      "fieldsRead": [
+        "settlement.isolationSupport",
+        "settlement.isolationSupport.applicable",
+        "settlement.isolationSupport.capacity",
+        "settlement.isolationSupport.magicDependent",
+        "settlement.isolationSupport.requiredCapacity"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "isolationSupportPoolKey",
+      "rung": "literal",
+      "reads": [
+        "settlement.isolationSupport",
+        "settlement.isolationSupport.applicable",
+        "settlement.isolationSupport.capacity",
+        "settlement.isolationSupport.magicDependent",
+        "settlement.isolationSupport.requiredCapacity"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "settlement.isolationSupport": "measured",
+        "settlement.isolationSupport.applicable": "measured",
+        "settlement.isolationSupport.capacity": "measured",
+        "settlement.isolationSupport.magicDependent": "measured",
+        "settlement.isolationSupport.requiredCapacity": "measured"
+      },
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "viability.isolationSupport"
+      ],
+      "attach": [],
+      "k": -2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "settlement.isolationSupport": "",
+          "settlement.isolationSupport.applicable": "",
+          "settlement.isolationSupport.capacity": "",
+          "settlement.isolationSupport.magicDependent": "",
+          "settlement.isolationSupport.requiredCapacity": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-DEF-12",
+      "pool": "CAPACITY: enough",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 3,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "settlement.isolationSupport.capacity",
+          "op": ">=",
+          "value": "support.requiredCapacity"
+        }
+      ],
+      "branchReads": [
+        "settlement.isolationSupport",
+        "settlement.isolationSupport.applicable",
+        "settlement.isolationSupport.capacity",
+        "settlement.isolationSupport.magicDependent",
+        "settlement.isolationSupport.requiredCapacity"
+      ],
+      "fieldsRead": [
+        "settlement.isolationSupport",
+        "settlement.isolationSupport.applicable",
+        "settlement.isolationSupport.capacity",
+        "settlement.isolationSupport.magicDependent",
+        "settlement.isolationSupport.requiredCapacity"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "isolationSupportPoolKey",
+      "rung": "literal",
+      "reads": [
+        "settlement.isolationSupport",
+        "settlement.isolationSupport.applicable",
+        "settlement.isolationSupport.capacity",
+        "settlement.isolationSupport.magicDependent",
+        "settlement.isolationSupport.requiredCapacity"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "settlement.isolationSupport": "measured",
+        "settlement.isolationSupport.applicable": "measured",
+        "settlement.isolationSupport.capacity": "measured",
+        "settlement.isolationSupport.magicDependent": "measured",
+        "settlement.isolationSupport.requiredCapacity": "measured"
+      },
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "viability.isolationSupport"
+      ],
+      "attach": [],
+      "k": -2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "settlement.isolationSupport": "",
+          "settlement.isolationSupport.applicable": "",
+          "settlement.isolationSupport.capacity": "",
+          "settlement.isolationSupport.magicDependent": "",
+          "settlement.isolationSupport.requiredCapacity": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-DEF-12",
+      "pool": "CAPACITY: short",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 3,
+      "grammars": 1,
+      "predicate": [
+        {
+          "field": "settlement.isolationSupport.capacity",
+          "op": ">=",
+          "value": "support.requiredCapacity - 15"
+        }
+      ],
+      "branchReads": [
+        "settlement.isolationSupport",
+        "settlement.isolationSupport.applicable",
+        "settlement.isolationSupport.capacity",
+        "settlement.isolationSupport.magicDependent",
+        "settlement.isolationSupport.requiredCapacity"
+      ],
+      "fieldsRead": [
+        "settlement.isolationSupport",
+        "settlement.isolationSupport.applicable",
+        "settlement.isolationSupport.capacity",
+        "settlement.isolationSupport.magicDependent",
+        "settlement.isolationSupport.requiredCapacity"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "isolationSupportPoolKey",
+      "rung": "literal",
+      "reads": [
+        "settlement.isolationSupport",
+        "settlement.isolationSupport.applicable",
+        "settlement.isolationSupport.capacity",
+        "settlement.isolationSupport.magicDependent",
+        "settlement.isolationSupport.requiredCapacity"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "settlement.isolationSupport": "measured",
+        "settlement.isolationSupport.applicable": "measured",
+        "settlement.isolationSupport.capacity": "measured",
+        "settlement.isolationSupport.magicDependent": "measured",
+        "settlement.isolationSupport.requiredCapacity": "measured"
+      },
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "viability.isolationSupport"
+      ],
+      "attach": [],
+      "k": -2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "settlement.isolationSupport": "",
+          "settlement.isolationSupport.applicable": "",
+          "settlement.isolationSupport.capacity": "",
+          "settlement.isolationSupport.magicDependent": "",
+          "settlement.isolationSupport.requiredCapacity": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-DEF-12",
+      "pool": "CAPACITY: far short",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 3,
+      "grammars": 1,
+      "predicate": [],
+      "branchReads": [
+        "settlement.isolationSupport",
+        "settlement.isolationSupport.applicable",
+        "settlement.isolationSupport.capacity",
+        "settlement.isolationSupport.magicDependent",
+        "settlement.isolationSupport.requiredCapacity"
+      ],
+      "fieldsRead": [
+        "settlement.isolationSupport",
+        "settlement.isolationSupport.applicable",
+        "settlement.isolationSupport.capacity",
+        "settlement.isolationSupport.magicDependent",
+        "settlement.isolationSupport.requiredCapacity"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "isolationSupportPoolKey",
+      "rung": "literal",
+      "reads": [
+        "settlement.isolationSupport",
+        "settlement.isolationSupport.applicable",
+        "settlement.isolationSupport.capacity",
+        "settlement.isolationSupport.magicDependent",
+        "settlement.isolationSupport.requiredCapacity"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "settlement.isolationSupport": "measured",
+        "settlement.isolationSupport.applicable": "measured",
+        "settlement.isolationSupport.capacity": "measured",
+        "settlement.isolationSupport.magicDependent": "measured",
+        "settlement.isolationSupport.requiredCapacity": "measured"
+      },
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "viability.isolationSupport"
+      ],
+      "attach": [],
+      "k": -2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "settlement.isolationSupport": "",
+          "settlement.isolationSupport.applicable": "",
+          "settlement.isolationSupport.capacity": "",
+          "settlement.isolationSupport.magicDependent": "",
+          "settlement.isolationSupport.requiredCapacity": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
       "undeclared": 0,
       "crisisScoped": false
     },
@@ -45925,6 +46336,30 @@
       ]
     },
     {
+      "fact": "settlement.isolationSupport.capacity",
+      "pools": [
+        "DS-DEF-12 :: CAPACITY: ample",
+        "DS-DEF-12 :: CAPACITY: enough",
+        "DS-DEF-12 :: CAPACITY: short"
+      ],
+      "variants": 9,
+      "grammars": 4,
+      "blocks": [
+        "DS-DEF-12"
+      ]
+    },
+    {
+      "fact": "settlement.isolationSupport.magicDependent",
+      "pools": [
+        "DS-DEF-12 :: MAGIC-DEPENDENT"
+      ],
+      "variants": 3,
+      "grammars": 1,
+      "blocks": [
+        "DS-DEF-12"
+      ]
+    },
+    {
       "fact": "text(label) (via FOOD_POOL_OF in generalStateProse.js)",
       "pools": [
         "DS-GEN-3 :: foodSecurity.label: Secure",
@@ -46578,7 +47013,7 @@
       {
         "field": "readings.activeChains",
         "mountsSpine": 1,
-        "mountsModifier": 20,
+        "mountsModifier": 21,
         "spineTabs": [
           "economics"
         ],
@@ -46601,6 +47036,7 @@
           "overview.systemsHealth",
           "overview.warnings",
           "relationships.network",
+          "viability.isolationSupport",
           "viability.magicDependency",
           "viability.verdict"
         ]
@@ -46608,7 +47044,7 @@
       {
         "field": "readings.ancientRuin",
         "mountsSpine": 0,
-        "mountsModifier": 30,
+        "mountsModifier": 31,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -46639,6 +47075,7 @@
           "overview.systemsHealth",
           "overview.warnings",
           "relationships.network",
+          "viability.isolationSupport",
           "viability.magicDependency",
           "viability.verdict"
         ]
@@ -46668,7 +47105,7 @@
       {
         "field": "readings.clockIds",
         "mountsSpine": 0,
-        "mountsModifier": 30,
+        "mountsModifier": 31,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -46699,6 +47136,7 @@
           "overview.systemsHealth",
           "overview.warnings",
           "relationships.network",
+          "viability.isolationSupport",
           "viability.magicDependency",
           "viability.verdict"
         ]
@@ -46706,7 +47144,7 @@
       {
         "field": "readings.coherenceNotes",
         "mountsSpine": 0,
-        "mountsModifier": 30,
+        "mountsModifier": 31,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -46737,6 +47175,7 @@
           "overview.systemsHealth",
           "overview.warnings",
           "relationships.network",
+          "viability.isolationSupport",
           "viability.magicDependency",
           "viability.verdict"
         ]
@@ -46766,7 +47205,7 @@
       {
         "field": "readings.conflicts",
         "mountsSpine": 0,
-        "mountsModifier": 30,
+        "mountsModifier": 31,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -46797,6 +47236,7 @@
           "overview.systemsHealth",
           "overview.warnings",
           "relationships.network",
+          "viability.isolationSupport",
           "viability.magicDependency",
           "viability.verdict"
         ]
@@ -46857,7 +47297,7 @@
       {
         "field": "readings.crossEngagements",
         "mountsSpine": 0,
-        "mountsModifier": 30,
+        "mountsModifier": 31,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -46888,6 +47328,7 @@
           "overview.systemsHealth",
           "overview.warnings",
           "relationships.network",
+          "viability.isolationSupport",
           "viability.magicDependency",
           "viability.verdict"
         ]
@@ -46895,7 +47336,7 @@
       {
         "field": "readings.exploitation",
         "mountsSpine": 1,
-        "mountsModifier": 20,
+        "mountsModifier": 21,
         "spineTabs": [
           "economics"
         ],
@@ -46918,6 +47359,7 @@
           "overview.systemsHealth",
           "overview.warnings",
           "relationships.network",
+          "viability.isolationSupport",
           "viability.magicDependency",
           "viability.verdict"
         ]
@@ -46964,7 +47406,7 @@
       {
         "field": "readings.foodBalance",
         "mountsSpine": 0,
-        "mountsModifier": 32,
+        "mountsModifier": 33,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -46997,6 +47439,7 @@
           "relationships.network",
           "resources.groundAndWorkings",
           "services.catalogStanding",
+          "viability.isolationSupport",
           "viability.magicDependency",
           "viability.verdict"
         ]
@@ -47004,7 +47447,7 @@
       {
         "field": "readings.foodSecurityLabel",
         "mountsSpine": 0,
-        "mountsModifier": 30,
+        "mountsModifier": 31,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -47035,6 +47478,7 @@
           "overview.systemsHealth",
           "overview.warnings",
           "relationships.network",
+          "viability.isolationSupport",
           "viability.magicDependency",
           "viability.verdict"
         ]
@@ -47042,7 +47486,7 @@
       {
         "field": "readings.govFaction",
         "mountsSpine": 0,
-        "mountsModifier": 30,
+        "mountsModifier": 31,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -47073,6 +47517,7 @@
           "overview.systemsHealth",
           "overview.warnings",
           "relationships.network",
+          "viability.isolationSupport",
           "viability.magicDependency",
           "viability.verdict"
         ]
@@ -47080,7 +47525,7 @@
       {
         "field": "readings.governingName",
         "mountsSpine": 0,
-        "mountsModifier": 30,
+        "mountsModifier": 31,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -47111,6 +47556,7 @@
           "overview.systemsHealth",
           "overview.warnings",
           "relationships.network",
+          "viability.isolationSupport",
           "viability.magicDependency",
           "viability.verdict"
         ]
@@ -47153,7 +47599,7 @@
       {
         "field": "readings.history",
         "mountsSpine": 0,
-        "mountsModifier": 30,
+        "mountsModifier": 31,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -47184,6 +47630,7 @@
           "overview.systemsHealth",
           "overview.warnings",
           "relationships.network",
+          "viability.isolationSupport",
           "viability.magicDependency",
           "viability.verdict"
         ]
@@ -47191,7 +47638,7 @@
       {
         "field": "readings.hookCategories",
         "mountsSpine": 0,
-        "mountsModifier": 30,
+        "mountsModifier": 31,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -47222,6 +47669,7 @@
           "overview.systemsHealth",
           "overview.warnings",
           "relationships.network",
+          "viability.isolationSupport",
           "viability.magicDependency",
           "viability.verdict"
         ]
@@ -47250,7 +47698,7 @@
       {
         "field": "readings.inst",
         "mountsSpine": 1,
-        "mountsModifier": 16,
+        "mountsModifier": 17,
         "spineTabs": [
           "overview"
         ],
@@ -47269,6 +47717,7 @@
           "history.identity",
           "history.record",
           "relationships.network",
+          "viability.isolationSupport",
           "viability.magicDependency",
           "viability.verdict"
         ]
@@ -47276,7 +47725,7 @@
       {
         "field": "readings.isEntrepot",
         "mountsSpine": 2,
-        "mountsModifier": 6,
+        "mountsModifier": 7,
         "spineTabs": [
           "economics",
           "overview"
@@ -47286,6 +47735,7 @@
           "history.identity",
           "history.record",
           "relationships.network",
+          "viability.isolationSupport",
           "viability.magicDependency",
           "viability.verdict"
         ]
@@ -47293,7 +47743,7 @@
       {
         "field": "readings.lifecycleStatus",
         "mountsSpine": 0,
-        "mountsModifier": 30,
+        "mountsModifier": 31,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -47324,6 +47774,7 @@
           "overview.systemsHealth",
           "overview.warnings",
           "relationships.network",
+          "viability.isolationSupport",
           "viability.magicDependency",
           "viability.verdict"
         ]
@@ -47331,7 +47782,7 @@
       {
         "field": "readings.neighbours",
         "mountsSpine": 0,
-        "mountsModifier": 30,
+        "mountsModifier": 31,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -47362,6 +47813,7 @@
           "overview.systemsHealth",
           "overview.warnings",
           "relationships.network",
+          "viability.isolationSupport",
           "viability.magicDependency",
           "viability.verdict"
         ]
@@ -47420,7 +47872,7 @@
       {
         "field": "readings.populationTrend",
         "mountsSpine": 1,
-        "mountsModifier": 16,
+        "mountsModifier": 17,
         "spineTabs": [
           "overview"
         ],
@@ -47439,6 +47891,7 @@
           "history.identity",
           "history.record",
           "relationships.network",
+          "viability.isolationSupport",
           "viability.magicDependency",
           "viability.verdict"
         ]
@@ -47446,7 +47899,7 @@
       {
         "field": "readings.primaryImports",
         "mountsSpine": 1,
-        "mountsModifier": 20,
+        "mountsModifier": 21,
         "spineTabs": [
           "economics"
         ],
@@ -47469,6 +47922,7 @@
           "overview.systemsHealth",
           "overview.warnings",
           "relationships.network",
+          "viability.isolationSupport",
           "viability.magicDependency",
           "viability.verdict"
         ]
@@ -47485,7 +47939,7 @@
       {
         "field": "readings.prominentRelationship",
         "mountsSpine": 1,
-        "mountsModifier": 16,
+        "mountsModifier": 17,
         "spineTabs": [
           "overview"
         ],
@@ -47504,6 +47958,7 @@
           "history.identity",
           "history.record",
           "relationships.network",
+          "viability.isolationSupport",
           "viability.magicDependency",
           "viability.verdict"
         ]
@@ -47511,7 +47966,7 @@
       {
         "field": "readings.prosperity",
         "mountsSpine": 0,
-        "mountsModifier": 30,
+        "mountsModifier": 31,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -47542,6 +47997,7 @@
           "overview.systemsHealth",
           "overview.warnings",
           "relationships.network",
+          "viability.isolationSupport",
           "viability.magicDependency",
           "viability.verdict"
         ]
@@ -47549,7 +48005,7 @@
       {
         "field": "readings.readinessLabel",
         "mountsSpine": 0,
-        "mountsModifier": 30,
+        "mountsModifier": 31,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -47580,6 +48036,7 @@
           "overview.systemsHealth",
           "overview.warnings",
           "relationships.network",
+          "viability.isolationSupport",
           "viability.magicDependency",
           "viability.verdict"
         ]
@@ -47625,7 +48082,7 @@
       {
         "field": "readings.relationships",
         "mountsSpine": 1,
-        "mountsModifier": 16,
+        "mountsModifier": 17,
         "spineTabs": [
           "overview"
         ],
@@ -47644,6 +48101,7 @@
           "history.identity",
           "history.record",
           "relationships.network",
+          "viability.isolationSupport",
           "viability.magicDependency",
           "viability.verdict"
         ]
@@ -47666,7 +48124,7 @@
       {
         "field": "readings.safetyLabel",
         "mountsSpine": 0,
-        "mountsModifier": 30,
+        "mountsModifier": 31,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -47697,6 +48155,7 @@
           "overview.systemsHealth",
           "overview.warnings",
           "relationships.network",
+          "viability.isolationSupport",
           "viability.magicDependency",
           "viability.verdict"
         ]
@@ -47704,7 +48163,7 @@
       {
         "field": "readings.scores",
         "mountsSpine": 0,
-        "mountsModifier": 30,
+        "mountsModifier": 31,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -47735,6 +48194,7 @@
           "overview.systemsHealth",
           "overview.warnings",
           "relationships.network",
+          "viability.isolationSupport",
           "viability.magicDependency",
           "viability.verdict"
         ]
@@ -47757,7 +48217,7 @@
       {
         "field": "readings.steadings",
         "mountsSpine": 0,
-        "mountsModifier": 30,
+        "mountsModifier": 31,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -47788,6 +48248,7 @@
           "overview.systemsHealth",
           "overview.warnings",
           "relationships.network",
+          "viability.isolationSupport",
           "viability.magicDependency",
           "viability.verdict"
         ]
@@ -47810,7 +48271,7 @@
       {
         "field": "readings.structuralSuggestions",
         "mountsSpine": 1,
-        "mountsModifier": 16,
+        "mountsModifier": 17,
         "spineTabs": [
           "overview"
         ],
@@ -47829,6 +48290,7 @@
           "history.identity",
           "history.record",
           "relationships.network",
+          "viability.isolationSupport",
           "viability.magicDependency",
           "viability.verdict"
         ]
@@ -47836,7 +48298,7 @@
       {
         "field": "readings.structuralViolations",
         "mountsSpine": 1,
-        "mountsModifier": 16,
+        "mountsModifier": 17,
         "spineTabs": [
           "overview"
         ],
@@ -47855,6 +48317,7 @@
           "history.identity",
           "history.record",
           "relationships.network",
+          "viability.isolationSupport",
           "viability.magicDependency",
           "viability.verdict"
         ]
@@ -47862,7 +48325,7 @@
       {
         "field": "readings.terrainType",
         "mountsSpine": 0,
-        "mountsModifier": 30,
+        "mountsModifier": 31,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -47893,6 +48356,7 @@
           "overview.systemsHealth",
           "overview.warnings",
           "relationships.network",
+          "viability.isolationSupport",
           "viability.magicDependency",
           "viability.verdict"
         ]
@@ -47900,7 +48364,7 @@
       {
         "field": "readings.tier",
         "mountsSpine": 1,
-        "mountsModifier": 16,
+        "mountsModifier": 17,
         "spineTabs": [
           "overview"
         ],
@@ -47919,6 +48383,7 @@
           "history.identity",
           "history.record",
           "relationships.network",
+          "viability.isolationSupport",
           "viability.magicDependency",
           "viability.verdict"
         ]
@@ -47926,7 +48391,7 @@
       {
         "field": "readings.tradeRouteAccess",
         "mountsSpine": 2,
-        "mountsModifier": 16,
+        "mountsModifier": 17,
         "spineTabs": [
           "overview"
         ],
@@ -47945,6 +48410,7 @@
           "history.identity",
           "history.record",
           "relationships.network",
+          "viability.isolationSupport",
           "viability.magicDependency",
           "viability.verdict"
         ]
@@ -48060,7 +48526,7 @@
       {
         "field": "settlement.config",
         "mountsSpine": 1,
-        "mountsModifier": 14,
+        "mountsModifier": 15,
         "spineTabs": [
           "defense"
         ],
@@ -48077,6 +48543,7 @@
           "economics.tradeFlow",
           "resources.groundAndWorkings",
           "services.catalogStanding",
+          "viability.isolationSupport",
           "viability.magicDependency",
           "viability.verdict"
         ]
@@ -48084,11 +48551,12 @@
       {
         "field": "settlement.defenseProfile",
         "mountsSpine": 2,
-        "mountsModifier": 2,
+        "mountsModifier": 3,
         "spineTabs": [
           "defense"
         ],
         "modifierMounts": [
+          "viability.isolationSupport",
           "viability.magicDependency",
           "viability.verdict"
         ]
@@ -48126,7 +48594,7 @@
       {
         "field": "settlement.economicViability",
         "mountsSpine": 1,
-        "mountsModifier": 14,
+        "mountsModifier": 15,
         "spineTabs": [
           "defense"
         ],
@@ -48143,14 +48611,33 @@
           "economics.tradeFlow",
           "resources.groundAndWorkings",
           "services.catalogStanding",
+          "viability.isolationSupport",
           "viability.magicDependency",
           "viability.verdict"
         ]
       },
       {
+        "field": "settlement.isolationSupport",
+        "mountsSpine": 1,
+        "mountsModifier": 8,
+        "spineTabs": [
+          "viability"
+        ],
+        "modifierMounts": [
+          "defense.armedForces",
+          "defense.criminalStructure",
+          "defense.militaryStatus",
+          "defense.postureHeader",
+          "defense.publicOrder",
+          "defense.supportingCapabilities",
+          "defense.threatAssessment",
+          "defense.wallRationale"
+        ]
+      },
+      {
         "field": "settlement.name",
         "mountsSpine": 0,
-        "mountsModifier": 54,
+        "mountsModifier": 55,
         "spineTabs": [],
         "modifierMounts": [
           "defense.armedForces",
@@ -48202,6 +48689,7 @@
           "relationships.network",
           "resources.groundAndWorkings",
           "services.catalogStanding",
+          "viability.isolationSupport",
           "viability.magicDependency",
           "viability.verdict",
           "war.dormantNote",
@@ -48212,7 +48700,7 @@
       {
         "field": "settlement.powerStructure",
         "mountsSpine": 0,
-        "mountsModifier": 17,
+        "mountsModifier": 18,
         "spineTabs": [],
         "modifierMounts": [
           "defense.armedForces",
@@ -48230,6 +48718,7 @@
           "power.rulingStructure",
           "power.stabilityHeader",
           "power.succession",
+          "viability.isolationSupport",
           "viability.magicDependency",
           "viability.verdict"
         ]
@@ -48237,7 +48726,7 @@
       {
         "field": "settlement.resourceAnalysis",
         "mountsSpine": 0,
-        "mountsModifier": 22,
+        "mountsModifier": 23,
         "spineTabs": [],
         "modifierMounts": [
           "defense.armedForces",
@@ -48260,6 +48749,7 @@
           "economics.tradeFlow",
           "resources.groundAndWorkings",
           "services.catalogStanding",
+          "viability.isolationSupport",
           "viability.magicDependency",
           "viability.verdict"
         ]
@@ -48267,7 +48757,7 @@
       {
         "field": "settlement.stress",
         "mountsSpine": 0,
-        "mountsModifier": 10,
+        "mountsModifier": 11,
         "spineTabs": [],
         "modifierMounts": [
           "defense.armedForces",
@@ -48278,6 +48768,7 @@
           "defense.supportingCapabilities",
           "defense.threatAssessment",
           "defense.wallRationale",
+          "viability.isolationSupport",
           "viability.magicDependency",
           "viability.verdict"
         ]
@@ -48285,7 +48776,7 @@
       {
         "field": "settlement.tier",
         "mountsSpine": 1,
-        "mountsModifier": 14,
+        "mountsModifier": 15,
         "spineTabs": [
           "defense"
         ],
@@ -48302,6 +48793,7 @@
           "economics.tradeFlow",
           "resources.groundAndWorkings",
           "services.catalogStanding",
+          "viability.isolationSupport",
           "viability.magicDependency",
           "viability.verdict"
         ]
@@ -48520,7 +49012,7 @@
       ],
       [
         "defense",
-        4
+        5
       ]
     ],
     "notExecutable": []
@@ -48546,6 +49038,13 @@
       "facts": 4,
       "spinesReachedBp": 10000,
       "meanReachBp": 4000
+    },
+    {
+      "block": "DS-DEF-12",
+      "spines": 5,
+      "facts": 5,
+      "spinesReachedBp": 2000,
+      "meanReachBp": 800
     },
     {
       "block": "DS-DEF-2",
@@ -49012,6 +49511,39 @@
             "WALLED-THREATENED",
             "WALLED-QUIET",
             "WALLED-STRAINED"
+          ]
+        }
+      ]
+    },
+    {
+      "block": "DS-DEF-12",
+      "spines": 5,
+      "facts": 5,
+      "spinesReachedBp": 2000,
+      "meanReachBp": 800,
+      "byFact": [
+        {
+          "field": "settlement.isolationSupport",
+          "attach": []
+        },
+        {
+          "field": "settlement.isolationSupport.applicable",
+          "attach": []
+        },
+        {
+          "field": "settlement.isolationSupport.capacity",
+          "attach": [
+            "MAGIC-DEPENDENT"
+          ]
+        },
+        {
+          "field": "settlement.isolationSupport.magicDependent",
+          "attach": []
+        },
+        {
+          "field": "settlement.isolationSupport.requiredCapacity",
+          "attach": [
+            "MAGIC-DEPENDENT"
           ]
         }
       ]
@@ -51578,8 +52110,8 @@
     }
   ],
   "factBudget": {
-    "zeroK": 61,
-    "executable": 356,
+    "zeroK": 66,
+    "executable": 361,
     "notExecutable": 368,
     "byBlock": [
       [
@@ -51601,6 +52133,13 @@
         {
           "zeroK": 7,
           "spines": 7
+        }
+      ],
+      [
+        "DS-DEF-12",
+        {
+          "zeroK": 5,
+          "spines": 5
         }
       ],
       [
@@ -51956,7 +52495,7 @@
       ],
       [
         -2,
-        12
+        16
       ],
       [
         -1,
@@ -51964,7 +52503,7 @@
       ],
       [
         0,
-        31
+        32
       ],
       [
         1,
@@ -51978,8 +52517,8 @@
   },
   "grains": {
     "branch": {
-      "zeroK": 61,
-      "executable": 356,
+      "zeroK": 66,
+      "executable": 361,
       "notExecutable": 368,
       "histogram": [
         [
@@ -52004,7 +52543,7 @@
         ],
         [
           -2,
-          12
+          16
         ],
         [
           -1,
@@ -52012,7 +52551,7 @@
         ],
         [
           0,
-          31
+          32
         ],
         [
           1,
@@ -52023,7 +52562,7 @@
           210
         ]
       ],
-      "blocksWithSpine": 50,
+      "blocksWithSpine": 51,
       "cannotAttach": [
         "DS-DEF-6",
         "DS-ECO-1",
@@ -52047,7 +52586,7 @@
         "DS-STR-1",
         "DS-WAR-3"
       ],
-      "readPaths": 629,
+      "readPaths": 652,
       "modifierEligibleFactsByTab": [
         [
           "economics",
@@ -52099,13 +52638,13 @@
         ],
         [
           "defense",
-          4
+          5
         ]
       ]
     },
     "function": {
-      "zeroK": 139,
-      "executable": 356,
+      "zeroK": 144,
+      "executable": 361,
       "notExecutable": 368,
       "histogram": [
         [
@@ -52122,7 +52661,7 @@
         ],
         [
           -2,
-          13
+          18
         ],
         [
           -1,
@@ -52141,9 +52680,10 @@
           130
         ]
       ],
-      "blocksWithSpine": 50,
+      "blocksWithSpine": 51,
       "cannotAttach": [
         "DS-DEF-11",
+        "DS-DEF-12",
         "DS-DEF-6",
         "DS-ECO-1",
         "DS-ECO-10",
@@ -52168,7 +52708,7 @@
         "DS-STR-1",
         "DS-WAR-3"
       ],
-      "readPaths": 892,
+      "readPaths": 917,
       "modifierEligibleFactsByTab": [
         [
           "economics",
@@ -52215,12 +52755,12 @@
           6
         ],
         [
-          "war",
+          "defense",
           5
         ],
         [
-          "defense",
-          4
+          "war",
+          5
         ]
       ]
     }
@@ -52549,12 +53089,12 @@
       "rows": {
         "LICENSED": 118,
         "OFFICE": 3,
-        "SOURCE-UNRESOLVED": 603
+        "SOURCE-UNRESOLVED": 608
       },
       "fields": {
         "LICENSED": 198,
         "OFFICE": 5,
-        "SOURCE-UNRESOLVED": 486
+        "SOURCE-UNRESOLVED": 509
       },
       "byKind": [
         [
@@ -52599,7 +53139,7 @@
         ]
       ],
       "unresolvedGrounds": {
-        "no-mapping": 486,
+        "no-mapping": 509,
         "no-institution-in-roster": 0
       },
       "twoSourceRows": 10,
@@ -53958,8 +54498,8 @@
       "leafBoth": 0,
       "leafEither": 2,
       "leafRows": [],
-      "deskRoots": 93,
-      "deskSegments": 216
+      "deskRoots": 94,
+      "deskSegments": 221
     }
   },
   "ratifiedAliases": {
@@ -55943,6 +56483,54 @@
       "fields": [],
       "readingFunction": "(unresolved)",
       "count": "3 variant(s) · 2 grammar(s) · slots {band, settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-DEF-12",
+      "subject": "MAGIC-DEPENDENT",
+      "fields": [
+        "settlement.isolationSupport.magicDependent"
+      ],
+      "readingFunction": "isolationSupportPoolKey",
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-DEF-12",
+      "subject": "CAPACITY: ample",
+      "fields": [
+        "settlement.isolationSupport.capacity"
+      ],
+      "readingFunction": "isolationSupportPoolKey",
+      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-DEF-12",
+      "subject": "CAPACITY: enough",
+      "fields": [
+        "settlement.isolationSupport.capacity"
+      ],
+      "readingFunction": "isolationSupportPoolKey",
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-DEF-12",
+      "subject": "CAPACITY: short",
+      "fields": [
+        "settlement.isolationSupport.capacity"
+      ],
+      "readingFunction": "isolationSupportPoolKey",
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-DEF-12",
+      "subject": "CAPACITY: far short",
+      "fields": [],
+      "readingFunction": "isolationSupportPoolKey",
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "COVERED",

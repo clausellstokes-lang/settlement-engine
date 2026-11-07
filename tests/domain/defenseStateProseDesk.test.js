@@ -31,6 +31,7 @@ import {
   navalDefensePoolKey, supplyLogisticsPoolKey,
   DEF7_DARK_POOLS, DEF10_DARK_POOLS, DEF10_FACT_SPOKEN_AT,
   defenseMagicDependencyProse, hasNamedMagicChain, magicDependencyPoolKey, magicFlagPoolKey, withSaid,
+  defenseIsolationSupportProse, isolationSupportPoolKey,
   namedMagicChainGood,
 } from '../../src/domain/display/stateProse/defenseStateProse.js';
 import {
@@ -2032,12 +2033,17 @@ describe('the defense desk\'s paid-surface gate — every caller, found by impor
     const importers = walk(resolve(SRC, 'components')).filter(
       (path) => readFileSync(path, 'utf8').includes('stateProse/defenseStateProse.js'),
     );
-    // Two callers today, and the count is asserted so a THIRD arrives as a red rather than
-    // as a silent third place to forget the gate.
+    // Three callers today, and the count is asserted so a FOURTH arrives as a red rather than
+    // as a silent fourth place to forget the gate.
     expect(importers.map((p) => p.replace(`${SRC}/`, '')).sort())
       // DS-DEF-9's screen caller moved ViabilityTab -> MagicTab with the dependence block
       // (UX consolidation 2026-10-30, RULINGS-T2 T2-15); still two callers, still gated.
-      .toEqual(['components/new/tabs/DefenseTab.jsx', 'components/new/tabs/MagicTab.jsx']);
+      // A THIRD caller, by design (W2 DEF third seat, 2026-11-07): ViabilityTab draws DS-DEF-12, the
+      // isolation-support finding, at `viability.isolationSupport`, gated like the other two.
+      .toEqual([
+        'components/new/tabs/DefenseTab.jsx', 'components/new/tabs/MagicTab.jsx',
+        'components/new/tabs/ViabilityTab.jsx',
+      ]);
     for (const path of importers) {
       const code = codeOnly(readFileSync(path, 'utf8'));
       // Every call into the desk must have a publicDossier read within the same expression.
@@ -2063,5 +2069,49 @@ describe('the defense desk\'s paid-surface gate — every caller, found by impor
     expect(at, 'the fixture no longer contains the call the slice is taken around').toBeGreaterThan(-1);
     // anchored: `at` is pinned to a real offset on the line above, so the slice is non-empty
     expect(ungated.slice(Math.max(0, at - 400), at)).not.toContain('publicDossier');
+  });
+});
+
+describe('DS-DEF-12 · supply in isolation (W2 DEF construction C3–C5, 2026-11-07)', () => {
+  const support = (over) => ({
+    applicable: true, magicDependent: false, capacity: 40, requiredCapacity: 38, status: 'viable', ...over,
+  });
+
+  it('the key walks the generator\'s own capacity steps, and the magic reading takes precedence', () => {
+    expect(isolationSupportPoolKey(support({ capacity: 53 }))).toBe('CAPACITY: ample');
+    expect(isolationSupportPoolKey(support({ capacity: 52 }))).toBe('CAPACITY: enough');
+    expect(isolationSupportPoolKey(support({ capacity: 38 }))).toBe('CAPACITY: enough');
+    expect(isolationSupportPoolKey(support({ capacity: 37 }))).toBe('CAPACITY: short');
+    expect(isolationSupportPoolKey(support({ capacity: 23 }))).toBe('CAPACITY: short');
+    expect(isolationSupportPoolKey(support({ capacity: 22 }))).toBe('CAPACITY: far short');
+    expect(isolationSupportPoolKey(support({ magicDependent: true, capacity: 60 }))).toBe('MAGIC-DEPENDENT');
+    // Every key the function can return is a pool the corpus carries.
+    for (const key of ['CAPACITY: ample', 'CAPACITY: enough', 'CAPACITY: short', 'CAPACITY: far short', 'MAGIC-DEPENDENT']) {
+      expect(DOSSIER_STATE_PROSE_DEFENSE['DS-DEF-12'].pools[key], key).toBeTruthy();
+    }
+  });
+
+  it('is silent where the finding does not apply, and on a record it cannot read', () => {
+    // The positive first, so the silences below are the key discriminating, not a dead key.
+    expect(isolationSupportPoolKey(support({}))).toBe('CAPACITY: enough');
+    expect(isolationSupportPoolKey(support({ applicable: false, status: 'connected' }))).toBeNull();
+    expect(isolationSupportPoolKey(null)).toBeNull();
+    expect(isolationSupportPoolKey(support({ capacity: '40' }))).toBeNull();
+    expect(defenseIsolationSupportProse({ name: 'Harrowmere', isolationSupport: support({ applicable: false }) }).isolationSupply).toBeNull();
+  });
+
+  it('draws one sentence for an isolated town, naming the town, at the viability mount', () => {
+    const rung = defenseIsolationSupportProse(
+      { name: 'Harrowmere', isolationSupport: support({ capacity: 10 }) },
+      { seed: 'w2-def-12', audience: 'dm' },
+    ).isolationSupply;
+    expect(rung?.sentence).toMatch(/Harrowmere/);
+    expect(rung?.provenance?.blockId).toBe('DS-DEF-12');
+    expect(rung?.provenance?.poolKey).toBe('CAPACITY: far short');
+    expect(sentenceMountForBlock('DS-DEF-12')?.mount).toBe('viability.isolationSupport');
+    // ⛔ The support model is not the food record: no line of the block speaks of hunger.
+    for (const pool of Object.values(DOSSIER_STATE_PROSE_DEFENSE['DS-DEF-12'].pools)) {
+      for (const v of pool) expect(v.text, v.text).not.toMatch(/\bhung(?:er|ry)\b|\bstarv/i);
+    }
   });
 });

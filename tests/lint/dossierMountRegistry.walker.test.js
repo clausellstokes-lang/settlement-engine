@@ -384,7 +384,9 @@ describe('C2 mount registry — the guards can see the defects they guard', () =
     expect(TAB_VOCABULARY.has('economy'), 'the desk name is not a tab id').toBe(false);
     expect(DESK_VOCABULARY.has('economy'), 'the desk name is a desk').toBe(true);
     // The corpus join is populated, or every totality claim below is free.
-    expect(CORPUS_BLOCKS.length, 'the corpus join emptied').toBe(68);
+    // 68 -> 69 (W2 DEF third seat, 2026-11-07): DS-DEF-12, the isolation-support block, mounted at
+    // `viability.isolationSupport`.
+    expect(CORPUS_BLOCKS.length, 'the corpus join emptied').toBe(69);
     // ['severity'] -> ['severity', 'walls'] at census-2b item 2 (db3ed88c1): three DS-GEN-1 lines declare walls.
     expect(blockDimensions('DS-GEN-1')).toEqual(['severity', 'walls']);
     expect(blockDimensions('DS-GEN-6')).toEqual(['deficit']);

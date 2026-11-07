@@ -315,9 +315,9 @@ describe('the corpus loaders — fail-closed, and counted against the probe', ()
     // c00b30eb6 +4); the causal leaf and the 787 pools unchanged. 2810 -> 2811 at
     // LANDING-R2 helper G (the chair's §934.105 ruling (1): DS-GEN-17 PROVISIONED v3, the hospital-only line) +1.
     // 2811 -> 2812 at LANDING-R2 helper G2 (the chair's 06:5x DS-CND-1 boom line (ODQ §934.105, ruling (2)): ARCHETYPE: boom v4 `[street · crisis: any]`) +1.
-    expect(leaves.length + causal.length).toBe(2812);
-    expect(new Set([...leaves, ...causal].map((e) => e.poolId)).size).toBe(787);
-    expect(new Set(leaves.map((e) => e.block)).size).toBe(68);
+    expect(leaves.length + causal.length).toBe(2859); // 2812 -> 2859 over the W2 DEF lane (2026-11-07): the 47 lines it added (FLAG 4, DS-DEF-4 FIXTURE 8, DS-DEF-5 FIXTURE 8, ARCANE 12, DS-DEF-12 15)
+    expect(new Set([...leaves, ...causal].map((e) => e.poolId)).size).toBe(807); // 787 -> 807 over the W2 DEF lane (2026-11-07): the twenty pools it added (FLAG 2, DS-DEF-4 FIXTURE 4, DS-DEF-5 FIXTURE 3, ARCANE 6, DS-DEF-12 5)
+    expect(new Set(leaves.map((e) => e.block)).size).toBe(69); // W2 DEF C3–C5 (DS-DEF-12, 2026-11-07): 68 -> 69
     expect(crier.length).toBeGreaterThan(300);
     expect(generator.length).toBeGreaterThan(0);
   });
@@ -331,13 +331,15 @@ describe('the corpus loaders — fail-closed, and counted against the probe', ()
     // (6dd3f9766, the {colour} rulings) +21 rows whose text now joins its twin. 0 unjoined.
     // 2121 -> 2122 at LANDING-R2 helper G (the chair's §934.105 ruling (1): DS-GEN-17 PROVISIONED v3, the hospital-only line) +1.
     // 2122 -> 2123 at LANDING-R2 helper G2 (the chair's 06:5x DS-CND-1 boom line (ODQ §934.105, ruling (2)): ARCHETYPE: boom v4 `[street · crisis: any]`) +1.
-    expect(joined.length).toBe(2123);
+    // 2123 -> 2170 over the W2 DEF lane (2026-11-07): every line the lane added joins its twin — DS-DEF-9 FLAG 4, DS-DEF-4
+    // FIXTURE 8, DS-DEF-5 FIXTURE 8, ARCANE 12, DS-DEF-12 15 = 47. (The lane's first two seats did not re-key this pin.)
+    expect(joined.length).toBe(2170);
     expect(unjoined).toEqual([]);
     // The compact-row grammar (a whole pool on one bullet line, 225 variants) carries no
     // per-row address, so not every leaf variant has an annex line. That gap is the ADDRESS
     // reader's, is declared, and is why the pool grammar stays with the projection.
     expect(leafLines.size).toBeLessThan(leaves.length);
-    expect(leafLines.size).toBe(2123); // 2121 -> 2122 at the same cause: the new line is addressed; 2122 -> 2123 at G2's boom v4, likewise
+    expect(leafLines.size).toBe(2170); // 2123 -> 2170 over the W2 DEF lane, the same 47 lines addressed // 2121 -> 2122 at the same cause: the new line is addressed; 2122 -> 2123 at G2's boom v4, likewise
   });
 });
 
@@ -423,8 +425,10 @@ describe('THE ANTI-VACUITY GUARD — the walker must fail on the corpus it ships
       // 5298 -> 5325, re-addressed by its text ("the same trades exempt"): the census lanes' annex
       // edits above it moved the row 27 lines (it now carries its census tag slot too). 5325 -> 5326
       // at LANDING-R2 helper G2 (the chair's 06:5x DS-CND-1 boom line (ODQ §934.105, ruling (2)): ARCHETYPE: boom v4 `[street · crisis: any]`): the boom line sits above it.
-      .find((row) => row.line === 5326);
-    expect(annexRow, 'RECEIPT_POOLS_DOSSIER_STATE.md:5326 did not load').toBeTruthy();
+      // 5326 -> 5458 over the W2 DEF lane (2026-11-07): the lane's new pools and their notes sit above it (DS-DEF-4, -5, -9
+      // and the new DS-DEF-12 block); re-addressed by the same text.
+      .find((row) => row.line === 5458);
+    expect(annexRow, 'RECEIPT_POOLS_DOSSIER_STATE.md:5458 did not load').toBeTruthy();
     expect(walkEntry(annexRow, withEntryContext(base, {})).fails.map((f) => f.arm))
       .toContain('exemption on a null column');
   });
@@ -673,7 +677,7 @@ describe('THE ANTI-VACUITY GUARD — the walker must fail on the corpus it ships
     // chair's ruling of 2026-11-04; the owner's veto point). Report-only, still a minority.
     // 336 -> 341, measured per commit on the leaves: F12 unit 2 (e19e3e4cf) +3, census-5b unit 3
     // (c00b30eb6, R-L twins) +2. Report-only, still a minority.
-    expect(carrying.length, 'entries carrying the trailing-coordinate class, at this tip').toBe(341);
+    expect(carrying.length, 'entries carrying the trailing-coordinate class, at this tip').toBe(346); // 341 -> 346 over the W2 DEF lane (2026-11-07), measured on the leaves: +3 at the second seat's tip (the DS-DEF-4/5 rewrites and FIXTURE: gates v2), +2 at DS-DEF-12 (CAPACITY: enough v3, MAGIC-DEPENDENT v1). Report-only, still a minority.
     expect(carrying.length, 'and it is a minority of the 2,266 R1 variants').toBeLessThan(leaves.length / 2);
     console.log(`  Q · trailing coordinate: ${carrying.length} of ${leaves.length} R1 entries carry the class`);
   });

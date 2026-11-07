@@ -2692,7 +2692,7 @@ supplies the ancestry.
 
 **`Internal Security`: full legal chain (court AND prison)**
 1. `[ledger · colour]` {settlement} can arrest, try and hold, and having all three means the town's law is a process rather than a threat.
-2. `[street]` A thing done wrong at {settlement} goes somewhere and takes time, and the town has come to rely on that rather than on the watch's temper.
+2. `[street · watch]` A thing done wrong at {settlement} goes somewhere and takes time, and the town has come to rely on that rather than on the watch's temper.
 3. `[visitor · colour]` A stranger who brings a complaint at {settlement} is given a procedure rather than a favour, and the procedure runs.
 
 **`Internal Security`: court without detention** {colour}
@@ -2799,12 +2799,12 @@ reading rather than a settled one.
 4. `[threshold · watch]` The balance at {settlement} sits where either side could take it. A thinner watch or a bolder operator would show up in the returns within the season, and nothing else would need to change.
 
 **`Unsafe`**
-1. `[street]` Crime at {settlement} is outrunning the watch. It is not chaos; it is that the people doing it have stopped expecting to be caught.
+1. `[street · watch]` Crime at {settlement} is outrunning the watch. It is not chaos; it is that the people doing it have stopped expecting to be caught.
 2. `[ledger · colour]` What criminal work is being done at {settlement} measurably exceeds what is being answered, and the gap is legible in the returns rather than merely felt.
 3. `[unfolding · watch]` The balance at {settlement} has tipped and is still tipping. Each season the watch answers a smaller share of what happens.
 
 **`Dangerous`**
-1. `[street]` The watch at {settlement} has been overwhelmed. What happens in this town is decided by whoever is present when it happens.
+1. `[street · watch]` The watch at {settlement} has been overwhelmed. What happens in this town is decided by whoever is present when it happens.
 2. `[ledger · colour]` Organized interests at {settlement} now outweigh enforcement outright; there is no part of the town's order that does not run through somebody's permission.
 3. `[visitor · colour]` A stranger at {settlement} is not warned about particular streets, because the warning would have to cover all of them.
 
@@ -2897,19 +2897,19 @@ getInstitutionNames` writes); the fixture pools never print alone. One fixture p
 order: the black market, the thieves' guild, the smuggling network, the gangs (`street gang`,
 `multiple criminal factions`, `front business`). Description position: plain lines.
 
-**FIXTURE: black market**
+**FIXTURE: black market** {colour}
 1. `[ledger]` Nothing sold at {settlement}'s black market reaches the toll book, so the town loses the dues on every load of contraband and stolen goods.
 2. `[street]` Anyone at {settlement} who knows whom to ask can buy contraband or stolen goods at the black market.
 
-**FIXTURE: thieves' guild**
+**FIXTURE: thieves' guild** {colour}
 1. `[ledger]` Few thefts at {settlement} are ever written into the town's books: a thieves' guild settles them first, and the losses go uncounted.
 2. `[street]` The thieves at {settlement} answer to a guild, and the guild decides who works which streets.
 
-**FIXTURE: smuggling**
+**FIXTURE: smuggling** {colour}
 1. `[ledger]` Goods moved by smuggling never pass through {settlement}'s toll book, and every load that slips past is a due the town does not collect.
 2. `[street]` A smuggling network runs through {settlement}, and some of what is sold in the town never paid a toll.
 
-**FIXTURE: gangs**
+**FIXTURE: gangs** {colour}
 1. `[street]` Criminal gangs at {settlement} keep a footing in the town, through the streets they hold or the businesses they front.
 2. `[ledger]` Whatever {settlement}'s gangs take in never appears on the tax lists, and the town is poorer by what they collect.
 
@@ -2999,17 +2999,17 @@ contracted forces PRESENT` or, where that line is silent (the hall is not in the
 bucket), beside the force line. The fixture pools never print alone. Description position: plain
 lines.
 
-**FIXTURE: gates**
+**FIXTURE: gates** {colour}
 1. `[street]` Traffic in and out of {settlement} goes through its gates, and that is where anyone arriving is first seen.
 2. `[ledger]` The wall at {settlement} is entered by its gates, and the gate tolls are counted there; a gate left unwatched is a toll lost.
 3. `[visitor]` You come into {settlement} by a gate, and someone at the gate sees you come.
 4. `[unfolding]` Whatever reaches {settlement} by road reaches it at a gate, and the town can close them against it.
 
-**FIXTURE: charter hall**
+**FIXTURE: charter hall** {colour}
 1. `[street]` Adventurers at {settlement} take their contracts at the charter hall, and the town posts its worst problems there.
 2. `[ledger]` The charter hall at {settlement} keeps a book of the bounties the town has posted, and every unclaimed one is a danger still at large.
 
-**FIXTURE: free company**
+**FIXTURE: free company** {colour}
 1. `[street]` A free company keeps a hall at {settlement} and hires out its swords to whoever pays.
 2. `[ledger]` The free company at {settlement} keeps its own muster roll, not the town's: its fighters answer to their captain and their contracts.
 
@@ -3022,27 +3022,27 @@ or `traditions.hasAlchemy`), then the defence profile's divine, druidic and arca
 blocked (`DEF6_C3_BLOCKED_POOLS`: this line already speaks that fact, so a DS-DEF-6 line would
 print nowhere). Description position: plain lines.
 
-**ARCANE: wizard's tower**
+**ARCANE: wizard's tower** {colour}
 1. `[street]` The wizard's tower at {settlement} is where the town turns when a threat is beyond its ordinary defences.
 2. `[ledger]` The town's defence against magic rests on the wizard's tower at {settlement}, and no muster roll lists it: if the wizard leaves, it leaves too.
 
-**ARCANE: mages' guild**
+**ARCANE: mages' guild** {colour}
 1. `[street]` The mages' guild at {settlement} keeps the town's wards and answers hostile spells.
 2. `[ledger]` {settlement}'s magical defence sits in the mages' guild's books, not the town's: the guild can withdraw it, and the town cannot hold it.
 
-**ARCANE: alchemists**
+**ARCANE: alchemists** {colour}
 1. `[street]` The magical help at {settlement} comes from its alchemists, who brew for the defenders.
 2. `[ledger]` {settlement} buys its magical support from its alchemists by the batch, and the town's accounts carry it as a purchase, not a defence.
 
-**ARCANE: divine**
+**ARCANE: divine** {colour}
 1. `[street]` The clergy at {settlement} heal and ward by prayer, and the town counts them among its defences.
 2. `[ledger]` Divine magic stands behind {settlement}'s defence, but the priests who heal the wounded are on no muster roll, and the town cannot order them out.
 
-**ARCANE: druidic**
+**ARCANE: druidic** {colour}
 1. `[street]` Druids at {settlement} ward the land around the town and know its ground better than anyone.
 2. `[ledger]` {settlement}'s defence draws on its druids, who keep watch over the country around it; they are on no muster roll, and the town cannot order them out.
 
-**ARCANE: practitioners**
+**ARCANE: practitioners** {colour}
 1. `[street]` Practitioners of the arcane at {settlement} are called on when the town is threatened.
 2. `[ledger]` {settlement} counts a few practitioners of the arcane among its defenders, though no muster roll lists them and none is bound to stay.
 
@@ -3356,13 +3356,13 @@ trade run low, a mages' guild or wizard's tower stands and no temple does
 magic and both a military and an arcane institution stand. Description position: plain lines,
 one vantage each.
 
-**FLAG: magicFillsVoid**
+**FLAG: magicFillsVoid** {colour}
 1. `[street]` There is no temple at {settlement} and little trade, so people bring their troubles to the mages instead: a sickness, a quarrel, a failed harvest.
 2. `[ledger]` With no temple and a weak market, people at {settlement} take their oaths and quarrels to the arcane houses, and no parish register records what was settled there.
 
-**FLAG: magicMilitarized**
+**FLAG: magicMilitarized** {colour}
 1. `[street]` The soldiers at {settlement} command its magic: the arcane houses answer to them, and their work goes first to the town's defence.
-2. `[ledger]` Arcane work at {settlement} is ordered by its military, and the practitioners' own books show it: defence work first, paying work after.
+2. `[ledger]` Arcane work at {settlement} answers to its military, and the practitioners' own books show it: defence work first, paying work after.
 
 ---
 
@@ -3431,7 +3431,7 @@ rows — the arm and the town. Both stand; **one per page, never both.**
 
 **posture `INTERNAL PRESSURE` (famine)**
 1. `[ledger · colour]` {settlement} is defending a hungry town, which changes what can be asked of anyone in it and how long they will keep answering.
-2. `[street]` The watch stands and the watch is not being fed properly, and both of those facts are the same fact.
+2. `[street · watch]` The watch stands and the watch is not being fed properly, and both of those facts are the same fact.
 3. `[unfolding · walls]` What {settlement} can ask of the people on its walls falls with what it can feed them, and neither is being replenished.
 
 **posture `UNDER OCCUPATION`**
@@ -3471,13 +3471,13 @@ rows — the arm and the town. Both stand; **one per page, never both.**
 
 **posture `BEAST PRESSURE`**
 1. `[ledger · colour]` What is coming out of the country at {settlement} is coming steadily, and the town's arrangements are being spent on it faster than they are being replaced.
-2. `[street]` The watch here is a matter of what is outside rather than who is inside, and it does not stand down.
+2. `[street · watch]` The watch here is a matter of what is outside rather than who is inside, and it does not stand down.
 3. `[unfolding · colour]` The pressure at {settlement} does not pause between attempts, and what the town spends answering it is not being replaced at the same rate.
 
 **posture `INSURGENCY ACTIVE`**
 1. `[ledger · colour]` {settlement} is being defended against people who live in it, which is a different problem from a siege and one the town's arrangements were not built for.
 2. `[unfolding · colour]` Every measure taken against the insurgency at {settlement} makes the next one more necessary, and the cycle is the shape of the problem rather than an accident of it.
-3. `[street]` The watch at {settlement} is walking streets that do not welcome it, and that is more dangerous to it than any ambush.
+3. `[street · watch]` The watch at {settlement} is walking streets that do not welcome it, and that is more dangerous to it than any ambush.
 
 **posture `RELIGIOUS UPHEAVAL`**
 1. `[ledger · colour]` The town's defense at {settlement} has been caught in a question about observance; what is being contested is who may command, and the answer turns on creed.
@@ -3498,6 +3498,43 @@ rows — the arm and the town. Both stand; **one per page, never both.**
 1. `[ledger · colour]` More people are arriving at {settlement} than the town's arrangements were built for, and the defense of the place has become a question of order rather than of walls.
 2. `[street · watch · gate]` The town is fuller than it was by {band}, and nothing about the watch, the water or the gates has been enlarged to match.
 3. `[visitor · gate]` A stranger arriving at {settlement} is not remarkable, because so many people have arrived lately that the gate has stopped treating arrival as an event.
+
+---
+
+### DS-DEF-12: `Viability › Supply in isolation` · `settlement.isolationSupport.{applicable, capacity, requiredCapacity, magicDependent}`
+> *whether a place with no dependable road, river or port can keep itself supplied*
+
+**RECEIPT:** `src/generators/isolationSupport.js :: deriveIsolationSupport`, persisted on the settlement by `src/generators/steps/assembleSettlement.js` (re-derived by `coherenceRepairPass.js` after the roster is final).
+**STATE-KEY:** `MAGIC-DEPENDENT` (`magicDependent` true: the ordinary paths fall short and magical transit closes the gap) · otherwise the CAPACITY ladder, the support the town's own paths give against what a place of its tier needs (`requiredCapacity`): `ample` (at least fifteen above), `enough` (at or above), `short` (within fifteen below), `far short` (further below) — the same steps `isolationSupport.js :: statusFor` takes.
+**SLOTS:** `{settlement}`
+**SECTION-TARGET:** `viability`
+**PROVENANCE + FENCE (W2 DEF, construction C3, C4, C5, 2026-11-07):** said ONLY where the finding applies (`applicable` true: the town has no dependable regional road, river or port); a connected town carries the `connected` default and the block is silent. ONE sentence per town: the magic-dependent reading where it holds, else the town's place on the capacity ladder. ⛔ The support model is NOT the food record: measured on 300 generated towns, isolated towns at `untenable` print `Food: Secure` beside it, so no line here speaks of hunger or of what the town eats now — the generator's own reading of a gap is that specialist goods and bad-season reserves stay vulnerable (`viability.js`'s isolation warning), and the lines say that. "A place its size" is `requiredCapacity` in a player's words (it is set by the tier). No line names an institution, a resource or a path: the paths are many and the record names them only as evidence strings.
+**PDF PARITY:** parity (`printProse.js`, `viability.isolationSupport`).
+
+**MAGIC-DEPENDENT** {colour}
+1. `[ledger]` The town's accounts at {settlement} balance only because supplies arrive by magic; if that magic failed, the town could not keep itself supplied by its own paths.
+2. `[unfolding]` Much of what {settlement} needs arrives by magic now, and if that magic failed the town would be cut off with too little of its own.
+3. `[street]` People at {settlement} rely on goods that arrive by magic, and nobody there could say how the town would manage without them.
+
+**CAPACITY: ample** {colour}
+1. `[visitor]` No dependable road, river or port reaches {settlement}, and the town does not need one: it keeps itself supplied with room to spare, even in a bad year.
+2. `[ledger]` By the town's own count of its stores, {settlement} has more put by than a bad year would take, so having no road costs it little.
+3. `[street]` Traders seldom reach {settlement}, and people there seldom miss them: the town has more than enough to get through a hard year.
+
+**CAPACITY: enough** {colour}
+1. `[visitor]` No dependable road, river or port reaches {settlement}, and the town gets by on its own: enough for an ordinary year, with little to spare.
+2. `[ledger]` The town's count of its stores at {settlement} covers an ordinary year and no more, so one bad harvest would leave it short before spring.
+3. `[street]` People at {settlement} make do with what the town raises and keeps for itself; a good year is comfortable and a bad one is lean.
+
+**CAPACITY: short** {colour}
+1. `[visitor]` With no dependable road, river or port, {settlement} cannot quite keep itself supplied: the goods it cannot make are scarce, and little is put by for a bad year.
+2. `[ledger]` The town's count of its stores at {settlement} comes up short of what a place its size needs for a hard year, so a bad harvest there would mean going without.
+3. `[street]` At {settlement} people go without what the town cannot make for itself, and most families know a bad year would find the stores thin.
+
+**CAPACITY: far short** {colour}
+1. `[visitor]` {settlement} has no dependable road, river or port, and it is too big for what reaches it: the goods it cannot make are always scarce, and almost nothing is put by for a bad year.
+2. `[ledger]` The town's count of its stores at {settlement} falls far short of what a place its size needs for a hard year, and its people would pay the gap in the first bad season.
+3. `[street]` Everyone at {settlement} knows the town is too big for what reaches it: what it cannot make is scarce and dear, and a bad year would hit it hard.
 
 ---
 

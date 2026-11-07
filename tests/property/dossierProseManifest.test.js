@@ -384,9 +384,11 @@ describe('the composed-prose manifest — the DRIFT corpus, both audiences', () 
     const absent = registered.filter((m) => !recorded.has(m));
     expect(absent, 'every mount the corpus does not reach carries a reason, and no other does')
       .toEqual(reasoned);
-    expect(registered.length, 'the registry\'s distinct mounts').toBe(56);
+    // 56 -> 57 and 42 -> 43 (W2 DEF third seat, 2026-11-07): `viability.isolationSupport` (DS-DEF-12) is registered and
+    // recorded — the recipe's defense call list (`prose-rate-corpus.mjs :: deskReturns`) composes its desk.
+    expect(registered.length, 'the registry\'s distinct mounts').toBe(57);
     expect(registered.filter((m) => recorded.has(m)).length, 'and the manifest records this many')
-      .toBe(42);
+      .toBe(43);
     // ⛔ AND THE REASONS ARE RE-MEASURED, NEVER TAKEN ON FAITH: every reasoned mount sits on a
     // block that fires on NO town of the RATE grid either, so its silence here is the world's
     // and not this recipe's. A block that starts speaking reds this arm until someone re-states

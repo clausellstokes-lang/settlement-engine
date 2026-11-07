@@ -24,6 +24,8 @@
  *   DS-DEF-9  Viability › Magic dependency — `defenseProfile.magicDependency` ×
  *             `economicState.activeChains[].magicNote`. The leaf's ONE block that speaks
  *             off the `defense` tab, and the reason its host needed the paid gate threaded.
+ *   DS-DEF-12 Viability › Supply in isolation — `isolationSupport.{applicable, magicDependent,
+ *             capacity, requiredCapacity}`. The second block off the `defense` tab (W2 DEF, 2026-11-07).
  *
  * ── ⛔⛔ TWO BLOCKS ARE DECLARED DARK BY MEASUREMENT, NOT BY OMISSION ─────────────────
  * DS-DEF-7 and DS-DEF-10 are the leaf's remaining unmounted blocks and each is dark for a
@@ -1905,6 +1907,58 @@ export function withSaid(unit, said) {
       ...(extra.pieces || []).map((piece) => Object.freeze({ ...piece, role: 'modifier', seat: 'sentence', relation: 'addition' })),
     ]),
   });
+}
+
+/**
+ * ── DS-DEF-12 · SUPPLY IN ISOLATION — the isolation-support finding said (W2 DEF, C3–C5) ──
+ *
+ * `settlement.isolationSupport` is written for every town by `isolationSupport.js ::
+ * deriveIsolationSupport` and re-derived by `coherenceRepairPass.js` once the roster is final.
+ * It was one of the three settlement-root facts no customer surface read (the writer-dark
+ * register's §12 WRW-2 pending-surface rows); WIRING-RULINGS R-W1 rules it SAID.
+ *
+ * ONE SENTENCE, ONE KEY. The magic-dependent reading is the more specific rung of the same
+ * finding (the ordinary paths fall short and magical transit closes the gap), so where it holds
+ * it is the line; otherwise the town's place on the capacity ladder is. The ladder's steps are
+ * the generator's own (`statusFor`: fifteen above the need, at the need, within fifteen below).
+ * Silent where the finding does not apply: a connected town carries the `connected` default.
+ *
+ * ⚠ THE RECORD PATHS ARE READ INSIDE THE KEY'S `if` TESTS, never through a local alias: the
+ * wiring census traces a branch's test, and an alias would hide the field it reads.
+ * @param {{applicable?: unknown, magicDependent?: unknown, capacity?: unknown,
+ *   requiredCapacity?: unknown}|null|undefined} support
+ * @returns {string|null}
+ */
+export function isolationSupportPoolKey(support) {
+  if (!support || typeof support !== 'object') return null;
+  if (support.applicable !== true) return null;
+  if (support.magicDependent === true) return 'MAGIC-DEPENDENT';
+  if (typeof support.capacity !== 'number' || typeof support.requiredCapacity !== 'number') return null;
+  if (support.capacity >= support.requiredCapacity + 15) return 'CAPACITY: ample';
+  if (support.capacity >= support.requiredCapacity) return 'CAPACITY: enough';
+  if (support.capacity >= support.requiredCapacity - 15) return 'CAPACITY: short';
+  return 'CAPACITY: far short';
+}
+
+/**
+ * THE ISOLATION-SUPPORT DESK — DS-DEF-12's one lens, at `viability.isolationSupport`.
+ * A plain rung: the block frames no DM-editable field.
+ * @param {{name?: string, isolationSupport?: object|null}|null|undefined} settlement
+ * @param {{seed?: string, audience?: string, tierNoun?: string|null}} [options]
+ * @returns {Readonly<{isolationSupply: object|null}>}
+ */
+export function defenseIsolationSupportProse(settlement, options = {}) {
+  options = factsAnswered(settlement, crisisAnswered(settlement, wallsAnswered(settlement, options)));
+  const poolKey = isolationSupportPoolKey(settlement?.isolationSupport);
+  const unit = poolKey
+    ? composeStateProse(CORPUS, 'DS-DEF-12', {
+      ...options,
+      slots: { settlement: properFill(text(settlement?.name)) },
+      spineKey: poolKey,
+      candidates: defenseStateProseCandidates('DS-DEF-12', settlement),
+    })
+    : null;
+  return Object.freeze({ isolationSupply: unit ? legibilityRung('', unit, []) : null });
 }
 
 /**

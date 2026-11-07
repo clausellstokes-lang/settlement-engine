@@ -310,7 +310,11 @@ describe('writer-with-no-reader ratchet: the frozen register', () => {
     // 45 -> 43 at MERGE-R2 (2026-11-07): two rows struck with cause — growsMoreThanEats on foodRecord (clause E,
     // domain/foodSurplus.js inside the dossier-pdf closure since the rung-2 chunk cure) and randomDepletionEligible on
     // resourceConditions (clause S, LIT-NAME at the merged tip); scripts/lib/writer-dark-register.mjs names both.
-    expect(WRITER_DARK_REGISTER.length).toBe(43);
+    // 43 -> 38 (2026-11-07, W2 DEF third seat, construction C3–C5): the three §12 WRW-2 pending-surface rows struck
+    // (DS-DEF-12 says the isolation-support finding on the Viability tab: LIT at web-display, clause P) and the two
+    // W6 engine-internal twins on _isolationSupport struck by clause S (LIT-NAME once the surface reads the same keys);
+    // scripts/lib/writer-dark-register.mjs names all five.
+    expect(WRITER_DARK_REGISTER.length).toBe(38);
     expect(liveEvidence.map((row) => row.identity).sort())
       .toEqual(WRITER_DARK_REGISTER.map((row) => row.identity).sort());
     for (const row of liveEvidence) {
@@ -389,16 +393,22 @@ describe('writer-with-no-reader ratchet: the EXECUTED corpus and the closures', 
   });
 
   test('THE PREMISE HOLDS: a written key the probe measured DARK is written, and its shape carries a liveness anchor', () => {
-    const row = live.verdicts.get('isolationSupport on settlement');
+    // Re-keyed 2026-11-07 (W2 DEF third seat): the premise's identity was `isolationSupport on settlement`, which
+    // DS-DEF-12 now says (LIT). The premise is the same claim on that finding's effective-config TWIN, which no
+    // surface reads at all (no R, no N reader): a DARK key on a live shape, the customer twin LIT beside it.
+    const row = live.verdicts.get('_isolationSupport on config');
     expect(row.verdict).toBe('DARK');
     expect(row.readers.R).toEqual([]);
     expect(row.readers.N).toEqual([]);
-    const settlementKeys = live.corpus.shapes.settlement.keys;
+    const configKeys = live.corpus.shapes.config.keys;
     expectAbsentWithAnchor(
-      settlementKeys.filter((key) => live.verdicts.get(`${key} on settlement`).verdict !== 'DARK'),
-      'isolationSupport', 'name',
-      'the settlement shape is genuinely alive — `name` is LIT — so `isolationSupport` is dark by measurement, not by an empty scan',
+      configKeys.filter((key) => live.verdicts.get(`${key} on config`).verdict !== 'DARK'),
+      '_isolationSupport', 'culture',
+      'the config shape is genuinely alive — `culture` is LIT — so `_isolationSupport` is dark by measurement, not by an empty scan',
     );
+    expect(live.verdicts.get('culture on config').verdict).toBe('LIT');
+    // …and the identity this arm used to hold is LIT now, said by DS-DEF-12.
+    expect(live.verdicts.get('isolationSupport on settlement').verdict).toBe('LIT');
     expect(live.verdicts.get('name on settlement').verdict).toBe('LIT');
   });
 
@@ -505,7 +515,8 @@ describe('writer-with-no-reader ratchet: the live judgment', () => {
     // 45 -> 43 at MERGE-R2 (2026-11-07): two rows struck with cause — growsMoreThanEats on foodRecord (clause E,
     // domain/foodSurplus.js inside the dossier-pdf closure since the rung-2 chunk cure) and randomDepletionEligible on
     // resourceConditions (clause S, LIT-NAME at the merged tip); scripts/lib/writer-dark-register.mjs names both.
-    expect(registeredAndDark.length).toBe(43);
+    // 43 -> 38 (2026-11-07, W2 DEF third seat): the five isolation-support rows struck with cause (the register names them).
+    expect(registeredAndDark.length).toBe(38);
     expect(baseline.darkUnregistered.length).toBe(cohort.length - registeredAndDark.length);
     expect(reviewableDark(cohort).length).toBe(baseline.reviewableDarkCount);
     expect(reviewableDark(cohort).length).toBeLessThan(cohort.length);
@@ -608,7 +619,15 @@ describe('writer-with-no-reader ratchet: the live judgment', () => {
   });
 
   test('pendingSurfaceBacklog returns exactly the pending-surface rows, sorted by surface then identity', () => {
-    const backlog = pendingSurfaceBacklog();
+    // THE DEBT IS PAID (2026-11-07, W2 DEF third seat): the shipped register holds no pending-surface row, the
+    // ceiling shrank to 0, and the three identities the struck rows named are LIT — said by DS-DEF-12.
+    expect(pendingSurfaceBacklog()).toEqual([]);
+    expect(baseline.pendingSurfaceCeiling).toBe(0);
+    for (const row of STRUCK_PENDING_ROWS) expect(live.verdicts.get(row.identity).verdict).toBe('LIT');
+    expect(liveReport.pendingSurfaceBacklog).toEqual([]);
+    // The reader itself, driven on the three struck rows as a planted register (out of order on purpose): it
+    // returns exactly them, projected and sorted.
+    const backlog = pendingSurfaceBacklog([...WRITER_DARK_REGISTER, ...[...STRUCK_PENDING_ROWS].reverse()]);
     expect(backlog.map((row) => row.identity)).toEqual([
       'isolationSupport on settlement',
       'magicDependent on isolationSupport',
@@ -619,13 +638,10 @@ describe('writer-with-no-reader ratchet: the live judgment', () => {
       expect(COUNTING_CLASSES).toContain(row.surface);
       expect(row.car).toMatch(/§\d+/);
       expect(() => read(row.carArtifact)).not.toThrow();
-      expect(live.verdicts.get(row.identity).verdict).toBe('DARK');
     }
     const sorted = [...backlog].sort((a, b) => (a.surface === b.surface
       ? (a.identity < b.identity ? -1 : 1) : (a.surface < b.surface ? -1 : 1)));
     expect(backlog).toEqual(sorted);
-    expect(backlog.length).toBe(baseline.pendingSurfaceCeiling);
-    expect(liveReport.pendingSurfaceBacklog).toEqual(backlog);
   });
 
   test('the export allowlist arm reaches json-export at grade A for exactly the allowlisted keys, and json-export does not count toward LIT', () => {
@@ -651,6 +667,63 @@ describe('writer-with-no-reader ratchet: the live judgment', () => {
     expect(onlyExport, 'no identity may be LIT on the export arm alone').toEqual([]);
   });
 });
+
+/**
+ * THE THREE §12 WRW-2 PENDING-SURFACE ROWS, BYTE FOR BYTE AS THEY STOOD BEFORE W2 DEF STRUCK THEM (2026-11-07,
+ * construction C3–C5: DS-DEF-12 says the isolation-support finding). The register no longer holds a live
+ * pending-surface row, so the arms that drive the pending-surface door take these as a PLANTED control: the same
+ * shape the door was built against, never a row the shipped register carries.
+ */
+const STRUCK_PENDING_ROWS = Object.freeze([
+  Object.freeze({
+    identity: 'isolationSupport on settlement',
+    key: 'isolationSupport',
+    shape: 'settlement',
+    writer: 'src/generators/steps/assembleSettlement.js',
+    reason: 'pending-surface',
+    surface: 'web-display',
+    car: '§12 WRW-2, the owner row that rules whether the isolation-support finding is shown',
+    carArtifact: 'docs/GENERATION_CONTRACTS.md',
+    why: 'Every settlement carries a full isolation-support finding — whether the place can be supplied at all, by '
+      + 'which paths, at what tier, and what it would take to close the gap — and no component, display read model '
+      + 'or PDF reads the container. It is one of exactly three settlement-root facts that reach no customer '
+      + 'surface. This is not plumbing: it is a generated judgement about the settlement that a player would want, '
+      + 'and the owner rules whether it is shown and where. Until that ruling it is an owed car, not an exemption.',
+    charter: '§7 WRWALKER, the drafted register row 6, measured DARK by Car 0 at C-prime',
+  }),
+  Object.freeze({
+    identity: 'magicDependent on isolationSupport',
+    key: 'magicDependent',
+    shape: 'isolationSupport',
+    writer: 'src/generators/isolationSupport.js',
+    reason: 'pending-surface',
+    surface: 'web-display',
+    car: '§12 WRW-2, the owner row that rules whether the isolation-support finding is shown',
+    carArtifact: 'docs/GENERATION_CONTRACTS.md',
+    why: 'Whether a settlement depends on magic to stay supplied is a striking fact about the place, and it is one '
+      + 'of only two keys on the isolation-support shape that no surface reads even at name level — its seven '
+      + 'siblings all read LIT-NAME. That asymmetry is the evidence it was overlooked rather than declined: a '
+      + 'surface that shows the status and the tier is already in front of this fact and does not print it. The '
+      + 'owner rules it with the container it belongs to.',
+    charter: '§7 WRWALKER, the drafted register row 6, measured DARK by Car 0 at C-prime',
+  }),
+  Object.freeze({
+    identity: 'requiredCapacity on isolationSupport',
+    key: 'requiredCapacity',
+    shape: 'isolationSupport',
+    writer: 'src/generators/isolationSupport.js',
+    reason: 'pending-surface',
+    surface: 'web-display',
+    car: '§12 WRW-2, the owner row that rules whether the isolation-support finding is shown',
+    carArtifact: 'docs/GENERATION_CONTRACTS.md',
+    why: 'The capacity a settlement would REQUIRE to end its isolation is the actionable half of the finding — the '
+      + 'number that turns a status into something a player can plan against — and it reaches no surface, while the '
+      + 'deficit and capacity beside it read LIT-NAME. Showing a settlement it is isolated without showing what '
+      + 'would fix it is the half-told version of the fact, so this key rides with the container to the same owner '
+      + 'ruling rather than being banked as unreviewed.',
+    charter: '§7 WRWALKER, the drafted register row 6, measured DARK by Car 0 at C-prime',
+  }),
+]);
 
 describe('writer-with-no-reader ratchet: the register doors convict what they cannot verify', () => {
   const rowOf = (identity) => WRITER_DARK_REGISTER.find((row) => row.identity === identity);
@@ -753,7 +826,7 @@ describe('writer-with-no-reader ratchet: the register doors convict what they ca
   });
 
   test('pending-surface: an uncited car convicts; a cited car on a surface the identity already reaches convicts; a car that resolves to no in-tree artifact convicts', async () => {
-    const row = rowOf('isolationSupport on settlement');
+    const row = STRUCK_PENDING_ROWS[0]; // the struck row's own shape, a planted control since the debt was paid
     expect(COUNTING_CLASSES).toContain(row.surface);
     const noArtifact = await convicts([{ ...row, carArtifact: 'docs/THIS_DOC_DOES_NOT_EXIST.md' }]);
     expect(noArtifact).toContain('clause P');
@@ -771,7 +844,7 @@ describe('writer-with-no-reader ratchet: the register doors convict what they ca
   });
 
   test('pending-surface: a row beyond the genesis-banked population is refused — the cohort ceiling shrinks and only --rebank --charter grows it', async () => {
-    const row = rowOf('isolationSupport on settlement');
+    const row = STRUCK_PENDING_ROWS[0];
     // A FIFTH pending row, built so that ONLY the ceiling can fire: its writer is
     // injected (clause W passes), its car artifact is real and names its shape
     // (clause P passes), and `verdicts` is omitted so clause S does not run. If the
@@ -850,7 +923,7 @@ describe('writer-with-no-reader ratchet: the register doors convict what they ca
     expect(message).toContain('no longer writes');
     expect(message).toContain('a row about nothing');
     // …and a pending-surface row is governed by the probe too.
-    const pending = WRITER_DARK_REGISTER.find((entry) => entry.identity === 'isolationSupport on settlement');
+    const pending = STRUCK_PENDING_ROWS[0];
     const pendingMessage = await convicts([pending], {
       readSource: (path) => (path === pending.writer
         ? 'ctx.settlement.isolationSupport = finding;\n' : read(path)),

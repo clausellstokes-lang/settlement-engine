@@ -181,54 +181,12 @@ export const WRITER_DARK_REGISTER = Object.freeze([
       + 'index selected, never the index.',
     charter: 'ODQ §934.101 (the chair, 2026-10-31, ruling GS-1 on G-SEAMS S1 and the G3 item-1 ruling), consumer CONFIRMED at generateSettlementPipeline.js:247',
   }),
-  Object.freeze({
-    identity: 'isolationSupport on settlement',
-    key: 'isolationSupport',
-    shape: 'settlement',
-    writer: 'src/generators/steps/assembleSettlement.js',
-    reason: 'pending-surface',
-    surface: 'web-display',
-    car: '§12 WRW-2, the owner row that rules whether the isolation-support finding is shown',
-    carArtifact: 'docs/GENERATION_CONTRACTS.md',
-    why: 'Every settlement carries a full isolation-support finding — whether the place can be supplied at all, by '
-      + 'which paths, at what tier, and what it would take to close the gap — and no component, display read model '
-      + 'or PDF reads the container. It is one of exactly three settlement-root facts that reach no customer '
-      + 'surface. This is not plumbing: it is a generated judgement about the settlement that a player would want, '
-      + 'and the owner rules whether it is shown and where. Until that ruling it is an owed car, not an exemption.',
-    charter: '§7 WRWALKER, the drafted register row 6, measured DARK by Car 0 at C-prime',
-  }),
-  Object.freeze({
-    identity: 'magicDependent on isolationSupport',
-    key: 'magicDependent',
-    shape: 'isolationSupport',
-    writer: 'src/generators/isolationSupport.js',
-    reason: 'pending-surface',
-    surface: 'web-display',
-    car: '§12 WRW-2, the owner row that rules whether the isolation-support finding is shown',
-    carArtifact: 'docs/GENERATION_CONTRACTS.md',
-    why: 'Whether a settlement depends on magic to stay supplied is a striking fact about the place, and it is one '
-      + 'of only two keys on the isolation-support shape that no surface reads even at name level — its seven '
-      + 'siblings all read LIT-NAME. That asymmetry is the evidence it was overlooked rather than declined: a '
-      + 'surface that shows the status and the tier is already in front of this fact and does not print it. The '
-      + 'owner rules it with the container it belongs to.',
-    charter: '§7 WRWALKER, the drafted register row 6, measured DARK by Car 0 at C-prime',
-  }),
-  Object.freeze({
-    identity: 'requiredCapacity on isolationSupport',
-    key: 'requiredCapacity',
-    shape: 'isolationSupport',
-    writer: 'src/generators/isolationSupport.js',
-    reason: 'pending-surface',
-    surface: 'web-display',
-    car: '§12 WRW-2, the owner row that rules whether the isolation-support finding is shown',
-    carArtifact: 'docs/GENERATION_CONTRACTS.md',
-    why: 'The capacity a settlement would REQUIRE to end its isolation is the actionable half of the finding — the '
-      + 'number that turns a status into something a player can plan against — and it reaches no surface, while the '
-      + 'deficit and capacity beside it read LIT-NAME. Showing a settlement it is isolated without showing what '
-      + 'would fix it is the half-told version of the fact, so this key rides with the container to the same owner '
-      + 'ruling rather than being banked as unreviewed.',
-    charter: '§7 WRWALKER, the drafted register row 6, measured DARK by Car 0 at C-prime',
-  }),
+  // W2 DEF (2026-11-07, construction C3–C5, the third seat): the three §12 WRW-2 pending-surface rows —
+  // `isolationSupport on settlement`, `magicDependent on isolationSupport`, `requiredCapacity on isolationSupport` —
+  // LEFT this register. WIRING-RULINGS R-W1 (ODQ §934.105) ruled the finding SAID, and the new block DS-DEF-12
+  // (`defenseStateProse.js :: defenseIsolationSupportProse`, mounted at `viability.isolationSupport`, drawn by
+  // ViabilityTab and the print chapter) reads all three, so each identity is LIT at web-display (clause P) and the
+  // pending-surface debt is paid. Retired with that cause; the HOLD line's debt clears with them.
   Object.freeze({
     identity: 'appliedHeadline on candidates',
     key: 'appliedHeadline',
@@ -537,40 +495,12 @@ export const WRITER_DARK_REGISTER = Object.freeze([
   // at the merged tip the identity is LIT-NAME — the rung-2 landing's closures reach a reader that names the key
   // (its writer-reach row reads dossier-pdf=N foundry=N on that side, web-transitive=N alone on the integration side
   // that registered it, W6 ECO ba1737b88). Struck with that cause (PLAUSIBLE: the surface that names it is the tool's).
-  Object.freeze({
-    identity: 'magicDependent on _isolationSupport',
-    key: 'magicDependent',
-    shape: '_isolationSupport',
-    writer: 'src/generators/isolationSupport.js',
-    reason: 'engine-internal',
-    consumer: Object.freeze({
-      file: 'src/generators/structuralValidator.js',
-      symbol: 'the isolation check, which reads config._isolationSupport and words the magical-transit finding',
-    }),
-    why: 'A pass-through copy of the isolation finding, stashed on the effective config for the validation and '
-      + 'repair passes. The structural validator reads it there (structuralValidator.js:676, :684) inside '
-      + 'src/generators behind the closure STOP. The customer fact is the settlement\'s own isolationSupport, '
-      + 'registered pending-surface under §12 WRW-2; this twin stays internal whatever the owner rules there.',
-    charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
-      + 'W6, section DEF), consumer CONFIRMED at src/generators/structuralValidator.js:684',
-  }),
-  Object.freeze({
-    identity: 'requiredCapacity on _isolationSupport',
-    key: 'requiredCapacity',
-    shape: '_isolationSupport',
-    writer: 'src/generators/isolationSupport.js',
-    reason: 'engine-internal',
-    consumer: Object.freeze({
-      file: 'src/generators/structuralValidator.js',
-      symbol: 'the isolation check, which reads config._isolationSupport and words the capacity shortfall',
-    }),
-    why: 'A pass-through copy of the isolation finding, stashed on the effective config for the validation and '
-      + 'repair passes. The structural validator reads it there (structuralValidator.js:676, :703) inside '
-      + 'src/generators behind the closure STOP. The customer fact is the settlement\'s own isolationSupport, '
-      + 'registered pending-surface under §12 WRW-2; this twin stays internal whatever the owner rules there.',
-    charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
-      + 'W6, section DEF), consumer CONFIRMED at src/generators/structuralValidator.js:703',
-  }),
+  // W2 DEF (2026-11-07, the third seat): `magicDependent on _isolationSupport` and `requiredCapacity on
+  // _isolationSupport` LEFT this register by clause S. W6 (section DEF) convicted them engine-internal (the
+  // structural validator reads the effective-config twin); once DS-DEF-12 read the settlement's own
+  // `isolationSupport.{magicDependent, requiredCapacity}` on the Viability tab, the same key names are read inside
+  // the web-display closure and both twins grade LIT-NAME, not DARK. Retired with that cause; the validator's read
+  // is unchanged.
   Object.freeze({
     identity: 'cascadeAdded on charter',
     key: 'cascadeAdded',

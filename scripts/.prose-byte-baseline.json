@@ -55,8 +55,8 @@
   },
   "leaves": {
     "src/data/dossierStateProse/defense.generated.js": {
-      "raw": 184656,
-      "gzip": 26137,
+      "raw": 191754,
+      "gzip": 27014,
       "ceilingRaw": 488168,
       "ceilingGzip": 108482
     },
@@ -355,6 +355,14 @@
       "toRaw": 184656,
       "gzipAfter": 26137,
       "reason": "+768 B raw (gzip level 9: 25,872 -> 26,137), one commit: the twenty `[ledger]` lines this lane authored or rewrote (DS-DEF-4 capture none v1, adversarial v1, corrupted v1, capture v1, FIXTURE v1 x3 and gangs v2; DS-DEF-5 walls PRESENT v2, FIXTURE v2 x3, ARCANE v2 x6; DS-DEF-9 FLAG v2 x2) rewritten to name the record in a player's words and what the gap costs. Projected through `node scripts/generate-dossier-state-prose.mjs`; `--check` exit 0."
+    },
+    {
+      "car": "W2 DEF third seat (2026-11-07; ODQ §934.105, WIRING-RULINGS R-W1): DS-DEF-12 — isolation support said (construction C3, C4, C5)",
+      "leaf": "src/data/dossierStateProse/defense.generated.js",
+      "fromRaw": 184656,
+      "toRaw": 191754,
+      "gzipAfter": 27014,
+      "reason": "+7098 B raw (gzip level 9: 26,137 -> 27,014), one commit: the new block DS-DEF-12 (MAGIC-DEPENDENT and the four CAPACITY steps, three lines each), the lane's twenty new pools braced {colour}, six `· watch` declarations restored on DS-DEF-2/3/10 lines (stripped by c66099791), FLAG: magicMilitarized v2 reworded (\"answers to its military\"). Projected through `node scripts/generate-dossier-state-prose.mjs`; `--check` exit 0."
     }
   ],
   "ceilingTransfersNewLeaves": [

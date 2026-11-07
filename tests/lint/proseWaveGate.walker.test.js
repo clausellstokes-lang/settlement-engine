@@ -164,7 +164,11 @@ describe('the CARTESIAN unit set is the attach set times the spines times the fa
     // 388 -> 397, measured with the gate's own roster and builder on each commit's tree (127 pools
     // throughout): F12 unit 2 (e19e3e4cf, the DS-DEF crisis twins) +8; census-5b unit 3
     // (c00b30eb6, DS-DEF-1 strategic value LOW v4) +1.
-    expect(total, 'the units actually compared').toBe(397);
+    // 397 -> 444 over the W2 DEF lane (2026-11-07), each new line one unit of the defense section: DS-DEF-9 FLAG pools +4
+    // (c66099791), DS-DEF-4 FIXTURE pools +8 (ec73f09f3), DS-DEF-5 FIXTURE pools +6 (e4cbe50db) and gates v3-v4 +2
+    // (4aaa0f230), DS-DEF-5 ARCANE pools +12 (15e146c53), DS-DEF-12 +15 (the third seat). This pin was not re-keyed by
+    // the lane's first two seats; the sum is measured, not inferred.
+    expect(total, 'the units actually compared').toBe(444);
     // AND THE FLAG IS A FLAG: without `bareSpine` the lib answers the SHAPE REPORT's question
     // (the units a corpus LICENSES), which on a spine pool is none. The two populations are
     // different on purpose, and this is the line that says so.
@@ -955,7 +959,8 @@ describe('THE ROSTER — a desk section is a LEAF, and the partition is asserted
     // partition makes "impossible" a measurement.
     const cover = sectionsCoverEveryPool();
     expect(cover.sections).toBe(6);
-    expect(cover.pools, 'every shipped pool').toBe(709);
+    // 709 -> 729 over the W2 DEF lane (2026-11-07): +2 FLAG, +4 DS-DEF-4 FIXTURE, +3 DS-DEF-5 FIXTURE, +6 ARCANE, +5 DS-DEF-12.
+    expect(cover.pools, 'every shipped pool').toBe(729);
     expect(cover.unreached, 'a pool no section reaches').toEqual([]);
     expect(cover.twice, 'a pool two sections claim').toEqual([]);
   });
@@ -971,7 +976,7 @@ describe('THE ROSTER — a desk section is a LEAF, and the partition is asserted
           .toMatch(/^[a-z0-9-]+$/);
       }
     }
-    expect(total, 'and the six sum to the corpus').toBe(709);
+    expect(total, 'and the six sum to the corpus').toBe(729); // 709 -> 729 over the W2 DEF lane (see the partition arm)
     expect(poolRosterOf({ section: 'no-such-desk' }).rows).toEqual([]);
     expect(poolRosterOf({ section: 'no-such-desk' }).why).toContain('NOT-EXECUTABLE');
     expect(poolRosterOf({}).rows.length, 'and no flag at all is the taste\'s seven').toBe(7);

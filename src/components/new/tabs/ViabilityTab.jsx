@@ -17,6 +17,11 @@ import {NarrativeNote} from '../NarrativeNote';
 // THE GENERAL DESK THROUGH ITS ONE CALLER (the registry's ARM 2), which also owns the
 // §885.3 paid-surface gate — corpus prose never draws for a free gallery viewer.
 import { generalDeskLines } from '../generalDeskRead.js';
+// DS-DEF-12 (W2 DEF, 2026-11-07): the isolation-support finding, a defense-leaf block that speaks
+// here, gated on the paid surface exactly as the Magic tab gates DS-DEF-9.
+import { defenseIsolationSupportProse } from '../../../domain/display/stateProse/defenseStateProse.js';
+import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
+import { tierNounFor } from '../../../domain/display/stateProse/weaveBlock.js';
 // THE ONE PARAGRAPH RENDERER (owner finding 2026-09-18): the verdict's three lenses are one
 // paragraph rather than three, each of which opened on the town's name. The DRAW is unchanged.
 import ProseBlock from '../ProseBlock.jsx';
@@ -27,6 +32,9 @@ import { FLUSH } from '../../../design/flush.js';
 
 /** The page's one first-survey vintage label (owner-queue #28 at one site per page, X-8). */
 export const FIRST_SURVEY_LABEL = 'Judged at the first survey; not re-run since.';
+
+/** DS-DEF-12's one position on this page (W2 DEF construction C3–C5). */
+const ISOLATION_SUPPORT_MOUNT = 'viability.isolationSupport';
 
 // The summary trim lives in viabilityFilter.js, the module web and PDF already share, so the
 // paid document trims exactly what the tab trims.
@@ -63,6 +71,16 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
   if (!s?.economicViability) return <Empty message="No coherence data available. Generate a settlement first."/>;
   const v = s.economicViability;
   const metrics = v.metrics || {};
+  // DS-DEF-12: whether a place with no dependable road, river or port can keep itself supplied.
+  // Silent on a connected town and on a free viewer's dossier (§885.3).
+  const isolationProse = publicDossier
+    ? Object.freeze({ isolationSupply: null })
+    : defenseIsolationSupportProse(s, {
+      seed: String(s?._seed ?? s?.id ?? ''),
+      audience: playerView ? 'player' : 'dm',
+      tierNoun: tierNounFor(s.tier),
+    });
+  const isolationLine = drawnAtMount(ISOLATION_SUPPORT_MOUNT, isolationProse.isolationSupply)?.sentence || null;
   // DS-DEF-9 and the frozen magicDependency record moved to the Magic tab as the Roles
   // section's framing (UX consolidation 2026-10-30, RULINGS-T2 T2-15); see MagicTab.jsx.
 
@@ -182,6 +200,12 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
 
         
       </div>
+
+      {/* ── SUPPLY IN ISOLATION (DS-DEF-12, viability.isolationSupport) ── */}
+      {isolationLine&&<div data-testid="viability-isolation-support" style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',padding:'10px 14px',margin:'10px 0'}}>
+        <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch.inkMag3,marginBottom:4}}>Supply in isolation</div>
+        <p style={{fontSize:proseFontSize(FS.md, mobile),color:swatch.inkMag2,lineHeight:1.55,margin:0}}>{isolationLine}</p>
+      </div>}
 
       {/* The generation receipt moved to the Versions tab (Notes group) in the UX
           consolidation (T2-14): it audits the generator, not the town, and stays
