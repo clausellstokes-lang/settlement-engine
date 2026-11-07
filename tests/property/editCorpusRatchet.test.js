@@ -370,7 +370,11 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // car 3 90dc22f18 -> 275 car 1b-2 fb0341b93 -> 276 PLACE-NOT-TIER 6129c300d -> 275 car 3 I7 6ca454d2b -> 277 F6
     // 6d84aa834; groups judged 130 -> 132 -> 130 (cars 1, 2) -> 132 PINS 37b1e746d -> 133 F6. mixedOutside and
     // settledLive stay empty at every stage.
-    expect(census().rows.filter((row) => row.takenLive > 0).length, 'the instrument is not idle').toBe(277);
+    // 2026-11-07 (LANDING-R2 seat C2, the pool census composed; this census at each stage of a change-point search over
+    // census-1b's first parent, git-archive trees): not idle 277 -> 280 at census-1i unit 1 R-AW (ba7887862, the label
+    // resolved at the birth's close: three more rows take a leaf live); groups judged 133 unmoved. Rung 1's final tip and
+    // the merge base both read 277 / 133, the composed tip 280 / 133: no interaction. mixedOutside stays empty.
+    expect(census().rows.filter((row) => row.takenLive > 0).length, 'the instrument is not idle').toBe(280);
     expect(census().rows.filter((row) => row.groupsJudged > 0).length, 'declared groups ARE judged').toBe(133);
     // THE POSITIVE CONTROL, CONSTRUCTED: one object holding a leaf taken from R1 beside a leaf kept
     // where the record had settled away from R0 IS a MIXED object, and enclosingGroup classes it.
@@ -494,12 +498,20 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // → [699, 63, 1217] PLACE-NOT-TIER (6129c300d) → [699, 63, 1199] TRUTH (ff4448d2e) → [705, 73, 1638] PINS (37b1e746d)
     // → [705, 71, 1688] TRUTH (844acaccc) → [703, 65, 1847] car 3 I7 (6ca454d2b) → [717, 66, 1810] F6 (6d84aa834) →
     // [709, 66, 1810] F1 (5e9ffb220), unmoved to the tip. Uncured, E6 read 1814 from F6 on (the 18 towns' summaries).
-    expect([taken.E1, taken.E5, taken.E6], 'the edits that DO reach a reading').toEqual([709, 66, 1810]);
+    // 2026-11-07 (LANDING-R2 seat C2, the same change-point search): [709, 66, 1810] -> [712, 66, 1806]. On census-1b's
+    // first parent from the merge base bf263a78d [709, 66, 1814] (record 28's cure is rung 1's): 1816 census-1b unit A (c)
+    // (f4f765b72) -> 1810 the census-4 merge (950b75014) -> 1806 census-1h R-AU (d035cf840) -> E1 712 census-1i R-AW
+    // (ba7887862). The census tip e36e4916f reads [712, 66, 1806], as does the composed tip; against rung 1's 1810 the
+    // census's E6 -8 lands as -4, an interaction of +4 with rung 1's own -4 (record 28's cure, the same summary leaves).
+    expect([taken.E1, taken.E5, taken.E6], 'the edits that DO reach a reading').toEqual([712, 66, 1806]);
     // an npc ROLE reached ZERO readings over the whole corpus until CRISIS, recorded so the figure is not silence.
     // 2026-11-05 (LANDING-6, the same bisection): 0 → 48 CRISIS (d3e072368: the crisis record carries its derived cast,
     // and the cast is chosen by role) → 63 SELF-VOUCH (0be13b5cb) → 32 car 3 (90dc22f18) → 24 PINS (37b1e746d) → 28 F6
     // (6d84aa834), unmoved to the tip. The two dormant membership edits still reach none.
-    expect([taken.E2, taken.E3, taken.E4], 'a role reaches the crisis cast; a dormant membership edit reaches none').toEqual([28, 0, 0]);
+    // 2026-11-07 (LANDING-R2 seat C2, measured by this arm on git-archive trees): 28 → 31 at census-1i unit 1 R-AW
+    // (ba7887862: the close-time relabel runs the rename cascade over the crisis cast; 28 at its parent 7e31beeb6, 31 at
+    // it). Merge base and rung 1's final tip read 28, the census tip and the composed tip 31: no interaction.
+    expect([taken.E2, taken.E3, taken.E4], 'a role reaches the crisis cast; a dormant membership edit reaches none').toEqual([31, 0, 0]);
     // AND THE MACHINERY'S FIRST POPULATION, in the chain: the restatement at the first merge lets
     // the record settle away from R0 at a leaf, so the second merge's receipts carry a ride-along.
     // 2026-10-31 (chair ruling X-29, cure lane T13; measured at the GS-2 tree WITHOUT it, where this reads [12, 12]):
@@ -582,7 +594,10 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     const importers = srcModules()
       .map((rel) => ({ rel, clause: /import\s*\{([^}]*)\}\s*from\s*'[^']*factionRename\.js'/s.exec(readFileSync(resolve(ROOT, 'src', rel), 'utf8')) }))
       .filter((each) => each.clause !== null);
-    expect(importers.length, 'the scan is not vacuous: factionRename.js HAS src/ importers').toBe(3);
+    // 2026-11-07 (LANDING-R2 seat C2, the pool census composed): 3 → 4, census-1i unit 1 R-AW (ba7887862) adds
+    // src/generators/power/factionLabelClose.js, which imports `applyFactionRenameToSettlement` (the rename cascade) and
+    // no NON_CASCADED surface; the file is created by that commit (git log --diff-filter=A).
+    expect(importers.length, 'the scan is not vacuous: factionRename.js HAS src/ importers').toBe(4);
     // THE POSITIVE CONTROL. `importers.length` proves the importer SCAN is live; nothing proved the
     // CLAUSE READER would fire on a real violation — a renamed ledger export, a dropped `NPC_`
     // alternation or a lost `\b` leaves a reader that matches NOTHING, and the empty filter below
