@@ -562,7 +562,7 @@ const requireDistRead = process.env.VERIFY_DIST === '1';
 // terms with their costs): **"do what you recommend"** — and the recommendation on the table
 // was this raise. Ledger §880.8; the seam is RECORDED AS PRICED AND NOT TAKEN, its prototype
 // kept out of the tree. Monotone-down and owner-signed discipline unchanged.
-const CLOSURE_BUDGET_BYTES = 1_042_033; // 2026-11-06: re-recorded AT the measured landing-tip closure, LANDING-8, a vetoable rise of 4,548 B (note at file end)
+const CLOSURE_BUDGET_BYTES = 1_062_940; // 2026-11-07: re-recorded AT the measured rung-2 landing closure, LANDING-R2 seat J by the chair's 08:4x ruling, a vetoable rise of 20,907 B (note at file end)
 // Transfer budgets measure each fetched chunk independently, matching CDN
 // compression rather than compressing an artificial concatenation. Recorded
 // 2026-07-24 from the seven-file closure: raw 1,034,954; gzip 321,341;
@@ -592,8 +592,8 @@ const CLOSURE_BUDGET_BYTES = 1_042_033; // 2026-11-06: re-recorded AT the measur
 //     it spends ~11.3 kB / ~9.5 kB of headroom no measurement asks for.
 // Leaving both untouched is the only one of the three that neither spends owner headroom
 // nor weakens the instrument. Monotone-down unchanged; raises stay owner-signed.
-const CLOSURE_GZIP_BUDGET_BYTES = 336_286; // 2026-11-04: measured 331,316 x 1.015, the ~1.5 % zlib margin restored, REGISTERS-6 ruling E2 (note at file end)
-const CLOSURE_BROTLI_BUDGET_BYTES = 282_346; // 2026-11-04: measured 278,173 x 1.015, the ~1.5 % zlib margin restored, REGISTERS-6 ruling E2 (note at file end)
+const CLOSURE_GZIP_BUDGET_BYTES = 338_385; // 2026-11-07: re-recorded AT the measured 338,385, LANDING-R2 seat J by the chair's 08:4x ruling, a vetoable rise of 2,099 B (note at file end)
+const CLOSURE_BROTLI_BUDGET_BYTES = 284_778; // 2026-11-07: re-recorded AT the measured 284,778, LANDING-R2 seat J by the chair's 08:4x ruling, a vetoable rise of 2,432 B (note at file end)
 
 // Parse the top-level *static* module edges out of a built chunk. Static
 // edges use the `from` keyword — `import{..}from"./x.js"` and re-exports
@@ -828,7 +828,7 @@ describe.runIf(distExists)('Tier 9.7 — vendor-pdf lazy load contract', () => {
     // green on the same build. The ~700 B cross-environment margin the three prior raises
     // carried is kept — 678,131 + 700 = 678,831, under this ceiling.
     expect(size).toBeGreaterThan(300_000);
-    expect(size).toBeLessThan(679_000);
+    expect(size).toBeLessThan(704_657); // 2026-11-07: re-recorded AT the measured 704,656, LANDING-R2 seat J by the chair's 08:4x ruling (note at file end)
   });
 
   // ── T13 TRANS: the transcendental kernel's CHUNK PLACEMENT ───────────────
@@ -1766,9 +1766,9 @@ describe.runIf(distExists)('ARCH car 2 — the corpus rides data-lazy, and that 
 // ratification histories above each constant are the record of what that costs.
 describe('ARCH car 2 — the three first-paint budgets stay where the owner signed them', () => {
   it('the raw, gzip and Brotli closure budgets are unmoved', () => {
-    expect(CLOSURE_BUDGET_BYTES, 'the raw first-paint budget moved').toBe(1_042_033); // LANDING-8, 2026-11-06 (note at file end)
-    expect(CLOSURE_GZIP_BUDGET_BYTES, 'the gzip transfer budget moved').toBe(336_286);
-    expect(CLOSURE_BROTLI_BUDGET_BYTES, 'the Brotli transfer budget moved').toBe(282_346);
+    expect(CLOSURE_BUDGET_BYTES, 'the raw first-paint budget moved').toBe(1_062_940); // LANDING-R2 seat J, 2026-11-07 (note at file end)
+    expect(CLOSURE_GZIP_BUDGET_BYTES, 'the gzip transfer budget moved').toBe(338_385);
+    expect(CLOSURE_BROTLI_BUDGET_BYTES, 'the Brotli transfer budget moved').toBe(284_778);
 
     // ⭐ THE SETTLEMENT-EDITOR TRAIN'S SUMMED FIRST-PAINT PRICE, recorded by the member that
     // holds this file's row. The three budgets above are unmoved because the train's MEMBERSHIP
@@ -1894,3 +1894,28 @@ describe('ARCH car 2 — the three first-paint budgets stay where the owner sign
 //   LANDING-7: lane E 471780f4a +37 · lane H 18fd6b442 -5 · lanes B, C, D, F, G, G3, F2-4, A 0. 1,042,033 at the tip, the
 //   same eight chunks. The sum closes exactly: 1,037,485 + 4,516 + 32 = 1,042,033. The gzip and Brotli budgets are NOT moved
 //   (both green at the tip). The budget is recorded AT the measured figure. Monotone-down from here; raises stay owner-signed.
+// ── (2026-11-07, THE RUNG-2 LANDING, LANDING-R2 seat J under the chair's 08:4x ruling "the three byte budgets, RULED by the
+//    same door as W0-CLOSE's") ALL THREE FIRST-PAINT BUDGETS AND THE ENGINE BAND RE-RECORDED AT THE MEASURED FIGURES:
+//    VETOABLE RISES (for the three constants above, their ARCH car 2 pin, and the engine chunk's upper band) ──
+// A rise stays the owner's (rule 33, §P11.2); these stand on the chair's ruling until the owner's word. MEASURED with this
+// file's own closure walk and compression settings over a fresh `npm run build` at fab53a696 (FIRSTPAINT-3, 87fdde9a9, already
+// in: it took the tip's closure from 2,383,250 back to the same eight chunks as 1bff51c6d): raw 1,042,033 -> 1,062,940
+// (+20,907), gzip 336,286 -> 338,385 (+2,099), Brotli 282,346 -> 284,778 (+2,432). TRIMMED FIRST, where a trim moves no output
+// byte: FIRSTPAINT-3 is that trim. WHAT IS LEFT IS REAL EAGER USE by the pool census, by chunk (Rollup's emitted bytes,
+// 1bff51c6d -> fab53a696): engine-core +65,879, index -47,727 (modules the grown ESD now routes to engine-core), data +2,980.
+// By module, the minified share estimated from Rollup's rendered lengths (total rendered +76,893 for the +21,132 the chunks
+// carry): rulingPower.js's EAGER call into drawDeclared.js's resolveSibling (census-1f row 116; main.jsx -> store/index.js ->
+// settlementSlice.js -> events/mutate.js -> events/mutateWorld.js -> rulingPower.js) pulls factVocabulary.js ~9.3k,
+// drawDeclared.js ~5.0k, stateProseKernel.js's growth ~1.2k and presumptionLedger.js ~1.0k; foodLedger.js's storesMonths.js
+// ~0.9k (via deriveSystemState.js); data tables ~1.9k (stressTypes, powerData, stressorSpinePhrases, institutionalCatalog);
+// other ~1.8k (activeConditions, rulingPower, foodways, facts/textOf). THE BUY-BACK (the lazy call) IS A CENSUS DESIGN CHANGE
+// (tests/domain/rulingPowerDoor.test.js pins its synchronous ledger notes) and was NOT taken in a landing, by the ruling.
+// THE ENGINE CHUNK'S UPPER BAND 679,000 -> 704,657 (measured 704,656 against 678,351 at 1bff51c6d, +26,305): generation code,
+// where it belongs; by rendered length npcGenerator.js +9.6k, safetyProfile.js +8.1k, power/governingStressVignettes.js +6.4k
+// (new), historyGenerator.js +5.7k, stressNarrative.js +5.0k, narrativeText.js +4.8k, economy/outlookHookSiblings.js +4.3k
+// (new), data/narrativeData.js +4.0k, economy/foodBalance.js +4.0k, narrative/arrivalScene.js +3.7k, and 17 smaller steps
+// (factionRoleFit, institutionDescDraw, foodGenerator, relationshipArchetypes, economyReconciliation, factionLabelClose,
+// factionLeaderSecret, historyCoherence, tieKind, serviceRollMaterialization, spatialGenerator, renormalizeFactionPower …),
+// less roleCategory.js -3.3k and governanceNarrative.js -3.7k. ⚠ The people car's lane 1 retires the density roster from
+// npcGenerator.js, so this band is RE-MEASURED at that car's landing. Recorded AT the measured figures (the band one byte above,
+// its `<` being strict). Monotone-down from here; raises stay owner-signed.
