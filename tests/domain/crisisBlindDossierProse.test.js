@@ -269,7 +269,9 @@ describe('F12 · the crisis dimensions on the state-prose desks', () => {
     // and DS-CND-1's the fixture's lie (a market, a temple, a watch, a value the pool reads, absent);
     // on the pool's own record 8, of which DS-STR-1's 5 are set aside above and DS-CND-1 boom's 3
     // (threat, hunger, crisis: every line denies all three, and the key reads only the archetype)
-    // are a REAL finding, owed a crisis-safe line by the writing wave.
+    // were a REAL finding, owed a crisis-safe line. 8 -> 5 at the chair's ruling of 2026-11-07
+    // 06:5x (ODQ §934.105): the boom pool's v4 `[street · crisis: any]`, which reads only the
+    // archetype and the name, prints under every crisis; the 5 left are DS-STR-1's, set aside.
     expect({ mute, blind }).toEqual({ mute: [], blind: [] });
   });
 

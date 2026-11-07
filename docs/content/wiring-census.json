@@ -23,7 +23,7 @@
   "totals": {
     "pools": 709,
     "blocks": 68,
-    "variants": 2343,
+    "variants": 2344,
     "resolved": 341,
     "unresolved": 368,
     "resolvedWithPredicate": 208,
@@ -34292,7 +34292,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 3,
+      "variants": 4,
       "grammars": 1,
       "predicate": [
         {
@@ -34343,7 +34343,7 @@
       },
       "declares": [],
       "lineDeclares": {
-        "crisis: any": 3,
+        "crisis: any": 4,
         "no crisis: hunger": 3,
         "no crisis: indebted": 3,
         "no crisis: threat": 3
@@ -43927,7 +43927,7 @@
         "DS-CND-1 :: ARCHETYPE: boom",
         "DS-CND-1 :: ARCHETYPE: flourishing"
       ],
-      "variants": 10,
+      "variants": 11,
       "grammars": 3,
       "blocks": [
         "DS-CND-1"
@@ -57589,7 +57589,7 @@
         "condition.archetype"
       ],
       "readingFunction": "conditionArchetypePoolKey",
-      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",

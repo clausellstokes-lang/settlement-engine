@@ -114,9 +114,12 @@ describe('the four negative controls and the positive one (MOVE-GRAMMAR §4.4, a
     // 406 / 114 -> 405 / 114 at the chair's 06:5x rewording of DS-GEN-17 PROVISIONED v3 (ODQ §934.105):
     // v3 is now two sentences beside v1's and v2's one, so the pool is no longer uniform; its opener
     // ("there is") is unchanged and still the pool's own.
-    expect(uniformSegments).toBe(405);
+    // 405 / 114 -> 404 / 114 at the chair's 06:5x DS-CND-1 boom line (ODQ §934.105): boom v4 is one sentence beside v1-v3's two, so the pool is no
+    // longer uniform; its opener ("it is") is new to the pool (the ruled "{settlement} is …" repeated
+    // v2's opener and read 115, so the line opens "It is a good stretch for {settlement}").
+    expect(uniformSegments).toBe(404);
     expect(repeatedOpener).toBe(114);
-    expect(uniformSegments / cells.size).toBeCloseTo(0.571, 3);
+    expect(uniformSegments / cells.size).toBeCloseTo(0.570, 3);
     expect(repeatedOpener / cells.size).toBeCloseTo(0.161, 3);
   });
 
@@ -138,8 +141,9 @@ describe('the four negative controls and the positive one (MOVE-GRAMMAR §4.4, a
     // The arm reads the SAME pools the calibration counted, to the unit.
     const figures = /** @type {any} */ (report.figures.spread);
     expect(figures.pools).toBe(709);
-    // 406 -> 405 by the same cause as the calibration above (the chair's 06:5x rewording of DS-GEN-17 v3).
-    expect(Math.round(figures.uniformSegmentShare * 709)).toBe(405);
+    // 406 -> 405 by the same cause as the calibration above (the chair's 06:5x rewording of DS-GEN-17 v3);
+    // 405 -> 404 at the chair's 06:5x DS-CND-1 boom line (ODQ §934.105), likewise.
+    expect(Math.round(figures.uniformSegmentShare * 709)).toBe(404);
     expect(Math.round(figures.repeatedOpenerShare * 709)).toBe(114);
   });
 

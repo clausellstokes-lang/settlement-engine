@@ -4519,6 +4519,7 @@ one crisis twice.
 1. `[ledger · no crisis: hunger · no crisis: threat · no crisis: indebted · crisis: any]` The town is prosperous. Trade runs in its favour, and the expectation of that has become part of the economy rather than a comment on it.
 2. `[threshold · no crisis: hunger · no crisis: threat · no crisis: indebted · crisis: any]` {settlement} is doing well, and quietly depends on the arteries feeding it. The boom is real and it is not self-sustaining.
 3. `[street · no crisis: hunger · no crisis: threat · no crisis: indebted · crisis: any]` Coin is easy here. The warehouses fill, the wages hold, and nobody is much interested in what the routes moving would mean.
+4. `[street · crisis: any]` It is a good stretch for {settlement}: more coin changes hands than a year ago, and work is easy to find.
 
 **ARCHETYPE: `flourishing`** · **THE GOOD STATE (R-DST-G)** {crisis-scoped}
 1. `[ledger]` This is a good stretch for the town. There is room here for things that are not strictly necessary, and the accounts carry them without strain.
