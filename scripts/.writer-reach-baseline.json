@@ -8,7 +8,7 @@
   "The reviewable slice is computed by RULE (reviewableDark), never hand-listed."
  ],
  "schema": 1,
- "frozenAtSha": "7b7f1de5bf4f81a027f4f6e8265d517ecddc7361",
+ "frozenAtSha": "b09db408602178f4e50001fba4af974567487be8",
  "charter": "§18.1 WRWALKER Car 1 (HORIZON) — chair-signed vetoably at the INSTR-WRW pre-stage",
  "minRows": 40,
  "corpusMeta": {
@@ -23,7 +23,7 @@
   "transitionCount": 14426
  },
  "shapesDigest": "782dcd97c1f8dc63870232f1660c255dfb5f6065c2cf0496e3e66b45823d9d03",
- "detectorDigest": "5862331bef3ff77c51067b13fb88218a84f690c8e9558966499428f7e6b72ed2",
+ "detectorDigest": "1dcced45ace570bc310f0b88ff72b4848a7ea75385d0ae883a2a72b46723e2e4",
  "verdictDigest": "ac48c453d28890e8747f6136704555d3bc7d86c61f2e3dc6a13c2e7ad75effab",
  "surfaceRoots": {
   "web": [
@@ -101,7 +101,7 @@
   "nGrades": 979601,
   "resolvedReceivers": 7018
  },
- "registerDigest": "11b704a1e015dcf84a6b7b25e2294a7f7138c4818b97a85095ab4bee9fc321d8",
+ "registerDigest": "44edd67a4f8bf47e507539ef6fe2e1a5da75ec18197a02a42fff91d213ba9520",
  "pendingSurfaceCeiling": 3,
  "reviewableDarkCount": 497,
  "darkUnregistered": [
@@ -174,12 +174,6 @@
   {
    "identity": "_population on config",
    "key": "_population",
-   "shape": "config",
-   "rows": 472
-  },
-  {
-   "identity": "_routeIntent on config",
-   "key": "_routeIntent",
    "shape": "config",
    "rows": 472
   },
@@ -308,12 +302,6 @@
    "key": "annotation",
    "shape": "legacyAnnotations",
    "rows": 957
-  },
-  {
-   "identity": "anyActive on flags",
-   "key": "anyActive",
-   "shape": "flags",
-   "rows": 472
   },
   {
    "identity": "appliedHeadline on majors",
@@ -2374,12 +2362,6 @@
    "rows": 4408
   },
   {
-   "identity": "human_trafficking on contentBoundaries",
-   "key": "human_trafficking",
-   "shape": "contentBoundaries",
-   "rows": 472
-  },
-  {
    "identity": "importNote on foodSecurity",
    "key": "importNote",
    "shape": "foodSecurity",
@@ -3158,18 +3140,6 @@
    "key": "mountain_timber",
    "shape": "reasons",
    "rows": 4408
-  },
-  {
-   "identity": "nearbyResourceDefinitions on config",
-   "key": "nearbyResourceDefinitions",
-   "shape": "config",
-   "rows": 472
-  },
-  {
-   "identity": "nearbyResourceDefinitionsDepleted on config",
-   "key": "nearbyResourceDefinitionsDepleted",
-   "shape": "config",
-   "rows": 472
   },
   {
    "identity": "noble on stocks",
@@ -5842,18 +5812,6 @@
    "rows": 406
   },
   {
-   "identity": "religion on priorities",
-   "key": "religion",
-   "shape": "priorities",
-   "rows": 472
-  },
-  {
-   "identity": "religion on raw",
-   "key": "religion",
-   "shape": "raw",
-   "rows": 944
-  },
-  {
    "identity": "religionInfluence on compound",
    "key": "religionInfluence",
    "shape": "compound",
@@ -6368,12 +6326,6 @@
    "key": "site",
    "shape": "steadings",
    "rows": 444
-  },
-  {
-   "identity": "slavery on contentBoundaries",
-   "key": "slavery",
-   "shape": "contentBoundaries",
-   "rows": 472
   },
   {
    "identity": "sourceNote on autoApplied",

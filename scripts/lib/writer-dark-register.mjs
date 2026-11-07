@@ -774,6 +774,142 @@ export const WRITER_DARK_REGISTER = Object.freeze([
     charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
       + 'W6, section POW), consumer PLAUSIBLE at src/domain/worldPulse/magicFormsPractitioner.js:127',
   }),
+  Object.freeze({
+    identity: '_routeIntent on config',
+    key: '_routeIntent',
+    shape: 'config',
+    writer: 'src/generators/steps/resolveConfig.js',
+    reason: 'engine-internal',
+    consumer: Object.freeze({
+      file: 'src/generators/structuralValidator.js',
+      symbol: 'the isolation check, which treats an explicitly chosen isolated route as the DM\'s intent',
+    }),
+    why: 'Provenance of the user\'s choice: whether the trade route was rolled at random or chosen. The '
+      + 'structural validator reads it (structuralValidator.js:699) so an isolation the DM chose is not '
+      + 'repaired away; the route itself is LIT, and the user already knows whether they chose it.',
+    charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
+      + 'W6, section META), consumer CONFIRMED at src/generators/structuralValidator.js:699',
+  }),
+  Object.freeze({
+    identity: 'nearbyResourceDefinitions on config',
+    key: 'nearbyResourceDefinitions',
+    shape: 'config',
+    writer: 'src/generators/steps/resolveResources.js',
+    reason: 'engine-internal',
+    consumer: Object.freeze({
+      file: 'src/generators/foodGenerator.js',
+      symbol: 'the food generator, which reads the custom resource definitions to count the food a custom resource '
+        + 'yields',
+    }),
+    why: 'Content identity sidecars (refId and localUid) for custom nearby resources, so a custom resource '
+      + 'keeps its identity through regeneration and import. The food generator reads them on the config '
+      + '(foodGenerator.js:85); the resource NAMES are LIT through nearbyResources, and an identity sidecar '
+      + 'is not a fact a player reads.',
+    charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
+      + 'W6, section META), consumer CONFIRMED at src/generators/foodGenerator.js:85',
+  }),
+  Object.freeze({
+    identity: 'nearbyResourceDefinitionsDepleted on config',
+    key: 'nearbyResourceDefinitionsDepleted',
+    shape: 'config',
+    writer: 'src/generators/steps/resolveResources.js',
+    reason: 'engine-internal',
+    consumer: Object.freeze({
+      file: 'src/generators/foodGenerator.js',
+      symbol: 'the food generator, which reads the custom resource definitions to count the food a custom resource '
+        + 'yields',
+    }),
+    why: 'Content identity sidecars (refId and localUid) for custom nearby resources, so a custom resource '
+      + 'keeps its identity through regeneration and import. The food generator reads them on the config '
+      + '(foodGenerator.js:90); the resource NAMES are LIT through nearbyResources, and an identity sidecar '
+      + 'is not a fact a player reads.',
+    charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
+      + 'W6, section META), consumer CONFIRMED at src/generators/foodGenerator.js:90',
+  }),
+  Object.freeze({
+    identity: 'slavery on contentBoundaries',
+    key: 'slavery',
+    shape: 'contentBoundaries',
+    writer: 'src/domain/generationContentProfile.js',
+    reason: 'engine-internal',
+    consumer: Object.freeze({
+      file: 'src/generators/economy/economicState.js',
+      symbol: 'the slave-trade export gate, which may draw that trade only where both boundaries allow it',
+    }),
+    why: 'A generation content gate the user set in the configuration panel: whether this theme may appear in '
+      + 'generated content. The economy reads the resolved profile\'s boundary (economicState.js:600-601) '
+      + 'before it may draw a slave trade; the stored config copy is spread from that same profile '
+      + '(resolveConfig.js:208) and is not itself re-read. A permission is not a fact about the world.',
+    charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
+      + 'W6, section META), consumer PLAUSIBLE at src/generators/economy/economicState.js:600',
+  }),
+  Object.freeze({
+    identity: 'human_trafficking on contentBoundaries',
+    key: 'human_trafficking',
+    shape: 'contentBoundaries',
+    writer: 'src/domain/generationContentProfile.js',
+    reason: 'engine-internal',
+    consumer: Object.freeze({
+      file: 'src/generators/economy/economicState.js',
+      symbol: 'the slave-trade export gate, which may draw that trade only where both boundaries allow it',
+    }),
+    why: 'A generation content gate the user set in the configuration panel: whether this theme may appear in '
+      + 'generated content. The economy reads the resolved profile\'s boundary (economicState.js:600-601) '
+      + 'before it may draw a slave trade; the stored config copy is spread from that same profile '
+      + '(resolveConfig.js:208) and is not itself re-read. A permission is not a fact about the world.',
+    charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
+      + 'W6, section META), consumer PLAUSIBLE at src/generators/economy/economicState.js:601',
+  }),
+  Object.freeze({
+    identity: 'anyActive on flags',
+    key: 'anyActive',
+    shape: 'flags',
+    writer: 'src/generators/priorityHelpers.js',
+    reason: 'engine-internal',
+    consumer: Object.freeze({
+      file: 'src/generators/npcGenerator.js',
+      symbol: 'the relationship-tension draw, which reads the compound-situation summary flag before weighting ties',
+    }),
+    why: 'A derived gate: the OR of the compound-situation flags beside it. getStressFlags writes it, and the '
+      + 'NPC relationship draw reads it on its own call of the same producer (npcGenerator.js:1608, :1653); '
+      + 'the stored copy on the safety profile is not itself re-read. The flags it summarises are the facts '
+      + '(W2, W34 say them); their OR is not.',
+    charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
+      + 'W6, section META), consumer PLAUSIBLE at src/generators/npcGenerator.js:1653',
+  }),
+  Object.freeze({
+    identity: 'religion on raw',
+    key: 'religion',
+    shape: 'raw',
+    writer: 'src/generators/priorityHelpers.js',
+    reason: 'engine-internal',
+    consumer: Object.freeze({
+      file: 'src/generators/priorityHelpers.js',
+      symbol: 'getInstFlags, which reads the religion slider into religionInfluence on the object it stores as raw',
+    }),
+    why: 'The raw religion priority slider, a copy of config.priorityReligion, which is LIT. getInstFlags '
+      + 'reads it (priorityHelpers.js:356, :422) to compute religionInfluence on the very object it then '
+      + 'stores as raw (:446); what drives the town is the computed influence, and the slider is the DM\'s own '
+      + 'input.',
+    charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
+      + 'W6, section META), consumer CONFIRMED at src/generators/priorityHelpers.js:422',
+  }),
+  Object.freeze({
+    identity: 'religion on priorities',
+    key: 'religion',
+    shape: 'priorities',
+    writer: 'src/generators/priorityHelpers.js',
+    reason: 'engine-internal',
+    consumer: Object.freeze({
+      file: 'src/generators/economy/viability.js',
+      symbol: 'the viability expectation check, which reads the religion priority to expect a religious centre',
+    }),
+    why: 'The religion priority slider again, copied onto economicState.priorities by getPriorities; the LIT '
+      + 'fact is config.priorityReligion. The viability check reads the slider on its own getPriorities call '
+      + '(viability.js:208, :333) to expect a religious centre; the stored copy is not itself re-read.',
+    charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
+      + 'W6, section META), consumer PLAUSIBLE at src/generators/economy/viability.js:333',
+  }),
 ]);
 
 const SECTION = /§\d+/;
