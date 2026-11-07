@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "08dbccd18cedd2987773b1922736919702bb7956",
-  "measuredBy": "LANDING-R2 seat E (Opus 5.5)",
+  "measuredAtSha": "5ecc8d4f93c684a5eab0845a76b5a63e00179858",
+  "measuredBy": "LANDING-R2 (Opus 5.5)",
   "date": "2026-11-07",
-  "note": "LANDING-R2 seat E at the rung-2 landing tip (rung 1 final merged with the pool census): files 2940 -> 3083 are the 143 test files the pool census lanes, the reader lanes, the compose and phases A-E brought in since rung 1 final (1bff51c6d; 143 born, 0 deleted); parked, credited and titles move with those files, this landing's re-keys, and seat E's cures (fourteen each-only files reformatted, each-only 122 -> 108; census2dTables' describe.each removed), measured whole.",
+  "note": "the late cure seats' test files (G2, G3, H, I2) after seat E's refreeze at 08dbccd18; the chair's rulings of 2026-11-07 06:1x-07:1x UTC, ODQ §934.105",
   "files": 3083,
   "parked": 381,
   "credited": 2702,
-  "titles": 28434,
+  "titles": 28435,
   "suiteTitles": 7635
 }
