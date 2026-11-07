@@ -5,6 +5,7 @@
  */
 import { describe, expect, it } from 'vitest';
 import { isDefenceClaim, isDefenceReach } from '../../scripts/audit/soak-review/defenceReach.mjs';
+import { variantByVid } from '../helpers/drawnProse.js';
 
 /** @type {ReadonlyArray<[string, string]>} the rung's bucket-a quotes */
 const REACH = [
@@ -86,7 +87,8 @@ describe('F11 · a building\'s own walls are not a fortification', () => {
   });
   it('the reserve line and the siege pool line still fire', () => {
     expect(claims('The settlement keeps more in reserve than its size explains: granaries a little too large, walls a little too strong.')).toBe(true);
-    expect(claims('the walls have settled the argument')).toBe(true);
+    // The siege pool line, computed (proseDrawnAnchors: never a literal state-prose anchor).
+    expect(claims(variantByVid({ leaf: 'power', blockId: 'DS-POW-2', poolKey: 'siege matched', vid: 1, slots: { settlement: 'Ford' } }))).toBe(true);
   });
   it('a perimeter claim still fires: the walls, walled, the town\'s walls, outside the walls, its walls of the settlement', () => {
     for (const quote of [
