@@ -255,9 +255,10 @@ describe('EM-R4 — the settlement name is held through assembly', () => {
     // ANTI-VACUITY: the blast radius is not the empty set, and the name itself is always in it.
     expect(tally.perKey[NAME_KEY], 'the name key itself never moved: the arm measured nothing').toBe(63);
     expect(Object.keys(tally.perKey).length, 'more than the name moved, which is the point of the five').toBeGreaterThan(1);
-    // THE OTHER KEYS ARE A STABLE 36 ON EVERY ROW, and every one of them is byte-identical.
-    expect([...tally.otherKeyCounts], 'the record\'s top-level key count is not uniform across the corpus').toEqual([36]);
-    expect(tally.others.size).toBe(36);
+    // THE OTHER KEYS ARE A STABLE 35 ON EVERY ROW, and every one of them is byte-identical.
+    // PEOPLE-5B (M-7): 36 -> 35, the grouping `factions` left the record.
+    expect([...tally.otherKeyCounts], 'the record\'s top-level key count is not uniform across the corpus').toEqual([35]);
+    expect(tally.others.size).toBe(35);
   }, 900_000);
 
   it('A5 — EM-R4: the customName short-circuit keeps the held name, where an in-mint consult loses it', () => {

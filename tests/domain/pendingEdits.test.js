@@ -139,8 +139,7 @@ describe('pendingEdits — cascade preview', () => {
   const baseSettlement = {
     name: 'Hightower',
     npcs: [{ name: 'A', plotHooks: [{ text: 'H1' }, { text: 'H2' }] }, { name: 'B' }],
-    // PEOPLE-5A (M-2): the preview counts the powers, not the NPC grouping (re-keyed with cause).
-    powerStructure: { factions: [{ faction: 'F1' }] },
+    powerStructure: { factions: [{ faction: 'F1' }] }, // PEOPLE-5B (M-7): the powers are the only faction roster
     economicViability: { plotHooks: [{ hook: 'H3' }] },
   };
 
@@ -297,7 +296,7 @@ describe('pendingEdits — cascade preview', () => {
     const q = [buildEdit('rename-npc', { npcId: 'a', newName: 'A2' }, 1)];
     const p = previewCascade(baseSettlement, q);
     expect(p.downstreamCounts.npcs).toBe(2);
-    expect(p.downstreamCounts.powers).toBe(1);
+    expect(p.downstreamCounts.factions).toBe(1);
     expect(p.downstreamCounts.hooks).toBe(3);
   });
 

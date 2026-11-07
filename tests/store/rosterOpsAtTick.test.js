@@ -49,6 +49,7 @@ import {
   selectDecrees,
   stageAddDecreeIntent,
 } from '../../src/store/editSlice.js';
+import { migrateV1toV2 } from '../../src/domain/settlementMigrations.js';
 
 const REPO_ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const ADVANCE_SESSION = 'src/store/campaignAdvanceSession.js';
@@ -206,6 +207,12 @@ describe('EM-E8 C — an applied add-decree mints its row at the tick, once, and
       state.settlement.interSettlementRelationships = [{ npcName: 'Cara', partnerName: 'Ilsa' }];
       state.settlement.crossSettlementConflicts = [{ id: 'c1' }];
       state.settlement.populationHistory = [{ tick: 0, population: 40 }];
+      // PEOPLE-5B (M-7): the save migration's report joined SAVED_ONLY_KEYS (HISTORY). SEEDED WITH THE PRODUCT'S
+      // OWN WRITER (settlementMigrations.js :: migrateV1toV2 over a v1 card whose affiliation names no power).
+      state.settlement.migrationReports = migrateV1toV2({
+        schemaVersion: 1, powerStructure: { factions: [] }, institutions: [],
+        npcs: [{ id: 'v1', name: 'Old Hand', factionAffiliation: 'A Grouping Long Gone' }],
+      }).settlement.migrationReports;
       // ⭐ NOTE-14's key joined SAVED_ONLY_KEYS when the register finally classed it, and the
       //    equality below is over that list, so this fixture has to carry it or the arm would
       //    red on a key nobody seeded rather than on a key the re-derivation dropped. SEEDED
@@ -225,7 +232,7 @@ describe('EM-E8 C — an applied add-decree mints its row at the tick, once, and
 
     expect(receipt.rederived, 'the record WAS replaced by a fresh re-derivation, or this arm'
       + ' measures a record nothing rebuilt').toBe(true);
-    expect(survived, 'every SAVED-ONLY key of EM-R0a\'s register survived — the SEVEN nothing in'
+    expect(survived, 'every SAVED-ONLY key of EM-R0a\'s register survived — the EIGHT nothing in'
       + ' generation writes, so a re-derivation that simply replaced the record would DELETE them')
       .toEqual([...SAVED_ONLY_KEYS].sort(compareCodepoint));
     expect(after.neighbourNetwork, 'and each one is carried VERBATIM')
@@ -234,6 +241,8 @@ describe('EM-E8 C — an applied add-decree mints its row at the tick, once, and
     expect(after.crossSettlementConflicts).toEqual(before.crossSettlementConflicts);
     expect(after.populationHistory).toEqual(before.populationHistory);
     expect(after.peaceOffers, 'NOTE-14\'s key was dropped by the re-derivation').toEqual(before.peaceOffers);
+    expect(after.migrationReports, 'M-7\'s report was dropped by the re-derivation').toEqual(before.migrationReports);
+    expect(before.migrationReports?.[0]?.unmapped?.length, 'the seeded report is not empty').toBe(1);
     expect(after.decrees.map((row) => row.id), 'the REGISTRY above all: losing it would erase the'
       + ' DM\'s own history at the very tick that applied it').toEqual([staged.decreeId]);
     expect(after.dmLayer.minted[staged.decreeId], 'and the layer is THIS member\'s own write, never'

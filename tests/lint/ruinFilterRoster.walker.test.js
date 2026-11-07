@@ -96,6 +96,7 @@ const RUIN_AGNOSTIC_EXEMPT = Object.freeze({
   'src/domain/worldPulse/stressorGates.js': 'existence-gate — .some() magic-dependence → narrative strings',
   'src/domain/tableLedger.js': 'name/existence-lookup — exposureTargets offers corruption-marked NPCs/institutions/factions as DM exposure-picker options (selection list, not live-provider aggregation)',
   'src/domain/display/galleryVeil.js': 'mutation — THE GALLERY VEIL (X-21e) REMOVES criminal and clandestine houses from a visitor\'s projected copy; it credits no institution with capacity and sums nothing. A ruined criminal house is hidden exactly as a standing one (existence is the fact veiled), so routing the read through liveInstitutions() would LEAK the ruined ones, not filter them. RULED EXEMPT BY THE CHAIR at the W2-VEIL-A landing (2026-10-31).',
+  'src/domain/settlementMigrations.js': 'name-lookup — PEOPLE-5B (2026-11-07, M-7): the v1 -> v2 save migration reads the roster\'s NAMES once, to recognise a v1 card\'s string `institution` (or an unmapped `secondaryAffiliation`) as a house on the roster. A ruined house is still the house that card was the face of: filtering ruins would turn a DM\'s ruined-temple priest into a face of no house and mis-report the value. It sums nothing and credits no institution with capacity.',
   'src/domain/edit/pools.js': 'name-lookup/affordance — the `npc.role` pool offers a DM the roles the record\'s OWN institutions roster already carries, as a SELECTION LIST ("what may a human name for this field"), never a live-provider aggregation: it sums nothing and credits no institution with capacity. RULED EXEMPT BY THE CHAIR (judgment 138, EM-A2b version 7) on the same reason src/domain/events/targetRosters.js and src/domain/tableLedger.js already hold. Routing it through liveInstitutions() would DROP a ruined institution from a picker where it is a legitimate answer — the former warden of a burned keep is a role a DM may still name — and would add a THIRTEENTH import to a leaf whose own header forbids one.',
   'src/domain/mapProfile.js': 'existence-gate (deferred) — .some() walls → hasWalls; a ruined citadel still reads walled (owner glance)',
   'src/domain/contradictions.js': 'existence-gate — narrative QA detectors (.some presence)',
@@ -485,7 +486,8 @@ describe('ruin-filter roster ratchet (structural-prevention Pattern 2)', () => {
     // src/domain/coherence/readerBattery.js, born in lane READER-INSTRUMENTS (c84e9377f) and
     // composed at cf7c6956f; EXEMPT above as an existence-gate/name-lookup instrument. Read from
     // this arm's own failure message ("expected 99 to be 98"), never computed.
-    expect(readers.length).toBe(99);
+    // PEOPLE-5B (2026-11-07, M-7): 99 -> 100, settlementMigrations.js :: migrateV1toV2's roster-name read (EXEMPT above).
+    expect(readers.length).toBe(100);
   });
 
   test('exempt honesty: every exempt entry still reads .institutions and is not already compliant', () => {

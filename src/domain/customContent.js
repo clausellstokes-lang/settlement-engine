@@ -32,6 +32,7 @@ import { magicLedger } from './magicLedger.js';
 import { ARCANE_IDENTITY } from './arcaneIdentity.js';
 import { stripNegatedMagic } from './magicAssertionText.js';
 import { institutionCatalogArcaneTag } from './arcaneInstitutionIdentity.js';
+import { firstRankMembershipOf } from './people/membership.js';
 
 // ── Catalogs ─────────────────────────────────────────────────────────────
 
@@ -61,7 +62,8 @@ export const INSTITUTION_CATEGORIES = Object.freeze([
  * @property {string} [type]
  * @property {string} [controlledBy]
  * @property {string} [controller]
- * @property {string} [factionAffiliation]
+ * @property {string} [factionAffiliation]  a library NPC authored before the people car (the DM's own words; read, never written)
+ * @property {Array<{ power?: string, rank?: number|null }>} [memberships]  PEOPLE-5B (M-7): the card's powers
  * @property {string} [threatType]
  * @property {string} [category]
  * @property {string[]} [risks]
@@ -385,7 +387,9 @@ function classifyCustomNpc(rawEntity) {
     inferredCategory: null,
     provides:     ['individual_authority'],
     requires:     ['standing in a faction or institution'],
-    controlledBy: rawEntity.factionAffiliation || 'unattributed',
+    // PEOPLE-5B (M-7): the power the NPC ranks first in; a library entity the DM authored before the
+    // car keeps its own `factionAffiliation` words (custom content is outside the settlement migration).
+    controlledBy: firstRankMembershipOf(rawEntity)?.power || rawEntity.factionAffiliation || 'unattributed',
     risks:        [],
     effects:      { substrate: {}, capacities: {} },
     contributors: [{ source: 'category_inference', effect: 'npc', reason: `"${name}" classified as NPC.` }],

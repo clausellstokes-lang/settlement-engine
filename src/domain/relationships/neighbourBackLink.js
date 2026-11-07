@@ -183,7 +183,7 @@ const NO_LIVE_ENGAGEMENTS = /** @type {ReadonlyArray<Record<string, unknown>>} *
  *
  * PURE: no clock, no ambient RNG, no store, no React.
  *
- * @param {{ _seed?: unknown, id?: unknown, name?: unknown, npcs?: unknown, factions?: unknown,
+ * @param {{ _seed?: unknown, id?: unknown, name?: unknown, npcs?: unknown, powerStructure?: unknown,
  *   neighborRelationship?: { id?: unknown, name?: unknown, relationshipType?: unknown,
  *     npcs?: unknown, factions?: unknown } | null } | null | undefined} settlement
  * @returns {ReadonlyArray<Record<string, unknown>>}

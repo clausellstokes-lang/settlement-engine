@@ -62,10 +62,6 @@ const isHeldScope = (key) => CLASS_OF.get(key.split(/[.[]/)[0]) === 'HELD';
 const READING_KEYS = Object.entries(RECORD_CLASSES)
   .filter(([, cls]) => cls === 'READING').map(([key]) => key);
 
-/** The declared MIRROR sub-paths. A mirror is RECOMPUTED after the merge, never merged. */
-const MIRROR_PATHS = Object.entries(CLASS_EXCEPTIONS)
-  .filter(([, cls]) => cls === 'MIRROR').map(([path]) => path);
-
 /**
  * The declared HISTORY sub-paths — THE PROMISE's immutable lived history. The tree merge keeps
  * one from the RECORD (`recordMergeTree.js :: mergeNode`, its `KEPT_BY_CLASS` set), and a rung
@@ -76,33 +72,10 @@ const MIRROR_PATHS = Object.entries(CLASS_EXCEPTIONS)
 const HISTORY_PATHS = Object.entries(CLASS_EXCEPTIONS)
   .filter(([, cls]) => cls === 'HISTORY').map(([path]) => path);
 
-/**
- * `factions[].members[]` — a complete copy of the NPC its `id` names, and a MIRROR by class: a pure
- * function of held facts, RECOMPUTED after the merge, never merged. A member whose id the merged
- * roster no longer carries is left exactly as the record has it (removing a person is the op's
- * cascade, never the merge's).
- * @param {RecordCard} merged @returns {number} members rewritten
- */
-export function recomputeMirrors(merged) {
-  if (!MIRROR_PATHS.includes('factions[].members[]')) return 0;
-  const factions = merged.factions;
-  const npcs = merged.npcs;
-  if (!Array.isArray(factions) || !Array.isArray(npcs)) return 0;
-  /** @type {Map<string, RecordCard>} */
-  const byId = new Map();
-  for (const npc of npcs) if (isObj(npc) && npc.id !== undefined) byId.set(String(npc.id), npc);
-  let rewritten = 0;
-  for (const faction of factions) {
-    if (!isObj(faction) || !Array.isArray(faction.members)) continue;
-    faction.members = faction.members.map((member) => {
-      const source = isObj(member) ? byId.get(String(member.id)) : undefined;
-      if (source === undefined) return member;
-      rewritten += 1;
-      return clone(source);
-    });
-  }
-  return rewritten;
-}
+// PEOPLE-5B (2026-11-07, M-7): `recomputeMirrors` LEFT with the register's `factions[].members[]` MIRROR
+// row — the grouping's member copy was the only MIRROR on an entity path, and a v2 record carries no
+// grouping. The one MIRROR left (`generationCoherenceReceipt.judgments[].evidence`) is restated by
+// `recomputeReceipts` below.
 
 /** `V-EVIDENCE-ROSTER`'s own `ROSTER_RE`, with the surrounding text captured so only the digits move. */
 const ROSTER_STATED = /(\d+)(\s+NPCs?\s*\/\s*)(\d+)(\s+relationships?)/;
@@ -330,7 +303,6 @@ export function mergeConsequence(record, R0, R1, options = {}) {
     );
   }
   const { value, receipts } = mergeTree(record, R0, R1);
-  recomputeMirrors(value);
   recomputeReceipts(value);
   /** @type {Set<string>} */
   const exempt = new Set([

@@ -756,24 +756,8 @@ export const WRITER_DARK_REGISTER = Object.freeze([
     charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
       + 'W6, section POW), consumer CONFIRMED at src/domain/worldPulse/magicFormsPractitioner.js:127',
   }),
-  Object.freeze({
-    identity: 'generatedAs on members',
-    key: 'generatedAs',
-    shape: 'members',
-    writer: 'src/generators/factionRoles.js',
-    reason: 'engine-internal',
-    consumer: Object.freeze({
-      file: 'src/domain/worldPulse/magicFormsPractitioner.js',
-      symbol: 'isMagicPractitioner, which reads the provenance marker before classifying a person by role',
-    }),
-    why: 'A provenance marker naming the generator path that minted the person (faction_structural, instant, '
-      + 'practitioner), written "for migration and debugging". The practitioner law reads it '
-      + '(magicFormsPractitioner.js:127) to recognise a person its own lane minted; the player is shown the '
-      + 'person, their role and their office, never the path that made them. The faction member list carries '
-      + 'the roster\'s records; whether its own saved copy is re-read is not measured.',
-    charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
-      + 'W6, section POW), consumer PLAUSIBLE at src/domain/worldPulse/magicFormsPractitioner.js:127',
-  }),
+  // PEOPLE-5B (2026-11-07, M-7): `generatedAs on members` LEFT — the grouping's member copy (`factions[].members[]`)
+  // left the record, so no shape carries the identity; the marker on the card itself is `generatedAs on npcs` above.
   Object.freeze({
     identity: '_routeIntent on config',
     key: '_routeIntent',

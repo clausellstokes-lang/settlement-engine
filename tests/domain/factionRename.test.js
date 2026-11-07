@@ -295,13 +295,11 @@ describe('faction rename — the declared surface set', () => {
     const npcRecord = () => ({
       id: 'npc.1',
       name: 'Aldis',
-      factionAffiliation: OLD,
-      secondaryAffiliation: OLD,
-      linkedFactionIds: [OLD, 'faction.militia'],
+      // PEOPLE-5B (M-7): the v2 card carries no factionAffiliation / secondaryAffiliation / linkedFactionIds /
+      // factionGoal — its powers are `memberships` below, the cascade's one key row.
       // The title and the goal line both carry the faction token (added 2026-08-01
       // with the surfaces themselves; see NPC_FACTION_FIELDS in factionRename.js).
       role: `${OLD} Harbourmaster`,
-      factionGoal: `Maintain ${OLD}'s position against current pressure`,
       // The succession-void goal names a faction too (added 2026-09-30 with its surface).
       goal: { short: `Position themselves before ${OLD} moves first`, long: 'Secure authority through the right means, not just the fastest' },
       secret: { what: `Aldis sells ${OLD} manifests to the Militia.`, stakes: `The ${OLD} would drown them for it.` },
@@ -335,7 +333,7 @@ describe('faction rename — the declared surface set', () => {
         npc1Role: `${OLD} Harbourmaster`, npc2Role: `${OLD} Tollwright`,
       }],
       institutions: [{ name: 'Customs House', factionSource: OLD }],
-      factions: [{ name: OLD, powerFactionName: OLD, members: [npcRecord()] }],
+      // PEOPLE-5B (M-7): no grouping `factions` — a v2 record's card has one home.
       // GS-2 (ODQ §934.101): a conflict is fought between POWER factions, so its party keys,
       // its sentence and its hooks carry the faction's name at the top-level home too.
       conflicts: [{ parties: [OLD, 'Militia'], desc: `${OLD} and Militia are in high conflict.`, plotHooks: [`A clerk of the ${OLD} sells the Militia a ledger.`] }],
@@ -378,9 +376,8 @@ describe('faction rename — the declared surface set', () => {
       .map(surface => surface.path);
     expect(lost, `surfaces that did not gain the new name: ${lost.join(', ')}`).toEqual([]);
 
-    // The link list keeps its non-name entry: a slug id is durable identity and
-    // never equals a display name, so only the name-keyed half heals.
-    expect(settlement.npcs[0].linkedFactionIds).toEqual([NEW_NAME, 'faction.militia']);
+    // The membership list keeps its sibling power: only the renamed power's entry moves.
+    expect(settlement.npcs[0].memberships.map((m) => m.power)).toEqual([NEW_NAME, 'Militia']);
     // `history` is cascaded for the tension roster ONLY. The founding story names
     // the old faction and must be left exactly as recorded.
     expect(settlement.history.founding.story).toBe(`The ${OLD} laid the first stone.`);
@@ -414,32 +411,28 @@ describe('faction rename — every exercised surface moves', () => {
       .toEqual([]);
   });
 
-  test('a saved-and-reloaded NPC is healed at BOTH of its homes', () => {
-    // The regression this pin exists for: on a live settlement the member copy IS
-    // the npcs[] object, so a cascade that walked only npcs[] looked complete.
+  // PEOPLE-5B (2026-11-07, M-7): the SECOND HOME LEFT with the grouping (factionRename.js :: NPC_HOMES is
+  // ['npcs[]']). The regression this arm pinned — a reloaded member copy keeping the dead name — cannot occur on a
+  // v2 record, which carries no member copy; what stands in its place is the one home's proof on a reloaded save.
+  test('a saved-and-reloaded card is healed at its ONE home, and the record carries no second', () => {
     const settlement = reloaded(base);
-    const named = (settlement.factions || []).flatMap(group => (group.members || []));
-    const held = named.filter(m => m?.factionAffiliation === governingName);
-    // Anchored: the fixture provably carries member copies of the renamed faction.
-    expect(held.length, 'no faction group member carries the governing name on this seed')
-      .toBeGreaterThan(0);
-    expect(named.some(m => m === settlement.npcs?.[0]), 'members must be separate objects after reload')
-      .toBe(false);
-
+    expect('factions' in settlement, 'a v2 record carries no grouping').toBe(false);
+    const held = settlement.npcs.filter(n => (n.memberships || []).some(m => m.power === governingName));
+    // Anchored: the fixture provably carries cards standing in the renamed power.
+    expect(held.length, 'no card stands in the governing power on this seed').toBeGreaterThan(0);
     applyFactionRenameToSettlement(settlement, governingName, NEW_NAME);
-    const stillStale = (settlement.factions || [])
-      .flatMap(group => group.members || [])
-      .filter(m => m?.factionAffiliation === governingName);
-    expect(stillStale, `${stillStale.length} member copies kept the dead faction name`).toEqual([]);
+    const stillStale = settlement.npcs.filter(n => (n.memberships || []).some(m => m.power === governingName));
+    expect(stillStale, `${stillStale.length} cards kept the dead power name`).toEqual([]);
   });
 
   test('the resolver reads through nameOf precedence, canonical list first', () => {
     const settlement = reloaded(base);
     const resolved = resolveFactionForRename(settlement, 0);
     expect(resolved?.currentName).toBe(nameOf(settlement.powerStructure.factions[0]));
-    // A legacy-only save still resolves, through the documented fallback.
+    // PEOPLE-5B (M-7): the grouping fallback LEFT — a v1 save is migrated before it is edited, and a
+    // record with no powers has nothing to rename.
     const legacyOnly = { factions: [{ name: 'Old Mirror' }] };
-    expect(resolveFactionForRename(legacyOnly, 0)?.currentName).toBe('Old Mirror');
+    expect(resolveFactionForRename(legacyOnly, 0)).toBeNull();
   });
 });
 

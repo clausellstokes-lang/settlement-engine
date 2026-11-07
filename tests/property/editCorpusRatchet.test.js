@@ -393,7 +393,8 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     expect(census().rows.flatMap((row) => row.gone)).toEqual([]);
     expect(census().rows.flatMap((row) => row.arrived)).toEqual([]);
     // the ONLY held motion left is the register's own declared RECEIPT, on the config channel
-    expect(HELD_EXCEPTIONS).toEqual(['powerStructure.economyInputFingerprint', 'factions[].members[]']);
+    // PEOPLE-5B (M-7): the grouping's MIRROR left the register (`factions[].members[]`).
+    expect(HELD_EXCEPTIONS).toEqual(['powerStructure.economyInputFingerprint']);
     // 2026-10-01 (the urban band + the druid rulings, ODQ §934.86 and its addendum 2; the urban-band chair, measured against the pre-band base 5d699cc68, where this file is 8/8): declared-only {E7 42, E8 2} → {47, 7};
     // config escalation rows {31, 17} → {30, 10} and steps {136, 76} → {132, 40}, every one still EXHAUSTED; the live residue
     // 48 → 40 rows, V-DEFENSE-INST 31 → 35 and V-EVIDENCE-CONFLICT 22 → 8 (mergeLadderHeldKeys A2 reads the same re-deal).

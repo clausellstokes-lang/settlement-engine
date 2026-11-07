@@ -42055,7 +42055,8 @@
         },
         {
           "path": "tests/domain/recordMerge.test.js",
-          "symbol": "      'enclosingGroup', 'guardMergedRecord', 'mergeConsequence', 'recomputeMirrors', 'recomputeReceipts',",
+          "symbol": "      'enclosingGroup', 'guardMergedRecord', 'mergeConsequence', 'recomputeReceipts',",
+          "_reKeyed": "2026-11-07, PEOPLE-5B EDIT (M-7): recomputeMirrors left mergeConsequence.js with the register's factions[].members[] MIRROR row (the grouping leaves the record), so the export pin is FOUR; re-keyed to the live line (the same pin, the same file) so a staged manifest validates",
           "_note": "THE FIVE-EXPORT PIN, and the reason restateProseCounts is module-local. A8 asserts Object.keys(mergeModule).sort() equals exactly this list; a sixth export reds it by name. The member keeps the helper unexported and this row is what makes that a contract rather than a preference. count 1."
         }
       ],

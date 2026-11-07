@@ -24,7 +24,7 @@ import { render, screen, cleanup } from '@testing-library/react';
 vi.mock('../../src/domain/pendingEditsPreview.js', () => ({
   previewCascade: () => ({
     summaryLines: [],
-    downstreamCounts: { npcs: 0, powers: 0, hooks: 0 },
+    downstreamCounts: { npcs: 0, factions: 0, hooks: 0 }, // MERGE-5AB: the preview is the edit layer's (its count of the powers keeps the key `factions`)
     narrativeImpact: 'none',
     warnings: [],
   }),

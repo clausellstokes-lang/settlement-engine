@@ -89,7 +89,7 @@ describe('legacy pre-v2 save fixture', () => {
   test('schemaVersion and a stable seed-derived id are stamped on load', async () => {
     const list = await saves.list();
     for (const e of list) {
-      expect(e.settlement.schemaVersion).toBe(1);
+      expect(e.settlement.schemaVersion).toBe(2); // M-7 (PEOPLE-5B): the chain ends at 2
       expect(e.settlement.id).toMatch(/^s_/);
     }
     // Deterministic: the same seeded blob always normalizes to the same id.
