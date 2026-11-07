@@ -315,7 +315,12 @@ const ROUTE_BASELINE = Object.freeze({
   // 2026-11-04, the rung-1 landing (LANDING-1 door 10): lane CRISIS's Crisis tab (src/components/new/tabs/CrisisTab.jsx,
   // five `chromeFontSize` and one `proseFontSize` site, 0 bare) is in the dossier closure: /create 609 -> 615,
   // /settlements 855 -> 861, /gallery 653 -> 659; `bare` holds on all three.
-  '/create':                { roots: 1, files: 162, floored: 615, ruled: 5, bare: 97, owner: 'lane 28 — the create page + the tier picker' },
+  // 2026-11-07, the pool census composed (LANDING-R2 seat C2, measured out of this test's own red run, attributed per commit
+  // by this census's own `censusOfSource` over the dossier tabs): reader-r1 unit 2 (d3b9280f6, the chair's rulings 1-4:
+  // validation text leaves the DM surfaces) cuts three floored sites (OverviewTab 14 -> 12, ResourcesTab 29 -> 28), and
+  // census-3c revenues (9e4283eb5, R-P 2: the income table prints the revenues) adds one (EconomicsTab 54 -> 55):
+  // /create 615 -> 613, /settlements 861 -> 859, /gallery 659 -> 657; `bare` holds on all three.
+  '/create':                { roots: 1, files: 162, floored: 613, ruled: 5, bare: 97, owner: 'lane 28 — the create page + the tier picker' },
   '/home':                  { roots: 1, files: 19, floored: 6, ruled: 4, bare: 19, owner: 'lane 28 — the landing' },
   // The Realm lazily mounts the create flow's ClerkNote for its one advisory
   // line, so lane 28's file lands on a route it does not own. One site.
@@ -358,8 +363,8 @@ const ROUTE_BASELINE = Object.freeze({
   // the cure is pinned in tests/components/publicChromeFloor.census.test.js, which grew a
   // PROSE-floor arm over a named pricing roster for exactly this gap.
   '/pricing':               { roots: 1, files: 14, floored: 17, ruled: 3, bare: 0 },
-  // floored 858 → 860 (2026-11-02, X-45): the same two floored lines of the Institutions card.
-  '/settlements':           { roots: 1, files: 206, floored: 861, ruled: 4, bare: 0 },
+  // floored 858 → 860 (2026-11-02, X-45): the same two floored lines of the Institutions card. 861 -> 859 (2026-11-07): see /create.
+  '/settlements':           { roots: 1, files: 206, floored: 859, ruled: 4, bare: 0 },
   // /compendium files 51 -> 50 with the same T6 cut: the size grid's one helper module left the
   // compendium's import closure when ConfigurationPanel stopped importing it; floored 211 -> 206.
   '/compendium':            { roots: 1, files: 50, floored: 206, ruled: 3, bare: 0 },
@@ -367,8 +372,8 @@ const ROUTE_BASELINE = Object.freeze({
   '/about/guide':           { roots: 1, files: 12, floored: 11, ruled: 3, bare: 0 },
   '/account':               { roots: 1, files: 46, floored: 105, ruled: 5, bare: 0 },
   '/admin':                 { roots: 2, files: 29, floored: 86, ruled: 1, bare: 0 },
-  // floored 655 → 657 (2026-11-02, X-45): the same two floored lines of the Institutions card.
-  '/gallery':               { roots: 1, files: 151, floored: 659, ruled: 4, bare: 0 },
+  // floored 655 → 657 (2026-11-02, X-45): the same two floored lines of the Institutions card. 659 -> 657 (2026-11-07): see /create.
+  '/gallery':               { roots: 1, files: 151, floored: 657, ruled: 4, bare: 0 },
   '/founders':              { roots: 1, files: 13, floored: 6, ruled: 1, bare: 0 },
   '/first-hundred':         { roots: 1, files: 6, floored: 4, ruled: 1, bare: 0 },
   '/roadmap':               { roots: 1, files: 6, floored: 3, ruled: 1, bare: 0 },
