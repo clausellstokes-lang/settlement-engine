@@ -189,6 +189,16 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * AND NOWHERE ELSE. Most recently at the ENGINE-HYGIENE landing (SHIFT RECORD,
  * 2026-09-01, TE-AGNOSTIC-1 cars `f2c1ad181` / `97d119c9b`); before that at T8.
  *
+ * ── 2026-11-07, ONE IMPORT SHARE (THE WIRING WAVE'S WRITER LANE W0) ──
+ * THE SIXTY-THIRD MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation of 2026-11-06,
+ * inside a NAMED CHARTERED WINDOW: ODQ §934.105, the construction-and-wiring wave's writer lane (the chair's ruling
+ * R-W7 (c)); the record is docs/shift-records/2026-11-07-w0-02-one-import-share.json. THE MOVER, FOUND: commit
+ * c99531cf9 alone (foodSecurity.importPct is the one import share, of the published pounds; the food record reads
+ * it). On THIS corpus 241 of 360 rows move (thorp 2, hamlet 9, village 54, town 60, city 57, metropolis 59); 360/360
+ * hashes stay distinct. Written from the staged tree (c99531cf9 with the door paths carried from the branch, the
+ * golden master's act of the same record committed first), measured by scripts/audit/refence.mjs before the write.
+ * `1bb9e7a2…` -> `281ca040…`.
+ *
  * ── 2026-11-07, THE MIGRATION DIRECTION DECLARED ONCE (THE WIRING WAVE'S WRITER LANE W0) ──
  * THE SIXTY-SECOND MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation of 2026-11-06,
  * inside a NAMED CHARTERED WINDOW: ODQ §934.105, the construction-and-wiring wave's writer lane (the chair's ruling
@@ -864,7 +874,7 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * superseded by the ENGINE-HYGIENE re-record above, which is the record of the
  * one chartered window that has been spent since.
  */
-const PRE_COUPLING_CORPUS_SHA = '1bb9e7a2721538c7891c6b983b4d02db9aacd9aa29ff4794153246e7bbb43730';
+const PRE_COUPLING_CORPUS_SHA = '281ca040ca78eb18b777781a23facf098171950ef0cf195c29336aa2b1ee2a8f';
 
 const CORPUS_TIERS = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
 const CORPUS_ROUTES = Object.freeze(['road', 'isolated', 'port', 'crossroads']);
