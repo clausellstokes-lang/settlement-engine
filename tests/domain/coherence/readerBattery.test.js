@@ -88,7 +88,8 @@ describe('reader:relation-types', () => {
   });
   // The chair's ruling Q1 (2026-11-04): the exempted rule is the line, the strict one a column.
   const roster = (spec) => rec({
-    npcs: spec.map(([name, role, factionAffiliation]) => ({ name, role, factionAffiliation })),
+    // PEOPLE-5A RE-KEYED (M-1b): a card's faction is its membership, not the shim's field.
+    npcs: spec.map(([name, role, power]) => ({ name, role, memberships: power ? [{ power, rank: 1 }] : [] })),
     powerStructure: { governingName: 'Guild Council', factions: [{ faction: 'Guild Council', isGoverning: true }, { faction: 'Merchant Rivals', contestsNiche: 'Guild Council' }, { faction: 'Military/Guard' }] },
   });
   const row = (a, kind, b, ra, rb) => `${a} ${kind} ${b}\n${ra} · stable · ${rb}\n▼`;

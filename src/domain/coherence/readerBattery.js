@@ -28,6 +28,7 @@ import { NOBLE_ROLES } from '../entities/factionRoleCatalog.js';
 import { hasMarketInstitution } from '../marketInstitution.js';
 import { nativeSemanticName } from '../content/customContentSemanticAuthority.js';
 import { collect, str } from './recordBattery.js';
+import { cardPowerNames } from '../people/cardPowers.js';
 
 /** @typedef {import('./coherenceBattery.js').BatteryFinding} BatteryFinding */
 
@@ -317,10 +318,12 @@ export function exemptedVerdict(kind, a, b, seat) {
     if (['office', 'noble'].includes(ca) && ['office', 'noble'].includes(cb)) return { fires: false, why: 'rivals for standing' };
     if (['merchant', 'trade'].includes(ca) && ['merchant', 'trade'].includes(cb)) return { fires: false, why: 'a shared market' };
   } else if (classesShare(ca, cb)) return { fires: false, why: 'same class' };
-  const fa = str(a.npc?.factionAffiliation); const fb = str(b.npc?.factionAffiliation);
-  if (fa && fa === fb) return { fires: false, why: 'same faction' };
-  if (fa && fb && seat.has(fa) && seat.has(fb)) return { fires: false, why: 'the seat\'s factions, one office' };
-  if ((SEAT_ROLE.test(a.role) && seat.has(fb)) || (SEAT_ROLE.test(b.role) && seat.has(fa))) return { fires: false, why: 'seat and its body' };
+  // PEOPLE-5A (M-1b): a card's powers are its memberships (any rank), never the shim's field.
+  const pa = cardPowerNames(a.npc); const pb = cardPowerNames(b.npc);
+  if (pa.some((p) => pb.includes(p))) return { fires: false, why: 'same faction' };
+  const inSeat = (/** @type {string[]} */ ps) => ps.some((p) => seat.has(p));
+  if (inSeat(pa) && inSeat(pb)) return { fires: false, why: 'the seat\'s factions, one office' };
+  if ((SEAT_ROLE.test(a.role) && inSeat(pb)) || (SEAT_ROLE.test(b.role) && inSeat(pa))) return { fires: false, why: 'seat and its body' };
   return { fires: true, why: '' };
 }
 
