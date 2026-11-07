@@ -1,0 +1,120 @@
+{
+  "pool": {
+    "id": "tonightSheet.CAST_WANTS",
+    "file": "src/domain/summary/tonightSheet.js",
+    "drawKind": "H",
+    "drawSite": "tonightSheet.js:98-102 castWantOf: pool[floor(castHash(personId, crisis, role) * n)] (no rng draw), called at :324",
+    "colour": false,
+    "crisisScoped": false,
+    "keyDeclares": {},
+    "lines": 13,
+    "declaring": 0,
+    "note": "Keyed by cast role (instigator/brunt/lever/exploiter/defender); printed only for a person the crisis cast named, so an active crisis is guaranteed by the call site. The brief listed it as R?: it is a hash modulus (H), not the seeded stream. No line presumes a settlement fact."
+  },
+  "rows": [
+    {
+      "id": "instigator#0",
+      "text": "keep the pressure on until the seat gives way, and keep their own hand out of sight.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "instigator#1",
+      "text": "turn this crisis into the settlement's next arrangement, with themselves at the head of it.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "instigator#2",
+      "text": "be the one still standing when the present order runs out of answers.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "brunt#0",
+      "text": "get their own people through this with what little they have left.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "brunt#1",
+      "text": "be heard by someone with power before the crisis takes the rest.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "brunt#2",
+      "text": "hold on until the worst has passed, and remember who helped.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "lever#0",
+      "text": "decide who gets what the crisis has made scarce, and be thanked rather than blamed for it.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "lever#1",
+      "text": "keep the office the crisis turns on working, whatever it costs them.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "lever#2",
+      "text": "hold the one thing everyone now needs without being crushed between those who want it.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "exploiter#0",
+      "text": "sell what the crisis has made scarce for as long as the crisis lasts.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "exploiter#1",
+      "text": "come out of this richer than they went in, without anyone tracing how.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "defender#0",
+      "text": "hold the line until the crisis breaks, with fewer hands than the line needs.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "defender#1",
+      "text": "keep the defence standing long enough for someone else to end this.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    }
+  ]
+}

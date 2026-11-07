@@ -216,8 +216,13 @@ describe('the column census, measured across the estate', () => {
     // hosts own their menus and `institutionServiceKeys.generated.js` was regenerated (69960e5d9) — so fewer rows are
     // instantiated over the same thirty (PLAUSIBLE as the unit; the lane is the measured cause, not bisected by unit).
     // The liveness anchor is unchanged in kind.
-    expect(serviceRows, 'the header claims 1,853 instantiated service rows over these thirty')
-      .toBe(1853);
+    // ⭐ RE-MEASURED 2026-11-07 (LANDING-R2 seat C2, the pool census composed; ODQ §934.105): 1,925 → 1,920, ONE cause.
+    // Bisected over the census lineage's first-parent chain (bf263a78d 1,925 .. e36e4916f 1,920) by this walk's own sum:
+    // census-1f unit 1c (9eee701c0, "the per-definition service roll resolves through drawDeclared") 1,925 → 1,920
+    // (thorp-1, village-0, town-1, metropolis-0, metropolis-4 one row each). Rung 1's final tip 1bff51c6d reads 1,925
+    // and the composed tip 1,920 with the same per-settlement rows, so no interaction with rung 1.
+    expect(serviceRows, 'the header claims 1,920 instantiated service rows over these thirty')
+      .toBe(1920);
     expect(
       carriers,
       'a generation step began writing `settlement.services`. The schema declares the field and'

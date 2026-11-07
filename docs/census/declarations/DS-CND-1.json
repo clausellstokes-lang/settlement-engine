@@ -1,0 +1,805 @@
+{
+ "poolId": "DS-CND-1",
+ "source": "src/data/dossierStateProse/stressors.generated.js (annex docs/content/RECEIPT_POOLS_DOSSIER_STATE.md)",
+ "drawKind": "K",
+ "drawSite": "stressorsStateProse (condition lenses, first condition only) → composeStateProse → readStateProse → eligibleVariants → drawVariant (src/domain/display/stateProse/stressorsStateProse.js); FAMILY pools are dark (no family field)",
+ "pools": [
+  {
+   "pool": "SEVERITY: low",
+   "keyGuarantees": "activeConditions[0] (the first condition) bands low (severityBand, or severityBand(severity)). Conditions are NOT folded into crisis kinds (crisisKind.js carrier c); only the plague / famine archetypes mirror a kind.",
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": true,
+   "ruling": "Not scoped: deictic to its own condition, never a town-wide calm claim. Colour.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "The condition is present and light. It shows in the accounting rather than the streets.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "It is a real pressure and a small one; {settlement} absorbs it without changing anything it does.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "The strain registers. It does not yet cost the town anything it would miss.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "SEVERITY: medium",
+   "keyGuarantees": "activeConditions[0] (the first condition) bands medium. Conditions are NOT folded into crisis kinds (crisisKind.js carrier c); only the plague / famine archetypes mirror a kind.",
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": true,
+   "ruling": "Not scoped: deictic to its own condition, never a town-wide calm claim. Colour.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "The pressure is genuine now. Choices are being made because of it that would not have been made otherwise.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "It has stopped being a line in a ledger: {settlement} is spending real capacity on this.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "The condition bites. Not everywhere and not badly, but consistently enough to plan around.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "SEVERITY: high",
+   "keyGuarantees": "activeConditions[0] (the first condition) bands high. Conditions are NOT folded into crisis kinds (crisisKind.js carrier c); only the plague / famine archetypes mirror a kind.",
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": true,
+   "ruling": "Not scoped: deictic to its own condition, never a town-wide calm claim. Colour.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "This is one of the defining facts about the town at present. Systems that ought to be independent are all bending around it.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "The strain is severe. {settlement} is meeting it by giving up things it would rather keep.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "The condition dominates. Whatever else is true of the town, this is truer.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "SEVERITY: critical",
+   "keyGuarantees": "activeConditions[0] (the first condition) bands critical. Conditions are NOT folded into crisis kinds (crisisKind.js carrier c); only the plague / famine archetypes mirror a kind.",
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": true,
+   "ruling": "Not scoped: deictic to its own condition, never a town-wide calm claim. Colour.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "The town is at its limit. There is no capacity left to absorb this, and nothing behind it that could absorb the next thing.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "This is as far as {settlement} bends. Past this it is not the same settlement, and it is very near past this.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "The condition has run past what the town was built to carry. Everything else here is now downstream of it.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "DIRECTION: worsening",
+   "keyGuarantees": "activeConditions[0] (the first condition) has status \"worsening\". Conditions are NOT folded into crisis kinds (crisisKind.js carrier c); only the plague / famine archetypes mirror a kind.",
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": true,
+   "ruling": "Not scoped: deictic to its own condition, never a town-wide calm claim. Colour.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "It is getting worse, steadily rather than suddenly; each season costs a little more than the one before.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "The trend is the wrong way. Nothing has broken yet, and nothing has stopped deteriorating either.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "The condition is deepening. The town's response has not caught up with the rate.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "DIRECTION: stable, and the FLAT case (no valid directional status)",
+   "keyGuarantees": "activeConditions[0] (the first condition) has status stable, absent or unrecognised (FLAT, E-3). Conditions are NOT folded into crisis kinds (crisisKind.js carrier c); only the plague / famine archetypes mirror a kind.",
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": true,
+   "ruling": "Not scoped: deictic to its own condition, never a town-wide calm claim. Colour. \"rather than a developing crisis\" is about the condition itself.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "It holds where it is. Neither the pressure nor the response is gaining, and the balance has become the normal state.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "The condition is level: an ongoing cost rather than a developing crisis.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "Nothing here is moving. That is not relief, only the absence of change.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "DIRECTION: easing",
+   "keyGuarantees": "activeConditions[0] (the first condition) has status \"easing\". Conditions are NOT folded into crisis kinds (crisisKind.js carrier c); only the plague / famine archetypes mirror a kind.",
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": true,
+   "ruling": "Not scoped: deictic to its own condition, never a town-wide calm claim. Colour.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "It is lifting. Slowly, and from a level the town remembers clearly, but lifting.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "The pressure is coming off. What remains is the accumulated cost rather than the cause.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "The condition is receding. {settlement} has begun spending on repair rather than on holding.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "ARCHETYPE: reconstruction",
+   "keyGuarantees": "activeConditions[0] (the first condition) has archetype reconstruction. Conditions are NOT folded into crisis kinds (crisisKind.js carrier c); only the plague / famine archetypes mirror a kind.",
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Opted in: a reconstruction condition can stand beside a fresh crisis, and lines 2-3 assert repair with a visible end going well, which a place held at its walls or occupied contradicts.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "The town is rebuilding. What was broken is being replaced, and the race is between the rebuilding and the memory of why it was needed.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "{settlement} is in its repair season: scaffolding where there were ruins, and a great deal of work with a visible end.",
+     "needs": [],
+     "excludes": [
+      "crisis: threat"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "The rebuild is going well enough that people have begun arguing about what it should look like rather than whether it will happen.",
+     "needs": [],
+     "excludes": [
+      "crisis: threat"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "ARCHETYPE: boom",
+   "keyGuarantees": "activeConditions[0] (the first condition) has archetype boom (sustained trade and surplus). Conditions are NOT folded into crisis kinds (crisisKind.js carrier c); only the plague / famine archetypes mirror a kind.",
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Opted in: a boom condition renders under any crisis and every line asserts plenty (prosperity, easy coin, trade in its favour), which hunger, a threat at the walls or an outside debt contradict. Empty for roughly 6 of 15 kinds plus deficit births: under half, so no twin (chair may veto).",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "The town is prosperous. Trade runs in its favour, and the expectation of that has become part of the economy rather than a comment on it.",
+     "needs": [],
+     "excludes": [
+      "crisis: hunger",
+      "crisis: threat",
+      "crisis: indebted"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": [
+      "prosperity"
+     ]
+    },
+    {
+     "lineId": "vid:2",
+     "text": "{settlement} is doing well, and quietly depends on the arteries feeding it. The boom is real and it is not self-sustaining.",
+     "needs": [],
+     "excludes": [
+      "crisis: hunger",
+      "crisis: threat",
+      "crisis: indebted"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": [
+      "prosperity"
+     ]
+    },
+    {
+     "lineId": "vid:3",
+     "text": "Coin is easy here. The warehouses fill, the wages hold, and nobody is much interested in what the routes moving would mean.",
+     "needs": [],
+     "excludes": [
+      "crisis: hunger",
+      "crisis: threat",
+      "crisis: indebted"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "ARCHETYPE: flourishing",
+   "keyGuarantees": "activeConditions[0] (the first condition) has archetype flourishing. Conditions are NOT folded into crisis kinds (crisisKind.js carrier c); only the plague / famine archetypes mirror a kind.",
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Opted in: every line asserts a good, unstrained stretch; line 1 (\"without strain\") is calm outright, lines 2-3 deny the families that make a golden age false. That leaves the pool empty for most crisis births (9 of 15 kinds, 916 of 1,000 births carry one), so one twin.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "This is a good stretch for the town. There is room here for things that are not strictly necessary, and the accounts carry them without strain.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "calm",
+     "colour": false,
+     "stop": [
+      "prosperity"
+     ]
+    },
+    {
+     "lineId": "vid:2",
+     "text": "{settlement} is in a modest golden age. It is bounded and it is real, and the people living in it mostly know both.",
+     "needs": [],
+     "excludes": [
+      "crisis: hunger",
+      "crisis: threat",
+      "crisis: unrest",
+      "crisis: indebted",
+      "crisis: plague_onset"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": [
+      "prosperity"
+     ]
+    },
+    {
+     "lineId": "vid:3",
+     "text": "The town is culturally fertile: workshops, schools, and arguments about art, all of them affordable for the first time in a while.",
+     "needs": [
+      "institution: school"
+     ],
+     "excludes": [
+      "crisis: hunger",
+      "crisis: threat",
+      "crisis: unrest",
+      "crisis: indebted",
+      "crisis: plague_onset"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": [
+      "culture"
+     ]
+    }
+   ],
+   "twins": [
+    {
+     "text": "The good stretch {settlement} was having has not ended, but it is being spent now on the trouble in front of it.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "hunger",
+      "threat",
+      "unrest",
+      "indebted",
+      "plague_onset"
+     ],
+     "why": "flourishing beside a famine, siege, occupation, raiders, unrest, debt or plague has no drawable line; this one holds only the condition and the crisis the record carries."
+    }
+   ]
+  },
+  {
+   "pool": "PROVENANCE: causes[] or triggeredAt.sourceEventType populated",
+   "keyGuarantees": "activeConditions[0] (the first condition) carries causes[] or triggeredAt.sourceEventType. Conditions are NOT folded into crisis kinds (crisisKind.js carrier c); only the plague / famine archetypes mirror a kind. Every line needs {reason}, which has no producer: silent even when routed.",
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": true,
+   "ruling": "Not scoped: deictic to its own condition, never a town-wide calm claim. Colour.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "The condition traces back to {reason}, and the trace is not disputed. The town knows exactly what did this.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "This began with {reason}. What {settlement} carries now is the consequence, and the consequence has outlasted the cause.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "{reason} put this here. The record is clear enough that the argument in the town is about the response rather than the origin.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "PROVENANCE: no causes[] and no sourceEventType",
+   "keyGuarantees": "activeConditions[0] (the first condition) carries neither causes[] nor sourceEventType. Conditions are NOT folded into crisis kinds (crisisKind.js carrier c); only the plague / famine archetypes mirror a kind. Never reached at birth (measured 0 of 14).",
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": true,
+   "ruling": "Not scoped: deictic to its own condition, never a town-wide calm claim. Colour.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "The condition stands. Nothing in the record explains where it came from, and the town has stopped asking.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "This is simply the state of {settlement}. No single event owns it, and nobody here can point to a beginning.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "It is here and it is {timeband_age}. Whatever caused it did so before anyone was writing things down.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": [],
+     "note": "{timeband_age} deliberately unfilled (DESK-TIMEBAND 2026-09-05): anchored liveness drops this line"
+    }
+   ]
+  },
+  {
+   "pool": "DURATION: inside the expiry wind-down window",
+   "keyGuarantees": "activeConditions[0] (the first condition) has remaining <= 25% of expiresAtTicks. Conditions are NOT folded into crisis kinds (crisisKind.js carrier c); only the plague / famine archetypes mirror a kind.",
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": true,
+   "ruling": "Not scoped: deictic to its own condition, never a town-wide calm claim. Colour.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "It is nearly over. The condition is winding down on its own schedule rather than anyone's effort.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "The end of this is in sight. The pressure has begun releasing without anything in particular being fixed.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "The town is at the tail of it. What is left is lifting, and nobody is treating that as an achievement.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "FAMILY: acute crisis",
+   "keyGuarantees": "activeConditions[0] (the first condition) is of the acute-crisis family. Conditions are NOT folded into crisis kinds (crisisKind.js carrier c); only the plague / famine archetypes mirror a kind. DARK: no family field on CONDITION_ARCHETYPE_TEMPLATES.",
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": true,
+   "ruling": "Not scoped: deictic to its own condition, never a town-wide calm claim. Colour. \"{settlement} is in crisis\" is licensed by the acute condition itself.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "This is an emergency the town is inside of: not a policy, not a trend, an event with a shape and an end.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "{settlement} is in crisis. The condition is the town's whole agenda for as long as it lasts.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "The trouble here is acute and undisguised; there is no reading of the state that does not begin with it.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "FAMILY: regional transmission",
+   "keyGuarantees": "activeConditions[0] (the first condition) is of the regional-transmission family. Conditions are NOT folded into crisis kinds (crisisKind.js carrier c); only the plague / famine archetypes mirror a kind. DARK.",
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": true,
+   "ruling": "Not scoped: deictic to its own condition, never a town-wide calm claim. Colour.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "The trouble did not begin here. It arrived along a connection {settlement} depends on, and the dependence is why it arrived.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "This is somebody else's crisis reaching the town through the channel that normally carries something better.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "What strains {settlement} is happening elsewhere. The town is exposed because it is well connected, which is the price of being well connected.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "FAMILY: war layer, aggressor side",
+   "keyGuarantees": "activeConditions[0] (the first condition) is of the war-layer aggressor-side family. Conditions are NOT folded into crisis kinds (crisisKind.js carrier c); only the plague / famine archetypes mirror a kind. DARK.",
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Opted in: lines 1, 2 and 4 say the war is fought elsewhere (no battle here), which a siege, an occupation or a front contradicts.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "The war is being fought elsewhere and paid for here. Men, coin and grain leave; nothing comes back on the same schedule.",
+     "needs": [],
+     "excludes": [
+      "crisis: under_siege",
+      "crisis: occupied",
+      "war: front"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "{settlement} is the home of a campaign rather than its battlefield. The cost shows in the treasury and the thin garrison, not in the walls.",
+     "needs": [
+      "walls",
+      "garrison"
+     ],
+     "excludes": [
+      "crisis: under_siege",
+      "crisis: occupied",
+      "war: front"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": [],
+     "note": "\"the thin garrison\""
+    },
+    {
+     "lineId": "vid:3",
+     "text": "The town is carrying an army it does not have with it. That is a specific kind of poverty, and it compounds.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:4",
+     "text": "{settlement} is the home of a campaign rather than its battlefield. The cost shows in the treasury and the missing men, not in the streets.",
+     "needs": [],
+     "excludes": [
+      "walls",
+      "crisis: under_siege",
+      "crisis: occupied",
+      "war: front"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "FAMILY: occupation layer",
+   "keyGuarantees": "activeConditions[0] (the first condition) is of the occupation-layer family. Conditions are NOT folded into crisis kinds (crisisKind.js carrier c); only the plague / famine archetypes mirror a kind. DARK.",
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Not scoped: deictic to its own condition, never a town-wide calm claim. Colour. The occupation is the condition's own; crisis: occupied is not required of the stress record.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "Holding this place costs more than it returns. Garrisons, administrators and suppression tie down strength that was meant for elsewhere.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": false,
+     "stop": [
+      "soldiers / commander"
+     ]
+    },
+    {
+     "lineId": "vid:2",
+     "text": "{settlement} is administered by a power stretched thin doing it. Noncompliance and sabotage make the arithmetic worse each season.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "The relationship here is extractive and it is expensive; both facts are true, and only one of them is written down.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "FAMILY: recovery",
+   "keyGuarantees": "activeConditions[0] (the first condition) is of the recovery family. Conditions are NOT folded into crisis kinds (crisisKind.js carrier c); only the plague / famine archetypes mirror a kind. DARK.",
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Opted in: every line says the crisis is behind the town. Calm throughout, so empty for most births (916 of 1,000 carry a crisis): one twin.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "The worst is behind {settlement}. What remains is the work of being a normal town again, which is slower than it looks.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "calm",
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "The crisis ended and left its scars in the ordinary places: trust, institutions, and the habits people formed to survive it.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "calm",
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "The town is recovering. It is not the town it was before, and it has not decided yet whether it minds.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "calm",
+     "colour": false,
+     "stop": []
+    }
+   ],
+   "twins": [
+    {
+     "text": "{settlement} is recovering from one trouble while it carries another, and the repair goes slower for it.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "crisis"
+     ],
+     "why": "a recovery condition beside any active crisis has no drawable line; this holds only the condition and the fact a crisis stands."
+    }
+   ]
+  }
+ ]
+}

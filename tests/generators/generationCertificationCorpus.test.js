@@ -56,7 +56,13 @@ const ADVISORY_STATUS = new Map();
  *    ff4448d2e (the rung-1 TRUTH compose)            religious-river-village-dun
  *    11467ed57 (the rung-1 PINS compose)              isolated-arcane-town-alder
  *    5e9ffb220 (the F1 DEFENCE-WORDS compose)         criminal-crossroads-town-dun,
- *                                                     isolated-arcane-town-cinder, mundane-river-port-city-bracken */
+ *                                                     isolated-arcane-town-cinder, mundane-river-port-city-bracken
+ *  RE-KEYED 2026-11-07 (LANDING-R2, the pool census composed): 60 -> 59 of 65. ONE SPECIMEN STOPPED FAILING,
+ *  nothing started: isolated-arcane-town-dun, at 1abf16d8d (census-4d unit 2c, R-W: the bowyers' "Military
+ *  supply" presumes a guard, not garrison AND militia). Bisected by a probe copy of this pin: rung 1's final
+ *  1bff51c6d and the merge base bf263a78d fail it; the compose's census-1b merge 0856c09d3 does not; inside
+ *  census-1b's first-parent line the flip is the census-4 merge fe7bb1d4a, and on census-4's side
+ *  fa39513d3 fails it, 1abf16d8d does not. */
 const ADVISORY_FAILING = Object.freeze([
   'certification-v1-commercial-metropolis-alder',
   'certification-v1-commercial-metropolis-bracken',
@@ -78,7 +84,6 @@ const ADVISORY_FAILING = Object.freeze([
   'certification-v1-grim-seaport-metropolis-dun',
   'certification-v1-grim-seaport-metropolis-ember',
   'certification-v1-isolated-arcane-town-bracken',
-  'certification-v1-isolated-arcane-town-dun',
   'certification-v1-isolated-arcane-town-ember',
   'certification-v1-magical-desert-village-alder',
   'certification-v1-magical-desert-village-bracken',

@@ -1,0 +1,5751 @@
+{
+  "id": "supplyChainData.SUPPLY_CHAIN_NEEDS",
+  "source": "src/data/supplyChainData.js :: SUPPLY_CHAIN_NEEDS",
+  "drawKind": "T",
+  "pool": {
+    "declares": [],
+    "crisisScoped": false,
+    "colour": false,
+    "notes": "11 needs → 74 chains. A chain row is drawn only when computeActiveChains activates it (processors present, minTier met, resource/substitute held); its tier atoms mirror minTier. Item rows (rawInputs/intermediateGoods/outputs/outputsByResource) are drawn inside an active chain: outputs and intermediates declare their PRODUCER atom; rawInputs declare only label-intrinsic atoms (terrain words, luxury band) since an input may be imported. need.color, processingInstitutions, services, upstreamChains, resourceSubstitutes are mechanics, not text.",
+    "needs": [],
+    "excludes": []
+  },
+  "rows": [
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.label",
+      "text": "Food Security",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.desc",
+      "text": "What the settlement eats, how it stores food, and what it can export",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "heading chrome"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[grain].label",
+      "text": "Grain & Bread",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[grain].rawInputs[0]",
+      "text": "Grain surplus",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[grain].rawInputs[1]",
+      "text": "Agricultural surplus",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[grain].intermediateGoods[0]",
+      "text": "Milled flour",
+      "needs": [
+        "institution: mill"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[grain].outputs[0]",
+      "text": "Baked goods",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: baker"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[grain].outputs[1]",
+      "text": "Grain surplus",
+      "needs": [
+        "grain"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[grain].outputs[2]",
+      "text": "Agricultural surplus",
+      "needs": [
+        "grain"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[grain].outputs[3]",
+      "text": "Bulk food exports",
+      "needs": [
+        "grain"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[livestock].label",
+      "text": "Livestock & Dairy",
+      "needs": [
+        "tier: >= hamlet"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "resourceSubstitutes include Camel Herds (camel, desert) and Alpine Pastures: substitutes only, the chain is not culture-keyed; tier mirrors minTier hamlet"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[livestock].rawInputs[0]",
+      "text": "Livestock",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[livestock].rawInputs[1]",
+      "text": "Dairy products",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[livestock].rawInputs[2]",
+      "text": "Eggs and dairy",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[livestock].intermediateGoods[0]",
+      "text": "Livestock",
+      "needs": [
+        "livestock"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[livestock].intermediateGoods[1]",
+      "text": "Dairy products",
+      "needs": [
+        "livestock"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[livestock].outputs[0]",
+      "text": "Preserved foods",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: salt works / smokehouse"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[livestock].outputs[1]",
+      "text": "Leather goods",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: tanner"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[salt].label",
+      "text": "Salt & Preservation",
+      "needs": [
+        "tier: >= hamlet"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "tier mirrors minTier hamlet"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[salt].entrepotNote",
+      "text": "Salt is among the most-traded commodities. Port and crossroads settlements profit from red",
+      "needs": [],
+      "excludes": [],
+      "colour": true,
+      "notes": "explanatory prose; names ports/crossroads as beneficiaries generically, not as this place"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[salt].rawInputs[0]",
+      "text": "Sea salt",
+      "needs": [
+        "coast"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[salt].rawInputs[1]",
+      "text": "Salt for preservation",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[salt].intermediateGoods[0]",
+      "text": "Salt for preservation",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: salt works"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[salt].outputs[0]",
+      "text": "Preserved foods",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: salt works / smokehouse"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[forage].label",
+      "text": "Foraging & Smallholding",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[forage].rawInputs[0]",
+      "text": "Foraged goods",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[forage].rawInputs[1]",
+      "text": "Honey and beeswax",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[forage].rawInputs[2]",
+      "text": "Eggs",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[forage].intermediateGoods[0]",
+      "text": "Honey and beeswax",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: beekeeper / chandler"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[forage].intermediateGoods[1]",
+      "text": "Foraged goods",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: forager / herbalist"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[forage].outputs[0]",
+      "text": "Honey and beeswax",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: beekeeper / chandler"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[forage].outputs[1]",
+      "text": "Foraged goods",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: forager / herbalist"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[fishing].label",
+      "text": "Fishing & Seafood",
+      "needs": [
+        "tier: >= hamlet",
+        "navigable"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "tier mirrors minTier hamlet"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[fishing].rawInputs[0]",
+      "text": "Fish catch",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[fishing].rawInputs[1]",
+      "text": "River fish",
+      "needs": [
+        "river"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[fishing].rawInputs[2]",
+      "text": "Freshwater catch",
+      "needs": [
+        "river"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[fishing].intermediateGoods[0]",
+      "text": "Fresh fish",
+      "needs": [
+        "fish"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[fishing].intermediateGoods[1]",
+      "text": "Gutted catch",
+      "needs": [
+        "fish"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[fishing].outputs[0]",
+      "text": "Salted fish",
+      "needs": [
+        "fish"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[fishing].outputs[1]",
+      "text": "Smoked seafood",
+      "needs": [
+        "fish",
+        "coast"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[fishing].outputs[2]",
+      "text": "Fish oil",
+      "needs": [
+        "fish"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[fishing].outputs[3]",
+      "text": "Freshwater catch",
+      "needs": [
+        "fish",
+        "river"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[fishing].outputs[4]",
+      "text": "Preserved foods",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: salt works / smokehouse"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[river_fishing].label",
+      "text": "River Fishing",
+      "needs": [
+        "tier: >= hamlet",
+        "river"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "tier mirrors minTier hamlet"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[river_fishing].rawInputs[0]",
+      "text": "River fish",
+      "needs": [
+        "river"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[river_fishing].rawInputs[1]",
+      "text": "Freshwater catch",
+      "needs": [
+        "river"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[river_fishing].intermediateGoods[0]",
+      "text": "Fresh fish",
+      "needs": [
+        "fish"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[river_fishing].outputs[0]",
+      "text": "River fish",
+      "needs": [
+        "fish",
+        "river"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[river_fishing].outputs[1]",
+      "text": "Freshwater catch",
+      "needs": [
+        "fish",
+        "river"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[river_fishing].outputs[2]",
+      "text": "Salted fish",
+      "needs": [
+        "fish"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[hunting].label",
+      "text": "Hunting & Trapping",
+      "needs": [
+        "tier: >= hamlet"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "tier mirrors minTier hamlet"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[hunting].rawInputs[0]",
+      "text": "Game meat",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[hunting].rawInputs[1]",
+      "text": "Furs and pelts",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[hunting].rawInputs[2]",
+      "text": "Hunting trophies",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[hunting].intermediateGoods[0]",
+      "text": "Prepared hides",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: tanner"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[hunting].intermediateGoods[1]",
+      "text": "Dressed game",
+      "needs": [
+        "game"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[hunting].outputs[0]",
+      "text": "Game meat",
+      "needs": [
+        "game"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[hunting].outputs[1]",
+      "text": "Furs and pelts",
+      "needs": [
+        "game"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[hunting].outputs[2]",
+      "text": "Hunting trophies",
+      "needs": [
+        "game"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[hunting].outputs[3]",
+      "text": "Leather goods",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: tanner"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[brewing].label",
+      "text": "Brewing & Malting",
+      "needs": [
+        "tier: >= hamlet"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "tier mirrors minTier hamlet"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[brewing].rawInputs[0]",
+      "text": "Grain surplus",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[brewing].rawInputs[1]",
+      "text": "Malted barley",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[brewing].rawInputs[2]",
+      "text": "Hops",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[brewing].intermediateGoods[0]",
+      "text": "Malted barley",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: brewer / maltster"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[brewing].intermediateGoods[1]",
+      "text": "Wort",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: brewer / maltster"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[brewing].outputs[0]",
+      "text": "Ale (barrel)",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: brewer / maltster"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[brewing].outputs[1]",
+      "text": "Beer (barrel)",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: brewer / maltster"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[brewing].outputs[2]",
+      "text": "Malt",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: brewer / maltster"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[brewing].outputs[3]",
+      "text": "Mead",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: beekeeper / chandler"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[animal_husbandry].label",
+      "text": "Horse & Animal Trade",
+      "needs": [
+        "tier: >= hamlet"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "resourceSubstitutes include Camel Herds: substitute only; tier mirrors minTier hamlet"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[animal_husbandry].rawInputs[0]",
+      "text": "Livestock",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[animal_husbandry].rawInputs[1]",
+      "text": "Working animals",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[animal_husbandry].intermediateGoods[0]",
+      "text": "Trained horses",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: stable / beast trainer"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[animal_husbandry].intermediateGoods[1]",
+      "text": "Draft animals",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: stable / beast trainer"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[animal_husbandry].outputs[0]",
+      "text": "Cavalry mounts",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: stable / beast trainer"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[animal_husbandry].outputs[1]",
+      "text": "Draft horses",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: stable / beast trainer"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[animal_husbandry].outputs[2]",
+      "text": "Working animals",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: stable / beast trainer"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[animal_husbandry].outputs[3]",
+      "text": "Hunting dogs",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: stable / beast trainer"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[animal_husbandry].outputs[4]",
+      "text": "Trained falcons",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: stable / beast trainer"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.label",
+      "text": "Raw Materials & Fuel",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.desc",
+      "text": "What the earth, forest, and water provide for construction and industry",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "heading chrome"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[timber].label",
+      "text": "Timber & Lumber",
+      "needs": [
+        "tier: >= hamlet"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "tier mirrors minTier hamlet"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[timber].rawInputs[0]",
+      "text": "Milled timber",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[timber].rawInputs[1]",
+      "text": "Charcoal",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[timber].rawInputs[2]",
+      "text": "Hardwood beams",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[timber].rawInputs[3]",
+      "text": "Shipbuilding timber",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[timber].intermediateGoods[0]",
+      "text": "Milled timber",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: sawmill"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[timber].intermediateGoods[1]",
+      "text": "Charcoal",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: charcoal burner"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[timber].outputs[0]",
+      "text": "Barrels and containers",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: cooper"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[timber].outputs[1]",
+      "text": "Milled lumber",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: sawmill"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[iron].label",
+      "text": "Iron & Metalwork",
+      "needs": [
+        "tier: >= hamlet"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "tier mirrors minTier hamlet"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[iron].rawInputs[0]",
+      "text": "Iron ore",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[iron].rawInputs[1]",
+      "text": "Basic metalwork",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[iron].intermediateGoods[0]",
+      "text": "Iron ore",
+      "needs": [
+        "institution: mine"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[iron].intermediateGoods[1]",
+      "text": "Basic metalwork",
+      "needs": [
+        "institution: smith"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[iron].outputs[0]",
+      "text": "Quality tools and weapons",
+      "needs": [
+        "institution: smith"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[iron].outputs[1]",
+      "text": "Advanced weapons and armor",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: specialized metalworkers"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[iron].outputs[2]",
+      "text": "Master-crafted weapons",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: specialized metalworkers"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[stone].label",
+      "text": "Stone & Construction",
+      "needs": [
+        "tier: >= village"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "tier mirrors minTier village"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[stone].rawInputs[0]",
+      "text": "Quarried stone",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[stone].rawInputs[1]",
+      "text": "Building materials",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[stone].intermediateGoods[0]",
+      "text": "Quarried stone",
+      "needs": [
+        "institution: quarry"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[stone].outputs[0]",
+      "text": "Quarried stone",
+      "needs": [
+        "institution: quarry"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[stone].outputs[1]",
+      "text": "Building materials",
+      "needs": [
+        "institution: quarry"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[fuel].label",
+      "text": "Fuel & Heating",
+      "needs": [
+        "tier: >= hamlet"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "tier mirrors minTier hamlet"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[fuel].rawInputs[0]",
+      "text": "Coal",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[fuel].rawInputs[1]",
+      "text": "Peat fuel",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[fuel].intermediateGoods[0]",
+      "text": "Coal",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: coal pit / charcoal burner"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[fuel].intermediateGoods[1]",
+      "text": "Peat fuel",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: peat cutter"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[fuel].intermediateGoods[2]",
+      "text": "Charcoal",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: charcoal burner"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[fuel].outputs[0]",
+      "text": "Coal",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: coal pit / charcoal burner"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[fuel].outputs[1]",
+      "text": "Peat fuel",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: peat cutter"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[clay].label",
+      "text": "Clay & Ceramics",
+      "needs": [
+        "tier: >= village"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "tier mirrors minTier village"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[clay].rawInputs[0]",
+      "text": "Fired brick",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[clay].rawInputs[1]",
+      "text": "Pottery and ceramics",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[clay].rawInputs[2]",
+      "text": "Roof tiles",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[clay].intermediateGoods[0]",
+      "text": "Fired brick",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: potter / brickmaker"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[clay].intermediateGoods[1]",
+      "text": "Pottery and ceramics",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: potter / brickmaker"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[clay].outputs[0]",
+      "text": "Pottery and ceramics",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: potter / brickmaker"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[clay].outputs[1]",
+      "text": "Barrels and containers",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: cooper"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[smelting].label",
+      "text": "Smelting & Refining",
+      "needs": [
+        "tier: >= town"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "tier mirrors minTier town"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[smelting].rawInputs[0]",
+      "text": "Iron ore",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[smelting].rawInputs[1]",
+      "text": "Charcoal",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[smelting].rawInputs[2]",
+      "text": "Coal",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[smelting].intermediateGoods[0]",
+      "text": "Pig iron",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: smelter"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[smelting].intermediateGoods[1]",
+      "text": "Refined iron",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: smelter"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[smelting].intermediateGoods[2]",
+      "text": "Charcoal",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: charcoal burner"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[smelting].outputs[0]",
+      "text": "Refined iron ingots",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: smelter"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[smelting].outputs[1]",
+      "text": "Pig iron",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: smelter"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[smelting].outputs[2]",
+      "text": "Cast iron goods",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: smelter"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[reed_marsh].label",
+      "text": "Reed & Marsh Harvest",
+      "needs": [
+        "tier: >= hamlet"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "unhomed: marsh terrain; tier mirrors minTier hamlet"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[reed_marsh].rawInputs[0]",
+      "text": "Reeds and thatch",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[reed_marsh].rawInputs[1]",
+      "text": "Peat fuel",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[reed_marsh].rawInputs[2]",
+      "text": "Waterfowl",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[reed_marsh].intermediateGoods[0]",
+      "text": "Dried reeds",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: thatcher"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[reed_marsh].intermediateGoods[1]",
+      "text": "Peat blocks",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: peat cutter"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[reed_marsh].outputs[0]",
+      "text": "Reeds and thatch",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: thatcher"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[reed_marsh].outputs[1]",
+      "text": "Peat fuel",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: peat cutter"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[reed_marsh].outputs[2]",
+      "text": "Waterfowl",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: wildfowler"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[reed_marsh].outputs[3]",
+      "text": "Basket goods",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: thatcher"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[shipbuilding].label",
+      "text": "Boatbuilding & River Transport",
+      "needs": [
+        "tier: >= village",
+        "navigable"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "tier mirrors minTier village"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[shipbuilding].rawInputs[0]",
+      "text": "Boatbuilding timber",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[shipbuilding].rawInputs[1]",
+      "text": "Milled lumber",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[shipbuilding].rawInputs[2]",
+      "text": "Rope and cordage",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[shipbuilding].intermediateGoods[0]",
+      "text": "Planks and beams",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: sawmill"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[shipbuilding].intermediateGoods[1]",
+      "text": "Boat components",
+      "needs": [
+        "navigable"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[shipbuilding].outputs[0]",
+      "text": "River craft",
+      "needs": [
+        "river"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[shipbuilding].outputs[1]",
+      "text": "Cargo barges",
+      "needs": [
+        "navigable"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[shipbuilding].outputs[2]",
+      "text": "Fishing boats",
+      "needs": [
+        "navigable"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[shipbuilding].outputs[3]",
+      "text": "Ferries",
+      "needs": [
+        "navigable"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[precious_metals_mining].label",
+      "text": "Mining & Coinage",
+      "needs": [
+        "tier: >= town"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "tier mirrors minTier town"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[precious_metals_mining].labelsByResource.gemstone_deposits",
+      "text": "Gem Mining & Lapidary",
+      "needs": [
+        "tier: >= town",
+        "tier: >= village"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "gem chain label"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[precious_metals_mining].rawInputs[0]",
+      "text": "Precious metals",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[precious_metals_mining].rawInputs[1]",
+      "text": "Raw ore",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[precious_metals_mining].intermediateGoods[0]",
+      "text": "Refined ingots",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: specialized metalworkers"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[precious_metals_mining].intermediateGoods[1]",
+      "text": "Coin blanks",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: specialized metalworkers"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[precious_metals_mining].intermediateGoods[2]",
+      "text": "Assay certificates",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: specialized metalworkers"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[precious_metals_mining].outputs[0]",
+      "text": "Precious metals",
+      "needs": [
+        "institution: mine"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[precious_metals_mining].outputs[1]",
+      "text": "Coin minting",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "income",
+      "notes": "capital"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[precious_metals_mining].outputs[2]",
+      "text": "Refined ingots",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: specialized metalworkers"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[precious_metals_mining].outputs[3]",
+      "text": "Assay certificates",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: specialized metalworkers"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[precious_metals_mining].outputsByResource.precious_metals[0]",
+      "text": "Precious metals",
+      "needs": [
+        "institution: mine"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[precious_metals_mining].outputsByResource.precious_metals[1]",
+      "text": "Coin minting",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "income",
+      "notes": "capital"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[precious_metals_mining].outputsByResource.precious_metals[2]",
+      "text": "Refined ingots",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: specialized metalworkers"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[precious_metals_mining].outputsByResource.precious_metals[3]",
+      "text": "Assay certificates",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: specialized metalworkers"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[precious_metals_mining].outputsByResource.gemstone_deposits[0]",
+      "text": "Raw gemstones",
+      "needs": [
+        "institution: mine",
+        "tier: >= village"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[precious_metals_mining].outputsByResource.gemstone_deposits[1]",
+      "text": "Cut gemstones",
+      "needs": [
+        "tier: >= village"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: jeweller / lapidary"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[precious_metals_mining].outputsByResource.gemstone_deposits[2]",
+      "text": "Gem appraisal",
+      "needs": [
+        "tier: >= village"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: jeweller / lapidary"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[petty_mining].label",
+      "text": "Mining & Quarrying",
+      "needs": [
+        "tier: >= hamlet"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "tier mirrors minTier hamlet"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[petty_mining].rawInputs[0]",
+      "text": "Iron ore",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[petty_mining].rawInputs[1]",
+      "text": "Quarried stone",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[petty_mining].rawInputs[2]",
+      "text": "Coal",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[petty_mining].intermediateGoods[0]",
+      "text": "Rough ore",
+      "needs": [
+        "institution: mine"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[petty_mining].intermediateGoods[1]",
+      "text": "Dressed stone",
+      "needs": [
+        "institution: quarry"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[petty_mining].intermediateGoods[2]",
+      "text": "Quarry rubble",
+      "needs": [
+        "institution: quarry"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[petty_mining].outputs[0]",
+      "text": "Quarried stone",
+      "needs": [
+        "institution: quarry"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[petty_mining].outputs[1]",
+      "text": "Iron ore",
+      "needs": [
+        "institution: mine"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[petty_mining].outputs[2]",
+      "text": "Building materials",
+      "needs": [
+        "institution: quarry"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[petty_mining].outputs[3]",
+      "text": "Coal",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: coal pit / charcoal burner"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[petty_mining].outputsByResource.iron_deposits[0]",
+      "text": "Iron ore",
+      "needs": [
+        "institution: mine"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[petty_mining].outputsByResource.stone_quarry[0]",
+      "text": "Quarried stone",
+      "needs": [
+        "institution: quarry"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[petty_mining].outputsByResource.stone_quarry[1]",
+      "text": "Building materials",
+      "needs": [
+        "institution: quarry"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[petty_mining].outputsByResource.coal_deposits[0]",
+      "text": "Coal",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: coal pit / charcoal burner"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[harbour_trade].label",
+      "text": "Harbour and Maritime",
+      "needs": [
+        "tier: >= town",
+        "coast",
+        "institution: docks"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "processors Harbour master's office / Docks/port facilities match INSTITUTION_KIND_PATTERNS.docks; Shipyard does not; tier mirrors minTier town"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[harbour_trade].rawInputs[0]",
+      "text": "Harbour capacity",
+      "needs": [
+        "coast"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[harbour_trade].rawInputs[1]",
+      "text": "Dockside access",
+      "needs": [
+        "coast"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[harbour_trade].intermediateGoods[0]",
+      "text": "Harbour fees",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "income",
+      "notes": "revenue"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[harbour_trade].intermediateGoods[1]",
+      "text": "Ship repair",
+      "needs": [
+        "coast"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[harbour_trade].outputs[0]",
+      "text": "Maritime trade revenue",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "income",
+      "notes": "revenue"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[harbour_trade].outputs[1]",
+      "text": "Ship construction",
+      "needs": [
+        "coast"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[harbour_trade].outputs[2]",
+      "text": "Vessel maintenance",
+      "needs": [
+        "coast"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[coastal_shipbuilding].label",
+      "text": "Shipbuilding and Timber",
+      "needs": [
+        "tier: >= town",
+        "coast"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "tier mirrors minTier town"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[coastal_shipbuilding].rawInputs[0]",
+      "text": "Coastal timber",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[coastal_shipbuilding].rawInputs[1]",
+      "text": "Shipbuilding wood",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[coastal_shipbuilding].intermediateGoods[0]",
+      "text": "Planks and beams",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: sawmill"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[coastal_shipbuilding].intermediateGoods[1]",
+      "text": "Ship timber",
+      "needs": [
+        "coast"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[coastal_shipbuilding].outputs[0]",
+      "text": "Ocean-going vessels",
+      "needs": [
+        "coast"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[coastal_shipbuilding].outputs[1]",
+      "text": "River barges",
+      "needs": [
+        "river"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[coastal_shipbuilding].outputs[2]",
+      "text": "Coastal craft",
+      "needs": [
+        "coast"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[river_milling].label",
+      "text": "River Mill Industry",
+      "needs": [
+        "tier: >= hamlet",
+        "river"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "tier mirrors minTier hamlet"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[river_milling].rawInputs[0]",
+      "text": "Grain for milling",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[river_milling].rawInputs[1]",
+      "text": "Water power",
+      "needs": [
+        "river"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[river_milling].intermediateGoods[0]",
+      "text": "Milled flour",
+      "needs": [
+        "institution: mill"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[river_milling].intermediateGoods[1]",
+      "text": "Sawn timber",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: sawmill"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[river_milling].outputs[0]",
+      "text": "Flour and meal",
+      "needs": [
+        "institution: mill"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[river_milling].outputs[1]",
+      "text": "Milled lumber",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: sawmill"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[river_milling].outputs[2]",
+      "text": "Fulled cloth",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: fuller"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[floodplain_agriculture].label",
+      "text": "Floodplain Agriculture",
+      "needs": [
+        "tier: >= village",
+        "river"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "tier mirrors minTier village"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[floodplain_agriculture].rawInputs[0]",
+      "text": "Alluvial soil crops",
+      "needs": [
+        "river"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[floodplain_agriculture].rawInputs[1]",
+      "text": "Flood-fed grain",
+      "needs": [
+        "river"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[floodplain_agriculture].intermediateGoods[0]",
+      "text": "Grain surplus",
+      "needs": [
+        "grain"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[floodplain_agriculture].intermediateGoods[1]",
+      "text": "Diverse crops",
+      "needs": [
+        "grain"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[floodplain_agriculture].outputs[0]",
+      "text": "Grain export",
+      "needs": [
+        "grain"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[floodplain_agriculture].outputs[1]",
+      "text": "Agricultural produce",
+      "needs": [
+        "grain"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[floodplain_agriculture].outputs[2]",
+      "text": "Surplus food",
+      "needs": [
+        "grain"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[mountain_timber_harvest].label",
+      "text": "Mountain Timber",
+      "needs": [
+        "tier: >= hamlet",
+        "terrain: mountain"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "tier mirrors minTier hamlet"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[mountain_timber_harvest].rawInputs[0]",
+      "text": "Mountain timber",
+      "needs": [
+        "terrain: mountain"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[mountain_timber_harvest].rawInputs[1]",
+      "text": "High-altitude wood",
+      "needs": [
+        "terrain: mountain"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[mountain_timber_harvest].intermediateGoods[0]",
+      "text": "Hewn timber",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: sawmill"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[mountain_timber_harvest].intermediateGoods[1]",
+      "text": "Charcoal",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: charcoal burner"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[mountain_timber_harvest].intermediateGoods[2]",
+      "text": "Firewood",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: charcoal burner"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[mountain_timber_harvest].outputs[0]",
+      "text": "Structural timber",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: sawmill"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[mountain_timber_harvest].outputs[1]",
+      "text": "Fuel wood",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: charcoal burner"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[mountain_timber_harvest].outputs[2]",
+      "text": "Charcoal",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: charcoal burner"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[alpine_wool].label",
+      "text": "Alpine Wool and Dairy",
+      "needs": [
+        "tier: >= hamlet",
+        "terrain: mountain"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "tier mirrors minTier hamlet"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[alpine_wool].rawInputs[0]",
+      "text": "Mountain wool",
+      "needs": [
+        "terrain: mountain"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[alpine_wool].rawInputs[1]",
+      "text": "Alpine dairy",
+      "needs": [
+        "terrain: mountain"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[alpine_wool].intermediateGoods[0]",
+      "text": "Raw wool",
+      "needs": [
+        "livestock"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[alpine_wool].intermediateGoods[1]",
+      "text": "Alpine cheese",
+      "needs": [
+        "livestock",
+        "terrain: mountain"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[alpine_wool].intermediateGoods[2]",
+      "text": "Mountain butter",
+      "needs": [
+        "livestock",
+        "terrain: mountain"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[alpine_wool].outputs[0]",
+      "text": "Fine wool cloth",
+      "needs": [
+        "livestock",
+        "tier: >= village"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "fine cloth"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[alpine_wool].outputs[1]",
+      "text": "Aged cheese",
+      "needs": [
+        "livestock"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[alpine_wool].outputs[2]",
+      "text": "Luxury dairy products",
+      "needs": [
+        "livestock"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "named \"luxury\" but not in the chair's class (dairy)"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[oasis_agriculture].label",
+      "text": "Oasis Water and Agriculture",
+      "needs": [
+        "tier: >= hamlet",
+        "terrain: desert"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "tier mirrors minTier hamlet"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[oasis_agriculture].rawInputs[0]",
+      "text": "Fresh water",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[oasis_agriculture].rawInputs[1]",
+      "text": "Oasis crops",
+      "needs": [
+        "terrain: desert"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[oasis_agriculture].intermediateGoods[0]",
+      "text": "Fresh water supply",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[oasis_agriculture].intermediateGoods[1]",
+      "text": "Desert produce",
+      "needs": [
+        "terrain: desert"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[oasis_agriculture].outputs[0]",
+      "text": "Water trade",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[oasis_agriculture].outputs[1]",
+      "text": "Dates and fruit",
+      "needs": [
+        "terrain: desert"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[oasis_agriculture].outputs[2]",
+      "text": "Caravan resupply",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: caravan / warehouse"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[date_palm_harvest].label",
+      "text": "Date Palms and Orchards",
+      "needs": [
+        "tier: >= hamlet",
+        "terrain: desert"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "tier mirrors minTier hamlet"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[date_palm_harvest].rawInputs[0]",
+      "text": "Dates",
+      "needs": [
+        "terrain: desert"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[date_palm_harvest].rawInputs[1]",
+      "text": "Palm products",
+      "needs": [
+        "terrain: desert"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[date_palm_harvest].intermediateGoods[0]",
+      "text": "Dried dates",
+      "needs": [
+        "terrain: desert"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[date_palm_harvest].intermediateGoods[1]",
+      "text": "Palm oil",
+      "needs": [
+        "terrain: desert"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[date_palm_harvest].intermediateGoods[2]",
+      "text": "Woven palm goods",
+      "needs": [
+        "terrain: desert"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[date_palm_harvest].outputs[0]",
+      "text": "Date export",
+      "needs": [
+        "terrain: desert"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[date_palm_harvest].outputs[1]",
+      "text": "Palm sugar",
+      "needs": [
+        "terrain: desert"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[date_palm_harvest].outputs[2]",
+      "text": "Preserved fruit",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[desert_glasswork].label",
+      "text": "Desert Glass and Sand",
+      "needs": [
+        "tier: >= town",
+        "terrain: desert"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "tier mirrors minTier town"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[desert_glasswork].rawInputs[0]",
+      "text": "Fine glass sand",
+      "needs": [
+        "terrain: desert"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[desert_glasswork].rawInputs[1]",
+      "text": "Desert silica",
+      "needs": [
+        "terrain: desert"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[desert_glasswork].intermediateGoods[0]",
+      "text": "Raw glass",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: glassblower"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[desert_glasswork].intermediateGoods[1]",
+      "text": "Glass blanks",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: glassblower"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[desert_glasswork].outputs[0]",
+      "text": "Glassware",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: glassblower"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[desert_glasswork].outputs[1]",
+      "text": "Window glass",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: glassblower"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[desert_glasswork].outputs[2]",
+      "text": "Optical glass",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: glassblower"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.label",
+      "text": "Manufacturing & Crafts",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.desc",
+      "text": "What craftsmen and guilds produce from raw inputs",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "heading chrome"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[textiles].label",
+      "text": "Textiles & Cloth",
+      "needs": [
+        "tier: >= village"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "tier mirrors minTier village"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[textiles].rawInputs[0]",
+      "text": "Raw wool",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[textiles].rawInputs[1]",
+      "text": "Raw wool and hides",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[textiles].intermediateGoods[0]",
+      "text": "Processed textiles",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: weaver / tailor"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[textiles].intermediateGoods[1]",
+      "text": "Raw wool and hides",
+      "needs": [
+        "livestock"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[textiles].outputs[0]",
+      "text": "Processed textiles",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: weaver / tailor"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[textiles].outputs[1]",
+      "text": "Guild-manufactured goods",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: guild"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[textiles].outputs[2]",
+      "text": "Dyed cloth",
+      "needs": [
+        "tier: >= village"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: dyer"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[textiles].outputs[3]",
+      "text": "Fine textiles",
+      "needs": [
+        "tier: >= village"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[leather].label",
+      "text": "Leather & Hides",
+      "needs": [
+        "tier: >= village"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "tier mirrors minTier village"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[leather].rawInputs[0]",
+      "text": "Furs and pelts",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[leather].rawInputs[1]",
+      "text": "Raw wool and hides",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[leather].intermediateGoods[0]",
+      "text": "Raw wool and hides",
+      "needs": [
+        "livestock"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[leather].outputs[0]",
+      "text": "Leather goods",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: tanner"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[leather].outputs[1]",
+      "text": "Guild-manufactured goods",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: guild"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[food_processing].label",
+      "text": "Food Processing",
+      "needs": [
+        "tier: >= village"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "tier mirrors minTier village"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[food_processing].rawInputs[0]",
+      "text": "Grain surplus",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[food_processing].rawInputs[1]",
+      "text": "Livestock",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[food_processing].rawInputs[2]",
+      "text": "Dairy products",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[food_processing].intermediateGoods[0]",
+      "text": "Milled flour",
+      "needs": [
+        "institution: mill"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[food_processing].intermediateGoods[1]",
+      "text": "Dairy products",
+      "needs": [
+        "livestock"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[food_processing].outputs[0]",
+      "text": "Baked goods",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: baker"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[food_processing].outputs[1]",
+      "text": "Preserved foods",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: salt works / smokehouse"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[weapons_armor].label",
+      "text": "Weapons & Armor",
+      "needs": [
+        "tier: >= town"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "tier mirrors minTier town"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[weapons_armor].rawInputs[0]",
+      "text": "Iron ore",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[weapons_armor].rawInputs[1]",
+      "text": "Basic metalwork",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[weapons_armor].intermediateGoods[0]",
+      "text": "Quality tools and weapons",
+      "needs": [
+        "institution: smith"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[weapons_armor].outputs[0]",
+      "text": "Quality tools and weapons",
+      "needs": [
+        "institution: smith"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[weapons_armor].outputs[1]",
+      "text": "Advanced weapons and armor",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: specialized metalworkers"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[weapons_armor].outputs[2]",
+      "text": "Master-crafted weapons",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: specialized metalworkers"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[luxury_goods].label",
+      "text": "Luxury Goods",
+      "needs": [
+        "tier: >= city"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "tier mirrors minTier city"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[luxury_goods].entrepotNote",
+      "text": "Luxury goods are the primary cargo of long-distance trade. Entrepôt cities profit enormous",
+      "needs": [],
+      "excludes": [],
+      "colour": true,
+      "notes": "explanatory prose; names ports/crossroads as beneficiaries generically, not as this place"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[luxury_goods].rawInputs[0]",
+      "text": "Precious metals",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[luxury_goods].rawInputs[1]",
+      "text": "Gemstones",
+      "needs": [
+        "tier: >= village"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[luxury_goods].rawInputs[2]",
+      "text": "Fine textiles",
+      "needs": [
+        "tier: >= village"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[luxury_goods].intermediateGoods[0]",
+      "text": "Fine metalwork and jewelry",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: specialized metalworkers"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[luxury_goods].intermediateGoods[1]",
+      "text": "Fine textiles",
+      "needs": [
+        "tier: >= village"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[luxury_goods].outputs[0]",
+      "text": "Luxury manufactured goods",
+      "needs": [
+        "tier: >= village"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[luxury_goods].outputs[1]",
+      "text": "Fine metalwork and jewelry",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: specialized metalworkers"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[luxury_goods].outputs[2]",
+      "text": "Extreme luxury goods",
+      "needs": [
+        "tier: >= village"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[luxury_goods].outputs[3]",
+      "text": "Master-crafted weapons",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: specialized metalworkers"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[glass_print].label",
+      "text": "Glass & Print",
+      "needs": [
+        "tier: >= city"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "tier mirrors minTier city"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[glass_print].intermediateGoods[0]",
+      "text": "Glassware",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: glassblower"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[glass_print].intermediateGoods[1]",
+      "text": "Books and manuscripts",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: scriptorium / library / ruins"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[glass_print].outputs[0]",
+      "text": "Glassware",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: glassblower"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[glass_print].outputs[1]",
+      "text": "Books and manuscripts",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: scriptorium / library / ruins"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[glass_print].outputs[2]",
+      "text": "Printing services",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: scriptorium / library / ruins"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[bowyer_fletcher].label",
+      "text": "Bowyer & fletcher",
+      "needs": [
+        "tier: >= village"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "tier mirrors minTier village"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[bowyer_fletcher].rawInputs[0]",
+      "text": "Yew wood",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[bowyer_fletcher].rawInputs[1]",
+      "text": "Ash wood",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[bowyer_fletcher].rawInputs[2]",
+      "text": "Feathers",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[bowyer_fletcher].rawInputs[3]",
+      "text": "Sinew",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[bowyer_fletcher].intermediateGoods[0]",
+      "text": "Bow staves",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: bowyer / fletcher"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[bowyer_fletcher].intermediateGoods[1]",
+      "text": "Arrow shafts",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: bowyer / fletcher"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[bowyer_fletcher].outputs[0]",
+      "text": "Bows and crossbows",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: bowyer / fletcher"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[bowyer_fletcher].outputs[1]",
+      "text": "Arrows (sheaf)",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: bowyer / fletcher"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[bowyer_fletcher].outputs[2]",
+      "text": "Crossbow bolts",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: bowyer / fletcher"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[bowyer_fletcher].outputs[3]",
+      "text": "Hunting equipment",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: bowyer / fletcher"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[textile_finishing].label",
+      "text": "Cloth Finishing & Clothing",
+      "needs": [
+        "tier: >= village"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "tier mirrors minTier village"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[textile_finishing].rawInputs[0]",
+      "text": "Raw wool",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[textile_finishing].rawInputs[1]",
+      "text": "Processed textiles",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[textile_finishing].rawInputs[2]",
+      "text": "Dyes",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[textile_finishing].intermediateGoods[0]",
+      "text": "Fulled cloth",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: fuller"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[textile_finishing].intermediateGoods[1]",
+      "text": "Dyed cloth",
+      "needs": [
+        "tier: >= village"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: dyer"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[textile_finishing].intermediateGoods[2]",
+      "text": "Finished cloth",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: weaver / tailor"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[textile_finishing].outputs[0]",
+      "text": "Finished clothing",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: weaver / tailor"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[textile_finishing].outputs[1]",
+      "text": "Dyed cloth",
+      "needs": [
+        "tier: >= village"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: dyer"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[textile_finishing].outputs[2]",
+      "text": "Tailored garments",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: weaver / tailor"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[textile_finishing].outputs[3]",
+      "text": "Livery and uniforms",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: weaver / tailor"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[leather_goods].label",
+      "text": "Leatherworking & Cordwaining",
+      "needs": [
+        "tier: >= village"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "tier mirrors minTier village"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[leather_goods].rawInputs[0]",
+      "text": "Raw hides",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[leather_goods].rawInputs[1]",
+      "text": "Tanned leather",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[leather_goods].intermediateGoods[0]",
+      "text": "Tanned leather",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: tanner"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[leather_goods].intermediateGoods[1]",
+      "text": "Dressed hides",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: tanner"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[leather_goods].outputs[0]",
+      "text": "Boots and shoes",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: tanner"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[leather_goods].outputs[1]",
+      "text": "Saddles and harness",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: tanner"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[leather_goods].outputs[2]",
+      "text": "Leather armour",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: tanner"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[leather_goods].outputs[3]",
+      "text": "Leather goods",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: tanner"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[leather_goods].outputs[4]",
+      "text": "Belts and straps",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: tanner"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[ceramics_brick].label",
+      "text": "Pottery & Brickmaking",
+      "needs": [
+        "tier: >= village"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "tier mirrors minTier village"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[ceramics_brick].rawInputs[0]",
+      "text": "Clay",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[ceramics_brick].rawInputs[1]",
+      "text": "Peat fuel",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[ceramics_brick].rawInputs[2]",
+      "text": "Firewood",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[ceramics_brick].intermediateGoods[0]",
+      "text": "Fired clay",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: potter / brickmaker"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[ceramics_brick].intermediateGoods[1]",
+      "text": "Unfired pottery",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: potter / brickmaker"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[ceramics_brick].outputs[0]",
+      "text": "Pottery and ceramics",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: potter / brickmaker"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[ceramics_brick].outputs[1]",
+      "text": "Fired brick",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: potter / brickmaker"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[ceramics_brick].outputs[2]",
+      "text": "Roof tiles",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: potter / brickmaker"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[ceramics_brick].outputs[3]",
+      "text": "Drainage pipes",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: potter / brickmaker"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[beekeeping_wax].label",
+      "text": "Beekeeping & Wax",
+      "needs": [
+        "tier: >= village"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "tier mirrors minTier village"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[beekeeping_wax].rawInputs[0]",
+      "text": "Wild honey",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[beekeeping_wax].rawInputs[1]",
+      "text": "Beeswax",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[beekeeping_wax].intermediateGoods[0]",
+      "text": "Refined beeswax",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: beekeeper / chandler"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[beekeeping_wax].intermediateGoods[1]",
+      "text": "Honey",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: beekeeper / chandler"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[beekeeping_wax].outputs[0]",
+      "text": "Wild honey",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: beekeeper / chandler"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[beekeeping_wax].outputs[1]",
+      "text": "Candles and wax",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: beekeeper / chandler"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[beekeeping_wax].outputs[2]",
+      "text": "Mead",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: beekeeper / chandler"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[beekeeping_wax].outputs[3]",
+      "text": "Medicinal honey",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: beekeeper / chandler"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.label",
+      "text": "Trade & Entrepôt",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.desc",
+      "text": "Goods that flow through for redistribution: the wealth of crossroads, ports, and river hub",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "heading chrome"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[spices_dyes].label",
+      "text": "Spices & Dyes",
+      "needs": [
+        "tier: >= town"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "tier mirrors minTier town"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[spices_dyes].entrepotNote",
+      "text": "Produced in distant lands. Crossroads and port settlements control distribution and take t",
+      "needs": [],
+      "excludes": [],
+      "colour": true,
+      "notes": "explanatory prose; names ports/crossroads as beneficiaries generically, not as this place"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[spices_dyes].rawInputs[0]",
+      "text": "Rare spices and dyes",
+      "needs": [
+        "tier: >= village"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[spices_dyes].intermediateGoods[0]",
+      "text": "Rare spices and dyes",
+      "needs": [
+        "tier: >= village"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[spices_dyes].outputs[0]",
+      "text": "Rare spices and exotic dyes",
+      "needs": [
+        "tier: >= village"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[silk_luxury_textiles].label",
+      "text": "Silk & Luxury Textiles",
+      "needs": [
+        "tier: >= city"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "entrepotNote: \"Silk is not produced locally at any tier\" yet the chain lists Fine textiles as an OUTPUT (both-lists); tier mirrors minTier city"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[silk_luxury_textiles].entrepotNote",
+      "text": "Silk is not produced locally at any tier. Port cities control import; crossroads cities co",
+      "needs": [],
+      "excludes": [],
+      "colour": true,
+      "notes": "explanatory prose; names ports/crossroads as beneficiaries generically, not as this place"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[silk_luxury_textiles].rawInputs[0]",
+      "text": "Fine textiles",
+      "needs": [
+        "tier: >= village"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[silk_luxury_textiles].rawInputs[1]",
+      "text": "Luxury textiles",
+      "needs": [
+        "tier: >= village"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[silk_luxury_textiles].intermediateGoods[0]",
+      "text": "Fine textiles",
+      "needs": [
+        "tier: >= village"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[silk_luxury_textiles].intermediateGoods[1]",
+      "text": "Luxury textiles",
+      "needs": [
+        "tier: >= village"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[silk_luxury_textiles].outputs[0]",
+      "text": "Fine textiles",
+      "needs": [
+        "tier: >= village"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[silk_luxury_textiles].outputs[1]",
+      "text": "Luxury manufactured goods",
+      "needs": [
+        "tier: >= village"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[transit_finance].label",
+      "text": "Letters of Credit & Finance",
+      "needs": [
+        "tier: >= town"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "tier mirrors minTier town"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[transit_finance].entrepotNote",
+      "text": "Entrepôt cities develop banking infrastructure to facilitate large-volume trade. The bank ",
+      "needs": [],
+      "excludes": [],
+      "colour": true,
+      "notes": "explanatory prose; names ports/crossroads as beneficiaries generically, not as this place"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[transit_finance].intermediateGoods[0]",
+      "text": "Financial services",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "income",
+      "notes": "capital"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[transit_finance].intermediateGoods[1]",
+      "text": "International banking services",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "income",
+      "notes": "capital"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[transit_finance].outputs[0]",
+      "text": "Financial services",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "income",
+      "notes": "capital"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[transit_finance].outputs[1]",
+      "text": "International banking services",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "income",
+      "notes": "capital"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[warehouse_logistics].label",
+      "text": "Storage & Logistics",
+      "needs": [
+        "tier: >= town"
+      ],
+      "excludes": [
+        "route: isolated"
+      ],
+      "colour": false,
+      "notes": "tier mirrors minTier town"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[warehouse_logistics].entrepotNote",
+      "text": "Ports and crossroads profit by charging for storage, loading, and onward transport, not by",
+      "needs": [],
+      "excludes": [],
+      "colour": true,
+      "notes": "explanatory prose; names ports/crossroads as beneficiaries generically, not as this place"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[warehouse_logistics].rawInputs[0]",
+      "text": "Transit trade",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "income",
+      "notes": "input (supply presumed, local or imported): producer not declared; transit trade"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[warehouse_logistics].rawInputs[1]",
+      "text": "Toll revenue",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "income",
+      "notes": "input (supply presumed, local or imported): producer not declared; toll/fee revenue"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[warehouse_logistics].outputs[0]",
+      "text": "Cargo handling",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: caravan / warehouse"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[warehouse_logistics].outputs[1]",
+      "text": "Goods storage",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: caravan / warehouse"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[furs_north].label",
+      "text": "Furs & Pelts",
+      "needs": [
+        "tier: >= hamlet"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "tier mirrors minTier hamlet"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[furs_north].entrepotNote",
+      "text": "Furs originate in frontier/northern settlements and travel south through trading posts. Mi",
+      "needs": [],
+      "excludes": [],
+      "colour": true,
+      "notes": "explanatory prose; names ports/crossroads as beneficiaries generically, not as this place"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[furs_north].rawInputs[0]",
+      "text": "Furs and pelts",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[furs_north].rawInputs[1]",
+      "text": "Game meat",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[furs_north].intermediateGoods[0]",
+      "text": "Furs and pelts",
+      "needs": [
+        "game"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[furs_north].outputs[0]",
+      "text": "Furs and pelts",
+      "needs": [
+        "game"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[furs_north].outputs[1]",
+      "text": "Leather goods",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: tanner"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[wine_spirits].label",
+      "text": "Wine & Spirits",
+      "needs": [
+        "tier: >= village"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "tier mirrors minTier village"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[wine_spirits].entrepotNote",
+      "text": "Wine is produced in specific vineyard regions and consumed everywhere. Port and river sett",
+      "needs": [],
+      "excludes": [],
+      "colour": true,
+      "notes": "explanatory prose; names ports/crossroads as beneficiaries generically, not as this place"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[wine_spirits].outputs[0]",
+      "text": "Meals and drink",
+      "needs": [
+        "institution: tavern"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[wine_spirits].outputs[1]",
+      "text": "Preserved foods",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: salt works / smokehouse"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[caravan_trade].label",
+      "text": "Caravan & Overland Trade",
+      "needs": [
+        "tier: >= village"
+      ],
+      "excludes": [
+        "route: isolated"
+      ],
+      "colour": false,
+      "notes": "tier mirrors minTier village"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[caravan_trade].rawInputs[0]",
+      "text": "Pack animals",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[caravan_trade].rawInputs[1]",
+      "text": "Trade goods",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[caravan_trade].rawInputs[2]",
+      "text": "Provisions",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[caravan_trade].intermediateGoods[0]",
+      "text": "Way-bills",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: caravan / warehouse"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[caravan_trade].intermediateGoods[1]",
+      "text": "Bonded cargo",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: caravan / warehouse"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[caravan_trade].intermediateGoods[2]",
+      "text": "Route maps",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: caravan / warehouse"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[caravan_trade].outputs[0]",
+      "text": "Overland cargo transport",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: caravan / warehouse"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[caravan_trade].outputs[1]",
+      "text": "Escorted caravan",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: caravan / warehouse"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[caravan_trade].outputs[2]",
+      "text": "Pack animal hire",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: caravan / warehouse"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[caravan_trade].outputs[3]",
+      "text": "Route intelligence",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: caravan / warehouse"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[crossroads_trade].label",
+      "text": "Strategic Crossroads Toll",
+      "needs": [
+        "tier: >= village",
+        "route: crossroads"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "tier mirrors minTier village"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[crossroads_trade].rawInputs[0]",
+      "text": "Trade traffic",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "income",
+      "notes": "input (supply presumed, local or imported): producer not declared; transit trade"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[crossroads_trade].rawInputs[1]",
+      "text": "Toll revenue",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "income",
+      "notes": "input (supply presumed, local or imported): producer not declared; toll/fee revenue"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[crossroads_trade].intermediateGoods[0]",
+      "text": "Toll revenue",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "income",
+      "notes": "toll/fee revenue"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[crossroads_trade].intermediateGoods[1]",
+      "text": "Transit fees",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "income",
+      "notes": "toll/fee revenue"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[crossroads_trade].outputs[0]",
+      "text": "Toll income",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "income",
+      "notes": "toll/fee revenue"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[crossroads_trade].outputs[1]",
+      "text": "Market taxes",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "income",
+      "notes": "toll/fee revenue"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[crossroads_trade].outputs[2]",
+      "text": "Transit trade profit",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "income",
+      "notes": "transit trade"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[camel_caravan].label",
+      "text": "Camel Caravan Trade",
+      "needs": [
+        "tier: >= town",
+        "terrain: desert"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "CULTURE-KEYED ANIMAL (camel): camel cultures in cultureProfiles.js are arabic / steppe; declared by terrain only (resolveSettlementCulture is not terrain-keyed; a culture atom would refuse a desert of any other culture) — chair to confirm \"culture: arabic, steppe\"; tier mirrors minTier town"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[camel_caravan].rawInputs[0]",
+      "text": "Camel transport capacity",
+      "needs": [
+        "terrain: desert"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared; culture-keyed animal (camel): see chain camel_caravan"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[camel_caravan].rawInputs[1]",
+      "text": "Desert routes",
+      "needs": [
+        "terrain: desert"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[camel_caravan].intermediateGoods[0]",
+      "text": "Desert transport",
+      "needs": [
+        "terrain: desert"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[camel_caravan].intermediateGoods[1]",
+      "text": "Long-distance freight",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: caravan / warehouse"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[camel_caravan].outputs[0]",
+      "text": "Caravan trade goods",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: caravan / warehouse"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[camel_caravan].outputs[1]",
+      "text": "Exotic imports",
+      "needs": [
+        "tier: >= village"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[camel_caravan].outputs[2]",
+      "text": "Overland freight revenue",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "income",
+      "notes": "revenue"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[mountain_pass_trade].label",
+      "text": "Mountain Pass Control",
+      "needs": [
+        "tier: >= village",
+        "route: mountain_pass"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "tier mirrors minTier village"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[mountain_pass_trade].rawInputs[0]",
+      "text": "Pass control",
+      "needs": [
+        "route: mountain_pass"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[mountain_pass_trade].rawInputs[1]",
+      "text": "Strategic chokepoint",
+      "needs": [
+        "route: mountain_pass"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[mountain_pass_trade].intermediateGoods[0]",
+      "text": "Pass fees",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "income",
+      "notes": "toll/fee revenue"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[mountain_pass_trade].intermediateGoods[1]",
+      "text": "Military revenue",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "income",
+      "notes": "revenue/control, not a good"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[mountain_pass_trade].outputs[0]",
+      "text": "Toll income",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "income",
+      "notes": "toll/fee revenue"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[mountain_pass_trade].outputs[1]",
+      "text": "Strategic control",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "income",
+      "notes": "revenue/control, not a good"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[mountain_pass_trade].outputs[2]",
+      "text": "Trade access fees",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "income",
+      "notes": "toll/fee revenue"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::defense_security.label",
+      "text": "Defense & Security",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::defense_security.desc",
+      "text": "What protects the settlement from external threats and internal disorder",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "heading chrome"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::defense_security.chains[garrison].label",
+      "text": "Standing Garrison",
+      "needs": [
+        "tier: >= town",
+        "garrison"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "labelNeeds hasGarrison; tier mirrors minTier town"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::defense_security.chains[garrison].labelOtherwise",
+      "text": "Standing Watch",
+      "needs": [
+        "tier: >= town",
+        "watch"
+      ],
+      "excludes": [
+        "garrison"
+      ],
+      "colour": false,
+      "notes": "labelOtherwise: drawn where hasGarrison is false; \"Standing Watch\" presumes a watch"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::defense_security.chains[garrison].rawInputs[0]",
+      "text": "Quality tools and weapons",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::defense_security.chains[garrison].rawInputs[1]",
+      "text": "Advanced weapons and armor",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::defense_security.chains[garrison].outputs[0]",
+      "text": "Defence services",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::defense_security.chains[garrison].outputs[1]",
+      "text": "Weapons training",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::defense_security.chains[fortification].label",
+      "text": "Fortifications",
+      "needs": [
+        "tier: >= hamlet"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "tier mirrors minTier hamlet"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::defense_security.chains[fortification].rawInputs[0]",
+      "text": "Quarried stone",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::defense_security.chains[fortification].rawInputs[1]",
+      "text": "Building materials",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::defense_security.chains[mercenary].label",
+      "text": "Mercenary Forces",
+      "needs": [
+        "tier: >= town"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "tier mirrors minTier town"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::defense_security.chains[mercenary].outputs[0]",
+      "text": "Armed escort",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::defense_security.chains[mercenary].outputs[1]",
+      "text": "Mercenary hire",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::defense_security.chains[mercenary].outputs[2]",
+      "text": "Training services",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::defense_security.chains[adventuring_escort].label",
+      "text": "Adventuring & Escort",
+      "needs": [
+        "tier: >= town"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "tier mirrors minTier town"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::defense_security.chains[adventuring_escort].outputs[0]",
+      "text": "Armed escort",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::defense_security.chains[adventuring_escort].outputs[1]",
+      "text": "Monster hunting services",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::defense_security.chains[adventuring_escort].outputs[2]",
+      "text": "Dungeon clearance",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::healing_medicine.label",
+      "text": "Healing & Medicine",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::healing_medicine.desc",
+      "text": "What keeps the population alive and attracts pilgrims and the infirm",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "heading chrome"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::healing_medicine.chains[herbalism].label",
+      "text": "Herbalism & Remedies",
+      "needs": [
+        "tier: >= village"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "tier mirrors minTier village"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::healing_medicine.chains[herbalism].rawInputs[0]",
+      "text": "Medicinal herbs",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::healing_medicine.chains[herbalism].rawInputs[1]",
+      "text": "Alchemical reagents",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::healing_medicine.chains[herbalism].rawInputs[2]",
+      "text": "Wild honey",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::healing_medicine.chains[herbalism].intermediateGoods[0]",
+      "text": "Medicinal herbs",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: forager / herbalist"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::healing_medicine.chains[herbalism].intermediateGoods[1]",
+      "text": "Alchemical reagents",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: apothecary / alchemist"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::healing_medicine.chains[herbalism].outputs[0]",
+      "text": "Herbal remedies",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: apothecary / alchemist"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::healing_medicine.chains[herbalism].outputs[1]",
+      "text": "Potions and elixirs",
+      "needs": [
+        "magic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::healing_medicine.chains[hospital].label",
+      "text": "Hospital & Surgery",
+      "needs": [
+        "tier: >= town",
+        "hospital"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "labelNeeds hasHospital; tier mirrors minTier town"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::healing_medicine.chains[hospital].labelOtherwise",
+      "text": "Almshouse Care",
+      "needs": [
+        "tier: >= town"
+      ],
+      "excludes": [
+        "hospital"
+      ],
+      "colour": false,
+      "notes": "labelOtherwise: drawn where hasHospital is false (almshouse/foundling home runs the chain)"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::healing_medicine.chains[hospital].outputs[0]",
+      "text": "Medical treatment",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::healing_medicine.chains[hospital].outputs[1]",
+      "text": "Surgery",
+      "needs": [
+        "hospital"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "the chain runs on an almshouse alone (labelOtherwise \"Almshouse Care\")"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::healing_medicine.chains[hospital].outputs[2]",
+      "text": "Quarantine",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::healing_medicine.chains[hospital].outputs[3]",
+      "text": "Medical training",
+      "needs": [
+        "hospital"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "the chain runs on an almshouse alone (labelOtherwise \"Almshouse Care\")"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::healing_medicine.chains[divine_healing].label",
+      "text": "Divine & Magical Healing",
+      "needs": [
+        "tier: >= village"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "tier mirrors minTier village"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::healing_medicine.chains[divine_healing].rawInputs[0]",
+      "text": "Healing waters (bottled)",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::healing_medicine.chains[divine_healing].outputs[0]",
+      "text": "Medical care (basic)",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::healing_medicine.chains[divine_healing].outputs[1]",
+      "text": "Spellcasting (minor)",
+      "needs": [
+        "magic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::knowledge_information.label",
+      "text": "Knowledge & Information",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::knowledge_information.desc",
+      "text": "What the settlement knows, records, teaches, and sells as intelligence",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "heading chrome"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::knowledge_information.chains[cartography].label",
+      "text": "Maps & Cartography",
+      "needs": [
+        "tier: >= town"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "tier mirrors minTier town"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::knowledge_information.chains[cartography].outputs[0]",
+      "text": "News and information",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::knowledge_information.chains[cartography].outputs[1]",
+      "text": "Maps and charts",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::knowledge_information.chains[scholarship].label",
+      "text": "Scholarship & Publishing",
+      "needs": [
+        "tier: >= town"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "tier mirrors minTier town"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::knowledge_information.chains[scholarship].rawInputs[0]",
+      "text": "Recovered artefacts",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::knowledge_information.chains[scholarship].rawInputs[1]",
+      "text": "Rare texts",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::knowledge_information.chains[scholarship].intermediateGoods[0]",
+      "text": "Books and manuscripts",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: scriptorium / library / ruins"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::knowledge_information.chains[scholarship].outputs[0]",
+      "text": "Books and manuscripts",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: scriptorium / library / ruins"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::knowledge_information.chains[scholarship].outputs[1]",
+      "text": "Higher education",
+      "needs": [
+        "institution: school"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::knowledge_information.chains[scholarship].outputs[2]",
+      "text": "Research",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: scriptorium / library / ruins"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::knowledge_information.chains[scholarship].outputs[3]",
+      "text": "Publishing",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: scriptorium / library / ruins"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::knowledge_information.chains[scholarship].outputs[4]",
+      "text": "Printing services",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: scriptorium / library / ruins"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::knowledge_information.chains[intelligence].label",
+      "text": "Intelligence & Communications",
+      "needs": [
+        "tier: >= town"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "tier mirrors minTier town"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::knowledge_information.chains[intelligence].outputs[0]",
+      "text": "Information brokerage",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::knowledge_information.chains[intelligence].outputs[1]",
+      "text": "Long-distance messages",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::knowledge_information.chains[intelligence].outputs[2]",
+      "text": "Intelligence services",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::knowledge_information.chains[intelligence].outputs[3]",
+      "text": "Divination and scrying",
+      "needs": [
+        "magic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::knowledge_information.chains[news_information].label",
+      "text": "News & Public Information",
+      "needs": [
+        "tier: >= village"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "tier mirrors minTier village"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::knowledge_information.chains[news_information].rawInputs[0]",
+      "text": "Letters and dispatches",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::knowledge_information.chains[news_information].rawInputs[1]",
+      "text": "Official proclamations",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::knowledge_information.chains[news_information].intermediateGoods[0]",
+      "text": "Letters",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::knowledge_information.chains[news_information].intermediateGoods[1]",
+      "text": "Broadsheets",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::knowledge_information.chains[news_information].intermediateGoods[2]",
+      "text": "Official notices",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::knowledge_information.chains[news_information].outputs[0]",
+      "text": "News and information",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::knowledge_information.chains[news_information].outputs[1]",
+      "text": "Broadsheets",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::knowledge_information.chains[news_information].outputs[2]",
+      "text": "Public proclamations",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::knowledge_information.chains[news_information].outputs[3]",
+      "text": "Message relay",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::knowledge_information.chains[news_information].outputs[4]",
+      "text": "Printing services",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: scriptorium / library / ruins"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::arcane_magical.label",
+      "text": "Arcane & Magical",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::arcane_magical.desc",
+      "text": "What the settlement can offer in magical services, goods, and infrastructure",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "heading chrome"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::arcane_magical.chains[alchemy].label",
+      "text": "Alchemy & Reagents",
+      "needs": [
+        "tier: >= hamlet"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "arcane substitution gated by the magic dial already; tier mirrors minTier hamlet"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::arcane_magical.chains[alchemy].rawInputs[0]",
+      "text": "Arcane reagents",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::arcane_magical.chains[alchemy].rawInputs[1]",
+      "text": "Medicinal herbs",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::arcane_magical.chains[alchemy].rawInputs[2]",
+      "text": "Monster components",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::arcane_magical.chains[alchemy].intermediateGoods[0]",
+      "text": "Alchemical reagents",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: apothecary / alchemist"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::arcane_magical.chains[alchemy].outputs[0]",
+      "text": "Potions and elixirs",
+      "needs": [
+        "magic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::arcane_magical.chains[alchemy].outputs[1]",
+      "text": "Alchemical reagents",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: apothecary / alchemist"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::arcane_magical.chains[alchemy].outputs[2]",
+      "text": "Alchemical products",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: apothecary / alchemist"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::arcane_magical.chains[spellcasting].label",
+      "text": "Spellcasting Services",
+      "needs": [
+        "tier: >= town",
+        "magic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "tier mirrors minTier town"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::arcane_magical.chains[spellcasting].outputs[0]",
+      "text": "Spellcasting (minor)",
+      "needs": [
+        "magic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::arcane_magical.chains[spellcasting].outputs[1]",
+      "text": "Magical identification",
+      "needs": [
+        "magic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::arcane_magical.chains[spellcasting].outputs[2]",
+      "text": "Enchanting services",
+      "needs": [
+        "magic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::arcane_magical.chains[spellcasting].outputs[3]",
+      "text": "Spellcasting (greater)",
+      "needs": [
+        "magic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::arcane_magical.chains[spellcasting].outputs[4]",
+      "text": "Teleportation",
+      "needs": [
+        "magic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::arcane_magical.chains[magical_goods].label",
+      "text": "Magical Items & Enchanting",
+      "needs": [
+        "tier: >= town",
+        "magic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "tier mirrors minTier town"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::arcane_magical.chains[magical_goods].entrepotNote",
+      "text": "Magical items are among the highest-value trade goods. Cities near magical nodes become di",
+      "needs": [],
+      "excludes": [],
+      "colour": true,
+      "notes": "explanatory prose; names ports/crossroads as beneficiaries generically, not as this place"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::arcane_magical.chains[magical_goods].rawInputs[0]",
+      "text": "Arcane reagents",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::arcane_magical.chains[magical_goods].rawInputs[1]",
+      "text": "Extraplanar goods",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::arcane_magical.chains[magical_goods].intermediateGoods[0]",
+      "text": "Arcane scribing",
+      "needs": [
+        "magic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::arcane_magical.chains[magical_goods].outputs[0]",
+      "text": "Magical item market",
+      "needs": [
+        "magic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::arcane_magical.chains[magical_goods].outputs[1]",
+      "text": "Weapon enchantment",
+      "needs": [
+        "magic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::arcane_magical.chains[magical_goods].outputs[2]",
+      "text": "Armour warding",
+      "needs": [
+        "magic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::arcane_magical.chains[magical_goods].outputs[3]",
+      "text": "Utility enchantments",
+      "needs": [
+        "magic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::arcane_magical.chains[magical_goods].outputs[4]",
+      "text": "Extraplanar goods",
+      "needs": [
+        "magic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::arcane_magical.chains[planar].label",
+      "text": "Planar Trade",
+      "needs": [
+        "tier: >= metropolis",
+        "magic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "tier mirrors minTier metropolis"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::arcane_magical.chains[planar].entrepotNote",
+      "text": "Planar goods are extreme-value entrepôt items. Only metropolis-level settlements can suppo",
+      "needs": [],
+      "excludes": [],
+      "colour": true,
+      "notes": "explanatory prose; names ports/crossroads as beneficiaries generically, not as this place"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::arcane_magical.chains[planar].rawInputs[0]",
+      "text": "Extraplanar goods",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::arcane_magical.chains[planar].rawInputs[1]",
+      "text": "Arcane reagents",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::arcane_magical.chains[planar].intermediateGoods[0]",
+      "text": "Extraplanar goods",
+      "needs": [
+        "magic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::arcane_magical.chains[planar].outputs[0]",
+      "text": "Extraplanar goods",
+      "needs": [
+        "magic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::arcane_magical.chains[planar].outputs[1]",
+      "text": "Planar travel information",
+      "needs": [
+        "magic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::arcane_magical.chains[planar].outputs[2]",
+      "text": "Diplomatic access",
+      "needs": [
+        "magic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::religion_civic.label",
+      "text": "Religion & Civic",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::religion_civic.desc",
+      "text": "What holds the settlement together: faith, law, administration, and social order",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "heading chrome"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::religion_civic.chains[parish].label",
+      "text": "Faith & Worship",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::religion_civic.chains[parish].rawInputs[0]",
+      "text": "Ritual components",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::religion_civic.chains[parish].rawInputs[1]",
+      "text": "Pilgrim donations",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "income",
+      "notes": "input (supply presumed, local or imported): producer not declared; pilgrim income (the pilgrimage chain's own note: \"non-trade income\")"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::religion_civic.chains[parish].outputs[0]",
+      "text": "Religious services",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "disjunction within the institution dimension (§3.2) · undeclarable as written (institution: temple|institution: monastery): a disjunction the vocabulary cannot express; left undeclared (CENSUS-3b re-spell)"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::religion_civic.chains[parish].outputs[1]",
+      "text": "Education (basic)",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::religion_civic.chains[parish].outputs[2]",
+      "text": "Poor relief",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::religion_civic.chains[parish].outputs[3]",
+      "text": "Record keeping",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::religion_civic.chains[parish].outputs[4]",
+      "text": "Sanctuary",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::religion_civic.chains[parish].outputs[5]",
+      "text": "Medical care (basic)",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::religion_civic.chains[parish].outputs[6]",
+      "text": "Illuminated manuscripts",
+      "needs": [
+        "institution: monastery"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "monastic craft: in the parish chain a shrine-only thorp would print it"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::religion_civic.chains[law_governance].label",
+      "text": "Law & Governance",
+      "needs": [
+        "tier: >= town"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "tier mirrors minTier town"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::religion_civic.chains[law_governance].outputs[0]",
+      "text": "Civil disputes",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: courthouse"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::religion_civic.chains[law_governance].outputs[1]",
+      "text": "Criminal trials",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: courthouse"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::religion_civic.chains[law_governance].outputs[2]",
+      "text": "Notary services",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: courthouse"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::religion_civic.chains[law_governance].outputs[3]",
+      "text": "Legal services",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: courthouse"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::religion_civic.chains[pilgrimage].label",
+      "text": "Pilgrimage & Holy Sites",
+      "needs": [
+        "tier: >= hamlet"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "tier mirrors minTier hamlet"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::religion_civic.chains[pilgrimage].note",
+      "text": "Holy sites generate economic activity through pilgrim spending: effectively a non-trade in",
+      "needs": [],
+      "excludes": [],
+      "colour": true,
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::religion_civic.chains[pilgrimage].rawInputs[0]",
+      "text": "Healing waters (bottled)",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::religion_civic.chains[pilgrimage].rawInputs[1]",
+      "text": "Pilgrim donations",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "income",
+      "notes": "input (supply presumed, local or imported): producer not declared; pilgrim income (the pilgrimage chain's own note: \"non-trade income\")"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::religion_civic.chains[pilgrimage].outputs[0]",
+      "text": "Religious services",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "disjunction within the institution dimension (§3.2) · undeclarable as written (institution: temple|institution: monastery): a disjunction the vocabulary cannot express; left undeclared (CENSUS-3b re-spell)"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::religion_civic.chains[pilgrimage].outputs[1]",
+      "text": "Hospitality for travellers",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::religion_civic.chains[pilgrimage].outputs[2]",
+      "text": "Poor relief",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::entertainment_culture.label",
+      "text": "Entertainment & Culture",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::entertainment_culture.desc",
+      "text": "What the settlement does for pleasure, culture, and social release",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "heading chrome"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::entertainment_culture.chains[tavern_social].label",
+      "text": "Taverns & Social Life",
+      "needs": [
+        "tier: >= hamlet"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "tier mirrors minTier hamlet"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::entertainment_culture.chains[tavern_social].outputs[0]",
+      "text": "Lodging",
+      "needs": [
+        "institution: tavern"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::entertainment_culture.chains[tavern_social].outputs[1]",
+      "text": "Meals and drink",
+      "needs": [
+        "institution: tavern"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::entertainment_culture.chains[tavern_social].outputs[2]",
+      "text": "Stabling",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::entertainment_culture.chains[tavern_social].outputs[3]",
+      "text": "Message relay",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::entertainment_culture.chains[tavern_social].outputs[4]",
+      "text": "Hiring hall",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::entertainment_culture.chains[tavern_social].outputs[5]",
+      "text": "Gambling",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::entertainment_culture.chains[performance].label",
+      "text": "Performance & Theater",
+      "needs": [
+        "tier: >= town"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "tier mirrors minTier town"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::entertainment_culture.chains[performance].outputs[0]",
+      "text": "Performances",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::entertainment_culture.chains[performance].outputs[1]",
+      "text": "Music and song",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::entertainment_culture.chains[performance].outputs[2]",
+      "text": "Musical education",
+      "needs": [
+        "institution: school"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::entertainment_culture.chains[performance].outputs[3]",
+      "text": "Magical entertainment",
+      "needs": [
+        "magic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::entertainment_culture.chains[gambling_arena].label",
+      "text": "Gambling & Arena",
+      "needs": [
+        "tier: >= town"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "tier mirrors minTier town"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::entertainment_culture.chains[gambling_arena].outputs[0]",
+      "text": "Games of chance",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::entertainment_culture.chains[gambling_arena].outputs[1]",
+      "text": "Gladiatorial combat",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: arena; already gated on the Arena processor (outputsRequiringProcessor)"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::entertainment_culture.chains[gambling_arena].outputs[2]",
+      "text": "Monster exhibitions",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: arena; already gated on the Arena processor (outputsRequiringProcessor)"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::entertainment_culture.chains[gambling_arena].outputs[3]",
+      "text": "Public games",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: arena; already gated on the Arena processor (outputsRequiringProcessor)"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::criminal_economy.label",
+      "text": "Criminal Economy",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::criminal_economy.desc",
+      "text": "The shadow economy: what moves without documentation and who profits",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "heading chrome"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::criminal_economy.chains[smuggling].label",
+      "text": "Smuggling & Contraband",
+      "needs": [
+        "organised crime"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::criminal_economy.chains[smuggling].entrepotNote",
+      "text": "Smuggling is the dark entrepôt model. Goods that cannot be taxed or declared flow through ",
+      "needs": [],
+      "excludes": [],
+      "colour": true,
+      "notes": "explanatory prose; names ports/crossroads as beneficiaries generically, not as this place"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::criminal_economy.chains[smuggling].rawInputs[0]",
+      "text": "Contraband goods",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::criminal_economy.chains[smuggling].intermediateGoods[0]",
+      "text": "Contraband goods",
+      "needs": [
+        "organised crime"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::criminal_economy.chains[smuggling].outputs[0]",
+      "text": "Contraband goods",
+      "needs": [
+        "organised crime"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::criminal_economy.chains[smuggling].outputs[1]",
+      "text": "Import/export bypass",
+      "needs": [
+        "organised crime"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::criminal_economy.chains[smuggling].outputs[2]",
+      "text": "Safe houses",
+      "needs": [
+        "organised crime"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::criminal_economy.chains[black_market].label",
+      "text": "Black market",
+      "needs": [
+        "organised crime"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::criminal_economy.chains[black_market].outputs[0]",
+      "text": "Contraband goods",
+      "needs": [
+        "organised crime"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::criminal_economy.chains[black_market].outputs[1]",
+      "text": "Forged documents",
+      "needs": [
+        "organised crime"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::criminal_economy.chains[black_market].outputs[2]",
+      "text": "Fencing stolen goods",
+      "needs": [
+        "organised crime"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::criminal_economy.chains[black_market].outputs[3]",
+      "text": "Illegal services",
+      "needs": [
+        "organised crime"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::criminal_economy.chains[guild_crime].label",
+      "text": "Organised Crime",
+      "needs": [
+        "tier: >= town",
+        "organised crime"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "tier mirrors minTier town"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::criminal_economy.chains[guild_crime].outputs[0]",
+      "text": "Information brokerage",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::criminal_economy.chains[guild_crime].outputs[1]",
+      "text": "Guild protection",
+      "needs": [
+        "organised crime"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::criminal_economy.chains[guild_crime].outputs[2]",
+      "text": "Contract killing",
+      "needs": [
+        "organised crime"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::criminal_economy.chains[guild_crime].outputs[3]",
+      "text": "Intimidation services",
+      "needs": [
+        "organised crime"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::criminal_economy.chains[guild_crime].outputs[4]",
+      "text": "Comprehensive black market",
+      "needs": [
+        "organised crime"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::criminal_economy.chains[slave_trade].label",
+      "text": "Forced Labour Economy",
+      "needs": [
+        "tier: >= town"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "tier mirrors minTier town"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::criminal_economy.chains[slave_trade].rawInputs[0]",
+      "text": "War captives",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::criminal_economy.chains[slave_trade].rawInputs[1]",
+      "text": "Debt bondage",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "input (supply presumed, local or imported): producer not declared"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::criminal_economy.chains[slave_trade].intermediateGoods[0]",
+      "text": "Bond papers",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: slave market"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::criminal_economy.chains[slave_trade].intermediateGoods[1]",
+      "text": "Slave registration",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: slave market"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::criminal_economy.chains[slave_trade].outputs[0]",
+      "text": "Forced labour services",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: slave market"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::criminal_economy.chains[slave_trade].outputs[1]",
+      "text": "Domestic servants",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: slave market"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::criminal_economy.chains[slave_trade].outputs[2]",
+      "text": "Agricultural labour",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: slave market"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::criminal_economy.chains[slave_trade].outputs[3]",
+      "text": "Mine labour",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "unhomed: slave market"
+    }
+  ]
+}

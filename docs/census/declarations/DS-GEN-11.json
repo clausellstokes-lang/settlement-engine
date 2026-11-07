@@ -1,0 +1,283 @@
+{
+  "poolId": "DS-GEN-11",
+  "source": "src/data/dossierStateProse/general.generated.js (annex docs/content/RECEIPT_POOLS_DOSSIER_STATE.md)",
+  "drawKind": "K",
+  "drawSite": "viabilityVerdictPoolKey / criticalIssuePoolKey → composeStateProse → readStateProse → eligibleVariants → drawVariant",
+  "pools": [
+    {
+      "pool": "viable: true: the arithmetic closes",
+      "keyGuarantees": [
+        "economicViability.viable === true"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Scoped: line 1 says the town gets what it needs and moves what it makes, which a hunger crisis (siege included) contradicts.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "{settlement} holds together as a settlement: what it needs it can get, what it makes it can move, and the pieces of it explain each other.",
+          "needs": [],
+          "excludes": [
+            "crisis: hunger"
+          ],
+          "crisis": "any",
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "A stranger at {settlement} does not have to be told why the town is where it is; the reason is legible from the road, and nothing about the place argues with it.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:3",
+          "text": "The town works, and works for the reasons a town of this kind usually works.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:4",
+          "text": "{settlement} carries real difficulties and none of them undermines the case for the place; the town's problems are problems inside a working arrangement.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "the MARGINAL arm: neither verdict returned",
+      "keyGuarantees": [
+        "economicViability.viable is absent (marginal coherence)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour, not scoped: speaks of the record's fit, asserts no calm.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "Whether {settlement} holds together is not a settled question. The pieces mostly fit, and the places where they do not are the places worth reading.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "{settlement} sits at the edge of coherence: the arrangement is defensible and it is not comfortable, and what separates those is a short list.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:3",
+          "text": "A careful stranger at {settlement} finds one or two things that do not quite add up, and finds the town no more troubled by them than by the weather.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:4",
+          "text": "The town makes sense in most respects. The respects in which it does not are the ones people here decline to discuss with outsiders.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "viable: false: the arithmetic does not close",
+      "keyGuarantees": [
+        "economicViability.viable === false"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour, not scoped: speaks of an accounting gap, asserts no calm.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "{settlement}'s outgoings stand above everything its land and its custom bring in, and nothing on the record accounts for the difference.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "A stranger who prices {settlement} against what a town of this size costs to keep finds the two do not meet, and a careful eye goes looking for a patron before it goes looking for an error in the sums.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:3",
+          "text": "Nobody in {settlement} treats the gap as a mystery and nobody in {settlement} can close it either; the town's own account of how it manages is that it manages.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:4",
+          "text": "{settlement} sits on the wrong side of its own accounting and is a settlement regardless, so the question the record leaves open is not whether the town is being carried but by whom.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "criticalIssueCount: critical contradictions on the record",
+      "keyGuarantees": [
+        "criticalIssueCount > 0, or the coherence battery found contradictions"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour, not scoped: speaks of the record, asserts no calm.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "{band} of the contradictions in {settlement}'s record are the serious kind: not a rough edge, a thing that cannot be true alongside the thing beside it.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "A careful reader of {settlement} finds {band} of places where the town's own account of itself contradicts the rest of it.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:3",
+          "text": "There are a handful of things about this town that cannot all be true, and everybody here has a preferred explanation.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "criticalIssueCount zero",
+      "keyGuarantees": [
+        "criticalIssueCount is 0 and the coherence battery passed"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour, not scoped: the coherence it asserts is the record's, guaranteed by the key, not the town's calm.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "Nothing in {settlement}'s record contradicts anything else in it. The town is what it says it is, throughout.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "A stranger who reads {settlement} closely finds no seam in it, which is rarer than the absence of trouble.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:3",
+          "text": "{settlement} carries pressures that would show up as contradictions in a less coherent place, and the record holds together regardless.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "THE FIRST-SURVEY QUALIFICATION",
+      "keyGuarantees": [
+        "the reading is the first survey's"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour: a qualification presumes nothing.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "This reading of {settlement} is the first survey's, and the first survey's alone; what the world has done since is not in it.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "What follows is {settlement} as it was judged when it was described, which is not the same as {settlement} as it stands.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:3",
+          "text": "The town was read once, carefully, and the reading has not been repeated.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    }
+  ]
+}

@@ -23,6 +23,9 @@
 import { useMemo } from 'react';
 import { deriveFoundingTraditions, describeTraditionWindow, motifGlyph } from '../../../domain/traditions/genesis.js';
 import { mergeCustomFoundingTraditions } from '../../../domain/traditions/customFounding.js';
+import { TRADITION_ELEMENTS } from '../../../data/traditionCorpus.js';
+import { filterDeclared } from '../../../domain/facts/drawDeclared.js';
+import { factsOf } from '../../../domain/facts/factsOf.js';
 import { useStore } from '../../../store/index.js';
 import {
   BODY, BORDER, CARD, FS, GOLD, INK, MUTED, SECOND, sans,
@@ -45,20 +48,24 @@ function humanizeMotif(id) {
 }
 
 /**
- * For each tradition whose window phrase an earlier one on the tab already printed: that
- * earlier tradition's name, keyed by the later one's id. Render order is the list's order.
+ * For each tradition whose window phrase an earlier one on the tab already printed: the NEAREST
+ * earlier tradition's name in that window, keyed by the later one's id. Render order is the list's
+ * order. Nearest, not first (RUNG-2 LANDING phase C unit 3, rung 2E's X-50 in soak1k-5255 and
+ * -5441): with three in one window, naming the first printed the same sentence on the second and
+ * the third card; each now names the one before it, so every line prints once and stays true.
  * @param {ReadonlyArray<any> | null | undefined} traditions @returns {Map<string, string>}
  */
 function sameWindowPlan(traditions) {
   /** @type {Map<string, string>} */
   const plan = new Map();
   /** @type {Map<string, string>} */
-  const firstBy = new Map();
+  const lastBy = new Map();
   for (const rec of Array.isArray(traditions) ? traditions : []) {
     const phrase = describeTraditionWindow(rec?.window);
-    const first = firstBy.get(phrase);
-    if (first === undefined) firstBy.set(phrase, String(rec?.name ?? ''));
-    else if (first) plan.set(rec.id, first);
+    const name = String(rec?.name ?? '');
+    const prev = lastBy.get(phrase);
+    if (prev) plan.set(rec.id, prev);
+    if (name || prev === undefined) lastBy.set(phrase, name);
   }
   return plan;
 }
@@ -139,6 +146,9 @@ export function TraditionRow({ rec, preview, sameWindowAs = null }) {
 /**
  * @param {{ settlement: any, saveId?: string|null }} props
  */
+/** element id → the facts it declares (`traditionCorpus.js :: TRADITION_ELEMENTS`' `needs`). */
+const ELEMENT_NEEDS = new Map(TRADITION_ELEMENTS.filter((e) => Array.isArray(e.needs) && e.needs.length).map((e) => [e.id, e.needs]));
+
 export default function TraditionsTab({ settlement }) {
   // THE PHONE PROSE FLOOR — the framing paragraph, the founding note and the
   // no-traditions line. Bound above the early return so the hook order is stable.
@@ -151,11 +161,23 @@ export default function TraditionsTab({ settlement }) {
   // PREVIEW founding set (empty ⇒ the pure leaf's bytes, untouched). Never merged
   // into the engine mirror (the lit mirror is the tick mover's authored truth).
   const customTraditions = useStore(s => s.customContent?.traditions);
-  const traditions = useMemo(
+  const kept = useMemo(
     () => (preview
       ? mergeCustomFoundingTraditions(deriveFoundingTraditions(settlement), customTraditions)
       : mirror),
     [preview, mirror, settlement, customTraditions],
+  );
+  // CENSUS-3b unit 5 (R6): the tab prints only ADMISSIBLE rows — a tradition whose motif element
+  // declares a fact the record does not hold (the Tide Fair on a dry road) is not printed. Kind A:
+  // a filter over the list, no weight and no roll moves (genesis's weights are CENSUS-1c's).
+  const traditions = useMemo(
+    () => (Array.isArray(kept)
+      // A DM's AUTHORED custom tradition (`customFounding.js`, id `custom:…`) is the DM's truth
+      // and is printed as authored; only a generated row is held to its element's declaration.
+      ? filterDeclared(kept.map((rec) => ({ text: String(rec?.name ?? ''), needs: String(rec?.id ?? '').startsWith('custom:') ? [] : ELEMENT_NEEDS.get(rec?.coreMotif?.element) || [], rec })),
+        { facts: () => factsOf(settlement), poolId: 'traditions:tab', surface: 'traditions', drawKind: 'A' }).map((row) => row.rec)
+      : kept),
+    [kept, settlement],
   );
 
   const name = settlement?.name || settlement?.identity?.name || 'this settlement';

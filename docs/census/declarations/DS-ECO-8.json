@@ -1,0 +1,296 @@
+{
+  "id": "DS-ECO-8",
+  "source": "src/data/dossierStateProse/economy.generated.js",
+  "drawKind": "K",
+  "pools": [
+    {
+      "id": "DS-ECO-8::SUBSISTENCE",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": true,
+      "notes": "key: prosperity Subsistence",
+      "lines": [
+        {
+          "id": "DS-ECO-8::SUBSISTENCE::v1",
+          "text": "{settlement} eats what it raises and keeps almost nothing back. A year here is measured by",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-8::SUBSISTENCE::v2",
+          "text": "There is no spare anything in this town: no spare grain, no spare coin, no spare hands. Wh",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": "\"no spare grain\" (generic food, not declared)"
+        },
+        {
+          "id": "DS-ECO-8::SUBSISTENCE::v3",
+          "text": "The accounts run to survival and stop. Nothing is set aside because there is nothing to se",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-ECO-8::STRUGGLING",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": false,
+      "notes": "key: prosperity Struggling",
+      "lines": [
+        {
+          "id": "DS-ECO-8::STRUGGLING::v1",
+          "text": "{settlement} is short more often than not. Some needs are met and some are postponed, and ",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-8::STRUGGLING::v2",
+          "text": "The books never quite close. What the town needs and what the town has are near enough to ",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-8::STRUGGLING::v3",
+          "text": "A stranger sees the shortage in the small things: a repair not made, a stall not restocked",
+          "needs": [
+            "market"
+          ],
+          "excludes": [],
+          "colour": false,
+          "notes": "\"a stall not restocked\"; \"a hall not heated\" presumes cold season (no atom)"
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-ECO-8::POOR",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": true,
+      "colour": false,
+      "notes": "key: prosperity Poor. Crisis-scoped: v2 author mark \"no hunger\".",
+      "lines": [
+        {
+          "id": "DS-ECO-8::POOR::v1",
+          "text": "{settlement} covers what it must and nothing beyond. Every essential is accounted for and ",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": false,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-8::POOR::v2",
+          "text": "The town gets by. Nobody is going without bread and nobody is building anything either.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "calm",
+          "colour": false,
+          "notes": "author mark \"no hunger\": \"Nobody is going without bread\""
+        },
+        {
+          "id": "DS-ECO-8::POOR::v3",
+          "text": "{settlement} looks maintained rather than made. What stands is kept standing; nothing new ",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": false,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-ECO-8::MODERATE",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": true,
+      "colour": false,
+      "notes": "key: prosperity Moderate. Crisis-scoped: authored \"no crisis\" pair and a \"crisis\" line.",
+      "lines": [
+        {
+          "id": "DS-ECO-8::MODERATE::v1",
+          "text": "The accounts come out steady with a narrow margin. It is an ordinary town's arithmetic and",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": false,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-8::MODERATE::v2",
+          "text": "Things are fine. Not comfortable, not tight: fine, and fine is what people here expect.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "calm",
+          "colour": false,
+          "notes": "author mark \"no crisis\": \"Things are fine\""
+        },
+        {
+          "id": "DS-ECO-8::MODERATE::v3",
+          "text": "Nothing about {settlement}'s condition asks to be remarked on. The town supports itself an",
+          "needs": [],
+          "excludes": [],
+          "crisis": "calm",
+          "colour": false,
+          "notes": "author mark \"no crisis\""
+        },
+        {
+          "id": "DS-ECO-8::MODERATE::v4",
+          "text": "{settlement}'s accounts still balance, and that is the one thing about the town the crisis",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "any"
+          ],
+          "colour": false,
+          "notes": "author mark \"crisis\": only true under an active crisis (family any)"
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-ECO-8::COMFORTABLE",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": true,
+      "notes": "key: prosperity Comfortable",
+      "lines": [
+        {
+          "id": "DS-ECO-8::COMFORTABLE::v1",
+          "text": "{settlement} closes every year ahead. The margin is not large and it is dependable, and th",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-8::COMFORTABLE::v2",
+          "text": "People here put things by, and can. That is the difference between this town and a poorer ",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-8::COMFORTABLE::v3",
+          "text": "The town is plainly past subsistence. The buildings are finished rather than patched, and ",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": "\"the stores are more than the season needs\" (soft; not declared)"
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-ECO-8::PROSPEROUS",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": false,
+      "notes": "key: prosperity Prosperous",
+      "lines": [
+        {
+          "id": "DS-ECO-8::PROSPEROUS::v1",
+          "text": "The surplus is large enough to be spent rather than merely held, and the spending shows in",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-8::PROSPEROUS::v2",
+          "text": "{settlement} is visibly well off. The halls, the walls and the roads are all better than a",
+          "needs": [
+            "walls"
+          ],
+          "excludes": [],
+          "colour": false,
+          "notes": "K mark walls; \"a town this size\""
+        },
+        {
+          "id": "DS-ECO-8::PROSPEROUS::v3",
+          "text": "There is money here and it goes into the town. Nobody argues about whether a thing can be ",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-8::PROSPEROUS::v4",
+          "text": "{settlement} is visibly well off. The halls, the houses and the roads are all better than ",
+          "needs": [],
+          "excludes": [
+            "walls"
+          ],
+          "colour": false,
+          "notes": "K mark no walls (twin of v2)"
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-ECO-8::WEALTHY",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": true,
+      "colour": false,
+      "notes": "key: prosperity Wealthy. Crisis-scoped: v3 \"What would be a crisis elsewhere is an expense here\" is crisis-blind.",
+      "lines": [
+        {
+          "id": "DS-ECO-8::WEALTHY::v1",
+          "text": "{settlement} holds reserves deep enough to sit out most of what could happen to it. The ac",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": false,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-8::WEALTHY::v2",
+          "text": "The wealth here is not the kind a stranger has to look for. It is in the scale of everythi",
+          "needs": [
+            "gate",
+            "market"
+          ],
+          "excludes": [],
+          "crisis": "any",
+          "colour": false,
+          "notes": "\"the gates\"; \"ordinary stalls\""
+        },
+        {
+          "id": "DS-ECO-8::WEALTHY::v3",
+          "text": "The town is rich and behaves like it. What would be a crisis elsewhere is an expense here.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "calm",
+          "colour": false,
+          "notes": "\"What would be a crisis elsewhere is an expense here\" — false under an active crisis"
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    }
+  ]
+}

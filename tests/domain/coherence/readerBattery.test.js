@@ -27,6 +27,23 @@ describe('reader:validation-on-page', () => {
     expect(R.validationOnPageFindings(rec(), { viability }).map((r) => r.detail)).toEqual(['[viability-count] states 2, lists Critical Issues (1)']);
     expect(R.validationOnPageFindings(rec(), { viability: '1 critical issue prevents settlement survival.\nStructural Crises (7) ▲' })[0].detail).toBe('[viability-count] states 1, lists Critical Issues (0)');
   });
+  test('gap-vs-record (READER-R1): a gap line whose good the record holds fires, in either voice; a true gap does not', () => {
+    const s = rec({ config: { terrainType: 'coastal', nearbyResources: ['grain_fields', 'hot_springs', 'clay_pits'], nearbyResourcesDepleted: ['clay_pits'] },
+      economicState: { localProduction: ['fish', 'salt'], primaryImports: ['Grain'], primaryExports: ['Grain surplus'], foodSecurity: { foodRecord: { foodSources: ['fish'], normalImportPct: 0 } } } });
+    const resources = 'Gaps & Opportunities ▲\nGrain: Mill exists but lacks access to grain\nNo water from the hot springs reaches the public bathhouse.\nNo clay reaches the potter.\nNo grapes reach the vintner.';
+    const rows = R.validationOnPageFindings(s, { resources });
+    const row = rows.find((r) => r.detail.startsWith('[gap-vs-record]'));
+    expect(row?.detail).toBe('[gap-vs-record] 2 lines'); // the mill (Grain imported) and the bathhouse (hot springs near); clay is depleted, grapes absent
+    expect(row?.quote).toBe('Grain: Mill exists but lacks access to grain');
+    // the staple by ordinary supply answers grain
+    const fed = rec({ economicState: { foodSecurity: { foodRecord: { foodSources: [], normalImportPct: 17 } } } });
+    expect(R.validationOnPageFindings(fed, { resources: 'No grain reaches the external mill.' }).map((r) => r.detail)).toEqual(['[gap-vs-record] 1 lines']);
+    expect(R.validationOnPageFindings(rec(), { resources: 'No clay reaches the potter.' })).toEqual([]);
+    // "Precious stones" are gems, not a quarry's stone; "Mineral salts" are salt (soak1k-316, -249 at 1,000)
+    const gems = rec({ economicState: { primaryImports: ['Precious stones and gems'], primaryExports: ['Mineral salts'] } });
+    expect(R.validationOnPageFindings(gems, { resources: 'No stone reaches the stone quarry.' })).toEqual([]);
+    expect(R.validationOnPageFindings(gems, { resources: 'No salt reaches the salt works.' }).map((r) => r.detail)).toEqual(['[gap-vs-record] 1 lines']);
+  });
   test('negative control: a viable page with no validator line is silent', () => {
     expect(R.validationOnPageFindings(rec(), { overview: 'The place\nThe water was here before the town.', viability: '✓ Viable\nCritical Issues (1) ▲' })).toEqual([]);
     expect(R.validationOnPageFindings(rec(), { viability: '1 critical issue prevents settlement survival.\nCritical Issues (1) ▲' })).toEqual([]);
@@ -182,10 +199,22 @@ describe('reader:tonight-wants', () => {
   test('"Wants to" followed by a sentence', () => {
     const rows = R.tonightWantsFindings(rec(), { tonight: 'People to voice\nLalita Acharya\nElder · Holds the seat\nWants to Was approached before the betrayal and said no.' });
     expect(rows).toHaveLength(1);
-    expect(rows[0].detail).toBe('1 lines; starts "Was"');
+    expect(rows[0].detail).toBe('[sentence-not-a-want] 1 lines; starts "Was"');
   });
-  test('negative control: a want with its verb', () => {
-    expect(R.tonightWantsFindings(rec(), { tonight: 'Wants to extend the institution\'s civic role.' })).toEqual([]);
+  test('R11: "Wants to" followed by management prose is the abstract-register sub-case', () => {
+    const tonight = [
+      'People to voice', 'Gerlinde', 'Baron · Holds the seat',
+      'Wants to convert governance instability into a restoration of prerogatives that formal governance had constrained.',
+      'Brother Anselm', 'Priest · Senior cleric',
+      'Wants to build pastoral standing and institutional credibility through consistent service in a context where the dominant institution sets the standard.',
+      'Wants to The supplies they declared destroyed in a fire are in a cellar.',
+    ].join('\n');
+    const rows = R.tonightWantsFindings(rec(), { tonight });
+    expect(rows.map((r) => r.detail)).toEqual(['[sentence-not-a-want] 1 lines; starts "The"', '[abstract-register] 2 lines; starts "convert"']);
+    expect(rows[1].quote).toMatch(/^Wants to convert governance instability/);
+  });
+  test('negative control: a concrete want, and the cast wants, read clean', () => {
+    expect(R.tonightWantsFindings(rec(), { tonight: 'Wants to get the old toll right back before the council notices.\nWants to keep the pressure on until the seat gives way, and keep their own hand out of sight.\nWants the same as Gerlinde.' })).toEqual([]);
   });
 });
 
@@ -229,15 +258,45 @@ describe('reader:daily-life-placeholder', () => {
   });
 });
 
+// ── 11. faction-role-fit (CENSUS-4 R12)
+describe('faction-role-fit', () => {
+  const town = (category, role) => rec({ powerStructure: { factions: [{ faction: 'The House', category }] }, npcs: [{ name: 'A', role, factionAffiliation: 'The House' }] });
+  test('a faction seating a role that does not fit its kind is a finding', () => {
+    expect(R.factionRoleFitFindings(town('religious', 'Wandering Peddler'), {})).toEqual([{ surface: 'factions', quote: 'The House (religious)', detail: 'Wandering Peddler (merchant)' }]);
+    expect(R.factionRoleFitFindings(town('military', 'Priest'), {})).toHaveLength(1);
+    expect(R.factionRoleFitFindings(town('criminal', 'Guard Captain'), {})).toHaveLength(1);
+  });
+  test('a fitting role, an unrestricted kind, or an unjudged role is not', () => {
+    expect(R.factionRoleFitFindings(town('religious', 'High Priest'), {})).toEqual([]);
+    expect(R.factionRoleFitFindings(town('noble', 'Mayor'), {})).toEqual([]);
+    expect(R.factionRoleFitFindings(town('economy', 'Priest'), {})).toEqual([]);
+    expect(R.factionRoleFitFindings(town('religious', 'Unheard-of Role'), {})).toEqual([]);
+  });
+});
+
 // ── the battery
 describe('readerBattery', () => {
-  test('runs the ten checks in order, in the battery shape, and a throwing check is a finding', () => {
-    expect(R.READER_BATTERY_CHECKS).toHaveLength(10);
+  test('runs the eleven checks in order, in the battery shape, and a throwing check is a finding', () => {
+    expect(R.READER_BATTERY_CHECKS).toHaveLength(11); // CENSUS-4 R12 added faction-role-fit
     const rows = R.readerBattery(rec({ tier: 'hamlet' }), { tonight: 'Wants to The supplies.', power: "Tailor's'" });
     expect(rows.map((f) => f.check)).toEqual(['tonight-wants', 'possessive-slip']);
     for (const f of rows) expect(Object.keys(f).sort()).toEqual(['check', 'detail', 'quote', 'surface']);
     expect(R.readerBattery(null, {})).toEqual([]);
     const thrown = R.readerBattery(rec({ history: { get currentTensions() { throw new Error('boom'); } } }), { history: 'x' }, { only: ['tension-memory'] });
     expect(thrown).toEqual([{ check: 'tension-memory', surface: 'record', quote: '', detail: 'instrument threw: boom' }]);
+  });
+});
+
+// CENSUS-1c unit 6c (the vocabulary rulings §6): the two instruments read factsOf.
+describe('CENSUS-1c · the Daily Life and hook-pools instruments read the fact homes', () => {
+  test('daily-life: a garrison is no watch (the watch regex that counted it goes)', () => {
+    const daily_life = 'Food\nStrained\nOrdinary life here in prose: dawn, the market, the tavern, the watch.';
+    expect(R.dailyLifePlaceholderFindings(rec({ institutions: [{ name: 'Market square' }, { name: 'Garrison' }] }), { daily_life }).map((r) => r.detail)).toEqual(['[no-watch] no watch']);
+  });
+  test("hook-pools: 'the old guard' is an idiom, not a guard", () => {
+    expect(R.hookPoolsFindings(rec({ npcs: [{ role: 'Elder' }] }), { plot_hooks: 'History\nThe old guard of the council resents every new name on the rolls.' })).toEqual([]);
+  });
+  test('hook-pools: the enforcement body is factsOf(record).guardPresence (a hired company counts)', () => {
+    expect(R.hookPoolsFindings(rec({ institutions: [{ name: 'Mercenary company' }], npcs: [{ role: 'Elder' }] }), { plot_hooks: 'NPCs\nOne of them is talking to the guard.' })).toEqual([]);
   });
 });

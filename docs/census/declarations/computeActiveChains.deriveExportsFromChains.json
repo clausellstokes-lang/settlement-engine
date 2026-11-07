@@ -1,0 +1,61 @@
+{
+  "id": "computeActiveChains.deriveExportsFromChains",
+  "source": "src/generators/computeActiveChains.js :: deriveExportsFromChains (export assembly + suffix sites :785/:794/:797, strip :818)",
+  "drawKind": "T",
+  "pool": {
+    "declares": [],
+    "crisisScoped": true,
+    "colour": false,
+    "notes": "THE LIVE suffix sites (this list is what economicState.primaryExports becomes at economicState.js :811-812). Stress set is config.stressTypes + config.intendedStressTypes (economicState.js :759) — wider than economicState's own suffix sites, which read stressTypes only. Order: transit suffix is applied BEFORE the stress map, so a transit good under siege/occupation carries TWO tags (\"X (transit) (taxed by occupation)\" — goodsCatalog.js :: preferTradeLabel comments on exactly this). Each suffix is to become a `kind` field (transit | naval-only | occupation-taxed).",
+    "needs": [],
+    "excludes": []
+  },
+  "rows": [
+    {
+      "id": "computeActiveChains.deriveExportsFromChains::suffix.transit",
+      "text": "${o} (transit)",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "export",
+      "notes": "Condition: active chain with chain.entrepot && status != impaired; first food-record-held output (slice 0,1). producer: the chain's, elsewhere."
+    },
+    {
+      "id": "computeActiveChains.deriveExportsFromChains::suffix.naval",
+      "text": "${e} (naval route only)",
+      "needs": [
+        "coast"
+      ],
+      "excludes": [],
+      "crisis": [
+        "under_siege"
+      ],
+      "colour": false,
+      "kind": "export",
+      "notes": "Condition: stress under_siege AND (worldLaw.supportsMaritime() ?? route === port); list cut to 3. Else under siege the list is EMPTY."
+    },
+    {
+      "id": "computeActiveChains.deriveExportsFromChains::suffix.occupation",
+      "text": "${e} (taxed by occupation)",
+      "needs": [],
+      "excludes": [],
+      "crisis": [
+        "occupied"
+      ],
+      "colour": false,
+      "kind": "export",
+      "notes": "Condition: occupied and NOT under_siege; list cut to 5."
+    },
+    {
+      "id": "computeActiveChains.deriveExportsFromChains::ungated.default",
+      "text": "${good}",
+      "needs": [],
+      "excludes": [],
+      "crisis": "calm",
+      "colour": false,
+      "kind": "export",
+      "notes": "The unsuffixed export rows (raw resource tradeGoods + chain outputs) print only when neither under_siege nor occupied, but print plainly under every OTHER crisis (famine is handled by goodsHeldByFoodRecord). Declared calm only to state the pool opt-in; the real exclusion is {under_siege, occupied}."
+    }
+  ]
+}

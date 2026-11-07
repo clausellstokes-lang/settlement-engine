@@ -179,15 +179,33 @@ const EXPECTED_ROOTS = new Map([
 // THE SHAPE HOLDS: 59 identities, none added and none removed; 42 rows move a count. Families: pulseHistory 46/952/5051 ->
 // 46/957/5042, regionalLog 2/4/157 -> 2/4/189; chronicle and timeline hold. Totals 59/971/5227 -> 59/976/5250; bytes
 // 7665 -> 7669; digest c24ac7a8 -> 7c53b1cd. The regional root reach 0..11 holds.
+// ── RE-RECORDED 2026-11-07 BY LANDING-R2 (helper seat D2, the chair's ruling of 02:36 UTC, §934.105: a pin re-taken AT THE TIP
+// with its movement ATTRIBUTED BY STEP and the residual named as interaction with rung 1), THROUGH THE SAME DOOR AS THE NEWS-VOICE
+// AND NEWS-HEADLINE CONTRACTS (the 3d50676bb / 4e010ec54 door: ONE corpus build per tree, this library's own functions, the
+// corpus-shape throws turned into readings in a scratch copy only). Four trees: rung 1 final 1bff51c6d reproduces every frozen
+// figure below EXACTLY; the census base f28689600 reads 25554/252/1528/252, 75/74, pulseHistory 46/952/5051, bytes 7665, c24ac7a8.
+// THE RUNG-2 LINE (f28689600..f5dc50c6b, all 19 first-parent src steps measured) moves at ONE step, the census-1b merge
+// 0856c09d3 (e36e4916f), and census-1b's own first-parent line (3bc72bc0c..e36e4916f, bisected) attributes it by step:
+//   d35532850 census-1c unit 6b (water-keyed tradition elements weigh 0 inland)   scalarRows -90, wizardNews -3 (accumulated -6)
+//   950b75014 the census-4 merge (4b/4c's goal tags)          -170, -2 (-15); pulseHistory distinct -2 (consequence headline -1)
+//   2b31f33f3 the census-2 merge (census-2e's {colour} rulings) pulseHistory distinct +3; nothing else
+//   597866207 census-1i unit 3 (R-AX: both criminal-secret rolls read the holder's role)  -164, -2 (-13); pulseHistory -4/-14
+//             (mechanical headline -1/-1, consequence -0/-1); queued|npc_suppress leaves the news
+// so f5dc50c6b reads 25130/245/1494/245, 75/74, pulseHistory 46/949/5037, bytes 7665, 04a90a12. (7369c35dd, census-1 wave 0
+// fact 4, is already inside the census base.) AT THE TIP 3d03dc723: 26471/262/1580/262, 86/86; pulseHistory 46/958/5052.
+// Rung 2's steps sum to scalarRows -424, wizardNews -7 (accumulated -34), pulseHistory -3/-14; the INTERACTION WITH RUNG 1 is
+// scalarRows +4, wizardNews -1 (accumulated -1), pulseHistory +4/+24 (the tip less rung 1 final less rung 2's steps).
+// THE SHAPE HOLDS: 59 identities, none in or out; 10 rows move a count; regionalLog 2/4/189, chronicle and timeline hold.
+// Totals 59/976/5250 -> 59/977/5260; bytes 7669 -> 7669 (digit widths again); digest 7c53b1cd -> 9f28cc22. Reach 0..11 holds.
 const EXPECTED_CORPUS = Object.freeze({
-  scalarRows: 26891, canonEventLogEntries: 1, wizardNewsFinalEntries: 270,
-  wizardNewsAccumulatedEntries: 1615, wizardNewsUnique: 270, pulseHistory: 12,
+  scalarRows: 26471, canonEventLogEntries: 1, wizardNewsFinalEntries: 262,
+  wizardNewsAccumulatedEntries: 1580, wizardNewsUnique: 262, pulseHistory: 12,
   regionalEventLog: 86, regionalEventLogUnique: 86, aiChronicle: 1,
 });
 const EXPECTED_REGIONAL_ROOTS = Object.freeze([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
 const EXPECTED_FAMILY_TOTALS = Object.freeze([
   { family: 'chronicle', identities: 7, distinctValues: 7, occurrences: 7 },
-  { family: 'pulseHistory', identities: 46, distinctValues: 957, occurrences: 5042 },
+  { family: 'pulseHistory', identities: 46, distinctValues: 958, occurrences: 5052 },
   { family: 'regionalLog', identities: 2, distinctValues: 4, occurrences: 189 },
   { family: 'timeline', identities: 4, distinctValues: 8, occurrences: 12 },
 ]);
@@ -197,9 +215,9 @@ const EXPECTED_FAMILY_TOTALS = Object.freeze([
 // (+6, +7, +9: both towns named, a deed per kind) and the three SUMMARY rows shrink (−1, −3, −1: the NPC line now states
 // the aim alone, its move having gone to the headline). EXPECTED_ROWS_BYTES holds at 8000 by digit-width coincidence again;
 // the digest below is the pin that convicts.
-const EXPECTED_TOTALS = Object.freeze({ families: 4, identities: 59, distinctValues: 976, occurrences: 5250 });
+const EXPECTED_TOTALS = Object.freeze({ families: 4, identities: 59, distinctValues: 977, occurrences: 5260 });
 const EXPECTED_ROWS_BYTES = 7669;
-const EXPECTED_ROWS_SHA256 = '7c53b1cd8f181b7080021bb9c89074bea84a6205cab29ed0b6e491bb8c332832';
+const EXPECTED_ROWS_SHA256 = '9f28cc22dc88d59c2dca5d086cc2a57aa81b0582d28f45aa075ccf83a35ed8ec';
 const codepoint = (left, right) => (left < right ? -1 : left > right ? 1 : 0);
 const same = (left, right) => JSON.stringify(left) === JSON.stringify(right);
 const identityOf = (row) => `${row.family}\0${row.path}\0${row.field}`;

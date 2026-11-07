@@ -13,7 +13,8 @@ import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 // institution keys; both are PRINTS here, and nothing on this tab matches on them.
 import { resourceDisplayName } from '../../../domain/display/resourceDisplayName.js';
 import { institutionDisplayName } from '../../../domain/display/institutionDisplayName.js';
-import { engineKeysInText } from '../../../domain/display/engineKeysInText.js';
+// READER-R1 ruling 3: the gap rows the DM reads are the record-read lines, in the house voice.
+import { resourceGapLines } from '../../../domain/display/validationOnPage.js';
 import { FLUSH } from '../../../design/flush.js';
 
 /**
@@ -123,6 +124,12 @@ export function ResourcesTab({settlement:r, narrativeNote, publicDossier = false
   // a silent corpus). Never both: the header used to print the line and the desk paragraph
   // below restated it in voice on 856 of 856 towns with a terrain.
   const deskWorth = drawnAtMount(GROUND_MOUNT, deskProse.strategicValue)?.sentence || null;
+  // ⭐ THE GAPS READ THE RECORD (READER-R1, the chair's ruling 3). The generator's gap rows
+  // ("Mill exists but lacks access to grain") ask the catalogue, not the place; a gap prints
+  // here only when the record holds none of the house's inputs, as a fact about the place.
+  // The raw rows and the priority notes (the generator's sliders: "Strong economic focus…")
+  // are on the Viability tab's staff panel only.
+  const gapLines = resourceGapLines(r);
 
   // Imports: object {critical:[], recommended:[], reasons:{}}
 
@@ -151,7 +158,7 @@ export function ResourcesTab({settlement:r, narrativeNote, publicDossier = false
             {!deskWorth&&res.strategicValue&&<div style={{fontSize: proseFontSize(FS['12.5'], mobile),color:swatch.inkMag2,lineHeight:1.5}}>{res.strategicValue}</div>}
           </div>
           {res.economicStrengths?.length>0&&<div style={{flex:'2 1 200px'}}>
-            <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch.inkMag3,marginBottom:6}}>Economic strengths</div>
+            <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch.inkMag3,marginBottom:6}}>What the land offers</div>
             <div style={{display:'flex',flexWrap:'wrap',gap:5}}>
               {[...res.economicStrengths].sort((a,b)=>(a||'').localeCompare(b||'')).map((s,i)=>(
                 <span key={i} style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:600,color:swatch.success,background:swatch['#E0F0E4'],border:'1px solid #a8d8b0',padding:'2px 9px'}}>✓ {s}</span>
@@ -221,36 +228,15 @@ export function ResourcesTab({settlement:r, narrativeNote, publicDossier = false
       </Section>}
 
       {/* ── GAPS & OPPORTUNITIES (combined) ──────────────────────────────── */}
-      {(res.gaps?.length>0||res.priorityNotes?.length>0)&&<Section title="Gaps & Opportunities" collapsible defaultOpen accent="#5a2a8a">
+      {gapLines.length>0&&<Section title="Gaps & Opportunities" collapsible defaultOpen accent="#5a2a8a">
         <div style={{display:'flex',flexDirection:'column',gap:6}}>
-          {/* Priority notes — DM opportunity hooks */}
-          {(res.priorityNotes||[]).map((note,i)=>(
-            <div key={i} style={{display:'flex',gap:8,padding:'8px 12px',background:swatch['#F8F4FD'],border:'1px solid #c8b0e0',borderLeft:'3px solid #5a2a8a'}}>
-              <span style={{fontSize:FS.sm,color:swatch.magic,flexShrink:0}}>✦</span>
-              <p style={{fontSize: proseFontSize(FS['12.5'], mobile),color:swatch.inkMag,lineHeight:1.45,margin:0}}>{note}</p>
-            </div>
-          ))}
-          {/* Structural gaps */}
-          {(res.gaps||[]).map((g,i)=>{
-            // ⛔ THE GAP'S `impact` IS GENERATED PROSE WITH A KEY IN IT — resourceGenerator
-            // writes "Glassblower exists but lacks access to glass_sand" — so it takes the
-            // same seam the upstream note does rather than a producer fix, which would move
-            // the golden and re-spell every saved world. The subject opens its row and takes
-            // a capital; the one inside the sentence does not.
-            const gapWord = (id, at) => {
-              const word = String(resourceDisplayName(id));
-              return at === 0 ? word : word.charAt(0).toLowerCase() + word.slice(1);
-            };
-            const chain = typeof g==='object'?resourceDisplayName(g.chain):'';
-            const impact = engineKeysInText(typeof g==='object'?g.impact||(g.missing||[]).join(', '):''+g, gapWord);
-            const sev = typeof g==='object'?g.severity:'low';
+          {gapLines.map((g,i)=>{
+            const sev = g.severity;
             const gc = sev==='high'?'#8b1a1a':sev==='medium'?'#a0762a':'#6b5340';
             const gbg = sev==='high'?'#fdf4f4':sev==='medium'?'#faf4e8':'#f7f0e4';
             return <div key={i} style={{display:'flex',gap:8,padding:'8px 12px',background:gbg,border:`1px solid ${gc}40`,borderLeft:`3px solid ${gc}`}}>
-              <span style={{fontSize:FS.sm,color:gc,flexShrink:0}}>{sev==='high'?'':''}</span>
               <div style={{flex:1}}>
-                {chain&&<span style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:swatch.inkMag,marginRight:6}}>{chain}:</span>}
-                <span style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch.inkMag2}}>{impact}</span>
+                <span style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch.inkMag2}}>{g.impact}</span>
               </div>
             </div>;
           })}

@@ -40,11 +40,12 @@ const capFirst = (s) => (typeof s === "string" && s.length ? s[0].toUpperCase() 
  * SIZE ruling 2 (2026-11-03): speak each line in the settlement's own tier noun ("the thorp no
  * longer has"), through the dossier kernel's own helper, on the pressure detail's tier.
  * Identity for a town or an unknown tier. Mapping the array draws nothing, so no pick moves.
- * @param {{tier?: unknown}} r @param {string[]} lines @returns {string[]}
+ * @param {{tier?: unknown}} r @param {Array<string | { text: string }>} lines @returns {Array<string | { text: string }>}
  */
 const speakTierLines = (r, lines) => {
   const noun = tierNounFor(r && r.tier);
-  return lines.map((line) => speakTierNoun(line, noun));
+  // a declared row (CENSUS-2d, R-C) keeps its declaration and speaks its text
+  return lines.map((line) => (typeof line === 'string' ? speakTierNoun(line, noun) : { ...line, text: speakTierNoun(line.text, noun) }));
 };
 
 // ─── Per-stress pressure sentences (consumed by narrativeGenerator) ──────────
@@ -72,10 +73,10 @@ const speakTierLines = (r, lines) => {
 export const PRESSURE_SENTENCES = {
   under_siege: (r) => [
     `${r.name} is surrounded. Supply lines are cut, morale is fracturing, and ${r.topNPCName ? r.topNPCName + ", the " + r.topNPCRole + "," : "the leadership"} is deciding whether to negotiate terms or hold out for relief that may not be coming.`,
-    `The siege has entered its second week; ${r.govFaction || "the council"} controls the rationing and the gates, which means they control everything else too, for now.`,
+    { text: `The siege has entered its second week; ${r.govFaction || "the council"} controls the rationing and the gates, which means they control everything else too, for now.`, needs: ['gate'] },
     `Every ${r.commodity || "resource"} cache in ${r.name} has been inventoried and argued over; the next argument will be about what to give up and what to defend to the end.`,
-    `The walls of ${r.name} have held so far, which is the problem. A quick fall would at least have settled the question of who was to blame, and a slow one leaves ${r.govFaction || "the council"} to answer for every day the relief does not come.`,
-    `${r.name} is learning the arithmetic of a siege: how many mouths, how many days of ${r.commodity || "grain"}, how many of the people on the walls are watching the enemy and how many are watching each other.`,
+    { text: `The walls of ${r.name} have held so far, which is the problem. A quick fall would at least have settled the question of who was to blame, and a slow one leaves ${r.govFaction || "the council"} to answer for every day the relief does not come.`, needs: ['walls'] },
+    { text: `${r.name} is learning the arithmetic of a siege: how many mouths, how many days of ${r.commodity || "grain"}, how many of the people on the walls are watching the enemy and how many are watching each other.`, needs: ['walls'] },
     `Word came into ${r.name} three days ago that the relief column had turned back; ${r.topNPCName ? r.topNPCName + ", the " + r.topNPCRole + "," : "the leadership"} has not made it public, and the effort of not making it public is beginning to show.`,
   ],
   famine: (r) => [
@@ -84,7 +85,7 @@ export const PRESSURE_SENTENCES = {
     `${r.topNPCName ? r.topNPCName + ", the " + r.topNPCRole + "," : "Someone"} knows where the hoarded ${r.commodity || "grain"} can be found, and isn't saying, and the reasons for that silence are complicated.`,
     `The bakers of ${r.name} have started cutting the bread with things that are not flour; everyone can taste it, and the fact that nobody complains is the most alarming part.`,
     `${capFirst(r.govFaction) || "The council"} of ${r.name} announced a fair distribution of the ${r.commodity || "grain"} reserves last week; the announcement and the distribution are turning out to be two different things.`,
-    `Hunger has made ${r.name} quiet. The market still opens, the queues still form, but the haggling has gone out of people. They take what they are given and calculate, silently, how long it will last.`,
+    { text: `Hunger has made ${r.name} quiet. The market still opens, the queues still form, but the haggling has gone out of people. They take what they are given and calculate, silently, how long it will last.`, needs: ['market'] },
   ],
   occupied: (r) => [
     `${r.name} is under occupation; ${r.govFaction || "the administration"} answers to outside authority now, which means every decision made here is made twice: once officially, once actually.`,
@@ -99,7 +100,7 @@ export const PRESSURE_SENTENCES = {
     `Three factions are each waiting for one of the other two to make a mistake. In the meantime, ${r.name} is being administered by inertia.`,
     `${r.topNPCName ? r.topNPCName + ", the " + r.topNPCRole + "," : "The most senior figure"} is the only person all three factions will still speak to, which makes them either the key to resolution or the next target.`,
     `Nothing gets decided in ${r.name} because deciding would require one faction to be seen to win, and none of them can afford to let another be seen to lose. The paralysis is not an accident; it is the only stable arrangement left.`,
-    `${r.name} runs two of everything now (two watches, two courts of a kind, two versions of who is owed what), and the citizens have learned which one to approach for which favour, which is its own kind of government.`,
+    { text: `${r.name} runs two of everything now (two watches, two courts of a kind, two versions of who is owed what), and the citizens have learned which one to approach for which favour, which is its own kind of government.`, needs: ['watch'] },
     `The last thing ${r.topFaction || "the leading faction"} and its rivals agreed on in ${r.name} was that the disagreement should not be allowed to reach the streets; that agreement is the only thing holding, and it is fraying.`,
   ],
   indebted: (r) => [
@@ -127,12 +128,12 @@ export const PRESSURE_SENTENCES = {
     `${r.topNPCName ? r.topNPCName + ", the " + r.topNPCRole + "," : "One trusted figure"} has become, without anyone deciding it, the person through whom a surprising amount of ${r.name}'s sensitive business now passes, which is either coincidence or the whole design.`,
   ],
   plague_onset: (r) => [
-    `Something is spreading in ${r.name}; the quarantine is partial, the healers are overwhelmed, and the ${r.topNPCRole || "official"} who first identified it has gone quiet in a way that suggests either pressure or something worse.`,
+    { text: `Something is spreading in ${r.name}; the quarantine is partial, the healers are overwhelmed, and the ${r.topNPCRole || "official"} who first identified it has gone quiet in a way that suggests either pressure or something worse.`, needs: ['healer'] },
     "The disease has not yet become a plague, but the window for preventing that outcome is narrowing; every day the quarantine is ignored or negotiated around makes the arithmetic worse.",
     `${capFirst(r.govFaction) || "The council"} is managing disclosure of the outbreak, which means what residents know and what is actually true have started to diverge.`,
     `The sickness in ${r.name} has already sorted the population into those who can afford to leave, those who can afford to isolate, and those who can do neither, and the last group has noticed the sorting.`,
-    `The healers of ${r.name} have stopped arguing about what the illness is and started arguing about what to do with the bodies, which is the point at which denial stops being an option for anyone.`,
-    `A cordon has gone up around one quarter of ${r.name}, and the people inside it and the people outside it are already telling different stories about why: stories that will outlast the sickness whichever way it goes.`,
+    { text: `The healers of ${r.name} have stopped arguing about what the illness is and started arguing about what to do with the bodies, which is the point at which denial stops being an option for anyone.`, needs: ['healer'] },
+    { text: `A cordon has gone up around one quarter of ${r.name}, and the people inside it and the people outside it are already telling different stories about why: stories that will outlast the sickness whichever way it goes.`, needs: ['population: > small'] },
   ],
   succession_void: (r) => {
     const weeksAgo = Math.floor(_rng() * 8) + 2;
@@ -141,7 +142,7 @@ export const PRESSURE_SENTENCES = {
       `Three different people in ${r.name} believe they should be in charge; two of them are wrong; none of them is certain; all of them are acting.`,
       "The power vacuum is obvious to everyone; the question is not who fills it but what they do to fill it and who they owe when they have.",
       `The old authority in ${r.name} left no clear heir and a great many people who benefited from the old arrangement; each of them is now discovering that a claim is only as good as the people willing to enforce it.`,
-      `${r.name} is being run, for the moment, by whoever holds the keys, the seals, and the granary: three things that used to be held by one office and are now held by three people who do not trust one another.`,
+      { text: `${r.name} is being run, for the moment, by whoever holds the keys, the seals, and the granary: three things that used to be held by one office and are now held by three people who do not trust one another.`, needs: ['institution: granary'] },
       `The succession in ${r.name} will be settled by the ${r.commodity || "trade"} more than by any claim of blood or law: whoever the merchants and the creditors decide to deal with becomes, retroactively, the legitimate successor.`,
     ];
   },
@@ -149,9 +150,9 @@ export const PRESSURE_SENTENCES = {
     `The attacks on ${r.name}'s outlying farmsteads are following a pattern that doesn't fit opportunistic predation; someone or something is directing this, and the evidence is available to anyone who looks carefully.`,
     `The settlement's defences are adequate for normal times; these are not normal times, and ${r.topNPCName ? r.topNPCName + ", the " + r.topNPCRole + "," : r.milForce || "the defenders"} knows it.`,
     "Three farmsteads have been abandoned in the last month; the families who abandoned them know something about what they saw that they haven't reported to the authorities.",
-    `${r.name} has drawn its edges inward (fields left unworked, a mill standing idle) trading the ${r.commodity || "harvest"} it needs for a perimeter ${r.milForce || "the defenders"} can actually hold.`,
+    { text: `${r.name} has drawn its edges inward (fields left unworked, a mill standing idle) trading the ${r.commodity || "harvest"} it needs for a perimeter ${r.milForce || "the defenders"} can actually hold.`, needs: ['institution: mill'] },
     `The bounty ${r.govFaction || "the council"} posted for the creature has attracted the wrong sort of help to ${r.name}: hunters who are more dangerous than useful, and who will expect payment whether or not the thing is dead.`,
-    `Whatever is preying on ${r.name} has learned the settlement's patterns (when the patrols pass, where the walls are thin) which is not something a beast does, and admitting that is the first hard conversation no one wants to open.`,
+    { text: `Whatever is preying on ${r.name} has learned the settlement's patterns (when the patrols pass, where the walls are thin) which is not something a beast does, and admitting that is the first hard conversation no one wants to open.`, needs: ['walls'] },
   ],
   // Compound-branched pools: the DATA branch (r.compound) selects a variant array,
   // then generatePressureSentence does ONE pickRandom2 over it. Every winning-branch
@@ -185,7 +186,7 @@ export const PRESSURE_SENTENCES = {
     ];
     return (((o = r.compound) == null ? void 0 : o.economyOutput) || 50) >= 50
       ? [
-          `${r.name} is absorbing more people than it was built for. The new arrivals and the old residents are not yet one community. They share streets and markets but not language, custom, or trust. ${capFirst(r.govFaction) || "The governing authority"} is managing the rate of change rather than directing it, and the rate of change is not cooperating.`,
+          { text: `${r.name} is absorbing more people than it was built for. The new arrivals and the old residents are not yet one community. They share streets and markets but not language, custom, or trust. ${capFirst(r.govFaction) || "The governing authority"} is managing the rate of change rather than directing it, and the rate of change is not cooperating.`, needs: ['market'] },
           `The ${r.commodity || "trade"} that made ${r.name} worth coming to cannot keep pace with the number who came. Housing is short, rents have doubled, and the newcomers who were welcomed as labour a year ago are being spoken of as a problem this one, though they have done nothing but arrive.`,
           `${r.name} has grown a second town at its edges. Newer, poorer, and not quite governed by the same rules as the first. ${capFirst(r.govFaction) || "The governing authority"} has not decided whether the outer town is part of the settlement or a thing that has happened to it, and the indecision is becoming a policy of its own.`,
         ]
@@ -194,7 +195,7 @@ export const PRESSURE_SENTENCES = {
       // arm tells the same arrival as a town that cannot carry it, never a departure. Three lines for three, so the
       // draw does not move.
       : [
-          `${r.name} is taking in more people than it can feed. The newcomers came for work the town no longer has, and ${r.govFaction || "the governing authority"} is rationing what there is between families who have lived here for generations and families who arrived last month.`,
+          { text: `${r.name} is taking in more people than it can feed. The newcomers came for work the town no longer has, and ${r.govFaction || "the governing authority"} is rationing what there is between families who have lived here for generations and families who arrived last month.`, needs: ['starving'] },
           `Every season brings more households to ${r.name} and no more work. The newcomers camp where they can, and ${r.govFaction || "the governing authority"} is counting heads it has no plan for.`,
           `The road into ${r.name} is busier than the road out, and both are watched. By ${r.govFaction || "the governing authority"}, which can neither turn people away nor keep them fed, and by the old residents, who are keeping a private account of who arrived.`,
         ];
@@ -204,9 +205,9 @@ export const PRESSURE_SENTENCES = {
     return (((o = r.compound) == null ? void 0 : o.militaryEffective) || 50) >= 55 &&
       (((d = r.compound) == null ? void 0 : d.economyOutput) || 50) >= 45
       ? [
-          `${r.name} is at war and, for now, on the right side of it. Contracts are flowing, the garrison is reinforced, and the crown is paying. The men who left to fight have not come back, which is a grief that runs beneath the commerce. The question is whether the war ends before the accounts do.`,
-          `The war has been good to ${r.name} so far, which is an uncomfortable thing to be. Being on the right side of it means the forges run day and night and the ${r.commodity || "export"} trade has never been dearer, and it means the settlement now needs the war to continue in order to pay for what the war has already cost it.`,
-          `${r.name} is prospering on the right side of it: full warehouses, a reinforced garrison, coin moving fast. Prosperity built on a war is a wager that the war will end at the right moment, and no one in ${r.name} controls the moment.`,
+          { text: `${r.name} is at war and, for now, on the right side of it. Contracts are flowing, the garrison is reinforced, and the crown is paying. The men who left to fight have not come back, which is a grief that runs beneath the commerce. The question is whether the war ends before the accounts do.`, needs: ['garrison'] },
+          { text: `The war has been good to ${r.name} so far, which is an uncomfortable thing to be. Being on the right side of it means the forges run day and night and the ${r.commodity || "export"} trade has never been dearer, and it means the settlement now needs the war to continue in order to pay for what the war has already cost it.`, needs: ['institution: smith'] },
+          { text: `${r.name} is prospering on the right side of it: full warehouses, a reinforced garrison, coin moving fast. Prosperity built on a war is a wager that the war will end at the right moment, and no one in ${r.name} controls the moment.`, needs: ['garrison'] },
         ]
       : [
           `${r.name} is losing people and resources to a war it did not choose the terms of. Conscription has hollowed out the skilled workforce. ${capFirst(r.govFaction) || "The governing authority"} signed a requisition order last week that it cannot afford and could not refuse. The settlement is loyal. It is also running thin.`,
@@ -222,7 +223,7 @@ export const PRESSURE_SENTENCES = {
   // array), real re-roll variety gained. Index 0 stays the canonical scenario-0 line.
   religious_conversion: (r) => [
     `The new faith in ${r.name} does not yet have a building. It has the congregation. ${capFirst(r.govFaction) || "The authorities"} have not yet decided whether this is a religious matter, a political one, or both, and the delay in deciding is itself a decision that both sides are interpreting.`,
-    `${r.name}'s religious community has formally split. Both factions hold services, keep records, and claim the legitimate succession. Every legal document that required religious sanction is now in a grey zone that the courts are not equipped to resolve quickly.`,
+    { text: `${r.name}'s religious community has formally split. Both factions hold services, keep records, and claim the legitimate succession. Every legal document that required religious sanction is now in a grey zone that the courts are not equipped to resolve quickly.`, needs: ['institution: temple'] },
     `The conversion order in ${r.name} was formally acknowledged within the week. The compliance was faster than anyone expected. The depth of that compliance is a separate question that no one with authority is asking loudly, because the answer would require a response.`,
     `The new faith has taken the young of ${r.name} first, which the old faith has noticed and cannot answer. You cannot argue a congregation back, and every festival now draws two crowds of visibly different ages to two different squares.`,
     `${capFirst(r.govFaction) || "The authorities"} in ${r.name} backed the winning faith a little too early and a little too visibly, and now find that a matter of belief has become a matter of who owes whom: the worst kind of debt to have taken on.`,
@@ -240,6 +241,16 @@ export const PRESSURE_SENTENCES = {
 // POLITICAL_FLAVOR maps history-event-type patterns to arrays of description
 // template functions. Several call pickRandom2(...) at render time to select a
 // representative event from the supplied list.
+// CENSUS-2e unit 2 (ledger docs/census/declarations/POLITICAL_FLAVOR.json): a row that presumes a
+// fact is the declared `{ text: <template>, needs?, crisis? }` (R-C), read through `textOf` by
+// historyCoherence.js until CENSUS-1f wires the cascade through `drawDeclared`. The reserve row's
+// walls stay with POLITICAL_FLAVOR_SIBLINGS below (CENSUS-1c, resolved after the draw), so the row
+// declares only its granaries. NOT declared, recorded in the lane doc: catastrophic[1] (its walls
+// and militia are one BRANCH of the closure, monster incursions only; a row atom would refuse the
+// other branch) and religious_heavy[0] / [2] (their clergy and institution want a sacred house of
+// any kind, not a temple: waiting on sacredHouse, R-AE).
+/** The ledger's `{crisis-scoped}` pools (R-AF): the cascade's wiring passes `crisisScoped: true`. */
+export const POLITICAL_FLAVOR_CRISIS_SCOPED = Object.freeze(['stable']);
 export const POLITICAL_FLAVOR = {
   political_heavy: [
     (r) =>
@@ -255,19 +266,21 @@ export const POLITICAL_FLAVOR = {
     (r) =>
       `Governance is a performance everyone has agreed to keep up: the offices are filled, the seals are real, and beneath them the ${pickRandom2(r.filter((s) => s.type === "political"))?.name || "this event"} left a question of legitimacy that no one wants to reopen by answering`,
   ],
+  // R-AO (CENSUS-2f): in the mixed pools (disaster_heavy, religious_heavy, magical_heavy) every bare row was read and
+  // presumes nothing: marked `colour: true`. `stable` is crisis-scoped, so its bare rows presume calm and stay bare.
   disaster_heavy: [
-    (r) =>
-      `A settlement defined by what it survived. The ${pickRandom2(r.filter((s) => s.type === "disaster"))?.name || "this event"} shaped how this community thinks about risk, preparation, and who gets left behind`,
-    (r) =>
-      `Cautious and self-sufficient in ways that visitors find excessive. The ${pickRandom2(r.filter((s) => s.type === "disaster"))?.name || "this event"} made it that way and the lesson has never been unlearned`,
-    (r) =>
-      `The ${pickRandom2(r.filter((s) => s.type === "disaster"))?.name || "this event"} is the reference point for everything: before it, during it, after it. A generation has grown up for whom it is history rather than memory`,
-    (r) =>
-      `There is a practicality to the people here that outsiders read as coldness. The ${pickRandom2(r.filter((s) => s.type === "disaster"))?.name || "this event"} taught them what sentiment costs when the accounting comes due, and the lesson stuck`,
-    (r) =>
-      `The settlement keeps more in reserve than its size explains: granaries a little too large, walls a little too strong. The ${pickRandom2(r.filter((s) => s.type === "disaster"))?.name || "this event"} is the reason, and no argument about the expense has ever won against that memory`,
-    (r) =>
-      `Ask why a custom here seems excessive and the answer is always the same shape: it did not used to be, until the ${pickRandom2(r.filter((s) => s.type === "disaster"))?.name || "this event"} made it necessary, and now it is simply how things are done`,
+    { text: (r) =>
+      `A settlement defined by what it survived. The ${pickRandom2(r.filter((s) => s.type === "disaster"))?.name || "this event"} shaped how this community thinks about risk, preparation, and who gets left behind`, colour: true },
+    { text: (r) =>
+      `Cautious and self-sufficient in ways that visitors find excessive. The ${pickRandom2(r.filter((s) => s.type === "disaster"))?.name || "this event"} made it that way and the lesson has never been unlearned`, colour: true },
+    { text: (r) =>
+      `The ${pickRandom2(r.filter((s) => s.type === "disaster"))?.name || "this event"} is the reference point for everything: before it, during it, after it. A generation has grown up for whom it is history rather than memory`, colour: true },
+    { text: (r) =>
+      `There is a practicality to the people here that outsiders read as coldness. The ${pickRandom2(r.filter((s) => s.type === "disaster"))?.name || "this event"} taught them what sentiment costs when the accounting comes due, and the lesson stuck`, colour: true },
+    { text: (r) =>
+      `The settlement keeps more in reserve than its size explains: granaries a little too large, walls a little too strong. The ${pickRandom2(r.filter((s) => s.type === "disaster"))?.name || "this event"} is the reason, and no argument about the expense has ever won against that memory`, needs: ['institution: granary'] },
+    { text: (r) =>
+      `Ask why a custom here seems excessive and the answer is always the same shape: it did not used to be, until the ${pickRandom2(r.filter((s) => s.type === "disaster"))?.name || "this event"} made it necessary, and now it is simply how things are done`, colour: true },
   ],
   economic_heavy: [
     (r) =>
@@ -292,6 +305,11 @@ export const POLITICAL_FLAVOR = {
           ? `The ${s.name} ended, but the habits of occupation never fully left: the way people speak about authority, the way they watch strangers, the way official records from that period are still treated with suspicion`
           : `Everything before the ${s.name} is referred to as 'the old settlement'. What exists now was built after, by different people, with different assumptions, over different rubble`;
     },
+    // CENSUS-2g unit 4 (R-AS amended, the chair's answer 1): LISTED, not split, not declared. The
+    // branch is chosen by the EVENT'S TYPE, so the monster branch presumes walls + a militia it never
+    // verifies; printed in 0 of 1,000, both facts true on the final record wherever it could print;
+    // waits on a per-branch closure declaration channel (the mechanism lane's wave 2). The other
+    // branch is colour. A split would move 166 of 1,000 births by the modulus (refused).
     (r) => {
       const s = r.find((o) => o.severity === "catastrophic") || r[0];
       return s.type === "monster_incursion"
@@ -349,13 +367,13 @@ export const POLITICAL_FLAVOR = {
   stable: [
     (r) =>
       "Unremarkable in its history, which is itself a kind of distinction: no catastrophe, no conquest, no great disruption. It simply continued, which required more work than it looks",
-    (r) =>
-      "An ordinary settlement that has outlasted several less ordinary ones nearby: through no single great decision, but through the accumulated effect of many small adequate ones",
-    (r) =>
-      "The kind of place that historians overlook and travellers remember fondly: no dramatic history, but a persistent one",
+    { text: (r) =>
+      "An ordinary settlement that has outlasted several less ordinary ones nearby: through no single great decision, but through the accumulated effect of many small adequate ones", crisis: ['any'] },
+    { text: (r) =>
+      "The kind of place that historians overlook and travellers remember fondly: no dramatic history, but a persistent one", crisis: ['any'] },
     (r) =>
       "Stable enough that its tensions are the slow kind: inherited grievances, unresolved inheritances, debts that have been rolled over so many times no one remembers the original amount",
-    (r) =>
+    { text: (r) =>
       r.length >= 3
         ? `A settlement shaped by the accumulated weight of ${r
             .map((s) => s.name)
@@ -363,13 +381,13 @@ export const POLITICAL_FLAVOR = {
             .join(
               ", ",
             )} and ${r[r.length - 1].name}: no single defining moment, but enough of them that the character formed anyway`
-        : "Shaped by events that left no monuments but changed things nonetheless: the kind of history that only becomes visible in the way people behave",
-    (r) =>
+        : "Shaped by events that left no monuments but changed things nonetheless: the kind of history that only becomes visible in the way people behave", crisis: ['any'] },
+    { text: (r) =>
       r.some((s) => s.type === "economic")
         ? `A settlement that has built its identity around commerce rather than conflict. The ${(r.find((s) => s.type === "economic") || r[0]).name} proved that economic power endures longer than military prestige`
-        : "The kind of place where records are well-kept and disputes are resolved through precedent, not because the people are unusually reasonable, but because they have learned the cost of the alternative",
-    (r) =>
-      "More complex than it appears from the road. Outsiders see a functioning market settlement. Residents know the version that has footnotes.",
+        : "The kind of place where records are well-kept and disputes are resolved through precedent, not because the people are unusually reasonable, but because they have learned the cost of the alternative", crisis: ['any'] },
+    { text: (r) =>
+      "More complex than it appears from the road. Outsiders see a functioning market settlement. Residents know the version that has footnotes.", needs: ['market'], crisis: ['any'] },
     (r) =>
       "A settlement whose great advantage is that nothing has ever forced it to become anything in particular. It has kept its options, its neighbours, and its temper, and it regards all three as achievements, correctly, though few visitors see why",
     (r) =>
@@ -378,35 +396,53 @@ export const POLITICAL_FLAVOR = {
         : "Little has happened here worth recording, which the residents will tell you is the point. The work of keeping a place uneventful is real work, and they have done it well enough that no one thanks them for it",
   ],
   religious_heavy: [
-    (r) =>
-      `The ${pickRandom2(r.filter((s) => s.type === "religious"))?.name || "this event"} divided this settlement's relationship to faith in ways that never fully healed: the institution persisted; the unity didn't`,
-    (r) =>
-      `Religious history here is complicated: the ${pickRandom2(r.filter((s) => s.type === "religious"))?.name || "this event"} left an official account and an unofficial one, and which version you know says something about who you are`,
-    (r) =>
-      `The ${pickRandom2(r.filter((s) => s.type === "religious"))?.name || "this event"} is why the local clergy and the civic authority maintain a relationship of careful, documented mutual respect rather than the easy cooperation you find elsewhere`,
-    (r) =>
-      `Visitors sometimes ask why the people here seem so personally invested in theological questions that most settlements leave to the priests. The ${pickRandom2(r.filter((s) => s.type === "religious"))?.name || "this event"} is the explanation`,
-    (r) =>
-      `Faith here is a matter of loyalty as much as belief. The ${pickRandom2(r.filter((s) => s.type === "religious"))?.name || "this event"} drew a line through the community, and which side of it a family stood on is still remembered, still counted, still quietly held against them`,
-    (r) =>
-      `The calendar here is crowded with observances an outsider cannot keep straight, and the crowding is the point: the ${pickRandom2(r.filter((s) => s.type === "religious"))?.name || "this event"} left rival claims to the same holy days, and each is kept as loudly as the other`,
-    (r) =>
-      `There is a wariness in how people here speak of doctrine. The ${pickRandom2(r.filter((s) => s.type === "religious"))?.name || "this event"} made it dangerous to be too certain out loud, and the habit of caution has outlived the danger that taught it`,
+    // CENSUS-2f unit 5: [0]'s persisting institution and [2]'s local clergy presume a house of worship of any kind (R-AE's
+    // `sacredHouse`, settled at this draw on all 1,000 soak births — R-V, R-AN); a refused row moves to the admitted argmax.
+    { text: (r) =>
+      `The ${pickRandom2(r.filter((s) => s.type === "religious"))?.name || "this event"} divided this settlement's relationship to faith in ways that never fully healed: the institution persisted; the unity didn't`, needs: ['sacredHouse'] },
+    { text: (r) =>
+      `Religious history here is complicated: the ${pickRandom2(r.filter((s) => s.type === "religious"))?.name || "this event"} left an official account and an unofficial one, and which version you know says something about who you are`, colour: true },
+    { text: (r) =>
+      `The ${pickRandom2(r.filter((s) => s.type === "religious"))?.name || "this event"} is why the local clergy and the civic authority maintain a relationship of careful, documented mutual respect rather than the easy cooperation you find elsewhere`, needs: ['sacredHouse'] },
+    { text: (r) =>
+      `Visitors sometimes ask why the people here seem so personally invested in theological questions that most settlements leave to the priests. The ${pickRandom2(r.filter((s) => s.type === "religious"))?.name || "this event"} is the explanation`, colour: true },
+    { text: (r) =>
+      `Faith here is a matter of loyalty as much as belief. The ${pickRandom2(r.filter((s) => s.type === "religious"))?.name || "this event"} drew a line through the community, and which side of it a family stood on is still remembered, still counted, still quietly held against them`, colour: true },
+    { text: (r) =>
+      `The calendar here is crowded with observances an outsider cannot keep straight, and the crowding is the point: the ${pickRandom2(r.filter((s) => s.type === "religious"))?.name || "this event"} left rival claims to the same holy days, and each is kept as loudly as the other`, colour: true },
+    { text: (r) =>
+      `There is a wariness in how people here speak of doctrine. The ${pickRandom2(r.filter((s) => s.type === "religious"))?.name || "this event"} made it dangerous to be too certain out loud, and the habit of caution has outlived the danger that taught it`, colour: true },
   ],
   magical_heavy: [
-    (r) =>
-      `The ${pickRandom2(r.filter((s) => s.type === "magical"))?.name || "this event"} is why this settlement treats arcane matters with more caution than neighbours do, not superstition, institutional memory`,
-    (r) =>
-      `A settlement with an unusual relationship to magic: the ${pickRandom2(r.filter((s) => s.type === "magical"))?.name || "this event"} made it both more dependent on arcane resources and more wary of them simultaneously`,
-    (r) =>
-      `The ${pickRandom2(r.filter((s) => s.type === "magical"))?.name || "this event"} is still discussed (carefully) by the practitioners who work here. The details are not shared with outsiders, which outsiders find either sinister or sensible depending on their own experience with magic`,
-    (r) =>
-      `Ask what the local policy on arcane practice is and you will get a longer answer than the question seems to warrant. The ${pickRandom2(r.filter((s) => s.type === "magical"))?.name || "this event"} is why`,
-    (r) =>
-      `The settlement relies on arcane workings it does not entirely trust. The ${pickRandom2(r.filter((s) => s.type === "magical"))?.name || "this event"} proved the two feelings can coexist indefinitely, and here they do, in the same shrug people give the weather`,
-    (r) =>
-      `There are places in and around the settlement that people simply do not go, and the reasons have hardened into custom without needing to be spoken. The ${pickRandom2(r.filter((s) => s.type === "magical"))?.name || "this event"} is where the custom started`,
-    (r) =>
-      `The practitioners here are respected, consulted, and watched: all three at once, without contradiction. The ${pickRandom2(r.filter((s) => s.type === "magical"))?.name || "this event"} taught the settlement that the useful and the dangerous are frequently the same people`,
+    { text: (r) =>
+      `The ${pickRandom2(r.filter((s) => s.type === "magical"))?.name || "this event"} is why this settlement treats arcane matters with more caution than neighbours do, not superstition, institutional memory`, colour: true },
+    { text: (r) =>
+      `A settlement with an unusual relationship to magic: the ${pickRandom2(r.filter((s) => s.type === "magical"))?.name || "this event"} made it both more dependent on arcane resources and more wary of them simultaneously`, needs: ['magic'] },
+    { text: (r) =>
+      `The ${pickRandom2(r.filter((s) => s.type === "magical"))?.name || "this event"} is still discussed (carefully) by the practitioners who work here. The details are not shared with outsiders, which outsiders find either sinister or sensible depending on their own experience with magic`, needs: ['magic'] },
+    { text: (r) =>
+      `Ask what the local policy on arcane practice is and you will get a longer answer than the question seems to warrant. The ${pickRandom2(r.filter((s) => s.type === "magical"))?.name || "this event"} is why`, colour: true },
+    { text: (r) =>
+      `The settlement relies on arcane workings it does not entirely trust. The ${pickRandom2(r.filter((s) => s.type === "magical"))?.name || "this event"} proved the two feelings can coexist indefinitely, and here they do, in the same shrug people give the weather`, needs: ['magic'] },
+    { text: (r) =>
+      `There are places in and around the settlement that people simply do not go, and the reasons have hardened into custom without needing to be spoken. The ${pickRandom2(r.filter((s) => s.type === "magical"))?.name || "this event"} is where the custom started`, colour: true },
+    { text: (r) =>
+      `The practitioners here are respected, consulted, and watched: all three at once, without contradiction. The ${pickRandom2(r.filter((s) => s.type === "magical"))?.name || "this event"} taught the settlement that the useful and the dangerous are frequently the same people`, needs: ['magic'] },
   ],
 };
+
+/**
+ * DECLARED SIBLINGS (CENSUS-1c unit 1; `docs/DESIGN_POOL_CENSUS.md` §3.1, the twin tables
+ * dissolved): the walls-free twin of POLITICAL_FLAVOR.disaster_heavy's reserve sentence (F11, rung 2B: soak1k-6879), keyed by SENTENCE because the line goes on to name a drawn event. Each set is the original line, declaring what it presumes, and beside it its
+ * twin with the complementary atom (`twinOf` the original). The original stays where this table's
+ * string consumers read it; the draw site resolves a drawn key through
+ * `domain/facts/drawDeclared.js :: resolveSibling` (the original if the record admits it, else the
+ * twin). Retired from the text-keyed tables `defenceTwinLines.js` / `inlandHookLines.js` (F5, F10),
+ * every twin to the byte. VETOABLE wording, as before (the owner's).
+ */
+export const POLITICAL_FLAVOR_SIBLINGS = Object.freeze({
+  'The settlement keeps more in reserve than its size explains: granaries a little too large, walls a little too strong.': Object.freeze([
+    Object.freeze({ text: 'The settlement keeps more in reserve than its size explains: granaries a little too large, walls a little too strong.', needs: Object.freeze(['walls']) }),
+    Object.freeze({ text: 'The settlement keeps more in reserve than its size explains: granaries a little too large, stores a little too deep.', twinOf: 'The settlement keeps more in reserve than its size explains: granaries a little too large, walls a little too strong.', excludes: Object.freeze(['walls']) }),
+  ]),
+});

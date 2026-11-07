@@ -1,0 +1,289 @@
+{
+  "poolId": "DS-GEN-8",
+  "source": "src/data/dossierStateProse/general.generated.js (annex docs/content/RECEIPT_POOLS_DOSSIER_STATE.md)",
+  "drawKind": "K",
+  "drawSite": "remnantPoolKey / ancientRuinPoolKey / steadingPoolKey → composeStateProse → readStateProse → eligibleVariants → drawVariant",
+  "pools": [
+    {
+      "pool": "lifecycleStatus: relic_ruin",
+      "keyGuarantees": [
+        "the settlement is dead and graded relic_ruin by the lifecycle writer"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Not scoped: a dead town speaks of departure, never of a live calm; line 1 presumes how the residents left (history facts).",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "{settlement} has died, and its stones stand as a relic ruin; the last residents left with the wagons, their fates unresolved. The interior is yours.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "history facts"
+          ]
+        },
+        {
+          "lineId": "vid:2",
+          "text": "Nothing is recorded at {settlement} any more. The rolls close on a departure and not on a disaster, and where the people went is not written. The interior is yours.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:3",
+          "text": "What stands at {settlement} is worth walking into and no longer worth living in; those who left, left together, and their fates are unresolved. The interior is yours.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:4",
+          "text": "The country around {settlement} still uses the name, and uses it for the place rather than for the people.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "lifecycleStatus: abandoned_site",
+      "keyGuarantees": [
+        "the settlement is dead and graded abandoned_site by the lifecycle writer"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Not scoped: a dead town speaks of departure, never of a live calm; line 1 presumes how the residents left (history facts).",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "{settlement} has died, and a quiet site marks where it stood; the last residents left with the wagons, their fates unresolved.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "history facts"
+          ]
+        },
+        {
+          "lineId": "vid:2",
+          "text": "{settlement} is off the rolls. What remains is ground with a name on it and nothing standing worth the name.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:3",
+          "text": "There is less at {settlement} than a ruin: a shape in the ground, and the memory of a shape; those who left it, left it whole, and their fates are unresolved.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:4",
+          "text": "People still give directions past {settlement}, which is more than the place itself still offers.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "history.ancientRuin present",
+      "keyGuarantees": [
+        "history.ancientRuin carries a proper name (a fallen city near the town)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Not scoped: speaks of the past; two lines presume local superstition, which has no reader (culture).",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "The relic ruin of {ruin} stands near {settlement}, a city that fell {timeband_since} and has been drawing superstition ever since. Its interior is yours.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "culture"
+          ]
+        },
+        {
+          "lineId": "vid:2",
+          "text": "{ruin} fell {timeband_since} and {settlement} has grown up in its shadow; what the older place was is not remembered here, only that it was larger. Its interior is yours.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:3",
+          "text": "{settlement} does not go into {ruin}, and the not-going is a rule nobody has ever had to write down.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "culture"
+          ]
+        },
+        {
+          "lineId": "vid:4",
+          "text": "{ruin} is {timeband_age} and appears on no roll of {settlement}'s; the ground it stands on is claimed by nobody and worked by nobody.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "steading row: organic",
+      "keyGuarantees": [
+        "one satellite steading of provenance growth, resource_strike or resettlement, no pending charter"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour: per-steading rows presume nothing beyond the row.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "{steading} holds {band} and works {resource} for {settlement}.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "{steading} is {band} of people and one reason to be there, and the reason is {resource}.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:3",
+          "text": "{steading} is close enough to {settlement} to be counted and far enough to be its own place.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "steading row: provenance: 'forced'",
+      "keyGuarantees": [
+        "one satellite steading founded by decree (provenance forced)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour: per-steading rows presume nothing beyond the row.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "{steading} holds {band} and was founded by decree rather than by settlement; {settlement}'s hall put it where it is and put people in it.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "{steading} exists because {settlement} decided it should, which is a different origin from every other place on this list and shows in how it is run.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:3",
+          "text": "Nobody moved to {steading}. They were sent, and {band} of them are still there.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "steading row: charterPending",
+      "keyGuarantees": [
+        "one satellite steading awaiting its charter"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour: per-steading rows presume nothing beyond the row.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "{steading} holds {band} and has no charter yet; what it is entitled to is being decided at {settlement}.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "{steading} is a place before it is a settlement. The people are there, the charter is not, and the gap is where the arguments are.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:3",
+          "text": "{steading} does not know yet what it will be allowed to become.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    }
+  ]
+}

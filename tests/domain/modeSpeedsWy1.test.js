@@ -476,7 +476,13 @@ const BASE_DIGEST_HASH = '3ddda43a3ff1421c339a4b1922cb0b48895083c6c824f8f246e898
 // first bad bc2a64000 (LANDING-5, record rung1-27: stressorsCore.js :: residualOutcome's id carries its tick,
 // `world_outcome.residual.<tick>.<stressor>.<target>`); that commit's only source change is the id template. Green at
 // 433289899 (the bands did not move it); unmoved from bc2a64000 to the landing tip. Still no datum: the absent arm holds.
-const BASE_PULSE_HASH = '865193cf0aa87ca03b93294d23880532ea11d9c72b6e6f4b5c907d174aaae582';
+// 2026-11-07 (LANDING-R2 seat C2, the pool census composed; ODQ §934.105): 865193cf... -> 5b6a1e51..., ONE cause: census-2c
+// unit 3a (38d1b4c05, HOOK_ESCALATION declared: refused escalation lines take their twins in place). Measured by this
+// arm's hash on git-archive trees: the census lineage moves 0937c69d (merge base bf263a78d) -> 219773db (census tip
+// e36e4916f) at exactly that commit (change-point search over census-1b's first parent, into census-2 through the merge
+// 2b31f33f3); at the composed tip with 38d1b4c05's src reverse-applied the arm reads 865193cf, rung 1's value, so the two
+// lineages' moves compose with no interaction. Still no datum: the absent arm holds.
+const BASE_PULSE_HASH = '5b6a1e518bf3cd5f62212a2872b1422a0cdf5ce203ca97c6a18aa76b87c16432';
 
 describe('WY-1 A5 — dark by ABSENT DATA: the digest and the pulse record are byte-identical to the base', () => {
   it('ABSENT or refused datum: the golden digest hashes to the base, whatever refused shape was supplied', () => {

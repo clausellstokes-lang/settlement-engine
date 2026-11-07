@@ -1,0 +1,742 @@
+{
+  "poolId": "POLITICAL_FLAVOR",
+  "source": "src/generators/narrativeText.js :235 POLITICAL_FLAVOR",
+  "drawKind": "R",
+  "drawSite": "src/generators/narrative/historyCoherence.js:44-84 stressProfileDrawn → pickRandom2(POLITICAL_FLAVOR[pattern])(subset) → defenceTwinSentences",
+  "note": "Branching closures are split into one line per branch (catastrophic by s.type, stable by event count/type). The \"this event\" fallback spelling of each line is the same fixed words and is not listed twice.",
+  "pools": [
+    {
+      "pool": "political_heavy",
+      "keyGuarantees": [
+        "history-event pattern = political_heavy (buildStressProfile counts event types; stable is also the 15% override and the empty-subset fallback)",
+        "${event} is a drawn history event name (pickRandom2 over the subset)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "History-keyed, renders under crisis, but no line asserts present calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "POLITICAL_FLAVOR.political_heavy[0]",
+          "text": "A settlement where power has changed hands repeatedly within living memory. ${event} left a governing structure that still hasn't fully settled",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "POLITICAL_FLAVOR.political_heavy[1]",
+          "text": "Politically restless: the ${event} is still treated as recent history by those who were there, and recent enough to be a warning by those who weren't",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "POLITICAL_FLAVOR.political_heavy[2]",
+          "text": "The current governing arrangements are a compromise nobody fully chose: shaped more by the ${event} than by any founding design",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "POLITICAL_FLAVOR.political_heavy[3]",
+          "text": "Authority here has a provisional quality, as though everyone is still waiting for the arrangement that followed the ${event} to be replaced by a permanent one that never comes",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "POLITICAL_FLAVOR.political_heavy[4]",
+          "text": "The factions here have long memories and short patience. The ${event} settled who held power without settling whether they should, and that second question has never closed",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "POLITICAL_FLAVOR.political_heavy[5]",
+          "text": "Governance is a performance everyone has agreed to keep up: the offices are filled, the seals are real, and beneath them the ${event} left a question of legitimacy that no one wants to reopen by answering",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "disaster_heavy",
+      "keyGuarantees": [
+        "history-event pattern = disaster_heavy (buildStressProfile counts event types; stable is also the 15% override and the empty-subset fallback)",
+        "${event} is a drawn history event name (pickRandom2 over the subset)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "History-keyed, renders under crisis, but no line asserts present calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "POLITICAL_FLAVOR.disaster_heavy[0]",
+          "text": "A settlement defined by what it survived. The ${event} shaped how this community thinks about risk, preparation, and who gets left behind",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "POLITICAL_FLAVOR.disaster_heavy[1]",
+          "text": "Cautious and self-sufficient in ways that visitors find excessive. The ${event} made it that way and the lesson has never been unlearned",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "food sources"
+          ]
+        },
+        {
+          "lineId": "POLITICAL_FLAVOR.disaster_heavy[2]",
+          "text": "The ${event} is the reference point for everything: before it, during it, after it. A generation has grown up for whom it is history rather than memory",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "POLITICAL_FLAVOR.disaster_heavy[3]",
+          "text": "There is a practicality to the people here that outsiders read as coldness. The ${event} taught them what sentiment costs when the accounting comes due, and the lesson stuck",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "POLITICAL_FLAVOR.disaster_heavy[4]",
+          "text": "The settlement keeps more in reserve than its size explains: granaries a little too large, walls a little too strong. The ${event} is the reason, and no argument about the expense has ever won against that memory",
+          "needs": [
+            "walls",
+            "institution: granary"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [],
+          "note": "walls half already twinned post-draw (src/data/defenceTwinLines.js:58)"
+        },
+        {
+          "lineId": "POLITICAL_FLAVOR.disaster_heavy[5]",
+          "text": "Ask why a custom here seems excessive and the answer is always the same shape: it did not used to be, until the ${event} made it necessary, and now it is simply how things are done",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "economic_heavy",
+      "keyGuarantees": [
+        "history-event pattern = economic_heavy (buildStressProfile counts event types; stable is also the 15% override and the empty-subset fallback)",
+        "${event} is a drawn history event name (pickRandom2 over the subset)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "History-keyed, renders under crisis, but no line asserts present calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "POLITICAL_FLAVOR.economic_heavy[0]",
+          "text": "A settlement whose identity was built on commerce. The ${event} didn't create the merchant class here, but it defined what the merchant class could become",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "POLITICAL_FLAVOR.economic_heavy[1]",
+          "text": "Economically dynamic in ways that occasionally tip into instability: the ${event} is recent enough to remind everyone that prosperity here has always been earned and can always be lost",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "POLITICAL_FLAVOR.economic_heavy[2]",
+          "text": "The ${event} gave this place its current shape: the physical one as much as the social one",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "POLITICAL_FLAVOR.economic_heavy[3]",
+          "text": "Money is discussed openly here in a way that scandalises visitors from more genteel places. The ${event} taught everyone that pretending not to care about it is a luxury for people who already have it",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "POLITICAL_FLAVOR.economic_heavy[4]",
+          "text": "The social order here maps almost exactly onto the ledger, and no one pretends otherwise. The ${event} settled who held the capital, and holding the capital has meant holding everything else ever since",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "POLITICAL_FLAVOR.economic_heavy[5]",
+          "text": "Prosperity here is worn carefully, never carelessly. The ${event} is close enough in memory that flaunting wealth reads less as confidence than as a failure to have learned anything",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "catastrophic",
+      "keyGuarantees": [
+        "history-event pattern = catastrophic (buildStressProfile counts event types; stable is also the 15% override and the empty-subset fallback)",
+        "${event} is a drawn history event name (pickRandom2 over the subset)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "History-keyed, renders under crisis, but no line asserts present calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "POLITICAL_FLAVOR.catastrophic[0].other",
+          "text": "Everything before the ${event} is referred to as 'the old settlement'. What exists now was built after, by different people, with different assumptions, over different rubble",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "POLITICAL_FLAVOR.catastrophic[0].occupation_infiltration",
+          "text": "The ${event} ended, but the habits of occupation never fully left: the way people speak about authority, the way they watch strangers, the way official records from that period are still treated with suspicion",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "POLITICAL_FLAVOR.catastrophic[1].other",
+          "text": "The ${event} is the settlement's founding trauma, not the actual founding, which is older, but the event that made everything before it feel like a different place",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "POLITICAL_FLAVOR.catastrophic[1].monster_incursion",
+          "text": "The ${event} is why this settlement has walls where others do not, why the militia drills when other villages have forgotten how, and why certain paths through the surrounding territory are still considered inadvisable",
+          "needs": [
+            "walls",
+            "militia"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [],
+          "listing": "presumes walls + militia, unverified; printed in 0 of 1,000; both facts true on the final record wherever the branch could print; waiting on a per-branch closure declaration channel (R-AS amended, CENSUS-2g unit 4) — no split, the branch kept (R-AK)"
+        },
+        {
+          "lineId": "POLITICAL_FLAVOR.catastrophic[2].political",
+          "text": "The ${event} produced a governing arrangement that has never been fully endorsed by everyone it governs. Ask who has legitimate authority here and you will get different answers depending on who you ask",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "POLITICAL_FLAVOR.catastrophic[2].other",
+          "text": "Ask anyone here what year something happened and they will tell you whether it was before or after the ${event}. Time is measured by it",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "POLITICAL_FLAVOR.catastrophic[3].other",
+          "text": "The ${event} did not destroy the settlement. It destroyed the settlement's sense of itself. What came after was rebuilt from the ground up, including what people believed about where they lived",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "POLITICAL_FLAVOR.catastrophic[3].economic",
+          "text": "The ${event} is why this settlement has no patience for debt, no tolerance for speculation, and a merchant class that keeps more coin in hand than any comparable settlement. Prosperity here is treated as temporary until proven otherwise",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "POLITICAL_FLAVOR.catastrophic[4]",
+          "text": "Older residents still distinguish between 'the original settlement' and 'what we have now'. The ${event} is where that line falls, not a clean line, but a real one",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "POLITICAL_FLAVOR.catastrophic[5].other",
+          "text": "The ${event} is the reason this settlement is here at all, in its current form, not because it was founded then, but because it was remade then, and what was remade is what we have",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "POLITICAL_FLAVOR.catastrophic[5].religious",
+          "text": "The ${event} is why the relationship between civic and religious authority here is more carefully managed than in settlements that have never had to think about it",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "POLITICAL_FLAVOR.catastrophic[6]",
+          "text": "The people here carry the ${event} the way other places carry a founding myth, except this one is remembered accurately, by people who were there, which makes it a heavier thing to live beside",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "POLITICAL_FLAVOR.catastrophic[7].other",
+          "text": "The ${event} did not just change what happened next; it changed what the settlement believed was possible, and a people's sense of the possible is the slowest thing in the world to rebuild",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "POLITICAL_FLAVOR.catastrophic[7].disasterOrMonster",
+          "text": "Every plan made in this settlement now includes, unspoken, a contingency for the ${event} happening again, not because anyone expects it, but because expecting nothing was what the ${event} punished",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "layered_history",
+      "keyGuarantees": [
+        "history-event pattern = layered_history (buildStressProfile counts event types; stable is also the 15% override and the empty-subset fallback)",
+        "${event} is a drawn history event name (pickRandom2 over the subset)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "History-keyed, renders under crisis, but no line asserts present calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "POLITICAL_FLAVOR.layered_history[0]",
+          "text": "A settlement with enough history that the layers show. The ${event} left a foundation; everything built on top of it shows the seams",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "POLITICAL_FLAVOR.layered_history[1]",
+          "text": "Old enough to have contradicted itself. The ${event} established one set of assumptions; subsequent events revised them, not always cleanly",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "POLITICAL_FLAVOR.layered_history[2]",
+          "text": "Ask what shaped this settlement and you will get different answers depending on who you ask and which generation they lived through. The ${event}, ${event} left different marks on different people",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "POLITICAL_FLAVOR.layered_history[3]",
+          "text": "Several significant events, no single defining one. The character formed through accumulation rather than rupture, which makes it harder to explain and more durable",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "POLITICAL_FLAVOR.layered_history[4]",
+          "text": "The history here is dense enough that residents disagree about which part of it matters most. The disagreement is itself part of the character",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "POLITICAL_FLAVOR.layered_history[5]",
+          "text": "Each generation here has left its mark on the last one's arrangements without ever quite clearing them away. The ${event} is the deepest layer still visible, and everything since has been built at an angle to it",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "POLITICAL_FLAVOR.layered_history[6]",
+          "text": "This is a settlement of accommodations and half-repairs, where every institution bears the compromise that let it survive the era before this one. It works, in the way a much-mended tool works: not elegantly, but reliably, and no one can quite remember what it looked like new",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "stable",
+      "keyGuarantees": [
+        "history-event pattern = stable (buildStressProfile counts event types; stable is also the 15% override and the empty-subset fallback)",
+        "${event} is a drawn history event name (pickRandom2 over the subset)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Opted in: renders under any crisis (history-keyed, not crisis-keyed) and several lines assert the place is uneventful now (\"Stable enough that its tensions are the slow kind\", \"Little has happened here worth recording\").",
+      "lines": [
+        {
+          "lineId": "POLITICAL_FLAVOR.stable[0]",
+          "text": "Unremarkable in its history, which is itself a kind of distinction: no catastrophe, no conquest, no great disruption. It simply continued, which required more work than it looks",
+          "needs": [],
+          "excludes": [],
+          "crisis": "calm",
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "POLITICAL_FLAVOR.stable[1]",
+          "text": "An ordinary settlement that has outlasted several less ordinary ones nearby: through no single great decision, but through the accumulated effect of many small adequate ones",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "POLITICAL_FLAVOR.stable[2]",
+          "text": "The kind of place that historians overlook and travellers remember fondly: no dramatic history, but a persistent one",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "POLITICAL_FLAVOR.stable[3]",
+          "text": "Stable enough that its tensions are the slow kind: inherited grievances, unresolved inheritances, debts that have been rolled over so many times no one remembers the original amount",
+          "needs": [],
+          "excludes": [],
+          "crisis": "calm",
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "POLITICAL_FLAVOR.stable[4].ge3",
+          "text": "A settlement shaped by the accumulated weight of ${event}, ${event} and ${event}: no single defining moment, but enough of them that the character formed anyway",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "POLITICAL_FLAVOR.stable[4].lt3",
+          "text": "Shaped by events that left no monuments but changed things nonetheless: the kind of history that only becomes visible in the way people behave",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "POLITICAL_FLAVOR.stable[5].other",
+          "text": "The kind of place where records are well-kept and disputes are resolved through precedent, not because the people are unusually reasonable, but because they have learned the cost of the alternative",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "POLITICAL_FLAVOR.stable[5].economic",
+          "text": "A settlement that has built its identity around commerce rather than conflict. The ${event} proved that economic power endures longer than military prestige",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "POLITICAL_FLAVOR.stable[6]",
+          "text": "More complex than it appears from the road. Outsiders see a functioning market settlement. Residents know the version that has footnotes.",
+          "needs": [
+            "market"
+          ],
+          "excludes": [],
+          "crisis": "any",
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "POLITICAL_FLAVOR.stable[7]",
+          "text": "A settlement whose great advantage is that nothing has ever forced it to become anything in particular. It has kept its options, its neighbours, and its temper, and it regards all three as achievements, correctly, though few visitors see why",
+          "needs": [],
+          "excludes": [],
+          "crisis": "calm",
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "POLITICAL_FLAVOR.stable[8].ge2",
+          "text": "The tensions here are the domestic kind (inheritances, boundaries, precedence at the festival), and they are managed rather than resolved, passed down like the disputes they are, each generation adding a footnote and settling nothing",
+          "needs": [],
+          "excludes": [],
+          "crisis": "calm",
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "POLITICAL_FLAVOR.stable[8].lt2",
+          "text": "Little has happened here worth recording, which the residents will tell you is the point. The work of keeping a place uneventful is real work, and they have done it well enough that no one thanks them for it",
+          "needs": [],
+          "excludes": [],
+          "crisis": "calm",
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "religious_heavy",
+      "keyGuarantees": [
+        "history-event pattern = religious_heavy (buildStressProfile counts event types; stable is also the 15% override and the empty-subset fallback)",
+        "${event} is a drawn history event name (pickRandom2 over the subset)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "History-keyed, renders under crisis, but no line asserts present calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "POLITICAL_FLAVOR.religious_heavy[0]",
+          "text": "The ${event} divided this settlement's relationship to faith in ways that never fully healed: the institution persisted; the unity didn't",
+          "needs": [
+            "institution: temple"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "POLITICAL_FLAVOR.religious_heavy[1]",
+          "text": "Religious history here is complicated: the ${event} left an official account and an unofficial one, and which version you know says something about who you are",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "POLITICAL_FLAVOR.religious_heavy[2]",
+          "text": "The ${event} is why the local clergy and the civic authority maintain a relationship of careful, documented mutual respect rather than the easy cooperation you find elsewhere",
+          "needs": [
+            "institution: temple"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "priest / faith presence"
+          ]
+        },
+        {
+          "lineId": "POLITICAL_FLAVOR.religious_heavy[3]",
+          "text": "Visitors sometimes ask why the people here seem so personally invested in theological questions that most settlements leave to the priests. The ${event} is the explanation",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "priest / faith presence"
+          ]
+        },
+        {
+          "lineId": "POLITICAL_FLAVOR.religious_heavy[4]",
+          "text": "Faith here is a matter of loyalty as much as belief. The ${event} drew a line through the community, and which side of it a family stood on is still remembered, still counted, still quietly held against them",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "POLITICAL_FLAVOR.religious_heavy[5]",
+          "text": "The calendar here is crowded with observances an outsider cannot keep straight, and the crowding is the point: the ${event} left rival claims to the same holy days, and each is kept as loudly as the other",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "POLITICAL_FLAVOR.religious_heavy[6]",
+          "text": "There is a wariness in how people here speak of doctrine. The ${event} made it dangerous to be too certain out loud, and the habit of caution has outlived the danger that taught it",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "magical_heavy",
+      "keyGuarantees": [
+        "history-event pattern = magical_heavy (buildStressProfile counts event types; stable is also the 15% override and the empty-subset fallback)",
+        "${event} is a drawn history event name (pickRandom2 over the subset)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "History-keyed, renders under crisis, but no line asserts present calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "POLITICAL_FLAVOR.magical_heavy[0]",
+          "text": "The ${event} is why this settlement treats arcane matters with more caution than neighbours do, not superstition, institutional memory",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "POLITICAL_FLAVOR.magical_heavy[1]",
+          "text": "A settlement with an unusual relationship to magic: the ${event} made it both more dependent on arcane resources and more wary of them simultaneously",
+          "needs": [
+            "magic"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "POLITICAL_FLAVOR.magical_heavy[2]",
+          "text": "The ${event} is still discussed (carefully) by the practitioners who work here. The details are not shared with outsiders, which outsiders find either sinister or sensible depending on their own experience with magic",
+          "needs": [
+            "magic"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "POLITICAL_FLAVOR.magical_heavy[3]",
+          "text": "Ask what the local policy on arcane practice is and you will get a longer answer than the question seems to warrant. The ${event} is why",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "POLITICAL_FLAVOR.magical_heavy[4]",
+          "text": "The settlement relies on arcane workings it does not entirely trust. The ${event} proved the two feelings can coexist indefinitely, and here they do, in the same shrug people give the weather",
+          "needs": [
+            "magic"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "POLITICAL_FLAVOR.magical_heavy[5]",
+          "text": "There are places in and around the settlement that people simply do not go, and the reasons have hardened into custom without needing to be spoken. The ${event} is where the custom started",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "POLITICAL_FLAVOR.magical_heavy[6]",
+          "text": "The practitioners here are respected, consulted, and watched: all three at once, without contradiction. The ${event} taught the settlement that the useful and the dangerous are frequently the same people",
+          "needs": [
+            "magic"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        }
+      ]
+    }
+  ]
+}

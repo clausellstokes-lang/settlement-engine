@@ -15,6 +15,7 @@
  * And the thorp's "Household levy" is a militia: the bucket vocabulary did not match it, so the
  * engine and the Defense tab read a levy thorp as having no force at all.
  */
+import { textOf } from '../../src/domain/facts/textOf.js';
 import { beforeAll, describe, expect, it } from 'vitest';
 
 import { CULTURE_PROFILES } from '../../src/data/cultureProfiles.js';
@@ -43,7 +44,7 @@ describe('the culture Defense row is true on every roster', () => {
   it('no defensePattern variant of any culture names a garrison, soldiers or walls', () => {
     const offenders = Object.entries(CULTURE_PROFILES).flatMap(([key, profile]) =>
       profile.defensePattern
-        .map((line) => [key, line, claimsOnBareRoster(line)])
+        .map(textOf).map((line) => [key, line, claimsOnBareRoster(line)])
         .filter(([, , terms]) => terms.length > 0));
     expect(offenders, 'culture lines that claim a defence the roster may lack').toEqual([]);
   });

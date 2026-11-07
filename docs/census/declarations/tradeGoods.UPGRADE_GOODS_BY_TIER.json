@@ -1,0 +1,287 @@
+{
+  "id": "tradeGoods.UPGRADE_GOODS_BY_TIER",
+  "source": "src/generators/economy/tradeGoods.js :: UPGRADE_GOODS_BY_TIER (read by getUpgradeChain)",
+  "drawKind": "A",
+  "pool": {
+    "declares": [],
+    "crisisScoped": false,
+    "colour": false,
+    "notes": "Every row is an IMPORT (generateTradeIncomeStreams.imports). The tier key and the pool key (basic/fromHigher/fromCityOrMetropolis/fromMetropolis/fromHinterland, chosen by isFromHigher) are the branch; tier is the same reader (record.tier) so a tier the key guarantees is noted, not declared. Pool-wide guarantee: route != isolated (getUpgradeChain returns [] first). Import rows carry the producer as a note (producer is elsewhere); a luxury-class import declares \"tier: >= village\" per the ruling. Rows ALSO feed generateTradeIncomeStreams.transit (imports.slice(0,4) when entrepot), i.e. the same labels print as transit re-exports. Duplicates src/data/tradeGoodsData.js :: IMPORT_GOODS_BY_TIER (same rows).",
+    "needs": [],
+    "excludes": []
+  },
+  "rows": [
+    {
+      "id": "tradeGoods.UPGRADE_GOODS_BY_TIER::thorp.basic.Salt",
+      "text": "Salt",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "producer: unhomed: salt source (salt_flats/desert_salt resource or sea). Branch: tier thorp."
+    },
+    {
+      "id": "tradeGoods.UPGRADE_GOODS_BY_TIER::thorp.basic.Metal tools",
+      "text": "Metal tools",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "producer: institution: smith (elsewhere)."
+    },
+    {
+      "id": "tradeGoods.UPGRADE_GOODS_BY_TIER::thorp.basic.Cloth",
+      "text": "Cloth",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "producer: unhomed: weaver. Basic textiles, not luxury-class."
+    },
+    {
+      "id": "tradeGoods.UPGRADE_GOODS_BY_TIER::hamlet.basic.Metal goods",
+      "text": "Metal goods",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "producer: institution: smith (elsewhere)."
+    },
+    {
+      "id": "tradeGoods.UPGRADE_GOODS_BY_TIER::hamlet.basic.Salt",
+      "text": "Salt",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "producer: unhomed: salt source."
+    },
+    {
+      "id": "tradeGoods.UPGRADE_GOODS_BY_TIER::hamlet.basic.Quality cloth",
+      "text": "Quality cloth",
+      "needs": [
+        "tier: >= village"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "LUXURY-CLASS (quality textiles) under the hamlet key: its declaration \"tier: >= village\" CONTRADICTS its own branch (tier hamlet) — under the ruling this row is never drawable where it lives. Producer: unhomed: weaver."
+    },
+    {
+      "id": "tradeGoods.UPGRADE_GOODS_BY_TIER::village.basic.Metal goods",
+      "text": "Metal goods",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "producer: institution: smith (elsewhere)."
+    },
+    {
+      "id": "tradeGoods.UPGRADE_GOODS_BY_TIER::village.basic.Quality cloth and clothing",
+      "text": "Quality cloth and clothing",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "luxury-class; \"tier: >= village\" guaranteed by the village key. Producer: unhomed: weaver/tailor."
+    },
+    {
+      "id": "tradeGoods.UPGRADE_GOODS_BY_TIER::village.basic.Salt for preservation",
+      "text": "Salt for preservation",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "producer: unhomed: salt source."
+    },
+    {
+      "id": "tradeGoods.UPGRADE_GOODS_BY_TIER::village.basic.Specialized tools",
+      "text": "Specialized tools",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "producer: institution: smith (elsewhere)."
+    },
+    {
+      "id": "tradeGoods.UPGRADE_GOODS_BY_TIER::village.fromHigher.Legal services",
+      "text": "Legal services",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "DEAD: category SERVICES is dropped by getUpgradeChain :: isService; never printed. Category error if revived (a service, not a good)."
+    },
+    {
+      "id": "tradeGoods.UPGRADE_GOODS_BY_TIER::village.fromHigher.Advanced medical care",
+      "text": "Advanced medical care",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "DEAD: category SERVICES is dropped by getUpgradeChain :: isService; never printed."
+    },
+    {
+      "id": "tradeGoods.UPGRADE_GOODS_BY_TIER::village.fromHigher.Manufactured goods",
+      "text": "Manufactured goods",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "Only printing row of fromHigher at village (the other two are services)."
+    },
+    {
+      "id": "tradeGoods.UPGRADE_GOODS_BY_TIER::town.fromCityOrMetropolis.Luxury textiles",
+      "text": "Luxury textiles",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "luxury-class; tier guaranteed by the town key. desc \"Fine cloth, silk\"."
+    },
+    {
+      "id": "tradeGoods.UPGRADE_GOODS_BY_TIER::town.fromCityOrMetropolis.Spices and exotic dyes",
+      "text": "Spices and exotic dyes",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "luxury-class; tier guaranteed by key."
+    },
+    {
+      "id": "tradeGoods.UPGRADE_GOODS_BY_TIER::town.fromCityOrMetropolis.Banking services",
+      "text": "Banking services",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "DEAD: category SERVICES is dropped by getUpgradeChain :: isService; never printed."
+    },
+    {
+      "id": "tradeGoods.UPGRADE_GOODS_BY_TIER::town.fromCityOrMetropolis.Advanced legal expertise",
+      "text": "Advanced legal expertise",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "DEAD: category SERVICES is dropped by getUpgradeChain :: isService; never printed."
+    },
+    {
+      "id": "tradeGoods.UPGRADE_GOODS_BY_TIER::town.fromCityOrMetropolis.Rare materials",
+      "text": "Rare materials",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "luxury-class (exotic goods); tier guaranteed by key."
+    },
+    {
+      "id": "tradeGoods.UPGRADE_GOODS_BY_TIER::town.fromHinterland.Food surplus",
+      "text": "Food surplus",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "A hinterland's surplus imported; producer elsewhere. Label is in foodSurplus.js FOOD_SURPLUS_GOODS but that filter guards exports only."
+    },
+    {
+      "id": "tradeGoods.UPGRADE_GOODS_BY_TIER::town.fromHinterland.Raw wool and hides",
+      "text": "Raw wool and hides",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "producer: food-source: livestock (elsewhere)."
+    },
+    {
+      "id": "tradeGoods.UPGRADE_GOODS_BY_TIER::town.fromHinterland.Timber",
+      "text": "Timber",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "producer: unhomed: woodland/sawmill (elsewhere)."
+    },
+    {
+      "id": "tradeGoods.UPGRADE_GOODS_BY_TIER::city.fromMetropolis.International banking",
+      "text": "International banking",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "DEAD: category SERVICES is dropped by getUpgradeChain :: isService; never printed."
+    },
+    {
+      "id": "tradeGoods.UPGRADE_GOODS_BY_TIER::city.fromMetropolis.Highest luxury goods",
+      "text": "Highest luxury goods",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "luxury-class; tier guaranteed by city key."
+    },
+    {
+      "id": "tradeGoods.UPGRADE_GOODS_BY_TIER::city.fromMetropolis.Political legitimacy",
+      "text": "Political legitimacy",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "DEAD: category SERVICES is dropped by getUpgradeChain :: isService; never printed. CATEGORY ERROR (not a good; a polity relation)."
+    },
+    {
+      "id": "tradeGoods.UPGRADE_GOODS_BY_TIER::city.fromHinterland.Bulk food",
+      "text": "Bulk food",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "tradeGoods.UPGRADE_GOODS_BY_TIER::city.fromHinterland.Raw materials",
+      "text": "Raw materials",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "desc \"Ore, timber, wool\"."
+    },
+    {
+      "id": "tradeGoods.UPGRADE_GOODS_BY_TIER::city.fromHinterland.Basic goods for resale",
+      "text": "Basic goods for resale",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "tradeGoods.UPGRADE_GOODS_BY_TIER::metropolis.basic.Massive food requirements",
+      "text": "Massive food requirements",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "CATEGORY ERROR: a need statement, not a good (proposed home: the provisioning-at-scale dependency / food record)."
+    },
+    {
+      "id": "tradeGoods.UPGRADE_GOODS_BY_TIER::metropolis.basic.Raw materials",
+      "text": "Raw materials",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "tradeGoods.UPGRADE_GOODS_BY_TIER::metropolis.basic.Luxury imports",
+      "text": "Luxury imports",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "luxury-class; tier guaranteed by key."
+    }
+  ]
+}

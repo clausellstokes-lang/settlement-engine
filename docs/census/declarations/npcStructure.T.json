@@ -1,0 +1,2407 @@
+{
+  "pool": {
+    "id": "npcStructure.T",
+    "file": "src/generators/npcStructure.js",
+    "drawKind": "T",
+    "drawSite": "npcStructure.js:424 T[cat__cond__rank] (registry; ids are `<category>__<condition>__<rank>.<field>`; condition keys: governance_fractured, corruption, food_crisis, economic_stress, contested, stable — see getPrimaryCondition; keyDeclares should record what each condition key guarantees, e.g. food_crisis → hunger family; corruption → crime)",
+    "colour": false,
+    "crisisScoped": false,
+    "keyDeclares": {
+      "*__governance_fractured__*": [],
+      "*__corruption__*": [
+        "organised crime"
+      ],
+      "*__food_crisis__*": [
+        "hunger"
+      ],
+      "*__economic_stress__*": [],
+      "*__contested__*": [],
+      "*__stable__*": [],
+      "criminal__*__*": [
+        "organised crime"
+      ],
+      "magic__*__*": [
+        "magic"
+      ]
+    },
+    "lines": 288,
+    "declaring": 35,
+    "note": "Condition is getPrimaryCondition's first hit: governance_fractured = publicLegitimacy.governanceFractured (legitimacy score < 30, NOT the politically_fractured stress kind; no atom); corruption = criminalCaptureState corrupted|capture (→ crime, no factsOf home); food_crisis = foodSecurity label famine|deficit (→ hunger per brief, BUT crisisKind.js counts a deficit toward hunger only while some crisis is active, so a deficit with no stress kind is not hunger to the reader); economic_stress = prosperity struggling|poor|subsist (no atom); contested = publicLegitimacy.isContested (no atom); stable = the residual — it does NOT exclude active crisis kinds (a siege with legitimacy and food intact lands here), so the stable lines that assert a stable/well-ordered/low-risk settlement are declared crisis \"calm\". The category key guarantees the NPC (criminal → crime; magic → magic, via worldLaw.allowsRole's magic gate). crafts__* lines are verbatim copies of economy__*. WRONG TODAY: other__{corruption,food_crisis,economic_stress,contested}__* are the other__stable__* text copied by the fill loop at npcStructure.js:387-391, so under a corruption/food/economic/contested condition they print \"in a stable settlement\" / \"in stable conditions\" — the calm declarations on 264-287 record that contradiction against their own key. Also: the subordinate texts never use reg()'s replace() fallback (every reg passes an explicit sub)."
+  },
+  "rows": [
+    {
+      "id": "government__governance_fractured__dominant.position",
+      "text": "Holds nominal governing authority where the legitimacy of that position is in active question. Formal title and real decision-making power are not the same thing.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__governance_fractured__dominant.goal",
+      "text": "Restore enough perceived legitimacy to make the governing role functional, or identify an exit before the gap between title and authority becomes irreversible.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__governance_fractured__dominant.constraint",
+      "text": "Cannot take the action most likely to restore legitimacy without exposing the informal arrangements that currently keep governance functional.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__governance_fractured__subordinate.position",
+      "text": "Occupies a civic position whose authority depends on a governing structure that is itself under question. Institutional standing is borrowed from above.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__governance_fractured__subordinate.goal",
+      "text": "Keep the institutional position viable through the governance crisis without being visibly associated with either the failure or an opportunistic alternative.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__governance_fractured__subordinate.constraint",
+      "text": "Acting to protect the position looks like opportunism; doing nothing risks being caught in the collapse of the structure this position depends on.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__corruption__dominant.position",
+      "text": "Governs within or alongside informal arrangements with criminal interests. Official and actual authority are partially different systems.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__corruption__dominant.goal",
+      "text": "Maintain governance viability without forcing a confrontation with the informal arrangements it depends on.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__corruption__dominant.constraint",
+      "text": "Cannot act decisively against criminal interests without dismantling arrangements the governance structure currently relies on.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__corruption__subordinate.position",
+      "text": "Holds a civic position inside a governance structure with compromised elements, not the source of the corruption, but operating within it.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__corruption__subordinate.goal",
+      "text": "Maintain credibility by demonstrating institutional function in areas the corruption has not reached.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__corruption__subordinate.constraint",
+      "text": "Any investigation or challenge to the corrupt arrangements requires the cooperation of institutions that are themselves compromised.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__food_crisis__dominant.position",
+      "text": "Holds governing authority during supply failure. Civic order and governing legitimacy are both contingent on how this crisis resolves.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__food_crisis__dominant.goal",
+      "text": "Stabilise the supply situation before the crisis opens political space for an alternative authority.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__food_crisis__dominant.constraint",
+      "text": "Cannot distribute what does not exist, and cannot admit the full scale of shortage without accelerating the loss of confidence this role depends on.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__food_crisis__subordinate.position",
+      "text": "Occupies a civic position with limited direct control over supply. Accountable for crisis conditions without the authority to address them.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__food_crisis__subordinate.goal",
+      "text": "Redirect accountability upward while demonstrating visible institutional effort that does not require resources this position controls.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__food_crisis__subordinate.constraint",
+      "text": "Visible effort without visible results extends accountability rather than resolving it.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__economic_stress__dominant.position",
+      "text": "Governs a settlement under persistent economic pressure. The faction's legitimacy depends partly on economic performance it cannot currently deliver.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__economic_stress__dominant.goal",
+      "text": "Demonstrate governance value through means that do not depend on economic conditions the settlement currently lacks.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__economic_stress__dominant.constraint",
+      "text": "Cannot make the structural investments that would address the economic situation without resources the settlement does not have.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__economic_stress__subordinate.position",
+      "text": "Holds a civic position in an economically pressured settlement where governance capacity is reduced along with fiscal capacity.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__economic_stress__subordinate.goal",
+      "text": "Protect the institutional role by making it indispensable for whatever limited resources remain to be managed.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__economic_stress__subordinate.constraint",
+      "text": "Indispensability in a resource-constrained environment means competing with other civic positions for the same shrinking share.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__contested__dominant.position",
+      "text": "Holds governing authority that is contested. The position is held but not secured.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__contested__dominant.goal",
+      "text": "Convert contested authority into stable authority before the contest resolves in someone else's favor.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__contested__dominant.constraint",
+      "text": "Every move to consolidate the position risks galvanizing opposition; every inaction gives the opposition time to consolidate instead.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__contested__subordinate.position",
+      "text": "Occupies a civic position whose institutional standing depends on a governing authority that is itself under challenge.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__contested__subordinate.goal",
+      "text": "Navigate the political contest without committing to a side until the outcome is sufficiently clear to make the commitment worthwhile.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__contested__subordinate.constraint",
+      "text": "Delayed commitment reduces the value of the eventual alignment without reducing the cost of having waited.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__stable__dominant.position",
+      "text": "Holds governing authority in a settlement with functional legitimacy. The position is secure enough to act from rather than defend.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__stable__dominant.goal",
+      "text": "Use current stability to address structural vulnerabilities before conditions change.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__stable__dominant.constraint",
+      "text": "Stability reduces the sense of urgency that would justify the resources and disruption required to address those vulnerabilities.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__stable__subordinate.position",
+      "text": "Holds a civic position in a well-functioning settlement. The role is defined by administration rather than crisis.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__stable__subordinate.goal",
+      "text": "Advance the faction's institutional standing through the credibility that comes from competent administration of current responsibilities.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__stable__subordinate.constraint",
+      "text": "Credible administration is expected, not rewarded. The upside is limited and the downside of failure is disproportionate.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__governance_fractured__dominant.position",
+      "text": "Commands enforcement capacity where civilian governance is failing. The military's relationship with civilian authority is under pressure.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__governance_fractured__dominant.goal",
+      "text": "Maintain operational cohesion and institutional loyalty while the political situation makes the chain of command ambiguous.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__governance_fractured__dominant.constraint",
+      "text": "Cannot act unilaterally to fill the governance vacuum without becoming a political actor in ways that compromise the institutional neutrality the role requires.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__governance_fractured__subordinate.position",
+      "text": "Commands a subordinate enforcement unit in a settlement where institutional authority is fragmented. Orders may be coming from multiple competing sources.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__governance_fractured__subordinate.goal",
+      "text": "Keep the unit functional and loyal to the institution rather than to any individual faction competing to claim the enforcement apparatus.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__governance_fractured__subordinate.constraint",
+      "text": "Institutional loyalty in a fragmented governance environment requires active management that cannot be publicly acknowledged as such.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__corruption__dominant.position",
+      "text": "Leads enforcement in a settlement where criminal interests have arrangements with parts of the security apparatus.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__corruption__dominant.goal",
+      "text": "Determine which elements of the enforcement apparatus are reliable without triggering a response before that determination is complete.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__corruption__dominant.constraint",
+      "text": "Investigating the arrangements exposes the investigators to the same pressures that created them.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__corruption__subordinate.position",
+      "text": "Commands a subordinate enforcement unit inside a structure where corruption is known to have reached some levels.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__corruption__subordinate.goal",
+      "text": "Maintain unit effectiveness and personal integrity without creating the kind of visibility that makes the unit a target for either the corrupt interests or those investigating them.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__corruption__subordinate.constraint",
+      "text": "Visibility in either direction (too compliant or too resistant) creates risk the unit cannot currently afford.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__food_crisis__dominant.position",
+      "text": "Responsible for public order during supply failure: the conditions that most reliably produce civil disorder are currently present.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__food_crisis__dominant.goal",
+      "text": "Maintain order through the crisis without deploying force in ways that create grievances that outlast it.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__food_crisis__dominant.constraint",
+      "text": "Enforcement sufficient to prevent disorder may be enforcement sufficient to generate resentment. The threshold is not visible in advance.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__food_crisis__subordinate.position",
+      "text": "Commands a subordinate enforcement unit during a supply crisis. Responsible for a sector where the pressure is acutely felt.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__food_crisis__subordinate.goal",
+      "text": "Keep order in the assigned sector with the resources available, without creating incidents that escalate beyond the unit's capacity.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__food_crisis__subordinate.constraint",
+      "text": "The resources available are not sufficient for the conditions present. Performance is being evaluated against a standard the conditions make unachievable.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__economic_stress__dominant.position",
+      "text": "Maintains order in a settlement under economic pressure, where enforcement is more necessary and less funded than at other times.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__economic_stress__dominant.goal",
+      "text": "Keep enforcement visible enough to deter disorder without making the enforcement apparatus the primary civic grievance.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__economic_stress__dominant.constraint",
+      "text": "Underfunding of enforcement is itself a product of the economic conditions that make enforcement more necessary.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__economic_stress__subordinate.position",
+      "text": "Commands a subordinate enforcement unit in an economically stressed settlement where unit resources, morale, and staffing are all under pressure.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__economic_stress__subordinate.goal",
+      "text": "Maintain unit effectiveness with reduced resources while preventing the visible deterioration in capacity from becoming an invitation.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__economic_stress__subordinate.constraint",
+      "text": "Visible deterioration invites exactly the disorder it signals the inability to contain.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__contested__dominant.position",
+      "text": "Commands enforcement in a settlement where competing political claims create pressure on the loyalty of the security forces.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__contested__dominant.goal",
+      "text": "Keep the enforcement apparatus out of the political contest long enough for the contest to resolve.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__contested__dominant.constraint",
+      "text": "Both sides of the contest want enforcement on their side. Neutrality requires active management that cannot be acknowledged publicly.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__contested__subordinate.position",
+      "text": "Leads a subordinate enforcement unit whose institutional loyalties are being tested by the political contest above it.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__contested__subordinate.goal",
+      "text": "Keep the unit's loyalty to the institution intact through the contest rather than allowing it to fragment along factional lines.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__contested__subordinate.constraint",
+      "text": "Unit members have personal loyalties that do not necessarily align with institutional neutrality.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__stable__dominant.position",
+      "text": "Commands enforcement in a well-ordered settlement. The role is preventive rather than responsive, and authority derives from institutional legitimacy.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__stable__dominant.goal",
+      "text": "Maintain the enforcement capacity and institutional culture that makes current stability possible.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__stable__dominant.constraint",
+      "text": "Stable conditions make it harder to justify the resources and authority that would be needed if conditions changed.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__stable__subordinate.position",
+      "text": "Leads a subordinate enforcement unit in a stable settlement. The role is routine, the risks are low, and advancement requires distinguishing the unit in conditions that offer few distinctions.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__stable__subordinate.goal",
+      "text": "Build unit reputation and institutional standing through consistent performance of routine responsibilities.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__stable__subordinate.constraint",
+      "text": "Routine excellence is expected and unremarkable; meaningful advancement requires either a crisis or a patron.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__governance_fractured__dominant.position",
+      "text": "Controls organized commercial infrastructure in a settlement where governance is failing. Economic institutions are currently more functional than civic ones.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__governance_fractured__dominant.goal",
+      "text": "Formalize the independent operational authority that governance failure has created in practice, before reconsolidation reasserts control.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__governance_fractured__dominant.constraint",
+      "text": "Formalizing commercial independence too visibly invites a reconsolidated governing authority to treat it as a threat rather than an asset.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__governance_fractured__subordinate.position",
+      "text": "Operates commercial interests from a position secondary to the dominant commercial faction in a settlement with failing governance.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__governance_fractured__subordinate.goal",
+      "text": "Use the governance instability to advance commercial standing relative to the dominant commercial interest without triggering a defensive response.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__governance_fractured__subordinate.constraint",
+      "text": "The governance instability that creates opportunity also creates uncertainty. The same conditions that allow advancement can reverse it.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__corruption__dominant.position",
+      "text": "Operates in a commercial environment where criminal interests have informal arrangements with enforcement. The line between legitimate and accommodated commerce is blurred.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__corruption__dominant.goal",
+      "text": "Maintain commercial operations without becoming either a target of the criminal arrangements or a dependent of them.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__corruption__dominant.constraint",
+      "text": "The informal arrangements with enforcement make legitimate commerce partially reliant on the same corruption it must avoid.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__corruption__subordinate.position",
+      "text": "Operates smaller commercial interests within a commercial environment compromised by criminal accommodation.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__corruption__subordinate.goal",
+      "text": "Distinguish the commercial position from the corruption without provoking retaliation from the interests that benefit from it.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__corruption__subordinate.constraint",
+      "text": "Visible distinction from the corruption draws attention; accommodation normalizes it. Neither option is cost-free.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__food_crisis__dominant.position",
+      "text": "Controls distribution infrastructure for a critical resource at a moment when that resource is in shortage. The position carries unusual leverage and unusual risk.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__food_crisis__dominant.goal",
+      "text": "Manage the supply situation in a way that preserves commercial relationships and reputation beyond this crisis.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__food_crisis__dominant.constraint",
+      "text": "Any pricing or allocation decision during a shortage is a political act, regardless of intent.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__food_crisis__subordinate.position",
+      "text": "Operates commercial interests in a supply crisis from a position without control over the primary distribution channel.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__food_crisis__subordinate.goal",
+      "text": "Find commercial position in the crisis that does not depend on controlling the critical shortage commodity.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__food_crisis__subordinate.constraint",
+      "text": "Alternative commercial positions during a supply crisis are defined by what the crisis displaces. The opportunity and the instability are the same thing.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__economic_stress__dominant.position",
+      "text": "Operates in a settlement under persistent economic pressure. The commercial position is maintained but not growing.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__economic_stress__dominant.goal",
+      "text": "Identify which commercial relationships will survive the current stress and consolidate around those.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__economic_stress__dominant.constraint",
+      "text": "Selective consolidation requires visibly abandoning some positions, creating vulnerability in the ones being retained.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__economic_stress__subordinate.position",
+      "text": "Operates smaller commercial interests in an economically stressed settlement where consolidation by larger commercial interests reduces operational space.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__economic_stress__subordinate.goal",
+      "text": "Find the commercial niche that larger interests do not find worth contesting.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__economic_stress__subordinate.constraint",
+      "text": "Niches that larger interests do not contest are typically ones with limited growth potential.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__contested__dominant.position",
+      "text": "Holds commercial structural influence in a settlement where governing authority is contested. Commercial interests are positioned to benefit from or be damaged by how the contest resolves.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__contested__dominant.goal",
+      "text": "Position commercial interests to maintain relevance regardless of which faction prevails.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__contested__dominant.constraint",
+      "text": "Cultivating relationships with both sides requires that neither side trusts you fully.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__contested__subordinate.position",
+      "text": "Operates commercial interests that are positioned between the competing factions in a contested settlement.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__contested__subordinate.goal",
+      "text": "Maintain commercial relationships with all significant factions without being treated as an asset by any of them.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__contested__subordinate.constraint",
+      "text": "Commercial neutrality looks like either timidity or calculation to the factions seeking commitment.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__stable__dominant.position",
+      "text": "Controls organized commercial infrastructure in a functioning settlement. The position is secure and the leverage is real.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__stable__dominant.goal",
+      "text": "Convert commercial leverage into more durable institutional advantages before conditions change.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__stable__dominant.constraint",
+      "text": "Visible accumulation of institutional advantage invites regulatory and political attention.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__stable__subordinate.position",
+      "text": "Operates commercial interests in a stable settlement from a position secondary to the dominant commercial faction.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__stable__subordinate.goal",
+      "text": "Grow commercial standing within the constraints the dominant commercial interest creates.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__stable__subordinate.constraint",
+      "text": "Growth that encroaches on the dominant interest's commercial territory invites a response; growth that doesn't stays marginal.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "crafts__governance_fractured__dominant.position",
+      "text": "Controls organized commercial infrastructure in a settlement where governance is failing. Economic institutions are currently more functional than civic ones.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "crafts__governance_fractured__dominant.goal",
+      "text": "Formalize the independent operational authority that governance failure has created in practice, before reconsolidation reasserts control.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "crafts__governance_fractured__dominant.constraint",
+      "text": "Formalizing commercial independence too visibly invites a reconsolidated governing authority to treat it as a threat rather than an asset.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "crafts__governance_fractured__subordinate.position",
+      "text": "Operates commercial interests from a position secondary to the dominant commercial faction in a settlement with failing governance.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "crafts__governance_fractured__subordinate.goal",
+      "text": "Use the governance instability to advance commercial standing relative to the dominant commercial interest without triggering a defensive response.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "crafts__governance_fractured__subordinate.constraint",
+      "text": "The governance instability that creates opportunity also creates uncertainty. The same conditions that allow advancement can reverse it.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "crafts__corruption__dominant.position",
+      "text": "Operates in a commercial environment where criminal interests have informal arrangements with enforcement. The line between legitimate and accommodated commerce is blurred.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "crafts__corruption__dominant.goal",
+      "text": "Maintain commercial operations without becoming either a target of the criminal arrangements or a dependent of them.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "crafts__corruption__dominant.constraint",
+      "text": "The informal arrangements with enforcement make legitimate commerce partially reliant on the same corruption it must avoid.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "crafts__corruption__subordinate.position",
+      "text": "Operates smaller commercial interests within a commercial environment compromised by criminal accommodation.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "crafts__corruption__subordinate.goal",
+      "text": "Distinguish the commercial position from the corruption without provoking retaliation from the interests that benefit from it.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "crafts__corruption__subordinate.constraint",
+      "text": "Visible distinction from the corruption draws attention; accommodation normalizes it. Neither option is cost-free.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "crafts__food_crisis__dominant.position",
+      "text": "Controls distribution infrastructure for a critical resource at a moment when that resource is in shortage. The position carries unusual leverage and unusual risk.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "crafts__food_crisis__dominant.goal",
+      "text": "Manage the supply situation in a way that preserves commercial relationships and reputation beyond this crisis.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "crafts__food_crisis__dominant.constraint",
+      "text": "Any pricing or allocation decision during a shortage is a political act, regardless of intent.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "crafts__food_crisis__subordinate.position",
+      "text": "Operates commercial interests in a supply crisis from a position without control over the primary distribution channel.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "crafts__food_crisis__subordinate.goal",
+      "text": "Find commercial position in the crisis that does not depend on controlling the critical shortage commodity.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "crafts__food_crisis__subordinate.constraint",
+      "text": "Alternative commercial positions during a supply crisis are defined by what the crisis displaces. The opportunity and the instability are the same thing.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "crafts__economic_stress__dominant.position",
+      "text": "Operates in a settlement under persistent economic pressure. The commercial position is maintained but not growing.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "crafts__economic_stress__dominant.goal",
+      "text": "Identify which commercial relationships will survive the current stress and consolidate around those.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "crafts__economic_stress__dominant.constraint",
+      "text": "Selective consolidation requires visibly abandoning some positions, creating vulnerability in the ones being retained.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "crafts__economic_stress__subordinate.position",
+      "text": "Operates smaller commercial interests in an economically stressed settlement where consolidation by larger commercial interests reduces operational space.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "crafts__economic_stress__subordinate.goal",
+      "text": "Find the commercial niche that larger interests do not find worth contesting.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "crafts__economic_stress__subordinate.constraint",
+      "text": "Niches that larger interests do not contest are typically ones with limited growth potential.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "crafts__contested__dominant.position",
+      "text": "Holds commercial structural influence in a settlement where governing authority is contested. Commercial interests are positioned to benefit from or be damaged by how the contest resolves.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "crafts__contested__dominant.goal",
+      "text": "Position commercial interests to maintain relevance regardless of which faction prevails.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "crafts__contested__dominant.constraint",
+      "text": "Cultivating relationships with both sides requires that neither side trusts you fully.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "crafts__contested__subordinate.position",
+      "text": "Operates commercial interests that are positioned between the competing factions in a contested settlement.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "crafts__contested__subordinate.goal",
+      "text": "Maintain commercial relationships with all significant factions without being treated as an asset by any of them.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "crafts__contested__subordinate.constraint",
+      "text": "Commercial neutrality looks like either timidity or calculation to the factions seeking commitment.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "crafts__stable__dominant.position",
+      "text": "Controls organized commercial infrastructure in a functioning settlement. The position is secure and the leverage is real.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "crafts__stable__dominant.goal",
+      "text": "Convert commercial leverage into more durable institutional advantages before conditions change.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "crafts__stable__dominant.constraint",
+      "text": "Visible accumulation of institutional advantage invites regulatory and political attention.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "crafts__stable__subordinate.position",
+      "text": "Operates commercial interests in a stable settlement from a position secondary to the dominant commercial faction.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "crafts__stable__subordinate.goal",
+      "text": "Grow commercial standing within the constraints the dominant commercial interest creates.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "crafts__stable__subordinate.constraint",
+      "text": "Growth that encroaches on the dominant interest's commercial territory invites a response; growth that doesn't stays marginal.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__governance_fractured__dominant.position",
+      "text": "Holds institutional religious authority in a settlement where civic governance is failing. Religious institutions often absorb civic functions when secular authority contracts.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__governance_fractured__dominant.goal",
+      "text": "Extend the institution's civic role in ways that survive whatever governance reconsolidation follows.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__governance_fractured__dominant.constraint",
+      "text": "Civic engagement that appears opportunistic risks being reversed by a reconsolidated authority that resents the encroachment.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__governance_fractured__subordinate.position",
+      "text": "Serves a religious position secondary to the dominant religious institution in a settlement with failing civic governance.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__governance_fractured__subordinate.goal",
+      "text": "Maintain the position's relevance by demonstrating pastoral function that does not depend on the failing civic structures.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__governance_fractured__subordinate.constraint",
+      "text": "Pastoral relevance without institutional authority is difficult to convert into institutional standing when the governance reconsolidates.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__corruption__dominant.position",
+      "text": "Holds institutional religious authority in a settlement where civic institutions are compromised. The church's moral authority depends on distance from the corruption.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__corruption__dominant.goal",
+      "text": "Sustain the institution's credibility while navigating a civic environment where most institutions have accommodated compromise.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__corruption__dominant.constraint",
+      "text": "The institution depends on civic structures for land rights and legal standing. Complete separation from compromised institutions is unavailable.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__corruption__subordinate.position",
+      "text": "Holds a religious position that must maintain pastoral credibility in a community aware of institutional corruption in the settlement's civic structures.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__corruption__subordinate.goal",
+      "text": "Build pastoral trust at the community level that is not contingent on the credibility of the civic structures above it.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__corruption__subordinate.constraint",
+      "text": "Pastoral trust built in opposition to civic institutions is vulnerable to any reconsolidation that restores civic legitimacy.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__food_crisis__dominant.position",
+      "text": "Leads a religious institution with direct welfare capacity during a supply crisis. Charitable infrastructure becomes a primary social stabilizer.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__food_crisis__dominant.goal",
+      "text": "Deploy welfare capacity in ways that address the crisis and reinforce the institution's civic indispensability.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__food_crisis__dominant.constraint",
+      "text": "The institution's charitable capacity is finite; prioritizing distribution for institutional benefit rather than need creates the scandal that outlasts the crisis.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__food_crisis__subordinate.position",
+      "text": "Serves a religious position with limited independent welfare capacity during a supply crisis.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__food_crisis__subordinate.goal",
+      "text": "Connect the community under pastoral care to whatever relief infrastructure exists, maintaining pastoral standing as a reliable intermediary.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__food_crisis__subordinate.constraint",
+      "text": "Intermediary standing depends on the reliability of what is being intermediated: if the relief infrastructure fails, the position loses credibility along with it.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__economic_stress__dominant.position",
+      "text": "Holds religious authority in a settlement under economic pressure. The church's land holdings and endowments are both assets and targets.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__economic_stress__dominant.goal",
+      "text": "Preserve institutional resources through the economic pressure without appearing to prosper from conditions that are harming the population.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__economic_stress__dominant.constraint",
+      "text": "Any use of institutional resources to protect institutional interests during population-level hardship is visible.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__economic_stress__subordinate.position",
+      "text": "Holds a religious position secondary to the dominant institution in an economically stressed settlement where religious endowment is under pressure.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__economic_stress__subordinate.goal",
+      "text": "Maintain the position's function with reduced resource support from institutional sources.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__economic_stress__subordinate.constraint",
+      "text": "Reduced resources reduce the pastoral capacity that justifies the position's existence.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__contested__dominant.position",
+      "text": "Holds institutional religious authority during political contestation. Both sides of a political contest typically want clerical endorsement.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__contested__dominant.goal",
+      "text": "Delay public alignment until the outcome is clear enough to make the endorsement worthwhile rather than premature.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__contested__dominant.constraint",
+      "text": "The longer neutrality is maintained, the less valuable the eventual endorsement becomes.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__contested__subordinate.position",
+      "text": "Serves a religious position under the dominant religious institution during political contestation.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__contested__subordinate.goal",
+      "text": "Follow the institutional alignment when it is made without appearing to have advocated for it prematurely.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__contested__subordinate.constraint",
+      "text": "Following the institutional alignment requires having subordinated personal judgment to institutional authority. The cost is the same regardless of whether the alignment was correct.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__stable__dominant.position",
+      "text": "Leads an established religious institution in a settlement with functional civic order.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__stable__dominant.goal",
+      "text": "Maintain the institution's role in civic life through the legitimacy of pastoral service rather than political pressure.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__stable__dominant.constraint",
+      "text": "Institutional stability tends toward complacency. The challenges that would justify institutional expansion are currently absent.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__stable__subordinate.position",
+      "text": "Serves a religious position secondary to the dominant institution in a stable settlement.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__stable__subordinate.goal",
+      "text": "Build pastoral standing and institutional credibility through consistent service in a context where the dominant institution sets the standard.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__stable__subordinate.constraint",
+      "text": "Excellence within the dominant institution's frame does not distinguish the position; deviation from it invites institutional friction.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal__governance_fractured__dominant.position",
+      "text": "Operates criminal interests in a settlement where governance is failing. A governance vacuum is the optimal environment for criminal operations to expand.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal__governance_fractured__dominant.goal",
+      "text": "Extend operational scope while governance is weakened in ways that become embedded before reconsolidation.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal__governance_fractured__dominant.constraint",
+      "text": "Expanding too visibly during governance failure risks triggering a consolidation response specifically aimed at criminal interests.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal__governance_fractured__subordinate.position",
+      "text": "Operates within a criminal network as a position secondary to the dominant criminal interest in a settlement with failing governance.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal__governance_fractured__subordinate.goal",
+      "text": "Advance within the criminal hierarchy using the conditions of governance failure.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal__governance_fractured__subordinate.constraint",
+      "text": "Advancement within the hierarchy requires either demonstrating value to it or demonstiting threat to it. Both are visible to the hierarchy.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal__corruption__dominant.position",
+      "text": "Has arrangements with enforcement that create unusual operational freedom. The position depends on those arrangements remaining stable.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal__corruption__dominant.goal",
+      "text": "Maintain the arrangements that allow current operations while managing the risk that they become a liability if political conditions change.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal__corruption__dominant.constraint",
+      "text": "The arrangements are known to multiple parties. They are leverage over the operation as much as they are protection for it.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal__corruption__subordinate.position",
+      "text": "Operates a position within a criminal network that benefits from the network's enforcement arrangements without being the architect of them.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal__corruption__subordinate.goal",
+      "text": "Leverage the operational freedom the arrangements provide without becoming dependent on their continuation.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal__corruption__subordinate.constraint",
+      "text": "Operational independence from the arrangements while continuing to benefit from them requires a position the network may not tolerate.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal__food_crisis__dominant.position",
+      "text": "Controls informal distribution channels for goods that are in shortage. Supply crises create extraordinary criminal economic opportunity.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal__food_crisis__dominant.goal",
+      "text": "Profit from the shortage through parallel distribution without triggering a response that uses the public interest as justification.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal__food_crisis__dominant.constraint",
+      "text": "Visible profiteering during a population-level crisis creates the moral clarity that even compromised enforcement cannot ignore.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal__food_crisis__subordinate.position",
+      "text": "Operates a secondary position in a criminal network that is expanding into supply crisis opportunity.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal__food_crisis__subordinate.goal",
+      "text": "Secure a reliable role in the crisis distribution network before the dominant criminal interest consolidates its position.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal__food_crisis__subordinate.constraint",
+      "text": "Securing that role requires either offering something the dominant interest needs or accepting a subordinate position that leaves future leverage limited.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal__economic_stress__dominant.position",
+      "text": "Operates in an economically pressured settlement where desperation expands the pool accessible to criminal recruitment and exploitation.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal__economic_stress__dominant.goal",
+      "text": "Convert expanded recruitment opportunity into operational capacity that persists after economic conditions ease.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal__economic_stress__dominant.constraint",
+      "text": "Operations built on desperation are vulnerable to improvement in the economic conditions that created them.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal__economic_stress__subordinate.position",
+      "text": "Holds a secondary position in a criminal network operating in an economically stressed settlement.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal__economic_stress__subordinate.goal",
+      "text": "Build a stable position within the network that is not contingent on the economic conditions that created the opportunity.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal__economic_stress__subordinate.constraint",
+      "text": "A stable position within the network requires demonstrated value that survives changing conditions. This is harder to demonstrate during the conditions themselves.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal__contested__dominant.position",
+      "text": "Operates criminal interests in a contested political environment where enforcement attention is distracted.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal__contested__dominant.goal",
+      "text": "Expand operational positions during the political distraction that would face more resistance under settled conditions.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal__contested__dominant.constraint",
+      "text": "Both sides of a political contest may attempt to use criminal enforcement as a tool against the other. The current operational freedom is unpredictable.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal__contested__subordinate.position",
+      "text": "Holds a position within a criminal network that is attempting to expand during political contestation.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal__contested__subordinate.goal",
+      "text": "Consolidate personal position within the network during the expansion, independent of whether the expansion succeeds.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal__contested__subordinate.constraint",
+      "text": "Network position consolidated during an expansion that fails is exposed when the network contracts.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal__stable__dominant.position",
+      "text": "Operates within a well-ordered settlement where enforcement is functional and operational space is defined by what enforcement chooses not to pursue.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal__stable__dominant.goal",
+      "text": "Maintain operations within the constraints that functional enforcement creates, without triggering focused attention.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal__stable__dominant.constraint",
+      "text": "Sustained operational success below the enforcement threshold makes the operation visible to those who look for the threshold.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal__stable__subordinate.position",
+      "text": "Holds a secondary position in a criminal network operating in a settled environment with functional enforcement.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal__stable__subordinate.goal",
+      "text": "Demonstrate reliability within the network sufficient to advance position without creating visibility that enforcement acts on.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "criminal__stable__subordinate.constraint",
+      "text": "Advancement within the network requires demonstrating capacity. Demonstration is visibility.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__governance_fractured__dominant.position",
+      "text": "Holds arcane institutional authority in a settlement with failing civic governance. Arcane services may hold leverage if structurally necessary.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__governance_fractured__dominant.goal",
+      "text": "Convert temporary crisis leverage into more durable institutional standing.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__governance_fractured__dominant.constraint",
+      "text": "Arcane authority claimed during a governance crisis is typically the first thing a reconsolidated government constrains.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__governance_fractured__subordinate.position",
+      "text": "Practices arcane arts in a secondary institutional position in a settlement with failing governance.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__governance_fractured__subordinate.goal",
+      "text": "Maintain operational position through the governance crisis without becoming associated with any faction competing to resolve it.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__governance_fractured__subordinate.constraint",
+      "text": "Neutrality in a crisis that affects all institutions is difficult to sustain without appearing to have calculated it.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__corruption__dominant.position",
+      "text": "Maintains arcane operations in a settlement with compromised institutions. Arcane services used for concealment create leverage and obligation.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__corruption__dominant.goal",
+      "text": "Maintain institutional independence without becoming so embedded in the corruption that independence becomes unavailable.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__corruption__dominant.constraint",
+      "text": "Arcane services used for concealment create relationships that are difficult to exit.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__corruption__subordinate.position",
+      "text": "Practices arcane arts in a position secondary to the dominant arcane institution in a compromised institutional environment.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__corruption__subordinate.goal",
+      "text": "Sustain the practice by providing arcane services that are not already dominated by the institutional position above.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__corruption__subordinate.constraint",
+      "text": "Services not dominated by the primary institution tend to be those the primary institution has declined: often for reasons.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__food_crisis__dominant.position",
+      "text": "Holds arcane institutional authority in a supply crisis. Magical production or preservation capacity, if available, becomes a critical resource.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__food_crisis__dominant.goal",
+      "text": "Deploy arcane capacity to address the crisis while establishing the institutional indispensability that justifies expanded authority.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__food_crisis__dominant.constraint",
+      "text": "Arcane solutions to supply crises create expectations that cannot be sustained indefinitely.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__food_crisis__subordinate.position",
+      "text": "Practices arcane arts in a position that could contribute to crisis response but lacks the institutional authority to deploy independently.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__food_crisis__subordinate.goal",
+      "text": "Make the arcane contribution through institutional channels that increase rather than circumvent personal standing.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__food_crisis__subordinate.constraint",
+      "text": "Contributing through channels that constrain the contribution limits both the impact and the credit.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__economic_stress__dominant.position",
+      "text": "Maintains arcane institutional operations in an economically pressured settlement. Arcane services are among the first to face budget reduction.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__economic_stress__dominant.goal",
+      "text": "Identify which arcane services are structurally indispensable enough to be funded under economic pressure.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__economic_stress__dominant.constraint",
+      "text": "Demonstrating indispensability may require deploying services in ways that reduce their scarcity and therefore their leverage.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__economic_stress__subordinate.position",
+      "text": "Practices arcane arts in a secondary institutional position in an economically pressured settlement where arcane patronage is declining.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__economic_stress__subordinate.goal",
+      "text": "Find the arcane service niche that survives economic pressure because it is necessary rather than convenient.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__economic_stress__subordinate.constraint",
+      "text": "Necessity-level arcane services are typically lower-status and lower-compensation than the services economic pressure eliminates.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__contested__dominant.position",
+      "text": "Holds arcane authority in a contested political environment. Arcane capacity is a resource both sides want access to.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__contested__dominant.goal",
+      "text": "Preserve the institution's autonomy through the political transition, regardless of which faction prevails.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__contested__dominant.constraint",
+      "text": "Maintaining neutrality requires declining requests from both sides, which generates resentment from both.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__contested__subordinate.position",
+      "text": "Practices arcane arts in a secondary position in a contested political environment.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__contested__subordinate.goal",
+      "text": "Position the practice to be valuable to whatever governance emerges from the contest without being committed to any specific outcome.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__contested__subordinate.constraint",
+      "text": "Value to multiple competing factions requires keeping the scope of arcane services narrow enough that none of them perceive a conflict of interest.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__stable__dominant.position",
+      "text": "Leads established arcane institutions in a functional settlement. The position is secure, the services are in demand.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__stable__dominant.goal",
+      "text": "Maintain and extend the arcane institution's role in civic and commercial life.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__stable__dominant.constraint",
+      "text": "Arcane authority in stable conditions faces gradual bureaucratic containment. Institutionalization brings limits alongside legitimacy.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__stable__subordinate.position",
+      "text": "Practices arcane arts in a secondary institutional position in a stable settlement.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__stable__subordinate.goal",
+      "text": "Build practical arcane standing through the quality of services rather than institutional authority.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__stable__subordinate.constraint",
+      "text": "Practical standing without institutional authority is vulnerable to institutional decisions about who is permitted to practice.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__governance_fractured__dominant.position",
+      "text": "Holds hereditary or traditional status in a settlement where formal governance is under pressure. Traditional authority often gains relative standing when formal authority loses it.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__governance_fractured__dominant.goal",
+      "text": "Convert governance instability into a restoration of prerogatives that formal governance had constrained.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__governance_fractured__dominant.constraint",
+      "text": "Traditional claims that would have been dismissed under stable governance invite more scrutiny under conditions where everyone is watching for illegitimate power grabs.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__governance_fractured__subordinate.position",
+      "text": "Holds traditional status secondary to the dominant traditional interest in a settlement with failing governance.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__governance_fractured__subordinate.goal",
+      "text": "Use the governance instability to close the gap between the secondary traditional position and the dominant one.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__governance_fractured__subordinate.constraint",
+      "text": "Advancing relative to the dominant traditional interest during a crisis positions the advance as opportunistic rather than earned.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__stable__dominant.position",
+      "text": "Holds traditional or hereditary status in a stable settlement where institutional competition constrains traditional influence.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__stable__dominant.goal",
+      "text": "Maintain traditional standing within the constraints that stable institutional competition creates.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__stable__dominant.constraint",
+      "text": "Traditional authority in stable conditions is in slow structural decline relative to institutional authority.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__stable__subordinate.position",
+      "text": "Holds a secondary traditional or hereditary position in a stable settlement.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__stable__subordinate.goal",
+      "text": "Convert traditional standing into operational relevance through alliances that institutional actors find useful.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__stable__subordinate.constraint",
+      "text": "Usefulness to institutional actors defines the scope of permitted influence, not the traditional claim itself.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__corruption__dominant.position",
+      "text": "Holds traditional or hereditary status in a stable settlement where institutional competition constrains traditional influence.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__corruption__dominant.goal",
+      "text": "Maintain traditional standing within the constraints that stable institutional competition creates.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__corruption__dominant.constraint",
+      "text": "Traditional authority in stable conditions is in slow structural decline relative to institutional authority.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__corruption__subordinate.position",
+      "text": "Holds a secondary traditional or hereditary position in a stable settlement.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__corruption__subordinate.goal",
+      "text": "Convert traditional standing into operational relevance through alliances that institutional actors find useful.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__corruption__subordinate.constraint",
+      "text": "Usefulness to institutional actors defines the scope of permitted influence, not the traditional claim itself.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__food_crisis__dominant.position",
+      "text": "Holds traditional or hereditary status in a stable settlement where institutional competition constrains traditional influence.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__food_crisis__dominant.goal",
+      "text": "Maintain traditional standing within the constraints that stable institutional competition creates.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__food_crisis__dominant.constraint",
+      "text": "Traditional authority in stable conditions is in slow structural decline relative to institutional authority.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__food_crisis__subordinate.position",
+      "text": "Holds a secondary traditional or hereditary position in a stable settlement.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__food_crisis__subordinate.goal",
+      "text": "Convert traditional standing into operational relevance through alliances that institutional actors find useful.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__food_crisis__subordinate.constraint",
+      "text": "Usefulness to institutional actors defines the scope of permitted influence, not the traditional claim itself.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__economic_stress__dominant.position",
+      "text": "Holds traditional or hereditary status in a stable settlement where institutional competition constrains traditional influence.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__economic_stress__dominant.goal",
+      "text": "Maintain traditional standing within the constraints that stable institutional competition creates.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__economic_stress__dominant.constraint",
+      "text": "Traditional authority in stable conditions is in slow structural decline relative to institutional authority.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__economic_stress__subordinate.position",
+      "text": "Holds a secondary traditional or hereditary position in a stable settlement.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__economic_stress__subordinate.goal",
+      "text": "Convert traditional standing into operational relevance through alliances that institutional actors find useful.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__economic_stress__subordinate.constraint",
+      "text": "Usefulness to institutional actors defines the scope of permitted influence, not the traditional claim itself.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__contested__dominant.position",
+      "text": "Holds traditional or hereditary status in a stable settlement where institutional competition constrains traditional influence.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__contested__dominant.goal",
+      "text": "Maintain traditional standing within the constraints that stable institutional competition creates.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__contested__dominant.constraint",
+      "text": "Traditional authority in stable conditions is in slow structural decline relative to institutional authority.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__contested__subordinate.position",
+      "text": "Holds a secondary traditional or hereditary position in a stable settlement.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__contested__subordinate.goal",
+      "text": "Convert traditional standing into operational relevance through alliances that institutional actors find useful.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__contested__subordinate.constraint",
+      "text": "Usefulness to institutional actors defines the scope of permitted influence, not the traditional claim itself.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    }
+  ]
+}

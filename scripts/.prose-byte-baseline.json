@@ -4,7 +4,7 @@
   "_ceilingArithmetic": "The CEILING is ARCH §10's, not this file's invention. §10 sizes the corpus on measured unit costs: today's six state leaves faced and render-meta'd ≈ 1.78 MB; the modifier pools' render fields ≈ 30 KB; new pieces at the CEILING (≈ 1200 semantic pieces ≈ 960 KB) ⇒ ≈ 2.8 MB raw for the SIX STATE LEAVES TOGETHER. `ceilingTotalRawStateLeaves` is that 2,800,000, and each state leaf's `ceilingRaw` is that total APPORTIONED BY ITS SHARE OF TODAY'S CORPUS: round(2800000 × genesis.raw ÷ 641410). The six rounded shares sum to exactly 2,800,000 with no remainder to allocate (asserted). Every leaf therefore carries the same 4.3654× headroom, which is the point: the ratchet is set from the CEILING so car 8's rewrite-and-faces wave cannot breach it, and a leaf that grows out of proportion to the rest still reds. `ceilingGzip` is round(ceilingRaw ÷ 4.5), §10's over-the-wire ratio at the ceiling (distinct faces raise entropy below today's measured 5.27 : 1); the six sum to 622,222, inside §10's stated 0.5–0.65 MB band (asserted).",
   "_causalLeafGround": "THE CAUSAL LEAF TAKES NO HEADROOM, AND THAT IS A RULING, NOT AN OVERSIGHT. Its ceilingRaw and ceilingGzip equal its genesis bytes. Three grounds: ARCH §11 refuses 'no wording sets on the causal register in wave one'; §12 car 13 (the causal register R2) is OWNER-GATED, 'wire or retire'; and the leaf reaches NO EMITTED CHUNK at all at this tip (measured by lane MEASURE car 2 at a fresh build: src/domain/display/stateProse/causalDossierProse.js has no product importer, only tests and doc references, so DOSSIER_CAUSAL_PROSE ships zero bytes to any reader today — a measured correction to §10, which states the causal leaf 'rides the data-lazy-* chunk'). A car that wires it is the owner's, and it must move this row through a declared row like any other growth.",
   "_declaredRowIdiom": "MONOTONE, SHRINK-ONLY, EXCEPT THROUGH A DECLARED ROW THAT NAMES THE CAR AND THE DELTA — and the idiom is MACHINE-CHECKED, not a promise in prose. A shrink needs no declaration: lower the leaf's `raw`/`gzip` and the win is banked. A GROWTH needs an entry appended to `declared`: { car, leaf, fromRaw, toRaw, gzipAfter, reason }. The test then reconstructs each leaf's whole history: the declared rows for a leaf, in file order, must CHAIN — the first row's fromRaw equals that leaf's `genesis.raw`, each later row's fromRaw equals the previous row's toRaw, and the LAST row's toRaw equals the leaf's CURRENT `raw` and its gzipAfter equals the leaf's current `gzip`. A leaf with no declared row must sit EXACTLY at its genesis value. So a number cannot be raised without a declared row landing on it: raise the row alone and the chain no longer reaches today's bytes, and the suite reds naming the leaf. Every declared toRaw must also stay at or under the leaf's `ceilingRaw`; a car that needs more than the ceiling is asking to amend ARCH §10 and §13 row 17, which is the owner's row, not a lane's. `reason` is prose for a reader; the machine does not read it, and a car that leaves it empty has declared nothing.",
-  "_newLeafCeilingArithmetic": "THE THREE LEAVES SEAM CAR 4 ADDS (src/data/dossierConnectives.generated.js, proseNorms.generated.js, dossierRelations.generated.js) are NOT state desk leaves and take their own total: ARCH §10 prices them at 'the three leaves ≈ 77 KB either way', so `ceilingTotalRawNewLeaves` is 77,000 and each leaf's ceilingRaw is that total APPORTIONED BY ITS SHARE OF THEIR GENESIS BYTES: round(77000 × genesis.raw ÷ 49539). The three rounded shares sum to exactly 77,000 with no remainder (asserted), and ceilingGzip is round(ceilingRaw ÷ 4.5) at the same over-the-wire ratio the state leaves use. ⚠ A MEASURED FINDING FOR THE SITTING, RECORDED HERE RATHER THAN SOLVED BY A LARGER NUMBER: the NORM leaf's growth law is ONE ROW PER FIRING POOL at about 73.6 B per row, so its 30,990 B ceiling is reached at about 421 rows. It holds 271 today, and ARCH §6.6 sizes up to 174 new modifier pools before the corpus ceiling, which lands near 445. §10's three-leaf estimate is therefore likely to need re-pricing during car 9, and that is an ARCH §10 amendment and an owner row (§13 row 17), not a lane's edit. SEAM car 4 sets the ceiling AT §10's own number rather than above it, on purpose: a lane that quietly gave itself headroom would have amended the architecture by arithmetic. ⚠ AND THE GZIP CEILING TAKES THE LARGER OF TWO RATIOS, WHICH THE INSTRUMENT ITSELF FORCED. §10's 4.5 : 1 is a CORPUS ratio and it does not hold on a small payload: gzip's fixed header and Huffman tables cost the same on 1,365 bytes as on 250,000, so the connectives leaf compresses at 1.72 : 1 and round(2122 ÷ 4.5) = 472 would have been a ceiling ALREADY BREACHED at the leaf's birth (measured 795 B). The first run of this ratchet said so by name, which is what a ratchet is for. So ceilingGzip is max(round(ceilingRaw × 10 ÷ ceilingGzipRatioTenths), round(genesis.gzip × ceilingRaw ÷ genesis.raw)): §10's ratio where the payload is large enough for it to hold, and the leaf's OWN measured ratio where it is not. The six state leaves are unaffected — every one of them is large and §10's ratio is the larger term there.",
+  "_newLeafCeilingArithmetic": "THE THREE LEAVES SEAM CAR 4 ADDS (src/data/dossierConnectives.generated.js, proseNorms.generated.js, dossierRelations.generated.js) are NOT state desk leaves and take their own total: ARCH §10 prices them at 'the three leaves ≈ 77 KB either way', so `ceilingTotalRawNewLeaves` is 77,000 and each leaf's ceilingRaw is that total APPORTIONED BY ITS SHARE OF THEIR GENESIS BYTES: round(77000 × genesis.raw ÷ 49539). The three rounded shares sum to exactly 77,000 with no remainder (asserted), and ceilingGzip is round(ceilingRaw ÷ 4.5) at the same over-the-wire ratio the state leaves use. ⚠ A MEASURED FINDING FOR THE SITTING, RECORDED HERE RATHER THAN SOLVED BY A LARGER NUMBER: the NORM leaf's growth law is ONE ROW PER FIRING POOL at about 73.6 B per row, so its 30,990 B ceiling is reached at about 421 rows. It holds 271 today, and ARCH §6.6 sizes up to 174 new modifier pools before the corpus ceiling, which lands near 445. §10's three-leaf estimate is therefore likely to need re-pricing during car 9, and that is an ARCH §10 amendment and an owner row (§13 row 17), not a lane's edit. SEAM car 4 sets the ceiling AT §10's own number rather than above it, on purpose: a lane that quietly gave itself headroom would have amended the architecture by arithmetic. ⚠ AND THE GZIP CEILING TAKES THE LARGER OF TWO RATIOS, WHICH THE INSTRUMENT ITSELF FORCED. §10's 4.5 : 1 is a CORPUS ratio and it does not hold on a small payload: gzip's fixed header and Huffman tables cost the same on 1,365 bytes as on 250,000, so the connectives leaf compresses at 1.72 : 1 and round(2122 ÷ 4.5) = 472 would have been a ceiling ALREADY BREACHED at the leaf's birth (measured 795 B). The first run of this ratchet said so by name, which is what a ratchet is for. So ceilingGzip is max(round(ceilingRaw × 10 ÷ ceilingGzipRatioTenths), round(genesis.gzip × ceilingRaw ÷ genesis.raw)): §10's ratio where the payload is large enough for it to hold, and the leaf's OWN measured ratio where it is not. The six state leaves are unaffected — every one of them is large and §10's ratio is the larger term there. ⭐ AMENDED 2026-11-07 (ARCH §10 and §13 row 17, the owner's row; the cloud chair's act under the owner's delegation of 2026-11-06, ODQ §934.105, its ruling of 04:43 UTC; VETOABLE BY THE OWNER): the connectives leaf grew 2,046 -> 2,732 raw (gzip 1,138 -> 1,295) at R-AQ, census-1h unit 7, 8c6dcab72 — the position-keyed declaration channel. RE-APPORTIONED, the 77,000 total standing: 610 raw of proseNorms' share (it carried 11,052 of slack) moves to the connectives leaf by the declared transfer in `ceilingTransfersNewLeaves`, which the ratchet applies on top of each genesis share (ceilings: connectives 2,122 -> 2,732 raw, 1,236 -> 1,591 gzip by the leaf's own ratio; proseNorms 30,990 -> 30,380 raw, 6,887 -> 6,751 gzip). ARCH-COMPOSED-PROSE itself is not a tracked file on any branch; this line is the amendment's home in the tree.",
   "ceilingTotalRawStateLeaves": 2800000,
   "ceilingGzipRatioTenths": 45,
   "genesisBasisRawStateLeaves": 641410,
@@ -55,38 +55,38 @@
   },
   "leaves": {
     "src/data/dossierStateProse/defense.generated.js": {
-      "raw": 156574,
-      "gzip": 23178,
+      "raw": 172793,
+      "gzip": 24602,
       "ceilingRaw": 488168,
       "ceilingGzip": 108482
     },
     "src/data/dossierStateProse/economy.generated.js": {
-      "raw": 127853,
-      "gzip": 20042,
+      "raw": 141754,
+      "gzip": 21311,
       "ceilingRaw": 393810,
       "ceilingGzip": 87513
     },
     "src/data/dossierStateProse/general.generated.js": {
-      "raw": 252226,
-      "gzip": 34765,
+      "raw": 272147,
+      "gzip": 36445,
       "ceilingRaw": 796761,
       "ceilingGzip": 177058
     },
     "src/data/dossierStateProse/power.generated.js": {
-      "raw": 110998,
-      "gzip": 16599,
+      "raw": 115715,
+      "gzip": 17079,
       "ceilingRaw": 357097,
       "ceilingGzip": 79355
     },
     "src/data/dossierStateProse/stressors.generated.js": {
-      "raw": 88961,
-      "gzip": 14520,
+      "raw": 94080,
+      "gzip": 15105,
       "ceilingRaw": 258858,
       "ceilingGzip": 57524
     },
     "src/data/dossierStateProse/warFaith.generated.js": {
-      "raw": 166003,
-      "gzip": 24378,
+      "raw": 176442,
+      "gzip": 25180,
       "ceilingRaw": 505306,
       "ceilingGzip": 112290
     },
@@ -97,16 +97,16 @@
       "ceilingGzip": 36700
     },
     "src/data/dossierConnectives.generated.js": {
-      "raw": 2046,
-      "gzip": 1138,
-      "ceilingRaw": 2122,
-      "ceilingGzip": 1236
+      "raw": 2732,
+      "gzip": 1295,
+      "ceilingRaw": 2732,
+      "ceilingGzip": 1591
     },
     "src/data/proseNorms.generated.js": {
       "raw": 19938,
       "gzip": 4315,
-      "ceilingRaw": 30990,
-      "ceilingGzip": 6887
+      "ceilingRaw": 30380,
+      "ceilingGzip": 6751
     },
     "src/data/dossierRelations.generated.js": {
       "raw": 28236,
@@ -227,6 +227,94 @@
       "toRaw": 127853,
       "gzipAfter": 20042,
       "reason": "+28 B: DS-ECO-9 BLOCKADED's wall-free twin (v4 `[ledger · no walls]`) re-worded so it no longer cites the road holder: \"The stores are sealed off from the road.\" -> \"The stores are sealed off, and the road brings nothing more to them.\" (the chair's ruling R-F2; the owner's veto class). Projected through `node scripts/generate-dossier-state-prose.mjs` by lane F; attributed by stage at f93c69938 (green at 5fbb339be)."
+    },
+    {
+      "car": "THE POOL CENSUS (census lanes 1b-5, the compose, F12), recorded at the rung-2 landing by LANDING-R2 seat B",
+      "leaf": "src/data/dossierStateProse/defense.generated.js",
+      "fromRaw": 156584,
+      "toRaw": 172793,
+      "gzipAfter": 24602,
+      "reason": "Chains from the last declared row (156,584): LANDING-8 banked a -10 B shrink (b9cd6d598, DS-DEF-9 re-wording) undeclared, as the idiom allows, so this row spans -10 then +16,219 B, by commit (leaf bytes parent -> commit): F12 unit 2 e19e3e4cf +3,818; census-5 unit 1 80d676864 +4,308; census-5b unit 1 a5ee3fb53 +21; census-5b unit 3 c00b30eb6 +657; census-5c unit 3 8b304b8d8 +188; census-5d unit 2b f260dbac6 +7,172; compose unit 8 b8d2c3569 +55 (= +16,219). census-1 unit 0 92ccf936f's +25 is the census lineage's twin of LANDING-1 door 1's +25 already in this row, net 0 through the merge. Projected through `npm run gen:dossier-prose` by each lane; `--check` exit 0 at the tip."
+    },
+    {
+      "car": "THE POOL CENSUS (census lanes 1b-5, the compose, F12), recorded at the rung-2 landing by LANDING-R2 seat B",
+      "leaf": "src/data/dossierStateProse/economy.generated.js",
+      "fromRaw": 127853,
+      "toRaw": 141754,
+      "gzipAfter": 21311,
+      "reason": "+13,901 B, by commit: F12 unit 2 e19e3e4cf +1,520; census-3b(2) 25f7dda41 +184; census-3c unit 4 DS-ECO e3295d168 +8,581; census-3c unit 4 DS-SUP 3a1bb7adc +175; census-3f unit 3 525084dfe +164; census-3g unit 2 b6caa5e1a +21; census-3g unit 3 (R-AO colour marks) b1aab0f21 +3,256 (= +13,901). Projected through `npm run gen:dossier-prose`; `--check` exit 0 at the tip."
+    },
+    {
+      "car": "THE POOL CENSUS (census lanes 1b-5, the compose, F12), recorded at the rung-2 landing by LANDING-R2 seat B",
+      "leaf": "src/data/dossierStateProse/general.generated.js",
+      "fromRaw": 252226,
+      "toRaw": 271758,
+      "gzipAfter": 36378,
+      "reason": "+19,532 B, by commit: census-2b item 2 DS-GEN db3ed88c1 +14,603; census-2b item 2 DS-HK eb2b16a84 +2,037; census-2b item 5 70d05b25b +657; census-5 unit 2 06b59812f +55; census-3c unit 4 DS-POP 586bedd7f +1,177; census-5c unit 2 6dd3f9766 +288; census-3g unit 3 b1aab0f21 +715 (= +19,532). Projected through `npm run gen:dossier-prose`; `--check` exit 0 at the tip."
+    },
+    {
+      "car": "THE POOL CENSUS (census lanes 1b-5, the compose, F12), recorded at the rung-2 landing by LANDING-R2 seat B",
+      "leaf": "src/data/dossierStateProse/power.generated.js",
+      "fromRaw": 110998,
+      "toRaw": 115715,
+      "gzipAfter": 17079,
+      "reason": "+4,717 B, by commit: F12 unit 2 e19e3e4cf +1,011; rung 2D unit 2 1d79e312a +25; census-5 unit 2 06b59812f +850; census-5d unit 2b f260dbac6 +2,828; census-5d unit 2b fix 152a4a06c +3 (= +4,717). Projected through `npm run gen:dossier-prose`; `--check` exit 0 at the tip."
+    },
+    {
+      "car": "THE POOL CENSUS (census lanes 1b-5, the compose, F12), recorded at the rung-2 landing by LANDING-R2 seat B",
+      "leaf": "src/data/dossierStateProse/stressors.generated.js",
+      "fromRaw": 88961,
+      "toRaw": 93762,
+      "gzipAfter": 15067,
+      "reason": "+4,801 B, by commit: census-2b item 2 DS-STR c37c27025 +1,740; census-2b item 2 DS-CND c85d7ec26 +2,172; census-2b item 5 70d05b25b +759; census-2c unit 2 f40e0f82c +130 (= +4,801). Projected through `npm run gen:dossier-prose`; `--check` exit 0 at the tip."
+    },
+    {
+      "car": "THE POOL CENSUS (census lanes 1b-5, the compose, F12), recorded at the rung-2 landing by LANDING-R2 seat B",
+      "leaf": "src/data/dossierStateProse/warFaith.generated.js",
+      "fromRaw": 166003,
+      "toRaw": 176442,
+      "gzipAfter": 25180,
+      "reason": "+10,439 B, by commit: census-5 unit 3 41f2c679a +1,070; census-5b unit 3 c00b30eb6 +1,825; census-5c unit 2 6dd3f9766 +2,424; census-5c unit 3 8b304b8d8 +433; census-5d unit 3 d5b80440b +400; census-5d unit 2a c24d7118e +3,527; compose unit 2 item 5 cd3b6b0e6 +705; compose unit 8 b8d2c3569 +55 (= +10,439). Projected through `npm run gen:dossier-prose`; `--check` exit 0 at the tip."
+    },
+    {
+      "car": "R-AQ (census-1h unit 7, 8c6dcab72): the position-keyed declaration channel, recorded at the rung-2 landing by LANDING-R2",
+      "leaf": "src/data/dossierConnectives.generated.js",
+      "fromRaw": 2046,
+      "toRaw": 2732,
+      "gzipAfter": 1295,
+      "reason": "+686 B raw (+157 gzip, zlib level 9 as this ratchet measures it: 1,138 -> 1,295; the 1,332 in LANDING-R2's message to the chair was the gzip CLI's figure with its file header, corrected here), one commit: 8c6dcab72 adds the channel's 34 lines to the projected connectives. Past the leaf's ceiling of 2,122 / 1,236: the ceiling moved by the chair's ruling of 2026-11-07 04:43 UTC under the owner's delegation (ODQ §934.105; vetoable by the owner): the owner's row (ARCH §10, §13 row 17) amended by RE-APPORTIONMENT, the three-leaf total of 77,000 standing — proseNorms carried 11,052 raw of slack (19,938 of 30,990), so 610 raw of its share moves to the connectives leaf, which grew 2,046 -> 2,732 raw at R-AQ (census-1h unit 7, 8c6dcab72: the position-keyed declaration channel)."
+    },
+    {
+      "car": "The chair's ruling of 2026-11-07 06:1x UTC (ODQ §934.105, ruling (1)): DS-GEN-17's hospital-only PROVISIONED line, recorded by LANDING-R2 helper G",
+      "leaf": "src/data/dossierStateProse/general.generated.js",
+      "fromRaw": 271758,
+      "toRaw": 272102,
+      "gzipAfter": 36423,
+      "reason": "+344 B raw (gzip level 9: 36,378 -> 36,423), one commit: DS-GEN-17 PROVISIONED gains v3 `[visitor · institution: hospital]`, the line census-2b item 2 left the hospital-only key without. Projected through `node scripts/generate-dossier-state-prose.mjs`; `--check` exit 0."
+    },
+    {
+      "car": "The chair's ruling of 2026-11-07 06:5x UTC (ODQ §934.105, ruling (1)): DS-GEN-17 PROVISIONED v3 reworded one step plainer under the style law, recorded by LANDING-R2 helper G2",
+      "leaf": "src/data/dossierStateProse/general.generated.js",
+      "fromRaw": 272102,
+      "toRaw": 272147,
+      "gzipAfter": 36445,
+      "reason": "+45 B raw (gzip level 9: 36,423 -> 36,445), one commit: PROVISIONED v3 `[visitor · institution: hospital]` keeps its reads and its slot and takes the chair's wording (the thing seen, then what follows: the ill taken in and fed from its stores, fewer dying). Projected through `node scripts/generate-dossier-state-prose.mjs`; `--check` exit 0."
+    },
+    {
+      "car": "The chair's ruling of 2026-11-07 06:5x UTC (ODQ §934.105, ruling (2)): DS-CND-1's crisis-safe boom line, recorded by LANDING-R2 helper G2",
+      "leaf": "src/data/dossierStateProse/stressors.generated.js",
+      "fromRaw": 93762,
+      "toRaw": 94103,
+      "gzipAfter": 15113,
+      "reason": "+341 B raw (gzip level 9: 15,067 -> 15,113), one commit: DS-CND-1 ARCHETYPE: boom gains v4 `[street · crisis: any]`, reading only the archetype and the name, so a keyed boom has a printable line under any crisis (v1-v3 each deny hunger, threat and indebted). Projected through `node scripts/generate-dossier-state-prose.mjs`; `--check` exit 0."
+    }
+  ],
+  "ceilingTransfersNewLeaves": [
+    {
+      "from": "src/data/proseNorms.generated.js",
+      "to": "src/data/dossierConnectives.generated.js",
+      "raw": 610,
+      "ruling": "the chair's ruling of 2026-11-07 04:43 UTC under the owner's delegation (ODQ §934.105; vetoable by the owner): the owner's row (ARCH §10, §13 row 17) amended by RE-APPORTIONMENT, the three-leaf total of 77,000 standing — proseNorms carried 11,052 raw of slack (19,938 of 30,990), so 610 raw of its share moves to the connectives leaf, which grew 2,046 -> 2,732 raw at R-AQ (census-1h unit 7, 8c6dcab72: the position-keyed declaration channel)"
     }
   ]
 }

@@ -1,0 +1,95 @@
+{
+  "id": "marketPrices.CRIER_FRAMES",
+  "source": "src/domain/display/marketPrices.js :: CRIER_FRAMES (crierLineFor)",
+  "drawKind": "H",
+  "pool": {
+    "declares": [],
+    "crisisScoped": false,
+    "colour": false,
+    "notes": "Hash-modulus selection (fnv1a32(`${id}::${tag}`) % 4). The tag (dear/cheap) is the key, guaranteed. Every frame is a market crier's call; deriveMarketPrices runs for any place with resolvable exports/imports, market or not, so each frame declares \"market\". The causal {receipt} carries the crisis claim (marketPrices.causalReceipt.json).",
+    "needs": [],
+    "excludes": []
+  },
+  "rows": [
+    {
+      "id": "marketPrices.CRIER_FRAMES::dear.0",
+      "text": "{label} runs {phrase}: dear, {receipt}.",
+      "needs": [
+        "market"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "marketPrices.CRIER_FRAMES::dear.1",
+      "text": "{label} is dear now, {phrase}, {receipt}.",
+      "needs": [
+        "market"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "marketPrices.CRIER_FRAMES::dear.2",
+      "text": "They're asking {phrase} for {label}: dear, {receipt}.",
+      "needs": [
+        "market"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "marketPrices.CRIER_FRAMES::dear.3",
+      "text": "{label} fetches {phrase} these days: dear, {receipt}.",
+      "needs": [
+        "market"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "marketPrices.CRIER_FRAMES::cheap.0",
+      "text": "{label} runs {phrase}: cheap, {receipt}.",
+      "needs": [
+        "market"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "marketPrices.CRIER_FRAMES::cheap.1",
+      "text": "{label} is cheap now, {phrase}, {receipt}.",
+      "needs": [
+        "market"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "marketPrices.CRIER_FRAMES::cheap.2",
+      "text": "There's {label} going for {phrase}: cheap, {receipt}.",
+      "needs": [
+        "market"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "marketPrices.CRIER_FRAMES::cheap.3",
+      "text": "{label} fetches {phrase} these days: cheap, {receipt}.",
+      "needs": [
+        "market"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": ""
+    }
+  ]
+}

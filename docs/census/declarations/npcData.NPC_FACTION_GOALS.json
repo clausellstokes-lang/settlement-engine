@@ -1,0 +1,956 @@
+{
+  "pool": {
+    "id": "npcData.NPC_FACTION_GOALS",
+    "file": "src/data/npcData.js",
+    "drawKind": "R",
+    "drawSite": "npcGenerator.js:613 pickFromArray (keyed by role; reached only if the stress-goal roll at :608 fails)",
+    "colour": false,
+    "crisisScoped": false,
+    "keyDeclares": {
+      "Garrison Commander": [
+        "garrison"
+      ],
+      "Guild Master": [
+        "guild"
+      ],
+      "Abbot/Abbess": [
+        "institution: monastery"
+      ],
+      "Thieves' Guild Master": [
+        "organised crime"
+      ],
+      "Smuggler Chief": [
+        "organised crime"
+      ],
+      "Crime Lord": [
+        "organised crime",
+        "tier: ≥ city"
+      ],
+      "Tower Wizard": [
+        "magic",
+        "tier: ≥ city"
+      ],
+      "Guild Archmage": [
+        "magic",
+        "tier: ≥ city"
+      ],
+      "Hedge Wizard": [
+        "magic"
+      ],
+      "Alchemist": [
+        "magic"
+      ],
+      "Inquisitor": [
+        "tier: ≥ city"
+      ]
+    },
+    "lines": 108,
+    "declaring": 9,
+    "note": "Role keys per historyData.js POWER_ROLES_BY_CATEGORY: Garrison Commander is gated on hasCommander (= a garrison stands, defenseFacts.js ROLE_NEEDS) for pool and mandated roles alike → garrison; Guild Master requiresGuild; Abbot requiresInstKeyword monastery|friary|monastic; Crime Lord / Tower Wizard / Guild Archmage / Inquisitor minTier city; magic roles pass worldLaw.allowsRole only where magic is enabled. Reach by tier: Mayor/Tax Collector/Guard Captain/High Priest/Master Craftsman/Healer/Hedge Wizard from village, Priest/Tavern Owner from hamlet. Guard Captain is gated on garrison|watch|militia (no single atom). Guard Captain#0.short ('dock-side') has an inland twin in data/inlandHookLines.js, applied after the draw. Governor#0.short presumes winter (season, no atom) and its 'grain' is rewritten to the trade commodity. Tavern Owner#0.short 'hospitalised' read as presuming a hospital here (judgement). Unexpressed presumptions: Mayor#3.short a council with annual elections, Council Member#0.long / Wealthiest Merchant#1.long a council and a merchant bloc (no 'council exists' atom; ruler: council would over-claim), Tax Collector#0.short a past riot, Guild Master#0.short a SECOND (rival) guild, Crime Lord#1.short a guard captain (watch|garrison|militia disjunction), High Priest#0.short a desecration event, Chief Magistrate#0.long / Governor#0.long a nobility / a crown (overlord, not this place's ruler). Abbot#1.short 'the local lord' read as possibly an overlord: no ruler atom.",
+    "colourReRead": "CENSUS-4h (R-AO, the chair's answer 2 of block m): the no-atom goals re-read (short and long together, 45 rows, 44 with no key declaration and Guild Master#0 under its key); 35 presume nothing (colour: true); 10 presume a fact with no home and stay unmarked (colourReadBy): a regional or local lord (Mayor#1, Abbot/Abbess#1), a council election (Mayor#3), the season and the crown (Governor#0), a past riot (Tax Collector#0), a guard captain (Crime Lord#1), a council and a merchant bloc (Council Member#0, Wealthiest Merchant#1), a second guild (Guild Master#0), a nobility (Chief Magistrate#0) — the last four by phase A's own note"
+  },
+  "rows": [
+    {
+      "id": "Mayor#0.short",
+      "text": "Navigate a dispute between two powerful guilds without losing either's support",
+      "needs": [
+        "guild"
+      ],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "Mayor#0.long",
+      "text": "Die in office having kept the peace (legacy matters more than wealth)",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "Mayor#1.short",
+      "text": "Cover up a minor corruption scandal before the regional lord hears of it",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false,
+      "colourReadBy": "CENSUS-4h: read, presumes a fact (not marked)"
+    },
+    {
+      "id": "Mayor#1.long",
+      "text": "Transform this settlement into a city-state with real independence",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false,
+      "colourReadBy": "CENSUS-4h: read, presumes a fact (not marked)"
+    },
+    {
+      "id": "Mayor#2.short",
+      "text": "Find funding for desperately needed infrastructure repairs",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "Mayor#2.long",
+      "text": "Build a political dynasty (their children will inherit influence, not just money)",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "Mayor#3.short",
+      "text": "Discredit a council rival before the annual election",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false,
+      "colourReadBy": "CENSUS-4h: read, presumes a fact (not marked)"
+    },
+    {
+      "id": "Mayor#3.long",
+      "text": "Write laws that outlast them: real reform, not political theatre",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false,
+      "colourReadBy": "CENSUS-4h: read, presumes a fact (not marked)"
+    },
+    {
+      "id": "Governor#0.short",
+      "text": "Secure enough grain reserves before winter to prevent unrest",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false,
+      "colourReadBy": "CENSUS-4h: read, presumes a fact (not marked)"
+    },
+    {
+      "id": "Governor#0.long",
+      "text": "Become indispensable to the crown: irreplaceable, never exposed",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false,
+      "colourReadBy": "CENSUS-4h: read, presumes a fact (not marked)"
+    },
+    {
+      "id": "Governor#1.short",
+      "text": "Root out the faction leaking tax figures to rivals",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "Governor#1.long",
+      "text": "Retire with a fortune and a clean name (in that order)",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "Council Member#0.short",
+      "text": "Block a proposal that would undermine their patron's interests",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false,
+      "colourReadBy": "CENSUS-4h: read, presumes a fact (not marked)"
+    },
+    {
+      "id": "Council Member#0.long",
+      "text": "Build a coalition that can outvote the merchant bloc on anything",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false,
+      "colourReadBy": "CENSUS-4h: read, presumes a fact (not marked)"
+    },
+    {
+      "id": "Council Member#1.short",
+      "text": "Expose a colleague's corruption without implicating themselves",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "Council Member#1.long",
+      "text": "Champion a reform that future councils will still cite by name",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "Tax Collector#0.short",
+      "text": "Meet this quarter's collection target without triggering another riot",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false,
+      "colourReadBy": "CENSUS-4h: read, presumes a fact (not marked)"
+    },
+    {
+      "id": "Tax Collector#0.long",
+      "text": "Accumulate enough to buy out of this hated post (any post but this)",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false,
+      "colourReadBy": "CENSUS-4h: read, presumes a fact (not marked)"
+    },
+    {
+      "id": "Tax Collector#1.short",
+      "text": "Find a missing merchant whose taxes haven't been filed in six months",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "Tax Collector#1.long",
+      "text": "Build enough goodwill that the settlement mourns them when they go",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "Chief Magistrate#0.short",
+      "text": "Close a murder case that has made the merchants nervous",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false,
+      "colourReadBy": "CENSUS-4h: read, presumes a fact (not marked)"
+    },
+    {
+      "id": "Chief Magistrate#0.long",
+      "text": "Establish a legal precedent that constrains what the nobility can do to commoners",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false,
+      "colourReadBy": "CENSUS-4h: read, presumes a fact (not marked)"
+    },
+    {
+      "id": "Chief Magistrate#1.short",
+      "text": "Resist pressure from a powerful patron to deliver a specific verdict",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "Chief Magistrate#1.long",
+      "text": "Train a successor who will carry on their judicial philosophy",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "Guard Captain#0.short",
+      "text": "Find the person responsible for three unsolved dock-side killings",
+      "needs": [
+        "institution: docks"
+      ],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "Guard Captain#0.long",
+      "text": "Rebuild guard morale after years of under-funding and low prestige",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "Guard Captain#1.short",
+      "text": "Identify which of their officers is on the thieves' guild payroll",
+      "needs": [
+        "organised crime"
+      ],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "Guard Captain#1.long",
+      "text": "Die in bed rather than in the street (unusual ambition for the role)",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "Garrison Commander#0.short",
+      "text": "Secure emergency funding to repair the east wall before it becomes a crisis",
+      "needs": [
+        "walls"
+      ],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "Garrison Commander#0.long",
+      "text": "Be remembered as the commander who made this settlement truly defensible",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "Garrison Commander#1.short",
+      "text": "Contain a near-mutiny caused by months of unpaid wages",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "Garrison Commander#1.long",
+      "text": "Obtain a noble title through military distinction (the only path left open)",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "Mercenary Captain#0.short",
+      "text": "Collect a debt from a client who keeps finding reasons to delay payment",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "Mercenary Captain#0.long",
+      "text": "Save enough to buy land and retire before this work kills them",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "Mercenary Captain#1.short",
+      "text": "Evaluate whether the next contract is worth the risk to their crew",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "Mercenary Captain#1.long",
+      "text": "Build a company so well-regarded that princes compete to hire them",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "High Priest#0.short",
+      "text": "Restore a desecrated shrine before the annual festival (quietly, without scandal)",
+      "needs": [
+        "institution: temple"
+      ],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "High Priest#0.long",
+      "text": "Unite the fractious local clergy under a single doctrinal standard",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "High Priest#1.short",
+      "text": "Identify who among their junior clergy is accepting bribes from merchants",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "High Priest#1.long",
+      "text": "Found an institution (a hospital, a school) that will outlast them by centuries",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "Priest#0.short",
+      "text": "Mediate a land dispute between two families before it turns violent",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "Priest#0.long",
+      "text": "Simply keep the community together: feed them, marry them, bury them with dignity",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "Priest#1.short",
+      "text": "Convince their superior in the faith to fund repairs to the temple roof",
+      "needs": [
+        "institution: temple"
+      ],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "Priest#1.long",
+      "text": "Leave a detailed record of the congregation so future priests know who this community was",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "Abbot/Abbess#0.short",
+      "text": "Investigate rumours that a novice has been leaving the grounds at night",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "Abbot/Abbess#0.long",
+      "text": "Expand the scriptorium into a library open to all who can read",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "Abbot/Abbess#1.short",
+      "text": "Negotiate a tithe reduction with the local lord without compromising principle",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false,
+      "colourReadBy": "CENSUS-4h: read, presumes a fact (not marked)"
+    },
+    {
+      "id": "Abbot/Abbess#1.long",
+      "text": "Leave the monastery in better condition (spiritually and structurally) than they found it",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false,
+      "colourReadBy": "CENSUS-4h: read, presumes a fact (not marked)"
+    },
+    {
+      "id": "Inquisitor#0.short",
+      "text": "Confirm or deny specific heresy accusations against a prominent citizen",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "Inquisitor#0.long",
+      "text": "Dismantle an actual organised heretical network, not chase rumours",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "Inquisitor#1.short",
+      "text": "Navigate political pressure from both the church hierarchy and the civil authorities",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "Inquisitor#1.long",
+      "text": "Retire before the work corrupts them entirely",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "Wealthiest Merchant#0.short",
+      "text": "Corner the market on a specific commodity before a rival does",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "Wealthiest Merchant#0.long",
+      "text": "Fund a trading dynasty that their grandchildren will run",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "Wealthiest Merchant#1.short",
+      "text": "Determine who has been bribing their warehouse staff",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false,
+      "colourReadBy": "CENSUS-4h: read, presumes a fact (not marked)"
+    },
+    {
+      "id": "Wealthiest Merchant#1.long",
+      "text": "Convert wealth into political power: a seat on the council, then more",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false,
+      "colourReadBy": "CENSUS-4h: read, presumes a fact (not marked)"
+    },
+    {
+      "id": "Guild Master#0.short",
+      "text": "Prevent a rival guild from undercutting their members' prices",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false,
+      "colourReadBy": "CENSUS-4h: read, presumes a fact (not marked)"
+    },
+    {
+      "id": "Guild Master#0.long",
+      "text": "Codify guild law so strongly that future masters can't easily corrupt it",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false,
+      "colourReadBy": "CENSUS-4h: read, presumes a fact (not marked)"
+    },
+    {
+      "id": "Guild Master#1.short",
+      "text": "Place a talented apprentice in a role that increases guild influence",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "Guild Master#1.long",
+      "text": "Be remembered as the master who expanded the guild into new trades",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "Moneylender#0.short",
+      "text": "Collect on a large overdue debt from a borrower who has suddenly disappeared",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "Moneylender#0.long",
+      "text": "Accumulate enough leverage over enough people to be untouchable",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "Moneylender#1.short",
+      "text": "Identify which of their clients is about to default and act first",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "Moneylender#1.long",
+      "text": "Transform the lending business into a proper banking institution: legitimate, respectable",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "Master Craftsman#0.short",
+      "text": "Complete a prestigious commission that will make their reputation in the city",
+      "needs": [
+        "tier: ≥ city"
+      ],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "Master Craftsman#0.long",
+      "text": "Train an apprentice who surpasses them: the greatest achievement of any craftsman",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "Master Craftsman#1.short",
+      "text": "Acquire a rare material to solve a technical problem they've never cracked",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "Master Craftsman#1.long",
+      "text": "Document every technique they know before the knowledge dies with them",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "Thieves' Guild Master#0.short",
+      "text": "Identify which of their lieutenants is planning to branch out independently",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "Thieves' Guild Master#0.long",
+      "text": "Achieve enough legitimate business to step back from direct criminal exposure",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "Thieves' Guild Master#1.short",
+      "text": "Negotiate a non-aggression pact with a new criminal faction moving into their territory",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "Thieves' Guild Master#1.long",
+      "text": "Ensure no one ever proves the connection between them and their operations",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "Crime Lord#0.short",
+      "text": "Suppress a rival operation that has begun cutting into smuggling revenue",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "Crime Lord#0.long",
+      "text": "Build an empire that survives their death: succession planning for criminals",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "Crime Lord#1.short",
+      "text": "Identify the guard captain who is no longer co-operative, and why",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false,
+      "colourReadBy": "CENSUS-4h: read, presumes a fact (not marked)"
+    },
+    {
+      "id": "Crime Lord#1.long",
+      "text": "Launder enough wealth to fund a legitimate legacy",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false,
+      "colourReadBy": "CENSUS-4h: read, presumes a fact (not marked)"
+    },
+    {
+      "id": "Smuggler Chief#0.short",
+      "text": "Find a new route after the customs increase made the old one uneconomical",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "Smuggler Chief#0.long",
+      "text": "Retire to somewhere no one knows their name with enough to live comfortably",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "Smuggler Chief#1.short",
+      "text": "Determine whether the recent cargo losses are coincidence or betrayal",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "Smuggler Chief#1.long",
+      "text": "Expand into a trade that requires less hiding: spice or cloth, not people",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "Tower Wizard#0.short",
+      "text": "Identify the source of unexplained magical disturbances in the northern district",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "Tower Wizard#0.long",
+      "text": "Complete a research project that will earn peer recognition: not power, just acknowledgement",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "Tower Wizard#1.short",
+      "text": "Find an apprentice worth investing time in before they become too old to train anyone",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "Tower Wizard#1.long",
+      "text": "Solve one genuinely unsolved theoretical question before they die",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "Guild Archmage#0.short",
+      "text": "Resolve a dispute between two factions of the mages' guild without taking sides",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "Guild Archmage#0.long",
+      "text": "Establish a magical institution that outlasts their own life and power",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "Guild Archmage#1.short",
+      "text": "Track down a former student who has been using restricted magic",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "Guild Archmage#1.long",
+      "text": "Complete the great work (whatever that means to them specifically)",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "Hedge Wizard#0.short",
+      "text": "Find reliable income for the next three months (magical services barely pay)",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "Hedge Wizard#0.long",
+      "text": "Be taken seriously by the formal magical establishment, just once",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "Hedge Wizard#1.short",
+      "text": "Identify what is wrong with the crops in the northern fields (it smells magical)",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "Hedge Wizard#1.long",
+      "text": "Understand their own unusual ability well enough to pass it on",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "Alchemist#0.short",
+      "text": "Source a specific reagent that has been mysteriously unavailable for six weeks",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "Alchemist#0.long",
+      "text": "Crack the theoretical basis for a transmutation they've been circling for years",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "Alchemist#1.short",
+      "text": "Fulfil a large dangerous commission while minimising the chance of explosion",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "Alchemist#1.long",
+      "text": "Publish findings that will outlast the potions they've spent their life brewing",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "Tavern Owner#0.short",
+      "text": "Manage the fallout from a brawl last week that left a local merchant hospitalised",
+      "needs": [
+        "institution: hospital"
+      ],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "Tavern Owner#0.long",
+      "text": "Pay off the building and own it outright before they're too old to work it",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "Tavern Owner#1.short",
+      "text": "Figure out who has been watering down their barrels before it reaches customers",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "Tavern Owner#1.long",
+      "text": "Build a place where everyone (not just the wealthy) can feel welcome",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "Sage/Scholar#0.short",
+      "text": "Verify a specific historical claim before publishing it (one source contradicts all others)",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "Sage/Scholar#0.long",
+      "text": "Complete the comprehensive work they've spent thirty years building toward",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "Sage/Scholar#1.short",
+      "text": "Find funding to continue research after their patron cut support without explanation",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "Sage/Scholar#1.long",
+      "text": "Mentor someone who will care about truth more than they care about credit",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "Healer#0.short",
+      "text": "Identify the source of a cluster of unusual illnesses in the western quarter",
+      "needs": [
+        "tier: ≥ town"
+      ],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "Healer#0.long",
+      "text": "Train enough local healers that the settlement can cope without them",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "Healer#1.short",
+      "text": "Obtain a specific medicinal compound that has been unavailable for months",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "Healer#1.long",
+      "text": "Document everything they know so the knowledge survives if they don't",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    }
+  ]
+}

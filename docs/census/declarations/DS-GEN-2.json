@@ -1,0 +1,188 @@
+{
+  "poolId": "DS-GEN-2",
+  "source": "src/data/dossierStateProse/general.generated.js (annex docs/content/RECEIPT_POOLS_DOSSIER_STATE.md)",
+  "drawKind": "K",
+  "drawSite": "generalStateProse → conflictIntensityPoolKey(conflict) per conflict row → composeStateProse → readStateProse → eligibleVariants → drawVariant",
+  "pools": [
+    {
+      "pool": "intensity: low",
+      "keyGuarantees": [
+        "one settlement.conflicts[] row with intensity low",
+        "{faction}/{faction2} = parties[0]/[1], {issue}/{stakes} present when the slot fills (anchored liveness drops a line whose slot is unfilled)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Not scoped: the peace/restraint claims (low vid:5, moderate vid:5, high vid:5) are about this one quarrel between the named parties, which the key owns, not about the town's condition.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "{faction} and {faction2} disagree in {settlement} about {issue}, and both of them can live with disagreeing.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "The quarrel between {faction} and {faction2} shows up in {settlement}'s records mostly as delay: nothing refused, nothing granted quickly.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:3",
+          "text": "You would not learn from a day in {settlement} that {faction} and {faction2} are at odds. It comes up on the second day.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:4",
+          "text": "What {faction} and {faction2} are actually contesting in {settlement} is {stakes}, and neither has decided yet that it is worth pressing for.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:5",
+          "text": "{faction} and {faction2} hold opposite positions on {issue} and neither will move first; in {settlement} that is a stalemate, and a stalemate is a kind of peace.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "intensity: moderate",
+      "keyGuarantees": [
+        "one settlement.conflicts[] row with intensity moderate",
+        "{faction}/{faction2} = parties[0]/[1], {issue}/{stakes} present when the slot fills (anchored liveness drops a line whose slot is unfilled)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Not scoped: the peace/restraint claims (low vid:5, moderate vid:5, high vid:5) are about this one quarrel between the named parties, which the key owns, not about the town's condition.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "{faction} and {faction2} are openly on opposite sides of {issue} in {settlement}, and the town has learned which rooms not to raise it in.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "Business in {settlement} that touches {issue} takes two signatures rather than one, because {faction} and {faction2} do not accept each other's.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:3",
+          "text": "{settlement} works, and there is a seam in it: {faction} on one side, {faction2} on the other, {issue} lying between them.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:4",
+          "text": "{stakes} is what stands to change hands in {settlement}, and {faction} and {faction2} both understand that well enough to be careful with each other.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:5",
+          "text": "{faction} and {faction2} contest {issue} hard and stop short of the thing that would break it; in {settlement} the restraint is deliberate, and both sides are relying on it.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "intensity: high",
+      "keyGuarantees": [
+        "one settlement.conflicts[] row with intensity high",
+        "{faction}/{faction2} = parties[0]/[1], {issue}/{stakes} present when the slot fills (anchored liveness drops a line whose slot is unfilled)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Not scoped: the peace/restraint claims (low vid:5, moderate vid:5, high vid:5) are about this one quarrel between the named parties, which the key owns, not about the town's condition.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "{faction} and {faction2} are past arguing in {settlement}. {issue} is the thing each of them is preparing for now, not the thing they are debating.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "{settlement}'s clerks have stopped filing anything that touches {issue}: whichever way it were filed, one of {faction} or {faction2} would read it as a decision.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:3",
+          "text": "The trouble between {faction} and {faction2} does not need explaining to a stranger in {settlement}. It is in how the room goes quiet.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:4",
+          "text": "{stakes} is what {faction} and {faction2} are contesting in {settlement}, and the contest has reached the stage where losing it costs more than winning it does.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:5",
+          "text": "{faction} and {faction2} are at the edge of it in {settlement} and neither has crossed; what holds is that both would rather have the town than have the argument.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    }
+  ]
+}

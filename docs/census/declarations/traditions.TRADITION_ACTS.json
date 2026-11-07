@@ -1,0 +1,57 @@
+{
+ "id": "traditions.TRADITION_ACTS",
+ "source": "src/data/traditionCorpus.js :: TRADITION_ACTS",
+ "drawKind": "R",
+ "pool": {
+  "declares": [],
+  "crisisScoped": false,
+  "colour": true,
+  "notes": "six act nouns; presume nothing",
+  "needs": [],
+  "excludes": []
+ },
+ "rows": [
+  {
+   "id": "traditions.TRADITION_ACTS::feast",
+   "text": "Feast",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_ACTS::procession",
+   "text": "Procession",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_ACTS::vigil",
+   "text": "Vigil",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_ACTS::contest",
+   "text": "Contest",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_ACTS::fair",
+   "text": "Fair",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_ACTS::offering",
+   "text": "Offering",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  }
+ ]
+}

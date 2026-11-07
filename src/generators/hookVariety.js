@@ -122,6 +122,8 @@ export function drawUnique(pool, used, keyFn = (x) => /** @type {string} */ (x),
   return chosen;
 }
 
+// THE REGISTRY-AWARE TWIN (CENSUS-3e's `freshAdmittedTwin`) moved to `drawDeclared`'s `registry`
+// option (R-AJ, CENSUS-1g unit 3): one resolver for every site that draws through `drawUnique`.
 /**
  * REVIEW-INTAKE-4 (the chair's ruling, 2026-11-07) — A DRAW THAT REFUSES WHAT THE ROSTER HOLDS.
  * One named figure's secret or goal is never a text another figure of the same roster already

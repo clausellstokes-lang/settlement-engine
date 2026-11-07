@@ -1,0 +1,895 @@
+{
+ "poolId": "HOOK_ESCALATION",
+ "source": "src/domain/hookEscalation.js :192 ORIGIN_CONSEQUENCES, :387 CLOCK_TEMPLATES (label and triggerDescription are headings keyed by the clock, not ledgered)",
+ "drawKind": "A",
+ "drawSite": "hookEscalation.js:305 ORIGIN_CONSEQUENCES[origin] copied whole into ifIgnored/possibleResolutions (deriveStructuredHook); :470-533 deriveEscalationClocks copies tmpl.stages whole (fillStage substitutes {controller}/{governing})",
+ "pools": [
+  {
+   "pool": "ORIGIN_CONSEQUENCES.chain.ifIgnored",
+   "keyGuarantees": [
+    "deriveHookOrigin(text) === \"chain\" (ORIGIN_RULES, hookEscalation.js:166-173, first match wins); every line of the list is copied onto the structured hook"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "A list (every line prints); renders under crisis but no line asserts calm: stays out. An excluded line must be swapped for its twin or dropped, never left standing.",
+   "lines": [
+    {
+     "lineId": "HOOK_ESCALATION.ORIGIN_CONSEQUENCES.chain.ifIgnored[0]",
+     "text": "Price hikes spread to dependent crafts and bakeries.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "bakeries (no institution kind)"
+     ]
+    },
+    {
+     "lineId": "HOOK_ESCALATION.ORIGIN_CONSEQUENCES.chain.ifIgnored[1]",
+     "text": "Smuggling fills the gap; criminal faction gains leverage.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "crime structure (a criminal faction)"
+     ]
+    },
+    {
+     "lineId": "HOOK_ESCALATION.ORIGIN_CONSEQUENCES.chain.ifIgnored[2]",
+     "text": "Public legitimacy erodes as the council fails to stabilize supply.",
+     "needs": [
+      "ruler: council"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": [],
+     "note": "\"the council\" presumes the seat is a council; under a lord, mayor or elder it is false"
+    }
+   ],
+   "twins": [
+    {
+     "text": "Public legitimacy erodes as the seat fails to stabilize supply.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "why": "the ruler-neutral twin of [2] (\"the council\") for every seat that is not a council"
+    }
+   ]
+  },
+  {
+   "pool": "ORIGIN_CONSEQUENCES.chain.possibleResolutions",
+   "keyGuarantees": [
+    "deriveHookOrigin(text) === \"chain\" (ORIGIN_RULES, hookEscalation.js:166-173, first match wins); every line of the list is copied onto the structured hook"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "A list (every line prints); renders under crisis but no line asserts calm: stays out. An excluded line must be swapped for its twin or dropped, never left standing.",
+   "lines": [
+    {
+     "lineId": "HOOK_ESCALATION.ORIGIN_CONSEQUENCES.chain.possibleResolutions[0]",
+     "text": "Negotiate an emergency supply contract with a neighbouring settlement.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "a neighbouring settlement (world, not record)"
+     ]
+    },
+    {
+     "lineId": "HOOK_ESCALATION.ORIGIN_CONSEQUENCES.chain.possibleResolutions[1]",
+     "text": "Expose hoarding and force the controller to release reserves.",
+     "needs": [
+      "stores: > 0"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "HOOK_ESCALATION.ORIGIN_CONSEQUENCES.chain.possibleResolutions[2]",
+     "text": "Subsidize the chain through temple charity or council intervention.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "guard presence (any of institution: temple / ruler: council): no single reader (design §1 row \"guard presence\"); a disjunction across dimensions is not a declaration (§3.2)"
+     ],
+     "note": "a disjunction; RULES.md has none for needs"
+    }
+   ],
+   "twins": [
+    {
+     "text": "Subsidize the chain through charity or the seat's intervention.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "why": "the twin of [2] for a place with no temple and no council seat"
+    }
+   ]
+  },
+  {
+   "pool": "ORIGIN_CONSEQUENCES.factionConflict.ifIgnored",
+   "keyGuarantees": [
+    "deriveHookOrigin(text) === \"factionConflict\" (ORIGIN_RULES, hookEscalation.js:166-173, first match wins); every line of the list is copied onto the structured hook"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "A list (every line prints); renders under crisis but no line asserts calm: stays out. An excluded line must be swapped for its twin or dropped, never left standing.",
+   "lines": [
+    {
+     "lineId": "HOOK_ESCALATION.ORIGIN_CONSEQUENCES.factionConflict.ifIgnored[0]",
+     "text": "One faction makes a unilateral move; the others retaliate.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "HOOK_ESCALATION.ORIGIN_CONSEQUENCES.factionConflict.ifIgnored[1]",
+     "text": "Public order strains as the conflict spills into the streets.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "tier (streets)"
+     ]
+    },
+    {
+     "lineId": "HOOK_ESCALATION.ORIGIN_CONSEQUENCES.factionConflict.ifIgnored[2]",
+     "text": "A weaker third party seizes the opening.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "ORIGIN_CONSEQUENCES.factionConflict.possibleResolutions",
+   "keyGuarantees": [
+    "deriveHookOrigin(text) === \"factionConflict\" (ORIGIN_RULES, hookEscalation.js:166-173, first match wins); every line of the list is copied onto the structured hook"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "A list (every line prints); renders under crisis but no line asserts calm: stays out. An excluded line must be swapped for its twin or dropped, never left standing.",
+   "lines": [
+    {
+     "lineId": "HOOK_ESCALATION.ORIGIN_CONSEQUENCES.factionConflict.possibleResolutions[0]",
+     "text": "Broker a treaty between the principals.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "HOOK_ESCALATION.ORIGIN_CONSEQUENCES.factionConflict.possibleResolutions[1]",
+     "text": "Expose the underlying corruption and force a public reckoning.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "corruption (no reader)"
+     ]
+    },
+    {
+     "lineId": "HOOK_ESCALATION.ORIGIN_CONSEQUENCES.factionConflict.possibleResolutions[2]",
+     "text": "Replace the most extreme leader with a more pliable successor.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "ORIGIN_CONSEQUENCES.institution.ifIgnored",
+   "keyGuarantees": [
+    "deriveHookOrigin(text) === \"institution\" (ORIGIN_RULES, hookEscalation.js:166-173, first match wins); every line of the list is copied onto the structured hook"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": true,
+   "ruling": "A list (every line prints); renders under crisis but no line asserts calm: stays out. An excluded line must be swapped for its twin or dropped, never left standing.",
+   "lines": [
+    {
+     "lineId": "HOOK_ESCALATION.ORIGIN_CONSEQUENCES.institution.ifIgnored[0]",
+     "text": "The institution becomes impaired. Services it provides degrade.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "HOOK_ESCALATION.ORIGIN_CONSEQUENCES.institution.ifIgnored[1]",
+     "text": "Dependent factions / chains lose their anchor.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": [
+      "meta: simulator vocabulary (\"chains\")"
+     ]
+    },
+    {
+     "lineId": "HOOK_ESCALATION.ORIGIN_CONSEQUENCES.institution.ifIgnored[2]",
+     "text": "A rival institution captures the vacated role.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "ORIGIN_CONSEQUENCES.institution.possibleResolutions",
+   "keyGuarantees": [
+    "deriveHookOrigin(text) === \"institution\" (ORIGIN_RULES, hookEscalation.js:166-173, first match wins); every line of the list is copied onto the structured hook"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": true,
+   "ruling": "A list (every line prints); renders under crisis but no line asserts calm: stays out. An excluded line must be swapped for its twin or dropped, never left standing.",
+   "lines": [
+    {
+     "lineId": "HOOK_ESCALATION.ORIGIN_CONSEQUENCES.institution.possibleResolutions[0]",
+     "text": "Restore the institution's lost capacity (fund repair, replace leadership).",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "HOOK_ESCALATION.ORIGIN_CONSEQUENCES.institution.possibleResolutions[1]",
+     "text": "Stand up an alternative institution to fill the role.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "HOOK_ESCALATION.ORIGIN_CONSEQUENCES.institution.possibleResolutions[2]",
+     "text": "Accept the loss and let the dependent systems reorganize.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "ORIGIN_CONSEQUENCES.npc.ifIgnored",
+   "keyGuarantees": [
+    "deriveHookOrigin(text) === \"npc\" (ORIGIN_RULES, hookEscalation.js:166-173, first match wins); every line of the list is copied onto the structured hook"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": true,
+   "ruling": "A list (every line prints); renders under crisis but no line asserts calm: stays out. An excluded line must be swapped for its twin or dropped, never left standing.",
+   "lines": [
+    {
+     "lineId": "HOOK_ESCALATION.ORIGIN_CONSEQUENCES.npc.ifIgnored[0]",
+     "text": "The NPC takes drastic action: defection, betrayal, departure, or death.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "HOOK_ESCALATION.ORIGIN_CONSEQUENCES.npc.ifIgnored[1]",
+     "text": "Their faction or institution loses leadership and capacity.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "HOOK_ESCALATION.ORIGIN_CONSEQUENCES.npc.ifIgnored[2]",
+     "text": "A power vacuum opens; opportunistic actors rush in.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "ORIGIN_CONSEQUENCES.npc.possibleResolutions",
+   "keyGuarantees": [
+    "deriveHookOrigin(text) === \"npc\" (ORIGIN_RULES, hookEscalation.js:166-173, first match wins); every line of the list is copied onto the structured hook"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": true,
+   "ruling": "A list (every line prints); renders under crisis but no line asserts calm: stays out. An excluded line must be swapped for its twin or dropped, never left standing.",
+   "lines": [
+    {
+     "lineId": "HOOK_ESCALATION.ORIGIN_CONSEQUENCES.npc.possibleResolutions[0]",
+     "text": "Confront the NPC directly and broker a resolution.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "HOOK_ESCALATION.ORIGIN_CONSEQUENCES.npc.possibleResolutions[1]",
+     "text": "Provide what they need (resources, leverage, protection).",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "HOOK_ESCALATION.ORIGIN_CONSEQUENCES.npc.possibleResolutions[2]",
+     "text": "Replace them with a more aligned successor.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "ORIGIN_CONSEQUENCES.external.ifIgnored",
+   "keyGuarantees": [
+    "deriveHookOrigin(text) === \"external\" (ORIGIN_RULES, hookEscalation.js:166-173, first match wins); every line of the list is copied onto the structured hook"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "A list (every line prints); renders under crisis but no line asserts calm: stays out. An excluded line must be swapped for its twin or dropped, never left standing.",
+   "lines": [
+    {
+     "lineId": "HOOK_ESCALATION.ORIGIN_CONSEQUENCES.external.ifIgnored[0]",
+     "text": "The external pressure compounds: more refugees, more raids, deeper plague.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "raids (monster / bandit threat)",
+      "refugees",
+      "plague: the line names three pressures while the hook names one"
+     ],
+     "note": "the origin is keyed on ONE word (bandit|raid|monster|plague|storm|drought|flood|fire|earthquake|refugee); naming all three claims what the record may not hold"
+    },
+    {
+     "lineId": "HOOK_ESCALATION.ORIGIN_CONSEQUENCES.external.ifIgnored[1]",
+     "text": "Local resources are consumed defending or absorbing the impact.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "HOOK_ESCALATION.ORIGIN_CONSEQUENCES.external.ifIgnored[2]",
+     "text": "Public order strains as the threat lingers.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "ORIGIN_CONSEQUENCES.external.possibleResolutions",
+   "keyGuarantees": [
+    "deriveHookOrigin(text) === \"external\" (ORIGIN_RULES, hookEscalation.js:166-173, first match wins); every line of the list is copied onto the structured hook"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "A list (every line prints); renders under crisis but no line asserts calm: stays out. An excluded line must be swapped for its twin or dropped, never left standing.",
+   "lines": [
+    {
+     "lineId": "HOOK_ESCALATION.ORIGIN_CONSEQUENCES.external.possibleResolutions[0]",
+     "text": "Confront the external force directly (combat, diplomacy, magic).",
+     "needs": [
+      "magic"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "HOOK_ESCALATION.ORIGIN_CONSEQUENCES.external.possibleResolutions[1]",
+     "text": "Hire intermediaries to absorb the threat.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "HOOK_ESCALATION.ORIGIN_CONSEQUENCES.external.possibleResolutions[2]",
+     "text": "Adapt: reorganize the settlement around the new reality.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    }
+   ],
+   "twins": [
+    {
+     "text": "Confront the external force directly, by arms or by talks.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "why": "the magic-free twin of [0]: every birth with magic off prints [0] today (an A list prints every line)"
+    }
+   ]
+  },
+  {
+   "pool": "ORIGIN_CONSEQUENCES.pressure.ifIgnored",
+   "keyGuarantees": [
+    "deriveHookOrigin(text) === \"pressure\" (ORIGIN_RULES, hookEscalation.js:166-173, first match wins); every line of the list is copied onto the structured hook"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": true,
+   "ruling": "A list (every line prints); renders under crisis but no line asserts calm: stays out. An excluded line must be swapped for its twin or dropped, never left standing.",
+   "lines": [
+    {
+     "lineId": "HOOK_ESCALATION.ORIGIN_CONSEQUENCES.pressure.ifIgnored[0]",
+     "text": "The pressure boils over into a discrete crisis (riot, strike, abandonment).",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "HOOK_ESCALATION.ORIGIN_CONSEQUENCES.pressure.ifIgnored[1]",
+     "text": "Stress markers propagate to adjacent subsystems.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": [
+      "meta: simulator vocabulary (\"stress markers\", \"subsystems\")"
+     ]
+    },
+    {
+     "lineId": "HOOK_ESCALATION.ORIGIN_CONSEQUENCES.pressure.ifIgnored[2]",
+     "text": "Public legitimacy strains; faction realignment becomes likely.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "ORIGIN_CONSEQUENCES.pressure.possibleResolutions",
+   "keyGuarantees": [
+    "deriveHookOrigin(text) === \"pressure\" (ORIGIN_RULES, hookEscalation.js:166-173, first match wins); every line of the list is copied onto the structured hook"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "A list (every line prints); renders under crisis but no line asserts calm: stays out. An excluded line must be swapped for its twin or dropped, never left standing.",
+   "lines": [
+    {
+     "lineId": "HOOK_ESCALATION.ORIGIN_CONSEQUENCES.pressure.possibleResolutions[0]",
+     "text": "Address the underlying need (food, justice, work).",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "HOOK_ESCALATION.ORIGIN_CONSEQUENCES.pressure.possibleResolutions[1]",
+     "text": "Provide a public ritual or release valve.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "HOOK_ESCALATION.ORIGIN_CONSEQUENCES.pressure.possibleResolutions[2]",
+     "text": "Suppress the symptoms with force (short-term, costly).",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "an armed force (no guard word)"
+     ]
+    }
+   ]
+  },
+  {
+   "pool": "ORIGIN_CONSEQUENCES.other.ifIgnored",
+   "keyGuarantees": [
+    "deriveHookOrigin(text) === \"other\" (ORIGIN_RULES, hookEscalation.js:166-173, first match wins); every line of the list is copied onto the structured hook"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": true,
+   "ruling": "A list (every line prints); renders under crisis but no line asserts calm: stays out. An excluded line must be swapped for its twin or dropped, never left standing.",
+   "lines": [
+    {
+     "lineId": "HOOK_ESCALATION.ORIGIN_CONSEQUENCES.other.ifIgnored[0]",
+     "text": "The hook fades, but leaves consequences the DM can pick up later.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "ORIGIN_CONSEQUENCES.other.possibleResolutions",
+   "keyGuarantees": [
+    "deriveHookOrigin(text) === \"other\" (ORIGIN_RULES, hookEscalation.js:166-173, first match wins); every line of the list is copied onto the structured hook"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": true,
+   "ruling": "A list (every line prints); renders under crisis but no line asserts calm: stays out. An excluded line must be swapped for its twin or dropped, never left standing.",
+   "lines": [
+    {
+     "lineId": "HOOK_ESCALATION.ORIGIN_CONSEQUENCES.other.possibleResolutions[0]",
+     "text": "Direct intervention by the players.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "CLOCK_TEMPLATES.bread_riot.stages",
+   "keyGuarantees": [
+    "a food_security supply chain whose status is not stable (deriveAllSupplyChainStates, hookEscalation.js:470-482); {controller} = the chain's controller"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "A list of six ordered stages, every one printed; renders under crisis, no stage asserts calm: stays out. A stage that fails its needs must take its twin in place, so the clock keeps six stages.",
+   "lines": [
+    {
+     "lineId": "HOOK_ESCALATION.CLOCK_TEMPLATES.bread_riot.stages[0]",
+     "text": "Flour prices rise.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "food source: grain (flour)"
+     ]
+    },
+    {
+     "lineId": "HOOK_ESCALATION.CLOCK_TEMPLATES.bread_riot.stages[1]",
+     "text": "Bakers reduce loaves.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "bakers (no institution kind)"
+     ]
+    },
+    {
+     "lineId": "HOOK_ESCALATION.CLOCK_TEMPLATES.bread_riot.stages[2]",
+     "text": "Workers accuse {controller} of hoarding.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "HOOK_ESCALATION.CLOCK_TEMPLATES.bread_riot.stages[3]",
+     "text": "The temple opens emergency stores.",
+     "needs": [
+      "institution: temple",
+      "stores: > 0"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "HOOK_ESCALATION.CLOCK_TEMPLATES.bread_riot.stages[4]",
+     "text": "The council sends the watch to guard warehouses.",
+     "needs": [
+      "ruler: council",
+      "watch"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "warehouses"
+     ],
+     "note": "\"the watch\" is a reader:hook-pools GUARD_WORDS hit if this surface is ever read as plot hooks"
+    },
+    {
+     "lineId": "HOOK_ESCALATION.CLOCK_TEMPLATES.bread_riot.stages[5]",
+     "text": "Riot breaks out in the market.",
+     "needs": [
+      "market"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": []
+    }
+   ],
+   "twins": [
+    {
+     "text": "Households begin pooling what food they have.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "why": "twin of [3] for a place with no temple or no stores"
+    },
+    {
+     "text": "Those who hold the stores start sleeping beside them.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "why": "twin of [4] for a place without a watch or without a council seat; names no force"
+    },
+    {
+     "text": "A crowd gathers where the food is handed out, and it turns ugly.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "why": "twin of [5] for a place with no market"
+    }
+   ]
+  },
+  {
+   "pool": "CLOCK_TEMPLATES.smuggling_rise.stages",
+   "keyGuarantees": [
+    "a trade_entrepot supply chain whose status is not stable (hookEscalation.js:484-494)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "A list of six ordered stages, every one printed; renders under crisis, no stage asserts calm: stays out. A stage that fails its needs must take its twin in place, so the clock keeps six stages.",
+   "lines": [
+    {
+     "lineId": "HOOK_ESCALATION.CLOCK_TEMPLATES.smuggling_rise.stages[0]",
+     "text": "Legal imports slow.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "imports"
+     ]
+    },
+    {
+     "lineId": "HOOK_ESCALATION.CLOCK_TEMPLATES.smuggling_rise.stages[1]",
+     "text": "{controller} loses revenue; tax base shrinks.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "HOOK_ESCALATION.CLOCK_TEMPLATES.smuggling_rise.stages[2]",
+     "text": "Black-market traders fill the gap quietly.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "crime structure (black market)"
+     ]
+    },
+    {
+     "lineId": "HOOK_ESCALATION.CLOCK_TEMPLATES.smuggling_rise.stages[3]",
+     "text": "Watch makes a high-profile raid; smugglers shift routes.",
+     "needs": [
+      "watch"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "trade-route kind (routes)"
+     ]
+    },
+    {
+     "lineId": "HOOK_ESCALATION.CLOCK_TEMPLATES.smuggling_rise.stages[4]",
+     "text": "A criminal faction consolidates the new routes.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "crime structure (a criminal faction)"
+     ]
+    },
+    {
+     "lineId": "HOOK_ESCALATION.CLOCK_TEMPLATES.smuggling_rise.stages[5]",
+     "text": "Public legitimacy of the governing faction collapses.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    }
+   ],
+   "twins": [
+    {
+     "text": "{controller} makes an example of one smuggler; the rest shift routes.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "why": "twin of [3] for a place without a watch"
+    }
+   ]
+  },
+  {
+   "pool": "CLOCK_TEMPLATES.legitimacy_crisis.stages",
+   "keyGuarantees": [
+    "powerStructure.publicLegitimacy.label matches Contested|Legitimacy Crisis (hookEscalation.js:497-512); {governing} = governingName or \"the governing faction\""
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "A list of six ordered stages, every one printed; renders under crisis, no stage asserts calm: stays out. A stage that fails its needs must take its twin in place, so the clock keeps six stages.",
+   "lines": [
+    {
+     "lineId": "HOOK_ESCALATION.CLOCK_TEMPLATES.legitimacy_crisis.stages[0]",
+     "text": "Citizens grumble openly in markets.",
+     "needs": [
+      "market"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "HOOK_ESCALATION.CLOCK_TEMPLATES.legitimacy_crisis.stages[1]",
+     "text": "A rival faction publicly questions {governing}.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "HOOK_ESCALATION.CLOCK_TEMPLATES.legitimacy_crisis.stages[2]",
+     "text": "Pamphlets / rumors spread accusations.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "print / literacy (pamphlets)"
+     ]
+    },
+    {
+     "lineId": "HOOK_ESCALATION.CLOCK_TEMPLATES.legitimacy_crisis.stages[3]",
+     "text": "Tax collection slows; watch loses authority.",
+     "needs": [
+      "watch"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "HOOK_ESCALATION.CLOCK_TEMPLATES.legitimacy_crisis.stages[4]",
+     "text": "A successor positions themselves.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "HOOK_ESCALATION.CLOCK_TEMPLATES.legitimacy_crisis.stages[5]",
+     "text": "Public assembly forces a confrontation.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "an assembly (no ruler-kind reader)"
+     ]
+    }
+   ],
+   "twins": [
+    {
+     "text": "People grumble openly wherever they gather.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "why": "twin of [0] for a place with no market"
+    },
+    {
+     "text": "Tax collection slows; orders go unheeded.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "why": "twin of [3] for a place without a watch"
+    }
+   ]
+  },
+  {
+   "pool": "CLOCK_TEMPLATES.faction_split.stages",
+   "keyGuarantees": [
+    "the two most powerful factions are within 8 power and of different archetypes (hookEscalation.js:518-533); stages print unfilled"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": true,
+   "ruling": "A list of six ordered stages, every one printed; renders under crisis, no stage asserts calm: stays out. A stage that fails its needs must take its twin in place, so the clock keeps six stages.",
+   "lines": [
+    {
+     "lineId": "HOOK_ESCALATION.CLOCK_TEMPLATES.faction_split.stages[0]",
+     "text": "A minor incident is exaggerated by both sides.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "HOOK_ESCALATION.CLOCK_TEMPLATES.faction_split.stages[1]",
+     "text": "Public statements harden.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "HOOK_ESCALATION.CLOCK_TEMPLATES.faction_split.stages[2]",
+     "text": "Allies are forced to pick sides.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "HOOK_ESCALATION.CLOCK_TEMPLATES.faction_split.stages[3]",
+     "text": "Quiet inducements / threats circulate.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "HOOK_ESCALATION.CLOCK_TEMPLATES.faction_split.stages[4]",
+     "text": "A symbolic act of defiance occurs.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "HOOK_ESCALATION.CLOCK_TEMPLATES.faction_split.stages[5]",
+     "text": "Open break: the principals stop speaking publicly.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    }
+   ]
+  }
+ ]
+}

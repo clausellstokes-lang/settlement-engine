@@ -8,7 +8,7 @@
  *     render beside it;
  *   - its first line names the active crisis (its label and the settlement's name);
  *   - every value it prints is on the record: the people are the record's NPCs, each line is
- *     that NPC's own secret or want, the hooks are the record's hooks, the food band is the food
+ *     that NPC's own secret or want (a person voiced from the crisis cast: their role's want, RUNG2-F13), the hooks are the record's hooks, the food band is the food
  *     record's band, and none of the old invented fallbacks print.
  */
 import { afterEach, beforeAll, describe, expect, test, vi } from 'vitest';
@@ -30,7 +30,8 @@ import SessionMode from '../../src/components/session/SessionMode.jsx';
 import { buildViewModel } from '../../src/pdf/lib/viewModel.js';
 import { TonightAtTheTable } from '../../src/pdf/sections/TonightAtTheTable.jsx';
 import { buildJournalPages } from '../../src/foundry/journalPages.js';
-import { composeTonightSheet, TONIGHT_COPY } from '../../src/domain/summary/tonightSheet.js';
+import { castWantOf, composeTonightSheet, TONIGHT_COPY } from '../../src/domain/summary/tonightSheet.js';
+import { effectiveCastOf } from '../../src/domain/crisis/crisisCast.js';
 import { collectPlotHooks } from '../../src/domain/dossier/plotHooks.js';
 import { FOOD_SECURITY_BANDS } from '../../src/data/bandLadders.js';
 
@@ -54,6 +55,17 @@ function deepText(node, out = []) {
   if (typeof node.type === 'function') { deepText(node.type(node.props || {}), out); return out; }
   return deepText(node.props?.children, out);
 }
+
+/** The role wants a cast person may voice: castWantOf for each (crisis, role) the record casts this NPC in. */
+const castLinesOf = (s, npc) => {
+  const id = String(npc.id || npc.name || '');
+  return (Array.isArray(s.stress) ? s.stress : s.stress ? [s.stress] : []).filter(Boolean).flatMap((entry) => {
+    const cast = effectiveCastOf(s, entry).cast;
+    return (cast?.roles || []).filter((r) => r.kind === 'npc' && r.id === id)
+      .map((r) => castWantOf(r.role, r.id, String(entry.type || ''), ''))
+      .filter(Boolean);
+  });
+};
 
 const crisisLabels = (s) => (Array.isArray(s.stress) ? s.stress : s.stress ? [s.stress] : [])
   .filter(Boolean).map((x) => x.label).filter(Boolean);
@@ -131,7 +143,13 @@ describe('X-51: one Tonight sheet', () => {
         const goal = String(npc.goal?.short || npc.goal?.long || '').replace(/^to\s+/i, '').toLowerCase();
         const secret = String(npc.secret?.what || '').toLowerCase();
         const line = p.line.replace(/[.!?]$/, '').toLowerCase();
-        if (p.line && line !== goal.replace(/[.!?]$/, '') && line !== secret.replace(/[.!?]$/, '')) {
+        // A person voiced FROM THE CRISIS CAST wants what the ROLE wants: their line is the castWantOf line for their
+        // own role, crisis and id (the role's CAST_WANTS pool; their own goal where the role has none). Added at
+        // 1e28faf1f (lane RUNG2-F13 unit 3, CRISIS-CAST-SENSE, the chair's ruling rung 2 §3c), which composes that
+        // line at render; measured: this arm green at 1e28faf1f^ (f7127dd20), red at 1e28faf1f (12 cast lines at the
+        // tip, every one a CAST_WANTS line). Every other person still prints their own want or secret.
+        const castLine = p.why === 'cast' ? castLinesOf(settlement, npc).map((l) => l.replace(/[.!?]$/, '').toLowerCase()) : [];
+        if (p.line && line !== goal.replace(/[.!?]$/, '') && line !== secret.replace(/[.!?]$/, '') && !castLine.includes(line)) {
           offenders.push(`${seed}: ${p.name}'s line is neither their want nor their secret: ${p.line}`);
         }
       }

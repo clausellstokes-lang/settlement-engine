@@ -22,42 +22,9 @@ import {
   nativeSemanticName,
   nativeSemanticNames,
 } from '../../domain/content/customContentSemanticAuthority.js';
-import { resolveGenerationWorldLaw } from '../generationContext.js'; import { hasMarketInstitution } from '../economy/viability.js'; import { defenseFactsOf, forceWordsOf } from '../../domain/defense/defenseFacts.js'; import { defenceTwinLine } from '../../data/defenceTwinLines.js'; // SIZE-3, R6, F1 and F10: one line, so no cited line moves
+import { resolveGenerationWorldLaw } from '../generationContext.js'; import { hasMarketInstitution } from '../economy/viability.js'; import { defenseFactsOf, forceWordsOf } from '../../domain/defense/defenseFacts.js'; import { resolveSibling } from '../../domain/facts/drawDeclared.js'; import { factsOf } from '../../domain/facts/factsOf.js'; import { textOf } from '../../domain/facts/textOf.js'; import { MILITARY_GUARD_LABEL } from '../../data/factionLabelSiblings.js'; import { FACTION_DESC_SIBLINGS } from '../../data/powerSiblings.js'; export { FACTION_DESC_SIBLINGS }; // SIZE-3, R6, F1, F10, CENSUS-1c, CENSUS-4f, CENSUS-5c and CENSUS-5e (R-AB: the tables moved to data/powerSiblings.js, re-exported): one line, so no cited line moves
 
-// renormalizeFactionPower — rescale every faction's `power` to integer
-// percentage points summing to exactly 100, using largest-remainder rounding
-// so the rounded points always total 100 (never 99 or 101). Mutates in place
-// and preserves rank order. Reused by the neighbourFactions step, which injects
-// raw-scale powers into the already-percentage-normalized roster and must
-// restore the power-share invariant. No-op for an empty/zero-power roster.
-// (factionDynamics carries a file-local copy — it cannot import from here
-// without closing an import cycle the architecture test bans.)
-export const renormalizeFactionPower = (factions) => {
-  if (!factions || !factions.length) return factions;
-  const total = factions.reduce((sum, f) => sum + (f.power || 0), 0);
-  if (total <= 0) return factions;
-  // Floor each share, track remainders, then distribute the leftover points to
-  // the largest remainders (ties broken by current order) so the sum is 100.
-  const shares = factions.map((f, i) => {
-    const exact = ((f.power || 0) / total) * 100;
-    const floor = Math.floor(exact);
-    return { i, floor, remainder: exact - floor };
-  });
-  let leftover = 100 - shares.reduce((sum, s) => sum + s.floor, 0);
-  shares
-    .slice()
-    .sort((a, b) => b.remainder - a.remainder || a.i - b.i)
-    .forEach((s) => {
-      if (leftover > 0) {
-        s.floor += 1;
-        leftover -= 1;
-      }
-    });
-  shares.forEach((s) => {
-    factions[s.i].power = s.floor;
-  });
-  return factions;
-};
+import { renormalizeFactionPower } from './renormalizeFactionPower.js'; export { renormalizeFactionPower }; // LANDING-R2 (ODQ §934.105): moved verbatim to power/renormalizeFactionPower.js, re-exported for its importers
 
 // normalizeAndAnnotateFactions — renormalise faction powers to percentages,
 // sort governing-first then by descending power, and append inter-faction
@@ -98,6 +65,13 @@ export const generatePowerStructure = (
   // route slot, and a non-coastal seaport with a hostile neighbour silently
   // loses its maritime standing (verified: merchant prose falls back from
   // "International merchant houses controlling port licences" to the generic).
+  // CENSUS-1e unit 2 (Appendix B item 23, inline T): a base-roster description CENSUS-5b declared in
+  // FACTION_DESC_SIBLINGS (data/powerSiblings.js) resolves where it prints, against the native roster's facts — the
+  // original where the record holds its atom, else its twin (a set with no twin keeps the original).
+  // ⚠ R-Q: the `militia` atom is NOT settled at this step (CENSUS-5c measured the 1,000: militia 33
+  // draw/final differences, garrison 9, watch 0), so no line here presumes the militia: the two
+  // militia lines print their guard-free wording (R-U, the chair's ruling of 2026-11-05 05:25).
+  const said = (/** @type {string} */ line) => resolveSibling(line, FACTION_DESC_SIBLINGS_SETTLED, { facts: () => factsOf({ institutions: nativeInstitutions }), poolId: 'rulingStructure:FACTION_DESC_SIBLINGS', surface: 'power', drawKind: 'T' });
   const generationWorldLaw = resolveGenerationWorldLaw(null, config);
   const nativeInstitutions = (institutions || []).filter(
       institution => !isMaterializedCustomContent(institution),
@@ -352,7 +326,7 @@ export const generatePowerStructure = (
         topPriority <= 65 &&
         (informalModifier =
           {
-            military: defenceTwinLine('garrison-backed', defenseFactsOf({ institutions: nativeInstitutions })), // F10: data/defenceTwinLines.js
+            military: 'arms-backed', // CENSUS-5e unit 2 (R-AN): garrison is not settled at this step, so the modifier presumes none (was garrison-backed, with this as its twin)
             religion: 'church-guided',
             economy: 'commerce-driven',
             criminal: 'corruption-riddled',
@@ -390,7 +364,7 @@ export const generatePowerStructure = (
       'Guild Authority':
         "The guilds have formalised their political control; the city's elected bodies are largely ceremonial.",
       'Military Council':
-        'Military commanders and garrison officers hold decisive political weight; civic matters defer to security priorities.',
+        'Military commanders and their officers hold decisive political weight; civic matters defer to security priorities.',
       'Church Council':
         'Religious authorities hold formal civic influence; canonical law and civil ordinance are intertwined.',
       'Merchant Council':
@@ -437,7 +411,9 @@ export const generatePowerStructure = (
       'Town Council':
         'An elected or appointed council governs; merchants, guilds, and prominent families compete for seats.',
     },
-    govDesc = govDescByLabel[govBody] || govDescByFaction[governingFaction] || govDescByFaction['Mixed Council'],
+    // R-AM (CENSUS-1g): resolved where it is CHOSEN, not inside the table (an eager `said` noted a
+    // description no birth printed); `said` hands every non-key back untouched, so nothing moves.
+    govDesc = said(govDescByLabel[govBody] || govDescByFaction[governingFaction] || govDescByFaction['Mixed Council']),
     priorityBonus = topPriority > 80 ? 18 : topPriority > 65 ? 12 : topPriority > 50 ? 6 : 0,
     govPower = [
       'Theocratic Council',
@@ -493,7 +469,7 @@ export const generatePowerStructure = (
                   : 'Established merchant community; fund civic works and expect council access in return.'
               : merchantAdjPower >= 10
                 ? 'Merchants with local reach; a consistent civic presence without yet being the dominant commercial voice.'
-                : 'A small trader community present at market days; politically active in minor disputes, limited in broader leverage.',
+                : said('A small trader community present at market days; politically active in minor disputes, limited in broader leverage.'),
       merchantLabel =
         (economicState == null ? void 0 : economicState.prosperity) === 'Wealthy' ||
         (economicState == null ? void 0 : economicState.prosperity) === 'Thriving'
@@ -568,7 +544,7 @@ export const generatePowerStructure = (
     });
   }
   if (militaryPower > 5 && (tier !== 'thorp' || priorities.military > 60)) {
-    const militaryDesc =
+    const militaryDesc = said(
         priorityToCategory(priorities.military) === 'very_high'
           ? militaryPower > 25
             ? ['city', 'metropolis'].includes(tier)
@@ -577,15 +553,15 @@ export const generatePowerStructure = (
             : 'Significant military presence; officers hold political influence disproportionate to formal civic rank.'
           : priorityToCategory(priorities.military) === 'low'
             ? ['hamlet', 'village', 'thorp'].includes(tier)
-              ? 'Part-time militia with limited organisation; authority is moral rather than institutional.'
+              ? 'Part-time armed volunteers with limited organisation; authority is moral rather than institutional.'
               : 'Undermanned and underfunded; unable to enforce law consistently and aware of it.'
             : ['thorp', 'hamlet', 'village'].includes(tier)
-              ? "Armed patrol and informal militia; the settlement's primary recourse when disputes turn physical."
+              ? "Armed patrol of able-bodied residents; the settlement's primary recourse when disputes turn physical."
               : tier === 'town'
                 ? 'Town watch and militia; enforce ordinances, manage disorder, and report to the council.'
                 : militaryPower > 18
-                  ? 'Well-funded garrison and city watch; a reliable instrument of civic order with growing institutional confidence.'
-                  : 'Garrison and city watch; law enforcement and external defence, stretched between multiple responsibilities.',
+                  ? 'Well-funded city watch; a reliable instrument of civic order with growing institutional confidence.'
+                  : 'City watch; law enforcement and external defence, stretched between multiple responsibilities.'),
       militaryDescFinal =
         governingFaction && (governingFaction.toLowerCase().includes('military council') || governingFaction.toLowerCase().includes('martial'))
           ? militaryDesc +
@@ -593,7 +569,7 @@ export const generatePowerStructure = (
           : militaryDesc,
       militaryCap = governingFaction && governingFaction.includes('Merchant oligarchy') ? Math.round(merchantPower * 0.85) : 9999;
     factions.push({
-      faction: 'Military/Guard',
+      faction: textOf(MILITARY_GUARD_LABEL), // CENSUS-4f: declared `guardPresence`, carried (data/factionLabelSiblings.js)
       power: Math.min(militaryPower, militaryCap),
       desc: militaryDescFinal,
     });
@@ -690,10 +666,17 @@ export const generatePowerStructure = (
               ? 'Mages and arcane practitioners hold real influence through monopoly on magical services and the latent fear their capabilities inspire.'
               : 'Magical practitioners are consulted but not formally empowered. Their influence is advisory, transactional, and quietly resented.',
     });
+  // CENSUS-1b unit B (the chair's ruling): the power step reads the stress ENTRIES the intent
+  // carries — their kinds, and the migration entry's direction — not `config.stressTypes`. A held
+  // intent written before the entries were carried falls back to the config's kinds (no entry, so
+  // the catalog's direction). At birth the two kind lists are one list, so no birth moves.
+  const stressEntries = Array.isArray(projection.stressEntries) ? projection.stressEntries : null;
   const stressType = (config == null ? void 0 : config.stressType) || null,
-    stressTypes = (config == null ? void 0 : config.stressTypes) || (stressType ? [stressType] : []),
+    stressTypes = stressEntries
+      ? stressEntries.map((e) => e.type)
+      : (config == null ? void 0 : config.stressTypes) || (stressType ? [stressType] : []),
     hasStress = (s) => stressTypes.includes(s);
-  applyStressEventFactions(factions, hasStress, governingFaction, hasNobleInst, config, institutions);
+  applyStressEventFactions(factions, hasStress, governingFaction, hasNobleInst, config, institutions, stressEntries || []);
   normalizeAndAnnotateFactions(factions, forceWordsOf(defenseFactsOf({ institutions: nativeInstitutions }))); // F1: the standing lines name the force that stands
   // Tag each faction with a category for power-economy correlation
   factions.forEach((f) => {
@@ -711,6 +694,7 @@ export const generatePowerStructure = (
     governingFaction,
     hasNobleInstitution: hasNobleInst,
     stressTypes,
+    stressEntries: stressEntries || [],
     fallbackStressType: stressType,
   });
   // ── Public legitimacy & faction dynamics ────────────────────────────────
@@ -797,3 +781,8 @@ export const generatePowerStructure = (
     criminalCaptureState,
   };
 };
+
+/** The sets this step can answer (R-Q): every set whose atoms are settled before the power step. */
+const FACTION_DESC_SIBLINGS_SETTLED = Object.freeze(Object.fromEntries(Object.entries(FACTION_DESC_SIBLINGS)
+  .filter(([, set]) => !set.some((l) => [...(/** @type {any} */ (l).needs || []), ...(/** @type {any} */ (l).excludes || [])].includes('militia')))));
+

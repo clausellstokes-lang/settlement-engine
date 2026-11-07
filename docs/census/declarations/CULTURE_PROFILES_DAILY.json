@@ -1,0 +1,3008 @@
+{
+ "poolId": "CULTURE_PROFILES_DAILY",
+ "source": "src/data/cultureProfiles.js :55-528 CULTURE_PROFILES — 11 profiles × 7 text fields × 2 lines (the field is exchangePattern, not \"exchange\"); architecturalDetails not ledgered here",
+ "drawKind": "R",
+ "drawSite": "src/data/cultureProfiles.js:556-560 choose → rng.pick on the named child stream rng.fork(\"cultural-identity\") at src/generators/steps/resolveConfig.js:174; read at src/components/new/dailyLifeLogic.js:112-114 (socialTexture ONLY, as ctx.cultureCtx; legacy saves read socialTexture[0], a T lookup). NOTE: ctx.cultureCtx has no consumer in DailyLifeTab.jsx today (buildLocalDailyLifeNarrative does not read it) — the other six fields reach the page only through culturalNotesFor (socialTexture + builtForm) and AI grounding.",
+ "pools": [
+  {
+   "pool": "germanic.builtForm",
+   "keyGuarantees": [
+    "config culture resolves to \"germanic\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders under crisis (916/1000) but no line asserts calm, plenty, safety or normality — the profiles state traditions and material grammar, not the present mood: stays out of the inverse default. Not colour: lines presume market, temple, bathhouse, water and defence the roster may lack.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.germanic.builtForm[0]",
+     "text": "Timber-framed street houses cluster around a market green, with stone reserved for halls, bridges, and defenses.",
+     "needs": [
+      "market",
+      "walls"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "bridges (a river crossing)"
+     ],
+     "note": "\"stone reserved for … defenses\" presumes a stone perimeter"
+    },
+    {
+     "lineId": "CULTURE_PROFILES.germanic.builtForm[1]",
+     "text": "Farmsteads and craft yards form compact wards around a hall, church, or fortified manor.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "a church or fortified manor (disjunction; faith / no reader)"
+     ]
+    }
+   ],
+   "rendered": false
+  },
+  {
+   "pool": "germanic.civicPattern",
+   "keyGuarantees": [
+    "config culture resolves to \"germanic\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders under crisis (916/1000) but no line asserts calm, plenty, safety or normality — the profiles state traditions and material grammar, not the present mood: stays out of the inverse default. Not colour: lines presume market, temple, bathhouse, water and defence the roster may lack.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.germanic.civicPattern[0]",
+     "text": "Household heads, landed patrons, and craft associations negotiate authority through customary rights.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": [
+      "craft associations (guilds)"
+     ]
+    },
+    {
+     "lineId": "CULTURE_PROFILES.germanic.civicPattern[1]",
+     "text": "A lordly court shares practical administration with guild officers and sworn neighborhood representatives.",
+     "needs": [
+      "ruler: lord"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "guild officers"
+     ]
+    }
+   ],
+   "rendered": false
+  },
+  {
+   "pool": "germanic.exchangePattern",
+   "keyGuarantees": [
+    "config culture resolves to \"germanic\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders under crisis (916/1000) but no line asserts calm, plenty, safety or normality — the profiles state traditions and material grammar, not the present mood: stays out of the inverse default. Not colour: lines presume market, temple, bathhouse, water and defence the roster may lack.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.germanic.exchangePattern[0]",
+     "text": "Guild-regulated craft production and overland fairs organize exchange.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "guilds",
+      "trade-route kind (overland fairs)"
+     ]
+    },
+    {
+     "lineId": "CULTURE_PROFILES.germanic.exchangePattern[1]",
+     "text": "Estate dues, weekly markets, and merchant associations connect farms to specialist workshops.",
+     "needs": [
+      "market"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "merchant associations"
+     ]
+    }
+   ],
+   "rendered": false
+  },
+  {
+   "pool": "germanic.foodways",
+   "keyGuarantees": [
+    "config culture resolves to \"germanic\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders under crisis (916/1000) but no line asserts calm, plenty, safety or normality — the profiles state traditions and material grammar, not the present mood: stays out of the inverse default. Not colour: lines presume market, temple, bathhouse, water and defence the roster may lack.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.germanic.foodways[0]",
+     "text": "Grain, orchard produce, preserved meat, dairy, and ale anchor the local table.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "food sources (no reader)"
+     ]
+    },
+    {
+     "lineId": "CULTURE_PROFILES.germanic.foodways[1]",
+     "text": "Rye or barley breads, pottage, smoked foods, and seasonal livestock products dominate ordinary meals.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "food sources (no reader)",
+      "season"
+     ]
+    }
+   ],
+   "rendered": false
+  },
+  {
+   "pool": "germanic.sacredLife",
+   "keyGuarantees": [
+    "config culture resolves to \"germanic\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders under crisis (916/1000) but no line asserts calm, plenty, safety or normality — the profiles state traditions and material grammar, not the present mood: stays out of the inverse default. Not colour: lines presume market, temple, bathhouse, water and defence the roster may lack.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.germanic.sacredLife[0]",
+     "text": "Parish observance coexists with household customs, saints, oath sites, and seasonal rites.",
+     "needs": [
+      "institution: temple"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "priest / faith presence beyond institution: temple (parish, saints)",
+      "season (seasonal rites)"
+     ]
+    },
+    {
+     "lineId": "CULTURE_PROFILES.germanic.sacredLife[1]",
+     "text": "The sacred calendar is public and institutional, while wells, groves, and family memorials retain local weight.",
+     "needs": [
+      "institution: temple"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "groves / wells (sacred sites)"
+     ]
+    }
+   ],
+   "rendered": false,
+   "droppedTwins": [
+    {
+     "text": "Household customs, saints, oath sites, and seasonal rites carry the sacred calendar.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "why": "both lines need a temple; the temple-free twin",
+     "droppedBy": "chair CENSUS-2 R-D2: the slot renders on no page (no reader of terrainCtx/routeCtx/defenseCtx/cultureCtx or culturalIdentity text in src), so a twin moves nothing"
+    }
+   ]
+  },
+  {
+   "pool": "germanic.defensePattern",
+   "keyGuarantees": [
+    "config culture resolves to \"germanic\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders under crisis (916/1000) but no line asserts calm, plenty, safety or normality — the profiles state traditions and material grammar, not the present mood: stays out of the inverse default. Not colour: lines presume market, temple, bathhouse, water and defence the roster may lack.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.germanic.defensePattern[0]",
+     "text": "Defense starts with earthworks and timber palisades and turns to gated stone only as wealth and threat increase.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": [],
+     "note": "DEFENSE-2 tradition-conditional (\"turns to gated stone only as …\"): presumes no present defence"
+    },
+    {
+     "lineId": "CULTURE_PROFILES.germanic.defensePattern[1]",
+     "text": "A militia tradition supports a smaller permanent watch or retinue.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "militia tradition",
+      "retinue (soldiers)",
+      "guard presence (any of watch / garrison): no single reader (design §1 row \"guard presence\"); a disjunction across dimensions is not a declaration (§3.2)"
+     ],
+     "note": "\"supports a smaller permanent watch or retinue\" presumes one stands now; RULES.md has no disjunction"
+    }
+   ],
+   "rendered": false
+  },
+  {
+   "pool": "germanic.socialTexture",
+   "keyGuarantees": [
+    "config culture resolves to \"germanic\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": true,
+   "ruling": "Renders under crisis but asserts no calm; both lines presume nothing beyond the culture key.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.germanic.socialTexture[0]",
+     "text": "Household, guild, parish, and estate obligations overlap; authority is visible through office and reciprocal duty.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": [
+      "guild",
+      "parish (faith)"
+     ]
+    },
+    {
+     "lineId": "CULTURE_PROFILES.germanic.socialTexture[1]",
+     "text": "Craft reputation and customary rights matter almost as much as formal rank in daily disputes.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    }
+   ],
+   "rendered": false
+  },
+  {
+   "pool": "latin.builtForm",
+   "keyGuarantees": [
+    "config culture resolves to \"latin\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders under crisis (916/1000) but no line asserts calm, plenty, safety or normality — the profiles state traditions and material grammar, not the present mood: stays out of the inverse default. Not colour: lines presume market, temple, bathhouse, water and defence the roster may lack.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.latin.builtForm[0]",
+     "text": "Masonry courtyard buildings and tiled roofs gather around public squares and processional streets.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "tier (public squares, processional streets)"
+     ]
+    },
+    {
+     "lineId": "CULTURE_PROFILES.latin.builtForm[1]",
+     "text": "Dense street blocks open into arcades, fountains, markets, and reused monumental precincts.",
+     "needs": [
+      "market"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "tier (dense street blocks, monumental precincts)"
+     ]
+    }
+   ],
+   "rendered": false
+  },
+  {
+   "pool": "latin.civicPattern",
+   "keyGuarantees": [
+    "config culture resolves to \"latin\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders under crisis (916/1000) but no line asserts calm, plenty, safety or normality — the profiles state traditions and material grammar, not the present mood: stays out of the inverse default. Not colour: lines presume market, temple, bathhouse, water and defence the roster may lack.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.latin.civicPattern[0]",
+     "text": "Councils, magistrates, patrons, and legal corporations compete through offices, charters, and public works.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "councils / magistrates as offices (not the seat; ruler kind not asserted)"
+     ]
+    },
+    {
+     "lineId": "CULTURE_PROFILES.latin.civicPattern[1]",
+     "text": "Civic office and private patronage are intertwined; public generosity is a recognized route to influence.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    }
+   ],
+   "rendered": false
+  },
+  {
+   "pool": "latin.exchangePattern",
+   "keyGuarantees": [
+    "config culture resolves to \"latin\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders under crisis (916/1000) but no line asserts calm, plenty, safety or normality — the profiles state traditions and material grammar, not the present mood: stays out of the inverse default. Not colour: lines presume market, temple, bathhouse, water and defence the roster may lack.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.latin.exchangePattern[0]",
+     "text": "Contract, warehousing, market tolls, and notarial practice support long-distance commerce.",
+     "needs": [
+      "market"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "trade-route kind (long-distance commerce)"
+     ]
+    },
+    {
+     "lineId": "CULTURE_PROFILES.latin.exchangePattern[1]",
+     "text": "Urban markets aggregate agricultural estates, workshops, and regional shipping into a documented tax base.",
+     "needs": [
+      "market",
+      "navigable"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "tier (urban)",
+      "regional shipping"
+     ]
+    }
+   ],
+   "rendered": false,
+   "droppedTwins": [
+    {
+     "text": "Contract, warehousing, and notarial practice organize what commerce the place has.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "why": "both lines need a market; the market-free twin",
+     "droppedBy": "chair CENSUS-2 R-D2: the slot renders on no page (no reader of terrainCtx/routeCtx/defenseCtx/cultureCtx or culturalIdentity text in src), so a twin moves nothing"
+    }
+   ]
+  },
+  {
+   "pool": "latin.foodways",
+   "keyGuarantees": [
+    "config culture resolves to \"latin\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders under crisis (916/1000) but no line asserts calm, plenty, safety or normality — the profiles state traditions and material grammar, not the present mood: stays out of the inverse default. Not colour: lines presume market, temple, bathhouse, water and defence the roster may lack.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.latin.foodways[0]",
+     "text": "Bread grains, pulses, garden produce, oil or rendered fats, wine, and preserved fish form the staple pattern.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "food sources (no reader)"
+     ]
+    },
+    {
+     "lineId": "CULTURE_PROFILES.latin.foodways[1]",
+     "text": "Public ovens, neighborhood vendors, and shared dining customs make food distribution visibly civic.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "public ovens",
+      "neighbourhood vendors"
+     ]
+    }
+   ],
+   "rendered": false
+  },
+  {
+   "pool": "latin.sacredLife",
+   "keyGuarantees": [
+    "config culture resolves to \"latin\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders under crisis (916/1000) but no line asserts calm, plenty, safety or normality — the profiles state traditions and material grammar, not the present mood: stays out of the inverse default. Not colour: lines presume market, temple, bathhouse, water and defence the roster may lack.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.latin.sacredLife[0]",
+     "text": "Shrines, processions, confraternities, and formal priesthoods share the public religious calendar.",
+     "needs": [
+      "institution: temple"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "priest / faith presence beyond institution: temple (formal priesthoods, confraternities)"
+     ]
+    },
+    {
+     "lineId": "CULTURE_PROFILES.latin.sacredLife[1]",
+     "text": "Household devotion and civic cult practice overlap in festivals, memorials, and patronage.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": [
+      "civic cult (faith)"
+     ]
+    }
+   ],
+   "rendered": false
+  },
+  {
+   "pool": "latin.defensePattern",
+   "keyGuarantees": [
+    "config culture resolves to \"latin\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders under crisis (916/1000) but no line asserts calm, plenty, safety or normality — the profiles state traditions and material grammar, not the present mood: stays out of the inverse default. Not colour: lines presume market, temple, bathhouse, water and defence the roster may lack.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.latin.defensePattern[0]",
+     "text": "Where a place can pay for them, masonry defenses, watch posts, and road gates are kept as civic infrastructure.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": [],
+     "note": "conditional (\"Where a place can pay for them\")"
+    },
+    {
+     "lineId": "CULTURE_PROFILES.latin.defensePattern[1]",
+     "text": "Professional guards supplement levy forces organized by district and patron.",
+     "needs": [
+      "militia"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "levy organised by district and patron",
+      "guard presence (any of watch / garrison): no single reader (design §1 row \"guard presence\"); a disjunction across dimensions is not a declaration (§3.2)"
+     ],
+     "note": "\"Professional guards\" presumes a standing watch or garrison"
+    }
+   ],
+   "rendered": false
+  },
+  {
+   "pool": "latin.socialTexture",
+   "keyGuarantees": [
+    "config culture resolves to \"latin\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders under crisis (916/1000) but no line asserts calm, plenty, safety or normality — the profiles state traditions and material grammar, not the present mood: stays out of the inverse default. Not colour: lines presume market, temple, bathhouse, water and defence the roster may lack.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.latin.socialTexture[0]",
+     "text": "Public standing is negotiated through family networks, office, clientage, law, and visible contribution to civic life.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "CULTURE_PROFILES.latin.socialTexture[1]",
+     "text": "Squares and courts make politics unusually public even when decisions are settled through private patronage.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "tier (squares and courts)"
+     ]
+    }
+   ],
+   "rendered": false
+  },
+  {
+   "pool": "celtic.builtForm",
+   "keyGuarantees": [
+    "config culture resolves to \"celtic\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders under crisis (916/1000) but no line asserts calm, plenty, safety or normality — the profiles state traditions and material grammar, not the present mood: stays out of the inverse default. Not colour: lines presume market, temple, bathhouse, water and defence the roster may lack.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.celtic.builtForm[0]",
+     "text": "Older round or oval compounds sit among later rectangular halls, linked by lanes rather than a rigid grid.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "CULTURE_PROFILES.celtic.builtForm[1]",
+     "text": "A dispersed settlement has grown inward around an assembly green, defended height, or sacred enclosure.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "defended height / sacred enclosure (disjunction)"
+     ]
+    }
+   ],
+   "rendered": false
+  },
+  {
+   "pool": "celtic.civicPattern",
+   "keyGuarantees": [
+    "config culture resolves to \"celtic\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": true,
+   "ruling": "Renders under crisis but asserts no calm; both lines presume nothing beyond the culture key.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.celtic.civicPattern[0]",
+     "text": "Kin groups, oath relationships, learned mediators, and an assembly divide political authority.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": [
+      "assembly"
+     ]
+    },
+    {
+     "lineId": "CULTURE_PROFILES.celtic.civicPattern[1]",
+     "text": "Leadership depends on hospitality, judgment, and alliance maintenance as much as coercive office.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    }
+   ],
+   "rendered": false
+  },
+  {
+   "pool": "celtic.exchangePattern",
+   "keyGuarantees": [
+    "config culture resolves to \"celtic\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders under crisis (916/1000) but no line asserts calm, plenty, safety or normality — the profiles state traditions and material grammar, not the present mood: stays out of the inverse default. Not colour: lines presume market, temple, bathhouse, water and defence the roster may lack.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.celtic.exchangePattern[0]",
+     "text": "Pastoral wealth, seasonal fairs, metalwork, and gift exchange connect dispersed households.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "seasonal fairs",
+      "metalwork"
+     ]
+    },
+    {
+     "lineId": "CULTURE_PROFILES.celtic.exchangePattern[1]",
+     "text": "Market exchange operates beside tribute, fosterage, and reciprocal obligations between kin groups.",
+     "needs": [
+      "market"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": []
+    }
+   ],
+   "rendered": false
+  },
+  {
+   "pool": "celtic.foodways",
+   "keyGuarantees": [
+    "config culture resolves to \"celtic\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders under crisis (916/1000) but no line asserts calm, plenty, safety or normality — the profiles state traditions and material grammar, not the present mood: stays out of the inverse default. Not colour: lines presume market, temple, bathhouse, water and defence the roster may lack.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.celtic.foodways[0]",
+     "text": "Oats or barley, dairy, cattle products, woodland foods, fish, and seasonal preserves shape the table.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "food sources (no reader)"
+     ]
+    },
+    {
+     "lineId": "CULTURE_PROFILES.celtic.foodways[1]",
+     "text": "Herding and mixed farming produce a strongly seasonal food calendar.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "food sources (no reader)",
+      "season"
+     ]
+    }
+   ],
+   "rendered": false
+  },
+  {
+   "pool": "celtic.sacredLife",
+   "keyGuarantees": [
+    "config culture resolves to \"celtic\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders under crisis (916/1000) but no line asserts calm, plenty, safety or normality — the profiles state traditions and material grammar, not the present mood: stays out of the inverse default. Not colour: lines presume market, temple, bathhouse, water and defence the roster may lack.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.celtic.sacredLife[0]",
+     "text": "Sacred enclosures, wells, groves, learned keepers, and household observances form a layered ritual landscape.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "priest / faith presence beyond institution: temple (learned keepers, groves)"
+     ]
+    },
+    {
+     "lineId": "CULTURE_PROFILES.celtic.sacredLife[1]",
+     "text": "Ritual authority is distributed among formal sanctuaries, seasonal gatherings, and place-based customs.",
+     "needs": [
+      "institution: temple"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "season (seasonal gatherings)"
+     ],
+     "note": "\"formal sanctuaries\" presumes a standing religious house"
+    }
+   ],
+   "rendered": false
+  },
+  {
+   "pool": "celtic.defensePattern",
+   "keyGuarantees": [
+    "config culture resolves to \"celtic\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders under crisis (916/1000) but no line asserts calm, plenty, safety or normality — the profiles state traditions and material grammar, not the present mood: stays out of the inverse default. Not colour: lines presume market, temple, bathhouse, water and defence the roster may lack.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.celtic.defensePattern[0]",
+     "text": "Ditches, banks, timber ramparts, and defensible hills protect clustered households.",
+     "needs": [
+      "palisade"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "defensible hills (terrain, disjunction)"
+     ],
+     "note": "present tense: \"timber ramparts … protect\""
+    },
+    {
+     "lineId": "CULTURE_PROFILES.celtic.defensePattern[1]",
+     "text": "War bands and kin levies assemble around a smaller retinue of experienced fighters.",
+     "needs": [
+      "militia"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "war bands / retinue (soldiers)"
+     ]
+    }
+   ],
+   "rendered": false,
+   "droppedTwins": [
+    {
+     "text": "Where a place can raise them, ditches, banks, and timber ramparts protect clustered households.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "why": "both lines need palisade or militia; the DEFENSE-2 conditional twin",
+     "droppedBy": "chair CENSUS-2 R-D2: the slot renders on no page (no reader of terrainCtx/routeCtx/defenseCtx/cultureCtx or culturalIdentity text in src), so a twin moves nothing"
+    }
+   ]
+  },
+  {
+   "pool": "celtic.socialTexture",
+   "keyGuarantees": [
+    "config culture resolves to \"celtic\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": true,
+   "ruling": "Renders under crisis but asserts no calm; both lines presume nothing beyond the culture key.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.celtic.socialTexture[0]",
+     "text": "Kinship and neighborhood obligations carry legal force, while poets, judges, and mediators preserve public memory.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": [
+      "poets, judges, mediators"
+     ]
+    },
+    {
+     "lineId": "CULTURE_PROFILES.celtic.socialTexture[1]",
+     "text": "Status is made visible through generosity, oath keeping, and the ability to mobilize relatives and clients.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    }
+   ],
+   "rendered": false
+  },
+  {
+   "pool": "arabic.builtForm",
+   "keyGuarantees": [
+    "config culture resolves to \"arabic\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders under crisis (916/1000) but no line asserts calm, plenty, safety or normality — the profiles state traditions and material grammar, not the present mood: stays out of the inverse default. Not colour: lines presume market, temple, bathhouse, water and defence the roster may lack.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.arabic.builtForm[0]",
+     "text": "Shaded lanes connect inward-looking courtyard buildings, market arcades, gardens, and managed water points.",
+     "needs": [
+      "market"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "CULTURE_PROFILES.arabic.builtForm[1]",
+     "text": "Dense masonry quarters open onto caravan courts, covered markets, bathhouses, and planted courtyards.",
+     "needs": [
+      "market",
+      "institution: bathhouse"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "tier (dense masonry quarters)",
+      "trade-route kind (caravan courts)"
+     ]
+    }
+   ],
+   "rendered": false,
+   "droppedTwins": [
+    {
+     "text": "Shaded lanes connect inward-looking courtyard buildings, gardens, and managed water points.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "why": "both lines need a market; the market-free twin",
+     "droppedBy": "chair CENSUS-2 R-D2: the slot renders on no page (no reader of terrainCtx/routeCtx/defenseCtx/cultureCtx or culturalIdentity text in src), so a twin moves nothing"
+    }
+   ]
+  },
+  {
+   "pool": "arabic.civicPattern",
+   "keyGuarantees": [
+    "config culture resolves to \"arabic\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders under crisis (916/1000) but no line asserts calm, plenty, safety or normality — the profiles state traditions and material grammar, not the present mood: stays out of the inverse default. Not colour: lines presume market, temple, bathhouse, water and defence the roster may lack.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.arabic.civicPattern[0]",
+     "text": "Judges, market officers, endowed institutions, military households, and merchant notables share administration.",
+     "needs": [
+      "market"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "soldiers (military households)"
+     ]
+    },
+    {
+     "lineId": "CULTURE_PROFILES.arabic.civicPattern[1]",
+     "text": "Formal law and charitable endowment sit beside neighborhood mediation and courtly patronage.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": [
+      "courtly patronage"
+     ]
+    }
+   ],
+   "rendered": false
+  },
+  {
+   "pool": "arabic.exchangePattern",
+   "keyGuarantees": [
+    "config culture resolves to \"arabic\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders under crisis (916/1000) but no line asserts calm, plenty, safety or normality — the profiles state traditions and material grammar, not the present mood: stays out of the inverse default. Not colour: lines presume market, temple, bathhouse, water and defence the roster may lack.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.arabic.exchangePattern[0]",
+     "text": "Caravan organization, brokerage, credit, warehousing, and inspected markets sustain regional exchange.",
+     "needs": [
+      "market"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "trade-route kind (caravan)"
+     ]
+    },
+    {
+     "lineId": "CULTURE_PROFILES.arabic.exchangePattern[1]",
+     "text": "Merchant partnerships and route intelligence connect local workshops to long-distance trade.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "trade-route kind (long-distance)"
+     ]
+    }
+   ],
+   "rendered": false
+  },
+  {
+   "pool": "arabic.foodways",
+   "keyGuarantees": [
+    "config culture resolves to \"arabic\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders under crisis (916/1000) but no line asserts calm, plenty, safety or normality — the profiles state traditions and material grammar, not the present mood: stays out of the inverse default. Not colour: lines presume market, temple, bathhouse, water and defence the roster may lack.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.arabic.foodways[0]",
+     "text": "Flatbreads, grains, pulses, dates or orchard fruits, dairy, spices, and irrigated garden produce anchor meals.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "food sources (no reader)"
+     ]
+    },
+    {
+     "lineId": "CULTURE_PROFILES.arabic.foodways[1]",
+     "text": "Water access and preservation skill determine the balance between local produce and caravan-borne staples.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "imports (caravan-borne staples)",
+      "trade-route kind"
+     ]
+    }
+   ],
+   "rendered": false
+  },
+  {
+   "pool": "arabic.sacredLife",
+   "keyGuarantees": [
+    "config culture resolves to \"arabic\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders under crisis (916/1000) but no line asserts calm, plenty, safety or normality — the profiles state traditions and material grammar, not the present mood: stays out of the inverse default. Not colour: lines presume market, temple, bathhouse, water and defence the roster may lack.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.arabic.sacredLife[0]",
+     "text": "Daily observance, schools, charitable endowments, pilgrimage traffic, and neighborhood shrines organize sacred life.",
+     "needs": [
+      "institution: school"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "priest / faith presence beyond institution: temple (daily observance, shrines)",
+      "pilgrimage traffic"
+     ]
+    },
+    {
+     "lineId": "CULTURE_PROFILES.arabic.sacredLife[1]",
+     "text": "Religious institutions also support law, education, hospitality, water, and relief for travelers.",
+     "needs": [
+      "institution: temple"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": []
+    }
+   ],
+   "rendered": false,
+   "droppedTwins": [
+    {
+     "text": "Daily observance, charitable giving, and neighborhood shrines organize sacred life.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "why": "both lines need a school or a temple; the twin that needs neither",
+     "droppedBy": "chair CENSUS-2 R-D2: the slot renders on no page (no reader of terrainCtx/routeCtx/defenseCtx/cultureCtx or culturalIdentity text in src), so a twin moves nothing"
+    }
+   ]
+  },
+  {
+   "pool": "arabic.defensePattern",
+   "keyGuarantees": [
+    "config culture resolves to \"arabic\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders under crisis (916/1000) but no line asserts calm, plenty, safety or normality — the profiles state traditions and material grammar, not the present mood: stays out of the inverse default. Not colour: lines presume market, temple, bathhouse, water and defence the roster may lack.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.arabic.defensePattern[0]",
+     "text": "Controlled gates, towers, citadels, and protected water infrastructure define strategic defense.",
+     "needs": [
+      "gate"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "towers / citadels"
+     ]
+    },
+    {
+     "lineId": "CULTURE_PROFILES.arabic.defensePattern[1]",
+     "text": "Mounted patrols and household troops reinforce ward-based watches.",
+     "needs": [
+      "watch"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "soldiers (household troops)",
+      "mounted patrols"
+     ]
+    }
+   ],
+   "rendered": false,
+   "droppedTwins": [
+    {
+     "text": "Where a place can afford them, controlled gates, towers, and guarded water points define its defense.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "why": "both lines need a gate or a watch; the DEFENSE-2 conditional twin",
+     "droppedBy": "chair CENSUS-2 R-D2: the slot renders on no page (no reader of terrainCtx/routeCtx/defenseCtx/cultureCtx or culturalIdentity text in src), so a twin moves nothing"
+    }
+   ]
+  },
+  {
+   "pool": "arabic.socialTexture",
+   "keyGuarantees": [
+    "config culture resolves to \"arabic\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders under crisis (916/1000) but no line asserts calm, plenty, safety or normality — the profiles state traditions and material grammar, not the present mood: stays out of the inverse default. Not colour: lines presume market, temple, bathhouse, water and defence the roster may lack.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.arabic.socialTexture[0]",
+     "text": "Neighborhood, household, legal, charitable, and commercial obligations intersect in markets and courtyards.",
+     "needs": [
+      "market"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "CULTURE_PROFILES.arabic.socialTexture[1]",
+     "text": "Hospitality, reputation, contract, and access to mediation are practical forms of social capital.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    }
+   ],
+   "rendered": false
+  },
+  {
+   "pool": "norse.builtForm",
+   "keyGuarantees": [
+    "config culture resolves to \"norse\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders under crisis (916/1000) but no line asserts calm, plenty, safety or normality — the profiles state traditions and material grammar, not the present mood: stays out of the inverse default. Not colour: lines presume market, temple, bathhouse, water and defence the roster may lack.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.norse.builtForm[0]",
+     "text": "Long halls, boat sheds, turf-roofed outbuildings, and timber yards face a landing or sheltered common.",
+     "needs": [
+      "navigable"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "boat sheds (reader:hook-pools SEA_HOOK_WORDS \"boat\" if read as hooks)"
+     ]
+    },
+    {
+     "lineId": "CULTURE_PROFILES.norse.builtForm[1]",
+     "text": "A compact hall-centered settlement stretches along the best shoreline, roadstead, or defensible ridge.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "shoreline / roadstead / ridge (disjunction)"
+     ]
+    }
+   ],
+   "rendered": false
+  },
+  {
+   "pool": "norse.civicPattern",
+   "keyGuarantees": [
+    "config culture resolves to \"norse\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders under crisis (916/1000) but no line asserts calm, plenty, safety or normality — the profiles state traditions and material grammar, not the present mood: stays out of the inverse default. Not colour: lines presume market, temple, bathhouse, water and defence the roster may lack.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.norse.civicPattern[0]",
+     "text": "Household leaders and law speakers bargain in assembly beneath a chieftain or royal representative.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "chieftain or royal representative"
+     ]
+    },
+    {
+     "lineId": "CULTURE_PROFILES.norse.civicPattern[1]",
+     "text": "Authority depends on followings, ships, land, judgments, and the public distribution of wealth.",
+     "needs": [
+      "navigable"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "ships"
+     ]
+    }
+   ],
+   "rendered": false
+  },
+  {
+   "pool": "norse.exchangePattern",
+   "keyGuarantees": [
+    "config culture resolves to \"norse\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders under crisis (916/1000) but no line asserts calm, plenty, safety or normality — the profiles state traditions and material grammar, not the present mood: stays out of the inverse default. Not colour: lines presume market, temple, bathhouse, water and defence the roster may lack.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.norse.exchangePattern[0]",
+     "text": "Maritime trade, seasonal voyaging, fishing, pastoral production, and portable wealth drive exchange.",
+     "needs": [
+      "coast"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "maritime trade, seasonal voyaging"
+     ]
+    },
+    {
+     "lineId": "CULTURE_PROFILES.norse.exchangePattern[1]",
+     "text": "Landing places and halls serve as markets before specialized commercial institutions emerge.",
+     "needs": [
+      "navigable"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": [],
+     "note": "\"Landing places … serve as markets\""
+    }
+   ],
+   "rendered": false,
+   "droppedTwins": [
+    {
+     "text": "Pastoral production, fishing where water allows, and portable wealth drive exchange.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "why": "both lines need coast or navigable water; the landlocked twin",
+     "droppedBy": "chair CENSUS-2 R-D2: the slot renders on no page (no reader of terrainCtx/routeCtx/defenseCtx/cultureCtx or culturalIdentity text in src), so a twin moves nothing"
+    }
+   ]
+  },
+  {
+   "pool": "norse.foodways",
+   "keyGuarantees": [
+    "config culture resolves to \"norse\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders under crisis (916/1000) but no line asserts calm, plenty, safety or normality — the profiles state traditions and material grammar, not the present mood: stays out of the inverse default. Not colour: lines presume market, temple, bathhouse, water and defence the roster may lack.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.norse.foodways[0]",
+     "text": "Barley, dairy, preserved fish or meat, hardy greens, and seasonal livestock products dominate.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "food sources (no reader)",
+      "season"
+     ]
+    },
+    {
+     "lineId": "CULTURE_PROFILES.norse.foodways[1]",
+     "text": "Smoking, drying, fermenting, and winter storage are central household technologies.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "season (winter storage)"
+     ]
+    }
+   ],
+   "rendered": false
+  },
+  {
+   "pool": "norse.sacredLife",
+   "keyGuarantees": [
+    "config culture resolves to \"norse\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders under crisis (916/1000) but no line asserts calm, plenty, safety or normality — the profiles state traditions and material grammar, not the present mood: stays out of the inverse default. Not colour: lines presume market, temple, bathhouse, water and defence the roster may lack.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.norse.sacredLife[0]",
+     "text": "Household rites, oath sites, burial memory, feast days, and formal sanctuaries overlap.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "priest / faith presence beyond institution: temple (formal sanctuaries, oath sites)"
+     ]
+    },
+    {
+     "lineId": "CULTURE_PROFILES.norse.sacredLife[1]",
+     "text": "Religious authority remains distributed between local ritual specialists and powerful patrons.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    }
+   ],
+   "rendered": false
+  },
+  {
+   "pool": "norse.defensePattern",
+   "keyGuarantees": [
+    "config culture resolves to \"norse\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders under crisis (916/1000) but no line asserts calm, plenty, safety or normality — the profiles state traditions and material grammar, not the present mood: stays out of the inverse default. Not colour: lines presume market, temple, bathhouse, water and defence the roster may lack.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.norse.defensePattern[0]",
+     "text": "Readily mobilized crews come first; ringworks, timber ramparts, and beacon systems follow where a place can man them.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": [],
+     "note": "conditional (\"follow where a place can man them\")"
+    },
+    {
+     "lineId": "CULTURE_PROFILES.norse.defensePattern[1]",
+     "text": "A warrior following provides the permanent core around which levy and ship crews assemble.",
+     "needs": [
+      "navigable"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "soldiers (warrior following)",
+      "ship crews"
+     ]
+    }
+   ],
+   "rendered": false
+  },
+  {
+   "pool": "norse.socialTexture",
+   "keyGuarantees": [
+    "config culture resolves to \"norse\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders under crisis (916/1000) but no line asserts calm, plenty, safety or normality — the profiles state traditions and material grammar, not the present mood: stays out of the inverse default. Not colour: lines presume market, temple, bathhouse, water and defence the roster may lack.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.norse.socialTexture[0]",
+     "text": "Law, household reputation, reciprocal gifts, and access to ships or land structure public standing.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": [],
+     "note": "\"ships or land\" is a disjunction"
+    },
+    {
+     "lineId": "CULTURE_PROFILES.norse.socialTexture[1]",
+     "text": "Seasonal scarcity makes storage, mutual aid, and dependable leadership visibly political.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "season (seasonal scarcity)"
+     ]
+    }
+   ],
+   "rendered": false
+  },
+  {
+   "pool": "slavic.builtForm",
+   "keyGuarantees": [
+    "config culture resolves to \"slavic\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders under crisis (916/1000) but no line asserts calm, plenty, safety or normality — the profiles state traditions and material grammar, not the present mood: stays out of the inverse default. Not colour: lines presume market, temple, bathhouse, water and defence the roster may lack.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.slavic.builtForm[0]",
+     "text": "Timber compounds, kitchen gardens, workshops, and communal greens spread along a riverbank or defensible rise.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": [],
+     "note": "\"riverbank or defensible rise\" is a disjunction"
+    },
+    {
+     "lineId": "CULTURE_PROFILES.slavic.builtForm[1]",
+     "text": "A palisaded core is surrounded by farm lanes, bathhouses, sheds, and later market streets.",
+     "needs": [
+      "palisade",
+      "institution: bathhouse",
+      "market"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": []
+    }
+   ],
+   "rendered": false
+  },
+  {
+   "pool": "slavic.civicPattern",
+   "keyGuarantees": [
+    "config culture resolves to \"slavic\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders under crisis (916/1000) but no line asserts calm, plenty, safety or normality — the profiles state traditions and material grammar, not the present mood: stays out of the inverse default. Not colour: lines presume market, temple, bathhouse, water and defence the roster may lack.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.slavic.civicPattern[0]",
+     "text": "Communal assemblies, household elders, service elites, and princely or appointed officers share authority.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "princely or appointed officers"
+     ]
+    },
+    {
+     "lineId": "CULTURE_PROFILES.slavic.civicPattern[1]",
+     "text": "Collective land and labor customs coexist with tribute, estate, and court obligations.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    }
+   ],
+   "rendered": false
+  },
+  {
+   "pool": "slavic.exchangePattern",
+   "keyGuarantees": [
+    "config culture resolves to \"slavic\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders under crisis (916/1000) but no line asserts calm, plenty, safety or normality — the profiles state traditions and material grammar, not the present mood: stays out of the inverse default. Not colour: lines presume market, temple, bathhouse, water and defence the roster may lack.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.slavic.exchangePattern[0]",
+     "text": "River trade, forest products, grain, wax, furs, and seasonal fairs connect households to wider routes.",
+     "needs": [
+      "river"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "exports (forest products, wax, furs)"
+     ]
+    },
+    {
+     "lineId": "CULTURE_PROFILES.slavic.exchangePattern[1]",
+     "text": "Communal production and itinerant merchants precede more formal guild and warehouse systems.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    }
+   ],
+   "rendered": false
+  },
+  {
+   "pool": "slavic.foodways",
+   "keyGuarantees": [
+    "config culture resolves to \"slavic\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders under crisis (916/1000) but no line asserts calm, plenty, safety or normality — the profiles state traditions and material grammar, not the present mood: stays out of the inverse default. Not colour: lines presume market, temple, bathhouse, water and defence the roster may lack.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.slavic.foodways[0]",
+     "text": "Rye, millet, cabbage, mushrooms, river fish, dairy, and preserved forest foods form the staple pattern.",
+     "needs": [
+      "river"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "food sources (no reader) (river fish)"
+     ]
+    },
+    {
+     "lineId": "CULTURE_PROFILES.slavic.foodways[1]",
+     "text": "Fermentation, pickling, drying, and shared ovens stretch the harvest through winter.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "season (through winter)",
+      "shared ovens"
+     ]
+    }
+   ],
+   "rendered": false
+  },
+  {
+   "pool": "slavic.sacredLife",
+   "keyGuarantees": [
+    "config culture resolves to \"slavic\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders under crisis (916/1000) but no line asserts calm, plenty, safety or normality — the profiles state traditions and material grammar, not the present mood: stays out of the inverse default. Not colour: lines presume market, temple, bathhouse, water and defence the roster may lack.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.slavic.sacredLife[0]",
+     "text": "Formal temples or churches coexist with ancestor customs, seasonal festivals, springs, and household rites.",
+     "needs": [
+      "institution: temple"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "CULTURE_PROFILES.slavic.sacredLife[1]",
+     "text": "Sacred life follows both an institutional calendar and the agricultural year.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    }
+   ],
+   "rendered": false
+  },
+  {
+   "pool": "slavic.defensePattern",
+   "keyGuarantees": [
+    "config culture resolves to \"slavic\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders under crisis (916/1000) but no line asserts calm, plenty, safety or normality — the profiles state traditions and material grammar, not the present mood: stays out of the inverse default. Not colour: lines presume market, temple, bathhouse, water and defence the roster may lack.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.slavic.defensePattern[0]",
+     "text": "Palisades, ditches, river barriers, and fortified compounds provide layered defense.",
+     "needs": [
+      "palisade",
+      "river"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "fortified compounds"
+     ]
+    },
+    {
+     "lineId": "CULTURE_PROFILES.slavic.defensePattern[1]",
+     "text": "A household levy is the common defense; a retinue stands beside it only where a lord can keep one.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": [],
+     "note": "conditional (\"only where a lord can keep one\"); \"a household levy is the common defense\" states a tradition"
+    }
+   ],
+   "rendered": false
+  },
+  {
+   "pool": "slavic.socialTexture",
+   "keyGuarantees": [
+    "config culture resolves to \"slavic\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders under crisis (916/1000) but no line asserts calm, plenty, safety or normality — the profiles state traditions and material grammar, not the present mood: stays out of the inverse default. Not colour: lines presume market, temple, bathhouse, water and defence the roster may lack.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.slavic.socialTexture[0]",
+     "text": "Household and communal labor obligations are enforced through reputation, assembly, and local office.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "CULTURE_PROFILES.slavic.socialTexture[1]",
+     "text": "Shared ovens, bathhouses, wells, and seasonal work make private life unusually communal.",
+     "needs": [
+      "institution: bathhouse"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "shared ovens"
+     ]
+    }
+   ],
+   "rendered": false
+  },
+  {
+   "pool": "east_asian.builtForm",
+   "keyGuarantees": [
+    "config culture resolves to \"east_asian\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders under crisis (916/1000) but no line asserts calm, plenty, safety or normality — the profiles state traditions and material grammar, not the present mood: stays out of the inverse default. Not colour: lines presume market, temple, bathhouse, water and defence the roster may lack.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.east_asian.builtForm[0]",
+     "text": "Walled compounds, tiled roofs, axial streets, shop houses, and garden courts organize distinct wards.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "walled compounds (not the perimeter, ruling 3)",
+      "tier (wards, axial streets)"
+     ]
+    },
+    {
+     "lineId": "CULTURE_PROFILES.east_asian.builtForm[1]",
+     "text": "A planned civic axis links gate, market, administrative compound, temple precinct, and waterworks.",
+     "needs": [
+      "gate",
+      "market",
+      "institution: temple"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "administrative compound",
+      "waterworks"
+     ]
+    }
+   ],
+   "rendered": false
+  },
+  {
+   "pool": "east_asian.civicPattern",
+   "keyGuarantees": [
+    "config culture resolves to \"east_asian\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders under crisis (916/1000) but no line asserts calm, plenty, safety or normality — the profiles state traditions and material grammar, not the present mood: stays out of the inverse default. Not colour: lines presume market, temple, bathhouse, water and defence the roster may lack.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.east_asian.civicPattern[0]",
+     "text": "Administrative officers, lineage organizations, neighborhood heads, guilds, and landed patrons overlap.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "guilds",
+      "lineage organisations"
+     ]
+    },
+    {
+     "lineId": "CULTURE_PROFILES.east_asian.civicPattern[1]",
+     "text": "Written office and examination or appointment coexist with household, temple, and merchant authority.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": [
+      "written office / examination"
+     ]
+    }
+   ],
+   "rendered": false
+  },
+  {
+   "pool": "east_asian.exchangePattern",
+   "keyGuarantees": [
+    "config culture resolves to \"east_asian\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders under crisis (916/1000) but no line asserts calm, plenty, safety or normality — the profiles state traditions and material grammar, not the present mood: stays out of the inverse default. Not colour: lines presume market, temple, bathhouse, water and defence the roster may lack.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.east_asian.exchangePattern[0]",
+     "text": "Regulated markets, guild brokerage, granary systems, canals or roads, and standardized records support exchange.",
+     "needs": [
+      "market",
+      "institution: granary"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "canals or roads (disjunction)"
+     ]
+    },
+    {
+     "lineId": "CULTURE_PROFILES.east_asian.exchangePattern[1]",
+     "text": "Merchant associations connect specialist craft wards to agricultural hinterlands and long routes.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "trade-route kind (long routes)"
+     ]
+    }
+   ],
+   "rendered": false
+  },
+  {
+   "pool": "east_asian.foodways",
+   "keyGuarantees": [
+    "config culture resolves to \"east_asian\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders under crisis (916/1000) but no line asserts calm, plenty, safety or normality — the profiles state traditions and material grammar, not the present mood: stays out of the inverse default. Not colour: lines presume market, temple, bathhouse, water and defence the roster may lack.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.east_asian.foodways[0]",
+     "text": "Rice or millet, wheat foods, soy or pulse products, vegetables, tea, fish, and preserved condiments vary by ecology.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "food sources (no reader)"
+     ]
+    },
+    {
+     "lineId": "CULTURE_PROFILES.east_asian.foodways[1]",
+     "text": "Markets, shared waterworks, fermentation, and intensive garden production structure urban food supply.",
+     "needs": [
+      "market"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "tier (urban food supply)"
+     ]
+    }
+   ],
+   "rendered": false
+  },
+  {
+   "pool": "east_asian.sacredLife",
+   "keyGuarantees": [
+    "config culture resolves to \"east_asian\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": true,
+   "ruling": "Renders under crisis but asserts no calm; both lines presume nothing beyond the culture key.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.east_asian.sacredLife[0]",
+     "text": "Temple, shrine, household, ancestor, philosophical, and state observances coexist without a single institutional center.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "CULTURE_PROFILES.east_asian.sacredLife[1]",
+     "text": "Ritual calendars connect family memorials, neighborhood festivals, pilgrimage, and civic legitimacy.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": [
+      "pilgrimage"
+     ]
+    }
+   ],
+   "rendered": false
+  },
+  {
+   "pool": "east_asian.defensePattern",
+   "keyGuarantees": [
+    "config culture resolves to \"east_asian\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders under crisis (916/1000) but no line asserts calm, plenty, safety or normality — the profiles state traditions and material grammar, not the present mood: stays out of the inverse default. Not colour: lines presume market, temple, bathhouse, water and defence the roster may lack.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.east_asian.defensePattern[0]",
+     "text": "Where the state reaches, enclosed wards, controlled gates, watch towers, granaries, and disciplined troops give defense in depth.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": [],
+     "note": "conditional (\"Where the state reaches\")"
+    },
+    {
+     "lineId": "CULTURE_PROFILES.east_asian.defensePattern[1]",
+     "text": "Militia and professional troops are organized through districts and administrative chains.",
+     "needs": [
+      "militia"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "soldiers (professional troops)"
+     ]
+    }
+   ],
+   "rendered": false
+  },
+  {
+   "pool": "east_asian.socialTexture",
+   "keyGuarantees": [
+    "config culture resolves to \"east_asian\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": true,
+   "ruling": "Renders under crisis but asserts no calm; both lines presume nothing beyond the culture key.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.east_asian.socialTexture[0]",
+     "text": "Office, household seniority, lineage, guild membership, education, and neighborhood duty create intersecting hierarchies.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": [
+      "guild membership"
+     ]
+    },
+    {
+     "lineId": "CULTURE_PROFILES.east_asian.socialTexture[1]",
+     "text": "Disputes often move through family, guild, or official intermediaries before becoming public contests.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    }
+   ],
+   "rendered": false
+  },
+  {
+   "pool": "mesoamerican.builtForm",
+   "keyGuarantees": [
+    "config culture resolves to \"mesoamerican\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders under crisis (916/1000) but no line asserts calm, plenty, safety or normality — the profiles state traditions and material grammar, not the present mood: stays out of the inverse default. Not colour: lines presume market, temple, bathhouse, water and defence the roster may lack.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.mesoamerican.builtForm[0]",
+     "text": "Residential compounds and gardens radiate from a raised civic-ritual precinct and broad market plaza.",
+     "needs": [
+      "market"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "tier (raised civic-ritual precinct)"
+     ]
+    },
+    {
+     "lineId": "CULTURE_PROFILES.mesoamerican.builtForm[1]",
+     "text": "Causeways, terraces, canals or reservoirs connect dense neighborhoods to monumental public space.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "tier (dense neighbourhoods, monumental space)",
+      "canals or reservoirs"
+     ]
+    }
+   ],
+   "rendered": false
+  },
+  {
+   "pool": "mesoamerican.civicPattern",
+   "keyGuarantees": [
+    "config culture resolves to \"mesoamerican\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders under crisis (916/1000) but no line asserts calm, plenty, safety or normality — the profiles state traditions and material grammar, not the present mood: stays out of the inverse default. Not colour: lines presume market, temple, bathhouse, water and defence the roster may lack.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.mesoamerican.civicPattern[0]",
+     "text": "Ward leaders, tribute officers, priestly institutions, military societies, and dynastic households divide authority.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "priest / faith presence beyond institution: temple (priestly institutions)",
+      "soldiers (military societies)"
+     ]
+    },
+    {
+     "lineId": "CULTURE_PROFILES.mesoamerican.civicPattern[1]",
+     "text": "Markets and neighborhood organizations operate inside a wider system of civic labor and tribute.",
+     "needs": [
+      "market"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": []
+    }
+   ],
+   "rendered": false
+  },
+  {
+   "pool": "mesoamerican.exchangePattern",
+   "keyGuarantees": [
+    "config culture resolves to \"mesoamerican\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders under crisis (916/1000) but no line asserts calm, plenty, safety or normality — the profiles state traditions and material grammar, not the present mood: stays out of the inverse default. Not colour: lines presume market, temple, bathhouse, water and defence the roster may lack.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.mesoamerican.exchangePattern[0]",
+     "text": "Large periodic markets, professional merchants, tribute redistribution, and specialist craft production drive exchange.",
+     "needs": [
+      "market"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "CULTURE_PROFILES.mesoamerican.exchangePattern[1]",
+     "text": "Porters, canoe traffic where possible, and managed causeways move staple and prestige goods.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": [],
+     "note": "conditional (\"canoe traffic where possible\")"
+    }
+   ],
+   "rendered": false
+  },
+  {
+   "pool": "mesoamerican.foodways",
+   "keyGuarantees": [
+    "config culture resolves to \"mesoamerican\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders under crisis (916/1000) but no line asserts calm, plenty, safety or normality — the profiles state traditions and material grammar, not the present mood: stays out of the inverse default. Not colour: lines presume market, temple, bathhouse, water and defence the roster may lack.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.mesoamerican.foodways[0]",
+     "text": "Maize, beans, squash, chile, tomatoes, greens, cacao, and locally available fish or game form the staple pattern.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "food sources (no reader)"
+     ]
+    },
+    {
+     "lineId": "CULTURE_PROFILES.mesoamerican.foodways[1]",
+     "text": "Intensive plots, terraces, raised fields, and market redistribution support dense populations.",
+     "needs": [
+      "population: >= middling"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": [],
+     "note": "\"support dense populations\""
+    }
+   ],
+   "rendered": false
+  },
+  {
+   "pool": "mesoamerican.sacredLife",
+   "keyGuarantees": [
+    "config culture resolves to \"mesoamerican\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders under crisis (916/1000) but no line asserts calm, plenty, safety or normality — the profiles state traditions and material grammar, not the present mood: stays out of the inverse default. Not colour: lines presume market, temple, bathhouse, water and defence the roster may lack.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.mesoamerican.sacredLife[0]",
+     "text": "Calendar rites, neighborhood temples, household offerings, pilgrimage, and civic ceremony are materially intertwined.",
+     "needs": [
+      "institution: temple"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "pilgrimage"
+     ]
+    },
+    {
+     "lineId": "CULTURE_PROFILES.mesoamerican.sacredLife[1]",
+     "text": "Ritual specialists track agricultural, dynastic, and communal obligations through a public festival cycle.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": [
+      "ritual specialists (faith)"
+     ]
+    }
+   ],
+   "rendered": false
+  },
+  {
+   "pool": "mesoamerican.defensePattern",
+   "keyGuarantees": [
+    "config culture resolves to \"mesoamerican\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders under crisis (916/1000) but no line asserts calm, plenty, safety or normality — the profiles state traditions and material grammar, not the present mood: stays out of the inverse default. Not colour: lines presume market, temple, bathhouse, water and defence the roster may lack.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.mesoamerican.defensePattern[0]",
+     "text": "Terraces, causeways, controlled approaches, fortified heights, and organized military orders shape defense.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "soldiers (organised military orders)",
+      "fortified heights"
+     ]
+    },
+    {
+     "lineId": "CULTURE_PROFILES.mesoamerican.defensePattern[1]",
+     "text": "Ward levies reinforce trained warrior societies and palace guards.",
+     "needs": [
+      "militia"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "palace guards",
+      "warrior societies (soldiers)",
+      "guard presence (any of watch / garrison): no single reader (design §1 row \"guard presence\"); a disjunction across dimensions is not a declaration (§3.2)"
+     ]
+    }
+   ],
+   "rendered": false
+  },
+  {
+   "pool": "mesoamerican.socialTexture",
+   "keyGuarantees": [
+    "config culture resolves to \"mesoamerican\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders under crisis (916/1000) but no line asserts calm, plenty, safety or normality — the profiles state traditions and material grammar, not the present mood: stays out of the inverse default. Not colour: lines presume market, temple, bathhouse, water and defence the roster may lack.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.mesoamerican.socialTexture[0]",
+     "text": "Ward membership, craft specialization, market standing, tribute duty, and ritual office structure public life.",
+     "needs": [
+      "market"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "CULTURE_PROFILES.mesoamerican.socialTexture[1]",
+     "text": "Civic labor and festival obligations make the settlement a visibly collective project.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    }
+   ],
+   "rendered": false
+  },
+  {
+   "pool": "south_asian.builtForm",
+   "keyGuarantees": [
+    "config culture resolves to \"south_asian\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders under crisis (916/1000) but no line asserts calm, plenty, safety or normality — the profiles state traditions and material grammar, not the present mood: stays out of the inverse default. Not colour: lines presume market, temple, bathhouse, water and defence the roster may lack.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.south_asian.builtForm[0]",
+     "text": "Dense bazaar streets, occupational quarters, courtyard homes, shrines, tanks, and shaded arcades interlock.",
+     "needs": [
+      "market"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "tier (dense bazaar streets)"
+     ]
+    },
+    {
+     "lineId": "CULTURE_PROFILES.south_asian.builtForm[1]",
+     "text": "A temple, court, or fortified precinct anchors neighborhoods organized around wells, workshops, and markets.",
+     "needs": [
+      "market"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "temple, court or fortified precinct (disjunction)"
+     ]
+    }
+   ],
+   "rendered": false,
+   "droppedTwins": [
+    {
+     "text": "Courtyard homes, shrines, wells, and workshop lanes interlock around shared water.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "why": "both lines need a market; the market-free twin",
+     "droppedBy": "chair CENSUS-2 R-D2: the slot renders on no page (no reader of terrainCtx/routeCtx/defenseCtx/cultureCtx or culturalIdentity text in src), so a twin moves nothing"
+    }
+   ]
+  },
+  {
+   "pool": "south_asian.civicPattern",
+   "keyGuarantees": [
+    "config culture resolves to \"south_asian\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders under crisis (916/1000) but no line asserts calm, plenty, safety or normality — the profiles state traditions and material grammar, not the present mood: stays out of the inverse default. Not colour: lines presume market, temple, bathhouse, water and defence the roster may lack.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.south_asian.civicPattern[0]",
+     "text": "Court officers, councils, merchant and craft corporations, religious endowments, and neighborhood leaders overlap.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "court officers",
+      "craft corporations"
+     ]
+    },
+    {
+     "lineId": "CULTURE_PROFILES.south_asian.civicPattern[1]",
+     "text": "Local assemblies and guild institutions negotiate tax, water, ritual, and occupational obligations with rulers.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    }
+   ],
+   "rendered": false
+  },
+  {
+   "pool": "south_asian.exchangePattern",
+   "keyGuarantees": [
+    "config culture resolves to \"south_asian\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders under crisis (916/1000) but no line asserts calm, plenty, safety or normality — the profiles state traditions and material grammar, not the present mood: stays out of the inverse default. Not colour: lines presume market, temple, bathhouse, water and defence the roster may lack.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.south_asian.exchangePattern[0]",
+     "text": "Bazaars, merchant houses, craft corporations, credit, pilgrimage, and caravan or maritime routes support exchange.",
+     "needs": [
+      "market"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "trade-route kind (caravan or maritime)"
+     ]
+    },
+    {
+     "lineId": "CULTURE_PROFILES.south_asian.exchangePattern[1]",
+     "text": "Occupational specialization links rural production to dense networks of processing and resale.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    }
+   ],
+   "rendered": false
+  },
+  {
+   "pool": "south_asian.foodways",
+   "keyGuarantees": [
+    "config culture resolves to \"south_asian\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders under crisis (916/1000) but no line asserts calm, plenty, safety or normality — the profiles state traditions and material grammar, not the present mood: stays out of the inverse default. Not colour: lines presume market, temple, bathhouse, water and defence the roster may lack.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.south_asian.foodways[0]",
+     "text": "Rice, wheat or millet, pulses, vegetables, dairy, oils, spices, and regional fruits vary with climate and water.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "food sources (no reader)",
+      "climate"
+     ]
+    },
+    {
+     "lineId": "CULTURE_PROFILES.south_asian.foodways[1]",
+     "text": "Irrigation, tanks, market kitchens, preservation, and ritual food rules shape supply and consumption.",
+     "needs": [
+      "market"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "irrigation tanks"
+     ]
+    }
+   ],
+   "rendered": false
+  },
+  {
+   "pool": "south_asian.sacredLife",
+   "keyGuarantees": [
+    "config culture resolves to \"south_asian\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders under crisis (916/1000) but no line asserts calm, plenty, safety or normality — the profiles state traditions and material grammar, not the present mood: stays out of the inverse default. Not colour: lines presume market, temple, bathhouse, water and defence the roster may lack.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.south_asian.sacredLife[0]",
+     "text": "Temple, monastery, shrine, household, philosophical, and pilgrimage traditions share a crowded sacred landscape.",
+     "needs": [
+      "institution: temple"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "monastery (institution: monastery not presumed singly)",
+      "pilgrimage"
+     ]
+    },
+    {
+     "lineId": "CULTURE_PROFILES.south_asian.sacredLife[1]",
+     "text": "Festival patronage, feeding, waterworks, education, and ritual service make sacred institutions civic actors.",
+     "needs": [
+      "institution: temple"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": [],
+     "note": "\"sacred institutions\" presumes at least one standing house"
+    }
+   ],
+   "rendered": false,
+   "droppedTwins": [
+    {
+     "text": "Household, shrine, and pilgrimage traditions share a crowded sacred landscape.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "why": "both lines need a temple; the temple-free twin",
+     "droppedBy": "chair CENSUS-2 R-D2: the slot renders on no page (no reader of terrainCtx/routeCtx/defenseCtx/cultureCtx or culturalIdentity text in src), so a twin moves nothing"
+    }
+   ]
+  },
+  {
+   "pool": "south_asian.defensePattern",
+   "keyGuarantees": [
+    "config culture resolves to \"south_asian\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders under crisis (916/1000) but no line asserts calm, plenty, safety or normality — the profiles state traditions and material grammar, not the present mood: stays out of the inverse default. Not colour: lines presume market, temple, bathhouse, water and defence the roster may lack.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.south_asian.defensePattern[0]",
+     "text": "Fortified precincts, gates, watch towers, protected tanks, and elephant or cavalry yards support strategic defense.",
+     "needs": [
+      "gate"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "fortified precincts",
+      "elephant or cavalry yards",
+      "watch towers"
+     ]
+    },
+    {
+     "lineId": "CULTURE_PROFILES.south_asian.defensePattern[1]",
+     "text": "Professional retainers and district levies answer through layered patrons and offices.",
+     "needs": [
+      "militia"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "soldiers (professional retainers)"
+     ]
+    }
+   ],
+   "rendered": false,
+   "droppedTwins": [
+    {
+     "text": "Where a place can pay for them, gates, watch towers, and protected tanks support its defense; otherwise households look to their patrons.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "why": "both lines need a gate or a militia; the DEFENSE-2 conditional twin",
+     "droppedBy": "chair CENSUS-2 R-D2: the slot renders on no page (no reader of terrainCtx/routeCtx/defenseCtx/cultureCtx or culturalIdentity text in src), so a twin moves nothing"
+    }
+   ]
+  },
+  {
+   "pool": "south_asian.socialTexture",
+   "keyGuarantees": [
+    "config culture resolves to \"south_asian\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders under crisis (916/1000) but no line asserts calm, plenty, safety or normality — the profiles state traditions and material grammar, not the present mood: stays out of the inverse default. Not colour: lines presume market, temple, bathhouse, water and defence the roster may lack.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.south_asian.socialTexture[0]",
+     "text": "Occupation, neighborhood, household, guild, patronage, and religious affiliation create multiple routes to belonging.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "CULTURE_PROFILES.south_asian.socialTexture[1]",
+     "text": "Water access, market standing, ritual service, and credit relationships are everyday political facts.",
+     "needs": [
+      "market"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": []
+    }
+   ],
+   "rendered": false
+  },
+  {
+   "pool": "steppe.builtForm",
+   "keyGuarantees": [
+    "config culture resolves to \"steppe\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders under crisis (916/1000) but no line asserts calm, plenty, safety or normality — the profiles state traditions and material grammar, not the present mood: stays out of the inverse default. Not colour: lines presume market, temple, bathhouse, water and defence the roster may lack.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.steppe.builtForm[0]",
+     "text": "Permanent halls, corrals, storehouses, and workshops stand beside seasonal encampment space.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "season (seasonal encampment)"
+     ]
+    },
+    {
+     "lineId": "CULTURE_PROFILES.steppe.builtForm[1]",
+     "text": "A fortified trade station or river town acts as the settled hinge of a much wider mobile hinterland.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "fortified trade station or river town (disjunction)"
+     ]
+    }
+   ],
+   "rendered": false
+  },
+  {
+   "pool": "steppe.civicPattern",
+   "keyGuarantees": [
+    "config culture resolves to \"steppe\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders under crisis (916/1000) but no line asserts calm, plenty, safety or normality — the profiles state traditions and material grammar, not the present mood: stays out of the inverse default. Not colour: lines presume market, temple, bathhouse, water and defence the roster may lack.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.steppe.civicPattern[0]",
+     "text": "Clan leaders, assemblies, military followings, trade brokers, and appointed governors negotiate authority.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": [
+      "military followings"
+     ]
+    },
+    {
+     "lineId": "CULTURE_PROFILES.steppe.civicPattern[1]",
+     "text": "Political power depends on pasture access, herds, mobility, marriage alliances, and control of caravan corridors.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "trade-route kind (caravan corridors)"
+     ]
+    }
+   ],
+   "rendered": false
+  },
+  {
+   "pool": "steppe.exchangePattern",
+   "keyGuarantees": [
+    "config culture resolves to \"steppe\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders under crisis (916/1000) but no line asserts calm, plenty, safety or normality — the profiles state traditions and material grammar, not the present mood: stays out of the inverse default. Not colour: lines presume market, temple, bathhouse, water and defence the roster may lack.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.steppe.exchangePattern[0]",
+     "text": "Livestock, horses, felt, leather, transport, tribute, and caravan brokerage dominate exchange.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "exports (livestock, horses, felt)"
+     ]
+    },
+    {
+     "lineId": "CULTURE_PROFILES.steppe.exchangePattern[1]",
+     "text": "Seasonal markets connect mobile producers to settled grain, metalwork, textiles, and administration.",
+     "needs": [
+      "market"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "season"
+     ]
+    }
+   ],
+   "rendered": false
+  },
+  {
+   "pool": "steppe.foodways",
+   "keyGuarantees": [
+    "config culture resolves to \"steppe\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders under crisis (916/1000) but no line asserts calm, plenty, safety or normality — the profiles state traditions and material grammar, not the present mood: stays out of the inverse default. Not colour: lines presume market, temple, bathhouse, water and defence the roster may lack.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.steppe.foodways[0]",
+     "text": "Meat, dairy, fermented drinks, traded grain, hardy vegetables, and preserved travel foods form the staple pattern.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "food sources (no reader)",
+      "imports (traded grain)"
+     ]
+    },
+    {
+     "lineId": "CULTURE_PROFILES.steppe.foodways[1]",
+     "text": "Herd cycles and winter fodder matter as much as harvests to food security.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "season (winter fodder)"
+     ]
+    }
+   ],
+   "rendered": false
+  },
+  {
+   "pool": "steppe.sacredLife",
+   "keyGuarantees": [
+    "config culture resolves to \"steppe\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": true,
+   "ruling": "Renders under crisis but asserts no calm; both lines presume nothing beyond the culture key.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.steppe.sacredLife[0]",
+     "text": "Household, ancestor, sky, land, shrine, and adopted institutional traditions coexist across mobile and settled life.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "CULTURE_PROFILES.steppe.sacredLife[1]",
+     "text": "Ritual authority often travels with households even when major sanctuaries anchor regional gatherings.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    }
+   ],
+   "rendered": false
+  },
+  {
+   "pool": "steppe.defensePattern",
+   "keyGuarantees": [
+    "config culture resolves to \"steppe\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders under crisis (916/1000) but no line asserts calm, plenty, safety or normality — the profiles state traditions and material grammar, not the present mood: stays out of the inverse default. Not colour: lines presume market, temple, bathhouse, water and defence the roster may lack.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.steppe.defensePattern[0]",
+     "text": "Mounted patrols, mobile musters, earthworks, corrals, and signal systems protect people and herds.",
+     "needs": [
+      "militia"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "mounted patrols",
+      "signal systems"
+     ]
+    },
+    {
+     "lineId": "CULTURE_PROFILES.steppe.defensePattern[1]",
+     "text": "A small permanent guard relies on rapid reinforcement from a dispersed mounted population.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "a dispersed mounted population",
+      "guard presence (any of watch / garrison): no single reader (design §1 row \"guard presence\"); a disjunction across dimensions is not a declaration (§3.2)"
+     ]
+    }
+   ],
+   "rendered": false,
+   "droppedTwins": [
+    {
+     "text": "Herds and households are protected by whoever can ride when the signal goes up.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "why": "both lines need a militia or a standing guard; names no force",
+     "droppedBy": "chair CENSUS-2 R-D2: the slot renders on no page (no reader of terrainCtx/routeCtx/defenseCtx/cultureCtx or culturalIdentity text in src), so a twin moves nothing"
+    }
+   ]
+  },
+  {
+   "pool": "steppe.socialTexture",
+   "keyGuarantees": [
+    "config culture resolves to \"steppe\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": true,
+   "ruling": "Renders under crisis but asserts no calm; both lines presume nothing beyond the culture key.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.steppe.socialTexture[0]",
+     "text": "Clan, household, herd ownership, alliance, military following, and hospitality obligations organize public standing.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": [
+      "military following"
+     ]
+    },
+    {
+     "lineId": "CULTURE_PROFILES.steppe.socialTexture[1]",
+     "text": "The settlement is a meeting point between mobile and sedentary expectations rather than the whole society.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    }
+   ],
+   "rendered": false
+  },
+  {
+   "pool": "greek.builtForm",
+   "keyGuarantees": [
+    "config culture resolves to \"greek\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders under crisis (916/1000) but no line asserts calm, plenty, safety or normality — the profiles state traditions and material grammar, not the present mood: stays out of the inverse default. Not colour: lines presume market, temple, bathhouse, water and defence the roster may lack.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.greek.builtForm[0]",
+     "text": "Stone and plaster courtyard houses rise around an agora, stoas, shrines, and steep connecting lanes.",
+     "needs": [
+      "market"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": [],
+     "note": "\"an agora\""
+    },
+    {
+     "lineId": "CULTURE_PROFILES.greek.builtForm[1]",
+     "text": "A fortified high precinct overlooks the market, theater, and workshops; where geography permits, it also overlooks a working harbor.",
+     "needs": [
+      "market"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "fortified high precinct",
+      "theater"
+     ],
+     "note": "harbour clause is conditional (\"where geography permits\")"
+    }
+   ],
+   "rendered": false,
+   "droppedTwins": [
+    {
+     "text": "Stone and plaster courtyard houses rise around shrines, workshops, and steep connecting lanes.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "why": "both lines need a market; the market-free twin",
+     "droppedBy": "chair CENSUS-2 R-D2: the slot renders on no page (no reader of terrainCtx/routeCtx/defenseCtx/cultureCtx or culturalIdentity text in src), so a twin moves nothing"
+    }
+   ]
+  },
+  {
+   "pool": "greek.civicPattern",
+   "keyGuarantees": [
+    "config culture resolves to \"greek\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders under crisis (916/1000) but no line asserts calm, plenty, safety or normality — the profiles state traditions and material grammar, not the present mood: stays out of the inverse default. Not colour: lines presume market, temple, bathhouse, water and defence the roster may lack.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.greek.civicPattern[0]",
+     "text": "Assemblies, magistrates, councils, patrons, sanctuaries, and civic associations compete through public office.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "assemblies / councils as offices (not the seat)"
+     ]
+    },
+    {
+     "lineId": "CULTURE_PROFILES.greek.civicPattern[1]",
+     "text": "Citizenship institutions coexist with oligarchic wealth, household patronage, and resident outsider communities.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": [
+      "resident outsider communities"
+     ]
+    }
+   ],
+   "rendered": false
+  },
+  {
+   "pool": "greek.exchangePattern",
+   "keyGuarantees": [
+    "config culture resolves to \"greek\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders under crisis (916/1000) but no line asserts calm, plenty, safety or normality — the profiles state traditions and material grammar, not the present mood: stays out of the inverse default. Not colour: lines presume market, temple, bathhouse, water and defence the roster may lack.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.greek.exchangePattern[0]",
+     "text": "Maritime or regional trade, workshops, contracts, coin exchange, and public markets support the civic economy.",
+     "needs": [
+      "market"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "coin exchange"
+     ]
+    },
+    {
+     "lineId": "CULTURE_PROFILES.greek.exchangePattern[1]",
+     "text": "Harbor and hinterland goods meet through brokers, associations, and tax-farming offices.",
+     "needs": [
+      "coast"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "harbour (reader:hook-pools SEA_HOOK_WORDS if read as hooks)"
+     ]
+    }
+   ],
+   "rendered": false,
+   "droppedTwins": [
+    {
+     "text": "Regional trade, workshops, and contracts support the civic economy.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "why": "both lines need a market or a coast; the twin that needs neither",
+     "droppedBy": "chair CENSUS-2 R-D2: the slot renders on no page (no reader of terrainCtx/routeCtx/defenseCtx/cultureCtx or culturalIdentity text in src), so a twin moves nothing"
+    }
+   ]
+  },
+  {
+   "pool": "greek.foodways",
+   "keyGuarantees": [
+    "config culture resolves to \"greek\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders under crisis (916/1000) but no line asserts calm, plenty, safety or normality — the profiles state traditions and material grammar, not the present mood: stays out of the inverse default. Not colour: lines presume market, temple, bathhouse, water and defence the roster may lack.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.greek.foodways[0]",
+     "text": "Grain, pulses, olives or other oil crops, wine, vegetables, cheese, and fish vary with terrain and trade.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "food sources (no reader)"
+     ]
+    },
+    {
+     "lineId": "CULTURE_PROFILES.greek.foodways[1]",
+     "text": "Market supply and imported grain become politically charged as population grows.",
+     "needs": [
+      "market"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "imports (imported grain)"
+     ]
+    }
+   ],
+   "rendered": false
+  },
+  {
+   "pool": "greek.sacredLife",
+   "keyGuarantees": [
+    "config culture resolves to \"greek\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders under crisis (916/1000) but no line asserts calm, plenty, safety or normality — the profiles state traditions and material grammar, not the present mood: stays out of the inverse default. Not colour: lines presume market, temple, bathhouse, water and defence the roster may lack.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.greek.sacredLife[0]",
+     "text": "Household rites, civic festivals, sanctuaries, mystery associations, oracles, and patron cults overlap.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "priest / faith presence beyond institution: temple (sanctuaries, oracles, mystery associations)"
+     ]
+    },
+    {
+     "lineId": "CULTURE_PROFILES.greek.sacredLife[1]",
+     "text": "Sacred offices and festival funding are inseparable from civic status and public memory.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    }
+   ],
+   "rendered": false
+  },
+  {
+   "pool": "greek.defensePattern",
+   "keyGuarantees": [
+    "config culture resolves to \"greek\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders under crisis (916/1000) but no line asserts calm, plenty, safety or normality — the profiles state traditions and material grammar, not the present mood: stays out of the inverse default. Not colour: lines presume market, temple, bathhouse, water and defence the roster may lack.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.greek.defensePattern[0]",
+     "text": "Citizen or district levies provide defense; stone enclosures, towers, fortified heights, and naval assets where relevant follow as a place grows.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": [],
+     "note": "conditional (\"follow as a place grows\")"
+    },
+    {
+     "lineId": "CULTURE_PROFILES.greek.defensePattern[1]",
+     "text": "Professional guards and mercenaries supplement civic musters during prolonged threats.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "mercenaries (soldiers)"
+     ],
+     "note": "conditional (\"during prolonged threats\")"
+    }
+   ],
+   "rendered": false
+  },
+  {
+   "pool": "greek.socialTexture",
+   "keyGuarantees": [
+    "config culture resolves to \"greek\" (resolveCultureProfileKey); for \"mixed\" the field is two profiles' picks joined by a space (materializeCulturalIdentity :601-614), so a mixed line carries the union of both lines' declarations",
+    "drawn in resolveConfig BEFORE any institution exists: no line can see the roster, so every needs is checked against the FINAL record (cert:false-presumption)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders under crisis (916/1000) but no line asserts calm, plenty, safety or normality — the profiles state traditions and material grammar, not the present mood: stays out of the inverse default. Not colour: lines presume market, temple, bathhouse, water and defence the roster may lack.",
+   "lines": [
+    {
+     "lineId": "CULTURE_PROFILES.greek.socialTexture[0]",
+     "text": "Household, citizenship, association, patronage, public rhetoric, and military service define competing forms of status.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": [
+      "military service"
+     ]
+    },
+    {
+     "lineId": "CULTURE_PROFILES.greek.socialTexture[1]",
+     "text": "The market and assembly make disagreement public, while wealth and networks shape who is heard.",
+     "needs": [
+      "market"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "assembly"
+     ]
+    }
+   ],
+   "rendered": false
+  }
+ ]
+}

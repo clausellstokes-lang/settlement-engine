@@ -59,6 +59,8 @@ import {
   AUDIENCE_DM, AUDIENCE_PLAYER, STATE_MARK_DIMENSIONS,
   eligibleVariants, poolDimensions, readStateProse,
 } from '../../src/domain/display/stateProse/stateProseKernel.js';
+import { COLOUR_MARK, assertDeclarable } from '../../src/domain/facts/factVocabulary.js';
+import { CALM_FACTS_ADMIT_ALL } from '../helpers/calmFactsDouble.js';
 
 const ROOT = resolve(import.meta.dirname, '../..');
 
@@ -767,7 +769,18 @@ const DIMENSIONED_POOLS = allStateBlocks.flatMap(([id, block]) => Object.entries
 /** Every (pool x dimension value) state those pools partition themselves into. */
 const DIMENSION_STATES = DIMENSIONED_POOLS.flatMap(({ id, key, pool, dims }) => dims
   .flatMap((dimension) => STATE_MARK_DIMENSIONS[dimension]
-    .map((value) => ({ id, key, pool, dimension, value }))));
+    .map((value) => ({ id, key, pool, dims, dimension, value }))));
+
+/**
+ * Every answer to a pool's OTHER dimensions, one combination each ([{}] for a pool that
+ * partitions by one). Rung 2D unit 2: DS-POW-4's `Stable (no challengers)` pool is the first to
+ * partition by two (`succession` and `unrest`); a desk answers all of them at once
+ * (`crisisAnswered`), so an arm that answers one dimension must answer the others too, or the
+ * fail-closed gate reads the pool as unanswered.
+ * @param {string[]} dims @param {string} dimension @returns {Array<Record<string, string>>}
+ */
+const otherAnswers = (dims, dimension) => dims.filter((d) => d !== dimension)
+  .reduce((combos, d) => combos.flatMap((c) => STATE_MARK_DIMENSIONS[d].map((v) => ({ ...c, [d]: v }))), [{}]);
 
 describe('the demoted state dimension — the channel the kernel enforces', () => {
   it('closes the mark vocabulary and keeps the three semantics disjoint', () => {
@@ -783,7 +796,15 @@ describe('the demoted state dimension — the channel the kernel enforces', () =
       .flatMap((variant) => variant.marks || []));
     const vocabulary = Object.values(STATE_MARK_DIMENSIONS).flat();
 
-    const unclassified = [...stateMarks].filter((m) => m !== 'dm-only' && !vocabulary.includes(m));
+    // CENSUS-1b wave 1: the mark vocabulary is the fact vocabulary's mark half, and a fact ATOM
+    // the projector routes into `marks` (`X` / `no X`, `crisis: …`) is classified too — but only
+    // a DECLARABLE one (a home answers it): an unknown atom, or one with no reader yet, is
+    // unclassified exactly as an unknown mark word is.
+    const declarable = (m) => { try { assertDeclarable(m.replace(/^no\s+/, '')); return true; } catch { return false; } };
+    // R-AO (factVocabulary.js :: COLOUR_MARK): the per-line `colour` mark is the vocabulary's own
+    // no-atom declaration ("read; presumes nothing"), classified by name; it first reached the
+    // leaves at census-3g unit 3 (b1aab0f21) and census-5d unit 2a (c24d7118e), parallel lanes.
+    const unclassified = [...stateMarks].filter((m) => m !== 'dm-only' && m !== COLOUR_MARK && !vocabulary.includes(m) && !declarable(m));
     const inTwoDimensions = vocabulary.filter((word, i) => vocabulary.indexOf(word) !== i);
     // The causal register's arm names are family-local and OPEN (92 distinct today), so
     // they cannot be a closed vocabulary and stay outside STATE_MARK_DIMENSIONS. What must
@@ -799,7 +820,8 @@ describe('the demoted state dimension — the channel the kernel enforces', () =
     expect(stateMarks.size).toBeGreaterThanOrEqual(8);
     expect(causalMarks.size).toBeGreaterThanOrEqual(92);
     // F10 WALLS-WORD (2026-11-04): the `walls` fact dimension adds `walls` / `no walls`.
-    expect(vocabulary.length).toBe(9);
+    // F12 CRISIS-BLIND (2026-11-04): the five crisis fact dimensions add ten words.
+    expect(vocabulary.length).toBe(19);
   });
 
   it('reads NOTHING from a partitioned pool the caller did not answer', () => {
@@ -818,27 +840,56 @@ describe('the demoted state dimension — the channel the kernel enforces', () =
       // fill: answering the dimension must bring the sentence back at every legal value.
       for (const dimension of dims) {
         for (const value of STATE_MARK_DIMENSIONS[dimension]) {
-          const answered = readStateProse({ [id]: { pools: { [key]: pool } } }, id, key,
-            { slots, seed: 's', audience: AUDIENCE_DM, dimensions: { [dimension]: value } });
-          if (answered === null) mute.push(`${id} :: ${key} :: ${dimension}=${value}`);
+          for (const others of otherAnswers(dims, dimension)) {
+            const answered = readStateProse({ [id]: { pools: { [key]: pool } } }, id, key,
+              { slots, seed: 's', audience: AUDIENCE_DM, dimensions: { ...others, [dimension]: value }, facts: CALM_FACTS_ADMIT_ALL });
+            if (answered === null) mute.push(`${id} :: ${key} :: ${dimension}=${value}${Object.keys(others).length ? ` with ${JSON.stringify(others)}` : ''}`);
+          }
         }
       }
     }
-    expect({ spoke, mute }).toEqual({ spoke: [], mute: [] });
+    // ⚠ MUTE IS NOW THE FACTS GATE, NOT THE DIMENSION GATE, on exactly these seven states
+    // (census-2b item 2, db3ed88c1; measured on the leaves: 0 at its parent, these 7 at it, the
+    // same 7 at the tip). The calm admit-all double holds every presence and no population band,
+    // so a state whose every line EXCLUDES a presence (`no garrison`, `no ruler: occupier`) or
+    // needs `population: ≥ middling` is refused by the facts, not by the dimension. DS-GEN-1 is
+    // dark (UNMOUNTED_BLOCKS) and DS-GEN-3 glances, so none is a reader's sentence. Pinned
+    // exactly: any NEW mute still reds.
+    expect({ spoke, mute }).toEqual({
+      spoke: [],
+      mute: [
+        'DS-GEN-1 :: economic_disparity :: severity=minor with {"walls":"no walls"}',
+        'DS-GEN-1 :: economic_disparity :: walls=no walls with {"severity":"minor"}',
+        'DS-GEN-1 :: occupation_legacy :: severity=minor',
+        'DS-GEN-1 :: occupation_legacy :: severity=major',
+        'DS-GEN-1 :: occupation_legacy :: severity=catastrophic',
+        'DS-GEN-3 :: defenseProfile.readiness.label: Undefended :: walls=walls',
+        'DS-GEN-3 :: defenseProfile.readiness.label: Undefended :: walls=no walls',
+      ],
+    });
 
     // The named case, spelled out because it is the one a reader can check by eye.
+    // db3ed88c1 made crime_wave crisis-scoped with fact-declaring lines, so the answered read
+    // carries facts, as every desk's does (the unanswered one stays null either way).
     expect(readStateProse(DOSSIER_STATE_PROSE_GENERAL, 'DS-GEN-1', 'crime_wave',
       { slots: { settlement: 'X' }, seed: 's' })).toBeNull();
     expect(readStateProse(DOSSIER_STATE_PROSE_GENERAL, 'DS-GEN-1', 'crime_wave',
-      { slots: { settlement: 'X' }, seed: 's', dimensions: { severity: 'minor' } })?.text)
+      { slots: { settlement: 'X' }, seed: 's', dimensions: { severity: 'minor' }, facts: CALM_FACTS_ADMIT_ALL })?.text)
       .toEqual(expect.any(String));
 
     // Non-vacuity, MEASURED: 24 pools across DS-GEN-1, DS-GEN-6 and DS-GEN-9.
     expect(DIMENSIONED_POOLS.length).toBeGreaterThanOrEqual(24);
     expect([...new Set(DIMENSIONED_POOLS.map((p) => p.id))].sort())
       // F10 WALLS-WORD (2026-11-04): sixteen more blocks partition by `walls`.
-      .toEqual(['DS-CND-1', 'DS-DEF-6', 'DS-ECO-12', 'DS-ECO-3', 'DS-ECO-8', 'DS-ECO-9', 'DS-FTH-1', 'DS-GEN-1', 'DS-GEN-3',
-        'DS-GEN-6', 'DS-GEN-9', 'DS-HK-1', 'DS-POW-2', 'DS-POW-6', 'DS-POW-7', 'DS-STR-1', 'DS-STR-2', 'DS-WAR-1', 'DS-WAR-2']);
+      // F12 CRISIS-BLIND (2026-11-04): six more partition by a crisis dimension (DS-DEF-1, -2, -4, -11, DS-ECO-1, DS-POW-4).
+      // CENSUS-3b unit 2 (2026-11-05): DS-ECO-10 (POSTURE established v1 carries `no hunger`).
+      // CENSUS-3c unit 4 (2026-11-05): DS-ECO-2 (the FOOD / GRANARY calm lines carry `no hunger`, R-K);
+      // DS-POP-1 (QUANTITY thousands v2 "retains its walls" declares `walls`, R-O's one word).
+      // census-2b item 2 (db3ed88c1): DS-GEN-10 and DS-GEN-17 (walls lines). census-5d unit 2a
+      // (c24d7118e): DS-WAR-5 (three siege pools mark walls). census-5d unit 2b (f260dbac6):
+      // DS-DEF-7 and DS-DEF-10. 28 -> 33, each measured on the leaves parent -> commit.
+      .toEqual(['DS-CND-1', 'DS-DEF-1', 'DS-DEF-10', 'DS-DEF-11', 'DS-DEF-2', 'DS-DEF-4', 'DS-DEF-6', 'DS-DEF-7', 'DS-ECO-1', 'DS-ECO-10', 'DS-ECO-12', 'DS-ECO-2', 'DS-ECO-3', 'DS-ECO-8', 'DS-ECO-9', 'DS-FTH-1', 'DS-GEN-1', 'DS-GEN-10', 'DS-GEN-17', 'DS-GEN-3',
+        'DS-GEN-6', 'DS-GEN-9', 'DS-HK-1', 'DS-POP-1', 'DS-POW-2', 'DS-POW-4', 'DS-POW-6', 'DS-POW-7', 'DS-STR-1', 'DS-STR-2', 'DS-WAR-1', 'DS-WAR-2', 'DS-WAR-5']);
   });
 
   it('never returns a variant that contradicts the state it was asked about', () => {
@@ -850,7 +901,9 @@ describe('the demoted state dimension — the channel the kernel enforces', () =
     for (const audience of [AUDIENCE_DM, AUDIENCE_PLAYER]) {
       for (const { id, key, pool, dimension, value } of DIMENSION_STATES) {
         const slots = bagFor(pool);
-        for (const variant of eligibleVariants(pool, { slots, audience, dimensions: { [dimension]: value } })) {
+        // db3ed88c1 onward pools declare facts and opt into the crisis dimension; without facts
+        // such a pool is [] and the sweep would pass over it unread. The calm admit-all double.
+        for (const variant of eligibleVariants(pool, { slots, audience, dimensions: { [dimension]: value }, facts: CALM_FACTS_ADMIT_ALL })) {
           const own = marksOf(variant, dimension);
           if (own.length > 0 && !own.includes(value)) {
             contradictions.push(`${audience} :: ${id} :: ${key} :: asked ${dimension}=${value} :: got [${own.join(', ')}]`);
@@ -866,8 +919,11 @@ describe('the demoted state dimension — the channel the kernel enforces', () =
     const crimeWave = DOSSIER_STATE_PROSE_GENERAL['DS-GEN-1'].pools.crime_wave;
     const catastrophic = crimeWave.find((v) => (v.marks || []).includes('catastrophic'));
     expect(catastrophic.angle).toBe('unfolding');
+    // db3ed88c1: the minor lines declare `watch` (v1) and `population: ≥ middling` (v5), so the
+    // read is a calm middling town holding every presence; at its parent (no facts) the same two.
     const minorReachable = new Set(eligibleVariants(crimeWave,
-      { slots: { settlement: 'X' }, audience: AUDIENCE_DM, dimensions: { severity: 'minor' } })
+      { slots: { settlement: 'X' }, audience: AUDIENCE_DM, dimensions: { severity: 'minor' },
+        facts: { ...CALM_FACTS_ADMIT_ALL, populationBand: 'middling' } })
       .map((v) => v.text));
     expect(minorReachable.has(catastrophic.text)).toBe(false);
     expect(minorReachable.size).toBeGreaterThanOrEqual(2);
@@ -885,23 +941,38 @@ describe('the demoted state dimension — the channel the kernel enforces', () =
     // by authoring, and hiding it would be the fail-open reading in a different coat.
     const thin = {};
     for (const audience of [AUDIENCE_DM, AUDIENCE_PLAYER]) {
-      thin[audience] = DIMENSION_STATES.filter(({ pool, dimension, value }) => eligibleVariants(
-        pool, { slots: bagFor(pool), audience, dimensions: { [dimension]: value } },
-      ).length <= 1).length;
+      thin[audience] = DIMENSION_STATES.filter(({ pool, dims, dimension, value }) => otherAnswers(dims, dimension).some((others) => eligibleVariants(
+        pool, { slots: bagFor(pool), audience, dimensions: { ...others, [dimension]: value }, facts: CALM_FACTS_ADMIT_ALL },
+      ).length <= 1)).length;
     }
     // MEASURED at 2d5112851, and the two audiences DIFFER BY ONE. The design volume
     // recorded 13; that is the DM figure. On the player's page DS-GEN-1 :: infiltration_fear
     // at `severity: major` also collapses to one line, because the second `major` variant
     // there is the block's only `major + dm-only` line and the player cannot hear it. The
     // reader-facing number is 14. Both are pinned so neither audience can drift unseen.
-    expect(thin[AUDIENCE_DM]).toBeLessThanOrEqual(13);
-    expect(thin[AUDIENCE_PLAYER]).toBeLessThanOrEqual(14);
+    // 13 -> 26 (DM) and 14 -> 27 (player) at census-2b item 2 (db3ed88c1), measured on the
+    // leaves parent -> commit and unchanged to the tip: the DS-GEN ledger's presence and band
+    // declarations leave one admitted line in 13 more states under the calm admit-all double.
+    // The bill grew by a declared cause; the ceiling still only ratchets DOWN from here.
+    expect(thin[AUDIENCE_DM]).toBeLessThanOrEqual(26);
+    expect(thin[AUDIENCE_PLAYER]).toBeLessThanOrEqual(27);
     // No state may go SILENT: a value with zero eligible variants is a dead branch of the
     // corpus dressed as a town with nothing to say, and the ratchet above would not see it.
-    const silent = DIMENSION_STATES.filter(({ pool, dimension, value }) => eligibleVariants(
-      pool, { slots: bagFor(pool), audience: AUDIENCE_DM, dimensions: { [dimension]: value } },
-    ).length === 0);
-    expect(silent).toEqual([]);
+    const silent = DIMENSION_STATES.filter(({ pool, dims, dimension, value }) => otherAnswers(dims, dimension).some((others) => eligibleVariants(
+      pool, { slots: bagFor(pool), audience: AUDIENCE_DM, dimensions: { ...others, [dimension]: value }, facts: CALM_FACTS_ADMIT_ALL },
+    ).length === 0));
+    // The same seven states the T2 arm pins (census-2b item 2, db3ed88c1; 0 at its parent): under
+    // the calm admit-all double their every line excludes a presence or needs a population band,
+    // so the FACTS gate empties them, not the dimension. Named exactly, so a new silence reds.
+    expect(silent.map(({ id, key, dimension, value }) => `${id} :: ${key} :: ${dimension}=${value}`)).toEqual([
+      'DS-GEN-1 :: economic_disparity :: severity=minor',
+      'DS-GEN-1 :: economic_disparity :: walls=no walls',
+      'DS-GEN-1 :: occupation_legacy :: severity=minor',
+      'DS-GEN-1 :: occupation_legacy :: severity=major',
+      'DS-GEN-1 :: occupation_legacy :: severity=catastrophic',
+      'DS-GEN-3 :: defenseProfile.readiness.label: Undefended :: walls=walls',
+      'DS-GEN-3 :: defenseProfile.readiness.label: Undefended :: walls=no walls',
+    ]);
   });
 
   it('states no duration its pool key does not license — the channel with NO kernel', () => {
@@ -1731,7 +1802,8 @@ describe('SEAM car 4 — §2.5\'s grammar, and every refusal it declares', () =>
     const marks = new Set(allStateBlocks.flatMap(([, b]) => Object.values(b.pools).flat())
       .flatMap((v) => v.marks || []));
     expect([...marks].filter((m) => m.startsWith('grammar'))).toEqual([]);
-    const src = readFileSync(resolve(ROOT, 'scripts/generate-dossier-state-prose.mjs'), 'utf8');
+    // CENSUS-1g unit 5: the annex parse (which routes the tag) moved verbatim to scripts/lib/dossier-annex-parse.mjs.
+    const src = readFileSync(resolve(ROOT, 'scripts/lib/dossier-annex-parse.mjs'), 'utf8');
     expect(src).toContain('GRAMMAR_TAG_RE');
     // No variant carries a grammar tag yet — Shift 1 authors them — so the claim the corpus
     // supports is the ABSENCE, pinned in both directions.

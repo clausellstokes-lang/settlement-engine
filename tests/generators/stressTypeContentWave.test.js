@@ -13,6 +13,7 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import { STRESS_INSTITUTION_EFFECTS } from '../../src/data/stressInstitutionEffects.js';
 import { buildStressContext } from '../../src/generators/stressGenerator.js';
 import { STRESS_DESCS } from '../../src/generators/narrativeGenerator.js';
+import { textOf } from '../../src/domain/facts/textOf.js';
 
 const NEW = ['insurgency', 'mass_migration', 'wartime', 'religious_conversion', 'slave_revolt'];
 const gen = (extra, seed) => {
@@ -52,7 +53,7 @@ describe('generators-domain-1 + data-tables-3 — stress-type content wave', () 
   // (the old fixed-phrase regexes went stale on any authoring change).
   const opensOnPool = (s, st) => {
     const arrival = String(s.arrivalScene || '');
-    return (STRESS_DESCS[st] || []).some((fn) => arrival.startsWith(fn(s.name)));
+    return (STRESS_DESCS[st] || []).some((fn) => arrival.startsWith(textOf(fn)(s.name)));
   };
 
   it('a slave-revolt town opens on the revolt, not on market day', () => {

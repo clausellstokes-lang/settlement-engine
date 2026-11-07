@@ -183,6 +183,9 @@ const TERRITORY_WORDS = Object.freeze({
   razed: 'burned',
 });
 
+/** The nameless filler where its slot opens a sentence (F11, rung 2B). */
+const REMEMBERED_LEAD = 'A court the record no longer names';
+
 /**
  * The name a place is remembered by: the LIVE name first, the name it carried at
  * the war's conclusion second, and the id never. A rename re-titles the war; a
@@ -191,15 +194,16 @@ const TERRITORY_WORDS = Object.freeze({
  * @param {unknown} id
  * @param {(id: string) => string} nameFor
  * @param {Map<string, string>} labels
+ * @param {string} [fallback]  the nameless filler; a sentence-opening slot passes it sentence-cased
  * @returns {string}
  */
-function rememberedName(id, nameFor, labels) {
+function rememberedName(id, nameFor, labels, fallback = 'a court the record no longer names') {
   const key = text(id) || String(id ?? '');
   const live = text(nameFor(key)).trim();
   if (live && live !== key) return live;
   const recorded = text(labels.get(key)).trim();
   if (recorded) return recorded;
-  return live || 'a court the record no longer names';
+  return live || fallback;
 }
 
 /**
@@ -246,8 +250,8 @@ function territoryLines(outcomes, nameFor, labels) {
     const seat = text(outcome.fallenSeatLabel);
     const seatClause = seat ? `, and the seat that fell there was ${seat}` : '';
     lines.push(occupier
-      ? `${rememberedName(occupier, nameFor, labels)} ${verb} ${placeName}${seatClause}.`
-      : `${placeName} was ${verb}${seatClause}.`);
+      ? `${rememberedName(occupier, nameFor, labels, REMEMBERED_LEAD)} ${verb} ${placeName}${seatClause}.`
+      : `${rememberedName(place, nameFor, labels, REMEMBERED_LEAD)} was ${verb}${seatClause}.`);
   }
   return lines;
 }
@@ -377,7 +381,7 @@ function remembranceRow(record, nowTick, nameFor, seesSecrets) {
     endingLine,
     whenLabel: ENDED_WORDS[agoBand],
     ranLabel: RAN_WORDS[ranBand],
-    costLine: costLineOf(recordOf(record.cost), attackerName, sides),
+    costLine: costLineOf(recordOf(record.cost), rememberedName(attackerId, nameFor, labels, REMEMBERED_LEAD), sides),
     territory: territoryLines(recordsOf(record.territorialOutcomes), nameFor, labels),
     engagements: engagementLines(recordsOf(record.notableEngagements), nameFor, labels),
     allies,

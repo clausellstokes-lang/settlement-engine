@@ -4,7 +4,7 @@
 
 import { SEVERITY, tierAtLeast } from '../../data/constants.js';
 import { migrationDirectionOfConfig } from '../../domain/migrationDirection.js';
-import { FOOD_SECURITY_CUTS, foodSecurityBandKeyOf } from '../../data/bandLadders.js';
+import { FOOD_SECURITY_BANDS, FOOD_SECURITY_CUTS, foodSecurityBandKeyOf } from '../../data/bandLadders.js';
 import { FOOD_IMPORT_RATES, SIEGE_PRODUCTION_KEPT } from '../../data/foodImportRates.js';
 import {
   getTradeRouteFeatures,
@@ -18,6 +18,7 @@ import {
 } from '../../domain/content/customContentSemanticAuthority.js';
 import { availableNativeResourceKeys } from '../../domain/resourceSemantics.js';
 import { resolveTerrain } from '../../domain/resolveTerrain.js';
+import { resolveSibling } from '../../domain/facts/drawDeclared.js';
 import {
   hasTradeRouteConnection,
   isTradeRouteDisconnected,
@@ -78,7 +79,14 @@ const FAILED_SOURCE_WORDS = Object.freeze({ grain: 'grain harvest', livestock: '
  * @property {'grain'|'livestock'|'fish'|'mill'|'game'|null} failedSource the source a famine failed
  * @property {number} famineCutPct      how much of the harvest the famine took, %
  * @property {string} foodwaysLine      the foodways sentence composed from the place's own sources
+ * @property {boolean=} storesHeld      an ACTIVE famine beside a granary still holding six months or
+ *                                      more (as the stores line rounds them): the stores are kept back,
+ *                                      not given out (the famine's own story: "The wealthy are hoarding.";
+ *                                      lane RUNG2-F13; one rounding, rung 2D)
  */
+
+/** The months a famine's granary may hold before the record says the stores are held back (RUNG2-F13). */
+export const FAMINE_HELD_STORE_MONTHS = 6;
 /**
  * ONE ANSWER TO "HOW FED IS THIS PLACE". Derived once, by the canonical food writer
  * (foodGenerator.js :: generateFoodSecurity), stored once at economicState.foodSecurity.foodRecord.
@@ -112,6 +120,10 @@ export function deriveFoodRecord(input) {
     failedSource: input.failedSource ?? null,
     famineCutPct: input.famineCutPct ?? 0,
     foodwaysLine: input.foodwaysLine || '',
+    // Carried by a famine's record only (absent = no famine, nothing held), so no other record moves.
+    // ONE ROUNDING (rung 2D, the chair's ruling): the flag reads the whole months the stores line
+    // prints (`tonightSheet.js :: foodStoresWords`, Math.round), so 5.5 months prints "six" AND is held.
+    ...(input.stressFamine ? { storesHeld: input.hasGranary === true && Math.round(input.storageMonths) >= FAMINE_HELD_STORE_MONTHS } : {}),
   };
 }
 
@@ -736,7 +748,17 @@ export function appendProvisioningAtScaleDeps(
   }
 }
 
-export const deriveSupplyRiskAnalysis = (population, terrain, institutions, config, foodBalance) => {
+/**
+ * CENSUS-1f unit 3 (Appendix B item 23, T): every printed hook resolves through
+ * `resolveSibling(…, OUTLOOK_HOOK_SIBLINGS, …)` (economy/outlookHookSiblings.js) — the timber line's `navigable` (its twin
+ * drops "shipbuilding"), the iron line's `institution: smith` (its twin drops the blacksmiths), the
+ * starving line's famine band (its twin, CENSUS-3g, the moderate gap; a fed place keeps the refused original). `facts`
+ * is the birth's partial record at the economy step (the roster, the config, the tier, the
+ * economic state: `viability.js`); absent, the hooks print unchanged (resolveSibling's rule).
+ * @param {any} population @param {any} terrain @param {any} institutions @param {any} config @param {any} foodBalance
+ * @param {object | (() => object) | null} [facts]
+ */
+export const deriveSupplyRiskAnalysis = (population, terrain, institutions, config, foodBalance, facts = null) => {
   const issues = [];
   const warnings = [];
   const hooks = [];
@@ -747,13 +769,15 @@ export const deriveSupplyRiskAnalysis = (population, terrain, institutions, conf
     if (route === 'isolated' || route === 'none' || route === 'road') {
       hooks.push({
         category: 'Survival Crisis',
-        hook: 'The settlement is starving. Villagers are turning to banditry, and a merchant has offered to supply food at a price the settlement cannot pay in coin.',
+        hook: 'The settlement is starving. Its hungriest are turning to banditry, and a merchant has offered to supply food at a price the settlement cannot pay in coin.',
         severity: 'critical',
       });
     } else if (route !== 'isolated') {
       hooks.push({
         category: 'Trade Monopoly',
-        hook: 'A single merchant guild controls grain imports and has raised prices 300%. The locals are weighing whether to pay it, find another supplier, or take the grain.',
+        // CENSUS-3e (answer 2, R-V measured): `guild` at this step differs from the final record on
+        // 25 of 1,000 births, so the hook presumes only the imports its branch guarantees.
+        hook: 'A single importer controls the grain coming in and has raised prices 300%. The locals are weighing whether to pay it, find another supplier, or take the grain.',
         severity: 'high',
       });
       if (route === 'river')
@@ -826,5 +850,32 @@ export const deriveSupplyRiskAnalysis = (population, terrain, institutions, conf
     hasExternalSupply,
   );
 
-  return { issues, warnings, plotHooks: hooks };
+  // R-AU (CENSUS-1h): a refused hook with no admitted twin DROPS here (kind A) — it never kept-and-
+  // noted a line that `hookTruthRecord.js :: withoutFalseHooks` removed later (the starving hook on
+  // a fed place: 250 kept notes in 161 of the 1,000, none printed); that pass stays as defence.
+  const resolved = hooks
+    .map((h) => ({ ...h, hook: resolveSibling(h.hook, OUTLOOK_HOOK_SIBLINGS, { facts, poolId: 'foodBalance:OUTLOOK_HOOK_SIBLINGS', surface: 'economics', drawKind: 'T', dropRefused: true }) })) // CENSUS-1f
+    .filter((h) => h.hook !== null);
+  return { issues, warnings, plotHooks: resolved.map((h) => (h.hook === MODERATE_GAP_TWIN ? { ...h, ...moderateGapGrade(facts) } : h)) };
 };
+
+/**
+ * CENSUS-3h (R-AV, the chair's answer 2 of 2026-11-05 08:3x): a twin carries only the severity and
+ * category the record holds. The moderate-gap twin prints only where the food record reads
+ * Import-Dependent or Pressured (its declaration); its category is that band's own label (the one
+ * ladder, never re-spelled) and its severity the band's grade — Import-Dependent `medium`, the
+ * record's own grade for that band's viability hook ("A poor harvest somewhere else…"), Pressured
+ * `low`, the grade under it (the ladder writes no Pressured hook). "critical" stays with the
+ * famine-band original. The band is read through the declaration's own reader (`famine.band`).
+ * @type {Readonly<Record<string, string>>}
+ */
+const MODERATE_GAP_SEVERITY = Object.freeze({ importDependent: 'medium', pressured: 'low' });
+/** @param {object | (() => object) | null} facts @returns {{ category?: string, severity?: string }} */
+function moderateGapGrade(facts) {
+  const f = /** @type {any} */ (typeof facts === 'function' ? facts() : facts);
+  const band = f?.famine?.band;
+  const severity = typeof band === 'string' ? MODERATE_GAP_SEVERITY[band] : undefined;
+  if (severity === undefined) return {};
+  return { category: FOOD_SECURITY_BANDS[/** @type {keyof typeof FOOD_SECURITY_BANDS} */ (band)].label, severity };
+}
+import { MODERATE_GAP_TWIN, OUTLOOK_HOOK_SIBLINGS } from './outlookHookSiblings.js'; export { OUTLOOK_HOOK_SIBLINGS }; // LANDING-R2 (ODQ §934.105): the outlook hooks' declared siblings moved verbatim to economy/outlookHookSiblings.js, re-exported; below every cited line, so none moves

@@ -189,21 +189,31 @@ describe('the wiring census — TOTALITY over the corpus', () => {
     // ⭐ THE OWNER RULED (2026-09-07 ~21:50) that every semantic variant gets a family of
     // FOUR wordings and nothing is ever trimmed. That makes the variant count per pool a
     // first-class column of this census, because it is what the authoring wave is priced on.
-    expect(summary.variants, 'the R1 corpus holds this many variants').toBe(2310);
+    // 2310 -> 2342, and the histogram with it, by cause (the six leaves, parent -> commit):
+    // F12 unit 2 e19e3e4cf +13; census-2b item 5 70d05b25b +4; census-5 unit 2 06b59812f +1;
+    // census-3c unit 4 e3295d168 +10; census-5b unit 3 c00b30eb6 +4.
+    // 2342 -> 2343 at LANDING-R2 helper G (the chair's §934.105 ruling (1): DS-GEN-17 PROVISIONED v3, the hospital-only line) +1.
+    // 2343 -> 2344 at LANDING-R2 helper G2 (the chair's 06:5x DS-CND-1 boom line (ODQ §934.105, ruling (2)): ARCHETYPE: boom v4 `[street · crisis: any]`) +1.
+    expect(summary.variants, 'the R1 corpus holds this many variants').toBe(2344);
     // THE MEAN IS THE CALLER'S TO FORMAT (INSTR-912 car 11). The census publishes `variants`
     // and `total` as integers; a `toFixed` inside `src/domain/prose/` is a float
     // interpolation and a two-decimal score against the estate's prose-numerics register, and
     // the module has no reader to format for. The arm keeps its full force — the same two
     // decimal places over the same two integers — computed here.
-    expect((summary.variants / summary.total).toFixed(2), 'mean variants per pool').toBe('3.26');
+    // 3.26 -> 3.30 with the same five causes; the histogram {2: 31, 3: 528, 4: 111, 5: 22, 6: 12,
+    // 7: 4, 10: 1} -> the one below (pools grown 3 -> 4 by twins, 4 -> 5 by F12's calm lines).
+    // {2: 29, 3: 507} -> {2: 28, 3: 508} at LANDING-R2 helper G (the chair's §934.105 ruling (1): DS-GEN-17 PROVISIONED v3, the hospital-only line): DS-GEN-17 PROVISIONED grew 2 -> 3; the mean holds.
+    // {3: 508, 4: 128} -> {3: 507, 4: 129} and the mean 3.30 -> 3.31 (2,344 / 709 = 3.306) at LANDING-R2 helper G2 (the chair's
+    // 06:5x DS-CND-1 boom line, ODQ §934.105 ruling (2)): DS-CND-1 ARCHETYPE: boom grew 3 -> 4.
+    expect((summary.variants / summary.total).toFixed(2), 'mean variants per pool').toBe('3.31');
     expect(Object.fromEntries(summary.variantHistogram), 'variants per pool, exactly').toEqual({
-      2: 31, 3: 528, 4: 111, 5: 22, 6: 12, 7: 4, 10: 1,
+      2: 28, 3: 507, 4: 129, 5: 27, 6: 13, 7: 4, 10: 1,
     });
     const summed = summary.variantHistogram.reduce((total, [size, pools]) => total + size * pools, 0);
-    expect(summed, 'and the histogram sums back to the corpus').toBe(2310);
+    expect(summed, 'and the histogram sums back to the corpus').toBe(2344);
     // PER PIECE: the same count rolled up to the block, which is the unit a reader meets.
     const perBlockTotal = summary.perBlock.reduce((total, [, n]) => total + n, 0);
-    expect(perBlockTotal, 'the per-block roll-up carries every variant once').toBe(2310);
+    expect(perBlockTotal, 'the per-block roll-up carries every variant once').toBe(2344);
     expect(summary.perBlock.length, 'across every block').toBe(68);
   });
 
@@ -1688,7 +1698,13 @@ describe('car 0f — the ALIAS DRAFT: measured, nothing ratified, no leaf writte
     // ⛔ 7 AND NOT 33 SINCE SEAM car 5b: the `docblock` kind is WITHDRAWN from `rows` and
     // survives as a REPORT channel only (SITTING §P.2-27 EXTENDED; the chair's ruling on car
     // 3h §3h.6 item 2). Twenty-six of the thirty-three candidates rested on a comment line.
-    expect(draft.rows.length, 'candidate rows at this tip, docblock withdrawn').toBe(7);
+    // 7 -> 8 at census-1c unit 2 site 4 (1d64e08ba; measured on archives: 7 at its parent, 8 at
+    // it): the stress-secret draw's `factsOf({ npcs: allNpcs, stress: ... })` argument is an AST
+    // Property key `stress`, so `system:food_security -> stress` gains a generator-write row at
+    // src/generators/npcGenerator.js:780. ⚠ A FINDING, NOT A JOIN: that key builds a fact READ's
+    // argument, not a write of world state; the AST cut cannot tell the two apart. Nothing joins
+    // on it (the join arm below stays 0).
+    expect(draft.rows.length, 'candidate rows at this tip, docblock withdrawn').toBe(8);
     expect(draft.endpointsWithCandidate, 'endpoints with at least one candidate').toBe(4);
     expect(draft.noCandidate.length, 'and the wiring debt the SEAM and WAVE trains inherit').toBe(85);
     expect(draft.docblockReports.length, 'the withdrawn candidates, reported and never proposed').toBe(28);
@@ -1700,12 +1716,14 @@ describe('car 0f — the ALIAS DRAFT: measured, nothing ratified, no leaf writte
     // is re-cut to a real Property key or member assignment read from the syntax tree, where a
     // string, a comment and a parameter binding can propose nothing.
     const byEvidence = draft.rows.reduce((m, r) => m.set(r.evidence, (m.get(r.evidence) || 0) + 1), new Map());
-    expect(byEvidence.get('generator-write'), 'the four sound citations survive the AST cut').toBe(4);
+    // 4 -> 5 at 1d64e08ba (the npcGenerator.js:780 Property key above).
+    expect(byEvidence.get('generator-write'), 'the four sound citations survive the AST cut').toBe(5);
     expect(draft.rows.filter((r) => r.evidence === 'generator-write').map((r) => r.at.replace(/:\d+$/, '')).sort(),
       'and each is a real write in a generator').toEqual([
       'src/generators/defenseGenerator.js',
       'src/generators/history/historyEventStrands.js',
       'src/generators/npc/factionLeaderSecret.js',
+      'src/generators/npcGenerator.js',
       'src/generators/npcGenerator.js',
     ]);
     for (const withdrawn of ['src/generators/structuralValidator.js:588', 'src/generators/stressNarrative.js:80',
@@ -1756,6 +1774,13 @@ describe('SEAM car 5b — THE HOLDER CENSUS: the source of each construction (SI
     expect((cites.get('incomeSources') || []).includes('src/generators/economy/economicState.js:1'),
       'a fabricated line of a real producer file is refused').toBe(false);
     expect((cites.get('thisTokenIsWrittenNowhere') || []).length, 'and an invented token has no citation').toBe(0);
+    // ⛔ AND THE SYMBOL FORM (`path :: declaration`, rule 32; LANDING-R2, ODQ §934.105) is held to
+    // the same reader: the declaration that WRITES the token resolves, and a real declaration of
+    // the same file that does not write it is refused.
+    expect((cites.get('criminalCaptureState') || []).includes('src/generators/power/rulingStructure.js :: generatePowerStructure'),
+      'the symbol that writes the token resolves').toBe(true);
+    expect((cites.get('criminalCaptureState') || []).includes('src/generators/power/rulingStructure.js :: normalizeAndAnnotateFactions'),
+      'a real symbol that does not write it is refused').toBe(false);
   });
 
   test('the COLUMN_SOURCES arms convict this roster too: every kind is fully cited or names its gaps', () => {
@@ -1865,7 +1890,7 @@ describe('SEAM car 5b — THE HOLDER CENSUS: the source of each construction (SI
   //
   // Car 5b reported capture "structurally absent at birth" and measured INTERESTED at 0 over
   // all 768 RATE towns. THE FIGURE WAS RIGHT AND THE GROUND WAS FALSE: every generated town
-  // carries `powerStructure.criminalCaptureState` (rulingStructure.js:797 — the very line the
+  // carries `powerStructure.criminalCaptureState` (rulingStructure.js :: generatePowerStructure — the write the
   // holder table maps to the WATCH), on the same five-rung ladder `standingOf` consumes,
   // reading none 495 · adversarial 194 · equilibrium 64 · corrupted 15 over the corpus. The
   // car reported the fact ABSENT rather than asking whether it licenses a per-institution

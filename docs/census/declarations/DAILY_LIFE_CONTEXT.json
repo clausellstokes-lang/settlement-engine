@@ -1,0 +1,830 @@
+{
+ "poolId": "DAILY_LIFE_CONTEXT",
+ "source": "src/components/new/dailyLifeLogic.js :179 TERRAIN_CONTEXT, :190 ROUTE_CONTEXT, :200 DEFENSE_CONTEXT, :12 legacy mixed culture line",
+ "drawKind": "T",
+ "drawSite": "dailyLifeLogic.js:108 TERRAIN_CONTEXT[terrain], :115 ROUTE_CONTEXT[tradeRoute], :124 DEFENSE_CONTEXT[readiness.label]. NOTE: ctx.terrainCtx / routeCtx / defenseCtx are computed but have NO consumer anywhere in src/ (grep, 2026-11-04) — DailyLifeTab never prints them; the declarations bind the day they are wired (or are the case for deleting them).",
+ "pools": [
+  {
+   "pool": "TERRAIN_CONTEXT['plains']",
+   "keyGuarantees": [
+    "config.terrainOverride === \"plains\" (the raw config field, dailyLifeLogic.js:88/108 — NOT factsOf terrain; a null override prints nothing)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "A one-line T lookup; asserts no calm: stays out. Its one line needs a market (\"the market cycle\"); a market-free plains birth has no line, so it carries a twin.",
+   "lines": [
+    {
+     "lineId": "DAILY_LIFE_CONTEXT.TERRAIN_CONTEXT['plains']",
+     "text": "Flat agricultural land. Daily life organised around the farming calendar: planting, harvest, and the market cycle. Weather is the primary topic of conversation. Little natural shelter means the settlement is exposed to the road and to anyone who travels it.",
+     "needs": [
+      "market"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "season / climate (farming calendar, weather)",
+      "trade-route kind (\"exposed to the road\")"
+     ]
+    }
+   ],
+   "rendered": false,
+   "droppedTwins": [
+    {
+     "text": "Flat agricultural land. Daily life is organised around planting and harvest. Little natural shelter means the settlement is exposed to anyone who crosses it.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "why": "plains without a market",
+     "droppedBy": "chair CENSUS-2 R-D2: the slot renders on no page (no reader of terrainCtx/routeCtx/defenseCtx/cultureCtx or culturalIdentity text in src), so a twin moves nothing"
+    }
+   ]
+  },
+  {
+   "pool": "TERRAIN_CONTEXT['forest']",
+   "keyGuarantees": [
+    "config.terrainOverride === \"forest\" (the raw config field, dailyLifeLogic.js:88/108 — NOT factsOf terrain; a null override prints nothing)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "A one-line T lookup; asserts no calm: stays out. ",
+   "lines": [
+    {
+     "lineId": "DAILY_LIFE_CONTEXT.TERRAIN_CONTEXT['forest']",
+     "text": "Dense woodland presses close. Timber, charcoal, and game are the economic foundation. Movement beyond the settlement requires knowledge of tracks; strangers who appear unannounced are treated with suspicion. The forest provides and threatens in equal measure.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "food sources (no reader) (game)",
+      "exports (timber, charcoal)"
+     ]
+    }
+   ],
+   "rendered": false
+  },
+  {
+   "pool": "TERRAIN_CONTEXT['hills']",
+   "keyGuarantees": [
+    "config.terrainOverride === \"hills\" (the raw config field, dailyLifeLogic.js:88/108 — NOT factsOf terrain; a null override prints nothing)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "A one-line T lookup; asserts no calm: stays out. \"uphill to the market\" needs a market.",
+   "lines": [
+    {
+     "lineId": "DAILY_LIFE_CONTEXT.TERRAIN_CONTEXT['hills']",
+     "text": "Rolling terrain means walking uphill to fetch water, uphill to the market, uphill home. Livestock (sheep especially) dominate the economy more than grain. Isolated farmsteads are common; the settlement is a gathering point, not a continuous community.",
+     "needs": [
+      "market"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "food sources (no reader) (livestock, grain)"
+     ]
+    }
+   ],
+   "rendered": false,
+   "droppedTwins": [
+    {
+     "text": "Rolling terrain means walking uphill to fetch water and uphill home. Isolated farmsteads are common; the settlement is a gathering point, not a continuous community.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "why": "hills without a market",
+     "droppedBy": "chair CENSUS-2 R-D2: the slot renders on no page (no reader of terrainCtx/routeCtx/defenseCtx/cultureCtx or culturalIdentity text in src), so a twin moves nothing"
+    }
+   ]
+  },
+  {
+   "pool": "TERRAIN_CONTEXT['riverside']",
+   "keyGuarantees": [
+    "config.terrainOverride === \"riverside\" (the raw config field, dailyLifeLogic.js:88/108 — NOT factsOf terrain; a null override prints nothing)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Opted in: \"River traders bring news and goods\" asserts open traffic, which a siege contradicts. Needs a mill (\"the mill\") and a river.",
+   "lines": [
+    {
+     "lineId": "DAILY_LIFE_CONTEXT.TERRAIN_CONTEXT['riverside']",
+     "text": "The river defines everything: the mill, the ferry crossing, the flood risk, the fish. The rhythm of the water sets the rhythm of the day. Seasonal floods are a shared memory and a shared threat. River traders bring news and goods; the landing is where things happen.",
+     "needs": [
+      "river",
+      "institution: mill"
+     ],
+     "excludes": [
+      "crisis: under_siege"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": [
+      "ferry crossing",
+      "food sources (no reader) (fish)",
+      "season (seasonal floods)"
+     ]
+    }
+   ],
+   "rendered": false,
+   "droppedTwins": [
+    {
+     "text": "The river defines everything: the crossing, the flood risk, the water itself. The rhythm of the water sets the rhythm of the day. Floods are a shared memory and a shared threat.",
+     "needs": [
+      "river"
+     ],
+     "excludes": [],
+     "crisis": "any",
+     "why": "riverside without a mill, or under siege (names no traders)",
+     "droppedBy": "chair CENSUS-2 R-D2: the slot renders on no page (no reader of terrainCtx/routeCtx/defenseCtx/cultureCtx or culturalIdentity text in src), so a twin moves nothing"
+    }
+   ]
+  },
+  {
+   "pool": "TERRAIN_CONTEXT['coastal']",
+   "keyGuarantees": [
+    "config.terrainOverride === \"coastal\" (the raw config field, dailyLifeLogic.js:88/108 — NOT factsOf terrain; a null override prints nothing)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "A one-line T lookup; asserts no calm: stays out. \"The dock or quay is the social and economic center\" needs docks.",
+   "lines": [
+    {
+     "lineId": "DAILY_LIFE_CONTEXT.TERRAIN_CONTEXT['coastal']",
+     "text": "Salt air, tidal rhythms, the permanent smell of fish. The sea is both livelihood and existential risk. Weather is watched obsessively. The dock or quay is the social and economic center; what happens there happens first. Inland people are called \"mudwalkers\" and looked down on.",
+     "needs": [
+      "coast",
+      "institution: docks"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "food sources (no reader) (fish)",
+      "culture (\"mudwalkers\" slur)"
+     ]
+    }
+   ],
+   "rendered": false,
+   "droppedTwins": [
+    {
+     "text": "Salt air, tidal rhythms, the smell of the shore. The sea is both livelihood and risk, and weather is watched obsessively.",
+     "needs": [
+      "coast"
+     ],
+     "excludes": [],
+     "crisis": "any",
+     "why": "coastal without docks",
+     "droppedBy": "chair CENSUS-2 R-D2: the slot renders on no page (no reader of terrainCtx/routeCtx/defenseCtx/cultureCtx or culturalIdentity text in src), so a twin moves nothing"
+    }
+   ]
+  },
+  {
+   "pool": "TERRAIN_CONTEXT['mountain']",
+   "keyGuarantees": [
+    "config.terrainOverride === \"mountain\" (the raw config field, dailyLifeLogic.js:88/108 — NOT factsOf terrain; a null override prints nothing)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "A one-line T lookup; asserts no calm: stays out. ",
+   "lines": [
+    {
+     "lineId": "DAILY_LIFE_CONTEXT.TERRAIN_CONTEXT['mountain']",
+     "text": "Altitude shortens the growing season and increases isolation. Water is managed carefully: springs, cisterns, snowmelt. The passes close in winter and the settlement turns inward. Self-sufficiency is a point of pride and a practical necessity. Outsiders arrive less often and are noticed more.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "season (passes close in winter, snowmelt)"
+     ]
+    }
+   ],
+   "rendered": false
+  },
+  {
+   "pool": "TERRAIN_CONTEXT['desert']",
+   "keyGuarantees": [
+    "config.terrainOverride === \"desert\" (the raw config field, dailyLifeLogic.js:88/108 — NOT factsOf terrain; a null override prints nothing)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "A one-line T lookup; asserts no calm: stays out. ",
+   "lines": [
+    {
+     "lineId": "DAILY_LIFE_CONTEXT.TERRAIN_CONTEXT['desert']",
+     "text": "Water is the central organising fact of daily life. Where it is, who controls it, how far to reach it. The heat governs the schedule: activity before midday and after dusk, stillness in between. Shade, shelter from sandstorms, and the oasis or well are social gathering points. Caravans are lifelines.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "climate (heat)",
+      "trade-route kind (caravans)"
+     ]
+    }
+   ],
+   "rendered": false
+  },
+  {
+   "pool": "ROUTE_CONTEXT['road']",
+   "keyGuarantees": [
+    "config.tradeRouteAccess === \"road\" (default \"road\" when unset, dailyLifeLogic.js:87/115)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Opted in: \"a steady trickle of travellers … Strangers are normal\" asserts open roads and normal traffic, which a siege, an occupation or monster pressure on the roads contradicts. \"The inn\" needs a tavern.",
+   "lines": [
+    {
+     "lineId": "DAILY_LIFE_CONTEXT.ROUTE_CONTEXT['road']",
+     "text": "A main road means a steady trickle of travellers, merchants, and news. The inn and the stables see constant turnover. People here know more about what's happening in distant places than isolated settlements do. Strangers are normal.",
+     "needs": [
+      "institution: tavern"
+     ],
+     "excludes": [
+      "crisis: threat"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": [
+      "stables"
+     ]
+    }
+   ],
+   "rendered": false,
+   "droppedTwins": [
+    {
+     "text": "A main road means a steady trickle of travellers, merchants, and news. People here know more about what's happening in distant places than isolated settlements do. Strangers are normal.",
+     "needs": [],
+     "excludes": [
+      "crisis: threat"
+     ],
+     "crisis": "any",
+     "why": "road without an inn (drops the inn sentence)",
+     "droppedBy": "chair CENSUS-2 R-D2: the slot renders on no page (no reader of terrainCtx/routeCtx/defenseCtx/cultureCtx or culturalIdentity text in src), so a twin moves nothing"
+    },
+    {
+     "text": "A main road runs through, and what travels it is watched now: who is still coming, and who has stopped.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "threat"
+     ],
+     "why": "road under a threat-family crisis",
+     "droppedBy": "chair CENSUS-2 R-D2: the slot renders on no page (no reader of terrainCtx/routeCtx/defenseCtx/cultureCtx or culturalIdentity text in src), so a twin moves nothing"
+    }
+   ]
+  },
+  {
+   "pool": "ROUTE_CONTEXT['crossroads']",
+   "keyGuarantees": [
+    "config.tradeRouteAccess === \"crossroads\" (default \"road\" when unset, dailyLifeLogic.js:87/115)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Opted in: \"constant movement\" asserts open roads, which a siege contradicts. \"The market is the heart of everything\" needs a market.",
+   "lines": [
+    {
+     "lineId": "DAILY_LIFE_CONTEXT.ROUTE_CONTEXT['crossroads']",
+     "text": "Multiple roads converging means constant movement: merchants, pilgrims, soldiers, refugees. The settlement sees a rotation of faces. News arrives from several directions simultaneously. The market is the heart of everything. Conflict between passing groups is a recurring management problem.",
+     "needs": [
+      "market"
+     ],
+     "excludes": [
+      "crisis: under_siege"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": [
+      "soldiers, pilgrims, refugees (listed as passing traffic)"
+     ]
+    }
+   ],
+   "rendered": false,
+   "droppedTwins": [
+    {
+     "text": "Multiple roads converging means constant movement. The settlement sees a rotation of faces, and news arrives from several directions at once. Conflict between passing groups is a recurring management problem.",
+     "needs": [],
+     "excludes": [
+      "crisis: under_siege"
+     ],
+     "crisis": "any",
+     "why": "crossroads without a market",
+     "droppedBy": "chair CENSUS-2 R-D2: the slot renders on no page (no reader of terrainCtx/routeCtx/defenseCtx/cultureCtx or culturalIdentity text in src), so a twin moves nothing"
+    },
+    {
+     "text": "Several roads meet here, and the siege has closed them all; the news that used to arrive from every direction has stopped.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "under_siege"
+     ],
+     "why": "crossroads under siege",
+     "droppedBy": "chair CENSUS-2 R-D2: the slot renders on no page (no reader of terrainCtx/routeCtx/defenseCtx/cultureCtx or culturalIdentity text in src), so a twin moves nothing"
+    }
+   ]
+  },
+  {
+   "pool": "ROUTE_CONTEXT['river']",
+   "keyGuarantees": [
+    "config.tradeRouteAccess === \"river\" (default \"road\" when unset, dailyLifeLogic.js:87/115)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Opted in: \"Barges and boats bring bulk goods\" asserts open traffic, which a siege contradicts. \"the dock\" needs docks; a route key is not the water fact, so navigable is declared.",
+   "lines": [
+    {
+     "lineId": "DAILY_LIFE_CONTEXT.ROUTE_CONTEXT['river']",
+     "text": "The river is a highway. Barges and boats bring bulk goods that no cart could carry economically. The landing, the dock, and the ferryman's house are where deals are made. The population is accustomed to travellers from upstream and downstream. Floods are a shared reference point for time (\"the year of the big flood\").",
+     "needs": [
+      "navigable",
+      "institution: docks"
+     ],
+     "excludes": [
+      "crisis: under_siege"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": [
+      "ferryman's house",
+      "season (floods)"
+     ]
+    }
+   ],
+   "rendered": false,
+   "droppedTwins": [
+    {
+     "text": "The river is a highway. The landing is where deals are made, and people here are used to travellers from upstream and downstream. Floods are a shared reference point for time.",
+     "needs": [
+      "navigable"
+     ],
+     "excludes": [
+      "crisis: under_siege"
+     ],
+     "crisis": "any",
+     "why": "river route without docks",
+     "droppedBy": "chair CENSUS-2 R-D2: the slot renders on no page (no reader of terrainCtx/routeCtx/defenseCtx/cultureCtx or culturalIdentity text in src), so a twin moves nothing"
+    },
+    {
+     "text": "The river was the highway; under the siege, nothing moves on it that the besiegers do not allow.",
+     "needs": [
+      "navigable"
+     ],
+     "excludes": [],
+     "crisis": [
+      "under_siege"
+     ],
+     "why": "river route under siege",
+     "droppedBy": "chair CENSUS-2 R-D2: the slot renders on no page (no reader of terrainCtx/routeCtx/defenseCtx/cultureCtx or culturalIdentity text in src), so a twin moves nothing"
+    }
+   ]
+  },
+  {
+   "pool": "ROUTE_CONTEXT['port']",
+   "keyGuarantees": [
+    "config.tradeRouteAccess === \"port\" (default \"road\" when unset, dailyLifeLogic.js:87/115)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Opted in: \"The harbour is never quiet\" asserts open sea traffic, which a siege contradicts. \"The dockside district\" needs docks.",
+   "lines": [
+    {
+     "lineId": "DAILY_LIFE_CONTEXT.ROUTE_CONTEXT['port']",
+     "text": "The sea brings the world to the door. The harbour is never quiet. Sailors from distant ports, foreign merchants, exotic goods, and foreign diseases all arrive by ship. The population is accustomed to the strange and is harder to shock. The dockside district has its own rough social order.",
+     "needs": [
+      "coast",
+      "navigable",
+      "institution: docks"
+     ],
+     "excludes": [
+      "crisis: under_siege"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": [
+      "foreign merchants / exotic goods (imports)"
+     ]
+    }
+   ],
+   "rendered": false,
+   "droppedTwins": [
+    {
+     "text": "The sea brings the world to the door, and the people here are harder to shock for it.",
+     "needs": [
+      "coast"
+     ],
+     "excludes": [],
+     "crisis": "any",
+     "why": "port without docks, or under siege",
+     "droppedBy": "chair CENSUS-2 R-D2: the slot renders on no page (no reader of terrainCtx/routeCtx/defenseCtx/cultureCtx or culturalIdentity text in src), so a twin moves nothing"
+    }
+   ]
+  },
+  {
+   "pool": "ROUTE_CONTEXT['isolated']",
+   "keyGuarantees": [
+    "config.tradeRouteAccess === \"isolated\" (default \"road\" when unset, dailyLifeLogic.js:87/115)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Opted in: \"The same … faces, every day\" asserts no newcomers, which a mass-migration influx contradicts; the head count needs a small place.",
+   "lines": [
+    {
+     "lineId": "DAILY_LIFE_CONTEXT.ROUTE_CONTEXT['isolated']",
+     "text": "The same thirty or two hundred faces, every day of your life. Everyone knows everything about everyone. Strangers who arrive are noticed immediately and discussed at length. Self-sufficiency is both a necessity and a point of deep local pride. News from outside arrives weeks late and is received with enormous interest.",
+     "needs": [
+      "population: < middling"
+     ],
+     "excludes": [
+      "migration: influx"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": [
+      "tier (thirty or two hundred faces)"
+     ]
+    }
+   ],
+   "rendered": false,
+   "droppedTwins": [
+    {
+     "text": "Everyone knows everyone's business. Strangers who arrive are noticed immediately and discussed at length. Self-sufficiency is both a necessity and a point of local pride, and news from outside arrives weeks late.",
+     "needs": [],
+     "excludes": [
+      "migration: influx"
+     ],
+     "crisis": "any",
+     "why": "isolated but not small (drops the head count)",
+     "droppedBy": "chair CENSUS-2 R-D2: the slot renders on no page (no reader of terrainCtx/routeCtx/defenseCtx/cultureCtx or culturalIdentity text in src), so a twin moves nothing"
+    },
+    {
+     "text": "Strangers are arriving in numbers this place has never had to absorb, and every one of them is noticed.",
+     "needs": [
+      "migration: influx"
+     ],
+     "excludes": [],
+     "crisis": [
+      "mass_migration"
+     ],
+     "why": "isolated under an influx",
+     "droppedBy": "chair CENSUS-2 R-D2: the slot renders on no page (no reader of terrainCtx/routeCtx/defenseCtx/cultureCtx or culturalIdentity text in src), so a twin moves nothing"
+    }
+   ]
+  },
+  {
+   "pool": "ROUTE_CONTEXT['mountain_pass']",
+   "keyGuarantees": [
+    "config.tradeRouteAccess === \"mountain_pass\" (default \"road\" when unset, dailyLifeLogic.js:87/115)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Opted in: \"a steady stream of merchants and travellers\" in season asserts open traffic, which a siege contradicts.",
+   "lines": [
+    {
+     "lineId": "DAILY_LIFE_CONTEXT.ROUTE_CONTEXT['mountain_pass']",
+     "text": "The pass controls movement between regions. In season, a steady stream of merchants and travellers; in winter, near-total isolation. The settlement exists to service the pass: stabling, food, shelter, guides. Every resident has opinions about road conditions, weather, and the character of travellers.",
+     "needs": [],
+     "excludes": [
+      "crisis: under_siege"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": [
+      "season (in season / in winter)",
+      "stabling, guides"
+     ]
+    }
+   ],
+   "rendered": false,
+   "droppedTwins": [
+    {
+     "text": "The pass is what this place exists to serve, and while it is closed, everyone here is waiting on it.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "under_siege"
+     ],
+     "why": "mountain pass under siege",
+     "droppedBy": "chair CENSUS-2 R-D2: the slot renders on no page (no reader of terrainCtx/routeCtx/defenseCtx/cultureCtx or culturalIdentity text in src), so a twin moves nothing"
+    }
+   ]
+  },
+  {
+   "pool": "DEFENSE_CONTEXT['Fortress']",
+   "keyGuarantees": [
+    "defenseProfile.readiness.label === \"Fortress\" (dailyLifeLogic.js:123-124). The readiness label is a score band with NO factsOf reader (a STOP): the key guarantees no wall, gate, watch or garrison"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Opted in: \"Safety is real\" asserts safety, which a threat-family crisis contradicts. Prints walls, garrison, gates and taverns on a score band.",
+   "lines": [
+    {
+     "lineId": "DAILY_LIFE_CONTEXT.DEFENSE_CONTEXT['Fortress']",
+     "text": "The walls are thick and the garrison is visible everywhere. Gates are checked twice: entering and leaving. Soldiers are a constant social presence; they drink in the better taverns and their officers live in the good houses. Safety is real but so is the feeling of being watched.",
+     "needs": [
+      "walls",
+      "garrison",
+      "gate",
+      "institution: tavern"
+     ],
+     "excludes": [
+      "crisis: threat"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": [
+      "soldiers / officers"
+     ]
+    }
+   ],
+   "rendered": false,
+   "droppedTwins": [
+    {
+     "text": "The place is as ready as it can be made, and it shows: people know their posts, and strangers are noticed entering and leaving. Safety is real, but so is the feeling of being watched.",
+     "needs": [],
+     "excludes": [
+      "crisis: threat"
+     ],
+     "crisis": "any",
+     "why": "Fortress band without walls, garrison or gate",
+     "droppedBy": "chair CENSUS-2 R-D2: the slot renders on no page (no reader of terrainCtx/routeCtx/defenseCtx/cultureCtx or culturalIdentity text in src), so a twin moves nothing"
+    },
+    {
+     "text": "The walls are thick and the garrison is on them. Gates are checked twice, and nobody pretends the safety is anything but earned daily.",
+     "needs": [
+      "walls",
+      "garrison",
+      "gate"
+     ],
+     "excludes": [],
+     "crisis": [
+      "threat"
+     ],
+     "why": "Fortress band under a threat-family crisis",
+     "droppedBy": "chair CENSUS-2 R-D2: the slot renders on no page (no reader of terrainCtx/routeCtx/defenseCtx/cultureCtx or culturalIdentity text in src), so a twin moves nothing"
+    }
+   ]
+  },
+  {
+   "pool": "DEFENSE_CONTEXT['Well-Defended']",
+   "keyGuarantees": [
+    "defenseProfile.readiness.label === \"Well-Defended\" (dailyLifeLogic.js:123-124). The readiness label is a score band with NO factsOf reader (a STOP): the key guarantees no wall, gate, watch or garrison"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Opted in: \"People feel reasonably secure … move freely after dark\" asserts safety, which a threat or unrest crisis contradicts.",
+   "lines": [
+    {
+     "lineId": "DAILY_LIFE_CONTEXT.DEFENSE_CONTEXT['Well-Defended']",
+     "text": "The settlement has real walls and a professional watch. People feel reasonably secure, which shows in how freely they move after dark. The garrison is present but not intrusive. Guard posts at the gates are routine, not threatening.",
+     "needs": [
+      "walls",
+      "watch",
+      "garrison",
+      "gate"
+     ],
+     "excludes": [
+      "crisis: threat",
+      "crisis: unrest"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": []
+    }
+   ],
+   "rendered": false,
+   "droppedTwins": [
+    {
+     "text": "The watch is professional, and people feel reasonably secure, which shows in how freely they move after dark.",
+     "needs": [
+      "watch"
+     ],
+     "excludes": [
+      "crisis: threat",
+      "crisis: unrest"
+     ],
+     "crisis": "any",
+     "why": "Well-Defended with a watch but no walls or garrison",
+     "droppedBy": "chair CENSUS-2 R-D2: the slot renders on no page (no reader of terrainCtx/routeCtx/defenseCtx/cultureCtx or culturalIdentity text in src), so a twin moves nothing"
+    },
+    {
+     "text": "People feel reasonably secure here, which shows in how freely they move after dark.",
+     "needs": [],
+     "excludes": [
+      "crisis: threat",
+      "crisis: unrest"
+     ],
+     "crisis": "any",
+     "why": "Well-Defended with none of walls, watch, garrison",
+     "droppedBy": "chair CENSUS-2 R-D2: the slot renders on no page (no reader of terrainCtx/routeCtx/defenseCtx/cultureCtx or culturalIdentity text in src), so a twin moves nothing"
+    },
+    {
+     "text": "The defences are real, and people are glad of them; nobody moves after dark without a reason.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "threat",
+      "unrest"
+     ],
+     "why": "Well-Defended under threat or unrest",
+     "droppedBy": "chair CENSUS-2 R-D2: the slot renders on no page (no reader of terrainCtx/routeCtx/defenseCtx/cultureCtx or culturalIdentity text in src), so a twin moves nothing"
+    }
+   ]
+  },
+  {
+   "pool": "DEFENSE_CONTEXT['Defensible']",
+   "keyGuarantees": [
+    "defenseProfile.readiness.label === \"Defensible\" (dailyLifeLogic.js:123-124). The readiness label is a score band with NO factsOf reader (a STOP): the key guarantees no wall, gate, watch or garrison"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Opted in: \"Most people feel safe enough\" asserts safety. Prints a palisade, a militia and a watch patrol on a score band.",
+   "lines": [
+    {
+     "lineId": "DAILY_LIFE_CONTEXT.DEFENSE_CONTEXT['Defensible']",
+     "text": "There are defenses (a palisade, a ditch, a part-time militia), but nobody would call this a fortress. The watch patrols the main streets at night. Most people feel safe enough, but they lock their doors and notice strangers.",
+     "needs": [
+      "palisade",
+      "militia",
+      "watch"
+     ],
+     "excludes": [
+      "crisis: threat"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": [
+      "tier (main streets)",
+      "a ditch"
+     ]
+    }
+   ],
+   "rendered": false,
+   "droppedTwins": [
+    {
+     "text": "There are some defenses, but nobody would call this a fortress. Most people feel safe enough, but they lock their doors and notice strangers.",
+     "needs": [],
+     "excludes": [
+      "crisis: threat"
+     ],
+     "crisis": "any",
+     "why": "Defensible without palisade, militia or watch",
+     "droppedBy": "chair CENSUS-2 R-D2: the slot renders on no page (no reader of terrainCtx/routeCtx/defenseCtx/cultureCtx or culturalIdentity text in src), so a twin moves nothing"
+    },
+    {
+     "text": "There are some defenses, but nobody would call this a fortress, and everyone now knows it. Doors are locked early and strangers are stopped.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "threat"
+     ],
+     "why": "Defensible under a threat-family crisis",
+     "droppedBy": "chair CENSUS-2 R-D2: the slot renders on no page (no reader of terrainCtx/routeCtx/defenseCtx/cultureCtx or culturalIdentity text in src), so a twin moves nothing"
+    }
+   ]
+  },
+  {
+   "pool": "DEFENSE_CONTEXT['Vulnerable']",
+   "keyGuarantees": [
+    "defenseProfile.readiness.label === \"Vulnerable\" (dailyLifeLogic.js:123-124). The readiness label is a score band with NO factsOf reader (a STOP): the key guarantees no wall, gate, watch or garrison"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Opted in with the pool (it describes exposure, not calm, so it is \"any\"). \"The watch exists mainly to deal with drunks\" needs a watch.",
+   "lines": [
+    {
+     "lineId": "DAILY_LIFE_CONTEXT.DEFENSE_CONTEXT['Vulnerable']",
+     "text": "The settlement has minimal defenses. A determined raiding party could take it. People are aware of this and it shapes how they live. They know where to run, they keep their valuables hidden, they have arrangements with neighbours for emergencies. The watch exists mainly to deal with drunks.",
+     "needs": [
+      "watch"
+     ],
+     "excludes": [],
+     "crisis": "any",
+     "colour": false,
+     "stop": []
+    }
+   ],
+   "rendered": false,
+   "droppedTwins": [
+    {
+     "text": "The settlement has minimal defenses. A determined raiding party could take it. People are aware of this and it shapes how they live: they know where to run, they keep their valuables hidden, they have arrangements with neighbours for emergencies.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "why": "Vulnerable without a watch (drops the watch sentence)",
+     "droppedBy": "chair CENSUS-2 R-D2: the slot renders on no page (no reader of terrainCtx/routeCtx/defenseCtx/cultureCtx or culturalIdentity text in src), so a twin moves nothing"
+    }
+   ]
+  },
+  {
+   "pool": "DEFENSE_CONTEXT['Undefended']",
+   "keyGuarantees": [
+    "defenseProfile.readiness.label === \"Undefended\" (dailyLifeLogic.js:123-124). The readiness label is a score band with NO factsOf reader (a STOP): the key guarantees no wall, gate, watch or garrison"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Opted in with the pool (\"any\": it asserts exposure). It DENIES walls, garrison, watch and gate, so it excludes all four.",
+   "lines": [
+    {
+     "lineId": "DAILY_LIFE_CONTEXT.DEFENSE_CONTEXT['Undefended']",
+     "text": "There are no walls, no garrison, no meaningful watch. The settlement is completely open. People have learned to live with this: some by forming informal neighbourhood watch arrangements, some by simply accepting that danger is a fact of life here. Strangers are watched carefully because there is no gate to watch them at.",
+     "needs": [],
+     "excludes": [
+      "walls",
+      "garrison",
+      "watch",
+      "gate"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": []
+    }
+   ],
+   "rendered": false,
+   "droppedTwins": [
+    {
+     "text": "The settlement is close to open. People have learned to live with it: some by forming informal neighbourhood arrangements, some by simply accepting that danger is a fact of life here. Strangers are watched carefully.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "why": "Undefended band on a record that holds walls, a garrison, a watch or a gate",
+     "droppedBy": "chair CENSUS-2 R-D2: the slot renders on no page (no reader of terrainCtx/routeCtx/defenseCtx/cultureCtx or culturalIdentity text in src), so a twin moves nothing"
+    }
+   ]
+  },
+  {
+   "pool": "legacyCultureContext.mixed",
+   "keyGuarantees": [
+    "resolveCultureProfileKey(config.culture) === \"mixed\" on a legacy save with no culturalIdentity (dailyLifeLogic.js:9-15)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": true,
+   "ruling": "Colour: presumes nothing beyond the key.",
+   "lines": [
+    {
+     "lineId": "DAILY_LIFE_CONTEXT.legacyCultureContext.mixed",
+     "text": "Several local traditions remain visible in ordinary institutions, household obligations, and the built environment.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": [
+      "culture"
+     ]
+    }
+   ],
+   "rendered": false
+  }
+ ]
+}

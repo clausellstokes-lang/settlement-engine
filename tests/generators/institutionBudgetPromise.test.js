@@ -57,67 +57,75 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 // RE-KEYED BY IDENTITY again at the lane tip (WIRING-W0 records 02-05: the import share, the food-source count and the
 // legacy annotations dated at birth reach every record; not the budget): 60 of 60 moved. Re-captured by this file's own
 // loop at 1dd31a377 with the factor forced to 1.0, twice and equal.
+// RE-KEYED BY IDENTITY 2026-11-07 (LANDING-R2, the pool census composed on rung 1's final 1bff51c6d, §934.105): 60 of 60
+// moved, none by the budget (densityFactor is still forced to 1). The cause is the census's generator changes on the d = 1
+// path — the same 33 lane commits the generator golden's record names (docs/shift-records/2026-11-06-rung2-01-census-
+// composed-generator-master.json, the chair's ruled exception: per-cause stages are unbuildable on this landing). MEASURED,
+// this file's own loop: rung 1's final 1bff51c6d 0 moved (the file green there); the census side f5dc50c6b red; and the
+// all-row mover on its own lineage, 73fa1a1e7 (reader-tonight-wants R11 unit 3, the 76 registry goals rewritten in the
+// house register) against its parent 7f0632463, moves 60 of 60 by itself. Re-captured at the tip dd2aab21d with the factor
+// forced to 1.0, twice and equal.
 const BEFORE = Object.freeze([
-  'e2afc1ee014331fc', // 0
-  'abf48f9e09131c8e', // 1
-  'e2a320a9a306a281', // 2
-  'a430b0dba889de05', // 3
-  'aeab1f77a06c674c', // 4
-  'e3f5a58bf1d01835', // 5
-  '39169be432d3ef98', // 6
-  'be9e39e64457f42f', // 7
-  'd0f6085d7d01e4bf', // 8
-  '5613e914ab1868b6', // 9
-  'fd1095c275954872', // 10
-  'f17560fc83f7d881', // 11
-  'd143e98483c63466', // 12
-  '9946861bfc60da31', // 13
-  'c09e6c0d71a40cc6', // 14
-  'ee1e5995001897a5', // 15
-  '07cc3e4a07598c78', // 16
-  'd60a1bb30d5d2a62', // 17
-  'e78c82d4be58c0e0', // 18
-  '30f6f77df6d5ed5c', // 19
-  '7aeeb716fb58cb20', // 20
-  '45827939d2c77474', // 21
-  '2693f193ee916866', // 22
-  'e7f5a787b64f6d70', // 23
-  'd4de32b9a359c4f3', // 24
-  'f63650389955bc21', // 25
-  '149321ea27037c1c', // 26
-  '05cfcb1053d40723', // 27
-  'df5707e12b759405', // 28
-  '4307ae5fb1f2f0fb', // 29
-  '059ed3878f81dda6', // 30
-  '251cb9da9fda4513', // 31
-  'a6c5c48bae17f973', // 32
-  'eca9a46483bc199a', // 33
-  '8025744ca5778dd5', // 34
-  'dc4e7e242805a23b', // 35
-  '6557e0cee17b4675', // 36
-  '62c325457587ab0d', // 37
-  'bfd337952132d0f5', // 38
-  '568dfa92c9da6409', // 39
-  'a83a73efb90bc2b7', // 40
-  'bd986b271826baee', // 41
-  '07aa9fc2135f3739', // 42
-  '5ffd52fb85a4af57', // 43
-  '0285441f2d1f1c91', // 44
-  '64a801cecacc5899', // 45
-  'bf4a6051cabf54e2', // 46
-  '5725466f7b2c27f8', // 47
-  '76ce3243224f3335', // 48
-  'ab9f44bf40df5bf0', // 49
-  '8bdf13c342d0a400', // 50
-  '9c2132b65eff9ec2', // 51
-  '63ce2b4f40bdd66c', // 52
-  '7395e0394234c596', // 53
-  'f39f294d43058b6f', // 54
-  '0b0a1a1219bb8020', // 55
-  '177bcfde72f48f54', // 56
-  '7960398b7015e9dc', // 57
-  '644ca6b055458360', // 58
-  'cd6c7bceffae6e69', // 59
+  'd3907bbcf4a47a3e', // 0
+  '1b1be5b33abaa994', // 1
+  '98a545ca5410795d', // 2
+  '3efbbe65e505e370', // 3
+  'a93910b620b5e8a0', // 4
+  '2cd628dfc5f9ad5c', // 5
+  '02a140a6c31d79a4', // 6
+  'd6cfa9236c28e148', // 7
+  'a6957733fc9637ac', // 8
+  '2e6e79205f5bc4e8', // 9
+  '68680158b811cc0c', // 10
+  'c2e607a6d3b2aab0', // 11
+  '4ecdf7dd0ef5df48', // 12
+  '4cb56c27c8089413', // 13
+  '5e9f28dcfb01930b', // 14
+  'b41b5befbb667036', // 15
+  'fc97d9fa3531f623', // 16
+  '98e9f02a5f82bf8d', // 17
+  'dd620ec0f3813f37', // 18
+  '5572403f817dc4fc', // 19
+  'f3e847f64d556d7e', // 20
+  'd5cd6c379b96f2da', // 21
+  '2b0dd71f02c29498', // 22
+  'e6b22bd962be039c', // 23
+  '7cbdaf58c6f3f294', // 24
+  '41e40ae02e5236ed', // 25
+  '4314cbfc8a2219d8', // 26
+  '71720481c9cb6b5c', // 27
+  '444ccdd021a13938', // 28
+  'd6443b3c0dfa3764', // 29
+  'aa33f54e600076b8', // 30
+  '38594deea820d18f', // 31
+  '3678534195830eec', // 32
+  'c0fa0cc0fa336909', // 33
+  'e0549f7fedcf38f4', // 34
+  '820691a64e512879', // 35
+  'c0ca90d43ce2a48e', // 36
+  'd52ccf2109512092', // 37
+  '44489cede99fb32d', // 38
+  '5177841cf995b34f', // 39
+  '902a9cd54c1e34a1', // 40
+  'ec246c1b8e3d2ced', // 41
+  'b4687a4f25d6a0fe', // 42
+  '96e5a94299e04f25', // 43
+  '29b5c593b26c9887', // 44
+  '19d9eac6f4c2f90d', // 45
+  '537e78c8a50cbf10', // 46
+  'c29a3d7b8b268b9d', // 47
+  'edd82e5cfaf2fc2e', // 48
+  '8dc39ae2ecfa821c', // 49
+  'c769f5ed5024b428', // 50
+  'c84b6d952d5686ec', // 51
+  'ea4d78a814f5d624', // 52
+  'd9f17d8bf42a5152', // 53
+  '6788271d980c17dc', // 54
+  'cebc0aaa3ef37fd9', // 55
+  'f76de55f1128abb5', // 56
+  '3a987b742c698b4c', // 57
+  'ab43a6c2028b032c', // 58
+  '9c73b6483bdec76e', // 59
 ]);
 
 const hashOf = (value) => createHash('sha256').update(JSON.stringify(value)).digest('hex').slice(0, 16);

@@ -1,0 +1,63 @@
+{
+  "id": "viability.deriveWaterDependencyAnalysis",
+  "source": "src/generators/economy/viability.js :: deriveWaterDependencyAnalysis",
+  "drawKind": "T",
+  "pool": {
+    "declares": [],
+    "crisisScoped": false,
+    "colour": false,
+    "notes": "hasWater = terrain name coastal|riverside, else route river|port (private; factsOf(r).water.navigable should answer — a lake place and a mountain_pass river place disagree).",
+    "needs": [],
+    "excludes": []
+  },
+  "rows": [
+    {
+      "id": "viability.deriveWaterDependencyAnalysis::title",
+      "text": "${inst}: requires water access",
+      "needs": [],
+      "excludes": [
+        "navigable"
+      ],
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "viability.deriveWaterDependencyAnalysis::desc",
+      "text": "${inst} requires ${waterNeed.description} but settlement has no river or port.",
+      "needs": [],
+      "excludes": [
+        "navigable"
+      ],
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "viability.deriveWaterDependencyAnalysis::impact",
+      "text": "Severely reduced productivity without water access.",
+      "needs": [],
+      "excludes": [
+        "navigable"
+      ],
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "viability.deriveWaterDependencyAnalysis::fix.alt",
+      "text": "Add ${alt}",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "INDUSTRY_WATER_NEEDS alternatives (data)."
+    },
+    {
+      "id": "viability.deriveWaterDependencyAnalysis::fix.route",
+      "text": "Establish a river or port trade route",
+      "needs": [],
+      "excludes": [
+        "navigable"
+      ],
+      "colour": false,
+      "notes": "A route cannot add a river; presumes terrain permits one."
+    }
+  ]
+}

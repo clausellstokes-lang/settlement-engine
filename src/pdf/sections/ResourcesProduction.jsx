@@ -120,7 +120,7 @@ export function ResourcesProduction({ settlement, narrativeMode, vm, stateProse 
       {r.economicStrengths.length > 0 && (
         <View style={{ marginBottom: space.sm }}>
           <Text style={{ ...type.label, color: palette.good, fontSize: pt['8'], marginBottom: 3 }}>
-            ECONOMIC STRENGTHS
+            WHAT THE LAND OFFERS
           </Text>
           <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 4 }}>
             {r.economicStrengths.map((s, i) => (

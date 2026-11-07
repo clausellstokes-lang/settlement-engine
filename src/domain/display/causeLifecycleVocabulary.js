@@ -1,9 +1,9 @@
 /**
  * domain/display/causeLifecycleVocabulary.js — W-C5: the GENERIC CONTENT FLOOR for
  * the cause-resolution lifecycle. The side-car pattern (institutionVocabulary.js):
- * a PURE HEADLESS LEAF (imports only the shared ageBands helper), read only by the
- * lazy dossier card — so generation NEVER imports it and adding to it is byte-inert
- * to every golden.
+ * a PURE HEADLESS LEAF (imports only the shared ageBands helper and, since CENSUS-1d, the
+ * one draw function `facts/drawDeclared.js`, itself pure), read only by the lazy dossier card —
+ * so generation NEVER imports it and adding to it is byte-inert to every golden.
  *
  * THE CONTRACT (WC5 brief §6). Every lifecycle event carries a CONJUNCTION KEY —
  * {role, situation, causeClass, lifecycleStage}. W2 authors SPECIFIC
@@ -17,8 +17,8 @@
  * The lifecycleStage vocabulary is CLOSED: attributed, re-caused, reformed,
  * historicized, exposed-public, re-adjudicated.
  */
-
 import { HISTORICIZE_BAND } from '../ageBands.js';
+import { drawDeclared, lineText } from '../facts/drawDeclared.js';
 
 /** The closed lifecycle-stage vocabulary (the conjunction key's fourth dimension). */
 export const LIFECYCLE_STAGES = Object.freeze([
@@ -135,23 +135,32 @@ function variantIndex(key, n) {
  * stage × causeClass. `ageBand` (an ageBands id) tunes the historicize register.
  * `variant` (0-based) selects a specific variant; omit for the deterministic default.
  *
+ * ⭐ CENSUS-1d unit 2 (Appendix B row 102, kind H): the template index is drawn over the FULL
+ * stage pool exactly as before and resolved through `drawDeclared` (noted as
+ * `CAUSE_LIFECYCLE.<stage>` / `CAUSE_LIFECYCLE.historicize-years-past`); `facts` answers a
+ * declared template, none = a declared template is refused (fail-closed).
  * @param {{ stage?: string, causeClass?: string, role?: string, ageBand?: string, variant?: number }} [key]
+ * @param {object|null|(() => object|null)} [facts]
  * @returns {string}
  */
-export function causeLifecyclePhrase({ stage, causeClass, role, ageBand, variant } = {}) {
+export function causeLifecyclePhrase({ stage, causeClass, role, ageBand, variant } = {}, facts = null) {
   const st = String(stage || '');
   const cc = String(causeClass || '');
   const cause = CAUSE_MECHANISM_PHRASE[cc] || (cc ? cc.replace(/-/g, ' ') : 'the pressure');
   let templates = STAGE_TEMPLATES[st];
-  if (st === 'historicized' && ageBand === HISTORICIZE_BAND) templates = HISTORICIZE_YEARS_PAST;
+  let poolId = `CAUSE_LIFECYCLE.${st}`;
+  if (st === 'historicized' && ageBand === HISTORICIZE_BAND) { templates = HISTORICIZE_YEARS_PAST; poolId = 'CAUSE_LIFECYCLE.historicize-years-past'; }
   if (!templates || !templates.length) {
     // Defensive floor-of-the-floor: an unknown stage still renders something honest.
     return `This ${roleNoun(role)}'s compromise (${st || 'active'}) roots in ${cause}.`;
   }
-  const idx = Number.isInteger(variant)
-    ? ((/** @type {number} */ (variant) % templates.length) + templates.length) % templates.length
-    : variantIndex(`${st}|${cc}|${role || ''}`, templates.length);
-  return templates[idx].replace(/\{cause\}/g, cause).replace(/\{role\}/g, roleNoun(role));
+  const drawn = drawDeclared(templates, {
+    draw: (p) => p[Number.isInteger(variant)
+      ? ((/** @type {number} */ (variant) % p.length) + p.length) % p.length
+      : variantIndex(`${st}|${cc}|${role || ''}`, p.length)],
+    facts, key: `${st}|${cc}|${role || ''}`, poolId, surface: 'npcs', drawKind: 'H',
+  });
+  return String(lineText(drawn.line) ?? '').replace(/\{cause\}/g, cause).replace(/\{role\}/g, roleNoun(role));
 }
 
 /**

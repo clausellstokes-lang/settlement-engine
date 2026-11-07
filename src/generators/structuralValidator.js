@@ -5,6 +5,7 @@
  */
 
 import {getTradeRouteFeatures, pickRandom, tierAtLeast} from './helpers.js';
+import { textOf } from '../domain/facts/textOf.js';
 export { getBaseChance } from './institutionProbability.js';
 
 import {GOODS_MODIFIERS_BY_TIER} from '../data/goods/chains.js';
@@ -267,6 +268,10 @@ const _getTierConstraints = (text, instNames, tier, govOverride, magicWorks = tr
  * @param {number} _magicPriority
  */
 export const checkInstCompat = (institutions, tier, _magicPriority) => {
+  // CENSUS-2e unit 2 (ledger docs/census/declarations/CHECK_INST_COMPAT_LANDMARKS.json): a landmark
+  // that presumes a fact the name match does not guarantee declares it (`{ text, needs?, excludes? }`)
+  // and is read through `textOf` (R-C) until the arrival redraw (CENSUS-1f) draws it through
+  // `drawDeclared`. The cathedral, tower and university lines presume only their names: colour.
   // These landmarks are native catalog implications. A current custom
   // institution may render its own authored scene vocabulary elsewhere, but
   // its presentation-only display name cannot impersonate a cathedral,
@@ -288,16 +293,16 @@ export const checkInstCompat = (institutions, tier, _magicPriority) => {
     ]);
   }
   if (has('massive wall', 'citadel')) {
-    return pickRandom([
-      'The walls are serious. High stone, maintained, with watchtowers spaced to cover every angle.',
+    return textOf(pickRandom([
+      { text: 'The walls are serious. High stone, maintained, with watchtowers spaced to cover every angle.', needs: ['walls'] },
       'The citadel on the high ground makes clear that this settlement has been defended before and expects to be again.',
-    ]);
+    ]));
   }
   if (has('wall', 'gatehouse') && !has('massive')) {
-    return pickRandom([
-      'A wall circuit, unremarkable but intact.',
-      'The gatehouse arch frames the main road.',
-    ]);
+    return textOf(pickRandom([
+      { text: 'A wall circuit, unremarkable but intact.', needs: ['walls'], excludes: ['crisis: under_siege'] },
+      { text: 'The gatehouse arch frames the main road.', needs: ['gate'] },
+    ]));
   }
   if (has('wizard', 'mage') && has('tower')) {
     return pickRandom([
@@ -306,16 +311,16 @@ export const checkInstCompat = (institutions, tier, _magicPriority) => {
     ]);
   }
   if (has('major port')) {
-    return pickRandom([
-      'The harbour cranes are visible from the road: tall, necessary, industrial.',
-      'Half the settlement seems to be about the water.',
-    ]);
+    return textOf(pickRandom([
+      { text: 'The harbour cranes are visible from the road: tall, necessary, industrial.', needs: ['navigable'] },
+      { text: 'Half the settlement seems to be about the water.', needs: ['navigable'] },
+    ]));
   }
   if (has('palace', 'royal seat')) {
-    return pickRandom([
+    return textOf(pickRandom([
       'The palace complex sits on the highest point of the settlement and does not look apologetic about it.',
-      'Flags on the palace towers. Someone is in residence.',
-    ]);
+      { text: 'Flags on the palace towers. Someone is in residence.', excludes: ['crisis: succession'] },
+    ]));
   }
   if (has('university', 'academy of magic')) {
     return pickRandom([

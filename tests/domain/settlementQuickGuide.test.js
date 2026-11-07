@@ -104,6 +104,8 @@ describe('composeSettlementQuickGuide', () => {
         key: 'mesoamerican',
         label: 'Mesoamerican-inspired',
       },
+      // CENSUS-1h unit 6 (row 95): the clause declares `market` and is read against the record.
+      institutions: [{ name: 'Market square' }],
     });
 
     expect(guide.identitySentence).toBe(
@@ -127,6 +129,9 @@ describe('composeSettlementQuickGuide', () => {
         tier: 'village',
         population: 400,
         culturalIdentity: { key, label: profile.label },
+        // CENSUS-1h unit 6 (row 95): a declared clause is read against the record, so the fixture
+        // holds what the declared scopes presume (mesoamerican: a market; south-asian: + a temple).
+        institutions: [{ name: 'Market square' }, { name: 'Temple' }],
       });
       // The fallback is recognisable: it ends at the population with nothing after it.
       if (/ of 400 people\.$/.test(guide.identitySentence)) unphrased.push(key);

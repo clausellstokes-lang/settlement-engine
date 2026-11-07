@@ -5,7 +5,7 @@
  */
 import { random as _rng } from '../../kernel/rngContext.js';
 import { getInstFlags } from '../helpers.js'; import { defenseFactsOf, forceWordsOf } from '../../domain/defense/defenseFacts.js'; // F1: one line, so no cited line moves
-import { FACTION_DESCRIPTORS, FACTION_DESCRIPTORS_EXTRA } from '../../data/powerData.js';
+import { FACTION_DESCRIPTORS, FACTION_DESCRIPTORS_EXTRA, FACTION_NAME_SIBLINGS } from '../../data/powerData.js'; import { noteDeclared } from '../../domain/facts/drawDeclared.js'; // CENSUS-1f: one line
 import { migrationDirectionOfConfig } from '../../domain/migrationDirection.js'; // WIRING-W0 (R-W7 e)
 
 /** A roster name compared loosely: case and a leading article set aside. */
@@ -29,7 +29,9 @@ const nameKey = (name) => String(name || '').trim().toLowerCase().replace(/^the\
 const firstUnusedPoolName = (factions, category) => {
   const used = new Set(factions.map((f) => nameKey(f.faction)));
   const pool = [...(FACTION_DESCRIPTORS[category] || []), ...(FACTION_DESCRIPTORS_EXTRA[category] || [])];
-  return pool.find((name) => !used.has(nameKey(name))) ?? null;
+  const name = pool.find((n) => !used.has(nameKey(n))) ?? null;
+  noteDeclared(name, FACTION_NAME_SIBLINGS, { poolId: `powerData:FACTION_DESCRIPTORS.${category}`, surface: 'power', drawKind: 'T' }); // CENSUS-1f: declared, carried, never pre-filtered (the self-check judges it)
+  return name;
 };
 
 /**
@@ -46,9 +48,12 @@ const pushPoolNamed = (factions, category, power, desc, extra = {}) => {
   if (faction !== null) factions.push({ faction, power, desc, category, ...extra });
 };
 
+/** The migration arms' damp on the governing faction's power (exodus and influx: one dial; RUNG2-F13 f7127dd20, ODQ §934.105). */
+const MIGRATION_GOVERNING_DAMP = 0.85;
+
 // applyStressEventFactions — apply every active stress type's power reweighting
 // and faction injection to `factions` (mutates in place).
-export const applyStressEventFactions = (factions, ke, P, S, config, institutions) => { const force = forceWordsOf(defenseFactsOf({ institutions: institutions || [] })), soldiersStand = force.members === 'soldiers'; // F1 (rung 1B): the force words read the record
+export const applyStressEventFactions = (factions, ke, P, S, config, institutions, _stressEntries = []) => { /* MERGE-R2: the direction is W0's config projection now (the entries kept for the call's shape) */ const force = forceWordsOf(defenseFactsOf({ institutions: institutions || [] })), soldiersStand = force.members === 'soldiers'; // F1 (rung 1B): the force words read the record
   (ke('under_siege') &&
     (factions.forEach((N) => {
       ((N.faction.toLowerCase().includes('military') || N.faction.toLowerCase().includes('guard')) &&
@@ -268,6 +273,10 @@ export const applyStressEventFactions = (factions, ke, P, S, config, institution
                     (he.desc || '') +
                     ' The arrival of skilled workers outside guild structures is an existential concern being discussed at every chapter meeting.')));
             }))
+          // RUNG2-F13 (soak1k-0, soak1k-4204): the weak-economy arm minted an emigration under an
+          // influx; same power, same governing ×0.85. MERGE-R2 (the chair's ruling 1): W0's test above
+          // already selects by the one field, so this arm is the DEPARTURES arm outright; F13's
+          // influx arm ("Newcomers' Committee") is unreachable under that test and retired.
           : (factions.push({
               faction: 'Departure Committee',
               power: 8,
@@ -275,7 +284,7 @@ export const applyStressEventFactions = (factions, ke, P, S, config, institution
             }),
             factions.forEach(function (he) {
               he.isGoverning &&
-                ((he.power = Math.round(he.power * 0.85)),
+                ((he.power = Math.round(he.power * MIGRATION_GOVERNING_DAMP)),
                 (he.desc =
                   (he.desc || '') +
                   ' Managing the emigration crisis while maintaining the appearance that it is not a crisis.'));

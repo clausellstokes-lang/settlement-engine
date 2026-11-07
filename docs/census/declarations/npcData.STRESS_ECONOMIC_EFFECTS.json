@@ -1,0 +1,2563 @@
+{
+  "pool": {
+    "id": "npcData.STRESS_ECONOMIC_EFFECTS",
+    "file": "src/data/npcData.js",
+    "drawKind": "H",
+    "drawSite": "relationshipArchetypes.js:138 createTieProseDraw (fnv, without replacement); archetype chosen by relationshipArchetypes.js computeRelTension (R)",
+    "colour": false,
+    "crisisScoped": false,
+    "keyDeclares": {
+      "econ_crim_blur": [
+        "guild",
+        "organised crime"
+      ],
+      "econ_crim_exploitation": [
+        "guild",
+        "organised crime"
+      ],
+      "rel_mil_crusader": [
+        "garrison"
+      ],
+      "rel_crim_fraud": [
+        "organised crime"
+      ],
+      "mag_crim_market": [
+        "magic",
+        "organised crime"
+      ]
+    },
+    "lines": 306,
+    "declaring": 30,
+    "note": "Tie prose; {A}/{B} are the tie parties (guaranteed, not atoms); the parties' categories (economy/criminal/military/religious/magic/government) are the archetype's tie rule, so a line about {B}'s operation, {A}'s pulpit/altar/congregation or {B}'s company presumes the party's role, not a record atom. keyDeclares from priorityHelpers.js stress flags: econ_crim_* only under merchantCriminalBlur (hasMerchantGuild && hasCriminalInst); rel_mil_crusader only under crusaderSynthesis (hasGarrison && hasChurch; hasChurch also matches monastery/priest, so temple is NOT key-guaranteed and the 'shrine' lines declare it); rel_crim_fraud under religiousFraud (hasChurch && hasCriminalInst); mag_crim_market under arcaneBlackMarket (hasMagicInst, which includes alchemist, && hasCriminalInst). mil_crim_corruption is reachable without stateCrime, so garrison is not key-guaranteed there. FORCE WORDS substituted per place by forceWordsOf (rendered as default garrison words, treated as substituted, not atoms): mil_crim_corruption.tension#7, econ_mil_contract.desc#5, rel_mil_crusader.desc#1/#3/#4, tension#3/#6, gov_mil_friction.desc#3, tension#3/#7. LITERAL force words that are NOT substituted and are declared: 'The watch reports' (mil_crim_corruption.desc#5), 'under the watch's command' (econ_mil_contract.tension#6), 'the watch ... the barracks' (gov_mil_friction.desc#5). 'ruler: council' is used for lines presuming a governing council exists here (before the council, council session/bloc/committee, a councillor's son, {A}'s council); a presence atom 'council' would be more exact (a council may sit under another ruler kind) -- reported. INEXPRESSIBLE (colour:false, empty arrays): customs house/customs officer (econ_crim_blur.desc#3, tension#4); magistrate/court/a case judged (econ_crim_exploitation.tension#6, mil_crim_suppression.tension#3, bitter_history.desc#3, tension#3, rel_mil_crusader.tension#6 church trial/court-martial); 'the capital' = an overlord realm (gov_mil_friction.tension#2, #5); an expected riot, unrest-like but not a crisis kind (gov_mil_friction.tension#6); a hired mercenary company (econ_mil_contract.desc#0 and the archetype generally: no mercenary atom). Season presumptions (no atom): 'two winters' (mil_crim_suppression.desc#7), midsummer (gov_econ_dependence.tension#1, peer_rivalry.tension#4), winter grain stores (gov_econ_dependence.tension#7). LABELS 'Mentor and Successor', 'Professional Rivalry', 'Jurisdictional Tension' presume a relation between the two parties (shared trade/office; two offices, civil vs military) -- handled by a tie rule, not a record atom."
+  },
+  "rows": [
+    {
+      "id": "econ_crim_blur.label",
+      "text": "Commercial Complicity",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "econ_crim_blur.desc#0",
+      "text": "{A} and {B} maintain a relationship that exists in legal grey territory. {A} provides legitimate cover, {B} ensures market access that official channels wouldn't permit.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "econ_crim_blur.desc#1",
+      "text": "The books of {A} are clean because {B} keeps certain entries off them; the arrangement benefits both parties and would survive scrutiny by neither.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "econ_crim_blur.desc#2",
+      "text": "What {A} sells is respectability, and {B} is a steady customer. Goods move through channels no inspector has thought to draw on a map.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "econ_crim_blur.desc#3",
+      "text": "{A} signs the import papers and {B} decides what is actually in the crates. The warehouse keeps two inventories, and only one is shown to the customs house.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "econ_crim_blur.desc#4",
+      "text": "{B}'s money buys {A}'s stock at full price and sells it back through stalls that pay no market dues. Both of them call it a partnership.",
+      "needs": [
+        "market"
+      ],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "econ_crim_blur.desc#5",
+      "text": "{A}'s shop front is real, the trade is real, and a third of the coin that passes through it belongs to {B}.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "econ_crim_blur.desc#6",
+      "text": "{A} vouches for {B}'s people at the guild hall. In return, {B}'s people keep {A}'s carts moving on roads where other carts are stopped.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "econ_crim_blur.desc#7",
+      "text": "{A} holds the licence, {B} supplies the goods, and the profit is split in a back room on the first of every month.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "econ_crim_blur.tension#0",
+      "text": "If either is investigated, the other is implicated. Both know this. Neither mentions it.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "econ_crim_blur.tension#1",
+      "text": "A clerk has begun cross-referencing the ledgers. Neither party has decided what to do about it.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "econ_crim_blur.tension#2",
+      "text": "One profitable season more, {A} keeps saying. The seasons keep being profitable.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "econ_crim_blur.tension#3",
+      "text": "{B} wants to move a larger cargo through {A}'s warehouse next month. {A} has not agreed and has not refused.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "econ_crim_blur.tension#4",
+      "text": "A customs officer has asked {A} for the names of every supplier. {B}'s name is missing from the list, and the officer has noticed the gap.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "econ_crim_blur.tension#5",
+      "text": "{A} has started paying off the guild debts that tied the two of them together. {B} reads it as a plan to leave.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "econ_crim_blur.tension#6",
+      "text": "{B} has been seen at {A}'s counting-house in daylight. That was never part of the arrangement.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "econ_crim_blur.tension#7",
+      "text": "{A}'s eldest has found the second ledger and asked what {B}'s initials mean.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "econ_crim_exploitation.label",
+      "text": "Protection Arrangement",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "econ_crim_exploitation.desc#0",
+      "text": "{B}'s operation charges {A} a \"security fee\" that is, in practice, a protection racket. {A} pays without complaint because the alternative is worse.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "econ_crim_exploitation.desc#1",
+      "text": "Every month {A} pays {B} for protection against dangers that would, on inspection, trace back to {B}. Both sides account for it as a cost of doing business.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "econ_crim_exploitation.desc#2",
+      "text": "The \"security fee\" {B} collects from {A} buys exactly one thing: the absence of {B}. It is paid punctually.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "econ_crim_exploitation.desc#3",
+      "text": "{A} pays {B} a tenth of every sale. The one season {A} paid late, a storehouse burned.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "econ_crim_exploitation.desc#4",
+      "text": "{B}'s collectors visit {A} on the same day each month and leave with a sealed purse. Nobody in the street watches them go.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "econ_crim_exploitation.desc#5",
+      "text": "{A} owes {B} for protection that was never asked for and cannot be cancelled. The debt is renewed in person, at the door.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "econ_crim_exploitation.desc#6",
+      "text": "{B} sets the fee, {A} pays it, and the price goes on every customer's bill without a line of its own.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "econ_crim_exploitation.desc#7",
+      "text": "{A}'s premises are the only ones on the row that have never been robbed. {B} reminds {A} of this when the fee is due.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "econ_crim_exploitation.tension#0",
+      "text": "{A} is quietly documenting every payment. Someone is being prepared for a fall.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "econ_crim_exploitation.tension#1",
+      "text": "The fee went up this quarter without explanation. {A}'s patience is a finite ledger.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "econ_crim_exploitation.tension#2",
+      "text": "A rival crew has offered {A} a better rate. Accepting would be a declaration of war on {B}.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "econ_crim_exploitation.tension#3",
+      "text": "{A} has hired two guards of their own. {B} has asked, politely, what they are for.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "econ_crim_exploitation.tension#4",
+      "text": "{B} wants a cut of {A}'s new venture before it opens. The fee was never meant to grow with the business.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "econ_crim_exploitation.tension#5",
+      "text": "{A} missed this month's payment by three days. {B} has not sent anyone yet, and that is worse.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "econ_crim_exploitation.tension#6",
+      "text": "{A} has written to the magistrate about {B}'s collectors. The letter sits unsent in {A}'s desk.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "econ_crim_exploitation.tension#7",
+      "text": "{B}'s collector was found drunk with {A}'s purse still sealed. Someone will have to explain the delay to {B}.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mil_crim_corruption.label",
+      "text": "Corrupt Arrangement",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mil_crim_corruption.desc#0",
+      "text": "{A} receives regular payments from {B}'s organization in exchange for patrol schedules and advance notice of raids. Both maintain professional courtesy in public.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mil_crim_corruption.desc#1",
+      "text": "{B}'s operation runs on a schedule {A} provides: patrols that turn a street early, raids announced a day in advance. In public the two exchange formal nods.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mil_crim_corruption.desc#2",
+      "text": "{A}'s clearance record looks respectable because {B} decides which crimes get cleared. The price of the arrangement is itemised and paid on time.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mil_crim_corruption.desc#3",
+      "text": "{A} takes {B}'s silver every quarter day and keeps certain doors unwatched in return. Each treats the other as a reliable colleague.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mil_crim_corruption.desc#4",
+      "text": "{B}'s people are never searched on {A}'s watch. The arrangement is three years old and has never been put in writing.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mil_crim_corruption.desc#5",
+      "text": "{A} warns {B} before every raid and arrests the competitors {B} names. The watch reports show a fine record of arrests.",
+      "needs": [
+        "watch"
+      ],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "mil_crim_corruption.desc#6",
+      "text": "When {B}'s crew needs a prisoner released, {A} signs the order. When {A} needs an arrest, {B} supplies the culprit.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mil_crim_corruption.desc#7",
+      "text": "{A} commands the patrols and {B} pays for their routes. The streets {B} uses are the quietest in the settlement.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mil_crim_corruption.tension#0",
+      "text": "A new superior has started asking uncomfortable questions about clearance rates. One of them will have to act before the other does.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mil_crim_corruption.tension#1",
+      "text": "An honest sergeant has been transferred into {A}'s command. Both parties consider this a problem.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mil_crim_corruption.tension#2",
+      "text": "The payments have started arriving late. In this trade, late is a message.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mil_crim_corruption.tension#3",
+      "text": "{A} was promoted last month, and {B} expects the price of silence to stay the same. {A} does not.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mil_crim_corruption.tension#4",
+      "text": "One of {B}'s runners was arrested by a patrol {A} did not assign. The runner knows both their names.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mil_crim_corruption.tension#5",
+      "text": "{B} has asked {A} to lose a piece of evidence that three other officers have already seen.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mil_crim_corruption.tension#6",
+      "text": "{A}'s quarter-day payment from {B} arrived with a name attached: someone {B} wants arrested.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mil_crim_corruption.tension#7",
+      "text": "An auditor from the garrison is counting {A}'s arrest records against the coin in {A}'s house. {B} is watching the count.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mil_crim_suppression.label",
+      "text": "Active Suppression",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mil_crim_suppression.desc#0",
+      "text": "{A} has made dismantling {B}'s operation a personal priority. The feeling is mutual.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mil_crim_suppression.desc#1",
+      "text": "{A} keeps a file on {B}'s operation that grows by the week; {B} keeps one on {A} that is already complete.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mil_crim_suppression.desc#2",
+      "text": "The war between {A} and {B} is fought in raids, informants, and paperwork. Neither side counts it as winnable; neither will stop.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mil_crim_suppression.desc#3",
+      "text": "{A} has closed three of {B}'s houses this year. {B} has opened four.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mil_crim_suppression.desc#4",
+      "text": "{A} wants {B} in a cell and has said so before the council. {B} has answered by paying two of {A}'s informants.",
+      "needs": [],
+      "excludes": [
+        "ruler: lord",
+        "ruler: occupier"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "mil_crim_suppression.desc#5",
+      "text": "{B}'s people know {A}'s patrol routes by heart, and {A}'s people know which taverns {B} uses. Neither side has made the arrest that counts.",
+      "needs": [
+        "institution: tavern"
+      ],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "mil_crim_suppression.desc#6",
+      "text": "{A} and {B} are open enemies. Every raid {A} orders costs {B} money, and every month {B} survives costs {A} standing.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mil_crim_suppression.desc#7",
+      "text": "{A} hunts {B}'s operation street by street, and {B} moves it one street ahead. The chase has lasted two winters.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mil_crim_suppression.tension#0",
+      "text": "{B} has leverage on someone close to {A}. It hasn't been used yet.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mil_crim_suppression.tension#1",
+      "text": "{A} is one warrant away from a raid that would end it. The warrant keeps not being signed.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mil_crim_suppression.tension#2",
+      "text": "Someone in {A}'s command reports to {B}. The file says so; it does not say who.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mil_crim_suppression.tension#3",
+      "text": "{A} has a witness willing to name {B} before a magistrate. {B} knows where the witness lives.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "mil_crim_suppression.tension#4",
+      "text": "{B} has offered {A} a truce and a purse. {A} has not answered, which {B} counts as progress.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mil_crim_suppression.tension#5",
+      "text": "{A}'s best informant inside {B}'s crew has stopped reporting. Nobody has seen the informant for nine days.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mil_crim_suppression.tension#6",
+      "text": "{B} has hired an advocate to sue {A} over the last raid. The case comes before the council this season.",
+      "needs": [],
+      "excludes": [
+        "ruler: lord",
+        "ruler: occupier"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "mil_crim_suppression.tension#7",
+      "text": "{A} has been ordered to stand down against {B} by someone above {A}. The order did not say why.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "econ_mil_contract.label",
+      "text": "Security Contract",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "econ_mil_contract.desc#0",
+      "text": "{B}'s company is retained by {A}'s interests on an exclusive basis. The arrangement works well enough that official channels have stopped asking questions.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "econ_mil_contract.desc#1",
+      "text": "{A} pays {B}'s company well and exclusively, and in return certain cargoes move unescorted and uninspected. The arrangement predates every official who might question it.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "econ_mil_contract.desc#2",
+      "text": "The contract between {A} and {B} is renewed annually with a handshake; what it actually covers has never been written down anywhere.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "econ_mil_contract.desc#3",
+      "text": "{B}'s company guards {A}'s warehouses and wagons for a fixed fee each season. {A} pays on time and asks for nothing in writing.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "econ_mil_contract.desc#4",
+      "text": "{A} is {B}'s largest client and {B} is {A}'s only protection. Each would be badly hurt by losing the other.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "econ_mil_contract.desc#5",
+      "text": "{B}'s soldiers wear {A}'s colours on the road and take {A}'s orders without question. No magistrate has a say over them.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "econ_mil_contract.desc#6",
+      "text": "{A} hired {B}'s company after the last caravan was lost. No caravan has been lost since, and {B}'s fee has doubled.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "econ_mil_contract.desc#7",
+      "text": "{B} answers to {A}'s purse before any other authority. Everyone in the settlement knows which way {B}'s company would march.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "econ_mil_contract.tension#0",
+      "text": "The contract is up for renewal. {B} has been approached by a competitor. {A} doesn't know yet.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "econ_mil_contract.tension#1",
+      "text": "{B}'s men have started asking what exactly they are guarding. {A} prefers them incurious.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "econ_mil_contract.tension#2",
+      "text": "The last shipment was short, and each side privately blames the other. The next one will settle the question.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "econ_mil_contract.tension#3",
+      "text": "{A} has cut {B}'s fee by a fifth. {B}'s company still guards the wagons, but more slowly.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "econ_mil_contract.tension#4",
+      "text": "{B}'s company has taken on a second client, and {A} has learned the client's name.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "econ_mil_contract.tension#5",
+      "text": "A guard from {B}'s company was killed protecting {A}'s cargo. {B} wants compensation the contract does not mention.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "econ_mil_contract.tension#6",
+      "text": "The council wants {B}'s company under the watch's command. {A} loses the contract's whole value if it agrees.",
+      "needs": [
+        "watch"
+      ],
+      "excludes": [
+        "ruler: lord",
+        "ruler: occupier"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "econ_mil_contract.tension#7",
+      "text": "{A} has asked {B} to escort a cargo with no manifest. {B} has named a price.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "rel_mil_crusader.label",
+      "text": "Sacred Commission",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "rel_mil_crusader.desc#0",
+      "text": "{A} and {B} operate as a unified authority: temporal and spiritual power reinforcing each other. Dissent against one is dissent against both.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "rel_mil_crusader.desc#1",
+      "text": "Between {A}'s pulpit and {B}'s garrison, the settlement is governed twice over; the sermons and the patrol routes have a way of agreeing.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "rel_mil_crusader.desc#2",
+      "text": "{A} blesses what {B} enforces, and {B} enforces what {A} blesses. Where one authority ends and the other begins is a question neither permits.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "rel_mil_crusader.desc#3",
+      "text": "{A} preaches the cause and {B} raises the men. The shrine's coffers pay for the garrison's swords.",
+      "needs": [
+        "institution: temple"
+      ],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "rel_mil_crusader.desc#4",
+      "text": "{B}'s soldiers take their oaths before {A}'s altar. To {A}'s faithful, {B}'s orders carry the weight of scripture.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "rel_mil_crusader.desc#5",
+      "text": "{A} names the settlement's enemies from the pulpit, and {B} rides against them within the week.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "rel_mil_crusader.desc#6",
+      "text": "{A} and {B} hold the settlement between faith and force. The two of them meet after every service to agree the week's orders.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "rel_mil_crusader.desc#7",
+      "text": "{B} carries {A}'s banner on every patrol. Crossing {B} is treated as heresy, and heresy is punished by {B}.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "rel_mil_crusader.tension#0",
+      "text": "They disagree on a fundamental question of method that neither will put into writing.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "rel_mil_crusader.tension#1",
+      "text": "A penitent has brought a case that pits doctrine against order. It has not been resolved. It will not stay private.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "rel_mil_crusader.tension#2",
+      "text": "The crowd that obeys them both has begun to notice it is one crowd. So has {B}.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "rel_mil_crusader.tension#3",
+      "text": "{A} has declared a holy day on which no soldier may bear arms. {B} has a patrol scheduled for it.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "rel_mil_crusader.tension#4",
+      "text": "{B}'s men have started praying at a different shrine. {A} counts the empty places at every service.",
+      "needs": [
+        "institution: temple"
+      ],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "rel_mil_crusader.tension#5",
+      "text": "{A} wants an armed march against a rival sect. {B} has counted the cost in men and wants to wait a year.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "rel_mil_crusader.tension#6",
+      "text": "A soldier under {B} stands accused of sacrilege. {A} demands a church trial; {B} wants a court-martial.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "rel_mil_crusader.tension#7",
+      "text": "{B} has started giving orders in the name of the faith without consulting {A}.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "rel_crim_fraud.label",
+      "text": "Institutional Cover",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "rel_crim_fraud.desc#0",
+      "text": "{A}'s religious position provides {B}'s operation with legitimacy, meeting spaces, and an excuse for financial flows that would otherwise attract scrutiny.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "rel_crim_fraud.desc#1",
+      "text": "{B}'s money passes through {A}'s offertory and comes out consecrated; the meeting rooms are sanctified, the accounts are not examined.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "rel_crim_fraud.desc#2",
+      "text": "{A} provides the sanctity, {B} provides the income, and the congregation provides the cover (unknowingly), which is what makes it work.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "rel_crim_fraud.desc#3",
+      "text": "{B}'s crew meets in the crypt beneath {A}'s shrine after evening prayers. {A} keeps the only key.",
+      "needs": [
+        "institution: temple"
+      ],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "rel_crim_fraud.desc#4",
+      "text": "{A} records {B}'s payments as gifts from a pious donor. The donor has never attended a service.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "rel_crim_fraud.desc#5",
+      "text": "{B} funds {A}'s alms, and {A} vouches for {B}'s good character to anyone who asks. Both are paid in the same coin.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "rel_crim_fraud.desc#6",
+      "text": "{A}'s charity runs the soup kitchen, and {B}'s couriers collect their parcels from the kitchen's back door.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "rel_crim_fraud.desc#7",
+      "text": "{A} hears {B}'s confession each week and keeps {B}'s accounts each month. Neither duty is written down.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "rel_crim_fraud.tension#0",
+      "text": "{A} has a genuine crisis of conscience that {B} is not prepared to accommodate.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "rel_crim_fraud.tension#1",
+      "text": "A visiting cleric has asked to audit the shrine's books. {B} has offered to handle it.",
+      "needs": [
+        "institution: temple"
+      ],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "rel_crim_fraud.tension#2",
+      "text": "{A} has started keeping a second set of records. Confession, of a kind.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "rel_crim_fraud.tension#3",
+      "text": "A member of {A}'s congregation saw {B}'s men carrying crates out of the shrine at night, and has asked {A} about it twice.",
+      "needs": [
+        "institution: temple"
+      ],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "rel_crim_fraud.tension#4",
+      "text": "{B} wants to store weapons beneath {A}'s altar. {A} has refused once and been asked again.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "rel_crim_fraud.tension#5",
+      "text": "{A}'s superior is coming to inspect the shrine's accounts. {B}'s gifts make up half the income.",
+      "needs": [
+        "institution: temple"
+      ],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "rel_crim_fraud.tension#6",
+      "text": "{A} preached a sermon on theft last week. {B} took it personally.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "rel_crim_fraud.tension#7",
+      "text": "{B} has asked {A} to marry two of the crew under false names. {A} has not set a date.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mag_crim_market.label",
+      "text": "Arcane Supplier",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mag_crim_market.desc#0",
+      "text": "{A} provides {B}'s network with components, identification services, and the occasional forged document that only a skilled practitioner could produce.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mag_crim_market.desc#1",
+      "text": "When {B}'s network needs a seal copied, a face forgotten, or a document aged thirty years, the work arrives through {A} and is never signed.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mag_crim_market.desc#2",
+      "text": "{A} takes commissions from {B} that no guild register records: small workings, expertly done, each one deniable and none of them innocent.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mag_crim_market.desc#3",
+      "text": "{A} brews what {B} sells: sleeping draughts, truth-tinctures, and inks that vanish after a day.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mag_crim_market.desc#4",
+      "text": "{B} brings {A} the jobs and the payment, and {A} asks no questions about who the work is for.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mag_crim_market.desc#5",
+      "text": "{A}'s workshop has a back door, and {B}'s couriers are the only ones who use it.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mag_crim_market.desc#6",
+      "text": "{A} supplies {B}'s network with wards against detection. Each ward is sold at triple the guild price.",
+      "needs": [
+        "guild"
+      ],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "mag_crim_market.desc#7",
+      "text": "{B} pays {A} a retainer to be ready at any hour. Twice this year, {A} has been called out before dawn.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mag_crim_market.tension#0",
+      "text": "The last commission left traces that a determined investigator might find. {A} is reconsidering the relationship.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mag_crim_market.tension#1",
+      "text": "{B} has begun asking for workings of a different order: the kind with witnesses. {A} has not yet said no.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mag_crim_market.tension#2",
+      "text": "Another practitioner has noticed {A}'s signature in the residue. Professional courtesy has limits.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mag_crim_market.tension#3",
+      "text": "{A}'s apprentice has started asking where the night commissions go. {B} has noticed the apprentice.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mag_crim_market.tension#4",
+      "text": "{B} owes {A} for three months of work and has offered information instead of coin.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mag_crim_market.tension#5",
+      "text": "A ward {A} made for {B} failed during a robbery. {B} blames the ward; {A} blames the thief.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mag_crim_market.tension#6",
+      "text": "The guild has summoned {A} to explain a shortfall in licensed components. {B}'s orders account for the missing stock.",
+      "needs": [
+        "guild"
+      ],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "mag_crim_market.tension#7",
+      "text": "{A} has been offered a guild post that requires a clean record. {B} has a list of everything {A} has made.",
+      "needs": [
+        "guild"
+      ],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "gov_econ_dependence.label",
+      "text": "Financial Dependence",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "gov_econ_dependence.desc#0",
+      "text": "The settlement's civic functions run on credit extended by {B}. {A} cannot take any action that seriously threatens {B}'s interests, and {B} does not let this be forgotten.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "gov_econ_dependence.desc#1",
+      "text": "{B} holds the settlement's debts and therefore, in every way that matters, its agenda; {A} governs within the margin {B} allows.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "gov_econ_dependence.desc#2",
+      "text": "Every civic project {A} announces has first been costed, quietly, in {B}'s counting-room. The public believes the order is the other way around.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "gov_econ_dependence.desc#3",
+      "text": "{A}'s treasury borrowed from {B} to cover a bad harvest and has borrowed every year since. The interest is paid before the wages.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "gov_econ_dependence.desc#4",
+      "text": "{B} holds the settlement's tax rolls as security for its loans. {A} cannot raise a levy without {B}'s clerks counting it first.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "gov_econ_dependence.desc#5",
+      "text": "{A} owes {B} more than the settlement collects in two years of taxes. {B} is paid first, every quarter.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "gov_econ_dependence.desc#6",
+      "text": "{B} lends and {A} spends. The council's decisions are made in {A}'s chamber and approved in {B}'s counting-house.",
+      "needs": [],
+      "excludes": [
+        "ruler: lord",
+        "ruler: occupier"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "gov_econ_dependence.desc#7",
+      "text": "{A} governs on {B}'s credit. Every loan renewed adds one more condition to the next.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "gov_econ_dependence.tension#0",
+      "text": "{A} has identified an alternative creditor. {B} has heard the same rumour.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "gov_econ_dependence.tension#1",
+      "text": "The interest falls due at midsummer and the treasury will not cover it. {B} has already drafted the terms of the extension.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "gov_econ_dependence.tension#2",
+      "text": "A faction on the council wants the debt repudiated outright. {A} has stopped disagreeing in public.",
+      "needs": [],
+      "excludes": [
+        "ruler: lord",
+        "ruler: occupier"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "gov_econ_dependence.tension#3",
+      "text": "{B} has asked for a seat on the council as a condition of the next loan. {A} has three weeks to answer.",
+      "needs": [],
+      "excludes": [
+        "ruler: lord",
+        "ruler: occupier"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "gov_econ_dependence.tension#4",
+      "text": "{A} has proposed a new tax to clear the debt. {B}'s friends on the council will vote against it.",
+      "needs": [],
+      "excludes": [
+        "ruler: lord",
+        "ruler: occupier"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "gov_econ_dependence.tension#5",
+      "text": "{B} is calling in a third of the debt at once. {A} has until the next quarter day to find it.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "gov_econ_dependence.tension#6",
+      "text": "{A} has started borrowing small sums from {B}'s rivals. {B}'s clerks have seen the receipts.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "gov_econ_dependence.tension#7",
+      "text": "{B} has refused credit for the winter grain stores. {A} must choose between the creditor and the granary.",
+      "needs": [
+        "institution: granary"
+      ],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "gov_mil_friction.label",
+      "text": "Jurisdictional Tension",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "gov_mil_friction.desc#0",
+      "text": "{A} and {B} disagree fundamentally about where civil authority ends and military authority begins. The argument has been running for years and occasionally generates paperwork.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "gov_mil_friction.desc#1",
+      "text": "{A} issues orders {B} regards as suggestions, and {B} takes actions {A} regards as insubordination; the settlement runs in the gap between.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "gov_mil_friction.desc#2",
+      "text": "The line between {A}'s authority and {B}'s has been redrawn four times and honoured never. Each keeps the map that favours them.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "gov_mil_friction.desc#3",
+      "text": "{A} controls the garrison's pay and {B} controls its swords. Each uses their half to bargain for the other's.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "gov_mil_friction.desc#4",
+      "text": "{B} reports to {A} on paper and to no one in practice. {A} has three letters of complaint unanswered.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "gov_mil_friction.desc#5",
+      "text": "{A} wants the watch under civil command; {B} wants the council out of the barracks. They meet monthly and settle nothing.",
+      "needs": [
+        "watch",
+        "garrison"
+      ],
+      "excludes": [
+        "ruler: lord",
+        "ruler: occupier"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "gov_mil_friction.desc#6",
+      "text": "{A} sets the curfew and {B} decides whether to enforce it. The two have not agreed on a curfew in a year.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "gov_mil_friction.desc#7",
+      "text": "{B} answers {A}'s summons late and leaves early. {A} now issues them in writing so the delays are on record.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "gov_mil_friction.tension#0",
+      "text": "An incident is coming that will force the issue. Both are positioning for it.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "gov_mil_friction.tension#1",
+      "text": "A prisoner is currently held by both jurisdictions at once. Neither will release the paperwork first.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "gov_mil_friction.tension#2",
+      "text": "{B} has begun drilling in the square without asking. {A} has begun writing letters to the capital.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "gov_mil_friction.tension#3",
+      "text": "{A} has cut the garrison's pay to fund the market repairs. {B} has told the soldiers who signed the order.",
+      "needs": [
+        "market"
+      ],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "gov_mil_friction.tension#4",
+      "text": "{B} arrested a councillor's son without {A}'s warrant. {A} has demanded his release by tomorrow.",
+      "needs": [],
+      "excludes": [
+        "ruler: lord",
+        "ruler: occupier"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "gov_mil_friction.tension#5",
+      "text": "{A} has asked the capital to replace {B}. {B} has asked the capital to dissolve {A}'s council.",
+      "needs": [],
+      "excludes": [
+        "ruler: lord",
+        "ruler: occupier"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "gov_mil_friction.tension#6",
+      "text": "A riot is expected on the next market day, and {A} and {B} have issued opposite orders for it.",
+      "needs": [
+        "market"
+      ],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "gov_mil_friction.tension#7",
+      "text": "{B} has begun collecting a road toll for the garrison. {A} calls it theft from the treasury.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "peer_rivalry.label",
+      "text": "Professional Rivalry",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "peer_rivalry.desc#0",
+      "text": "{A} and {B} compete for the same resource, position, or reputation. The competition is vigorous but bounded. Neither has crossed the line into genuine enmity. Yet.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "peer_rivalry.desc#1",
+      "text": "{A} and {B} want the same thing and cannot both have it. The contest is conducted with scrupulous courtesy and total commitment.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "peer_rivalry.desc#2",
+      "text": "Every advance {A} makes is answered by {B} within the season; the rivalry has become its own institution, with rules neither wrote and both obey.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "peer_rivalry.desc#3",
+      "text": "{A} and {B} bid for the same contracts and sit at the same tables. Each counts the other's wins more carefully than their own.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "peer_rivalry.desc#4",
+      "text": "{A} and {B} trained together and have competed ever since. The settlement keeps score, and so do they.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "peer_rivalry.desc#5",
+      "text": "{A} wants {B}'s position, and {B} wants {A}'s reputation. They are civil in public and unforgiving in private.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "peer_rivalry.desc#6",
+      "text": "Every client {A} wins is one {B} lost, and the reverse. The two keep a polite distance and an exact tally.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "peer_rivalry.desc#7",
+      "text": "{A} and {B} are rivals for the same patron's favour. Each has spent the year trying to be first through the patron's door.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "peer_rivalry.tension#0",
+      "text": "A decision coming in the next season will advantage one significantly. The other knows this.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "peer_rivalry.tension#1",
+      "text": "A mutual patron has let it be known there is room for only one of them at the next table.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "peer_rivalry.tension#2",
+      "text": "One of them has recently broken an unwritten rule of the contest. The other is deciding what that permits.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "peer_rivalry.tension#3",
+      "text": "{A} has hired away {B}'s best assistant. {B} has said nothing about it, to anyone.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "peer_rivalry.tension#4",
+      "text": "A post opens at midsummer, and only {A} or {B} can fill it.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "peer_rivalry.tension#5",
+      "text": "{B} has been telling clients that {A}'s work is slipping. Two of the clients have repeated it to {A}.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "peer_rivalry.tension#6",
+      "text": "{A} and {B} will both present proposals at the next council session. Only one will be accepted.",
+      "needs": [],
+      "excludes": [
+        "ruler: lord",
+        "ruler: occupier"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "peer_rivalry.tension#7",
+      "text": "{A} lost the last contract to {B} by a single vote, and has learned who cast it.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mentor_legacy.label",
+      "text": "Mentor and Successor",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mentor_legacy.desc#0",
+      "text": "{A} shaped {B}'s career in ways that {B} has not fully acknowledged. The debt is real; the gratitude is complicated.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mentor_legacy.desc#1",
+      "text": "{B} stands where {A} put them, by a ladder {A} built and {B} has since pulled up. Both remember it differently.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mentor_legacy.desc#2",
+      "text": "What {B} knows, {A} taught (including, inconveniently, how to outmanoeuvre a teacher).",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mentor_legacy.desc#3",
+      "text": "{A} took {B} in as an apprentice and taught them the trade, the clients, and the names worth knowing.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mentor_legacy.desc#4",
+      "text": "{B} learned the work at {A}'s side for seven years. Half of {B}'s clients first came through {A}'s door.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mentor_legacy.desc#5",
+      "text": "{A} vouched for {B} when nobody else would. {B}'s first post came from that word.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mentor_legacy.desc#6",
+      "text": "{B} still uses {A}'s methods and {A}'s ledger format. Everyone who sees {B}'s work recognises the teacher.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mentor_legacy.desc#7",
+      "text": "{A} named {B} as successor in front of witnesses. The formal handover has not happened.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mentor_legacy.tension#0",
+      "text": "{B} now operates in ways {A} would not approve of. Neither discusses the divergence directly.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mentor_legacy.tension#1",
+      "text": "{A} has one favour left to call in, and is saving it. {B} knows, and is watching for it.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mentor_legacy.tension#2",
+      "text": "A third party has asked {A}, quietly, whether {B} can be trusted. The answer took too long.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mentor_legacy.tension#3",
+      "text": "{B} has taken on a client {A} turned away on principle.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mentor_legacy.tension#4",
+      "text": "{A} has taken a new apprentice, and {B} has heard the apprentice is being taught things {B} never was.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mentor_legacy.tension#5",
+      "text": "{B} corrected {A} in public last month, and was right.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mentor_legacy.tension#6",
+      "text": "{A} has asked {B} for a loan. It is the first time a debt between teacher and student has run that way.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mentor_legacy.tension#7",
+      "text": "{B} has begun teaching {A}'s methods as {B}'s own.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mutual_leverage.label",
+      "text": "Mutual Leverage",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mutual_leverage.desc#0",
+      "text": "{A} and {B} each hold information or resources the other needs. They cooperate efficiently and neither trusts the other at all.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mutual_leverage.desc#1",
+      "text": "What {A} knows would ruin {B}; what {B} holds would finish {A}. On this foundation they have built an excellent working relationship.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mutual_leverage.desc#2",
+      "text": "{A} and {B} deal with each other like men carrying lit lanterns in a powder store, carefully, and with great mutual politeness.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mutual_leverage.desc#3",
+      "text": "{A} and {B} trade favours on a strict count. Neither has ever been more than one favour ahead.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mutual_leverage.desc#4",
+      "text": "{A} controls a vote {B} needs, and {B} controls a supply {A} needs. Their meetings are short and their bargains hold.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mutual_leverage.desc#5",
+      "text": "{A} and {B} each have something to trade and nothing to give away. They meet in private, bargain hard, and keep every bargain.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mutual_leverage.desc#6",
+      "text": "{B} needs {A}'s seal on certain papers; {A} needs {B}'s silence about certain others. Neither has asked for more than the other could pay.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mutual_leverage.desc#7",
+      "text": "{A} and {B} sit on opposite sides of most questions and vote together on the few that touch their shared interests.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mutual_leverage.tension#0",
+      "text": "The balance of leverage has recently shifted. One party has noticed; the other hasn't yet.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mutual_leverage.tension#1",
+      "text": "A document each believed only they possessed has surfaced in a third set of hands.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mutual_leverage.tension#2",
+      "text": "{B} has recently secured something that makes {A}'s hold obsolete. The politeness continues, for now.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mutual_leverage.tension#3",
+      "text": "{A} has asked {B} for a second favour before repaying the first.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mutual_leverage.tension#4",
+      "text": "{B} has found a new source for what {A} supplies. {A} has not been told.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mutual_leverage.tension#5",
+      "text": "The vote {B} needs from {A} comes up next week, and {A} has named a new price.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mutual_leverage.tension#6",
+      "text": "{A}'s secret is about to come out by other means. Once it does, {B} holds nothing over {A}.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mutual_leverage.tension#7",
+      "text": "{B} has written down what {A} owes and left a copy with a notary.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "wary_alliance.label",
+      "text": "Pragmatic Alliance",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "wary_alliance.desc#0",
+      "text": "{A} and {B} work together because the alternative (working against each other) is worse for both. The alliance holds as long as the calculation holds.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "wary_alliance.desc#1",
+      "text": "{A} and {B} are allies by arithmetic: each has counted the cost of the other as an enemy and found it too high. The friendship is warm, public, and entirely conditional.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "wary_alliance.desc#2",
+      "text": "The alliance between {A} and {B} was born of a shared threat and has outlived it; both are quietly recalculating what it is now for.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "wary_alliance.desc#3",
+      "text": "{A} and {B} share a council bloc and a list of enemies. They do not share their plans.",
+      "needs": [],
+      "excludes": [
+        "ruler: lord",
+        "ruler: occupier"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "wary_alliance.desc#4",
+      "text": "{A} and {B} back each other in public and check each other's work in private.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "wary_alliance.desc#5",
+      "text": "{A} brings the votes and {B} brings the money. The alliance is three years old and has won every vote it needed.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "wary_alliance.desc#6",
+      "text": "{A} and {B} signed a pact after their last quarrel cost them both. They keep to its terms exactly.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "wary_alliance.desc#7",
+      "text": "{A} and {B} are allies with separate interests. They meet to coordinate and leave by different doors.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "wary_alliance.tension#0",
+      "text": "A third party is actively working to change that calculation.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "wary_alliance.tension#1",
+      "text": "The threat that made the alliance necessary is gone. Neither has said so aloud.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "wary_alliance.tension#2",
+      "text": "{A} has taken a precaution against {B} that {B} was not meant to discover. {B} has discovered it.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "wary_alliance.tension#3",
+      "text": "{B} has been dining with {A}'s rivals. {A} heard about it from a servant.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "wary_alliance.tension#4",
+      "text": "{A} wants to bring a third member into the alliance. {B} thinks the newcomer would take {B}'s place.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "wary_alliance.tension#5",
+      "text": "{B} voted against {A} on a small matter last week. {A} is waiting to see whether it was small.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "wary_alliance.tension#6",
+      "text": "{A} and {B} both want the same office, and the alliance cannot survive one of them winning it.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "wary_alliance.tension#7",
+      "text": "{B} has asked {A} to back a candidate {A} distrusts. Refusing would cost the alliance its majority.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "genuine_respect.label",
+      "text": "Genuine Respect",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "genuine_respect.desc#0",
+      "text": "{A} and {B} have earned each other's regard through demonstrated competence. They don't agree on everything but they trust each other's judgment within their respective domains.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "genuine_respect.desc#1",
+      "text": "{A} and {B} disagree often and trust completely. Each has watched the other be right at cost, and neither forgets it.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "genuine_respect.desc#2",
+      "text": "There is no arrangement between {A} and {B}, only a long record of kept words; in this settlement that makes them remarkable.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "genuine_respect.desc#3",
+      "text": "{A} sends difficult cases to {B}, and {B} sends them back solved. Neither has ever charged the other a fee.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "genuine_respect.desc#4",
+      "text": "{A} and {B} have stood on opposite sides of three disputes and praised each other after every one.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "genuine_respect.desc#5",
+      "text": "{B} once told the council that {A} was right and {B} was wrong. {A} has not forgotten it.",
+      "needs": [],
+      "excludes": [
+        "ruler: lord",
+        "ruler: occupier"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "genuine_respect.desc#6",
+      "text": "{A} and {B} consult each other before any decision that matters. The advice is honest and is always taken seriously.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "genuine_respect.desc#7",
+      "text": "{A} trusts {B}'s word over any written contract. {B} has never given a reason to regret it.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "genuine_respect.tension#0",
+      "text": "They are about to be on opposite sides of a significant decision.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "genuine_respect.tension#1",
+      "text": "One of them is being pressured to act against the other, and has not yet mentioned it.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "genuine_respect.tension#2",
+      "text": "The respect is real and the interests are diverging. Both can read a map.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "genuine_respect.tension#3",
+      "text": "{A} has learned something about {B}'s family that {B} does not know.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "genuine_respect.tension#4",
+      "text": "{B} has been offered {A}'s post by people who want {A} gone.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "genuine_respect.tension#5",
+      "text": "{A} has made a mistake that {B} is bound to report. {B} has not reported it.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "genuine_respect.tension#6",
+      "text": "The council has asked {A} and {B} to audit each other's accounts. Both agreed, and neither is comfortable.",
+      "needs": [],
+      "excludes": [
+        "ruler: lord",
+        "ruler: occupier"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "genuine_respect.tension#7",
+      "text": "{B} has publicly backed a plan that {A} thinks will fail. {A} has said so once, in private.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "old_debt.label",
+      "text": "Outstanding Debt",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "old_debt.desc#0",
+      "text": "{A} owes {B} something significant: a favour, a secret kept, a crisis managed. The debt has never been formally acknowledged. It doesn't need to be.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "old_debt.desc#1",
+      "text": "Years ago {B} did for {A} the kind of favour that cannot be repaid, only serviced. {A} has been servicing it ever since.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "old_debt.desc#2",
+      "text": "Between {A} and {B} stands an old kindness with the structure of a mortgage. Neither names it; both know the balance to the penny.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "old_debt.desc#3",
+      "text": "{B} paid {A}'s bail eleven years ago and has never mentioned it. {A} mentions it to no one.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "old_debt.desc#4",
+      "text": "{A} owes {B} a large sum in coin, borrowed in a bad year and repaid in small amounts ever since.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "old_debt.desc#5",
+      "text": "{B} kept {A}'s name out of a scandal that ruined two others. {A} has voted with {B} ever since.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "old_debt.desc#6",
+      "text": "{B} nursed {A} through a winter fever when no one else would come. {A} still owes the debt and still knows it.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "old_debt.desc#7",
+      "text": "{A} borrowed {B}'s good name to win a post. {B} has never asked for it back.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "old_debt.tension#0",
+      "text": "{B} is about to call it in.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "old_debt.tension#1",
+      "text": "{A} has begun to act like someone who considers the debt paid. {B} does not.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "old_debt.tension#2",
+      "text": "A third party has learned what the original favour was. The debt just changed hands.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "old_debt.tension#3",
+      "text": "{B} has asked {A} for a vote against {A}'s own interests. It is the first payment {B} has asked for.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "old_debt.tension#4",
+      "text": "{A} has started repaying the debt in coin. {B} wants it repaid in favours.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "old_debt.tension#5",
+      "text": "{B} has mentioned the debt aloud, at a dinner, in front of {A}'s partners.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "old_debt.tension#6",
+      "text": "{A} has refused {B} a small favour for the first time in years.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "old_debt.tension#7",
+      "text": "{B} has fallen on hard times, and the debt {A} owes is now the only asset {B} has.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "family_complication.label",
+      "text": "Family Complication",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "family_complication.desc#0",
+      "text": "{A} and {B} are connected by blood or marriage in a way that neither finds professionally convenient. The connection is known; its implications are not discussed.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "family_complication.desc#1",
+      "text": "Blood ties {A} to {B} in a way that neither career can afford; they meet at funerals and weddings and pretend the rest of the year does not exist.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "family_complication.desc#2",
+      "text": "{A} and {B} share a family and avoid sharing anything else; every professional dealing between them is conducted as though the relation were a rumour.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "family_complication.desc#3",
+      "text": "{A} married into {B}'s family. {B} opposed the match and still calls {A} by surname.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "family_complication.desc#4",
+      "text": "{A} and {B} are cousins on opposite sides of the settlement's politics. Their grandmother still seats them together.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "family_complication.desc#5",
+      "text": "{B} is {A}'s half-sibling, raised in the same house and left out of the same will.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "family_complication.desc#6",
+      "text": "{A} and {B} are in-laws. They are polite at family dinners and avoid each other everywhere else.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "family_complication.desc#7",
+      "text": "{A} is godparent to {B}'s eldest child. The tie was made before their careers set them against each other.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "family_complication.tension#0",
+      "text": "An inheritance, title, or secret is about to make the connection impossible to ignore.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "family_complication.tension#1",
+      "text": "A younger relative has begun trading on the connection both of them refuse to use.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "family_complication.tension#2",
+      "text": "The family has taken a side in a dispute between them. It is the wrong side, in both their opinions.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "family_complication.tension#3",
+      "text": "{A}'s child wants to marry into {B}'s household. Neither parent has given an answer.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "family_complication.tension#4",
+      "text": "{B} has gone into business against {A}'s partners, and the family expects {A} to keep the peace.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "family_complication.tension#5",
+      "text": "A family property must be sold, and {A} and {B} each want the money for a different purpose.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "family_complication.tension#6",
+      "text": "{A}'s rivals have learned that {B} is family, and have started asking {B} questions.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "family_complication.tension#7",
+      "text": "The family has asked {A} and {B} to end their quarrel before the next feast. Neither will apologise first.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "bitter_history.label",
+      "text": "Unresolved History",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "bitter_history.desc#0",
+      "text": "Something happened between {A} and {B} years ago that neither has forgotten. They function professionally. They do not forgive.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "bitter_history.desc#1",
+      "text": "{A} and {B} were something to each other once (partners, friends, perhaps more), and the wreck of it is the one subject on which both are permanently silent.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "bitter_history.desc#2",
+      "text": "The quarrel between {A} and {B} is old enough that no one else remembers the cause. They remember. They have simply stopped explaining.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "bitter_history.desc#3",
+      "text": "{A} testified against {B} in a case ten years ago. {B} lost a fortune and has not spoken to {A} since.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "bitter_history.desc#4",
+      "text": "{B} took the post {A} had been promised. {A} has treated {B} as an enemy from that day.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "bitter_history.desc#5",
+      "text": "{A} and {B} were partners until one of them emptied the shared account. Each says it was the other.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "bitter_history.desc#6",
+      "text": "{A} blames {B} for a death in {A}'s family. {B} has never denied it.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "bitter_history.desc#7",
+      "text": "{A} and {B} fought a duel in their youth. Both survived, and the scar is on {B}'s face.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "bitter_history.tension#0",
+      "text": "The circumstances that caused the original rupture are repeating. Both of them know it.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "bitter_history.tension#1",
+      "text": "An apology is owed in one direction and expected in the other, and they disagree about which.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "bitter_history.tension#2",
+      "text": "A newcomer keeps trying to reconcile them, and is about to learn why nobody else does.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "bitter_history.tension#3",
+      "text": "{B} has been appointed to judge a case in which {A} is a party.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "bitter_history.tension#4",
+      "text": "{A} has found the document that proves what {B} did, and has kept it locked away.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "bitter_history.tension#5",
+      "text": "{A} and {B} have been placed on the same council committee. The first meeting is next week.",
+      "needs": [],
+      "excludes": [
+        "ruler: lord",
+        "ruler: occupier"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "bitter_history.tension#6",
+      "text": "{B}'s child has asked to apprentice with {A}. {A} has not refused.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "bitter_history.tension#7",
+      "text": "{A} has learned that {B} is in debt and could be ruined by one call on a loan.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    }
+  ]
+}

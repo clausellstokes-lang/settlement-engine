@@ -71,7 +71,6 @@
  */
 import { DOSSIER_STATE_PROSE_GENERAL } from '../../../data/dossierStateProse/general.generated.js';
 import { scoreBand } from '../defenseScoreBands.js';
-import { liveInstitutions } from '../../institutions/institutionRoster.js';
 // FREE: `heraldCausalGrammar.js` is a ZERO-IMPORT display leaf, and it holds §0d's own
 // six-band duration table in its four print positions. ⚠ TWO SIBLING DESKS DECLINED
 // `{timeband_age}` FOR WANT OF A "duration former in the tree" (powerStateProse.js:900,
@@ -83,6 +82,10 @@ import { composeStateProse } from './composeStateProse.js';
 import { generalStateProseCandidates } from './generalStateProseCandidates.js';
 import { legibilityRung } from './legibilityRung.js';
 import { wallsAnswered } from '../../defense/defenseFacts.js';
+import { defenceOf } from '../../facts/defence.js';
+import { marketOf } from '../../facts/market.js';
+import { crisisAnswered } from '../../crisis/crisisFacts.js';
+import { factsAnswered } from '../../facts/factsAnswered.js';
 
 /** @typedef {import('./legibilityRung.js').LegibilityRung} LegibilityRung */
 
@@ -1125,12 +1128,6 @@ export function groundPoolKey(terrainType) {
  */
 const NARROW_ACCESS = Object.freeze(['isolated', 'mountain_pass', 'mountain_road']);
 
-/**
- * The engine's own market NAME CLASS, from `glyphAssign.js`'s stall-rows rule. Read as a
- * NAME test rather than a category test because that is what the annex's receipt names and
- * because `institutions[].category` is `economy` for a great deal more than a market.
- */
-const MARKET_NAME = /\b(market|bazaar|exchange|shambles|stalls)\b/i;
 
 /**
  * DS-GEN-13's pool.
@@ -1160,8 +1157,12 @@ const MARKET_NAME = /\b(market|bazaar|exchange|shambles|stalls)\b/i;
  * @returns {string|null}
  */
 export function marketPoolKey(state) {
-  const rows = liveInstitutions(state);
-  const hasMarket = rows.some((row) => MARKET_NAME.test(text(row?.name)));
+  // CENSUS-1b unit A (d), the chair's ruling: the market is THE MARKET HOME's answer
+  // (`facts/market.js`: the catalogue's market tag on the live roster), homed together with
+  // `arrivalScene.holdsMarket` so chair ruling T1-12's equality holds by construction. The
+  // retired name regex (`/\b(market|bazaar|exchange|shambles|stalls)\b/i`, `glyphAssign.js`'s
+  // stall-rows rule) counted a black market. It moves pages, counted by cause.
+  const hasMarket = marketOf({ institutions: /** @type {{ institutions?: unknown } | null | undefined} */ (state)?.institutions });
   const key = !hasMarket
     ? 'NO-MARKET'
     : state?.isEntrepot === true
@@ -1197,14 +1198,22 @@ export function marketPoolKey(state) {
  * @param {{hasCourtSystem?: unknown, hasPrison?: unknown, hasMilitaryInst?: unknown,
  *   hasNavy?: unknown, hasWatch?: unknown, hasMagicInst?: unknown, hasGranary?: unknown,
  *   hasHospital?: unknown}|null|undefined} inst
+ * @param {unknown} [record] the settlement, whose live roster answers the hospital atom
  * @returns {string|null}
  */
-export function institutionsPoolKey(inst) {
+export function institutionsPoolKey(inst, record = undefined) {
   if (!inst || typeof inst !== 'object') return null;
+  // CENSUS-1b unit A (b), the chair's ruling: given the record, PROVISIONED's hospital is the
+  // home's atom (`facts/defence.js`: the live roster, a hospital only), never the birth flag
+  // bag's hospital-or-monastery-or-healer-or-friary. It moves pages, counted by cause. A caller
+  // without the record keeps the flag (the partition tests read the function alone).
+  const hasHospital = record && typeof record === 'object'
+    ? defenceOf(/** @type {{ institutions?: unknown }} */ (record)).hospital
+    : inst.hasHospital === true;
   const key = (inst.hasCourtSystem === true && inst.hasPrison === true) ? 'ADMINISTERED'
     : (inst.hasMilitaryInst === true || inst.hasNavy === true || inst.hasWatch === true) ? 'GARRISONED'
       : inst.hasMagicInst === true ? 'LETTERED'
-        : (inst.hasGranary === true || inst.hasHospital === true) ? 'PROVISIONED'
+        : (inst.hasGranary === true || hasHospital) ? 'PROVISIONED'
           : 'BARE';
   return CORPUS['DS-GEN-17'].pools[key] ? key : null;
 }
@@ -1730,8 +1739,8 @@ export const GENERAL_STATE_PROSE_SILENT = Object.freeze({
  * @returns {typeof GENERAL_STATE_PROSE_SILENT}
  */
 export function generalStateProse(settlement, readings = {}, options = {}) {
-  // F10: the walls dimension answered once, from the defence reader (stateProseKernel law 5).
-  options = wallsAnswered(settlement, options);
+  // F10 + F12: the walls and the five crisis dimensions answered once, from the defence and crisis readers (stateProseKernel law 5).
+  options = factsAnswered(settlement, crisisAnswered(settlement, wallsAnswered(settlement, options)));
   const slots = { settlement: properFill(text(settlement?.name)) };
 
   // ⭐ ROUTED THROUGH THE COMPOSER (SEAM car 3g), at all eleven of this desk's call sites.
@@ -2010,7 +2019,7 @@ export function generalStateProse(settlement, readings = {}, options = {}) {
       warnings,
       ground: rung('DS-GEN-12', groundPoolKey(readings.terrainType), ''),
       market: rung('DS-GEN-13', marketPoolKey(readings), ''),
-      institutions: rung('DS-GEN-17', institutionsPoolKey(readings.inst), ''),
+      institutions: rung('DS-GEN-17', institutionsPoolKey(readings.inst, settlement), ''),
       // DS-REL-2's two lenses at ONE position: the tie the town names first, then how much
       // of its roll this town's own conditions made. The connection line leads because the
       // page prints its datum directly beneath.

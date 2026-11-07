@@ -77,14 +77,14 @@ export const fixture = {
     "tier": "village",
     "eyebrow": "road village · mountain",
     "prose": "The first person you meet on the road into Cnocby wants to know your business, and the second already knows it. Earth-banked enclosures and older rounded foundations remain visible between newer halls.",
-    "pressure": "Hector Gallagher and Inghean MacCarthy are connected by something neither discusses openly: Hector Gallagher has made a mistake that Inghean MacCarthy is bound to report. Inghean MacCarthy has not reported it.",
+    "pressure": "Hector Gallagher and Inghean MacCarthy are connected by something neither discusses openly: They are about to be on opposite sides of a significant decision.",
     "hooks": [
       {
         "kind": "NPC",
         "tone": "success",
         "tag": "derived · npcs",
         "lead": "Odhrán MacCarthy, mayor",
-        "rest": " · goal: demonstrate governance value through means that do not depend on economic conditions the settlement currently lacks."
+        "rest": " · goal: win the people back with things that cost nothing: fair hearings and quick answers."
       },
       {
         "kind": "Hook",
@@ -114,7 +114,7 @@ export const fixture = {
         "text": "blacksmith · selected (Base chance 4% lifted by ×2.50 from nearby resources + terrain.)"
       }
     ],
-    "narrated": "The road made Cnocby by a coin’s width, three chances of it against two of nothing, and the mountain stands are being cleared faster than they grow back. The Elder Council and the Religious Authorities are at odds over conscripting the guilds’ apprentices, and a neutral name is being pressed to choose a side before the council next sits. The mayor, Odhrán MacCarthy, means to prove the office is worth having by means that do not wait on money the town does not have. Hector Gallagher has made a mistake that Inghean MacCarthy is bound to report, and Inghean MacCarthy has not reported it."
+    "narrated": "The road made Cnocby by a coin’s width, three chances of it against two of nothing, and the mountain stands are being cleared faster than they grow back. The Elder Council and the Religious Authorities are at odds over conscripting the guilds’ apprentices, and a neutral name is being pressed to choose a side before the council next sits. The mayor, Odhrán MacCarthy, means to win the people back with what costs nothing: fair hearings and quick answers. Hector Gallagher and Inghean MacCarthy are bound by something neither speaks of, and they are about to stand on opposite sides of a decision that matters."
   },
   "realm": {
     "whyTrace": [

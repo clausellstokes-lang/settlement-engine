@@ -19,6 +19,7 @@
  *
  * Pure and headless. No generator, store, or React dependency.
  */
+import { textOf } from '../domain/facts/textOf.js';
 
 const freezeList = (values) => Object.freeze([...values]);
 
@@ -58,28 +59,28 @@ export const CULTURE_PROFILES = Object.freeze({
     label: 'Germanic-inspired',
     scope: 'A timber-and-stone, guild-and-estate design grammar.',
     builtForm: [
-      'Timber-framed street houses cluster around a market green, with stone reserved for halls, bridges, and defenses.',
+      { text: 'Timber-framed street houses cluster around a market green, with stone reserved for halls, bridges, and defenses.', needs: ['market', 'walls'] },
       'Farmsteads and craft yards form compact wards around a hall, church, or fortified manor.',
     ],
     civicPattern: [
       'Household heads, landed patrons, and craft associations negotiate authority through customary rights.',
-      'A lordly court shares practical administration with guild officers and sworn neighborhood representatives.',
+      { text: 'A lordly court shares practical administration with guild officers and sworn neighborhood representatives.', needs: ['ruler: lord'] },
     ],
     exchangePattern: [
       'Guild-regulated craft production and overland fairs organize exchange.',
-      'Estate dues, weekly markets, and merchant associations connect farms to specialist workshops.',
+      { text: 'Estate dues, weekly markets, and merchant associations connect farms to specialist workshops.', needs: ['market'] },
     ],
     foodways: [
       'Grain, orchard produce, preserved meat, dairy, and ale anchor the local table.',
       'Rye or barley breads, pottage, smoked foods, and seasonal livestock products dominate ordinary meals.',
     ],
     sacredLife: [
-      'Parish observance coexists with household customs, saints, oath sites, and seasonal rites.',
-      'The sacred calendar is public and institutional, while wells, groves, and family memorials retain local weight.',
+      { text: 'Parish observance coexists with household customs, saints, oath sites, and seasonal rites.', needs: ['institution: temple'] },
+      { text: 'The sacred calendar is public and institutional, while wells, groves, and family memorials retain local weight.', needs: ['institution: temple'] },
     ],
     defensePattern: [
       'Defense starts with earthworks and timber palisades and turns to gated stone only as wealth and threat increase.',
-      'A militia tradition supports a smaller permanent watch or retinue.',
+      { text: 'A militia tradition supports a smaller permanent watch or retinue.', needs: ['guardPresence'] },
     ],
     socialTexture: [
       'Household, guild, parish, and estate obligations overlap; authority is visible through office and reciprocal duty.',
@@ -88,7 +89,7 @@ export const CULTURE_PROFILES = Object.freeze({
     architecturalDetails: [
       'half-timbered upper floors project above the busier lanes',
       'steep roofs, enclosed craft yards, and carved lintels mark the older wards',
-      'a hall-and-market axis organizes the settlement center',
+      { text: 'a hall-and-market axis organizes the settlement center', needs: ['market'] },
     ],
     institutionBias: {
       categories: { Crafts: 1.12, Economy: 1.05 },
@@ -102,34 +103,34 @@ export const CULTURE_PROFILES = Object.freeze({
     scope: 'A masonry, civic-square, patronage-and-law design grammar.',
     builtForm: [
       'Masonry courtyard buildings and tiled roofs gather around public squares and processional streets.',
-      'Dense street blocks open into arcades, fountains, markets, and reused monumental precincts.',
+      { text: 'Dense street blocks open into arcades, fountains, markets, and reused monumental precincts.', needs: ['market'] },
     ],
     civicPattern: [
       'Councils, magistrates, patrons, and legal corporations compete through offices, charters, and public works.',
       'Civic office and private patronage are intertwined; public generosity is a recognized route to influence.',
     ],
     exchangePattern: [
-      'Contract, warehousing, market tolls, and notarial practice support long-distance commerce.',
-      'Urban markets aggregate agricultural estates, workshops, and regional shipping into a documented tax base.',
+      { text: 'Contract, warehousing, market tolls, and notarial practice support long-distance commerce.', needs: ['market'] },
+      { text: 'Urban markets aggregate agricultural estates, workshops, and regional shipping into a documented tax base.', needs: ['market', 'navigable'] },
     ],
     foodways: [
       'Bread grains, pulses, garden produce, oil or rendered fats, wine, and preserved fish form the staple pattern.',
       'Public ovens, neighborhood vendors, and shared dining customs make food distribution visibly civic.',
     ],
     sacredLife: [
-      'Shrines, processions, confraternities, and formal priesthoods share the public religious calendar.',
+      { text: 'Shrines, processions, confraternities, and formal priesthoods share the public religious calendar.', needs: ['institution: temple'] },
       'Household devotion and civic cult practice overlap in festivals, memorials, and patronage.',
     ],
     defensePattern: [
       'Where a place can pay for them, masonry defenses, watch posts, and road gates are kept as civic infrastructure.',
-      'Professional guards supplement levy forces organized by district and patron.',
+      { text: 'Professional guards supplement levy forces organized by district and patron.', needs: ['militia', 'guardPresence'] },
     ],
     socialTexture: [
       'Public standing is negotiated through family networks, office, clientage, law, and visible contribution to civic life.',
       'Squares and courts make politics unusually public even when decisions are settled through private patronage.',
     ],
     architecturalDetails: [
-      'arcaded market fronts define the principal square',
+      { text: 'arcaded market fronts define the principal square', needs: ['market'] },
       'warm tile roofs and enclosed courtyards break up the stone streets',
       'fountains, steps, and reused columns give the civic center a layered age',
     ],
@@ -153,7 +154,7 @@ export const CULTURE_PROFILES = Object.freeze({
     ],
     exchangePattern: [
       'Pastoral wealth, seasonal fairs, metalwork, and gift exchange connect dispersed households.',
-      'Market exchange operates beside tribute, fosterage, and reciprocal obligations between kin groups.',
+      { text: 'Market exchange operates beside tribute, fosterage, and reciprocal obligations between kin groups.', needs: ['market'] },
     ],
     foodways: [
       'Oats or barley, dairy, cattle products, woodland foods, fish, and seasonal preserves shape the table.',
@@ -161,11 +162,11 @@ export const CULTURE_PROFILES = Object.freeze({
     ],
     sacredLife: [
       'Sacred enclosures, wells, groves, learned keepers, and household observances form a layered ritual landscape.',
-      'Ritual authority is distributed among formal sanctuaries, seasonal gatherings, and place-based customs.',
+      { text: 'Ritual authority is distributed among formal sanctuaries, seasonal gatherings, and place-based customs.', needs: ['institution: temple'] },
     ],
     defensePattern: [
-      'Ditches, banks, timber ramparts, and defensible hills protect clustered households.',
-      'War bands and kin levies assemble around a smaller retinue of experienced fighters.',
+      { text: 'Ditches, banks, timber ramparts, and defensible hills protect clustered households.', needs: ['palisade'] },
+      { text: 'War bands and kin levies assemble around a smaller retinue of experienced fighters.', needs: ['militia'] },
     ],
     socialTexture: [
       'Kinship and neighborhood obligations carry legal force, while poets, judges, and mediators preserve public memory.',
@@ -187,15 +188,15 @@ export const CULTURE_PROFILES = Object.freeze({
     label: 'Arabic-inspired',
     scope: 'A courtyard, waterworks, endowed-institution-and-caravan design grammar.',
     builtForm: [
-      'Shaded lanes connect inward-looking courtyard buildings, market arcades, gardens, and managed water points.',
-      'Dense masonry quarters open onto caravan courts, covered markets, bathhouses, and planted courtyards.',
+      { text: 'Shaded lanes connect inward-looking courtyard buildings, market arcades, gardens, and managed water points.', needs: ['market'] },
+      { text: 'Dense masonry quarters open onto caravan courts, covered markets, bathhouses, and planted courtyards.', needs: ['market', 'institution: bathhouse'] },
     ],
     civicPattern: [
-      'Judges, market officers, endowed institutions, military households, and merchant notables share administration.',
+      { text: 'Judges, market officers, endowed institutions, military households, and merchant notables share administration.', needs: ['market'] },
       'Formal law and charitable endowment sit beside neighborhood mediation and courtly patronage.',
     ],
     exchangePattern: [
-      'Caravan organization, brokerage, credit, warehousing, and inspected markets sustain regional exchange.',
+      { text: 'Caravan organization, brokerage, credit, warehousing, and inspected markets sustain regional exchange.', needs: ['market'] },
       'Merchant partnerships and route intelligence connect local workshops to long-distance trade.',
     ],
     foodways: [
@@ -203,19 +204,19 @@ export const CULTURE_PROFILES = Object.freeze({
       'Water access and preservation skill determine the balance between local produce and caravan-borne staples.',
     ],
     sacredLife: [
-      'Daily observance, schools, charitable endowments, pilgrimage traffic, and neighborhood shrines organize sacred life.',
-      'Religious institutions also support law, education, hospitality, water, and relief for travelers.',
+      { text: 'Daily observance, schools, charitable endowments, pilgrimage traffic, and neighborhood shrines organize sacred life.', needs: ['institution: school'] },
+      { text: 'Religious institutions also support law, education, hospitality, water, and relief for travelers.', needs: ['institution: temple'] },
     ],
     defensePattern: [
-      'Controlled gates, towers, citadels, and protected water infrastructure define strategic defense.',
-      'Mounted patrols and household troops reinforce ward-based watches.',
+      { text: 'Controlled gates, towers, citadels, and protected water infrastructure define strategic defense.', needs: ['gate'] },
+      { text: 'Mounted patrols and household troops reinforce ward-based watches.', needs: ['watch'] },
     ],
     socialTexture: [
-      'Neighborhood, household, legal, charitable, and commercial obligations intersect in markets and courtyards.',
+      { text: 'Neighborhood, household, legal, charitable, and commercial obligations intersect in markets and courtyards.', needs: ['market'] },
       'Hospitality, reputation, contract, and access to mediation are practical forms of social capital.',
     ],
     architecturalDetails: [
-      'shaded arcades and latticed upper windows soften the market streets',
+      { text: 'shaded arcades and latticed upper windows soften the market streets', needs: ['market'] },
       'courtyard gates reveal planted interiors and carefully managed water',
       'caravan courts and covered lanes make movement through the merchant quarter deliberate',
     ],
@@ -230,16 +231,16 @@ export const CULTURE_PROFILES = Object.freeze({
     label: 'Norse-inspired',
     scope: 'A hall, maritime, assembly-and-seasonal-survival design grammar.',
     builtForm: [
-      'Long halls, boat sheds, turf-roofed outbuildings, and timber yards face a landing or sheltered common.',
+      { text: 'Long halls, boat sheds, turf-roofed outbuildings, and timber yards face a landing or sheltered common.', needs: ['navigable'] },
       'A compact hall-centered settlement stretches along the best shoreline, roadstead, or defensible ridge.',
     ],
     civicPattern: [
       'Household leaders and law speakers bargain in assembly beneath a chieftain or royal representative.',
-      'Authority depends on followings, ships, land, judgments, and the public distribution of wealth.',
+      { text: 'Authority depends on followings, ships, land, judgments, and the public distribution of wealth.', needs: ['navigable'] },
     ],
     exchangePattern: [
-      'Maritime trade, seasonal voyaging, fishing, pastoral production, and portable wealth drive exchange.',
-      'Landing places and halls serve as markets before specialized commercial institutions emerge.',
+      { text: 'Maritime trade, seasonal voyaging, fishing, pastoral production, and portable wealth drive exchange.', needs: ['coast'] },
+      { text: 'Landing places and halls serve as markets before specialized commercial institutions emerge.', needs: ['navigable'] },
     ],
     foodways: [
       'Barley, dairy, preserved fish or meat, hardy greens, and seasonal livestock products dominate.',
@@ -251,7 +252,7 @@ export const CULTURE_PROFILES = Object.freeze({
     ],
     defensePattern: [
       'Readily mobilized crews come first; ringworks, timber ramparts, and beacon systems follow where a place can man them.',
-      'A warrior following provides the permanent core around which levy and ship crews assemble.',
+      { text: 'A warrior following provides the permanent core around which levy and ship crews assemble.', needs: ['navigable'] },
     ],
     socialTexture: [
       'Law, household reputation, reciprocal gifts, and access to ships or land structure public standing.',
@@ -259,8 +260,8 @@ export const CULTURE_PROFILES = Object.freeze({
     ],
     architecturalDetails: [
       'carved roof beams and long hall ridges dominate the older quarter',
-      'turf roofs and timber sheds gather behind the working waterfront',
-      'the assembly ground sits between the principal hall and the landing',
+      { text: 'turf roofs and timber sheds gather behind the working waterfront', needs: ['navigable'] },
+      { text: 'the assembly ground sits between the principal hall and the landing', needs: ['navigable'] },
     ],
     institutionBias: {
       categories: { Defense: 1.06, Crafts: 1.05 },
@@ -274,36 +275,36 @@ export const CULTURE_PROFILES = Object.freeze({
     scope: 'A timber-compound, communal-land, river-and-forest design grammar.',
     builtForm: [
       'Timber compounds, kitchen gardens, workshops, and communal greens spread along a riverbank or defensible rise.',
-      'A palisaded core is surrounded by farm lanes, bathhouses, sheds, and later market streets.',
+      { text: 'A palisaded core is surrounded by farm lanes, bathhouses, sheds, and later market streets.', needs: ['palisade', 'institution: bathhouse', 'market'] },
     ],
     civicPattern: [
       'Communal assemblies, household elders, service elites, and princely or appointed officers share authority.',
       'Collective land and labor customs coexist with tribute, estate, and court obligations.',
     ],
     exchangePattern: [
-      'River trade, forest products, grain, wax, furs, and seasonal fairs connect households to wider routes.',
+      { text: 'River trade, forest products, grain, wax, furs, and seasonal fairs connect households to wider routes.', needs: ['river'] },
       'Communal production and itinerant merchants precede more formal guild and warehouse systems.',
     ],
     foodways: [
-      'Rye, millet, cabbage, mushrooms, river fish, dairy, and preserved forest foods form the staple pattern.',
+      { text: 'Rye, millet, cabbage, mushrooms, river fish, dairy, and preserved forest foods form the staple pattern.', needs: ['river'] },
       'Fermentation, pickling, drying, and shared ovens stretch the harvest through winter.',
     ],
     sacredLife: [
-      'Formal temples or churches coexist with ancestor customs, seasonal festivals, springs, and household rites.',
+      { text: 'Formal temples or churches coexist with ancestor customs, seasonal festivals, springs, and household rites.', needs: ['institution: temple'] },
       'Sacred life follows both an institutional calendar and the agricultural year.',
     ],
     defensePattern: [
-      'Palisades, ditches, river barriers, and fortified compounds provide layered defense.',
+      { text: 'Palisades, ditches, river barriers, and fortified compounds provide layered defense.', needs: ['palisade', 'river'] },
       'A household levy is the common defense; a retinue stands beside it only where a lord can keep one.',
     ],
     socialTexture: [
       'Household and communal labor obligations are enforced through reputation, assembly, and local office.',
-      'Shared ovens, bathhouses, wells, and seasonal work make private life unusually communal.',
+      { text: 'Shared ovens, bathhouses, wells, and seasonal work make private life unusually communal.', needs: ['institution: bathhouse'] },
     ],
     architecturalDetails: [
       'painted timber fronts and enclosed garden plots line the older lanes',
-      'a communal green, bathhouse, and well bind several household compounds together',
-      'palisade lines and river stairs reveal successive stages of expansion',
+      { text: 'a communal green, bathhouse, and well bind several household compounds together', needs: ['institution: bathhouse'] },
+      { text: 'palisade lines and river stairs reveal successive stages of expansion', needs: ['palisade', 'river'] },
     ],
     institutionBias: {
       categories: { Agriculture: 1.08, Infrastructure: 1.04 },
@@ -317,19 +318,19 @@ export const CULTURE_PROFILES = Object.freeze({
     scope: 'A ward, courtyard, bureaucratic-and-lineage design grammar.',
     builtForm: [
       'Walled compounds, tiled roofs, axial streets, shop houses, and garden courts organize distinct wards.',
-      'A planned civic axis links gate, market, administrative compound, temple precinct, and waterworks.',
+      { text: 'A planned civic axis links gate, market, administrative compound, temple precinct, and waterworks.', needs: ['gate', 'market', 'institution: temple'] },
     ],
     civicPattern: [
       'Administrative officers, lineage organizations, neighborhood heads, guilds, and landed patrons overlap.',
       'Written office and examination or appointment coexist with household, temple, and merchant authority.',
     ],
     exchangePattern: [
-      'Regulated markets, guild brokerage, granary systems, canals or roads, and standardized records support exchange.',
+      { text: 'Regulated markets, guild brokerage, granary systems, canals or roads, and standardized records support exchange.', needs: ['market', 'institution: granary'] },
       'Merchant associations connect specialist craft wards to agricultural hinterlands and long routes.',
     ],
     foodways: [
       'Rice or millet, wheat foods, soy or pulse products, vegetables, tea, fish, and preserved condiments vary by ecology.',
-      'Markets, shared waterworks, fermentation, and intensive garden production structure urban food supply.',
+      { text: 'Markets, shared waterworks, fermentation, and intensive garden production structure urban food supply.', needs: ['market'] },
     ],
     sacredLife: [
       'Temple, shrine, household, ancestor, philosophical, and state observances coexist without a single institutional center.',
@@ -337,7 +338,7 @@ export const CULTURE_PROFILES = Object.freeze({
     ],
     defensePattern: [
       'Where the state reaches, enclosed wards, controlled gates, watch towers, granaries, and disciplined troops give defense in depth.',
-      'Militia and professional troops are organized through districts and administrative chains.',
+      { text: 'Militia and professional troops are organized through districts and administrative chains.', needs: ['militia'] },
     ],
     socialTexture: [
       'Office, household seniority, lineage, guild membership, education, and neighborhood duty create intersecting hierarchies.',
@@ -346,7 +347,7 @@ export const CULTURE_PROFILES = Object.freeze({
     architecturalDetails: [
       'tiled rooflines and enclosed courts create a measured rhythm along the main axis',
       'ward gates, shop fronts, and planted courtyards divide public from household space',
-      'the market street terminates at an administrative or temple precinct',
+      { text: 'the market street terminates at an administrative or temple precinct', needs: ['market'] },
     ],
     institutionBias: {
       categories: { Government: 1.08, Infrastructure: 1.08, Crafts: 1.06 },
@@ -359,35 +360,35 @@ export const CULTURE_PROFILES = Object.freeze({
     label: 'Mesoamerican-inspired',
     scope: 'A civic-ritual plaza, tribute, market-and-waterworks design grammar.',
     builtForm: [
-      'Residential compounds and gardens radiate from a raised civic-ritual precinct and broad market plaza.',
+      { text: 'Residential compounds and gardens radiate from a raised civic-ritual precinct and broad market plaza.', needs: ['market'] },
       'Causeways, terraces, canals or reservoirs connect dense neighborhoods to monumental public space.',
     ],
     civicPattern: [
       'Ward leaders, tribute officers, priestly institutions, military societies, and dynastic households divide authority.',
-      'Markets and neighborhood organizations operate inside a wider system of civic labor and tribute.',
+      { text: 'Markets and neighborhood organizations operate inside a wider system of civic labor and tribute.', needs: ['market'] },
     ],
     exchangePattern: [
-      'Large periodic markets, professional merchants, tribute redistribution, and specialist craft production drive exchange.',
+      { text: 'Large periodic markets, professional merchants, tribute redistribution, and specialist craft production drive exchange.', needs: ['market'] },
       'Porters, canoe traffic where possible, and managed causeways move staple and prestige goods.',
     ],
     foodways: [
       'Maize, beans, squash, chile, tomatoes, greens, cacao, and locally available fish or game form the staple pattern.',
-      'Intensive plots, terraces, raised fields, and market redistribution support dense populations.',
+      { text: 'Intensive plots, terraces, raised fields, and market redistribution support dense populations.', needs: ['population: ≥ middling'] },
     ],
     sacredLife: [
-      'Calendar rites, neighborhood temples, household offerings, pilgrimage, and civic ceremony are materially intertwined.',
+      { text: 'Calendar rites, neighborhood temples, household offerings, pilgrimage, and civic ceremony are materially intertwined.', needs: ['institution: temple'] },
       'Ritual specialists track agricultural, dynastic, and communal obligations through a public festival cycle.',
     ],
     defensePattern: [
       'Terraces, causeways, controlled approaches, fortified heights, and organized military orders shape defense.',
-      'Ward levies reinforce trained warrior societies and palace guards.',
+      { text: 'Ward levies reinforce trained warrior societies and palace guards.', needs: ['militia', 'guardPresence'] },
     ],
     socialTexture: [
-      'Ward membership, craft specialization, market standing, tribute duty, and ritual office structure public life.',
+      { text: 'Ward membership, craft specialization, market standing, tribute duty, and ritual office structure public life.', needs: ['market'] },
       'Civic labor and festival obligations make the settlement a visibly collective project.',
     ],
     architecturalDetails: [
-      'a raised ceremonial precinct overlooks a broad and intensely used market plaza',
+      { text: 'a raised ceremonial precinct overlooks a broad and intensely used market plaza', needs: ['market'] },
       'terraces, plastered platforms, and residential compounds step with the terrain',
       'causeways and managed water divide the settlement into organized neighborhoods',
     ],
@@ -402,37 +403,37 @@ export const CULTURE_PROFILES = Object.freeze({
     label: 'South-Asian-inspired',
     scope: 'A tank-and-bazaar, occupational-quarter, temple-and-guild design grammar.',
     builtForm: [
-      'Dense bazaar streets, occupational quarters, courtyard homes, shrines, tanks, and shaded arcades interlock.',
-      'A temple, court, or fortified precinct anchors neighborhoods organized around wells, workshops, and markets.',
+      { text: 'Dense bazaar streets, occupational quarters, courtyard homes, shrines, tanks, and shaded arcades interlock.', needs: ['market'] },
+      { text: 'A temple, court, or fortified precinct anchors neighborhoods organized around wells, workshops, and markets.', needs: ['market'] },
     ],
     civicPattern: [
       'Court officers, councils, merchant and craft corporations, religious endowments, and neighborhood leaders overlap.',
       'Local assemblies and guild institutions negotiate tax, water, ritual, and occupational obligations with rulers.',
     ],
     exchangePattern: [
-      'Bazaars, merchant houses, craft corporations, credit, pilgrimage, and caravan or maritime routes support exchange.',
+      { text: 'Bazaars, merchant houses, craft corporations, credit, pilgrimage, and caravan or maritime routes support exchange.', needs: ['market'] },
       'Occupational specialization links rural production to dense networks of processing and resale.',
     ],
     foodways: [
       'Rice, wheat or millet, pulses, vegetables, dairy, oils, spices, and regional fruits vary with climate and water.',
-      'Irrigation, tanks, market kitchens, preservation, and ritual food rules shape supply and consumption.',
+      { text: 'Irrigation, tanks, market kitchens, preservation, and ritual food rules shape supply and consumption.', needs: ['market'] },
     ],
     sacredLife: [
-      'Temple, monastery, shrine, household, philosophical, and pilgrimage traditions share a crowded sacred landscape.',
-      'Festival patronage, feeding, waterworks, education, and ritual service make sacred institutions civic actors.',
+      { text: 'Temple, monastery, shrine, household, philosophical, and pilgrimage traditions share a crowded sacred landscape.', needs: ['institution: temple'] },
+      { text: 'Festival patronage, feeding, waterworks, education, and ritual service make sacred institutions civic actors.', needs: ['institution: temple'] },
     ],
     defensePattern: [
-      'Fortified precincts, gates, watch towers, protected tanks, and elephant or cavalry yards support strategic defense.',
-      'Professional retainers and district levies answer through layered patrons and offices.',
+      { text: 'Fortified precincts, gates, watch towers, protected tanks, and elephant or cavalry yards support strategic defense.', needs: ['gate'] },
+      { text: 'Professional retainers and district levies answer through layered patrons and offices.', needs: ['militia'] },
     ],
     socialTexture: [
       'Occupation, neighborhood, household, guild, patronage, and religious affiliation create multiple routes to belonging.',
-      'Water access, market standing, ritual service, and credit relationships are everyday political facts.',
+      { text: 'Water access, market standing, ritual service, and credit relationships are everyday political facts.', needs: ['market'] },
     ],
     architecturalDetails: [
-      'shaded bazaar fronts open toward tanks, wells, and neighborhood shrines',
+      { text: 'shaded bazaar fronts open toward tanks, wells, and neighborhood shrines', needs: ['market', 'institution: temple'] },
       'carved stone, plastered courtyards, and workshop lanes layer sacred and commercial space',
-      'occupational quarters cluster around shared water and market infrastructure',
+      { text: 'occupational quarters cluster around shared water and market infrastructure', needs: ['market'] },
     ],
     institutionBias: {
       categories: { Economy: 1.08, Religious: 1.06, Crafts: 1.08, Infrastructure: 1.06 },
@@ -454,7 +455,7 @@ export const CULTURE_PROFILES = Object.freeze({
     ],
     exchangePattern: [
       'Livestock, horses, felt, leather, transport, tribute, and caravan brokerage dominate exchange.',
-      'Seasonal markets connect mobile producers to settled grain, metalwork, textiles, and administration.',
+      { text: 'Seasonal markets connect mobile producers to settled grain, metalwork, textiles, and administration.', needs: ['market'] },
     ],
     foodways: [
       'Meat, dairy, fermented drinks, traded grain, hardy vegetables, and preserved travel foods form the staple pattern.',
@@ -465,8 +466,8 @@ export const CULTURE_PROFILES = Object.freeze({
       'Ritual authority often travels with households even when major sanctuaries anchor regional gatherings.',
     ],
     defensePattern: [
-      'Mounted patrols, mobile musters, earthworks, corrals, and signal systems protect people and herds.',
-      'A small permanent guard relies on rapid reinforcement from a dispersed mounted population.',
+      { text: 'Mounted patrols, mobile musters, earthworks, corrals, and signal systems protect people and herds.', needs: ['militia'] },
+      { text: 'A small permanent guard relies on rapid reinforcement from a dispersed mounted population.', needs: ['guardPresence'] },
     ],
     socialTexture: [
       'Clan, household, herd ownership, alliance, military following, and hospitality obligations organize public standing.',
@@ -488,20 +489,20 @@ export const CULTURE_PROFILES = Object.freeze({
     label: 'Greek-inspired',
     scope: 'An agora, harbor, civic-association-and-hillside design grammar.',
     builtForm: [
-      'Stone and plaster courtyard houses rise around an agora, stoas, shrines, and steep connecting lanes.',
-      'A fortified high precinct overlooks the market, theater, and workshops; where geography permits, it also overlooks a working harbor.',
+      { text: 'Stone and plaster courtyard houses rise around an agora, stoas, shrines, and steep connecting lanes.', needs: ['market'] },
+      { text: 'A fortified high precinct overlooks the market, theater, and workshops; where geography permits, it also overlooks a working harbor.', needs: ['market'] },
     ],
     civicPattern: [
       'Assemblies, magistrates, councils, patrons, sanctuaries, and civic associations compete through public office.',
       'Citizenship institutions coexist with oligarchic wealth, household patronage, and resident outsider communities.',
     ],
     exchangePattern: [
-      'Maritime or regional trade, workshops, contracts, coin exchange, and public markets support the civic economy.',
-      'Harbor and hinterland goods meet through brokers, associations, and tax-farming offices.',
+      { text: 'Maritime or regional trade, workshops, contracts, coin exchange, and public markets support the civic economy.', needs: ['market'] },
+      { text: 'Harbor and hinterland goods meet through brokers, associations, and tax-farming offices.', needs: ['coast'] },
     ],
     foodways: [
       'Grain, pulses, olives or other oil crops, wine, vegetables, cheese, and fish vary with terrain and trade.',
-      'Market supply and imported grain become politically charged as population grows.',
+      { text: 'Market supply and imported grain become politically charged as population grows.', needs: ['market'] },
     ],
     sacredLife: [
       'Household rites, civic festivals, sanctuaries, mystery associations, oracles, and patron cults overlap.',
@@ -513,12 +514,12 @@ export const CULTURE_PROFILES = Object.freeze({
     ],
     socialTexture: [
       'Household, citizenship, association, patronage, public rhetoric, and military service define competing forms of status.',
-      'The market and assembly make disagreement public, while wealth and networks shape who is heard.',
+      { text: 'The market and assembly make disagreement public, while wealth and networks shape who is heard.', needs: ['market'] },
     ],
     architecturalDetails: [
-      'a colonnaded market edge frames the busiest civic ground',
+      { text: 'a colonnaded market edge frames the busiest civic ground', needs: ['market'] },
       'whitewashed courts and stone stairs climb toward a fortified high precinct',
-      'workshops, shrines, and meeting halls crowd the approaches to the agora',
+      { text: 'workshops, shrines, and meeting halls crowd the approaches to the agora', needs: ['market', 'institution: temple'] },
     ],
     institutionBias: {
       categories: { Government: 1.08, Economy: 1.06, Entertainment: 1.06 },
@@ -549,14 +550,16 @@ export function resolveCultureProfileKey(value) {
 }
 
 /**
- * @param {readonly string[]} values
- * @param {{ pick?: (values: readonly string[]) => string } | null | undefined} rng
+ * @param {readonly (string | { text: string })[]} values a profile list (a row may be declared: R-C)
+ * @param {{ pick?: (values: readonly any[]) => any } | null | undefined} rng
  * @returns {string}
  */
 function choose(values, rng) {
   if (!values.length) return '';
-  if (rng?.pick) return rng.pick(values) || values[0];
-  return values[0];
+  // R-C (CENSUS-2d): a declared row `{ text, needs?, excludes? }` gives back its text; the pick is
+  // over the same array, so no roll moves. CENSUS-1e's wiring enforces the declarations.
+  if (rng?.pick) return textOf(rng.pick(values) || values[0]);
+  return textOf(values[0]);
 }
 
 /**

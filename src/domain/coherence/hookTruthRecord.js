@@ -11,6 +11,7 @@
 import { crisisHooksOf } from '../crisis/crisisHooks.js';
 
 import { hookTruthViolations, settlementHookFacts } from './hookTruth.js';
+import { crisisEntries } from '../facts/crisisKind.js';
 import { buildViabilitySummary } from '../viabilitySummary.js';
 
 /** @typedef {import('./hookTruth.js').HookTruthRecord} HookTruthRecord */
@@ -68,7 +69,7 @@ function storedHookTexts(settlement) {
   // are a function of the record, never a stored copy, so the record's own answer is to derive
   // them from the engine's cast (the DM's edit is the page's business, read there).
   /** @type {unknown[]} */
-  const crises = Array.isArray(record.stress) ? record.stress : record.stress && typeof record.stress === 'object' ? [record.stress] : [];
+  const crises = crisisEntries(record);
   crises.forEach((entry) => takeAll(crisisHooksOf(settlement, /** @type {Parameters<typeof crisisHooksOf>[1]} */ (entry))));
   return out;
 }

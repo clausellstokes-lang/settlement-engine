@@ -1,6 +1,7 @@
 import { compareCodepoint } from '../deterministicSort.js';
 import { hookTruthViolations, settlementHookFacts, speakHookTruthfully } from '../coherence/hookTruth.js';
 import { traditionHook } from '../traditions/prose.js';
+import { factsOf } from '../facts/factsOf.js';
 import { normalizePlotHook, plotHookText } from '../../lib/proseSeams.js';
 import { themeOfText } from '../hookThemes.js';
 import { createConflictHookDraw, foodGapHookLine } from './hookLines.js';
@@ -139,7 +140,8 @@ export function groupPlotHooksBySourcePage(hooks) {
 // Echo prefixes: historyGenerator reframes older present-tense hooks as archival
 // discoveries ("Old records suggest …"). Those are paraphrase VARIANTS of one hook
 // family, so the family key strips them before comparing — otherwise the same beat
-// reads once live and once reframed.
+// reads once live and once reframed. A match list, never printed (CENSUS-1e: row 91); the printed copy
+// in historyGenerator.js is ruled {colour} (CENSUS-2e, R-R).
 const ECHO_PREFIXES = [
   'old records suggest ',
   'a recently surfaced document implies ',
@@ -277,7 +279,7 @@ function speakHooks(collected, facts, settlement) {
   }
   if (refusedFamine && !keptFoodHook && facts.foodGap) {
     push(out, {
-      text: foodGapHookLine({ name: settlement.name, band: facts.foodBand }),
+      text: foodGapHookLine({ name: settlement.name, band: facts.foodBand }, () => factsOf(settlement)),
       source: 'Economy',
       role: '',
       category: 'economics',
@@ -370,7 +372,7 @@ export function collectPlotHooks(settlement = {}, options = {}) {
   /** @type {PlotHook[]} */
   const hooks = [];
   const facts = settlementHookFacts(settlement);
-  const drawConflictHook = createConflictHookDraw();
+  const drawConflictHook = createConflictHookDraw(() => factsOf(settlement));
 
   // ── THE CRISIS HOOKS, FIRST (the HOOKS-UNDER-STRESS lane, SOAK-1000 §3) ─────────────────
   // Each active crisis adds the hooks its cast derives (`src/domain/crisis/crisisHooks.js ::
@@ -493,7 +495,7 @@ export function collectPlotHooks(settlement = {}, options = {}) {
   // rite suppressed under an overlord / just liberated / carried in by settlers each raise
   // a seeded hook. Absent mirror (dark / draft) ⇒ nothing added, byte-identical.
   (settlement.traditions || []).forEach((rec) => {
-    const hook = traditionHook(/** @type {Parameters<typeof traditionHook>[0]} */ (rec), { town: settlement.name });
+    const hook = traditionHook(/** @type {Parameters<typeof traditionHook>[0]} */ (rec), { town: settlement.name, facts: () => factsOf(settlement) });
     if (!hook) return;
     push(hooks, {
       text: hook.text,

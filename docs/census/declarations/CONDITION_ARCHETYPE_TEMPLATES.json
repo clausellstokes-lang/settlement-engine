@@ -1,0 +1,1148 @@
+{
+  "poolId": "CONDITION_ARCHETYPE_TEMPLATES",
+  "source": "src/domain/activeConditions.js :58 CONDITION_ARCHETYPE_TEMPLATES (description; label noted in keyGuarantees)",
+  "drawKind": "T",
+  "drawSite": "src/domain/activeConditions.js:623 deriveActiveCondition → CONDITION_ARCHETYPE_TEMPLATES[archetype] (label/description defaults; callers may override)",
+  "pools": [
+    {
+      "pool": "plague",
+      "keyGuarantees": [
+        "an active condition of archetype plague (its own label: \"Plague\")",
+        "conditions are reported by crisisOf as conditionKinds and NOT folded into crisis kinds (crisisKind.js (c)), so no poolCrisis"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Asserts no calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "CONDITION_ARCHETYPE_TEMPLATES.plague.description",
+          "text": "A virulent illness spreads through the settlement.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "famine",
+      "keyGuarantees": [
+        "an active condition of archetype famine (its own label: \"Famine pressure\")",
+        "conditions are reported by crisisOf as conditionKinds and NOT folded into crisis kinds (crisisKind.js (c)), so no poolCrisis"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Asserts no calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "CONDITION_ARCHETYPE_TEMPLATES.famine.description",
+          "text": "Food scarcity has become a public crisis rather than a private hardship.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "war_pressure",
+      "keyGuarantees": [
+        "an active condition of archetype war_pressure (its own label: \"Wartime pressure\")",
+        "conditions are reported by crisisOf as conditionKinds and NOT folded into crisis kinds (crisisKind.js (c)), so no poolCrisis"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Asserts no calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "CONDITION_ARCHETYPE_TEMPLATES.war_pressure.description",
+          "text": "Conflict is reshaping defenses, trade, and public expectations.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "alliance_burden",
+      "keyGuarantees": [
+        "an active condition of archetype alliance_burden (its own label: \"Alliance burden\")",
+        "conditions are reported by crisisOf as conditionKinds and NOT folded into crisis kinds (crisisKind.js (c)), so no poolCrisis"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Asserts no calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "CONDITION_ARCHETYPE_TEMPLATES.alliance_burden.description",
+          "text": "Aid to an ally is straining local capacity.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "vassal_extraction",
+      "keyGuarantees": [
+        "an active condition of archetype vassal_extraction (its own label: \"Vassal extraction\")",
+        "conditions are reported by crisisOf as conditionKinds and NOT folded into crisis kinds (crisisKind.js (c)), so no poolCrisis"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Asserts no calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "CONDITION_ARCHETYPE_TEMPLATES.vassal_extraction.description",
+          "text": "A superior settlement is drawing wealth, troops, or legal authority from this settlement.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "soldiers / commander"
+          ]
+        }
+      ]
+    },
+    {
+      "pool": "rebellion",
+      "keyGuarantees": [
+        "an active condition of archetype rebellion (its own label: \"Rebellion\")",
+        "conditions are reported by crisisOf as conditionKinds and NOT folded into crisis kinds (crisisKind.js (c)), so no poolCrisis"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Asserts no calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "CONDITION_ARCHETYPE_TEMPLATES.rebellion.description",
+          "text": "Local resistance is organizing against an overlord or coercive patron.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "faction_challenge",
+      "keyGuarantees": [
+        "an active condition of archetype faction_challenge (its own label: \"Faction challenge\")",
+        "conditions are reported by crisisOf as conditionKinds and NOT folded into crisis kinds (crisisKind.js (c)), so no poolCrisis"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Asserts no calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "CONDITION_ARCHETYPE_TEMPLATES.faction_challenge.description",
+          "text": "A major faction is maneuvering to alter the settlement power balance.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "government_overthrown",
+      "keyGuarantees": [
+        "an active condition of archetype government_overthrown (its own label: \"Government overthrown\")",
+        "conditions are reported by crisisOf as conditionKinds and NOT folded into crisis kinds (crisisKind.js (c)), so no poolCrisis"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Asserts no calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "CONDITION_ARCHETYPE_TEMPLATES.government_overthrown.description",
+          "text": "The ruling power has just changed hands; authority is being rebuilt under new masters.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "coup_suppressed",
+      "keyGuarantees": [
+        "an active condition of archetype coup_suppressed (its own label: \"Coup suppressed\")",
+        "conditions are reported by crisisOf as conditionKinds and NOT folded into crisis kinds (crisisKind.js (c)), so no poolCrisis"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Asserts no calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "CONDITION_ARCHETYPE_TEMPLATES.coup_suppressed.description",
+          "text": "An attempted seizure of power failed; purges, loyalty tests, and settling of scores follow.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "stressor_residual",
+      "keyGuarantees": [
+        "an active condition of archetype stressor_residual (its own label: \"Stressor aftereffects\")",
+        "conditions are reported by crisisOf as conditionKinds and NOT folded into crisis kinds (crisisKind.js (c)), so no poolCrisis"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Asserts no calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "CONDITION_ARCHETYPE_TEMPLATES.stressor_residual.description",
+          "text": "A resolved crisis still leaves social, economic, or institutional scars.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "custom_crisis",
+      "keyGuarantees": [
+        "an active condition of archetype custom_crisis (its own label: \"Crisis\")",
+        "conditions are reported by crisisOf as conditionKinds and NOT folded into crisis kinds (crisisKind.js (c)), so no poolCrisis"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Asserts no calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "CONDITION_ARCHETYPE_TEMPLATES.custom_crisis.description",
+          "text": "An authored crisis grips the settlement.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "magical_instability",
+      "keyGuarantees": [
+        "an active condition of archetype magical_instability (its own label: \"Magical instability\")",
+        "conditions are reported by crisisOf as conditionKinds and NOT folded into crisis kinds (crisisKind.js (c)), so no poolCrisis"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Asserts no calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "CONDITION_ARCHETYPE_TEMPLATES.magical_instability.description",
+          "text": "Magic in the settlement is misbehaving: surging wild, failing, or fallen silent.",
+          "needs": [
+            "magic"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "trade_route_cut",
+      "keyGuarantees": [
+        "an active condition of archetype trade_route_cut (its own label: \"Trade route severed\")",
+        "conditions are reported by crisisOf as conditionKinds and NOT folded into crisis kinds (crisisKind.js (c)), so no poolCrisis"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Asserts no calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "CONDITION_ARCHETYPE_TEMPLATES.trade_route_cut.description",
+          "text": "A primary trade route is no longer passable.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "trade-route kind"
+          ]
+        }
+      ]
+    },
+    {
+      "pool": "regional_import_shortage",
+      "keyGuarantees": [
+        "an active condition of archetype regional_import_shortage (its own label: \"Regional import shortage\")",
+        "conditions are reported by crisisOf as conditionKinds and NOT folded into crisis kinds (crisisKind.js (c)), so no poolCrisis"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Asserts no calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "CONDITION_ARCHETYPE_TEMPLATES.regional_import_shortage.description",
+          "text": "A regional supplier can no longer meet an important import need.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "regional_export_market_loss",
+      "keyGuarantees": [
+        "an active condition of archetype regional_export_market_loss (its own label: \"Export market weakened\")",
+        "conditions are reported by crisisOf as conditionKinds and NOT folded into crisis kinds (crisisKind.js (c)), so no poolCrisis"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Asserts no calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "CONDITION_ARCHETYPE_TEMPLATES.regional_export_market_loss.description",
+          "text": "A connected market is no longer buying at normal volume.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "regional_route_disruption",
+      "keyGuarantees": [
+        "an active condition of archetype regional_route_disruption (its own label: \"Regional route disruption\")",
+        "conditions are reported by crisisOf as conditionKinds and NOT folded into crisis kinds (crisisKind.js (c)), so no poolCrisis"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Asserts no calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "CONDITION_ARCHETYPE_TEMPLATES.regional_route_disruption.description",
+          "text": "A connected trade route is transmitting regional disruption.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "regional_authority_instability",
+      "keyGuarantees": [
+        "an active condition of archetype regional_authority_instability (its own label: \"Regional authority instability\")",
+        "conditions are reported by crisisOf as conditionKinds and NOT folded into crisis kinds (crisisKind.js (c)), so no poolCrisis"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Asserts no calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "CONDITION_ARCHETYPE_TEMPLATES.regional_authority_instability.description",
+          "text": "A governing or patron settlement is transmitting political instability.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "regional_tax_revenue_disruption",
+      "keyGuarantees": [
+        "an active condition of archetype regional_tax_revenue_disruption (its own label: \"Regional revenue disruption\")",
+        "conditions are reported by crisisOf as conditionKinds and NOT folded into crisis kinds (crisisKind.js (c)), so no poolCrisis"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Asserts no calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "CONDITION_ARCHETYPE_TEMPLATES.regional_tax_revenue_disruption.description",
+          "text": "A tributary or client settlement can no longer reliably meet obligations.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "regional_protection_gap",
+      "keyGuarantees": [
+        "an active condition of archetype regional_protection_gap (its own label: \"Regional protection gap\")",
+        "conditions are reported by crisisOf as conditionKinds and NOT folded into crisis kinds (crisisKind.js (c)), so no poolCrisis"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Asserts no calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "CONDITION_ARCHETYPE_TEMPLATES.regional_protection_gap.description",
+          "text": "A protector or ally is less able to project military support.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "regional_service_disruption",
+      "keyGuarantees": [
+        "an active condition of archetype regional_service_disruption (its own label: \"Regional service disruption\")",
+        "conditions are reported by crisisOf as conditionKinds and NOT folded into crisis kinds (crisisKind.js (c)), so no poolCrisis"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Asserts no calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "CONDITION_ARCHETYPE_TEMPLATES.regional_service_disruption.description",
+          "text": "A settlement that provides regional services is under strain.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "cold_war_sanctions",
+      "keyGuarantees": [
+        "an active condition of archetype cold_war_sanctions (its own label: \"Cold-war sanctions\")",
+        "conditions are reported by crisisOf as conditionKinds and NOT folded into crisis kinds (crisisKind.js (c)), so no poolCrisis"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Asserts no calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "CONDITION_ARCHETYPE_TEMPLATES.cold_war_sanctions.description",
+          "text": "Inspections, sanctions, or informal embargoes are tightening daily trade.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "regional_conflict_pressure",
+      "keyGuarantees": [
+        "an active condition of archetype regional_conflict_pressure (its own label: \"Regional conflict pressure\")",
+        "conditions are reported by crisisOf as conditionKinds and NOT folded into crisis kinds (crisisKind.js (c)), so no poolCrisis"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Asserts no calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "CONDITION_ARCHETYPE_TEMPLATES.regional_conflict_pressure.description",
+          "text": "Conflict pressure is spilling across a confirmed regional channel.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "regional_migration_pressure",
+      "keyGuarantees": [
+        "an active condition of archetype regional_migration_pressure (its own label: \"Regional migration pressure\")",
+        "conditions are reported by crisisOf as conditionKinds and NOT folded into crisis kinds (crisisKind.js (c)), so no poolCrisis"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Asserts no calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "CONDITION_ARCHETYPE_TEMPLATES.regional_migration_pressure.description",
+          "text": "A nearby shock is pushing people across the regional network.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "regional_information_shock",
+      "keyGuarantees": [
+        "an active condition of archetype regional_information_shock (its own label: \"Regional information shock\")",
+        "conditions are reported by crisisOf as conditionKinds and NOT folded into crisis kinds (crisisKind.js (c)), so no poolCrisis"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Asserts no calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "CONDITION_ARCHETYPE_TEMPLATES.regional_information_shock.description",
+          "text": "News, rumor, or panic from a connected settlement is shaping local politics.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "regional_criminal_pressure",
+      "keyGuarantees": [
+        "an active condition of archetype regional_criminal_pressure (its own label: \"Regional criminal pressure\")",
+        "conditions are reported by crisisOf as conditionKinds and NOT folded into crisis kinds (crisisKind.js (c)), so no poolCrisis"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Asserts no calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "CONDITION_ARCHETYPE_TEMPLATES.regional_criminal_pressure.description",
+          "text": "A criminal corridor is transmitting opportunism or instability.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "regional_religious_pressure",
+      "keyGuarantees": [
+        "an active condition of archetype regional_religious_pressure (its own label: \"Regional religious pressure\")",
+        "conditions are reported by crisisOf as conditionKinds and NOT folded into crisis kinds (crisisKind.js (c)), so no poolCrisis"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Asserts no calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "CONDITION_ARCHETYPE_TEMPLATES.regional_religious_pressure.description",
+          "text": "Religious authority or crisis is echoing through connected institutions.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "corruption_exposed",
+      "keyGuarantees": [
+        "an active condition of archetype corruption_exposed (its own label: \"Corruption scandal\")",
+        "conditions are reported by crisisOf as conditionKinds and NOT folded into crisis kinds (crisisKind.js (c)), so no poolCrisis"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Asserts no calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "CONDITION_ARCHETYPE_TEMPLATES.corruption_exposed.description",
+          "text": "Public exposure of corruption at an institutional level.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "food_anchor_lost",
+      "keyGuarantees": [
+        "an active condition of archetype food_anchor_lost (its own label: \"Food anchor lost\")",
+        "conditions are reported by crisisOf as conditionKinds and NOT folded into crisis kinds (crisisKind.js (c)), so no poolCrisis"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Asserts no calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "CONDITION_ARCHETYPE_TEMPLATES.food_anchor_lost.description",
+          "text": "A primary food institution (granary, mill, fishery) is gone.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "dominant_npc_removed",
+      "keyGuarantees": [
+        "an active condition of archetype dominant_npc_removed (its own label: \"Leadership void\")",
+        "conditions are reported by crisisOf as conditionKinds and NOT folded into crisis kinds (crisisKind.js (c)), so no poolCrisis"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Asserts no calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "CONDITION_ARCHETYPE_TEMPLATES.dominant_npc_removed.description",
+          "text": "A dominant leader is gone; succession is unresolved.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "siege_lifted",
+      "keyGuarantees": [
+        "an active condition of archetype siege_lifted (its own label: \"Siege lifted\")",
+        "conditions are reported by crisisOf as conditionKinds and NOT folded into crisis kinds (crisisKind.js (c)), so no poolCrisis"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Opted in: asserts the siege has ended; a live siege contradicts it.",
+      "lines": [
+        {
+          "lineId": "CONDITION_ARCHETYPE_TEMPLATES.siege_lifted.description",
+          "text": "A siege has ended; the settlement is recovering.",
+          "needs": [],
+          "excludes": [
+            "crisis: under_siege"
+          ],
+          "crisis": "any",
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "war_drain",
+      "keyGuarantees": [
+        "an active condition of archetype war_drain (its own label: \"War drain\")",
+        "conditions are reported by crisisOf as conditionKinds and NOT folded into crisis kinds (crisisKind.js (c)), so no poolCrisis"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Asserts no calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "CONDITION_ARCHETYPE_TEMPLATES.war_drain.description",
+          "text": "Sustaining a campaign abroad is bleeding the home economy.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "army_deployed",
+      "keyGuarantees": [
+        "an active condition of archetype army_deployed (its own label: \"Army deployed\")",
+        "conditions are reported by crisisOf as conditionKinds and NOT folded into crisis kinds (crisisKind.js (c)), so no poolCrisis"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Asserts no calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "CONDITION_ARCHETYPE_TEMPLATES.army_deployed.description",
+          "text": "The settlement's standing army is committed abroad, thinning the home garrison.",
+          "needs": [
+            "garrison"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "soldiers / commander"
+          ]
+        }
+      ],
+      "twins": [
+        {
+          "text": "The settlement's standing army is committed abroad, leaving the home defence thin.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "why": "The one description names a home garrison; an aggressor with no garrison on record has none."
+        }
+      ]
+    },
+    {
+      "pool": "war_exhaustion",
+      "keyGuarantees": [
+        "an active condition of archetype war_exhaustion (its own label: \"War exhaustion\")",
+        "conditions are reported by crisisOf as conditionKinds and NOT folded into crisis kinds (crisisKind.js (c)), so no poolCrisis"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Asserts no calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "CONDITION_ARCHETYPE_TEMPLATES.war_exhaustion.description",
+          "text": "Years of campaigning have left a lasting wound on the war economy and the public will to fight.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "war_mobilization",
+      "keyGuarantees": [
+        "an active condition of archetype war_mobilization (its own label: \"War mobilization\")",
+        "conditions are reported by crisisOf as conditionKinds and NOT folded into crisis kinds (crisisKind.js (c)), so no poolCrisis"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Asserts no calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "CONDITION_ARCHETYPE_TEMPLATES.war_mobilization.description",
+          "text": "The settlement is shifting onto a war footing. Its economy is reorganizing for the coming campaign.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "reinforcement_cost",
+      "keyGuarantees": [
+        "an active condition of archetype reinforcement_cost (its own label: \"Reinforcement burden\")",
+        "conditions are reported by crisisOf as conditionKinds and NOT folded into crisis kinds (crisisKind.js (c)), so no poolCrisis"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Asserts no calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "CONDITION_ARCHETYPE_TEMPLATES.reinforcement_cost.description",
+          "text": "The home keeps bleeding men, coin, and grain to the front to keep the army in the field.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "occupation_lifted",
+      "keyGuarantees": [
+        "an active condition of archetype occupation_lifted (its own label: \"Occupation lifted\")",
+        "conditions are reported by crisisOf as conditionKinds and NOT folded into crisis kinds (crisisKind.js (c)), so no poolCrisis"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Opted in: asserts the occupation has ended; a live occupation contradicts it.",
+      "lines": [
+        {
+          "lineId": "CONDITION_ARCHETYPE_TEMPLATES.occupation_lifted.description",
+          "text": "A foreign occupation has ended; the settlement is restoring its own authority.",
+          "needs": [],
+          "excludes": [
+            "crisis: occupied"
+          ],
+          "crisis": "any",
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "relief_burden",
+      "keyGuarantees": [
+        "an active condition of archetype relief_burden (its own label: \"Relief burden\")",
+        "conditions are reported by crisisOf as conditionKinds and NOT folded into crisis kinds (crisisKind.js (c)), so no poolCrisis"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Asserts no calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "CONDITION_ARCHETYPE_TEMPLATES.relief_burden.description",
+          "text": "Marching relief to a besieged ally is straining local capacity.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "trade_realignment",
+      "keyGuarantees": [
+        "an active condition of archetype trade_realignment (its own label: \"Trade realignment\")",
+        "conditions are reported by crisisOf as conditionKinds and NOT folded into crisis kinds (crisisKind.js (c)), so no poolCrisis"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Asserts no calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "CONDITION_ARCHETYPE_TEMPLATES.trade_realignment.description",
+          "text": "A new primary supplier is reshaping local trade flows.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "vassal_trade_coercion",
+      "keyGuarantees": [
+        "an active condition of archetype vassal_trade_coercion (its own label: \"Vassal trade coercion\")",
+        "conditions are reported by crisisOf as conditionKinds and NOT folded into crisis kinds (crisisKind.js (c)), so no poolCrisis"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Asserts no calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "CONDITION_ARCHETYPE_TEMPLATES.vassal_trade_coercion.description",
+          "text": "The overlord dictates the trade allocation, straining the local economy.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "trade_embargo",
+      "keyGuarantees": [
+        "an active condition of archetype trade_embargo (its own label: \"Trade embargo\")",
+        "conditions are reported by crisisOf as conditionKinds and NOT folded into crisis kinds (crisisKind.js (c)), so no poolCrisis"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Asserts no calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "CONDITION_ARCHETYPE_TEMPLATES.trade_embargo.description",
+          "text": "A critical supplier has cut off the flow. The dependent economy reels.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "occupation_resistance",
+      "keyGuarantees": [
+        "an active condition of archetype occupation_resistance (its own label: \"Occupation resistance\")",
+        "conditions are reported by crisisOf as conditionKinds and NOT folded into crisis kinds (crisisKind.js (c)), so no poolCrisis"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Asserts no calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "CONDITION_ARCHETYPE_TEMPLATES.occupation_resistance.description",
+          "text": "Sabotage, noncompliance, and an organizing resistance harry the occupiers.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "occupation_burden",
+      "keyGuarantees": [
+        "an active condition of archetype occupation_burden (its own label: \"Occupation burden\")",
+        "conditions are reported by crisisOf as conditionKinds and NOT folded into crisis kinds (crisisKind.js (c)), so no poolCrisis"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Asserts no calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "CONDITION_ARCHETYPE_TEMPLATES.occupation_burden.description",
+          "text": "Garrisoning and administering conquered settlements ties down the occupier's strength.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "soldiers / commander"
+          ]
+        }
+      ]
+    },
+    {
+      "pool": "war_spoils",
+      "keyGuarantees": [
+        "an active condition of archetype war_spoils (its own label: \"War spoils\")",
+        "conditions are reported by crisisOf as conditionKinds and NOT folded into crisis kinds (crisisKind.js (c)), so no poolCrisis"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Asserts no calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "CONDITION_ARCHETYPE_TEMPLATES.war_spoils.description",
+          "text": "Tribute, levies, and materiel from stabilized occupations sustain the war effort.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "reconstruction",
+      "keyGuarantees": [
+        "an active condition of archetype reconstruction (its own label: \"Reconstruction\")",
+        "conditions are reported by crisisOf as conditionKinds and NOT folded into crisis kinds (crisisKind.js (c)), so no poolCrisis"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Asserts no calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "CONDITION_ARCHETYPE_TEMPLATES.reconstruction.description",
+          "text": "The settlement is rebuilding after a calamity or the lifting of a siege. The rebuild race is on.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "boom",
+      "keyGuarantees": [
+        "an active condition of archetype boom (its own label: \"Boom\")",
+        "conditions are reported by crisisOf as conditionKinds and NOT folded into crisis kinds (crisisKind.js (c)), so no poolCrisis"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Opted in: asserts surplus and prosperity; a hunger-family crisis contradicts it.",
+      "lines": [
+        {
+          "lineId": "CONDITION_ARCHETYPE_TEMPLATES.boom.description",
+          "text": "Sustained trade and surplus have tipped the settlement into a boom. Prosperous, and quietly dependent on the arteries feeding it.",
+          "needs": [],
+          "excludes": [
+            "deficit",
+            "crisis: hunger"
+          ],
+          "crisis": "any",
+          "colour": false,
+          "stop": [
+            "prosperity"
+          ]
+        }
+      ]
+    },
+    {
+      "pool": "flourishing",
+      "keyGuarantees": [
+        "an active condition of archetype flourishing (its own label: \"Flourishing\")",
+        "conditions are reported by crisisOf as conditionKinds and NOT folded into crisis kinds (crisisKind.js (c)), so no poolCrisis"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Opted in: asserts a long peace and steady legitimacy; a threat, unrest or open-succession crisis contradicts it.",
+      "lines": [
+        {
+          "lineId": "CONDITION_ARCHETYPE_TEMPLATES.flourishing.description",
+          "text": "A long peace and steady legitimacy have made the settlement culturally fertile: a golden age, modest and bounded.",
+          "needs": [
+            "war: peace"
+          ],
+          "excludes": [
+            "crisis: threat",
+            "crisis: unrest",
+            "crisis: succession"
+          ],
+          "crisis": "any",
+          "colour": false,
+          "stop": []
+        }
+      ]
+    }
+  ]
+}

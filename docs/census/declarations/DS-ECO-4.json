@@ -1,0 +1,201 @@
+{
+  "id": "DS-ECO-4",
+  "source": "src/data/dossierStateProse/economy.generated.js",
+  "drawKind": "K",
+  "pools": [
+    {
+      "id": "DS-ECO-4::HIGHLIGHT: dear",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": false,
+      "notes": "key: market-price highlight tag dear. Market institution NOT guaranteed by the key (deriveMarketPrices runs for every place).",
+      "lines": [
+        {
+          "id": "DS-ECO-4::HIGHLIGHT: dear::v1",
+          "text": "{good} is the price everyone here quotes first, and it quotes high. The stores are short o",
+          "needs": [],
+          "excludes": [],
+          "colour": false,
+          "notes": "unhomed: crier"
+        },
+        {
+          "id": "DS-ECO-4::HIGHLIGHT: dear::v2",
+          "text": "What this market talks about is the cost of {good}. It is dear, it has been dear, and the ",
+          "needs": [
+            "market"
+          ],
+          "excludes": [],
+          "colour": false,
+          "notes": "unhomed: crier"
+        },
+        {
+          "id": "DS-ECO-4::HIGHLIGHT: dear::v3",
+          "text": "A stranger's coin goes furthest on everything in {settlement} except {good}, which is scar",
+          "needs": [
+            "market"
+          ],
+          "excludes": [],
+          "colour": false,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-4::HIGHLIGHT: dear::v4",
+          "text": "The market is ordinary but for {good}: stocks of it have fallen far enough to move the cri",
+          "needs": [
+            "market"
+          ],
+          "excludes": [],
+          "colour": false,
+          "notes": "unhomed: crier"
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-ECO-4::HIGHLIGHT: cheap",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": false,
+      "notes": "key: highlight tag cheap",
+      "lines": [
+        {
+          "id": "DS-ECO-4::HIGHLIGHT: cheap::v1",
+          "text": "{good} sells for little here. The stores are heavy with it and the reckoning has come down",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-4::HIGHLIGHT: cheap::v2",
+          "text": "Anyone selling {good} in {settlement} is selling it badly. There is too much of it and the",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-4::HIGHLIGHT: cheap::v3",
+          "text": "A stranger buying {good} does well in this market. Nothing else is priced kindly.",
+          "needs": [
+            "market"
+          ],
+          "excludes": [],
+          "colour": false,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-4::HIGHLIGHT: cheap::v4",
+          "text": "{good} keeps arriving faster than it leaves, and the price has been giving way to it.",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-ECO-4::NO HIGHLIGHT: everything steady",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": false,
+      "notes": "key: no highlight",
+      "lines": [
+        {
+          "id": "DS-ECO-4::NO HIGHLIGHT: everything steady::v1",
+          "text": "Nothing in {settlement}'s market is priced out of the ordinary. Every good the town trades",
+          "needs": [
+            "market"
+          ],
+          "excludes": [],
+          "colour": false,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-4::NO HIGHLIGHT: everything steady::v2",
+          "text": "The crier has nothing to make a noise about. Prices here are what prices here usually are.",
+          "needs": [],
+          "excludes": [],
+          "colour": false,
+          "notes": "unhomed: crier"
+        },
+        {
+          "id": "DS-ECO-4::NO HIGHLIGHT: everything steady::v3",
+          "text": "A stranger will find no bargains and no robberies. The market is level across the board.",
+          "needs": [
+            "market"
+          ],
+          "excludes": [],
+          "colour": false,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-4::NO HIGHLIGHT: everything steady::v4",
+          "text": "No good is scarce enough or heavy enough to move its price, so every stall sits inside its",
+          "needs": [
+            "market"
+          ],
+          "excludes": [],
+          "colour": false,
+          "notes": "\"every stall\""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-ECO-4::MIXED: exports dear, imports cheap",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": false,
+      "notes": "key: exports dear, imports cheap",
+      "lines": [
+        {
+          "id": "DS-ECO-4::MIXED: exports dear, imports cheap::v1",
+          "text": "The two halves of this market disagree. What the town sells is dear and what the town buys",
+          "needs": [
+            "market"
+          ],
+          "excludes": [],
+          "colour": false,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-4::MIXED: exports dear, imports cheap::v2",
+          "text": "Sellers here are doing well and so are buyers, which is not the ordinary shape of a market",
+          "needs": [
+            "market"
+          ],
+          "excludes": [],
+          "colour": false,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-4::MIXED: exports dear, imports cheap::v3",
+          "text": "A trader arriving at {settlement} pays dear for what the town makes and gets little for wh",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-4::MIXED: exports dear, imports cheap::v4",
+          "text": "The town's own goods are running short while what it imports keeps piling up, and the crie",
+          "needs": [],
+          "excludes": [],
+          "colour": false,
+          "notes": "unhomed: crier"
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    }
+  ]
+}

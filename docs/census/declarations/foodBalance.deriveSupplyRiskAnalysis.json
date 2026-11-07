@@ -1,0 +1,49 @@
+{
+  "id": "foodBalance.deriveSupplyRiskAnalysis",
+  "source": "src/generators/economy/foodBalance.js :: deriveSupplyRiskAnalysis (Resource Import warning; hooks excluded)",
+  "drawKind": "T",
+  "pool": {
+    "declares": [],
+    "crisisScoped": false,
+    "colour": false,
+    "notes": "One templated warning per terrain mustImport resource with a local processor (hasImportProcessor) and external supply. The seven hook strings in this function are the hook seat's (see summary hookStringLocations).",
+    "needs": [],
+    "excludes": []
+  },
+  "rows": [
+    {
+      "id": "foodBalance.deriveSupplyRiskAnalysis::import.title",
+      "text": "Imports ${resource}",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "foodBalance.deriveSupplyRiskAnalysis::import.desc",
+      "text": "Settlement must import ${resource} to support local industries.",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "grain → mill, timber → sawmill/carpenter, metal → smith/smelter (hasImportProcessor; reads the raw roster)."
+    },
+    {
+      "id": "foodBalance.deriveSupplyRiskAnalysis::import.impact",
+      "text": "Creates trade dependency and vulnerability.",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "foodBalance.deriveSupplyRiskAnalysis::import.fix.0",
+      "text": "Establish stable trade relationship with ${resource} supplier",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": ""
+    }
+  ]
+}

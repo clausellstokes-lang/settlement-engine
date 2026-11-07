@@ -1117,6 +1117,15 @@ export const AGE_BY_TIER = {
   metropolis: { min: 200, max: 800 },
 }
 
+/**
+ * DECLARED HOOKS (CENSUS-3d unit 6, 2026-11-05; `docs/DESIGN_POOL_CENSUS.md` §3.1, the sibling
+ * column). A `plotHooks` row that presumes a fact its event does not guarantee is `{ text, needs?,
+ * excludes? }`; a bare string presumes only what the event is. The ONE reader of the rows is
+ * `historyGenerator.js :: generateEventNarrative`, which draws over the full list as before and
+ * resolves through `drawDeclared` (a refused hook gives way to the event's highest-hashed admitted
+ * hook, no roll), storing the TEXT only. The event's own past (the newcomers of a friction event)
+ * is its key and is not declared; a live crisis atom would misread it.
+ */
 export const HISTORICAL_EVENTS_DATA = [
   {
     type: 'succession_crisis',
@@ -1128,8 +1137,8 @@ export const HISTORICAL_EVENTS_DATA = [
     ],
     plotHooks: [
       "A would-be heir approaches outsiders to investigate a rival's past",
-      'The ailing ruler wants a final errand completed before naming a successor',
-      'Someone is poisoning the ruler slowly, and the physician knows',
+      { text: 'The ailing ruler wants a final errand completed before naming a successor', excludes: ['ruler: council'] }, // CENSUS-3d unit 6
+      { text: 'Someone is poisoning the ruler slowly, and the physician knows', excludes: ['ruler: council'] }, // CENSUS-3d unit 6
     ],
     severity: ['minor', 'major'],
   },
@@ -1143,7 +1152,7 @@ export const HISTORICAL_EVENTS_DATA = [
     ],
     plotHooks: [
       'A reformer has been found dead. Suicide or silenced?',
-      "A hidden ledger documenting wage theft is circulating in the workers' quarter",
+      { text: "A hidden ledger documenting wage theft is circulating in the workers' quarter", needs: ['tier: >= town'] }, // CENSUS-3d unit 6
       'A merchant is funding both the reform movement and the suppression of it',
     ],
     severity: ['minor', 'major'],
@@ -1174,7 +1183,7 @@ export const HISTORICAL_EVENTS_DATA = [
     plotHooks: [
       "A guild master's records have gone missing ahead of an audit",
       'A journeyman denied mastership has proof the exam was rigged',
-      'Someone is sabotaging both guilds to destabilize the market for a third party',
+      { text: 'Someone is sabotaging both guilds to destabilize the market for a third party', needs: ['market'] }, // CENSUS-3d unit 6
     ],
     severity: ['minor', 'major'],
   },
@@ -1202,7 +1211,7 @@ export const HISTORICAL_EVENTS_DATA = [
       'Price ceilings on the affected goods still enforced in lean seasons',
     ],
     plotHooks: [
-      'A warehouse full of the resource is being held off the market deliberately',
+      { text: 'A warehouse full of the resource is being held off the market deliberately', needs: ['market'] }, // CENSUS-3d unit 6
       'The scarcity was engineered. Someone destroyed the competing supply route',
       'An alternative source exists but the information is being suppressed',
     ],
@@ -1218,7 +1227,7 @@ export const HISTORICAL_EVENTS_DATA = [
     ],
     plotHooks: [
       'The crime wave is coordinated. Someone is directing it to create a pretext',
-      'A guard captain is on the payroll of the criminal network',
+      { text: 'A guard captain is on the payroll of the criminal network', needs: ['guardPresence'] }, // CENSUS-3d unit 6
       'The vigilantes have begun targeting innocents based on bad information',
     ],
     severity: ['minor', 'major'],
@@ -1399,7 +1408,7 @@ export const HISTORICAL_EVENTS_DATA = [
     description: 'A speculative frenzy in {resource} and property collapsed almost overnight, ruining fortunes and hardening class resentment for a generation',
     factions: ['Ruined speculators', 'Creditors calling in debts', 'Those who sold in time'],
     plotHooks: [
-      'A ledger names who was warned to sell before the collapse, and who was not',
+      { text: 'A ledger names who was warned to sell before the collapse, and who was not', needs: ['market'] }, // CENSUS-3d unit 6
       'A ruined family blames a rival for engineering the panic, and wants proof',
       'The debts that survived the crash were quietly bought up by a single hidden buyer',
     ],
@@ -1444,8 +1453,8 @@ export const HISTORICAL_EVENTS_DATA = [
     factions: ['Displaced families', 'Landowners pressing newly-convenient claims', 'Those who profited from the redrawing'],
     plotHooks: [
       'The old property boundaries washed away, and the new map favours whoever drew it',
-      'A structure meant to hold back the water had been quietly left to rot, and someone knew',
-      'The flood exposed a foundation, a wreck, or a cache that had been submerged for lifetimes',
+      { text: 'A structure meant to hold back the water had been quietly left to rot, and someone knew', needs: ['navigable'] }, // CENSUS-3d unit 6
+      { text: 'The flood exposed a foundation, a wreck, or a cache that had been submerged for lifetimes', needs: ['navigable'] }, // CENSUS-3d unit 6
     ],
     severity: ['major', 'catastrophic'],
   },
@@ -1456,7 +1465,7 @@ export const HISTORICAL_EVENTS_DATA = [
     plotHooks: [
       'The evidence that convicted the heretic was fabricated, and a witness is finally willing to say so',
       "The condemned doctrine is quietly practised still, by more of the town's leaders than would admit it",
-      'A relic seized during the trial never reached the temple vault it was bound for',
+      { text: 'A relic seized during the trial never reached the temple vault it was bound for', needs: ['institution: temple'] }, // CENSUS-3d unit 6
     ],
     severity: ['minor', 'major'],
   },
@@ -1466,8 +1475,8 @@ export const HISTORICAL_EVENTS_DATA = [
     factions: ['Temple beneficiaries', 'Overwhelmed old residents', 'Sceptics who doubt the miracle'],
     plotHooks: [
       'The miracle can be explained mundanely, and the person who can explain it is being kept quiet',
-      'The pilgrim trade made one family rich enough to buy the office that authenticates relics',
-      'A rival shrine claims the relic is theirs, stolen, and has sent someone to recover it',
+      { text: 'The pilgrim trade made one family rich enough to buy the office that authenticates relics', needs: ['institution: temple'] }, // CENSUS-3d unit 6
+      { text: 'A rival shrine claims the relic is theirs, stolen, and has sent someone to recover it', needs: ['institution: temple'] }, // CENSUS-3d unit 6
     ],
     severity: ['minor', 'major'],
   },
@@ -1524,10 +1533,13 @@ export const HISTORICAL_EVENTS_DATA = [
     type: 'demographic_pressure',
     description: 'The population changed faster than the settlement’s institutions could absorb (through arrivals, departures, or both) and the strain reshaped daily life',
     factions: ['Established residents', 'The newly arrived or departing', 'Those profiting from the churn'],
+    // CENSUS-3e (R-AA): one template, two directions, is two lines. The migration direction is
+    // homed (`facts/migration.js`), so each hook declares the direction it presumes, and a tension's
+    // list (kind A) prints only the hooks of the live direction.
     plotHooks: [
-      'The relief meant for the newcomers is being skimmed, and the shortfall is being blamed on the newcomers',
-      'An old family is quietly buying the properties the departed left behind, before anyone can return to claim them',
-      'The newcomers fled something, and that something has followed them here',
+      { text: 'The relief meant for the newcomers is being skimmed, and the shortfall is being blamed on the newcomers', needs: ['migration: influx'] },
+      { text: 'An old family is quietly buying the properties the departed left behind, before anyone can return to claim them', needs: ['migration: exodus'] },
+      { text: 'The newcomers fled something, and that something has followed them here', needs: ['migration: influx'] },
     ],
     severity: ['minor', 'major'],
   },

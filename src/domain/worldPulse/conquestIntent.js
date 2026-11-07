@@ -163,6 +163,7 @@ function unknownIntent(why) {
 export function readConquestIntent(input) {
   const row = recordOf(input);
   const partyId = text(row.partyId) || 'the court';
+  const partyLead = text(row.partyId) || 'The court';
   const counterpartId = text(row.counterpartId) || 'its neighbour';
   const martial = bandInput(row.martialBand, MARTIAL_INPUT);
   if (martial == null) return unknownIntent(`${partyId} has no martial disposition on record`);
@@ -231,7 +232,7 @@ export function readConquestIntent(input) {
     wanted01,
     moralVerdict,
     permitted,
-    receipt: `${partyId} ${appetite} ${counterpartId}: ${because}`
+    receipt: `${partyLead} ${appetite} ${counterpartId}: ${because}`
       + ` (martial ${text(row.martialBand)}, ${text(row.conquestHistoryBand)} before,`
       + ` ${text(row.ownNatureBand)} under a ${patronWord} patron).`,
   };
@@ -258,7 +259,7 @@ export function conquestMercyReceipt(intentRead, feasibilityRead) {
   const couldHave = reachBand === 'within_reach' || reachBand === 'assured';
   if (!couldHave || intent.intent !== 'terms') return null;
   if (intent.moralVerdict !== 'refused_the_decent') return null;
-  const partyId = text(feasibility.partyId) || 'the victor';
+  const partyId = text(feasibility.partyId) || 'The victor';
   const counterpartId = text(feasibility.counterpartId) || 'the defeated';
   return {
     merciful: true,

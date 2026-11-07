@@ -44,6 +44,8 @@
 import { deriveAllActiveConditions } from './activeConditions.js';
 import { magicLedger } from './magicLedger.js';
 import { canonStressors } from './canonicalAccessors.js';
+import { resolveSibling, resolveDeclared } from './facts/drawDeclared.js';
+import { factsOf } from './facts/factsOf.js';
 
 // ── Canonical catalog ────────────────────────────────────────────────────
 
@@ -554,7 +556,14 @@ export function deriveThreatProfile(source, _settlement) {
     : 0.4;
 
   const label = raw?.label || raw?.name || tmpl.label;
-  const description = raw?.description || tmpl.description;
+  // CENSUS-1e unit 2 (Appendix B row 118, T; the victims A): CENSUS-5b's THREAT_TEXT_SIBLINGS
+  // resolve where the template prints, against the settlement's facts. Unanswered (no settlement)
+  // keeps the template, resolveSibling's rule; a declared victim the record refuses leaves the list.
+  const facts = _settlement ? () => factsOf(_settlement) : null;
+  const where = { facts, poolId: 'threatProfile:THREAT_TEXT_SIBLINGS', surface: 'threats' };
+  const description = raw?.description || resolveSibling(tmpl.description, THREAT_TEXT_SIBLINGS, { ...where, drawKind: 'T' });
+  const spoken = (/** @type {string} */ v) => !facts || !Object.prototype.hasOwnProperty.call(THREAT_TEXT_SIBLINGS, v)
+    || resolveDeclared(THREAT_TEXT_SIBLINGS[v], { ...where, drawKind: 'A' }).line != null;
 
   return {
     id: typeof raw?.id === 'string' && raw.id.startsWith('threat.')
@@ -577,7 +586,7 @@ export function deriveThreatProfile(source, _settlement) {
     beneficiaries: Array.isArray(raw?.beneficiaries) && raw.beneficiaries.length
       ? [...raw.beneficiaries] : [...tmpl.beneficiaries],
     victims: Array.isArray(raw?.victims) && raw.victims.length
-      ? [...raw.victims] : [...tmpl.victims],
+      ? [...raw.victims] : tmpl.victims.filter(spoken),
     affectedSystems: Array.isArray(raw?.affectedSystems) && raw.affectedSystems.length
       ? [...raw.affectedSystems] : [...tmpl.affectedSystems],
 
@@ -693,3 +702,20 @@ export function threatSeverityBands() {
 export function threatStages() {
   return [...THREAT_STAGES];
 }
+
+/**
+ * DECLARED SIBLINGS, CARRIED (CENSUS-5b unit 2, 2026-11-05; the chair's ruling R-C): two
+ * template texts that presume a fact the threat type does not guarantee — a siege threat "pressing
+ * the walls" of a place with no perimeter (the chair's ruling 3: `walls` is the perimeter), and a
+ * civil unrest whose victims name "the watch". Keyed by the text; `deriveThreatProfile` resolves
+ * both where the template prints (CENSUS-1e unit 2). The siege twin
+ * is the chair's ruling (R-G); the victim is a list item (kind A: filtered, no twin).
+ * @type {Readonly<Record<string, ReadonlyArray<{ text: string, needs?: ReadonlyArray<string>, excludes?: ReadonlyArray<string>, twinOf?: string }>>>}
+ */
+export const THREAT_TEXT_SIBLINGS = Object.freeze({
+  'External military force pressing or potentially pressing the walls.': Object.freeze([
+    Object.freeze({ text: 'External military force pressing or potentially pressing the walls.', needs: Object.freeze(['walls']) }),
+    Object.freeze({ text: 'External military force pressing or potentially pressing the settlement.', twinOf: 'External military force pressing or potentially pressing the walls.', excludes: Object.freeze(['walls']) }),
+  ]),
+  'the watch': Object.freeze([Object.freeze({ text: 'the watch', needs: Object.freeze(['watch']) })]),
+});

@@ -1,0 +1,72 @@
+{
+  "pool": {
+    "id": "corruptionPass.CORRUPT_SHORT_GOAL",
+    "file": "src/generators/steps/corruptionPass.js",
+    "drawKind": "T",
+    "drawSite": "corruptionPass.js:79 (keyed by corruption vector)",
+    "colour": false,
+    "crisisScoped": false,
+    "keyDeclares": {
+      "greed": [
+        "organised crime"
+      ],
+      "hunger_for_status": [
+        "organised crime"
+      ],
+      "fear": [
+        "organised crime"
+      ],
+      "forbidden_patron": [
+        "organised crime"
+      ],
+      "fanaticism": [
+        "organised crime"
+      ]
+    },
+    "lines": 5,
+    "declaring": 0,
+    "note": "The step is a no-op unless the settlement has a criminal institution (climate.hasCriminalInst), so crime is guaranteed by the draw site for every key; the vector key itself guarantees only the NPC's flaw. No line presumes any further record fact."
+  },
+  "rows": [
+    {
+      "id": "greed",
+      "text": "Skim what passes through their hands and call it a fee.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "hunger_for_status",
+      "text": "Trade quiet favours upward, buying a seat above their station.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "fear",
+      "text": "Stay useful to the wrong people so they stay breathing.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "forbidden_patron",
+      "text": "Answer, in secret, to a patron no one is meant to know.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "fanaticism",
+      "text": "Bend every rule for the cause and call the corruption devotion.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    }
+  ]
+}

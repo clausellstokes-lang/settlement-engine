@@ -19,13 +19,36 @@
 // scene's own substream. @enforced-by tests/generators/arrivalScene.test.js
 
 /**
+ * A pool line: a name template, or the declared row of the census's sibling column (CENSUS-2b, the chair's
+ * ruling R-C) — `{ text, needs?, excludes?, crisis? }` in the atoms of `domain/facts/factVocabulary.js`. Consumers
+ * read it through `domain/facts/textOf.js` until CENSUS-1c's wiring draws it through `drawDeclared`.
+ * @typedef {((n: string) => string) | { text: (n: string) => string, needs?: ReadonlyArray<string>,
+ *   excludes?: ReadonlyArray<string>, crisis?: ReadonlyArray<string>, colour?: boolean }} ArrivalLine
+ */
+/**
+ * THE CRISIS-SCOPED FLAGS (CENSUS-2e unit 1, the chair's R-AF: "flags now, pins at the compose"). The ledger's
+ * pools (docs/census/declarations/ARRIVAL_*.json) that opted into the crisis dimension, by pool name: in these a
+ * line that says nothing of a crisis is CALM, so the arrival site's wiring passes `crisisScoped: true` for them,
+ * read from here. The register pin is the compose's (R-T).
+ * @type {Readonly<Record<string, ReadonlyArray<string>>>}
+ */
+export const ARRIVAL_CRISIS_SCOPED = Object.freeze({
+  // CENSUS-2f, the chair's R-AH: the 23 pools 2e flagged here hold no calm line (every line writes
+  // `crisis: any`), so the flag protected nothing and is dropped; a pool that gains a calm line is listed again.
+  ARRIVAL_SENSES: Object.freeze([]),
+  ARRIVAL_PEOPLE: Object.freeze([]),
+  ARRIVAL_TENSIONS: Object.freeze([]),
+  ARRIVAL_MEMORIES: Object.freeze([]),
+});
+
+/**
  * SENSE: what the settlement sounds or smells like, by a trade it practises. `institutions` are lowercase name
  * fragments matched at a word start against the settlement's NATIVE catalogue names. `trade` fragments are matched
  * the same way against its exports and income sources; a hit makes the key DOMINANT, which weights it ahead of a
  * trade the place merely has and draws from `dominant`, the lines that say the trade fills the whole place.
  * `arcane` keys are drawn only where the world's magic is real.
  * @typedef {Readonly<{ key: string, arcane?: boolean, institutions: ReadonlyArray<string>, trade: ReadonlyArray<string>,
- *   lines: ReadonlyArray<(n: string) => string>, dominant: ReadonlyArray<(n: string) => string> }>} ArrivalSense
+ *   lines: ReadonlyArray<ArrivalLine>, dominant: ReadonlyArray<ArrivalLine> }>} ArrivalSense
  * @type {ReadonlyArray<ArrivalSense>}
  */
 export const ARRIVAL_SENSES = Object.freeze([
@@ -51,25 +74,25 @@ export const ARRIVAL_SENSES = Object.freeze([
     trade: ['weapon', 'armour', 'armor'],
     lines: [],
     dominant: [
-      (n) => `The hammering echoes throughout ${n}, and most of it is the sound of blades being made.`,
-      () => 'Racks of spearheads and helms stand outside the workshops, waiting for the carts.',
-      () => 'Every forge you pass is making something meant for a war, and the carts on the road out are full of it.',
-      () => 'A smith tests a new blade against a post, frowns, and sends it back to the fire.',
+      { text: (n) => `The hammering echoes throughout ${n}, and most of it is the sound of blades being made.`, crisis: ['any'] },
+      { text: () => 'Racks of spearheads and helms stand outside the workshops, waiting for the carts.', crisis: ['any'] },
+      { text: () => 'Every forge you pass is making something meant for a war, and the carts on the road out are full of it.', excludes: ['crisis: under_siege'], crisis: ['any'] },
+      { text: () => 'A smith tests a new blade against a post, frowns, and sends it back to the fire.', crisis: ['any'] },
     ] },
   { key: 'bread',
     institutions: ['bakery', 'baker', 'bakehouse', 'mill', 'mills'],
     trade: ['baked goods', 'milled flour', 'flour', 'bread', 'grain surplus'],
     lines: [
-      () => 'The smell of fresh bread meets you on the road in.',
-      () => 'Someone has been baking since before dawn, and the air still carries it.',
-      () => 'A mill wheel turns somewhere close, and flour dust drifts on the breeze.',
-      () => 'The warm smell of an oven reaches you before the first doorway does.',
+      { text: () => 'The smell of fresh bread meets you on the road in.', colour: true }, // R-AO (CENSUS-2f): read; presumes nothing
+      { text: () => 'Someone has been baking since before dawn, and the air still carries it.', colour: true },
+      { text: () => 'A mill wheel turns somewhere close, and flour dust drifts on the breeze.', needs: ['institution: mill'] },
+      { text: () => 'The warm smell of an oven reaches you before the first doorway does.', colour: true },
     ],
     dominant: [
-      (n) => `The smell of bread hits you as you walk into ${n}, and it never really leaves.`,
-      () => 'Carts of grain rattle toward the mills while the ovens send the smell of bread down every lane.',
-      () => 'Flour dust lies pale on the doorsteps, and the whole place smells of the ovens.',
-      () => 'Sacks of flour are stacked shoulder high by the roadside, waiting to be carted out.',
+      { text: (n) => `The smell of bread hits you as you walk into ${n}, and it never really leaves.`, excludes: ['crisis: hunger'], crisis: ['any'] },
+      { text: () => 'Carts of grain rattle toward the mills while the ovens send the smell of bread down every lane.', needs: ['institution: mill'], excludes: ['crisis: hunger'], crisis: ['any'] },
+      { text: () => 'Flour dust lies pale on the doorsteps, and the whole place smells of the ovens.', excludes: ['crisis: hunger'], crisis: ['any'] },
+      { text: () => 'Sacks of flour are stacked shoulder high by the roadside, waiting to be carted out.', excludes: ['crisis: hunger'], crisis: ['any'] },
     ] },
   { key: 'tanners',
     institutions: ['tanner', 'tannery', 'tanners', 'leatherwork', 'saddler', 'furrier'],
@@ -81,9 +104,9 @@ export const ARRIVAL_SENSES = Object.freeze([
       () => 'A sour reek drifts over the rooftops from the tanning yard.',
     ],
     dominant: [
-      (n) => `The reek of the tanning pits hangs over ${n}, and the locals have long since stopped noticing it.`,
-      () => 'Bales of hides and bundled pelts crowd the carts on the road out.',
-      () => 'Frames of drying leather line the lanes, and the sour smell of the pits follows you everywhere.',
+      { text: (n) => `The reek of the tanning pits hangs over ${n}, and the locals have long since stopped noticing it.`, crisis: ['any'] },
+      { text: () => 'Bales of hides and bundled pelts crowd the carts on the road out.', excludes: ['crisis: under_siege'], crisis: ['any'] },
+      { text: () => 'Frames of drying leather line the lanes, and the sour smell of the pits follows you everywhere.', crisis: ['any'] },
     ] },
   { key: 'brewers',
     institutions: ['brewer', 'brewery', 'brewhouse', 'ale house', 'alehouse', 'maltster'],
@@ -95,23 +118,27 @@ export const ARRIVAL_SENSES = Object.freeze([
       () => 'A cask stands propped by a doorway, waiting for the evening trade.',
     ],
     dominant: [
-      (n) => `${n} smells of malt from one end to the other.`,
-      () => 'Barrels are stacked by every doorway, and the carts on the road out are loaded with more.',
-      () => 'The steam of the mash tuns drifts across the roofs, sweet and heavy.',
+      { text: (n) => `${n} smells of malt from one end to the other.`, crisis: ['any'] },
+      { text: () => 'Barrels are stacked by every doorway, and the carts on the road out are loaded with more.', excludes: ['crisis: under_siege'], crisis: ['any'] },
+      { text: () => 'The steam of the mash tuns drifts across the roofs, sweet and heavy.', crisis: ['any'] },
     ] },
   { key: 'fish',
     institutions: ['fish market', 'fishmonger', 'fishing', 'fisher', 'fishers'],
     trade: ['fish'],
     lines: [
-      () => "Gulls quarrel over the fish stalls, and the air smells of the morning's catch.",
-      () => 'A fishmonger shouts a price over the slap of wet baskets.',
-      () => 'Nets hang drying on poles, and the smell of the catch follows you.',
-      () => 'A basket of fish, still flapping, is carried past at a run.',
+      // CENSUS-2f, R-AP: the picker reaches `fish` by a fish market's or a fishmonger's NAME, which guarantees no
+      // catch (soak1k-152), so every line here declares `fish` (the food record's source) and a refused beat redraws.
+      { text: () => "Gulls quarrel over the fish stalls, and the air smells of the morning's catch.", needs: ['market', 'navigable', 'fish'] },
+      { text: () => 'A fishmonger shouts a price over the slap of wet baskets.', needs: ['fish'] },
+      { text: () => 'Nets hang drying on poles, and the smell of the catch follows you.', needs: ['fish'] },
+      { text: () => 'A basket of fish, still flapping, is carried past at a run.', needs: ['fish'] },
     ],
     dominant: [
-      () => 'Racks of drying fish line the way in, and the smell of salt and catch is everywhere.',
-      (n) => `Half of ${n} seems to be gutting, salting or selling fish.`,
-      () => 'Barrels of salt fish stand stacked for the carts, and the gulls have opinions about every one.',
+      // CENSUS-2f, R-AP amended: the dominant pool is picked by the exports' fish trade, which guarantees the trade and no
+      // catch; the racks of catch and the gutting declare `fish`, the gulls' water `navigable`, both where both.
+      { text: () => 'Racks of drying fish line the way in, and the smell of salt and catch is everywhere.', needs: ['navigable', 'fish'] },
+      { text: (n) => `Half of ${n} seems to be gutting, salting or selling fish.`, needs: ['fish'] },
+      { text: () => 'Barrels of salt fish stand stacked for the carts, and the gulls have opinions about every one.', needs: ['navigable'] },
     ] },
   { key: 'cloth',
     institutions: ['weaver', 'weavers', 'textile', 'fuller', 'dyer', 'tailor', 'clothier', 'draper'],
@@ -123,37 +150,39 @@ export const ARRIVAL_SENSES = Object.freeze([
       () => 'A dyer walks past with hands stained to the wrist.',
     ],
     dominant: [
-      (n) => `The clatter of looms follows you through ${n}, from one shutter to the next.`,
-      () => 'Bolts of cloth and bales of wool fill the carts waiting on the road out.',
-      () => 'Bolts of cloth hang drying in long bright strips across every yard.',
+      { text: (n) => `The clatter of looms follows you through ${n}, from one shutter to the next.`, crisis: ['any'] },
+      { text: () => 'Bolts of cloth and bales of wool fill the carts waiting on the road out.', excludes: ['crisis: under_siege'], crisis: ['any'] },
+      { text: () => 'Bolts of cloth hang drying in long bright strips across every yard.', crisis: ['any'] },
     ] },
   { key: 'livestock',
     institutions: ['livestock', 'cattle', 'stockyard', 'shambles', 'slaughter', 'shepherd', 'drover', 'dairy farmer', 'common grazing', 'herd'],
     trade: ['livestock', 'cattle', 'sheep', 'raw wool', 'dairy', 'cheese', 'mutton', 'beef'],
     lines: [
-      () => 'Sheep call to one another from the grazing beyond the houses.',
-      () => 'A dog drives a handful of animals across the road, and you wait for them.',
-      () => 'The smell of the byres reaches you on the breeze.',
-      () => 'Someone is churning butter in a doorway, and the rhythm of it carries.',
+      { text: () => 'Sheep call to one another from the grazing beyond the houses.', excludes: ['crisis: under_siege', 'crisis: monster_pressure'], crisis: ['any'] },
+      { text: () => 'A dog drives a handful of animals across the road, and you wait for them.', crisis: ['any'] },
+      { text: () => 'The smell of the byres reaches you on the breeze.', crisis: ['any'] },
+      { text: () => 'Someone is churning butter in a doorway, and the rhythm of it carries.', crisis: ['any'] },
     ],
     dominant: [
-      () => 'Drovers push their herds along the road, and the whole place smells of the pens.',
-      (n) => `The lowing of penned cattle carries across ${n} at every hour.`,
-      () => 'Hurdles and holding pens crowd the edge of the settlement, full and noisy.',
+      { text: () => 'Drovers push their herds along the road, and the whole place smells of the pens.', excludes: ['crisis: under_siege'], crisis: ['any'] },
+      { text: (n) => `The lowing of penned cattle carries across ${n} at every hour.`, crisis: ['any'] },
+      { text: () => 'Hurdles and holding pens crowd the edge of the settlement, full and noisy.', excludes: ['crisis: hunger'], crisis: ['any'] },
     ] },
   { key: 'faith',
     institutions: ['cathedral', 'temple', 'church', 'churches', 'chapel', 'monastery', 'abbey', 'shrine', 'priory', 'friary', 'priest'],
     trade: ['pilgrim', 'relic', 'religious tourism'],
     lines: [
-      () => 'A bell marks the hour, and a few heads bow as it rings.',
-      () => 'The smell of incense drifts out into the press of the lane.',
-      () => 'Someone has left fresh flowers at a small shrine set into a wall.',
-      () => 'Voices raised in a hymn carry, faintly, from somewhere among the roofs.',
+      // CENSUS-2f, R-AP: the key is reachable by a `priest` or `chapel` name with no sacred house on the roster, so the
+      // bell, the incense and the hymn declare `sacredHouse`; the wayside shrine set into a wall presumes nothing.
+      { text: () => 'A bell marks the hour, and a few heads bow as it rings.', needs: ['sacredHouse'] },
+      { text: () => 'The smell of incense drifts out into the press of the lane.', needs: ['sacredHouse'] },
+      { text: () => 'Someone has left fresh flowers at a small shrine set into a wall.', colour: true }, // R-AO: read; presumes nothing
+      { text: () => 'Voices raised in a hymn carry, faintly, from somewhere among the roofs.', needs: ['sacredHouse'] },
     ],
     dominant: [
-      () => "Pilgrims crowd the road in, and every second stall sells candles, tokens or someone's blessing.",
-      (n) => `The bells of ${n} answer one another across the roofs, and the streets slow for them.`,
-      () => 'Pilgrims in travel-stained cloaks queue patiently for their turn at the holy places.',
+      { text: () => "Pilgrims crowd the road in, and every second stall sells candles, tokens or someone's blessing.", needs: ['market'], excludes: ['crisis: threat'], crisis: ['any'] },
+      { text: (n) => `The bells of ${n} answer one another across the roofs, and the streets slow for them.`, crisis: ['any'] },
+      { text: () => 'Pilgrims in travel-stained cloaks queue patiently for their turn at the holy places.', excludes: ['crisis: threat', 'crisis: unrest'], crisis: ['any'] },
     ] },
   { key: 'stone',
     institutions: ['quarry', 'stone quarry', 'mason', 'mine', 'mines', 'stonecutter'],
@@ -165,9 +194,9 @@ export const ARRIVAL_SENSES = Object.freeze([
       () => 'Workers coming off a shift are grey with dust to the eyebrows.',
     ],
     dominant: [
-      (n) => `${n} lives on what comes out of the ground, and the dust of it is on everything.`,
-      () => 'Ore carts and stone carts grind along the road in a line that never seems to end.',
-      () => 'Spoil heaps rise beyond the houses, and the sound of the workings never quite stops.',
+      { text: (n) => `${n} lives on what comes out of the ground, and the dust of it is on everything.`, crisis: ['any'] },
+      { text: () => 'Ore carts and stone carts grind along the road in a line that never seems to end.', excludes: ['crisis: under_siege'], crisis: ['any'] },
+      { text: () => 'Spoil heaps rise beyond the houses, and the sound of the workings never quite stops.', crisis: ['any'] },
     ] },
   { key: 'timber',
     institutions: ['carpenter', 'carpenters', 'sawmill', 'woodcutter', 'lumber', 'joiner', 'cooper', 'shipwright', 'wheelwright', 'woodcarver'],
@@ -193,9 +222,9 @@ export const ARRIVAL_SENSES = Object.freeze([
       () => 'The heat of a working kiln reaches you from across the lane.',
     ],
     dominant: [
-      (n) => `Kiln smoke hangs over ${n}, and the dust of fired clay is on everything.`,
-      () => 'Crates of pots and glassware, packed in straw, wait for the carts on the road out.',
-      () => 'The kilns are lit all through the day, and the heat of them is in every lane.',
+      { text: (n) => `Kiln smoke hangs over ${n}, and the dust of fired clay is on everything.`, crisis: ['any'] },
+      { text: () => 'Crates of pots and glassware, packed in straw, wait for the carts on the road out.', excludes: ['crisis: under_siege'], crisis: ['any'] },
+      { text: () => 'The kilns are lit all through the day, and the heat of them is in every lane.', crisis: ['any'] },
     ] },
   { key: 'horses',
     institutions: ['coaching inn', 'stable', 'stables', 'livery', 'carriers', 'post relay', 'horse', 'beast trainers', 'caravaneer'],
@@ -207,18 +236,20 @@ export const ARRIVAL_SENSES = Object.freeze([
       () => 'Harness jingles somewhere behind you as a cart pulls out.',
     ],
     dominant: [
-      () => 'Hooves and wheels fill the road, and the yards are crowded with teams changing over.',
-      (n) => `${n} is loud with horses: shod, sold, hired and fed at every hour.`,
-      () => 'Fresh horses stand saddled and waiting while the tired ones are led away.',
+      { text: () => 'Hooves and wheels fill the road, and the yards are crowded with teams changing over.', excludes: ['crisis: under_siege'], crisis: ['any'] },
+      { text: (n) => `${n} is loud with horses: shod, sold, hired and fed at every hour.`, crisis: ['any'] },
+      { text: () => 'Fresh horses stand saddled and waiting while the tired ones are led away.', crisis: ['any'] },
     ] },
   { key: 'market',
     institutions: ['market square', 'market squares', 'weekly market', 'daily markets', 'markets', 'market hall', 'bazaar', 'annual fair', 'fairs'],
     trade: [],
     lines: [
-      () => 'Stallholders call their wares over the noise of the market.',
-      () => 'The market is loud with haggling long before noon.',
-      () => 'A knot of buyers argues over a price, and the seller enjoys every word of it.',
-      () => 'A child weaves between the stalls with a basket bigger than she is.',
+      // CENSUS-2f, R-AP: the key is picked by name fragments, not by the market's own reader (`isMarketInstitution`,
+      // the catalogue's tags), so every line declares the `market` it presumes.
+      { text: () => 'Stallholders call their wares over the noise of the market.', needs: ['market'], crisis: ['any'] },
+      { text: () => 'The market is loud with haggling long before noon.', needs: ['market'], excludes: ['crisis: threat'], crisis: ['any'] },
+      { text: () => 'A knot of buyers argues over a price, and the seller enjoys every word of it.', needs: ['market'], excludes: ['crisis: threat', 'crisis: hunger'], crisis: ['any'] },
+      { text: () => 'A child weaves between the stalls with a basket bigger than she is.', needs: ['market'], crisis: ['any'] },
     ],
     dominant: [] },
   { key: 'herbs',
@@ -230,9 +261,9 @@ export const ARRIVAL_SENSES = Object.freeze([
       () => 'Someone is grinding something pungent behind an open shutter.',
     ],
     dominant: [
-      () => 'Spice and drying herbs scent every lane, and the stalls are piled with them.',
-      () => 'Sacks of herbs and spices fill the carts, and the smell of them clings to your clothes.',
-      () => 'Every other doorway seems to sell a remedy for something.',
+      { text: () => 'Spice and drying herbs scent every lane, and the stalls are piled with them.', needs: ['market'] },
+      { text: () => 'Sacks of herbs and spices fill the carts, and the smell of them clings to your clothes.', colour: true }, // R-AO (CENSUS-2f)
+      { text: () => 'Every other doorway seems to sell a remedy for something.', colour: true },
     ] },
   { key: 'arcane', arcane: true,
     institutions: ['mage', 'mages', 'wizard', 'arcane', 'alchemist', 'alchemy', 'enchanter', 'enchanting', 'sorcer', 'magelight', 'spellcast'],
@@ -255,26 +286,26 @@ export const ARRIVAL_SENSES = Object.freeze([
  * (src/data/cultureProfiles.js: socialTexture, exchangePattern, civicPattern). Shown, never explained. Keyed on
  * `resolveCultureProfileKey`, so `mixed` speaks for every culture the catalogue does not carry. No line names an
  * institution: a guild officer or a court would be a claim about the settlement's roster.
- * @type {Readonly<Record<string, ReadonlyArray<(n: string) => string>>>}
+ * @type {Readonly<Record<string, ReadonlyArray<ArrivalLine>>>}
  */
 export const ARRIVAL_PEOPLE = Object.freeze({
   germanic: [
     () => 'An apprentice hurries past on an errand, a master\'s mark stitched on his sleeve.',
     () => 'Two neighbours argue over a boundary stone, each quoting what their grandfathers agreed.',
     () => 'A craftsman shows off a finished piece in his doorway, and passers-by judge it out loud.',
-    () => 'A notice of the next fair is nailed up beside a doorway, and someone is reading it aloud for the others.',
+    { text: () => 'A notice of the next fair is nailed up beside a doorway, and someone is reading it aloud for the others.', needs: ['market'] },
   ],
   latin: [
-    () => 'A patron moves through the crowd with clients at their heels, greeting people by name.',
-    () => "A notary's clerk hurries past with a satchel of contracts.",
-    () => 'People argue politics in the open, loudly, and seem to enjoy it.',
-    () => 'A benefactor\'s name is carved fresh above a mended well, and people make sure you notice it.',
+    { text: () => 'A patron moves through the crowd with clients at their heels, greeting people by name.', crisis: ['any'] },
+    { text: () => "A notary's clerk hurries past with a satchel of contracts.", crisis: ['any'] },
+    { text: () => 'People argue politics in the open, loudly, and seem to enjoy it.', excludes: ['crisis: occupied'], crisis: ['any'] },
+    { text: () => 'A benefactor\'s name is carved fresh above a mended well, and people make sure you notice it.', crisis: ['any'] },
   ],
   celtic: [
-    () => 'A poet holds a small crowd by the well, and nobody hurries the telling along.',
-    () => 'A household feeds strangers at its door, and makes sure everyone sees it doing so.',
-    () => 'Greetings are called across the lane, and every greeting comes with a question about family.',
-    () => 'An old judge listens to two neighbours by a gate and says nothing until both are finished.',
+    { text: () => 'A poet holds a small crowd by the well, and nobody hurries the telling along.', crisis: ['any'] },
+    { text: () => 'A household feeds strangers at its door, and makes sure everyone sees it doing so.', excludes: ['crisis: hunger'], crisis: ['any'] },
+    { text: () => 'Greetings are called across the lane, and every greeting comes with a question about family.', crisis: ['any'] },
+    { text: () => 'An old judge listens to two neighbours by a gate and says nothing until both are finished.', crisis: ['any'] },
   ],
   arabic: [
     () => 'A broker sits in the shade, matching buyers to goods from routes you have never travelled.',
@@ -283,16 +314,16 @@ export const ARRIVAL_PEOPLE = Object.freeze({
     () => 'A merchant swears an oath on his scales, and the buyer watches the scales anyway.',
   ],
   norse: [
-    () => 'People argue law in the open as freely as they trade.',
-    () => 'Racks of drying fish and smoked meat stand beside the houses, laid in against the winter.',
-    () => 'A household leader hands out gifts in the open, and everyone watching keeps count.',
-    () => 'Neighbours work together to mend a roof, and nobody seems to be in charge of it.',
+    { text: () => 'People argue law in the open as freely as they trade.', excludes: ['crisis: occupied'], crisis: ['any'] },
+    { text: () => 'Racks of drying fish and smoked meat stand beside the houses, laid in against the winter.', needs: ['navigable'], excludes: ['crisis: hunger'], crisis: ['any'] },
+    { text: () => 'A household leader hands out gifts in the open, and everyone watching keeps count.', crisis: ['any'] },
+    { text: () => 'Neighbours work together to mend a roof, and nobody seems to be in charge of it.', crisis: ['any'] },
   ],
   slavic: [
-    () => 'Smoke rises from a shared oven, and neighbours queue to bake together.',
-    () => 'People gather at the well, and the news of the whole place passes through it.',
-    () => 'Strings of dried mushrooms hang in the doorways beside barrels of pickled cabbage.',
-    () => 'A work party heads out together, singing, with tools on their shoulders.',
+    { text: () => 'Smoke rises from a shared oven, and neighbours queue to bake together.', crisis: ['any'] },
+    { text: () => 'People gather at the well, and the news of the whole place passes through it.', crisis: ['any'] },
+    { text: () => 'Strings of dried mushrooms hang in the doorways beside barrels of pickled cabbage.', excludes: ['crisis: hunger'], crisis: ['any'] },
+    { text: () => 'A work party heads out together, singing, with tools on their shoulders.', crisis: ['any'] },
   ],
   east_asian: [
     () => 'A clerk records every cartload that passes in a careful ledger.',
@@ -310,25 +341,25 @@ export const ARRIVAL_PEOPLE = Object.freeze({
     () => 'A moneylender sits at a low table with a queue of familiar faces waiting.',
     () => 'People draw water in an order nobody needs to explain.',
     () => 'Food is being handed out to anyone who asks, and the line is patient.',
-    () => 'Each lane of stalls has someone who speaks for it, and they are all speaking at once.',
+    { text: () => 'Each lane of stalls has someone who speaks for it, and they are all speaking at once.', needs: ['market'] },
   ],
   steppe: [
-    () => 'Horse traders show their animals at the edge of the settlement, where herders and townsfolk meet.',
-    () => 'Felt tents stand beside the timber houses, and their owners seem at home in either.',
-    () => 'A caravan broker shouts terms to a line of laden animals and the people leading them.',
-    () => 'Guests are greeted with a cup before a word of business is spoken.',
+    { text: () => 'Horse traders show their animals at the edge of the settlement, where herders and townsfolk meet.', excludes: ['crisis: under_siege'], crisis: ['any'] },
+    { text: () => 'Felt tents stand beside the timber houses, and their owners seem at home in either.', crisis: ['any'] },
+    { text: () => 'A caravan broker shouts terms to a line of laden animals and the people leading them.', crisis: ['any'] },
+    { text: () => 'Guests are greeted with a cup before a word of business is spoken.', crisis: ['any'] },
   ],
   greek: [
-    () => 'Two citizens argue a point of law loudly enough for a crowd to gather.',
-    () => 'A notice of the next assembly is chalked on a wall, and someone has corrected the spelling.',
-    () => 'A money changer sits at his table with coins from many mints.',
-    () => 'A patron stands drinks at a wine shop, and makes sure everyone knows who is paying.',
+    { text: () => 'Two citizens argue a point of law loudly enough for a crowd to gather.', excludes: ['crisis: occupied'], crisis: ['any'] },
+    { text: () => 'A notice of the next assembly is chalked on a wall, and someone has corrected the spelling.', excludes: ['crisis: occupied'], crisis: ['any'] },
+    { text: () => 'A money changer sits at his table with coins from many mints.', crisis: ['any'] },
+    { text: () => 'A patron stands drinks at a wine shop, and makes sure everyone knows who is paying.', crisis: ['any'] },
   ],
   mixed: [
-    () => 'You hear three languages in as many steps, and nobody seems to find it strange.',
-    () => 'People here greet strangers with open curiosity, and ask where you have come from before your name.',
-    () => 'A cook at a doorway mixes the spices of two different homelands into one pot.',
-    () => 'Neighbours bargain in a trade tongue that belongs to no one and works for everyone.',
+    { text: () => 'You hear three languages in as many steps, and nobody seems to find it strange.', crisis: ['any'] },
+    { text: () => 'People here greet strangers with open curiosity, and ask where you have come from before your name.', excludes: ['crisis: threat', 'crisis: plague_onset', 'crisis: recently_betrayed', 'crisis: infiltrated'], crisis: ['any'] },
+    { text: () => 'A cook at a doorway mixes the spices of two different homelands into one pot.', crisis: ['any'] },
+    { text: () => 'Neighbours bargain in a trade tongue that belongs to no one and works for everyone.', crisis: ['any'] },
   ],
 });
 
@@ -336,7 +367,7 @@ export const ARRIVAL_PEOPLE = Object.freeze({
  * TENSION: one visible sign of what the dossier says is wrong, or right, with the place today. Keyed on facts the
  * dossier PRINTS (the safety label, the prosperity rung), never on a covert one (floor 4): the criminal hold on
  * the government is drawn only where the safety label itself names criminal governance. Present tense only.
- * @type {Readonly<Record<string, ReadonlyArray<(n: string) => string>>>}
+ * @type {Readonly<Record<string, ReadonlyArray<ArrivalLine>>>}
  */
 export const ARRIVAL_TENSIONS = Object.freeze({
   criminal_governance: [
@@ -364,10 +395,10 @@ export const ARRIVAL_TENSIONS = Object.freeze({
     () => 'The goods on offer are mostly second-hand, and even those go slowly.',
   ],
   prosperous: [
-    () => 'Fresh paint and well-kept roofs say the place is doing well.',
-    () => 'Well-fed children run errands through a busy street.',
-    () => 'Even the outbuildings have new roofs, and nobody looks hungry.',
-    () => 'A merchant shows off a new cloak, and several neighbours make a point of noticing.',
+    { text: () => 'Fresh paint and well-kept roofs say the place is doing well.', excludes: ['starving', 'crisis: hunger'], crisis: ['any'] },
+    { text: () => 'Well-fed children run errands through a busy street.', excludes: ['starving', 'crisis: hunger'], crisis: ['any'] },
+    { text: () => 'Even the outbuildings have new roofs, and nobody looks hungry.', excludes: ['starving', 'crisis: hunger'], crisis: ['any'] },
+    { text: () => 'A merchant shows off a new cloak, and several neighbours make a point of noticing.', crisis: ['any'] },
   ],
 });
 
@@ -377,7 +408,7 @@ export const ARRIVAL_TENSIONS = Object.freeze({
  * the line points at a past the dossier's History tab already tells, and never invents one (floor 2). A template
  * with no visible trace has no pool and speaks no memory. `wild_magic` is drawn only where the world's magic is
  * real, like the arcane sense.
- * @type {Readonly<Record<string, ReadonlyArray<(n: string) => string>>>}
+ * @type {Readonly<Record<string, ReadonlyArray<ArrivalLine>>>}
  */
 export const ARRIVAL_MEMORIES = Object.freeze({
   great_fire: [
@@ -388,12 +419,12 @@ export const ARRIVAL_MEMORIES = Object.freeze({
   great_flood: [
     () => 'A tidemark from the flood still stains the lower walls of the oldest houses.',
     () => 'The newer houses stand on raised footings, and the older folk explain why without being asked.',
-    () => 'A carved post by the water marks how high the flood came, and children dare each other to touch the line.',
+    { text: () => 'A carved post by the water marks how high the flood came, and children dare each other to touch the line.', needs: ['navigable'] },
   ],
   plague_years: [
-    (n) => `A plain stone outside ${n} marks where the plague dead were buried, and people walk around it.`,
-    () => 'Some houses still carry the faded marks of the sickness on their doors, painted over but not quite gone.',
-    () => 'People here wash their hands at every well, a habit nobody has bothered to lose.',
+    { text: (n) => `A plain stone outside ${n} marks where the plague dead were buried, and people walk around it.`, crisis: ['any'] },
+    { text: () => 'Some houses still carry the faded marks of the sickness on their doors, painted over but not quite gone.', crisis: ['any'] },
+    { text: () => 'People here wash their hands at every well, a habit nobody has bothered to lose.', excludes: ['crisis: plague_onset'], crisis: ['any'] },
   ],
   popular_uprising: [
     () => 'A few houses still fly the old colours of the rising, and nobody takes them down.',
@@ -403,7 +434,7 @@ export const ARRIVAL_MEMORIES = Object.freeze({
   religious_tension: [
     () => 'Two congregations keep to their own sides of the lane on holy days, and both pretend not to notice the other.',
     () => 'Symbols of two different observances are painted on neighbouring doors, each a little larger than the last.',
-    () => 'A shrine has been scrubbed clean of one faith\'s marks and painted with another\'s.',
+    { text: () => 'A shrine has been scrubbed clean of one faith\'s marks and painted with another\'s.', needs: ['institution: temple'] },
   ],
   heresy_trial: [
     () => 'People are careful about what they say about faith in public.',
@@ -411,19 +442,19 @@ export const ARRIVAL_MEMORIES = Object.freeze({
     () => 'A preacher speaks carefully, glancing at the crowd between sentences.',
   ],
   pilgrimage_surge: [
-    () => 'Pilgrims still pass through on the old route, and the stalls along the road still sell to them.',
+    { text: () => 'Pilgrims still pass through on the old route, and the stalls along the road still sell to them.', needs: ['market'] },
     () => 'Pilgrim badges are nailed above doorways, collected over years.',
     () => 'The road in is worn smooth by pilgrim feet.',
   ],
   external_threat: [
-    () => 'The older folk still keep a weapon by the door, out of habit.',
-    () => 'Watch fires are still laid ready on the high ground, though nobody has lit one in years.',
-    () => 'People look up at the sound of hooves on the road, and only relax when they see who it is.',
+    { text: () => 'The older folk still keep a weapon by the door, out of habit.', excludes: ['crisis: threat'], crisis: ['any'] },
+    { text: () => 'Watch fires are still laid ready on the high ground, though nobody has lit one in years.', excludes: ['crisis: threat'], crisis: ['any'] },
+    { text: () => 'People look up at the sound of hooves on the road, and only relax when they see who it is.', crisis: ['any'] },
   ],
   occupation_legacy: [
-    () => "A few old signs still carry the occupiers' words, painted over but showing through.",
-    () => 'Older folk still flinch at the sound of marching feet.',
-    () => 'People here still say "since they left" the way other places say "last year".',
+    { text: () => "A few old signs still carry the occupiers' words, painted over but showing through.", excludes: ['crisis: occupied'], crisis: ['any'] },
+    { text: () => 'Older folk still flinch at the sound of marching feet.', crisis: ['any'] },
+    { text: () => 'People here still say "since they left" the way other places say "last year".', excludes: ['crisis: occupied'], crisis: ['any'] },
   ],
   tyranny: [
     () => 'People still lower their voices near the old seat of power, though the one they feared is gone.',

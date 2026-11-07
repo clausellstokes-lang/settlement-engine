@@ -55,6 +55,8 @@ import { composeStateProse } from './composeStateProse.js';
 import { stressorsStateProseCandidates } from './stressorsStateProseCandidates.js';
 import { legibilityRung } from './legibilityRung.js';
 import { wallsAnswered } from '../../defense/defenseFacts.js';
+import { crisisAnswered } from '../../crisis/crisisFacts.js';
+import { factsAnswered } from '../../facts/factsAnswered.js';
 
 /**
  * The desk's corpus, typed at the import boundary — the generated leaves stay PURE DATA.
@@ -475,8 +477,8 @@ export function stressorOriginPoolKey(stressor) {
  *   worldStressorOrigin: object|null}>}
  */
 export function stressorsStateProse(settlement, readings = {}, options = {}) {
-  // F10: the walls dimension answered once, from the defence reader (stateProseKernel law 5).
-  options = wallsAnswered(settlement, options);
+  // F10 + F12: the walls and the five crisis dimensions answered once, from the defence and crisis readers (stateProseKernel law 5).
+  options = factsAnswered(settlement, crisisAnswered(settlement, wallsAnswered(settlement, options)));
   const town = properFill(text(settlement?.name));
   const slots = { settlement: town };
   const banners = readings.banners ?? null;
@@ -535,8 +537,8 @@ export function stressorsStateProse(settlement, readings = {}, options = {}) {
  * @returns {object|null}
  */
 export function crisisBannerRung(settlement, banner, options = {}) {
-  // F10: the walls dimension answered once, from the defence reader (stateProseKernel law 5).
-  options = wallsAnswered(settlement, options);
+  // F10 + F12: the walls and the five crisis dimensions answered once, from the defence and crisis readers (stateProseKernel law 5).
+  options = factsAnswered(settlement, crisisAnswered(settlement, wallsAnswered(settlement, options)));
   const key = crisisBannerPoolKey(banner?.type);
   if (!key) return null;
   const slots = { settlement: properFill(text(settlement?.name)) };

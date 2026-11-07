@@ -1,0 +1,1333 @@
+{
+  "poolId": "STRESS_TYPE_MAP",
+  "source": "src/data/stressTypes.js :10 STRESS_TYPE_MAP (label / crisisHook / viabilityNote)",
+  "drawKind": "T",
+  "drawSite": "src/generators/stressGenerator.js:55-56 copies crisisHook/viabilityNote onto the stress entry; rendered at src/components/new/tabs/DefenseTab.jsx:394, src/components/compendium/CatalogTabs.jsx:226-227, src/domain/summary/settlementQuickGuide.js:712, src/generators/generationReceiptJudgments.js:476/525",
+  "pools": [
+    {
+      "pool": "under_siege.label",
+      "keyGuarantees": [
+        "stress entry type = under_siege",
+        "field: label"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "under_siege"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one text per field (T).",
+      "lines": [
+        {
+          "lineId": "STRESS_TYPE_MAP.under_siege.label",
+          "text": "Under Siege",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "under_siege"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "under_siege.crisisHook",
+      "keyGuarantees": [
+        "stress entry type = under_siege",
+        "field: crisisHook"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "under_siege"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one text per field (T).",
+      "lines": [
+        {
+          "lineId": "STRESS_TYPE_MAP.under_siege.crisisHook",
+          "text": "The settlement is surrounded. Someone in the leadership is considering terms. Someone else is considering a desperate sortie. The players arrive as this decision is being forced.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "under_siege"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "under_siege.viabilityNote",
+      "keyGuarantees": [
+        "stress entry type = under_siege",
+        "field: viabilityNote"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "under_siege"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one text per field (T).",
+      "lines": [
+        {
+          "lineId": "STRESS_TYPE_MAP.under_siege.viabilityNote",
+          "text": "Land-based economic activity is suspended. Port access (if present) provides a partial lifeline. The only metric that matters is how long food, water, and ammunition hold out.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "under_siege"
+          ],
+          "colour": false,
+          "stop": [],
+          "note": "\"Port access (if present)\" is conditional in the text itself; presumes nothing"
+        }
+      ]
+    },
+    {
+      "pool": "famine.label",
+      "keyGuarantees": [
+        "stress entry type = famine",
+        "field: label"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "famine"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one text per field (T).",
+      "lines": [
+        {
+          "lineId": "STRESS_TYPE_MAP.famine.label",
+          "text": "Famine",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "famine"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "famine.crisisHook",
+      "keyGuarantees": [
+        "stress entry type = famine",
+        "field: crisisHook"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "famine"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one text per field (T).",
+      "lines": [
+        {
+          "lineId": "STRESS_TYPE_MAP.famine.crisisHook",
+          "text": "A grain merchant has food, enough to matter. They will sell it, but their price is not money. The players can intervene in how this plays out.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "famine"
+          ],
+          "colour": false,
+          "stop": [
+            "food sources"
+          ]
+        }
+      ]
+    },
+    {
+      "pool": "famine.viabilityNote",
+      "keyGuarantees": [
+        "stress entry type = famine",
+        "field: viabilityNote"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "famine"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one text per field (T).",
+      "lines": [
+        {
+          "lineId": "STRESS_TYPE_MAP.famine.viabilityNote",
+          "text": "Short-term economic viability is critically compromised. Normal income projections do not apply.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "famine"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "occupied.label",
+      "keyGuarantees": [
+        "stress entry type = occupied",
+        "field: label"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "occupied"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one text per field (T).",
+      "lines": [
+        {
+          "lineId": "STRESS_TYPE_MAP.occupied.label",
+          "text": "Under Occupation",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "occupied"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "occupied.crisisHook",
+      "keyGuarantees": [
+        "stress entry type = occupied",
+        "field: crisisHook"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "occupied"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one text per field (T).",
+      "lines": [
+        {
+          "lineId": "STRESS_TYPE_MAP.occupied.crisisHook",
+          "text": "A resistance cell needs outside help: people who aren't known faces. The occupation's local collaborators include someone the players will recognise.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "occupied"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "occupied.viabilityNote",
+      "keyGuarantees": [
+        "stress entry type = occupied",
+        "field: viabilityNote"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "occupied"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one text per field (T).",
+      "lines": [
+        {
+          "lineId": "STRESS_TYPE_MAP.occupied.viabilityNote",
+          "text": "Revenue flows to the occupying authority. Local institutions continue under oversight.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "occupied"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "politically_fractured.label",
+      "keyGuarantees": [
+        "stress entry type = politically_fractured",
+        "field: label"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "politically_fractured"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one text per field (T).",
+      "lines": [
+        {
+          "lineId": "STRESS_TYPE_MAP.politically_fractured.label",
+          "text": "Politically Fractured",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "politically_fractured"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "politically_fractured.crisisHook",
+      "keyGuarantees": [
+        "stress entry type = politically_fractured",
+        "field: crisisHook"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "politically_fractured"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one text per field (T).",
+      "lines": [
+        {
+          "lineId": "STRESS_TYPE_MAP.politically_fractured.crisisHook",
+          "text": "Something important (a resource, a prisoner, a decision) falls into the contested space between factions. The players can't avoid taking a side.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "politically_fractured"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "politically_fractured.viabilityNote",
+      "keyGuarantees": [
+        "stress entry type = politically_fractured",
+        "field: viabilityNote"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "politically_fractured"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one text per field (T).",
+      "lines": [
+        {
+          "lineId": "STRESS_TYPE_MAP.politically_fractured.viabilityNote",
+          "text": "Decision-making is paralysed. Infrastructure maintenance is being neglected. Crisis is deferred, not resolved.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "politically_fractured"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "indebted.label",
+      "keyGuarantees": [
+        "stress entry type = indebted",
+        "field: label"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "indebted"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one text per field (T).",
+      "lines": [
+        {
+          "lineId": "STRESS_TYPE_MAP.indebted.label",
+          "text": "Indebted to Outside Power",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "indebted"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "indebted.crisisHook",
+      "keyGuarantees": [
+        "stress entry type = indebted",
+        "field: crisisHook"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "indebted"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one text per field (T).",
+      "lines": [
+        {
+          "lineId": "STRESS_TYPE_MAP.indebted.crisisHook",
+          "text": "The creditor has sent a representative to collect (not money, but something specific). Locals are divided between compliance and resistance, and neither option is clean.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "indebted"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "indebted.viabilityNote",
+      "keyGuarantees": [
+        "stress entry type = indebted",
+        "field: viabilityNote"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "indebted"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one text per field (T).",
+      "lines": [
+        {
+          "lineId": "STRESS_TYPE_MAP.indebted.viabilityNote",
+          "text": "A significant portion of revenue is being extracted by the creditor. Capital investment has stopped.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "indebted"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "recently_betrayed.label",
+      "keyGuarantees": [
+        "stress entry type = recently_betrayed",
+        "field: label"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "recently_betrayed"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one text per field (T).",
+      "lines": [
+        {
+          "lineId": "STRESS_TYPE_MAP.recently_betrayed.label",
+          "text": "Recently Betrayed",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "recently_betrayed"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "recently_betrayed.crisisHook",
+      "keyGuarantees": [
+        "stress entry type = recently_betrayed",
+        "field: crisisHook"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "recently_betrayed"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one text per field (T).",
+      "lines": [
+        {
+          "lineId": "STRESS_TYPE_MAP.recently_betrayed.crisisHook",
+          "text": "The betrayal had consequences that are still unfolding. The betrayer may still be here. The players know something that could help identify them, or they are the only people who don't have a motive.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "recently_betrayed"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "recently_betrayed.viabilityNote",
+      "keyGuarantees": [
+        "stress entry type = recently_betrayed",
+        "field: viabilityNote"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "recently_betrayed"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one text per field (T).",
+      "lines": [
+        {
+          "lineId": "STRESS_TYPE_MAP.recently_betrayed.viabilityNote",
+          "text": "Trust in institutions is low. Some key systems are not operating at full capacity as a result.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "recently_betrayed"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "infiltrated.label",
+      "keyGuarantees": [
+        "stress entry type = infiltrated",
+        "field: label"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "infiltrated"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one text per field (T).",
+      "lines": [
+        {
+          "lineId": "STRESS_TYPE_MAP.infiltrated.label",
+          "text": "Infiltrated",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "infiltrated"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "infiltrated.crisisHook",
+      "keyGuarantees": [
+        "stress entry type = infiltrated",
+        "field: crisisHook"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "infiltrated"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one text per field (T).",
+      "lines": [
+        {
+          "lineId": "STRESS_TYPE_MAP.infiltrated.crisisHook",
+          "text": "Something is slightly wrong: a decision that doesn't make sense, a face seen in too many places, a piece of information that reached the wrong hands. The players can notice if they pay attention.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "infiltrated"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "infiltrated.viabilityNote",
+      "keyGuarantees": [
+        "stress entry type = infiltrated",
+        "field: viabilityNote"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "infiltrated"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one text per field (T).",
+      "lines": [
+        {
+          "lineId": "STRESS_TYPE_MAP.infiltrated.viabilityNote",
+          "text": "No economic impact yet. The infiltration is strategic, not extractive (so far).",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "infiltrated"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "plague_onset.label",
+      "keyGuarantees": [
+        "stress entry type = plague_onset",
+        "field: label"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "plague_onset"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one text per field (T).",
+      "lines": [
+        {
+          "lineId": "STRESS_TYPE_MAP.plague_onset.label",
+          "text": "Disease Outbreak",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "plague_onset"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "plague_onset.crisisHook",
+      "keyGuarantees": [
+        "stress entry type = plague_onset",
+        "field: crisisHook"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "plague_onset"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one text per field (T).",
+      "lines": [
+        {
+          "lineId": "STRESS_TYPE_MAP.plague_onset.crisisHook",
+          "text": "The healer who identified the outbreak first has gone quiet. Their last message suggested the disease is not natural. Accessing them means navigating a quarantine that is not being enforced consistently.",
+          "needs": [
+            "healer"
+          ],
+          "excludes": [],
+          "crisis": [
+            "plague_onset"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ],
+      "twins": [
+        {
+          "text": "The first person to name the outbreak has gone quiet. Their last message suggested the disease is not natural. Reaching them means crossing a quarantine that is not being enforced consistently.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "plague_onset"
+          ],
+          "why": "The one hook names a healer; a plague place with no healer on record has no hook."
+        }
+      ]
+    },
+    {
+      "pool": "plague_onset.viabilityNote",
+      "keyGuarantees": [
+        "stress entry type = plague_onset",
+        "field: viabilityNote"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "plague_onset"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one text per field (T).",
+      "lines": [
+        {
+          "lineId": "STRESS_TYPE_MAP.plague_onset.viabilityNote",
+          "text": "Market activity is reduced. Travel is being discouraged. Some supply chains are disrupted.",
+          "needs": [
+            "market"
+          ],
+          "excludes": [],
+          "crisis": [
+            "plague_onset"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ],
+      "twins": [
+        {
+          "text": "Travel is being discouraged. Some supply chains are disrupted.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "plague_onset"
+          ],
+          "why": "The one note names market activity; a plague place with no market has no note."
+        }
+      ]
+    },
+    {
+      "pool": "succession_void.label",
+      "keyGuarantees": [
+        "stress entry type = succession_void",
+        "field: label"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "succession_void"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one text per field (T).",
+      "lines": [
+        {
+          "lineId": "STRESS_TYPE_MAP.succession_void.label",
+          "text": "Succession Void",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "succession_void"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "succession_void.crisisHook",
+      "keyGuarantees": [
+        "stress entry type = succession_void",
+        "field: crisisHook"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "succession_void"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one text per field (T).",
+      "lines": [
+        {
+          "lineId": "STRESS_TYPE_MAP.succession_void.crisisHook",
+          "text": "Three different factions have approached the players for support, each believing they represent the legitimate or best claim. All three are partly right.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "succession_void"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "succession_void.viabilityNote",
+      "keyGuarantees": [
+        "stress entry type = succession_void",
+        "field: viabilityNote"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "succession_void"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one text per field (T).",
+      "lines": [
+        {
+          "lineId": "STRESS_TYPE_MAP.succession_void.viabilityNote",
+          "text": "Major decisions are deferred. Some institutions are operating autonomously, for better or worse.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "succession_void"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "monster_pressure.label",
+      "keyGuarantees": [
+        "stress entry type = monster_pressure",
+        "field: label"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "monster_pressure"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one text per field (T).",
+      "lines": [
+        {
+          "lineId": "STRESS_TYPE_MAP.monster_pressure.label",
+          "text": "Beast & Raider Threat",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "monster_pressure"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "monster_pressure.crisisHook",
+      "keyGuarantees": [
+        "stress entry type = monster_pressure",
+        "field: crisisHook"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "monster_pressure"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one text per field (T).",
+      "lines": [
+        {
+          "lineId": "STRESS_TYPE_MAP.monster_pressure.crisisHook",
+          "text": "The attacks are following a pattern that suggests coordination, not desperation. Someone is directing this (whether a rival lord, a beast of unusual cunning, or something stranger). The evidence is there for anyone who looks carefully.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "monster_pressure"
+          ],
+          "colour": false,
+          "stop": [
+            "ruler: lord (rival lord, outside the record)"
+          ]
+        }
+      ]
+    },
+    {
+      "pool": "monster_pressure.viabilityNote",
+      "keyGuarantees": [
+        "stress entry type = monster_pressure",
+        "field: viabilityNote"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "monster_pressure"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one text per field (T).",
+      "lines": [
+        {
+          "lineId": "STRESS_TYPE_MAP.monster_pressure.viabilityNote",
+          "text": "Trade disruption is reducing income. Defensive expenditure is increasing. Population anxiety is rising.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "monster_pressure"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "insurgency.label",
+      "keyGuarantees": [
+        "stress entry type = insurgency",
+        "field: label"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "insurgency"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one text per field (T).",
+      "lines": [
+        {
+          "lineId": "STRESS_TYPE_MAP.insurgency.label",
+          "text": "Insurgency",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "insurgency"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "insurgency.crisisHook",
+      "keyGuarantees": [
+        "stress entry type = insurgency",
+        "field: crisisHook"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "insurgency"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one text per field (T).",
+      "lines": [
+        {
+          "lineId": "STRESS_TYPE_MAP.insurgency.crisisHook",
+          "text": "The governing faction knows what is happening but cannot admit it publicly without legitimising the insurgency. They need something done that cannot be official.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "insurgency"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "insurgency.viabilityNote",
+      "keyGuarantees": [
+        "stress entry type = insurgency",
+        "field: viabilityNote"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "insurgency"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one text per field (T).",
+      "lines": [
+        {
+          "lineId": "STRESS_TYPE_MAP.insurgency.viabilityNote",
+          "text": "Tax collection is contested. Several institutions have stopped forwarding revenue to the central authority. Normal governance is functioning on momentum.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "insurgency"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "religious_conversion.label",
+      "keyGuarantees": [
+        "stress entry type = religious_conversion",
+        "field: label"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "religious_conversion"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one text per field (T).",
+      "lines": [
+        {
+          "lineId": "STRESS_TYPE_MAP.religious_conversion.label",
+          "text": "Religious Conversion",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "religious_conversion"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "religious_conversion.crisisHook",
+      "keyGuarantees": [
+        "stress entry type = religious_conversion",
+        "field: crisisHook"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "religious_conversion"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one text per field (T).",
+      "lines": [
+        {
+          "lineId": "STRESS_TYPE_MAP.religious_conversion.crisisHook",
+          "text": "The contested religious authority has left a gap in the institutions that depended on it: records, oaths, property, sanctuary. Someone is about to exploit that gap.",
+          "needs": [
+            "institution: temple"
+          ],
+          "excludes": [],
+          "crisis": [
+            "religious_conversion"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "religious_conversion.viabilityNote",
+      "keyGuarantees": [
+        "stress entry type = religious_conversion",
+        "field: viabilityNote"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "religious_conversion"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one text per field (T).",
+      "lines": [
+        {
+          "lineId": "STRESS_TYPE_MAP.religious_conversion.viabilityNote",
+          "text": "Tithing income splits or redirects. Religious market days and fairs are contested or duplicated. Properties of the old institution are in legal ambiguity. Cross-faith trade is complicated.",
+          "needs": [
+            "institution: temple",
+            "market"
+          ],
+          "excludes": [],
+          "crisis": [
+            "religious_conversion"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ],
+      "twins": [
+        {
+          "text": "Tithing income splits or redirects. Properties of the old institution are in legal ambiguity.",
+          "needs": [
+            "institution: temple"
+          ],
+          "excludes": [],
+          "crisis": [
+            "religious_conversion"
+          ],
+          "why": "The one note names market days and fairs; a converting place with a temple but no market has no note."
+        }
+      ]
+    },
+    {
+      "pool": "slave_revolt.label",
+      "keyGuarantees": [
+        "stress entry type = slave_revolt",
+        "field: label",
+        "requiresTier: town (generation gate; tier has no fact home)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "slave_revolt"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one text per field (T).",
+      "lines": [
+        {
+          "lineId": "STRESS_TYPE_MAP.slave_revolt.label",
+          "text": "Slave Revolt",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "slave_revolt"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "slave_revolt.crisisHook",
+      "keyGuarantees": [
+        "stress entry type = slave_revolt",
+        "field: crisisHook",
+        "requiresTier: town (generation gate; tier has no fact home)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "slave_revolt"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one text per field (T).",
+      "lines": [
+        {
+          "lineId": "STRESS_TYPE_MAP.slave_revolt.crisisHook",
+          "text": "The revolt's leadership has demands. Some of them are negotiable. The governing faction has not admitted this publicly, and one of them is attempting to open a back channel.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "slave_revolt"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "slave_revolt.viabilityNote",
+      "keyGuarantees": [
+        "stress entry type = slave_revolt",
+        "field: viabilityNote",
+        "requiresTier: town (generation gate; tier has no fact home)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "slave_revolt"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one text per field (T).",
+      "lines": [
+        {
+          "lineId": "STRESS_TYPE_MAP.slave_revolt.viabilityNote",
+          "text": "The slave market's commercial operations are suspended. Labour-dependent production is disrupted. The security apparatus is entirely focused on containment.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "slave_revolt"
+          ],
+          "colour": false,
+          "stop": [
+            "slave market"
+          ]
+        }
+      ]
+    },
+    {
+      "pool": "wartime.label",
+      "keyGuarantees": [
+        "stress entry type = wartime",
+        "field: label"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "wartime"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one text per field (T).",
+      "lines": [
+        {
+          "lineId": "STRESS_TYPE_MAP.wartime.label",
+          "text": "Wartime",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "wartime"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "wartime.crisisHook",
+      "keyGuarantees": [
+        "stress entry type = wartime",
+        "field: crisisHook"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "wartime"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one text per field (T).",
+      "lines": [
+        {
+          "lineId": "STRESS_TYPE_MAP.wartime.crisisHook",
+          "text": "A crown officer has arrived with requisition orders that will strip the settlement of something it cannot spare. The governing faction must decide whether to comply, negotiate, or find a third option.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "wartime"
+          ],
+          "colour": false,
+          "stop": [
+            "crown / realm"
+          ]
+        }
+      ]
+    },
+    {
+      "pool": "wartime.viabilityNote",
+      "keyGuarantees": [
+        "stress entry type = wartime",
+        "field: viabilityNote"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "wartime"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one text per field (T).",
+      "lines": [
+        {
+          "lineId": "STRESS_TYPE_MAP.wartime.viabilityNote",
+          "text": "Military expenditure dominates the economy. Trade disruption is significant but offset by war contracts for some. Labour shortage from conscription affects agricultural and craft output.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "wartime"
+          ],
+          "colour": false,
+          "stop": [
+            "soldiers / commander"
+          ]
+        }
+      ]
+    },
+    {
+      "pool": "mass_migration.label",
+      "keyGuarantees": [
+        "stress entry type = mass_migration",
+        "field: label"
+      ],
+      "poolNeeds": [
+        "migration: influx"
+      ],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "mass_migration"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one text per field (T).",
+      "lines": [
+        {
+          "lineId": "STRESS_TYPE_MAP.mass_migration.label",
+          "text": "Mass Migration",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "mass_migration"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "mass_migration.crisisHook",
+      "keyGuarantees": [
+        "stress entry type = mass_migration",
+        "field: crisisHook"
+      ],
+      "poolNeeds": [
+        "migration: influx"
+      ],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "mass_migration"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one text per field (T).",
+      "lines": [
+        {
+          "lineId": "STRESS_TYPE_MAP.mass_migration.crisisHook",
+          "text": "The question is not whether things will change, but who will shape the change and what they will want in return.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "mass_migration"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "mass_migration.viabilityNote",
+      "keyGuarantees": [
+        "stress entry type = mass_migration",
+        "field: viabilityNote"
+      ],
+      "poolNeeds": [
+        "migration: influx"
+      ],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "mass_migration"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one text per field (T).",
+      "lines": [
+        {
+          "lineId": "STRESS_TYPE_MAP.mass_migration.viabilityNote",
+          "text": "Immigration: food balance stressed, labour market disrupted, criminal opportunity elevated. Emigration: tax base shrinking, institutions hollowing, labour shortage emerging.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "mass_migration"
+          ],
+          "colour": false,
+          "stop": [],
+          "note": "its \"Emigration:\" half describes an exodus, against the kind's one direction (influx, ruling 2 of 2026-10-30); flagged, not declared"
+        }
+      ]
+    }
+  ]
+}

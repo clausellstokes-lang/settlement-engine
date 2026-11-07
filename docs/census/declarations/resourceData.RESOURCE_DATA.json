@@ -1,0 +1,1324 @@
+{
+  "id": "resourceData.RESOURCE_DATA",
+  "source": "src/data/resourceData.js :: RESOURCE_DATA",
+  "drawKind": "T",
+  "pool": {
+    "declares": [],
+    "crisisScoped": false,
+    "colour": false,
+    "notes": "Key-guaranteed: the resource is held (and its terrainRequired/forbidden route gates already applied by resourceTerrainCompatibility.js). label+desc rows are descriptive (colour); warning rows fire when the ROUTE is forbidden, so they declare the route they fire on. tradeGoods declare their producer atom. STRENGTHS: the Resources tab's \"Economic strengths\" (to be relabelled \"What the land offers\") is fed by geographyData.js :: <terrain>.economicStrengths via resourceGenerator.js:500 (terrain.economicStrengths) — NO RESOURCE_DATA field feeds it, so nothing here is declared for that use. commodities/instBoosts/forbidden/terrainRequired/category are mechanics, not text.",
+    "needs": [],
+    "excludes": []
+  },
+  "rows": [
+    {
+      "id": "resourceData.RESOURCE_DATA::fishing_grounds.desc",
+      "text": "Fishing Grounds: Deep-water or reef fishing close to shore; reliable fish and seafood supp",
+      "needs": [
+        "coast"
+      ],
+      "excludes": [],
+      "colour": true,
+      "notes": "\"close to shore\""
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::fishing_grounds.warning",
+      "text": "Fishing grounds require water access.",
+      "needs": [
+        "route: isolated"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": "fires on forbidden route isolated"
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::fishing_grounds.tradeGoods[0]",
+      "text": "Salted fish",
+      "needs": [
+        "fish"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": ""
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::fishing_grounds.tradeGoods[1]",
+      "text": "Smoked seafood",
+      "needs": [
+        "fish",
+        "coast"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "seafood"
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::fishing_grounds.tradeGoods[2]",
+      "text": "Fish oil",
+      "needs": [
+        "fish"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": ""
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::salt_flats.desc",
+      "text": "Salt Flats: Coastal evaporation pans or inland salt deposits; the settlement produces its ",
+      "needs": [],
+      "excludes": [],
+      "colour": true,
+      "notes": "coastal OR inland: both sides covered"
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::salt_flats.tradeGoods[0]",
+      "text": "Sea salt",
+      "needs": [
+        "coast"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "sea salt"
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::salt_flats.tradeGoods[1]",
+      "text": "Salt for preservation",
+      "needs": [],
+      "excludes": [
+        "terrain: plains",
+        "terrain: hills",
+        "terrain: forest",
+        "terrain: riverside",
+        "terrain: mountain"
+      ],
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: salt works"
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::deep_harbour.desc",
+      "text": "Deep Natural Harbour: A sheltered deepwater anchorage capable of hosting large vessels",
+      "needs": [
+        "coast"
+      ],
+      "excludes": [],
+      "colour": true,
+      "notes": ""
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::deep_harbour.warning",
+      "text": "A deep harbour requires coastal port access.",
+      "needs": [],
+      "excludes": [
+        "route: port"
+      ],
+      "colour": false,
+      "notes": "fires on any route but port"
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::deep_harbour.tradeGoods[0]",
+      "text": "Ship passage",
+      "needs": [
+        "coast",
+        "institution: docks"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": ""
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::deep_harbour.tradeGoods[1]",
+      "text": "Maritime trade access",
+      "needs": [
+        "coast"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "income",
+      "notes": "\"Maritime trade access\" is access, not a good"
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::shipbuilding_timber.desc",
+      "text": "Coastal Timber: Dense timber stands near the coast suitable for shipbuilding and construct",
+      "needs": [
+        "coast"
+      ],
+      "excludes": [],
+      "colour": true,
+      "notes": "\"near the coast\""
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::shipbuilding_timber.tradeGoods[0]",
+      "text": "Shipbuilding timber",
+      "needs": [
+        "coast"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": ""
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::shipbuilding_timber.tradeGoods[1]",
+      "text": "Milled lumber",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: sawmill; Sawmill does not match INSTITUTION_KIND_PATTERNS.mill (by design)"
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::river_mills.desc",
+      "text": "Mill Sites: Fast-flowing sections ideal for water-powered mills; grain and textile process",
+      "needs": [
+        "river"
+      ],
+      "excludes": [],
+      "colour": true,
+      "notes": ""
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::river_mills.warning",
+      "text": "Mill sites require river access.",
+      "needs": [],
+      "excludes": [
+        "route: river"
+      ],
+      "colour": false,
+      "notes": "fires on every route but river"
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::river_mills.tradeGoods[0]",
+      "text": "Milled flour",
+      "needs": [
+        "institution: mill"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": ""
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::river_mills.tradeGoods[1]",
+      "text": "Processed grain",
+      "needs": [
+        "institution: mill"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": ""
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::river_mills.tradeGoods[2]",
+      "text": "Fulled cloth",
+      "needs": [
+        "river"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: fuller"
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::river_clay.desc",
+      "text": "Clay Deposits: Rich riverbank clay deposits suitable for brickmaking and pottery",
+      "needs": [
+        "river"
+      ],
+      "excludes": [],
+      "colour": true,
+      "notes": "\"riverbank\""
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::river_clay.tradeGoods[0]",
+      "text": "Fired brick",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: brickmaker"
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::river_clay.tradeGoods[1]",
+      "text": "Pottery and ceramics",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: potter"
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::river_clay.tradeGoods[2]",
+      "text": "Roof tiles",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: brickmaker"
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::fertile_floodplain.desc",
+      "text": "Fertile Floodplain: Annual flooding renews soil nutrients; exceptionally productive farmla",
+      "needs": [
+        "river"
+      ],
+      "excludes": [],
+      "colour": true,
+      "notes": "\"annual flooding\""
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::fertile_floodplain.warning",
+      "text": "Floodplain farming requires river access.",
+      "needs": [],
+      "excludes": [
+        "route: river"
+      ],
+      "colour": false,
+      "notes": "fires on every route but river"
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::fertile_floodplain.tradeGoods[0]",
+      "text": "Grain surplus",
+      "needs": [
+        "grain"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": ""
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::fertile_floodplain.tradeGoods[1]",
+      "text": "Agricultural surplus",
+      "needs": [
+        "grain"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": ""
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::fertile_floodplain.tradeGoods[2]",
+      "text": "Livestock",
+      "needs": [
+        "livestock"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": ""
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::river_fish.desc",
+      "text": "River Fisheries: Salmon runs, freshwater fish, and fishing weirs in the river",
+      "needs": [
+        "river"
+      ],
+      "excludes": [],
+      "colour": true,
+      "notes": ""
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::river_fish.warning",
+      "text": "River fisheries require river access.",
+      "needs": [],
+      "excludes": [
+        "route: road",
+        "route: river",
+        "route: crossroads",
+        "route: mountain_pass"
+      ],
+      "colour": false,
+      "notes": "fires on forbidden routes isolated/port"
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::river_fish.tradeGoods[0]",
+      "text": "River fish",
+      "needs": [
+        "fish",
+        "river"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": ""
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::river_fish.tradeGoods[1]",
+      "text": "Freshwater catch",
+      "needs": [
+        "fish",
+        "river"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": ""
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::hunting_grounds.desc",
+      "text": "Hunting Grounds: Dense forest with abundant deer, boar, and smaller game; furs and meat av",
+      "needs": [
+        "terrain: forest"
+      ],
+      "excludes": [],
+      "colour": true,
+      "notes": "\"Dense forest\" — hunting_grounds also rolls in mountain terrain, where this desc would be refused (twin wanted)"
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::hunting_grounds.tradeGoods[0]",
+      "text": "Furs and pelts",
+      "needs": [
+        "game"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": ""
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::hunting_grounds.tradeGoods[1]",
+      "text": "Game meat",
+      "needs": [
+        "game"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": ""
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::hunting_grounds.tradeGoods[2]",
+      "text": "Hunting trophies",
+      "needs": [
+        "game"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": ""
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::managed_forest.desc",
+      "text": "Managed Woodland: Sustainably harvested timber stands; reliable lumber and charcoal supply",
+      "needs": [],
+      "excludes": [],
+      "colour": true,
+      "notes": ""
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::managed_forest.tradeGoods[0]",
+      "text": "Milled timber",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: sawmill"
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::managed_forest.tradeGoods[1]",
+      "text": "Charcoal",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: charcoal burner"
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::managed_forest.tradeGoods[2]",
+      "text": "Hardwood beams",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: sawmill"
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::foraging_areas.desc",
+      "text": "Wild Foraging Areas: Mushrooms, berries, medicinal herbs, and wild plants; supports herbal",
+      "needs": [],
+      "excludes": [],
+      "colour": true,
+      "notes": "names herbalists and alchemists as supported, not present"
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::foraging_areas.tradeGoods[0]",
+      "text": "Medicinal herbs",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: herbalist / forager"
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::foraging_areas.tradeGoods[1]",
+      "text": "Alchemical reagents",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: alchemist / apothecary"
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::foraging_areas.tradeGoods[2]",
+      "text": "Wild honey",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: beekeeper"
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::ancient_grove.desc",
+      "text": "Ancient Grove: Old-growth forest with religious or mystical significance; attracts druids ",
+      "needs": [
+        "terrain: forest"
+      ],
+      "excludes": [],
+      "colour": true,
+      "notes": "unhomed: druid; \"Old-growth forest\"; \"attracts druids and pilgrims\" — druid has no atom"
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::ancient_grove.tradeGoods[0]",
+      "text": "Sacred wood",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: grove (resource itself)"
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::ancient_grove.tradeGoods[1]",
+      "text": "Ritual components",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: grove (resource itself)"
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::grain_fields.desc",
+      "text": "Extensive Grain Fields: Wide open farmland producing wheat, barley, and oats well beyond l",
+      "needs": [],
+      "excludes": [],
+      "colour": true,
+      "notes": ""
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::grain_fields.tradeGoods[0]",
+      "text": "Grain surplus",
+      "needs": [
+        "grain"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": ""
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::grain_fields.tradeGoods[1]",
+      "text": "Milled flour",
+      "needs": [
+        "institution: mill"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": ""
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::grain_fields.tradeGoods[2]",
+      "text": "Bulk food exports",
+      "needs": [
+        "grain"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": ""
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::grazing_land.desc",
+      "text": "Open Grazing Land: Extensive pasture for cattle, sheep, and horses; wool, leather, and dai",
+      "needs": [],
+      "excludes": [],
+      "colour": true,
+      "notes": ""
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::grazing_land.tradeGoods[0]",
+      "text": "Raw wool",
+      "needs": [
+        "livestock"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": ""
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::grazing_land.tradeGoods[1]",
+      "text": "Livestock",
+      "needs": [
+        "livestock"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": ""
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::grazing_land.tradeGoods[2]",
+      "text": "Dairy products",
+      "needs": [
+        "livestock"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": ""
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::grazing_land.tradeGoods[3]",
+      "text": "Leather goods",
+      "needs": [
+        "livestock"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: tanner"
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::crossroads_position.desc",
+      "text": "Strategic Crossroads: Intersection of multiple trade routes; every caravan must pass throu",
+      "needs": [
+        "route: crossroads"
+      ],
+      "excludes": [],
+      "colour": true,
+      "notes": ""
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::crossroads_position.warning",
+      "text": "A crossroads position requires crossroads trade access.",
+      "needs": [],
+      "excludes": [
+        "route: road",
+        "route: crossroads",
+        "route: mountain_pass"
+      ],
+      "colour": false,
+      "notes": "fires on forbidden routes isolated/port/river"
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::crossroads_position.tradeGoods[0]",
+      "text": "Transit trade",
+      "needs": [
+        "route: crossroads"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "income",
+      "notes": "transit trade"
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::crossroads_position.tradeGoods[1]",
+      "text": "Toll revenue",
+      "needs": [
+        "route: crossroads"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "income",
+      "notes": "toll revenue"
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::iron_deposits.desc",
+      "text": "Iron Ore Deposits: Accessible iron ore veins; enables metalworking and weapon production l",
+      "needs": [],
+      "excludes": [],
+      "colour": true,
+      "notes": ""
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::iron_deposits.tradeGoods[0]",
+      "text": "Iron ore",
+      "needs": [
+        "institution: mine"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": ""
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::iron_deposits.tradeGoods[1]",
+      "text": "Basic metalwork",
+      "needs": [
+        "institution: smith"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": ""
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::iron_deposits.tradeGoods[2]",
+      "text": "Weapons and armour",
+      "needs": [
+        "institution: smith"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": ""
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::stone_quarry.desc",
+      "text": "Stone quarry: Accessible limestone, granite, or sandstone; reduces construction costs sign",
+      "needs": [],
+      "excludes": [],
+      "colour": true,
+      "notes": ""
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::stone_quarry.tradeGoods[0]",
+      "text": "Quarried stone",
+      "needs": [
+        "institution: quarry"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": ""
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::stone_quarry.tradeGoods[1]",
+      "text": "Building materials",
+      "needs": [
+        "institution: quarry"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": ""
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::precious_metals.desc",
+      "text": "Precious Metal Veins: Silver, gold, or copper deposits; attracts merchants and banking inf",
+      "needs": [],
+      "excludes": [],
+      "colour": true,
+      "notes": "\"attracts merchants and banking\": aspiration, not presence"
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::precious_metals.tradeGoods[0]",
+      "text": "Precious metals",
+      "needs": [
+        "institution: mine"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": ""
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::precious_metals.tradeGoods[1]",
+      "text": "Coin minting",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "income",
+      "notes": "unhomed: mint; coin minting is capital/seigniorage, not a trade good"
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::precious_metals.tradeGoods[2]",
+      "text": "Jewellery",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: jeweller"
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::gemstone_deposits.desc",
+      "text": "Gemstone Deposits: Crystals, semiprecious stones, or gems in the surrounding rock",
+      "needs": [],
+      "excludes": [],
+      "colour": true,
+      "notes": ""
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::gemstone_deposits.tradeGoods[0]",
+      "text": "Raw gemstones",
+      "needs": [
+        "institution: mine",
+        "tier: >= village"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": ""
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::gemstone_deposits.tradeGoods[1]",
+      "text": "Cut gemstones",
+      "needs": [
+        "tier: >= village"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: jeweller / lapidary"
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::gemstone_deposits.tradeGoods[2]",
+      "text": "Luxury goods",
+      "needs": [
+        "tier: >= village"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": ""
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::coal_deposits.desc",
+      "text": "Coal or Peat Deposits: Surface-accessible fuel for forges, kilns, and domestic heating",
+      "needs": [],
+      "excludes": [],
+      "colour": true,
+      "notes": ""
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::coal_deposits.tradeGoods[0]",
+      "text": "Coal",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: coal pit / charcoal burner"
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::coal_deposits.tradeGoods[1]",
+      "text": "Peat fuel",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: peat cutter"
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::ancient_ruins.desc",
+      "text": "Ancient Ruins: Ruins of a prior civilization; scholars, treasure-hunters, and curious adve",
+      "needs": [],
+      "excludes": [],
+      "colour": true,
+      "notes": ""
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::ancient_ruins.tradeGoods[0]",
+      "text": "Recovered artefacts",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: ruins (resource itself)"
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::ancient_ruins.tradeGoods[1]",
+      "text": "Rare texts",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: ruins (resource itself)"
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::hot_springs.desc",
+      "text": "Hot Springs / Healing Waters: Natural thermal springs with reputed healing properties; att",
+      "needs": [],
+      "excludes": [],
+      "colour": true,
+      "notes": ""
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::hot_springs.tradeGoods[0]",
+      "text": "Healing waters (bottled)",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: springs (resource itself)"
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::hot_springs.tradeGoods[1]",
+      "text": "Pilgrim hospitality",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "income",
+      "notes": ""
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::magical_node.desc",
+      "text": "Magical Ley Line Node: Intersection of magical energy; draws practitioners and makes ritua",
+      "needs": [
+        "magic level: ≥ low"
+      ],
+      "excludes": [],
+      "colour": true,
+      "notes": "\"draws practitioners and makes ritual work easier\" presumes working magic"
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::magical_node.tradeGoods[0]",
+      "text": "Arcane reagents",
+      "needs": [
+        "magic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": ""
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::magical_node.tradeGoods[1]",
+      "text": "Magical services",
+      "needs": [
+        "magic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "\"Magical services\" is a service (services lane), not a good"
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::defended_pass.desc",
+      "text": "Mountain Pass: The only viable route through surrounding terrain; all overland traffic mus",
+      "needs": [
+        "terrain: mountain"
+      ],
+      "excludes": [
+        "route: isolated"
+      ],
+      "colour": true,
+      "notes": "\"all overland traffic must pass here\""
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::defended_pass.tradeGoods[0]",
+      "text": "Toll revenue",
+      "needs": [
+        "terrain: mountain"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "income",
+      "notes": "toll revenue"
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::defended_pass.tradeGoods[1]",
+      "text": "Pass transit trade",
+      "needs": [
+        "terrain: mountain"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "income",
+      "notes": "transit trade"
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::marshlands.desc",
+      "text": "Marshlands: Wetlands providing reeds, peat, waterfowl, and unusual plant materials; impass",
+      "needs": [],
+      "excludes": [],
+      "colour": true,
+      "notes": "unhomed: marsh terrain"
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::marshlands.tradeGoods[0]",
+      "text": "Reeds and thatch",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: thatcher"
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::marshlands.tradeGoods[1]",
+      "text": "Peat fuel",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: peat cutter"
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::marshlands.tradeGoods[2]",
+      "text": "Waterfowl",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: wildfowler"
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::oasis_water.desc",
+      "text": "Oasis and Water Rights: Rare water access determines settlement survival and trade leverag",
+      "needs": [
+        "terrain: desert"
+      ],
+      "excludes": [],
+      "colour": true,
+      "notes": ""
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::oasis_water.warning",
+      "text": "Oasis water: settlement depends on sustained water access",
+      "needs": [
+        "terrain: desert"
+      ],
+      "excludes": [
+        "route: road",
+        "route: crossroads",
+        "route: isolated",
+        "route: mountain_pass"
+      ],
+      "colour": false,
+      "notes": "fires on forbidden routes port/river"
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::oasis_water.tradeGoods[0]",
+      "text": "Water rights",
+      "needs": [
+        "terrain: desert"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "income",
+      "notes": "water RIGHTS are a levy/right, not a good"
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::oasis_water.tradeGoods[1]",
+      "text": "Date surplus",
+      "needs": [
+        "terrain: desert"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": ""
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::oasis_water.tradeGoods[2]",
+      "text": "Oasis provisions",
+      "needs": [
+        "terrain: desert"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": ""
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::date_palms.desc",
+      "text": "Date Palms and Orchards: Productive desert agriculture: dates, figs, and drought-resistant",
+      "needs": [
+        "terrain: desert"
+      ],
+      "excludes": [],
+      "colour": true,
+      "notes": ""
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::date_palms.tradeGoods[0]",
+      "text": "Date harvest",
+      "needs": [
+        "terrain: desert"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": ""
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::date_palms.tradeGoods[1]",
+      "text": "Dried fruit",
+      "needs": [
+        "terrain: desert"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": ""
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::date_palms.tradeGoods[2]",
+      "text": "Desert grain",
+      "needs": [
+        "terrain: desert"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": ""
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::glass_sand.desc",
+      "text": "Fine Glass Sand: High-purity silica sand deposits ideal for glassblowing and fine ceramics",
+      "needs": [
+        "terrain: desert"
+      ],
+      "excludes": [],
+      "colour": true,
+      "notes": ""
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::glass_sand.tradeGoods[0]",
+      "text": "Raw sand",
+      "needs": [
+        "terrain: desert"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": ""
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::glass_sand.tradeGoods[1]",
+      "text": "Glass blanks",
+      "needs": [
+        "terrain: desert"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: glassblower"
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::desert_salt.desc",
+      "text": "Salt Pans: Extensive salt deposits from ancient dried seabeds: major trade commodity acros",
+      "needs": [
+        "terrain: desert"
+      ],
+      "excludes": [],
+      "colour": true,
+      "notes": ""
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::desert_salt.tradeGoods[0]",
+      "text": "Rock salt",
+      "needs": [
+        "terrain: desert"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": ""
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::desert_salt.tradeGoods[1]",
+      "text": "Salt blocks",
+      "needs": [
+        "terrain: desert"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": ""
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::desert_salt.tradeGoods[2]",
+      "text": "Evaporated salt",
+      "needs": [
+        "terrain: desert"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": ""
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::camel_herds.desc",
+      "text": "Camel Herds: Essential for desert trade and transport. Camel milk, leather, and wool also ",
+      "needs": [
+        "terrain: desert"
+      ],
+      "excludes": [],
+      "colour": true,
+      "notes": "culture-keyed animal: camel cultures arabic / steppe NOT declared — resolveSettlementCulture is not terrain-keyed, so a culture atom would refuse every non-arabic/steppe desert; the resource is desert-gated (geographyData desert.allowedResources). Label \"Camel Herds\" is in the chair's luxury class but this is a RESOURCE row (not an import)"
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::camel_herds.tradeGoods[0]",
+      "text": "Draft camels",
+      "needs": [
+        "terrain: desert"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": ""
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::camel_herds.tradeGoods[1]",
+      "text": "Camel leather",
+      "needs": [
+        "terrain: desert"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": ""
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::camel_herds.tradeGoods[2]",
+      "text": "Camel wool",
+      "needs": [
+        "terrain: desert"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": ""
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::alpine_pasture.desc",
+      "text": "Alpine Pastures: High summer pasture for sheep and goats: wool, cheese, and live animals t",
+      "needs": [
+        "terrain: mountain"
+      ],
+      "excludes": [],
+      "colour": true,
+      "notes": ""
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::alpine_pasture.tradeGoods[0]",
+      "text": "Raw wool",
+      "needs": [
+        "terrain: mountain",
+        "livestock"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": ""
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::alpine_pasture.tradeGoods[1]",
+      "text": "Mountain cheese",
+      "needs": [
+        "terrain: mountain",
+        "livestock"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": ""
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::alpine_pasture.tradeGoods[2]",
+      "text": "Live sheep",
+      "needs": [
+        "terrain: mountain",
+        "livestock"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": ""
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::mountain_timber.desc",
+      "text": "Mountain Timber: Dense evergreen forests at elevation: structural timber, fuel wood, and c",
+      "needs": [
+        "terrain: mountain"
+      ],
+      "excludes": [],
+      "colour": true,
+      "notes": ""
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::mountain_timber.tradeGoods[0]",
+      "text": "Hewn timber",
+      "needs": [
+        "terrain: mountain"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: sawmill"
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::mountain_timber.tradeGoods[1]",
+      "text": "Pine planks",
+      "needs": [
+        "terrain: mountain"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: sawmill"
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::mountain_timber.tradeGoods[2]",
+      "text": "Charcoal",
+      "needs": [
+        "terrain: mountain"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: charcoal burner"
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::hot_springs_mineral.desc",
+      "text": "Mineral Hot Springs: Medicinal thermal waters drawing pilgrims and wealthy travelers. Alum",
+      "needs": [
+        "terrain: mountain"
+      ],
+      "excludes": [],
+      "colour": true,
+      "notes": ""
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::hot_springs_mineral.tradeGoods[0]",
+      "text": "Mineral salts",
+      "needs": [
+        "terrain: mountain"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": ""
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::hot_springs_mineral.tradeGoods[1]",
+      "text": "Alum",
+      "needs": [
+        "terrain: mountain"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": ""
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::hot_springs_mineral.tradeGoods[2]",
+      "text": "Sulfur",
+      "needs": [
+        "terrain: mountain"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": ""
+    }
+  ]
+}

@@ -105,6 +105,7 @@ import { classifyCells, diffLines } from './prose-manifest-diff.mjs';
 import { TASTE_POOLS } from './prose-licence-card.mjs';
 import { tasteTown, INTERESTED_TOWNS } from '../tests/fixtures/tasteTowns.js';
 import { composeStateProse } from '../src/domain/display/stateProse/composeStateProse.js';
+import { factsOf } from '../src/domain/facts/factsOf.js';
 import { DOSSIER_STATE_PROSE_DEFENSE } from '../src/data/dossierStateProse/defense.generated.js';
 import { DOSSIER_STATE_PROSE_GENERAL } from '../src/data/dossierStateProse/general.generated.js';
 // ⭐ ALL SIX LEAVES (REWRITE car 8a-5). The taste read two because its seven pools lived in
@@ -1242,11 +1243,15 @@ export function fixtureSection() {
   for (const spec of INTERESTED_TOWNS) {
     const settlement = tasteTown(spec);
     const source = censusRow ? sourceOfForTown(censusRow, settlement, {}) : null;
+    // The town's own facts, as every desk hands them at its entry (`facts/factsAnswered.js`):
+    // since census-2b item 2 (db3ed88c1) this pool is crisis-scoped, and a crisis-scoped pool
+    // read without facts is unreadable (fail-closed), which left BOTH faces null.
+    const facts = factsOf(settlement);
     const player = composeStateProse(CORPUS, INTERESTED_ROW.block, {
-      spineKey: INTERESTED_ROW.pool, candidates: [], turns: [], slots: {}, seed: spec.seed, audience: 'player',
+      spineKey: INTERESTED_ROW.pool, candidates: [], turns: [], slots: {}, seed: spec.seed, audience: 'player', facts,
     });
     const dm = composeStateProse(CORPUS, INTERESTED_ROW.block, {
-      spineKey: INTERESTED_ROW.pool, candidates: [], turns: [], slots: {}, seed: spec.seed, audience: 'dm',
+      spineKey: INTERESTED_ROW.pool, candidates: [], turns: [], slots: {}, seed: spec.seed, audience: 'dm', facts,
     });
     const interested = Boolean(source && source.standing === 'INTERESTED');
     // ⛔ ONLY AN INTERESTED ROW HAS A DM SENTENCE AT ALL, AND THE CLEAN TOWN IS THE CONTROL.

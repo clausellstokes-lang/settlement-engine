@@ -1,0 +1,240 @@
+{
+  "pool": {
+    "id": "npcData.NPC_PLOT_HOOKS",
+    "file": "src/data/npcData.js",
+    "drawKind": "R",
+    "drawSite": "npcGenerator.js:692 pick (impressions keyed by category)",
+    "colour": true,
+    "crisisScoped": false,
+    "keyDeclares": {},
+    "lines": 28,
+    "declaring": 0,
+    "note": "First-impression manners keyed by category; every line is colour."
+  },
+  "rows": [
+    {
+      "id": "government#0.impression",
+      "text": "Efficient, slightly distracted: someone with too many things in their head and a practised way of not showing it.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "government#1.impression",
+      "text": "Warmer than their office suggests. They have the gift of making people feel briefly important.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "government#2.impression",
+      "text": "Formally polite. Every sentence is measured before it leaves their mouth.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "government#3.impression",
+      "text": "Tired. Not rudely, but visibly. This is a person who has been doing a hard job for a long time.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "military#0.impression",
+      "text": "Direct. They assess you in the first three seconds and their expression tells you they've reached a provisional conclusion.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "military#1.impression",
+      "text": "Professionally cordial: the manner of someone who deals with strangers all day and has a system for it.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "military#2.impression",
+      "text": "Relaxed in a way that reads as confidence rather than carelessness.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "military#3.impression",
+      "text": "Alert. Not hostile, but attentive in a way that doesn't quite switch off.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "religious#0.impression",
+      "text": "Genuinely glad to see you, or performs it so well the difference doesn't matter at first.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "religious#1.impression",
+      "text": "Composed. The particular stillness of someone who has practised being still.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "religious#2.impression",
+      "text": "Interested in you as a person, or at least in what you might need. The attention feels real.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "religious#3.impression",
+      "text": "Watchful, in a religious way: not suspicious, but as though taking a reading.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "economy#0.impression",
+      "text": "Quick to smile, quick to calculate. Both things are happening simultaneously.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "economy#1.impression",
+      "text": "Busy, or presenting as busy. The first impression is of someone who doesn't waste time.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "economy#2.impression",
+      "text": "Affable. The manner of someone for whom friendliness is both genuine and useful.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "economy#3.impression",
+      "text": "Cautious with newcomers. The wariness is professional rather than personal.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "criminal#0.impression",
+      "text": "Unremarkable, deliberately. The kind of person you would walk past twice.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "criminal#1.impression",
+      "text": "Helpful in a way that asks for nothing obvious in return. Yet.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "criminal#2.impression",
+      "text": "Friendly, easy, slightly too interested in where you're from.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "criminal#3.impression",
+      "text": "Quiet. They let other people fill the silence.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "magic#0.impression",
+      "text": "Elsewhere, mentally. The conversation is happening in the foreground while something else has most of their attention.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "magic#1.impression",
+      "text": "Precise: words chosen carefully, pauses before answering, a slight sense of being assessed.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "magic#2.impression",
+      "text": "Unexpectedly approachable. Whatever you expected, this isn't it.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "magic#3.impression",
+      "text": "Polite but removed. Not unfriendly, just operating at a different register.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "other#0.impression",
+      "text": "Ordinary in a way that is itself a kind of presence.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "other#1.impression",
+      "text": "Open. The impression of someone with nothing in particular to hide, or who has decided not to hide it.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "other#2.impression",
+      "text": "Tired, but alert. The combination of someone who works hard and pays attention.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "other#3.impression",
+      "text": "Reserved. Not hostile, just private.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    }
+  ]
+}

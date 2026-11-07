@@ -102,7 +102,10 @@ describe('the knowledge desk — the non-omniscient Herald golden (captured firs
     // 2 fewer items (436 → 434).
     // 434 → 435 at F1 DEFENCE-WORDS, FIRST STEP (UNITS 1–5) (ODQ §934.105, RUNG 1 OF THE SOAK LADDER, 2026-11-04; record docs/shift-records/2026-11-04-rung1-23-f1-defence-words.json): the step re-deals the realm's year and the year-one desk files
     // 1 more items (434 → 435).
-    expect(Object.keys(manifest)).toHaveLength(435);
+    // 435 → 438 at THE POOL CENSUS COMPOSED (ODQ §934.105, RUNG 2 OF THE SOAK LADDER, the landing stacked on rung 1;
+    // record docs/shift-records/2026-11-06-rung2-03-census-composed-herald-desk.json): the census record's shape on rung 1's
+    // desk files 3 more items (5 rows from the census-1b step, 36 interaction rows of the rung-1 merge; 435 → 438).
+    expect(Object.keys(manifest)).toHaveLength(438);
   });
 
   it('the declared refile set is exactly the knowledge desk the routing table carries', () => {

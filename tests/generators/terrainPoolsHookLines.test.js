@@ -8,12 +8,22 @@
  * killings." in a town in the hills on a road.
  */
 import { describe, expect, it } from 'vitest';
-import { NPC_FACTION_GOALS, NPC_FACTION_LOYALTY, NPC_SECRETS, NPC_CRIMINAL_SECRETS, NPC_WANTS } from '../../src/data/npcData.js';
-import { INLAND_HOOK_LINES, WET_HOOK_WORD, inlandHookLine } from '../../src/data/inlandHookLines.js';
+import { NPC_FACTION_GOALS, NPC_FACTION_LOYALTY, NPC_SECRETS, NPC_CRIMINAL_SECRETS, NPC_WANTS, NPC_HOOK_SIBLINGS } from '../../src/data/npcData.js';
+import { resolveSibling } from '../../src/domain/facts/drawDeclared.js';
+import { factsOf } from '../../src/domain/facts/factsOf.js';
+
+// CENSUS-1c unit 1: the text-keyed table `data/inlandHookLines.js` dissolved into the declared
+// sibling sets beside the originals (`npcData.js :: NPC_HOOK_SIBLINGS`); re-keyed by that cause.
+/** A pool line's water words (the A-11 vocabulary plus the sea and the tide), moved here from the retired table. */
+const WET_HOOK_WORD = /\b(?:sea|seas|dock-side|dockside|docks?|harbou?rs?|ships?|shipping|shipwrights?|tides?|tidal|wharf|wharves|quays?|sailors?|fleet|boats?|fishermen|fishing)\b/i;
+const twinOf = (/** @type {string} */ line) => NPC_HOOK_SIBLINGS[line]?.find((l) => l.twinOf === line)?.text;
+const inlandHookLine = (/** @type {any} */ line, /** @type {'maritime'|'river'|'none'} */ kind) => resolveSibling(line, NPC_HOOK_SIBLINGS, { facts: factsOf({}, { waterKind: kind }), poolId: 'test', drawKind: 'T' });
 import { waterAccessKind } from '../../src/domain/tradeRouteSemantics.js';
 
 /** Every string a hook pool holds, however nested. @param {unknown} v @returns {string[]} */
-const stringsOf = (v) => (typeof v === 'string' ? [v] : Array.isArray(v) ? v.flatMap(stringsOf) : v && typeof v === 'object' ? Object.values(v).flatMap(stringsOf) : []);
+// CENSUS-4f: a declared row's column (`needs`, `excludes`, `crisis`, `twinOf`, `tags`) is a declaration, not prose — `needs: ['docks']` is no wet line.
+const DECLARATION_KEYS = new Set(['needs', 'excludes', 'crisis', 'twinOf', 'tags']);
+const stringsOf = (v) => (typeof v === 'string' ? [v] : Array.isArray(v) ? v.flatMap(stringsOf) : v && typeof v === 'object' ? Object.entries(v).filter(([k]) => !DECLARATION_KEYS.has(k)).flatMap(([, x]) => stringsOf(x)) : []);
 const POOLS = { NPC_FACTION_GOALS, NPC_FACTION_LOYALTY, NPC_SECRETS, NPC_CRIMINAL_SECRETS, NPC_WANTS };
 
 describe('the hook pools\' wet lines', () => {
@@ -21,8 +31,8 @@ describe('the hook pools\' wet lines', () => {
     const wet = Object.values(POOLS).flatMap(stringsOf).filter((x) => WET_HOOK_WORD.test(x));
     expect(wet.length).toBeGreaterThan(0);
     for (const line of wet) {
-      expect(INLAND_HOOK_LINES[line], line).toBeTypeOf('string');
-      expect(WET_HOOK_WORD.test(INLAND_HOOK_LINES[line]), INLAND_HOOK_LINES[line]).toBe(false);
+      expect(twinOf(line), line).toBeTypeOf('string');
+      expect(WET_HOOK_WORD.test(twinOf(line)), twinOf(line)).toBe(false);
     }
   });
   it('the twin is taken only where there is no water', () => {

@@ -1,0 +1,60 @@
+{
+  "id": "marketPrices.MOVEMENTS",
+  "source": "src/domain/display/marketPrices.js :: MOVEMENTS",
+  "drawKind": "T",
+  "pool": {
+    "declares": [],
+    "crisisScoped": true,
+    "colour": false,
+    "notes": "Closed typed vocabulary keyed by movementFor(band, driftBand); the band is the M6a commodityStocks band (unhomed: commodity stock band — no atom) and absent ⇒ adequate. Crisis-scoped because the default \"usual\" prints for every good of an aspatial world (no ledger) under any crisis.",
+    "needs": [],
+    "excludes": []
+  },
+  "rows": [
+    {
+      "id": "marketPrices.MOVEMENTS::near_double",
+      "text": "nearly double its usual price",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "marketPrices.MOVEMENTS::shade_above",
+      "text": "a shade above its usual price",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "marketPrices.MOVEMENTS::usual",
+      "text": "its usual price",
+      "needs": [],
+      "excludes": [],
+      "crisis": "calm",
+      "colour": false,
+      "notes": "Default arm (no ledger ⇒ adequate): asserts normal prices under famine/siege for food goods. Narrower: excludes hunger/threat families for food-category goods."
+    },
+    {
+      "id": "marketPrices.MOVEMENTS::shade_under",
+      "text": "a shade under its usual price",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "marketPrices.MOVEMENTS::third_under",
+      "text": "a third under its usual price",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": "A surplus band under famine is the ledger's own reading; not a presumption of this line."
+    }
+  ]
+}

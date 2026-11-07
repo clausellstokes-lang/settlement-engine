@@ -32,6 +32,7 @@ import { resourceDisplayName } from '../../domain/display/resourceDisplayName.js
 import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js'; // §934.22 item 1(b) — the PROC row
 import { SupplyChainFlow } from './SupplyChainFlow.jsx';
 import { StateProse } from '../primitives/StateProse.jsx';
+import { revenuesOffTheLists } from '../../domain/display/tradeListDisplay.js'; // CENSUS-3c R-P 2 — the revenues that left the trade lists
 
 function renderedTradeLabel(economy, direction, item) {
   // §934.22 item 2 — A PRINT GOES THROUGH THE SEAM, A MATCH NEVER DOES. The ownership read
@@ -107,6 +108,17 @@ export function EconomicsTrade({ settlement, narrativeMode, vm, stateProse }) {
           ))}
         </View>
       )}
+
+      {/* CENSUS-3c (R-P 2): the revenues that left the trade lists, where the record holds the
+          fact behind them — printed unmeasured, because the record holds no share for them. */}
+      {(() => {
+        const off = revenuesOffTheLists(settlement);
+        return off.length > 0 ? (
+          <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['8'], marginBottom: space.sm }}>
+            {`Also earned, with no share recorded: ${off.map((r) => `${r.text}, ${r.desc}`).join(' ')}`}
+          </Text>
+        ) : null;
+      })()}
 
       {/* ── Trade flows ───────────────────────────────────────── */}
       {(e.primaryExports?.length > 0 || e.primaryImports?.length > 0 || e.localProduction?.length > 0) && (

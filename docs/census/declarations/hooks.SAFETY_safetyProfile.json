@@ -1,0 +1,89 @@
+{
+ "id": "hooks.SAFETY_safetyProfile",
+ "source": "src/generators/safetyProfile.js :: generateSafetyProfile (plotHooks)",
+ "drawKind": "T",
+ "pool": {
+  "declares": [
+   "the stress flag of each branch (key)"
+  ],
+  "crisisScoped": false,
+  "colour": false,
+  "notes": "Defense-surface table (Safety & Crime hooks on the Plot Hooks tab); declared here because reader:hook-pools reads the whole tab. Its flags read priorityHelpers (CENSUS-1 left them, militia measured moving births).",
+  "needs": [],
+  "excludes": []
+ },
+ "rows": [
+  {
+   "id": "hooks.SAFETY_safetyProfile::stateCrime",
+   "text": "A local family wants evidence of tax extortion gathered quietly, but the extorter wears an official badge.",
+   "needs": [
+    "organised crime"
+   ],
+   "excludes": [],
+   "colour": false
+  },
+  {
+   "id": "hooks.SAFETY_safetyProfile::crimeIsGovt",
+   "text": "Someone approached the party seeking legitimate authority to settle a dispute. The only \"authority\" here is...",
+   "needs": [
+    "organised crime"
+   ],
+   "excludes": [],
+   "colour": false,
+   "notes": "the ref is already tier-keyed (quarter from a town up)"
+  },
+  {
+   "id": "hooks.SAFETY_safetyProfile::arcaneBlackMarket",
+   "text": "A wizard's tower component went missing. The black market has it...",
+   "needs": [
+    "magic",
+    "organised crime"
+   ],
+   "excludes": [],
+   "colour": false
+  },
+  {
+   "id": "hooks.SAFETY_safetyProfile::religiousFraud",
+   "text": "A pilgrim paid a fortune for a holy relic that is obviously fake...",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.SAFETY_safetyProfile::merchantCriminalBlur",
+   "text": "A guild merchant hired the party, then asked them to do something the guild officially forbids...",
+   "needs": [],
+   "excludes": [],
+   "colour": true,
+   "notes": "unhomed: guild"
+  },
+  {
+   "id": "hooks.SAFETY_safetyProfile::hasSmuggling",
+   "text": "The smuggling network is moving something unusual this week...",
+   "needs": [
+    "organised crime"
+   ],
+   "excludes": [],
+   "colour": false
+  },
+  {
+   "id": "hooks.SAFETY_safetyProfile::crusaderSynthesis",
+   "text": "The garrison chaplain and the commander are the same man...",
+   "needs": [
+    "garrison"
+   ],
+   "excludes": [],
+   "colour": false
+  },
+  {
+   "id": "hooks.SAFETY_safetyProfile::merchantArmy",
+   "text": "The merchant guild's private security force just detained someone... The watch is looking the other way.",
+   "needs": [
+    "watch"
+   ],
+   "excludes": [],
+   "colour": false,
+   "notes": "unhomed: guild"
+  }
+ ]
+}

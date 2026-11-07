@@ -1,0 +1,261 @@
+{
+  "id": "DS-SUP-2",
+  "source": "src/data/dossierStateProse/economy.generated.js",
+  "drawKind": "K",
+  "pools": [
+    {
+      "id": "DS-SUP-2::STABLE",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": true,
+      "notes": "key: chain status stable",
+      "lines": [
+        {
+          "id": "DS-SUP-2::STABLE::v1",
+          "text": "The line holds. Every input the {chain} needs is present, and nothing in it is being cover",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-SUP-2::STABLE::v2",
+          "text": "The {chain} works. There is no story in it this season.",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": "\"no story in it this season\" (season, no atom)"
+        },
+        {
+          "id": "DS-SUP-2::STABLE::v3",
+          "text": "Nothing about {settlement}'s {chain} draws attention, which, in a line of supply, means al",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-SUP-2::STRAINED",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": true,
+      "notes": "key: strained",
+      "lines": [
+        {
+          "id": "DS-SUP-2::STRAINED::v1",
+          "text": "The {chain} is meeting its needs and meeting them exactly. There is no slack anywhere in t",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-SUP-2::STRAINED::v2",
+          "text": "The {chain} runs under weight. It has not failed and it has nothing left to absorb a failu",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-SUP-2::STRAINED::v3",
+          "text": "The people working the {chain} are keeping up. Keeping up is all they are doing.",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-SUP-2::SCARCE",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": true,
+      "notes": "key: scarce",
+      "lines": [
+        {
+          "id": "DS-SUP-2::SCARCE::v1",
+          "text": "The {chain} is producing below what it should. The line is intact and the volume coming of",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-SUP-2::SCARCE::v2",
+          "text": "The workshops on this line are open and half-busy. What they turn out is short of what the",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-SUP-2::SCARCE::v3",
+          "text": "Output is falling away rather than stopping. Each turn takes a little more off what the li",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-SUP-2::BLOCKED",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": true,
+      "notes": "key: blocked",
+      "lines": [
+        {
+          "id": "DS-SUP-2::BLOCKED::v1",
+          "text": "The {chain} is off. Something above it failed hard enough that nothing reaches the line at",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-SUP-2::BLOCKED::v2",
+          "text": "The {chain} is not running. Not slowly. Not at all.",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-SUP-2::BLOCKED::v3",
+          "text": "A stranger will find {institution} shut and the yard behind it empty. Whatever fed this pl",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-SUP-2::CAPTURED",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": true,
+      "notes": "key: captured (dm-only pool)",
+      "lines": [
+        {
+          "id": "DS-SUP-2::CAPTURED::v1",
+          "text": "The {chain} still runs and no longer runs for the town. {faction} takes its cut at the poi",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": "dm-only; {faction} slot"
+        },
+        {
+          "id": "DS-SUP-2::CAPTURED::v2",
+          "text": "Everything on the {chain} goes through the same hands now, and those hands are paid before",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": "dm-only"
+        },
+        {
+          "id": "DS-SUP-2::CAPTURED::v3",
+          "text": "The {chain} looks ordinary from outside {settlement}. Inside it, one name sits on every st",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": "dm-only"
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-SUP-2::SUBSTITUTED",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": false,
+      "notes": "key: substituted (substituteActive — may be an import substitute or magic; magic not guaranteed by key)",
+      "lines": [
+        {
+          "id": "DS-SUP-2::SUBSTITUTED::v1",
+          "text": "The {chain} runs on something other than its own supply. The output is real; the line bene",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-SUP-2::SUBSTITUTED::v2",
+          "text": "What holds the {chain} up is a working, not a road. Take the working away and the line is ",
+          "needs": [
+            "magic"
+          ],
+          "excludes": [],
+          "colour": false,
+          "notes": "\"What holds the {chain} up is a working\" — presumes the substitute is magical"
+        },
+        {
+          "id": "DS-SUP-2::SUBSTITUTED::v3",
+          "text": "The {chain} keeps producing and nobody local mistakes that for health.",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-SUP-2::COLLAPSING",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": true,
+      "notes": "key: collapsing",
+      "lines": [
+        {
+          "id": "DS-SUP-2::COLLAPSING::v1",
+          "text": "The {chain} is failing from several directions at once. No single break explains it and no",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-SUP-2::COLLAPSING::v2",
+          "text": "The {chain} is coming apart rather than stopping. Each pressure makes the next bite harder",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-SUP-2::COLLAPSING::v3",
+          "text": "People are leaving the {chain}'s trades. That is usually the last thing that happens, not ",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    }
+  ]
+}

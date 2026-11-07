@@ -1,0 +1,274 @@
+{
+  "poolId": "ARRIVAL_TENSIONS",
+  "source": "src/data/arrivalProse.js:341-372",
+  "drawKind": "R",
+  "drawSite": "src/generators/narrative/arrivalScene.js:173-197 chooseClosing (key) then :293 one pickRandom (NO agreeingLine filter); CLOSING beat, only when !underStress",
+  "pools": [
+    {
+      "pool": "criminal_governance",
+      "keyGuarantees": [
+        "safety label includes \"criminal governance\"; stop: safety label",
+        "rendered only when the record's primary stress has no STRESS_DESCS vignette (src/generators/narrative/arrivalScene.js:215,226,259,292): every record crisis kind has one, so this beat is silent under a record crisis and renders under calm, a custom DM crisis type, or a world pulse stressor the scene never reads"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Not opted: asserts a danger, not calm.",
+      "lines": [
+        {
+          "lineId": "ARRIVAL_TENSIONS.criminal_governance[0]",
+          "text": "A shopkeeper hands a fat purse to a man who is plainly not a tax collector, and does not argue.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_TENSIONS.criminal_governance[1]",
+          "text": "Certain doorways have someone standing in them who does not seem to be waiting for anyone.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_TENSIONS.criminal_governance[2]",
+          "text": "People step aside for a well-dressed group in the street, and nobody meets their eyes.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_TENSIONS.criminal_governance[3]",
+          "text": "A posted notice of new duties carries a seal nobody here seems willing to name.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "controlled",
+      "keyGuarantees": [
+        "safety label starts \"controlled\"; stop: safety label",
+        "rendered only when the record's primary stress has no STRESS_DESCS vignette (src/generators/narrative/arrivalScene.js:215,226,259,292): every record crisis kind has one, so this beat is silent under a record crisis and renders under calm, a custom DM crisis type, or a world pulse stressor the scene never reads"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Not opted: asserts a danger, not calm.",
+      "lines": [
+        {
+          "lineId": "ARRIVAL_TENSIONS.controlled[0]",
+          "text": "Armed men stand where the lanes meet, and conversations stop when they pass.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "armed men (soldiers/watch not guaranteed)"
+          ]
+        },
+        {
+          "lineId": "ARRIVAL_TENSIONS.controlled[1]",
+          "text": "A proclamation is read aloud to a silent crowd, and nobody moves until it is finished.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_TENSIONS.controlled[2]",
+          "text": "People here keep their eyes down and their voices lower.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_TENSIONS.controlled[3]",
+          "text": "Papers are checked at the edge of the settlement, and checked again further in.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "unsafe",
+      "keyGuarantees": [
+        "safety label starts \"unsafe\" or \"dangerous\"; stop: safety label",
+        "rendered only when the record's primary stress has no STRESS_DESCS vignette (src/generators/narrative/arrivalScene.js:215,226,259,292): every record crisis kind has one, so this beat is silent under a record crisis and renders under calm, a custom DM crisis type, or a world pulse stressor the scene never reads"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Not opted: asserts a danger, not calm.",
+      "lines": [
+        {
+          "lineId": "ARRIVAL_TENSIONS.unsafe[0]",
+          "text": "Doors are barred early here, and nobody lingers outside after dark.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_TENSIONS.unsafe[1]",
+          "text": "People keep their purses close and their eyes on strangers.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_TENSIONS.unsafe[2]",
+          "text": "Every shutter has a stout bar, and every bar looks used.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_TENSIONS.unsafe[3]",
+          "text": "People walk quickly and do not stop to talk to strangers.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "poor",
+      "keyGuarantees": [
+        "no danger label, no memory pool, prosperity subsistence | struggling | poor; stop: prosperity",
+        "rendered only when the record's primary stress has no STRESS_DESCS vignette (src/generators/narrative/arrivalScene.js:215,226,259,292): every record crisis kind has one, so this beat is silent under a record crisis and renders under calm, a custom DM crisis type, or a world pulse stressor the scene never reads"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Not opted: poverty is sayable beside any crisis.",
+      "lines": [
+        {
+          "lineId": "ARRIVAL_TENSIONS.poor[0]",
+          "text": "Patched roofs and patched clothes say money is short here.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_TENSIONS.poor[1]",
+          "text": "People mend what they have rather than buy anything new.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_TENSIONS.poor[2]",
+          "text": "Children in outgrown clothes run errands for a copper.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_TENSIONS.poor[3]",
+          "text": "The goods on offer are mostly second-hand, and even those go slowly.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "prosperous",
+      "keyGuarantees": [
+        "no danger label, no memory pool, prosperity prosperous | wealthy; stop: prosperity",
+        "rendered only when the record's primary stress has no STRESS_DESCS vignette (src/generators/narrative/arrivalScene.js:215,226,259,292): every record crisis kind has one, so this beat is silent under a record crisis and renders under calm, a custom DM crisis type, or a world pulse stressor the scene never reads"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Opted: asserts plenty (\"nobody looks hungry\", \"well-fed\") that the hunger family and a food deficit deny. There is no \"Secure\" safety pool to opt: a safe label falls through to memory or prosperity.",
+      "lines": [
+        {
+          "lineId": "ARRIVAL_TENSIONS.prosperous[0]",
+          "text": "Fresh paint and well-kept roofs say the place is doing well.",
+          "needs": [],
+          "excludes": [
+            "deficit",
+            "crisis: hunger"
+          ],
+          "crisis": "any",
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_TENSIONS.prosperous[1]",
+          "text": "Well-fed children run errands through a busy street.",
+          "needs": [],
+          "excludes": [
+            "deficit",
+            "crisis: hunger"
+          ],
+          "crisis": "any",
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_TENSIONS.prosperous[2]",
+          "text": "Even the outbuildings have new roofs, and nobody looks hungry.",
+          "needs": [],
+          "excludes": [
+            "deficit",
+            "crisis: hunger"
+          ],
+          "crisis": "any",
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_TENSIONS.prosperous[3]",
+          "text": "A merchant shows off a new cloak, and several neighbours make a point of noticing.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        }
+      ]
+    }
+  ]
+}

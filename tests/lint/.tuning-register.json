@@ -198,6 +198,63 @@
         "DENSITY_CEILINGS"
       ],
       "note": "LANDING-7 ruling R-E8 (2026-11-06): the lit demographic density ceiling by tier, D_tier. Unsuffixed, so the _TUNING glob cannot see it; the demographic roster (DEMOGRAPHIC_TUNING_COVERAGE) already names it."
+    },
+    {
+      "kind": "tables",
+      "file": "src/domain/coherence/crisisFactFindings.js",
+      "exports": [
+        "FAMINE_STORES_HELD_MONTHS"
+      ],
+      "note": "RUNG2-F13 (57004aee2): the famine-stores check’s months threshold, one module scalar indexed by roster; it mirrors foodBalance.js#FAMINE_HELD_STORE_MONTHS. Registered by the chair’s ruling of 2026-11-07, ODQ §934.105 (B): POPULATION_GREW answered number by number, the ceiling 535 held (LANDING-R2 seat I)."
+    },
+    {
+      "kind": "tables",
+      "file": "src/generators/economy/foodBalance.js",
+      "exports": [
+        "FAMINE_HELD_STORE_MONTHS"
+      ],
+      "note": "RUNG2-F13 unit 1 (f3131e917): the months a famine’s granary may hold before the food record says the stores are held back, one exported scalar indexed by roster. Registered by the chair’s ruling of 2026-11-07, ODQ §934.105 (B): POPULATION_GREW answered number by number, the ceiling 535 held (LANDING-R2 seat I)."
+    },
+    {
+      "kind": "tables",
+      "file": "src/generators/foodGenerator.js",
+      "exports": [
+        "FAMINE_MONTHS_RUN",
+        "FAMINE_DRAWDOWN"
+      ],
+      "note": "RUNG2-F13 units 1 and 1b (f3131e917, ad47f711c): the famine’s months of drawdown and the four drawdown terms it is drawn by, the generation-side mirror of foodStockpile.js#STOCKPILE_TUNING. Registered by the chair’s ruling of 2026-11-07, ODQ §934.105 (B): POPULATION_GREW answered number by number, the ceiling 535 held (LANDING-R2 seat I)."
+    },
+    {
+      "kind": "tables",
+      "file": "src/domain/summary/tonightSheet.js",
+      "exports": [
+        "WANT_MAX_WORDS"
+      ],
+      "note": "Reader R11 unit 1 (6ea19cfc0): the voiceable register’s word limit on a want, one exported scalar indexed by roster. Registered by the chair’s ruling of 2026-11-07, ODQ §934.105 (B): POPULATION_GREW answered number by number, the ceiling 535 held (LANDING-R2 seat I)."
+    },
+    {
+      "kind": "tables",
+      "file": "src/generators/power/stressFactions.js",
+      "exports": [
+        "MIGRATION_GOVERNING_DAMP"
+      ],
+      "note": "RUNG2-F13 unit 2 (f7127dd20): the migration arms’ damp on the governing faction’s power, one module scalar indexed by roster. Named by the chair’s ruling (ii) of 2026-11-07 07:0x UTC, ODQ §934.105 (B): the three bare decimals named in src, DECLARED_GROWTH_CEILING held at 6 (LANDING-R2 seat I)."
+    },
+    {
+      "kind": "tables",
+      "file": "src/generators/foodGenerator.js",
+      "exports": [
+        "SMALLEST_ONE_DECIMAL_MONTHS"
+      ],
+      "note": "STRUCTURAL, indexed not a dial. RUNG2-F13 unit 1b (ad47f711c): the smallest value the one-decimal rounding prints. Named by the chair’s ruling (ii) of 2026-11-07 07:0x UTC, ODQ §934.105 (B): the three bare decimals named in src, DECLARED_GROWTH_CEILING held at 6 (LANDING-R2 seat I)."
+    },
+    {
+      "kind": "tables",
+      "file": "src/domain/coherence/crisisFactFindings.js",
+      "exports": [
+        "FEW_WEEKS_AS_MONTHS"
+      ],
+      "note": "STRUCTURAL, indexed not a dial. RUNG2-F13 (57004aee2): the months ‘a few weeks’ reads back as. Named by the chair’s ruling (ii) of 2026-11-07 07:0x UTC, ODQ §934.105 (B): the three bare decimals named in src, DECLARED_GROWTH_CEILING held at 6 (LANDING-R2 seat I)."
     }
   ],
   "moduleSide": [
@@ -2653,6 +2710,85 @@
       },
       "band": null,
       "note": "X-46 car 3 (d224a5a0): seven [population, expected houses] anchors, log-linear between them; the metropolis anchor 120 -> 93 by the chair’s ruling of 2026-11-04 (rung-1 pins unit 3). Its module header already called it registered; declared here at the rung-1 landing (LANDING-1 door 3)."
+    },
+    "src/domain/coherence/crisisFactFindings.js#FAMINE_STORES_HELD_MONTHS": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "value": "count"
+      },
+      "band": null,
+      "note": "DIAL (a threshold). RUNG2-F13 (57004aee2, the crisis-fact battery): famineStoresFindings reports a famine’s stores line printing this many months or more unless the line says the stores are held. Unit: a count of MONTHS (the closed vocabulary carries no month word). It mirrors foodBalance.js#FAMINE_HELD_STORE_MONTHS (both 6): the check reads the writer’s cut. DRAFT — registering is not signing; the value is the one shipping today and this row moves nothing. Registered by the chair’s ruling of 2026-11-07, ODQ §934.105 (B): POPULATION_GREW answered number by number, the ceiling 535 held (LANDING-R2 seat I); the owner’s sitting signs or vetoes it."
+    },
+    "src/generators/economy/foodBalance.js#FAMINE_HELD_STORE_MONTHS": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "value": "count"
+      },
+      "band": null,
+      "note": "DIAL (a threshold). RUNG2-F13 unit 1 (f3131e917): an active famine beside a granary whose rounded storageMonths reach this many sets the food record’s storesHeld (the stores are kept back, not given out). Unit: a count of MONTHS (the closed vocabulary carries no month word). DRAFT — registering is not signing; the value is the one shipping today and this row moves nothing. Registered by the chair’s ruling of 2026-11-07, ODQ §934.105 (B): POPULATION_GREW answered number by number, the ceiling 535 held (LANDING-R2 seat I); the owner’s sitting signs or vetoes it."
+    },
+    "src/generators/foodGenerator.js#FAMINE_MONTHS_RUN": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "value": "count"
+      },
+      "band": null,
+      "note": "DIAL (a duration). RUNG2-F13 unit 1 (f3131e917): the months a famine has drawn on the stores (\"its second failed harvest season\": a year since the first failure), the months famineStoresLeft draws over. Unit: a count of MONTHS (the closed vocabulary carries no month word). DRAFT — registering is not signing; the value is the one shipping today and this row moves nothing. Registered by the chair’s ruling of 2026-11-07, ODQ §934.105 (B): POPULATION_GREW answered number by number, the ceiling 535 held (LANDING-R2 seat I); the owner’s sitting signs or vetoes it."
+    },
+    "src/generators/foodGenerator.js#FAMINE_DRAWDOWN": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "rationFloorPct": "points",
+        "maxReleaseFraction": "fraction01",
+        "reserveTitheDeficitCap": "points",
+        "reserveTitheFloorMonths": "count"
+      },
+      "band": null,
+      "note": "DIAL (the drawdown terms). RUNG2-F13 unit 1b (ad47f711c): the world pulse’s monthly drawdown rule, copied beside the generation writer so the bundle loads no pulse graph; each term mirrors foodStockpile.js#STOCKPILE_TUNING (5, 0.5, 25, 1) and is pinned equal by tests/domain/crisisFactFindings.test.js. rationFloorPct and reserveTitheDeficitCap in percentage points of the daily need; maxReleaseFraction a fraction of what may be released; reserveTitheFloorMonths a count of months. The new counted number was maxReleaseFraction 0.5, a bare decimal until this row. DRAFT — registering is not signing; the value is the one shipping today and this row moves nothing. Registered by the chair’s ruling of 2026-11-07, ODQ §934.105 (B): POPULATION_GREW answered number by number, the ceiling 535 held (LANDING-R2 seat I); the owner’s sitting signs or vetoes it."
+    },
+    "src/domain/summary/tonightSheet.js#WANT_MAX_WORDS": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "value": "count"
+      },
+      "band": null,
+      "note": "DIAL (a threshold). Reader R11 unit 1 (6ea19cfc0, the chair’s ruling 2026-11-04): a want longer than this many words is not voiceable after \"Wants to\" (abstract-register). Unit: a count of words. DRAFT — registering is not signing; the value is the one shipping today and this row moves nothing. Registered by the chair’s ruling of 2026-11-07, ODQ §934.105 (B): POPULATION_GREW answered number by number, the ceiling 535 held (LANDING-R2 seat I); the owner’s sitting signs or vetoes it."
+    },
+    "src/generators/power/stressFactions.js#MIGRATION_GOVERNING_DAMP": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "value": "multiplier"
+      },
+      "band": null,
+      "note": "DIAL (a weight). RUNG2-F13 unit 2 (f7127dd20, MIGRATION-DIRECTION): the governing faction’s power is multiplied by this in both migration arms (exodus and influx: one dial, read at both; the influx arm’s bare copy that could drift is deleted). The craft/guild and the revolt arms’ own ×0.85 are different dials and stay bare. DRAFT — registering is not signing; the value is the one shipping today and this row moves nothing. Named and registered by the chair’s ruling (ii) of 2026-11-07 07:0x UTC, ODQ §934.105 (B): the three bare decimals named in src, DECLARED_GROWTH_CEILING held at 6 (LANDING-R2 seat I); the owner’s sitting signs or vetoes it."
+    },
+    "src/generators/foodGenerator.js#SMALLEST_ONE_DECIMAL_MONTHS": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": "STRUCTURAL — an INDEX, not a dial, and so it carries no unit and can never be signed. RUNG2-F13 unit 1b (ad47f711c): a famine’s printed stores are floored at the smallest value the one-decimal rounding beside it prints, so a drawn granary never prints zero months; the value follows from the rounding. Named by the chair’s ruling (ii) of 2026-11-07 07:0x UTC, ODQ §934.105 (B): the three bare decimals named in src, DECLARED_GROWTH_CEILING held at 6 (LANDING-R2 seat I)."
+    },
+    "src/domain/coherence/crisisFactFindings.js#FEW_WEEKS_AS_MONTHS": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": "STRUCTURAL — an INDEX, not a dial, and so it carries no unit and can never be signed. RUNG2-F13 (57004aee2, the crisis-fact battery): monthsOfWord reads the stores sentence’s own phrase ‘a few weeks’ back as this many months, the inverse of the writer’s wording. Named by the chair’s ruling (ii) of 2026-11-07 07:0x UTC, ODQ §934.105 (B): the three bare decimals named in src, DECLARED_GROWTH_CEILING held at 6 (LANDING-R2 seat I)."
     }
   },
   "roles": {

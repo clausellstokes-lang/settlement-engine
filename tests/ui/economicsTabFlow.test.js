@@ -21,6 +21,8 @@ import { EconomicsTab } from '../../src/components/new/tabs/EconomicsTab.jsx';
 import { pricesMoved } from '../../src/components/new/tabs/MarketPricesSection.jsx';
 import { expectAbsentWithAnchor, expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
 import { drawnMembers } from '../helpers/drawnProse.js';
+import { crisisDimensionsOf } from '../../src/domain/crisis/crisisFacts.js';
+import { factsOf } from '../../src/domain/facts/factsOf.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { useStore } from '../../src/store/index.js';
 
@@ -180,7 +182,15 @@ const ECO_SLOTS = Object.freeze({ settlement: 'Forge Town', access: 'road' });
 const { HEADER_SENTENCE, FOOD_SENTENCE } = drawnMembers({
   HEADER_SENTENCE: { blockId: 'DS-ECO-1', poolKey: 'COMBINATION C3: the middle rungs' },
   FOOD_SENTENCE: { blockId: 'DS-ECO-9', poolKey: 'DEFICIT' },
-}, { leaf: 'economy', seed: SPEAKING._seed, slots: ECO_SLOTS });
+  // F12 CRISIS-BLIND (2026-11-04): DS-ECO-1 partitions by the crisis dimensions, which the desk
+  // answers at its entry from the stress record; this town carries none, so the spec answers the same.
+  // CENSUS-3c unit 4 (e3295d168): DS-ECO-1's pools now declare fact atoms (and C3 is crisis-scoped),
+  // which the kernel reads against `facts` fail-closed — so the spec hands in `factsOf(SPEAKING)`,
+  // exactly what the desk hands in at its entry (`economyStateProse.js` → `factsAnswered`).
+}, {
+  leaf: 'economy', seed: SPEAKING._seed, slots: ECO_SLOTS,
+  dimensions: crisisDimensionsOf(SPEAKING), facts: factsOf(SPEAKING),
+});
 
 describe('THE PUBLIC GATE — the economy desk stays silent on a public dossier', () => {
   test('a PUBLIC dossier draws ZERO state-prose sentences, and the SAME town drawn non-public draws BOTH', () => {
@@ -571,7 +581,14 @@ const GROUND_LINES = Object.freeze(drawnMembers({
   catalog: { blockId: 'DS-SUP-3', poolKey: 'THE HEALING GAP' },
   posture: { blockId: 'DS-ECO-10', poolKey: 'POSTURE: established' },
   standing: { blockId: 'DS-ECO-8', poolKey: 'COMFORTABLE' },
-}, { leaf: 'economy', seed: '', slots: GROUND_SLOTS }));
+  // CENSUS-3c unit 4 (e3295d168): the economy pools now declare fact atoms and crisis marks (DS-ECO-10's
+  // `no hunger`), which the kernel reads fail-closed — so the spec answers both exactly as the desk
+  // does at its entry (`economyStateProse.js` → `factsAnswered(crisisAnswered(...))`): the crisis
+  // dimensions from the stress record (this town carries none) and `factsOf(GROUND)`.
+}, {
+  leaf: 'economy', seed: '', slots: GROUND_SLOTS,
+  dimensions: crisisDimensionsOf(GROUND), facts: factsOf(GROUND),
+}));
 
 /**
  * ⭐ THE ANCHOR AS THE PAGE PRINTS IT (the block weave, 2026-09-18). Every `DeskLines` position

@@ -1,0 +1,176 @@
+{
+  "poolId": "DOSSIER_CONNECTIVES",
+  "source": "src/data/dossierConnectives.generated.js (projected from docs/content/RECEIPT_POOLS_DOSSIER_STATE.md §7b)",
+  "drawKind": "H",
+  "drawSite": "composeStateProse.js:725 joint draw — list[hashKey(seed::blockId::spineKey::joint::modifierKey) % list.length]",
+  "pools": [
+    {
+      "pool": "consequence.clause",
+      "keyGuarantees": [
+        "the composer joined a modifier to its spine under relation 'consequence' at the clause seat (composeStateProse.js joint draw, hash % list length)",
+        "Currently dark: no shipped pool declares role: modifier, so no joint is drawn on any town."
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour: a consequence connective is pure joinery between two already-declared sentences and asserts no fact, crisis or calm of its own.",
+      "lines": [
+        {
+          "lineId": "DOSSIER_CONNECTIVES.consequence.clause[0]",
+          "text": ", so",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "DOSSIER_CONNECTIVES.consequence.clause[1]",
+          "text": ", and so",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "DOSSIER_CONNECTIVES.consequence.clause[2]",
+          "text": ", leaving",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "tension.sentence",
+      "keyGuarantees": [
+        "the composer joined a modifier to its spine under relation 'tension' at the sentence seat (composeStateProse.js joint draw, hash % list length)",
+        "Currently dark: no shipped pool declares role: modifier, so no joint is drawn on any town."
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour: a tension connective is pure joinery between two already-declared sentences and asserts no fact, crisis or calm of its own.",
+      "lines": [
+        {
+          "lineId": "DOSSIER_CONNECTIVES.tension.sentence[0]",
+          "text": "Against that,",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "DOSSIER_CONNECTIVES.tension.sentence[1]",
+          "text": "Even so,",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "DOSSIER_CONNECTIVES.tension.sentence[2]",
+          "text": "At the same time,",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "contrast.sentence",
+      "keyGuarantees": [
+        "the composer joined a modifier to its spine under relation 'contrast' at the sentence seat (composeStateProse.js joint draw, hash % list length)",
+        "Currently dark: no shipped pool declares role: modifier, so no joint is drawn on any town."
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour: a contrast connective is pure joinery between two already-declared sentences and asserts no fact, crisis or calm of its own.",
+      "lines": [
+        {
+          "lineId": "DOSSIER_CONNECTIVES.contrast.sentence[0]",
+          "text": "",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "DOSSIER_CONNECTIVES.contrast.sentence[1]",
+          "text": "Instead,",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "DOSSIER_CONNECTIVES.contrast.sentence[2]",
+          "text": "In its place,",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "addition.sentence",
+      "keyGuarantees": [
+        "the composer joined a modifier to its spine under relation 'addition' at the sentence seat (composeStateProse.js joint draw, hash % list length)",
+        "Currently dark: no shipped pool declares role: modifier, so no joint is drawn on any town."
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour: a addition connective is pure joinery between two already-declared sentences and asserts no fact, crisis or calm of its own.",
+      "lines": [
+        {
+          "lineId": "DOSSIER_CONNECTIVES.addition.sentence[0]",
+          "text": "",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "DOSSIER_CONNECTIVES.addition.sentence[1]",
+          "text": "Beside that,",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "DOSSIER_CONNECTIVES.addition.sentence[2]",
+          "text": "Also,",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        }
+      ]
+    }
+  ]
+}

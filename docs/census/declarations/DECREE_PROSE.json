@@ -1,0 +1,1731 @@
+{
+  "poolId": "DECREE_PROSE",
+  "source": "src/domain/display/stateProse/decreeProsePools.js (DECREE_PROSE_BLOCKS addresses DECREE_EVENT/FOLLOWS_FROM/FORM/HAND/OVERRIDE/PARTY_DEED/STANDING; the named exports and the blocks map are the SAME pools, counted once here)",
+  "drawKind": "K",
+  "drawSite": "decreeProse.js:230 drawPart → causes filter → eligibleVariants → drawVariant (DEC-EVENT / DEC-PARTY drawn in src/domain/edit/eventCatalogue.js and spliced via splicedPart)",
+  "pools": [
+    {
+      "pool": "DEC-EVENT: Economy",
+      "keyGuarantees": [
+        "the decree schedules a typed settlement event of VERB_FAMILIES family 'Economy' for a coming turn (spliced from eventCatalogue.js)",
+        "Renders only in a DM-authored decree chronicle line (decreeChronicleLine), filtered by causes ⊇ line cause; drawn by eligibleVariants + drawVariant keyed on block::pool::seed::entryId."
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Not opted in: no line asserts calm or plenty; vid 54 presumes a market (declared), vids 52 and 53 stay drawable on every birth, so no twin.",
+      "lines": [
+        {
+          "lineId": "vid:52",
+          "text": "What was set down for the coming turn falls on the town's trade and its keeping.",
+          "causes": [
+            "party",
+            "table"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:53",
+          "text": "The order names a change in what the town makes, holds and sells, due when the turn comes round.",
+          "causes": [
+            "party",
+            "table"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:54",
+          "text": "Something in the market's arrangement is already spoken for, and waits only on the day.",
+          "causes": [
+            "party",
+            "table"
+          ],
+          "needs": [
+            "market"
+          ],
+          "excludes": [],
+          "crisis": "any",
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "DEC-EVENT: Faith",
+      "keyGuarantees": [
+        "the decree schedules a typed settlement event of VERB_FAMILIES family 'Faith' for a coming turn (spliced from eventCatalogue.js)",
+        "Renders only in a DM-authored decree chronicle line (decreeChronicleLine), filtered by causes ⊇ line cause; drawn by eligibleVariants + drawVariant keyed on block::pool::seed::entryId."
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour: the lines say only that a Faith-family event is scheduled, which the key guarantees; nothing presumes calm or a settlement fact.",
+      "lines": [
+        {
+          "lineId": "vid:55",
+          "text": "What was set down for the coming turn falls on what the town keeps faith with.",
+          "causes": [
+            "party",
+            "table"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:56",
+          "text": "The order names a change in the town's observances, due when the turn comes round.",
+          "causes": [
+            "party",
+            "table"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:57",
+          "text": "What is honoured here is already spoken for, and waits only on the day.",
+          "causes": [
+            "party",
+            "table"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "DEC-EVENT: People",
+      "keyGuarantees": [
+        "the decree schedules a typed settlement event of VERB_FAMILIES family 'People' for a coming turn (spliced from eventCatalogue.js)",
+        "Renders only in a DM-authored decree chronicle line (decreeChronicleLine), filtered by causes ⊇ line cause; drawn by eligibleVariants + drawVariant keyed on block::pool::seed::entryId."
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour: the lines say only that a People-family event is scheduled, which the key guarantees; nothing presumes calm or a settlement fact.",
+      "lines": [
+        {
+          "lineId": "vid:58",
+          "text": "What was set down for the coming turn falls on the people who live here by name.",
+          "causes": [
+            "party",
+            "table"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:59",
+          "text": "The order names a change among the town's own folk, due when the turn comes round.",
+          "causes": [
+            "party",
+            "table"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:60",
+          "text": "A life here is already spoken for, and waits only on the day.",
+          "causes": [
+            "party",
+            "table"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "DEC-EVENT: Power",
+      "keyGuarantees": [
+        "the decree schedules a typed settlement event of VERB_FAMILIES family 'Power' for a coming turn (spliced from eventCatalogue.js)",
+        "Renders only in a DM-authored decree chronicle line (decreeChronicleLine), filtered by causes ⊇ line cause; drawn by eligibleVariants + drawVariant keyed on block::pool::seed::entryId."
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour: the lines say only that a Power-family event is scheduled, which the key guarantees; nothing presumes calm or a settlement fact.",
+      "lines": [
+        {
+          "lineId": "vid:61",
+          "text": "What was set down for the coming turn falls on who holds authority here.",
+          "causes": [
+            "party",
+            "table"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:62",
+          "text": "The order names a change in who answers for the town, due when the turn comes round.",
+          "causes": [
+            "party",
+            "table"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:63",
+          "text": "Who speaks for this place is already spoken for, and waits only on the day.",
+          "causes": [
+            "party",
+            "table"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "DEC-EVENT: Realm",
+      "keyGuarantees": [
+        "the decree schedules a typed settlement event of VERB_FAMILIES family 'Realm' for a coming turn (spliced from eventCatalogue.js)",
+        "Renders only in a DM-authored decree chronicle line (decreeChronicleLine), filtered by causes ⊇ line cause; drawn by eligibleVariants + drawVariant keyed on block::pool::seed::entryId."
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour: the lines say only that a Realm-family event is scheduled, which the key guarantees; nothing presumes calm or a settlement fact.",
+      "lines": [
+        {
+          "lineId": "vid:64",
+          "text": "What was set down for the coming turn falls on the town's whole standing in the wider realm.",
+          "causes": [
+            "party",
+            "table"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:65",
+          "text": "The order names a change to what {settlement} itself is, due when the turn comes round.",
+          "causes": [
+            "party",
+            "table"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:66",
+          "text": "The town's own place in the world is already spoken for, and waits only on the day.",
+          "causes": [
+            "party",
+            "table"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "DEC-EVENT: Relations",
+      "keyGuarantees": [
+        "the decree schedules a typed settlement event of VERB_FAMILIES family 'Relations' for a coming turn (spliced from eventCatalogue.js)",
+        "Renders only in a DM-authored decree chronicle line (decreeChronicleLine), filtered by causes ⊇ line cause; drawn by eligibleVariants + drawVariant keyed on block::pool::seed::entryId."
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour: the lines say only that a Relations-family event is scheduled, which the key guarantees; nothing presumes calm or a settlement fact.",
+      "lines": [
+        {
+          "lineId": "vid:67",
+          "text": "What was set down for the coming turn falls on the town's dealings with its neighbours.",
+          "causes": [
+            "party",
+            "table"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:68",
+          "text": "The order names a change between the town and those it lives beside, due when the turn comes round.",
+          "causes": [
+            "party",
+            "table"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:69",
+          "text": "How the town stands with its neighbours is already spoken for, and waits only on the day.",
+          "causes": [
+            "party",
+            "table"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "DEC-EVENT: War",
+      "keyGuarantees": [
+        "the decree schedules a typed settlement event of VERB_FAMILIES family 'War' for a coming turn (spliced from eventCatalogue.js)",
+        "Renders only in a DM-authored decree chronicle line (decreeChronicleLine), filtered by causes ⊇ line cause; drawn by eligibleVariants + drawVariant keyed on block::pool::seed::entryId."
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour: the lines say only that a War-family event is scheduled, which the key guarantees; nothing presumes calm or a settlement fact.",
+      "lines": [
+        {
+          "lineId": "vid:70",
+          "text": "What was set down for the coming turn falls on the town as a trouble it must carry.",
+          "causes": [
+            "party",
+            "table"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:71",
+          "text": "The order names a hardship the town will meet, due when the turn comes round.",
+          "causes": [
+            "party",
+            "table"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:72",
+          "text": "A trouble is already spoken for, and waits only on the day.",
+          "causes": [
+            "party",
+            "table"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "DEC-FOLLOWS: *",
+      "keyGuarantees": [
+        "the decree's followsFrom resolves to at least one prerequisite entry with a chronicleRef (fills {prerequisite})",
+        "Renders only in a DM-authored decree chronicle line (decreeChronicleLine), filtered by causes ⊇ line cause; drawn by eligibleVariants + drawVariant keyed on block::pool::seed::entryId."
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour: the lines speak of the decree record itself (who moved it, how it stands, where it lands, what warning or prerequisite it carries), never of the settlement's condition, so no crisis or fact can contradict them.",
+      "lines": [
+        {
+          "lineId": "vid:49",
+          "text": "It follows from the decree recorded as {prerequisite}.",
+          "causes": [
+            "party",
+            "table"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:50",
+          "text": "Read it beside {prerequisite}, which came first and made room for it.",
+          "causes": [
+            "party",
+            "table"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:51",
+          "text": "It stands on {prerequisite}, and would not have stood alone.",
+          "causes": [
+            "party",
+            "table"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "DEC-FORM: home",
+      "keyGuarantees": [
+        "the decree's op lands 'home' (design §13: home ground / off-stage against a phantom / off-stage against a real save); off-stage keys guarantee a counterparty exists",
+        "Renders only in a DM-authored decree chronicle line (decreeChronicleLine), filtered by causes ⊇ line cause; drawn by eligibleVariants + drawVariant keyed on block::pool::seed::entryId."
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour: the lines speak of the decree record itself (who moved it, how it stands, where it lands, what warning or prerequisite it carries), never of the settlement's condition, so no crisis or fact can contradict them.",
+      "lines": [
+        {
+          "lineId": "vid:25",
+          "text": "The act falls on the town's own ground.",
+          "causes": [
+            "party",
+            "table"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:26",
+          "text": "Everything it touches is here, in {settlement}, where anyone can see it.",
+          "causes": [
+            "party",
+            "table"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:27",
+          "text": "It is the town's own business, and the town's own cost.",
+          "causes": [
+            "party",
+            "table"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "DEC-FORM: off-stage-phantom",
+      "keyGuarantees": [
+        "the decree's op lands 'off-stage-phantom' (design §13: home ground / off-stage against a phantom / off-stage against a real save); off-stage keys guarantee a counterparty exists",
+        "Renders only in a DM-authored decree chronicle line (decreeChronicleLine), filtered by causes ⊇ line cause; drawn by eligibleVariants + drawVariant keyed on block::pool::seed::entryId."
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Colour for crisis purposes: the lines speak of the off-stage act and the estate procedure; vid 28 presumes \"the town's roads\", recorded as a stop only.",
+      "lines": [
+        {
+          "lineId": "vid:28",
+          "text": "It reaches past the town's roads, overnight, by means the town does not understand.",
+          "causes": [
+            "party",
+            "table"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": false,
+          "stop": [
+            "roads / road network (no factsOf reader; trade-route kind is a STOP)"
+          ]
+        },
+        {
+          "lineId": "vid:29",
+          "text": "Whatever answers out there answers off the record; what returns is the town's own, and nothing else comes home.",
+          "causes": [
+            "party",
+            "table"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:30",
+          "text": "Against {counterpart} the town can only send and receive, and the rest is a story told here.",
+          "causes": [
+            "party",
+            "table"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "DEC-FORM: off-stage-real",
+      "keyGuarantees": [
+        "the decree's op lands 'off-stage-real' (design §13: home ground / off-stage against a phantom / off-stage against a real save); off-stage keys guarantee a counterparty exists",
+        "Renders only in a DM-authored decree chronicle line (decreeChronicleLine), filtered by causes ⊇ line cause; drawn by eligibleVariants + drawVariant keyed on block::pool::seed::entryId."
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour: the lines speak of the decree record itself (who moved it, how it stands, where it lands, what warning or prerequisite it carries), never of the settlement's condition, so no crisis or fact can contradict them.",
+      "lines": [
+        {
+          "lineId": "vid:31",
+          "text": "It crosses to a neighbour that answers for itself, and the answer will be its own.",
+          "causes": [
+            "party",
+            "table"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:32",
+          "text": "The far side of this is a place with its own record, and it will keep one.",
+          "causes": [
+            "party",
+            "table"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:33",
+          "text": "{counterpart} stands on the far side of it, and will act as it sees fit.",
+          "causes": [
+            "party",
+            "table"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "DEC-HAND: dm",
+      "keyGuarantees": [
+        "the decree entry's provenance addedBy = 'dm' (EM-C1 §6 author); a decree exists in the registry",
+        "Renders only in a DM-authored decree chronicle line (decreeChronicleLine), filtered by causes ⊇ line cause; drawn by eligibleVariants + drawVariant keyed on block::pool::seed::entryId."
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour: the lines speak of the decree record itself (who moved it, how it stands, where it lands, what warning or prerequisite it carries), never of the settlement's condition, so no crisis or fact can contradict them.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "It was set down by the table's hand.",
+          "causes": [
+            "table"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "The table wrote this one into the record itself.",
+          "causes": [
+            "table"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:3",
+          "text": "This came from the table, plainly and on purpose.",
+          "causes": [
+            "table"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:4",
+          "text": "It came by the party's hand, and the table only wrote it down.",
+          "causes": [
+            "party"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:5",
+          "text": "The party's hand moved first here, and the table kept the record.",
+          "causes": [
+            "party"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "DEC-HAND: guard",
+      "keyGuarantees": [
+        "the decree entry's provenance addedBy = 'guard' (EM-C1 §6 author); a decree exists in the registry",
+        "Renders only in a DM-authored decree chronicle line (decreeChronicleLine), filtered by causes ⊇ line cause; drawn by eligibleVariants + drawVariant keyed on block::pool::seed::entryId."
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour: the lines speak of the decree record itself (who moved it, how it stands, where it lands, what warning or prerequisite it carries), never of the settlement's condition, so no crisis or fact can contradict them.",
+      "lines": [
+        {
+          "lineId": "vid:6",
+          "text": "The register offered this one, and the table took the offer.",
+          "causes": [
+            "table"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:7",
+          "text": "It stands here because the register proposed it and nobody refused.",
+          "causes": [
+            "table"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:8",
+          "text": "The register raised it, and the table let it into the order.",
+          "causes": [
+            "table"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:9",
+          "text": "The register offered it, and the party's hand carried it through.",
+          "causes": [
+            "party"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:10",
+          "text": "It reached the order through the register, with the party acting on it.",
+          "causes": [
+            "party"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "DEC-HAND: surveyor",
+      "keyGuarantees": [
+        "the decree entry's provenance addedBy = 'surveyor' (EM-C1 §6 author); a decree exists in the registry",
+        "Renders only in a DM-authored decree chronicle line (decreeChronicleLine), filtered by causes ⊇ line cause; drawn by eligibleVariants + drawVariant keyed on block::pool::seed::entryId."
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour: the lines speak of the decree record itself (who moved it, how it stands, where it lands, what warning or prerequisite it carries), never of the settlement's condition, so no crisis or fact can contradict them.",
+      "lines": [
+        {
+          "lineId": "vid:11",
+          "text": "The Surveyor drew this one up, and the table let it stand.",
+          "causes": [
+            "table"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:12",
+          "text": "It arrived as a Surveyor's proposal, with its credit already spent.",
+          "causes": [
+            "table"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:13",
+          "text": "The Surveyor's hand is on this one, and the table kept it.",
+          "causes": [
+            "table"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:14",
+          "text": "The Surveyor drew it up, and the party's hand carried it out.",
+          "causes": [
+            "party"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:15",
+          "text": "It began as a Surveyor's proposal and ended in the party's hands.",
+          "causes": [
+            "party"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "DEC-OVERRIDE: connection",
+      "keyGuarantees": [
+        "the table proceeded past a guard of GUARD_KINDS kind 'connection' that the DM was shown",
+        "Renders only in a DM-authored decree chronicle line (decreeChronicleLine), filtered by causes ⊇ line cause; drawn by eligibleVariants + drawVariant keyed on block::pool::seed::entryId."
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour: the lines speak of the decree record itself (who moved it, how it stands, where it lands, what warning or prerequisite it carries), never of the settlement's condition, so no crisis or fact can contradict them.",
+      "lines": [
+        {
+          "lineId": "vid:34",
+          "text": "The register had asked for a connection to be made first, and the table went on without it.",
+          "causes": [
+            "party",
+            "table"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:35",
+          "text": "A connection the register wanted was never made, and the table proceeded anyway.",
+          "causes": [
+            "party",
+            "table"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:36",
+          "text": "The register named a missing connection; the table heard it and moved on.",
+          "causes": [
+            "party",
+            "table"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "DEC-OVERRIDE: contention",
+      "keyGuarantees": [
+        "the table proceeded past a guard of GUARD_KINDS kind 'contention' that the DM was shown",
+        "Renders only in a DM-authored decree chronicle line (decreeChronicleLine), filtered by causes ⊇ line cause; drawn by eligibleVariants + drawVariant keyed on block::pool::seed::entryId."
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour: the lines speak of the decree record itself (who moved it, how it stands, where it lands, what warning or prerequisite it carries), never of the settlement's condition, so no crisis or fact can contradict them.",
+      "lines": [
+        {
+          "lineId": "vid:37",
+          "text": "The register called it a contention with an earlier decree, and the table let this one stand.",
+          "causes": [
+            "party",
+            "table"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:38",
+          "text": "Two decrees were in contention over the same fact, and the table chose this one.",
+          "causes": [
+            "party",
+            "table"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:39",
+          "text": "The register raised the contention, and the table answered by proceeding.",
+          "causes": [
+            "party",
+            "table"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "DEC-OVERRIDE: contradiction",
+      "keyGuarantees": [
+        "the table proceeded past a guard of GUARD_KINDS kind 'contradiction' that the DM was shown",
+        "Renders only in a DM-authored decree chronicle line (decreeChronicleLine), filtered by causes ⊇ line cause; drawn by eligibleVariants + drawVariant keyed on block::pool::seed::entryId."
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour: the lines speak of the decree record itself (who moved it, how it stands, where it lands, what warning or prerequisite it carries), never of the settlement's condition, so no crisis or fact can contradict them.",
+      "lines": [
+        {
+          "lineId": "vid:40",
+          "text": "The register named the contradiction, and the table set the warning aside.",
+          "causes": [
+            "party",
+            "table"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:41",
+          "text": "A contradiction was on the page, and the table wrote past it.",
+          "causes": [
+            "party",
+            "table"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:42",
+          "text": "The register saw a contradiction here, and the table proceeded regardless.",
+          "causes": [
+            "party",
+            "table"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "DEC-OVERRIDE: prerequisite",
+      "keyGuarantees": [
+        "the table proceeded past a guard of GUARD_KINDS kind 'prerequisite' that the DM was shown",
+        "Renders only in a DM-authored decree chronicle line (decreeChronicleLine), filtered by causes ⊇ line cause; drawn by eligibleVariants + drawVariant keyed on block::pool::seed::entryId."
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour: the lines speak of the decree record itself (who moved it, how it stands, where it lands, what warning or prerequisite it carries), never of the settlement's condition, so no crisis or fact can contradict them.",
+      "lines": [
+        {
+          "lineId": "vid:43",
+          "text": "The register named a prerequisite still wanting, and the table did not wait for it.",
+          "causes": [
+            "party",
+            "table"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:44",
+          "text": "A prerequisite was missing, and the table proceeded without it.",
+          "causes": [
+            "party",
+            "table"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:45",
+          "text": "The register asked for a prerequisite first, and the table went ahead.",
+          "causes": [
+            "party",
+            "table"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "DEC-OVERRIDE: totality",
+      "keyGuarantees": [
+        "the table proceeded past a guard of GUARD_KINDS kind 'totality' that the DM was shown",
+        "Renders only in a DM-authored decree chronicle line (decreeChronicleLine), filtered by causes ⊇ line cause; drawn by eligibleVariants + drawVariant keyed on block::pool::seed::entryId."
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour: the lines speak of the decree record itself (who moved it, how it stands, where it lands, what warning or prerequisite it carries), never of the settlement's condition, so no crisis or fact can contradict them.",
+      "lines": [
+        {
+          "lineId": "vid:46",
+          "text": "The register warned that the totality would not balance, and the table let it ride.",
+          "causes": [
+            "party",
+            "table"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:47",
+          "text": "A totality the register keeps was left short, and the table proceeded.",
+          "causes": [
+            "party",
+            "table"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:48",
+          "text": "The register raised the totality, and the table accepted the imbalance.",
+          "causes": [
+            "party",
+            "table"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "DEC-PARTY: bolster_faction",
+      "keyGuarantees": [
+        "cause = 'party' and the PARTY_IMPACT_KINDS kind is 'bolster_faction' (the deed and its object — faction, npc, relationship, stressor, condition, attacker — exist by the key)",
+        "Renders only in a DM-authored decree chronicle line (decreeChronicleLine), filtered by causes ⊇ line cause; drawn by eligibleVariants + drawVariant keyed on block::pool::seed::entryId."
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour: the lines name the party's bolster_faction deed the key guarantees and assert nothing of the town's calm, plenty or safety, so no crisis contradicts them.",
+      "lines": [
+        {
+          "lineId": "vid:73",
+          "text": "A faction's standing here was raised by the party's hand.",
+          "causes": [
+            "party"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:74",
+          "text": "One of the town's factions walks taller since the party took its side.",
+          "causes": [
+            "party"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "DEC-PARTY: broker_relationship",
+      "keyGuarantees": [
+        "cause = 'party' and the PARTY_IMPACT_KINDS kind is 'broker_relationship' (the deed and its object — faction, npc, relationship, stressor, condition, attacker — exist by the key)",
+        "Renders only in a DM-authored decree chronicle line (decreeChronicleLine), filtered by causes ⊇ line cause; drawn by eligibleVariants + drawVariant keyed on block::pool::seed::entryId."
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour: the lines name the party's broker_relationship deed the key guarantees and assert nothing of the town's calm, plenty or safety, so no crisis contradicts them.",
+      "lines": [
+        {
+          "lineId": "vid:75",
+          "text": "The quarrel between the two places was cooled by the party's hand.",
+          "causes": [
+            "party"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:76",
+          "text": "The party stood between the two of them until the shouting stopped.",
+          "causes": [
+            "party"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "DEC-PARTY: clear_condition",
+      "keyGuarantees": [
+        "cause = 'party' and the PARTY_IMPACT_KINDS kind is 'clear_condition' (the deed and its object — faction, npc, relationship, stressor, condition, attacker — exist by the key)",
+        "Renders only in a DM-authored decree chronicle line (decreeChronicleLine), filtered by causes ⊇ line cause; drawn by eligibleVariants + drawVariant keyed on block::pool::seed::entryId."
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour: the lines name the party's clear_condition deed the key guarantees and assert nothing of the town's calm, plenty or safety, so no crisis contradicts them.",
+      "lines": [
+        {
+          "lineId": "vid:77",
+          "text": "What the town had been living under was lifted by the party's hand.",
+          "causes": [
+            "party"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:78",
+          "text": "The thing everyone had learned to live with is simply gone, and the party saw to it.",
+          "causes": [
+            "party"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "DEC-PARTY: ease_stressor",
+      "keyGuarantees": [
+        "cause = 'party' and the PARTY_IMPACT_KINDS kind is 'ease_stressor' (the deed and its object — faction, npc, relationship, stressor, condition, attacker — exist by the key)",
+        "Renders only in a DM-authored decree chronicle line (decreeChronicleLine), filtered by causes ⊇ line cause; drawn by eligibleVariants + drawVariant keyed on block::pool::seed::entryId."
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour: the lines name the party's ease_stressor deed the key guarantees and assert nothing of the town's calm, plenty or safety, so no crisis contradicts them.",
+      "lines": [
+        {
+          "lineId": "vid:79",
+          "text": "The trouble was blunted, though not ended, by the party's hand.",
+          "causes": [
+            "party"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:80",
+          "text": "The worst of it was pulled back a little; the thing itself is still here.",
+          "causes": [
+            "party"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "DEC-PARTY: empower_npc",
+      "keyGuarantees": [
+        "cause = 'party' and the PARTY_IMPACT_KINDS kind is 'empower_npc' (the deed and its object — faction, npc, relationship, stressor, condition, attacker — exist by the key)",
+        "Renders only in a DM-authored decree chronicle line (decreeChronicleLine), filtered by causes ⊇ line cause; drawn by eligibleVariants + drawVariant keyed on block::pool::seed::entryId."
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour: the lines name the party's empower_npc deed the key guarantees and assert nothing of the town's calm, plenty or safety, so no crisis contradicts them.",
+      "lines": [
+        {
+          "lineId": "vid:81",
+          "text": "A person's position in the town was advanced by the party's hand.",
+          "causes": [
+            "party"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:82",
+          "text": "Somebody here stands further along than they did, and the party carried them.",
+          "causes": [
+            "party"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "DEC-PARTY: impose_condition",
+      "keyGuarantees": [
+        "cause = 'party' and the PARTY_IMPACT_KINDS kind is 'impose_condition' (the deed and its object — faction, npc, relationship, stressor, condition, attacker — exist by the key)",
+        "Renders only in a DM-authored decree chronicle line (decreeChronicleLine), filtered by causes ⊇ line cause; drawn by eligibleVariants + drawVariant keyed on block::pool::seed::entryId."
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour: the lines name the party's impose_condition deed the key guarantees and assert nothing of the town's calm, plenty or safety, so no crisis contradicts them.",
+      "lines": [
+        {
+          "lineId": "vid:83",
+          "text": "Something new settled on the town by the party's hand.",
+          "causes": [
+            "party"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:84",
+          "text": "The town is living under something it was not living under before, and it arrived with the party.",
+          "causes": [
+            "party"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "DEC-PARTY: inflame_relationship",
+      "keyGuarantees": [
+        "cause = 'party' and the PARTY_IMPACT_KINDS kind is 'inflame_relationship' (the deed and its object — faction, npc, relationship, stressor, condition, attacker — exist by the key)",
+        "Renders only in a DM-authored decree chronicle line (decreeChronicleLine), filtered by causes ⊇ line cause; drawn by eligibleVariants + drawVariant keyed on block::pool::seed::entryId."
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour: the lines name the party's inflame_relationship deed the key guarantees and assert nothing of the town's calm, plenty or safety, so no crisis contradicts them.",
+      "lines": [
+        {
+          "lineId": "vid:85",
+          "text": "The quarrel between the two places was sharpened by the party's hand.",
+          "causes": [
+            "party"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:86",
+          "text": "Whatever the party did out there, the two of them stand further apart for it.",
+          "causes": [
+            "party"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "DEC-PARTY: name_attacker",
+      "keyGuarantees": [
+        "cause = 'party' and the PARTY_IMPACT_KINDS kind is 'name_attacker' (the deed and its object — faction, npc, relationship, stressor, condition, attacker — exist by the key)",
+        "Renders only in a DM-authored decree chronicle line (decreeChronicleLine), filtered by causes ⊇ line cause; drawn by eligibleVariants + drawVariant keyed on block::pool::seed::entryId."
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour: the lines name the party's name_attacker deed the key guarantees and assert nothing of the town's calm, plenty or safety, so no crisis contradicts them.",
+      "lines": [
+        {
+          "lineId": "vid:87",
+          "text": "The force behind the trouble was named at last, by the party's hand.",
+          "causes": [
+            "party"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:88",
+          "text": "Somebody finally put a name to whoever is doing this, and the name came from the party.",
+          "causes": [
+            "party"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "DEC-PARTY: remove_npc",
+      "keyGuarantees": [
+        "cause = 'party' and the PARTY_IMPACT_KINDS kind is 'remove_npc' (the deed and its object — faction, npc, relationship, stressor, condition, attacker — exist by the key)",
+        "Renders only in a DM-authored decree chronicle line (decreeChronicleLine), filtered by causes ⊇ line cause; drawn by eligibleVariants + drawVariant keyed on block::pool::seed::entryId."
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour: the lines name the party's remove_npc deed the key guarantees and assert nothing of the town's calm, plenty or safety, so no crisis contradicts them.",
+      "lines": [
+        {
+          "lineId": "vid:89",
+          "text": "A person was taken out of the town's affairs altogether by the party's hand.",
+          "causes": [
+            "party"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:90",
+          "text": "One of the town's own is not in the reckoning any more, and the party is the reason.",
+          "causes": [
+            "party"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "DEC-PARTY: resolve_stressor",
+      "keyGuarantees": [
+        "cause = 'party' and the PARTY_IMPACT_KINDS kind is 'resolve_stressor' (the deed and its object — faction, npc, relationship, stressor, condition, attacker — exist by the key)",
+        "Renders only in a DM-authored decree chronicle line (decreeChronicleLine), filtered by causes ⊇ line cause; drawn by eligibleVariants + drawVariant keyed on block::pool::seed::entryId."
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour: the lines name the party's resolve_stressor deed the key guarantees and assert nothing of the town's calm, plenty or safety, so no crisis contradicts them.",
+      "lines": [
+        {
+          "lineId": "vid:91",
+          "text": "The trouble that had its grip on the town was ended by the party's hand.",
+          "causes": [
+            "party"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:92",
+          "text": "Whatever had been gnawing at the place, the party finished it, and the town knows whom to thank.",
+          "causes": [
+            "party"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "DEC-PARTY: undermine_faction",
+      "keyGuarantees": [
+        "cause = 'party' and the PARTY_IMPACT_KINDS kind is 'undermine_faction' (the deed and its object — faction, npc, relationship, stressor, condition, attacker — exist by the key)",
+        "Renders only in a DM-authored decree chronicle line (decreeChronicleLine), filtered by causes ⊇ line cause; drawn by eligibleVariants + drawVariant keyed on block::pool::seed::entryId."
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour: the lines name the party's undermine_faction deed the key guarantees and assert nothing of the town's calm, plenty or safety, so no crisis contradicts them.",
+      "lines": [
+        {
+          "lineId": "vid:93",
+          "text": "A faction's standing here was cut down by the party's hand.",
+          "causes": [
+            "party"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:94",
+          "text": "One of the town's factions lost ground, and the party is why.",
+          "causes": [
+            "party"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "DEC-PARTY: worsen_stressor",
+      "keyGuarantees": [
+        "cause = 'party' and the PARTY_IMPACT_KINDS kind is 'worsen_stressor' (the deed and its object — faction, npc, relationship, stressor, condition, attacker — exist by the key)",
+        "Renders only in a DM-authored decree chronicle line (decreeChronicleLine), filtered by causes ⊇ line cause; drawn by eligibleVariants + drawVariant keyed on block::pool::seed::entryId."
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour: the lines name the party's worsen_stressor deed the key guarantees and assert nothing of the town's calm, plenty or safety, so no crisis contradicts them.",
+      "lines": [
+        {
+          "lineId": "vid:95",
+          "text": "The trouble was deepened by the party's hand, whether or not that was the intent.",
+          "causes": [
+            "party"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:96",
+          "text": "What was bad got worse after the party passed through, and the town noticed.",
+          "causes": [
+            "party"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "DEC-STANDING: applied",
+      "keyGuarantees": [
+        "the decree entry's status = 'applied' (design §20.3)",
+        "Renders only in a DM-authored decree chronicle line (decreeChronicleLine), filtered by causes ⊇ line cause; drawn by eligibleVariants + drawVariant keyed on block::pool::seed::entryId."
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour: the lines speak of the decree record itself (who moved it, how it stands, where it lands, what warning or prerequisite it carries), never of the settlement's condition, so no crisis or fact can contradict them.",
+      "lines": [
+        {
+          "lineId": "vid:16",
+          "text": "It has happened, and the town has lived it.",
+          "causes": [
+            "party",
+            "table"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:17",
+          "text": "The advance carried it out, and what followed followed from it.",
+          "causes": [
+            "party",
+            "table"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:18",
+          "text": "It is done, and the record keeps it where the doing put it.",
+          "causes": [
+            "party",
+            "table"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "DEC-STANDING: pending",
+      "keyGuarantees": [
+        "the decree entry's status = 'pending' (design §20.3)",
+        "Renders only in a DM-authored decree chronicle line (decreeChronicleLine), filtered by causes ⊇ line cause; drawn by eligibleVariants + drawVariant keyed on block::pool::seed::entryId."
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour: the lines speak of the decree record itself (who moved it, how it stands, where it lands, what warning or prerequisite it carries), never of the settlement's condition, so no crisis or fact can contradict them.",
+      "lines": [
+        {
+          "lineId": "vid:19",
+          "text": "It waits for the next advance, and nothing of it has happened yet.",
+          "causes": [
+            "party",
+            "table"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:20",
+          "text": "Nothing has come of it yet; it sits in the order, waiting its turn.",
+          "causes": [
+            "party",
+            "table"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:21",
+          "text": "The order holds it, unspent, until the town moves again.",
+          "causes": [
+            "party",
+            "table"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "DEC-STANDING: withdrawn",
+      "keyGuarantees": [
+        "the decree entry's status = 'withdrawn' (design §20.3)",
+        "Renders only in a DM-authored decree chronicle line (decreeChronicleLine), filtered by causes ⊇ line cause; drawn by eligibleVariants + drawVariant keyed on block::pool::seed::entryId."
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour: the lines speak of the decree record itself (who moved it, how it stands, where it lands, what warning or prerequisite it carries), never of the settlement's condition, so no crisis or fact can contradict them.",
+      "lines": [
+        {
+          "lineId": "vid:22",
+          "text": "It was set aside before it could happen, and its words were kept.",
+          "causes": [
+            "party",
+            "table"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:23",
+          "text": "Nothing came of it; the order let it go and kept what it said.",
+          "causes": [
+            "party",
+            "table"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:24",
+          "text": "It was withdrawn, and the register still carries the sentence it would have been.",
+          "causes": [
+            "party",
+            "table"
+          ],
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        }
+      ]
+    }
+  ]
+}

@@ -31,11 +31,16 @@ beforeAll(async () => {
 }, 120_000);
 
 describe('coherenceBattery — the seven instruments behind one call', () => {
-  it('names the checks it runs: one per instrument, the rendered hook reading, and the reader\'s three two-tab checks', () => {
+  it('names the checks it runs: one per instrument, the rendered hook reading, the reader\'s three two-tab checks and the four kind-10 crisis page checks', () => {
     expect([...BATTERY_CHECKS]).toEqual([
       'defense-words', 'faith-denial', 'food-words', 'hook-truth-record', 'hook-truth-page',
       'magic-words', 'seat-holder', 'tier-noun',
       'grade-vs-food', 'magic-absent-prose', 'crime-denied-and-listed',
+      // F12 (rung 2, 2026-11-04): a calm line under the crisis it denies.
+      'crisis-blind-prose',
+      // F13 (rung 2, 2026-11-04): three crisis facts the page contradicts. One kind with F12's
+      // (kind 10, crisis), pinned once at the composed list (the rung-2 window).
+      'famine-stores', 'migration-direction', 'crisis-cast-sense',
     ]);
   });
 

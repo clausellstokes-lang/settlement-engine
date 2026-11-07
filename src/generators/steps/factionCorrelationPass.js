@@ -81,7 +81,7 @@ registerStep('factionCorrelationPass', {
       for (const add of /** @type {Array<any>} */ (boostAdditions)) {
         const triggerFaction = add.boostedBy || add.factionTrigger ||
           add.factionSource ||
-          (factionBoosts[0]?.factionName || 'a dominant faction');
+          (factionBoosts[0]?.factionName || 'A dominant faction'); // F11: it opens the trace reason
         recordTrace(ctx, {
           targetType: 'institution',
           targetId:   instId(add.name),

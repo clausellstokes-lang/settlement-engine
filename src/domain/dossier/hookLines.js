@@ -37,6 +37,7 @@
  */
 
 import { fnv1a32 } from '../../kernel/proseHash.js';
+import { drawDeclared, lineText } from '../facts/drawDeclared.js';
 
 /**
  * The issue families, in the order they are tested. A family is matched on the issue text
@@ -60,7 +61,7 @@ const ISSUE_FAMILIES = Object.freeze([
  * A line takes the two parties and the issue as the record spells them, and returns one
  * sentence. The issue arrives lower-cased at the call site (the record stores it
  * Title-Case, as a label), so a line may drop it mid-sentence without re-casing it.
- * @typedef {(a: string, b: string, issue: string) => string} HookLine
+ * @typedef {((a: string, b: string, issue: string) => string) | { text: (a: string, b: string, issue: string) => string, needs?: string[], excludes?: string[] }} HookLine a template, or the declared form around one (CENSUS-2c)
  */
 
 /**
@@ -96,7 +97,7 @@ const JURISDICTION_LINES = Object.freeze([
 
 /** @type {ReadonlyArray<HookLine>} */
 const PROPERTY_LINES = Object.freeze([
-  (a, b, issue) => `${a} has posted guards on what it says is its own, and ${b} says ${issue} was never ${a}'s to hold.`,
+  { text: (a, b, issue) => `${a} has posted guards on what it says is its own, and ${b} says ${issue} was never ${a}'s to hold.`, needs: ['guardPresence'] }, // CENSUS-2c: the rulings §3's composite
   (a, b, issue) => `An inventory of ${issue} came up short, and ${a} and ${b} each say the other took the difference.`,
   (a, b, issue) => `${b} has produced an old deed bearing on ${issue}; it is good enough for ${a} to take seriously and old enough for ${a} to doubt.`,
   (a, b, issue) => `Someone has been moving what ${issue} covers out of the building at night, and both ${a} and ${b} assume the other arranged it.`,
@@ -158,14 +159,14 @@ const CONFLICT_LINES = Object.freeze({
  * them claims a famine, so the same truth gate that refused the starving sentence passes
  * these. The settlement's name is never interpolated: the collector's dedupe folds on text,
  * and a named line would survive it on every page.
- * @type {ReadonlyArray<string>}
+ * @type {ReadonlyArray<string | { text: string, needs?: string[], excludes?: string[] }>} a line, or the declared form around one (CENSUS-2c)
  */
 const FOOD_GAP_LINES = Object.freeze([
-  'Grain is coming in, and the people bringing it have worked out exactly how much that is worth. The price has moved twice this month.',
-  'Enough food arrives to keep the place fed, which means whoever controls the carts controls rather more than the carts.',
+  { text: 'Grain is coming in, and the people bringing it have worked out exactly how much that is worth. The price has moved twice this month.', excludes: ['crisis: under_siege'] },
+  { text: 'Enough food arrives to keep the place fed, which means whoever controls the carts controls rather more than the carts.', excludes: ['starving', 'famine', 'crisis: famine', 'crisis: under_siege'] },
   'A supplier who has carried the shortfall for years wants the arrangement put on paper now, and the terms have changed.',
-  'The last two consignments were short by the same amount, and the measure is being blamed rather than the measurer.',
-  'Somebody has begun buying grain forward at prices nobody local can match, and will not say who it is for.',
+  { text: 'The last two consignments were short by the same amount, and the measure is being blamed rather than the measurer.', excludes: ['crisis: under_siege'] },
+  { text: 'Somebody has begun buying grain forward at prices nobody local can match, and will not say who it is for.', needs: ['market'] },
   'A merchant has offered to cover the whole gap from one source, which would solve this season and hand them next season.',
 ]);
 
@@ -181,13 +182,31 @@ export function conflictIssueFamily(issue) {
 }
 
 /**
+ * A drawn hook line as text: a template takes the parties and the issue; a declared line is
+ * `{ text, needs?, excludes?, crisis? }` around either form.
+ * @param {unknown} line @param {string} a @param {string} b @param {string} issue
+ * @returns {string}
+ */
+function spoken(line, a, b, issue) {
+  const v = lineText(line);
+  return typeof v === 'function' ? v(a, b, issue) : String(v);
+}
+
+/**
  * ONE DRAW PER DOSSIER, WITHOUT REPLACEMENT PER FAMILY.
  *
+ * ⭐ CENSUS-1d unit 2 (Appendix B row 90, kind H): the walking modulus is drawn over the FULL
+ * family pool as before and the drawn line resolved through `drawDeclared` (a refused line
+ * moves to its twin or the hash argmax; `used` advances exactly as before), noted in the
+ * presumption ledger as `HOOK_LINE_POOLS.conflict.<family>`.
+ *
+ * @param {object|null|(() => object|null)} [facts] `factsOf(settlement)` (or a thunk), which
+ *   answers a declared line; none = a declared line is refused (fail-closed)
  * @returns {(conflict: { parties?: unknown, issue?: unknown }) => string[]} the lines for
  *   one conflict, in the order they should be read. One line per conflict: the chair's
  *   ruling 3 ("one hook per conflict, chosen").
  */
-export function createConflictHookDraw() {
+export function createConflictHookDraw(facts = null) {
   /** @type {Map<string, { base: number, used: number }>} */
   const draws = new Map();
   return (conflict) => {
@@ -208,22 +227,33 @@ export function createConflictHookDraw() {
       draw = { base: fnv1a32(`${a}>${b}::${rawIssue}::${family}`), used: 0 };
       draws.set(family, draw);
     }
-    const index = (draw.base + draw.used) % pool.length;
+    const offset = draw.base + draw.used;
     draw.used += 1;
-    return [pool[index](a, b, issue)];
+    const drawn = drawDeclared(pool, {
+      draw: (p) => p[offset % p.length], facts, key: `${a}>${b}::${rawIssue}::${family}`,
+      poolId: `HOOK_LINE_POOLS.conflict.${family}`, surface: 'plot_hooks', drawKind: 'H',
+    });
+    return drawn.line == null ? [] : [spoken(drawn.line, a, b, issue)];
   };
 }
 
 /**
  * The food-gap line for one settlement: a draw-free fnv offset on the place's own name and
- * band, so two settlements with the same shortfall do not read the same sentence.
+ * band, so two settlements with the same shortfall do not read the same sentence. Drawn over
+ * the full pool and resolved through `drawDeclared` (CENSUS-1d unit 2, row 90, kind H).
  * @param {{ name?: unknown, band?: unknown }} place
+ * @param {object|null|(() => object|null)} [facts] `factsOf(settlement)` (or a thunk)
  * @returns {string}
  */
-export function foodGapHookLine(place) {
+export function foodGapHookLine(place, facts = null) {
   const name = typeof place?.name === 'string' ? place.name : '';
   const band = typeof place?.band === 'string' ? place.band : '';
-  return FOOD_GAP_LINES[fnv1a32(`${name}::${band}::food-gap`) % FOOD_GAP_LINES.length];
+  const seed = `${name}::${band}::food-gap`;
+  const drawn = drawDeclared(FOOD_GAP_LINES, {
+    draw: (p) => p[fnv1a32(seed) % p.length], facts, key: seed,
+    poolId: 'HOOK_LINE_POOLS.foodGap', surface: 'plot_hooks', drawKind: 'H',
+  });
+  return drawn.line == null ? '' : String(lineText(drawn.line));
 }
 
 /** The pools, for the tests that measure their size and read their voice. */

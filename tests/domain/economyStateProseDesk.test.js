@@ -1016,7 +1016,8 @@ describe('DESK-7 — the {complexity} band, wired from the chair\'s eleven forms
     /** @param {string} tier @param {string} access @param {string} complexity */
     const drawnKeys = (tier, access, complexity) => new Set(seeds
       .map((seed) => economyStateProse(
-        town({ economicState: { prosperity: tier, tradeAccess: access, economicComplexity: complexity } }),
+        // CENSUS-3c: C3 v3 / C5 lines declare `market`; the measured town keeps one (a market square).
+        town({ economicState: { prosperity: tier, tradeAccess: access, economicComplexity: complexity }, institutions: [{ name: 'Market square' }] }),
         {}, { seed, audience: AUDIENCE_DM },
       ).prosperityHeader?.sentence)
       .filter(Boolean));

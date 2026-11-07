@@ -65,6 +65,8 @@
  *
  * @enforced-by tests/domain/stateProseKernel.test.js
  */
+import { STATE_MARK_DIMENSIONS, EMPTY_DECLARATION, declarationOfTags, declarationOfMarks, declarationAdmits, declares, atomsOf, COLOUR_MARK } from '../../facts/factVocabulary.js';
+import { activePresumptionLedger, notePresumption } from '../../facts/presumptionLedger.js';
 
 /**
  * One authored sentence, as the corpus projection emits it.
@@ -95,6 +97,12 @@
 /**
  * A desk leaf: block id → block.
  * @typedef {Record<string, StateProseBlock>} StateProseCorpus
+ */
+/** @typedef {import('../../facts/factVocabulary.js').FactsLike} FactsLike the `factsOf(record)` a desk hands in */
+/**
+ * The read options as the eligibility gate takes them (the single-pool read hands its own options
+ * on to `eligibleVariants`, the pool's brace group with them).
+ * @typedef {NonNullable<Parameters<typeof eligibleVariants>[1]>} DeclaringOptions
  */
 
 /**
@@ -208,16 +216,22 @@ export function variantIsAudible(variant, audience) {
  * pool that names walls is unreadable to a caller who has not asked whether walls stand —
  * the same fail-closed law, aimed at the defence-words class.
  *
+ * ⭐ THE FIVE CRISIS DIMENSIONS ARE FACT DIMENSIONS TOO (F12 CRISIS-BLIND PROSE, rung 2,
+ * 2026-11-04). A variant that asserts a calm an active crisis denies ("Nothing presses the
+ * town", "the succession question is not a live one") carries the family's `no …` word; a
+ * crisis-safe variant carries the crisis word. Every desk answers all five at its entry from
+ * the one crisis reader (`crisis/crisisFacts.js :: crisisAnswered`, the stress record): a
+ * calm line is unreadable to a caller that has not asked which crises are on.
+ *
  * @enforced-by tests/data/dossierStateProseProjection.contract.test.js
  * @enforced-by tests/domain/wallsWordDossierProse.test.js
+ * @enforced-by tests/domain/crisisBlindDossierProse.test.js
  * @type {Readonly<Record<string, ReadonlyArray<string>>>}
  */
-export const STATE_MARK_DIMENSIONS = Object.freeze({
-  severity: Object.freeze(['minor', 'major', 'catastrophic']),
-  deficit: Object.freeze(['deficit', 'no deficit']),
-  anchor: Object.freeze(['anchored', 'not anchored']),
-  walls: Object.freeze(['walls', 'no walls']),
-});
+// ⭐ CENSUS-1b WAVE 1: THE WORDS MOVED TO THE ONE VOCABULARY (`domain/facts/factVocabulary.js`),
+// which is import-free like this file; this constant is a re-export of its MARK HALF, so the
+// contract test that refuses an unknown mark word refuses an unknown atom.
+export { STATE_MARK_DIMENSIONS };
 
 /**
  * mark word → the one dimension it belongs to. Derived, so the vocabulary is written
@@ -261,15 +275,51 @@ function variantSpeaksOver(variant, dimension, value) {
   return own.length === 0 || own.includes(value);
 }
 
+/** variant → its FACT declaration (the atoms of its marks beyond the kernel's own words). */
+const FACT_DECLARATION = new WeakMap();
+
+/**
+ * The fact atoms a variant's marks declare (CENSUS-1b wave 1): every mark that is neither the
+ * audience mark nor a kernel mark word, read in the vocabulary's tag form (`X` needs, `no X`
+ * excludes, `crisis: …`). The kernel's own words (`walls`, the crisis families) stay law 5's.
+ * @param {StateProseVariant|undefined} variant
+ */
+export function variantFactDeclaration(variant) {
+  // ⚠ STATE VARIANTS ONLY. The causal register's marks are its family-local, OPEN arm names, and
+  // one of them is spelled `market` (JF-CPL-9b): read as an atom it would gate that arm on the
+  // market fact. The STATE schema alone carries `vid` (§13 row 14; the causal register carries
+  // none), so a variant without one declares no fact atoms here.
+  if (!variant || typeof variant !== 'object' || typeof variant.vid !== 'number') return EMPTY_DECLARATION;
+  const held = FACT_DECLARATION.get(variant);
+  if (held) return held;
+  const atoms = (variant.marks || []).filter((m) => m !== COVERT_MARK && !DIMENSION_OF_MARK[m]);
+  const decl = atoms.length ? declarationOfTags(atoms) : EMPTY_DECLARATION;
+  FACT_DECLARATION.set(variant, decl);
+  return decl;
+}
+
 /**
  * The variants of one pool that this state and this audience can actually carry.
+ *
+ * ⭐ LAW 5 GENERALISED (CENSUS-1b wave 1; `docs/DESIGN_POOL_CENSUS.md` §3.3). A pool whose
+ * variants declare fact atoms (or that opted into the crisis dimension, `crisisScoped`) is read
+ * against `facts` — `factsOf(record)`, which every desk hands in at its entry — through the ONE
+ * rule (`factVocabulary.js :: declarationAdmits`). FAIL-CLOSED: such a pool with no `facts` is
+ * unreadable. A pool that declares nothing reads exactly as before, which is every pool today.
  * @param {ReadonlyArray<StateProseVariant>|undefined} pool
  * @param {{slots?: Record<string, unknown>, audience?: string,
- *   dimensions?: Record<string, string>}} [options]
+ *   dimensions?: Record<string, string>, facts?: object|null, crisisScoped?: boolean,
+ *   poolDeclares?: ReadonlyArray<string>}} [options] `poolDeclares` / `crisisScoped` are the
+ *   pool's own brace group (`poolMeta`), handed in by the composer
  * @returns {ReadonlyArray<StateProseVariant>}
  */
 export function eligibleVariants(pool, options = {}) {
   if (!Array.isArray(pool) || pool.length === 0) return [];
+  // The pool's own atoms (the key guarantees them; declared once on the pool): fail-closed too.
+  if (Array.isArray(options.poolDeclares) && options.poolDeclares.length > 0) {
+    if (!options.facts || typeof options.facts !== 'object') return [];
+    if (!declarationAdmits(declarationOfTags(options.poolDeclares), /** @type {FactsLike} */ (options.facts)).admitted) return [];
+  }
   // Read on the RAW pool, before any filter: the audience or a missing slot could remove
   // the last variant carrying a dimension word and turn a partitioned pool into one that
   // looks unpartitioned, which is the fail-OPEN reading wearing the gate's coat.
@@ -283,13 +333,95 @@ export function eligibleVariants(pool, options = {}) {
     const value = given[dimension];
     if (typeof value !== 'string' || !STATE_MARK_DIMENSIONS[dimension].includes(value)) return [];
   }
+  const crisisScoped = options.crisisScoped === true;
+  const factual = crisisScoped || pool.some((variant) => declares(variantFactDeclaration(variant)));
+  if (factual && (!options.facts || typeof options.facts !== 'object')) return [];
   const slots = options.slots || {};
   const audience = options.audience === AUDIENCE_DM ? AUDIENCE_DM : AUDIENCE_PLAYER;
   return pool.filter(
     (variant) => variantIsAudible(variant, audience)
       && variantIsAnchored(variant, slots)
-      && dimensions.every((dimension) => variantSpeaksOver(variant, dimension, given[dimension])),
+      && dimensions.every((dimension) => variantSpeaksOver(variant, dimension, given[dimension]))
+      && (!factual || declarationAdmits(variantFactDeclaration(variant), /** @type {FactsLike} */ (options.facts), { crisisScoped }).admitted),
   );
+}
+
+/**
+ * Note a drawn variant in the open presumption ledger (CENSUS-1b wave 1, item 4): its atoms are
+ * the kernel's fact marks onto the vocabulary's dimensions (`walls` / `no walls`, and since wave 2
+ * — CENSUS-1i unit 8, R-O — F12's five crisis families: `crisis: threat`, `no crisis: hunger`,
+ * `crisis`, …; `factVocabulary.js :: declarationOfMarks`) and any fact atoms its marks declare.
+ * A no-op when no ledger is open.
+ * @param {StateProseVariant|null|undefined} variant
+ * A line marked `colour` (R-AO), or drawn from a pool braced `{colour}` (`where.colour`), is noted
+ * `colour: true`: no atom, but `declared-share` counts it (the chair, 11:0x, on CENSUS-4h Q1).
+ * @param {{ blockId: string, poolKey: string, surface?: string, crisisScoped?: boolean,
+ *   poolDeclares?: ReadonlyArray<string>, colour?: boolean }} where
+ */
+export function noteDrawnVariant(variant, where) {
+  if (!variant || activePresumptionLedger() === null) return;
+  const marked = declarationOfMarks(variant.marks);
+  const facts = variantFactDeclaration(variant);
+  notePresumption({
+    pool: `${where.blockId}::${where.poolKey}`,
+    lineId: typeof variant.vid === 'number' ? variant.vid : variant.text,
+    atoms: [...atomsOf(marked), ...atomsOf(facts)],
+    surface: where.surface || 'dossier',
+    drawKind: 'K',
+    resolvedBy: 'drawn',
+    ...(where.crisisScoped ? { crisisScoped: true } : {}),
+    ...(where.poolDeclares && where.poolDeclares.length ? { poolDeclares: where.poolDeclares } : {}),
+    ...(where.colour === true || (Array.isArray(variant.marks) && variant.marks.includes(COLOUR_MARK)) ? { colour: true } : {}),
+  });
+}
+
+/**
+ * ⭐ THE POSITION-KEYED DECLARATION CHANNEL (CENSUS-1h unit 7; the chair's R-AQ). A vid-less
+ * list (the connectives) is drawn by the MODULUS of a roll, so a vid would move about (n−1)/n of
+ * its draws and a pre-filter would shift the modulus of every draw. Its declarations therefore
+ * sit in a list PARALLEL to the phrase list (`declarations[i]` = the tag array of position i, or
+ * null) that the draw never reads: the caller draws over the FULL list exactly as before and
+ * hands the drawn position here AFTER the draw. An admitted position (or a list with no
+ * declaration at all) comes back unchanged — byte-identity 0 until a line declares. A refused
+ * position resolves to the hash argmax over the admitted positions (`drawDeclared`'s rule, keyed
+ * on the caller's own key plus the position); none admitted answers -1 and the caller drops the
+ * slot (kind A; R-AU). FAIL-CLOSED: a declared position with no `facts` is refused.
+ * @param {ReadonlyArray<ReadonlyArray<string>|null|undefined>|undefined} declarations
+ * @param {number} drawn the position the modulus drew
+ * @param {object|null|undefined} facts `factsOf(record)`
+ * @param {string} key the caller's draw key (the settlement's seed is already in it)
+ * @param {{ pool?: string, surface?: string }} [where] ledger identity for a declared pick
+ * @returns {number} the position to print, or -1
+ */
+export function resolveDeclaredPosition(declarations, drawn, facts, key, where = {}) {
+  if (!Array.isArray(declarations) || !declarations.some((d) => Array.isArray(d) && d.length > 0)) return drawn;
+  const admits = (/** @type {number} */ i) => {
+    const tags = declarations[i];
+    if (!Array.isArray(tags) || tags.length === 0) return true;
+    if (!facts || typeof facts !== 'object') return false;
+    return declarationAdmits(declarationOfTags(tags), /** @type {FactsLike} */ (facts)).admitted;
+  };
+  let pick = admits(drawn) ? drawn : -1;
+  if (pick < 0) {
+    let bestHash = -1;
+    for (let i = 0; i < declarations.length; i += 1) {
+      if (i === drawn || !admits(i)) continue;
+      const digest = avalanche32(fnv1a32(`${key}::p${i}`));
+      if (digest > bestHash) { bestHash = digest; pick = i; }
+    }
+  }
+  const tags = pick >= 0 ? declarations[pick] : null;
+  if (Array.isArray(tags) && tags.length > 0 && activePresumptionLedger() !== null) {
+    notePresumption({
+      pool: where.pool || key,
+      lineId: `p${pick}`,
+      atoms: atomsOf(declarationOfTags(tags)),
+      surface: where.surface || 'dossier',
+      drawKind: 'K',
+      resolvedBy: pick === drawn ? 'drawn' : 'argmax',
+    });
+  }
+  return pick;
 }
 
 /**
@@ -493,6 +625,9 @@ export function readStateProse(corpus, blockId, poolKey, options = {}) {
   const eligible = eligibleVariants(pool, options);
   const variant = drawVariant(eligible, blockId, poolKey, options.seed || '');
   if (!variant) return null;
+  // CENSUS-1c unit 4: the single-pool read notes its draw too (the PDF, Tonight and Foundry paths
+  // read here, not through composeStateProse's drawPiece); a no-op when no ledger is open.
+  noteDrawnVariant(variant, { blockId, poolKey, crisisScoped: /** @type {DeclaringOptions} */ (options).crisisScoped === true, poolDeclares: /** @type {DeclaringOptions} */ (options).poolDeclares, colour: /** @type {(StateProseBlock & { poolMeta?: Readonly<Record<string, { colour?: unknown } | undefined>> }) | undefined} */ (block)?.poolMeta?.[poolKey]?.colour === true });
   const text = fillSlots(variant.text, options.slots || {});
   if (text === null) return null;
   return Object.freeze({

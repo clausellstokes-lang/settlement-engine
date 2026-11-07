@@ -1,0 +1,63 @@
+{
+  "id": "viability.deriveResourceChainAnalysis",
+  "source": "src/generators/economy/viability.js :: deriveResourceChainAnalysis",
+  "drawKind": "T",
+  "pool": {
+    "declares": [],
+    "crisisScoped": false,
+    "colour": false,
+    "notes": "Resource-chain suggestions; processors named are tier-plausible catalog names (institutionDisplayName). The resource is unhomed (nearby resource). ",
+    "needs": [],
+    "excludes": []
+  },
+  "rows": [
+    {
+      "id": "viability.deriveResourceChainAnalysis::opportunity.title",
+      "text": "Opportunity: process ${resource}",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "viability.deriveResourceChainAnalysis::opportunity.desc",
+      "text": "${resource} is available locally. Add ${A or B or C} to unlock higher-value exports.",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "\"available locally\" ignores depletion (depletedResources)."
+    },
+    {
+      "id": "viability.deriveResourceChainAnalysis::incomplete.title",
+      "text": "Incomplete chain: ${resource}",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "viability.deriveResourceChainAnalysis::incomplete.desc",
+      "text": "Processing ${resource} but missing ${missing} for the full chain.",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "viability.deriveResourceChainAnalysis::incomplete.impact",
+      "text": "Exports intermediate goods instead of final products (${outputs}). Lower profit margins.",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "unhomed: exports presence — prints for an isolated subsistence place with no exports and under siege (exports collapsed)."
+    },
+    {
+      "id": "viability.deriveResourceChainAnalysis::incomplete.fix.0",
+      "text": "Add ${missing} to complete the production chain",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": ""
+    }
+  ]
+}

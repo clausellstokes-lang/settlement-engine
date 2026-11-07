@@ -63,6 +63,7 @@ import { warFaithStateProseCandidates } from '../../src/domain/display/statePros
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { driftRun } from '../helpers/dossierManifest.js';
 import { ROOT } from '../helpers/dossierCorpus.js';
+import { CALM_FACTS_ADMIT_ALL } from '../helpers/calmFactsDouble.js';
 
 /**
  * THE SHIPPED CORPUS, all six state leaves merged on block id — which is the shape a desk
@@ -99,6 +100,26 @@ function bagFor(pool) {
   const slots = {};
   for (const variant of pool) for (const slot of variant.slots || []) slots[slot] = 'Thornwall';
   return slots;
+}
+
+/**
+ * THE POOL'S OWN BRACE GROUP, the way the composer reads it (`composeStateProse.js :: poolReadOf`,
+ * CENSUS-1b wave 1): `poolMeta.declares` -> `poolDeclares`, `poolMeta.crisisScoped` -> `crisisScoped`.
+ * The composer draws a pool under the desk's read PLUS this brace; `readStateProse` takes it only
+ * from its caller. So the kernel side of an equality sweep is handed the same brace, and both sides
+ * the calm admit-all facts double (the 80d676864 idiom), or the sweep compares a gated read with an
+ * ungated one. Measured: the sweeps below drift 0 at db3ed88c1^ and first drift at db3ed88c1
+ * (census-2b item 2), whose brace groups put pool-level atoms on pools whose lines declare none.
+ * @param {string} blockId @param {string} poolKey
+ * @returns {{poolDeclares?: ReadonlyArray<string>, crisisScoped?: true, facts: object}}
+ */
+function poolBraceFor(blockId, poolKey) {
+  const meta = /** @type {{declares?: string[], crisisScoped?: boolean}} */ (CORPUS[blockId]?.poolMeta?.[poolKey] || {});
+  return {
+    facts: CALM_FACTS_ADMIT_ALL,
+    ...(Array.isArray(meta.declares) && meta.declares.length ? { poolDeclares: meta.declares } : {}),
+    ...(meta.crisisScoped === true ? { crisisScoped: true } : {}),
+  };
 }
 
 /** An answer for every dimension the pool partitions itself by (law 5). */
@@ -150,7 +171,12 @@ describe('the composer — the corpus loads, and the merge is legal', () => {
     expect(BLOCK_COLLISIONS, 'a block id emitted by two leaves').toEqual([]);
     expect(Object.keys(CORPUS).length, 'blocks').toBe(68);
     expect(SHIPPED_POOLS.length, 'pools').toBe(709);
-    expect(SHIPPED_POOLS.reduce((n, row) => n + row.pool.length, 0), 'variants').toBe(2310);
+    // 2310 -> 2342, by cause (each measured on the six leaves, parent -> commit, 709 pools throughout):
+    // F12 unit 2 (e19e3e4cf) 2310 -> 2323; census-2b item 5 (70d05b25b) +4; census-5 unit 2
+    // (06b59812f) +1; census-3c unit 4 DS-ECO (e3295d168) +10; census-5b unit 3 (c00b30eb6) +4.
+    // 2342 -> 2343 at LANDING-R2 helper G (the chair's §934.105 ruling (1): DS-GEN-17 PROVISIONED v3, the hospital-only line) +1.
+    // 2343 -> 2344 at LANDING-R2 helper G2 (the chair's 06:5x DS-CND-1 boom line (ODQ §934.105, ruling (2)): ARCHETYPE: boom v4 `[street · crisis: any]`) +1.
+    expect(SHIPPED_POOLS.reduce((n, row) => n + row.pool.length, 0), 'variants').toBe(2344);
   });
 });
 
@@ -170,8 +196,8 @@ describe('⭐ THE SEAM COMPOSES TO THE KERNEL — an empty candidate list moves 
       for (const audience of ['dm', 'player']) {
         for (const key of SWEEP_SEEDS) {
           checks += 1;
-          const read = { slots, seed: key, audience, dimensions };
-          const base = readStateProse(CORPUS, blockId, poolKey, read);
+          const read = { slots, seed: key, audience, dimensions, facts: CALM_FACTS_ADMIT_ALL };
+          const base = readStateProse(CORPUS, blockId, poolKey, { ...read, ...poolBraceFor(blockId, poolKey) });
           const unit = composeStateProse(CORPUS, blockId, {
             ...read, spineKey: poolKey, candidates: [], turns: [],
           });
@@ -353,9 +379,9 @@ describe('⭐ THE BASE-SIDE SYNTHESIS — every recorded cell, against the compo
     let pools = 0;
     for (const { blockId, poolKey, pool } of SHIPPED_POOLS) {
       const read = {
-        slots: bagFor(pool), audience: 'dm', dimensions: dimensionsFor(pool),
+        slots: bagFor(pool), audience: 'dm', dimensions: dimensionsFor(pool), facts: CALM_FACTS_ADMIT_ALL,
       };
-      const base = readStateProse(CORPUS, blockId, poolKey, { ...read, seed: '' });
+      const base = readStateProse(CORPUS, blockId, poolKey, { ...read, ...poolBraceFor(blockId, poolKey), seed: '' });
       const spellings = [undefined, null, ''].map((given) => composeStateProse(CORPUS, blockId, {
         ...read, seed: given, spineKey: poolKey, candidates: [], turns: [],
       }));
@@ -1193,6 +1219,9 @@ describe('the composer — turns (ARCH §4.2 step 1, §5.3)', () => {
       seed: 'shipped-probe',
       audience: 'dm',
       dimensions: dimensionsFor(block.pool),
+      // CENSUS-5: the first shipped pool (DS-DEF-1 readiness STRONG) declares fact atoms and opts
+      // into the crisis dimension, so the read carries facts, as every desk's does.
+      facts: CALM_FACTS_ADMIT_ALL,
     });
     expect(unit.pieces.length, 'every sibling pool offered, and none of them seats').toBe(1);
   });
@@ -1344,11 +1373,15 @@ describe('the six candidates leaves (ARCH §4.1, M-F7)', () => {
     const unit = composeStateProse(CORPUS, block.blockId, {
       spineKey: block.poolKey, candidates, turns: [], slots: bagFor(block.pool),
       seed: 'leaf-probe', audience: 'dm', dimensions: dimensionsFor(block.pool),
+      // db3ed88c1 (census-2b item 2): DS-GEN-3's first pool (scores.military: STRONG) is
+      // crisis-scoped, so the read carries facts, as every desk's does; the kernel the brace.
+      facts: CALM_FACTS_ADMIT_ALL,
     });
     const base = readStateProse(CORPUS, block.blockId, block.poolKey, {
       slots: bagFor(block.pool), seed: 'leaf-probe', audience: 'dm',
-      dimensions: dimensionsFor(block.pool),
+      dimensions: dimensionsFor(block.pool), ...poolBraceFor(block.blockId, block.poolKey),
     });
+    expect(unit, 'the probe composed nothing; the equality below would be vacuous').not.toBeNull();
     expect(unit.text).toBe(base.text);
     expect(unit.pieces.length).toBe(1);
   });

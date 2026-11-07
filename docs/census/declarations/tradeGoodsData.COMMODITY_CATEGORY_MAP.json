@@ -1,0 +1,279 @@
+{
+  "id": "tradeGoodsData.COMMODITY_CATEGORY_MAP",
+  "source": "src/data/tradeGoodsData.js :: COMMODITY_CATEGORY_MAP",
+  "drawKind": "A",
+  "pool": {
+    "declares": [],
+    "crisisScoped": false,
+    "colour": false,
+    "notes": "A classifier (commodity token → category) consumed by tradeGoods.js :: deriveLocalCommodities; no row is DM-facing text, so every row declares nothing. Listed for completeness.",
+    "needs": [],
+    "excludes": []
+  },
+  "rows": [
+    {
+      "id": "tradeGoodsData.COMMODITY_CATEGORY_MAP::fish",
+      "text": "fish → fish",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "tradeGoodsData.COMMODITY_CATEGORY_MAP::salt",
+      "text": "salt → salt",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "tradeGoodsData.COMMODITY_CATEGORY_MAP::salt_flat",
+      "text": "salt_flat → salt",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "tradeGoodsData.COMMODITY_CATEGORY_MAP::iron",
+      "text": "iron → iron",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "tradeGoodsData.COMMODITY_CATEGORY_MAP::metalwork",
+      "text": "metalwork → iron",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "tradeGoodsData.COMMODITY_CATEGORY_MAP::stone",
+      "text": "stone → stone",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "tradeGoodsData.COMMODITY_CATEGORY_MAP::pottery",
+      "text": "pottery → stone",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "tradeGoodsData.COMMODITY_CATEGORY_MAP::timber",
+      "text": "timber → timber",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "tradeGoodsData.COMMODITY_CATEGORY_MAP::grain",
+      "text": "grain → grain",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "tradeGoodsData.COMMODITY_CATEGORY_MAP::flour",
+      "text": "flour → grain",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "tradeGoodsData.COMMODITY_CATEGORY_MAP::livestock",
+      "text": "livestock → grain",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "maps to category \"grain\" (food bucket), not a text"
+    },
+    {
+      "id": "tradeGoodsData.COMMODITY_CATEGORY_MAP::dairy",
+      "text": "dairy → grain",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "maps to category \"grain\" (food bucket), not a text"
+    },
+    {
+      "id": "tradeGoodsData.COMMODITY_CATEGORY_MAP::game meat",
+      "text": "game meat → grain",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "maps to category \"grain\" (food bucket), not a text"
+    },
+    {
+      "id": "tradeGoodsData.COMMODITY_CATEGORY_MAP::animal hides",
+      "text": "animal hides → craft",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "tradeGoodsData.COMMODITY_CATEGORY_MAP::furs",
+      "text": "furs → luxury",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "mapped \"luxury\" category; not in the chair's class list"
+    },
+    {
+      "id": "tradeGoodsData.COMMODITY_CATEGORY_MAP::forest herbs",
+      "text": "forest herbs → herbs",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "tradeGoodsData.COMMODITY_CATEGORY_MAP::wool",
+      "text": "wool → textile",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "tradeGoodsData.COMMODITY_CATEGORY_MAP::flax",
+      "text": "flax → textile",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "tradeGoodsData.COMMODITY_CATEGORY_MAP::silk cocoons",
+      "text": "silk cocoons → luxury",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "mapped \"luxury\"; silk is luxury-class but this is a classifier key, not a drawn row; no RESOURCE_DATA commodity emits it today"
+    },
+    {
+      "id": "tradeGoodsData.COMMODITY_CATEGORY_MAP::clay",
+      "text": "clay → craft",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "tradeGoodsData.COMMODITY_CATEGORY_MAP::raw leather",
+      "text": "raw leather → craft",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "tradeGoodsData.COMMODITY_CATEGORY_MAP::coal",
+      "text": "coal → fuel",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "tradeGoodsData.COMMODITY_CATEGORY_MAP::peat",
+      "text": "peat → fuel",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "tradeGoodsData.COMMODITY_CATEGORY_MAP::candle wax",
+      "text": "candle wax → craft",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "tradeGoodsData.COMMODITY_CATEGORY_MAP::silver",
+      "text": "silver → precious_metal",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "tradeGoodsData.COMMODITY_CATEGORY_MAP::gold",
+      "text": "gold → precious_metal",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "tradeGoodsData.COMMODITY_CATEGORY_MAP::amber",
+      "text": "amber → luxury",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": "mapped \"luxury\" category; not in the chair's class list"
+    },
+    {
+      "id": "tradeGoodsData.COMMODITY_CATEGORY_MAP::sea salt",
+      "text": "sea salt → salt",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "tradeGoodsData.COMMODITY_CATEGORY_MAP::rock salt",
+      "text": "rock salt → salt",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "tradeGoodsData.COMMODITY_CATEGORY_MAP::clay pots",
+      "text": "clay pots → craft",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "tradeGoodsData.COMMODITY_CATEGORY_MAP::baked bricks",
+      "text": "baked bricks → craft",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "tradeGoodsData.COMMODITY_CATEGORY_MAP::rough timber",
+      "text": "rough timber → timber",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "tradeGoodsData.COMMODITY_CATEGORY_MAP::cut lumber",
+      "text": "cut lumber → timber",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": ""
+    }
+  ]
+}

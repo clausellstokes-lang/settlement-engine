@@ -94,14 +94,14 @@ export function pietyTrend(local01, target) {
 // The faithProfile.piety.causes[] name the drivers; W-F6 renders them as prose.
 // The three STRUCTURAL inputs (authority / institutions / devotion) render as
 // bars, not sentences; these are the ARC drivers — why devotion is moving.
-const CAUSE_SENTENCE = Object.freeze({
+export const CAUSE_SENTENCE = Object.freeze({
   conduct_drift: 'The town no longer lives like its god. Devotion is ebbing.',
   conduct_alignment: 'The town lives by its god’s creed. Devotion runs deep.',
   clergy_distortion: 'A compromised priesthood distorts the faith’s reach. The god arrives through bad priests.',
   opposed_rivals: 'The patron’s word is muted. An opposed rival presses close behind the seat.',
 });
 const STRUCTURAL_SOURCES = new Set(['religious_authority', 'institutions', 'devotion']);
-const STRUCTURAL_LABEL = Object.freeze({
+export const STRUCTURAL_LABEL = Object.freeze({
   religious_authority: 'Religious authority',
   institutions: 'Temples & orders',
   devotion: 'Patron devotion',

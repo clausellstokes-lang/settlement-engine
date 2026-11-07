@@ -1,0 +1,658 @@
+{
+  "id": "DS-POP-1",
+  "source": "src/data/dossierStateProse/general.generated.js",
+  "drawKind": "K",
+  "pools": [
+    {
+      "id": "DS-POP-1::QUANTITY: nobody",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": true,
+      "colour": false,
+      "notes": "key: outflow QUANTITY nobody (the good state, R-DST-G). Crisis-scoped: v3 asserts nothing was bad enough to move anyone.",
+      "lines": [
+        {
+          "id": "DS-POP-1::QUANTITY: nobody::v1",
+          "text": "Nobody left {settlement} in {season}. That is a small fact and, in a year like this one, n",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "any"
+          ],
+          "colour": false,
+          "notes": "\"in a year like this one, not a trivial one\" — presumes a hard year (crisis family any); {season} slot"
+        },
+        {
+          "id": "DS-POP-1::QUANTITY: nobody::v2",
+          "text": "No one took to the road. Whatever the town is short of, it is not short of reasons to stay",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": false,
+          "notes": "\"Whatever the town is short of\""
+        },
+        {
+          "id": "DS-POP-1::QUANTITY: nobody::v3",
+          "text": "The departure rolls are empty. Nothing here was bad enough to move anyone.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "calm",
+          "colour": false,
+          "notes": "\"Nothing here was bad enough to move anyone\" — false under any crisis"
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-POP-1::QUANTITY: a few souls",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": true,
+      "notes": "key: outflow a few souls (QUANTITY_BANDS on the departure ledger; net migration direction NOT guaranteed)",
+      "lines": [
+        {
+          "id": "DS-POP-1::QUANTITY: a few souls::v1",
+          "text": "A few souls left {settlement} in {season}, few enough that everyone can name them, which i",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-POP-1::QUANTITY: a few souls::v2",
+          "text": "The departure amounted to a few souls. The town noticed, because it is the sort of town th",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-POP-1::QUANTITY: a few souls::v3",
+          "text": "A few souls went. Nothing about the settlement changed except the number of empty doorways",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-POP-1::QUANTITY: a dozen or so",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": false,
+      "notes": "key: outflow a dozen or so",
+      "lines": [
+        {
+          "id": "DS-POP-1::QUANTITY: a dozen or so::v1",
+          "text": "A dozen or so have gone. That is a street's worth in a place this size, and the street sho",
+          "needs": [
+            "population: small"
+          ],
+          "excludes": [],
+          "colour": false,
+          "notes": "\"a street's worth in a place this size\""
+        },
+        {
+          "id": "DS-POP-1::QUANTITY: a dozen or so::v2",
+          "text": "The loss runs to a dozen or so: enough to leave a trade short-handed, not enough to alter ",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-POP-1::QUANTITY: a dozen or so::v3",
+          "text": "About a dozen households' worth of people have moved on; the town has redistributed the wo",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-POP-1::QUANTITY: dozens",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": false,
+      "notes": "key: outflow dozens",
+      "lines": [
+        {
+          "id": "DS-POP-1::QUANTITY: dozens::v1",
+          "text": "Dozens have left {settlement}. The workshops run with gaps in them, and the gaps are not b",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-POP-1::QUANTITY: dozens::v2",
+          "text": "The departure runs to dozens, enough that the town's own count and the realm's have alread",
+          "needs": [],
+          "excludes": [],
+          "colour": false,
+          "notes": "unhomed: realm (an overlord census; \"the realm's\" count)"
+        },
+        {
+          "id": "DS-POP-1::QUANTITY: dozens::v3",
+          "text": "Dozens of people are gone from a place that could not spare them. What they were doing is ",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-POP-1::QUANTITY: a hundred or so",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": false,
+      "notes": "key: outflow a hundred or so",
+      "lines": [
+        {
+          "id": "DS-POP-1::QUANTITY: a hundred or so::v1",
+          "text": "A hundred or so have gone from {settlement}, which is a visible subtraction. Whole quarter",
+          "needs": [
+            "tier: >= town"
+          ],
+          "excludes": [],
+          "colour": false,
+          "notes": "\"Whole quarters are quieter\""
+        },
+        {
+          "id": "DS-POP-1::QUANTITY: a hundred or so::v2",
+          "text": "The loss is a hundred or so people, and it is the sort of loss a town argues about rather ",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-POP-1::QUANTITY: a hundred or so::v3",
+          "text": "About a hundred have left. That is enough to change what the market can sell and what the ",
+          "needs": [
+            "market"
+          ],
+          "excludes": [],
+          "colour": false,
+          "notes": "\"what the market can sell\"; unhomed: levy"
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-POP-1::QUANTITY: several hundred",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": false,
+      "notes": "key: outflow several hundred",
+      "lines": [
+        {
+          "id": "DS-POP-1::QUANTITY: several hundred::v1",
+          "text": "Several hundred have left {settlement}. The town is measurably smaller, and its institutio",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-POP-1::QUANTITY: several hundred::v2",
+          "text": "The exodus runs to several hundred: a real portion of a district, gone over a stretch of s",
+          "needs": [
+            "tier: >= town"
+          ],
+          "excludes": [],
+          "colour": false,
+          "notes": "\"a real portion of a district\""
+        },
+        {
+          "id": "DS-POP-1::QUANTITY: several hundred::v3",
+          "text": "Several hundred people are no longer here. What they paid in, the town now raises from the",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-POP-1::QUANTITY: many hundreds",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": false,
+      "notes": "key: outflow many hundreds",
+      "lines": [
+        {
+          "id": "DS-POP-1::QUANTITY: many hundreds::v1",
+          "text": "Many hundreds have gone. {settlement} is a substantially different settlement than it was,",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-POP-1::QUANTITY: many hundreds::v2",
+          "text": "The departure runs to many hundreds. The town carries its old infrastructure on a fraction",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-POP-1::QUANTITY: many hundreds::v3",
+          "text": "Many hundreds have left, and the emptying is legible from the road: whole terraces dark, w",
+          "needs": [
+            "tier: >= town"
+          ],
+          "excludes": [],
+          "colour": false,
+          "notes": "\"whole terraces dark\""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-POP-1::QUANTITY: thousands",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": false,
+      "notes": "key: outflow thousands",
+      "lines": [
+        {
+          "id": "DS-POP-1::QUANTITY: thousands::v1",
+          "text": "Thousands have gone from {settlement}. This is not a decline; it is an evacuation on a slo",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-POP-1::QUANTITY: thousands::v2",
+          "text": "The loss runs into thousands. The town retains its walls, its plan and its name, and very ",
+          "needs": [
+            "walls"
+          ],
+          "excludes": [],
+          "colour": false,
+          "notes": "\"The town retains its walls\" — unmarked walls claim (no K mark, no twin)"
+        },
+        {
+          "id": "DS-POP-1::QUANTITY: thousands::v3",
+          "text": "Thousands of people have left. What remains occupies a settlement built for something cons",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-POP-1::HERALD KIND: hungry_gap",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": false,
+      "notes": "key: demographic herald hungry_gap (deaths over births from food shortfall; ≈ hunger, not the crisis record)",
+      "lines": [
+        {
+          "id": "DS-POP-1::HERALD KIND: hungry_gap::v1",
+          "text": "The lean season has cost {settlement} people, not to the road but to the ground, and the b",
+          "needs": [
+            "grain"
+          ],
+          "excludes": [],
+          "colour": false,
+          "notes": "\"the harvest\""
+        },
+        {
+          "id": "DS-POP-1::HERALD KIND: hungry_gap::v2",
+          "text": "More were buried here in {season} than born, and the shortfall in the fields is why the tw",
+          "needs": [
+            "grain"
+          ],
+          "excludes": [],
+          "colour": false,
+          "notes": "\"the shortfall in the fields\"; {season} slot"
+        },
+        {
+          "id": "DS-POP-1::HERALD KIND: hungry_gap::v3",
+          "text": "The gap between what the town grew and what it needed has been paid in the usual currency;",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-POP-1::HERALD KIND: migration_flight",
+      "pool": true,
+      "declares": [
+        "migration: exodus"
+      ],
+      "crisisScoped": false,
+      "colour": false,
+      "notes": "key: demographic herald migration_flight",
+      "lines": [
+        {
+          "id": "DS-POP-1::HERALD KIND: migration_flight::v1",
+          "text": "Families are taking to the road. What they are leaving is not a rumour to them, and the co",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-POP-1::HERALD KIND: migration_flight::v2",
+          "text": "The departure is organized now: households moving together, with their tools, which is wha",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-POP-1::HERALD KIND: migration_flight::v3",
+          "text": "People are leaving {settlement} in numbers, and they are leaving for somewhere specific, w",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-POP-1::RECEIPT: births exceed deaths",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": false,
+      "notes": "key: births exceed deaths",
+      "lines": [
+        {
+          "id": "DS-POP-1::RECEIPT: births exceed deaths::v1",
+          "text": "More are born here than buried, and have been for a while. The town is growing from inside",
+          "needs": [],
+          "excludes": [],
+          "colour": false,
+          "notes": "\"The town is growing\" — unhomed: population trend (net growth not guaranteed by births > deaths)"
+        },
+        {
+          "id": "DS-POP-1::RECEIPT: births exceed deaths::v2",
+          "text": "{settlement}'s own households are adding to it. That is the slowest kind of growth and the",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-POP-1::RECEIPT: births exceed deaths::v3",
+          "text": "The rolls run in the town's favour. Nothing dramatic; simply more cradles than graves, sea",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-POP-1::RECEIPT: births and deaths in balance",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": false,
+      "notes": "key: births and deaths balance",
+      "lines": [
+        {
+          "id": "DS-POP-1::RECEIPT: births and deaths in balance::v1",
+          "text": "The rolls balance. {settlement} replaces itself and does not exceed itself, which is what ",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-POP-1::RECEIPT: births and deaths in balance::v2",
+          "text": "Births and burials run level here. The town holds its size out of its own population, with",
+          "needs": [],
+          "excludes": [
+            "migration: influx",
+            "migration: exodus"
+          ],
+          "colour": false,
+          "notes": "\"holds its size… without help and without loss\""
+        },
+        {
+          "id": "DS-POP-1::RECEIPT: births and deaths in balance::v3",
+          "text": "Nothing about the town's counts is moving. It is neither growing nor failing, only continu",
+          "needs": [],
+          "excludes": [],
+          "colour": false,
+          "notes": "\"neither growing nor failing\" — unhomed: population trend (level)"
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-POP-1::RECEIPT: deficit01 positive",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": true,
+      "notes": "key: deficit01 positive (deaths over births)",
+      "lines": [
+        {
+          "id": "DS-POP-1::RECEIPT: deficit01 positive::v1",
+          "text": "More are buried here than born. The town is not emptying quickly, and it is not replacing ",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-POP-1::RECEIPT: deficit01 positive::v2",
+          "text": "{settlement}'s own counts run against it. Whatever holds the population up, it is not the ",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-POP-1::RECEIPT: deficit01 positive::v3",
+          "text": "The rolls are short. A settlement in this condition survives on arrivals, and the arrivals",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-POP-1::CANDIDATE KIND: growth",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": false,
+      "notes": "key: population-dynamics candidate growth",
+      "lines": [
+        {
+          "id": "DS-POP-1::CANDIDATE KIND: growth::v1",
+          "text": "The town is taking people in faster than it loses them. The building is happening at the e",
+          "needs": [
+            "migration: influx"
+          ],
+          "excludes": [],
+          "colour": false,
+          "notes": "\"taking people in faster than it loses them\""
+        },
+        {
+          "id": "DS-POP-1::CANDIDATE KIND: growth::v2",
+          "text": "{settlement} is growing. The pressure shows as crowding rather than prosperity so far, whi",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-POP-1::CANDIDATE KIND: growth::v3",
+          "text": "Numbers here are climbing. Whether the town can house what it is attracting is a question ",
+          "needs": [
+            "migration: influx"
+          ],
+          "excludes": [],
+          "colour": false,
+          "notes": "\"what it is attracting\""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-POP-1::CANDIDATE KIND: emigration",
+      "pool": true,
+      "declares": [
+        "migration: exodus"
+      ],
+      "crisisScoped": false,
+      "colour": false,
+      "notes": "key: candidate emigration",
+      "lines": [
+        {
+          "id": "DS-POP-1::CANDIDATE KIND: emigration::v1",
+          "text": "The town is losing people to the road in organized numbers. This is departure rather than ",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-POP-1::CANDIDATE KIND: emigration::v2",
+          "text": "{settlement} is emptying outward. Households leave together and tell each other where they",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-POP-1::CANDIDATE KIND: emigration::v3",
+          "text": "The population is falling because people are going somewhere else, which is a different pr",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-POP-1::CANDIDATE KIND: decline",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": true,
+      "colour": false,
+      "notes": "key: candidate decline. Crisis-scoped: v3 \"no exodus, no catastrophe\".",
+      "lines": [
+        {
+          "id": "DS-POP-1::CANDIDATE KIND: decline::v1",
+          "text": "The town is shrinking without anyone particularly leaving. It is losing people the slow wa",
+          "needs": [],
+          "excludes": [
+            "migration: exodus"
+          ],
+          "crisis": "any",
+          "colour": false,
+          "notes": "\"without anyone particularly leaving\""
+        },
+        {
+          "id": "DS-POP-1::CANDIDATE KIND: decline::v2",
+          "text": "{settlement} is smaller each season for reasons that appear on no single day's record.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": false,
+          "notes": ""
+        },
+        {
+          "id": "DS-POP-1::CANDIDATE KIND: decline::v3",
+          "text": "Numbers here are falling quietly: no exodus, no catastrophe, only a settlement that is not",
+          "needs": [],
+          "excludes": [
+            "migration: exodus"
+          ],
+          "crisis": "calm",
+          "colour": false,
+          "notes": "\"no exodus, no catastrophe\""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-POP-1::BELIEVED TREND diverges from the ring",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": false,
+      "notes": "key: believed trend diverges from the ring (dm-only pool)",
+      "lines": [
+        {
+          "id": "DS-POP-1::BELIEVED TREND diverges from the ring::v1",
+          "text": "What the neighbouring settlements believe about {settlement}'s numbers and what the rolls ",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": "dm-only"
+        },
+        {
+          "id": "DS-POP-1::BELIEVED TREND diverges from the ring::v2",
+          "text": "{counterpart} still believes this town is emptying. It stopped some time ago, and nothing ",
+          "needs": [],
+          "excludes": [],
+          "colour": false,
+          "notes": "dm-only; {counterpart} slot (a neighbour settlement, not other-npc); presumes believed band < 0 and actual >= 0 — direction of divergence not guaranteed by key"
+        },
+        {
+          "id": "DS-POP-1::BELIEVED TREND diverges from the ring::v3",
+          "text": "The realm's picture of {settlement}'s population is out of date in the town's favour, whic",
+          "needs": [],
+          "excludes": [],
+          "colour": false,
+          "notes": "dm-only; \"out of date in the town's favour\" — presumes belief worse than truth; direction not guaranteed"
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    }
+  ]
+}

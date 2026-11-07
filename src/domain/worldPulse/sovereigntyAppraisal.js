@@ -262,7 +262,7 @@ function unknownAppraisal(assetId, appraiserId, why, evidence) {
     value01: null,
     valueBand: 'unknown',
     evidence,
-    receipt: `${appraiserId || 'the court'} cannot price ${assetId || 'the holding'}: ${why}.`,
+    receipt: `${appraiserId || 'The court'} cannot price ${assetId || 'the holding'}: ${why}.`,
   };
 }
 

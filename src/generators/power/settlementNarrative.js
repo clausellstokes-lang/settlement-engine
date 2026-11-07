@@ -26,6 +26,8 @@ export const STRESS_FLAVOR = {
 };
 
 // STRESS_RUMORS — each renders a rumour phrasing from a relationship object
+// {colour} (CENSUS-2e, R-R; ledger docs/census/declarations/STRESS_RUMORS.json): the fixed words presume
+// only the two NPCs the key supplies, and the `tension` slot is upstream relationship prose, declared there.
 const STRESS_RUMORS = [
   (rel) => {
     var detail;
@@ -92,7 +94,7 @@ export const genSuccessionNarr = (ctx) => {
     );
   if (ctx.prosperity === 'Wealthy' || ctx.prosperity === 'Thriving')
     narratives.push(
-      `${ctx.name} is prosperous enough that the real conflicts are about who controls the surplus. ${ctx.topFaction || 'the dominant faction'} has the most and wants more.`
+      `${ctx.name} is prosperous enough that the real conflicts are about who controls the surplus. ${sentenceStart(ctx.topFaction || 'The dominant faction')} has the most and wants more.`
     );
   if (ctx.prosperity === 'Poor') {
     const [costGov, costTop] = resolvePartyPair(

@@ -1,0 +1,329 @@
+{
+  "poolId": "CHECK_INST_COMPAT_LANDMARKS",
+  "source": "src/generators/structuralValidator.js:269-323 (checkInstCompat)",
+  "drawKind": "R",
+  "drawSite": "src/generators/structuralValidator.js:279,285,291,297,303,309,315,321 pickRandom (first matching rule), called from src/generators/narrative/arrivalScene.js:260; SIGHT beat, only when !underStress",
+  "pools": [
+    {
+      "pool": "great cathedral",
+      "keyGuarantees": [
+        "a native name includes 'great cathedral'",
+        "first matching rule wins (if-chain order)",
+        "rendered only when the record's primary stress has no STRESS_DESCS vignette (src/generators/narrative/arrivalScene.js:215,226,259,292): every record crisis kind has one, so this beat is silent under a record crisis and renders under calm, a custom DM crisis type, or a world pulse stressor the scene never reads",
+        "arrivalScene.js:261 drops a landmark naming a market the roster lacks"
+      ],
+      "poolNeeds": [
+        "institution: temple"
+      ],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Not opted: landmarks drawn only off a record crisis; line-level excludes mark the one calm claim each where a custom/pulse crisis could still be live.",
+      "lines": [
+        {
+          "lineId": "checkInstCompat.landmarks[0][0]",
+          "text": "The great cathedral's spire is the tallest thing for miles.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "checkInstCompat.landmarks[0][1]",
+          "text": "A cathedral dominates the skyline. Larger than anything else in the settlement, which may say something about what matters here.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ],
+      "drawLine": "src/generators/structuralValidator.js:279"
+    },
+    {
+      "pool": "cathedral",
+      "keyGuarantees": [
+        "a native name includes 'cathedral'",
+        "tier not thorp or hamlet (stop: tier)",
+        "first matching rule wins (if-chain order)",
+        "rendered only when the record's primary stress has no STRESS_DESCS vignette (src/generators/narrative/arrivalScene.js:215,226,259,292): every record crisis kind has one, so this beat is silent under a record crisis and renders under calm, a custom DM crisis type, or a world pulse stressor the scene never reads",
+        "arrivalScene.js:261 drops a landmark naming a market the roster lacks"
+      ],
+      "poolNeeds": [
+        "institution: temple"
+      ],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Not opted: landmarks drawn only off a record crisis; line-level excludes mark the one calm claim each where a custom/pulse crisis could still be live.",
+      "lines": [
+        {
+          "lineId": "checkInstCompat.landmarks[1][0]",
+          "text": "A stone cathedral anchors the high ground.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "high ground (terrain not presumed by key)"
+          ]
+        },
+        {
+          "lineId": "checkInstCompat.landmarks[1][1]",
+          "text": "The cathedral bell tower is the first thing visible from this direction.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ],
+      "drawLine": "src/generators/structuralValidator.js:285"
+    },
+    {
+      "pool": "massive wall | citadel",
+      "keyGuarantees": [
+        "a native name includes 'massive wall' or 'citadel'",
+        "first matching rule wins (if-chain order)",
+        "rendered only when the record's primary stress has no STRESS_DESCS vignette (src/generators/narrative/arrivalScene.js:215,226,259,292): every record crisis kind has one, so this beat is silent under a record crisis and renders under calm, a custom DM crisis type, or a world pulse stressor the scene never reads",
+        "arrivalScene.js:261 drops a landmark naming a market the roster lacks"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Not opted: landmarks drawn only off a record crisis; line-level excludes mark the one calm claim each where a custom/pulse crisis could still be live.",
+      "lines": [
+        {
+          "lineId": "checkInstCompat.landmarks[2][0]",
+          "text": "The walls are serious. High stone, maintained, with watchtowers spaced to cover every angle.",
+          "needs": [
+            "walls"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "checkInstCompat.landmarks[2][1]",
+          "text": "The citadel on the high ground makes clear that this settlement has been defended before and expects to be again.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "citadel (a massive-wall-only roster has none)",
+            "high ground",
+            "defended before (history facts)"
+          ]
+        }
+      ],
+      "drawLine": "src/generators/structuralValidator.js:291"
+    },
+    {
+      "pool": "wall | gatehouse (not massive)",
+      "keyGuarantees": [
+        "a native name includes 'wall' or 'gatehouse' (substring, not word start), none includes 'massive'",
+        "first matching rule wins (if-chain order)",
+        "rendered only when the record's primary stress has no STRESS_DESCS vignette (src/generators/narrative/arrivalScene.js:215,226,259,292): every record crisis kind has one, so this beat is silent under a record crisis and renders under calm, a custom DM crisis type, or a world pulse stressor the scene never reads",
+        "arrivalScene.js:261 drops a landmark naming a market the roster lacks"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Not opted: landmarks drawn only off a record crisis; line-level excludes mark the one calm claim each where a custom/pulse crisis could still be live.",
+      "lines": [
+        {
+          "lineId": "checkInstCompat.landmarks[3][0]",
+          "text": "A wall circuit, unremarkable but intact.",
+          "needs": [
+            "walls"
+          ],
+          "excludes": [
+            "crisis: under_siege"
+          ],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "checkInstCompat.landmarks[3][1]",
+          "text": "The gatehouse arch frames the main road.",
+          "needs": [
+            "gate"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        }
+      ],
+      "drawLine": "src/generators/structuralValidator.js:297"
+    },
+    {
+      "pool": "wizard | mage + tower",
+      "keyGuarantees": [
+        "a native name includes 'wizard' or 'mage', and one includes 'tower'",
+        "NOT gated on world magic (the _magicPriority argument is unused)",
+        "first matching rule wins (if-chain order)",
+        "rendered only when the record's primary stress has no STRESS_DESCS vignette (src/generators/narrative/arrivalScene.js:215,226,259,292): every record crisis kind has one, so this beat is silent under a record crisis and renders under calm, a custom DM crisis type, or a world pulse stressor the scene never reads",
+        "arrivalScene.js:261 drops a landmark naming a market the roster lacks"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Not opted: landmarks drawn only off a record crisis; line-level excludes mark the one calm claim each where a custom/pulse crisis could still be live.",
+      "lines": [
+        {
+          "lineId": "checkInstCompat.landmarks[4][0]",
+          "text": "A tower rises above the roofline in a way that isn't architectural. It was added later, and whoever added it wasn't interested in fitting in.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "checkInstCompat.landmarks[4][1]",
+          "text": "The mage tower catches the light differently from the other buildings.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ],
+      "drawLine": "src/generators/structuralValidator.js:303"
+    },
+    {
+      "pool": "major port",
+      "keyGuarantees": [
+        "a native name includes 'major port'",
+        "first matching rule wins (if-chain order)",
+        "rendered only when the record's primary stress has no STRESS_DESCS vignette (src/generators/narrative/arrivalScene.js:215,226,259,292): every record crisis kind has one, so this beat is silent under a record crisis and renders under calm, a custom DM crisis type, or a world pulse stressor the scene never reads",
+        "arrivalScene.js:261 drops a landmark naming a market the roster lacks"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Not opted: landmarks drawn only off a record crisis; line-level excludes mark the one calm claim each where a custom/pulse crisis could still be live.",
+      "lines": [
+        {
+          "lineId": "checkInstCompat.landmarks[5][0]",
+          "text": "The harbour cranes are visible from the road: tall, necessary, industrial.",
+          "needs": [
+            "navigable"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "checkInstCompat.landmarks[5][1]",
+          "text": "Half the settlement seems to be about the water.",
+          "needs": [
+            "navigable"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        }
+      ],
+      "drawLine": "src/generators/structuralValidator.js:309"
+    },
+    {
+      "pool": "palace | royal seat",
+      "keyGuarantees": [
+        "a native name includes 'palace' or 'royal seat'",
+        "first matching rule wins (if-chain order)",
+        "rendered only when the record's primary stress has no STRESS_DESCS vignette (src/generators/narrative/arrivalScene.js:215,226,259,292): every record crisis kind has one, so this beat is silent under a record crisis and renders under calm, a custom DM crisis type, or a world pulse stressor the scene never reads",
+        "arrivalScene.js:261 drops a landmark naming a market the roster lacks"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Not opted: landmarks drawn only off a record crisis; line-level excludes mark the one calm claim each where a custom/pulse crisis could still be live.",
+      "lines": [
+        {
+          "lineId": "checkInstCompat.landmarks[6][0]",
+          "text": "The palace complex sits on the highest point of the settlement and does not look apologetic about it.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "highest point (terrain)"
+          ]
+        },
+        {
+          "lineId": "checkInstCompat.landmarks[6][1]",
+          "text": "Flags on the palace towers. Someone is in residence.",
+          "needs": [],
+          "excludes": [
+            "crisis: succession"
+          ],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "a resident ruler (ruler kind lord not guaranteed)"
+          ]
+        }
+      ],
+      "drawLine": "src/generators/structuralValidator.js:315"
+    },
+    {
+      "pool": "university | academy of magic",
+      "keyGuarantees": [
+        "a native name includes 'university' or 'academy of magic'",
+        "first matching rule wins (if-chain order)",
+        "rendered only when the record's primary stress has no STRESS_DESCS vignette (src/generators/narrative/arrivalScene.js:215,226,259,292): every record crisis kind has one, so this beat is silent under a record crisis and renders under calm, a custom DM crisis type, or a world pulse stressor the scene never reads",
+        "arrivalScene.js:261 drops a landmark naming a market the roster lacks"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Not opted: landmarks drawn only off a record crisis; line-level excludes mark the one calm claim each where a custom/pulse crisis could still be live.",
+      "lines": [
+        {
+          "lineId": "checkInstCompat.landmarks[7][0]",
+          "text": "The university buildings take up more of the skyline than you expected.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "checkInstCompat.landmarks[7][1]",
+          "text": "A complex of old stone buildings (the university) anchors the northern quarter.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "\"the university\" when the key matched an academy of magic",
+            "northern quarter (size, compass)"
+          ]
+        }
+      ],
+      "drawLine": "src/generators/structuralValidator.js:321"
+    }
+  ]
+}

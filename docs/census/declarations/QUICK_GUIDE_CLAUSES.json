@@ -1,0 +1,396 @@
+{
+  "poolId": "QUICK_GUIDE_CLAUSES",
+  "source": "src/domain/summary/settlementQuickGuide.js :512 SCOPE_PHRASE (+ :559 INLAND_SCOPE_PHRASE) / :675 FOOD_SECURITY_CLAUSE",
+  "drawKind": "T",
+  "drawSite": "src/domain/summary/settlementQuickGuide.js:537-542 scopePhrase(cultureKey) / :685-687 foodSecurityClause(label), composed at :647",
+  "pools": [
+    {
+      "pool": "SCOPE_PHRASE",
+      "keyGuarantees": [
+        "cultural identity key (no reader: culture)",
+        "greek/norse/slavic are WATERSIDE_SCOPES: withheld where waterAccessKind(config) === none (:539, chair ruling 5/T1: no fallback, the identity sentence takes its plain form)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Culture-keyed, no calm asserted: not opted in. No twin: an empty cell already falls to the plain identity sentence by ruling T1. The inland Norse and Slavic forms are written (RUNG-2 LANDING phase B; the chair's 10:0x: a waterside slot mute inland is MUTE, not absent), each declaring `excludes: navigable`; the Greek inland form declares the same since phase C unit 4.",
+      "lines": [
+        {
+          "lineId": "SCOPE_PHRASE.germanic",
+          "text": "built in timber and stone, and run by guild and estate",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "culture"
+          ]
+        },
+        {
+          "lineId": "SCOPE_PHRASE.latin",
+          "text": "built in masonry around a civic square, and run by patronage and law",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "culture"
+          ]
+        },
+        {
+          "lineId": "SCOPE_PHRASE.celtic",
+          "text": "built around kin districts and an assembly ground, on pasture and earthwork",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "culture",
+            "food sources"
+          ]
+        },
+        {
+          "lineId": "SCOPE_PHRASE.arabic",
+          "text": "built around courtyards and waterworks, on endowed institutions and the caravan road",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "culture",
+            "trade-route kind"
+          ]
+        },
+        {
+          "lineId": "SCOPE_PHRASE.norse",
+          "text": "built around the hall and the water, on assembly and what the season allows",
+          "needs": [
+            "navigable"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "culture",
+            "season"
+          ]
+        },
+        {
+          "lineId": "SCOPE_PHRASE.slavic",
+          "text": "built in timber compounds on common land, between river and forest",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "culture"
+          ],
+          "note": "CENSUS-2g unit 7 (R-AY): `river` dropped — scopePhrase self-gates the waterside scopes on the record's water and does not verify a river."
+        },
+        {
+          "lineId": "SCOPE_PHRASE.east_asian",
+          "text": "built in wards and courtyards, ordered by bureau and lineage",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "culture"
+          ]
+        },
+        {
+          "lineId": "SCOPE_PHRASE.mesoamerican",
+          "text": "built around a civic-ritual plaza, tribute, and market-and-waterworks",
+          "needs": [
+            "market"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "culture"
+          ]
+        },
+        {
+          "lineId": "SCOPE_PHRASE.south_asian",
+          "text": "built around the tank and the bazaar, in quarters by trade, under temple and guild",
+          "needs": [
+            "market",
+            "institution: temple"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "culture"
+          ]
+        },
+        {
+          "lineId": "SCOPE_PHRASE.steppe",
+          "text": "built for a pastoral life half-settled and half-moving, held by clan and caravan",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "culture",
+            "food sources",
+            "trade-route kind"
+          ]
+        },
+        {
+          "lineId": "SCOPE_PHRASE.greek",
+          "text": "built around the agora and the harbour, on hillside ground and civic association",
+          "needs": [
+            "navigable"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "culture"
+          ],
+          "note": "CENSUS-2g unit 7 (R-AY): `coast` → `navigable` — a river keeps a harbour (chair ruling 5); the closure reads the water."
+        },
+        {
+          "lineId": "INLAND_SCOPE_PHRASE.greek",
+          "text": "built around the agora, on hillside ground and civic association",
+          "needs": [],
+          "excludes": [
+            "navigable"
+          ],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "culture"
+          ],
+          "note": "the landlocked greek form; RUNG-2 LANDING phase C unit 4: aligned with the norse and slavic inland forms, declares `excludes: navigable` (0 of 41 inland Greek births on the 1,000 carry water: no page moves)"
+        },
+        {
+          "lineId": "INLAND_SCOPE_PHRASE.norse",
+          "text": "built around the hall, on kin, oath and the assembly",
+          "needs": [],
+          "excludes": [
+            "navigable"
+          ],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "culture"
+          ],
+          "note": "RUNG-2 LANDING phase B (the chair's ruling of 2026-11-05 10:0x): the landlocked norse form; presumes no water (the branch reads navigable) and no season; the slot was mute in 38 of 98 Norse births on the 1,000"
+        },
+        {
+          "lineId": "INLAND_SCOPE_PHRASE.slavic",
+          "text": "built in timber compounds on land held in common, kin by kin",
+          "needs": [],
+          "excludes": [
+            "navigable"
+          ],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "culture"
+          ],
+          "note": "RUNG-2 LANDING phase B (the chair's ruling of 2026-11-05 10:0x): the landlocked slavic form; presumes no water (the branch reads navigable) and no season; the slot was mute in 30 of 82 Slavic births on the 1,000"
+        }
+      ],
+      "twins": [
+        {
+          "text": "built around a civic-ritual plaza, on tribute and the ritual calendar",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "twinOf": "built around a civic-ritual plaza, tribute, and market-and-waterworks",
+          "why": "CENSUS-2g unit 7, the chair's ruling of 09:29: the mesoamerican scope where no market stands (38 of 92 on the 1,000)"
+        },
+        {
+          "text": "built around the tank, in quarters by trade and kin",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "twinOf": "built around the tank and the bazaar, in quarters by trade, under temple and guild",
+          "why": "CENSUS-2g unit 7, the chair's ruling of 09:29: the south-asian scope where no market or temple stands (44 of 95 on the 1,000)"
+        }
+      ]
+    },
+    {
+      "pool": "FOOD_SECURITY_CLAUSE: deficit - active famine",
+      "keyGuarantees": [
+        "foodSecurity.label = \"deficit - active famine\" (generateFoodSecurity's ladder; its band is the record's own food fact)"
+      ],
+      "poolNeeds": [
+        "deficit",
+        "famine"
+      ],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "States the food band the key already guarantees; asserts no calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "FOOD_SECURITY_CLAUSE[\"deficit - active famine\"]",
+          "text": "food is in deficit and famine is active",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "FOOD_SECURITY_CLAUSE: deficit",
+      "keyGuarantees": [
+        "foodSecurity.label = \"deficit\" (generateFoodSecurity's ladder; its band is the record's own food fact)"
+      ],
+      "poolNeeds": [
+        "deficit"
+      ],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "States the food band the key already guarantees; asserts no calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "FOOD_SECURITY_CLAUSE[\"deficit\"]",
+          "text": "food is in deficit",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "FOOD_SECURITY_CLAUSE: import-dependent",
+      "keyGuarantees": [
+        "foodSecurity.label = \"import-dependent\" (generateFoodSecurity's ladder; its band is the record's own food fact)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "States the food band the key already guarantees; asserts no calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "FOOD_SECURITY_CLAUSE[\"import-dependent\"]",
+          "text": "the food supply depends on imports",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "imports / exports"
+          ]
+        }
+      ]
+    },
+    {
+      "pool": "FOOD_SECURITY_CLAUSE: pressured",
+      "keyGuarantees": [
+        "foodSecurity.label = \"pressured\" (generateFoodSecurity's ladder; its band is the record's own food fact)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "States the food band the key already guarantees; asserts no calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "FOOD_SECURITY_CLAUSE[\"pressured\"]",
+          "text": "the food supply is under pressure",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "FOOD_SECURITY_CLAUSE: surplus",
+      "keyGuarantees": [
+        "foodSecurity.label = \"surplus\" (generateFoodSecurity's ladder; its band is the record's own food fact)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [
+        "deficit"
+      ],
+      "poolCrisis": null,
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Opted in: asserts plenty and renders under crisis; a hunger-family crisis (famine, siege, or any crisis over a deficit) contradicts it.",
+      "lines": [
+        {
+          "lineId": "FOOD_SECURITY_CLAUSE[\"surplus\"]",
+          "text": "there is food to spare",
+          "needs": [],
+          "excludes": [
+            "crisis: hunger"
+          ],
+          "crisis": "any",
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "FOOD_SECURITY_CLAUSE: secure",
+      "keyGuarantees": [
+        "foodSecurity.label = \"secure\" (generateFoodSecurity's ladder; its band is the record's own food fact)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [
+        "deficit"
+      ],
+      "poolCrisis": null,
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Opted in: asserts plenty and renders under crisis; a hunger-family crisis (famine, siege, or any crisis over a deficit) contradicts it.",
+      "lines": [
+        {
+          "lineId": "FOOD_SECURITY_CLAUSE[\"secure\"]",
+          "text": "the food supply is secure",
+          "needs": [],
+          "excludes": [
+            "crisis: hunger"
+          ],
+          "crisis": "any",
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "FOOD_SECURITY_CLAUSE: fallback",
+      "keyGuarantees": [
+        "a label outside the ladder"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Template names its own label.",
+      "lines": [
+        {
+          "lineId": "foodSecurityClause.fallback",
+          "text": "the food supply is ${label}",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    }
+  ]
+}

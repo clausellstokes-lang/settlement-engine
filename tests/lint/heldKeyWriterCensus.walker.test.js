@@ -148,6 +148,19 @@ const ROSTER = Object.freeze([
   // assembly body on `chooseOrPin(pins, 'npcs', …)`, the structural appender's own gate, so a held
   // roster is never re-written; the conflicts are re-derived on every run and never held.
   { symbol: 'storeTrueHooksOnly', file: 'src/domain/coherence/hookTruthRecord.js', cls: 'mutator', stream: SHARED, via: ASSEMBLY_STEP },
+  // ⭐ 15 -> 18 AT THE POOL CENSUS'S MERGE (classed by LANDING-R2 seat E, 2026-11-07, each read
+  // from its own body; none draws, so all three are SHARED-stream):
+  // `fitFactionRoster` (census-4 R12, acd70a977) re-fits a misfit NPC's `factionAffiliation`
+  // inside `npcs` (a new array; no row's identity changes), gated in the assembly body on
+  // `chooseOrPin(pins, 'npcs', …)`. `resolveFactionLabelsAtClose` (census-1i unit 1 R-AW,
+  // ba7887862) renames a power faction whose declared label resolves late, through
+  // applyFactionRenameToSettlement, gated on `chooseOrPin(pins, 'powerStructure', …)`.
+  // `fishTradeTwinned` (F11 unit 3, 2aee16efe) re-words a fish-trade row's `desc` inside
+  // `institutions` when the record holds no fish; it is called in the settlement literal and
+  // consults NO pin, so it runs on a held roster too (stated, not ruled: EM-R7's subject).
+  { symbol: 'fitFactionRoster', file: 'src/generators/power/factionRoleFit.js', cls: 'mutator', stream: SHARED, via: ASSEMBLY_STEP },
+  { symbol: 'resolveFactionLabelsAtClose', file: 'src/generators/power/factionLabelClose.js', cls: 'mutator', stream: SHARED, via: ASSEMBLY_STEP },
+  { symbol: 'fishTradeTwinned', file: 'src/data/fishTradeTwinLines.js', cls: 'mutator', stream: SHARED, via: ASSEMBLY_STEP },
 ]);
 
 /**
@@ -196,6 +209,8 @@ const DISCOVERY_EXEMPT = Object.freeze([
   { symbol: 'refreshPowerGenerationTraces', reason: 're-stamps the power traces in `simulationTrace`, the sanctioned cross-cutting ledger, never `powerStructure` itself.' },
   // RUNG1B-F4 unit 4 (9fd39cf6d), added at the window compose, 2026-11-04.
   { symbol: 'settleCrimeLinesToSignal', reason: 'rewrites the safety profile crime-line descs inside economicState from the final crime signal; economicState is not a held key.' },
+  // CENSUS-2c unit 1a (6dda5f72c), composed at the pool census's merge; classed by LANDING-R2 seat E.
+  { symbol: 'factsOf', reason: 'a pure READ of the record\'s declared facts, handed to renderStressSummary as its facts bag; it returns a new object and writes nothing at all.' },
 ]);
 
 /** The held denominator, DERIVED from its producers and never re-typed. */
@@ -501,7 +516,7 @@ describe('EM-R1 — the writer census of every held key', () => {
       if (!cache.has(row.file)) cache.set(row.file, declaredSymbols(rawSource(row.file)));
       if (cache.get(row.file).get(row.symbol) !== 1) unresolved.push(`${row.file} :: ${row.symbol}`);
     }
-    expect(ROSTER).toHaveLength(15); // 11 -> 13 at the GS-2 merge (lane G2): generateFactions, generateConflicts; 13 -> 14 rung 1 N1 (2026-11-04): conserveSeatPower; 14 -> 15: storeTrueHooksOnly (lane RUNG1-TRUTH unit A; the union of both lanes' rows, composed on the window branch)
+    expect(ROSTER).toHaveLength(18); // 11 -> 13 at the GS-2 merge (lane G2): generateFactions, generateConflicts; 13 -> 14 rung 1 N1 (2026-11-04): conserveSeatPower; 14 -> 15: storeTrueHooksOnly (lane RUNG1-TRUTH unit A; the union of both lanes' rows, composed on the window branch); 15 -> 18 at the pool census's merge: fitFactionRoster (census-4 R12, acd70a977), resolveFactionLabelsAtClose (census-1i unit 1, ba7887862), fishTradeTwinned (F11 unit 3, 2aee16efe)
     expect(unresolved, 'a roster row names a symbol its file no longer declares exactly once').toEqual([]);
 
     // (b) DISCOVERY, both directions, over the assembly step's OWN body.
@@ -583,8 +598,9 @@ describe('EM-R1 — the writer census of every held key', () => {
     // Every OTHER held writer is SHARED-STREAM and therefore consumes and discards.
     const shared = ROSTER.filter((row) => row.stream === SHARED).map((row) => row.symbol).sort();
     expect(shared).toEqual([
-      'conserveSeatPower', 'ensureFactionStructuralNpcs', 'generateCoherence', 'generateFactions', 'generateSettlementName',
-      'reconcilePowerStructure', 'relinkFactionMembers', 'resizePoliticalRoster', 'storeTrueHooksOnly',
+      'conserveSeatPower', 'ensureFactionStructuralNpcs', 'fishTradeTwinned', 'fitFactionRoster', 'generateCoherence', 'generateFactions',
+      'generateSettlementName', 'reconcilePowerStructure', 'relinkFactionMembers', 'resizePoliticalRoster',
+      'resolveFactionLabelsAtClose', 'storeTrueHooksOnly',
     ]);
     // ⛔ generateSettlementName is the row this rule exists for: the mint draws on the assembly
     // step's own shared stream, so a held name is CONSUMED AND DISCARDED, never skipped.

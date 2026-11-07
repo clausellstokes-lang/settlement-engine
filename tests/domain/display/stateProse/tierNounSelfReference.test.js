@@ -17,6 +17,7 @@ import { describe, expect, it } from 'vitest';
 
 import { speakTierNoun, TIER_NOUN_KEPT } from '../../../../src/domain/display/stateProse/stateProseKernel.js';
 import { tierNounFindings } from '../../../../src/domain/coherence/tierNounFindings.js';
+import { parseAtom } from '../../../../src/domain/facts/factVocabulary.js';
 import { DOSSIER_STATE_PROSE_ECONOMY } from '../../../../src/data/dossierStateProse/economy.generated.js';
 import { DOSSIER_STATE_PROSE_GENERAL } from '../../../../src/data/dossierStateProse/general.generated.js';
 import { DOSSIER_STATE_PROSE_DEFENSE } from '../../../../src/data/dossierStateProse/defense.generated.js';
@@ -79,11 +80,24 @@ describe('speakTierNoun — the self-references the corpus writes as "a town"', 
   });
 });
 
-/** Every string leaf of a corpus object. */
+/**
+ * Every string leaf of a corpus object, except a variant's mark that parses as a fact atom.
+ *
+ * ⚠ MARKS ARE DECLARATIONS, NEVER PRINTED (census-3c unit 4, 586bedd7f). The DS-POP exodus lines
+ * declare the band atom `tier: >= town` (factVocabulary.js: `tier: ≥ town`, parsed alike), which
+ * names a tier BY DESIGN and is read by the kernel, never spoken; no mark carried "town" before
+ * it (this file 24/24 green at 586bedd7f^, the four corpus arms red at 586bedd7f on exactly the
+ * three `tier: >= town` marks). Every printed string, and every mark that is not an atom
+ * (`dm-only`, `colour`, the kernel's words), is still walked.
+ */
 function leaves(node, out = []) {
   if (typeof node === 'string') out.push(node);
   else if (Array.isArray(node)) for (const v of node) leaves(v, out);
-  else if (node && typeof node === 'object') for (const v of Object.values(node)) leaves(v, out);
+  else if (node && typeof node === 'object') {
+    for (const [k, v] of Object.entries(node)) {
+      leaves(k === 'marks' && Array.isArray(v) ? v.filter((m) => parseAtom(m) === null) : v, out);
+    }
+  }
   return out;
 }
 

@@ -1,0 +1,521 @@
+{
+ "poolId": "HOOK_LINE_POOLS",
+ "source": "src/domain/dossier/hookLines.js :80-170 (LICENCE_LINES … STANDING_LINES via CONFLICT_LINES :144; FOOD_GAP_LINES :163); exported as HOOK_LINE_POOLS :230",
+ "drawKind": "H",
+ "drawSite": "src/domain/dossier/hookLines.js:190-214 createConflictHookDraw (fnv1a32(`${a}>${b}::${issue}::${family}`) base, then +1 per further conflict of the family, no replacement until spent), called at src/domain/dossier/plotHooks.js:373; foodGap at hookLines.js:223-227",
+ "readerCoverage": "reader:hook-pools (src/domain/coherence/readerBattery.js:393 hookPoolsFindings): GUARD_WORDS hits only conflict.property[0] (\"guards\"); SEA_HOOK_WORDS hits no line in these pools.",
+ "pools": [
+  {
+   "pool": "conflict.licence",
+   "keyGuarantees": [
+    "one conflict on the record whose issue text matches this family (ISSUE_FAMILIES, first match wins); ${a}/${b} are the record's two parties (fallback \"One faction\"/\"another\"); ${issue} is the record's issue label, first letter lowered. Every line is then passed through speakHookTruthfully/hookTruthViolations (plotHooks.js:263)."
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders on every birth with a conflict of this family (crisis or none), but no line asserts calm, plenty or safety: stays out of the inverse default. Not a colour pool: some lines carry stop presumptions (papers, clerks, courts), though none has an atom.",
+   "lines": [
+    {
+     "lineId": "HOOK_LINE_POOLS.conflict.licence[0]",
+     "text": "${a} has begun issuing its own papers over ${issue}, and ${b} is refusing to honour them.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "papers / written administration"
+     ]
+    },
+    {
+     "lineId": "HOOK_LINE_POOLS.conflict.licence[1]",
+     "text": "A clerk who holds the only complete record of ${issue} has stopped coming to work, and both ${a} and ${b} have sent someone to find them.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "clerk",
+      "records"
+     ]
+    },
+    {
+     "lineId": "HOOK_LINE_POOLS.conflict.licence[2]",
+     "text": "${b} has offered to drop its claim on ${issue} in exchange for something it will not put in writing, and ${a} is tempted.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "HOOK_LINE_POOLS.conflict.licence[3]",
+     "text": "Two sets of papers covering ${issue} are in circulation, one sealed by ${a} and one by ${b}, and nobody outside either camp can tell which is binding.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "papers / seals"
+     ]
+    },
+    {
+     "lineId": "HOOK_LINE_POOLS.conflict.licence[4]",
+     "text": "${a} has quietly stopped enforcing ${issue} against anyone who pays ${b} instead, and the arrangement is about to become public.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "enforcement capacity (no guard word; not convicted by reader:hook-pools)"
+     ]
+    }
+   ]
+  },
+  {
+   "pool": "conflict.jurisdiction",
+   "keyGuarantees": [
+    "one conflict on the record whose issue text matches this family (ISSUE_FAMILIES, first match wins); ${a}/${b} are the record's two parties (fallback \"One faction\"/\"another\"); ${issue} is the record's issue label, first letter lowered. Every line is then passed through speakHookTruthfully/hookTruthViolations (plotHooks.js:263)."
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders on every birth with a conflict of this family (crisis or none), but no line asserts calm, plenty or safety: stays out of the inverse default. Not a colour pool: some lines carry stop presumptions (papers, clerks, courts), though none has an atom.",
+   "lines": [
+    {
+     "lineId": "HOOK_LINE_POOLS.conflict.jurisdiction[0]",
+     "text": "${a} has taken someone into custody over ${issue}, and ${b} has sent people to take them back.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "detention / a place to hold someone"
+     ]
+    },
+    {
+     "lineId": "HOOK_LINE_POOLS.conflict.jurisdiction[1]",
+     "text": "A ruling on ${issue} went ${a}'s way, and ${b} has simply carried on as though it did not.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "a court or ruling body"
+     ]
+    },
+    {
+     "lineId": "HOOK_LINE_POOLS.conflict.jurisdiction[2]",
+     "text": "${b} has started keeping its own account of ${issue}, and it no longer agrees with ${a}'s about what happened.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "HOOK_LINE_POOLS.conflict.jurisdiction[3]",
+     "text": "Somebody acting for ${a} overstepped badly over ${issue}, and ${b} is holding the proof back for a better moment.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "HOOK_LINE_POOLS.conflict.jurisdiction[4]",
+     "text": "${a} and ${b} have both claimed the right to settle ${issue}, and the people who must live with the answer are being asked to choose.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "conflict.property",
+   "keyGuarantees": [
+    "one conflict on the record whose issue text matches this family (ISSUE_FAMILIES, first match wins); ${a}/${b} are the record's two parties (fallback \"One faction\"/\"another\"); ${issue} is the record's issue label, first letter lowered. Every line is then passed through speakHookTruthfully/hookTruthViolations (plotHooks.js:263)."
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders on every birth with a conflict of this family (crisis or none), but no line asserts calm, plenty or safety: stays out of the inverse default. Not a colour pool: the property pool holds the one guard presumption reader:hook-pools convicts.",
+   "lines": [
+    {
+     "lineId": "HOOK_LINE_POOLS.conflict.property[0]",
+     "text": "${a} has posted guards on what it says is its own, and ${b} says ${issue} was never ${a}'s to hold.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "guards (convicted by reader:hook-pools GUARD_WORDS \"guards\" with no enforcement body)",
+      "guard presence (any of watch / garrison / militia): no single reader (design §1 row \"guard presence\"); a disjunction across dimensions is not a declaration (§3.2)"
+     ],
+     "note": "needsAny is NOT in RULES.md: the reader:hook-pools [guard] check is satisfied by ANY enforcement body (ENFORCEMENT_HOUSE watch|guard|garrison|militia...), and RULES.md has no disjunction for needs. Recorded as needsAny for the chair; Phase B must pick one atom or add a disjunction."
+    },
+    {
+     "lineId": "HOOK_LINE_POOLS.conflict.property[1]",
+     "text": "An inventory of ${issue} came up short, and ${a} and ${b} each say the other took the difference.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "HOOK_LINE_POOLS.conflict.property[2]",
+     "text": "${b} has produced an old deed bearing on ${issue}; it is good enough for ${a} to take seriously and old enough for ${a} to doubt.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "records (a deed)"
+     ]
+    },
+    {
+     "lineId": "HOOK_LINE_POOLS.conflict.property[3]",
+     "text": "Someone has been moving what ${issue} covers out of the building at night, and both ${a} and ${b} assume the other arranged it.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "a building holds what the issue covers"
+     ]
+    },
+    {
+     "lineId": "HOOK_LINE_POOLS.conflict.property[4]",
+     "text": "${a} has offered to split ${issue} rather than argue it, and the offer has split ${b} instead.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "conflict.revenue",
+   "keyGuarantees": [
+    "one conflict on the record whose issue text matches this family (ISSUE_FAMILIES, first match wins); ${a}/${b} are the record's two parties (fallback \"One faction\"/\"another\"); ${issue} is the record's issue label, first letter lowered. Every line is then passed through speakHookTruthfully/hookTruthViolations (plotHooks.js:263)."
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders on every birth with a conflict of this family (crisis or none), but no line asserts calm, plenty or safety: stays out of the inverse default. Not a colour pool: some lines carry stop presumptions (papers, clerks, courts), though none has an atom.",
+   "lines": [
+    {
+     "lineId": "HOOK_LINE_POOLS.conflict.revenue[0]",
+     "text": "${a} has stopped paying what ${b} says it owes on ${issue}, and the stoppage is costing a third party money.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "HOOK_LINE_POOLS.conflict.revenue[1]",
+     "text": "A clerk's ledger covering ${issue} is missing a season, and ${a} benefits from its absence more than ${b} does.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "clerk / ledger",
+      "season (ruling 8; here a span of time, not a climate claim)"
+     ]
+    },
+    {
+     "lineId": "HOOK_LINE_POOLS.conflict.revenue[2]",
+     "text": "${b} has undercut ${a} on ${issue} at a price that cannot be honest, and nobody has worked out yet where the difference comes from.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "HOOK_LINE_POOLS.conflict.revenue[3]",
+     "text": "${a} has begun turning away anyone who deals with ${b} over ${issue}, and the refusals are starting to bite the wrong people.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "HOOK_LINE_POOLS.conflict.revenue[4]",
+     "text": "Both ${a} and ${b} have promised the same share of ${issue} to the same outsider, who has now arrived to collect.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "conflict.people",
+   "keyGuarantees": [
+    "one conflict on the record whose issue text matches this family (ISSUE_FAMILIES, first match wins); ${a}/${b} are the record's two parties (fallback \"One faction\"/\"another\"); ${issue} is the record's issue label, first letter lowered. Every line is then passed through speakHookTruthfully/hookTruthViolations (plotHooks.js:263)."
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders on every birth with a conflict of this family (crisis or none), but no line asserts calm, plenty or safety: stays out of the inverse default. Not a colour pool: some lines carry stop presumptions (papers, clerks, courts), though none has an atom.",
+   "lines": [
+    {
+     "lineId": "HOOK_LINE_POOLS.conflict.people[0]",
+     "text": "${a} has drawn up names under ${issue}, and ${b} has been quietly telling people how to keep off the list.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "HOOK_LINE_POOLS.conflict.people[1]",
+     "text": "A family caught between ${a} and ${b} over ${issue} has asked for someone from outside to speak for them.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "HOOK_LINE_POOLS.conflict.people[2]",
+     "text": "${b} has taken on people ${a} had already claimed under ${issue}, and neither will release them.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "HOOK_LINE_POOLS.conflict.people[3]",
+     "text": "Someone has been paid to swear to a version of ${issue} that suits ${a}, and ${b} knows who paid and not yet who swore.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "HOOK_LINE_POOLS.conflict.people[4]",
+     "text": "${a} and ${b} have each offered protection over ${issue} to the same households, on terms that cannot both be kept.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "armed protection (no guard word)"
+     ]
+    }
+   ]
+  },
+  {
+   "pool": "conflict.seat",
+   "keyGuarantees": [
+    "one conflict on the record whose issue text matches this family (ISSUE_FAMILIES, first match wins); ${a}/${b} are the record's two parties (fallback \"One faction\"/\"another\"); ${issue} is the record's issue label, first letter lowered. Every line is then passed through speakHookTruthfully/hookTruthViolations (plotHooks.js:263)."
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Renders on every birth with a conflict of this family (crisis or none), but no line asserts calm, plenty or safety: stays out of the inverse default. Not a colour pool: some lines carry stop presumptions (papers, clerks, courts), though none has an atom.",
+   "lines": [
+    {
+     "lineId": "HOOK_LINE_POOLS.conflict.seat[0]",
+     "text": "${a} has a candidate for ${issue} and ${b} has a reason the candidate cannot stand, and the reason is true.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "HOOK_LINE_POOLS.conflict.seat[1]",
+     "text": "A vote on ${issue} has been postponed three times, each time by whichever of ${a} or ${b} would have lost it.",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "a voting body (no ruler-kind reader for an assembly that votes)"
+     ]
+    },
+    {
+     "lineId": "HOOK_LINE_POOLS.conflict.seat[2]",
+     "text": "${b} has let it be known it will accept ${a}'s answer to ${issue} if one of its own people is kept on, and the condition is the real dispute.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "HOOK_LINE_POOLS.conflict.seat[3]",
+     "text": "Two people are already acting as though ${issue} is settled in their favour, one backed by ${a} and one by ${b}.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "HOOK_LINE_POOLS.conflict.seat[4]",
+     "text": "Someone with no part in ${a} or ${b} has been promised ${issue} by both of them, and has told neither about the other.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "conflict.standing",
+   "keyGuarantees": [
+    "one conflict on the record whose issue text matches this family (ISSUE_FAMILIES, first match wins); ${a}/${b} are the record's two parties (fallback \"One faction\"/\"another\"); ${issue} is the record's issue label, first letter lowered. Every line is then passed through speakHookTruthfully/hookTruthViolations (plotHooks.js:263)."
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": true,
+   "ruling": "Renders on every birth with a conflict of this family (crisis or none), but no line asserts calm, plenty or safety: stays out of the inverse default. Not a colour pool: some lines carry stop presumptions (papers, clerks, courts), though none has an atom.",
+   "lines": [
+    {
+     "lineId": "HOOK_LINE_POOLS.conflict.standing[0]",
+     "text": "${a} has stopped speaking to ${b} about ${issue} and started speaking about it to everybody else.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "HOOK_LINE_POOLS.conflict.standing[1]",
+     "text": "A go-between who carried messages on ${issue} between ${a} and ${b} has been caught keeping copies.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "HOOK_LINE_POOLS.conflict.standing[2]",
+     "text": "${b} is waiting for ${a} to overreach on ${issue}, and has arranged for it to be witnessed when it happens.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "HOOK_LINE_POOLS.conflict.standing[3]",
+     "text": "An old debt between ${a} and ${b} has been called in over ${issue}, years after both sides had stopped mentioning it.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "HOOK_LINE_POOLS.conflict.standing[4]",
+     "text": "Someone has been feeding ${a} and ${b} the same warning about each other over ${issue}, and neither has asked who.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "HOOK_LINE_POOLS.conflict.standing[5]",
+     "text": "${a} has offered ${b} terms on ${issue} that are better than ${b} expected, which is why ${b} has not accepted them.",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "foodGap",
+   "keyGuarantees": [
+    "facts.foodGap: the food band is pressured, import-dependent, deficit or famine (hookTruth.js:161)",
+    "a famine hook on the page was refused (famine_words_on_a_fed_place), so famineLicensed is false: either famineOf.starvingAllowed is false or stores >= 2 months",
+    "no other economics hook naming grain/food/harvest survived (plotHooks.js:270-285)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Opted in: the line renders under any crisis (siege included: the siege is a hunger-family kind and drives food bands down), and four of six lines assert that supply still ARRIVES, which a siege contradicts; [1] asserts the place is fed, which a deficit band (reachable here with >= 2 months stored) and a famine contradict.",
+   "drawKind": "H",
+   "drawSite": "src/domain/dossier/hookLines.js:226 foodGapHookLine (fnv1a32(name::band::food-gap) % 6), called at src/domain/dossier/plotHooks.js:280",
+   "lines": [
+    {
+     "lineId": "HOOK_LINE_POOLS.foodGap[0]",
+     "text": "Grain is coming in, and the people bringing it have worked out exactly how much that is worth. The price has moved twice this month.",
+     "needs": [],
+     "excludes": [
+      "crisis: under_siege"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": [
+      "imports (grain arrives from outside)",
+      "food source: grain"
+     ]
+    },
+    {
+     "lineId": "HOOK_LINE_POOLS.foodGap[1]",
+     "text": "Enough food arrives to keep the place fed, which means whoever controls the carts controls rather more than the carts.",
+     "needs": [],
+     "excludes": [
+      "deficit",
+      "famine",
+      "crisis: famine",
+      "crisis: under_siege"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": [
+      "imports (food arrives by cart)"
+     ]
+    },
+    {
+     "lineId": "HOOK_LINE_POOLS.foodGap[2]",
+     "text": "A supplier who has carried the shortfall for years wants the arrangement put on paper now, and the terms have changed.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": false,
+     "stop": [
+      "imports (an outside supplier)"
+     ]
+    },
+    {
+     "lineId": "HOOK_LINE_POOLS.foodGap[3]",
+     "text": "The last two consignments were short by the same amount, and the measure is being blamed rather than the measurer.",
+     "needs": [],
+     "excludes": [
+      "crisis: under_siege"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": [
+      "imports (consignments arrive)"
+     ]
+    },
+    {
+     "lineId": "HOOK_LINE_POOLS.foodGap[4]",
+     "text": "Somebody has begun buying grain forward at prices nobody local can match, and will not say who it is for.",
+     "needs": [
+      "market"
+     ],
+     "excludes": [],
+     "crisis": "any",
+     "colour": false,
+     "stop": [
+      "food source: grain"
+     ]
+    },
+    {
+     "lineId": "HOOK_LINE_POOLS.foodGap[5]",
+     "text": "A merchant has offered to cover the whole gap from one source, which would solve this season and hand them next season.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": false,
+     "stop": [
+      "imports (one outside source)",
+      "season (a span of time)"
+     ]
+    }
+   ],
+   "emptySlot": "Under siege 3 of 6 lines stay drawable ([2], [5] unconditionally; [4] with a market); every other condition keeps >= 4. No twin needed; NOTE the draw is a fixed hash modulo 6, so Phase B must make the draw choose among eligible lines rather than refuse after the pick."
+  }
+ ]
+}

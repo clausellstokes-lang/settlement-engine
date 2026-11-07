@@ -176,6 +176,7 @@ function text(value) {
 export function conquestMarginVerdict(input) {
   const row = recordOf(input);
   const occupierName = text(row.occupierName) || 'the victor';
+  const occupierLead = text(row.occupierName) || 'The victor';
   const occupiedName = text(row.occupiedName) || 'the held settlement';
   // ⚠️ `Number(null)` IS 0, AND 0 IS A RUIN. A null/undefined capacity means NOT
   // READ; a zero capacity means a settlement with nothing left. Coercing first
@@ -215,7 +216,7 @@ export function conquestMarginVerdict(input) {
       overwhelming: true,
       gap,
       ceiling: T.OPEN_CEILING,
-      receipt: `${occupierName} outweighs ${occupiedName} by ${gap} points of war-making capacity:`
+      receipt: `${occupierLead} outweighs ${occupiedName} by ${gap} points of war-making capacity:`
         + ' this was never a contest, and the hold may become a client state.',
     };
   }
@@ -226,9 +227,9 @@ export function conquestMarginVerdict(input) {
     gap,
     ceiling: T.CAPPED_CEILING,
     receipt: band === 'clearly_winning'
-      ? `${occupierName} is plainly winning against ${occupiedName} by ${gap} points, and plainly`
+      ? `${occupierLead} is plainly winning against ${occupiedName} by ${gap} points, and plainly`
         + ' winning is not overwhelming. It may hold and extract; it may not annex, and its war ends at a table.'
-      : `${occupierName} holds ${occupiedName} by ${gap} points, which is a garrison and not a conquest.`,
+      : `${occupierLead} holds ${occupiedName} by ${gap} points, which is a garrison and not a conquest.`,
   };
 }
 

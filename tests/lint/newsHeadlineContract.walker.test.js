@@ -115,7 +115,7 @@ describe('complete Wizard News address and headline rewrite contract', () => {
     expect(overlapFields.consequenceOutcomes.filter(isStateOnlyOutcome)).toHaveLength(12);
   });
 
-  it('A2 freezes all 88 address rows and their canonical digest', () => {
+  it('A2 freezes all 86 address rows and their canonical digest', () => {
     expect(compareNewsAddressRows(addressRows, baseline.addressTotality.rows)).toBe(true);
     expect(addressRowsSha256(addressRows)).toBe(baseline.addressTotality.rowsSha256);
     // T8 · SHIFT (§858 + §860): 106 → 102 identities over 53 → 51 homes. The two homes that leave
@@ -138,7 +138,11 @@ describe('complete Wizard News address and headline rewrite contract', () => {
     // 42/2/84/0/84/365/506; ten homes out and seven in, named at news-voice-contract.mjs's RE-RECORDED block. Every row stays indicative.
     // 2026-11-06 (LANDING-7 R-E10, the density ceilings re-derived from the stamp bands, 20c0139c5 alone): 42/2/84/0/84/365/506 →
     // 44/2/88/0/88/372/540; one home out and three in, named at news-voice-contract.mjs's RE-RECORDED block. Every row stays indicative.
-    expect(baseline.addressTotality.totals).toEqual({ homes: 44, fields: 2, identities: 88, prospectiveIdentities: 0, indicativeIdentities: 88, distinctValues: 372, occurrences: 540 });
+    // 2026-11-07 (LANDING-R2 seat D2, the chair's 02:36 ruling, §934.105; re-taken at the tip 3d03dc723): 44/2/88/0/88/372/540 →
+    // 43/2/86/0/86/356/524; queued|npc_suppress leaves at census-1i unit 3 (597866207, inside rung 2's census-1b merge 0856c09d3),
+    // distinct/occurrences by step d35532850 −6/−6, 950b75014 −4/−4, 597866207 −4/−4, and −2/−2 interaction with rung 1, at
+    // news-headline-contract.mjs's ADDRESS_TOTALS. Every row stays indicative.
+    expect(baseline.addressTotality.totals).toEqual({ homes: 43, fields: 2, identities: 86, prospectiveIdentities: 0, indicativeIdentities: 86, distinctValues: 356, occurrences: 524 });
   });
 
   it('A3 freezes both raw lanes and all 26 exact rewrite counts', () => {

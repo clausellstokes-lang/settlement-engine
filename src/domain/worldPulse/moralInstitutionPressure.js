@@ -374,7 +374,7 @@ export function evaluateMoralInstitutionPressure(worldState, snapshot, context =
         reasons: [
           best.martial
             ? `A demilitarizing town no longer sustains the ${instName}.`
-            : `${patronName} leads the abolition: ${cause}.`,
+            : `${String((prescriber && prescriber.name) || 'A reaching faith')} leads the abolition: ${cause}.`,
           'The case against it has been building for seasons rather than arriving in a single ruling: an arc, not a decree.',
         ],
         institutionPatch: {
@@ -530,7 +530,7 @@ export function evaluateMoralInstitutionFounding(worldState, snapshot, context =
         appliedHeadline: `${item.name || item.id} raises ${articleFor(entry.name)} ${nameLower}`,
         summary: `Under ${patronName}, ${nameLower} rises because ${cause}.`,
         reasons: [
-          `${patronName} raises the ${nameLower}: ${cause}.`,
+          `${String(patron.name || 'The patron')} raises the ${nameLower}: ${cause}.`,
           'The case for it has been building for years rather than arriving in a single ruling: an arc, not a decree.',
         ],
         institutionPatch: {

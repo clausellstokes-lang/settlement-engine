@@ -12,7 +12,7 @@
  */
 
 import { buildThreatAssessment, disasterReadinessScore, healerSubject } from './threatAssessment.js';
-import { defenseFactsOf, foodEnduranceOf } from '../defense/defenseFacts.js';
+import { HELD_STORES_WORDS, defenseFactsOf, foodEnduranceOf } from '../defense/defenseFacts.js';
 import { numberWord } from './numberWords.js';
 import { scoreBand, scoreColor, SCORE_BAND_CUTS } from './defenseScoreBands.js';
 import { STRESS_TYPE_MAP } from '../../data/stressTypes.js';
@@ -237,6 +237,51 @@ export function runningCriminalChains(settlement) {
   const chains = settlement?.economicState?.activeChains;
   return (Array.isArray(chains) ? chains : [])
     .filter((c) => c?.needKey === 'criminal_economy' && RUNNING_CHAIN_STATUS.includes(String(c?.status ?? '')));
+}
+
+/**
+ * DOES THE BLOCK LIST CRIME (RUNG-2 LANDING phase D, R-D2; F9's law extended)? The Defense
+ * block's own lists: the operations (`safetyProfile.criminalInstitutions`), the running criminal
+ * supply chains (`runningCriminalChains`) — F9's two — and the block's "Active crime patterns"
+ * (`safetyProfile.crimeTypes`), which a crisis fills with its own operations (a religious
+ * conversion's religious fraud and informant networks, soak1k-1801). The denial that nothing
+ * criminal is organised here (DS-DEF-4's `structure null` pool, the tab's static line) prints only
+ * where this is false: beside a listed pattern it is the contradiction F9 cured for the operations.
+ * A pattern whose own text denies organisation (`patternDeniesOrganisation`, phase E) lists no
+ * crime the denial contradicts, so it is not counted (R-E1).
+ * @param {DefenseDisplaySettlement | null | undefined} settlement
+ * @returns {boolean}
+ */
+export function blockListsCrime(settlement) {
+  const sp = /** @type {{ crimeTypes?: unknown[], criminalInstitutions?: unknown[] } | undefined} */ (settlement?.economicState?.safetyProfile);
+  return (sp?.criminalInstitutions || []).length > 0
+    || (sp?.crimeTypes || []).some((pattern) => !patternDeniesOrganisation(pattern))
+    || runningCriminalChains(settlement).length > 0;
+}
+
+/**
+ * A CRIME PATTERN WHOSE OWN TEXT DENIES ORGANISATION (RUNG-2 LANDING phase E, R-E1). The denial
+ * ("No criminal infrastructure has been identified") means no ORGANISED structure; beside such a
+ * pattern it is true, and phase D's silence there (soak1k-362, -452, -572, -686, -740, -800,
+ * -848, -884: "Background crime" alone) hid a true sentence. The pattern catalogue
+ * (`generators/safetyProfile.js`, its crime types and every stress addition), read whole, holds
+ * two texts that deny organisation in their own words, matched here by those words:
+ *   - "Background crime": "… No single dominant organisation: just the steady pressure …";
+ *   - "Survival crime" where no network exists: "Theft driven by economic desperation rather than
+ *     organization. No criminal infrastructure: …" (beside a network the same type prints the
+ *     desperation-theft line, which denies nothing, so the TEXT decides, not the type).
+ * Every other pattern (a crisis's fraud, networks, black markets; lawlessness; smuggling) is crime
+ * the denial would contradict.
+ */
+export const PATTERN_DENIES_ORGANISATION = /No single dominant organisation|No criminal infrastructure:/;
+
+/**
+ * @param {unknown} pattern one `safetyProfile.crimeTypes` entry, `{ type, desc }`
+ * @returns {boolean}
+ */
+export function patternDeniesOrganisation(pattern) {
+  const desc = /** @type {{ desc?: unknown } | null | undefined} */ (pattern)?.desc;
+  return typeof desc === 'string' && PATTERN_DENIES_ORGANISATION.test(desc);
 }
 
 /**
@@ -566,10 +611,14 @@ export function foodEnduranceLine(settlement) {
   let door;
   /** @type {string} */
   let after;
+  // The rung-2 window (F13 FAMINE-STORES): where an active famine holds the granary shut
+  // (`storesHeld`), the line says so in the stores words' one home and never says the held
+  // granary simply carries the place.
+  const held = end.storesHeld ? `, but ${HELD_STORES_WORDS} it` : '';
   if (end.fullRationMonths === null) {
     before = `${lead}, but what the ${noun} still grows feeds it at full rations; `;
     door = end.hasGranary ? 'the granary' : 'its household stores';
-    after = end.hasGranary ? ' stands in reserve.' : ' stand in reserve.';
+    after = end.hasGranary ? ` stands in reserve${held}.` : ' stand in reserve.';
   } else {
     const stretched = end.keptShare > 0 ? 'with what is still harvested, ' : '';
     const half = end.halfRationMonths === null
@@ -577,7 +626,8 @@ export function foodEnduranceLine(settlement) {
       : `, ${monthsInWords(end.halfRationMonths)} on half`;
     before = `${lead}; ${stretched}`;
     door = end.hasGranary ? 'the granary' : 'household stores';
-    after = ` ${end.hasGranary ? 'carries' : 'carry'} the ${noun} for ${monthsInWords(end.fullRationMonths)} at full rations${half}.`;
+    const carries = end.storesHeld ? 'would carry' : end.hasGranary ? 'carries' : 'carry';
+    after = ` ${carries} the ${noun} for ${monthsInWords(end.fullRationMonths)} at full rations${half}${held}.`;
   }
   return { label: FOOD_ENDURANCE_LABEL, before, door, after, sentence: `${before}${door}${after}` };
 }

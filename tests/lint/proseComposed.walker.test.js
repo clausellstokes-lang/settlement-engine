@@ -201,7 +201,11 @@ function unitRowOf(unit, texts) {
 
 describe('GUARD THE GUARD — the inputs this file judges are the real ones', () => {
   it('the corpus, the census and the relation leaf are the shipped ones, not empty stubs', () => {
-    expect(corpus.length, 'the shipped state corpus').toBe(2310);
+    // 2310 -> 2342 (each measured on the six leaves, parent -> commit): F12 unit 2 e19e3e4cf +13,
+    // census-2b item 5 70d05b25b +4, census-5 unit 2 06b59812f +1, census-3c unit 4 e3295d168 +10,
+    // census-5b unit 3 c00b30eb6 +4. 2342 -> 2343 at LANDING-R2 helper G (the chair's §934.105 ruling (1): DS-GEN-17 PROVISIONED v3, the hospital-only line) +1.
+    // 2343 -> 2344 at LANDING-R2 helper G2 (the chair's 06:5x DS-CND-1 boom line (ODQ §934.105, ruling (2)): ARCHETYPE: boom v4 `[street · crisis: any]`) +1.
+    expect(corpus.length, 'the shipped state corpus').toBe(2344);
     expect(census.rows.length, 'the committed wiring census').toBe(709);
     expect(Object.keys(DOSSIER_RELATIONS).length, 'the committed relation leaf').toBe(165);
     // Every arm this module owns is exercised below; a roster that quietly shrank would make
@@ -439,8 +443,38 @@ describe('A0b — the text claims every declared field and no other', () => {
     // are OWED to the census wave that narrows per-line reads (DESIGN_POOL_CENSUS §4.2 steps
     // 4–5). The ceiling is the base plus the owed figure, both printed; a buy-back lowers OWED.
     const UNDER_CLAIM_BASE = 1282;
-    const UNDER_CLAIM_OWED = 26;
+    // 26 -> 60 OWED: +34 from the pool census's appended lines, each inheriting its pool's
+    // per-line debt as F10's twins did (A0b under-claims counted per variant against the census
+    // of each commit, parent -> commit, on the census lineage): F12 unit 2 e19e3e4cf +4 (DS-DEF-11
+    // calm twins), census-1 unit 0 92ccf936f +1 (re-take), census-2b item 5 70d05b25b +3
+    // (DS-CND-1 flourishing v4, DS-GEN-13 NO-MARKET v3), census-3c unit 4 e3295d168 +23 (DS-ECO-2's
+    // seven hunger-safe/no-granary lines), census-5b unit 3 c00b30eb6 +4 (DS-FTH-3 uncontested v4)
+    // = +35 over that lineage's base, +34 net over the rung's 1,308 at the merged tip (one finding
+    // stood on both sides). Bought back by the same census wave that owes the 26.
+    // 60 -> 61 OWED at LANDING-R2 helper G (the chair's §934.105 ruling (1): DS-GEN-17 PROVISIONED v3, the hospital-only line): the
+    // line inherits its pool's per-line debt as every PROVISIONED line does (`readings.inst`, the
+    // pool's one declared read, unclaimed; 1342 -> 1343 measured, the one new under-claim is
+    // DS-GEN-17 :: PROVISIONED v3).
+    // 61 -> 62 OWED at LANDING-R2 helper G2 (the chair's 06:5x DS-CND-1 boom line (ODQ §934.105, ruling (2)): ARCHETYPE: boom v4 `[street · crisis: any]`): the line inherits its pool's per-line debt
+    // as boom v1-3 do (`condition.archetype`, the pool's one declared read, unclaimed; 1343 -> 1344
+    // measured, the one new under-claim is DS-CND-1 :: ARCHETYPE: boom v4).
+    const UNDER_CLAIM_OWED = 62;
     const UNDER_CLAIM_CEILING = UNDER_CLAIM_BASE + UNDER_CLAIM_OWED;
+    // ⛔ THE OVER-CLAIM CEILING, RE-KEYED THE SAME WAY (census-1b unit A (d), 427f7b112). From that
+    // commit the wiring census records `settlement` among DS-GEN-17's fieldsRead (the roster key
+    // reads the record's live hospital, CENSUS-1b unit A (b)), so each of the pool's 11 lines,
+    // which fill the `{settlement}` name slot, reads as claiming a field the branch evaluates and
+    // the pool does not read. Measured: the census row's fieldsRead gains `settlement` at
+    // 427f7b112 (false at its parent); at the tip the 66 over-claims are the 55 of the base plus
+    // exactly those 11 (DS-GEN-17 ADMINISTERED v1-3, GARRISONED v1-2, LETTERED v1-2,
+    // PROVISIONED v1-2, BARE v1-2). OWED to whichever lands first: the census naming the slot
+    // fill as the pool's own read, or the walker telling a name slot from a record claim.
+    // 11 -> 12 OWED at LANDING-R2 helper G (the chair's §934.105 ruling (1): DS-GEN-17 PROVISIONED v3, the hospital-only line): the pool's twelfth line fills
+    // the same `{settlement}` name slot and inherits the same finding (66 -> 67 measured, the one
+    // new over-claim is DS-GEN-17 :: PROVISIONED v3); the same buy-back pays it.
+    const OVER_CLAIM_BASE = 55;
+    const OVER_CLAIM_OWED = 12;
+    const OVER_CLAIM_CEILING = OVER_CLAIM_BASE + OVER_CLAIM_OWED;
     const tally = {
       'over-claim': 0, 'under-claim': 0, 'implicit-negation': 0,
     };
@@ -468,9 +502,10 @@ describe('A0b — the text claims every declared field and no other', () => {
     }
     console.log(`\nA0b · the AUTHORING debt on the shipped corpus, before a byte of the rewrite moves`
       + `\n  variants walked      ${corpus.length}`
-      + `\n  over-claims          ${tally['over-claim']}`
+      + `\n  over-claims          ${tally['over-claim']}   ceiling ${OVER_CLAIM_CEILING}`
+      + ` = ${OVER_CLAIM_BASE} + ${OVER_CLAIM_OWED} OWED (427f7b112: DS-GEN-17's name slot)`
       + `\n  under-claims         ${tally['under-claim']}   ceiling ${UNDER_CLAIM_CEILING}`
-      + ` = ${UNDER_CLAIM_BASE} + ${UNDER_CLAIM_OWED} OWED (R-F5: the census wave buys them back)`
+      + ` = ${UNDER_CLAIM_BASE} + ${UNDER_CLAIM_OWED} OWED (R-F5 26 + the pool census 34 + DS-GEN-17 PROVISIONED v3 1 + DS-CND-1 boom v4 1: the census wave buys them back)`
       + `\n  implicit negations   ${tally['implicit-negation']}`
       + `\n  absences claimed by silence (R-F4, REPORT) ${silent}`
       + `\n  NOT-EXECUTABLE reads ${notExecutable}   pools carrying a finding ${pools.size}\n`);
@@ -479,7 +514,7 @@ describe('A0b — the text claims every declared field and no other', () => {
     expect(tally['implicit-negation']).toBeGreaterThan(0);
     // SHRINK-ONLY, and NOT an exact pin. The rewrite wave pays this debt down; a car that
     // ADDS a claim the census does not license reds here on the day it lands.
-    expect(tally['over-claim']).toBeLessThanOrEqual(55);
+    expect(tally['over-claim']).toBeLessThanOrEqual(OVER_CLAIM_CEILING);
     expect(tally['under-claim']).toBeLessThanOrEqual(UNDER_CLAIM_CEILING);
     expect(tally['implicit-negation']).toBeLessThanOrEqual(13);
     expect(pools.size).toBeLessThanOrEqual(240);

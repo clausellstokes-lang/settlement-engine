@@ -11,7 +11,7 @@ import { commitDeityEmbed } from '../deityCommitEmbed.js';
 import { queueRegionalImpacts, addRegionalChannels, mintDirectedChannel } from '../region/graph.js';
 import { activeSpatialDigest, getSpatialLedger, setSpatialLedger, dropSpatialLedger } from '../spatial/distanceRead.js';
 import { parkArrivals, drainDueArrivals } from '../spatial/spatialArrival.js';
-import { storageCapacityMonths } from './foodStockpile.js';
+import { storageCapacityMonths, withStoresMonths } from './foodStockpile.js';
 import { applyRelationshipPatch, relationshipKeyFromEdge } from './relationshipEvolution.js';
 import { applyWarIntentOutcome, stampDeploymentRecall } from './warIntent.js';
 import { ensureRelationshipEdgeSeed } from './relationshipEdgeSeed.js';
@@ -103,7 +103,7 @@ function applyFoodStockpileOutcomeToSettlement(/** @type {any} */ settlement, /*
     ...settlement,
     economicState: {
       ...settlement.economicState,
-      foodSecurity: { ...fs, storageMonths: nextMonths },
+      foodSecurity: withStoresMonths(fs, nextMonths),
     },
   };
 }

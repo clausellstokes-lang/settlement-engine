@@ -1,0 +1,799 @@
+{
+  "lists": 25,
+  "rows": 571,
+  "rowsDeclaring": 385,
+  "rowsDeclaringNote": "a row counts as declaring when it carries any needs/excludes atom or a crisis other than \"any\"",
+  "colourLists": [],
+  "crisisScoped": [
+    "tradeGoods.deriveIsEntrepot",
+    "computeActiveChains.INSTITUTIONAL_SERVICE_MAP",
+    "computeActiveChains.deriveExportsFromChains",
+    "economicState.generateEconomicState.incomeBuild",
+    "economicState.generateEconomicState.tradeAssembly",
+    "foodBalance.deriveFoodBalanceAnalysis",
+    "foodBalance.deriveFoodBalanceAnalysis.stressNotes",
+    "viability.generatePowerDynamics",
+    "viability.buildViabilitySummary",
+    "viability.generateEconomicViability",
+    "marketPrices.MOVEMENTS",
+    "marketPrices.causalReceipt",
+    "foodways.FRAMES"
+  ],
+  "suffixSites": [
+    {
+      "suffix": "(transit)",
+      "site": "src/generators/computeActiveChains.js :: deriveExportsFromChains (:785)",
+      "condition": "active chain with chain.entrepot && status !== \"impaired\"; first food-record-held output (slice 0,1). LIVE: becomes primaryExports at economicState.js :811-812. Applied BEFORE the stress map, so it can stack with a second tag.",
+      "live": true,
+      "consumers": [
+        "src/generators/computeActiveChains.js :: deriveExportsFromChains (:818 dedupe base strips all three literally)",
+        "src/domain/foodSurplus.js :: TRADE_SUFFIX (/ \\((?:transit|naval route only|taxed by occupation)\\)$/, read by isProcessedFoodGood and isFoodSurplusGood -> goodsHeldByFoodRecord / ownFoodGoodsHeldByFoodRecord; NOTE $-anchored: a doubly-tagged label strips only the LAST tag)",
+        "src/domain/region/goodsCatalog.js :: stripAnnotations (/\\([^)]*\\)/g generic) -> comparable -> normalizeGood / exactCatalogEntry / subsumeTradeGoods (and through normalizeGood: src/domain/display/marketPrices.js :: resolveGood)",
+        "src/domain/region/goodsCatalog.js :: preferTradeLabel (ANNOTATION_RE generic: an annotated label wins a canonical merge)",
+        "src/domain/worldPulse/tierResourceDynamics.js :: comparableLabel (/\\([^)]*\\)/g generic; comment names \"(taxed by occupation)\")",
+        "src/domain/region/goodsCatalog.js :: TOKEN_STOPWORDS (\"transit\")",
+        "src/domain/region/goodsCatalog.js :: preferTradeLabel (/\\(transit\\)/i outranks every other annotation)",
+        "src/domain/region/goodsCatalog.js :: reconcileTradeLists (/\\(transit\\)/i spares the export from the import-contradiction drop; called via economicState normalizeFinalTradeLists and generators/steps/economyReconcilePass.js)",
+        "src/generators/steps/generateEconomy.js :: applyCustomTradeGoodsConfig (baseOf strips /\\s*\\(transit\\)\\s*$/i)",
+        "src/domain/events/mutateWorld.js :: removeTradeGood (strips /\\s*\\(transit\\)\\s*$/i; targets raw|base|`${base} (transit)`)",
+        "src/domain/events/batch.js :: nsHas (strip + `${base} (transit)` match; mirrors removeTradeGood)",
+        "src/domain/display/stateProse/economyStateProse.js :: tradeProfilePoolKey (good.includes(\"(transit)\") with eco.isEntrepot selects the entrepot pool)",
+        "src/domain/display/stateProse/economyStateProse.js :: leadingGoodNoun (skips goods including \"(transit)\")",
+        "src/components/new/tabs/EconomicsTab.jsx :: EconomicsTab (e.includes(\"(transit)\") -> blue transit pill)",
+        "src/components/settlement/eventComposer/EventComposerSecondaryFields.jsx (hint text names \"(transit)\"; display copy, not a match)"
+      ]
+    },
+    {
+      "suffix": "(naval route only)",
+      "site": "src/generators/computeActiveChains.js :: deriveExportsFromChains (:794)",
+      "condition": "stressTypes ∪ intendedStressTypes includes under_siege AND (worldLaw.supportsMaritime() ?? route === \"port\"); list cut to 3; otherwise siege empties the list. LIVE.",
+      "live": true,
+      "consumers": [
+        "src/generators/computeActiveChains.js :: deriveExportsFromChains (:818 dedupe base strips all three literally)",
+        "src/domain/foodSurplus.js :: TRADE_SUFFIX (/ \\((?:transit|naval route only|taxed by occupation)\\)$/, read by isProcessedFoodGood and isFoodSurplusGood -> goodsHeldByFoodRecord / ownFoodGoodsHeldByFoodRecord; NOTE $-anchored: a doubly-tagged label strips only the LAST tag)",
+        "src/domain/region/goodsCatalog.js :: stripAnnotations (/\\([^)]*\\)/g generic) -> comparable -> normalizeGood / exactCatalogEntry / subsumeTradeGoods (and through normalizeGood: src/domain/display/marketPrices.js :: resolveGood)",
+        "src/domain/region/goodsCatalog.js :: preferTradeLabel (ANNOTATION_RE generic: an annotated label wins a canonical merge)",
+        "src/domain/worldPulse/tierResourceDynamics.js :: comparableLabel (/\\([^)]*\\)/g generic; comment names \"(taxed by occupation)\")",
+        "src/domain/region/goodsCatalog.js :: TOKEN_STOPWORDS (\"naval\",\"route\",\"only\")"
+      ]
+    },
+    {
+      "suffix": "(taxed by occupation)",
+      "site": "src/generators/computeActiveChains.js :: deriveExportsFromChains (:797)",
+      "condition": "occupied AND NOT under_siege (same widened stress set); list cut to 5. LIVE.",
+      "live": true,
+      "consumers": [
+        "src/generators/computeActiveChains.js :: deriveExportsFromChains (:818 dedupe base strips all three literally)",
+        "src/domain/foodSurplus.js :: TRADE_SUFFIX (/ \\((?:transit|naval route only|taxed by occupation)\\)$/, read by isProcessedFoodGood and isFoodSurplusGood -> goodsHeldByFoodRecord / ownFoodGoodsHeldByFoodRecord; NOTE $-anchored: a doubly-tagged label strips only the LAST tag)",
+        "src/domain/region/goodsCatalog.js :: stripAnnotations (/\\([^)]*\\)/g generic) -> comparable -> normalizeGood / exactCatalogEntry / subsumeTradeGoods (and through normalizeGood: src/domain/display/marketPrices.js :: resolveGood)",
+        "src/domain/region/goodsCatalog.js :: preferTradeLabel (ANNOTATION_RE generic: an annotated label wins a canonical merge)",
+        "src/domain/worldPulse/tierResourceDynamics.js :: comparableLabel (/\\([^)]*\\)/g generic; comment names \"(taxed by occupation)\")",
+        "src/domain/region/goodsCatalog.js :: TOKEN_STOPWORDS (\"taxed\"; \"by\"/\"occupation\" are NOT stopwords, so \"occupation\" enters fuzzy token matching)"
+      ]
+    },
+    {
+      "suffix": "(naval route only)",
+      "site": "src/generators/economy/economicState.js :: generateEconomicState (:564)",
+      "condition": "config.stressTypes includes under_siege AND generationWorldLaw.supportsMaritime(); slice(0,3). DEAD: primaryExports is cleared at :811 and rebuilt from deriveExportsFromChains; only the stage-5 military/slave dedupe checks (:644, :658) read the interim list.",
+      "live": false,
+      "consumers": [
+        "src/generators/computeActiveChains.js :: deriveExportsFromChains (:818 dedupe base strips all three literally)",
+        "src/domain/foodSurplus.js :: TRADE_SUFFIX (/ \\((?:transit|naval route only|taxed by occupation)\\)$/, read by isProcessedFoodGood and isFoodSurplusGood -> goodsHeldByFoodRecord / ownFoodGoodsHeldByFoodRecord; NOTE $-anchored: a doubly-tagged label strips only the LAST tag)",
+        "src/domain/region/goodsCatalog.js :: stripAnnotations (/\\([^)]*\\)/g generic) -> comparable -> normalizeGood / exactCatalogEntry / subsumeTradeGoods (and through normalizeGood: src/domain/display/marketPrices.js :: resolveGood)",
+        "src/domain/region/goodsCatalog.js :: preferTradeLabel (ANNOTATION_RE generic: an annotated label wins a canonical merge)",
+        "src/domain/worldPulse/tierResourceDynamics.js :: comparableLabel (/\\([^)]*\\)/g generic; comment names \"(taxed by occupation)\")",
+        "src/domain/region/goodsCatalog.js :: TOKEN_STOPWORDS (\"naval\",\"route\",\"only\")"
+      ]
+    },
+    {
+      "suffix": "(taxed by occupation)",
+      "site": "src/generators/economy/economicState.js :: generateEconomicState (:567)",
+      "condition": "stressTypes includes occupied, not under_siege; slice(0,5). DEAD (same overwrite).",
+      "live": false,
+      "consumers": [
+        "src/generators/computeActiveChains.js :: deriveExportsFromChains (:818 dedupe base strips all three literally)",
+        "src/domain/foodSurplus.js :: TRADE_SUFFIX (/ \\((?:transit|naval route only|taxed by occupation)\\)$/, read by isProcessedFoodGood and isFoodSurplusGood -> goodsHeldByFoodRecord / ownFoodGoodsHeldByFoodRecord; NOTE $-anchored: a doubly-tagged label strips only the LAST tag)",
+        "src/domain/region/goodsCatalog.js :: stripAnnotations (/\\([^)]*\\)/g generic) -> comparable -> normalizeGood / exactCatalogEntry / subsumeTradeGoods (and through normalizeGood: src/domain/display/marketPrices.js :: resolveGood)",
+        "src/domain/region/goodsCatalog.js :: preferTradeLabel (ANNOTATION_RE generic: an annotated label wins a canonical merge)",
+        "src/domain/worldPulse/tierResourceDynamics.js :: comparableLabel (/\\([^)]*\\)/g generic; comment names \"(taxed by occupation)\")",
+        "src/domain/region/goodsCatalog.js :: TOKEN_STOPWORDS (\"taxed\"; \"by\"/\"occupation\" are NOT stopwords, so \"occupation\" enters fuzzy token matching)"
+      ]
+    },
+    {
+      "suffix": "(transit)",
+      "site": "src/generators/economy/economicState.js :: generateEconomicState (:570)",
+      "condition": "no siege/occupation AND tradeRoute in crossroads|port|river; items = tradeStreams.transit (UPGRADE_GOODS_BY_TIER imports, slice 0,4, only when deriveIsEntrepot). DEAD (same overwrite); the raw tradeStreams.transit list survives unsuffixed at economicState.transit.",
+      "live": false,
+      "consumers": [
+        "src/generators/computeActiveChains.js :: deriveExportsFromChains (:818 dedupe base strips all three literally)",
+        "src/domain/foodSurplus.js :: TRADE_SUFFIX (/ \\((?:transit|naval route only|taxed by occupation)\\)$/, read by isProcessedFoodGood and isFoodSurplusGood -> goodsHeldByFoodRecord / ownFoodGoodsHeldByFoodRecord; NOTE $-anchored: a doubly-tagged label strips only the LAST tag)",
+        "src/domain/region/goodsCatalog.js :: stripAnnotations (/\\([^)]*\\)/g generic) -> comparable -> normalizeGood / exactCatalogEntry / subsumeTradeGoods (and through normalizeGood: src/domain/display/marketPrices.js :: resolveGood)",
+        "src/domain/region/goodsCatalog.js :: preferTradeLabel (ANNOTATION_RE generic: an annotated label wins a canonical merge)",
+        "src/domain/worldPulse/tierResourceDynamics.js :: comparableLabel (/\\([^)]*\\)/g generic; comment names \"(taxed by occupation)\")",
+        "src/domain/region/goodsCatalog.js :: TOKEN_STOPWORDS (\"transit\")",
+        "src/domain/region/goodsCatalog.js :: preferTradeLabel (/\\(transit\\)/i outranks every other annotation)",
+        "src/domain/region/goodsCatalog.js :: reconcileTradeLists (/\\(transit\\)/i spares the export from the import-contradiction drop; called via economicState normalizeFinalTradeLists and generators/steps/economyReconcilePass.js)",
+        "src/generators/steps/generateEconomy.js :: applyCustomTradeGoodsConfig (baseOf strips /\\s*\\(transit\\)\\s*$/i)",
+        "src/domain/events/mutateWorld.js :: removeTradeGood (strips /\\s*\\(transit\\)\\s*$/i; targets raw|base|`${base} (transit)`)",
+        "src/domain/events/batch.js :: nsHas (strip + `${base} (transit)` match; mirrors removeTradeGood)",
+        "src/domain/display/stateProse/economyStateProse.js :: tradeProfilePoolKey (good.includes(\"(transit)\") with eco.isEntrepot selects the entrepot pool)",
+        "src/domain/display/stateProse/economyStateProse.js :: leadingGoodNoun (skips goods including \"(transit)\")",
+        "src/components/new/tabs/EconomicsTab.jsx :: EconomicsTab (e.includes(\"(transit)\") -> blue transit pill)",
+        "src/components/settlement/eventComposer/EventComposerSecondaryFields.jsx (hint text names \"(transit)\"; display copy, not a match)"
+      ]
+    },
+    {
+      "suffix": "(transit)",
+      "site": "src/generators/steps/generateEconomy.js :: applyCustomTradeGoodsConfig (:98)",
+      "condition": "editor-authored custom trade good flagged entrepot/transit: ensure(primaryExports, `${l} (transit)`). Producer outside this seat's manifest, found by grep.",
+      "live": true,
+      "consumers": [
+        "src/generators/computeActiveChains.js :: deriveExportsFromChains (:818 dedupe base strips all three literally)",
+        "src/domain/foodSurplus.js :: TRADE_SUFFIX (/ \\((?:transit|naval route only|taxed by occupation)\\)$/, read by isProcessedFoodGood and isFoodSurplusGood -> goodsHeldByFoodRecord / ownFoodGoodsHeldByFoodRecord; NOTE $-anchored: a doubly-tagged label strips only the LAST tag)",
+        "src/domain/region/goodsCatalog.js :: stripAnnotations (/\\([^)]*\\)/g generic) -> comparable -> normalizeGood / exactCatalogEntry / subsumeTradeGoods (and through normalizeGood: src/domain/display/marketPrices.js :: resolveGood)",
+        "src/domain/region/goodsCatalog.js :: preferTradeLabel (ANNOTATION_RE generic: an annotated label wins a canonical merge)",
+        "src/domain/worldPulse/tierResourceDynamics.js :: comparableLabel (/\\([^)]*\\)/g generic; comment names \"(taxed by occupation)\")",
+        "src/domain/region/goodsCatalog.js :: TOKEN_STOPWORDS (\"transit\")",
+        "src/domain/region/goodsCatalog.js :: preferTradeLabel (/\\(transit\\)/i outranks every other annotation)",
+        "src/domain/region/goodsCatalog.js :: reconcileTradeLists (/\\(transit\\)/i spares the export from the import-contradiction drop; called via economicState normalizeFinalTradeLists and generators/steps/economyReconcilePass.js)",
+        "src/generators/steps/generateEconomy.js :: applyCustomTradeGoodsConfig (baseOf strips /\\s*\\(transit\\)\\s*$/i)",
+        "src/domain/events/mutateWorld.js :: removeTradeGood (strips /\\s*\\(transit\\)\\s*$/i; targets raw|base|`${base} (transit)`)",
+        "src/domain/events/batch.js :: nsHas (strip + `${base} (transit)` match; mirrors removeTradeGood)",
+        "src/domain/display/stateProse/economyStateProse.js :: tradeProfilePoolKey (good.includes(\"(transit)\") with eco.isEntrepot selects the entrepot pool)",
+        "src/domain/display/stateProse/economyStateProse.js :: leadingGoodNoun (skips goods including \"(transit)\")",
+        "src/components/new/tabs/EconomicsTab.jsx :: EconomicsTab (e.includes(\"(transit)\") -> blue transit pill)",
+        "src/components/settlement/eventComposer/EventComposerSecondaryFields.jsx (hint text names \"(transit)\"; display copy, not a match)"
+      ]
+    },
+    {
+      "suffix": "(transit)",
+      "site": "src/domain/events/mutateWorld.js :: addTradeGood (:839)",
+      "condition": "event-applied trade good with entrepot flag: written = `${label} (transit)`. Producer outside manifest.",
+      "live": true,
+      "consumers": [
+        "src/generators/computeActiveChains.js :: deriveExportsFromChains (:818 dedupe base strips all three literally)",
+        "src/domain/foodSurplus.js :: TRADE_SUFFIX (/ \\((?:transit|naval route only|taxed by occupation)\\)$/, read by isProcessedFoodGood and isFoodSurplusGood -> goodsHeldByFoodRecord / ownFoodGoodsHeldByFoodRecord; NOTE $-anchored: a doubly-tagged label strips only the LAST tag)",
+        "src/domain/region/goodsCatalog.js :: stripAnnotations (/\\([^)]*\\)/g generic) -> comparable -> normalizeGood / exactCatalogEntry / subsumeTradeGoods (and through normalizeGood: src/domain/display/marketPrices.js :: resolveGood)",
+        "src/domain/region/goodsCatalog.js :: preferTradeLabel (ANNOTATION_RE generic: an annotated label wins a canonical merge)",
+        "src/domain/worldPulse/tierResourceDynamics.js :: comparableLabel (/\\([^)]*\\)/g generic; comment names \"(taxed by occupation)\")",
+        "src/domain/region/goodsCatalog.js :: TOKEN_STOPWORDS (\"transit\")",
+        "src/domain/region/goodsCatalog.js :: preferTradeLabel (/\\(transit\\)/i outranks every other annotation)",
+        "src/domain/region/goodsCatalog.js :: reconcileTradeLists (/\\(transit\\)/i spares the export from the import-contradiction drop; called via economicState normalizeFinalTradeLists and generators/steps/economyReconcilePass.js)",
+        "src/generators/steps/generateEconomy.js :: applyCustomTradeGoodsConfig (baseOf strips /\\s*\\(transit\\)\\s*$/i)",
+        "src/domain/events/mutateWorld.js :: removeTradeGood (strips /\\s*\\(transit\\)\\s*$/i; targets raw|base|`${base} (transit)`)",
+        "src/domain/events/batch.js :: nsHas (strip + `${base} (transit)` match; mirrors removeTradeGood)",
+        "src/domain/display/stateProse/economyStateProse.js :: tradeProfilePoolKey (good.includes(\"(transit)\") with eco.isEntrepot selects the entrepot pool)",
+        "src/domain/display/stateProse/economyStateProse.js :: leadingGoodNoun (skips goods including \"(transit)\")",
+        "src/components/new/tabs/EconomicsTab.jsx :: EconomicsTab (e.includes(\"(transit)\") -> blue transit pill)",
+        "src/components/settlement/eventComposer/EventComposerSecondaryFields.jsx (hint text names \"(transit)\"; display copy, not a match)"
+      ]
+    }
+  ],
+  "categoryErrors": [
+    {
+      "label": "Transit trade",
+      "where": "src/data/resourceData.js :173 crossroads_position.tradeGoods -> computeActiveChains.js :: deriveExportsFromChains step 1 (no extraction gate) -> primaryExports",
+      "proposedHome": "income table (tradeGoods.js Entrepôt Trade bonus already carries it)"
+    },
+    {
+      "label": "Toll revenue",
+      "where": "src/data/resourceData.js :173 crossroads_position / :266 defended_pass tradeGoods -> deriveExportsFromChains step 1 -> primaryExports",
+      "proposedHome": "income table (economicState Toll Revenue row)"
+    },
+    {
+      "label": "Pass transit trade",
+      "where": "src/data/resourceData.js :266 defended_pass.tradeGoods -> deriveExportsFromChains step 1",
+      "proposedHome": "income table"
+    },
+    {
+      "label": "Toll income / Market taxes / Transit trade profit / Strategic control / Trade access fees",
+      "where": "src/data/supplyChainData.js :865, :891 chain outputs -> deriveExportsFromChains step 2 (slice 0,2)",
+      "proposedHome": "income table"
+    },
+    {
+      "label": "trade access (commodity)",
+      "where": "RESOURCE_DATA commodities \"trade_access\" -> tradeGoods.js :: deriveLocalCommodities / computeActiveChains.js :: deriveLocalProductionFromChains -> localProduction",
+      "proposedHome": "route fact (route: crossroads|mountain_pass), not a commodity"
+    },
+    {
+      "label": "Coin minting",
+      "where": "computeActiveChains.js :: RESOURCE_GOOD_INST_GATES precious_metals",
+      "proposedHome": "income table (seigniorage)"
+    },
+    {
+      "label": "Cultural tourism revenue",
+      "where": "computeActiveChains.js :: INSTITUTIONAL_SERVICE_MAP entertainment.exportLabel",
+      "proposedHome": "income table"
+    },
+    {
+      "label": "Planar trade access",
+      "where": "computeActiveChains.js :: INSTITUTIONAL_SERVICE_MAP planar.exportLabel",
+      "proposedHome": "income table"
+    },
+    {
+      "label": "Warehousing and logistics services",
+      "where": "computeActiveChains.js :: deriveImportsFromChains UPSTREAM_IMPORT_LABELS.warehouse_logistics (import)",
+      "proposedHome": "income table / institutional services (a service, not an import)"
+    },
+    {
+      "label": "Route maps and intelligence",
+      "where": "computeActiveChains.js :: deriveImportsFromChains UPSTREAM_IMPORT_LABELS.cartography (import)",
+      "proposedHome": "income table / institutional services"
+    },
+    {
+      "label": "Massive food requirements",
+      "where": "tradeGoods.js :: UPGRADE_GOODS_BY_TIER metropolis.basic (import)",
+      "proposedHome": "provisioning dependency (foodBalance.appendProvisioningAtScaleDeps) — a need, not a good"
+    },
+    {
+      "label": "Political legitimacy / Banking services / International banking / Legal services / Advanced legal expertise / Advanced medical care",
+      "where": "tradeGoods.js :: UPGRADE_GOODS_BY_TIER (SERVICES category)",
+      "proposedHome": "DEAD today (getUpgradeChain drops services); income table / services if revived"
+    },
+    {
+      "label": "Military services — … / Mercenary services — …",
+      "where": "economicState.js :: generateEconomicState stage 5 (:637-:642) exports",
+      "proposedHome": "income table (Military Contracts already exists in INSTITUTIONAL_SERVICE_MAP) — services as exports; borderline"
+    }
+  ],
+  "hookStringLocations": [
+    "src/generators/economy/foodBalance.js :490-494 deriveFoodBalanceAnalysis — \"Trade Disruption\" (route cut, ${days} days of food)",
+    "src/generators/economy/foodBalance.js :519-523 deriveFoodBalanceAnalysis — \"Trade Politics\" (poor harvest elsewhere spikes grain)",
+    "src/generators/economy/foodBalance.js :742-746 deriveSupplyRiskAnalysis — \"Survival Crisis\" (settlement is starving; banditry)",
+    "src/generators/economy/foodBalance.js :748-752 deriveSupplyRiskAnalysis — \"Trade Monopoly\" (guild +300% grain)",
+    "src/generators/economy/foodBalance.js :754-758 deriveSupplyRiskAnalysis — \"River Control\" (upstream dam)",
+    "src/generators/economy/foodBalance.js :760-764 deriveSupplyRiskAnalysis — \"Naval Blockade\" (port + coastal terrain)",
+    "src/generators/economy/foodBalance.js :766-770 deriveSupplyRiskAnalysis — \"Bandit Raids\" (UNREACHABLE: route road takes the first arm at :741)",
+    "src/generators/economy/foodBalance.js :799-803 deriveSupplyRiskAnalysis — \"Resource Conflict\" (timber forest)",
+    "src/generators/economy/foodBalance.js :805-809 deriveSupplyRiskAnalysis — \"Strategic Resource\" (war breaks out; metal)",
+    "src/generators/economy/viability.js — no hook strings; it only aggregates foodBalance plotHooks (:511, :531) and prints their count in buildViabilitySummary (:119)"
+  ],
+  "atomHistogram": {
+    "crisis: any": 188,
+    "magic": 62,
+    "crime": 42,
+    "crisis: calm": 34,
+    "market": 20,
+    "culture: arabic": 18,
+    "culture: east_asian": 18,
+    "culture: germanic": 18,
+    "culture: norse": 18,
+    "culture: celtic": 18,
+    "culture: slavic": 18,
+    "culture: steppe": 18,
+    "culture: south_asian": 18,
+    "culture: greek": 18,
+    "culture: mesoamerican": 18,
+    "route: isolated": 16,
+    "crisis: under_siege": 12,
+    "food-source: grain": 10,
+    "garrison": 9,
+    "institution: mill": 8,
+    "water: coast": 7,
+    "water: navigable": 7,
+    "institution: mine": 7,
+    "water: river": 7,
+    "institution: smith": 6,
+    "institution: docks": 6,
+    "walls": 6,
+    "crisis: famine": 6,
+    "institution: granary": 6,
+    "food-source: livestock": 5,
+    "institution: temple": 5,
+    "crisis: occupied": 5,
+    "food-band: deficit": 5,
+    "crisis: plague_onset": 4,
+    "institution: quarry": 3,
+    "food-source: fish": 3,
+    "crisis: wartime": 3,
+    "crisis: slave_revolt": 3,
+    "crisis: mass_migration": 3,
+    "institution: monastery": 3,
+    "watch": 3,
+    "tier: >= village": 2,
+    "institution: school": 2,
+    "tier: <= village": 2,
+    "food-source: game": 1,
+    "institution: hospital": 1,
+    "gate": 1,
+    "stores: < 3": 1,
+    "migration: in": 1,
+    "tier: >= city": 1,
+    "tier: >= town": 1
+  },
+  "unhomed": {
+    "slavery boundary": {
+      "count": 7,
+      "rows": [
+        "demandProfile.FACTION_DEMAND::criminal.norse.2",
+        "demandProfile.FACTION_DEMAND::criminal.steppe.1",
+        "economicState.generateEconomicState.tradeAssembly::slave.export.transit_market",
+        "economicState.generateEconomicState.tradeAssembly::slave.export.labour",
+        "economicState.generateEconomicState.tradeAssembly::slave.export.captive",
+        "economicState.generateEconomicState.tradeAssembly::slave.export.generic",
+        "… +1"
+      ]
+    },
+    "alchemist": {
+      "count": 5,
+      "rows": [
+        "computeActiveChains.INSTITUTIONAL_SERVICE_MAP::alchemy.export",
+        "computeActiveChains.INSTITUTIONAL_SERVICE_MAP::alchemy.income",
+        "computeActiveChains.RESOURCE_GOOD_INST_GATES::foraging_areas.Alchemical reagents",
+        "computeActiveChains.RESOURCE_GOOD_INST_GATES::magical_node.Arcane reagents",
+        "economicState.generateEconomicState.incomeBuild::herbalist_apothecary"
+      ]
+    },
+    "staple = grain": {
+      "count": 5,
+      "rows": [
+        "foodBalance.deriveFoodBalanceAnalysis::heavy.desc",
+        "foodBalance.deriveFoodBalanceAnalysis::severe.desc",
+        "foodBalance.deriveFoodBalanceAnalysis::import_req.desc",
+        "foodBalance.deriveFoodBalanceAnalysis (pool)",
+        "foodBalance.appendProvisioningAtScaleDeps::staple.desc"
+      ]
+    },
+    "salt source": {
+      "count": 4,
+      "rows": [
+        "tradeGoods.UPGRADE_GOODS_BY_TIER::thorp.basic.Salt",
+        "tradeGoods.UPGRADE_GOODS_BY_TIER::hamlet.basic.Salt",
+        "tradeGoods.UPGRADE_GOODS_BY_TIER::village.basic.Salt for preservation",
+        "tradeGoods.deriveNecessityImports::Salt"
+      ]
+    },
+    "weaver": {
+      "count": 4,
+      "rows": [
+        "tradeGoods.UPGRADE_GOODS_BY_TIER::thorp.basic.Cloth",
+        "tradeGoods.UPGRADE_GOODS_BY_TIER::hamlet.basic.Quality cloth",
+        "tradeGoods.deriveLocalCommodities::cloth",
+        "computeActiveChains.deriveImportsFromChains::UPSTREAM.textiles"
+      ]
+    },
+    "guild": {
+      "count": 4,
+      "rows": [
+        "economicState.generateEconomicState.incomeBuild::guild_licensing",
+        "economicState.generateEconomicState.incomeBuild::guild_fees",
+        "economicState.generateEconomicState.incomeBuild::security_contracts",
+        "viability.generatePowerDynamics::trade_crafts.desc"
+      ]
+    },
+    "courthouse": {
+      "count": 3,
+      "rows": [
+        "computeActiveChains.INSTITUTIONAL_SERVICE_MAP::legal.export",
+        "computeActiveChains.INSTITUTIONAL_SERVICE_MAP::legal.income",
+        "economicState.generateEconomicState.incomeBuild::court_fees"
+      ]
+    },
+    "mages' guild": {
+      "count": 3,
+      "rows": [
+        "computeActiveChains.INSTITUTIONAL_SERVICE_MAP::arcane.export",
+        "computeActiveChains.INSTITUTIONAL_SERVICE_MAP::arcane.income",
+        "economicState.generateEconomicState.incomeBuild::arcane_industry"
+      ]
+    },
+    "jeweller": {
+      "count": 3,
+      "rows": [
+        "computeActiveChains.RESOURCE_GOOD_INST_GATES::precious_metals.Jewellery",
+        "computeActiveChains.RESOURCE_GOOD_INST_GATES::gemstone_deposits.Cut gemstones",
+        "computeActiveChains.RESOURCE_GOOD_INST_GATES::gemstone_deposits.Luxury goods"
+      ]
+    },
+    "tannery": {
+      "count": 2,
+      "rows": [
+        "tradeGoods.deriveLocalCommodities::leather",
+        "computeActiveChains.RESOURCE_GOOD_INST_GATES::grazing_land.Leather goods"
+      ]
+    },
+    "narcotics boundary": {
+      "count": 2,
+      "rows": [
+        "demandProfile.FACTION_DEMAND::criminal.east_asian.1",
+        "demandProfile.FACTION_DEMAND::criminal.south_asian.1"
+      ]
+    },
+    "imperial polity": {
+      "count": 2,
+      "rows": [
+        "demandProfile.FACTION_DEMAND::criminal.east_asian.2",
+        "foodBalance.appendProvisioningAtScaleDeps::luxury.desc"
+      ]
+    },
+    "bank / money changer": {
+      "count": 2,
+      "rows": [
+        "computeActiveChains.INSTITUTIONAL_SERVICE_MAP::banking.export",
+        "computeActiveChains.INSTITUTIONAL_SERVICE_MAP::banking.income"
+      ]
+    },
+    "mercenary quarter": {
+      "count": 2,
+      "rows": [
+        "computeActiveChains.INSTITUTIONAL_SERVICE_MAP::military.export",
+        "computeActiveChains.INSTITUTIONAL_SERVICE_MAP::military.income"
+      ]
+    },
+    "arena/theatre/bardic college": {
+      "count": 2,
+      "rows": [
+        "computeActiveChains.INSTITUTIONAL_SERVICE_MAP::entertainment.export",
+        "computeActiveChains.INSTITUTIONAL_SERVICE_MAP::entertainment.income"
+      ]
+    },
+    "great library / sage": {
+      "count": 2,
+      "rows": [
+        "computeActiveChains.INSTITUTIONAL_SERVICE_MAP::scholarly.export",
+        "computeActiveChains.INSTITUTIONAL_SERVICE_MAP::scholarly.income"
+      ]
+    },
+    "planar trader/embassy": {
+      "count": 2,
+      "rows": [
+        "computeActiveChains.INSTITUTIONAL_SERVICE_MAP::planar.export",
+        "computeActiveChains.INSTITUTIONAL_SERVICE_MAP::planar.income"
+      ]
+    },
+    "sawmill": {
+      "count": 2,
+      "rows": [
+        "computeActiveChains.RESOURCE_GOOD_INST_GATES::shipbuilding_timber.Milled lumber",
+        "computeActiveChains.RESOURCE_GOOD_INST_GATES::managed_forest.Milled timber"
+      ]
+    },
+    "brickmaker": {
+      "count": 2,
+      "rows": [
+        "computeActiveChains.RESOURCE_GOOD_INST_GATES::river_clay.Fired brick",
+        "computeActiveChains.RESOURCE_GOOD_INST_GATES::river_clay.Roof tiles"
+      ]
+    },
+    "mason": {
+      "count": 2,
+      "rows": [
+        "computeActiveChains.RESOURCE_GOOD_INST_GATES::stone_quarry.Building materials",
+        "economicState.generateEconomicState.incomeBuild::stone.imported"
+      ]
+    },
+    "weaver/tailor": {
+      "count": 1,
+      "rows": [
+        "tradeGoods.UPGRADE_GOODS_BY_TIER::village.basic.Quality cloth and clothing"
+      ]
+    },
+    "woodland/sawmill": {
+      "count": 1,
+      "rows": [
+        "tradeGoods.UPGRADE_GOODS_BY_TIER::town.fromHinterland.Timber"
+      ]
+    },
+    "sawmill/carpenter": {
+      "count": 1,
+      "rows": [
+        "tradeGoods.deriveNecessityImports::Timber"
+      ]
+    },
+    "butcher": {
+      "count": 1,
+      "rows": [
+        "tradeGoods.deriveLocalCommodities::meat"
+      ]
+    },
+    "carpenter/sawmill": {
+      "count": 1,
+      "rows": [
+        "tradeGoods.deriveLocalCommodities::lumber"
+      ]
+    },
+    "salt pans": {
+      "count": 1,
+      "rows": [
+        "tradeGoods.deriveLocalCommodities::salt"
+      ]
+    },
+    "'international trade' institution": {
+      "count": 1,
+      "rows": [
+        "tradeGoods.deriveIsEntrepot::International Commerce.source"
+      ]
+    },
+    "faction category government": {
+      "count": 1,
+      "rows": [
+        "demandProfile.FACTION_DEMAND (pool)"
+      ]
+    },
+    "faction category economy": {
+      "count": 1,
+      "rows": [
+        "demandProfile.FACTION_DEMAND (pool)"
+      ]
+    },
+    "faction category military": {
+      "count": 1,
+      "rows": [
+        "demandProfile.FACTION_DEMAND (pool)"
+      ]
+    },
+    "faction category religious": {
+      "count": 1,
+      "rows": [
+        "demandProfile.FACTION_DEMAND (pool)"
+      ]
+    },
+    "charcoal burner / woodland": {
+      "count": 1,
+      "rows": [
+        "computeActiveChains.deriveImportsFromChains::UPSTREAM.fuel"
+      ]
+    },
+    "clay pit": {
+      "count": 1,
+      "rows": [
+        "computeActiveChains.deriveImportsFromChains::UPSTREAM.clay"
+      ]
+    },
+    "smelter": {
+      "count": 1,
+      "rows": [
+        "computeActiveChains.deriveImportsFromChains::UPSTREAM.smelting"
+      ]
+    },
+    "fuller": {
+      "count": 1,
+      "rows": [
+        "computeActiveChains.RESOURCE_GOOD_INST_GATES::river_mills.Fulled cloth"
+      ]
+    },
+    "potter": {
+      "count": 1,
+      "rows": [
+        "computeActiveChains.RESOURCE_GOOD_INST_GATES::river_clay.Pottery and ceramics"
+      ]
+    },
+    "carpenter": {
+      "count": 1,
+      "rows": [
+        "computeActiveChains.RESOURCE_GOOD_INST_GATES::managed_forest.Hardwood beams"
+      ]
+    },
+    "charcoal burner": {
+      "count": 1,
+      "rows": [
+        "computeActiveChains.RESOURCE_GOOD_INST_GATES::managed_forest.Charcoal"
+      ]
+    },
+    "dairy": {
+      "count": 1,
+      "rows": [
+        "computeActiveChains.RESOURCE_GOOD_INST_GATES::grazing_land.Dairy products"
+      ]
+    },
+    "mint": {
+      "count": 1,
+      "rows": [
+        "computeActiveChains.RESOURCE_GOOD_INST_GATES::precious_metals.Coin minting"
+      ]
+    },
+    "sage": {
+      "count": 1,
+      "rows": [
+        "computeActiveChains.RESOURCE_GOOD_INST_GATES::ancient_ruins.Rare texts"
+      ]
+    },
+    "wizard": {
+      "count": 1,
+      "rows": [
+        "computeActiveChains.RESOURCE_GOOD_INST_GATES::magical_node.Magical services"
+      ]
+    },
+    "tenant farming": {
+      "count": 1,
+      "rows": [
+        "economicState.generateEconomicState.incomeBuild::agri_rents.small"
+      ]
+    },
+    "districts": {
+      "count": 1,
+      "rows": [
+        "economicState.generateEconomicState.incomeBuild::market_taxes.district"
+      ]
+    },
+    "teleportation infrastructure": {
+      "count": 1,
+      "rows": [
+        "economicState.generateEconomicState.incomeBuild::market_taxes.daily.magic"
+      ]
+    },
+    "ferry": {
+      "count": 1,
+      "rows": [
+        "economicState.generateEconomicState.incomeBuild::river_tolls"
+      ]
+    },
+    "banking district / stock exchange": {
+      "count": 1,
+      "rows": [
+        "economicState.generateEconomicState.incomeBuild::financial_services"
+      ]
+    },
+    "banking house / money changer": {
+      "count": 1,
+      "rows": [
+        "economicState.generateEconomicState.incomeBuild::banking_fees"
+      ]
+    },
+    "bridge": {
+      "count": 1,
+      "rows": [
+        "economicState.generateEconomicState.incomeBuild::toll_revenue"
+      ]
+    },
+    "state crime": {
+      "count": 1,
+      "rows": [
+        "economicState.generateEconomicState.incomeBuild::military_extraction"
+      ]
+    },
+    "theocraticEconomy flag": {
+      "count": 1,
+      "rows": [
+        "economicState.generateEconomicState.incomeBuild::church_tithes_rents"
+      ]
+    },
+    "magicFillsVoid flag": {
+      "count": 1,
+      "rows": [
+        "economicState.generateEconomicState.incomeBuild::arcane_economy"
+      ]
+    },
+    "merchantArmy stress flag": {
+      "count": 1,
+      "rows": [
+        "economicState.generateEconomicState.incomeBuild::security_contracts"
+      ]
+    },
+    "weaver/fuller": {
+      "count": 1,
+      "rows": [
+        "economicState.generateEconomicState.incomeBuild::wool.local"
+      ]
+    },
+    "ore deposit": {
+      "count": 1,
+      "rows": [
+        "economicState.generateEconomicState.incomeBuild::iron.local"
+      ]
+    },
+    "woodland, sawmill": {
+      "count": 1,
+      "rows": [
+        "economicState.generateEconomicState.incomeBuild::timber.local"
+      ]
+    },
+    "standing army": {
+      "count": 1,
+      "rows": [
+        "economicState.generateEconomicState.tradeAssembly::military.export.high"
+      ]
+    },
+    "mercenary company": {
+      "count": 1,
+      "rows": [
+        "economicState.generateEconomicState.tradeAssembly::military.export.mercenary"
+      ]
+    },
+    "fishable water": {
+      "count": 1,
+      "rows": [
+        "foodBalance.deriveFoodBalanceAnalysis::severe.fix.2"
+      ]
+    },
+    "brewery/bakery": {
+      "count": 1,
+      "rows": [
+        "foodBalance.deriveFoodBalanceAnalysis::surplus.fix.2"
+      ]
+    },
+    "airship dock": {
+      "count": 1,
+      "rows": [
+        "foodBalance.deriveFoodBalanceAnalysis::channel.airship"
+      ]
+    },
+    "druid circle / sacred grove": {
+      "count": 1,
+      "rows": [
+        "foodBalance.deriveFoodBalanceAnalysis::magic_note.druid"
+      ]
+    },
+    "farmland": {
+      "count": 1,
+      "rows": [
+        "foodBalance.deriveFoodBalanceAnalysis.stressNotes::siege"
+      ]
+    },
+    "slavery": {
+      "count": 1,
+      "rows": [
+        "foodBalance.deriveFoodBalanceAnalysis.stressNotes::slave_revolt"
+      ]
+    },
+    "magic priority dial": {
+      "count": 1,
+      "rows": [
+        "viability.generatePowerDynamics::magic.small.title"
+      ]
+    },
+    "bank": {
+      "count": 1,
+      "rows": [
+        "viability.generatePowerDynamics::banking.title"
+      ]
+    },
+    "exports presence": {
+      "count": 1,
+      "rows": [
+        "viability.deriveResourceChainAnalysis::incomplete.impact"
+      ]
+    },
+    "commodity stock band": {
+      "count": 1,
+      "rows": [
+        "marketPrices.MOVEMENTS (pool)"
+      ]
+    },
+    "road presence": {
+      "count": 1,
+      "rows": [
+        "marketPrices.causalReceipt (pool)"
+      ]
+    },
+    "salt supply": {
+      "count": 1,
+      "rows": [
+        "foodways.SOURCE_PHRASES::fish.2"
+      ]
+    },
+    "woodland": {
+      "count": 1,
+      "rows": [
+        "foodways.SOURCE_PHRASES::game.0"
+      ]
+    }
+  },
+  "files": [
+    "docs/census/declarations/tradeGoods.UPGRADE_GOODS_BY_TIER.json",
+    "docs/census/declarations/tradeGoods.deriveNecessityImports.json",
+    "docs/census/declarations/tradeGoods.deriveLocalCommodities.json",
+    "docs/census/declarations/tradeGoods.deriveIsEntrepot.json",
+    "docs/census/declarations/demandProfile.FACTION_DEMAND.json",
+    "docs/census/declarations/computeActiveChains.deriveImportsFromChains.json",
+    "docs/census/declarations/computeActiveChains.INSTITUTIONAL_SERVICE_MAP.json",
+    "docs/census/declarations/computeActiveChains.RESOURCE_GOOD_INST_GATES.json",
+    "docs/census/declarations/computeActiveChains.deriveExportsFromChains.json",
+    "docs/census/declarations/economicState.generateEconomicState.incomeBuild.json",
+    "docs/census/declarations/economicState.generateEconomicState.tradeAssembly.json",
+    "docs/census/declarations/foodBalance.deriveFoodBalanceAnalysis.json",
+    "docs/census/declarations/foodBalance.deriveFoodBalanceAnalysis.stressNotes.json",
+    "docs/census/declarations/foodBalance.appendProvisioningAtScaleDeps.json",
+    "docs/census/declarations/foodBalance.deriveSupplyRiskAnalysis.json",
+    "docs/census/declarations/viability.generatePowerDynamics.json",
+    "docs/census/declarations/viability.deriveWaterDependencyAnalysis.json",
+    "docs/census/declarations/viability.deriveResourceChainAnalysis.json",
+    "docs/census/declarations/viability.buildViabilitySummary.json",
+    "docs/census/declarations/viability.generateEconomicViability.json",
+    "docs/census/declarations/marketPrices.MOVEMENTS.json",
+    "docs/census/declarations/marketPrices.CRIER_FRAMES.json",
+    "docs/census/declarations/marketPrices.causalReceipt.json",
+    "docs/census/declarations/foodways.SOURCE_PHRASES.json",
+    "docs/census/declarations/foodways.FRAMES.json"
+  ]
+}

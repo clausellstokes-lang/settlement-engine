@@ -535,8 +535,8 @@ const PAIRS = [
     "Trade in certain goods runs through their hands alone.",
   ],
   [
-    "Foreign coin exchanged. The first stirrings of banking, past 3,000 people.",
-    "They change coin from abroad. Banking in its infancy, and only above 3,000 population.",
+    "Foreign coin exchanged. The first stirrings of banking.",
+    "They change coin from abroad. Banking in its infancy.",
   ],
   [
     "Takes pledges and lends at steep interest, no questions asked. It is the only credit for labourers, journeymen, and whoever the banks refuse.",
@@ -587,8 +587,8 @@ const PAIRS = [
     "Coastal or riverside wharfage, without which no heavy water-borne trade moves.",
   ],
   [
-    "It orders waterborne traffic, gathers anchorage fees, assigns the berths, and enforces port law. Navigable-water cities only.",
-    "Traffic is regulated here, anchorage fees collected, berths handed out, and sea-law enforced. Found only in port cities.",
+    "It orders waterborne traffic, gathers anchorage fees, assigns the berths, and enforces port law.",
+    "Traffic is regulated here, anchorage fees collected, berths handed out, and sea-law enforced.",
   ],
   [
     "Duties are taken here on goods passing through the port or the main roads. Royal or municipal officers run it.",
@@ -708,7 +708,7 @@ const PAIRS = [
   ],
   [
     "Books and broadsheets, where the technology has arrived.",
-    "Printed books and broadsheets, only if the craft exists at all.",
+    "Printed books and broadsheets, struck off by the sheet.",
   ],
   [
     "Sells road maps, regional surveys, and coastal charts, and takes commissions to survey estates or sketch dungeons. An older collection is kept for reference. Adventurers, merchants, and army scouts all stop here.",
@@ -827,12 +827,12 @@ const PAIRS = [
     "Rangers keep this lodge, minding the wilderness about the town, tending its trails, and marking where the beasts migrate. When trouble comes they scout and track for the town.",
   ],
   [
-    "One wizard's home. It holds only past 1,000 people.",
-    "A single wizard's residence, viable once the town passes 1,000.",
+    "One wizard's home.",
+    "A single wizard's residence.",
   ],
   [
-    "A body of spellcasters organised together. A chapter needs 2,000 to 5,000 people.",
-    "An association of magic-workers. Sustaining a chapter takes 2,000-5,000 population.",
+    "A body of spellcasters organised together.",
+    "An association of magic-workers.",
   ],
   [
     "Sells spell scrolls. A minor charm costs a craftsman a month's earnings; a greater working, a merchant's year.",
@@ -923,8 +923,8 @@ const PAIRS = [
     "Politically, a power in their own right.",
   ],
   [
-    "Loans, coin exchange, and letters of credit. The beginnings of banking, viable above 5,000 souls.",
-    "Lending, currency exchange, and credit by letter. Rudimentary banking, and only past 5,000 population.",
+    "Loans, coin exchange, and letters of credit. The beginnings of banking.",
+    "Lending, currency exchange, and credit by letter. Rudimentary banking.",
   ],
   [
     "Several inn districts, given over to merchants, travellers, and those who stay long.",
@@ -1047,8 +1047,8 @@ const PAIRS = [
     "More than one monastery, and no two of the same order.",
   ],
   [
-    "The bishop's seat. It wants at least 10,000 people to sustain it, and its presence marks a city as a major one.",
-    "Seat of a bishop, and the mark of a first-rank city. Nothing under 10,000 population carries one.",
+    "The bishop's seat, and its presence marks a city as a major one.",
+    "Seat of a bishop, and the mark of a first-rank city.",
   ],
   [
     "A large house for the sick poor, of 50 to 100 beds.",
@@ -1131,8 +1131,8 @@ const PAIRS = [
     "The seat of a high-level mage. Several may stand in a single city.",
   ],
   [
-    "Magic items made to order. It wants a population of 5,000 or more, as a rule.",
-    "Where magic items are crafted. Typically past 5,000 people.",
+    "Magic items made to order.",
+    "Where magic items are crafted.",
   ],
   [
     "A permanent teleportation circle. Its use is restricted and its upkeep dear, but any settlement fortunate enough to hold one is transformed by it.",
@@ -1159,8 +1159,8 @@ const PAIRS = [
     "Several gangs at odds, quarrelling over ground.",
   ],
   [
-    "A chapter of organised crime, workable only past 10,000 people. Thirty to a hundred members.",
-    "An arm of the wider criminal order, 30 to 100 strong. It needs a city of 10,000 or more to survive.",
+    "A chapter of organised crime. Thirty to a hundred members.",
+    "An arm of the wider criminal order, 30 to 100 strong.",
   ],
   [
     "Warehouses, taverns, and shops that mask criminal work.",
@@ -1187,12 +1187,12 @@ const PAIRS = [
     "Free persons are taken and passed into slavery through counterfeit provenance documents. With no lawful market to lean on, it moves them through its own apparatus.",
   ],
   [
-    "A wholly hidden operation that moves persons across borders outside any legal channel. It arises only where no lawful slave market stands. It runs its own logistics, its own safe houses, and its own bought border officials.",
-    "An entirely clandestine trade in persons, carried across jurisdictions beyond the reach of law. It appears only where no legal slave market exists to absorb the traffic. Separate logistics, safe houses, and corrupted border infrastructure hold it together.",
+    "A wholly hidden operation that moves persons across borders outside any legal channel. It runs its own logistics, its own safe houses, and its own bought border officials.",
+    "An entirely clandestine trade in persons, carried across jurisdictions beyond the reach of law. Separate logistics, safe houses, and corrupted border infrastructure hold it together.",
   ],
   [
-    "Music taught in the formal way, with an amphitheatre and dormitories. Even a small campus wants 10,000 or more people.",
-    "A formal schooling in music: amphitheatre, dormitories, and all. Nothing under 10,000 sustains even a small campus.",
+    "Music taught in the formal way, with an amphitheatre and dormitories.",
+    "A formal schooling in music: amphitheatre, dormitories, and all.",
   ],
   [
     "Houses given wholly to play. Not all of them lawful.",
@@ -1207,7 +1207,7 @@ const PAIRS = [
     "Prostitution on a large and organised scale, held to one quarter.",
   ],
   [
-    "Constructed servants, where the magic allows them.",
+    "Constructed servants, put to the heavy work.",
     "Servants made rather than born, if magic permits it.",
   ],
   [
@@ -1880,4 +1880,99 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
   "metropolis|Exotic|Dream parlors (high magic)": PAIRS[329],
   "metropolis|Exotic|Airship docking (high magic)": PAIRS[330],
   "metropolis|Exotic|Message network (high magic)": PAIRS[331],
+});
+
+/**
+ * DECLARED SIBLINGS (CENSUS-1c unit 1; `docs/DESIGN_POOL_CENSUS.md` §3.1, the twin tables
+ * dissolved): the walls-free twin of the waystation's second variant (its own yard, read as the town's walls; F10 unit 4). Each set is the original line, declaring what it presumes, and beside it its
+ * twin with the complementary atom (`twinOf` the original). The original stays where this table's
+ * string consumers read it; the draw site resolves a drawn key through
+ * `domain/facts/drawDeclared.js :: resolveSibling` (the original if the record admits it, else the
+ * twin). Retired from the text-keyed tables `defenceTwinLines.js` / `inlandHookLines.js` (F5, F10),
+ * every twin to the byte. VETOABLE wording, as before (the owner's).
+ */
+export const DESC_VARIANT_SIBLINGS = Object.freeze({
+  'An overnight stop behind walls, offering stabling, a well, and basic supplies to caravans and long-haul travellers. Where the inn sees to comfort, this sees to the animals and the laden wagons.': Object.freeze([
+    Object.freeze({ text: 'An overnight stop behind walls, offering stabling, a well, and basic supplies to caravans and long-haul travellers. Where the inn sees to comfort, this sees to the animals and the laden wagons.', needs: Object.freeze(['walls']) }),
+    Object.freeze({ text: 'An overnight stop inside a fenced yard, offering stabling, a well, and basic supplies to caravans and long-haul travellers. Where the inn sees to comfort, this sees to the animals and the laden wagons.', twinOf: 'An overnight stop behind walls, offering stabling, a well, and basic supplies to caravans and long-haul travellers. Where the inn sees to comfort, this sees to the animals and the laden wagons.', excludes: Object.freeze(['walls']) }),
+  ]),
+});
+
+/**
+ * THE DECLARATION COLUMN (CENSUS-4c unit 5; docs/DESIGN_POOL_CENSUS.md; the phase-A ledger
+ * docs/census/declarations/institutionDescVariants.INSTITUTION_DESC_VARIANTS.json). A variant that
+ * presumes a record fact the key does not guarantee declares it HERE, keyed by its exact text — the
+ * shape R-P(3) accepted for the sibling sets above: six string consumers read the pairs (the ship
+ * filter, the tier-noun walkers, the dossier corpus), and the resolver reads by text. A variant with
+ * no row declares nothing (the key guarantees the institution and the tier). The draw
+ * (`steps/assembleInstitutions.js` pickVariant, Appendix B site 18, H) is CENSUS-1d's to wire:
+ * lift a drawn text to `{ text, ...DESC_VARIANT_DECLARATIONS[text] }`, resolve after the draw.
+ * Each key is held live by tests/generators/institutionProseDeclared.test.js.
+ *
+ * WAITING ON ORDER (R-Q, not declared): town Parish burial grounds #0 and Town watch #0/#1 presume a
+ * GATE, which the cascade can add after the description draw (4 of 1,525 measured births).
+ */
+export const DESC_VARIANT_DECLARATIONS = Object.freeze({
+  "A rough jetty and its salting-and-drying racks. Where there is water, the fish are what the hamlet lives on.": Object.freeze({ needs: Object.freeze(["tier: ≤ hamlet"]) }), // hamlet|Economy|Fisher's landing#1
+  "Tends kilns out in the nearby woods, supplying the fuel that smiths and bakers burn. The necessary link between forest and forge.": Object.freeze({ needs: Object.freeze(["terrain: forest"]) }), // hamlet|Economy|Charcoal burner#0
+  "Works his kilns in the woodland close by, turning timber into the fuel for forge and oven. Without him nothing gets from the trees to the fire.": Object.freeze({ needs: Object.freeze(["terrain: forest"]) }), // hamlet|Economy|Charcoal burner#1
+  "A plain hall held under a regional adventurers' charter. It posts bounties, houses monster hunters, and takes up the local defence no garrison is here to keep. You find them along dangerous frontiers.": Object.freeze({ excludes: Object.freeze(["garrison"]) }), // hamlet|Adventuring|Adventurers' charter hall#0
+  "Chartered by the region's adventuring order and little more than a rough hall for it. Bounties go up on its board, monster hunters bed down inside, and with no garrison to call on it musters the defence. A frontier fixture where the country is dangerous.": Object.freeze({ excludes: Object.freeze(["garrison"]) }), // hamlet|Adventuring|Adventurers' charter hall#1
+  "Goods route through the hamlet to slip past the toll roads and customs posts. It is paid for the service in kind, and glad of it.": Object.freeze({ needs: Object.freeze(["tier: ≤ hamlet"]) }), // hamlet|Criminal|Smuggling waypoint#0
+  "Contraband moves through here, skirting the tolls and the customs checks. The hamlet takes its cut in goods rather than coin.": Object.freeze({ needs: Object.freeze(["tier: ≤ hamlet"]) }), // hamlet|Criminal|Smuggling waypoint#1
+  "An open stall or small roofed market for selling the day's catch. The price falls quickly, for fish keeps no better than a day.": Object.freeze({ needs: Object.freeze(["navigable"]) }), // village|Economy|Fish market#0
+  "Where the day's catch is sold, from an open stall or a small covered market. Prices sink fast. Fish will not wait.": Object.freeze({ needs: Object.freeze(["navigable"]) }), // village|Economy|Fish market#1
+  "Runs cattle or goats for their milk, butter, and soft cheese. Vital protein and fat when the grain runs thin. What isn't used goes to the weekly market.": Object.freeze({ needs: Object.freeze(["market"]) }), // village|Economy|Dairy farmer#0
+  "Keeps a herd of cattle or goats, yielding milk, butter, and soft cheese; in the lean grain months these are the settlement's protein and fat. The surplus is sold at the weekly market.": Object.freeze({ needs: Object.freeze(["market"]) }), // village|Economy|Dairy farmer#1
+  "Catches wildfowl (using snares, nets, and trained birds) to stock the market with duck, goose, and pigeon.": Object.freeze({ needs: Object.freeze(["market"]) }), // village|Economy|Wildfowler#1
+  "Works kilns out in the surrounding woods, producing the fuel for smiths, bakers, and hearths. Where timber runs plentiful, no fuel source is steadier.": Object.freeze({ needs: Object.freeze(["terrain: forest"]) }), // village|Economy|Charcoal burner#0
+  "Tends charcoal kilns in the nearby woodland to feed the forge, the oven, and the fire. When timber is abundant, it is the settlement's surest supply of fuel.": Object.freeze({ needs: Object.freeze(["terrain: forest"]) }), // village|Economy|Charcoal burner#1
+  "A flat-bottomed ferry over the river, the crossing rights held in one family for generations. Anyone unwilling to walk the distance to the nearest bridge depends on it.": Object.freeze({ needs: Object.freeze(["river"]) }), // village|Economy|River ferry#0
+  "The river is crossed by a flat-bottomed ferry, worked by a family that has held the right to it for generations. Without it, the nearest bridge is a long walk off.": Object.freeze({ needs: Object.freeze(["river"]) }), // village|Economy|River ferry#1
+  "Builds and mends flat-bottomed river craft: barges, punts, ferries, fishing boats. The work turns on river-boat knowledge: shallow draft, a hull that flexes, parts made to be replaced.": Object.freeze({ needs: Object.freeze(["river"]) }), // village|Economy|River boatyard#0
+  "River boats, all flat-bottomed, made and repaired here: barges, punts, ferries, and fishing craft. It takes a specialist's hand. Shallow in the draft, supple in the hull, and built so parts can be swapped out.": Object.freeze({ needs: Object.freeze(["river"]) }), // village|Economy|River boatyard#1
+  "Turns hides to leather with oak bark. The stink of it keeps it downstream. Without it there are no shoes, no harness, no straps.": Object.freeze({ needs: Object.freeze(["river"]) }), // village|Crafts|Tannery#0
+  "Hides become leather here, cured with oak bark. It reeks, and so it sits downstream, but shoes, harness, and straps all depend on it.": Object.freeze({ needs: Object.freeze(["river"]) }), // village|Crafts|Tannery#1
+  "Crews tend kilns out in the woods and sell charcoal to smelters, smiths, and bakers. The metal trades here use up a forest a generation.": Object.freeze({ needs: Object.freeze(["terrain: forest"]) }), // town|Economy|Charcoal burner#0
+  "Charcoal from woodland kilns feeds the smelters, the smithies, and the bake ovens. At this pace of metalwork, a forest lasts a generation.": Object.freeze({ needs: Object.freeze(["terrain: forest"]) }), // town|Economy|Charcoal burner#1
+  "Builds and mends ocean-going merchantmen. It wants a steady supply of timber, iron fittings, and skilled shipwrights. A great employer, and a heavy investment of capital.": Object.freeze({ needs: Object.freeze(["coast"]) }), // town|Economy|Shipyard#0
+  "Sea-going trade vessels are built and repaired here, on a footing of constant timber, iron fittings, and specialist labour. It employs many and ties up much capital.": Object.freeze({ needs: Object.freeze(["coast"]) }), // town|Economy|Shipyard#1
+  "A fleet of river barges working scheduled and commissioned runs. It carries bulk cargo, passengers, and military supply along the river network.": Object.freeze({ needs: Object.freeze(["river"]) }), // town|Economy|Barge and river transport company#0
+  "River barges run in fleet, some to a schedule and some to order. Bulk freight, passengers, and army supply all move on them through the river network.": Object.freeze({ needs: Object.freeze(["river"]) }), // town|Economy|Barge and river transport company#1
+  "Traffic is regulated here, anchorage fees collected, berths handed out, and sea-law enforced.": Object.freeze({ needs: Object.freeze(["coast"]) }), // town|Economy|Harbour master's office#1
+  "The modest end of the news trade. A paid register of who came into the city and what they reported, kept openly and taxed like any other counter.": Object.freeze({ needs: Object.freeze(["tier: ≥ city"]) }), // town|Economy|Listening post#1
+  "Several craftsmen banded into a guild. Standard arrows by the sheaf, specialty broadheads, and composite bows made to order. They restock the merchant caravans and arm the town militias.": Object.freeze({ needs: Object.freeze(["militia"]) }), // town|Crafts|Bowyers & fletchers (guild)#0
+  "A full tannery of many vats and a guild-trained workforce, turning out fine leather for shoes, armour, and saddlery.": Object.freeze({ needs: Object.freeze(["guild"]) }), // town|Crafts|Tanner (established)#0
+  "Multiple vats, trained hands from the guild. A proper tannery whose leather is good enough for footwear, armour, and saddlery.": Object.freeze({ needs: Object.freeze(["guild"]) }), // town|Crafts|Tanner (established)#1
+  "The town's bread. Prices fixed by the guild.": Object.freeze({ needs: Object.freeze(["guild"]) }), // town|Crafts|Bakers (5-15)#0
+  "Bread baked for sale, with the guild setting the price.": Object.freeze({ needs: Object.freeze(["guild"]) }), // town|Crafts|Bakers (5-15)#1
+  "Each congregation buries its own, and the sexton keeps the roll that inheritance disputes are settled from. Guilds buy plots together so their members lie among their trade.": Object.freeze({ needs: Object.freeze(["guild"]) }), // town|Religious|Parish burial grounds#1
+  "Senior druids who govern how their circle deals with the city. They may keep a grove hidden beneath the streets, hold the line between the city's spread and the wild, or advise its rulers on the land. Found where a city has come to terms with the wild.": Object.freeze({ needs: Object.freeze(["tier: ≥ city"]) }), // town|Religious|Elder Grove Council#0
+  "A council of elder druids charged with their circle's standing in the city: sometimes tending a concealed grove below the streets, sometimes mediating between expansion and wild ground, sometimes counselling those in power on ecological matters. It arises only in cities at peace with the wild.": Object.freeze({ needs: Object.freeze(["tier: ≥ city"]) }), // town|Religious|Elder Grove Council#1
+  "The official voice, reading proclamations, market prices, and news at set hours in the market square. Town or guild pays his wage.": Object.freeze({ needs: Object.freeze(["market"]) }), // town|Government|Town crier#0
+  "At fixed times he stands in the market square and calls out the proclamations, the prices, and the news. His employer is the town, or else a guild.": Object.freeze({ needs: Object.freeze(["market"]) }), // town|Government|Town crier#1
+  "An innermost stronghold, the city's final hold under siege.": Object.freeze({ needs: Object.freeze(["tier: ≥ city"]) }), // town|Defense|Citadel#1
+  "Message birds kept above a city yard by people who declare nothing. The word arrives unsigned and moves faster than the watch.": Object.freeze({ needs: Object.freeze(["watch","tier: ≥ city"]) }), // town|Criminal|Rookery#0
+  "Bards, jugglers, and acrobats, come for the fairs.": Object.freeze({ needs: Object.freeze(["market"]) }), // town|Entertainment|Traveling performers#0
+  "The fairs bring bards, jugglers, and acrobats through.": Object.freeze({ needs: Object.freeze(["market"]) }), // town|Entertainment|Traveling performers#1
+  "Armourers, swordsmiths, and jewellers, each in its own guild.": Object.freeze({ needs: Object.freeze(["guild"]) }), // city|Crafts|Specialized metalworkers#0
+  "Swordsmiths, armourers, jewellers. The trades kept to separate guilds.": Object.freeze({ needs: Object.freeze(["guild"]) }), // city|Crafts|Specialized metalworkers#1
+  "Guild-organised carpenters, joiners, and furniture makers for building and fitting out.": Object.freeze({ needs: Object.freeze(["guild"]) }), // city|Crafts|Carpenters (5-15)#0
+  "Builders' carpenters, joiners, and furniture makers, each trade organised under its guild.": Object.freeze({ needs: Object.freeze(["guild"]) }), // city|Crafts|Carpenters (5-15)#1
+  "Guild bowyers and fletchers selling arrows by the sheaf, special broadheads, and composite bows to order, supplying the watch, the garrison, and the caravans.": Object.freeze({ needs: Object.freeze(["watch","garrison"]) }), // city|Crafts|Bowyers & fletchers (guild)#0
+  "Arrows by the sheaf, specialty broadheads, and commissioned composite bows from the guild's bowyers and fletchers. The watch, the garrison, and the caravans buy here.": Object.freeze({ needs: Object.freeze(["watch","garrison"]) }), // city|Crafts|Bowyers & fletchers (guild)#1
+  "Every ward has its bakehouses, with weights and prices set by the guild.": Object.freeze({ needs: Object.freeze(["guild"]) }), // city|Crafts|Bakers (5-15)#0
+  "Bakehouses throughout the wards, the loaf's weight and price fixed by guild rule.": Object.freeze({ needs: Object.freeze(["guild"]) }), // city|Crafts|Bakers (5-15)#1
+  "Several alchemical workshops, run under a guild.": Object.freeze({ needs: Object.freeze(["guild"]) }), // city|Crafts|Alchemist quarter#0
+  "A cluster of alchemists' workshops, organised into a guild.": Object.freeze({ needs: Object.freeze(["guild"]) }), // city|Crafts|Alchemist quarter#1
+  "The grounds inside the walls filled generations back, so the dead are lifted when their term is up and their bones stacked to make room. New ground lies outside the gates.": Object.freeze({ needs: Object.freeze(["walls","gate"]) }), // city|Religious|Burial grounds and charnel house#0
+  "Carts go out at dusk to ground bought beyond the walls, and the charnel house holds what the old plots gave up. What a family endowed decides who is lifted and who is left.": Object.freeze({ needs: Object.freeze(["walls"]) }), // city|Religious|Burial grounds and charnel house#1
+  "The official announcer, reading proclamations, market prices, and news in the market squares at set hours, paid by the city or a guild.": Object.freeze({ needs: Object.freeze(["market"]) }), // city|Government|Town crier#0
+  "Employed by the city or a guild to call proclamations, prices, and news in the market squares at fixed times.": Object.freeze({ needs: Object.freeze(["market"]) }), // city|Government|Town crier#1
+  "Excavated ways running under walls and wards alike; whole shipments pass below the city without touching a street.": Object.freeze({ needs: Object.freeze(["walls"]) }), // city|Criminal|Underground network#1
+  "Burial has left the walls: grounds beyond every gate, each with its road and its gatekeepers, and a trade in plots the revenue office keeps an eye on.": Object.freeze({ needs: Object.freeze(["walls","gate"]) }), // metropolis|Religious|Cemetery network#0
+  "Tall, crowded blocks and tenement courts, with suburbs spreading beyond the walls.": Object.freeze({ needs: Object.freeze(["walls"]) }), // metropolis|Infrastructure|Housing (3500+ households)#0
+  "Multi-story blocks packed around tenement courts, and suburbs that have outgrown the walls.": Object.freeze({ needs: Object.freeze(["walls"]) }), // metropolis|Infrastructure|Housing (3500+ households)#1
+  "Walls within walls: an outer line, an inner line, and the citadel ring. Garrison districts and gatehouses at every stage.": Object.freeze({ needs: Object.freeze(["garrison"]) }), // metropolis|Defense|Massive walls and fortifications#0
+  "A defence built in layers: outer wall, inner wall, and the ring about the citadel, with garrisons and gatehouses throughout.": Object.freeze({ needs: Object.freeze(["garrison"]) }), // metropolis|Defense|Massive walls and fortifications#1
 });

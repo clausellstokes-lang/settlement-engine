@@ -42,6 +42,7 @@ import { routeAwareHopDelayTicks } from '../worldPulse/distancePricedNews.js';
 import { embattlementLevel } from '../spatial/embattlement.js';
 import { FALLBACK_CANONICALS, FALLBACK_PHRASE_POOLS } from './rumorFallbackPhrasePools.js';
 import { WHAT_PHRASE_POOLS } from './rumorPhrasePools.js';
+import { drawDeclared, lineText } from '../facts/drawDeclared.js';
 
 /** @typedef {import('../spatial/rumorNetwork.js').RumorArrivalRecord} RumorArrivalRecord */
 
@@ -631,7 +632,15 @@ export function whatPhrase(value, seed = '') {
 function widenedPhrase(key, canonical, variants, seed) {
   if (!seed || !variants || variants.length === 0) return canonical;
   const pool = [canonical, ...variants];
-  return pool[avalanche32(fnv1a32(`${seed}::what::${key}`)) % pool.length];
+  // CENSUS-1d unit 2 (Appendix B rows 97–99, kind H): the avalanche modulus over the FULL pool,
+  // resolved through `drawDeclared` and noted in the ledger. A rumour is world news with no
+  // settlement record behind it (the world-pulse wave, ruling 7), so no facts are handed: a
+  // declared line would be refused fail-closed, and none declares.
+  const drawn = drawDeclared(pool, {
+    draw: (p) => p[avalanche32(fnv1a32(`${seed}::what::${key}`)) % p.length],
+    key: `${seed}::what::${key}`, poolId: `WHAT_PHRASE_POOLS.${key}`, surface: 'rumors', drawKind: 'H',
+  });
+  return drawn.line == null ? canonical : String(lineText(drawn.line));
 }
 
 // ── The in-world vocabulary (fiction-not-internals) ─────────────────────────
@@ -745,7 +754,12 @@ export const HEADLINE_FRAMES = Object.freeze({
  */
 function frameHeadline(band, seed, { what, where }) {
   const pool = HEADLINE_FRAMES[band];
-  const frame = seed ? pool[fnv1a32(`${seed}::${band}`) % pool.length] : pool[0];
+  // CENSUS-1d unit 2 (Appendix B row 100, kind H): the same modulus (index 0 seedless) over the
+  // FULL pool, resolved through `drawDeclared`; no facts (world news), none declares.
+  const frame = String(lineText(drawDeclared(pool, {
+    draw: (p) => (seed ? p[fnv1a32(`${seed}::${band}`) % p.length] : p[0]),
+    key: `${seed}::${band}`, poolId: `HEADLINE_FRAMES.${band}`, surface: 'rumors', drawKind: 'H',
+  }).line) ?? pool[0]);
   return frame
     .replace('{What}', capitalize(what))
     .replace('{what}', what)

@@ -335,8 +335,15 @@ describe('HK-3 draws — the corpus, through the real pipeline', () => {
     // re-deals city-2's faction filing (its Hedge Witch leaves the Thieves' Guild) and the guild's and the arcane
     // seat's offices are honestly unled. No hook-bearing NPC was dropped: 561 at both trees; total and duplicates
     // unchanged.
-    expect(npcTotal, 'the NPC denominator must be a real corpus').toBe(598);
-    expect(hookless, 'hookless NPCs grew — a hook-bearing record is being dropped downstream').toBe(37);
+    // RE-BASED 2026-11-07 (LANDING-R2, the pool census composed): 595 -> 594 NPCs and 34 -> 33 hookless, ONE step,
+    // bisected by a probe copy of this file's genAt over the census lineage (rung 1's final 1bff51c6d and the merge
+    // base bf263a78d 595/34; the compose's first-parent steps to its census-1b merge 0856c09d3; census-1b's 114
+    // first-parent steps): b00d3873f 595/34 -> 597866207 594/33, census-1i unit 3 (R-AX, refined: both rolls of the
+    // criminal secret read the holder's role). The movers by identity, all unnamed hookless seat placeholders:
+    // city-6's Kingpin and Lieutenant go (-2), hamlet-0 gains a Watch Captain (+1). Total 860 and duplicates 25
+    // unchanged; the hook-bearing count is still 561.
+    expect(npcTotal, 'the NPC denominator must be a real corpus').toBe(594);
+    expect(hookless, 'hookless NPCs grew — a hook-bearing record is being dropped downstream').toBe(33);
     expect(npcTotal - hookless, 'a hook-bearing NPC was dropped (561 at every step of the rung-1 window)').toBe(561);
   });
 

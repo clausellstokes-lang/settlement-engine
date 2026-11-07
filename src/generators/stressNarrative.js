@@ -23,6 +23,14 @@
  * is rng-free, so the token is `null` for them and the draw order is byte-identical
  * to the old inline closures.
  */
+import { drawDeclared, resolveSiblingSentences } from '../domain/facts/drawDeclared.js';
+
+/** mass_migration's food sentence, the key of its declared sibling set (STRESS_SUMMARY_SIBLINGS). */
+const MIGRATION_FOOD = 'New arrivals come faster than housing, food, and employment can absorb them.';
+/** wartime (loss)'s price sentence, the key of its declared sibling set (CENSUS-2d; the chair's answer 1, R-U). */
+const WARTIME_PRICES = 'Food prices have doubled.';
+/** plague_onset's healer sentence, the key of its declared sibling set. */
+const PLAGUE_HEALERS = 'Healers are overwhelmed.';
 
 /**
  * Roll the rng-derived choices for a stressor summary.
@@ -54,12 +62,50 @@ export function rollStressSummary(type, { rng } = {}) {
  * @param {?Object} [roll] - token from rollStressSummary (only wartime uses it)
  * @param {'arrivals'|'departures'} [direction] - the entry's own `direction` (mass_migration only;
  *   WIRING-W0, domain/migrationDirection.js); absent reads as arrivals, the §934.101 default
+ * @param {object|null} [facts] - `factsOf(record)` at assembly (CENSUS-2c): a sentence of the
+ *   paragraph that is a key of STRESS_SUMMARY_SIBLINGS resolves through its declaration, after the
+ *   render and draw-free. Absent (the provisional roll-time render): every sentence is kept.
+ *   MERGE-R2: both kept — W0's direction (the one fact) and the census's declared sentences.
  * @returns {string|undefined}
  */
-export function renderStressSummary(type, name, roll, direction) {
+export function renderStressSummary(type, name, roll, direction, facts = null) {
   const fn = RENDERERS[type];
-  return fn ? fn(name, roll, direction) : undefined;
+  if (!fn) return undefined;
+  const text = fn(name, roll, facts, direction);
+  return facts ? resolveSiblingSentences(text, STRESS_SUMMARY_SIBLINGS, { facts, poolId: 'stressNarrative:STRESS_SUMMARY_SIBLINGS', surface: 'crisis', drawKind: 'T' }) : text;
 }
+
+/**
+ * THE DECLARED SENTENCES OF THE STRESS NARRATIVE (CENSUS-2c; `docs/DESIGN_POOL_CENSUS.md` §3.1, the
+ * chair's R-P 1). A sentence a renderer prints that presumes a fact the stressor alone does not
+ * guarantee is a declared sibling set keyed by its own text: the original with its atoms, and its
+ * twin (`twinOf`) — what the record DOES hold — reached only when the original is refused. A keyed
+ * renderer does not re-declare its own stressor (R-B1). Each twin is the chair's ruling (R-G),
+ * recorded in `docs/CENSUS_2_LANE_2026-11-04.md` "CENSUS-2c" with its share: a T cell, so a twin
+ * moves only the births whose original is refused.
+ * @type {Readonly<Record<string, ReadonlyArray<Readonly<{ text: string, crisis?: string[], needs?: string[], excludes?: string[], twinOf?: string }>>>>}
+ */
+export const STRESS_SUMMARY_SIBLINGS = Object.freeze({
+  // mass_migration: "faster than … food … can absorb them" needs the food record's deficit (the
+  // food record counts the influx at ×1.15, so a fed influx is FED: CENSUS-1c unit 7).
+  [MIGRATION_FOOD]: Object.freeze([
+    Object.freeze({ text: MIGRATION_FOOD, crisis: ['hunger'] }),
+    Object.freeze({ text: 'New arrivals come faster than housing and employment can absorb them.', twinOf: MIGRATION_FOOD, excludes: ['crisis: hunger'] }),
+  ]),
+  // plague_onset: "Healers are overwhelmed" needs a healer, an infirmary or a monastic house
+  // (`factsOf(record).defence.healer`); most thorps and hamlets have none (Phase A's ledger).
+  [PLAGUE_HEALERS]: Object.freeze([
+    Object.freeze({ text: PLAGUE_HEALERS, needs: ['healer'] }),
+    Object.freeze({ text: 'The sick outnumber those who can tend them.', twinOf: PLAGUE_HEALERS, excludes: ['healer'] }),
+  ]),
+  // wartime (loss): a doubled price is the food deficit speaking (R-U; the chair's answer 1 to
+  // CENSUS-2c): the line needs `crisis: hunger`; a war fought on a secure food record takes what
+  // the war takes that is not grain (the twin, the chair's ruling R-G).
+  [WARTIME_PRICES]: Object.freeze([
+    Object.freeze({ text: WARTIME_PRICES, crisis: ['hunger'] }),
+    Object.freeze({ text: 'The army has the carts and the road, and the fields are short of hands.', twinOf: WARTIME_PRICES, excludes: ['crisis: hunger'] }),
+  ]),
+});
 
 /**
  * Legacy single-call shim. Any caller not yet migrated to the roll/render split
@@ -98,7 +144,7 @@ const RENDERERS = {
     `${name} has been quietly penetrated by an outside interest. Enemy agents, a cult, a merchant intelligence network. The settlement does not know. Key decisions are being subtly shaped.`,
 
   plague_onset: (name) =>
-    `Something is spreading in ${name}. It is not yet a plague, but it will be if nothing changes. Healers are overwhelmed. The origin is disputed. Quarantine measures are being resisted.`,
+    `Something is spreading in ${name}. It is not yet a plague, but it will be if nothing changes. ${PLAGUE_HEALERS} The origin is disputed. Quarantine measures are being resisted.`,
 
   succession_void: (name) =>
     `The last strong leader of ${name} died recently. No one has consolidated authority. Power is available to whoever moves first, and several parties are aware of this simultaneously.`,
@@ -118,26 +164,27 @@ const RENDERERS = {
     );
   },
 
-  religious_conversion: (name) => {
+  // religious_conversion: three wordings, picked by the name's length (an H modulus). Variants 0
+  // and 1 presume the old religious house (`institution: temple`; Phase A's ledger): with facts in
+  // hand the pick runs through `drawDeclared` over the FULL list (the modulus unchanged), and a
+  // refused pick resolves to the admitted variant by the kernel's hash — variant 2, the one that
+  // presumes no building. No new wording. With no facts (the provisional render) the pick is kept.
+  religious_conversion: (name, _roll, facts) => {
     const s = name || "the settlement";
     const o = name ? name.length % 3 : 0;
-    return o === 0
-      ? "A new faith is gaining ground in " +
-          s +
-          ". The old religious institution still holds its buildings and its records, but it is losing the congregation. The priest gives a service on Sunday to a room that is quietly, consistently, slightly emptier than the week before."
-      : o === 1
-        ? "The religious community of " +
-          s +
-          " has fractured. Both factions claim the legitimate succession. Both hold services. Both have a priest who will not acknowledge the other. The congregation has been forced to choose, and some of them have chosen neither."
-        : "An outside authority is requiring " +
-          s +
-          " to convert. The governing faction has formally complied. The population's compliance is more varied, more private, and more complicated than the official record shows.";
+    const variants = RELIGIOUS_CONVERSION_VARIANTS(s);
+    if (!facts) return variants[o].text;
+    return drawDeclared(variants, { draw: (p) => p[o], facts, key: `stressNarrative:religious_conversion::${s}`, /* R-AT (CENSUS-1i unit 5): the settlement's name, not a constant */ poolId: 'stressNarrative:RELIGIOUS_CONVERSION', surface: 'crisis', drawKind: 'H', keepRefused: true }).text ?? variants[o].text; // R-AM: a kept beat is noted
   },
 
+  // slave_revolt: presumes only what the key guarantees, enslaved people and their revolt (R-U; the
+  // chair's answer 2 to CENSUS-2c). "The slave market's holding facilities have been breached"
+  // presumed a slave market, which has no fact home (`institution: slave market` is listed under
+  // "needs a home" in docs/CENSUS_2_LANE_2026-11-04.md "CENSUS-2d").
   slave_revolt: (name) =>
     "The enslaved population of " +
     (name || "the settlement") +
-    " has organised. What began as work stoppages and passive resistance has moved into open defiance. The slave market's holding facilities have been breached. The governing authority's first response was inadequate. Its second response is still being decided.",
+    " has organised. What began as work stoppages and passive resistance has moved into open defiance. Whole work gangs have downed tools and will not take them up again. The governing authority's first response was inadequate. Its second response is still being decided.",
 
   // wartime: the profit text names no garrison (lane DEFENSE-2, 2026-11-03). It is rendered from
   // the stress type and the place's name alone, with no roster in reach, so it says only what
@@ -152,7 +199,7 @@ const RENDERERS = {
       ? s +
           " is in a kingdom at war and currently positioned to profit. Military contracts are flowing. Prices are high and merchants with the right connections are getting richer. The cost will come due (it always does), but for now the war is good for business."
       : s +
-          " is in a kingdom fighting a war it may not win. Conscription has taken a third of the working-age men. Supply caravans pass through on crown requisition. Food prices have doubled. The governing authority is demanding sacrifice while certain families are quietly thriving on contracts.";
+          " is in a kingdom fighting a war it may not win. Conscription has taken a third of the working-age men. Supply caravans pass through on crown requisition. " + WARTIME_PRICES + " The governing authority is demanding sacrifice while certain families are quietly thriving on contracts.";
   },
 
   // mass_migration: the old closure used `typeof getInstFlags == 'function'` (ALWAYS
@@ -164,7 +211,7 @@ const RENDERERS = {
   // WIRING-W0 (2026-11-07, R-W7 e): the text reads the entry's declared direction, never a score.
   // Arrivals is the one direction a drawn migration carries at birth; the departures text is for a
   // record that declares one (an authored entry, the campaign's ledger re-derive).
-  mass_migration: (name, _roll, direction) => {
+  mass_migration: (name, _roll, _facts, direction) => { // MERGE-R2: the census's facts ride third, W0's direction fourth
     const l = name || "The settlement";
     if (direction === "departures") {
       return (
@@ -174,7 +221,22 @@ const RENDERERS = {
     }
     return (
       l +
-      " is receiving more people than its infrastructure was built for. New arrivals come faster than housing, food, and employment can absorb them. The old residents and the new ones are not yet the same community."
+      " is receiving more people than its infrastructure was built for. " + MIGRATION_FOOD + " The old residents and the new ones are not yet the same community."
     );
   },
 };
+
+/**
+ * religious_conversion's three wordings for one place (`s` = the name, or "the settlement"), in
+ * the order the name's length picks them; ids are the old branch numbers. Variants 0 and 1 speak
+ * of the old institution's buildings and its priest, so they declare the temple (CENSUS-2c).
+ * @param {string} s
+ * @returns {ReadonlyArray<{ id: number, text: string, needs?: string[] }>}
+ */
+function RELIGIOUS_CONVERSION_VARIANTS(s) {
+  return [
+    { id: 0, needs: ['institution: temple'], text: "A new faith is gaining ground in " + s + ". The old religious institution still holds its buildings and its records, but it is losing the congregation. The priest gives a service on Sunday to a room that is quietly, consistently, slightly emptier than the week before." },
+    { id: 1, needs: ['institution: temple'], text: "The religious community of " + s + " has fractured. Both factions claim the legitimate succession. Both hold services. Both have a priest who will not acknowledge the other. The congregation has been forced to choose, and some of them have chosen neither." },
+    { id: 2, text: "An outside authority is requiring " + s + " to convert. The governing faction has formally complied. The population's compliance is more varied, more private, and more complicated than the official record shows." },
+  ];
+}

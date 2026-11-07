@@ -1,0 +1,58 @@
+{
+  "poolId": "STRESS_RUMORS",
+  "source": "src/generators/power/settlementNarrative.js :29 STRESS_RUMORS",
+  "drawKind": "R",
+  "drawSite": "src/generators/power/settlementNarrative.js:227 genRelNarrative → pickRandom2(STRESS_RUMORS)(topRel)",
+  "pools": [
+    {
+      "pool": "STRESS_RUMORS",
+      "keyGuarantees": [
+        "the top-scored relationship between two named NPCs (npc1Name, npc2Name, tension, typeName, description)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour: the fixed words presume only the two NPCs the key supplies; the slot contents are upstream relationship prose, ledgered there.",
+      "lines": [
+        {
+          "lineId": "STRESS_RUMORS[0]",
+          "text": "${npc1Name} and ${npc2Name} are connected by something neither discusses openly: ${descriptionTail || tension}",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "STRESS_RUMORS[1]",
+          "text": "${npc1Name}'s relationship with ${npc2Name} is more complicated than their public roles suggest. ${tension}",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "STRESS_RUMORS[2]",
+          "text": "The relationship between ${npc1Name} and ${npc2Name} is best understood as ${typeName}. ${tension}",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "STRESS_RUMORS[3]",
+          "text": "${tension}",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    }
+  ]
+}

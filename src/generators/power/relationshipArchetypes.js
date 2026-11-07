@@ -6,6 +6,7 @@
 import { random as _rng } from '../../kernel/rngContext.js';
 import { fnv1a32 } from '../../kernel/proseHash.js';
 import { STRESS_ECONOMIC_EFFECTS } from '../../data/npcData.js';
+import { drawDeclared } from '../../domain/facts/drawDeclared.js';
 
 export const computeRelTension = (factionA, factionB, stressFlags, instFlags) => {
   const categoryPair = [factionA.category, factionB.category].sort().join('_'),
@@ -118,6 +119,36 @@ const bothNamedTensions = (archetype) => {
   return indices;
 };
 
+/** @type {WeakMap<object, ReadonlyArray<Readonly<{ id: number, needs: string[], excludes: string[], crisis: string[] }>>>} */
+const pairPoolCache = new WeakMap();
+/**
+ * An archetype's tie indices as one declared pool: index i declares what its desc row
+ * (`desc.lines[i % n]`) and its tension row (`tension.lines[i % m]`) declare, together (pure;
+ * cached per archetype; frozen, so `drawDeclared` caches whether it declares at all). No tie row
+ * declares a crisis (CENSUS-4c's ledger), so the union is a plain union.
+ * @param {any} archetype
+ */
+const tiePairPool = (archetype) => {
+  let pool = pairPoolCache.get(archetype);
+  if (!pool) {
+    const descLines = archetype.desc?.lines ?? [];
+    const tensionLines = archetype.tension?.lines ?? [];
+    /** @param {ReadonlyArray<any>} lines @param {number} i @param {'needs'|'excludes'|'crisis'} f @returns {string[]} */
+    const field = (lines, i, f) => {
+      const row = lines.length ? lines[i % lines.length] : null;
+      return row && typeof row === 'object' && Array.isArray(row[f]) ? row[f] : [];
+    };
+    pool = Object.freeze(Array.from({ length: archetype.tension.size }, (_, id) => Object.freeze({
+      id,
+      needs: [...field(descLines, id, 'needs'), ...field(tensionLines, id, 'needs')],
+      excludes: [...field(descLines, id, 'excludes'), ...field(tensionLines, id, 'excludes')],
+      crisis: [...field(descLines, id, 'crisis'), ...field(tensionLines, id, 'crisis')],
+    })));
+    pairPoolCache.set(archetype, pool);
+  }
+  return pool;
+};
+
 /**
  * GS-1 (ODQ §934.101): THE TIE-PROSE DRAW, WITHOUT REPLACEMENT PER SETTLEMENT. One draw per
  * `generateRelationships` call (one town). The first tie of an archetype opens at a draw-free
@@ -131,11 +162,20 @@ const bothNamedTensions = (archetype) => {
  * (generateSettlementPipeline.js :: refreshRelationshipProjections) reuses it instead of re-hashing.
  * F1 (rung 1B): `force` is the place's force words (`defenseFacts.js :: forceWordsOf`), so a tie line
  * names the watch or the militia where no garrison stands; omitted, the lines keep the garrison's words.
+ * CENSUS-1f (Appendix B site 19, H): the drawn index is RESOLVED through `drawDeclared` against
+ * CENSUS-4c's in-place declarations (`npcData.js :: pairProse`'s `lines`). One index picks the desc
+ * AND the tension line, so the index's declaration is the union of both rows' (`tiePairPool`). The
+ * draw above is unchanged; a refused index moves to the hash argmax over the admitted indices (keyed
+ * on the directed pair, so two ties of one archetype do not collapse onto one line). `facts` is the
+ * birth's facts at the draw (R-V / R-Z: the roster and the government only; CENSUS-4c measured all
+ * 30 declared rows settled there, 0 of 585 births differ); absent, a declared index is refused
+ * (fail-closed, R-N).
  * @param {Readonly<{ body: string, members: string, member: string }>} [force]
+ * @param {object | (() => object) | null} [facts]
  * @returns {(archetype: any, npc: {name?: string}, partner: {name?: string}) =>
  *   {archetypeKey: string | undefined, proseVariant: number, description: string, tension: string}}
  */
-export const createTieProseDraw = (force) => {
+export const createTieProseDraw = (force, facts = null) => {
   /** @type {Map<unknown, {base: number, used: number}>} */
   const draws = new Map();
   return (archetype, npc, partner) => {
@@ -147,10 +187,16 @@ export const createTieProseDraw = (force) => {
     }
     const size = archetype.tension.size;
     const named = bothNamedTensions(archetype);
-    const proseVariant = draw.used < size || named.length === 0
+    const drawnVariant = draw.used < size || named.length === 0
       ? (draw.base + draw.used) % size
       : named[(draw.base + draw.used - size) % named.length];
     draw.used += 1;
+    const pool = tiePairPool(archetype);
+    const resolved = drawDeclared(pool, {
+      draw: (p) => p[drawnVariant], facts, key: `${npc?.name ?? ''}>${partner?.name ?? ''}::${archetypeKey ?? archetype?.label}`,
+      poolId: `npcData:STRESS_ECONOMIC_EFFECTS.${archetypeKey ?? archetype?.label}`, surface: 'relationships', drawKind: 'H',
+    });
+    const proseVariant = resolved.line ? resolved.line.id : drawnVariant;
     return {
       archetypeKey,
       proseVariant,

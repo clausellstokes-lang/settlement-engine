@@ -16,7 +16,7 @@ import { bandReadings } from './bands.mjs';
 import { REPO_ROOT } from './renderHarness.mjs';
 
 const TIERS = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
-const KIND_NAMES = ['none', 'food', 'faith', 'magic', 'defence', 'rulers', 'repetition', 'unnamed', 'small-as-town', 'reader'];
+const KIND_NAMES = ['none', 'food', 'faith', 'magic', 'defence', 'rulers', 'repetition', 'unnamed', 'small-as-town', 'reader', 'crisis'];
 
 function* shardLines(out) {
   const dir = join(out, 'shards');
@@ -255,7 +255,20 @@ export function aggregate(out, meta, source = () => shardLines(out)) {
     else if (c.kind === 0 && c.rate > 0.01) reasons.push(`wording: ${c.check} at ${c.rate}`);
   }
   const verdict = reasons.length ? 'STOP' : 'CLIMB';
-  const summary = { ...meta, settlements: N, rendered: towns, errors, findings: classRows.reduce((s, c) => s + c.occurrences, 0), classes: classRows.length, fieldsWalked: fieldVals.size, fieldsReported: fields.length, fieldsExcluded: excluded, dependenceCandidates: cand.length, strongCrossFamilyPairs: pairs.length, mediansOutsideBands: banded.outside.map((x) => `${x.path} ${x.tier} ${x.median} (band ${x.low}–${x.high})`), proseRepetition: { storyPairwise: prose.story.all, storySameTier: prose.story.sameTier, exactPairwise: prose.exact.all, exactSameTier: prose.exact.sameTier, hooksPairwise: prose.hooks.all, skeletonsInTenPercent: prose.skeletonsInTenPercent }, residual: { pairs: second.residualPairs.length, copies: second.copies.length, surprisesA: second.surprisesA.length, surprisesB: second.surprisesB.length }, verdict, reasons, chairReadings: CHAIR_READINGS, bands: OWNER_BANDS, reader: { classes: readerRows.length, findings: readerRows.reduce((a, c) => a + c.occurrences, 0), note: 'kind 9, outside the stop rule' } };
+  // ── CENSUS-1b wave 1: declared-share (the share of drawn lines that went through a
+  // declaration, by surface) and cert:false-presumption (a class above; 0 or STOP).
+  /** @type {Record<string, { drawn: number, declared: number, share: number|null }>} */
+  const declaredShareBySurface = {};
+  for (const row of source()) { // MERGE-R2 (SOAK-MERGE §1's integration note): the one row source, not shardLines(out)
+    for (const [surface, v] of Object.entries(row.presumptions?.share || {})) {
+      const t = (declaredShareBySurface[surface] ||= { drawn: 0, declared: 0, share: null });
+      t.drawn += v.drawn; t.declared += v.declared;
+    }
+  }
+  for (const t of Object.values(declaredShareBySurface)) t.share = t.drawn ? r3(t.declared / t.drawn) : null;
+  writeFileSync(join(out, 'aggregates', 'declared-share.json'), `${JSON.stringify(declaredShareBySurface, null, 1)}\n`);
+  const falsePresumptions = classRows.find((c) => c.check === 'cert:false-presumption')?.occurrences ?? 0;
+  const summary = { ...meta, settlements: N, rendered: towns, errors, findings: classRows.reduce((s, c) => s + c.occurrences, 0), classes: classRows.length, fieldsWalked: fieldVals.size, fieldsReported: fields.length, fieldsExcluded: excluded, dependenceCandidates: cand.length, strongCrossFamilyPairs: pairs.length, mediansOutsideBands: banded.outside.map((x) => `${x.path} ${x.tier} ${x.median} (band ${x.low}–${x.high})`), proseRepetition: { storyPairwise: prose.story.all, storySameTier: prose.story.sameTier, exactPairwise: prose.exact.all, exactSameTier: prose.exact.sameTier, hooksPairwise: prose.hooks.all, skeletonsInTenPercent: prose.skeletonsInTenPercent }, residual: { pairs: second.residualPairs.length, copies: second.copies.length, surprisesA: second.surprisesA.length, surprisesB: second.surprisesB.length }, verdict, reasons, chairReadings: CHAIR_READINGS, bands: OWNER_BANDS, reader: { classes: readerRows.length, findings: readerRows.reduce((a, c) => a + c.occurrences, 0), note: 'kind 9, outside the stop rule' }, declaredShare: declaredShareBySurface, falsePresumptions };
   writeFileSync(join(out, 'run.json'), `${JSON.stringify(summary, null, 1)}\n`);
   return summary;
 }

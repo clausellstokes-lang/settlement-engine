@@ -1,0 +1,2234 @@
+{
+  "id": "demandProfile.FACTION_DEMAND",
+  "source": "src/generators/demandProfile.js :: FACTION_DEMAND (read by computeDemandImports)",
+  "drawKind": "A",
+  "pool": {
+    "declares": [
+      "tier: >= village"
+    ],
+    "crisisScoped": false,
+    "colour": false,
+    "notes": "Whole-list IMPORT pool; each qualifying faction (power >= 8, by power) contributes its FIRST unsuppressed good (CHAIN_SUPPRESSES by active chain id). tier >= village is guaranteed by TIER_DEMAND_BUDGET (thorp/hamlet budget 0). Culture is the caller's culture string with a latin fallback, so culture is declared per row (except latin). Faction category presence: unhomed: faction category government (powerStructure.factions[].category, power >= 8); unhomed: faction category economy (merchant/guild faction, power >= 8); unhomed: faction category military (power >= 8); unhomed: faction category religious (power >= 8); faction category magic declared as \"magic\" (magic functions); the faction itself is unhomed; faction category criminal declared as \"crime\" (deriveCriminalStructure non-null — a DIFFERENT reader from the faction roster; confirm with chair). Producers are elsewhere (imports) and not declared. Line 189's government/isGoverning ternary is a no-op (both arms 'government').",
+    "needs": [],
+    "excludes": []
+  },
+  "rows": [
+    {
+      "id": "demandProfile.FACTION_DEMAND::government.arabic.0",
+      "text": "Spices and rare aromatics",
+      "needs": [
+        "culture: arabic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "luxury-class; \"tier: >= village\" guaranteed by the pool (TIER_DEMAND_BUDGET 0 below village)."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::government.arabic.1",
+      "text": "Fine silk and brocade",
+      "needs": [
+        "culture: arabic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "luxury-class; \"tier: >= village\" guaranteed by the pool (TIER_DEMAND_BUDGET 0 below village)."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::government.arabic.2",
+      "text": "Carved ivory and ebony",
+      "needs": [
+        "culture: arabic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "luxury-class; \"tier: >= village\" guaranteed by the pool (TIER_DEMAND_BUDGET 0 below village)."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::government.east_asian.0",
+      "text": "Fine porcelain and lacquerware",
+      "needs": [
+        "culture: east_asian"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "luxury-class; \"tier: >= village\" guaranteed by the pool (TIER_DEMAND_BUDGET 0 below village)."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::government.east_asian.1",
+      "text": "Silk and embroidered cloth",
+      "needs": [
+        "culture: east_asian"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "luxury-class; \"tier: >= village\" guaranteed by the pool (TIER_DEMAND_BUDGET 0 below village)."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::government.east_asian.2",
+      "text": "Exotic incense",
+      "needs": [
+        "culture: east_asian"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "luxury-class; \"tier: >= village\" guaranteed by the pool (TIER_DEMAND_BUDGET 0 below village)."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::government.latin.0",
+      "text": "Fine wine and amphorae",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "latin is the FALLBACK block: prints for any culture key missing from the map, so culture is not declared. luxury-class; \"tier: >= village\" guaranteed by the pool (TIER_DEMAND_BUDGET 0 below village)."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::government.latin.1",
+      "text": "Marble and ornamental stone",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "latin is the FALLBACK block: prints for any culture key missing from the map, so culture is not declared. luxury-class; \"tier: >= village\" guaranteed by the pool (TIER_DEMAND_BUDGET 0 below village)."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::government.latin.2",
+      "text": "Luxury glassware",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "latin is the FALLBACK block: prints for any culture key missing from the map, so culture is not declared. luxury-class; \"tier: >= village\" guaranteed by the pool (TIER_DEMAND_BUDGET 0 below village)."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::government.germanic.0",
+      "text": "Master-crafted plate armour",
+      "needs": [
+        "culture: germanic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::government.germanic.1",
+      "text": "Imported wine and spices",
+      "needs": [
+        "culture: germanic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "luxury-class; \"tier: >= village\" guaranteed by the pool (TIER_DEMAND_BUDGET 0 below village)."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::government.germanic.2",
+      "text": "Fine furs and pelts",
+      "needs": [
+        "culture: germanic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "luxury-class; \"tier: >= village\" guaranteed by the pool (TIER_DEMAND_BUDGET 0 below village)."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::government.norse.0",
+      "text": "Silver and hack-silver",
+      "needs": [
+        "culture: norse"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "luxury-class; \"tier: >= village\" guaranteed by the pool (TIER_DEMAND_BUDGET 0 below village)."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::government.norse.1",
+      "text": "Fine furs and walrus ivory",
+      "needs": [
+        "culture: norse"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "luxury-class; \"tier: >= village\" guaranteed by the pool (TIER_DEMAND_BUDGET 0 below village)."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::government.norse.2",
+      "text": "Imported wine and silk",
+      "needs": [
+        "culture: norse"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "luxury-class; \"tier: >= village\" guaranteed by the pool (TIER_DEMAND_BUDGET 0 below village)."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::government.celtic.0",
+      "text": "Gold and silver torcs",
+      "needs": [
+        "culture: celtic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "luxury-class; \"tier: >= village\" guaranteed by the pool (TIER_DEMAND_BUDGET 0 below village)."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::government.celtic.1",
+      "text": "Fine wine from southern trade",
+      "needs": [
+        "culture: celtic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "luxury-class; \"tier: >= village\" guaranteed by the pool (TIER_DEMAND_BUDGET 0 below village)."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::government.celtic.2",
+      "text": "Rare dyes and pigments",
+      "needs": [
+        "culture: celtic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::government.slavic.0",
+      "text": "Silver ornaments and coins",
+      "needs": [
+        "culture: slavic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "luxury-class; \"tier: >= village\" guaranteed by the pool (TIER_DEMAND_BUDGET 0 below village)."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::government.slavic.1",
+      "text": "Imported silk",
+      "needs": [
+        "culture: slavic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "luxury-class; \"tier: >= village\" guaranteed by the pool (TIER_DEMAND_BUDGET 0 below village)."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::government.slavic.2",
+      "text": "Fine furs from the north",
+      "needs": [
+        "culture: slavic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "luxury-class; \"tier: >= village\" guaranteed by the pool (TIER_DEMAND_BUDGET 0 below village)."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::government.steppe.0",
+      "text": "Fine horses and tack",
+      "needs": [
+        "culture: steppe"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "luxury-class; \"tier: >= village\" guaranteed by the pool (TIER_DEMAND_BUDGET 0 below village)."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::government.steppe.1",
+      "text": "Silk from eastern routes",
+      "needs": [
+        "culture: steppe"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "luxury-class; \"tier: >= village\" guaranteed by the pool (TIER_DEMAND_BUDGET 0 below village)."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::government.steppe.2",
+      "text": "Gold and silver work",
+      "needs": [
+        "culture: steppe"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "luxury-class; \"tier: >= village\" guaranteed by the pool (TIER_DEMAND_BUDGET 0 below village)."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::government.south_asian.0",
+      "text": "Precious stones and gems",
+      "needs": [
+        "culture: south_asian"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "luxury-class; \"tier: >= village\" guaranteed by the pool (TIER_DEMAND_BUDGET 0 below village)."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::government.south_asian.1",
+      "text": "Fine cotton and muslin",
+      "needs": [
+        "culture: south_asian"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "luxury-class; \"tier: >= village\" guaranteed by the pool (TIER_DEMAND_BUDGET 0 below village)."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::government.south_asian.2",
+      "text": "Sandalwood and teak",
+      "needs": [
+        "culture: south_asian"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "luxury-class; \"tier: >= village\" guaranteed by the pool (TIER_DEMAND_BUDGET 0 below village)."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::government.greek.0",
+      "text": "Fine wine and olive oil",
+      "needs": [
+        "culture: greek"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "luxury-class; \"tier: >= village\" guaranteed by the pool (TIER_DEMAND_BUDGET 0 below village)."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::government.greek.1",
+      "text": "Marble and bronze sculpture",
+      "needs": [
+        "culture: greek"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "luxury-class; \"tier: >= village\" guaranteed by the pool (TIER_DEMAND_BUDGET 0 below village)."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::government.greek.2",
+      "text": "Luxury ceramics",
+      "needs": [
+        "culture: greek"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "luxury-class; \"tier: >= village\" guaranteed by the pool (TIER_DEMAND_BUDGET 0 below village)."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::government.mesoamerican.0",
+      "text": "Quetzal feathers and jade",
+      "needs": [
+        "culture: mesoamerican"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "luxury-class; \"tier: >= village\" guaranteed by the pool (TIER_DEMAND_BUDGET 0 below village)."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::government.mesoamerican.1",
+      "text": "Fine cacao",
+      "needs": [
+        "culture: mesoamerican"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "luxury-class; \"tier: >= village\" guaranteed by the pool (TIER_DEMAND_BUDGET 0 below village)."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::government.mesoamerican.2",
+      "text": "Obsidian and turquoise work",
+      "needs": [
+        "culture: mesoamerican"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::economy.arabic.0",
+      "text": "Dyed cloth and quality textiles",
+      "needs": [
+        "culture: arabic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::economy.arabic.1",
+      "text": "Tin and copper ingots",
+      "needs": [
+        "culture: arabic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::economy.arabic.2",
+      "text": "Paper and writing materials",
+      "needs": [
+        "culture: arabic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::economy.east_asian.0",
+      "text": "Quality paper and ink",
+      "needs": [
+        "culture: east_asian"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::economy.east_asian.1",
+      "text": "Fine metalwork tools",
+      "needs": [
+        "culture: east_asian"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "luxury-class; \"tier: >= village\" guaranteed by the pool (TIER_DEMAND_BUDGET 0 below village)."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::economy.east_asian.2",
+      "text": "Dyed and printed cloth",
+      "needs": [
+        "culture: east_asian"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::economy.latin.0",
+      "text": "Parchment and wax tablets",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "latin is the FALLBACK block: prints for any culture key missing from the map, so culture is not declared."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::economy.latin.1",
+      "text": "Quality wool cloth",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "latin is the FALLBACK block: prints for any culture key missing from the map, so culture is not declared."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::economy.latin.2",
+      "text": "Tin and lead",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "latin is the FALLBACK block: prints for any culture key missing from the map, so culture is not declared."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::economy.germanic.0",
+      "text": "Quality iron tools and fittings",
+      "needs": [
+        "culture: germanic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::economy.germanic.1",
+      "text": "Fine cloth and dye",
+      "needs": [
+        "culture: germanic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "luxury-class; \"tier: >= village\" guaranteed by the pool (TIER_DEMAND_BUDGET 0 below village)."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::economy.germanic.2",
+      "text": "Barrel-staves and cooperage",
+      "needs": [
+        "culture: germanic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::economy.norse.0",
+      "text": "Rope and sailcloth",
+      "needs": [
+        "culture: norse",
+        "navigable"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "presumes shipping."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::economy.norse.1",
+      "text": "Quality iron fittings",
+      "needs": [
+        "culture: norse"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::economy.norse.2",
+      "text": "Wax and tallow",
+      "needs": [
+        "culture: norse"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::economy.celtic.0",
+      "text": "Bronze fittings and tools",
+      "needs": [
+        "culture: celtic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::economy.celtic.1",
+      "text": "Quality wool cloth",
+      "needs": [
+        "culture: celtic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::economy.celtic.2",
+      "text": "Tin from western mines",
+      "needs": [
+        "culture: celtic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::economy.slavic.0",
+      "text": "Amber and beeswax",
+      "needs": [
+        "culture: slavic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::economy.slavic.1",
+      "text": "Quality iron tools",
+      "needs": [
+        "culture: slavic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::economy.slavic.2",
+      "text": "Flax and linen cloth",
+      "needs": [
+        "culture: slavic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::economy.steppe.0",
+      "text": "Felt and leather goods",
+      "needs": [
+        "culture: steppe"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::economy.steppe.1",
+      "text": "Iron fittings and arrowheads",
+      "needs": [
+        "culture: steppe"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::economy.steppe.2",
+      "text": "Dried and salted provisions",
+      "needs": [
+        "culture: steppe"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::economy.south_asian.0",
+      "text": "Cotton cloth in bulk",
+      "needs": [
+        "culture: south_asian"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::economy.south_asian.1",
+      "text": "Iron and steel tools",
+      "needs": [
+        "culture: south_asian"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::economy.south_asian.2",
+      "text": "Sesame oil and ghee",
+      "needs": [
+        "culture: south_asian"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::economy.greek.0",
+      "text": "Amphora and storage vessels",
+      "needs": [
+        "culture: greek"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::economy.greek.1",
+      "text": "Quality wool cloth",
+      "needs": [
+        "culture: greek"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::economy.greek.2",
+      "text": "Lead and tin",
+      "needs": [
+        "culture: greek"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::economy.mesoamerican.0",
+      "text": "Cacao in bulk",
+      "needs": [
+        "culture: mesoamerican"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::economy.mesoamerican.1",
+      "text": "Cotton cloth",
+      "needs": [
+        "culture: mesoamerican"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::economy.mesoamerican.2",
+      "text": "Rubber and copal resin",
+      "needs": [
+        "culture: mesoamerican"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::military.arabic.0",
+      "text": "Cavalry horses and tack",
+      "needs": [
+        "culture: arabic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::military.arabic.1",
+      "text": "Laminar armour components",
+      "needs": [
+        "culture: arabic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::military.arabic.2",
+      "text": "Salted provisions and hardtack",
+      "needs": [
+        "culture: arabic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::military.east_asian.0",
+      "text": "Lacquered armour fittings",
+      "needs": [
+        "culture: east_asian"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::military.east_asian.1",
+      "text": "Bowstaves and horn",
+      "needs": [
+        "culture: east_asian"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::military.east_asian.2",
+      "text": "Rice and dried provisions",
+      "needs": [
+        "culture: east_asian"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::military.latin.0",
+      "text": "Lorica segmentata fittings",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "latin is the FALLBACK block: prints for any culture key missing from the map, so culture is not declared."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::military.latin.1",
+      "text": "Grain and salted pork",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "latin is the FALLBACK block: prints for any culture key missing from the map, so culture is not declared."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::military.latin.2",
+      "text": "Cordage and leather",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "latin is the FALLBACK block: prints for any culture key missing from the map, so culture is not declared."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::military.germanic.0",
+      "text": "Mail and iron fittings",
+      "needs": [
+        "culture: germanic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::military.germanic.1",
+      "text": "Salted beef and grain",
+      "needs": [
+        "culture: germanic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::military.germanic.2",
+      "text": "Horses and warhorse stock",
+      "needs": [
+        "culture: germanic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::military.norse.0",
+      "text": "Shield-boards and iron rims",
+      "needs": [
+        "culture: norse"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::military.norse.1",
+      "text": "Salted fish and hardtack",
+      "needs": [
+        "culture: norse"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::military.norse.2",
+      "text": "Bowstaves and arrows",
+      "needs": [
+        "culture: norse"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::military.celtic.0",
+      "text": "Chariot fittings and iron",
+      "needs": [
+        "culture: celtic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::military.celtic.1",
+      "text": "Grain and dried meat",
+      "needs": [
+        "culture: celtic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::military.celtic.2",
+      "text": "Quality horses",
+      "needs": [
+        "culture: celtic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::military.slavic.0",
+      "text": "Iron arrowheads and spearheads",
+      "needs": [
+        "culture: slavic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::military.slavic.1",
+      "text": "Grain and salted fish",
+      "needs": [
+        "culture: slavic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::military.slavic.2",
+      "text": "Horses from the steppe",
+      "needs": [
+        "culture: slavic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::military.steppe.0",
+      "text": "Composite bow materials",
+      "needs": [
+        "culture: steppe"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::military.steppe.1",
+      "text": "Horses and remounts",
+      "needs": [
+        "culture: steppe"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::military.steppe.2",
+      "text": "Dried meat and kumiss",
+      "needs": [
+        "culture: steppe"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::military.south_asian.0",
+      "text": "War elephants and fodder",
+      "needs": [
+        "culture: south_asian"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "live animals as import; fine."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::military.south_asian.1",
+      "text": "Steel and iron",
+      "needs": [
+        "culture: south_asian"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::military.south_asian.2",
+      "text": "Dried rice and provisions",
+      "needs": [
+        "culture: south_asian"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::military.greek.0",
+      "text": "Bronze armour components",
+      "needs": [
+        "culture: greek"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::military.greek.1",
+      "text": "Grain and olive oil",
+      "needs": [
+        "culture: greek"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::military.greek.2",
+      "text": "Horses and cavalry gear",
+      "needs": [
+        "culture: greek"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::military.mesoamerican.0",
+      "text": "Obsidian for macuahuitl",
+      "needs": [
+        "culture: mesoamerican"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::military.mesoamerican.1",
+      "text": "Cotton armour padding",
+      "needs": [
+        "culture: mesoamerican"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::military.mesoamerican.2",
+      "text": "Dried provisions and cacao",
+      "needs": [
+        "culture: mesoamerican"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::religious.arabic.0",
+      "text": "Incense and frankincense",
+      "needs": [
+        "culture: arabic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "luxury-class; \"tier: >= village\" guaranteed by the pool (TIER_DEMAND_BUDGET 0 below village)."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::religious.arabic.1",
+      "text": "Fine prayer rugs and cloth",
+      "needs": [
+        "culture: arabic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "luxury-class; \"tier: >= village\" guaranteed by the pool (TIER_DEMAND_BUDGET 0 below village)."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::religious.arabic.2",
+      "text": "Calligraphy tools and inks",
+      "needs": [
+        "culture: arabic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::religious.east_asian.0",
+      "text": "Incense and ritual paper",
+      "needs": [
+        "culture: east_asian"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "luxury-class; \"tier: >= village\" guaranteed by the pool (TIER_DEMAND_BUDGET 0 below village)."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::religious.east_asian.1",
+      "text": "Fine lacquerwork for shrines",
+      "needs": [
+        "culture: east_asian"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "luxury-class; \"tier: >= village\" guaranteed by the pool (TIER_DEMAND_BUDGET 0 below village)."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::religious.east_asian.2",
+      "text": "Bronze casting materials",
+      "needs": [
+        "culture: east_asian"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::religious.latin.0",
+      "text": "Incense and ritual oil",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "latin is the FALLBACK block: prints for any culture key missing from the map, so culture is not declared. luxury-class; \"tier: >= village\" guaranteed by the pool (TIER_DEMAND_BUDGET 0 below village)."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::religious.latin.1",
+      "text": "Fine linen for vestments",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "latin is the FALLBACK block: prints for any culture key missing from the map, so culture is not declared. luxury-class; \"tier: >= village\" guaranteed by the pool (TIER_DEMAND_BUDGET 0 below village)."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::religious.latin.2",
+      "text": "Lead for pipe organs",
+      "needs": [
+        "institution: temple"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "latin is the FALLBACK block: prints for any culture key missing from the map, so culture is not declared. presumes a church with an organ."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::religious.germanic.0",
+      "text": "Carved wood and amber",
+      "needs": [
+        "culture: germanic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::religious.germanic.1",
+      "text": "Ritual drinking vessels",
+      "needs": [
+        "culture: germanic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::religious.germanic.2",
+      "text": "Imported wine for ceremony",
+      "needs": [
+        "culture: germanic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::religious.norse.0",
+      "text": "Mead and ritual ale ingredients",
+      "needs": [
+        "culture: norse"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::religious.norse.1",
+      "text": "Silver for votive offerings",
+      "needs": [
+        "culture: norse"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "luxury-class; \"tier: >= village\" guaranteed by the pool (TIER_DEMAND_BUDGET 0 below village)."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::religious.norse.2",
+      "text": "Carved bone and antler",
+      "needs": [
+        "culture: norse"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::religious.celtic.0",
+      "text": "Bronze for votive offerings",
+      "needs": [
+        "culture: celtic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::religious.celtic.1",
+      "text": "Mistletoe and sacred herbs",
+      "needs": [
+        "culture: celtic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::religious.celtic.2",
+      "text": "Fine gold wire",
+      "needs": [
+        "culture: celtic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "luxury-class; \"tier: >= village\" guaranteed by the pool (TIER_DEMAND_BUDGET 0 below village)."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::religious.slavic.0",
+      "text": "Beeswax candles",
+      "needs": [
+        "culture: slavic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::religious.slavic.1",
+      "text": "Imported icons and sacred metals",
+      "needs": [
+        "culture: slavic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::religious.slavic.2",
+      "text": "Incense from the east",
+      "needs": [
+        "culture: slavic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "luxury-class; \"tier: >= village\" guaranteed by the pool (TIER_DEMAND_BUDGET 0 below village)."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::religious.steppe.0",
+      "text": "Felt for yurt-shrines",
+      "needs": [
+        "culture: steppe"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::religious.steppe.1",
+      "text": "Ritual fermented mare milk",
+      "needs": [
+        "culture: steppe"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::religious.steppe.2",
+      "text": "Carved bone idols",
+      "needs": [
+        "culture: steppe"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::religious.south_asian.0",
+      "text": "Sandalwood and camphor",
+      "needs": [
+        "culture: south_asian"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "luxury-class; \"tier: >= village\" guaranteed by the pool (TIER_DEMAND_BUDGET 0 below village)."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::religious.south_asian.1",
+      "text": "Gold and silver leaf",
+      "needs": [
+        "culture: south_asian"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "luxury-class; \"tier: >= village\" guaranteed by the pool (TIER_DEMAND_BUDGET 0 below village)."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::religious.south_asian.2",
+      "text": "Sacred river water vessels",
+      "needs": [
+        "culture: south_asian"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "presumes a sacred river (may be elsewhere); not declared."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::religious.greek.0",
+      "text": "Fine pottery for libations",
+      "needs": [
+        "culture: greek"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "luxury-class; \"tier: >= village\" guaranteed by the pool (TIER_DEMAND_BUDGET 0 below village)."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::religious.greek.1",
+      "text": "Olive oil for sacred lamps",
+      "needs": [
+        "culture: greek"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::religious.greek.2",
+      "text": "Incense and myrrh",
+      "needs": [
+        "culture: greek"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "luxury-class; \"tier: >= village\" guaranteed by the pool (TIER_DEMAND_BUDGET 0 below village)."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::religious.mesoamerican.0",
+      "text": "Copal resin incense",
+      "needs": [
+        "culture: mesoamerican"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "luxury-class; \"tier: >= village\" guaranteed by the pool (TIER_DEMAND_BUDGET 0 below village)."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::religious.mesoamerican.1",
+      "text": "Jade and turquoise for ritual",
+      "needs": [
+        "culture: mesoamerican"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "luxury-class; \"tier: >= village\" guaranteed by the pool (TIER_DEMAND_BUDGET 0 below village)."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::religious.mesoamerican.2",
+      "text": "Obsidian for sacrifice",
+      "needs": [
+        "culture: mesoamerican"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::magic.arabic.0",
+      "text": "Exotic minerals and salts",
+      "needs": [
+        "culture: arabic",
+        "magic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "luxury-class; \"tier: >= village\" guaranteed by the pool (TIER_DEMAND_BUDGET 0 below village)."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::magic.arabic.1",
+      "text": "Rare earths and pigments",
+      "needs": [
+        "culture: arabic",
+        "magic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::magic.arabic.2",
+      "text": "Manuscripts and star charts",
+      "needs": [
+        "culture: arabic",
+        "magic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::magic.east_asian.0",
+      "text": "Cinnabar and mercury",
+      "needs": [
+        "culture: east_asian",
+        "magic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::magic.east_asian.1",
+      "text": "Rare minerals and crystals",
+      "needs": [
+        "culture: east_asian",
+        "magic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::magic.east_asian.2",
+      "text": "Medicinal herbs and fungi",
+      "needs": [
+        "culture: east_asian",
+        "magic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::magic.latin.0",
+      "text": "Sulfur and alum",
+      "needs": [
+        "magic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "latin is the FALLBACK block: prints for any culture key missing from the map, so culture is not declared."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::magic.latin.1",
+      "text": "Parchment and vellum",
+      "needs": [
+        "magic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "latin is the FALLBACK block: prints for any culture key missing from the map, so culture is not declared."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::magic.latin.2",
+      "text": "Rare metals and glass vessels",
+      "needs": [
+        "magic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "latin is the FALLBACK block: prints for any culture key missing from the map, so culture is not declared."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::magic.germanic.0",
+      "text": "Rune-worthy bone and antler",
+      "needs": [
+        "culture: germanic",
+        "magic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::magic.germanic.1",
+      "text": "Rare herbs and roots",
+      "needs": [
+        "culture: germanic",
+        "magic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::magic.germanic.2",
+      "text": "Quicksilver and lead",
+      "needs": [
+        "culture: germanic",
+        "magic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "luxury-class; \"tier: >= village\" guaranteed by the pool (TIER_DEMAND_BUDGET 0 below village)."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::magic.norse.0",
+      "text": "Seiðr herbs and mushrooms",
+      "needs": [
+        "culture: norse",
+        "magic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::magic.norse.1",
+      "text": "Carved rune materials",
+      "needs": [
+        "culture: norse",
+        "magic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::magic.norse.2",
+      "text": "Quicksilver from trade",
+      "needs": [
+        "culture: norse",
+        "magic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "luxury-class; \"tier: >= village\" guaranteed by the pool (TIER_DEMAND_BUDGET 0 below village)."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::magic.celtic.0",
+      "text": "Druidic herbs and oak bark",
+      "needs": [
+        "culture: celtic",
+        "magic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::magic.celtic.1",
+      "text": "Silver wire for wards",
+      "needs": [
+        "culture: celtic",
+        "magic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "luxury-class; \"tier: >= village\" guaranteed by the pool (TIER_DEMAND_BUDGET 0 below village)."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::magic.celtic.2",
+      "text": "Rare mistletoe and bark",
+      "needs": [
+        "culture: celtic",
+        "magic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::magic.slavic.0",
+      "text": "Folklore herbs and mushrooms",
+      "needs": [
+        "culture: slavic",
+        "magic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::magic.slavic.1",
+      "text": "Silver for protective charms",
+      "needs": [
+        "culture: slavic",
+        "magic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "luxury-class; \"tier: >= village\" guaranteed by the pool (TIER_DEMAND_BUDGET 0 below village)."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::magic.slavic.2",
+      "text": "Beeswax for seals",
+      "needs": [
+        "culture: slavic",
+        "magic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::magic.steppe.0",
+      "text": "Shamanic herbs and bones",
+      "needs": [
+        "culture: steppe",
+        "magic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::magic.steppe.1",
+      "text": "Carved spirit-tokens",
+      "needs": [
+        "culture: steppe",
+        "magic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::magic.steppe.2",
+      "text": "Exotic feathers and furs",
+      "needs": [
+        "culture: steppe",
+        "magic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "luxury-class; \"tier: >= village\" guaranteed by the pool (TIER_DEMAND_BUDGET 0 below village)."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::magic.south_asian.0",
+      "text": "Ritual metals and gemstones",
+      "needs": [
+        "culture: south_asian",
+        "magic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "luxury-class; \"tier: >= village\" guaranteed by the pool (TIER_DEMAND_BUDGET 0 below village)."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::magic.south_asian.1",
+      "text": "Rare spices as reagents",
+      "needs": [
+        "culture: south_asian",
+        "magic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "luxury-class; \"tier: >= village\" guaranteed by the pool (TIER_DEMAND_BUDGET 0 below village)."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::magic.south_asian.2",
+      "text": "Medicinal plants and oils",
+      "needs": [
+        "culture: south_asian",
+        "magic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::magic.greek.0",
+      "text": "Sulfur and brimstone",
+      "needs": [
+        "culture: greek",
+        "magic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::magic.greek.1",
+      "text": "Rare earths and pigments",
+      "needs": [
+        "culture: greek",
+        "magic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::magic.greek.2",
+      "text": "Bronze and electrum vessels",
+      "needs": [
+        "culture: greek",
+        "magic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::magic.mesoamerican.0",
+      "text": "Obsidian mirrors",
+      "needs": [
+        "culture: mesoamerican",
+        "magic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::magic.mesoamerican.1",
+      "text": "Rare feathers for ritual",
+      "needs": [
+        "culture: mesoamerican",
+        "magic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::magic.mesoamerican.2",
+      "text": "Copal and rubber for sealing",
+      "needs": [
+        "culture: mesoamerican",
+        "magic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::criminal.arabic.0",
+      "text": "Undeclared luxury silk",
+      "needs": [
+        "culture: arabic",
+        "organised crime"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "luxury-class; \"tier: >= village\" guaranteed by the pool (TIER_DEMAND_BUDGET 0 below village)."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::criminal.arabic.1",
+      "text": "Stolen spice shipments",
+      "needs": [
+        "culture: arabic",
+        "organised crime"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "luxury-class; \"tier: >= village\" guaranteed by the pool (TIER_DEMAND_BUDGET 0 below village)."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::criminal.arabic.2",
+      "text": "Forged bills of trade",
+      "needs": [
+        "culture: arabic",
+        "organised crime"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::criminal.east_asian.0",
+      "text": "Smuggled jade and gems",
+      "needs": [
+        "culture: east_asian",
+        "organised crime"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "luxury-class; \"tier: >= village\" guaranteed by the pool (TIER_DEMAND_BUDGET 0 below village)."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::criminal.east_asian.1",
+      "text": "Opium and exotic narcotics",
+      "needs": [
+        "culture: east_asian",
+        "organised crime"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "luxury-class; \"tier: >= village\" guaranteed by the pool (TIER_DEMAND_BUDGET 0 below village). unhomed: narcotics boundary (content profile)."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::criminal.east_asian.2",
+      "text": "Forged imperial seals",
+      "needs": [
+        "culture: east_asian",
+        "organised crime"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "unhomed: imperial polity."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::criminal.latin.0",
+      "text": "Stolen silver plate",
+      "needs": [
+        "organised crime"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "latin is the FALLBACK block: prints for any culture key missing from the map, so culture is not declared. luxury-class; \"tier: >= village\" guaranteed by the pool (TIER_DEMAND_BUDGET 0 below village)."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::criminal.latin.1",
+      "text": "Undeclared wine and oil",
+      "needs": [
+        "organised crime"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "latin is the FALLBACK block: prints for any culture key missing from the map, so culture is not declared."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::criminal.latin.2",
+      "text": "Forged land titles",
+      "needs": [
+        "organised crime"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "latin is the FALLBACK block: prints for any culture key missing from the map, so culture is not declared."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::criminal.germanic.0",
+      "text": "Stolen mail and weapons",
+      "needs": [
+        "culture: germanic",
+        "organised crime"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::criminal.germanic.1",
+      "text": "Undeclared furs and amber",
+      "needs": [
+        "culture: germanic",
+        "organised crime"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "luxury-class; \"tier: >= village\" guaranteed by the pool (TIER_DEMAND_BUDGET 0 below village)."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::criminal.germanic.2",
+      "text": "Counterfeit coinage",
+      "needs": [
+        "culture: germanic",
+        "organised crime"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::criminal.norse.0",
+      "text": "Stolen silver and hack-silver",
+      "needs": [
+        "culture: norse",
+        "organised crime"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "luxury-class; \"tier: >= village\" guaranteed by the pool (TIER_DEMAND_BUDGET 0 below village)."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::criminal.norse.1",
+      "text": "Undeclared furs",
+      "needs": [
+        "culture: norse",
+        "organised crime"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "luxury-class; \"tier: >= village\" guaranteed by the pool (TIER_DEMAND_BUDGET 0 below village)."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::criminal.norse.2",
+      "text": "Enslaved captives",
+      "needs": [
+        "culture: norse",
+        "organised crime"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "unhomed: slavery boundary (generatedContentProfile.boundaries.slavery; allowsGeneratedContent filters at draw)."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::criminal.celtic.0",
+      "text": "Stolen bronze work",
+      "needs": [
+        "culture: celtic",
+        "organised crime"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::criminal.celtic.1",
+      "text": "Undeclared cattle",
+      "needs": [
+        "culture: celtic",
+        "organised crime"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::criminal.celtic.2",
+      "text": "Forged clan markers",
+      "needs": [
+        "culture: celtic",
+        "organised crime"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::criminal.slavic.0",
+      "text": "Stolen furs and amber",
+      "needs": [
+        "culture: slavic",
+        "organised crime"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "luxury-class; \"tier: >= village\" guaranteed by the pool (TIER_DEMAND_BUDGET 0 below village)."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::criminal.slavic.1",
+      "text": "Forged documents",
+      "needs": [
+        "culture: slavic",
+        "organised crime"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::criminal.slavic.2",
+      "text": "Undeclared silver",
+      "needs": [
+        "culture: slavic",
+        "organised crime"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "luxury-class; \"tier: >= village\" guaranteed by the pool (TIER_DEMAND_BUDGET 0 below village)."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::criminal.steppe.0",
+      "text": "Stolen horses",
+      "needs": [
+        "culture: steppe",
+        "organised crime"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::criminal.steppe.1",
+      "text": "Undeclared slaves",
+      "needs": [
+        "culture: steppe",
+        "organised crime"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "unhomed: slavery boundary (generatedContentProfile.boundaries.slavery)."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::criminal.steppe.2",
+      "text": "Contraband silk and spice",
+      "needs": [
+        "culture: steppe",
+        "organised crime"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "luxury-class; \"tier: >= village\" guaranteed by the pool (TIER_DEMAND_BUDGET 0 below village)."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::criminal.south_asian.0",
+      "text": "Stolen gems and spices",
+      "needs": [
+        "culture: south_asian",
+        "organised crime"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "luxury-class; \"tier: >= village\" guaranteed by the pool (TIER_DEMAND_BUDGET 0 below village)."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::criminal.south_asian.1",
+      "text": "Opium and contraband",
+      "needs": [
+        "culture: south_asian",
+        "organised crime"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "unhomed: narcotics boundary (content profile)."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::criminal.south_asian.2",
+      "text": "Forged merchant writs",
+      "needs": [
+        "culture: south_asian",
+        "organised crime"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::criminal.greek.0",
+      "text": "Stolen silver",
+      "needs": [
+        "culture: greek",
+        "organised crime"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "luxury-class; \"tier: >= village\" guaranteed by the pool (TIER_DEMAND_BUDGET 0 below village)."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::criminal.greek.1",
+      "text": "Undeclared olive oil",
+      "needs": [
+        "culture: greek",
+        "organised crime"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::criminal.greek.2",
+      "text": "Forged citizenship documents",
+      "needs": [
+        "culture: greek",
+        "organised crime"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::criminal.mesoamerican.0",
+      "text": "Stolen jade and cacao",
+      "needs": [
+        "culture: mesoamerican",
+        "organised crime"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "luxury-class; \"tier: >= village\" guaranteed by the pool (TIER_DEMAND_BUDGET 0 below village)."
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::criminal.mesoamerican.1",
+      "text": "Contraband obsidian",
+      "needs": [
+        "culture: mesoamerican",
+        "organised crime"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "demandProfile.FACTION_DEMAND::criminal.mesoamerican.2",
+      "text": "Forged tribute records",
+      "needs": [
+        "culture: mesoamerican",
+        "organised crime"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    }
+  ]
+}

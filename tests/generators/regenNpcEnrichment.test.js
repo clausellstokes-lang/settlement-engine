@@ -25,7 +25,10 @@ function enrichmentCoverage(npcs) {
 
 describe('[generators-domain-3] rerolled NPCs get the same coherence enrichment as generated ones', () => {
   test('a regen roster carries factionAffiliation and structuralPosition like the generated one', () => {
-    const s = gen({ settType: 'city', culture: 'germanic', terrainOverride: 'plains', tradeRouteAccess: 'road' }, 'd3-gen');
+    // CENSUS-1d (re-keyed by cause): the registry's `stable` entries are CALM_ONLY and refused under
+    // any crisis; this seed rolled a succession void, under which every top NPC was `stable`, so the
+    // anchor reads a CALM city (no stress selected) — the parity it proves is unchanged.
+    const s = gen({ settType: 'city', culture: 'germanic', terrainOverride: 'plains', tradeRouteAccess: 'road', selectedStressesRandom: false, selectedStresses: [] }, 'd3-gen');
     const genCov = enrichmentCoverage(s.npcs || []);
     // the generated roster is non-vacuously enriched
     expect(genCov.factionAffiliation).toBeGreaterThan(0);

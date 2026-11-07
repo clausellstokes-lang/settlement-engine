@@ -31,11 +31,11 @@ const UNPINNED = Symbol(); // The description was removed to buy the generation 
 
 registerStep('generatePower', {
   deps: ['generateEconomy', 'resolveNeighbour'],
-  reads: ['economicState', 'effectiveConfig', 'institutions', 'tier'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
+  reads: ['economicState', 'effectiveConfig', 'institutions', 'stress', 'tier'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
   // DECLARED: this step wants the PROVISIONAL economy. It establishes political intent, and
   // economyReconcilePass re-derives the economy AFTER that intent lands — ordering it later
   // would cycle (the dataFlowContract SCOPE NOTE's own argument).
-  readsVersion: { economicState: 'provisional' },
+  readsVersion: { economicState: 'provisional', stress: 'reconciled' }, // stress: the entries after isolationPass and stressConfirmPass re-derive them (census-1b unit B, 3bed695be, added the read)
   // powerIntent is transient pipeline state. It retains the original power
   // inputs + named RNG stream so the final economy can re-project scores
   // without regenerating political identities or reopening institution pulls.
@@ -43,7 +43,7 @@ registerStep('generatePower', {
   phase: 'power',
 }, (ctx, rng) => {
   const {
-    tier, economicState, effectiveConfig, institutions,
+    tier, economicState, effectiveConfig, institutions, stress,
   } = ctx;
   // THE PIN CONSULT (EM-B2a3). Both of this step's choosers are gated through the runner's
   // shared primitive at the call that produces them, so a held key costs no draw and no call.
@@ -79,6 +79,8 @@ registerStep('generatePower', {
       neighbourRelationship: neighbourRelationshipArg,
       config: effectiveConfig,
       institutions,
+      // CENSUS-1b unit B: the stress ENTRIES reach the power step (the migration direction).
+      stressEntries: stress ?? [],
     })
     : heldIntent;
   const heldStructure = chooseOrPin(pins, 'powerStructure', () => UNPINNED);

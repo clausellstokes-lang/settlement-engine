@@ -2622,7 +2622,12 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
   // the corrected reformat on tests/build/injectGalleryMeta.test.js — an inline literal
   // table with a row parameter, which is the exact class the old header sent lanes to
   // build. Its five rows now run inside one parameterless test and the file is CREDITED.
-  const EACH_FAMILY_PARK_CEILING = 111;
+  // ⭐ RATCHETED 111 -> 108 (LANDING-R2 seat E, 2026-11-07): the pool census's merge brought FOURTEEN new
+  // each-only files (122 measured at 104654b43); all fourteen took the reformat that works (plain
+  // parameterless tests, every seed through collectSeedFailures), and the estate measured 108. The win
+  // is banked at the moment it is measured. The literal-table ceiling below holds at 50 (59 -> 50 by
+  // the same fourteen cures).
+  const EACH_FAMILY_PARK_CEILING = 108;
   const LITERAL_TABLE_STILL_PARKED_CEILING = 50;
 
   test('⛔ THE EACH-FAMILY PARK DEBT ONLY SHRINKS — and the false reformat reds here', () => {

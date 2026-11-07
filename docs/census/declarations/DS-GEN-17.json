@@ -1,0 +1,184 @@
+{
+  "poolId": "DS-GEN-17",
+  "source": "src/data/dossierStateProse/general.generated.js (annex docs/content/RECEIPT_POOLS_DOSSIER_STATE.md)",
+  "drawKind": "K",
+  "drawSite": "institutionsPoolKey(economicState.compound.inst) → readStateProse → eligibleVariants → drawVariant",
+  "pools": [
+    {
+      "pool": "ADMINISTERED",
+      "keyGuarantees": [
+        "hasCourtSystem and hasPrison"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour, not scoped: the roster's character, guaranteed by the key.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "{settlement} keeps a court and keeps a place for those the court is finished with, which means the town has decided its quarrels are its own business to settle.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "{settlement} is administered, visibly: rules here have rooms, and the rooms have officers.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:3",
+          "text": "In {settlement} the law is a building you can point to, and the pointing settles a certain number of arguments on its own.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "GARRISONED",
+      "keyGuarantees": [
+        "a paid standing force: hasMilitaryInst, hasNavy or hasWatch (no court+prison); not reducible to one atom, so prose"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Not scoped: keeping professionals \"for its safety\" names a purpose, not a calm; line 2 presumes stone defences.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "Armed order is part of {settlement}'s furniture; the town keeps professionals for its safety rather than trusting to luck and neighbours.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "{settlement} pays for its own defense in wages, not only in stone, and the paying is a standing decision renewed every season.",
+          "needs": [
+            "walls"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "LETTERED",
+      "keyGuarantees": [
+        "hasMagicInst (no court+prison, no paid force)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour, not scoped: the roster's character.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "{settlement} supports work that only towns of a certain seriousness support, and the seriousness rubs off on the rest of the place.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "There are people in {settlement} whose whole trade is knowing things, and the town has decided it can afford them.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "PROVISIONED",
+      "keyGuarantees": [
+        "hasGranary or hasHospital (none of the earlier antecedents)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Not scoped: provision is a building, not a plenty claim; line 1 presumes both stores and care, line 2 the granary.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "{settlement} keeps stores against the bad season and care for the bad year; the town has met scarcity before and built its answer into the roster.",
+          "needs": [
+            "institution: granary",
+            "institution: hospital"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "A town does not keep a granary out of optimism; {settlement}'s provision is the polite form of its memory.",
+          "needs": [
+            "institution: granary"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "BARE",
+      "keyGuarantees": [
+        "none of the four antecedents"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour, not scoped: a thin roster asserts no calm.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "{settlement} keeps few institutions because it needs few; what a larger town does with buildings, this one does with acquaintance.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "Nothing in {settlement} is official that could instead be somebody's job on the side.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    }
+  ]
+}

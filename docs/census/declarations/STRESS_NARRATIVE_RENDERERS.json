@@ -1,0 +1,532 @@
+{
+  "poolId": "STRESS_NARRATIVE_RENDERERS",
+  "source": "src/generators/stressNarrative.js :74 RENDERERS",
+  "drawKind": "T",
+  "drawSite": "src/generators/stressNarrative.js:57 renderStressSummary(type, name, roll) → RENDERERS[type] (wartime branch R-rolled at :42; religious_conversion H on name length)",
+  "pools": [
+    {
+      "pool": "under_siege",
+      "keyGuarantees": [
+        "stress entry type = under_siege"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "under_siege"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one line per key (T).",
+      "lines": [
+        {
+          "lineId": "RENDERERS.under_siege",
+          "text": "${name} is under active siege. Land supply lines are cut or contested. Morale is fracturing under sustained pressure. Every decision carries the weight of survival.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "under_siege"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "famine",
+      "keyGuarantees": [
+        "stress entry type = famine"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "famine"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one line per key (T).",
+      "lines": [
+        {
+          "lineId": "RENDERERS.famine",
+          "text": "${name} is in its second failed harvest season. Rationing has begun. The wealthy are hoarding. Children are visibly hungry.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "famine"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "occupied",
+      "keyGuarantees": [
+        "stress entry type = occupied"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "occupied"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one line per key (T).",
+      "lines": [
+        {
+          "lineId": "RENDERERS.occupied",
+          "text": "${name} is under the administrative control of an outside power. Locals comply outwardly. Resistance exists, distributed and careful.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "occupied"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "politically_fractured",
+      "keyGuarantees": [
+        "stress entry type = politically_fractured"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "politically_fractured"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one line per key (T).",
+      "lines": [
+        {
+          "lineId": "RENDERERS.politically_fractured",
+          "text": "${name} has no stable governing authority. Two or three factions each control part of the settlement and none will yield. Daily life continues, but every interaction has a political valence.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "politically_fractured"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "indebted",
+      "keyGuarantees": [
+        "stress entry type = indebted"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "indebted"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one line per key (T).",
+      "lines": [
+        {
+          "lineId": "RENDERERS.indebted",
+          "text": "${name} owes a debt it cannot repay to an external power: a merchant house, a noble, a guild confederation, or something older. The debt is now a leash.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "indebted"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "recently_betrayed",
+      "keyGuarantees": [
+        "stress entry type = recently_betrayed"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "recently_betrayed"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one line per key (T).",
+      "lines": [
+        {
+          "lineId": "RENDERERS.recently_betrayed",
+          "text": "${name} was betrayed from within: recently enough that the wound hasn't closed. Someone trusted sold something important. The settlement knows it, but the full picture is not yet known.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "recently_betrayed"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "infiltrated",
+      "keyGuarantees": [
+        "stress entry type = infiltrated"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "infiltrated"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one line per key (T).",
+      "lines": [
+        {
+          "lineId": "RENDERERS.infiltrated",
+          "text": "${name} has been quietly penetrated by an outside interest. Enemy agents, a cult, a merchant intelligence network. The settlement does not know. Key decisions are being subtly shaped.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "infiltrated"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "plague_onset",
+      "keyGuarantees": [
+        "stress entry type = plague_onset"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "plague_onset"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one line per key (T).",
+      "lines": [
+        {
+          "lineId": "RENDERERS.plague_onset",
+          "text": "Something is spreading in ${name}. It is not yet a plague, but it will be if nothing changes. Healers are overwhelmed. The origin is disputed. Quarantine measures are being resisted.",
+          "needs": [
+            "healer"
+          ],
+          "excludes": [],
+          "crisis": [
+            "plague_onset"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ],
+      "twins": [
+        {
+          "text": "Something is spreading in ${name}. It is not yet a plague, but it will be if nothing changes. The sick outnumber those who can tend them. The origin is disputed. Quarantine measures are being resisted.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "plague_onset"
+          ],
+          "why": "The one line names healers; a plague place with no healer on record (most thorps and hamlets) has no other line."
+        }
+      ]
+    },
+    {
+      "pool": "succession_void",
+      "keyGuarantees": [
+        "stress entry type = succession_void"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "succession_void"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one line per key (T).",
+      "lines": [
+        {
+          "lineId": "RENDERERS.succession_void",
+          "text": "The last strong leader of ${name} died recently. No one has consolidated authority. Power is available to whoever moves first, and several parties are aware of this simultaneously.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "succession_void"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "monster_pressure",
+      "keyGuarantees": [
+        "stress entry type = monster_pressure"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "monster_pressure"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one line per key (T).",
+      "lines": [
+        {
+          "lineId": "RENDERERS.monster_pressure",
+          "text": "Something in the surrounding region has grown bolder. Caravans are disappearing. A farmstead burned last week. Whether wolves, raiders, or worse. The settlement's defences are adequate for normal times, but these are not normal times.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "monster_pressure"
+          ],
+          "colour": false,
+          "stop": [
+            "trade-route kind"
+          ]
+        }
+      ]
+    },
+    {
+      "pool": "insurgency",
+      "keyGuarantees": [
+        "stress entry type = insurgency"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "insurgency"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one line per key (T).",
+      "lines": [
+        {
+          "lineId": "RENDERERS.insurgency",
+          "text": "A powerful faction in ${name} has decided the current government is illegitimate. The challenge is quiet, institutional, and dangerous, not street fighting but the systematic withdrawal of cooperation.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "insurgency"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "religious_conversion (name%3=0)",
+      "keyGuarantees": [
+        "stress entry type = religious_conversion",
+        "branch: settlement name length % 3 (H: deterministic per name)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "religious_conversion"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one line per key (T).",
+      "lines": [
+        {
+          "lineId": "RENDERERS.religious_conversion(name%3=0)",
+          "text": "A new faith is gaining ground in ${name}. The old religious institution still holds its buildings and its records, but it is losing the congregation. The priest gives a service on Sunday to a room that is quietly, consistently, slightly emptier than the week before.",
+          "needs": [
+            "institution: temple"
+          ],
+          "excludes": [],
+          "crisis": [
+            "religious_conversion"
+          ],
+          "colour": false,
+          "stop": [
+            "priest / faith presence",
+            "culture"
+          ]
+        }
+      ]
+    },
+    {
+      "pool": "religious_conversion (name%3=1)",
+      "keyGuarantees": [
+        "stress entry type = religious_conversion",
+        "branch: settlement name length % 3 (H: deterministic per name)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "religious_conversion"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one line per key (T).",
+      "lines": [
+        {
+          "lineId": "RENDERERS.religious_conversion(name%3=1)",
+          "text": "The religious community of ${name} has fractured. Both factions claim the legitimate succession. Both hold services. Both have a priest who will not acknowledge the other. The congregation has been forced to choose, and some of them have chosen neither.",
+          "needs": [
+            "institution: temple"
+          ],
+          "excludes": [],
+          "crisis": [
+            "religious_conversion"
+          ],
+          "colour": false,
+          "stop": [
+            "priest / faith presence"
+          ]
+        }
+      ]
+    },
+    {
+      "pool": "religious_conversion (name%3=2)",
+      "keyGuarantees": [
+        "stress entry type = religious_conversion",
+        "branch: settlement name length % 3 (H: deterministic per name)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "religious_conversion"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one line per key (T).",
+      "lines": [
+        {
+          "lineId": "RENDERERS.religious_conversion(name%3=2)",
+          "text": "An outside authority is requiring ${name} to convert. The governing faction has formally complied. The population's compliance is more varied, more private, and more complicated than the official record shows.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "religious_conversion"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "slave_revolt",
+      "keyGuarantees": [
+        "stress entry type = slave_revolt"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "slave_revolt"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one line per key (T).",
+      "lines": [
+        {
+          "lineId": "RENDERERS.slave_revolt",
+          "text": "The enslaved population of ${name} has organised. What began as work stoppages and passive resistance has moved into open defiance. The slave market's holding facilities have been breached. The governing authority's first response was inadequate. Its second response is still being decided.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "slave_revolt"
+          ],
+          "colour": false,
+          "stop": [
+            "slave market"
+          ]
+        }
+      ]
+    },
+    {
+      "pool": "wartime (profit)",
+      "keyGuarantees": [
+        "stress entry type = wartime",
+        "branch: roll.profit, drawn once at the stress step (rollStressSummary rng() < 0.45)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "wartime"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one line per key (T).",
+      "lines": [
+        {
+          "lineId": "RENDERERS.wartime(profit)",
+          "text": "${name} is in a kingdom at war and currently positioned to profit. Military contracts are flowing. Prices are high and merchants with the right connections are getting richer. The cost will come due (it always does), but for now the war is good for business.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "wartime"
+          ],
+          "colour": false,
+          "stop": [
+            "crown / realm"
+          ]
+        }
+      ]
+    },
+    {
+      "pool": "wartime (loss)",
+      "keyGuarantees": [
+        "stress entry type = wartime",
+        "branch: roll.profit, drawn once at the stress step (rollStressSummary rng() < 0.45)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "wartime"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one line per key (T).",
+      "lines": [
+        {
+          "lineId": "RENDERERS.wartime(loss)",
+          "text": "${name} is in a kingdom fighting a war it may not win. Conscription has taken a third of the working-age men. Supply caravans pass through on crown requisition. Food prices have doubled. The governing authority is demanding sacrifice while certain families are quietly thriving on contracts.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "wartime"
+          ],
+          "colour": false,
+          "stop": [
+            "crown / realm",
+            "soldiers / commander"
+          ]
+        }
+      ]
+    },
+    {
+      "pool": "mass_migration",
+      "keyGuarantees": [
+        "stress entry type = mass_migration"
+      ],
+      "poolNeeds": [
+        "migration: influx"
+      ],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "mass_migration"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis; one line per key (T).",
+      "lines": [
+        {
+          "lineId": "RENDERERS.mass_migration",
+          "text": "${name} is receiving more people than its infrastructure was built for. New arrivals come faster than housing, food, and employment can absorb them. The old residents and the new ones are not yet the same community.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "mass_migration"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    }
+  ]
+}

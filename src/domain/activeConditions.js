@@ -490,6 +490,48 @@ export const CONDITION_ARCHETYPE_TEMPLATES = Object.freeze({
   },
 });
 
+/**
+ * THE DECLARED DESCRIPTIONS (CENSUS-2d unit 3; Phase A's ledger CONDITION_ARCHETYPE_TEMPLATES.json),
+ * in the dissolved-twin shape keyed by the original's text (R-P 3): the templates stay strings for
+ * `deriveActiveCondition`; the T wiring (CENSUS-1e) resolves a printed description through
+ * `resolveSibling`. The four archetypes the ledger opts into the crisis dimension (siege_lifted,
+ * occupation_lifted, boom, flourishing: `{crisis-scoped}`) write `crisis: any` with their denials.
+ * The twin is the chair's ruling (R-G), recorded with its share in
+ * docs/CENSUS_2_LANE_2026-11-04.md "CENSUS-2d".
+ * @type {Readonly<Record<string, ReadonlyArray<Readonly<{ text: string, needs?: string[], excludes?: string[], crisis?: string[], twinOf?: string }>>>>}
+ */
+export const CONDITION_ARCHETYPE_SIBLINGS = Object.freeze({
+  [CONDITION_ARCHETYPE_TEMPLATES.magical_instability.description]: Object.freeze([
+    Object.freeze({ text: CONDITION_ARCHETYPE_TEMPLATES.magical_instability.description, needs: ['magic'] }),
+  ]),
+  [CONDITION_ARCHETYPE_TEMPLATES.siege_lifted.description]: Object.freeze([
+    Object.freeze({ text: CONDITION_ARCHETYPE_TEMPLATES.siege_lifted.description, excludes: ['crisis: under_siege'], crisis: ['any'] }),
+  ]),
+  [CONDITION_ARCHETYPE_TEMPLATES.army_deployed.description]: Object.freeze([
+    Object.freeze({ text: CONDITION_ARCHETYPE_TEMPLATES.army_deployed.description, needs: ['garrison'] }),
+    Object.freeze({ text: 'The settlement\'s standing army is committed abroad, leaving the home defence thin.', twinOf: CONDITION_ARCHETYPE_TEMPLATES.army_deployed.description, excludes: ['garrison'] }),
+  ]),
+  [CONDITION_ARCHETYPE_TEMPLATES.occupation_lifted.description]: Object.freeze([
+    Object.freeze({ text: CONDITION_ARCHETYPE_TEMPLATES.occupation_lifted.description, excludes: ['crisis: occupied'], crisis: ['any'] }),
+  ]),
+  [CONDITION_ARCHETYPE_TEMPLATES.boom.description]: Object.freeze([
+    Object.freeze({ text: CONDITION_ARCHETYPE_TEMPLATES.boom.description, excludes: ['starving', 'crisis: hunger'], crisis: ['any'] }),
+  ]),
+  [CONDITION_ARCHETYPE_TEMPLATES.flourishing.description]: Object.freeze([
+    Object.freeze({ text: CONDITION_ARCHETYPE_TEMPLATES.flourishing.description, needs: ['war: peace'], excludes: ['crisis: threat', 'crisis: unrest', 'crisis: succession'], crisis: ['any'] }),
+  ]),
+});
+
+/**
+ * THE CRISIS-SCOPED FLAGS (CENSUS-2e unit 1, the chair's R-AF): the sibling sets above whose ledger pool opted
+ * into the crisis dimension, by their key (the original's text). The T wiring passes `crisisScoped: true` for
+ * these, read from here; the register pin is the compose's (R-T).
+ * @type {ReadonlyArray<string>}
+ */
+// CENSUS-2f, R-AH: the four sets 2e flagged (siege_lifted, occupation_lifted, boom, flourishing) write
+// `crisis: any` on every line (no calm line), so the inert flag is dropped.
+export const CONDITION_ARCHETYPE_CRISIS_SCOPED = Object.freeze([]);
+
 const VALID_STATUSES = new Set(['worsening', 'stable', 'easing']);
 const SEVERITY_BANDS = ['low', 'medium', 'high', 'critical'];
 

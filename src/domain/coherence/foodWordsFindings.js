@@ -10,8 +10,9 @@
  * the generation receipt. Pure: a function of the settlement and the text only.
  */
 
-import { sourcesNamedIn } from '../foodways.js';
+import { SOURCE_WORDS, sourcesNamedIn } from '../foodways.js'; import { FISH_TRADE_TWIN_LINES } from '../../data/fishTradeTwinLines.js'; // F11: one line
 import { CLAIMS_STARVING, recordAllowsStarving } from '../foodSurplus.js';
+import { storesMonthsOf } from '../facts/storesMonths.js';
 
 /**
  * @typedef {Object} FoodWordsFinding
@@ -49,6 +50,18 @@ const NO_RESERVES = /\bNo food reserves\b|\bholds no food\b|\bNo reserves\b/i;
 const GOODS_LABEL = /^[-*\s]*(?:\*\*)?(?:Primary )?Exports:?(?:\*\*)?\s*/i;
 
 /**
+ * The Foundry journal's escaping undone (`foundry-module/scripts/markdownEscape.js ::
+ * escapeMarkdown`, read in reverse order: its entities, then its backslashes), so a good printed
+ * there ("Healing waters \\(bottled\\)", "Pilgrimage &amp; religious tourism") is read as the
+ * record's own good (F11 unit 3, rung 2B: the journal's Exports row read as a sentence while the
+ * screen's identical list read as goods). A string with no escape is unchanged.
+ * @param {string} text
+ */
+const unescapedGoods = (text) => text
+  .replace(/&#39;/g, "'").replace(/&quot;/g, '"').replace(/&gt;/g, '>').replace(/&lt;/g, '<').replace(/&amp;/g, '&')
+  .replace(/\\([\\`*_[\]()#+~|])/g, '$1');
+
+/**
  * THE EXPORT LIST IS GOODS, NOT A SENTENCE (F3 FOOD-WORDS unit 2a, the chair's ruling
  * 2026-11-04). A line made only of the record's own export goods (economicState.primaryExports,
  * run together on the Economics tab, comma-joined on the Foundry row) names what the place
@@ -59,7 +72,7 @@ const GOODS_LABEL = /^[-*\s]*(?:\*\*)?(?:Primary )?Exports:?(?:\*\*)?\s*/i;
  */
 function isGoodsList(sentence, goods) {
   if (!goods.length) return false;
-  let rest = sentence.replace(GOODS_LABEL, '');
+  let rest = unescapedGoods(sentence.replace(GOODS_LABEL, ''));
   let named = 0;
   for (const good of goods) {
     if (!rest.includes(good)) continue;
@@ -79,6 +92,31 @@ function exportGoodsOf(settlement) {
 }
 
 /**
+ * THE FISH TRADE ON BOUGHT-IN FISH (F11 unit 3, rung 2B; the chair's ruling of 2026-11-04: a
+ * fishmonger needs a fish source OR fish among the imports). A fishmonger's own description names
+ * fish at the table; where the record imports fish that is no claim to a catch of the place's own.
+ * @param {unknown} settlement
+ */
+function importsNameFish(settlement) {
+  const s = /** @type {{ economicState?: { primaryImports?: unknown } | null } | null | undefined} */ (settlement);
+  const list = s?.economicState?.primaryImports;
+  return Array.isArray(list) && list.some((g) => typeof g === 'string' && SOURCE_WORDS.fish.test(g));
+}
+
+/** The cart twins: a fish trade that names the cart claims no catch of the place's own. */
+const CART_LINES = new Set(Object.values(FISH_TRADE_TWIN_LINES));
+
+/**
+ * Is `sentence` (part of) the description of a fish-trading house on the roster?
+ * @param {string} sentence @param {unknown} settlement
+ */
+function isFishTradeLine(sentence, settlement) {
+  const s = /** @type {{ institutions?: unknown } | null | undefined} */ (settlement);
+  const roster = Array.isArray(s?.institutions) ? s.institutions : [];
+  return roster.some((/** @type {{ name?: unknown, desc?: unknown } | null | undefined} */ inst) => /\bfish ?monger|\bfish market\b/i.test(String(inst?.name ?? '')) && typeof inst?.desc === 'string' && inst.desc.includes(sentence));
+}
+
+/**
  * @param {unknown} settlement
  * @returns {{ band: string, storageMonths: number, growsMoreThanEats: boolean, foodSources: string[] | null } | null}
  */
@@ -88,7 +126,7 @@ function recordOf(settlement) {
   if (!r || typeof r !== 'object') return null;
   return {
     band: typeof r.band === 'string' ? r.band : '',
-    storageMonths: typeof r.storageMonths === 'number' && Number.isFinite(r.storageMonths) ? r.storageMonths : 0,
+    storageMonths: storesMonthsOf(s) ?? 0,
     growsMoreThanEats: r.growsMoreThanEats === true,
     // FOOD-3: a record older than the sources list cannot be held to named sources.
     foodSources: Array.isArray(r.foodSources) ? r.foodSources.map(String) : null,
@@ -112,6 +150,7 @@ export function foodWordsFindings(settlement, renderedText) {
   const storeDays = Math.round(record.storageMonths * 30);
   const hungry = recordAllowsStarving(record);
   const goods = exportGoodsOf(settlement);
+  const fishImported = importsNameFish(settlement);
   for (const sentence of sentences) {
     if (isGoodsList(sentence, goods)) continue;
     if (!record.growsMoreThanEats && SURPLUS_WORDS.test(sentence.replace(REQUIREMENT_CLAUSE, ''))) {
@@ -129,6 +168,7 @@ export function foodWordsFindings(settlement, renderedText) {
     }
     if (record.foodSources && TABLE_WORDS.test(sentence)) {
       const held = new Set(record.foodSources);
+      if ((fishImported || CART_LINES.has(sentence)) && isFishTradeLine(sentence, settlement)) held.add('fish'); // F11: a fish trade on bought-in or carted fish
       const lacking = sourcesNamedIn(sentence.replace(NEEDS_CLAUSE, '')).filter((source) => !held.has(source));
       if (lacking.length) {
         findings.push({ code: 'source_not_held', sentence, detail: `The place has no ${lacking.join(' or ')} source.` });

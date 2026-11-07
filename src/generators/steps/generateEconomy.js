@@ -29,6 +29,7 @@ import { recordTrace } from '../../domain/trace.js';
 import { deriveSupplyChainState } from '../../domain/supplyChainState.js';
 import { customDeps } from '../../lib/dependencyEngine.js';
 import { deriveTradeLinks } from '../../domain/region/tradeLinks.js';
+import { withLedgerBlock } from '../../domain/facts/presumptionLedger.js';
 import {
   projectOwnedCustomTradeDirection,
   resolveCustomTradeEndpointSemantics,
@@ -337,8 +338,18 @@ export function projectCustomTradeSemantics(economicState, neighbourProfile) {
  * (idempotent) and consumes the ACTIVE step rng (via rngContext) inside
  * generateEconomicState. Exported so economyReconcilePass can re-derive the
  * economy from the post-faction-pull roster with identical semantics.
+ *
+ * The derivation runs as the `economicState` block of the presumption ledger
+ * (R-D1): a re-derivation replaces the notes the provisional one drew, since
+ * its economicState replaces the provisional one (no draw moves; the ledger
+ * is not persisted).
  */
 export function computeEconomyState(ctx) {
+  return withLedgerBlock('economicState', () => deriveEconomyState(ctx));
+}
+
+/** The derivation itself (see computeEconomyState). */
+function deriveEconomyState(ctx) {
   const {
     tier, institutions, tradeRoute, effectiveConfig,
     goodsToggles, neighbourEconBias, neighbourProfile,

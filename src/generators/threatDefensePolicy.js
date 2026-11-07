@@ -7,7 +7,7 @@
  * catalog entries and recording their pipeline receipts.
  */
 
-const DEFENSE_PREFERENCES = Object.freeze({
+export const DEFENSE_PREFERENCES = Object.freeze({
   thorp: Object.freeze({
     fortification: Object.freeze(['Palisade']),
     force: Object.freeze(['Household levy']),

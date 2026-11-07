@@ -1,0 +1,606 @@
+{
+  "poolId": "ARRIVAL_MEMORIES",
+  "source": "src/data/arrivalProse.js:382-450",
+  "drawKind": "R",
+  "drawSite": "src/generators/narrative/arrivalScene.js:183-191 chooseClosing (memory key) then :293 one pickRandom (NO agreeingLine filter: pilgrimage_surge[0]'s stalls are unfiltered today); CLOSING beat, only when !underStress",
+  "pools": [
+    {
+      "pool": "great_fire",
+      "keyGuarantees": [
+        "the most recent major/catastrophic history event within thirty years has templateType 'great_fire'; stop: history facts",
+        "no danger safety label (danger outranks memory in chooseClosing)",
+        "rendered only when the record's primary stress has no STRESS_DESCS vignette (src/generators/narrative/arrivalScene.js:215,226,259,292): every record crisis kind has one, so this beat is silent under a record crisis and renders under calm, a custom DM crisis type, or a world pulse stressor the scene never reads"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Not opted: a trace of the past, true beside any present.",
+      "lines": [
+        {
+          "lineId": "ARRIVAL_MEMORIES.great_fire[0]",
+          "text": "Newer timber stands out among the old where the fire went through.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_MEMORIES.great_fire[1]",
+          "text": "An old woman points out where the fire stopped, as if she still cannot quite believe it.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_MEMORIES.great_fire[2]",
+          "text": "A blackened beam has been left standing among the rebuilt houses, on purpose.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "great_flood",
+      "keyGuarantees": [
+        "the most recent major/catastrophic history event within thirty years has templateType 'great_flood'; stop: history facts",
+        "no danger safety label (danger outranks memory in chooseClosing)",
+        "rendered only when the record's primary stress has no STRESS_DESCS vignette (src/generators/narrative/arrivalScene.js:215,226,259,292): every record crisis kind has one, so this beat is silent under a record crisis and renders under calm, a custom DM crisis type, or a world pulse stressor the scene never reads"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Not opted: a trace of the past, true beside any present.",
+      "lines": [
+        {
+          "lineId": "ARRIVAL_MEMORIES.great_flood[0]",
+          "text": "A tidemark from the flood still stains the lower walls of the oldest houses.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_MEMORIES.great_flood[1]",
+          "text": "The newer houses stand on raised footings, and the older folk explain why without being asked.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_MEMORIES.great_flood[2]",
+          "text": "A carved post by the water marks how high the flood came, and children dare each other to touch the line.",
+          "needs": [
+            "navigable"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "plague_years",
+      "keyGuarantees": [
+        "the most recent major/catastrophic history event within thirty years has templateType 'plague_years'; stop: history facts",
+        "no danger safety label (danger outranks memory in chooseClosing)",
+        "rendered only when the record's primary stress has no STRESS_DESCS vignette (src/generators/narrative/arrivalScene.js:215,226,259,292): every record crisis kind has one, so this beat is silent under a record crisis and renders under calm, a custom DM crisis type, or a world pulse stressor the scene never reads"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Opted: a line says the danger is past (habit, fires unlit for years, \"since they left\") which the same crisis active again would contradict.",
+      "lines": [
+        {
+          "lineId": "ARRIVAL_MEMORIES.plague_years[0]",
+          "text": "A plain stone outside {name} marks where the plague dead were buried, and people walk around it.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_MEMORIES.plague_years[1]",
+          "text": "Some houses still carry the faded marks of the sickness on their doors, painted over but not quite gone.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_MEMORIES.plague_years[2]",
+          "text": "People here wash their hands at every well, a habit nobody has bothered to lose.",
+          "needs": [],
+          "excludes": [
+            "crisis: plague_onset"
+          ],
+          "crisis": "any",
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "popular_uprising",
+      "keyGuarantees": [
+        "the most recent major/catastrophic history event within thirty years has templateType 'popular_uprising'; stop: history facts",
+        "no danger safety label (danger outranks memory in chooseClosing)",
+        "rendered only when the record's primary stress has no STRESS_DESCS vignette (src/generators/narrative/arrivalScene.js:215,226,259,292): every record crisis kind has one, so this beat is silent under a record crisis and renders under calm, a custom DM crisis type, or a world pulse stressor the scene never reads"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Not opted: a trace of the past, true beside any present.",
+      "lines": [
+        {
+          "lineId": "ARRIVAL_MEMORIES.popular_uprising[0]",
+          "text": "A few houses still fly the old colours of the rising, and nobody takes them down.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_MEMORIES.popular_uprising[1]",
+          "text": "People who fought in the rising are pointed out to you with a mix of pride and caution.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_MEMORIES.popular_uprising[2]",
+          "text": "A song about the rising is being sung in a doorway, and half the lane knows the words.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "religious_tension",
+      "keyGuarantees": [
+        "the most recent major/catastrophic history event within thirty years has templateType 'religious_tension'; stop: history facts",
+        "no danger safety label (danger outranks memory in chooseClosing)",
+        "rendered only when the record's primary stress has no STRESS_DESCS vignette (src/generators/narrative/arrivalScene.js:215,226,259,292): every record crisis kind has one, so this beat is silent under a record crisis and renders under calm, a custom DM crisis type, or a world pulse stressor the scene never reads"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Not opted: a trace of the past, true beside any present.",
+      "lines": [
+        {
+          "lineId": "ARRIVAL_MEMORIES.religious_tension[0]",
+          "text": "Two congregations keep to their own sides of the lane on holy days, and both pretend not to notice the other.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_MEMORIES.religious_tension[1]",
+          "text": "Symbols of two different observances are painted on neighbouring doors, each a little larger than the last.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_MEMORIES.religious_tension[2]",
+          "text": "A shrine has been scrubbed clean of one faith's marks and painted with another's.",
+          "needs": [
+            "institution: temple"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "heresy_trial",
+      "keyGuarantees": [
+        "the most recent major/catastrophic history event within thirty years has templateType 'heresy_trial'; stop: history facts",
+        "no danger safety label (danger outranks memory in chooseClosing)",
+        "rendered only when the record's primary stress has no STRESS_DESCS vignette (src/generators/narrative/arrivalScene.js:215,226,259,292): every record crisis kind has one, so this beat is silent under a record crisis and renders under calm, a custom DM crisis type, or a world pulse stressor the scene never reads"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Not opted: a trace of the past, true beside any present.",
+      "lines": [
+        {
+          "lineId": "ARRIVAL_MEMORIES.heresy_trial[0]",
+          "text": "People are careful about what they say about faith in public.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_MEMORIES.heresy_trial[1]",
+          "text": "A family's house stands empty and shuttered, and nobody will say why.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_MEMORIES.heresy_trial[2]",
+          "text": "A preacher speaks carefully, glancing at the crowd between sentences.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "preacher (faith presence beyond institution: temple)"
+          ]
+        }
+      ]
+    },
+    {
+      "pool": "pilgrimage_surge",
+      "keyGuarantees": [
+        "the most recent major/catastrophic history event within thirty years has templateType 'pilgrimage_surge'; stop: history facts",
+        "no danger safety label (danger outranks memory in chooseClosing)",
+        "rendered only when the record's primary stress has no STRESS_DESCS vignette (src/generators/narrative/arrivalScene.js:215,226,259,292): every record crisis kind has one, so this beat is silent under a record crisis and renders under calm, a custom DM crisis type, or a world pulse stressor the scene never reads"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Not opted: a trace of the past, true beside any present.",
+      "lines": [
+        {
+          "lineId": "ARRIVAL_MEMORIES.pilgrimage_surge[0]",
+          "text": "Pilgrims still pass through on the old route, and the stalls along the road still sell to them.",
+          "needs": [
+            "market"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_MEMORIES.pilgrimage_surge[1]",
+          "text": "Pilgrim badges are nailed above doorways, collected over years.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_MEMORIES.pilgrimage_surge[2]",
+          "text": "The road in is worn smooth by pilgrim feet.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "external_threat",
+      "keyGuarantees": [
+        "the most recent major/catastrophic history event within thirty years has templateType 'external_threat'; stop: history facts",
+        "no danger safety label (danger outranks memory in chooseClosing)",
+        "rendered only when the record's primary stress has no STRESS_DESCS vignette (src/generators/narrative/arrivalScene.js:215,226,259,292): every record crisis kind has one, so this beat is silent under a record crisis and renders under calm, a custom DM crisis type, or a world pulse stressor the scene never reads"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Opted: a line says the danger is past (habit, fires unlit for years, \"since they left\") which the same crisis active again would contradict.",
+      "lines": [
+        {
+          "lineId": "ARRIVAL_MEMORIES.external_threat[0]",
+          "text": "The older folk still keep a weapon by the door, out of habit.",
+          "needs": [],
+          "excludes": [
+            "crisis: threat"
+          ],
+          "crisis": "any",
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_MEMORIES.external_threat[1]",
+          "text": "Watch fires are still laid ready on the high ground, though nobody has lit one in years.",
+          "needs": [],
+          "excludes": [
+            "crisis: threat"
+          ],
+          "crisis": "any",
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_MEMORIES.external_threat[2]",
+          "text": "People look up at the sound of hooves on the road, and only relax when they see who it is.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "occupation_legacy",
+      "keyGuarantees": [
+        "the most recent major/catastrophic history event within thirty years has templateType 'occupation_legacy'; stop: history facts",
+        "no danger safety label (danger outranks memory in chooseClosing)",
+        "rendered only when the record's primary stress has no STRESS_DESCS vignette (src/generators/narrative/arrivalScene.js:215,226,259,292): every record crisis kind has one, so this beat is silent under a record crisis and renders under calm, a custom DM crisis type, or a world pulse stressor the scene never reads"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Opted: a line says the danger is past (habit, fires unlit for years, \"since they left\") which the same crisis active again would contradict.",
+      "lines": [
+        {
+          "lineId": "ARRIVAL_MEMORIES.occupation_legacy[0]",
+          "text": "A few old signs still carry the occupiers' words, painted over but showing through.",
+          "needs": [],
+          "excludes": [
+            "crisis: occupied"
+          ],
+          "crisis": "any",
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_MEMORIES.occupation_legacy[1]",
+          "text": "Older folk still flinch at the sound of marching feet.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_MEMORIES.occupation_legacy[2]",
+          "text": "People here still say \"since they left\" the way other places say \"last year\".",
+          "needs": [],
+          "excludes": [
+            "crisis: occupied"
+          ],
+          "crisis": "any",
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "tyranny",
+      "keyGuarantees": [
+        "the most recent major/catastrophic history event within thirty years has templateType 'tyranny'; stop: history facts",
+        "no danger safety label (danger outranks memory in chooseClosing)",
+        "rendered only when the record's primary stress has no STRESS_DESCS vignette (src/generators/narrative/arrivalScene.js:215,226,259,292): every record crisis kind has one, so this beat is silent under a record crisis and renders under calm, a custom DM crisis type, or a world pulse stressor the scene never reads"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Not opted: a trace of the past, true beside any present.",
+      "lines": [
+        {
+          "lineId": "ARRIVAL_MEMORIES.tyranny[0]",
+          "text": "People still lower their voices near the old seat of power, though the one they feared is gone.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "the old seat of power"
+          ]
+        },
+        {
+          "lineId": "ARRIVAL_MEMORIES.tyranny[1]",
+          "text": "A defaced statue stands on its plinth, its face chiselled smooth.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "a statue"
+          ]
+        },
+        {
+          "lineId": "ARRIVAL_MEMORIES.tyranny[2]",
+          "text": "Older folk stop talking when a stranger asks about the bad years, and change the subject.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "market_crash",
+      "keyGuarantees": [
+        "the most recent major/catastrophic history event within thirty years has templateType 'market_crash'; stop: history facts",
+        "no danger safety label (danger outranks memory in chooseClosing)",
+        "rendered only when the record's primary stress has no STRESS_DESCS vignette (src/generators/narrative/arrivalScene.js:215,226,259,292): every record crisis kind has one, so this beat is silent under a record crisis and renders under calm, a custom DM crisis type, or a world pulse stressor the scene never reads"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Not opted: a trace of the past, true beside any present.",
+      "lines": [
+        {
+          "lineId": "ARRIVAL_MEMORIES.market_crash[0]",
+          "text": "Merchants here count their coin twice and trust a handshake less, a habit from the bad years.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_MEMORIES.market_crash[1]",
+          "text": "Debts from the crash are still remembered, and a few families still do not speak because of them.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "trade_collapse",
+      "keyGuarantees": [
+        "the most recent major/catastrophic history event within thirty years has templateType 'trade_collapse'; stop: history facts",
+        "no danger safety label (danger outranks memory in chooseClosing)",
+        "rendered only when the record's primary stress has no STRESS_DESCS vignette (src/generators/narrative/arrivalScene.js:215,226,259,292): every record crisis kind has one, so this beat is silent under a record crisis and renders under calm, a custom DM crisis type, or a world pulse stressor the scene never reads"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Not opted: a trace of the past, true beside any present.",
+      "lines": [
+        {
+          "lineId": "ARRIVAL_MEMORIES.trade_collapse[0]",
+          "text": "Old traders still talk about the routes that closed, naming each one like a lost relative.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_MEMORIES.trade_collapse[1]",
+          "text": "People here still talk about the years when the caravans stopped coming.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "crime_wave",
+      "keyGuarantees": [
+        "the most recent major/catastrophic history event within thirty years has templateType 'crime_wave'; stop: history facts",
+        "no danger safety label (danger outranks memory in chooseClosing)",
+        "rendered only when the record's primary stress has no STRESS_DESCS vignette (src/generators/narrative/arrivalScene.js:215,226,259,292): every record crisis kind has one, so this beat is silent under a record crisis and renders under calm, a custom DM crisis type, or a world pulse stressor the scene never reads"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Not opted: a trace of the past, true beside any present.",
+      "lines": [
+        {
+          "lineId": "ARRIVAL_MEMORIES.crime_wave[0]",
+          "text": "Every door has a newer, heavier lock than the frame it sits in.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_MEMORIES.crime_wave[1]",
+          "text": "The older folk still keep their valuables hidden, a habit from the bad years.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "wild_magic",
+      "keyGuarantees": [
+        "the most recent major/catastrophic history event within thirty years has templateType 'wild_magic'; stop: history facts",
+        "no danger safety label (danger outranks memory in chooseClosing)",
+        "rendered only when the record's primary stress has no STRESS_DESCS vignette (src/generators/narrative/arrivalScene.js:215,226,259,292): every record crisis kind has one, so this beat is silent under a record crisis and renders under calm, a custom DM crisis type, or a world pulse stressor the scene never reads",
+        "world magic is real"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Not opted: a trace of the past, true beside any present.",
+      "lines": [
+        {
+          "lineId": "ARRIVAL_MEMORIES.wild_magic[0]",
+          "text": "A patch of ground near the centre still grows wrong, and nobody builds on it.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_MEMORIES.wild_magic[1]",
+          "text": "Some of the older stones shimmer faintly in certain light, and people step around them.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_MEMORIES.wild_magic[2]",
+          "text": "A tree twisted into an impossible shape stands where the magic broke loose, fenced and left alone.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    }
+  ]
+}

@@ -31,6 +31,7 @@ import { ServicesTab }      from '../../src/components/new/tabs/ServicesTab.jsx'
 import { ViabilityTab }     from '../../src/components/new/tabs/ViabilityTab.jsx';
 import InstitutionsTab, { institutionsWithServices } from '../../src/components/new/tabs/InstitutionsTab.jsx';
 import DMCompassTab         from '../../src/components/new/tabs/DMCompassTab.jsx';
+import { staffValidationRows } from '../../src/domain/display/validationOnPage.js';
 
 const e = React.createElement;
 const SEED = 'smoke-test-seed-2026-05';
@@ -69,7 +70,9 @@ describe('OverviewTab smoke', () => {
   });
 
   // ODQ §767.3(b)+(c) — the walk's copy defects, pinned at the render site.
-  test('a structural suggestion reads as two clean sentences, never joined words', () => {
+  // READER-R1 ruling 1 (2026-11-05): the suggestion left the DM page; the sentence pair is now
+  // the Viability tab's staff row (validationOnPage.js :: staffValidationRows), pinned there.
+  test('a structural suggestion reads as two clean sentences, never joined words (staff row); the Overview prints none', () => {
     const s = {
       name: 'X', tier: 'village', population: 300,
       structuralSuggestions: [{
@@ -78,8 +81,9 @@ describe('OverviewTab smoke', () => {
         suggested: ['Palisade or earthworks', 'Citizen militia'],
       }],
     };
-    const { container } = render(e(OverviewTab, { settlement: s }));
-    const text = container.textContent;
+    const overview = render(e(OverviewTab, { settlement: s })).container.textContent;
+    expectAbsentWithAnchor(overview, 'Consider:', 'Systems Health', 'a validator suggestion is back on the DM Overview');
+    const text = staffValidationRows(s).map((r) => r.text).join('\n');
     // The exact sentence pair — one period, a space, the PDF's "Consider:" form.
     const pair = 'monster incursions. Consider: Palisade or earthworks, Citizen militia.';
     expect(text).toContain(pair);
@@ -229,7 +233,8 @@ describe('OverviewTab follows the block law (X-16, BUILD-W2-BLOCKLAW U3)', () =>
       arrivalScene: 'Arrival fixture scene.',
       history: { currentTensions: [{ description: 'Tension fixture.' }] },
       settlementReason: 'Origin fixture.',
-      structuralSuggestions: [{ reason: 'Suggestion fixture', suggested: ['A wall'] }],
+      // READER-R1: the validator's suggestions left the page; a coherence note is the DM material.
+      coherenceNotes: [{ note: 'Coherence fixture.', severity: 'note' }],
     };
     const text = render(e(OverviewTab, { settlement: s })).container.textContent || '';
     const at = (needle) => {
@@ -243,7 +248,7 @@ describe('OverviewTab follows the block law (X-16, BUILD-W2-BLOCKLAW U3)', () =>
       'Systems Health',         // (2) the facts: status tags
       'Tension fixture.',       // (2) the facts: tension rows
       'Origin fixture.',        // (3) prose: why it is here
-      'Suggestion fixture',     // (4) DM material: warnings and suggestions
+      'Coherence fixture.',     // (4) DM material: the coherence notes (READER-R1 cut the validator's rows)
       // (5) the collapsed reference was the Spatial Layout section, cut by X-37 (2026-11-01);
       // the page now ends on its DM material and the campaign-only blocks beneath it.
     ].map(at);

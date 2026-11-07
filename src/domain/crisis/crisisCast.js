@@ -32,8 +32,8 @@ import { governingFactionOf } from '../rulingPower.js';
 import { outrankingRivalOf, rulingChainOf } from '../dossier/powerStrata.js';
 import { isOfficeStandIn } from '../dossier/seatHolder.js';
 import { liveInstitutions } from '../institutions/institutionRoster.js';
-import { defenseFactsOf } from '../defense/defenseFacts.js';
-import { defenceTwinLine } from '../../data/defenceTwinLines.js';
+import { factsOf } from '../facts/factsOf.js';
+import { resolveSibling } from '../facts/drawDeclared.js';
 import { CAST_EDIT_PATH, CAST_EDIT_SEPARATOR } from '../userEditLines.js';
 import { nativeSemanticName } from '../content/customContentSemanticAuthority.js';
 
@@ -139,7 +139,7 @@ const OCCASIONAL_BY_NATURE = Object.freeze(/** @type {Record<CrisisNature, Array
   external: ['profiteer', 'collaborator'],
 }));
 
-/** The fixed reason vocabulary. Every `reason` on the record is one of these sentences, or its defence-free twin (`data/defenceTwinLines.js`, F10). */
+/** The fixed reason vocabulary. Every `reason` on the record is one of these sentences, or its declared defence-free sibling (`CAST_REASON_SIBLINGS`, at the end of this file; F10, CENSUS-1c). */
 export const CAST_REASONS = Object.freeze({
   bruntBase: Object.freeze(/** @type {Record<string, string>} */ ({
     food_security: 'the hunger falls first on its people',
@@ -390,6 +390,18 @@ function isOccupier(f) {
   return factionArchetype(f) === A.OCCUPATION || /occupation|occupying|garrison\s+rule|imperial\s+presence|annex/i.test(factionName(f));
 }
 
+/**
+ * Does this house already hold the seat: the governing house, or a criminal house holding it by
+ * capture (rulingStructure.js stamps `criminalCaptureState`; factionDynamics.js "is a front")?
+ * @param {CastSettlement} s @param {CastFaction} f @returns {boolean}
+ */
+function holdsTheSeat(s, f) {
+  const governing = governingFactionOf(/** @type {never} */ (s));
+  if (governing && factionName(/** @type {CastFaction} */ (governing)) === factionName(f)) return true;
+  const captured = /** @type {{ criminalCaptureState?: unknown }} */ (s.powerStructure || {}).criminalCaptureState === 'capture';
+  return captured && factionArchetype(f) === A.CRIMINAL;
+}
+
 /** @param {CastSettlement} s @returns {CastFaction[]} */
 function factionsOf(s) {
   const fs = s.powerStructure?.factions;
@@ -504,8 +516,8 @@ export function bruntCandidates(s, kind, stakes) {
   const losers = new Set(stakes.filter((k) => k.stake !== 'gains').map((k) => k.factionId));
   /** @type {CastRow[]} */
   const out = [];
-  // F10 unit 4: a reason that names walls the place lacks takes its twin (data/defenceTwinLines.js).
-  const defence = defenseFactsOf(/** @type {Parameters<typeof defenseFactsOf>[0]} */ (s));
+  // F10 unit 4, CENSUS-1c: a reason that names walls the place lacks resolves to its declared sibling (CAST_REASON_SIBLINGS).
+  const defence = castReasonOptions(s);
   for (const sys of catalogFor(kind).affectedSystems) {
     const base = SYSTEM_BASE[sys];
     if (!base) continue;
@@ -513,9 +525,9 @@ export function bruntCandidates(s, kind, stakes) {
     for (const f of hit) {
       const members = membersOf(s, factionName(f)).reverse(); // the least powerful first
       const touching = members.filter((n) => base.role.test(str(n.role)));
-      for (const n of touching) out.push(npcRow(n, 'brunt', defenceTwinLine(CAST_REASONS.bruntBase[sys] || CAST_REASONS.bruntLeast, defence)));
+      for (const n of touching) out.push(npcRow(n, 'brunt', resolveSibling(CAST_REASONS.bruntBase[sys] || CAST_REASONS.bruntLeast, BRUNT_SIBLINGS, defence)));
       for (const n of members) if (!touching.includes(n)) out.push(npcRow(n, 'brunt', CAST_REASONS.bruntLeast));
-      out.push(factionRow(f, 'brunt', defenceTwinLine(CAST_REASONS.bruntBase[sys] || CAST_REASONS.bruntLeast, defence)));
+      out.push(factionRow(f, 'brunt', resolveSibling(CAST_REASONS.bruntBase[sys] || CAST_REASONS.bruntLeast, BRUNT_SIBLINGS, defence)));
     }
     if (out.length) break;
   }
@@ -598,7 +610,10 @@ export function instigatorCandidates(s, kind, stakes) {
   const nature = natureOf(kind);
   // An occupying power is never the town's own instigator (the design's "never a local
   // instigator"): a rising against the occupier is cast against it, not by it.
-  const factions = factionsOf(s).filter((f) => !isOccupier(f));
+  // RUNG2-F13 (soak1k-4203): nor is a house that ALREADY holds the seat — the governing house, or
+  // a criminal house that holds it by capture (`criminalCaptureState` 'capture': "the council is a
+  // front") — an instigator against it: instigator and target are a contradictory pair.
+  const factions = factionsOf(s).filter((f) => !isOccupier(f) && !holdsTheSeat(s, f));
   const rivalName = outrankingRivalOf(/** @type {never} */ (s));
   const rival = factions.some((f) => factionName(f) === rivalName) ? rivalName : null;
   const gainers = stakes.filter((k) => k.stake === 'gains')
@@ -703,8 +718,8 @@ export function defenderCandidates(s) {
     for (const n of membersOf(s, factionName(f))) out.push(npcRow(n, 'defender', CAST_REASONS.defenderMilitary));
   }
   for (const n of rosterOf(s).filter((x) => /captain|guard|watch|marshal|warden|sergeant|commander/i.test(str(x.role)))) {
-    // F10 unit 4: "holds the garrison's office" only where a garrison stands (data/defenceTwinLines.js).
-    out.push(npcRow(n, 'defender', defenceTwinLine(CAST_REASONS.defenderOffice, defenseFactsOf(/** @type {Parameters<typeof defenseFactsOf>[0]} */ (s)))));
+    // F10 unit 4, CENSUS-1c: "holds the garrison's office" only where a garrison stands (CAST_REASON_SIBLINGS).
+    out.push(npcRow(n, 'defender', resolveSibling(CAST_REASONS.defenderOffice, CAST_REASON_SIBLINGS, castReasonOptions(s))));
   }
   // The house fallback credits a house with the town's defence, so it reads the STANDING roster
   // only (`liveInstitutions`): a closed garrison defends nothing.
@@ -877,7 +892,8 @@ export function deriveCrisisCast(settlement, entries, seed, options = {}) {
           const b = prev.get('brunt');
           if (!b) continue;
           const fname = b.kind === 'faction' ? b.id : str(rosterOf(settlement).find((n) => (str(n.id) || str(n.name)) === b.id)?.factionAffiliation);
-          const lead = fname ? membersOf(settlement, fname).find((n) => (str(n.id) || str(n.name)) !== b.id) || null : null;
+          const house = fname ? factionsOf(settlement).find((f) => factionName(f) === fname) : undefined;
+          const lead = fname && !(house && holdsTheSeat(settlement, house)) ? membersOf(settlement, fname).find((n) => (str(n.id) || str(n.name)) !== b.id) || null : null;
           if (lead) { links.push(link.from); return npcRow(lead, 'instigator', CAST_REASONS.instigatorLinked); }
         } else if (read === 'targetFromFace') {
           const f = prev.get('face');
@@ -1022,4 +1038,54 @@ export function effectiveCastOf(settlement, entry) {
   /** @type {CrisisCast} */
   const base = engine || { nature: natureOf(''), rank: 0, roles: [], absent: [], stakes: [], levers: [], ifNothingIsDone: { residualEffects: [] }, playersSeeFirst: [], links: [] };
   return { cast: { ...base, roles, absent: [] }, edited: true };
+}
+
+/**
+ * DECLARED SIBLINGS (CENSUS-1c unit 1; the twin tables dissolved, `docs/DESIGN_POOL_CENSUS.md`
+ * §3.1): `CAST_REASONS.bruntBase.defense_readiness` and `CAST_REASONS.defenderOffice`. The original stays where it is spelled above; the twin stands beside it here with
+ * the complementary atom, and the site resolves a drawn key through `resolveSibling`. Retired from
+ * `data/defenceTwinLines.js` (F10 unit 4), every twin to the byte.
+ */
+export const CAST_REASON_SIBLINGS = Object.freeze({
+  'its people stand on the walls': Object.freeze([
+    Object.freeze({ text: 'its people stand on the walls', needs: Object.freeze(['walls']) }),
+    Object.freeze({ text: 'its people stand guard', twinOf: 'its people stand on the walls', excludes: Object.freeze(['walls']) }),
+  ]),
+  'holds the garrison\'s office': Object.freeze([
+    Object.freeze({ text: 'holds the garrison\'s office', needs: Object.freeze(['garrison']) }),
+    Object.freeze({ text: 'holds the office of the guard', twinOf: 'holds the garrison\'s office', excludes: Object.freeze(['garrison']) }),
+  ]),
+});
+
+/**
+ * THE BRUNT REASONS' CRISIS DECLARATIONS (CENSUS-2d unit 3), apart from the defence sets above
+ * (`DEFENCE_SIBLINGS` reads those as defence-word lines). Resolved with them at the brunt draw.
+ */
+export const CAST_CRISIS_SIBLINGS = Object.freeze({
+  // CENSUS-2d unit 3 (Phase A's ledger CRISIS_CAST_REASONS.json; the brunt site is wired, so these
+  // are enforced): food_security is reached under a famine OR a mass migration, and "the hunger" is
+  // true only with the hunger family on (a fed influx is fed: CENSUS-1c unit 7); housing_pressure
+  // under a migration OR monster pressure, and "the newcomers" only under an influx. Each twin is
+  // the chair's ruling (R-G), recorded with its share in docs/CENSUS_2_LANE_2026-11-04.md "CENSUS-2d".
+  // healing_capacity is reached under plague_onset alone: its key, never re-declared (R-B1).
+  'the hunger falls first on its people': Object.freeze([
+    Object.freeze({ text: 'the hunger falls first on its people', crisis: Object.freeze(['hunger']) }),
+    Object.freeze({ text: 'the strain falls first on its people', twinOf: 'the hunger falls first on its people', excludes: Object.freeze(['crisis: hunger']) }),
+  ]),
+  'its people take in the newcomers': Object.freeze([
+    Object.freeze({ text: 'its people take in the newcomers', needs: Object.freeze(['migration: influx']) }),
+    Object.freeze({ text: 'its houses are where the crisis is felt first', twinOf: 'its people take in the newcomers', excludes: Object.freeze(['migration: influx']) }),
+  ]),
+});
+
+/** The brunt draw's sibling sets: the defence sets and the crisis ones. */
+const BRUNT_SIBLINGS = Object.freeze({ ...CAST_REASON_SIBLINGS, ...CAST_CRISIS_SIBLINGS });
+
+/**
+ * The resolution options for a cast reason: the record's facts (the defence home), the ledger's
+ * pool name. Draw-free.
+ * @param {CastSettlement} s
+ */
+function castReasonOptions(s) {
+  return { facts: factsOf(s), poolId: 'crisisCast:CAST_REASON_SIBLINGS', surface: 'crisis', drawKind: /** @type {'T'} */ ('T') };
 }

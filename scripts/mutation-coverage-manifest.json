@@ -3216,6 +3216,286 @@
     "tests/lint/holderCitesBySymbol.test.js": {
       "kind": "mutation",
       "label": "review-intake/a holder citation resolves by symbol"
+    },
+    "tests/generators/arrivalFishKeyDeclared.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/arrivalRedrawDeclared.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/baselineConflictWherePrinted.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/census5bOffCensusDeclarations.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/census5cMilitiaReword.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/census5dGarrisonReword.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/census5eArmsBacked.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/exodusSecretTwin.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/factionDescSiblings.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/factionLabelClose.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/factionLeaderSecretKeyed.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/factionRoleFit.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/foundryExportsFishTrade.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/grainMonopolyHookNoGuild.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/guildTitleName.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/hookTablesDeclared.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/institutionDescDraw.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/institutionProseDeclared.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/npcLoyaltyGuardRows.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/npcStructureDeclared.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/npcStructureGoalLookup.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/npcStructureWantsVoiceable.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/npcWantsDeclared.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/npcWantsSite.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/outlookHookDropRefused.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/outlookHooksResolved.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/politicalFlavorDeclared.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/politicalFlavorSacredHouse.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/powerStepStressEntries.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/resolutionKeyIdentity.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/safetyLineSiblings.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/safetySurvivalLineListed.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/sentenceSlotFallback.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/serviceAuthorNotes.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/serviceRollDeclared.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/stressGoalOverridesDeclared.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/stressGoalRulerDeclared.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/stressNarrativeDeclared.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/stressSecretDeclared.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/tensionTemplateDeclaration.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/tieDrawDeclared.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/tieProseDeclared.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/timelineHookDeclared.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/data/bowyersMilitarySupply.test.js": {
+      "kind": "rationale",
+      "rationale": "CENSUS-4d unit 2c (1abf16d8d): the bowyers' Military supply service row presumes a guard, not garrison and militia (src/data/institutionServices.js). IT IS A RATIONALE BECAUSE ITS CATCHING POWER WAS PROVEN BY AN EXECUTED IN-PLACE NEGATIVE CONTROL (LANDING-R2 seat E, 2026-11-07, at 104654b43): the row's desc 'to the local guard' -> 'to the local garrison' -> 1 failed / 2 (its text names no particular force). File restored byte-exact from a cp backup (cmp equal; git diff clean) and the file green again. A standing sweep plant would re-run that identical check while mutating a module the generation suites share."
+    },
+    "tests/data/canonicalRowsDeclared.test.js": {
+      "kind": "rationale",
+      "rationale": "CENSUS-3f unit 3 (525084dfe): the seven canonical v0 rows of the dossier economy leaf declare through their tag slot (src/data/dossierStateProse/economy.generated.js). IT IS A RATIONALE BECAUSE ITS CATCHING POWER WAS PROVEN BY AN EXECUTED IN-PLACE NEGATIVE CONTROL (LANDING-R2 seat E, 2026-11-07, at 104654b43): DS-ECO-6 v4's text 'The guilds are losing their grip' re-worded -> 1 failed / 18 (v4 declares guild). File restored byte-exact from a cp backup (cmp equal; git diff clean) and the file green again. A standing sweep plant would re-run that identical check while mutating a module the generation suites share."
+    },
+    "tests/data/canonicalTagSlot.contract.test.js": {
+      "kind": "rationale",
+      "rationale": "CENSUS-1f unit 5c (48189488b): the projector's canonical-at-zero row carries one optional tag slot whose parts are marks (scripts/lib/dossier-annex-parse.mjs, read from source). IT IS A RATIONALE BECAUSE ITS CATCHING POWER WAS PROVEN BY AN EXECUTED IN-PLACE NEGATIVE CONTROL (LANDING-R2 seat E, 2026-11-07, at 104654b43): the v0 variant's `marks: slot` -> `marks: []` in the parse -> 1 failed / 3 (the projector folds the slot into the v0 variant's marks). File restored byte-exact from a cp backup (cmp equal; git diff clean) and the file green again. A standing sweep plant would re-run that identical check while mutating a module the generation suites share."
+    },
+    "tests/data/catalogGuildTag.test.js": {
+      "kind": "rationale",
+      "rationale": "CENSUS-4d unit 2b / CENSUS-4e (fa39513d3, 25145f198): nine mislabelled catalogue rows carry no guild tag (src/data/institutionalCatalog.js), and three soak villages crew no false Guild Master. IT IS A RATIONALE BECAUSE ITS CATCHING POWER WAS PROVEN BY AN EXECUTED IN-PLACE NEGATIVE CONTROL (LANDING-R2 seat E, 2026-11-07, at 104654b43): Hired blades' tags ['military'] -> ['military', 'guild'] -> 2 failed / 13 (Hired blades: no row tagged guild; each keeps its other tags). File restored byte-exact from a cp backup (cmp equal; git diff clean) and the file green again. A standing sweep plant would re-run that identical check while mutating a module the generation suites share."
+    },
+    "tests/data/colourMarks4h.test.js": {
+      "kind": "rationale",
+      "rationale": "CENSUS-4h unit 4 (ea6b9e1eb): the colour marks of NPC_WANTS / NPC_FACTION_GOALS / the desc tables follow the declaration ledger line for line (src/data/npcData.js and kin). IT IS A RATIONALE BECAUSE ITS CATCHING POWER WAS PROVEN BY AN EXECUTED IN-PLACE NEGATIVE CONTROL (LANDING-R2 seat E, 2026-11-07, at 104654b43): one NPC_WANTS row 'formal robes of office' lost its colour: true -> 1 failed / 4 (the 53 colour wants rows). File restored byte-exact from a cp backup (cmp equal; git diff clean) and the file green again. A standing sweep plant would re-run that identical check while mutating a module the generation suites share."
+    },
+    "tests/data/criminalSecretsByHolder.test.js": {
+      "kind": "rationale",
+      "rationale": "CENSUS-4g unit 2 R-AX (6e9cbc676): NPC_CRIMINAL_SECRETS keyed by the holder, its flat view byte-identical to the table before the key (sha256 pin) (src/data/npcData.js). IT IS A RATIONALE BECAUSE ITS CATCHING POWER WAS PROVEN BY AN EXECUTED IN-PLACE NEGATIVE CONTROL (LANDING-R2 seat E, 2026-11-07, at 104654b43): one any.military secret re-worded ('released' -> 'freed') -> 2 failed / 4 (the flat-view sha256 and the keyed sets). File restored byte-exact from a cp backup (cmp equal; git diff clean) and the file green again. A standing sweep plant would re-run that identical check while mutating a module the generation suites share."
+    },
+    "tests/data/demographicPressureDirection.test.js": {
+      "kind": "rationale",
+      "rationale": "CENSUS-3e unit 2b R-AA (4be71624b): demographic_pressure's three hooks declare their migration direction (src/data/historyData.js). IT IS A RATIONALE BECAUSE ITS CATCHING POWER WAS PROVEN BY AN EXECUTED IN-PLACE NEGATIVE CONTROL (LANDING-R2 seat E, 2026-11-07, at 104654b43): the exodus hook's needs 'migration: exodus' -> 'migration: influx' -> 3 failed / 3. File restored byte-exact from a cp backup (cmp equal; git diff clean) and the file green again. A standing sweep plant would re-run that identical check while mutating a module the generation suites share."
+    },
+    "tests/data/factionLabelSiblings.test.js": {
+      "kind": "rationale",
+      "rationale": "CENSUS-4f unit 2 (3cb986142): the Military/Guard label declares guardPresence and its one twin excludes it (src/data/factionLabelSiblings.js). IT IS A RATIONALE BECAUSE ITS CATCHING POWER WAS PROVEN BY AN EXECUTED IN-PLACE NEGATIVE CONTROL (LANDING-R2 seat E, 2026-11-07, at 104654b43): the twin's text 'Military Party' -> 'Military Guard Party' -> 3 failed / 4 (a, b, c). File restored byte-exact from a cp backup (cmp equal; git diff clean) and the file green again. A standing sweep plant would re-run that identical check while mutating a module the generation suites share."
+    },
+    "tests/data/tradeGoodsAuthorNotes.test.js": {
+      "kind": "rationale",
+      "rationale": "CENSUS-3b R-A (416bafa6b): no tradeGoodsData text prints an author condition '(if ...)' / '(where ...)' / '(only ...)' (src/data/tradeGoodsData.js, every exported string walked). IT IS A RATIONALE BECAUSE ITS CATCHING POWER WAS PROVEN BY AN EXECUTED IN-PLACE NEGATIVE CONTROL (LANDING-R2 seat E, 2026-11-07, at 104654b43): CRAFT_GUILDS_5_15 'Craft guilds (5-15)' -> 'Craft guilds (if 5-15)' -> 1 failed / 1. File restored byte-exact from a cp backup (cmp equal; git diff clean) and the file green again. A standing sweep plant would re-run that identical check while mutating a module the generation suites share."
+    },
+    "tests/domain/census5bMuteTwins.test.js": {
+      "kind": "rationale",
+      "rationale": "CENSUS-5b unit 3 (c00b30eb6): four dossier pools that went mute under their own crisis carry one crisis-safe twin (defense / warFaith generated leaves, read through eligibleVariants). IT IS A RATIONALE BECAUSE ITS CATCHING POWER WAS PROVEN BY AN EXECUTED IN-PLACE NEGATIVE CONTROL (LANDING-R2 seat E, 2026-11-07, at 104654b43): DS-DEF-1 strategic value LOW's twin 'somebody has come for it anyway' re-worded -> 1 failed / 5. File restored byte-exact from a cp backup (cmp equal; git diff clean) and the file green again. A standing sweep plant would re-run that identical check while mutating a module the generation suites share."
+    },
+    "tests/domain/census5cOwedLines.test.js": {
+      "kind": "rationale",
+      "rationale": "CENSUS-5c unit 3 (8b304b8d8): ten owed lines of the defense / warFaith leaves declare their presumption, refused where the record contradicts it (eligibleVariants). IT IS A RATIONALE BECAUSE ITS CATCHING POWER WAS PROVEN BY AN EXECUTED IN-PLACE NEGATIVE CONTROL (LANDING-R2 seat E, 2026-11-07, at 104654b43): DS-WAR-5 siege_lifted 'The gates are open' -> 'The gates stand open' (the line no longer found) -> 1 failed / 10. File restored byte-exact from a cp backup (cmp equal; git diff clean) and the file green again. A standing sweep plant would re-run that identical check while mutating a module the generation suites share."
+    },
+    "tests/domain/census5dColourMarks.test.js": {
+      "kind": "rationale",
+      "rationale": "CENSUS-5d unit 2a (c24d7118e): every read DS-FTH / DS-WAR line declares or is colour; the blockade line presumes no harbour (warFaith.generated.js). IT IS A RATIONALE BECAUSE ITS CATCHING POWER WAS PROVEN BY AN EXECUTED IN-PLACE NEGATIVE CONTROL (LANDING-R2 seat E, 2026-11-07, at 104654b43): the blockade line 'points at the water' -> 'points at the harbour' -> 2 failed / 3. File restored byte-exact from a cp backup (cmp equal; git diff clean) and the file green again. A standing sweep plant would re-run that identical check while mutating a module the generation suites share."
+    },
+    "tests/domain/census5dDefPowColour.test.js": {
+      "kind": "rationale",
+      "rationale": "CENSUS-5d unit 2b (f260dbac6): every read DS-DEF / DS-POW line declares or is colour (defense / power generated leaves). IT IS A RATIONALE BECAUSE ITS CATCHING POWER WAS PROVEN BY AN EXECUTED IN-PLACE NEGATIVE CONTROL (LANDING-R2 seat E, 2026-11-07, at 104654b43): DS-DEF-6 Under blockade 'a magical channel' -> 'a warded channel' -> 1 failed / 3 (the reading's presumptions declare). File restored byte-exact from a cp backup (cmp equal; git diff clean) and the file green again. A standing sweep plant would re-run that identical check while mutating a module the generation suites share."
+    },
+    "tests/domain/census5dWaitingLines.test.js": {
+      "kind": "rationale",
+      "rationale": "CENSUS-5d unit 3 (d5b80440b): the waiting faith lines declare as their atoms land (warFaith.generated.js, eligibleVariants). IT IS A RATIONALE BECAUSE ITS CATCHING POWER WAS PROVEN BY AN EXECUTED IN-PLACE NEGATIVE CONTROL (LANDING-R2 seat E, 2026-11-07, at 104654b43): DS-FTH-3 STANDING: cult 'Its shrine is real' -> 'Its altar is real' -> 1 failed / 7. File restored byte-exact from a cp backup (cmp equal; git diff clean) and the file green again. A standing sweep plant would re-run that identical check while mutating a module the generation suites share."
+    },
+    "tests/domain/census5eClergyLines.test.js": {
+      "kind": "rationale",
+      "rationale": "CENSUS-5e unit 3 R-AE (ba4ea14d3): the two 'the clergy' lines of DS-FTH-1 declare clergy (warFaith.generated.js). IT IS A RATIONALE BECAUSE ITS CATCHING POWER WAS PROVEN BY AN EXECUTED IN-PLACE NEGATIVE CONTROL (LANDING-R2 seat E, 2026-11-07, at 104654b43): the ARC: trend: rising line's marks ['clergy'] -> ['priest'] -> 1 failed / 2. File restored byte-exact from a cp backup (cmp equal; git diff clean) and the file green again. A standing sweep plant would re-run that identical check while mutating a module the generation suites share."
+    },
+    "tests/domain/facts/census2DeclaredPools.test.js": {
+      "kind": "rationale",
+      "rationale": "CENSUS-2b item 2 (db3ed88c1): the general / stressors annex carries the declaration ledger (docs/census/declarations) pool by pool and line by line (general.generated.js, stressors.generated.js). IT IS A RATIONALE BECAUSE ITS CATCHING POWER WAS PROVEN BY AN EXECUTED IN-PLACE NEGATIVE CONTROL (LANDING-R2 seat E, 2026-11-07, at 104654b43): one DS-GEN-1 pool's poolMeta colour: true -> false -> 1 failed / 30 (DS-GEN-1). File restored byte-exact from a cp backup (cmp equal; git diff clean) and the file green again. A standing sweep plant would re-run that identical check while mutating a module the generation suites share."
+    },
+    "tests/domain/facts/census2dTables.test.js": {
+      "kind": "rationale",
+      "rationale": "CENSUS-2d unit 3 (69e1b6255): STRESS_DESCS, CULTURE_PROFILES and kin declare exactly what the ledger says, the parked guard/soldier lines included (src/data/narrativeData.js and kin, read by espree). IT IS A RATIONALE BECAUSE ITS CATCHING POWER WAS PROVEN BY AN EXECUTED IN-PLACE NEGATIVE CONTROL (LANDING-R2 seat E, 2026-11-07, at 104654b43): STRESS_DESCS under_siege's 'A guard patrol passes' line needs ['guardPresence'] -> [] -> 1 failed / 20. File restored byte-exact from a cp backup (cmp equal; git diff clean) and the file green again. A standing sweep plant would re-run that identical check while mutating a module the generation suites share."
+    },
+    "tests/domain/facts/census2eTables.test.js": {
+      "kind": "rationale",
+      "rationale": "CENSUS-2e R-AF / R-W (56803fea6): the crisis-scoped tables flag exactly the ledger's opted pools; the Daily Life readiness cells declare the ledger's atoms (src/components/new/dailyLifeLogic.js and kin). IT IS A RATIONALE BECAUSE ITS CATCHING POWER WAS PROVEN BY AN EXECUTED IN-PLACE NEGATIVE CONTROL (LANDING-R2 seat E, 2026-11-07, at 104654b43): the Defensible cell's needs ['watch'] -> ['guardPresence'] -> 1 failed / 34. File restored byte-exact from a cp backup (cmp equal; git diff clean) and the file green again. A standing sweep plant would re-run that identical check while mutating a module the generation suites share."
+    },
+    "tests/domain/facts/census2fColour.test.js": {
+      "kind": "rationale",
+      "rationale": "CENSUS-2f unit 7, R-AP / R-AO (852a5882d): the fish key's arrival lines declare the catch and the water; the read bare lines are colour (src/data/arrivalProse.js, narrativeText.js). IT IS A RATIONALE BECAUSE ITS CATCHING POWER WAS PROVEN BY AN EXECUTED IN-PLACE NEGATIVE CONTROL (LANDING-R2 seat E, 2026-11-07, at 104654b43): the stalls' catch line needs ['market','navigable','fish'] -> ['market','fish'] -> 1 failed / 5. File restored byte-exact from a cp backup (cmp equal; git diff clean) and the file green again. A standing sweep plant would re-run that identical check while mutating a module the generation suites share."
+    },
+    "tests/domain/facts/census2gCatastrophicListing.test.js": {
+      "kind": "rationale",
+      "rationale": "CENSUS-2g unit 4 R-AS (5ba3fe42c): POLITICAL_FLAVOR catastrophic[1] is listed, not split; the row stays one closure carrying both branches (src/generators/narrativeText.js). IT IS A RATIONALE BECAUSE ITS CATCHING POWER WAS PROVEN BY AN EXECUTED IN-PLACE NEGATIVE CONTROL (LANDING-R2 seat E, 2026-11-07, at 104654b43): the monster branch's 'has walls where others do not' -> 'has palisades ...' -> 1 failed / 2. File restored byte-exact from a cp backup (cmp equal; git diff clean) and the file green again. A standing sweep plant would re-run that identical check while mutating a module the generation suites share."
+    },
+    "tests/domain/facts/census2gDailyLifePriest.test.js": {
+      "kind": "rationale",
+      "rationale": "CENSUS-2g unit 3 (2d4608c8f): the Daily Life paragraph [1] declares guardPresence and priest and keeps its words (src/components/new/tabs/DailyLifeTab.jsx, read by the census's literal reader). IT IS A RATIONALE BECAUSE ITS CATCHING POWER WAS PROVEN BY AN EXECUTED IN-PLACE NEGATIVE CONTROL (LANDING-R2 seat E, 2026-11-07, at 104654b43): 'Farmers, haulers, priests, guards, and tradespeople' -> the priests dropped -> 1 failed / 23. File restored byte-exact from a cp backup (cmp equal; git diff clean) and the file green again. A standing sweep plant would re-run that identical check while mutating a module the generation suites share."
+    },
+    "tests/domain/facts/census2gDecreeConnectives.test.js": {
+      "kind": "rationale",
+      "rationale": "CENSUS-2g unit 2 R-AQ (7b7230fbb; the arms cite R-AI / R-AD): DEC-EVENT and DEC-PARTY print on no page (no src importer of eventCatalogue.js), the printed decree blocks and the connectives declare nothing (a src/ scan plus the pools). IT IS A RATIONALE BECAUSE ITS CATCHING POWER WAS PROVEN BY AN EXECUTED IN-PLACE NEGATIVE CONTROL (LANDING-R2 seat E, 2026-11-07, at 104654b43): an import of '../edit/eventCatalogue.js' appended to src/domain/facts/market.js -> 1 failed / 5 (nothing in src imports eventCatalogue.js). File restored byte-exact from a cp backup (cmp equal; git diff clean) and the file green again. A standing sweep plant would re-run that identical check while mutating a module the generation suites share."
+    },
+    "tests/domain/summary/census2gScopeTwins.test.js": {
+      "kind": "rationale",
+      "rationale": "CENSUS-2g unit 7 R-AY / row 95 (4d61d3b8b): the waterside scopes declare only what scopePhrase verifies; the dropped scope slots take a twin that presumes nothing (src/domain/summary/settlementQuickGuide.js). IT IS A RATIONALE BECAUSE ITS CATCHING POWER WAS PROVEN BY AN EXECUTED IN-PLACE NEGATIVE CONTROL (LANDING-R2 seat E, 2026-11-07, at 104654b43): the mesoamerican twin given needs ['market'] -> 2 failed / 4. File restored byte-exact from a cp backup (cmp equal; git diff clean) and the file green again. A standing sweep plant would re-run that identical check while mutating a module the generation suites share."
+    },
+    "tests/lint/census4Ledger.walker.test.js": {
+      "kind": "rationale",
+      "rationale": "CENSUS-4 phase B (9a879c519): the declaration ledger (docs/census/declarations/, CENSUS-4's files) speaks only the closed vocabulary of src/domain/facts/factVocabulary.js. IT IS A RATIONALE BECAUSE ITS CATCHING POWER WAS PROVEN BY AN EXECUTED IN-PLACE NEGATIVE CONTROL (LANDING-R2 seat E, 2026-11-07, at 104654b43): one institutionServices ledger row's needs [] -> ['dragons: present'] -> 2 failed / 2. File restored byte-exact from a cp backup (cmp equal; git diff clean) and the file green again. A standing sweep plant would re-run that identical check while mutating a module the generation suites share."
+    },
+    "tests/lint/census5dTablePools.test.js": {
+      "kind": "rationale",
+      "rationale": "CENSUS-5d unit 3 (2a8fdd22d): the two off-census colour tables are enrolled in the wiring census's tablePools with the colour ruling (scripts/lib/table-pools.mjs, docs/content/wiring-census.json). IT IS A RATIONALE BECAUSE ITS CATCHING POWER WAS PROVEN BY AN EXECUTED IN-PLACE NEGATIVE CONTROL (LANDING-R2 seat E, 2026-11-07, at 104654b43): WAR_ENDING_TELLINGS rulings ['colour'] -> [] -> 1 failed / 2. File restored byte-exact from a cp backup (cmp equal; git diff clean) and the file green again. A standing sweep plant would re-run that identical check while mutating a module the generation suites share."
+    },
+    "tests/lint/drawDeclaredKeys.walker.test.js": {
+      "kind": "rationale",
+      "rationale": "CENSUS-1i unit 5 R-AT (24ca3ee49): every drawDeclared caller in src passes a key carrying the settlement (a git-grep scan of src/). IT IS A RATIONALE BECAUSE ITS CATCHING POWER WAS PROVEN BY AN EXECUTED IN-PLACE NEGATIVE CONTROL (LANDING-R2 seat E, 2026-11-07, at 104654b43): the STRESS_GOALS caller in src/generators/npcGenerator.js lost its key -> 2 failed / 3. File restored byte-exact from a cp backup (cmp equal; git diff clean) and the file green again. A standing sweep plant would re-run that identical check while mutating a module the generation suites share."
+    },
+    "tests/lint/wiringCensusDeclared.walker.test.js": {
+      "kind": "rationale",
+      "rationale": "CENSUS-1g unit 5 (1425ac790): the wiring census's declared columns equal a fresh annex reading and the registers' reading of the leaves (docs/content/wiring-census.json, the annex, the six generated leaves). IT IS A RATIONALE BECAUSE ITS CATCHING POWER WAS PROVEN BY AN EXECUTED IN-PLACE NEGATIVE CONTROL (LANDING-R2 seat E, 2026-11-07, at 104654b43): one row's undeclared 1 -> 0 in docs/content/wiring-census.json -> 1 failed / 9. File restored byte-exact from a cp backup (cmp equal; git diff clean) and the file green again. A standing sweep plant would re-run that identical check while mutating a module the generation suites share."
     }
   },
   "meta": {

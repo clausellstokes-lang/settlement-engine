@@ -54,6 +54,9 @@ import { CAUSE_SIGNAL } from '../src/domain/worldPulse/causeVocabulary.js';
 import { CUSTOM_CONTENT_MANIFEST } from '../src/domain/content/customContentManifest.js';
 import { loadStateLeaves, ROOT, STATE_ANNEX } from '../tests/helpers/dossierCorpus.js';
 import { readAnnexDeclarations } from './lib/dossier-annex-grammar.mjs';
+import { annexDeclaredColumns, tablePoolRow } from './lib/census-declared.mjs';
+import { DECLARATION_CHANNELS, TABLE_POOLS } from './lib/table-pools.mjs';
+import { pathToFileURL } from 'node:url';
 import {
   COMPOSERS, composedFillByBlock, composedFillByKeyFunction, composerSources, fillSites,
   unrenderedFacts,
@@ -228,6 +231,12 @@ export function producerIndex() {
  * written, as a `file:line` a reader can open. This is the same walk with the line kept, so the
  * walker can re-derive every citation from the tree rather than believe the table: a row whose
  * `cite` has gone stale, or never existed, reds by name.
+ *
+ * ⭐ TWO FORMS, ONE WALK (LANDING-R2, ODQ §934.105). Each write is cited at its `file:line`
+ * AND as `file :: declaration` (OPERATING_STANDARD rule 32), the top-level declaration that
+ * holds it, so a row may cite the SYMBOL and survive a move that shifts its line; a symbol that
+ * writes no such token reds exactly as a stale line does. The KEYS are unchanged, so
+ * `producerIndex` and everything the census computes from it are byte-identical.
  *
  * ⛔ IT IS THE SAME SCAN AND NOT A SECOND ONE. Two walks over `src/generators/**` and
  * `src/domain/**` that could disagree would be two producer indexes, and the estate's rule is
@@ -940,6 +949,21 @@ export function grainFigures(rows, mounts, deskFacts) {
  */
 export async function buildCensus(options = {}) {
   const leaves = await loadStateLeaves();
+  // CENSUS-1g unit 5: the declared columns, read from the ANNEX through the projector's own parse.
+  const declaredCols = annexDeclaredColumns(readFileSync(STATE_ANNEX, 'utf8'));
+  const tablePools = [];
+  // CENSUS-1i unit 2: every declaration channel held beside a table, read for every table.
+  const channels = [];
+  for (const c of DECLARATION_CHANNELS) {
+    const mod = await import(pathToFileURL(join(ROOT, c.module)).href);
+    if (!(c.name in mod)) throw new Error(`tablePools: ${c.module} exports no ${c.name} (a declaration channel)`);
+    channels.push({ [c.kind]: mod[c.name] });
+  }
+  for (const entry of TABLE_POOLS) {
+    const mod = await import(pathToFileURL(join(ROOT, entry.module)).href);
+    if (!(entry.name in mod)) throw new Error(`tablePools: ${entry.module} exports no ${entry.name} (${entry.id})`);
+    tablePools.push(tablePoolRow(entry, mod[entry.name], channels));
+  }
   /** @type {Map<string, Map<string, Array<{text: string, slots: string[]}>>>} */
   const pools = new Map();
   for (const e of leaves) {
@@ -1094,8 +1118,16 @@ export async function buildCensus(options = {}) {
       // is measured over the SPINE rows, so `pools + modifierRows === rows.length` exactly and
       // nothing is hidden by the filter that keeps those integers stable.
       modifierRows: modifiers.length,
+      declaredColumnRows: census.rows.filter((r) => declaredCols.has(`${r.block} :: ${r.pool}`)).length,
+      tablePools: tablePools.length,
     },
-    rows: census.rows,
+    rows: census.rows.map((r) => {
+      const d = declaredCols.get(`${r.block} :: ${r.pool}`);
+      return d ? { ...r, ...d } : r;
+    }),
+    // ⭐ THE TABLE POOLS (CENSUS-1g unit 5): the off-census pools, the same four declared columns
+    // plus their draw kind and site (`scripts/lib/table-pools.mjs`).
+    tablePools,
     // ⭐ THE MODIFIER SECTION. A modifier pool is the estate's first non-spine, and it is
     // carried here so a reader meets it once, whole, rather than by grepping `rows` for a
     // `role`. `rung: 'annex'` on every one of them says the reading is AUTHOR-DECLARED and

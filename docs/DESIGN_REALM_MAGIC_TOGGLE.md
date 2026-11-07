@@ -487,6 +487,15 @@ realm is not a thinner realm — it is at or above parity on three of the five a
 the provisional bands on the other two, and suppression rides the substitution arms exactly
 as the law requires.
 
+⚠️ **RE-RECORDED 2026-11-07 (LANDING-R2 seat C2, the pool census composed; ODQ §934.105), ONE
+SAME-SEED SHIFT, BOTH TWINS MOVE.** services `127 vs 132` → `126 vs 130` (0.962 → 0.969); every other
+axis holds (members `5 vs 5`, institutions `99 vs 102`, factions `12 vs 12`, history events `18 vs 18`).
+The cause is census-1f unit 1c (9eee701c0): a rolled service whose definition's declaration the
+birth's facts refuse is not materialized. Measured at the composed tip with that resolver neutralized:
+`127 vs 132`, so the whole shift is that one cause. The arcane census over the mundane realm is still
+EMPTY; the ratio stays inside PENDING_BANDS, so no band is asked to move. Copied from the MG-4.2 pin's
+own measured line; this block and the test header were moved in ONE act.
+
 ⚠️ **RE-KEYED TO SEED `mg4-acceptance-1` AND RE-RECORDED 2026-11-06 (LANDING-7 lane D).** The
 magical twin of `mg4-acceptance` stopped seating an arcane faction, so MG-4.1's faction control
 read 0. Bisected on the harness by first-parent stage a07ee4e0a..8e60cb2a5 to 3420d01e3, the

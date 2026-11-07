@@ -25,6 +25,7 @@ import {
   ROUTE_TO_SCENE,
 } from '../../src/generators/narrativeGenerator.js';
 import { ARRIVAL_SCENES } from '../../src/data/narrativeData.js';
+import { textOf } from '../../src/domain/facts/textOf.js';
 import { CULTURE_PROFILES } from '../../src/data/cultureProfiles.js';
 import { createPRNG } from '../../src/kernel/prng.js';
 import { setActiveRng, clearActiveRng } from '../../src/kernel/rngContext.js';
@@ -53,7 +54,7 @@ const settlementFor = (route) => ({
 // Render every template of a pool so the assertion is independent of which
 // one the (seeded) picker chose.
 const renderPool = (pool, name, tier) =>
-  (pool || []).map(t => (typeof t === 'function' ? t(name, tier) : t));
+  (pool || []).map(textOf).map(t => (typeof t === 'function' ? t(name, tier) : t));
 
 describe('arrival scene resolves for every route value (no bare fallback)', () => {
   test.each(ROUTES)('route %s opens on a real scene from its mapped pool', (route) => {
@@ -137,10 +138,10 @@ describe('port and cultural arrival vocabulary remain semantically grounded', ()
     // The SIGHT beat sentence-cases the detail, so the comparison ignores case.
     const lowered = scene.toLowerCase();
     expect(
-      CULTURE_PROFILES.east_asian.architecturalDetails.some(detail => lowered.includes(detail.toLowerCase())),
+      CULTURE_PROFILES.east_asian.architecturalDetails.map(textOf).some(detail => lowered.includes(detail.toLowerCase())),
     ).toBe(true);
     expect(
-      CULTURE_PROFILES.germanic.architecturalDetails.some(detail => lowered.includes(detail.toLowerCase())),
+      CULTURE_PROFILES.germanic.architecturalDetails.map(textOf).some(detail => lowered.includes(detail.toLowerCase())),
     ).toBe(false);
   });
 

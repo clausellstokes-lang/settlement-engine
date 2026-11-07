@@ -53,6 +53,9 @@ export function clockOfTick(weekTick) {
   return { season: SEASONS[Math.floor(weekOfYear0 / WEEKS_PER_SEASON)] || 'spring', weekOfYear: weekOfYear0 + 1 };
 }
 
+/** A nameless rite's filler; where it opens the strip line it is sentence-cased (F11, rung 2B). */
+const OBSERVANCE_FALLBACK = 'an observance';
+
 /** @typedef {{ id?: unknown, name?: unknown, settlement?: { name?: unknown, traditions?: unknown } }} AlmanacSave */
 /** @typedef {{ name: string, settlementName: string, startWeekOfYear: number, weeks: number }} AlmanacEntry */
 
@@ -83,7 +86,7 @@ export function deriveTraditionAlmanac({ settlements, weekTick } = {}) {
       if (seasonOfWeek(startWeekOfYear) !== season) continue;   // not this season
       if (startWeekOfYear < weekOfYear) continue;               // already passed this year
       coming.push({
-        name: String(rec.name || 'an observance'),
+        name: String(rec.name || OBSERVANCE_FALLBACK),
         settlementName,
         startWeekOfYear,
         weeks: Math.max(1, Math.min(2, Math.floor(num(win && win.weeks, 1)))),
@@ -97,7 +100,7 @@ export function deriveTraditionAlmanac({ settlements, weekTick } = {}) {
   const lead = coming[0];
   // A named lead when there is exactly one; a count otherwise (the realm strip stays terse).
   const display = count === 1
-    ? `${lead.name} coming this season`
+    ? `${lead.name === OBSERVANCE_FALLBACK ? 'An observance' : lead.name} coming this season`
     : `${count} festivals coming this season`;
   return { available: true, coming, count, season, display };
 }

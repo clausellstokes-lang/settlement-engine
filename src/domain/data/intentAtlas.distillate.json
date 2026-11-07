@@ -364,7 +364,7 @@
       "bucket": "hamlet",
       "coBucket": "low",
       "n": 72,
-      "effect": 0.3,
+      "effect": 0.31,
       "weight": 0.5,
       "source": "soak"
     },
@@ -374,7 +374,7 @@
       "bucket": "hamlet",
       "coBucket": "moderate",
       "n": 72,
-      "effect": -0.27,
+      "effect": -0.28,
       "weight": 0.5,
       "source": "soak"
     },
@@ -394,7 +394,7 @@
       "bucket": "metropolis",
       "coBucket": "moderate",
       "n": 63,
-      "effect": 0.22,
+      "effect": 0.21,
       "weight": 0.5,
       "source": "soak"
     },
@@ -404,7 +404,7 @@
       "bucket": "thorp",
       "coBucket": "low",
       "n": 61,
-      "effect": 0.33,
+      "effect": 0.34,
       "weight": 0.5,
       "source": "soak"
     },
@@ -414,7 +414,7 @@
       "bucket": "thorp",
       "coBucket": "moderate",
       "n": 61,
-      "effect": -0.3,
+      "effect": -0.31,
       "weight": 0.5,
       "source": "soak"
     },
@@ -554,8 +554,8 @@
       "bucket": "isolated",
       "coBucket": "low",
       "n": 69,
-      "effect": -0.12,
-      "weight": 0.45,
+      "effect": -0.14,
+      "weight": 0.5,
       "source": "soak"
     },
     {
@@ -564,7 +564,7 @@
       "bucket": "isolated",
       "coBucket": "moderate",
       "n": 69,
-      "effect": 0.12,
+      "effect": 0.14,
       "weight": 0.5,
       "source": "soak"
     },

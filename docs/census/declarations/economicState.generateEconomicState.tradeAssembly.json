@@ -1,0 +1,234 @@
+{
+  "id": "economicState.generateEconomicState.tradeAssembly",
+  "source": "src/generators/economy/economicState.js :: generateEconomicState (export/import assembly :550–:733)",
+  "drawKind": "T",
+  "pool": {
+    "declares": [],
+    "crisisScoped": true,
+    "colour": false,
+    "notes": "Crisis necessity imports, the stage-1 suffix sites (:564/:567/:570), the stage-5 military/slave rows, and the tradeDependencies impact lines. ⚠ The stage-1 primaryExports (all three suffix sites) is DISCARDED at :811 (primaryExports.length = 0) and rebuilt from deriveExportsFromChains: these suffix rows reach no output, only the stage-5 dedupe checks (:644 military/mercenary, :658 slave) read the interim list. The crisis necessity imports DO survive (passed into deriveImportsFromChains at :778).",
+    "needs": [],
+    "excludes": []
+  },
+  "rows": [
+    {
+      "id": "economicState.generateEconomicState.tradeAssembly::crisis_import.Grain",
+      "text": "Grain",
+      "needs": [],
+      "excludes": [],
+      "crisis": [
+        "under_siege",
+        "famine"
+      ],
+      "colour": false,
+      "kind": "import",
+      "notes": "stressTypes only (not intendedStressTypes)."
+    },
+    {
+      "id": "economicState.generateEconomicState.tradeAssembly::crisis_import.Salt",
+      "text": "Salt",
+      "needs": [],
+      "excludes": [],
+      "crisis": [
+        "under_siege",
+        "famine"
+      ],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "economicState.generateEconomicState.tradeAssembly::crisis_import.Iron (weapons)",
+      "text": "Iron (weapons)",
+      "needs": [],
+      "excludes": [],
+      "crisis": [
+        "under_siege"
+      ],
+      "colour": false,
+      "kind": "import",
+      "notes": "A FOURTH parenthetical tag, outside the three-suffix inventory. Dedupe tests includes('Iron') but pushes 'Iron (weapons)', so a necessity 'Iron' and 'Iron (weapons)' can co-print."
+    },
+    {
+      "id": "economicState.generateEconomicState.tradeAssembly::crisis_import.Medicinal herbs",
+      "text": "Medicinal herbs",
+      "needs": [],
+      "excludes": [],
+      "crisis": [
+        "plague_onset"
+      ],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "economicState.generateEconomicState.tradeAssembly::suffix.naval",
+      "text": "${exp} (naval route only)",
+      "needs": [
+        "coast"
+      ],
+      "excludes": [],
+      "crisis": [
+        "under_siege"
+      ],
+      "colour": false,
+      "kind": "export",
+      "notes": "DEAD (overwritten :811). Condition: stressTypes under_siege AND worldLaw.supportsMaritime(); slice(0,3)."
+    },
+    {
+      "id": "economicState.generateEconomicState.tradeAssembly::suffix.occupation",
+      "text": "${exp} (taxed by occupation)",
+      "needs": [],
+      "excludes": [],
+      "crisis": [
+        "occupied"
+      ],
+      "colour": false,
+      "kind": "export",
+      "notes": "DEAD (overwritten :811). Condition: occupied, not under_siege; slice(0,5)."
+    },
+    {
+      "id": "economicState.generateEconomicState.tradeAssembly::suffix.transit",
+      "text": "${item} (transit)",
+      "needs": [],
+      "excludes": [],
+      "crisis": "calm",
+      "colour": false,
+      "kind": "export",
+      "notes": "DEAD (overwritten :811). Condition: no siege/occupation AND route crossroads|port|river; items = tradeStreams.transit. Note the route set differs from deriveIsEntrepot (river never makes an entrepot, so transit is empty there)."
+    },
+    {
+      "id": "economicState.generateEconomicState.tradeAssembly::military.export.high",
+      "text": "Military services — standing army leasing, siege engineering, garrison contracts",
+      "needs": [
+        "garrison"
+      ],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "export",
+      "notes": "CATEGORY: a service as an export. Branch tier >= village, militaryEffective >= 80, name mercenary/garrison/barracks/professional guard (private). unhomed: standing army."
+    },
+    {
+      "id": "economicState.generateEconomicState.tradeAssembly::military.export.mercenary",
+      "text": "Mercenary services — trained companies available for hire",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: mercenary company (name)."
+    },
+    {
+      "id": "economicState.generateEconomicState.tradeAssembly::military.export.garrison",
+      "text": "Military services — garrison contracts and armed escort",
+      "needs": [
+        "garrison"
+      ],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "export",
+      "notes": ""
+    },
+    {
+      "id": "economicState.generateEconomicState.tradeAssembly::slave.export.transit_market",
+      "text": "Slave trade: transit market for human trafficking; imported labour and exported captives",
+      "needs": [
+        "market"
+      ],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: slavery boundary (content profile). isSlaveMarket && isCaptiveSource (occupied or criminalEff > 65)."
+    },
+    {
+      "id": "economicState.generateEconomicState.tradeAssembly::slave.export.labour",
+      "text": "Slave labour: purchased workforce for agricultural estates, mines, and domestic service",
+      "needs": [
+        "market"
+      ],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: slavery boundary. Names 'mines' without a mine. Listed as an EXPORT though the words describe a purchased (imported) workforce."
+    },
+    {
+      "id": "economicState.generateEconomicState.tradeAssembly::slave.export.captive",
+      "text": "Captive trade: war captives and debtors sold through established trafficking networks",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: slavery boundary. 'war captives' presumes war (war: at war) — branch is occupied OR criminalEff>65, not war; left as a note."
+    },
+    {
+      "id": "economicState.generateEconomicState.tradeAssembly::slave.export.generic",
+      "text": "Slave trade: human trafficking and forced labour; legally tolerated or actively regulated",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: slavery boundary."
+    },
+    {
+      "id": "economicState.generateEconomicState.tradeAssembly::slave.import",
+      "text": "Enslaved labour: purchased from regional trafficking networks",
+      "needs": [
+        "market"
+      ],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "import",
+      "notes": "unhomed: slavery boundary."
+    },
+    {
+      "id": "economicState.generateEconomicState.tradeAssembly::dependency.impact.siege",
+      "text": "Supply route severed. Operating at minimal capacity or shut down.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [
+        "under_siege"
+      ],
+      "colour": false,
+      "notes": "isUnderStress: stressTypes|intendedStressTypes under_siege OR institution named 'war council'|'siege'|'rationing' (private; a name alone asserts a siege)."
+    },
+    {
+      "id": "economicState.generateEconomicState.tradeAssembly::dependency.impact.isolated",
+      "text": "No trade access: running on existing stockpiles only.",
+      "needs": [
+        "route: isolated"
+      ],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "economicState.generateEconomicState.tradeAssembly::dependency.impact.magic",
+      "text": "Supplied via magical trade infrastructure: teleportation imports replace road access.",
+      "needs": [
+        "magic",
+        "route: isolated"
+      ],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "economicState.generateEconomicState.tradeAssembly::dependency.impact.routes",
+      "text": "Dependent on trade routes. Siege, road closure, or blockade would impair operations.",
+      "needs": [],
+      "excludes": [],
+      "crisis": "calm",
+      "colour": false,
+      "notes": "Counterfactual \"would impair\" is false under an active siege — but the siege arm takes precedence, so this prints under every crisis EXCEPT siege. Declared calm per the ruling; narrower: excludes under_siege only."
+    }
+  ]
+}

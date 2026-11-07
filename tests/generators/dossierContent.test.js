@@ -8,6 +8,7 @@
  * (3) the wartime compound-branch anchors survive the pool growth, (4) every pressure
  * pool still resolves to a non-empty sentence.
  */
+import { textOf } from '../../src/domain/facts/textOf.js';
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
@@ -159,7 +160,7 @@ describe('pressure pools stay well-formed after growth', () => {
     setActiveRng(createPRNG('pools'));
     try {
       for (const [type, fn] of Object.entries(PRESSURE_SENTENCES)) {
-        const arr = fn(detail);
+        const arr = fn(detail).map(textOf);
         expect(Array.isArray(arr), `${type} returns an array`).toBe(true);
         expect(arr.length, `${type} non-empty`).toBeGreaterThan(0);
         for (const s of arr) {
@@ -172,8 +173,8 @@ describe('pressure pools stay well-formed after growth', () => {
     } finally { clearActiveRng(); }
   });
   it('wartime keeps both compound-branch anchors across every variant', () => {
-    const win = PRESSURE_SENTENCES.wartime({ ...detail, compound: { militaryEffective: 62, economyOutput: 55 } });
-    const lose = PRESSURE_SENTENCES.wartime({ ...detail, compound: { militaryEffective: 30, economyOutput: 40 } });
+    const win = PRESSURE_SENTENCES.wartime({ ...detail, compound: { militaryEffective: 62, economyOutput: 55 } }).map(textOf);
+    const lose = PRESSURE_SENTENCES.wartime({ ...detail, compound: { militaryEffective: 30, economyOutput: 40 } }).map(textOf);
     // Both pools must actually have variants, or the two loops below assert nothing.
     expect(win.length, 'the winning-compound wartime pool is non-empty').toBeGreaterThan(0);
     expect(lose.length, 'the losing-compound wartime pool is non-empty').toBeGreaterThan(0);
@@ -212,7 +213,7 @@ describe('AMENDMENT B — sentence-start faction interpolations are capitalised 
   it('mid-sentence faction interpolations stay lowercase (not over-capitalised)', () => {
     const r = { name: 'Ashholt', govFaction: 'the town council', commodity: 'grain' };
     // under_siege[1] uses govFaction mid-sentence after "; " — must remain lowercase.
-    expect(PRESSURE_SENTENCES.under_siege(r)[1]).toMatch(/second week; the town council controls/);
+    expect(textOf(PRESSURE_SENTENCES.under_siege(r)[1])).toMatch(/second week; the town council controls/);
   });
 });
 

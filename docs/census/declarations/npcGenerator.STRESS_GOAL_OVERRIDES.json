@@ -1,0 +1,218 @@
+{
+  "pool": {
+    "id": "npcGenerator.STRESS_GOAL_OVERRIDES",
+    "file": "src/generators/npcGenerator.js",
+    "drawKind": "T",
+    "drawSite": "npcGenerator.js:1223 (keyed by stress then role class gov/mil/merchant/rel)",
+    "colour": false,
+    "crisisScoped": false,
+    "keyDeclares": {
+      "wartime": [
+        "wartime"
+      ],
+      "insurgency": [
+        "insurgency"
+      ],
+      "mass_migration": [
+        "mass_migration"
+      ],
+      "religious_conversion": [
+        "religious_conversion"
+      ],
+      "slave_revolt": [
+        "slave_revolt"
+      ]
+    },
+    "lines": 22,
+    "declaring": 5,
+    "note": "Keyed by the stress type (key-guaranteed) then the NPC's role class; the role class guarantees only the NPC. wartime.mil.short/.note need 'soldiers' — data/defenceTwinLines.js reads that as garrison OR a hired company and swaps a twin where neither stands; the vocabulary has no mercenary atom, so garrison is declared (a hired-company-only place would be a false refusal). insurgency.mil.short presumes the watch specifically (no twin). mass_migration does not fix the direction, so 'the influx' needs migration: influx. slave_revolt.merchant.short presumes a market (its suspension). wartime.gov.* presumes a crown overlord (no atom)."
+  },
+  "rows": [
+    {
+      "id": "wartime.gov.short",
+      "text": "Satisfy the crown requisition order without stripping the settlement to the bone",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "wartime.gov.note",
+      "text": "The war has made every civic decision a military calculation. The crown's needs and the settlement's needs are not the same calculation.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "wartime.mil.short",
+      "text": "Keep unit cohesion as conscription pulls away experienced soldiers and replaces them with frightened substitutes",
+      "needs": [
+        "garrison"
+      ],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "wartime.mil.note",
+      "text": "Every experienced soldier conscripted into the field army is a hole in local security that a substitute won't fill the same way.",
+      "needs": [
+        "garrison"
+      ],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "wartime.merchant.short",
+      "text": "Secure a war contract before a rival does, or find a way to profit from the disruption instead of suffering it",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "insurgency.gov.short",
+      "text": "Maintain the appearance of legitimate authority while the substance of it is actively contested",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "insurgency.gov.note",
+      "text": "Every public appearance is a performance of control. The private meetings are about whether there is still enough control to perform.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "insurgency.mil.short",
+      "text": "Determine which members of the watch are loyal to the institution and which are loyal to whoever is paying them",
+      "needs": [
+        "watch"
+      ],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "insurgency.mil.note",
+      "text": "An insurgency that has lasted this long has had time to make investments in the security apparatus.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "insurgency.rel.short",
+      "text": "Avoid being forced to publicly declare support for either the governing faction or the insurgency, and run out of reasons before the pressure does",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "mass_migration.gov.short",
+      "text": "Manage the influx without the old residents concluding the governing authority has chosen the newcomers over them",
+      "needs": [
+        "migration: influx"
+      ],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "mass_migration.gov.note",
+      "text": "The governing faction is caught between two constituencies that want incompatible things, and both know it.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "mass_migration.merchant.short",
+      "text": "Either profit from the demographic change or find a way to be insulated from it. Either answer requires moving faster than the uncertainty",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "mass_migration.mil.short",
+      "text": "Establish which residents are registered, which are transient, and which are neither: before one of the third category becomes a problem",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious_conversion.rel.short",
+      "text": "Preserve the institution's position through the transition without either abandoning the congregation or openly defying the new authority",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious_conversion.rel.note",
+      "text": "The institution has survived political upheaval before by being indispensable. Whether it can repeat that calculation here is the open question.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious_conversion.gov.short",
+      "text": "Delay a public declaration on the religious question for as long as the political cost of delay is lower than the cost of choosing a side",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "slave_revolt.gov.short",
+      "text": "End the revolt without either full suppression or formal negotiation: both options set precedents the governing faction cannot afford",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "slave_revolt.gov.note",
+      "text": "The revolt's continued existence is itself a delegitimisation. Every day it continues is evidence that the authority is not in control.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "slave_revolt.mil.short",
+      "text": "Contain the revolt geographically without deploying force that will create martyrs and widen the conflict",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "slave_revolt.mil.note",
+      "text": "The orders are to restore order. The orders do not specify what order is supposed to look like when this is over.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "slave_revolt.merchant.short",
+      "text": "Recover the economic loss from the market suspension, or redirect capital away from a labour system that may not survive this in its current form",
+      "needs": [
+        "market"
+      ],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    }
+  ]
+}

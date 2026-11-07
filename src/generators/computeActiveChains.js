@@ -18,9 +18,16 @@ import {customDeps} from '../lib/dependencyEngine.js';
 // unregistered — its slug fallback matches — this keeps the enumerated path live.)
 import '../lib/prebuiltResourceChains.js';
 import { compareCodepoint } from '../domain/deterministicSort.js';
-import { goodsHeldByFoodRecord } from './economy/foodBalance.js';
-import { ownFoodGoodsHeldByFoodRecord } from '../domain/foodSurplus.js';
-import {institutionalCatalog, catalogIdForName} from '../data/institutionalCatalog.js';
+// The food-surplus gate is read from its home, not through economy/foodBalance.js's re-export: that
+// re-export made this module (pinned to the lazy `resource-chains` chunk) evaluate foodBalance.js first,
+// and since the pool census (measured: present at f5dc50c6b, absent at 1bff51c6d) Rollup keeps that order
+// with a bare `import "./engine-*.js"` — an engine <-> resource-chains chunk cycle (bootSmoke.test.js).
+// Same binding, same function: no generation change.
+import { goodsHeldByFoodRecord, ownFoodGoodsHeldByFoodRecord } from '../domain/foodSurplus.js';
+import {catalogIdForName} from '../data/institutionalCatalog.js';
+import { ALL_CATALOG_NAMES, institutionMatchesKeyword } from '../domain/institutions/institutionCategory.js';
+
+export { institutionMatchesKeyword };
 import {
   isMaterializedCustomContent,
   nativeSemanticName,
@@ -59,16 +66,6 @@ function chainLabelFor(chain, resourceInputKey, facts) {
 const fuzzyProcessorMatch = (lowerName, pattern) =>
   lowerName.includes(String(pattern || '').toLowerCase().slice(0, 12));
 
-const ALL_CATALOG_NAMES = (() => {
-  const names = new Set();
-  for (const tierCatalog of Object.values(institutionalCatalog)) {
-    for (const group of Object.values(tierCatalog)) {
-      for (const name of Object.keys(group)) names.add(name);
-    }
-  }
-  return [...names];
-})();
-
 const _patternIdSets = new Map();
 
 /** Catalog-id set a processor pattern resolves to under the legacy fuzzy matcher. */
@@ -100,37 +97,9 @@ export function institutionMatchesProcessor(inst, pattern) {
   return fuzzyProcessorMatch(String(inst?.name || '').toLowerCase(), pattern);
 }
 
-// ── Keyword (substring) id-set — the tradition / magic-transit twin of the
-// processor id-set (A+ generators.4). The tradition + _hasInst gates match by
-// raw `name.includes(keyword)`, a DIFFERENT rule than fuzzyProcessorMatch, so
-// they need their own keyword→catalog-id resolution built from that exact rule.
-// Built once per keyword: id-match === name-includes-match for an unrenamed
-// catalog institution BY CONSTRUCTION, so generation output is byte-identical;
-// a DM-renamed-but-stamped institution stays matched (rename-proof), a
-// bare-renamed (unstamped) one falls to the fuzzy substring path and is lost.
-const _keywordIdSets = new Map();
-function keywordIdSet(keyword) {
-  const key = String(keyword || '').toLowerCase();
-  let set = _keywordIdSets.get(key);
-  if (!set) {
-    set = new Set();
-    for (const name of ALL_CATALOG_NAMES) {
-      if (name.toLowerCase().includes(key)) {
-        const id = catalogIdForName(name);
-        if (id) set.add(id);
-      }
-    }
-    _keywordIdSets.set(key, set);
-  }
-  return set;
-}
-
-/** Does this institution match a keyword? Id-first for stamped, substring fallback. */
-export function institutionMatchesKeyword(inst, keyword) {
-  if (inst?.catalogId) return keywordIdSet(keyword).has(inst.catalogId);
-  if (isMaterializedCustomContent(inst)) return false;
-  return String(inst?.name || '').toLowerCase().includes(String(keyword).toLowerCase());
-}
+// ── Keyword (substring) id-set and `institutionMatchesKeyword` (A+ generators.4) moved to
+// `domain/institutions/institutionCategory.js` with the one guild reader (CENSUS-4c, the chair's
+// answer 3), re-exported here so every import keeps its path. `ALL_CATALOG_NAMES` comes from there.
 
 // ── Export-gate id-set (A+ generators.6). The export extraction/processing
 // gates match by whole-name predicates with one bespoke special case: the

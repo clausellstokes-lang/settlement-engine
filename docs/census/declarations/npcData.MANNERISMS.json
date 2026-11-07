@@ -1,0 +1,256 @@
+{
+  "pool": {
+    "id": "npcData.MANNERISMS",
+    "file": "src/data/npcData.js",
+    "drawKind": "R",
+    "drawSite": "npcGenerator.js:323 → hookVariety.js:93 drawUnique",
+    "colour": true,
+    "crisisScoped": false,
+    "keyDeclares": {},
+    "lines": 30,
+    "declaring": 0,
+    "note": "Mannerisms; every line is colour."
+  },
+  "rows": [
+    {
+      "id": "#0",
+      "text": "drums fingers on surfaces when thinking",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#1",
+      "text": "never makes direct eye contact with inferiors",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#2",
+      "text": "touches a specific piece of jewellery when stressed",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#3",
+      "text": "quotes scripture or proverbs in casual conversation",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#4",
+      "text": "keeps meticulous written records of every meeting",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#5",
+      "text": "always stands when others sit, or vice versa",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#6",
+      "text": "laughs loudly at their own jokes, silently at others'",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#7",
+      "text": "cleans or fidgets with their hands constantly",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#8",
+      "text": "addresses everyone by full name, never shortened",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#9",
+      "text": "pauses for exactly three seconds before answering any question",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#10",
+      "text": "carries food or sweets, offers them as social lubricant",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#11",
+      "text": "unconsciously mimics the posture of whoever they're speaking to",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#12",
+      "text": "refuses to sit with their back to a door",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#13",
+      "text": "hums under their breath when concentrating",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#14",
+      "text": "keeps a coin or token that they flip when making decisions",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#15",
+      "text": "never volunteers information, only answers what is asked",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#16",
+      "text": "speaks of themselves in the third person when angry",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#17",
+      "text": "checks exits in every new room before speaking",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#18",
+      "text": "maintains an unnervingly fixed smile during conflict",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#19",
+      "text": "takes written notes during conversations, even casual ones",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#20",
+      "text": "taps their foot in a complex rhythm when bored",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#21",
+      "text": "never eats or drinks anything offered by a stranger without watching others first",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#22",
+      "text": "uses elaborate, florid greetings regardless of context",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#23",
+      "text": "deflects personal questions with a counter-question",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#24",
+      "text": "keeps their hands clasped behind their back when displeased",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#25",
+      "text": "always arrives fifteen minutes early, and comments when others do not",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#26",
+      "text": "repeats the last word of a sentence spoken to them before responding",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#27",
+      "text": "traces patterns on flat surfaces absentmindedly",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#28",
+      "text": "flinches slightly at raised voices even when calm",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#29",
+      "text": "makes deliberate, theatrical eye contact to assert dominance",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    }
+  ]
+}

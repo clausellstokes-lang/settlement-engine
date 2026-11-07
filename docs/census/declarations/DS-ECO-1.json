@@ -1,0 +1,199 @@
+{
+  "id": "DS-ECO-1",
+  "source": "src/data/dossierStateProse/economy.generated.js",
+  "drawKind": "K",
+  "pools": [
+    {
+      "id": "DS-ECO-1::COMBINATION C1: a high rung on a working approach",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": true,
+      "colour": false,
+      "notes": "key: prosperity high rung × open tradeAccess. Crisis-scoped: v3 asserts no hunger (author mark \"no hunger\"), v1 asserts steady unimproved traffic.; key guarantees route ∈ {road, river, port, crossroads} (working approach)",
+      "lines": [
+        {
+          "id": "DS-ECO-1::COMBINATION C1: a high rung on a working approach::v1",
+          "text": "A stranger reads {settlement}'s standing off its {access} before anyone tells him: the tra",
+          "needs": [],
+          "excludes": [],
+          "crisis": "calm",
+          "colour": false,
+          "notes": "asserts steady traffic, \"none of it looks improvised\" — false under siege/occupation/wartime"
+        },
+        {
+          "id": "DS-ECO-1::COMBINATION C1: a high rung on a working approach::v2",
+          "text": "{settlement}'s books close with a margin, and the margin is broad rather than lucky. The {",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": false,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-1::COMBINATION C1: a high rung on a working approach::v3",
+          "text": "Nobody here talks about the price of bread. The town is well off, the {access} keeps it th",
+          "needs": [],
+          "excludes": [],
+          "crisis": "calm",
+          "colour": false,
+          "notes": "author mark \"no hunger\": \"Nobody here talks about the price of bread\""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-ECO-1::COMBINATION C2: a high rung on a narrow approach (isolated / mountain_pass)",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": false,
+      "notes": "key: prosperity high rung × narrow tradeAccess; key guarantees route ∈ {isolated, mountain_pass} (narrow approach)",
+      "lines": [
+        {
+          "id": "DS-ECO-1::COMBINATION C2: a high rung on a narrow approach (isolated / mountain_pass)::v1",
+          "text": "{settlement} is richer than its road suggests. Nothing reaches it easily and the stores ar",
+          "needs": [
+            "stores: >= 6"
+          ],
+          "excludes": [],
+          "colour": false,
+          "notes": "\"the stores are deep\" presumes a deep food store (band boundary approximate); \"halls\" colour"
+        },
+        {
+          "id": "DS-ECO-1::COMBINATION C2: a high rung on a narrow approach (isolated / mountain_pass)::v2",
+          "text": "The books here are strong on a thin channel: one way in, one way out, and a {complexity} t",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-1::COMBINATION C2: a high rung on a narrow approach (isolated / mountain_pass)::v3",
+          "text": "A narrow way in has not kept {settlement} poor. The approach is the thing that would ordin",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-ECO-1::COMBINATION C3: the middle rungs",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": true,
+      "colour": false,
+      "notes": "key: middle prosperity rungs. Crisis-scoped: v3 carries author mark \"no crisis\".",
+      "lines": [
+        {
+          "id": "DS-ECO-1::COMBINATION C3: the middle rungs::v1",
+          "text": "{settlement} manages. The {complexity} covers what the town needs and leaves a little over",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": false,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-1::COMBINATION C3: the middle rungs::v2",
+          "text": "The accounts here balance on a thin margin. Nothing in them is failing; nothing in them is",
+          "needs": [],
+          "excludes": [],
+          "crisis": "calm",
+          "colour": false,
+          "notes": "\"Nothing in them is failing\" — false under indebted / any economic crisis"
+        },
+        {
+          "id": "DS-ECO-1::COMBINATION C3: the middle rungs::v3",
+          "text": "There is nothing striking about {settlement}'s condition in either direction: a working {a",
+          "needs": [
+            "market"
+          ],
+          "excludes": [],
+          "crisis": "calm",
+          "colour": false,
+          "notes": "author mark \"no crisis\"; \"a working market\""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-ECO-1::COMBINATION C4: a low rung on a working approach",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": false,
+      "notes": "key: prosperity low rung × open approach; key guarantees route ∈ {road, river, port, crossroads} (working approach)",
+      "lines": [
+        {
+          "id": "DS-ECO-1::COMBINATION C4: a low rung on a working approach::v1",
+          "text": "{settlement} sits on a working {access} and still counts short. The traffic is real; the s",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-1::COMBINATION C4: a low rung on a working approach::v2",
+          "text": "The roads into this town are busy and the town is poor, which is the complaint a visitor w",
+          "needs": [],
+          "excludes": [],
+          "colour": false,
+          "notes": "presumes an overland road approach (route: road|crossroads; disjunction, not declared) — reads oddly on a river/port approach; \"the roads into this town are busy\""
+        },
+        {
+          "id": "DS-ECO-1::COMBINATION C4: a low rung on a working approach::v3",
+          "text": "A stranger arriving by the {access} finds more moving through {settlement} than settling i",
+          "needs": [
+            "market"
+          ],
+          "excludes": [],
+          "colour": false,
+          "notes": "\"The market turns\""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-ECO-1::COMBINATION C5: a low rung on a narrow approach",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": true,
+      "notes": "key: prosperity low rung × narrow approach; key guarantees route ∈ {isolated, mountain_pass} (narrow approach)",
+      "lines": [
+        {
+          "id": "DS-ECO-1::COMBINATION C5: a low rung on a narrow approach::v1",
+          "text": "{settlement} is poor and hard to reach, and the two read as one fact: what the road does n",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-1::COMBINATION C5: a low rung on a narrow approach::v2",
+          "text": "The books are short in the ordinary way: a {complexity} sized to the town and no further, ",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-1::COMBINATION C5: a low rung on a narrow approach::v3",
+          "text": "{settlement} is poor and hard to reach, and the two hold each other in place: nothing abou",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    }
+  ]
+}

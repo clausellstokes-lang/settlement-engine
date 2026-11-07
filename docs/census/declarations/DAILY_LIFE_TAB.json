@@ -1,0 +1,690 @@
+{
+ "poolId": "DAILY_LIFE_TAB",
+ "source": "src/components/new/tabs/DailyLifeTab.jsx :80-86 LOAD_MSGS, :186-191 the offer line (R10), :287-319 buildLocalDailyLifeNarrative (local mode). Button labels :133-146 and titles :200-202 are chrome, not ledgered.",
+ "drawKind": "mixed",
+ "drawSite": "per pool (drawKind/drawSite on each)",
+ "pools": [
+  {
+   "pool": "LOAD_MSGS",
+   "keyGuarantees": [
+    "local (unconfigured) mode only, while the offline narrative builds (DailyLifeTab.jsx:103)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Transient loading chrome; asserts no calm: stays out. Two colour lines always remain drawable, so no twin.",
+   "drawKind": "R",
+   "drawSite": "DailyLifeTab.jsx:103 LOAD_MSGS[Math.floor(Math.random() * 5)]",
+   "lines": [
+    {
+     "lineId": "DAILY_LIFE_TAB.LOAD_MSGS[0]",
+     "text": "Walking the streets…",
+     "needs": [],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "tier (streets)"
+     ]
+    },
+    {
+     "lineId": "DAILY_LIFE_TAB.LOAD_MSGS[1]",
+     "text": "Listening at the alehouse…",
+     "needs": [
+      "institution: tavern"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "DAILY_LIFE_TAB.LOAD_MSGS[2]",
+     "text": "Watching the market open…",
+     "needs": [
+      "market"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "DAILY_LIFE_TAB.LOAD_MSGS[3]",
+     "text": "Asking the locals…",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "DAILY_LIFE_TAB.LOAD_MSGS[4]",
+     "text": "Reading the mood…",
+     "needs": [],
+     "excludes": [],
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "offer (saved)",
+   "keyGuarantees": [
+    "dailyLifeEnabled && !hasContent && !loading (DailyLifeTab.jsx:186-189)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "The chair's ruling R10: a COMPOSED line whose named items each carry their atom; the eight subset variants are written out as declared lines (needs = named items, excludes = omitted items) so every birth has exactly one. Chrome-adjacent, asserts no calm: stays out of the inverse default.",
+   "composed": {
+    "template": "Ordinary life here in prose: dawn, {items}.",
+    "items": [
+     {
+      "text": "the market",
+      "needs": [
+       "market"
+      ]
+     },
+     {
+      "text": "the tavern",
+      "needs": [
+       "institution: tavern"
+      ]
+     },
+     {
+      "text": "the watch",
+      "needs": [
+       "watch"
+      ]
+     }
+    ],
+    "join": "\", \" in the order market, tavern, watch; only items whose atom holds",
+    "dawn": "colour (no atom); printed only when at least one item is named",
+    "fallback": {
+     "text": "Ordinary life here in prose.",
+     "excludes": [
+      "market",
+      "institution: tavern",
+      "watch"
+     ],
+     "why": "R10: with none of the three, the bare line alone"
+    }
+   },
+   "drawKind": "T",
+   "drawSite": "DailyLifeTab.jsx:189 (fixed today)",
+   "readerNote": "reader:daily-life-placeholder (readerBattery.js:490) convicts the current fixed line on [no-market] (hasMarketInstitution, a Periodic market counts) or [no-watch] (WATCH_HOUSE /watch|guard|garrison/ over house names). The `watch` atom reads factsOf.defence.watch (watch ONLY), so a garrison-only place drops \"the watch\" here though the reader would pass it; and the reader never checks the tavern. Once the line is composed, the reader's PLACEHOLDER substring (\"dawn, the market, the tavern, the watch\") only matches the full variant — the reader must be re-keyed to the composed items in Phase B.",
+   "lines": [
+    {
+     "lineId": "DAILY_LIFE_TAB.offer.saved[market+tavern+watch]",
+     "text": "Ordinary life here in prose: dawn, the market, the tavern, the watch.",
+     "needs": [
+      "market",
+      "institution: tavern",
+      "watch"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "DAILY_LIFE_TAB.offer.saved[market+tavern]",
+     "text": "Ordinary life here in prose: dawn, the market, the tavern.",
+     "needs": [
+      "market",
+      "institution: tavern"
+     ],
+     "excludes": [
+      "watch"
+     ],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "DAILY_LIFE_TAB.offer.saved[market+watch]",
+     "text": "Ordinary life here in prose: dawn, the market, the watch.",
+     "needs": [
+      "market",
+      "watch"
+     ],
+     "excludes": [
+      "institution: tavern"
+     ],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "DAILY_LIFE_TAB.offer.saved[market]",
+     "text": "Ordinary life here in prose: dawn, the market.",
+     "needs": [
+      "market"
+     ],
+     "excludes": [
+      "institution: tavern",
+      "watch"
+     ],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "DAILY_LIFE_TAB.offer.saved[tavern+watch]",
+     "text": "Ordinary life here in prose: dawn, the tavern, the watch.",
+     "needs": [
+      "institution: tavern",
+      "watch"
+     ],
+     "excludes": [
+      "market"
+     ],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "DAILY_LIFE_TAB.offer.saved[tavern]",
+     "text": "Ordinary life here in prose: dawn, the tavern.",
+     "needs": [
+      "institution: tavern"
+     ],
+     "excludes": [
+      "market",
+      "watch"
+     ],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "DAILY_LIFE_TAB.offer.saved[watch]",
+     "text": "Ordinary life here in prose: dawn, the watch.",
+     "needs": [
+      "watch"
+     ],
+     "excludes": [
+      "market",
+      "institution: tavern"
+     ],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "DAILY_LIFE_TAB.offer.saved[none]",
+     "text": "Ordinary life here in prose.",
+     "needs": [],
+     "excludes": [
+      "market",
+      "institution: tavern",
+      "watch"
+     ],
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "offer (unsaved)",
+   "keyGuarantees": [
+    "!dailyLifeEnabled (configured mode, no saveId) && !hasContent && !loading (DailyLifeTab.jsx:186-190)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "R10 applied to the unsaved twin of the offer line; same composition, same atoms.",
+   "composed": {
+    "template": "Save this settlement to write its ordinary life in prose: dawn, {items}.",
+    "items": [
+     {
+      "text": "the market",
+      "needs": [
+       "market"
+      ]
+     },
+     {
+      "text": "the tavern",
+      "needs": [
+       "institution: tavern"
+      ]
+     },
+     {
+      "text": "the watch",
+      "needs": [
+       "watch"
+      ]
+     }
+    ],
+    "join": "\", \" in the order market, tavern, watch; only items whose atom holds",
+    "dawn": "colour (no atom); printed only when at least one item is named",
+    "fallback": {
+     "text": "Save this settlement to write its ordinary life in prose.",
+     "excludes": [
+      "market",
+      "institution: tavern",
+      "watch"
+     ],
+     "why": "R10, unsaved variant"
+    }
+   },
+   "drawKind": "T",
+   "drawSite": "DailyLifeTab.jsx:190 (fixed today)",
+   "lines": [
+    {
+     "lineId": "DAILY_LIFE_TAB.offer.unsaved[market+tavern+watch]",
+     "text": "Save this settlement to write its ordinary life in prose: dawn, the market, the tavern, the watch.",
+     "needs": [
+      "market",
+      "institution: tavern",
+      "watch"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "DAILY_LIFE_TAB.offer.unsaved[market+tavern]",
+     "text": "Save this settlement to write its ordinary life in prose: dawn, the market, the tavern.",
+     "needs": [
+      "market",
+      "institution: tavern"
+     ],
+     "excludes": [
+      "watch"
+     ],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "DAILY_LIFE_TAB.offer.unsaved[market+watch]",
+     "text": "Save this settlement to write its ordinary life in prose: dawn, the market, the watch.",
+     "needs": [
+      "market",
+      "watch"
+     ],
+     "excludes": [
+      "institution: tavern"
+     ],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "DAILY_LIFE_TAB.offer.unsaved[market]",
+     "text": "Save this settlement to write its ordinary life in prose: dawn, the market.",
+     "needs": [
+      "market"
+     ],
+     "excludes": [
+      "institution: tavern",
+      "watch"
+     ],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "DAILY_LIFE_TAB.offer.unsaved[tavern+watch]",
+     "text": "Save this settlement to write its ordinary life in prose: dawn, the tavern, the watch.",
+     "needs": [
+      "institution: tavern",
+      "watch"
+     ],
+     "excludes": [
+      "market"
+     ],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "DAILY_LIFE_TAB.offer.unsaved[tavern]",
+     "text": "Save this settlement to write its ordinary life in prose: dawn, the tavern.",
+     "needs": [
+      "institution: tavern"
+     ],
+     "excludes": [
+      "market",
+      "watch"
+     ],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "DAILY_LIFE_TAB.offer.unsaved[watch]",
+     "text": "Save this settlement to write its ordinary life in prose: dawn, the watch.",
+     "needs": [
+      "watch"
+     ],
+     "excludes": [
+      "market",
+      "institution: tavern"
+     ],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "DAILY_LIFE_TAB.offer.unsaved[none]",
+     "text": "Save this settlement to write its ordinary life in prose.",
+     "needs": [],
+     "excludes": [
+      "market",
+      "institution: tavern",
+      "watch"
+     ],
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "localNarrative.food",
+   "keyGuarantees": [
+    "local mode buildLocalDailyLifeNarrative; branch on ctx.foodDeficit / foodSurplus (economicViability.metrics.foodBalance), DailyLifeTab.jsx:291-297"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Opted in: renders under crisis and [deficit>0] asserts adequacy, [else] asserts an ordinary supply — a famine or the hunger family (siege) contradicts them. T lookup on a band: an excluded branch has no line, so twins.",
+   "drawKind": "T",
+   "drawSite": "DailyLifeTab.jsx:291",
+   "lines": [
+    {
+     "lineId": "DAILY_LIFE_TAB.localNarrative.food[deficit>20]",
+     "text": "bread is dear and the poorest households plan every meal carefully",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": false,
+     "stop": [
+      "food sources (no reader) (bread)"
+     ]
+    },
+    {
+     "lineId": "DAILY_LIFE_TAB.localNarrative.food[deficit>0]",
+     "text": "food is adequate for most families, though prices are watched closely",
+     "needs": [],
+     "excludes": [
+      "famine",
+      "crisis: famine"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "DAILY_LIFE_TAB.localNarrative.food[surplus>10]",
+     "text": "granaries and kitchen gardens give the town a little breathing room",
+     "needs": [
+      "institution: granary"
+     ],
+     "excludes": [],
+     "crisis": "any",
+     "colour": false,
+     "stop": [
+      "tier (\"the town\")"
+     ]
+    },
+    {
+     "lineId": "DAILY_LIFE_TAB.localNarrative.food[else]",
+     "text": "the food supply is ordinary, practical, and never taken for granted",
+     "needs": [],
+     "excludes": [
+      "crisis: hunger"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": []
+    }
+   ],
+   "twins": [
+    {
+     "text": "food is short for most families, and prices are watched closely",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "famine"
+     ],
+     "why": "deficit>0 branch under a famine"
+    },
+    {
+     "text": "the food supply holds for now, and nobody takes it for granted",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "hunger"
+     ],
+     "why": "no-deficit branch under a hunger-family crisis"
+    },
+    {
+     "text": "stores and kitchen gardens give the place a little breathing room",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "why": "surplus branch without a granary (and without the tier word)"
+    }
+   ]
+  },
+  {
+   "pool": "localNarrative.order",
+   "keyGuarantees": [
+    "branch on ctx.safetyScore (safetyProfile.safetyRatio bands), DailyLifeTab.jsx:299-303"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Opted in: [>=70] asserts safety after dark, which threat or unrest contradicts; the safety score is a STOP (no reader) so only the crisis is declared.",
+   "drawKind": "T",
+   "drawSite": "DailyLifeTab.jsx:299",
+   "lines": [
+    {
+     "lineId": "DAILY_LIFE_TAB.localNarrative.order[>=70]",
+     "text": "people move after dusk with confidence",
+     "needs": [],
+     "excludes": [
+      "crisis: threat",
+      "crisis: unrest"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "DAILY_LIFE_TAB.localNarrative.order[>=45]",
+     "text": "doors are barred early and strangers are studied before they are welcomed",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "DAILY_LIFE_TAB.localNarrative.order[else]",
+     "text": "ordinary errands carry a careful awareness of who controls the street",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": false,
+     "stop": [
+      "tier (the street)"
+     ]
+    }
+   ],
+   "twins": [
+    {
+     "text": "people still move after dusk, though fewer of them and never alone",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "threat",
+      "unrest"
+     ],
+     "why": "high safety score under threat or unrest"
+    }
+   ]
+  },
+  {
+   "pool": "localNarrative.anchors",
+   "keyGuarantees": [
+    "listText(institutions, fallback): the fallback prints when keyInsts holds NO institution in the eight listed categories (DailyLifeTab.jsx:308-309)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "The fallback speaks exactly when the roster lists nothing — the births least likely to hold a market or a watch. Asserts no calm: stays out. Its one line needs both, so it carries a twin.",
+   "drawKind": "T",
+   "drawSite": "DailyLifeTab.jsx:309",
+   "lines": [
+    {
+     "lineId": "DAILY_LIFE_TAB.localNarrative.anchors[fallback]",
+     "text": "the market, shrine, workshop, and watch post",
+     "needs": [
+      "market",
+      "watch"
+     ],
+     "excludes": [],
+     "colour": false,
+     "stop": [
+      "shrine (faith)",
+      "workshop"
+     ]
+    }
+   ],
+   "twins": [
+    {
+     "text": "the wells, the lanes, and the common ground",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "why": "the empty-roster fallback: names nothing the record must hold (cf. defenceTwinLines.js:31 \"Wells, roads and the common ground\")"
+    }
+   ]
+  },
+  {
+   "pool": "localNarrative.stress",
+   "keyGuarantees": [
+    "ctx.stressTypes (settlement.stress[].type only — NOT the full crisis fact; a world-pulse crisis with an empty stress array takes the calm branch), DailyLifeTab.jsx:310-312"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Opted in: the [none] branch asserts routine normality; it is calm by construction, but its key reads s.stress alone, so it can print under a crisis the crisis home holds (pulse stressors).",
+   "drawKind": "T",
+   "drawSite": "DailyLifeTab.jsx:310",
+   "lines": [
+    {
+     "lineId": "DAILY_LIFE_TAB.localNarrative.stress[active]",
+     "text": "The talk of the day keeps returning to {stresses}.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "crisis"
+     ],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "DAILY_LIFE_TAB.localNarrative.stress[none]",
+     "text": "The place is not peaceful so much as practiced: people know its routines and work around its frictions.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "calm",
+     "colour": false,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "localNarrative.paragraphs",
+   "keyGuarantees": [
+    "local mode only (isConfigured false): the four joined paragraphs, DailyLifeTab.jsx:314-319; slots are declared in their own pools above"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Opted in: [2][stability>=45] asserts settled authority, which a succession-family crisis contradicts. Paragraph [1] names priests and guards on every page.",
+   "drawKind": "A",
+   "drawSite": "DailyLifeTab.jsx:314",
+   "lines": [
+    {
+     "lineId": "DAILY_LIFE_TAB.localNarrative.paragraph[0]",
+     "text": "Morning starts around {anchors}. {terrain} and {trade} shape the pace: carts, tools, and gossip move where the ground and roads allow, while {culture} gives even routine bargains a recognizable local rhythm.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": false,
+     "stop": [
+      "culture (the culture name as rhythm)"
+     ]
+    },
+    {
+     "lineId": "DAILY_LIFE_TAB.localNarrative.paragraph[1]",
+     "text": "{food}. Work is divided by habit more than proclamation. Farmers, haulers, priests, guards, and tradespeople all know which shortages can be endured and which ones will turn into arguments before sundown.",
+     "needs": [
+      "guardPresence",
+      "priest"
+     ],
+     "excludes": [],
+     "crisis": "any",
+     "colour": false,
+     "stop": [],
+     "note": "CENSUS-2e: the guards stop declared as guardPresence (one atom: any watch / garrison / militia). CENSUS-2g unit 3 (the chair's answer 3, block j): the priests declare priest (a senior cleric among the named people), carried through textOf until the site is wired; no reword."
+    },
+    {
+     "lineId": "DAILY_LIFE_TAB.localNarrative.paragraph[2][stability<45]",
+     "text": "Power is felt through {govFaction | \"whoever can make orders stick this week\"}. Promises are weighed carefully because yesterday's bargain may not survive tomorrow. {order}.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "DAILY_LIFE_TAB.localNarrative.paragraph[2][stability>=45]",
+     "text": "Power is felt through {govFaction | \"whoever can make orders stick this week\"}. Most residents know where authority lives and how to petition it without making themselves memorable. {order}.",
+     "needs": [],
+     "excludes": [
+      "crisis: succession"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": [],
+     "note": "\"Most residents know where authority lives\" is false while the seat is open"
+    },
+    {
+     "lineId": "DAILY_LIFE_TAB.localNarrative.paragraph[3]",
+     "text": "{stress} By evening, daily life narrows to lamplight, shared meals, debts remembered, and news carried from door to door. The settlement feels less like a map marker than a set of bargains people keep renewing because leaving would cost more than staying.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": false,
+     "stop": [
+      "meta (\"a map marker\")"
+     ]
+    }
+   ],
+   "twins": [
+    {
+     "text": "{food}. Work is divided by habit more than proclamation. Farmers, haulers, and tradespeople all know which shortages can be endured and which ones will turn into arguments before sundown.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "why": "paragraph [1] for a place with no watch, garrison or militia (drops priests and guards)"
+    },
+    {
+     "text": "Power is felt through {govFaction | \"whoever can make orders stick this week\"}. Most residents know who held authority last, and are waiting to learn who holds it next. {order}.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "succession"
+     ],
+     "why": "paragraph [2] (stability >= 45) under a succession-family crisis"
+    }
+   ]
+  }
+ ]
+}

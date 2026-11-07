@@ -1,0 +1,51 @@
+{
+  "id": "marketPrices.causalReceipt",
+  "source": "src/domain/display/marketPrices.js :: causalReceipt",
+  "drawKind": "T",
+  "pool": {
+    "declares": [],
+    "crisisScoped": true,
+    "colour": false,
+    "notes": "The \"why\" clause. Season words have no atom (ruled). \"roads\" presumes an overland route (unhomed: road presence; route: road too narrow).",
+    "needs": [],
+    "excludes": []
+  },
+  "rows": [
+    {
+      "id": "marketPrices.causalReceipt::dear.drift",
+      "text": "for the roads are cut",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": "Branch driftBand shortage (M6d flow band)."
+    },
+    {
+      "id": "marketPrices.causalReceipt::dear.season",
+      "text": "for it comes scarce this season",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "marketPrices.causalReceipt::cheap.drift",
+      "text": "for the roads run thick with wagons",
+      "needs": [],
+      "excludes": [],
+      "crisis": "calm",
+      "colour": false,
+      "notes": "Traffic-plenty claim; false under siege/occupation."
+    },
+    {
+      "id": "marketPrices.causalReceipt::cheap.season",
+      "text": "for the season has been generous",
+      "needs": [],
+      "excludes": [],
+      "crisis": "calm",
+      "colour": false,
+      "notes": "Plenty claim; false under famine."
+    }
+  ]
+}

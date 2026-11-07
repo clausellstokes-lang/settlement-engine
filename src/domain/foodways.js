@@ -15,6 +15,7 @@
  * its source's small library. Pure.
  */
 import { fnv1a32 } from '../kernel/proseHash.js';
+import { drawDeclared, lineText } from './facts/drawDeclared.js';
 
 /** @typedef {'grain'|'livestock'|'fish'|'mill'|'game'} FoodSource */
 
@@ -60,7 +61,13 @@ export function sourcesNamedIn(sentence) {
 }
 
 /**
- * @param {{ sources: ReadonlyArray<string>, cultureLines?: ReadonlyArray<string> | null, identity: string }} input
+ * ⭐ CENSUS-1d unit 2 (Appendix B row 111, kind H): the frame and each slot's phrase are drawn
+ * over the FULL library exactly as before (the fnv offset; the without-replacement probe walks
+ * the same library, comparing texts) and resolved through `drawDeclared`, noted in the ledger as
+ * `FOODWAYS.FRAMES.<one|two|more>` / `FOODWAYS.SOURCE_PHRASES.<source>`. `input.facts` answers a
+ * declared line (a birth in progress hands `birthFactsOf`; none = a declared line is refused).
+ * @param {{ sources: ReadonlyArray<string>, cultureLines?: ReadonlyArray<string> | null, identity: string,
+ *   facts?: object|null|(() => object|null) }} input
  * @returns {string}
  */
 export function composeFoodwaysLine(input) {
@@ -78,16 +85,29 @@ export function composeFoodwaysLine(input) {
     const claimless = cultureLines.filter((line) => sourcesNamedIn(line).length === 0);
     return claimless.length ? claimless[offset % claimless.length] : 'Meals follow the season and what the household has put by.';
   }
-  const frames = sources.length === 1 ? FRAMES.one : sources.length === 2 ? FRAMES.two : FRAMES.more;
-  const frame = frames[offset % frames.length];
+  const frameKey = sources.length === 1 ? 'one' : sources.length === 2 ? 'two' : 'more';
+  const frames = FRAMES[frameKey];
+  const facts = input.facts ?? null;
+  const frame = String(lineText(drawDeclared(frames, {
+    draw: (p) => p[offset % p.length], facts, key: `foodways|${input.identity}`,
+    poolId: `FOODWAYS.FRAMES.${frameKey}`, surface: 'economics', drawKind: 'H',
+  }).line) ?? '');
   // Each slot draws a phrase from its own source's library, without replacement across slots.
+  /** @type {Set<string>} */
   const used = new Set();
   const phrases = sources.slice(0, 3).map((source, slot) => {
-    const library = SOURCE_PHRASES[source];
-    let pick = (offset + slot) % library.length;
-    for (let tries = 0; tries < library.length && used.has(library[pick]); tries += 1) pick = (pick + 1) % library.length;
-    used.add(library[pick]);
-    return library[pick];
+    const drawn = drawDeclared(SOURCE_PHRASES[source], {
+      draw: (library) => {
+        let pick = (offset + slot) % library.length;
+        for (let tries = 0; tries < library.length && used.has(String(lineText(library[pick]))); tries += 1) pick = (pick + 1) % library.length;
+        return library[pick];
+      },
+      facts, key: `foodways|${input.identity}|${slot}`,
+      poolId: `FOODWAYS.SOURCE_PHRASES.${source}`, surface: 'economics', drawKind: 'H',
+    });
+    const phrase = drawn.line == null ? '' : String(lineText(drawn.line));
+    used.add(phrase);
+    return phrase;
   });
   const own = frame.replace('{A}', phrases[0] || '').replace('{B}', phrases[1] || '').replace('{C}', phrases[2] || '');
   const line = capital(own);

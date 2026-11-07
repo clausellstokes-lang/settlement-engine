@@ -12,6 +12,10 @@ import {
 } from '../domain/institutionClassify.js';
 import { institutionCategoryFlags } from './roleCategory.js';
 import { crimeSignalOf } from '../domain/crimeSignal.js';
+import { runningCriminalChains } from '../domain/display/defenseDisplay.js';
+import { defenceOf } from '../domain/facts/defence.js';
+import { factsOf } from '../domain/facts/factsOf.js';
+import { resolveSibling } from '../domain/facts/drawDeclared.js';
 
 /**
  * The pool's own "desperation theft" line, held once because two entries print it: the famine
@@ -45,7 +49,16 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
   const pri     = getPriorities(config);
   const flags   = getInstFlags(config, institutions);
   const stress  = getStressFlags(config, institutions);
-  const inst    = flags.inst;
+  // CENSUS-1 wave 0, fact 3: the defence atoms are the live roster's (`domain/facts/defence.js`),
+  // never the raw roster's substring flags; the other presence flags are still priorityHelpers'.
+  // CENSUS-1b unit A (a), the chair's ruling: the militia atom is the home's too (a ruined
+  // militia patrols nothing; a household levy is a militia). It moves births, counted by cause.
+  const defence = defenceOf({ institutions });
+  const inst    = { ...flags.inst, hasWalls: defence.walls, hasWatch: defence.watch, hasGarrison: defence.garrison, hasGates: defence.gate, hasMilitia: defence.militia };
+  // CENSUS-1e unit 2 (Appendix B item 23, the inline T branches): each line CENSUS-5b declared in
+  // SAFETY_LINE_SIBLINGS (below) resolves at the branch that prints it, against the live roster's
+  // facts — the original where the record holds its atom, else its twin. Draw-free.
+  const said = (/** @type {string} */ line) => resolveSibling(line, SAFETY_LINE_SIBLINGS, { facts: () => factsOf({ institutions }), poolId: 'safetyProfile:SAFETY_LINE_SIBLINGS', surface: 'defense', drawKind: 'T' });
   const threat  = config.monsterThreat || 'frontier';
   const watchLabel =
     tier === 'town'
@@ -200,7 +213,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
       const strainLabel = safetyRatio >= 2 ? 'Tense' : safetyRatio >= 1 ? 'Strained' : 'Volatile';
       safetyStrains.push({ strain: strainLabel, condition: 'Succession Crisis' });
       safetyDescs.push(
-        "Authority is contested. The watch is uncertain whose orders to follow. Opportunistic crime is rising in the gap."
+        said("Authority is contested. The watch is uncertain whose orders to follow. Opportunistic crime is rising in the gap.")
       );
     }
     if (hasStress('recently_betrayed')) {
@@ -229,8 +242,8 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
       const strainLabel = safetyRatio >= 2 ? 'Strained' : 'Tense';
       safetyStrains.push({ strain: strainLabel, condition: 'Mass Migration' });
       safetyDescs.push(
-        "The settlement is absorbing more people than its infrastructure was built for. " +
-        "Friction between established residents and newcomers is visible. The watch is overwhelmed by unfamiliar faces."
+        said("The settlement is absorbing more people than its infrastructure was built for. " +
+        "Friction between established residents and newcomers is visible. The watch is overwhelmed by unfamiliar faces.")
       );
     }
     if (hasStress('religious_conversion')) {
@@ -489,7 +502,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
   if (inst.hasSmuggling) {
     const routeType = inst.hasPort ? 'port-based' : 'overland';
     const gateNote  = inst.hasGates
-      ? " The settlement's gates and walls are checkpoints that smugglers work around. Bribing officials, using hidden routes, or moving shipments at shift changes."
+      ? said(" The settlement's gates and walls are checkpoints that smugglers work around. Bribing officials, using hidden routes, or moving shipments at shift changes.")
       : ' The lack of controlled entry points makes movement relatively easy; no gates to bribe and no checkpoints to avoid.';
     const prosecuteNote = inst.hasPrison && inst.hasCourtSystem
       ? ' Arrests do happen. Prosecution is real, which is why the network is careful.'
@@ -502,7 +515,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
     });
   }
   if (inst.hasGangInfra && crimeTypes.length === 0) {
-    const garRef  = inst.hasGarrison ? ' The garrison acknowledges the problem but focuses on the walls and gates. Interior policing is under-resourced.'
+    const garRef  = inst.hasGarrison ? said(' The garrison acknowledges the problem but focuses on the walls and gates. Interior policing is under-resourced.')
                   : inst.hasWatch    ? ' The watch responds to the worst incidents but cannot contest territorial control.'
                   : inst.hasMilitia  ? ' The militia is composed of locals who know the gangs personally. Enforcement is complicated.'
                   :                    ' With no formal guard, the gangs operate without meaningful opposition.';
@@ -525,7 +538,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
     // (already reflected in communityOrderBonus above)
   } else if (crimeTypes.length === 0 && (isDangerous || flags.criminalEffective >= 45)) {
     if (flags.criminalEffective < 35 || effectiveSafety < 0.6) {
-      const lawRef  = inst.hasMilitaryInst ? 'The watch is too thinly spread to maintain order.' : 'There is no meaningful law enforcement.';
+      const lawRef  = inst.hasMilitaryInst ? said('The watch is too thinly spread to maintain order.') : 'There is no meaningful law enforcement.';
       const charNote = inst.hasCharterHall ? ' The charter hall handles external threats but is not equipped for civil enforcement.' : '';
       const courtNote = inst.hasCourtSystem ? '' : ' Without a court, there is no formal mechanism for resolving disputes peacefully.';
       crimeTypes.push({
@@ -575,7 +588,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
     const insurgentDriven = (flags.criminalEffective || 0) > (flags.militaryEffective || 0);
     addCrimeIfMissing('political violence',
       insurgentDriven
-        ? 'Street-level confrontations between insurgent supporters and the watch. Officially categorised as riot and disorder.'
+        ? said('Street-level confrontations between insurgent supporters and the watch. Officially categorised as riot and disorder.')
         : 'Targeted intimidation and occasional violence against officials loyal to the current authority. Professionally executed.');
     addCrimeIfMissing('loyalty testing',
       'Both the governing faction and the insurgency pressure individuals to declare allegiance. Refusal is dangerous. False declarations are common.');
@@ -584,7 +597,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
   }
   if (hasStress('slave_revolt')) {
     addCrimeIfMissing('revolt violence',
-      'Active armed conflict between revolt participants and security forces in contested districts. Civilians are avoiding specific streets. The watch has abandoned normal patrol patterns.');
+      said('Active armed conflict between revolt participants and security forces in contested districts. Civilians are avoiding specific streets. The watch has abandoned normal patrol patterns.'));
     addCrimeIfMissing('escape networks',
       'Organised infrastructure helping enslaved persons escape. Safe houses, forged papers, passage out of the settlement. The same network that was small and cautious is now large and urgent.');
     addCrimeIfMissing('informant pressure',
@@ -612,7 +625,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
   }
   if (hasStress('mass_migration')) {
     addCrimeIfMissing('displacement crime',
-      'Theft and petty fraud by new arrivals with no local ties and no established credit. The watch struggles to distinguish transients from residents.');
+      said('Theft and petty fraud by new arrivals with no local ties and no established credit. The watch struggles to distinguish transients from residents.'));
     addCrimeIfMissing('cultural friction',
       'Violent incidents between established residents and newcomers. Usually starts with an economic dispute and escalates.');
     addCrimeIfMissing('black market passage',
@@ -705,10 +718,10 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
     plotHooks.push("The smuggling network is moving something unusual this week, not the normal contraband. Someone wants to know what it is before it arrives.");
   }
   if (stress.crusaderSynthesis) {
-    plotHooks.push("The garrison chaplain and the commander are the same man. He's authorizing military action for reasons that sound theological.");
+    plotHooks.push(said("The garrison chaplain and the commander are the same man. He's authorizing military action for reasons that sound theological."));
   }
   if (stress.merchantArmy) {
-    plotHooks.push("The merchant guild's private security force just detained someone, with no legal authority to do so. The watch is looking the other way.");
+    plotHooks.push(said("The merchant guild's private security force just detained someone, with no legal authority to do so. The watch is looking the other way."));
   }
 
   return {
@@ -739,10 +752,16 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
  *     (unit C's rule, now on the final record); the famine/siege desperation-theft entry is then
  *     printed once, never twice, as at the economy step;
  *   - debt evasion: the same line without its "criminal networks" clause where none exists.
+ * ⛔ NOR BESIDE THE BLOCK'S OWN LIST (RUNG-2 LANDING phase C unit 3, 2026-11-06; rung 2E's A-06 in
+ * soak1k-6759, -6885, -7485, -7845: "No criminal infrastructure" beside the listed Gambling Den
+ * whose line "funds broader criminal network"). The survival line also reads the safety profile's
+ * own `criminalInstitutions` and the running criminal supply chains — the two lists RUNG1B-F9 made
+ * the Defense structure read (`defenseDisplay.js :: deriveCriminalStructure`, `listed`). A listed
+ * operation is infrastructure, not a network: the debt-evasion line still reads the signal alone.
  * Every entry's TYPE is kept (the services menu reads types). No draw. Returns the input
  * `economicState` BY REFERENCE when no line changes, else a copy with a copied crime list.
  *
- * @template {{ safetyProfile?: { crimeTypes?: Array<{ type?: unknown, desc?: unknown }> } | null } | null | undefined} E
+ * @template {{ safetyProfile?: { crimeTypes?: Array<{ type?: unknown, desc?: unknown }>, criminalInstitutions?: unknown[] } | null, activeChains?: Array<{ needKey?: unknown, status?: unknown, chainId?: unknown } | null> } | null | undefined} E
  * @param {E} economicState
  * @param {Parameters<typeof crimeSignalOf>[0]} lists the FINAL roster's seats and the estate
  * @returns {E}
@@ -752,15 +771,73 @@ export function settleCrimeLinesToSignal(economicState, lists) {
   const crimes = safetyProfile?.crimeTypes;
   if (!Array.isArray(crimes) || !crimes.length) return economicState;
   const present = crimeSignalOf(lists).present;
-  const lineFor = { 'Survival crime': present ? DESPERATION_THEFT_DESC : SURVIVAL_NO_NETWORK_DESC,
+  const infrastructure = present
+    || (Array.isArray(safetyProfile?.criminalInstitutions) && safetyProfile.criminalInstitutions.length > 0)
+    || runningCriminalChains({ economicState: { activeChains: economicState?.activeChains } }).length > 0;
+  const lineFor = { 'Survival crime': infrastructure ? DESPERATION_THEFT_DESC : SURVIVAL_NO_NETWORK_DESC,
     'debt evasion': present ? DEBT_EVASION_DESC : DEBT_EVASION_NO_NETWORK_DESC };
   let settled = crimes.map((entry) => {
     const desc = lineFor[/** @type {keyof typeof lineFor} */ (String(entry?.type))];
     return desc !== undefined && entry.desc !== desc ? { ...entry, desc } : entry;
   });
-  if (present && settled.some((entry) => entry?.type === 'Survival crime')) {
+  if (infrastructure && settled.some((entry) => entry?.type === 'Survival crime')) {
     settled = settled.filter((entry) => !(entry?.type === 'desperation theft' && entry.desc === DESPERATION_THEFT_DESC));
   }
   if (settled.length === crimes.length && settled.every((entry, i) => entry === crimes[i])) return economicState;
   return { ...economicState, safetyProfile: { ...safetyProfile, crimeTypes: settled } };
 }
+
+/**
+ * One declared sibling set: the original, `needs` its atoms; its twin (when the slot needs one)
+ * `excludes` them. @param {string} text @param {string[]} needs @param {string} [twin]
+ */
+const declaredSet = (text, needs, twin) => Object.freeze([
+  Object.freeze({ text, needs: Object.freeze(needs) }),
+  ...(twin === undefined ? [] : [Object.freeze({ text: twin, twinOf: text, excludes: Object.freeze(needs) })]),
+]);
+
+/**
+ * DECLARED SIBLINGS, CARRIED (CENSUS-5b unit 2, 2026-11-05; `docs/DESIGN_POOL_CENSUS.md` §3.1,
+ * the chair's ruling R-C). The safety profile's inline T branches print lines that presume a fact
+ * their branch does not guarantee: the watch named under a stress any place can carry, the walls
+ * named beside a garrison or a gate (a gate row stands without walls). The originals stay where
+ * they are spelled above; each is declared here, keyed by its printed text, with its twin. Each
+ * printing branch resolves through `said` → `resolveSibling` (CENSUS-1e unit 2), so a twin prints
+ * where the record refuses its original's atom. Measured on the 1,000 (soak1k-0..999) before the change, printed / false by the record:
+ * the succession watch 61 / 30, the migration watch 63 / 28, the revolt watch 61 / 25, the
+ * insurgent watch 43 / 22, the displacement watch 71 / 32, the garrison's walls 52 / 3, the
+ * smuggler's walls 229 / 0, the thin watch 2 / 1, the merchant army's watch 32 / 0, the garrison
+ * chaplain 12 / 0. Each twin is the chair's ruling (R-G), recorded in the lane doc.
+ */
+export const SAFETY_LINE_SIBLINGS = Object.freeze({
+  'Authority is contested. The watch is uncertain whose orders to follow. Opportunistic crime is rising in the gap.': declaredSet(
+    'Authority is contested. The watch is uncertain whose orders to follow. Opportunistic crime is rising in the gap.', ['watch'],
+    'Authority is contested. Whoever keeps order is uncertain whose orders to follow. Opportunistic crime is rising in the gap.'),
+  'The settlement is absorbing more people than its infrastructure was built for. Friction between established residents and newcomers is visible. The watch is overwhelmed by unfamiliar faces.': declaredSet(
+    'The settlement is absorbing more people than its infrastructure was built for. Friction between established residents and newcomers is visible. The watch is overwhelmed by unfamiliar faces.', ['watch'],
+    'The settlement is absorbing more people than its infrastructure was built for. Friction between established residents and newcomers is visible. Whoever keeps order is overwhelmed by unfamiliar faces.'),
+  'Active armed conflict between revolt participants and security forces in contested districts. Civilians are avoiding specific streets. The watch has abandoned normal patrol patterns.': declaredSet(
+    'Active armed conflict between revolt participants and security forces in contested districts. Civilians are avoiding specific streets. The watch has abandoned normal patrol patterns.', ['watch'],
+    'Active armed conflict between revolt participants and security forces in contested districts. Civilians are avoiding specific streets. Normal patrol patterns have been abandoned.'),
+  'Street-level confrontations between insurgent supporters and the watch. Officially categorised as riot and disorder.': declaredSet(
+    'Street-level confrontations between insurgent supporters and the watch. Officially categorised as riot and disorder.', ['watch'],
+    'Street-level confrontations between insurgent supporters and those who keep order. Officially categorised as riot and disorder.'),
+  'Theft and petty fraud by new arrivals with no local ties and no established credit. The watch struggles to distinguish transients from residents.': declaredSet(
+    'Theft and petty fraud by new arrivals with no local ties and no established credit. The watch struggles to distinguish transients from residents.', ['watch'],
+    'Theft and petty fraud by new arrivals with no local ties and no established credit. Those who keep order struggle to distinguish transients from residents.'),
+  ' The garrison acknowledges the problem but focuses on the walls and gates. Interior policing is under-resourced.': declaredSet(
+    ' The garrison acknowledges the problem but focuses on the walls and gates. Interior policing is under-resourced.', ['walls'],
+    ' The garrison acknowledges the problem but focuses on the approaches. Interior policing is under-resourced.'),
+  " The settlement's gates and walls are checkpoints that smugglers work around. Bribing officials, using hidden routes, or moving shipments at shift changes.": declaredSet(
+    " The settlement's gates and walls are checkpoints that smugglers work around. Bribing officials, using hidden routes, or moving shipments at shift changes.", ['walls'],
+    " The settlement's gates are checkpoints that smugglers work around. Bribing officials, using hidden routes, or moving shipments at shift changes."),
+  'The watch is too thinly spread to maintain order.': declaredSet(
+    'The watch is too thinly spread to maintain order.', ['watch'],
+    'Enforcement is too thinly spread to maintain order.'),
+  "The merchant guild's private security force just detained someone, with no legal authority to do so. The watch is looking the other way.": declaredSet(
+    "The merchant guild's private security force just detained someone, with no legal authority to do so. The watch is looking the other way.", ['watch'],
+    "The merchant guild's private security force just detained someone, with no legal authority to do so. No one with the authority to stop it is trying."),
+  "The garrison chaplain and the commander are the same man. He's authorizing military action for reasons that sound theological.": declaredSet(
+    "The garrison chaplain and the commander are the same man. He's authorizing military action for reasons that sound theological.", ['garrison'],
+    "The settlement's chaplain also leads its armed men. He's authorizing military action for reasons that sound theological."),
+});

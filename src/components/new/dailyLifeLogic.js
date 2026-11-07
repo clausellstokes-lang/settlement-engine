@@ -1,17 +1,42 @@
 // dailyLifeLogic.js — Pure settlement-context extraction for DailyLifeTab.
+import { textOf } from '../../domain/facts/textOf.js';
 import { TIER_LABELS } from './design';
 import { computeEffectiveMagicPresence } from '../../generators/priorityHelpers.js';
+import { factsOf } from '../../domain/facts/factsOf.js';
 import {
   CULTURE_PROFILES,
   resolveCultureProfileKey,
 } from '../../domain/cultureProfiles.js';
+import { resolveDeclared, lineText } from '../../domain/facts/drawDeclared.js';
 
 function legacyCultureContext(culture) {
   const key = resolveCultureProfileKey(culture);
   if (key === 'mixed') {
     return 'Several local traditions remain visible in ordinary institutions, household obligations, and the built environment.';
   }
-  return CULTURE_PROFILES[key]?.socialTexture?.[0] || null;
+  return textOf(CULTURE_PROFILES[key]?.socialTexture?.[0]) || null; // R-C: a declared row gives back its text (CENSUS-2d)
+}
+
+/**
+ * THE DAILY LIFE OFFER LINE (CENSUS-2, the chair's ruling R10; ledger
+ * `docs/census/declarations/DAILY_LIFE_TAB.json`). The line names only what the place has —
+ * each named item is a declared line asking its one reader in `factsOf`: the market
+ * (`market`), the tavern (`institution: tavern`), the watch (`watch`) — and with none of the
+ * three it is "Ordinary life here in prose." alone. A place with all three reads the original
+ * wording byte for byte.
+ * @param {object} s the settlement record
+ * @param {boolean} enabled the saved-settlement variant ("Ordinary life…") or the unsaved one
+ * @returns {string}
+ */
+export function dailyLifeOfferLine(s, enabled) {
+  const facts = factsOf(s);
+  const named = [
+    ...(facts.market ? ['the market'] : []),
+    ...(facts.hasInstitution('tavern') ? ['the tavern'] : []),
+    ...(facts.defence.watch ? ['the watch'] : []),
+  ];
+  const tail = named.length ? `: dawn, ${named.join(', ')}.` : '.';
+  return enabled ? `Ordinary life here in prose${tail}` : `Save this settlement to write its ordinary life in prose${tail}`;
 }
 
 export function extractSettlementContext(s) {
@@ -121,7 +146,9 @@ export function extractSettlementContext(s) {
   const rawMagicScore = _magicPresence.score;
 
   const rawDefenseReadinessLabel = dp.readiness?.label || null;
-  const rawDefenseCtx  = DEFENSE_CONTEXT[rawDefenseReadinessLabel] || null;
+  // CENSUS-1e unit 2 (Appendix B item 23, T): the readiness cell resolves through the one rule
+  // against the settlement's facts (undeclared today: drawn as before, noted in the ledger).
+  const rawDefenseCtx  = lineText(resolveDeclared(DEFENSE_CONTEXT[rawDefenseReadinessLabel] ?? null, { facts: () => factsOf(s), poolId: `dailyLife:DEFENSE_CONTEXT.${rawDefenseReadinessLabel}`, surface: 'daily_life', crisisScoped: true }).line) || null;
 
   return {
     tier, tierLabel: TIER_LABELS[tier] || tier,
@@ -197,10 +224,17 @@ const ROUTE_CONTEXT = {
 };
 
 // ── Defense posture daily-life feel ──────────────────────────────────────────
+// CENSUS-2e unit 2 (ledger docs/census/declarations/DAILY_LIFE_CONTEXT.json; CENSUS-1e wired the
+// site): each cell declares what its text presumes, so the readiness label alone never prints a
+// wall, a garrison or a watch the record lacks. Every cell is the ledger's `{crisis-scoped}` pool
+// (the site passes the flag) and is sayable under a crisis (`crisis: any`) save the threat / unrest
+// denials. 'Defensible' presumed a palisade AND a militia, true in 0 of 50 Defensible births on a
+// 300-birth probe: reworded to its real presumption, the watch (R-W). No twin: `defenseCtx` prints
+// on no page (R-D2), so a refused cell reads null and nothing renders differently.
 const DEFENSE_CONTEXT = {
-  'Fortress':       'The walls are thick and the garrison is visible everywhere. Gates are checked twice: entering and leaving. Soldiers are a constant social presence; they drink in the better taverns and their officers live in the good houses. Safety is real but so is the feeling of being watched.',
-  'Well-Defended':  'The settlement has real walls and a professional watch. People feel reasonably secure, which shows in how freely they move after dark. The garrison is present but not intrusive. Guard posts at the gates are routine, not threatening.',
-  'Defensible':     'There are defenses (a palisade, a ditch, a part-time militia), but nobody would call this a fortress. The watch patrols the main streets at night. Most people feel safe enough, but they lock their doors and notice strangers.',
-  'Vulnerable':     'The settlement has minimal defenses. A determined raiding party could take it. People are aware of this and it shapes how they live. They know where to run, they keep their valuables hidden, they have arrangements with neighbours for emergencies. The watch exists mainly to deal with drunks.',
-  'Undefended':     'There are no walls, no garrison, no meaningful watch. The settlement is completely open. People have learned to live with this: some by forming informal neighbourhood watch arrangements, some by simply accepting that danger is a fact of life here. Strangers are watched carefully because there is no gate to watch them at.',
+  'Fortress':       { text: 'The walls are thick and the garrison is visible everywhere. Gates are checked twice: entering and leaving. Soldiers are a constant social presence; they drink in the better taverns and their officers live in the good houses. Safety is real but so is the feeling of being watched.', needs: ['walls', 'garrison', 'gate', 'institution: tavern'], excludes: ['crisis: threat'], crisis: ['any'] },
+  'Well-Defended':  { text: 'The settlement has real walls and a professional watch. People feel reasonably secure, which shows in how freely they move after dark. The garrison is present but not intrusive. Guard posts at the gates are routine, not threatening.', needs: ['walls', 'watch', 'garrison', 'gate'], excludes: ['crisis: threat', 'crisis: unrest'], crisis: ['any'] },
+  'Defensible':     { text: 'There are defenses, but nobody would call this a fortress. The watch patrols the main streets at night. Most people feel safe enough, but they lock their doors and notice strangers.', needs: ['watch'], excludes: ['crisis: threat'], crisis: ['any'] },
+  'Vulnerable':     { text: 'The settlement has minimal defenses. A determined raiding party could take it. People are aware of this and it shapes how they live. They know where to run, they keep their valuables hidden, they have arrangements with neighbours for emergencies. The watch exists mainly to deal with drunks.', needs: ['watch'], crisis: ['any'] },
+  'Undefended':     { text: 'There are no walls, no garrison, no meaningful watch. The settlement is completely open. People have learned to live with this: some by forming informal neighbourhood watch arrangements, some by simply accepting that danger is a fact of life here. Strangers are watched carefully because there is no gate to watch them at.', excludes: ['walls', 'garrison', 'watch', 'gate'], crisis: ['any'] },
 };

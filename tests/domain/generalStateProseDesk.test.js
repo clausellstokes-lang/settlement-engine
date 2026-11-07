@@ -129,7 +129,11 @@ const BLOCK_POOLS = Object.freeze({
  * than exempting it — an exemption is how a block quietly grows a dimension nobody answers.
  */
 // F10 WALLS-WORD (2026-11-04): DS-GEN-3 and DS-HK-1 carry wall variants and their twins.
-const DIMENSIONED = Object.freeze({ 'DS-GEN-6': 'deficit', 'DS-GEN-9': 'anchor', 'DS-GEN-3': 'walls', 'DS-HK-1': 'walls' });
+// census-2b item 2 (db3ed88c1): DS-GEN-17 GARRISONED v2 ("not only in stone") declares walls —
+// DS-GEN-17 [] -> [walls] at db3ed88c1 (measured: [] at its parent); its mount row declares it.
+const DIMENSIONED = Object.freeze({
+  'DS-GEN-6': 'deficit', 'DS-GEN-9': 'anchor', 'DS-GEN-3': 'walls', 'DS-HK-1': 'walls', 'DS-GEN-17': 'walls',
+});
 
 /** @param {string} id @returns {string[]} */
 const poolsOf = (id) => Object.keys(DOSSIER_STATE_PROSE_GENERAL[id].pools);
@@ -172,6 +176,13 @@ function expectSentence(line, where) {
 /**
  * The desk over one set of readings, BY POSITION.
  *
+ * ⚠ THE RECORD MUST HOLD WHAT THE READINGS CLAIM (census-2b item 2, db3ed88c1). The DS-GEN
+ * ledger declared its pools' presumptions (`terrain: desert`, `market`, `coast`, `river`,
+ * `famine` / `starving`, `institution: granary`, `institution: temple`), and the desk reads
+ * them off the RECORD it is handed (`factsAnswered(settlement)`), never off the readings. So an
+ * arm whose reading claims a fact hands a record that carries it too; the default stays the
+ * name-only stub. Measured: this file 8 red at db3ed88c1, 0 at its parent.
+ *
  * ⚠ IT MUST BE BY POSITION AND NOT A FLAT LIST, and the first cut of this file learned it
  * the hard way: `DS-GEN-13` resolves `NO-MARKET` on a reading that names no institutions,
  * so a flat count of "how many sentences came out" is one higher than the lens under test
@@ -180,8 +191,8 @@ function expectSentence(line, where) {
  * @param {object} readings
  * @returns {{health: string[], ground: string|null, market: string|null, institutions: string|null}}
  */
-function draw(readings) {
-  const prose = generalStateProse(TOWN, readings, { seed: 'aliveness', audience: 'dm' });
+function draw(readings, record = {}) {
+  const prose = generalStateProse({ ...TOWN, ...record }, readings, { seed: 'aliveness', audience: 'dm' });
   return {
     conflicts: prose.overview.conflicts.map((rung) => rung?.sentence ?? null),
     warnings: prose.overview.warnings.map((rung) => rung.sentence).filter(Boolean),
@@ -378,7 +389,9 @@ describe('DS-GEN-3 — ten lenses over one block, and three label traps', () => 
       'the famine pool was assumed to be spelled the way the producer spells it',
     );
     for (const label of labels) {
-      expect(draw({ foodSecurityLabel: label }).health, `${label} drew nothing`).toHaveLength(1);
+      // db3ed88c1: the famine pool declares `starving` · `famine`, read off the record's food band.
+      const record = { economicState: { foodSecurity: { label } } };
+      expect(draw({ foodSecurityLabel: label }, record).health, `${label} drew nothing`).toHaveLength(1);
     }
   });
 
@@ -439,7 +452,8 @@ describe('DS-GEN-12 / DS-GEN-13 / DS-GEN-17 — three total partitions', () => {
     expect([...reached].filter((k) => k === null), 'a live terrain reaches no family').toEqual([]);
     expect([...reached].sort()).toEqual(poolsOf('DS-GEN-12').sort());
     for (const terrain of TERRAINS) {
-      expectSentence(draw({ terrainType: terrain }).ground, terrain);
+      // db3ed88c1: three of the five families declare their terrain, read off the record.
+      expectSentence(draw({ terrainType: terrain }, { config: { terrainType: terrain } }).ground, terrain);
     }
   });
 
@@ -454,7 +468,9 @@ describe('DS-GEN-12 / DS-GEN-13 / DS-GEN-17 — three total partitions', () => {
     // "ruined reads NO-MARKET" cannot distinguish: the SAME row reads MARKET-OPEN while it
     // stands and NO-MARKET once stamped. A one-sided assertion here would pass just as
     // happily if `marketPoolKey` had been broken into always answering NO-MARKET.
-    const bazaar = (extra) => [{ name: 'Grand bazaar', ...extra }];
+    // CENSUS-1b unit A (d): re-keyed to the market home, which reads the catalogue's market
+    // tag (an authored 'Grand bazaar' carries none), so the falsifier's row is a catalogue market.
+    const bazaar = (extra) => [{ name: 'Weekly market', ...extra }];
     expect(marketPoolKey({ institutions: bazaar({}), tradeRouteAccess: 'road' }))
       .toBe('MARKET-OPEN');
     // Both ruin spellings the estate stamps, each against that same standing reading.
@@ -467,7 +483,7 @@ describe('DS-GEN-12 / DS-GEN-13 / DS-GEN-17 — three total partitions', () => {
     expect(marketPoolKey({ institutions: bazaar({ status: 'ruined' }), isEntrepot: true, tradeRouteAccess: 'road' }))
       .toBe('NO-MARKET');
     // A live row alongside a ruined one still carries the town — the filter is per ROW.
-    expect(marketPoolKey({ institutions: [...bazaar({ status: 'ruined' }), { name: 'Weekly market' }], tradeRouteAccess: 'road' }))
+    expect(marketPoolKey({ institutions: [...bazaar({ status: 'ruined' }), { name: 'Market square' }], tradeRouteAccess: 'road' }))
       .toBe('MARKET-OPEN');
   });
 
@@ -500,9 +516,14 @@ describe('DS-GEN-12 / DS-GEN-13 / DS-GEN-17 — three total partitions', () => {
     for (const route of ['road', 'river', 'port', 'crossroads', 'desert_road']) {
       expect(marketPoolKey({ institutions: stalls, tradeRouteAccess: route }), route).toBe('MARKET-OPEN');
     }
-    // The name class is the engine's own, not a category test.
-    for (const name of ['Weekly market', 'Grand bazaar', 'Caravan masters\' exchange', 'The shambles', 'Market stalls']) {
+    // CENSUS-1b unit A (d), the chair's ruling: the market is THE MARKET HOME's (the catalogue's
+    // market tag on the live roster), not the retired name class. A catalogue market (and an
+    // annual fair) is one; a name that merely contains a market word is not.
+    for (const name of ['Weekly market', 'Market square', 'Annual fair']) {
       expect(marketPoolKey({ institutions: [{ name }], tradeRouteAccess: 'road' }), name).toBe('MARKET-OPEN');
+    }
+    for (const name of ['Black market', 'Stock exchange', 'Grand bazaar', 'The shambles']) {
+      expect(marketPoolKey({ institutions: [{ name }], tradeRouteAccess: 'road' }), name).toBe('NO-MARKET');
     }
     const reached = new Set([
       marketPoolKey({ institutions: [], tradeRouteAccess: 'road' }),
@@ -514,7 +535,11 @@ describe('DS-GEN-12 / DS-GEN-13 / DS-GEN-17 — three total partitions', () => {
     for (const state of [
       { institutions: [] }, { institutions: stalls, isEntrepot: true },
       { institutions: stalls, tradeRouteAccess: 'isolated' }, { institutions: stalls, tradeRouteAccess: 'road' },
-    ]) expectSentence(draw(state).market, JSON.stringify(state));
+    ]) {
+      // db3ed88c1: the three market pools declare `market`, read off the record's live roster.
+      const record = { institutions: state.institutions, config: { tradeRouteAccess: state.tradeRouteAccess } };
+      expectSentence(draw(state, record).market, JSON.stringify(state));
+    }
   });
 
   it('THE ROSTER: five keys in most-constrained order, and BARE is the pure else-arm', () => {
@@ -531,7 +556,10 @@ describe('DS-GEN-12 / DS-GEN-13 / DS-GEN-17 — three total partitions', () => {
     ];
     for (const [inst, key] of cases) {
       expect(institutionsPoolKey(inst), JSON.stringify(inst)).toBe(key);
-      expectSentence(draw({ inst }).institutions, JSON.stringify(inst));
+      // db3ed88c1: both PROVISIONED lines declare `institution: granary`, read off the record's
+      // roster, so the granary reading hands a roster that holds one.
+      const record = inst.hasGranary === true ? { institutions: [{ name: 'Granary' }] } : {};
+      expectSentence(draw({ inst }, record).institutions, JSON.stringify(inst));
     }
     // ORDER IS THE ARGUMENT: a roster satisfying every antecedent at once resolves to the
     // most constrained one, and PROVISIONED — which a granary alone would win — does not
@@ -729,7 +757,8 @@ describe('DS-GEN-5 — the live companion, and the suppression that is not optio
     ]);
     expect([...reached].sort()).toEqual(poolsOf('DS-GEN-5').sort());
     for (const route of [...Object.keys(ROUTE_TO_SCENE), 'road', 'mountain_road', 'desert_road', '']) {
-      expectSentence(draw({ tradeRouteAccess: route }).situation, route || '(no route)');
+      // db3ed88c1: `port` declares `coast` and `river` declares `river`, read off the record's route.
+      expectSentence(draw({ tradeRouteAccess: route }, { config: { tradeRouteAccess: route } }).situation, route || '(no route)');
     }
     // THE GLOSS TRAP: three pool keys carry a parenthetical, so the scene word alone is not
     // a key. Anchored on `port`, which IS both.
@@ -805,7 +834,8 @@ describe('DS-GEN-6 — the route, the tier overlay, and the demoted deficit dime
     const seen = new Set();
     for (const route of ['crossroads', 'river', 'port', 'isolated', 'road']) {
       for (const foodBalance of [DEFICIT, NO_DEFICIT]) {
-        const lines = draw({ tradeRouteAccess: route, tier: 'town', foodBalance }).origin;
+        // db3ed88c1: the `river` route pool declares `river`, read off the record's route.
+        const lines = draw({ tradeRouteAccess: route, tier: 'town', foodBalance }, { config: { tradeRouteAccess: route } }).origin;
         expect(lines.length, `${route} ${foodBalance === DEFICIT ? 'deficit' : 'fed'}`).toBe(2);
         for (const line of lines) expectSentence(line, route);
         seen.add(originRoutePoolKey(route));
@@ -965,7 +995,10 @@ describe('DS-GEN-7 — the record disagreeing with itself, and five pools the pr
     expect(coherencePoolKey(null)).toBeNull();
     // Every pool, including the two list pools, draws a real sentence.
     for (const [t, tab] of pairs) {
-      const lines = draw({ coherenceNotes: [NOTE(t, tab)], govFaction: 'The Town Council' }).warnings;
+      // db3ed88c1: the temple-economy pool's lines declare `institution: temple` (or `market`), so
+      // the record that wrote that note carries its temple.
+      const record = `${t}|${tab}` === 'power_economic|power' ? { institutions: [{ name: 'Temple' }] } : {};
+      const lines = draw({ coherenceNotes: [NOTE(t, tab)], govFaction: 'The Town Council' }, record).warnings;
       expect(lines, `${t}|${tab}`).toHaveLength(1);
       expectSentence(lines[0], `${t}|${tab}`);
     }

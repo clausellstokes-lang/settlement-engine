@@ -30969,7 +30969,8 @@
         {
           "_note": "⛔ THE PROOF THAT THE DERIVING HALF DRAWS: npcGenerator imports the ambient helpers, so generateRelationships's 62 draws come off the step's stream. NOT EDITED — the seam is in the step, not in the generator.",
           "path": "src/generators/npcGenerator.js",
-          "symbol": "import { random as _rng, pick as ctxPick } from '../kernel/rngContext.js';"
+          "symbol": "import { random as _rng, pick as ctxPick } from '../kernel/rngContext.js';",
+          "retiredBy": "§934.105 (rule 39 addendum, judgment 269; §731.3's idiom): census-1h R-AT (0c445be43) REWROTE this line in place — the import gains getActiveRng so a resolution's tie-break key carries the settlement's identity; the ambient helpers are still imported, so the note's proof stands; retired by the rewriting lane, never re-sealed (LANDING-R2, the rung-2 landing)"
         },
         {
           "_note": "THE STEP. It stays ONE registration; the seam is internal.",
@@ -30994,7 +30995,8 @@
         {
           "_note": "CHOOSER 2 — takes the roster AND DRAWS 62 TIMES. An argument is not a proof of purity, which is the sentence version 1 needed and did not have.",
           "path": "src/generators/npcGenerator.js",
-          "symbol": "export const generateRelationships = (npcs, config = {}, institutions = []) => {"
+          "symbol": "export const generateRelationships = (npcs, config = {}, institutions = []) => {",
+          "retiredBy": "§934.105 (rule 39 addendum, judgment 269; §731.3's idiom): census-1f unit 1a (d422a8dbd, Appendix B site 19) REWROTE this line in place — generateRelationships gains its fourth parameter `settled` so the tie draw resolves through drawDeclared; retired by the rewriting lane, never re-sealed (LANDING-R2, the rung-2 landing)"
         },
         {
           "_note": "CHOOSER 3 — takes both and draws twice. RE-ANCHORED 2026-10-31 (GS-2 one faction set, ODQ §934.101, lane G2): the chooser now takes the power factions, not the relationships, and draws nothing.",
@@ -33486,7 +33488,8 @@
         },
         {
           "path": "src/generators/power/rulingStructure.js",
-          "symbol": "export const renormalizeFactionPower"
+          "symbol": "export const renormalizeFactionPower",
+          "retiredBy": "§934.105 (the chair's ruling of 2026-11-07 06:1x UTC: the module ceilings split by verbatim moves; rule 39 addendum, judgment 269; §731.3's idiom): LANDING-R2's split e366b4beb MOVED renormalizeFactionPower byte for byte to src/generators/power/renormalizeFactionPower.js, rulingStructure.js re-exporting it — the landed pin is retired by the moving act, never re-sealed"
         }
       ],
       "retiredSymbols": [],
@@ -35066,7 +35069,8 @@
           {
             "_note": "THE TOTALITY WRITER rebalance-power DECLARES as its fulfil writer (design §12.8; ARCH §5). ⚠ MEASURED AND LOAD-BEARING: IT MUTATES IN PLACE — `factions[s.i].power = s.floor` — and returns the SAME array reference; largest-remainder to an exact sum of 100 with ties broken by current order; it returns the argument unchanged when the roster is empty or every power is <= 0. This packet CALLS it nowhere (EM-C3 does); the mutation is recorded here because a later caller that assumed purity would corrupt a roster. Proven present: grep -c -> 1.",
             "path": "src/generators/power/rulingStructure.js",
-            "symbol": "export const renormalizeFactionPower"
+            "symbol": "export const renormalizeFactionPower",
+            "retiredBy": "§934.105 (the chair's ruling of 2026-11-07 06:1x UTC: the module ceilings split by verbatim moves; rule 39 addendum, judgment 269; §731.3's idiom): LANDING-R2's split e366b4beb MOVED renormalizeFactionPower byte for byte to src/generators/power/renormalizeFactionPower.js, rulingStructure.js re-exporting it — the landed pin is retired by the moving act, never re-sealed"
           },
           {
             "_note": "⛔ NAMED BECAUSE IT EXISTS AND THE FINDING IS ACCEPTED (the chair's ruling 7) — AND IT IS REFUTED AS THE PREREQUISITE RULE'S SOURCE. MEASURED: (institutions, tier, _magicPriority) -> string. Its entire body is a keyword ladder over institution names returning a NARRATIVE SENTENCE through pickRandom (e.g. \"The great cathedral's spire is the tallest thing for miles.\"). No boolean, no violation list, no verdict — and it CONSUMES A DRAW. EM-B1a calls it nowhere; the row exists so EM-C3's compiler finds the correction in the manifest rather than re-discovering it. Proven present: grep -c -> 1.",
@@ -41102,8 +41106,8 @@
         },
         {
           "path": "src/generators/stressNarrative.js",
-          "symbol": "export function renderStressSummary(type, name, roll, direction) {",
-          "_note": "SIGNATURE EXTENDED by WIRING-W0 (343bd4eec, R-W7 e, 2026-11-07): a fourth parameter `direction`, the stressor's own `stress[].direction`, read at the draw and at the re-render; the row re-cited to the live declaration by the chair at the integration merge (a landed packet's required symbol moved by a later authorized lane, not a retirement). As landed: The F8 re-render's producer, UNCHANGED: only the ARGUMENT the assembly step passes it changes. Its `name` parameter is the settlement name the summary embeds, which is why a held name must reach it. count 1."
+          "symbol": "export function renderStressSummary(type, name, roll, direction, facts = null) {",
+          "_note": "SIGNATURE EXTENDED by WIRING-W0 (343bd4eec, R-W7 e, 2026-11-07): a fourth parameter `direction`, the stressor's own `stress[].direction`, read at the draw and at the re-render; the row re-cited to the live declaration by the chair at the integration merge; EXTENDED AGAIN at MERGE-R2 (2026-11-07, the chair's ruling 1): census-2c unit 1a (6dda5f72c, R-P 1) gave the same line a fourth parameter `facts` on the rung-2 line (where the pin was retired by that lane), and the merge composes both \u2014 `direction` fourth, `facts` fifth \u2014 so the row is re-cited to the composed live declaration rather than retired (a landed packet's required symbol moved by a later authorized lane, not a retirement). As landed: The F8 re-render's producer, UNCHANGED: only the ARGUMENT the assembly step passes it changes. Its `name` parameter is the settlement name the summary embeds, which is why a held name must reach it. count 1."
         },
         {
           "path": "src/domain/edit/recordRegister.js",
@@ -41725,6 +41729,7 @@
         {
           "path": "src/generators/power/rulingStructure.js",
           "symbol": "export const renormalizeFactionPower",
+          "retiredBy": "§934.105 (the chair's ruling of 2026-11-07 06:1x UTC: the module ceilings split by verbatim moves; rule 39 addendum, judgment 269; §731.3's idiom): LANDING-R2's split e366b4beb MOVED renormalizeFactionPower byte for byte to src/generators/power/renormalizeFactionPower.js, rulingStructure.js re-exporting it — the landed pin is retired by the moving act, never re-sealed",
           "_note": "THE TOTALITY RULE'S fulfil WRITER (design §12.8; the charter's EM-C3 row). ⚠ IT MUTATES IN PLACE - factions[s.i].power = s.floor - and returns the SAME reference, which is why the rule renormalises a CLONE and why the rule reads its TARGET from the clone's own sum rather than spelling a literal 100 (the tuning register's P2 arm holds a new file at zero named numeric constants). It returns the argument unchanged on an empty or all-zero roster, which the rule relies on for silence. ⛔ INJECTED, never imported, for the boundary reason above. count 1."
         },
         {

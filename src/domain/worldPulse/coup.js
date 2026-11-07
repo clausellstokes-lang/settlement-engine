@@ -175,7 +175,7 @@ export function coupVerdictOutcomes({ resolved = [], snapshot, rng, tick = 0, wa
         ruleId: 'coup_verdict_hold',
         applyMode: 'auto',
         severity: clamp(0.3, 0.7, severity * 0.7),
-        headline: `${incumbentName} crushes the coup in ${settlementName}`,
+        headline: `${verdict.incumbent?.name || 'The ruling power'} crushes the coup in ${settlementName}`,
         summary: `The conspiracy broke against the seat. Purges and loyalty tests follow; the plotters' names are currency now.`,
         reasons: [
           verdict.reason,

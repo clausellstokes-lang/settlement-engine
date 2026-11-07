@@ -34,19 +34,24 @@
  *
  * @enforced-by tests/generators/arrivalScene.test.js
  */
-import { pickRandom } from '../helpers.js';
+import { pickRandom } from '../helpers.js'; import { getActiveRng } from '../../kernel/rngContext.js'; // R-AT (CENSUS-1i unit 5): one line, so no cited line moves
+import { textOf } from '../../domain/facts/textOf.js';
 import { resolvePrimaryStress } from '../stressPriority.js';
 import { sentenceCase } from '../narrativeProse.js';
 import { checkInstCompat } from '../structuralValidator.js';
 import { resolveGenerationWorldLaw } from '../generationContext.js';
 import { nativeSemanticNames } from '../../domain/content/customContentSemanticAuthority.js';
-import { liveInstitutions } from '../../domain/institutions/institutionRoster.js'; import { defenseWordsFindings } from '../../domain/coherence/defenseWordsFindings.js'; // F1: one line
+import { defenseWordsFindings } from '../../domain/coherence/defenseWordsFindings.js'; // F1: one line
 import { CULTURE_PROFILES, resolveCultureProfileKey } from '../../data/cultureProfiles.js';
 import { speakTierNoun } from '../../domain/display/stateProse/stateProseKernel.js';
 import { tierNounFor } from '../../domain/display/stateProse/weaveBlock.js';
-import { ARRIVAL_SCENES, STRESS_DESCS } from '../../data/narrativeData.js';
+import { marketOf } from '../../domain/facts/market.js';
+import { factsOf } from '../../domain/facts/factsOf.js';
+import { drawDeclared } from '../../domain/facts/drawDeclared.js';
+import { declarationAdmits, declarationOf } from '../../domain/facts/factVocabulary.js';
+import { ARRIVAL_SCENES, ARRIVAL_SCENES_CRISIS_SCOPED, STRESS_DESCS } from '../../data/narrativeData.js';
 import {
-  ARRIVAL_MEMORIES, ARRIVAL_PEOPLE, ARRIVAL_SENSES, ARRIVAL_TENSIONS,
+  ARRIVAL_CRISIS_SCOPED, ARRIVAL_MEMORIES, ARRIVAL_PEOPLE, ARRIVAL_SENSES, ARRIVAL_TENSIONS,
 } from '../../data/arrivalProse.js';
 
 /**
@@ -68,6 +73,7 @@ export const ROUTE_TO_SCENE = Object.freeze({
  * the SIGHT asks the same question the same way: the engine's market NAME class over the live roster. Mirrored
  * rather than imported (a generator does not reach into the display corpus) and pinned equal by the arrival test.
  */
+/** Retired as the market reader (CENSUS-1b unit A (d)); kept exported, unread (rule 36). */
 export const MARKET_INSTITUTION_NAME = /\b(market|bazaar|exchange|shambles|stalls)\b/i;
 /** The words a SIGHT line uses to say there is a market. */
 const MARKET_WORD = /\b(?:market\w*|fairs?|bazaars?|stalls?|agora)\b/i;
@@ -75,12 +81,16 @@ const MARKET_WORD = /\b(?:market\w*|fairs?|bazaars?|stalls?|agora)\b/i;
 const CATCH_RACK_WORD = /\bracks of drying fish\b/i;
 
 /**
- * Whether the live roster carries a market-class institution, by DS-GEN-13's rule.
+ * Whether the live roster carries a market — THE MARKET HOME's answer (`facts/market.js`,
+ * CENSUS-1 fact 5). CENSUS-1b unit A (d), the chair's ruling: this predicate and DS-GEN-13's
+ * `marketPoolKey` are homed TOGETHER, so chair ruling T1-12's equality holds because both read
+ * the home (tests/generators/arrivalScene.test.js, re-keyed to the home). The retired name
+ * regex (`MARKET_INSTITUTION_NAME`) counted a black market and a stock exchange.
  * @param {unknown} institutions
  * @returns {boolean}
  */
 export function holdsMarket(institutions) {
-  return liveInstitutions({ institutions }).some((row) => MARKET_INSTITUTION_NAME.test(String(row?.name ?? '')));
+  return marketOf({ institutions });
 }
 
 /** Severities that leave a visible trace; a minor event does not mark a settlement. */
@@ -165,7 +175,7 @@ export function chooseSense(names, tradeWords, magicReal) {
  * The CLOSING key: a printed danger first, then a memory, then poverty or plenty. Player-visible facts only.
  * @param {any} settlement
  * @param {boolean} magicReal
- * @returns {{ pool: ReadonlyArray<(n: string) => string> } | null}
+ * @returns {{ pool: ReadonlyArray<import('../../data/arrivalProse.js').ArrivalLine> } | null}
  */
 export function chooseClosing(settlement, magicReal) {
   const safety = lower(settlement.economicState?.safetyProfile?.safetyLabel);
@@ -194,6 +204,37 @@ export function chooseClosing(settlement, magicReal) {
 }
 
 /**
+ * THE ⚠ REDRAW-ONCE, DECLARED (CENSUS-1f unit 2; `docs/DESIGN_POOL_CENSUS.md` Appendix B, the arrival scene). A
+ * beat draws its line exactly as before (one `pickRandom` over the whole pool); only where that line is REFUSED —
+ * its declaration contradicted by the record (`declarationAdmits`), or the old market / drying-rack agreement
+ * failing — does it redraw ONCE from the pool's lines that pass both, and an empty clean set leaves the beat out.
+ * The extra draw is on the scene's own substream ('arrival-scene', `assembleSettlement.js`), so it moves nothing
+ * outside this paragraph, and a birth whose first draws are all admitted draws exactly what it drew. The resolved
+ * line is noted in the presumption ledger through `drawDeclared` (its `draw` is this rule).
+ * @param {ReadonlyArray<any>} pool
+ * `cleanOnly`: the caller's first line was already refused (the materialized built detail that names a market the
+ * roster lacks), so the one draw is the redraw from the clean lines, as before.
+ * @param {{ poolId: string, scoped: boolean, facts: () => object, speaks?: (line: any) => boolean, cleanOnly?: boolean }} opts
+ * @returns {any}
+ */
+function drawAdmitted(pool, { poolId, scoped, facts, speaks = () => true, cleanOnly = false }) {
+  const ok = (/** @type {any} */ line) => speaks(line)
+    && declarationAdmits(declarationOf(line), /** @type {any} */ (facts()), { crisisScoped: scoped }).admitted;
+  return drawDeclared(pool, {
+    draw: (p) => {
+      const first = cleanOnly ? null : pickRandom(p);
+      if (!cleanOnly && (first == null || ok(first))) return first;
+      const clean = p.filter(ok);
+      return clean.length ? pickRandom(clean) : null;
+    },
+    facts, poolId, key: `${getActiveRng()?.seed ?? ''}::${poolId}`, surface: 'overview', drawKind: 'R', crisisScoped: scoped, // R-AT (CENSUS-1i unit 5): the settlement's identity
+  }).line;
+}
+
+/** @param {Readonly<Record<string, unknown>>} table @param {unknown} pool @returns {string | undefined} */
+const keyOfPool = (table, pool) => Object.keys(table).find((k) => table[k] === pool);
+
+/**
  * The arrival scene, beat by beat. Same settlement + same stream ⇒ same paragraph.
  * @param {any} settlement
  * @returns {string | null}
@@ -205,6 +246,9 @@ export function composeArrivalScene(settlement) {
     .map(lower)
     .filter((n) => !ABSENT_PREFIXES.some((prefix) => n.startsWith(prefix)));
   const magicReal = resolveGenerationWorldLaw(null, config)?.magicEnabled === true;
+  /** @type {object | undefined} */ let held;
+  const facts = () => (held ??= factsOf(settlement)); // CENSUS-1f: read once, only when a drawn line declares
+  const sensesScoped = new Set(ARRIVAL_CRISIS_SCOPED.ARRIVAL_SENSES);
 
   // HOOK: the stress vignette, else the route scene. A market opening needs a market.
   const stresses = (stress ? (Array.isArray(stress) ? stress : [stress]) : []).map((s) => s?.type);
@@ -218,11 +262,11 @@ export function composeArrivalScene(settlement) {
   // A stress vignette names only structures the settlement holds; the structure-free vignettes every stress
   // carries are the floor (pinned by the arrival test), so the filter never empties the pool.
   const vignettes = underStress
-    ? STRESS_DESCS[primaryStress].filter((line) => unheldClaims(line(name), names).length === 0 && defenseWordsFindings({ institutions }, line(name)).length === 0) // F1: and no force the record lacks
+    ? STRESS_DESCS[primaryStress].filter((line) => unheldClaims(textOf(line)(name), names).length === 0 && defenseWordsFindings({ institutions }, textOf(line)(name)).length === 0) // F1: and no force the record lacks; R-C: a declared row gives back its template (CENSUS-2d)
     : [];
-  const hookTemplate = underStress
-    ? pickRandom(vignettes.length ? vignettes : STRESS_DESCS[primaryStress])
-    : pickRandom(ARRIVAL_SCENES[sceneKey]);
+  const hookTemplate = textOf(underStress
+    ? drawAdmitted(vignettes.length ? vignettes : STRESS_DESCS[primaryStress], { poolId: `STRESS_DESCS.${primaryStress}`, scoped: false, facts })
+    : drawAdmitted(ARRIVAL_SCENES[sceneKey], { poolId: `ARRIVAL_SCENES.${sceneKey}`, scoped: ARRIVAL_SCENES_CRISIS_SCOPED.includes(sceneKey), facts })); // R-C; CENSUS-1f: the redraw-once, declared
   // SIZE ruling 2 (ODQ §934.104): the vignettes and route scenes were written with 'town' for a place of any size,
   // so the drawn hook speaks the settlement's own tier noun through the dossier kernel's helper, with its kept
   // phrases ("at the edge of town"). Identity for a town; it draws nothing, so no later pick moves.
@@ -243,13 +287,13 @@ export function composeArrivalScene(settlement) {
   /**
    * One beat's line from a pool of name-templates, redrawn once from the lines that agree where the first draw
    * names a market the roster lacks; null when no line of the pool agrees.
-   * @param {ReadonlyArray<(n: string) => string>} pool
+   * A row may carry its declaration (`{ text, needs?, excludes?, crisis? }`, R-C): read through `textOf`, byte-identical;
+   * CENSUS-1c's wiring enforces it.
+   * @param {ReadonlyArray<import('../../data/arrivalProse.js').ArrivalLine>} pool
    */
-  const agreeingLine = (pool) => {
-    const first = pickRandom(pool)(name);
-    if (speaks(first)) return first;
-    const clean = pool.filter((line) => speaks(line(name)));
-    return clean.length ? pickRandom(clean)(name) : null;
+  const agreeingLine = (pool, /** @type {string} */ poolId, /** @type {boolean} */ scoped) => {
+    const line = drawAdmitted(pool, { poolId, scoped, facts, speaks: (l) => speaks(textOf(l)(name)) });
+    return line == null ? null : textOf(line)(name);
   };
   // SIGHT: a landmark the native institutions imply, else the culture's built detail.
   let sight = null;
@@ -260,13 +304,13 @@ export function composeArrivalScene(settlement) {
       const materialized = typeof culturalIdentity?.architecturalDetail === 'string'
         ? culturalIdentity.architecturalDetail.trim()
         : '';
-      const profile = CULTURE_PROFILES[resolveCultureProfileKey(config.culture || 'germanic')];
-      let detail = materialized
-        || (profile?.architecturalDetails?.length ? pickRandom(profile.architecturalDetails) : '');
-      if (detail && !speaks(detail)) {
-        const clean = (profile?.architecturalDetails || []).filter(speaks);
-        detail = clean.length ? pickRandom(clean) : '';
-      }
+      const profileKey = resolveCultureProfileKey(config.culture || 'germanic');
+      const profile = CULTURE_PROFILES[profileKey];
+      const details = profile?.architecturalDetails || [];
+      const drawnDetail = (!materialized || !speaks(materialized)) && details.length
+        ? drawAdmitted(details, { poolId: `CULTURE_PROFILES.${profileKey}.architecturalDetails`, scoped: false, facts, speaks: (d) => speaks(textOf(d)), cleanOnly: Boolean(materialized) })
+        : null;
+      const detail = materialized && speaks(materialized) ? materialized : (drawnDetail == null ? '' : textOf(drawnDetail)); // R-C (CENSUS-2d); CENSUS-1f: the redraw-once, declared
       if (detail) sight = `${sentenceCase(detail)}.`;
     }
   }
@@ -279,15 +323,24 @@ export function composeArrivalScene(settlement) {
   ].map(lower);
   const chosen = chooseSense(names, tradeWords, magicReal);
   const sensePool = chosen ? (chosen.dominant ? chosen.sense.dominant : chosen.sense.lines) : null;
-  const senseLine = sensePool?.length ? agreeingLine(sensePool) : null;
+  const senseField = chosen?.dominant ? 'dominant' : 'lines';
+  const senseLine = sensePool?.length && chosen ? agreeingLine(sensePool, `ARRIVAL_SENSES.${chosen.sense.key}.${senseField}`, sensesScoped.has(`${chosen.sense.key}.${senseField}`)) : null;
 
   // PEOPLE: the culture, shown.
-  const peoplePool = ARRIVAL_PEOPLE[resolveCultureProfileKey(config.culture || 'germanic')] || ARRIVAL_PEOPLE.mixed;
-  const peopleLine = peoplePool?.length ? agreeingLine(peoplePool) : null;
+  const peopleKey = ARRIVAL_PEOPLE[resolveCultureProfileKey(config.culture || 'germanic')] ? resolveCultureProfileKey(config.culture || 'germanic') : 'mixed';
+  const peoplePool = ARRIVAL_PEOPLE[peopleKey];
+  const peopleLine = peoplePool?.length ? agreeingLine(peoplePool, `ARRIVAL_PEOPLE.${peopleKey}`, ARRIVAL_CRISIS_SCOPED.ARRIVAL_PEOPLE.includes(peopleKey)) : null;
 
   // CLOSING: one more visible truth, none under a vignette.
   const closing = underStress ? null : chooseClosing(settlement, magicReal);
-  const closingLine = closing ? pickRandom(closing.pool)(name) : null;
+  const tensionKey = closing ? keyOfPool(ARRIVAL_TENSIONS, closing.pool) : undefined;
+  const memoryKey = closing && !tensionKey ? keyOfPool(ARRIVAL_MEMORIES, closing.pool) : undefined;
+  const closingPick = closing ? drawAdmitted(closing.pool, {
+    poolId: tensionKey ? `ARRIVAL_TENSIONS.${tensionKey}` : `ARRIVAL_MEMORIES.${memoryKey}`,
+    scoped: tensionKey ? ARRIVAL_CRISIS_SCOPED.ARRIVAL_TENSIONS.includes(tensionKey) : ARRIVAL_CRISIS_SCOPED.ARRIVAL_MEMORIES.includes(String(memoryKey)),
+    facts,
+  }) : null;
+  const closingLine = closingPick == null ? null : textOf(closingPick)(name); // CENSUS-1f: the redraw-once, declared
 
   return [hook, sight, senseLine, peopleLine, closingLine].filter(Boolean).join(' ');
 }

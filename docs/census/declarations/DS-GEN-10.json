@@ -1,0 +1,217 @@
+{
+  "poolId": "DS-GEN-10",
+  "source": "src/data/dossierStateProse/general.generated.js (annex docs/content/RECEIPT_POOLS_DOSSIER_STATE.md)",
+  "drawKind": "K",
+  "drawSite": "UNMOUNTED (dossierMounts.UNMOUNTED_BLOCKS); would draw readStateProse → eligibleVariants → drawVariant per PDF chapter",
+  "pools": [
+    {
+      "pool": "PRINT-NATIVE CHAPTER OPENERS: overview",
+      "keyGuarantees": [
+        "the overview chapter is printed"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour: a chapter opener presumes nothing.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "What follows is {settlement} as it was surveyed, and where a thing has been re-judged since, the page says so.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "{settlement}, described from the outside in.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:3",
+          "text": "This is the town as {settlement} would describe itself to somebody staying.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "PRINT-NATIVE CHAPTER OPENERS: economics",
+      "keyGuarantees": [
+        "the economics chapter is printed"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Not scoped (no calm); line 3 presumes a market.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "What {settlement} earns, what it eats, and what it owes, in that order.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "{settlement}'s year, as the books have it.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:3",
+          "text": "The market at {settlement} and what stands behind it.",
+          "needs": [
+            "market"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "PRINT-NATIVE CHAPTER OPENERS: defense",
+      "keyGuarantees": [
+        "the defense chapter is printed"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Not scoped (no calm); line 2 presumes walls.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "What {settlement} can field, hold, and survive.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "{settlement}'s walls and what they are actually for.",
+          "needs": [
+            "walls"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "vid:3",
+          "text": "What {settlement} does when something comes.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "PRINT-NATIVE CHAPTER OPENERS: viability",
+      "keyGuarantees": [
+        "the viability chapter is printed"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour: a chapter opener presumes nothing.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "Whether {settlement} works, and on what terms.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "What {settlement} depends on, and what would happen without it.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:3",
+          "text": "The arithmetic underneath {settlement}.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "PRINT-NATIVE CHAPTER OPENERS: power",
+      "keyGuarantees": [
+        "the power chapter is printed"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour: a chapter opener presumes nothing.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "Who decides at {settlement}, and who has to be consulted first.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "{settlement}'s hall, and the rooms that matter more than the hall.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:3",
+          "text": "Where authority in {settlement} actually sits.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    }
+  ]
+}

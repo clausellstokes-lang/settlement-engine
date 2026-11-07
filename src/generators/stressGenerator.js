@@ -10,7 +10,7 @@ import { random as _rng } from '../kernel/rngContext.js';
 import {tierAtLeast, getTradeRouteFeatures} from './helpers.js';
 import { rollStressSummary, renderStressSummary } from './stressNarrative.js';
 
-import {STRESS_TYPE_MAP} from '../data/stressTypes.js';
+import {STRESS_TYPE_MAP} from '../data/stressTypes.js'; import { hasMarketInstitution } from '../domain/facts/market.js'; // MERGE-R2: one line, so no cited line moves
 import { MIGRATION_DIRECTION_AT_BIRTH } from '../domain/migrationDirection.js';
 import {
   nativeSemanticNames,
@@ -62,6 +62,9 @@ export const buildStressEntry = (settlementName, stressType, stressData) => {
     crisisHook:    stressData.crisisHook,
     viabilityNote: (direction && stressData.viabilityNoteByDirection?.[direction]) || stressData.viabilityNote,
     historyColour: stressData.historyColour,
+    // MERGE-R2 (the chair's ruling 1, R-W7 e): F13's second write of `direction` (the catalog's
+    // influx | exodus) is retired; W0's field above is the one fact, and F13's reader
+    // (domain/crisis/migrationDirection.js) reads it.
   };
 };
 
@@ -114,7 +117,7 @@ export const buildStressContext = (stressType, tier, config, institutions) => {
   const hasWalls    = instNames.some(n => n.includes('wall')    || n.includes('citadel') || n.includes('palisade'));
   const hasMilitary = instNames.some(n => n.includes('garrison')|| n.includes('militia') || n.includes('watch'));
   const hasGranary  = instNames.some(n => n.includes('granary') || n.includes('granar'));
-  const hasMarket   = instNames.some(n => n.includes('market')  || n.includes('fair'));
+  const hasMarket   = hasMarketInstitution(institutions); // CENSUS-1 fact 5: the market home
   const hasChurch   = instNames.some(n => n.includes('church')  || n.includes('temple') ||
                                           n.includes('cathedral')|| n.includes('monastery'));
   const hasHealer   = instNames.some(n => n.includes('healer')  || n.includes('physician') || n.includes('hospital'));

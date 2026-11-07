@@ -1,0 +1,77 @@
+{
+  "id": "viability.generateEconomicViability",
+  "source": "src/generators/economy/viability.js :: generateEconomicViability (trade-dependency issue/warning lines)",
+  "drawKind": "T",
+  "pool": {
+    "declares": [],
+    "crisisScoped": true,
+    "colour": false,
+    "notes": "isSieged = stressTypes under_siege OR an institution named 'war council'|'rationing' (private: a name asserts a siege).",
+    "needs": [],
+    "excludes": []
+  },
+  "rows": [
+    {
+      "id": "viability.generateEconomicViability::siege.title",
+      "text": "Siege: Supply Chain Disruption",
+      "needs": [],
+      "excludes": [],
+      "crisis": [
+        "under_siege"
+      ],
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "viability.generateEconomicViability::siege.desc",
+      "text": "${n} institution(s) critically impaired by siege: ${names}.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [
+        "under_siege"
+      ],
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "viability.generateEconomicViability::isolated.title",
+      "text": "Isolated: Stockpile Dependency",
+      "needs": [
+        "route: isolated"
+      ],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": "critical deps arise from isolation or isUnderStress; when isUnderStress came from intendedStressTypes/names but isSieged here is false, an UNISOLATED place reads \"isolated trade\"."
+    },
+    {
+      "id": "viability.generateEconomicViability::isolated.desc",
+      "text": "${n} institution(s) operating on stockpiles only (isolated trade): ${names}.",
+      "needs": [
+        "route: isolated"
+      ],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "viability.generateEconomicViability::deps.title",
+      "text": "Trade Dependencies",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "viability.generateEconomicViability::deps.desc",
+      "text": "${n} institution(s) depend on imported materials (${resources}). Standard for this trade r",
+      "needs": [],
+      "excludes": [],
+      "crisis": "calm",
+      "colour": false,
+      "notes": "\"Standard for this trade route\" asserts normalcy; vulnerable deps exist only when not under stress/isolated (critical otherwise), so it prints under non-siege crises."
+    }
+  ]
+}

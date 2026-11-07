@@ -25,6 +25,7 @@ export const STRESS_INSTITUTION_EFFECTS = {
     {
       secret: "Secretly negotiating surrender terms with the besieging force, without the council's knowledge",
       stakes: "Treason. The defenders would execute them on the spot if they found out",
+      excludes: ["ruler: lord","ruler: occupier"],
     },
     {
       secret: "Has been rationing their own private food stores while publicly enforcing the communal rationing order",
@@ -37,23 +38,28 @@ export const STRESS_INSTITUTION_EFFECTS = {
     {
       secret: "Knows the barricade across the main approach is structurally compromised and has told no one",
       stakes: "Telling the council means explaining why they knew and said nothing for two weeks",
+      excludes: ["ruler: lord","ruler: occupier"],
     },
     {
       secret: "Has already made personal arrangements to leave before the final assault. Their family left last week",
       stakes: "{npc} saw them loading the cart. They don't know what {npc} understood",
+      needs: ["other npc"],
     },
     {
       secret: "The supplies they declared destroyed in a fire are actually hidden in a location only they know",
       stakes: "People are starving. The supplies could last another month",
+      needs: ["starving"],
     },
     {
       secret: "Is in contact with the besieging commander (not as a spy, as a former colleague)",
       stakes:
         "The relationship predates the siege. They've been using it to buy time, but the council would not accept the distinction",
+      excludes: ["ruler: lord","ruler: occupier"],
     },
     {
       secret: "Authorised an illegal sortie that failed. Five people died and no record was kept",
       stakes: "{npc} survived it. They know, and they've been drinking heavily ever since",
+      needs: ["other npc"],
     },
     {
       secret: "Has been skimming from the {commodity} reserves to pay a personal debt that predates the siege",
@@ -84,6 +90,7 @@ export const STRESS_INSTITUTION_EFFECTS = {
       secret:
         "Their family has been eating normally throughout the famine (not from stores, from a private source they will not name)",
       stakes: "{npc} has noticed. They asked once. They were told to forget it",
+      needs: ["other npc"],
     },
     {
       secret:
@@ -105,6 +112,7 @@ export const STRESS_INSTITUTION_EFFECTS = {
     {
       secret: "Has been feeding information to the occupation authority since the first week, not under duress",
       stakes: "{npc} is part of the resistance. They trust this person completely",
+      needs: ["other npc"],
     },
     {
       secret:
@@ -130,6 +138,7 @@ export const STRESS_INSTITUTION_EFFECTS = {
     {
       secret: "Is smuggling people out, but only those who can pay, and the price has been rising",
       stakes: "{npc} can't pay. They've been waiting for weeks. The next group leaves in two days",
+      needs: ["other npc"],
     },
     {
       secret: "Knows the occupation commander's real orders (not the stated ones), and those orders include a date",
@@ -144,6 +153,7 @@ export const STRESS_INSTITUTION_EFFECTS = {
     {
       secret: "The vote that split the council was not actually close. They falsified the count",
       stakes: "The original tallies still exist somewhere. {npc} was in the room",
+      needs: ["other npc"], excludes: ["ruler: lord","ruler: occupier"],
     },
     {
       secret:
@@ -165,6 +175,7 @@ export const STRESS_INSTITUTION_EFFECTS = {
         "Their public neutrality is a cover. They are actively funding one faction's operations through a third party",
       stakes:
         "{npc} traced one payment. They came to ask about it. They accepted the explanation. They didn't believe it",
+      needs: ["other npc"],
     },
   ],
   indebted: [
@@ -172,6 +183,7 @@ export const STRESS_INSTITUTION_EFFECTS = {
       secret:
         "The debt was not authorised by the council. They signed alone under pressure and have been hiding it for two years",
       stakes: "{faction} is about to discover this in the accounts they requested",
+      excludes: ["ruler: lord","ruler: occupier"],
     },
     {
       secret:
@@ -182,6 +194,7 @@ export const STRESS_INSTITUTION_EFFECTS = {
       secret:
         "Knows the debt contains a clause that transfers significant civic assets to the creditor on default (a clause that was buried in the original document)",
       stakes: "{npc} is a notary who helped draft it. They've been avoiding eye contact for six months",
+      needs: ["other npc"],
     },
     {
       secret:
@@ -204,6 +217,7 @@ export const STRESS_INSTITUTION_EFFECTS = {
         "Has already transferred personal assets out of the settlement to a safe location, anticipating default and the personal liability that follows",
       stakes:
         "{npc} helped with the transfer. They've said nothing. They're waiting to see what they get for their silence",
+      needs: ["other npc"],
     },
   ],
   recently_betrayed: [
@@ -221,6 +235,7 @@ export const STRESS_INSTITUTION_EFFECTS = {
       secret:
         "Participated in the original betrayal in a minor capacity and has been helping frame someone else ever since",
       stakes: "{npc} saw them at a meeting they claimed not to attend. {npc} has not yet understood what they saw",
+      needs: ["other npc"],
     },
     {
       secret:
@@ -245,6 +260,7 @@ export const STRESS_INSTITUTION_EFFECTS = {
       secret:
         "Noticed an inconsistency in {npc}'s behaviour three weeks ago and said nothing, deciding it was probably nothing",
       stakes: "It was not nothing. And now they've waited too long to raise it without explaining why they waited",
+      needs: ["other npc"],
     },
     {
       secret:
@@ -272,6 +288,7 @@ export const STRESS_INSTITUTION_EFFECTS = {
     {
       secret: "Has already been exposed and is symptomatic, presenting publicly as unaffected",
       stakes: "{npc} stands close to them every day. They've said nothing",
+      needs: ["other npc"],
     },
     {
       secret:
@@ -321,6 +338,7 @@ export const STRESS_INSTITUTION_EFFECTS = {
       secret:
         "Has been quietly removing records from the archive that would complicate the succession in ways they prefer not to see complicated",
       stakes: "{npc} manages the archive and has noticed the gaps. They've raised it with {faction}",
+      needs: ["other npc"],
     },
   ],
   monster_pressure: [
@@ -333,6 +351,7 @@ export const STRESS_INSTITUTION_EFFECTS = {
       secret:
         "Has been negotiating with the creature threat on their own authority, and the terms they've offered include access rights the settlement doesn't know they gave",
       stakes: "{npc} intercepted one communication. They don't fully understand what they read",
+      needs: ["other npc"],
     },
     {
       secret:
@@ -358,10 +377,12 @@ export const STRESS_INSTITUTION_EFFECTS = {
     {
       secret: "Wrote the anonymous manifesto that gave the insurgency its language, and has since publicly condemned it more than once",
       stakes: "{npc} recognised the phrasing. They have said nothing, but they read the condemnation with a strange expression",
+      needs: ["other npc"],
     },
     {
       secret: "Is the insurgency's contact inside the council, and has been feeding it exactly the information that keeps the fighting away from their own district",
       stakes: "Three other districts have suffered. Theirs has not. Someone is beginning to notice the pattern",
+      needs: ["tier: ≥ town"], excludes: ["ruler: lord","ruler: occupier"],
     },
     {
       secret: "Ordered a crackdown that killed people who had nothing to do with the insurgency, then falsified the reports to record them as insurgents",
@@ -370,6 +391,7 @@ export const STRESS_INSTITUTION_EFFECTS = {
     {
       secret: "Has already negotiated their own safe passage with the insurgency's leadership in exchange for opening a gate on a night yet to be named",
       stakes: "The night is close. {faction} still believes this person is loyal",
+      needs: ["gate"],
     },
     {
       secret: "Knows the insurgency is being funded from outside the settlement, by a party the authority itself has been quietly dealing with",
@@ -379,20 +401,45 @@ export const STRESS_INSTITUTION_EFFECTS = {
       // [D6 THE UNDERWAYS] the insurgency uses the tunnels — content integration.
       secret: "Has been moving insurgent fighters and sealed messages through the underways (the dug tunnels beneath the settlement), one cellar-mouth at a time",
       stakes: "The warren has no map, but {npc} has walked it. If the authority ever forces one, this person's own route becomes the confession",
+      needs: ["other npc"],
     },
   ],
   mass_migration: [
     {
       secret: "Has been selling residency papers and gate-passes to newcomers who cannot legally settle, at a price that rises with their desperation",
       stakes: "The register is falsified in a pattern anyone auditing arrivals would find. An audit has been requested",
+      needs: ["gate","migration: influx"],
     },
     {
       secret: "Diverted the relief meant for the newcomer camp into a private arrangement, and the shortfall is being blamed on the newcomers themselves",
       stakes: "People in the camp are dying of the shortfall. The blame is holding, for now",
+      needs: ["migration: influx"], text: "Diverted the relief meant for the newcomer camp into a private arrangement, and the shortfall is being blamed on the newcomers themselves", // CENSUS-4b: `text` is the line's identity for its exodus twin (drawDeclared :: lineText)
+    },
+    {
+      // CENSUS-4b, THE CHAIR'S RULING (answer 5; R-G): the exodus twin of the relief pair above, the
+      // influx pair mirrored. Reached only by resolution (`twinOf`): out of the draw's domain, so no
+      // birth moves where the place fills; it serves a refused draw of its original where it empties.
+      secret: "Diverted the coin meant to keep the departing families here into a private arrangement, and the shortfall is being blamed on the families who left",
+      stakes: "More households go every week for want of it. The blame is holding, for now",
+      twinOf: "Diverted the relief meant for the newcomer camp into a private arrangement, and the shortfall is being blamed on the newcomers themselves",
+      needs: ["migration: exodus"],
     },
     {
       secret: "Is themselves a newcomer, arrived a decade ago under a false history that the current upheaval is threatening to expose",
       stakes: "The people they would rule against for lying are lying no more than they once did",
+    },
+    {
+      // MERGE-R2 (the chair's ruling 1): A DIRECTION PAIR. F13 retold this slot as the arrival
+      // (ODQ §934.101) and W0 kept the exodus line tagged for a departures record; both are kept,
+      // each with its own tag and its own needs, and the writer selects by `stress[].direction`
+      // (npcGenerator.js's filter). The arrivals line stands first, so an arrivals record's pool is
+      // F13's row for row.
+      // RUNG2-F13: this secret told an exodus ("those who fled") under the influx the crisis is
+      // (ODQ §934.101); it tells the arrival now. Same slot, so no draw moves.
+      direction: "arrivals",
+      secret: "Has been quietly buying up the houses the newcomers need, through a third party, and letting them at a price that rises with every arrival",
+      stakes: "The tenants have begun comparing what they pay. The third party's name will not survive the first honest question",
+      needs: ["migration: influx"],
     },
     {
       // WIRING-W0 (2026-11-07, R-W7 e): a DEPARTURES secret; drawn only where the record's
@@ -400,14 +447,17 @@ export const STRESS_INSTITUTION_EFFECTS = {
       direction: "departures",
       secret: "Has been quietly buying up the emptied properties of those who fled, through a third party, at a fraction of their worth",
       stakes: "Some of the departed intend to return. The purchases will not survive their claims, or their questions",
+      needs: ["migration: exodus"],
     },
     {
       secret: "Knows the migration was triggered by something upstream (a failed harvest, a war, a purge) that {faction} helped cause and has been concealing",
       stakes: "The newcomers carry the proof in their own stories, if anyone here thinks to listen",
+      needs: ["migration: influx"],
     },
     {
       secret: "Signed the order closing the settlement to further arrivals, then made a paid exception for one group now already settled inside",
       stakes: "{npc} was turned away the same week. They saw the paid group admitted. They have not forgotten a face",
+      needs: ["migration: influx","other npc"],
     },
   ],
   wartime: [
@@ -426,6 +476,7 @@ export const STRESS_INSTITUTION_EFFECTS = {
     {
       secret: "Knows the war is going worse than the settlement has been told, and has been quietly moving their family and their wealth ahead of the news",
       stakes: "{npc} helped load the last cart. They asked no questions then. They are asking them now",
+      needs: ["other npc"],
     },
     {
       secret: "Authorised the seizure of a rival's property as a 'war measure', on evidence they invented",
@@ -444,6 +495,7 @@ export const STRESS_INSTITUTION_EFFECTS = {
     {
       secret: "Holds the deeds and endowments of the old religious institution, which they were meant to transfer, and has been quietly keeping them in the confusion",
       stakes: "Both faiths claim the properties. Only this person knows the documents never actually moved",
+      needs: ["institution: temple"],
     },
     {
       secret: "Engineered the 'miracle' that tipped the settlement toward the new faith, and knows exactly how it was done",
@@ -452,6 +504,7 @@ export const STRESS_INSTITUTION_EFFECTS = {
     {
       secret: "Was a senior figure in the old faith and surrendered its secrets (its finances, its sanctuary lists, its private sins) to the new one to secure a place",
       stakes: "The sanctuary lists named people now being hunted. {npc} was on a list this person handed over",
+      needs: ["other npc"],
     },
     {
       secret: "Has been forging records to erase the old faith's marriages, oaths, and legitimacies, retroactively unmaking inheritances and alliances",
@@ -470,6 +523,7 @@ export const STRESS_INSTITUTION_EFFECTS = {
     {
       secret: "Owned a share of the slave market and has been destroying the records of exactly whom they owned before those records can be turned against them",
       stakes: "{npc} kept a copy. They have not yet decided what to do with it",
+      needs: ["market","other npc"],
     },
     {
       secret: "Freed and armed a group of the enslaved themselves, quietly, before the revolt began, for reasons they have not disclosed and cannot now defend",

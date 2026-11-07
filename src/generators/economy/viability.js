@@ -22,6 +22,7 @@ import {
   nativeSemanticNames,
 } from '../../domain/content/customContentSemanticAuthority.js';
 import { isTradeRouteDisconnected } from '../../domain/tradeRouteSemantics.js';
+import { waterOf } from '../../domain/facts/water.js'; import { factsOf } from '../../domain/facts/factsOf.js'; // CENSUS-1f: one line
 
 const SUPPLY_CHAIN_GROUPS = /** @type {Array<{ chains: Array<any> }>} */ (Object.values(SUPPLY_CHAIN_NEEDS));
 
@@ -30,8 +31,6 @@ const SUPPLY_CHAIN_GROUPS = /** @type {Array<{ chains: Array<any> }>} */ (Object
 // from data/foodImportRates.js) — single source of truth shared with
 // foodGenerator and the tick-time stockpile (domain/worldPulse/foodStockpile).
 
-// WATER_ROUTES
-const WATER_ROUTES = ['coastal', 'riverside'];
 
 
 // Tier-plausible institution availability — the SAME model assembleInstitutions
@@ -165,19 +164,20 @@ const deriveResourceChainAnalysis = (institutions, terrain, nearbyResources, con
 // rows, so 1,569 warnings in 476 of the 1,000 soak settlements sat beside a water row. Only a
 // PROCESS-water industry (resourceChains.js :: INDUSTRY_WATER_NEEDS, matched by exact name) can
 // lack a supply; a mill's MOTIVE power is the DM's to picture and raises nothing.
+// MERGE-R2 (the chair's ruling 3): (i) is the record read, the source; (ii) and (iii) are CENSUS-1b
+// unit A (c)'s water home (`facts/water.js :: waterOf`, over `waterAccessKind`: coastal or riverside
+// terrain, a river or port route — the same three tests), so a port route on hills is not dry.
 const WATER_ROW_NAMES = new Set(['Water source', 'Multiple water sources', 'Aqueduct or water system', 'Advanced water infrastructure']);
 const PROCESS_WATER_BY_NAME = new Map(
   Object.values(INDUSTRY_WATER_NEEDS).flatMap((need) => (need.names || []).map((name) => [name, need])),
 );
-const deriveWaterDependencyAnalysis = (institutions, terrain, config) => {
+const deriveWaterDependencyAnalysis = (institutions, terrainType, config) => {
   const issues = [];
   const warnings = [];
   const suggestions = [];
-  const route = config?.tradeRouteAccess || 'unknown';
   const native = (institutions || []).filter((inst) => !isMaterializedCustomContent(inst));
   const hasWater = native.some((inst) => WATER_ROW_NAMES.has(nativeSemanticName(inst)))
-    || (terrain ? WATER_ROUTES.includes(terrain.name.toLowerCase()) : false)
-    || route === 'river' || route === 'port';
+    || waterOf({ config: { terrainType: terrainType ?? config?.terrainType ?? null, tradeRouteAccess: config?.tradeRouteAccess ?? null } }).navigable;
   if (hasWater) return { issues, warnings, suggestions };
 
   native.forEach((inst) => {
@@ -473,13 +473,13 @@ export const generateEconomicViability = (settlement, terrainType = null, nearby
   }
 
   // Water/infrastructure dependencies
-  const waterAnalysis = deriveWaterDependencyAnalysis(insts, terrain, cfg);
+  const waterAnalysis = deriveWaterDependencyAnalysis(insts, terrainType, cfg);
   issues.push(...waterAnalysis.issues);
   warnings.push(...waterAnalysis.warnings);
   suggestions.push(...(waterAnalysis.suggestions || []));
 
   // Food balance plot hooks
-  const stabilityAnalysis = deriveSupplyRiskAnalysis(population, terrain, insts, cfg, foodAnalysis.foodBalance);
+  const stabilityAnalysis = deriveSupplyRiskAnalysis(population, terrain, insts, cfg, foodAnalysis.foodBalance, () => factsOf({ institutions: insts, config: cfg, tier, economicState })); // CENSUS-1f: the outlook hooks resolve (the fields at hand only, R-Z)
   issues.push(...stabilityAnalysis.issues);
   warnings.push(...stabilityAnalysis.warnings);
   plotHooks.push(...stabilityAnalysis.plotHooks);
@@ -566,9 +566,11 @@ export const generateEconomicViability = (settlement, terrainType = null, nearby
   };
 };
 
-// hasMarketInstitution MOVED to src/domain/marketInstitution.js (LANDING-2, the domain -> generators
-// boundary); re-exported here so the generator callers keep their import.
-export { hasMarketInstitution } from '../../domain/marketInstitution.js';
+// IS THERE A REAL MARKET HERE? — moved whole to the market home (CENSUS-1 wave 0, fact 5), which
+// reads the LIVE roster; re-exported under its SIZE-lane name for this module's importers. (Rung 1's
+// LANDING-2 moved the same function to src/domain/marketInstitution.js for the domain -> generators
+// boundary; at the rung-2 merge the census's home serves both intents and that copy is retired.)
+export { hasMarketInstitution } from '../../domain/facts/market.js';
 
 /**
  * IS THIS A CITY-SCALE PLACE? The two structural cuts below ("no trade infrastructure",

@@ -272,6 +272,8 @@ export async function decreeChronicleEntriesForResult(result, campaignId, preTic
     for (let t = startTick; t <= endTick; t += 1) tickByRef.set(pulseIdFor(campaignId, t), t);
   }
   const { decreeChronicleLine } = await import('../domain/display/stateProse/decreeProse.js');
+  // CENSUS-1h unit 7 (R-AQ, R-Z): the decree draw is handed the advanced record's one reader.
+  const { factsOf } = await import('../domain/facts/factsOf.js');
   /** @type {Record<string, unknown>[]} */
   const entries = [];
   for (const cause of causes) {
@@ -282,6 +284,7 @@ export async function decreeChronicleEntriesForResult(result, campaignId, preTic
     const tick = tickByRef.get(String(entry.tickRef));
     const line = /** @type {any} */ (decreeChronicleLine(entry, update?.settlement, {
       registry,
+      facts: update?.settlement && typeof update.settlement === 'object' ? factsOf(update.settlement) : null,
       cause: /** @type {any} */ (cause)?.cause,
       ...(tick === undefined ? {} : { tick }),
     }));

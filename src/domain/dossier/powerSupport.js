@@ -83,7 +83,7 @@ import { backingRowFor } from '../../data/institutionBacking.js';
 // so the line names the shared domain. Frozen: a typo key reads `undefined` and
 // falls to OTHER, never a silent miss.
 /** @type {Readonly<Record<string, string>>} */
-const ALIGNED_BASIS = Object.freeze({
+export const ALIGNED_BASIS = Object.freeze({
   [A.MERCHANT]:   'A commercial house of this power',
   [A.MILITARY]:   'In the service of this command',
   [A.RELIGIOUS]:  'A house of this faith',

@@ -13,11 +13,14 @@
  */
 
 import { crisisHookFor } from '../crisis/crisisHooks.js';
+import { resolveSibling } from '../facts/drawDeclared.js';
+import { factsOf } from '../facts/factsOf.js';
 import { collectPlotHooks } from '../dossier/plotHooks.js';
 import { formatCount } from '../formatNumber.js';
 import { institutionDisplayName } from '../display/institutionDisplayName.js';
 import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { waterAccessKind } from '../tradeRouteSemantics.js';
+import { voicedLineOf } from './tonightSheet.js';
 
 const INFLUENCE_RANK = Object.freeze({
   high: 0,
@@ -536,10 +539,39 @@ const SCOPE_PHRASE = Object.freeze({
  */
 function scopePhrase(cultureKey, settlement) {
   if (!Object.hasOwn(SCOPE_PHRASE, cultureKey)) return '';
-  if (WATERSIDE_SCOPES.has(cultureKey) && isLandlocked(settlement)) {
-    return Object.hasOwn(INLAND_SCOPE_PHRASE, cultureKey) ? INLAND_SCOPE_PHRASE[cultureKey] : '';
+  if (WATERSIDE_SCOPES.has(cultureKey)) {
+    // R-AS (amended): the three waterside scopes read the record's water HERE (chair ruling 5:
+    // inland → the inland phrase; a river keeps the Greek harbour; a record with no config reads as
+    // it always did), and every atom they declare is a water atom — the branch is their gate.
+    // RUNG-2 LANDING phase B (the chair's 10:0x): the inland form goes through the declared
+    // channel — a declared inland phrase (`excludes: navigable`) is admitted by the draw only where
+    // the record holds no water. Phase C unit 4: all three inland forms declare it (Greek aligned).
+    if (isLandlocked(settlement)) {
+      return Object.hasOwn(INLAND_SCOPE_PHRASE, cultureKey) ? declaredClause(INLAND_SCOPE_PHRASE[cultureKey], settlement) : '';
+    }
+    return SCOPE_PHRASE[cultureKey];
   }
-  return SCOPE_PHRASE[cultureKey];
+  return declaredClause(SCOPE_PHRASE[cultureKey], settlement);
+}
+
+/**
+ * THE T WIRING (CENSUS-1h unit 6, Appendix B row 95): a printed clause that is a key of
+ * `QUICK_GUIDE_SIBLINGS` is resolved against the record it describes; refused with no admitted
+ * twin, the clause DROPS (R-AU, kind A) and the sentence is built without it. The facts are read
+ * only when the clause declares. Display-time: pages move, records do not.
+ * @param {string} clause
+ * @param {SettlementQuickGuideSource} settlement
+ * @returns {string}
+ */
+function declaredClause(clause, settlement) {
+  const resolved = resolveSibling(clause, QUICK_GUIDE_SIBLINGS, {
+    facts: () => factsOf(/** @type {Parameters<typeof factsOf>[0]} */ (settlement)),
+    poolId: 'QUICK_GUIDE_CLAUSES',
+    surface: 'overview',
+    crisisScoped: QUICK_GUIDE_CRISIS_SCOPED.includes(clause),
+    dropRefused: true,
+  });
+  return typeof resolved === 'string' ? resolved : '';
 }
 
 /**
@@ -554,10 +586,16 @@ function scopePhrase(cultureKey, settlement) {
 /**
  * A waterside scope's landlocked form, where one is authored (2026-11-04, under the owner's
  * delegation): the Greek phrase without its harbour. A culture with none takes the plain sentence.
+ * The Norse and Slavic forms (RUNG-2 LANDING phase B, the chair's ruling of 2026-11-05 10:0x: the
+ * slot was mute in 38 of 98 Norse and 30 of 82 Slavic births on the 1,000) presume no water and
+ * no season, and declare it (`excludes: navigable`, `QUICK_GUIDE_SIBLINGS`); the Greek form declares the
+ * same since phase C unit 4.
  * @type {Readonly<Record<string, string>>}
  */
 const INLAND_SCOPE_PHRASE = Object.freeze({
   greek: 'built around the agora, on hillside ground and civic association',
+  norse: 'built around the hall, on kin, oath and the assembly',
+  slavic: 'built in timber compounds on land held in common, kin by kin',
 });
 
 const WATERSIDE_SCOPES = new Set(['greek', 'norse', 'slavic']); // norse "the hall and the water", slavic "between river and forest" (chair ruling 5)
@@ -644,7 +682,8 @@ function composeMaterialTruth(settlement) {
   // unchanged — only the rendering.
   const clauses = [];
   if (prosperity) clauses.push(`the economy is ${prosperity.toLowerCase()}`);
-  if (food) clauses.push(foodSecurityClause(food));
+  const foodClause = food ? foodSecurityClause(food, settlement) : '';
+  if (foodClause) clauses.push(foodClause);
 
   let text = clauses.length ? upperLead(clauses.join('; ')) : '';
   if (topExport) {
@@ -681,10 +720,56 @@ const FOOD_SECURITY_CLAUSE = Object.freeze({
   secure: 'the food supply is secure',
 });
 
-/** @param {string} label @returns {string} */
-function foodSecurityClause(label) {
+/**
+ * THE DECLARED CLAUSES (CENSUS-2d unit 3; Phase A's ledger QUICK_GUIDE_CLAUSES.json), in the
+ * dissolved-twin shape keyed by the original's text (R-P 3): SCOPE_PHRASE and FOOD_SECURITY_CLAUSE
+ * stay strings for `scopePhrase` / `foodSecurityClause`; the T wiring (CENSUS-1e, Appendix B row
+ * 95) resolves a printed clause through `resolveSibling`. The food band's calm clauses are the
+ * ledger's `{crisis-scoped}` pool: `crisis: any` with the hunger denial.
+ * @type {Readonly<Record<string, ReadonlyArray<Readonly<{ text: string, needs?: string[], excludes?: string[], crisis?: string[] }>>>>}
+ */
+export const QUICK_GUIDE_SIBLINGS = Object.freeze({
+  [SCOPE_PHRASE.norse]: Object.freeze([Object.freeze({ text: SCOPE_PHRASE.norse, needs: ['navigable'] })]),
+  // CENSUS-2g unit 7 (R-AY): a self-gated line declares only what `scopePhrase` verifies (the record's
+  // water) — the Slavic line's `river` is dropped (and with it its set: it declares nothing), the Greek
+  // harbour declares `navigable`, not `coast`.
+  // CENSUS-2g unit 7 (the chair's ruling of 09:29, R-G): row 95 drops a refused scope, so each declared
+  // scope takes ONE twin that presumes nothing (share: the refused births only — 38 of 92 mesoamerican,
+  // 44 of 95 south-asian on the 1,000).
+  [SCOPE_PHRASE.mesoamerican]: Object.freeze([
+    Object.freeze({ text: SCOPE_PHRASE.mesoamerican, needs: ['market'] }),
+    Object.freeze({ text: 'built around a civic-ritual plaza, on tribute and the ritual calendar', twinOf: SCOPE_PHRASE.mesoamerican }),
+  ]),
+  [SCOPE_PHRASE.south_asian]: Object.freeze([
+    Object.freeze({ text: SCOPE_PHRASE.south_asian, needs: ['market', 'institution: temple'] }),
+    Object.freeze({ text: 'built around the tank, in quarters by trade and kin', twinOf: SCOPE_PHRASE.south_asian }),
+  ]),
+  [SCOPE_PHRASE.greek]: Object.freeze([Object.freeze({ text: SCOPE_PHRASE.greek, needs: ['navigable'] })]),
+  // RUNG-2 LANDING phase B (the chair's 10:0x): the two inland waterside forms presume NO water —
+  // `excludes: navigable`, the very fact `scopePhrase`'s branch reads (R-AY) — so the draw admits
+  // them where the sea lines are withheld. Phase C unit 4: the Greek inland form is aligned with
+  // them (it declared nothing; 0 of 41 inland Greek births on the 1,000 carry water: no page moves).
+  [INLAND_SCOPE_PHRASE.greek]: Object.freeze([Object.freeze({ text: INLAND_SCOPE_PHRASE.greek, excludes: ['navigable'] })]),
+  [INLAND_SCOPE_PHRASE.norse]: Object.freeze([Object.freeze({ text: INLAND_SCOPE_PHRASE.norse, excludes: ['navigable'] })]),
+  [INLAND_SCOPE_PHRASE.slavic]: Object.freeze([Object.freeze({ text: INLAND_SCOPE_PHRASE.slavic, excludes: ['navigable'] })]),
+  [FOOD_SECURITY_CLAUSE.surplus]: Object.freeze([Object.freeze({ text: FOOD_SECURITY_CLAUSE.surplus, excludes: ['crisis: hunger'], crisis: ['any'] })]),
+  [FOOD_SECURITY_CLAUSE.secure]: Object.freeze([Object.freeze({ text: FOOD_SECURITY_CLAUSE.secure, excludes: ['crisis: hunger'], crisis: ['any'] })]),
+});
+
+/**
+ * THE CRISIS-SCOPED FLAGS (CENSUS-2e unit 1, the chair's R-AF): the food band's calm clauses, the ledger's opted
+ * pools, by their sibling key. The T wiring passes `crisisScoped: true` for these; the pin is the compose's (R-T).
+ * @type {ReadonlyArray<string>}
+ */
+// CENSUS-2f, R-AH: the surplus and secure clauses write `crisis: any` (no calm line), so the inert flag is dropped.
+export const QUICK_GUIDE_CRISIS_SCOPED = Object.freeze([]);
+
+/** @param {string} label @param {SettlementQuickGuideSource} settlement @returns {string} */
+function foodSecurityClause(label, settlement) {
   const key = label.toLowerCase().replace(/[\u2013\u2014]/g, '-');
-  return FOOD_SECURITY_CLAUSE[key] || `the food supply is ${label.toLowerCase()}`;
+  return Object.hasOwn(FOOD_SECURITY_CLAUSE, key)
+    ? declaredClause(FOOD_SECURITY_CLAUSE[key], settlement)
+    : `the food supply is ${label.toLowerCase()}`;
 }
 
 /**
@@ -806,27 +891,13 @@ function composeEntryPoint(settlement) {
  * @returns {string}
  */
 function personDetail(npc) {
-  const goal = cleanText(
-    typeof npc.goal === 'object'
-      ? (npc.goal?.short || npc.goal?.long)
-      : npc.goal,
-  );
-  if (goal) return sentence(`Wants to ${lowerLead(stripInfinitive(goal))}`);
-
+  // R11: the ONE choice of what a person is voiced with (tonightSheet.js :: voicedLineOf, the
+  // chair's ruling): the goal only when it is voiceable, else the secret, else the temperament.
+  const { says, text } = voicedLineOf(/** @type {Parameters<typeof voicedLineOf>[0]} */ (npc));
+  if (text && says === 'want') return sentence(`Wants to ${text}`);
+  if (text && says === 'secret') return sentence(`Secret: ${lowerLead(text)}`);
   // X-48: the temperament, never the nervous habit (`tell`), which prints nowhere.
-  const temperament = cleanText(
-    typeof npc.personality === 'object'
-      ? npc.personality?.dominant
-      : npc.personality,
-  );
-  if (temperament) return sentence(temperament);
-
-  const secret = cleanText(
-    typeof npc.secret === 'object'
-      ? npc.secret?.what
-      : npc.secret,
-  );
-  if (secret) return sentence(`Secret: ${lowerLead(secret)}`);
+  if (text) return sentence(text);
 
   return 'No immediate agenda is recorded.';
 }
@@ -886,11 +957,6 @@ function lowerLead(value) {
 /** @param {string} value @returns {string} */
 function upperLead(value) {
   return value ? value[0].toUpperCase() + value.slice(1) : '';
-}
-
-/** @param {string} value @returns {string} */
-function stripInfinitive(value) {
-  return value.replace(/^to\s+/i, '');
 }
 
 /** @param {string} value @returns {string} */

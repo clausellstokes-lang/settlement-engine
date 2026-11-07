@@ -1,0 +1,112 @@
+{
+  "pool": {
+    "id": "crisisCast.STAKE_REASONS",
+    "file": "src/domain/crisis/crisisCast.js",
+    "drawKind": "T",
+    "drawSite": "crisisCast.js:461-701",
+    "colour": false,
+    "crisisScoped": false,
+    "keyDeclares": {},
+    "lines": 12,
+    "declaring": 0,
+    "note": "Stake reasons set by deriveStakes (crisisCast.js:458-499), each gated on the archetype the label names (church, merchants, military, crime, occupier) or the scarce-name regex; presumes nothing the rule does not check."
+  },
+  "rows": [
+    {
+      "id": "gainsVacuum",
+      "text": "the military gains in a vacuum of governance",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "gainsChurch",
+      "text": "the church gains while the seat struggles",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "gainsMerchants",
+      "text": "the merchants gain while the seat is endorsed",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "gainsCrime",
+      "text": "crime gains from the disorder",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "gainsRival",
+      "text": "outranks the seat while it weakens",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "gainsClaim",
+      "text": "a rival claim to govern gains by it",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "gainsHolds",
+      "text": "holds what the crisis makes scarce",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "gainsOccupier",
+      "text": "the occupier gains by it",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "loses",
+      "text": "the crisis hits its base",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "losesSeat",
+      "text": "the seat bears the blame",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "split",
+      "text": "gains and loses by it at once",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "untouched",
+      "text": "no direct stake; it could go either way",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    }
+  ]
+}

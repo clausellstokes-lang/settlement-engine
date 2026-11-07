@@ -1,0 +1,372 @@
+{
+  "poolId": "ARRIVAL_SCENES",
+  "source": "src/data/narrativeData.js:10-75",
+  "drawKind": "R",
+  "drawSite": "src/generators/narrative/arrivalScene.js:216-228 (sceneKey from route/terrain/market fragments, then one pickRandom on the 'arrival-scene' substream; HOOK beat, only when !underStress)",
+  "pools": [
+    {
+      "pool": "market",
+      "keyGuarantees": [
+        "config.tradeRouteAccess crossroads",
+        "a native name matching the market SENSE fragments (else the key falls to ordinary)",
+        "rendered only when the record's primary stress has no STRESS_DESCS vignette (src/generators/narrative/arrivalScene.js:215,226,259,292): every record crisis kind has one, so this beat is silent under a record crisis and renders under calm, a custom DM crisis type, or a world pulse stressor the scene never reads",
+        "stop: trade-route kind"
+      ],
+      "poolNeeds": [
+        "market"
+      ],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Opted: [1] asserts a settled, problem-free market day an active crisis contradicts; drawn only under no record crisis, so calm is also what the gate already gives.",
+      "lines": [
+        {
+          "lineId": "ARRIVAL_SCENES.market[0]",
+          "text": "The market at {name} is audible before it is visible: a specific mix of voices, animals, and the percussion of commerce that no other combination of sounds quite replicates.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_SCENES.market[1]",
+          "text": "{name}'s market day has the comfortable chaos of something that has been happening in the same place for a long time and has worked out most of its problems.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "calm",
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_SCENES.market[2]",
+          "text": "The road into {name} is thick with carts by mid-morning, all of them heading for the same square, and the traffic tells you where the settlement's heart is before you can see it.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_SCENES.market[3]",
+          "text": "You reach {name} against a tide of people leaving it. The market has ended for the day, and the settlement is exhaling its visitors back onto the roads with their purchases and their news.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "river",
+      "keyGuarantees": [
+        "config.tradeRouteAccess river, or port on riverside terrain (waterAccessKind: navigable water)",
+        "rendered only when the record's primary stress has no STRESS_DESCS vignette (src/generators/narrative/arrivalScene.js:215,226,259,292): every record crisis kind has one, so this beat is silent under a record crisis and renders under calm, a custom DM crisis type, or a world pulse stressor the scene never reads",
+        "stop: trade-route kind"
+      ],
+      "poolNeeds": [
+        "navigable"
+      ],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Not opted: no line asserts calm; the route kind itself is a stop, the water it implies is navigable.",
+      "lines": [
+        {
+          "lineId": "ARRIVAL_SCENES.river[0]",
+          "text": "The smell of the river reaches you before the settlement does: clean water, reeds, the particular mud of a working waterfront.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_SCENES.river[1]",
+          "text": "{name} runs along the water the way settlements do when water is the reason they exist: practical, a little chaotic at the waterfront, tidier as you move inland.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_SCENES.river[2]",
+          "text": "The river carries the sounds of {name} to you around the bend before the buildings appear: a mill wheel, the knock of boats against a jetty, someone calling a tally across the water.",
+          "needs": [
+            "institution: mill"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "jetty (docks not guaranteed)"
+          ]
+        },
+        {
+          "lineId": "ARRIVAL_SCENES.river[3]",
+          "text": "{name} has its back to the land and its face to the river; the approach by road brings you in the rear way, past the yards and the drying nets, into a settlement that plainly considers the water its front door.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "drying nets (food source: fish)"
+          ]
+        }
+      ]
+    },
+    {
+      "pool": "port",
+      "keyGuarantees": [
+        "config.tradeRouteAccess port, terrain not riverside (waterAccessKind maritime)",
+        "rendered only when the record's primary stress has no STRESS_DESCS vignette (src/generators/narrative/arrivalScene.js:215,226,259,292): every record crisis kind has one, so this beat is silent under a record crisis and renders under calm, a custom DM crisis type, or a world pulse stressor the scene never reads",
+        "stop: trade-route kind"
+      ],
+      "poolNeeds": [
+        "coast"
+      ],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Not opted: busy harbour, no calm asserted; maritime water is the coast fact.",
+      "lines": [
+        {
+          "lineId": "ARRIVAL_SCENES.port[0]",
+          "text": "The harbour at {name} announces itself beyond the last rise: masts above the roofs, gulls wheeling over the quays, and salt bright in the air.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_SCENES.port[1]",
+          "text": "{name} faces the sea as deliberately as a fortress faces its enemy. Warehouses and chandlers crowd the waterfront, with the older streets climbing behind them.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "warehouses and chandlers"
+          ]
+        },
+        {
+          "lineId": "ARRIVAL_SCENES.port[2]",
+          "text": "You hear {name}'s harbour before you see it: rigging knocking against masts, dock crews calling cargo tallies, and surf working against the outer wall.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "outer wall = harbour mole, not the perimeter"
+          ]
+        },
+        {
+          "lineId": "ARRIVAL_SCENES.port[3]",
+          "text": "The road into {name} descends toward a forest of masts. Tar, salt, fish, and woodsmoke mark the boundary between the coast and the working port.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "fish (food source)"
+          ]
+        }
+      ]
+    },
+    {
+      "pool": "smoke",
+      "keyGuarantees": [
+        "config.tradeRouteAccess isolated or mountain_pass",
+        "rendered only when the record's primary stress has no STRESS_DESCS vignette (src/generators/narrative/arrivalScene.js:215,226,259,292): every record crisis kind has one, so this beat is silent under a record crisis and renders under calm, a custom DM crisis type, or a world pulse stressor the scene never reads",
+        "stop: trade-route kind"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Not opted: smoke and supper smells assert nothing a crisis denies; route kind is a stop.",
+      "lines": [
+        {
+          "lineId": "ARRIVAL_SCENES.smoke[0]",
+          "text": "The cookfire smoke of {name} drifts on the wind in your direction: a hundred fires, each with its own particular fuel, combining into something that smells like inhabited place.",
+          "needs": [
+            "population: >= middling"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_SCENES.smoke[1]",
+          "text": "{name} is visible as a smear of smoke on the horizon for a long time before the buildings resolve.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_SCENES.smoke[2]",
+          "text": "You smell {name} before anything else: woodsmoke and bread and livestock, the layered scent of a place where people have been living close together and cooking the same suppers for generations.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "bread, livestock (food sources)"
+          ]
+        },
+        {
+          "lineId": "ARRIVAL_SCENES.smoke[3]",
+          "text": "The smoke above {name} stands straight up in the still air, a dozen thin columns that mark the settlement's shape on the sky like a map drawn in grey.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "guild",
+      "keyGuarantees": [
+        "UNREACHABLE: no ROUTE_TO_SCENE value (arrivalScene.js:56-62) names guild, so this pool is never drawn",
+        "stop: trade-route kind"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Dead pool, annotated for Phase B only: lines name a smithing quarter, a tanner and walls the key never guarantees.",
+      "lines": [
+        {
+          "lineId": "ARRIVAL_SCENES.guild[0]",
+          "text": "The sound of a hammer on metal reaches you from {name}'s smithing quarter: a craftsperson's rhythm, not a soldier's.",
+          "needs": [
+            "institution: smith"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "smithing quarter (size)"
+          ]
+        },
+        {
+          "lineId": "ARRIVAL_SCENES.guild[1]",
+          "text": "{name} smells of work: sawdust, tallow, the particular sharp smell of a tanner at the edge of town.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "tanner (no institution kind)"
+          ]
+        },
+        {
+          "lineId": "ARRIVAL_SCENES.guild[2]",
+          "text": "{name} announces its trade before its name: the whine of a lathe, the reek of the dye-vats, a workshop door standing open on a scene of unhurried, practised industry.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "lathe, dye-vats (crafts, no kind)"
+          ]
+        },
+        {
+          "lineId": "ARRIVAL_SCENES.guild[3]",
+          "text": "The approach to {name} is lined with the overflow of its crafts: timber stacked to season, half-finished goods under eaves, the settlement's work spilling out past its walls for want of room inside.",
+          "needs": [
+            "walls"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "ordinary",
+      "keyGuarantees": [
+        "any other route (road, or crossroads without a market)",
+        "rendered only when the record's primary stress has no STRESS_DESCS vignette (src/generators/narrative/arrivalScene.js:215,226,259,292): every record crisis kind has one, so this beat is silent under a record crisis and renders under calm, a custom DM crisis type, or a world pulse stressor the scene never reads",
+        "stop: trade-route kind"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Opted: [0] and [2] assert ordinary, untroubled normality; under the gate that is calm by construction.",
+      "lines": [
+        {
+          "lineId": "ARRIVAL_SCENES.ordinary[0]",
+          "text": "{name} is ordinary in the best sense: a place where people live and work and argue and sleep, which is most of what places are for.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "calm",
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_SCENES.ordinary[1]",
+          "text": "The road into {name} becomes a street at a point you can't precisely identify. The settlement grows around you gradually.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_SCENES.ordinary[2]",
+          "text": "{name} is neither impressive nor disappointing from the approach. It is what it is, which is a working settlement of reasonable size doing reasonable things.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "calm",
+          "colour": false,
+          "stop": [
+            "reasonable size"
+          ]
+        },
+        {
+          "lineId": "ARRIVAL_SCENES.ordinary[3]",
+          "text": "A child runs past you on the road into {name}, chasing something or being chased by something (unclear which). Nobody in the street pays attention.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_SCENES.ordinary[4]",
+          "text": "A merchant argues with a carter on the road into {name} about the size of a load. Nobody else pays them any attention. This is clearly a daily occurrence.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_SCENES.ordinary[5]",
+          "text": "The first person you meet on the road into {name} wants to know your business, and the second already knows it.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        }
+      ]
+    }
+  ]
+}

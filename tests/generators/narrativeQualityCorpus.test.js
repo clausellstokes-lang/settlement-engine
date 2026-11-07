@@ -486,17 +486,24 @@ describe('relationship tie prose is drawn without replacement per settlement (GS
     for (let index = 0; index < 12; index++) {
       const seed = `tie-prose-draw-${tier}-${index}`;
       corpus.push(withSeed(seed, () => {
+        const powerStructure = { factions: [{ faction: 'the town council', category: 'government', isGoverning: true }] };
         const npcs = generateNPCs(
           {
             tier,
             institutions,
-            powerStructure: { factions: [{ faction: 'the town council', category: 'government', isGoverning: true }] },
+            powerStructure,
             economicState: { primaryExports: ['Grain sales'], prosperity: 'Modest' },
           },
           'germanic',
           { stressTypes: ['politically_fractured'], priorityMilitary: 60, priorityEconomy: 60 },
         );
-        return { seed, npcs, relationships: generateRelationships(npcs, {}, institutions) };
+        // The corpus hands the settled facts BOTH callers hand (generatePopulation, regenNPCsPipeline):
+        // `generateRelationships(npcs, {}, institutions)` -> `(…, { government, tier })` at d422a8dbd (census-1f
+        // unit 1a, site 19: the tie draw resolves through drawDeclared, and with NO facts handed a declared
+        // index is refused fail-closed, so refused indices collapse onto the argmax and a page repeats a
+        // line). Measured: this file 23/23 at d422a8dbd^ (fe7bb1d4a), the without-replacement arm red at
+        // d422a8dbd; handed the callers' facts, green at the tip.
+        return { seed, npcs, relationships: generateRelationships(npcs, {}, institutions, { government: powerStructure.government ?? null, tier }) };
       }));
     }
   }

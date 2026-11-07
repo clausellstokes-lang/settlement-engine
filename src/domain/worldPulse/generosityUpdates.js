@@ -16,6 +16,7 @@
 
 import { storageCapacityMonths } from './foodStockpile.js';
 import { PROSPERITY_TIERS, prosperityRank } from '../../data/constants.js';
+import { withStoresMonths } from '../facts/storesMonths.js';
 
 // ── Kernel-mirrored read-shapes (0-hole discipline: no `any`) ──────────────────
 /** @typedef {{ _deityRef?: unknown, alignmentAxis?: string, lawAxis?: string }} GenDeity */
@@ -62,7 +63,7 @@ export function applyFoodDeltasToUpdates(updates, updateIndex, foodDeltas) {
       ...entry,
       settlement: {
         ...settlement,
-        economicState: { ...settlement.economicState, foodSecurity: { ...fs, storageMonths: nextMonths } },
+        economicState: { ...settlement.economicState, foodSecurity: withStoresMonths(fs, nextMonths) },
       },
     };
   }

@@ -24,6 +24,8 @@ import { deepClone } from '../../domain/clone.js';
 import { deriveFactionProfile } from '../../domain/factionProfile.js';
 import { createPRNG } from '../../kernel/prng.js';
 import { clearActiveRng, setActiveRng } from '../../kernel/rngContext.js';
+import { withLedgerBlock } from '../../domain/facts/presumptionLedger.js';
+import { FACTION_LABEL_SIBLINGS } from '../../data/factionLabelSiblings.js';
 import {
   generatePowerStructure,
   renormalizeFactionPower,
@@ -54,6 +56,14 @@ const TRANSIENT_PROJECTION_FIELDS = [
 // collide with; a unique Symbol cannot.
 const UNPINNED = Symbol('economyReconciliation:unpinned');
 
+// A DECLARED LABEL TWIN IS THE SAME BLOC (CENSUS-1i R-AW). The birth's close relabels a refused
+// label to its declared twin (`Military/Guard` -> `Military Party`, `twinOf` in the sibling table)
+// through the rename cascade; the organization is unchanged. Keyed lower-case, twin -> original.
+const LABEL_TWIN_OF = new Map(
+  /** @type {ReadonlyArray<{ text: string, twinOf?: string }>} */ (Object.values(FACTION_LABEL_SIBLINGS).flat())
+  .filter((row) => typeof row.twinOf === 'string')
+  .map((row) => [row.text.toLowerCase(), row.twinOf.toLowerCase()]));
+
 /**
  * THE ONE SITE THIS CONDITION IS SPELLED. The key is the RECORD PATH the producer writes, per
  * `runPipeline`'s own `Pins` typedef — never a step name, and never a second spelling of the
@@ -76,8 +86,10 @@ function normalizedFactionName(faction) {
     .trim()
     .toLowerCase();
   // Prosperity projects merchant dominance as a display suffix. It is a state
-  // label, not a different organization, so both forms share one intent key.
-  return name.replace(/\s+\(dominant\)$/, '');
+  // label, not a different organization, so both forms share one intent key. A declared label
+  // twin (LABEL_TWIN_OF) is the same rule for R-AW's close-time relabel.
+  const base = name.replace(/\s+\(dominant\)$/, '');
+  return LABEL_TWIN_OF.get(base) || base;
 }
 
 function factionIntentKey(faction) {
@@ -111,6 +123,7 @@ export function createPowerGenerationIntent({
   neighbourRelationship,
   config,
   institutions,
+  stressEntries = null,
 }) {
   if (!stepRng || typeof stepRng.fork !== 'function') {
     throw new TypeError(
@@ -124,8 +137,27 @@ export function createPowerGenerationIntent({
     neighbourRelationship: neighbourRelationship || null,
     config: config || {},
     institutions: institutions || [],
+    // CENSUS-1b unit B (the chair's ruling; F13's census debt): the power step is handed the
+    // stress ENTRIES, not only `config.stressTypes`, so the migration direction is the entry's
+    // (`crisis/migrationDirection.js`). The kind and the direction are what the step reads; a held
+    // intent written before this field reads `null` and falls back to the config's kinds.
+    stressEntries: stressEntriesOf(stressEntries),
   });
   return deepFreeze(snapshot);
+}
+
+/**
+ * The stress container as the power step reads it: one `{ type, direction? }` per entry, or
+ * `null` when the caller handed none (a legacy caller; the config's kinds then govern).
+ * @param {unknown} stress the pipeline's `stress` (an entry, an array of entries, or nothing)
+ * @returns {Array<{ type: string, direction?: string }> | null}
+ */
+function stressEntriesOf(stress) {
+  if (stress == null) return null;
+  const list = Array.isArray(stress) ? stress : [stress];
+  return list
+    .filter((e) => e && typeof e === 'object' && typeof e.type === 'string')
+    .map((e) => ({ type: e.type, ...(typeof e.direction === 'string' ? { direction: e.direction } : {}) }));
 }
 
 function assertIntent(intent) {
@@ -140,8 +172,24 @@ function assertIntent(intent) {
  * Replay the original power calculation without consuming the active pipeline
  * step's stream. The named seed reproduces every power-local roll even if later
  * code adds draws elsewhere in generatePower.
+ *
+ * Every power pass runs through here (the generatePower step, then
+ * reconcilePowerStructure at powerEconomyReconcilePass and at assembly), so the
+ * projection runs as the `powerStructure` block of the presumption ledger, as
+ * the economy runs as `economicState` (RUNG-2 LANDING phase E, R-E2; phase D's
+ * R-D1): a later pass replaces the notes the earlier pass drew, so the ledger
+ * holds one power note set. No draw moves; the ledger is not persisted.
  */
 export function projectPowerGenerationIntent(
+  intent,
+  economicState,
+  options = {},
+) {
+  return withLedgerBlock('powerStructure', () => projectPower(intent, economicState, options));
+}
+
+/** The projection itself (see projectPowerGenerationIntent). */
+function projectPower(
   intent,
   economicState,
   { defenseLabel = null } = {},
@@ -155,7 +203,10 @@ export function projectPowerGenerationIntent(
       intent.neighbourRelationship,
       intent.config,
       intent.institutions,
-      defenseLabel ? { defenseLabel } : {},
+      {
+        ...(defenseLabel ? { defenseLabel } : {}),
+        ...(Array.isArray(intent.stressEntries) ? { stressEntries: intent.stressEntries } : {}),
+      },
     );
     powerStructure.powerProjectionVersion = POWER_PROJECTION_VERSION;
     powerStructure.economyInputFingerprint = fingerprintPowerEconomyInput(

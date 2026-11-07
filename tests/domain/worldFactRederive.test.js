@@ -138,6 +138,13 @@ const stride = (rows, n) => rows.filter((_, index) => index % n === 0);
  * `src/generators/steps/resolveCrisisCast.js` reads the culture to name the crisis car's rare
  * TEMPORARY person (`pickFirst(config.culture, …)`) when a required crisis role has no holder. A culture
  * change re-names that one person; CRISIS-1 omitted the row and the chair's ruling of 2026-11-04 adds it.
+ *
+ * 2026-11-07, LANDING-R2 (the pool census composed): TWENTY-THREE. `src/generators/npcStructure.js` leaves the set at
+ * 73fa1a1e7 (reader-tonight-wants R11 unit 3, the 76 registry goals rewritten in the house register): its one
+ * match was a goal STRING ("…the enforcement capacity and institutional culture that makes current stability
+ * possible."), never a read of the fact, and the rewrite dropped the word. Measured: the file names `culture` once at
+ * the merge base bf263a78d and at rung 1's final 1bff51c6d, zero times at the census side f5dc50c6b; `git log -S`
+ * over the census range names 73fa1a1e7 alone. No reader was added or lost: a word left a sentence.
  */
 const CULTURE_READERS = Object.freeze([
   'src/generators/aiLayer.js',
@@ -155,7 +162,6 @@ const CULTURE_READERS = Object.freeze([
   'src/generators/narrativeGenerator.js',
   'src/generators/npc/generatedNpcTitle.js',
   'src/generators/npcGenerator.js',
-  'src/generators/npcStructure.js',
   'src/generators/pipeline.js',
   'src/generators/steps/assembleSettlement.js',
   'src/generators/steps/buildGenerationContext.js',
@@ -422,10 +428,15 @@ describe('EM-B2b — world facts by consequence: the route, the refusals and the
     // from the stage at b893dcda1: the generator master 8141a111.. -> 98f99494.. (525 of 525 rows); the prose manifest did not move.
     // Then record 05, the annotation's date in one home (the asOf field withdrawn), from the stage at b79dfa98b:
     // 98f99494.. -> 06050f53.. (525 of 525 rows); the prose manifest did not move.
+    // Then rung 2, THE POOL CENSUS COMPOSED (ODQ §934.105; docs/shift-records/2026-11-06-rung2-01-census-composed-generator-master.json,
+    // 33 causes with their own-lineage rows inside, a ruled exception to one-cause-per-record — the chair, 2026-11-07),
+    // through the signed door at the rung-2 landing's tip by LANDING-R2: the generator master e7e8a6ff.. -> d1429bcc..
+    // (525 of 525 rows); restated in the same act. Its fourth record (docs/shift-records/2026-11-06-rung2-04-census-
+    // composed-prose-manifest.json): the prose manifest 777e4b4b.. -> 373f2d55.. (1,050 of 1,050 rows); restated in that act.
     expect(shaOfFile(GOLDEN), 'tests/fixtures/generator-golden-master.json moved')
-      .toBe('06050f531a8f55f5d9e54026942dd11336352ea50920843bb7af929f0960623d');
+      .toBe('d1429bcc228d3dfb3f394c9745ae23313a6f7143cd73f8271fb74b5c894adc5a');
     expect(shaOfFile(PROSE_GOLDEN), 'tests/fixtures/dossier-prose-manifest-golden.json moved')
-      .toBe('777e4b4b2968fab6b02a758435c7dcc8c779753942aeab77c4ae8c261e6d990e');
+      .toBe('373f2d55ce53d23e0613f3658becc1d94ee8c2592c3cf1561581d86ff3ddba1f');
 
     // AND THE REASON THEY CANNOT MOVE: fresh generation passes no layer, so no world fact is ever
     // routed and `config′` is `config` itself. Measured against the committed manifest.

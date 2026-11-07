@@ -5,7 +5,7 @@ import Button from '../../primitives/Button.jsx';
 
 import {buildThreatAssessment, disasterReadinessScore} from '../../../domain/display/threatAssessment.js';
 import {NarrativeNote} from '../NarrativeNote';
-import { arcaneDefenseOf, criminalOpNote, deriveCriminalStructure, deriveDefenseReadiness, deriveSupportingCapabilities, deriveGuardAssessment, deriveDefenseVulnerabilities, DEFENSE_STRESS_STATUS, FOOD_STORES_DOOR, foodEnduranceLine } from '../../../domain/display/defenseDisplay.js';
+import { arcaneDefenseOf, blockListsCrime, criminalOpNote, deriveCriminalStructure, deriveDefenseReadiness, deriveSupportingCapabilities, deriveGuardAssessment, deriveDefenseVulnerabilities, DEFENSE_STRESS_STATUS, FOOD_STORES_DOOR, foodEnduranceLine } from '../../../domain/display/defenseDisplay.js';
 import EntityLink from '../../primitives/EntityLink.jsx';
 import { safetySeverityOf } from '../../../domain/display/safetySeverity.js';
 import { scoreBand, scoreColor } from '../../../domain/display/defenseScoreBands.js';
@@ -317,7 +317,12 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
     ? Object.freeze({ structure: null, capture: null })
     : defenseCriminalProse(r, crimStructure, deskOpts);
   // T2-20: the capture lens is cut (Power owns capture; Defense owns the structure).
-  const criminalLines = ['structure']
+  // R-D2 (RUNG-2 LANDING phase D; F9's law extended): with no structure the lens is a DENIAL
+  // ("No criminal infrastructure has been identified"), so it is never read beside the block's
+  // own crime patterns or operations (soak1k-1801: a religious conversion's religious fraud and
+  // informant networks). Silence there; the static line below reads the same list.
+  const criminalDenialListed = !crimStructure && blockListsCrime(r);
+  const criminalLines = (criminalDenialListed ? [] : ['structure'])
     .map((k) => drawnAtMount(CRIMINAL_MOUNT, criminalProse[k])?.sentence).filter(Boolean);
 
   // Safety severity for UI theming — via the shared safetySeverity chokepoint
@@ -489,8 +494,9 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
           </div>}
 
           {/* T2-20: the static no-organised-crime line stands where the DS-DEF-4 structure lens
-              does not speak (public); the lens says it in the town's voice elsewhere. */}
-          {!crimeVeiled&&!crimStructure&&criminalLines.length===0&&<div style={{background:swatch['#F0FAF4'],border:'1px solid #a8d8b0',borderLeft:'3px solid #2d7a44',padding:'8px 13px',fontSize:proseFontSize(FS.sm, isMobile),color:swatch.success}}>
+              does not speak (public); the lens says it in the town's voice elsewhere. R-D2: like
+              the lens, never beside the block's own crime patterns or operations. */}
+          {!crimeVeiled&&!crimStructure&&criminalLines.length===0&&!criminalDenialListed&&<div style={{background:swatch['#F0FAF4'],border:'1px solid #a8d8b0',borderLeft:'3px solid #2d7a44',padding:'8px 13px',fontSize:proseFontSize(FS.sm, isMobile),color:swatch.success}}>
             No organized criminal infrastructure detected. Crime exists at a petty, individual level.
           </div>}
 

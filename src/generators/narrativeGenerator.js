@@ -23,7 +23,8 @@
  *  - historySiegeNarrative     — the stored-form siege sentence
  */
 
-import { defenseWordsFindings } from '../domain/coherence/defenseWordsFindings.js';
+import { textOf } from '../domain/facts/textOf.js';
+import { defenseWordsFindings } from '../domain/coherence/defenseWordsFindings.js'; import { factsOf } from '../domain/facts/factsOf.js'; // F11, CENSUS-1c: one line
 import {
   clearActiveRng,
   getActiveRng,
@@ -69,7 +70,7 @@ import { generateSiegeCapability } from './narrative/siegeCapability.js';
 // second copy.
 import { buildStressProfile, historySiegeNarrative } from './narrative/historyCoherence.js';
 import { resolveGenerationWorldLaw } from './generationContext.js';
-import { deriveHistoryChallengeRoute } from './history/historyRouteContext.js';
+import { deriveHistoryChallengeRoute } from './history/historyRouteContext.js'; // CENSUS-4 (factsOf: imported on line 26 by CENSUS-1c)
 
 // Keep the established public import path while the implementation lives with
 // the other extracted narrative policies.
@@ -798,8 +799,9 @@ export const generatePressureSentence = settlement => {
     const templates = typeof raw === 'function' ? raw(detail) : raw;
     if (Array.isArray(templates) && templates.length) {
       // F1: a line that names walls, a garrison or soldiers the record lacks is not drawn.
-      const licensed = templates.filter((t) => typeof t !== 'string' || defenseWordsFindings(settlement, t).length === 0);
-      const template = pickRandom2(licensed.length ? licensed : templates);
+      // R-C (CENSUS-2d): a declared row gives back its text; the pick is over the same arrays.
+      const licensed = templates.filter((t) => typeof textOf(t) !== 'string' || defenseWordsFindings(settlement, textOf(t)).length === 0);
+      const template = textOf(pickRandom2(licensed.length ? licensed : templates));
       return typeof template === 'function' ? template(detail) : template;
     }
   }
@@ -826,12 +828,12 @@ export const generatePressureSentence = settlement => {
       'A dispute over grazing rights and water access has been running for two seasons without resolution.',
       'The harvest was thin this year. Everyone knows it. Nobody is saying it directly.',
       'A family moved away last spring. The reason is not discussed, but it affected the dynamics here.',
-      "The question of who tends the shared fields when the miller's household falls ill has never been properly settled.",
+      { text: "The question of who tends the shared fields when the miller's household falls ill has never been properly settled.", needs: ['institution: mill'] },
       'Two families have been in a quiet feud over a boundary marker for longer than anyone can clearly remember.',
       'The last frost came late and damaged the seedstock. Recovery is possible but the margin is narrow.',
       'A stranger passed through a month ago and asked questions nobody found comfortable.',
     ];
-    return thorpPressures[Math.floor(_rng() * thorpPressures.length)];
+    return textOf(thorpPressures[Math.floor(_rng() * thorpPressures.length)]); // R-C (CENSUS-2d): a declared row gives back its text; CENSUS-1e enforces
   }
 
   return null;
@@ -874,8 +876,8 @@ export const generateArrivalScene = settlement => composeArrivalScene(settlement
  */
 export const enrichNpcCoherence = (settlement) => {
   const npcs = settlement.npcs || [];
-  const summary = genSettSummary(settlement);
-  const secretsNow = npcs.map((n) => n?.secret?.what); const enrichedNpcs = npcs.map((npc, idx) => { const e = buildPoliticalNarrative(npc, idx, summary, npcs, heldByOthers(secretsNow, idx)); secretsNow[idx] = e?.secret?.what; return e; }); // REVIEW-INTAKE-4: the overlay refuses a secret another figure holds
+  const summary = { ...genSettSummary(settlement), facts: () => factsOf(settlement) }; // CENSUS-4: the declared NPC pools answer the record's facts
+  const secretsNow = npcs.map((n) => n?.secret?.what); const enrichedNpcs = npcs.map((npc, idx) => { const e = buildPoliticalNarrative(npc, idx, summary, npcs, heldByOthers(secretsNow, idx)); secretsNow[idx] = e?.secret?.what; return e; }); // REVIEW-INTAKE-4: the overlay refuses a secret another figure holds (MERGE-R2: inside the census's declared draw)
   const rawMergedNpcs = mergeNPCLists(
     enrichedNpcs,
     settlement.powerStructure?.factions || [],
@@ -998,7 +1000,7 @@ export const generateCoherence = (settlement, coherenceRng = null, pins = null) 
     () => buildStressProfile(
       history.historicalEvents || [],
       settlement.tier,
-      settlement.config,
+      settlement.config, factsOf(settlement), // F11, CENSUS-1c: the reserve line's declared wall-free sibling; one line, so no cited line moves
     ),
   );
 

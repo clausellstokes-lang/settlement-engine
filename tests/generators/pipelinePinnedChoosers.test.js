@@ -460,7 +460,10 @@ describe('EM-B2a3 — the institution and power choosers consult the pin seam', 
     // holds [0, 0], so the refusal is the control's, never the product's, and the control stays live.
     expect(bareAssemble.threw).toBe(1);
     expect(bareAssemble.messages).toEqual(['Cannot add property 0, object is not extensible']);
-    expect(barePower.mutated).toBe(26); // 2026-10-01, the urban band (ODQ §934.86): 30 -> 47; the druid rulings (2026-10-01, ODQ §934.86 addendum 2, J30–J33): 47 -> 46; re-measured; 2026-11-05, records 12–26 (ODQ §934.105, LANDING-5 under the chair's ruling 4): 46 -> 26
+    expect(barePower.mutated).toBe(37); // 2026-10-01, the urban band (ODQ §934.86): 30 -> 47; the druid rulings (2026-10-01, ODQ §934.86 addendum 2, J30–J33): 47 -> 46; re-measured; 2026-11-05, records 12–26 (ODQ §934.105, LANDING-5 under the chair's ruling 4): 46 -> 26; 2026-11-07 (LANDING-R2 seat C2, the pool census composed): 26 -> 37 at census-1i R-AW (ba7887862, the
+    // label resolved at the birth's close) with the replay's intent key reading the declared twin as the same bloc (this
+    // commit). Measured at the tip: R-AW's close call disabled, 26 / threw 0; R-AW alone, 23 / threw 14 (the replay's roster
+    // assert refusing the relabelled record); R-AW with the twin key, 37 / threw 0. Still not vacuous.
     expect(barePower.threw).toBe(0);
     expect(bareAssemble.rows).toBe(63);
   }, 300_000);

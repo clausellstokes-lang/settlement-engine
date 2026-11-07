@@ -1,0 +1,1730 @@
+{
+ "poolId": "STRESS_DESCS",
+ "source": "src/data/narrativeData.js:150-391",
+ "drawKind": "R",
+ "drawSite": "src/generators/narrative/arrivalScene.js:213-227 (primary stress; filter at :224; one pickRandom at :227 on the 'arrival-scene' substream; HOOK beat)",
+ "pools": [
+  {
+   "pool": "under_siege",
+   "keyGuarantees": [
+    "resolvePrimaryStress(stress types) === 'under_siege' (stressPriority.js order)",
+    "lines naming a structure the native roster lacks are filtered (unheldClaims, STRUCTURE_CLAIMS) and so are lines naming a defence force/walls the record lacks (defenseWordsFindings); if the filter empties the pool the whole pool is drawn"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": [
+    "under_siege"
+   ],
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Crisis-keyed: lines inherit the kind; needs translate the STRUCTURE_CLAIMS/defenseWords filters into atoms; lines asserting wider normality exclude the families they deny.",
+   "lines": [
+    {
+     "lineId": "STRESS_DESCS.under_siege[0]",
+     "text": "The gates of {name} are closed. There are people on the walls. This is not the relaxed watch of a settlement going about its day. These are people watching the treeline. A runner comes out of the small side gate, sees your group, stops.",
+     "needs": [
+      "gate",
+      "walls"
+     ],
+     "excludes": [],
+     "crisis": [
+      "under_siege"
+     ],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "STRESS_DESCS.under_siege[1]",
+     "text": "{name}'s gates are open but attended: every person entering is noted, every cart searched. The guards are professional about it, which makes it worse. Professional means this has been happening long enough to become routine.",
+     "needs": [
+      "gate"
+     ],
+     "excludes": [],
+     "crisis": [
+      "under_siege"
+     ],
+     "colour": false,
+     "stop": [
+      "guards (STRUCTURE_CLAIMS guard family: watch | garrison | militia; no disjunction atom)"
+     ]
+    },
+    {
+     "lineId": "STRESS_DESCS.under_siege[2]",
+     "text": "From the road, {name} looks ordinary. Smoke from cookfires, the sound of a market. It is only at the gate that the weight becomes apparent: the guards' expressions, the way conversation stops when strangers approach.",
+     "needs": [
+      "gate",
+      "market"
+     ],
+     "excludes": [],
+     "crisis": [
+      "under_siege"
+     ],
+     "colour": false,
+     "stop": [
+      "guards (STRUCTURE_CLAIMS guard family: watch | garrison | militia; no disjunction atom)"
+     ]
+    },
+    {
+     "lineId": "STRESS_DESCS.under_siege[3]",
+     "text": "The approach to {name} is quieter than it should be for a settlement this size. The outlying farms are empty. The road has not been maintained recently. The settlement itself is intact, but everything around it has been abandoned to the walls.",
+     "needs": [
+      "walls"
+     ],
+     "excludes": [],
+     "crisis": [
+      "under_siege"
+     ],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "STRESS_DESCS.under_siege[4]",
+     "text": "The fields around {name} were harvested early and badly: stubble cut in haste, carts gone. Whatever the walls are waiting for, the granaries inside are already keeping its schedule.",
+     "needs": [
+      "walls",
+      "institution: granary"
+     ],
+     "excludes": [],
+     "crisis": [
+      "under_siege"
+     ],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "STRESS_DESCS.under_siege[5]",
+     "text": "A thrown stone sits half-buried a hundred paces short of {name}'s wall, left where it landed. Nobody has hauled it away. There are fresher things to attend to.",
+     "needs": [
+      "walls"
+     ],
+     "excludes": [],
+     "crisis": [
+      "under_siege"
+     ],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "STRESS_DESCS.under_siege[6]",
+     "text": "{name} has drawn in on itself. Every family from the outlying fields is sleeping under a neighbour's roof, the livestock are penned between the houses, and someone is always watching the treeline.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "under_siege"
+     ],
+     "colour": [
+      "under_siege"
+     ],
+     "stop": []
+    },
+    {
+     "lineId": "STRESS_DESCS.under_siege[7]",
+     "text": "There are campfires on the hill above {name}, and they are not {name}'s. The people inside keep their own fires low and their voices lower, and they count the strangers' fires every night.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "under_siege"
+     ],
+     "colour": [
+      "under_siege"
+     ],
+     "stop": []
+    },
+    {
+     "lineId": "STRESS_DESCS.under_siege[8]",
+     "text": "Carts and timber block the lanes into {name}, piled in a hurry and manned around the clock. The faces behind them are farmers' faces, and none of them has slept.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "under_siege"
+     ],
+     "colour": [
+      "under_siege"
+     ],
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "famine",
+   "keyGuarantees": [
+    "resolvePrimaryStress(stress types) === 'famine' (stressPriority.js order)",
+    "lines naming a structure the native roster lacks are filtered (unheldClaims, STRUCTURE_CLAIMS) and so are lines naming a defence force/walls the record lacks (defenseWordsFindings); if the filter empties the pool the whole pool is drawn"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": [
+    "famine"
+   ],
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Crisis-keyed: lines inherit the kind; needs translate the STRUCTURE_CLAIMS/defenseWords filters into atoms; lines asserting wider normality exclude the families they deny.",
+   "lines": [
+    {
+     "lineId": "STRESS_DESCS.famine[0]",
+     "text": "{name} looks prosperous in the merchant quarter: new paint, loaded carts, a market stall with produce. It is only when you walk further in that the other version of the settlement appears: shuttered houses, people sitting on doorsteps with no particular purpose.",
+     "needs": [
+      "market"
+     ],
+     "excludes": [],
+     "crisis": [
+      "famine"
+     ],
+     "colour": false,
+     "stop": [
+      "quarters/districts (size; tier not a fact home)"
+     ]
+    },
+    {
+     "lineId": "STRESS_DESCS.famine[1]",
+     "text": "{name} is functional. The market is open, the streets are swept, the guards are at their posts. Something is wrong anyway. It takes a moment to identify: there are no children playing in the street.",
+     "needs": [
+      "market"
+     ],
+     "excludes": [],
+     "crisis": [
+      "famine"
+     ],
+     "colour": false,
+     "stop": [
+      "guards (STRUCTURE_CLAIMS guard family: watch | garrison | militia; no disjunction atom)"
+     ]
+    },
+    {
+     "lineId": "STRESS_DESCS.famine[2]",
+     "text": "The queue at the granary gate is the first thing you see in {name}. Not a market queue, not a water queue: the organised, patient, daily queue of people who are waiting to receive what they are owed and are not certain they will receive it.",
+     "needs": [
+      "institution: granary"
+     ],
+     "excludes": [],
+     "crisis": [
+      "famine"
+     ],
+     "colour": false,
+     "stop": [
+      "\"granary gate\" trips the perimeter claim (STRUCTURE_CLAIMS) though it is the granary's door"
+     ]
+    },
+    {
+     "lineId": "STRESS_DESCS.famine[3]",
+     "text": "{name} is orderly in the way that a settlement is orderly when order is being enforced. The streets are clear. The rationing markers are painted on the doors. A guard patrol passes and everyone steps aside.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "famine"
+     ],
+     "colour": false,
+     "stop": [
+      "guards (STRUCTURE_CLAIMS guard family: watch | garrison | militia; no disjunction atom)"
+     ]
+    },
+    {
+     "lineId": "STRESS_DESCS.famine[4]",
+     "text": "The dogs of {name} are gone. It takes a while to notice and longer to stop noticing, and nobody in the settlement will discuss it with a stranger.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "famine"
+     ],
+     "colour": [
+      "famine"
+     ],
+     "stop": []
+    },
+    {
+     "lineId": "STRESS_DESCS.famine[5]",
+     "text": "Prices chalked outside {name}'s market gate have been rubbed out and rewritten so often the board has gone grey. The numbers on it now are polite fictions; the real trading happens in back rooms, in kind.",
+     "needs": [
+      "market"
+     ],
+     "excludes": [],
+     "crisis": [
+      "famine"
+     ],
+     "colour": false,
+     "stop": [
+      "\"market gate\" trips the perimeter claim"
+     ]
+    },
+    {
+     "lineId": "STRESS_DESCS.famine[6]",
+     "text": "The smoke from {name}'s chimneys is thin. People here look at your pack before they look at your face, and then look away, ashamed of having looked.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "famine"
+     ],
+     "colour": [
+      "famine"
+     ],
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "occupied",
+   "keyGuarantees": [
+    "resolvePrimaryStress(stress types) === 'occupied' (stressPriority.js order)",
+    "lines naming a structure the native roster lacks are filtered (unheldClaims, STRUCTURE_CLAIMS) and so are lines naming a defence force/walls the record lacks (defenseWordsFindings); if the filter empties the pool the whole pool is drawn"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": [
+    "occupied"
+   ],
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Crisis-keyed: lines inherit the kind; needs translate the STRUCTURE_CLAIMS/defenseWords filters into atoms; lines asserting wider normality exclude the families they deny.",
+   "lines": [
+    {
+     "lineId": "STRESS_DESCS.occupied[0]",
+     "text": "The flags above {name}'s gatehouse are not the settlement's own. Two soldiers at the gate. Their uniform is not local. They look at your papers with the particular expression of people who have been told to look at papers.",
+     "needs": [
+      "gate"
+     ],
+     "excludes": [],
+     "crisis": [
+      "occupied"
+     ],
+     "colour": false,
+     "stop": [
+      "soldiers (defenseWords: garrison | hired company; no disjunction atom); here they are the occupier's, not the record's garrison"
+     ]
+    },
+    {
+     "lineId": "STRESS_DESCS.occupied[1]",
+     "text": "{name} looks normal from the approach. It is only at the gate that the nature of normal becomes apparent: the guard asks where you are from, writes it down, and asks how long you intend to stay. This is not the usual question.",
+     "needs": [
+      "gate"
+     ],
+     "excludes": [],
+     "crisis": [
+      "occupied"
+     ],
+     "colour": false,
+     "stop": [
+      "guards (STRUCTURE_CLAIMS guard family: watch | garrison | militia; no disjunction atom)"
+     ]
+    },
+    {
+     "lineId": "STRESS_DESCS.occupied[2]",
+     "text": "The approach to {name} looks like any other settlement. There is graffiti on the wall near the gate that someone has attempted to scrub off. The symbol is still readable.",
+     "needs": [
+      "gate"
+     ],
+     "excludes": [],
+     "crisis": [
+      "occupied"
+     ],
+     "colour": false,
+     "stop": [
+      "\"the wall near the gate\" (a wall face, read as perimeter by STRUCTURE_CLAIMS)"
+     ]
+    },
+    {
+     "lineId": "STRESS_DESCS.occupied[3]",
+     "text": "{name} is going about its business. The market is open, the streets are busy, the gates are attended by soldiers whose armour is not local. Everyone is doing what they are supposed to be doing, which is the point.",
+     "needs": [
+      "market",
+      "gate"
+     ],
+     "excludes": [],
+     "crisis": [
+      "occupied"
+     ],
+     "colour": false,
+     "stop": [
+      "soldiers (defenseWords: garrison | hired company; no disjunction atom)"
+     ]
+    },
+    {
+     "lineId": "STRESS_DESCS.occupied[4]",
+     "text": "{name}'s street signs have been repainted in two languages, the local one second. The new lettering is neat, official, and everywhere, which is how you learn the occupation intends to stay.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "occupied"
+     ],
+     "colour": [
+      "occupied"
+     ],
+     "stop": []
+    },
+    {
+     "lineId": "STRESS_DESCS.occupied[5]",
+     "text": "At {name}'s gate the queue divides in two: residents with papers, and everyone else. The residents' line is longer and moves slower, and no one in it complains where the soldiers can hear.",
+     "needs": [
+      "gate"
+     ],
+     "excludes": [],
+     "crisis": [
+      "occupied"
+     ],
+     "colour": false,
+     "stop": [
+      "soldiers (defenseWords: garrison | hired company; no disjunction atom)"
+     ]
+    },
+    {
+     "lineId": "STRESS_DESCS.occupied[6]",
+     "text": "Strangers in foreign colours stand where the roads meet in {name}, and the locals walk around them as if they were furniture nobody wanted.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "occupied"
+     ],
+     "colour": [
+      "occupied"
+     ],
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "politically_fractured",
+   "keyGuarantees": [
+    "resolvePrimaryStress(stress types) === 'politically_fractured' (stressPriority.js order)",
+    "lines naming a structure the native roster lacks are filtered (unheldClaims, STRUCTURE_CLAIMS) and so are lines naming a defence force/walls the record lacks (defenseWordsFindings); if the filter empties the pool the whole pool is drawn"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": [
+    "politically_fractured"
+   ],
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Crisis-keyed: lines inherit the kind; needs translate the STRUCTURE_CLAIMS/defenseWords filters into atoms; lines asserting wider normality exclude the families they deny.",
+   "lines": [
+    {
+     "lineId": "STRESS_DESCS.politically_fractured[0]",
+     "text": "{name} has two gates. The eastern one is controlled by one faction, the western by another. You can tell by the pennants. The road you are on leads to the eastern gate.",
+     "needs": [
+      "gate"
+     ],
+     "excludes": [],
+     "crisis": [
+      "politically_fractured"
+     ],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "STRESS_DESCS.politically_fractured[1]",
+     "text": "The gate guard at {name} asks where you intend to stay: which inn, which district. The answer apparently matters. They note it and say nothing further.",
+     "needs": [
+      "gate",
+      "institution: tavern"
+     ],
+     "excludes": [],
+     "crisis": [
+      "politically_fractured"
+     ],
+     "colour": false,
+     "stop": [
+      "guards (STRUCTURE_CLAIMS guard family: watch | garrison | militia; no disjunction atom)",
+      "quarters/districts (size; tier not a fact home)"
+     ]
+    },
+    {
+     "lineId": "STRESS_DESCS.politically_fractured[2]",
+     "text": "The road into {name} has been marked. Symbols painted on fence posts and milestone stones: the same symbol, repeated, belonging to one faction or another. Someone has been doing this recently; the paint is fresh.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "politically_fractured"
+     ],
+     "colour": [
+      "politically_fractured"
+     ],
+     "stop": []
+    },
+    {
+     "lineId": "STRESS_DESCS.politically_fractured[3]",
+     "text": "{name} is quieter than it should be. Not the quiet of a sleeping town or a working one: the particular quiet of a place where people have learned to be careful about what they say in earshot of strangers.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "politically_fractured"
+     ],
+     "colour": [
+      "politically_fractured"
+     ],
+     "stop": []
+    },
+    {
+     "lineId": "STRESS_DESCS.politically_fractured[4]",
+     "text": "Two tax collectors work {name}'s market: different sashes, different ledgers, studiously ignoring one another. Traders pay one, or the other, or both, according to calculations a visitor is not equipped to make.",
+     "needs": [
+      "market"
+     ],
+     "excludes": [],
+     "crisis": [
+      "politically_fractured"
+     ],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "STRESS_DESCS.politically_fractured[5]",
+     "text": "The council hall of {name} is dark; the business of governing has moved to two different taverns at opposite ends of town. Which one you drink in has become a declaration.",
+     "needs": [
+      "institution: tavern"
+     ],
+     "excludes": [],
+     "crisis": [
+      "politically_fractured"
+     ],
+     "colour": false,
+     "stop": [
+      "council building/offices (ruler kind not guaranteed; no presence reader)"
+     ]
+    }
+   ]
+  },
+  {
+   "pool": "indebted",
+   "keyGuarantees": [
+    "resolvePrimaryStress(stress types) === 'indebted' (stressPriority.js order)",
+    "lines naming a structure the native roster lacks are filtered (unheldClaims, STRUCTURE_CLAIMS) and so are lines naming a defence force/walls the record lacks (defenseWordsFindings); if the filter empties the pool the whole pool is drawn"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": [
+    "indebted"
+   ],
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Crisis-keyed: lines inherit the kind; needs translate the STRUCTURE_CLAIMS/defenseWords filters into atoms; lines asserting wider normality exclude the families they deny.",
+   "lines": [
+    {
+     "lineId": "STRESS_DESCS.indebted[0]",
+     "text": "{name} is in reasonable shape. The walls are standing, the market is functioning, the main street is paved. The paving needs repair. The wall has a section of new brick that doesn't quite match the old. The repairs that needed doing five years ago are still waiting.",
+     "needs": [
+      "walls",
+      "market"
+     ],
+     "excludes": [
+      "crisis: threat"
+     ],
+     "crisis": [
+      "indebted"
+     ],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "STRESS_DESCS.indebted[1]",
+     "text": "A building near the gate has a new sign: an institution that wasn't there last season, with a name that is recognisably the name of an outside creditor. Someone has arrived and set up an office. This is not a good sign.",
+     "needs": [
+      "gate"
+     ],
+     "excludes": [],
+     "crisis": [
+      "indebted"
+     ],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "STRESS_DESCS.indebted[2]",
+     "text": "{name} functions. The market is busy enough. The streets are clean enough. The civic buildings are maintained enough. 'Enough' is doing a lot of work in every impression.",
+     "needs": [
+      "market"
+     ],
+     "excludes": [],
+     "crisis": [
+      "indebted"
+     ],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "STRESS_DESCS.indebted[3]",
+     "text": "The merchant district of {name} looks prosperous. The rest of the settlement, visible further in, looks like it has been waiting for the merchant district's prosperity to reach it for some years.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "indebted"
+     ],
+     "colour": false,
+     "stop": [
+      "quarters/districts (size; tier not a fact home)"
+     ]
+    },
+    {
+     "lineId": "STRESS_DESCS.indebted[4]",
+     "text": "The finest building in {name} is new, stone-built, and belongs to nobody local: a counting house, its brass plate polished daily by a clerk who arrived with the ledgers. It is what everything else in town is working to pay for.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "indebted"
+     ],
+     "colour": false,
+     "stop": [
+      "counting house"
+     ]
+    },
+    {
+     "lineId": "STRESS_DESCS.indebted[5]",
+     "text": "{name} holds a market day that has quietly become a collection day: the stalls pay their pitch fees to a factor before they sell a thing, and the factor's book has more names in it than the market has stalls.",
+     "needs": [
+      "market"
+     ],
+     "excludes": [],
+     "crisis": [
+      "indebted"
+     ],
+     "colour": false,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "recently_betrayed",
+   "keyGuarantees": [
+    "resolvePrimaryStress(stress types) === 'recently_betrayed' (stressPriority.js order)",
+    "lines naming a structure the native roster lacks are filtered (unheldClaims, STRUCTURE_CLAIMS) and so are lines naming a defence force/walls the record lacks (defenseWordsFindings); if the filter empties the pool the whole pool is drawn"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": [
+    "recently_betrayed"
+   ],
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Crisis-keyed: lines inherit the kind; needs translate the STRUCTURE_CLAIMS/defenseWords filters into atoms; lines asserting wider normality exclude the families they deny.",
+   "lines": [
+    {
+     "lineId": "STRESS_DESCS.recently_betrayed[0]",
+     "text": "The guard at {name}'s gate is polite, thorough, and writes down more than guards usually write down. You are asked your business three times, by three different people, in the space of five minutes.",
+     "needs": [
+      "gate"
+     ],
+     "excludes": [],
+     "crisis": [
+      "recently_betrayed"
+     ],
+     "colour": false,
+     "stop": [
+      "guards (STRUCTURE_CLAIMS guard family: watch | garrison | militia; no disjunction atom)"
+     ]
+    },
+    {
+     "lineId": "STRESS_DESCS.recently_betrayed[1]",
+     "text": "Something happened in {name} recently. You cannot immediately say what, but the settlement has the quality of a place that is still processing something: hushed conversations, people watching the street.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "recently_betrayed"
+     ],
+     "colour": [
+      "recently_betrayed"
+     ],
+     "stop": []
+    },
+    {
+     "lineId": "STRESS_DESCS.recently_betrayed[2]",
+     "text": "There are notices posted at the gate of {name}. You take a moment to read one: it is asking for information about a specific event, with a contact at the council offices. The date on the notice is recent.",
+     "needs": [
+      "gate"
+     ],
+     "excludes": [],
+     "crisis": [
+      "recently_betrayed"
+     ],
+     "colour": false,
+     "stop": [
+      "council building/offices (ruler kind not guaranteed; no presence reader)"
+     ]
+    },
+    {
+     "lineId": "STRESS_DESCS.recently_betrayed[3]",
+     "text": "{name} looks ordinary from the approach. It is only in the expressions of the people at the gate (watchful in a specific, tired way) that something registers.",
+     "needs": [
+      "gate"
+     ],
+     "excludes": [],
+     "crisis": [
+      "recently_betrayed"
+     ],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "STRESS_DESCS.recently_betrayed[4]",
+     "text": "{name} has new locks. You can see the bright hasps on doors and shutters as you walk in: ironmongery bought all at once, recently, by people who used not to need it.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "recently_betrayed"
+     ],
+     "colour": [
+      "recently_betrayed"
+     ],
+     "stop": []
+    },
+    {
+     "lineId": "STRESS_DESCS.recently_betrayed[5]",
+     "text": "Conversation in {name}'s common room stops at the creak of the door-hinge, resumes a beat later, carefully general. Whatever happened here, everyone has already said everything they intend to say about it.",
+     "needs": [
+      "institution: tavern"
+     ],
+     "excludes": [],
+     "crisis": [
+      "recently_betrayed"
+     ],
+     "colour": false,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "infiltrated",
+   "keyGuarantees": [
+    "resolvePrimaryStress(stress types) === 'infiltrated' (stressPriority.js order)",
+    "lines naming a structure the native roster lacks are filtered (unheldClaims, STRUCTURE_CLAIMS) and so are lines naming a defence force/walls the record lacks (defenseWordsFindings); if the filter empties the pool the whole pool is drawn"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": [
+    "infiltrated"
+   ],
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Crisis-keyed: lines inherit the kind; needs translate the STRUCTURE_CLAIMS/defenseWords filters into atoms; lines asserting wider normality exclude the families they deny.",
+   "lines": [
+    {
+     "lineId": "STRESS_DESCS.infiltrated[0]",
+     "text": "{name} looks exactly like it should. The gate is attended, the market sounds busy, there is nothing remarkable about the approach. Everything is as it should be.",
+     "needs": [
+      "gate",
+      "market"
+     ],
+     "excludes": [
+      "crisis: threat",
+      "crisis: hunger",
+      "crisis: succession",
+      "crisis: unrest"
+     ],
+     "crisis": [
+      "infiltrated"
+     ],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "STRESS_DESCS.infiltrated[1]",
+     "text": "The approach to {name} is unremarkable in every respect. Gate, road, market noise, smoke, the usual questions from the guard. Nothing to note.",
+     "needs": [
+      "gate",
+      "market"
+     ],
+     "excludes": [
+      "crisis: threat",
+      "crisis: hunger",
+      "crisis: succession",
+      "crisis: unrest"
+     ],
+     "crisis": [
+      "infiltrated"
+     ],
+     "colour": false,
+     "stop": [
+      "guards (STRUCTURE_CLAIMS guard family: watch | garrison | militia; no disjunction atom)"
+     ]
+    },
+    {
+     "lineId": "STRESS_DESCS.infiltrated[2]",
+     "text": "{name} looks normal. There is a moment at the gate (a guard glancing at another guard after you answer a question) that is probably nothing.",
+     "needs": [
+      "gate"
+     ],
+     "excludes": [],
+     "crisis": [
+      "infiltrated"
+     ],
+     "colour": false,
+     "stop": [
+      "guards (STRUCTURE_CLAIMS guard family: watch | garrison | militia; no disjunction atom)"
+     ]
+    },
+    {
+     "lineId": "STRESS_DESCS.infiltrated[3]",
+     "text": "{name} is functioning well. Clean streets, busy market, maintained walls. If you were looking for problems, you would not find them from the outside.",
+     "needs": [
+      "market",
+      "walls"
+     ],
+     "excludes": [
+      "crisis: threat",
+      "crisis: hunger",
+      "crisis: succession",
+      "crisis: unrest"
+     ],
+     "crisis": [
+      "infiltrated"
+     ],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "STRESS_DESCS.infiltrated[4]",
+     "text": "Nothing in {name} is out of place. The watch changes on the hour, the market closes at dusk, the innkeeper remembers your name on the second morning. It is all exactly as a well-run town should be.",
+     "needs": [
+      "watch",
+      "market",
+      "institution: tavern"
+     ],
+     "excludes": [
+      "crisis: threat",
+      "crisis: hunger",
+      "crisis: succession",
+      "crisis: unrest"
+     ],
+     "crisis": [
+      "infiltrated"
+     ],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "STRESS_DESCS.infiltrated[5]",
+     "text": "{name} welcomes travellers with practised ease: a good inn, fair prices, incurious guards. A week later you would struggle to say why the ease sat strangely. It was practised.",
+     "needs": [
+      "institution: tavern"
+     ],
+     "excludes": [
+      "crisis: hunger"
+     ],
+     "crisis": [
+      "infiltrated"
+     ],
+     "colour": false,
+     "stop": [
+      "guards (STRUCTURE_CLAIMS guard family: watch | garrison | militia; no disjunction atom)"
+     ]
+    },
+    {
+     "lineId": "STRESS_DESCS.infiltrated[6]",
+     "text": "{name} is friendly. Everyone you meet is helpful, and everyone you meet asks one question more than they need to: where you are going next, and who you know there.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "infiltrated"
+     ],
+     "colour": [
+      "infiltrated"
+     ],
+     "stop": []
+    },
+    {
+     "lineId": "STRESS_DESCS.infiltrated[7]",
+     "text": "{name} runs smoothly, almost too smoothly. Quarrels that should be loud are settled quietly and fast, and nobody can quite tell you who settled them.",
+     "needs": [],
+     "excludes": [
+      "crisis: unrest"
+     ],
+     "crisis": [
+      "infiltrated"
+     ],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "STRESS_DESCS.infiltrated[8]",
+     "text": "In {name} the same stranger seems to turn up wherever you go: at the well, on the road, at the edge of every conversation. He never says much. He never needs to.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "infiltrated"
+     ],
+     "colour": [
+      "infiltrated"
+     ],
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "plague_onset",
+   "keyGuarantees": [
+    "resolvePrimaryStress(stress types) === 'plague_onset' (stressPriority.js order)",
+    "lines naming a structure the native roster lacks are filtered (unheldClaims, STRUCTURE_CLAIMS) and so are lines naming a defence force/walls the record lacks (defenseWordsFindings); if the filter empties the pool the whole pool is drawn"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": [
+    "plague_onset"
+   ],
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Crisis-keyed: lines inherit the kind; needs translate the STRUCTURE_CLAIMS/defenseWords filters into atoms; lines asserting wider normality exclude the families they deny.",
+   "lines": [
+    {
+     "lineId": "STRESS_DESCS.plague_onset[0]",
+     "text": "The approach to {name} is interrupted by a checkpoint a quarter mile from the gates: a temporary structure, manned by people wearing cloth over their faces. They want to know where you came from and when.",
+     "needs": [
+      "gate"
+     ],
+     "excludes": [],
+     "crisis": [
+      "plague_onset"
+     ],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "STRESS_DESCS.plague_onset[1]",
+     "text": "{name}'s gate is open, the market is running, and there are people in the street. People are giving each other slightly more space than usual. A cart passes with barrels marked with an unfamiliar symbol. You have seen that symbol once before, on a quarantine notice.",
+     "needs": [
+      "gate",
+      "market"
+     ],
+     "excludes": [],
+     "crisis": [
+      "plague_onset"
+     ],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "STRESS_DESCS.plague_onset[2]",
+     "text": "Near the gate of {name} there is a temporary shelter: a healer's station, by the look of it, with two attendants and a queue. The queue is not yet long. That is either good or early.",
+     "needs": [
+      "gate",
+      "healer"
+     ],
+     "excludes": [],
+     "crisis": [
+      "plague_onset"
+     ],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "STRESS_DESCS.plague_onset[3]",
+     "text": "Some of {name}'s market stalls are closed. Not all, not most, but several, in a pattern that isn't about the day of the week. The ones that are open are busy; the ones that are closed have been for a while.",
+     "needs": [
+      "market"
+     ],
+     "excludes": [],
+     "crisis": [
+      "plague_onset"
+     ],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "STRESS_DESCS.plague_onset[4]",
+     "text": "{name}'s gate stands open, but the gatekeeper waves you through from a distance, and the well just inside has been roped off under a painted sign too weathered to read from horseback.",
+     "needs": [
+      "gate"
+     ],
+     "excludes": [],
+     "crisis": [
+      "plague_onset"
+     ],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "STRESS_DESCS.plague_onset[5]",
+     "text": "Smoke rises from {name} at midday: not cookfires but something being burned deliberately, bedding or clothes, in a yard behind the healer's house. The street watches it burn and says nothing.",
+     "needs": [
+      "healer"
+     ],
+     "excludes": [],
+     "crisis": [
+      "plague_onset"
+     ],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "STRESS_DESCS.plague_onset[6]",
+     "text": "{name} smells of vinegar and woodsmoke. Doors that should be open are shut, and the people who do come out keep a careful distance from one another, and from you.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "plague_onset"
+     ],
+     "colour": [
+      "plague_onset"
+     ],
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "succession_void",
+   "keyGuarantees": [
+    "resolvePrimaryStress(stress types) === 'succession_void' (stressPriority.js order)",
+    "lines naming a structure the native roster lacks are filtered (unheldClaims, STRUCTURE_CLAIMS) and so are lines naming a defence force/walls the record lacks (defenseWordsFindings); if the filter empties the pool the whole pool is drawn"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": [
+    "succession_void"
+   ],
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Crisis-keyed: lines inherit the kind; needs translate the STRUCTURE_CLAIMS/defenseWords filters into atoms; lines asserting wider normality exclude the families they deny.",
+   "lines": [
+    {
+     "lineId": "STRESS_DESCS.succession_void[0]",
+     "text": "There are two sets of pennants above {name}'s main gate: different colours, same height. Someone made a decision to hang them both and has committed to maintaining the ambiguity.",
+     "needs": [
+      "gate"
+     ],
+     "excludes": [],
+     "crisis": [
+      "succession_void"
+     ],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "STRESS_DESCS.succession_void[1]",
+     "text": "{name} has the specific quality of a settlement waiting for news. People are going about their business, but there is a particular alertness to the street: people checking who is talking to whom.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "succession_void"
+     ],
+     "colour": [
+      "succession_void"
+     ],
+     "stop": []
+    },
+    {
+     "lineId": "STRESS_DESCS.succession_void[2]",
+     "text": "The road into {name} has been busy recently. You can tell by the wheel ruts, the quality of the mud, the number of horses at the inn you pass on the approach. Something is happening that requires people to arrive quickly.",
+     "needs": [
+      "institution: tavern"
+     ],
+     "excludes": [],
+     "crisis": [
+      "succession_void"
+     ],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "STRESS_DESCS.succession_void[3]",
+     "text": "{name} functions, after a fashion. The market is open, the gates are attended. The flagpole above the council building is empty. Someone removed the standard and hasn't replaced it yet.",
+     "needs": [
+      "market",
+      "gate"
+     ],
+     "excludes": [],
+     "crisis": [
+      "succession_void"
+     ],
+     "colour": false,
+     "stop": [
+      "council building/offices (ruler kind not guaranteed; no presence reader)"
+     ]
+    },
+    {
+     "lineId": "STRESS_DESCS.succession_void[4]",
+     "text": "The masons of {name} have stopped mid-job on the great house; scaffolding stands empty on dressed stone. Work that fine waits on a patron, and the town is not currently sure who that is.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "succession_void"
+     ],
+     "colour": false,
+     "stop": [
+      "great house, masons"
+     ]
+    },
+    {
+     "lineId": "STRESS_DESCS.succession_void[5]",
+     "text": "In {name}'s taproom the toast is to \"the settlement\": a formulation everyone has adopted at once, smooth as furniture, since naming anyone more specific has become a wager.",
+     "needs": [
+      "institution: tavern"
+     ],
+     "excludes": [],
+     "crisis": [
+      "succession_void"
+     ],
+     "colour": false,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "monster_pressure",
+   "keyGuarantees": [
+    "resolvePrimaryStress(stress types) === 'monster_pressure' (stressPriority.js order)",
+    "lines naming a structure the native roster lacks are filtered (unheldClaims, STRUCTURE_CLAIMS) and so are lines naming a defence force/walls the record lacks (defenseWordsFindings); if the filter empties the pool the whole pool is drawn"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": [
+    "monster_pressure"
+   ],
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Crisis-keyed: lines inherit the kind; needs translate the STRUCTURE_CLAIMS/defenseWords filters into atoms; lines asserting wider normality exclude the families they deny.",
+   "lines": [
+    {
+     "lineId": "STRESS_DESCS.monster_pressure[0]",
+     "text": "{name} is more fortified than its size suggests. The walls are new (or newly repaired), the mortar still pale. There are more torches at the gate than a settlement like this would normally need.",
+     "needs": [
+      "walls",
+      "gate"
+     ],
+     "excludes": [],
+     "crisis": [
+      "monster_pressure"
+     ],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "STRESS_DESCS.monster_pressure[1]",
+     "text": "The farms outside {name} are partially abandoned. You count three sets of buildings that have not been worked recently: the fields untended, the doors standing open. The settlement's wall is a quarter mile closer than it would have been three months ago.",
+     "needs": [
+      "walls"
+     ],
+     "excludes": [],
+     "crisis": [
+      "monster_pressure"
+     ],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "STRESS_DESCS.monster_pressure[2]",
+     "text": "{name}'s gate is attended by its usual guards and, less usually, by several people in road-worn equipment who are clearly not local and clearly not merchants. The settlement is paying for help.",
+     "needs": [
+      "gate"
+     ],
+     "excludes": [],
+     "crisis": [
+      "monster_pressure"
+     ],
+     "colour": false,
+     "stop": [
+      "guards (STRUCTURE_CLAIMS guard family: watch | garrison | militia; no disjunction atom)",
+      "hired help (mercenaries)"
+     ]
+    },
+    {
+     "lineId": "STRESS_DESCS.monster_pressure[3]",
+     "text": "{name} is going about its business, but the business includes people you wouldn't normally see on a market day: hunters checking arrows, a blacksmith working past dark, a group of militia running a drill in the square visible from the gate.",
+     "needs": [
+      "market",
+      "institution: smith",
+      "militia",
+      "gate"
+     ],
+     "excludes": [],
+     "crisis": [
+      "monster_pressure"
+     ],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "STRESS_DESCS.monster_pressure[4]",
+     "text": "The road into {name} runs its last mile between new watchtowers: timber, hasty, manned. Whatever they watch for, the fields between them have been let go to seed.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "monster_pressure"
+     ],
+     "colour": false,
+     "stop": [
+      "watchtowers (read as perimeter by STRUCTURE_CLAIMS; road towers, not walls)"
+     ]
+    },
+    {
+     "lineId": "STRESS_DESCS.monster_pressure[5]",
+     "text": "{name} buys arrows. The fletcher's is the busiest shop in the settlement, and the militia board outside the gate lists a standing bounty in terms that carefully avoid naming what it is for.",
+     "needs": [
+      "militia",
+      "gate"
+     ],
+     "excludes": [],
+     "crisis": [
+      "monster_pressure"
+     ],
+     "colour": false,
+     "stop": [
+      "fletcher"
+     ]
+    },
+    {
+     "lineId": "STRESS_DESCS.monster_pressure[6]",
+     "text": "{name} keeps its doors barred in daylight. Claw marks score the timber of the outermost houses, old ones and new ones, and the newest have not yet weathered.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "monster_pressure"
+     ],
+     "colour": [
+      "monster_pressure"
+     ],
+     "stop": []
+    },
+    {
+     "lineId": "STRESS_DESCS.monster_pressure[7]",
+     "text": "Every household in {name} keeps a spear by the door, and the children know which way to run. Nobody says what they would be running from. They say it is the woods.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "monster_pressure"
+     ],
+     "colour": [
+      "monster_pressure"
+     ],
+     "stop": []
+    },
+    {
+     "lineId": "STRESS_DESCS.monster_pressure[8]",
+     "text": "Fresh earth marks a row of graves at the edge of {name}, all dug in the same week. The people who dug them still glance at the treeline while they work.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "monster_pressure"
+     ],
+     "colour": [
+      "monster_pressure"
+     ],
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "insurgency",
+   "keyGuarantees": [
+    "resolvePrimaryStress(stress types) === 'insurgency' (stressPriority.js order)",
+    "lines naming a structure the native roster lacks are filtered (unheldClaims, STRUCTURE_CLAIMS) and so are lines naming a defence force/walls the record lacks (defenseWordsFindings); if the filter empties the pool the whole pool is drawn"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": [
+    "insurgency"
+   ],
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Crisis-keyed: lines inherit the kind; needs translate the STRUCTURE_CLAIMS/defenseWords filters into atoms; lines asserting wider normality exclude the families they deny.",
+   "lines": [
+    {
+     "lineId": "STRESS_DESCS.insurgency[0]",
+     "text": "The approach to {name} is ordinary until you notice what is missing: no toll-keeper at the gate, no one collecting the road tax a settlement this size always collects. The guards are present, but they are watching the town, not the road.",
+     "needs": [
+      "gate"
+     ],
+     "excludes": [],
+     "crisis": [
+      "insurgency"
+     ],
+     "colour": false,
+     "stop": [
+      "guards (STRUCTURE_CLAIMS guard family: watch | garrison | militia; no disjunction atom)"
+     ]
+    },
+    {
+     "lineId": "STRESS_DESCS.insurgency[1]",
+     "text": "{name}'s gate stands open and unmanned. Further in, two different sets of notices are posted on the same wall: one in the formal hand of the authorities, one hand-lettered and torn at the corner. Someone tears down the second kind. Someone keeps putting them back.",
+     "needs": [
+      "gate"
+     ],
+     "excludes": [],
+     "crisis": [
+      "insurgency"
+     ],
+     "colour": false,
+     "stop": [
+      "\"the same wall\" (a building wall, read as perimeter)"
+     ]
+    },
+    {
+     "lineId": "STRESS_DESCS.insurgency[2]",
+     "text": "There are soldiers on {name}'s streets, but they move in pairs and do not linger. The people watch them pass with the particular blankness of a place that has already decided which side it is on and is waiting to be asked.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "insurgency"
+     ],
+     "colour": false,
+     "stop": [
+      "soldiers (defenseWords: garrison | hired company; no disjunction atom)"
+     ]
+    },
+    {
+     "lineId": "STRESS_DESCS.insurgency[3]",
+     "text": "{name} looks governed, and is not, quite. The market runs, the watch patrols, the council building is occupied. But the orders that leave that building are not always the orders that get followed, and everyone in the street knows which is which.",
+     "needs": [
+      "market",
+      "watch"
+     ],
+     "excludes": [],
+     "crisis": [
+      "insurgency"
+     ],
+     "colour": false,
+     "stop": [
+      "council building/offices (ruler kind not guaranteed; no presence reader)"
+     ]
+    },
+    {
+     "lineId": "STRESS_DESCS.insurgency[4]",
+     "text": "The garrison of {name} patrols in daylight only, and along routes a stranger could predict by the third day. After dark the town belongs to whoever it belongs to.",
+     "needs": [
+      "garrison"
+     ],
+     "excludes": [],
+     "crisis": [
+      "insurgency"
+     ],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "STRESS_DESCS.insurgency[5]",
+     "text": "Someone has been chalking a sign on {name}'s walls faster than the watch can scrub it. By now the scrubbed patches themselves mark every corner. The censorship has become the graffiti.",
+     "needs": [
+      "walls",
+      "watch"
+     ],
+     "excludes": [],
+     "crisis": [
+      "insurgency"
+     ],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "STRESS_DESCS.insurgency[6]",
+     "text": "Slogans have been scratched into the doors of {name} overnight and half scrubbed away by morning. People read them on the way past without stopping, which is how you know they agree.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "insurgency"
+     ],
+     "colour": [
+      "insurgency"
+     ],
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "mass_migration",
+   "keyGuarantees": [
+    "resolvePrimaryStress(stress types) === 'mass_migration' (stressPriority.js order)",
+    "lines naming a structure the native roster lacks are filtered (unheldClaims, STRUCTURE_CLAIMS) and so are lines naming a defence force/walls the record lacks (defenseWordsFindings); if the filter empties the pool the whole pool is drawn"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": [
+    "mass_migration"
+   ],
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Crisis-keyed: lines inherit the kind; needs translate the STRUCTURE_CLAIMS/defenseWords filters into atoms; lines asserting wider normality exclude the families they deny.",
+   "lines": [
+    {
+     "lineId": "STRESS_DESCS.mass_migration[0]",
+     "text": "The road into {name} is crowded: not with merchants but with families, carts piled with household goods, people who are clearly not from here and clearly not passing through. The gate guard has stopped checking papers. There are too many.",
+     "needs": [
+      "migration: influx",
+      "gate"
+     ],
+     "excludes": [],
+     "crisis": [
+      "mass_migration"
+     ],
+     "colour": false,
+     "stop": [
+      "guards (STRUCTURE_CLAIMS guard family: watch | garrison | militia; no disjunction atom)"
+     ]
+    },
+    {
+     "lineId": "STRESS_DESCS.mass_migration[1]",
+     "text": "{name} has grown a second settlement outside its walls: tents and lean-tos and cookfires on the ground that used to be common pasture. The people there watch you approach with the wariness of those who arrived too late to get inside.",
+     "needs": [
+      "migration: influx",
+      "walls"
+     ],
+     "excludes": [],
+     "crisis": [
+      "mass_migration"
+     ],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "STRESS_DESCS.mass_migration[2]",
+     "text": "Half of {name} seems to have arrived this year. You pass loaded wagons on the road heading in, and inside the walls every spare room has a family in it. Those who were here first have the look of people deciding how much more they can give.",
+     "needs": [
+      "migration: influx",
+      "walls"
+     ],
+     "excludes": [],
+     "crisis": [
+      "mass_migration"
+     ],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "STRESS_DESCS.mass_migration[3]",
+     "text": "{name}'s market speaks three languages you can pick out and more you cannot. The old families and the newcomers trade at the same stalls and do not quite look at each other. Everyone is doing business. No one is comfortable.",
+     "needs": [
+      "migration: influx",
+      "market"
+     ],
+     "excludes": [],
+     "crisis": [
+      "mass_migration"
+     ],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "STRESS_DESCS.mass_migration[4]",
+     "text": "The road to {name} has acquired a verge of graves: recent, orderly, unmarked but tended. People arrived here in numbers, and not all of them finished the journey.",
+     "needs": [
+      "migration: influx"
+     ],
+     "excludes": [],
+     "crisis": [
+      "mass_migration"
+     ],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "STRESS_DESCS.mass_migration[5]",
+     "text": "{name}'s smithy has a queue for wheel-rims and none for ploughshares. A town where the carts outnumber the fields is a town still filling with people who came here with everything they own.",
+     "needs": [
+      "migration: influx",
+      "institution: smith"
+     ],
+     "excludes": [],
+     "crisis": [
+      "mass_migration"
+     ],
+     "colour": false,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "wartime",
+   "keyGuarantees": [
+    "resolvePrimaryStress(stress types) === 'wartime' (stressPriority.js order)",
+    "lines naming a structure the native roster lacks are filtered (unheldClaims, STRUCTURE_CLAIMS) and so are lines naming a defence force/walls the record lacks (defenseWordsFindings); if the filter empties the pool the whole pool is drawn"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": [
+    "wartime"
+   ],
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Crisis-keyed: lines inherit the kind; needs translate the STRUCTURE_CLAIMS/defenseWords filters into atoms; lines asserting wider normality exclude the families they deny.",
+   "lines": [
+    {
+     "lineId": "STRESS_DESCS.wartime[0]",
+     "text": "The road to {name} has been rutted deep by heavy wagons moving in one direction: toward the settlement loaded, away from it loaded differently. At the gate a clerk in crown colours records what comes and goes. This is not a market town's traffic.",
+     "needs": [
+      "gate"
+     ],
+     "excludes": [],
+     "crisis": [
+      "wartime"
+     ],
+     "colour": false,
+     "stop": [
+      "crown (ruler kind: monarchy not a reader value)",
+      "\"not a market town\" trips the market claim though it denies one"
+     ]
+    },
+    {
+     "lineId": "STRESS_DESCS.wartime[1]",
+     "text": "{name}'s young men are not in {name}. You notice it at the gate and it holds true inside: the people working the stalls and the fields are the old, the very young, and the women. A recruiting notice is nailed to the gatepost, its edges soft with weather.",
+     "needs": [
+      "gate",
+      "market"
+     ],
+     "excludes": [],
+     "crisis": [
+      "wartime"
+     ],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "STRESS_DESCS.wartime[2]",
+     "text": "There are more soldiers than citizens visible on {name}'s main street, and the citizens are the ones stepping aside. A requisition column is being loaded in the square: grain, cloth, iron, and the settlement's own carts to carry it away.",
+     "needs": [
+      "market"
+     ],
+     "excludes": [],
+     "crisis": [
+      "wartime"
+     ],
+     "colour": false,
+     "stop": [
+      "soldiers (defenseWords: garrison | hired company; no disjunction atom)"
+     ]
+    },
+    {
+     "lineId": "STRESS_DESCS.wartime[3]",
+     "text": "{name} is prosperous in a way that feels wrong. The forges work past dark, the warehouses are full, the coin is moving, and all of it points one direction, toward a war that is not fought here but is paid for here.",
+     "needs": [
+      "institution: smith"
+     ],
+     "excludes": [
+      "crisis: hunger",
+      "crisis: under_siege",
+      "war: front"
+     ],
+     "crisis": [
+      "wartime"
+     ],
+     "colour": false,
+     "stop": [
+      "warehouses"
+     ]
+    },
+    {
+     "lineId": "STRESS_DESCS.wartime[4]",
+     "text": "{name}'s noticeboard is a wall of requisition orders, each stamped, each superseding the last. At its foot, a smaller paper, hand-lettered: prayers offered nightly, all welcome.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "wartime"
+     ],
+     "colour": [
+      "wartime"
+     ],
+     "stop": []
+    },
+    {
+     "lineId": "STRESS_DESCS.wartime[5]",
+     "text": "The horses in {name}'s paddocks are old, or lame, or foals. Every sound animal of working age has a receipt where it used to be, and the receipts do not say when the crown returns them.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "wartime"
+     ],
+     "colour": false,
+     "stop": [
+      "crown"
+     ]
+    }
+   ]
+  },
+  {
+   "pool": "religious_conversion",
+   "keyGuarantees": [
+    "resolvePrimaryStress(stress types) === 'religious_conversion' (stressPriority.js order)",
+    "lines naming a structure the native roster lacks are filtered (unheldClaims, STRUCTURE_CLAIMS) and so are lines naming a defence force/walls the record lacks (defenseWordsFindings); if the filter empties the pool the whole pool is drawn"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": [
+    "religious_conversion"
+   ],
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Crisis-keyed: lines inherit the kind; needs translate the STRUCTURE_CLAIMS/defenseWords filters into atoms; lines asserting wider normality exclude the families they deny.",
+   "lines": [
+    {
+     "lineId": "STRESS_DESCS.religious_conversion[0]",
+     "text": "Two temples face each other across {name}'s central square, and only one has a queue. The other's doors are open but its steps are swept too clean, walked on too little. Something has moved from one building to the other, and it was not only worshippers.",
+     "needs": [
+      "institution: temple",
+      "market"
+     ],
+     "excludes": [],
+     "crisis": [
+      "religious_conversion"
+     ],
+     "colour": false,
+     "stop": [
+      "two temples (count)"
+     ]
+    },
+    {
+     "lineId": "STRESS_DESCS.religious_conversion[1]",
+     "text": "The shrine at {name}'s gate has been recently altered: one symbol chiselled away, another set in its place, the old outline still faintly visible beneath the new. Someone did this carefully. Someone else has been scratching at the replacement.",
+     "needs": [
+      "institution: temple",
+      "gate"
+     ],
+     "excludes": [],
+     "crisis": [
+      "religious_conversion"
+     ],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "STRESS_DESCS.religious_conversion[2]",
+     "text": "{name} is observing a holy day, and you cannot tell which one. Some shops are shut and draped; others are pointedly open. Two processions are forming in different quarters, and the people watching each are counting who watches the other.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "religious_conversion"
+     ],
+     "colour": false,
+     "stop": [
+      "quarters/districts (size; tier not a fact home)"
+     ]
+    },
+    {
+     "lineId": "STRESS_DESCS.religious_conversion[3]",
+     "text": "The bells of {name} ring at competing times: one set of chimes answered a beat later by another, from a different quarter, slightly out of tune with the first. No one seems to find this strange, which is the strangest part.",
+     "needs": [
+      "institution: temple"
+     ],
+     "excludes": [],
+     "crisis": [
+      "religious_conversion"
+     ],
+     "colour": false,
+     "stop": [
+      "quarters/districts (size; tier not a fact home)"
+     ]
+    },
+    {
+     "lineId": "STRESS_DESCS.religious_conversion[4]",
+     "text": "The mason's yard in {name} is its busiest enterprise: one set of holy symbols coming down, another going up, and the same three workmen paid for both. They no longer joke about it.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "religious_conversion"
+     ],
+     "colour": false,
+     "stop": [
+      "mason's yard"
+     ]
+    },
+    {
+     "lineId": "STRESS_DESCS.religious_conversion[5]",
+     "text": "{name} has two burial grounds now, one old and one new, and the town's grief is learning to sort itself accordingly. The gravedigger serves both and is the most carefully neutral man alive.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "religious_conversion"
+     ],
+     "colour": [
+      "religious_conversion"
+     ],
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "slave_revolt",
+   "keyGuarantees": [
+    "resolvePrimaryStress(stress types) === 'slave_revolt' (stressPriority.js order)",
+    "lines naming a structure the native roster lacks are filtered (unheldClaims, STRUCTURE_CLAIMS) and so are lines naming a defence force/walls the record lacks (defenseWordsFindings); if the filter empties the pool the whole pool is drawn"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": [
+    "slave_revolt"
+   ],
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Crisis-keyed: lines inherit the kind; needs translate the STRUCTURE_CLAIMS/defenseWords filters into atoms; lines asserting wider normality exclude the families they deny.",
+   "lines": [
+    {
+     "lineId": "STRESS_DESCS.slave_revolt[0]",
+     "text": "{name}'s gates are shut in daylight, which is wrong for a settlement of its size. There is smoke inside: not cookfire smoke, too much and too dark. On the wall, the guards face inward, toward their own streets, not out toward you.",
+     "needs": [
+      "gate",
+      "walls"
+     ],
+     "excludes": [],
+     "crisis": [
+      "slave_revolt"
+     ],
+     "colour": false,
+     "stop": [
+      "guards (STRUCTURE_CLAIMS guard family: watch | garrison | militia; no disjunction atom)"
+     ]
+    },
+    {
+     "lineId": "STRESS_DESCS.slave_revolt[1]",
+     "text": "The approach to {name} is blocked by a hasty checkpoint: overturned carts, armed men who are not the regular watch, a hard question about your business before you are allowed within sight of the gate. Whatever is happening inside, they have decided strangers are a risk.",
+     "needs": [
+      "gate",
+      "watch"
+     ],
+     "excludes": [],
+     "crisis": [
+      "slave_revolt"
+     ],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "STRESS_DESCS.slave_revolt[2]",
+     "text": "{name} is quiet in the way a held breath is quiet. The slave market at its heart (you can see the empty auction platform from the gate) stands deserted, ringed by guards. The chains are still there. The people who wore them are not.",
+     "needs": [
+      "market",
+      "gate"
+     ],
+     "excludes": [],
+     "crisis": [
+      "slave_revolt"
+     ],
+     "colour": false,
+     "stop": [
+      "guards (STRUCTURE_CLAIMS guard family: watch | garrison | militia; no disjunction atom)",
+      "slave market (slavery institution)"
+     ]
+    },
+    {
+     "lineId": "STRESS_DESCS.slave_revolt[3]",
+     "text": "There are bodies being carried through {name}'s streets under cloth, and the people carrying them are not mourners but labourers doing grim, fast work. The rising that did this is not finished; you can hear it, somewhere in the lower districts, still going on.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "slave_revolt"
+     ],
+     "colour": false,
+     "stop": [
+      "quarters/districts (size; tier not a fact home)"
+     ]
+    },
+    {
+     "lineId": "STRESS_DESCS.slave_revolt[4]",
+     "text": "The manacle-maker's shop in {name} is shuttered and scorched: the only burned building on the street, which tells you the fire was a statement, not an accident.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "slave_revolt"
+     ],
+     "colour": false,
+     "stop": [
+      "manacle-maker"
+     ]
+    },
+    {
+     "lineId": "STRESS_DESCS.slave_revolt[5]",
+     "text": "{name}'s field gangs work without overseers today, or the overseers have dressed like the gangs. From the road you cannot tell which, and that is the whole story of the settlement this season.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "slave_revolt"
+     ],
+     "colour": [
+      "slave_revolt"
+     ],
+     "stop": []
+    }
+   ]
+  }
+ ]
+}

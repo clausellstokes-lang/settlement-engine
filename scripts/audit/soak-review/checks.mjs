@@ -24,6 +24,8 @@
  * (docs/GENERATION_ROOT_CAUSES_2026-11-02.md, appendix: 1 food, 2 faith, 3 magic, 4 defence,
  * 5 rulers, 6 repetition, 7 unnamed, 8 small places as towns) or to none (`KIND_OF`), which the
  * stop rule reads. Kind 9 (reader) is the READER battery's, which the stop rule does not read.
+ * Kind 10 (crisis; lane F12, rung 2, 2026-11-04) is a contradiction the stop rule reads: a calm
+ * sentence printed under an active crisis it denies (`coh:crisis-blind-prose`).
  */
 import { inspectSettlement } from '../generation-certification-soak.mjs';
 import { normalizeRenderedSentence } from '../phrase-repetition.mjs';
@@ -31,8 +33,14 @@ import { coherenceBattery } from '../../../src/domain/coherence/coherenceBattery
 import { isDefenceClaim } from './defenceReach.mjs';
 import { magicWorksAt } from '../../../src/domain/worldPulse/magicWorksAt.js';
 import { institutionCatalogMagicLicence } from '../../../src/domain/arcaneInstitutionIdentity.js';
-import { hasMarketInstitution } from '../../../src/generators/economy/viability.js';
+import { hasMarketInstitution } from '../../../src/domain/facts/market.js';
 import { READER_BATTERY_CHECKS, readerBattery } from '../../../src/domain/coherence/readerBattery.js';
+import { crisisEntries } from '../../../src/domain/facts/crisisKind.js';
+import { storesMonthsOf } from '../../../src/domain/facts/storesMonths.js';
+import { famineOf } from '../../../src/domain/facts/famine.js';
+import { terrainClassOf, tradeRouteOf } from '../../../src/domain/facts/terrain.js';
+import { waterAccessKind } from '../../../src/domain/tradeRouteSemantics.js';
+import { PATTERN_DENIES_ORGANISATION } from '../../../src/domain/display/defenseDisplay.js';
 
 /** The owner's bands (X-46, docs/UX_CONSOLIDATION_2026-10-30.md; car 1 is parked, not on this tip). */
 export const OWNER_BANDS = Object.freeze({
@@ -53,17 +61,27 @@ export const KIND_OF = Object.freeze({
   // 6); keyed with the people family, 7.
   'coh:roster-duplicate-secret': 7, 'coh:roster-duplicate-goal': 7,
   'A-05:lacks-access-lines': -2,
+  // CENSUS-1b wave 1 (2026-11-04): the runtime self-check (`facts/presumptionCheck.js`) — a drawn
+  // line's declared atom the FINAL record contradicts. A certification failure: STOP from the
+  // first declared pool (the chair's ruling 5).
+  'cert:false-presumption': -1,
   // I2: the advisory battery judgment's verdict — "records the battery would not vouch for" — informational.
   'info:battery-would-not-vouch': -2,
   // F9 (2026-11-04): crime denied beside a listed operation, A-06 in reverse; A-06's own kind
   // (unlisted, so 0, the stop rule's wording kind) — stated, not defaulted.
   'coh:crime-denied-and-listed': 0,
-  // WIRING-W0 (2026-11-07, R-W7 e): a mass migration told as arrivals on one surface and departures
-  // on another — the wording kind, as crime-denied-and-listed.
-  'coh:migration-direction': 0,
+  // Kind 10, crisis (lane RUNG2-F13, 2026-11-04; the chair's CONTRADICTION kinds of rung 2 §3c, shared
+  // with lane F12's calm-prose check): a crisis fact the page contradicts. Inside the stop rule.
+  // MERGE-R2: 'coh:migration-direction' has TWO producers, one kind — WIRING-W0's surface reader
+  // (migrationDirectionFindings below, R-W7 e: arrivals on one surface and departures on another; the
+  // chair's referee) and F13's crisis-fact reader (domain/coherence/crisisFactFindings.js). W0 keyed it
+  // 0 (the wording kind) and F13 10 (inside the stop rule); a contradiction, so 10 is kept.
+  'coh:famine-stores': 10, 'coh:migration-direction': 10, 'coh:crisis-cast-sense': 10,
   'coh:tier-noun': 8, 'A-14:guild-power-small': 8, 'A-14:lord-mayor-small': 8,
   // Kind 9, reader (lane READER-INSTRUMENTS, 2026-11-04): outside the stop rule until the READER WINDOW lands.
   ...Object.fromEntries(READER_BATTERY_CHECKS.map((c) => [`reader:${c}`, 9])),
+  // Kind 10, crisis (lane F12, rung 2, 2026-11-04): a calm line under the crisis it denies; a contradiction, read by the stop rule.
+  'coh:crisis-blind-prose': 10,
 });
 
 /** Kind 9: the READER battery's plausibility observations (aggregate.mjs counts them apart). */
@@ -87,7 +105,6 @@ const SENTENCE_SPLIT = /(?<=[.!?])\s+(?=[A-Z"“‘'(])|\n+/;
 /** @param {string} text */
 export const sentencesOf = (text) => String(text || '').split(SENTENCE_SPLIT).map((x) => x.trim()).filter(Boolean);
 
-const WATER_TERRAINS = /coast|river|lake|marsh|swamp|island|delta|fjord|wetland|sea/i;
 const SEA_WORDS = /\b(?:harbou?r|fish(?:ing|ermen|erman|monger)?s?|fish market|ship(?:s|wright|yard|ping)?|docks?|wharf|wharves|quays?|fleet|sailors?|boats?)\b/i;
 
 /**
@@ -111,6 +128,8 @@ const ROUTE_DISJUNCTION = /\b(?:by )?(?:road|land|river) or (?:by )?(?:harbou?r|
 const AIRSHIP_PORT = /\b(?:docks?(?:\/port facilities)?|port facilities|harbou?r master(?:'s|’s)?(?: office)?|berths?|anchorage|(?:between )?ship and shore|harbou?r approach(?:es)?|ship(?:s|wrights?|yards?|ping)?)\b/gi;
 /** F5 (2026-11-04): an A-05 gap line, "<chain>: <house> exists but lacks access to <good>". */
 const LACKS_ACCESS_LINE = /^[^:\n]{1,60}: (.+?) exists but lacks access to .+$/;
+/** READER-R1 (2026-11-05): the same lack in the house voice, "No <good> reaches the <house>." — F5's licence, read alike. */
+const NO_INPUT_LINE = /^No .+? reach(?:es)? the (.+?)\.$/;
 
 /**
  * A-11 reads prose, not ledgers of LACKS (lane F5, 2026-11-04, on rung 1B's soak1k-992 and
@@ -126,7 +145,7 @@ const LACKS_ACCESS_LINE = /^[^:\n]{1,60}: (.+?) exists but lacks access to .+$/;
  * @returns {string}
  */
 export function withoutLackLedger(x) {
-  const gap = x.match(LACKS_ACCESS_LINE);
+  const gap = x.match(LACKS_ACCESS_LINE) || x.match(NO_INPUT_LINE);
   if (gap) return gap[1];
   // The "covers" list ends the row; it is stripped wherever the sentence split put it (an impact
   // of two sentences leaves it on the second, soak1k-605).
@@ -249,11 +268,59 @@ export function migrationDirectionFindings(s, r) {
   return read.filter(([, d]) => d !== first[1]).map(([surface, d, quote]) => ({ surface, quote, detail: `${d} beside ${first[0]} ${first[1]}` }));
 }
 
+/** DS-DEF-4's `structure null` variants and the Defense tab's static no-organised-crime line. */
+const DS_DEF4_DENIAL = /No criminal infrastructure has been identified|goes wrong one thing at a time and belongs to whoever did it|met with genuine incomprehension|No organized criminal infrastructure detected\./;
+/** The Defense block's "Active crime patterns" heading. */
+const CRIME_PATTERNS_HEADING = 'Active crime patterns';
+/** A screen line that closes a sentence (a pattern's description); a pattern's name does not. */
+const CLOSES_SENTENCE = /[.!?…]["”’)]?$/;
+
+/**
+ * The Defense block's "Active crime patterns" rows read off the tab text (`DefenseTab.jsx`: each
+ * row is its name, then its description), up to DS-DEF-4's lens or the next section heading.
+ * @param {string} tab the Defense tab
+ * @returns {Array<{ type: string, desc: string }>}
+ */
+export function crimePatternRows(tab) {
+  const at = tab.indexOf(CRIME_PATTERNS_HEADING);
+  if (at < 0) return [];
+  /** @type {Array<{ type: string, desc: string }>} */
+  const rows = [];
+  for (const line of tab.slice(at + CRIME_PATTERNS_HEADING.length).split('\n').map((x) => x.trim()).filter(Boolean)) {
+    if (DS_DEF4_DENIAL.test(line) || /[▲▼]$/.test(line)) break;
+    if (!CLOSES_SENTENCE.test(line)) rows.push({ type: line, desc: '' });
+    else if (rows.length) rows[rows.length - 1].desc += `${rows[rows.length - 1].desc ? ' ' : ''}${line}`;
+  }
+  return rows;
+}
+
+/**
+ * A-06's reading: the phrase pair (the bare denial anywhere on the screen beside an organised
+ * network's words), and (RUNG-2 LANDING phase D, R-D2; soak1k-1801) the Defense tab's denial
+ * under the block's own "Active crime patterns". The survival pattern's own "No criminal
+ * infrastructure: …" is a pattern, not the denial, so the second arm reads DS-DEF-4's sentences.
+ * Phase E (R-E1), the display's exemption mirrored: a list whose every row denies organisation
+ * in its own text (`defenseDisplay.js :: PATTERN_DENIES_ORGANISATION`: "Background crime", the
+ * no-network "Survival crime") is no crime the denial contradicts.
+ * @param {string} screenText every screen surface, joined
+ * @param {string} defense the Defense tab
+ * @returns {string|null} the finding's detail, or null
+ */
+export function crimeAbsentAndOrganised(screenText, defense) {
+  if (/No criminal infrastructure/i.test(screenText) && /criminal network|thieves['’] guild|crime boss|kingpin/i.test(screenText)) return 'and an organised network elsewhere';
+  const tab = String(defense || '');
+  if (!DS_DEF4_DENIAL.test(tab)) return null;
+  const rows = crimePatternRows(tab);
+  if (rows.some((row) => !PATTERN_DENIES_ORGANISATION.test(row.desc))) return 'beside the block\'s own crime patterns';
+  return null;
+}
+
 /** Does the place have water a boat or a net could use? */
 function hasWater(s, config) {
-  const terrain = String(s?.config?.terrainType ?? s?.terrain ?? config?.terrainOverride ?? s?.resourceAnalysis?.terrain ?? '');
-  const route = String(s?.config?.tradeRouteAccess ?? config?.tradeRouteAccess ?? '');
-  return WATER_TERRAINS.test(terrain) || route === 'port' || route === 'river';
+  // The terrain home's one chain (CENSUS-1 fact 13), the birth config as the last fallback.
+  const terrain = terrainClassOf(s) || String(config?.terrainOverride ?? '');
+  const route = tradeRouteOf(s) || String(config?.tradeRouteAccess ?? '');
+  return waterAccessKind(terrain.toLowerCase(), route || null) !== 'none'; // the water home's rule (CENSUS-1 fact 4)
 }
 
 /**
@@ -329,7 +396,7 @@ export function reviewSettlement(s, config, r) {
   // ── coh: the seven instruments, every surface
   // F1 unit 4: the defence-words check counts defence CLAIMS; a soldier who is one person, a walled
   // plot, a trade's customers or a hedged hospital is reach, licensed by rule (`defenceReach.mjs`).
-  for (const f of coherenceBattery(s, surfaces)) if (isDefenceClaim(f)) add(`coh:${f.check}`, f.surface, f.quote, f.detail);
+  for (const f of coherenceBattery(s, surfaces)) if (isDefenceClaim(f, s)) add(`coh:${f.check}`, f.surface, f.quote, f.detail);
 
   // ── X-47: no district or tavern names on any text surface
   const quarters = (s.spatialLayout?.quarters || []).flatMap((q) => [q?.name]).filter((n) => typeof n === 'string' && n.length > 3);
@@ -352,10 +419,11 @@ export function reviewSettlement(s, config, r) {
   }
 
   // ── X-49: the stores figure printed once, on the Economy tab
-  const STORE = /\b(?:Stores: a granary, [^.]+ of grain|No granary; [^.]+ in (?:household stores|the larder))\./g;
+  // RUNG2-F13: the held famine granary is the same stores row ("Stores: a granary of N months that the hall will not open.").
+  const STORE = /\b(?:Stores: a granary, [^.]+ of grain|Stores: a granary of [^.]+ that the hall will not open|No granary; [^.]+ in (?:household stores|the larder))\./g;
   const storeHits = Object.entries(r.tabs).flatMap(([tab, text]) => (text.match(STORE) || []).map((q) => [tab, q]));
   const record = s.economicState?.foodSecurity?.foodRecord;
-  const stored = Number(record?.storageMonths);
+  const stored = record ? Number(storesMonthsOf(s)) : NaN;
   const ecoHits = storeHits.filter(([tab]) => tab === 'economics');
   if (Number.isFinite(stored) && stored > 0 && ecoHits.length !== 1) add('X-49:stores-not-once', 'economics', ecoHits.map((h) => h[1]).join(' | '), `${ecoHits.length} stores rows on the Economy tab; record holds ${stored} months`);
   for (const [tab, q] of storeHits.filter(([tab]) => tab !== 'economics')) add('X-49:stores-not-once', tab, q, 'the stores figure off its home tab');
@@ -372,7 +440,7 @@ export function reviewSettlement(s, config, r) {
   }
 
   // ── X-51: one Tonight sheet whose first line names the crisis
-  const stressTypes = (Array.isArray(s.stress) ? s.stress : s.stress ? [s.stress] : []).map((x) => x?.label).filter(Boolean);
+  const stressTypes = crisisEntries(s).map((x) => x?.label).filter(Boolean);
   // The sheet's own opening line (`composeTonightSheet(...).opening`), which the page prints first
   // under its eyebrow; the eyebrow label itself ("Active crisis", "What is urgent") is not the line.
   const firstLine = String(r.tonightSheet?.opening ?? '').trim();
@@ -385,7 +453,7 @@ export function reviewSettlement(s, config, r) {
   if (endurance > 0 && record?.hasGranary === false && /the granary\b/.test(r.tabs.defense.split('Food endurance')[1]?.slice(0, 300) || '')) add('X-52:endurance-disagrees', 'defense', r.tabs.defense.split('Food endurance')[1].slice(0, 200), 'names a granary the record does not hold');
 
   // ── A-01: "starving" in the record's hooks where the food record is fed
-  if (record && record.band !== 'famine' && (record.gapPct ?? 0) < 20) {
+  if (record && !famineOf(s).starvingAllowed) { // CENSUS-1 fact 6: the famine home's one rule
     const starving = sentencesOf(screenText).find((x) => /\bstarving\b/i.test(x));
     if (starving) add('A-01:starving-fed', 'screen', starving, `band ${record.band}, gap ${record.gapPct}%`);
   }
@@ -408,8 +476,9 @@ export function reviewSettlement(s, config, r) {
   const lacks = (screenText.match(/exists but lacks access to/g) || []).length;
   if (lacks) add('A-05:lacks-access-lines', 'screen', '', `${lacks} lines`);
 
-  // ── A-06: crime said absent beside an organised network
-  if (/No criminal infrastructure/i.test(screenText) && /criminal network|thieves['’] guild|crime boss|kingpin/i.test(screenText)) add('A-06:crime-absent-and-organised', 'screen', 'No criminal infrastructure', 'and an organised network elsewhere');
+  // ── A-06: crime said absent beside an organised network, or beside the block's own crime patterns
+  const crimeAbsent = crimeAbsentAndOrganised(screenText, r.tabs.defense);
+  if (crimeAbsent) add('A-06:crime-absent-and-organised', 'screen', 'No criminal infrastructure', crimeAbsent);
 
   // ── A-08: the fixed hidden-ruler note that never says who
   const hidden = sentencesOf(screenText).find((x) => /appears to govern is not the faction that governs/i.test(x));

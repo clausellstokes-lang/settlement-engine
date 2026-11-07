@@ -161,7 +161,10 @@ describe('the CARTESIAN unit set is the attach set times the spines times the fa
     expect(disagree.slice(0, 5), 'a pool the two builders read differently').toEqual([]);
     // NON-VACUITY on the only axis that could hide a fork: a comparison over zero units is two
     // implementations agreeing about nothing. The defense section composes 383 units today.
-    expect(total, 'the units actually compared').toBe(388);
+    // 388 -> 397, measured with the gate's own roster and builder on each commit's tree (127 pools
+    // throughout): F12 unit 2 (e19e3e4cf, the DS-DEF crisis twins) +8; census-5b unit 3
+    // (c00b30eb6, DS-DEF-1 strategic value LOW v4) +1.
+    expect(total, 'the units actually compared').toBe(397);
     // AND THE FLAG IS A FLAG: without `bareSpine` the lib answers the SHAPE REPORT's question
     // (the units a corpus LICENSES), which on a spine pool is none. The two populations are
     // different on purpose, and this is the line that says so.

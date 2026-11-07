@@ -12,7 +12,7 @@
  * those precedence rules explicit when adding new narrative cases.
  */
 
-import { resolveGenerationWorldLaw } from '../generationContext.js'; import { migrationDirectionOfConfig } from '../../domain/migrationDirection.js'; import { defenceTwinLine } from '../../data/defenceTwinLines.js'; import { defenseFactsOf } from '../../domain/defense/defenseFacts.js'; // F10: one line, so no cited line moves
+import { resolveGenerationWorldLaw } from '../generationContext.js'; import { migrationDirectionOfConfig } from '../../domain/migrationDirection.js'; import { resolveSibling } from '../../domain/facts/drawDeclared.js'; import { factsOf } from '../../domain/facts/factsOf.js'; import { BASELINE_CONFLICT_SIBLINGS } from '../../data/powerSiblings.js'; export { BASELINE_CONFLICT_SIBLINGS }; import { buildInsurgencyNarrative, buildMigrationNarrative, buildReligiousConversionNarrative, buildWartimeNarrative } from './governingStressVignettes.js'; // F10, CENSUS-1c, CENSUS-5c (R-AB: the table moved to data/powerSiblings.js, re-exported): one line, so no cited line moves — LANDING-R2 (ODQ §934.105): the four governing-faction stress vignettes moved verbatim to power/governingStressVignettes.js, imported on this line, so no cited line moves
 
 const SMALL_SETTLEMENT_TIERS = new Set(['thorp', 'hamlet', 'village']);
 
@@ -531,77 +531,6 @@ const buildBetrayalNarrative = ({
   );
 };
 
-const buildInsurgencyNarrative = (
-  institutionFlags,
-  governingFactionName,
-) => {
-  const insurgencyOutmusclesAuthority =
-    (institutionFlags.criminalEffective || 0) >
-      (institutionFlags.militaryEffective || 0) &&
-    (institutionFlags.economyOutput || 50) < 48;
-
-  if (insurgencyOutmusclesAuthority) {
-    return "The commons no longer accept the authority's account of events. Inflammatory pamphlets are being distributed. Two guild masters refused to attend the last civic assembly. The governing faction has intelligence about cells meeting at night, but hasn't moved, because moving publicly would confirm what it officially denies.";
-  }
-  return (
-    'The challenge to the governing faction is institutional, not popular. ' +
-    'Key officials are slow-walking orders. Revenue is being collected but held rather than forwarded. ' +
-    `${governingFactionName} is conducting meetings with people who should not be meeting privately. ` +
-    'The governing faction has noticed and is considering whether to act before the coalition is complete.'
-  );
-};
-
-const buildWartimeNarrative = (institutionFlags, governingFactionName) => {
-  const isWellSupplied =
-    (institutionFlags.militaryEffective || 50) >= 55 &&
-    (institutionFlags.economyOutput || 50) >= 45;
-
-  if (isWellSupplied) {
-    return (
-      'The war is present here as money and absence. The garrison has doubled in size and is well-supplied. The crown is paying for this one. ' +
-      'Contracts for grain, leather, and ironwork are flowing to anyone with the capacity to fill them. ' +
-      'The men who left to fight have not returned, which is a grief that runs beneath the commerce. ' +
-      `${governingFactionName} is navigating the difference between what it can extract for the war effort and what the settlement can actually spare.`
-    );
-  }
-  return 'The war is present here as scarcity and fear. Conscription has taken workers, not soldiers. The farms and workshops feel their absence. Supply caravans pass through on crown requisition and local needs come second. Prices have risen and will rise further. A crown officer arrived last week and left with a list of what will be requisitioned next month. The governing faction signed the order. There was no alternative that anyone could see.';
-};
-
-const buildReligiousConversionNarrative = (governingFactionName) => {
-  // The governing label has historically selected the stable prose variant.
-  // Keep that deterministic selector until a seeded narrative selector owns it.
-  const variant = governingFactionName ? governingFactionName.length % 3 : 0;
-  if (variant === 0) {
-    return 'The new faith does not yet have a building. It has kitchens, meeting rooms in private homes, and a preacher who travels a circuit. The old institution has the building, the records, the accumulated donations, and a congregation that is quietly redistributing itself. Neither party is ready to force a confrontation. Both are watching the numbers.';
-  }
-  if (variant === 1) {
-    return (
-      'The schism is now formal. Two priests, two congregations, two sets of records (births, deaths, marriages) that may or may not be recognised depending on which authority the other party acknowledges. ' +
-      `${governingFactionName || 'The governing authority'} has not declared which succession is legitimate, ` +
-      'which means every legal document dependent on religious sanction is in a grey zone.'
-    );
-  }
-  return (
-    `The conversion order came from ${governingFactionName || 'outside authority'} ` +
-    'and was formally acknowledged within the week. The speed of the formal compliance was remarkable. ' +
-    'The depth of the actual compliance is a different question. The old faith does not hold services openly. ' +
-    'It is not clear it has stopped holding them.'
-  );
-};
-
-// WIRING-W0 (R-W7 e): the vignette and the stability label read the direction the record declares (domain/migrationDirection.js), never `economyOutput >= 50`.
-const buildMigrationNarrative = (migrationDirection, governingFactionName) => {
-  if (migrationDirection !== 'departures') {
-    return (
-      'The settlement is receiving more people than its infrastructure was built for. ' +
-      'New arrivals come faster than housing, food, and employment can absorb them. ' +
-      'The old residents and the new ones are not yet the same community. ' +
-      `${governingFactionName} is being asked to do something about it and cannot agree what that something is.`
-    );
-  }
-  return 'Three families left this week. Two more last week. The departure is quiet and orderly, which makes it worse. The people leaving have thought it through. What remains is those who cannot leave, those who choose to stay, and institutions running on fewer people than they were designed for.';
-};
-
 const buildSlaveRevoltNarrative = (institutionNames) => {
   const revoltOrigin = includesInstitution(institutionNames, 'slave market')
     ? 'the slave market'
@@ -615,7 +544,8 @@ const buildSlaveRevoltNarrative = (institutionNames) => {
 };
 
 const buildStressNarratives = ({
-  baselineConflict, migrationDirection,
+  migrationEntry = null,
+  baselineConflict,
   institutionFlags,
   institutionNames,
   institutionSignals,
@@ -682,8 +612,9 @@ const buildStressNarratives = ({
     religious_conversion:
       buildReligiousConversionNarrative(governingFactionName),
     mass_migration: buildMigrationNarrative(
-      migrationDirection,
+      institutionFlags,
       governingFactionName,
+      migrationEntry,
     ),
     slave_revolt: buildSlaveRevoltNarrative(institutionNames),
   };
@@ -709,6 +640,7 @@ export const buildGovernanceLabels = ({
   governingFaction: configuredGoverningFaction,
   hasNobleInstitution,
   stressTypes,
+  stressEntries = [],
   fallbackStressType,
   worldLaw = null, // absent, it resolves from config exactly as generatePowerStructure builds its own
 }) => {
@@ -745,7 +677,7 @@ export const buildGovernanceLabels = ({
   const governingFactionName =
     factions.find(faction => faction.isGoverning)?.faction || null;
 
-  let recentConflict = defenceTwinLine(deriveBaselineConflict({ // F10: a soldiers line its twin where no garrison or hired company stands (data/defenceTwinLines.js)
+  const baselineConflict = deriveBaselineConflict({
     stressFlags,
     institutionFlags,
     institutionSignals,
@@ -754,7 +686,7 @@ export const buildGovernanceLabels = ({
     monsterThreat: config?.monsterThreat,
     hasRoyalAuthority,
     hasNoblePower,
-  }), defenseFactsOf({ institutions: (institutionNames || []).map((name) => ({ name })) }));
+  });
 
   const primaryStress = selectPrimaryStress(
     stressTypes,
@@ -765,7 +697,10 @@ export const buildGovernanceLabels = ({
     tier,
   );
   const stressNarratives = buildStressNarratives({
-    baselineConflict: recentConflict, migrationDirection,
+    // MERGE-R2 (the chair's ruling 1): the vignette reads W0's one field — the entry's own, else its
+    // config projection (stressConfirmPass) — through F13's reader; no second derivation.
+    migrationEntry: (stressEntries || []).find((e) => e?.type === 'mass_migration') ?? { type: 'mass_migration', direction: migrationDirection },
+    baselineConflict: null, // set below, once resolved where it prints
     institutionFlags,
     institutionNames,
     institutionSignals,
@@ -774,6 +709,19 @@ export const buildGovernanceLabels = ({
     hasRoyalAuthority,
     hasNoblePower,
   });
+
+  // F10, CENSUS-1c: a soldiers line its declared sibling where no garrison or hired company stands
+  // (BASELINE_CONFLICT_SIBLINGS, data/powerSiblings.js). R-D1 unit 2 (R-AU at the site): the set is
+  // resolved ONLY where the baseline prints — no primary-stress narrative, or the `infiltrated` one
+  // that carries it. A narrative that overrides it draws nothing from the set and writes no note
+  // (rung 2E soak1k-5589: three notes of a line the siege narrative overwrote). No roll either way.
+  const baselineOverridden = Boolean(
+    primaryStress && primaryStress !== 'infiltrated' && stressNarratives[primaryStress],
+  );
+  let recentConflict = baselineOverridden
+    ? baselineConflict
+    : resolveSibling(baselineConflict, BASELINE_CONFLICT_SIBLINGS, { facts: () => factsOf({ institutions: (institutionNames || []).map((name) => ({ name })) }), poolId: 'governanceNarrative:BASELINE_CONFLICT_SIBLINGS', surface: 'power', drawKind: 'T' });
+  stressNarratives.infiltrated = recentConflict;
 
   if (recentConflict) {
     recentConflict = rewriteFactionPhrasing(

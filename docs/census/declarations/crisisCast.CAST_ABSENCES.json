@@ -1,0 +1,125 @@
+{
+  "pool": {
+    "id": "crisisCast.CAST_ABSENCES",
+    "file": "src/domain/crisis/crisisCast.js",
+    "drawKind": "T",
+    "drawSite": "crisisCast.js:461-701",
+    "colour": false,
+    "crisisScoped": false,
+    "keyDeclares": {},
+    "lines": 13,
+    "declaring": 2,
+    "note": "Absence reasons stamped when a rule finds no candidate. noMilitary asserts no garrison or watch stands; the defender rule finds a garrison/watch only through a roster role or a live institution name, so a record whose defence facts hold a garrison or watch by another path would print it falsely — declared excludes. townCap 'the town already has one' is reachable at every tier."
+  },
+  "rows": [
+    {
+      "id": "noBase",
+      "text": "no house's base is hit",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "noLever",
+      "text": "no house the crisis turns on stands here",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "noGains",
+      "text": "no faction gains",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "outsideHand",
+      "text": "an outside hand, unnamed",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "noSeat",
+      "text": "no seat or governing house stands",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "noMilitary",
+      "text": "no military, garrison or watch stands",
+      "needs": [],
+      "excludes": [
+        "garrison",
+        "watch"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "noMerchantOrSeat",
+      "text": "no merchant house and no seat stands",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "noOccupier",
+      "text": "no occupying power on the roster",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "noSplit",
+      "text": "no faction could go either way",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "notContested",
+      "text": "legitimacy is not contested",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "noLoser",
+      "text": "neither the seat's house nor the lever's loses by it",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "townCap",
+      "text": "the town already has one",
+      "needs": [
+        "tier: ≥ town"
+      ],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "noCandidate",
+      "text": "everyone who could already holds a role that contradicts this one",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    }
+  ]
+}

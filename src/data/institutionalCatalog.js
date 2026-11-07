@@ -69,8 +69,8 @@ const ROW_KEYS = Object.freeze([
 /** The keys a tier entry may declare that stay in the registry and never ride onto a row. */
 const GUARD_KEYS = Object.freeze(['minPopulation', 'requiresAny']);
 /** The registry-only marks a tier entry may declare (the fabric and the rarity, X-46 car 3); never on a row. */
-const MARK_KEYS = Object.freeze(['fabric', 'rare']);
-const ENTRY_KEYS = new Set(['name', ...ROW_KEYS, ...GUARD_KEYS, ...MARK_KEYS]);
+const MARK_KEYS = Object.freeze(['fabric', 'rare']); const NOTE_KEYS = Object.freeze(['thresholdNote']); // CENSUS-4 R8: the designer's threshold note ("viable above 5,000 souls"), registry-only, never on a row or a page
+const ENTRY_KEYS = new Set(['name', ...ROW_KEYS, ...GUARD_KEYS, ...MARK_KEYS, ...NOTE_KEYS]);
 
 /**
  * @typedef {{ tier: string, reason: string }} FamilyCeiling
@@ -293,8 +293,8 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       at: {
         // X-46 car 2: the owner's bands put a town at 300–2,500; the row stays a town row with its
         // chain; the floor moves to the band's top fifth (the design's recorded exception, ODQ §934.104).
-        town: { name: 'Money changers', baseChance: 0.5, minPopulation: 2000, desc: 'Exchange foreign currency. Early banking (2,000+ population).' },
-        city: { name: 'Banking houses', baseChance: 0.7, desc: 'Loans, currency exchange, letters of credit. Basic banking (5,000+).' },
+        town: { name: 'Money changers', baseChance: 0.5, minPopulation: 2000, desc: 'Exchange foreign currency. Early banking.', thresholdNote: 'Early banking (2,000+ population).' },
+        city: { name: 'Banking houses', baseChance: 0.7, desc: 'Loans, currency exchange, letters of credit. Basic banking.', thresholdNote: 'Basic banking (5,000+).' },
         metropolis: { name: 'Banking district', baseChance: 0.8, desc: 'Consolidated financial quarter: international banking, letters of credit, currency speculation at scale.' },
       },
     },
@@ -446,7 +446,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       },
     },
     {
-      shared: { name: "Harbour master's office", tradeRouteRequired: ['port', 'river'], desc: 'Regulates harbour and river-port traffic, collects anchorage fees, assigns berths, and enforces port law. Navigable-water cities only.', tags: ['law_enforcement', 'port'], priorityCategory: 'economy' },
+      shared: { name: "Harbour master's office", tradeRouteRequired: ['port', 'river'], desc: 'Regulates harbour and river-port traffic, collects anchorage fees, assigns berths, and enforces port law.', thresholdNote: 'Navigable-water cities only.', tags: ['law_enforcement', 'port'], priorityCategory: 'economy' },
       at: {
         town: { baseChance: 0.25 },
         city: { baseChance: 0.4 },
@@ -463,7 +463,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       },
     },
     {
-      shared: { name: 'Customs house', desc: 'Levies duties on goods entering and leaving via the port or main roads. Run by royal or municipal officials.', tags: ['guild', 'law_enforcement'], priorityCategory: 'government' },
+      shared: { name: 'Customs house', desc: 'Levies duties on goods entering and leaving via the port or main roads. Run by royal or municipal officials.', tags: ['law_enforcement'], priorityCategory: 'government' },
       at: {
         town: { baseChance: 0.35 },
         city: { baseChance: 0.55 },
@@ -511,7 +511,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       },
     },
     {
-      shared: { name: 'Auction house', desc: "Formal venue for selling high-value goods: estates, ships, livestock, art, and occasionally persons. Charges buyer's and seller's premiums.", tags: ['market', 'guild'], priorityCategory: 'economy' },
+      shared: { name: 'Auction house', desc: "Formal venue for selling high-value goods: estates, ships, livestock, art, and occasionally persons. Charges buyer's and seller's premiums.", tags: ['market'], priorityCategory: 'economy' },
       at: {
         town: { baseChance: 0.1 },
         city: { baseChance: 0.35 },
@@ -519,7 +519,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       },
     },
     {
-      shared: { name: 'Assay office', desc: 'Tests the purity of precious metals brought to market. Essential infrastructure for banking and minting. Charges fees per assay.', tags: ['banking', 'guild'], priorityCategory: 'government' },
+      shared: { name: 'Assay office', desc: 'Tests the purity of precious metals brought to market. Essential infrastructure for banking and minting. Charges fees per assay.', tags: ['banking'], priorityCategory: 'government' },
       at: {
         town: { baseChance: 0.2, desc: 'Tests the purity of precious metals brought to the town. Essential infrastructure for banking and minting. Charges fees per assay.' },
         city: { baseChance: 0.3 },
@@ -528,7 +528,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
     },
     // The town Mint was filed on Crafts and the city's Mint (official) on Economy until 2026-09-30.
     {
-      shared: { name: 'Mint (official)', desc: 'State or noble-chartered coin production. Standardises currency across the region. Significant ongoing revenue via seigniorage.', tags: ['banking', 'guild'], priorityCategory: 'economy' },
+      shared: { name: 'Mint (official)', desc: 'State or noble-chartered coin production. Standardises currency across the region. Significant ongoing revenue via seigniorage.', tags: ['banking'], priorityCategory: 'economy' },
       at: {
         town: { name: 'Mint', baseChance: 0.15, desc: 'Converts refined precious metal into standardised coinage. Requires noble or royal charter. Significant revenue for the granting authority.', priorityCategory: 'government' },
         city: { baseChance: 0.4 },
@@ -833,12 +833,12 @@ export const INSTITUTION_FAMILIES = Object.freeze([
     {
       shared: { name: 'Village scribe' },
       at: {
-        village: { baseChance: 0.15, desc: "Can read and write. Copies letters, draws up simple contracts, reads documents for the illiterate. Often the priest's assistant or a monastery-educated lay person.", tags: ['guild'], priorityCategory: 'government' },
+        village: { baseChance: 0.15, desc: "Can read and write. Copies letters, draws up simple contracts, reads documents for the illiterate. Often the priest's assistant or a monastery-educated lay person.", tags: [], priorityCategory: 'government' },
       },
       ceiling: { tier: 'village', reason: "Town record-keeping sits with guild clerks and the crier; the printing house is the city's writing trade." },
     },
     {
-      shared: { name: 'Printing house', desc: 'Books and broadsheets (if technology exists).', tags: ['education'], priorityCategory: 'crafts' },
+      shared: { name: 'Printing house', desc: 'Books and broadsheets.', thresholdNote: 'If technology exists.', tags: ['education'], priorityCategory: 'crafts' },
       at: {
         town: { baseChance: 0.1 },
         city: { baseChance: 0.3 },
@@ -930,7 +930,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
     {
       shared: { exclusiveGroup: 'religiousCenter', exclusiveGroupCoexists: true, tags: ['religious', 'church'] },
       at: {
-        city: { name: 'Cathedral (10,000+ only)', baseChance: 0.3, minPopulation: 10000, desc: "Bishop's seat. Requires 10,000+ population minimum. Defines major city status.", priorityCategory: 'religion' },
+        city: { name: 'Cathedral (10,000+ only)', baseChance: 0.3, minPopulation: 10000, desc: "Bishop's seat. Defines major city status.", thresholdNote: 'Requires 10,000+ population minimum.', priorityCategory: 'religion' },
         metropolis: { name: 'Great cathedral', baseChance: 0.6, desc: 'Metropolitan cathedral. Seat of the highest regional religious authority. Pilgrimage destination.', priorityCategory: 'infrastructure' },
       },
     },
@@ -1093,7 +1093,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
     },
     // Filed on Crafts until 2026-09-30; a civic office, not a craft.
     {
-      shared: { name: 'Town crier', desc: 'Official announcer who reads proclamations, market prices, and news at fixed times in the market squares. Employed by the city or a guild.', tags: ['guild'], priorityCategory: 'government' },
+      shared: { name: 'Town crier', desc: 'Official announcer who reads proclamations, market prices, and news at fixed times in the market squares. Employed by the city or a guild.', tags: [], priorityCategory: 'government' },
       at: {
         town: { baseChance: 0.45, desc: 'Official announcer who reads proclamations, market prices, and news at fixed times in the market square. Employed by the town or a guild.' },
         city: { baseChance: 0.4 },
@@ -1259,7 +1259,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       },
     },
     {
-      shared: { name: "Veteran's lodge", desc: 'A drinking hall where retired soldiers and mercenaries gather. Informal security, bar brawls, and the occasional job offer for a group needing swords.', tags: ['military', 'guild'], priorityCategory: 'military' },
+      shared: { name: "Veteran's lodge", desc: 'A drinking hall where retired soldiers and mercenaries gather. Informal security, bar brawls, and the occasional job offer for a group needing swords.', tags: ['military'], priorityCategory: 'military' },
       at: {
         village: { baseChance: 0.15 },
         town: { baseChance: 0.2 },
@@ -1284,13 +1284,13 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       at: {
         hamlet: { name: 'Traveling hedge wizard', baseChance: 0.2, desc: 'Occasional visits. The smallest spells only.', magicLicense: 'low' },
         village: { name: 'Hedge wizard', baseChance: 0.3, exclusiveGroup: 'magicalAuthority', desc: 'A resident caster of modest reach. Minor spells only.', magicLicense: 'low' },
-        town: { baseChance: 0.2, exclusiveGroup: 'magicalAuthority', minPopulation: 1000, forbiddenTradeRoutes: ['isolated'], desc: 'Individual wizard residence. 1,000+ population viable.' },
+        town: { baseChance: 0.2, exclusiveGroup: 'magicalAuthority', minPopulation: 1000, forbiddenTradeRoutes: ['isolated'], desc: 'Individual wizard residence.', thresholdNote: '1,000+ population viable.' },
         city: { baseChance: 0.4, exclusiveGroup: 'magicalAuthority', forbiddenTradeRoutes: ['isolated'] },
         metropolis: { baseChance: 0.4, exclusiveGroup: 'magicalAuthority', forbiddenTradeRoutes: ['isolated'] },
       },
     },
     {
-      shared: { name: "Mages' guild", desc: 'Organization of magic users. 2,000-5,000 population for chapter.', tags: ['arcane', 'guild'], magicLicense: 'medium', priorityCategory: 'magic' },
+      shared: { name: "Mages' guild", desc: 'Organization of magic users.', thresholdNote: '2,000-5,000 population for chapter.', tags: ['arcane', 'guild'], magicLicense: 'medium', priorityCategory: 'magic' },
       at: {
         town: { baseChance: 0.1, minPopulation: 2000, forbiddenTradeRoutes: ['isolated'] },
         city: { baseChance: 0.3, forbiddenTradeRoutes: ['isolated'] },
@@ -1304,7 +1304,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       },
     },
     {
-      shared: { name: "Enchanter's shop", forbiddenTradeRoutes: ['isolated'], desc: 'Magic item creation. 5,000+ population typically.', tags: ['arcane', 'enchanting'], magicLicense: 'high', priorityCategory: 'magic' },
+      shared: { name: "Enchanter's shop", forbiddenTradeRoutes: ['isolated'], desc: 'Magic item creation.', thresholdNote: '5,000+ population typically.', tags: ['arcane', 'enchanting'], magicLicense: 'high', priorityCategory: 'magic' },
       at: {
         city: { baseChance: 0.4, minPopulation: 5000 },
         metropolis: { baseChance: 0.45 },
@@ -1373,7 +1373,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
     },
     // Filed on Entertainment until 2026-09-30.
     {
-      shared: { name: 'Hired blades', desc: 'Individual or small groups of professional fighters available for private contracts: bodyguard work, debt enforcement, or quiet removal of problems.', tags: ['military', 'guild'], priorityCategory: 'government' },
+      shared: { name: 'Hired blades', desc: 'Individual or small groups of professional fighters available for private contracts: bodyguard work, debt enforcement, or quiet removal of problems.', tags: ['military'], priorityCategory: 'government' },
       at: {
         town: { baseChance: 0.25 },
         city: { baseChance: 0.35 },
@@ -1447,7 +1447,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
     {
       shared: { exclusiveGroup: 'criminalPower', tags: ['criminal'], priorityCategory: 'criminal' },
       at: {
-        city: { name: "Thieves' guild chapter", baseChance: 0.6, minPopulation: 10000, desc: 'Organized crime chapter. 10,000+ population for viable operation. 30-100 members.' },
+        city: { name: "Thieves' guild chapter", baseChance: 0.6, minPopulation: 10000, desc: 'Organized crime chapter. 30-100 members.', thresholdNote: '10,000+ population for viable operation.' },
         metropolis: { name: "Thieves' guild (powerful)", baseChance: 0.55, desc: 'Dominant criminal syndicate. Tolerated because the alternative (gang war) is worse.' },
       },
     },
@@ -1507,7 +1507,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       },
     },
     {
-      shared: { name: 'Contract killer', baseChance: 0.25, desc: 'An individual or small cell operating beneath the assassins guild threshold. Accepts contracts through criminal intermediaries. Less reliable but deniable.', tags: ['guild', 'military'], priorityCategory: 'criminal' },
+      shared: { name: 'Contract killer', baseChance: 0.25, desc: 'An individual or small cell operating beneath the assassins guild threshold. Accepts contracts through criminal intermediaries. Less reliable but deniable.', tags: ['military'], priorityCategory: 'criminal' },
       at: {
         city: {},
         metropolis: {},
@@ -1527,7 +1527,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       },
     },
     {
-      shared: { name: 'Human trafficking network', baseChance: 0.2, exclusionConditions: ['Slave market', 'Slave market district'], desc: 'Fully clandestine operation moving persons across jurisdictions outside legal channels. Only fires where no legal slave market exists. Distinct logistics, safe houses, and corrupt border infrastructure.', tags: ['criminal', 'underground', 'smuggling'], priorityCategory: 'criminal' },
+      shared: { name: 'Human trafficking network', baseChance: 0.2, exclusionConditions: ['Slave market', 'Slave market district'], thresholdNote: 'Only fires where no legal slave market exists.', desc: 'Fully clandestine operation moving persons across jurisdictions outside legal channels. Distinct logistics, safe houses, and corrupt border infrastructure.', tags: ['criminal', 'underground', 'smuggling'], priorityCategory: 'criminal' },
       at: {
         city: {},
         metropolis: {},
@@ -1562,7 +1562,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       },
     },
     {
-      shared: { name: 'Bardic college', desc: 'Formal musical education. Amphitheater, dormitories. 10,000+ for small campus.', tags: ['education'], priorityCategory: 'entertainment' },
+      shared: { name: 'Bardic college', desc: 'Formal musical education. Amphitheater, dormitories.', thresholdNote: '10,000+ for small campus.', tags: ['education'], priorityCategory: 'entertainment' },
       at: {
         city: { baseChance: 0.4, minPopulation: 10000 },
         metropolis: { baseChance: 0.45 },
@@ -1645,7 +1645,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       },
     },
     {
-      shared: { name: 'Golem workforce', baseChance: 0.2, desc: 'Constructed servants if magic permits.', tags: ['arcane'], magicLicense: 'high', priorityCategory: 'exotic' },
+      shared: { name: 'Golem workforce', baseChance: 0.2, desc: 'Constructed servants.', thresholdNote: 'If magic permits.', tags: ['arcane'], magicLicense: 'high', priorityCategory: 'exotic' },
       at: {
         city: {},
         metropolis: {},

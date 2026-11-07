@@ -76,7 +76,7 @@ function derivePopulation(ctx, rng, pins, npcs) {
   const { tier, institutions, effectiveConfig } = ctx;
 
   const relationships = chooseOrPin(pins, 'relationships',
-    () => generateRelationships(npcs, effectiveConfig, institutions));
+    () => generateRelationships(npcs, effectiveConfig, institutions, { government: ctx.powerStructure?.government ?? null, tier })); // CENSUS-1f (site 19): the government only (R-Z)
 
   // Summary traces — one per category, not one per entity. Per-entity
   // traces would flood the rail (50+ NPCs is normal at metropolis tier)

@@ -48,6 +48,8 @@
  * each checkable, and the full roster is committed in the baseline's
  * `archivalExclusionAtFreeze.files`:
  *   tree (84)    docs/review-r2/**, docs/shift-records/**
+ *                (2026-11-07, LANDING-R2 seat E, 90 -> 95: the rung-2 landing's five signed records rung2-01..-05,
+ *                the census-composed surfaces; GROWTHS that hid nothing, 0 past-EOF of their own.)
  *                (2026-11-06, LANDING-8, 84 -> 90: the day's six signed records rung1-29, -30, -32..-35;
  *                GROWTHS that hid nothing, 0 past-EOF of their own.)
  *                (2026-11-06, the rung-1 landing, 56 -> 84: the landing's twenty-eight signed records

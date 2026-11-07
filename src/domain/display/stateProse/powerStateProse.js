@@ -82,6 +82,8 @@ import { composeStateProse } from './composeStateProse.js';
 import { powerStateProseCandidates } from './powerStateProseCandidates.js';
 import { legibilityRung } from './legibilityRung.js';
 import { wallsAnswered } from '../../defense/defenseFacts.js';
+import { crisisAnswered } from '../../crisis/crisisFacts.js';
+import { factsAnswered } from '../../facts/factsAnswered.js';
 
 /**
  * The desk's corpus, typed at the import boundary. The generated leaves stay PURE DATA
@@ -628,8 +630,8 @@ export function ladderPoolKey(rungs, instability) {
  * @returns {object|null}
  */
 export function powerLadderRung(settlement, reading = {}, options = {}) {
-  // F10: the walls dimension answered once, from the defence reader (stateProseKernel law 5).
-  options = wallsAnswered(settlement, options);
+  // F10 + F12: the walls and the five crisis dimensions answered once, from the defence and crisis readers (stateProseKernel law 5).
+  options = factsAnswered(settlement, crisisAnswered(settlement, wallsAnswered(settlement, options)));
   const key = ladderPoolKey(reading.rungs, reading.instability);
   if (!key) return null;
   const faction = properFill(text(reading.factionName));
@@ -850,8 +852,8 @@ export function politicsEndPoolKey(projection) {
  *   blocPresence: object|null, blocGlue: object|null, blocEnd: object|null}>}
  */
 export function powerStateProse(settlement, readings = {}, options = {}) {
-  // F10: the walls dimension answered once, from the defence reader (stateProseKernel law 5).
-  options = wallsAnswered(settlement, options);
+  // F10 + F12: the walls and the five crisis dimensions answered once, from the defence and crisis readers (stateProseKernel law 5).
+  options = factsAnswered(settlement, crisisAnswered(settlement, wallsAnswered(settlement, options)));
   const power = settlement?.powerStructure || {};
   // A legacy numeric `publicLegitimacy` carries no label, breakdown or flag. Reading it as
   // an object would yield `undefined` at every field and silence at every pool, which is

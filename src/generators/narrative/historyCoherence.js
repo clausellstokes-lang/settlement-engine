@@ -28,10 +28,12 @@
  */
 
 import { pickRandom2, random01 } from '../helpers.js';
+import { getActiveRng } from '../../kernel/rngContext.js';
 import { collapseArticleSeams } from '../narrativeProse.js';
-import { POLITICAL_FLAVOR } from '../narrativeText.js';
+import { POLITICAL_FLAVOR, POLITICAL_FLAVOR_CRISIS_SCOPED, POLITICAL_FLAVOR_SIBLINGS } from '../narrativeText.js';
+import { textOf } from '../../domain/facts/textOf.js'; // R-C (CENSUS-2e): a declared POLITICAL_FLAVOR row gives back its template; CENSUS-1f's cascade wiring enforces
 import { generateSiegeCapability } from './siegeCapability.js';
-import { deriveLegacyAnnotations } from '../legacyGenerator.js';
+import { deriveLegacyAnnotations } from '../legacyGenerator.js'; import { drawDeclared, resolveSiblingSentences } from '../../domain/facts/drawDeclared.js'; import { factsOf } from '../../domain/facts/factsOf.js'; // F11, CENSUS-1c: one line, so no cited line moves
 
 // ─── buildStressProfile ───────────────────────────────────────────────────────
 /**
@@ -41,7 +43,7 @@ import { deriveLegacyAnnotations } from '../legacyGenerator.js';
  * Draws from the active RNG, so callers that need a stable draw budget wrap it
  * in their own substream (generateCoherence does).
  */
-export const buildStressProfile = (events, _tier, _config) => {
+export const buildStressProfile = (events, _tier, _config, facts) => resolveSiblingSentences(stressProfileDrawn(events, facts), POLITICAL_FLAVOR_SIBLINGS, { facts, poolId: 'narrativeText:POLITICAL_FLAVOR_SIBLINGS', surface: 'history', drawKind: 'T' }); const stressProfileDrawn = (events, facts) => { // F11, CENSUS-1c: a wall sentence the place cannot speak resolves to its declared sibling (narrativeText.js :: POLITICAL_FLAVOR_SIBLINGS), after the draw
   if (!events || events.length === 0) return 'recently established and still finding its character';
 
   const disasters = events.filter(e => e.type === 'disaster').length;
@@ -52,7 +54,7 @@ export const buildStressProfile = (events, _tier, _config) => {
   const catastrophic = events.some(e => e.severity === 'catastrophic');
 
   if (random01(0.15)) {
-    return collapseArticleSeams(pickRandom2(POLITICAL_FLAVOR.stable)(events));
+    return collapseArticleSeams(textOf(flavorOf('stable', events, facts))(events));
   }
 
   let pattern;
@@ -78,10 +80,34 @@ export const buildStressProfile = (events, _tier, _config) => {
 
   const flavors = POLITICAL_FLAVOR[pattern];
   if (!flavors || !subset || subset.length === 0) {
-    return collapseArticleSeams(pickRandom2(POLITICAL_FLAVOR.stable)(events));
+    return collapseArticleSeams(textOf(flavorOf('stable', events, facts))(events));
   }
 
-  return collapseArticleSeams(pickRandom2(flavors)(subset));
+  return collapseArticleSeams(textOf(flavorOf(pattern, subset, facts))(subset));
+};
+
+/**
+ * THE CASCADE'S DRAW, DECLARED (CENSUS-1f unit 3; Appendix B row 36). The pattern's pool is drawn
+ * exactly as before (one `pickRandom2`); the drawn template is then RESOLVED through `drawDeclared`
+ * against CENSUS-2e's rows (`narrativeText.js :: POLITICAL_FLAVOR`; `stable` is `{crisis-scoped}`,
+ * `POLITICAL_FLAVOR_CRISIS_SCOPED`). A refused template moves to the hash argmax over the admitted
+ * ones (no roll). Its closure's own event pick then runs as the drawn one's did, inside this
+ * sentence's substream (`narrativeGenerator.js`: 'historical-character'), so nothing outside the
+ * sentence moves. Nothing admitted (no facts handed): the drawn template stays.
+ * R-AT (CENSUS-1h): the argmax key carries the settlement's identity — the active substream's own
+ * seed (`getActiveRng().seed`, the settlement seed and the stream's labels), read without a roll —
+ * so refused births spread over the admitted rows; an unrefused birth never reads the key.
+ * @param {string} pattern @param {any[]} subset @param {any} facts
+ */
+const flavorOf = (pattern, subset, facts) => {
+  const pool = /** @type {Record<string, any[]>} */ (POLITICAL_FLAVOR)[pattern];
+  let drawn;
+  const r = drawDeclared(pool, {
+    draw: (p) => (drawn = pickRandom2(p)), facts, poolId: `POLITICAL_FLAVOR.${pattern}`, surface: 'history', drawKind: 'R',
+    crisisScoped: POLITICAL_FLAVOR_CRISIS_SCOPED.includes(pattern), key: `${getActiveRng()?.seed ?? ''}::POLITICAL_FLAVOR.${pattern}::${subset.length}::${subset[0]?.name ?? ''}`,
+    keepRefused: true, // R-AM: a kept template is noted
+  });
+  return r.line ?? drawn;
 };
 
 /**
@@ -128,7 +154,7 @@ export const enrichHistoryCoherence = (history, settlement) => ({
   historicalCharacter: buildStressProfile(
     history.historicalEvents || [],
     settlement.tier,
-    settlement.config,
+    settlement.config, factsOf(settlement), // F11, CENSUS-1c
   ),
   siegeNarrative: historySiegeNarrative(history),
   legacyAnnotations: deriveLegacyAnnotations(history, settlement),

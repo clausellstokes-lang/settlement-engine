@@ -72,7 +72,9 @@ function buildAnnotation(ev, relationship, suffix) {
 }
 
 function annotationBody(ev, relationship, suffix) {
-  // Mid-sentence after the date opening, an event named "The …" reads "the …".
+  // Mid-sentence after the date opening, an event named "The …" reads "the …". MERGE-R2 (the chair's
+  // ruling 3): W0's dated form is the ruled one (w0-04), so F11's capitalised fallback, which opened
+  // an undated annotation, is dropped: the fallback no longer opens a sentence.
   const name   = String(ev.name || 'a significant historical event').replace(/^The /, 'the ');
   const effect = (ev.lastingEffects || [])[0] || null;
 

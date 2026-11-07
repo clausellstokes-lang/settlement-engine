@@ -1,0 +1,325 @@
+{
+ "id": "traditions.TRADITION_PROSE",
+ "source": "src/data/traditionProse.js :: TRAD_HELD_SUMMARY · TRAD_CANCELLED_SUMMARY · TRAD_HOOKS · TRAD_OUTCOME_PHRASE",
+ "drawKind": "H",
+ "pool": {
+  "declares": [
+   "outcome / relation (the key)"
+  ],
+  "crisisScoped": false,
+  "colour": true,
+  "notes": "prose.js :: pickLine (fnv, 0 rolls). suppressed / restored are keyed on the occupation relation (key-guaranteed); adopted on newcomers (key).",
+  "needs": [],
+  "excludes": []
+ },
+ "rows": [
+  {
+   "id": "traditions.TRAD_HELD_SUMMARY::0",
+   "text": "In {town}, {name} {phrase} this year. A settlement's traditions carry its identity forward; each holding or...",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRAD_HELD_SUMMARY::1",
+   "text": "{name} {phrase} this year in {town}. A town's observances carry its identity forward, and every year they h...",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRAD_HELD_SUMMARY::2",
+   "text": "This year in {town}, {name} {phrase}. What a people keeps, and how well, is written into the record of the ...",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRAD_HELD_SUMMARY::3",
+   "text": "In {town}, {name} {phrase}. A settlement is known by the customs it keeps; each year's keeping, or failing,...",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRAD_CANCELLED_SUMMARY::0",
+   "text": "In {town}, {name} was set aside this year: hardship left no room for the observance, and a people that keep...",
+   "needs": [],
+   "excludes": [],
+   "crisis": "any",
+   "colour": false,
+   "notes": "\"hardship left no room\": the cancelled outcome is the key; sayable in or out of a crisis"
+  },
+  {
+   "id": "traditions.TRAD_CANCELLED_SUMMARY::1",
+   "text": "{name} was set aside in {town} this year; hardship left no room for it, and a people that shows restraint i...",
+   "needs": [],
+   "excludes": [],
+   "crisis": "any",
+   "colour": false,
+   "notes": "\"hardship left no room\": the cancelled outcome is the key; sayable in or out of a crisis"
+  },
+  {
+   "id": "traditions.TRAD_CANCELLED_SUMMARY::2",
+   "text": "In {town} this year, {name} went unheld: the season left no room for it, and there is a quiet credit in a t...",
+   "needs": [],
+   "excludes": [],
+   "crisis": "any",
+   "colour": false,
+   "notes": "\"hardship left no room\": the cancelled outcome is the key; sayable in or out of a crisis"
+  },
+  {
+   "id": "traditions.TRAD_HOOKS::failure#0",
+   "text": "{name} failed badly this year, and the townsfolk are looking for someone to blame: a rich seam of grievance...",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRAD_HOOKS::failure#1",
+   "text": "The failure of {name} has soured the mood in {town}; muttered blame is hardening into factions, and a cleve...",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRAD_HOOKS::failure#2",
+   "text": "{name} came apart this year. Someone profited from the disgrace, or arranged it. The party may be the ones ...",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRAD_HOOKS::cancelled#0",
+   "text": "{town} set aside {name} this year, and the older folk call it an ill omen: a rumour a party could confirm, ...",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRAD_HOOKS::cancelled#1",
+   "text": "For the first time in memory, {name} went unheld in {town}; the quiet has left people uneasy, and uneasy to...",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRAD_HOOKS::cancelled#2",
+   "text": "The setting-aside of {name} has emboldened those who always resented it and alarmed those who need it kept....",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRAD_HOOKS::triumph#0",
+   "text": "{name} was a triumph this year, and {town} is thick with visitors, coin, and the cut-purses who follow both...",
+   "needs": [],
+   "excludes": [],
+   "colour": true,
+   "notes": "\"cut-purses\": crime presumed loosely; not declared"
+  },
+  {
+   "id": "traditions.TRAD_HOOKS::triumph#1",
+   "text": "The triumph of {name} has made {town} the envy of its neighbours; someone means to spoil it, and the party ...",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRAD_HOOKS::triumph#2",
+   "text": "On the strength of {name}'s triumph, a bold claim is being made in {town}. A rival is already moving to ans...",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRAD_HOOKS::suppressed#0",
+   "text": "{name} was traded away under the overlord and now survives only in secret; the party may be asked to help k...",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRAD_HOOKS::suppressed#1",
+   "text": "The banned rite of {name} is still kept behind closed doors in {town}, and word of it has reached the wrong...",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRAD_HOOKS::suppressed#2",
+   "text": "Since {name} was forced under, a quiet resistance has gathered around its memory in {town}. The overlord wa...",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRAD_HOOKS::restored#0",
+   "text": "With the occupation ended, {town} keeps {name} openly again for the first time in years. Old scores are bei...",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRAD_HOOKS::restored#1",
+   "text": "{name} has returned to {town} now the overlord is gone, but the first free keeping stirs up who collaborate...",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRAD_HOOKS::restored#2",
+   "text": "The restored rite of {name} draws home exiles and grudges alike; {town} has not decided whether it is a rec...",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRAD_HOOKS::adopted#0",
+   "text": "{name}, brought by newcomers, has taken root in {town}, and it chafes against the older custom; the party m...",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRAD_HOOKS::adopted#1",
+   "text": "The settlers' rite of {name} has grown too large for the old families of {town} to ignore, and the friction...",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRAD_HOOKS::adopted#2",
+   "text": "{name} arrived with the newcomers and now rivals the town's own observances; someone in {town} means to see...",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRAD_OUTCOME_PHRASE::triumph#0",
+   "text": "was a triumph",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRAD_OUTCOME_PHRASE::triumph#1",
+   "text": "was a triumph to remember",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRAD_OUTCOME_PHRASE::triumph#2",
+   "text": "went splendidly",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRAD_OUTCOME_PHRASE::good#0",
+   "text": "was well kept",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRAD_OUTCOME_PHRASE::good#1",
+   "text": "was kept in good faith",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRAD_OUTCOME_PHRASE::good#2",
+   "text": "went well",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRAD_OUTCOME_PHRASE::modest#0",
+   "text": "was modestly kept",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRAD_OUTCOME_PHRASE::modest#1",
+   "text": "was kept quietly",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRAD_OUTCOME_PHRASE::modest#2",
+   "text": "passed modestly",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRAD_OUTCOME_PHRASE::troubled#0",
+   "text": "passed under a shadow",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRAD_OUTCOME_PHRASE::troubled#1",
+   "text": "was troubled",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRAD_OUTCOME_PHRASE::troubled#2",
+   "text": "went uneasily",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRAD_OUTCOME_PHRASE::failure#0",
+   "text": "failed",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRAD_OUTCOME_PHRASE::failure#1",
+   "text": "fell flat",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRAD_OUTCOME_PHRASE::failure#2",
+   "text": "came to nothing",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRAD_OUTCOME_PHRASE::cancelled#0",
+   "text": "was set aside",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRAD_OUTCOME_PHRASE::cancelled#1",
+   "text": "went unheld",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRAD_OUTCOME_PHRASE::cancelled#2",
+   "text": "was quietly set aside",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  }
+ ]
+}

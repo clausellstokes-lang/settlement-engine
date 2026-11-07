@@ -147,8 +147,11 @@ export const STRESS_TYPE_MAP = {
     requiresTier: "town",
     crisisHook:
       "The revolt's leadership has demands. Some of them are negotiable. The governing faction has not admitted this publicly, and one of them is attempting to open a back channel.",
+    // R-U (CENSUS-2d; the chair's answer 2 to CENSUS-2c): presumes only the enslaved and their revolt.
+    // "The slave market's commercial operations are suspended." presumed a slave market, which has
+    // no fact home (`institution: slave market` is listed under "needs a home").
     viabilityNote:
-      "The slave market's commercial operations are suspended. Labour-dependent production is disrupted. The security apparatus is entirely focused on containment.",
+      "Owners have pulled their work gangs off every task they cannot watch. Labour-dependent production is disrupted. The security apparatus is entirely focused on containment.",
     historyColour: "political",
   },
   wartime: {
@@ -179,5 +182,39 @@ export const STRESS_TYPE_MAP = {
       departures: MIGRATION_VIABILITY_NOTE.slice(MIGRATION_NOTE_CUT + 1),
     },
     historyColour: "demographic",
+    // ONE DIRECTION (lane RUNG2-F13, on the chair's ruling 2 of 2026-10-30, ODQ §934.101): the
+    // kind's direction, copied once onto the crisis entry (stressGenerator.js :: buildStressEntry)
+    // and read by every migration line through domain/crisis/migrationDirection.js.
+    direction: "influx",
   },
 };
+
+/**
+ * THE DECLARED CELLS OF STRESS_TYPE_MAP (CENSUS-2d unit 3; Phase A's ledger
+ * `docs/census/declarations/STRESS_TYPE_MAP.json`; the dissolved-twin shape CENSUS-1c keyed by
+ * the original's text, accepted by the chair's R-P 3). A crisisHook / viabilityNote that presumes a
+ * fact its stressor alone does not guarantee is a sibling set keyed by its own text: the original
+ * with its atoms, and its twin (`twinOf`, the complementary atom) where Phase A drafted one. The
+ * table's cells stay strings, so its ~20 readers are untouched; the T-branch wiring (CENSUS-1e)
+ * resolves a printed cell through `resolveSibling`. A crisis-keyed cell does not re-declare its key
+ * (R-B1). Each twin is the chair's ruling (R-G), recorded in docs/CENSUS_2_LANE_2026-11-04.md
+ * "CENSUS-2d": a T cell, so a twin moves only the births whose original is refused, once wired.
+ * @type {Readonly<Record<string, ReadonlyArray<Readonly<{ text: string, needs?: string[], excludes?: string[], twinOf?: string }>>>>}
+ */
+export const STRESS_TYPE_SIBLINGS = Object.freeze({
+  [STRESS_TYPE_MAP.plague_onset.crisisHook]: Object.freeze([
+    Object.freeze({ text: STRESS_TYPE_MAP.plague_onset.crisisHook, needs: ['healer'] }),
+    Object.freeze({ text: 'The first person to name the outbreak has gone quiet. Their last message suggested the disease is not natural. Reaching them means crossing a quarantine that is not being enforced consistently.', twinOf: STRESS_TYPE_MAP.plague_onset.crisisHook, excludes: ['healer'] }),
+  ]),
+  [STRESS_TYPE_MAP.plague_onset.viabilityNote]: Object.freeze([
+    Object.freeze({ text: STRESS_TYPE_MAP.plague_onset.viabilityNote, needs: ['market'] }),
+    Object.freeze({ text: 'Travel is being discouraged. Some supply chains are disrupted.', twinOf: STRESS_TYPE_MAP.plague_onset.viabilityNote, excludes: ['market'] }),
+  ]),
+  [STRESS_TYPE_MAP.religious_conversion.crisisHook]: Object.freeze([
+    Object.freeze({ text: STRESS_TYPE_MAP.religious_conversion.crisisHook, needs: ['institution: temple'] }),
+  ]),
+  [STRESS_TYPE_MAP.religious_conversion.viabilityNote]: Object.freeze([
+    Object.freeze({ text: STRESS_TYPE_MAP.religious_conversion.viabilityNote, needs: ['institution: temple', 'market'] }),
+    Object.freeze({ text: 'Tithing income splits or redirects. Properties of the old institution are in legal ambiguity.', twinOf: STRESS_TYPE_MAP.religious_conversion.viabilityNote, needs: ['institution: temple'], excludes: ['market'] }),
+  ]),
+});

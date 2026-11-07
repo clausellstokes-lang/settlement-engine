@@ -118,3 +118,22 @@ export const STRESSOR_SPINE_PHRASES = Object.freeze({
     },
   },
 });
+
+/**
+ * THE DECLARED PHRASES (CENSUS-2d unit 3; Phase A's ledger STRESSOR_SPINE_PHRASES.json), in the
+ * dissolved-twin shape keyed by the original's text (R-P 3): the cells stay strings for
+ * `strainPhraseOf` / `fearPhraseOf`; the T wiring (CENSUS-1e) resolves a printed phrase through
+ * `resolveSibling`. The keyed stressor is never re-declared (R-B1). Each twin is the chair's ruling
+ * (R-G), recorded with its share in docs/CENSUS_2_LANE_2026-11-04.md "CENSUS-2d".
+ * @type {Readonly<Record<string, ReadonlyArray<Readonly<{ text: string, needs?: string[], excludes?: string[], twinOf?: string }>>>>}
+ */
+export const STRESSOR_SPINE_SIBLINGS = Object.freeze({
+  [STRESSOR_SPINE_PHRASES.under_siege.fear]: Object.freeze([
+    Object.freeze({ text: STRESSOR_SPINE_PHRASES.under_siege.fear, needs: ['walls'] }),
+    Object.freeze({ text: 'the stores running out before any relief arrives', twinOf: STRESSOR_SPINE_PHRASES.under_siege.fear, excludes: ['walls'] }),
+  ]),
+  [STRESSOR_SPINE_PHRASES.politically_fractured.strain]: Object.freeze([
+    Object.freeze({ text: STRESSOR_SPINE_PHRASES.politically_fractured.strain, needs: ['ruler: council'] }),
+    Object.freeze({ text: 'factions that each hold part of the place and will not yield', twinOf: STRESSOR_SPINE_PHRASES.politically_fractured.strain, excludes: ['ruler: council'] }),
+  ]),
+});

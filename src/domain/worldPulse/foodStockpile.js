@@ -49,6 +49,11 @@ import {
   nativeSemanticName,
   nativeSemanticNames,
 } from '../content/customContentSemanticAuthority.js';
+import { withStoresMonths } from '../facts/storesMonths.js';
+
+// The stores-months home's one writer, re-exported for the pulse modules that already import
+// the stockpile (CENSUS-1 wave 0, fact 2).
+export { withStoresMonths };
 
 const round1 = (/** @type {number} */ v) => Math.round(v * 10) / 10;
 // Storage moves in small steps (a one-month tithe is 0.03 months of food) —
@@ -401,7 +406,7 @@ export function advanceFoodStockpile(settlement, { interval = 'one_month', tick 
     : undefined;
   const _disasterMoved = nextDisaster !== undefined && nextDisaster !== _frozenDisaster;
 
-  const nextFoodSecurity = {
+  const nextFoodSecurity = withStoresMonths({
     ...fs,
     storageMonths: round2(storage),
     deficitPct: round1(effectiveDeficit),
@@ -431,7 +436,7 @@ export function advanceFoodStockpile(settlement, { interval = 'one_month', tick 
         seasonalEvent: seasonal.variance ?? null,
       } : {}),
     },
-  };
+  }, round2(storage));
 
   // Bookkeeping transitions count as change too (NOT lastTick — that moves
   // every tick by definition): a siege lifting under full bypass must flip

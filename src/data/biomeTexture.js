@@ -53,6 +53,9 @@ export function biomeNameOf(id) {
 // season labels → a short texture line. Index-0 is not a variant pool here (a direct lookup,
 // not pickLine): each cell is the ONE canonical line for that terrain/season. Kept terse so a
 // road scene reads as a caption, not a paragraph.
+// {colour} (CENSUS-2e, R-R; ledger TERRAIN_SEASON_TEXTURE.json): past the season, a cell presumes only the
+// terrain its key names. Every cell presumes its SEASON, which no record field holds (ruling 8): the table is
+// listed under "needs a field" in tests/lint/undeclaredLines.register.json and left as it is.
 /** @type {Readonly<Record<string, Readonly<Record<string, string>>>>} */
 export const TERRAIN_SEASON_TEXTURE = Object.freeze({
   water: Object.freeze({

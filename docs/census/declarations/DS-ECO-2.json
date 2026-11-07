@@ -1,0 +1,301 @@
+{
+  "id": "DS-ECO-2",
+  "source": "src/data/dossierStateProse/economy.generated.js",
+  "drawKind": "K",
+  "pools": [
+    {
+      "id": "DS-ECO-2::FOOD: deficit",
+      "pool": true,
+      "declares": [
+        "food: ≤ deficit"
+      ],
+      "crisisScoped": false,
+      "colour": false,
+      "notes": "key: food tile Deficit N% (foodBalance.deficit; band equivalence with food-band reader to be confirmed)",
+      "lines": [
+        {
+          "id": "DS-ECO-2::FOOD: deficit::v1",
+          "text": "{settlement} does not grow what it eats. The daily count comes up short and the shortfall ",
+          "needs": [],
+          "excludes": [],
+          "colour": false,
+          "notes": "unhomed: imports (shortfall \"made good off the road, week on week\") — false under siege/blockade"
+        },
+        {
+          "id": "DS-ECO-2::FOOD: deficit::v2",
+          "text": "Bread here is bought, not simply had. The fields do not cover the town and everyone knows ",
+          "needs": [
+            "grain"
+          ],
+          "excludes": [],
+          "colour": false,
+          "notes": "\"The fields do not cover the town\"; unhomed: imports (\"which day the carts come\")"
+        },
+        {
+          "id": "DS-ECO-2::FOOD: deficit::v3",
+          "text": "The granary doors open more often than they shut, and what comes out is not what the field",
+          "needs": [
+            "institution: granary",
+            "grain"
+          ],
+          "excludes": [],
+          "colour": false,
+          "notes": "\"granary doors\"; \"what the fields put in\"; unhomed: imports"
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-ECO-2::FOOD: surplus",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": true,
+      "colour": false,
+      "notes": "key: food tile Surplus. Crisis-scoped: v2/v3 assert ease and outbound food, false under siege/famine crisis.",
+      "lines": [
+        {
+          "id": "DS-ECO-2::FOOD: surplus::v1",
+          "text": "{settlement} eats well below what it raises. The excess is counted, stored, and argued ove",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": false,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-2::FOOD: surplus::v2",
+          "text": "The talk about food here is about price, not about enough. The fields have been good to th",
+          "needs": [
+            "grain"
+          ],
+          "excludes": [],
+          "crisis": "calm",
+          "colour": false,
+          "notes": "\"talk about food is about price, not about enough\"; \"The fields have been good\""
+        },
+        {
+          "id": "DS-ECO-2::FOOD: surplus::v3",
+          "text": "A stranger notices the loaded carts leaving {settlement} rather than arriving. What the to",
+          "needs": [],
+          "excludes": [],
+          "crisis": "calm",
+          "colour": false,
+          "notes": "\"loaded carts leaving\" — unhomed: food exports; false under siege"
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-ECO-2::FOOD: balanced",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": true,
+      "colour": false,
+      "notes": "key: food tile Balanced. Crisis-scoped: v2 \"Food is not a subject here\".",
+      "lines": [
+        {
+          "id": "DS-ECO-2::FOOD: balanced::v1",
+          "text": "What {settlement} raises and what {settlement} eats come out level. There is no shortfall ",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": false,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-2::FOOD: balanced::v2",
+          "text": "Food is not a subject here. The town feeds itself, and it feeds itself exactly.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "calm",
+          "colour": false,
+          "notes": "\"Food is not a subject here\""
+        },
+        {
+          "id": "DS-ECO-2::FOOD: balanced::v3",
+          "text": "{settlement} sits level on food. The fields answer the town and no further, so a single fa",
+          "needs": [
+            "grain"
+          ],
+          "excludes": [],
+          "crisis": "any",
+          "colour": false,
+          "notes": "\"The fields answer the town\""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-ECO-2::GRANARY: well stocked",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": true,
+      "colour": false,
+      "notes": "key: granary outlook band well_stocked; {season} slot (season has no atom). Granary institution NOT guaranteed by the key (outlook is derived for every place). Crisis-scoped: v2 \"Nobody is counting sacks\".",
+      "lines": [
+        {
+          "id": "DS-ECO-2::GRANARY: well stocked::v1",
+          "text": "The granary stands near its capacity going into {season}. The stores reach past the turn o",
+          "needs": [
+            "institution: granary"
+          ],
+          "excludes": [],
+          "crisis": "any",
+          "colour": false,
+          "notes": "season slot: no atom"
+        },
+        {
+          "id": "DS-ECO-2::GRANARY: well stocked::v2",
+          "text": "Nobody is counting sacks in {settlement} this {season}. The granary is full and the argume",
+          "needs": [
+            "institution: granary"
+          ],
+          "excludes": [],
+          "crisis": "calm",
+          "colour": false,
+          "notes": "\"Nobody is counting sacks\""
+        },
+        {
+          "id": "DS-ECO-2::GRANARY: well stocked::v3",
+          "text": "The stores here are the reassuring kind: a granary standing deep in {season}, and a town t",
+          "needs": [
+            "institution: granary"
+          ],
+          "excludes": [],
+          "crisis": "calm",
+          "colour": false,
+          "notes": "\"a town that plainly expects to stay that way\""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-ECO-2::GRANARY: stocked",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": false,
+      "notes": "key: granary outlook band stocked; {season} slot",
+      "lines": [
+        {
+          "id": "DS-ECO-2::GRANARY: stocked::v1",
+          "text": "The granary holds a working reserve into {season}: enough to carry the town through, not e",
+          "needs": [
+            "institution: granary"
+          ],
+          "excludes": [],
+          "colour": false,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-2::GRANARY: stocked::v2",
+          "text": "The stores will do. That is the whole of what {settlement} says about its granary this {se",
+          "needs": [
+            "institution: granary"
+          ],
+          "excludes": [],
+          "colour": false,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-2::GRANARY: stocked::v3",
+          "text": "The granary is stocked and not deep. It answers {season} as things stand and would not ans",
+          "needs": [
+            "institution: granary"
+          ],
+          "excludes": [],
+          "colour": false,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-ECO-2::GRANARY: thin",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": false,
+      "notes": "key: granary outlook band thin; {season} slot",
+      "lines": [
+        {
+          "id": "DS-ECO-2::GRANARY: thin::v1",
+          "text": "The granary runs thin this {season}. What is left is measured in a stretch of weeks rather",
+          "needs": [
+            "institution: granary"
+          ],
+          "excludes": [],
+          "colour": false,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-2::GRANARY: thin::v2",
+          "text": "People in {settlement} have begun asking when the granary was last this low, which is the ",
+          "needs": [
+            "institution: granary"
+          ],
+          "excludes": [],
+          "colour": false,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-2::GRANARY: thin::v3",
+          "text": "The stores are drawing down faster than {season} will replace them, and the gap between th",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": "\"the town's whole immediate problem\" — crisis-blind (would understate a siege), not declared"
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-ECO-2::GRANARY: nearly empty",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": false,
+      "notes": "key: granary outlook band nearly_empty; {season} slot",
+      "lines": [
+        {
+          "id": "DS-ECO-2::GRANARY: nearly empty::v1",
+          "text": "The granary is very nearly out. What remains is counted daily and issued against a list.",
+          "needs": [
+            "institution: granary"
+          ],
+          "excludes": [],
+          "colour": false,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-2::GRANARY: nearly empty::v2",
+          "text": "The granary door is watched now. There is little behind it and everybody knows roughly how",
+          "needs": [
+            "institution: granary"
+          ],
+          "excludes": [],
+          "colour": false,
+          "notes": "\"The granary door is watched\""
+        },
+        {
+          "id": "DS-ECO-2::GRANARY: nearly empty::v3",
+          "text": "A stranger who asks about the stores gets a short answer and a changed subject. The granar",
+          "needs": [
+            "institution: granary"
+          ],
+          "excludes": [],
+          "colour": false,
+          "notes": "season slot: \"{season} has not turned\""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    }
+  ]
+}

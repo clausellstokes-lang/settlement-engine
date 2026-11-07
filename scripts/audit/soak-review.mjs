@@ -63,6 +63,11 @@ async function runWorker({ indices, out, w, renderedSubset, count }) {
   const { readerDistributions } = await import('../../src/domain/coherence/readerBattery.js');
   const { normalizeRenderedSentence } = await import('./phrase-repetition.mjs');
   const { storySentencesOf, skeletonOf } = await import('./soak-review/prose.mjs');
+  // CENSUS-1b wave 1: the birth runs with a presumption ledger open; the self-check re-asserts
+  // every declared atom against the final record (cert:false-presumption), and the ledger's
+  // declared-share is carried on the line for the aggregate.
+  const { withPresumptionLedger } = await import('../../src/domain/facts/presumptionLedger.js');
+  const { presumptionFindings, declaredShare } = await import('../../src/domain/facts/presumptionCheck.js');
   await ensureLaws();
   const needRender = indices.some((i) => isRendered(i, renderedSubset) || isSampled(i, count));
   const H = needRender ? await import('./soak-review/renderHarness.mjs') : null;
@@ -75,13 +80,20 @@ async function runWorker({ indices, out, w, renderedSubset, count }) {
   for (const i of indices) {
     let line;
     try {
-      const b = birth(i);
+      const born = withPresumptionLedger(() => birth(i));
+      const b = born.result;
       const s = b.settlement;
       let replay = null;
       if (i % 100 === 0) replay = sha(birth(i).settlement) === sha(s);
       const rendered = isRendered(i, renderedSubset) || isSampled(i, count);
       const r = rendered ? H.renderSurfaces(harness, s) : null;
       const findings = reviewSettlement(s, b.config, r);
+      // CENSUS-1c unit 4: the render's draws (noted in the harness graph's own ledger) are
+      // re-asserted against the same final record and counted in declared-share.
+      const renderLedger = r && Array.isArray(r.ledger) ? r.ledger : [];
+      for (const p of [...presumptionFindings(s, born.ledger), ...presumptionFindings(s, renderLedger)]) {
+        findings.push({ check: 'cert:false-presumption', surface: 'record', quote: p.atom, detail: `${p.pool} #${p.lineId}: '${p.atom}' reads ${p.answer} on the final record` });
+      }
       if (replay === false) findings.push({ check: 'cert:replay_mismatch', surface: 'record', quote: '', detail: 'same seed, different bytes' });
       // corpus repetition: every screen sentence, exact and with this place's own names masked
       const sentences = [];
@@ -127,6 +139,7 @@ async function runWorker({ indices, out, w, renderedSubset, count }) {
         houses: housesReading(s),
         // The READER battery's distributions (2c: the Exports count; 10: the Daily Life line at all), apart.
         reader: readerDistributions(s, r ? r.tabs : null),
+        presumptions: { share: declaredShare([...born.ledger, ...renderLedger]) },
       };
       if (isSampled(i, count) && r) {
         const body = [

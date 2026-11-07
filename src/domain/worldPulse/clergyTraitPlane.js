@@ -274,7 +274,7 @@ export function targetedFootholds(settlement, patronDeity, rivals, lens) {
     if (orgPower(npc) < T.MIN_ORG_POWER) continue;
     const plane = npcTraitPlane(npc, lens);
     if (plane.spread <= 0) continue;                          // trait-neutral ⇒ never available
-    ministers.push({ id: String(npc?.id ?? ''), name: String(npc?.name || npc?.id || 'a minister'), plane });
+    ministers.push({ id: String(npc?.id ?? ''), name: String(npc?.name || npc?.id || 'A minister'), plane });
   }
   if (!ministers.length) return [];
   ministers.sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));

@@ -1,0 +1,672 @@
+{
+  "poolId": "ARRIVAL_PEOPLE",
+  "source": "src/data/arrivalProse.js:260-333",
+  "drawKind": "R",
+  "drawSite": "src/generators/narrative/arrivalScene.js:288-289 agreeingLine (pickRandom, one redraw on a market/catch contradiction); PEOPLE beat, every birth",
+  "pools": [
+    {
+      "pool": "germanic",
+      "keyGuarantees": [
+        "resolveCultureProfileKey(config.culture) === 'germanic'; stop: culture",
+        "renders in EVERY birth, crisis or none (PEOPLE is not gated by underStress)",
+        "agreeingLine market/catch redraw (arrivalScene.js:251-256, 289)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Not opted: customs shown, no calm asserted.",
+      "lines": [
+        {
+          "lineId": "ARRIVAL_PEOPLE.germanic[0]",
+          "text": "An apprentice hurries past on an errand, a master's mark stitched on his sleeve.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_PEOPLE.germanic[1]",
+          "text": "Two neighbours argue over a boundary stone, each quoting what their grandfathers agreed.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_PEOPLE.germanic[2]",
+          "text": "A craftsman shows off a finished piece in his doorway, and passers-by judge it out loud.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_PEOPLE.germanic[3]",
+          "text": "A notice of the next fair is nailed up beside a doorway, and someone is reading it aloud for the others.",
+          "needs": [
+            "market"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "latin",
+      "keyGuarantees": [
+        "resolveCultureProfileKey(config.culture) === 'latin'; stop: culture",
+        "renders in EVERY birth, crisis or none (PEOPLE is not gated by underStress)",
+        "agreeingLine market/catch redraw (arrivalScene.js:251-256, 289)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Opted: renders under a crisis and a line asserts open politics (occupation denies it), plenty or hospitality (hunger denies it), open grazing trade (siege) or easy trust of strangers.",
+      "lines": [
+        {
+          "lineId": "ARRIVAL_PEOPLE.latin[0]",
+          "text": "A patron moves through the crowd with clients at their heels, greeting people by name.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_PEOPLE.latin[1]",
+          "text": "A notary's clerk hurries past with a satchel of contracts.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_PEOPLE.latin[2]",
+          "text": "People argue politics in the open, loudly, and seem to enjoy it.",
+          "needs": [],
+          "excludes": [
+            "crisis: occupied"
+          ],
+          "crisis": "any",
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_PEOPLE.latin[3]",
+          "text": "A benefactor's name is carved fresh above a mended well, and people make sure you notice it.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "celtic",
+      "keyGuarantees": [
+        "resolveCultureProfileKey(config.culture) === 'celtic'; stop: culture",
+        "renders in EVERY birth, crisis or none (PEOPLE is not gated by underStress)",
+        "agreeingLine market/catch redraw (arrivalScene.js:251-256, 289)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Opted: renders under a crisis and a line asserts open politics (occupation denies it), plenty or hospitality (hunger denies it), open grazing trade (siege) or easy trust of strangers.",
+      "lines": [
+        {
+          "lineId": "ARRIVAL_PEOPLE.celtic[0]",
+          "text": "A poet holds a small crowd by the well, and nobody hurries the telling along.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_PEOPLE.celtic[1]",
+          "text": "A household feeds strangers at its door, and makes sure everyone sees it doing so.",
+          "needs": [],
+          "excludes": [
+            "crisis: hunger"
+          ],
+          "crisis": "any",
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_PEOPLE.celtic[2]",
+          "text": "Greetings are called across the lane, and every greeting comes with a question about family.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_PEOPLE.celtic[3]",
+          "text": "An old judge listens to two neighbours by a gate and says nothing until both are finished.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": false,
+          "stop": [
+            "\"by a gate\" (a yard gate, not the perimeter; unread)"
+          ]
+        }
+      ]
+    },
+    {
+      "pool": "arabic",
+      "keyGuarantees": [
+        "resolveCultureProfileKey(config.culture) === 'arabic'; stop: culture",
+        "renders in EVERY birth, crisis or none (PEOPLE is not gated by underStress)",
+        "agreeingLine market/catch redraw (arrivalScene.js:251-256, 289)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Not opted: customs shown, no calm asserted.",
+      "lines": [
+        {
+          "lineId": "ARRIVAL_PEOPLE.arabic[0]",
+          "text": "A broker sits in the shade, matching buyers to goods from routes you have never travelled.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "trade routes"
+          ]
+        },
+        {
+          "lineId": "ARRIVAL_PEOPLE.arabic[1]",
+          "text": "Travellers are offered water before anyone asks their business.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_PEOPLE.arabic[2]",
+          "text": "Two partners go over their accounts in a courtyard with a mediator sitting between them.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_PEOPLE.arabic[3]",
+          "text": "A merchant swears an oath on his scales, and the buyer watches the scales anyway.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "norse",
+      "keyGuarantees": [
+        "resolveCultureProfileKey(config.culture) === 'norse'; stop: culture",
+        "renders in EVERY birth, crisis or none (PEOPLE is not gated by underStress)",
+        "agreeingLine market/catch redraw (arrivalScene.js:251-256, 289)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Opted: renders under a crisis and a line asserts open politics (occupation denies it), plenty or hospitality (hunger denies it), open grazing trade (siege) or easy trust of strangers.",
+      "lines": [
+        {
+          "lineId": "ARRIVAL_PEOPLE.norse[0]",
+          "text": "People argue law in the open as freely as they trade.",
+          "needs": [],
+          "excludes": [
+            "crisis: occupied"
+          ],
+          "crisis": "any",
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_PEOPLE.norse[1]",
+          "text": "Racks of drying fish and smoked meat stand beside the houses, laid in against the winter.",
+          "needs": [
+            "navigable"
+          ],
+          "excludes": [
+            "crisis: hunger"
+          ],
+          "crisis": "any",
+          "colour": false,
+          "stop": [
+            "winter (season)",
+            "fish, smoked meat (food sources)"
+          ]
+        },
+        {
+          "lineId": "ARRIVAL_PEOPLE.norse[2]",
+          "text": "A household leader hands out gifts in the open, and everyone watching keeps count.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_PEOPLE.norse[3]",
+          "text": "Neighbours work together to mend a roof, and nobody seems to be in charge of it.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "slavic",
+      "keyGuarantees": [
+        "resolveCultureProfileKey(config.culture) === 'slavic'; stop: culture",
+        "renders in EVERY birth, crisis or none (PEOPLE is not gated by underStress)",
+        "agreeingLine market/catch redraw (arrivalScene.js:251-256, 289)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Opted: renders under a crisis and a line asserts open politics (occupation denies it), plenty or hospitality (hunger denies it), open grazing trade (siege) or easy trust of strangers.",
+      "lines": [
+        {
+          "lineId": "ARRIVAL_PEOPLE.slavic[0]",
+          "text": "Smoke rises from a shared oven, and neighbours queue to bake together.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_PEOPLE.slavic[1]",
+          "text": "People gather at the well, and the news of the whole place passes through it.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_PEOPLE.slavic[2]",
+          "text": "Strings of dried mushrooms hang in the doorways beside barrels of pickled cabbage.",
+          "needs": [],
+          "excludes": [
+            "crisis: hunger"
+          ],
+          "crisis": "any",
+          "colour": false,
+          "stop": [
+            "mushrooms, cabbage (food sources)"
+          ]
+        },
+        {
+          "lineId": "ARRIVAL_PEOPLE.slavic[3]",
+          "text": "A work party heads out together, singing, with tools on their shoulders.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "east_asian",
+      "keyGuarantees": [
+        "resolveCultureProfileKey(config.culture) === 'east_asian'; stop: culture",
+        "renders in EVERY birth, crisis or none (PEOPLE is not gated by underStress)",
+        "agreeingLine market/catch redraw (arrivalScene.js:251-256, 289)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Not opted: customs shown, no calm asserted.",
+      "lines": [
+        {
+          "lineId": "ARRIVAL_PEOPLE.east_asian[0]",
+          "text": "A clerk records every cartload that passes in a careful ledger.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_PEOPLE.east_asian[1]",
+          "text": "An elder settles a quarrel in a quiet voice before it can grow loud enough to need anyone else.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_PEOPLE.east_asian[2]",
+          "text": "Tea is poured for a merchant before the bargaining begins, and the bargaining waits for it.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_PEOPLE.east_asian[3]",
+          "text": "Each lane seems to keep to its own trade, and each trade to its own lane.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "mesoamerican",
+      "keyGuarantees": [
+        "resolveCultureProfileKey(config.culture) === 'mesoamerican'; stop: culture",
+        "renders in EVERY birth, crisis or none (PEOPLE is not gated by underStress)",
+        "agreeingLine market/catch redraw (arrivalScene.js:251-256, 289)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Not opted: customs shown, no calm asserted.",
+      "lines": [
+        {
+          "lineId": "ARRIVAL_PEOPLE.mesoamerican[0]",
+          "text": "Porters bent under loaded frames file past, and someone counts them in.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_PEOPLE.mesoamerican[1]",
+          "text": "The neighbours turn out together to sweep and mend their own street.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_PEOPLE.mesoamerican[2]",
+          "text": "Festival banners hang above the doors, faded from one year and waiting for the next.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_PEOPLE.mesoamerican[3]",
+          "text": "Craftspeople sit in rows, each row a different trade, each worker deep in their own work.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "south_asian",
+      "keyGuarantees": [
+        "resolveCultureProfileKey(config.culture) === 'south_asian'; stop: culture",
+        "renders in EVERY birth, crisis or none (PEOPLE is not gated by underStress)",
+        "agreeingLine market/catch redraw (arrivalScene.js:251-256, 289)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Not opted: customs shown, no calm asserted.",
+      "lines": [
+        {
+          "lineId": "ARRIVAL_PEOPLE.south_asian[0]",
+          "text": "A moneylender sits at a low table with a queue of familiar faces waiting.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_PEOPLE.south_asian[1]",
+          "text": "People draw water in an order nobody needs to explain.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_PEOPLE.south_asian[2]",
+          "text": "Food is being handed out to anyone who asks, and the line is patient.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_PEOPLE.south_asian[3]",
+          "text": "Each lane of stalls has someone who speaks for it, and they are all speaking at once.",
+          "needs": [
+            "market"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "steppe",
+      "keyGuarantees": [
+        "resolveCultureProfileKey(config.culture) === 'steppe'; stop: culture",
+        "renders in EVERY birth, crisis or none (PEOPLE is not gated by underStress)",
+        "agreeingLine market/catch redraw (arrivalScene.js:251-256, 289)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Opted: renders under a crisis and a line asserts open politics (occupation denies it), plenty or hospitality (hunger denies it), open grazing trade (siege) or easy trust of strangers.",
+      "lines": [
+        {
+          "lineId": "ARRIVAL_PEOPLE.steppe[0]",
+          "text": "Horse traders show their animals at the edge of the settlement, where herders and townsfolk meet.",
+          "needs": [],
+          "excludes": [
+            "crisis: under_siege"
+          ],
+          "crisis": "any",
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_PEOPLE.steppe[1]",
+          "text": "Felt tents stand beside the timber houses, and their owners seem at home in either.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_PEOPLE.steppe[2]",
+          "text": "A caravan broker shouts terms to a line of laden animals and the people leading them.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": false,
+          "stop": [
+            "caravan (trade-route kind)"
+          ]
+        },
+        {
+          "lineId": "ARRIVAL_PEOPLE.steppe[3]",
+          "text": "Guests are greeted with a cup before a word of business is spoken.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "greek",
+      "keyGuarantees": [
+        "resolveCultureProfileKey(config.culture) === 'greek'; stop: culture",
+        "renders in EVERY birth, crisis or none (PEOPLE is not gated by underStress)",
+        "agreeingLine market/catch redraw (arrivalScene.js:251-256, 289)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Opted: renders under a crisis and a line asserts open politics (occupation denies it), plenty or hospitality (hunger denies it), open grazing trade (siege) or easy trust of strangers.",
+      "lines": [
+        {
+          "lineId": "ARRIVAL_PEOPLE.greek[0]",
+          "text": "Two citizens argue a point of law loudly enough for a crowd to gather.",
+          "needs": [],
+          "excludes": [
+            "crisis: occupied"
+          ],
+          "crisis": "any",
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_PEOPLE.greek[1]",
+          "text": "A notice of the next assembly is chalked on a wall, and someone has corrected the spelling.",
+          "needs": [],
+          "excludes": [
+            "crisis: occupied"
+          ],
+          "crisis": "any",
+          "colour": false,
+          "stop": [
+            "assembly (governance kind; ruler: council not guaranteed)"
+          ]
+        },
+        {
+          "lineId": "ARRIVAL_PEOPLE.greek[2]",
+          "text": "A money changer sits at his table with coins from many mints.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_PEOPLE.greek[3]",
+          "text": "A patron stands drinks at a wine shop, and makes sure everyone knows who is paying.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "mixed",
+      "keyGuarantees": [
+        "resolveCultureProfileKey(config.culture) === 'mixed' (or any culture the catalogue lacks); stop: culture",
+        "renders in EVERY birth, crisis or none (PEOPLE is not gated by underStress)",
+        "agreeingLine market/catch redraw (arrivalScene.js:251-256, 289)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Opted: renders under a crisis and a line asserts open politics (occupation denies it), plenty or hospitality (hunger denies it), open grazing trade (siege) or easy trust of strangers.",
+      "lines": [
+        {
+          "lineId": "ARRIVAL_PEOPLE.mixed[0]",
+          "text": "You hear three languages in as many steps, and nobody seems to find it strange.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_PEOPLE.mixed[1]",
+          "text": "People here greet strangers with open curiosity, and ask where you have come from before your name.",
+          "needs": [],
+          "excludes": [
+            "crisis: threat",
+            "crisis: plague_onset",
+            "crisis: recently_betrayed",
+            "crisis: infiltrated"
+          ],
+          "crisis": "any",
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_PEOPLE.mixed[2]",
+          "text": "A cook at a doorway mixes the spices of two different homelands into one pot.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "ARRIVAL_PEOPLE.mixed[3]",
+          "text": "Neighbours bargain in a trade tongue that belongs to no one and works for everyone.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        }
+      ]
+    }
+  ]
+}
