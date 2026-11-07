@@ -42,6 +42,26 @@ const GOAL = {
   competition: 'Keep the family\'s name honoured at every feast',
 };
 
+/**
+ * ⭐ THE CENSUS CURED THESE SIX ROWS AT THE SOURCE (census-1d unit 2, e267287e7, and its parallel
+ * twin census-1e unit 1, b8fdcd3d5: the registry goal lookup resolves through the one rule, so
+ * CENSUS-4b's CALM_ONLY goals are refused under a crisis). Measured with this file's own births
+ * on archives: at each commit's parent seeds 604/1804/2404/3604 carry the stability want, 3005
+ * the administration want and 3000 the competition want; at each commit none does, and the calm
+ * control 1803 keeps its want. So the born record no longer prints the want, and the instrument
+ * is read on the want as it WOULD print (the registry's R11 wording, verbatim) under the same
+ * born crisis: both halves asserted, the cure and the instrument.
+ */
+const WANT = {
+  stability: 'Fix the weakness in the seat that nobody wants to talk about, before someone uses it.',
+  administration: 'Do every task the seat hands them so well that the seat cannot do without them.',
+  competition: 'Keep the family\'s name honoured at every feast while the new offices take its old work.',
+};
+/** @param {any} s @param {string} fragment @returns {boolean} does any NPC of the born record want it? */
+const holdsWant = (s, fragment) => (s.npcs || []).some((n) => (typeof n?.goal === 'string' ? n.goal : n?.goal?.short || '').includes(fragment));
+/** @param {string} want @returns {string} the want as the Tonight sheet prints it */
+const printed = (want) => `Wants to ${want.charAt(0).toLowerCase()}${want.slice(1)}`;
+
 const SEEDS = [604, 1804, 2404, 3604, 1205, 2402, 5404, 4803, 1204, 3005, 3000, 5402, 1803];
 /** @type {Record<number, any>} */
 const born = {};
@@ -55,7 +75,8 @@ const readOn = (i, line) => crisisBlindFindings(born[i], { page: line(born[i]) }
 
 describe('rung 2D · the crisis-blind instrument reads the twelve sampled rows', () => {
   it.each([604, 1804, 2404, 3604])('soak1k-%i: the ruler\'s "current stability" want under a fracture or a debt', (i) => {
-    expect(readOn(i, (s) => rulerWant(s, GOAL.stability))).toEqual([['current stability', 'crisis']]);
+    expect(holdsWant(born[i], GOAL.stability), 'the census refuses the calm-only want under the crisis').toBe(false);
+    expect(readOn(i, () => printed(WANT.stability))).toEqual([['current stability', 'crisis']]);
   });
 
   // CENSUS-2c (the chair's R-P 1): the food record counts the influx (×1.15, CENSUS-1c unit 7), so
@@ -81,11 +102,13 @@ describe('rung 2D · the crisis-blind instrument reads the twelve sampled rows',
   });
 
   it('soak1k-3005: the governor\'s "competent administration" want under a succession void and an insurgency', () => {
-    expect(readOn(3005, (s) => rulerWant(s, GOAL.administration))).toEqual([['competent administration', 'succession']]);
+    expect(holdsWant(born[3005], GOAL.administration), 'the census refuses the calm-only want under the crisis').toBe(false);
+    expect(readOn(3005, () => printed(WANT.administration))).toEqual([['competent administration', 'succession']]);
   });
 
   it('soak1k-3000: the elder\'s "stable institutional competition" want under an insurgency', () => {
-    expect(readOn(3000, (s) => rulerWant(s, GOAL.competition))).toEqual([['stable institutional competition', 'unrest']]);
+    expect(holdsWant(born[3000], GOAL.competition), 'the census refuses the calm-only want under the crisis').toBe(false);
+    expect(readOn(3000, () => printed(WANT.competition))).toEqual([['stable institutional competition', 'unrest']]);
   });
 
   it('soak1k-5402: the line that no one export matters, under a famine that took the herds', () => {
