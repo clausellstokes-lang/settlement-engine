@@ -572,7 +572,7 @@ export function regenNPCsPipeline(settlement, config, options = {}) {
       ? refreshRelationshipProjections(relationships, roster, settlement.institutions)
       : relationships;
     const factions = generateFactions(roster, settlement.powerStructure?.factions);
-    const conflicts = generateConflicts(factions, finalRelationships, config, settlement.institutions || []);
+    const conflicts = generateConflicts(settlement.powerStructure?.factions || [], finalRelationships, config, settlement.institutions || [], roster);
     return {
       npcs: roster,
       relationships: finalRelationships,

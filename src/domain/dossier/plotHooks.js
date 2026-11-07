@@ -1,11 +1,11 @@
 import { compareCodepoint } from '../deterministicSort.js';
-import { hookTruthViolations, settlementHookFacts, speakHookTruthfully } from '../coherence/hookTruth.js';
+import { hookPartyRosterOf, hookPartyViolations, hookTruthViolations, settlementHookFacts, speakHookTruthfully } from '../coherence/hookTruth.js';
 import { traditionHook } from '../traditions/prose.js';
 import { normalizePlotHook, plotHookText } from '../../lib/proseSeams.js';
 import { themeOfText } from '../hookThemes.js';
 import { createConflictHookDraw, foodGapHookLine } from './hookLines.js';
 import { retainHooks, retentionKey, editedHookTextKeys } from './hookRetention.js';
-import { crisisHooksOf } from '../crisis/crisisHooks.js';
+import { crisisHooksOf, leverAndLoserOf } from '../crisis/crisisHooks.js';
 import { effectiveCastOf } from '../crisis/crisisCast.js';
 
 const TENSION_LABELS = Object.freeze({
@@ -44,6 +44,43 @@ export const PLOT_HOOK_CATEGORIES = Object.freeze({
   // Relationships tab beside it. A stored hook that still carries the token renders under the
   // tension colour (every reader's fallback).
 });
+
+/**
+ * THE THREE CLASSES (the people car, PEOPLE-3 HOOKS; the owner: "one plot hook per NPC rather than
+ * multiple … It should be both tensions, people, and history and it doesn't mean that hooks are
+ * between specific individual people it could be between powers, groups, or historical").
+ *   person  — the ONE hook each representative carries (its party: the person);
+ *   tension — the place's tensions: the current tensions (parties: their camps, a power where the
+ *             camp is one), the crisis hooks (the role's face and the power), the traditions
+ *             (the rite's community), the conflict line (the TWO POWERS), and — R-P6 — the
+ *             economics and safety hooks as tensions of the place (party: the place);
+ *   history — the historical events' hooks (party: the event).
+ * Every collected hook carries `class` and `parties` beside its `category`, which stays the
+ * surfaces' render token (colour, label, source page, the framing pools) until PEOPLE-5 reads the
+ * class and the parties everywhere, as `links` stays beside `parties`.
+ */
+export const PLOT_HOOK_CLASSES = Object.freeze(['person', 'tension', 'history']);
+
+/** @type {Readonly<Record<string, 'person' | 'tension' | 'history'>>} the class of each source category */
+const CLASS_OF_CATEGORY = Object.freeze({
+  npc: 'person',
+  faction: 'tension',
+  tension: 'tension',
+  economics: 'tension',
+  safety: 'tension',
+  history: 'history',
+});
+
+/**
+ * The class of one hook (a stored hook from before the classes reads by its category).
+ * @param {{ class?: unknown, category?: unknown } | null | undefined} hook
+ * @returns {'person' | 'tension' | 'history'}
+ */
+export function plotHookClassOf(hook) {
+  const declared = String(hook?.class ?? '');
+  if (PLOT_HOOK_CLASSES.includes(declared)) return /** @type {'person' | 'tension' | 'history'} */ (declared);
+  return CLASS_OF_CATEGORY[String(hook?.category ?? '')] || 'tension';
+}
 
 /**
  * THE PAGE EACH HOOK'S SOURCE FACT LIVES ON (chair ruling X-2 / RULINGS-T1 Plot Hooks). The
@@ -120,6 +157,8 @@ export function groupPlotHooksBySourcePage(hooks) {
  * @property {string} category
  * @property {number} priority
  * @property {boolean} [accent]
+ * @property {'person' | 'tension' | 'history'} [class] the hook's class (PLOT_HOOK_CLASSES)
+ * @property {Array<import('../coherence/hookTruth.js').HookParty>} [parties] who or what the hook is between
  * @property {Array<{ kind: string, label: unknown, id: unknown }>} [links]
  * @property {string} [crisis] the crisis kind a crisis hook belongs to (absent on every other hook)
  */
@@ -181,8 +220,13 @@ function dedupeHooks(sorted) {
   /** @type {Set<string>} */ const seenFamily = new Set();
   /** @type {PlotHook[]} */ const out = [];
   for (const hook of sorted) {
-    const textKey = normHookText(hook.text);
-    const familyKey = hookFamilyId(hook.text);
+    // A PARTY IS A FACT (PEOPLE-3 HOOKS): a person hook is the hook OF that person, so two
+    // representatives whose pools ran dry onto the same authored line are two hooks, each the
+    // card's one (the owner's "one plot hook per NPC"); every other hook folds as it always did.
+    const person = hook.class === 'person' ? (hook.parties || []).find((p) => p.kind === 'person') : undefined;
+    const by = person && person.kind === 'person' ? `person:${person.id}|` : '';
+    const textKey = normHookText(hook.text) && `${by}${normHookText(hook.text)}`;
+    const familyKey = `${by}${hookFamilyId(hook.text)}`;
     if (!textKey) continue;
     if (seenText.has(textKey) || seenFamily.has(familyKey)) continue;
     seenText.add(textKey);
@@ -235,6 +279,8 @@ function push(out, hook) {
     ...hook,
     text,
     category: hook.category || 'tension',
+    class: plotHookClassOf(hook),
+    parties: Array.isArray(hook.parties) ? hook.parties : [],
     priority: Number.isFinite(hook.priority) ? hook.priority : 5,
     accent: Boolean(hook.accent),
   }));
@@ -259,7 +305,11 @@ function speakHooks(collected, facts, settlement) {
   const out = [];
   let refusedFamine = false;
   let keptFoodHook = false;
+  const roster = hookPartyRosterOf(settlement);
   for (const hook of collected) {
+    // THE PARTY ARM (PEOPLE-3 HOOKS): a hook about a person not on the roster, or a power that
+    // does not exist, is refused before its words are read.
+    if (hookPartyViolations(hook.parties, roster).length > 0) continue;
     const text = speakHookTruthfully(hook.text, facts);
     const violations = hookTruthViolations(text, facts);
     if (violations.length > 0) {
@@ -279,6 +329,7 @@ function speakHooks(collected, facts, settlement) {
       source: 'Economy',
       role: '',
       category: 'economics',
+      parties: [{ kind: 'place' }],
       priority: 7,
     });
   }
@@ -353,6 +404,55 @@ function firstPowerOf(npc) {
   return first ? String(first.power) : null;
 }
 
+/**
+ * A crisis hook's parties: the cast hook's role holder (a person, or the power or house it names)
+ * and that person's power; the lever hook's holder and the power that loses.
+ * @param {{ bound?: unknown, link?: { kind: string, id: string, label: string } | null }} hook
+ * @param {unknown} cast @param {PlotHookSettlement} settlement
+ * @returns {Array<import('../coherence/hookTruth.js').HookParty>}
+ */
+function crisisPartiesOf(hook, cast, settlement) {
+  /** @type {Array<import('../coherence/hookTruth.js').HookParty>} */
+  const out = [];
+  const npcs = settlement.npcs || [];
+  const person = (/** @type {unknown} */ id) => {
+    if (id === null || id === undefined || id === '') return;
+    out.push({ kind: 'person', id: String(id) });
+    const npc = npcs.find((n) => String(n?.id ?? n?.name) === String(id));
+    const power = npc ? firstPowerOf(npc) : null;
+    if (power) out.push({ kind: 'power', name: power });
+  };
+  if (hook.bound === 'lever') {
+    const { lever, loser } = leverAndLoserOf(/** @type {never} */ (cast));
+    if (lever?.holderId) out.push({ kind: 'person', id: String(lever.holderId) });
+    if (loser?.factionId) out.push({ kind: 'power', name: String(loser.factionId) });
+    return out;
+  }
+  const link = hook.link;
+  if (!link) return out;
+  if (link.kind === 'npc') person(link.id);
+  else if (link.kind === 'faction') out.push({ kind: 'power', name: String(link.id) });
+  else out.push({ kind: 'group', name: String(link.label || link.id) });
+  return out;
+}
+
+/**
+ * A current tension's parties: each camp it names, a POWER where the camp is one on the roster,
+ * else the GROUP the camp names (the owner's "between powers, groups").
+ * @param {PlotHookTension & { factions?: unknown }} tension @param {Set<string>} powerNames
+ * @returns {Array<import('../coherence/hookTruth.js').HookParty>}
+ */
+function campPartiesOf(tension, powerNames) {
+  const camps = Array.isArray(tension.factions) ? tension.factions.filter((c) => typeof c === 'string' && c.trim()) : [];
+  return camps.map((name) => (powerNames.has(name) ? { kind: 'power', name } : { kind: 'group', name }));
+}
+
+/** A historical event's key: its id where the record gives one, else its name. @param {PlotHookEvent & { id?: unknown, name?: unknown }} event */
+function eventIdOf(event) {
+  const id = event.id ?? event.name;
+  return id === undefined || id === null || id === '' ? null : String(id);
+}
+
 /** The link kinds a hook card can carry. */
 const CRISIS_LINK_KINDS = new Set(['npc', 'faction']);
 
@@ -369,6 +469,7 @@ export function collectPlotHooks(settlement = {}, options = {}) {
   const hooks = [];
   const facts = settlementHookFacts(settlement);
   const drawConflictHook = createConflictHookDraw();
+  const powerNames = hookPartyRosterOf(settlement).rosterPowerNames || new Set();
 
   // ── THE CRISIS HOOKS, FIRST (the HOOKS-UNDER-STRESS lane, SOAK-1000 §3) ─────────────────
   // Each active crisis adds the hooks its cast derives (`src/domain/crisis/crisisHooks.js ::
@@ -392,6 +493,7 @@ export function collectPlotHooks(settlement = {}, options = {}) {
         accent: true,
         crisis: kind,
         links: hook.link && CRISIS_LINK_KINDS.has(hook.link.kind) ? [{ kind: hook.link.kind, label: hook.link.label, id: hook.link.id }] : [],
+        parties: crisisPartiesOf(hook, cast, settlement),
       });
     });
   });
@@ -437,6 +539,8 @@ export function collectPlotHooks(settlement = {}, options = {}) {
       priority: intensity === 'high' ? 9 : intensity === 'low' ? 5 : 7,
       accent: intensity === 'high',
       links: (conflict.parties || []).filter(Boolean).map(party => ({ kind: 'faction', label: party, id: party })),
+      // between the TWO POWERS (the owner's "between powers")
+      parties: (conflict.parties || []).filter(Boolean).map((name) => ({ kind: 'power', name: String(name) })),
     }));
   });
 
@@ -449,6 +553,8 @@ export function collectPlotHooks(settlement = {}, options = {}) {
       // small/muted; a hard slice left mid-word fragments ('…resist investi').
       role: typeof tension.description === 'string' ? tension.description : '',
       category: 'tension',
+      // between its camps: a power where the camp is one, else the group the camp names
+      parties: campPartiesOf(tension, powerNames),
       priority: 7,
     }));
   });
@@ -465,6 +571,8 @@ export function collectPlotHooks(settlement = {}, options = {}) {
       role: '',
       sub: ['high', 'critical'].includes(/** @type {string} */ (h.severity)) ? `${h.severity} severity` : null,
       category: 'economics',
+      // R-P6: a tension of the place (the food gap), no person
+      parties: [{ kind: 'place' }],
       priority: h.severity === 'critical' ? 9 : h.severity === 'high' ? 8 : 7,
       accent: h.severity === 'critical' || h.severity === 'high',
     });
@@ -475,6 +583,8 @@ export function collectPlotHooks(settlement = {}, options = {}) {
     source: 'Safety & Crime',
     role: '',
     category: 'safety',
+    // R-P6: a tension of the place (the crime), no person
+    parties: [{ kind: 'place' }],
     priority: 8,
   }));
 
@@ -486,6 +596,7 @@ export function collectPlotHooks(settlement = {}, options = {}) {
       role: event.yearsAgo ? `${event.yearsAgo}y ago` : '',
       sub: event.anchored ? 'Still affecting this settlement' : null,
       category: 'history',
+      parties: [{ kind: 'history', eventId: eventIdOf(event) }],
       priority: event.anchored ? 7 : 5,
       accent: Boolean(event.anchored),
     }));
@@ -503,6 +614,7 @@ export function collectPlotHooks(settlement = {}, options = {}) {
       source: 'Traditions', // the source label marks these; they ride the existing 'tension' category
       role: hook.source, // the tradition's name
       category: 'tension',
+      parties: [{ kind: 'group', name: String(hook.source || 'the rite\'s keepers') }],
       priority: hook.priority,
       accent: hook.priority >= 8,
     });

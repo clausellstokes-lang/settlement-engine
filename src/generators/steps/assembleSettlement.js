@@ -350,7 +350,7 @@ registerStep('assembleSettlement', {
   settlement.conflicts = inAssemblySubstream(
     rng,
     'faction-conflicts',
-    () => generateConflicts(settlement.factions, settlement.relationships || [], effectiveConfig, settlement.institutions || []),
+    () => generateConflicts(settlement.powerStructure?.factions || [], settlement.relationships || [], effectiveConfig, settlement.institutions || [], settlement.npcs || []),
   );
   if (settlement.powerStructure) {
     settlement.powerStructure = { ...settlement.powerStructure, conflicts: settlement.conflicts };
@@ -374,7 +374,12 @@ registerStep('assembleSettlement', {
   // re-written, under the same gate.
   if (!npcsHeld) {
     const npcs = truePersonHooks(settlement, resolveGenerationWorldLaw(ctx.generationContext, ctx.effectiveConfig || {}).portKind);
-    if (npcs !== settlement.npcs) settlement.npcs = npcs;
+    if (npcs !== settlement.npcs) {
+      settlement.npcs = npcs;
+      // the grouping (the shim's projection, deleted by PEOPLE-5) copies its members from the
+      // roster: re-projected, so its copies carry the card's redrawn hook (one source)
+      settlement.factions = generateFactions(settlement.npcs, settlement.powerStructure?.factions);
+    }
   }
 
   // Propagate the in-pipeline causal trace onto the settlement so

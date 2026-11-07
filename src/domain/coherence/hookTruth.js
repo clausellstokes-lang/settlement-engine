@@ -297,6 +297,59 @@ export function hookTruthViolations(text, facts) {
 
 
 /**
+ * A hook's PARTY — who or what the hook is between (the people car, PEOPLE-3 HOOKS; the owner:
+ * "it doesn't mean that hooks are between specific individual people it could be between powers,
+ * groups, or historical").
+ * @typedef {{ kind: 'person', id: string }
+ *   | { kind: 'power', name: string }
+ *   | { kind: 'group', name: string }
+ *   | { kind: 'history', eventId: string | null }
+ *   | { kind: 'place' }} HookParty
+ */
+
+/**
+ * The roster a hook's parties are checked against: the people on the record (by id) and the
+ * powers that exist (`powerStructure.factions`, by name). Pure.
+ * @param {unknown} settlement
+ * @returns {{ rosterPersonIds: Set<string> | null, rosterPowerNames: Set<string> | null }} null: the record carries no such roster
+ */
+export function hookPartyRosterOf(settlement) {
+  const record = /** @type {{ npcs?: unknown, powerStructure?: { factions?: unknown } }} */ (
+    settlement && typeof settlement === 'object' ? settlement : {}
+  );
+  // AN UNKNOWN ROSTER REFUSES NOTHING (the defence half's `defenseKnown` rule): a record that
+  // carries no people, or no power roster, cannot say a party is missing from it.
+  const npcs = Array.isArray(record.npcs) && record.npcs.length ? record.npcs : null;
+  const powers = Array.isArray(record.powerStructure?.factions) && record.powerStructure.factions.length ? record.powerStructure.factions : null;
+  return {
+    rosterPersonIds: npcs ? new Set(npcs.map((/** @type {any} */ n) => String(n?.id ?? n?.name ?? '')).filter(Boolean)) : null,
+    rosterPowerNames: powers ? new Set(powers.map((/** @type {any} */ f) => String(f?.faction || f?.name || '').trim()).filter(Boolean)) : null,
+  };
+}
+
+/**
+ * THE GATE'S PARTY ARM (PEOPLE-3 HOOKS): a party is a fact. A hook naming a person who is not on
+ * the roster, or a power that does not exist, is REFUSED — the display may not print a hook
+ * about someone the record does not hold. Groups, history and the place are not roster facts.
+ * @param {ReadonlyArray<HookParty> | null | undefined} parties
+ * @param {{ rosterPersonIds: Set<string> | null, rosterPowerNames: Set<string> | null }} roster from `hookPartyRosterOf`
+ * @returns {HookTruthFinding[]}
+ */
+export function hookPartyViolations(parties, roster) {
+  /** @type {HookTruthFinding[]} */
+  const out = [];
+  for (const party of Array.isArray(parties) ? parties : []) {
+    if (party?.kind === 'person' && roster.rosterPersonIds && !roster.rosterPersonIds.has(String(party.id))) {
+      out.push({ code: 'party_not_on_the_roster', text: '', detail: `no person ${String(party.id)} on the roster` });
+    }
+    if (party?.kind === 'power' && roster.rosterPowerNames && !roster.rosterPowerNames.has(String(party.name))) {
+      out.push({ code: 'power_that_does_not_exist', text: '', detail: `no power ${String(party.name)} on the power roster` });
+    }
+  }
+  return out;
+}
+
+/**
  * THE TWO REWRITES. Two of the measured defects are a sentence that is RIGHT about its
  * subject and wrong about one word in it, and dropping those costs the DM a true hook for
  * no reason:
