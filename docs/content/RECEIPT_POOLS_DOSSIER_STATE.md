@@ -1402,7 +1402,7 @@ block reads the canonical status and supplies clauses any surface can attach.
 **STABLE** — *runs normally, all inputs available* · **note fields must be empty**
 1. `[ledger]` The line holds. Every input the {chain} needs is present, and nothing in it is being covered for.
 2. `[street]` The {chain} works. There is no story in it this season.
-3. `[visitor]` Nothing about {settlement}'s {chain} draws attention, which, in a line of supply, means all of it is arriving.
+3. `[visitor]` Nothing about {settlement}'s {chain} draws attention: everything it needs is arriving.
 
 **STRAINED** — *runs under stress; a shock would bite*
 1. `[ledger]` The {chain} is meeting its needs and meeting them exactly. There is no slack anywhere in the line.
@@ -1412,12 +1412,12 @@ block reads the canonical status and supplies clauses any surface can attach.
 **SCARCE** — *producing below normal output*
 1. `[ledger]` The {chain} is producing below what it should. The line is intact and the volume coming off it is not.
 2. `[visitor]` The workshops on this line are open and half-busy. What they turn out is short of what they are built to turn out.
-3. `[unfolding]` Output is falling away rather than stopping. Each turn takes a little more off what the line delivers.
+3. `[unfolding]` {settlement}'s {chain} is slowing, not stopping, and it delivers a little less the longer the shortage lasts.
 
 **BLOCKED** — *offline after a hard upstream failure*
 1. `[ledger]` The {chain} is off. Something above it failed hard enough that nothing reaches the line at all.
 2. `[street]` The {chain} is not running. Not slowly. Not at all.
-3. `[visitor]` A stranger will find {institution} shut and the yard behind it empty. Whatever fed this place stopped feeding it.
+3. `[visitor]` {settlement}'s {institution} is shut and the yard behind it is empty. Whatever fed it has stopped.
 
 **CAPTURED** — *one faction takes rents* · **NO PRODUCER — do not wire a selector until one exists (R-DST-H)** · **dm-only where the capture is covert**
 1. `[ledger · dm-only]` The {chain} still runs and no longer runs for the town. {faction} takes its cut at the point everything must pass, and the cut is an arrangement rather than a theft.

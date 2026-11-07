@@ -3690,7 +3690,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "Nothing about {settlement}'s {chain} draws attention, which, in a line of supply, means all of it is arriving.",
+          "text": "Nothing about {settlement}'s {chain} draws attention: everything it needs is arriving.",
           "slots": [
             "settlement",
             "chain"
@@ -3741,8 +3741,11 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "Output is falling away rather than stopping. Each turn takes a little more off what the line delivers.",
-          "slots": [],
+          "text": "{settlement}'s {chain} is slowing, not stopping, and it delivers a little less the longer the shortage lasts.",
+          "slots": [
+            "settlement",
+            "chain"
+          ],
           "vid": 3
         }
       ],
@@ -3765,8 +3768,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "A stranger will find {institution} shut and the yard behind it empty. Whatever fed this place stopped feeding it.",
+          "text": "{settlement}'s {institution} is shut and the yard behind it is empty. Whatever fed it has stopped.",
           "slots": [
+            "settlement",
             "institution"
           ],
           "vid": 3

@@ -12052,7 +12052,8 @@
         "settlement"
       ],
       "slotsNamed": [
-        "chain"
+        "chain",
+        "settlement"
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
@@ -12106,7 +12107,8 @@
       ],
       "slotsNamed": [
         "chain",
-        "institution"
+        "institution",
+        "settlement"
       ],
       "slotsWithoutProvider": [
         "institution"
@@ -57240,7 +57242,7 @@
       "subject": "SCARCE",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 1 grammar(s) · slots {chain}"
+      "count": "3 variant(s) · 1 grammar(s) · slots {chain, settlement}"
     },
     {
       "tier": "COVERED",
@@ -57248,7 +57250,7 @@
       "subject": "BLOCKED",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 2 grammar(s) · slots {chain, institution}"
+      "count": "3 variant(s) · 2 grammar(s) · slots {chain, institution, settlement}"
     },
     {
       "tier": "COVERED",
