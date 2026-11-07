@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import {
   deriveIsolationSupport,
+  isolationFoodImportShareOf,
   shouldAddMagicalSubstitution,
 } from '../../src/generators/isolationSupport.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
@@ -34,6 +35,30 @@ describe('isolation support model', () => {
       'reserves',
       'seasonal_access',
     ]));
+  });
+
+  // FIX-FOOD-ISOLATION (the chair's ruling, 2026-11-07): the receipt says how much of the place's need
+  // can reach it from outside — its import-bearing paths over the capacity its size needs — and the food
+  // writer reads that bound. Anchored: the foodshed and the reserves (the harvest and the stores) are in
+  // the receipt and out of the bound; a connected receipt bounds nothing.
+  it('reads the food import bound from the paths that carry food in from outside', () => {
+    const support = deriveIsolationSupport({
+      tier: 'town',
+      tradeRoute: 'isolated',
+      institutions: [{ name: 'Farmland' }, { name: 'Grain fields' }, { name: 'Granary' }, { name: "Caravaneer's post" }],
+      config: {
+        tradeRouteAccess: 'isolated',
+        nearbyResources: ['grain_fields', 'grazing_land', 'foraging_areas'],
+        nearbyResourcesDepleted: [],
+        magicExists: false,
+        priorityMagic: 0,
+      },
+    });
+    expect(support.paths.map(path => path.type)).toEqual(expect.arrayContaining(['local_foodshed', 'reserves']));
+    // hinterland 14 + seasonal access 8 of the 52 a town needs; the foodshed's 42 and the reserves' 6 are not imports.
+    expect(isolationFoodImportShareOf(support)).toBe(22 / 52);
+    const connected = deriveIsolationSupport({ tier: 'town', tradeRoute: 'road', institutions: [], config: {} });
+    expect(isolationFoodImportShareOf(connected)).toBeNull();
   });
 
   it('offers magical substitution only for a real gap at functional high magic', () => {

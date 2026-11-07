@@ -47,6 +47,8 @@ const FOOD_INSTITUTION = /\bfarm|farmland|grain|field|orchard|fish|hunting|pastu
 const RESERVE_INSTITUTION = /\bgranary|warehouse|storehouse|root cellar|silo|cistern|cold storage|preserv/i;
 const SEASONAL_ACCESS_INSTITUTION = /\bcaravan|pack train|stable|waystation|traveler|traveller|ferry|road warden|guide\b/i;
 const PATRONAGE_INSTITUTION = /\bmanor|royal seat|lord'?s|palace|monastery|abbey|fortress|citadel|military order\b/i;
+/** The receipt's paths that carry food in from outside the place's own fields (FIX-FOOD-ISOLATION). */
+const FOOD_IMPORT_PATH_TYPES = Object.freeze(['hinterland', 'seasonal_access', 'patronage', 'magical_transit']);
 const MAGICAL_TRANSIT_INSTITUTION = /\bteleportation circle|airship docking|planar (?:gate|market|trader|embassy)\b/i;
 
 /**
@@ -235,6 +237,29 @@ export function deriveIsolationSupport(input) {
     }))),
     magicDependent,
   });
+}
+
+/**
+ * ⛔ ONE SOURCE FOR AN ISOLATED PLACE'S SUPPLY (FIX-FOOD-ISOLATION, the chair's ruling, 2026-11-07).
+ * The share of its daily need (0..1) that can reach an isolated settlement from outside its own
+ * fields, read from its support receipt: the capacity of the paths that carry food in from outside
+ * (the hinterland's carts, seasonal pack access, patronage, magical transit last) over the capacity
+ * a place this size needs. The local foodshed is the harvest the food writer grows itself and the
+ * reserves are its stores, so neither is counted. The food writer (foodGenerator.js ::
+ * generateFoodSecurity) bounds its ordinary supply by it: an untenable town's imports are the
+ * trickle this allows, and its food band follows the arithmetic. The receipt's paths, each with its
+ * capacity and evidence, are the why; no figure is persisted beside them. Null where the receipt
+ * does not apply (a connected route is bounded by its route, not by this receipt).
+ *
+ * @param {ReturnType<typeof deriveIsolationSupport>|null|undefined} support
+ * @returns {number|null}
+ */
+export function isolationFoodImportShareOf(support) {
+  if (support?.applicable !== true || !(support.requiredCapacity > 0)) return null;
+  const carried = (support.paths || [])
+    .filter(path => FOOD_IMPORT_PATH_TYPES.includes(path.type))
+    .reduce((sum, path) => sum + path.capacity, 0);
+  return Math.min(1, carried / support.requiredCapacity);
 }
 
 /**

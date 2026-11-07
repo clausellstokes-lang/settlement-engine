@@ -22,6 +22,7 @@ import { migrationDirectionOfConfig } from '../domain/migrationDirection.js';
 import { FOOD_IMPORT_RATES, SIEGE_PRODUCTION_KEPT } from '../data/foodImportRates.js';
 import { FOOD_SECURITY_CUTS, foodSecurityBandOf, foodSecurityFlagsOf } from '../data/bandLadders.js';
 import { deriveFoodRecord, grownShareOf, hasImportProcessor, hinterlandShareOf } from './economy/foodBalance.js';
+import { deriveIsolationSupport, isolationFoodImportShareOf } from './isolationSupport.js';
 import { TERRAIN_DATA } from '../data/geographyData.js';
 import { CULTURE_PROFILES } from '../data/cultureProfiles.js';
 import { composeFoodwaysLine } from '../domain/foodways.js';
@@ -407,7 +408,19 @@ export function generateFoodSecurity(tier, institutions, config) {
   // Ordinary supply: the hinterland first, then the trade channel carries its share of what
   // remains. Both are imports to the dossier ("+ N imported"); the record keeps them apart.
   const channelGap      = rawDeficit - hinterlandSupply;
-  const importCoverage  = hinterlandSupply + (channelGap > 0 ? channelGap * importCoverageRate : 0);
+  // ⛔ AN ISOLATED PLACE IS FED FROM OUTSIDE ONLY AS FAR AS ITS SUPPORT RECEIPT CARRIES (FIX-FOOD-ISOLATION,
+  // the chair's ruling, 2026-11-07). The isolation-support receipt is THE supply-capacity fact for an isolated
+  // route: the carts and channel above are bounded by the share of need its import-bearing paths carry
+  // (isolationSupport.js :: isolationFoodImportShareOf), the receipt derived from the same roster, route and
+  // resources, zero draws. Unbounded, they read 20–50% "imported" on towns the receipt calls untenable (the
+  // hinterland's carts the receipt does not credit), and the band read Secure.
+  const isolationImportShare = isolationFoodImportShareOf(
+    deriveIsolationSupport({ tier, tradeRoute: route, institutions, config }),
+  );
+  const ordinarySupply  = hinterlandSupply + (channelGap > 0 ? channelGap * importCoverageRate : 0);
+  const importCoverage  = isolationImportShare === null
+    ? ordinarySupply
+    : Math.min(ordinarySupply, dailyNeed * isolationImportShare);
 
   // Magic food offset
   let magicOffset = 0;
