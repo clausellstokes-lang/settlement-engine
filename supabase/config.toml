@@ -502,6 +502,18 @@ verify_jwt = false
 [functions.health]
 verify_jwt = false
 
+# The engine service (ENGINE-1, the engine-service design, the owner 2026-11-03). Anonymous
+# callers are served by design: engine-generate resolves an OPTIONAL Bearer JWT itself
+# (signed in → per-account meter + the single-session gate; otherwise per-IP), behind the
+# botGuard and a fail-closed rate guard; it spends no credits and writes no account row.
+[functions.engine-generate]
+verify_jwt = false
+
+# engine-version — a public read of the engine bundle's version stamp (ENGINE-1), like
+# health: no user data, no write path, no client.
+[functions.engine-version]
+verify_jwt = false
+
 # ── verify_jwt = true: functions that REQUIRE an authenticated user ──────────
 # Pinned true (the default) as defense-in-depth: an accidental `--no-verify-jwt`
 # on any of these would expose an authenticated/money/admin endpoint to unauth

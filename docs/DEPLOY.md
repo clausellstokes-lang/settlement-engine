@@ -88,6 +88,80 @@ VITE_STRIPE_PUBLISHABLE_KEY=...     # for Stripe.js
 VITE_GENERATE_NARRATIVE_URL=...      # the edge function URL
 ```
 
+**The engine service's client switch (docs/DESIGN_ENGINE_SERVICE.md, ENGINE-2):**
+
+```
+VITE_ENGINE_REMOTE=true              # generate through engine-generate; CLOSED unless exactly 'true'
+VITE_ENGINE_GENERATE_URL=...         # optional; default VITE_SUPABASE_URL + /functions/v1/engine-generate
+VITE_ENGINE_ADVANCE_URL=...          # reserved for engine-advance (not built; read by src/lib/engineRemote.js :: engineFunctionUrl)
+```
+
+`VITE_ENGINE_REMOTE` is read by `src/lib/engineRemote.js :: engineRemoteOpen` (and by
+`src/lib/generationClient.js`, same rule): a missing, empty or misspelled value keeps
+generation in the browser. Open, a generation the service cannot make (an imported
+neighbour, reviewed homebrew, content tunables) is REFUSED with a typed error, never
+made locally instead; leave it off until `engine-generate` is deployed and proven.
+
+### Turning the engine service on
+
+The owner's steps (docs/DESIGN_ENGINE_SERVICE.md "What the owner does"), once:
+
+1. **Supabase:** confirm edge functions are enabled on the project, and read the plan's
+   invocation allowance before launch (the plan page is the authority).
+2. **GitHub:** the Supabase access token as a repository secret for the deploy job, so the
+   functions ship from CI at a green commit rather than by hand.
+3. **Vercel:** `VITE_ENGINE_REMOTE` — off until the service is proven, `true` at launch.
+4. **The dials:** the rate limits in `supabase/functions/engine-generate/index.ts ::
+   ENGINE_GENERATE_RATE_LIMITS` (6 a minute, 200 a day per account or IP; staff unlimited),
+   and the veto on any rule in the design.
+
+The order, every time it is turned on:
+
+1. **Deploy the functions from a green commit:** `engine-generate` and `engine-version`
+   (see "Edge function — manual" below; clean tree, pushed, CI-green commit only).
+2. **Verify `engine-version`:** `GET <VITE_SUPABASE_URL>/functions/v1/engine-version` answers
+   `{ engineVersion, builtFromCommit, deployedAt }`; `engineVersion` must equal
+   `supabase/functions/_shared/engineBundle.meta.json :: engineVersion` at the commit Vercel
+   will build (same engine on both sides; otherwise a pinned caller is answered 409
+   `engine_version_retired`). `builtFromCommit` is the commit the bundle was BUILT from, not
+   necessarily the one deployed; `deployedAt` is the bundle's build stamp.
+3. **Set `VITE_ENGINE_REMOTE=true`** in Vercel → Project → Settings → Environment Variables
+   (Production).
+4. **Redeploy** (the value is baked in at build time). A build with the flag on also LEAVES
+   THE GENERATOR OUT of the client (`vite.config.js :: engineAbsentWhenRemote`;
+   `tests/build/engineAbsentWhenRemote.test.js`): no generation worker, no pipeline, no step
+   registry in `dist/`.
+5. **Watch:** generations today and this month by op and outcome — the first line of
+   Admin → Analytics ("Engine generations (today / this month)"), read from the
+   `engine_generate` rows engine-generate writes to `analytics_events` through
+   `report_engine_generations` (migration 204, which must be applied for the line to load;
+   until then it says so). The function's own invocations and errors stay in the Supabase
+   dashboard (Edge Functions → engine-generate → Logs). Rotating the service-role key
+   re-buckets every caller (`caller_hash` is an HMAC under that key), so per-caller counts
+   restart from zero on rotation: harmless by design, expect it.
+
+**What the engine service serves with the flag on:** a fresh generation, the DM
+re-derivation and the surveyor's settlement preview (`engine-generate`'s `derive` op), and
+section regeneration of NPCs and history (its `regenSection` op). **What still does not, by
+design, and what each says instead of crashing** (`src/lib/engineAbsentPaths.js`): the
+surveyor's REALM preview says "Realm previews are not available in this build. Settlement
+previews still are."; and three paths are launch-gated — the campaign content-binding review,
+instant world (the realm builder and a shared world's page) and the custom-content sample.
+For a non-staff account each shows the "Available at launch" teaser on its control (a shared
+world's page shows the teaser's words), and for a staff account one plain sentence ("Content
+change reviews are not available in this build." · "Instant worlds are not available in this
+build." · "Custom content samples are not available in this build."). Try them on a Preview
+deployment with the flag on before flipping Production.
+
+**Rollback:** set `VITE_ENGINE_REMOTE` to anything but `true` (or delete it) → **Redeploy**.
+The local engine is back in the next build; saved towns are unaffected either way.
+
+**What stays in the browser regardless of the flag:** the world pulse
+(`src/domain/worldPulse/`, the advance interval) runs client-side for this program (the
+chair's ruling, 2026-11-04: campaign-scoped, saves larger than the request cap), and the
+display prose pools and the dossier readers remain in the client — the known exposure the
+design records for a later server-rendering step.
+
 Set these in Vercel's dashboard → Project → Settings → Environment
 Variables. Redeploy after changing them so the new values bake into the
 client bundle.
@@ -197,7 +271,7 @@ remembered number.** Migration numbers grow every release, so this guide
 deliberately does NOT pin a "latest" number that would rot and cause an operator
 to under-apply.
 
-**Current migration head: `203_gallery_scanner_client_mirror_totality.sql`** (this
+**Current migration head: `204_engine_generation_report.sql`** (this
 filename is kept current by a freshness pin — `tests/docs/deployRunbookFreshness.test.js`
 derives the head from `supabase/migrations/` and fails the gate if this line drifts).
 <!-- @enforced-by tests/docs/deployRunbookFreshness.test.js -->
@@ -283,7 +357,7 @@ guard against by discipline:
   exactly why you must only deploy from a commit that job passed.
   (`npm run check:full` = `check` + `check:edge-behavior` mirrors everything CI runs.)
 
-There are 32 functions total — deploy all of them on a first cutover.
+There are 34 functions total — deploy all of them on a first cutover.
 
 ## Edge function — manual
 
@@ -328,6 +402,8 @@ npx supabase@2.122.0 functions deploy account-deletion-worker --no-verify-jwt # 
 npx supabase@2.122.0 functions deploy payment-refund-worker --no-verify-jwt   # five-minute durable Stripe refund recovery, x-cron-secret
 npx supabase@2.122.0 functions deploy operator-message-worker --no-verify-jwt # disabled-by-default leased broadcast courier, x-cron-secret
 npx supabase@2.122.0 functions deploy unsubscribe --no-verify-jwt             # public GET-confirm / POST opt-out token boundary
+npx supabase@2.122.0 functions deploy engine-generate --no-verify-jwt         # the engine service: optional Bearer JWT resolved in-handler, anonymous metered per IP
+npx supabase@2.122.0 functions deploy engine-version --no-verify-jwt          # public read of the engine bundle's version stamp (no user data)
 # verify_jwt = true (require an authenticated user — no flag):
 npx supabase@2.122.0 functions deploy create-checkout
 npx supabase@2.122.0 functions deploy verify-checkout-session                 # account-bound checkout verification
@@ -347,9 +423,9 @@ npx supabase@2.122.0 functions deploy account-actions
 npx supabase@2.122.0 functions deploy admin-actions
 ```
 
-There are **32 deployable functions** (every `supabase/functions/*` dir except
-`_shared`) — deploy all of them on a first cutover. The sixteen `verify_jwt = false`
-and seventeen `verify_jwt = true` postures above are pinned in `config.toml`, the
+There are **34 deployable functions** (every `supabase/functions/*` dir except
+`_shared`) — deploy all of them on a first cutover. The eighteen `verify_jwt = false`
+and sixteen `verify_jwt = true` postures above are pinned in `config.toml`, the
 single source of truth `deploy.sh` parses. The freshness pin
 (`tests/docs/deployRunbookFreshness.test.js`) fails the gate if any function dir
 stops being named here. <!-- @enforced-by tests/docs/deployRunbookFreshness.test.js -->

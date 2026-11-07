@@ -38043,7 +38043,8 @@
         {
           "_note": "THE ONE STORE SEAT. The only action that re-runs generation on an existing settlement; it returns early on `get().phase === 'canon'` (canon does not re-derive) and holds exactly two branches. This member inserts its delegation here and nowhere else — no second regeneration path. Verbatim at src/store/settlementSlice.js:456.",
           "path": "src/store/settlementSlice.js",
-          "symbol": "regenSection: async (section) => {"
+          "symbol": "regenSection: async (section) => {",
+          "retiredBy": "§934.105 (rule 39 addendum, judgment 269: a landed pin a builder rewrites is annotated, never rewritten): ENGINE-5 unit 1 (9c7bb42d0) lifted THE ONE STORE SEAT for regeneration into src/store/settlementRegenAction.js, where the guard now lives; the chair's annotation, 2026-11-06"
         },
         {
           "_note": "THE ONLY MUTATION PATH FOR A SAVE ROW, preserved untouched: it refuses any key outside the closed patch list and returns a typed `makeActionResult` envelope. This member writes no save row and widens no patch surface. Verbatim at src/store/settlementSlice.js:637.",
@@ -38053,7 +38054,8 @@
         {
           "_note": "⭐⭐ THE LAZY ENGINE SEAM, AND THE REASON THE EAGER FIRST-PAINT CLOSURE DOES NOT MOVE. `loadEngine()` memoizes a DYNAMIC import of the pipeline, which is why `src/generators/generateSettlementPipeline.js` is NOT in `EAGER_FIRST_PAINT_MODULES` (executed). This member reaches the engine by the same idiom through its own lazy leaf and NEVER by a static edge. Named so that an implementer who 'simplifies' the dynamic import into a static one is convicted by a required symbol instead of by an owner-signed byte ceiling at the terminal. Verbatim at src/store/settlementSlice.js:45.",
           "path": "src/store/settlementSlice.js",
-          "symbol": "_enginePromise = import('../generators/generateSettlementPipeline.js').then((pipe) => {"
+          "symbol": "_enginePromise = import('../generators/generateSettlementPipeline.js').then((pipe) => {",
+          "retiredBy": "§934.105 (rule 39 addendum, judgment 269): ENGINE-3 (0004a8dd5) moved THE LAZY ENGINE SEAM to src/lib/localPipeline.js (read by settlementRederiveAction.js); the dynamic import and the eager first-paint closure's law are kept there (tests/build/engineAbsentWhenRemote.test.js and the first-paint budgets convict a static edge); the chair's annotation, 2026-11-06"
         },
         {
           "_note": "The frozen 17-key patch list whose first member is 'settlement'. `dmLayer` rides INSIDE the settlement blob, so this list is NOT widened by this member — persisting the key is EM-B3's. Verbatim at src/store/settlementSliceHelpers.js:318.",

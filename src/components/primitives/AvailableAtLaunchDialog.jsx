@@ -18,8 +18,9 @@
  * the fixed ground. `data-launch-dialog` lets a host popover (a menu that closes on an outside
  * press) recognise a press inside the dialog as its own.
  *
- * Served today by the export controls (LaunchGatedExport.jsx); ready to serve the purchase
- * controls if the owner moves them onto the same interaction.
+ * Served today by the export controls (LaunchGatedExport.jsx) and, with their own sentence, the
+ * three paths a build without an engine cannot serve (lib/engineAbsentPaths.js, ENGINE-5);
+ * ready to serve the purchase controls if the owner moves them onto the same interaction.
  */
 import { useId } from 'react';
 import { createPortal } from 'react-dom';
@@ -33,9 +34,11 @@ import { AVAILABLE_AT_LAUNCH } from './AvailableAtLaunchPill.jsx';
 export const AVAILABLE_AT_LAUNCH_SENTENCE = 'Exports open when the site launches; your settlement is saved and will be ready.';
 
 /**
- * @param {{ open: boolean, onClose: () => void }} props
+ * @param {{ open: boolean, onClose: () => void, sentence?: string }} props
+ *   sentence: the one sentence, when the control is not an export (a path a build without an
+ *   engine cannot serve, `lib/engineAbsentPaths.js`); the export sentence otherwise
  */
-export default function AvailableAtLaunchDialog({ open, onClose }) {
+export default function AvailableAtLaunchDialog({ open, onClose, sentence = AVAILABLE_AT_LAUNCH_SENTENCE }) {
   const titleId = useId();
   const dialogRef = useDialogFocusTrap(open, onClose);
   if (!open || typeof document === 'undefined') return null;
@@ -77,7 +80,7 @@ export default function AvailableAtLaunchDialog({ open, onClose }) {
           <DialogClose onClose={onClose} />
         </header>
         <p style={{ margin: 0, padding: SP.lg, color: BODY, fontSize: FS.sm, lineHeight: 1.45 }}>
-          {AVAILABLE_AT_LAUNCH_SENTENCE}
+          {sentence}
         </p>
         <footer style={{ display: 'flex', justifyContent: 'flex-end', padding: `0 ${SP.lg}px ${SP.lg}px` }}>
           <Button type="button" variant="launch" size="md" onClick={onClose} style={{ minHeight: 44 }}>OK</Button>

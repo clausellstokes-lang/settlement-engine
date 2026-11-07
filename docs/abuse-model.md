@@ -47,7 +47,7 @@ before exposing new attack surface.
 
 ### Edge functions
 
-There are **32** edge functions under `supabase/functions/` (excluding
+There are **34** edge functions under `supabase/functions/` (excluding
 `_shared/`). They split by auth posture, but share one baseline defense
 as of Tier 0.10.
 
@@ -122,6 +122,14 @@ flip intent):
   gallery projection behind the seed-secret firewall (name, tier,
   terrain, coarse public stats); its only write path (view counts) is
   deliberately not touched, so scraping it leaks nothing private.
+- `engine-generate` — the engine service's generate call (ENGINE-1). Anonymous
+  callers are served by design: generation spends no credits and touches no
+  account row. The handler resolves an OPTIONAL Bearer JWT itself (a signed-in
+  caller passes the single-session gate and `account_is_active`), runs the bot
+  guard, caps the body, and meters every non-staff caller through the
+  fail-closed rate guard, per account when signed in and per IP otherwise.
+- `engine-version` — public read of the engine bundle's version stamp, like
+  `health`: no user data, no client, no write path.
 - `health` — anonymous liveness + optional deep DB probe for uptime
   monitoring (monitors carry no JWT). Deliberately NOT bot-guarded
   (uptime services ARE automated clients); reads no user data and takes

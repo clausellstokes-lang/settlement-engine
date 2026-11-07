@@ -474,10 +474,17 @@ describe('generation worker — source boundary', () => {
   });
 
   it('the client constructs the worker from its URL and never statically imports the core (the wire-lean law)', () => {
+    // ENGINE-3 unit 1 (the protection step): the worker's `new Worker(new URL(...))` moved
+    // into the local engine's one seam, the module a VITE_ENGINE_REMOTE build leaves out,
+    // because Vite emits a worker bundle for that pattern at transform time. The client
+    // reaches it through the seam's `createGenerationWorker`, still synchronously.
     const client = source('src/lib/generationClient.js');
-    expect(client).toMatch(/new Worker\(new URL\(['"]\.\.\/workers\/generation\.worker\.js['"], import\.meta\.url\)/);
-    expect(staticImports(client)).toEqual(['./generationProtocol.js']);
-    // anchored: staticImports(client) is asserted to be exactly one entry on the line above, so this file's import list is proven non-empty and readable before the absence below is read.
+    const seam = source('src/lib/localEngine.js');
+    expect(seam).toMatch(/new Worker\(new URL\(['"]\.\.\/workers\/generation\.worker\.js['"], import\.meta\.url\), \{ type: 'module' \}\)/);
+    expect(client).toMatch(/return createGenerationWorker\(\);/);
+    expect(staticImports(client)).toEqual(['./generationProtocol.js', './localEngine.js']);
+    expect(staticImports(seam)).toEqual([]);
+    // anchored: staticImports(client) is asserted to be exactly two entries above, so this file's import list is proven non-empty and readable before the absence below is read.
     expect(client).not.toMatch(/generationRequest/);
   });
 
@@ -633,12 +640,13 @@ describe.runIf(DIST_EXISTS)('generation worker — production boundary', () => {
   });
 
   it('the client builds this worker with { type: \'module\' }, which is what lets the declared lazy edge run', () => {
-    const client = source('src/lib/generationClient.js');
+    // ENGINE-3 unit 1: the construction lives in the local engine's seam, which the client calls.
+    const client = source('src/lib/localEngine.js');
     // Anchored both ways: the pattern must match the shipped construction, and
     // must NOT match a classic worker, or "module" would be true of every string.
     expect(
       MODULE_WORKER_CONSTRUCTION.test(client),
-      'generationClient.js no longer constructs generation.worker.js with { type: \'module\' }. '
+      'localEngine.js no longer constructs generation.worker.js with { type: \'module\' }. '
       + 'A classic worker cannot execute the import( the bundle now carries, so every generation '
       + 'would die on the seam load rather than on anything the user did.',
     ).toBe(true);

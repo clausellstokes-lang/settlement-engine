@@ -99,6 +99,7 @@ import { accountHolderPhrase, ANON_SIZES, SIZE_LABEL, TIER_FACTS } from '../conf
 import { TIER_ORDER } from '../data/constants.js';
 import { flag } from '../lib/flags.js';
 import { runGeneration } from '../lib/generationClient.js';
+import { loadGenerationCore } from '../lib/localEngine.js';
 import {
   GENERATION_PROTOCOL_VERSION,
   GENERATION_REQUEST_KIND,
@@ -182,12 +183,13 @@ function carriedHistoryOf(record, forged) {
 
 /**
  * The in-thread half of the ONE code path. Imported lazily so the happy worker
- * path never fetches the engine chunk on the main thread at all.
+ * path never fetches the engine chunk on the main thread at all — through the local
+ * engine's one seam (`lib/localEngine.js`), which a VITE_ENGINE_REMOTE build leaves out.
  * @param {any} request
  * @param {(step: any) => void} [onStep]
  */
 async function inThreadGeneration(request, onStep) {
-  const core = await import('../workers/generationRequest.js');
+  const core = await loadGenerationCore();
   return core.runGenerationRequest(request, (event) => onStep?.(event.step));
 }
 
@@ -571,10 +573,19 @@ export async function generateSettlementAction(set, get, seedOverride, options) 
     // can no longer fetch, and "try once more" is FALSE advice there — only a reload
     // helps. `isChunkLoadError` is the same pure predicate lib/staleDeploy.js gives
     // HomeHero, so the two surfaces cannot disagree about what happened.
+    //
+    // ⚠ AND THE ENGINE SERVICE'S RETIRED VERSION IS ITS OWN SENTENCE (ENGINE-3 unit 3): the
+    // remote transport rejects with the typed `engine_version_retired`
+    // (lib/engineRemote.js :: ENGINE_VERSION_RETIRED_CODE, spelled here rather than imported so
+    // the lane does not statically pull the remote leaf; tests/components/refusalNotice.test.jsx
+    // raises it through that constant) when the server no longer serves the engine this page
+    // pinned. As with a stale chunk, only a reload helps.
     set(s => {
-      s.lastRefusal = refusedAt(isChunkLoadError(genErr)
-        ? REFUSAL_REASONS.STALE_BUILD
-        : REFUSAL_REASONS.GENERATION_FAILED);
+      s.lastRefusal = refusedAt(/** @type {any} */ (genErr)?.code === 'engine_version_retired'
+        ? REFUSAL_REASONS.ENGINE_VERSION_RETIRED
+        : isChunkLoadError(genErr)
+          ? REFUSAL_REASONS.STALE_BUILD
+          : REFUSAL_REASONS.GENERATION_FAILED);
     });
     throw genErr;
   }

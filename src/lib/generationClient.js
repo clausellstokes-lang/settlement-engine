@@ -23,8 +23,19 @@
  *   (b) `protocol_mismatch` REJECTS rather than falling back. A retry would
  *       fetch the same stale cached script and mismatch again.
  *
+ * THE THIRD TRANSPORT, `remote` (docs/DESIGN_ENGINE_SERVICE.md "The client
+ * switch"): when the build carries VITE_ENGINE_REMOTE='true'
+ * (`engineRemote.js :: engineRemoteOpen`, closed unless explicitly opened) the
+ * request goes to the `engine-generate` edge function and the reply is the
+ * worker's result packet. It takes precedence over the worker flag, and it has
+ * NO fallback: a remote failure REJECTS with its typed code and the local
+ * engine never runs in its place (a town the service did not make must not be
+ * handed over as if it had). The service relays no steps, so `onStep` is not
+ * called on this path; the caller stamps receipt times off the packet's list.
+ *
  * DELIBERATELY HAS NO IMPORT OF THE CORE, static or dynamic — the wire-lean
- * law. The caller supplies `fallback`, so on the happy path the main thread
+ * law (its one other static edge is the local engine's seam, whose own edges to the
+ * core are dynamic and which constructs the worker). The caller supplies `fallback`, so on the happy path the main thread
  * never fetches the engine chunk at all; only a fallback pays for it.
  *
  * This module reads ONLY protocol-envelope keys (kind, requestId,
@@ -39,6 +50,60 @@ import {
   GENERATION_STEP_WATCHDOG_MS,
   GENERATION_WORKER_CONTRACT,
 } from './generationProtocol.js';
+import { createGenerationWorker } from './localEngine.js';
+// THE LOCAL ENGINE'S VERSION, read at BUILD time: the content hash of the committed
+// engine bundle (`scripts/build-edge-shared.mjs`), the same value the `engine-generate`
+// service reports. A named JSON import, so the client build carries the one string and
+// nothing else of the meta (its input list stays out of every chunk).
+import { engineVersion as LOCAL_ENGINE_VERSION } from '../../supabase/functions/_shared/engineBundle.meta.json';
+
+/**
+ * ⭐ THE ENGINE-VERSION STAMP (docs/DESIGN_ENGINE_SERVICE.md "The replay guarantee" §3:
+ * "the record carries `engineVersion`"). It is written HERE, at the transport, and never
+ * inside the pipeline: the bundle's output must stay byte-identical to the in-process
+ * pipeline's (`tests/build/engineBundleReplay.test.js`), and the same-seed goldens hash
+ * the pipeline's output, which this does not touch. The local transports (the worker and
+ * every in-thread outcome) stamp the committed bundle's hash through this function; the
+ * remote one stamps the version the service ANSWERED, in the same shape
+ * (`engineRemote.js :: runRemoteGeneration`), so a town made locally and one made
+ * remotely from the same sources carry the same version. A packet without a settlement
+ * object is returned as it came.
+ *
+ * @param {any} result a transport's result packet
+ * @param {string} engineVersion
+ * @returns {any}
+ */
+export function stampEngineVersion(result, engineVersion) {
+  const settlement = result?.settlement;
+  if (!settlement || typeof settlement !== 'object' || Array.isArray(settlement)) return result;
+  return { ...result, settlement: { ...settlement, engineVersion } };
+}
+
+/**
+ * The `remote` transport's build flag, read with `engineRemote.js :: engineRemoteOpen`'s
+ * rule (closed unless VITE_ENGINE_REMOTE is exactly 'true'). Spelled here rather than
+ * imported because this module's static import list is pinned to the protocol leaf
+ * and the local engine's seam (tests/build/generationWorkerLazy.test.js, the wire-lean
+ * law) and the worker
+ * path must construct synchronously; tests/lib/engineRemoteTransport.test.js drives the
+ * two over the same env matrix, so the spellings cannot drift.
+ * @returns {boolean}
+ */
+function remoteFlagOpen() {
+  const env = /** @type {{ VITE_ENGINE_REMOTE?: unknown } | undefined} */ (import.meta.env);
+  return Boolean(env) && env?.VITE_ENGINE_REMOTE === 'true';
+}
+
+/**
+ * The default remote transport: the engine-service leaf, fetched only when a remote
+ * generation is actually made.
+ * @param {any} request
+ * @param {{ signal?: any }} opts
+ */
+async function defaultRemoteTransport(request, opts) {
+  const { runRemoteGeneration } = await import('./engineRemote.js');
+  return runRemoteGeneration(request, opts);
+}
 
 /** The abort rejection, minted the same way on every cancel path. */
 function cancelledError() {
@@ -47,9 +112,14 @@ function cancelledError() {
   return Object.assign(new Error(message), { name: 'AbortError', code: 'cancelled' });
 }
 
-/** The default transport: one worker per request, terminated on every settle path. */
+/**
+ * The default transport: one worker per request, terminated on every settle path. The
+ * worker is constructed by the local engine's seam (`localEngine.js ::
+ * createGenerationWorker`), the ONE module a VITE_ENGINE_REMOTE build leaves out, so a
+ * flagged build carries no generation worker bundle (the protection step).
+ */
 function defaultWorkerFactory() {
-  return new Worker(new URL('../workers/generation.worker.js', import.meta.url), { type: 'module' });
+  return createGenerationWorker();
 }
 
 /**
@@ -63,7 +133,10 @@ function defaultWorkerFactory() {
  *   onStep?: (step: any) => void,
  *   signal?: {aborted?: boolean, addEventListener?: Function, removeEventListener?: Function},
  *   workerFactory?: () => any,
- * }} opts
+ *   remote?: boolean,
+ *   remoteTransport?: (request: any, opts: {signal?: any}) => Promise<any>,
+ * }} opts `remote` defaults to the build flag (VITE_ENGINE_REMOTE); it and
+ *   `remoteTransport` are seams for tests.
  * @returns {Promise<{result: any, outcome: string}>}
  */
 export async function runGeneration(request, {
@@ -72,10 +145,14 @@ export async function runGeneration(request, {
   onStep,
   signal,
   workerFactory = defaultWorkerFactory,
+  remote = remoteFlagOpen(),
+  remoteTransport = defaultRemoteTransport,
 } = /** @type {any} */ ({})) {
-  const inThread = async (outcome) => ({ result: await fallback(request, onStep), outcome });
+  const local = async () => stampEngineVersion(await fallback(request, onStep), LOCAL_ENGINE_VERSION);
+  const inThread = async (outcome) => ({ result: await local(), outcome });
 
   if (signal?.aborted) throw cancelledError();
+  if (remote) return { result: await remoteTransport(request, { signal }), outcome: 'remote' };
   if (!flagOn) return inThread('in-thread:flag-off');
   // The `Worker` probe asks whether the DEFAULT transport can exist (Node /
   // vitest / SSR have no Worker constructor). It must not veto a transport the
@@ -109,7 +186,7 @@ export async function runGeneration(request, {
       if (settled) return;
       settled = true;
       cleanup();
-      resolve({ result, outcome: 'worker' });
+      resolve({ result: stampEngineVersion(result, LOCAL_ENGINE_VERSION), outcome: 'worker' });
     };
     const fail = (error) => {
       if (settled) return;
@@ -125,7 +202,7 @@ export async function runGeneration(request, {
       settled = true;
       cleanup();
       Promise.resolve()
-        .then(() => fallback(request, onStep))
+        .then(local)
         .then(result => resolve({ result, outcome: 'in-thread:transport-failed' }), reject);
     };
     const arm = () => {

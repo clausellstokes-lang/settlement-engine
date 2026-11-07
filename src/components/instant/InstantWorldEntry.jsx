@@ -25,6 +25,8 @@ import { triggerPricingMoment } from '../../lib/pricingMoments.js';
 import { REALM_SIZES, TONES, MAP_KINDS, MAGIC_CHOICES, DEFAULT_REALM_SIZE, DEFAULT_TONE, DEFAULT_MAP_KIND, DEFAULT_MAGIC, isMagicChoice } from '../../domain/instantWorld/worldPlan.js';
 import Button from '../primitives/Button.jsx';
 import AvailableAtLaunchPill from '../primitives/AvailableAtLaunchPill.jsx';
+import LaunchGatedExport from '../primitives/LaunchGatedExport.jsx';
+import { INSTANT_WORLD_ABSENT, engineServiceBuild } from '../../lib/engineAbsentPaths.js';
 import { purchasesOpen } from '../../lib/launchGate.js';
 import Segmented from '../primitives/Segmented.jsx';
 import { ChoiceDialog } from '../primitives/Dialog.jsx';
@@ -69,6 +71,11 @@ export default function InstantWorldEntry({ isMobile, onNavigate }) {
   // Available at launch pill. The premium open/hide toggle is untouched.
   const purchasesAreOpen = purchasesOpen();
   const premiumReachClosed = !canGenerate && !purchasesAreOpen;
+  // The composer is synchronous and runs the whole pipeline once per member, so a build that
+  // carries no engine cannot build a realm (ENGINE-5 unit 2, path b): a non-staff viewer meets
+  // the launch teaser on the Generate control, staff the path's plain sentence.
+  const engineAbsent = engineServiceBuild();
+  const generateGated = engineAbsent && !isElevated;
 
   const [open, setOpen] = useState(false);
   const [realmSize, setRealmSize] = useState(DEFAULT_REALM_SIZE);
@@ -97,6 +104,7 @@ export default function InstantWorldEntry({ isMobile, onNavigate }) {
   const handleGenerate = () => {
     if (!canGenerate) { handleLockedReach(); return; }
     if (busy) return;
+    if (engineAbsent) { setError(INSTANT_WORLD_ABSENT); return; }
     setError(null);
     setAskMagic(true);
   };
@@ -232,6 +240,7 @@ export default function InstantWorldEntry({ isMobile, onNavigate }) {
             <div role="alert" style={{ fontFamily: sans, fontSize: FS.sm, color: swatch.danger }}>{error}</div>
           )}
 
+          <LaunchGatedExport gated={generateGated} block sentence={INSTANT_WORLD_ABSENT}>
           <Button
             variant="primary"
             fullWidth
@@ -247,6 +256,7 @@ export default function InstantWorldEntry({ isMobile, onNavigate }) {
           >
             {busy ? 'Building your realm…' : 'Generate Instant World'}
           </Button>
+          </LaunchGatedExport>
           <p style={{ margin: 0, textAlign: 'center', fontFamily: sans, fontSize: proseFontSize(FS.xxs, mobile), color: MUTED }}>
             It places everything and canonizes nothing. You can move, edit, or regenerate before mapping the geography.
           </p>

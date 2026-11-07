@@ -17,6 +17,11 @@ import {
   swatch,
 } from '../theme.js';
 import Button from '../primitives/Button.jsx';
+import LaunchGatedExport from '../primitives/LaunchGatedExport.jsx';
+import { selectExportStaff } from '../primitives/exportLaunchGate.js';
+import {
+  CONTENT_BINDING_SAMPLE_ABSENT, ENGINE_LOCAL_ABSENT, engineServiceBuild,
+} from '../../lib/engineAbsentPaths.js';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
@@ -177,6 +182,11 @@ export default function CampaignContentBindingLifecycle() {
   const [review, setReview] = useState(null);
   const [message, setMessage] = useState(null);
   const [error, setError] = useState(null);
+  // A build without an engine cannot forge the review's same-seed sample (ENGINE-5 unit 2,
+  // path a): a non-staff viewer meets the launch teaser on the review control, staff the
+  // path's plain sentence when the review answers `engine_local_absent`.
+  const staff = useStore(selectExportStaff);
+  const reviewGated = engineServiceBuild() && !staff;
 
   if (!activeCampaignId || !campaign?.contentBinding) return null;
 
@@ -193,6 +203,7 @@ export default function CampaignContentBindingLifecycle() {
         setError(
           next?.reason === 'campaign_content_binding_already_active'
             ? 'This campaign already uses the active account environment.'
+            : next?.reason === ENGINE_LOCAL_ABSENT ? CONTENT_BINDING_SAMPLE_ABSENT
             : next?.message || next?.reason
               || 'The campaign content change could not be reviewed.',
         );
@@ -309,15 +320,17 @@ export default function CampaignContentBindingLifecycle() {
             follows future library edits; rollback activates an earlier snapshot
             without rewriting history.
           </div>
-          <Button
-            variant="secondary"
-            size="sm"
-            disabled={busy}
-            onClick={() => beginReview()}
-            style={{ marginTop: 8 }}
-          >
-            Review active account environment
-          </Button>
+          <LaunchGatedExport gated={reviewGated} sentence={CONTENT_BINDING_SAMPLE_ABSENT}>
+            <Button
+              variant="secondary"
+              size="sm"
+              disabled={busy}
+              onClick={() => beginReview()}
+              style={{ marginTop: 8 }}
+            >
+              Review active account environment
+            </Button>
+          </LaunchGatedExport>
           {historical.length > 0 && (
             <div style={{
               display: 'flex',

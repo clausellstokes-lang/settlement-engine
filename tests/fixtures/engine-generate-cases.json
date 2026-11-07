@@ -1,0 +1,11 @@
+{
+  "_doc": "The three engine-generate replay cases (ENGINE-1 unit 3), ONE spelling read by both sides of the chain: supabase/functions/engine-generate/index.test.ts (Deno: the function's settlement equals the bundle's birth for these) and tests/build/engineBundleReplay.test.js (Node: the bundle's birth equals the in-process birth for these). No hashes live here, so an engine shift never re-records this file.",
+  "config": {
+    "settType": "village",
+    "culture": "germanic",
+    "terrainOverride": "riverside",
+    "tradeRouteAccess": "river",
+    "monsterThreat": "frontier"
+  },
+  "seeds": ["engine-contract-alpha", "engine-contract-beta", "engine-contract-gamma"]
+}

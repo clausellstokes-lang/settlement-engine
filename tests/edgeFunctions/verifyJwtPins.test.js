@@ -70,6 +70,15 @@ const SELF_AUTH_FALSE = new Set([
   // uptime monitors / the ops probe with no JWT; it reads no user data and takes
   // no write path. See supabase/functions/health/index.ts.
   'health',
+  // engine-generate — the engine service (ENGINE-1; the engine-service design ruled by the
+  // owner 2026-11-03). Anonymous callers are served by design; it resolves an OPTIONAL
+  // Bearer JWT itself (per-account meter + session gate when signed in, per-IP otherwise)
+  // behind the botGuard and a fail-closed rate guard, spends no credits and writes no
+  // account row. See supabase/functions/engine-generate/index.ts.
+  'engine-generate',
+  // engine-version — a public read of the engine bundle's version stamp (ENGINE-1), like
+  // health: no user data, no write path. See supabase/functions/engine-version/index.ts.
+  'engine-version',
   // Public token-bearing opt-out endpoint. GET confirms; POST can only disable
   // an allowed category through unsubscribe_via_token.
   'unsubscribe',

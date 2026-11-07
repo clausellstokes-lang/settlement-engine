@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite';
+import { defineConfig, loadEnv } from 'vite';
 import react from '@vitejs/plugin-react';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { readFileSync, existsSync, statSync, readdirSync } from 'node:fs';
@@ -11,6 +11,62 @@ const analyze = process.env.ANALYZE === '1';
 
 const ROOT = dirname(fileURLToPath(import.meta.url));
 const SRC = resolve(ROOT, 'src');
+
+// ── THE PROTECTION STEP (docs/DESIGN_ENGINE_SERVICE.md "The client switch" (5)) ──
+// A build made with VITE_ENGINE_REMOTE='true' (closed unless exactly 'true', the
+// `engineRemote.js :: engineRemoteOpen` rule) generates through the engine service, so
+// it must not CARRY the generator. The local engine's one seam, src/lib/localEngine.js,
+// and the pipeline entry (the backstop for the three importers that reach it without
+// the seam) resolve to src/lib/localEngine.absent.js, which imports nothing: the
+// generator, its step registry, the generation core and the generation worker (whose
+// only `new Worker(new URL(...))` lives in the seam) then have no path into `dist/`.
+// The world pulse (src/domain/worldPulse/) is untouched: it stays in the browser for
+// this program (the chair's ruling, 2026-11-04). Flag off, the plugin resolves nothing
+// and the build is the build it was.
+// @guarded-by tests/build/engineAbsentWhenRemote.test.js
+const LOCAL_ENGINE_ABSENT = resolve(SRC, 'lib/localEngine.absent.js');
+const LOCAL_ENGINE_IDS = new Set([
+  resolve(SRC, 'lib/localEngine.js'),
+  resolve(SRC, 'lib/localPipeline.js'),
+  resolve(SRC, 'generators/generateSettlementPipeline.js'),
+]);
+
+/**
+ * The build's VITE_ENGINE_REMOTE, read the way the client reads it (.env files of the
+ * mode, then the process environment, which wins — Vercel's project variables arrive
+ * there). Exported for the build test.
+ * @param {string} [mode]
+ * @returns {boolean}
+ */
+export function engineRemoteBuild(mode = 'production') {
+  return loadEnv(mode, ROOT, 'VITE_ENGINE_REMOTE').VITE_ENGINE_REMOTE === 'true';
+}
+
+/** `vite build --mode <m>` names the mode; a plain `vite build` is 'production'. */
+function cliMode() {
+  const at = process.argv.indexOf('--mode');
+  if (at !== -1 && process.argv[at + 1]) return process.argv[at + 1];
+  const eq = process.argv.find((arg) => arg.startsWith('--mode='));
+  if (eq) return eq.slice('--mode='.length);
+  return process.argv.includes('build') ? 'production' : 'development';
+}
+const ENGINE_REMOTE_BUILD = engineRemoteBuild(cliMode());
+
+/**
+ * @param {boolean} on
+ * @returns {import('vite').Plugin}
+ */
+export function engineAbsentWhenRemote(on) {
+  return {
+    name: 'engine-absent-when-remote',
+    enforce: 'pre',
+    async resolveId(source, importer, options) {
+      if (!on || !/(?:^|\/)(?:localEngine|localPipeline|generateSettlementPipeline)(?:\.js)?$/.test(source)) return null;
+      const resolved = await this.resolve(source, importer, { ...options, skipSelf: true });
+      return resolved && LOCAL_ENGINE_IDS.has(resolved.id.split('?')[0]) ? LOCAL_ENGINE_ABSENT : null;
+    },
+  };
+}
 
 // ── Engine-shared domain vocabulary (for the engine-core chunk) ──────────────
 // generators and domain are mutually-dependent PEER engine layers: the
@@ -519,12 +575,16 @@ export default defineConfig({
       brotliSize: true,
       open: false,
     }),
+    engineAbsentWhenRemote(ENGINE_REMOTE_BUILD),
   ].filter(Boolean),
   // Every production worker is constructed with `{ type: 'module' }`. ES
   // output lets the TownScene worker code-split its canonical-map vocabulary
   // instead of parsing that graph before the first compile request.
   worker: {
     format: 'es',
+    // A worker bundle is built with ITS OWN plugin list, so the protection step is
+    // repeated here: the custom-content preview worker imports the pipeline entry.
+    plugins: () => [engineAbsentWhenRemote(ENGINE_REMOTE_BUILD)],
   },
   build: {
     outDir: 'dist',

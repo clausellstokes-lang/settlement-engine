@@ -13,6 +13,21 @@
  *   - aiCharter        (src/domain/aiCharter.js)        → aiCharterBundle.js
  *   - intentAtlas      (src/domain/intentAtlas.js)      → intentAtlasBundle.js
  *   - aiOutputSchema   (src/domain/aiOutputSchema.js)   → aiOutputSchemaBundle.js
+ *   - engine           (src/engine/serviceEntry.js)     → engineBundle.js
+ *       The engine service's bundle (engine-generate / engine-version). Its entry
+ *       carries `version: true`, so its meta also records:
+ *         engineVersion   — sha256 (16 hex) of the FINAL bundle bytes as written:
+ *                           the code that runs, so an esbuild upgrade that changes
+ *                           the emitted engine is a new version even when no source
+ *                           moved. A client may pin it; the service refuses one it
+ *                           does not serve (409 engine_version_retired).
+ *         builtFromCommit — `git rev-parse HEAD` when the builder ran: the commit the
+ *                           build sat on. The bundle itself is committed after, so
+ *                           this is its parent; `sourceHash` pins the exact inputs
+ *                           (edgeSharedBundleReproducibility proves them committed).
+ *       Its behaviour is pinned by tests/build/engineBundleReplay.test.js (the bundle
+ *       equals the in-process pipeline over the golden master's 525 configurations),
+ *       which also fails a stale bundle.
  *
  * Freshness contract: re-run after editing any module a bundle transitively
  * imports. The per-bundle *.freshness.test.js tests fail on stale bundles.
@@ -25,6 +40,7 @@ import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { writeFileSync, readFileSync, existsSync, mkdirSync } from 'node:fs';
 import { createHash } from 'node:crypto';
+import { execFileSync } from 'node:child_process';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT    = join(__dirname, '..');
@@ -36,7 +52,17 @@ const ENTRIES = [
   { label: 'aiCharter',       entry: 'src/domain/aiCharter.js',    out: 'aiCharterBundle.js',       meta: 'aiCharterBundle.meta.json' },
   { label: 'intentAtlas',     entry: 'src/domain/intentAtlas.js',  out: 'intentAtlasBundle.js',     meta: 'intentAtlasBundle.meta.json' },
   { label: 'aiOutputSchema',  entry: 'src/domain/aiOutputSchema.js', out: 'aiOutputSchemaBundle.js', meta: 'aiOutputSchemaBundle.meta.json' },
+  { label: 'engine',          entry: 'src/engine/serviceEntry.js', out: 'engineBundle.js',         meta: 'engineBundle.meta.json', version: true },
 ];
+
+/** The commit the build sits on, or null outside a git checkout. */
+function headCommit() {
+  try {
+    return execFileSync('git', ['rev-parse', 'HEAD'], { cwd: ROOT }).toString('utf8').trim();
+  } catch {
+    return null;
+  }
+}
 
 function banner(entryRel) {
   return `/**
@@ -55,7 +81,7 @@ function banner(entryRel) {
 
 if (!existsSync(OUT_DIR)) mkdirSync(OUT_DIR, { recursive: true });
 
-async function buildOne({ label, entry, out, meta }) {
+async function buildOne({ label, entry, out, meta, version = false }) {
   const OUT_FILE = join(OUT_DIR, out);
   const META_FILE = join(OUT_DIR, meta);
 
@@ -79,12 +105,7 @@ async function buildOne({ label, entry, out, meta }) {
   const inputContents = inputPaths.map(p => `${p}:${readFileSync(join(ROOT, p), 'utf8')}`).join('\n');
   const sourceHash = createHash('sha256').update(inputContents).digest('hex').slice(0, 16);
 
-  writeFileSync(META_FILE, JSON.stringify({
-    generatedAt: new Date().toISOString(),
-    entry,
-    sourceHash,
-    inputs: inputPaths,
-  }, null, 2) + '\n');
+  const generatedAt = new Date().toISOString();
 
   // Strip JSDoc blocks that carry an `import(...)` TYPE reference before writing.
   // Bundled app source may thread `@param {import('../settlement.schema.js').SimX}`
@@ -100,6 +121,21 @@ async function buildOne({ label, entry, out, meta }) {
     ? bundleSrc
     : bundleSrc.replace('DO NOT EDIT BY HAND.', `DO NOT EDIT BY HAND.\n * Source hash: ${sourceHash}`);
   writeFileSync(OUT_FILE, finalSrc);
+
+  // The meta is written AFTER the final bytes so a versioned entry can hash them.
+  const versionStamp = version
+    ? {
+      engineVersion: createHash('sha256').update(finalSrc, 'utf8').digest('hex').slice(0, 16),
+      builtFromCommit: headCommit(),
+    }
+    : {};
+  writeFileSync(META_FILE, JSON.stringify({
+    generatedAt,
+    entry,
+    sourceHash,
+    ...versionStamp,
+    inputs: inputPaths,
+  }, null, 2) + '\n');
 
   const kb = (Buffer.byteLength(finalSrc, 'utf8') / 1024).toFixed(1);
   console.log(`✓ ${label}: ${out}  (inputs: ${inputPaths.length}, ${kb} KB, hash ${sourceHash})`);

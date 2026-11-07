@@ -87,6 +87,8 @@ export const TRANSPORT_OUTCOMES = Object.freeze([
   'in-thread:no-worker',
   'in-thread:construct-failed',
   'in-thread:transport-failed',
+  // The engine service (lib/engineRemote.js): the same packet, made on the server.
+  'remote',
 ]);
 
 /**
