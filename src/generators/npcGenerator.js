@@ -92,7 +92,7 @@ const generateNPCPowerLevel = role => {
 // so a call site that forgets to thread it degrades SILENTLY to naive picks —
 // it does not throw. The real guards are the pipeline-level roll-budget and
 // theme-repeat pins, which red on exactly that regression.
-const generateSingleNPC = (
+export const generateSingleNPC = ( // exported for people/representatives.js (the people car): every face takes today's record body
   role,
   namingTier,
   category,
@@ -215,19 +215,6 @@ const computeNPCWeights = (config = {}, institutions = []) => {
 // bands have one home, each labelled by its version. Values unchanged; the
 // unknown-tier fallback is still the town row.
 const getNPCCountRange = legacyMassRange;
-
-// formatNPCForDisplay
-const _formatNPCForDisplay = (r, s, o, d) => {
-  const l = generateCrimeLevel(r, s, o, d),
-    m = l || r.secret;
-  let h = r.presentation;
-  if (m && random01(0.4)) {
-    const w = getStressHistory(m);
-    w && (h = w);
-  }
-  const g = { ...r, presentation: h };
-  return (l && (g.secret = l), g);
-};
 
 // mergeNPCLists
 

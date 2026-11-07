@@ -12,7 +12,8 @@
 import { createPRNG, generateSeed } from '../kernel/prng.js';
 import { setActiveRng, clearActiveRng } from '../kernel/rngContext.js';
 import { runPipeline } from './pipeline.js';
-import { generateNPCs, generateRelationships } from './npcGenerator.js';
+import { generateRelationships } from './npcGenerator.js';
+import { generateRepresentatives } from './people/representatives.js';
 import { generateFactions, generateConflicts } from './powerGenerator.js';
 import { generateHistory } from './historyGenerator.js';
 import { enrichNpcCoherence, relinkFactionMembers } from './narrativeGenerator.js';
@@ -23,7 +24,7 @@ import { withCustomContent } from '../lib/dependencyEngine.js';
 // prose, and a raw substring swap there corrupts a SURVIVOR whose name merely
 // starts with the departed one — one rule, one place, Unicode-aware boundaries.
 import { substituteWholeWord } from '../lib/narrativeMutations.js';
-import { countPreservedNpcs, mergePreservedNpcs } from '../domain/regenerationPreservation.js';
+import { mergePreservedNpcs } from '../domain/regenerationPreservation.js';
 // The LOCKS leaf (importless but for clone.js), already in this chunk through
 // regenerationPreservation — the full-generate carry reads the same id set the
 // section reroll does, so the two paths can never disagree about what is locked.
@@ -519,23 +520,17 @@ export function regenNPCsPipeline(settlement, config, options = {}) {
         config.cultureProfileKey
         || config.culture,
     });
-    // Roster size is a seeded draw and can come back SMALLER than the pinned
-    // cast, which would leave the surplus keepers appended with no relationships
-    // and no faction — surviving in name only. Floor the roll at the number the
-    // merge will carry, computed with the merge's own predicate so the two can
-    // never disagree. The draw still happens first, so a settlement holding no
-    // canon floors at 0 and rolls exactly what it always rolled.
-    // The dormant path must hand over the SAME config object, not a spread copy
-    // carrying a zero floor — anything downstream that fingerprints config keys
-    // would see a shape change where nothing changed.
-    const preservedCount = countPreservedNpcs(settlement.npcs, { mode: options.mode, locks: options.locks });
-    const rollConfig = preservedCount > 0 ? { ...config, _minNpcCount: preservedCount } : config;
-    const npcs = generateNPCs({
+    // THE PEOPLE CAR (PEOPLE-1 CAST, 2026-11-07): the cast is the roster's faces, one per house,
+    // so there is no roll to floor at the preserved count any more (the `_minNpcCount` floor is
+    // retired with the roll it floored) — a preserved person rides over the cast in the merge
+    // below exactly as before. The cards draw on this regen's own stream (the ambient one set
+    // above), each on its own keyed fork, so a regen of the same seed reproduces the same cast.
+    const npcs = generateRepresentatives({
       tier: settlement.tier,
       institutions: settlement.institutions || [],
       powerStructure: settlement.powerStructure,
       economicState: settlement.economicState,
-    }, config.culture || 'germanic', rollConfig, generationContext);
+    }, config.culture || 'germanic', config, generationContext);
     const relationships = generateRelationships(npcs, config, settlement.institutions || []);
     // GS-2 (ODQ §934.101): the faction groups and the conflicts are derived from the FINAL
     // roster below, exactly as assembly derives them, because an NPC's power affiliation is

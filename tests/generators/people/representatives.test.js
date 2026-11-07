@@ -1,0 +1,137 @@
+/**
+ * representatives.test.js — THE REPRESENTATIVE GENERATOR (the people car, PEOPLE-1 CAST, step 2;
+ * docs/chair/2026-11-07/BRIEF-PEOPLE-1-CAST-2026-11-07.md §1, rulings R-P1 c, R-P2, M-2, M-4).
+ *
+ * The owner's charter (ODQ §934.105): "one person per institution. They act as the face." The
+ * claims: one card per face-bearing house and zero duplicates on the golden 525 and the soak
+ * 1,000's first 200; the seat always faced (housed, the hall's, or minted); ids stable across
+ * two births; the same seed the identical cast; the house-face count per tier inside PEOPLE-0
+ * §1's measured envelope (docs/chair/2026-11-07/PEOPLE-INVENTORY-2026-11-07.md).
+ *
+ * BUDGETS: the two corpus arms birth 525 and 200 full settlements; each carries an explicit
+ * per-test budget at its measured cost (the 525 ran in ~75 s, the 200 in ~45 s on the lane's
+ * machine), never the suite-wide timeout.
+ */
+import { describe, expect, it } from 'vitest';
+import { goldenCorpus } from '../../helpers/goldenMasterCorpus.js';
+import { generateSettlementPipeline } from '../../../src/generators/generateSettlementPipeline.js';
+import { birth, ensureLaws } from '../../../scripts/audit/soak-review/corpus.mjs';
+import { FACE_SEAT, faceOfInstitution, isFabricInstitution } from '../../../src/data/institutionalCatalog.js';
+import { governingFactionOf, nameOf } from '../../../src/domain/rulingPower.js';
+import { SEAT_CARD_ID, seatHouseOf } from '../../../src/generators/people/representatives.js';
+import { SEAT_ROLE_BY_TIER } from '../../../src/generators/people/poolMap.js';
+import { seatMintTitleFor } from '../../../src/generators/people/mintTitles.js';
+
+const TIERS = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
+/**
+ * PEOPLE-0 §1 on the soak 1,000: the FACE column's minimum, and its maximum plus the JUDGMENT
+ * column's (0 / 2 / 4 / 9 / 16 / 21), because R-P1 made ten of the judgment families and the
+ * weight-3 market row faces that PEOPLE-0's face column did not count (measured at this suite's
+ * birth: a town of the first 200 carries 41 house faces against the face column's 40).
+ */
+const ENVELOPE = Object.freeze({
+  thorp: [0, 5], hamlet: [0, 10], village: [3, 23], town: [7, 49], city: [18, 91], metropolis: [46, 104],
+});
+
+/** The houses the registry says carry a face on this roster, in roster order, plus the seat's building where it is the seat. */
+function expectedFaceHouses(settlement) {
+  const seat = seatHouseOf(settlement.institutions);
+  const names = [];
+  (settlement.institutions || []).forEach((house, index) => {
+    if (!house || isFabricInstitution(house)) return;
+    const face = faceOfInstitution(house);
+    if (!face) return;
+    if (face === FACE_SEAT) { if (seat && seat.index === index) names.push(house.name); return; }
+    names.push(house.name);
+  });
+  return { names, seat };
+}
+
+/** The claims every settlement of both corpora must hold. @param {any} s */
+function assertCast(s, label) {
+  const cards = s.npcs.filter((n) => n.institution);
+  const houseCards = cards.filter((n) => n.institution.kind === 'house');
+  const { names, seat } = expectedFaceHouses(s);
+  // one card per face house and no house twice (the cards are DRAWN in roster order; the stored
+  // array is re-sorted by relevance by npcStructure.js :: enrichNPCsWithStructure, as today's was)
+  expect([...houseCards.map((n) => n.institution.key)].sort(), `${label}: one card per face house`).toEqual([...names].sort());
+  expect(new Set(s.npcs.map((n) => n.id)).size, `${label}: ids are unique`).toBe(s.npcs.length);
+  expect(new Set(houseCards.map((n) => n.institution.key)).size, `${label}: no house faced twice`).toBe(houseCards.length);
+  for (const card of cards) {
+    expect(typeof card.title === 'string' && card.title.length > 0, `${label}: ${card.id} carries a title`).toBe(true);
+    expect(card.memberships, `${label}: ${card.id} memberships`).toEqual(expect.any(Array));
+    expect(card.id, `${label}: ids derive from the house, never an index`).not.toMatch(/^npc_\d+$/);
+    // today's record body, every field the surfaces read
+    for (const key of ['name', 'gender', 'role', 'category', 'personality', 'physical', 'plotHooks', 'influence', 'power', 'presentation']) {
+      expect(card, `${label}: ${card.id} carries ${key}`).toHaveProperty(key);
+    }
+  }
+  // the seat is always faced: the governing house's face, the hall's, or the mint
+  const governing = nameOf(governingFactionOf(s));
+  if (governing) {
+    const seatRole = SEAT_ROLE_BY_TIER[s.tier];
+    const seated = cards.filter((n) => n.role === seatRole && (seat ? n.institution.key === seat.house.name : n.institution.kind === 'power'));
+    expect(seated.length, `${label}: exactly one seat face (${seat ? seat.kind : 'minted'})`).toBe(1);
+    const mint = cards.find((n) => n.institution.kind === 'power');
+    if (seat) expect(mint, `${label}: no mint beside a seat house`).toBeUndefined();
+    else {
+      expect(mint.id).toBe(SEAT_CARD_ID);
+      expect(mint.institution).toEqual({ kind: 'power', key: governing, family: null, title: seatMintTitleFor(governing).title });
+    }
+    if (seat?.kind === 'hall') expect(seated[0].title, `${label}: the hall's face is the seat, titled from the power`).toBe(seatMintTitleFor(governing).title);
+  }
+  return { houseFaces: houseCards.length, minted: cards.some((n) => n.institution.kind === 'power') };
+}
+
+describe('the people car — the representative generator (step 2)', () => {
+  it('one card per face house, zero duplicates, the seat always faced: the golden 525', () => {
+    let faces = 0;
+    for (const row of goldenCorpus()) {
+      const { _seed, ...cfg } = row;
+      const s = generateSettlementPipeline(cfg, null, { seed: _seed, customContent: {} });
+      faces += assertCast(s, `${row.settType}/${_seed}`).houseFaces;
+    }
+    expect(faces, 'the corpus births a cast').toBeGreaterThan(525);
+  }, 240_000);
+
+  it("one card per face house, zero duplicates, the seat always faced, the envelope: the soak 1,000's first 200", async () => {
+    await ensureLaws();
+    const perTier = Object.fromEntries(TIERS.map((t) => [t, []]));
+    let minted = 0;
+    for (let i = 0; i < 200; i += 1) {
+      const s = birth(i).settlement;
+      const { houseFaces, minted: m } = assertCast(s, `soak1k-${i}`);
+      perTier[s.tier].push(houseFaces);
+      if (m) minted += 1;
+    }
+    for (const tier of TIERS) {
+      const [lo, hi] = ENVELOPE[tier];
+      expect(Math.min(...perTier[tier]), `${tier} min house faces`).toBeGreaterThanOrEqual(lo);
+      expect(Math.max(...perTier[tier]), `${tier} max house faces`).toBeLessThanOrEqual(hi);
+    }
+    // R-P2's measured need: the mint fires only below the town (PEOPLE-0: never above the village without a hall)
+    expect(minted, 'the seat is minted somewhere on the first 200').toBeGreaterThan(0);
+  }, 180_000);
+
+  it('ids are stable across two births of the same seed and roster, and the cast is identical', async () => {
+    await ensureLaws();
+    for (const i of [0, 1, 3, 5]) {
+      const a = birth(i).settlement;
+      const b = birth(i).settlement;
+      expect(b.npcs.map((n) => n.id)).toEqual(a.npcs.map((n) => n.id));
+      expect(JSON.stringify(b.npcs)).toBe(JSON.stringify(a.npcs));
+    }
+  }, 60_000);
+
+  it('a different seed on the same config is a different cast of the same houses', () => {
+    const row = goldenCorpus().find((c) => c.settType === 'town');
+    const { _seed, ...cfg } = row;
+    const a = generateSettlementPipeline(cfg, null, { seed: _seed, customContent: {} });
+    const b = generateSettlementPipeline(cfg, null, { seed: `${_seed}-other`, customContent: {} });
+    const facesA = a.npcs.filter((n) => n.institution).map((n) => n.name);
+    const facesB = b.npcs.filter((n) => n.institution).map((n) => n.name);
+    expect(facesA.length).toBeGreaterThan(5);
+    // anchored: the two casts are the same length only by coincidence of roster; the names differ
+    expect(facesA.join('|')).not.toBe(facesB.join('|'));
+  }, 30_000);
+});

@@ -26,11 +26,10 @@
 import { defenseWordsFindings } from '../domain/coherence/defenseWordsFindings.js';
 import {
   clearActiveRng,
-  getActiveRng,
   random as _rng,
   setActiveRng,
 } from '../kernel/rngContext.js';
-import { disperseNamedRoster } from './density/applyDensityLaw.js';
+import { shimLegacyFactionFields } from './people/legacyShim.js';
 import { pickVariant } from '../kernel/proseHash.js';
 import { selectOriginBody } from './narrative/settlementOriginProse.js';
 import { resolvePrimaryStress } from './stressPriority.js';
@@ -883,35 +882,16 @@ export const enrichNpcCoherence = (settlement) => {
     settlement.tier,
     settlement.config || {},
   );
-  // ── ODQ §810 SEAM 2 (coherence): under the Register VII density law the
-  // two-stage roll's DISPERSAL supersedes mergeNPCLists' power-proportional
-  // cascade, and every figure is stamped with its rolled rung band.
-  //
-  // ⭐ THIS SEAM, NOT THE POPULATION STEP, IS WHERE THE DISPERSAL LIVES — because
-  // this function is the tail BOTH full assembly and NPC section-regen run
-  // ("a rerolled roster must carry the same factionAffiliation … as a freshly
-  // generated one"). Wiring the law here is what makes a regen reproduce the
-  // same political shape instead of a differently-dispersed one.
-  //
-  // Version-gated and draw-free under the dormant default: `disperseNamedRoster`
-  // returns the same array by reference for a world whose config carries no
-  // density-law marker, and `getActiveRng()` is a read, not a draw.
-  const densityRng = getActiveRng();
-  const dispersed = densityRng
-    ? disperseNamedRoster({
-      tier: settlement.tier,
-      // X-46 car 4: the population tilt. This seam runs in re-derivation mode, so the tilt
-      // reaches only results it overrides; passed so all three seams roll one plan.
-      population: settlement.population,
-      config: settlement.config || {},
-      stress: settlement.stress,
-      powerStructure: settlement.powerStructure,
-      economicState: settlement.economicState,
-      npcs: rawMergedNpcs,
-      rng: densityRng,
-    }).npcs
-    : rawMergedNpcs;
-  return enrichNPCsWithStructure(dispersed, settlement);
+  // ── THE PEOPLE CAR (PEOPLE-1 CAST, 2026-11-07). The density law's DISPERSAL and its rung
+  // stamps (`applyDensityLaw.js :: disperseNamedRoster`, the §810 seam 2 that used to sit here)
+  // are RETIRED FROM BIRTH: a card's standing in the powers is its `memberships`, and the two old
+  // fields every reader still keys on are derived from them by the ONE shim (people/legacyShim.js,
+  // M-2), AFTER mergeNPCLists' keyword cascade (overwritten) and BEFORE the structural pass
+  // (which reads `factionAffiliation` for its rank). This tail is still the one BOTH full
+  // assembly and NPC section-regen run, so a regenerated cast carries the same fields as a born
+  // one. Draw-free.
+  const shimmed = rawMergedNpcs.map((card) => shimLegacyFactionFields(card));
+  return enrichNPCsWithStructure(shimmed, settlement);
 };
 
 /**
