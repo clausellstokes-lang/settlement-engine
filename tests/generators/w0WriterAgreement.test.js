@@ -77,3 +77,22 @@ describe('LEGACY ANNOTATIONS DATED AT BIRTH (R-W7 d, cause 5)', () => {
     expect(undated).toEqual([]);
   });
 });
+
+describe('THE ROSTER-READ FLAGS AND SCORES ARE THE FINAL ROSTER\'S (R-W7 a, b; causes 2 and 3, a pin)', () => {
+  // MEASURED, NOT CURED: over the golden 525 and the soak 1,000 (flags firing on 179), safetyProfile.flags,
+  // economicState.compound (inst and the five scores) and safetyProfile.compound recomputed over the FINAL roster
+  // equal the stored ones on every birth (0 of 1,525): the economy is re-derived after the roster's last pass
+  // (steps/economyReconcilePass.js). This pins it, so a later pass that trims the roster after the economy reds here.
+  // On ADVANCE they go stale (economicState.js, the "RAW ROSTER, STAMPED ONCE" note): the simulation's, after FPZ.
+  it('every birth\'s stored flags, compound.inst and influence scores equal a recompute over its final roster', async () => {
+    const { getInstFlags, getStressFlags } = await import('../../src/generators/priorityHelpers.js');
+    const stale = births.filter(({ s }) => {
+      const eco = s.economicState;
+      const inst = getInstFlags(s.config, s.institutions);
+      return JSON.stringify(eco.safetyProfile.flags) !== JSON.stringify(getStressFlags(s.config, s.institutions))
+        || JSON.stringify(eco.compound) !== JSON.stringify(inst)
+        || JSON.stringify(eco.safetyProfile.compound) !== JSON.stringify(inst);
+    }).map(({ key }) => key);
+    expect(stale).toEqual([]);
+  });
+});
