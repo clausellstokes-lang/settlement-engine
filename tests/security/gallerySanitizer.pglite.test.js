@@ -275,3 +275,150 @@ describe('gallery per-member overrides — net-current execution (pglite)', () =
     expect(out).toEqual({ name: 'Riverbend', population: 900 });
   });
 });
+
+// ── 206: THE CARD'S VEIL BIT (FIX-PUBLIC-VEIL, the chair's ruling of 2026-11-07, shape (a)) ──
+// Every writer of a card's `institution` stamps `institution.veiled` at birth from ONE predicate
+// (src/domain/people/cardVeil.js); the sanitizer and its client twin READ the bit. Where it is false
+// the house is public (institution, title, role, memberships); where it is true or ABSENT the face
+// is bare (fail-closed); a card with no institution record is 205's projection exactly. Each proof
+// is EXECUTED on the net-current SQL and compared field for field with toPublicSafe.
+describe('206 — the card\'s veil bit: a face\'s house is public only where veiled is false (pglite)', () => {
+  let vdb;
+  const sanitizeV = async (obj) =>
+    (await vdb.query(`select public._gallery_sanitize_public_json($1::jsonb) as out`, [JSON.stringify(obj)])).rows[0].out;
+  /** @param {string} name */
+  const sqlArray = (name) => {
+    const m = SANITIZER.sql.match(new RegExp(`${name}\\s+constant\\s+text\\[\\]\\s*:=\\s*array\\[([\\s\\S]*?)\\]`, 'i'));
+    if (!m) throw new Error(`${name} not found in the net-current sanitizer`);
+    return [...m[1].matchAll(/'([^']+)'/g)].map((x) => x[1]).sort();
+  };
+  const BODY = { personality: 'wary', physical: 'tall', presentation: 'plain', influence: 'high', category: 'government',
+    goal: 'DM-ONLY-GOAL', secret: 'DM-ONLY-SECRET', power: 9 };
+  // the hidden infiltrator's mint (castPowers.js R-P4), stamped veiled
+  const INFILTRATOR = { id: 'npc_power_the_independent_bloc', name: 'Wendel Ashby', title: "the bloc's speaker", role: "the bloc's speaker",
+    ...BODY, institution: { kind: 'power', key: 'The Independent Bloc', family: null, title: "the bloc's speaker", veiled: true },
+    memberships: [{ power: 'The Independent Bloc', rank: 1, share: 1, veiled: true }] };
+  // a criminal guild's face, stamped veiled
+  const GUILDMASTER = { id: 'npc_thieves_guild_chapter', name: 'Corvin Vale', title: 'the guildmaster of thieves', role: 'the guildmaster of thieves',
+    ...BODY, category: 'criminal', institution: { kind: 'house', key: "Thieves' guild chapter", family: "Thieves' guild chapter", title: 'the guildmaster of thieves', veiled: true },
+    memberships: [{ power: 'The Night Market', rank: 1, share: 0.6, veiled: true }] };
+  // the parish priest, an open house
+  const PRIEST = { id: 'npc_parish_church', name: 'Robert Thomas', title: 'the priest', role: 'the priest',
+    ...BODY, category: 'religious', institution: { kind: 'house', key: 'Parish church', family: 'Parish church', title: 'the priest', veiled: false },
+    memberships: [{ power: 'The Parish', rank: 1, share: 1, veiled: false }] };
+  // an open house's face holding one public and one HIDDEN membership (soak1k-389's shape: a court house
+  // backing the infiltrator's hidden power), plus an unstamped entry
+  const MAGISTRATE = { id: 'npc_multiple_court_buildings', name: 'Hal Brede', title: 'the chief magistrate', role: 'the chief magistrate',
+    ...BODY, institution: { kind: 'house', key: 'Multiple court buildings', family: 'Court', title: 'the chief magistrate', veiled: false },
+    memberships: [{ power: 'The Crown', rank: 1, share: 0.6, veiled: false }, { power: 'The Quiet Hand', rank: 2, share: 0.4, veiled: true },
+      { power: 'The Old Guard', rank: null, share: null }] };
+  // a card born by the car BEFORE the bit (an institution record, no `veiled`)
+  const UNSTAMPED = { id: 'npc_mill', name: 'Ada Miller', title: 'the miller', role: 'the miller',
+    ...BODY, institution: { kind: 'house', key: 'Mill', family: 'Mill', title: 'the miller' }, memberships: [{ power: 'The Guilds', rank: 2, share: 0.4 }] };
+  // a card saved before the people car (no institution, today's title and role)
+  const PRE_CAR = { id: 'npc.old_tom', name: 'Old Tom', title: 'Laird', role: 'Blacksmith', ...BODY, category: 'economy' };
+  // a DM's person after the v1 -> v2 migration (institution null, memberships moved from factionAffiliation)
+  const DM_PERSON = { id: 'npc.dm_mara', name: 'Mara', title: 'Captain', role: 'Captain', ...BODY, institution: null,
+    memberships: [{ power: 'The Watch', rank: null, share: null }] };
+  const ALL = [INFILTRATOR, GUILDMASTER, PRIEST, MAGISTRATE, UNSTAMPED, PRE_CAR, DM_PERSON];
+
+  beforeAll(async () => {
+    vdb = new PGlite();
+    await vdb.exec('create schema if not exists public;');
+    await vdb.exec(SANITIZER.sql);
+  }, PGLITE_BOOT_TIMEOUT_MS);
+
+  it('the net-current sanitizer is 206 or later, and its two house constants equal the client twin\'s', async () => {
+    expect(Number(String(SANITIZER.file).split('_')[0])).toBeGreaterThanOrEqual(206);
+    const { NPC_HOUSE_KEYS, NPC_HOUSE_NAMED_KEYS } = await import('../../src/domain/display/publicSafe.js');
+    expect(sqlArray('npc_house_keys')).toEqual([...NPC_HOUSE_KEYS].sort());
+    expect(sqlArray('npc_house_named')).toEqual([...NPC_HOUSE_NAMED_KEYS].sort());
+    // anchored: the two constants name exactly the car's three public fields plus the role
+    expect(sqlArray('npc_house_keys')).toEqual(['institution', 'memberships']);
+    expect(sqlArray('npc_house_named')).toEqual(['role', 'title']);
+  });
+
+  it('a hidden-infiltrator face comes out bare: no institution, no title, no role, no memberships', async () => {
+    const npc = (await sanitizeV({ npcs: [INFILTRATOR] })).npcs[0];
+    expect(npc.name).toBe('Wendel Ashby');
+    expect(npc.personality).toBe('wary');
+    for (const k of ['institution', 'title', 'role', 'memberships', 'goal', 'secret', 'power']) expect(k in npc, k).toBe(false);
+    const { id: _id, ...rest } = npc;
+    expect(JSON.stringify(rest)).not.toContain("bloc's speaker");
+    expect(JSON.stringify(rest)).not.toContain('Independent Bloc');
+  });
+
+  it('a criminal guild\'s face comes out bare', async () => {
+    const npc = (await sanitizeV({ npcs: [GUILDMASTER] })).npcs[0];
+    expect(npc.name).toBe('Corvin Vale');
+    for (const k of ['institution', 'title', 'role', 'memberships']) expect(k in npc, k).toBe(false);
+    // the card's `id` is the house slug and stays public (the identity floor, the gallery member key —
+    // recorded in docs/FIX_PUBLIC_VEIL_2026-11-07.md for the chair); every OTHER field is clean
+    const { id: _id, ...rest } = npc;
+    expect(JSON.stringify(rest)).not.toMatch(/thieves/i);
+    expect(JSON.stringify(rest)).not.toContain('Night Market');
+  });
+
+  it('a parish priest comes out with its institution, title, role and memberships', async () => {
+    const npc = (await sanitizeV({ npcs: [PRIEST] })).npcs[0];
+    expect(npc.institution).toEqual(PRIEST.institution);
+    expect(npc.title).toBe('the priest');
+    expect(npc.role).toBe('the priest');
+    expect(npc.memberships).toEqual(PRIEST.memberships);
+    // and nothing of the DM's: the rest of the card is 205's allowlist
+    for (const k of ['goal', 'secret', 'power']) expect(k in npc, k).toBe(false);
+  });
+
+  it('an unveiled face with one public and one hidden membership comes out with exactly the public one', async () => {
+    const npc = (await sanitizeV({ npcs: [MAGISTRATE] })).npcs[0];
+    expect(npc.institution.key).toBe('Multiple court buildings');
+    expect(npc.memberships).toEqual([{ power: 'The Crown', rank: 1, share: 0.6, veiled: false }]);
+    expect(JSON.stringify(npc)).not.toContain('The Quiet Hand');
+    expect(JSON.stringify(npc)).not.toContain('The Old Guard');
+    // a memberships that is not an array is dropped whole (fail-closed)
+    const odd = (await sanitizeV({ npcs: [{ ...MAGISTRATE, memberships: { power: 'The Quiet Hand' } }] })).npcs[0];
+    expect('memberships' in odd).toBe(false);
+    expect(odd.institution.key).toBe('Multiple court buildings');
+  });
+
+  it('a row without the bit (born before the fix) is stripped — fail-closed', async () => {
+    const npc = (await sanitizeV({ npcs: [UNSTAMPED] })).npcs[0];
+    expect(npc.name).toBe('Ada Miller');
+    for (const k of ['institution', 'title', 'role', 'memberships']) expect(k in npc, k).toBe(false);
+  });
+
+  it('a pre-car NPC row is unchanged by the rule: 205\'s projection, title and role kept', async () => {
+    const npc = (await sanitizeV({ npcs: [PRE_CAR] })).npcs[0];
+    expect(npc).toEqual({ id: 'npc.old_tom', name: 'Old Tom', title: 'Laird', role: 'Blacksmith', category: 'economy',
+      personality: 'wary', physical: 'tall', presentation: 'plain', influence: 'high' });
+  });
+
+  it('a DM\'s person (institution null) keeps its title and role and publishes no memberships', async () => {
+    const npc = (await sanitizeV({ npcs: [DM_PERSON] })).npcs[0];
+    expect(npc.title).toBe('Captain');
+    expect(npc.role).toBe('Captain');
+    expect('institution' in npc).toBe(false);
+    expect('memberships' in npc).toBe(false);
+  });
+
+  it('a roster member under powerStructure.factions[].members obeys the same rule', async () => {
+    const out = await sanitizeV({ powerStructure: { factions: [{ faction: 'The Parish', power: 10, members: [PRIEST, INFILTRATOR] }] } });
+    const [priest, infiltrator] = out.powerStructure.factions[0].members;
+    expect(priest.institution).toEqual(PRIEST.institution);
+    expect(priest.memberships).toEqual(PRIEST.memberships);
+    expect(priest.title).toBe('the priest');
+    for (const k of ['institution', 'title', 'role', 'memberships']) expect(k in infiltrator, k).toBe(false);
+  });
+
+  it('client == server, field for field, on every card and both paths (the publicSafe.js twin)', async () => {
+    const { toPublicSafe } = await import('../../src/domain/display/publicSafe.js');
+    const record = { name: 'Riverbend', npcs: ALL, powerStructure: { factions: [{ faction: 'The Parish', power: 10, members: ALL }] } };
+    const server = await sanitizeV(record);
+    const client = JSON.parse(JSON.stringify(toPublicSafe(record)));
+    expect(client.npcs).toEqual(server.npcs);
+    expect(client.powerStructure.factions[0].members).toEqual(server.powerStructure.factions[0].members);
+    // anchored: the server output is not vacuous — the priest's house rides, the infiltrator's does not
+    expect(server.npcs.find((n) => n.id === PRIEST.id).institution.key).toBe('Parish church');
+    expect(server.npcs.find((n) => n.id === INFILTRATOR.id).name).toBe('Wendel Ashby');
+  });
+});

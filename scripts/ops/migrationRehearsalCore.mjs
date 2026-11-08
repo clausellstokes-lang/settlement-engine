@@ -16,7 +16,7 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { basename, join } from 'node:path';
 
 export const MIGRATION_TRAIN_BASE_HEAD = 121;
-export const MIGRATION_TRAIN_REPO_HEAD = 205;
+export const MIGRATION_TRAIN_REPO_HEAD = 206;
 
 const FORWARD_ONLY_REASON = [
   'No automatic schema rollback is admitted for this wave.',
@@ -668,6 +668,38 @@ export const MIGRATION_WAVES = Object.freeze([
         + 'documented-manual-reversal rather than taking the wave policy. Nothing is destroyed '
         + 'on reversal: the function holds no state and no row was minted; the only consequence '
         + 'is that the three retired keys project publicly again, exactly as today.',
+      ].join(' '),
+    }),
+    expectedObjects: Object.freeze([
+      Object.freeze({ kind: 'function', name: '_gallery_sanitize_public_json' }),
+    ]),
+  }),
+  Object.freeze({
+    id: 'public-card-veil-bit',
+    from: 206,
+    to: 206,
+    purpose: 'FIX-PUBLIC-VEIL (the chair\'s ruling of 2026-11-07, shape (a)): every writer of a card\'s '
+      + '`institution` stamps `institution.veiled` at birth from one predicate (src/domain/people/cardVeil.js), '
+      + 'and the public dossier sanitizer reads the bit. ONE re-stated function: '
+      + 'public._gallery_sanitize_public_json is 205\'s body VERBATIM outside two new constants '
+      + '(npc_house_keys, npc_house_named), two locals and the per-row house rule — an NPC object\'s '
+      + '`institution` and `memberships` are public only where `institution.veiled` is false, and a face '
+      + 'whose `institution` is an object with the bit true or absent loses `title` and `role` '
+      + '(fail-closed). A card with no institution object projects exactly as at 205. It creates no '
+      + 'table, no column, no policy and no row, and re-points get_gallery_dossier, get_unlisted_dossier, '
+      + 'import_gallery_dossier and _gallery_apply_member_overrides (093) by name with no signature '
+      + 'change and no re-grant. DEPLOYMENT remains the owner\'s manual act after 205 (`supabase db '
+      + 'push` plus the applied-head bump in that same act).',
+    rollback: Object.freeze({
+      mode: 'forward-only',
+      reason: [
+        FORWARD_ONLY_REASON,
+        'Like 202, 203 and 205, this wave is one re-stated function and its own @rollback annotation '
+        + 'spells the whole reversal out: recreate 205\'s body verbatim, i.e. the same function without '
+        + 'the two house constants and the per-row rule — which is why 206 classifies as '
+        + 'documented-manual-reversal rather than taking the wave policy. Nothing is destroyed on '
+        + 'reversal: the function holds no state and no row was minted; the only consequence is that '
+        + 'every face\'s title and role project publicly again and no face\'s institution or memberships do.',
       ].join(' '),
     }),
     expectedObjects: Object.freeze([

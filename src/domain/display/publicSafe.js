@@ -115,7 +115,7 @@ export const PRIVATE_KEY_RE = /(secret|private|\bdm|\bgm|guidance|dossierNotes|t
 
 // ── Public NPC field allowlist ──────────────────────────────────────────────
 // Character-identical (order-independent) to the SQL npc_allowed array in
-// _gallery_sanitize_public_json (033, recreated net-current through 205) and to
+// _gallery_sanitize_public_json (033, recreated net-current through 206) and to
 // the publicNpc() object literal below. KEEP publicNpc a plain object literal —
 // tests/security/gallerySanitizer.pglite.test.js parses that literal by regex
 // and pins it to the SQL npc_allowed; this constant is behaviourally pinned to
@@ -124,13 +124,71 @@ export const PRIVATE_KEY_RE = /(secret|private|\bdm|\bgm|guidance|dossierNotes|t
 // Used by sanitizePublicValue to reduce ROSTER member records — see the member
 // gate there (migration 189 twin). Migration 205 drops 'factionAffiliation' and
 // 'secondaryAffiliation', the people car's retired per-NPC faction fields (a card's
-// standing in the powers is its `memberships`, which is not public); the card's
-// `institution` and `memberships` stay off this list until the chair rules how a
-// hidden or criminal house is told apart per row (docs/FIX_EXPORT_KEYS_2026-11-07.md §3).
+// standing in the powers is its `memberships`). The card's `institution` and
+// `memberships` are NOT on this list: they are public PER ROW, by the veil bit
+// (NPC_HOUSE_KEYS below, migration 206).
 export const NPC_PUBLIC_KEYS = Object.freeze([
   'id', 'name', 'role', 'title', 'category', 'personality', 'physical',
   'presentation', 'influence',
 ]);
+
+// ── THE VEIL BIT (FIX-PUBLIC-VEIL, migration 206 twin) ─────────────────────
+// The chair's ruling of 2026-11-07, shape (a): every writer of a card's
+// `institution` stamps `institution.veiled: true | false` at birth from ONE
+// predicate (src/domain/people/cardVeil.js — the gallery veil's hideable house,
+// a hidden or criminal power for a minted face). This projection READS the bit
+// and never re-derives it:
+//   • `veiled === false` — the house is public: NPC_HOUSE_KEYS (`institution`,
+//     `memberships`) join the card, and `title`/`role` stay; each membership rides
+//     only where its OWN `veiled` is false (the same law per entry);
+//   • the card carries an `institution` RECORD with the bit true or ABSENT (a
+//     card born before the fix) — fail-closed: NPC_HOUSE_KEYS stay off and
+//     NPC_HOUSE_NAMED_KEYS (`title`, `role` — the face's title, "the bloc's
+//     speaker" for the hidden infiltrator's mint) are stripped too: the bare name;
+//   • no `institution` record (a pre-car card, a DM's person, `institution: null`)
+//     — untouched: today's NPC_PUBLIC_KEYS, nothing of a house to name.
+// Character-identical to the SQL npc_house_keys / npc_house_named arrays in
+// _gallery_sanitize_public_json (206); pinned by gallerySanitizer.pglite.test.js.
+export const NPC_HOUSE_KEYS = Object.freeze(['institution', 'memberships']);
+export const NPC_HOUSE_NAMED_KEYS = Object.freeze(['title', 'role']);
+
+/** @param {unknown} v @returns {v is Record<string, unknown>} */
+const isRecordValue = (v) => !!v && typeof v === 'object' && !Array.isArray(v);
+
+/**
+ * The veil bit's reading for one NPC object: 'public' (stamped false), 'veiled'
+ * (an institution record stamped true or not stamped), or 'none' (no record).
+ * @param {Record<string, unknown>} npc @returns {'public' | 'veiled' | 'none'}
+ */
+function houseVeilOf(npc) {
+  const inst = npc.institution;
+  if (!isRecordValue(inst)) return 'none';
+  return inst.veiled === false ? 'public' : 'veiled';
+}
+
+/**
+ * THE SAME LAW PER ENTRY (the chair's second ruling; 206 twin): the memberships a public house's
+ * face publishes are the entries stamped `veiled: false` — a membership in a hidden or criminal
+ * power, or an unstamped one, is dropped; a non-array is dropped whole (undefined). Order kept.
+ * @param {unknown} memberships @returns {unknown[] | undefined}
+ */
+function publicMembershipsOf(memberships) {
+  if (!Array.isArray(memberships)) return undefined;
+  return memberships.filter((m) => isRecordValue(m) && m.veiled === false);
+}
+
+/**
+ * Is `key` public on this NPC object? NPC_PUBLIC_KEYS, less NPC_HOUSE_NAMED_KEYS on a
+ * veiled card, plus NPC_HOUSE_KEYS on a public one. The roster-member gate and
+ * publicCard below share it, as the SQL's one is_npc_obj arm does.
+ * @param {Record<string, unknown>} npc @param {string} key @returns {boolean}
+ */
+function isNpcKeyPublic(npc, key) {
+  const veil = houseVeilOf(npc);
+  if (NPC_HOUSE_KEYS.includes(key)) return veil === 'public';
+  if (NPC_HOUSE_NAMED_KEYS.includes(key) && veil === 'veiled') return false;
+  return NPC_PUBLIC_KEYS.includes(key);
+}
 
 /**
  * Recursively strip denied keys from a subtree; preserves history.currentTensions.
@@ -184,12 +242,14 @@ export function sanitizePublicValue(value, path = []) {
     const childPath = [...path, key];
     if (PRIVATE_KEY_RE.test(key)) continue;
     if (childPath.includes('npcs') && ['goal', 'secret', 'plotHooks', 'relationships'].includes(key)) continue;
-    if (isFactionMember && !NPC_PUBLIC_KEYS.includes(key)) continue;
+    if (isFactionMember && !isNpcKeyPublic(/** @type {Record<string, unknown>} */ (value), key)) continue;
     if (childPath.includes('history') && key === 'currentTensions') {
       out[key] = sanitizePublicValue(child, childPath);
       continue;
     }
-    const sanitized = sanitizePublicValue(child, childPath);
+    let sanitized = sanitizePublicValue(child, childPath);
+    // 206 twin: a roster member's memberships, entry by entry, as the npcs[] projection's
+    if (isFactionMember && key === 'memberships') sanitized = publicMembershipsOf(sanitized);
     if (sanitized !== undefined) out[key] = sanitized;
   }
   return out;
@@ -229,6 +289,25 @@ function publicNpc(npc) {
     presentation: npc.presentation,
     influence: npc.influence,
   };
+}
+
+/**
+ * THE PUBLIC CARD (206 twin): publicNpc's allowlist, then the veil bit's per-row rule —
+ * a public house adds `institution` and `memberships` (where the card carries them);
+ * a veiled card loses `title` and `role`. A card with no `institution` record is
+ * publicNpc's projection exactly.
+ * @param {Record<string, unknown>} npc
+ */
+function publicCard(npc) {
+  /** @type {Record<string, unknown>} */
+  const out = publicNpc(npc);
+  for (const key of NPC_HOUSE_NAMED_KEYS) if (!isNpcKeyPublic(npc, key)) delete out[key];
+  for (const key of NPC_HOUSE_KEYS) {
+    if (!isNpcKeyPublic(npc, key) || !Object.prototype.hasOwnProperty.call(npc, key)) continue;
+    const value = key === 'memberships' ? publicMembershipsOf(npc[key]) : npc[key];
+    if (value !== undefined) out[key] = value;
+  }
+  return out;
 }
 
 /**
@@ -392,7 +471,7 @@ export function toPublicSafe(settlement, { full = false, memberOverrides = null 
     if (sanitized !== undefined) clean[key] = sanitized;
   }
   if (Array.isArray(clean.npcs)) {
-    clean.npcs = clean.npcs.map(publicNpc).filter(npc => npc.name || npc.role);
+    clean.npcs = clean.npcs.map(publicCard).filter(npc => npc.name || npc.role);
   }
   result = clean;
   }
@@ -422,7 +501,7 @@ export function toPublicSafe(settlement, { full = false, memberOverrides = null 
         const key = galleryMemberKey(npc);
         const ov = overrides[key];
         const effReveal = ov && typeof ov.revealDm === 'boolean' ? ov.revealDm : full;
-        return effReveal ? (fullByKey.get(key) || npc) : publicNpc(npc);
+        return effReveal ? (fullByKey.get(key) || npc) : publicCard(npc);
       })
       .filter(npc => npc.name || npc.role);
   }
