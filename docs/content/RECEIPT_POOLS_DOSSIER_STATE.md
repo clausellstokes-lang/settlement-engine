@@ -826,7 +826,7 @@ the access.
 
 **COMBINATION C4: a low rung on a working approach**
 1. `[ledger · colour]` Traffic moves through {settlement}'s {access} every day, and little of the money stays. The market tolls bring in less than the town spends, so the coffers stay short.
-2. `[street]` The {access} into {settlement} is busy and the town is poor. That is the first complaint a visitor hears, and the one they hear most.
+2. `[street]` The way into {settlement} is busy and the town is poor. That is the first complaint a visitor hears, and the one they hear most.
 3. `[visitor · market]` More goods come off the {access} at {settlement} than are ever sold there. The traffic is busy and the town stays poor.
 
 **COMBINATION C5: a low rung on a narrow approach**
@@ -6768,10 +6768,10 @@ analogy. No variant carries a digit, an em dash or an exclamation point.*
 3. `[street]` No market or fair stands in {settlement}: what trade the town does is done house to house and on the road.
 
 **`COMMERCE: a bank`** *(the commercial houses on the live roster, `compound.inst`: `hasBank`)*
-1. `[visitor · colour]` A merchant passing through {settlement} can change coin, borrow or settle a debt at the town's bank without carrying the silver home.
+1. `[visitor · colour]` A traveller passing through {settlement} can change coin, borrow or settle a debt at the town's bank without carrying the silver home.
 2. `[ledger · colour]` {settlement}'s larger dealings, from cargoes to building work, are paid for through its bank.
 3. `[street · colour]` Townsfolk at {settlement} keep their savings at the bank and go there when they need to borrow.
-4. `[threshold · colour]` A trader wanting credit at {settlement} has to satisfy the bank about who they are before it lends.
+4. `[threshold · colour]` A trader wanting credit at {settlement} must satisfy the bank about who they are before it lends.
 
 **`COMMERCE: a merchant guild, no bank`** *(`hasMerchantGuild`, not `hasBank`)*
 1. `[visitor · colour]` A merchant who wants to sell at {settlement} goes first to its merchant guild to learn where, when and for what fee.

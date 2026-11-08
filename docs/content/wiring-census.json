@@ -2,7 +2,7 @@
   "schema": "wiring-census/1",
   "stamp": {
     "files": {
-      "src/domain/display/stateProse/generalStateProse.js": "88665e91116f258996473915208e51e0c391f71886771ac4110e1343e9f62b5a",
+      "src/domain/display/stateProse/generalStateProse.js": "dd46142547f9877c9df953d83c4845e35a75a192addc449f468d1d07dac0c540",
       "src/domain/display/stateProse/powerStateProse.js": "af9935cf52a1efb0c55a292538334d4f239b916ad92b01898a51e53f780fa8af",
       "src/domain/display/stateProse/economyStateProse.js": "4338681a6ebb687315187094bf06893b8d07b3b8a9d7a4c4f03f5eea2c01d3bb",
       "src/domain/display/stateProse/defenseStateProse.js": "27538b1c57b2a0afd445d348027c92e047973e442c0cbfd4b8665df48383dea0",
@@ -49,7 +49,7 @@
     "objectClassed": 112,
     "mountedRows": 726,
     "absent": {
-      "measured": 582,
+      "measured": 583,
       "default": 3,
       "not-produced": 71,
       "method-call": 18
@@ -30131,11 +30131,17 @@
           "field": "readings.inst.hasMerchantGuild",
           "op": "===",
           "value": "true"
+        },
+        {
+          "field": "readings.inst.hasGuild",
+          "op": "===",
+          "value": "true"
         }
       ],
       "branchReads": [
         "readings.inst",
         "readings.inst.hasBank",
+        "readings.inst.hasGuild",
         "readings.inst.hasMerchantGuild"
       ],
       "fieldsRead": [
@@ -30152,6 +30158,7 @@
       "reads": [
         "readings.inst",
         "readings.inst.hasBank",
+        "readings.inst.hasGuild",
         "readings.inst.hasMerchantGuild"
       ],
       "readsGrain": "branch",
@@ -30159,6 +30166,7 @@
       "absent": {
         "readings.inst": "measured",
         "readings.inst.hasBank": "measured",
+        "readings.inst.hasGuild": "measured",
         "readings.inst.hasMerchantGuild": "measured"
       },
       "covert": false,
@@ -30171,7 +30179,7 @@
         "overview.market"
       ],
       "attach": [],
-      "k": 0,
+      "k": -1,
       "rateBp": null,
       "departure": null,
       "source": {
@@ -30180,6 +30188,7 @@
         "fields": {
           "readings.inst": "",
           "readings.inst.hasBank": "",
+          "readings.inst.hasGuild": "",
           "readings.inst.hasMerchantGuild": ""
         },
         "holder": null,
@@ -55187,10 +55196,11 @@
     {
       "fact": "readings.inst.hasGuild",
       "pools": [
+        "DS-GEN-13 :: COMMERCE: a merchant guild, no bank",
         "DS-GEN-13 :: COMMERCE: craft guilds, no merchant guild"
       ],
-      "variants": 4,
-      "grammars": 2,
+      "variants": 8,
+      "grammars": 3,
       "blocks": [
         "DS-GEN-13"
       ]
@@ -58638,7 +58648,7 @@
       "spines": 9,
       "facts": 9,
       "spinesReachedBp": 10000,
-      "meanReachBp": 6543
+      "meanReachBp": 6420
     },
     {
       "block": "DS-GEN-14",
@@ -61325,7 +61335,7 @@
       "spines": 9,
       "facts": 9,
       "spinesReachedBp": 10000,
-      "meanReachBp": 6543,
+      "meanReachBp": 6420,
       "byFact": [
         {
           "field": "readings",
@@ -61364,7 +61374,6 @@
             "ENTREPOT",
             "NO-MARKET",
             "COMMERCE: a bank",
-            "COMMERCE: a merchant guild, no bank",
             "WAREHOUSES"
           ]
         },
@@ -63230,11 +63239,11 @@
       ],
       [
         -1,
-        17
+        18
       ],
       [
         0,
-        44
+        43
       ],
       [
         1,
@@ -63278,11 +63287,11 @@
         ],
         [
           -1,
-          17
+          18
         ],
         [
           0,
-          44
+          43
         ],
         [
           1,
@@ -63314,7 +63323,7 @@
         "DS-SUP-2",
         "DS-WAR-3"
       ],
-      "readPaths": 848,
+      "readPaths": 849,
       "modifierEligibleFactsByTab": [
         [
           "economics",
@@ -63832,7 +63841,7 @@
       "fields": {
         "LICENSED": 234,
         "OFFICE": 5,
-        "SOURCE-UNRESOLVED": 849
+        "SOURCE-UNRESOLVED": 850
       },
       "byKind": [
         [
@@ -63877,7 +63886,7 @@
         ]
       ],
       "unresolvedGrounds": {
-        "no-mapping": 849,
+        "no-mapping": 850,
         "no-institution-in-roster": 0
       },
       "twoSourceRows": 10,
@@ -70302,7 +70311,8 @@
       "block": "DS-GEN-13",
       "subject": "COMMERCE: a merchant guild, no bank",
       "fields": [
-        "readings.inst.hasMerchantGuild"
+        "readings.inst.hasMerchantGuild",
+        "readings.inst.hasGuild"
       ],
       "readingFunction": "commercePoolKey",
       "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
