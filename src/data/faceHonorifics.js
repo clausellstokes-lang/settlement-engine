@@ -255,6 +255,88 @@ export const FACE_HONORIFICS_INLAND = Object.freeze({
   "the harbour master": ["Dockmaster", "Wharfinger"],
 });
 
+/**
+ * THE CULTURE'S OWN WORD FOR THE OFFICE (WAVE-RULINGS item 14, the owner's word of 2026-11-08: "Yeah do
+ * those before deploy"): the cultural honorific ('Jarl', 'Druid', the old role vocabulary of
+ * data/namingData.js) that fell off the card when role became title returns HERE, as a culture-keyed
+ * pool beside the registry's — never a second role field, never written onto a card. Keyed by the
+ * canonical culture (data/worldFactOptions.js :: CULTURES), then by the face's title; for the
+ * LEADERSHIP, FAITH and WARDEN titles only, and only where the culture holds a real period form of
+ * that office (in the old role vocabulary or in standard English usage). A culture's pool REPLACES the
+ * registry's for that title on a settlement of that culture; a culture or title not named here reads
+ * the registry ('mixed' and an unknown culture included). East-Asian names none: no form of its offices
+ * passes the rule, so the registry stands. Display-only, no draw, no golden moves.
+ * @type {Readonly<Record<string, Readonly<Record<string, readonly Honorific[]>>>>}
+ */
+export const FACE_HONORIFICS_BY_CULTURE = Object.freeze({
+  germanic: Object.freeze({
+    "the mayor": ["Burgomaster"],
+  }),
+  latin: Object.freeze({
+    "the lord": [{ male: "Dominus", female: "Domina" }],
+    "the high priest": ["Pontifex"],
+    "the watch captain": ["Tribune"],
+    "the watch commander": ["Prefect"],
+    "the garrison commander": ["Prefect"],
+  }),
+  celtic: Object.freeze({
+    "the headman": ["Chieftain"],
+    "the priest": ["Druid"],
+    "the elder priest": ["Druid"],
+    "the high priest": ["Druid"],
+  }),
+  arabic: Object.freeze({
+    "the eldest": ["Sheikh"],
+    "the village elder": ["Sheikh"],
+    "the headman": ["Sheikh"],
+    "the lord": ["Emir"],
+    "the governor": ["Wali"],
+    "the royal governor": ["Wali"],
+    "the priest": ["Imam"],
+    "the elder priest": ["Imam"],
+    "the garrison commander": ["Qaid"],
+  }),
+  norse: Object.freeze({
+    "the lord": ["Jarl"],
+    "the headman": ["Jarl"],
+    "the priest": [{ male: "Godi", female: "Gydja" }],
+    "the elder priest": [{ male: "Godi", female: "Gydja" }],
+    "the high priest": [{ male: "Godi", female: "Gydja" }],
+  }),
+  slavic: Object.freeze({
+    "the eldest": ["Starosta"],
+    "the village elder": ["Starosta"],
+    "the headman": ["Starosta"],
+    "the lord": [{ male: "Boyar", female: "Boyarina" }],
+    "the war-leader": ["Voivode"],
+    "the commander": ["Voivode"],
+    "the garrison commander": ["Voivode"],
+    "the governor": ["Voivode"],
+  }),
+  mesoamerican: Object.freeze({
+    "the lord": ["Tlatoani"],
+    "the monarch": ["Huey Tlatoani"],
+    "the priest": ["Tlamacazqui"],
+  }),
+  south_asian: Object.freeze({
+    "the headman": ["Mukhiya"],
+    "the lord": [{ male: "Raja", female: "Rani" }],
+    "the monarch": [{ male: "Maharaja", female: "Maharani" }],
+    "the priest": ["Purohit"],
+  }),
+  steppe: Object.freeze({
+    "the lord": [{ male: "Khan", female: "Khatun" }],
+    "the war-leader": ["Noyan"],
+    "the occupying governor": ["Darughachi"],
+    "the priest": ["Shaman"],
+  }),
+  greek: Object.freeze({
+    "the mayor": ["Archon"],
+    "the commander": ["Strategos"],
+    "the high priest": ["Hierophant"],
+  }),
+});
+
 /** The seat mint's fallback title, "the head of <power>" (mintTitles.js :: headOf). */
 const HEAD_OF = /^the head of (.+)$/i;
 
