@@ -7,7 +7,12 @@
  *
  * ── ⭐⭐ EIGHT IDENTITY DEFINITIONS LIVE HERE, AND ONLY ONE IS THE AUTHORITY ──
  *
- * `BASELINE_SCHEMA` is **33**: schema 32's tagged numeric heuristic-leaf envelope, tag law and roster,
+ * `BASELINE_SCHEMA` is **34**: schema 33's tagged numeric heuristic-leaf envelope, tag law, roster and corpus
+ * definition UNCHANGED, re-governed to THE HIDDEN ALLEGIANCE (ALLEGIANCE-CAR1, 2026-11-08): the retired corrupt mark
+ * leaves the birth record and the card's `allegiance` comes in. Its full rationale lives beside
+ * `ALLEGIANCE_TARGET_SCHEMA` in `migrate-observed-shape-readers.mjs`.
+ *
+ * `RETIRED_VEIL_MERGE_BASELINE_SCHEMA` is **33**: schema 32's tagged numeric heuristic-leaf envelope, tag law and roster,
  * re-governed to THE VEIL MERGED OVER MERGE-CAR (ALLEGIANCE-CAR1, 2026-11-08): FIX-PUBLIC-VEIL's two rungs
  * (the infiltrated topology, producer 1b′, and the veiled-id re-deal) composed at the merged tree as one
  * rung; the corpus definition gains 1b′. Its full rationale lives beside `VEIL_MERGE_TARGET_SCHEMA` in
@@ -521,7 +526,10 @@ export const RETIRED_PEOPLE_LANDING_BASELINE_SCHEMA = 31;
  *  fence; schema 33 re-governs it to the veil merged over MERGE-CAR and adds producer 1b′ to the corpus
  *  definition. Never redefined, never deleted, so a schema-32 PREDECESSOR is still validated as schema 32. */
 export const RETIRED_CAR_MERGE_BASELINE_SCHEMA = 32;
-export const BASELINE_SCHEMA = 33;
+/** The RETIRED veil-merge definition — schema 34's predecessor. Never redefined, never deleted, so a schema-33
+ *  PREDECESSOR is still validated as schema 33. */
+export const RETIRED_VEIL_MERGE_BASELINE_SCHEMA = 33;
+export const BASELINE_SCHEMA = 34;
 /** The RETIRED exact per-site definition. Never redefined, never deleted. */
 export const RETIRED_EXACT_BASELINE_SCHEMA = 3;
 /** The RETIRED UNFILTERED heuristic-leaf definition — schema 5's predecessor.
@@ -1236,10 +1244,20 @@ export function validateSchema32Baseline(baseline) {
   );
 }
 
+/** The RETIRED authority — schema 33's tagged envelope (the veil merged over MERGE-CAR), re-governed by schema 34 to
+ *  the hidden allegiance. Re-bound to its own LITERAL now that the authority has moved to 34. */
+export function validateSchema33Baseline(baseline) {
+  return validateLeafBaseline(
+    baseline,
+    RETIRED_VEIL_MERGE_BASELINE_SCHEMA,
+    { tagged: true },
+  );
+}
+
 /** The LIVE envelope validator. Bound to `BASELINE_SCHEMA` rather than a literal,
  *  so the retired rungs above keep validating their own numbers while this one
  *  always names the authority. */
-export function validateSchema33Baseline(baseline) {
+export function validateSchema34Baseline(baseline) {
   return validateLeafBaseline(baseline, BASELINE_SCHEMA, { tagged: true });
 }
 
