@@ -7,14 +7,14 @@
    "reads": [
     "corrupt"
    ],
-   "reason": "compromisedSecurityInstitutions: the covert stooge's home institution, read only by the simulation (worldPulse/causeVocabulary.js, npcAgency.js and the espionage gauntlet through patronageSecurityDrag); corruption.js is an EAGER first-paint module, so it does not import the allegiance reader (its module graph carries the catalog). Its in-file npcHomeInstitution is FPZ's (fpz-list.json). Re-point to allegianceOf when FPZ rebuilds the simulation's corruption loop (M-6)."
+   "reason": "compromisedSecurityInstitutions: the covert stooge's home institution, read only by the simulation — MEASURED at the car: every executing caller is the pulse's, none in a birth or an edit (worldPulse/causeVocabulary.js, npcAgency.js and the espionage gauntlet through patronageSecurityDrag); corruption.js is an EAGER first-paint module, so it does not import the allegiance reader (its module graph carries the catalog). Its in-file npcHomeInstitution is FPZ's (fpz-list.json). Re-point to allegianceOf when FPZ rebuilds the simulation's corruption loop (M-6)."
   },
   {
    "file": "src/domain/corruptionLeash.js",
    "reads": [
     "corruptTies"
    ],
-   "reason": "resolveLeash's LEGACY ARM: a card with no allegiance reads the `corruptTies` the frozen simulation itself writes (npcVerdictTable.js, the betrayal seed), so the simulation's behaviour is untouched; the allegiance arm (allegianceOf) is read first. The legacy arm leaves when FPZ rebuilds the simulation's corruption loop (M-6)."
+   "reason": "resolveLeash's LEGACY ARM: a card with no allegiance reads the `corruptTies` the frozen simulation itself writes (npcVerdictTable.js, the betrayal seed), so the simulation's behaviour is untouched (MEASURED at the car: the arm executes on the pulse path only, never in a birth or an edit); the allegiance arm (allegianceOf) is read first. The legacy arm leaves when FPZ rebuilds the simulation's corruption loop (M-6)."
   },
   {
    "file": "src/domain/worldPulse/applyWorldPulseBetrayal.js",
