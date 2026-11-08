@@ -191,10 +191,12 @@ describe('the composed-prose manifest — the DRIFT corpus, both audiences', () 
     // Towns unmoved at 516/3/3/3.
     // 67,674 -> 67,802 (380/368/358 -> 378/366/358) at MERGE-CAR RECORD A, THE RUNG-2 LANDING'S MERGE (ODQ §934.105, THE INTEGRATION LANDING, 2026-11-08; record docs/shift-records/2026-11-08-merge-car-a-rung2-composition.json), against the carried car figures.
     // Towns unmoved at 516/3/3/3.
+    // 67,802 -> 67,674 (378/366/358 -> 380/368/358) at MERGE-CAR RECORD B, THE PEOPLE CAR'S MERGE (ODQ §934.105, THE INTEGRATION LANDING, 2026-11-08; record docs/shift-records/2026-11-08-merge-car-b-people-car-composition.json).
+    // Towns unmoved at 516/3/3/3.
     expect(tally, 'the DRIFT corpus by seed, cells and towns').toEqual({
-      'golden-master-v3': { cells: 67_802, towns: 516 },
-      'gm-seed-a': { cells: 378, towns: 3 },
-      'gm-seed-b': { cells: 366, towns: 3 },
+      'golden-master-v3': { cells: 67_674, towns: 516 },
+      'gm-seed-a': { cells: 380, towns: 3 },
+      'gm-seed-b': { cells: 368, towns: 3 },
       'gm-seed-c': { cells: 358, towns: 3 },
     });
     // The two halves must close against the figures every other arm here reads.
