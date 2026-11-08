@@ -7,7 +7,14 @@
  *
  * ── ⭐⭐ EIGHT IDENTITY DEFINITIONS LIVE HERE, AND ONLY ONE IS THE AUTHORITY ──
  *
- * `BASELINE_SCHEMA` is **32**: schema 31's tagged numeric heuristic-leaf envelope, tag law and roster
+ * `BASELINE_SCHEMA` is **33**: schema 32's tagged numeric heuristic-leaf envelope, tag law, roster and
+ * corpus definition UNCHANGED, re-governed to THE VEILED-ID RE-DEAL (FIX-PUBLIC-VEIL's second seat, the
+ * chair's ruling of 2026-11-08, option (B)): a veiled face is born with an opaque id, its keyed forks
+ * re-deal, and the corpus's year over the re-dealt cast fires different simulation branches. Every row it
+ * moves is ADMITTED WITH ATTRIBUTION; nothing is declared and the bank holds at 77/51. Its full rationale
+ * lives beside `VEILED_ID_REDEAL_TARGET_SCHEMA` in `migrate-observed-shape-readers.mjs`.
+ *
+ * `RETIRED_INFILTRATED_TOPOLOGY_BASELINE_SCHEMA` is **32**: schema 31's tagged numeric heuristic-leaf envelope, tag law and roster
  * UNCHANGED, re-governed to THE INFILTRATED TOPOLOGY (FIX-PUBLIC-VEIL, the chair's ruling of
  * 2026-11-07, option (1)): the corpus builder gains producer 1b′, one config × the four seeds
  * generated with the `infiltrated` stress (TOPOLOGY ONLY, never `generated`), so the hidden
@@ -511,7 +518,11 @@ export const RETIRED_PEOPLE_CAST_BASELINE_SCHEMA = 30;
  *  theta, roster and fence; schema 32 re-governs it to the corpus's infiltrated topology.
  *  Never redefined, never deleted, so a schema-31 PREDECESSOR is still validated as schema 31. */
 export const RETIRED_PEOPLE_LANDING_BASELINE_SCHEMA = 31;
-export const BASELINE_SCHEMA = 32;
+/** The RETIRED infiltrated-topology definition — schema 33's predecessor. Same tagged topology envelope,
+ *  theta, roster, corpus definition and fence; schema 33 re-governs it to the veiled-id re-deal.
+ *  Never redefined, never deleted, so a schema-32 PREDECESSOR is still validated as schema 32. */
+export const RETIRED_INFILTRATED_TOPOLOGY_BASELINE_SCHEMA = 32;
+export const BASELINE_SCHEMA = 33;
 /** The RETIRED exact per-site definition. Never redefined, never deleted. */
 export const RETIRED_EXACT_BASELINE_SCHEMA = 3;
 /** The RETIRED UNFILTERED heuristic-leaf definition — schema 5's predecessor.
@@ -1216,10 +1227,20 @@ export function validateSchema31Baseline(baseline) {
   );
 }
 
+/** The RETIRED authority — schema 32's tagged envelope, re-governed by schema 33 to the veiled-id
+ *  re-deal. Re-bound to its own LITERAL now that the authority has moved to 33. */
+export function validateSchema32Baseline(baseline) {
+  return validateLeafBaseline(
+    baseline,
+    RETIRED_INFILTRATED_TOPOLOGY_BASELINE_SCHEMA,
+    { tagged: true },
+  );
+}
+
 /** The LIVE envelope validator. Bound to `BASELINE_SCHEMA` rather than a literal,
  *  so the retired rungs above keep validating their own numbers while this one
  *  always names the authority. */
-export function validateSchema32Baseline(baseline) {
+export function validateSchema33Baseline(baseline) {
   return validateLeafBaseline(baseline, BASELINE_SCHEMA, { tagged: true });
 }
 

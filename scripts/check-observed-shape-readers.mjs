@@ -105,11 +105,12 @@ import {
   RETIRED_MIGRATION_DIRECTION_BASELINE_SCHEMA,
   RETIRED_PEOPLE_CAST_BASELINE_SCHEMA,
   RETIRED_PEOPLE_LANDING_BASELINE_SCHEMA,
+  RETIRED_INFILTRATED_TOPOLOGY_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA,
   RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
-  validateSchema32Baseline,
+  validateSchema33Baseline,
 } from './lib/observed-shape-baseline.mjs';
 import {
   parseExactFlags,
@@ -247,7 +248,11 @@ const BASELINE = join(ROOT, 'scripts/.observed-shape-readers-baseline.json');
  *     (FIX-PUBLIC-VEIL, the chair's ruling of 2026-11-07, option (1)): the corpus builder's producer
  *     1b′ generates one config × the four seeds with the `infiltrated` stress (topology only), so the
  *     hidden power that stress writes is observed; every identity it reveals ADMITTED with
- *     attribution; nothing declared, the bank 77/51. THE LIVE AUTHORITY.
+ *     attribution; nothing declared, the bank 77/51 (RETIRED).
+ * 33 = schema 32's topology envelope, tag law, roster and corpus definition, re-governed to THE VEILED-ID
+ *     RE-DEAL (FIX-PUBLIC-VEIL's second seat, the chair's ruling of 2026-11-08, option (B)): a veiled face is
+ *     born with an opaque id and its keyed forks re-deal; the rows the corpus's year then moves are
+ *     ADMITTED with attribution; nothing declared, the bank 77/51. THE LIVE AUTHORITY.
  * ⚠ THIS LIST WENT STALE FOR EIGHT RUNGS — it marked 10 as "THE LIVE AUTHORITY" while
  *   the number stood at 18 — so it is filled in here rather than extended by one. Each
  *   rung's full rationale lives beside its own target constant in
@@ -275,6 +280,7 @@ export {
   RETIRED_MIGRATION_DIRECTION_BASELINE_SCHEMA,
   RETIRED_PEOPLE_CAST_BASELINE_SCHEMA,
   RETIRED_PEOPLE_LANDING_BASELINE_SCHEMA,
+  RETIRED_INFILTRATED_TOPOLOGY_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA, RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
@@ -1586,7 +1592,7 @@ export function assertExplainedWriterRowTags(
   baseline,
   entries = EXPLAINED_WRITER_EXEMPTIONS,
 ) {
-  validateSchema32Baseline(baseline);
+  validateSchema33Baseline(baseline);
   assertExplainedWriterExemptions(entries);
   const declarations = new Map(entries.map((entry) => [entry.identity, entry]));
   const genesis = baseline.frozenAtSha === baseline.migrationReview.subjectSha;
@@ -3095,10 +3101,14 @@ export function baselineOf({
       'per-NPC faction fields leave the record at the v2 boundary (M-2, M-7). A NEW GENESIS from a restored',
       'consistent schema-30 predecessor; every new row ADMITTED with attribution by lane cause, the',
       'migration\'s v1 reads one review class (v1-migration-reads); nothing is declared and the bank holds at 77/51 (RETIRED).',
-      'SCHEMA 32 = schema 31\'s topology envelope, tag law and roster, re-governed to THE INFILTRATED TOPOLOGY',
+      'SCHEMA 32 (RETIRED) held schema 31\'s topology envelope, tag law and roster, re-governed to THE INFILTRATED TOPOLOGY',
       '(FIX-PUBLIC-VEIL, the chair\'s ruling of 2026-11-07, option (1)): the corpus builder\'s producer 1b′ generates',
       'one config × the four seeds with the `infiltrated` stress, topology only, so the hidden power that stress',
-      'writes is observed; every identity it reveals ADMITTED with attribution; nothing is declared and the bank holds at 77/51.',
+      'writes is observed; every identity it reveals ADMITTED with attribution; nothing is declared and the bank holds at 77/51 (RETIRED).',
+      'SCHEMA 33 = schema 32\'s topology envelope, tag law, roster and corpus definition, re-governed to THE VEILED-ID RE-DEAL',
+      '(FIX-PUBLIC-VEIL\'s second seat, the chair\'s ruling of 2026-11-08, option (B)): a veiled face is born with an opaque',
+      'id, its keyed forks re-deal, and the rows the corpus\'s year then moves are ADMITTED with attribution; nothing is declared',
+      'and the bank holds at 77/51.',
       'Of the fourteen declared bank entries THIRTEEN bank reads today; `isCriminal on incomeSources`',
       'has banked nothing since schema 17 made its writer observable, and banked is always a',
       `subset of declared. This envelope banks ${bankPhrase(bankOf(inventory, rowTags))}.`,
@@ -3109,7 +3119,7 @@ export function baselineOf({
       'An untagged row means: a guarded read, of a real record rather than browser or language surface,',
       'of a key no writer the corpus runs produces and no declared out-of-corpus writer explains.',
       'A tagged row stays visible as governed explained-writer debt under its numeric ceiling and reason.',
-      'Schemas 4–31 are the RETIRED numeric predecessors.',
+      'Schemas 4–32 are the RETIRED numeric predecessors.',
     ],
     schema: BASELINE_SCHEMA,
     frozen: new Date().toISOString().slice(0, 10),
@@ -3283,7 +3293,7 @@ export async function run(argv = [], overrides = {}) {
     createScanArtifact,
     validateScanArtifact,
     assertFindingSourceEvidence,
-    validateBaseline: validateSchema32Baseline,
+    validateBaseline: validateSchema33Baseline,
     // ⭐ THE BANK FENCE'S TWO HAND-OWNED SIDES, overridable so the sentinel can drive
     // every refusal: the literal module and the migration script's declared post-bank.
     readBankLiteral: readBankLiteralModule,

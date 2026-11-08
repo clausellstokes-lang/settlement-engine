@@ -197,7 +197,13 @@
  *     roster 10 -> 13, the bank 69/45 -> 76/50), and ADMITS the window's other rows with
  *     attribution. Its full rationale lives beside `WINDOW_RUNG1_TARGET_SCHEMA` (RETIRED).
  *
- *   schema 31 -> 32 (LIVE)   the same tagged numeric reconciliation, and THE INFILTRATED TOPOLOGY
+ *   schema 32 -> 33 (LIVE)   the same tagged numeric reconciliation, and THE VEILED-ID RE-DEAL
+ *     (FIX-PUBLIC-VEIL's second seat, the chair's ruling of 2026-11-08, option (B)): a veiled face is born
+ *     with an opaque id, its keyed forks re-deal, and the rows the corpus's year then moves are ADMITTED
+ *     with attribution; nothing is declared and the bank holds at 77/51. Its full rationale lives beside
+ *     `VEILED_ID_REDEAL_TARGET_SCHEMA`.
+ *
+ *   schema 31 -> 32 (RETIRED) the same tagged numeric reconciliation, and THE INFILTRATED TOPOLOGY
  *     (FIX-PUBLIC-VEIL, the chair's ruling of 2026-11-07, option (1)): the corpus builder's producer
  *     1b′ generates one config × the four seeds with the `infiltrated` stress (topology only), so the
  *     hidden power it writes is observed at last. Every identity the new topology reveals is
@@ -323,6 +329,7 @@ import {
   validateSchema29Baseline,
   validateSchema30Baseline,
   validateSchema31Baseline,
+  validateSchema32Baseline,
 } from './lib/observed-shape-baseline.mjs';
 
 export const MIGRATION_REPORT_SCHEMA = 2;
@@ -1410,6 +1417,36 @@ export const PEOPLE_LANDING_TARGET_SCHEMA = 31;
  *  paths every rung moves. This rung lands ratchet-red; its re-freeze lands next. */
 export const INFILTRATED_TOPOLOGY_TARGET_SCHEMA = 32;
 
+/* ⭐⭐ THE SCHEMA 32 → 33 RUNG — THE VEILED-ID RE-DEAL
+ *
+ *  THE CAUSE (FIX-PUBLIC-VEIL's second seat; the chair's ruling of 2026-11-08, option (B)). A veiled
+ *  face's id spelled its house on every public payload (`npc_thieves_guild_chapter`), so it is now BORN
+ *  opaque: `npc_veiled_` + 16 hex of sha256(<record seed>|<slug>) (domain/people/cardVeil.js ::
+ *  veiledCardIdFor). The id keys the face's own forks (`people-faces::`, `people-ties::`,
+ *  `people-hooks::<card id>`), so a veiled face re-deals, and the corpus's year over the re-dealt cast
+ *  fires different simulation branches: the corpus DEFINITION is unchanged, its CONTENT moved (the
+ *  schema-30 shape, 19 rows admitted then).
+ *
+ *  MEASURED, at the subject, through `--scan-only --scan-mode=legacy-leaf` against the committed
+ *  schema-32 register (act 2's report):
+ *
+ *      reads 2,193 → 2,177 · identities 1,545 → 1,537
+ *      NEW 4 · GONE 12 · INCREASED 0 · DECREASED 0 · SAME 1,533
+ *      corpusCompatibility unmoved (seeds 4, configs 4, generations 16, pulseIntervals 12, shapeCount)
+ *
+ *  The 4 NEW are ONE identity, `covert on impairments` (domain/corruption.js, entities/status.js,
+ *  worldPulse/beliefMap.js, worldPulse/institutionStatusLifecycle.js): the corpus's year over the
+ *  re-dealt cast no longer reaches the covert-corruption writer (corruption.js's covert impairment). The
+ *  12 GONE are the lawful shrink of the same re-deal: `nearbyResourcesState on config` (9 files) and
+ *  `resourceHistory on settlement` (3) are now observed, their writers reached.
+ *
+ *  ⛔ EVERY ROW IS ADMITTED WITH ATTRIBUTION (the schema-24 posture), none declared: "the corpus's year
+ *  over the re-dealt veiled cast no longer reaches <writer>".
+ *
+ *  ⭐ THE BANK DOES NOT MOVE: 77 banked reads across 51 tagged addresses. Its delta is the THREE
+ *  bookkeeping paths every rung moves. This rung lands ratchet-red; its re-freeze lands next. */
+export const VEILED_ID_REDEAL_TARGET_SCHEMA = 33;
+
 export const DECLARED_BANK_BY_TARGET = Object.freeze({
   [EXEMPTION_RETIREMENT_TARGET_SCHEMA]: Object.freeze({ bankedReads: 60, taggedRows: 39 }),
   [BANK_FENCE_TARGET_SCHEMA]: Object.freeze({ bankedReads: 60, taggedRows: 39 }),
@@ -1473,6 +1510,9 @@ export const DECLARED_BANK_BY_TARGET = Object.freeze({
   // MEASURED off the committed schema-31 register and the live scan at the subject: no admitted,
   // gone or decreased row is on a declared identity, so the pair cannot move.
   [INFILTRATED_TOPOLOGY_TARGET_SCHEMA]: Object.freeze({ bankedReads: 77, taggedRows: 51 }),
+  // MEASURED off the committed schema-32 register and the live scan at the subject: no moving row is on a
+  // declared identity, so the pair cannot move.
+  [VEILED_ID_REDEAL_TARGET_SCHEMA]: Object.freeze({ bankedReads: 77, taggedRows: 51 }),
 });
 
 /** The declared post-bank of a target, or `null` for a rung that predates the law. */
@@ -2047,6 +2087,14 @@ export const INFILTRATED_TOPOLOGY_SCANNER_DELTA_PATHS = Object.freeze([
   'scripts/migrate-observed-shape-readers.mjs',
 ]);
 
+/** The schema-32 → 33 delta: the THREE bookkeeping paths (the live validator moving to
+ *  `validateSchema33Baseline`, the 32 → 33 bump with the retired-32 constant, this rung). */
+export const VEILED_ID_REDEAL_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
 export const BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS = Object.freeze([
   'package-lock.json',
   'package.json',
@@ -2107,6 +2155,8 @@ const PEOPLE_LANDING_SCANNER_TRANSITION_POLICY =
   'schema-30-to-31-exact-scanner-transition-v1';
 const INFILTRATED_TOPOLOGY_SCANNER_TRANSITION_POLICY =
   'schema-31-to-32-infiltrated-topology-v1';
+const VEILED_ID_REDEAL_SCANNER_TRANSITION_POLICY =
+  'schema-32-to-33-veiled-id-redeal-v1';
 const CORPUS_COVERAGE_SCANNER_TRANSITION_POLICY =
   'schema-7-to-8-exact-scanner-transition-v1';
 const EPOCH_DARK_CORPUS_SCANNER_TRANSITION_POLICY =
@@ -2157,6 +2207,7 @@ export const LEAF_MIGRATION_PREDECESSOR = Object.freeze({
   [PEOPLE_CAST_TARGET_SCHEMA]: MIGRATION_DIRECTION_TARGET_SCHEMA,
   [PEOPLE_LANDING_TARGET_SCHEMA]: PEOPLE_CAST_TARGET_SCHEMA,
   [INFILTRATED_TOPOLOGY_TARGET_SCHEMA]: PEOPLE_LANDING_TARGET_SCHEMA,
+  [VEILED_ID_REDEAL_TARGET_SCHEMA]: INFILTRATED_TOPOLOGY_TARGET_SCHEMA,
 });
 
 /**
@@ -2251,6 +2302,8 @@ const LEAF_PREDECESSOR_VALIDATOR = Object.freeze({
   [PEOPLE_CAST_TARGET_SCHEMA]: validateSchema30Baseline,
   // The schema-32 rung's own predecessor, validated as schema 31 by its retired literal.
   [PEOPLE_LANDING_TARGET_SCHEMA]: validateSchema31Baseline,
+  // The schema-33 rung's own predecessor, validated as schema 32 by its retired literal.
+  [INFILTRATED_TOPOLOGY_TARGET_SCHEMA]: validateSchema32Baseline,
 });
 
 const RETIRED_EXACT_MIGRATION_KIND = `observed-shape-schema-2-to-${RETIRED_EXACT_TARGET_SCHEMA}-migration`;
@@ -2774,6 +2827,14 @@ const SCANNER_TRANSITION_BY_TARGET = new Map([
     // governed execution inputs (the dossier-state prose, the institution service keys, the prose
     // norms, …) by their documented commands after the predecessor was frozen, and the report
     // records that movement for the review's decision.
+    reviewableUnscannedMovement: true,
+  })],
+  [VEILED_ID_REDEAL_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: VEILED_ID_REDEAL_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: VEILED_ID_REDEAL_SCANNER_TRANSITION_POLICY,
+    // TRUE, matching every rung since 8→9: any governed execution input regenerated by its
+    // documented command since the schema-32 freeze is recorded for the review's decision.
     reviewableUnscannedMovement: true,
   })],
   [INFILTRATED_TOPOLOGY_TARGET_SCHEMA, Object.freeze({
@@ -3918,7 +3979,7 @@ export function run(argv = process.argv.slice(2)) {
   // any mismatch into a refusal rather than a silent mode switch.
   const targetSchema = command.targetSchema
     ? Number(command.targetSchema)
-    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : INFILTRATED_TOPOLOGY_TARGET_SCHEMA);
+    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : VEILED_ID_REDEAL_TARGET_SCHEMA);
   if (![RETIRED_EXACT_TARGET_SCHEMA, HEURISTIC_TARGET_SCHEMA, FILTERED_TARGET_SCHEMA,
     SURFACE_FILTERED_TARGET_SCHEMA, BANKED_EXPLAINED_WRITER_TARGET_SCHEMA,
     CORPUS_COVERAGE_TARGET_SCHEMA, EPOCH_DARK_CORPUS_TARGET_SCHEMA,
@@ -3932,8 +3993,9 @@ export function run(argv = process.argv.slice(2)) {
     CORPUS_REDEAL_TARGET_SCHEMA, ADVISORY_LOCKFILE_TARGET_SCHEMA,
     FED_WORLD_TARGET_SCHEMA, WINDOW_RUNG1_TARGET_SCHEMA, TIER_COVERAGE_TARGET_SCHEMA,
     MIGRATION_DIRECTION_TARGET_SCHEMA, PEOPLE_CAST_TARGET_SCHEMA,
-    PEOPLE_LANDING_TARGET_SCHEMA, INFILTRATED_TOPOLOGY_TARGET_SCHEMA].includes(targetSchema)) {
-    throw new Error(`observed-shape --target-schema must be ${INFILTRATED_TOPOLOGY_TARGET_SCHEMA} (live infiltrated-topology leaf),`
+    PEOPLE_LANDING_TARGET_SCHEMA, INFILTRATED_TOPOLOGY_TARGET_SCHEMA, VEILED_ID_REDEAL_TARGET_SCHEMA].includes(targetSchema)) {
+    throw new Error(`observed-shape --target-schema must be ${VEILED_ID_REDEAL_TARGET_SCHEMA} (live veiled-id-redeal leaf),`
+      + ` ${INFILTRATED_TOPOLOGY_TARGET_SCHEMA} (retired infiltrated-topology leaf),`
       + ` ${PEOPLE_LANDING_TARGET_SCHEMA} (retired people-landing leaf),`
       + ` ${PEOPLE_CAST_TARGET_SCHEMA} (retired people-cast leaf),`
       + ` ${MIGRATION_DIRECTION_TARGET_SCHEMA} (retired migration-direction leaf),`
