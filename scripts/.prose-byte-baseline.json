@@ -55,8 +55,8 @@
   },
   "leaves": {
     "src/data/dossierStateProse/defense.generated.js": {
-      "raw": 172793,
-      "gzip": 24602,
+      "raw": 232862,
+      "gzip": 31654,
       "ceilingRaw": 488168,
       "ceilingGzip": 108482
     },
@@ -85,8 +85,8 @@
       "ceilingGzip": 57524
     },
     "src/data/dossierStateProse/warFaith.generated.js": {
-      "raw": 176442,
-      "gzip": 25180,
+      "raw": 174395,
+      "gzip": 24601,
       "ceilingRaw": 505306,
       "ceilingGzip": 112290
     },
@@ -371,6 +371,78 @@
       "toRaw": 168361,
       "gzipAfter": 23911,
       "reason": "+165 B raw (gzip level 9: 23895 -> 23911), one commit: the block's REWRITE rows of STYLE-AUDIT §2b-1 taken, each read against the block's declaration (record docs/WIRING_W1_2026-11-07.md); projected through node scripts/generate-dossier-state-prose.mjs; --check exit 0."
+    },
+    {
+      "car": "W2 DEF (the construction-and-wiring wave, 2026-11-07; ODQ §934.105, WIRING-RULINGS R-W1/R-W9): DS-DEF-9 — magic fills the void said; magic militarized said; the owner's style law of 2026-11-07",
+      "leaf": "src/data/dossierStateProse/defense.generated.js",
+      "fromRaw": 172793,
+      "toRaw": 174036,
+      "gzipAfter": 24812,
+      "reason": "+1243 B raw (gzip level 9: 24,602 -> 24,812), one commit: DS-DEF-9 gains the two FLAG pools (magicFillsVoid, magicMilitarized; two variants each, said beside the dependency line only when the flag is true) and four style rewrites (true v3, v4; NAMED chain v2; availability absent v3). Projected through `node scripts/generate-dossier-state-prose.mjs`; `--check` exit 0."
+    },
+    {
+      "car": "W2 DEF second seat (the construction-and-wiring wave, 2026-11-07; ODQ §934.105, WIRING-RULINGS R-W1/R-W3): DS-DEF-4 — criminal infrastructure present said; the black market said; the owner's style law of 2026-11-07",
+      "leaf": "src/data/dossierStateProse/defense.generated.js",
+      "fromRaw": 174036,
+      "toRaw": 176749,
+      "gzipAfter": 25174,
+      "reason": "+2713 B raw (gzip level 9: 24,812 -> 25,174), one commit: DS-DEF-4 gains the four FIXTURE pools (black market, thieves' guild, smuggling, gangs; two variants each, said beside the structure line only when the roster carries the fixture) and sixteen style rewrites (structure organized v3, v4; semi-organized v2, v3; diffuse v2, v3; capture none v1, v3; adversarial v1; equilibrium v3; corrupted v1-v3; capture v1-v3). Projected through `node scripts/generate-dossier-state-prose.mjs`; `--check` exit 0."
+    },
+    {
+      "car": "W2 DEF second seat (the construction-and-wiring wave, 2026-11-07; ODQ §934.105, WIRING-RULINGS R-W1/R-W3): DS-DEF-5 — armed and fortified fixtures said; the free company said; the owner's style law of 2026-11-07",
+      "leaf": "src/data/dossierStateProse/defense.generated.js",
+      "fromRaw": 176749,
+      "toRaw": 178794,
+      "gzipAfter": 25336,
+      "reason": "+2045 B raw (gzip level 9: 25,174 -> 25,336), one commit: DS-DEF-5 gains the three FIXTURE pools (gates, charter hall, free company; two variants each, said beside their group's line only when the roster carries the fixture) and fifteen style rewrites (walls PRESENT v2; walls ABSENT v2; garrison v2, v3; militia v2; watch v3; NO force v2, v3; mercenary v3; charter PRESENT v3; charter ABSENT v2, v3; arcane PRESENT v2; arcane ABSENT v2, v3). Projected through `node scripts/generate-dossier-state-prose.mjs`; `--check` exit 0."
+    },
+    {
+      "car": "W2 DEF second seat (the construction-and-wiring wave, 2026-11-07; ODQ §934.105, WIRING-RULINGS R-W1/R-W9): DS-DEF-5 — arcane establishments present said; magical traditions under arms said",
+      "leaf": "src/data/dossierStateProse/defense.generated.js",
+      "fromRaw": 178794,
+      "toRaw": 183357,
+      "gzipAfter": 25818,
+      "reason": "+4563 B raw (gzip level 9: 25,336 -> 25,818), one commit: DS-DEF-5 gains the six ARCANE pools (wizard's tower, mages' guild, alchemists, divine, druidic, practitioners; two variants each, said beside `arcane defense PRESENT` only). Projected through `node scripts/generate-dossier-state-prose.mjs`; `--check` exit 0."
+    },
+    {
+      "car": "W2 DEF second seat (2026-11-07; ODQ §934.105, WIRING-RULINGS §7 / STYLE-RULINGS §2 law 2): DS-DEF-5 FIXTURE: gates gains two variants — the referee's frame cure",
+      "leaf": "src/data/dossierStateProse/defense.generated.js",
+      "fromRaw": 183357,
+      "toRaw": 183888,
+      "gzipAfter": 25872,
+      "reason": "+531 B raw (gzip level 9: 25,818 -> 25,872), one commit: FIXTURE: gates v1 entered the twenty most-repeated story frames on the 1,000 (309 towns); the pool gains v3 (traveller) and v4 (watch) so the frame spreads. Projected through `node scripts/generate-dossier-state-prose.mjs`; `--check` exit 0."
+    },
+    {
+      "car": "W2 DEF second seat (2026-11-07; ODQ §934.105, WAVE-RULINGS item 16): DS-DEF-4, DS-DEF-5, DS-DEF-9 — the owner's reading, 2026-11-07: the ledger vantage names the record and its cost",
+      "leaf": "src/data/dossierStateProse/defense.generated.js",
+      "fromRaw": 183888,
+      "toRaw": 184656,
+      "gzipAfter": 26137,
+      "reason": "+768 B raw (gzip level 9: 25,872 -> 26,137), one commit: the twenty `[ledger]` lines this lane authored or rewrote (DS-DEF-4 capture none v1, adversarial v1, corrupted v1, capture v1, FIXTURE v1 x3 and gangs v2; DS-DEF-5 walls PRESENT v2, FIXTURE v2 x3, ARCANE v2 x6; DS-DEF-9 FLAG v2 x2) rewritten to name the record in a player's words and what the gap costs. Projected through `node scripts/generate-dossier-state-prose.mjs`; `--check` exit 0."
+    },
+    {
+      "car": "W2 DEF third seat (2026-11-07; ODQ §934.105, WIRING-RULINGS R-W1): DS-DEF-12 — isolation support said (construction C3, C4, C5)",
+      "leaf": "src/data/dossierStateProse/defense.generated.js",
+      "fromRaw": 184656,
+      "toRaw": 191754,
+      "gzipAfter": 27014,
+      "reason": "+7098 B raw (gzip level 9: 26,137 -> 27,014), one commit: the new block DS-DEF-12 (MAGIC-DEPENDENT and the four CAPACITY steps, three lines each), the lane's twenty new pools braced {colour}, six `· watch` declarations restored on DS-DEF-2/3/10 lines (stripped by c66099791), FLAG: magicMilitarized v2 reworded (\"answers to its military\"). Projected through `node scripts/generate-dossier-state-prose.mjs`; `--check` exit 0."
+    },
+    {
+      "car": "W2 DEF third seat (2026-11-07; ODQ §934.105, WIRING-RULINGS R-W1/R-W9): DS-DEF-2 — the supply-chain defence bonus said (construction C6)",
+      "leaf": "src/data/dossierStateProse/defense.generated.js",
+      "fromRaw": 191754,
+      "toRaw": 197079,
+      "gzipAfter": 27733,
+      "reason": "+5325 B raw (gzip level 9: 27,014 -> 27,733), one commit: DS-DEF-2 gains four clause pools (CHAIN: defence supplied / defence short, four lines each; CHAIN: food trades working / failing, three each), said beside the Invasion & War and Economic Survival rows where defenseProfile.chainModifiers moved the score. Projected through `node scripts/generate-dossier-state-prose.mjs`; `--check` exit 0."
+    },
+    {
+      "car": "W2 DEF third seat (2026-11-07; ODQ §934.105, STYLE-RULINGS §1a): DS-DEF-3 and DS-DEF-8 — the stress type in the pool key; their style rows; the owner's style law",
+      "leaf": "src/data/dossierStateProse/defense.generated.js",
+      "fromRaw": 197079,
+      "toRaw": 234278,
+      "gzipAfter": 32212,
+      "reason": "+37199 B raw (gzip level 9: 27,733 -> 32,212), one commit: DS-DEF-3 gains seventeen COMPOUND condition pools and DS-DEF-8 sixteen per-type override pools (three lines each), and both blocks' style rows are rewritten (DS-DEF-3 rows 27-30 and 158-170; DS-DEF-8 rows 49-55, 233, 234). Projected through `node scripts/generate-dossier-state-prose.mjs`; `--check` exit 0."
     }
   ],
   "ceilingTransfersNewLeaves": [

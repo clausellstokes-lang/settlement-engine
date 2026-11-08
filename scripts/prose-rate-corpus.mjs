@@ -301,7 +301,7 @@ export function deskReturns(s, opts, onThrow) {
   });
   for (const name of ['defenseStateProse', 'defenseThreatProse', 'defenseForcesProse',
     'defensePostureProse', 'defenseWallRationaleProse', 'defenseMilitaryStatusProse',
-    'defenseSupportingProse', 'defenseMagicDependencyProse']) {
+    'defenseSupportingProse', 'defenseMagicDependencyProse', 'defenseIsolationSupportProse']) {
     desk(name, () => defense[name](s, opts));
   }
   desk('stressors', () => stressors.stressorsStateProse(s, {

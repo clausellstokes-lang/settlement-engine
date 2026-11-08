@@ -456,6 +456,11 @@ export const DOSSIER_MOUNTS = Object.freeze([
   Object.freeze({
     mount: 'viability.magicDependency', tab: 'viability', desk: 'defense', blockId: 'DS-DEF-9', rung: 'sentence',
   }),
+  // DS-DEF-12 (W2 DEF construction C3–C5, 2026-11-07): the isolation-support finding, said on
+  // the Viability tab where the finding applies (no dependable road, river or port); silent elsewhere.
+  Object.freeze({
+    mount: 'viability.isolationSupport', tab: 'viability', desk: 'defense', blockId: 'DS-DEF-12', rung: 'sentence',
+  }),
   Object.freeze({
     mount: 'economics.exportPosture', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-10', rung: 'sentence', dimensions: ['hunger'],
   }),

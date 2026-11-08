@@ -392,9 +392,11 @@ describe('the composed-prose manifest — the DRIFT corpus, both audiences', () 
     const absent = registered.filter((m) => !recorded.has(m));
     expect(absent, 'every mount the corpus does not reach carries a reason, and no other does')
       .toEqual(reasoned);
-    expect(registered.length, 'the registry\'s distinct mounts').toBe(56);
+    // 56 -> 57 and 42 -> 43 (W2 DEF third seat, 2026-11-07): `viability.isolationSupport` (DS-DEF-12) is registered and
+    // recorded — the recipe's defense call list (`prose-rate-corpus.mjs :: deskReturns`) composes its desk.
+    expect(registered.length, 'the registry\'s distinct mounts').toBe(57);
     expect(registered.filter((m) => recorded.has(m)).length, 'and the manifest records this many')
-      .toBe(42);
+      .toBe(43);
     // ⛔ AND THE REASONS ARE RE-MEASURED, NEVER TAKEN ON FAITH: every reasoned mount sits on a
     // block that fires on NO town of the RATE grid either, so its silence here is the world's
     // and not this recipe's. A block that starts speaking reds this arm until someone re-states
@@ -454,7 +456,9 @@ describe('the two controls no one-audience manifest can see', () => {
       const covert = variants.filter((v) => v.marks.includes('dm-only')).length;
       if (covert > 0 && covert < variants.length) mixed.add(key);
     }
-    expect(mixed.size, 'mixed pools in the shipped corpus').toBe(12);
+    // 12 -> 13 (W2 DEF stress-type keys, 2026-11-07): DS-DEF-8's `override: INFILTRATION ACTIVE` holds three dm-only lines and
+    // one player-safe line that says no more than the posture banner, so the player face speaks there too.
+    expect(mixed.size, 'mixed pools in the shipped corpus').toBe(13);
     /** @type {Map<string, {dm?: object, player?: object}>} */
     const byPosition = new Map();
     for (const cell of run.cells) {

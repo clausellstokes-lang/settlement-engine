@@ -178,7 +178,7 @@ export const HOLDER_SOURCES = Object.freeze({
   localProduction: Object.freeze({ kind: 'market', cite: 'src/generators/economy/economicState.js:776', read: true }),
   isEntrepot: Object.freeze({ kind: 'market', cite: 'src/generators/economy/economicState.js:833', read: true }),
   activeChains: Object.freeze({ kind: 'market', cite: 'src/generators/economy/economicState.js:775', read: true }),
-  exportPosture: Object.freeze({ kind: 'market', cite: 'src/domain/display/dossierViewModel.js:570', read: true }),
+  exportPosture: Object.freeze({ kind: 'market', cite: 'src/domain/display/dossierViewModel.js:651', read: true }),
   // ⭐ CITED BY SYMBOL (rule 32): REVIEW-INTAKE-3 R9 moved :500/:501/:418 down the file.
   economicStrengths: Object.freeze({ kind: 'market', cite: 'src/generators/resourceGenerator.js :: generateResourceAnalysis', read: true }),
   strategicValue: Object.freeze({ kind: 'market', cite: 'src/generators/resourceGenerator.js :: generateResourceAnalysis', read: true }),
@@ -212,7 +212,7 @@ export const HOLDER_SOURCES = Object.freeze({
       + ' the token is mapped to the WATCH rather than to the muster on the ruling\'s own'
       + ' grain: the muster roll counts men under arms, and the watch keeps its own count.',
   }),
-  blackMarketCapture: Object.freeze({ kind: 'watch', cite: 'src/generators/safetyProfile.js:734', read: true }),
+  blackMarketCapture: Object.freeze({ kind: 'watch', cite: 'src/generators/safetyProfile.js:732', read: true }),
   criminalCaptureState: Object.freeze({ kind: 'watch', cite: 'src/generators/power/rulingStructure.js :: generatePowerStructure', read: true }),
   safetyProfile: Object.freeze({ kind: 'watch', cite: 'src/generators/economy/economicState.js:839', read: true }),
 

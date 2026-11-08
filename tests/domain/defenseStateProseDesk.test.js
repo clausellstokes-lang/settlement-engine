@@ -16,20 +16,23 @@ import { describe, expect, it } from 'vitest';
 import {
   RECOGNISED_MONSTER_TIERS, SLOT_FILL_SHAPES, SLOT_FILL_TABLES, arcaneDefensePoolKey,
   beastsRowPoolKey, charterPoolKey, contractedForcePoolKey, countryWarrantsCharter,
+  arcaneFixturePoolKey, charterFixturePoolKey, freeCompanyFixturePoolKey, gatesFixturePoolKey,
   defenseForcesProse, defenseStateProse, defenseThreatProse, disasterRowPoolKey,
   defensePostureProse, economicRowPoolKey, firstSurveyPoolKey, forceCorePoolKey,
   fortificationPoolKey, internalRowPoolKey, invasionRowPoolKey, isCompoundSafetyLabel,
-  measuredMonsterFamily, posturePoolKey, publicOrderPoolKey, strategicPrizePoolKey,
+  measuredMonsterFamily, posturePoolKey, publicOrderPoolKey, strategicPrizePoolKey, COMPOUND_CONDITIONS, OVERRIDE_TYPES,
+  compoundSafetyPoolKey,
   terrainDefencePoolKey, activeDefenceStress, defenseMilitaryStatusProse,
   militaryOverridePoolKey, viabilityUnderStressPoolKey, DEF8_UNREACHABLE_POOLS,
   defenseWallRationaleProse, defworkFill, wallRationalePoolKey,
-  criminalCapturePoolKey, criminalStructurePoolKey, defenseCriminalProse,
+  criminalCapturePoolKey, criminalFixturePoolKey, criminalStructurePoolKey, defenseCriminalProse,
   CRIMINAL_CAPTURE_STATES, RECOGNISED_CRIMINAL_STRUCTURES,
   TERRAIN_DEFENCE_NAMES, TERRAIN_PRIZE_NAMES,
   DEF6_C3_BLOCKED_POOLS, DEF6_FACT_SPOKEN_AT, defenseSupportingProse,
   navalDefensePoolKey, supplyLogisticsPoolKey,
   DEF7_DARK_POOLS, DEF10_DARK_POOLS, DEF10_FACT_SPOKEN_AT,
-  defenseMagicDependencyProse, hasNamedMagicChain, magicDependencyPoolKey,
+  defenseMagicDependencyProse, hasNamedMagicChain, magicDependencyPoolKey, magicFlagPoolKey, withSaid,
+  defenseIsolationSupportProse, isolationSupportPoolKey, defenceSupplyPoolKey, foodTradesPoolKey,
   namedMagicChainGood,
 } from '../../src/domain/display/stateProse/defenseStateProse.js';
 import {
@@ -109,17 +112,51 @@ describe('the defense desk — the label vocabulary is the producer\'s', () => {
     expect(publicOrderPoolKey(undefined)).toBeNull();
   });
 
-  it('a crisis-rewritten label goes to COMPOUND, detected by the dash and not a name list', () => {
+  it('a crisis-rewritten label goes to its CONDITION\'s pool, detected by the dash (STYLE-RULINGS §1a)', () => {
+    // W2 DEF (2026-11-07): the stress type in the pool key — one variant set per condition.
+    const expected = {
+      'Controlled — Occupation Curfew': 'COMPOUND: occupation curfew',
+      'Tense — Active Siege': 'COMPOUND: active siege',
+      'Desperate — Famine Conditions': 'COMPOUND: famine',
+      'Strained — Plague Conditions': 'COMPOUND: plague',
+      'Tense — Wartime': 'COMPOUND: wartime',
+    };
     for (const label of COMPOUND_LABELS) {
       expect(isCompoundSafetyLabel(label), label).toBe(true);
       expect(publicOrderPoolKey(label)).toBe('COMPOUND override (a crisis stress has rewritten the label)');
+      expect(compoundSafetyPoolKey(label, [])).toBe(expected[label]);
+      // …and the desk draws the condition's pool, beside the DM's own line.
+      expect(defenseStateProse(town(label), { seed: 'c' }).publicOrder.rung.provenance.poolKey).toBe(expected[label]);
     }
+    // The lead condition wins, and the plague strain's own dash does not fool the reader.
+    expect(compoundSafetyPoolKey('Dangerous — Plague Unrest — Plague Conditions + Wartime', [])).toBe('COMPOUND: plague');
+    expect(compoundSafetyPoolKey('Strained — Mass Migration', [{ type: 'mass_migration' }])).toBe('COMPOUND: mass migration, arrivals');
+    expect(compoundSafetyPoolKey('Strained — Mass Migration', [{ type: 'mass_migration', direction: 'departures' }]))
+      .toBe('COMPOUND: mass migration, departures');
+    expect(compoundSafetyPoolKey('Controlled — Authoritarian', [])).toBe('COMPOUND: authoritarian rule');
+    expect(compoundSafetyPoolKey('Dangerous — Criminal Governance', null)).toBe('COMPOUND: criminal governance');
+    expect(compoundSafetyPoolKey('Tense — Some Future Crisis', [])).toBe('COMPOUND override (a crisis stress has rewritten the label)');
     for (const label of CLEAN_LABELS) expect(isCompoundSafetyLabel(label), label).toBe(false);
     // Detecting the DASH rather than listing crisis names is deliberate: a new crisis would
     // otherwise read as an ordinary label, which is the quiet-degradation shape. A crisis
     // this suite has never heard of still routes correctly.
     expect(publicOrderPoolKey('Tense — Some Future Crisis'))
       .toBe('COMPOUND override (a crisis stress has rewritten the label)');
+  });
+
+  it('the condition table is TOTAL over the conditions the producer writes, both ways', () => {
+    // Read from the producer's own source: every `condition: '…'` a strain carries, and the two
+    // non-crisis compounds written as whole labels.
+    const src = readFileSync(resolve(SRC, 'generators/safetyProfile.js'), 'utf8');
+    const written = new Set([...src.matchAll(/condition: '([^']+)'/g)].map((m) => m[1]));
+    for (const m of src.matchAll(/safetyLabel = '[^'—]+ — ([^']+)'/g)) written.add(m[1]);
+    expect(written.size, 'the producer reader found the conditions').toBeGreaterThanOrEqual(16);
+    expect([...COMPOUND_CONDITIONS].sort()).toEqual([...written].sort());
+    for (const condition of COMPOUND_CONDITIONS) {
+      const key = compoundSafetyPoolKey(`Tense — ${condition}`, []);
+      expect(key, condition).not.toBe('COMPOUND override (a crisis stress has rewritten the label)');
+      expect(DEF3_POOLS[key], `${condition} -> ${key}`).toBeTruthy();
+    }
   });
 
   it('the declared slot shapes equal the annex register, and the desk owns no fill table', () => {
@@ -151,27 +188,36 @@ describe('the defense desk — the FIRST-SURVEY framing rests on a measurement',
     expect(firstSurveyPoolKey(undefined)).toBeNull();
   });
 
-  it('ALIVENESS: all SEVEN pools speak over labels the generator really writes', () => {
+  it('ALIVENESS: all TWENTY-FOUR pools speak over labels the generator really writes', () => {
+    // 7 -> 24 (W2 DEF, 2026-11-07): the seventeen COMPOUND condition pools (STYLE-RULINGS §1a). Every
+    // condition the producer writes is swept, the migration both ways, and one unknown condition
+    // reaches the generic COMPOUND pool.
     const reached = new Set();
-    for (const label of [...CLEAN_LABELS, ...COMPOUND_LABELS]) {
-      const drawn = defenseStateProse(town(label), { seed: `d-${label}` });
+    const swept = [
+      ...CLEAN_LABELS.map((label) => [label, undefined]),
+      ...COMPOUND_CONDITIONS.map((c) => [`Tense — ${c}`, undefined]),
+      ['Strained — Mass Migration', [{ type: 'mass_migration', direction: 'departures' }]],
+      ['Tense — Some Future Crisis', undefined],
+    ];
+    for (const [label, stress] of swept) {
+      const drawn = defenseStateProse({ ...town(label), ...(stress ? { stress } : {}) }, { seed: `d-${label}`, audience: 'dm' });
       for (const key of ['publicOrder', 'firstSurvey']) {
         const rung = drawn[key]?.rung;
         if (rung?.sentence) {
           reached.add(rung.provenance.poolKey);
           expect(rung.provenance.blockId).toBe(DEF3);
           // This branch is guarded by `if (rung?.sentence)`, so it could run zero times —
-          // but the arm pins `reached.size` at exactly 7 below, which a desk that had gone
+          // but the arm pins `reached.size` at exactly 24 below, which a desk that had gone
           // silent over every label fails.
-          // anchored: `reached.size` is pinned at exactly 7 after this loop
+          // anchored: `reached.size` is pinned at exactly 24 after this loop
           expect(rung.sentence).not.toMatch(/[{}]/);
-          // anchored: same guarded sentence; `reached.size` is pinned at 7 below
+          // anchored: same guarded sentence; `reached.size` is pinned at 24 below
           expect(rung.sentence).not.toMatch(/[0-9]/);
         }
       }
     }
-    expect(reached.size, `reached: ${[...reached]}`).toBe(7);
-    expect(Object.keys(DEF3_POOLS)).toHaveLength(7);
+    expect(reached.size, `reached: ${[...reached]}`).toBe(24);
+    expect(Object.keys(DEF3_POOLS)).toHaveLength(24);
   });
 });
 
@@ -560,9 +606,14 @@ describe('DS-DEF-2 — ALIVENESS over every combination the generator can build'
     // other twenty-one still all speak; the silent five are named, not merely counted.
     const silent = Object.keys(DEF2_POOLS).filter((k) => k.startsWith('Disasters & Famine: '));
     expect(silent).toHaveLength(5);
-    expect(Object.keys(DEF2_POOLS).filter((k) => !reached.has(k))).toEqual(silent);
-    expect(reached.size).toBe(Object.keys(DEF2_POOLS).length - silent.length);
-    expect(Object.keys(DEF2_POOLS)).toHaveLength(26);
+    // ⭐ THE FOUR CHAIN CLAUSE POOLS NEVER SPINE (W2 DEF construction C6, 2026-11-07): each rides as a
+    // SECOND piece beside the Invasion & War or Economic Survival row, so no rung's provenance names
+    // one; the clause arm below proves each prints. Named, not merely counted.
+    const clauses = Object.keys(DEF2_POOLS).filter((k) => k.startsWith('CHAIN: '));
+    expect(clauses).toHaveLength(4);
+    expect(Object.keys(DEF2_POOLS).filter((k) => !reached.has(k))).toEqual([...clauses, ...silent]);
+    expect(reached.size).toBe(Object.keys(DEF2_POOLS).length - silent.length - clauses.length);
+    expect(Object.keys(DEF2_POOLS)).toHaveLength(30); // 26 -> 30 at W2 DEF C6: the four CHAIN clause pools
   });
 
   it('DS-DEF-2 frames no DM field, so it returns plain rungs rather than projections', () => {
@@ -895,9 +946,43 @@ describe('DS-DEF-4 — two vocabularies that are EXACT 1:1s, and a covertness ga
         }
       }
     }
-    expect(reached.size, `unreached: ${Object.keys(DEF4_POOLS).filter((k) => !reached.has(k))}`)
-      .toBe(Object.keys(DEF4_POOLS).length);
-    expect(Object.keys(DEF4_POOLS)).toHaveLength(9);
+    // W2 DEF C7 (2026-11-07): the four FIXTURE pools are never a rung's own pool; they ride
+    // beside the structure line (the next test), so the sweep's population is the nine.
+    const spines = Object.keys(DEF4_POOLS).filter((k) => !k.startsWith('FIXTURE: '));
+    expect(reached.size, `unreached: ${spines.filter((k) => !reached.has(k))}`)
+      .toBe(spines.length);
+    expect(spines).toHaveLength(9);
+    expect(Object.keys(DEF4_POOLS)).toHaveLength(13);
+  });
+
+  it('W2 DEF C7: a criminal fixture is said beside the structure line, only when the roster carries it, one per box', () => {
+    // The key function, both ways against the corpus: the four keys it can emit are exactly
+    // the four FIXTURE pools, and the black market leads (R-W3).
+    const emitted = [
+      criminalFixturePoolKey({ hasBlackMarket: true, hasThievesGuild: true, hasSmuggling: true, hasGangInfra: true }),
+      criminalFixturePoolKey({ hasThievesGuild: true, hasSmuggling: true, hasGangInfra: true }),
+      criminalFixturePoolKey({ hasSmuggling: true, hasGangInfra: true }),
+      criminalFixturePoolKey({ hasGangInfra: true }),
+    ];
+    expect(emitted).toEqual(['FIXTURE: black market', "FIXTURE: thieves' guild", 'FIXTURE: smuggling', 'FIXTURE: gangs']);
+    expect([...emitted].sort()).toEqual(Object.keys(DEF4_POOLS).filter((k) => k.startsWith('FIXTURE: ')).sort());
+    expect(criminalFixturePoolKey({ hasBlackMarket: 'true' })).toBeNull();
+    expect(criminalFixturePoolKey({})).toBeNull();
+    expect(criminalFixturePoolKey(null)).toBeNull();
+
+    const withInst = (inst) => ({ ...underworld(), economicState: { compound: { inst } } });
+    const plain = defenseCriminalProse(withInst({}), 'semi-organized', { seed: 'fx', audience: 'player' });
+    const said = defenseCriminalProse(withInst({ hasBlackMarket: true }), 'semi-organized', { seed: 'fx', audience: 'player' });
+    // the structure line keeps its pool; the fixture is a second sentence, a modifier piece
+    expect(said.structure.provenance.poolKey).toBe('structure semi-organized');
+    expect(said.structure.sentence.startsWith(plain.structure.sentence)).toBe(true);
+    expect(said.structure.sentence).toMatch(/black market/);
+    expect(said.structure.provenance.pieces.map((p) => p.role)).toEqual(['spine', 'modifier']);
+    // anchored: the line above proves the said rung carries the modifier piece; this plain rung is the same block
+    expect(plain.structure.sentence).not.toMatch(/black market/);
+    // never alone: no structure key, no fixture sentence
+    const none = defenseCriminalProse(withInst({ hasBlackMarket: true }), 'bogus', { seed: 'fx', audience: 'player' });
+    expect(none.structure).toBeNull();
   });
 
   it('the registry mounts DS-DEF-4 once, as a sentence, on the defense tab', () => {
@@ -1045,18 +1130,25 @@ describe('DS-DEF-8 — the military-status override, and the pool that must NOT 
   it('the override lens asks the SAME map the banner beside it asks', () => {
     // Not a second opinion about which stresses carry a posture: `DefenseTab` picks
     // `stressTypes.find((t) => DEFENSE_STRESS_STATUS[t])` and so does this desk.
+    // W2 DEF (2026-11-07, STYLE-RULINGS §1a): every posture keys its OWN pool; the per-type table is
+    // total over the banner's map, so the generic framing never draws.
+    expect([...OVERRIDE_TYPES].sort()).toEqual(Object.keys(DEFENSE_STRESS_STATUS).sort());
     for (const type of Object.keys(DEFENSE_STRESS_STATUS)) {
-      expect(militaryOverridePoolKey(pressed([type]).stress), type)
-        .toBe('override active (generic framing)');
+      const key = militaryOverridePoolKey(pressed([type]).stress);
+      expect(key, type).not.toBe('override active (generic framing)');
+      expect(DEF8_POOLS[key], `${type} -> ${key}`).toBeTruthy();
       expect(activeDefenceStress(pressed([type]).stress).type).toBe(type);
     }
+    // The migration posture splits on W0's direction.
+    expect(militaryOverridePoolKey([{ type: 'mass_migration', direction: 'departures' }])).toBe('override: MIGRATION, departures');
+    expect(militaryOverridePoolKey([{ type: 'mass_migration' }])).toBe('override: MIGRATION, arrivals');
     // A stress with no defence posture leaves the banner — and this desk — silent.
     expect(DEFENSE_STRESS_STATUS.no_such_stress).toBeUndefined();
     expect(militaryOverridePoolKey([{ type: 'no_such_stress' }])).toBeNull();
     expect(militaryOverridePoolKey([])).toBeNull();
     expect(militaryOverridePoolKey(undefined)).toBeNull();
     // The field is a bare object on some saves; both shapes normalise.
-    expect(militaryOverridePoolKey({ type: 'under_siege' })).toBe('override active (generic framing)');
+    expect(militaryOverridePoolKey({ type: 'under_siege' })).toBe('override: ACTIVE SIEGE');
   });
 
   it('⛔⛔ `viabilityNote` IS A CONSTANT — every one of the fifteen carries one', () => {
@@ -1082,7 +1174,8 @@ describe('DS-DEF-8 — the military-status override, and the pool that must NOT 
     // named is "the heaviest"/"the loudest" of several. MEASURED: STRESS_TYPE_MAP carries
     // `probability` (rarity) and NO severity, and the banner picks the FIRST stress that
     // maps — roll order, not rank. Printing it would assert a ranking nothing computes.
-    expect(DEF8_UNREACHABLE_POOLS).toEqual(['multiple stresses, one posture shown']);
+    // W2 DEF (2026-11-07): the generic framing joins it — kept (the frame is fixed), drawn by no stress type.
+    expect(DEF8_UNREACHABLE_POOLS).toEqual(['multiple stresses, one posture shown', 'override active (generic framing)']);
     expect(DEF8_POOLS[DEF8_UNREACHABLE_POOLS[0]], 'the declared-dark pool left the corpus').toBeTruthy();
     for (const type of Object.keys(STRESS_TYPE_MAP)) {
       // ⚠ `probability` IS THE ANCHOR BECAUSE IT IS THE ARGUMENT. The claim above is not
@@ -1101,15 +1194,18 @@ describe('DS-DEF-8 — the military-status override, and the pool that must NOT 
     expect(activeDefenceStress(both.stress).type).toBe('mass_migration');
     // And a multi-stress settlement is still described — by the two live lenses.
     const drawn = defenseMilitaryStatusProse({ ...both, economicViability: { viable: false } }, { seed: 'm' });
-    expect(drawn.override.provenance.poolKey).toBe('override active (generic framing)');
+    expect(drawn.override.provenance.poolKey).toBe('override: MIGRATION, arrivals');
     expect(drawn.viability.provenance.poolKey).toBe('override active, viability threatened');
   });
 
-  it('all THREE live pools speak over every stress type × the viability verdict', () => {
+  it('all EIGHTEEN live pools speak over every stress type × the viability verdict', () => {
     const reached = new Set();
-    for (const type of [...Object.keys(STRESS_TYPE_MAP), 'no_such_stress']) {
+    // The departures migration is its own pool (W0's direction), so it is swept as its own case.
+    const departing = (viable) => ({ ...pressed(['mass_migration'], { viable }), stress: [{ type: 'mass_migration', ...STRESS_TYPE_MAP.mass_migration, direction: 'departures' }] });
+    for (const type of [...Object.keys(STRESS_TYPE_MAP), 'no_such_stress', 'departures']) {
       for (const viable of [true, false, undefined]) {
-        const drawn = defenseMilitaryStatusProse(pressed([type], { viable }), { seed: 'sweep8' });
+        const town8 = type === 'departures' ? departing(viable) : pressed([type], { viable });
+        const drawn = defenseMilitaryStatusProse(town8, { seed: 'sweep8', audience: 'dm' });
         for (const lens of ['override', 'viability']) {
           const rung = drawn[lens];
           if (!rung?.sentence) continue;
@@ -1122,8 +1218,9 @@ describe('DS-DEF-8 — the military-status override, and the pool that must NOT 
     }
     const live = Object.keys(DEF8_POOLS).filter((k) => !DEF8_UNREACHABLE_POOLS.includes(k));
     expect([...reached].sort()).toEqual([...live].sort());
-    expect(Object.keys(DEF8_POOLS)).toHaveLength(4);
-    expect(live).toHaveLength(3);
+    // 4 -> 20 and 3 -> 18 (W2 DEF, 2026-11-07): the sixteen per-type override pools; the generic framing declared.
+    expect(Object.keys(DEF8_POOLS)).toHaveLength(20);
+    expect(live).toHaveLength(18);
   });
 
   it('the registry mounts DS-DEF-8 once, as a sentence, on the defense tab', () => {
@@ -1263,9 +1360,77 @@ describe('DS-DEF-5 — the armed-forces lenses read what still STANDS', () => {
         }
       }
     }
-    expect(reached.size, `unreached: ${Object.keys(DEF5_POOLS).filter((k) => !reached.has(k))}`)
-      .toBe(Object.keys(DEF5_POOLS).length);
-    expect(Object.keys(DEF5_POOLS)).toHaveLength(11);
+    // W2 DEF C9 (2026-11-07): the three FIXTURE pools are never a rung's own pool; they ride
+    // beside their group's line (the next test), so the sweep's population is the eleven.
+    // W2 DEF C8/C10: likewise the six ARCANE pools, beside `arcane defense PRESENT`.
+    const spines = Object.keys(DEF5_POOLS).filter((k) => !k.startsWith('FIXTURE: ') && !k.startsWith('ARCANE: '));
+    expect(reached.size, `unreached: ${spines.filter((k) => !reached.has(k))}`)
+      .toBe(spines.length);
+    expect(spines).toHaveLength(11);
+    expect(Object.keys(DEF5_POOLS)).toHaveLength(20);
+  });
+
+  it('W2 DEF C9: a fixture is said beside its own group\'s line, only when the group stands and the roster carries it', () => {
+    const all = { hasGates: true, hasCharterHall: true, hasFreeCompany: true };
+    expect(gatesFixturePoolKey(all, true)).toBe('FIXTURE: gates');
+    expect(charterFixturePoolKey(all, true)).toBe('FIXTURE: charter hall');
+    expect(freeCompanyFixturePoolKey(all)).toBe('FIXTURE: free company');
+    // never beside a line that denies the group, never on a non-boolean flag
+    expect(gatesFixturePoolKey(all, false)).toBeNull();
+    expect(charterFixturePoolKey(all, false)).toBeNull();
+    expect(freeCompanyFixturePoolKey({ hasFreeCompany: 1 })).toBeNull();
+    expect(gatesFixturePoolKey({ hasGates: 'true' }, true)).toBeNull();
+    expect(charterFixturePoolKey(null, true)).toBeNull();
+    // the three keys are exactly the corpus's three FIXTURE pools
+    expect(['FIXTURE: gates', 'FIXTURE: charter hall', 'FIXTURE: free company'].sort())
+      .toEqual(Object.keys(DEF5_POOLS).filter((k) => k.startsWith('FIXTURE: ')).sort());
+
+    const town = (inst) => ({ ...garrisonTown(['walls', 'mercenary', 'charter']), economicState: { compound: { inst } } });
+    const plain = defenseForcesProse(town({}), { seed: 'fx5' });
+    const said = defenseForcesProse(town(all), { seed: 'fx5' });
+    for (const [lens, word] of [['fortification', /gates/], ['charter', /charter hall/], ['contracted', /free company/]]) {
+      expect(said[lens].provenance.poolKey).toBe(plain[lens].provenance.poolKey);
+      expect(said[lens].sentence.startsWith(plain[lens].sentence)).toBe(true);
+      expect(said[lens].sentence).toMatch(word);
+      expect(said[lens].provenance.pieces.map((p) => p.role)).toEqual(['spine', 'modifier']);
+    }
+    // a town without walls is never told about its gates
+    const open = defenseForcesProse({ ...garrisonTown([]), economicState: { compound: { inst: all } } }, { seed: 'fx5' });
+    expect(open.fortification.provenance.poolKey).toBe('walls ABSENT');
+    // anchored: the line above pins this rung to the walls ABSENT pool, so the sentence is live
+    expect(open.fortification.sentence).not.toMatch(/gates/);
+    // the free company's hall is not in the mercenary bucket: with no contracted line it rides
+    // beside the force line, and never twice
+    const hall = defenseForcesProse({ ...garrisonTown(['militia']), economicState: { compound: { inst: { hasFreeCompany: true } } } }, { seed: 'fx5' });
+    expect(hall.contracted).toBeNull();
+    expect(hall.force.sentence).toMatch(/free company/);
+    // anchored: the line above finds the free company on the hall's own line, the same desk call shape
+    expect(said.force?.sentence ?? '').not.toMatch(/free company/);
+  });
+
+  it('W2 DEF C8/C10: who the arcane defence is, said beside the PRESENT line only, establishments before traditions', () => {
+    expect(arcaneFixturePoolKey({ hasWizardTower: true, hasMagesGuild: true }, { hasDivine: true }, true)).toBe("ARCANE: wizard's tower");
+    expect(arcaneFixturePoolKey({}, { hasArcaneGuild: true }, true)).toBe("ARCANE: mages' guild");
+    expect(arcaneFixturePoolKey({ hasAlchemist: true }, null, true)).toBe('ARCANE: alchemists');
+    expect(arcaneFixturePoolKey(null, { hasAlchemy: true }, true)).toBe('ARCANE: alchemists');
+    expect(arcaneFixturePoolKey(null, { hasDivine: true, hasDruid: true }, true)).toBe('ARCANE: divine');
+    expect(arcaneFixturePoolKey(null, { hasDruid: true, hasArcane: true }, true)).toBe('ARCANE: druidic');
+    expect(arcaneFixturePoolKey(null, { hasArcane: true }, true)).toBe('ARCANE: practitioners');
+    expect(arcaneFixturePoolKey({ hasWizardTower: true }, null, false)).toBeNull();
+    expect(arcaneFixturePoolKey(null, null, true)).toBeNull();
+    const emitted = ["ARCANE: wizard's tower", "ARCANE: mages' guild", 'ARCANE: alchemists', 'ARCANE: divine', 'ARCANE: druidic', 'ARCANE: practitioners'];
+    expect([...emitted].sort()).toEqual(Object.keys(DEF5_POOLS).filter((k) => k.startsWith('ARCANE: ')).sort());
+    const tower = { ...garrisonTown(['magicDef']), economicState: { compound: { inst: { hasWizardTower: true } } } };
+    const plain = defenseForcesProse(garrisonTown(['magicDef']), { seed: 'ar5' });
+    const said = defenseForcesProse(tower, { seed: 'ar5' });
+    expect(said.arcane.provenance.poolKey).toBe('arcane defense PRESENT');
+    expect(said.arcane.sentence.startsWith(plain.arcane.sentence)).toBe(true);
+    expect(said.arcane.sentence).toMatch(/wizard's tower/);
+    // never beside the ABSENT line
+    const none = defenseForcesProse({ ...garrisonTown([]), economicState: { compound: { inst: { hasWizardTower: true } } } }, { seed: 'ar5' });
+    expect(none.arcane.provenance.poolKey).toBe('arcane defense ABSENT');
+    // anchored: the line above pins this rung to the ABSENT pool, so the sentence is live
+    expect(none.arcane.sentence).not.toMatch(/wizard/);
   });
 
   it('the registry mounts DS-DEF-5 once, as a sentence, on the defense tab', () => {
@@ -1620,7 +1785,26 @@ describe('DS-DEF-9 — magic dependency, and the slot filled from the right ROLE
     // Both directions: the four keys the desk can emit are exactly the corpus's four.
     const emitted = new Set(['magicDependency true', 'magicDependency true, with a NAMED dependent chain', 'magicDependency false',
       'magicDependency false, availability absent']);
-    expect([...emitted].sort()).toEqual(Object.keys(DEF9_POOLS).sort());
+    // W2 DEF (2026-11-07, C1/C2): the two FLAG pools are drawn by their own key function and
+    // said beside the dependency line, so the block holds the four plus the two.
+    const flags = new Set([magicFlagPoolKey({ magicFillsVoid: true }), magicFlagPoolKey({ magicMilitarized: true })]);
+    expect([...emitted, ...flags].sort()).toEqual(Object.keys(DEF9_POOLS).sort());
+  });
+
+  it('W2 DEF C1/C2: a flag is said only when it is true, never alone, and the void reading leads', () => {
+    expect(magicFlagPoolKey({ magicFillsVoid: true, magicMilitarized: true })).toBe('FLAG: magicFillsVoid');
+    expect(magicFlagPoolKey({ magicMilitarized: true })).toBe('FLAG: magicMilitarized');
+    expect(magicFlagPoolKey({ magicFillsVoid: false, magicMilitarized: 'true' })).toBeNull();
+    expect(magicFlagPoolKey(null)).toBeNull();
+    expect(magicFlagPoolKey(undefined)).toBeNull();
+    // never alone: a flag without a dependency line returns the line untouched (null stays null)
+    expect(withSaid(null, { text: 'x', pieces: [] })).toBeNull();
+    const unit = { blockId: 'DS-DEF-9', poolKey: 'magicDependency false', angle: 'ledger', text: 'A.', pieces: [{ role: 'spine', key: 'magicDependency false', vid: 0, index: 0, face: 0 }] };
+    const said = withSaid(unit, { text: 'B.', pieces: [{ role: 'spine', key: 'FLAG: magicFillsVoid', vid: 1, index: 1, face: 0 }] });
+    expect(said.text).toBe('A. B.');
+    expect(said.poolKey).toBe('magicDependency false');
+    expect(said.pieces.map((p) => p.role)).toEqual(['spine', 'modifier']);
+    expect(withSaid(unit, null)).toBe(unit);
   });
 
   it('THE FILL COMES FROM `outputs[0]` AND NEVER FROM `label` — the role, not the field', () => {
@@ -1914,12 +2098,17 @@ describe('the defense desk\'s paid-surface gate — every caller, found by impor
     const importers = walk(resolve(SRC, 'components')).filter(
       (path) => readFileSync(path, 'utf8').includes('stateProse/defenseStateProse.js'),
     );
-    // Two callers today, and the count is asserted so a THIRD arrives as a red rather than
-    // as a silent third place to forget the gate.
+    // Three callers today, and the count is asserted so a FOURTH arrives as a red rather than
+    // as a silent fourth place to forget the gate.
     expect(importers.map((p) => p.replace(`${SRC}/`, '')).sort())
       // DS-DEF-9's screen caller moved ViabilityTab -> MagicTab with the dependence block
       // (UX consolidation 2026-10-30, RULINGS-T2 T2-15); still two callers, still gated.
-      .toEqual(['components/new/tabs/DefenseTab.jsx', 'components/new/tabs/MagicTab.jsx']);
+      // A THIRD caller, by design (W2 DEF third seat, 2026-11-07): ViabilityTab draws DS-DEF-12, the
+      // isolation-support finding, at `viability.isolationSupport`, gated like the other two.
+      .toEqual([
+        'components/new/tabs/DefenseTab.jsx', 'components/new/tabs/MagicTab.jsx',
+        'components/new/tabs/ViabilityTab.jsx',
+      ]);
     for (const path of importers) {
       const code = codeOnly(readFileSync(path, 'utf8'));
       // Every call into the desk must have a publicDossier read within the same expression.
@@ -1945,5 +2134,89 @@ describe('the defense desk\'s paid-surface gate — every caller, found by impor
     expect(at, 'the fixture no longer contains the call the slice is taken around').toBeGreaterThan(-1);
     // anchored: `at` is pinned to a real offset on the line above, so the slice is non-empty
     expect(ungated.slice(Math.max(0, at - 400), at)).not.toContain('publicDossier');
+  });
+});
+
+describe('DS-DEF-12 · supply in isolation (W2 DEF construction C3–C5, 2026-11-07)', () => {
+  const support = (over) => ({
+    applicable: true, magicDependent: false, capacity: 40, requiredCapacity: 38, status: 'viable', ...over,
+  });
+
+  it('the key walks the generator\'s own capacity steps, and the magic reading takes precedence', () => {
+    expect(isolationSupportPoolKey(support({ capacity: 53 }))).toBe('CAPACITY: ample');
+    expect(isolationSupportPoolKey(support({ capacity: 52 }))).toBe('CAPACITY: enough');
+    expect(isolationSupportPoolKey(support({ capacity: 38 }))).toBe('CAPACITY: enough');
+    expect(isolationSupportPoolKey(support({ capacity: 37 }))).toBe('CAPACITY: short');
+    expect(isolationSupportPoolKey(support({ capacity: 23 }))).toBe('CAPACITY: short');
+    expect(isolationSupportPoolKey(support({ capacity: 22 }))).toBe('CAPACITY: far short');
+    expect(isolationSupportPoolKey(support({ magicDependent: true, capacity: 60 }))).toBe('MAGIC-DEPENDENT');
+    // Every key the function can return is a pool the corpus carries.
+    for (const key of ['CAPACITY: ample', 'CAPACITY: enough', 'CAPACITY: short', 'CAPACITY: far short', 'MAGIC-DEPENDENT']) {
+      expect(DOSSIER_STATE_PROSE_DEFENSE['DS-DEF-12'].pools[key], key).toBeTruthy();
+    }
+  });
+
+  it('is silent where the finding does not apply, and on a record it cannot read', () => {
+    // The positive first, so the silences below are the key discriminating, not a dead key.
+    expect(isolationSupportPoolKey(support({}))).toBe('CAPACITY: enough');
+    expect(isolationSupportPoolKey(support({ applicable: false, status: 'connected' }))).toBeNull();
+    expect(isolationSupportPoolKey(null)).toBeNull();
+    expect(isolationSupportPoolKey(support({ capacity: '40' }))).toBeNull();
+    expect(defenseIsolationSupportProse({ name: 'Harrowmere', isolationSupport: support({ applicable: false }) }).isolationSupply).toBeNull();
+  });
+
+  it('draws one sentence for an isolated town, naming the town, at the viability mount', () => {
+    const rung = defenseIsolationSupportProse(
+      { name: 'Harrowmere', isolationSupport: support({ capacity: 10 }) },
+      { seed: 'w2-def-12', audience: 'dm' },
+    ).isolationSupply;
+    expect(rung?.sentence).toMatch(/Harrowmere/);
+    expect(rung?.provenance?.blockId).toBe('DS-DEF-12');
+    expect(rung?.provenance?.poolKey).toBe('CAPACITY: far short');
+    expect(sentenceMountForBlock('DS-DEF-12')?.mount).toBe('viability.isolationSupport');
+    // ⛔ The support model is not the food record: no line of the block speaks of hunger.
+    for (const pool of Object.values(DOSSIER_STATE_PROSE_DEFENSE['DS-DEF-12'].pools)) {
+      for (const v of pool) {
+        // anchored: every DS-DEF-12 pool is asserted present by the key arm above, so this loop reads real lines
+        expect(v.text, v.text).not.toMatch(/\bhung(?:er|ry)\b|\bstarv/i);
+      }
+    }
+  });
+});
+
+describe('DS-DEF-2 · the supply-chain clauses (W2 DEF construction C6, 2026-11-07)', () => {
+  it('the force clause speaks only where the chains moved the score AND the town has a force to supply', () => {
+    expect(defenceSupplyPoolKey({ military: 11, economic: 0 }, true)).toBe('CHAIN: defence supplied');
+    expect(defenceSupplyPoolKey({ military: -5, economic: 0 }, true)).toBe('CHAIN: defence short');
+    // The positive above makes these silences the key discriminating, not a dead key.
+    expect(defenceSupplyPoolKey({ military: 11, economic: 0 }, false)).toBeNull();
+    expect(defenceSupplyPoolKey({ military: 0, economic: 5 }, true)).toBeNull();
+    expect(defenceSupplyPoolKey(null, true)).toBeNull();
+  });
+
+  it('each clause prints as the second sentence beside its own row, and never alone', () => {
+    const withChains = (mods, over) => ({ ...fort(over), defenseProfile: { scores: { economic: 50 }, chainModifiers: mods } });
+    const bare = defenseThreatProse(fort({ walls: true, garrison: true }), { seed: 'c6' });
+    const supplied = defenseThreatProse(withChains({ military: 11, economic: 5 }, { walls: true, garrison: true }), { seed: 'c6' });
+    // The spine is the same row; the clause is ADDED after it.
+    expect(supplied.invasion.sentence.startsWith(bare.invasion.sentence)).toBe(true);
+    expect(supplied.invasion.sentence.length).toBeGreaterThan(bare.invasion.sentence.length);
+    expect(supplied.economic.sentence.length).toBeGreaterThan(bare.economic.sentence.length);
+    expect(supplied.invasion.provenance.poolKey).toBe(bare.invasion.provenance.poolKey);
+    // No force to supply: the force clause is not said, the food clause still is.
+    const unmanned = defenseThreatProse(withChains({ military: 6, economic: -8 }, { walls: true }), { seed: 'c6' });
+    const unmannedBare = defenseThreatProse(fort({ walls: true }), { seed: 'c6' });
+    expect(unmanned.invasion.sentence).toBe(unmannedBare.invasion.sentence);
+    expect(unmanned.economic.sentence.length).toBeGreaterThan(unmannedBare.economic.sentence.length);
+  });
+
+  it('the food clause reads the food-processing arm alone', () => {
+    expect(foodTradesPoolKey({ military: 0, economic: 5 })).toBe('CHAIN: food trades working');
+    expect(foodTradesPoolKey({ military: 0, economic: -8 })).toBe('CHAIN: food trades failing');
+    expect(foodTradesPoolKey({ military: 15, economic: 0 })).toBeNull();
+    expect(foodTradesPoolKey({ military: 0, economic: 'x' })).toBeNull();
+    for (const key of ['CHAIN: defence supplied', 'CHAIN: defence short', 'CHAIN: food trades working', 'CHAIN: food trades failing']) {
+      expect(DOSSIER_STATE_PROSE_DEFENSE['DS-DEF-2'].pools[key], key).toBeTruthy();
+    }
   });
 });

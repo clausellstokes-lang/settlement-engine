@@ -135,8 +135,10 @@ describe('UX consolidation — the Outlook page says each fact once (RULINGS-T2 
       viable: true, issues: [], warnings: [], dependencies: [{}, {}],
       summary: '✓ VIABLE: Settlement can survive but has 2 operational dependencies that require active management. 3 plot hooks available.',
     })} />);
-    expect(container.textContent).toContain('can function');
-    expect(container.textContent).not.toMatch(/plot hooks available|operational dependenc|stable trade dependenc/); // anchored: toContain('can function') on this render
+    // #36 (W2 DEF, 2026-11-07): the dependent verdict reads in plain words; with no dependency row naming
+    // a good, the line speaks of "the goods it buys in" / "goods brought in", and the machine clause stays out.
+    expect(container.textContent).toMatch(/goods it buys in|goods brought in/);
+    expect(container.textContent).not.toMatch(/plot hooks available|operational dependenc|stable trade dependenc/); // anchored: the toMatch above on this render
   });
 
   it('T2-15: the magic-dependence block left the Outlook page (it frames the Magic tab\'s roles)', () => {

@@ -74,7 +74,7 @@
 import { drawnAtMount } from './dossierMounts.js';
 import { tierNounFor, weaveBlock } from './weaveBlock.js';
 import {
-  defenseCriminalProse, defenseForcesProse, defenseMagicDependencyProse,
+  defenseCriminalProse, defenseForcesProse, defenseIsolationSupportProse, defenseMagicDependencyProse,
   defenseMilitaryStatusProse, defensePostureProse, defenseStateProse,
   defenseSupportingProse, defenseThreatProse, defenseWallRationaleProse,
 } from './defenseStateProse.js';
@@ -420,6 +420,8 @@ export function buildPrintProse(settlement, ctx = {}) {
   const supporting = defenseSupportingProse(r, opts);
   // T2-24: silent where magic does not function, exactly as ViabilityTab gates it.
   const magic = magicWorksAt({ settlement: r }) === false ? { arcaneReliance: null } : defenseMagicDependencyProse(r, opts);
+  // DS-DEF-12, as ViabilityTab: the isolation-support finding, silent where it does not apply.
+  const isolation = defenseIsolationSupportProse(r, opts);
   const criminalKey = deriveCriminalStructure(r)?.key || null;
   const criminal = defenseCriminalProse(r, criminalKey, opts);
   // R-D2 (RUNG-2 LANDING phase D; F9's law extended), as DefenseTab: the `structure null` reading
@@ -571,6 +573,9 @@ export function buildPrintProse(settlement, ctx = {}) {
   put('viability', 'viability.verdict', general.viability.verdictLines);
   put('viability', 'viability.magicDependency', [
     printed('viability.magicDependency', magic.arcaneReliance),
+  ]);
+  put('viability', 'viability.isolationSupport', [
+    printed('viability.isolationSupport', isolation.isolationSupply),
   ]);
 
   put('economics', 'economics.prosperityHeader', [

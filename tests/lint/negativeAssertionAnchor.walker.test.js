@@ -400,7 +400,6 @@ const FROZEN_UNANCHORED_NEGATIVES = Object.freeze({
   'tests/domain/discourseKernel.test.js': 5,
   'tests/domain/display/armyStrength.test.js': 5,
   'tests/domain/display/bTrackSurfacingSoak.test.js': 2,
-  'tests/domain/display/dossierViewModel.test.js': 3,
   'tests/domain/display/mobilizationStatus.test.js': 2,
   'tests/domain/display/occupationStatus.test.js': 1,
   'tests/domain/display/publicSafe.test.js': 5,

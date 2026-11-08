@@ -135,44 +135,42 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
       : 'Occupation authorities enforce';
     safetyStrains.push({ strain: 'Controlled', condition: 'Occupation Curfew' });
     safetyDescs.push(
-      `Movement is restricted and monitored. ${curfewAuthority} curfew and checkpoint protocols. ` +
-      `Common crime is suppressed by authoritarian presence. Residents face little risk from thieves ` +
-      `and considerably more from informers and occupation officials. Resistance activity operates underground.`
+      `${curfewAuthority} the curfew at the checkpoints. Thieves are scarce now; the danger is informers ` +
+      `and occupation officials, and the resistance works out of sight.`
     );
   }
 
   if (hasStress('under_siege')) {
     const strainLabel = safetyRatio >= 2 ? 'Tense' : safetyRatio >= 1 ? 'Strained' : 'Desperate';
-    const milRef = inst.hasGarrison ? 'The garrison maintains order' : 'Military command has assumed civil authority';
+    const milRef = inst.hasGarrison ? 'The garrison keeps order' : 'The military command has taken charge of the streets';
     safetyStrains.push({ strain: strainLabel, condition: 'Active Siege' });
     safetyDescs.push(
-      `Siege conditions have transformed the settlement's social character. ${milRef} with increasing severity ` +
-      `as supplies run low. Rationing disputes, black market food trading, and desperation theft are rising.`
+      `${milRef}, and more harshly as the food runs down. People quarrel over rations, food is sold ` +
+      `under the counter, and the hungry have started to steal.`
     );
   }
 
   if (hasStress('famine')) {
     const strainLabel = safetyRatio >= 2 ? 'Strained' : safetyRatio >= 1 ? 'Unsafe' : 'Dangerous';
     const foodRef = inst.hasGarrison
-      ? 'The garrison focuses on food distribution enforcement'
-      : 'Authority is increasingly exercised around food access';
+      ? 'The garrison spends its days guarding the food'
+      : 'Whoever controls the food now has the say';
     safetyStrains.push({ strain: strainLabel, condition: 'Famine Conditions' });
     safetyDescs.push(
-      `Hunger has destabilised the normal social order. ${foodRef}. ` +
-      `Desperation theft is rampant and difficult to distinguish from survival. ` +
-      `Those with food stores face targeted theft or worse.`
+      `People are hungry and stealing to eat. ${foodRef}. ` +
+      `Anyone known to have food hidden away is robbed, or worse.`
     );
   }
 
   if (hasStress('plague_onset')) {
     const strainLabel = safetyRatio >= 2 ? 'Quarantined' : safetyRatio >= 1 ? 'Restricted' : 'Dangerous — Plague Unrest';
-    const quarRef = inst.hasGarrison ? 'The garrison enforces quarantine zones'
-                  : inst.hasWatch    ? 'The watch manages quarantine compliance'
-                  :                    'Informal community enforcement maintains quarantine';
+    const quarRef = inst.hasGarrison ? 'The garrison holds the quarantine lines'
+                  : inst.hasWatch    ? 'The watch keeps the quarantine'
+                  :                    'Neighbours keep the quarantine among themselves';
     safetyStrains.push({ strain: strainLabel, condition: 'Plague Conditions' });
     safetyDescs.push(
-      `Disease has reorganised daily life around containment and fear. ${quarRef}, with mixed compliance. ` +
-      `Violence against the sick is a genuine risk. Price gouging on medicines and burial services is widespread.`
+      `${quarRef}, but not everyone obeys. Frightened neighbours turn on the sick, ` +
+      `and medicine and burials cost whatever the seller asks.`
     );
   }
 
@@ -182,24 +180,24 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
       const strainLabel = safetyRatio >= 2 ? 'Tense' : safetyRatio >= 1 ? 'Strained' : 'Dangerous';
       safetyStrains.push({ strain: strainLabel, condition: 'Insurgency' });
       safetyDescs.push(
-        'The settlement is experiencing organised resistance. Patrol patterns have changed. ' +
-        'Movement between districts may be restricted. Loyalties are unclear.'
+        'Armed rebels are active. Patrols have changed their routes, some districts are closed off, ' +
+        'and nobody is sure whose side a neighbour is on.'
       );
     }
     if (hasStress('slave_revolt')) {
       const strainLabel = safetyRatio >= 2 ? 'Tense' : safetyRatio >= 1 ? 'Dangerous' : 'Critical';
       safetyStrains.push({ strain: strainLabel, condition: 'Slave Revolt' });
       safetyDescs.push(
-        'Active armed conflict between revolt participants and security forces in contested districts. ' +
-        'Civilians are avoiding specific streets. Normal patrol patterns have been abandoned.'
+        'Rebels and guards are fighting in the contested districts. People keep off certain streets, ' +
+        'and the regular patrols have stopped.'
       );
     }
     if (hasStress('wartime')) {
       const strainLabel = safetyRatio >= 2 ? 'Strained' : 'Tense';
       safetyStrains.push({ strain: strainLabel, condition: 'Wartime' });
       safetyDescs.push(
-        'War has reorganised daily life. Strangers are viewed with heightened suspicion. ' +
-        'Price controls and curfews are sporadically enforced.'
+        'The war has changed daily life: strangers are watched closely, ' +
+        'and curfews and fixed prices are enforced now and then.'
       );
     }
     if (hasStress('politically_fractured')) {
@@ -220,38 +218,38 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
       const strainLabel = safetyRatio >= 2 ? 'Tense' : safetyRatio >= 1 ? 'Strained' : 'Suspicious';
       safetyStrains.push({ strain: strainLabel, condition: 'Aftermath of Betrayal' });
       safetyDescs.push(
-        'The settlement is processing a betrayal. Strangers are viewed with heightened suspicion. Informal loyalty checks are common.'
+        "Since the betrayal, strangers are watched closely and neighbours quietly test each other's loyalty."
       );
     }
     if (hasStress('monster_pressure')) {
       const strainLabel = safetyRatio >= 2 ? 'Tense' : safetyRatio >= 1 ? 'Strained' : 'Dangerous';
       safetyStrains.push({ strain: strainLabel, condition: 'Monster Threat' });
       safetyDescs.push(
-        'Monster pressure from the surrounding region has changed how the settlement operates after dark. ' +
-        'Outlying areas are avoided. Night movement is restricted.'
+        'Creatures come close after dark. People keep away from the outlying houses, ' +
+        'and nobody walks out at night.'
       );
     }
     if (hasStress('indebted')) {
       const strainLabel = safetyRatio >= 2 ? 'Strained' : 'Tense';
       safetyStrains.push({ strain: strainLabel, condition: 'Debt Crisis' });
       safetyDescs.push(
-        'Debt service obligations shape every civic decision. The creditor representative has effective veto power over enforcement priorities.'
+        "The debt comes before everything. The creditor's agent decides which wrongs are chased and which are let go."
       );
     }
     if (hasStress('mass_migration')) {
       const strainLabel = safetyRatio >= 2 ? 'Strained' : 'Tense';
       safetyStrains.push({ strain: strainLabel, condition: 'Mass Migration' });
       safetyDescs.push(
-        said("The settlement is absorbing more people than its infrastructure was built for. " +
-        "Friction between established residents and newcomers is visible. The watch is overwhelmed by unfamiliar faces.")
+        said("More people have arrived than there are roofs or work for, and newcomers and old residents quarrel in the streets. " +
+        "The watch cannot tell one stranger from the next.")
       );
     }
     if (hasStress('religious_conversion')) {
       const strainLabel = safetyRatio >= 2 ? 'Tense' : safetyRatio >= 1 ? 'Strained' : 'Suspicious';
       safetyStrains.push({ strain: strainLabel, condition: 'Religious Upheaval' });
       safetyDescs.push(
-        'The religious shift has divided the settlement. Each faction suspects the other of reporting to the relevant authority. ' +
-        'Enforcement of the new order is inconsistent.'
+        'The change of faith has split the people here. Each side suspects the other of informing, ' +
+        'and the new rules are enforced one day and ignored the next.'
       );
     }
   }
@@ -281,8 +279,8 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
     safetyLabel = 'Dangerous — Criminal Governance';
     const crimeRef = inst.hasThievesGuild ? "The thieves' guild" : 'Organized crime';
     const garNote  = inst.hasGarrison ? ' The garrison takes orders from criminal leadership.' : '';
-    safetyDesc = `There is no meaningful distinction between criminal organizations and civil authority here. ` +
-      `${crimeRef} provides order of a sort: its own. Protection must be purchased; those who cannot pay are unprotected.${garNote}`;
+    safetyDesc = `The criminals are the government here. ${crimeRef} keeps its own kind of order: ` +
+      `protection is bought, and those who cannot pay go without.${garNote}`;
   // ── Safety label thresholds ─────────────────────────────────────────────
   // effectiveSafety = max(militaryEffective/criminalEffective, communityBonus, courtFloor)
   // Intended meaning:
@@ -302,25 +300,25 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
           ? watchLabel
           : inst.hasMilitia
             ? 'militia'
-            : 'law enforcement';
-    const wallNote   = inst.hasWalls ? ' Walls and controlled entry points reinforce the guard\'s ability to monitor movement.' : '';
+            : 'local guard';
+    const wallNote   = inst.hasWalls ? ' Everyone comes in by the gates, where the guard sees them.' : '';
     const charNote   = inst.hasCharterHall ? " The adventurers' charter hall handles threats the watch cannot." : '';
     // Canonical threat vocabulary is heartland/frontier/plagued ('embattled' was never emitted).
     const threatNote = threat === 'plagued' ? ' The constant monster threat keeps the guard exceptionally well-drilled and alert.' : '';
-    safetyDesc = `Effective ${lawRef} and low criminal activity make this among the safest settlements in the region. ` +
-      `Visitors can move freely at all hours.${wallNote}${charNote}${threatNote}`;
+    safetyDesc = `Visitors can walk anywhere at any hour, and there is little crime; the ${lawRef} sees to that.` +
+      `${wallNote}${charNote}${threatNote}`;
   } else if (effectiveSafety >= 2) {
     safetyLabel = 'Safe';
     const lawRef  = inst.hasGarrison ? 'The garrison' : inst.hasWatch ? 'The watch' : inst.hasMilitia ? 'The militia' : 'Local enforcement';
-    const wallNote = inst.hasWalls ? ' Walls limit access and give the guard leverage over smuggling and movement.' : '';
-    const courtNote = inst.hasCourtSystem ? ' A functioning court system means organized crime operates with greater caution.' : '';
+    const wallNote = inst.hasWalls ? ' The walls keep most trouble outside.' : '';
+    const courtNote = inst.hasCourtSystem ? ' With a working court, organised crime treads carefully.' : '';
     safetyDesc = `Crime exists but is well-managed. ${lawRef} is present and responsive. Petty theft is the primary risk; ` +
       `organized crime has a limited foothold.${courtNote}${wallNote}`;
   } else if (effectiveSafety >= 1.2) {
     safetyLabel = 'Moderate';
     const lawRef  = inst.hasGarrison ? 'The garrison patrols' : inst.hasWatch ? 'The watch covers'
                   : inst.hasMilitia  ? 'Militia volunteers patrol' : 'Locals watch over';
-    const wallNote = inst.hasWalls ? ' The walls contain the problem somewhat: crime is concentrated inside rather than spilling into the surrounding territory.' : '';
+    const wallNote = inst.hasWalls ? ' The walls keep the trouble inside, off the roads beyond.' : '';
     safetyDesc = `A mix of safer and more exposed areas. ${lawRef} the main paths; quieter spots after dark carry genuine risk. ` +
       `Residents know which corners to avoid.${wallNote}`;
   } else if (effectiveSafety >= 0.6) {
@@ -342,7 +340,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
       inst.hasMercenary  ? 'The mercenary company has effectively become another criminal faction.' :
                            'There is effectively no law enforcement.';
     const wallNote   = inst.hasWalls ? ' Even the walls provide limited protection. The threat is within.' : '';
-    const courtNote  = inst.hasCourtSystem ? '' : ' With no court system, violence is the primary means of dispute resolution.';
+    const courtNote  = inst.hasCourtSystem ? '' : ' With no court, quarrels are settled with fists and knives.';
     safetyDesc = `Violence and theft are routine. ${lawRef} Residents protect themselves through community networks or tribute paid to whoever controls their street.${courtNote}${wallNote}`;
   }
 
@@ -366,12 +364,12 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
       : ' Without courts or prison, enforcement relies entirely on fines, exile, or summary violence.';
 
     const wallNote = inst.hasWalls
-      ? ' Walls control entry points and give the guard a chokehold on smuggling routes.'
+      ? ` Everyone comes and goes by the gates, so smugglers have to get past the ${lawRef}.`
       : '';
 
     if (stress.stateCrime) {
-      guardEffectivenessDesc = `The ${lawRef} is well-organized but deployed as an instrument of state extraction rather than public protection. ` +
-        `Loyalty is to whoever controls the payroll.${prisonNote}`;
+      guardEffectivenessDesc = `The ${lawRef} is well organised and works for the rulers' purses, not for the public; ` +
+        `it is loyal to whoever pays it.${prisonNote}`;
     } else if (flags.militaryEffective < 30 && pri.economy < 35) {
       const militiaNote = inst.hasMilitia ? ': these are volunteers with day jobs, not soldiers' : '';
       guardEffectivenessDesc = `The ${lawRef} exists on paper. Chronically underpaid and poorly equipped${militiaNote}. ` +
@@ -383,8 +381,8 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
         `real protection exists, but only for those with the right associations.${prisonNote}`;
     } else if (inst.hasMilitia && !inst.hasGarrison && !inst.hasWatch) {
       if (flags.militaryEffective >= 55) {
-        guardEffectivenessDesc = `The citizen militia is well-organized and motivated. These are people defending their own homes and livelihoods, which counts for something. ` +
-          `Coverage is irregular by professional standards, but local knowledge compensates.${prisonNote}${wallNote}`;
+        guardEffectivenessDesc = `The citizen militia is well organised and willing: these are people defending their own homes. ` +
+          `They do not patrol like professionals, but they know every lane.${prisonNote}${wallNote}`;
       } else {
         guardEffectivenessDesc = `The citizen militia musters when needed but cannot maintain consistent patrol. ` +
           `Volunteers with other work to do; reliable in a crisis, absent during routine crime.${prisonNote}`;
@@ -396,8 +394,8 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
       guardEffectivenessDesc = `The adventurers' charter hall coordinates emergency response to threats. Effective for monster incursions and major disturbances, ` +
         `less so for routine crime prevention. Not a police force.${prisonNote}`;
     } else if (flags.militaryEffective >= 65 && pri.economy >= 50) {
-      guardEffectivenessDesc = `The ${lawRef} is well-funded, properly equipped, and maintains meaningful patrol coverage. ` +
-        `Response times are adequate; bribery exists but isn't normalized.${prisonNote}${wallNote}`;
+      guardEffectivenessDesc = `The ${lawRef} is well paid, well equipped and patrols properly. ` +
+        `They come when called, and though some take bribes, it is not the custom.${prisonNote}${wallNote}`;
     } else if (flags.militaryEffective >= 65 && pri.economy < 40) {
       guardEffectivenessDesc = `The ${lawRef} is disciplined but resource-constrained: motivated with inadequate equipment and irregular pay. ` +
         `Effective in a fight; vulnerable to sustained corruption.${prisonNote}${wallNote}`;
@@ -406,13 +404,13 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
         `less effective against organized operations that can plan around patrol routes.${prisonNote}${wallNote}`;
     }
   } else if (inst.hasCourtSystem) {
-    guardEffectivenessDesc = 'No formal enforcement body exists, but a functioning court system provides some deterrence. ' +
-      'Disputes that escalate to violence must rely on community pressure or the intervention of whoever is strongest locally.';
+    guardEffectivenessDesc = 'There is no watch, only a court. ' +
+      'When a quarrel turns violent, the neighbours or whoever is strongest nearby step in.';
   } else {
     guardEffectivenessDesc = ['thorp', 'hamlet', 'village'].includes(tier)
-      ? "There is no formal enforcement body. Order is maintained through community social pressure, the authority of established families, " +
-        "and the implicit threat of collective action against those who break the peace. This works until it doesn't."
-      : 'No functioning enforcement institution exists. The settlement is relying on whatever informal mechanisms remain.';
+      ? 'There is no watch. The old families keep the peace, and anyone who breaks it answers to all the neighbours at once; ' +
+        'when the families fall out among themselves, nobody keeps it.'
+      : 'There is no watch and nobody in charge of order; people look after themselves and their own.';
   }
 
   // ── Crime types ───────────────────────────────────────────────────────────
@@ -422,7 +420,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
     const garRef = inst.hasGarrison ? 'the garrison' : 'armed officials';
     crimeTypes.push({
       type: 'State predation',
-      desc: `The primary threat comes from institutional actors: ${garRef} using their authority for personal extraction. ` +
+      desc: `The worst thieves here hold office: ${garRef} use their authority to line their own pockets. ` +
             'Tax extortion, forced confiscations, and selective enforcement targeting those without political connections.',
     });
   }
@@ -460,7 +458,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
     const tradeRef = inst.hasMerchantGuild ? 'Guild merchants' : 'Wealthy traders';
     crimeTypes.push({
       type: 'Commercial crime',
-      desc: `${tradeRef} and criminal operators are in many cases the same people. The distinction between a successful merchant and a successful criminal is largely legal technicality.`,
+      desc: `${tradeRef} and the criminals are often the same people; what separates them is a licence.`,
     });
   }
   if (flags.criminalEffective >= 60 && pri.economy >= 60 &&
@@ -470,7 +468,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
       : ' With no reliable court system to fear, operations are conducted openly enough to be an open secret.';
     crimeTypes.push({
       type: 'Organized guild crime',
-      desc: `The thieves' guild is well-funded and structured. Protection rackets, sophisticated smuggling operations, and contract services for discerning clients.${courtNote}`,
+      desc: `The thieves' guild is rich and well run: protection rackets, smuggling, and jobs done for whoever pays.${courtNote}`,
     });
   }
   // Survival crime: requires either a criminal institution OR a settlement large enough
@@ -813,9 +811,9 @@ export const SAFETY_LINE_SIBLINGS = Object.freeze({
   'Authority is contested. The watch is uncertain whose orders to follow. Opportunistic crime is rising in the gap.': declaredSet(
     'Authority is contested. The watch is uncertain whose orders to follow. Opportunistic crime is rising in the gap.', ['watch'],
     'Authority is contested. Whoever keeps order is uncertain whose orders to follow. Opportunistic crime is rising in the gap.'),
-  'The settlement is absorbing more people than its infrastructure was built for. Friction between established residents and newcomers is visible. The watch is overwhelmed by unfamiliar faces.': declaredSet(
-    'The settlement is absorbing more people than its infrastructure was built for. Friction between established residents and newcomers is visible. The watch is overwhelmed by unfamiliar faces.', ['watch'],
-    'The settlement is absorbing more people than its infrastructure was built for. Friction between established residents and newcomers is visible. Whoever keeps order is overwhelmed by unfamiliar faces.'),
+  'More people have arrived than there are roofs or work for, and newcomers and old residents quarrel in the streets. The watch cannot tell one stranger from the next.': declaredSet(
+    'More people have arrived than there are roofs or work for, and newcomers and old residents quarrel in the streets. The watch cannot tell one stranger from the next.', ['watch'],
+    'More people have arrived than there are roofs or work for, and newcomers and old residents quarrel in the streets. Whoever keeps order cannot tell one stranger from the next.'),
   'Active armed conflict between revolt participants and security forces in contested districts. Civilians are avoiding specific streets. The watch has abandoned normal patrol patterns.': declaredSet(
     'Active armed conflict between revolt participants and security forces in contested districts. Civilians are avoiding specific streets. The watch has abandoned normal patrol patterns.', ['watch'],
     'Active armed conflict between revolt participants and security forces in contested districts. Civilians are avoiding specific streets. Normal patrol patterns have been abandoned.'),

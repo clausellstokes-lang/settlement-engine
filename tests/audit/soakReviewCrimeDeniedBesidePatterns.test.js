@@ -23,7 +23,7 @@ const SOAK1K_1801 = [
   'False conversion declarations sold or arranged for a fee. Forged certification of compliance.',
   'informant networks',
   'Enforcement authorities paying for information about non-compliant households.',
-  'No criminal infrastructure has been identified at Tarkhanbulag. Whatever wrongdoing the hamlet has does not run through anything that could be called an organization.',
+  'Tarkhanbulag\'s books record no gang, guild or racket: what wrongdoing the hamlet has, people do on their own account.',
   'Armed Forces & Fortifications ▲',
 ].join('\n');
 
@@ -44,7 +44,7 @@ describe('A-06 reads the denial beside the block\'s own crime patterns', () => {
   });
 
   it('the denial with no patterns listed, and a survival pattern without the denial, are not findings', () => {
-    const denialOnly = 'Criminal Architecture & Public Order ▲\nNo criminal infrastructure has been identified at Ford. Whatever wrongdoing the town has does not run through anything that could be called an organization.';
+    const denialOnly = `Criminal Architecture & Public Order ▲\n${denialOf(1, 'Ford')}`;
     expect(crimeAbsentAndOrganised(denialOnly, denialOnly)).toBeNull();
     const survival = 'Active crime patterns\nSurvival crime\nTheft driven by economic desperation rather than organization. No criminal infrastructure: the desperate steal alone.';
     expect(crimeAbsentAndOrganised(survival, survival)).toBeNull();

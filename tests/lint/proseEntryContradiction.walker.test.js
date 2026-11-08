@@ -315,9 +315,9 @@ describe('the corpus loaders — fail-closed, and counted against the probe', ()
     // c00b30eb6 +4); the causal leaf and the 787 pools unchanged. 2810 -> 2811 at
     // LANDING-R2 helper G (the chair's §934.105 ruling (1): DS-GEN-17 PROVISIONED v3, the hospital-only line) +1.
     // 2811 -> 2812 at LANDING-R2 helper G2 (the chair's 06:5x DS-CND-1 boom line (ODQ §934.105, ruling (2)): ARCHETYPE: boom v4 `[street · crisis: any]`) +1.
-    expect(leaves.length + causal.length).toBe(2889); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted).
-    expect(new Set([...leaves, ...causal].map((e) => e.poolId)).size).toBe(813); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted).
-    expect(new Set(leaves.map((e) => e.block)).size).toBe(68);
+    expect(leaves.length + causal.length).toBe(3050); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted). // 2812 -> 2859 over the W2 DEF lane (2026-11-07): the 47 lines it added (FLAG 4, DS-DEF-4 FIXTURE 8, DS-DEF-5 FIXTURE 8, ARCANE 12, DS-DEF-12 15) // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 2859 -> 2873 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 2873 -> 2973 // MERGE-WAVE at the W2 DEF merge: both lanes' deltas composed (2812 -> 3050)
+    expect(new Set([...leaves, ...causal].map((e) => e.poolId)).size).toBe(870); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted). // 787 -> 807 over the W2 DEF lane (2026-11-07): the twenty pools it added (FLAG 2, DS-DEF-4 FIXTURE 4, DS-DEF-5 FIXTURE 3, ARCANE 6, DS-DEF-12 5) // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 807 -> 811 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 811 -> 844 // MERGE-WAVE at the W2 DEF merge: both lanes' deltas composed (787 -> 870)
+    expect(new Set(leaves.map((e) => e.block)).size).toBe(69); // W2 DEF C3–C5 (DS-DEF-12, 2026-11-07): 68 -> 69 // MERGE-WAVE at the W2 DEF merge: both lanes' deltas composed (68 -> 69)
     expect(crier.length).toBeGreaterThan(300);
     expect(generator.length).toBeGreaterThan(0);
   });
@@ -331,13 +331,15 @@ describe('the corpus loaders — fail-closed, and counted against the probe', ()
     // (6dd3f9766, the {colour} rulings) +21 rows whose text now joins its twin. 0 unjoined.
     // 2121 -> 2122 at LANDING-R2 helper G (the chair's §934.105 ruling (1): DS-GEN-17 PROVISIONED v3, the hospital-only line) +1.
     // 2122 -> 2123 at LANDING-R2 helper G2 (the chair's 06:5x DS-CND-1 boom line (ODQ §934.105, ruling (2)): ARCHETYPE: boom v4 `[street · crisis: any]`) +1.
-    expect(joined.length).toBe(2200); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted).
+    // 2123 -> 2170 over the W2 DEF lane (2026-11-07): every line the lane added joins its twin — DS-DEF-9 FLAG 4, DS-DEF-4
+    // FIXTURE 8, DS-DEF-5 FIXTURE 8, ARCANE 12, DS-DEF-12 15 = 47. (The lane's first two seats did not re-key this pin.)
+    expect(joined.length).toBe(2361); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted). // 2184 -> 2284 (W2 DEF stress-type keys, 2026-11-07): the hundred new lines // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 2170 -> 2184 (the fourteen CHAIN lines) // MERGE-WAVE at the W2 DEF merge: both lanes' deltas composed (2123 -> 2361)
     expect(unjoined).toEqual([]);
     // The compact-row grammar (a whole pool on one bullet line, 225 variants) carries no
     // per-row address, so not every leaf variant has an annex line. That gap is the ADDRESS
     // reader's, is declared, and is why the pool grammar stays with the projection.
     expect(leafLines.size).toBeLessThan(leaves.length);
-    expect(leafLines.size).toBe(2200); // 2121 -> 2122 at the same cause: the new line is addressed; 2122 -> 2123 at G2's boom v4, likewise // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted).
+    expect(leafLines.size).toBe(2361); // 2121 -> 2122 at the same cause: the new line is addressed; 2122 -> 2123 at G2's boom v4, likewise // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted). // 2123 -> 2170 over the W2 DEF lane, the same 47 lines addressed // 2121 -> 2122 at the same cause: the new line is addressed; 2122 -> 2123 at G2's boom v4, likewise // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 2170 -> 2184 (the fourteen CHAIN lines) // MERGE-WAVE at the W2 DEF merge: both lanes' deltas composed (2123 -> 2361)
   });
 });
 
@@ -425,8 +427,12 @@ describe('THE ANTI-VACUITY GUARD — the walker must fail on the corpus it ships
       // at LANDING-R2 helper G2 (the chair's 06:5x DS-CND-1 boom line (ODQ §934.105, ruling (2)): ARCHETYPE: boom v4 `[street · crisis: any]`): the boom line sits above it.
       // 5326 -> 5422 at W1 ECO construction (2026-11-07): 96 annex lines of new economy pools sit above it.
       // 5422 -> 5425: three DS-ECO-11 strategic-value vantages added above it (W1 ECO, 2026-11-07).
-      .find((row) => row.line === 5425);
-    expect(annexRow, 'RECEIPT_POOLS_DOSSIER_STATE.md:5425 did not load').toBeTruthy();
+      // 5326 -> 5458 over the W2 DEF lane (2026-11-07): the lane's new pools and their notes sit above it (DS-DEF-4, -5, -9
+      // and the new DS-DEF-12 block); re-addressed by the same text.
+      // 5458 -> 5489 at W2 DEF C6 (2026-11-07): DS-DEF-2's four CHAIN pools and their note sit above it.
+      // 5489 -> 5674 (W2 DEF stress-type keys, 2026-11-07): DS-DEF-3's and DS-DEF-8's thirty-three new pools sit above it.
+      .find((row) => row.line === 5773); // MERGE-WAVE at the W2 DEF merge: both lanes' deltas composed (5326 -> 5773)
+    expect(annexRow, 'RECEIPT_POOLS_DOSSIER_STATE.md:5773 did not load').toBeTruthy(); // MERGE-WAVE at the W2 DEF merge: both lanes' deltas composed (5326 -> 5773)
     expect(walkEntry(annexRow, withEntryContext(base, {})).fails.map((f) => f.arm))
       .toContain('exemption on a null column');
   });
@@ -516,8 +522,15 @@ describe('THE ANTI-VACUITY GUARD — the walker must fail on the corpus it ships
     // `eventProvenance: false`; NOT-EXECUTABLE without the flag) — measured on that one entry.
     // 47 -> 46 (both) at the chair's 07:1x ruling: the boom line's undated clause ("coin moves
     // freely and work is easy to find") makes no dated claim, so the entry leaves the class.
-    expect(notExecutable).toBe(48); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted).
-    expect(fails).toBe(48); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted).
+    // 46 -> 45 (W2 DEF, 2026-11-07): DS-DEF-8's generic framing v1 rewritten off its actor claim ("What {settlement}'s defenses
+    // are ordinarily worth ... the arrangements have been rebuilt"), measured on that one entry.
+    // 45 -> 44 (W2 DEF fourth seat, 2026-11-07, the DS-DEF-1 style rows): readiness ADEQUATE v3's old wording ("The town
+    // believes it could hold ...") carried the class; its rewrite does not, measured on that one entry.
+    // 44 -> 43 (W2 DEF fourth seat (DS-DEF-2 style rows, 2026-11-07)), measured on the entries that left the class.
+    // 43 -> 42 (W2 DEF fourth seat (DS-DEF-10 style rows, 2026-11-07)), measured on the entries that left the class.
+    // 42 -> 41 (W2 DEF fourth seat (DS-WAR-1 style rows, 2026-11-07)), measured on the entries that left the class.
+    expect(notExecutable).toBe(43); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted). // MERGE-WAVE at the W2 DEF merge: both lanes' deltas composed (46 -> 43)
+    expect(fails).toBe(43); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted). // MERGE-WAVE at the W2 DEF merge: both lanes' deltas composed (46 -> 43)
     // PRESENT-THEN-ABSENT on one of them, so the arm is proved rather than counted.
     const anchor = corpus.find((entry) => walkEntry(entry, withEntryContext(base, { eventProvenance: false }))
       .fails.some((f) => f.klass === 'C3'));
@@ -676,7 +689,7 @@ describe('THE ANTI-VACUITY GUARD — the walker must fail on the corpus it ships
     // chair's ruling of 2026-11-04; the owner's veto point). Report-only, still a minority.
     // 336 -> 341, measured per commit on the leaves: F12 unit 2 (e19e3e4cf) +3, census-5b unit 3
     // (c00b30eb6, R-L twins) +2. Report-only, still a minority.
-    expect(carrying.length, 'entries carrying the trailing-coordinate class, at this tip').toBe(352); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted).
+    expect(carrying.length, 'entries carrying the trailing-coordinate class, at this tip').toBe(342); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted). // 341 -> 346 over the W2 DEF lane (2026-11-07), measured on the leaves: +3 at the second seat's tip (the DS-DEF-4/5 rewrites and FIXTURE: gates v2), +2 at DS-DEF-12 (CAPACITY: enough v3, MAGIC-DEPENDENT v1). Report-only, still a minority. // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 346 -> 347 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 347 -> 346 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 346 -> 347 // W2 DEF fourth seat (DS-DEF-2 style rows, 2026-11-07): 347 -> 345 (report-only) // W2 DEF fourth seat (DS-DEF-6 style rows, 2026-11-07): 345 -> 342 (report-only) // W2 DEF fourth seat (DS-DEF-7 style rows, 2026-11-07): 342 -> 341 (report-only) // W2 DEF fourth seat (DS-DEF-10 style rows, 2026-11-07): 341 -> 336 (report-only) // W2 DEF fourth seat (DS-DEF-11 style rows, 2026-11-07): 336 -> 334 (report-only) // W2 DEF fourth seat (DS-WAR-1 style rows, 2026-11-07): 334 -> 333 (report-only) // W2 DEF fourth seat (DS-WAR-3 style rows, 2026-11-07): 333 -> 332 (report-only) // W2 DEF fourth seat (DS-WAR-5 style rows, 2026-11-07): 332 -> 331 (report-only) // MERGE-WAVE at the W2 DEF merge: both lanes' deltas composed (341 -> 342)
     expect(carrying.length, 'and it is a minority of the 2,266 R1 variants').toBeLessThan(leaves.length / 2);
     console.log(`  Q · trailing coordinate: ${carrying.length} of ${leaves.length} R1 entries carry the class`);
   });
