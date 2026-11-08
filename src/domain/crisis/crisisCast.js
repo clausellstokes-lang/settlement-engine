@@ -144,12 +144,12 @@ const OCCASIONAL_BY_NATURE = Object.freeze(/** @type {Record<CrisisNature, Array
 export const CAST_REASONS = Object.freeze({
   bruntBase: Object.freeze(/** @type {Record<string, string>} */ ({
     food_security: 'the hunger falls first on its people',
-    labor_capacity: 'its hands do the work the crisis takes',
+    labor_capacity: 'its people do the work the crisis needs most',
     trade_connectivity: 'its trade is cut',
     defense_readiness: 'its people stand on the walls',
-    public_legitimacy: 'its standing is what the crisis spends',
+    public_legitimacy: 'it takes the blame, and its good name pays for the crisis',
     healing_capacity: 'its people tend the sick',
-    tax_revenue: 'its revenue is what the crisis drains',
+    tax_revenue: 'its income dries up first',
     housing_pressure: 'its people take in the newcomers',
     social_trust: 'its people stop trusting their neighbours',
     faction_stability: 'its own ranks begin to split',
@@ -158,8 +158,8 @@ export const CAST_REASONS = Object.freeze({
   })),
   bruntLeast: 'the least powerful of the house the crisis hits',
   leverRuns: 'holds the office the crisis turns on',
-  leverInstitution: 'the crisis turns on this house, and no one on the roster runs it',
-  leverTemporary: 'no one on the roster could; here for this crisis',
+  leverInstitution: 'whoever runs it decides how the crisis goes, and nobody named here runs it',
+  leverTemporary: 'nobody here could, so this one stepped in for the crisis',
   instigatorRival: 'outranks the seat while it weakens',
   instigatorGains: 'its faction gains from the crisis',
   instigatorLinked: 'drawn from the house that bore the famine',
@@ -217,7 +217,7 @@ export const STAKE_REASONS = Object.freeze({
   loses: 'the crisis hits its base',
   losesSeat: 'the seat bears the blame',
   split: 'gains and loses by it at once',
-  untouched: 'no direct stake; it could go either way',
+  untouched: 'not touched yet; it could side with either camp',
 });
 
 // ── The levers: the houses each kind turns on, and the faces that run them ─────────────────

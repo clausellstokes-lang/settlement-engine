@@ -132,7 +132,7 @@
         },
         {
           "lineId": "PRESSURE_SENTENCES.famine[2]",
-          "text": "${topNPCName}, the ${topNPCRole}, knows where the hoarded ${commodity} can be found, and isn't saying, and the reasons for that silence are complicated.",
+          "text": "${topNPCName}, the ${topNPCRole}, knows where the hoarded ${commodity} can be found and is not saying; someone close to them is among the hoarders.",
           "needs": [],
           "excludes": [],
           "crisis": [
@@ -797,7 +797,7 @@
         },
         {
           "lineId": "PRESSURE_SENTENCES.monster_pressure[1]",
-          "text": "The settlement's defences are adequate for normal times; these are not normal times, and ${topNPCName}, the ${topNPCRole}, knows it.",
+          "text": "The defences of ${name} were built for quieter years than these, as ${topNPCName}, the ${topNPCRole}, warned at the last muster.",
           "needs": [],
           "excludes": [],
           "crisis": [

@@ -82,7 +82,7 @@ export const PRESSURE_SENTENCES = {
   famine: (r) => [
     `${r.name} is two bad weeks from genuine starvation; ${r.topFaction || "the merchant class"} controls the remaining ${r.commodity || "grain"} reserves and is not discussing it openly.`,
     `Since the harvest failed, whoever holds the food in ${r.name} holds the power, and at least three factions are fighting over the stores.`,
-    `${r.topNPCName ? r.topNPCName + ", the " + r.topNPCRole + "," : "Someone"} knows where the hoarded ${r.commodity || "grain"} can be found, and isn't saying, and the reasons for that silence are complicated.`,
+    `${r.topNPCName ? r.topNPCName + ", the " + r.topNPCRole + "," : "Someone"} knows where the hoarded ${r.commodity || "grain"} can be found and is not saying; someone close to them is among the hoarders.`,
     `The bakers of ${r.name} have started cutting the bread with things that are not flour; everyone can taste it, and the fact that nobody complains is the most alarming part.`,
     `${capFirst(r.govFaction) || "The council"} of ${r.name} promised a fair share of the ${r.commodity || "grain"} reserves last week, and little of it has reached the poor.`,
     { text: `Hunger has made ${r.name} quiet. The market still opens, the queues still form, but the haggling has gone out of people. They take what they are given and calculate, silently, how long it will last.`, needs: ['market'] },
@@ -148,7 +148,7 @@ export const PRESSURE_SENTENCES = {
   },
   monster_pressure: (r) => [
     `${r.name}'s outlying farms are being hit one after another, each one near the last; whatever is out there is choosing them.`,
-    `The settlement's defences are adequate for normal times; these are not normal times, and ${r.topNPCName ? r.topNPCName + ", the " + r.topNPCRole + "," : r.milForce || "the defenders"} knows it.`,
+    `The defences of ${r.name} were built for quieter years than these, as ${r.topNPCName ? r.topNPCName + ", the " + r.topNPCRole + "," : r.milForce || "the defenders"} warned at the last muster.`,
     "Three farmsteads have been abandoned in the last month; the families who abandoned them know something about what they saw that they haven't reported to the authorities.",
     { text: `${r.name} has drawn its edges inward (fields left unworked, a mill standing idle) trading the ${r.commodity || "harvest"} it needs for a perimeter ${r.milForce || "the defenders"} can actually hold.`, needs: ['institution: mill'] },
     `The bounty ${r.govFaction || "the council"} posted for the creature has attracted the wrong sort of help to ${r.name}: hunters who are more dangerous than useful, and who will expect payment whether or not the thing is dead.`,

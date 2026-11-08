@@ -102,7 +102,7 @@
     },
     {
       "id": "untouched",
-      "text": "no direct stake; it could go either way",
+      "text": "not touched yet; it could side with either camp",
       "needs": [],
       "excludes": [],
       "crisis": [],
