@@ -52,7 +52,7 @@ import { resolveGenerationWorldLaw } from '../generationContext.js';
 import { disambiguateNPCDisplayNames } from '../npcDisplayNames.js';
 import { hookPoolFor, poolFor, seatPoolFor } from './poolMap.js';
 import { seatMintTitleFor } from './mintTitles.js';
-import { isHideableHouse, isVeiledPower } from '../../domain/people/cardVeil.js';
+import { isHideableHouse, isVeiledPower, veiledCardIdFor } from '../../domain/people/cardVeil.js';
 
 /** The keyed fork every card is drawn under (declared in the fork census). */
 export const FACES_FORK_LABEL = 'people-faces';
@@ -129,11 +129,15 @@ export function seatHouseOf(institutions) {
 
 /**
  * A card's stable id from its house: the roster name's slug (the same name at every regeneration
- * of the same roster), suffixed only where the roster carries the name twice.
- * @param {string} name @param {Set<string>} taken
+ * of the same roster), suffixed only where the roster carries the name twice. A veiled house's face
+ * (`veil` given) takes the opaque form of people/cardVeil.js :: veiledCardIdFor instead.
+ * @param {string} name @param {Set<string>} taken @param {{ seed: unknown } | null} [veil]
  */
-function cardIdFor(name, taken) {
-  const base = `npc_${slugify(name, { sep: '_', max: 60, fallback: 'house', empty: 'house' })}`;
+function cardIdFor(name, taken, veil = null) {
+  const slug = slugify(name, { sep: '_', max: 60, fallback: 'house', empty: 'house' });
+  // FIX-PUBLIC-VEIL (the second seat): a veiled house's face is born with an opaque id, so the slug
+  // never names the house on a public payload; the loop below is the uniqueness guard for both forms.
+  const base = veil ? veiledCardIdFor(veil.seed, slug) : `npc_${slug}`;
   let id = base;
   for (let n = 2; taken.has(id); n += 1) id = `${base}_${n}`;
   taken.add(id);
@@ -224,7 +228,8 @@ export function spareHookLine(pools, held, key, portKind, accept = () => true) {
  * THE CAST: one card per face-bearing house in roster order, the seat always faced.
  *
  * @param {{ tier?: string, institutions?: RosterRow[], powerStructure?: { factions?: Array<Record<string, unknown>> } | null,
- *   economicState?: Record<string, any> | null }} settlement the roster and the powers as they stand
+ *   economicState?: Record<string, any> | null, _seed?: unknown }} settlement the roster and the powers as they
+ *   stand, and the record's seed (the salt of a veiled face's opaque id)
  * @param {string} culture
  * @param {Record<string, any>} config the effective config (stress, priorities, the world law's inputs)
  * @param {unknown} generationContext
@@ -237,6 +242,10 @@ export function generateRepresentatives(settlement, culture = 'germanic', config
   const tier = String(settlement?.tier || 'town');
   const institutions = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
   const powerStructure = settlement?.powerStructure || null;
+  // FIX-PUBLIC-VEIL (the second seat): the record's seed salts a veiled face's opaque id. It rides the
+  // first argument (never the config, whose seed-keyed pickers it would move): the population step
+  // and the section regen pass `_seed`.
+  const veil = { seed: settlement?._seed ?? null };
   const economicState = settlement?.economicState || {};
   const worldLaw = resolveGenerationWorldLaw(generationContext, config);
   const faces = root.fork(FACES_FORK_LABEL);
@@ -304,14 +313,14 @@ export function generateRepresentatives(settlement, culture = 'germanic', config
       // governing power.
       if (!isSeat) return;
       const { title } = seatMintTitleFor(governingName || '');
-      birth(cardIdFor(key, taken), seatPoolFor(tier), title, { kind: 'house', key, family: family?.key ?? null, title, veiled: isHideableHouse(house) },
+      birth(cardIdFor(key, taken, isHideableHouse(house) ? veil : null), seatPoolFor(tier), title, { kind: 'house', key, family: family?.key ?? null, title, veiled: isHideableHouse(house) },
         hookPoolFor(title, null, { seat: true }).pool);
       return;
     }
     const pool = isSeat ? seatPoolFor(tier) : poolFor(face, family?.shelf ?? null);
     // FIX-PUBLIC-VEIL (the chair's ruling, shape (a)): the veil bit stamped at birth from the ONE predicate
     // (domain/people/cardVeil.js): a hideable house's face is never named on a public card.
-    birth(cardIdFor(key, taken), pool, face, { kind: 'house', key, family: family?.key ?? null, title: face, veiled: isHideableHouse(house) },
+    birth(cardIdFor(key, taken, isHideableHouse(house) ? veil : null), pool, face, { kind: 'house', key, family: family?.key ?? null, title: face, veiled: isHideableHouse(house) },
       hookPoolFor(face, family?.shelf ?? null, { seat: isSeat }).pool);
   });
 

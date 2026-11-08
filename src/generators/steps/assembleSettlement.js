@@ -309,7 +309,8 @@ registerStep('assembleSettlement', {
   const coherenceUpdates = inAssemblySubstream(
     rng,
     'canonical-coherence',
-    coherenceRng => generateCoherence(settlement, coherenceRng, pins),
+    // FIX-PUBLIC-VEIL (the second seat): the record's seed salts a veiled mint's opaque id at the cast seam
+    coherenceRng => generateCoherence(settlement, coherenceRng, pins, ctx._seed),
   );
   Object.assign(settlement, coherenceUpdates);
   // Rung 1 N1: faction power totals 100 on every path, the held-roster one included (whose

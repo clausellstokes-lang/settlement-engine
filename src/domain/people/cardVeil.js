@@ -23,6 +23,7 @@
 import { facetOf } from '../spatial/cohesionWeave.js';
 import { brokerageLegalityOf } from '../../data/informationBrokerageTuning.js';
 import { nameOf } from '../rulingPower.js';
+import { sha256Hex } from '../content/contentFingerprint.js';
 
 /** @typedef {Record<string, unknown>} Rec */
 
@@ -129,6 +130,23 @@ export function stampVeil(institution, settlement) {
   if (!institution || typeof institution !== 'object' || Array.isArray(institution)) return institution;
   const { veiled: _old, ...rest } = /** @type {Rec} */ (institution);
   return /** @type {T} */ ({ ...rest, veiled: veiledOfInstitution(institution, settlement) });
+}
+
+/** The prefix of a veiled face's opaque card id (FIX-PUBLIC-VEIL, the second seat). */
+export const VEILED_CARD_PREFIX = 'npc_veiled_';
+
+/**
+ * A VEILED face's card id, minted at birth (the chair's ruling of 2026-11-08, option (B)): the house's
+ * slug would name the house on every public payload (`npc_thieves_guild_chapter`), so a face this
+ * module veils is born `npc_veiled_` + 16 hex of sha256(`<record seed>|<slug>`). The salt is the
+ * record's `_seed`, which every public projection denies (publicSafe.js, the SQL allowlist), so the
+ * digest cannot be reversed by hashing the catalogue's slugs. Stable for a seed: a regeneration of
+ * the same seed reproduces it. The caller's uniqueness guard suffixes a collision, as for any id.
+ * @param {unknown} seed the record's `_seed` @param {string} slug the house's (or power's) slug
+ * @returns {string}
+ */
+export function veiledCardIdFor(seed, slug) {
+  return `${VEILED_CARD_PREFIX}${sha256Hex(`${String(seed ?? '')}|${slug}`).slice(0, 16)}`;
 }
 
 // THE READER lives beside the card's house reader in cardPowers.js (the leaf the public projection

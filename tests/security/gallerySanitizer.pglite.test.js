@@ -518,7 +518,21 @@ describe('206 (second seat) — the hidden power is not public, and a veiled fac
       const client = JSON.parse(JSON.stringify(toPublicSafe(rec)));
       expect(client).toEqual(server);
       for (const name of hidden) expect(JSON.stringify(server)).not.toContain(name);
+      // FIX-PUBLIC-VEIL (option (B)): a veiled face is born with an opaque id; on the public payload no
+      // face path spells its house, and every tie to it still resolves
+      // (generated towns only: the hand-made fixture above is not born by the generator)
+      const veiledFaces = rec === RECORD ? [] : (rec.npcs || []).filter((n) => n.institution && n.institution.veiled === true);
+      const ids = new Set(server.npcs.map((n) => n.id));
+      for (const n of veiledFaces) {
+        expect(ids.has(n.id)).toBe(true);
+        const slug = String(n.institution.key).toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '');
+        expect(JSON.stringify({ npcs: server.npcs, relationships: server.relationships, stress: server.stress, stressors: server.stressors })).not.toContain(slug);
+      }
+      for (const tie of server.relationships || []) { expect(ids.has(tie.from)).toBe(true); expect(ids.has(tie.to)).toBe(true); }
     }
     expect(hiddenSeen, 'anchored: the generated towns carry a hidden power').toBeGreaterThanOrEqual(4);
+    const born = records.slice(1).flatMap((r) => (r.npcs || []).filter((n) => n.institution?.veiled === true));
+    expect(born.length, 'anchored: the generated towns carry veiled faces').toBeGreaterThan(3);
+    for (const n of born) expect(n.id).toMatch(/^npc_veiled_[0-9a-f]{16}(_\d+)?$/);
   }, 120_000);
 });

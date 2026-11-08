@@ -43,7 +43,8 @@ function drawPopulation(ctx, rng, pins) {
     // name) and the economy (the goal pools' commodity and prosperity tokens): both are on ctx
     // because this step depends on generatePower.
     return generateRepresentatives(
-      { tier, institutions, powerStructure, economicState },
+      // FIX-PUBLIC-VEIL (the second seat): the record's seed salts a veiled face's opaque id
+      { tier, institutions, powerStructure, economicState, _seed: ctx._seed },
       culture,
       effectiveConfig,
       generationContext,

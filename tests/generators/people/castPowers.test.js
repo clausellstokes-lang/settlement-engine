@@ -25,7 +25,7 @@ import { OTHER_CARD_PREFIX, RANKS, assignCastPowers, rollWeightOf } from '../../
 import { SEAT_CARD_ID, seatHouseOf } from '../../../src/generators/people/representatives.js';
 import { otherMintRowFor } from '../../../src/generators/people/mintTitles.js';
 import { expectAbsentWithAnchor } from '../../helpers/anchoredNegatives.js';
-import { isVeiledPower, veiledOfPower } from '../../../src/domain/people/cardVeil.js';
+import { isVeiledPower, veiledOfPower, VEILED_CARD_PREFIX } from '../../../src/domain/people/cardVeil.js';
 
 /** Two military claimants (the density law's doubled niche), one seat, four military houses. */
 const FIXTURE = Object.freeze({
@@ -92,7 +92,12 @@ function assertPowers(s, label) {
     if (backingArchetypeOf(f) !== A.OTHER || name === governing) continue;
     const mint = cards.find((c) => c.institution.kind === 'power' && c.institution.key === name);
     expect(mint, `${label}: the other power ${name} has its minted face`).toBeDefined();
-    expect(mint.id.startsWith(OTHER_CARD_PREFIX)).toBe(true);
+    // FIX-PUBLIC-VEIL (the second seat, re-keyed with the cause): a hidden or criminal power's face is born
+    // with the opaque id (people/cardVeil.js :: veiledCardIdFor, salted by the record's seed); an open one keeps
+    // its power-slug id
+    if (isVeiledPower(f)) {
+      expect(mint.id).toMatch(new RegExp(`^${VEILED_CARD_PREFIX}[0-9a-f]{16}(_\\d+)?$`));
+    } else expect(mint.id.startsWith(OTHER_CARD_PREFIX)).toBe(true);
     expect(mint.title).toBe(otherMintRowFor(name).title);
     // FIX-PUBLIC-VEIL (re-keyed with the cause): the membership carries THAT power's veil bit
     expect(mint.memberships).toEqual([{ power: name, rank: 1, share: 1, veiled: isVeiledPower(f) }]);
