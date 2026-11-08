@@ -47,7 +47,7 @@
     "pastEofCitationsExcluded": 382,
     "byRule": {
       "banner": 9,
-      "dated": 153,
+      "dated": 154,
       "sha-pin": 2,
       "tree": 109
     },
@@ -322,6 +322,7 @@
     "_rosterGrowth2026-11-08-allegiance-design": "ONE document JOINED the roster by being BORN into it (ALLEGIANCE-DESIGN, the allegiance train's design seat, a child of the cloud chair under the owner's delegation of 2026-11-06, on lane/allegiance-design-2026-11-08 cut from the integration tip 8308f13f8, measured once with this walker's own arm): `dated` 148 -> 149, docs/allegiance/ALLEGIANCE_DESIGN_2026-11-08.md, the design record, born dated (its citations are `path :: symbol` at 8308f13f8), 0 past-EOF; nothing changed class.",
     "_rosterGrowth2026-11-08-allegiance-rulings": "ONE document JOINED the roster by being BORN into it (the chair, on the allegiance design branch): `dated` 149 -> 150, docs/allegiance/ALLEGIANCE_RULINGS_2026-11-08.md, born dated, 0 past-EOF; nothing changed class.",
     "_rosterGrowth2026-11-08-allegiance-briefs": "THREE documents JOINED the roster by being BORN into it (the chair, on the allegiance design branch): `dated` 150 -> 153, docs/allegiance/BRIEF-ALLEGIANCE-CAR1-2026-11-08.md, BRIEF-WRITE-GOALS-2026-11-08.md, BRIEF-WRITE-PEOPLE-2026-11-08.md, each born dated, 0 past-EOF; nothing changed class.",
+    "_rosterGrowth2026-11-08-write-people": "ONE document JOINED the roster by being BORN into it (WRITE-PEOPLE, the allegiance train's writing seat B, a child of the cloud chair under the owner's delegation, on lane/write-people-2026-11-08): `dated` 153 -> 154, docs/allegiance/WRITE_PEOPLE_2026-11-08.md, the seat's record, born dated (its citations are `path :: symbol`), 0 past-EOF; nothing changed class. The `tree` count (112 on disk against 109) is MERGE-CAR's line, untouched.",
     "_rosterMove2026-11-08-merge-car": "ONE document changed class, by the chair's ruling of 2026-11-08 (MERGE-CAR, option (a)): docs/chair/2026-11-07/people-5-prep/walker-draft-at-base.txt joined `sha-pin` (1 -> 2) with the header `**Snapshot base:** 1031233a4`. CAUSE: the people car shortened narrativeGenerator.js (1,035 -> 1,016 lines) and factionDedup.js (217 -> 122) under a listing frozen at 1031233a4; the listing changed class from live to snapshot, pastEofCitationsExcluded 377 -> 382; no row re-addressed."
   },
   "rows": []
