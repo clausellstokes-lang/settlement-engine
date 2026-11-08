@@ -305,24 +305,25 @@ export const NAV_HIT = /* @__PURE__ */ Object.freeze({
 });
 
 /**
- * THE SECTIONS' PAINTED WIDTHS, strip px: NAV_HIT's six regions, binding to binding
- * (121, 134, 124, 160, 145, 133).
+ * THE SECTIONS' PAINTED WIDTHS, strip px: NAV_HIT's six regions, binding to binding.
+ * Literals throughout this block (no reduction over NAV_HIT), so the first-paint bundle keeps
+ * only what the layout reads; tests/components/arrowGeometry.test.js holds every one of them
+ * to NAV_HIT and BINDINGS.
  * @type {ReadonlyArray<number>}
  */
-export const SECTION_W = /* @__PURE__ */ Object.freeze(Object.values(NAV_HIT).map((hit) => hit.x1 - hit.x0));
+export const SECTION_W = /* @__PURE__ */ Object.freeze([121, 134, 124, 160, 145, 133]);
 
-/**
- * The widest painted section (Compendium): the six are equal once every one reaches it.
- * Literals rather than reductions over SECTION_W, so the first-paint bundle drops them (only
- * the pins read them); tests/components/arrowGeometry.test.js holds both to SECTION_W.
- */
+/** The same widths, narrowest first: the order the water fills them in. */
+export const SECTION_W_SORTED = /* @__PURE__ */ Object.freeze([121, 124, 133, 134, 145, 160]);
+
+/** The widest painted section (Compendium): the six are equal once every one reaches it. */
 export const SECTION_W_MAX = 160;
 
 /** The mean painted section, strip px. */
 export const SECTION_W_MEAN = 817 / 6;
 
 /** The parts the extra width is laid in: one per section and one for the blank plate's slot. */
-export const PARTS = SECTION_W.length + 1;
+export const PARTS = 7;
 
 /**
  * The CATCH-UP: the extra width, strip px at the scale, that lifts every section to
@@ -333,20 +334,16 @@ export const EQUAL_EXTRA = PARTS * (SECTION_W_MAX - SECTION_W_MEAN);
 
 /**
  * The water level, strip px: the width L every section below it is lifted to when `wood`
- * strip px are poured over the six painted sections (narrowest first), so that the sum of
- * max(0, L - painted) is `wood`. At or past the catch-up, L = mean + wood / 6.
+ * strip px are poured over the six painted sections, narrowest first, so that the sum of
+ * max(0, L - painted) is `wood`. It is the least of the running means (wood + the j narrowest)
+ * / j: the first j whose level does not reach the next section gives the smallest of them.
+ * At or past the catch-up, L = mean + wood / 6.
  * @param {number} wood
  * @returns {number}
  */
 export function waterLevel(wood) {
-  const sorted = SECTION_W.slice().sort((a, b) => a - b);
   let sum = 0;
-  for (let j = 1; j <= sorted.length; j += 1) {
-    sum += sorted[j - 1];
-    const level = (wood + sum) / j;
-    if (j === sorted.length || level <= sorted[j]) return level;
-  }
-  return 0; // unreachable: the loop returns at its last step
+  return Math.min(...SECTION_W_SORTED.map((w, j) => (wood + (sum += w)) / (j + 1)));
 }
 
 /**
@@ -359,11 +356,10 @@ export function waterLevel(wood) {
  * @returns {number[]}
  */
 export function fullSlots(part, s) {
-  const hits = Object.values(NAV_HIT);
-  const level = waterLevel((SECTION_W.length * part) / s);
+  const level = waterLevel((6 * part) / s);
   return CUTS.map(({ x }) => {
-    const k = hits.findIndex((hit) => x > hit.x0 && x < hit.x1);
-    return k < 0 ? part : (Math.max(0, level - SECTION_W[k]) * s) / 2;
+    const hit = Object.values(NAV_HIT).find((h) => x > h.x0 && x < h.x1);
+    return hit ? (Math.max(0, level - hit.x1 + hit.x0) * s) / 2 : part;
   });
 }
 

@@ -72,7 +72,19 @@ Measured in the built page from the six nav controls' `getBoundingClientRect`. `
 | gzip | 341,947 | 342,013 | 341,881 (+234) | 341,647 |
 | Brotli | 287,704 | 287,695 | 287,676 (+149) | 287,527 |
 
-The budget was not raised. Step (c) candidate sent to the chair: lazy-load `src/domain/aiOverlayVerifier.js`, which is 4,943 B raw and 1,680 B gzip in the entry chunk. Its sole importer is `store/aiOverlayLifecycle.js :: runOverlayVerifier`; one of its three callers, `setAiSettlement`, is synchronous. I examined and set aside `staleDeploy.js` and `customContentAdmission.js` (eager by design) and the event pipeline (a structural change).
+**The chair's second ceiling ruling (lazy-load refused; steps 1–3), each step measured against the parent's real bundle** (sourcemap attribution of the entry chunk, `src/components/nav/arrowGeometry.js` the only module that differs):
+
+| step | raw | gzip | Brotli | verdict |
+|---|---|---|---|---|
+| start (water-fill, `0a6d0fc2`) | +234 | +234 | +149 | — |
+| (1) the glow clip alone, measured by removing it | −169 | −49 | −113 | does not close the gap alone, so it STAYS, by the ruling |
+| (2) literal sections, sorted widths and PARTS; `waterLevel` as the least running mean; `fullSlots` reads NAV_HIT directly | → +116 | → +194 | → +107 | still over |
+| (2) further trims tried by probe: CUTS as 13 literals (+12 gzip, rejected); `stripPx` dropped (−12, test-read, not taken) | | | | each about ±10 gzip |
+| (3) zero-behaviour buy-back: every top-level binding in the entry chunk parsed (acorn) for references and export-list membership | | | | **none found**: 0 unreferenced, unexported bindings; Rollup keeps nothing dead at binding level |
+
+After (1)–(3) the entry is still over by **+116 raw, +194 gzip and +107 Brotli**, and none of the chair's three doors closes it. The ceiling is not raised and nothing is lazy-loaded; the chair rules next.
+
+**Superseded**, the first step-(c) candidate (refused by the chair): lazy-load `src/domain/aiOverlayVerifier.js`, which is 4,943 B raw and 1,680 B gzip in the entry chunk. Its sole importer is `store/aiOverlayLifecycle.js :: runOverlayVerifier`; one of its three callers, `setAiSettlement`, is synchronous. I examined and set aside `staleDeploy.js` and `customContentAdmission.js` (eager by design) and the event pipeline (a structural change).
 
 ## 6. Gates
 

@@ -40,7 +40,7 @@ import { describe, expect, it } from 'vitest';
 import {
   BAND_H, BARB_HANG_H, BINDINGS, COMPACT_JOIN, COMPACT_MIN_SLOT, COMPACT_W, COMPENDIUM_FE, CUTS, EQUAL_EXTRA,
   FE, FEATHER_FROM, FEATHER_RAMP, FEATHER_X1, FILLER_W, FULL_MIN_VIEWPORT, GLOW_PAD, GLOW_ROWS, HANG_H, HOME,
-  LOGO_PLATE, NAV_HIT, NAV_WORD, PARTS, waterLevel, PLATE, PLATE_FIELD, PLATE_RIVETS, S_MAX, SECTION_W, SECTION_W_MAX,
+  LOGO_PLATE, NAV_HIT, NAV_WORD, PARTS, SECTION_W_MEAN, SECTION_W_SORTED, waterLevel, PLATE, PLATE_FIELD, PLATE_RIVETS, S_MAX, SECTION_W, SECTION_W_MAX,
   SHORT_CAP, SLIP, SLOT_TONE, STRIP_W, WOOD_RUNS, WORD_FLOOR, WORD_ROWS, SEAM_BAND_TO, SEAM_HANG_FROM,
   featherShown, fullScale, glowSpan, layoutArrow, padTarget,
 } from '../../src/components/nav/arrowGeometry.js';
@@ -174,6 +174,12 @@ describe('(b) the measured tables agree with each other', () => {
     expect(SECTION_W).toEqual([121, 134, 124, 160, 145, 133]);
     expect(SECTION_W_MAX).toBe(160);
     expect(SECTION_W).toEqual(BINDINGS.slice(0, 6).map((b, i) => BINDINGS[i + 1].x0 - b.x1));
+    expect(SECTION_W).toEqual(Object.values(NAV_HIT).map((hit) => hit.x1 - hit.x0));
+    // The literals the layout reads, held to their derivation (literals keep the bundle small).
+    expect(SECTION_W_SORTED).toEqual([...SECTION_W].sort((x, y) => x - y));
+    expect(SECTION_W_MAX).toBe(Math.max(...SECTION_W));
+    expect(SECTION_W_MEAN).toBeCloseTo(SECTION_W.reduce((t, w) => t + w, 0) / SECTION_W.length, 12);
+    expect(PARTS).toBe(SECTION_W.length + 1);
     // Seven parts lift all six to 160 at S_MAX: 7 / 6 x (6 x 160 - 817) strip px.
     expect(EQUAL_EXTRA).toBeCloseTo(166.8333, 4);
   });
