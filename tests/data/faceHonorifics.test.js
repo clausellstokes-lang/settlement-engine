@@ -127,11 +127,13 @@ describe("the settlement's culture picks its own word for the office (item 14)",
     expect(formsOf('the priest', 'male', { culture: 'germanic' })).toEqual(['Father', 'Pastor', 'Reverend', 'Vicar']);
   });
   it("a culture with no pool, 'mixed', an unknown key and no culture all read the registry's pool", () => {
-    for (const culture of ['east_asian', 'mixed', 'random_culture', 'atlantean', null, undefined]) {
+    for (const culture of ['mixed', 'random_culture', 'atlantean', null, undefined]) {
       expect(formsOf('the lord', 'female', { culture }), String(culture)).toEqual(['Lady']);
       expect(formsOf('the priest', 'male', { culture }), String(culture)).toEqual(['Father', 'Pastor', 'Reverend', 'Vicar']);
     }
     expect(formsOf('the lord', 'female')).toEqual(['Lady']);
+    // east_asian names the lord alone: its priest reads the registry
+    expect(formsOf('the priest', 'male', { culture: 'east_asian' })).toEqual(['Father', 'Pastor', 'Reverend', 'Vicar']);
   });
   it('the coast guard and the culture read compose: an inland Norse harbour master is still a Dockmaster or Wharfinger', () => {
     expect(formsOf('the harbour master', null, { coastal: false, culture: 'norse' })).toEqual(['Dockmaster', 'Wharfinger']);
@@ -192,11 +194,12 @@ describe('every culture-keyed honorific is pinned (item 14)', () => {
       'the lord': ['Khan', 'Khatun'], 'the war-leader': ['Noyan', 'Noyan'], 'the occupying governor': ['Darughachi', 'Darughachi'],
       'the priest': ['Shaman', 'Shaman'],
     },
+    east_asian: { 'the lord': ['Daimyo', 'Daimyo'] },
     greek: { 'the mayor': ['Archon', 'Archon'], 'the commander': ['Strategos', 'Strategos'], 'the high priest': ['Hierophant', 'Hierophant'] },
   };
   const seeds = Array.from({ length: 24 }, (_, i) => `seed-${i}`);
 
-  it('names only canonical cultures and only registered titles in scope; east_asian names none', () => {
+  it('names only canonical cultures and only registered titles in scope; every canonical culture names one', () => {
     expect(Object.keys(FACE_HONORIFICS_BY_CULTURE).sort()).toEqual(Object.keys(PINS).sort());
     for (const culture of Object.keys(FACE_HONORIFICS_BY_CULTURE)) {
       expect(CULTURES, culture).toContain(culture);
@@ -205,8 +208,8 @@ describe('every culture-keyed honorific is pinned (item 14)', () => {
         expect(SCOPE.has(title), `${culture} ${title}`).toBe(true);
       }
     }
-    expectAbsentWithAnchor(Object.keys(FACE_HONORIFICS_BY_CULTURE), 'east_asian', 'norse', 'a culture with no grounded form');
-    expect(Object.values(PINS).reduce((n, t) => n + Object.keys(t).length, 0)).toBe(46);
+    expect(Object.keys(FACE_HONORIFICS_BY_CULTURE).sort()).toEqual([...CULTURES].sort());
+    expect(Object.values(PINS).reduce((n, t) => n + Object.keys(t).length, 0)).toBe(47);
   });
 
   it('every (culture, title) reads exactly its pinned forms by gender, through the resolver and the card door', () => {

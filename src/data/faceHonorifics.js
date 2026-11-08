@@ -264,8 +264,8 @@ export const FACE_HONORIFICS_INLAND = Object.freeze({
  * LEADERSHIP, FAITH and WARDEN titles only, and only where the culture holds a real period form of
  * that office (in the old role vocabulary or in standard English usage). A culture's pool REPLACES the
  * registry's for that title on a settlement of that culture; a culture or title not named here reads
- * the registry ('mixed' and an unknown culture included). East-Asian names none: no form of its offices
- * passes the rule, so the registry stands. Display-only, no draw, no golden moves.
+ * the registry ('mixed' and an unknown culture included). East-Asian names the lord alone (its naming
+ * reaches Japan; the chair's ruling of 2026-11-08). Display-only, no draw, no golden moves.
  * @type {Readonly<Record<string, Readonly<Record<string, readonly Honorific[]>>>>}
  */
 export const FACE_HONORIFICS_BY_CULTURE = Object.freeze({
@@ -329,6 +329,9 @@ export const FACE_HONORIFICS_BY_CULTURE = Object.freeze({
     "the war-leader": ["Noyan"],
     "the occupying governor": ["Darughachi"],
     "the priest": ["Shaman"],
+  }),
+  east_asian: Object.freeze({
+    "the lord": ["Daimyo"],
   }),
   greek: Object.freeze({
     "the mayor": ["Archon"],
