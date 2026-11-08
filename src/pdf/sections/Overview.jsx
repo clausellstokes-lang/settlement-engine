@@ -565,7 +565,7 @@ export default Overview;
  * @param {number} ratio @returns {string}
  */
 function enforcementWords(ratio) {
-  if (!Number.isFinite(ratio)) return '—';
+  if (!Number.isFinite(ratio)) return 'Not measured.';
   if (ratio >= 2) return 'Those who keep order clearly outmatch the criminals.';
   if (ratio >= 1) return 'Those who keep order roughly match the criminals.';
   return 'The criminals outmatch those who keep order.';
