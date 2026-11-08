@@ -18,6 +18,13 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-11-08 — MERGE-CAR RECORD A, THE RUNG-2 LANDING'S MERGE, THROUGH THE SIGNED DOOR (ODQ §934.105, THE INTEGRATION LANDING, MERGE-CAR;
+ *   record docs/shift-records/2026-11-08-merge-car-a-rung2-composition.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   525 of 525 rows (thorp 84, hamlet 84, village 84, town 105, city 84, metropolis 84) against record 0b's post-state. THE CAUSE, ONE (first-parent
+ *   step 572c15018): the rung-2 landing's merge over the integration branch (10b8f09b4, staged at its composition commit 572c15018; rung2-01..05 the components). ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree SA (the tree of 572c15018 with the door paths carried from
+ *   the branch, the previous record's writes committed). 6b0d226e.. -> 6d651bde..
+ *
  * 2026-11-07 — RECORD 6, PEOPLE-LAND SHIM OUT, THROUGH THE SIGNED DOOR (ODQ §934.105, THE PEOPLE CAR’S LANDING;
  *   record docs/shift-records/2026-11-07-people-land-shim-out.json; the cloud chair signs under the owner's delegation, vetoable).
  *   180 of 525 (thorp 12, hamlet 84, village 72, city 12) rows against the stage of 1adf403e4 (8dc527fd.., record 5b's post-state). THE CAUSE, ONE (first-parent
