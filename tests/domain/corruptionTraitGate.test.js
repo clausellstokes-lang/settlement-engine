@@ -27,6 +27,7 @@ import { setActiveRng, clearActiveRng } from '../../src/kernel/rngContext.js';
 import { createPRNG } from '../../src/kernel/prng.js';
 import { ensureNpcStates, advanceNpcCorruption } from '../../src/domain/worldPulse/npcAgency.js';
 import { mutateSettlement } from '../../src/domain/events/mutate.js';
+import { allegianceOf } from '../../src/domain/people/allegiance.js';
 
 afterEach(() => clearActiveRng());
 
@@ -209,7 +210,8 @@ describe('IMPOSE_CORRUPTION (DM override) ignores the flaw gate', () => {
     factions: [],
     npcs: [
       // A genuinely no-flaw NPC: temperament only, the sim could never turn them.
-      { id: 'npc_saint', name: 'Saint Cora', corrupt: false, personality: { dominant: 'incorruptible' } },
+      // ALLEGIANCE-CAR1 (2026-11-08): a v3 card carries no `corrupt` mark (migrateV2toV3 deletes `corrupt: false`); clean = no allegiance
+      { id: 'npc_saint', name: 'Saint Cora', personality: { dominant: 'incorruptible' } },
     ],
   });
 
@@ -220,9 +222,13 @@ describe('IMPOSE_CORRUPTION (DM override) ignores the flaw gate', () => {
       now: NOW,
     });
     const cora = next.npcs.find(n => n.name === 'Saint Cora');
-    expect(cora.corrupt).toBe(true);
-    expect(typeof cora.corruptionVector).toBe('string');
-    expect(cora.corruptionVector.length).toBeGreaterThan(0); // defaults to greed
-    expect(cora.corruptTies?.criminalInstitution).toBe("Thieves' Guild");
+    // ALLEGIANCE-CAR1 (2026-11-08): IMPOSE_CORRUPTION writes the hidden allegiance (the one shape birth writes), not the retired mark
+    const a = allegianceOf(cora);
+    expect(a).toBeTruthy();
+    expect(typeof a.vector).toBe('string');
+    expect(a.vector.length).toBeGreaterThan(0); // defaults to greed
+    expect(a.house).toBe("Thieves' Guild");
+    expect(a).toMatchObject({ veiled: true, covert: true });
+    expect('corrupt' in cora || 'corruptionVector' in cora || 'corruptTies' in cora, 'no retired mark is written').toBe(false);
   });
 });
