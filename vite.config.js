@@ -335,6 +335,10 @@ export const FIRSTPAINT2_LAZY_DOMAIN = [
   '/src/domain/crisis/crisisHooks.js',
   '/src/domain/defense/defenseFacts.js',
   '/src/domain/dossier/faithReading.js',
+  // PEOPLE-LAND (2026-11-07): lane 1's castPowers.js reads houseBacksOf here, which made this display-side
+  // reader engine-shared and so a first-paint seed; its userEditLines import (pinned to this chunk) then made
+  // coherence-lazy, and data-lazy behind it, static first-paint chunks (+1.24 MB). Excised and pinned like the rest.
+  '/src/domain/dossier/powerSupport.js',
   '/src/domain/dossier/powerStrata.js',
   '/src/domain/dossier/seatHolder.js',
   '/src/domain/entities/factionRoleCatalog.js',

@@ -23,8 +23,7 @@
  */
 
 import { chooseOrPin, registerStep } from '../pipeline.js';
-import { generateNPCs, generateRelationships } from '../npcGenerator.js';
-import { rollNamedMass } from '../density/applyDensityLaw.js';
+import { generateRepresentatives } from '../people/representatives.js';
 import { recordTrace } from '../../domain/trace.js';
 
 /**
@@ -34,33 +33,21 @@ import { recordTrace } from '../../domain/trace.js';
 function drawPopulation(ctx, rng, pins) {
   const { tier, institutions, culture, effectiveConfig, generationContext, powerStructure, economicState } = ctx;
   return chooseOrPin(pins, 'npcs', () => {
-    // ── ODQ §810 SEAM 1 (population): the tier-gated density law's MASS band.
-    // Version-gated — a world whose own config carries no density-law marker gets
-    // `null` here with no draw taken, and `generateNPCs` keeps its own roll.
-    // The roster SIZING is deliberately NOT here: the power roster is replayed and
-    // identity-asserted by `reconcilePowerStructure` at assembly, so it is resized
-    // after that, in assembleSettlement.
-    const densityMassTarget = rollNamedMass({
-      tier,
-      // X-46 car 4: the population tilt (read only under Register VII; no draw).
-      population: ctx.population,
-      config: effectiveConfig,
-      stress: ctx.stress,
-      powerStructure,
-      economicState,
-      rng,
-    });
-
-    // generateNPCs reads settlement.powerStructure (noble roles) and
-    // settlement.economicState (goal commodity/faction tokens). This step depends on
-    // generatePower, so both are present on ctx — pass them through or those branches
-    // silently fall back.
-    return generateNPCs(
+    // ── THE PEOPLE CAR (PEOPLE-1 CAST, 2026-11-07; the owner's charter, ODQ §934.105: "one person
+    // per institution. They act as the face"). The roster is the cast: one card per face-bearing
+    // house in roster order, the seat always faced, each card on its own keyed fork of this
+    // step's stream (`people-faces::<card id>`; people/representatives.js). The named-NPC roster
+    // of `generateNPCs` and the density law's MASS seam (`rollNamedMass`, the population tilt)
+    // are RETIRED FROM BIRTH here: the powers' sizing stays where it was (assembleSettlement's
+    // `resizePoliticalRoster`, after reconciliation). The generator reads the powers (the seat's
+    // name) and the economy (the goal pools' commodity and prosperity tokens): both are on ctx
+    // because this step depends on generatePower.
+    return generateRepresentatives(
       { tier, institutions, powerStructure, economicState },
       culture,
       effectiveConfig,
       generationContext,
-      densityMassTarget,
+      rng,
     );
   });
 }
@@ -73,10 +60,14 @@ function drawPopulation(ctx, rng, pins) {
  * @param {Array} npcs
  */
 function derivePopulation(ctx, rng, pins, npcs) {
-  const { tier, institutions, effectiveConfig } = ctx;
+  const { tier } = ctx;
 
-  const relationships = chooseOrPin(pins, 'relationships',
-    () => generateRelationships(npcs, effectiveConfig, institutions, { government: ctx.powerStructure?.government ?? null, tier })); // CENSUS-1f (site 19): the government only (R-Z)
+  // THE PEOPLE CAR (PEOPLE-4 TIES, 2026-11-07; R-P7): the pair-saturation writer is RETIRED. The
+  // ties are drawn at the coherence seam (narrativeGenerator.js :: generateCoherence, people/ties.js)
+  // over the FINAL cast, because the target rule reads the memberships the seam writes. Until then
+  // the key is empty (a held `relationships` key is still the DM's, carried through). The government
+  // fact CENSUS-1f gave the retired writer (site 19, R-Z) is read by the tie draw at the seam (MERGE-CAR).
+  const relationships = chooseOrPin(pins, 'relationships', () => []);
 
   // Summary traces — one per category, not one per entity. Per-entity
   // traces would flood the rail (50+ NPCs is normal at metropolis tier)
@@ -101,7 +92,7 @@ function derivePopulation(ctx, rng, pins, npcs) {
 
 registerStep('generatePopulation', {
   deps: ['coherenceRepairPass', 'powerEconomyReconcilePass'],
-  reads: ['culture', 'economicState', 'effectiveConfig', 'generationContext', 'institutions', 'population', 'powerStructure', 'tier'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
+  reads: ['culture', 'economicState', 'effectiveConfig', 'generationContext', 'institutions', 'powerStructure', 'tier'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract); `population` left with the retired mass seam (the people car)
   readsVersion: { economicState: 'reconciled' },
   provides: ['npcs', 'relationships'],
   phase: 'population',

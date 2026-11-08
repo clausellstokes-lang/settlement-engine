@@ -121,7 +121,10 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 // Structural Crises section's `accent='#8b1a1a'` left ViabilityTab.jsx with reader-r1 unit 2 (d3b9280f6, the critical
 // lists made one), measured by this file's counter on that commit and its parent (21 -> 20); every other src file is
 // unmoved between rung 1's final tip 1bff51c6d and the composed tip. A shrink, banked.
-const BUDGET = 1229; // committed raw-color-literal occurrences. EXACT. Lower on a shrink; never raise. 1313 -> 1303 on 2026-09-19: the fixes consist's label ladder and the band-primitive deletion removed ten raw literals.
+// 1229 + 1229 -> 1228 (2026-11-08, MERGE-CAR): both sides' shrinks of the same base 1230 composed — the rung-2 landing's
+// (ViabilityTab's accent, d3b9280f6) and the people car's (PEOPLE-3 HOOKS: the `relationship` hook category's colour);
+// measured by this file's counter at the merged tip. A shrink, banked.
+const BUDGET = 1228; // committed raw-color-literal occurrences. EXACT. Lower on a shrink; never raise. 1230 -> 1229 on 2026-11-07, PEOPLE-3 HOOKS: the `relationship` hook category (unemitted since X-2) left the PLOT_HOOK_CATEGORIES registry with its colour '#5a3a1a'. 1313 -> 1303 on 2026-09-19: the fixes consist's label ladder and the band-primitive deletion removed ten raw literals.
 // Pure-hex TEMPLATE elements are their OWN population with their OWN number. They are NOT
 // folded into BUDGET: one number per population, so a future movement stays attributable to
 // the population that moved. Today's single occurrence is real debt, not a placeholder —

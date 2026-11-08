@@ -31,7 +31,8 @@ import {
   random as _rng,
   setActiveRng,
 } from '../kernel/rngContext.js';
-import { disperseNamedRoster } from './density/applyDensityLaw.js';
+import { assignCastPowers } from './people/castPowers.js';
+import { drawTies } from './people/ties.js';
 import { pickVariant } from '../kernel/proseHash.js';
 import { selectOriginBody } from './narrative/settlementOriginProse.js';
 import { resolvePrimaryStress } from './stressPriority.js';
@@ -521,7 +522,9 @@ const genPressureDetail = settlement => {
     stability: powerStructure?.stability || 'Stable',
     recentConflict: powerStructure?.recentConflict || null,
     topNPC: npcs?.[0] || null,
-    topNPCRole: npcs?.[0]?.role || null,
+    // M-1b (PEOPLE-1 CAST): a card's role is its TITLE and carries its article ('the master fishmonger'); the pressure
+    // lines prefix ", the " themselves, so the noun is handed over without it (never "the the").
+    topNPCRole: String(npcs?.[0]?.role || '').replace(/^the\s+/i, '') || null,
     topNPCName: npcs?.[0]?.name || null,
     viabilityIssues: economicViability?.issues || [],
     isViable: economicViability?.viable !== false,
@@ -885,62 +888,18 @@ export const enrichNpcCoherence = (settlement) => {
     settlement.tier,
     settlement.config || {},
   );
-  // ── ODQ §810 SEAM 2 (coherence): under the Register VII density law the
-  // two-stage roll's DISPERSAL supersedes mergeNPCLists' power-proportional
-  // cascade, and every figure is stamped with its rolled rung band.
-  //
-  // ⭐ THIS SEAM, NOT THE POPULATION STEP, IS WHERE THE DISPERSAL LIVES — because
-  // this function is the tail BOTH full assembly and NPC section-regen run
-  // ("a rerolled roster must carry the same factionAffiliation … as a freshly
-  // generated one"). Wiring the law here is what makes a regen reproduce the
-  // same political shape instead of a differently-dispersed one.
-  //
-  // Version-gated and draw-free under the dormant default: `disperseNamedRoster`
-  // returns the same array by reference for a world whose config carries no
-  // density-law marker, and `getActiveRng()` is a read, not a draw.
-  const densityRng = getActiveRng();
-  const dispersed = densityRng
-    ? disperseNamedRoster({
-      tier: settlement.tier,
-      // X-46 car 4: the population tilt. This seam runs in re-derivation mode, so the tilt
-      // reaches only results it overrides; passed so all three seams roll one plan.
-      population: settlement.population,
-      config: settlement.config || {},
-      stress: settlement.stress,
-      powerStructure: settlement.powerStructure,
-      economicState: settlement.economicState,
-      npcs: rawMergedNpcs,
-      rng: densityRng,
-    }).npcs
-    : rawMergedNpcs;
-  return enrichNPCsWithStructure(dispersed, settlement);
-};
-
-/**
- * Re-link faction member records to the ENRICHED roster by id.
- * [experience-faction-member-staleness] factionGrouping.buildFactions captures direct
- * references to the PRE-enrichment npc objects; the coherence tail then mints NEW enriched
- * npc objects for settlement.npcs (stress-woven goals + the secrets overlay + structural
- * position), leaving every faction's embedded members pointing at the discarded generic
- * copies — the ONE-SOURCE-PER-FACT violation. This remaps each member to the enriched npc
- * of the same id (identity fallback to the original when no id match), so the canonical
- * roster and the faction rosters carry the SAME npc records.
- *
- * Minimum honest repair only — NO id-reference / settlementMigration / normalizeSettlement
- * persistence-shape rewrite (owner-gated). Same-seed generator output shifts (members now
- * serialize the enriched shape): a DECLARED one-time move confined to the ALREADY-PARKED
- * generatorGoldenMaster family (re-mints at THE ONE REGEN).
- * @param {Array<{members?: Array<{id?: any}>}>|undefined} factions
- * @param {Array<{id?: any}>} enrichedNpcs
- * @returns {Array|undefined} the factions with members re-linked (input passed through when not an array)
- */
-export const relinkFactionMembers = (factions, enrichedNpcs) => {
-  if (!Array.isArray(factions)) return factions;
-  const byId = new Map((Array.isArray(enrichedNpcs) ? enrichedNpcs : []).map((n) => [n?.id, n]));
-  return factions.map((f) => {
-    if (!f || !Array.isArray(f.members)) return f;
-    return { ...f, members: f.members.map((m) => (m && byId.has(m.id) ? byId.get(m.id) : m)) };
-  });
+  // ── THE PEOPLE CAR (PEOPLE-1 CAST, 2026-11-07). The density law's DISPERSAL and its rung
+  // stamps (`applyDensityLaw.js :: disperseNamedRoster`, the §810 seam 2 that used to sit here)
+  // are RETIRED FROM BIRTH: a card's standing in the powers is its `memberships`, written here
+  // from the backing catalogue with the `other` powers' minted faces and each power's first,
+  // second and third (people/castPowers.js, R-P3–R-P5; the mints and the ranks draw on keyed
+  // forks of this seam's stream, `people-powers::…`, so nothing after them moves). PEOPLE-LAND
+  // (M-2): the shim that derived the two old fields from the ranks is deleted; the structural
+  // pass reads the memberships (npcStructure.js) and no card carries the old fields. This tail is still
+  // the one BOTH full assembly and NPC section-regen run, so a regenerated cast carries the
+  // same powers as a born one.
+  const withPowers = assignCastPowers(settlement, rawMergedNpcs, getActiveRng());
+  return enrichNPCsWithStructure(withPowers, settlement);
 };
 
 /**
@@ -991,6 +950,18 @@ export const generateCoherence = (settlement, coherenceRng = null, pins = null) 
     () => enrichNpcCoherence(settlement),
   ));
 
+  // ── THE PEOPLE CAR (PEOPLE-4 TIES, 2026-11-07; R-P7): ONE OUTGOING TIE PER CARD, drawn HERE over
+  // the final cast — after the memberships the target rule reads ("× 3 when the two share a
+  // power") and the `other` mints — on the seam's own keyed family (`people-ties::<card id>`,
+  // people/ties.js). The population step's pair-saturation writer is retired. A held
+  // `relationships` key is the DM's and is not redrawn.
+  const relationships = chooseOrPin(pins, 'relationships', () => drawTies(
+    mergedNpcs,
+    { config: settlement.config || {}, institutions: settlement.institutions || [], tier: settlement.tier, government: settlement.powerStructure?.government ?? null },
+    coherenceRng?.fork ? coherenceRng : getActiveRng(),
+  ));
+  const withTies = { ...settlement, npcs: mergedNpcs, relationships };
+
   const history = settlement.history || {};
 
   // Historical character string
@@ -1008,7 +979,7 @@ export const generateCoherence = (settlement, coherenceRng = null, pins = null) 
   const prominentRelationship = inCoherenceSubstream(
     coherenceRng,
     'prominent-relationship',
-    () => genRelNarrative(settlement),
+    () => genRelNarrative(withTies),
   );
 
   // Coherence contradiction notes
@@ -1031,11 +1002,7 @@ export const generateCoherence = (settlement, coherenceRng = null, pins = null) 
   return {
     ...settlement,
     npcs: mergedNpcs,
-    // Re-link faction rosters to the enriched npcs so members are not stale pre-enrichment
-    // copies (only when the settlement already carries faction groups). [faction-member-staleness]
-    ...(Array.isArray(settlement.factions)
-      ? { factions: relinkFactionMembers(settlement.factions, mergedNpcs) }
-      : {}),
+    relationships,
     prominentRelationship,
     coherenceNotes,
     history: {

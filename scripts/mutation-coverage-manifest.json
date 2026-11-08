@@ -3197,6 +3197,18 @@
       "rationale": "THE WRITER-AGREEMENT PINS (WIRING-W0 causes 2-5, R-W7 a-d). Catching power EXECUTED per block as the lane's red-first, the file copied into the PARENT tree of each cure and run there: cause 4a red at 76febf9b0 ('foodSecurity.importPct and foodRecord.normalImportPct are one figure on every birth', 1 failed / 1 passed), cause 4b red at c99531cf9 (1 failed / 3 passed), cause 5 red at 3d1df12d7 (1 failed / 4 passed); each green at its cure. The causes 2-3 block is a guard measured at 0 of 1,525 before any change (no cure to plant against). A standing sweep plant is not offered: the writers are foodGenerator.js, foodBalance.js and legacyGenerator.js, shared generator modules whose revert by checkout would discard concurrent work.",
       "kindNote": "rationale rather than a standing plant: each block's red was executed on its cure's parent tree and recorded with its counts."
     },
+    "tests/lint/faceRegistry.walker.test.js": {
+      "kind": "rationale",
+      "rationale": "PEOPLE-1 CAST (2026-11-07, the people car's lane 1). Its catching power is EXECUTED on every ordinary run, not claimed: the walker executes the revised face census against the live registry (every family's face declared and of the three forms; the NONE list exact, with a stray-null arm that reds on any other faceless non-fabric row; the seat word on exactly the two government buildings; the three noPower persons at weight 0 in the backing catalogue; the family, row, override and distinct-title figures pinned at what was measured, 165/2/13 and 463/4/52). A planted mark (a fourth face form, a null on a FACE family, a seat word on a third building) reds the named arm by construction of the exact-equality pins. A standing sweep plant is not offered because the one target, src/data/institutionalCatalog.js, is the shared catalogue every concurrent lane edits, and scripts/mutation-sweep.sh reverts with git checkout -- <file> against the live worktree, which this program's shared-tree protocol forbids (the standing reason recorded at customContentCharsetWiring). Promote to kind:mutation when the sweep gains a target outside the shared catalogue."
+    },
+    "tests/generators/people/representatives.test.js": {
+      "kind": "rationale",
+      "rationale": "PEOPLE-1 CAST (2026-11-07, the people car's lane 1). Its catching power is EXECUTED on every ordinary run, not claimed: the suite drives the real pipeline over the golden 525 and the soak 1,000's first 200 and asserts one card per face-bearing house and zero duplicates against the registry's own face column (an independent oracle, tests/lint/faceRegistry), the seat always faced (house, hall or mint, by id), ids stable across two births, the same seed giving an identical cast, and the per-tier envelope at the measured figures. A generator that dropped a house, faced one twice, minted beside a seat house or drew on the step's stream reds the named arm. A standing sweep plant is not offered because the targets (people/representatives.js, steps/generatePopulation.js, npcGenerator.js) are the people car's live seam that the middle lanes PEOPLE-2..4 build on concurrently, and the sweep's revert is a checkout of the live worktree. Promote to kind:mutation once the car has landed."
+    },
+    "tests/generators/people/castPowers.test.js": {
+      "kind": "rationale",
+      "rationale": "PEOPLE-1 CAST (2026-11-07, the people car's lane 1). Its catching power is EXECUTED on every ordinary run, not claimed: the suite asserts, over the golden 525 and the soak sample, that every membership names a power the record carries, that shares per house sum to at most one (the X-45 arithmetic re-summed), that floor 1 (the seat's face first in the governing power) and floor 2 (the highest-weight house whose largest share lands on the power) hold, that no power with a face-bearing house of its archetype on the roster is at zero, that every `other` power has its minted face, and determinism; the snake deal is proved on two fixtures with two military claimants. A planted fault (a share over one, a floor broken, a power at zero with a house of its kind) reds the named arm. A standing sweep plant is not offered for the reason recorded at tests/generators/people/representatives.test.js: the targets are the car's live seam. Promote to kind:mutation once the car has landed."
+    },
     "tests/generators/gapSaysWhichKind.test.js": {
       "kind": "mutation",
       "label": "review-intake/a gap says which kind"
@@ -3270,10 +3282,6 @@
       "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
     },
     "tests/generators/grainMonopolyHookNoGuild.test.js": {
-      "kind": "rationale",
-      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
-    },
-    "tests/generators/guildTitleName.test.js": {
       "kind": "rationale",
       "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
     },
@@ -3496,6 +3504,26 @@
     "tests/lint/wiringCensusDeclared.walker.test.js": {
       "kind": "rationale",
       "rationale": "CENSUS-1g unit 5 (1425ac790): the wiring census's declared columns equal a fresh annex reading and the registers' reading of the leaves (docs/content/wiring-census.json, the annex, the six generated leaves). IT IS A RATIONALE BECAUSE ITS CATCHING POWER WAS PROVEN BY AN EXECUTED IN-PLACE NEGATIVE CONTROL (LANDING-R2 seat E, 2026-11-07, at 104654b43): one row's undeclared 1 -> 0 in docs/content/wiring-census.json -> 1 failed / 9. File restored byte-exact from a cp backup (cmp equal; git diff clean) and the file green again. A standing sweep plant would re-run that identical check while mutating a module the generation suites share."
+    },
+    "tests/generators/people/castDerived.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/people/personHooks.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/people/ties.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/lint/noLegacyFactionReaders.walker.test.js": {
+      "kind": "rationale",
+      "rationale": "THE NO-LEGACY-FACTION-READERS WALKER (M-2's closing proof; PEOPLE-LAND). Owed at MERGE-CAR (2026-11-08): the people car's lane added it where the integration side's enumeration rule now reaches it. Its catching power is EXECUTED IN THE TEST BODY on every gate run: the POSITIVE CONTROL plants one read of every refused shape (the five retired per-NPC fields, the grouping, a refused helper; a plain read, an optional chain, a destructured read, a dynamic key list, a key-path string) into a planted source and asserts each is caught by name, and its anchored negative half asserts the powers (powerStructure.factions), a tension's names and the kept structuralRank are NOT caught in the same file. The live arm walks the whole of src (a liveness floor of > 2,000 files) against the FPZ list (an exact 38). At MERGE-CAR it convicted six real reads the merge composed (five line-drifted tension exemptions, re-keyed; one real read of the retired grouping in facts/guild.js, cured). WHY A RATIONALE RATHER THAN A SWEEP PLANT: every plantable target is a shared src module, and the sweep's revert is a `git checkout --` this program's shared-tree protocol forbids."
+    },
+    "tests/data/faceHonorifics.test.js": {
+      "kind": "rationale",
+      "rationale": "THE HONORIFIC REGISTRY (PEOPLE-6 LINKS step 2; the A-11 harbour guard at MERGE-CAR). Owed at MERGE-CAR (2026-11-08): the people car's links lane added it where the integration side's enumeration rule now reaches it. The subject is authored DATA (src/data/faceHonorifics.js) plus one pure resolver, and the suite's catching power is in its own arms: totality both ways against the LIVE census (every title a face can be born with — the catalogue's faceRows and the two mint tables — and no other), the canonical form pinned per named title, the deterministic pick reaching every form, the gendered forms by card gender, and the coast guard's two arms, each with an anchored negative (expectAbsentWithAnchor) so a vacuous pool cannot pass. A sweep plant would mutate src/data/institutionalCatalog.js or the registry, files nearly every generation suite imports and a concurrent lane may hold; the sweep's revert is a `git checkout --`."
     }
   },
   "meta": {

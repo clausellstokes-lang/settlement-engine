@@ -45,7 +45,9 @@ export const TRACE_SUBJECTS = Object.freeze({
   'factionCorrelationPass::institution': 'institutions',
   'coherenceRepairPass::institution': 'institutions',
   'generatePopulation::npc': 'npcs',
-  'generatePopulation::faction': 'factions',
+  // PEOPLE-5B (2026-11-07, M-7): the grouping `factions` left the record; the population step's faction
+  // entries are about the cards' standing in the powers, which lives on the cards (`npcs[].memberships`).
+  'generatePopulation::faction': 'npcs',
   'corruptionPass::npc': 'npcs',
   'generatePower::faction': 'powerStructure',
   'neighbourFactions::faction': 'powerStructure',

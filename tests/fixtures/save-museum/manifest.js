@@ -27,8 +27,8 @@ export const MUSEUM = [
     envelope: 'real',
     body: 'real',
     entries: 3,
-    // Settlements enter the migration chain at v0 and get stamped to schemaVersion 1.
-    expectSchemaVersion: 1,
+    // Settlements enter the migration chain at v0 and walk it to schemaVersion 2 (M-7, PEOPLE-5B: 1 -> 2).
+    expectSchemaVersion: 2, // M-7 (PEOPLE-5B): the chain ends at 2
   },
   {
     id: 'v2-draft-2026-06',
@@ -37,7 +37,7 @@ export const MUSEUM = [
     envelope: 'synthetic',
     body: 'real', // Harrowmoor, verbatim from the pre-v2 fixture
     entries: 1,
-    expectSchemaVersion: 1,
+    expectSchemaVersion: 2, // M-7 (PEOPLE-5B): the chain ends at 2
   },
   {
     id: 'campaign-canon-2026-07',
@@ -46,7 +46,7 @@ export const MUSEUM = [
     envelope: 'synthetic',
     body: 'real', // Kelder's Reach, verbatim
     entries: 1,
-    expectSchemaVersion: 1,
+    expectSchemaVersion: 2, // M-7 (PEOPLE-5B): the chain ends at 2
   },
   {
     id: 'forward-version-vNext',

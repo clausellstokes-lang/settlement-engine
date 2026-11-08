@@ -3,7 +3,7 @@
     "id": "npcGenerator.RELATIONSHIP_STRENGTHS",
     "file": "src/generators/npcGenerator.js",
     "drawKind": "R",
-    "drawSite": "npcGenerator.js:1634 pick (strength labels)",
+    "drawSite": "people/ties.js:144 pick (strength labels; the table moved whole from the retired npcGenerator.js pair writer by PEOPLE-4 TIES, re-addressed at MERGE-CAR)",
     "colour": true,
     "crisisScoped": false,
     "keyDeclares": {},

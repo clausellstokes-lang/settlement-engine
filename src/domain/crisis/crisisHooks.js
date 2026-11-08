@@ -35,6 +35,7 @@ import { hookTruthViolations, settlementHookFacts, speakHookTruthfully } from '.
 import { effectiveCastOf, requiredRolesOf } from './crisisCast.js';
 import { resolveDeclared, lineText } from '../facts/drawDeclared.js';
 import { factsOf } from '../facts/factsOf.js';
+import { firstRankMembershipOf, powerOrderOf } from '../people/membership.js';
 
 /** @typedef {import('./crisisCast.js').CrisisCast} CrisisCast */
 /** @typedef {import('./crisisCast.js').CastRow} CastRow */
@@ -88,19 +89,22 @@ const str = (v) => (typeof v === 'string' ? v : '');
 
 /**
  * @typedef {Object} HookSettlement
- * @property {Array<{ id?: unknown, name?: unknown, factionAffiliation?: unknown }>=} npcs
+ * @property {Array<{ id?: unknown, name?: unknown, memberships?: unknown }>=} npcs
+ * @property {unknown=} powerStructure
  */
 
 /**
  * How a cast row is named in a hook: a person with their house, a house by its name, an
- * institution with its article.
+ * institution with its article. A person's "house" is its FIRST-RANK power (the people car,
+ * PEOPLE-2 CAST-DERIVED, 2026-11-07: the card's best standing, read from its memberships; the
+ * hook text is lane 3's — only the party read changed here).
  * @param {HookSettlement} s @param {CastRow} row
  * @returns {string}
  */
 function holderWords(s, row) {
   if (row.kind === 'npc') {
     const npc = (Array.isArray(s.npcs) ? s.npcs : []).find((n) => !!n && (str(n.id) || str(n.name)) === row.id);
-    const house = str(npc?.factionAffiliation);
+    const house = str(firstRankMembershipOf(npc, powerOrderOf(s))?.power);
     return house ? `${row.name} of ${house}` : row.name;
   }
   return row.kind === 'institution' ? `the ${row.name}` : row.name;

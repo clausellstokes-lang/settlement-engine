@@ -18,16 +18,15 @@ import { drawUnique, heldByOthers } from './hookVariety.js';
 import { themeOfText } from '../domain/hookThemes.js';
 import { disambiguateNPCDisplayNames } from './npcDisplayNames.js';
 import { resolveGenerationWorldLaw } from './generationContext.js';
-import { legacyMassRange } from '../domain/density/densityLaw.js'; import { defenceRoleGate, defenseFactsOf, forceWordsOf } from '../domain/defense/defenseFacts.js'; import { crimeSignalOf, namesCriminalGuild, withoutCriminalGuild } from '../domain/crimeSignal.js'; // R6 (and F4 unit 3): one line, so no cited line moves
+import { legacyMassRange } from '../domain/density/densityLaw.js'; import { defenceRoleGate, defenseFactsOf } from '../domain/defense/defenseFacts.js'; import { crimeSignalOf, namesCriminalGuild, withoutCriminalGuild } from '../domain/crimeSignal.js'; // R6 (and F4 unit 3): one line, so no cited line moves
 import { generateFactionLeaderSecret } from './npc/factionLeaderSecret.js'; import { drawDeclared, hasUnheldCandidate, lineText, resolveSibling, resolveDeclared } from '../domain/facts/drawDeclared.js'; import { birthFactsOf, factsOf } from '../domain/facts/factsOf.js'; // F5, F10, CENSUS-1c, CENSUS-4f: one line, so no cited line moves
 import { CRAFTS_ROLES, NOBLE_ROLES } from './npc/factionRoleCatalog.js';
 import { resolveGeneratedNpcTitle } from './npc/generatedNpcTitle.js';
-import { deriveThorpSecondRole } from './npc/thorpSecondRole.js'; import { guildTitleName } from './npc/guildTitleName.js'; import { tieArchetype } from './npc/tieKind.js'; // CENSUS-4 R9: one line, so no cited line moves
+import { deriveThorpSecondRole } from './npc/thorpSecondRole.js'; // CENSUS-4 R9's guildTitleName and R3's tieArchetype left this line at MERGE-CAR (R9 superseded by the census titles and the honorific pools, R-P9; R3 read at people/ties.js); one line, so no cited line moves
 
 import { NAMING_DATA } from '../data/namingData.js';
-import { STRESS_ECONOMIC_EFFECTS , TRAIT_PRESENCE_DISTRIBUTION } from '../data/npcData.js';
+import { TRAIT_PRESENCE_DISTRIBUTION } from '../data/npcData.js';
 
-import { computeRelTension, createTieProseDraw } from './powerGenerator.js';
 import { pickRandom2 } from './helpers.js';
 import { STRESS_INSTITUTION_EFFECTS } from '../data/stressInstitutionEffects.js';
 import { secretsHeldByFoodRecord } from '../domain/foodSurplus.js'; import { fillSentenceSlots } from './narrativeProse.js'; import { waterAccessKind } from '../domain/tradeRouteSemantics.js'; import { otherNpcOf } from '../domain/facts/otherNpc.js'; import { bareLine } from '../domain/facts/bareLine.js'; // F11 / CENSUS-1 / CENSUS-4b: one line, so no cited line moves
@@ -41,7 +40,6 @@ import {
   NPC_FEATURES,
   NPC_WANTS,
   NPC_FACTION_GOALS,
-  FACTION_CONFLICT_TYPES,
   NPC_FACTION_LOYALTY,
   NPC_SECRETS,
   NPC_PLOT_HOOKS_DATA,
@@ -92,7 +90,7 @@ const generateNPCPowerLevel = role => {
 // so a call site that forgets to thread it degrades SILENTLY to naive picks —
 // it does not throw. The real guards are the pipeline-level roll-budget and
 // theme-repeat pins, which red on exactly that regression.
-const generateSingleNPC = (
+export const generateSingleNPC = ( // exported for people/representatives.js (the people car): every face takes today's record body
   role,
   namingTier,
   category,
@@ -101,7 +99,7 @@ const generateSingleNPC = (
   config = {},
   institutions = [],
   hookRegistry,
-  generationContext = null,
+  generationContext = null, options = {}, // options.hook === false: the birth seam draws the card's one hook itself
 ) => {
   const gender = _rng() > 0.5 ? 'male' : 'female';
   const fullName = pickFirst(culture, gender, true, tier);
@@ -128,9 +126,11 @@ const generateSingleNPC = (
     hookRegistry?.secrets, // REVIEW-INTAKE-4 (MERGE-R2: composed with the holder's keyed rows)
   );
   for (const t of [goalRaw?.short, goal?.short]) if (t) hookRegistry?.goals?.add(String(t).trim()); if (secret?.secret) hookRegistry?.secrets?.add(String(secret.secret).trim()); // REVIEW-INTAKE-4; MERGE-R2: the drawn text (the held key) beside the text the figure carries
-  const title1 = resolveSibling(generatePlotHook(category, config, hookRegistry, birthFactsOf({ institutions, config, tier }, worldLaw)), NPC_HOOK_SIBLINGS, { facts: () => factsOf({ institutions }, { waterKind: worldLaw.portKind }), poolId: 'npcData:NPC_HOOK_SIBLINGS', surface: 'npcs', drawKind: 'T' });
-  const title2 = _rng() > 0.5 ? resolveSibling(generatePlotHook(category, config, hookRegistry, birthFactsOf({ institutions, config, tier }, worldLaw)), NPC_HOOK_SIBLINGS, { facts: () => factsOf({ institutions }, { waterKind: worldLaw.portKind }), poolId: 'npcData:NPC_HOOK_SIBLINGS', surface: 'npcs', drawKind: 'T' }) : null;
-  const plotHooks = title2 && title2 !== title1 ? [title1, title2] : [title1];
+  // ONE PLOT HOOK PER PERSON (the owner, 2026-11-07: "one plot hook per NPC rather than multiple";
+  // PEOPLE-3 HOOKS): the second hook (a coin-flip, μ 0.5 per card) is RETIRED. A representative's
+  // hook is drawn by its birth seam on its own keyed fork, keyed by the face's title through the
+  // pool map (people/representatives.js :: drawCardHooks), so that seam asks for none here.
+  const plotHooks = options.hook === false ? [] : [drawPersonHook(category, config, hookRegistry, { worldLaw, institutions, tier })];
   const powerLevel = generateNPCPowerLevel(role);
   return {
     id: null,
@@ -213,19 +213,6 @@ const computeNPCWeights = (config = {}, institutions = []) => {
 // unknown-tier fallback is still the town row.
 const getNPCCountRange = legacyMassRange;
 
-// formatNPCForDisplay
-const _formatNPCForDisplay = (r, s, o, d) => {
-  const l = generateCrimeLevel(r, s, o, d),
-    m = l || r.secret;
-  let h = r.presentation;
-  if (m && random01(0.4)) {
-    const w = getStressHistory(m);
-    w && (h = w);
-  }
-  const g = { ...r, presentation: h };
-  return (l && (g.secret = l), g);
-};
-
 // mergeNPCLists
 
 // ─── NPC name helpers (pickFirst, pickCulturalTitle, filterByGuild) ───
@@ -287,7 +274,7 @@ const filterByGuild = (
   const guildInsts = institutions.filter(isCommerceGuild);
   if (!guildInsts.length) return null;
   const guild = pick(guildInsts);
-  const guildName = guildTitleName(guild.name); // CENSUS-4 R9: a singular possessive no longer doubles
+  const guildName = guild.name.replace(/\s*\(.*?\)/, '').replace(/s'?\s*guild$/i, "s'"); // MERGE-CAR: CENSUS-4 R9 (guildTitleName) retired — superseded by the census titles and the honorific pools (R-P9; the chair's SC-2 ruling); this legacy path has no generator caller
   const npc = generateSingleNPC(
     'Guild Master',
     culture,
@@ -644,8 +631,8 @@ const generateNPCGoal = (role, category = 'other', config = {}, facts = null, he
 // roll lands on changes, and that is HK-3's disclosed same-seed shift.
 const drawLoyalty = (pool, reg, facts = null) => drawDeclared(pool, { key: `${getActiveRng()?.seed ?? ''}::npcData:NPC_FACTION_LOYALTY`, /* R-AT (CENSUS-1h): the registry resolution's key carries the settlement's identity, the active stream's seed (no roll) */ draw: (p) => drawUnique(p, reg?.titles, (x) => lineText(x), reg?.themes, (x) => themeOfText(lineText(x))), registry: { used: reg?.titles, keyFn: (x) => lineText(x), themes: reg?.themes, themeOfFn: (x) => themeOfText(lineText(x)) }, facts, poolId: 'npcData:NPC_FACTION_LOYALTY', surface: 'npcs', drawKind: 'R' }).text; // CENSUS-1c unit 2: one drawUnique over the full pool (one roll, HK-LAW-6), then resolve; CENSUS-3e: stores the TEXT (a declared row is `{ text, needs }`), and a refused row resolves to a FRESH admitted template (drawDeclared's `registry` option, R-AJ: CENSUS-3e's resolver lifted), so no hook is lost
 
-// generatePlotHook — ONE plot hook. `generateSingleNPC` calls it twice and the pair becomes
-// the NPC's `plotHooks` array.
+// generatePlotHook — ONE plot hook, the person's one (`drawPersonHook`; the second draw that
+// made a pair was retired by PEOPLE-3 HOOKS, 2026-11-07).
 //
 // ⚠ THIS WAS CALLED `generateCharacterTitle` AND RETURNS NO TITLE. The NPC's title comes from
 // `pickTitle(category)` and `pickCulturalTitle`; this draws from NPC_FACTION_LOYALTY, which is
@@ -693,6 +680,19 @@ const generatePlotHook = (category = 'other', config = {}, hookRegistry, facts =
   return drawLoyalty(NPC_FACTION_LOYALTY[category] || NPC_FACTION_LOYALTY.other, hookRegistry, facts);
 };
 
+/** THE PERSON HOOK — one line of the NPC hook pool under `hookPool` (people/poolMap.js :: hookPoolFor),
+ * refusing a held text, the wet line resolved through its declared sibling set (CENSUS-1c: the F5 inland
+ * twin dissolved into `NPC_HOOK_SIBLINGS`) with the birth's facts; on the ambient stream (the card's fork).
+ * MERGE-CAR: the people car's one hook per person (PEOPLE-3) composed with the rung-2 landing's declared
+ * draw (the facts the census gives the loyalty pool, the sibling resolution the twin table became).
+ * @param {string} hookPool @param {Record<string, any>} config @param {any} hookRegistry
+ * @param {{ worldLaw?: { portKind?: string | null } | null, institutions?: unknown[], tier?: string }} [place]
+ * @returns {string} */
+export const drawPersonHook = (hookPool, config = {}, hookRegistry, place = {}) => {
+  const { worldLaw = null, institutions = [], tier } = place || {};
+  return /** @type {string} */ (resolveSibling(generatePlotHook(hookPool, config, hookRegistry, birthFactsOf({ institutions, config, tier }, worldLaw)), NPC_HOOK_SIBLINGS, { facts: () => factsOf({ institutions }, { waterKind: worldLaw?.portKind }), poolId: 'npcData:NPC_HOOK_SIBLINGS', surface: 'npcs', drawKind: 'T' }));
+};
+
 // pickTitle
 const pickTitle = (r, facts = null) => {
   const s = drawDeclared(NPC_PLOT_HOOKS[r] || NPC_PLOT_HOOKS.other, { draw: pick, facts, key: `${getActiveRng()?.seed ?? ''}::npcData:NPC_PLOT_HOOKS`, poolId: 'npcData:NPC_PLOT_HOOKS', surface: 'npcs', drawKind: 'R' }).line || {}; // CENSUS-1c unit 2
@@ -701,30 +701,6 @@ const pickTitle = (r, facts = null) => {
     disposition: s.disposition,
     behaviour: NPC_PLOT_HOOKS_DATA[s.disposition] || NPC_PLOT_HOOKS_DATA.transactional,
   };
-};
-
-// generateFactionGoal
-const generateFactionGoal = (npcA, npcB, stressFlags) => {
-  let score = 0.28;
-  const cats = [npcA.category, npcB.category];
-
-  // Same category factions have natural rivalry
-  if (npcA.category === npcB.category) score += 0.3;
-
-  // Known conflict type pairs
-  if (FACTION_CONFLICT_TYPES[npcA.category]?.includes(npcB.category)) score += 0.22;
-
-  // Power differential: similar power → more likely to interact
-  const powerGap = Math.abs(npcA.power - npcB.power);
-  if (powerGap <= 1) score += 0.18;
-  else if (powerGap <= 3) score += 0.1;
-
-  // Stress flag boosts for specific category pairs
-  if (stressFlags.merchantCriminalBlur && cats.includes('economy') && cats.includes('criminal')) score += 0.25;
-  if (stressFlags.crusaderSynthesis && cats.includes('military') && cats.includes('religious')) score += 0.3;
-  if (stressFlags.arcaneBlackMarket && cats.includes('magic') && cats.includes('criminal')) score += 0.25;
-
-  return Math.min(score, 0.95);
 };
 
 // NPC_BUILDS
@@ -1134,8 +1110,10 @@ export const mergeNPCLists = (npcs, factions, institutions, tier, config) => {
       if (!assignedFaction) assignedFaction = pool[0];
     }
 
+    // PEOPLE-LAND (M-2, the shim out): the keyword cascade no longer writes `factionAffiliation`; a
+    // card's powers are its `memberships` (people/castPowers.js). The draw and the capacity count stay,
+    // so the stream after them does not move.
     if (assignedFaction) {
-      enriched.factionAffiliation = assignedFaction.faction;
       factionAssignCount.set(assignedFaction.faction, (factionAssignCount.get(assignedFaction.faction) || 0) + 1);
     }
 
@@ -1278,13 +1256,9 @@ export const mergeNPCLists = (npcs, factions, institutions, tier, config) => {
         !roleLower.includes('thief') &&
         !roleLower.includes('assassin') &&
         !roleLower.includes('criminal');
-      if (isCriminalSecret && notAlreadyCrime && roleIsNotCrime && !noCrime) {
-        enriched.secondaryAffiliation = crimeFaction
-          ? crimeFaction.faction
-          : secretText.includes('thieves')
-            ? "Thieves' Guild"
-            : 'criminal network';
-      }
+      // PEOPLE-LAND (M-2): `secondaryAffiliation` is no longer written (a criminal secret's house
+      // rides on the corruption pass's `corruptTies`); the test above stays a pure read.
+      void (isCriminalSecret && notAlreadyCrime && roleIsNotCrime && !noCrime);
     }
 
     // First NPC inherits governing faction goal context
@@ -1295,7 +1269,7 @@ export const mergeNPCLists = (npcs, factions, institutions, tier, config) => {
         govDesc.toLowerCase().includes('challeng') ||
         govDesc.toLowerCase().includes('compet')
       ) {
-        enriched.factionGoal = `Maintain ${govFaction.faction}'s position against current pressure`;
+        // PEOPLE-LAND (M-2): `factionGoal` is no longer written; the goal itself carries the pressure.
       }
     }
 
@@ -1602,92 +1576,11 @@ export const generateNPCs = (
   return disambiguateNPCDisplayNames(npcs);
 };
 
-// generateRelationships
-/**
- * @param {any[]} npcs @param {any} [config] @param {any[]} [institutions]
- * @param {{ government?: unknown, tier?: unknown } | null} [settled] CENSUS-1f (site 19, R-V / R-Z): the
- *   ONE field the tie draw's declarations need beyond the roster — the government (the ruler kind,
- *   measured settled at this draw) — and the tier; absent, a declared tie index is refused (fail-closed)
- */
-export const generateRelationships = (npcs, config = {}, institutions = [], settled = null) => {
-  // Relationship type definitions (for the strength labels)
-  const RELATIONSHIP_STRENGTHS = {
-    ally: ['weak', 'moderate', 'strong'],
-    rival: ['professional', 'personal', 'bitter'],
-    enemy: ['mild', 'serious', 'mortal'],
-    family: ['distant', 'close', 'inseparable'],
-    patron_client: ['nominal', 'significant', 'total dependence'],
-    lover: ['casual', 'serious', 'passionate'],
-    mentor_student: ['formal', 'devoted', 'lifelong'],
-    debtor_creditor: ['minor', 'substantial', 'crushing'],
-    political: ['convenience', 'stable', 'unbreakable'],
-    respect: ['grudging', 'genuine', 'deep'],
-  };
-
-  if (!npcs || npcs.length < 2) return [];
-
-  const instFlags = getInstFlags(config, institutions);
-  const stressFlags = getStressFlags(config, institutions);
-  const relationships = [];
-  const seen = new Set();
-  // GS-1: each tie's description and tension are drawn WITHOUT REPLACEMENT across this town,
-  // draw-free; the index rides on the tie as `proseVariant` (see createTieProseDraw).
-  const drawTieProse = createTieProseDraw(forceWordsOf(defenseFactsOf({ institutions })), settled ? () => birthFactsOf({ institutions, config, tier: settled.tier, powerStructure: { government: settled.government } }) : null); // F1: the place's force words; CENSUS-1f: the roster and the government only (R-Z)
-
-  npcs.forEach(npc => {
-    const maxRelationships = randInt(2, 3);
-    let count = 0;
-
-    // Sort potential partners by relationship score (most likely first)
-    const candidates = npcs
-      .filter(other => other.id !== npc.id)
-      .map(other => ({ npc: other, score: generateFactionGoal(npc, other, stressFlags) }))
-      .sort((a, b) => b.score - a.score);
-
-    for (const { npc: partner, score } of candidates) {
-      if (count >= maxRelationships) break;
-
-      // Deduplicate by pair (regardless of direction)
-      const pairKey = [npc.id, partner.id].sort().join('::');
-      if (seen.has(pairKey)) continue;
-      if (_rng() >= score && count > 0) continue;
-
-      const archetype = tieArchetype(computeRelTension(npc, partner, stressFlags, instFlags), npc, partner); // CENSUS-4 R3: the tie rule, resolved after the roll
-      const strength = pick(RELATIONSHIP_STRENGTHS[archetype.type] || RELATIONSHIP_STRENGTHS.respect);
-
-      // The archetype key (for UI rendering) and the tie's prose, drawn without replacement.
-      const { archetypeKey, proseVariant, description, tension } = drawTieProse(archetype, npc, partner);
-
-      relationships.push({
-        type: archetype.type,
-        typeName: archetype.label,
-        description,
-        tension,
-        strength,
-        npc1Id: npc.id,
-        npc2Id: partner.id,
-        npc1Name: npc.name,
-        npc2Name: partner.name,
-        npc1Role: npc.role,
-        npc2Role: partner.role,
-        archetypeKey, proseVariant,
-        flagDriven:
-          stressFlags.anyActive &&
-          (archetype === STRESS_ECONOMIC_EFFECTS.econ_crim_blur ||
-            archetype === STRESS_ECONOMIC_EFFECTS.mil_crim_corruption ||
-            archetype === STRESS_ECONOMIC_EFFECTS.rel_crim_fraud ||
-            archetype === STRESS_ECONOMIC_EFFECTS.mag_crim_market ||
-            archetype === STRESS_ECONOMIC_EFFECTS.rel_mil_crusader ||
-            archetype === STRESS_ECONOMIC_EFFECTS.econ_mil_contract),
-      });
-
-      seen.add(pairKey);
-      count++;
-    }
-  });
-
-  return relationships;
-};
+// generateRelationships — RETIRED (the people car, PEOPLE-4 TIES, 2026-11-07; R-P7): the pair
+// saturation (every NPC in two or three undirected ties) gave way to ONE outgoing tie per card,
+// drawn at the coherence seam by people/ties.js :: drawTies. The rung-2 landing's two additions to the
+// retired writer are carried there (MERGE-CAR): CENSUS-4 R3's tie rule (npc/tieKind.js :: tieArchetype)
+// and CENSUS-1f's declared facts (the tier and the government) into createTieProseDraw.
 
 // generateSettlementName
 export const generateSettlementName = (r = 'germanic') => {

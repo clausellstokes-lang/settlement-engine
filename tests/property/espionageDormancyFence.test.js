@@ -189,16 +189,143 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * AND NOWHERE ELSE. Most recently at the ENGINE-HYGIENE landing (SHIFT RECORD,
  * 2026-09-01, TE-AGNOSTIC-1 cars `f2c1ad181` / `97d119c9b`); before that at T8.
  *
- * ── 2026-11-06/07, THE POOL CENSUS COMPOSED (RUNG 2 OF THE SOAK LADDER, the landing stacked on rung 1) ──
+ * ── 2026-11-08, THE RUNG-2 LANDING'S MERGE OVER THE INTEGRATION BRANCH, SIGNED AT THE INTEGRATION LANDING (MERGE-CAR RECORD A) ──
+ * THE SEVENTY-SIXTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation of 2026-11-06,
+ * inside a NAMED CHARTERED WINDOW: ODQ §934.105, the integration landing (BRIEF-MERGE-CAR §0, the law of the chain); the
+ * record is docs/shift-records/2026-11-08-merge-car-a-rung2-composition.json. THE MOVER, FOUND: the rung-2 landing's merge
+ * 10b8f09b4 (MERGE-R2), staged at its composition commit 572c15018 (the same src), its own records rung2-01..05 the
+ * components (rung2-02 this fence's, the pool census composed, the SIXTY-SECOND movement of the rung-2 lineage).
+ * On THIS corpus 360 of 360 rows (60 a tier) move against record 0b's post-state (`f1aa52d8…`, the stage of 262e8b255);
+ * 360/360 hashes stay distinct. Written from the staged tree (572c15018 with the door paths carried from the integration
+ * branch through the guard's integration-merge arm, LANDING_STAGE_MERGE_SIDE=8dff691f3), measured by
+ * scripts/audit/refence.mjs before the write. `407609f4…` (the people car's post-state, carried) -> `9eb258a4…`.
+ *
+ *
+ * ── 2026-11-07, PEOPLE-LAND SHIM OUT, SIGNED AT THE PEOPLE CAR'S LANDING (RECORD 6) ──
+ * THE SEVENTY-FIFTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation of 2026-11-06,
+ * inside a NAMED CHARTERED WINDOW: ODQ §934.105, the people car's landing (PEOPLE-RULINGS M-1, M-3); the record is
+ * docs/shift-records/2026-11-07-people-land-shim-out.json. THE MOVER, FOUND: the landing's step 1, PEOPLE-LAND SHIM OUT (2981f23f6): the shim deleted (M-2's end), the grouping's generator and the relink gone, the pre-law office path ranking the powers alone.
+ * On THIS corpus 98 of 360 (thorp 13, hamlet 52, village 25, city 8) rows move against the stage of 1adf403e4 (973c37d9…, record 5b's post-state); 360/360
+ * hashes stay distinct. Written from the staged tree (2981f23f6 with the door paths carried from the landing branch, the
+ * previous records committed), measured by scripts/audit/refence.mjs before the write. `973c37d9…` -> `407609f4…`.
+ *
+ * ── 2026-11-07, PEOPLE-5B EDIT, SIGNED AT THE PEOPLE CAR'S LANDING (RECORD 5b) ──
+ * THE SEVENTY-FOURTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation of 2026-11-06,
+ * inside a NAMED CHARTERED WINDOW: ODQ §934.105, the people car's landing (PEOPLE-RULINGS M-1, M-3); the record is
+ * docs/shift-records/2026-11-07-people-5b-edit.json. THE MOVER, FOUND: lane 5B, PEOPLE-5B EDIT (lane/people-5b-edit-2026-11-07, f24623a9f, merged at a725df7e4): the edit layer, the schema, the first real save migration and the contract.
+ * On THIS corpus 360 of 360 (thorp 60, hamlet 60, village 60, town 60, city 60, metropolis 60) rows move against the stage of 3c66d320e (080243fb…, record 5a's post-state); 360/360
+ * hashes stay distinct. Written from the staged tree (a725df7e4 with the door paths carried from the landing branch, the
+ * previous records committed), measured by scripts/audit/refence.mjs before the write. `080243fb…` -> `973c37d9…`.
+ *
+ * ── 2026-11-07, PEOPLE-5A DISPLAY, SIGNED AT THE PEOPLE CAR'S LANDING (RECORD 5a) ──
+ * THE SEVENTY-THIRD MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation of 2026-11-06,
+ * inside a NAMED CHARTERED WINDOW: ODQ §934.105, the people car's landing (PEOPLE-RULINGS M-1, M-3); the record is
+ * docs/shift-records/2026-11-07-people-5a-display.json. THE MOVER, FOUND: lane 5A, PEOPLE-5A DISPLAY (lane/people-5a-display-2026-11-07, 3d76fb058, merged at 053283dfd): every birth and display reader of the old faction fields re-wired to the memberships, the institution and the powers.
+ * On THIS corpus 25 of 360 (thorp 7, hamlet 14, village 4) rows move against the stage of c7d552370 (e59a30cd…, record 4's post-state); 360/360
+ * hashes stay distinct. Written from the staged tree (053283dfd with the door paths carried from the landing branch, the
+ * previous records committed), measured by scripts/audit/refence.mjs before the write. `e59a30cd…` -> `080243fb…`.
+ *
+ * ── 2026-11-07, PEOPLE-4 TIES, SIGNED AT THE PEOPLE CAR'S LANDING (RECORD 4) ──
+ * THE SEVENTY-SECOND MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation of 2026-11-06,
+ * inside a NAMED CHARTERED WINDOW: ODQ §934.105, the people car's landing (PEOPLE-RULINGS M-1, M-3); the record is
+ * docs/shift-records/2026-11-07-people-4-ties.json. THE MOVER, FOUND: lane 4, PEOPLE-4 TIES (lane/people-4-ties-2026-11-07, 91fb07774, merged at c7d552370): one outgoing relationship per card, directed, the graph holding the rest.
+ * On THIS corpus 351 of 360 (thorp 51, hamlet 60, village 60, town 60, city 60, metropolis 60) rows move against the stage of 5697b3735 (465a1a70…, record 3's post-state); 360/360
+ * hashes stay distinct. Written from the staged tree (c7d552370 with the door paths carried from the landing branch, the
+ * previous records committed), measured by scripts/audit/refence.mjs before the write. `465a1a70…` -> `e59a30cd…`.
+ *
+ * ── 2026-11-07, PEOPLE-3 HOOKS, SIGNED AT THE PEOPLE CAR'S LANDING (RECORD 3) ──
+ * THE SEVENTY-FIRST MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation of 2026-11-06,
+ * inside a NAMED CHARTERED WINDOW: ODQ §934.105, the people car's landing (PEOPLE-RULINGS M-1, M-3); the record is
+ * docs/shift-records/2026-11-07-people-3-hooks.json. THE MOVER, FOUND: lane 3, PEOPLE-3 HOOKS (lane/people-3-hooks-2026-11-07, f49311d04, merged at 0f930ce95): one plot hook per representative, the tensions and the history kept, parties of every kind.
+ * On THIS corpus 360 of 360 (thorp 60, hamlet 60, village 60, town 60, city 60, metropolis 60) rows move against the stage of f3912a838 (12355043…, record 2's post-state); 360/360
+ * hashes stay distinct. Written from the staged tree (0f930ce95 with the door paths carried from the landing branch, the
+ * previous records committed), measured by scripts/audit/refence.mjs before the write. `12355043…` -> `465a1a70…`.
+ *
+ * ── 2026-11-07, PEOPLE-2 CAST-DERIVED, SIGNED AT THE PEOPLE CAR'S LANDING (RECORD 2) ──
+ * THE SEVENTIETH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation of 2026-11-06,
+ * inside a NAMED CHARTERED WINDOW: ODQ §934.105, the people car's landing (PEOPLE-RULINGS M-1, M-3); the record is
+ * docs/shift-records/2026-11-07-people-2-cast-derived.json. THE MOVER, FOUND: lane 2 (lane/people-2-cast-2026-11-07,
+ * ebcf85fc7, merged at 3aa160a70): the crisis cast and the seat rows read from the powers' people. On THIS corpus 360 of
+ * 360 rows move (60 per tier) against the stage of dc655f712 (03a5a47e…, record 1's post-state); 360/360 hashes stay
+ * distinct. Written from the staged tree (3aa160a70 with the door paths carried from the landing branch, records 0a, 0b
+ * and 1 committed), measured by scripts/audit/refence.mjs before the write. `03a5a47e…` -> `12355043…`.
+ *
+ * ── 2026-11-07, PEOPLE-1 CAST, SIGNED AT THE PEOPLE CAR'S LANDING (RECORD 1) ──
+ * THE SIXTY-NINTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation of 2026-11-06,
+ * inside a NAMED CHARTERED WINDOW: ODQ §934.105, the people car's landing (PEOPLE-RULINGS M-1, M-3); the record is
+ * docs/shift-records/2026-11-07-people-1-cast.json. THE MOVER, FOUND: lane 1 (lane/people-1-cast-2026-11-07,
+ * 262e8b255..bbe4a02ab, on the first parent at dc655f712): one face per face-bearing house, memberships from the backing
+ * catalogue. On THIS corpus 360 of 360 rows move (60 per tier) against the stage of the base 262e8b255 (f1aa52d8…, record
+ * 0b's post-state); 360/360 hashes stay distinct. Written from the staged tree (dc655f712 with the door paths carried
+ * from the landing branch, records 0a and 0b committed), measured by scripts/audit/refence.mjs before the write.
+ * `f1aa52d8…` -> `03a5a47e…`.
+ *
+ * ── 2026-11-07, THE W0 MERGE'S COMPOSITION OVER THE REVIEW-INTAKE MOVE, SIGNED AT THE PEOPLE CAR'S LANDING (RECORD 0b) ──
+ * THE SIXTY-EIGHTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation of 2026-11-06,
+ * inside a NAMED CHARTERED WINDOW: ODQ §934.105, the people car's landing; the record is
+ * docs/shift-records/2026-11-07-people-land-0b-w0-merge.json. THE MOVER, FOUND: the W0 merge fc834a6bd (lane
+ * wiring-w0, eb4c508e1, whose own five records moved this constant to 726ef86a… on a branch without the review-intake
+ * code) composed over record 0a's move. On THIS corpus 360 of 360 rows move (60 per tier) against the stage of the
+ * first parent 780180b08 (0edf3da6…, equal to record 0a's stage); 360/360 hashes stay distinct. Written from the staged
+ * tree (fc834a6bd with the door paths carried from the landing branch, record 0a committed), measured by
+ * scripts/audit/refence.mjs before the write. `0edf3da6…` -> `f1aa52d8…`.
+ *
+ * ── 2026-11-07, THE REVIEW-INTAKE LANE'S MOVE, SIGNED AT THE PEOPLE CAR'S LANDING (RECORD 0a) ──
+ * THE SIXTY-SEVENTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation of 2026-11-06,
+ * inside a NAMED CHARTERED WINDOW: ODQ §934.105, the people car's landing; the record is
+ * docs/shift-records/2026-11-07-people-land-0a-review-intake.json. THE MOVER, FOUND: the review-intake lane
+ * (lane/review-intake-2026-11-06, 63a7cd852) merged onto the integration branch at 5b444331a, never re-recorded at its
+ * own tip. On THIS corpus 360 of 360 rows move (60 per tier) against its first parent a1d5ecd0e (68c107c2..); 360/360
+ * hashes stay distinct. Written from the staged tree (5b444331a with the door paths carried from the landing branch,
+ * which carries W0's 66th movement; the stage predates W0's code, so the constant moves from W0's value and record 0b
+ * composes W0 over this one), measured by scripts/audit/refence.mjs before the write. `726ef86a…` -> `0edf3da6…`.
+ *
+ * ── 2026-11-07, THE LEGACY ANNOTATION'S DATE IN ONE HOME (THE WIRING WAVE'S WRITER LANE W0) ──
+ * THE SIXTY-SIXTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation of 2026-11-06,
+ * inside a NAMED CHARTERED WINDOW: ODQ §934.105 (the chair's ruling R-W7 (d)); the record is
+ * docs/shift-records/2026-11-07-w0-05-annotation-date-one-home.json. THE MOVER, FOUND: commit b79dfa98b alone (the
+ * annotation's asOf field, read by nothing, withdrawn; its text keeps the date). On THIS corpus 337 of 360 rows move
+ * (the places with an annotation); 360/360 hashes stay distinct. Written from the staged tree (b79dfa98b with the door
+ * paths carried from the branch, the golden master's act committed first), measured by scripts/audit/refence.mjs
+ * before the write. `a83e777b…` -> `726ef86a…`.
+ *
+ * ── 2026-11-07, LEGACY ANNOTATIONS DATED AT BIRTH (THE WIRING WAVE'S WRITER LANE W0) ──
+ * THE SIXTY-FIFTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation of 2026-11-06,
+ * inside a NAMED CHARTERED WINDOW: ODQ §934.105, the construction-and-wiring wave's writer lane (the chair's ruling
+ * R-W7 (d)); the record is docs/shift-records/2026-11-07-w0-04-legacy-annotations-dated.json. THE MOVER, FOUND: commit
+ * b893dcda1 alone (every legacy annotation dated 'as of the founding survey', in its text and as a field). On THIS
+ * corpus 337 of 360 rows move (thorp 51, hamlet 53, village 55, town 58, city 60, metropolis 60: the places with an
+ * annotation); 360/360 hashes stay distinct. Written from the staged tree (b893dcda1 with the door paths carried from
+ * the branch, the golden master's act committed first), measured by scripts/audit/refence.mjs before the write.
+ * `67c9727b…` -> `a83e777b…`.
+ *
+ * ── 2026-11-07, ONE FOOD-SOURCE COUNT (THE WIRING WAVE'S WRITER LANE W0) ──
+ * THE SIXTY-FOURTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation of 2026-11-06,
+ * inside a NAMED CHARTERED WINDOW: ODQ §934.105, the construction-and-wiring wave's writer lane (the chair's ruling
+ * R-W7 (c)); the record is docs/shift-records/2026-11-07-w0-03-one-food-source-count.json. THE MOVER, FOUND: commit
+ * 3d1df12d7 alone (the food chains, their count and the diversity note are the types of the record's foodSources).
+ * On THIS corpus 360 of 360 rows move (60 a tier: every record's chain block); 360/360 hashes stay distinct. Written
+ * from the staged tree (3d1df12d7 with the door paths carried from the branch, the golden master's act of the same
+ * record committed first), measured by scripts/audit/refence.mjs before the write. `281ca040…` -> `67c9727b…`.
+ *
+ * ── 2026-11-07, ONE IMPORT SHARE (THE WIRING WAVE'S WRITER LANE W0) ──
+ * THE SIXTY-THIRD MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation of 2026-11-06,
+ * inside a NAMED CHARTERED WINDOW: ODQ §934.105, the construction-and-wiring wave's writer lane (the chair's ruling
+ * R-W7 (c)); the record is docs/shift-records/2026-11-07-w0-02-one-import-share.json. THE MOVER, FOUND: commit
+ * c99531cf9 alone (foodSecurity.importPct is the one import share, of the published pounds; the food record reads
+ * it). On THIS corpus 241 of 360 rows move (thorp 2, hamlet 9, village 54, town 60, city 57, metropolis 59); 360/360
+ * hashes stay distinct. Written from the staged tree (c99531cf9 with the door paths carried from the branch, the
+ * golden master's act of the same record committed first), measured by scripts/audit/refence.mjs before the write.
+ * `1bb9e7a2…` -> `281ca040…`.
+ *
+ * ── 2026-11-07, THE MIGRATION DIRECTION DECLARED ONCE (THE WIRING WAVE'S WRITER LANE W0) ──
  * THE SIXTY-SECOND MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation of 2026-11-06,
- * inside a NAMED CHARTERED WINDOW: RUNG 2 OF THE SOAK LADDER, ODQ §934.105; the record is
- * docs/shift-records/2026-11-06-rung2-02-census-composed-espionage-fence.json. A RULED EXCEPTION to one cause per
- * record (the chair, 2026-11-07 02:36 UTC): per-cause stages are unbuildable on the landing (the census cross-merges
- * hand-joined the one-line imports), so the record names all 33 census causes with their OWN-LINEAGE rows on this
- * corpus (32 move it; measured by scripts/audit/refence.mjs on each lane commit against its first parent). At the tip
- * against rung 1's final tree 1bff51c6d all 360 of 360 rows move (60 a tier); own-lineage rows, deduplicated, 360;
- * interaction rows 0. 360/360 hashes stay distinct. Written at the tip (the stage is the tip by the ruling).
- * FENCE 3 (call-path dormancy) re-run green at the write. `68c107c2…` -> `292ad5e8…`.
+ * inside a NAMED CHARTERED WINDOW: ODQ §934.105, the construction-and-wiring wave's writer lane (the chair's ruling
+ * R-W7 (e)); the record is docs/shift-records/2026-11-07-w0-01-migration-direction.json. THE MOVER, FOUND: commit
+ * 343bd4eec alone, on the rung-1 candidate 76febf9b0 (stress[].direction written once at the draw, arrivals at birth;
+ * every migration surface reads it). On THIS corpus 6 of 360 rows move (thorp 1, village 2, city 2, metropolis 1;
+ * the corpus's mass_migration places); 360/360 hashes stay distinct. Written from the staged tree (343bd4eec with the
+ * door paths carried from the branch), measured by scripts/audit/refence.mjs before the write. `68c107c2…` -> `1bb9e7a2…`.
  *
  * ── 2026-11-06, THE VILLAGE WATCH'S ROTA PRESUMES NO GOVERNOR (RUNG 1 OF THE SOAK LADDER) ──
  * THE SIXTY-FIRST MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation of 2026-11-06,
@@ -866,7 +993,7 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * superseded by the ENGINE-HYGIENE re-record above, which is the record of the
  * one chartered window that has been spent since.
  */
-const PRE_COUPLING_CORPUS_SHA = '292ad5e81e108df3f0dac2eedfc66d13ebbeb8e675c5ca3a314c23f4c4af1b65';
+const PRE_COUPLING_CORPUS_SHA = '9eb258a482f2b656f1f682223f5301936541e2f6ad0bd14ba5b9210972263997';
 
 const CORPUS_TIERS = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
 const CORPUS_ROUTES = Object.freeze(['road', 'isolated', 'port', 'crossroads']);

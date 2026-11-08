@@ -21,8 +21,8 @@ const cast = (roles, levers = [], stakes = []) => ({
 const town = (extra = {}) => ({
   tier: 'town',
   npcs: [
-    { id: 'n1', name: 'Mara Vell', role: 'Miller', factionAffiliation: 'Millers’ Guild' },
-    { id: 'n2', name: 'Oswin Hale', role: 'Mayor', factionAffiliation: 'Town Council' },
+    { id: 'n1', name: 'Mara Vell', role: 'Miller', memberships: [{ power: 'Millers’ Guild', rank: 1 }] },
+    { id: 'n2', name: 'Oswin Hale', role: 'Mayor', memberships: [{ power: 'Town Council', rank: 1 }] },
   ],
   ...extra,
 });
@@ -36,6 +36,15 @@ describe('crisisHooksOf: one hook bound to the cast, one bound to the lever', ()
       bound: 'cast',
       link: { kind: 'npc', id: 'n1', label: 'Mara Vell' },
     });
+  });
+
+  it('a person in two powers is named of their FIRST-RANK power (PEOPLE-2 CAST-DERIVED: the card\'s best standing)', () => {
+    const entry = { type: 'famine', cast: cast([npcRow('brunt', 'n1', 'Mara Vell', CAST_REASONS.bruntBase.food_security)]) };
+    const s = town();
+    s.npcs[0] = { ...s.npcs[0], memberships: [{ power: 'Town Council', rank: 3 }, { power: 'Millers’ Guild', rank: 1 }] };
+    expect(crisisHooksOf(s, entry)[0].text).toBe('In the famine, the brunt falls on Mara Vell of Millers’ Guild: the hunger falls first on its people.');
+    s.npcs[0] = { ...s.npcs[0], memberships: [] };
+    expect(crisisHooksOf(s, entry)[0].text).toBe('In the famine, the brunt falls on Mara Vell: the hunger falls first on its people.');
   });
 
   it('the lever hook names the house the players can push, its holder, and the faction that loses with the reason', () => {

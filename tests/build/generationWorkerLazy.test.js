@@ -375,7 +375,6 @@ const SENTINEL = 'settlementforge:generation:worker-v1';
 //   ~24 KB · the data tables ~21 KB (npcData, institutionDescVariants, powerSiblings) · domain/display ~7 KB · roles/roleClass ~4 KB;
 //   THE MERGE WITH RUNG 1 AND THIS LANDING'S CURES +5,567 (the two lineages' interaction, the module splits, the chunk cure).
 //   The sum closes exactly on the measured figures: 1,574,838 + 110,009 + 5,567 = 1,690,414.
-// The ceiling is recorded AT the measured figure. MONOTONE-DOWN from here.
 // 1,690,414 -> 1,695,569 (2026-11-07, MERGE-R2, the integration merge of the rung-2 landing; the chair's standing ruling
 // "trim where no output byte moves, then re-record at the measured figure", under the owner's delegation of 2026-11-06):
 // A RISE OF 5,155 B, VETOABLE BY THE OWNER. No trim that moves no output byte was found in this seat. MEASURED by a fresh
@@ -387,7 +386,21 @@ const SENTINEL = 'settlementforge:generation:worker-v1';
 //   THE MERGE ITSELF (both lines composed: the migration direction, the held refusal inside drawDeclared, the water and
 //     market detectors) +357 of interaction. Every commit after the merge moves no src byte.
 //   The sum closes exactly: 1,574,838 + 4,798 + 115,576 + 357 = 1,695,569. Recorded AT the measured figure; monotone-down.
-export const WORKER_BUNDLE_CEILING_BYTES = 1695569;
+// 1,574,838 -> 1,603,564 (2026-11-07, THE PEOPLE CAR'S LANDING, PEOPLE-LAND second seat under the chair's brief step 5,
+// "re-recorded at the measured figures with every byte attributed by first-parent step"; ODQ §934.105, VETOABLE BY THE
+// OWNER): A RISE OF 28,726 B. MEASURED by a fresh `vite build` at every first-parent point of the car's stack, each with
+// the landing's two build cures applied (6c8369071, the backing relation's leaf; f7bb28ef6, powerSupport pinned to
+// coherence-lazy -- without them lane 1 also drags the goods chains and the prose corpus into the worker and first paint),
+// the worker bytes being the file's size:
+//   the integration base 262e8b255: 1,579,660 (+4,822 over the ceiling before the car: the integration merges of
+//   2026-11-07, the review-intake lane and W0 among them; not split further here) ·
+//   lane 1 PEOPLE-1 CAST dc655f712 +17,607 (the cast: castPowers, representatives, the mints) · lane 2 3aa160a70 +420 ·
+//   lane 3 0f930ce95 +3,214 (one hook per card) · lane 4 c7d552370 +327 · 5A 053283dfd -568 · 5B a725df7e4 +4,645
+//   (the v1 -> v2 save migration) · the landing's step 1 2981f23f6 -1,738 (the shim and the grouping out) · L0, the links
+//   lane 147fa6c3f 0 · the landing's cures and records to the tip -3 (6851c4c89, an em dash). The sum closes exactly:
+//   1,574,838 + 4,822 + 17,607 + 420 + 3,214 + 327 - 568 + 4,645 - 1,738 - 3 = 1,603,564, the tip's worker bundle.
+// The ceiling is recorded AT the measured figure. MONOTONE-DOWN from here.
+export const WORKER_BUNDLE_CEILING_BYTES = 1603564;
 
 const source = (path) => readFileSync(join(ROOT, path), 'utf8');
 

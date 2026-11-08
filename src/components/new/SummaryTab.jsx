@@ -119,7 +119,7 @@ function SummaryTab({ settlement:r }) {
   const isMobile = useIsMobile(); // reactive; hook must precede the early return (rules-of-hooks)
   if (!r) return null;
 
-  const {name,tier,population:pop,institutions:g=[],npcs:w=[],factions:_factionGroups=[],conflicts:allConflicts=[],economicState:eco={},spatialLayout:spatial,powerStructure:ps={},history:hist={},economicViability:via,settlementReason:reason,config:cfg={},stress:stressRaw,prominentRelationship:pr,coherenceNotes:_cn=[]}=r;
+  const {name,tier,population:pop,institutions:g=[],npcs:w=[],conflicts:allConflicts=[],economicState:eco={},spatialLayout:spatial,powerStructure:ps={},history:hist={},economicViability:via,settlementReason:reason,config:cfg={},stress:stressRaw,prominentRelationship:pr,coherenceNotes:_cn=[]}=r;
   const stresses=(Array.isArray(stressRaw)?stressRaw:stressRaw?[stressRaw]:[]).filter(Boolean);
   const allFactions=ps?.factions||[];
   const tradeAccess=(cfg.tradeRouteAccess||'road').replace(/_/g,' ');

@@ -105,7 +105,8 @@ describe('reader:relation-types', () => {
   });
   // The chair's ruling Q1 (2026-11-04): the exempted rule is the line, the strict one a column.
   const roster = (spec) => rec({
-    npcs: spec.map(([name, role, factionAffiliation]) => ({ name, role, factionAffiliation })),
+    // PEOPLE-5A RE-KEYED (M-1b): a card's faction is its membership, not the shim's field.
+    npcs: spec.map(([name, role, power]) => ({ name, role, memberships: power ? [{ power, rank: 1 }] : [] })),
     powerStructure: { governingName: 'Guild Council', factions: [{ faction: 'Guild Council', isGoverning: true }, { faction: 'Merchant Rivals', contestsNiche: 'Guild Council' }, { faction: 'Military/Guard' }] },
   });
   const row = (a, kind, b, ra, rb) => `${a} ${kind} ${b}\n${ra} · stable · ${rb}\n▼`;
@@ -258,9 +259,18 @@ describe('reader:daily-life-placeholder', () => {
   });
 });
 
-// ── 11. faction-role-fit (CENSUS-4 R12)
+// ── 11. faction-role-fit (CENSUS-4 R12; ported to the memberships at MERGE-CAR, the chair's SC-1 ruling: a reader
+// only — the card's FIRST-RANK membership is its affiliation, the people car's shape)
 describe('faction-role-fit', () => {
-  const town = (category, role) => rec({ powerStructure: { factions: [{ faction: 'The House', category }] }, npcs: [{ name: 'A', role, factionAffiliation: 'The House' }] });
+  const town = (category, role) => rec({ powerStructure: { factions: [{ faction: 'The House', category }] }, npcs: [{ name: 'A', role, memberships: [{ power: 'The House', rank: 1 }] }] });
+  test('the affiliation is the FIRST-RANK membership: a lower-rank membership in the house is not judged there', () => {
+    const s = rec({ powerStructure: { factions: [{ faction: 'The House', category: 'religious' }, { faction: 'The Market', category: 'economy' }] },
+      npcs: [{ name: 'A', role: 'Wandering Peddler', memberships: [{ power: 'The Market', rank: 1 }, { power: 'The House', rank: 2 }] }] });
+    expect(R.factionRoleFitFindings(s, {})).toEqual([]);
+    // anchored: the same card first-ranked in the house is the finding
+    s.npcs[0].memberships = [{ power: 'The House', rank: 1 }, { power: 'The Market', rank: 2 }];
+    expect(R.factionRoleFitFindings(s, {})).toHaveLength(1);
+  });
   test('a faction seating a role that does not fit its kind is a finding', () => {
     expect(R.factionRoleFitFindings(town('religious', 'Wandering Peddler'), {})).toEqual([{ surface: 'factions', quote: 'The House (religious)', detail: 'Wandering Peddler (merchant)' }]);
     expect(R.factionRoleFitFindings(town('military', 'Priest'), {})).toHaveLength(1);

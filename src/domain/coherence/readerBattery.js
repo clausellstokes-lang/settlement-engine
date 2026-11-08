@@ -29,6 +29,7 @@ import { nativeSemanticName } from '../content/customContentSemanticAuthority.js
 import { wantRegisterFault } from '../summary/tonightSheet.js';
 import { collect, str } from './recordBattery.js';
 import { waterOf } from '../facts/water.js';
+import { firstRankMembershipOf, powerOrderOf } from '../people/membership.js';
 import { terrainClassOf, tradeRouteOf } from '../facts/terrain.js';
 
 /** @typedef {import('./coherenceBattery.js').BatteryFinding} BatteryFinding */
@@ -52,7 +53,7 @@ import { terrainClassOf, tradeRouteOf } from '../facts/terrain.js';
  *   history?: { currentTensions?: unknown, historicalEvents?: unknown } | null,
  * } | null | undefined} ReaderRecord
  */
-/** @typedef {{ name?: unknown, role?: unknown, factionAffiliation?: unknown }} ReaderNpc */
+/** @typedef {{ name?: unknown, role?: unknown, memberships?: unknown }} ReaderNpc */
 /** @typedef {{ templateType?: unknown, description?: unknown, yearsAgo?: unknown, name?: unknown }} ReaderEvent */
 
 // ───────────────────────────── shared readers ─────────────────────────────
@@ -235,7 +236,8 @@ export function readerDistributions(s, surfaces = null) {
 // ──────────────────────────── 3. relation-types ────────────────────────────
 
 // THE ROLE-CLASS RULE lives in `../roles/roleClass.js` (CENSUS-4: one rule, one home, read by the
-// generator's tie step and by this instrument); re-exported for this module's readers.
+// generator's tie step and by this instrument); re-exported for this module's readers. Its exempted
+// rule reads a card's memberships (PEOPLE-5A, M-1b; composed there at MERGE-CAR).
 export { ROLE_CLASS, classOfRole, shareTradeOrOffice, exemptedVerdict };
 
 /**
@@ -453,8 +455,8 @@ export function dailyLifePlaceholderFindings(s, surfaces) {
  * A faction that seats a member whose role does not fit its kind (R12, the chair's ruling of
  * 2026-11-04: religious → clergy; noble → noble or office; military → military; criminal →
  * criminal; `domain/roles/roleClass.js :: factionRoleFits`, the rule the assembly seam applies).
- * Read on the record: each power faction's category against the roles of the NPCs affiliated to
- * it; the factions that hold or contest the seat also seat office-holders and nobles (ruling Q1). One finding per misfit faction; the detail names the misfit roles and their classes.
+ * Read on the record: each power faction's category against the roles of the NPCs whose first-rank
+ * membership is in it (MERGE-CAR: memberships, M-1b); the factions that hold or contest the seat also seat office-holders and nobles (ruling Q1). One finding per misfit faction; the detail names the misfit roles and their classes.
  * @param {ReaderRecord} s @param {Readonly<Record<string,string>>} _surfaces
  */
 export function factionRoleFitFindings(s, _surfaces) {
@@ -462,9 +464,12 @@ export function factionRoleFitFindings(s, _surfaces) {
   const out = [];
   const npcs = Array.isArray(s?.npcs) ? s.npcs : [];
   const seat = seatFactions(s);
+  const order = powerOrderOf(s);
   for (const f of Array.isArray(s?.powerStructure?.factions) ? s.powerStructure.factions : []) {
     const name = str(f?.faction);
-    const misfits = npcs.filter((/** @type {ReaderNpc} */ n) => str(n?.factionAffiliation) === name && !factionRoleFits(f?.category, n?.role, { seat: seat.has(name) }));
+    // MERGE-CAR (the chair's SC-1 ruling): the affiliation is the card's FIRST-RANK membership — the
+    // people car's shape (M-1b); the shim's field is gone. A reader only: no generator fits the roster.
+    const misfits = npcs.filter((/** @type {ReaderNpc} */ n) => str(firstRankMembershipOf(n, order)?.power) === name && !factionRoleFits(f?.category, n?.role, { seat: seat.has(name) }));
     if (!name || !misfits.length) continue;
     out.push({ surface: 'factions', quote: `${name} (${str(f.category)})`, detail: misfits.map((/** @type {ReaderNpc} */ n) => `${str(n.role)} (${classOfRole(str(n.role))})`).join(', ') });
   }

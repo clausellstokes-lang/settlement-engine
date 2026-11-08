@@ -33,6 +33,8 @@ import {
   RETIRED_WINDOW_RUNG1_BASELINE_SCHEMA,
   RETIRED_TIER_COVERAGE_BASELINE_SCHEMA,
   RETIRED_MIGRATION_DIRECTION_BASELINE_SCHEMA,
+  RETIRED_PEOPLE_CAST_BASELINE_SCHEMA,
+  RETIRED_PEOPLE_LANDING_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA,
   validateSchema3Baseline,
   RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
@@ -65,6 +67,8 @@ import {
   validateSchema28Baseline,
   validateSchema29Baseline,
   validateSchema30Baseline,
+  validateSchema31Baseline,
+  validateSchema32Baseline,
 } from '../../scripts/lib/observed-shape-baseline.mjs';
 import {
   digestOf,
@@ -365,8 +369,12 @@ describe('observed-shape schema-3 baseline envelope', () => {
     // ⭐ SCHEMA 27: THE RUNG-1 WINDOW (the chair's rulings on lane LANDING-2b's STOP, 2026-11-04): schema 26's envelope and tag law re-governed to the shape-family theta 0.76 (the crisis cast on `stressors`), a corpus topology pass that cures the window's `facets`/`issues` erosion, three crisis declarations (the roster 10 -> 13, the bank 69/45 -> 76/50) and the window's rows admitted with attribution.
     // ⭐ SCHEMA 28: THE TIER-CHANGE COVERAGE PASS (the chair's corpus-coverage ruling of 2026-11-06, the militia precedent): schema 27's envelope, tag law, roster and register UNCHANGED, re-governed to a corpus builder whose producer 2b pulses one town generated over the city cut (osr-tier-14) so the stamp law mints the tier candidate R-B1 took from producer 2. Like 25, its reconciliation is EMPTY, and measured so.
     // ⭐ SCHEMA 29: THE MIGRATION-DIRECTION DECLARATION (the chair's ruling of 2026-11-07 03:55 UTC, ODQ §934.105, lane WIRING-W0): schema 28's envelope, tag law, corpus and register re-governed to ONE declaration of the fifth class, `migrationDirection on config` (writer generators/steps/stressConfirmPass.js; no corpus world draws a mass migration); the roster 13 -> 14, the bank 76/50 -> 77/51, the one new row admitted tagged.
-    // ⭐ SCHEMA 30: THE CENSUS READERS (the chair's ruling of 2026-11-07 06:5x UTC, ODQ §934.105, on LANDING-R2's record; cut there as 28 -> 29 and RE-NUMBERED 29 -> 30 at the integration merge MERGE-R2): a governed migration rung, the register's own door for a shape change — schema 29's envelope, tag law, theta, corpus and roster UNCHANGED; the census and reader lanes' ten new rows admitted with attribution (contestsNiche on factions a MOVE, readerBattery.js -> roles/roleClass.js), eleven gone rows retired with cause, the bank 77/51 -> 76/50.
-    expect(BASELINE_SCHEMA).toBe(30);
+    // ⭐ SCHEMA 30: THE PEOPLE CAR'S CAST (the owner's charter, ODQ §934.105; lane PEOPLE-1 CAST, 2026-11-07): schema 29's envelope, tag law, roster and corpus definition UNCHANGED, re-governed to a register that admits 19 ordinary rows the cast's year exposes and lets 0 go; nothing is declared and the bank holds at 77/51.
+    // ⭐ SCHEMA 31: THE PEOPLE CAR'S LANDING (ODQ §934.105; the landing seat PEOPLE-LAND, 2026-11-07): schema 30's envelope, tag law, roster and corpus definition UNCHANGED, re-governed to a NEW GENESIS from a restored consistent schema-30 predecessor; the grouping and the per-NPC faction fields leave the record (M-2, M-7), 90 rows admitted with attribution by lane cause, 9 go, 2 decrease; nothing is declared and the bank holds at 77/51.
+    // ⭐ SCHEMA 32: MERGE-CAR (the people car merged into the integration branch over the rung-2 landing; the chair's brief, 2026-11-08): schema 31's envelope, tag law, roster and corpus definition UNCHANGED; the car's genesis at 31 STANDS and the integration side's schema-30 reads (R2's census readers) are admitted by cause, 15 rows admitted, 12 go; nothing is declared and the bank is 76/50.
+    expect(BASELINE_SCHEMA).toBe(32);
+    expect(RETIRED_PEOPLE_LANDING_BASELINE_SCHEMA).toBe(31);
+    expect(RETIRED_PEOPLE_CAST_BASELINE_SCHEMA).toBe(30);
     expect(RETIRED_MIGRATION_DIRECTION_BASELINE_SCHEMA).toBe(29);
     expect(RETIRED_TIER_COVERAGE_BASELINE_SCHEMA).toBe(28);
     expect(RETIRED_WINDOW_RUNG1_BASELINE_SCHEMA).toBe(27);
@@ -684,6 +692,20 @@ function validSchema29Baseline_fixture() {
   return baseline;
 }
 
+/** The RETIRED schema-30 envelope, pinned to its own LITERAL number (the people-landing rung). */
+function validSchema30Baseline_fixture() {
+  const baseline = validSchema7Baseline();
+  baseline.schema = RETIRED_PEOPLE_CAST_BASELINE_SCHEMA;
+  return baseline;
+}
+
+/** The RETIRED schema-31 envelope, pinned to its own LITERAL number (the car-merge rung). */
+function validSchema31Baseline_fixture() {
+  const baseline = validSchema7Baseline();
+  baseline.schema = RETIRED_PEOPLE_LANDING_BASELINE_SCHEMA;
+  return baseline;
+}
+
 /** The LIVE envelope, whatever number is in force. */
 function validLiveBaseline() {
   const baseline = validSchema7Baseline();
@@ -976,11 +998,23 @@ describe('observed-shape schema-7 bank-by-rule envelope', () => {
     // is paired with a fixture rather than with `live`. `live` belongs to 29 now.
     const tierCoverage = validSchema28Baseline_fixture();
     expect(validateSchema28Baseline(tierCoverage)).toBe(tierCoverage);
-    // ⭐ 29 IS RETIRED at the schema-30 rung (MERGE-R2) and now validates its OWN literal, so it
-    // too is paired with a fixture rather than with `live`. `live` belongs to 30 now.
+    // ⭐ 29 IS RETIRED at the schema-30 rung and now validates its OWN literal, so it too
+    // is paired with a fixture rather than with `live`. `live` belongs to 30 now.
     const migrationDirection = validSchema29Baseline_fixture();
     expect(validateSchema29Baseline(migrationDirection)).toBe(migrationDirection);
-    expect(validateSchema30Baseline(live)).toBe(live);
+    // ⭐ 30 IS RETIRED at the schema-31 rung (the people car's landing) and validates its OWN
+    // literal, paired with a fixture; `live` belongs to 31 now.
+    const peopleCast = validSchema30Baseline_fixture();
+    expect(validateSchema30Baseline(peopleCast)).toBe(peopleCast);
+    // ⭐ 31 IS RETIRED at the schema-32 rung (MERGE-CAR) and validates its OWN literal, paired
+    // with a fixture; `live` belongs to 32 now.
+    const peopleLanding = validSchema31Baseline_fixture();
+    expect(validateSchema31Baseline(peopleLanding)).toBe(peopleLanding);
+    expect(validateSchema32Baseline(live)).toBe(live);
+    expect(() => validateSchema31Baseline(live)).toThrow(/is not schema 31/);
+    expect(() => validateSchema32Baseline(peopleLanding)).toThrow(/is not schema 32/);
+    expect(() => validateSchema30Baseline(live)).toThrow(/is not schema 30/);
+    expect(() => validateSchema31Baseline(peopleCast)).toThrow(/is not schema 31/);
     expect(() => validateSchema29Baseline(live)).toThrow(/is not schema 29/);
     expect(() => validateSchema30Baseline(migrationDirection)).toThrow(/is not schema 30/);
     expect(() => validateSchema30Baseline(tierCoverage)).toThrow(/is not schema 30/);

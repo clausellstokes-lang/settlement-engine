@@ -70,9 +70,10 @@ describe('claims-parity — each synopsis is proven by the forged world', () => 
     expect((t.powerStructure?.factions || []).find((f) => f.faction === "Thieves' Guild")?.power).toBeGreaterThan(governing?.power);
     // "that guild's master has begun, quietly, to write the authority ... into permanent ink": the coup is the
     // thieves' guild master's.
-    expect((Array.isArray(t.npcs) ? t.npcs : []).some((n) => /guild master/i.test(n?.role || '')
-      && n?.factionAffiliation === "Thieves' Guild"
-      && /new freedoms written down/i.test(n?.goal?.short || ''))).toBe(true); // R11 (73fa1a1e7): the formalising row's wording
+    // Re-keyed by identity with its cause (PEOPLE-2 CAST-DERIVED, 2026-11-07): the people car's cast has no
+    // "Thieves Guild Master" role (M-1b: a role is its house's title; the guild's master is the face its powers
+    // rank FIRST), so the master is the Thieves' Guild's rank-1 face, carrying the dominant fractured template.
+    expect(Boolean(masterOf(t))).toBe(true);
   });
 
   it('THE MILL THAT OUTLIVED ITS WARS — a scarred survivor', () => {
@@ -142,8 +143,14 @@ describe('claims-parity — each synopsis is proven by the forged world', () => 
 // state it); each row is proven here by the forged world, like the facts. A row names a field from LINK_FIELDS
 // below, and each field proves exactly one (cause → effect) pair, so a row cannot borrow another link's proof.
 
-const masterOf = (t) => (Array.isArray(t.npcs) ? t.npcs : []).find((n) => /guild master/i.test(n?.role || '')
-  && n?.factionAffiliation === "Thieves' Guild" && /new freedoms written down/i.test(n?.goal?.short || '')); // R11 (73fa1a1e7)
+// The thieves' guild's master: the Thieves' Guild's rank-1 face (the people car: a role is its house's title, the
+// master is the face the guild ranks first — re-keyed from the old "Guild Master" role, PEOPLE-2 CAST-DERIVED,
+// 2026-11-07), whose goal is a power head's formalising template under fractured governance (the criminal or
+// commercial dominant row of npcStructure.js). MERGE-CAR, re-keyed by identity with its cause: the rows' WORDING is the
+// rung-2 landing's (R11, 73fa1a1e7: the formalising rows re-worded — the criminal "Take over whatever the seat has
+// stopped watching, and dig in …", the commercial "Get their trade's new freedoms written down …"), the IDENTITY the car's.
+const masterOf = (t) => (Array.isArray(t.npcs) ? t.npcs : []).find((n) => (n?.memberships || []).some((m) => m.power === "Thieves' Guild" && m.rank === 1)
+  && /stopped watching, and dig in before it recovers|new freedoms written down/i.test(n?.goal?.short || ''));
 const governingOf = (t) => (t.powerStructure?.factions || []).find((f) => f.isGoverning);
 const thievesOf = (t) => (t.powerStructure?.factions || []).find((f) => f.faction === "Thieves' Guild");
 /** The showcase story's six facts, each a predicate on the forged world (the same truths the claims above pin). */
@@ -182,10 +189,10 @@ const LINK_FIELDS = {
   // npcStructure: the master's goal is the template of the settlement condition the record stamps on her.
   'npcs[].settlementCondition': { cause: 'title unhonoured', effect: 'master formalising',
     holds: (t) => masterOf(t)?.settlementCondition === 'governance_fractured' },
-  // npcStructure: the template's rank, `dominant` when her faction leads its category and stands within reach of
-  // the governing faction's power, selects the formalising goal (the subordinate one only advances standing).
+  // npcStructure: the master's standing, `head` (rank 1 of her first-rank power), with her power leading its category
+  // within reach of the governing power, selects the formalising goal (the subordinate one only advances standing).
   'npcs[].structuralRank': { cause: 'thieves outweigh', effect: 'master formalising',
-    holds: (t) => masterOf(t)?.structuralRank === 'dominant' },
+    holds: (t) => masterOf(t)?.structuralRank === 'head' },
   // The stressor's own trace: would hold "harvests → plague" if a cause named the food record. resolveStress runs
   // before the economy, so its causes name tier, threat and the stress generator.
   'simulationTrace[stressor.plague_onset].causes': { cause: 'poor harvests', effect: 'plague',
