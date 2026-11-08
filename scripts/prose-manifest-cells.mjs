@@ -192,7 +192,11 @@ export const MANIFEST_PROVENANCE = Object.freeze({
     + ' 2026-11-08 (THE RUNG-2 LANDING’S MERGE OVER THE INTEGRATION BRANCH, RECORD A OF THE INTEGRATION LANDING, docs/'
     + 'shift-records/2026-11-08-merge-car-a-rung2-composition.json, ODQ §934.105): re-recorded at the stage of 572c15018'
     + ' (the composition commit of the merge 10b8f09b4, MERGE-R2) because the pool census composed moved the composed'
-    + ' prose of every town; against record 0b’s post-state 1,050 of the 1,050 rows move, 0 added, 0 removed.',
+    + ' prose of every town; against record 0b’s post-state 1,050 of the 1,050 rows move, 0 added, 0 removed.'
+    + ' 2026-11-08 (THE PEOPLE CAR’S MERGE OVER THE INTEGRATION BRANCH, RECORD B OF THE INTEGRATION LANDING, docs/'
+    + 'shift-records/2026-11-08-merge-car-b-people-car-composition.json, ODQ §934.105): re-recorded at the stage of'
+    + ' 8dff691f3 (the people car merged, the conflicts composed) because one face per institution re-casts the towns'
+    + ' over the pool census; against record A’s post-state 832 of the 1,050 rows move, 0 added, 0 removed.',
 });
 
 /** This surface's identity in tests/fixtures/.golden-freeze-register.json. */
