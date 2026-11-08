@@ -7,7 +7,13 @@
  *
  * ── ⭐⭐ EIGHT IDENTITY DEFINITIONS LIVE HERE, AND ONLY ONE IS THE AUTHORITY ──
  *
- * `BASELINE_SCHEMA` is **32**: schema 31's tagged numeric heuristic-leaf envelope, tag law, roster
+ * `BASELINE_SCHEMA` is **33**: schema 32's tagged numeric heuristic-leaf envelope, tag law and roster,
+ * re-governed to THE VEIL MERGED OVER MERGE-CAR (ALLEGIANCE-CAR1, 2026-11-08): FIX-PUBLIC-VEIL's two rungs
+ * (the infiltrated topology, producer 1b′, and the veiled-id re-deal) composed at the merged tree as one
+ * rung; the corpus definition gains 1b′. Its full rationale lives beside `VEIL_MERGE_TARGET_SCHEMA` in
+ * `migrate-observed-shape-readers.mjs`.
+ *
+ * `RETIRED_CAR_MERGE_BASELINE_SCHEMA` is **32**: schema 31's tagged numeric heuristic-leaf envelope, tag law, roster
  * and corpus definition UNCHANGED, re-governed to MERGE-CAR: the people car merged into the
  * integration branch over the rung-2 landing (the chair's brief, 2026-11-08: "the car's genesis at
  * schema 31 STANDS; the integration side's schema-30 reads — R2's census readers — admitted at a new
@@ -511,7 +517,11 @@ export const RETIRED_PEOPLE_CAST_BASELINE_SCHEMA = 30;
  *  the census readers' reads admitted by cause. Never redefined, never deleted, so a schema-31
  *  PREDECESSOR is still validated as schema 31. */
 export const RETIRED_PEOPLE_LANDING_BASELINE_SCHEMA = 31;
-export const BASELINE_SCHEMA = 32;
+/** The RETIRED car-merge definition — schema 33's predecessor. Same tagged envelope, theta, roster and
+ *  fence; schema 33 re-governs it to the veil merged over MERGE-CAR and adds producer 1b′ to the corpus
+ *  definition. Never redefined, never deleted, so a schema-32 PREDECESSOR is still validated as schema 32. */
+export const RETIRED_CAR_MERGE_BASELINE_SCHEMA = 32;
+export const BASELINE_SCHEMA = 33;
 /** The RETIRED exact per-site definition. Never redefined, never deleted. */
 export const RETIRED_EXACT_BASELINE_SCHEMA = 3;
 /** The RETIRED UNFILTERED heuristic-leaf definition — schema 5's predecessor.
@@ -1216,10 +1226,20 @@ export function validateSchema31Baseline(baseline) {
   );
 }
 
+/** The RETIRED authority — schema 32's tagged envelope (MERGE-CAR), re-governed by schema 33 to the
+ *  veil merged over MERGE-CAR. Re-bound to its own LITERAL now that the authority has moved to 33. */
+export function validateSchema32Baseline(baseline) {
+  return validateLeafBaseline(
+    baseline,
+    RETIRED_CAR_MERGE_BASELINE_SCHEMA,
+    { tagged: true },
+  );
+}
+
 /** The LIVE envelope validator. Bound to `BASELINE_SCHEMA` rather than a literal,
  *  so the retired rungs above keep validating their own numbers while this one
  *  always names the authority. */
-export function validateSchema32Baseline(baseline) {
+export function validateSchema33Baseline(baseline) {
   return validateLeafBaseline(baseline, BASELINE_SCHEMA, { tagged: true });
 }
 

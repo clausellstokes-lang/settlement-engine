@@ -197,7 +197,14 @@
  *     roster 10 -> 13, the bank 69/45 -> 76/50), and ADMITS the window's other rows with
  *     attribution. Its full rationale lives beside `WINDOW_RUNG1_TARGET_SCHEMA` (RETIRED).
  *
- *   schema 31 -> 32 (LIVE)   the same tagged numeric reconciliation, and MERGE-CAR: the people car
+ *   schema 32 -> 33 (LIVE)   the same tagged numeric reconciliation, and THE VEIL MERGED OVER MERGE-CAR
+ *     (ALLEGIANCE-CAR1, 2026-11-08): FIX-PUBLIC-VEIL's two rungs — its 31 -> 32, the infiltrated topology
+ *     (producer 1b′), and its 32 -> 33, the veiled-id re-deal — composed at the merged tree as ONE rung,
+ *     by the veil's own merge note (its record §9: "a merge that brings another schema-31 re-freeze must
+ *     re-run this rung's two acts on the merged tip rather than resolve the register textually").
+ *     4 new rows (one identity, `covert on impairments`) and 12 gone, each ADMITTED or RETIRED with the veil's attribution; nothing declared, the bank holds at 76/50. Its full rationale lives beside `VEIL_MERGE_TARGET_SCHEMA`.
+ *
+ *   schema 31 -> 32 (RETIRED) the same tagged numeric reconciliation, and MERGE-CAR: the people car
  *     merged into the integration branch over the rung-2 landing (the chair's brief, 2026-11-08). The
  *     car's genesis at 31 STANDS; the integration side's schema-30 reads (R2's census readers) are
  *     ADMITTED at this rung by cause, the rows they retired go with cause: 15 new, 12 gone, none
@@ -323,6 +330,7 @@ import {
   validateSchema29Baseline,
   validateSchema30Baseline,
   validateSchema31Baseline,
+  validateSchema32Baseline,
 } from './lib/observed-shape-baseline.mjs';
 
 export const MIGRATION_REPORT_SCHEMA = 2;
@@ -1446,6 +1454,49 @@ export const PEOPLE_LANDING_TARGET_SCHEMA = 31;
  *  holds as at every rung: this rung lands ratchet-red, and its re-freeze lands next. */
 export const CAR_MERGE_TARGET_SCHEMA = 32;
 
+/* ⭐⭐ THE SCHEMA 32 → 33 RUNG — THE VEIL MERGED OVER MERGE-CAR
+ *
+ *  THE MERGE (ALLEGIANCE-CAR1, 2026-11-08, the brief's §1.2): lane/fix-public-veil-2026-11-07 (eb18cb458)
+ *  merged into the integration tip e376ee6a3 (MERGE-CAR's). Both sides had cut a schema 32: MERGE-CAR its
+ *  car-merge rung (bd47c29c7 / 5e2b0c008), FIX-PUBLIC-VEIL its infiltrated topology (0095f7327 /
+ *  e161ee427) and then its 33, the veiled-id re-deal (a69c472b7 / 6b85e6509). At the merge commit the
+ *  INTEGRATION side of the tooling, suites and register was taken, and the veil's two rungs are re-run here
+ *  on the merged tree as ONE rung, as the veil's own merge note directs (its record §9).
+ *
+ *  THE CHANGE: the corpus builder carries the veil's producer 1b′ (one config, CONFIGS[0], × the four seeds,
+ *  generated with `stressTypes: ['infiltrated']`, entering `roots` and NOT `generated` — topology only,
+ *  1b's own four worlds do not re-deal), merged in textually; this rung governs it.
+ *
+ *  THE REFUSAL, MEASURED at the merged tip e1ee863ac through `--scan-only --scan-mode=legacy-leaf`
+ *  against MERGE-CAR's schema-32 register:
+ *
+ *      findings 2,202 → 2,186 · identities 1,548 → 1,540
+ *      NEW 4 · GONE 12 · INCREASED 0 · DECREASED 0 · SAME 1,536
+ *
+ *  These are, row for row, the veil's own schema-33 review (osr-rung33-review.json): the infiltrated
+ *  topology reveals NO identity at either side (the veil measured 0 at its 32; the merged tree agrees), and
+ *  the veiled-id re-deal moves the corpus's year exactly as on the lane.
+ *
+ *  THE MIGRATION REVIEW — every moved row, its cause, its disposition:
+ *    NEW (4 rows, ONE identity), each ADMITTED as ordinary debt: `covert on impairments` x1 at
+ *      domain/corruption.js, domain/entities/status.js, worldPulse/beliefMap.js and
+ *      worldPulse/institutionStatusLifecycle.js — the corpus's year over the re-dealt veiled cast (a
+ *      veiled face's opaque id keys its forks: domain/people/cardVeil.js :: veiledCardIdFor) no longer
+ *      reaches the covert-corruption writer (corruption.js's covert impairment).
+ *    GONE (12 rows), each RETIRED with its cause, the lawful shrink of the same re-deal: their writers
+ *      are now reached — `nearbyResourcesState on config` x1 affordanceManifest.js, x4 mutateWorld.js,
+ *      x1 targetRosters.js, x1 resourceSemantics.js, x1 deriveSystemState.js, x1
+ *      institutionLifecycleResourceRead.js, x1 resourceDynamicsKernel.js, x2 tierResourceDynamics.js, x3
+ *      resolveResources.js; `resourceHistory on settlement` x1 rosterProvenance.js, x2
+ *      resourceDynamicsKernel.js, x2 tierResourceDynamics.js.
+ *
+ *  Nothing is declared (the roster stays fourteen; thirteen bank). The identity rows move by exactly the
+ *  review's delta, 1548 + 4 - 12 = 1540. ⛔ The reconciliation must be EXACTLY those 16 rows; any other
+ *  moved row at the mint means the review was not the whole cause and the mint STOPS. Its delta is the
+ *  corpus builder plus the three bookkeeping paths; see `VEIL_MERGE_SCANNER_DELTA_PATHS`. The commit pair
+ *  holds as at every rung: this rung lands ratchet-red, and its re-freeze lands next. */
+export const VEIL_MERGE_TARGET_SCHEMA = 33;
+
 export const DECLARED_BANK_BY_TARGET = Object.freeze({
   [EXEMPTION_RETIREMENT_TARGET_SCHEMA]: Object.freeze({ bankedReads: 60, taggedRows: 39 }),
   [BANK_FENCE_TARGET_SCHEMA]: Object.freeze({ bankedReads: 60, taggedRows: 39 }),
@@ -1511,6 +1562,9 @@ export const DECLARED_BANK_BY_TARGET = Object.freeze({
   // readers' `stresses on settlement` at canonicalAccessors.js (uncured erosion, 7af3c6797) — so the
   // pair moves 77/51 -> 76/50, the integration side's schema-30 figure. The bank does not grow.
   [CAR_MERGE_TARGET_SCHEMA]: Object.freeze({ bankedReads: 76, taggedRows: 50 }),
+  // MEASURED off MERGE-CAR's schema-32 register (76/50) and the live scan at the merged tip (76 reads
+  // across 13 of 14 declared identities): no moving row is on a declared identity, so the pair cannot move.
+  [VEIL_MERGE_TARGET_SCHEMA]: Object.freeze({ bankedReads: 76, taggedRows: 50 }),
 });
 
 /** The declared post-bank of a target, or `null` for a rung that predates the law. */
@@ -2083,6 +2137,16 @@ export const CAR_MERGE_SCANNER_DELTA_PATHS = Object.freeze([
   'scripts/migrate-observed-shape-readers.mjs',
 ]);
 
+/** The schema-32 → 33 delta: the corpus builder (the subject: FIX-PUBLIC-VEIL's producer 1b′, merged in)
+ *  plus the THREE bookkeeping paths (the live validator moving to `validateSchema33Baseline`, the
+ *  32 → 33 bump with the retired-32 constant, this rung) — the veil's own infiltrated rung's four-path shape. */
+export const VEIL_MERGE_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/lib/observed-shape-corpus.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
 export const BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS = Object.freeze([
   'package-lock.json',
   'package.json',
@@ -2143,6 +2207,8 @@ const PEOPLE_LANDING_SCANNER_TRANSITION_POLICY =
   'schema-30-to-31-exact-scanner-transition-v1';
 const CAR_MERGE_SCANNER_TRANSITION_POLICY =
   'schema-31-to-32-exact-scanner-transition-v1';
+const VEIL_MERGE_SCANNER_TRANSITION_POLICY =
+  'schema-32-to-33-veil-merge-v1';
 const CORPUS_COVERAGE_SCANNER_TRANSITION_POLICY =
   'schema-7-to-8-exact-scanner-transition-v1';
 const EPOCH_DARK_CORPUS_SCANNER_TRANSITION_POLICY =
@@ -2193,6 +2259,7 @@ export const LEAF_MIGRATION_PREDECESSOR = Object.freeze({
   [PEOPLE_CAST_TARGET_SCHEMA]: MIGRATION_DIRECTION_TARGET_SCHEMA,
   [PEOPLE_LANDING_TARGET_SCHEMA]: PEOPLE_CAST_TARGET_SCHEMA,
   [CAR_MERGE_TARGET_SCHEMA]: PEOPLE_LANDING_TARGET_SCHEMA,
+  [VEIL_MERGE_TARGET_SCHEMA]: CAR_MERGE_TARGET_SCHEMA,
 });
 
 /**
@@ -2288,6 +2355,8 @@ const LEAF_PREDECESSOR_VALIDATOR = Object.freeze({
   // The schema-32 rung's own predecessor (the car's genesis), validated as schema 31 by its
   // retired literal.
   [PEOPLE_LANDING_TARGET_SCHEMA]: validateSchema31Baseline,
+  // The schema-33 rung's own predecessor (MERGE-CAR's), validated as schema 32 by its retired literal.
+  [CAR_MERGE_TARGET_SCHEMA]: validateSchema32Baseline,
 });
 
 const RETIRED_EXACT_MIGRATION_KIND = `observed-shape-schema-2-to-${RETIRED_EXACT_TARGET_SCHEMA}-migration`;
@@ -2811,6 +2880,14 @@ const SCANNER_TRANSITION_BY_TARGET = new Map([
     // governed execution inputs (the dossier-state prose, the institution service keys, the prose
     // norms, …) by their documented commands after the predecessor was frozen, and the report
     // records that movement for the review's decision.
+    reviewableUnscannedMovement: true,
+  })],
+  [VEIL_MERGE_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: VEIL_MERGE_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: VEIL_MERGE_SCANNER_TRANSITION_POLICY,
+    // TRUE, matching every rung since 8→9: any governed execution input regenerated by its
+    // documented command since the schema-32 freeze is recorded for the review's decision.
     reviewableUnscannedMovement: true,
   })],
   [CAR_MERGE_TARGET_SCHEMA, Object.freeze({
@@ -3956,7 +4033,7 @@ export function run(argv = process.argv.slice(2)) {
   // any mismatch into a refusal rather than a silent mode switch.
   const targetSchema = command.targetSchema
     ? Number(command.targetSchema)
-    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : CAR_MERGE_TARGET_SCHEMA);
+    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : VEIL_MERGE_TARGET_SCHEMA);
   if (![RETIRED_EXACT_TARGET_SCHEMA, HEURISTIC_TARGET_SCHEMA, FILTERED_TARGET_SCHEMA,
     SURFACE_FILTERED_TARGET_SCHEMA, BANKED_EXPLAINED_WRITER_TARGET_SCHEMA,
     CORPUS_COVERAGE_TARGET_SCHEMA, EPOCH_DARK_CORPUS_TARGET_SCHEMA,
@@ -3970,8 +4047,9 @@ export function run(argv = process.argv.slice(2)) {
     CORPUS_REDEAL_TARGET_SCHEMA, ADVISORY_LOCKFILE_TARGET_SCHEMA,
     FED_WORLD_TARGET_SCHEMA, WINDOW_RUNG1_TARGET_SCHEMA, TIER_COVERAGE_TARGET_SCHEMA,
     MIGRATION_DIRECTION_TARGET_SCHEMA, PEOPLE_CAST_TARGET_SCHEMA,
-    PEOPLE_LANDING_TARGET_SCHEMA, CAR_MERGE_TARGET_SCHEMA].includes(targetSchema)) {
-    throw new Error(`observed-shape --target-schema must be ${CAR_MERGE_TARGET_SCHEMA} (live car-merge leaf),`
+    PEOPLE_LANDING_TARGET_SCHEMA, CAR_MERGE_TARGET_SCHEMA, VEIL_MERGE_TARGET_SCHEMA].includes(targetSchema)) {
+    throw new Error(`observed-shape --target-schema must be ${VEIL_MERGE_TARGET_SCHEMA} (live veil-merge leaf),`
+      + ` ${CAR_MERGE_TARGET_SCHEMA} (retired car-merge leaf),`
       + ` ${PEOPLE_LANDING_TARGET_SCHEMA} (retired people-landing leaf),`
       + ` ${PEOPLE_CAST_TARGET_SCHEMA} (retired people-cast leaf),`
       + ` ${MIGRATION_DIRECTION_TARGET_SCHEMA} (retired migration-direction leaf),`
