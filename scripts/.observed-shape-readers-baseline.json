@@ -177,14 +177,14 @@
  "digests": {
   "corpusMeta": "1a4216a0fb4db8841e27ac3e2c45851c67d411b6aae8da02ab3145b4076a224d",
   "inventory": "8a95fac189c16a52417124e88e0b8b5ba7139f93e9bb12e4b82df75644898011",
-  "manifests": "4ace67da118048b5a091f11a6092a2b2de9cd4b185bc63a9dbe827a870036e77",
+  "manifests": "2b7fae85f4f2adb5f202022eca1ba53408c7702c05cc1b8167fc083da7848de9",
   "migrationReview": "0f122dc60cecf83441c50da0d0e3438d854564666edaf4fefc9dd41f6712666d",
   "rowTags": "1ebab9f067e5ec39f32a8c38b8e1a18c24d8ad0c66109851551ef84efc314447",
-  "scanStats": "3fd77c601d5a09fe7190aa9e96d4d37b8b273b17363c371ae20527ea6695d87d",
+  "scanStats": "03e2e333487062a8013e26db554469ba47ca408b3d3058eedb14757db025e351",
   "sentinel": "c0091693fe6cfdc0e4fecce492ed19b2bb6393841224cef5592139c8c3edd762"
  },
  "frozen": "2026-11-08",
- "frozenAtSha": "5efcb5812289eeaa80f6fbe987eae4f878315c5f",
+ "frozenAtSha": "c0398704a34c36f0f3ba82d69fa2c078ec350903",
  "identities": 1548,
  "inventory": {
   "src/components/BuyThisDossier.jsx": {
@@ -2684,7 +2684,7 @@
   },
   "executionTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "9f82048adab5f8e298e455846d3bd1d0c3ed8d79092d9497eed4d5ca0070852d",
+   "digest": "ebbbbe438e5812b23ce4ea60b3eff6ce28f16fec19a7eb8abed5b6c2900ed2c7",
    "entries": [
     {
      "mode": "100644",
@@ -18971,8 +18971,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/sections/IdentityDailyLife.jsx",
-     "sha256": "2598e849b9a832cc6eedb3671f9ebd68803245bdaff8ed7f12d9301a5810c32c",
-     "size": 18054,
+     "sha256": "0220b8264d078a8ef4f0d902dcadc54d6cffe96bd6f696d09671da46572d691d",
+     "size": 18596,
      "type": "file"
     },
     {
@@ -19861,7 +19861,7 @@
   },
   "scanTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "72d5483e59210d1fc21821674eb4c3b9301e1b15064eb06f2e883fee8120eaa1",
+   "digest": "23290125990ba9f5d3bd4829c8dbea33775f576a30f33dba65a36a78ac97f080",
    "entries": [
     {
      "mode": "100644",
@@ -35959,8 +35959,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/sections/IdentityDailyLife.jsx",
-     "sha256": "2598e849b9a832cc6eedb3671f9ebd68803245bdaff8ed7f12d9301a5810c32c",
-     "size": 18054,
+     "sha256": "0220b8264d078a8ef4f0d902dcadc54d6cffe96bd6f696d09671da46572d691d",
+     "size": 18596,
      "type": "file"
     },
     {
@@ -36842,7 +36842,7 @@
   },
   "sourceTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "d1cf611cf850eaa40ca9ae3b1a55e85748806b2c4bee78cd616afe3a07f0dd24",
+   "digest": "79e328804a0b7532191083e209ffba97a5b3fdd04e83c6caaa444b9dc3ebe32c",
    "entries": [
     {
      "mode": "100644",
@@ -53059,8 +53059,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/sections/IdentityDailyLife.jsx",
-     "sha256": "2598e849b9a832cc6eedb3671f9ebd68803245bdaff8ed7f12d9301a5810c32c",
-     "size": 18054,
+     "sha256": "0220b8264d078a8ef4f0d902dcadc54d6cffe96bd6f696d09671da46572d691d",
+     "size": 18596,
      "type": "file"
     },
     {
@@ -54259,15 +54259,15 @@
  },
  "scanStats": {
   "files": 2425,
-  "reads": 138681,
+  "reads": 138682,
   "resolved": 10864,
-  "unresolved": 127817
+  "unresolved": 127818
  },
  "scannerProvenance": {
   "detectorDigest": "cb5dac5989089c789d38f0689a859a2dd8e64d78bb3f378a7aab1e0a255d1de5",
-  "executionTreeDigest": "9f82048adab5f8e298e455846d3bd1d0c3ed8d79092d9497eed4d5ca0070852d",
-  "scanTreeDigest": "72d5483e59210d1fc21821674eb4c3b9301e1b15064eb06f2e883fee8120eaa1",
-  "sourceTreeDigest": "d1cf611cf850eaa40ca9ae3b1a55e85748806b2c4bee78cd616afe3a07f0dd24",
+  "executionTreeDigest": "ebbbbe438e5812b23ce4ea60b3eff6ce28f16fec19a7eb8abed5b6c2900ed2c7",
+  "scanTreeDigest": "23290125990ba9f5d3bd4829c8dbea33775f576a30f33dba65a36a78ac97f080",
+  "sourceTreeDigest": "79e328804a0b7532191083e209ffba97a5b3fdd04e83c6caaa444b9dc3ebe32c",
   "unscannedInputDigest": "c74e3dff79551fcaad04423b3eb60b96e555e3972bf842f70c5715fc43e020b0"
  },
  "schema": 32,
