@@ -41,6 +41,8 @@
 
 ---
 
+[RE-BASED 2026-11-08 (FP-REBASE, seat FPR-PEOPLE; the census §2 row "MF") — the header's "CHANGING NOTHING BELOW IT" stands for the charter's bytes of 2026-08-16; the FP re-basing adds dated brackets only, the fold's form (`DESIGN_FP_COHERENCE_FOLD.md`), and deletes nothing. Three DM-lens rows of §10 presumed the retired NPC grouping and the per-NPC corruption mark (item 18 "corruption records", item 19 "faction state") → item 18's marks are sourced from `allegiance.via` and the card↔institution link; item 19's tint reads the POWERS ("faction" the retired synonym of "power", census §7); item 22's "never a named character's fate" is now the owner's death law (census §9). The census cites item 18 as "§5 item 18"; it stands in §10 (THE STATE-AXIS DISPOSITION TABLE), block C. What moved is listed at the volume's end.]
+
 ## §0.A · CITATION RESOLUTION MAP (ODQ § → volume §)
 
 ⭐ **THE TABLE THAT MAKES THE PROGRAM'S CITATIONS RESOLVE.** ODQ §150–§181 carry
@@ -391,13 +393,13 @@ Every axis the simulation actually carries, ruled into one of four dispositions.
 
 **C · DM-LENS ONLY (default lens renders them as ordinary fabric):**
 17. Underworld/crime → front businesses, smuggling piers, gang territory render as ordinary buildings by default; the DM lens lights them (§6).
-18. Corruption → discreet document marks on the affected institutions on the DM lens only (corruption records).
-19. Faction control/territory → ward-tint overlay on the DM lens only (faction state).
+18. Corruption → discreet document marks on the affected institutions on the DM lens only (corruption records). [RE-BASED 2026-11-08 (FP-REBASE, seat FPR-PEOPLE; the census §2 row "MF") — "corruption records" presumed the per-NPC corruption mark (`corrupt`, `corruptionVector`, `corruptTies.criminalInstitution`) → the AFFECTED INSTITUTIONS are found from each card's ONE hidden `allegiance` (read through `allegianceOf`, the allegiance design §1.2) and its `via` (§1.4), joined to the house by the card↔institution link (the card's `institution`; the institution card's face row, `PEOPLE-RULINGS-2026-11-07.md` R-P8): `via: 'front'` marks the house the face keeps (a place for the guild's money and goods — the ledger mark); `via: 'office'` marks the office's house (the hall, the watch house, the courthouse, the temple — the bought-seal mark); ⚖ `via: 'retainer'` marks nothing (a retainer brings the guild information and small favours, not its house's documents — the seat's default, vetoable); a minted face's `institution: { kind: 'power' }` marks the seat's building where one stands, else nothing. The criminal houses themselves are OPEN and render by item 17, never as "corrupted". DM lens only by the veil's rule: the allegiance is veiled and covert, so no mark reaches a public or player render. The foreign "compromised" tag (ES's web) is not a house mark.]
+19. Faction control/territory → ward-tint overlay on the DM lens only (faction state). [RE-BASED 2026-11-08 (FP-REBASE, seat FPR-PEOPLE; a presumption the census did not list) — "faction state" → the POWERS' state (`powerStructure.factions`, a LANDED key read as the powers, with the derived capture `hallCaptureOf` for the criminal tint); no NPC grouping is read.]
 
 **D · DOES NOT EXPRESS (ruled out, with reasons):**
 20. **GOOD vs EVIL as metaphysics: does not exist in the simulation and does not express.** No canonical alignment field exists; the deity doctrine (faith = culture, never theological) and setting-agnosticism forbid a cosmic-morality layer. What the owner's instinct actually reaches for IS expressed — through its observable proxies: crime (C17), corruption (C18), order/lawlessness (§5.0 morphology + unrest), oppression (martial skyline + garrison presence). A settlement ruled by cruel people LOOKS like one on this map — walls, gallows-adjacent institutions, a cowed thin market — without the engine ever asserting "evil." If the owner wants a metaphysical alignment dial, that is NEW simulation state — owner-gated capability, not a render decision.
 21. **Tick-scale transients (THE TIME-GRAIN LAW):** the folio is a YEAR-scale document. Festivals, market-day crowds, weather, a passing caravan do not express — they belong to the news. Unrest crowds (hf27) express ONLY while unrest stands as a stressor, not for tick events.
-22. NPC-level portraiture: no individual's face, fate, or home-as-biography on the map (product scope: never a named character's fate); institutions keep their dossier links — the map points AT people, never depicts them.
+22. NPC-level portraiture: no individual's face, fate, or home-as-biography on the map (product scope: never a named character's fate) [RE-BASED 2026-11-08, FPR-PEOPLE: the owner's death law, census §9 — a named person's death is the DM's alone, so the map never shows one the DM did not decree]; institutions keep their dossier links — the map points AT people, never depicts them.
 23. Faith theology: temples, processions-as-streets, precinct prominence express (A5/§6); doctrine content never does.
 
 ---
@@ -484,3 +486,14 @@ Every axis the simulation actually carries, ruled into one of four dispositions.
 7. **SUBSTRATE IMPERFECTION + PATH-DEPENDENCE PINS:** the terrain solver seeds mild inconvenience (the ore not always at the handiest slope — land supports the settlement without looking designed for it), and the closed-form derivation carries PINNED path-dependence proofs: the wall traces against the fabric of its build year; the rebuilt quarter's grain dates from its fire — replay-equivalence tested, not assumed.
 
 **Considered and declined, recorded:** universal per-house identity (the representative-matrix law with its printed honesty stands — §5's legend law); literal sequential replay as the engine core (the closed-form event-anchored derivation is retained; §15.7's pins carry the causal guarantees).
+
+## RE-BASED 2026-11-08 (FP-REBASE) — what moved in this volume
+
+Seat FPR-PEOPLE; design text only, the FP parked behind the plat (the owner, 2026-11-08). The brackets answer the census §2 row "MF" (`docs/chair/2026-11-08/FP-REBASE-CENSUS-2026-11-08.md`), which cites "§5 item 18"; the item stands in §10, block C.
+
+| # | where | what moved | census row / law |
+|---|---|---|---|
+| 1 | before §0.A | the brackets' form under the verbatim-charter header; the three moves named; the census's §5 → §10 cite corrected | MF |
+| 2 | §10 item 18 | corruption marks from `allegiance.via` (front → the house, office → the office's house, ⚖ retainer → none) and the card↔institution link; DM lens only by the veil | MF §10 item 18 |
+| 3 | §10 item 19 | the tint reads the powers and the derived capture, no NPC grouping | a presumption the census did not list |
+| 4 | §10 item 22 | "never a named character's fate" → the owner's death law | census §9 |
