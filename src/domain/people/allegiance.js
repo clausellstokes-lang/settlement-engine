@@ -41,7 +41,7 @@
  * Pure apart from the keyed draws; no clock, no Math.random.
  */
 import {
-  CORRUPTION_TUNING, corruptionVectorForFlaw, isCriminalInstitution, npcCorruptibleFlaw,
+  corruptionVectorForFlaw, isCriminalInstitution, npcCorruptibleFlaw,
   readCorruptionClimate, spawnCorruptionChance,
 } from '../corruption.js';
 import { backingRowFor } from '../../data/institutionBacking.js';
@@ -408,10 +408,9 @@ export function assignHandlers(cards, settlement) {
  * @returns {Rec[]}
  */
 export function leaveAllegianceReceipts(settlement, dealt) {
-  const traces = dealt.map(({ card, flaw, p, organized, climate }) => {
+  const traces = dealt.map(({ card, flaw, p }) => {
     const a = /** @type {Allegiance} */ (allegianceOf(card));
     const handlerId = a.handler;
-    const crime = Number(climate.crime) || 0;
     return {
       targetType: 'npc',
       targetId: String(card.id || card.name || 'npc'),
@@ -422,7 +421,7 @@ export function leaveAllegianceReceipts(settlement, dealt) {
           reason: `A corruptible ${flaw} flaw, not a criminal face, and a criminal house with a face on the roster (${a.house}).` },
         { source: `flaw.${flaw}`, effect: `allegiance vector: ${a.vector}`, reason: `A ${flaw} flaw gave the guild its opening.` },
         { source: 'corruption.climate', effect: `onset chance ${p.toFixed(3)}`,
-          reason: `Crime ${crime.toFixed(2)}, organized crime ${organized.toFixed(2)} (×${ALLEGIANCE_TUNING.organizedCrime}), clamped to [${CORRUPTION_TUNING.spawn.min}, ${CORRUPTION_TUNING.spawn.max}].` },
+          reason: 'The climate\'s crime and the backing of its criminal houses set the chance, inside the climate\'s own floor and ceiling.' },
         { source: `via.${a.via}`, effect: `brings the guild ${a.via === 'office' ? 'protection and decisions' : a.via === 'front' ? 'a place for the money and the goods' : 'information and small favours'}`,
           reason: `Read from the card's own house.` },
       ],
