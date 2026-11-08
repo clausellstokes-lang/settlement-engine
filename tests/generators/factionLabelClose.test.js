@@ -15,7 +15,9 @@ import { birth, ensureLaws } from '../../scripts/audit/soak-review/corpus.mjs';
 const fixture = (/** @type {any[]} */ institutions) => ({
   tier: 'town',
   institutions,
-  npcs: [{ name: 'Ada Vell', role: 'Officer', factionAffiliation: 'Military/Guard' }],
+  // MERGE-CAR-2 (2026-11-08): the card in the people car's shape — R-AW's rename cascades through
+  // `memberships[].power` at the composed tip (8dff691f3); `factionAffiliation` left the card at PEOPLE-5.
+  npcs: [{ name: 'Ada Vell', role: 'Officer', memberships: [{ power: 'Military/Guard', rank: 1, share: 1 }] }],
   powerStructure: {
     factions: [{ faction: 'Military/Guard', power: 30, desc: 'Officers.' }, { faction: 'Merchant Guilds', power: 70, desc: 'Rivals of the Military/Guard.' }],
     conflicts: [{ parties: ['Merchant Guilds', 'Military/Guard'], issue: 'Tolls' }],
