@@ -177,14 +177,14 @@
  "digests": {
   "corpusMeta": "1a4216a0fb4db8841e27ac3e2c45851c67d411b6aae8da02ab3145b4076a224d",
   "inventory": "8a95fac189c16a52417124e88e0b8b5ba7139f93e9bb12e4b82df75644898011",
-  "manifests": "e92307c72405bd63a690ffdb1ada2925153ef0a55bed9108573a411bda9a015c",
+  "manifests": "9457a85ec85c11974fbb257611d5c689dd96cd986cef0503cd674492e150bb82",
   "migrationReview": "0f122dc60cecf83441c50da0d0e3438d854564666edaf4fefc9dd41f6712666d",
   "rowTags": "1ebab9f067e5ec39f32a8c38b8e1a18c24d8ad0c66109851551ef84efc314447",
   "scanStats": "e8d05fd329fcc54962a6b77556a4724b6b94ef510e0420a0f8656b0c4af8986d",
   "sentinel": "b2106f95d2357a2e491d31c4c2519d8acca538904dd941e4eb24537c8b2663ff"
  },
  "frozen": "2026-11-08",
- "frozenAtSha": "9eb66107d3b77ccd1399991379af5d8094b040ce",
+ "frozenAtSha": "a81f1b437402dd7795dd62c09e9411e9a0a64f4b",
  "identities": 1548,
  "inventory": {
   "src/components/BuyThisDossier.jsx": {
@@ -2684,7 +2684,7 @@
   },
   "executionTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "f8b7e8592b89fe325d2742e971d88722b7227f2eb2e78aa44f07e509dddc69fb",
+   "digest": "1f6656006b9073f8a4e70def35dd2222e07542ac11db6088fea987fc90cd9335",
    "entries": [
     {
      "mode": "100644",
@@ -16731,8 +16731,8 @@
     {
      "mode": "100644",
      "path": "src/generators/power/stressFactions.js",
-     "sha256": "b45ac6c75da5feeeb52efd8094a8ddcfe59e4edaccd3c3a610972e03679e8a16",
-     "size": 25949,
+     "sha256": "115b1971f4ef9faba14458322201a37b05731e14527e3c805f8394c2edc4f1a1",
+     "size": 25960,
      "type": "file"
     },
     {
@@ -19854,7 +19854,7 @@
   },
   "scanTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "c0738313a02ef0365bceb43dbe2314f027f2a91837f2db39a404dbb3903a77c6",
+   "digest": "36ff631641d94ec545d7d6148385c82a9bd7db382a506291579be89e5f42028b",
    "entries": [
     {
      "mode": "100644",
@@ -33712,8 +33712,8 @@
     {
      "mode": "100644",
      "path": "src/generators/power/stressFactions.js",
-     "sha256": "b45ac6c75da5feeeb52efd8094a8ddcfe59e4edaccd3c3a610972e03679e8a16",
-     "size": 25949,
+     "sha256": "115b1971f4ef9faba14458322201a37b05731e14527e3c805f8394c2edc4f1a1",
+     "size": 25960,
      "type": "file"
     },
     {
@@ -36828,7 +36828,7 @@
   },
   "sourceTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "635ef4a74805fbc5e7e768b78f04c6eb3519204caf2027319a1b7050f88e6fa5",
+   "digest": "081d4731f0951dfb594f7cd885e0e1c067e880c914a315577cc35b6e17147215",
    "entries": [
     {
      "mode": "100644",
@@ -50805,8 +50805,8 @@
     {
      "mode": "100644",
      "path": "src/generators/power/stressFactions.js",
-     "sha256": "b45ac6c75da5feeeb52efd8094a8ddcfe59e4edaccd3c3a610972e03679e8a16",
-     "size": 25949,
+     "sha256": "115b1971f4ef9faba14458322201a37b05731e14527e3c805f8394c2edc4f1a1",
+     "size": 25960,
      "type": "file"
     },
     {
@@ -54244,9 +54244,9 @@
  },
  "scannerProvenance": {
   "detectorDigest": "cb5dac5989089c789d38f0689a859a2dd8e64d78bb3f378a7aab1e0a255d1de5",
-  "executionTreeDigest": "f8b7e8592b89fe325d2742e971d88722b7227f2eb2e78aa44f07e509dddc69fb",
-  "scanTreeDigest": "c0738313a02ef0365bceb43dbe2314f027f2a91837f2db39a404dbb3903a77c6",
-  "sourceTreeDigest": "635ef4a74805fbc5e7e768b78f04c6eb3519204caf2027319a1b7050f88e6fa5",
+  "executionTreeDigest": "1f6656006b9073f8a4e70def35dd2222e07542ac11db6088fea987fc90cd9335",
+  "scanTreeDigest": "36ff631641d94ec545d7d6148385c82a9bd7db382a506291579be89e5f42028b",
+  "sourceTreeDigest": "081d4731f0951dfb594f7cd885e0e1c067e880c914a315577cc35b6e17147215",
   "unscannedInputDigest": "6fc9faaaf4f3a9b181cffa9a55ffd45d1d2e9acbd5088e63472abe013ab495de"
  },
  "schema": 32,
