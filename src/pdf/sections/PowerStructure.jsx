@@ -26,6 +26,7 @@ import { cap, label, humanize } from '../lib/format.js';
 import { anchorTarget } from '../primitives/EntityRef.jsx';
 import { StateProse } from '../primitives/StateProse.jsx';
 import { governingFactionOf } from '../../domain/rulingPower.js';
+import { WhoRunsThisTown } from './WhoRunsThisTown.jsx';
 
 export function PowerStructure({ settlement, narrativeMode, vm, stateProse }) {
   const p = vm.power;
@@ -155,6 +156,9 @@ export function PowerStructure({ settlement, narrativeMode, vm, stateProse }) {
 
       {/* ── Rule & Succession (self-gating: regime lineage / conquest) ──── */}
       <RuleAndSuccession lineage={p.lineage} occupied={vm?.liveWorld?.occupied || null} />
+
+      {/* ── Who really runs this town (the DM view, car 3; self-gating on vm.dm) ── */}
+      <WhoRunsThisTown dm={vm?.dm} />
     </PageChrome>
   );
 }
