@@ -201,8 +201,7 @@ export function NPCInlineCard({
   const editMode             = useStore(s => s.editMode);
   const applyUserEditAction  = useStore(s => s.applyUserEditAction);
   const revertUserEditAction = useStore(s => s.revertUserEditAction);
-  const storeSettlement      = useStore(s => s.settlement);
-  const settlement           = placeSettlement || storeSettlement;
+  const settlement           = useStore(s => s.settlement);
   const savedSettlements     = useStore(s => s.savedSettlements);
   const focusEntity          = useStore(s => s.focusEntity);
   // DESIGN_THE_ROADS §12 — the ONE dossier whereabouts line + short badge (display-read only;
@@ -264,7 +263,9 @@ export function NPCInlineCard({
   // PEOPLE-6 LINKS step 2 (the owner's word): a face's heading is its full name alone, and its
   // role is the honorific of its institution's title, on its own row under the door. The card's
   // `role`/`title` (the title itself, M-1b) is not printed beside it; a DM's person keeps both.
-  const honorific = cardHonorificOf(npc, settlement); // MERGE-CAR: the place's coast picks the pool (A-11)
+  // MERGE-CAR: the place's coast picks the pool (A-11) — read from the settlement the card is SHOWN in (the tab's), the
+  // store's when absent; the edit layer above keeps the live store record (its roster order resolves the edit's index).
+  const honorific = cardHonorificOf(npc, placeSettlement || settlement);
   const nativeRole = cardDoor ? '' : NPC_ROLE_ARCHETYPES.includes(npc.role)
     ? humanizeNpcFacet(npc.role)
     : (npc.role || '');
