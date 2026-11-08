@@ -1279,7 +1279,7 @@ const ROWS = [
     P("transactional", "Polite, reasonable and very clear about what things cost.",
       "Will arrange a theft, a return or a safe passage, for a price paid in advance."),
     P("welcoming", "Charming and open, as if nothing they do could possibly be wrong.",
-      "Talks easily about the town's wealth and who is careless with it."),
+      "Talks easily about the wealth around them and who is careless with it."),
   ]],
   ["the charter master", 97, [
     S("Takes a cut from every reward and tells the companies it is the hall's fee",
