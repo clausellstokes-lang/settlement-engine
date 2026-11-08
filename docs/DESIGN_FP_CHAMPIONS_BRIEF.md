@@ -90,7 +90,7 @@
 
 ## §4 THE NEXT SESSION'S RESEARCH (before any design is compiled)
 
-[RE-BASED 2026-11-08 (FP-REBASE, seat FPR-LARGE; the census §2 row "CH"; census §8 ledger) — item 1 presumed today's NPC trait-and-goal system lives in `npcAgency.js`, `npcLadderGoals.js` and the 23-key goal catalogue → the agency is rebuilt on memberships, allegiances and car 4's KEYED INTENTS (`goal.intent.key`, the allegiance design §6.3); `npcAgency.js` is an FPZ file and the rung-role ladder seed (`npcLadderGoals.mintGoal({ faction, rungIndex })`) and the role-keyed goal pools retire. The research reads the new card and its families, not the retired pools.]
+[RE-BASED 2026-11-08 (FP-REBASE, seat FPR-LARGE; the census §2 row "CH"; census §8 ledger) — item 1 presumed today's NPC trait-and-goal system lives in `npcAgency.js`, `npcLadderGoals.js` and the 23-key goal catalogue → the agency is rebuilt on memberships, allegiances and car 4's KEYED INTENTS (`goal.intent.key`, the allegiance design §6.3); `npcAgency.js` is an FPZ [read as FP] file and the rung-role ladder seed (`npcLadderGoals.mintGoal({ faction, rungIndex })`) and the role-keyed goal pools retire. The research reads the new card and its families, not the retired pools.]
 
 1. The standard NPC trait and goal system in code (`npcGenerator`, `npcAgency.js`, `npcLadderGoals.js`, `npcGrowthKernel.js`, W-LIVES) — what "the full personality traits and goals system" is today.
 2. The deity custom-content pipeline as the template for a new authored entity type (the custom content promotion contract).
@@ -164,3 +164,4 @@ Seat FPR-LARGE (Opus 5.5), under `docs/chair/2026-11-08/BRIEF-FP-REBASE-2026-11-
 | §5 guardrails | writers | the corruption web, faction competition → the allegiance, ES's web, the powers' competition | §8 decision 4 |
 
 **The CH volume's own literals** — `DESIGN_FP_ARCH_CH.md`'s unaffiliates row ("lists residents with no faction") and its "'handler' is the prose word" registry row — were added to this seat's scope by the chair and carry their own brackets there (§2.4, §2.3; the volume's end-section). This brief states the same answer (no membership = unaffiliated; the liaison). [CORRECTED 2026-11-08 (FP-REBASE, seat FPR-LARGE; FPR-VERIFY F4) — the earlier sentence "the CH volume still owes its own bracket" was stale.]
+- THE FPZ SWEEP (seat FPR-CONSTITUTION, on FPR-VERIFY H5; the owner, read 22:07 UTC: "FPZ was a typo to FP"): 1 "FPZ" in this volume bracketed `[read as FP]`; no artifact renamed (`fpz-list.json` keeps its name until the FP's own first commit); the fold §5's `FPZ` row.

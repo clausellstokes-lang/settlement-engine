@@ -6,7 +6,7 @@
 
 ---
 
-[RE-BASED 2026-11-08 (FP-REBASE, seat FPR-PEOPLE; the census §2 row "PT", and the census §7 and §9) — this volume was written when a town's people were grouped into factions with roles and a per-NPC corruption mark → read every "faction" in this volume as "power" (the owner's unification law, census §7: "power" the word, "faction" its retired synonym; LANDED tokens — `bolster_faction`, `undermine_faction`, `factionId`, `IMPAIR_FACTION`, `RESTORE_FACTION`, `factionPowerShare01`, the persisted `powerStructure.factions` — keep their spelling); the office-holders are institution faces and the ruler the seat face (§7.3); the corruption deeds write the allegiance (§3.3); the party's killing deeds are the DM's door under the owner's death law (§19b; `DESIGN_FP_ARCH_EDITOR.md :: PART D §2`, THE DEATH LAW AT THE OPS). The §0 rows citing `npcCirculationTable.js :: rejectionFor({ faction, … })` measure a file on the FPZ list (`tests/lint/legacyFactionReaders/fpz-list.json`), re-pointed through the one reader module when FPZ is built. What moved is listed at the volume's end.]
+[RE-BASED 2026-11-08 (FP-REBASE, seat FPR-PEOPLE; the census §2 row "PT", and the census §7 and §9) — this volume was written when a town's people were grouped into factions with roles and a per-NPC corruption mark → read every "faction" in this volume as "power" (the owner's unification law, census §7: "power" the word, "faction" its retired synonym; LANDED tokens — `bolster_faction`, `undermine_faction`, `factionId`, `IMPAIR_FACTION`, `RESTORE_FACTION`, `factionPowerShare01`, the persisted `powerStructure.factions` — keep their spelling); the office-holders are institution faces and the ruler the seat face (§7.3); the corruption deeds write the allegiance (§3.3); the party's killing deeds are the DM's door under the owner's death law (§19b; `DESIGN_FP_ARCH_EDITOR.md :: PART D §2`, THE DEATH LAW AT THE OPS). The §0 rows citing `npcCirculationTable.js :: rejectionFor({ faction, … })` measure a file on the FPZ [read as FP] list (`tests/lint/legacyFactionReaders/fpz-list.json`), re-pointed through the one reader module when FPZ [read as FP] is built. What moved is listed at the volume's end.]
 
 ## THE READER'S GUIDE
 
@@ -672,7 +672,7 @@ Seat FPR-PEOPLE; design text only, the FP parked behind the plat (the owner, 202
 
 | # | where | what moved | census row / law |
 |---|---|---|---|
-| 1 | under the header, before THE READER'S GUIDE | the vocabulary read ("faction" → "power"; LANDED tokens kept); the volume's three moves named; `rejectionFor` on the FPZ list | census §7, §9 |
+| 1 | under the header, before THE READER'S GUIDE | the vocabulary read ("faction" → "power"; LANDED tokens kept); the volume's three moves named; `rejectionFor` on the FPZ [read as FP] list | census §7, §9 |
 | 2 | §2.1 head | `town_power`'s `factionId` names a power; its people `membersOf(power)`; its body the ranked three | PT (`town_power` with `factionId`) |
 | 3 | §3.3 (before the registration walker) | `IMPOSE_CORRUPTION` writes the allegiance (the `set-allegiance` door), `EXPOSE_CORRUPTION` reveals it; the LOCAL axis only | PT §3.3 (the corruption deeds) |
 | 4 | §7.3 head | each office = one institution's face; the RULER = the seat face; an empty office held by the ruler; "leader" = the seat face | PT §7.3 (the offices); "leader" |
@@ -683,3 +683,4 @@ Seat FPR-PEOPLE; design text only, the FP parked behind the plat (the owner, 202
 | 9 | §10 head (the chair's word on the chamber law) | the chamber as the party's lever: lobby a voter, carry an offer, expose a leashed vote; the dossier's division; the unfilled commission and the failed motion as the party's doors | the fold's chamber law |
 
 §16's "death" row ("the party's fate is the table's; an ACTOR's death (the DM's) closes its engagements") already stood with the death law and is unchanged.
+- THE FPZ SWEEP (seat FPR-CONSTITUTION, on FPR-VERIFY H5; the owner, read 22:07 UTC: "FPZ was a typo to FP"): 3 "FPZ" in this volume bracketed `[read as FP]`; no artifact renamed (`fpz-list.json` keeps its name until the FP's own first commit); the fold §5's `FPZ` row.
