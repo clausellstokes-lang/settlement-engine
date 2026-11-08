@@ -19,6 +19,7 @@ import {
   nativeSemanticName,
   nativeSemanticResourceKeys,
 } from '../domain/content/customContentSemanticAuthority.js';
+import { foodLandOf } from './foodGenerator.js';
 
 const REQUIRED_CAPACITY = Object.freeze({
   thorp: 22,
@@ -29,21 +30,13 @@ const REQUIRED_CAPACITY = Object.freeze({
   metropolis: 88,
 });
 
-const FOOD_RESOURCE_CAPACITY = Object.freeze({
-  grain_fields: 14,
-  fertile_floodplain: 14,
-  grazing_land: 10,
-  fishing_grounds: 10,
-  river_fish: 10,
-  hunting_grounds: 8,
-  foraging_areas: 6,
-  camel_herds: 10,
-  alpine_pasture: 8,
-  date_palms: 8,
-  marshlands: 5,
-});
+/** The food resources whose count is evidence of a hinterland (three or more); how much the land grows
+ *  is the food writer's figure (foodGenerator.js :: foodLandOf), not a score per resource (FIX-FOOD-ISOLATION second seat). */
+const FOOD_RESOURCES = Object.freeze([
+  'grain_fields', 'fertile_floodplain', 'grazing_land', 'fishing_grounds', 'river_fish', 'hunting_grounds',
+  'foraging_areas', 'camel_herds', 'alpine_pasture', 'date_palms', 'marshlands',
+]);
 
-const FOOD_INSTITUTION = /\bfarm|farmland|grain|field|orchard|fish|hunting|pasture|grazing|herd|mill|bakery|garden|food\b/i;
 const RESERVE_INSTITUTION = /\bgranary|warehouse|storehouse|root cellar|silo|cistern|cold storage|preserv/i;
 const SEASONAL_ACCESS_INSTITUTION = /\bcaravan|pack train|stable|waystation|traveler|traveller|ferry|road warden|guide\b/i;
 const PATRONAGE_INSTITUTION = /\bmanor|royal seat|lord'?s|palace|monastery|abbey|fortress|citadel|military order\b/i;
@@ -121,28 +114,29 @@ export function deriveIsolationSupport(input) {
   const availableResources = nativeSemanticResourceKeys(input.config);
   const depleted = new Set(nativeSemanticDepletedResourceKeys(input.config));
   const productiveFoodResources = availableResources
-    .filter(resource => FOOD_RESOURCE_CAPACITY[resource] && !depleted.has(resource));
+    .filter(resource => FOOD_RESOURCES.includes(resource) && !depleted.has(resource));
 
   /** @type {IsolationSupportPath[]} */
   const paths = [];
-  const resourceCapacity = Math.min(
-    38,
-    productiveFoodResources.reduce(
-      (sum, resource) => sum + FOOD_RESOURCE_CAPACITY[resource],
-      0,
-    ),
-  );
-  const foodInstitutions = names.filter(name => FOOD_INSTITUTION.test(name));
-  const foodInstitutionCapacity = Math.min(24, foodInstitutions.length * 6);
-  const localFoodshedCapacity = Math.min(48, resourceCapacity + foodInstitutionCapacity);
+  // ⛔ ONE SOURCE FOR HOW MUCH THE LAND GROWS (FIX-FOOD-ISOLATION second seat, the chair's ruling,
+  // 2026-11-07). The local foodshed is the land's ordinary harvest as the food writer computes it
+  // (foodGenerator.js :: foodLandOf — terrain, food sources, resources, custom producers; no stress, an
+  // average year), as a share of the capacity a place this size needs. It scored named resources and
+  // food institutions from a table of its own, and an isolated town on plains read 6/52 here while the
+  // writer grew 99% of its need. A town that grows its need is not untenable on food; a town scored
+  // low here does not grow nine-tenths of its need.
+  const land = foodLandOf(tier, input.institutions, input.config || {}, tradeRoute);
+  const localFoodshedCapacity = Math.round(land.grownShareOfNeed * requiredCapacity);
   if (localFoodshedCapacity > 0) {
     paths.push({
       type: 'local_foodshed',
       capacity: localFoodshedCapacity,
       stability: 'durable',
       evidence: [
-        ...productiveFoodResources.map(resource => `resource:${resource}`),
-        ...foodInstitutions.slice(0, 4).map(name => `institution:${name}`),
+        `land:${land.terrain}`,
+        ...land.foodSources.map(source => `source:${source}`),
+        ...(land.customFoodImpact.producers > 0 ? [`custom-producers:${land.customFoodImpact.producers}`] : []),
+        `grown:${Math.round(land.grownShareOfNeed * 100)}% of need`,
       ],
     });
   }
@@ -150,12 +144,20 @@ export function deriveIsolationSupport(input) {
   const hinterlandEvidence = names.filter(name => (
     /\bfarmland|grain|field|orchard|pasture|grazing|herd\b/i.test(name)
   ));
-  if (hinterlandEvidence.length >= 2 || productiveFoodResources.length >= 3) {
+  // The hinterland's capacity is the share of need the countryside around a place this size grows and
+  // carts in (foodBalance.js :: hinterlandShareOf, the writer's own table): none for a hamlet, half for a
+  // metropolis. The evidence decides whether that countryside is there for an isolated place.
+  const hinterlandCapacity = Math.round(land.hinterlandShare * requiredCapacity);
+  if (hinterlandCapacity > 0 && (hinterlandEvidence.length >= 2 || productiveFoodResources.length >= 3)) {
     paths.push({
       type: 'hinterland',
-      capacity: Math.min(18, 8 + hinterlandEvidence.length * 3),
+      capacity: hinterlandCapacity,
       stability: 'durable',
-      evidence: hinterlandEvidence.slice(0, 4).map(name => `institution:${name}`),
+      evidence: [
+        ...hinterlandEvidence.slice(0, 4).map(name => `institution:${name}`),
+        ...(hinterlandEvidence.length >= 2 ? [] : productiveFoodResources.map(resource => `resource:${resource}`)),
+        `share:${Math.round(land.hinterlandShare * 100)}% of need`,
+      ],
     });
   }
 
