@@ -64,7 +64,12 @@ const LANES = Object.freeze({ mechanicalOutcomes: 8, selectedOutcomes: 24 });
 // 400/1/399/40, 7b3ffb6ee 266/0/266/44). −4 introductions, all applied|tradition, no home in or out (recorded once, at the voice
 // contract's copy; PLAUSIBLE, not bisected). ADDRESS_TOTALS below, noted. RAW_LIVENESS HOLDS (49/26, 165/96, 214/96, measured);
 // REWRITE_TOTALS and KNOWN_INERT_HEADLINE_REWRITES hold (all 26 inert; no gap, overlap or indicative match).
-const CORPUS = Object.freeze({ pulseRoots: 12, introductions: 396, retirements: 1, finalEntries: 395, homes: 40 });
+// ── RE-RECORDED 2026-11-08 AT MERGE-WAVE's FIX-PUBLIC-VEIL MERGE POINT (7e65c7bec; the brief §0.6: the news family re-recorded in
+// ONE act, PEOPLE-1's precedent), the cause the veil lane's own: a veiled face's opaque id re-deals its keyed forks, which moves
+// the corpus's AO-0 year (the lane left these walkers red for this act). ONE corpus build at the merged tip, each library's own
+// functions (the voice throw disabled in an untracked scratch copy only). CORPUS 396/1/395/40 → 391/1/390/41: one home ARRIVES, applied|resource_depletion
+// (1/1 headline and summary); conservation 391 − 1 = 390.
+const CORPUS = Object.freeze({ pulseRoots: 12, introductions: 391, retirements: 1, finalEntries: 390, homes: 41 });
 // ── RE-RECORDED 2026-09-01 BY T8 · SHIFT (ODQ §858 + §860) ─────────────────────────────────────
 // 53/106/14/92/400/544 → 51/102/12/90/393/536. `fields` holds at 2, as it must: the address grammar
 // is still headline-and-summary and nothing was added to it.
@@ -125,7 +130,10 @@ const CORPUS = Object.freeze({ pulseRoots: 12, introductions: 396, retirements: 
 // a count: applied|tradition headline and summary 22/22 → 18/18 (the integration parent 7b3ffb6ee's own 18/18; the car parent
 // 373a2947b reproduces 596/800 and digest 77f91347 exactly). Every row stays indicative; digest 77f91347 → c62116c2, re-derived
 // with the rows in the baseline. PLAUSIBLE (the car's re-dealt cast × the rung-2 landing's pool census), not bisected.
-const ADDRESS_TOTALS = Object.freeze({ homes: 40, fields: 2, identities: 80, prospectiveIdentities: 0, indicativeIdentities: 80, distinctValues: 588, occurrences: 792 });
+// 2026-11-08 (MERGE-WAVE at the FIX-PUBLIC-VEIL merge, the veiled re-deal's year): 40/2/80/0/80/588/792 → 41/2/82/0/82/596/782 —
+// applied|resource_depletion arrives (2 rows 1/1); roads 101 → 103, npc_contest 39/49 dv 69 → 40/50 dv 62 occ, npc_reform 24 → 23,
+// cause_lifecycle 4 → 5, rival_sabotage 3 → 2 occ. Every row stays indicative.
+const ADDRESS_TOTALS = Object.freeze({ homes: 41, fields: 2, identities: 82, prospectiveIdentities: 0, indicativeIdentities: 82, distinctValues: 596, occurrences: 782 });
 const RAW_LIVENESS = Object.freeze({
   pulseRecords: 12,
   lanes: Object.freeze([
@@ -160,7 +168,7 @@ const RAW_LIVENESS = Object.freeze({
     // 165/96, union 211/82 → 214/96. Lane 1 dc655f712 49/26, 165/96, 214/96; lane 2 3aa160a70 mechanical 50/27, union 215/96;
     // lanes 3, 4, 5A hold; lane 5B a725df7e4 mechanical 49/26, union 214/96; 2981f23f6 and the tip as now. All indicative; the
     // union's distinct count still equals the selected lane's (96 = 96).
-    Object.freeze({ field: 'mechanicalOutcomes', capPerPulse: 8, headlineOccurrences: 49, distinctValues: 26, prospectiveOccurrences: 0, prospectiveDistinctValues: 0, indicativeOccurrences: 49, indicativeDistinctValues: 26 }),
+    Object.freeze({ field: 'mechanicalOutcomes', capPerPulse: 8, headlineOccurrences: 50, distinctValues: 26, prospectiveOccurrences: 0, prospectiveDistinctValues: 0, indicativeOccurrences: 50, indicativeDistinctValues: 26 }), // MERGE-WAVE (FIX-PUBLIC-VEIL merge, the re-dealt year): 49 → 50
     // ⭐ THE CONTROL THAT HELD FOR TWO RE-RECORDS NOW MOVES, AND THAT IS THE POINT OF KEEPING IT.
     // T8 recorded this lane byte-identical twice running because the corruption work never authors
     // into it. WAR LANDING (§876): 151/80/95/66/56/14 → 153/78/95/63/58/15, and the shape names the
@@ -171,7 +179,7 @@ const RAW_LIVENESS = Object.freeze({
     // reach, and the first cause in three re-records that does.
     // 2026-10-01 (the urban band + the druid rulings): 154/78/96/63/58/15 → 155/75/93/59/62/16.
     // 2026-10-02 (THE VOICE PROGRAM wave 1): every persisted headline in this lane is now a deed; its prospective half is zero.
-    Object.freeze({ field: 'selectedOutcomes', capPerPulse: 24, headlineOccurrences: 165, distinctValues: 96, prospectiveOccurrences: 0, prospectiveDistinctValues: 0, indicativeOccurrences: 165, indicativeDistinctValues: 96 }),
+    Object.freeze({ field: 'selectedOutcomes', capPerPulse: 24, headlineOccurrences: 164, distinctValues: 96, prospectiveOccurrences: 0, prospectiveDistinctValues: 0, indicativeOccurrences: 164, indicativeDistinctValues: 96 }), // MERGE-WAVE (FIX-PUBLIC-VEIL merge): 165 → 164; the union holds 214/96
   ]),
   // TE36: the union follows the mechanical lane alone — 228 → 207 (−21, the same 21),
   // 83 → 80 distinct, 168 → 147 prospective. The indicative halves do not move at all.

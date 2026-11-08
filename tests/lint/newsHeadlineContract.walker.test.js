@@ -152,7 +152,8 @@ describe('complete Wizard News address and headline rewrite contract', () => {
     // 2026-11-08 (MERGE-CAR, the people car merged into the integration branch, 8dff691f3; re-keyed by identity with its cause, measured at
     // the working tree, byte-equal to the merge): 40/2/80/0/80/596/800 → 40/2/80/0/80/588/792; no home in or out; applied|tradition 22/22 →
     // 18/18 (both fields, the integration parent's own count), at news-headline-contract.mjs's ADDRESS_TOTALS. PLAUSIBLE, not bisected. Every row stays indicative.
-    expect(baseline.addressTotality.totals).toEqual({ homes: 40, fields: 2, identities: 80, prospectiveIdentities: 0, indicativeIdentities: 80, distinctValues: 588, occurrences: 792 });
+    // 2026-11-08 (MERGE-WAVE at the FIX-PUBLIC-VEIL merge, the veiled re-deal's year, at news-headline-contract.mjs's ADDRESS_TOTALS): one home arrives.
+    expect(baseline.addressTotality.totals).toEqual({ homes: 41, fields: 2, identities: 82, prospectiveIdentities: 0, indicativeIdentities: 82, distinctValues: 596, occurrences: 782 });
   });
 
   it('A3 freezes both raw lanes and all 26 exact rewrite counts', () => {

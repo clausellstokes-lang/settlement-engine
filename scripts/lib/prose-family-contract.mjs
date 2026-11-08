@@ -234,16 +234,21 @@ const EXPECTED_ROOTS = new Map([
 // 7523 → 7523 (digit widths); digest afddb136 → 2bb92026. Reach 0..11 holds. ATTRIBUTION: the car's re-dealt cast × the rung-2
 // landing's pool census (−4 applied|tradition introductions and three more time-tick spellings, each at the integration side's
 // measured value), PLAUSIBLE, not bisected.
+// ── RE-RECORDED 2026-11-08 AT MERGE-WAVE's FIX-PUBLIC-VEIL MERGE POINT (7e65c7bec; the brief §0.6: the news family re-recorded in
+// ONE act, PEOPLE-1's precedent), the cause the veil lane's own: a veiled face's opaque id re-deals its keyed forks, which moves
+// the corpus's AO-0 year (the lane left these walkers red for this act). ONE corpus build at the merged tip, each library's own
+// functions (the voice throw disabled in an untracked scratch copy only). scalarRows 37359 → 37103; wizardNews 395/2511/396 →
+// 390/2486/391 (equal to the observed-shape walker's rung-35 pin); regional 81 → 82. Two identities ARRIVE (58 → 60).
 const EXPECTED_CORPUS = Object.freeze({
-  scalarRows: 37359, canonEventLogEntries: 1, wizardNewsFinalEntries: 395,
-  wizardNewsAccumulatedEntries: 2511, wizardNewsUnique: 396, pulseHistory: 12,
-  regionalEventLog: 81, regionalEventLogUnique: 81, aiChronicle: 1,
+  scalarRows: 37103, canonEventLogEntries: 1, wizardNewsFinalEntries: 390,
+  wizardNewsAccumulatedEntries: 2486, wizardNewsUnique: 391, pulseHistory: 12,
+  regionalEventLog: 82, regionalEventLogUnique: 82, aiChronicle: 1,
 });
 const EXPECTED_REGIONAL_ROOTS = Object.freeze([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
 const EXPECTED_FAMILY_TOTALS = Object.freeze([
   { family: 'chronicle', identities: 7, distinctValues: 7, occurrences: 7 },
-  { family: 'pulseHistory', identities: 45, distinctValues: 1030, occurrences: 5331 },
-  { family: 'regionalLog', identities: 2, distinctValues: 4, occurrences: 158 },
+  { family: 'pulseHistory', identities: 47, distinctValues: 1050, occurrences: 5341 },
+  { family: 'regionalLog', identities: 2, distinctValues: 8, occurrences: 169 },
   { family: 'timeline', identities: 4, distinctValues: 8, occurrences: 12 },
 ]);
 // 2026-10-02 (THE VOICE PROGRAM wave 1, the owner: "Updates like these need to reflect actions not to potential"):
@@ -252,9 +257,9 @@ const EXPECTED_FAMILY_TOTALS = Object.freeze([
 // (+6, +7, +9: both towns named, a deed per kind) and the three SUMMARY rows shrink (−1, −3, −1: the NPC line now states
 // the aim alone, its move having gone to the headline). EXPECTED_ROWS_BYTES holds at 8000 by digit-width coincidence again;
 // the digest below is the pin that convicts.
-const EXPECTED_TOTALS = Object.freeze({ families: 4, identities: 58, distinctValues: 1049, occurrences: 5508 });
-const EXPECTED_ROWS_BYTES = 7523;
-const EXPECTED_ROWS_SHA256 = '2bb92026f194ffb8f92c2f06a89d3bbfb7beb45a774705145fc4265c50a7f2cd';
+const EXPECTED_TOTALS = Object.freeze({ families: 4, identities: 60, distinctValues: 1073, occurrences: 5529 });
+const EXPECTED_ROWS_BYTES = 7823; // MERGE-WAVE (FIX-PUBLIC-VEIL merge): 7523 → 7823, two identities arrive
+const EXPECTED_ROWS_SHA256 = 'f207dcfbe448397297ad6cb0453902a1ef7150d0c897a44a57733c37d81bb5c2';
 const codepoint = (left, right) => (left < right ? -1 : left > right ? 1 : 0);
 const same = (left, right) => JSON.stringify(left) === JSON.stringify(right);
 const identityOf = (row) => `${row.family}\0${row.path}\0${row.field}`;

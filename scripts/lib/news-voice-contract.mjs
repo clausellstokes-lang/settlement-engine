@@ -181,8 +181,13 @@ const TOTAL_KEYS = Object.freeze(['identities', 'distinctValues', 'occurrences']
 // LINES: the car's re-dealt cast × the rung-2 landing's pool census (its tradition home at the integration side's count),
 // attributed by equality with each parent's measured row, PLAUSIBLE, not bisected. Conservation closes: 396 − 1 = 395. No row
 // flips its voice class (every owned home reads indicative); the voice debt stays EMPTY.
+// ── RE-RECORDED 2026-11-08 AT MERGE-WAVE's FIX-PUBLIC-VEIL MERGE POINT (7e65c7bec; the brief §0.6: the news family re-recorded in
+// ONE act, PEOPLE-1's precedent), the cause the veil lane's own: a veiled face's opaque id re-deals its keyed forks, which moves
+// the corpus's AO-0 year (the lane left these walkers red for this act). ONE corpus build at the merged tip, each library's own
+// functions (the voice throw disabled in an untracked scratch copy only). 396/1/395/40 → 391/1/390/41, the same act as the headline and
+// prose-family contracts: one home arrives (applied|resource_depletion), indicative; the voice debt stays EMPTY.
 const CORPUS = Object.freeze({
-  pulseRoots: 12, introductions: 396, retirements: 1, finalEntries: 395, homes: 40,
+  pulseRoots: 12, introductions: 391, retirements: 1, finalEntries: 390, homes: 41,
 });
 
 export const NEWS_VOICE_PROTECTED_SUBSTRATE = Object.freeze([
