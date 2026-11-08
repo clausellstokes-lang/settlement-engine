@@ -72,6 +72,23 @@ const FOREIGN_LEASH_KINDS = Object.freeze(new Set(['foreign_settlement', 'foreig
 export const WILLED_MEETING_CONSPIRACY = 'chance_meeting';
 
 /**
+ * THE CARD'S CORRUPTION MARK AS THE SIMULATION READS IT (J-19, AMENDED BY CAUSE: the chair's ruling, ALLEGIANCE-CAR1;
+ * its reader is worldPulse/npcAgency.js :: ensureNpcStates). A v3 card is born with no `corrupt` boolean: its hidden
+ * allegiance is the mark, read through `allegianceOf`: an allegiance is corrupt; a v3 card with none is CLEAN
+ * (generation decided; never a re-roll). The retired boolean is read only where present, which at v3 means the
+ * simulation's OWN write-back (npcAgency.js :: mirrorCorruptionOntoSettlement: an exposure writes `corrupt: false` onto a card
+ * that keeps its allegiance, and must stick) or a pre-v3 save. Undefined only for a pre-v3 save with no boolean: the
+ * legacy re-roll, keyed by the SAVE'S VERSION, not by the field's absence.
+ * @param {any} npc @param {any} settlement @returns {boolean | undefined}
+ */
+export function corruptMarkOf(npc, settlement) {
+  if (typeof npc?.corrupt === 'boolean') return npc.corrupt;
+  if (allegianceOf(npc)) return true;
+  if ((Number(settlement?.schemaVersion) || 0) >= 3) return false;
+  return undefined;
+}
+
+/**
  * True iff a leash was WILLED by a chance meeting. TOTAL: garbage, null, a leashless
  * npcState and a pre-feature save all read false, which is what keeps every dark and
  * every legacy world byte-identical through all three fences.

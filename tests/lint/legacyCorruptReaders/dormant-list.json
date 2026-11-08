@@ -12,9 +12,10 @@
   {
    "file": "src/domain/corruptionLeash.js",
    "reads": [
-    "corruptTies"
+    "corruptTies",
+    "corrupt"
    ],
-   "reason": "resolveLeash's LEGACY ARM: a card with no allegiance reads the `corruptTies` the frozen simulation itself writes (npcVerdictTable.js, the betrayal seed), so the simulation's behaviour is untouched (MEASURED at the car: the arm executes on the pulse path only, never in a birth or an edit); the allegiance arm (allegianceOf) is read first. The legacy arm leaves when FPZ rebuilds the simulation's corruption loop (M-6)."
+   "reason": "resolveLeash's LEGACY ARM: a card with no allegiance reads the `corruptTies` the frozen simulation itself writes (npcVerdictTable.js, the betrayal seed), so the simulation's behaviour is untouched (MEASURED at the car: the arm executes on the pulse path only, never in a birth or an edit); the allegiance arm (allegianceOf) is read first. Since J-19 (the chair's ruling) it also holds corruptMarkOf, the simulation's one read of the card's mark (the sim's own `corrupt` write-back first, then allegianceOf, then the save's version). Both leave when FPZ rebuilds the simulation's corruption loop (M-6)."
   },
   {
    "file": "src/domain/worldPulse/applyWorldPulseBetrayal.js",
@@ -87,7 +88,7 @@
     "corruptTies",
     "corruptionVector"
    ],
-   "reason": "J-19, THE DOUBLE-CORRUPTION RISK ON UNFREEZE: npcAgency.js :: ensureNpcStates treats a non-boolean `corrupt` as a legacy save and RE-ROLLS corruption with spawnCorruptionChance. A v3 card carries no `corrupt` (its hidden allegiance is `allegiance`), so an unfrozen simulation would corrupt the town a second time over the allegiances birth already dealt. The reader must read allegianceOf when FPZ rebuilds it (the chair's ruling J-19: recorded, nothing built now)."
+   "reason": "J-19, CURED AT THE CAR (the chair's ruling, AMENDED BY CAUSE: a certified band, statecraftExposureBand, ran the simulation and exposed the double read): ensureNpcStates no longer re-rolls a v3 card; it reads corruptMarkOf, the hidden allegiance through allegianceOf where the card carries no boolean, a v3 card with none clean, the legacy re-roll only for a pre-v3 save. The file stays listed for the simulation's OWN write-back of the mark (mirrorCorruptionOntoSettlement: corrupt, corruptionVector, corruptTies.leash) and corruptMarkOf's read of that write-back, which leave when FPZ rebuilds the simulation's corruption loop (M-6)."
   },
   {
    "file": "src/domain/worldPulse/npcGrowthKernel.js",
