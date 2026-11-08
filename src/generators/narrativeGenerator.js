@@ -881,7 +881,7 @@ export const generateArrivalScene = settlement => composeArrivalScene(settlement
  *   powerStructure/institutions/tier/config and the live state enrichment reads.
  * @returns {Array} the enriched npc list
  */
-export const enrichNpcCoherence = (settlement, seed = null) => {
+export const enrichNpcCoherence = (settlement) => {
   const npcs = settlement.npcs || [];
   const summary = genSettSummary(settlement);
   const secretsNow = npcs.map((n) => n?.secret?.what); const enrichedNpcs = npcs.map((npc, idx) => { const e = buildPoliticalNarrative(npc, idx, summary, npcs, heldByOthers(secretsNow, idx)); secretsNow[idx] = e?.secret?.what; return e; }); // REVIEW-INTAKE-4: the overlay refuses a secret another figure holds
@@ -902,7 +902,7 @@ export const enrichNpcCoherence = (settlement, seed = null) => {
   // pass reads the memberships (npcStructure.js) and no card carries the old fields. This tail is still
   // the one BOTH full assembly and NPC section-regen run, so a regenerated cast carries the
   // same powers as a born one.
-  const withPowers = assignCastPowers(settlement, rawMergedNpcs, getActiveRng(), seed ?? settlement?._seed ?? null);
+  const withPowers = assignCastPowers(settlement, rawMergedNpcs, getActiveRng(), settlement?._seed ?? null);
   return enrichNPCsWithStructure(withPowers, settlement);
 };
 
@@ -951,7 +951,18 @@ export const generateCoherence = (settlement, coherenceRng = null, pins = null, 
   const mergedNpcs = chooseOrPin(pins, 'npcs', () => inCoherenceSubstream(
     coherenceRng,
     'npc-enrichment',
-    () => enrichNpcCoherence(settlement, seed),
+    // FIX-PUBLIC-VEIL (the second seat): the record's seed salts a veiled mint's opaque id at the cast seam. It is
+    // LENT to the settlement for this call only (assembly attaches `_seed` after the seam; nothing on this path
+    // read it before), so the enrichment's signature, pinned by packet EM-R2, is unchanged.
+    () => {
+      const lend = seed != null && settlement._seed == null;
+      if (lend) settlement._seed = seed;
+      try {
+        return enrichNpcCoherence(settlement);
+      } finally {
+        if (lend) delete settlement._seed;
+      }
+    },
   ));
 
   // ── THE PEOPLE CAR (PEOPLE-4 TIES, 2026-11-07; R-P7): ONE OUTGOING TIE PER CARD, drawn HERE over
