@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-11-08T00:50:48.134Z",
+  "generatedAt": "2026-11-08T03:20:56.886Z",
   "entry": "src/domain/aiCharter.js",
-  "sourceHash": "c98d63fc6fe5eb23",
+  "sourceHash": "6a59426b8e51c124",
   "inputs": [
     "node_modules/immer/dist/immer.mjs",
     "node_modules/seedrandom/seedrandom.js",
@@ -43,6 +43,7 @@
     "src/domain/factionArchetypes.js",
     "src/domain/factionProfile.js",
     "src/domain/factionRefs.js",
+    "src/domain/facts/storesMonths.js",
     "src/domain/foodLedger.js",
     "src/domain/governanceLedger.js",
     "src/domain/healingLedger.js",
