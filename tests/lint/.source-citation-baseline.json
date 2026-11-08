@@ -47,7 +47,7 @@
     "pastEofCitationsExcluded": 382,
     "byRule": {
       "banner": 9,
-      "dated": 166,
+      "dated": 167,
       "sha-pin": 2,
       "tree": 139
     },
@@ -377,7 +377,9 @@
     "_rosterGrowth2026-11-07-fix-export-keys": "ONE document JOINED the roster by being BORN into it (FIX-EXPORT-KEYS, migration 205 and its client twin, measured with this walker's own arm): `dated` 104 -> 105, docs/FIX_EXPORT_KEYS_2026-11-07.md (the seat's record), born dated. A GROWTH, not a re-classification: no document changed class.",
     "_rosterGrowth2026-11-08-merge-wave-export-keys": "THE UNION AT THE FIX-EXPORT-KEYS MERGE (MERGE-WAVE, session session_01FbPLbdbKovNtK8Fx32oQ24): both sides' notes kept; `dated` 164 -> 165 (docs/FIX_EXPORT_KEYS_2026-11-07.md); the count measured once by the walker; nothing changed class.",
     "_rosterGrowth2026-11-07-fix-public-veil": "ONE document JOINED the roster by being BORN into it (FIX-PUBLIC-VEIL, the veil bit and migration 206, measured with this walker's own arm): `dated` 105 -> 106, docs/FIX_PUBLIC_VEIL_2026-11-07.md (the seat's record), born dated. A GROWTH, not a re-classification: no document changed class.",
-    "_rosterGrowth2026-11-08-merge-wave-public-veil": "THE UNION AT THE FIX-PUBLIC-VEIL MERGE (MERGE-WAVE, session session_01FbPLbdbKovNtK8Fx32oQ24): both sides' notes kept; `dated` 165 -> 166 (docs/FIX_PUBLIC_VEIL_2026-11-07.md); the count measured once by the walker; nothing changed class."
+    "_rosterGrowth2026-11-08-merge-wave-public-veil": "THE UNION AT THE FIX-PUBLIC-VEIL MERGE (MERGE-WAVE, session session_01FbPLbdbKovNtK8Fx32oQ24): both sides' notes kept; `dated` 165 -> 166 (docs/FIX_PUBLIC_VEIL_2026-11-07.md); the count measured once by the walker; nothing changed class.",
+    "_rosterGrowth2026-11-08-green-base": "ONE document JOINED the roster by being BORN into it (GREEN-BASE, session session_01FbPLbdhzfNE69LAdAXhoQE, on lane/green-base-2026-11-08 cut from the integration tip 1f74ce3e1, measured once with this walker's own arm): `dated` 150 -> 151, docs/GREEN_BASE_2026-11-08.md, the seat's record, born dated, 0 past-EOF; nothing changed class.",
+    "_rosterGrowth2026-11-08-merge-wave-green-base": "THE UNION AT THE GREEN-BASE MERGE (MERGE-WAVE, session session_01FbPLbdbKovNtK8Fx32oQ24): both sides' notes kept; `dated` 166 -> 167 (docs/GREEN_BASE_2026-11-08.md); the count measured once by the walker; nothing changed class."
   },
   "rows": []
 }

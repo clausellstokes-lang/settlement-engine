@@ -378,7 +378,9 @@ const ROUTE_BASELINE = Object.freeze({
   '/about/what-this-is':    { roots: 1, files: 16, floored: 5, ruled: 1, bare: 0 },
   '/about/guide':           { roots: 1, files: 12, floored: 11, ruled: 3, bare: 0 },
   '/account':               { roots: 1, files: 46, floored: 105, ruled: 5, bare: 0 },
-  '/admin':                 { roots: 2, files: 29, floored: 86, ruled: 1, bare: 0 },
+  // floored 86 -> 87 (GREEN-BASE, 2026-11-08, re-measured; red at the base 262e8b255 and on every wave lane): ENGINE-5's
+  // engine-cost dashboard line (4b2310b44, AdminAnalyticsPanel.jsx, one floored site, 0 bare).
+  '/admin':                 { roots: 2, files: 29, floored: 87, ruled: 1, bare: 0 },
   // floored 655 → 657 (2026-11-02, X-45): the same two floored lines of the Institutions card. 659 -> 657 (2026-11-07): see /create.
   // floored 655 → 657 (2026-11-02, X-45): the same two floored lines of the Institutions card.
   // 2026-11-07, PEOPLE-6 LINKS: the Institutions card's face row (one `proseFontSize` site, 0 bare) — +1; the
@@ -388,7 +390,10 @@ const ROUTE_BASELINE = Object.freeze({
   '/founders':              { roots: 1, files: 13, floored: 6, ruled: 1, bare: 0 },
   '/first-hundred':         { roots: 1, files: 6, floored: 4, ruled: 1, bare: 0 },
   '/roadmap':               { roots: 1, files: 6, floored: 3, ruled: 1, bare: 0 },
-  '/world':                 { roots: 1, files: 4, floored: 5, ruled: 1, bare: 0 },
+  // files 4 -> 7, floored 5 -> 6 (GREEN-BASE, 2026-11-08, re-measured; red at the base 262e8b255 and on every wave lane):
+  // ENGINE-5 unit 2 (fc8a82704) — WorldPage says a build without an engine, importing the launch pill
+  // (primitives/AvailableAtLaunchPill.jsx -> Pill.jsx, one floored site) and the export gate; 0 bare.
+  '/world':                 { roots: 1, files: 7, floored: 6, ruled: 1, bare: 0 },
   '/terms':                 { roots: 1, files: 5, floored: 2, ruled: 0, bare: 0 },
   '/privacy':               { roots: 1, files: 5, floored: 2, ruled: 0, bare: 0 },
   '/refunds':               { roots: 1, files: 5, floored: 2, ruled: 0, bare: 0 },

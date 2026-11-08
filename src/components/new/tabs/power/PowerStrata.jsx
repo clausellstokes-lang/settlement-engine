@@ -332,7 +332,7 @@ export function FactionRow({ settlement, r, i, last = false, isExp, onToggle, ro
       {memberCount > 0 && (
         <div style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '3px 9px 3px 24px', background: `${c}08`, borderLeft: `2px solid ${c}30` }}>
           <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: c }}>{'↳'}</span>
-          <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: swatch.inkMag3 }}>{memberCount} member{memberCount !== 1 ? 's' : ''}
+          <span style={{ fontSize: proseFontSize(FS.xxs, mobile), color: swatch.inkMag3 }}>{memberCount} member{memberCount !== 1 ? 's' : ''}
             {ranked.map(({ npc, rank }) => (
               <span key={npc.id || npc.name}>{` · ${RANK_WORD[rank]} `}<EntityLink id={entityIdFor('npc', npc, npc.name)} type="npc" fallback={npc.name} style={{ color: swatch.inkMag }} /></span>
             ))}

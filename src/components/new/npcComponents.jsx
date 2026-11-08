@@ -382,7 +382,7 @@ export function NPCInlineCard({
           may not sit inside the toggle's <button>; the role row follows it. */}
       {hasSubline && (
         <div data-testid="npc-card-line" style={{padding:'0 12px 8px'}}>
-      <div style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag3}}>
+      <div style={{fontSize:proseFontSize(FS.xs, mobile),color:swatch.inkMag3}}>
         {nativeRole}
         {showRoleArchetype ? `${nativeRole ? ' · ' : ''}${roleArchetype} archetype` : ''}
         {/* THE POWER LINE (PEOPLE-5A, M-1b): the card's house, then its standing in
@@ -456,7 +456,7 @@ export function NPCInlineCard({
             </div>
           )}
           {tieLines.length>0 && (
-            <div data-testid="npc-card-ties" style={{display:'flex',flexDirection:'column',gap:2,margin:'6px 0',fontSize:chromeFontSize(FS.xs, mobile)}}>
+            <div data-testid="npc-card-ties" style={{display:'flex',flexDirection:'column',gap:2,margin:'6px 0',fontSize:proseFontSize(FS.xs, mobile)}}>
               {tieLines.map((t,i)=>(
                 <div key={`tie-${i}`} data-tie-direction={t.direction} style={{display:'flex',alignItems:'baseline',gap:6,flexWrap:'wrap'}}>
                   <span style={{fontWeight:800,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.04em'}}>{t.direction==='own'?(t.kind||'Tie'):'Called by'}</span>
