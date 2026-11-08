@@ -8,7 +8,7 @@
   "The reviewable slice is computed by RULE (reviewableDark), never hand-listed."
  ],
  "schema": 1,
- "frozenAtSha": "1a160d5992994b68d9a6160bac3868380c71401a",
+ "frozenAtSha": "66c23bfeac28e5eaafd42f66fe2384a091f1de2c",
  "charter": "§18.1 WRWALKER Car 1 (HORIZON) — chair-signed vetoably at the INSTR-WRW pre-stage",
  "minRows": 40,
  "corpusMeta": {
@@ -23,8 +23,8 @@
   "transitionCount": 21984
  },
  "shapesDigest": "e3e094c7fe1ea56d9362f2892c2767871a55d153c6791b7c2eb5c54e9a906d28",
- "detectorDigest": "edb86010fe98b326c944dc72171646b8b8039d24db9f015a2339f33dc66e2e60",
- "verdictDigest": "4603c3be37c73f513ee803a9bc43f15b9144ec884a3980bfa84904825ae65026",
+ "detectorDigest": "ab71e92531ff38fac314aeaa6df126530ad98603fcf7441470b0e5c80479eaec",
+ "verdictDigest": "a137ea211bbc49a6c446cd67302f8bfa58b1c74d940c78af54bd508d63837408",
  "surfaceRoots": {
   "web": [
    "src/main.jsx"
@@ -73,37 +73,37 @@
  ],
  "closureSizes": {
   "web-display": 753,
-  "web-transitive": 993,
-  "dossier-pdf": 499,
+  "web-transitive": 994,
+  "dossier-pdf": 501,
   "campaign-pdf": 136,
   "world-book": 153,
-  "foundry": 407,
+  "foundry": 408,
   "json-export": 8,
   "news": 29
  },
  "population": {
   "judged": 11997,
-  "lit": 649,
-  "litName": 9965,
-  "dark": 1383,
+  "lit": 652,
+  "litName": 9970,
+  "dark": 1375,
   "thinKeys": 17280,
   "thinShapes": 1203,
   "knownShapes": 517
  },
  "scanStats": {
-  "files": 1747,
-  "sites": 41302,
-  "propRead": 39118,
+  "files": 1748,
+  "sites": 41336,
+  "propRead": 39151,
   "elemRead": 0,
-  "destructure": 2168,
+  "destructure": 2169,
   "inOp": 16,
-  "rGrades": 6479,
-  "nGrades": 1622126,
-  "resolvedReceivers": 7379
+  "rGrades": 6493,
+  "nGrades": 1623700,
+  "resolvedReceivers": 7393
  },
- "registerDigest": "93a67b1b960e2d5d310b1356109fbb059bdd932996d1b73ec45da5cb990cfe78",
+ "registerDigest": "ab0b445e2cc5fbedba7a1307fe9775fd69b981ceea89835abbcb88d6b842bae5",
  "pendingSurfaceCeiling": 0,
- "reviewableDarkCount": 396,
+ "reviewableDarkCount": 388,
  "darkUnregistered": [
   {
    "identity": "Bulk grain and flour on reasons",
@@ -1028,12 +1028,6 @@
    "key": "craft_guilds",
    "shape": "leaderNpcIds",
    "rows": 1190
-  },
-  {
-   "identity": "crusaderSynthesis on flags",
-   "key": "crusaderSynthesis",
-   "shape": "flags",
-   "rows": 472
   },
   {
    "identity": "custom.alum on osr012",
@@ -2092,30 +2086,6 @@
    "rows": 472
   },
   {
-   "identity": "hasCathedral on inst",
-   "key": "hasCathedral",
-   "shape": "inst",
-   "rows": 944
-  },
-  {
-   "identity": "hasMonastery on inst",
-   "key": "hasMonastery",
-   "shape": "inst",
-   "rows": 944
-  },
-  {
-   "identity": "heresyIntensity on flags",
-   "key": "heresyIntensity",
-   "shape": "flags",
-   "rows": 472
-  },
-  {
-   "identity": "heresySuppression on flags",
-   "key": "heresySuppression",
-   "shape": "flags",
-   "rows": 472
-  },
-  {
    "identity": "historicizedTick on compromiseLifecycle",
    "key": "historicizedTick",
    "shape": "compromiseLifecycle",
@@ -2786,12 +2756,6 @@
    "key": "mag",
    "shape": "deposits",
    "rows": 2456
-  },
-  {
-   "identity": "mageTheocracy on flags",
-   "key": "mageTheocracy",
-   "shape": "flags",
-   "rows": 472
   },
   {
    "identity": "manor_household on leaderNpcIds",
@@ -5702,12 +5666,6 @@
    "key": "religious",
    "shape": "stocks",
    "rows": 6263
-  },
-  {
-   "identity": "religiousFraud on flags",
-   "key": "religiousFraud",
-   "shape": "flags",
-   "rows": 472
   },
   {
    "identity": "religious_authorities on leaderNpcIds",
@@ -9196,15 +9154,15 @@
   "anyActive on flags": "",
   "arcaneBlackMarket on flags": "dossier-pdf=R web-display=R",
   "crimeIsGovt on flags": "dossier-pdf=R web-display=R",
-  "crusaderSynthesis on flags": "",
-  "heresyIntensity on flags": "",
-  "heresySuppression on flags": "",
-  "mageTheocracy on flags": "",
+  "crusaderSynthesis on flags": "dossier-pdf=N web-display=N",
+  "heresyIntensity on flags": "dossier-pdf=N web-display=N",
+  "heresySuppression on flags": "dossier-pdf=N web-display=N",
+  "mageTheocracy on flags": "dossier-pdf=N web-display=N",
   "magicFillsVoid on flags": "dossier-pdf=R web-display=R",
   "magicMilitarized on flags": "dossier-pdf=R web-display=R",
   "merchantArmy on flags": "dossier-pdf=R web-display=R",
   "merchantCriminalBlur on flags": "dossier-pdf=R web-display=R",
-  "religiousFraud on flags": "",
+  "religiousFraud on flags": "dossier-pdf=N web-display=N",
   "secularBrutalism on flags": "dossier-pdf=R web-display=R",
   "stateCrime on flags": "dossier-pdf=R web-display=R",
   "stateCrimeIntensity on flags": "dossier-pdf=R web-display=R",
@@ -9265,7 +9223,7 @@
   "isDeficit on foodSecurity": "",
   "isPressured on foodSecurity": "",
   "isSecure on foodSecurity": "",
-  "isSurplus on foodSecurity": "web-transitive=R",
+  "isSurplus on foodSecurity": "dossier-pdf=R web-transitive=R",
   "label on foodSecurity": "campaign-pdf=R dossier-pdf=R foundry=R json-export=N news=N web-display=R web-transitive=R world-book=R",
   "magicNote on foodSecurity": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
   "magicOffset on foodSecurity": "dossier-pdf=N web-display=N",
@@ -9415,7 +9373,7 @@
   "hasAlchemist on inst": "dossier-pdf=R web-display=R",
   "hasBank on inst": "dossier-pdf=R web-display=R",
   "hasBlackMarket on inst": "dossier-pdf=R web-display=R",
-  "hasCathedral on inst": "",
+  "hasCathedral on inst": "dossier-pdf=R web-display=R",
   "hasCharterHall on inst": "dossier-pdf=R web-display=R",
   "hasChurch on inst": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=N world-book=R",
   "hasCourtSystem on inst": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R world-book=R",
@@ -9434,7 +9392,7 @@
   "hasMerchantGuild on inst": "dossier-pdf=R web-display=R",
   "hasMilitaryInst on inst": "dossier-pdf=R web-display=R",
   "hasMilitia on inst": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
-  "hasMonastery on inst": "",
+  "hasMonastery on inst": "dossier-pdf=R web-display=R",
   "hasNavy on inst": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R world-book=R",
   "hasPort on inst": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R world-book=R",
   "hasPrison on inst": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R world-book=R",
