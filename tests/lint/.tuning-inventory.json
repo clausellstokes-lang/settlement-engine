@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "2cffe66cd14cb1a4b0e3866baaccd3a5bf056df8",
-  "measuredBy": "MERGE-CAR",
+  "measuredAtSha": "9e0d5577607b69db32e65e2b8147293c6ccf7174",
+  "measuredBy": "MERGE-WAVE (W1 ECO merge point)",
   "date": "2026-11-08",
-  "note": "the people car merged into the integration branch (8dff691f3): both sides inventories composed at the merged tree (Register VII v2 stands; the rung-2 landing registered dials stay)",
+  "note": "the W1 ECO merge at ea0e269a9: economyStateProse.js gains three named share thresholds (W1 construction 725b62eb5), 2 -> 5, attributed by their DECLARED_GROWTH row; refrozen at the merged tip, Register VII v2 stands",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -1020,7 +1020,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 441,
+      "line": 450,
       "spanDigest": "3812788e098c702a89d72a5b51c0007f969391069da9b98b2fdd4f2e789ff838",
       "leaves": {
         "value": 50
@@ -1034,7 +1034,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 442,
+      "line": 451,
       "spanDigest": "a6b1340215d65b0c4945f4b657854f6756ff2217a648606b9e467ee5ac00bbda",
       "leaves": {
         "value": 20
@@ -8257,7 +8257,7 @@
     "src/domain/display/marketPrices.js": 3,
     "src/domain/display/realmArcSummary.js": 1,
     "src/domain/display/settlementRumors.js": 3,
-    "src/domain/display/stateProse/economyStateProse.js": 2,
+    "src/domain/display/stateProse/economyStateProse.js": 5,
     "src/domain/display/timelineTrack.js": 1,
     "src/domain/display/warStatus.js": 1,
     "src/domain/display/worldSnapshotPublic.js": 1,
@@ -8820,7 +8820,7 @@
   "totals": {
     "tables": 271,
     "keys": 2222,
-    "unregisteredNamed": 536,
+    "unregisteredNamed": 539,
     "bareDecimals": 6934,
     "zeroDependentTables": 10,
     "zeroNamedDependentTables": 180
