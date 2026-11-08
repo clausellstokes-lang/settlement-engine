@@ -7963,7 +7963,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "category relationship: the ties are the opening": [
         {
           "angle": "street",
-          "text": "What binds people in {settlement} also obliges them, and the obligations do not all point the same way.",
+          "text": "People in {settlement} owe each other, and some of what they owe pulls in opposite directions.",
           "slots": [
             "settlement"
           ],

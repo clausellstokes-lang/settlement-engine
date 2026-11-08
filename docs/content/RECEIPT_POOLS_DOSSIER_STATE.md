@@ -5882,7 +5882,7 @@ unchanged.
 4. `[visitor]` The reason {settlement} is the way it is lies further back than anyone here will volunteer.
 
 **category `relationship`: the ties are the opening** {colour}
-1. `[street]` What binds people in {settlement} also obliges them, and the obligations do not all point the same way.
+1. `[street]` People in {settlement} owe each other, and some of what they owe pulls in opposite directions.
 2. `[ledger]` {settlement}'s ties are dense enough that a favour asked of one person reaches three, and everyone here knows which three.
 3. `[visitor]` Getting anything done in {settlement} means going through somebody, and going through somebody has a price that is rarely money.
 4. `[unfolding]` Two of {settlement}'s ties are pulling against each other, and the people caught between them have not yet chosen.
