@@ -640,76 +640,14 @@ export const PATRONAGE_TUNING = Object.freeze({
   proximityVisibilityBonus: 0.25, // investigators circle a PUBLICLY corrupt institution
 });
 
-/** @param {unknown} a @param {unknown} b */
-function nameMatches(a, b) {
-  const x = String(a || '').trim().toLowerCase();
-  const y = String(b || '').trim().toLowerCase();
-  if (!x || !y) return false;
-  return x === y || x.includes(y) || y.includes(x);
-}
-
 /** The home-institution fields the exposure path reads, in the same order.
  *  @param {import('./settlement.schema.js').SimNpc} npc */
 export function npcHomeInstitution(npc) {
   return npc?.factionAffiliation || npc?.factionLink || npc?.institutionId || null;
 }
 
-/**
- * Which of the settlement's security institutions are compromised, and how.
- *   covert   — an unexposed corrupt NPC is homed there (the hidden stooge);
- *              drags onset security, invisible to the public.
- *   revealed — the institution carries a 'corruption' impairment (a scandal
- *              made it public); drags onset security AND raises the exposure
- *              visibility of anyone still corrupt inside it.
- *
- * @param {import('./settlement.schema.js').SimSettlement} settlement
- * @returns {{covert: string[], revealed: string[]}}
- */
-export function compromisedSecurityInstitutions(settlement) {
-  const institutions = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
-  const securityInstitutions = institutions
-    .filter((inst) => SECURITY_INSTITUTION_RE.test(String(inst?.name || '')));
-  if (!securityInstitutions.length) return { covert: [], revealed: [] };
-
-  // A 'corruption'-typed impairment is PUBLIC record only when it is not flagged
-  // covert. A covert mark (an institution-scope Impose Corruption that quietly
-  // captured a node) is the hidden channel: it must NOT read as a public scandal,
-  // or it would wrongly drag exposure-proximity scrutiny onto the very NPC it was
-  // meant to conceal.
-  const revealed = new Set();
-  const covert = new Set();
-  for (const inst of securityInstitutions) {
-    const corruptionImps = (inst.impairments || []).filter((imp) => imp?.type === 'corruption');
-    if (!corruptionImps.length) continue;
-    if (corruptionImps.some((imp) => imp?.covert !== true)) revealed.add(inst.name);
-    else covert.add(inst.name);
-  }
-
-  for (const npc of settlement?.npcs || []) {
-    if (npc?.corrupt !== true || npc?.ousted) continue;
-    const home = npcHomeInstitution(npc);
-    if (!home) continue;
-    const match = securityInstitutions.find((inst) => nameMatches(inst.name, home));
-    if (match && !revealed.has(match.name)) covert.add(match.name);
-  }
-
-  return { covert: [...covert], revealed: [...revealed] };
-}
-
-/**
- * The patronage drag corrupted security institutions exert on ONSET-side
- * effective security (covert + revealed both count: a bought watch shields
- * recruits whether or not the town knows it's bought).
- *
- * @param {import('./settlement.schema.js').SimSettlement} settlement
- * @returns {{drag: number, covert: string[], revealed: string[]}}
- */
-export function patronageSecurityDrag(settlement) {
-  const { covert, revealed } = compromisedSecurityInstitutions(settlement);
-  const count = covert.length + revealed.length;
-  return {
-    drag: Math.min(PATRONAGE_TUNING.maxDrag, count * PATRONAGE_TUNING.dragPerInstitution),
-    covert,
-    revealed,
-  };
-}
+// The bought watch's two readers — compromisedSecurityInstitutions and patronageSecurityDrag — MOVED
+// to corruptionLeash.js (ALLEGIANCE-CAR3, 2026-11-08, the chair's late row 1): their person arm reads the
+// LOCAL axis through the hidden allegiance's one reader (allegianceOf), which this EAGER first-paint
+// module may not import (the catalog rides with it, and allegiance.js imports this file). Every caller
+// is the simulation's (lazy). The two names keep (landed tokens, ES §3.3); the dials above stay here.

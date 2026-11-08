@@ -4,12 +4,12 @@ import { relationshipRoles } from './relationshipEvolution.js';
 import {
   readCorruptionClimate, npcCorruptibleFlaw, corruptibility, corruptionVectorForFlaw, spawnCorruptionChance,
   onsetHazard, exposureChance, demoteDotRank, CORRUPTION_TUNING, guildEffectiveSecurity,
-  patronageSecurityDrag, npcHomeInstitution, PATRONAGE_TUNING,
+  npcHomeInstitution, PATRONAGE_TUNING,
   hasCorruptingDeity, npcDeityDisfavor } from '../corruption.js';
 // THE RESOLVER CHOKEPOINT (§1) rides a LAZY leaf, NOT eager corruption.js — see
 // corruptionLeash.js's first-paint note. npcAgency is the lazy engine chunk, so
 // this import adds nothing to first paint.
-import { resolveLeash, isWilledLeash, corruptMarkOf } from '../corruptionLeash.js';
+import { resolveLeash, isWilledLeash, corruptMarkOf, patronageSecurityDrag } from '../corruptionLeash.js';
 import { allegianceOf } from '../people/allegiance.js';
 // Phase 4 W-F3 site #7 — the corruption-plane amplifier over the onset (flaw-expression)
 // pressure channel. Reads the settlement's TICK-START faithProfile.piety + patron plane

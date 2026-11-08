@@ -36,6 +36,7 @@
  */
 
 import { allegianceOf } from './people/allegiance.js'; // ALLEGIANCE-CAR1: the hidden allegiance's one reader (J-1)
+import { PATRONAGE_TUNING, SECURITY_INSTITUTION_RE } from './corruption.js';
 
 /** The set of leash kinds whose beneficiary sits in ANOTHER settlement/court —
  *  the ones whose exposure must NEVER impair a local organization. */
@@ -193,5 +194,98 @@ export function resolveLeash(npc, settlement, worldState) {
     conspiracy: null,
     foreign: false,
     covert: true,
+  };
+}
+
+// ── THE BOUGHT WATCH, ON THE LOCAL AXIS (ALLEGIANCE-CAR3, 2026-11-08) ───────────────────────────────
+// The chair's late row 1 and the ES design's §3.3 bracket (lane/fp-rebase-2026-11-08, DESIGN_FP_ARCH_ES.md):
+// a bought watch is a LOCAL allegiance of the watch's FACE to the briber's criminal house, read through
+// allegianceOf and the card's own `institution.key` (its allegiance's `via` is 'office' there by the
+// design's §1.4) — NEVER the foreign leash (`allegiance.leash`, the web's sidecar: the FOREIGN axis, read
+// by resolveLeash). The person arm read `npc.corrupt === true` homed by `npcHomeInstitution` (the
+// retired `factionAffiliation` family), which no card has carried since the people car: MEASURED dead
+// at the base 4297838f3 and at car 1's tip alike (a lit fp-read-2 run, twenty years: covert 0,
+// revealed 0, drag 0 every year at both). The institution arm (a 'corruption' impairment) is unchanged.
+// Moved here from corruption.js (the eager first-paint module may not import the allegiance reader);
+// both names keep (landed tokens). Pure.
+
+/** @param {unknown} a @param {unknown} b */
+function nameMatches(a, b) {
+  const x = String(a || '').trim().toLowerCase();
+  const y = String(b || '').trim().toLowerCase();
+  if (!x || !y) return false;
+  return x === y || x.includes(y) || y.includes(x);
+}
+
+/**
+ * True when the card is a LOCAL agent still in place: it holds a hidden allegiance to a local criminal
+ * house (a foreign leash with no house is the other axis), it is not ousted, and the simulation has not
+ * exposed it (its own write-back `corrupt: false` sticks, corruptMarkOf's rule).
+ * @param {any} npc @param {any} settlement @returns {boolean}
+ */
+function isLocalAgentInPlace(npc, settlement) {
+  const a = allegianceOf(npc);
+  if (!a || !a.house || npc?.ousted) return false;
+  return corruptMarkOf(npc, settlement) === true;
+}
+
+/**
+ * Which of the settlement's security institutions are compromised, and how.
+ *   covert   — the FACE of a security house holds a local hidden allegiance, unexposed (the hidden
+ *              stooge), or the house carries only covert 'corruption' impairments; drags onset
+ *              security, invisible to the public.
+ *   revealed — the institution carries a public 'corruption' impairment (a scandal made it public);
+ *              drags onset security AND raises the exposure visibility of anyone still corrupt inside it.
+ *
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
+ * @returns {{covert: string[], revealed: string[]}}
+ */
+export function compromisedSecurityInstitutions(settlement) {
+  const institutions = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
+  const securityInstitutions = institutions
+    .filter((inst) => SECURITY_INSTITUTION_RE.test(String(inst?.name || '')));
+  if (!securityInstitutions.length) return { covert: [], revealed: [] };
+
+  // A 'corruption'-typed impairment is PUBLIC record only when it is not flagged
+  // covert. A covert mark (an institution-scope Impose Corruption that quietly
+  // captured a node) is the hidden channel: it must NOT read as a public scandal,
+  // or it would wrongly drag exposure-proximity scrutiny onto the very NPC it was
+  // meant to conceal.
+  const revealed = new Set();
+  const covert = new Set();
+  for (const inst of securityInstitutions) {
+    const corruptionImps = (inst.impairments || []).filter((imp) => imp?.type === 'corruption');
+    if (!corruptionImps.length) continue;
+    if (corruptionImps.some((imp) => imp?.covert !== true)) revealed.add(inst.name);
+    else covert.add(inst.name);
+  }
+
+  // THE PERSON ARM, LOCAL AXIS: the face of a security house that answers, unexposed, to a local house.
+  for (const npc of settlement?.npcs || []) {
+    const inst = npc?.institution;
+    if (!inst || inst.kind !== 'house' || !isLocalAgentInPlace(npc, settlement)) continue;
+    const match = securityInstitutions.find((s) => nameMatches(s.name, inst.key));
+    if (match && !revealed.has(match.name)) covert.add(match.name);
+  }
+
+  return { covert: [...covert], revealed: [...revealed] };
+}
+
+/**
+ * The patronage drag corrupted security institutions exert on ONSET-side
+ * effective security (covert + revealed both count: a bought watch shields
+ * recruits whether or not the town knows it's bought). The dials are
+ * corruption.js :: PATRONAGE_TUNING (the bought watch's name, J-12).
+ *
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
+ * @returns {{drag: number, covert: string[], revealed: string[]}}
+ */
+export function patronageSecurityDrag(settlement) {
+  const { covert, revealed } = compromisedSecurityInstitutions(settlement);
+  const count = covert.length + revealed.length;
+  return {
+    drag: Math.min(PATRONAGE_TUNING.maxDrag, count * PATRONAGE_TUNING.dragPerInstitution),
+    covert,
+    revealed,
   };
 }
