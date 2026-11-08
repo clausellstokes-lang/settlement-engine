@@ -25,6 +25,7 @@ import { OTHER_CARD_PREFIX, RANKS, assignCastPowers, rollWeightOf } from '../../
 import { SEAT_CARD_ID, seatHouseOf } from '../../../src/generators/people/representatives.js';
 import { otherMintRowFor } from '../../../src/generators/people/mintTitles.js';
 import { expectAbsentWithAnchor } from '../../helpers/anchoredNegatives.js';
+import { isVeiledPower, veiledOfPower, VEILED_CARD_PREFIX } from '../../../src/domain/people/cardVeil.js';
 
 /** Two military claimants (the density law's doubled niche), one seat, four military houses. */
 const FIXTURE = Object.freeze({
@@ -91,9 +92,23 @@ function assertPowers(s, label) {
     if (backingArchetypeOf(f) !== A.OTHER || name === governing) continue;
     const mint = cards.find((c) => c.institution.kind === 'power' && c.institution.key === name);
     expect(mint, `${label}: the other power ${name} has its minted face`).toBeDefined();
-    expect(mint.id.startsWith(OTHER_CARD_PREFIX)).toBe(true);
+    // FIX-PUBLIC-VEIL (the second seat, re-keyed with the cause): a hidden or criminal power's face is born
+    // with the opaque id (people/cardVeil.js :: veiledCardIdFor, salted by the record's seed); an open one keeps
+    // its power-slug id
+    if (isVeiledPower(f)) {
+      expect(mint.id).toMatch(new RegExp(`^${VEILED_CARD_PREFIX}[0-9a-f]{16}(_\\d+)?$`));
+    } else expect(mint.id.startsWith(OTHER_CARD_PREFIX)).toBe(true);
     expect(mint.title).toBe(otherMintRowFor(name).title);
-    expect(mint.memberships).toEqual([{ power: name, rank: 1, share: 1 }]);
+    // FIX-PUBLIC-VEIL (re-keyed with the cause): the membership carries THAT power's veil bit
+    expect(mint.memberships).toEqual([{ power: name, rank: 1, share: 1, veiled: isVeiledPower(f) }]);
+  }
+  // FIX-PUBLIC-VEIL (the chair's ruling, the same law per entry): every membership is stamped at birth,
+  // a boolean equal to the one predicate applied to THAT power on the final record
+  for (const card of cards) {
+    for (const m of card.memberships) {
+      expect(typeof m.veiled, `${label}: ${card.id} -> ${m.power} carries the veil bit`).toBe('boolean');
+      expect(m.veiled, `${label}: ${card.id} -> ${m.power}'s bit is the predicate's`).toBe(veiledOfPower(m.power, s));
+    }
   }
   // PEOPLE-LAND re-key, cause M-2 (the shim out): the shim's `factionAffiliation` / `secondaryAffiliation` are no
   // fields of a returned card; the memberships are the card's powers, each naming a power on the roster.
@@ -216,8 +231,15 @@ describe('the people car — the powers\' people (step 3)', () => {
     ];
     const out = assignCastPowers(FIXTURE, cards, null);
     const by = Object.fromEntries(out.map((c) => [c.id, c.memberships]));
-    expect(by.npc_mayor_and_council).toEqual([{ power: 'Elder Council', rank: 1, share: 1 }]);
-    expect(by.npc_citadel).toEqual([{ power: 'Military/Guard', rank: 1, share: 0.6 }, { power: 'Elder Council', rank: 2, share: 0.4 }]);
-    expect(by.npc_barracks).toEqual([{ power: 'The Shield Compact', rank: 1, share: 1 }]);
+    // FIX-PUBLIC-VEIL (re-keyed with the cause): each membership carries its power's veil bit (none of the
+    // fixture's three powers is hidden or criminal)
+    expect(by.npc_mayor_and_council).toEqual([{ power: 'Elder Council', rank: 1, share: 1, veiled: false }]);
+    expect(by.npc_citadel).toEqual([{ power: 'Military/Guard', rank: 1, share: 0.6, veiled: false }, { power: 'Elder Council', rank: 2, share: 0.4, veiled: false }]);
+    expect(by.npc_barracks).toEqual([{ power: 'The Shield Compact', rank: 1, share: 1, veiled: false }]);
+    // and a hidden power's membership is stamped veiled (the stress infiltrator's shape)
+    const hidden = { ...FIXTURE, powerStructure: { ...FIXTURE.powerStructure,
+      factions: FIXTURE.powerStructure.factions.map((f) => (f.faction === 'The Shield Compact' ? { ...f, hidden: true } : f)) } };
+    const barracks = assignCastPowers(hidden, [{ ...cards[1], memberships: [] }], null)[0];
+    expect(barracks.memberships).toEqual([{ power: 'The Shield Compact', rank: 1, share: 1, veiled: true }]);
   });
 });

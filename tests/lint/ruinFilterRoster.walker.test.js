@@ -100,6 +100,7 @@ const RUIN_AGNOSTIC_EXEMPT = Object.freeze({
   'src/domain/edit/pools.js': 'name-lookup/affordance — the `npc.role` pool offers a DM the roles the record\'s OWN institutions roster already carries, as a SELECTION LIST ("what may a human name for this field"), never a live-provider aggregation: it sums nothing and credits no institution with capacity. RULED EXEMPT BY THE CHAIR (judgment 138, EM-A2b version 7) on the same reason src/domain/events/targetRosters.js and src/domain/tableLedger.js already hold. Routing it through liveInstitutions() would DROP a ruined institution from a picker where it is a legitimate answer — the former warden of a burned keep is a role a DM may still name — and would add a THIRTEENTH import to a leaf whose own header forbids one.',
   'src/domain/mapProfile.js': 'existence-gate (deferred) — .some() walls → hasWalls; a ruined citadel still reads walled (owner glance)',
   'src/domain/contradictions.js': 'existence-gate — narrative QA detectors (.some presence)',
+  'src/domain/people/cardVeil.js': 'name-lookup — FIX-PUBLIC-VEIL (2026-11-07): veiledOfInstitution finds a face\'s house row BY NAME only to apply the veil predicate (criminal, clandestine, an illegal brokerage) and stamp the card\'s bit. It credits no capacity and sums nothing; a ruined house is still the same class of house, so its face stays veiled or open with it.',
   'src/domain/people/cardDoor.js': 'name-lookup/display — PEOPLE-6 LINKS (2026-11-07): the NPC card\'s door back finds its house\'s roster row BY NAME only to compute the id the Institutions card focuses on. It credits no capacity and sums nothing; a ruined house still has its card and its face, so the link stands.',
   'src/domain/coherence/readerBattery.js': 'existence-gate/name-lookup — THE READER BATTERY (lane READER-INSTRUMENTS, 2026-11-04) is an INSTRUMENT, not a provider aggregation: the soak runs it over BIRTH records to ask whether rendered prose names a house the roster lacks — `houseNames` maps the roster to catalogue names for the [~strength-no-house] column and the [no-watch] sub-case, and `hasMarketInstitution(s?.institutions)` is the [no-market] existence gate. It credits no institution with capacity and sums nothing; its own header says it cures nothing. The same standing as contradictions.js above (narrative QA detectors). A ruin on a pulsed save would read present here, which is a false negative in an instrument, never an over-credit in the product.',
   // LANDING-R2 seat E (2026-11-07): the two raw readers the pool census merged in, each classified
@@ -502,7 +503,9 @@ describe('ruin-filter roster ratchet (structural-prevention Pattern 2)', () => {
     // PEOPLE-6 LINKS (2026-11-07): 100 -> 101, src/domain/people/cardDoor.js :: cardInstitutionDoorOf's roster-name read (EXEMPT above).
     // MERGE-CAR (2026-11-08): 99 + 4 (the pool census's readers, LANDING-R2 above) + 2 (PEOPLE-5B, PEOPLE-6 LINKS) = 105, measured
     // by this file's own scan at the merged tip; both sides' readers composed, no new one.
-    expect(readers.length).toBe(105);
+    // FIX-PUBLIC-VEIL (2026-11-07): 101 -> 102, src/domain/people/cardVeil.js :: veiledOfInstitution's roster-name read (EXEMPT above).
+    // ALLEGIANCE-CAR1 (2026-11-08, the veil merged over MERGE-CAR): 105 + 1 (cardVeil.js, EXEMPT) = 106, measured by this file's own scan.
+    expect(readers.length).toBe(106);
   });
 
   test('exempt honesty: every exempt entry still reads .institutions and is not already compliant', () => {

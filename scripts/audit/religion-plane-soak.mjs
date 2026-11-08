@@ -1,3 +1,6 @@
+// FIX-PUBLIC-VEIL step 3 (2026-11-07): the fixtures' NPCs name their power by `memberships` (the people car's
+// card, M-7) -- the clergy plane reads it through factionRefs.js :: entityLinksFaction; the retired
+// `linkedFactionIds` linked these NPCs to nothing since PEOPLE-5B.
 /**
  * religion-plane-soak.mjs — the LAW/CHAOS PLANE distribution soak (Phase 4 W-F7).
  *
@@ -60,7 +63,7 @@ function context(regime, seed) {
   if (regime === 'stable') return {
     powerStructure: { governingName: 'Free Council', government: 'Merchant Council', publicLegitimacy: { score: 65, label: 'Stable' },
       factions: [{ id: 'f.gov', name: 'Free Council', archetype: 'government', power: 62, isGoverning: true }] },
-    npcs: [{ id: 'n.c', name: 'Steward', importance: 'pillar', linkedFactionIds: ['f.gov'], personality: { dominant: 'principled' } }],
+    npcs: [{ id: 'n.c', name: 'Steward', importance: 'pillar', memberships: [{ power: 'f.gov', rank: 1, share: 1 }], personality: { dominant: 'principled' } }],
     institutions: [{ id: 'i.temple', name: 'Temple', category: 'religious', tags: ['religious', 'church'], status: 'active' }],
     economicState: { prosperity: 'prosperous', primaryExports: [], primaryImports: [] },
     stressors: [],
@@ -68,7 +71,7 @@ function context(regime, seed) {
   if (regime === 'marginal') return {  // corrupt-not-deep, average, no famine — the sensitive band
     powerStructure: { governingName: 'The Ring', government: 'Merchant Council', publicLegitimacy: { score: 45, label: 'Contested' },
       factions: [{ id: 'f.crime', name: 'The Ring', archetype: 'criminal', power: 58, isGoverning: true }] },
-    npcs: [{ id: 'n.b', name: 'Boss', importance: 'key', linkedFactionIds: ['f.crime'], personality: { dominant: 'greedy', flaw: 'greedy' }, flaw: 'greedy' }],
+    npcs: [{ id: 'n.b', name: 'Boss', importance: 'key', memberships: [{ power: 'f.crime', rank: 1, share: 1 }], personality: { dominant: 'greedy', flaw: 'greedy' }, flaw: 'greedy' }],
     institutions: [{ id: 'i.thieves', name: 'Thieves Guild', category: 'criminal', tags: ['criminal'], status: 'active' }],
     economicState: { prosperity: 'average', primaryExports: [], primaryImports: [] },
     stressors: [],
@@ -76,7 +79,7 @@ function context(regime, seed) {
   return { // crisis — criminal-captured, struggling, famine (the receptivity pressure cooker)
     powerStructure: { governingName: 'The Syndicate', government: 'Merchant Council', publicLegitimacy: { score: 35, label: 'Contested' },
       factions: [{ id: 'f.crime', name: 'The Syndicate', archetype: 'criminal', power: 78, isGoverning: true }] },
-    npcs: [{ id: 'n.k', name: 'Kingpin', importance: 'pillar', linkedFactionIds: ['f.crime'], personality: { dominant: 'ruthless', flaw: 'ruthless' }, flaw: 'ruthless' }],
+    npcs: [{ id: 'n.k', name: 'Kingpin', importance: 'pillar', memberships: [{ power: 'f.crime', rank: 1, share: 1 }], personality: { dominant: 'ruthless', flaw: 'ruthless' }, flaw: 'ruthless' }],
     institutions: [{ id: 'i.thieves', name: 'Thieves Guild', category: 'criminal', tags: ['criminal'], status: 'active' }, { id: 'i.smug', name: 'Smugglers', category: 'criminal', tags: ['criminal'], status: 'active' }],
     economicState: { prosperity: 'struggling', primaryExports: [], primaryImports: [] },
     stressors: [{ id: `world_stressor.famine.s${seed}`, type: 'famine', severity: 0.8, affectedSettlementIds: [`s${seed}`], age: 2 }],

@@ -36,7 +36,6 @@ import { backingRowFor } from '../../data/institutionBacking.js';
 import { defenseFactsOf, forceWordsOf } from '../../domain/defense/defenseFacts.js';
 import { random as _rng } from '../../kernel/rngContext.js';
 import { onStream, seatHouseOf, SEAT_CARD_ID } from './representatives.js';
-import { OTHER_CARD_PREFIX } from './mintTitles.js';
 import { birthFactsOf } from '../../domain/facts/factsOf.js';
 import { tieArchetype } from '../npc/tieKind.js';
 
@@ -129,7 +128,9 @@ export function drawTies(cards, place, rng, only = {}) {
   const seat = seatHouseOf(/** @type {any} */ (institutions));
   const seatKey = seat ? String(seat.house.name || '') : null;
   const seatCard = cast.find((c) => (seatKey ? c?.institution?.kind === 'house' && c?.institution?.key === seatKey : c?.id === SEAT_CARD_ID)) || cast[0];
-  const isOtherMint = (/** @type {Record<string, any>} */ c) => c?.institution?.kind === 'power' && String(c.id).startsWith(OTHER_CARD_PREFIX);
+  // a minted face that is not the seat (FIX-PUBLIC-VEIL: a veiled mint's id is opaque, so it is told by
+  // its kind, not by the `npc_power_` prefix)
+  const isOtherMint = (/** @type {Record<string, any>} */ c) => c?.institution?.kind === 'power' && c?.id !== SEAT_CARD_ID;
 
   const sources = only?.sources ? cast.filter((c) => only.sources.has(c.id)) : cast;
   return sources.map((from) => {

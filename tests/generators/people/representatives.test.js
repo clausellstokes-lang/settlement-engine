@@ -20,6 +20,7 @@ import { FACE_SEAT, faceOfInstitution, familyOfInstitution, isFabricInstitution 
 import { governingFactionOf, nameOf } from '../../../src/domain/rulingPower.js';
 import { SEAT_CARD_ID, YIELDS_TO, seatHouseOf } from '../../../src/generators/people/representatives.js';
 import { seatMintTitleFor } from '../../../src/generators/people/mintTitles.js';
+import { isVeiledPower, veiledOfInstitution } from '../../../src/domain/people/cardVeil.js';
 
 const TIERS = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
 /**
@@ -69,6 +70,15 @@ function assertCast(s, label) {
     expect(card.id, `${label}: ids derive from the house, never an index`).toMatch(/^npc_[a-z][a-z0-9_]*$/);
     // today's record body, every field the surfaces read
     expect(card.role, `${label}: ${card.id} role is the title (M-1b)`).toBe(card.title);
+    // FIX-PUBLIC-VEIL: the veil bit is stamped at birth, a boolean, and equal to the one predicate read on the FINAL record
+    expect(typeof card.institution.veiled, `${label}: ${card.id} carries the veil bit`).toBe('boolean');
+    expect(card.institution.veiled, `${label}: ${card.id}'s bit is the predicate's on the record`).toBe(veiledOfInstitution(card.institution, s));
+    // FIX-PUBLIC-VEIL (the second seat, option (B)): a veiled face is BORN with an opaque id — never its house's slug
+    if (card.institution.veiled) {
+      expect(card.id, `${label}: a veiled face's id is opaque`).toMatch(/^npc_veiled_[0-9a-f]{16}(_\d+)?$/);
+    } else if (card.id !== SEAT_CARD_ID) {
+      expect(card.id.startsWith('npc_veiled_'), `${label}: an open face keeps its readable id`).toBe(false);
+    }
     for (const key of ['name', 'gender', 'role', 'category', 'personality', 'physical', 'plotHooks', 'influence', 'power', 'presentation']) {
       expect(card, `${label}: ${card.id} carries ${key}`).toHaveProperty(key);
     }
@@ -86,7 +96,9 @@ function assertCast(s, label) {
     if (seat) expect(mint, `${label}: no seat mint beside a seat house`).toBeUndefined();
     else {
       expect(mint.id).toBe(SEAT_CARD_ID);
-      expect(mint.institution).toEqual({ kind: 'power', key: governing, family: null, title: seatMintTitleFor(governing).title });
+      // FIX-PUBLIC-VEIL (re-keyed with the cause): the mint's institution carries its veil bit, the governing power's
+      expect(mint.institution).toEqual({ kind: 'power', key: governing, family: null, title: seatMintTitleFor(governing).title,
+        veiled: isVeiledPower(governingFactionOf(s)) });
     }
     if (seat?.kind === 'hall') expect(seated[0].title, `${label}: the hall's face is the seat, titled from the power`).toBe(seatMintTitleFor(governing).title);
   }
@@ -144,4 +156,20 @@ describe('the people car — the representative generator (step 2)', () => {
     // anchored: the two casts are the same length only by coincidence of roster; the names differ
     expect(facesA.join('|')).not.toBe(facesB.join('|'));
   }, 30_000);
+});
+
+describe('FIX-PUBLIC-VEIL (the second seat) — a veiled face\'s opaque id is salted by the record\'s seed and stable for it', () => {
+  it('the same seed mints the same opaque ids; another seed mints others; no id spells its house', () => {
+    const cfg = { settType: 'city', culture: 'germanic', stressTypes: ['infiltrated'] };
+    const idsOf = (seed) => generateSettlementPipeline(cfg, null, { seed, customContent: {} }).npcs
+      .filter((n) => n.institution?.veiled === true).map((n) => [n.institution.key, n.id]);
+    const a = idsOf('veil-a'); const again = idsOf('veil-a'); const b = idsOf('veil-b');
+    expect(a.length, 'anchored: the city carries veiled faces').toBeGreaterThan(2);
+    expect(again).toEqual(a);
+    const bByKey = new Map(b);
+    const shared = a.filter(([key]) => bByKey.has(key));
+    expect(shared.length, 'anchored: the two seeds share a veiled house').toBeGreaterThan(0);
+    for (const [key, id] of shared) expect(bByKey.get(key), `${key}: another seed, another id`).not.toBe(id);
+    for (const [key, id] of a) expect(id).not.toContain(String(key).toLowerCase().split(/[^a-z0-9]+/).filter(Boolean)[0]);
+  });
 });

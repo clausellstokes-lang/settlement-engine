@@ -243,7 +243,7 @@ export const HOLDER_SOURCES = Object.freeze({
   // ── the office itself: the record's own audit of the record ──
   structuralViolations: Object.freeze({ kind: 'office', cite: 'src/generators/steps/assembleSettlement.js:135', read: true }),
   structuralSuggestions: Object.freeze({ kind: 'office', cite: 'src/generators/steps/assembleSettlement.js:136', read: true }),
-  prominentRelationship: Object.freeze({ kind: 'office', cite: 'src/generators/narrativeGenerator.js:1006', read: true }),
+  prominentRelationship: Object.freeze({ kind: 'office', cite: 'src/generators/narrativeGenerator.js:1023', read: true }), // ALLEGIANCE-CAR1 (the veil merge): 1006 (integration) / 1021 (veil) -> 1023, the line on the composed file
 });
 
 /**

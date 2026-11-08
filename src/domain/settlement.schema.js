@@ -466,7 +466,7 @@ export const FIELD_ALIASES = Object.freeze({
  *   factionId?: string,
  *   factionLink?: string,
  *   memberships?: Array<{ power: string, rank: (1|2|3|null), share?: (number|null) }>,
- *   institution?: ({ kind: ('house'|'power'), key: string, family?: (string|null), title?: (string|null) } | null),
+ *   institution?: ({ kind: ('house'|'power'), key: string, family?: (string|null), title?: (string|null), veiled?: boolean } | null),
  *   institutionId?: string,
  *   organizationId?: string,
  *   settlementId?: string,
@@ -495,6 +495,12 @@ export const FIELD_ALIASES = Object.freeze({
  * `linkedFactionIds`, `factionGoal` and `densityRungRole` left the record, and the
  * grouping `settlement.factions` with them. The simulation's reads of them (FPZ's,
  * M-6) go through the loose `Record<string, any>` until FPZ rebuilds them.
+ * THE VEIL BIT (FIX-PUBLIC-VEIL, 2026-11-07): `institution.veiled` — true when the
+ * house is hideable (criminal, clandestine, an illegal brokerage) or the minted face's
+ * power is hidden or criminal — stamped at birth by every writer of `institution`
+ * from the ONE predicate (domain/people/cardVeil.js); the public sanitizer (migration
+ * 206) and publicSafe.js read it: `false` makes `institution`, `title`, `role` and
+ * `memberships` public, true or absent strips them (fail-closed).
  */
 
 /**

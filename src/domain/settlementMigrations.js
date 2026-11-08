@@ -36,6 +36,7 @@ import { SCHEMA_VERSION } from './settlement.schema.js';
 import { resolveFactionRef } from './factionRefs.js';
 import { tagEntityCanon } from './canonStatus.js';
 import { factionIdFromName } from '../lib/entities.js';
+import { isVeiledPower, stampVeil } from './people/cardVeil.js';
 
 /** The per-card faction fields a v2 record does not carry (M-2's six, less `structuralRank`, which is carried). */
 const V1_CARD_FIELDS = Object.freeze(['factionAffiliation', 'secondaryAffiliation', 'linkedFactionIds', 'factionGoal', 'densityRungRole']);
@@ -94,13 +95,15 @@ export function dmCardReasons(npc) {
 /**
  * THE V1 -> V2 STEP (M-7): the people car's card. Pure; returns `{ settlement, report }`.
  *
- *   npcs[].factionAffiliation    -> a membership `{ power, rank: null, share: null }` where it resolves to a power
+ *   npcs[].factionAffiliation    -> a membership `{ power, rank: null, share: null, veiled }` where it resolves to a power
+ *     (FIX-PUBLIC-VEIL: every built membership carries THAT power's veil bit, people/cardVeil.js)
  *   npcs[].secondaryAffiliation  -> a second membership only where it names a power; else REPORTED
  *   npcs[].linkedFactionIds[]    -> memberships (each resolved against the powers); an unresolved one REPORTED
  *   npcs[].factionGoal, densityRungRole -> deleted (generated text and a retired rung; no reader in v2)
  *   npcs[].structuralRank        -> carried
  *   npcs[].memberships (a card born by the car before the bump) -> kept as written, the old fields merged in once
- *   npcs[].institution: a string naming a roster house -> `{ kind: 'house', key, family: null, title: null }`
+ *   npcs[].institution: a string naming a roster house -> `{ kind: 'house', key, family: null, title: null, veiled }`
+ *     (FIX-PUBLIC-VEIL: the veil bit stamped from the house's roster row by people/cardVeil.js)
  *     (the card shape's spelling, people/representatives.js: the house's roster name is `key`); a car-born
  *     record `{ kind, key, ... }` -> kept; anything else -> REPORTED and null. A DM card -> null (M-7).
  *   settlement.factions (the grouping) -> dropped; an entry naming no power is REPORTED with its members
@@ -148,7 +151,7 @@ export function migrateV1toV2(settlement) {
     const add = (p) => {
       const name = powerNameOf(p);
       if (!name || memberships.some((m) => isObj(m) && m.power === name)) return;
-      memberships.push({ power: name, rank: null, share: null });
+      memberships.push({ power: name, rank: null, share: null, veiled: isVeiledPower(p) });
     };
     /** @param {string} field @param {unknown} value @param {string} [names] */
     const unmapped = (field, value, names) => report.unmapped.push({ id: npc.id ?? null, field, value, ...(names ? { names } : {}) });
@@ -180,7 +183,7 @@ export function migrateV1toV2(settlement) {
     } else if (isObj(inst) && typeof inst.kind === 'string' && INSTITUTION_KINDS.has(inst.kind) && typeof inst.key === 'string' && inst.key) {
       next.institution = inst;
     } else if (typeof inst === 'string' && houses.has(inst)) {
-      next.institution = { kind: 'house', key: inst, family: null, title: null };
+      next.institution = stampVeil({ kind: 'house', key: inst, family: null, title: null }, s);
       report.houseLinked += 1;
     } else {
       if (inst != null) unmapped('institution', inst);
