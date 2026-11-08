@@ -49,7 +49,7 @@
       "banner": 9,
       "dated": 149,
       "sha-pin": 2,
-      "tree": 109
+      "tree": 110
     },
     "files": {
       "banner": [
@@ -320,7 +320,7 @@
     "_rosterGrowth2026-11-07-chair-veil-brief": "ONE document JOINED the roster by being BORN into it (the chair, on the integration branch, on FIX-EXPORT-KEYS's finding that a hidden power's minted face prints its title on a public card): `dated` 136 -> 137, docs/chair/2026-11-07/BRIEF-FIX-PUBLIC-VEIL-2026-11-07.md, born dated, 0 past-EOF; nothing changed class.",
     "_rosterGrowth2026-11-08-merge-car": "MERGE-CAR (the people car merged into the integration branch, 8dff691f3): the roster is the UNION of both sides', measured once by this walker: `dated` 93 (the base 262e8b255) + 44 (the integration side's documents born dated after the base) + 11 (the car's) = 148; `tree` 95 + 5 (the rung-2 landing's five signed records) + 9 (the car's nine) = 109; `banner` 9 and `sha-pin` 1 unmoved. No document changed class; each entered its class when it was born on its own side. pastEofCitationsExcluded is UNCHANGED at 377.",
     "_rosterMove2026-11-08-merge-car": "ONE document changed class, by the chair's ruling of 2026-11-08 (MERGE-CAR, option (a)): docs/chair/2026-11-07/people-5-prep/walker-draft-at-base.txt joined `sha-pin` (1 -> 2) with the header `**Snapshot base:** 1031233a4`. CAUSE: the people car shortened narrativeGenerator.js (1,035 -> 1,016 lines) and factionDedup.js (217 -> 122) under a listing frozen at 1031233a4; the listing changed class from live to snapshot, pastEofCitationsExcluded 377 -> 382; no row re-addressed.",
-    "_rosterGrowth2026-11-07-w7": "ONE document JOINED the roster by being BORN into it (W7 HOOKS, a writing lane of the cloud chair, on lane/w7-hooks-2026-11-07): `dated` 131 -> 132 on the lane; re-measured ONCE by this walker at the lane's merge of the people car's integration tip (ffafe2a0e): the integration's 148 -> 149 with this one document, docs/WIRING_W7_2026-11-07.md, the lane's hand-back record (every rewritten line old -> new for the owner's veto), born dated, its citations addressing the lane's own tip. A GROWTH, not a re-classification."
+    "_rosterGrowth2026-11-07-w7": "ONE document JOINED the roster by being BORN into it (W7 HOOKS, a writing lane of the cloud chair, on lane/w7-hooks-2026-11-07): `dated` 131 -> 132 on the lane; re-measured ONCE by this walker at the lane's merge of the people car's integration tip (ffafe2a0e): the integration's 148 -> 149 with this one document, docs/WIRING_W7_2026-11-07.md, the lane's hand-back record (every rewritten line old -> new for the owner's veto), born dated, its citations addressing the lane's own tip. A GROWTH, not a re-classification. The same single measurement at the merged tip also counts `tree` 109 -> 110: docs/shift-records/2026-11-08-merge-car-a-rung2-composition.json (MERGE-CAR's signed record A, born on the integration branch after MERGE-CAR's own roster note was measured), born archival by the tree rule, a JSON signature with no path:line citation of its own; a GROWTH, not a re-classification."
   },
   "rows": []
 }
