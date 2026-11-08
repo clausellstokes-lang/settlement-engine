@@ -43,8 +43,7 @@ export const OTHER_SHAPES = Object.freeze({
   'src/components/settlement/EventComposer.jsx:179': 'the DM\'s custom powers',
   'src/components/dossier/CascadePreviewPanel.jsx:288': 'the preview\'s powers count (MERGE-5AB ruling 1: the preview is the edit layer\'s)',
   'src/lib/editFingerprint.js:63': 'the preview\'s powers count (MERGE-5AB ruling 1)',
-  'src/domain/dossier/plotHooks.js:445': 'a tension\'s camps',
-  'src/domain/display/publicSafe.js': 'the public projection\'s SQL-parity allowlist (migration 189), see FIELD_CONTRACTS',
+  'src/domain/dossier/plotHooks.js:452': 'a tension\'s camps', // re-keyed by identity 445 -> 452 at MERGE-WAVE's FIX-EXPORT-KEYS point: W7 HOOKS's conflict hooks (fdf41ee95) sit above it
   'src/domain/aiGrounding.js': 'the powers\' profiles', 'src/domain/coherence/readerBattery.js:307': 'a tension',
   'src/domain/density/densityBands.js': 'the signed band', 'src/domain/display/defenseDisplay.js': 'the crime signal',
   'src/domain/dossier/dossierSearch.js:329': 'the search index', 'src/domain/dossier/realmEntityWeb.js:163': 'the search index',
@@ -72,8 +71,9 @@ const GROUPING_DOMINANT_FILES = Object.freeze(['src/components/settlementDetail/
  * A refused FIELD read kept by a contract outside the car, keyed by file:line (or file), each with its reason —
  * reviewed by the landing (PEOPLE-LAND, 2026-11-07), never silent. Nothing generated feeds these on a v2 record.
  */
+// FIX-EXPORT-KEYS (2026-11-07): the publicSafe.js rows (here and in OTHER_SHAPES) left with migration 205 — the
+// public projection's allowlists and publicNpc no longer name the grouping or the two fields, so no exemption is owed.
 export const FIELD_CONTRACTS = Object.freeze({
-  'src/domain/display/publicSafe.js': 'the public projection\'s allowlist and publicNpc literal, parity-pinned to the SQL _gallery_sanitize_public_json (migration 189\'s npc_allowed, tests/security/*): a public data contract whose change is a Supabase migration, the landing\'s named remainder',
   'src/domain/customContent.js:392': 'a DM-authored custom-content library entity\'s legacy `controlledBy` fallback (not a generated card; no settlement migration covers that store)',
 });
 

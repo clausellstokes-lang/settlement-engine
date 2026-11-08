@@ -682,16 +682,19 @@ describe('writer-with-no-reader ratchet: the live judgment', () => {
     // 2026-11-07 PEOPLE-5B EDIT (M-7): + three — the grouping and the shim's two fields left the v2 record at the
     // normalize boundary; the export allowlist that still names them is lane 5a's display surface (publicSafe.js), the
     // report this arm exists to make.
+    // 2026-11-07 FIX-EXPORT-KEYS: − those three — migration 205 and its client twin (publicSafe.js PUBLIC_TOPLEVEL_KEYS,
+    // NPC_PUBLIC_KEYS, publicNpc) dropped `factions`, `factionAffiliation` and `secondaryAffiliation` from the export
+    // allowlist (the owner's word: the dead keys go before the deploy). The five left are the pre-car report, unmoved.
     expect(unwritten).toEqual([
       'crossSettlementConflicts on settlement',
       'dailyLife on settlement',
-      'factionAffiliation on npcs',
-      'factions on settlement',
       'interSettlementRelationships on settlement',
       'neighbourNetwork on settlement',
-      'secondaryAffiliation on npcs',
       'thesis on settlement',
     ]);
+    for (const retired of ['factions on settlement', 'factionAffiliation on npcs', 'secondaryAffiliation on npcs']) {
+      expect(live.allowlist.has(retired), `${retired} left the export allowlist (205)`).toBe(false);
+    }
     expect(REPORT_ONLY_CLASSES).toContain('json-export');
     const onlyExport = [...live.verdicts.values()]
       .filter((row) => row.verdict === 'LIT' && COUNTING_CLASSES.every((cls) => row.reach[cls] !== 'R'));

@@ -16,7 +16,7 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { basename, join } from 'node:path';
 
 export const MIGRATION_TRAIN_BASE_HEAD = 121;
-export const MIGRATION_TRAIN_REPO_HEAD = 204;
+export const MIGRATION_TRAIN_REPO_HEAD = 205;
 
 const FORWARD_ONLY_REASON = [
   'No automatic schema rollback is admitted for this wave.',
@@ -641,6 +641,37 @@ export const MIGRATION_WAVES = Object.freeze([
     }),
     expectedObjects: Object.freeze([
       Object.freeze({ kind: 'function', name: 'report_engine_generations' }),
+    ]),
+  }),
+  Object.freeze({
+    id: 'retired-faction-public-keys',
+    from: 205,
+    to: 205,
+    purpose: 'The people car (ODQ §934.105, PEOPLE-RULINGS M-1b / M-2) retired the NPC grouping '
+      + '`settlement.factions` and the per-NPC faction fields; the owner\'s word of 2026-11-07: '
+      + 'the export allowlist\'s dead keys go before the deploy. ONE re-stated function: '
+      + 'public._gallery_sanitize_public_json is 189\'s body VERBATIM outside its two allowlist '
+      + 'literals and their comments — public_toplevel loses \'factions\' and npc_allowed loses '
+      + '\'factionAffiliation\' and \'secondaryAffiliation\'. Every change only HIDES; no public '
+      + 'field is added. It creates no table, no column, no policy and no row, and re-points '
+      + 'get_gallery_dossier, get_unlisted_dossier, import_gallery_dossier and '
+      + '_gallery_apply_member_overrides (093) by name with no signature change and no re-grant. '
+      + 'DEPLOYMENT remains the owner\'s manual act (`supabase db push` plus the applied-head '
+      + 'bump in that same act).',
+    rollback: Object.freeze({
+      mode: 'forward-only',
+      reason: [
+        FORWARD_ONLY_REASON,
+        'Like 202 and 203, this wave is one re-stated function and its own @rollback annotation '
+        + 'spells the whole reversal out: recreate 189\'s body verbatim, i.e. the same function '
+        + 'with the three keys restored to its two allowlists — which is why 205 classifies as '
+        + 'documented-manual-reversal rather than taking the wave policy. Nothing is destroyed '
+        + 'on reversal: the function holds no state and no row was minted; the only consequence '
+        + 'is that the three retired keys project publicly again, exactly as today.',
+      ].join(' '),
+    }),
+    expectedObjects: Object.freeze([
+      Object.freeze({ kind: 'function', name: '_gallery_sanitize_public_json' }),
     ]),
   }),
 ]);

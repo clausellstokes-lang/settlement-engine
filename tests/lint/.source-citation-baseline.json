@@ -47,7 +47,7 @@
     "pastEofCitationsExcluded": 382,
     "byRule": {
       "banner": 9,
-      "dated": 164,
+      "dated": 165,
       "sha-pin": 2,
       "tree": 139
     },
@@ -373,7 +373,9 @@
     "_rosterGrowth2026-11-07-w7": "ONE document JOINED the roster by being BORN into it (W7 HOOKS, a writing lane of the cloud chair, on lane/w7-hooks-2026-11-07): `dated` 131 -> 132 on the lane; re-measured ONCE by this walker at the lane's merge of the people car's integration tip (ffafe2a0e): the integration's 148 -> 149 with this one document, docs/WIRING_W7_2026-11-07.md, the lane's hand-back record (every rewritten line old -> new for the owner's veto), born dated, its citations addressing the lane's own tip. A GROWTH, not a re-classification. The same single measurement at the merged tip also counts `tree` 109 -> 110: docs/shift-records/2026-11-08-merge-car-a-rung2-composition.json (MERGE-CAR's signed record A, born on the integration branch after MERGE-CAR's own roster note was measured), born archival by the tree rule, a JSON signature with no path:line citation of its own; a GROWTH, not a re-classification.",
     "_rosterGrowth2026-11-08-merge-wave-w7": "THE UNION AT THE W7 HOOKS MERGE (MERGE-WAVE, session session_01FbPLbdbKovNtK8Fx32oQ24): both sides' notes kept; `dated` 162 -> 163 (docs/WIRING_W7_2026-11-07.md); `tree` holds at 139; the count measured once by the walker; nothing changed class.",
     "_rosterGrowth2026-11-07-fix-food-isolation": "ONE document JOINED the roster by being BORN into it (FIX-FOOD-ISOLATION, measured with this walker's own arm): `dated` 136 -> 137, docs/FIX_FOOD_ISOLATION_2026-11-07.md, the seat's record, born dated, 0 past-EOF; nothing changed class.",
-    "_rosterGrowth2026-11-08-merge-wave-food-isolation": "THE UNION AT THE FIX-FOOD-ISOLATION MERGE (MERGE-WAVE, session session_01FbPLbdbKovNtK8Fx32oQ24): both sides' notes kept; `dated` 163 -> 164 (docs/FIX_FOOD_ISOLATION_2026-11-07.md); the count measured once by the walker; nothing changed class."
+    "_rosterGrowth2026-11-08-merge-wave-food-isolation": "THE UNION AT THE FIX-FOOD-ISOLATION MERGE (MERGE-WAVE, session session_01FbPLbdbKovNtK8Fx32oQ24): both sides' notes kept; `dated` 163 -> 164 (docs/FIX_FOOD_ISOLATION_2026-11-07.md); the count measured once by the walker; nothing changed class.",
+    "_rosterGrowth2026-11-07-fix-export-keys": "ONE document JOINED the roster by being BORN into it (FIX-EXPORT-KEYS, migration 205 and its client twin, measured with this walker's own arm): `dated` 104 -> 105, docs/FIX_EXPORT_KEYS_2026-11-07.md (the seat's record), born dated. A GROWTH, not a re-classification: no document changed class.",
+    "_rosterGrowth2026-11-08-merge-wave-export-keys": "THE UNION AT THE FIX-EXPORT-KEYS MERGE (MERGE-WAVE, session session_01FbPLbdbKovNtK8Fx32oQ24): both sides' notes kept; `dated` 164 -> 165 (docs/FIX_EXPORT_KEYS_2026-11-07.md); the count measured once by the walker; nothing changed class."
   },
   "rows": []
 }
