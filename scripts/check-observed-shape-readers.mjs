@@ -106,11 +106,12 @@ import {
   RETIRED_PEOPLE_CAST_BASELINE_SCHEMA,
   RETIRED_PEOPLE_LANDING_BASELINE_SCHEMA,
   RETIRED_CAR_MERGE_BASELINE_SCHEMA,
+  RETIRED_WAVE_W2_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA,
   RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
-  validateSchema33Baseline,
+  validateSchema34Baseline,
 } from './lib/observed-shape-baseline.mjs';
 import {
   parseExactFlags,
@@ -252,7 +253,11 @@ const BASELINE = join(ROOT, 'scripts/.observed-shape-readers-baseline.json');
  * 33 = schema 32's topology, tag law, roster and corpus definition, re-governed to MERGE-WAVE at the
  *     W2 DEF merge (82a4e2856; the chair's ruling, 2026-11-08: one rung per cause): ONE new row
  *     ADMITTED with attribution — `direction on stress` at migrationDirection.js, grounded by the W2
- *     composition, its writer W0-1's draw; nothing goes, nothing declared, the bank 76/50. THE LIVE AUTHORITY.
+ *     composition, its writer W0-1's draw; nothing goes, nothing declared, the bank 76/50 (RETIRED).
+ * 34 = schema 33's topology, tag law, roster and corpus definition, re-governed to MERGE-WAVE at the
+ *     FIX-FOOD-ISOLATION merge (one rung per cause): ONE new row ADMITTED with attribution —
+ *     `nearbyResourcesState on config` at foodGenerator.js, its own existing read observed on the
+ *     isolation receipt's call path; nothing goes, nothing declared, the bank 76/50. THE LIVE AUTHORITY.
  * ⚠ THIS LIST WENT STALE FOR EIGHT RUNGS — it marked 10 as "THE LIVE AUTHORITY" while
  *   the number stood at 18 — so it is filled in here rather than extended by one. Each
  *   rung's full rationale lives beside its own target constant in
@@ -281,6 +286,7 @@ export {
   RETIRED_PEOPLE_CAST_BASELINE_SCHEMA,
   RETIRED_PEOPLE_LANDING_BASELINE_SCHEMA,
   RETIRED_CAR_MERGE_BASELINE_SCHEMA,
+  RETIRED_WAVE_W2_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA, RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
@@ -1592,7 +1598,7 @@ export function assertExplainedWriterRowTags(
   baseline,
   entries = EXPLAINED_WRITER_EXEMPTIONS,
 ) {
-  validateSchema33Baseline(baseline);
+  validateSchema34Baseline(baseline);
   assertExplainedWriterExemptions(entries);
   const declarations = new Map(entries.map((entry) => [entry.identity, entry]));
   const genesis = baseline.frozenAtSha === baseline.migrationReview.subjectSha;
@@ -3105,10 +3111,14 @@ export function baselineOf({
       'people car merged into the integration branch over the rung-2 landing. The car\'s genesis at 31 STANDS;',
       'the integration side\'s schema-30 reads (R2\'s census readers) are ADMITTED at this rung by cause, the',
       'rows they retired go with cause; nothing is declared and the bank is 76/50 (RETIRED).',
-      'SCHEMA 33 = schema 32\'s topology, tag law, roster and corpus definition, re-governed to MERGE-WAVE at the',
+      'SCHEMA 33 (RETIRED) held schema 32\'s topology, tag law, roster and corpus definition, re-governed to MERGE-WAVE at the',
       'W2 DEF merge (one rung per cause): ONE row ADMITTED by cause, `direction on stress` at migrationDirection.js,',
       'grounded to the `stress` shape by the W2 composition, its writer W0-1\'s draw (343bd4eec), which no corpus',
-      'seed reaches; nothing goes, nothing is declared and the bank is 76/50.',
+      'seed reaches; nothing goes, nothing is declared and the bank is 76/50 (RETIRED).',
+      'SCHEMA 34 = schema 33\'s topology, tag law, roster and corpus definition, re-governed to MERGE-WAVE at the',
+      'FIX-FOOD-ISOLATION merge (one rung per cause): ONE row ADMITTED by cause, `nearbyResourcesState on config` at',
+      'foodGenerator.js, its own existing read observed on the isolation receipt\'s call path; nothing goes,',
+      'nothing is declared and the bank is 76/50.',
       'Of the fourteen declared bank entries THIRTEEN bank reads today; `isCriminal on incomeSources`',
       'has banked nothing since schema 17 made its writer observable, and banked is always a',
       `subset of declared. This envelope banks ${bankPhrase(bankOf(inventory, rowTags))}.`,
@@ -3119,7 +3129,7 @@ export function baselineOf({
       'An untagged row means: a guarded read, of a real record rather than browser or language surface,',
       'of a key no writer the corpus runs produces and no declared out-of-corpus writer explains.',
       'A tagged row stays visible as governed explained-writer debt under its numeric ceiling and reason.',
-      'Schemas 4–32 are the RETIRED numeric predecessors.',
+      'Schemas 4–33 are the RETIRED numeric predecessors.',
     ],
     schema: BASELINE_SCHEMA,
     frozen: new Date().toISOString().slice(0, 10),
@@ -3293,7 +3303,7 @@ export async function run(argv = [], overrides = {}) {
     createScanArtifact,
     validateScanArtifact,
     assertFindingSourceEvidence,
-    validateBaseline: validateSchema33Baseline,
+    validateBaseline: validateSchema34Baseline,
     // ⭐ THE BANK FENCE'S TWO HAND-OWNED SIDES, overridable so the sentinel can drive
     // every refusal: the literal module and the migration script's declared post-bank.
     readBankLiteral: readBankLiteralModule,

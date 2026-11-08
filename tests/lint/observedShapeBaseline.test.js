@@ -36,6 +36,7 @@ import {
   RETIRED_PEOPLE_CAST_BASELINE_SCHEMA,
   RETIRED_PEOPLE_LANDING_BASELINE_SCHEMA,
   RETIRED_CAR_MERGE_BASELINE_SCHEMA,
+  RETIRED_WAVE_W2_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA,
   validateSchema3Baseline,
   RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
@@ -71,6 +72,7 @@ import {
   validateSchema31Baseline,
   validateSchema32Baseline,
   validateSchema33Baseline,
+  validateSchema34Baseline,
 } from '../../scripts/lib/observed-shape-baseline.mjs';
 import {
   digestOf,
@@ -375,7 +377,9 @@ describe('observed-shape schema-3 baseline envelope', () => {
     // ⭐ SCHEMA 31: THE PEOPLE CAR'S LANDING (ODQ §934.105; the landing seat PEOPLE-LAND, 2026-11-07): schema 30's envelope, tag law, roster and corpus definition UNCHANGED, re-governed to a NEW GENESIS from a restored consistent schema-30 predecessor; the grouping and the per-NPC faction fields leave the record (M-2, M-7), 90 rows admitted with attribution by lane cause, 9 go, 2 decrease; nothing is declared and the bank holds at 77/51.
     // ⭐ SCHEMA 32: MERGE-CAR (the people car merged into the integration branch over the rung-2 landing; the chair's brief, 2026-11-08): schema 31's envelope, tag law, roster and corpus definition UNCHANGED; the car's genesis at 31 STANDS and the integration side's schema-30 reads (R2's census readers) are admitted by cause, 15 rows admitted, 12 go; nothing is declared and the bank is 76/50.
     // ⭐ SCHEMA 33: MERGE-WAVE at the W2 DEF merge (one rung per cause, the chair's ruling of 2026-11-08): schema 32's envelope, tag law, roster and corpus definition UNCHANGED; one grounded read admitted by cause.
-    expect(BASELINE_SCHEMA).toBe(33);
+    // ⭐ SCHEMA 34: MERGE-WAVE at the FIX-FOOD-ISOLATION merge (one rung per cause): one row admitted by cause.
+    expect(BASELINE_SCHEMA).toBe(34);
+    expect(RETIRED_WAVE_W2_BASELINE_SCHEMA).toBe(33);
     expect(RETIRED_PEOPLE_LANDING_BASELINE_SCHEMA).toBe(31);
     expect(RETIRED_CAR_MERGE_BASELINE_SCHEMA).toBe(32);
     expect(RETIRED_PEOPLE_CAST_BASELINE_SCHEMA).toBe(30);
@@ -717,6 +721,13 @@ function validSchema32Baseline_fixture() {
   return baseline;
 }
 
+/** The RETIRED schema-33 envelope, pinned to its own LITERAL number (the food-isolation rung). */
+function validSchema33Baseline_fixture() {
+  const baseline = validSchema7Baseline();
+  baseline.schema = RETIRED_WAVE_W2_BASELINE_SCHEMA;
+  return baseline;
+}
+
 /** The LIVE envelope, whatever number is in force. */
 function validLiveBaseline() {
   const baseline = validSchema7Baseline();
@@ -1027,9 +1038,14 @@ describe('observed-shape schema-7 bank-by-rule envelope', () => {
     // with a fixture; `live` belongs to 33 now.
     const carMerge = validSchema32Baseline_fixture();
     expect(validateSchema32Baseline(carMerge)).toBe(carMerge);
-    expect(validateSchema33Baseline(live)).toBe(live);
     expect(() => validateSchema32Baseline(live)).toThrow(/is not schema 32/);
     expect(() => validateSchema33Baseline(carMerge)).toThrow(/is not schema 33/);
+    // ⭐ 33 IS RETIRED at the schema-34 rung (MERGE-WAVE, FIX-FOOD-ISOLATION) and validates its OWN literal.
+    const waveW2 = validSchema33Baseline_fixture();
+    expect(validateSchema33Baseline(waveW2)).toBe(waveW2);
+    expect(validateSchema34Baseline(live)).toBe(live);
+    expect(() => validateSchema33Baseline(live)).toThrow(/is not schema 33/);
+    expect(() => validateSchema34Baseline(waveW2)).toThrow(/is not schema 34/);
     expect(() => validateSchema30Baseline(live)).toThrow(/is not schema 30/);
     expect(() => validateSchema31Baseline(peopleCast)).toThrow(/is not schema 31/);
     expect(() => validateSchema29Baseline(live)).toThrow(/is not schema 29/);

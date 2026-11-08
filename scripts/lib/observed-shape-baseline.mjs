@@ -7,7 +7,15 @@
  *
  * ── ⭐⭐ EIGHT IDENTITY DEFINITIONS LIVE HERE, AND ONLY ONE IS THE AUTHORITY ──
  *
- * `BASELINE_SCHEMA` is **33**: schema 32's tagged numeric heuristic-leaf envelope, tag law, roster
+ * `BASELINE_SCHEMA` is **34**: schema 33's tagged numeric heuristic-leaf envelope, tag law, roster
+ * and corpus definition UNCHANGED, re-governed to MERGE-WAVE AT THE FIX-FOOD-ISOLATION MERGE (c6e8a4ad6;
+ * the chair's ruling of 2026-11-08: one rung per cause): ONE new row ADMITTED with attribution by cause —
+ * `nearbyResourcesState on config` at src/generators/foodGenerator.js, the land arithmetic's depletion arm, foodGenerator's own
+ * existing read newly observed on the isolation receipt's call path (the lane's §S4). Nothing goes,
+ * nothing is declared and the bank holds at 76/50. Its full rationale lives beside
+ * `WAVE_FOOD_TARGET_SCHEMA` in `migrate-observed-shape-readers.mjs`.
+ *
+ * `RETIRED_WAVE_W2_BASELINE_SCHEMA` is **33**: schema 32's tagged numeric heuristic-leaf envelope, tag law, roster
  * and corpus definition UNCHANGED, re-governed to MERGE-WAVE AT THE W2 DEF MERGE (82a4e2856; the
  * chair's ruling of 2026-11-08: one rung per cause): ONE new row ADMITTED with attribution by cause —
  * `direction on stress` at src/domain/migrationDirection.js, whose receiver the W2 DEF composition
@@ -525,7 +533,11 @@ export const RETIRED_PEOPLE_LANDING_BASELINE_SCHEMA = 31;
  *  one grounded read admitted by cause. Never redefined, never deleted, so a schema-32 PREDECESSOR is
  *  still validated as schema 32. */
 export const RETIRED_CAR_MERGE_BASELINE_SCHEMA = 32;
-export const BASELINE_SCHEMA = 33;
+/** The RETIRED W2-merge definition — schema 34's predecessor. Same tagged topology envelope, theta,
+ *  roster, corpus definition and fence; schema 34 re-governs it to MERGE-WAVE at the FIX-FOOD-ISOLATION
+ *  merge. Never redefined, never deleted, so a schema-33 PREDECESSOR is still validated as schema 33. */
+export const RETIRED_WAVE_W2_BASELINE_SCHEMA = 33;
+export const BASELINE_SCHEMA = 34;
 /** The RETIRED exact per-site definition. Never redefined, never deleted. */
 export const RETIRED_EXACT_BASELINE_SCHEMA = 3;
 /** The RETIRED UNFILTERED heuristic-leaf definition — schema 5's predecessor.
@@ -1240,10 +1252,20 @@ export function validateSchema32Baseline(baseline) {
   );
 }
 
+/** The RETIRED authority — schema 33's tagged envelope (MERGE-WAVE, W2 DEF), re-governed by schema 34 to
+ *  MERGE-WAVE at the FIX-FOOD-ISOLATION merge. Re-bound to its own LITERAL now that the authority has moved. */
+export function validateSchema33Baseline(baseline) {
+  return validateLeafBaseline(
+    baseline,
+    RETIRED_WAVE_W2_BASELINE_SCHEMA,
+    { tagged: true },
+  );
+}
+
 /** The LIVE envelope validator. Bound to `BASELINE_SCHEMA` rather than a literal,
  *  so the retired rungs above keep validating their own numbers while this one
  *  always names the authority. */
-export function validateSchema33Baseline(baseline) {
+export function validateSchema34Baseline(baseline) {
   return validateLeafBaseline(baseline, BASELINE_SCHEMA, { tagged: true });
 }
 
