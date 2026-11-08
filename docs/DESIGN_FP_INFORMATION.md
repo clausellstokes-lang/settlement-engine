@@ -93,6 +93,7 @@ requirements are the density contract for every mechanism below.
   ES-2/ES-7's Herald strings red on the very vocabulary this amendment admits.
   The war volume carries a POINTER to this amendment beside the WR-7
   foreign-guest hold, never the amendment text.
+  [RE-BASED 2026-11-08 (FP-REBASE, seat FPR-COMPROMISE; the census §9 — THE OWNER'S DEATH LAW) — the boundary presumed it was this medium's own carve (the 2026-07-19 ruling and CR-ES-2). → It now sits under the owner's law for the whole FP (2026-11-08, verbatim: "The masses happen behen the scenes but only the user determine death to the representatives and named generated NPCs"): the person substrate covers EVERY named NPC in every preset, and a named person's death is the DM's alone, entering only by decree through the edit layer (OD-FC-69 strengthened to "no simulated death of a named person"). This boundary is STRICTER than that law and stands as written: an information event removes no one at all — it neither kills nor exiles; the exile, wound, demotion or ruin the owner's law allows other programs reach a named person here only through "the existing legitimacy/coup machinery on their own law". The BY-THE-ENGINE qualifier is the death law's own shape.]
 - **THE ONE-SUBSTRATE DISTANCE LAW:** five independent consumers price the SAME
   physical distance through one shared reader (latency hopWeeks, recency
   surcharge ×0.5, route impedance, fidelity attenuation 1/(1+0.75×delay), query
@@ -408,6 +409,7 @@ wave lands them. Historical archetype, one clause each below.
   the market's named institution; the mouthpiece idiom (informationStatecraft
   :526) extends — a named house factor fronts the story, read-wired, no new
   NPC state.
+  [RE-BASED 2026-11-08 (FP-REBASE, seat FPR-COMPROMISE; the census §2 row "IN / INFORMATION") — "the patron faction" presumed the commissioning court acts through a faction grouping. → It is the commissioning POWER ("faction" the retired synonym, the census §7); "a named house factor" is the house's FACE (its one representative, the people car), read through its `institution` and memberships — still no new NPC state.]
 - **Receipts (house voice):** the built beat stands — "A story is bought… It is
   not true. Nobody there knows that yet" (DM-gated). NEW: `plant_took`
   (DM-truth-only projection line, never public — audience law) when the mark's
@@ -947,6 +949,7 @@ pattern, two courts marching on each other's theatre.
 
 ### IN-3 — THE COUNTER-GAME (flag `counterIntelEnabled`; joined to SP-4)
 [ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: the DM Watch panel and Houses block (WatchPanel.jsx, HousesBlock.jsx) at any advance; the sweep's catch beat would be the fast sign, but every verb is UNMOUNTED pending U123 (`resolveSweep` has no production caller); the sweep cooldown (~26 weeks) and the witch-hunt's remembered grievance are seasonal-to-yearly, and the spy exposure the counter-game prices against runs at `EXPOSE_BASE 0.01`/tick (informationStatecraft.js:822, FP-43) ≈ a two-year spy life — a clock shift this volume never recorded · TIER: belief infoMode (spatial canon ∧ infoMode ≠ omniscient) · host flags: `counterIntelEnabled` + `infoStatecraftEnabled` (+ U123 for the verbs) · DEGRADED ARM: mirror-gap arm dark ⇒ suspicion from exposure/contradiction evidence only]
+[RE-BASED 2026-11-08 (FP-REBASE, seat FPR-COMPROMISE; the census §2 row "IN / INFORMATION") — the old text presumed the brokerage's "covert patronage" (`brokeragePatronage.js :: projectPatronBindings`, its genesis patron a zero-draw pick over the settlement's factions) is a patronage fact of its own beside the allegiance train's, and that the sweep, the witch-hunt and the house unmasking ride one corruption substrate. → ONE PATRONAGE (the census §8 decision 5, ruled for this program): the derived `src/domain/people/patronage.js :: patronageOf` (`docs/allegiance/ALLEGIANCE_DESIGN_2026-11-08.md :: §3.3`, J-9 — pure, never stored) is the FP's one patronage; the brokerage's binding is its READER. The binding's genesis is the power the house BACKS with its largest share (`houseBacksOf`, which retires `genesisPatronOf`'s pick per the census §8 ledger); its captured half stands; any patronage strength the Houses block or an unmasking shows is read from `patronageOf`. The landed tokens keep their names (a LANDED token never renames), but "patronage" beside `patronageOf` misleads, so this volume's prose calls the brokerage's fact THE HOUSE'S BINDING ("whom the house serves", "its true patron" in the house voice) and "patronage" means `patronageOf` alone. THE SWEEP stays on ES's FOREIGN axis (`DESIGN_FP_ARCH_ES.md` §1's bracket): it hunts other courts' eyes and covert house bindings, and a catch fires the web's exposure road; the town's own LOCAL agents (an allegiance to its criminal houses, read through `allegianceOf`) are the law's WARRANT/SUSPICION pursuit (`ALLEGIANCE_DESIGN :: §6.4`), not this verb's. Casting: the sweep's face is the watch institution's face; the accused is cast from the directed per-card ties and shared memberships (the people car's one outgoing tie per card) — shamed, never removed (§1b and the owner's death law). The full re-basing note is `DESIGN_FP_ARCH_IN.md` §4 IN-3's bracket.]
 Settled: counter-intelligence as DELIBERATE agency. Today the counter-game is
 emergent only (HIDE burns spies by arithmetic, never by decision —
 survey-verified). Archetype: Walsingham — the vetted channel, the doubled
@@ -1082,6 +1085,7 @@ courier, the swept court that hanged a plot by reading it first.
 Settled: the reputation race GAINS CONSUMERS; the errand spine carries the
 medium's people. Archetypes: the Thurn-und-Taxis post rider — and Rothschild's
 pigeon, the legend of who-knew-first at Waterloo.
+[RE-BASED 2026-11-08 (FP-REBASE, seat FPR-COMPROMISE; the census §2 row "IN / INFORMATION") — "a corruption-web-compromised courier (existing plane …)" presumed one corruption substrate on the person. → THE COMPROMISED COURIER IS ON ES'S FOREIGN AXIS (`DESIGN_FP_ARCH_ES.md` §1's bracket): its leash — the one carried field `allegiance.leash`, or the web's tick-side sidecar, through `resolveLeash` — is of a foreign kind; a courier whose only hidden tie is a LOCAL allegiance to its own town's criminal house is the guild's agent, not this double agent. The leash is minted by the web at tick, never at birth; the web's recruit filter reads the allegiance. The honesty clause is ruled (OD-FC-9, leak-only, below). The JSON-alias hazard of §1c stays as the in-memory roster-reference class; the grouping alias (`factions[].members[]` ARE `npcs[]`) is gone.]
 - **Model, courier half (SEAM CONTRACT TWO):** intel gift/sale transfers ride
   SP-1 errands (typed covert/commercial; declared vs true purpose — the Q
   amendment generalized: every courier may be traveling for someone else).
@@ -1534,3 +1538,16 @@ that tuning legible, and does not pre-empt it.
    an amendment, or the tree).
 5. The audit stage is part of the build (spine §5): this volume does not
    ship to Sol unaudited.
+
+## RE-BASED 2026-11-08 (FP-REBASE) — what moved in this volume
+
+Seat FPR-COMPROMISE, on the census `docs/chair/2026-11-08/FP-REBASE-CENSUS-2026-11-08.md` §2 row "IN / INFORMATION" and its §7–§9 laws. Design text only; no code, flag, key or golden moves; the FP stays parked behind the plat. The compiled twin is `DESIGN_FP_ARCH_IN.md` (its own closing section).
+
+| Where | What moved | Census row answered |
+|---|---|---|
+| §1b, THE ANONYMITY / NO-FATES BOUNDARY | set under THE OWNER'S DEATH LAW (no simulated death of a named person; death the DM's decree alone); this boundary stays stricter (no removal at all by an information event) | §9 ruling 2 |
+| §5 IN-0a, Casting | "the patron faction" → the commissioning power; the house factor = the house's face | IN / INFORMATION; §7 |
+| §5 IN-3 (head) | ONE PATRONAGE: the brokerage's binding a READER of `patronageOf`, genesis from `houseBacksOf`; prose "the house's binding", landed tokens unrenamed; the sweep FOREIGN-axis, the local hand the law's; casting by faces, ties, memberships | IN / INFORMATION (IN-3); §8 decision 5 |
+| §5 IN-4, courier half | the compromised courier on ES's FOREIGN axis, the carried field `allegiance.leash`; the grouping alias gone | IN / INFORMATION (IN-4); §8 decision 4 |
+
+§2's substrate census rows (the "Covert patronage" and "Foreign-asset scandal" rows) are the record of their survey day and are not bracketed; the IN-3 bracket states what stands now. Judgment calls as in `DESIGN_FP_ARCH_IN.md`'s closing section. No passage needed a STOP.
