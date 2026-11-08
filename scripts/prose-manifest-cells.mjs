@@ -188,7 +188,11 @@ export const MANIFEST_PROVENANCE = Object.freeze({
     + ' are read from the memberships; 312 of the 1,050 rows move, 0 added, 0 removed.'
     + ' 2026-11-07 (PEOPLE-LAND SHIM OUT, RECORD 6 OF THE PEOPLE CAR’S LANDING, docs/shift-records/2026-11-07-people-'
     + 'land-shim-out.json, ODQ §934.105): re-recorded at the stage of 2981f23f6 because the pre-law office path ranks'
-    + ' the powers alone once the shim is out; 312 of the 1,050 rows move, 0 added, 0 removed.',
+    + ' the powers alone once the shim is out; 312 of the 1,050 rows move, 0 added, 0 removed.'
+    + ' 2026-11-08 (THE RUNG-2 LANDING’S MERGE OVER THE INTEGRATION BRANCH, RECORD A OF THE INTEGRATION LANDING, docs/'
+    + 'shift-records/2026-11-08-merge-car-a-rung2-composition.json, ODQ §934.105): re-recorded at the stage of 572c15018'
+    + ' (the composition commit of the merge 10b8f09b4, MERGE-R2) because the pool census composed moved the composed'
+    + ' prose of every town; against record 0b’s post-state 1,050 of the 1,050 rows move, 0 added, 0 removed.',
 });
 
 /** This surface's identity in tests/fixtures/.golden-freeze-register.json. */
