@@ -18,7 +18,7 @@
 
 | # | Volume premise | Live receipt (2026-08-04) | Verdict |
 |---|---|---|---|
-| S1 | Named-cast mercy: `pool = before − named`, `after = max(named, …)` | `demographicsKernel.js:282-297` — `const pool = Math.max(0, before - named)`; `const after = Math.max(named, before + births - deaths)`; `npcReplacement.js:329` `residentNamedNpcCount` | VERIFIED [CORRECTED 2026-10-16 (coherence fold) — the expression is now `Math.max(Math.min(named, before), …)` (demographicsKernel.js:313, CS-B2); see DESIGN_FP_POPULATIONS.md §1b.] |
+| S1 | [RE-BASED 2026-11-08 (FP-REBASE, seat FPR-CONSTITUTION; the fold §7 OD-FC-146) — the named-cast mercy is the owner's death law at the demographic grain: loss falls on the masses, never on a named card; POP casts no office, so the commission law (the fold §3.2.26) reaches no POP wave] Named-cast mercy: `pool = before − named`, `after = max(named, …)` | `demographicsKernel.js:282-297` — `const pool = Math.max(0, before - named)`; `const after = Math.max(named, before + births - deaths)`; `npcReplacement.js:329` `residentNamedNpcCount` | VERIFIED [CORRECTED 2026-10-16 (coherence fold) — the expression is now `Math.max(Math.min(named, before), …)` (demographicsKernel.js:313, CS-B2); see DESIGN_FP_POPULATIONS.md §1b.] |
 | S2 | migrationDebt deliberately not built | `demographicsKernel.js:49` (header comment, standing) | VERIFIED |
 | S3 | Herald mint site bypasses every governor | `demographicsKernel.js:402` `newsEntries: demographicNewsEntries({...})` — direct into the kernel result | VERIFIED (line survives at HEAD) [CORRECTED 2026-10-16 (coherence fold) — the mint is demographicsKernel.js:424 at 00b648c9d, and a feed-side governor now exists (CW-1, dark, display/cascadeBraid.js) — see POP-6.] |
 | S4 | Demographics mounts via the lifecycle host, not pulseKernel | `settlementLifecycleKernel.js:83` imports `advanceDemographics` (L1 mount law confirmed) | VERIFIED |
@@ -632,3 +632,4 @@ Seat FPR-CONSTITUTION, against `docs/chair/2026-11-08/FP-REBASE-CENSUS-2026-11-0
 
 - §1 S23 — the corruption input re-read through `allegianceOf` and the exposure record.
 - §4 POP-2 — the revealed-only pin through `allegianceOf`; the crowd is the masses.
+- §1 S1 — the named-cast mercy read as the death law; POP casts no commission (the chair's addition: the commission law).

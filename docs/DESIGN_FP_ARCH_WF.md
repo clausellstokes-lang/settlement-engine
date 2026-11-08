@@ -858,6 +858,19 @@ reusable surface (WF-5b), and warDeployment headroom at WF-7's build). Report,
 don't rule: any conflict between this layer, the volume, the spine, the
 amendments, or the tree is a STOP-and-report to the validation chair.
 
+## THE PERSON'S FAITH (owner directive 2026-11-08; DESIGN, dark)
+
+[RE-BASED 2026-11-08 (FP-REBASE, seat FPR-CONSTITUTION; the chair's addition of 2026-11-08) — this compile was settlement- and clergy-grain and gave no lay person a faith → a NEW section, DARK and UNSCHEDULED; `DESIGN_FP_FAITH.md` § THE PERSON'S FAITH is normative and this compile carries its build shape; the fold §7 OD-FC-147 is its owner row.] The owner, 2026-11-08 (~20:0x UTC), verbatim: "when faith is lit, each NPC takes a faith appropriate to them based on their occupation, personality, etc that is pooled from the and scaled (by number of NPC per patron) of the pantheon of the settlement at the time with an also alternative agnostic option as well. Their patron affects (similar to how we have core traits abd personalities that drift or mutate due to external effects) their personalities based on alignment and the personality of their god."
+
+- **THE FIELD.** `faith: { deity: <deityRef> | null, fervour }` on each named card (`null` = the agnostic; `fervour` a band word `lukewarm · steady · devout`) — a person-grain field beside the memberships and the allegiance (`DESIGN_FP_ARCHITECTURE.md` §4 THE CANONICAL PERSON MODEL); the town keeps `religionStates` and its devotion (unchanged).
+- **BIRTH (create).** One weighted draw per card on its own keyed fork `people-faith::<card id>`, from the settlement's pantheon AT THAT TIME, w = the deity's town share × the trade's domain affinity (institution family × domain) × the temperament fit (trait clusters × the god's personality and alignment); the agnostic floor rising in cosmopolitan or low-devotion towns; one receipt per card ("why this god"). A priest's faith is their temple's god, devout, NO ROLL.
+- **DRIFT (the tick).** The patron's pull enters the ONE drift writer — `src/domain/npc/livedExperienceFunnel.js :: foldLivedExperience` over `src/domain/npc/characterDrift.js`'s offsets (`setCharacterDrift`, `decayCharacterDrift`) — under HB's damping, scaled by fervour; never a write on the born traits; an agnostic has no drift. WF-1's unseating converts the lukewarm (a receipt each) and leaves the devout a minority sect.
+- **VEIL.** Public, except a forbidden cult's faith, veiled as a hidden power's membership is and dropped from every public payload; the `forbidden_patron` allegiance vector is that cult's home on the allegiance axis.
+- **CENSUS LAW.** Every line naming a person's god declares it (requirement 25) and is refused where the card's faith denies it.
+- **LIFECYCLE.** create — birth only (a deity added later moves no born card); read — the card; persist — the card; regenerate — re-drawn like a birth; undo — the pulse ring (the drift); migrate — a save without `faith` holds none until a migration deals it like a birth (a migration's act, the owner's persisted-shape gate); veil — above.
+- **BANDS (the 1,000).** Followers per patron against the town's shares; the agnostic share by tier; the drift bounded per season and per decade; the priest invariant at 100%.
+- **BUILD.** The birth draw a candidate car after the deploy; the drift after FPZ. Nothing dispatches.
+
 ---
 
 ## RE-BASED 2026-11-08 (FP-REBASE) — what moved in this volume
@@ -866,3 +879,4 @@ Seat FPR-CONSTITUTION, against `docs/chair/2026-11-08/FP-REBASE-CENSUS-2026-11-0
 
 - §1b V17 — clergy roles → the church's face is its priest.
 - §3 PERSIST — the JSON-alias clause retired.
+- § THE PERSON'S FAITH (owner directive 2026-11-08; DESIGN, dark) — its build shape and lifecycle (the chair's addition; the fold §7 OD-FC-147).

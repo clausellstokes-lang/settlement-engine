@@ -132,11 +132,11 @@ cross-program shorthand to its source document.
 
 ### 1c Recorded hazards that WILL bite these waves (each has bitten this estate)
 - **JSON-alias trap:** factors and house members ARE `npcs[]` objects in memory;
-  every roster-touching fixture JSON-round-trips.
+  every roster-touching fixture JSON-round-trips. [RE-BASED 2026-11-08 (FP-REBASE, seat FPR-CONSTITUTION; the census §2 row "TR") — presumed the NPC grouping → RETIRED with it; a factor is a card named by id; the fixtures round-trip as plain data]
 - **Faction-key/rename family [CORRECTED 2026-08-02 (fp-audit) — omitted at
   drafting; a recorded estate hazard this program walks straight into]:**
   archetype/name/membership reads go through `factionArchetype()`/`nameOf`/
-  `governingFactionOf`/`npcInFaction` ONLY, never hand-rolled; storing
+  `governingFactionOf`/`npcInFaction` ONLY, never hand-rolled [RE-BASED 2026-11-08 (FP-REBASE, seat FPR-CONSTITUTION; the census §2 row "TR") — `npcInFaction` was the grouping's roster helper → MEMBERSHIP reads go through the ONE READER MODULE (`DESIGN_FP_ARCHITECTURE.md` §1 L11: `membersOf`, `rankIn`); `factionArchetype()` and `governingFactionOf` stand as POWER-grain reads ("faction" read as "power", the fold §5)]; storing
   `.archetype` is FORBIDDEN. `factionArchetype()` resolves category-first and
   falls back to a NAME/description REGEX (factionArchetypes.js:85-96; the
   MERCHANT row at :63) — house eligibility is therefore RENAME-SENSITIVE while
@@ -577,7 +577,7 @@ and a faction at once.*
   toward the settlement's own prosperity band absent live interests.
 - **Belief posture:** every house motive reads BELIEVED bands (TR-3) — a house can
   be wrong, and its books pay for it.
-- **Casting (named-actor rule):** the FACTOR is cast per act by read-wiring —
+- **Casting (named-actor rule):** [RE-BASED 2026-11-08 (FP-REBASE, seat FPR-CONSTITUTION; the census §2 row "TR") — the factor was "the house faction's highest-ranked member" with a codepoint tie-break over the grouping (`houseLedger.js` reads `npc.factionAffiliation === house`, on the FPZ list) → THE FACTOR IS A COMMISSION (the fold §3.2.26, THE COMMISSION LAW, and `DESIGN_FP_ARCHITECTURE.md` §1 L12; the owner's law: "Only those in the craft and merchant can be envoys for trade relationships"): `commissionOf` draws it from the MERCHANT/CRAFT power the house backs by rank (`membersOf`, `rankIn`), or the house's LINKED FACE (the institution card's representative, the people car's R-P8), then the seat of power, then down the power ranking; BUSY (one person, one commission) and UNFILLED (a receipt, never a minted person) bind; a ruined factor is never killed (the fold §7 OD-FC-146)] the FACTOR is cast per act by read-wiring —
   deterministically the house faction's highest-ranked member scored by existing
   planes (temperament via W0/H3, goals, mercantile facets; codepoint tie-break),
   never stored, never new NPC state. Rivalries between factors of competing houses
@@ -1191,7 +1191,7 @@ prices in his head and the family's credit in his name.*
   transit kernel is WR-7a's; this program adds consumers, never a second kernel.
 - **Slice 2 — the compromised factor + the prize.** DECLARED vs TRUE purpose
   rides the covert seam (the Q amendment generalized — a factor traveling for
-  the house may truly travel for the corruption web's patron or a rival house:
+  the house may truly travel for the corruption web's patron or a rival house [RE-BASED 2026-11-08 (FP-REBASE, seat FPR-CONSTITUTION; the census §2 row "TR") — the "corruption web's patron" read the one corruption mark → the fold §3.2.23's TWO AXES: a patron abroad is ES's FOREIGN leash (`allegiance.leash`); a home-town hidden hand is the ALLEGIANCE (`allegianceOf`); the slice declares which]:
   terms tilted, the TRUE stock book handed over — treachery transmits what
   loyalty cannot). INTERCEPTION: a factor is a rich prize (term sheets + market
   intelligence — interception weights band above plain travelers); a captured
@@ -1470,3 +1470,13 @@ registry row (pairId, direction, read, receiptField, counterforce, flags,
 owningVolume, owningWave, intendedDesk) in the SAME commit — the coupling's
 owning wave is the TR wave whose Couplings bullet declares it, and the CW-0
 walker asserts the row; a cross-layer read with no registry row reds.
+
+---
+
+## RE-BASED 2026-11-08 (FP-REBASE) — what moved in this volume
+
+Seat FPR-CONSTITUTION (the chair's addition of 2026-11-08: this source volume was owned by no seat), against `docs/chair/2026-11-08/FP-REBASE-CENSUS-2026-11-08.md` §2 row "TR".
+
+- §1c the JSON-alias hazard retired; the faction-key family's `npcInFaction` re-pointed to the one reader module.
+- TR-2 Casting — the factor is a COMMISSION (the fold §3.2.26; the owner's commission law), from the merchant/craft power by rank or the house's linked face.
+- TR-8 slice 2 — the compromised factor on the two axes.

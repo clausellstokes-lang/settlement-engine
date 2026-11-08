@@ -36,6 +36,8 @@ this document wins, and under requirement 22 (b) "a bug to report" is not a disp
 ## volume carries ALL twelve or it is a defect; the audit stage hunts shallow
 ## spots wearing deep clothing)
 
+[RE-BASED 2026-11-08 (FP-REBASE, seat FPR-CONSTITUTION; the census §8 decision 6, §7, §9) — the constitution held requirements 1–24 → REQUIREMENT 25, THE CENSUS LAW BINDS TIME, and THE TIME LADDER are appended; their text of record is `DESIGN_FP_COHERENCE_FOLD.md` §1 (after requirement 24), as 15–24's is; this section's mirror is this pointer]
+
 Requirements 1–12 are the ratified core; 13 and 14 were added under the owner's full delegation; 15–24 were added by the coherence fold, whose §1 is their text of record. The owner's words stand verbatim; what was ruled under a requirement later follows it as a named paragraph.
 
 1. **THE HEURISTIC LAW (Law One, owner-dictated):** the engine models believers,
@@ -57,7 +59,7 @@ Requirements 1–12 are the ratified core; 13 and 14 were added under the owner'
 4. **THE NAMED-ACTOR RULE:** durable NPCs carry stories where persons beat
    systems — read through their EXISTING planes (powers, factions, temperament
    via W0/H3, flaws, rankings, goals, rivalries). Casting is read-wiring, never
-   new NPC state. Never-kill and never-resolve-fates hold absolutely.
+   new NPC state. Never-kill and never-resolve-fates hold absolutely. [RE-BASED 2026-11-08 (FP-REBASE, seat FPR-CONSTITUTION; the census §8 decision 6, §7, §9) — "factions" and "rankings" were the NPC grouping and its rungs → a person's planes are its MEMBERSHIPS (rank and share in a power, through the one reader module, `DESIGN_FP_ARCHITECTURE.md` §1 L11), its institution and title, its hidden ALLEGIANCE (`allegianceOf`), its keyed goal intent and, dark, its FAITH; an office it fills is a COMMISSION (the fold §3.2.26); NEVER-KILL is the owner's law of 2026-11-08 for every named NPC in every preset — no simulated death of a named person, death the DM's decree alone (the fold §7 OD-FC-146)]
 
    **NO ENGINE MORTALITY CLOCK for named persons** — THE OWNER'S OWN WORDS, verbatim (the fold's §7 OD-FC-69 · OD-FC-70): "in fantasy settings, there are longed lived or immortal species and characters. this allows the DM to decide" (2026-10-18 05:57) — lifespan is the DM's through species and character, death stays the DM's verdict, and the ages' thinness on heirs is by design; MEDIEVAL FOR MILLENNIA: "We're keeping this strictly to the medieval and in the fantasy setting these last for millennia's on end." (06:32) — no technological eras; the ages are long spans of the same world.
 
@@ -850,3 +852,12 @@ The build records — the commits, receipts and executed negative controls of th
 - **THERE ARE TWO PRESSURE LADDERS.** CAPACITY pressure's `OVERFLOW_BANDS` is the one capacity authority, exactly as ruled. The INTENSITY ladder `{quiet, present, pressing, decisive}` (± an `unknown` head) is declared in NINE files under EIGHT names — `negotiationPictures`, `conquestFeasibility`, `conquestIntent`, `envoyNegotiationPictureBuilder`, `conquestDoctrineStage`, `compromiseRound`, `envoyErrandVocabulary`, `warCosts`, `warTermination`; reusing one intensity vocabulary across nine subjects is good design, declaring it nine times is the per-volume-minting problem, so the set is FROZEN SHRINK-ONLY and all nine are pinned to spell the SAME rungs (the first copy to drift reds and names itself), and `pressed` (capacity) and `pressing` (intensity) are pinned disjoint. The consolidation is a war-surface edit across nine files and belongs to whoever owns that surface.
 - **ALIGNMENT LINE (requirement 13): DECLARED-EMPTY, WITH REASON.** Both leaves are pure vocabulary and shape: they read no world state, name no settlement, and colour no verb, so neither alignment axis is engaged in either direction; consumers that colour a verb by alignment do so in their own volumes. **EDIT VERB (requirement 14): ENGINE-ONLY, RECORDED.** These are authored constants under the owner's tuning signature (their §7 tuning rows), not player- or DM-editable state: a DM-set half-life or a DM-set significance scale would be a stored opinion the pacing governor and every instance would immediately fight; the DM's hand on them arrives through J-D12's era presets (SP-8), the owner's designed instrument for exactly this.
 - **THE SIGNIFICANCE MIGRATION IS SP-E's.** heraldFeed.js:120 (at `00b648c9d`) still mixes a banded `significance === 'major'` with a raw `severity >= 0.72` float, and every consumer still spells the classes inline; SP-A supplies the thing they migrate ONTO, SP-E lands the census that names the debt, and each surface migrates in its own small wave. THE FREQUENCY-CADENCE MAPPING is SP-E's §7 row: SP-E's floor walker derives a kind's variant floor from its own significance, so `bandFamilies.js` stops at the scale and its two shapes.
+
+---
+
+## RE-BASED 2026-11-08 (FP-REBASE) — what moved in this volume
+
+Seat FPR-CONSTITUTION (the chair's addition of 2026-11-08: this volume was owned by no seat), against `docs/chair/2026-11-08/FP-REBASE-CENSUS-2026-11-08.md` §7–§9.
+
+- §1 head — requirement 25 and THE TIME LADDER pointed to their text of record in the fold.
+- §1 requirement 4, THE NAMED-ACTOR RULE — a person's planes re-based (memberships, institution, allegiance, intent, faith); offices as commissions; never-kill as the owner's death law.

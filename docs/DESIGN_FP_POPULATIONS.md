@@ -138,7 +138,7 @@ pronounces death after a 104-tick dwell and rebirth after 52 fallow ticks (BUILT
   departures=0). Every POP headline carries an honesty pin: the sentence's verb
   is entailed by the receipt's counts.
 - **The JSON-alias trap** — factions[].members[] ARE npcs[] in memory; every
-  fixture that touches roster + ledger JSON-round-trips.
+  fixture that touches roster + ledger JSON-round-trips. [RE-BASED 2026-11-08 (FP-REBASE, seat FPR-CONSTITUTION; the census §2 row "POP (POP-2)") — presumed the grouping → RETIRED with it; the fixtures round-trip as plain data]
 - **The wizard-news id skew** [CORRECTED 2026-08-02 (fp-audit): added — the wave
   most likely to trip it had no warning] — commons beats carry ids of the form
   `wizard_news.${tick}.${rung}.${sid}` (commonsVoiceKernel.js:168), [CORRECTED 2026-10-16 (coherence fold) — now commonsVoiceKernel.js:197 at 00b648c9d (the escalation step :291; the kernel is 365 lines); navigate by symbol.] and every
@@ -550,10 +550,10 @@ simply refuses — with the Pilgrimage of Grace's petition-in-arms one rung up.*
   10's law applied to crowds). Ignoring compounds through the same three inputs.
 - **Belief posture (Law One):** the crowd acts on what it can see from the square —
   exposed corruption, felt scarcity, the levy notice — never on DM truth or covert
-  state. Covert corruption moves nothing until revealed (the covert/revealed seam
+  state. Covert corruption moves nothing until revealed [RE-BASED 2026-11-08 (FP-REBASE, seat FPR-CONSTITUTION; the census §2 row "POP (POP-2)") — the input read the local corruption mark (`corrupt`, `timesExposed`) → one read through `allegianceOf` and the allegiance's exposure record (`revealed`); THE REVEALED-ONLY PIN STANDS] (the covert/revealed seam
   already gates the kernel's corruption input — VERIFY-AT-BUILD that `exposed/
   seated` in the grievance read means revealed-only, and pin it either way).
-- **Named actors (req. 4):** the crowd stays nobody (law 1b). THE VOICE'S FACE is
+- **Named actors (req. 4):** [RE-BASED 2026-11-08 (FP-REBASE, seat FPR-CONSTITUTION; the census §2 row "POP (POP-2)") — the voice's face was read from "a resident NPC" over the grouping with a codepoint tie-break → it is read from the town's named CARDS (the people car's faces); it is NOT a COMMISSION (a speaker for the commons holds no office the court fills — the fold §3.2.26's boundary), so `commissionOf` does not cast it; the crowd itself is the masses (the fold §7 OD-FC-146), never a person record] the crowd stays nobody (law 1b). THE VOICE'S FACE is
   read-wired per episode: a resident NPC whose temperament (W0/H3), goals, or
   grudges match the grievance is NAMED AS SPEAKING — "Marta the miller spoke for
   the commons of Thornwall" — reads only, no new state, fate never resolved, and
@@ -1404,3 +1404,13 @@ its receipt (the R-28 class, never again).
    report on any conflict between this volume, the spine, the surveys' cited
    lines, and the tree. Every completion claim CONFIRMED (executed, quoted) or
    PLAUSIBLE (labeled).
+
+---
+
+## RE-BASED 2026-11-08 (FP-REBASE) — what moved in this volume
+
+Seat FPR-CONSTITUTION (the chair's addition of 2026-11-08: this source volume was owned by no seat), against `docs/chair/2026-11-08/FP-REBASE-CENSUS-2026-11-08.md` §2 row "POP (POP-2)".
+
+- §1c the JSON-alias hazard retired.
+- POP-2 belief posture — the revealed-only pin through `allegianceOf`.
+- POP-2 named actors — the voice's face read from the named cards; not a commission (the fold §3.2.26); the crowd the masses.
