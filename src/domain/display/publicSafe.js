@@ -291,6 +291,107 @@ function publicCard(npc) {
   return out;
 }
 
+// ── THE ROOT PASS (206 twin, the chair's second-seat ruling of 2026-11-08) ──────
+// A hidden power's own row (`powerStructure.factions[]` stamped `hidden: true` — the stress
+// infiltrator) is not public, and nor is its NAME anywhere else in the public JSON; and a
+// veiled face's title does not ride its ties (`relationships[].npc1Role` for the `from`
+// end, `npc2Role` for the `to` end). One pass over the projected output, with two sets read
+// from the ORIGINAL record: each power row's own stamped `hidden`, each card's own bit.
+// The stress TYPE stays ("Military status: infiltrated", W2 §F7). Character for character
+// the SQL's root branch in _gallery_sanitize_public_json (206); the mask phrase is pinned.
+export const HIDDEN_POWER_MASK = 'an unseen interest';
+
+/** @param {unknown} v @returns {unknown[]} */
+const arrayOf = (v) => (Array.isArray(v) ? v : []);
+
+/**
+ * The names of the record's hidden powers (each row's `faction`), from its own stamp.
+ * @param {Record<string, unknown>} settlement @returns {string[]}
+ */
+function hiddenPowerNamesOf(settlement) {
+  const ps = settlement.powerStructure;
+  const rows = ps && typeof ps === 'object' ? arrayOf(/** @type {Record<string, unknown>} */ (ps).factions) : [];
+  const names = new Set();
+  for (const row of rows) {
+    if (!row || typeof row !== 'object' || Array.isArray(row)) continue;
+    const power = /** @type {Record<string, unknown>} */ (row);
+    if (power.hidden !== true) continue;
+    if (typeof power.faction === 'string' && power.faction) names.add(power.faction);
+  }
+  return [...names];
+}
+
+/**
+ * The ids of the record's veiled faces: a house record stamped true or not stamped.
+ * @param {Record<string, unknown>} settlement @returns {string[]}
+ */
+function veiledCardIdsOf(settlement) {
+  return arrayOf(settlement.npcs)
+    .filter((card) => cardInstitutionVeilOf(card) === 'veiled')
+    .map((card) => /** @type {Record<string, unknown>} */ (card).id)
+    .filter((id) => typeof id === 'string' && id !== '')
+    .map(String);
+}
+
+/** @param {string} text @param {string[]} names @returns {string} */
+const maskText = (text, names) => names.reduce((t, name) => t.split(name).join(HIDDEN_POWER_MASK), text);
+
+/**
+ * Every string — value AND key, as the SQL's text-level replace reaches both — with each hidden
+ * name masked.
+ * @param {unknown} value @param {string[]} names @returns {unknown}
+ */
+function maskHiddenNames(value, names) {
+  if (typeof value === 'string') return maskText(value, names);
+  if (Array.isArray(value)) return value.map((v) => maskHiddenNames(v, names));
+  if (value && typeof value === 'object') {
+    /** @type {Record<string, unknown>} */
+    const out = {};
+    for (const [k, v] of Object.entries(value)) out[maskText(k, names)] = maskHiddenNames(v, names);
+    return out;
+  }
+  return value;
+}
+
+/**
+ * The root pass over a projected settlement (206 twin).
+ * @param {Record<string, any>} pub @param {string[]} hiddenNames @param {string[]} veiledIds
+ * @returns {Record<string, any>}
+ */
+function publicVeilPass(pub, hiddenNames, veiledIds) {
+  const veiled = new Set(veiledIds);
+  if (veiled.size && Array.isArray(pub.relationships)) {
+    pub.relationships = pub.relationships.map((tie) => {
+      if (!tie || typeof tie !== 'object' || Array.isArray(tie)) return tie;
+      const out = { ...tie };
+      if (veiled.has(String(out.from))) delete out.npc1Role;
+      if (veiled.has(String(out.to))) delete out.npc2Role;
+      return out;
+    });
+  }
+  if (!hiddenNames.length) return pub;
+  const hidden = new Set(hiddenNames);
+  const isRow = (v) => !!v && typeof v === 'object' && !Array.isArray(v);
+  const ps = pub.powerStructure;
+  if (isRow(ps) && Array.isArray(ps.factions)) {
+    ps.factions = ps.factions.filter((f) => !(isRow(f) && (f.hidden === true || hidden.has(f.faction))));
+  }
+  /** @param {unknown} list */
+  const dropConflicts = (list) => list.filter((c) => !(isRow(c) && Array.isArray(c.parties) && c.parties.some((p) => hidden.has(p))));
+  if (Array.isArray(pub.conflicts)) pub.conflicts = dropConflicts(pub.conflicts);
+  if (isRow(ps) && Array.isArray(ps.conflicts)) ps.conflicts = dropConflicts(ps.conflicts);
+  /** @param {unknown} entry */
+  const dropStakes = (entry) => {
+    if (!(isRow(entry) && isRow(entry.cast) && Array.isArray(entry.cast.stakes))) return entry;
+    return { ...entry, cast: { ...entry.cast, stakes: entry.cast.stakes.filter((st) => !(isRow(st) && hidden.has(st.factionId))) } };
+  };
+  for (const key of ['stress', 'stressors']) {
+    if (Array.isArray(pub[key])) pub[key] = pub[key].map(dropStakes);
+    else if (isRow(pub[key])) pub[key] = dropStakes(pub[key]);
+  }
+  return /** @type {Record<string, any>} */ (maskHiddenNames(pub, hiddenNames));
+}
+
 /**
  * Project a settlement to its public-safe form. Strips the recursive denylist,
  * drops top-level DM blocks explicitly, and reduces NPCs to a public allowlist
@@ -454,7 +555,7 @@ export function toPublicSafe(settlement, { full = false, memberOverrides = null 
   if (Array.isArray(clean.npcs)) {
     clean.npcs = clean.npcs.map(publicCard).filter(npc => npc.name || npc.role);
   }
-  result = clean;
+  result = publicVeilPass(clean, hiddenPowerNamesOf(src), veiledCardIdsOf(src));
   }
 
   // Per-member overrides: a member with no override follows the settlement `full`

@@ -72,6 +72,27 @@
 --   role project publicly again and no face's institution or memberships do, as at 205.
 -- ════════════════════════════════════════════════════════════════════════════
 
+-- ════════════════════════════════════════════════════════════════════════════
+-- 206 (SECOND SEAT) — THE HIDDEN POWER AND A VEILED FACE'S TIES, at the ROOT
+-- ════════════════════════════════════════════════════════════════════════════
+-- The chair's ruling (2026-11-08, the second seat): a hidden power's own row
+-- (`powerStructure.factions[]` stamped `hidden: true` — the stress infiltrator, "Its
+-- presence is not known to the settlement") must not be public, and nor may its NAME
+-- anywhere else in the public JSON. MEASURED over the 525 and the soak 1,000 (the
+-- record, docs/FIX_PUBLIC_VEIL_2026-11-07.md §12): the name rides the row itself, the
+-- crisis cast's `stakes[].factionId` (both stress containers, object or array), the
+-- conflicts naming it (`conflicts[]`, `powerStructure.conflicts[]`: parties and desc),
+-- a niche contest (`contestsNiche`, on a second hidden row: it leaves with its row), and
+-- once another power's `desc` (masked). And a veiled
+-- face's TITLE rides its ties: `relationships[].npc1Role` (the `from` end) and
+-- `npc2Role` (the `to` end). The stress TYPE stays public ("Military status:
+-- infiltrated", W2 §F7): the power's identity is what is withheld.
+-- The pass runs ONCE, at the root, over the sanitized output, with two sets read from
+-- the ORIGINAL record: the hidden powers' names (each row's own stamped `hidden`, never
+-- re-derived) and the veiled faces' ids (each card's own bit, by the house-record test
+-- below). It lives INSIDE this one function (no helper), so every caller and every
+-- extraction of the net-current body gets it. Mirrors publicSafe.js :: publicVeilPass.
+
 create or replace function public._gallery_sanitize_public_json(value jsonb, path text[] default '{}')
 returns jsonb
 language plpgsql
@@ -88,6 +109,10 @@ declare
   -- 206: the card's veil bit, read once per NPC object
   house_is_object boolean;
   house_is_public boolean;
+  -- 206 (second seat): the root pass's two sets, read from the ORIGINAL record
+  hidden_names text[];
+  veiled_ids text[];
+  txt text;
   -- ══ PUBLIC TOP-LEVEL ALLOWLIST ══
   -- Character-identical (order-independent) to publicSafe.js PUBLIC_TOPLEVEL_KEYS.
   -- tests/security/gallerySanitizeAllowlist.contract.test.js parses the NET-CURRENT
@@ -212,6 +237,88 @@ begin
         out := out || jsonb_build_object(key, sanitized);
       end if;
     end loop;
+    -- 206 (second seat): THE ROOT PASS. The hidden powers' names (each row's own stamped
+    -- `hidden`) and the veiled faces' ids (each card's own bit, by the house-record test
+    -- above, stamped true or absent), from the ORIGINAL record.
+    if is_toplevel then
+      select coalesce(array_agg(distinct nm), '{}') into hidden_names
+        from jsonb_array_elements(case when jsonb_typeof(value -> 'powerStructure' -> 'factions') = 'array'
+                                       then value -> 'powerStructure' -> 'factions' else '[]'::jsonb end) as f(row)
+             cross join lateral (values (row ->> 'faction')) as n(nm)
+       where jsonb_typeof(row) = 'object' and (row -> 'hidden') = 'true'::jsonb
+         and nm is not null and nm <> '';
+      select coalesce(array_agg(n ->> 'id'), '{}') into veiled_ids
+        from jsonb_array_elements(case when jsonb_typeof(value -> 'npcs') = 'array'
+                                       then value -> 'npcs' else '[]'::jsonb end) as t(n)
+       where jsonb_typeof(n) = 'object'
+         and (n ->> 'id') is not null
+         and jsonb_typeof(n -> 'institution') = 'object'
+         and (n -> 'institution' ->> 'kind') in ('house', 'power')
+         and coalesce(nullif(n -> 'institution' ->> 'key', ''), nullif(n -> 'institution' ->> 'name', '')) is not null
+         and not coalesce((n -> 'institution' -> 'veiled') = 'false'::jsonb, false);
+      -- a veiled face's title by its ties: the `from` end's npc1Role, the `to` end's npc2Role
+      if coalesce(array_length(veiled_ids, 1), 0) > 0 and jsonb_typeof(out -> 'relationships') = 'array' then
+        out := jsonb_set(out, '{relationships}', (
+          select coalesce(jsonb_agg(
+                   case when jsonb_typeof(r) = 'object' then
+                     (case when coalesce((r ->> 'from') = any(veiled_ids), false) then r - 'npc1Role' else r end)
+                     - (case when coalesce((r ->> 'to') = any(veiled_ids), false) then 'npc2Role' else '' end)
+                   else r end
+                   order by ord), '[]'::jsonb)
+            from jsonb_array_elements(out -> 'relationships') with ordinality as t(r, ord)));
+      end if;
+      if coalesce(array_length(hidden_names, 1), 0) > 0 then
+        -- the hidden power's own row leaves the powers (another row naming it — a niche contest, a
+        -- description — keeps its key and has the name masked below)
+        if jsonb_typeof(out -> 'powerStructure' -> 'factions') = 'array' then
+          out := jsonb_set(out, '{powerStructure,factions}', (
+            select coalesce(jsonb_agg(f order by ord), '[]'::jsonb)
+              from jsonb_array_elements(out -> 'powerStructure' -> 'factions') with ordinality as t(f, ord)
+             where not coalesce(jsonb_typeof(f) = 'object'
+                        and (coalesce((f -> 'hidden') = 'true'::jsonb, false)
+                             or coalesce((f ->> 'faction') = any(hidden_names), false)), false)));
+        end if;
+        -- every conflict whose parties name a hidden power, at both homes
+        foreach key in array array['conflicts', 'powerStructure.conflicts'] loop
+          if jsonb_typeof(out #> string_to_array(key, '.')) = 'array' then
+            out := jsonb_set(out, string_to_array(key, '.'), (
+              select coalesce(jsonb_agg(c order by ord), '[]'::jsonb)
+                from jsonb_array_elements(out #> string_to_array(key, '.')) with ordinality as t(c, ord)
+               where not coalesce(jsonb_typeof(c) = 'object'
+                          and jsonb_typeof(c -> 'parties') = 'array'
+                          and exists (select 1 from jsonb_array_elements_text(c -> 'parties') as p(party)
+                                       where p.party = any(hidden_names)), false)));
+          end if;
+        end loop;
+        -- the crisis cast's stakes naming a hidden power, at both stress homes (one entry, or an array)
+        foreach key in array array['stress', 'stressors'] loop
+          if jsonb_typeof(out -> key) = 'object' and jsonb_typeof(out -> key -> 'cast' -> 'stakes') = 'array' then
+            out := jsonb_set(out, array[key, 'cast', 'stakes'], (
+              select coalesce(jsonb_agg(st order by ord), '[]'::jsonb)
+                from jsonb_array_elements(out -> key -> 'cast' -> 'stakes') with ordinality as t(st, ord)
+               where not coalesce(jsonb_typeof(st) = 'object' and (st ->> 'factionId') = any(hidden_names), false)));
+          elsif jsonb_typeof(out -> key) = 'array' then
+            out := jsonb_set(out, array[key], (
+              select coalesce(jsonb_agg(
+                       case when jsonb_typeof(e) = 'object' and jsonb_typeof(e -> 'cast' -> 'stakes') = 'array' then
+                         jsonb_set(e, '{cast,stakes}', (
+                           select coalesce(jsonb_agg(st order by so), '[]'::jsonb)
+                             from jsonb_array_elements(e -> 'cast' -> 'stakes') with ordinality as s2(st, so)
+                            where not coalesce(jsonb_typeof(st) = 'object' and (st ->> 'factionId') = any(hidden_names), false)))
+                       else e end
+                       order by eo), '[]'::jsonb)
+                from jsonb_array_elements(out -> key) with ordinality as t(e, eo)));
+          end if;
+        end loop;
+        -- last: the name anywhere else a public string (a value, or a key) carries it, masked. The search string is
+        -- the name's JSON-escaped body (to_jsonb(name) without its quotes), so the replacement
+        -- happens only inside string text and the result is valid JSON by construction (the
+        -- replacement holds no character JSON escapes).
+        foreach txt in array hidden_names loop
+          out := replace(out::text, substr(to_jsonb(txt)::text, 2, length(to_jsonb(txt)::text) - 2), 'an unseen interest')::jsonb;
+        end loop;
+      end if;
+    end if;
     return out;
   end if;
 

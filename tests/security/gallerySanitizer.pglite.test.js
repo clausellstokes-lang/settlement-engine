@@ -432,3 +432,93 @@ describe('206 — the card\'s veil bit: a face\'s house is public only where vei
     expect(server.npcs.find((n) => n.id === INFILTRATOR.id).name).toBe('Wendel Ashby');
   });
 });
+
+// ── 206, SECOND SEAT: THE HIDDEN POWER AND A VEILED FACE'S TIES (the chair's ruling of 2026-11-08) ──
+// A hidden power's own row and its NAME leave the public JSON (the row, the crisis cast's stakes, the
+// conflicts naming it, another row's niche contest, any other string, masked); the stress TYPE stays.
+// A veiled face's title leaves its ties (npc1Role for the `from` end, npc2Role for the `to` end).
+describe('206 (second seat) — the hidden power is not public, and a veiled face\'s ties carry no title (pglite)', () => {
+  let hdb;
+  const sanitizeH = async (obj) =>
+    (await hdb.query(`select public._gallery_sanitize_public_json($1::jsonb) as out`, [JSON.stringify(obj)])).rows[0].out;
+  const HIDDEN = 'The Quiet Hand';
+  const VEILED_MINT = { id: 'npc_power_the_quiet_hand', name: 'Wendel Ashby', title: 'the bloc\'s speaker', role: 'the bloc\'s speaker',
+    institution: { kind: 'power', key: HIDDEN, family: null, title: 'the bloc\'s speaker', veiled: true },
+    memberships: [{ power: HIDDEN, rank: 1, share: 1, veiled: true }] };
+  const SEAT = { id: 'npc_seat', name: 'Oda Hoffmann', title: 'the eldest', role: 'the eldest',
+    institution: { kind: 'power', key: 'Elder Council', family: null, title: 'the eldest', veiled: false },
+    memberships: [{ power: 'Elder Council', rank: 1, share: 1, veiled: false }] };
+  const RECORD = {
+    name: 'Riverbend',
+    npcs: [SEAT, VEILED_MINT],
+    relationships: [{ id: 'tie_npc_seat', from: 'npc_seat', to: 'npc_power_the_quiet_hand', npc1Role: 'the eldest', npc2Role: 'the bloc\'s speaker', npc1Name: 'Oda Hoffmann', npc2Name: 'Wendel Ashby' },
+      { id: 'tie_npc_power_the_quiet_hand', from: 'npc_power_the_quiet_hand', to: 'npc_seat', npc1Role: 'the bloc\'s speaker', npc2Role: 'the eldest' }],
+    powerStructure: {
+      factions: [
+        { faction: 'Elder Council', power: 40, isGoverning: true, desc: 'The old families. They play The Quiet Hand and the Guilds against each other.' },
+        { faction: HIDDEN, name: HIDDEN, power: 15, category: 'other', hidden: true, desc: 'An external interest with embedded assets in at least two factions. Its presence is not known to the settlement.' },
+        { faction: 'The Free Alliance', name: 'The Free Alliance', power: 8, hidden: true, contestsNiche: HIDDEN },
+        { faction: 'Merchant Guilds', power: 30, contestsNiche: HIDDEN },
+      ],
+      conflicts: [{ parties: [HIDDEN, 'Elder Council'], issue: 'x', desc: 'The Quiet Hand and Elder Council are in conflict.' },
+        { parties: ['Elder Council', 'Merchant Guilds'], issue: 'tolls', desc: 'Elder Council and Merchant Guilds dispute the tolls.' }],
+    },
+    conflicts: [{ parties: [HIDDEN, 'Elder Council'], issue: 'x', desc: 'The Quiet Hand and Elder Council are in conflict.' }],
+    stress: { type: 'infiltrated', label: 'Infiltrated', cast: { stakes: [{ factionId: HIDDEN, stake: 'split' }, { factionId: 'Elder Council', stake: 'loses' }], roles: [] } },
+    stressors: [{ type: 'infiltrated', cast: { stakes: [{ factionId: HIDDEN, stake: 'split' }] } }],
+  };
+
+  beforeAll(async () => {
+    hdb = new PGlite();
+    await hdb.exec('create schema if not exists public;');
+    await hdb.exec(SANITIZER.sql);
+  }, PGLITE_BOOT_TIMEOUT_MS);
+
+  it('the hidden power\'s name appears nowhere in the sanitized JSON; the stress type stays', async () => {
+    const out = await sanitizeH(RECORD);
+    const text = JSON.stringify(out);
+    expect(text).not.toContain(HIDDEN);
+    expect(text).not.toContain('The Free Alliance'); // the second hidden row goes too
+    expect(text).not.toContain('Its presence is not known');
+    // anchored: the open powers, the open conflict and the stress type are all still there
+    expect(out.powerStructure.factions.map((f) => f.faction)).toEqual(['Elder Council', 'Merchant Guilds']);
+    expect(out.powerStructure.conflicts.map((c) => c.issue)).toEqual(['tolls']);
+    expect(out.conflicts).toEqual([]);
+    expect(out.stress.type).toBe('infiltrated');
+    expect(out.stress.cast.stakes).toEqual([{ factionId: 'Elder Council', stake: 'loses' }]);
+    expect(out.stressors[0].cast.stakes).toEqual([]);
+    expect(out.powerStructure.factions[1].contestsNiche).toBe('an unseen interest'); // another row naming it: masked
+    expect(out.powerStructure.factions[0].desc).toBe('The old families. They play an unseen interest and the Guilds against each other.');
+  });
+
+  it('a veiled face\'s ties carry no title at either end; an open end keeps its role; the tie still resolves', async () => {
+    const out = await sanitizeH(RECORD);
+    const [a, b] = out.relationships;
+    expect(a.npc1Role).toBe('the eldest');
+    expect('npc2Role' in a).toBe(false);
+    expect('npc1Role' in b).toBe(false);
+    expect(b.npc2Role).toBe('the eldest');
+    const ids = new Set(out.npcs.map((n) => n.id));
+    for (const tie of out.relationships) { expect(ids.has(tie.from)).toBe(true); expect(ids.has(tie.to)).toBe(true); }
+    expect(JSON.stringify(out)).not.toContain('bloc\'s speaker');
+  });
+
+  it('client == server on the fixture and on real generated towns with an infiltrator', async () => {
+    const { toPublicSafe } = await import('../../src/domain/display/publicSafe.js');
+    const { generateSettlementPipeline } = await import('../../src/generators/generateSettlementPipeline.js');
+    const records = [RECORD];
+    for (const seed of ['veil-a', 'veil-b', 'veil-c']) {
+      records.push(generateSettlementPipeline({ settType: 'city', culture: 'germanic', stressTypes: ['infiltrated'] }, null, { seed, customContent: {} }));
+    }
+    let hiddenSeen = 0;
+    for (const rec of records) {
+      const hidden = (rec.powerStructure?.factions || []).filter((f) => f.hidden === true).map((f) => f.faction);
+      hiddenSeen += hidden.length;
+      const server = await sanitizeH(rec);
+      const client = JSON.parse(JSON.stringify(toPublicSafe(rec)));
+      expect(client).toEqual(server);
+      for (const name of hidden) expect(JSON.stringify(server)).not.toContain(name);
+    }
+    expect(hiddenSeen, 'anchored: the generated towns carry a hidden power').toBeGreaterThanOrEqual(4);
+  }, 120_000);
+});
