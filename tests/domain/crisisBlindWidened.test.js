@@ -91,7 +91,7 @@ describe('rung 2D · the crisis-blind instrument reads the twelve sampled rows',
   });
 
   it('soak1k-2402: the one-earner line that says nothing is failing, under famine', () => {
-    expect(readOn(2402, (s) => leafLine(DOSSIER_STATE_PROSE_ECONOMY, 'one earner.', s.name).split(/(?<=\.)\s+/)[1])).toEqual([['nothing is failing', 'hunger']]);
+    expect(readOn(2402, (s) => leafLine(DOSSIER_STATE_PROSE_ECONOMY, 'on one trade.', s.name) /* W1 ECO (2026-11-07): the line reworded under the owner's style law, its claim and regex moved with it */.split(/(?<=\.)\s+/)[1])).toEqual([['nothing is failing', 'hunger']]);
   });
 
   it('soak1k-5404: pilgrims queue patiently in a besieged city', () => {
@@ -117,7 +117,7 @@ describe('rung 2D · the crisis-blind instrument reads the twelve sampled rows',
   });
 
   it('soak1k-5402: the line that no one export matters, under a famine that took the herds', () => {
-    expect(readOn(5402, (s) => leafLine(DOSSIER_STATE_PROSE_ECONOMY, 'things outward', s.name).split(/(?<=\.)\s+/)[0])).toEqual([['depends on none alone', 'hunger']]);
+    expect(readOn(5402, (s) => leafLine(DOSSIER_STATE_PROSE_ECONOMY, 'different goods', s.name) /* W1 ECO (2026-11-07): the line reworded under the owner's style law, its claim and regex moved with it */.split(/(?<=\.)\s+/)[0])).toEqual([['depends on none alone', 'hunger']]);
   });
 
   it('soak1k-1803 (no crisis, the control): the same want reads nothing', () => {

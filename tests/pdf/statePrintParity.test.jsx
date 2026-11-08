@@ -265,10 +265,16 @@ function screenProse(s, faithUnlocked = false) {
     [magicWorksAt({ settlement: s }) === false ? null : defenseMagicDependencyProse(s, o).arcaneReliance]));
 
   set('economics.prosperityHeader', screenParagraph(s, 'economics.prosperityHeader', [eco.prosperityHeader]));
-  set('economics.foodSecurity', screenParagraph(s, 'economics.foodSecurity', [eco.foodSecurityRung]));
+  // W1 ECO construction (2026-11-07): each economy position carries the lenses the tab draws at
+  // it, in the tab's order (EconomicsTab.jsx's DeskLines at each mount); re-stated here from the
+  // screen, never from the builder (W1 ECO second seat: this arm reddened at 725b62eb5).
+  set('economics.foodSecurity', screenParagraph(s, 'economics.foodSecurity',
+    [eco.foodSecurityRung, eco.famineSource, eco.foodMeans, eco.foodSources]));
   set('economics.commercialProfile', screenParagraph(s, 'economics.commercialProfile',
-    [eco.incomeMix, eco.criminalLine])); // T2-4: the trade-profile lens cut on screen
-  set('economics.shadowEconomy', screenParagraph(s, 'economics.shadowEconomy', [eco.shadowEconomy]));
+    [eco.incomeMix, eco.criminalLine, eco.incomeWeight, eco.criticalImport])); // T2-4: the trade-profile lens cut on screen
+  set('economics.shadowEconomy', screenParagraph(s, 'economics.shadowEconomy',
+    [eco.shadowEconomy, eco.arcaneMarket, eco.theocraticEconomy, eco.hiddenHouse]));
+  set('economics.upstreamSupply', screenParagraph(s, 'economics.upstreamSupply', [eco.upstreamWeak]));
   set('economics.tradeFlow', screenParagraph(s, 'economics.tradeFlow', [eco.tradeFlow]));
   set('economics.exportPosture', screenParagraph(s, 'economics.exportPosture', [eco.exportPosture]));
   set('economics.craftReason', screenWeave(s, [general.economics.craftReasonLine]));
@@ -278,7 +284,8 @@ function screenProse(s, faithUnlocked = false) {
     // screen's strategic-value lens REPLACES the generator line; print keeps the DM-editable
     // generator line (ResourcesProduction's STRATEGIC VALUE callout) instead, so the printed
     // position carries the exploitation lens alone. One strategic-value sentence either way.
-    ['exploitation'].map((k) => eco[k])));
+    // W1 ECO construction: the resource-condition lens the tab draws after it (ResourcesTab.jsx).
+    ['exploitation', 'resourceCondition'].map((k) => eco[k])));
   // DS-SUP-3. Since 2026-09-19 the screen renders the catalog lens at the position and the
   // IMPAIRED-HOUSE lens under that house's own service row (the owner's order; the
   // `defense.threatAssessment` idiom). Print has no rows to join to, so the position is one
@@ -288,7 +295,8 @@ function screenProse(s, faithUnlocked = false) {
   // the catalog lens to NEITHER surface on a complete catalog (economyStateProse.js).
   set('services.catalogStanding', screenParagraph(s, 'services.catalogStanding',
     [eco.catalogStanding, eco.impairedService]));
-  set('daily_life.standingOfLiving', screenParagraph(s, 'daily_life.standingOfLiving', [eco.prosperityRung]));
+  set('daily_life.standingOfLiving', screenParagraph(s, 'daily_life.standingOfLiving',
+    [eco.prosperityRung, eco.foodOnProsperity])); // W1 ECO construction: DailyLifeTab.jsx's second DeskLines
 
   set('history.identity', screenWeave(s, general.history.identityLines));
   set('history.founded', screenWeave(s, [general.history.foundedLine, general.history.recordLine]));

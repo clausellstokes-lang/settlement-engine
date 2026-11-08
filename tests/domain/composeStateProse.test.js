@@ -170,13 +170,13 @@ describe('the composer — the corpus loads, and the merge is legal', () => {
   it('every block lives in exactly one leaf, and the sweep found the whole corpus', () => {
     expect(BLOCK_COLLISIONS, 'a block id emitted by two leaves').toEqual([]);
     expect(Object.keys(CORPUS).length, 'blocks').toBe(68);
-    expect(SHIPPED_POOLS.length, 'pools').toBe(709);
+    expect(SHIPPED_POOLS.length, 'pools').toBe(735); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted).
     // 2310 -> 2342, by cause (each measured on the six leaves, parent -> commit, 709 pools throughout):
     // F12 unit 2 (e19e3e4cf) 2310 -> 2323; census-2b item 5 (70d05b25b) +4; census-5 unit 2
     // (06b59812f) +1; census-3c unit 4 DS-ECO (e3295d168) +10; census-5b unit 3 (c00b30eb6) +4.
     // 2342 -> 2343 at LANDING-R2 helper G (the chair's §934.105 ruling (1): DS-GEN-17 PROVISIONED v3, the hospital-only line) +1.
     // 2343 -> 2344 at LANDING-R2 helper G2 (the chair's 06:5x DS-CND-1 boom line (ODQ §934.105, ruling (2)): ARCHETYPE: boom v4 `[street · crisis: any]`) +1.
-    expect(SHIPPED_POOLS.reduce((n, row) => n + row.pool.length, 0), 'variants').toBe(2344);
+    expect(SHIPPED_POOLS.reduce((n, row) => n + row.pool.length, 0), 'variants').toBe(2421); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted).
   });
 });
 
@@ -222,7 +222,7 @@ describe('⭐ THE SEAM COMPOSES TO THE KERNEL — an empty candidate list moves 
     expect(drift.slice(0, 10), 'a pool where the composer and the kernel disagree').toEqual([]);
     expect(drift.length).toBe(0);
     // ANTI-VACUITY: an equality over an empty sweep is free.
-    expect(checks).toBe(709 * 2 * SWEEP_SEEDS.length);
+    expect(checks).toBe(735 * 2 * SWEEP_SEEDS.length); // W1 ECO construction (2026-11-07): 26 new pools.
     expect(composed, 'and most of the sweep really did compose a unit').toBeGreaterThan(6000);
   });
 
@@ -394,7 +394,7 @@ describe('⭐ THE BASE-SIDE SYNTHESIS — every recorded cell, against the compo
       }
     }
     expect(drift.slice(0, 5), 'a pool where an unseeded read is not the canonical one').toEqual([]);
-    expect(pools).toBe(709);
+    expect(pools).toBe(735); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted).
   });
 });
 

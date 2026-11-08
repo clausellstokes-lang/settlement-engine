@@ -315,8 +315,8 @@ describe('the corpus loaders — fail-closed, and counted against the probe', ()
     // c00b30eb6 +4); the causal leaf and the 787 pools unchanged. 2810 -> 2811 at
     // LANDING-R2 helper G (the chair's §934.105 ruling (1): DS-GEN-17 PROVISIONED v3, the hospital-only line) +1.
     // 2811 -> 2812 at LANDING-R2 helper G2 (the chair's 06:5x DS-CND-1 boom line (ODQ §934.105, ruling (2)): ARCHETYPE: boom v4 `[street · crisis: any]`) +1.
-    expect(leaves.length + causal.length).toBe(2812);
-    expect(new Set([...leaves, ...causal].map((e) => e.poolId)).size).toBe(787);
+    expect(leaves.length + causal.length).toBe(2889); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted).
+    expect(new Set([...leaves, ...causal].map((e) => e.poolId)).size).toBe(813); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted).
     expect(new Set(leaves.map((e) => e.block)).size).toBe(68);
     expect(crier.length).toBeGreaterThan(300);
     expect(generator.length).toBeGreaterThan(0);
@@ -331,13 +331,13 @@ describe('the corpus loaders — fail-closed, and counted against the probe', ()
     // (6dd3f9766, the {colour} rulings) +21 rows whose text now joins its twin. 0 unjoined.
     // 2121 -> 2122 at LANDING-R2 helper G (the chair's §934.105 ruling (1): DS-GEN-17 PROVISIONED v3, the hospital-only line) +1.
     // 2122 -> 2123 at LANDING-R2 helper G2 (the chair's 06:5x DS-CND-1 boom line (ODQ §934.105, ruling (2)): ARCHETYPE: boom v4 `[street · crisis: any]`) +1.
-    expect(joined.length).toBe(2123);
+    expect(joined.length).toBe(2200); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted).
     expect(unjoined).toEqual([]);
     // The compact-row grammar (a whole pool on one bullet line, 225 variants) carries no
     // per-row address, so not every leaf variant has an annex line. That gap is the ADDRESS
     // reader's, is declared, and is why the pool grammar stays with the projection.
     expect(leafLines.size).toBeLessThan(leaves.length);
-    expect(leafLines.size).toBe(2123); // 2121 -> 2122 at the same cause: the new line is addressed; 2122 -> 2123 at G2's boom v4, likewise
+    expect(leafLines.size).toBe(2200); // 2121 -> 2122 at the same cause: the new line is addressed; 2122 -> 2123 at G2's boom v4, likewise // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted).
   });
 });
 
@@ -359,7 +359,7 @@ describe('the composed-fill resolver — measured against an orthogonal witness'
     // composer's slot bag from source and asking which blocks no bag serves. They agree
     // exactly. If the resolver ever goes dark it will disagree, loudly.
     expect(noBag.slice().sort()).toEqual([...UNMOUNTED_BLOCKS].sort());
-    expect(noBag.length).toBe(15);
+    expect(noBag.length).toBe(14); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted).
   });
 
   it('reads the three bags the reconciliation measured by hand', () => {
@@ -423,8 +423,10 @@ describe('THE ANTI-VACUITY GUARD — the walker must fail on the corpus it ships
       // 5298 -> 5325, re-addressed by its text ("the same trades exempt"): the census lanes' annex
       // edits above it moved the row 27 lines (it now carries its census tag slot too). 5325 -> 5326
       // at LANDING-R2 helper G2 (the chair's 06:5x DS-CND-1 boom line (ODQ §934.105, ruling (2)): ARCHETYPE: boom v4 `[street · crisis: any]`): the boom line sits above it.
-      .find((row) => row.line === 5326);
-    expect(annexRow, 'RECEIPT_POOLS_DOSSIER_STATE.md:5326 did not load').toBeTruthy();
+      // 5326 -> 5422 at W1 ECO construction (2026-11-07): 96 annex lines of new economy pools sit above it.
+      // 5422 -> 5425: three DS-ECO-11 strategic-value vantages added above it (W1 ECO, 2026-11-07).
+      .find((row) => row.line === 5425);
+    expect(annexRow, 'RECEIPT_POOLS_DOSSIER_STATE.md:5425 did not load').toBeTruthy();
     expect(walkEntry(annexRow, withEntryContext(base, {})).fails.map((f) => f.arm))
       .toContain('exemption on a null column');
   });
@@ -480,8 +482,9 @@ describe('THE ANTI-VACUITY GUARD — the walker must fail on the corpus it ships
     // SCOPE fault (a military-doctrine sentence under an economic-base key — R-DA-19), and
     // this walker carries no scope arm. So it cannot serve as a C3-lexical anchor, and the
     // roster's fifth entry is NOT-EXECUTABLE with its reason rather than silently absent.
-    const row = joined.find((r) => r.line === 2256);
-    expect(row, 'RECEIPT_POOLS_DOSSIER_STATE.md:2256 did not load').toBeTruthy();
+    // W1 ECO (2026-11-07): re-addressed to the turtling row itself (2371); the stale 2256 had drifted onto another row.
+    const row = joined.find((r) => r.line === 2371);
+    expect(row, 'RECEIPT_POOLS_DOSSIER_STATE.md:2371 did not load').toBeTruthy();
     for (const eventProvenance of [true, false]) {
       expect(walkEntry(row, withEntryContext(base, { eventProvenance })).fails).toEqual([]);
     }
@@ -513,8 +516,8 @@ describe('THE ANTI-VACUITY GUARD — the walker must fail on the corpus it ships
     // `eventProvenance: false`; NOT-EXECUTABLE without the flag) — measured on that one entry.
     // 47 -> 46 (both) at the chair's 07:1x ruling: the boom line's undated clause ("coin moves
     // freely and work is easy to find") makes no dated claim, so the entry leaves the class.
-    expect(notExecutable).toBe(46);
-    expect(fails).toBe(46);
+    expect(notExecutable).toBe(48); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted).
+    expect(fails).toBe(48); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted).
     // PRESENT-THEN-ABSENT on one of them, so the arm is proved rather than counted.
     const anchor = corpus.find((entry) => walkEntry(entry, withEntryContext(base, { eventProvenance: false }))
       .fails.some((f) => f.klass === 'C3'));
@@ -673,7 +676,7 @@ describe('THE ANTI-VACUITY GUARD — the walker must fail on the corpus it ships
     // chair's ruling of 2026-11-04; the owner's veto point). Report-only, still a minority.
     // 336 -> 341, measured per commit on the leaves: F12 unit 2 (e19e3e4cf) +3, census-5b unit 3
     // (c00b30eb6, R-L twins) +2. Report-only, still a minority.
-    expect(carrying.length, 'entries carrying the trailing-coordinate class, at this tip').toBe(341);
+    expect(carrying.length, 'entries carrying the trailing-coordinate class, at this tip').toBe(352); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted).
     expect(carrying.length, 'and it is a minority of the 2,266 R1 variants').toBeLessThan(leaves.length / 2);
     console.log(`  Q · trailing coordinate: ${carrying.length} of ${leaves.length} R1 entries carry the class`);
   });

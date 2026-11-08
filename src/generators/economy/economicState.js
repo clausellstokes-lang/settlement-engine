@@ -187,7 +187,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
     incomeBuild.push({
       source: 'Toll Revenue',
       percentage: 20,
-      desc: 'Passage tolls on all roads and bridges serving the crossroads position.',
+      desc: 'Tolls taken on the roads that meet here at the crossroads.',
     });
   } else if (!trulyIsolated && tradeRoute === 'road' && hasInst('gate', 'town wall', 'city wall')) {
     incomeBuild.push({
@@ -351,13 +351,13 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
             : bmc >= 20
               ? 'Shadow Economy (untaxed)'
               : 'Black Market Revenue';
-    const desc = `An estimated ${bmc}% of economic activity flows through unofficial channels: ${
+    const desc = `${
       hasGuild
-        ? 'guild-organised fencing, extortion, and black market trade'
+        ? 'Guild-run fencing, extortion and black-market trade'
         : hasSmuggling
-          ? 'smuggling margins, contraband networks, and protection rackets'
-          : 'untaxed trade, fencing, and criminal margins'
-    }. This income stays in the settlement but flows to criminal actors, not the public treasury.`;
+          ? 'Smuggling, contraband and protection rackets'
+          : 'Untaxed trade, fencing and theft'
+    } bring money in here, but it goes to the criminals who run them and the treasury sees none of it.`;
     incomeBuild.push({ source: label, percentage: bmc, desc, isCriminal: true });
   }
   if (incomeBuild.length === 0) {

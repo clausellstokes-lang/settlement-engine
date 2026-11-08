@@ -186,8 +186,8 @@ export function economyShiftSinceSurvey(settlement) {
  * @type {Readonly<Record<'tallies'|'catalog', string>>}
  */
 export const ECONOMY_FRESHNESS_SENTENCES = Object.freeze({
-  tallies: "Events recorded after this settlement's last survey may not be fully counted in these tallies yet.",
-  catalog: "Events recorded after this settlement's last survey may not be fully counted in this catalog yet.",
+  tallies: "Something has changed in this town since these tallies were taken, and it may not show in them yet.",
+  catalog: "Something has changed in this town since this list of houses and services was drawn up, and it may not show on it yet.",
 });
 
 /**

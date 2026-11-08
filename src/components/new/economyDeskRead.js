@@ -71,6 +71,17 @@ export const SILENT_ECONOMY_DESK = Object.freeze({
   exploitation: null,
   catalogStanding: null,
   impairedService: null,
+  arcaneMarket: null,
+  theocraticEconomy: null,
+  hiddenHouse: null,
+  famineSource: null,
+  foodMeans: null,
+  foodSources: null,
+  foodOnProsperity: null,
+  resourceCondition: null,
+  criticalImport: null,
+  incomeWeight: null,
+  upstreamWeak: null,
 });
 
 /**

@@ -278,6 +278,11 @@ export const DOSSIER_MOUNTS = Object.freeze([
   Object.freeze({
     mount: 'economics.shadowEconomy', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-6', rung: 'sentence',
   }),
+  // W1 ECO (2026-11-07, WAVE-RULINGS item 10): DS-SUP-2 MOUNTED in the same commit that
+  // authors in it — the upstream-weak lens (construction C9) under the Economic Flows cards.
+  Object.freeze({
+    mount: 'economics.upstreamSupply', tab: 'economics', desk: 'economy', blockId: 'DS-SUP-2', rung: 'sentence',
+  }),
   Object.freeze({
     mount: 'economics.tradeFlow', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-3', rung: 'sentence', dimensions: ['walls'],
   }),
@@ -526,7 +531,6 @@ export const UNMOUNTED_BLOCKS = Object.freeze([
   'DS-DEF-10',
   'DS-ECO-4',
   'DS-ECO-5', 'DS-SUP-1', 'DS-ECO-7',
-  'DS-SUP-2',
   'DS-POP-1', 'DS-POP-2', 'DS-GEN-1',
   'DS-GEN-10', 'DS-GEN-15',
   // ── warFaith, after DESK CAR 4 ─────────────────────────────────────────────────────

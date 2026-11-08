@@ -67,7 +67,8 @@ const CLAIMS = Object.freeze([
   // hunger: famine, under siege; any crisis on a deficit food band (crisisFacts.js :: familyActiveIn)
   { claim: 'feeds itself with a margin', re: /\bfeeds itself with a small margin\b/, family: 'hunger' },
   { claim: 'food is not a subject', re: /\bIt is not a subject anyone raises unprompted\b/, family: 'hunger' },
-  { claim: 'fed, comfortably', re: /\bfed and only just comfortably\b/, family: 'hunger' },
+  // W1 ECO (2026-11-07): DS-ECO-9 SECURE v3 reworded under the owner's style law; the claim kept.
+  { claim: 'fed, comfortably', re: /\bis fed, but only just\b/, family: 'hunger' },
   { claim: 'the road staying open', re: /\bNothing about the arrangement is failing; everything about it rests on the road staying open\b/, family: 'hunger' },
   { claim: 'nobody without bread', re: /\bNobody is going without bread\b/, family: 'hunger' },
   { claim: 'nobody talks about bread', re: /\bNobody here talks about the price of bread\b/, family: 'hunger' },
@@ -105,8 +106,10 @@ const CLAIMS = Object.freeze([
   // the place cannot feed reads the deficit, which the hunger row already catches.
   { claim: 'food secure', re: /^Food Secure\b/, family: 'hunger' },
   // An economy line that says nothing is failing, or that no one export matters, under hunger.
-  { claim: 'nothing is failing', re: /^Nothing about that is failing\b/, family: 'hunger' },
-  { claim: 'depends on none alone', re: /\bsells several things outward and depends on none of them alone\b/, family: 'hunger' },
+  // W1 ECO (2026-11-07): DS-ECO-12 INCOME MIX one source v3 reworded under the owner's style law; the claim kept.
+  { claim: 'nothing is failing', re: /^It is doing well enough now\b/, family: 'hunger' },
+  // W1 ECO (2026-11-07): DS-ECO-10 POSTURE established v1 reworded under the owner's style law; the claim kept.
+  { claim: 'depends on none alone', re: /\bif one trade fails, the others still go\b/, family: 'hunger' },
   // A place under threat that a stranger walks into unchallenged, or where pilgrims queue at ease.
   { claim: 'nobody stops a stranger', re: /\bwithout being stopped, challenged or counted by anybody at all\b/, family: 'threat' },
   { claim: 'pilgrims queue patiently', re: /\bqueue patiently for their turn\b/, family: 'threat' },

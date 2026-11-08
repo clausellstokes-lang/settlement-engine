@@ -440,7 +440,10 @@ const buildHistoricalEvent = (
         // neither is present rather than emitting a dangling clause.
         const topIssue = economicViability.issues[0];
         const issueText = topIssue?.message ?? topIssue?.description ?? '';
-        const lead = `The supply of ${commodity} (the settlement's economic backbone) is under pressure.`;
+        // W1 ECO second seat (the owner's style law, 2026-11-07): the lead names what the place lives
+        // by (its first export) and says that trade is strained; the top issue that follows is the
+        // evidence (on a migration it is the ARRIVALS food note; a departures record writes none).
+        const lead = `Life here runs mostly on the ${commodity} trade, and that trade is under strain.`;
         selected.push({
           ...tmpl,
           description: issueText ? `${lead} ${issueText}` : lead,

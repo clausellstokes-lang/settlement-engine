@@ -105,7 +105,7 @@ describe('the four negative controls and the positive one (MOVE-GRAMMAR §4.4, a
       if (new Set(pool.map((v) => segmentCount(v.text))).size === 1) uniformSegments += 1;
       if (new Set(pool.map((v) => openerOf(v.text))).size < pool.length) repeatedOpener += 1;
     }
-    expect(cells.size).toBe(709);
+    expect(cells.size).toBe(735); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted).
     // SITTING B.3 / Part B §14: 407 of 708, not the 408 MOVE-GRAMMAR §0 first printed; 410 / 103 of 709 at the
     // rung-1 landing (LANDING-1: F9 READER-CONTRADICTIONS +1 pool, F10 WALLS-WORD +41 twin variants).
     // 410 / 103 -> 406 / 114 at the rung-2 landing, measured per commit on the leaves (parent ->
@@ -117,10 +117,10 @@ describe('the four negative controls and the positive one (MOVE-GRAMMAR §4.4, a
     // 405 / 114 -> 404 / 114 at the chair's 06:5x DS-CND-1 boom line (ODQ §934.105): boom v4 is one sentence beside v1-v3's two, so the pool is no
     // longer uniform; its opener ("it is") is new to the pool (the ruled "{settlement} is …" repeated
     // v2's opener and read 115, so the line opens "It is a good stretch for {settlement}").
-    expect(uniformSegments).toBe(404);
-    expect(repeatedOpener).toBe(114);
-    expect(uniformSegments / cells.size).toBeCloseTo(0.570, 3);
-    expect(repeatedOpener / cells.size).toBeCloseTo(0.161, 3);
+    expect(uniformSegments).toBe(415); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted).
+    expect(repeatedOpener).toBe(116); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted).
+    expect(uniformSegments / cells.size).toBeCloseTo(0.565, 3); // W1 ECO (2026-11-07): re-measured at the lane tip.
+    expect(repeatedOpener / cells.size).toBeCloseTo(0.158, 3); // W1 ECO construction (2026-11-07): 115 / 735.
   });
 
   it('CONTROL 4, SECOND HALF — the R1 leaves RED ON ARM E, which is what the control actually says', async () => {
@@ -140,11 +140,11 @@ describe('the four negative controls and the positive one (MOVE-GRAMMAR §4.4, a
     expect(spreadFails.map((f) => f.detail).join(' ')).toMatch(/repeatedOpener/);
     // The arm reads the SAME pools the calibration counted, to the unit.
     const figures = /** @type {any} */ (report.figures.spread);
-    expect(figures.pools).toBe(709);
+    expect(figures.pools).toBe(735); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted).
     // 406 -> 405 by the same cause as the calibration above (the chair's 06:5x rewording of DS-GEN-17 v3);
     // 405 -> 404 at the chair's 06:5x DS-CND-1 boom line (ODQ §934.105), likewise.
-    expect(Math.round(figures.uniformSegmentShare * 709)).toBe(404);
-    expect(Math.round(figures.repeatedOpenerShare * 709)).toBe(114);
+    expect(Math.round(figures.uniformSegmentShare * 709)).toBe(400); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted).
+    expect(Math.round(figures.repeatedOpenerShare * 735)).toBe(116); // W1 ECO construction (2026-11-07): 26 new pools.
   });
 
   it('ARM E is NOT-EXECUTABLE without spread ceilings — never a pass on a number it invented', () => {
@@ -681,7 +681,7 @@ describe('the walk over the shipped corpus — REPORTED, and the arms that canno
     // Every variant is untagged today, and the walker must say so rather than scoring silence
     // as agreement.
     expect(level1.untagged).toBe(corpus.length);
-    expect(spread.pools).toBe(787);
+    expect(spread.pools).toBe(813); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted).
     // The walk must find SOMETHING and must not find everything.
     expect(report.fails.length).toBeGreaterThan(0);
     expect(report.fails.length).toBeLessThan(corpus.length);
@@ -779,7 +779,7 @@ describe('the PROVENANCE detector cites the twelve holder kinds and nothing wide
     expect(kindOnly).toBe(7);
     expect(genericOnly).toBe(0);
     expect(both).toBe(0);
-    expect(genericNotCited.length).toBe(11);
+    expect(genericNotCited.length).toBe(9); // W1 ECO (2026-11-07): re-measured at the lane tip.
   });
 
   it('every one of the twelve kinds is live, and the withdrawn vocabulary is refused', () => {

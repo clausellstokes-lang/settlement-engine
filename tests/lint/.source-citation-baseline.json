@@ -47,9 +47,9 @@
     "pastEofCitationsExcluded": 382,
     "byRule": {
       "banner": 9,
-      "dated": 157,
+      "dated": 158,
       "sha-pin": 2,
-      "tree": 112
+      "tree": 124
     },
     "files": {
       "banner": [
@@ -168,7 +168,8 @@
         "docs/chair/2026-11-06/BRIEF-RUNG2-PHASE-D-2026-11-06.md",
         "docs/chair/2026-11-06/BRIEF-RUNG2-TYPES-2026-11-06.md",
         "docs/implementation/surveys/SIM-SEALS-SURVEY-2026-09-19.md",
-        "docs/tuning-signatures/2026-11-06-v1.json"
+        "docs/tuning-signatures/2026-11-06-v1.json",
+        "docs/WIRING_W1_2026-11-07.md"
       ],
       "sha-pin": [
         "docs/SETTLEMENT_CAPABILITY_ATLAS.md",
@@ -277,7 +278,19 @@
         "docs/shift-records/2026-11-08-merge-car-b-people-car-composition.json",
         "docs/shift-records/2026-11-08-merge-car-c-composition-cure.json",
         "docs/shift-records/README.md",
-        "docs/shift-records/_TEMPLATE.json"
+        "docs/shift-records/_TEMPLATE.json",
+        "docs/shift-records/2026-11-07-w1-01-construction.json",
+        "docs/shift-records/2026-11-07-w1-02-style-ds-eco-1.json",
+        "docs/shift-records/2026-11-07-w1-03-style-ds-eco-10.json",
+        "docs/shift-records/2026-11-07-w1-04-style-ds-eco-11.json",
+        "docs/shift-records/2026-11-07-w1-05-style-ds-eco-12.json",
+        "docs/shift-records/2026-11-07-w1-06-style-ds-eco-8.json",
+        "docs/shift-records/2026-11-07-w1-07-style-ds-eco-9.json",
+        "docs/shift-records/2026-11-07-w1-08-style-ds-sup-3.json",
+        "docs/shift-records/2026-11-07-w1-09-style-ds-eco-2.json",
+        "docs/shift-records/2026-11-07-w1-10-style-amendments.json",
+        "docs/shift-records/2026-11-07-w1-11-style-ds-eco-11-spread.json",
+        "docs/shift-records/2026-11-07-w1-12-style-ds-eco-6-scalenote.json"
       ]
     },
     "_rosterGrowth2026-10-30-consolidation": "FIVE documents JOINED the roster by being BORN into it, and they hid NOTHING (re-measured by BUILD-T1 on claude/ux-T1 rebased onto 2acd0206): the integration branch's docs/UX_CONSOLIDATION_2026-10-30.md joined `dated` (5 -> 6) and BUILD-S's docs/shift-records/2026-10-30-service-category-fidelity.json joined `tree` (40 -> 41), both already on the tip; BUILD-T1's three signed records docs/shift-records/2026-10-30-arrival-market-gate.json, -no-market-pool.json and -migration-one-direction.json joined `tree` (41 -> 44). GROWTHS, not class moves: each file entered the tree already archival by rule, and each shift record is a JSON signature with zero path:line citations of its own, so pastEofCitationsExcluded stays at 377.",
@@ -329,7 +342,9 @@
     "_rosterGrowth2026-11-08-fp-rebase-brief": "ONE document JOINED the roster by being BORN into it (the chair, session session_01FbPLbejcfwX5nii12VM673, on the integration branch, on the owner's word of 2026-11-08 to fix the FP architecture in the documents now while the FP stays parked behind the plat): `dated` 153 -> 154, docs/chair/2026-11-08/BRIEF-FP-REBASE-2026-11-08.md, the four-seat docs program's brief, born dated (citations `path :: symbol`), 0 past-EOF; nothing changed class; pastEofCitationsExcluded unchanged at 382.",
     "_rosterGrowth2026-11-08-fp-rebase-verify-brief": "ONE document JOINED the roster by being BORN into it (the chair, session session_01FbPLbejcfwX5nii12VM673, on the integration branch, 2026-11-08 20:3x UTC): docs/chair/2026-11-08/BRIEF-FP-REBASE-VERIFY-2026-11-08.md, the adversarial verifier's brief for the FP re-base (one seat after the four writing seats' hand-backs; docs only). dated 155 -> 156; born dated, 0 past-EOF. The archival-at-freeze figure grows by exactly the documents born dated; nothing already counted moved.",
     "_rosterGrowth2026-11-08-fix-arrow-sections-brief": "ONE document JOINED the roster by being BORN into it (the chair, session session_01FbPLbejcfwX5nii12VM673, on the integration branch, on the owner's word of 2026-11-08 that the painted arrow header's sections are not equally spaced): `dated` 154 -> 155, docs/chair/2026-11-08/BRIEF-FIX-ARROW-SECTIONS-2026-11-08.md, the fix lane's brief, born dated (citations `path :: symbol`), 0 past-EOF; nothing changed class; pastEofCitationsExcluded unchanged at 382.",
-    "_rosterGrowth2026-11-08-merge-wave": "ONE document JOINED the roster by being BORN into it (MERGE-WAVE, session session_01FbPLbdbKovNtK8Fx32oQ24, on the integration branch at step 0, the brief's record commit): `dated` 156 -> 157, docs/INTEGRATION_MERGE_WAVE_2026-11-07.md, the merge seat's record, born dated (citations `path :: symbol`), 0 past-EOF; nothing changed class; pastEofCitationsExcluded unchanged at 382."
+    "_rosterGrowth2026-11-08-merge-wave": "ONE document JOINED the roster by being BORN into it (MERGE-WAVE, session session_01FbPLbdbKovNtK8Fx32oQ24, on the integration branch at step 0, the brief's record commit): `dated` 156 -> 157, docs/INTEGRATION_MERGE_WAVE_2026-11-07.md, the merge seat's record, born dated (citations `path :: symbol`), 0 past-EOF; nothing changed class; pastEofCitationsExcluded unchanged at 382.",
+    "_rosterGrowth2026-11-07-w1": "W1 ECO (the economy lane of the construction-and-wiring wave, measured with this walker's own arm at the lane tip): ONE document BORN dated, `dated` 131 -> 132, docs/WIRING_W1_2026-11-07.md, the lane's record, 0 past-EOF; and 11 signed shift records BORN into `tree`, 100 -> 111, docs/shift-records/2026-11-07-w1-01 .. -11 (the construction re-record and the style law's re-records of the composed-prose manifest). A GROWTH, not a re-classification.",
+    "_rosterGrowth2026-11-08-merge-wave-w1": "THE UNION AT THE W1 ECO MERGE (MERGE-WAVE, session session_01FbPLbdbKovNtK8Fx32oQ24): both sides' notes kept; `dated` 157 -> 158 (W1 ECO's docs/WIRING_W1_2026-11-07.md, 131 -> 132 on that side), `tree` 112 -> 124 (W1 ECO's twelve signed lane records docs/shift-records/2026-11-07-w1-01..w1-12, components of the W1 composition record); the count measured once by the walker; nothing changed class."
   },
   "rows": []
 }

@@ -75,7 +75,7 @@ describe('FOOD-3 — food diversity', () => {
       const record = s.economicState.foodSecurity.foodRecord;
       const notes = (s.economicViability?.issues || []).map((x) => x.description || '').join(' ');
       const word = { grain: 'grain', livestock: 'herds', fish: 'fishing', mill: 'mill', game: 'hunt' }[record.failedSource];
-      if (record.foodSources.length && (!word || !new RegExp(`Famine: the [^.]*${word}`).test(notes))) missing.push(`${tier}-${i}: ${record.failedSource} / ${notes.slice(0, 80)}`);
+      if (record.foodSources.length && (!word || !new RegExp(`The [^.]*${word}[^.]* failed this year`).test(notes))) missing.push(`${tier}-${i}: ${record.failedSource} / ${notes.slice(0, 80)}`);
       if (record.foodSources.length) named += 1;
       if (record.foodSources.length <= 1 && !/^Deficit/.test(s.economicState.foodSecurity.label)) missing.push(`${tier}-${i}: ${s.economicState.foodSecurity.label}`);
     }

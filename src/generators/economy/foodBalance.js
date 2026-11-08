@@ -212,23 +212,26 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
   if (stresses.includes('famine')) {
     productionMult *= 0.35;
     // FOOD-3: the canonical record names the source the famine failed and how deep it cut.
+    // W1 ECO second seat (the owner's style law, 2026-11-07): the cut is BANDED at 50, the way the
+    // DS-ECO-9 famine-source lens bands it; the figure stays on the food record, never in the prose.
     const failed = foodSecurity?.foodRecord?.failedSource;
+    const cutWord = (foodSecurity?.foodRecord?.famineCutPct ?? 0) >= 50 ? 'most' : 'part';
     stressNotes.push(failed
-      ? `Famine: the ${FAILED_SOURCE_WORDS[failed]} failed, taking ${foodSecurity.foodRecord.famineCutPct}% of local food production.`
-      : 'Famine: crop failure has reduced local food production to 35% of normal capacity.');
+      ? `The ${FAILED_SOURCE_WORDS[failed]} failed this year and took ${cutWord} of the food produced here with it. The winter ahead will be hungry.`
+      : 'The crops failed, and only about a third of the usual harvest will come in. The winter ahead will be hungry.');
   }
   if (stresses.includes('under_siege')) {
     productionMult *= SIEGE_PRODUCTION_KEPT;
     routeOverride = 'isolated';
-    stressNotes.push('Siege: external supply lines severed and outlying farmland abandoned or razed.');
+    stressNotes.push('The siege has cut every road in, and the outlying farms are abandoned or burned. What is already in store is all there will be until it lifts.');
   }
   if (stresses.includes('plague_onset')) {
     productionMult *= 0.75;
-    stressNotes.push('Plague: agricultural workforce decimated by illness, fields understaffed.');
+    stressNotes.push('The plague has killed or sickened many who work the fields. Those still standing face a short harvest and a hard winter.');
   }
   if (stresses.includes('occupied')) {
     consumptionMult *= 1.2;
-    stressNotes.push('Occupation: occupying forces consume approximately 20% of food supply beyond normal needs.');
+    stressNotes.push('The occupiers are fed from local stores, so the food has to stretch about a fifth further than before.');
   }
   // [generators-domain-1] second-wave stress types with a food-relevant viabilityNote.
   // (Defense stays coupled via the priorityHelpers effective-score multipliers — no inline
@@ -236,16 +239,18 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
   // foodGenerator.js's production block.
   if (stresses.includes('wartime')) {
     productionMult *= 0.85;
-    stressNotes.push('Wartime: conscription has thinned the agricultural workforce, cutting local output.');
+    stressNotes.push('The levy has taken workers from the fields, and less will be harvested this year.');
   }
   if (stresses.includes('slave_revolt')) {
     productionMult *= 0.8;
-    stressNotes.push('Slave revolt: labour-dependent production is disrupted and outlying fields lie idle.');
+    stressNotes.push('With the enslaved workers in revolt, the outlying fields lie idle and nobody is bringing in the harvest.');
   }
   // WIRING-W0 (R-W7 e): more mouths only where the record declares ARRIVALS (domain/migrationDirection.js).
   if (stresses.includes('mass_migration') && migrationDirectionOfConfig(config) !== 'departures') {
     consumptionMult *= 1.15;
-    stressNotes.push('Mass migration: an influx of newcomers stresses the food balance beyond normal needs.');
+    // The ARRIVALS set. A departures record adds no mouths here (the writer's multiplier above), so
+    // its set is silent: a note would state a food effect the record does not hold (the census law).
+    stressNotes.push('Newcomers keep arriving, and every one of them has to be fed from the same fields and stores.');
   }
 
   // The legacy view (no canonical record) grows by the same base numbers as the writer
@@ -592,10 +597,10 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
         type: 'stress_consequence',
         category: 'Food Supply',
         severity: isCritical ? 'critical' : 'implausible',
-        title: 'Stress: Food Production Degraded',
+        title: 'Crisis Cutting the Food Supply',
         message: note,
         description: note,
-        priorityNote: 'Active stress condition is directly reducing food availability.',
+        priorityNote: 'The crisis is cutting into the food supply now.',
       });
     });
   }

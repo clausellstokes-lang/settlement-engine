@@ -41,6 +41,14 @@ const FLOW_BAND_COLOR = { shortage: '#8b1a1a', adequate: '#a0762a', surplus: '#1
  * surfaced as a qualitative dependency drift. Renders ONLY when `drift` is present
  * (marker + commodity-flow on + measured flow); absent ⇒ nothing ⇒ byte-identical tab.
  */
+/**
+ * W1 ECO (2026-11-07): each of these two positions draws its block's tier/rung line AND the
+ * construction lenses beneath it, so the mount id is spelled ONCE here and both draws at the
+ * position read it (the registry walker's one-site rule: one position, one site).
+ */
+const FOOD_SECURITY_MOUNT = 'economics.foodSecurity';
+const SHADOW_ECONOMY_MOUNT = 'economics.shadowEconomy';
+
 function LiveTradeFlowSection({ drift, rung = null }) {
   // THE PHONE PROSE FLOOR — the band's own sentence and the note under it.
   const mobile = useIsMobile();
@@ -390,7 +398,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
   // one file that calls it, so the call cannot live in a tab any more. Datum is untouched:
   // situationDesc, the tiles and their sub-lines never read the desk.
   const deskProse = economyDeskRead(s, { publicDossier, playerView, tier: s?.tier, foodBalance: fbal, granaryOutlook: granary, flowDrift });
-  const drawnFoodLine = drawnAtMount('economics.foodSecurity', deskProse.foodSecurityRung);
+  const drawnFoodLine = drawnAtMount(FOOD_SECURITY_MOUNT, deskProse.foodSecurityRung);
   // The food GLANCE position (DS-ECO-2), read at the Food Security section since the Food
   // tile was cut (T2-1); see EconomicsGlance.jsx for why the read stays.
   const drawnFoodGlance = drawnAtMount('economics.foodTile', deskProse.foodTile);
@@ -452,7 +460,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
       {/* ── THE COMMERCIAL PROFILE (DS-ECO-12: concentration, the criminal line), UNDER the
           income rows it reads (the block law, X-16). The trade-profile lens is not drawn here
           (T2-4, R2): the DS-ECO-10 export-posture sentence is the one trade-posture sentence. */}
-      <DeskLines mount="economics.commercialProfile" settlementName={s?.name} tier={s?.tier} rungs={[deskProse.incomeMix, deskProse.criminalLine]} />
+      <DeskLines mount="economics.commercialProfile" settlementName={s?.name} tier={s?.tier} rungs={[deskProse.incomeMix, deskProse.criminalLine, deskProse.incomeWeight, deskProse.criticalImport]} />
 
       {/* ── TRADE PROFILE (exports + imports unified) ───────────────────── */}
       {(shownExports.length>0||shownImports.length>0||eco.localProduction?.length>0)&&<Section title="Trade Profile" collapsible defaultOpen>
@@ -575,9 +583,9 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
         <div style={{background:foodDeficit?'#fdf4f4':'#f0faf2',...edged(`1px solid ${foodDeficit?'#e8c0c0':'#a8d8b0'}`,`3px solid ${foodColor}`),padding:'8px 12px',fontSize:proseFontSize(FS.sm, mobile),color:foodDeficit?'#5a1a1a':'#1a3a10',lineHeight:1.5}}>
           {foodDeficit
             ? fb.importCoverage>0
-              ? `Production covers ${Math.round(fb.dailyProduction/fb.dailyNeed*100)}% of food needs. Trade imports cover an estimated ${Math.round(fb.importCoverage/(fb.rawDeficit||1)*100)}% of the gap. Residual shortfall is ${fbal.deficitPct}%.${fb.magicFoodOffset>0?` A further ${formatCount(fb.magicFoodOffset)} lbs/day comes by ${foodBar.magicChannel} provision.`:''}`
-              : ` Production deficit of ${fbal.deficitPct}%. Settlement requires food imports to sustain population.`+(fb.magicFoodOffset>0?` A further ${formatCount(fb.magicFoodOffset)} lbs/day comes by ${foodBar.magicChannel} provision.`:'')
-            : foodSurplus ? `Agricultural surplus of ${Math.round((fb.surplus/Math.max(1,fb.dailyNeed))*100)}% above daily needs.` : 'Daily needs are met, with no surplus: production, imports and any magical provision cover the day between them.'
+              ? `What is grown here covers ${Math.round(fb.dailyProduction/fb.dailyNeed*100)}% of the food people need. Trade brings in about ${Math.round(fb.importCoverage/(fb.rawDeficit||1)*100)}% of the rest, and ${fbal.deficitPct}% of what people need still goes unmet.${fb.magicFoodOffset>0?` A further ${formatCount(fb.magicFoodOffset)} lbs/day comes by ${foodBar.magicChannel} provision.`:''}`
+              : `No trade brings food in here, and ${fbal.deficitPct}% of what people need goes unmet.`+(fb.magicFoodOffset>0?` A further ${formatCount(fb.magicFoodOffset)} lbs/day comes by ${foodBar.magicChannel} provision.`:'')
+            : foodSurplus ? `Agricultural surplus of ${Math.round((fb.surplus/Math.max(1,fb.dailyNeed))*100)}% above daily needs.` : 'What is grown here and brought in covers each day\'s food, with nothing to spare against a bad year.'
           }
         </div>
         {drawnFoodGlance?.sentence&&<p style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch.inkMag2,lineHeight:1.5,margin:'8px 0 0',fontStyle:'italic'}}>{drawnFoodGlance.sentence}</p>}
@@ -595,6 +603,9 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
           position at a glance. Drawn outside the section so a reader who folds it keeps the
           tone; the visibility arm in dossierMountRegistry.walker.test.js keeps it on first paint. */}
       {drawnFoodLine?.sentence&&<p data-testid="economics-food-security-line" style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.55,margin:'0 0 10px',fontStyle:'italic'}}>{drawnFoodLine.sentence}</p>}
+      {/* W1 ECO construction (2026-11-07): what the famine broke, how the need is met, and the
+          food sources, each a DS-ECO-9 lens at the same position, under the rung. */}
+      <DeskLines mount={FOOD_SECURITY_MOUNT} settlementName={s?.name} tier={s?.tier} rungs={[deskProse.famineSource, deskProse.foodMeans, deskProse.foodSources]} />
 
       {/* ── ECONOMIC FLOWS (unified production chains + dependencies) ──────── */}
       {eco.activeChains?.length > 0 && (
@@ -605,6 +616,9 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
           instNames={(s?.institutions || []).map(i => i?.name || '')}
         />
       )}
+      {/* W1 ECO (2026-11-07): DS-SUP-2 at economics.upstreamSupply — an upstream chain the
+          town's work draws on is failing (construction C9), UNDER the flow cards it explains. */}
+      <DeskLines mount="economics.upstreamSupply" settlementName={s?.name} tier={s?.tier} rungs={[deskProse.upstreamWeak]} />
 
       {/* ── DS-GEN-18: the craft reason, UNDER the chains it explains (the block law, X-16) ──
           Economic Flows is the one chain rendering (T2-6); the line carries the craft reason
@@ -626,10 +640,10 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
         // Scale context: same % means different things at different tiers
         const _tier = s?.tier || 'village';
         const scaleNote = bmc>=30
-          ? 'A substantial portion of economic activity bypasses legitimate channels. Tax revenue is severely compressed. Guild structures are being undercut.'
+          ? 'Much of the trade here never passes the tax collector, so the duties come in far short and guild members are undersold by traders who pay no fees.'
           : bmc>=15
-          ? 'Significant off-book activity. Merchants operating in the shadow economy have a cost advantage over those paying duties and guild fees.'
-          : 'Minor shadow activity. Petty theft and small-scale unlicensed trade. An inconvenience, not a structural threat.';
+          ? 'A good part of the trade here goes unrecorded, and merchants who pay their duties and guild fees are undersold by those who do not.'
+          : 'Some petty theft goes on here, and some trading without a licence. It is a nuisance, nothing more.';
 
         // What goods flow through the shadow economy (from crime types)
         const _shadowGoods = crimeTypes
@@ -682,7 +696,10 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
 
           </div>
         </Section>
-        <p data-testid="economics-shadow-economy-line" style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch.inkMag2,lineHeight:1.5,margin:'0 0 8px'}}>{drawnAtMount('economics.shadowEconomy',deskProse.shadowEconomy)?.sentence||scaleNote}</p>
+        <p data-testid="economics-shadow-economy-line" style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch.inkMag2,lineHeight:1.5,margin:'0 0 8px'}}>{drawnAtMount(SHADOW_ECONOMY_MOUNT,deskProse.shadowEconomy)?.sentence||scaleNote}</p>
+        {/* W1 ECO construction (2026-11-07): the arcane market, the theocratic economy and the
+            hidden house, DS-ECO-6 lenses under the tier line (dm-only, like the whole block). */}
+        <DeskLines mount={SHADOW_ECONOMY_MOUNT} settlementName={s?.name} tier={s?.tier} rungs={[deskProse.arcaneMarket, deskProse.theocraticEconomy, deskProse.hiddenHouse]} />
         </>;
       })()}
 

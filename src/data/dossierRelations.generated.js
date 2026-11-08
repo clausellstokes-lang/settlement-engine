@@ -1198,6 +1198,6 @@ export const DOSSIER_RELATION_ALIASES = /* #__PURE__ */ Object.freeze([
     "endpoint": "system:food_security",
     "readRoot": "eco",
     "evidence": "identifier",
-    "at": "eco.foodSecurity.stockpile"
+    "at": "eco.foodSecurity.foodRecord.foodSources"
   }
 ]);

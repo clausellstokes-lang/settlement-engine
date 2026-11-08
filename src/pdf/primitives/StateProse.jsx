@@ -91,6 +91,7 @@ const SCREEN_KICKER = Object.freeze({
   'defense.supportingCapabilities': 'Supporting Capabilities',
   // EconomicsTab.jsx
   'economics.foodSecurity': 'Food Security',
+  'economics.upstreamSupply': 'Upstream supply',
   'economics.tradeFlow': 'Live Trade Flow',
   // HistoryTab.jsx (`plot_hooks.framing` glances since 2026-10-30, so its kicker is gone)
   'history.identity': 'What the years have made of it',

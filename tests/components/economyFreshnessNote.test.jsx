@@ -62,8 +62,9 @@ import TableView from '../../src/components/TableView.jsx';
 import SessionMode from '../../src/components/session/SessionMode.jsx';
 import { ECONOMY_FRESHNESS_SENTENCES } from '../../src/domain/display/economyFreshness.js';
 
-const ECON_NOTE = /Events recorded after this settlement's last survey may not be fully counted in these tallies yet\./;
-const SVC_NOTE = /Events recorded after this settlement's last survey may not be fully counted in this catalog yet\./;
+// W1 ECO second seat (2026-11-07): re-keyed, not loosened, with the sentence's rewrite under the owner's style law.
+const ECON_NOTE = /^Something has changed in this town since these tallies were taken, and it may not show in them yet\.$/;
+const SVC_NOTE = /^Something has changed in this town since this list of houses and services was drawn up, and it may not show on it yet\.$/;
 
 function entry(source, changeType) {
   return { at: null, source, changeType, changeLabel: null, preservedWorldConditionIds: [] };

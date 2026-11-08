@@ -66,7 +66,8 @@ const TABS = [
   ['Power', (s) => <PowerTab powerStructure={s.powerStructure} settlement={s} />],
   ['PlotHooks', (s) => <PlotHooksTab settlement={s} />],
 ];
-const HEADER = /The roads into this \p{L}+ are busy and the \p{L}+ is poor/u;
+// W1 ECO (2026-11-07): DS-ECO-1 C4 v2 reworded under the owner's style law ("The {access} into {settlement} is busy and the town is poor").
+const HEADER = /The \p{L}+ into [\p{L}' -]+? is busy and the \p{L}+ is poor/u;
 
 function expandAll(container) {
   for (let pass = 0; pass < 4; pass += 1) {

@@ -55,6 +55,8 @@ import {
   groundPoolKey,
   institutionsPoolKey,
   marketPoolKey,
+  commercePoolKey,
+  warehousesPoolKey,
   prosperityPoolKey,
   readinessPoolKey,
   safetyPoolKey,
@@ -107,7 +109,7 @@ const mergedShapes = () => mergeSlotShapes([
 
 /** Every block this desk lights, and the pool counts the shipped leaf carries. */
 const BLOCK_POOLS = Object.freeze({
-  'DS-GEN-2': 3, 'DS-GEN-3': 42, 'DS-GEN-5': 5, 'DS-GEN-6': 9, 'DS-GEN-12': 5, 'DS-GEN-13': 4,
+  'DS-GEN-2': 3, 'DS-GEN-3': 42, 'DS-GEN-5': 5, 'DS-GEN-6': 9, 'DS-GEN-12': 5, 'DS-GEN-13': 9, /* W1 ECO construction (2026-11-07): +4 COMMERCE, +1 WAREHOUSES */
   'DS-GEN-7': 8, 'DS-GEN-17': 5,
   // The history chapter (DESK-GEN2 car 1).
   'DS-GEN-9': 15, 'DS-GEN-14': 3, 'DS-GEN-16': 5,
@@ -531,6 +533,17 @@ describe('DS-GEN-12 / DS-GEN-13 / DS-GEN-17 — three total partitions', () => {
       marketPoolKey({ institutions: stalls, tradeRouteAccess: 'isolated' }),
       marketPoolKey({ institutions: stalls, tradeRouteAccess: 'road' }),
     ]);
+    // W1 ECO construction (2026-11-07, C13 + R-W3): the commerce and warehouse lenses share the
+    // block, keyed on the live roster's commercial booleans (`economicState.compound.inst`).
+    for (const [inst, key] of [
+      [{ hasBank: true, hasMerchantGuild: true, hasGuild: true, hasMarket: true }, 'COMMERCE: a bank'],
+      [{ hasMerchantGuild: true, hasGuild: true, hasMarket: true }, 'COMMERCE: a merchant guild, no bank'],
+      [{ hasGuild: true, hasMarket: true }, 'COMMERCE: craft guilds, no merchant guild'],
+      [{ hasMarket: true }, 'COMMERCE: a market, no guild'],
+    ]) reached.add(commercePoolKey(inst));
+    reached.add(warehousesPoolKey({ hasWarehouse: true }));
+    expect(commercePoolKey({}), 'no commercial house is silence (NO-MARKET says it)').toBe(null);
+    expect(warehousesPoolKey({ hasWarehouse: false })).toBe(null);
     expect([...reached].sort()).toEqual(poolsOf('DS-GEN-13').sort());
     for (const state of [
       { institutions: [] }, { institutions: stalls, isEntrepot: true },

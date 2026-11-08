@@ -172,7 +172,7 @@ const LINK_FIELDS = {
   // foodBalance's plague branch cuts local production (×0.75) and writes the stress's consequence for food.
   'economicViability.issues[stress_consequence]': { cause: 'plague', effect: 'poor harvests',
     holds: (t) => (t.economicViability?.issues || []).some((i) => i?.type === 'stress_consequence'
-      && i?.category === 'Food Supply' && /^Plague:/.test(i?.message || '')) },
+      && i?.category === 'Food Supply' && /^The plague has killed or sickened many who work the fields\./.test(i?.message || '')) }, // re-keyed with the note's rewrite (W1 ECO second seat, 2026-11-07)
   // computePublicLegitimacy's safety term reads the safety label, whose strain is the plague's own.
   'powerStructure.publicLegitimacy.breakdown.safety': { cause: 'plague', effect: 'title unhonoured',
     holds: (t) => (legitOf(t).breakdown?.safety ?? 0) < 0
