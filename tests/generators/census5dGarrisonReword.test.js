@@ -18,7 +18,8 @@ import { FACTION_DESC_SIBLINGS } from '../../src/data/powerSiblings.js';
 
 const WELL_FUNDED = 'Well-funded city watch; a reliable instrument of civic order with growing institutional confidence.';
 const STRETCHED = 'City watch; law enforcement and external defence, stretched between multiple responsibilities.';
-const COMMANDERS = 'Military commanders and their officers hold decisive political weight; civic matters defer to security priorities.';
+// Re-keyed with cause (W3 POW third seat, the owner's style law of 2026-11-07, worklist #174): the description's words moved.
+const COMMANDERS = 'Military commanders and their officers carry the most weight; ordinary business waits on the needs of defence.';
 
 describe('CENSUS-5d · the garrison sets reworded to presume nothing about the unsettled garrison (R-AN, R-U)', () => {
   it('no FACTION_DESC_SIBLINGS set declares the unsettled garrison (or militia) any more', () => {

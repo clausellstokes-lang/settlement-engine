@@ -345,7 +345,7 @@ export const generatePowerStructure = (
       'Town Council':
         'An elected or appointed council governs; merchants, guilds, and prominent families compete for seats.',
       'City Council':
-        'A full civic council governs the city; aldermen, guild representatives, and appointed officials manage taxation, law, and infrastructure at scale.',
+        'A full council governs the city: aldermen, guild masters and appointed officials see to its taxes, its laws and its streets.',
       'Grand Council':
         'A grand council of senior officials, guild masters, and appointed magnates governs the metropolis; internal factions are constant, and real power shifts between blocs.',
       'Military City Council':
@@ -358,30 +358,30 @@ export const generatePowerStructure = (
       'Ducal Governorship':
         'A duke or duchess governs the metropolis by royal appointment; the city is the administrative capital of a large territory.',
       'Grand Merchant Oligarchy':
-        'The wealthiest merchant houses of the metropolis form a formal oligarchic senate; political power is inseparable from commercial dominance.',
+        'The richest merchant houses of the metropolis sit as its senate, so the houses that control the trade also make the law.',
       'Grand Guild Consortium':
         "A formal consortium of the metropolis's most powerful guild masters holds civic authority; membership in the consortium is itself a prize.",
       'Guild Authority':
         "The guilds have formalised their political control; the city's elected bodies are largely ceremonial.",
       'Military Council':
-        'Military commanders and their officers hold decisive political weight; civic matters defer to security priorities.',
+        'Military commanders and their officers carry the most weight; ordinary business waits on the needs of defence.',
       'Church Council':
-        'Religious authorities hold formal civic influence; canonical law and civil ordinance are intertwined.',
+        'Priests sit on the council, and church law and the council\'s law are hard to tell apart.',
       'Merchant Council':
         'Prominent merchants dominate the council; trade and taxation policy favour commercial interests.',
       'Corrupt Council':
         'The governing body is systematically compromised; offices are sold and justice is purchasable.',
       'Arcane Council':
-        'Mages and scholars hold formal civic positions; arcane expertise confers political legitimacy.',
+        'Mages and scholars hold the offices here; skill in magic is what earns a seat.',
       'Grand Merchant Senate':
         'A senate of the wealthiest merchant houses governs; political influence is measured in coin, trade concessions, and debt.',
       'Grand Military Council':
-        'Military commanders and their political allies hold power; civilian governance is subordinate to the needs of the war machine.',
+        'Military commanders and their allies hold power; everything else waits on the needs of the army.',
       'High Theocratic Council':
         'Senior clergy hold civic authority; religious law and civil law are functionally the same.',
-      'Arcane Senate': 'A senate of senior mages governs; magical expertise confers political legitimacy.',
+      'Arcane Senate': 'A senate of senior mages governs; the stronger the mage, the louder the voice.',
       'Shadow Senate': 'Nominal governance masks a criminal oligarchy; the real decisions happen in back rooms.',
-      'Guild Council': 'The guilds collectively govern; economic power directly translates to political authority.',
+      'Guild Council': 'The guilds govern together; the richer the guild, the more say it has.',
       'Merchant Guild Council':
         'A consortium of guild masters holds power; policy is shaped by trade interests and inter-guild bargaining.',
       'Noble Governorship':
@@ -393,7 +393,7 @@ export const generatePowerStructure = (
       'City-State Council':
         'A city-state council governs with considerable autonomy; internal factions compete for control of policy.',
       'Royal Authority':
-        'A royal seat concentrates formal authority at the apex of the realm. How much real power the monarch exercises depends on their strength, the loyalty of the nobility, and whether anyone is currently contesting that loyalty.',
+        'The crown rules here directly. How far its word carries depends on the monarch\'s strength and on whether the nobles stay loyal.',
     },
     govDescByFaction = {
       'Military Council': 'Military commanders hold direct political authority; civic life is subordinate to defence.',
@@ -405,9 +405,9 @@ export const generatePowerStructure = (
       'Corrupt Oligarchy': 'Criminal networks have captured governance; official authority is a facade.',
       'Shadowed Council':
         'Criminal influence shapes decisions behind the scenes; officials are systematically compromised.',
-      'Arcane Council': 'Magical practitioners govern; arcane power legitimises political authority.',
+      'Arcane Council': 'Mages govern, and their magic is their claim to rule.',
       'Mixed Council': 'Power is distributed across multiple factions without a clear dominant authority.',
-      'Elder Council': 'Community elders guide decisions by consensus; authority is moral and traditional, not formal.',
+      'Elder Council': 'The oldest heads of the community decide things together; people follow them out of respect and custom, not law.',
       'Town Council':
         'An elected or appointed council governs; merchants, guilds, and prominent families compete for seats.',
     },
