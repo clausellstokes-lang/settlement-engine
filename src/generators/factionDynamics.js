@@ -540,7 +540,9 @@ export function applyLegitimacyMultipliers(factions, publicLeg, _tier) {
       // Tag legitimacy crisis on governing faction
       if (publicLeg.governanceFractured) {
         f.legitimacyCrisis = true;
-        f.crisisNote = 'Governing authority is internally fractured. Real decisions are being made informally. The faction that appears to govern is not the faction that governs.';
+        // The owner's style law of 2026-11-07 (W3 POW #189): the note no longer repeats the Power tab's fracture banner and
+        // DS-POW-1's fractured line; it says the one thing they do not, which powerStrata.crisisNoteFor names or drops.
+        f.crisisNote = 'Holds the title, but the decisions that matter are made elsewhere.';
       }
     } else if (isCrim) {
       mult = publicLeg.crimMultiplier;

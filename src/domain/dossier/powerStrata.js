@@ -384,7 +384,7 @@ export function rulingChainOf(settlement) {
  * whenever public legitimacy falls below the contested cut. It names nobody, and
  * on the audit's 389 no stronger rival existed in 18 of 110 cases.
  */
-export const APPEARS_TO_GOVERN = 'The faction that appears to govern is not the faction that governs.';
+export const APPEARS_TO_GOVERN = 'Holds the title, but the decisions that matter are made elsewhere.';
 
 /**
  * The faction that outranks the governing faction on the power figures: the
@@ -407,13 +407,6 @@ export function outrankingRivalOf(settlement) {
   }
   return best ? nameOf(best) || null : null;
 }
-
-/**
- * The sentence the Power tab's legitimacy panel prints after "Governance fractured." when
- * governance is fractured (PowerTab.jsx). The generator's crisis note on the governing
- * faction carries the same words (factionDynamics.js :: applyLegitimacyMultipliers).
- */
-export const FRACTURE_PANEL_LINE = 'Real decisions are being made informally.';
 
 /**
  * X-50 (BOILERPLATE ONCE): a note with every sentence the tab already prints elsewhere
@@ -443,6 +436,6 @@ export function crisisNoteFor(settlement, faction) {
   if (!note.includes(APPEARS_TO_GOVERN)) return note;
   const governing = governingFactionOf(settlement);
   const rival = governing && faction === governing ? outrankingRivalOf(settlement) : null;
-  const said = rival ? `${APPEARS_TO_GOVERN.slice(0, -1)}; the real decisions rest with ${rival}.` : '';
+  const said = rival ? `Holds the title; the decisions that matter are made by ${rival}.` : '';
   return note.replace(APPEARS_TO_GOVERN, said).replace(/\s{2,}/g, ' ').trim();
 }

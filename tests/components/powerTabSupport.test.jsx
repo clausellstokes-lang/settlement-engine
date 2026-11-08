@@ -350,7 +350,8 @@ describe('UX consolidation — Power (T2-17..T2-19)', () => {
     cleanup();
     const f = render(<PowerTab powerStructure={fractured.powerStructure} settlement={fractured} narrativeNote={null} publicDossier />).container.textContent;
     expect(f).toContain('Governance fractured.');
-    expect(f).not.toContain('appears to govern is not the faction that governs'); // anchored: toContain('Governance fractured.') on this render
+    // re-keyed by identity at W3 POW #189 (2026-11-08, the owner's style law: the crisis note says the one thing the banner does not): the unnamed claim's new words.
+    expect(f).not.toContain('decisions that matter are made elsewhere'); // anchored: toContain('Governance fractured.') on this render
   });
 
   it('T2-18: the cut lenses do not draw (DS-POW-2 lens, legitimacy hold, governing title, dormant blocs) and the kept ones do', () => {

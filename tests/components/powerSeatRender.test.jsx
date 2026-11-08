@@ -5,7 +5,7 @@
  * (lane RULERS, 2026-11-03; root-cause trace failure 5).
  *
  *   - "Holds power" is the ruler's word alone; a challenger reads "Contests the seat".
- *   - "The faction that appears to govern is not the faction that governs" prints only
+ *   - "Holds the title; the decisions that matter are made by …" prints only
  *     when a rival outranks the governing faction on the power figures, and names it.
  *   - The vacant seat's row never reads "The seat The seat".
  * Seeds are the probe's (scratchpad probes/rulers/seat120.mjs) on the app's birth path.
@@ -21,7 +21,8 @@ import { governingFactionOf, nameOf } from '../../src/domain/rulingPower.js';
 
 afterEach(cleanup);
 
-const NOTE = 'The faction that appears to govern is not the faction that governs';
+// re-keyed by identity at W3 POW #189 (2026-11-08, the owner's style law: the crisis note says the one thing the banner does not).
+const NOTE = 'Holds the title, but the decisions that matter are made elsewhere';
 const born = (tier, i) => generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: tier }), null, { seed: `rulers-${tier}-${i}`, customContent: {} });
 const tab = (s) => render(<PowerTab powerStructure={s.powerStructure} settlement={s} narrativeNote={null} />).container;
 /** Open the governing faction's roster row (one row opens at a time) so its crisis note is on the page. */
@@ -73,17 +74,19 @@ describe('the governs note names the rival or goes', () => {
     tab(s);
     openGoverning(s);
     const text = document.body.textContent;
-    expect(text).toContain(`${NOTE}; the real decisions rest with Religious Authorities.`);
+    expect(text).toContain('Holds the title; the decisions that matter are made by Religious Authorities.');
   });
 
-  it('drops the claim when no rival outranks the governing faction (thorp 13), keeping the fracture reading', () => {
+  // The note carried "Governing authority is internally fractured." before #189; that reading now has one home, the
+  // legitimacy panel's banner (and DS-POW-1's fractured line), so the unnamed claim leaves and the note with it.
+  it('drops the claim when no rival outranks the governing faction (thorp 13); the fracture reading stays in the banner', () => {
     const s = born('thorp', 13);
     expect(String(governingFactionOf(s).crisisNote), 'fixture premise: the generator wrote the note').toContain(NOTE);
     tab(s);
     openGoverning(s);
     const text = document.body.textContent;
-    expect(text).toContain('Governing authority is internally fractured.');
-    expect(text).not.toContain('appears to govern'); // anchored: the same note's first sentence is asserted on this render
+    expect(text).toContain('Governance fractured.');
+    expect(text).not.toContain('decisions that matter are made'); // anchored: the banner is asserted on this render
   });
 });
 
