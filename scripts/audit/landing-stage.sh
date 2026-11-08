@@ -21,6 +21,7 @@
 # Usage (from the landing branch's checkout):
 #   sh scripts/audit/landing-stage.sh build   <step-commit> <stage-dir>
 #   sh scripts/audit/landing-stage.sh guard   <step-commit>              # the build's door-path guard alone
+#   LANDING_STAGE_MERGE_SIDE=<merge sha> sh scripts/audit/landing-stage.sh build|guard ...   # the integration merge's arm
 #   sh scripts/audit/landing-stage.sh measure <stage-dir> <scratch-dir> [<previous stage's scratch-dir>]
 #   sh scripts/audit/landing-stage.sh suites  <stage-dir>        # the registered suites + walker, plainly
 set -eu
@@ -61,10 +62,54 @@ case "$cmd" in
     # step's bytes went forward unchanged until a record moved them -- AND (b) every commit in step..carry that touches
     # it carries an `Owner-Signed:` trailer -- every later move went through the door. Otherwise STOP, naming the path
     # and the first unsigned toucher (or the difference at the first toucher's parent).
+    # THE INTEGRATION MERGE'S ARM (the chair's ruling on MERGE-CAR's STOP at 572c15018, 2026-11-08: the law of the chain
+    # made exact — the integration's FIRST-PARENT line is the chain; a lane's records are components inside the side a
+    # merge brought in whole; the composition record at the merge point is the signature for what the merge took).
+    # `LANDING_STAGE_MERGE_SIDE=<sha>` names ONE merge commit (never a pattern) that lies on the first-parent line
+    # between the step and the carry. A touched door path is then also CARRIED when every FIRST-PARENT commit in
+    # step..carry that touches it is Owner-Signed or is that merge, AND the merge's bytes for the path equal its SECOND
+    # parent's exactly (it took one side whole); a merge that hand-edits a door path STOPs. The first stage this serves
+    # is the rung-2 composition at 572c15018 behind the integration merge 8dff691f3, which took the car's door paths whole.
+    merge=''
+    if [ -n "${LANDING_STAGE_MERGE_SIDE:-}" ]; then
+      merge=$(git rev-parse --verify -q "${LANDING_STAGE_MERGE_SIDE}^{commit}" || true)
+      if [ -z "$merge" ] || ! git rev-parse --verify -q "$merge^2" >/dev/null; then
+        echo "STOP: LANDING_STAGE_MERGE_SIDE=${LANDING_STAGE_MERGE_SIDE} does not name one merge commit" >&2
+        exit 1
+      fi
+      if ! git rev-list --first-parent "$full..$carry" | grep -qx "$merge"; then
+        echo "STOP: LANDING_STAGE_MERGE_SIDE=${LANDING_STAGE_MERGE_SIDE} is not on the first-parent line between the step and the carry" >&2
+        exit 1
+      fi
+    fi
     for p in $touched; do
       if git diff --quiet "$full" "$carry" -- "$p"; then
         echo "door path touched by the step, equal to the carry — carried: $p" >&2
         continue
+      fi
+      if [ -n "$merge" ]; then
+        fpmovers=$(git rev-list --first-parent --reverse "$full..$carry" -- "$p")
+        if printf '%s\n' "$fpmovers" | grep -qx "$merge"; then
+          if ! git diff --quiet "$merge^2" "$merge" -- "$p"; then
+            differ="$differ$p (the named merge $(git rev-parse --short=9 "$merge") hand-edits it: its bytes differ from its second parent's)
+"
+            continue
+          fi
+          fpunsigned=''
+          for c in $fpmovers; do
+            [ "$c" = "$merge" ] && continue
+            if [ -z "$(git log -1 --format='%(trailers:key=Owner-Signed,valueonly)' "$c" | tr -d '[:space:]')" ]; then
+              fpunsigned=$c; break
+            fi
+          done
+          if [ -n "$fpunsigned" ]; then
+            differ="$differ$p (first unsigned first-parent toucher $(git rev-parse --short=9 "$fpunsigned"))
+"
+          else
+            echo "door path touched by the step, moved after it only by signed records and the integration merge $(git rev-parse --short=9 "$merge") (took its second parent $(git rev-parse --short=9 "$merge^2")'s side whole) — carried: $p" >&2
+          fi
+          continue
+        fi
       fi
       movers=$(git rev-list --reverse "$full..$carry" -- "$p")
       first=$(printf '%s\n' "$movers" | head -n 1)

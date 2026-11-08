@@ -137,4 +137,54 @@ describe('landing-stage.sh build guard', () => {
     expect(r.stderr).toContain(`door path touched by the step, moved after it only by signed records — carried: tests/fixtures/g.json (${signed})`);
     expect(r.stderr).toContain('door path touched by the step, equal to the carry — carried: tests/fixtures/h.json');
   });
+
+  // THE INTEGRATION MERGE'S ARM (the chair's ruling on MERGE-CAR's STOP at 572c15018, 2026-11-08): LANDING_STAGE_MERGE_SIDE
+  // names ONE merge on the first-parent line; a door path moved after the step only by signed first-parent commits and by
+  // that merge — which took its SECOND parent's bytes whole — is carried; a merge that hand-edits the path STOPs.
+  function mergeRepo({ handEdit = false } = {}) {
+    const r0 = repo();
+    const { dir, git, step } = r0;
+    git('checkout', '-q', '-b', 'side');
+    writeFileSync(join(dir, 'tests/fixtures/g.json'), '{"a":5}\n'); // the side lane's own (unsigned) move of g
+    git('commit', '-qam', 'a lane move of g');
+    const side = git('rev-parse', 'HEAD');
+    git('checkout', '-q', '-'); // back to the first-parent line
+    git('commit', '-q', '--allow-empty', '-m', 'the line moves on');
+    git('merge', '-q', '--no-ff', '--no-commit', 'side');
+    if (handEdit) writeFileSync(join(dir, 'tests/fixtures/g.json'), '{"a":6}\n'); // the merge hand-edits the door path
+    git('add', '-A');
+    git('commit', '-q', '-m', 'merge(integration): the side lane, its door paths taken whole');
+    return { ...r0, side, merge: git('rev-parse', 'HEAD') };
+  }
+
+  test('merge arm, red-first: without the arm a door path moved behind a merge STOPs; named, a one-side-whole merge carries', () => {
+    const { dir, step, merge, side } = mergeRepo();
+    const before = run('sh', [script, 'guard', step], dir);
+    const after = spawnSync('sh', [script, 'guard', step], { cwd: dir, encoding: 'utf8', env: { ...process.env, LANDING_STAGE_MERGE_SIDE: merge } });
+    rmSync(dir, { recursive: true, force: true });
+    expect(before.status).toBe(1);
+    expect(before.stderr).toMatch(/STOP: step \S+ touched door paths/);
+    expect(after.status, after.stderr).toBe(0);
+    expect(after.stderr).toContain(`door path touched by the step, moved after it only by signed records and the integration merge ${merge.slice(0, 9)} (took its second parent ${side.slice(0, 9)}'s side whole) — carried: tests/fixtures/g.json`);
+    expect(after.stderr).toContain('door path touched by the step, equal to the carry — carried: tests/fixtures/h.json'); // anchored: the equal path keeps its own receipt
+  });
+
+  test('merge arm NEGATIVE: a named merge that hand-edits the door path STOPs, naming the merge', () => {
+    const { dir, step, merge } = mergeRepo({ handEdit: true });
+    const r = spawnSync('sh', [script, 'guard', step], { cwd: dir, encoding: 'utf8', env: { ...process.env, LANDING_STAGE_MERGE_SIDE: merge } });
+    rmSync(dir, { recursive: true, force: true });
+    expect(r.status).toBe(1);
+    expect(r.stderr).toContain(`tests/fixtures/g.json (the named merge ${merge.slice(0, 9)} hand-edits it: its bytes differ from its second parent's)`);
+  });
+
+  test('merge arm: a name that is not one merge on the first-parent line between the step and the carry STOPs', () => {
+    const { dir, step, side } = mergeRepo();
+    const notMerge = spawnSync('sh', [script, 'guard', step], { cwd: dir, encoding: 'utf8', env: { ...process.env, LANDING_STAGE_MERGE_SIDE: side } });
+    const pattern = spawnSync('sh', [script, 'guard', step], { cwd: dir, encoding: 'utf8', env: { ...process.env, LANDING_STAGE_MERGE_SIDE: 'merge*' } });
+    rmSync(dir, { recursive: true, force: true });
+    expect(notMerge.status).toBe(1);
+    expect(notMerge.stderr).toContain('does not name one merge commit');
+    expect(pattern.status).toBe(1);
+    expect(pattern.stderr).toContain('does not name one merge commit');
+  });
 });
