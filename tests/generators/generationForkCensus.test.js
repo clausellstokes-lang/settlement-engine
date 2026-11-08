@@ -163,7 +163,10 @@ const GOLDEN_CONTROL_KEY = 'town|germanic|plains|road|civilized|golden-master-v3
 // composition (5c9a2a171; the base 262e8b255's own produced row) -> 2dc1916f PEOPLE-1 CAST (bea23878e) -> df1f6ff3 PEOPLE-2
 // (053b85375) -> b5f89e1d PEOPLE-3 HOOKS (3d52c0932) -> 4957a2b9 PEOPLE-4 TIES (9cd1f1f1c), held by 5A (61136ab39) ->
 // b58f9562 PEOPLE-5B EDIT (32b625930), held by the shim out (d16a14aaf).
-const GOLDEN_CONTROL_HASH = 'b58f9562f8757b45ae5a9d4dcce7642ee1484985affe1ea28cac6bc3f3696850';
+// 2026-11-08, the integration landing (MERGE-CAR, ODQ §934.105), traced the same way at each record's golden-master
+// commit: b58f9562 (the car's, carried) -> 2432ade0 record A, the rung-2 landing's merge (4e22bb6ad) -> 882e592f record B,
+// the people car's merge (6196cdec8).
+const GOLDEN_CONTROL_HASH = '882e592f4fb18052d4936695d3714658365fa133af6a55313eab5867335f1521';
 /** EM-P0's own pinned-mode row and its chooser keys, re-measured here under the mocks. */
 const PIN_ROW = {
   settType: 'town', culture: 'germanic', terrainOverride: 'riverside',
@@ -182,7 +185,11 @@ const CHOOSER_KEYS = ['npcs', 'relationships'];
 // produced manifest in place): 303 -> 885 PEOPLE-1 CAST (dc655f712: one face per face-bearing house, the cast drawn on the
 // step) -> 840 PEOPLE-3 HOOKS (0f930ce95: one hook per card) -> 560 PEOPLE-4 TIES (c7d552370: the pair writer's draws
 // leave the step), unmoved to the tip.
-const POPULATION_UNPINNED_DRAWS = 560;
+// RE-KEYED at MERGE-CAR (2026-11-08; the integration side held the base's 303): 560 -> 547, measured by this arm at the
+// merged tree. The car's person-hook draws now run through the rung-2 landing's declared draw (drawDeclared over the
+// census's facts, the held set refusing inside it — MERGE-R2's ruling 2: nothing left, no roll), the composition of
+// silent breaks 1 and 2. PLAUSIBLE, not bisected.
+const POPULATION_UNPINNED_DRAWS = 547;
 /** The row both side channels are censused on (the pre-proof's probe row). */
 const CENSUS_ROW = {
   settType: 'town', culture: 'germanic', terrainOverride: 'riverside',
@@ -313,7 +320,7 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
     ).toEqual([]);
   };
 
-  it('A1 — the instrument reaches the generator graph: mints split 4 direct / 106 via fork, no golden moves, 560 draws unpinned and 0 pinned', () => {
+  it('A1 — the instrument reaches the generator graph: mints split 4 direct / 106 via fork, no golden moves, 547 draws unpinned and 0 pinned', () => {
     // ── C0 — the mocks lose no export. A replacement that dropped a name would break
     // importers silently, and every figure below would be measured on a crippled module.
     expect(mintCensus.actualKeys.length, 'the prng mock factory never ran').toBeGreaterThan(0);
