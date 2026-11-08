@@ -177,14 +177,14 @@
  "digests": {
   "corpusMeta": "91c6e9f2e1677d0c3bf587cffb27b69fe554308ff5d9fda1622090c53dfec0b9",
   "inventory": "0a77cc0b1a29d41babeabecbeded0385f72b2876fe36501ab8283b64d8cd3937",
-  "manifests": "0cc2d9b4f0bd7bdda392931b3ca9c6257e4f050d0ce0730a0f40dc30e8f7c16f",
+  "manifests": "f6a279d44df63737c6ea5b01c6c8321ebf45e538fdeab65a51c4f0529eb516e5",
   "migrationReview": "2aab370e3c7ae37a3f3a1913b485ec64291d30783be550d4c6f27d7665921f6c",
   "rowTags": "707fe2c0f85a64f89016fd606099f7a8a71fa5ac76b218d8eb2b287a998b7d1d",
-  "scanStats": "c10da564dfbd9371fa66ffd551213b6cd22e4e9052486be2153da1ad9cf2796f",
-  "sentinel": "d9e7f8382726f2ce00b8e612c2d68fc4eb1133638cf840c1250efc9de675332a"
+  "scanStats": "35a16ca88e40042c278d769f01709b42359f5d14ece0ca7ffa2995b51f77361a",
+  "sentinel": "0b5dc51b36d86160847e7ada7ea352a80ef2d4e44c66625e5555a9e30d9acbca"
  },
  "frozen": "2026-11-08",
- "frozenAtSha": "0095f7327f16777df7f645aaac2f531ac1dda47a",
+ "frozenAtSha": "dded069c1514924804506db27e42ca0a3762c528",
  "identities": 1545,
  "inventory": {
   "src/components/BuyThisDossier.jsx": {
@@ -2669,7 +2669,7 @@
   },
   "executionTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "d9e834699aa30c76a87e4907f43615bb9b87048ffc479d426c45c33bf8874499",
+   "digest": "5782266abad45f58122e65965305dcb81777c4c2f3f1a43e038734d937278fd9",
    "entries": [
     {
      "mode": "100644",
@@ -9289,8 +9289,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/galleryVeil.js",
-     "sha256": "49be313ca2707e4921ddd09ba468fc5442528b67b80ffc1102769a2682364200",
-     "size": 56479,
+     "sha256": "106c82a0cf002bcfebff988f25da8b5dbf0b312838a952e27d36c185cd51c873",
+     "size": 55675,
      "type": "file"
     },
     {
@@ -10913,8 +10913,8 @@
     {
      "mode": "100644",
      "path": "src/domain/npc/npcOps.js",
-     "sha256": "69bb4f80ce96d082c0b9fb2873890953e937f8d812c6b415e50d9c9d91095371",
-     "size": 14390,
+     "sha256": "5a6368d0b59affdb6c591ac6fd3be2193106b159112ac5fe9e4915f4689db26c",
+     "size": 14914,
      "type": "file"
     },
     {
@@ -10978,6 +10978,13 @@
      "path": "src/domain/people/cardPowers.js",
      "sha256": "11805b0384eb10ff92d9534a8fe52361e32850cbdd06b2292011aedc0c1225fb",
      "size": 7390,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/domain/people/cardVeil.js",
+     "sha256": "9c2c14fb6b2ff9e7a2335209b3387383de9876bcde8dbec593e619f892242864",
+     "size": 7121,
      "type": "file"
     },
     {
@@ -11473,15 +11480,15 @@
     {
      "mode": "100644",
      "path": "src/domain/settlement.schema.js",
-     "sha256": "c7287e0fcf77a39340eba3c4af576b2adf251ed5e28542b749ee4ed066b663c2",
-     "size": 80523,
+     "sha256": "28cccd065778b89ec99a9d949dbdc9ecc5091926f26d3896eee3217ff33f57fc",
+     "size": 81038,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/domain/settlementMigrations.js",
-     "sha256": "e9d57eb63abcba0552ecf37d6f22c8ddca4d0dde40e1e7cc9d9c572b75d8fb19",
-     "size": 19286,
+     "sha256": "737ee118c1294b06f6931bcd5a7beee805e4c454eba3e86cd15b5b37deb74112",
+     "size": 19603,
      "type": "file"
     },
     {
@@ -16324,8 +16331,8 @@
     {
      "mode": "100644",
      "path": "src/generators/people/castPowers.js",
-     "sha256": "af2ebd5b169657fd9fc62ea0392b280331fea2534018d1b1e09c1622fc8ed391",
-     "size": 16549,
+     "sha256": "303272413d7404c71f589f37abfecea0f5f8e0db6c0c37427442f42beafb08df",
+     "size": 17194,
      "type": "file"
     },
     {
@@ -16352,8 +16359,8 @@
     {
      "mode": "100644",
      "path": "src/generators/people/representatives.js",
-     "sha256": "495dfdfd587cfb97a19dbbe7435a9b34573c09e7defa77f67a7b29024211d8fc",
-     "size": 19493,
+     "sha256": "2e2bce28a58cd52501b563808e2cb35ee4e42873fcc373d0845e396da7dd15e2",
+     "size": 19906,
      "type": "file"
     },
     {
@@ -19355,8 +19362,8 @@
     {
      "mode": "100644",
      "path": "src/store/settlementPendingEditWriters.js",
-     "sha256": "1ceed178c2fc7225326c03d5d8a9ae2e8db48b0b95f02c0ae778b5cf4f006fa1",
-     "size": 10256,
+     "sha256": "f9bd55af47b1e02e58ce0c5f5f10b26089c29f9523af6a6f7bb6213b21fa756d",
+     "size": 10747,
      "type": "file"
     },
     {
@@ -19545,7 +19552,7 @@
   },
   "scanTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "31406f1a8df4acd69f4d805ffe95609d8600bddbe48ae42f954c2cd9f187d4d1",
+   "digest": "d22893e4190a20eaa358d4969e201a0ba32b18f8d21ac8a0e6705f42cb9796cf",
    "entries": [
     {
      "mode": "100644",
@@ -25976,8 +25983,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/galleryVeil.js",
-     "sha256": "49be313ca2707e4921ddd09ba468fc5442528b67b80ffc1102769a2682364200",
-     "size": 56479,
+     "sha256": "106c82a0cf002bcfebff988f25da8b5dbf0b312838a952e27d36c185cd51c873",
+     "size": 55675,
      "type": "file"
     },
     {
@@ -27600,8 +27607,8 @@
     {
      "mode": "100644",
      "path": "src/domain/npc/npcOps.js",
-     "sha256": "69bb4f80ce96d082c0b9fb2873890953e937f8d812c6b415e50d9c9d91095371",
-     "size": 14390,
+     "sha256": "5a6368d0b59affdb6c591ac6fd3be2193106b159112ac5fe9e4915f4689db26c",
+     "size": 14914,
      "type": "file"
     },
     {
@@ -27665,6 +27672,13 @@
      "path": "src/domain/people/cardPowers.js",
      "sha256": "11805b0384eb10ff92d9534a8fe52361e32850cbdd06b2292011aedc0c1225fb",
      "size": 7390,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/domain/people/cardVeil.js",
+     "sha256": "9c2c14fb6b2ff9e7a2335209b3387383de9876bcde8dbec593e619f892242864",
+     "size": 7121,
      "type": "file"
     },
     {
@@ -28160,15 +28174,15 @@
     {
      "mode": "100644",
      "path": "src/domain/settlement.schema.js",
-     "sha256": "c7287e0fcf77a39340eba3c4af576b2adf251ed5e28542b749ee4ed066b663c2",
-     "size": 80523,
+     "sha256": "28cccd065778b89ec99a9d949dbdc9ecc5091926f26d3896eee3217ff33f57fc",
+     "size": 81038,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/domain/settlementMigrations.js",
-     "sha256": "e9d57eb63abcba0552ecf37d6f22c8ddca4d0dde40e1e7cc9d9c572b75d8fb19",
-     "size": 19286,
+     "sha256": "737ee118c1294b06f6931bcd5a7beee805e4c454eba3e86cd15b5b37deb74112",
+     "size": 19603,
      "type": "file"
     },
     {
@@ -33011,8 +33025,8 @@
     {
      "mode": "100644",
      "path": "src/generators/people/castPowers.js",
-     "sha256": "af2ebd5b169657fd9fc62ea0392b280331fea2534018d1b1e09c1622fc8ed391",
-     "size": 16549,
+     "sha256": "303272413d7404c71f589f37abfecea0f5f8e0db6c0c37427442f42beafb08df",
+     "size": 17194,
      "type": "file"
     },
     {
@@ -33039,8 +33053,8 @@
     {
      "mode": "100644",
      "path": "src/generators/people/representatives.js",
-     "sha256": "495dfdfd587cfb97a19dbbe7435a9b34573c09e7defa77f67a7b29024211d8fc",
-     "size": 19493,
+     "sha256": "2e2bce28a58cd52501b563808e2cb35ee4e42873fcc373d0845e396da7dd15e2",
+     "size": 19906,
      "type": "file"
     },
     {
@@ -36042,8 +36056,8 @@
     {
      "mode": "100644",
      "path": "src/store/settlementPendingEditWriters.js",
-     "sha256": "1ceed178c2fc7225326c03d5d8a9ae2e8db48b0b95f02c0ae778b5cf4f006fa1",
-     "size": 10256,
+     "sha256": "f9bd55af47b1e02e58ce0c5f5f10b26089c29f9523af6a6f7bb6213b21fa756d",
+     "size": 10747,
      "type": "file"
     },
     {
@@ -36225,7 +36239,7 @@
   },
   "sourceTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "da64bd49c0df985d0b21a115c73e04e27363a52ccbba95343c15af62481d36b2",
+   "digest": "8cde75da0acc18e3e67f8ac3ec902e42fee6e2e33a9e8b1792b3950d5dccece7",
    "entries": [
     {
      "mode": "100644",
@@ -42775,8 +42789,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/galleryVeil.js",
-     "sha256": "49be313ca2707e4921ddd09ba468fc5442528b67b80ffc1102769a2682364200",
-     "size": 56479,
+     "sha256": "106c82a0cf002bcfebff988f25da8b5dbf0b312838a952e27d36c185cd51c873",
+     "size": 55675,
      "type": "file"
     },
     {
@@ -44399,8 +44413,8 @@
     {
      "mode": "100644",
      "path": "src/domain/npc/npcOps.js",
-     "sha256": "69bb4f80ce96d082c0b9fb2873890953e937f8d812c6b415e50d9c9d91095371",
-     "size": 14390,
+     "sha256": "5a6368d0b59affdb6c591ac6fd3be2193106b159112ac5fe9e4915f4689db26c",
+     "size": 14914,
      "type": "file"
     },
     {
@@ -44464,6 +44478,13 @@
      "path": "src/domain/people/cardPowers.js",
      "sha256": "11805b0384eb10ff92d9534a8fe52361e32850cbdd06b2292011aedc0c1225fb",
      "size": 7390,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/domain/people/cardVeil.js",
+     "sha256": "9c2c14fb6b2ff9e7a2335209b3387383de9876bcde8dbec593e619f892242864",
+     "size": 7121,
      "type": "file"
     },
     {
@@ -44959,15 +44980,15 @@
     {
      "mode": "100644",
      "path": "src/domain/settlement.schema.js",
-     "sha256": "c7287e0fcf77a39340eba3c4af576b2adf251ed5e28542b749ee4ed066b663c2",
-     "size": 80523,
+     "sha256": "28cccd065778b89ec99a9d949dbdc9ecc5091926f26d3896eee3217ff33f57fc",
+     "size": 81038,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/domain/settlementMigrations.js",
-     "sha256": "e9d57eb63abcba0552ecf37d6f22c8ddca4d0dde40e1e7cc9d9c572b75d8fb19",
-     "size": 19286,
+     "sha256": "737ee118c1294b06f6931bcd5a7beee805e4c454eba3e86cd15b5b37deb74112",
+     "size": 19603,
      "type": "file"
     },
     {
@@ -49810,8 +49831,8 @@
     {
      "mode": "100644",
      "path": "src/generators/people/castPowers.js",
-     "sha256": "af2ebd5b169657fd9fc62ea0392b280331fea2534018d1b1e09c1622fc8ed391",
-     "size": 16549,
+     "sha256": "303272413d7404c71f589f37abfecea0f5f8e0db6c0c37427442f42beafb08df",
+     "size": 17194,
      "type": "file"
     },
     {
@@ -49838,8 +49859,8 @@
     {
      "mode": "100644",
      "path": "src/generators/people/representatives.js",
-     "sha256": "495dfdfd587cfb97a19dbbe7435a9b34573c09e7defa77f67a7b29024211d8fc",
-     "size": 19493,
+     "sha256": "2e2bce28a58cd52501b563808e2cb35ee4e42873fcc373d0845e396da7dd15e2",
+     "size": 19906,
      "type": "file"
     },
     {
@@ -52841,8 +52862,8 @@
     {
      "mode": "100644",
      "path": "src/store/settlementPendingEditWriters.js",
-     "sha256": "1ceed178c2fc7225326c03d5d8a9ae2e8db48b0b95f02c0ae778b5cf4f006fa1",
-     "size": 10256,
+     "sha256": "f9bd55af47b1e02e58ce0c5f5f10b26089c29f9523af6a6f7bb6213b21fa756d",
+     "size": 10747,
      "type": "file"
     },
     {
@@ -53346,22 +53367,22 @@
   }
  },
  "scanStats": {
-  "files": 2382,
-  "reads": 137099,
-  "resolved": 10756,
-  "unresolved": 126343
+  "files": 2383,
+  "reads": 137128,
+  "resolved": 10771,
+  "unresolved": 126357
  },
  "scannerProvenance": {
   "detectorDigest": "496a36dca495337a97b949f6628aa99f26ef090695d7614260dead994b6d740b",
-  "executionTreeDigest": "d9e834699aa30c76a87e4907f43615bb9b87048ffc479d426c45c33bf8874499",
-  "scanTreeDigest": "31406f1a8df4acd69f4d805ffe95609d8600bddbe48ae42f954c2cd9f187d4d1",
-  "sourceTreeDigest": "da64bd49c0df985d0b21a115c73e04e27363a52ccbba95343c15af62481d36b2",
+  "executionTreeDigest": "5782266abad45f58122e65965305dcb81777c4c2f3f1a43e038734d937278fd9",
+  "scanTreeDigest": "d22893e4190a20eaa358d4969e201a0ba32b18f8d21ac8a0e6705f42cb9796cf",
+  "sourceTreeDigest": "8cde75da0acc18e3e67f8ac3ec902e42fee6e2e33a9e8b1792b3950d5dccece7",
   "unscannedInputDigest": "ba274abce8a4669ce588c8cbe3a067a8115da0d2d350890b334929f6298cac97"
  },
  "schema": 32,
  "sentinel": {
-  "resolvedReads": 10756,
-  "totalKeys": 11992,
+  "resolvedReads": 10771,
+  "totalKeys": 11994,
   "usableShapes": 516
  },
  "total": 2193
