@@ -136,11 +136,13 @@ export const landing = {
     h2:     'The same town, in a voice for the table.',
     // ⚓ "never invents facts" is carried VERBATIM — tests/copy/landingClaimsParity
     // binds it to src/domain/aiGrounding.js and its suites. ⚑ The four named
-    // receipts are voice.receipts[0], [1], [2] and [3], in the order the card prints
+    // receipts are voice.receipts[0], [1] and [2], in the order the card prints
     // (re-grounded 2026-09-30 with forge.body above; the conflict line came back with
     // the one-faction-set fixture, GS-2 of ODQ §934.101, re-grounded 2026-11-01; re-grounded
-    // 2026-11-04 at the rung-1 landing: the Religious Authorities and the blacksmith. An OWNER VETO POINT.)
-    body:   'Left is what the engine derived about Cnocby: the quarrel it found between the Elder Council and the Religious Authorities, the road it rolled, the timber it marked out, the blacksmith it seated. Right is the same four facts for the table. The Narrative Layer never invents facts. Everything it needs is already in the brief.',
+    // 2026-11-04 at the rung-1 landing: the Religious Authorities and the blacksmith; re-grounded
+    // 2026-11-07 at the people car's landing: the conflict receipt left with the faction grouping, so three
+    // facts remain — the road, the timber, the blacksmith. An OWNER VETO POINT.)
+    body:   'Left is what the engine derived about Cnocby: the road it rolled, the timber it marked out, the blacksmith it seated. Right is the same three facts for the table. The Narrative Layer never invents facts. Everything it needs is already in the brief.',
     // Owner directive: disclose the AI up front (not prominent). The Narrative
     // Layer is no longer the ONLY AI surface (the Surveyor workshop is another),
     // so this line evolved (W-DOC reconcile, brief §4) from the stale "only AI
@@ -174,14 +176,17 @@ export const landing = {
     body1: 'Canonize the draft and Cnocby becomes part of your campaign: it takes events, keeps a chronicle, remembers. Put it on the world map in the Realm with the towns around it, tie them together by trade and grudge, and add your own gods, guilds and goods in the Compendium.',
     // ⚑ FIXTURE-GROUNDED, EVENT BY EVENT. Every beat in this sentence is one row
     // of realm.advance — the same six records the card beside it renders, in the
-    // same order, at the same weeks (3 challenge · 4 raiders · 8 reforms · 8 raiders
-    // passed · 9 capture · 12 trade). It is the most fragile prose on the page and the grounding
+    // same order, at the same weeks (2 order · 3 rally · 4 fracture passed · 5 war footing
+    // · 9 capture · 12 trade). It is the most fragile prose on the page and the grounding
     // suite walks it word against field.
     // 2026-10-02, the Voice Program (ODQ §934.88): re-grounded on the regenerated timeline, which now speaks in deeds
     // ("Cnocby goes onto a war footing", "Crime takes hold of Cnocby", "Cnocby's trade routes break down").
     // 2026-11-04 (the rung-1 landing, LANDING-2; an OWNER VETO POINT): re-grounded on the timeline the rung-1
     // window's town derives (an open challenge, the raiders, the reforms, the capture, the broken routes).
-    body2: 'Then advance time. In Cnocby’s first twelve weeks the village’s rulers faced an open challenge, and monster or raider pressure deepened and then passed, leaving its abandoned roads behind; by week eight Inghean MacCarthy was pushing through reforms, by week nine the Elder Council had captured an institution, and by week twelve its trade routes had broken down. Every one of those is a record the engine wrote, and every one carries its cause.',
+    // 2026-11-07 (the people car's landing, PEOPLE-LAND second seat; an OWNER VETO POINT): re-grounded on the
+    // timeline the cast derives (the priest's order, a rally for an institution, the fracture passed, the war
+    // footing, the capture, the broken routes).
+    body2: 'Then advance time. In Cnocby’s first twelve weeks Étaín Sullivan set out to restore order and Fearghus O’Brien rallied supporters to take control of an institution; the religious conversion fracture passed, leaving its sectarian memory behind; by week five the village was on a war footing, by week nine the Elder Council had captured an institution, and by week twelve its trade routes had broken down. Every one of those is a record the engine wrote, and every one carries its cause.',
     // The chronicle beside the realm map is the REGION's band, not the town's —
     // two cards that now say different things, and a reader needs to be told why.
     regionLine: 'Beside it, the region: what the neighbours did while Cnocby was busy.',

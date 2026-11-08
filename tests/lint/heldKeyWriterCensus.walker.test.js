@@ -124,9 +124,11 @@ const ROSTER = Object.freeze([
   { symbol: 'enrichNpcCoherence', file: NARRATIVE_FILE, cls: 'enricher', stream: NAMED_CHILD, via: 'generateCoherence' },
   { symbol: 'buildPoliticalNarrative', file: NARRATIVE_FILE, cls: 'enricher', stream: NAMED_CHILD, via: 'generateCoherence' },
   { symbol: 'mergeNPCLists', file: 'src/generators/npcGenerator.js', cls: 'enricher', stream: NAMED_CHILD, via: 'generateCoherence' },
-  { symbol: 'disperseNamedRoster', file: 'src/generators/density/applyDensityLaw.js', cls: 'enricher', stream: NAMED_CHILD, via: 'generateCoherence' },
+  // 2026-11-07 PEOPLE-1 CAST (R-P2/R-P3): `disperseNamedRoster` is RETIRED from birth — the cast is the roster's faces;
+  // the powers' people are written by `assignCastPowers` in the same named child stream, through the same seam.
+  { symbol: 'assignCastPowers', file: 'src/generators/people/castPowers.js', cls: 'enricher', stream: NAMED_CHILD, via: 'generateCoherence' },
   { symbol: 'enrichNPCsWithStructure', file: 'src/generators/npcStructure.js', cls: 'enricher', stream: NAMED_CHILD, via: 'generateCoherence' },
-  { symbol: 'relinkFactionMembers', file: NARRATIVE_FILE, cls: 'MIRROR', stream: SHARED, via: 'generateCoherence' },
+  // 2026-11-07 PEOPLE-LAND (M-2, the shim out): `relinkFactionMembers`, the one MIRROR, left with the NPC grouping.
   { symbol: 'ensureFactionStructuralNpcs', file: 'src/generators/factionRoles.js', cls: 'producer', stream: SHARED, via: ASSEMBLY_STEP },
   { symbol: 'reconcilePowerStructure', file: RECONCILE_FILE, cls: 'replay', stream: SHARED, via: ASSEMBLY_STEP },
   { symbol: 'resizePoliticalRoster', file: 'src/generators/density/applyDensityLaw.js', cls: 'replay', stream: SHARED, via: ASSEMBLY_STEP },
@@ -140,7 +142,7 @@ const ROSTER = Object.freeze([
   // rival or enemy tie crosses, drawing its count and issues on its OWN assembly child stream
   // 'faction-conflicts'. NEITHER consults a pin: no step declares either key any more, so the
   // pin bag can never carry them (see A2) and both re-derive on every run.
-  { symbol: 'generateFactions', file: 'src/generators/power/factionGrouping.js', cls: 'producer', stream: SHARED, via: ASSEMBLY_STEP },
+  // 2026-11-07 PEOPLE-LAND (M-2): `generateFactions` (power/factionGrouping.js) deleted with the grouping it built.
   { symbol: 'generateConflicts', file: 'src/generators/power/conflicts.js', cls: 'producer', stream: NAMED_CHILD, via: ASSEMBLY_STEP },
   // ⭐ 13 -> 14 (lane RUNG1-TRUTH unit A, 2026-11-04): `storeTrueHooksOnly` drops a stored hook its
   // own record contradicts, so it WRITES `plotHooks` inside `npcs` and `conflicts` (copy-on-write,
@@ -150,17 +152,27 @@ const ROSTER = Object.freeze([
   { symbol: 'storeTrueHooksOnly', file: 'src/domain/coherence/hookTruthRecord.js', cls: 'mutator', stream: SHARED, via: ASSEMBLY_STEP },
   // ⭐ 15 -> 18 AT THE POOL CENSUS'S MERGE (classed by LANDING-R2 seat E, 2026-11-07, each read
   // from its own body; none draws, so all three are SHARED-stream):
-  // `fitFactionRoster` (census-4 R12, acd70a977) re-fits a misfit NPC's `factionAffiliation`
-  // inside `npcs` (a new array; no row's identity changes), gated in the assembly body on
-  // `chooseOrPin(pins, 'npcs', …)`. `resolveFactionLabelsAtClose` (census-1i unit 1 R-AW,
+  // `fitFactionRoster` (census-4 R12, acd70a977) re-fitted a misfit NPC's `factionAffiliation`;
+  // RETIRED at MERGE-CAR (the chair's SC-1 ruling: superseded by construction, memberships born by rank). `resolveFactionLabelsAtClose` (census-1i unit 1 R-AW,
   // ba7887862) renames a power faction whose declared label resolves late, through
   // applyFactionRenameToSettlement, gated on `chooseOrPin(pins, 'powerStructure', …)`.
   // `fishTradeTwinned` (F11 unit 3, 2aee16efe) re-words a fish-trade row's `desc` inside
   // `institutions` when the record holds no fish; it is called in the settlement literal and
   // consults NO pin, so it runs on a held roster too (stated, not ruled: EM-R7's subject).
-  { symbol: 'fitFactionRoster', file: 'src/generators/power/factionRoleFit.js', cls: 'mutator', stream: SHARED, via: ASSEMBLY_STEP },
   { symbol: 'resolveFactionLabelsAtClose', file: 'src/generators/power/factionLabelClose.js', cls: 'mutator', stream: SHARED, via: ASSEMBLY_STEP },
   { symbol: 'fishTradeTwinned', file: 'src/data/fishTradeTwinLines.js', cls: 'mutator', stream: SHARED, via: ASSEMBLY_STEP },
+  // PEOPLE-LAND (2026-11-07), lane 3's row the merge never added (A3 red since MERGE-234): ONE TRUE HOOK PER CARD —
+  // a card whose hook the check above refused takes the next true line of its own pool, draw-free, writing `plotHooks`
+  // inside `npcs`; gated in the assembly body on the same `npcsHeld` as storeTrueHooksOnly. A MUTATOR.
+  { symbol: 'truePersonHooks', file: 'src/generators/people/personHooks.js', cls: 'mutator', stream: SHARED, via: ASSEMBLY_STEP },
+  // ⭐ 15 -> 16 (the people car, PEOPLE-4 TIES, 2026-11-07; R-P7): `relationships` left
+  // generatePopulation's chooser (the step now provides `[]` under it) and is PRODUCED at function
+  // level: ONE OUTGOING TIE PER CARD, `drawTies`, called by `generateCoherence` over the final cast
+  // and by the assembly body for the cards the pre-law appender adds after it. It draws on its OWN
+  // named family (`people-ties`, forked from the coherence stream; `people-ties-late`, an assembly
+  // child), keyed per card, and BOTH call sites consult the `relationships` pin: the family's second
+  // lawful SKIP, lawful for the reason the first is (a child never created moves no sibling).
+  { symbol: 'drawTies', file: 'src/generators/people/ties.js', cls: 'producer', stream: NAMED_CHILD, via: ASSEMBLY_STEP },
 ]);
 
 /**
@@ -208,6 +220,8 @@ const DISCOVERY_EXEMPT = Object.freeze([
   { symbol: 'buildGenerationCoherenceReceipt', reason: 'builds `generationCoherenceReceipt`, classed RECEIPT, not HELD.' },
   { symbol: 'refreshPowerGenerationTraces', reason: 're-stamps the power traces in `simulationTrace`, the sanctioned cross-cutting ledger, never `powerStructure` itself.' },
   // RUNG1B-F4 unit 4 (9fd39cf6d), added at the window compose, 2026-11-04.
+  // PEOPLE-LAND (2026-11-07), lane 3's call the merge never listed: a pure resolver of the world law (portKind).
+  { symbol: 'resolveGenerationWorldLaw', reason: 'a pure resolver of the generation world law from the context and config; it writes nothing.' },
   { symbol: 'settleCrimeLinesToSignal', reason: 'rewrites the safety profile crime-line descs inside economicState from the final crime signal; economicState is not a held key.' },
   // CENSUS-2c unit 1a (6dda5f72c), composed at the pool census's merge; classed by LANDING-R2 seat E.
   { symbol: 'factsOf', reason: 'a pure READ of the record\'s declared facts, handed to renderStressSummary as its facts bag; it returns a new object and writes nothing at all.' },
@@ -247,6 +261,7 @@ function liveStepRows() {
 const STEP_ROSTER = Object.freeze([
   'assembleInstitutions|institutions|provides',
   'assembleSettlement|powerStructure|mutates',
+  'assembleSettlement|relationships|mutates', // 2026-11-07 PEOPLE-1 CAST: the coherence seam appends the `other` mints' ties (people/castPowers.js)
   'cascadePass|institutions|mutates',
   'coherenceRepairPass|institutions|mutates',
   'corruptionPass|npcs|mutates',
@@ -437,6 +452,12 @@ const SAVED_KEY_NON_WRITERS = Object.freeze([
       + 'declared in SAVED_KEY_WRITERS.',
   },
   {
+    id: 'migrationReports|src/domain/edit/recordRegister.js|RECORD_CLASSES|literal',
+    reason: 'PEOPLE-5B (M-7): the class row of the save migration\'s report, the fourth of the same kind. The '
+      + 'register classes the key as HISTORY and writes it nowhere; its one writer, settlementMigrations.js :: '
+      + 'migrateV1toV2, is declared in SAVED_KEY_WRITERS.',
+  },
+  {
     id: 'decrees|src/domain/ai/personaSlicer.js|buildPersonaSlice|literal',
     reason: 'a field of the PERSONA SLICE handed to the clerk, capped at six entries and read out '
       + 'of the home record. The slice is a projection built for one prompt and is never written '
@@ -477,7 +498,8 @@ describe('EM-R1 — the writer census of every held key', () => {
     expect(derived.length, 'the held denominator is empty: every arm below would be vacuous')
       .toBeGreaterThan(0);
     expect(HELD_KEYS).toEqual(derived);
-    expect(HELD_KEYS).toEqual(['conflicts', 'factions', 'institutions', 'name', 'npcs', 'powerStructure', 'relationships']);
+    // PEOPLE-5B (M-7): `factions` (the NPC grouping) left the register's HELD set.
+    expect(HELD_KEYS).toEqual(['conflicts', 'institutions', 'name', 'npcs', 'powerStructure', 'relationships']);
 
     // The three HELD-but-SAVED_ONLY keys are excluded BY NAME, by the producer's own table.
     const savedOnlyHeld = Object.entries(RECORD_CLASSES)
@@ -516,7 +538,7 @@ describe('EM-R1 — the writer census of every held key', () => {
       if (!cache.has(row.file)) cache.set(row.file, declaredSymbols(rawSource(row.file)));
       if (cache.get(row.file).get(row.symbol) !== 1) unresolved.push(`${row.file} :: ${row.symbol}`);
     }
-    expect(ROSTER).toHaveLength(18); // 11 -> 13 at the GS-2 merge (lane G2): generateFactions, generateConflicts; 13 -> 14 rung 1 N1 (2026-11-04): conserveSeatPower; 14 -> 15: storeTrueHooksOnly (lane RUNG1-TRUTH unit A; the union of both lanes' rows, composed on the window branch); 15 -> 18 at the pool census's merge: fitFactionRoster (census-4 R12, acd70a977), resolveFactionLabelsAtClose (census-1i unit 1, ba7887862), fishTradeTwinned (F11 unit 3, 2aee16efe)
+    expect(ROSTER).toHaveLength(17); // 18 + 15 -> 17 (MERGE-CAR): the union of both sides less fitFactionRoster (CENSUS-4 R12, retired by the chair's SC-1 ruling): the car's 15 plus the rung-2 landing's resolveFactionLabelsAtClose and fishTradeTwinned; 16 -> 15 (PEOPLE-LAND): relinkFactionMembers and generateFactions left (M-2), truePersonHooks joined (lane 3's); with the grouping; 15 -> 16 (PEOPLE-4 TIES): drawTies; 11 -> 13 at the GS-2 merge (lane G2): generateFactions, generateConflicts; 13 -> 14 rung 1 N1 (2026-11-04): conserveSeatPower; 14 -> 15: storeTrueHooksOnly (lane RUNG1-TRUTH unit A; the union of both lanes' rows, composed on the window branch)
     expect(unresolved, 'a roster row names a symbol its file no longer declares exactly once').toEqual([]);
 
     // (b) DISCOVERY, both directions, over the assembly step's OWN body.
@@ -566,8 +588,11 @@ describe('EM-R1 — the writer census of every held key', () => {
       .map((row) => row.symbol)
       .sort();
     const declaredMirrors = ROSTER.filter((row) => row.cls === 'MIRROR').map((row) => row.symbol).sort();
-    // ANTI-VACUITY: there IS at least one MIRROR row, so the equality is not two empty sets.
-    expect(declaredMirrors).toEqual(['relinkFactionMembers']);
+    // Re-keyed by identity (PEOPLE-LAND, M-2): the class's one row, `relinkFactionMembers`, left with the NPC
+    // grouping, so the MIRROR class is EMPTY by measurement; the anti-vacuity half is that the measured roster below
+    // still ran over every declared row (the MIRROR filter applied to a non-empty roster).
+    expect(declaredMirrors).toEqual([]);
+    expect(ROSTER.length).toBeGreaterThan(10);
     expect(measuredMirrors, 'a MIRROR row consults a pin, so it does not always run').toEqual(declaredMirrors);
   });
 
@@ -595,12 +620,23 @@ describe('EM-R1 — the writer census of every held key', () => {
     expect(wrapper, 'enrichNpcCoherence is no longer wrapped by its named child stream').toBe(true);
     expect(declaredNamed).toContain('enrichNpcCoherence');
 
+    // ⭐ THE PEOPLE-4 TIES ROW (R-P7): `drawTies` forks its OWN family once (`people-ties`) and keys
+    // it per card; at the coherence seam it is called under the `relationships` pin, in the assembly
+    // body under the same pin inside its own child ('people-ties-late'). The family's SECOND lawful
+    // skip: a held `relationships` key never creates the child, so no sibling moves.
+    expect(rawSource('src/generators/people/ties.js'), 'drawTies no longer forks its own family once')
+      .toMatch(/const family = rng\.fork\(TIES_FORK_LABEL\);/);
+    expect(rawSource(NARRATIVE_FILE), 'the seam\'s tie draw is no longer gated on the relationships pin')
+      .toMatch(/chooseOrPin\(pins, 'relationships', \(\) => drawTies\(/);
+    expect(rawSource(ASSEMBLY_FILE).match(/'people-ties-late'/g) || [], 'the late tie child stream moved or multiplied').toHaveLength(1);
+    expect(rawSource(ASSEMBLY_FILE), 'the late tie draw is no longer gated on the relationships pin')
+      .toMatch(/chooseOrPin\(pins, 'relationships', \(\) => UNPINNED\) === UNPINNED\) \{[\s\S]{0,400}inAssemblySubstream\(rng, 'people-ties-late'/);
+
     // Every OTHER held writer is SHARED-STREAM and therefore consumes and discards.
     const shared = ROSTER.filter((row) => row.stream === SHARED).map((row) => row.symbol).sort();
     expect(shared).toEqual([
-      'conserveSeatPower', 'ensureFactionStructuralNpcs', 'fishTradeTwinned', 'fitFactionRoster', 'generateCoherence', 'generateFactions',
-      'generateSettlementName', 'reconcilePowerStructure', 'relinkFactionMembers', 'resizePoliticalRoster',
-      'resolveFactionLabelsAtClose', 'storeTrueHooksOnly',
+      'conserveSeatPower', 'ensureFactionStructuralNpcs', 'fishTradeTwinned', 'generateCoherence', 'generateSettlementName',
+      'reconcilePowerStructure', 'resizePoliticalRoster', 'resolveFactionLabelsAtClose', 'storeTrueHooksOnly', 'truePersonHooks',
     ]);
     // ⛔ generateSettlementName is the row this rule exists for: the mint draws on the assembly
     // step's own shared stream, so a held name is CONSUMED AND DISCARDED, never skipped.
@@ -608,13 +644,13 @@ describe('EM-R1 — the writer census of every held key', () => {
 
     // THE OTHER NAMED-CHILD ROWS ARE INSIDE THAT ONE STREAM, not streams of their own: each is
     // called from `enrichNpcCoherence`'s own body, so they inherit its child stream.
-    const inside = declaredNamed.filter((symbol) => symbol !== 'enrichNpcCoherence' && symbol !== 'generateConflicts');
+    const inside = declaredNamed.filter((symbol) => symbol !== 'enrichNpcCoherence' && symbol !== 'generateConflicts' && symbol !== 'drawTies');
     const enrichmentBody = bodyOf(NARRATIVE_FILE, 'enrichNpcCoherence');
     expect(enrichmentBody.length, 'enrichNpcCoherence was not found: the claim below is vacuous').toBeGreaterThan(500);
     expect(inside.filter((symbol) => !called(enrichmentBody, symbol)),
       'a named-child row is not called from the one named child stream').toEqual([]);
     expect(inside).toEqual([
-      'buildPoliticalNarrative', 'disperseNamedRoster', 'enrichNPCsWithStructure', 'mergeNPCLists',
+      'assignCastPowers', 'buildPoliticalNarrative', 'enrichNPCsWithStructure', 'mergeNPCLists',
     ]);
 
     // A SECOND named child stream around a held writer reds BY NAME: the substream label set is
@@ -671,8 +707,10 @@ describe('EM-R1 — the writer census of every held key', () => {
     const modules = srcFiles();
     expect(modules.length, 'the src/ walk found no modules: every equality below would be vacuous')
       .toBeGreaterThan(500);
-    expect(WRITTEN_KEYS, 'the roster governs the editor\'s two keys and NOTE-14\'s third')
-      .toEqual(['decrees', 'dmLayer', 'peaceOffers']);
+    // PEOPLE-5B (2026-11-07, M-7): + `migrationReports`, the first real save migration's report of what it
+    // could not map (settlementMigrations.js :: migrateV1toV2).
+    expect(WRITTEN_KEYS, 'the roster governs the editor\'s two keys, NOTE-14\'s third and M-7\'s report')
+      .toEqual(['decrees', 'dmLayer', 'migrationReports', 'peaceOffers']);
 
     // THE ROSTER IS TIED TO THE REGISTER IT LIVES IN: every governed key is SAVED-ONLY and carries
     // a class, so a reclassification cannot leave this roster pointing at a key that moved out.
@@ -712,7 +750,8 @@ describe('EM-R1 — the writer census of every held key', () => {
     // which is the fact the cured claim exists to carry: the row it closes named ONE writer each.
     expect(SAVED_KEY_WRITERS.length, 'the roster is empty').toBeGreaterThan(0);
     const writerFiles = sorted(new Set(SAVED_KEY_WRITERS.map((row) => row.file)));
-    expect(writerFiles, 'the governed keys are written from four homes, not one').toEqual([
+    expect(writerFiles, 'the governed keys are written from five homes, not one (PEOPLE-5B: + the save migration)').toEqual([
+      'src/domain/settlementMigrations.js',
       'src/domain/worldPulse/decreeHook.js',
       'src/domain/worldPulse/peaceTermsDrafting.js',
       'src/store/campaignWorldPulseDeferred.js',
@@ -722,7 +761,8 @@ describe('EM-R1 — the writer census of every held key', () => {
     // RE-RECORDED AT THE TRAIN TIP (2026-09-23, the chair): 10 → 12 — EM-E4d unit 1 (97f18610b) added
     // `stageSealDecreeIntent` and EM-F3d (b5d5ca71f) added `scrubDeletedCounterparty`, two more `decrees`
     // writes in editSlice.js (the register's two new rows name them).
-    expect(totalSites, 'the measured write sites of the governed keys').toBe(12);
+    // PEOPLE-5B (M-7): 12 -> 13, migrateV1toV2's one `migrationReports` write.
+    expect(totalSites, 'the measured write sites of the governed keys').toBe(13);
 
     // (c2) ⭐ NOTE-14's SECOND MEASUREMENT: a DECLARED writer is not a LIVE one. `reachedFromSrc`
     // is re-derived from the call graph, so the register can never imply that `peaceOffers` is
@@ -740,7 +780,8 @@ describe('EM-R1 — the writer census of every held key', () => {
     expect(SAVED_KEY_WRITERS.filter((row) => row.reachedFromSrc === true).length,
       // RE-RECORDED AT THE TRAIN TIP (2026-09-23, the chair): 6 → 8 — E4d's stageSealDecreeIntent and
       // F3d's scrubDeletedCounterparty are both reached from src/ (the seal click; the delete).
-      'every other writer is reached from src/').toBe(8);
+      // PEOPLE-5B (M-7): 8 -> 9, migrateV1toV2 (reached through the v1 -> v2 step of the migration chain).
+      'every other writer is reached from src/').toBe(9);
 
     // (d) EVERY NON-WRITER CARRIES A WRITTEN REASON, so the exempt table cannot become a silent
     // allow-list. anchored: the table is asserted non-empty first, so this is not a vacuous every.

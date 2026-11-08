@@ -66,8 +66,8 @@ function hostFixture() {
       previousGovernments: [{ label: OLD, cause: 'election', tick: 2 }],
       conflicts: [],
     },
-    npcs: [{ id: 'npc.aldis', name: 'Aldis', role: 'Guildmaster', factionAffiliation: OLD }],
-    factions: [{ name: 'Traders', dominantCategory: 'merchant', powerFactionName: OLD }],
+    // PEOPLE-5B (M-7): the v2 card names its power in `memberships`; the record carries no grouping.
+    npcs: [{ id: 'npc.aldis', name: 'Aldis', role: 'Guildmaster', memberships: [{ power: OLD, rank: 1, share: 1 }] }],
     interSettlementRelationships: [{ partnerSettlement: 'Elsewhere', factionName: OLD }],
     history: { historicalEvents: [], currentTensions: [] },
   };
@@ -140,9 +140,8 @@ describe('store lane — the converged cascade', () => {
     expect(s.powerStructure.factionRelationships[0].pair).toEqual([NEW, 'Militia']);
     expect(s.powerStructure.factionRelationships[0].narrative).toBe(`${NEW} commands, Militia executes.`);
     expect(s.powerStructure.recentConflict).toBe(`The ${NEW} broke the grain cartel.`);
-    expect(s.npcs[0].factionAffiliation).toBe(NEW);
+    expect(s.npcs[0].memberships[0].power).toBe(NEW);
     expect(s.institutions[0].factionSource).toBe(NEW);
-    expect(s.factions[0].powerFactionName).toBe(NEW);
     expect(s.interSettlementRelationships[0].factionName).toBe(NEW);
     // The sibling faction and the recorded lineage are untouched.
     expect(nameOf(s.powerStructure.factions[1])).toBe('Militia');
@@ -155,7 +154,7 @@ describe('store lane — the converged cascade', () => {
     await vi.waitFor(() => expect(saves.update).toHaveBeenCalled());
     const reloaded = reloadInto(rowFor(store, SAVE_ID));
     expect(nameOf(reloaded.powerStructure.factions[0])).toBe(NEW);
-    expect(reloaded.npcs[0].factionAffiliation).toBe(NEW);
+    expect(reloaded.npcs[0].memberships[0].power).toBe(NEW);
     expect(reloaded.powerStructure.governingName).toBe(NEW);
   });
 

@@ -46,14 +46,8 @@ function storedHookTexts(settlement) {
   /** @type {unknown[]} */
   const npcs = Array.isArray(record.npcs) ? record.npcs : [];
   npcs.forEach((npc) => takeAll(/** @type {{ plotHooks?: unknown }} */ (npc)?.plotHooks));
-  // The faction rosters carry a COPY of each member NPC, hooks included (F10 unit 4, rung 1C:
-  // `soak1k-452` stored the dropped soldiers hook on `factions[2].members[1]` after the NPC lost it).
-  /** @type {unknown[]} */
-  const factions = Array.isArray(record.factions) ? record.factions : [];
-  factions.forEach((faction) => {
-    const members = /** @type {{ members?: unknown }} */ (faction)?.members;
-    if (Array.isArray(members)) members.forEach((m) => takeAll(/** @type {{ plotHooks?: unknown }} */ (m)?.plotHooks));
-  });
+  // PEOPLE-5A (M-2): the NPC grouping's member copies are not read — no surface prints them; the
+  // cards in `npcs` are the one home of a person's hook.
   /** @type {unknown[]} */
   const conflicts = Array.isArray(record.conflicts) ? record.conflicts : [];
   conflicts.forEach((conflict) => takeAll(/** @type {{ plotHooks?: unknown }} */ (conflict)?.plotHooks));
@@ -183,20 +177,9 @@ export function withoutFalseHooks(settlement, options = {}) {
 
   const npcs = options.npcsHeld ? record.npcs : keepRows(record.npcs);
   if (npcs !== record.npcs) patch.npcs = npcs;
-  // The faction rosters' member copies, under the same hold (F10 unit 4): a copy keeps no hook
-  // its NPC lost, so the Power tab and the exports cannot print what the roster dropped.
-  if (!options.npcsHeld && Array.isArray(record.factions)) {
-    let changed = false;
-    const factions = record.factions.map((/** @type {unknown} */ faction) => {
-      const entry = /** @type {{ members?: unknown }} */ (faction);
-      if (!faction || typeof faction !== 'object' || !Array.isArray(entry.members)) return faction;
-      const members = keepRows(entry.members);
-      if (members === entry.members) return faction;
-      changed = true;
-      return { ...entry, members };
-    });
-    if (changed) patch.factions = factions;
-  }
+  // PEOPLE-5A (M-2): the NPC grouping's member copies are no longer kept in step here — every
+  // surface reads the cards in `npcs` (the Power tab's members, the exports), and the grouping
+  // leaves with the landing.
   const conflicts = keepRows(record.conflicts);
   if (conflicts !== record.conflicts) patch.conflicts = conflicts;
   if (record.history && typeof record.history === 'object') {

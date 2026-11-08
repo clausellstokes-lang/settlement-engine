@@ -506,8 +506,8 @@ export function deriveHeadcounts(settlement) {
   return {
     institutions: (s.institutions || []).length,
     npcs: (s.npcs || []).length,
-    // PowerStructure.factions is the canonical faction roster (legacy .factions fallback).
-    factions: (s.powerStructure?.factions || s.factions || []).length,
+    // The powers are the only faction roster (PEOPLE-5A: the NPC grouping's fallback deleted).
+    factions: (s.powerStructure?.factions || []).length,
   };
 }
 

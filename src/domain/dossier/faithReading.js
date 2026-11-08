@@ -329,7 +329,9 @@ function quietOf(dial) {
 
 /** @param {SeniorCleric} c @returns {string} */
 function clericLead(c) {
-  return c.name ? `${c.name}, the ${c.role}, leads its clergy.` : `A ${c.role} leads its clergy.`;
+  // M-1b (PEOPLE-1 CAST): a card's role carries its article ('the priest'); the line supplies its own.
+  const noun = String(c.role || '').replace(/^the\s+/i, '');
+  return c.name ? `${c.name}, the ${noun}, leads its clergy.` : `A ${noun} leads its clergy.`;
 }
 
 /**
@@ -363,7 +365,8 @@ export function faithLinesOf(reading, { tierNoun = null } = {}) {
     if (cleric) out.push(clericLead(cleric));
   } else if (reading.accessOnly) {
     out.push(`${cap(place)} has no church of its own; its people walk to the next village’s parish church for the rites.`);
-    if (cleric) out.push(cleric.name ? `${cleric.name}, the ${cleric.role}, lives here.` : `A ${cleric.role} lives here.`);
+    const clericNoun = String(cleric?.role || '').replace(/^the\s+/i, ''); // M-1b: the role carries its article
+    if (cleric) out.push(cleric.name ? `${cleric.name}, the ${clericNoun}, lives here.` : `A ${clericNoun} lives here.`);
   } else if (faithHasChurchEvidence(reading)) {
     out.push(`No church building stands in ${place}, but the faith is organised here.`);
     if (cleric) out.push(clericLead(cleric));

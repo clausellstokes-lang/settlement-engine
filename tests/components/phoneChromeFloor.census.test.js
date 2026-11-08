@@ -320,7 +320,10 @@ const ROUTE_BASELINE = Object.freeze({
   // validation text leaves the DM surfaces) cuts three floored sites (OverviewTab 14 -> 12, ResourcesTab 29 -> 28), and
   // census-3c revenues (9e4283eb5, R-P 2: the income table prints the revenues) adds one (EconomicsTab 54 -> 55):
   // /create 615 -> 613, /settlements 861 -> 859, /gallery 659 -> 657; `bare` holds on all three.
-  '/create':                { roots: 1, files: 162, floored: 613, ruled: 5, bare: 97, owner: 'lane 28 — the create page + the tier picker' },
+  // 2026-11-07, PEOPLE-6 LINKS: the Institutions card's face row (one `proseFontSize` site, 0 bare) — +1; the
+  // other +1 is red at the base bc4b6423 (the people car's lanes; /admin and /world's +1 there are left red, the base's).
+  // PEOPLE-6 LINKS step 2: +1, the NPC card's role row (one `chromeFontSize` site, 0 bare).
+  '/create':                { roots: 1, files: 162, floored: 618, ruled: 5, bare: 97, owner: 'lane 28 — the create page + the tier picker' },
   '/home':                  { roots: 1, files: 19, floored: 6, ruled: 4, bare: 19, owner: 'lane 28 — the landing' },
   // The Realm lazily mounts the create flow's ClerkNote for its one advisory
   // line, so lane 28's file lands on a route it does not own. One site.
@@ -364,7 +367,11 @@ const ROUTE_BASELINE = Object.freeze({
   // PROSE-floor arm over a named pricing roster for exactly this gap.
   '/pricing':               { roots: 1, files: 14, floored: 17, ruled: 3, bare: 0 },
   // floored 858 → 860 (2026-11-02, X-45): the same two floored lines of the Institutions card. 861 -> 859 (2026-11-07): see /create.
-  '/settlements':           { roots: 1, files: 206, floored: 859, ruled: 4, bare: 0 },
+  // floored 858 → 860 (2026-11-02, X-45): the same two floored lines of the Institutions card.
+  // 2026-11-07, PEOPLE-6 LINKS: the Institutions card's face row (one `proseFontSize` site, 0 bare) — +1; the
+  // other +1 is red at the base bc4b6423 (the people car's lanes; /admin and /world's +1 there are left red, the base's).
+  // PEOPLE-6 LINKS step 2: +1, the NPC card's role row (one `chromeFontSize` site, 0 bare).
+  '/settlements':           { roots: 1, files: 206, floored: 864, ruled: 4, bare: 0 },
   // /compendium files 51 -> 50 with the same T6 cut: the size grid's one helper module left the
   // compendium's import closure when ConfigurationPanel stopped importing it; floored 211 -> 206.
   '/compendium':            { roots: 1, files: 50, floored: 206, ruled: 3, bare: 0 },
@@ -373,7 +380,11 @@ const ROUTE_BASELINE = Object.freeze({
   '/account':               { roots: 1, files: 46, floored: 105, ruled: 5, bare: 0 },
   '/admin':                 { roots: 2, files: 29, floored: 86, ruled: 1, bare: 0 },
   // floored 655 → 657 (2026-11-02, X-45): the same two floored lines of the Institutions card. 659 -> 657 (2026-11-07): see /create.
-  '/gallery':               { roots: 1, files: 151, floored: 657, ruled: 4, bare: 0 },
+  // floored 655 → 657 (2026-11-02, X-45): the same two floored lines of the Institutions card.
+  // 2026-11-07, PEOPLE-6 LINKS: the Institutions card's face row (one `proseFontSize` site, 0 bare) — +1; the
+  // other +1 is red at the base bc4b6423 (the people car's lanes; /admin and /world's +1 there are left red, the base's).
+  // PEOPLE-6 LINKS step 2: +1, the NPC card's role row (one `chromeFontSize` site, 0 bare).
+  '/gallery':               { roots: 1, files: 151, floored: 662, ruled: 4, bare: 0 },
   '/founders':              { roots: 1, files: 13, floored: 6, ruled: 1, bare: 0 },
   '/first-hundred':         { roots: 1, files: 6, floored: 4, ruled: 1, bare: 0 },
   '/roadmap':               { roots: 1, files: 6, floored: 3, ruled: 1, bare: 0 },

@@ -46,7 +46,7 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import { getStepMeta } from '../../src/generators/pipeline.js';
 import { rederive } from '../../src/domain/edit/dmLayer.js';
 import { declarationsFor } from '../../src/domain/edit/fieldDeclarations.js';
-import { mergeConsequence, recomputeMirrors, recomputeReceipts } from '../../src/domain/edit/mergeConsequence.js';
+import { mergeConsequence, recomputeReceipts } from '../../src/domain/edit/mergeConsequence.js';
 import { mergeTree } from '../../src/domain/edit/recordMergeTree.js';
 import { CHECK_META } from '../../src/domain/edit/recordInvariants.js';
 import { CLASS_EXCEPTIONS, RECORD_CLASSES } from '../../src/domain/edit/recordRegister.js';
@@ -84,7 +84,7 @@ function sample63() {
 }
 
 /** THE LADDER'S OWN WORK, field by field: the receipt as the DECLARED POST-PASS PIPELINE leaves
- *  it (`mergeTree` then `recomputeMirrors` then `recomputeReceipts`, which is the shape
+ *  it (`mergeTree` then `recomputeReceipts` — PEOPLE-5B: `recomputeMirrors` left with the grouping, which is the shape
  *  `mergeLadderHeldKeys.test.js :: A6` proves for every quiet trial) against the receipt the
  *  merge returns. Whatever differs, a rung wrote. */
 function fieldsTheRungMoved(pipeline, merged) {
@@ -124,7 +124,6 @@ function trials() {
       const merged = out.record;
       const tree = mergeTree(cl(record), cl(R0), cl(R1));
       const pipeline = cl(tree.value);
-      recomputeMirrors(pipeline);
       recomputeReceipts(pipeline);
       rows.push({
         key,

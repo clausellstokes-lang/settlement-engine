@@ -1252,6 +1252,11 @@ export function signingRecordMalformations(record) {
       problems.push(`'${field}' is blank — the owner's word is the record`);
     }
   }
+  // A bare numeral is not the owner's words (GOLDEN-REHEARSAL 2026-11-07 finding 4: this door accepted
+  // ownerWords "1", which the golden door's isBlankProvenance refuses). Words that CONTAIN a numeral pass.
+  if (typeof record.ownerWords === 'string' && /^\d+$/.test(record.ownerWords.trim())) {
+    problems.push(`'ownerWords' is the bare numeral ${JSON.stringify(record.ownerWords.trim())} — the owner's word is the record`);
+  }
   if (!Number.isInteger(record.version) || record.version < 1) {
     problems.push(`'version' is ${JSON.stringify(record.version)}; versions are dense integers from 1`);
   }

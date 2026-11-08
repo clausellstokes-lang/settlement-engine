@@ -162,6 +162,14 @@ The structured culture identity and coherence receipt persist and appear in
 owner-facing dossier/PDF projections. Function-bearing world law remains
 transient. AI overlay selection cannot erase canonical contract facts.
 
+2026-11-07 (PEOPLE-5B, the people car's M-7): `src/domain/settlement.schema.js`
+is at schema 2 and `src/domain/settlementMigrations.js` owns the first real
+migration (the NPC card: `institution` and ranked `memberships`; the grouping
+`settlement.factions` and the per-card faction fields leave the record). The
+contract is `docs/GENERATION_CONTRACTS.md` §8, "The NPC card and the powers";
+the edit layer's HELD/MIRROR declarations for the card are
+`src/domain/edit/recordRegister.js`'s.
+
 ## Permanent certification
 
 `tests/generators/generationCertificationCorpus.test.js` is the whole-dossier

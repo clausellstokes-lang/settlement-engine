@@ -44,11 +44,15 @@ describe('the hook pools\' wet lines', () => {
   });
 });
 
-describe('soak1k-105, a town in the hills on a road', () => {
+// 2026-11-07 PEOPLE-1 CAST: re-keyed by identity soak1k-105 -> soak1k-441 (a town in the hills on a road whose cast
+// draws the three-killings goal), found by a probe over the 1,000 at the lane's tip; the claim is unchanged.
+// 2026-11-07 PEOPLE-2 CAST-DERIVED (3aa160a70): re-keyed soak1k-441 -> soak1k-921 (441's cast no longer draws the goal;
+// 921 is a town in the hills on a road whose watch captain does), found by a probe over the 1,000 at the car's tip.
+describe('soak1k-921, a town in the hills on a road', () => {
   it('no NPC goal or hook of a landlocked record speaks of the docks or the sea', async () => {
     const { birth, ensureLaws } = await import('../../scripts/audit/soak-review/corpus.mjs');
     await ensureLaws();
-    const s = birth(105).settlement;
+    const s = birth(921).settlement;
     expect(waterAccessKind(s.config?.terrainType, s.config?.tradeRouteAccess)).toBe('none');
     const lines = (s.npcs || []).flatMap((n) => [n?.goal?.short, n?.goal?.long, ...(n?.plotHooks || [])]).filter((x) => typeof x === 'string');
     expect(lines.filter((x) => WET_HOOK_WORD.test(x))).toEqual([]);

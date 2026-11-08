@@ -1,0 +1,28 @@
+{
+  "_doc": "RECORD 3 OF THE PEOPLE CAR'S LANDING (PEOPLE-LAND, second seat), ODQ §934.105 (the cloud chair signs by the owner's delegation of 2026-11-06, vetoable; PEOPLE-RULINGS M-1: one record per lane-cause, signed once at the landing from the stage at the lane's first-parent point; M-3). THE CAUSE, ONE: lane 3, PEOPLE-3 HOOKS (docs/PEOPLE_3_HOOKS_2026-11-07.md): one plot hook per representative; the tension hooks and the history hooks kept; parties may be people, powers, groups or history (the owner's charter, PEOPLE-RULINGS §0), merged onto lanes 1+2 at 0f930ce95 (MERGE-234, the seam mint composed by the chair's ruling). THE MOVE, MEASURED before the write by scripts/audit/landing-stage.sh measure at the stage of f3912a838 (record 2's post-state) and at the stage of 0f930ce95: the generator golden master 525 of 525 (thorp 84, hamlet 84, village 84, town 105, city 84, metropolis 84) rows, 0e235c36.. -> bad219f2..; the espionage fence's driven corpus 360 of 360 (thorp 60, hamlet 60, village 60, town 60, city 60, metropolis 60), 12355043.. -> 465a1a70..; the herald desk 478 -> 478 keys (+0 -0, 0 moved); the dossier prose manifest 484 of 1,050 (hamlet 20, village 54, town 150, city 122, metropolis 138); the PDF view-model snapshot 0; the preset lighting witness 0. The stage of f3912a838 equals the stage of 3aa160a70 (record 2's post-state) on all six surfaces: the MERGE-234 register and record commits between them move no golden byte; the three after the merge (8dd30106b..5697b3735) move none either.",
+  "ownerWords": "for every appropriate institution, we generate one NPC … I think just one person per institution. They act as the face. We are not building all the citizens of a settlement. That's too granular and the DM can do that work themselves. We are simply making representatives.",
+  "ownerDate": "2026-11-07",
+  "odqRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's people-model charter of 2026-11-07, PEOPLE-RULINGS §0; the owner's delegation of 2026-11-06 to the cloud chair, session 01FE9mEvGxnFx6WTBkEC6ie9; the people car's landing)",
+  "cause": "lane 3, PEOPLE-3 HOOKS (lane/people-3-hooks-2026-11-07, f49311d04, merged at 0f930ce95): one plot hook per representative, the tensions and the history kept, parties of every kind",
+  "seat": "PEOPLE-LAND second seat (Opus 5.5) under the cloud chair (Fable 5.1), session 01FE9mEvGxnFx6WTBkEC6ie9, from the stage at 0f930ce95",
+  "surfaces": [
+    {
+      "surface": "generator-golden-master",
+      "action": "re-record",
+      "predictedRows": 525,
+      "proofForm": "settlement-hash"
+    },
+    {
+      "surface": "espionage-dormancy-fence",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "in-file corpus constant"
+    },
+    {
+      "surface": "dossier-prose-manifest",
+      "action": "re-record",
+      "predictedRows": 2,
+      "proofForm": "derived-artefact"
+    }
+  ]
+}

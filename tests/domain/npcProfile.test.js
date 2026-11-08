@@ -31,7 +31,7 @@ function militaryCaptain(over = {}) {
     name: 'Beatrix Becker',
     role: 'Guard Captain',
     category: 'military',
-    factionAffiliation: 'Military/Guard',
+    memberships: [{ power: 'Military/Guard', rank: 1 }], // PEOPLE-5A re-keyed (M-1b): the link reads the first-rank membership
     structuralPosition: 'Commands enforcement capacity where civilian governance is failing.',
     structuralRank: 'dominant',
     influence: 'high',
@@ -58,7 +58,7 @@ function templeHighPriest(over = {}) {
     name: 'Sister Vaela',
     role: 'High Priestess',
     category: 'religious',
-    factionAffiliation: 'Religious Authorities',
+    memberships: [{ power: 'Religious Authorities', rank: 1 }], // PEOPLE-5A re-keyed (M-1b)
     structuralRank: 'dominant',
     influence: 'high',
     power: 8,
@@ -75,7 +75,7 @@ function minorTraderNpc(over = {}) {
     name: 'Oren the Quiet',
     role: 'Stall Keeper',
     category: 'economy',
-    factionAffiliation: 'Merchant Guilds',
+    memberships: [{ power: 'Merchant Guilds', rank: 1 }], // PEOPLE-5A re-keyed (M-1b)
     structuralRank: 'minor',
     influence: 'low',
     power: 3,
@@ -151,10 +151,12 @@ describe('deriveNpcProfile()', () => {
     expect(deriveNpcProfile({ id: 'x', name: 'X', category: 'unknown' }).archetype).toBe('other');
   });
 
-  it('factionLink derives a stable id from factionAffiliation', () => {
+  it('factionLink derives a stable id from the first-rank membership (PEOPLE-5A re-keyed)', () => {
     expect(deriveNpcProfile(militaryCaptain()).factionLink).toBe('faction.military_guard');
     expect(deriveNpcProfile(templeHighPriest()).factionLink).toBe('faction.religious_authorities');
-    expect(deriveNpcProfile({ id: 'x', name: 'X', factionAffiliation: '' }).factionLink).toBeNull();
+    expect(deriveNpcProfile({ id: 'x', name: 'X', memberships: [] }).factionLink).toBeNull();
+    // the shim's derived field alone links nowhere (the memberships are the source)
+    expect(deriveNpcProfile({ id: 'x', name: 'X', factionAffiliation: 'Military/Guard' }).factionLink).toBeNull();
   });
 
   it('inferences institutionLink from settlement institutions when available', () => {
@@ -368,8 +370,11 @@ describe('primaryRelationship', () => {
       typeName: 'Pragmatic Alliance',
       description: 'They work together because the alternative is worse.',
       tension: 'A third party is destabilizing the calculation.',
-      npc1Id: 'npc_2', npc2Id: 'npc_3',
-      npc1N: 'Beatrix Becker', npc2N: 'Sister Vaela',
+      // RE-KEYED 2026-11-07 (PEOPLE-4 TIES, R-P7): the tie is directed (`from` → `to`; the
+      // undirected npc1Id/npc2Id pair is not written), and its names are the producer's own
+      // `npc1Name`/`npc2Name` (the `npc1N`/`npc2N` arm read a key no producer writes: cut).
+      from: 'npc_2', to: 'npc_3',
+      npc1Name: 'Beatrix Becker', npc2Name: 'Sister Vaela',
     },
   ];
 

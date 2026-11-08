@@ -20,6 +20,7 @@
  */
 
 import { CONTRADICTORY_ROLE_PAIRS, CRISIS_CAST_TUNING, CAST_REASONS } from '../crisis/crisisCast.js';
+import { powerOrderOf, powersByRankOf } from '../people/membership.js';
 
 /**
  * @typedef {import('../crisis/crisisCast.js').CrisisRole} CrisisRole
@@ -30,9 +31,9 @@ import { CONTRADICTORY_ROLE_PAIRS, CRISIS_CAST_TUNING, CAST_REASONS } from '../c
  * @property {string} crisis   the crisis id (its type), or '' for a town-wide finding
  * @property {string} detail
  *
- * @typedef {{ id?: unknown, name?: unknown, factionAffiliation?: unknown, temporary?: unknown }} FindingNpc
+ * @typedef {{ id?: unknown, name?: unknown, memberships?: unknown, temporary?: unknown }} FindingNpc
  * @typedef {{ type?: unknown, cast?: CrisisCast | null }} FindingEntry
- * @typedef {{ stress?: FindingEntry | FindingEntry[] | null, npcs?: FindingNpc[] }} FindingSettlement
+ * @typedef {{ stress?: FindingEntry | FindingEntry[] | null, npcs?: FindingNpc[], powerStructure?: unknown }} FindingSettlement
  */
 
 /** The stake each role's faction must hold in that crisis (rules 5, 6, 9, 10). */
@@ -57,8 +58,9 @@ export function crisisCastFindings(settlement) {
   const entries = (Array.isArray(raw) ? raw : (raw && typeof raw === 'object' ? [raw] : []))
     .filter((e) => !!e && typeof e === 'object' && !!e.cast && Array.isArray(e.cast.roles));
   const npcs = Array.isArray(settlement?.npcs) ? settlement.npcs : [];
-  /** @param {string} id */
-  const factionOfNpc = (id) => str(npcs.find((n) => !!n && (str(n.id) || str(n.name)) === id)?.factionAffiliation);
+  const powerOrder = powerOrderOf(settlement);
+  /** A person's powers, its best standing first (its memberships — PEOPLE-2 CAST-DERIVED). @param {string} id @returns {string[]} */
+  const powersOfNpc = (id) => powersByRankOf(npcs.find((n) => !!n && (str(n.id) || str(n.name)) === id), powerOrder).map((m) => m.power);
 
   /** @type {Map<string, Array<{ role: CrisisRole, crisis: string, name: string }>>} */
   const held = new Map();
@@ -79,7 +81,10 @@ export function crisisCastFindings(settlement) {
         ? (row.reason.startsWith(CAST_REASONS.collaboratorAmbition) ? 'gains' : null)
         : STAKE_FOR_ROLE[row.role] || null;
       if (!want) continue;
-      const faction = row.kind === 'faction' ? row.id : row.kind === 'npc' ? factionOfNpc(row.id) : '';
+      // a person answers to the stake of ANY power it holds a membership in (the one that
+      // agrees, else its first-rank power's)
+      const powers = row.kind === 'faction' ? [row.id] : row.kind === 'npc' ? powersOfNpc(row.id) : [];
+      const faction = powers.find((p) => stakeOf.get(p) === want) || powers[0] || '';
       const stake = faction ? stakeOf.get(faction) : undefined;
       if (stake !== want) {
         findings.push({ code: 'stake_disagrees', crisis, detail: `${row.name} ${row.role}s, but ${faction || 'no faction'} ${stake ? `${stake} by it` : 'holds no stake'} (wants ${want})` });

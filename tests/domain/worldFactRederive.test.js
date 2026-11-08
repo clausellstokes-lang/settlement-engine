@@ -147,6 +147,10 @@ const stride = (rows, n) => rows.filter((_, index) => index % n === 0);
  * over the census range names 73fa1a1e7 alone. No reader was added or lost: a word left a sentence.
  */
 const CULTURE_READERS = Object.freeze([
+  // 2026-11-07 PEOPLE-1 CAST: the representative generator reads the culture for every card's name and title; the seam's
+  // mint of the `other` powers' faces (castPowers.js) reads it for the same draw
+  'src/generators/people/castPowers.js',
+  'src/generators/people/representatives.js',
   'src/generators/aiLayer.js',
   'src/generators/computeActiveChains.js',
   'src/generators/demandProfile.js',
@@ -433,10 +437,37 @@ describe('EM-B2b — world facts by consequence: the route, the refusals and the
     // through the signed door at the rung-2 landing's tip by LANDING-R2: the generator master e7e8a6ff.. -> d1429bcc..
     // (525 of 525 rows); restated in the same act. Its fourth record (docs/shift-records/2026-11-06-rung2-04-census-
     // composed-prose-manifest.json): the prose manifest 777e4b4b.. -> 373f2d55.. (1,050 of 1,050 rows); restated in that act.
+    // Then the people car's landing (ODQ §934.105, 2026-11-07), one signed record per lane-cause, each written from its
+    // stage with the door paths carried from the landing branch and restated here in the same act. Record 0a, the
+    // review-intake lane (docs/shift-records/2026-11-07-people-land-0a-review-intake.json), from the stage at 5b444331a:
+    // the generator master 06050f53.. -> b1be65e4.. (525 of 525 rows) and the prose manifest 777e4b4b.. -> 63c63a8b..
+    // (8 of 1,050 rows). Record 0b, the W0 merge's composition over it (docs/shift-records/2026-11-07-people-land-0b-
+    // w0-merge.json), from the stage at fc834a6bd: the generator master b1be65e4.. -> 6b0d226e.. (525 of 525 rows); the
+    // prose manifest did not move.
+    // Record 1, PEOPLE-1 CAST (docs/shift-records/2026-11-07-people-1-cast.json), from the stage at dc655f712: the
+    // generator master 6b0d226e.. -> 58fb2164.. (525 of 525 rows) and the prose manifest 63c63a8b.. -> 22e1df2d..
+    // (762 of 1,050 rows).
+    // Record 2, PEOPLE-2 CAST-DERIVED (docs/shift-records/2026-11-07-people-2-cast-derived.json), from the stage at
+    // 3aa160a70: the generator master 58fb2164.. -> 0e235c36.. (525 of 525 rows); the prose manifest did not move.
+    // Record 3, PEOPLE-3 HOOKS (docs/shift-records/2026-11-07-people-3-hooks.json), from the stage at 0f930ce95: the
+    // generator master 0e235c36.. -> bad219f2.. (525 of 525 rows) and the prose manifest 22e1df2d.. -> 4f4e6071..
+    // (484 of 1,050 rows).
+    // Record 4, PEOPLE-4 TIES (docs/shift-records/2026-11-07-people-4-ties.json), from the stage at c7d552370: the
+    // generator master bad219f2.. -> 27de6ac3.. (525 of 525 (thorp 84, hamlet 84, village 84, town 105, city 84,
+    // metropolis 84) rows); the prose manifest 4f4e6071.. -> ee573112.. (892 of 1,050 rows).
+    // Record 5a, PEOPLE-5A DISPLAY (docs/shift-records/2026-11-07-people-5a-display.json), from the stage at
+    // 053283dfd: the generator master 27de6ac3.. -> 47e48e47.. (172 of 525 (hamlet 84, village 72, city 12,
+    // metropolis 4) rows); the prose manifest ee573112.. -> 86517b75.. (312 of 1,050 rows).
+    // Record 5b, PEOPLE-5B EDIT (docs/shift-records/2026-11-07-people-5b-edit.json), from the stage at a725df7e4: the
+    // generator master 47e48e47.. -> 8dc527fd.. (525 of 525 (thorp 84, hamlet 84, village 84, town 105, city 84,
+    // metropolis 84) rows); the prose manifest did not move.
+    // Record 6, PEOPLE-LAND SHIM OUT (docs/shift-records/2026-11-07-people-land-shim-out.json), from the stage at
+    // 2981f23f6: the generator master 8dc527fd.. -> c7c11b0b.. (180 of 525 (thorp 12, hamlet 84, village 72, city 12)
+    // rows); the prose manifest 86517b75.. -> ffc84348.. (312 of 1,050 rows).
     expect(shaOfFile(GOLDEN), 'tests/fixtures/generator-golden-master.json moved')
-      .toBe('d1429bcc228d3dfb3f394c9745ae23313a6f7143cd73f8271fb74b5c894adc5a');
+      .toBe('c7c11b0b81376930b074c1145bb40071a9b632848fae453361223e8be48db007');
     expect(shaOfFile(PROSE_GOLDEN), 'tests/fixtures/dossier-prose-manifest-golden.json moved')
-      .toBe('373f2d55ce53d23e0613f3658becc1d94ee8c2592c3cf1561581d86ff3ddba1f');
+      .toBe('ffc84348c4e30aa13abe28590c343984b606106e6ef0dd697924979417706a30');
 
     // AND THE REASON THEY CANNOT MOVE: fresh generation passes no layer, so no world fact is ever
     // routed and `config′` is `config` itself. Measured against the committed manifest.

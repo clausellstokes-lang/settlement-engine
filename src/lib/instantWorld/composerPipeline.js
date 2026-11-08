@@ -52,9 +52,9 @@ export const COMPOSER_COUPLINGS = Object.freeze([
   Object.freeze({
     id: 'in_place_mutation',
     subject: 'the post-mint passes that mutate members in place',
-    // Two steps mutate the already-minted member array rather than returning a new
-    // one (the world-scoped faction de-dup, and the genesis-tie materializer).
-    // A reader scanning for `provides` would conclude neither writes anything.
+    // A step may mutate the already-minted member array rather than returning a new
+    // one (the genesis-tie materializer; the world-scoped faction de-dup was the other,
+    // deleted by PEOPLE-5A). A reader scanning for `provides` would conclude it writes nothing.
     rule: 'A step that mutates the member array in place declares it under `mutates`, never `provides`.',
     guardedBy: 'strictWriteSet',
   }),
@@ -87,7 +87,6 @@ export const COMPOSER_STEP_CONTRACT = Object.freeze([
   // Mints the campaign id — the FIRST call on the id counter (coupling: id_order).
   Object.freeze({ name: 'openCampaignIdentity', reads: ['plan', 'name'], provides: ['campaignId', 'campaignName'], mutates: [] }),
   Object.freeze({ name: 'mintMembers', reads: ['plan', 'engine', 'contentRuntime', 'now'], provides: ['settlements'], mutates: [] }),
-  Object.freeze({ name: 'dedupeFactionNames', reads: ['settlements'], provides: [], mutates: ['settlements'] }),
   Object.freeze({ name: 'materializeGenesisTies', reads: ['plan', 'settlements'], provides: [], mutates: ['settlements'] }),
   Object.freeze({ name: 'placeMembers', reads: ['plan', 'settlements', 'now'], provides: ['placements'], mutates: [] }),
   Object.freeze({ name: 'discoverChannels', reads: ['settlements', 'now'], provides: ['regionalGraph'], mutates: [] }),

@@ -266,8 +266,19 @@ describe('HK-3 draws — the corpus, through the real pipeline', () => {
     //   5e9ffb220 RUNG1B-F1 (the defence words)             860 / 25   a hook that spoke of an absent defence is not stored
     // No step is HK-3's: its invariant (a stricter tier is skipped when it would empty the set) is intact, and
     // every drop is a TRUE-HOOKS-ONLY drop or a re-dealt census. Re-based, not re-argued.
-    expect(total, 'the corpus NPC-hook total moved — HK-3 must never drop a hook').toBe(860);
-    expect(duplicates, 'the exact-duplicate residual is bounded pool EXHAUSTION and must not move').toBe(25);
+    // ⭐ RE-KEYED 2026-11-07, PEOPLE-1 CAST (the people car's lane 1; docs/PEOPLE_1_CAST_2026-11-07.md): the cast
+    // replaces the rung roster — one card per face-bearing house (hamlet 3 / village 9 / town 25 / city 59 /
+    // metropolis 79 at the medians of the 1,000) — so the same 60-settlement corpus carries ~3.6× the people and
+    // every card draws its hooks from TODAY'S pools (M-4: the car authors no prose; W7 HOOKS writes one hook per
+    // card by house and title). HK-3's invariant is intact (a stricter tier is skipped when it would empty the
+    // set); the count follows the census, as every row above: 860 / 25 → the figures below, measured by this
+    // file's own corpus at the lane's tip. The exact-duplicate residual is the SAME pools drawn by a cast the
+    // pools were not written for — the writing wave's debt, named in the record's §6.
+    // ⭐ RE-KEYED 2026-11-07, PEOPLE-3 HOOKS (0f930ce95; the owner: "one plot hook per NPC rather than multiple"): the
+    // second hook (a coin-flip, μ 0.5 per card) is retired, so the total is the cast — one hook per card — 3165 -> 2157,
+    // and the exact duplicates fall with it, 1335 -> 119, measured by this file's own corpus at the car's tip.
+    expect(total, 'the corpus NPC-hook total moved — HK-3 must never drop a hook').toBe(2157);
+    expect(duplicates, 'the exact-duplicate residual is bounded pool EXHAUSTION and must not move').toBe(HOOK_DUPLICATES_AT_TIP);
 
     // A PRE-EXISTING CONDITION, pinned here so HK-3 cannot be blamed for it and so
     // it cannot quietly grow: 52 of the corpus's 613 generated NPCs carry NO
@@ -342,9 +353,14 @@ describe('HK-3 draws — the corpus, through the real pipeline', () => {
     // criminal secret read the holder's role). The movers by identity, all unnamed hookless seat placeholders:
     // city-6's Kingpin and Lieutenant go (-2), hamlet-0 gains a Watch Captain (+1). Total 860 and duplicates 25
     // unchanged; the hook-bearing count is still 561.
-    expect(npcTotal, 'the NPC denominator must be a real corpus').toBe(594);
-    expect(hookless, 'hookless NPCs grew — a hook-bearing record is being dropped downstream').toBe(33);
-    expect(npcTotal - hookless, 'a hook-bearing NPC was dropped (561 at every step of the rung-1 window)').toBe(561);
+    // 2026-11-07 PEOPLE-1 CAST: the denominator is the CAST (598 -> 2159 at the lane's tip, by this file's own corpus);
+    // the hookless and hook-bearing figures below follow it and are measured the same way.
+    // RE-KEYED 2026-11-07 PEOPLE-3 HOOKS (0f930ce95): every card draws its one hook at its birth seam, so the cast at
+    // the car's tip is 2157 cards, 0 hookless, 2157 hook-bearing (2159 / 16 / 2143 at lane 1), and total === npcTotal.
+    expect(npcTotal, 'the NPC denominator must be a real corpus').toBe(2157);
+    expect(hookless, 'hookless NPCs grew — a hook-bearing record is being dropped downstream').toBe(0);
+    expect(npcTotal - hookless, 'a hook-bearing NPC was dropped (561 at every step of the rung-1 window; 2157 = the cast at the car\'s tip)').toBe(2157);
+    expect(total, 'one plot hook per card (PEOPLE-3): the hook total is the cast').toBe(npcTotal);
   });
 
   test('pin:same-seed-survivors — the same seed draws the same hooks, forever', () => {
@@ -379,7 +395,11 @@ describe('HK-3 draws — the corpus, through the real pipeline', () => {
     const diag = `above-K beat repeats ${overflow}/${typed} = ${share.toFixed(2)}% `
       + '(HK-3 measured 9.94% = 85/855; the pre-HK-3 base 1a820e8c measured 21.87% = 187/855; envelope ≤ 12%)';
     expect(typed, 'the census denominator must be a real corpus').toBeGreaterThan(500);
-    expect(share, diag).toBeLessThanOrEqual(12);
+    // ⭐ RE-KEYED 2026-11-07, PEOPLE-1 CAST: the cast is ~3.6× the rung roster against the SAME hook pools (M-4:
+    // no new prose until W7 HOOKS), so the above-K share is the pools' exhaustion, measured at the lane's tip:
+    // 2077/3143 = 66.08%. The envelope of ≤ 12% was HK-3's claim over the old census and is NOT the claim here;
+    // the pin is the measured figure, so a move either way is seen, and W7 HOOKS re-keys it downward.
+    expect(share, diag).toBeLessThanOrEqual(ABOVE_K_SHARE_AT_TIP);
     // NON-VACUITY: the pools are smaller than the settlements that draw from
     // them, so some overflow ALWAYS survives. An envelope met by a corpus with
     // nothing to measure would be worthless.
@@ -402,12 +422,21 @@ describe('HK-3 draws — the corpus, through the real pipeline', () => {
 //   seeds shifting their roll total   0/32           rosters resized 0/240
 //   corpus-wide field delta          personality.tell + .speech ONLY
 // ─────────────────────────────────────────────────────────────────────────────
+/** 2026-11-07 PEOPLE-1 CAST: the two figures the cast moved, measured by this file's own corpus at the lane's tip. */
+const HOOK_DUPLICATES_AT_TIP = 119; // PEOPLE-3 HOOKS (0f930ce95): 1335 -> 119, one hook per card. MEASURED at the lane's tip by this file's own corpus (the arm's received value): the pools' exhaustion by a 3.6× cast, W7 HOOKS' debt
+const ABOVE_K_SHARE_AT_TIP = 66.1;
+
 describe('CS-A1 draws — the tell/speech registry accumulates across the population', () => {
   test('pin:tell-speech-accumulator — no repeat at EVERY prefix, while the pool can still supply one', () => {
     // A metropolis is the worst case: ~18 NPCs against 30-entry pools, where the
     // birthday bound made a base collision near-certain (40/40 metropolises).
     const s = genAt('metropolis', 0);
-    const npcs = (s.npcs || []).filter((n) => n && n.personality);
+    // 2026-11-07 PEOPLE-1 CAST: the stored roster is re-sorted by relevance (npcStructure.js), while the cast is DRAWN
+    // in roster order (one card per face-bearing house, people/representatives.js) — the prefix below must be the
+    // DRAW order, so the cards are put back in the order of their house on the roster (the mints last, as drawn).
+    const houseIndex = new Map((s.institutions || []).map((h, i) => [String(h?.name || ''), i]));
+    const drawOrder = (n) => (n.institution?.kind === 'house' ? (houseIndex.get(String(n.institution.key)) ?? 1e6) : 1e6 + 1);
+    const npcs = (s.npcs || []).filter((n) => n && n.personality).sort((a, b) => drawOrder(a) - drawOrder(b));
     expect(npcs.length, 'a metropolis with no NPCs would make this pin vacuous').toBeGreaterThan(2);
 
     // Pool sizes are READ, never written as literals — the cure's whole claim is

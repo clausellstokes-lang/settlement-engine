@@ -55,7 +55,10 @@ describe('the seat over 120 generated settlements (twenty per tier, fixed seeds)
       }
       const npc = chain.npc ? (s.npcs || []).find((n) => n.name === chain.npc.name) : null;
       if (!npc) { misses.push(`${seed}: nobody seated`); continue; }
-      if (npc.factionAffiliation !== gov) misses.push(`${seed}: ${npc.name} is of ${npc.factionAffiliation}, not ${gov}`);
+      // PEOPLE-LAND re-key, cause M-2/M-7 (the shim out, the v2 boundary): a card's powers are its MEMBERSHIPS; the
+      // retired `factionAffiliation` is no field of a returned card. The seat is a member of the governing power.
+      const powers = (npc.memberships || []).map((m) => m.power);
+      if (!powers.includes(gov)) misses.push(`${seed}: ${npc.name} is of ${powers.join('/') || 'no power'}, not ${gov}`);
       if (/^The\s/.test(npc.name)) misses.push(`${seed}: stand-in ${npc.name}`);
       seated += 1;
     }
@@ -64,11 +67,39 @@ describe('the seat over 120 generated settlements (twenty per tier, fixed seeds)
     expect(seated + vacant).toBe(120);
   });
 
-  it('every thorp and hamlet that is not a claimant vacancy seats the governing faction Elder', () => {
+  // Re-keyed by identity with its cause (PEOPLE-2 CAST-DERIVED, 2026-11-07): the people car's cast
+  // records who holds the seat — the governing power's RANK-1 FACE (people/castPowers.js floor 1:
+  // the seat house's face or the seat minted from the governing power) — and a representative's
+  // role is its institution's title (M-1b: "the eldest", "the headman", "the reeve"), so the old
+  // premise "the role reads Elder" no longer names the seat. Every tier, not only the thorp.
+  it('every settlement that is not a claimant vacancy seats the governing power\'s rank-1 face', () => {
+    const live = corpus.filter(({ s }) => !isClaimantVacancy(s));
+    expect(live.length).toBeGreaterThan(100);
+    const misses = live.map(({ seed, s }) => {
+      const gov = nameOf(governingFactionOf(s));
+      const npc = (s.npcs || []).find((n) => n.name === rulingChainOf(s).npc?.name);
+      return npc && (npc.memberships || []).some((m) => m.power === gov && m.rank === 1) ? null : `${seed}:${npc?.title ?? 'none'}`;
+    }).filter(Boolean);
+    expect(misses).toEqual([]);
+  });
+
+  it('every thorp and hamlet that is not a claimant vacancy seats the governing power\'s FIRST, whose role is its title (M-1b)', () => {
+    // Kept by MERGE-234 (the chair's ruling: lane 2's seat code, proven by lane 1's thorp/hamlet seat-line arm too).
+    // 2026-11-07 PEOPLE-1 CAST (M-1b, the owner: a representative's ROLE is its institution's title and its standing
+    // in each power its RANK): the seat is the card ranked first in the governing power — 'the eldest', 'the headman',
+    // 'the household elder' at a thorp or hamlet (the census's titles and the R-P2 mint table), never 'Elder'.
     const small = corpus.filter(({ tier, s }) => (tier === 'thorp' || tier === 'hamlet') && !isClaimantVacancy(s));
     expect(small.length).toBeGreaterThan(30);
-    const roles = small.map(({ seed, s }) => `${seed}:${rulingChainOf(s).npc?.role ?? 'none'}`);
-    expect(roles.filter((r) => !r.endsWith(':Elder'))).toEqual([]);
+    const misses = [];
+    for (const { seed, s } of small) {
+      const gov = nameOf(governingFactionOf(s));
+      const npc = rulingChainOf(s).npc;
+      const card = npc ? (s.npcs || []).find((n) => n.name === npc.name) : null;
+      if (!card) { misses.push(`${seed}: nobody seated`); continue; }
+      if (card.role !== card.title) misses.push(`${seed}: role ${card.role} is not the title ${card.title}`);
+      if (!(card.memberships || []).some((m) => m.power === gov && m.rank === 1)) misses.push(`${seed}: ${card.name} is not ${gov}'s first`);
+    }
+    expect(misses).toEqual([]);
   });
 
   it('seatHolderFindings is empty over the 120', () => {
@@ -99,12 +130,20 @@ describe('the tier\'s own head wins (chair ruling c, 2026-11-03)', () => {
   // Register VII lit (3420d01e3, X-46 car 4; first-parent bisect: green at fb5edb7f5, red from
   // 3420d01e3) re-draws the city rosters, so the two cities whose governing faction holds a Governor
   // beside its Mayor are now -5 and -9 (2 of the 20, the mechanism still fires); the assertion is unchanged.
-  it('every city seats its required Mayor; rulers-city-5 and rulers-city-9 also hold a Governor', () => {
+  // Re-keyed by identity with its cause (PEOPLE-2 CAST-DERIVED, 2026-11-07): the generator no longer
+  // mints a Mayor and a Governor into one governing faction (the people car: one face per house,
+  // roles are titles, M-1b), so the premise "two cities hold both heads" is gone from the corpus.
+  // The seat is the seat house's face or the minted seat — never a second head — in every city.
+  it('every city seats its seat house\'s face (or the minted seat), and no second card holds the governing power\'s rank 1', () => {
     const cities = corpus.filter(({ tier, s }) => tier === 'city' && !isClaimantVacancy(s));
     expect(cities.length).toBe(20);
-    const both = cities.filter(({ s }) => { const gov = nameOf(governingFactionOf(s)); const roles = (s.npcs || []).filter((n) => n.factionAffiliation === gov).map((n) => n.role); return roles.includes('Mayor') && roles.includes('Governor'); });
-    expect(both.map(({ seed }) => seed), 'fixture premise: the two cities that drew a Governor').toEqual(expect.arrayContaining(['rulers-city-5', 'rulers-city-9']));
-    expect(cities.map(({ seed, s }) => `${seed}:${rulingChainOf(s).npc?.role}`).filter((r) => !r.endsWith(':Mayor'))).toEqual([]);
+    const misses = cities.map(({ seed, s }) => {
+      const gov = nameOf(governingFactionOf(s));
+      const firsts = (s.npcs || []).filter((n) => (n.memberships || []).some((m) => m.power === gov && m.rank === 1));
+      const seated = rulingChainOf(s).npc?.name;
+      return firsts.length === 1 && firsts[0].name === seated && (firsts[0].institution?.kind === 'house' || firsts[0].id === 'npc_seat') ? null : `${seed}:${firsts.length}`;
+    }).filter(Boolean);
+    expect(misses).toEqual([]);
   });
 
   it('the tier decides: a metropolis seats its Governor, a city its Mayor, and another head seats only when the tier\'s own is absent', () => {
@@ -170,10 +209,14 @@ describe('the seat titles mirror the generator', () => {
 describe('seatHolderFindings, planted faults', () => {
   const base = () => corpus.find(({ tier, s }) => tier === 'village' && !isClaimantVacancy(s)).s;
 
+  // Re-keyed by identity with its cause (PEOPLE-2 CAST-DERIVED, 2026-11-07): the village's seat is its
+  // rank-1 face, titled from its house ("the headman", "the reeve"), not a role reading Mayor — a
+  // planted Mayor no longer shares the seated card's title. The second seat-holder is planted the
+  // way the cast records the seat: a second card ranked first in the governing power.
   it('finds a second seat-holder planted in the governing faction', () => {
     const s = base();
     const gov = nameOf(governingFactionOf(s));
-    const planted = { ...s, npcs: [...s.npcs, { id: 'npc.planted.mayor', name: 'Second Mayor', role: 'Mayor', factionAffiliation: gov }] };
+    const planted = { ...s, npcs: [...s.npcs, { id: 'npc.planted.mayor', name: 'Second Mayor', role: 'Mayor', memberships: [{ power: gov, rank: 1, share: 1 }] }] };
     expect(seatHolderFindings(s)).toEqual([]);
     expect(seatHolderFindings(planted).length).toBeGreaterThanOrEqual(1);
   });

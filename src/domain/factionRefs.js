@@ -92,16 +92,21 @@ export function resolveFactionRef(factions, ref) {
 }
 
 /**
- * Does an entity's `linkedFactionIds` roster address this faction? When the full
- * roster is supplied, resolution honors id priority and ambiguity rejection.
+ * Does an entity's standing address this faction? PEOPLE-5B (M-7): a v2 card names
+ * its powers in `memberships[].power` (by the power's name, ∈ powerStructure.factions);
+ * `linkedFactionIds` left the card. When the full roster is supplied, resolution
+ * honors id priority and ambiguity rejection.
  *
- * @param {{ linkedFactionIds?: unknown } | null | undefined} entity
+ * @param {{ memberships?: unknown } | null | undefined} entity
  * @param {FactionRefRecord | null | undefined} faction
  * @param {FactionRefRecord[] | null | undefined} [factions]
  * @returns {boolean}
  */
 export function entityLinksFaction(entity, faction, factions) {
-  const links = Array.isArray(entity?.linkedFactionIds) ? entity.linkedFactionIds : [];
+  // inline rather than imported: this module is a pure leaf (see its header)
+  const links = (Array.isArray(entity?.memberships) ? entity.memberships : [])
+    .map((m) => (m && typeof m === 'object' ? /** @type {{ power?: unknown }} */ (m).power : null))
+    .filter((power) => typeof power === 'string' && power.length > 0);
   if (Array.isArray(factions)) {
     return links.some((ref) => resolveFactionRef(factions, ref) === faction);
   }

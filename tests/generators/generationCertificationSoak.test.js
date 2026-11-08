@@ -146,7 +146,8 @@ describe('generation certification soak independent oracle', () => {
       npcs: [{
         id: 'npc-1',
         name: 'Alda Vale',
-        factionAffiliation: 'Missing faction',
+        // PEOPLE-5B (M-7): a v2 card's broken faction reference is a membership naming no power.
+        memberships: [{ power: 'Missing faction', rank: 1, share: 1 }],
       }],
       relationships: [{
         npc1Id: 'npc-1',
@@ -160,12 +161,9 @@ describe('generation certification soak independent oracle', () => {
           power: 70,
         }],
       },
-      factions: [{
-        name: 'Civic bloc',
-        members: [{ id: 'npc-missing' }],
-      }],
+      // PEOPLE-5B (M-7): no grouping on a v2 record; a conflict's parties are checked against the powers.
       conflicts: [{
-        parties: ['Civic bloc', 'Missing bloc'],
+        parties: ['Council', 'Missing bloc'],
       }],
       history: {
         historicalEvents: [
@@ -201,7 +199,6 @@ describe('generation certification soak independent oracle', () => {
       'relationship_endpoint_missing',
       'faction_power_not_conserved',
       'npc_faction_missing',
-      'faction_member_missing',
       'conflict_faction_missing',
       'history_order_invalid',
       'income_not_conserved',
