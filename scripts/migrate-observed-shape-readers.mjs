@@ -197,7 +197,14 @@
  *     roster 10 -> 13, the bank 69/45 -> 76/50), and ADMITS the window's other rows with
  *     attribution. Its full rationale lives beside `WINDOW_RUNG1_TARGET_SCHEMA` (RETIRED).
  *
- *   schema 30 -> 31 (LIVE)   the same tagged numeric reconciliation, and THE PEOPLE CAR'S LANDING
+ *   schema 31 -> 32 (LIVE)   the same tagged numeric reconciliation, and MERGE-CAR: the people car
+ *     merged into the integration branch over the rung-2 landing (the chair's brief, 2026-11-08). The
+ *     car's genesis at 31 STANDS; the integration side's schema-30 reads (R2's census readers) are
+ *     ADMITTED at this rung by cause, the rows they retired go with cause: 15 new, 12 gone, none
+ *     declared; the bank 77/51 -> 76/50 (the census readers' `stresses on settlement` erosion). Its
+ *     full rationale lives beside `CAR_MERGE_TARGET_SCHEMA`.
+ *
+ *   schema 30 -> 31 (RETIRED) the same tagged numeric reconciliation, and THE PEOPLE CAR'S LANDING
  *     (ODQ §934.105; the landing seat PEOPLE-LAND, 2026-11-07): the NPC grouping and the per-NPC
  *     faction fields leave the record at the v2 boundary (M-2, M-7). A NEW GENESIS from a restored
  *     consistent schema-30 predecessor. 90 new rows ADMITTED with attribution by lane cause, 9 go,
@@ -315,6 +322,7 @@ import {
   validateSchema28Baseline,
   validateSchema29Baseline,
   validateSchema30Baseline,
+  validateSchema31Baseline,
 } from './lib/observed-shape-baseline.mjs';
 
 export const MIGRATION_REPORT_SCHEMA = 2;
@@ -1363,6 +1371,81 @@ export const PEOPLE_CAST_TARGET_SCHEMA = 30;
  *  ratchet-red; its re-freeze lands next. */
 export const PEOPLE_LANDING_TARGET_SCHEMA = 31;
 
+/* ⭐⭐ THE SCHEMA 31 → 32 RUNG — MERGE-CAR: THE PEOPLE CAR MERGED INTO THE INTEGRATION BRANCH
+ *
+ *  The merge commit 8dff691f3 merged the people car (lane/people-land-2026-11-07, 373a2947b) into
+ *  the integration branch (7b3ffb6ee). Both sides had cut their own rung: the car its NEW GENESIS
+ *  at 31 (PEOPLE-LAND, aaa15f224 / b61029f4d), the integration side its 30, THE CENSUS READERS
+ *  (MERGE-R2, f7bc53623 / a709af16d). At the merge the car's side of the tooling, suites and
+ *  register was taken. THE CHAIR'S BRIEF (MERGE-CAR, 2026-11-08): "the car's genesis at schema 31
+ *  STANDS; the integration side's schema-30 reads — R2's census readers — admitted at a new rung by
+ *  cause, none declared". This is that rung.
+ *
+ *  THE REFUSAL, MEASURED at the merged tip c12c28af0 through `--scan-only --scan-mode=legacy-leaf`
+ *  against the car's schema-31 register (frozen at 147fa6c3f):
+ *
+ *      findings 2,193 → 2,202 · identities 1,545 → 1,548
+ *      NEW 15 · GONE 12 · INCREASED 0 · DECREASED 0 · SAME 1,533
+ *
+ *  The scanner transition modifies exactly the three bookkeeping paths; the unscanned movement is
+ *  the eight regenerated execution inputs (src/data/dossierConnectives.generated.js, the six
+ *  src/data/dossierStateProse/*.generated.js, src/domain/data/intentAtlas.distillate.json), changed
+ *  since the car's freeze and verified fresh at this tree (`gen:dossier-prose --check` green):
+ *  regenerated inputs the write absorbs, not detector sources.
+ *
+ *  THE MIGRATION REVIEW — every moved row, its cause, its disposition:
+ *   (A) R2'S CENSUS READERS (the rung-2 landing; MERGE-R2's schema-30 review is the source of every
+ *       cause), the same 21 rows R2 measured, row for row:
+ *     NEW (10 rows), each ADMITTED as ordinary debt:
+ *      • display/tradeListDisplay.js `name on incomeSources` x1 — 9e4283eb5 (census-3c R-P 2).
+ *      • facts/drawDeclared.js `id` x3, `text` x2, `twinOf` x2 `on merchant` — 8d5b704a9, surfaced
+ *        at f739d37c6 (census-1e unit 2: the `merchant` override's binding carried into it);
+ *        `colour on merchant` x1 — d59b8a37a (census compose, R-AO).
+ *      • facts/factVocabulary.js `crisis`, `excludes`, `needs` x1, `tags` x2 `on merchant` —
+ *        c84bd6a29, surfaced at f739d37c6 by the same binding.
+ *      • roles/roleClass.js `contestsNiche on factions` x1 — A MOVE: 596cb8b1b (census-4 R3) re-homed
+ *        `seatFactions` from coherence/readerBattery.js.
+ *     GONE (11 rows), each RETIRED with its cause:
+ *      • coherence/readerBattery.js `contestsNiche on factions` x1 — moved by 596cb8b1b.
+ *      • generators/npcGenerator.js `note` x2, `short` x1 `on merchant` — f739d37c6 (the binding
+ *        moved into drawDeclared.js / factVocabulary.js).
+ *      • domain/canonicalAccessors.js `stresses on settlement` x1 (a BANKED row: the bank 77/51 ->
+ *        76/50) and domain/magicLedger.js `magicLevel on settlement` x1 — 7af3c6797 (census-3b(3)):
+ *        UNCURED INSTRUMENT EROSION, recorded as such, not as a repair.
+ *      • pdf/lib/viewModel.js `criticalIssues` x1, `structuralSuggestions` x1, `stressConsequences`
+ *        x2 `on economicViability`; pdf/lib/viewModelBodySlices.js `priorityNotes on
+ *        economicViability` x1, `structuralGaps on resourceAnalysis` x1, `structuralGaps on
+ *        settlement` x1 — d3b9280f6 (reader-r1 unit 2): the reads are gone, a lawful repair.
+ *   (B) THE CENSUS READERS UNDER THE CAR'S RECORD (the composition): the rung-2 landing's readers of
+ *       the powers keep a `f.faction ?? f.name` fallback; on the integration side the corpus's
+ *       `factions` shape still carried the NPC grouping's `name`, and at the car's v2 boundary (M-2,
+ *       M-7) the observed `factions` shape is the powers alone, named by `faction`. The fallback
+ *       becomes a finding — a dead fallback, not a lost writer. NEW (4 rows), ADMITTED:
+ *      • roles/roleClass.js `name on factions` x2 — A MOVE: `seatFactions`, re-homed by 596cb8b1b
+ *        from coherence/readerBattery.js, whose `name on factions` x2 the car's register held
+ *        (GONE below; readerBattery's faction-role-fit now reads memberships via people/membership.js,
+ *        MERGE-CAR, M-1b, and moves no row).
+ *      • coherence/crisisFactFindings.js `name on factions` x2 — the rung-2 crisis-cast reader
+ *        (`governing?.name`, `x?.name`); MERGE-CAR's composition there (memberships) moves no row.
+ *      • generators/power/factionLabelClose.js `name on factions` x1 — the rung-2 close-label pass.
+ *      • facts/guild.js `name on factions` x1 — MERGE-CAR's composition: `guildOf` reads the powers
+ *        alone now that the grouping is no longer built (M-2); its `f?.name` fallback is on the powers.
+ *     GONE (1 row), RETIRED: coherence/readerBattery.js `name on factions` x2 — moved by 596cb8b1b.
+ *   (C) THE CENSUS READERS UNDER THE CAR'S CORPUS: generators/npcGenerator.js `_government on
+ *       config` x3 (NEW, ADMITTED) — CENSUS-1i unit 6 / CENSUS-4d's `birthFactsOf` reads of
+ *       `config._government` (the integration side). Its writer is the npcConfig literal in the same
+ *       file; the car's corpus does not ground that derived config, so the read joins the car's own
+ *       admitted siblings `_dominantFaction on config` / `_tradeCommodity on config` there.
+ *  MEASURED, NOT EXPECTED: no row moves at people/ties.js, people/representatives.js or in
+ *  readerBattery's faction-role-fit — the composition's reads there are grounded.
+ *
+ *  Nothing is declared (the roster stays fourteen; thirteen bank). The identity rows move by exactly
+ *  the review's delta, 1545 + 15 - 12 = 1548. ⛔ The reconciliation must be EXACTLY those 27 rows;
+ *  any other moved row at the mint means the review was not the whole cause and the mint STOPS.
+ *  Its delta is the three bookkeeping paths; see `CAR_MERGE_SCANNER_DELTA_PATHS`. The commit pair
+ *  holds as at every rung: this rung lands ratchet-red, and its re-freeze lands next. */
+export const CAR_MERGE_TARGET_SCHEMA = 32;
+
 export const DECLARED_BANK_BY_TARGET = Object.freeze({
   [EXEMPTION_RETIREMENT_TARGET_SCHEMA]: Object.freeze({ bankedReads: 60, taggedRows: 39 }),
   [BANK_FENCE_TARGET_SCHEMA]: Object.freeze({ bankedReads: 60, taggedRows: 39 }),
@@ -1423,6 +1506,11 @@ export const DECLARED_BANK_BY_TARGET = Object.freeze({
   // MEASURED off the restored schema-30 predecessor and the live scan at the subject: no admitted,
   // gone or decreased row is on a declared identity, so the pair cannot move.
   [PEOPLE_LANDING_TARGET_SCHEMA]: Object.freeze({ bankedReads: 77, taggedRows: 51 }),
+  // MEASURED off the car's schema-31 register (77/51) and the live scan at the merged tip (76 reads
+  // across 13 of 14 declared identities): ONE gone row is on a declared identity — the census
+  // readers' `stresses on settlement` at canonicalAccessors.js (uncured erosion, 7af3c6797) — so the
+  // pair moves 77/51 -> 76/50, the integration side's schema-30 figure. The bank does not grow.
+  [CAR_MERGE_TARGET_SCHEMA]: Object.freeze({ bankedReads: 76, taggedRows: 50 }),
 });
 
 /** The declared post-bank of a target, or `null` for a rung that predates the law. */
@@ -1987,6 +2075,14 @@ export const PEOPLE_LANDING_SCANNER_DELTA_PATHS = Object.freeze([
   'scripts/migrate-observed-shape-readers.mjs',
 ]);
 
+/** The schema-31 → 32 delta: the same THREE bookkeeping paths (the live validator moving to
+ *  `validateSchema32Baseline`, the 31 → 32 bump with the retired-31 constant, this rung). */
+export const CAR_MERGE_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
 export const BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS = Object.freeze([
   'package-lock.json',
   'package.json',
@@ -2045,6 +2141,8 @@ const PEOPLE_CAST_SCANNER_TRANSITION_POLICY =
   'schema-29-to-30-exact-scanner-transition-v1';
 const PEOPLE_LANDING_SCANNER_TRANSITION_POLICY =
   'schema-30-to-31-exact-scanner-transition-v1';
+const CAR_MERGE_SCANNER_TRANSITION_POLICY =
+  'schema-31-to-32-exact-scanner-transition-v1';
 const CORPUS_COVERAGE_SCANNER_TRANSITION_POLICY =
   'schema-7-to-8-exact-scanner-transition-v1';
 const EPOCH_DARK_CORPUS_SCANNER_TRANSITION_POLICY =
@@ -2094,6 +2192,7 @@ export const LEAF_MIGRATION_PREDECESSOR = Object.freeze({
   [MIGRATION_DIRECTION_TARGET_SCHEMA]: TIER_COVERAGE_TARGET_SCHEMA,
   [PEOPLE_CAST_TARGET_SCHEMA]: MIGRATION_DIRECTION_TARGET_SCHEMA,
   [PEOPLE_LANDING_TARGET_SCHEMA]: PEOPLE_CAST_TARGET_SCHEMA,
+  [CAR_MERGE_TARGET_SCHEMA]: PEOPLE_LANDING_TARGET_SCHEMA,
 });
 
 /**
@@ -2186,6 +2285,9 @@ const LEAF_PREDECESSOR_VALIDATOR = Object.freeze({
   [MIGRATION_DIRECTION_TARGET_SCHEMA]: validateSchema29Baseline,
   // The schema-31 rung's own predecessor, validated as schema 30 by its retired literal.
   [PEOPLE_CAST_TARGET_SCHEMA]: validateSchema30Baseline,
+  // The schema-32 rung's own predecessor (the car's genesis), validated as schema 31 by its
+  // retired literal.
+  [PEOPLE_LANDING_TARGET_SCHEMA]: validateSchema31Baseline,
 });
 
 const RETIRED_EXACT_MIGRATION_KIND = `observed-shape-schema-2-to-${RETIRED_EXACT_TARGET_SCHEMA}-migration`;
@@ -2709,6 +2811,15 @@ const SCANNER_TRANSITION_BY_TARGET = new Map([
     // governed execution inputs (the dossier-state prose, the institution service keys, the prose
     // norms, …) by their documented commands after the predecessor was frozen, and the report
     // records that movement for the review's decision.
+    reviewableUnscannedMovement: true,
+  })],
+  [CAR_MERGE_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: CAR_MERGE_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: CAR_MERGE_SCANNER_TRANSITION_POLICY,
+    // TRUE, matching every rung since 8→9 — and THIS rung exercises it: the eight dossier-prose /
+    // intent-atlas execution inputs were regenerated by their documented commands since the
+    // schema-31 freeze, and the report records that movement for the review's decision.
     reviewableUnscannedMovement: true,
   })],
   [PEOPLE_LANDING_TARGET_SCHEMA, Object.freeze({
@@ -3845,7 +3956,7 @@ export function run(argv = process.argv.slice(2)) {
   // any mismatch into a refusal rather than a silent mode switch.
   const targetSchema = command.targetSchema
     ? Number(command.targetSchema)
-    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : PEOPLE_LANDING_TARGET_SCHEMA);
+    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : CAR_MERGE_TARGET_SCHEMA);
   if (![RETIRED_EXACT_TARGET_SCHEMA, HEURISTIC_TARGET_SCHEMA, FILTERED_TARGET_SCHEMA,
     SURFACE_FILTERED_TARGET_SCHEMA, BANKED_EXPLAINED_WRITER_TARGET_SCHEMA,
     CORPUS_COVERAGE_TARGET_SCHEMA, EPOCH_DARK_CORPUS_TARGET_SCHEMA,
@@ -3859,8 +3970,9 @@ export function run(argv = process.argv.slice(2)) {
     CORPUS_REDEAL_TARGET_SCHEMA, ADVISORY_LOCKFILE_TARGET_SCHEMA,
     FED_WORLD_TARGET_SCHEMA, WINDOW_RUNG1_TARGET_SCHEMA, TIER_COVERAGE_TARGET_SCHEMA,
     MIGRATION_DIRECTION_TARGET_SCHEMA, PEOPLE_CAST_TARGET_SCHEMA,
-    PEOPLE_LANDING_TARGET_SCHEMA].includes(targetSchema)) {
-    throw new Error(`observed-shape --target-schema must be ${PEOPLE_LANDING_TARGET_SCHEMA} (live people-landing leaf),`
+    PEOPLE_LANDING_TARGET_SCHEMA, CAR_MERGE_TARGET_SCHEMA].includes(targetSchema)) {
+    throw new Error(`observed-shape --target-schema must be ${CAR_MERGE_TARGET_SCHEMA} (live car-merge leaf),`
+      + ` ${PEOPLE_LANDING_TARGET_SCHEMA} (retired people-landing leaf),`
       + ` ${PEOPLE_CAST_TARGET_SCHEMA} (retired people-cast leaf),`
       + ` ${MIGRATION_DIRECTION_TARGET_SCHEMA} (retired migration-direction leaf),`
       + ` ${TIER_COVERAGE_TARGET_SCHEMA} (retired tier-coverage leaf),`
