@@ -264,7 +264,7 @@ banded; no float reaches a surface; the AI is a bucketing clerk.
   band. The weight is PARTIAL and authored: path cost, danger, stance and
   appetite keep their terms; the condition is one more. Law One holds: the
   actor is the origin's merchant faction (faction grain), never a caravan
-  with a mind. [see the bracket at :2106] [RE-READ 2026-11-08 (FP-REBASE; FPR-VERIFY N1) — the pointer drifted :2103 → :2106 with the RE-READ bracket's two header lines]
+  with a mind. [see the bracket at :2103] [RE-READ 2026-11-08 (FP-REBASE; FPR-VERIFY N1, R5) — the line pointer drifted; read it as the `[CORRECTED 2026-10-16 (coherence fold) — `merchantAppetite` is a per-ORIGIN-SETTLEMENT …]` bracket in § EC-18 — THE OPEN ROAD (a heading, not a line, by the standard's rule 32)]
 - **E12 — THE CLERK READS BANDS:** the AI grounding for economy — the client
   payload AND the edge function's prompt summary — carries condition bands,
   pressures and believed bands; never a stock integer, never an income
@@ -2682,7 +2682,7 @@ file class).
   narrows it.
 - **J-EC-21 — THE OPEN ROAD IS PARTIAL AND UNCONTRACTED (E15 made a ruling).**
   The condition is one weighted term in the existing dispatch decision and the
-  actor of a speculative caravan is the origin's merchant faction; [see the bracket at :2106] [RE-READ 2026-11-08 (FP-REBASE; FPR-VERIFY N1) — the pointer drifted :2103 → :2106 with the RE-READ bracket's two header lines] contracted
+  actor of a speculative caravan is the origin's merchant faction; [see the bracket at :2103] [RE-READ 2026-11-08 (FP-REBASE; FPR-VERIFY N1, R5) — the line pointer drifted; read it as the `[CORRECTED 2026-10-16 (coherence fold) — `merchantAppetite` is a per-ORIGIN-SETTLEMENT …]` bracket in § EC-18 — THE OPEN ROAD (a heading, not a line, by the standard's rule 32)] contracted
   flows are fenced by name; the house's venture (TR-7) takes precedence where
   lit. The weight's cap below path cost is the chair's reading of "partially"
   and is a tuning band the owner signs at the soak.
