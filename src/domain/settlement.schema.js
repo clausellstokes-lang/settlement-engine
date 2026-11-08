@@ -44,7 +44,7 @@
 // that older saves wouldn't recompute identically. GENERATOR_VERSION is the
 // build-time stamp — useful for "this save was made by SettlementForge 1.2.3."
 
-export const SCHEMA_VERSION     = 2; // PEOPLE-5B (2026-11-07, M-7): 1 -> 2, the people car (settlementMigrations.js :: migrateV1toV2)
+export const SCHEMA_VERSION     = 3; // ALLEGIANCE-CAR1 (2026-11-08): 2 -> 3, the hidden allegiance (settlementMigrations.js :: migrateV2toV3); PEOPLE-5B (2026-11-07, M-7): 1 -> 2, the people car (migrateV1toV2)
 export const SIMULATION_VERSION = 1;
 export const GENERATOR_VERSION  = '0.9.0';
 
@@ -460,6 +460,7 @@ export const FIELD_ALIASES = Object.freeze({
  *   influence?: (string | number),
  *   power?: number,
  *   corrupt?: boolean,
+ *   allegiance?: { power: (string|null), house: string, vector: string, via: string, handler: (string|null), share: number, veiled: boolean, covert: boolean, leash?: Record<string, unknown>, foreignPatron?: string, revealed?: boolean, conspiracy?: string },
  *   ousted?: boolean,
  *   timesExposed?: number,
  *   dots?: number,
@@ -1015,8 +1016,8 @@ export const FIELD_ALIASES = Object.freeze({
  * @property {string|null}   factionLink          Stable id of the linked faction.
  * @property {string|null}   publicReputation     What the town knows of them.
  * @property {string|null}   privateAgenda        The NPC's long-term goal.
- * @property {boolean|null}  corrupt              Tri-state: false is a generation verdict, null a legacy save the corruption pass never judged.
- * @property {string|null}   corruptionVector     How they are compromised (corruptionPass.js mirror).
+ * @property {boolean|null}  corrupt              LEGACY (simulation-only, ALLEGIANCE-CAR1): the retired mark; a v3 birth-era card carries `allegiance` instead (domain/people/allegiance.js :: allegianceOf).
+ * @property {string|null}   corruptionVector     LEGACY (simulation-only): the vector now lives on `allegiance.vector`.
  * @property {number}        timesExposed         How many times their corruption has been surfaced.
  * @property {boolean}       ousted               Whether they have been removed from their seat.
  * @property {({ causeClass: string, family: string, stage: string, situation: string, role: string, originTick: number|null, resolvedTick: number|null, historicizedTick: number|null, exposedTick: number|null, ageBand: string|null })|null} [compromiseLifecycle]  W-C5 cause-resolution lifecycle RAW stamp (attributed cause + stage + situation + tick stamps + age band; the conjunction key W2 keys off). Null unless the world pulse touched this compromise; the lazy dossier card runs it through the generic content floor.
