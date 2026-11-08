@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "d8563dadba9cd588350940fcdbe48b200a784f4d",
-  "measuredBy": "MERGE-WAVE (FIX-FOOD-ISOLATION merge point)",
+  "measuredAtSha": "86ea40298bc29991cb896056008c9de0c6208d68",
+  "measuredBy": "MERGE-WAVE (FIX-PUBLIC-VEIL merge point)",
   "date": "2026-11-08",
-  "note": "the FIX-FOOD-ISOLATION merge at c6e8a4ad6: foodGenerator.js / isolationSupport.js re-shaped by the fix lane (the receipt reads the land through foodLandOf; the harvest side), the registered constants dependents moved, no value; refrozen at the merged tip, Register VII v2 stands",
+  "note": "the FIX-PUBLIC-VEIL merge at 7e65c7bec: the veil lane re-shapes the card mints and the migrations; refrozen at the merged tip, Register VII v2 stands",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -192,6 +192,7 @@
       },
       "dependents": [
         "src/domain/display/galleryVeil.js",
+        "src/domain/people/cardVeil.js",
         "src/domain/worldPulse/brokerageFidelity.js",
         "src/domain/worldPulse/brokerageServices.js",
         "src/domain/worldPulse/brokerageServicesFeed.js",
@@ -1020,7 +1021,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 450,
+      "line": 451,
       "spanDigest": "3812788e098c702a89d72a5b51c0007f969391069da9b98b2fdd4f2e789ff838",
       "leaves": {
         "value": 50
@@ -1034,7 +1035,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 451,
+      "line": 452,
       "spanDigest": "a6b1340215d65b0c4945f4b657854f6756ff2217a648606b9e467ee5ac00bbda",
       "leaves": {
         "value": 20
@@ -1604,10 +1605,10 @@
       },
       "dependents": [
         "src/components/new/tabs/PowerTab.jsx",
-        "src/domain/display/galleryVeil.js",
         "src/domain/display/stateProse/printProse.js",
         "src/domain/interior/interiorTemplates.js",
         "src/domain/npc/npcBank.js",
+        "src/domain/people/cardVeil.js",
         "src/domain/spatial/navalLayer.js",
         "src/domain/undercity/monotoneComponents.js",
         "src/domain/undercity/sewerDerivation.js",
@@ -8167,7 +8168,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 2,
-      "line": 65,
+      "line": 67,
       "spanDigest": "27e8cae7f714b6255ed46d5145a6bb53f4257fda9c347798c877bf6108baa529",
       "leaves": {
         "RANKS": 3,
