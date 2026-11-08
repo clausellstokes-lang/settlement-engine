@@ -47,7 +47,7 @@
  * past-EOF citations this gate deliberately does not see. FOUR rules select them,
  * each checkable, and the full roster is committed in the baseline's
  * `archivalExclusionAtFreeze.files`:
- *   tree (113)   docs/review-r2/**, docs/shift-records/** (2026-11-08, W5 HIS second seat at the lane merge, 109 -> 113: the union, the lane's four signed records 2026-11-07-w5-01 .. -04; 2026-11-07, MERGE-CAR: the union, 95 + 5 + 9 = 109 — both
+ *   tree (114)   docs/review-r2/**, docs/shift-records/** (2026-11-08, W5 HIS second seat at the lane merge, 109 -> 114: the union, the lane's four signed records 2026-11-07-w5-01 .. -04 and MERGE-CAR's record A (2026-11-08-merge-car-a-rung2-composition.json, born after its 109); 2026-11-07, MERGE-CAR: the union, 95 + 5 + 9 = 109 — both
  *                sides' records composed, no document changed class)
  *                (2026-11-07, LANDING-R2 seat E, 90 -> 95: the rung-2 landing's five signed records rung2-01..-05,
  *                the census-composed surfaces; GROWTHS that hid nothing, 0 past-EOF of their own.)

@@ -49,7 +49,7 @@
       "banner": 9,
       "dated": 149,
       "sha-pin": 2,
-      "tree": 113
+      "tree": 114
     },
     "files": {
       "banner": [
@@ -325,7 +325,7 @@
     "_rosterGrowth2026-11-08-merge-car": "MERGE-CAR (the people car merged into the integration branch, 8dff691f3): the roster is the UNION of both sides', measured once by this walker: `dated` 93 (the base 262e8b255) + 44 (the integration side's documents born dated after the base) + 11 (the car's) = 148; `tree` 95 + 5 (the rung-2 landing's five signed records) + 9 (the car's nine) = 109; `banner` 9 and `sha-pin` 1 unmoved. No document changed class; each entered its class when it was born on its own side. pastEofCitationsExcluded is UNCHANGED at 377.",
     "_rosterMove2026-11-08-merge-car": "ONE document changed class, by the chair's ruling of 2026-11-08 (MERGE-CAR, option (a)): docs/chair/2026-11-07/people-5-prep/walker-draft-at-base.txt joined `sha-pin` (1 -> 2) with the header `**Snapshot base:** 1031233a4`. CAUSE: the people car shortened narrativeGenerator.js (1,035 -> 1,016 lines) and factionDedup.js (217 -> 122) under a listing frozen at 1031233a4; the listing changed class from live to snapshot, pastEofCitationsExcluded 377 -> 382; no row re-addressed.",
     "_rosterGrowth2026-11-07-w5": "FIVE documents JOINED the roster by being BORN into it (W5 HIS, the writing wave's history lane): `dated` 131 -> 132, docs/WIRING_W5_2026-11-07.md, the lane's record, born dated, 0 past-EOF citations; `tree` 100 -> 104, the lane's four signed composed-prose-manifest records docs/shift-records/2026-11-07-w5-01 .. -04. A GROWTH, not a re-classification.",
-    "_rosterGrowth2026-11-08-w5-merge": "W5 HIS second seat (the lane's merge of the integration branch at ffafe2a0e, 2026-11-08): the roster is the UNION of both sides', measured once by this walker: `dated` 148 (the integration side, MERGE-CAR's union) + 1 (the lane's record docs/WIRING_W5_2026-11-07.md) = 149; `tree` 109 + 4 (the lane's four signed composed-prose-manifest records docs/shift-records/2026-11-07-w5-01 .. -04) = 113; `banner` 9 and `sha-pin` 2 unmoved. No document changed class; both sides' notes kept."
+    "_rosterGrowth2026-11-08-w5-merge": "W5 HIS second seat (the lane's merge of the integration branch at ffafe2a0e, 2026-11-08): the roster is the UNION of both sides', measured once by this walker: `dated` 148 (the integration side, MERGE-CAR's union) + 1 (the lane's record docs/WIRING_W5_2026-11-07.md) = 149; `tree` 109 + 4 (the lane's four signed composed-prose-manifest records docs/shift-records/2026-11-07-w5-01 .. -04) + 1 (docs/shift-records/2026-11-08-merge-car-a-rung2-composition.json, MERGE-CAR's record A, born on the integration side after its own 109 was measured) = 114; `banner` 9 and `sha-pin` 2 unmoved. No document changed class; both sides' notes kept."
   },
   "rows": []
 }
