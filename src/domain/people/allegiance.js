@@ -426,6 +426,8 @@ export function leaveAllegianceReceipts(settlement, dealt) {
       step: ALLEGIANCE_FORK_LABEL,
       result: 'allegiance',
       causes: [
+        { source: 'allegiance.gate', effect: 'eligible',
+          reason: `A corruptible ${flaw} flaw, not a criminal face, and a criminal house with a face on the roster (${a.house}).` },
         { source: `flaw.${flaw}`, effect: `allegiance vector: ${a.vector}`, reason: `A ${flaw} flaw gave the guild its opening.` },
         { source: 'corruption.climate', effect: `onset chance ${p.toFixed(3)}`,
           reason: `Crime ${crime.toFixed(2)}, organized crime ${organized.toFixed(2)} (×${ALLEGIANCE_TUNING.organizedCrime}), clamped to [${CORRUPTION_TUNING.spawn.min}, ${CORRUPTION_TUNING.spawn.max}].` },
