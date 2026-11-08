@@ -66,7 +66,7 @@ const TABS = [
   ['Power', (s) => <PowerTab powerStructure={s.powerStructure} settlement={s} />],
   ['PlotHooks', (s) => <PlotHooksTab settlement={s} />],
 ];
-// W1 ECO (2026-11-07): DS-ECO-1 C4 v2 reworded under the owner's style law ("The {access} into {settlement} is busy and the town is poor").
+// W1 ECO (2026-11-07): DS-ECO-1 C4 v2 reworded under the owner's style law; W1-A0b (2026-11-08) drops its {access} slot, an A0b over-claim ("The way into {settlement} is busy and the town is poor").
 const HEADER = /The \p{L}+ into [\p{L}' -]+? is busy and the \p{L}+ is poor/u;
 
 function expandAll(container) {

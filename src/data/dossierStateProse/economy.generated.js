@@ -135,9 +135,8 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "The {access} into {settlement} is busy and the town is poor. That is the first complaint a visitor hears, and the one they hear most.",
+          "text": "The way into {settlement} is busy and the town is poor. That is the first complaint a visitor hears, and the one they hear most.",
           "slots": [
-            "access",
             "settlement"
           ],
           "vid": 2

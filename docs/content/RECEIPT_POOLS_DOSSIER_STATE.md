@@ -826,7 +826,7 @@ the access.
 
 **COMBINATION C4: a low rung on a working approach**
 1. `[ledger · colour]` Traffic moves through {settlement}'s {access} every day, and little of the money stays. The market tolls bring in less than the town spends, so the coffers stay short.
-2. `[street]` The {access} into {settlement} is busy and the town is poor. That is the first complaint a visitor hears, and the one they hear most.
+2. `[street]` The way into {settlement} is busy and the town is poor. That is the first complaint a visitor hears, and the one they hear most.
 3. `[visitor · market]` More goods come off the {access} at {settlement} than are ever sold there. The traffic is busy and the town stays poor.
 
 **COMBINATION C5: a low rung on a narrow approach**
