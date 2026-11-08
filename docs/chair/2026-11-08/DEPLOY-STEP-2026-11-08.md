@@ -4,7 +4,7 @@
 
 ## 0. What is new in this release that the servers must learn
 
-- **Migrations 204, 205, 206** (`supabase/migrations/`): 204 the engine generation report (the Admin → Analytics line reads it); 205 the export keys (`publicSafe.js`'s SQL twin, from the export-keys lane); 206 the public veil's twins (from the public-veil lane). Master today ends at 203.
+- **Migrations 204, 205, 206 and 207** (`supabase/migrations/`): 204 the engine generation report (the Admin → Analytics line reads it); 205 the export keys (`publicSafe.js`'s SQL twin, from the export-keys lane); 206 the public veil's twins (from the public-veil lane); 207 the capture-state veil's SQL twin (ALLEGIANCE-CAR2, the chair's J-20 ruling of 23:2x UTC: the token `captureState` added to `_gallery_sanitize_public_json` and `_gallery_world_snapshot_is_safe` by the 202/206 idiom, so a hidden power's hold on the hall never prints on a public page; a FILE in the release, applied by your hand here). Master today ends at 203.
 - **Two new edge functions**: `engine-generate` (birth, derive, stepMeta, regenSection) and `engine-version` (the version probe). Master today has neither. The shared engine bundle `supabase/functions/_shared/engineBundle.js` is built from the same source the client runs; its `engineBundle.meta.json :: engineVersion` is the pin.
 - **The client build** with `VITE_ENGINE_REMOTE=true` LEAVES THE GENERATOR OUT of the browser bundle (no worker, no pipeline, no step registry), so every generation, re-derivation and section regeneration goes through `engine-generate`.
 
@@ -17,7 +17,7 @@
 ## 2. The release, in order (one attended session)
 
 1. **The merge on master** happens first: the integration pull request merges on green CI. Everything below runs from THAT commit — clean tree, pushed, CI-green.
-2. **Migrations:** `npx supabase@2.122.0 login` → `npx supabase@2.122.0 link --project-ref <your-project-ref>` → `npx supabase@2.122.0 migration list` (204, 205, 206 pending) → `npx supabase@2.122.0 db push` → `npx supabase@2.122.0 db diff` (empty = the remote matches the tree).
+2. **Migrations:** `npx supabase@2.122.0 login` → `npx supabase@2.122.0 link --project-ref <your-project-ref>` → `npx supabase@2.122.0 migration list` (204, 205, 206, 207 pending) → `npx supabase@2.122.0 db push` → `npx supabase@2.122.0 db diff` (empty = the remote matches the tree).
 3. **Functions, from the same commit:** `npx supabase@2.122.0 functions deploy engine-generate` and `npx supabase@2.122.0 functions deploy engine-version`, plus any other function whose `_shared` stamp moved in this release (the release receipt lists them; the merge seats' records name the rebuilt edge-shared bundles — ALLEGIANCE-CAR1 rebuilt them for the allegiance model).
 4. **Verify the pin:** `GET <VITE_SUPABASE_URL>/functions/v1/engine-version` must answer `engineVersion` equal to `supabase/functions/_shared/engineBundle.meta.json :: engineVersion` at the merged commit. If it does not, the functions were not deployed from that commit; fix that before the flag, or every pinned caller is answered 409 `engine_version_retired`.
 5. **Vercel:** Project → Settings → Environment Variables → Production: `VITE_ENGINE_REMOTE=true` (and `VITE_ENGINE_GENERATE_URL` / `VITE_ENGINE_ADVANCE_URL` if the design's "What the owner does" names them for your project). The value is baked at build time.
