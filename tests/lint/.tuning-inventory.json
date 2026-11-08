@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "8f4d39df07c0c35dcaff8ec28fd1a78c57d2c777",
+  "measuredAtSha": "87346db26fd804f17dc100eef0f6e172fa03cb3b",
   "measuredBy": "ALLEGIANCE-CAR1",
   "date": "2026-11-08",
-  "note": "the hidden allegiance (ALLEGIANCE-CAR1): ALLEGIANCE_TUNING born (src/domain/people/allegiance.js, a draft row in the declared register), and the corruption tables gain the allegiance module as a dependent (it imports CORRUPTION_TUNING and the climate); no value moved",
+  "note": "allegiance.js receipt reason humanized for the prose-numerics ratchet (87346db26): ALLEGIANCE_TUNING.organizedCrime is no longer printed, one dependent read fewer",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -411,7 +411,6 @@
         "src/domain/worldPulse/thievesGuild.js"
       ],
       "namedDependents": [
-        "src/domain/people/allegiance.js",
         "src/domain/worldPulse/npcAgency.js"
       ]
     },
@@ -1222,7 +1221,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 6,
-      "line": 67,
+      "line": 68,
       "spanDigest": "bdc4407d93dfb082d17719ba435ca434e433f36a95c24609a342ccdbf1e86563",
       "leaves": {
         "organizedCrime": 0.1,
@@ -1242,6 +1241,7 @@
         "src/domain/npcProfile.js",
         "src/domain/settlementMigrations.js",
         "src/domain/tableLedger.js",
+        "src/domain/worldPulse/npcAgency.js",
         "src/generators/generateSettlementPipeline.js",
         "src/generators/narrativeGenerator.js",
         "src/generators/people/ties.js",
