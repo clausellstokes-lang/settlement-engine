@@ -7,7 +7,8 @@
  * `src/generators/people/goals.js`). This file holds only the lines: plain template strings with
  * `{slot}` tokens, in `GOAL_FAMILY_LINES[family][subKind][vantage]`, the cells of design §6.6
  * exactly (RANK 36 · POWER 48 · INSTITUTION 48 · SUPPLY 48 · TIES 60 · PERSONALITY 96 ·
- * ALLEGIANCE 128 = 464). No goal is keyed by title (J-16). CRISIS keeps today's lines and has no
+ * ALLEGIANCE 128 = 464), plus UNCANNY 60 (the owner's word of 2026-11-08: rare fantasy goals, magic on
+ * as the gate) = 524. No goal is keyed by title (J-16). CRISIS keeps today's lines and has no
  * cell here. Every line is written to the owner's style law (WIRING-RULINGS §5–§8, STYLE-RULINGS §2,
  * WAVE-RULINGS item 16) and is listed here FOR THE OWNER'S VETO.
  *
@@ -55,7 +56,7 @@
  */
 
 /** The families with a cell in this file, in design §6.6's order (CRISIS keeps its own lines). */
-export const GOAL_FAMILIES = Object.freeze(['RANK', 'POWER', 'INSTITUTION', 'SUPPLY', 'TIES', 'PERSONALITY', 'ALLEGIANCE']);
+export const GOAL_FAMILIES = Object.freeze(['RANK', 'POWER', 'INSTITUTION', 'SUPPLY', 'TIES', 'PERSONALITY', 'ALLEGIANCE', 'UNCANNY']);
 
 /** Each family's allowed slot set (design §6.1, less the struck slots; SUPPLY gains {house}). */
 export const GOAL_SLOTS = Object.freeze({
@@ -66,6 +67,9 @@ export const GOAL_SLOTS = Object.freeze({
   TIES: Object.freeze(['other']),
   PERSONALITY: Object.freeze(['flaw', 'dominant', 'modifier']),
   ALLEGIANCE: Object.freeze(['guild', 'handler', 'front', 'agent', 'target', 'targetHouse']),
+  // {shrine} a sacred house on the roster, as a house (needs sacredHouse); {priest} the senior
+  // cleric, by name (needs priest); {arcaneHouse} a Magic-shelf house, as a house (its own gate)
+  UNCANNY: Object.freeze(['shrine', 'priest', 'arcaneHouse']),
 });
 
 /** The design's slots this file does not use, and why (measured on the soak 1,000; the record §1). */
@@ -96,6 +100,7 @@ export const GOAL_SUBKIND_SLOTS = Object.freeze({
     front_keep: ['front', 'guild', 'handler'], front_out: ['front', 'guild', 'handler'],
     warrant: ['target', 'targetHouse'], suspicion: ['target'],
   }),
+  UNCANNY: Object.freeze({ haunting: ['shrine', 'priest'], components: ['arcaneHouse'], commission: [], omen: ['shrine', 'priest'], bargain: [] }),
 });
 
 /**
@@ -967,6 +972,108 @@ export const GOAL_FAMILY_LINES = Object.freeze({
         'Turn {target}, and use them against whoever holds their leash.',
         'Keep {target} watched for as long as it takes to learn the truth.',
         'Follow the trail from {target} to whoever stands at the other end of it.',
+      ]),
+    }),
+  }),
+  // ── UNCANNY (the owner, 2026-11-08: "purely fantasy aesthetic goals … with magic on only as the gate …
+  // peppered in the settlement very rarely if at all but scaling across population sizes"): 5 × 2 × 6 = 60.
+  // Every line needs the world's magic ON (`magic`, the vocabulary's magic-functions atom); a thing the
+  // town holds is a slot or a declared atom; a being the record does not hold (a dragon, a spirit, the
+  // fair folk) is flavour only and presumes nothing else. ──
+  UNCANNY: Object.freeze({
+    // haunted by a creature or spirit; seeks an exorcist, a priest, a ward
+    haunting: Object.freeze({
+      short: cell([
+        { line: 'Find someone who can rid their house of the thing that walks it at night.', needs: ['magic'] },
+        { line: 'Get {priest} to bless the house before the next new moon.', needs: ['magic', 'priest'] },
+        { line: 'Learn the name of the spirit that follows them, so it can be sent away.', needs: ['magic'] },
+        { line: 'Bring an offering to {shrine} and ask for a ward against what haunts them.', needs: ['magic', 'sacredHouse'] },
+        { line: 'Find out who died in the house before them, and what the dead one wants.', needs: ['magic'] },
+        { line: 'Hire someone brave enough to sit up a night with them and see the thing for themselves.', needs: ['magic'] },
+      ]),
+      long: cell([
+        { line: 'Be free of the haunting for good, and sleep a whole night again.', needs: ['magic'] },
+        { line: 'Learn why the dead chose them, and put the matter right.', needs: ['magic'] },
+        { line: 'Find an exorcist who can do what {priest} could not.', needs: ['magic', 'priest'] },
+        { line: 'Lay the restless dead of their family to rest at {shrine}.', needs: ['magic', 'sacredHouse'] },
+        { line: 'Never again let the thing that haunts them follow them through a door.', needs: ['magic'] },
+        { line: 'Make peace with the ghost, since it cannot be driven out.', needs: ['magic'] },
+      ]),
+    }),
+    // gathering components or offerings for a magical or eldritch being: a pact, a summoning, a cure
+    components: Object.freeze({
+      short: cell([
+        { line: 'Gather the last three things the being asked for before the moon turns.', needs: ['magic'] },
+        { line: 'Buy a rare reagent at {arcaneHouse} without saying what it is for.', needs: ['magic'] },
+        { line: 'Find bone, salt and silver in the amounts the pact demands.', needs: ['magic'] },
+        { line: 'Dig up what lies buried where the instructions say, and tell no one.', needs: ['magic'] },
+        { line: 'Take one thing the summoning needs from someone who would never sell it.', needs: ['magic'] },
+        { line: 'Find someone who can read the old writing on the list of what is needed.', needs: ['magic'] },
+      ]),
+      long: cell([
+        { line: 'Complete the summoning, and get what was promised in return.', needs: ['magic'] },
+        { line: 'Gather everything the being demands, and then learn what it truly wants.', needs: ['magic'] },
+        { line: 'Win the cure the being promised for someone they love, whatever it costs.', needs: ['magic'] },
+        { line: 'Learn enough of the old craft at {arcaneHouse} to finish the work without help.', needs: ['magic'] },
+        { line: 'Keep the pact they made, so the being never comes to collect in its own way.', needs: ['magic'] },
+        { line: 'Become the one the being speaks through, and keep that secret.', needs: ['magic'] },
+      ]),
+    }),
+    // sent on a mission, a tribute or a message by a dragon or a great power
+    commission: Object.freeze({
+      short: cell([
+        { line: "Carry the dragon's message to the person it named, and come back alive.", needs: ['magic'] },
+        { line: 'Collect the tribute the dragon demands before it comes to collect it itself.', needs: ['magic'] },
+        { line: 'Find the thing the dragon sent them to find, and tell no one why.', needs: ['magic'] },
+        { line: 'Deliver a sealed gift from a great power to the one it was meant for, unopened.', needs: ['magic'] },
+        { line: "Learn where the dragon's old enemy is hiding, as they were told to.", needs: ['magic'] },
+        { line: "Keep the dragon's mark on them hidden from everyone here.", needs: ['magic'] },
+      ]),
+      long: cell([
+        { line: "Finish the dragon's errand, and be free of its claim on them.", needs: ['magic'] },
+        { line: 'Serve the great power well enough to earn its protection for life.', needs: ['magic'] },
+        { line: 'Find out why the dragon chose them out of everyone here.', needs: ['magic'] },
+        { line: "Win the dragon's favour, and use it to change their own fortunes.", needs: ['magic'] },
+        { line: "Bring the dragon's quarrel to an end without being destroyed by it.", needs: ['magic'] },
+        { line: 'Repay the dragon what was promised, and never be called on again.', needs: ['magic'] },
+      ]),
+    }),
+    // a prophecy, dream or omen that must be answered
+    omen: Object.freeze({
+      short: cell([
+        { line: 'Find out what the dream that keeps coming back is trying to tell them.', needs: ['magic'] },
+        { line: 'Have {priest} read the omen that came to them, and do what it says.', needs: ['magic', 'priest'] },
+        { line: 'Do the one thing the prophecy asks of them before the season ends.', needs: ['magic'] },
+        { line: 'Find the person the omen pointed to, without telling them why.', needs: ['magic'] },
+        { line: 'Write down every sign they have seen, and show it to someone who understands such things.', needs: ['magic'] },
+        { line: 'Keep watch at {shrine} on the night the omen named.', needs: ['magic', 'sacredHouse'] },
+      ]),
+      long: cell([
+        { line: 'Meet the fate the prophecy gives them on their own terms.', needs: ['magic'] },
+        { line: 'Prove the omen wrong, whatever it takes.', needs: ['magic'] },
+        { line: 'Live long enough to see whether the prophecy comes true.', needs: ['magic'] },
+        { line: 'Become the one the old prophecy speaks of, if they are.', needs: ['magic'] },
+        { line: 'Learn to read the signs for themselves, so no one else has to tell them.', needs: ['magic'] },
+        { line: 'Keep this place safe from what the omen warns of.', needs: ['magic'] },
+      ]),
+    }),
+    // a bargain with the fair folk or a spirit of the place, to fulfil or to escape
+    bargain: Object.freeze({
+      short: cell([
+        { line: 'Pay the fair folk what is owed before the next full moon.', needs: ['magic'] },
+        { line: 'Leave the right offering at the river each night until the bargain is kept.', needs: ['magic', 'river'] },
+        { line: 'Find a way out of the promise made to the spirit of the wood without breaking it.', needs: ['magic', 'terrain: forest'] },
+        { line: 'Keep the bargain secret, even from their own family.', needs: ['magic'] },
+        { line: 'Find out exactly what was given away in the bargain, and whether it can be won back.', needs: ['magic'] },
+        { line: 'Bring the spirit the one gift it asked for, and ask for nothing more.', needs: ['magic'] },
+      ]),
+      long: cell([
+        { line: 'Escape the bargain with the fair folk, and keep everything they love.', needs: ['magic'] },
+        { line: 'Keep the bargain faithfully, and live well on what it gives.', needs: ['magic'] },
+        { line: 'Win back what the spirit took from them.', needs: ['magic'] },
+        { line: 'Become the one person here the spirits of the place will deal with.', needs: ['magic'] },
+        { line: 'End the bargain, so their children never inherit it.', needs: ['magic'] },
+        { line: 'Make a second bargain good enough to undo the first.', needs: ['magic'] },
       ]),
     }),
   }),

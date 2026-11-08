@@ -43,8 +43,9 @@ const EXPECTED_CELLS = {
     keep_partnership: { short: 5 }, keep_leverage: { short: 5 }, keep_patron: { short: 5 }, keep_cause: { short: 5 },
     front_keep: SIX, front_out: SIX, warrant: SIX, suspicion: SIX,
   },
+  UNCANNY: { haunting: SIX, components: SIX, commission: SIX, omen: SIX, bargain: SIX },
 };
-const EXPECTED_TOTALS = { RANK: 36, POWER: 48, INSTITUTION: 48, SUPPLY: 48, TIES: 60, PERSONALITY: 96, ALLEGIANCE: 128 };
+const EXPECTED_TOTALS = { RANK: 36, POWER: 48, INSTITUTION: 48, SUPPLY: 48, TIES: 60, PERSONALITY: 96, ALLEGIANCE: 128, UNCANNY: 60 };
 
 /** STYLE-RULINGS-2026-11-07 §2 law 3, verbatim, plus WIRING-RULINGS §7's named tic. */
 const STRUCK_TICS = [
@@ -53,7 +54,7 @@ const STRUCK_TICS = [
 ];
 
 /** Slots that name a person: the only slots that may take "'s". */
-const PERSON_SLOTS = new Set(['above', 'below', 'other', 'handler', 'agent', 'target']);
+const PERSON_SLOTS = new Set(['above', 'below', 'other', 'handler', 'agent', 'target', 'priest']);
 /** Present-tense verbs that must agree in number; never after a power, house or thing slot. */
 const AGREEING_VERBS = ['is', 'has', 'was', 'does', 'needs', 'wants', 'makes', 'keeps', 'gets', 'pays', 'sends', 'brings',
   'owes', 'spends', 'takes', 'turns', 'decides', 'raises', 'gives', 'runs', 'holds', 'earns', 'asks'];
@@ -117,8 +118,8 @@ const plant = (family, sub, vantage, line) => {
 };
 
 describe('goal families — the cells of design §6.6', () => {
-  test('the families are §6.6\'s seven, in its order', () => {
-    expect(GOAL_FAMILIES).toEqual(['RANK', 'POWER', 'INSTITUTION', 'SUPPLY', 'TIES', 'PERSONALITY', 'ALLEGIANCE']);
+  test('the families are §6.6\'s seven, in its order, then UNCANNY (the owner, 2026-11-08)', () => {
+    expect(GOAL_FAMILIES).toEqual(['RANK', 'POWER', 'INSTITUTION', 'SUPPLY', 'TIES', 'PERSONALITY', 'ALLEGIANCE', 'UNCANNY']);
     expect(Object.keys(GOAL_FAMILY_LINES)).toEqual([...GOAL_FAMILIES]);
   });
 
@@ -128,10 +129,10 @@ describe('goal families — the cells of design §6.6', () => {
     expect(actual).toEqual(EXPECTED_CELLS);
   });
 
-  test('the family totals are §6.6\'s, 464 in all', () => {
+  test('the family totals are §6.6\'s 464 plus UNCANNY\'s 60, 524 in all', () => {
     const totals = Object.fromEntries(Object.entries(GOAL_FAMILY_LINES).map(([f, subs]) => [f, count(subs)]));
     expect(totals).toEqual(EXPECTED_TOTALS);
-    expect(Object.values(totals).reduce((a, b) => a + b, 0)).toBe(464);
+    expect(Object.values(totals).reduce((a, b) => a + b, 0)).toBe(524);
   });
 
   test('the table is frozen to its lines', () => {
@@ -254,5 +255,36 @@ describe('goal families — the tie types onto the TIES sub-kinds', () => {
     expect(tieTableViolations(missing, types, cells).some((x) => x.startsWith("missing: tie type 'political'"))).toBe(true);
     const bad = { ...TIE_TYPE_TO_GOAL_SUBKIND, respect: { from: 'friend', to: 'ally' } };
     expect(tieTableViolations(bad, types, cells).some((x) => x.startsWith("target: 'respect'.from -> 'friend'"))).toBe(true);
+  });
+});
+
+/** The UNCANNY gate: every line needs magic ON; a slot or a noun the town holds is declared. */
+const UNCANNY_DECLARES = [
+  [/\{shrine\}/, 'sacredHouse'], [/\{priest\}/, 'priest'], [/\briver\b/i, 'river'], [/\b(wood|forest)\b/i, 'terrain: forest'],
+];
+function uncannyViolations(cells) {
+  const out = [];
+  for (const [sub, vantages] of Object.entries(cells)) for (const [v, lines] of Object.entries(vantages)) for (const e of lines) {
+    const text = textOf(e); const needs = typeof e === 'string' ? [] : e.needs;
+    if (!needs.includes('magic')) out.push(`gate: UNCANNY.${sub}.${v} does not need magic — ${text}`);
+    for (const [re, atom] of UNCANNY_DECLARES) if (re.test(text) && !needs.includes(atom)) out.push(`declare: '${atom}' undeclared — ${text}`);
+  }
+  return out;
+}
+
+describe('goal families — UNCANNY, the magic gate', () => {
+  test('every UNCANNY line needs magic ON, and declares the town nouns it names', () => {
+    expect(uncannyViolations(GOAL_FAMILY_LINES.UNCANNY)).toEqual([]);
+  });
+
+  test('the gate atom is the vocabulary\'s own magic atom, with a reader', () => {
+    expect(() => assertDeclarable('magic')).not.toThrow();
+  });
+
+  test('CONTROL: a planted ungated line and a planted undeclared river each red the checker', () => {
+    const plantedA = plant('UNCANNY', 'haunting', 'short', 'Find a witch to lift the curse this season.');
+    expect(uncannyViolations(plantedA.UNCANNY).some((x) => x.startsWith('gate: UNCANNY.haunting.short'))).toBe(true);
+    const plantedB = plant('UNCANNY', 'bargain', 'long', { line: 'Drown the bargain in the river for good.', needs: ['magic'] });
+    expect(uncannyViolations(plantedB.UNCANNY).some((x) => x.startsWith("declare: 'river'"))).toBe(true);
   });
 });

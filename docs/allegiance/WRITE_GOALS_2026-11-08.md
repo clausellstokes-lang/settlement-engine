@@ -9,7 +9,7 @@ Seat: WRITE-GOALS, the allegiance train's writing seat A (Opus 5.5, effort high)
 | path | what |
 |---|---|
 | `src/data/people/goalFamilies.js` | `GOAL_FAMILY_LINES[family][subKind][vantage]`, 464 lines; `GOAL_FAMILIES`; `GOAL_SLOTS`; `GOAL_SLOTS_STRUCK` (each struck slot with its reason); `GOAL_SUBKIND_SLOTS` (the slots each sub-kind may need: what car 4 fills); `PERSONALITY_CLUSTERS`; `PERSONALITY_CLUSTER_OF`; `TIE_TYPE_TO_GOAL_SUBKIND` (the chair's ruling, §4 item 10). Plain data: no import, no closure. |
-| `tests/data/goalFamilies.test.js` | the shape law, 18 tests, with anchored controls |
+| `tests/data/goalFamilies.test.js` | the shape law, 21 tests, with anchored controls |
 | this record | |
 | `tests/lint/.source-citation-baseline.json`, `tests/lint/sourceCitationIntegrity.walker.test.js` | the roster's two lines: `dated` 153 → 154 |
 
@@ -26,7 +26,9 @@ Nothing imports the data file (car 4 wires it). No edit to `npcData.js`, `npcGen
 | TIES | rival_enemy · debtor · creditor · ally · family · mentor_student × 2 × 5 | 60 |
 | PERSONALITY | 12 clusters × 2 × 4 | 96 |
 | ALLEGIANCE | serve × 4 vectors × 2 × 5 (40) · escape × 4 × short × 5 (20) · keep × 4 tie kinds × short × 5 (20) · front_keep, front_out × 2 × 6 (24) · warrant × 2 × 6 (12) · suspicion × 2 × 6 (12) | 128 |
-| **total** | | **464** |
+| **§6.6 total** | | **464** |
+| UNCANNY (the owner, 2026-11-08; the chair's ruling) | haunting · components · commission · omen · bargain × 2 × 6 | 60 |
+| **total** | | **524** |
 
 ## 1. The fill measurement (measured first)
 
@@ -143,8 +145,53 @@ The four vector clusters are exactly `domain/corruption.js :: FLAW_VECTOR` (the 
 
 | gate | result |
 |---|---|
-| `npx vitest run tests/data/goalFamilies.test.js` | 18 of 18, exit 0 |
+| `npx vitest run tests/data/goalFamilies.test.js` | 21 of 21, exit 0 |
 | `npx eslint src/data/people/goalFamilies.js tests/data/goalFamilies.test.js` | exit 0 |
 | `npx vitest run tests/lint/sourceCitationIntegrity.walker.test.js` | 18 of 18, exit 0: `dated` 154 (this record, 153 → 154), `tree` 112 (the base's red, 109 against 112, was already cured on the integration branch at 2a95b5917; this seat touched no `tree` row) |
 
 The controls: a planted `{season}` and a planted `{rival}` in TIES each red the slot law; a planted "rather than" reds the tic law; a planted duplicate, "the {house}", "{rival}'s", "{rival} needs" and `needs: ['bazaar']` each red their rule. The checker first caught this seat's own slips (a sparse array slot; six agreeing verbs), all cured before the commit.
+
+## 8. UNCANNY: the rare fantasy goals (the owner's word, 2026-11-08 18:5x UTC; the chair's ruling)
+
+**The owner, verbatim:** "Also in the goals, (with magic on only as the gate) have some purely fantasy aesthetic goals such as (is being haunted by a creature and looking for an exorcist, or is looking for components to a magical or Eldridge being, or commissioned on a mission by a dragon) and the likes. Peppered in the settlement very rarely if at all but scaling across population sizes."
+
+**The family.** `GOAL_FAMILY_LINES.UNCANNY`, five sub-kinds × short, long × 6 = 60 lines, every one FOR THE OWNER'S VETO:
+- `haunting`: haunted by a creature or spirit; seeks an exorcist, a priest, a ward.
+- `components`: gathering components or offerings for a magical or eldritch being (a pact, a summoning, a cure).
+- `commission`: sent on a mission, a tribute or a message by a dragon or a great power.
+- `omen`: a prophecy, dream or omen that must be answered.
+- `bargain`: a bargain with the fair folk or a spirit of the place, to keep or to escape.
+
+**The gate.** Every line declares `needs: ['magic', …]`. `magic` is the fact vocabulary's own atom: magic functions here, read through `src/domain/facts/magic.js :: magicOf` and `worldPulse/magicWorksAt.js :: magicWorksAt`. It is the key the estate's magic lines already use (18 `needs: ['magic']` declarations across `spatialGenerator.js` and `narrativeText.js`). No new key was made.
+
+A thing the town holds is a slot or a declared atom:
+- `{shrine}`: a sacred house, filled as a house, `sacredHouse`.
+- `{priest}`: the senior cleric by name, `priest`.
+- `{arcaneHouse}`: a Magic-shelf house, its own gate.
+- "the river": `river`.
+- "the spirit of the wood": `terrain: forest`.
+
+A being the record does not hold (a dragon, a great power, a spirit, the fair folk, "the being") is flavour only. Its line presumes nothing else about the town.
+
+The test holds every UNCANNY line to the magic gate and to the declarations its nouns need. Its controls: a planted ungated line and a planted undeclared river each red the checker. `commission`, most of `components`, and the undeclared `bargain` lines carry no town noun, so they are FRAMES; rarity is what keeps them from repeating.
+
+**For car 4, the RARITY the owner asked for** (every dial born draft in `GOAL_FAMILY_TUNING`; none is tuned here). UNCANNY is drawn outside the family weighting of §6.2, as a per-card roll on the goal fork, and only where magic functions. The draft dials:
+
+| dial | role | draft value |
+|---|---|---|
+| `uncanny.perCard[tier]` | chance per card | thorp 0.003 · hamlet 0.004 · village 0.006 · town 0.008 · city 0.011 · metropolis 0.013 |
+| `uncanny.capPerSettlement` | hard cap on UNCANNY goals per settlement | 2 |
+| `uncanny.vantage` | which goal the roll replaces | `'short'` (the LONG stays the card's own) |
+
+The values are sized from the soak 1,000's measured cards per town (CONFIRMED): thorp 1.7, hamlet 3.7, village 9.5, town 25.1, city 56.8, metropolis 77.9. The expected number per town (PLAUSIBLE: the arithmetic of the draft values, before the cap and the magic gate) follows:
+
+| tier | expected per town | how often |
+|---|---|---|
+| thorp | 0.005 | about 1 thorp in 200 |
+| hamlet | 0.015 | |
+| village | 0.06 | |
+| town | 0.20 | |
+| city | 0.62 | |
+| metropolis | 1.0 | about one per metropolis |
+
+Car 4 measures the band on the 1,000 by tier, with magic on: the share of towns with at least one UNCANNY goal, and the mean per town, reported beside the other family shares. The family, its lines and every dial are FOR THE OWNER'S VETO.
