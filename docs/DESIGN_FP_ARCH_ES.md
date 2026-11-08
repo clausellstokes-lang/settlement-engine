@@ -467,6 +467,8 @@ composes the same module — whichever lands first is the first consumer, and
 BOTH route through the one reader per seam row 9's one-home clause) — see
 §3.13.
 
+[RE-BASED 2026-11-08 (FP-REBASE, seat FPR-COMPROMISE; the chair's relay of THE COMMISSION LAW) — J-ES-4 presumed diplomatic casting is `envoyCasting.js :: envoyCandidate`'s importance-DESCENDING pick over the free notables ("the realm's face is its most notable"). → THE DIPLOMATIC ENVOY IS A COMMISSION, by `DESIGN_FP_COHERENCE_FOLD.md :: THE COMMISSION LAW` (the owner's law read 2026-11-08 ~20:1x UTC, written once in the fold by seat FPR-CONSTITUTION; pointed at here, never restated in full): the competent power's available faces by rank (peace and alliance → the seat of power's people; trade → the Merchant / Craft powers' faces; each counterpart its own power), then the seat, then down the power ranking of who is available, then UNFILLED with a receipt — never a minted person, never the most notable free card. `envoyCandidate` keeps its landed name and is re-pointed to that order when the FP unparks. COVERT CASTING IS NOT A COMMISSION: the importance-INVERSE draw above and the leash read stand unchanged — a court's spies are still its least noticed, whatever office they hold. The two laws still coexist by class, now as COMMISSION vs DRAW. THE ATTACK SURFACE THIS OPENS, named: the commission table makes the envoy's holder PREDICTABLE — a rival can know, before any dispatch, which face a court will send to sue for peace or to treat for trade — so the corruption web's natural target is the person who WILL be commissioned. The two axes meet there (§1's bracket): a commissioned envoy whose leash, the carried field `allegiance.leash`, runs to a foreign court is the double agent §3.13 prices, sitting where the table guarantees traffic; a commissioned face with only a LOCAL allegiance carries its guild's interest to the table, not a foreign court's. The web still mints at tick only, its recruit filter on `allegianceOf`; whether its target pick should weight the predictable holder is a tuning question for the web's unpark, not designed here (GENERALS' scourge H9 is the general's case of the same exposure; this is the envoy's). A commissioned person is BUSY for the mission's length — one person, one commission — and §3.11's absence bench already prices that absence.]
+
 ### 3.2 COVERT COMPETENCE — `covertCompetence01(homeSettlement, npc)`
 
 ```
@@ -585,7 +587,7 @@ reach (one extra legRef fillable per §3.6).
 Itinerary ≤ 3 stops (ESPIONAGE_TUNING.MAX_ITINERARY_STOPS = 3, mint-refused
 with reason `itinerary_too_long`), any declared/covert mix per stop (the
 composite mission: a diplomatic leg extending covertly from its destination
-is `[{A, face:'declared'}, {B, face:'covert'}]`). Superlinear leg risk
+is `[{A, face:'declared'}, {B, face:'covert'}]`). [RE-BASED 2026-11-08 (FP-REBASE, seat FPR-COMPROMISE; the chair's relay of THE COMMISSION LAW) — a composite mission's carrier is cast by its DECLARED face: a mission whose first leg is declared diplomatic carries a COMMISSIONED face (`DESIGN_FP_COHERENCE_FOLD.md :: THE COMMISSION LAW`; §3.1's bracket), never a covert draw wearing a commission; a wholly covert itinerary keeps the importance-inverse draw.] Superlinear leg risk
 (refinement 8 — 2-3 is a CHOICE, not free efficiency):
 
 ```
@@ -1167,7 +1169,7 @@ expects spy-driven bench-lightening: with importance-INVERSE covert casting
 (J-ES-4), a PURE spy's absence costs the council little — minors carry
 little weight — and the absence drama arrives through COMPOSITE missions
 carrying notables on declared legs, which is coherent with the owner's
-design. The PERSON-grain cost of a minor's long absence is §3.14's career
+design. [RE-BASED 2026-11-08 (FP-REBASE, seat FPR-COMPROMISE; the chair's relay of THE COMMISSION LAW) — "notables on declared legs" presumed the diplomatic face is the most notable free card. → The declared leg's carrier is the COMMISSIONED face (`DESIGN_FP_COHERENCE_FOLD.md :: THE COMMISSION LAW`; §3.1's bracket): the competent power's ranked face, so the absence drama falls on that power's bench by its rank and share; a commissioned person is busy for the mission's length, one person one commission, and `presentShare01` counts that absence with no new term.] The PERSON-grain cost of a minor's long absence is §3.14's career
 register, not the bench. The
 faction's authored `power` is NEVER written (roads/state.js records
 faction.power as a READ-ONLY derivation output — HZ6);
@@ -2179,6 +2181,8 @@ Seat FPR-COMPROMISE, on the census `docs/chair/2026-11-08/FP-REBASE-CENSUS-2026-
 | §4 ES-5 | `presentShare01`'s members from memberships; the career consumers on rank movement; the roster-walk JSON-alias pin rewritten on memberships | ES; §5 (the alias trap UNNECESSARY) |
 | §4 ES-6 | the leash read FOREIGN, own-web health LOCAL; web dark ⇒ no foreign leash minted | ES |
 | §5 seam row 12 | the web's assets FOREIGN only; the recruit filter on the allegiance | ES; COUPLINGS Story 5 |
+| §3.1, after J-ES-4 | THE COMMISSION LAW (relayed by the chair 2026-11-08, ~20:1x UTC; the fold's text by FPR-CONSTITUTION): the diplomatic envoy is a COMMISSION (the competent power's faces by rank → the seat → down the ranking → UNFILLED, never minted); covert casting is NOT a commission and stands; the attack surface — the predictable holder is the web's natural target; one person one commission, priced by §3.11 | the chair's relay (beyond the census) |
+| §3.4, the composite mission; §3.11, the texture note | the declared leg's carrier is the commissioned face; its absence falls on its power's bench | the chair's relay |
 | §7 CR-ES-1 | the discount's member set from `membersOf(power)` | ES |
 | §7 CR-ES-2 | THE OWNER'S DEATH LAW: no simulated death of a named person; `'death'` a DM-authored close only | §9 ruling 2 |
 
