@@ -8,7 +8,7 @@
   "The reviewable slice is computed by RULE (reviewableDark), never hand-listed."
  ],
  "schema": 1,
- "frozenAtSha": "3ebfbfa68f5e5b3361b47b320fed38517dc62d6f",
+ "frozenAtSha": "a6740c708164bee24b5562d3c29fd5a0a1e30bc4",
  "charter": "§18.1 WRWALKER Car 1 (HORIZON) — chair-signed vetoably at the INSTR-WRW pre-stage",
  "minRows": 40,
  "corpusMeta": {
@@ -24,7 +24,7 @@
  },
  "shapesDigest": "3d5f894219f7b28cb1c469a523a4931e9bc54da28a6852eaca106ccfa85735ba",
  "detectorDigest": "6de1fcb17cc758e4e0ddb8d549ea9a65bd69d25c05668ca68b37bc193bd19c1e",
- "verdictDigest": "ecbfd8875cad59ead659304500c544bf9758080fbc66e92385c16be9ccd596e7",
+ "verdictDigest": "e7b2a002667bb1dde8be8a64b388678c818a55f4a93f2835a79cfb3a2d25c7a9",
  "surfaceRoots": {
   "web": [
    "src/main.jsx"
@@ -83,27 +83,27 @@
  },
  "population": {
   "judged": 11997,
-  "lit": 597,
+  "lit": 600,
   "litName": 9966,
-  "dark": 1434,
+  "dark": 1431,
   "thinKeys": 17280,
   "thinShapes": 1203,
   "knownShapes": 517
  },
  "scanStats": {
   "files": 1747,
-  "sites": 41115,
-  "propRead": 38934,
+  "sites": 41132,
+  "propRead": 38950,
   "elemRead": 0,
-  "destructure": 2165,
+  "destructure": 2166,
   "inOp": 16,
-  "rGrades": 6342,
-  "nGrades": 1618639,
-  "resolvedReceivers": 7223
+  "rGrades": 6347,
+  "nGrades": 1618962,
+  "resolvedReceivers": 7228
  },
  "registerDigest": "511672c01b1b5660c194a2a586e43e5be1455ab7f6cf1c888113258e54a0dc6e",
  "pendingSurfaceCeiling": 3,
- "reviewableDarkCount": 447,
+ "reviewableDarkCount": 444,
  "darkUnregistered": [
   {
    "identity": "Bulk grain and flour on reasons",
@@ -344,12 +344,6 @@
    "key": "animal hides",
    "shape": "reasons",
    "rows": 4408
-  },
-  {
-   "identity": "annotation on legacyAnnotations",
-   "key": "annotation",
-   "shape": "legacyAnnotations",
-   "rows": 957
   },
   {
    "identity": "arcaneBlackMarket on flags",
@@ -2894,12 +2888,6 @@
    "key": "legModes",
    "shape": "missions",
    "rows": 329
-  },
-  {
-   "identity": "legacyAnnotations on history",
-   "key": "legacyAnnotations",
-   "shape": "history",
-   "rows": 472
   },
   {
    "identity": "legitimacyClaim on factionStates",
@@ -6460,12 +6448,6 @@
    "rows": 26419
   },
   {
-   "identity": "siegeNarrative on history",
-   "key": "siegeNarrative",
-   "shape": "history",
-   "rows": 472
-  },
-  {
    "identity": "site on steadings",
    "key": "site",
    "shape": "steadings",
@@ -9647,8 +9629,8 @@
   "founding on history": "dossier-pdf=R foundry=R web-display=R web-transitive=R",
   "historicalCharacter on history": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
   "historicalEvents on history": "campaign-pdf=R dossier-pdf=R foundry=R news=R web-display=R web-transitive=R world-book=R",
-  "legacyAnnotations on history": "web-transitive=R",
-  "siegeNarrative on history": "",
+  "legacyAnnotations on history": "dossier-pdf=R web-display=R web-transitive=R",
+  "siegeNarrative on history": "dossier-pdf=R web-display=R",
   "hands on homeFrontComponents": "web-transitive=N",
   "institutions on homeFrontComponents": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N",
   "markets on homeFrontComponents": "web-transitive=N",
@@ -9821,8 +9803,8 @@
   "religious_authorities on leaderNpcIds": "",
   "thieves_guild on leaderNpcIds": "",
   "town_council on leaderNpcIds": "",
-  "annotation on legacyAnnotations": "web-transitive=R",
-  "eventName on legacyAnnotations": "dossier-pdf=N web-transitive=R",
+  "annotation on legacyAnnotations": "dossier-pdf=R web-display=R web-transitive=R",
+  "eventName on legacyAnnotations": "dossier-pdf=N web-display=N web-transitive=R",
   "eventType on legacyAnnotations": "web-display=N web-transitive=N",
   "severity on legacyAnnotations": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N",
   "yearsAgo on legacyAnnotations": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=R world-book=N",
