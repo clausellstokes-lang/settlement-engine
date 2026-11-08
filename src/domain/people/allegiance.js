@@ -75,6 +75,8 @@ export const ALLEGIANCE_TUNING = Object.freeze({
   share: 0.15,
   /** a PRIME front's roll weight — RESERVED (J-8): 1 does not weight car 1's roll */
   frontWeight: 1,
+  /** a weight-0 criminal house's backing weight in the organized-crime sum (the design's "0 → 0.5") */
+  weightZeroHouse: 0.5,
 });
 
 export const ALLEGIANCE_VECTORS = Object.freeze(['greed', 'hunger_for_status', 'fear', 'forbidden_patron', 'fanaticism']);
@@ -190,7 +192,7 @@ export function organizedCrimeOf(settlement) {
   const weights = criminalHousesOf(settlement).map((inst) => {
     const row = backingRowFor(str(inst.name));
     const w = row && typeof row.weight === 'number' ? row.weight : 1;
-    return w === 0 ? 0.5 : w;
+    return w === 0 ? T.weightZeroHouse : w;
   });
   const sum = weights.reduce((s, w) => s + w, 0);
   const governing = nameOf(governingFactionOf(/** @type {import('../settlement.schema.js').SimSettlement} */ (/** @type {unknown} */ (settlement))));
