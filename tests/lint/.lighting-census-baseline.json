@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "73bdcc1531fd75d2103fb9bc39382dffcab5e7e7",
-  "measuredBy": "MERGE-CAR",
+  "measuredAtSha": "1f050c57bb88e2a9b2d426b3b51c2ffb56b9cb85",
+  "measuredBy": "W3 POW second seat",
   "date": "2026-11-08",
-  "note": "the people car merged into the integration branch (8dff691f3): both sides suites unioned; guildTitleName retired, factionRoleFit re-keyed, the harbour and hook-fold arms",
+  "note": "the merge of the integration (the people car) into the power lane: the power desk suite C1-C6 arms over the car-side titles",
   "files": 3118,
   "parked": 384,
   "credited": 2734,
-  "titles": 28609,
-  "suiteTitles": 7698
+  "titles": 28617,
+  "suiteTitles": 7699
 }
