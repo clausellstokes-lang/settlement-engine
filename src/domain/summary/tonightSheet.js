@@ -65,8 +65,8 @@ export const TONIGHT_COPY = Object.freeze({
 export const CAST_WANTS = Object.freeze(/** @type {Record<string, ReadonlyArray<string>>} */ ({
   instigator: Object.freeze([
     'keep the pressure on until the seat gives way, and keep their own hand out of sight.',
-    "turn this crisis into the settlement's next arrangement, with themselves at the head of it.",
-    'be the one still standing when the present order runs out of answers.',
+    'use this crisis to take the seat for themselves.',
+    'be the one people turn to when the seat fails.',
   ]),
   brunt: Object.freeze([
     'get their own people through this with what little they have left.',
@@ -75,7 +75,7 @@ export const CAST_WANTS = Object.freeze(/** @type {Record<string, ReadonlyArray<
   ]),
   lever: Object.freeze([
     'decide who gets what the crisis has made scarce, and be thanked rather than blamed for it.',
-    'keep the office the crisis turns on working, whatever it costs them.',
+    'keep their house working through this, whatever it costs them.',
     'hold the one thing everyone now needs without being crushed between those who want it.',
   ]),
   exploiter: Object.freeze([
