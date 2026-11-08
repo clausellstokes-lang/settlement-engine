@@ -675,8 +675,8 @@ describe('reader-with-no-writer ratchet: the EXECUTED corpus', () => {
     // as attributed; not bisected per step). c12c28af0 moved registers only, so the merge commit measures the same.
     expect(scalarCorpus.scalarMeta).toEqual({
       canonEventLogEntries: 1,
-      wizardNewsFinalEntries: 395,
-      wizardNewsAccumulatedEntries: 2511,
+      wizardNewsFinalEntries: 390, // MERGE-WAVE at the FIX-PUBLIC-VEIL merge (2026-11-08, rung 35): the veiled re-deal's year, the lane's own deltas composed
+      wizardNewsAccumulatedEntries: 2486, // MERGE-WAVE at the FIX-PUBLIC-VEIL merge (2026-11-08, rung 35): the veiled re-deal's year, the lane's own deltas composed
       // FP BATCH 4 (2026-09-24, the FP chair): wizardNewsFinalEntries 240 → 272 and wizardNewsAccumulatedEntries 1567 → 1604 —
       // the Herald lens U2 (32315e384, FP-31): the feed keeps its newest 52 weeks whole under the 240 cap, so the corpus's
       // twelve monthly pulses retire one entry instead of thirty-three; unique 273 HOLDS. Attributed by equality with the U2
@@ -686,7 +686,7 @@ describe('reader-with-no-writer ratchet: the EXECUTED corpus', () => {
       // (a peacetime suit retires when a war opens against its court; its feed reconcile mints the one id). Accumulated 1567
       // and final 240 DO NOT MOVE. Cross-recorded in the same act: news-voice (introductions 273), prose-family
       // (scalarRows 25549, pulseHistory 1055/5097), the OSR register --write at 98e0d8664 (exact, 1970 findings).
-      wizardNewsUnique: 396,
+      wizardNewsUnique: 391, // MERGE-WAVE at the FIX-PUBLIC-VEIL merge (2026-11-08, rung 35): the veiled re-deal's year, the lane's own deltas composed
       pulseHistory: 12,
       // TE36 (ODQ §271): 109 → 73, one cause — the regional event log carries the pulse's
       // selected outcomes, and the retired bare-decline family was 36 of them. That mint's
@@ -694,11 +694,11 @@ describe('reader-with-no-writer ratchet: the EXECUTED corpus', () => {
       // OPPOSITE directions, and 73 → 74 here is the state lane picking up exactly what the
       // Chronicle put down. `wizardNewsFinalEntries` staying at 240 through both mints is
       // the control that keeps the two layers legibly apart.
-      regionalEventLog: 81, // 2026-11-07 PEOPLE-2 CAST-DERIVED step 3: 80 → 81 (see the note above); PEOPLE-1 CAST: 86 → 80
+      regionalEventLog: 82, // 2026-11-07 PEOPLE-2 CAST-DERIVED step 3: 80 → 81 (see the note above); PEOPLE-1 CAST: 86 → 80 // MERGE-WAVE at the FIX-PUBLIC-VEIL merge (2026-11-08, rung 35): the veiled re-deal's year, the lane's own deltas composed
       // 2026-11-05 (LANDING-5, the chair's addition (c)): 74 → 75, ONE cause — the residual outcome's id now carries
       // its tick (stressorsCore.js :: residualOutcome), so osr002's raider pressure, resolved twice, is two regional
       // records instead of one id minted twice. regionalEventLog holds at 75: no record was added, one stopped colliding.
-      regionalEventLogUnique: 81,
+      regionalEventLogUnique: 82, // MERGE-WAVE at the FIX-PUBLIC-VEIL merge (2026-11-08, rung 35): the veiled re-deal's year, the lane's own deltas composed
       aiChronicle: 1,
     });
     expect(Object.hasOwn(corpus, 'scalarObservations')).toBe(false);
