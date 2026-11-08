@@ -962,7 +962,7 @@ describe('THE ROSTER — a desk section is a LEAF, and the partition is asserted
     const cover = sectionsCoverEveryPool();
     expect(cover.sections).toBe(6);
     // 709 -> 729 over the W2 DEF lane (2026-11-07): +2 FLAG, +4 DS-DEF-4 FIXTURE, +3 DS-DEF-5 FIXTURE, +6 ARCANE, +5 DS-DEF-12.
-    expect(cover.pools, 'every shipped pool').toBe(766); // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 729 -> 733 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 733 -> 766
+    expect(cover.pools, 'every shipped pool').toBe(792); // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 729 -> 733 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 733 -> 766 // MERGE-WAVE at the W2 DEF merge (2026-11-08): W1 ECO's +77 variants / +26 pools composed with W2 DEF's (measured at the merged tip)
     expect(cover.unreached, 'a pool no section reaches').toEqual([]);
     expect(cover.twice, 'a pool two sections claim').toEqual([]);
   });
@@ -978,7 +978,7 @@ describe('THE ROSTER — a desk section is a LEAF, and the partition is asserted
           .toMatch(/^[a-z0-9-]+$/);
       }
     }
-    expect(total, 'and the six sum to the corpus').toBe(766); // 709 -> 729 over the W2 DEF lane (see the partition arm) // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 729 -> 733 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 733 -> 766
+    expect(total, 'and the six sum to the corpus').toBe(792); // 709 -> 729 over the W2 DEF lane (see the partition arm) // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 729 -> 733 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 733 -> 766 // MERGE-WAVE at the W2 DEF merge (2026-11-08): W1 ECO's +77 variants / +26 pools composed with W2 DEF's (measured at the merged tip)
     expect(poolRosterOf({ section: 'no-such-desk' }).rows).toEqual([]);
     expect(poolRosterOf({ section: 'no-such-desk' }).why).toContain('NOT-EXECUTABLE');
     expect(poolRosterOf({}).rows.length, 'and no flag at all is the taste\'s seven').toBe(7);
