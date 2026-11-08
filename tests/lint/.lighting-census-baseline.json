@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "bf718398ec2d63a77acd7a48ad18d2c2f36ba0c4",
-  "measuredBy": "FIX-FOOD-ISOLATION",
-  "date": "2026-11-07",
-  "note": "two test titles born with the isolated-route food bound (foodBaseNumbers: an isolated place is fed from outside only as far as its support receipt carries; isolationSupport: reads the food import bound from the paths that carry food in from outside)",
+  "measuredAtSha": "4f9ee1844b90d48b48f35ff01c68cdf9e67ad92a",
+  "measuredBy": "FIX-FOOD-ISOLATION-2",
+  "date": "2026-11-08",
+  "note": "one test title born with the harvest-side ruling (isolationSupport: scores the local foodshed by the share of need the food writer grows)",
   "files": 3107,
   "parked": 384,
   "credited": 2723,
-  "titles": 28537,
+  "titles": 28538,
   "suiteTitles": 7671
 }
