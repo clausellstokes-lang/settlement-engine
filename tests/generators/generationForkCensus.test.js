@@ -201,7 +201,11 @@ const PICK_VARIANT_CALLS = 31;
 // (15 at this lane's base, never re-keyed by PEOPLE-1) moves to the same measured figure.
 // RE-KEYED by MERGE-234 (one tie writer, the chair's ruling): 16 -> 15, measured by A6 at the 1+2+3+4 tip — the
 // seam mint's tie no longer hashes its prose through the retired pair generator; drawTies writes it.
-const FNV_EXTERNAL_CALLS = 15;
+// RE-KEYED 2026-11-08 (FIX-PUBLIC-VEIL, the second seat): 15 -> 13, measured by A6. A veiled face is born with an
+// opaque id, and its keyed forks (`people-faces::`, `people-ties::`, `people-hooks::<card id>`) re-deal, so two of
+// the probe row's ties draw archetypes whose prose takes no external fnv1a32 hash. The cause is the lane's one
+// UNSIGNED generator move.
+const FNV_EXTERNAL_CALLS = 13;
 /** The fork law A1 pins: the mint wrapper's equivalence rests on this line and nothing else. */
 const FORK_LAW = 'fork: (label) => createPRNG(`${seed}::${label}`),';
 /** §6.4's off-corpus block: a wizard-reachable switch, the keys it moves, and 24 seeds. */
