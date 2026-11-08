@@ -30,6 +30,7 @@ import { describe, test, expect } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { getStepMeta } from '../../src/generators/pipeline.js';
 import { getTraces, tracesByStep } from '../../src/domain/trace.js';
+import { TRACE_SUBJECTS } from '../../src/domain/edit/tracePartition.js';
 
 const SEED = 'sf-trace-coverage';
 
@@ -175,8 +176,15 @@ describe('Tier 2.1 — query helpers work on real traces', () => {
     // corruptionPass), so a legitimate step's traces read as "unregistered".
     // A trace can only fail this test by carrying a step name that truly
     // isn't registered (e.g. a typo at a recordTrace call site).
-    const VALID_STEPS = new Set(getStepMeta().map((s) => s.name));
-    expect(VALID_STEPS.has('corruptionPass')).toBe(true); // registry sanity: the step that exposed the drift
+    // ALLEGIANCE-CAR1 (2026-11-08): corruptionPass left the registry (J-2) and its receipt moved to the coherence seam,
+    // recorded by assembleSettlement under the declared label `people-allegiance` — accepted EXACTLY that label, read
+    // from tracePartition.js :: TRACE_SUBJECTS (`people-allegiance::npc`), nothing broader; the sanity pin re-keyed
+    // from "corruptionPass is registered" -> "corruptionPass is retired and assembleSettlement is registered", measured.
+    const SEAM_LABEL = 'people-allegiance';
+    expect(Object.prototype.hasOwnProperty.call(TRACE_SUBJECTS, `${SEAM_LABEL}::npc`), 'the seam label is declared').toBe(true);
+    const VALID_STEPS = new Set([...getStepMeta().map((s) => s.name), SEAM_LABEL]);
+    expect(VALID_STEPS.has('assembleSettlement')).toBe(true); // registry sanity: the registry is live
+    expect(getStepMeta().some((s) => s.name === 'corruptionPass')).toBe(false); // the retired step stays retired
     for (const t of traces) {
       expect(VALID_STEPS.has(t.step), `unregistered step: ${t.step}`).toBe(true);
     }
