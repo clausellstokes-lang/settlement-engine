@@ -39,7 +39,9 @@ describe('powerHeadline — no leading comma when there is no lead clause', () =
 import {
   overviewHeadline, economicsHeadline, defenseHeadline, servicesHeadline,
   resourcesHeadline, viabilityHeadline, historyHeadline,
+  npcsHeadline, hooksHeadline, relationshipsHeadline,
 } from '../../src/pdf/lib/headlines.js';
+import { stripViabilityToken } from '../../src/domain/display/viabilityFilter.js';
 
 describe('the chrome headlines — plain, label first, no machinery', () => {
   it('#1 overview: the prosperity label first, the crisis by its label, no chip count, no safety label', () => {
@@ -98,5 +100,17 @@ describe('the chrome headlines — plain, label first, no machinery', () => {
   it('history: the historical character is not repeated in the headline', () => {
     const h = historyHeadline({ age: 30, historicalCharacter: 'Shaped by events…', events: [{}], tensions: [{}, {}] });
     expect(h).toBe('Founded 30 years ago, with one event on record and two tensions still unresolved.');
+  });
+
+  it('the car rows: #7 people by name, title and first rank; #5 hooks by the group the chapter prints; ties in words', () => {
+    const npc = npcsHeadline({ all: [{ name: 'A' }, { name: 'B' }], sorted: [
+      { name: 'Walpurga Corvinus', title: 'the agent', powerLine: 'first of Elder Council · member of Grain Holders', power: 2 }, { name: 'B' }] });
+    expect(npc).toMatch(/Walpurga Corvinus, the agent, first of Elder Council,/);
+    expect(npc).not.toMatch(/power \d|Grain Holders|fisherman/); // anchored: npc is asserted to carry the name and title one line above
+    expect(hooksHeadline({ all: [{ category: 'npc' }, { category: 'npc' }, { category: 'tension' }] }))
+      .toBe('Three hooks to pull; most of them belong to the people (2).');
+    expect(relationshipsHeadline({ all: [{}, {}] })).toBe('Ties to two neighbouring places.');
+    expect(stripViabilityToken('✗ NOT VIABLE: 1 critical issue prevents settlement survival.')).toBe('1 critical issue prevents settlement survival.');
+    expect(stripViabilityToken('VIABLE BUT STRAINED: historically plausible')).toBe('Historically plausible');
   });
 });

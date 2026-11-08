@@ -12,6 +12,7 @@
 import { cap, humanize, label as labelOf } from './format.js';
 import { coverageRatioPct } from './foodCoverage.js';
 import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
+import { plotHookSourcePage } from '../../domain/dossier/plotHooks.js';
 
 // ── Shared plain-word helpers (the owner's style law of 2026-11-07: the label stays as the
 // first word, the machinery leaves, the town's own nouns fill the slots) ──────────────────
@@ -343,22 +344,50 @@ export function npcsHeadline(npcs) {
   const top = sorted[0];
   const total = list.length;
   if (!top) return null;
-  return `${total} named figure${total === 1 ? '' : 's'}: ${top.name}${top.title ? `, ${top.title}` : ''}, the most powerful (power ${top.power}).`;
+  // W7 HOOKS (the owner's style law of 2026-11-07; STYLE-RULINGS §1 #7): the people by name, TITLE and RANK
+  // (the people car's card: `title` is the house's title, `powerLine` the rank in its power, "first of Elder
+  // Council"); "(power N)" was machinery, and the struck variant's "the fisherman" is never written — the
+  // card's own title is.
+  // the first rank only: a card backed by two powers prints "first of A · member of B"; the headline keeps the first.
+  const who = [top.title, String(top.powerLine || '').split(' · ')[0]].filter(Boolean).join(', ');
+  const named = `${top.name}${who ? `, ${who},` : ''}`;
+  if (total === 1) return `One person worth knowing: ${named.replace(/,$/, '')}.`;
+  const count = capFirst(countWord(total));
+  const variants = [
+    // [official · S] who carries the weight
+    () => `${count} people worth knowing; ${named} carries the most weight.`,
+    // [newcomer · S] what you hear when you ask
+    () => `Ask who matters here and you hear ${countWord(total)} names; ${named} comes first.`,
+  ];
+  return seedPick(String(top.name || ''), variants)();
 }
 
 // ── Hooks ──────────────────────────────────────────────────────────────────
+/** The group a reader knows, by the page the chapter prints the hook under (plotHooks.js :: PLOT_HOOK_SOURCE_PAGES). */
+const HOOK_GROUP_PLAIN = Object.freeze({
+  npcs: 'the people', relationships: 'the town\'s ties', history: 'its history and its tensions',
+  traditions: 'its traditions', viability: 'its outlook', defense: 'its defence',
+});
 export function hooksHeadline(hooks) {
   if (!hooks) return null;
   const all = hooks.all || [];
   if (!all.length) return null;
-  // Tally by source
-  const bySrc = {};
+  // W7 HOOKS (the owner's style law of 2026-11-07; STYLE-RULINGS §1 #5): tallied by the GROUP THE CHAPTER
+  // PRINTS (the source page), never by the collector's category key ("heaviest from tension" named a group
+  // the page does not print). One hook per card since the people car, so the people's group is the cast.
+  const byPage = {};
   for (const h of all) {
-    const k = h?.source || 'other';
-    bySrc[k] = (bySrc[k] || 0) + 1;
+    const id = plotHookSourcePage({ category: h?.category, source: h?.sourceName ?? h?.source }).id;
+    byPage[id] = (byPage[id] || 0) + 1;
   }
-  const top = Object.entries(bySrc).sort((a, b) => b[1] - a[1])[0];
-  return `${all.length} plot hook${all.length === 1 ? '' : 's'} surfaced, heaviest from ${humanize(top[0]).toLowerCase()} (${top[1]}).`;
+  const [topId, topCount] = Object.entries(byPage).sort((a, b) => b[1] - a[1])[0];
+  const where = HOOK_GROUP_PLAIN[topId] || 'the town';
+  const total = all.length;
+  const count = total <= 12 ? capFirst(countWord(total)) : String(total);
+  if (topCount === total) return `${count} hook${total === 1 ? '' : 's'} to pull, all of them belonging to ${where}.`;
+  return topCount * 2 > total
+    ? `${count} hooks to pull; most of them belong to ${where} (${topCount}).`
+    : `${count} hooks to pull; the largest group belongs to ${where} (${topCount}).`;
 }
 
 // ── Relationships ──────────────────────────────────────────────────────────
@@ -366,12 +395,14 @@ export function relationshipsHeadline(rel) {
   if (!rel) return null;
   // The relationships slice exposes `neighbours` (external) + `internal`, not the
   // `all`/`relationships` the old code read.
-  const neighbours = rel.neighbours || [];
-  const internal = rel.internal || rel.relationships || rel.all || [];
+  const neighbours = rel.neighbours || rel.all || [];
+  const internal = rel.internal || rel.relationships || [];
   const total = neighbours.length + internal.length;
   if (!total) return null;
+  // W7 HOOKS (the owner's style law of 2026-11-07): the ties in words; "links … on file" was machinery.
+  // Since the people car each card holds ONE outgoing tie (R-P7), so the internal count is the people's ties.
   const bits = [];
-  if (neighbours.length) bits.push(`${neighbours.length} neighbour link${neighbours.length === 1 ? '' : 's'}`);
-  if (internal.length) bits.push(`${internal.length} internal tie${internal.length === 1 ? '' : 's'}`);
-  return bits.join(', ') + ' on file.';
+  if (neighbours.length) bits.push(`ties to ${countWord(neighbours.length)} neighbouring place${neighbours.length === 1 ? '' : 's'}`);
+  if (internal.length) bits.push(`${countWord(internal.length)} tie${internal.length === 1 ? '' : 's'} among its own people`);
+  return `${capFirst(listOf(bits))}.`;
 }

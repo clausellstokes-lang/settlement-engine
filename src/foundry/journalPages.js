@@ -22,6 +22,7 @@
 // THE ONE markdown/HTML escaper, shared with the standalone world importer. It
 // lives under foundry-module/ because that folder IS the shipped Foundry module
 // and must stay self-contained, so the dependency runs app → module.
+import { stripViabilityToken } from '../domain/display/viabilityFilter.js';
 import { escapeMarkdown } from '../../foundry-module/scripts/markdownEscape.js';
 import { PDF_VARIANTS, shouldInclude, faithChapterVisible } from '../pdf/variants.js';
 import {
@@ -375,7 +376,8 @@ function viabilityPage(vm) {
     lede(viabilityHeadline(v)),
     '',
     kv('Verdict', v.verdict ? humanize(v.verdict) : null),
-    v.summary ? md('', esc(v.summary)) : null,
+    // The summary without its opening verdict token: the Verdict row above is the label (W7 HOOKS).
+    v.summary ? md('', esc(stripViabilityToken(v.summary))) : null,
     (v.issues || []).length ? md('', '## Issues', v.issues.map(i =>
       `- **${esc(i.title || 'Issue')}**${i.severity ? ` (${esc(i.severity)})` : ''}${i.description ? `: ${esc(i.description)}` : ''}`)) : null,
   );

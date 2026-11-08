@@ -558,9 +558,12 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 // sentences stay owed their humanization; a move is not a cure.
 // PEOPLE-4 TIES (2026-11-07, R-P7) — TWO PURE LINE MOVES, NO DEBT MOTION. npcComponents.jsx 149 -> 150 and 155 -> 156
 // (the card-ties import line above the tie card). Path, category and snippet byte-identical; 205 / 138 / 50 unmoved.
-const REVIEWED_TOTAL_CEILING = 205;
+// W7 HOOKS (2026-11-08) — THE DEBT FELL BY ONE AND THE CEILINGS FOLLOW IT DOWN. 205 -> 204, floatInterpolation
+// 138 -> 137: src/pdf/lib/headlines.js :: npcsHeadline's "(power ${top.power})" left the prose (the people by name,
+// title and first rank; the owner's style law of 2026-11-07), so its row leaves the baseline as a CURE.
+const REVIEWED_TOTAL_CEILING = 204;
 const REVIEWED_CATEGORY_CEILINGS = Object.freeze({
-  floatInterpolation: 138,
+  floatInterpolation: 137,
   percentToken: 50,
   multiplier: 8,
   twoDecimalScore: 9,
@@ -902,8 +905,8 @@ describe('prose numerics live-tree ratchet (exact legacy identity, shrink-only)'
     const temporaryRegeneratedBaseline = JSON.parse(JSON.stringify(mutatedLive));
     expect(mutatedLive).toEqual(temporaryRegeneratedBaseline);
     expect(ceilingViolations(temporaryRegeneratedBaseline)).toEqual([
-      'total 206 exceeds reviewed ceiling 205',
-      'floatInterpolation 139 exceeds reviewed ceiling 138',
+      'total 205 exceeds reviewed ceiling 204',
+      'floatInterpolation 138 exceeds reviewed ceiling 137',
     ]);
   });
 

@@ -406,7 +406,7 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
       {/* ── THREAT ASSESSMENT ────────────────────────────────────────────── */}
       <div style={FLUSH_RULED}>
         <div style={{fontSize:chromeFontSize(FS.xxs, isMobile),fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:2}}>Threat Assessment</div>
-        <div style={{fontSize:proseFontSize(FS.xxs, isMobile),color:MUTED,marginBottom:8,fontStyle:'italic'}}>Bars show the settlement&apos;s defense readiness against each threat, as judged at the first survey; Disasters & Famine is re-judged as the campaign advances. Higher is better.</div>
+        <div style={{fontSize:proseFontSize(FS.xxs, isMobile),color:MUTED,marginBottom:8,fontStyle:'italic'}}>Each bar shows how ready the settlement is for that threat, as judged at the first survey; Disasters & Famine is re-judged as the campaign advances. A longer bar is safer.</div>
         {/* ⛔ NO SENTENCE STACK ABOVE THE BARS (owner finding 3, 2026-09-18). DS-DEF-2's five
             readiness sentences used to print here as five paragraphs, one per row, ABOVE the
             rows they describe — so a reader had to pair sentence to bar by counting, and all

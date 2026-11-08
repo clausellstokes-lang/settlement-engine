@@ -22,7 +22,7 @@ import { type, palette, space, pt, swatch } from '../theme.js';
 import { cap, label, noteText, smart, humanize, stripZwnj, safe } from '../lib/format.js';
 import { tokenCase } from '../../domain/display/labelCase.js';
 import { viabilityVerdict } from '../../domain/display/viabilityVerdict.js';
-import { trimViabilitySummary } from '../../domain/display/viabilityFilter.js';
+import { stripViabilityToken, trimViabilitySummary } from '../../domain/display/viabilityFilter.js';
 import { StateProse } from '../primitives/StateProse.jsx';
 
 const SEVERITY_TONE = {
@@ -64,7 +64,7 @@ export function ViabilityAssessment({ settlement, narrativeMode, vm, stateProse 
       <Callout tone={verdict.tone} kicker="VERDICT" title={verdict.label}>
         <EditableProse
           name="viability.summary"
-          defaultValue={trimViabilitySummary(v.summary || '')}
+          defaultValue={trimViabilitySummary(stripViabilityToken(v.summary || ''))}
           lines={2}
           style={{ ...type.body, fontSize: pt['9.5'] }}
         />
