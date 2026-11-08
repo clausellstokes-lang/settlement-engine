@@ -559,6 +559,14 @@ The per-row delta is no longer "only the bit". Since `48bcc1f3e`, a veiled face'
 - That a veiled face's slug is reversible only by someone holding the record's `_seed`. The salt is denied on every public path this lane knows, but a past export that carried `_seed` would expose it.
 - That §13's finding (the criminal house itself public at the SQL level) matters.
 
-## 16. The tip
+## 16. Open items (the chair's ruling of 2026-11-08, on the hand-back at `b367506f8`)
+
+The criminal HOUSE's own row being public at the SQL level is PRE-EXISTING, not a leak the car introduced. The institutions list and the client veil both predate the car, and it is a spoiler exposure to someone reading network traffic. A server-side strip would collide with the DM's per-member reveals, which are applied client-side and keyed by the original ids. So it is a design, not a cure for tonight. It goes to the owner's post-deploy queue as:
+
+> a server-side institutional veil — the sanitizer applies the DM's reveals first, then drops each unrevealed hidden house's row and masks its chains and catalog id; measure the public page's dependence on those rows first.
+
+The news-family reference walkers (`newsHeadlineContract`, `newsVoiceContract`, `proseFamilyContract`) are left red by this lane's cause, for MERGE-WAVE's one act. The lane is complete.
+
+## 17. The tip
 
 `lane/fix-public-veil-2026-11-07`, the commit carrying this file's last edit.
