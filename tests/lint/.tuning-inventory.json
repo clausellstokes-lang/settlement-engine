@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "1b7ef4814fb2088ae7b579ad3663049c20f99888",
+  "measuredAtSha": "e9070d614bd6775fee74d2ce70a4fc083d2a2af0",
   "measuredBy": "ALLEGIANCE-CAR3",
   "date": "2026-11-08",
-  "note": "RULING_PATRONAGE_TUNING born (draft, design §3.3, J-12) at 1b7ef4814; patronage.js imports allegiance.js (ALLEGIANCE_TUNING dependents +1)",
+  "note": "ALLEGIANCE_TUNING.organizedCrime 0.10 -> 0.05 (the measured no-power band)",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -1222,9 +1222,9 @@
       "idiom": "literal",
       "keys": 6,
       "line": 68,
-      "spanDigest": "bdc4407d93dfb082d17719ba435ca434e433f36a95c24609a342ccdbf1e86563",
+      "spanDigest": "b593f44d8657d5fbd857d8916d4ee220c7b9e396f01c7883b3ebead3986f370a",
       "leaves": {
-        "organizedCrime": 0.1,
+        "organizedCrime": 0.05,
         "organizedFull": 8,
         "powerBonus": 0.25,
         "share": 0.15,
