@@ -2,7 +2,7 @@
  * tests/generators/npcStructureDeclared.test.js — CENSUS-1d unit 2 (the chair's R-A ruling of
  * 2026-11-05 02:30): `npcStructure.js :: enrichNPCsWithStructure` resolves its registry entry
  * through `resolveDeclared`, so CENSUS-4b's CALM_ONLY tags (`no crisis`) are ENFORCED: a
- * `stable` entry ("Fix the weakness in the seat that nobody wants to talk about…") is not applied
+ * `stable` entry ("Find and mend the seat's weak spot…") is not applied
  * under an active crisis, and the NPC keeps its own role goal. Under calm it applies as before.
  *
  * Red-first at a3a383ae5 (the merge of 4b's tags; the lookup unwired): the crisis arm fails.
@@ -24,7 +24,7 @@ describe('the registry lookup enforces its tags (CENSUS-4b, CALM_ONLY)', () => {
   it('calm: the stable entry applies, noted in the ledger', () => {
     const out = withPresumptionLedger(() => enrichNPCsWithStructure([npc(), npc()], place([])));
     expect(out.result[0].settlementCondition).toBe('stable');
-    expect(out.result[0].goal.short).toMatch(/Fix the weakness in the seat/);
+    expect(out.result[0].goal.short).toMatch(/Find and mend the seat's weak spot/); // W3 POW: re-keyed with the goal's words
     expect(out.ledger.some((e) => e.pool === 'NPC_STRUCTURE.government__stable__dominant' && e.atoms.includes('no crisis'))).toBe(true);
   });
 
