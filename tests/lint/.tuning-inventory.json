@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "87346db26fd804f17dc100eef0f6e172fa03cb3b",
+  "measuredAtSha": "15a62cb0ca23d7882e2489a422638ca00e6db1c1",
   "measuredBy": "ALLEGIANCE-CAR1",
   "date": "2026-11-08",
-  "note": "allegiance.js receipt reason humanized for the prose-numerics ratchet (87346db26): ALLEGIANCE_TUNING.organizedCrime is no longer printed, one dependent read fewer",
+  "note": "allegiance.js receipt reason humanized for the prose-numerics ratchet (1515f0b19): ALLEGIANCE_TUNING.organizedCrime is no longer printed, one dependent read fewer; npcAgency.js joins as a dependent through the J-19 cure (d131ab158); re-stamped at the rewritten tip",
   "schemaVersion": 1,
   "trees": {
     "p1": [
