@@ -220,6 +220,10 @@ the agent-stash incident, the NUL class, and the WR chain of honest STOPs.
 
 **Precedence.** Where this law and the Edit Mode design disagree on the EDITOR'S MODEL, the design governs and the disagreement is a bug to report; where they disagree on FP SUBSTANCE (what a treaty, a mission, a tithe IS), the FP volumes govern. Provenance: the seal survey (146 candidate rows; at the survey 1 of 42 registry rows carried a vocabulary, at this fold 6 of 86 [CORRECTED 2026-10-16 (coherence fold) — 104 distinct `HBF-` ids and 10 `actionVocabulary:` rows at 00b648c9d (habitForkRegistry.js)]; the owner's named acts were unregistered draws), the cure day's measurement that twelve of the shell's sixteen seals name an act no catalogue can express and one bound seal could never light in a real world (U104, U105), and the standing-offer STOP (E4e v1) — each a defect this law prevents at the wave, not at the surface.
 
+---
+
+**L11 — THE ONE READER MODULE FOR POWER MEMBERSHIP, BESIDE THE ALLEGIANCE'S ONE READER.** [RE-BASED 2026-11-08 (FP-REBASE, seat FPR-CONSTITUTION; the census §7 THE OWNER'S UNIFICATION LAW and §8's retirement ledger, `docs/chair/2026-11-08/FP-REBASE-CENSUS-2026-11-08.md`; the fold §3.2.25) — the laws held no rule for how a wave reads a power's people: the volumes read the NPC grouping (`settlement.factions[].members[]`), the per-person faction fields (`factionAffiliation`, `secondaryAffiliation`, `npcHomeInstitution`, `linkedFactionIds`), the roster helpers (`factionRosterOf`, `npcInFaction`), the seat roles (`FACTION_SEAT_ROLES`, `leader_champion`), the rung roles (`densityRungRole`) and codepoint-stable seat picks, each its own way → the people car dissolved the grouping and those fields at birth (`docs/chair/2026-11-07/PEOPLE-RULINGS-2026-11-07.md`, M-1b, M-2, M-6), and this law names the ONE read that replaces them all.] The owner, 2026-11-08 (~19:4x UTC), verbatim: "So in my view we simply integrate much of what is attributed to factions to the powers as a whole, isn't that correct? … Treating the powers as a whole as semi-factions where appropriate for FP to retire factions outright?" THREE GRAINS AND ONE HINGE: the POWER holds strategy (strength, legitimacy, pacts, war, capture, patronage, competition); the INSTITUTION holds the economy and the offices (a house backs powers with shares through `src/data/institutionBacking.js :: houseBacksOf`, has a face, keeps books; habit stays institution-grain); the PERSON holds agency (goals, ties, deeds, verdicts, the hidden allegiance); the HINGE is the MEMBERSHIP, a person's rank and share in a power. (a) EVERY wave that reads who belongs to a power, how high a person stands in one, or which power is a person's own, reads it through ONE module and nowhere else: `src/domain/people/membership.js` (LANDED at the people car: `membershipsOf`, `membershipIn`, `rankIn`, `powersByRankOf`, `firstRankMembershipOf`, `membersByRank`, `powerOrderOf`, `structuralStandingOf`). Its four FP reads: **`membersOf(power)`** — the cards whose memberships name the power, in rank order (the landed `membersByRank(roster, power)` answers it); **`rankIn(card, power)`** — 1, 2, 3, null (a member ranked nowhere) or undefined (no member), LANDED; **THE HOME POWER** — a person's first-rank membership, and among unranked memberships the largest share, ties by `powerOrderOf` (the landed `firstRankMembershipOf` breaks an unranked tie by power order, not share, so the home-power read is a design read the module GAINS when the FP unparks, `homePowerOf`, never a private helper in a volume); **THE RANKED THREE** — a power's rank-1, rank-2 and rank-3 faces, as many as it has (R-P5: no borrowing, no padding), the first three of `membersByRank` with a rank. (b) A POWER'S LEADER IS ITS RANK-1 FACE; every seat pick in the FP — the ruler, the oath-holder, the garrison commander, the sword-holder, the hunt's leader — is rank 1 (or the named office's face, below), with NO ROLL and no codepoint-stable pick; a power with no rank-1 face has no leader and its voice is the seat's (the existing seat-voice fallback). THE SEAT FACE is the governing power's rank-1 face (FLOOR 1 of the rank deal: the seat's face first in the governing power); an OFFICE (the watch, the bench, the purse, the temple) is its INSTITUTION's face and title (R-P8, R-P9), read from the card's `institution`, never a faction role. (c) THE LADDER IS RANK MOVEMENT within a power — a person's rank rising or falling in one power, written through the membership's one writer and derived from the hinge — never a rolled rung, never a rung role; rank-and-file membership is a share with no rank. (d) THE ALLEGIANCE'S ONE READER stands beside it: `src/domain/people/allegiance.js :: allegianceOf(card)` (the allegiance train, `docs/allegiance/ALLEGIANCE_DESIGN_2026-11-08.md` §1.2, DESIGN until car 1 lands it) is the only read of a person's hidden hand; the membership module never reads the allegiance, the allegiance module never re-derives a rank; patronage (`src/domain/people/patronage.js :: patronageOf`) and the hall's capture (`src/domain/people/hallCapture.js :: hallCaptureOf`) are DERIVED from the two and never stored (the fold §3.2.24). (e) The 38 dormant simulation readers (`tests/lint/legacyFactionReaders/fpz-list.json`) are re-pointed THROUGH THIS MODULE when the FP unparks — the spine of their re-pointing — never one by one with private helpers; a wave whose reader is on that list re-points it in the wave that rebuilds it. (f) The persisted key `powerStructure.factions` is read as "the powers" and is NOT renamed by any wave (⭐ the owner's YES, the fold §7 OD-FC-145: renamed at the first migration window after the current deploy, with this module). Provenance: the people car's measurement (PEOPLE-0) and its 38-file dormant list; the census's per-volume table, where every faction mechanic of the FP mapped onto a power plus one of these reads.
+
 ## §2 SUBSTRATE CENSUS (merged; refutations PROMINENT; live code outranks
 ## every row — re-verify anything you build on, with the multi-spelling grep
 ## that found it; J-WR-13's standing STOP rule binds: an implementer finding
@@ -391,6 +395,17 @@ if it existed):**
 - The ruled significance vocabulary today is TWO-valued (`major|notable`);
   `routine` does not exist until SP-A mints the family — CW-1 and every
   damping target wait on it. [CW S15, SP §4]
+
+**CLASS 5 — THE RETIRED PERSON FIELDS (the people car and the allegiance train removed them at birth; nothing builds on one; read the right column instead)** [RE-BASED 2026-11-08 (FP-REBASE, seat FPR-CONSTITUTION; the census §8's retirement ledger) — the register held no person-grain refutation because the grouping and the corruption mark stood when it was compiled → a new class]:
+- The NPC GROUPING `settlement.factions` and its `members[]`, `dominantCategory` (and "factions[].members[] ARE npcs[]") — GONE (the people car, PEOPLE-5). Read a power's people through `membersOf(power)` (§1 L11). [the census §2 rows "INT / INTERIOR", "WF / FAITH", "CW"]
+- The per-person faction fields `factionAffiliation`, `secondaryAffiliation`, `npcHomeInstitution`, `linkedFactionIds`, `factionGoal`, `densityRungRole`, `structuralRank` — GONE at birth (M-2's shim removed by PEOPLE-5). Read `memberships[{ power, rank, share }]` through §1 L11, and the card's `institution`. [rows "GENERALS", "TR", "ES"]
+- The roster helpers `factionRosterOf`, the grouping's `npcInFaction` arm, every roster or codepoint-stable seat pick (`oathHolderOf`'s pick, the GENERALS garrison commander) — RETIRED. Rank 1 answers (§1 L11 (b)). [rows "GR / GRAMMAR", "GENERALS"]
+- `FACTION_SEAT_ROLES` and the `leader_champion` seat; `generators/factionRoles.js`'s roles (`warden` …) as a key — RETIRED. The ranked three; the institution's face and title. [rows "BD", "RN", "PR"]
+- The density law's rung roles (`densityRungRole`, `RUNG_ROLE_FIELD`), its rung dispersal and succession (`disperseNamedRoster`, `claimantsFor`), the rung-role ladder seed (`npcLadderGoals.mintGoal({ faction, rungIndex })`) — RETIRED. The ladder is rank movement (§1 L11 (c)). [rows "INT / INTERIOR", "HB", "EP"]
+- The role-keyed goal pools (`NPC_FACTION_GOALS`) and the 23-key `NPC_GOAL_CATALOG` as the agency's input — RETIRED as input. Car 4's keyed intent `goal.intent.{short,long} = { family, key, target }`. [row "HB"]
+- The LOCAL corruption mark `corrupt`, `corruptionVector`, `corruptTies` and the step `corruptionPass` — RETIRED (the allegiance train's car 1; the v2 → v3 save migration). Read `allegianceOf` (§1 L11 (d)); ES's FOREIGN "compromised" tag and `corruptionLeash`'s foreign arm STAND, meeting the allegiance only in `allegiance.leash` / `allegiance.foreignPatron` (the fold §3.2.23). `npcAgency.js`'s corruption re-roll of a non-boolean `corrupt` is RETIRED with it (the train's J-19: an unfrozen agency would double-corrupt the town). [rows "ES", "POP", "MF", "PR"]
+- `genesisPatronOf` — RETIRED for `houseBacksOf`; a stored patronage figure — REFUSED (the train's J-9); `patronageOf` is derived. [rows "EDITOR", "IN / INFORMATION"]
+- The JSON-ALIAS TRAP ("factions[].members[] ARE npcs[] objects") — GONE with the grouping (§4's universal clauses, bracketed). [row "CW"]
 
 ### 2b THE SHARED GROUND (census digest — the eight facts every wave builds on)
 
@@ -843,12 +858,14 @@ program's evaluator leaves.
 program's §3/§4 BEFORE the writer builds — the war volume's WR-10 declaration
 is the model. Universal clauses: JSON-round-trip pinned per shape including
 the JSON-ALIAS TRAP (factions[].members[] ARE npcs[] objects — fixtures
-round-trip through real serialization); undo rides the pulse ring wholesale;
+round-trip through real serialization) [RE-BASED 2026-11-08 (FP-REBASE, seat FPR-CONSTITUTION; the census §2 row "CW", §5 UNNECESSARY) — the clause presumed the NPC grouping, whose `members[]` aliased the `npcs[]` objects so a serialization round-trip split one person into two → the grouping is GONE (the people car), so the TRAP IS RETIRED: no FP shape holds a person by object reference; a person is named by its card id and its power by the membership's `power` name, and the round-trip pins are re-written on the memberships (a card's `memberships[]` and `allegiance` survive JSON as plain data). The JSON-round-trip clause itself stands for every shape]; undo rides the pulse ring wholesale;
 import validates closed vocabularies and heals dangling refs to ABSENT with a
 receipt, never a crash and never an invented name; veil — no new public
 payload builder anywhere, every projection rides
 includeCovert/includeGroundTruth fail-closed upstream, and every public
 payload builder returns through veilPublicPayload (standing law).
+
+**THE CANONICAL PERSON MODEL** [RE-BASED 2026-11-08 (FP-REBASE, seat FPR-CONSTITUTION; the census §7, §8, §9) — the canonical models held no person record: every program's person read the generator's NPC as it stood in August (a faction affiliation, a faction role and rung, a corruption mark, a goal from a role-keyed pool) → the person is re-stated here on the people car and the allegiance train; it is NOT new state (every field below is born by the generator, not minted by the FP)]. A NAMED PERSON is a CARD on `settlement.npcs[]` with: **`institution`** — the house it is the face of (`{ key, … }`; a minted seat or stress face `{ kind: 'power', name }`, R-P2/R-P4; a DM card `null`); **its title** — the institution's title and its honorific, resolved at render (R-P9, display-only); **`memberships: [{ power, rank: 1|2|3|null, share }]`** — the hinge (§1 L11), written once at birth by `src/generators/people/castPowers.js :: assignCastPowers` and keyed by the power's name; **`allegiance`** — absent on a clean card, else the ONE hidden hand `{ power, house, vector, via, handler, share, veiled, covert }` and the simulation's carried sub-fields (`leash`, `foreignPatron`, `revealed`), read only through `allegianceOf` (the train's §1.2, §7.2); **ONE outgoing tie** — `relationships[]` directed `{ from, to, type }`, one per card, in-degree free (R-P7; the handler tie `covert`); **`goal`** — `{ short, long, intent: { short: { family, key, target }, long: { … } } }`, the keyed intent the agency acts on (the train's §6.3). THERE IS NO GROUPING AND NO MARK: no faction field, no faction role, no rung, no `corrupt`; a person's standing is its rank in a power, its office is its institution, its hidden hand is its allegiance. THE GRAIN, the owner's law (2026-11-08, ~19:5x UTC, verbatim: "The masses happen behen the scenes but only the user determine death to the representatives and named generated NPCs."; the fold §7 OD-FC-146): EVERY named NPC is a person to the simulation in every preset; the unnamed masses are aggregate blocks (POP's columns, WC's blocks); the simulation may wound, capture, exile, demote, ruin or disgrace a named person and NEVER KILLS one — death is the DM's decree through the edit layer alone. Lifecycle (the seven paths): create — birth only (the FP mints no person; a successor is an existing card's rank movement or the DM's); read — §1 L11 and `allegianceOf`; persist — the card as born; regenerate — the cast re-dealt like a birth, allegiances included (the train's §2 note); undo — the pulse ring wholesale; migrate — the save migrations (people car v1 → v2, the train v2 → v3, the powers key at OD-FC-145's window); veil — the card veil (`cardVeil.js`), veiled memberships and the allegiance `covert`, dropped from every public payload.
 
 ---
 
@@ -1126,7 +1143,7 @@ runs with dispositionChannelsEnabled dark to isolate WR-2's deltas at the
 same two sites.
 
 **#9 GR-1 — THE OATH-HOLDER IDENTITY** (flag `oathHolderEnabled`;
-EARLY-ELIGIBLE). `oathHolder.js` composes EXACTLY governingFactionOf ->
+EARLY-ELIGIBLE). [RE-BASED 2026-11-08 (FP-REBASE, seat FPR-CONSTITUTION; the census §2 row "GR / GRAMMAR (GR-1)") — the charter composed `governingFactionOf -> npcInFaction -> codepoint-stable pick` and pinned the JSON-alias round-trip of a roster object → the oath-holder is THE SEAT'S RANK-1 FACE: `governingFactionOf` → the governing power's rank-1 face through §1 L11 (`membersOf`/`rankIn`), NO PICK; null (no rank-1 face) = no stamp = seat-voice, as before; `sworn.npcId` names the card by its id and the alias pin is retired with the trap (§4); `oathHolder.js` is on the FPZ list (`tests/lint/legacyFactionReaders/fpz-list.json`) and is re-pointed at its rebuild; `DESIGN_FP_ARCH_GR.md` and `DESIGN_FP_GRAMMAR.md` carry the same bracket] `oathHolder.js` composes EXACTLY governingFactionOf ->
 npcInFaction -> codepoint-stable pick -> durableIdForRoster; null = no stamp
 = seat-voice. Stamps at THREE mint doors (war mint, carried-sheet, sale —
 the tree grew a third since the volume; stamp totality walker across all
@@ -1271,7 +1288,7 @@ SEND-TWO consumes sendTwoDivergence.js (the one-home contract — a source
 scan proves no second implementation); suspicionOf derives from live
 conditions/deception grievances/caught intercepts/mirror gap (degrades
 dark); the house sub-program supplies projectPatronBindings' `exposed`
-parameter at last; PLANT_REFUSALS grows six->SEVEN with `too_hot`
+parameter at last [RE-BASED 2026-11-08 (FP-REBASE, seat FPR-CONSTITUTION; the census §2 row "IN / INFORMATION"; the fold §3.2.24) — the brokerage patronage (`brokeragePatronage.js`, on the FPZ list) computed a patronage of its own from the grouping → it becomes a READER of the derived `patronageOf` (renamed at its rebuild if its own name would read as a second patronage); the sweep targets real veiled agents through `allegianceOf`; the volume's own brackets are FPR-COMPROMISE's]; PLANT_REFUSALS grows six->SEVEN with `too_hot`
 (QUERY_REFUSALS asserted unchanged); the witch-hunt counterforce with
 no-fates wording; the Watch panel (sightPostures' first UI consumer, DM-only
 fail-closed). Edit-verb: the SWEEP DM verb (same store-action discipline).
@@ -1446,7 +1463,7 @@ minimally dark).
 **ES-5b — THE ABSENCE AMENDMENT, THE BENCH GRAIN** (fourth slice, second half;
 the absence arm rides CR-ES-1, SIGNED — ONE signature covers ES-5b and ES-5c,
 CR-ES5B-3; ES §4). Charter: THE ROADS LAW-5 AMENDMENT (CR-ES-1): a flag-gated
-GRADED COUNCIL-WEIGHT DISCOUNT via the `memberNpcIds` first consumer;
+GRADED COUNCIL-WEIGHT DISCOUNT via the `memberNpcIds` first consumer [RE-BASED 2026-11-08 (FP-REBASE, seat FPR-CONSTITUTION; the census §2 row "ES" §3.11) — `factionStates[fid].memberNpcIds`, written every tick by `seatNpcsIntoFactions` from the grouping → a power's member roster is `membersOf(power)` through §1 L11, read at the tick, never a stored roster; the bench's weight is the member's rank and share];
 `isOffStage` UNTOUCHED; dark worlds byte-identical; the lit shift disclosed.
 The literal full-off-stage reading is REFUSED as implementation. The discount
 lands at BOTH places §3.11 names — `rulingBlocOf`'s power sum (the bench) and
@@ -1461,7 +1478,7 @@ compiles only after ES-5b lands (CR-ES5B-7) and is NOT re-gated.
 rides the SAME CR-ES-1 signature, CR-ES5B-3, and is NOT separately owner-gated;
 ES §3.14). Charter: the PROMOTION-RISK REGISTER goes live — a rung-holder who
 is abroad, on a rung with windows open, with a live rivalry around him, defends
-his seat WEAKER. ⛔ §3.14's "the ladder CONTEST math … no new contest code" is
+his seat WEAKER [RE-BASED 2026-11-08 (FP-REBASE, seat FPR-CONSTITUTION; the census §2 row "ES" §3.14; the census §3 chain C1) — the career grain read the rung ladder (`npcLadderChallenge.js`, `npcLadderContest.js`) → the ladder is RANK MOVEMENT within a power (§1 L11 (c)): the holder abroad defends its RANK weaker; the composition lands where the rank contest is rebuilt, never on a rung]. ⛔ §3.14's "the ladder CONTEST math … no new contest code" is
 FALSE as measured and names the WRONG FILE (the third such refuted reach claim
 in this volume): `npcLadderContest.js` has no defense term at all, so the
 composition lands at `npcLadderChallenge.js#defenseScore`, which already
@@ -1476,7 +1493,7 @@ and was measured VACUOUS (it forbade three identifiers that exist nowhere in
 **ES-5d**, whose substrate is fiction today.
 
 **ES-6 — THE DOUBLE AGENT** (fifth slice; degraded-dark when the corruption
-web is dark; ES §4). Charter: the leash read at dispatch (deterministic,
+web is dark; ES §4) [RE-BASED 2026-11-08 (FP-REBASE, seat FPR-CONSTITUTION; the census §2 row "ES" §3.3/§3.13; the fold §3.2.23) — the leash and the web's candidates read the local corruption mark (`corruptionProfile`, `corruptTies`) → TWO AXES: the double agent's leash is ES's FOREIGN compromised mark (to an ENEMY court), carried in `allegiance.leash` / `allegiance.foreignPatron`; the LOCAL hand is read only through `allegianceOf`; the web's recruit filter reads the allegiance and never recruits the guild's own agent; ES's own brackets are FPR-COMPROMISE's]. Charter: the leash read at dispatch (deterministic,
 keyed on the minted errand id) + the leak delivery (magic two-address sends;
 mundane reach-priced) + meta-intelligence writes + THE SILENT-SUCCESS
 DISCIPLINE (no news, no home state — the negative is the hardest pin) +
@@ -1656,7 +1673,7 @@ the receipt naming the stock read.
 (formation/ruin-latch/rename + load-time normalizer — the dormant-with-books
 shape round-trips from old saves) + houseActs (threshold chooser over the
 closed verb set, import-pinned: no relationship graph, no target lists) +
-deterministic factor casting + news. Eligibility ONLY via factionArchetype()
+deterministic factor casting + news [RE-BASED 2026-11-08 (FP-REBASE, seat FPR-CONSTITUTION; the census §2 row "TR") — factor casting read `npc.factionAffiliation === house` (`houseLedger.js`, on the FPZ list) → a factor is cast from the MEMBERS OF THE MERCHANT POWER (`membersOf`, rank and share) or the house's LINKED FACE (the institution card's representative, R-P8); `DESIGN_FP_ARCH_TR.md` carries the same bracket]. Eligibility ONLY via factionArchetype()
 (the name-regex fallback makes rename-sensitivity real — the rename
 round-trip pin is mandatory). Ruin reachable from the top band; formation
 determinism (codepoint decides, same-seed identical); no-undead-house
@@ -2131,7 +2148,7 @@ repair + stressor stand-down); plan/levy/emigration refusal pricing
 end-to-end lands a SMALLER REAL MUSTER upstream of WR-4's conscript-share
 read, never a parallel multiplier (the double-count fence is the
 levy/consent fixture); the revealed-only pin (covert corruption moves
-nothing until exposed); reversal on BOTH answering arms.
+nothing until exposed) [RE-BASED 2026-11-08 (FP-REBASE, seat FPR-CONSTITUTION; the census §2 row "POP (POP-2)") — `corruptionSignalOf` read `corrupt===true && ousted!==true && timesExposed>0` → one read through `allegianceOf` and the allegiance's exposure record (`revealed`); the pin stands: a covert allegiance moves nothing until exposed; `DESIGN_FP_ARCH_POP.md` carries the same bracket]; reversal on BOTH answering arms.
 
 **#44 POP-3 — DEPARTURE MEMORY** (flag `departureMemoryEnabled`).
 departureMemory.js (ONE writer + decay + spent-tie; banded memory, never
@@ -2197,6 +2214,8 @@ if the register lane landed it first — check-first); POP-7 samples its own
 registry rows (SC-9).
 
 ### PHASE 7 — INTERIOR (program 7; INT §4)
+
+[RE-BASED 2026-11-08 (FP-REBASE, seat FPR-CONSTITUTION; the census §2 row "INT / INTERIOR", LARGE) — the phase's charters read the grouping (`factions[].members[] ARE npcs[]`), `settlementPolitics.js`'s blocs and `factionCompetition`, the ladder's `npcInFaction` and `structuralRank`, and three seat-capture paths → BLOCS are read from MEMBERSHIPS (§1 L11); the ladder is RANK MOVEMENT; seat capture is the DERIVED `hallCaptureOf` (all three paths read the one source); the faction card is THE POWER'S CARD with its ranked three; INT-2's counsel reads `patronageOf` (the fold §3.2.24); bloc warmth under one outgoing tie per card (R-P7) is MEASURED before INT lights, read from shared memberships if ties thin it. The charters below keep their text; INT's and INTERIOR's own brackets (FPR-LARGE's) are of record where they differ.]
 
 **#50 INT-1 — THE BOOKS GENERALIZED** (flag `seatBooksEnabled`).
 warSeatBooks.js IS the volume's seatBooks.js (J-INT naming ruling — no
@@ -3322,3 +3341,14 @@ sequences it.* [CORRECTED 2026-10-16 (coherence fold) — the owner sequenced it
 **COURT BONDS — a treaty FLAVOUR, no wave** (rides GR-7 in pair 1's tail, or FP-23's court-name key on pact treaties). A match, a fosterage, an adoption, a hostage exchange are `bond` flavours of a treaty kind carrying the two court names and a banded strength; the bond is between COURTS and names no person's fate. The Herald voices the sealing ("a match sealed between the two courts") and its breaking as a cause. [prose: "court bond", never bare "bond" — see the bracket at WC-3]
 
 **The order re-derived.** Pair 6 = the couplings · THE SEAM (CW-2x · CW-3 ‖ SEAM-1 · SEAM-2 · SEAM-3; CW-1 already at pair 1's tail by FP-25); pair 7 = the epoch (EP-4 slices 2–3; EP-5 LAST, unchanged). SEAM-0 rides pair 2; court bonds ride pair 1's tail. Pull-forward clause (the FP-25 instrument): if read 3 or read 4 scores peacetime friction below the specificity floor, SEAM-1 moves to the tail of pair 3. Every unit lands in tests-only mode, red-first, with its own walker registrations, the §3 flag law in ONE commit, lit under §934.84 with §934.85 as the cause. The wave count from this section on is 114 (the §5 header's 111 is the compile's figure and stays). [CORRECTED 2026-10-16 (coherence fold) — the pair cadence is the INVENTORY since FP-40 CHAIN-FIRST (2026-10-02, FP-ORDER.md), so this clause no longer orders anything: SEAM-0..3 are taken in the order of the chains they unlock (the coherence fold's §6, OD-FC-19); SEAM-0 is OWED and unslotted until a chain asks for SP-C's appetite. SEAM-2 overlaps THE STANDING (FPQ-78) and EC's persistent condition (ODQ §934.90 addendum 4): one court-side truth, ruled once — see the OD-FC-37 row at SEAM-2.] [RULED 2026-10-16 (coherence fold §9, lane H item H7) — SEAM-0 (SP-C's appetite mount) is SLOTTED at the head of coherence chain C2 (THE AUXILIARY): allies' send/keep deciders read appetite first; the pair cadence is the inventory under FP-40.]
+
+---
+
+## RE-BASED 2026-11-08 (FP-REBASE) — what moved in this volume
+
+Seat FPR-CONSTITUTION, against `docs/chair/2026-11-08/FP-REBASE-CENSUS-2026-11-08.md` (§2's rows, §7–§9) and the fold's §3.2.23–§3.2.25 and §5 THE PEOPLE AND ALLEGIANCE WORDS. Design text only; no section renumbered; no LANDED token renamed.
+
+- §1 L11 — THE ONE READER MODULE FOR POWER MEMBERSHIP (`membersOf`, `rankIn`, the home power, the ranked three; `src/domain/people/membership.js`), beside the allegiance's `allegianceOf` — the census §7 and §8's retirement ledger; the fold §3.2.25.
+- §2a CLASS 5 — THE RETIRED PERSON FIELDS (the grouping, the six fields, the helpers, the seat and rung roles, the goal pools, the local corruption mark, `genesisPatronOf`, the alias trap) — the census §8's retirement ledger, each item naming its §2 row.
+- §4 — the JSON-ALIAS TRAP clause retired with its bracket (row "CW"); THE CANONICAL PERSON MODEL (a card: institution, title, memberships[{power, rank, share}], allegiance, one tie, goal.intent; no grouping, no mark; the owner's death law; its seven lifecycle paths) — the census §7, §9.
+- §5, presumptions the census named for the volumes and this seat found in this volume's charters too: #9 GR-1 (row "GR / GRAMMAR"), #19 IN-3 (row "IN / INFORMATION"), ES-5b and ES-5c (row "ES" §3.11, §3.14), ES-6 (row "ES" §3.3/§3.13), #24 TR-2 (row "TR"), #43 POP-2 (row "POP"), PHASE 7's head (row "INT / INTERIOR").
