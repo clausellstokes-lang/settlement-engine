@@ -9097,7 +9097,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "A merchant passing through {settlement} can change coin, borrow or settle a debt at the town's bank without carrying the silver home.",
+          "text": "A traveller passing through {settlement} can change coin, borrow or settle a debt at the town's bank without carrying the silver home.",
           "slots": [
             "settlement"
           ],
@@ -9130,7 +9130,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "A trader wanting credit at {settlement} has to satisfy the bank about who they are before it lends.",
+          "text": "A trader wanting credit at {settlement} must satisfy the bank about who they are before it lends.",
           "slots": [
             "settlement"
           ],
