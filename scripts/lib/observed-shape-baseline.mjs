@@ -7,7 +7,16 @@
  *
  * ── ⭐⭐ EIGHT IDENTITY DEFINITIONS LIVE HERE, AND ONLY ONE IS THE AUTHORITY ──
  *
- * `BASELINE_SCHEMA` is **31**: schema 30's tagged numeric heuristic-leaf envelope, tag law, roster
+ * `BASELINE_SCHEMA` is **32**: schema 31's tagged numeric heuristic-leaf envelope, tag law and roster
+ * UNCHANGED, re-governed to THE INFILTRATED TOPOLOGY (FIX-PUBLIC-VEIL, the chair's ruling of
+ * 2026-11-07, option (1)): the corpus builder gains producer 1b′, one config × the four seeds
+ * generated with the `infiltrated` stress (TOPOLOGY ONLY, never `generated`), so the hidden
+ * power that stress writes (`hidden: true`, generators/power/stressFactions.js) is observed at
+ * last. Every identity the new topology reveals is ADMITTED WITH ATTRIBUTION; nothing is declared
+ * and the bank holds at 77/51. Its full rationale lives beside `INFILTRATED_TOPOLOGY_TARGET_SCHEMA`
+ * in `migrate-observed-shape-readers.mjs`.
+ *
+ * `RETIRED_PEOPLE_LANDING_BASELINE_SCHEMA` is **31**: schema 30's tagged numeric heuristic-leaf envelope, tag law, roster
  * and corpus definition UNCHANGED, re-governed to THE PEOPLE CAR'S LANDING (the owner's charter, ODQ
  * §934.105; lanes 2-5B merged, the landing seat PEOPLE-LAND, 2026-11-07): the NPC grouping
  * `settlement.factions` and the per-NPC faction fields leave the record at the v2 boundary (M-2, M-7).
@@ -498,7 +507,11 @@ export const RETIRED_MIGRATION_DIRECTION_BASELINE_SCHEMA = 29;
  *  theta, roster, corpus definition and fence; schema 31 re-governs it to the people car's landing.
  *  Never redefined, never deleted, so a schema-30 PREDECESSOR is still validated as schema 30. */
 export const RETIRED_PEOPLE_CAST_BASELINE_SCHEMA = 30;
-export const BASELINE_SCHEMA = 31;
+/** The RETIRED people-landing definition — schema 32's predecessor. Same tagged topology envelope,
+ *  theta, roster and fence; schema 32 re-governs it to the corpus's infiltrated topology.
+ *  Never redefined, never deleted, so a schema-31 PREDECESSOR is still validated as schema 31. */
+export const RETIRED_PEOPLE_LANDING_BASELINE_SCHEMA = 31;
+export const BASELINE_SCHEMA = 32;
 /** The RETIRED exact per-site definition. Never redefined, never deleted. */
 export const RETIRED_EXACT_BASELINE_SCHEMA = 3;
 /** The RETIRED UNFILTERED heuristic-leaf definition — schema 5's predecessor.
@@ -1193,10 +1206,20 @@ export function validateSchema30Baseline(baseline) {
   );
 }
 
+/** The RETIRED authority — schema 31's tagged envelope, re-governed by schema 32 to the corpus's
+ *  infiltrated topology. Re-bound to its own LITERAL now that the authority has moved to 32. */
+export function validateSchema31Baseline(baseline) {
+  return validateLeafBaseline(
+    baseline,
+    RETIRED_PEOPLE_LANDING_BASELINE_SCHEMA,
+    { tagged: true },
+  );
+}
+
 /** The LIVE envelope validator. Bound to `BASELINE_SCHEMA` rather than a literal,
  *  so the retired rungs above keep validating their own numbers while this one
  *  always names the authority. */
-export function validateSchema31Baseline(baseline) {
+export function validateSchema32Baseline(baseline) {
   return validateLeafBaseline(baseline, BASELINE_SCHEMA, { tagged: true });
 }
 

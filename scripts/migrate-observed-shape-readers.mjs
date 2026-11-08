@@ -197,7 +197,14 @@
  *     roster 10 -> 13, the bank 69/45 -> 76/50), and ADMITS the window's other rows with
  *     attribution. Its full rationale lives beside `WINDOW_RUNG1_TARGET_SCHEMA` (RETIRED).
  *
- *   schema 30 -> 31 (LIVE)   the same tagged numeric reconciliation, and THE PEOPLE CAR'S LANDING
+ *   schema 31 -> 32 (LIVE)   the same tagged numeric reconciliation, and THE INFILTRATED TOPOLOGY
+ *     (FIX-PUBLIC-VEIL, the chair's ruling of 2026-11-07, option (1)): the corpus builder's producer
+ *     1b′ generates one config × the four seeds with the `infiltrated` stress (topology only), so the
+ *     hidden power it writes is observed at last. Every identity the new topology reveals is
+ *     ADMITTED with attribution; nothing is declared and the bank holds at 77/51. Its full rationale
+ *     lives beside `INFILTRATED_TOPOLOGY_TARGET_SCHEMA`.
+ *
+ *   schema 30 -> 31 (RETIRED) the same tagged numeric reconciliation, and THE PEOPLE CAR'S LANDING
  *     (ODQ §934.105; the landing seat PEOPLE-LAND, 2026-11-07): the NPC grouping and the per-NPC
  *     faction fields leave the record at the v2 boundary (M-2, M-7). A NEW GENESIS from a restored
  *     consistent schema-30 predecessor. 90 new rows ADMITTED with attribution by lane cause, 9 go,
@@ -315,6 +322,7 @@ import {
   validateSchema28Baseline,
   validateSchema29Baseline,
   validateSchema30Baseline,
+  validateSchema31Baseline,
 } from './lib/observed-shape-baseline.mjs';
 
 export const MIGRATION_REPORT_SCHEMA = 2;
@@ -1363,6 +1371,45 @@ export const PEOPLE_CAST_TARGET_SCHEMA = 30;
  *  ratchet-red; its re-freeze lands next. */
 export const PEOPLE_LANDING_TARGET_SCHEMA = 31;
 
+/* ⭐⭐ THE SCHEMA 31 → 32 RUNG — THE INFILTRATED TOPOLOGY
+ *
+ *  THE GAP (FIX-PUBLIC-VEIL, 2026-11-07; the chair's ruling, option (1): "the honest cure, because
+ *  the gap is real"). The generator's `infiltrated` stress (generators/power/stressFactions.js)
+ *  pushes a power with `hidden: true` — "Its presence is not known to the settlement" — and no
+ *  corpus world ever drew it: producer 1b runs `insurgency` and `famine`, 1c `famine`. So every read
+ *  of what that branch writes was invisible to the instrument since the branch's birth, and the
+ *  veil predicate's first read of it (`hidden on factions`, domain/people/cardVeil.js ::
+ *  isVeiledPower, which tells the hidden infiltrator's minted face from an open power's) reported
+ *  "a key no writer produces" although the generator writes it.
+ *
+ *  THE CHANGE: the corpus builder gains producer 1b′ — one config (CONFIGS[0]) × the four seeds,
+ *  generated with `stressTypes: ['infiltrated']`, entering `roots` and NOT `generated`, exactly as
+ *  1b, 1c and 1d. Producer 2's pulse, its saves, its steadings, the scalar stream and the four
+ *  execution keys are byte-for-byte untouched, and 1b's own four worlds do not re-deal (1b′ is a
+ *  pass of its own, not a third type in 1b's list).
+ *
+ *  MEASURED, at the subject, through `--scan-only --scan-mode=legacy-leaf` against the committed
+ *  schema-31 register (the figures are act 2's report):
+ *
+ *      reads 2,193 → 2,193 · identities 1,545 → 1,545
+ *      NEW 0 · GONE 0 · INCREASED 0 · DECREASED 0 · SAME 1,545
+ *      corpus: seeds 4 · configs 4 · generations 16 · pulseIntervals 12 · shapeCount 1,719 — unmoved;
+ *      the `factions` shape now OBSERVES `hidden` (the infiltrator, on all four seeds)
+ *
+ *  So the topology reveals NO identity at the predecessor's tree: no committed reader of a key the
+ *  infiltrated branch writes was a finding, because no reader of `hidden` on a power existed. The
+ *  veil predicate's read lands AFTER this rung (FIX-PUBLIC-VEIL's step 1) and is then no finding
+ *  at all: its writer is observed.
+ *
+ *  ⛔ EVERY IDENTITY THE TOPOLOGY REVEALS IS ADMITTED WITH ATTRIBUTION (the schema-24 posture), none
+ *  declared, nothing exempted: a reader the infiltrated towns newly light carries the cause
+ *  "revealed by the corpus's infiltrated topology; written by <writer>".
+ *
+ *  ⭐ THE BANK DOES NOT MOVE: 77 banked reads across 51 tagged addresses (no moving row is on a
+ *  declared identity). Its delta is the corpus builder (the subject) plus the THREE bookkeeping
+ *  paths every rung moves. This rung lands ratchet-red; its re-freeze lands next. */
+export const INFILTRATED_TOPOLOGY_TARGET_SCHEMA = 32;
+
 export const DECLARED_BANK_BY_TARGET = Object.freeze({
   [EXEMPTION_RETIREMENT_TARGET_SCHEMA]: Object.freeze({ bankedReads: 60, taggedRows: 39 }),
   [BANK_FENCE_TARGET_SCHEMA]: Object.freeze({ bankedReads: 60, taggedRows: 39 }),
@@ -1423,6 +1470,9 @@ export const DECLARED_BANK_BY_TARGET = Object.freeze({
   // MEASURED off the restored schema-30 predecessor and the live scan at the subject: no admitted,
   // gone or decreased row is on a declared identity, so the pair cannot move.
   [PEOPLE_LANDING_TARGET_SCHEMA]: Object.freeze({ bankedReads: 77, taggedRows: 51 }),
+  // MEASURED off the committed schema-31 register and the live scan at the subject: no admitted,
+  // gone or decreased row is on a declared identity, so the pair cannot move.
+  [INFILTRATED_TOPOLOGY_TARGET_SCHEMA]: Object.freeze({ bankedReads: 77, taggedRows: 51 }),
 });
 
 /** The declared post-bank of a target, or `null` for a rung that predates the law. */
@@ -1987,6 +2037,16 @@ export const PEOPLE_LANDING_SCANNER_DELTA_PATHS = Object.freeze([
   'scripts/migrate-observed-shape-readers.mjs',
 ]);
 
+/** The schema-31 → 32 delta: the corpus builder (the subject: producer 1b′) plus the THREE
+ *  bookkeeping paths (the live validator moving to `validateSchema32Baseline`, the 31 → 32 bump with
+ *  the retired-31 constant, this rung) — the fed-world rung's four-path shape. */
+export const INFILTRATED_TOPOLOGY_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/lib/observed-shape-corpus.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
 export const BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS = Object.freeze([
   'package-lock.json',
   'package.json',
@@ -2045,6 +2105,8 @@ const PEOPLE_CAST_SCANNER_TRANSITION_POLICY =
   'schema-29-to-30-exact-scanner-transition-v1';
 const PEOPLE_LANDING_SCANNER_TRANSITION_POLICY =
   'schema-30-to-31-exact-scanner-transition-v1';
+const INFILTRATED_TOPOLOGY_SCANNER_TRANSITION_POLICY =
+  'schema-31-to-32-infiltrated-topology-v1';
 const CORPUS_COVERAGE_SCANNER_TRANSITION_POLICY =
   'schema-7-to-8-exact-scanner-transition-v1';
 const EPOCH_DARK_CORPUS_SCANNER_TRANSITION_POLICY =
@@ -2094,6 +2156,7 @@ export const LEAF_MIGRATION_PREDECESSOR = Object.freeze({
   [MIGRATION_DIRECTION_TARGET_SCHEMA]: TIER_COVERAGE_TARGET_SCHEMA,
   [PEOPLE_CAST_TARGET_SCHEMA]: MIGRATION_DIRECTION_TARGET_SCHEMA,
   [PEOPLE_LANDING_TARGET_SCHEMA]: PEOPLE_CAST_TARGET_SCHEMA,
+  [INFILTRATED_TOPOLOGY_TARGET_SCHEMA]: PEOPLE_LANDING_TARGET_SCHEMA,
 });
 
 /**
@@ -2186,6 +2249,8 @@ const LEAF_PREDECESSOR_VALIDATOR = Object.freeze({
   [MIGRATION_DIRECTION_TARGET_SCHEMA]: validateSchema29Baseline,
   // The schema-31 rung's own predecessor, validated as schema 30 by its retired literal.
   [PEOPLE_CAST_TARGET_SCHEMA]: validateSchema30Baseline,
+  // The schema-32 rung's own predecessor, validated as schema 31 by its retired literal.
+  [PEOPLE_LANDING_TARGET_SCHEMA]: validateSchema31Baseline,
 });
 
 const RETIRED_EXACT_MIGRATION_KIND = `observed-shape-schema-2-to-${RETIRED_EXACT_TARGET_SCHEMA}-migration`;
@@ -2709,6 +2774,14 @@ const SCANNER_TRANSITION_BY_TARGET = new Map([
     // governed execution inputs (the dossier-state prose, the institution service keys, the prose
     // norms, …) by their documented commands after the predecessor was frozen, and the report
     // records that movement for the review's decision.
+    reviewableUnscannedMovement: true,
+  })],
+  [INFILTRATED_TOPOLOGY_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: INFILTRATED_TOPOLOGY_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: INFILTRATED_TOPOLOGY_SCANNER_TRANSITION_POLICY,
+    // TRUE, matching every rung since 8→9: any governed execution input regenerated by its
+    // documented command since the schema-31 freeze is recorded for the review's decision.
     reviewableUnscannedMovement: true,
   })],
   [PEOPLE_LANDING_TARGET_SCHEMA, Object.freeze({
@@ -3845,7 +3918,7 @@ export function run(argv = process.argv.slice(2)) {
   // any mismatch into a refusal rather than a silent mode switch.
   const targetSchema = command.targetSchema
     ? Number(command.targetSchema)
-    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : PEOPLE_LANDING_TARGET_SCHEMA);
+    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : INFILTRATED_TOPOLOGY_TARGET_SCHEMA);
   if (![RETIRED_EXACT_TARGET_SCHEMA, HEURISTIC_TARGET_SCHEMA, FILTERED_TARGET_SCHEMA,
     SURFACE_FILTERED_TARGET_SCHEMA, BANKED_EXPLAINED_WRITER_TARGET_SCHEMA,
     CORPUS_COVERAGE_TARGET_SCHEMA, EPOCH_DARK_CORPUS_TARGET_SCHEMA,
@@ -3859,8 +3932,9 @@ export function run(argv = process.argv.slice(2)) {
     CORPUS_REDEAL_TARGET_SCHEMA, ADVISORY_LOCKFILE_TARGET_SCHEMA,
     FED_WORLD_TARGET_SCHEMA, WINDOW_RUNG1_TARGET_SCHEMA, TIER_COVERAGE_TARGET_SCHEMA,
     MIGRATION_DIRECTION_TARGET_SCHEMA, PEOPLE_CAST_TARGET_SCHEMA,
-    PEOPLE_LANDING_TARGET_SCHEMA].includes(targetSchema)) {
-    throw new Error(`observed-shape --target-schema must be ${PEOPLE_LANDING_TARGET_SCHEMA} (live people-landing leaf),`
+    PEOPLE_LANDING_TARGET_SCHEMA, INFILTRATED_TOPOLOGY_TARGET_SCHEMA].includes(targetSchema)) {
+    throw new Error(`observed-shape --target-schema must be ${INFILTRATED_TOPOLOGY_TARGET_SCHEMA} (live infiltrated-topology leaf),`
+      + ` ${PEOPLE_LANDING_TARGET_SCHEMA} (retired people-landing leaf),`
       + ` ${PEOPLE_CAST_TARGET_SCHEMA} (retired people-cast leaf),`
       + ` ${MIGRATION_DIRECTION_TARGET_SCHEMA} (retired migration-direction leaf),`
       + ` ${TIER_COVERAGE_TARGET_SCHEMA} (retired tier-coverage leaf),`

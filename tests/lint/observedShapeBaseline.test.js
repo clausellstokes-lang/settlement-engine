@@ -34,6 +34,7 @@ import {
   RETIRED_TIER_COVERAGE_BASELINE_SCHEMA,
   RETIRED_MIGRATION_DIRECTION_BASELINE_SCHEMA,
   RETIRED_PEOPLE_CAST_BASELINE_SCHEMA,
+  RETIRED_PEOPLE_LANDING_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA,
   validateSchema3Baseline,
   RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
@@ -67,6 +68,7 @@ import {
   validateSchema29Baseline,
   validateSchema30Baseline,
   validateSchema31Baseline,
+  validateSchema32Baseline,
 } from '../../scripts/lib/observed-shape-baseline.mjs';
 import {
   digestOf,
@@ -369,7 +371,9 @@ describe('observed-shape schema-3 baseline envelope', () => {
     // ⭐ SCHEMA 29: THE MIGRATION-DIRECTION DECLARATION (the chair's ruling of 2026-11-07 03:55 UTC, ODQ §934.105, lane WIRING-W0): schema 28's envelope, tag law, corpus and register re-governed to ONE declaration of the fifth class, `migrationDirection on config` (writer generators/steps/stressConfirmPass.js; no corpus world draws a mass migration); the roster 13 -> 14, the bank 76/50 -> 77/51, the one new row admitted tagged.
     // ⭐ SCHEMA 30: THE PEOPLE CAR'S CAST (the owner's charter, ODQ §934.105; lane PEOPLE-1 CAST, 2026-11-07): schema 29's envelope, tag law, roster and corpus definition UNCHANGED, re-governed to a register that admits 19 ordinary rows the cast's year exposes and lets 0 go; nothing is declared and the bank holds at 77/51.
     // ⭐ SCHEMA 31: THE PEOPLE CAR'S LANDING (ODQ §934.105; the landing seat PEOPLE-LAND, 2026-11-07): schema 30's envelope, tag law, roster and corpus definition UNCHANGED, re-governed to a NEW GENESIS from a restored consistent schema-30 predecessor; the grouping and the per-NPC faction fields leave the record (M-2, M-7), 90 rows admitted with attribution by lane cause, 9 go, 2 decrease; nothing is declared and the bank holds at 77/51.
-    expect(BASELINE_SCHEMA).toBe(31);
+    // ⭐ SCHEMA 32: THE INFILTRATED TOPOLOGY (FIX-PUBLIC-VEIL, the chair's ruling of 2026-11-07, option (1)): schema 31's envelope, tag law and roster UNCHANGED, re-governed to a corpus builder whose producer 1b′ generates one config × the four seeds with the `infiltrated` stress (topology only), so the hidden power that stress writes is observed; every identity it reveals admitted with attribution; nothing is declared and the bank holds at 77/51.
+    expect(BASELINE_SCHEMA).toBe(32);
+    expect(RETIRED_PEOPLE_LANDING_BASELINE_SCHEMA).toBe(31);
     expect(RETIRED_PEOPLE_CAST_BASELINE_SCHEMA).toBe(30);
     expect(RETIRED_MIGRATION_DIRECTION_BASELINE_SCHEMA).toBe(29);
     expect(RETIRED_TIER_COVERAGE_BASELINE_SCHEMA).toBe(28);
@@ -695,6 +699,13 @@ function validSchema30Baseline_fixture() {
   return baseline;
 }
 
+/** The RETIRED schema-31 envelope, pinned to its own LITERAL number (the infiltrated-topology rung). */
+function validSchema31Baseline_fixture() {
+  const baseline = validSchema7Baseline();
+  baseline.schema = RETIRED_PEOPLE_LANDING_BASELINE_SCHEMA;
+  return baseline;
+}
+
 /** The LIVE envelope, whatever number is in force. */
 function validLiveBaseline() {
   const baseline = validSchema7Baseline();
@@ -995,7 +1006,13 @@ describe('observed-shape schema-7 bank-by-rule envelope', () => {
     // literal, paired with a fixture; `live` belongs to 31 now.
     const peopleCast = validSchema30Baseline_fixture();
     expect(validateSchema30Baseline(peopleCast)).toBe(peopleCast);
-    expect(validateSchema31Baseline(live)).toBe(live);
+    // ⭐ 31 IS RETIRED at the schema-32 rung (the infiltrated topology) and validates its OWN
+    // literal, paired with a fixture; `live` belongs to 32 now.
+    const peopleLanding = validSchema31Baseline_fixture();
+    expect(validateSchema31Baseline(peopleLanding)).toBe(peopleLanding);
+    expect(validateSchema32Baseline(live)).toBe(live);
+    expect(() => validateSchema31Baseline(live)).toThrow(/is not schema 31/);
+    expect(() => validateSchema32Baseline(peopleLanding)).toThrow(/is not schema 32/);
     expect(() => validateSchema30Baseline(live)).toThrow(/is not schema 30/);
     expect(() => validateSchema31Baseline(peopleCast)).toThrow(/is not schema 31/);
     expect(() => validateSchema29Baseline(live)).toThrow(/is not schema 29/);

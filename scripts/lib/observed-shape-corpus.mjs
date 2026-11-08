@@ -838,6 +838,36 @@ export async function buildObservedCorpus({
     });
   }
 
+  // ── Producer 1b′: the stress topology pass's INFILTRATED arm (schema 32). TOPOLOGY ONLY. ──
+  //
+  // ⭐ THE SAME LAW AS 1b: these settlements enter `roots` and NOT `generated`, so producer 2's
+  // pulse, its saves, its steadings, the scalar stream and all four execution keys are
+  // byte-for-byte untouched; and 1b's own four settlements are byte-identical (the arm is a
+  // pass of its own rather than a third type in 1b's list, so the insurgency + famine worlds
+  // 1b has always observed do not re-deal).
+  //
+  // WHY IT EXISTS (FIX-PUBLIC-VEIL, the chair's ruling of 2026-11-07, option (1)). The stress
+  // the generator calls `infiltrated` (generators/power/stressFactions.js) pushes a power with
+  // `hidden: true` — "Its presence is not known to the settlement" — and no corpus world ever
+  // drew it, so every read of what that branch writes was invisible to this instrument since
+  // the branch's birth: the veil predicate's `hidden on factions` (domain/people/cardVeil.js ::
+  // isVeiledPower, which tells the hidden infiltrator's minted face from an open power's)
+  // reported "a key no writer produces" although the generator writes it. The cure is the
+  // corpus's REACH, not an exemption: one config × the four seeds with `infiltrated`, the
+  // gap's own size. Widen it only with the same before/after row reconciliation, and never
+  // through `generated`.
+  const INFILTRATED_TOPOLOGY_TYPES = Object.freeze(['infiltrated']);
+  for (const seed of SEEDS) {
+    roots.push({
+      name: 'settlement',
+      value: generateSettlementPipeline(
+        { ...CONFIGS[0], stressTypes: [...INFILTRATED_TOPOLOGY_TYPES] },
+        null,
+        { seed, customContent: {} },
+      ),
+    });
+  }
+
   // ── Producer 1c: the FED-WORLD famine topology pass (schema 26). TOPOLOGY ONLY. ──
   //
   // ⭐ THE SAME LAW AS 1b, ONE STEP WIDER: these settlements enter `roots` and NOT
