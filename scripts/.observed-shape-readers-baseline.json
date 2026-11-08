@@ -177,14 +177,14 @@
  "digests": {
   "corpusMeta": "1a4216a0fb4db8841e27ac3e2c45851c67d411b6aae8da02ab3145b4076a224d",
   "inventory": "8a95fac189c16a52417124e88e0b8b5ba7139f93e9bb12e4b82df75644898011",
-  "manifests": "9df3f32d44c959b3dd441a03bdf6215ea716ff26cb5fc69c0436418fab13da57",
+  "manifests": "4ace67da118048b5a091f11a6092a2b2de9cd4b185bc63a9dbe827a870036e77",
   "migrationReview": "0f122dc60cecf83441c50da0d0e3438d854564666edaf4fefc9dd41f6712666d",
   "rowTags": "1ebab9f067e5ec39f32a8c38b8e1a18c24d8ad0c66109851551ef84efc314447",
   "scanStats": "3fd77c601d5a09fe7190aa9e96d4d37b8b273b17363c371ae20527ea6695d87d",
   "sentinel": "c0091693fe6cfdc0e4fecce492ed19b2bb6393841224cef5592139c8c3edd762"
  },
  "frozen": "2026-11-08",
- "frozenAtSha": "3ab957155d46580b63ba97c618a963aa41b93c8d",
+ "frozenAtSha": "5efcb5812289eeaa80f6fbe987eae4f878315c5f",
  "identities": 1548,
  "inventory": {
   "src/components/BuyThisDossier.jsx": {
@@ -2684,7 +2684,7 @@
   },
   "executionTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "dff33c0b5566739735e1a3429bb95873b5763d0b2d74b8ea2d41d801f65ea951",
+   "digest": "9f82048adab5f8e298e455846d3bd1d0c3ed8d79092d9497eed4d5ca0070852d",
    "entries": [
     {
      "mode": "100644",
@@ -7379,8 +7379,8 @@
     {
      "mode": "100644",
      "path": "src/data/historyData.js",
-     "sha256": "81db14b4fc9133ae8a0dcdb8c43be0bde3ff5cb8332ab2fca331595719a3ee9e",
-     "size": 53815,
+     "sha256": "8923f770e22df6efd1a27d1b022c7d101ce6eea5c0084c1fe2bed6882dfad0e0",
+     "size": 53894,
      "type": "file"
     },
     {
@@ -10088,8 +10088,8 @@
     {
      "mode": "100644",
      "path": "src/domain/dossier/plotHooks.js",
-     "sha256": "9a9daed8909578733893feaf7dcb9c2e50b21b64e26731b78749ee0c5193dba9",
-     "size": 32029,
+     "sha256": "f2cd8ab584c89bd608a717d27ec5281d4eaf33b24e16799820777b0b81c8ce25",
+     "size": 32136,
      "type": "file"
     },
     {
@@ -16283,8 +16283,8 @@
     {
      "mode": "100644",
      "path": "src/generators/economy/foodBalance.js",
-     "sha256": "9a6018f22e7078f3cb36b8714642e7080e51e2a5f8eaa78a200b312d51fd3da2",
-     "size": 47932,
+     "sha256": "b1bb25bd0a9b2b5c9a2e08e04d15a377754ec2943ff8be9aa2e282287281c0d7",
+     "size": 48010,
      "type": "file"
     },
     {
@@ -16311,8 +16311,8 @@
     {
      "mode": "100644",
      "path": "src/generators/economy/outlookHookSiblings.js",
-     "sha256": "b6ba03a414ca88f5f9cbaaa3e7968378f05c6d3b4536b23345af8628152cf430",
-     "size": 4302,
+     "sha256": "c8d339b9762ee6ee5b62606fb1f001dc02c5b93d5eba98c16e16d94fd192f9b7",
+     "size": 4334,
      "type": "file"
     },
     {
@@ -16661,8 +16661,8 @@
     {
      "mode": "100644",
      "path": "src/generators/power/conflicts.js",
-     "sha256": "423f7d4500127d550162f1464d222aa29cf8d4aca14d075855bb0c1d1fa2cf03",
-     "size": 12098,
+     "sha256": "8880feaa306fe57ba22e6fbfab9c1756342d80de3f878f1b342238e650d9cfa9",
+     "size": 12097,
      "type": "file"
     },
     {
@@ -16759,8 +16759,8 @@
     {
      "mode": "100644",
      "path": "src/generators/recordBatteryFindings.js",
-     "sha256": "3b6eae9f2569cf1be5ee1621147ab806b42de7e3bde20a298de9f63b00111a0f",
-     "size": 6113,
+     "sha256": "f65cc4d305a3334fd692576fc7c3a1536b80e7900fe4a7b26240afc06c041ac4",
+     "size": 6134,
      "type": "file"
     },
     {
@@ -16780,8 +16780,8 @@
     {
      "mode": "100644",
      "path": "src/generators/safetyProfile.js",
-     "sha256": "dd6f8dc6a43e5d841e88303a56ff464d9703493f87e6babd7dbf1287937f0f0d",
-     "size": 55565,
+     "sha256": "d1bad3719de8b20fe82c292782cac19b300a0a55064e6e71f717ddc9a5d3a712",
+     "size": 55529,
      "type": "file"
     },
     {
@@ -18999,8 +18999,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/sections/Overview.jsx",
-     "sha256": "060d73db2ef735a3389b53d8ce7a8aa2a5a09043184aebedf64ce40cc339ed02",
-     "size": 25747,
+     "sha256": "fc2c4f8b9e9fba313b83020953920c04274486fce4a63f87d9f686ea3937670c",
+     "size": 25757,
      "type": "file"
     },
     {
@@ -19861,7 +19861,7 @@
   },
   "scanTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "088100c3508fb20296944f483dc552313225c1f709fc82f0c64f43c0fc709063",
+   "digest": "72d5483e59210d1fc21821674eb4c3b9301e1b15064eb06f2e883fee8120eaa1",
    "entries": [
     {
      "mode": "100644",
@@ -24423,8 +24423,8 @@
     {
      "mode": "100644",
      "path": "src/data/historyData.js",
-     "sha256": "81db14b4fc9133ae8a0dcdb8c43be0bde3ff5cb8332ab2fca331595719a3ee9e",
-     "size": 53815,
+     "sha256": "8923f770e22df6efd1a27d1b022c7d101ce6eea5c0084c1fe2bed6882dfad0e0",
+     "size": 53894,
      "type": "file"
     },
     {
@@ -27076,8 +27076,8 @@
     {
      "mode": "100644",
      "path": "src/domain/dossier/plotHooks.js",
-     "sha256": "9a9daed8909578733893feaf7dcb9c2e50b21b64e26731b78749ee0c5193dba9",
-     "size": 32029,
+     "sha256": "f2cd8ab584c89bd608a717d27ec5281d4eaf33b24e16799820777b0b81c8ce25",
+     "size": 32136,
      "type": "file"
     },
     {
@@ -33271,8 +33271,8 @@
     {
      "mode": "100644",
      "path": "src/generators/economy/foodBalance.js",
-     "sha256": "9a6018f22e7078f3cb36b8714642e7080e51e2a5f8eaa78a200b312d51fd3da2",
-     "size": 47932,
+     "sha256": "b1bb25bd0a9b2b5c9a2e08e04d15a377754ec2943ff8be9aa2e282287281c0d7",
+     "size": 48010,
      "type": "file"
     },
     {
@@ -33299,8 +33299,8 @@
     {
      "mode": "100644",
      "path": "src/generators/economy/outlookHookSiblings.js",
-     "sha256": "b6ba03a414ca88f5f9cbaaa3e7968378f05c6d3b4536b23345af8628152cf430",
-     "size": 4302,
+     "sha256": "c8d339b9762ee6ee5b62606fb1f001dc02c5b93d5eba98c16e16d94fd192f9b7",
+     "size": 4334,
      "type": "file"
     },
     {
@@ -33649,8 +33649,8 @@
     {
      "mode": "100644",
      "path": "src/generators/power/conflicts.js",
-     "sha256": "423f7d4500127d550162f1464d222aa29cf8d4aca14d075855bb0c1d1fa2cf03",
-     "size": 12098,
+     "sha256": "8880feaa306fe57ba22e6fbfab9c1756342d80de3f878f1b342238e650d9cfa9",
+     "size": 12097,
      "type": "file"
     },
     {
@@ -33747,8 +33747,8 @@
     {
      "mode": "100644",
      "path": "src/generators/recordBatteryFindings.js",
-     "sha256": "3b6eae9f2569cf1be5ee1621147ab806b42de7e3bde20a298de9f63b00111a0f",
-     "size": 6113,
+     "sha256": "f65cc4d305a3334fd692576fc7c3a1536b80e7900fe4a7b26240afc06c041ac4",
+     "size": 6134,
      "type": "file"
     },
     {
@@ -33768,8 +33768,8 @@
     {
      "mode": "100644",
      "path": "src/generators/safetyProfile.js",
-     "sha256": "dd6f8dc6a43e5d841e88303a56ff464d9703493f87e6babd7dbf1287937f0f0d",
-     "size": 55565,
+     "sha256": "d1bad3719de8b20fe82c292782cac19b300a0a55064e6e71f717ddc9a5d3a712",
+     "size": 55529,
      "type": "file"
     },
     {
@@ -35987,8 +35987,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/sections/Overview.jsx",
-     "sha256": "060d73db2ef735a3389b53d8ce7a8aa2a5a09043184aebedf64ce40cc339ed02",
-     "size": 25747,
+     "sha256": "fc2c4f8b9e9fba313b83020953920c04274486fce4a63f87d9f686ea3937670c",
+     "size": 25757,
      "type": "file"
     },
     {
@@ -36842,7 +36842,7 @@
   },
   "sourceTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "fdc3e930f1ba81b4b67b2b9ddeb35fde983dedb5779432842cd9d33ea64ddf00",
+   "digest": "d1cf611cf850eaa40ca9ae3b1a55e85748806b2c4bee78cd616afe3a07f0dd24",
    "entries": [
     {
      "mode": "100644",
@@ -41467,8 +41467,8 @@
     {
      "mode": "100644",
      "path": "src/data/historyData.js",
-     "sha256": "81db14b4fc9133ae8a0dcdb8c43be0bde3ff5cb8332ab2fca331595719a3ee9e",
-     "size": 53815,
+     "sha256": "8923f770e22df6efd1a27d1b022c7d101ce6eea5c0084c1fe2bed6882dfad0e0",
+     "size": 53894,
      "type": "file"
     },
     {
@@ -44176,8 +44176,8 @@
     {
      "mode": "100644",
      "path": "src/domain/dossier/plotHooks.js",
-     "sha256": "9a9daed8909578733893feaf7dcb9c2e50b21b64e26731b78749ee0c5193dba9",
-     "size": 32029,
+     "sha256": "f2cd8ab584c89bd608a717d27ec5281d4eaf33b24e16799820777b0b81c8ce25",
+     "size": 32136,
      "type": "file"
     },
     {
@@ -50371,8 +50371,8 @@
     {
      "mode": "100644",
      "path": "src/generators/economy/foodBalance.js",
-     "sha256": "9a6018f22e7078f3cb36b8714642e7080e51e2a5f8eaa78a200b312d51fd3da2",
-     "size": 47932,
+     "sha256": "b1bb25bd0a9b2b5c9a2e08e04d15a377754ec2943ff8be9aa2e282287281c0d7",
+     "size": 48010,
      "type": "file"
     },
     {
@@ -50399,8 +50399,8 @@
     {
      "mode": "100644",
      "path": "src/generators/economy/outlookHookSiblings.js",
-     "sha256": "b6ba03a414ca88f5f9cbaaa3e7968378f05c6d3b4536b23345af8628152cf430",
-     "size": 4302,
+     "sha256": "c8d339b9762ee6ee5b62606fb1f001dc02c5b93d5eba98c16e16d94fd192f9b7",
+     "size": 4334,
      "type": "file"
     },
     {
@@ -50749,8 +50749,8 @@
     {
      "mode": "100644",
      "path": "src/generators/power/conflicts.js",
-     "sha256": "423f7d4500127d550162f1464d222aa29cf8d4aca14d075855bb0c1d1fa2cf03",
-     "size": 12098,
+     "sha256": "8880feaa306fe57ba22e6fbfab9c1756342d80de3f878f1b342238e650d9cfa9",
+     "size": 12097,
      "type": "file"
     },
     {
@@ -50847,8 +50847,8 @@
     {
      "mode": "100644",
      "path": "src/generators/recordBatteryFindings.js",
-     "sha256": "3b6eae9f2569cf1be5ee1621147ab806b42de7e3bde20a298de9f63b00111a0f",
-     "size": 6113,
+     "sha256": "f65cc4d305a3334fd692576fc7c3a1536b80e7900fe4a7b26240afc06c041ac4",
+     "size": 6134,
      "type": "file"
     },
     {
@@ -50868,8 +50868,8 @@
     {
      "mode": "100644",
      "path": "src/generators/safetyProfile.js",
-     "sha256": "dd6f8dc6a43e5d841e88303a56ff464d9703493f87e6babd7dbf1287937f0f0d",
-     "size": 55565,
+     "sha256": "d1bad3719de8b20fe82c292782cac19b300a0a55064e6e71f717ddc9a5d3a712",
+     "size": 55529,
      "type": "file"
     },
     {
@@ -53087,8 +53087,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/sections/Overview.jsx",
-     "sha256": "060d73db2ef735a3389b53d8ce7a8aa2a5a09043184aebedf64ce40cc339ed02",
-     "size": 25747,
+     "sha256": "fc2c4f8b9e9fba313b83020953920c04274486fce4a63f87d9f686ea3937670c",
+     "size": 25757,
      "type": "file"
     },
     {
@@ -54265,9 +54265,9 @@
  },
  "scannerProvenance": {
   "detectorDigest": "cb5dac5989089c789d38f0689a859a2dd8e64d78bb3f378a7aab1e0a255d1de5",
-  "executionTreeDigest": "dff33c0b5566739735e1a3429bb95873b5763d0b2d74b8ea2d41d801f65ea951",
-  "scanTreeDigest": "088100c3508fb20296944f483dc552313225c1f709fc82f0c64f43c0fc709063",
-  "sourceTreeDigest": "fdc3e930f1ba81b4b67b2b9ddeb35fde983dedb5779432842cd9d33ea64ddf00",
+  "executionTreeDigest": "9f82048adab5f8e298e455846d3bd1d0c3ed8d79092d9497eed4d5ca0070852d",
+  "scanTreeDigest": "72d5483e59210d1fc21821674eb4c3b9301e1b15064eb06f2e883fee8120eaa1",
+  "sourceTreeDigest": "d1cf611cf850eaa40ca9ae3b1a55e85748806b2c4bee78cd616afe3a07f0dd24",
   "unscannedInputDigest": "c74e3dff79551fcaad04423b3eb60b96e555e3972bf842f70c5715fc43e020b0"
  },
  "schema": 32,

@@ -8,7 +8,7 @@
   "The reviewable slice is computed by RULE (reviewableDark), never hand-listed."
  ],
  "schema": 1,
- "frozenAtSha": "5c9218f627249842ad6e640b734949b0399024cb",
+ "frozenAtSha": "5efcb5812289eeaa80f6fbe987eae4f878315c5f",
  "charter": "§18.1 WRWALKER Car 1 (HORIZON) — chair-signed vetoably at the INSTR-WRW pre-stage",
  "minRows": 40,
  "corpusMeta": {
@@ -22,7 +22,7 @@
   "originCount": 14338,
   "transitionCount": 21984
  },
- "shapesDigest": "3d5f894219f7b28cb1c469a523a4931e9bc54da28a6852eaca106ccfa85735ba",
+ "shapesDigest": "5f7e11215567a7a82e49543480bc0064252b83a98e57d3e1658b2eafac0b8495",
  "detectorDigest": "78232c0e77e20d3979f6a62c7f68cbc5659ff7401315a02d8d915efe4715d058",
  "verdictDigest": "9ae012681b66a4d3d808f0fcb46a2fa741111eb26dca3e398f9cff27ca2e75b1",
  "surfaceRoots": {
@@ -349,7 +349,7 @@
    "identity": "annotation on legacyAnnotations",
    "key": "annotation",
    "shape": "legacyAnnotations",
-   "rows": 957
+   "rows": 954
   },
   {
    "identity": "arcaneBlackMarket on flags",
@@ -6781,7 +6781,7 @@
    "identity": "templateType on historicalEvents",
    "key": "templateType",
    "shape": "historicalEvents",
-   "rows": 2217
+   "rows": 2218
   },
   {
    "identity": "terrainA on segments",
