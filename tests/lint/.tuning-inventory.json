@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "2cffe66cd14cb1a4b0e3866baaccd3a5bf056df8",
-  "measuredBy": "MERGE-CAR",
+  "measuredAtSha": "3a6602b03e4cf7fa39fd6bafb961889df690436e",
+  "measuredBy": "ALLEGIANCE-CAR1",
   "date": "2026-11-08",
-  "note": "the people car merged into the integration branch (8dff691f3): both sides inventories composed at the merged tree (Register VII v2 stands; the rung-2 landing registered dials stay)",
+  "note": "the veil merged over MERGE-CAR (744c22d74): dependents moved, no value moved — src/domain/people/cardVeil.js (FIX-PUBLIC-VEIL) imports INFORMATION_BROKERAGE_TUNING (through brokerageLegalityOf) and QUADRANT_TUNING, as on the veil lane (24ac7fbcc); both sides inventories composed at the merged tree",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -192,6 +192,7 @@
       },
       "dependents": [
         "src/domain/display/galleryVeil.js",
+        "src/domain/people/cardVeil.js",
         "src/domain/worldPulse/brokerageFidelity.js",
         "src/domain/worldPulse/brokerageServices.js",
         "src/domain/worldPulse/brokerageServicesFeed.js",
@@ -1604,10 +1605,10 @@
       },
       "dependents": [
         "src/components/new/tabs/PowerTab.jsx",
-        "src/domain/display/galleryVeil.js",
         "src/domain/display/stateProse/printProse.js",
         "src/domain/interior/interiorTemplates.js",
         "src/domain/npc/npcBank.js",
+        "src/domain/people/cardVeil.js",
         "src/domain/spatial/navalLayer.js",
         "src/domain/undercity/monotoneComponents.js",
         "src/domain/undercity/sewerDerivation.js",
@@ -8164,7 +8165,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 2,
-      "line": 65,
+      "line": 67,
       "spanDigest": "27e8cae7f714b6255ed46d5145a6bb53f4257fda9c347798c877bf6108baa529",
       "leaves": {
         "RANKS": 3,
