@@ -21,7 +21,8 @@
  *   (b) the page starts on wood: row 0 is opaque across ROW0_OPAQUE and the shaft band is
  *       opaque; the hang and barb constants end exactly where the alpha ends;
  *   (c) bindings are cord and no painted-word region or the plate carries cord;
- *   (d) every cut has FE columns of plain wood on both sides, every wood run is plain and
+ *   (d) every cut has its own `fe` columns of plain wood on both sides (FE, or Compendium's 5;
+ *       FE at the compact join, with a CONTROL that FE at Compendium fails), every wood run is plain and
  *       maximal, and each word's ink lies inside its NAV_WORD extent (with a CONTROL showing
  *       the ink detector fires on a word);
  *   (e) the filler tiles seamlessly, is opaque through the shaft and matches its lighting, and
@@ -273,12 +274,22 @@ describe('(c) bindings are cord; words and the plate are not', () => {
 });
 
 describe('(d) cuts, wood runs and words', () => {
-  it('every cut, and the compact join, has FE columns of plain wood on both sides', () => {
+  it('every cut has its own fe columns of plain wood on both sides, and the compact join FE', () => {
     const failures = [];
-    for (const x of [...CUTS.map((c) => c.x), COMPACT_JOIN.left, COMPACT_JOIN.right]) {
-      for (let c = x - FE; c < x + FE; c += 1) if (!plain(c)) failures.push(`cut ${x}: column ${c} is not plain wood`);
+    for (const { x, fe } of [...CUTS, { x: COMPACT_JOIN.left, fe: FE }, { x: COMPACT_JOIN.right, fe: FE }]) {
+      for (let c = x - fe; c < x + fe; c += 1) if (!plain(c)) failures.push(`cut ${x}: column ${c} is not plain wood`);
     }
     expect(failures).toEqual([]);
+    expect(CUTS.filter((c) => c.fe !== FE).map((c) => [c.x, c.fe])).toEqual([[1032, 5], [1181, 5]]);
+  });
+
+  it("CONTROL: Compendium's gaps convict a cut there at the full FE (ink on both sides)", () => {
+    for (const x of [1032, 1181]) {
+      const ink = [];
+      for (let c = x - FE; c < x + FE; c += 1) if (!plain(c)) ink.push(c);
+      expect(ink.length, `cut ${x}`).toBeGreaterThan(0);
+      expect(ink.some((c) => c < x) && ink.some((c) => c > x), `cut ${x}`).toBe(true);
+    }
   });
 
   it('every wood run is plain and maximal', () => {

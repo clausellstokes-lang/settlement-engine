@@ -25,15 +25,25 @@
  *
  * HOW A WIDER PAGE IS FILLED. The painting is never stretched. It is cut at columns of plain
  * wood (CUTS) and the gap opened at each cut (a SLOT) is filled with the filler tile. Each
- * slot's filler is painted OPAQUE first, spanning the slot plus FE on both sides, and the
- * two painted segments beside it fade to transparent across those FE-wide overlaps. Two
- * layers that BOTH fade across one zone dip in opacity and show the page through as grey
- * bands (the kit's canvas prototype showed it), so only the painted segments fade. A cut
- * therefore needs FE columns of plain, ink-free wood on BOTH sides, and every cut below
- * sits inside a measured WOOD_RUN with that margin. At a slot width of zero the
- * construction reproduces the uncut painting exactly, and below MIN_SHARE_PX no slot is
- * rendered at all. The painting darkens toward the arrowhead while the filler is one tone,
- * so each slot's filler is toned to the painted wood beside its cut (SLOT_TONE).
+ * slot's filler is painted OPAQUE first, spanning the slot plus its cut's crossfade width
+ * (`fe`, FE unless the cut says otherwise) on both sides, and the two painted segments beside
+ * it fade to transparent across those overlaps. Two layers that BOTH fade across one zone dip
+ * in opacity and show the page through as grey bands (the kit's canvas prototype showed it),
+ * so only the painted segments fade. A cut therefore needs `fe` columns of plain, ink-free
+ * wood on BOTH sides, and every cut below sits inside a measured WOOD_RUN with that margin.
+ * At a slot width of zero the construction reproduces the uncut painting exactly. The
+ * painting darkens toward the arrowhead while the filler is one tone, so each slot's filler
+ * is toned to the painted wood beside its cut (SLOT_TONE).
+ *
+ * THE SIX SECTIONS ARE EQUAL (owner, 2026-11-08: "The spacing between the sections
+ * ( represented by the banded thread red) are not equally spaced and scales as such can you
+ * do that for me?"). A section is the shaft between two consecutive red bindings, 1 to 7,
+ * each holding one painted word; the painting's own six run from 121 to 160 columns. Once
+ * the page is wide enough to lift every section to the widest one's painted width, the extra
+ * width is laid so the six are EQUAL, each section's two slots taking half of its section's
+ * share, and they grow together; the blank plate's slot takes one part in seven of the extra
+ * (it grows like one section). Below that width the painting is shown uncut: no section can
+ * shrink, because the painting is never stretched or cut inside ink.
  *
  * THE FEATHER HIDES ON SCROLL (owner, 2026-09-17): "once we start scrolling, the feather in
  * the arrow turns completely transparent, only to reappear fully if they scroll to the very
@@ -117,7 +127,7 @@ export const ROW0_OPAQUE = Object.freeze([
 export const FILLER_W = 372;
 export const FILLER_H = 70;
 
-/** The crossfade width on each side of a cut, in strip px. */
+/** The crossfade width on each side of a cut, in strip px (a cut may name its own `fe`). */
 export const FE = 10;
 
 /** The largest scale the arrow takes while there is room to insert wood. */
@@ -136,9 +146,6 @@ export const FULL_MIN_VIEWPORT = 1024;
 export const SHORT_CAP = 0.36;
 /** The media query that marks a short (landscape phone) viewport. */
 export const SHORT_QUERY = '(max-height: 480px)';
-
-/** Below this many CSS px of wood per share, the full arrow renders uncut. */
-export const MIN_SHARE_PX = 2;
 
 /** The compact arrow's slot is never narrower than this many strip px (times s). */
 export const COMPACT_MIN_SLOT = 40;
@@ -177,7 +184,8 @@ export const WOOD_RUNS = Object.freeze([
   Object.freeze({ x0: 813, x1: 836 }),
   Object.freeze({ x0: 870, x1: 895 }),
   Object.freeze({ x0: 968, x1: 994 }),
-  // Compendium's two gaps, 10 and 11 columns wide: narrower than 2 x FE, so no cut.
+  // Compendium's two gaps, 10 and 11 columns wide: narrower than 2 x FE, so each takes a cut
+  // with a 5-column crossfade (COMPENDIUM_FE).
   Object.freeze({ x0: 1027, x1: 1037 }),
   Object.freeze({ x0: 1176, x1: 1187 }),
   Object.freeze({ x0: 1219, x1: 1250 }),
@@ -189,29 +197,34 @@ export const WOOD_RUNS = Object.freeze([
 ]);
 
 /**
- * THE CUT TABLE (full arrow). Each cut is a column of plain wood with FE columns of plain
- * wood on both sides; `shares` is how much of the extra width the slot there takes. Two per
- * painted word beside its bindings (so a word's hit region widens by its own slots), none
- * for Compendium (its gaps are too narrow), and a double share before the blank plate. These
- * are the eleven columns the kit's canvas prototype rendered seamlessly.
- * @type {ReadonlyArray<Readonly<{ x: number, shares: number }>>}
+ * Compendium's crossfade width: its two plain-wood gaps are 10 and 11 columns, so a cut in
+ * each has exactly 5 columns of wood on both sides (about 3 CSS px at S_MAX).
+ */
+export const COMPENDIUM_FE = 5;
+
+/**
+ * THE CUT TABLE (full arrow). Each cut is a column of plain wood with `fe` columns of plain
+ * wood on both sides (the crossfade width there). Two per painted word beside its bindings,
+ * one before and one after the lettering, so a word's hit region widens by its own slots;
+ * Compendium's two sit in its narrow gaps at COMPENDIUM_FE; the last is before the blank
+ * plate. The other ten are the columns the kit's canvas prototype rendered seamlessly.
+ * @type {ReadonlyArray<Readonly<{ x: number, fe: number }>>}
  */
 export const CUTS = Object.freeze([
-  Object.freeze({ x: 558, shares: 1 }),
-  Object.freeze({ x: 657, shares: 1 }),
-  Object.freeze({ x: 713, shares: 1 }),
-  Object.freeze({ x: 825, shares: 1 }),
-  Object.freeze({ x: 881, shares: 1 }),
-  Object.freeze({ x: 982, shares: 1 }),
-  Object.freeze({ x: 1234, shares: 1 }),
-  Object.freeze({ x: 1350, shares: 1 }),
-  Object.freeze({ x: 1413, shares: 1 }),
-  Object.freeze({ x: 1516, shares: 1 }),
-  Object.freeze({ x: 1596, shares: 2 }),
+  Object.freeze({ x: 558, fe: FE }),
+  Object.freeze({ x: 657, fe: FE }),
+  Object.freeze({ x: 713, fe: FE }),
+  Object.freeze({ x: 825, fe: FE }),
+  Object.freeze({ x: 881, fe: FE }),
+  Object.freeze({ x: 982, fe: FE }),
+  Object.freeze({ x: 1032, fe: COMPENDIUM_FE }),
+  Object.freeze({ x: 1181, fe: COMPENDIUM_FE }),
+  Object.freeze({ x: 1234, fe: FE }),
+  Object.freeze({ x: 1350, fe: FE }),
+  Object.freeze({ x: 1413, fe: FE }),
+  Object.freeze({ x: 1516, fe: FE }),
+  Object.freeze({ x: 1596, fe: FE }),
 ]);
-
-/** Total shares across the full arrow's slots. */
-export const SHARES = CUTS.reduce((sum, cut) => sum + cut.shares, 0);
 
 /**
  * SLOT_TONE: the CSS brightness each slot's filler takes, keyed by cut column. The painting
@@ -225,8 +238,8 @@ export const SHARES = CUTS.reduce((sum, cut) => sum + cut.shares, 0);
  * @type {Readonly<Record<number, number>>}
  */
 export const SLOT_TONE = Object.freeze({
-  558: 1.047, 657: 1.027, 713: 1.044, 825: 1.014, 881: 1.035, 982: 1.019,
-  1234: 0.994, 1350: 0.955, 1413: 0.981, 1516: 0.923, 1596: 0.802,
+  558: 1.047, 657: 1.027, 713: 1.044, 825: 1.014, 881: 1.035, 982: 1.019, 1032: 1.050,
+  1181: 0.975, 1234: 0.994, 1350: 0.955, 1413: 0.981, 1516: 0.923, 1596: 0.802,
 });
 
 /**
@@ -248,7 +261,7 @@ export const LOGO_PLATE = Object.freeze({ x0: 128, x1: 505 });
 
 /**
  * THE HOVER GLOW's box: a word's lettering widened by GLOW_PAD columns on each side (still
- * inside its region and clear of every cut), or a plate, over band rows GLOW_ROWS.
+ * inside its region, and clipped at a cut: glowSpan), or a plate, over band rows GLOW_ROWS.
  */
 export const GLOW_PAD = 10;
 export const GLOW_ROWS = Object.freeze({ top: 4, bottom: 64 });
@@ -299,6 +312,44 @@ export const NAV_HIT = Object.freeze({
 });
 
 /**
+ * THE SECTIONS' PAINTED WIDTHS, strip px: NAV_HIT's six regions, binding to binding
+ * (121, 134, 124, 160, 145, 133).
+ * @type {ReadonlyArray<number>}
+ */
+export const SECTION_W = Object.freeze(Object.values(NAV_HIT).map((hit) => hit.x1 - hit.x0));
+
+/** The widest painted section: below the width that lifts every section to it, no slot opens. */
+export const SECTION_W_MAX = Math.max(...SECTION_W);
+
+/** The mean painted section, 817 / 6 strip px. */
+export const SECTION_W_MEAN = SECTION_W.reduce((sum, w) => sum + w, 0) / SECTION_W.length;
+
+/** The parts the extra width is laid in: one per section and one for the blank plate's slot. */
+export const PARTS = SECTION_W.length + 1;
+
+/**
+ * The extra width, strip px at the scale, that lifts every section to SECTION_W_MAX with the
+ * plate taking its part: PARTS x (160 - 817 / 6) = 166.83.
+ */
+export const EQUAL_EXTRA = PARTS * (SECTION_W_MAX - SECTION_W_MEAN);
+
+/**
+ * The slot at each cut of the full arrow, CSS px, for one part of the extra width (`part`)
+ * at scale s. Every section's width becomes T = (painted mean) x s + part, so each of its two
+ * slots takes (T - painted x s) / 2; the plate's cut (in no section) takes one part.
+ * @param {number} part
+ * @param {number} s
+ * @returns {number[]}
+ */
+export function fullSlots(part, s) {
+  const hits = Object.values(NAV_HIT);
+  return CUTS.map(({ x }) => {
+    const k = hits.findIndex((hit) => x > hit.x0 && x < hit.x1);
+    return k < 0 ? part : (part + (SECTION_W_MEAN - SECTION_W[k]) * s) / 2;
+  });
+}
+
+/**
  * NAV_WORD: the painted lettering inside each region (Create, Library, Realm, Compendium,
  * Gallery, About), measured as the columns carrying three or more ink pixels.
  * @type {Readonly<Record<string, Readonly<Span>>>}
@@ -311,6 +362,22 @@ export const NAV_WORD = Object.freeze({
   gallery: Object.freeze({ x0: 1250, x1: 1336 }),
   'about-what-this-is': Object.freeze({ x0: 1432, x1: 1502 }),
 });
+
+/**
+ * A word's hover-glow span, strip px: its lettering widened by GLOW_PAD columns on each side,
+ * but never past a cut, so the glow never stretches across a slot. Only Compendium's cuts sit
+ * that close (5 columns from its lettering), so only its pad is 5.
+ * @param {string} id - a NAV_HIT key
+ * @returns {Span}
+ */
+export function glowSpan(id) {
+  const { x0, x1 } = NAV_WORD[id];
+  const xs = CUTS.map((c) => c.x);
+  return {
+    x0: Math.max(x0 - GLOW_PAD, ...xs.filter((x) => x <= x0)),
+    x1: Math.min(x1 + GLOW_PAD, ...xs.filter((x) => x >= x1)),
+  };
+}
 
 /**
  * The lettering's rows: capitals [19, 41), descenders (the y of Library and Gallery, the p
@@ -395,7 +462,7 @@ export const slipFont = (s) => (s >= 0.55 ? 12 : s >= 0.4 ? 11 : 10);
  *   columns that box shows. fadeL and fadeR: the CSS px of fade at each end (0 for none).
  *   coreX and coreW: the part of the box that is not a crossfade.
  * @typedef {{ x: number, w: number, slot: number, phase: number, toneL: number, toneR: number }} Filler
- *   x and w: the opaque filler's box (the slot plus FE times s on both sides). slot: the
+ *   x and w: the opaque filler's box (the slot plus its cut's fe times s on both sides). slot: the
  *   slot's own width. phase: the tile's horizontal offset in CSS px. toneL and toneR: the
  *   brightness at its left and right ends (equal on the full arrow, SLOT_TONE of its cut).
  * @typedef {{
@@ -422,21 +489,23 @@ export const slipFont = (s) => (s >= 0.55 ? 12 : s >= 0.4 ? 11 : 10);
  */
 
 /**
- * The strip columns each composition shows, in order, the joins between them, and the cut
- * columns on each side of each join (for its tone).
+ * The strip columns each composition shows, in order, the joins between them, the cut
+ * columns on each side of each join (for its tone) and each join's crossfade width.
  * @param {'full' | 'compact'} mode
- * @param {number} share - CSS px per share (full) or the one slot's width (compact)
- * @returns {{ ranges: Array<[number, number]>, slots: number[], joins: Array<[number, number]> }}
+ * @param {number} share - CSS px per part (full) or the one slot's width (compact)
+ * @param {number} s
+ * @returns {{ ranges: Array<[number, number]>, slots: number[], joins: Array<[number, number]>, fes: number[] }}
  */
-function composition(mode, share) {
+function composition(mode, share, s) {
   if (mode === 'compact') {
     return {
       ranges: [[0, COMPACT_JOIN.left], [COMPACT_JOIN.right, STRIP_W]],
       slots: [share],
       joins: [[COMPACT_JOIN.left, COMPACT_JOIN.right]],
+      fes: [FE],
     };
   }
-  if (share <= 0) return { ranges: [[0, STRIP_W]], slots: [], joins: [] };
+  if (share <= 0) return { ranges: [[0, STRIP_W]], slots: [], joins: [], fes: [] };
   /** @type {Array<[number, number]>} */
   const ranges = [];
   let from = 0;
@@ -445,26 +514,41 @@ function composition(mode, share) {
     from = cut.x;
   }
   ranges.push([from, STRIP_W]);
-  return { ranges, slots: CUTS.map((cut) => cut.shares * share), joins: CUTS.map((cut) => [cut.x, cut.x]) };
+  return {
+    ranges,
+    slots: fullSlots(share, s),
+    joins: CUTS.map((cut) => [cut.x, cut.x]),
+    fes: CUTS.map((cut) => cut.fe),
+  };
 }
 
 /**
- * The full arrow's scale and per-share wood, from the page's clientWidth.
- *   - Below STRIP_W x S_MAX + SHARES x MIN_SHARE_PX: uncut, s = cw / 2133 (so s rises
- *     slightly past S_MAX, to about 0.611, before the first slot opens).
- *   - Up to (STRIP_W + SHARES x FILLER_W) x S_MAX: s = S_MAX and the extra width is shared.
- *   - Above: s grows again so that one share is exactly one filler tile (no single-share
- *     slot ever repeats the tile; with the 372-column tile S_MAX holds up to 3958.2 px).
+ * The CSS px per part at which the widest word slot is exactly one filler tile, per unit of
+ * scale: the narrowest section's slots are the widest, (2 x FILLER_W - (mean - narrowest))
+ * per part. (The plate's slot, one part, then stays under two tiles, as its old double share
+ * did.)
+ */
+const TILE_PART = 2 * FILLER_W - SECTION_W_MEAN + Math.min(...SECTION_W);
+
+/**
+ * The full arrow's scale and wood per part (one seventh of the extra width), from the page's
+ * clientWidth.
+ *   - Below (STRIP_W + EQUAL_EXTRA) x S_MAX (1379.9 px): uncut, s = cw / 2133 (so s rises
+ *     past S_MAX, to about 0.647, before the slots open: the six sections cannot be equal
+ *     without cutting into the widest one's painting).
+ *   - Up to (STRIP_W + PARTS x TILE_PART) x S_MAX (4340.9 px): s = S_MAX, and the extra
+ *     width is laid so the six sections are equal.
+ *   - Above: s grows again so that the widest word slot is exactly one filler tile.
  * @param {number} cw
  * @returns {{ s: number, share: number }}
  */
 export function fullScale(cw) {
-  const uncutBelow = STRIP_W * S_MAX + SHARES * MIN_SHARE_PX;
-  const tiledAbove = (STRIP_W + SHARES * FILLER_W) * S_MAX;
+  const uncutBelow = (STRIP_W + EQUAL_EXTRA) * S_MAX;
+  const tiledAbove = (STRIP_W + PARTS * TILE_PART) * S_MAX;
   if (cw < uncutBelow) return { s: cw / STRIP_W, share: 0 };
-  if (cw <= tiledAbove) return { s: S_MAX, share: (cw - STRIP_W * S_MAX) / SHARES };
-  const s = cw / (STRIP_W + SHARES * FILLER_W);
-  return { s, share: FILLER_W * s };
+  if (cw <= tiledAbove) return { s: S_MAX, share: (cw - STRIP_W * S_MAX) / PARTS };
+  const s = cw / (STRIP_W + PARTS * TILE_PART);
+  return { s, share: TILE_PART * s };
 }
 
 /**
@@ -493,8 +577,7 @@ export function layoutArrow({ clientWidth, full, short = false }) {
   /** @type {'full' | 'compact'} */
   const mode = full ? 'full' : 'compact';
   const { s, share } = full ? fullScale(width) : compactScale(width, short);
-  const { ranges, slots, joins } = composition(mode, share);
-  const ext = FE * s;
+  const { ranges, slots, joins, fes } = composition(mode, share, s);
 
   /** @type {Segment[]} */
   const segments = [];
@@ -504,25 +587,27 @@ export function layoutArrow({ clientWidth, full, short = false }) {
   const starts = [];
   let x = 0;
   ranges.forEach(([a, b], i) => {
-    const fadeL = i > 0 ? ext : 0;
-    const fadeR = i < ranges.length - 1 ? ext : 0;
+    const feL = i > 0 ? fes[i - 1] : 0;
+    const feR = i < ranges.length - 1 ? fes[i] : 0;
+    const fadeL = feL * s;
+    const fadeR = feR * s;
     starts.push(x);
     segments.push({
       x: x - fadeL,
       w: (b - a) * s + fadeL + fadeR,
-      from: a - (fadeL ? FE : 0),
-      to: b + (fadeR ? FE : 0),
+      from: a - feL,
+      to: b + feR,
       fadeL,
       fadeR,
       coreX: x,
       coreW: (b - a) * s,
     });
     x += (b - a) * s;
-    if (fadeR) {
+    if (i < ranges.length - 1) {
       const slot = slots[i];
       // A per-slot phase so neighbouring slots do not repeat the same knot at the same place.
       fillers.push({
-        x: x - ext, w: slot + 2 * ext, slot, phase: ((i * 67) % FILLER_W) * s,
+        x: x - fadeR, w: slot + 2 * fadeR, slot, phase: ((i * 67) % FILLER_W) * s,
         toneL: SLOT_TONE[joins[i][0]], toneR: SLOT_TONE[joins[i][1]],
       });
       x += slot;
@@ -567,8 +652,11 @@ export function layoutArrow({ clientWidth, full, short = false }) {
   const glowNav = {};
   if (full) {
     for (const [id, span] of Object.entries(NAV_HIT)) nav[id] = rect(span, 0, bandPx);
-    for (const [id, span] of Object.entries(NAV_WORD)) {
-      glowNav[id] = rect({ x0: span.x0 - GLOW_PAD, x1: span.x1 + GLOW_PAD }, GLOW_ROWS.top, glowH);
+    for (const id of Object.keys(NAV_WORD)) {
+      // A glow clipped at a cut ends where the column before it ends, before the slot.
+      const span = glowSpan(id);
+      const left = mapX(span.x0);
+      glowNav[id] = { x: left, y: GLOW_ROWS.top * s, w: mapX(span.x1 - 1) + s - left, h: glowH };
     }
   }
 
