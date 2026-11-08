@@ -317,7 +317,8 @@ describe('the corpus loaders — fail-closed, and counted against the probe', ()
     // 2811 -> 2812 at LANDING-R2 helper G2 (the chair's 06:5x DS-CND-1 boom line (ODQ §934.105, ruling (2)): ARCHETYPE: boom v4 `[street · crisis: any]`) +1.
     // WIRING W3 (2026-11-07), C1-C6 said in DS-POW-5/-6 (+8 pools, +19 variants): 2812 -> 2831.
     // WIRING W3 second seat (2026-11-07), the owner's style law over DS-POW-1 (the #23 tier twins, Endorsed v5 and Legitimacy Crisis v5, +2 variants): 2831 -> 2833.
-    expect(leaves.length + causal.length).toBe(2833);
+    // W3 POW fourth seat (2026-11-08): DS-POW-1 governanceFractured `[newcomer]` v5 (STYLE-AUDIT §2a #24), +1: 2833 -> 2834.
+    expect(leaves.length + causal.length).toBe(2834);
     // WIRING W3 (2026-11-07), C1-C6 said in DS-POW-5/-6 (+8 pools, +19 variants): 787 -> 795.
     expect(new Set([...leaves, ...causal].map((e) => e.poolId)).size).toBe(795);
     expect(new Set(leaves.map((e) => e.block)).size).toBe(68);
@@ -336,7 +337,8 @@ describe('the corpus loaders — fail-closed, and counted against the probe', ()
     // 2122 -> 2123 at LANDING-R2 helper G2 (the chair's 06:5x DS-CND-1 boom line (ODQ §934.105, ruling (2)): ARCHETYPE: boom v4 `[street · crisis: any]`) +1.
     // WIRING W3 (2026-11-07), C1-C6 said in DS-POW-5/-6 (+8 pools, +19 variants): 2123 -> 2142.
     // WIRING W3 second seat (2026-11-07), the owner's style law over DS-POW-1 (the #23 tier twins, Endorsed v5 and Legitimacy Crisis v5, +2 variants): 2142 -> 2144.
-    expect(joined.length).toBe(2144);
+    // W3 POW fourth seat (2026-11-08): DS-POW-1 governanceFractured `[newcomer]` v5, +1 joined row: 2144 -> 2145.
+    expect(joined.length).toBe(2145);
     expect(unjoined).toEqual([]);
     // The compact-row grammar (a whole pool on one bullet line, 225 variants) carries no
     // per-row address, so not every leaf variant has an annex line. That gap is the ADDRESS
@@ -344,7 +346,8 @@ describe('the corpus loaders — fail-closed, and counted against the probe', ()
     expect(leafLines.size).toBeLessThan(leaves.length);
     // WIRING W3 (2026-11-07), C1-C6 said in DS-POW-5/-6 (+8 pools, +19 variants): 2123 -> 2142.
     // 2142 -> 2144 at WIRING W3's second seat (2026-11-07): the #23 tier twins are addressed lines.
-    expect(leafLines.size).toBe(2144); // 2121 -> 2122 at the same cause: the new line is addressed; 2122 -> 2123 at G2's boom v4, likewise
+    // 2144 -> 2145 at W3 POW's fourth seat (2026-11-08): DS-POW-1 governanceFractured `[newcomer]` v5 is an addressed line.
+    expect(leafLines.size).toBe(2145); // 2121 -> 2122 at the same cause: the new line is addressed; 2122 -> 2123 at G2's boom v4, likewise
   });
 });
 
@@ -433,8 +436,10 @@ describe('THE ANTI-VACUITY GUARD — the walker must fail on the corpus it ships
       // 5326 -> 5361 at WIRING W3 (2026-11-07): the C1-C6 pools in DS-POW-5/-6 sit above it.
       // 5361 -> 5363, re-addressed by its text ("the same trades exempt"): the second seat of WIRING W3 (2026-11-07),
       // the #23 tier twins (DS-POW-1 Endorsed v5, Legitimacy Crisis v5) sit above it.
-      .find((row) => row.line === 5363);
-    expect(annexRow, 'RECEIPT_POOLS_DOSSIER_STATE.md:5363 did not load').toBeTruthy();
+      // 5363 -> 5364, re-addressed by its text ("the same trades exempt"): W3 POW's fourth seat (2026-11-08),
+      // DS-POW-1 governanceFractured `[newcomer]` v5 sits above it.
+      .find((row) => row.line === 5364);
+    expect(annexRow, 'RECEIPT_POOLS_DOSSIER_STATE.md:5364 did not load').toBeTruthy();
     expect(walkEntry(annexRow, withEntryContext(base, {})).fails.map((f) => f.arm))
       .toContain('exemption on a null column');
   });
@@ -484,14 +489,16 @@ describe('THE ANTI-VACUITY GUARD — the walker must fail on the corpus it ships
     const { joined } = joinAnnexToLeaves(loadStateAnnex(), leaves);
 
     // ⛔ THE ANCHOR §2.4.1 NAMES DOES NOT FIRE, AND THAT IS REPORTED RATHER THAN PATCHED.
-    // `RECEIPT_POOLS_DOSSIER_STATE.md:2256` is the `[counterforce]` turtling row under an
+    // `RECEIPT_POOLS_DOSSIER_STATE.md:2257` is the `[counterforce]` turtling row under an
     // `economicBase: extraction` header (SITTING A5). Measured at this tip, against every
     // value of the provenance flag, it fires NO arm of this walker: its defect is a pool-key
     // SCOPE fault (a military-doctrine sentence under an economic-base key — R-DA-19), and
     // this walker carries no scope arm. So it cannot serve as a C3-lexical anchor, and the
     // roster's fifth entry is NOT-EXECUTABLE with its reason rather than silently absent.
-    const row = joined.find((r) => r.line === 2256);
-    expect(row, 'RECEIPT_POOLS_DOSSIER_STATE.md:2256 did not load').toBeTruthy();
+    // 2256 -> 2257, re-addressed by its text (the turtling row): W3 POW's fourth seat (2026-11-08), DS-POW-1
+    // governanceFractured `[newcomer]` v5 sits above it.
+    const row = joined.find((r) => r.line === 2257);
+    expect(row, 'RECEIPT_POOLS_DOSSIER_STATE.md:2257 did not load').toBeTruthy();
     for (const eventProvenance of [true, false]) {
       expect(walkEntry(row, withEntryContext(base, { eventProvenance })).fails).toEqual([]);
     }

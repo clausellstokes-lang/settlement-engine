@@ -179,7 +179,8 @@ describe('the composer — the corpus loads, and the merge is legal', () => {
     // 2343 -> 2344 at LANDING-R2 helper G2 (the chair's 06:5x DS-CND-1 boom line (ODQ §934.105, ruling (2)): ARCHETYPE: boom v4 `[street · crisis: any]`) +1.
     // WIRING W3 (2026-11-07), C1-C6 said in DS-POW-5/-6 (+8 pools, +19 variants): 2344 -> 2363.
     // WIRING W3 second seat (2026-11-07), the owner's style law over DS-POW-1 (the #23 tier twins, Endorsed v5 and Legitimacy Crisis v5, +2 variants): 2363 -> 2365.
-    expect(SHIPPED_POOLS.reduce((n, row) => n + row.pool.length, 0), 'variants').toBe(2365);
+    // W3 POW fourth seat (2026-11-08): DS-POW-1 governanceFractured `[newcomer]` v5 (STYLE-AUDIT §2a #24), +1: 2365 -> 2366.
+    expect(SHIPPED_POOLS.reduce((n, row) => n + row.pool.length, 0), 'variants').toBe(2366);
   });
 });
 
@@ -339,7 +340,9 @@ describe('⭐ THE BASE-SIDE SYNTHESIS — every recorded cell, against the compo
     //     coordinates apart. The chair's ruling named this pool as the cause; the measurement
     //     moved the row to DS-POW-1, and the record says so.
     const DECLARED_APART = {
-      'DS-POW-1 :: governanceFractured true': { cells: 72, coordinates: ['vid 3 / index 2'] },
+      // W3 POW fourth seat (2026-11-08, STYLE-AUDIT §2a #24): the pool gained its player face's fourth vantage,
+      // `[newcomer]` v5 (vid 4); the same 72 player cells now draw it, at vid 4 / index 3 (was vid 3 / index 2).
+      'DS-POW-1 :: governanceFractured true': { cells: 72, coordinates: ['vid 4 / index 3'] },
     };
     /** @type {Record<string, { cells: number, coordinates: string[] }>} */
     const measuredApart = {};

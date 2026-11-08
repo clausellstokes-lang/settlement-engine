@@ -207,7 +207,8 @@ describe('GUARD THE GUARD — the inputs this file judges are the real ones', ()
     // 2343 -> 2344 at LANDING-R2 helper G2 (the chair's 06:5x DS-CND-1 boom line (ODQ §934.105, ruling (2)): ARCHETYPE: boom v4 `[street · crisis: any]`) +1.
     // WIRING W3 (2026-11-07), C1-C6 said in DS-POW-5/-6 (+8 pools, +19 variants): 2344 -> 2363.
     // WIRING W3 second seat (2026-11-07), the owner's style law over DS-POW-1 (the #23 tier twins, Endorsed v5 and Legitimacy Crisis v5, +2 variants): 2363 -> 2365.
-    expect(corpus.length, 'the shipped state corpus').toBe(2365);
+    // W3 POW fourth seat (2026-11-08): DS-POW-1 governanceFractured `[newcomer]` v5 (STYLE-AUDIT §2a #24), +1: 2365 -> 2366.
+    expect(corpus.length, 'the shipped state corpus').toBe(2366);
     // WIRING W3 (2026-11-07), C1-C6 said in DS-POW-5/-6 (+8 pools, +19 variants): 709 -> 717.
     expect(census.rows.length, 'the committed wiring census').toBe(717);
     expect(Object.keys(DOSSIER_RELATIONS).length, 'the committed relation leaf').toBe(165);
@@ -469,7 +470,10 @@ describe('A0b — the text claims every declared field and no other', () => {
     // crimeIsGovt 6, stateCrime 9, stateCrime heavy 9, merchantArmy 6, merchantCriminalBlur 8, secularBrutalism 12,
     // GM ADVISORY: the commander 2 (`power.factionRelationships`). The four over-claims the same pools first carried
     // ("criminal"/"merchant" read as merchantCriminalBlur) were CURED in the lines, not owed: 71 -> 67.
-    const UNDER_CLAIM_OWED = 114;
+    // 114 -> 116 OWED at W3 POW's fourth seat (2026-11-08, STYLE-AUDIT §2a #24): DS-POW-1 governanceFractured's
+    // `[newcomer]` v5 inherits its pool's per-line debt as v1-v4 do (the pool's declared reads `legitimacy` and
+    // `legitimacy.governanceFractured`, unclaimed by name; 1396 -> 1398 measured, both new under-claims on that line).
+    const UNDER_CLAIM_OWED = 116;
     const UNDER_CLAIM_CEILING = UNDER_CLAIM_BASE + UNDER_CLAIM_OWED;
     // ⛔ THE OVER-CLAIM CEILING, RE-KEYED THE SAME WAY (census-1b unit A (d), 427f7b112). From that
     // commit the wiring census records `settlement` among DS-GEN-17's fieldsRead (the roster key
@@ -516,7 +520,7 @@ describe('A0b — the text claims every declared field and no other', () => {
       + `\n  over-claims          ${tally['over-claim']}   ceiling ${OVER_CLAIM_CEILING}`
       + ` = ${OVER_CLAIM_BASE} + ${OVER_CLAIM_OWED} OWED (427f7b112: DS-GEN-17's name slot)`
       + `\n  under-claims         ${tally['under-claim']}   ceiling ${UNDER_CLAIM_CEILING}`
-      + ` = ${UNDER_CLAIM_BASE} + ${UNDER_CLAIM_OWED} OWED (R-F5 26 + the pool census 34 + DS-GEN-17 PROVISIONED v3 1 + DS-CND-1 boom v4 1 + W3 POW DS-POW-5/-6 FLAG and advisory pools 52: the census wave buys them back)`
+      + ` = ${UNDER_CLAIM_BASE} + ${UNDER_CLAIM_OWED} OWED (R-F5 26 + the pool census 34 + DS-GEN-17 PROVISIONED v3 1 + DS-CND-1 boom v4 1 + W3 POW DS-POW-5/-6 FLAG and advisory pools 52 + W3 POW DS-POW-1 newcomer v5 2: the census wave buys them back)`
       + `\n  implicit negations   ${tally['implicit-negation']}`
       + `\n  absences claimed by silence (R-F4, REPORT) ${silent}`
       + `\n  NOT-EXECUTABLE reads ${notExecutable}   pools carrying a finding ${pools.size}\n`);

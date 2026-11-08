@@ -23,7 +23,7 @@
   "totals": {
     "pools": 717,
     "blocks": 68,
-    "variants": 2365,
+    "variants": 2366,
     "resolved": 349,
     "unresolved": 368,
     "resolvedWithPredicate": 212,
@@ -26620,8 +26620,8 @@
         "seat"
       ],
       "hasBag": true,
-      "variants": 4,
-      "grammars": 3,
+      "variants": 5,
+      "grammars": 4,
       "predicate": [
         {
           "field": "legitimacy.governanceFractured",
@@ -44937,8 +44937,8 @@
       "pools": [
         "DS-POW-1 :: governanceFractured true"
       ],
-      "variants": 4,
-      "grammars": 3,
+      "variants": 5,
+      "grammars": 4,
       "blocks": [
         "DS-POW-1"
       ]
@@ -57265,7 +57265,7 @@
         "legitimacy.governanceFractured"
       ],
       "readingFunction": "legitimacyLensPoolKey",
-      "count": "4 variant(s) · 3 grammar(s) · slots {seat, settlement}"
+      "count": "5 variant(s) · 4 grammar(s) · slots {seat, settlement}"
     },
     {
       "tier": "COVERED",

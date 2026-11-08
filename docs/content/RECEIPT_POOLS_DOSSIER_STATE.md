@@ -2014,6 +2014,7 @@ common state.
 2. `[visitor]` Business taken to the {seat} at {settlement} goes nowhere; the same business taken to somebody with no title at all is settled that afternoon.
 3. `[street · dm-only]` {settlement} has a governing body and it has a government, and they are not the same set of people. The town knows which one to approach and does not say so aloud.
 4. `[unfolding]` The {seat} at {settlement} still sits and still makes announcements, but fewer people act on them each week.
+5. `[newcomer]` Newcomers to {settlement} are told early which door to knock on, and it is not the {seat}'s.
 
 ---
 
