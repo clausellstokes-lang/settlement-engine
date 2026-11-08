@@ -1810,11 +1810,11 @@ export const STRESS_ECONOMIC_EFFECTS = {
     label: 'Professional Rivalry',
     desc: pairProse('d', [
       { line: (r, s) =>
-        `${r.name} and ${s.name} compete for the same resource, position, or reputation. The competition is vigorous but bounded. Neither has crossed the line into genuine enmity. Yet.`, colour: true },
+        `${r.name} and ${s.name} want the same thing and compete hard for it, but neither has let it turn into hatred.`, colour: true },
       { line: (r, s) =>
-        `${r.name} and ${s.name} want the same thing and cannot both have it. The contest is conducted with scrupulous courtesy and total commitment.`, colour: true },
+        `Only one of ${r.name} and ${s.name} can come out ahead, and both know it. They stay polite and give no ground.`, colour: true },
       { line: (r, s) =>
-        `Every advance ${r.name} makes is answered by ${s.name} within the season; the rivalry has become its own institution, with rules neither wrote and both obey.`, colour: true },
+        `Every gain ${r.name} makes, ${s.name} answers within the season, and people here have learned to expect it.`, colour: true },
       { line: (r, s) =>
         `${r.name} and ${s.name} bid for the same contracts and sit at the same tables. Each counts the other's wins more carefully than their own.`, colour: true },
       { line: (r, s) =>
@@ -1843,12 +1843,10 @@ export const STRESS_ECONOMIC_EFFECTS = {
   mentor_legacy: {
     label: 'Mentor and Successor',
     desc: pairProse('d', [
+      { line: (r, s) => `${r.name} made ${s.name}'s career, and ${s.name} rarely says so.`, colour: true },
       { line: (r, s) =>
-        `${r.name} shaped ${s.name}'s career in ways that ${s.name} has not fully acknowledged. The debt is real; the gratitude is complicated.`, colour: true },
-      { line: (r, s) =>
-        `${s.name} stands where ${r.name} put them, by a ladder ${r.name} built and ${s.name} has since pulled up. Both remember it differently.`, colour: true },
-      { line: (r, s) =>
-        `What ${s.name} knows, ${r.name} taught (including, inconveniently, how to outmanoeuvre a teacher).`, colour: true },
+        `${s.name} owes their place to ${r.name} and has kept others from climbing the same way. The two of them remember it differently.`, colour: true },
+      { line: (r, s) => `${r.name} taught ${s.name} everything, including how to get the better of ${r.name}.`, colour: true },
       { line: (r, s) =>
         `${r.name} took ${s.name} in as an apprentice and taught them the trade, the clients, and the names worth knowing.`, colour: true },
       { line: (r, s) =>
@@ -1879,9 +1877,9 @@ export const STRESS_ECONOMIC_EFFECTS = {
       { line: (r, s) =>
         `${r.name} and ${s.name} each hold information or resources the other needs. They cooperate efficiently and neither trusts the other at all.`, colour: true },
       { line: (r, s) =>
-        `What ${r.name} knows would ruin ${s.name}; what ${s.name} holds would finish ${r.name}. On this foundation they have built an excellent working relationship.`, colour: true },
+        `${r.name} knows enough to ruin ${s.name}, and ${s.name} holds enough to finish ${r.name}, so the two of them work together very carefully.`, colour: true },
       { line: (r, s) =>
-        `${r.name} and ${s.name} deal with each other like men carrying lit lanterns in a powder store, carefully, and with great mutual politeness.`, colour: true },
+        `${r.name} and ${s.name} deal with each other slowly and politely, each knowing one slip could ruin them both.`, colour: true },
       { line: (r, s) =>
         `${r.name} and ${s.name} trade favours on a strict count. Neither has ever been more than one favour ahead.`, colour: true },
       { line: (r, s) =>
@@ -1910,11 +1908,11 @@ export const STRESS_ECONOMIC_EFFECTS = {
     label: 'Pragmatic Alliance',
     desc: pairProse('d', [
       { line: (r, s) =>
-        `${r.name} and ${s.name} work together because the alternative (working against each other) is worse for both. The alliance holds as long as the calculation holds.`, colour: true },
+        `${r.name} and ${s.name} work together because fighting each other would cost them both more, and both of them know it.`, colour: true },
       { line: (r, s) =>
-        `${r.name} and ${s.name} are allies by arithmetic: each has counted the cost of the other as an enemy and found it too high. The friendship is warm, public, and entirely conditional.`, colour: true },
+        `${r.name} and ${s.name} are allies because each has reckoned what the other would cost as an enemy. The friendship is warm and public, and it lasts only while that reckoning holds.`, colour: true },
       { line: (r, s) =>
-        `The alliance between ${r.name} and ${s.name} was born of a shared threat and has outlived it; both are quietly recalculating what it is now for.`, colour: true },
+        `${r.name} and ${s.name} joined against a threat that has since passed, and each is now asking what the alliance is still for.`, colour: true },
       { line: (r, s) => `${r.name} and ${s.name} share a council bloc and a list of enemies. They do not share their plans.`, excludes: ["ruler: lord","ruler: occupier"] },
       { line: (r, s) => `${r.name} and ${s.name} back each other in public and check each other's work in private.`, colour: true },
       { line: (r, s) =>
@@ -1944,7 +1942,7 @@ export const STRESS_ECONOMIC_EFFECTS = {
     label: 'Genuine Respect',
     desc: pairProse('d', [
       { line: (r, s) =>
-        `${r.name} and ${s.name} have earned each other's regard through demonstrated competence. They don't agree on everything but they trust each other's judgment within their respective domains.`, colour: true },
+        `${r.name} and ${s.name} have each watched the other do good work. They argue, but each trusts the other's judgment in their own field.`, colour: true },
       { line: (r, s) =>
         `${r.name} and ${s.name} disagree often and trust completely. Each has watched the other be right at cost, and neither forgets it.`, colour: true },
       { line: (r, s) =>
@@ -1977,12 +1975,11 @@ export const STRESS_ECONOMIC_EFFECTS = {
   old_debt: {
     label: 'Outstanding Debt',
     desc: pairProse('d', [
+      { line: (r, s) => `${r.name} owes ${s.name} a great deal, and neither has ever said so aloud.`, colour: true },
       { line: (r, s) =>
-        `${r.name} owes ${s.name} something significant: a favour, a secret kept, a crisis managed. The debt has never been formally acknowledged. It doesn't need to be.`, colour: true },
+        `Years ago ${s.name} did ${r.name} a favour too large to repay, and ${r.name} has been paying it back in small ways ever since.`, colour: true },
       { line: (r, s) =>
-        `Years ago ${s.name} did for ${r.name} the kind of favour that cannot be repaid, only serviced. ${r.name} has been servicing it ever since.`, colour: true },
-      { line: (r, s) =>
-        `Between ${r.name} and ${s.name} stands an old kindness with the structure of a mortgage. Neither names it; both know the balance to the penny.`, colour: true },
+        `${r.name} owes ${s.name} for an old kindness. Neither mentions it, and both know exactly how much is still owed.`, colour: true },
       { line: (r, s) =>
         `${s.name} paid ${r.name}'s bail eleven years ago and has never mentioned it. ${r.name} mentions it to no one.`, colour: true },
       { line: (r, s) =>
@@ -2010,11 +2007,11 @@ export const STRESS_ECONOMIC_EFFECTS = {
     label: 'Family Complication',
     desc: pairProse('d', [
       { line: (r, s) =>
-        `${r.name} and ${s.name} are connected by blood or marriage in a way that neither finds professionally convenient. The connection is known; its implications are not discussed.`, colour: true },
+        `${r.name} and ${s.name} are family, which suits neither of their careers. Everyone knows it, and nobody mentions it.`, colour: true },
       { line: (r, s) =>
         `Blood ties ${r.name} to ${s.name} in a way that neither career can afford; they meet at funerals and weddings and pretend the rest of the year does not exist.`, colour: true },
       { line: (r, s) =>
-        `${r.name} and ${s.name} share a family and avoid sharing anything else; every professional dealing between them is conducted as though the relation were a rumour.`, colour: true },
+        `${r.name} and ${s.name} are family, but in business they deal with each other as if they were not related.`, colour: true },
       { line: (r, s) =>
         `${r.name} married into ${s.name}'s family. ${s.name} opposed the match and still calls ${r.name} by surname.`, colour: true },
       { line: (r, s) =>
@@ -2047,7 +2044,7 @@ export const STRESS_ECONOMIC_EFFECTS = {
       { line: (r, s) =>
         `Something happened between ${r.name} and ${s.name} years ago that neither has forgotten. They function professionally. They do not forgive.`, colour: true },
       { line: (r, s) =>
-        `${r.name} and ${s.name} were something to each other once (partners, friends, perhaps more), and the wreck of it is the one subject on which both are permanently silent.`, colour: true },
+        `${r.name} and ${s.name} were close once, and whatever broke between them is the one subject neither will discuss.`, colour: true },
       { line: (r, s) =>
         `The quarrel between ${r.name} and ${s.name} is old enough that no one else remembers the cause. They remember. They have simply stopped explaining.`, colour: true },
       (r, s) =>
