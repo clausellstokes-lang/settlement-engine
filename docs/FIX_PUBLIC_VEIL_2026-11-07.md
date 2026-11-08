@@ -16,7 +16,10 @@
 > - `f98b50cc4` the registers through their doors
 > - `c5d72d80a` step 2, migration 206 and the twin
 > - `5c200ba2f` step 3, the edge prompt and the scripts sweep
-> - this record
+> - `bf729b4b8` this record, born with its proof pending
+> - `e78d0cc67` the cure the proof run convicted (§5)
+> - `24ac7fbcc` / `1d8e6e60d` the registers through their doors at the cured tip
+> - this record's last edit
 >
 > No golden was re-recorded (that is the merge seat's job).
 
@@ -119,12 +122,12 @@ These were measured by the stage instruments over the parent `0c4cbbc86` (a clea
 
 | surface | moved | where |
 |---|---|---|
-| generator golden master (`golden-master-stage.mjs --against`) | **525 / 525** | every settlement: every one has a face. thorp 84 · hamlet 84 · village 84 · town 105 · city 84 · metropolis 84. sha256 `c7c11b0b…` → `7c4f9bc4…` (this measurement predates the membership bit; the per-entry bit adds the key on memberships of the same 525 rows) |
+| generator golden master (`golden-master-stage.mjs --against`) | **525 / 525** | every settlement: every one has a face. thorp 84 · hamlet 84 · village 84 · town 105 · city 84 · metropolis 84. sha256 `c7c11b0b…` → `5ead1eb2…` at the final tip `1d8e6e60d` (both bits) |
 | espionage fence (`refence.mjs --against`) | **360 / 360** | every row, 60 a tier |
 | herald desk (`herald-stage.mjs`) | **0 / 470** | byte-identical |
 | prose manifest (`prose-manifest-cells.mjs`, base and tip, `prose-manifest-diff.mjs`) | **0 / 1,050** | 68,780 cells UNCHANGED, 0 replaced, 0 re-indexed, 0 wording-only: no text moves |
 
-**The per-row delta.** For each of the 525, the record was generated at the base and at the tip, the tip's every `veiled` key was deleted, and the JSON was compared: **525 / 525 byte-identical** (14,366 bits stripped, institution bits only). This was measured at the institution-bit tree; the membership bit is the same kind of key on the same cards. So the bit is the whole move: no draw, no order and no other field changes.
+**The per-row delta.** For each of the 525, the record was generated at the base and at the final tip, every `veiled` key on a card's institution and on its memberships was deleted, and the JSON was compared: **525 / 525 byte-identical** (31,481 bits stripped = 14,366 institution bits + 17,115 membership bits). So the bits are the whole move: no draw, no order and no other field changes. The fence (360 / 360, corpus sha `407609f4…` → `57795e27…`), the herald (0 / 470) and the prose (0 / 1,050, 68,780 cells unchanged) were re-measured at the final tip with the same figures as above.
 
 **The arms that hash the goldens are red by this unsigned cause, as the brief foresees:** `tests/property/generatorGoldenMaster`, `tests/domain/worldFactRederive` A7 (the committed golden's stride, 7 of 7), and the fence. They are re-recorded by the merge seat, as every car's are. The edge-shared bundles (`supabase/functions/_shared/*Bundle.js`) are stale by the changed `src/` files (`aiGrounding`, `aiCharter`, `aiOutputSchema`, `engine`). As FIX-FOOD-ISOLATION recorded, the merge seat re-emits them at the final tip (`build:edge-shared`). At the base itself, 9 of these edge tests are already red (§5).
 
@@ -210,7 +213,7 @@ Everything else is 205's byte for byte: `npc_allowed`, `public_toplevel`, the de
 
 **The rehearsal receipt.** `npm run ops:migrations:rehearse -- --json`, a read-only plan, at the step-2 tree:
 - exit 0; applied 203 → repo 206; **3 pending** (204, 205, 206);
-- wave 206 sha256 `9c646965ff0497b870f3beac87700c2e1bfc48d8bb8e246ec1cf67d10cef0342`, rollback documented-manual-reversal;
+- wave 206 sha256 `9c646965…` at step 2; **at the final tip, after the cure of §5: `1fe90bebe314029eb85a71cc6fac328b2b89ee363381fcf7d3da28b2b1cc509e`**, rollback documented-manual-reversal;
 - 205's sha is unchanged (`d6691303…`).
 
 The `--execute` receipt was not made, for FIX-EXPORT-KEYS's reason: it needs the attended production-shaped clone of the runbook. The SQL is executed in pglite.
@@ -268,6 +271,129 @@ The sweep is a grep of `supabase/` and `scripts/` for `factionAffiliation`, `sec
 
 With `contracts`, `aiGroundingContract` and `factionNamePrecedenceScan`: 318 / 318. The audit scripts smoke-run exit 0 (`crime-signal-writers` 0..3, `religion-coup-soak`).
 
-## 5. Step 4: the proof
+## 5. Step 4: the proof (at the final tip `1d8e6e60d`)
 
-FIGURES-PENDING: the three-directory gate (tip and base), the importer suites, the migration tests, and the build land in the next commit.
+**The first proof run convicted the lane, and the cure is `e78d0cc67`.** The three-directory gate at `5c200ba2f` had five reds beyond the base's:
+
+1. **`observedShapeReaders.walker`** ×2: a NEW `institution on settlement`. The twin's inline bit reader (`npc.institution` in `publicSafe.js`) was grounded by the register's legacy-leaf detector to the settlement shape, although the key is written, and observed, on the NPC card. Moving the same read into an import-free leaf, then into `cardPowers.js` and into `cardVeil.js`, under four names and three spellings, reproduced it every time. The one read that grounds to the card is `cardPowers.js :: cardInstitutionOf`'s. So the bit is now read THROUGH it: its return gains `veiled`, and the reader `cardInstitutionVeilOf` lives beside it and is re-exported by `cardVeil.js`.
+   - **One consequence was made exact on both sides.** An "institution record" is what `cardInstitutionOf` reads: an object of kind `house` / `power` with a key or a name. A malformed object is no record, so it gets 205's projection, like a legacy string. 206's `house_is_object` says the same. No writer produces such an object, and a new pglite proof pins the parity.
+   - **For the register's owners (PLAUSIBLE):** the detector's grounding of a bare `.institution` read is a false positive in any file it does not ground as a card. This is recorded, not changed.
+2. **`ruinFilterRoster.walker`** ×2: `cardVeil.js :: veiledOfInstitution` reads `.institutions` by name to apply the predicate. It is EXEMPT as a name-lookup with its reason, and the reader count goes 101 → 102.
+3. **`tuningRegister.walker`**: the dependents moved (`cardVeil.js` now imports the two tuning tables the predicate reads). It was refrozen through the ritual (`24ac7fbcc`): no value moved.
+
+| run | result |
+|---|---|
+| `sh scripts/gate-tail.sh npx vitest run tests/security tests/lint tests/scripts` at the tip | 8 failed / 357 passed / 1 skipped files (366); **13 failed** / 5,020 passed / 1 skipped tests; exit 1 |
+| the same at the base `0c4cbbc86` (a clean worktree) | 9 failed / 356 passed / 1 skipped files; 14 failed / 5,008 passed / 1 skipped tests |
+| tip reds NOT red at the base | **0** (`comm -23` of the two failing-test lists is empty) |
+| base reds cured at the tip | 1: `writerReach.walker` "the surfaceReach grammar round-trips" (the writer-reach `--write`, §6) |
+| the importers of `publicSafe` / `toPublicSafe` / `galleryVeil` / `cardVeil` outside the three directories (32 files: FIX-EXPORT-KEYS's 30, now including the two people suites) | **724 / 724, exit 0** |
+| the migration tests (12 files: `migrationSequenceAll.pglite`, `migrationRollbackDiscipline`, `migrationSearchPathPin`, `migrationGrantPosturePin`, `migrationContiguity`, `migrationAppliedHead`, `migrationOrdering`, `migrationRefIntegrity.meta`, `migration062Authz`, `migrations100to102`, `migrations104to106`, `migrationRehearsal`) | **100 / 100, exit 0** |
+| tests/ops + tests/docs (at step 2) | 266 / 266: `architectureFreshness`, red at the base since 204, is green |
+| `npm run build` | exit 0 at the tip and at the base |
+
+**The red list at the tip, attributed: every one is the base's** (FIX-EXPORT-KEYS's list, less the writer-reach red this lane cured):
+- `domainAnyCastBaseline` 5
+- `institutionTable` 2
+- `negativeAssertionAnchor` 2
+- `proseWiringCensus` 2
+- `mutationCoverageManifest` 1
+- `sovereigntyLightingContract` 1
+- `ledgerCitationIntegrity` and `provenanceMap`: ENVIRONMENT (no local `refs/heads/review-fixes-2026-07-08`)
+
+**Outside the three directories, the reds this lane owns by its unsigned cause** (§1): the golden-hashing arms (`generatorGoldenMaster`, `worldFactRederive` A7, the fence) and the edge-shared bundles' freshness (stale by the changed `src/`, 9 of those edge tests red at the base already). All are the merge seat's re-record. `tierNounKeptRulings` and the other base reds of `tests/domain` / `tests/generators` (`densityLaw` ×4, `x46NpcBand`, `characterConsumers` ×3) are the base's: the same tests, run at `0c4cbbc86`.
+
+**The build's bytes**, compared by chunk name with hashes stripped. 18 chunks moved, and the dist total grew from 34,901,672 to 34,910,847 bytes (**+9,175**):
+
+| chunk | bytes | why |
+|---|---|---|
+| `generation.worker`, `customContentPreview.worker` | +3,586 each | the engine's copy of `cardVeil.js` and the stamping writers |
+| `engine-core` | +1,495 | the same, in the main engine |
+| `data` / `data-lazy` | +1,525 / −1,535 | `informationBrokerageTuning.js` now reached eagerly through `cardVeil.js` (the predicate's import, moved out of the lazy `galleryVeil` path) |
+| `publicSafe` | +442 | the twin's per-row rule and its import of `cardPowers.js` |
+| `gallery` | −265 | the predicate left `galleryVeil.js` |
+| `settlementPendingEdits` | +164 | the edit layer's stamp |
+| `engine`, `state`, `settlement-normalize`, and the rest | ≤ +129 each | small closure moves |
+
+No ceiling is raised and none is touched. The build gate exited 0, and none of its checks reported a ceiling.
+
+## 6. Registers
+
+- **The observed-shape register.** The rung 31 → 32 (§2), then the plain `--write` re-stamps at `dded069c1` (`f98b50cc4`) and at the cured tip (`1d8e6e60d`). Each moved provenance only; the inventory stays at 2,193 / 1,545 / 425 files, the bank at 77 / 51, the literal agrees. The plain check is exit 0 at the tip. Nothing is declared and nothing is exempted.
+- **Writer reach.**
+  - `--write` at `dded069c1` (`f98b50cc4`): cohort 1,397 → 1,397; judged 11,991 → 11,994. The lane's three identities are `veiled on institution`, `veiled on memberships` and `hidden on factions`, each LIT or LIT-NAME.
+  - The car's drift since `1994a2ef5` (closureSizes, scanStats.files, four `processingTags` reach strings), measured byte for byte by FIX-EXPORT-KEYS at its base, is folded in under the brief's word. That cures the base's writer-reach red.
+  - Re-stamped at `1d8e6e60d`.
+- **The legacy-reader walker**: green (`noLegacyFactionReaders.walker`).
+- **The ruin-filter roster**: `cardVeil.js` EXEMPT, 101 → 102.
+- **The tuning inventory**: refrozen through its ritual, dependents only (`24ac7fbcc`), and verified 75 / 75.
+- **The rehearsal manifest, DEPLOY.md, ARCHITECTURE.md, CURRENT_STATE.md**: §3.
+- **The dated roster**: this record, born dated. `byRule.dated` 105 → 106 with `_rosterGrowth2026-11-07-fix-public-veil`.
+- **Untouched**: the wiring census, the lighting census, the fork census, the freeze register, every golden fixture.
+
+## 7. Noticed (for the intake, not acted on)
+
+1. **The hidden power is already public by name.** `powerStructure.factions` is public whole, and its rows carry `hidden: true` and the infiltrator's description ("Its presence is not known to the settlement"). The SQL and the twin strip neither. This lane closes the FACE (the mint's title and its tie to the power) and the MEMBERSHIPS (who serves it), not the power's own row. Whether the hidden power's row should leave the public payload is a separate ruling. PLAUSIBLE that it should.
+2. **A face's public `id` spells its house** (§0's second finding).
+3. **The DM's ties eye stays client-side** (FIX-EXPORT-KEYS §3.4). For an open house, the anon `get_gallery_dossier` RPC now returns the face's `institution`. A DM who shut that card's ties eye removes it only in the client's `applyVeil`. This is the same posture every other tie (`relationships`) already has. It is recorded in 206's header, not changed.
+4. **`category` stays public** (the chair's ruling 1). On a criminal house's face it is the pool category `criminal`, so a public card still says "criminal" with no house named.
+5. **Two writers stamp no membership bit by design**: `factionRoles.js`'s synthesized leaders and `entities/npcs.js :: assignNpcToRole`. They write memberships on cards with no house record, so the public rule never publishes those memberships. If they ever give such a card a house, they must stamp.
+6. **The register's eleven unobserved stress types** (§2's table) are the owner's post-deploy queue.
+
+## 8. CONFIRMED vs PLAUSIBLE
+
+**CONFIRMED** (each read from a command's own exit code or output):
+- every count in §0 and §1 (the 525 and the 1,000, both bits, 0 absent, 0 disagreeing);
+- the generator moves and the per-row delta (525 / 525 identical, 31,481 bits);
+- the rung's figures and its plain check exit 0;
+- 206's proofs (24 / 24 at the cure) and red-first (8, then 2);
+- the SQL's fail-open caught and cured (`coalesce`);
+- the rehearsal plan's figures and wave 206's final sha256 `1fe90beb…`;
+- the tip's reds ⊆ the base's (0 tip-only);
+- the importers 724 / 724; the migration tests 100 / 100;
+- the build exit 0 and its byte table;
+- the edge prompt's re-point (3 / 3, 318 / 318 with the contracts).
+
+**PLAUSIBLE:**
+- That 206 applies cleanly in production. It is the same `create or replace` shape as 205 and runs in pglite and in `migrationSequenceAll`, but the attended clone `--execute` was not run.
+- That the observed-shape detector's grounding of a bare `.institution` read is a false positive of its name prior. This is concluded from the experiments in §5, not from a trace of the detector.
+- That §7.1 (the hidden power's own row) should leave the public payload. That is a ruling's to make.
+- That the face's public `id` (§0) matters as a leak, given §7.1.
+
+## 9. Merge notes (for the merge seats)
+
+- **The observed-shape register's rungs compose in order: the car's 31, then this lane's 32.** Rung 32 is cut on the car's genesis line (`aaa15f224` → `b61029f4d` → …), and its predecessor is the schema-31 register at `caba91879`. A merge that brings another schema-31 re-freeze must re-run this rung's two acts on the merged tip rather than resolve the register textually (MERGE-5AB's STOP is the precedent).
+- The goldens (`generator-golden-master.json`, the fence's constant, `worldFactRederive` A7's pinned sha) move by this UNSIGNED cause. Re-record them at the final tip under the merge's signed record.
+- The edge-shared bundles: `npm run build:edge-shared` at the final tip.
+- Writer reach's baseline already folds the car's drift (§6). Do not re-fold it.
+
+## 10. THE DEPLOY STEP (for the owner, in plain words)
+
+**What this changes in production.** The same one database function as 205: the one that cleans a settlement before anyone can see it in the public gallery. After it:
+- the face of a criminal house or of a hidden power shows only its name: no house, no title, no role, no powers;
+- the face of an ordinary house (the parish priest, the miller) shows its house, its title and the open powers it belongs to, so the institution card's face row and the NPC card's link work on public pages;
+- a membership in a hidden or criminal power is never shown.
+
+No table, no column and no row of anyone's data is touched.
+
+**Before the deploy, regenerate nothing.** Settlements generated before this client carry no veil bit, so 206 shows their faces with the bare name only (fail-closed). They regain their house and title on a public page once regenerated or re-saved by the new client.
+
+**When.** **206 goes in the SAME push as 205 and after it**, in the same migration train as FIX-EXPORT-KEYS's §9 step. The dry run lists **204, 205, 206**.
+- **Database first, then client (recommended).** This is safe at every moment. An old client's public pages show a car-born face's bare name (the server strips the title it used to send), which only hides.
+- **Client first, then database.** Also safe, but until 206 lands the server still sends every face's title, which is today's leak, for that window.
+
+**How**, from a clean checkout of the exact commit you are deploying, never the old main checkout:
+1. Optional, for release evidence: `npm run ops:migrations:rehearse`. It should show applied 203 → repo 206, 3 pending. Then the clone rehearsal in `docs/ops/MIGRATION_REHEARSAL_RUNBOOK.md`.
+2. `npx supabase@2.122.0 db push`. Its dry run should list exactly **204, 205 and 206** as pending. If it lists anything else, stop.
+3. In the same sitting, bump `supabase/applied-head.json` to **206** with what the push printed. Then `SUPABASE_MIGRATION_HEAD=206 node scripts/check-migration-head.mjs` should print `live head 206 == repo head 206`.
+4. Deploy the client on Vercel as usual. Then run `docs/ops/POST_DEPLOY_VERIFICATION_RUNBOOK.md`. A spot check: open a public gallery dossier of a freshly generated town with a thieves' guild. Its face shows a bare name; the parish priest shows "Pastor <name>" with a link to the church.
+
+Never run the CLI's suggested `migration repair --status reverted …`.
+
+**If it goes wrong (the rollback).** The database is forward-only.
+- **Database:** write a new migration that recreates 205's version of the function, which is exactly what 206's `@rollback` line says, and `db push` it. Nothing is lost: the function holds no data. The only effect of the rollback is that faces' titles are public again and no face's house is.
+- **Client:** revert the commit on master, or promote the last good deployment in Vercel (`docs/ops/DEPLOY_ROLLBACK_RUNBOOK.md` §1).
+
+## 11. The tip
+
+`lane/fix-public-veil-2026-11-07`, the commit carrying this file's last edit.
