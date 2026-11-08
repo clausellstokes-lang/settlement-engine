@@ -464,10 +464,17 @@ describe('EM-B2b — world facts by consequence: the route, the refusals and the
     // Record 6, PEOPLE-LAND SHIM OUT (docs/shift-records/2026-11-07-people-land-shim-out.json), from the stage at
     // 2981f23f6: the generator master 8dc527fd.. -> c7c11b0b.. (180 of 525 (thorp 12, hamlet 84, village 72, city 12)
     // rows); the prose manifest 86517b75.. -> ffc84348.. (312 of 1,050 rows).
+    // Then the integration landing (MERGE-CAR, ODQ §934.105, 2026-11-08), the law of the chain: one record per first-parent
+    // stage that moves a surface, restated here in the same act. Record A, the rung-2 landing's merge over the integration
+    // branch (docs/shift-records/2026-11-08-merge-car-a-rung2-composition.json), from the stage at 572c15018: the generator
+    // master c7c11b0b.. (carried, the car's) -> 6d651bde.. (525 of 525 rows) and the prose manifest ffc84348.. -> 1a6351f1..
+    // (1,050 of 1,050 rows against record 0b's post-state). Record B, the people car's merge (docs/shift-records/2026-11-08-
+    // merge-car-b-people-car-composition.json), from the stage at 8dff691f3: the generator master 6d651bde.. -> 9be37cae..
+    // (525 of 525 rows) and the prose manifest 1a6351f1.. -> f2d3410b.. (832 of 1,050 rows).
     expect(shaOfFile(GOLDEN), 'tests/fixtures/generator-golden-master.json moved')
-      .toBe('c7c11b0b81376930b074c1145bb40071a9b632848fae453361223e8be48db007');
+      .toBe('9be37cae1ba04e0c06ea01066364960c1ee01b82f0d13c7048ab6156b9f93f9c');
     expect(shaOfFile(PROSE_GOLDEN), 'tests/fixtures/dossier-prose-manifest-golden.json moved')
-      .toBe('ffc84348c4e30aa13abe28590c343984b606106e6ef0dd697924979417706a30');
+      .toBe('f2d3410b20c0b4757a48f03afd96598a643d861bd763c6a9172c5a466ef9728e');
 
     // AND THE REASON THEY CANNOT MOVE: fresh generation passes no layer, so no world fact is ever
     // routed and `config′` is `config` itself. Measured against the committed manifest.

@@ -1,0 +1,40 @@
+{
+  "_doc": "RECORD B OF THE INTEGRATION LANDING (MERGE-CAR), ODQ §934.105 (the cloud chair signs by the owner's delegation of 2026-11-06, vetoable; a successor chair does not inherit this signature). THE LAW OF THE CHAIN (BRIEF-MERGE-CAR §0): the integration branch's first-parent line is the golden chain; a lane's own records are components. THE CAUSE, ONE: the people car's merge over the integration branch — lane/people-land-2026-11-07 (373a2947b, the car final, PEOPLE-LAND-2's hand-back) merged at 8dff691f3 (MERGE-CAR step 1), its conflicts composed by the brief's rules (the car's shape for cards, powers, memberships, the institution join, the honorifics and the display/edit layers; the rung-2 landing's for the pool census, the prose desks and the crisis/migration fields; one writer per fact; the chair's SC-1 and SC-2 rulings; the five silent breaks), carrying its own signed lane records as COMPONENTS: docs/shift-records/2026-11-07-people-1-cast.json, -people-2-cast-derived.json, -people-3-hooks.json, -people-4-ties.json, -people-5a-display.json, -people-5b-edit.json, -people-land-shim-out.json (the car's seven), with records 0a (-people-land-0a-review-intake.json) and 0b (-people-land-0b-w0-merge.json) ALREADY ON THE CHAIN (they sign stages of the shared history before the base 262e8b255). THE MOVE, MEASURED before the write by scripts/audit/landing-stage.sh measure, stage to stage against record A's post-state (the stage of 572c15018: the 525 6d651bde.., the fence 9eb258a4.., the herald b8a8ed19.. 434 keys, the prose 50fdc9a4.., the witness ed83e218.., the PDF 1e32b1a8..): the generator golden master 525 of 525 rows (thorp 84, hamlet 84, village 84, town 105, city 84, metropolis 84) -> 9be37cae..; the espionage fence's driven corpus 360 of 360 rows (60 per tier), 360/360 distinct, -> d08f716d..; the herald knowledge desk 2 moved, 226 added, 190 removed (434 -> 470 keys) -> b853c045..; the dossier prose manifest 832 of 1,050 rows -> 6818628f..; the PDF view-model snapshot 1 line -> 2a785d50.. (the people car's own snapshot, which the branch carries: the composed record's view row is the car's); the preset lighting witness 0 of 8. EVERY LATER FIRST-PARENT POINT MOVES NOTHING: the tip 848e28fde measured equal to this stage on all six surfaces (the registers, the observed-shape rung 32, the two display rulings 7ad0b04e1, the lint pins). Built through the door-path guard as the chair ruled on the two STOPs at this step (2026-11-08): the merge's touched GOLDEN paths are carried equal to the carry (the car's nine records) or as moved after the step only by record A's signed acts (the register, the 525, the prose manifest, the herald, the PDF snapshot and the four golden suites); its two TOOLING paths are carried from the carry under the tooling rule (67b3f4973): scripts/audit/landing-stage.sh (moved since by 6d674cb5a, 67b3f4973) and scripts/prose-manifest-cells.mjs (moved since by 7a014344b, record A's unsigned provenance commit). The door writes FROM record A's post-state (carried) TO the merged tree's output.",
+  "ownerWords": "for every appropriate institution, we generate one NPC … I think just one person per institution. They act as the face. We are not building all the citizens of a settlement. That's too granular and the DM can do that work themselves. We are simply making representatives.",
+  "ownerDate": "2026-11-07",
+  "odqRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's people-model charter of 2026-11-07, PEOPLE-RULINGS §0; the owner's delegation of 2026-11-06 to the cloud chair, session 01FE9mEvGxnFx6WTBkEC6ie9; the integration landing MERGE-CAR, 2026-11-08)",
+  "cause": "THE PEOPLE CAR'S MERGE OVER THE INTEGRATION BRANCH — lane/people-land-2026-11-07 (373a2947b, its seven signed lane records people-1..5b and shim-out; 0a and 0b already on the chain) merged at 8dff691f3 (MERGE-CAR), the conflicts composed: what the merge moved beyond record A's post-state",
+  "seat": "MERGE-CAR (Opus 5.5) under the cloud chair (Fable 5.1), session 01FE9mEvGxnFx6WTBkEC6ie9, from the stage at 8dff691f3",
+  "surfaces": [
+    {
+      "surface": "generator-golden-master",
+      "action": "re-record",
+      "predictedRows": 525,
+      "proofForm": "settlement-hash"
+    },
+    {
+      "surface": "espionage-dormancy-fence",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "in-file corpus constant"
+    },
+    {
+      "surface": "herald-knowledge-desk-golden",
+      "action": "re-record",
+      "predictedRows": 470,
+      "proofForm": "derived-artefact"
+    },
+    {
+      "surface": "dossier-prose-manifest",
+      "action": "re-record",
+      "predictedRows": 2,
+      "proofForm": "derived-artefact"
+    },
+    {
+      "surface": "pdf-golden-view-model-snapshot",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "derived-artefact"
+    }
+  ]
+}
