@@ -243,7 +243,16 @@ describe('nobody in the dossier talks about a character who left', () => {
   });
 
   test('no NPC secret names a displaced character', () => {
+    let scanned = 0;
     for (const npc of parts.npcs) {
+      // RE-KEYED (MERGE-CAR-2, 2026-11-08; the car's corruptionPass precedent, dc655f712): the people car's cast is
+      // ~3x the rung roster, so a card whose secret pools are wholly held is born secret-less (REVIEW-INTAKE-4's
+      // refusal; MERGE-R2 ruling 2: nothing left, no roll). Measured on this town: the car 373a2947b's generated
+      // roster already holds one (Reinhard Schneider, 28/29), and the composed tip's reroll one (Ernst Lehmann,
+      // 28/29). Such a card carries no secret object at all and has nothing to scan; every other card is held to
+      // the anchor below, and the scan is pinned non-vacuous after the loop.
+      if (!npc.secret?.what && !npc.secret?.stakes) continue;
+      scanned++;
       const secret = `${npc.secret?.what || ''} ${npc.secret?.stakes || ''}`;
       // A secret is not required to name anybody, so there is no sibling-name
       // anchor available here; the liveness anchor is that the scanned text is
@@ -254,6 +263,8 @@ describe('nobody in the dossier talks about a character who left', () => {
       // anchored: the assertion above pins `secret` as live non-empty prose, so this exclusion cannot pass against an emptied or absent secret.
       for (const name of gone) expect(secret).not.toContain(name);
     }
+    // non-vacuity: all but at most one card of the reroll carry a secret to scan (28 of 29 at the tip)
+    expect(scanned, 'the reroll carries secrets to scan').toBeGreaterThanOrEqual(parts.npcs.length - 1);
   });
 });
 
