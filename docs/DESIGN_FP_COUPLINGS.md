@@ -28,6 +28,8 @@ reads and receipts (spine req. 7's proof-by-construction), and specs the FOUR
 cross-wire waves (CW-0..CW-3) that no single volume owns. Judgment blocks in §7
 are the drafting chair's rulings under delegation — vetoable there.** [CORRECTED 2026-10-16 (coherence fold) — the live map is the coupling REGISTRY (68 rows, src/domain/certification/couplingRegistry*.js); this volume is its design. CW-0w and CW-1 LANDED (CW-1 dark); CW-2 is RE-SCOPED to CW-2x (DESIGN_FP_ARCH_CW §1 S9, ratified in the compiled fold DESIGN_FP_ARCHITECTURE.md as wave #59; see the bracket at :1672); CW-2x and CW-3 are unbuilt.]
 
+[RE-BASED 2026-11-08 (FP-REBASE, seat FPR-COMPROMISE; the census §2 row "COUPLINGS" (the brief §2) — the volume presumed the faction grouping and the per-NPC corruption mark: "factions" contesting, holding interest domains and reading the world; coups run "through factions/ladder contenders"; "seated corruption" and "the compromised seat" on one corruption substrate. → From the re-basing on, every "faction" in this volume reads "POWER" (the owner's unification law, the census §7: "faction" is the retired synonym; the persisted key `powerStructure.factions` and every LANDED token — `factionCompetition.js`, `factionStates`, `faction_institution_capture` — keep their spellings); a power's members are the cards whose memberships name it (`membersOf(power)`), its leadership its ranked three, a person's standing its rank and share in a power; the person ladder is RANK MOVEMENT within a power (the census §8 decision 1). Compromise runs on THE TWO AXES (`DESIGN_FP_ARCH_ES.md` §1's bracket): the LOCAL allegiance to a criminal house of the card's own town (read only through `allegianceOf`; the hall capture DERIVED by `hallCaptureOf`) and the FOREIGN compromised mark of the corruption web (foreign leashes only, minted at tick, never at birth), meeting in the one carried field `allegiance.leash`. The passages that turn on this carry their own brackets (CPL-3, CPL-6, CPL-11, CPL-19, CPL-20, Story 5).]
+
 **Cross-reference key [CORRECTED 2026-08-02 (fp-audit)].** War volume waves =
 WR-0..WR-10 (DESIGN_WAR_RULINGS_ARCHITECTURE.md). Faith = WF-0..WF-9
 (DESIGN_FP_FAITH.md). Populations = POP-1..POP-7 (DESIGN_FP_POPULATIONS.md).
@@ -409,6 +411,7 @@ COLUMNS that conserve exactly (no soul minted or ghosted; the 300-tick
 accounting identity extends over the sack class); a pressured realm below the
 capability floor still cannot march (floor 0.20 built); named cast never dies
 in a sack (never-kill law).
+[RE-BASED 2026-11-08 (FP-REBASE, seat FPR-COMPROMISE; the census §9 — THE OWNER'S DEATH LAW — the never-kill law presumed a war-lane carve (the razing's named cast "disperses roaming, never engine-killed"). → It is now the owner's law for the whole FP (2026-11-08, verbatim: "The masses happen behen the scenes but only the user determine death to the representatives and named generated NPCs"): EVERY named NPC is a person, the masses move as aggregate blocks, and a named person's death is the DM's decree alone (OD-FC-69 strengthened to "no simulated death of a named person"). The sack's deaths are the masses' (the conserved `sack` class); a named card in a razed town is scattered, captured, wounded or ruined, never killed. The same binds POP-4's plague arc and every war coupling of this volume.]
 **DECLARED EMPTY:** war→pop deliberate massacre outside R's double gate —
 no mechanism kills population as policy except the razing (extremity-gated,
 evil-exclusive at initiation); pop→war manpower arithmetic — armies do not
@@ -551,6 +554,7 @@ peacemaker; peace party overturns warmonger).
 **DECLARED EMPTY:** no standing army as a domestic actor — the garrison never
 coups on its own (coups run through factions/ladder contenders; a praetorian
 lane would need its own owner ruling).
+[RE-BASED 2026-11-08 (FP-REBASE, seat FPR-COMPROMISE; the census §2 row "COUPLINGS" (the brief §2) — "factions/ladder contenders" presumed the grouping's seats and the rung ladder. → Coups run through POWERS and their ranked contenders — a power's real ranked three, weighed by rank and share (the census §5 "a recall or coup weighed by a power's real ranked three"), with the person ladder as rank movement within a power; the garrison's commander is the Military/Guard power's rank-1 face, no roll — still no coup of its own. "The commons and factions read TRUE local state" above reads "the commons and the powers"; "seated corruption" there is the exposed allegiance the crowd can see (read through `allegianceOf` and an exposure record) or a live `exposedCorruption` entry — POP's re-point.]
 
 ### CPL-7 — TRADE × FAITH (the Fugger loan behind the indulgence sale: money and mitres in one ledger)
 **EXISTS, faith→trade:** the conscience embargo — tolerance baseline IS patron
@@ -807,6 +811,7 @@ stay earned-centrality derivations with brakes (the four co-built brakes are
 the anti-monopolist law; a property system is a new capability needing an
 owner ruling); no engine-side bribery verb from house to seat (capture rides
 the EXISTING criminal-capture and corruption webs).
+[RE-BASED 2026-11-08 (FP-REBASE, seat FPR-COMPROMISE; the census §2 row "COUPLINGS" (the brief §2) — "the EXISTING criminal-capture and corruption webs" and "seated corruption when the house captures the seat" presumed a stored capture state and the per-NPC corruption mark. → The criminal capture of the hall is DERIVED (`src/domain/people/hallCapture.js :: hallCaptureOf`, the allegiance design §2 step A6 — ranks, allegiances, criminal powers, never rolled), the one source INT, BD and ES read; the corruption web is the FOREIGN axis only. A house's influence on the seat rides the backing (`houseBacksOf`) and its face's memberships, and its patronage of the ruling powers is the derived `patronageOf` (ONE patronage, the census §8 decision 5) — still no bribery verb. "The factions panel" is the powers panel; "no route/institution OWNERSHIP by factions" reads "by powers".]
 
 ### CPL-12 — FAITH × POP (the Huguenot flight: a creed suppressed is a town emptied; and the pilgrim road that feeds two economies)
 **EXISTS, faith→pop:** crisis conversion ("chaos converts in the cracks" —
@@ -1204,6 +1209,7 @@ table (the correction arrives in time exactly when the race says it does —
 IN-4 consumed at the parlay); the compromised envoy's divergent account is
 caught only when TWO were sent (vetting is a real choice with a real cost;
 the hurried seat that sent one deserves its treaty).
+[RE-BASED 2026-11-08 (FP-REBASE, seat FPR-COMPROMISE; the census §2 row "COUPLINGS" (the brief §2) — "the compromised envoy" presumed one corruption substrate. → It is ES's FOREIGN axis: an envoy whose leash (the carried field `allegiance.leash` or the web's tick-side sidecar, through `resolveLeash`) runs to another court; an envoy whose only hidden tie is a LOCAL allegiance answers to its own town's guild, and is no traitor at this table. The honesty law is OD-FC-9's.]
 **DECLARED EMPTY:** no forged INSTRUMENTS — a lie targets beliefs about
 states (strength, compliance, margins), never mints, alters, or counterfeits
 a treaty record, an obligation, or any ledger artifact; peaceTerms.js is the
@@ -1258,6 +1264,7 @@ its own commons in v1 (the crowd reads true local state; a seat-to-crowd
 deception lane needs its own owner ruling and its own counterforce —
 J-CPL-9); no thought-police verb (suspicion reads target FOREIGN assets and
 travelling strangers, never the resident crowd's beliefs).
+[RE-BASED 2026-11-08 (FP-REBASE, seat FPR-COMPROMISE; the census §2 row "COUPLINGS" (the brief §2) — THE COMPROMISED SEAT RE-STATED: "the compromised seat optimizes a foreign patron's books covertly (directionBias)" presumed a seat held by a faction grouping and a person mark the generator also wrote. → The seat is the governing power's seat; its person is the seat FACE (the governing power's rank-1 face, the people car's R-P2). It is COMPROMISED only on ES's FOREIGN axis: the seat face carries a leash of a foreign kind (the carried field `allegiance.leash` or the web's tick-side sidecar, through `resolveLeash`), minted by the corruption web AT TICK — never at birth, because a born settlement has no foreign court — and `directionBias` optimizes that foreign patron's books. A seat face whose only hidden tie is a LOCAL allegiance (birth's allegiance roll can make the lord an agent, the allegiance design §2) is the GUILD's, and its effect is the derived hall capture (`hallCaptureOf`), not `directionBias`. The web's recruit filter reads the allegiance, so the web never "compromises" the guild's own agent. The rest of the row re-reads: "a faction confidently reading the world differently" → a power; "pays the faction that read the world right (standing/counsel weight …)" → pays that power (its counsel weight) and its ranked faces' standing (rank and share), never a rung. "Suspicion reads target FOREIGN assets" stands and is the axis boundary IN-3's re-basing keeps.]
 
 ### CPL-21 — GRAMMAR × INTERIOR (Brest-Litovsk and the repudiated debts: the successor who disavows the ancien régime's signature)
 **EXISTS, grammar→interior (LIVE lanes) [CORRECTED 2026-08-02 (fp-audit):
@@ -1505,6 +1512,7 @@ a mitre. Pairs: CPL-9, CPL-7, CPL-15, CPL-20.)*
    covert seam; directionBias optimizes the patron's books,
    corruptionWeb.js:506; the contest itself stays intra-settlement in the
    bishop's town).
+   [RE-BASED 2026-11-08 (FP-REBASE, seat FPR-COMPROMISE; the census §2 row "COUPLINGS" (the brief §2) — AFFIRMED AS THE AXIS BOUNDARY: "FOREIGN leashes only" (`if (!leash.foreign) return;`) is now the line between THE TWO AXES (`DESIGN_FP_ARCH_ES.md` §1's bracket) and is affirmed as such: the web's covert mark — "compromised", ES's word, the tag the owner kept for cross-settlement espionage — is FOREIGN by construction, and a SAME-town hold is the LOCAL allegiance, which runs only to a criminal house of the town (a merchant house holds none), read through `allegianceOf`. The story's corrected geography therefore stands unchanged: the bishop is compromised under the neighbouring house-town's FOREIGN leash, minted by the web at tick and carried in the one field `allegiance.leash`; the web's recruit filter reads the allegiance, so the bishop is never already the guild's agent. Step 3's "the local faction the house's credit props" is the local POWER the credit props; step 5's "the ladder climbs" is the commons-voice rung ladder (POP-2), not a person ladder.]
 5. Exposure risk runs the organic clock (the built per-tick odds,
    corruptionWeb.js exposure lane): on reveal, CLERGY_REVEALED_SHARPEN
    (religionLegitimacy.js:127-132, BUILT) makes the scandal bite the creed;
@@ -1958,3 +1966,19 @@ coupling itself visible, tellable, and measurable.
 
 
 
+
+## RE-BASED 2026-11-08 (FP-REBASE) — what moved in this volume
+
+Seat FPR-COMPROMISE, on the brief §2's COUPLINGS row (the census §2 names this volume through ES's row — "FOREIGN leashes only", `DESIGN_FP_COUPLINGS.md :: Story 5` — and its §7–§9 laws). Design text only; no code, flag, key or golden moves; the FP stays parked behind the plat.
+
+| Where | What moved | Census row answered |
+|---|---|---|
+| the header (before the cross-reference key) | the volume-wide reading: "faction" → "power" (landed tokens and the persisted key unrenamed); members, leadership, standing and the ladder on the membership hinge; THE TWO AXES and the one carried field `allegiance.leash` | §7; §8 decisions 1 and 4 |
+| §4 CPL-3, PINS | the never-kill law under THE OWNER'S DEATH LAW: the sack and the plague kill in the masses; a named card is scattered, captured, wounded or ruined | §9 ruling 2 |
+| §4 CPL-6, DECLARED EMPTY | coups through powers and their real ranked three; the garrison commander the Military/Guard power's rank-1 face; "seated corruption" the exposed allegiance or a live `exposedCorruption` entry | §5 (the recall or coup by the ranked three); §8 decision 1 |
+| §4 CPL-11, DECLARED EMPTY | the criminal capture DERIVED (`hallCaptureOf`); the web FOREIGN only; the house's influence through `houseBacksOf` and `patronageOf` | §5 (capture derived); §8 decision 5 |
+| §4 CPL-19, PINS | the compromised envoy on ES's FOREIGN axis | ES; §8 decision 4 |
+| §4 CPL-20, DECLARED EMPTY | THE COMPROMISED SEAT RE-STATED: the seat face, compromised only by a FOREIGN leash minted at tick, never at birth; a locally-allied seat face is the guild's and acts through the derived capture; schism and vindication by power, rank and share | ES; §8 decision 4 |
+| §5 Story 5, step 4 | "FOREIGN leashes only" AFFIRMED as the boundary between the two axes; the story's geography stands; the local power; the commons-voice ladder | ES ("FOREIGN leashes only"); §8 decision 4 |
+
+Judgment call (vetoable): one volume-level reading bracket carries the faction → power swap for the many power-grain uses ("merchant factions", "religious factions contest temple_authority", "the factions panel") instead of a bracket at each; the person-grain and compromise passages carry their own. No passage needed a STOP.
