@@ -125,3 +125,95 @@ Pins re-keyed in `bf718398`, each with its cause in the file: `foodBaseNumbers` 
 - PLAUSIBLE (reasoned, not measured further): that the ten remaining Secure untenable towns are a harvest-side disagreement (foodshed path vs `agricultureCapacity`), for the chair to rule on or leave.
 
 **Tip:** the commit carrying this record on `lane/fix-food-isolation-2026-11-07` (its parent `dfdd06ed`).
+
+---
+
+# SECOND SEAT — the harvest side (2026-11-08)
+
+> **STATE: DONE, one register held for the chair (§S4).** The chair's ruling of 2026-11-07 (relayed on hand-back of `ff260abb`): *one source for how much the land grows* — the receipt's `local_foodshed` (and `hinterland`) capacity is derived from the same production figure the food writer computes, as a pure function of pre-economy inputs. Applied as ruled. Untenable/precarious isolated towns reading Secure: **15 → 0** on the 1,000 (the import side was 31 → 0 at `bf718398`), **0 on either side**. Commits: `89f947526` (refactor, 0 moved), `ddf0da3f4` (refactor kept in the writer's file, 0 moved), `46459cb16` (the cause, UNSIGNED), `4f9ee1844` (tuning inventory), `52800917a` (lighting census), and this record.
+
+## §S0 The measurement (at `ff260abb`, before the cause)
+
+The 10 untenable towns that read Secure (all `town`, all isolated, no food stress):
+
+| seed | receipt | receipt foodshed | its evidence | writer grows (land) | terrain (agri) | food sources |
+|---|---|---|---|---|---|---|
+| soak1k-315 | 21/52 | 11 (21% of 52) | marshlands, Mills | 99% | plains 1.5 | none |
+| soak1k-321 | 27/52 | 17 (33%) | marshlands, Mills, Fish market | 86% | hills 0.9 | none |
+| soak1k-351 | 27/52 | 12 (23%) | Mills, Sawmill | 95% | riverside 1.3 | none |
+| soak1k-357 | 16/52 | 6 (12%) | Mills | 99% | plains 1.5 | none |
+| soak1k-399 | 16/52 | 6 (12%) | Mills | 95% | riverside 1.3 | none |
+| soak1k-465 | 34/52 | 14 (27%) | hunting grounds, Mills | 84% | coastal 0.8 | none |
+| soak1k-555 | 20/52 | 6 (12%) | Mills | 99% | plains 1.5 | none |
+| soak1k-591 | 16/52 | 6 (12%) | Mills | 99% | plains 1.5 | none |
+| soak1k-633 | 34/52 | 20 (38%) | hunting grounds, foraging, Mills | 95% | riverside 1.3 | none |
+| soak1k-651 | 20/52 | 6 (12%) | Mills | 95% | riverside 1.3 | none |
+
+Every isolated place, receipt foodshed as % of required vs the writer's land harvest (median, range): thorp 91 (55–123) vs 107 (91–124); hamlet 93 (64–121) vs 105 (91–124); village 63 (47–105) vs 102 (86–118); **town 27 (12–42) vs 95 (73–99); city 26 (9–46) vs 65 (56–77); metropolis 20 (7–35) vs 51 (44–59)**.
+
+**Where and why they diverge.** The receipt scored a fixed point per named food resource (`FOOD_RESOURCE_CAPACITY`, 5–14 each, capped 38) plus 6 per food-named institution (capped 24), all capped at 48 absolute points — points that do not scale with the tier's `REQUIRED_CAPACITY` (22 → 88). The writer's FOOD-2 arithmetic (chair ruling 2, 2026-11-03) grows a household's need on ordinary land: `(1 − hinterlandShare) × grownShareOf(effectiveAgri)`, with `effectiveAgri` the terrain's `agricultureCapacity` plus the food-source pairings' bonuses — so a plains town with **no** food-source pairing still grows 99%. **123 of the 166 isolated places have no food-source pairing at all.** The gap therefore opens with tier: small places roughly agree, towns and larger diverge by 30–70 points of required.
+
+**The dependency check (no STOP).** The writer's land arithmetic reads the tier, the roster's names, the terrain, the route (for water access), the resources with their depletion, and custom content. None of it is written by the economy pass. The year's stresses and the seeded crop fortune are NOT in it (the writer applies them on top). The receipt stays upstream.
+
+## §S1 The ruling applied — the code path
+
+- **`foodGenerator.js :: foodLandOf(tier, institutions, config, route)`** (exported, pure, zero draws): the writer's own land arithmetic — the institution flags, the five food sources, `TERRAIN_DATA.agricultureCapacity`, the resource and custom-producer bonuses, the custom-consumer need bonus — extracted unchanged out of `generateFoodSecurity`, which now calls it. It also returns `grownShareOfNeed = (1 − hinterlandShare) × grownShareOf(effectiveAgri) / (1 + customConsumerNeedBonus)`. Extraction moved **0/525 golden and 0/360 fence rows** (`89f947526` measured, `ddf0da3f4` re-measured). It first lived in a new `foodLand.js`; it was moved back into `foodGenerator.js` because writer reach's dark register, the observed-shape readers, the tuning inventory and the prose wiring census all key those reads and dials to `foodGenerator.js`. Cost: a function-level import cycle `foodGenerator.js ↔ isolationSupport.js` (both use the other's functions only inside function bodies; no module-evaluation dependency; no cycle rule exists on the tree).
+- **`isolationSupport.js :: deriveIsolationSupport`**: `local_foodshed.capacity = round(grownShareOfNeed × requiredCapacity)`, with evidence `land:<terrain>`, `source:<kind>` for each food source, `custom-producers:<n>` where present, and `grown:<N>% of need`. `hinterland.capacity = round(hinterlandShareOf(tier) × requiredCapacity)` (village 2, town 10, city 27, metropolis 46; none for thorp/hamlet) where the evidence holds (two or more hinterland institutions, or three or more food resources), with evidence `share:<N>% of need`. The fixed-point `FOOD_RESOURCE_CAPACITY` scores and the food-institution count are retired; the food-resource list stays as hinterland evidence. Reserves, seasonal access, patronage and magical transit are unchanged. The first seat's import bound now reads the re-derived hinterland path.
+- **What did NOT move:** the food record. On the 1,000, **0 food bands and 0 import shares moved** (the receipts move, the food record does not); the first seat's bound binds where it did.
+
+## The generator moves, second seat, for the merge's record
+
+Measured over the parent output (`ff260abb` = `ddf0da3f4` by bytes), none re-recorded:
+
+| surface | moved | where |
+|---|---|---|
+| generator golden master | **73 / 525** | every isolated row (thorp 12, hamlet 12, village 12, town 13, city 12, metropolis 12): the receipt's paths, capacity, status |
+| espionage fence | **90 / 360** | every isolated row (15 per tier) |
+| herald desk | **0 / 434** | byte-identical |
+| prose manifest | **2 / 1,050 rows** | `town|germanic|plains|isolated` × both audiences, `overview.warnings` (2 cells REPLACED; 68,968 unchanged) |
+
+Golden statuses (parent → tip): town ×12 forest `untenable → precarious`; city ×12 forest `untenable → precarious`; metropolis ×12 forest `untenable` (unchanged status, receipt figures moved); thorp, hamlet, village ×12 each forest `viable` (figures moved); `town|germanic|plains|isolated` `untenable → viable`, and its viability verdict reads "△ VIABLE WITH PROVISIONING STRAIN: 1% of daily food need remains uncovered" in place of "✓ VIABLE … has 1 operational dependency" (the viability writer's own coupling; band Secure and prosperity Poor unchanged). No golden food band moved.
+
+## §S2 The referee — the 1,000, `ff260abb` → `52800917a`
+
+| status | n (before → after) | secure | pressured | importDependent | deficit | famine |
+|---|---|---|---|---|---|---|
+| resilient | 7 → 16 | 11 | 1 | 1 | 2 | 1 |
+| viable | 62 → 91 | 33 | 12 | 14 | 1 | 31 |
+| magic_supported | 1 → 11 | 5 | 5 | 0 | 0 | 1 |
+| magic_dependent | 11 → 0 | — | — | — | — | — |
+| precarious | 19 → 35 | **0** | 4 | 24 | 4 | 3 |
+| untenable | 66 → 13 | **0** | 0 | 9 | 4 | 0 |
+
+Status moves: untenable → precarious 35, untenable → viable 18, untenable stays 13 (12 metropolises, 1 city); precarious → viable 16, → resilient 3; magic_dependent → magic_supported 11 (the mundane paths now carry the required capacity, magic is the margin); viable → resilient 8; resilient → viable 3; magic_supported → resilient 1. By tier: thorp viable 18 / resilient 2; hamlet viable 34 / resilient 1; village viable 19 / resilient 10; town precarious 8 / viable 17 / resilient 3; city precarious 17 / viable 3 / magic_supported 4 / untenable 1; metropolis precarious 10 / untenable 12 / magic_supported 7.
+
+**The target: no untenable or precarious isolated town reads Secure on either side — 0** (15 at the parent, 36 at the integration base). Imports ≤ the receipt's bound: 166/166.
+
+**The residue, by name — the reverse direction (for the chair; not acted on).** 18 places the receipt calls viable or resilient read Import-Dependent or Deficit. **Every one carries a stress that cuts this year's harvest or adds mouths**, which the receipt (the land's ordinary year) deliberately does not read: plague — soak1k-333, 374, 789, 913; war — 350, 764; mass migration (arrivals) — 98, 354, 637, 670; slave revolt — 486, 757, 897; occupation — 507, 628; siege — 704, 872, 984 (deficit, 67–70% gap). Whether the receipt should read the year's stresses is a separate question; the ruling made it read the land.
+
+**The soak battery** (`soak-review.mjs --count 1000 --workers 4`): 0 errors both; **every finding identical** to the parent (A-09 8, info 675, faction-role-fit 514, relation-types 225, tension-memory 61; 0 changed findings); `cert:*`/`coh:*` 0; top twenty frames unchanged; 166 settlement lines moved (the receipts), **0 connected**.
+
+## §S3 The doors' receipts, second seat (each from its own run at `52800917a` unless named)
+
+| door | result |
+|---|---|
+| `tests/generators tests/lint tests/scripts` whole | 434 files, 4,828 tests: **16 red** — the base's 15 (same test names) **less** `domainAnyCastBaseline`'s overrun arm (red at the base, green here; not investigated, not claimed), **plus** the 2 observed-shape arms of §S4 |
+| writer reach plain | exit 0, judged 6,730 · LIT 598 · DARK 1,272 · reviewable 488 — identical to the base |
+| wiring census `--check` | exit 0, 709 pools / 2,344 variants / 165 rows |
+| tuning inventory | refrozen through its door (`TUNING_INVENTORY_REFREEZE=FIX-FOOD-ISOLATION-2`, `4f9ee1844`): no value moved; the three famine dials gain `isolationSupport.js` as a dependent and sit one line lower; 270 tables / 535 named / 6,944 bare; walker green |
+| lighting census | refrozen through its door (`52800917a`): titles 28,537 → 28,538 (the new arm); walker green |
+| `npm run build` | exit 0 |
+| `npm run verify:dist` | exit 1, the same three rows as the first seat: the edge bundle stale by exactly 73/525 and 90/360 (the merge seat re-emits); worker **1,695,939 → 1,696,719 B (+780; +1,150 over the integration base)**; engine chunk **708,072 → 708,851 B (+779; +1,149 over the base)** — `foodLandOf`'s returned land object and the receipt's evidence strings. Ceilings untouched. |
+
+Pins re-keyed in `46459cb16`, cause beside each: `isolationSupport` — the transit-scaling arm moved city/plains → metropolis/desert (a bare plains city now grows 77% and its gap, 12, sits under the 42 floor; a desert metropolis's gap is 46), the first seat's bound arm's hinterland 14 → 10 (share 22/52 → 18/52), and a new arm (the foodshed IS the writer's share; anchored by a mountain town scoring lower); `resolveConfigReceipts` — seed `receipts-iso-town` → `receipts-iso-town-2` (the first seed's town is now viable, 56/52, with no gap to label; the second is precarious, 51/52, and still carries the `by_design` isolation violation).
+
+## §S4 HELD FOR THE CHAIR — the observed-shape register
+
+`check-observed-shape-readers.mjs` (plain) exits 1 with one NEW row: **`nearbyResourcesState on config` in `src/generators/foodGenerator.js`, 1 read** — the land arithmetic's depletion arm (`Object.entries(config.nearbyResourcesState || {})`). The read is not new code: it sat in `generateFoodSecurity` unflagged at the parent and at both refactor commits (measured: exit 0 at `ddf0da3f4`). It becomes visible because the receipt now calls `foodLandOf` with the effective config, a shape the scanner judges, and the generator never writes `nearbyResourcesState` (it is the advance-time depletion sidecar the event layer maintains; the same identity stands banked in five other rows of the baseline). The governed `--write` refuses to ADD an identity, so no door of mine can take it. Options: (a) the chair banks the row (the same standing as `resolveResources.js`'s four); (b) the land arithmetic reads depletion through `domain/resourceSemantics.js :: availableNativeResourceKeys` alone — its custom-resource arm would then change, which moves output and is a writer question; (c) leave it red for the merge seat. I took none of them.
+
+## CONFIRMED vs PLAUSIBLE, second seat
+
+- CONFIRMED: 15 → 0 (and 0 on the import side); 0 food bands / import shares moved on the 1,000; all golden/fence/prose movement isolated; herald 0; soak findings identical; extraction byte-neutral (0/525, 0/360 twice); +780 B in both bundles.
+- PLAUSIBLE: that the 18 reverse-direction places are the receipt's deliberate ordinary-year reading against this year's stresses (every one carries a harvest-cutting or mouth-adding stress; not tested further).
+
+**Tip:** the commit carrying this section on `lane/fix-food-isolation-2026-11-07` (parent `52800917a`).
