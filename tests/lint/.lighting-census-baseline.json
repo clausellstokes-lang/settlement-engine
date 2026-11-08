@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "87d8afa3686d8cca065b87d33c82d357a221e1f8",
-  "measuredBy": "W5 HIS (lane/w5-his-2026-11-07)",
-  "date": "2026-11-07",
-  "note": "W5 HIS: two new test files (historicalCharacterMajorEvents, stressNoteDirection) and new arms in settlementReason (#10, #11)",
-  "files": 3109,
+  "measuredAtSha": "73bdcc1531fd75d2103fb9bc39382dffcab5e7e7",
+  "measuredBy": "MERGE-CAR",
+  "date": "2026-11-08",
+  "note": "the people car merged into the integration branch (8dff691f3): both sides suites unioned; guildTitleName retired, factionRoleFit re-keyed, the harbour and hook-fold arms",
+  "files": 3118,
   "parked": 384,
-  "credited": 2725,
-  "titles": 28546,
-  "suiteTitles": 7675
+  "credited": 2734,
+  "titles": 28609,
+  "suiteTitles": 7698
 }

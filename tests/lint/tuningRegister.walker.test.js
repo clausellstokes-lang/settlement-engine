@@ -85,7 +85,10 @@ const CEILINGS = Object.freeze({
   // population while crediting it as a win in the other, which is a finding about this instrument
   // and rides to §884. Raising a ceiling is not a LANE's act: this one is the CHAIR's, ruled at
   // §883.8, attributed here and declared owner-visible on §884.
-  UNREGISTERED_NAMED_CEILING: 535,
+  // RAISED 535 -> 536 (2026-11-07, PEOPLE-LAND) under the owner's delegation of 2026-11-06 to the chair (ODQ §934.105),
+  // as §883.8 raised it: ONE name, lane 4's SHARED_POWER_FACTOR = 3 in src/generators/people/ties.js (R-P7's ruled
+  // factor, 141383cd4), attributed by its DECLARED_GROWTH row; the name earns its register row when the owner signs.
+  UNREGISTERED_NAMED_CEILING: 536,
   UNITLESS_TABLE_CEILING: 220,
   DECLARED_DIVERGENCE_CEILING: 5,
   PHANTOM_ALIAS_CEILING: 3,
@@ -100,7 +103,11 @@ const CEILINGS = Object.freeze({
   // recordBatteryFindings.js BATTERY_QUOTE_MAX (SELF-VOUCH b7a5f778e), threatAssessment.js 0.4 (RUNG1B-F9 26ed1b259),
   // densityRoll.js 0.5 (X-46 car 4 U2 1c527831a). This counts ATTRIBUTED rows, so it moves with them; the six
   // population ceilings above are not touched.
-  DECLARED_GROWTH_CEILING: 6,
+  // RAISED 6 -> 8 (2026-11-07, PEOPLE-LAND) under the owner's delegation of 2026-11-06 to the chair (ODQ §934.105), the
+  // LANDING-2 idiom ("write the DECLARED_GROWTH rows the ritual admits"): lane 4's src/generators/people/ties.js, the two
+  // values R-P7 rules (0.5 for a weight-0 house's target weight, SHARED_POWER_FACTOR = 3), cited to 141383cd4. This counts
+  // ATTRIBUTED rows, so it moves with them; the six population ceilings above are not touched.
+  DECLARED_GROWTH_CEILING: 8,
 });
 
 const register = loadTuningRegister(ROOT);
@@ -1195,9 +1202,18 @@ describe('tuning register — the signature is a record, not a word', () => {
     // ninth signed row, or a digest that differs from the committed inventory's reds here.
     const RECORD_REL = 'docs/tuning-signatures/2026-11-06-v1.json';
     const record = JSON.parse(readFileSync(join(ROOT, RECORD_REL), 'utf8'));
-    expect(register.signatureVersion).toBe(1);
-    expect(register.signatures.map((entry) => entry.version), 'one signature, version 1').toEqual([1]);
-    const [signature] = register.signatures;
+    // Re-keyed with its cause (PEOPLE-LAND, 2026-11-07, M-5): Register VII v2 re-signed the same eight ids at
+    // version 2 by docs/tuning-signatures/2026-11-07-v2.json (the owner's charter words, ODQ §934.105) through the
+    // ritual (REFROZEN, "SIGNED at tuning-register v2: 8 ids"); densityBands.js byte-identical, so v2's digests
+    // equal v1's. Two signatures now, v1 kept as written; the signed rows carry version 2.
+    expect(register.signatureVersion).toBe(2);
+    expect(register.signatures.map((entry) => entry.version), 'two signatures, versions 1 and 2').toEqual([1, 2]);
+    const [signature, v2] = register.signatures;
+    const recordV2 = JSON.parse(readFileSync(join(ROOT, 'docs/tuning-signatures/2026-11-07-v2.json'), 'utf8'));
+    expect(v2.date).toBe('2026-11-07');
+    expect(v2.ownerWords, 'v2 carries the owner\'s charter words verbatim from its record').toBe(recordV2.ownerWords);
+    expect([...v2.ids].sort()).toEqual([...record.ids].sort());
+    for (const id of record.ids) expect(v2.digests[id], `${id}: v2's digest equals v1's (the file byte-identical)`).toBe(signature.digests[id]);
     expect(signature.odqRow).toBe('§934.105');
     expect(signature.date).toBe('2026-11-06');
     expect(signature.ownerWords, 'the entry carries the owner\'s words verbatim from the record').toBe(record.ownerWords);
@@ -1208,7 +1224,7 @@ describe('tuning register — the signature is a record, not a word', () => {
     const signed = Object.entries(register.tables).filter(([, row]) => row.status !== 'draft').map(([id]) => id).sort();
     expect(signed, 'the signed rows are exactly the ids the record names and never one more').toEqual([...record.ids].sort());
     for (const id of record.ids) {
-      expect(register.tables[id].signedAt, `${id} signed at version 1`).toBe(1);
+      expect(register.tables[id].signedAt, `${id} signed at version 2 (Register VII v2, M-5)`).toBe(2);
       expect(signature.digests[id], `${id}: the frozen digest is the committed inventory's`).toBe(committed.tables[id].spanDigest);
     }
   });
@@ -1224,10 +1240,10 @@ describe('tuning register — the signature is a record, not a word', () => {
     // first row is a DRAFT row carrying the register's version, 1 since the owner's record of
     // 2026-11-06; a SIGNED row reads signed through the same call.
     expect(real.status).toBe('draft');
-    expect(real.version).toBe(1);
+    expect(real.version).toBe(2); // the register's version, 2 since Register VII v2 (PEOPLE-LAND, M-5)
     const signedReal = signatureStateOf(register, 'src/domain/density/densityBands.js#DENSITY_BANDS');
     expect(signedReal.status, 'a signed row reads signed').toBe('signed');
-    expect(signedReal.signedAt).toBe(1);
+    expect(signedReal.signedAt).toBe(2); // Register VII v2 (PEOPLE-LAND, M-5)
   });
 
   test('each signature record in code reads as its register rows do: Register VII signed, the faith surface draft', () => {
@@ -1335,7 +1351,7 @@ describe('tuning register — the signature is a record, not a word', () => {
 
   test('the register fingerprint reports the version and both file digests', () => {
     const fingerprint = tuningRegisterFingerprint(ROOT);
-    expect(fingerprint.signatureVersion, 'v1 since the owner\'s record of 2026-11-06 (Register VII, ODQ §934.105)').toBe(1);
+    expect(fingerprint.signatureVersion, 'v2 since Register VII v2 of 2026-11-07 (M-5, ODQ §934.105)').toBe(2);
     expect(fingerprint.declaredSha256, 'the declared file must digest').toMatch(/^[0-9a-f]{64}$/);
     expect(fingerprint.inventorySha256, 'and so must the measured one').toMatch(/^[0-9a-f]{64}$/);
     expect(fingerprint.measuredAtSha, 'and the fingerprint names the sha the inventory was'
@@ -1556,6 +1572,11 @@ describe('tuning register — the refreeze ritual refuses', () => {
       version: 1, ids: ['src/domain/a.js#A_TUNING'], note: '',
     };
     if (signingRecordMalformations(wellFormed)) problems.push('a well-formed record was refused');
+    // GOLDEN-REHEARSAL finding 4: a bare numeral is refused as the golden door refuses it; words carrying a numeral pass.
+    for (const bare of ['1', ' 1 ', '42']) {
+      if (!signingRecordMalformations({ ...wellFormed, ownerWords: bare })) problems.push(`a bare numeral ${JSON.stringify(bare)} was accepted as the owner's words`);
+    }
+    if (signingRecordMalformations({ ...wellFormed, ownerWords: 'the 8 ids, as signed' })) problems.push('words carrying a numeral were refused');
     expect(problems, 'the blank template is a LIVE SUBJECT, not decoration: it ships blank so'
       + ' that this arm always has something real to refuse.').toEqual([]);
   });

@@ -120,7 +120,8 @@ export function extractNeighbourProfile(neighbour, relationshipType = 'neutral')
 
   const econ    = neighbour.economicState || {};
   const power   = neighbour.powerStructure || {};
-  const factions= neighbour.powerStructure?.factions || neighbour.factions || [];
+  // The powers only (PEOPLE-5A, M-2): the NPC grouping's fallback is deleted.
+  const factions= neighbour.powerStructure?.factions || [];
   const config  = neighbour.config || {};
 
   // Primary exports/imports from economic state
@@ -181,9 +182,10 @@ export function extractNeighbourProfile(neighbour, relationshipType = 'neutral')
     tradeRoute,
     // Raw dynamics for the relationship type
     dynamics: REL_DYNAMICS[relationshipType] || REL_DYNAMICS.neutral,
-    // Include NPC and faction data for cross-settlement conflict generation
+    // Include NPC and power data for cross-settlement conflict generation (PEOPLE-5A: the
+    // partner's POWERS, carried where every place carries them — never its NPC grouping)
     npcs:     neighbour.npcs     || [],
-    factions: neighbour.factions || factions || [],
+    powerStructure: { factions },
   };
 }
 

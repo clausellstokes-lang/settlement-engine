@@ -28,6 +28,8 @@ export const STRESS_FLAVOR = {
 // STRESS_RUMORS — each renders a rumour phrasing from a relationship object
 // {colour} (CENSUS-2e, R-R; ledger docs/census/declarations/STRESS_RUMORS.json): the fixed words presume
 // only the two NPCs the key supplies, and the `tension` slot is upstream relationship prose, declared there.
+// THE TIE IS DIRECTED (PEOPLE-4 TIES, R-P7; people/ties.js): `npc1Name` is the `from` end's name and leads every
+// phrasing, `npc2Name` the `to` end's — the existing templates, the direction choosing who leads (M-4).
 const STRESS_RUMORS = [
   (rel) => {
     var detail;
@@ -227,6 +229,7 @@ export const genRelNarrative = (input) => {
   const topRel = (topScored = scored[0]) == null ? void 0 : topScored.r;
   if (!topRel) return null;
   const phrasing = pickRandom2(STRESS_RUMORS)(topRel);
+  // the tie's `from` end leads (`npc1`), its `to` end follows (`npc2`)
   return {
     npc1: topRel.npc1Name,
     npc2: topRel.npc2Name,

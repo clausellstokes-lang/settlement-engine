@@ -835,7 +835,7 @@ export function notableConnectionPoolKey(prominentRelationship) {
  * because the mistake is the instructive part. A one-line grep for `flagDriven\s*[:=]`
  * found exactly ONE site — a READ in RelationshipsTab.jsx — so the lens looked like the
  * `economicBase: mixed` shape: a count that is always zero because nothing ever sets the
- * flag. It is not. `npcGenerator.js:1630` writes `flagDriven` on EVERY relationship row (re-addressed 2026-10-31 after GS-2 shortened the file); the
+ * flag. It is not. `people/ties.js:143` writes `flagDriven` on EVERY relationship row (re-addressed 2026-11-07: PEOPLE-4 TIES moved the tie writer out of npcGenerator.js); the
  * grep missed it only because the value is a multi-line boolean expression and the key sits
  * alone on its line. What is true is narrower and is a FINDING rather than a defect: the
  * flag is `stressFlags.anyActive && archetype ∈ {six stress-economic effects}`, and across

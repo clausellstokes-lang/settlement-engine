@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-11-07T12:58:40.664Z",
+  "generatedAt": "2026-11-08T00:50:48.134Z",
   "entry": "src/domain/aiCharter.js",
-  "sourceHash": "7eff1ef0cf12b7b6",
+  "sourceHash": "c98d63fc6fe5eb23",
   "inputs": [
     "node_modules/immer/dist/immer.mjs",
     "node_modules/seedrandom/seedrandom.js",
@@ -43,7 +43,6 @@
     "src/domain/factionArchetypes.js",
     "src/domain/factionProfile.js",
     "src/domain/factionRefs.js",
-    "src/domain/facts/storesMonths.js",
     "src/domain/foodLedger.js",
     "src/domain/governanceLedger.js",
     "src/domain/healingLedger.js",
@@ -58,6 +57,8 @@
     "src/domain/npc/npcFacetContract.js",
     "src/domain/npc/npcOps.js",
     "src/domain/npcProfile.js",
+    "src/domain/people/cardPowers.js",
+    "src/domain/people/membership.js",
     "src/domain/prosperityRank.js",
     "src/domain/region/deriveRegionalState.js",
     "src/domain/region/goodsCatalog.js",

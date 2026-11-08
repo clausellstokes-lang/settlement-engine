@@ -108,8 +108,10 @@ const FROZEN_DIAL_GATED = Object.freeze([
   'customDefinitionCategory on factions',
   'customDefinitionCategory on stressors',
   'customDefinitionCategory on traditions',
-  'densityRungRole on members',
-  'densityRungRole on npcs',
+  // 2026-11-07 PEOPLE-1 CAST (M-5): `densityRungRole on members` and `on npcs` LEFT the dial-gated set by measurement —
+  // the rung roles are no longer WRITTEN at birth under either law (the cast replaces the rung roster; the roles are
+  // unread, densityBands.js byte-identical), so the lit corpus carries them no more than the dark one. A shrink,
+  // 53 -> 51, taken as the walker measured it; no row rowed.
   'description on stressors',
   'disablesGoods on stressors',
   'disablesInstitutions on stressors',
@@ -123,6 +125,10 @@ const FROZEN_DIAL_GATED = Object.freeze([
   'methods on factions',
   'motifAct on traditions',
   'motifElement on traditions',
+  // 2026-11-07 PEOPLE-5B EDIT (M-7): `name on factions` JOINED by measurement — the grouping (`settlement.factions`,
+  // whose `name` was written on every world) left the v2 record at the normalize boundary, so the only `factions`
+  // shape left is the powers', whose legacy `name` alias is written under the custom-content dial alone.
+  'name on factions',
   'name on stressors',
   'scale on factions',
   'source on factions',
@@ -310,7 +316,11 @@ describe('writer-with-no-reader ratchet: the frozen register', () => {
     // 45 -> 43 at MERGE-R2 (2026-11-07): two rows struck with cause — growsMoreThanEats on foodRecord (clause E,
     // domain/foodSurplus.js inside the dossier-pdf closure since the rung-2 chunk cure) and randomDepletionEligible on
     // resourceConditions (clause S, LIT-NAME at the merged tip); scripts/lib/writer-dark-register.mjs names both.
-    expect(WRITER_DARK_REGISTER.length).toBe(43);
+    // FORTY-FIVE BECAME FORTY-FOUR (2026-11-07, PEOPLE-5B EDIT, M-7): `generatedAs on members` LEFT with the grouping's
+    // member copy — no shape carries the identity once the grouping leaves the record.
+    // MERGE-CAR (2026-11-07): both sides' strikes composed — MERGE-R2's two (growsMoreThanEats, randomDepletionEligible)
+    // and PEOPLE-5B's one (generatedAs on members): 45 -> 42.
+    expect(WRITER_DARK_REGISTER.length).toBe(42);
     expect(liveEvidence.map((row) => row.identity).sort())
       .toEqual(WRITER_DARK_REGISTER.map((row) => row.identity).sort());
     for (const row of liveEvidence) {
@@ -336,7 +346,12 @@ describe('writer-with-no-reader ratchet: the frozen register', () => {
     expect(Object.keys(frozen).length).toBe(live.verdicts.size);
     // The frozen map is the thing Car 2 hands CHARSET and READERREVIEW, so its SIZE
     // is a STOP of its own: never ship a multi-megabyte register.
-    expect(JSON.stringify(frozen).length, 'surfaceReach must stay under 1 MB').toBeLessThan(1_000_000);
+    // 2026-11-07 PEOPLE-1 CAST: 1 MB -> 1.3 MB, MEASURED (1,194,048 bytes at the lane's tip). The map holds one row per
+    // simulation ledger key per card id (`weakness on osr001:npc_coaching_inn`: 8,484 of its 12,569 rows), and the cast
+    // is ~3.6× the rung roster, so the per-id rows grew with it. A cost ceiling re-keyed at the measured figure, not a
+    // claim loosened; the per-id rows want ONE pattern row each (`weakness on osr#:npc_*`) — the register's shape, for
+    // the chair (docs/PEOPLE_1_CAST_2026-11-07.md §4).
+    expect(JSON.stringify(frozen).length, 'surfaceReach must stay under 1.3 MB').toBeLessThan(1_300_000);
   });
 
   test('CHARSET_SURFACES mirrors SURFACE_CLASSES minus news and minus web-transitive — the six RENDERING classes, pinned for the day CHARSET Car 1 lands', () => {
@@ -505,7 +520,9 @@ describe('writer-with-no-reader ratchet: the live judgment', () => {
     // 45 -> 43 at MERGE-R2 (2026-11-07): two rows struck with cause — growsMoreThanEats on foodRecord (clause E,
     // domain/foodSurplus.js inside the dossier-pdf closure since the rung-2 chunk cure) and randomDepletionEligible on
     // resourceConditions (clause S, LIT-NAME at the merged tip); scripts/lib/writer-dark-register.mjs names both.
-    expect(registeredAndDark.length).toBe(43);
+    // 2026-11-07 (PEOPLE-5B EDIT, M-7): `generatedAs on members` left with the grouping: forty-five became forty-four.
+    // MERGE-CAR: 45 -> 42, both sides' strikes composed (MERGE-R2's two, PEOPLE-5B's one).
+    expect(registeredAndDark.length).toBe(42);
     expect(baseline.darkUnregistered.length).toBe(cohort.length - registeredAndDark.length);
     expect(reviewableDark(cohort).length).toBe(baseline.reviewableDarkCount);
     expect(reviewableDark(cohort).length).toBeLessThan(cohort.length);
@@ -582,7 +599,10 @@ describe('writer-with-no-reader ratchet: the live judgment', () => {
     expect(rows.length).toBeGreaterThan(5000);
     const byKey = new Map();
     for (const row of rows) byKey.set(row.key, (byKey.get(row.key) ?? 0) + 1);
-    expect([...byKey].sort((a, b) => b[1] - a[1])[0][0]).toBe('id');
+    // 2026-11-07 PEOPLE-1 CAST: 'id' -> 'name'. The cross-join's most frequent key was the id (`npc_<N>`, re-keyed by
+    // the simulation's ledgers per card); the cast's ids are the houses' slugs and the ledgers key by them once per
+    // card, while every card's NAME is read by the dossier, the PDF and the journal — the name leads the count now.
+    expect([...byKey].sort((a, b) => b[1] - a[1])[0][0]).toBe('name');
     expect(osrScansRun, 'the cross-join shares ONE OSR pass across both arms').toBe(1);
   }, 120_000);
 
@@ -638,11 +658,17 @@ describe('writer-with-no-reader ratchet: the live judgment', () => {
     // naming keys the engine does not produce is a finding for the review's backlog.
     const unwritten = [...live.allowlist].filter((identity) => !live.verdicts.has(identity)).sort();
     expect(graded.length).toBe(live.allowlist.size - unwritten.length);
+    // 2026-11-07 PEOPLE-5B EDIT (M-7): + three — the grouping and the shim's two fields left the v2 record at the
+    // normalize boundary; the export allowlist that still names them is lane 5a's display surface (publicSafe.js), the
+    // report this arm exists to make.
     expect(unwritten).toEqual([
       'crossSettlementConflicts on settlement',
       'dailyLife on settlement',
+      'factionAffiliation on npcs',
+      'factions on settlement',
       'interSettlementRelationships on settlement',
       'neighbourNetwork on settlement',
+      'secondaryAffiliation on npcs',
       'thesis on settlement',
     ]);
     expect(REPORT_ONLY_CLASSES).toContain('json-export');
@@ -1134,11 +1160,14 @@ describe('writer-with-no-reader ratchet: the lit-dial arm', () => {
     expect(live.verdicts.has('customContentRoster on settlement')).toBe(false);
   });
 
-  test('the density v2 roll is dial-gated: densityRungRole on npcs is present lit and absent dark', () => {
-    expect(litShapes.npcs.keys).toContain('densityRungRole'); // anchored: the dark side is asserted absent on the next line
+  test('the density v2 roll writes no rung role under either law (PEOPLE-1 CAST, M-5): densityRungRole is absent lit and dark', () => {
+    // 2026-11-07 PEOPLE-1 CAST: the rung roles are retired from birth with the roster they stamped (M-5: unread; the
+    // bands stay signed). The arm's claim inverts with its cause: the key is absent on BOTH sides and gated nowhere.
+    expect(litShapes.npcs.keys).toContain('importance'); // anchored: the lit corpus still carries the cast's rank band
+    expect(litShapes.npcs.keys.includes('densityRungRole')).toBe(false);
     expect(live.corpus.shapes.npcs.keys.includes('densityRungRole')).toBe(false);
-    expect(gated.has('densityRungRole on npcs')).toBe(true);
-    expect(gated.has('densityRungRole on members')).toBe(true);
+    expect(gated.has('densityRungRole on npcs')).toBe(false);
+    expect(gated.has('densityRungRole on members')).toBe(false);
     expect(live.verdicts.has('densityRungRole on npcs')).toBe(false);
   });
 
@@ -1146,9 +1175,9 @@ describe('writer-with-no-reader ratchet: the lit-dial arm', () => {
     // §7.1 compares the lit corpus against the WALKER'S corpus, which moves two
     // variables at once and misses a third. Every reading is asserted TOGETHER so
     // the corrections are measured quantities rather than an argument.
-    expect(confounded.size, 'lit vs the walker corpus: the pack counted as a dial').toBe(53);
-    expect(packControlOnly.size, 'pack held constant, producer set still asymmetric').toBe(33); // GS-2: 34 -> 33 with importance on members
-    expect(gated.size, 'both controls applied').toBe(29);
+    expect(confounded.size, 'lit vs the walker corpus: the pack counted as a dial').toBe(52); // 53 -> 51, PEOPLE-1 CAST (M-5): the two rung-role rows; 51 -> 52, PEOPLE-5B (M-7): `name on factions`
+    expect(packControlOnly.size, 'pack held constant, producer set still asymmetric').toBe(32) /* 33 -> 31, PEOPLE-1 CAST (M-5): the two rung-role rows left the dial-gated set; 31 -> 32, PEOPLE-5B (M-7): `name on factions` */; // GS-2: 34 -> 33 with importance on members
+    expect(gated.size, 'both controls applied').toBe(28) /* 29 -> 27, PEOPLE-1 CAST (M-5): the two rung-role rows; 27 -> 28, PEOPLE-5B (M-7): `name on factions` */;
     expect(confounded.size - packControlOnly.size, '23 pack-attributable, less 3 the pack control also gains (was 24/21 before source on stressors turned ordinary at §900)')
       .toBe(20);
     // The four the DARK-corpus control removes are keys a shipped world does write,
@@ -1167,7 +1196,7 @@ describe('writer-with-no-reader ratchet: the lit-dial arm', () => {
 
   test('every dial-gated identity is in the frozen roster and every frozen entry is still dial-gated — a new dial-gated key reds by name', () => {
     expect([...gated].sort()).toEqual([...FROZEN_DIAL_GATED]);
-    expect(FROZEN_DIAL_GATED.length).toBe(29);
+    expect(FROZEN_DIAL_GATED.length).toBe(28); // 29 -> 27, PEOPLE-1 CAST (M-5); 27 -> 28, PEOPLE-5B (M-7)
     expect(new Set(FROZEN_DIAL_GATED).size).toBe(FROZEN_DIAL_GATED.length);
     for (const identity of FROZEN_DIAL_GATED) {
       expect(identity).toMatch(/^\S+ on \S+$/);

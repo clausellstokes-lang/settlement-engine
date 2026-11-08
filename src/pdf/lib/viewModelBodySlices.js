@@ -154,7 +154,7 @@ export function defenseSlice(active) {
     note: all.slice(0, i).some((prev) => criminalOpNote(prev) === criminalOpNote(name)) ? null : criminalOpNote(name),
   }));
   const criminalStructure = deriveCriminalStructure(s);
-  const criminalFaction = (s?.powerStructure?.factions || s?.factions || []).find(f => (f?.category || '').toLowerCase() === 'criminal') || null;
+  const criminalFaction = (s?.powerStructure?.factions || []).find(f => (f?.category || '').toLowerCase() === 'criminal') || null;
   const orderHooks = sp?.plotHooks || [];
 
   return {

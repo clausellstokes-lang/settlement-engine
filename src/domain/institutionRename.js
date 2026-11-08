@@ -45,13 +45,13 @@ import { CRISIS_CAST_HOMES, DEFENSE_CATEGORIES, NPC_HOMES as INSTITUTION_HOMES, 
 /** @typedef {{ owner: StoredRecord, key: string, isList: boolean, holder: unknown[]|null, index: number, via: { owner: StoredRecord, key: string }|null }} Site */
 /** A row's record filter: the leaf's owner must carry `key` equal to `equals` (the crisis cast's `kind`). @typedef {{ key: string, equals: string }} SiteFilter */
 /** One declared row of the cascade list. `rewrite` is present only on a `label` row; `where` only on a row whose owner record is shared by several kinds of name. @typedef {{ path: string, match: 'exact'|'label', rewrite?: LabelRewrite, where?: SiteFilter, removal: string, why: string }} SurfaceRow */
-/** One institution-name-bearing field an NPC record carries, before it is spread across the two homes. @typedef {{ parent: string|null, key: string, list: boolean, removal: string, why: string }} HandleField */
+/** One institution-name-bearing field an NPC record carries, before it is spread across the two homes. @typedef {{ parent: string|null, key: string, list: boolean, removal: string, where?: SiteFilter, why: string }} HandleField */
 /** One row of the NON_CASCADED ledger. @typedef {{ path: string, kind: string, readable: boolean, why: string }} LedgerRow */
 
 /** The settlement buckets the cascade can reach, for the immutable form's minimal clone. */
 const CASCADE_BUCKETS = Object.freeze([
   'institutions', 'availableServices', 'economicState', 'resourceAnalysis',
-  'defenseProfile', 'spatialLayout', 'npcs', 'factions',
+  'defenseProfile', 'spatialLayout', 'npcs',
   // RUNG1B-F7: the crisis cast at both stress containers (CRISIS_CAST_HOMES).
   'stress', 'stressors',
 ]);
@@ -111,10 +111,10 @@ export const LABEL_REWRITE = Object.freeze({
  * @type {ReadonlyArray<HandleField>}
  */
 const INSTITUTION_HANDLE_FIELDS = Object.freeze([
-  { parent: null, key: 'institution', list: false, removal: 'delete-key',
-    why: 'the employing house a pipeline character is attached to' },
-  { parent: null, key: 'secondaryAffiliation', list: false, removal: 'delete-key',
-    why: 'the second attachment npcGenerator writes for a character with a criminal or civic tie' },
+  // 2026-11-07 PEOPLE-1 CAST (R-P2): `institution` is a RECORD `{ kind, key, family, title }` on every card; the
+  // house's name is its `key` (a `kind: 'house'` card) — a removal deletes the key and the face keeps its title.
+  { parent: 'institution', key: 'key', list: false, removal: 'delete-key', where: Object.freeze({ key: 'kind', equals: 'house' }),
+    why: 'the house a representative is the face of, by the house\'s roster name (people/representatives.js); a `kind: \'power\'` card\'s key is a POWER name, the faction ledger\'s' },
   { parent: 'corruptTies', key: 'thievesGuild', list: false, removal: 'delete-key',
     why: 'the corruption record names the guild house by its own name' },
   { parent: 'corruptTies', key: 'criminalInstitution', list: false, removal: 'delete-key',
@@ -167,6 +167,7 @@ export const INSTITUTION_RENAME_SURFACES = Object.freeze([
     why: 'the second DERIVED DISPLAY LABEL, rendered on Economics under a Via label: deriveInstitutionalServices stores the lowercased name, so the rewrite is lowercased too or the producer invariant breaks' },
   ...INSTITUTION_HOMES.flatMap((home) => INSTITUTION_HANDLE_FIELDS.map((field) => ({
     path: handlePath(home, field), match: /** @type {'exact'} */ ('exact'), removal: field.removal, why: field.why,
+    ...(field.where ? { where: field.where } : {}),
   }))),
   ...CRISIS_CAST_HOMES.flatMap((home) => [
     { path: `${home}.levers[].institution`, match: /** @type {'exact'} */ ('exact'), removal: 'drop-entry',
@@ -189,6 +190,14 @@ export const INSTITUTION_RENAME_SURFACES = Object.freeze([
  * @type {ReadonlyArray<LedgerRow>}
  */
 export const NON_CASCADED_SURFACES = Object.freeze([
+  // PEOPLE-5B (2026-11-07, M-7): the grouping (`factions[]`, its member copies, `powerFactionName`) and the
+  // per-card `factionAffiliation`/`secondaryAffiliation` LEFT a v2 record; their rows left this ledger with them.
+  // A card's powers are `npcs[].memberships[].power` (below), the faction ledger's one key row.
+  // 2026-11-07 PEOPLE-1 CAST: the card's fields (people/representatives.js, people/castPowers.js).
+  { path: 'npcs[].institution.family', kind: 'catalogue', readable: false,
+    why: 'the CATALOGUE FAMILY KEY of the face\'s house (src/data/institutionalCatalog.js :: familyOfInstitution), spelled as the family\'s first-tier name: the catalogue\'s identity, not the roster\'s name, and the backing catalogue and the face table are keyed by it' },
+  { path: 'npcs[].memberships[].power', kind: 'label', readable: true,
+    why: 'a POWER name (the faction ledger\'s, src/domain/factionRename.js): it equals a house name only where the power layer names the governing faction after its body, the reason powerStructure.factions[].faction gives below' },
   { path: 'simulationTrace[].downstreamEffects[].target', kind: 'receipt', readable: false,
     why: 'the generation RECEIPT: it records what the generator decided while the house still bore its old name, so rewriting it would falsify the trace' },
   { path: 'generationCoherenceReceipt.repairs[].subject', kind: 'receipt', readable: false,
@@ -217,29 +226,21 @@ export const NON_CASCADED_SURFACES = Object.freeze([
     why: 'the structural validator AUTHORED advice, rendered as a Consider line: a statement about what the town should build, never a reference to what it has' },
   { path: 'economicState.compound.inst.names[]', kind: 'frozen-stamp', readable: false,
     why: 'the LOWERCASED roster stamped once beside the booleans it produced and never recomputed on advance, owner-gated: rewriting the names would make them disagree with their own flags inside a frozen structure nothing reads' },
-  { path: 'factions[].powerFactionName', kind: 'label', readable: false,
-    why: 'a FACTION name, owned by the faction rename ledger (src/domain/factionRename.js): it equals a catalog institution name only where the power structure names a governing body\'s faction after the body (\'Democratic assembly\', observable since the urban band\'s weighted government seat of 2026-09-30, ODQ §934.86), and renaming the institution must not silently rename a faction the DM may have renamed on its own' },
-  { path: 'factions[].members[].factionAffiliation', kind: 'label', readable: false,
-    why: 'the same faction name stamped on each member: it follows the FACTION ledger, never the institution one, for the reason the row above gives' },
   // The faction ledger's other homes for that same name (src/domain/factionRename.js
   // FACTION_RENAME_SURFACES declares each one). rulingStructure.js names the governing
   // faction after the body for two forms ('Democratic assembly'; 'Merchant oligarchy' below
   // metropolis) and keys its own logic on those spellings, so the label is the power
   // layer's design, not a stamp of the institution.
   { path: 'powerStructure.governingName', kind: 'label', readable: false,
-    why: 'the governing FACTION\'s name, owned by the faction rename ledger; it equals the institution name only for the two forms the power layer names after their body, for the reason the powerFactionName row gives' },
+    why: 'the governing FACTION\'s name, owned by the faction rename ledger (src/domain/factionRename.js); it equals the institution name only for the two forms the power layer names after their body (\'Democratic assembly\', observable since the urban band\'s weighted government seat of 2026-09-30, ODQ §934.86), and renaming the institution must not silently rename a faction the DM may have renamed on its own' },
   { path: 'powerStructure.government', kind: 'label', readable: false,
     why: 'the government type, which at generation equals the governing faction\'s name and moves with it under the faction ledger' },
   { path: 'powerStructure.factions[].faction', kind: 'label', readable: false,
     why: 'the power roster\'s faction name, the faction ledger\'s canonical display key' },
   { path: 'powerStructure.factionRelationships[].pair[]', kind: 'label', readable: false,
     why: 'each pairwise relationship is keyed by the two faction names, and the faction ledger rewrites the pair' },
-  { path: 'npcs[].factionAffiliation', kind: 'label', readable: false,
-    why: 'a character\'s link to its faction by name, owned by the faction ledger like the member stamp above' },
   // GS-2 (ODQ §934.101): the grouping list and the conflicts are named by the POWER factions now, so the
   // governing body's faction name ('Democratic assembly') reaches them too; the faction ledger owns all three.
-  { path: 'factions[].name', kind: 'label', readable: false,
-    why: 'the grouping list is a projection of the power factions since GS-2, so its name IS the faction name, owned by the faction ledger (factionRename.js rewrites it), for the reason the powerFactionName row gives' },
   { path: 'conflicts[].parties[]', kind: 'label', readable: false,
     why: 'a conflict party is a power faction\'s exact name since GS-2; the faction ledger rewrites it at both conflict homes' },
   { path: 'powerStructure.conflicts[].parties[]', kind: 'label', readable: false,
@@ -247,7 +248,7 @@ export const NON_CASCADED_SURFACES = Object.freeze([
   // RUNG1B-F7 (the walker over 120 soak records): three more homes of a FACTION name that
   // equals a house name for the governing-body forms, an office title, and a service label.
   ...CRISIS_CAST_HOMES.map((home) => ({ path: `${home}.stakes[].factionId`, kind: 'label', readable: false,
-    why: 'a crisis stake keys on the FACTION name, owned by the faction rename ledger; it equals a house name only for the forms the power layer names after their body, for the reason the powerFactionName row gives' })),
+    why: 'a crisis stake keys on the FACTION name, owned by the faction rename ledger; it equals a house name only for the forms the power layer names after their body, for the reason the governingName row gives' })),
   { path: 'history.currentTensions[].factions[]', kind: 'label', readable: false,
     why: 'the tension party roster holds FACTION names, rewritten by the faction ledger; the same governing-body collision' },
   { path: 'availableServices.criminal[].name', kind: 'label', readable: false,

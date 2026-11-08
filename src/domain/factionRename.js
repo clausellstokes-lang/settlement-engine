@@ -117,7 +117,6 @@ const CASCADE_BUCKETS = Object.freeze([
   'powerStructure',
   'npcs',
   'institutions',
-  'factions',
   'interSettlementRelationships',
   // ADDED 2026-08-01 for exactly TWO paths: `relationships[].npc1Role` and
   // `npc2Role`, the per-end TITLES on the in-settlement edge list, which carry the
@@ -155,12 +154,10 @@ const CASCADE_BUCKETS = Object.freeze([
 /**
  * The same minimal-clone contract for the NPC cascade. `relationships` is the
  * in-settlement edge list (a DIFFERENT bucket from the neighbour links), and it
- * is joined by display name even though every edge also carries npc1Id/npc2Id.
+ * is joined by display name even though every edge also carries its from/to ids.
  */
 const NPC_CASCADE_BUCKETS = Object.freeze([
   'npcs',
-  // The second home a character is stored in — see NPC_HOMES.
-  'factions',
   'relationships',
   'interSettlementRelationships',
   // RUNG1B-F7: the crisis cast names people (CRISIS_CAST_HOMES).
@@ -200,7 +197,13 @@ const CONFLICT_HOMES = Object.freeze(['conflicts[]', 'powerStructure.conflicts[]
 const PAIRWISE = 'powerStructure.factionRelationships[]';
 
 /**
- * THE TWO HOMES OF ONE NPC. A pipeline character is stored TWICE: once in
+ * THE ONE HOME OF ONE NPC (PEOPLE-5B, 2026-11-07, M-7: the grouping leaves the record). Until the
+ * people car a character was stored TWICE — `settlement.npcs` and the grouping's member copy
+ * `settlement.factions[].members[]` — and every cascade below walked both. A v2 record carries no
+ * grouping (settlementMigrations.js drops it), so the card has one home and the second walk is
+ * deleted. The history of the two-home bug, kept for the reader who meets an old save:
+ *
+ * A pipeline character was stored TWICE: once in
  * `settlement.npcs`, and once inside the NPC-grouping list as
  * `settlement.factions[].members[]`. At generation those are the SAME OBJECT —
  * power/factionGrouping.js pushes the very npc reference into `members` — so a
@@ -214,22 +217,32 @@ const PAIRWISE = 'powerStructure.factionRelationships[]';
  * declared ONCE here and applied at BOTH homes, so a field added for one can
  * never be forgotten at the other.
  */
-export const NPC_HOMES = Object.freeze(['npcs[]', 'factions[].members[]']);
+export const NPC_HOMES = Object.freeze(['npcs[]']);
 
 /**
  * Every faction-name-bearing field an NPC record carries. `list` marks a field
  * holding an ARRAY of names rather than one; `kind` is the declared surface kind
  * (exact-key rewrite vs whole-word prose substitution).
  *
- * @type {ReadonlyArray<{ parent: string | null, key: string, kind: 'key' | 'prose', list?: boolean, why: string }>}
+ * @type {ReadonlyArray<{ parent: string | null, key: string, kind: 'key' | 'prose', list?: boolean, each?: boolean, when?: { key: string, equals: unknown }, why: string }>}
  */
 const NPC_FACTION_FIELDS = Object.freeze([
-  { parent: null, key: 'factionAffiliation', kind: 'key',
-    why: 'the display-name link every pipeline NPC carries to its faction' },
-  { parent: null, key: 'secondaryAffiliation', kind: 'key',
-    why: 'the second display-name link npcGenerator writes for a character with a criminal tie' },
-  { parent: null, key: 'linkedFactionIds', kind: 'key', list: true,
-    why: 'id-bearing seats store a durable id; legacy generated seats without ids store the canonical display key, which must follow the rename' },
+  // 2026-11-07 PEOPLE-1 CAST (R-P3): the card's powers — `memberships[]` holds one record per power the
+  // card's house backs, each naming the power by its display name; `each` marks a LIST OF RECORDS whose
+  // `key` is rewritten on every entry (the shim's two affiliation fields below are derived from these).
+  { parent: 'memberships', key: 'power', kind: 'key', each: true,
+    why: 'the people car\'s memberships: every power a representative stands in, by the power\'s name, with its rank there' },
+  // a MINTED face (the seat of R-P2, an `other` power's of R-P4) is the face of the POWER itself:
+  // `institution.key` holds the power's name (`when` kind === 'power'; a house-kind card's key is the
+  // house's roster name, owned by the institution ledger) and its title is built from the name.
+  { parent: 'institution', key: 'key', kind: 'key', when: { key: 'kind', equals: 'power' },
+    why: 'a minted face\'s institution is the power it stands for, keyed by the power\'s name' },
+  { parent: 'institution', key: 'title', kind: 'prose',
+    why: 'a minted face\'s title is built from the power\'s name (people/mintTitles.js headOf: "the head of <power>")' },
+  { parent: null, key: 'title', kind: 'prose',
+    why: 'the card\'s title, the same string as institution.title (M-1b: the role is the title too, and `role` is declared below)' },
+  // PEOPLE-5B (M-7): `factionAffiliation`, `secondaryAffiliation`, `linkedFactionIds` and `factionGoal`
+  // LEFT this list — a v2 card's ONE key row for its powers is `memberships[].power` above.
   { parent: 'secret', key: 'what', kind: 'prose',
     why: 'the secret itself is faction-token prose (npcGenerator substitutes the faction token into it)' },
   { parent: 'secret', key: 'stakes', kind: 'prose',
@@ -246,9 +259,7 @@ const NPC_FACTION_FIELDS = Object.freeze([
   // rename, which is a different lane and is untouched here.
   { parent: null, key: 'role', kind: 'prose',
     why: 'the character\'s title is faction-token prose ("Thieves\' Guild Master"); leaving it stale renders a member chip that still names the dissolved faction' },
-  { parent: null, key: 'factionGoal', kind: 'prose',
-    why: 'the generated goal line names the faction whose position the character maintains' },
-  // ADDED 2026-09-30, the same latent class as role and factionGoal above: npcGenerator's
+  // ADDED 2026-09-30, the same latent class as role and the (retired) factionGoal above: npcGenerator's
   // succession-void goal ("Position themselves before {topFaction} moves first") has always
   // named a faction, and no denominator seed rolled it until the urban band's same-seed
   // shift (ODQ §934.86) did. Cascading it is repair under the same ratified prose policy;
@@ -260,26 +271,26 @@ const NPC_FACTION_FIELDS = Object.freeze([
 /**
  * The stored path of one NPC field under one of its two homes.
  * @param {string} home
- * @param {{ parent: string|null, key: string, list?: boolean }} field
+ * @param {{ parent: string|null, key: string, list?: boolean, each?: boolean }} field
  */
 function npcFieldPath(home, field) {
-  const owner = field.parent ? `${home}.${field.parent}` : home;
+  const owner = field.parent ? `${home}.${field.parent}${field.each ? '[]' : ''}` : home;
   return `${owner}.${field.key}${field.list ? '[]' : ''}`;
 }
 
 /**
  * The affiliation keys the MEMBERSHIP PREDICATE accepts that this cascade does
  * NOT rewrite, with the reason each is excluded. npcInFaction
- * (worldPulse/npcLadderState.js) resolves an NPC's faction through
- * `factionAffiliation | factionId | factionLink | faction | organizationId`,
- * first present wins; only the first is in NPC_FACTION_FIELDS. The other four are
+ * (worldPulse/npcLadderState.js, FPZ's under M-6) resolves an NPC's faction through
+ * a family of single-name keys, first present wins; a v2 card names its powers in
+ * `memberships[].power` alone (the cascade's one key row). The four below are
  * declared here so the divergence reads as a decision rather than an oversight.
  *
  * @type {ReadonlyArray<{ key: string, why: string }>}
  */
 const NPC_HANDLE_KEYS_NOT_CASCADED = Object.freeze([
   { key: 'factionId', why: 'an identity, not a label: a rename changes the label only (the same ruling as the roster id); no writer for it exists in src' },
-  { key: 'factionLink', why: 'derived read-model output (npcProfile.js mints it from factionAffiliation via factionIdFromName), not stored generator state, and it holds an id' },
+  { key: 'factionLink', why: 'derived read-model output (npcProfile.js mints it from the card\'s first power via factionIdFromName), not stored generator state, and it holds an id' },
   { key: 'organizationId', why: 'an identity the membership predicate accepts; no writer for it exists in src, and an id never follows a label' },
   { key: 'faction', why: 'a name-shaped alternate affiliation key the membership predicate accepts, written by no generator; widening the cascade to a key only imported or custom content could carry is a persistence-shape judgement, recorded as latent rather than taken here' },
 ]);
@@ -316,8 +327,6 @@ export const FACTION_RENAME_SURFACES = Object.freeze([
     why: `the ${category} defence copy of an institution record keeps the raising faction's exact marker` })),
   // RUNG1B-F7: a doubled-niche rival names the faction whose niche it contests (density law).
   { path: `${ROSTER}.contestsNiche`, kind: 'key', why: 'the exact name of the faction whose niche a doubled-niche rival contests; the contest layer finds the pair by it' },
-  { path: 'factions[].name', kind: 'key', why: 'the legacy top-level mirror the gallery rename surface renders' },
-  { path: 'factions[].powerFactionName', kind: 'key', why: 'the NPC grouping list back-link to its power faction' },
   // The relationship edge list stores each end's TITLE alongside its name, and that
   // title carries the faction token exactly as the NPC-home `role` does. Declared here
   // rather than in NPC_FACTION_FIELDS because these live on the edge, not under either
@@ -384,6 +393,14 @@ export const NON_CASCADED_SURFACES = Object.freeze([
   // the institution ledger (src/domain/institutionRename.js), which declares the mirror
   // rows; renaming the faction must not silently rename the house.
   { path: 'institutions[].name', why: 'the house record\'s own name, owned by the institution ledger: it equals a faction name only where the power layer names the governing faction after its body' },
+  // 2026-11-07 PEOPLE-1 CAST: the card's catalogue FAMILY key (people/representatives.js) is the catalogue's
+  // identity of the house's family, spelled as the family's first-tier name; it equals a faction name only
+  // where the power layer names the governing faction after its body ('Merchant oligarchy'), as the row above.
+  { path: 'npcs[].institution.family', why: 'the catalogue family key of the face\'s house, owned by the catalogue (src/data/institutionalCatalog.js), never a faction handle' },
+  // the coherence battery's findings are the generation RECEIPT (design §22.3 item 1: history by path), as
+  // simulationTrace[].causes[].reason above: "seat_unfilled: nobody holds the seat of <power>" is what the
+  // battery judged at birth, under the name the power bore then.
+  { path: 'generationCoherenceReceipt.judgments[].findings[].detail', why: 'the battery\'s finding, a recorded judgment of the birth record; rewriting it would falsify the receipt' },
   { path: 'availableServices.legal[].institution', why: 'the house providing the service, owned by the institution ledger, for the reason the row above gives' },
   // RUNG1B-F7 unit 5 (the chair's ruling; soak1k-35 on the composed window db8ce5da): the same
   // collision on the crisis cast's levers, which the institution ledger cascades as a HOUSE handle.
@@ -419,7 +436,6 @@ export const NON_CASCADED_SURFACES = Object.freeze([
  */
 export const NPC_RENAME_SURFACES = Object.freeze([
   { path: `${NPC_HOMES[0]}.name`, kind: 'key', why: 'the character record\'s own display name at the canonical home' },
-  { path: `${NPC_HOMES[1]}.name`, kind: 'key', why: 'the grouping copy the dossier renders as a faction member chip; a separate object on every reloaded save' },
   { path: 'relationships[].npc1Name', kind: 'key', why: 'the first end of an NPC relationship edge, joined by display name' },
   { path: 'relationships[].npc2Name', kind: 'key', why: 'the second end of an NPC relationship edge, joined by display name' },
   { path: 'interSettlementRelationships[].npcName', kind: 'key', why: 'this settlement side of a neighbour NPC contact (the partner save holds the same person as partnerName)' },
@@ -450,8 +466,6 @@ export const NPC_RENAME_SURFACES = Object.freeze([
 export const NPC_NON_CASCADED_SURFACES = Object.freeze([
   { path: `${NPC_HOMES[0]}.secret.what`, why: 'the secret is generated prose that names the characters it implicates; prose policy for people is owner-gated (see above)' },
   { path: `${NPC_HOMES[0]}.secret.stakes`, why: 'the stakes sentence names who would pay to bury the secret; prose policy for people is owner-gated' },
-  { path: `${NPC_HOMES[1]}.secret.what`, why: 'the grouping copy of the same secret prose; it moves if and only if its twin does' },
-  { path: `${NPC_HOMES[1]}.secret.stakes`, why: 'the grouping copy of the same stakes prose; it moves if and only if its twin does' },
   { path: 'relationships[].description', why: 'the generated relationship paragraph names both ends; prose policy for people is owner-gated' },
   { path: 'relationships[].tension', why: 'the generated tension line names both ends; prose policy for people is owner-gated' },
   { path: 'interSettlementRelationships[].description', why: 'the generated contact sentence names both people and the partner settlement; prose policy for people is owner-gated' },
@@ -698,8 +712,18 @@ function renameNpcRecord(npc, home, oldName, newName, mark) {
   for (const field of NPC_FACTION_FIELDS) {
     // A nested field's parent record must ALREADY exist; this module never
     // mints one, exactly as it never mints a missing name spelling.
+    if (field.each) {
+      // a list of records: the key is rewritten on every entry that carries the old name
+      const entries = /** @type {unknown[] | null} */ (Array.isArray(npc[field.parent]) ? npc[field.parent] : null);
+      if (!entries) continue;
+      let movedAny = false;
+      for (const entry of entries) if (isRecord(entry) && rewriteKey(entry, field.key, oldName, newName)) movedAny = true;
+      mark(npcFieldPath(home, field), movedAny);
+      continue;
+    }
     const owner = field.parent ? npc[field.parent] : npc;
     if (!isRecord(owner)) continue;
+    if (field.when && owner[field.when.key] !== field.when.equals) continue;
     const moved = field.list
       ? rewriteNameList(owner, field.key, oldName, newName)
       : field.kind === 'key'
@@ -724,8 +748,8 @@ function factionLabel(record) {
 
 /**
  * Locate the faction record a rename addresses, using the STORE lane's
- * resolution: the canonical `powerStructure.factions` list first, the legacy
- * `settlement.factions` array only as a fallback for pre-pipeline saves.
+ * resolution: the canonical `powerStructure.factions` list — the ONLY faction roster
+ * of a v2 record (PEOPLE-5B, M-7: the grouping fallback is deleted).
  *
  * @param {unknown} settlement
  * @param {number} factionIndex
@@ -734,10 +758,8 @@ function factionLabel(record) {
 export function resolveFactionForRename(settlement, factionIndex) {
   if (!isRecord(settlement)) return null;
   const power = isRecord(settlement.powerStructure) ? settlement.powerStructure : null;
-  const canonical = listOf(power?.factions);
-  const legacy = listOf(settlement.factions);
-  const list = canonical && canonical.length ? canonical : legacy;
-  if (!list) return null;
+  const list = listOf(power?.factions);
+  if (!list || !list.length) return null;
   const record = list[factionIndex];
   if (!isRecord(record)) return null;
   const currentName = factionLabel(record);
@@ -904,23 +926,6 @@ export function applyFactionRenameToSettlement(settlement, oldName, newName) {
     for (const institution of listOf(defense?.[category]) || []) {
       if (!isRecord(institution)) continue;
       mark(`defenseProfile.institutions.${category}[].factionSource`, rewriteKey(institution, 'factionSource', oldName, newName));
-    }
-  }
-
-  // 8-9. The legacy top-level mirror. This is a DIFFERENT record type (the NPC
-  // grouping list): `.name` is its own label and `.powerFactionName` is its
-  // back-link to the power faction, so both are checked independently.
-  for (const group of listOf(settlement.factions) || []) {
-    if (!isRecord(group)) continue;
-    mark('factions[].name', rewriteKey(group, 'name', oldName, newName));
-    mark('factions[].powerFactionName', rewriteKey(group, 'powerFactionName', oldName, newName));
-    // The group's MEMBERS are NPC records — the second home (see NPC_HOMES).
-    // On a live settlement these are the same objects the npcs[] walk above
-    // already healed and every rewrite here is a no-op; on a settlement that
-    // has been saved and reloaded they are separate copies, and this walk is
-    // the only thing that moves them.
-    for (const member of listOf(group.members) || []) {
-      renameNpcRecord(member, NPC_HOMES[1], oldName, newName, mark);
     }
   }
 
@@ -1117,17 +1122,6 @@ export function applyNpcRenameToSettlement(settlement, oldName, newName) {
   for (const npc of listOf(settlement.npcs) || []) {
     if (!isRecord(npc)) continue;
     mark(`${NPC_HOMES[0]}.name`, rewriteKey(npc, 'name', oldName, newName));
-  }
-
-  // 2. The grouping home. On a live settlement these ARE the objects above and
-  // every rewrite here is a no-op; on a reloaded save they are separate copies,
-  // and this walk is the only thing that moves them.
-  for (const group of listOf(settlement.factions) || []) {
-    if (!isRecord(group)) continue;
-    for (const member of listOf(group.members) || []) {
-      if (!isRecord(member)) continue;
-      mark(`${NPC_HOMES[1]}.name`, rewriteKey(member, 'name', oldName, newName));
-    }
   }
 
   // 3. The in-settlement relationship edges. Both ends are display names: miss

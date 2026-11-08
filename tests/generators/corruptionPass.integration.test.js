@@ -18,6 +18,7 @@ describe('corruptionPass — generation-time onset (integration)', () => {
   it('marks corruption iff a criminal institution is present, and corrupt NPCs are fully wired', () => {
     let sawCriminalSettlement = false;
     let sawCorruptNpc = false;
+    let sawCorruptGoal = false;
 
     const failures = collectSeedFailures(SEEDS, (seed) => {
       const s = gen(seed);
@@ -39,7 +40,11 @@ describe('corruptionPass — generation-time onset (integration)', () => {
             expect(npc.corruptionVector).toBeTruthy();
             expect(npc.corruptTies?.criminalInstitution).toBeTruthy();
             expect(npc.corruptTies?.thievesGuild).toBeTruthy();
+            // RE-KEYED (PEOPLE-1 CAST, dc655f712): the cast is ~3.6x the rung roster, so a card whose goal pool is wholly
+            // held is born goal-less (REVIEW-INTAKE-4's refusal, npcGenerator :: generateNPC); the rewrite reaches a card with a goal.
+            if (npc.goal === null) continue;
             expect(npc.goal?.short).toBeTruthy(); // goal rewritten to a compromised motivation
+            sawCorruptGoal = true;
           }
         }
       } else {
@@ -56,6 +61,8 @@ describe('corruptionPass — generation-time onset (integration)', () => {
     expect(sawCriminalSettlement).toBe(true);
     // And with eligible NPCs under real crime pressure, corruption should fire.
     expect(sawCorruptNpc).toBe(true);
+    // And at least one corrupt card carries the (rewritten) goal, so the goal arm is never vacuous.
+    expect(sawCorruptGoal).toBe(true);
   });
 
   it('is deterministic — same seed yields identical corruption flags', () => {

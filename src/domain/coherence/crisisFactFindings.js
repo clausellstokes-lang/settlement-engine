@@ -35,6 +35,7 @@ import { composeTonightSheet, CAST_WANTS } from '../summary/tonightSheet.js';
 import { governingFactionOf } from '../rulingPower.js';
 import { STRESS_INSTITUTION_EFFECTS } from '../../data/stressInstitutionEffects.js';
 import { migrationDirectionOf } from '../crisis/migrationDirection.js';
+import { firstRankMembershipOf, powerOrderOf } from '../people/membership.js';
 
 /** @typedef {{ quote: string, detail: string }} CrisisFactFinding */
 /**
@@ -49,7 +50,7 @@ import { migrationDirectionOf } from '../crisis/migrationDirection.js';
  */
 /**
  * A cast person as this module reads it: the Tonight sheet's npc plus the house it sits in.
- * @typedef {import('../summary/tonightSheet.js').TonightNpc & { factionAffiliation?: unknown }} CrisisNpc
+ * @typedef {import('../summary/tonightSheet.js').TonightNpc & { memberships?: unknown }} CrisisNpc
  */
 /**
  * The settlement fields this module reads, shaped so the record still goes, unwidened, to the
@@ -207,9 +208,11 @@ export function crisisCastSenseFindings(settlement, surfaces = {}) {
       }
     }
     // plotter_governs: the instigator is the governing house, or the house holding it by capture.
+    const order = powerOrderOf(settlement);
     for (const e of entries) {
       for (const row of e.cast.roles.filter((r) => r.role === 'instigator')) {
-        const fname = row.kind === 'faction' ? str(row.id) : str(npcById(str(row.id))?.factionAffiliation);
+        // MERGE-CAR: a person's house is its FIRST-RANK power (the people car's memberships, M-1b; as crisisCast reads the brunt)
+        const fname = row.kind === 'faction' ? str(row.id) : str(firstRankMembershipOf(npcById(str(row.id)), order)?.power);
         if (!fname) continue;
         if (govName && fname === govName) out.push({ surface: 'record', quote: `${row.name} of ${fname}`, detail: `plotter_governs: the ${str(e.type)} instigator is the governing house` });
         else if (captured && isCriminal(fname)) out.push({ surface: 'record', quote: `${row.name} of ${fname}`, detail: `plotter_governs: the ${str(e.type)} instigator's house already holds the seat by capture` });

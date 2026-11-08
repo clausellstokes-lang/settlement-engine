@@ -182,17 +182,20 @@ describe('the composed-prose manifest — the DRIFT corpus, both audiences', () 
     // 67,780 -> 67,754 (372/358/358 -> 372/360/358) at F6 BUDGET-FLOOR (UNITS 1–4) (ODQ §934.105, RUNG 1 OF THE SOAK LADDER, 2026-11-04; record docs/shift-records/2026-11-04-rung1-22-f6-budget-floor.json).
     // Towns unmoved at 516/3/3/3.
     // 67,754 -> 67,754 (372/360/358 -> 372/364/358) at F1 DEFENCE-WORDS, FIRST STEP (UNITS 1–5) (ODQ §934.105, RUNG 1 OF THE SOAK LADDER, 2026-11-04; record docs/shift-records/2026-11-04-rung1-23-f1-defence-words.json).
+    // 67,754 -> 67,754 (372/364/358 -> 378/366/358) at RECORD 0a, THE REVIEW-INTAKE LANE (ODQ §934.105, THE PEOPLE CAR’S LANDING, 2026-11-07; record docs/shift-records/2026-11-07-people-land-0a-review-intake.json).
+    // 67,754 -> 67,502 (378/366/358 -> 380/372/358) at RECORD 1, PEOPLE-1 CAST (ODQ §934.105, THE PEOPLE CAR’S LANDING, 2026-11-07; record docs/shift-records/2026-11-07-people-1-cast.json).
+    // 67,502 -> 67,564 (380/372/358 -> 380/372/358) at RECORD 3, PEOPLE-3 HOOKS (ODQ §934.105, THE PEOPLE CAR’S LANDING, 2026-11-07; record docs/shift-records/2026-11-07-people-3-hooks.json).
+    // 67,564 -> 67,746 (380/372/358 -> 380/368/358) at RECORD 4, PEOPLE-4 TIES (ODQ §934.105, THE PEOPLE CAR’S LANDING, 2026-11-07; record docs/shift-records/2026-11-07-people-4-ties.json).
+    // 67,746 -> 67,362 (380/368/358 -> 380/368/358) at RECORD 5A, PEOPLE-5A DISPLAY (ODQ §934.105, THE PEOPLE CAR’S LANDING, 2026-11-07; record docs/shift-records/2026-11-07-people-5a-display.json).
+    // 67,362 -> 67,674 (380/368/358 -> 380/368/358) at RECORD 6, PEOPLE-LAND SHIM OUT (ODQ §934.105, THE PEOPLE CAR’S LANDING, 2026-11-07; record docs/shift-records/2026-11-07-people-land-shim-out.json).
     // Towns unmoved at 516/3/3/3.
-    // 67,754 -> 67,730 (372/364/358 unmoved) at THE POOL CENSUS COMPOSED (ODQ §934.105, RUNG 2 OF THE SOAK LADDER, the landing
-    // stacked on rung 1; record docs/shift-records/2026-11-06-rung2-04-census-composed-prose-manifest.json). Towns unmoved at 516/3/3/3.
-    // 67,730 -> 68,954 (372/364/358 -> 384/372/364) at W5 HIS CONSTRUCTION (ODQ §934.105, the construction-and-wiring
-    // wave of 2026-11-07; record docs/shift-records/2026-11-07-w5-01-legacy-and-living-memory-said.json): the new sentence
-    // mount history.legacy composes DS-GEN-16's living-memory and legacy lines. Towns unmoved at 516/3/3/3.
+    // 67,674 -> 67,802 (380/368/358 -> 378/366/358) at MERGE-CAR RECORD A, THE RUNG-2 LANDING'S MERGE (ODQ §934.105, THE INTEGRATION LANDING, 2026-11-08; record docs/shift-records/2026-11-08-merge-car-a-rung2-composition.json), against the carried car figures.
+    // Towns unmoved at 516/3/3/3.
     expect(tally, 'the DRIFT corpus by seed, cells and towns').toEqual({
-      'golden-master-v3': { cells: 68_954, towns: 516 },
-      'gm-seed-a': { cells: 384, towns: 3 },
-      'gm-seed-b': { cells: 372, towns: 3 },
-      'gm-seed-c': { cells: 364, towns: 3 },
+      'golden-master-v3': { cells: 67_802, towns: 516 },
+      'gm-seed-a': { cells: 378, towns: 3 },
+      'gm-seed-b': { cells: 366, towns: 3 },
+      'gm-seed-c': { cells: 358, towns: 3 },
     });
     // The two halves must close against the figures every other arm here reads.
     expect(Object.values(tally).reduce((n, r) => n + r.cells, 0)).toBe(run.cells.length);
@@ -387,10 +390,9 @@ describe('the composed-prose manifest — the DRIFT corpus, both audiences', () 
     const absent = registered.filter((m) => !recorded.has(m));
     expect(absent, 'every mount the corpus does not reach carries a reason, and no other does')
       .toEqual(reasoned);
-    // 56 / 42 -> 57 / 43 at W5 HIS construction (2026-11-07): the sentence mount history.legacy, recorded.
-    expect(registered.length, 'the registry\'s distinct mounts').toBe(57);
+    expect(registered.length, 'the registry\'s distinct mounts').toBe(56);
     expect(registered.filter((m) => recorded.has(m)).length, 'and the manifest records this many')
-      .toBe(43);
+      .toBe(42);
     // ⛔ AND THE REASONS ARE RE-MEASURED, NEVER TAKEN ON FAITH: every reasoned mount sits on a
     // block that fires on NO town of the RATE grid either, so its silence here is the world's
     // and not this recipe's. A block that starts speaking reds this arm until someone re-states

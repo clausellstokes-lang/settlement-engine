@@ -34,7 +34,7 @@ import { generatePowerStructure } from '../../src/generators/power/rulingStructu
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { governingFactionOf, nameOf, transferRulingPower } from '../../src/domain/rulingPower.js';
 import { factionArchetype } from '../../src/domain/factionArchetypes.js';
-import { rulerLens } from '../../src/domain/worldPulse/religionLegitimacy.js';
+import { rulerLens, orgPower } from '../../src/domain/worldPulse/religionLegitimacy.js';
 
 /** A real generated power structure. @param {string} tier @param {string} prosperity */
 const realPs = (tier, prosperity) => generatePowerStructure(tier, { prosperity }, null, {}, []);
@@ -184,7 +184,13 @@ describe('rulerLens reads the canonical governing seat', () => {
     // Selection, isolated: lens.power tracks the chosen record's own power. The roster is
     // non-empty here, so leadPow floors it — assert the seat's 17 does NOT read as the temple's 57.
     const lens = rulerLens(s);
-    expect(lens.power).toBeLessThan(0.45 + 0.55 * 0.57);
+    // 2026-11-07 PEOPLE-1 CAST: the lens floors the seat's power with its own people's (`leadPow`, the governing
+    // faction's highest card power); the cast's seat card carries a higher `power` than the rung roster's, so the
+    // bound is the formula on the seat's OWN people, read off the record — never the temple's 57.
+    const seatPeople = (s.npcs || []).filter((n) => n.factionAffiliation === nameOf(seat)).map((n) => orgPower(n));
+    const leadPow = Math.max(0, ...seatPeople);
+    expect(lens.power).toBeCloseTo(Math.min(1, 0.45 + 0.55 * Math.max(0.17, leadPow)), 10);
+    expect(lens.power).not.toBeCloseTo(0.45 + 0.55 * 0.57, 10); // anchored: the equality above pins the seat's own reading
     // And the lean is the seat's (government temper 0.5), not the temple's (religious 0.4).
     expect(lens.temper).toBeCloseTo(0.5, 10);
   });

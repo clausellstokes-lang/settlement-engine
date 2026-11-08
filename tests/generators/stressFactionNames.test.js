@@ -90,7 +90,8 @@ describe('stress factions take the role pool\'s first unused name', () => {
       expect(claimant).toBeTruthy();
       const { changed, touched } = applyFactionRenameToSettlement(settlement, claimant, 'The Iron Pretenders');
       expect(changed).toBe(true);
-      expect(touched).toEqual(expect.arrayContaining(['npcs[].factionAffiliation', 'factions[].name']));
+      // PEOPLE-5B (M-7): a card names its power in `memberships`; the grouping left the record.
+      expect(touched).toEqual(expect.arrayContaining(['npcs[].memberships[].power']));
       const { stress: _stress, stressors: _stressors, ...rest } = settlement;
       expect(JSON.stringify(rest)).not.toContain(claimant); // anchored: the next line pins the new name in this same record
       expect(JSON.stringify(rest)).toContain('The Iron Pretenders');

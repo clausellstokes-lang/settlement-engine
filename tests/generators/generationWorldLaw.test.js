@@ -606,22 +606,29 @@ describe('full-pipeline world-law enforcement', () => {
     // river port, and 'Laird' is a celtic cultural title minted beside 'Druid'. Both
     // measured present on these exact seeds (2026-07-27). A roster that stopped
     // carrying roles or titles at all now reds on the anchor.
+    // 2026-11-07 PEOPLE-1 CAST (R-P2, M-1b): a card's role is its institution's TITLE from the face registry, so the
+    // generated-role and cultural-title leaks of today's roster have no writer: the river port's cast carries the
+    // faces of the houses it rolled (no Harbour rolls on a river, so no harbour master; the wharf's wharfinger does),
+    // and the mundane world's cast carries no magic house's face (no Wizard's tower rolls where magic does not
+    // function; a magic-category pool draws its body from the mundane pools, representatives.js). The culture's
+    // honorific ('Druid', 'Laird') is no longer written on the card — `title` is the face's (the record's §5).
     expectAbsentWithAnchor(
       riverSettlement.npcs.map(npc => npc.role),
-      'Naval Commander',
-      'City Watch Chief',
-      'river-port generated roles',
+      'the harbour master',
+      'the watch commander',
+      'river-port cast titles',
     );
-    // The celtic PRIEST's title is 'Druid' (namingData celtic.titles.priest), and since J24
-    // (2026-09-30, TE-CH-6) a magic-disabled world keeps it: before, every celtic priest there was
-    // stripped of their own culture's word for priest. Its magic titles ('Mage', 'Sorcerer') are
-    // still filtered by their own tokens.
-    expect(mundaneSettlement.npcs.map(npc => npc.title)).toContain('Druid');
     expectAbsentWithAnchor(
       mundaneSettlement.npcs.map(npc => npc.title),
-      'Mage',
-      'Laird',
-      'magic-disabled cultural titles',
+      'the wizard',
+      'the dean',
+      'magic-disabled cast titles',
+    );
+    expectAbsentWithAnchor(
+      mundaneSettlement.npcs.map(npc => npc.title),
+      'the guild archmage',
+      'the sage',
+      'magic-disabled cast titles (the guild)',
     );
     expect(riverSettlement.generationCoherenceReceipt.status).toBe('coherent');
     expect(mundaneSettlement.generationCoherenceReceipt.status).toBe('coherent');

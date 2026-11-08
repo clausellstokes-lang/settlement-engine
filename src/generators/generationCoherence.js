@@ -67,12 +67,6 @@ function presentationBranches(settlement) {
         ['npc1Name', 'npc1Role', 'npc2Name', 'npc2Role'],
       ))
     : settlement?.relationships;
-  const factions = Array.isArray(settlement?.factions)
-    ? settlement.factions.map(faction => withoutCopiedFields(
-        faction,
-        ['members'],
-      ))
-    : settlement?.factions;
   const powerStructure = withoutCopiedFields(
     settlement?.powerStructure,
     ['conflicts'],
@@ -90,7 +84,7 @@ function presentationBranches(settlement) {
     pressureSentence: settlement?.pressureSentence,
     coherenceNotes: settlement?.coherenceNotes,
     powerStructure,
-    factions,
+    // PEOPLE-5A (M-2): the NPC grouping is not a presentation branch — the powers are.
     conflicts: settlement?.conflicts,
     relationships,
     stress: settlement?.stressors ?? settlement?.stress,

@@ -10,8 +10,8 @@
  * moves. The strength label is then drawn from the resolved kind's list with the same single
  * roll (every list is three long).
  *
- * At the tie step the seat's factions are not yet known (the power affiliation is decided by the
- * enrichment tail), so the seat exemptions read empty and only the class, office and same-faction
+ * The tie step is the people car's seam (people/ties.js :: drawTies, MERGE-CAR): the cards' memberships
+ * are written there and read for the same-faction exemption; the seat exemptions read empty and only the class, office and same-faction
  * exemptions can spare a tie: the draw is at least as strict as the reader, never laxer.
  */
 import { STRESS_ECONOMIC_EFFECTS } from '../../data/npcData.js';
@@ -19,8 +19,8 @@ import { resolveTieKey } from '../../domain/roles/roleClass.js';
 
 /**
  * @param {any} archetype the kind `computeRelTension` drew (a STRESS_ECONOMIC_EFFECTS entry)
- * @param {{ id?: unknown, role?: unknown, factionAffiliation?: unknown }} npc
- * @param {{ id?: unknown, role?: unknown, factionAffiliation?: unknown }} partner
+ * @param {{ id?: unknown, role?: unknown, memberships?: unknown }} npc
+ * @param {{ id?: unknown, role?: unknown, memberships?: unknown }} partner
  * @returns {any} the archetype to print
  */
 export function tieArchetype(archetype, npc, partner) {

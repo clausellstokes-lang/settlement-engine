@@ -44,7 +44,7 @@
 // that older saves wouldn't recompute identically. GENERATOR_VERSION is the
 // build-time stamp — useful for "this save was made by SettlementForge 1.2.3."
 
-export const SCHEMA_VERSION     = 1;
+export const SCHEMA_VERSION     = 2; // PEOPLE-5B (2026-11-07, M-7): 1 -> 2, the people car (settlementMigrations.js :: migrateV1toV2)
 export const SIMULATION_VERSION = 1;
 export const GENERATOR_VERSION  = '0.9.0';
 
@@ -308,7 +308,8 @@ export const FIELD_ALIASES = Object.freeze({
  * @property {Object} [power]
  *   Faction power distribution, public legitimacy ingredients, stability.
  *
- * @property {Faction[]} [factions]
+ * (PEOPLE-5B, schema 2, M-7: the NPC grouping `factions` left the record — the powers under
+ *  `power`/`powerStructure.factions` are the only faction roster.)
  * @property {Object} [population]
  * @property {NPC[]} [npcRoster]
  * @property {Threat[]} [threats]
@@ -384,7 +385,6 @@ export const FIELD_ALIASES = Object.freeze({
  *   economicViability?: any,
  *   thievesGuildStrength?: number,
  *   nearbyResourcesDepleted?: boolean|string[],
- *   factions?: SimFaction[],
  *   npcs?: SimNpc[],
  *   institutions?: SimInstitution[],
  *   stressors?: SimStressor[],
@@ -465,8 +465,8 @@ export const FIELD_ALIASES = Object.freeze({
  *   dots?: number,
  *   factionId?: string,
  *   factionLink?: string,
- *   factionAffiliation?: string,
- *   secondaryAffiliation?: string,
+ *   memberships?: Array<{ power: string, rank: (1|2|3|null), share?: (number|null) }>,
+ *   institution?: ({ kind: ('house'|'power'), key: string, family?: (string|null), title?: (string|null) } | null),
  *   institutionId?: string,
  *   organizationId?: string,
  *   settlementId?: string,
@@ -481,7 +481,6 @@ export const FIELD_ALIASES = Object.freeze({
  *   corruptTies?: any,
  *   corruptionVector?: any,
  *   plotHooks?: any[],
- *   linkedFactionIds?: any[],
  *   linkedInstitutionIds?: any[]
  * } & Record<string, any>} SimNpc
  *
@@ -490,8 +489,12 @@ export const FIELD_ALIASES = Object.freeze({
  * `structuralRank` are unioned (string|number) because both forms appear across
  * legacy generator output. Nested prose/pointer fields (secret, goal, personality,
  * corruptTies …) stay loose until their own sub-shapes are enumerated.
- * `linkedFactionIds` currently stores id-first handles (`faction.id`, else the
- * generated seat's `.faction` / `.name`) pending the governed ID-only migration.
+ * SCHEMA 2 (PEOPLE-5B, M-7): a card's standing in the powers is `memberships`
+ * (ranked, each power ∈ powerStructure.factions) and its house is `institution`
+ * (`null` for the DM's card); `factionAffiliation`, `secondaryAffiliation`,
+ * `linkedFactionIds`, `factionGoal` and `densityRungRole` left the record, and the
+ * grouping `settlement.factions` with them. The simulation's reads of them (FPZ's,
+ * M-6) go through the loose `Record<string, any>` until FPZ rebuilds them.
  */
 
 /**
@@ -977,9 +980,13 @@ export const FIELD_ALIASES = Object.freeze({
  * @property {string} [role]
  * @property {string} [factionId]
  * @property {string} [institutionId]
+ * @property {Array<{ power: string, rank: (1|2|3|null), share?: (number|null) }>} [memberships]
+ *   SCHEMA 2 (M-7): the powers the card stands in, ranked first/second/third where its house backs it.
+ * @property {({ kind: ('house'|'power'), key: string, family?: (string|null), title?: (string|null) } | null)} [institution]
+ *   SCHEMA 2 (M-7): the house (or, for a minted face, the power) the card is the face of; null for the DM's.
  *
  * Legacy compatibility note: today's generator produces NPC entries
- * with shape `{ id, name, role, category, factionAffiliation,
+ * with shape `{ id, name, role, title, category, institution, memberships,
  * structuralPosition, structuralRank, power, influence, personality,
  * physical, goal, secret, plotHooks, … }`. The Tier 4.5 structured
  * shape (NpcProfile below) is derived from this on demand via

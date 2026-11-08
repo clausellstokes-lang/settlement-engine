@@ -29,7 +29,8 @@ describe('generators-domain-2 — structural-NPC office coverage', () => {
       for (const s of ['gm-a', 'gm-b', 'gm-c', 'gm-d']) {
         const settlement = gen({ settType: 'town', terrainOverride }, s);
         const npcs = settlement.npcs || [];
-        const hasGuardCaptain = npcs.some((n) => n.role === 'Guard Captain');
+        // 2026-11-07 PEOPLE-1 CAST (M-1b): the realized guard captain is the militia's or the watch's FACE, by title
+        const hasGuardCaptain = npcs.some((n) => ['Guard Captain', 'the militia captain', 'the watch sergeant', 'the watch captain', 'the watch commander'].includes(n.role));
         if (!hasGuardCaptain) continue;
         sawGuardCaptainSettlements++;
         const synthWatch = npcs.filter(
@@ -51,7 +52,7 @@ describe('generators-domain-2 — structural-NPC office coverage', () => {
       tier: 'town',
       institutions: [],
       powerStructure: { factions: [{ faction: 'Military/Guard', category: 'military' }] },
-      npcs: [{ id: 'npc_1', role: 'Guard Captain', factionAffiliation: 'Military/Guard' }],
+      npcs: [{ id: 'npc_1', role: 'Guard Captain', memberships: [{ power: 'Military/Guard', rank: 1, share: 1 }] }],
     });
     const synth = (out.npcs || []).filter((n) => n.generatedAs === 'faction_structural');
     expect(synth).toHaveLength(0);
@@ -62,15 +63,15 @@ describe('generators-domain-2 — structural-NPC office coverage', () => {
       tier: 'town',
       institutions: [{ id: 'inst_temple', name: 'Grand Temple' }],
       powerStructure: { factions: [{ faction: 'Religious Authorities', category: 'religious' }] },
-      npcs: [{ id: 'npc_1', role: 'Mayor', factionAffiliation: 'Elected Reeve' }], // no religious NPC
+      npcs: [{ id: 'npc_1', role: 'Mayor', memberships: [{ power: 'Elected Reeve', rank: 1, share: 1 }] }], // no religious NPC
     });
     const synth = (out.npcs || []).filter((n) => n.generatedAs === 'faction_structural');
     expect(synth.length).toBeGreaterThan(0);
     const priest = synth.find((n) => n.role === 'High Priestess');
     expect(priest).toBeTruthy();
     // Stamped: belongs to its seat and links the temple institution.
-    expect(priest.factionAffiliation).toBe('Religious Authorities');
-    expect(priest.linkedFactionIds).toEqual(['Religious Authorities']);
+    // PEOPLE-LAND re-key (M-2): the placeholder's power is a membership; the retired fields are not written.
+    expect(priest.memberships).toEqual([{ power: 'Religious Authorities', rank: 1, share: 1 }]);
     expect(priest.linkedInstitutionIds).toContain('inst_temple');
   });
 
@@ -85,7 +86,7 @@ describe('generators-domain-2 — structural-NPC office coverage', () => {
       tier: 'town',
       institutions: [],
       powerStructure: { factions: [{ faction: 'Religious Authorities', category: 'religious' }] },
-      npcs: [{ id: 'npc_1', role, factionAffiliation }],
+      npcs: [{ id: 'npc_1', role, memberships: factionAffiliation ? [{ power: factionAffiliation, rank: 1, share: 1 }] : [] }], // PEOPLE-LAND (M-2): the card's power is its membership
     }).npcs.filter((n) => n.generatedAs === 'faction_structural');
 
     // THE VACUITY CONTROL: on the seat path the role name is inert, by design.
@@ -129,7 +130,7 @@ describe('generators-domain-2 — structural-NPC office coverage', () => {
           { faction: 'Craft Guilds', category: 'economy' },
         ],
       },
-      npcs: [{ id: 'npc_1', role: 'Guild Master', factionAffiliation: 'Merchant Guilds' }],
+      npcs: [{ id: 'npc_1', role: 'Guild Master', memberships: [{ power: 'Merchant Guilds', rank: 1, share: 1 }] }],
     });
     const synth = (out.npcs || []).filter((n) => n.generatedAs === 'faction_structural');
     expect(synth).toHaveLength(0);
@@ -155,7 +156,7 @@ describe('generators-domain-2 — structural-NPC office coverage', () => {
       tier: 'town',
       institutions: [{ name: 'Grand Temple', category: 'Religious' }],
       powerStructure: { factions: [{ faction: 'Religious Authorities', category: 'religious' }] },
-      npcs: [{ id: 'npc_1', role: 'Mayor', factionAffiliation: 'Elected Reeve' }],
+      npcs: [{ id: 'npc_1', role: 'Mayor', memberships: [{ power: 'Elected Reeve', rank: 1, share: 1 }] }],
     });
     const priest = (out.npcs || []).find((n) => n.role === 'High Priestess');
     expect(priest).toBeTruthy();
@@ -167,7 +168,7 @@ describe('generators-domain-2 — structural-NPC office coverage', () => {
       tier: 'town',
       institutions: [{ id: 'inst_temple', name: 'Grand Temple', category: 'Religious' }],
       powerStructure: { factions: [{ faction: 'Religious Authorities', category: 'religious' }] },
-      npcs: [{ id: 'npc_1', role: 'Mayor', factionAffiliation: 'Elected Reeve' }],
+      npcs: [{ id: 'npc_1', role: 'Mayor', memberships: [{ power: 'Elected Reeve', rank: 1, share: 1 }] }],
     });
     const priest = (out.npcs || []).find((n) => n.role === 'High Priestess');
     expect(priest.linkedInstitutionIds).toEqual(['inst_temple']);
@@ -183,7 +184,7 @@ describe('generators-domain-2 — structural-NPC office coverage', () => {
       tier: 'town',
       institutions: [{ name: 'Village smithy', category: 'Crafts' }],
       powerStructure: { factions: [{ faction: 'Religious Authorities', category: 'religious' }] },
-      npcs: [{ id: 'npc_1', role: 'Mayor', factionAffiliation: 'Elected Reeve' }],
+      npcs: [{ id: 'npc_1', role: 'Mayor', memberships: [{ power: 'Elected Reeve', rank: 1, share: 1 }] }],
     });
     const priest = (out.npcs || []).find((n) => n.role === 'High Priestess');
     expect(priest).toBeTruthy();
@@ -195,7 +196,7 @@ describe('generators-domain-2 — structural-NPC office coverage', () => {
       tier: 'town',
       institutions: [],
       powerStructure: { factions: [{ faction: 'Religious Authorities', category: 'religious' }] },
-      npcs: [{ id: 'npc_1', role: 'Mayor', factionAffiliation: 'Elected Reeve' }],
+      npcs: [{ id: 'npc_1', role: 'Mayor', memberships: [{ power: 'Elected Reeve', rank: 1, share: 1 }] }],
     };
     const once = ensureFactionStructuralNpcs(base);
     const twice = ensureFactionStructuralNpcs(once);

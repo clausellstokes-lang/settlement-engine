@@ -115,7 +115,7 @@ describe('complete Wizard News address and headline rewrite contract', () => {
     expect(overlapFields.consequenceOutcomes.filter(isStateOnlyOutcome)).toHaveLength(12);
   });
 
-  it('A2 freezes all 88 address rows and their canonical digest', () => {
+  it('A2 freezes all 80 address rows and their canonical digest', () => {
     expect(compareNewsAddressRows(addressRows, baseline.addressTotality.rows)).toBe(true);
     expect(addressRowsSha256(addressRows)).toBe(baseline.addressTotality.rowsSha256);
     // T8 · SHIFT (§858 + §860): 106 → 102 identities over 53 → 51 homes. The two homes that leave
@@ -146,7 +146,13 @@ describe('complete Wizard News address and headline rewrite contract', () => {
     // its cause, measured at the merged tip 6c3e25661): 43/2/86/0/86/356/524 → 44/2/88/0/88/364/532; queued|npc_sabotage ARRIVES and
     // no home leaves; applied|roads 41/41 → 45/45 and queued|strategy_sue_for_peace 2/2 → 1/1 (both fields), at
     // news-headline-contract.mjs's ADDRESS_TOTALS. PLAUSIBLE (census steps × WIRING-W0 / REVIEW-INTAKE), not bisected. Every row stays indicative.
-    expect(baseline.addressTotality.totals).toEqual({ homes: 44, fields: 2, identities: 88, prospectiveIdentities: 0, indicativeIdentities: 88, distinctValues: 364, occurrences: 532 });
+    // 2026-11-07 (the people car's landing, PEOPLE-LAND second seat, §934.105; by first-parent point: lane 1 dc655f712 39/2/78/0/78/596/758,
+    // lane 2 3aa160a70 as now, lane 5B a725df7e4 four rows' counts and the digest only): 44/2/88/0/88/372/540 → 40/2/80/0/80/596/800; net seven homes
+    // out and three in, named at news-voice-contract.mjs's RE-RECORDED block. Every row stays indicative.
+    // 2026-11-08 (MERGE-CAR, the people car merged into the integration branch, 8dff691f3; re-keyed by identity with its cause, measured at
+    // the working tree, byte-equal to the merge): 40/2/80/0/80/596/800 → 40/2/80/0/80/588/792; no home in or out; applied|tradition 22/22 →
+    // 18/18 (both fields, the integration parent's own count), at news-headline-contract.mjs's ADDRESS_TOTALS. PLAUSIBLE, not bisected. Every row stays indicative.
+    expect(baseline.addressTotality.totals).toEqual({ homes: 40, fields: 2, identities: 80, prospectiveIdentities: 0, indicativeIdentities: 80, distinctValues: 588, occurrences: 792 });
   });
 
   it('A3 freezes both raw lanes and all 26 exact rewrite counts', () => {

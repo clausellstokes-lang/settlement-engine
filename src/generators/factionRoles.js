@@ -22,6 +22,7 @@ import {
 } from '../domain/content/customContentSemanticAuthority.js';
 import { factionDisplayNameOf, factionRefOf } from '../domain/factionRefs.js';
 import { resolveGenerationWorldLaw } from './generationContext.js';
+import { firstRankMembershipOf } from '../domain/people/membership.js';
 import { rollsRegisterVii } from '../domain/density/densityLaw.js';
 
 // inferImportance is not used directly here yet — kept on the import
@@ -206,10 +207,7 @@ export function generateFactionStructuralNpcs(
   if (!arch) return [];
   const worldLaw = resolveGenerationWorldLaw(generationContext);
   const defs = (FACTION_ROLES[arch] || []).filter(worldLaw.allowsRole);
-  // `linkedFactionIds` is the propagation identity: prefer a durable authored
-  // id, falling back to the canonical display key only for legacy/generated
-  // seats that genuinely carry no id. `factionAffiliation` remains display prose.
-  const factionKey = factionRefOf(faction);
+  // The placeholder's power is its membership, named by the seat's display name (PEOPLE-LAND, M-2).
   const factionName = factionDisplayNameOf(faction) || 'Unknown faction';
   return defs.map((def, i) => {
     // ── ONE-TIME CORRECTION, 2026-08-11 (owner-approved) ────────────────────
@@ -249,17 +247,13 @@ export function generateFactionStructuralNpcs(
       role: def.role,
       importance: def.importance,
       status: 'active',
-      // factionAffiliation is the DISPLAY-name link every pipeline NPC carries and
-      // the key downstream consumers (and this module's own office-coverage) read.
-      // Stamping it makes the synthesized leader belong to its seat AND makes a
-      // second ensureFactionStructuralNpcs pass idempotent (the placeholder now
-      // covers its own office, so it is not re-synthesized).
-      factionAffiliation: factionName,
+      // PEOPLE-LAND (M-2, the shim out): the synthesized leader belongs to its seat by a
+      // MEMBERSHIP, first in that power (the card's standing, domain/people/membership.js),
+      // which this module's own office-coverage reads, so a second
+      // ensureFactionStructuralNpcs pass stays idempotent. The retired `factionAffiliation`
+      // and `linkedFactionIds` are no longer written.
+      memberships: [{ power: factionName, rank: 1, share: 1 }],
       linkedInstitutionIds: linkedInstId ? [linkedInstId] : [],
-      // Canonical faction identity. Name-only legacy seats intentionally fall
-      // back to their display key; id-bearing seats must never be downgraded to
-      // a rename-sensitive label because propagation and clergy joins are id-first.
-      linkedFactionIds: factionKey ? [factionKey] : [],
       // Defaults for the structural fields the impairment engine reads.
       // Influence is a BAND STRING everywhere it is consumed (npcComponents,
       // campaign PDF filter `influence === 'high'`) — the prior numeric 75/50/25
@@ -318,9 +312,8 @@ export function ensureFactionStructuralNpcs(
   // Office source: the powerStructure power-seats are the authoritative faction
   // list — each carries a `category` that classifies reliably. Fall back to the
   // grouping list only when no powerStructure exists (bare-faction test inputs).
-  const seats = settlement.powerStructure?.factions?.length
-    ? settlement.powerStructure.factions
-    : (settlement.factions || []);
+  // PEOPLE-LAND (M-2): the NPC grouping fallback is gone with the grouping; the powers alone.
+  const seats = settlement.powerStructure?.factions || [];
   if (!seats.length) return settlement;
 
   const existingNpcs = settlement.npcs || [];
@@ -339,7 +332,7 @@ export function ensureFactionStructuralNpcs(
   // count as coverage too (they carry factionAffiliation), so re-running is a no-op.
   const coveredRoleKeys = new Set();
   for (const npc of existingNpcs) {
-    const affil = String(npc.factionAffiliation || '').toLowerCase();
+    const affil = String(firstRankMembershipOf(npc)?.power || '').toLowerCase(); // the card's first power (M-2)
     const seat = affil ? seatByName.get(affil) : null;
     const byAffiliation = seat
       ? matchFactionArchetype(seat)

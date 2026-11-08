@@ -1,0 +1,28 @@
+{
+  "_doc": "RECORD 2 OF THE PEOPLE CAR'S LANDING (PEOPLE-LAND, second seat), ODQ §934.105 (the cloud chair signs by the owner's delegation of 2026-11-06, vetoable; PEOPLE-RULINGS M-1, M-3). THE CAUSE, ONE LANE: lane 2, PEOPLE-2 CAST-DERIVED (docs/PEOPLE_2_CAST_2026-11-07.md): the crisis cast, the seat rows, the crisis hooks' party and the structural standing read from the powers' people, merged onto lane 1 at 3aa160a70 (MERGE-234, the chair's seat ruling). THE MOVE, MEASURED before the write by scripts/audit/landing-stage.sh measure at the stage of dc655f712 (record 1's post-state) and at the stage of 3aa160a70: the generator golden master 525 of 525 rows (thorp 84, hamlet 84, village 84, town 105, city 84, metropolis 84), 58fb2164.. -> 0e235c36..; the espionage fence's driven corpus 360 of 360 (60 per tier), 360/360 distinct, 03a5a47e.. -> 12355043..; the herald desk 479 -> 478 keys (9 added, 10 removed, 2 moved); the dossier prose manifest 0 of 1,050; the PDF view-model snapshot 0; the preset lighting witness 0. The six MERGE-234 register and record commits after the merge (94901a5fb..f3912a838) move no golden byte (their stage equals this one on all six surfaces).",
+  "ownerWords": "for every appropriate institution, we generate one NPC … I think just one person per institution. They act as the face. We are not building all the citizens of a settlement. That's too granular and the DM can do that work themselves. We are simply making representatives.",
+  "ownerDate": "2026-11-07",
+  "odqRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's people-model charter of 2026-11-07, PEOPLE-RULINGS §0; the owner's delegation of 2026-11-06 to the cloud chair, session 01FE9mEvGxnFx6WTBkEC6ie9; the people car's landing)",
+  "cause": "PEOPLE-2 CAST-DERIVED — the crisis cast, the seat rows, the crisis hooks' party and the structural standing re-derived from the powers' people (lane/people-2-cast-2026-11-07, ebcf85fc7, merged at 3aa160a70 under the chair's seat ruling)",
+  "seat": "PEOPLE-LAND second seat (Opus 5.5) under the cloud chair (Fable 5.1), session 01FE9mEvGxnFx6WTBkEC6ie9, from the stage at 3aa160a70",
+  "surfaces": [
+    {
+      "surface": "generator-golden-master",
+      "action": "re-record",
+      "predictedRows": 525,
+      "proofForm": "settlement-hash"
+    },
+    {
+      "surface": "espionage-dormancy-fence",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "in-file corpus constant"
+    },
+    {
+      "surface": "herald-knowledge-desk-golden",
+      "action": "re-record",
+      "predictedRows": 478,
+      "proofForm": "derived-artefact"
+    }
+  ]
+}

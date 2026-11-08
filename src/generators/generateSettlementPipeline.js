@@ -10,12 +10,13 @@
  */
 
 import { createPRNG, generateSeed } from '../kernel/prng.js';
-import { setActiveRng, clearActiveRng } from '../kernel/rngContext.js';
+import { setActiveRng, clearActiveRng, getActiveRng } from '../kernel/rngContext.js';
 import { runPipeline } from './pipeline.js';
-import { generateNPCs, generateRelationships } from './npcGenerator.js';
-import { generateFactions, generateConflicts } from './powerGenerator.js';
+import { drawTies } from './people/ties.js';
+import { generateRepresentatives } from './people/representatives.js';
+import { generateConflicts } from './powerGenerator.js';
 import { generateHistory } from './historyGenerator.js';
-import { enrichNpcCoherence, relinkFactionMembers } from './narrativeGenerator.js'; import { fitFactionRoster } from './power/factionRoleFit.js'; // CENSUS-4 R12
+import { enrichNpcCoherence } from './narrativeGenerator.js'; // MERGE-CAR: CENSUS-4 R12's fitFactionRoster retired (the chair's SC-1 ruling: superseded by construction — memberships born by rank)
 import { enrichHistoryCoherence } from './narrative/historyCoherence.js';
 import { withCustomContent } from '../lib/dependencyEngine.js';
 // THE whole-word substitution, shared with the faction-rename convergence. The
@@ -23,7 +24,7 @@ import { withCustomContent } from '../lib/dependencyEngine.js';
 // prose, and a raw substring swap there corrupts a SURVIVOR whose name merely
 // starts with the departed one — one rule, one place, Unicode-aware boundaries.
 import { substituteWholeWord } from '../lib/narrativeMutations.js';
-import { countPreservedNpcs, mergePreservedNpcs } from '../domain/regenerationPreservation.js';
+import { mergePreservedNpcs } from '../domain/regenerationPreservation.js';
 // The LOCKS leaf (importless but for clone.js), already in this chunk through
 // regenerationPreservation — the full-generate carry reads the same id set the
 // section reroll does, so the two paths can never disagree about what is locked.
@@ -202,7 +203,7 @@ export function generateSettlementPipeline(config = {}, importedNeighbour = null
 /**
  * Refresh everything a relationship denormalizes about its two NPCs.
  *
- * An edge stores npc1Name/npc1Role beside npc1Id so readers can render it
+ * An edge stores npc1Name/npc1Role beside its `from` id so readers can render it
  * without loading the roster, AND it stores `description`/`tension` — prose the
  * archetype closures build by interpolating both names. All of it is a snapshot
  * taken at generation time that nothing re-derives, so once a preserved
@@ -231,8 +232,10 @@ function refreshRelationshipProjections(relationships, npcs, institutions) {
   if (!Array.isArray(relationships)) return relationships;
   const byId = new Map(npcs.map(npc => [npc?.id, npc]));
   return relationships.map(rel => {
-    const first  = byId.get(/** @type {string} */ (rel?.npc1Id));
-    const second = byId.get(/** @type {string} */ (rel?.npc2Id));
+    // PEOPLE-4 TIES: a tie is directed — `from` is the first end, `to` the second (R-P7).
+    // TODO(PEOPLE-5): a v1 save's `npc1Id`/`npc2Id` pair is read as `from`/`to` by the migration.
+    const first  = byId.get(/** @type {string} */ (rel?.from));
+    const second = byId.get(/** @type {string} */ (rel?.to));
     if (!first && !second) return rel;
     /** @type {Record<string, unknown>} */
     const next = {
@@ -446,7 +449,6 @@ export function carryLockedRosterThroughGenerate(previousSettlement, freshSettle
     ...freshSettlement,
     npcs: roster,
     relationships: refreshRelationshipProjections(freshSettlement.relationships, roster, freshSettlement.institutions),
-    factions: relinkFactionMembers(freshSettlement.factions, roster),
   };
 
   // A departed name that still belongs to somebody in the final cast is not
@@ -519,24 +521,17 @@ export function regenNPCsPipeline(settlement, config, options = {}) {
         config.cultureProfileKey
         || config.culture,
     });
-    // Roster size is a seeded draw and can come back SMALLER than the pinned
-    // cast, which would leave the surplus keepers appended with no relationships
-    // and no faction — surviving in name only. Floor the roll at the number the
-    // merge will carry, computed with the merge's own predicate so the two can
-    // never disagree. The draw still happens first, so a settlement holding no
-    // canon floors at 0 and rolls exactly what it always rolled.
-    // The dormant path must hand over the SAME config object, not a spread copy
-    // carrying a zero floor — anything downstream that fingerprints config keys
-    // would see a shape change where nothing changed.
-    const preservedCount = countPreservedNpcs(settlement.npcs, { mode: options.mode, locks: options.locks });
-    const rollConfig = preservedCount > 0 ? { ...config, _minNpcCount: preservedCount } : config;
-    const npcs = generateNPCs({
+    // THE PEOPLE CAR (PEOPLE-1 CAST, 2026-11-07): the cast is the roster's faces, one per house,
+    // so there is no roll to floor at the preserved count any more (the `_minNpcCount` floor is
+    // retired with the roll it floored) — a preserved person rides over the cast in the merge
+    // below exactly as before. The cards draw on this regen's own stream (the ambient one set
+    // above), each on its own keyed fork, so a regen of the same seed reproduces the same cast.
+    const npcs = generateRepresentatives({
       tier: settlement.tier,
       institutions: settlement.institutions || [],
       powerStructure: settlement.powerStructure,
       economicState: settlement.economicState,
-    }, config.culture || 'germanic', rollConfig, generationContext);
-    const relationships = generateRelationships(npcs, config, settlement.institutions || [], { government: settlement.powerStructure?.government ?? null, tier: settlement.tier }); // CENSUS-1f (site 19): the government only (R-Z)
+    }, config.culture || 'germanic', config, generationContext);
     // GS-2 (ODQ §934.101): the faction groups and the conflicts are derived from the FINAL
     // roster below, exactly as assembly derives them, because an NPC's power affiliation is
     // decided by the enrichment tail. The tier-1-only re-link that used to sit here (the
@@ -547,7 +542,10 @@ export function regenNPCsPipeline(settlement, config, options = {}) {
     // structuralPosition — not the poorer raw generateNPCs shape. The enrichment
     // reads the live settlement state (legitimacy/capture/food/prosperity) plus the
     // freshly generated npcs; give it a settlement-shaped view with the new roster.
-    const enrichedNpcs = fitFactionRoster(enrichNpcCoherence({ ...settlement, npcs, config }), settlement); // CENSUS-4 R12: the fitted roster, before canon rides over it
+    // (the seam mints the `other` powers' faces; their ties to the seat are drawn by drawTies below —
+    // MERGE-234, one tie writer — so the seam is handed no ties). MERGE-CAR: CENSUS-4 R12's roster fitter
+    // is retired here (the chair's SC-1 ruling): a card's powers are its memberships, born by rank.
+    const enrichedNpcs = enrichNpcCoherence({ ...settlement, npcs, config });
 
     // The user's canon rides OVER the finished roll rather than through it. Every
     // draw above has already happened, so preservation cannot perturb a seeded
@@ -570,18 +568,17 @@ export function regenNPCsPipeline(settlement, config, options = {}) {
       ? refreshRosterProse(merged, displacements, new Set(preserved.map(p => p.id)))
       : merged;
 
-    // The faction groups are built FROM the final npcs, so their members are the same records
-    // the roster carries (the one-source property relinkFactionMembers used to repair), and a
-    // displaced stranger can never sit in a group: a preserved character inherits its slot.
-    const finalRelationships = preserved.length
-      ? refreshRelationshipProjections(relationships, roster, settlement.institutions)
-      : relationships;
-    const factions = generateFactions(roster, settlement.powerStructure?.factions);
-    const conflicts = generateConflicts(factions, finalRelationships, config, settlement.institutions || []);
+    // The NPC grouping is gone (PEOPLE-LAND, M-2: the shim out): a card's powers are its
+    // memberships, so there is no group to rebuild from the final roster.
+    // THE PEOPLE CAR (PEOPLE-4 TIES, R-P7): one outgoing tie per card, drawn over the FINAL roster
+    // (the memberships written, the user's canon merged in) on this regen's own keyed family — the
+    // pair-saturation writer that drew here before the enrichment is retired. Drawn last, so it
+    // moves no draw above it; a fresh tie names the cast as it stands, so no projection refresh.
+    const finalRelationships = drawTies(roster, { config, institutions: settlement.institutions || [], tier: settlement.tier, government: settlement.powerStructure?.government ?? null }, getActiveRng());
+    const conflicts = generateConflicts(settlement.powerStructure?.factions || [], finalRelationships, config, settlement.institutions || [], roster);
     return {
       npcs: roster,
       relationships: finalRelationships,
-      factions,
       conflicts,
       _regenSeed: seed,
       // The preservation REPORT, out of band of the settlement parts. A keeper

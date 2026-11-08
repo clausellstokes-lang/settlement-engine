@@ -63,15 +63,21 @@ const ADVISORY_STATUS = new Map();
  *  1bff51c6d and the merge base bf263a78d fail it; the compose's census-1b merge 0856c09d3 does not; inside
  *  census-1b's first-parent line the flip is the census-4 merge fe7bb1d4a, and on census-4's side
  *  fa39513d3 fails it, 1abf16d8d does not. */
+/* RE-KEYED 2026-11-07 (PEOPLE-1 CAST, the people car's lane 1): 60 -> 59 of 65, MEASURED at the lane's tip. The cast
+ * replaces the rung roster and the battery over the stored record reads a different cast: criminal-crossroads-town-alder,
+ * -cinder, isolated-arcane-town-ember, mercantile-seaport-town-cinder and religious-river-village-cinder STOPPED
+ * failing; criminal-crossroads-town-dun, isolated-arcane-town-alder and -cinder and religious-river-village-dun STARTED
+ * (the advisory judgment, not the overall status: every specimen still certifies). Not bisected per specimen: one
+ * cause, the cast (R-P2) with its mints born beside it (R-P4), the mundane draw of a magic-category face where magic
+ * does not function, and the pressure line's noun without its article (M-1b) — the battery reads that prose. */
 const ADVISORY_FAILING = Object.freeze([
   'certification-v1-commercial-metropolis-alder',
   'certification-v1-commercial-metropolis-bracken',
   'certification-v1-commercial-metropolis-cinder',
   'certification-v1-commercial-metropolis-dun',
   'certification-v1-commercial-metropolis-ember',
-  'certification-v1-criminal-crossroads-town-alder',
   'certification-v1-criminal-crossroads-town-bracken',
-  'certification-v1-criminal-crossroads-town-cinder',
+  'certification-v1-criminal-crossroads-town-dun',
   'certification-v1-criminal-crossroads-town-ember',
   'certification-v1-frontier-hamlet-alder',
   'certification-v1-frontier-hamlet-bracken',
@@ -83,8 +89,10 @@ const ADVISORY_FAILING = Object.freeze([
   'certification-v1-grim-seaport-metropolis-cinder',
   'certification-v1-grim-seaport-metropolis-dun',
   'certification-v1-grim-seaport-metropolis-ember',
+  'certification-v1-isolated-arcane-town-alder',
   'certification-v1-isolated-arcane-town-bracken',
-  'certification-v1-isolated-arcane-town-ember',
+  'certification-v1-isolated-arcane-town-cinder',
+  'certification-v1-isolated-arcane-town-dun',
   'certification-v1-magical-desert-village-alder',
   'certification-v1-magical-desert-village-bracken',
   'certification-v1-magical-desert-village-cinder',
@@ -92,7 +100,6 @@ const ADVISORY_FAILING = Object.freeze([
   'certification-v1-magical-desert-village-ember',
   'certification-v1-mercantile-seaport-town-alder',
   'certification-v1-mercantile-seaport-town-bracken',
-  'certification-v1-mercantile-seaport-town-cinder',
   'certification-v1-mercantile-seaport-town-dun',
   'certification-v1-mercantile-seaport-town-ember',
   'certification-v1-mundane-river-port-city-alder',
@@ -106,7 +113,7 @@ const ADVISORY_FAILING = Object.freeze([
   'certification-v1-plagued-martial-city-ember',
   'certification-v1-religious-river-village-alder',
   'certification-v1-religious-river-village-bracken',
-  'certification-v1-religious-river-village-cinder',
+  'certification-v1-religious-river-village-dun',
   'certification-v1-religious-river-village-ember',
   'certification-v1-subsistence-thorp-alder',
   'certification-v1-subsistence-thorp-bracken',
@@ -336,8 +343,9 @@ function expectIndependentIntegrity(settlement, label) {
   for (const [index, relationship] of (
     settlement.relationships || []
   ).entries()) {
-    const first = npcById.get(relationship?.npc1Id);
-    const second = npcById.get(relationship?.npc2Id);
+    // RE-KEYED 2026-11-07 (PEOPLE-4 TIES, R-P7): a tie's ends are `from`/`to` (directed).
+    const first = npcById.get(relationship?.from);
+    const second = npcById.get(relationship?.to);
     expect(first, `${label} relationship[${index}] has no first NPC`).toBeTruthy();
     expect(second, `${label} relationship[${index}] has no second NPC`).toBeTruthy();
     expect(
@@ -381,38 +389,27 @@ function expectIndependentIntegrity(settlement, label) {
     ).toBe(100);
   }
 
+  // PEOPLE-LAND re-key, cause M-7 (the v2 boundary, PEOPLE_5B_EDIT §9 item 1), as
+  // scripts/audit/generation-certification-soak.mjs already reads it: a card's power is a MEMBERSHIP naming a
+  // power on the roster (the per-NPC `factionAffiliation` left the record), and a conflict is fought between
+  // POWER factions (GS-2, ODQ §934.101), so its parties are checked against `powerStructure.factions`. The
+  // grouping (`settlement.factions`) left the record at v2, so its member check has no subject and left with it.
   const powerFactionSet = new Set(powerFactionNames);
   for (const npc of npcs) {
-    if (!npc?.factionAffiliation) continue;
-    expect(
-      powerFactionSet.has(npc.factionAffiliation),
-      `${label} NPC ${npc.id} references a missing power faction`,
-    ).toBe(true);
-  }
-
-  const narrativeFactions = settlement.factions || [];
-  const narrativeFactionNames = narrativeFactions
-    .map(faction => faction?.name)
-    .filter(Boolean);
-  expect(
-    new Set(narrativeFactionNames).size,
-    `${label} contains duplicate narrative factions`,
-  ).toBe(narrativeFactionNames.length);
-
-  const narrativeFactionSet = new Set(narrativeFactionNames);
-  for (const [index, faction] of narrativeFactions.entries()) {
-    for (const member of faction?.members || []) {
+    for (const membership of Array.isArray(npc?.memberships) ? npc.memberships : []) {
+      if (!membership?.power) continue;
       expect(
-        npcById.has(member?.id),
-        `${label} faction[${index}] references a missing NPC`,
+        powerFactionSet.has(membership.power),
+        `${label} NPC ${npc.id} membership references a missing power faction`,
       ).toBe(true);
     }
   }
+  expect(Object.hasOwn(settlement, 'factions'), `${label} still carries the retired NPC grouping`).toBe(false);
   for (const [index, conflict] of (settlement.conflicts || []).entries()) {
     for (const party of conflict?.parties || []) {
       expect(
-        narrativeFactionSet.has(party),
-        `${label} conflict[${index}] references a missing narrative faction`,
+        powerFactionSet.has(party),
+        `${label} conflict[${index}] references a missing power faction`,
       ).toBe(true);
     }
   }

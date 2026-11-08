@@ -36,6 +36,7 @@ import { factsOf } from '../facts/factsOf.js';
 import { resolveSibling } from '../facts/drawDeclared.js';
 import { CAST_EDIT_PATH, CAST_EDIT_SEPARATOR } from '../userEditLines.js';
 import { nativeSemanticName } from '../content/customContentSemanticAuthority.js';
+import { firstRankMembershipOf, membersByRank, membershipsOf, powerOrderOf } from '../people/membership.js';
 
 // ── The tuning (the owner's dials; docs/DESIGN_CRISIS_TAB.md "Open for the owner's veto") ──
 
@@ -219,32 +220,33 @@ export const STAKE_REASONS = Object.freeze({
   untouched: 'no direct stake; it could go either way',
 });
 
-// ── The levers: the houses each kind turns on, and the offices that run them ──────────────
+// ── The levers: the houses each kind turns on, and the faces that run them ─────────────────
 
 /**
- * The institutions a kind turns on (by name) and the offices that run them (by role, the
- * most specific office first). This
- * is the lever table the design expected `STRESS_INSTITUTION_EFFECTS` to be; that table holds
- * NPC secrets, not institutions, so the lever lives here (reported to the chair).
+ * The institutions a kind turns on (by name). This is the lever table the design expected
+ * `STRESS_INSTITUTION_EFFECTS` to be; that table holds NPC secrets, not institutions, so the
+ * lever lives here (reported to the chair). The house's HOLDER is its face — the card born for
+ * it (the people car, PEOPLE-2 CAST-DERIVED, 2026-11-07: one face per face-bearing house); the
+ * old role-regex office table is gone with the faction roles (M-1b).
  * `temporary` names the kind of person minted when a natural kind's lever has neither a house
- * nor an office-holder; the same kind serves two crises (one temporary person per town).
+ * nor a face; the same kind serves two crises (one temporary person per town).
  */
-export const CRISIS_LEVERS = Object.freeze(/** @type {Record<string, { house: RegExp, office: RegExp[], temporary: string | null }>} */ ({
-  famine: { house: /granar|market|mill|baker|storehouse|warehouse/i, office: [/grain/i, /granar/i, /miller/i, /baker/i, /market/i, /merchant/i, /farmer/i, /quartermaster/i, /steward/i], temporary: 'grain' },
-  plague_onset: { house: /healer|hospital|apothec|infirm|hospice|temple|church|shrine/i, office: [/healer/i, /physician/i, /apothecar/i, /herbal/i, /surgeon/i, /midwife/i], temporary: 'healer' },
-  mass_migration: { house: /almshouse|hospital|hospice|healer|temple|church|inn/i, office: [/healer/i, /almoner/i, /physician/i, /steward/i], temporary: 'healer' },
-  monster_pressure: { house: /watch|garrison|militia|guard|barracks|wall|ranger|palisade/i, office: [/captain/i, /guard/i, /warden/i, /ranger/i, /hunter/i, /sheriff/i, /marshal/i], temporary: 'warden' },
-  under_siege: { house: /wall|garrison|barracks|watch|militia|guard|palisade|granar/i, office: [/captain/i, /guard/i, /marshal/i, /commander/i, /warden/i, /sergeant/i], temporary: null },
-  wartime: { house: /barracks|garrison|militia|armou?r|smith|watch|guard/i, office: [/captain/i, /guard/i, /marshal/i, /commander/i, /smith/i, /quartermaster/i], temporary: null },
-  occupied: { house: /garrison|council|court|barracks|watch|hall/i, office: [/captain/i, /mayor/i, /reeve/i, /steward/i, /magistrate/i], temporary: null },
-  indebted: { house: /mint|customs|bank|money|treasury|exchequer|counting/i, office: [/treasurer/i, /banker/i, /collector/i, /money/i, /merchant/i, /steward/i], temporary: null },
-  politically_fractured: { house: /council|court|hall|assembly/i, office: [/mayor/i, /reeve/i, /magistrate/i, /councillor/i, /steward/i, /elder/i], temporary: null },
-  succession_void: { house: /council|court|hall|keep|palace|manor/i, office: [/steward/i, /chancellor/i, /magistrate/i, /herald/i, /elder/i], temporary: null },
-  insurgency: { house: /council|court|hall|watch|customs/i, office: [/mayor/i, /reeve/i, /magistrate/i, /captain/i, /collector/i], temporary: null },
-  slave_revolt: { house: /slave|mine|quarr|plantation|watch|guard/i, office: [/overseer/i, /slaver/i, /captain/i, /guard/i], temporary: null },
-  religious_conversion: { house: /temple|church|shrine|chapel|cathedral|monaster/i, office: [/priest/i, /cleric/i, /abbot/i, /bishop/i, /preacher/i], temporary: null },
-  recently_betrayed: { house: /council|court|watch|hall/i, office: [/mayor/i, /reeve/i, /magistrate/i, /captain/i, /spymaster/i], temporary: null },
-  infiltrated: { house: /watch|guard|court|council|customs/i, office: [/captain/i, /magistrate/i, /spymaster/i, /guard/i, /collector/i], temporary: null },
+export const CRISIS_LEVERS = Object.freeze(/** @type {Record<string, { house: RegExp, temporary: string | null }>} */ ({
+  famine: { house: /granar|market|mill|baker|storehouse|warehouse/i, temporary: 'grain' },
+  plague_onset: { house: /healer|hospital|apothec|infirm|hospice|temple|church|shrine/i, temporary: 'healer' },
+  mass_migration: { house: /almshouse|hospital|hospice|healer|temple|church|inn/i, temporary: 'healer' },
+  monster_pressure: { house: /watch|garrison|militia|guard|barracks|wall|ranger|palisade/i, temporary: 'warden' },
+  under_siege: { house: /wall|garrison|barracks|watch|militia|guard|palisade|granar/i, temporary: null },
+  wartime: { house: /barracks|garrison|militia|armou?r|smith|watch|guard/i, temporary: null },
+  occupied: { house: /garrison|council|court|barracks|watch|hall/i, temporary: null },
+  indebted: { house: /mint|customs|bank|money|treasury|exchequer|counting/i, temporary: null },
+  politically_fractured: { house: /council|court|hall|assembly/i, temporary: null },
+  succession_void: { house: /council|court|hall|keep|palace|manor/i, temporary: null },
+  insurgency: { house: /council|court|hall|watch|customs/i, temporary: null },
+  slave_revolt: { house: /slave|mine|quarr|plantation|watch|guard/i, temporary: null },
+  religious_conversion: { house: /temple|church|shrine|chapel|cathedral|monaster/i, temporary: null },
+  recently_betrayed: { house: /council|court|watch|hall/i, temporary: null },
+  infiltrated: { house: /watch|guard|court|council|customs/i, temporary: null },
 }));
 
 // ── The base each affected system hits (rule 1) ───────────────────────────────────────────
@@ -317,7 +319,8 @@ export const CRISIS_LINKS = Object.freeze([
  * @property {string=} name
  * @property {string=} role
  * @property {unknown=} power
- * @property {string | null=} factionAffiliation
+ * @property {Array<{ power: string, rank: 1 | 2 | 3 | null, share?: number }>=} memberships
+ * @property {{ kind?: string, key?: string, title?: string } | null=} institution
  * @property {boolean=} corrupt
  * @property {{ criminalInstitution?: string, thievesGuild?: string } | null=} corruptTies
  * @property {{ dominant?: string | null, flaw?: string | null, modifier?: string | null } | null=} personality
@@ -408,13 +411,20 @@ function factionsOf(s) {
   return (Array.isArray(fs) ? fs : []).filter((f) => !!f && typeof f === 'object' && !!factionName(f));
 }
 
-/** A faction's members, the most powerful first (roster order on a tie). @param {CastSettlement} s @param {string} fname */
+/**
+ * A power's members: the faces holding a membership in it, ORDERED BY RANK — its first, second
+ * and third, then the unranked in roster order (the people car, PEOPLE-2 CAST-DERIVED,
+ * 2026-11-07: the owner's "each NPC according to their institution, belongs to one or more
+ * powers now"; the shim's `factionAffiliation` is no longer read here).
+ * @param {CastSettlement} s @param {string} fname
+ */
 function membersOf(s, fname) {
-  return rosterOf(s)
-    .map((n, at) => ({ n, at }))
-    .filter(({ n }) => str(n.factionAffiliation) === fname)
-    .sort((a, b) => (numOf(b.n.power) - numOf(a.n.power)) || (a.at - b.at))
-    .map(({ n }) => n);
+  return membersByRank(rosterOf(s), fname);
+}
+
+/** True when the card holds a membership in any power of `powers`. @param {CastNpc} n @param {Set<string>} powers */
+function memberOfAny(n, powers) {
+  return membershipsOf(n).some((m) => powers.has(m.power));
 }
 
 /** @param {CastNpc} n @param {CrisisRole} role @param {string} reason @returns {CastRow} */
@@ -540,21 +550,19 @@ export function bruntCandidates(s, kind, stakes) {
 }
 
 /**
- * The roster's office-holders for a kind's lever, the most specific office first.
- * @param {CastSettlement} s @param {RegExp[]} offices
- * @returns {CastNpc[]}
+ * A house's FACE on the live roster: the card born for it (`institution: { kind: 'house', key }`),
+ * or null where the house bears no face (a market, a fabric row) or its face is gone.
+ * @param {CastSettlement} s @param {string} house
+ * @returns {CastNpc | null}
  */
-function officeHoldersOf(s, offices) {
-  /** @type {CastNpc[]} */
-  const out = [];
-  const roster = rosterOf(s);
-  for (const re of offices) for (const n of roster) if (re.test(str(n.role)) && !out.includes(n)) out.push(n);
-  return out;
+function faceOfHouse(s, house) {
+  if (!house) return null;
+  return rosterOf(s).find((n) => n.institution?.kind === 'house' && str(n.institution?.key) === house) || null;
 }
 
 /**
- * The STANDING houses a kind turns on (`liveInstitutions`), each with its holder where the
- * roster has one.
+ * The STANDING houses a kind turns on (`liveInstitutions`), each with its holder — the house's
+ * face — where the roster has one.
  * @param {CastSettlement} s @param {string} kind
  * @returns {CastLever[]}
  */
@@ -571,31 +579,36 @@ export function deriveLevers(s, kind) {
   // "State Granary" grants no famine lever.
   const houses = liveInstitutions(s)
     .filter((i) => !!i && lever.house.test(nativeSemanticName(i)));
-  const holders = officeHoldersOf(s, lever.office);
   const seen = new Set();
   /** @type {CastLever[]} */
   const out = [];
-  houses.forEach((h, i) => {
+  houses.forEach((h) => {
     const name = str(h.name);
     if (seen.has(name)) return;
     seen.add(name);
-    const holder = holders[i] || null;
+    const holder = faceOfHouse(s, name);
     out.push({ institution: name, holderId: holder ? (str(holder.id) || str(holder.name)) : null, holderName: holder ? str(holder.name) : null });
   });
   return out;
 }
 
 /**
- * Rule 2 — holds the lever: the office-holder, else the house itself.
+ * Rule 2 — holds the lever: the lever house's face, else the house itself.
  * @param {CastSettlement} s @param {string} kind
  * @returns {Candidates}
  */
 export function leverCandidates(s, kind) {
   const lever = CRISIS_LEVERS[kind];
   if (!lever) return { candidates: [], absent: CAST_ABSENCES.noLever };
+  const levers = deriveLevers(s, kind);
+  const byId = new Map(rosterOf(s).map((n) => [str(n.id) || str(n.name), n]));
   /** @type {CastRow[]} */
-  const out = officeHoldersOf(s, lever.office).map((n) => npcRow(n, 'lever', CAST_REASONS.leverRuns));
-  for (const l of deriveLevers(s, kind)) {
+  const out = [];
+  for (const l of levers) {
+    const face = l.holderId ? byId.get(l.holderId) : null;
+    if (face && !out.some((r) => r.id === l.holderId)) out.push(npcRow(face, 'lever', CAST_REASONS.leverRuns));
+  }
+  for (const l of levers) {
     out.push({ role: 'lever', kind: 'institution', id: l.institution, name: l.institution, reason: CAST_REASONS.leverInstitution, temporary: false });
   }
   return { candidates: out, absent: CAST_ABSENCES.noLever };
@@ -677,7 +690,7 @@ export function targetCandidates(s) {
  */
 export function exploiterCandidates(s, stakes, role) {
   const gainers = new Set(stakes.filter((k) => k.stake === 'gains').map((k) => k.factionId));
-  const pool = rosterOf(s).map((n, at) => ({ n, at })).filter(({ n }) => gainers.has(str(n.factionAffiliation)));
+  const pool = rosterOf(s).map((n, at) => ({ n, at })).filter(({ n }) => memberOfAny(n, gainers));
   /** @param {CastNpc} n */
   const grade = (n) => (n.corrupt ? 0 : traitsOf(n).some((t) => GRASPING_TRAITS.includes(t)) ? 1 : 2);
   pool.sort((a, b) => (grade(a.n) - grade(b.n)) || (numOf(b.n.power) - numOf(a.n.power)) || (a.at - b.at));
@@ -695,12 +708,14 @@ export function scapegoatCandidates(s, stakes, leverRow) {
   if (!legitimacyContested(s)) return { candidates: [], absent: CAST_ABSENCES.notContested };
   const losers = new Set(stakes.filter((k) => k.stake === 'loses').map((k) => k.factionId));
   const roster = rosterOf(s);
-  /** @param {CastRow} r */
-  const factionOfRow = (r) => (r.kind === 'faction' ? r.id : str(roster.find((n) => (str(n.id) || str(n.name)) === r.id)?.factionAffiliation));
+  /** A row's powers: a power row is its own; a person's are every power it holds a membership in. @param {CastRow} r */
+  const losesBy = (r) => (r.kind === 'faction'
+    ? losers.has(r.id)
+    : memberOfAny(/** @type {CastNpc} */ (roster.find((n) => (str(n.id) || str(n.name)) === r.id) || {}), losers));
   /** @type {CastRow[]} */
   const out = seatRows(s, 'scapegoat', CAST_REASONS.scapegoatSeat, CAST_REASONS.scapegoatSeat)
-    .filter((r) => r.kind === 'npc' && losers.has(factionOfRow(r)));
-  if (leverRow && leverRow.kind === 'npc' && !leverRow.temporary && losers.has(factionOfRow(leverRow))) {
+    .filter((r) => r.kind === 'npc' && losesBy(r));
+  if (leverRow && leverRow.kind === 'npc' && !leverRow.temporary && losesBy(leverRow)) {
     out.push({ ...leverRow, role: 'scapegoat', reason: CAST_REASONS.scapegoatLever });
   }
   return { candidates: out, absent: CAST_ABSENCES.noLoser };
@@ -758,7 +773,7 @@ export function collaboratorCandidates(s, stakes) {
   const out = roster.filter((n) => n.corrupt && !!n.corruptTies).map((n) => npcRow(n, 'collaborator', CAST_REASONS.collaboratorCorrupt));
   const gainers = new Set(stakes.filter((k) => k.stake === 'gains').map((k) => k.factionId));
   const ambitious = roster.map((n, at) => ({ n, at }))
-    .filter(({ n }) => gainers.has(str(n.factionAffiliation)) && !n.corrupt)
+    .filter(({ n }) => memberOfAny(n, gainers) && !n.corrupt)
     .sort((a, b) => {
       const am = (/** @type {CastNpc} */ n) => (traitsOf(n).some((t) => AMBITION_TRAITS.includes(t)) ? 0 : 1);
       return (am(a.n) - am(b.n)) || (numOf(b.n.power) - numOf(a.n.power)) || (a.at - b.at);
@@ -891,7 +906,11 @@ export function deriveCrisisCast(settlement, entries, seed, options = {}) {
         if (read === 'instigatorFromBrunt') {
           const b = prev.get('brunt');
           if (!b) continue;
-          const fname = b.kind === 'faction' ? b.id : str(rosterOf(settlement).find((n) => (str(n.id) || str(n.name)) === b.id)?.factionAffiliation);
+          // the brunt's power: a power row's own; a person's FIRST-RANK power (its best standing)
+          const fname = b.kind === 'faction'
+            ? b.id
+            : str(firstRankMembershipOf(rosterOf(settlement).find((n) => (str(n.id) || str(n.name)) === b.id), powerOrderOf(settlement))?.power);
+          // no lead is drawn where the brunt's house holds the seat (RUNG2-F13)
           const house = fname ? factionsOf(settlement).find((f) => factionName(f) === fname) : undefined;
           const lead = fname && !(house && holdsTheSeat(settlement, house)) ? membersOf(settlement, fname).find((n) => (str(n.id) || str(n.name)) !== b.id) || null : null;
           if (lead) { links.push(link.from); return npcRow(lead, 'instigator', CAST_REASONS.instigatorLinked); }
