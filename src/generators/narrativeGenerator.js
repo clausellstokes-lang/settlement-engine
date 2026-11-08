@@ -33,6 +33,8 @@ import {
 } from '../kernel/rngContext.js';
 import { landMemberships, rankPowers } from './people/castPowers.js';
 import { CORRUPT_SHORT_GOAL, assignHandlers, dealAllegiances, leaveAllegianceReceipts } from '../domain/people/allegiance.js';
+import { hallCaptureOf, writeHallCapture } from '../domain/people/hallCapture.js';
+import { captureClimateOf } from './power/rulingStructure.js';
 import { cardInstitutionVeilOf } from '../domain/people/cardPowers.js';
 import { drawTies } from './people/ties.js';
 import { pickVariant } from '../kernel/proseHash.js';
@@ -930,6 +932,7 @@ export const enrichNpcCoherence = (settlement) => {
   const withPowers = rankPowers(settlement, landed);
   assignHandlers(withPowers, settlement);
   leaveAllegianceReceipts(settlement, dealt);
+  settlement.powerStructure = writeHallCapture(settlement.powerStructure, hallCaptureOf(settlement, { npcs: withPowers, climate: captureClimateOf(settlement) })); // A6 (car 2, J-13): the hall-capture state DERIVED, its ONE writer — after the ranks and handlers it reads, before the structural pass that reads it
   return enrichNPCsWithStructure(withPowers, settlement);
 };
 

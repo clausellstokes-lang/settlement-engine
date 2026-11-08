@@ -735,20 +735,13 @@ export const generatePowerStructure = (
   // Apply multipliers before relationship computation (relationships use final powers)
   applyLegitimacyMultipliers(factions, publicLegitimacy, tier);
 
-  const safetyRatio = instFlags?.inst ? instFlags.militaryEffective / Math.max(8, instFlags.criminalEffective) : 1.0;
-  const criminalCaptureState = computeCriminalCaptureState(factions, safetyRatio, instFlags.inst || {});
-  // Wave 7 #1 — birth seeds the play-time ladder: a settlement born at
-  // equilibrium+ stamps the rung onto the GOVERNING faction entry, which
-  // ensureFactionStates reads (faction.captureState) when it mints the
-  // §corruption Phase 2 faction state. Without the stamp, the first pulse's
-  // settlementCaptureState rollup (worst faction rung, all born 'none')
-  // would silently reset the dossier's criminalCaptureState to 'none'.
-  // 'adversarial' is not seeded — it asserts enforcement is WINNING, i.e.
-  // no faction is on a capture arc.
-  if (['equilibrium', 'corrupted', 'capture'].includes(criminalCaptureState)) {
-    const govEntry = factions.find((f) => f.isGoverning);
-    if (govEntry && !govEntry.captureState) govEntry.captureState = criminalCaptureState;
-  }
+  const safetyRatio = safetyRatioOf(instFlags);
+  // ALLEGIANCE-CAR2 (2026-11-08, the allegiance design §3.4, J-13 — ONE writer): the hall-capture state is
+  // no longer written here. It is DERIVED at the coherence seam (domain/people/hallCapture.js ::
+  // writeHallCapture, the only writer of `criminalCaptureState` and of the governing row's birth
+  // `captureState` seed), from the hidden agents in the ruling three and this step's classifier, kept as the
+  // CLIMATE RUNG (`captureClimateOf` below, read over the seam's final roster). The relationships below
+  // still read the classifier's verdict for their own lines, as before.
   const stressTypesArr = config?.stressTypes || (config?.stressType ? [config.stressType] : []);
   const factionRelationships = computeFactionRelationships(
     factions,
@@ -778,9 +771,31 @@ export const generatePowerStructure = (
     recentConflict,
     publicLegitimacy,
     factionRelationships,
-    criminalCaptureState,
   };
 };
+
+/**
+ * The power step's safety ratio: the military's effective weight over the criminal's (floored at 8), 1
+ * where the institution flags are absent.
+ * @param {any} instFlags getInstFlags' result @returns {number}
+ */
+function safetyRatioOf(instFlags) {
+  return instFlags?.inst ? instFlags.militaryEffective / Math.max(8, instFlags.criminalEffective) : 1.0;
+}
+
+/**
+ * THE CLIMATE RUNG (ALLEGIANCE-CAR2, the design §3.4): the power step's strengths-only classifier
+ * (factionDynamics.js :: computeCriminalCaptureState) over a settlement's CURRENT roster — its powers, its
+ * institutions and its config, the same inputs the power step reads. Draw-free. The coherence seam hands
+ * it to domain/people/hallCapture.js :: hallCaptureOf, which caps it at 'equilibrium'.
+ * @param {{ config?: any, institutions?: any[], powerStructure?: { factions?: any[] } }} settlement
+ * @returns {'none'|'adversarial'|'equilibrium'|'corrupted'|'capture'}
+ */
+export function captureClimateOf(settlement) {
+  const instFlags = getInstFlags(settlement?.config || {}, settlement?.institutions || []);
+  const factions = Array.isArray(settlement?.powerStructure?.factions) ? settlement.powerStructure.factions : [];
+  return computeCriminalCaptureState(factions, safetyRatioOf(instFlags), instFlags.inst || {});
+}
 
 /** The sets this step can answer (R-Q): every set whose atoms are settled before the power step. */
 const FACTION_DESC_SIBLINGS_SETTLED = Object.freeze(Object.fromEntries(Object.entries(FACTION_DESC_SIBLINGS)
