@@ -3179,7 +3179,7 @@ or expired order leaves a pledge that LAPSES with its receipt rather than mis-jo
 seeded with a real `classifyFeasibility` refusal. ⭐ **CLOSE 8's CARRY ROUND-TRIP IS
 NAMED EXPLICITLY** — the `LadderGoal` record's own persisted mint baseline is the
 carrier, so the pin stamps at `mintGoal`, advances, and asserts `evaluateGoal`'s close
-read the SAME `goal:<goalId>` string off the record the estate already persists.
+read the SAME `goal:<goalId>` string off the record the estate already persists. [RE-BASED 2026-11-08 (FP-REBASE, seat FPR-PEOPLE; the census §2 row "HB"; the verifier's F2, the chair's ruling) — this pin presumed the `LadderGoal` record's persisted mint baseline is close 8's carrier, stamped at `mintGoal` → THE HEAD BRACKET (before §0) GOVERNS AND THIS PIN IS STALE: the `LadderGoal` record is the retired ladder's, and car 4's goal record (`goal.intent.{short,long} = { family, key, target }`, the allegiance design §6.3) holds no mint baseline, so NO baseline is stamped at `mintGoal`; the pin's carrier is re-pointed to LEARN-WHEN-REBUILT — the rebuilt agency's goal record OWES the carrier (its own persisted mint baseline, keyed by `goal.intent.key`), and this round-trip pin is written against that record when the agency names its writer, the same condition as sites 12 and 13.]
 ⭐ **AND `treaty.habitEpisode` GETS ITS OWN CARRY ROUND-TRIP, SEPARATE FROM CLOSE 1's** —
 stamp at the gated open, advance to the treaty mint, and assert the close read the same
 string; ⛔ **the recompute-equality fixture for close 2's OTHER road cannot stand in for
@@ -4542,5 +4542,6 @@ Seat FPR-PEOPLE; design text only, the FP parked behind the plat (the owner, 202
 | 4 | §3, the arity table, site 13 | the signature retired; monadic unless the intent names a person (measured at the rebuild) | HB |
 | 5 | §3, the site table, site 13 | goal families keyed on `goal.intent.key`; closes on the rebuilt record | HB |
 | 6 | §3, the named-domain checklist, rows 10 and 12 | the loop copied onto the agency's record; the kind axis the goal family, the credit by rank | HB |
+| 7 | §4, the HB-3 wave block (the close-8 carry round-trip pin; the verifier's F2) | the pin is stale: no baseline at `mintGoal`; the carrier is owed by the rebuilt agency's goal record (LEARN-WHEN-REBUILT) | HB |
 
 The wave blocks of §4 (their `**Bands:**` lines read by `tests/lint/habitBandsReconciliation.walker.test.js`), §8.2's tuning seam and §9's machine census are untouched.
