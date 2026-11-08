@@ -35,6 +35,8 @@
  * annotation. `covert` is always true (the covert-naming law, §6). Pure.
  */
 
+import { allegianceOf } from './people/allegiance.js'; // ALLEGIANCE-CAR1: the hidden allegiance's one reader (J-1)
+
 /** The set of leash kinds whose beneficiary sits in ANOTHER settlement/court —
  *  the ones whose exposure must NEVER impair a local organization. */
 const FOREIGN_LEASH_KINDS = Object.freeze(new Set(['foreign_settlement', 'foreign_faction', 'foreign_org']));
@@ -118,7 +120,14 @@ export function isForeignLeashKind(kind) {
  * @returns {ResolvedLeash}
  */
 export function resolveLeash(npc, settlement, worldState) {
-  const ties = npc && typeof npc.corruptTies === 'object' ? npc.corruptTies : null;
+  // ALLEGIANCE-CAR1 (2026-11-08): the leash rides on the card's hidden allegiance (its one reader, allegianceOf); the
+  // retired `corruptTies.criminalInstitution` is the allegiance's `house`, and its simulation sub-fields (`leash`,
+  // `foreignPatron`, `conspiracy`) are carried on the allegiance by the v2 -> v3 migration. THE LEGACY ARM: the frozen
+  // simulation (M-6) still writes `corruptTies` on the cards it turns, so a card with no allegiance reads its
+  // `corruptTies` as before (this file is on the dormant list for that arm; it leaves when FPZ rebuilds the loop).
+  const allegiance = allegianceOf(npc);
+  const ties = allegiance ? { ...allegiance, criminalInstitution: allegiance.house || null }
+    : (npc && typeof npc.corruptTies === 'object' ? npc.corruptTies : null);
 
   // 1. Explicit normalized leash (foreign lanes / composer).
   const explicit = ties && typeof ties.leash === 'object' && ties.leash ? ties.leash : null;

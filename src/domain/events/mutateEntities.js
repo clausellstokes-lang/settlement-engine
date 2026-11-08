@@ -48,6 +48,7 @@ import {
   labelFromTarget, slugify,
   vetoMutation, sev01,
 } from './mutateHelpers.js';
+import { ALLEGIANCE_TUNING, allegianceOf, allegiancePowerFor, assignHandlers, viaOf } from '../people/allegiance.js'; // ALLEGIANCE-CAR1
 
 // A settlement / entity / event is a schemaless open object at this layer — every
 // handler spreads it (`{ ...s, ... }`) and reads a wide, evolving surface with no
@@ -688,7 +689,7 @@ function exposeCorruption(s, event) {
   // exposing a faction/institution directly still scandalises it (our in-place
   // behaviour — the dead corruption_exposed consumer tree needs a producer).
   const npc = findNpc(s, event.targetId);
-  if (npc && npc.corrupt) return exposeCorruptNpc(s, npc, event);
+  if (npc && allegianceOf(npc)) return exposeCorruptNpc(s, npc, event);
 
   const severity = sev01(event.payload?.severity, 0.7);
   const inst    = findInstitution(s, event.targetId);
@@ -746,7 +747,7 @@ function exposeCorruptNpc(s, npc, event) {
     npcId: npc.id || npc.name,
     name: npc.name,
     kind: 'ousted',
-    criminalInstitution: npc.corruptTies?.criminalInstitution || null,
+    criminalInstitution: allegianceOf(npc)?.house || null,
     homeInstitution: npc.factionAffiliation || npc.factionLink || null,
   };
   const next = applyCorruptionImpairments(s, [exposure], { now });
@@ -773,20 +774,21 @@ function severCorruptionTiesTo(s, institutionName) {
   if (!n) return s;
   let changed = false;
   const nextNpcs = (s.npcs || []).map((/** @type {MutEntity} */ npc) => {
-    if (npc.corrupt && String(npc.corruptTies?.criminalInstitution || '').toLowerCase() === n) {
+    if (String(allegianceOf(npc)?.house || '').toLowerCase() === n) {
       changed = true;
-      return { ...npc, corrupt: false, corruptionVector: null, ousted: true };
+      // ALLEGIANCE-CAR1: the allegiance is severed with its house (the card is clean, and ousted as before)
+      const { allegiance: _severed, ...clean } = npc;
+      return { ...clean, ousted: true };
     }
     return npc;
   });
   return changed ? { ...s, npcs: nextNpcs } : s;
 }
 
-// IMPOSE_CORRUPTION: a DM turns a clean NPC by linking them to a criminal
-// organization in the settlement. We write the EXACT shape the world-pulse corruption loop
-// seeds from — npc.corrupt + corruptionVector + corruptTies.criminalInstitution (npcAgency.js
-// reads these to evolve corruption, advance faction capture from the seat, and gate exposure) —
-// so the corruption is canon + visible + propagates, and EXPOSE_CORRUPTION can later target them.
+// IMPOSE_CORRUPTION: a DM turns a clean NPC by giving them a hidden allegiance to a criminal
+// organization in the settlement (ALLEGIANCE-CAR1, 2026-11-08: the card's `allegiance`, the one shape
+// birth writes — domain/people/allegiance.js — with its handler dealt by the same draw-free rule, §1.5),
+// so the corruption is canon + visible to the DM, and EXPOSE_CORRUPTION can later target them.
 // Covert by design: no public legitimacy impairment here (that is the exposure consequence).
 /**
  * @param {MutSettlement} s
@@ -796,7 +798,7 @@ function imposeCorruption(s, event) {
   const npc = findNpc(s, event.targetId);
   // need a real, not-already-corrupt NPC
   if (!npc) return vetoMutation('npc_not_found', labelFromTarget(event.targetId));
-  if (npc.corrupt) return vetoMutation('npc_already_corrupt', npc.name);
+  if (allegianceOf(npc)) return vetoMutation('npc_already_corrupt', npc.name);
 
   // W-DOCTRINE-3b §6 — THE BENEFICIARY. A composer beneficiary leash (payload.leash, already
   // normalized by buildEvent) names a FOREIGN patron court and REPLACES the local-org rule (the
@@ -808,13 +810,27 @@ function imposeCorruption(s, event) {
   if (leash && !leash.settlementId) return vetoMutation('no_beneficiary');
   const orgName = event.payload?.criminalInstitution || readCorruptionClimate(s).criminalInstitutions[0] || null;
   if (!leash && !orgName) return vetoMutation('no_criminal_org');
+  const house = leash ? '' : String(orgName);
   const corrupted = {
     ...npc,
-    corrupt: true,
-    corruptionVector: corruptionVectorForFlaw(npcCorruptibleFlaw(npc)),
-    corruptTies: { ...(npc.corruptTies || {}), ...(leash ? { leash } : { criminalInstitution: orgName }) },
+    allegiance: {
+      power: leash ? null : allegiancePowerFor(s.npcs || [], house, s),
+      house,
+      vector: corruptionVectorForFlaw(npcCorruptibleFlaw(npc)),
+      via: viaOf(npc, new Map((s.institutions || []).map((/** @type {MutEntity} */ i) => [String(i?.name || ''), i]))),
+      handler: null,
+      share: ALLEGIANCE_TUNING.share,
+      veiled: true,
+      covert: true,
+      ...(leash ? { leash } : {}),
+    },
   };
   let next = replaceNpc(s, npc, corrupted);
+  // the handler, by birth's draw-free rule (J-10), on the record as it now stands
+  // every allegiance on the roster is COPIED before the deal writes a handler, so the input record is never mutated
+  const dealt = (/** @type {MutEntity} */ (next).npcs || []).map((/** @type {MutEntity} */ n) => (n && n.allegiance && typeof n.allegiance === 'object' ? { ...n, allegiance: { ...n.allegiance } } : n));
+  assignHandlers(dealt, next);
+  next = { ...next, npcs: dealt };
 
   // Scope: 'individual_institution' captures the NPC's home institution too —
   // a COVERT 'corruption' impairment, not a public legitimacy hit (that is the

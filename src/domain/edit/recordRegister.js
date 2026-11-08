@@ -232,6 +232,8 @@ export const KEYED_COLLECTIONS = Object.freeze({
   'history.legacyAnnotations': Object.freeze(['eventName', 'yearsAgo']),
   institutions: 'name',
   // the card is keyed by its id; its `institution` and its ranked `memberships` merge INSIDE the HELD card.
+  // ALLEGIANCE-CAR1 (2026-11-08): so does its `allegiance` (the hidden allegiance, domain/people/allegiance.js) — ONE
+  // record per card, a HELD card field the DM edits whole (the Impose / Expose events, the Power tab), never keyed.
   npcs: 'id',
   // 2026-11-07 PEOPLE-1 CAST (R-P3/R-P5): a card's powers, one entry per power its house backs, keyed by the power's name.
   'npcs[].memberships': 'power',

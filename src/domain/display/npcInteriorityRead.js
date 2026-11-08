@@ -39,6 +39,7 @@ import { compareCodepoint } from '../deterministicSort.js';
 import { getSpatialLedger, hasSpatialLedger } from '../spatial/distanceRead.js';
 import { strongestBond, bondedPeersAbove } from '../worldPulse/npcLadderState.js';
 import { npcCredibilityScoreOf, hasNpcCredibilityLedger } from '../worldPulse/npcCredibility.js';
+import { allegianceOf } from '../people/allegiance.js'; // ALLEGIANCE-CAR1: the hidden allegiance's one reader (J-1)
 
 /** The display NPC's own coarse standing signal → a stance word. */
 const INFLUENCE_WORD = Object.freeze({ high: 'commanding', moderate: 'established', low: 'marginal' });
@@ -291,7 +292,7 @@ export function npcInteriority({
   if (includeGroundTruth) {
     // COVERT / DM-only marks (never surfaced to a non-DM audience): the compromise stance + the
     // gm secret, plus the relational truth (bonds / grudges / credibility) from the sidecar.
-    const compromised = n.corrupt ? 'compromised' : (n.ousted ? 'exposed' : null);
+    const compromised = allegianceOf(n) ? 'compromised' : (n.ousted ? 'exposed' : null); // ALLEGIANCE-CAR1: the hidden allegiance (allegianceOf)
     const secretRaw = typeof n.secret === 'string' ? n.secret : firstText(/** @type {{ what?: unknown }} */ (n.secret || {}).what);
     const relational = relationalGroundTruth(worldState, String(nid || ''), tick, resolveNpcName);
     /** @type {Record<string, unknown>} */

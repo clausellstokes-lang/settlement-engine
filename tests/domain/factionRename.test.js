@@ -307,6 +307,8 @@ describe('faction rename — the declared surface set', () => {
       title: `the head of ${OLD}`,
       institution: { kind: 'power', key: OLD, family: null, title: `the head of ${OLD}` },
       memberships: [{ power: OLD, rank: 1, share: 1 }, { power: 'Militia', rank: null, share: 0.2 }],
+      // ALLEGIANCE-CAR1 (2026-11-08): the hidden allegiance names the criminal power it answers to (factionRename.js's new surface)
+      allegiance: { power: OLD, house: 'Customs House', vector: 'greed', via: 'office', handler: null, share: 0.15, veiled: true, covert: true },
     });
     const settlement = {
       name: 'Bramblewatch',

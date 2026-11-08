@@ -26,6 +26,7 @@
 import { institutionMatchesRegex } from './institutionClassify.js';
 import { ARCANE_INST_TAGS, TRADE_INST_TAGS } from './arcaneInstitutionVocabulary.js';
 import { cardHouseOf, firstPowerOf, powerOrderOf } from './people/cardPowers.js';
+import { allegianceOf } from './people/allegiance.js'; // ALLEGIANCE-CAR1: the hidden allegiance's one reader (J-1)
 
 // ── Category → archetype mapping ────────────────────────────────────────
 // The generator's `category` field already aligns reasonably well with
@@ -595,15 +596,14 @@ export function deriveNpcProfile(npc, settlement) {
       npc.goal?.short,
     ),
 
-    // Corruption truth — mirror the raw fields the corruption pass writes at
-    // generation (corruptionPass.js) and the world-pulse sim mirrors back per
-    // tick (npcAgency.js#mirrorCorruptionOntoSettlement). The dossier card
-    // already renders the raw flags; the structured profile must tell the
-    // same story instead of presenting a compromised/ousted NPC as a clean
-    // incumbent. `corrupt` stays tri-state: explicit false is a generation
-    // verdict, null means a legacy save the corruption pass never judged.
-    corrupt:          npc.corrupt ?? null,
-    corruptionVector: npc.corruptionVector || null,
+    // Corruption truth — the hidden allegiance (ALLEGIANCE-CAR1, 2026-11-08: the card's `allegiance`, read
+    // through its one reader, domain/people/allegiance.js :: allegianceOf; the retired `corrupt` mark leaves the
+    // birth record, J-1, J-2). The structured profile must tell the same story as the card instead of
+    // presenting an agent or an ousted NPC as a clean incumbent: `corrupt` is true for an agent and false
+    // otherwise, `corruptionVector` the allegiance's vector, `allegiance` the record itself (DM-only, covert).
+    corrupt:          allegianceOf(npc) !== null,
+    corruptionVector: allegianceOf(npc)?.vector || null,
+    allegiance:       allegianceOf(npc),
     timesExposed:     npc.timesExposed || 0,
     ousted:           npc.ousted === true,
 

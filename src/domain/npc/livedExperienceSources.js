@@ -883,7 +883,7 @@ export const GROWTH_SIGNAL_TOKENS = Object.freeze({
   besieged: Object.freeze(['relationshipType:war']),
   siege_survived: Object.freeze(['siege_lifted', 'occupation_lifted']),
   reconstruction: Object.freeze(['reconstruction']),
-  betrayal: Object.freeze(['corruptTies.revealed', 'ousted']),
+  betrayal: Object.freeze(['allegiance.revealed', 'ousted']), // ALLEGIANCE-CAR1: the retired corruptTies' sub-field rides on the allegiance
   boom: Object.freeze(['boom']),
   flourishing: Object.freeze(['flourishing']),
 });

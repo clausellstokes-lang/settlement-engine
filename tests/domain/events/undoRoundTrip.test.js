@@ -72,7 +72,7 @@ function baseSettlement() {
   ];
   // NPC fixtures: [0] corrupt + same faction as [1] (EXPOSE + swap peer),
   // [1] same faction distinct standing (PROMOTE/DEMOTE swap), [2] clean (IMPOSE).
-  if (s.npcs?.[0]) { s.npcs[0].importance = 'background'; s.npcs[0].influence = 10; s.npcs[0].structuralRank = 8; s.npcs[0].corrupt = true; s.npcs[0].corruptionVector = 'greed'; s.npcs[0].factionAffiliation = 'Town Council'; }
+  if (s.npcs?.[0]) { s.npcs[0].importance = 'background'; s.npcs[0].influence = 10; s.npcs[0].structuralRank = 8; s.npcs[0].allegiance = { power: null, house: 'Thieves den', vector: 'greed', via: 'retainer', handler: null, share: 0.15, veiled: true, covert: true }; /* ALLEGIANCE-CAR1 (2026-11-08): the retired mark is the card's hidden allegiance */ s.npcs[0].factionAffiliation = 'Town Council'; }
   if (s.npcs?.[1]) { s.npcs[1].importance = 'notable'; s.npcs[1].influence = 45; s.npcs[1].structuralRank = 2; s.npcs[1].factionAffiliation = 'Town Council'; }
   if (s.npcs?.[2]) { s.npcs[2].corrupt = false; }
   return normalizeForUndo(JSON.parse(JSON.stringify(s)));

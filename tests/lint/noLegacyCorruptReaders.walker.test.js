@@ -140,7 +140,7 @@ describe('no legacy corrupt readers outside the dormant list (I-15, ALLEGIANCE-C
     const { violations, unparsed, scanned, dormant, dormantReading } = walkSrc();
     expect(unparsed).toEqual([]);
     expect(scanned).toBeGreaterThan(2000); // liveness: the walk reached src/
-    expect(dormant.length).toBe(16); // measured at the car (the dormant list's own note)
+    expect(dormant.length).toBe(17); // measured at the car (the dormant list's own note)
     expect(violations).toEqual([]);
     // the list is exact: every dormant file still reads the mark (a re-pointed file leaves the list in the same commit)
     expect(dormant.filter((f) => !dormantReading.has(f))).toEqual([]);

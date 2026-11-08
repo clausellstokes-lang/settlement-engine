@@ -37,6 +37,7 @@ import { canonExports, canonImports, canonStressors } from '../canonicalAccessor
 // LAZY leaf; the EAGER handler mirrors the constant under a parity pin instead).
 import { qualifiesForGenerosity, normalizeBondKind } from '../spatial/generosityGate.js';
 import { STOCKPILE_TUNING } from '../worldPulse/foodStockpile.js';
+import { allegianceOf } from '../people/allegiance.js'; // ALLEGIANCE-CAR1: the hidden allegiance's one reader (J-1)
 
 // The loose open-object shape of the events layer ("schemaless open objects at
 // this layer" — mutateEntities.js's own words). Aliased to the schema's OWN
@@ -272,7 +273,7 @@ const generosityVerbPredicate = (/** @type {Mut} */ s) => {
 const compromisedTargets = (/** @type {Mut} */ s) => {
   const out = [];
   for (const n of s?.npcs || []) {
-    if (n?.corrupt) out.push({ id: String(n.id || n.name), name: String(n.name || n.id) });
+    if (allegianceOf(n)) out.push({ id: String(n.id || n.name), name: String(n.name || n.id) });
   }
   const marked = (/** @type {Mut} */ e) => (e?.impairments || []).some((/** @type {Mut} */ i) => i?.type === 'corruption');
   for (const i of s?.institutions || []) if (marked(i)) out.push({ id: String(i.id || i.name), name: String(i.name || i.id) });
@@ -476,11 +477,11 @@ export const AFFORDANCE_MANIFEST = Object.freeze({
     coversVetoCodes: ['npc_not_found', 'npc_already_corrupt', 'no_criminal_org', 'no_beneficiary'],
     dials: [enumDial('scope', ['individual', 'individual_institution'], 'individual', 'How far the rot reaches')],
     targetOptions: (/** @type {Mut} */ s) => buildTargetOptions(s, 'npcs')
-      .filter(o => !(s?.npcs || []).find((/** @type {Mut} */ n) => String(n.id || n.name) === o.id)?.corrupt),
+      .filter(o => !allegianceOf((s?.npcs || []).find((/** @type {Mut} */ n) => String(n.id || n.name) === o.id))),
     predicate(/** @type {Mut} */ s) {
       // The SAME climate read the imposeCorruption handler runs.
       const climate = readCorruptionClimate(s);
-      const cleanNpc = (s?.npcs || []).some((/** @type {Mut} */ n) => n?.name && !n.corrupt);
+      const cleanNpc = (s?.npcs || []).some((/** @type {Mut} */ n) => n?.name && !allegianceOf(n));
       if (!climate.criminalInstitutions.length) {
         return no(['No criminal organization operates here.'], ['Requires a criminal organization (add one, e.g. a Thieves\' Guild).']);
       }

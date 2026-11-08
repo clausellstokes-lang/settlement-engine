@@ -253,12 +253,15 @@ describe('deriveNpcProfile()', () => {
 // never reach the public-safe projection (the npc allowlist excludes them).
 
 describe('corruption truth fields', () => {
-  it('carries corrupt / corruptionVector / timesExposed / ousted from the raw NPC', () => {
+  // ALLEGIANCE-CAR1 (2026-11-08): the retired `corrupt` mark is the card's hidden `allegiance`; the profile reads it
+  // through allegianceOf — `corrupt` true for an agent, `corruptionVector` the allegiance's, `allegiance` the record.
+  it('carries corrupt / corruptionVector / allegiance / timesExposed / ousted from the raw NPC', () => {
     const profile = deriveNpcProfile(militaryCaptain({
-      corrupt: true, corruptionVector: 'greed', timesExposed: 2, ousted: true,
+      allegiance: { power: "Thieves' Guild", house: 'Thieves den', vector: 'greed', via: 'office', handler: 'npc_fence', share: 0.15, veiled: true, covert: true }, timesExposed: 2, ousted: true,
     }));
     expect(profile.corrupt).toBe(true);
     expect(profile.corruptionVector).toBe('greed');
+    expect(profile.allegiance).toMatchObject({ house: 'Thieves den', vector: 'greed', handler: 'npc_fence', covert: true });
     expect(profile.timesExposed).toBe(2);
     expect(profile.ousted).toBe(true);
   });
@@ -271,20 +274,22 @@ describe('corruption truth fields', () => {
     expect(profile.ousted).toBe(false);
   });
 
-  it('a legacy save the corruption pass never judged stays tri-state null', () => {
+  // ALLEGIANCE-CAR1 (2026-11-08): the tri-state retired with the mark — the absence of an allegiance IS the clean state
+  it('a card with no allegiance reads clean (the retired tri-state null is gone with the mark)', () => {
     const profile = deriveNpcProfile(militaryCaptain()); // fixture carries no corruption fields
-    expect(profile.corrupt).toBeNull();
+    expect(profile.corrupt).toBe(false);
     expect(profile.corruptionVector).toBeNull();
+    expect(profile.allegiance).toBeNull();
     expect(profile.timesExposed).toBe(0);
     expect(profile.ousted).toBe(false);
   });
 
   it('publicSafe: raw corruption fields never reach the public npc allowlist', () => {
     const out = toPublicSafe({
-      npcs: [militaryCaptain({ corrupt: true, corruptionVector: 'greed', timesExposed: 2, ousted: true })],
+      npcs: [militaryCaptain({ corrupt: true, corruptionVector: 'greed', allegiance: { power: "Thieves' Guild", house: 'Thieves den', vector: 'greed', via: 'office', handler: 'npc_fence', share: 0.15, veiled: true, covert: true }, timesExposed: 2, ousted: true })],
     });
     expect(out.npcs).toHaveLength(1);
-    for (const k of ['corrupt', 'corruptionVector', 'timesExposed', 'ousted']) {
+    for (const k of ['corrupt', 'corruptionVector', 'allegiance', 'timesExposed', 'ousted']) {
       expect(out.npcs[0][k]).toBeUndefined();
     }
   });

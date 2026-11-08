@@ -1,5 +1,5 @@
 {
- "_": "ALLEGIANCE-CAR1 2026-11-08 (the allegiance design \u00a77.3, I-15): the files that may still read the retired NPC mark \u2014 `corrupt`, `corruptTies`, `corruptionVector` \u2014 after car 1: the simulation's readers (M-6, frozen: the owner kept 'compromised' for the simulator) and the one eager first-paint module that feeds only the simulation. MEASURED by tests/lint/noLegacyCorruptReaders.walker.test.js's own syntax-tree pass at the car's tip: every file the pass finds reading the mark that is not re-pointed through allegianceOf, minus the two declared classes (the veil's retired-key drop, the v2 -> v3 migration). The design's \u00a77.3 union of 37 names (21 files containing `compromised`, 16 reading the field) MEASURED: 15 of its 16 field readers read the mark (npcVerdictTable.js reads it only through corruptionLeash.js :: resolveLeash, re-pointed, so it is no reader of its own), none of the `compromised`-only files reads the card field (they read the simulation's WORLD roster), and corruption.js joins them (its re-point is refused for the first-paint closure, its row says why): 16 files.",
+ "_": "ALLEGIANCE-CAR1 2026-11-08 (the allegiance design \u00a77.3, I-15): the files that may still read the retired NPC mark \u2014 `corrupt`, `corruptTies`, `corruptionVector` \u2014 after car 1: the simulation's readers (M-6, frozen: the owner kept 'compromised' for the simulator) and the one eager first-paint module that feeds only the simulation. MEASURED by tests/lint/noLegacyCorruptReaders.walker.test.js's own syntax-tree pass at the car's tip: every file the pass finds reading the mark that is not re-pointed through allegianceOf, minus the two declared classes (the veil's retired-key drop, the v2 -> v3 migration). The design's \u00a77.3 union of 37 names (21 files containing `compromised`, 16 reading the field) MEASURED: 15 of its 16 field readers read the mark (npcVerdictTable.js reads it only through corruptionLeash.js :: resolveLeash, re-pointed, so it is no reader of its own), none of the `compromised`-only files reads the card field (they read the simulation's WORLD roster), and corruption.js joins them (its re-point is refused for the first-paint closure, its row says why), and corruptionLeash.js's legacy arm (the simulation's own `corruptTies` writes, read where a card holds no allegiance): 17 files.",
  "base": "ALLEGIANCE-CAR1",
  "files": [
   {
@@ -8,6 +8,13 @@
     "corrupt"
    ],
    "reason": "compromisedSecurityInstitutions: the covert stooge's home institution, read only by the simulation (worldPulse/causeVocabulary.js, npcAgency.js and the espionage gauntlet through patronageSecurityDrag); corruption.js is an EAGER first-paint module, so it does not import the allegiance reader (its module graph carries the catalog). Its in-file npcHomeInstitution is FPZ's (fpz-list.json). Re-point to allegianceOf when FPZ rebuilds the simulation's corruption loop (M-6)."
+  },
+  {
+   "file": "src/domain/corruptionLeash.js",
+   "reads": [
+    "corruptTies"
+   ],
+   "reason": "resolveLeash's LEGACY ARM: a card with no allegiance reads the `corruptTies` the frozen simulation itself writes (npcVerdictTable.js, the betrayal seed), so the simulation's behaviour is untouched; the allegiance arm (allegianceOf) is read first. The legacy arm leaves when FPZ rebuilds the simulation's corruption loop (M-6)."
   },
   {
    "file": "src/domain/worldPulse/applyWorldPulseBetrayal.js",
