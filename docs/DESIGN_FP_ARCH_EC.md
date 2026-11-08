@@ -1,6 +1,6 @@
 # EC-ARCHITECTURE — THE ECONOMY PROGRAM: SCARCITY, ALLOCATION AND CAUSE (compiled implementation layer; absorbs TR)
 
-[RE-READ 2026-11-08 (FP-REBASE) — unaffected by the people car and the allegiance train: the economy is settlement-, house- and court-grain; its casting lines name "the seat NPC" and "the house's factor" through existing reads, which now resolve to the seat face (`DESIGN_FP_ARCHITECTURE.md` §1 L11) and to TR-2's re-based factor (`DESIGN_FP_ARCH_TR.md`), and no line presumes the grouping or the mark.]
+[RE-READ 2026-11-08 (FP-REBASE) — unaffected by the people car and the allegiance train: the economy is settlement-, house- and court-grain; its casting lines name "the seat NPC" and "the house's factor" through existing reads, which now resolve to the seat face (`DESIGN_FP_ARCHITECTURE.md` §1 L11) and to TR-2's re-based factor (`DESIGN_FP_ARCH_TR.md`), and no line presumes the grouping or the mark. [RE-READ 2026-11-08 (FP-REBASE; FPR-VERIFY N8) — re-worded: the volume DOES reach the person, through CASTING (the seat NPC, a factor, a master craftsman named in receipts) and through the caravan's TRANSIT and CAPTURE (persons on the road); every reach goes through the seat face, the commission or a card by id, and none of it reads a retired field]]
 
 ## EC program architect (chair session 2fc13d59, Fable 5.1), 2026-10-16. Measured
 ## against the DEPLOYED master tip `origin/master` @ `00b648c9d` (a detached
@@ -264,7 +264,7 @@ banded; no float reaches a surface; the AI is a bucketing clerk.
   band. The weight is PARTIAL and authored: path cost, danger, stance and
   appetite keep their terms; the condition is one more. Law One holds: the
   actor is the origin's merchant faction (faction grain), never a caravan
-  with a mind. [see the bracket at :2103]
+  with a mind. [see the bracket at :2106] [RE-READ 2026-11-08 (FP-REBASE; FPR-VERIFY N1) — the pointer drifted :2103 → :2106 with the RE-READ bracket's two header lines]
 - **E12 — THE CLERK READS BANDS:** the AI grounding for economy — the client
   payload AND the edge function's prompt summary — carries condition bands,
   pressures and believed bands; never a stock integer, never an income
@@ -2160,7 +2160,7 @@ letters were a season old.*
   composer idiom (TR-3's Seam Three whitelist grows by this one composer,
   enumerated) and never a band. [CORRECTED 2026-10-16 (coherence fold) — the whitelist is enumerated in DESIGN_FP_TRADE.md §3 Seam Three "HERE and only here", and EC-1 pins `conditionToScarcityTruth.js` as the ONLY module that may name both ladders: this composer's entry lands as a TRADE §3 amendment AND an EC-1 pin amendment in EC-18's own commit, or the push reads truth only (the declared dark-belief arm); no lane widens the list silently (findings TR-EC §5A-18)]
 - **Casting:** the origin's merchant faction (its named factor when TR-2 is
-  lit) in the departure receipt.
+  lit) in the departure receipt. [RE-READ 2026-11-08 (FP-REBASE; FPR-VERIFY N1) — "faction" reads the merchant POWER (the fold §5); the named factor is a COMMISSION (`DESIGN_FP_COHERENCE_FOLD.md :: THE COMMISSION LAW`, cast by `commissionOf`)]
 - **Receipts:** "Mossgate's iron, cheap at home, went up the Harrow road on
   word that it was dear there" · "The Mossgate wagons came to Harrow for a
   dear market and found the Aldenmoor iron already in the yards" · "No wagon
@@ -2682,7 +2682,7 @@ file class).
   narrows it.
 - **J-EC-21 — THE OPEN ROAD IS PARTIAL AND UNCONTRACTED (E15 made a ruling).**
   The condition is one weighted term in the existing dispatch decision and the
-  actor of a speculative caravan is the origin's merchant faction; [see the bracket at :2103] contracted
+  actor of a speculative caravan is the origin's merchant faction; [see the bracket at :2106] [RE-READ 2026-11-08 (FP-REBASE; FPR-VERIFY N1) — the pointer drifted :2103 → :2106 with the RE-READ bracket's two header lines] contracted
   flows are fenced by name; the house's venture (TR-7) takes precedence where
   lit. The weight's cap below path cost is the chair's reading of "partially"
   and is a tuning band the owner signs at the soak.

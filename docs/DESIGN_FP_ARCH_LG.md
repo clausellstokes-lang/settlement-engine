@@ -1,6 +1,6 @@
 # DESIGN — THE LG FAMILY: THE LOGISTICS NETWORK (circles, fleets, journeys)
 
-[RE-READ 2026-11-08 (FP-REBASE) — unaffected by the people car and the allegiance train: logistics (circles, fleets, journeys) is unit- and route-grain, and no person record, roster or mark is read.]
+[RE-READ 2026-11-08 (FP-REBASE) — unaffected by the people car and the allegiance train: logistics (circles, fleets, journeys) is unit- and route-grain, and no person record, roster or mark is read. [RE-READ 2026-11-08 (FP-REBASE; FPR-VERIFY N8) — re-worded: the volume DOES reach the person in TRANSIT: its journeys carry the errand spine's travellers — envoys and spies under the envoy and ES mission flags — by circle and fleet; it reaches them as the errand's traveller and its whereabouts, and none of it reads a retired field]]
 
 - **Status:** ARCHITECTED 2026-08-15 (Fable chair, the §46 sitting). Lands on
   the ledger branch (the build branch is mid-train); **fold obligation:** to
