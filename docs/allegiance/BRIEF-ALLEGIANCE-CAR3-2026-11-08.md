@@ -20,6 +20,8 @@ CREATE `src/domain/people/patronage.js` — `RULING_PATRONAGE_TUNING` (`byRank.1
 
 ## 2. The invariants FIRST, red-first
 
+**A contract car 1 already pinned for you (2026-11-08 19:15 UTC, ALLEGIANCE-CAR1's veil test):** a patronage receipt STORED on a `powerStructure` row reaches the public page, because both projections keep `powerStructure` whole — so J-9's never-stored rule is load-bearing for the veil, not only for the arithmetic. The pin is red on a planted stored receipt; your `patronageOf` stores nothing and the pin stays green — never widen or loosen it.
+
 I-6 and I-7 in `patronage.test.js` (§1); I-10 extended in `tests/security/allegianceVeil.pglite.test.js` (car 1's harness): a hidden power's boost, its name and the panel's blocks appear nowhere in the public projection — red on a planted public row, green at the drop; the W7 surface rule as a test: the panel renders on the DM layer and the PDF DM chapter only (a player-view render shows nothing).
 
 ## 3. Generator moves on this branch: UNSIGNED cause commits, measured
