@@ -177,14 +177,14 @@
  "digests": {
   "corpusMeta": "1a4216a0fb4db8841e27ac3e2c45851c67d411b6aae8da02ab3145b4076a224d",
   "inventory": "8a95fac189c16a52417124e88e0b8b5ba7139f93e9bb12e4b82df75644898011",
-  "manifests": "0b119e4106b816078850c65a823daf87a85c6b529798f6e56dc7eca3e166f532",
+  "manifests": "eca5e6a6a865c02da4a3abfc8c4bdd07370432dd8406ad714e584b5c1be09ce5",
   "migrationReview": "0f122dc60cecf83441c50da0d0e3438d854564666edaf4fefc9dd41f6712666d",
   "rowTags": "1ebab9f067e5ec39f32a8c38b8e1a18c24d8ad0c66109851551ef84efc314447",
   "scanStats": "b93aae1d1b9f3109713ff7b01fc805dca710901c0788329dba9940ba59270020",
   "sentinel": "cc9b8fdaabb56d46ba6cdc7352f63381715d7aaf4a12ae8f988e59fb7cd4deb7"
  },
  "frozen": "2026-11-08",
- "frozenAtSha": "e46bf27f90a9e792add9fcd072a51e92b9cccdff",
+ "frozenAtSha": "657b3fb30ceb49d4624798120985cd7029014068",
  "identities": 1548,
  "inventory": {
   "src/components/BuyThisDossier.jsx": {
@@ -2684,7 +2684,7 @@
   },
   "executionTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "db1dfaea68c1fa6ded7c21ab0fb507c82599e5805145537d5b58659ae9b81e79",
+   "digest": "80de348593d282371faccf63776b4f2f351528cabfc3eabb9f632e8dbdd1cddd",
    "entries": [
     {
      "mode": "100644",
@@ -7260,8 +7260,8 @@
     {
      "mode": "100644",
      "path": "src/data/dossierStateProse/general.generated.js",
-     "sha256": "8b3e140f621ccb140d9af7bf998edf7b89ffb90c9b5febefe7194a1894fdffec",
-     "size": 267534,
+     "sha256": "18b956441b417dd9fd56d4191679a81f35c88b8a53d92e7a63d5370b7e7d496f",
+     "size": 267540,
      "type": "file"
     },
     {
@@ -7498,8 +7498,8 @@
     {
      "mode": "100644",
      "path": "src/data/npcData.js",
-     "sha256": "d8ccdb9fc500975df484a0f125556bf95e8b48a422ea73bd8bba737c8b12038a",
-     "size": 123144,
+     "sha256": "6d1412c3249dd9449a8559d561719e3c8f63594e1aafd48736cd2a1b1bbd3eaf",
+     "size": 122831,
      "type": "file"
     },
     {
@@ -19854,7 +19854,7 @@
   },
   "scanTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "c070cefc1d10d3487fd2869c54d17a368af6a17521a41359dd91f685eaff3f32",
+   "digest": "8cb9c2ac09757fd50ffa7557a74bb6d198221b22156118a0d317dc0a65b4b4d8",
    "entries": [
     {
      "mode": "100644",
@@ -24528,8 +24528,8 @@
     {
      "mode": "100644",
      "path": "src/data/npcData.js",
-     "sha256": "d8ccdb9fc500975df484a0f125556bf95e8b48a422ea73bd8bba737c8b12038a",
-     "size": 123144,
+     "sha256": "6d1412c3249dd9449a8559d561719e3c8f63594e1aafd48736cd2a1b1bbd3eaf",
+     "size": 122831,
      "type": "file"
     },
     {
@@ -36828,7 +36828,7 @@
   },
   "sourceTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "1d52748235c6f2384e9f8ae7c39148836730f4058aa33588a4a458611b79c3d6",
+   "digest": "271f11647590e7d7f4d86f46caa0c99526f6137cddceb1d79134cedb5fbf2ba3",
    "entries": [
     {
      "mode": "100644",
@@ -41334,8 +41334,8 @@
     {
      "mode": "100644",
      "path": "src/data/dossierStateProse/general.generated.js",
-     "sha256": "8b3e140f621ccb140d9af7bf998edf7b89ffb90c9b5febefe7194a1894fdffec",
-     "size": 267534,
+     "sha256": "18b956441b417dd9fd56d4191679a81f35c88b8a53d92e7a63d5370b7e7d496f",
+     "size": 267540,
      "type": "file"
     },
     {
@@ -41572,8 +41572,8 @@
     {
      "mode": "100644",
      "path": "src/data/npcData.js",
-     "sha256": "d8ccdb9fc500975df484a0f125556bf95e8b48a422ea73bd8bba737c8b12038a",
-     "size": 123144,
+     "sha256": "6d1412c3249dd9449a8559d561719e3c8f63594e1aafd48736cd2a1b1bbd3eaf",
+     "size": 122831,
      "type": "file"
     },
     {
@@ -54244,10 +54244,10 @@
  },
  "scannerProvenance": {
   "detectorDigest": "cb5dac5989089c789d38f0689a859a2dd8e64d78bb3f378a7aab1e0a255d1de5",
-  "executionTreeDigest": "db1dfaea68c1fa6ded7c21ab0fb507c82599e5805145537d5b58659ae9b81e79",
-  "scanTreeDigest": "c070cefc1d10d3487fd2869c54d17a368af6a17521a41359dd91f685eaff3f32",
-  "sourceTreeDigest": "1d52748235c6f2384e9f8ae7c39148836730f4058aa33588a4a458611b79c3d6",
-  "unscannedInputDigest": "150e4b374c6b0477c2f399b06fb7506753892078f55d0a05895f1d0bfdd42041"
+  "executionTreeDigest": "80de348593d282371faccf63776b4f2f351528cabfc3eabb9f632e8dbdd1cddd",
+  "scanTreeDigest": "8cb9c2ac09757fd50ffa7557a74bb6d198221b22156118a0d317dc0a65b4b4d8",
+  "sourceTreeDigest": "271f11647590e7d7f4d86f46caa0c99526f6137cddceb1d79134cedb5fbf2ba3",
+  "unscannedInputDigest": "304219e2d242a5ebebaceaec1787b7c88b929b8f5016162e29b780399d4a072b"
  },
  "schema": 32,
  "sentinel": {
