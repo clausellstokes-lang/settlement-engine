@@ -13,7 +13,9 @@ import { describe, expect, it } from 'vitest';
 import { enrichNPCsWithStructure } from '../../src/generators/npcStructure.js';
 import { withPresumptionLedger } from '../../src/domain/facts/presumptionLedger.js';
 
-const npc = () => ({ name: 'Oswin Hale', role: 'Mayor', category: 'government', factionAffiliation: 'Council', goal: { short: 'role goal', long: 'role goal' } });
+// MERGE-CAR-2 (2026-11-08): the card in the people car's shape — the rank axis reads the first-rank
+// membership (PEOPLE-2; `factionAffiliation` left the card at PEOPLE-5); the Mayor heads the Council.
+const npc = () => ({ name: 'Oswin Hale', role: 'Mayor', category: 'government', memberships: [{ power: 'Council', rank: 1, share: 1 }], goal: { short: 'role goal', long: 'role goal' } });
 const place = (stress) => ({
   tier: 'town', stress, institutions: [],
   powerStructure: { factions: [{ faction: 'Council', category: 'government', power: 60, isGoverning: true }], publicLegitimacy: {} },

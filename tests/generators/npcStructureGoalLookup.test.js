@@ -21,9 +21,12 @@ function enrich(extra) {
     { faction: 'Lesser', category: 'government', power: 10 },
   ];
   const settlement = { tier: 'town', ...extra, powerStructure: { ...(/** @type {any} */ (extra).powerStructure || {}), factions } };
+  // MERGE-CAR-2 (2026-11-08): the cards in the people car's shape — the rank axis reads the FIRST-RANK
+  // membership (PEOPLE-2; `factionAffiliation` left the card at PEOPLE-5). A heads the governing power
+  // (dominant), B heads the lesser one (subordinate), as the two affiliations meant.
   const npcs = [
-    { id: 'a', name: 'A', category: 'government', factionAffiliation: 'Council', role: 'Mayor', goal: ROLE_GOAL },
-    { id: 'b', name: 'B', category: 'government', factionAffiliation: 'Lesser', role: 'Clerk', goal: ROLE_GOAL },
+    { id: 'a', name: 'A', category: 'government', memberships: [{ power: 'Council', rank: 1, share: 1 }], role: 'Mayor', goal: ROLE_GOAL },
+    { id: 'b', name: 'B', category: 'government', memberships: [{ power: 'Lesser', rank: 1, share: 1 }], role: 'Clerk', goal: ROLE_GOAL },
   ];
   return withPresumptionLedger(() => enrichNPCsWithStructure(npcs, settlement));
 }

@@ -33,13 +33,20 @@ function allGoals() {
         { faction: 'Second', category, power: 10 },
       ];
       const settlement = { ...state, powerStructure: { ...(state.powerStructure || {}), factions } };
+      // MERGE-CAR-2 (2026-11-08): the cards in the people car's shape (the rank axis reads the first-rank
+      // membership; `factionAffiliation` left the card at PEOPLE-5): A heads Top (dominant), B heads Second
+      // (subordinate — a lesser power of the category), the two ranks the affiliations meant.
       const npcs = [
-        { name: 'A', category, factionAffiliation: 'Top', role: 'Head' },
-        { name: 'B', category, factionAffiliation: 'Second', role: 'Second' },
+        { name: 'A', category, memberships: [{ power: 'Top', rank: 1, share: 1 }], role: 'Head' },
+        { name: 'B', category, memberships: [{ power: 'Second', rank: 1, share: 1 }], role: 'Second' },
       ];
       for (const npc of enrichNPCsWithStructure(npcs, settlement)) {
         expect(npc.settlementCondition).toBe(condition);
-        out[`${category}__${condition}__${npc.structuralRank}`] = npc.goal.short;
+        // MERGE-CAR-2: `structuralRank` is the card's STANDING since PEOPLE-2 ('head' for both cards here),
+        // no longer the template's rank axis; the axis is keyed by the fixture's identity — A the dominant
+        // card, B the subordinate — exactly the two ranks the enricher's getRank reads for them.
+        const rank = npc.name === 'A' ? 'dominant' : 'subordinate';
+        out[`${category}__${condition}__${rank}`] = npc.goal.short;
       }
     }
   }
