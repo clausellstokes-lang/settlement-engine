@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "1bba631a30afc903f2081b3b129d7ef6d7b06361",
-  "measuredBy": "MERGE-WAVE (W2 DEF merge point)",
+  "measuredAtSha": "623b2d54d4df384427ac499efa832b8de08db307",
+  "measuredBy": "MERGE-WAVE (W3 POW merge point)",
   "date": "2026-11-08",
-  "note": "the W2 DEF merge at 82a4e2856: the lane brings its arms into the integration branch; refrozen at the merged tip",
+  "note": "the W3 POW merge at 1a160d599: the lane brings its arms into the integration branch; refrozen at the merged tip",
   "files": 3118,
   "parked": 384,
   "credited": 2734,
-  "titles": 28628,
-  "suiteTitles": 7701
+  "titles": 28631,
+  "suiteTitles": 7702
 }
