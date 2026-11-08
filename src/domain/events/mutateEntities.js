@@ -747,7 +747,7 @@ function exposeCorruptNpc(s, npc, event) {
     npcId: npc.id || npc.name,
     name: npc.name,
     kind: 'ousted',
-    criminalInstitution: allegianceOf(npc)?.house || null,
+    criminalInstitution: allegianceOf(npc)?.house || undefined,
     homeInstitution: npc.factionAffiliation || npc.factionLink || null,
   };
   const next = applyCorruptionImpairments(s, [exposure], { now });

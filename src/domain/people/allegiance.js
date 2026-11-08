@@ -171,7 +171,7 @@ export function criminalHousesOf(settlement) {
  * @param {unknown} settlement @returns {Rec[]}
  */
 export function criminalPowersOf(settlement) {
-  const governing = nameOf(governingFactionOf(/** @type {import('../settlement.schema.js').SimSettlement} */ (/** @type {unknown} */ (settlement))));
+  const governing = nameOf(governingFactionOf(/** @type {import('../rulingPower.js').RulingPowerSettlement} */ (/** @type {unknown} */ (settlement))));
   return powersOf(settlement)
     .map((p, at) => ({ p, at }))
     .filter(({ p }) => isCriminalPower(p))
@@ -195,7 +195,7 @@ export function organizedCrimeOf(settlement) {
     return w === 0 ? T.weightZeroHouse : w;
   });
   const sum = weights.reduce((s, w) => s + w, 0);
-  const governing = nameOf(governingFactionOf(/** @type {import('../settlement.schema.js').SimSettlement} */ (/** @type {unknown} */ (settlement))));
+  const governing = nameOf(governingFactionOf(/** @type {import('../rulingPower.js').RulingPowerSettlement} */ (/** @type {unknown} */ (settlement))));
   const independent = criminalPowersOf(settlement).some((p) => nameOf(p) !== governing);
   return n01(n01(sum / T.organizedFull) + (independent ? T.powerBonus : 0));
 }

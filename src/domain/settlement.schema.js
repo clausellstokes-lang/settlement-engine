@@ -1018,6 +1018,7 @@ export const FIELD_ALIASES = Object.freeze({
  * @property {string|null}   privateAgenda        The NPC's long-term goal.
  * @property {boolean|null}  corrupt              LEGACY (simulation-only, ALLEGIANCE-CAR1): the retired mark; a v3 birth-era card carries `allegiance` instead (domain/people/allegiance.js :: allegianceOf).
  * @property {string|null}   corruptionVector     LEGACY (simulation-only): the vector now lives on `allegiance.vector`.
+ * @property {Record<string, unknown>|null} [allegiance] The hidden allegiance (ALLEGIANCE-CAR1, DM-only, covert), read through domain/people/allegiance.js :: allegianceOf.
  * @property {number}        timesExposed         How many times their corruption has been surfaced.
  * @property {boolean}       ousted               Whether they have been removed from their seat.
  * @property {({ causeClass: string, family: string, stage: string, situation: string, role: string, originTick: number|null, resolvedTick: number|null, historicizedTick: number|null, exposedTick: number|null, ageBand: string|null })|null} [compromiseLifecycle]  W-C5 cause-resolution lifecycle RAW stamp (attributed cause + stage + situation + tick stamps + age band; the conjunction key W2 keys off). Null unless the world pulse touched this compromise; the lazy dossier card runs it through the generic content floor.

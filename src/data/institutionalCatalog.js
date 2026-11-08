@@ -1974,7 +1974,7 @@ export function isNoPowerInstitution(institution) {
  */
 export function frontClassOfInstitution(institution) {
   if (isStrangerHouse(institution)) return null;
-  return /** @type {'prime' | 'front' | null} */ (FRONT_BY_NAME.get(String(institution.name ?? '')) ?? null);
+  return /** @type {'prime' | 'front' | null} */ (FRONT_BY_NAME.get(String(institution?.name ?? '')) ?? null);
 }
 
 /**
