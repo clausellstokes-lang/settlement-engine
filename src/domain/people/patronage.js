@@ -27,7 +27,8 @@
  */
 import { governingFactionOf, nameOf } from '../rulingPower.js';
 import { membershipsOf } from './membership.js';
-import { hiddenMembershipOf } from './allegiance.js';
+import { allegianceOf, criminalPowersOf, hiddenMembershipOf, isCriminalPower } from './allegiance.js';
+import { CAPTURE_LINES, CAPTURE_RUNG_LABELS, PATRONAGE_LINES } from '../../data/people/dmPowerLines.js';
 
 /** @typedef {Record<string, unknown>} Rec */
 /** @typedef {1 | 2 | 3 | 'steward'} PatronRank */
@@ -160,4 +161,131 @@ export function effectiveStrengthOf(settlement, power, patronage) {
   const factions = rec(rec(settlement).powerStructure).factions;
   const f = (Array.isArray(factions) ? factions : []).map(rec).find((x) => nameOf(x) === power);
   return f ? finite(f.power) : 0;
+}
+
+// ── THE DM VIEW: "who really runs this town" (design §9; DM layer only) ─────────────────────────────
+
+/**
+ * The handler tie's kind in plain words, by the tie's archetype key (car 1's four kinds, the fear kind's
+ * four sub-kinds; relationshipArchetypes.js). Every phrase is listed FOR THE OWNER'S VETO in the car's record.
+ */
+export const HANDLER_TIE_WORDS = Object.freeze({
+  handler_partnership: 'a silent partnership',
+  handler_patron: 'a patron no one names',
+  handler_cause: 'sworn to the cause',
+  handler_leverage_debt: 'held over them: a debt',
+  handler_leverage_secret: 'held over them: a secret',
+  handler_leverage_crime: 'held over them: a past crime',
+  handler_leverage_loved: 'held over them: someone they love',
+});
+
+/** What an agent brings the guild, by `via` (allegiance.js :: leaveAllegianceReceipts's words). */
+export const VIA_WORDS = Object.freeze({
+  office: 'protection and decisions',
+  front: 'a place for the money and the goods',
+  retainer: 'information and small favours',
+});
+
+/** @param {Rec} card @returns {{ id: string, name: string, title: string, house: string }} */
+const faceOf = (card) => ({
+  id: String(card.id ?? ''),
+  name: String(card.name ?? ''),
+  title: String(card.title ?? card.role ?? ''),
+  house: String(rec(card.institution).key ?? ''),
+});
+
+/**
+ * The hall's rung and its one plain line, read from today's stored `criminalCaptureState` and the ruling
+ * three's agents. ⚠ RE-READ AT CAR 2'S TIP: car 2's `hallCaptureOf` becomes the one writer of the
+ * rung and its receipt (J-13); this block then reads that receipt in place of the stored classifier.
+ * @param {Rec} s @param {string} ruler @param {Array<{ card: Rec, rank: PatronRank }>} three
+ */
+function hallOf(s, ruler, three) {
+  const stored = String(rec(s.powerStructure).criminalCaptureState || 'none');
+  const rung = /** @type {keyof typeof CAPTURE_LINES} */ (Object.hasOwn(CAPTURE_LINES, stored) ? stored : 'none');
+  const governing = governingFactionOf(/** @type {import('../rulingPower.js').RulingPowerSettlement} */ (/** @type {unknown} */ (s)));
+  const underworld = criminalPowersOf(s).map((p) => nameOf(p)).find((n) => n && n !== ruler) || null;
+  const agents = three
+    .map(({ card, rank }) => ({ card, rank: rank === 'steward' ? 1 : rank, a: allegianceOf(card) }))
+    .filter((x) => x.a)
+    .map((x) => ({ name: String(x.card.name ?? ''), rank: /** @type {1 | 2 | 3} */ (x.rank), guild: String(x.a?.power || x.a?.house || '') }));
+  const facts = { ruler, agents, rulerCriminal: isCriminalPower(governing), underworld };
+  // variant 0 is the receipt in rank words (§9's example); every 'capture' variant but the last names an
+  // agent, so a capture the stored classifier reads with no agent in the three takes the last
+  const variant = rung === 'capture' && !agents.length ? 2 : 0;
+  return { rung, label: CAPTURE_RUNG_LABELS[rung], line: CAPTURE_LINES[rung][variant](facts), source: 'criminalCaptureState' };
+}
+
+/**
+ * THE DM VIEW's rows (design §9), for the Power tab's DM panel and the PDF's DM chapter — DM-ONLY: it
+ * names hidden allegiances, handlers, covert ties and a hidden power's boost. Never call it for a player
+ * surface, a public page or the Foundry journal (the W7 receipt ruling). Pure; writes nothing.
+ * @param {unknown} settlement
+ */
+export function dmPowerViewOf(settlement) {
+  const s = rec(settlement);
+  const patronage = patronageOf(s);
+  const ruler = patronage.ruler;
+  if (!ruler) return null;
+  const governing = rec(governingFactionOf(/** @type {import('../rulingPower.js').RulingPowerSettlement} */ (/** @type {unknown} */ (s))));
+  const vacant = Array.isArray(governing.modifiers) && /** @type {unknown[]} */ (governing.modifiers).includes('vacant');
+  const cards = (Array.isArray(s.npcs) ? /** @type {unknown[]} */ (s.npcs) : []).map(rec);
+  const byId = new Map(cards.map((c) => [String(c.id ?? ''), c]));
+  const three = rulingThreeOf(cards, ruler, vacant);
+  const ties = (Array.isArray(s.relationships) ? /** @type {unknown[]} */ (s.relationships) : []).map(rec).filter((t) => t.handler === true);
+  const tieWords = (/** @type {string} */ from, /** @type {string} */ to) => {
+    const t = ties.find((x) => String(x.from) === from && String(x.to) === to);
+    const key = String(t?.archetypeKey || '');
+    return Object.hasOwn(HANDLER_TIE_WORDS, key) ? HANDLER_TIE_WORDS[/** @type {keyof typeof HANDLER_TIE_WORDS} */ (key)] : null;
+  };
+
+  /** the evidence sentence for one patron of one power @param {Patron} pt @param {string} power @param {number} variant */
+  const patronLine = (pt, power, variant) => PATRONAGE_LINES[pt.kind][variant]({ name: pt.name, rank: pt.rank, ruler, power, share: pt.share, boost: pt.boost });
+
+  const rulingThree = three.map(({ card, rank }) => {
+    const a = allegianceOf(card);
+    const handler = a?.handler ? byId.get(a.handler) : null;
+    const id = String(card.id ?? '');
+    const lends = patronage.powers.flatMap((p) => p.patrons.filter((pt) => pt.id === id && pt.boost > 0)
+      // the rank-2 face takes the third line, every other place the second (variant 0 is the boosts block's)
+      .map((pt) => ({ power: p.power, kind: pt.kind, share: pt.share, boost: pt.boost, line: patronLine(pt, p.power, rank === 2 ? 2 : 1) })));
+    return {
+      rank, ...faceOf(card),
+      openPowers: membershipsOf(card).filter((m) => m.power !== ruler).map((m) => ({ power: m.power, rank: m.rank })),
+      answersTo: a ? { guild: a.power || a.house, handler: handler ? String(handler.name ?? '') : null } : null,
+      lends,
+    };
+  });
+
+  // who answers to whom: per criminal power (or the houses, where the allegiance names none) the boss,
+  // then each handler with its agents
+  const agents = cards.map((card) => ({ card, a: allegianceOf(card) })).filter((x) => x.a);
+  /** @type {Map<string, { guild: string, kind: 'power' | 'house', boss: ReturnType<typeof faceOf> | null, handlers: Map<string, any> }>} */
+  const groups = new Map();
+  for (const { card, a } of agents) {
+    if (!a) continue;
+    const guild = a.power || a.house;
+    if (!groups.has(guild)) {
+      const boss = a.power ? cards.find((c) => membershipsOf(c).some((m) => m.power === a.power && m.rank === 1)) : null;
+      groups.set(guild, { guild, kind: a.power ? 'power' : 'house', boss: boss ? faceOf(boss) : null, handlers: new Map() });
+    }
+    const g = /** @type {{ handlers: Map<string, any> }} */ (groups.get(guild));
+    const hid = a.handler || '';
+    const h = byId.get(hid);
+    if (!g.handlers.has(hid)) g.handlers.set(hid, { ...(h ? faceOf(h) : { id: hid, name: '', title: '', house: '' }), agents: [] });
+    g.handlers.get(hid).agents.push({ ...faceOf(card), via: a.via, brings: VIA_WORDS[a.via], tie: tieWords(String(card.id ?? ''), hid) });
+  }
+  const answers = [...groups.values()].map((g) => ({ guild: g.guild, kind: g.kind, boss: g.boss, handlers: [...g.handlers.values()] }));
+
+  const fronts = agents.filter(({ a }) => a?.via === 'front').map(({ card, a }) => {
+    const h = a?.handler ? byId.get(a.handler) : null;
+    return { ...faceOf(card), guild: a?.power || a?.house || '', handler: h ? String(h.name ?? '') : null };
+  });
+
+  const boosts = patronage.powers.filter((p) => p.boost > 0).map((p) => {
+    const lead = [...p.patrons].sort((x, y) => y.boost - x.boost)[0];
+    return { power: p.power, base: p.base, boost: p.boost, effective: p.effective, bound: p.bound, hidden: p.hidden, line: patronLine(lead, p.power, 0) };
+  });
+
+  return { ruler, rulingThree, answers, fronts, hall: hallOf(s, ruler, three), boosts, hunts: null };
 }

@@ -13,7 +13,9 @@
  *
  * What drops what (§8): the card field `allegiance` and `goal` — the NPC public ALLOWLIST (publicSafe.js :: publicNpc;
  * SQL 033 → 205 → 206), a key not on it never leaves; the handler TIE — `covert: true` on the tie, the value-level
- * covert drop (publicSafe.js; SQL 142, re-stated in 206), the object dropped whole.
+ * covert drop (publicSafe.js; SQL 142, re-stated in 206), the object dropped whole; car 3's DM view (a hidden power's
+ * boost, its sentence, who answers to whom) — derived on the DM record, stored nowhere (J-9), so neither projection
+ * carries one (ALLEGIANCE-CAR3).
  */
 import { describe, it, expect, beforeAll } from 'vitest';
 import { PGlite } from '@electric-sql/pglite';
@@ -152,6 +154,47 @@ describe('I-10 — no hidden allegiance, handler tie, pursuit goal or hidden boo
     // anchored: THE COUNTERFORCE — no generated record stores one (J-9: derived, never written)
     for (const r of records) expect(JSON.stringify(r)).not.toMatch(/patronage(Receipt|Boost)/i);
   });
+
+  // I-10, car 3 (ALLEGIANCE-CAR3, 2026-11-08): the DM view's rows (design §9) — a hidden power's boost, its evidence
+  // sentence, the ruling three's "answers to" lines, the hall's line — are computed on the DM record by
+  // patronage.js :: dmPowerViewOf and stored nowhere, so neither projection carries one. Over the six planted towns and
+  // soak1k-785 (a metropolis whose second answers to a criminal power: a HIDDEN boost). RED-FIRST, BY ITS CONTROL: the
+  // same strings planted on a public row (a power row's `desc`, which both projections keep) are counted.
+  it('car 3: the DM view\'s rows (a hidden boost, its sentence, who answers to whom) reach no public page', async () => {
+    const { toPublicSafe } = await import('../../src/domain/display/publicSafe.js');
+    const { dmPowerViewOf } = await import('../../src/domain/people/patronage.js');
+    const { birth, ensureLaws } = await import('../../scripts/audit/soak-review/corpus.mjs');
+    await ensureLaws();
+    const towns = [...records, birth(785).settlement];
+    /** @param {any} v */
+    const dmStrings = (v) => (v ? [
+      ...v.boosts.filter((b) => b.hidden).map((b) => b.line),
+      ...v.rulingThree.flatMap((f) => f.lends.filter((l) => l.kind === 'hidden').map((l) => l.line)),
+      ...v.rulingThree.filter((f) => f.answersTo).map((f) => `answers to ${f.answersTo.guild}`),
+      ...(v.rulingThree.some((f) => f.answersTo) ? [v.hall.line] : []),
+    ] : []);
+    let hiddenBoosts = 0;
+    let checked = 0;
+    for (const rec of towns) {
+      const before = JSON.stringify(rec);
+      const view = dmPowerViewOf(rec);
+      expect(JSON.stringify(rec), 'the DM view stores nothing').toBe(before);
+      hiddenBoosts += view ? view.boosts.filter((b) => b.hidden).length : 0;
+      const secrets = dmStrings(view);
+      checked += secrets.length;
+      const pub = [JSON.stringify(toPublicSafe(rec)), JSON.stringify(await sanitize(rec))];
+      for (const x of secrets) for (const text of pub) expect(text, x).not.toContain(x);
+      // the control: the same strings planted on a public row are counted on both projections
+      if (secrets.length) {
+        const planted = JSON.parse(before);
+        planted.powerStructure.factions[0].desc = secrets.join(' | ');
+        expect(JSON.stringify(toPublicSafe(planted)), 'control, client').toContain(secrets[0]);
+        expect(JSON.stringify(await sanitize(planted)), 'control, server').toContain(secrets[0]);
+      }
+    }
+    expect(hiddenBoosts, 'a hidden boost is among the towns (anti-vacuity)').toBeGreaterThan(0);
+    expect(checked).toBeGreaterThan(0);
+  }, PGLITE_BOOT_TIMEOUT_MS);
 
   it('the client projection carries every count at 0, and client == server', async () => {
     const { toPublicSafe } = await import('../../src/domain/display/publicSafe.js');
