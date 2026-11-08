@@ -49,7 +49,7 @@
       "banner": 9,
       "dated": 148,
       "sha-pin": 2,
-      "tree": 109
+      "tree": 112
     },
     "files": {
       "banner": [
@@ -273,6 +273,9 @@
         "docs/shift-records/2026-11-07-w0-03-one-food-source-count.json",
         "docs/shift-records/2026-11-07-w0-04-legacy-annotations-dated.json",
         "docs/shift-records/2026-11-07-w0-05-annotation-date-one-home.json",
+        "docs/shift-records/2026-11-08-merge-car-a-rung2-composition.json",
+        "docs/shift-records/2026-11-08-merge-car-b-people-car-composition.json",
+        "docs/shift-records/2026-11-08-merge-car-c-composition-cure.json",
         "docs/shift-records/README.md",
         "docs/shift-records/_TEMPLATE.json"
       ]
@@ -318,7 +321,8 @@
     "_rosterGrowth2026-11-07-chair-fix-briefs": "TWO documents JOINED the roster by being BORN into it (the chair, on the integration branch, on the owner's word that both fixes go before the deploy): `dated` 134 -> 136, docs/chair/2026-11-07/BRIEF-FIX-EXPORT-KEYS-2026-11-07.md and docs/chair/2026-11-07/BRIEF-FIX-FOOD-ISOLATION-2026-11-07.md, born dated, 0 past-EOF; nothing changed class.",
     "_rosterGrowth2026-11-07-chair-veil-brief": "ONE document JOINED the roster by being BORN into it (the chair, on the integration branch, on FIX-EXPORT-KEYS's finding that a hidden power's minted face prints its title on a public card): `dated` 136 -> 137, docs/chair/2026-11-07/BRIEF-FIX-PUBLIC-VEIL-2026-11-07.md, born dated, 0 past-EOF; nothing changed class.",
     "_rosterGrowth2026-11-08-merge-car": "MERGE-CAR (the people car merged into the integration branch, 8dff691f3): the roster is the UNION of both sides', measured once by this walker: `dated` 93 (the base 262e8b255) + 44 (the integration side's documents born dated after the base) + 11 (the car's) = 148; `tree` 95 + 5 (the rung-2 landing's five signed records) + 9 (the car's nine) = 109; `banner` 9 and `sha-pin` 1 unmoved. No document changed class; each entered its class when it was born on its own side. pastEofCitationsExcluded is UNCHANGED at 377.",
-    "_rosterMove2026-11-08-merge-car": "ONE document changed class, by the chair's ruling of 2026-11-08 (MERGE-CAR, option (a)): docs/chair/2026-11-07/people-5-prep/walker-draft-at-base.txt joined `sha-pin` (1 -> 2) with the header `**Snapshot base:** 1031233a4`. CAUSE: the people car shortened narrativeGenerator.js (1,035 -> 1,016 lines) and factionDedup.js (217 -> 122) under a listing frozen at 1031233a4; the listing changed class from live to snapshot, pastEofCitationsExcluded 377 -> 382; no row re-addressed."
+    "_rosterMove2026-11-08-merge-car": "ONE document changed class, by the chair's ruling of 2026-11-08 (MERGE-CAR, option (a)): docs/chair/2026-11-07/people-5-prep/walker-draft-at-base.txt joined `sha-pin` (1 -> 2) with the header `**Snapshot base:** 1031233a4`. CAUSE: the people car shortened narrativeGenerator.js (1,035 -> 1,016 lines) and factionDedup.js (217 -> 122) under a listing frozen at 1031233a4; the listing changed class from live to snapshot, pastEofCitationsExcluded 377 -> 382; no row re-addressed.",
+    "_rosterGrowth2026-11-08-merge-car-records": "THREE documents JOINED the roster by being BORN into it (MERGE-CAR, measured with this walker's own arm): `tree` 109 -> 112, docs/shift-records/2026-11-08-merge-car-a-rung2-composition.json, -b-people-car-composition.json and -c-composition-cure.json, the integration landing's three signed records, born into the tree class. GROWTHS that hid nothing: 0 past-EOF of their own; pastEofCitationsExcluded unchanged at 382."
   },
   "rows": []
 }
