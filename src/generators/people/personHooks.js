@@ -21,7 +21,7 @@
 
 import { hookTruthViolations, settlementHookFacts } from '../../domain/coherence/hookTruth.js';
 import { HOOK_POOLS } from './poolMap.js';
-import { dryPoolWalk, spareHookLine } from './representatives.js';
+import { dryPoolWalk, spareHookLine, titlePoolName } from './representatives.js';
 import { plotHookText as textOf } from '../../lib/proseSeams.js';
 
 /**
@@ -45,7 +45,8 @@ export function truePersonHooks(settlement, portKind) {
     const hooks = Array.isArray(npc.plotHooks) ? npc.plotHooks : [];
     if (hooks.length === 1 && isTrue(textOf(hooks[0]))) return npc;
     const own = HOOK_POOLS.includes(npc.category) ? npc.category : 'other';
-    const pools = dryPoolWalk(own);
+    // W7 HOOKS (WAVE-RULINGS item 15): the card's own title pool first, then the category walk.
+    const pools = [titlePoolName(npc.title), ...dryPoolWalk(own)];
     const key = String(npc.id ?? npc.name ?? '');
     // an unheld true line first; where every true line is held, a held one (a repeat beats none)
     const place = { worldLaw: { portKind }, institutions: Array.isArray(settlement?.institutions) ? settlement.institutions : [], tier: typeof settlement?.tier === 'string' ? settlement.tier : undefined }; // MERGE-CAR: the declared rows' facts

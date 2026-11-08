@@ -22,9 +22,12 @@ import { birth, ensureLaws } from '../../../scripts/audit/soak-review/corpus.mjs
 // (CENSUS-3e) and dissolved the F5 inland twins into their table's sibling sets (CENSUS-1c, `NPC_HOOK_SIBLINGS`), so a
 // pool's lines are its rows' TEXTS and an authored line is a row's text or a declared sibling's.
 const lines = (pool) => new Set((NPC_FACTION_LOYALTY[pool] || []).map(lineText));
+import { PERSON_HOOKS_BY_TITLE } from '../../../src/data/personHooksByTitle.js';
 const ALL_LINES = new Set([
   ...Object.values(NPC_FACTION_LOYALTY).flat().map(lineText),
   ...Object.values(NPC_HOOK_SIBLINGS).flat().map(lineText),
+  // W7 HOOKS (2026-11-07, WAVE-RULINGS item 15): the pools by title are authored lines too.
+  ...Object.values(PERSON_HOOKS_BY_TITLE).flat(),
 ]);
 
 describe('the person hook pool, keyed by title through the pool map', () => {
@@ -114,6 +117,24 @@ describe('every card of the soak carries exactly one hook, from the pool map\'s 
     // every line is the pool's own, or its inland twin (F5) where the place has no water
     expect(authored / cards).toBeGreaterThan(0.9);
     expect(Object.keys(repeats).filter((tier) => !['city', 'metropolis'].includes(tier))).toEqual([]);
-    expect((repeats.city || 0) + (repeats.metropolis || 0)).toBeLessThanOrEqual(156);
+    // W7 HOOKS (2026-11-07, WAVE-RULINGS item 15): 156 -> 0. The pools by title cure the city and metropolis repeats.
+    expect(repeats).toEqual({});
   }, 90_000);
+});
+
+describe('the person hook pool BY TITLE (W7 HOOKS, WAVE-RULINGS item 15)', () => {
+  it('every keyed title is a mapped title, every line is plain text, and none presumes a defence, famine, hospital or magic fact', () => {
+    const titles = Object.keys(PERSON_HOOKS_BY_TITLE);
+    expect(titles.length).toBeGreaterThanOrEqual(40);
+    for (const title of titles) {
+      expect(Object.keys(POOL_BY_TITLE), title).toContain(title);
+      const lines = PERSON_HOOKS_BY_TITLE[title];
+      expect(lines.length, title).toBeGreaterThanOrEqual(3);
+      for (const line of lines) {
+        expect(typeof line, title).toBe('string');
+        // anchored: `lines` is asserted non-empty above and `line` a string, so the match cannot run over nothing
+        expect(line, `${title}: ${line}`).not.toMatch(/\b(?:guards?|soldiers?|garrisons?|barracks|watch(?:men|man)?|walls?|palisade|hospitals?|starv\w*|famine|banditry|magic\w*|wizards?|spells?|arcane|villagers?)\b/i);
+      }
+    }
+  });
 });

@@ -423,7 +423,9 @@ describe('HK-3 draws — the corpus, through the real pipeline', () => {
 //   corpus-wide field delta          personality.tell + .speech ONLY
 // ─────────────────────────────────────────────────────────────────────────────
 /** 2026-11-07 PEOPLE-1 CAST: the two figures the cast moved, measured by this file's own corpus at the lane's tip. */
-const HOOK_DUPLICATES_AT_TIP = 119; // PEOPLE-3 HOOKS (0f930ce95): 1335 -> 119, one hook per card. MEASURED at the lane's tip by this file's own corpus (the arm's received value): the pools' exhaustion by a 3.6× cast, W7 HOOKS' debt
+// W7 HOOKS (2026-11-07, WAVE-RULINGS item 15): 119 -> 0. The person hook pool BY TITLE (data/personHooksByTitle.js) is
+// walked first when a card's drawn line is already held, so the exhaustion residual is cured; the total is unchanged.
+const HOOK_DUPLICATES_AT_TIP = 0; // was 119 at // PEOPLE-3 HOOKS (0f930ce95): 1335 -> 119, one hook per card. MEASURED at the lane's tip by this file's own corpus (the arm's received value): the pools' exhaustion by a 3.6× cast, W7 HOOKS' debt
 const ABOVE_K_SHARE_AT_TIP = 66.1;
 
 describe('CS-A1 draws — the tell/speech registry accumulates across the population', () => {

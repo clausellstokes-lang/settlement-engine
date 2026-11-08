@@ -37,6 +37,7 @@
  * itself (a fork is a derivation, not a draw). The display-name pass is draw-free.
  */
 
+import { PERSON_HOOKS_BY_TITLE } from '../../data/personHooksByTitle.js';
 import { slugify } from '../../kernel/slugify.js';
 import { clearActiveRng, getActiveRng, setActiveRng } from '../../kernel/rngContext.js';
 import {
@@ -174,7 +175,8 @@ export function drawCardHooks(cards, poolOf, stream, config, hookRegistry, place
     // from an offset keyed by the card's id. Where every one is held, the repeat stands (the
     // writing wave's W7 HOOKS authors by title; the lane's record counts them).
     if (before.has(String(line).trim())) {
-      const spare = spareHookLine(dryPoolWalk(pool), before, String(card.id), place);
+      // W7 HOOKS (WAVE-RULINGS item 15): the card's TITLE pool is walked first, then the category walk.
+      const spare = spareHookLine([titlePoolName(card.title), ...dryPoolWalk(pool)], before, String(card.id), place);
       if (spare !== null) line = spare;
     }
     held.add(String(line).trim());
@@ -193,6 +195,22 @@ export function drawCardHooks(cards, poolOf, stream, config, hookRegistry, place
  */
 export function dryPoolWalk(own) {
   return [...new Set([own, 'other', 'small_settlement', 'economy', 'government', 'criminal', 'military', 'religious'])];
+}
+
+/**
+ * THE TITLE POOL (W7 HOOKS, 2026-11-07; WAVE-RULINGS item 15): a dry-pool walk names a card's own
+ * title pool as `title:<title>`; `spareHookLine` resolves it from data/personHooksByTitle.js. A title
+ * with no authored pool resolves to an empty pool and the walk moves on to the category pools.
+ * @param {unknown} title @returns {string}
+ */
+export function titlePoolName(title) {
+  return `title:${String(title || '').trim().toLowerCase()}`;
+}
+
+/** @param {string} name @returns {ReadonlyArray<string> | null} the title pool's lines, or null for a category pool */
+function titlePoolLines(name) {
+  if (!name.startsWith('title:')) return null;
+  return PERSON_HOOKS_BY_TITLE[name.slice('title:'.length)] || [];
 }
 
 /** A stable non-negative integer from a string (FNV-1a): a walk's offset, no stream read. @param {string} key */
@@ -223,7 +241,7 @@ export function spareHookLine(pools, held, key, place = {}, accept = () => true)
   const institutions = Array.isArray(place?.institutions) ? place.institutions : [];
   const facts = () => factsOf({ institutions, tier: place?.tier }, { waterKind: place?.worldLaw?.portKind });
   for (const name of [...new Set(pools)]) {
-    const pool = /** @type {unknown[]} */ (NPC_FACTION_LOYALTY[/** @type {keyof typeof NPC_FACTION_LOYALTY} */ (name)] || []);
+    const pool = /** @type {unknown[]} */ (titlePoolLines(name) ?? NPC_FACTION_LOYALTY[/** @type {keyof typeof NPC_FACTION_LOYALTY} */ (name)] ?? []);
     const start = pool.length ? hookOffsetOf(key) % pool.length : 0;
     for (let i = 0; i < pool.length; i += 1) {
       const row = pool[(start + i) % pool.length];
