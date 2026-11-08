@@ -234,8 +234,10 @@ const PICK_VARIANT_CALLS = 31;
 // opaque id, and its keyed forks (`people-faces::`, `people-ties::`, `people-hooks::<card id>`) re-deal, so two of
 // the probe row's ties draw archetypes whose prose takes no external fnv1a32 hash. The cause is the lane's one
 // UNSIGNED generator move.
-// COMPOSED 2026-11-08 (ALLEGIANCE-CAR1, the veil merged over MERGE-CAR): MEASURED by this arm at the merged tree.
-const FNV_EXTERNAL_CALLS = 16;
+// COMPOSED 2026-11-08 (ALLEGIANCE-CAR1, the veil merged over MERGE-CAR, 744c22d74): 16 -> 14, MEASURED by this arm at
+// the merged tree — the integration side's 16 with the veil's re-deal of the probe row's veiled faces composed in (the
+// veil measured -2 at its lane, 15 -> 13; the same -2 here). The register's fnv1a32External moves with it.
+const FNV_EXTERNAL_CALLS = 14;
 /** The fork law A1 pins: the mint wrapper's equivalence rests on this line and nothing else. */
 const FORK_LAW = 'fork: (label) => createPRNG(`${seed}::${label}`),';
 /** §6.4's off-corpus block: a wizard-reachable switch, the keys it moves, and 24 seeds. */
