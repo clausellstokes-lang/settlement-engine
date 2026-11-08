@@ -51,7 +51,7 @@ const BIRTHS = {};
 
 beforeAll(async () => {
   await ensureLaws();
-  for (const i of [452, 15, 76]) {
+  for (const i of [452, 15, 370]) {
     const { settlement } = birth(i);
     BIRTHS[i] = { settlement, text: strings(settlement) };
   }
@@ -78,8 +78,12 @@ describe('F10 unit 4 · the three soak seeds', () => {
   // 970 — all with a Garrison; no garrison-less witness exists in the corpus, nor in sixty war-stressed cities born
   // with the garrison and company houses forbidden). The claim is kept from the other side on a live witness: beside
   // a garrison the soldiers line is KEPT and the twin does not fire; the twin table below proves the substitution.
-  it('soak1k-76 keeps its soldiers line beside its garrison — the twin fires only where no garrison stands', () => {
-    const { settlement, text } = BIRTHS[76];
+  // ALLEGIANCE-CAR1 (2026-11-08): re-keyed by identity 76 -> 370. On 76 the prison warden (npc_large_prison), who carried
+  // the soldiers line, is now dealt a hidden allegiance (the people-allegiance roll that succeeds the retired
+  // corruptionPass), and the seam rewrites the warden's short goal to CORRUPT_SHORT_GOAL, so 76 no longer carries the line
+  // (measured: base 4297838f3 has it on npcs[23], the tip on no card). 370 is the probe's next live witness: a garrison and the line, no twin.
+  it('soak1k-370 keeps its soldiers line beside its garrison — the twin fires only where no garrison stands', () => {
+    const { settlement, text } = BIRTHS[370];
     const f = defenseFactsOf(settlement);
     expect(f.hasGarrison || f.hasMercenary).toBe(true);
     expect(text.some((s) => /conscription pulls away experienced soldiers/.test(s))).toBe(true);
