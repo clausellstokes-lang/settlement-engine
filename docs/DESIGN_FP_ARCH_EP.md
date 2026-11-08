@@ -1,4 +1,6 @@
 # DESIGN — THE ADVANCE EPOCH (EP: living futures, immutable pasts)
+
+[RE-READ 2026-11-08 (FP-REBASE) — unaffected by the people car and the allegiance train except two rows, bracketed in place (§0.3 R7 row 21, §3e row A9): this volume is the entropy and epoch law — seeds, draw keys, stamps and affordances — and it reads no person's grouping, corruption mark or roster; it kills no one (the owner's death law of 2026-11-08 has no passage here to bind).]
 [CLARIFIED 2026-10-16 (coherence fold §5) — "epoch" in this volume always means THE ADVANCE EPOCH: the per-user-advance entropy nonce (`advanceEpoch` the argument and cursor field, `pulseHistory[].epoch` the record field, `spatialLedgers.advanceEpoch` the ledger). It is NOT the town-map construction "epoch" of ODQ §240 ("EPOCH GENERATION — CORE, WALL, RING", the version/epoch axis of MF-ARCH-2): the advance-epoch ledger is a simulation stamp, never a construction date. Prose in other volumes says "the advance epoch" for this program (findings EP §9).]
 
 ⚠⚠ **"LANDED" IN THE HEADER BELOW NAMES THE *DOCUMENT*, NOT THE CODE.** This
@@ -454,6 +456,8 @@ these eight key it off the world seed:
 | 22 | `worldPulse/demographicsPlans.js` | `` `demographics.plan.${realm}.${settlementId}.${episode}.site` `` | TICK-VARYING (`episode = `${stepTick}:${band}``) | WHERE a satellite steading is founded |
 | 23 | `worldPulse/demographicsResponses.js#selectResponse` | `` `demographics.plan.${input.realmId}.${input.settlementId}.${input.episode}.${entry.response}` `` | TICK-VARYING (same episode) | ⚠ in-source: "the last bit here CHOOSES WHAT A CITY DOES for the rest of a campaign" |
 | 24 | `worldPulse/sovereigntyMarketStage.js` (the keyed race) | `` `sovereignty.offer.${realmId}.${sellerId}.${buyerId}.${assetId}.${episode}` `` → `draw: weight * hash01(key)` | TICK-VARYING (`episode = `${tick}:${band}``) | WR-10's winning BUYER |
+
+[RE-BASED 2026-11-08 (FP-REBASE, seat FPR-COMPROMISE; the census §2 row "EP") — row 21's key `` `${seed}|${tick}|ladder|${fkey}|${cNid}|${dNid}` `` presumed the rung ladder and a FACTION key (`fkey`, the grouping's key handed into `resolveFactionChallenges`). → The ladder is RANK MOVEMENT within a power (the census §8 decision 1); where the rebuilt rank-movement draws whether a challenge is attempted, its key keys on the POWER NAME — the membership's `power`, which names the power record's `.faction` value (`src/domain/people/membership.js`) — so `fkey` reads "the power name" and the literal `ladder` segment and the row's TICK-VARYING family stand; the challenger and defender ids (`cNid`, `dNid`) read the cards' durable ids. If INT's re-basing (FPR-LARGE) derives every rank move with no attempt draw, row 21 retires from this census and the denominator shrinks by one, recorded where it shrinks — never re-keyed silently. Rows 17–20 are person- and contest-keyed and stand as written. The root read (`npcLadderKernel.js`'s `seed`) and EP's re-root law are unchanged; `resolveFactionChallenges` is a LANDED name and keeps it; the ladder family's faction readers are FPZ files (`fpz-list.json`), rebuilt on memberships when the FP unparks.]
 
 **And a THIRD idiom, one site, on a DISPLAY surface:** `src/components/map/CauseWalkPanel.jsx`
 passes `seedId: worldState?.rngSeed ?? rootId` into
@@ -2711,6 +2715,8 @@ NOT-APPLICABLE with A13–A15.
 | A17 | `InstantWorldEntry.jsx` "Surprise me" | FRESH — **through a NON-SANCTIONED door**: `` freshSeed() { return Math.random().toString(36).slice(2,8) + Math.random().toString(36).slice(2,6); } `` | ALREADY-COMPLIANT (fresh) — **second entropy door, H4** | **EP-4** |
 | **A18** | ⭐ **`src/components/surveyor/ConstructionPanel.jsx#compile` (NEW — chair ruling R8)** → `composeInstantWorld({ seed, basicConfig })` · `generateSettlementPipeline(config, null, { seed })` · `instantWorld?.(result.config, { seed })` | FRESH per compile — **through a THIRD non-sanctioned door**: MEASURED `` const newSeed = () => `surveyor-${Math.random().toString(36).slice(2, 10)}`; ``, called as `const s = newSeed(); setSeed(s);` inside `compile()` | ALREADY-COMPLIANT (fresh) — **third entropy door, H4** ⚠ on a CREDIT-METERED surface (`useSurveyorContext().creditBalance`) | **EP-4** |
 
+[RE-BASED 2026-11-08 (FP-REBASE, seat FPR-COMPROMISE; the census §2 row "EP") — row A9's "ALREADY-COMPLIANT" presumed the roster reroll re-dealt only what the pre-car generator dealt, the corruption mark never among it (regeneration never ran `corruptionPass` — `ALLEGIANCE_DESIGN :: §2`, "Today regen never runs the corruption pass"). → REGENERATION DEALS ALLEGIANCES LIKE A BIRTH: `regenNPCsPipeline` runs the same seam as birth (`narrativeGenerator.js :: enrichNpcCoherence`, the allegiance design §2 steps A1–A9), so a reroll re-deals the memberships' ranks, the hidden allegiances (each on its own keyed fork `people-allegiance::<card id>` under the coherence stream), their handlers, the ties and the keyed goals. The disposition stands ALREADY-COMPLIANT because every one of those draws rides the reroll's FRESH + RECORDED `_regenSeed`; the row's scope widens, not its class. What is preserved across a reroll (a DM-locked or DM-authored card, its locks and content) is the edit layer's and the allegiance train's (`allegianceOf` answers null for a DM card), not this table's.]
+
 **H1 (HIGH — a LIVE product break independent of this directive).** MEASURED:
 `configSlice.js`'s `CONFIG_PATCH_EXTRA_KEYS` contains the literal token `seed`, so
 `updateConfig` admits it and writes `state.config.seed`; A4/A5 both call
@@ -4128,3 +4134,15 @@ STOP-and-report. Nothing here lights a flag, runs a soak, ratifies a band, re-re
 golden, or pushes.*
 
 [CORRECTED 2026-10-16 (coherence fold) — CUT-TO-POINTER candidate (findings EP §8, depth vs felt value): the header revision blocks (REVISION 2 to 6 and the SEVENTH PASS) and §0.3 R1-R13 are revision archaeology for waves now LANDED (EP-0 to EP-3, 2026-08-16), and the five fences and four-mutant matrices of §2.5, §3b.1a and §3b.1b (about 900 lines) duplicate executed tests (tests/lint/entropyRootCensus.walker.test.js, tests/property/advanceEpochDormancyFence.test.js, tests/domain/advanceEpochStampSurvival.test.js). RECORDED, not executed: the chair may fold them to a ten-line pointer when this volume is next re-compiled; nothing is cut here.]
+
+## RE-BASED 2026-11-08 (FP-REBASE) — what moved in this volume
+
+Seat FPR-COMPROMISE, on the census `docs/chair/2026-11-08/FP-REBASE-CENSUS-2026-11-08.md` §2 row "EP" and its §7–§9 laws. Design text only; no code, flag, key or golden moves.
+
+| Where | What moved | Census row answered |
+|---|---|---|
+| the header | `[RE-READ 2026-11-08 (FP-REBASE)]` — entropy and epoch law; no person grouping read, no one killed | the census §2 row "EP" (the rest of the volume) |
+| §0.3 R7, row 21 | the ladder draw keys on the POWER NAME (rank movement within a power); the row retires if INT's rebuilt rank movement draws no attempt | EP ("ladder keys `ladder\|${fkey}\|…`"); §8 decision 1 |
+| §3e, row A9 | regeneration deals allegiances like a birth; ALREADY-COMPLIANT stands, its scope widened | EP ("§3e row A9 regen ALREADY-COMPLIANT") |
+
+Open for the verifier: row 21's fate turns on FPR-LARGE's rank-movement design (whether an attempt is drawn at all); this volume states both outcomes and decides neither. No passage needed a STOP.
