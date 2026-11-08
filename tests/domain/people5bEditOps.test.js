@@ -140,7 +140,7 @@ describe('P3 — rename: the powers and the houses cascade onto the card', () =>
 
   test('on a GENERATED v2 record: a power rename leaves no membership naming the dead power', () => {
     const s = generateSettlementPipeline({ settType: 'town' }, null, { seed: 'people-5b-rename', customContent: {} });
-    expect(s.schemaVersion).toBe(2);
+    expect(s.schemaVersion).toBe(3); // ALLEGIANCE-CAR1 (2026-11-08): a generated record is born at schema 3 (v2 -> v3, the hidden allegiance); the card shape is still v2's
     expect('factions' in s, 'the v2 record carries no grouping').toBe(false);
     const target = s.powerStructure.factions.find((f) => s.npcs.some((n) => (n.memberships || []).some((m) => m.power === (f.faction || f.name))));
     expect(target, 'a power some card stands in').toBeTruthy();
