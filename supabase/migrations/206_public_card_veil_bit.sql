@@ -31,8 +31,11 @@
 --       bit — fail-closed) they are stripped, so the public card shows the bare name and
 --       nothing of the house. `role` goes with `title` because the car writes both as the
 --       face's title (M-1b);
---   (3) an NPC object with NO `institution` object (a card saved before the people car,
---       a DM's person, `institution: null`) is untouched: npc_allowed, as at 205;
+--   (3) an NPC object with NO institution RECORD — no object of kind 'house' | 'power'
+--       naming a key (a card saved before the people car, a DM's person, `institution:
+--       null`, a legacy string, a malformed object) — is untouched: npc_allowed, as at 205.
+--       The record test is the client's (people/cardPowers.js :: cardInstitutionOf), so the
+--       twins agree on every input;
 --   (4) npc_allowed itself is 205's 9 keys, byte-identical; public_toplevel, the deeper
 --       denylist, the covert drop, the is_npc_obj predicate, the recursion, `immutable`,
 --       the pinned search_path and the grant posture are 205's, unchanged.
@@ -144,9 +147,16 @@ begin
       return null;
     end if;
     -- 206: THE VEIL BIT, read (never re-derived) on an NPC object. A card with no
-    -- institution OBJECT (pre-car, a DM's person, null) takes npc_allowed as at 205.
-    -- coalesce: an ABSENT `veiled` reads NULL, and NULL must never pass for public.
-    house_is_object := coalesce(is_npc_obj and jsonb_typeof(value -> 'institution') = 'object', false);
+    -- institution RECORD — an object of kind 'house' | 'power' naming its house by `key`
+    -- (or `name`), as the client's people/cardPowers.js :: cardInstitutionOf reads it — is
+    -- a pre-car card, a DM's person or a malformed value, and takes npc_allowed as at 205.
+    -- coalesce: an ABSENT `veiled` (or key) reads NULL, and NULL must never pass for public.
+    house_is_object := coalesce(
+      is_npc_obj
+      and jsonb_typeof(value -> 'institution') = 'object'
+      and (value -> 'institution' ->> 'kind') in ('house', 'power')
+      and coalesce(nullif(value -> 'institution' ->> 'key', ''), nullif(value -> 'institution' ->> 'name', '')) is not null,
+      false);
     house_is_public := coalesce(house_is_object and (value -> 'institution' -> 'veiled') = 'false'::jsonb, false);
     out := '{}'::jsonb;
     for key, child in select * from jsonb_each(value) loop

@@ -29,6 +29,9 @@ import { deepClone } from '../clone.js';
 // the authored word lists), so this domain→lib edge stays headless — no React,
 // no store, nothing that could taint the engine spine through the back door.
 import { veilDeep } from '../../lib/civility.js';
+// FIX-PUBLIC-VEIL (migration 206 twin): the veil bit's reader (people/cardPowers.js, a leaf whose
+// closure is membership.js and deterministicSort.js): read, never re-derived.
+import { cardInstitutionVeilOf, publicMembershipsOf } from '../people/cardPowers.js';
 
 // ── Public top-level allowlist ──────────────────────────────────────────────
 // Character-identical (order-independent) to the NET-CURRENT public_toplevel
@@ -145,38 +148,16 @@ export const NPC_PUBLIC_KEYS = Object.freeze([
 //     card born before the fix) — fail-closed: NPC_HOUSE_KEYS stay off and
 //     NPC_HOUSE_NAMED_KEYS (`title`, `role` — the face's title, "the bloc's
 //     speaker" for the hidden infiltrator's mint) are stripped too: the bare name;
-//   • no `institution` record (a pre-car card, a DM's person, `institution: null`)
-//     — untouched: today's NPC_PUBLIC_KEYS, nothing of a house to name.
+//   • no `institution` record — no object of kind 'house' | 'power' naming a key, as
+//     people/cardPowers.js :: cardInstitutionOf reads it (a pre-car card, a DM's person,
+//     `institution: null`, a legacy string, a malformed object) — untouched: today's
+//     NPC_PUBLIC_KEYS, nothing of a house to name.
 // Character-identical to the SQL npc_house_keys / npc_house_named arrays in
 // _gallery_sanitize_public_json (206); pinned by gallerySanitizer.pglite.test.js.
 export const NPC_HOUSE_KEYS = Object.freeze(['institution', 'memberships']);
 export const NPC_HOUSE_NAMED_KEYS = Object.freeze(['title', 'role']);
 
-/** @param {unknown} v @returns {v is Record<string, unknown>} */
-const isRecordValue = (v) => !!v && typeof v === 'object' && !Array.isArray(v);
-
-/**
- * The veil bit's reading for one NPC object: 'public' (stamped false), 'veiled'
- * (an institution record stamped true or not stamped), or 'none' (no record).
- * @param {Record<string, unknown>} npc @returns {'public' | 'veiled' | 'none'}
- */
-function houseVeilOf(npc) {
-  const inst = npc.institution;
-  if (!isRecordValue(inst)) return 'none';
-  return inst.veiled === false ? 'public' : 'veiled';
-}
-
-/**
- * THE SAME LAW PER ENTRY (the chair's second ruling; 206 twin): the memberships a public house's
- * face publishes are the entries stamped `veiled: false` — a membership in a hidden or criminal
- * power, or an unstamped one, is dropped; a non-array is dropped whole (undefined). Order kept.
- * @param {unknown} memberships @returns {unknown[] | undefined}
- */
-function publicMembershipsOf(memberships) {
-  if (!Array.isArray(memberships)) return undefined;
-  return memberships.filter((m) => isRecordValue(m) && m.veiled === false);
-}
-
+// The bit's reader is the people leaf src/domain/people/cardPowers.js: read, never re-derived.
 /**
  * Is `key` public on this NPC object? NPC_PUBLIC_KEYS, less NPC_HOUSE_NAMED_KEYS on a
  * veiled card, plus NPC_HOUSE_KEYS on a public one. The roster-member gate and
@@ -184,7 +165,7 @@ function publicMembershipsOf(memberships) {
  * @param {Record<string, unknown>} npc @param {string} key @returns {boolean}
  */
 function isNpcKeyPublic(npc, key) {
-  const veil = houseVeilOf(npc);
+  const veil = cardInstitutionVeilOf(npc);
   if (NPC_HOUSE_KEYS.includes(key)) return veil === 'public';
   if (NPC_HOUSE_NAMED_KEYS.includes(key) && veil === 'veiled') return false;
   return NPC_PUBLIC_KEYS.includes(key);

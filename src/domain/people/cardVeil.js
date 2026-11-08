@@ -131,13 +131,6 @@ export function stampVeil(institution, settlement) {
   return /** @type {T} */ ({ ...rest, veiled: veiledOfInstitution(institution, settlement) });
 }
 
-/**
- * THE READER (the public projection's one question): may this card's house be named publicly?
- * Only a card whose `institution` is a record stamped `veiled: false`. Every other card — veiled,
- * unstamped, no house — may not.
- * @param {unknown} card @returns {boolean}
- */
-export function isHousePublic(card) {
-  const inst = recordOf(card).institution;
-  return !!inst && typeof inst === 'object' && !Array.isArray(inst) && /** @type {Rec} */ (inst).veiled === false;
-}
+// THE READER lives beside the card's house reader in cardPowers.js (the leaf the public projection
+// imports); re-exported here so the predicate's module names every veil fact.
+export { cardInstitutionVeilOf, isHousePublic, publicMembershipsOf } from './cardPowers.js';

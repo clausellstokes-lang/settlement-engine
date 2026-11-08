@@ -320,7 +320,10 @@ describe('206 — the card\'s veil bit: a face\'s house is public only where vei
   // a DM's person after the v1 -> v2 migration (institution null, memberships moved from factionAffiliation)
   const DM_PERSON = { id: 'npc.dm_mara', name: 'Mara', title: 'Captain', role: 'Captain', ...BODY, institution: null,
     memberships: [{ power: 'The Watch', rank: null, share: null }] };
-  const ALL = [INFILTRATOR, GUILDMASTER, PRIEST, MAGISTRATE, UNSTAMPED, PRE_CAR, DM_PERSON];
+  // a malformed institution value (no kind / key): no house record, so 205's projection on both sides
+  const MALFORMED = { id: 'npc.odd', name: 'Odd Fellow', title: 'Warden', role: 'Warden', ...BODY,
+    institution: { title: 'the warden', veiled: false }, memberships: [{ power: 'The Crown', rank: 1, share: 1, veiled: false }] };
+  const ALL = [INFILTRATOR, GUILDMASTER, PRIEST, MAGISTRATE, UNSTAMPED, PRE_CAR, DM_PERSON, MALFORMED];
 
   beforeAll(async () => {
     vdb = new PGlite();
@@ -391,6 +394,13 @@ describe('206 — the card\'s veil bit: a face\'s house is public only where vei
     const npc = (await sanitizeV({ npcs: [PRE_CAR] })).npcs[0];
     expect(npc).toEqual({ id: 'npc.old_tom', name: 'Old Tom', title: 'Laird', role: 'Blacksmith', category: 'economy',
       personality: 'wary', physical: 'tall', presentation: 'plain', influence: 'high' });
+  });
+
+  it('a malformed institution value (no kind or key) is no house record: 205\'s projection, nothing of the house', async () => {
+    const npc = (await sanitizeV({ npcs: [MALFORMED] })).npcs[0];
+    expect(npc.title).toBe('Warden');
+    expect('institution' in npc).toBe(false);
+    expect('memberships' in npc).toBe(false);
   });
 
   it('a DM\'s person (institution null) keeps its title and role and publishes no memberships', async () => {

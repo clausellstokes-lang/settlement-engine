@@ -84,15 +84,46 @@ export const cardInPower = holdsMembership;
 
 /**
  * THE CARD'S INSTITUTION: its house's name (kind 'house'), or the power it was minted from
- * (kind 'power'), or null (a DM's person, a pre-car card).
- * @param {unknown} card @returns {{ kind: 'house' | 'power', name: string, title: string } | null}
+ * (kind 'power'), or null (a DM's person, a pre-car card). `veiled` is the card's veil bit as
+ * stamped at birth (FIX-PUBLIC-VEIL; true, false, or undefined on a card born before the bit).
+ * @param {unknown} card @returns {{ kind: 'house' | 'power', name: string, title: string, veiled: unknown } | null}
  */
 export function cardInstitutionOf(card) {
   const inst = recordOf(recordOf(card).institution);
   const kind = inst.kind === 'house' || inst.kind === 'power' ? inst.kind : null;
   const name = String(inst.key || inst.name || '');
   if (!kind || !name) return null;
-  return { kind, name, title: String(inst.title || '') };
+  return { kind, name, title: String(inst.title || ''), veiled: inst.veiled };
+}
+
+/**
+ * THE READER (the public projection's one question, FIX-PUBLIC-VEIL): a card's house as the public
+ * projection reads it — 'public' (an `institution` record stamped `veiled: false`), 'veiled' (stamped
+ * true, or not stamped: fail-closed), or 'none' (no record: a pre-car card, a DM's person).
+ * @param {unknown} card @returns {'public' | 'veiled' | 'none'}
+ */
+export function cardInstitutionVeilOf(card) {
+  // the card's house record as cardInstitutionOf reads it: a record of kind 'house' | 'power' with a key;
+  // anything else (absent, null, a legacy string, a malformed object) is none
+  const inst = cardInstitutionOf(card);
+  if (!inst) return 'none';
+  return inst.veiled === false ? 'public' : 'veiled';
+}
+
+/** May this card's house be named publicly? @param {unknown} card @returns {boolean} */
+export function isHousePublic(card) {
+  return cardInstitutionVeilOf(card) === 'public';
+}
+
+/**
+ * The memberships a public house's face publishes: the entries stamped `veiled: false` (the same law
+ * per entry); a hidden or criminal power's membership, or an unstamped one, is dropped; a non-array is
+ * no list (undefined). Order kept.
+ * @param {unknown} memberships @returns {unknown[] | undefined}
+ */
+export function publicMembershipsOf(memberships) {
+  if (!Array.isArray(memberships)) return undefined;
+  return memberships.filter((m) => !!m && typeof m === 'object' && !Array.isArray(m) && /** @type {Record<string, unknown>} */ (m).veiled === false);
 }
 
 /** @param {unknown} card @returns {string | null} the card's house (kind 'house' only) */
