@@ -2,8 +2,9 @@
  * WRITE-PEOPLE (2026-11-08): item 15 — secrets and presentations BY TITLE as data
  * (`src/data/people/titleSecretsPresentations.js`), for car 4 to wire (design §6.5, J-16).
  *
- * Pins: (1) the 147 titles measured on the soak 1,000 at the lane's base, in card-count order
- * (22,892 cards), each a POOL_BY_TITLE title its pool map sends to a fallback; (2) every title holds
+ * Pins: (1) the 83 titles of the chair's 90% coverage cut (of the 22,892 fallback cards on the soak
+ * 1,000 at the lane's base), in card-count order, each a POOL_BY_TITLE title its pool map sends to a
+ * fallback; (2) every title holds
  * 3 secrets and 3 presentations in EXACTLY the record shapes the draw sites read — `{ secret, stakes }`
  * (NPC_CRIMINAL_SECRETS_BY_HOLDER's row) and `{ impression, disposition, behaviour }` (pickTitle's
  * record), the disposition one of NPC_PLOT_HOOKS_DATA's keys; (3) the estate's punctuation (a secret
@@ -62,14 +63,19 @@ const presentationFaults = (row, magicAllowed) => {
 const magicTitle = (/** @type {string} */ title) => POOL_BY_TITLE[title]?.[1] === 'magic' || ['the message-master', 'the skydock master', 'the planar factor', 'the envoy', 'the dragon'].includes(title);
 
 describe('titleSecretsPresentations (WRITE-PEOPLE, item 15)', () => {
-  it('holds the 147 measured titles in card-count order, 22,892 cards, each a mapped title', () => {
-    expect(TITLE_ORDER).toHaveLength(147);
-    expect(new Set(TITLE_ORDER).size).toBe(147);
+  it('holds the 83 titles of the 90% coverage cut in card-count order, each a mapped title', () => {
+    expect(TITLE_ORDER).toHaveLength(83);
+    expect(new Set(TITLE_ORDER).size).toBe(83);
     expect(Object.keys(TITLE_SECRETS)).toEqual(TITLE_ORDER);
     expect(Object.keys(TITLE_PRESENTATIONS)).toEqual(TITLE_ORDER);
     const counts = TITLE_ORDER.map((t) => TITLE_CARDS_ON_THE_1000[t]);
     expect(counts.every((n, i) => i === 0 || n <= counts[i - 1])).toBe(true);
-    expect(counts.reduce((a, b) => a + b, 0)).toBe(22892);
+    // the cut: the first prefix whose cards reach 90% of the 22,892 fallback cards
+    const covered = counts.reduce((a, b) => a + b, 0);
+    expect(covered).toBe(20605);
+    expect(covered / 22892).toBeGreaterThanOrEqual(0.9);
+    expect((covered - counts[counts.length - 1]) / 22892).toBeLessThan(0.9);
+    expect(TITLE_ORDER[82]).toBe('the charter master');
     expect(TITLE_ORDER.filter((t) => !POOL_BY_TITLE[t])).toEqual([]);
     expect(TITLE_ORDER.slice(0, 3)).toEqual(['the miller', 'the innkeeper', 'the warehouse factor']);
   });
@@ -92,7 +98,7 @@ describe('titleSecretsPresentations (WRITE-PEOPLE, item 15)', () => {
     }
     expect(faults).toEqual([]);
     const total = TITLE_ORDER.reduce((n, t) => n + TITLE_SECRETS[t].length + TITLE_PRESENTATIONS[t].length, 0);
-    expect(total).toBe(882);
+    expect(total).toBe(498);
   });
 
   it('a title varies its dispositions, and no text repeats anywhere in the table', () => {
