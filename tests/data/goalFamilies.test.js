@@ -19,11 +19,12 @@ import { readFileSync } from 'node:fs';
 import { describe, expect, test } from 'vitest';
 import {
   GOAL_FAMILIES, GOAL_FAMILY_LINES, GOAL_SLOTS, GOAL_SLOTS_STRUCK, GOAL_SUBKIND_SLOTS,
-  PERSONALITY_CLUSTERS, PERSONALITY_CLUSTER_OF,
+  PERSONALITY_CLUSTERS, PERSONALITY_CLUSTER_OF, TIE_TYPE_TO_GOAL_SUBKIND,
 } from '../../src/data/people/goalFamilies.js';
 import { NPC_PERSONALITY_TRAITS } from '../../src/data/npcData.js';
 import { CORRUPTIBLE_FLAWS, corruptionVectorForFlaw } from '../../src/domain/corruption.js';
 import { assertDeclarable } from '../../src/domain/facts/factVocabulary.js';
+import { RELATIONSHIP_STRENGTHS } from '../../src/generators/people/ties.js';
 
 /** Design §6.6, cell by cell: sub-kind → { vantage: variants }. */
 const SIX = { short: 6, long: 6 };
@@ -216,5 +217,25 @@ describe('goal families — the personality clusters', () => {
     expect(vectors.size).toBe(4);
     const others = words.filter((w) => !CORRUPTIBLE_FLAWS.includes(w));
     for (const w of others) expect(vectors.has(PERSONALITY_CLUSTER_OF[w])).toBe(false);
+  });
+});
+
+describe('goal families — the tie types onto the TIES sub-kinds', () => {
+  test('TIE_TYPE_TO_GOAL_SUBKIND is total over the tie types the record can produce, and names nothing else', () => {
+    expect(Object.keys(TIE_TYPE_TO_GOAL_SUBKIND).sort()).toEqual(Object.keys(RELATIONSHIP_STRENGTHS).sort());
+  });
+
+  test('every end of every tie type lands on a TIES sub-kind that has its cell', () => {
+    const subs = Object.keys(GOAL_FAMILY_LINES.TIES);
+    for (const ends of Object.values(TIE_TYPE_TO_GOAL_SUBKIND)) {
+      expect(Object.keys(ends).sort()).toEqual(['from', 'to']);
+      expect(subs).toContain(ends.from);
+      expect(subs).toContain(ends.to);
+    }
+  });
+
+  test('every TIES sub-kind is reached by some tie type (no cell is orphaned)', () => {
+    const reached = new Set(Object.values(TIE_TYPE_TO_GOAL_SUBKIND).flatMap((e) => [e.from, e.to]));
+    expect(Object.keys(GOAL_FAMILY_LINES.TIES).filter((s) => !reached.has(s))).toEqual([]);
   });
 });

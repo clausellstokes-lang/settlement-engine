@@ -144,6 +144,33 @@ export const PERSONALITY_CLUSTER_OF = Object.freeze({
   eccentric: 'impulse',
 });
 
+/**
+ * Every tie type the record can produce → the TIES sub-kind for the card at each end (the
+ * chair's ruling, 2026-11-08: no new cells; §6.6's counts stand; car 4 wires it). Keys are total
+ * over `generators/people/ties.js :: RELATIONSHIP_STRENGTHS` (the test reads that list, never a
+ * copy). `from` is the tie's `from` card, `to` its `to` card. Mapped by valence:
+ *   rival, enemy, political → rival_enemy  (political is "Mutual Leverage": each holds something
+ *                                           over the other, so the wary lines fit, not the ally's)
+ *   ally, respect, patron_client → ally    (patron_client at birth is a working arrangement:
+ *                                           "Commercial Complicity", "Security Contract")
+ *   debtor_creditor → debtor at `from`, creditor at `to` (the old-debt prose names the `from`
+ *                                           card as the one who owes; PLAUSIBLE, car 4 confirms)
+ *   family → family · lover → family (unreachable at birth; the simulation may light it)
+ *   mentor_student → mentor_student at both ends (its lines read true from either end)
+ */
+export const TIE_TYPE_TO_GOAL_SUBKIND = Object.freeze({
+  rival: Object.freeze({ from: 'rival_enemy', to: 'rival_enemy' }),
+  enemy: Object.freeze({ from: 'rival_enemy', to: 'rival_enemy' }),
+  political: Object.freeze({ from: 'rival_enemy', to: 'rival_enemy' }),
+  ally: Object.freeze({ from: 'ally', to: 'ally' }),
+  respect: Object.freeze({ from: 'ally', to: 'ally' }),
+  patron_client: Object.freeze({ from: 'ally', to: 'ally' }),
+  debtor_creditor: Object.freeze({ from: 'debtor', to: 'creditor' }),
+  family: Object.freeze({ from: 'family', to: 'family' }),
+  lover: Object.freeze({ from: 'family', to: 'family' }),
+  mentor_student: Object.freeze({ from: 'mentor_student', to: 'mentor_student' }),
+});
+
 const cell = (lines) => Object.freeze(lines.map((l) => (typeof l === 'string' ? l : Object.freeze({ line: l.line, needs: Object.freeze([...l.needs]) }))));
 
 /**

@@ -8,8 +8,8 @@ Seat: WRITE-GOALS, the allegiance train's writing seat A (Opus 5.5, effort high)
 
 | path | what |
 |---|---|
-| `src/data/people/goalFamilies.js` | `GOAL_FAMILY_LINES[family][subKind][vantage]`, 464 lines; `GOAL_FAMILIES`; `GOAL_SLOTS`; `GOAL_SLOTS_STRUCK` (each struck slot with its reason); `GOAL_SUBKIND_SLOTS` (the slots each sub-kind may need: what car 4 fills); `PERSONALITY_CLUSTERS`; `PERSONALITY_CLUSTER_OF`. Plain data: no import, no closure. |
-| `tests/data/goalFamilies.test.js` | the shape law, 15 tests, with anchored controls |
+| `src/data/people/goalFamilies.js` | `GOAL_FAMILY_LINES[family][subKind][vantage]`, 464 lines; `GOAL_FAMILIES`; `GOAL_SLOTS`; `GOAL_SLOTS_STRUCK` (each struck slot with its reason); `GOAL_SUBKIND_SLOTS` (the slots each sub-kind may need: what car 4 fills); `PERSONALITY_CLUSTERS`; `PERSONALITY_CLUSTER_OF`; `TIE_TYPE_TO_GOAL_SUBKIND` (the chair's ruling, §4 item 10). Plain data: no import, no closure. |
+| `tests/data/goalFamilies.test.js` | the shape law, 18 tests, with anchored controls |
 | this record | |
 | `tests/lint/.source-citation-baseline.json`, `tests/lint/sourceCitationIntegrity.walker.test.js` | the roster's two lines: `dated` 153 → 154 |
 
@@ -97,22 +97,53 @@ The four vector clusters are exactly `domain/corruption.js :: FLAW_VECTOR` (the 
 7. **The handler's lines for `keep_cause`** are written (§6.6 counts them) though fanaticism is unreachable at birth (J-6).
 8. **The tic list** in the test is STYLE-RULINGS §2 law 3 verbatim, plus WIRING-RULINGS §7's named "which makes it worse".
 9. **POWER `corrupted` and TIES `mentor_student` are direction-neutral** (both ends read true), so car 4 needs no direction to draw them.
+10. **`TIE_TYPE_TO_GOAL_SUBKIND`** (the chair's ruling of 2026-11-08 on §5 item 4: a table, no new cells, §6.6's counts stand). Total over `src/generators/people/ties.js :: RELATIONSHIP_STRENGTHS` (10 types; the test reads that list), each end mapped by valence: rival, enemy, **political** → `rival_enemy` (political is "Mutual Leverage": each holds something over the other, so the wary lines fit and the ally's do not); ally, **respect**, **patron_client** → `ally` (patron_client at birth is a working arrangement: "Commercial Complicity", "Security Contract", "Arcane Supplier"); debtor_creditor → `debtor` at the tie's `from` card, `creditor` at its `to` card (PLAUSIBLE, §1); family and **lover** → `family`; mentor_student → `mentor_student` at both ends. The test holds it total in both directions, every end on a sub-kind with its cell, and no TIES cell unreached. Default for the veto: political → `rival_enemy` (the alternative is `ally`).
 
 ## 5. What in the design did not survive contact with the record
 
 1. **`{season}` does not exist at birth** (design §6.4's WARRANT line). Struck; the WARRANT lines carry no season. Evidence: §1.
 2. **`{house}` has no reader-safe form at birth.** The design's `{house}` assumes a name; the record holds catalogue nouns, 13% still parenthesised through the display seam, 4,642 faces in a person-noun house ("the cooper", "the midwife", "the contract killer"), 1,358 in a "Multiple …"/"Massive …" key. The lines are written to tolerate the stripped lower-cased noun, but "Buy a share in the cooper" and "Watch who goes in and out of the contract killer" still read wrong. **Car 4 owes a house-noun fill**: the person nouns → "the cooper's workshop"-style forms, "Multiple X" → "the X". Evidence: §1.
 3. **The `{route}`, `{status}`, `{condition}` and `{kind}` slots have no player-word form** (§1): their sub-kinds carry them instead.
-4. **The TIES sub-kinds miss 28% of the ties.** Political (5,061) and respect (2,993) ties, 8,054 of 28,916 (27.9%), and patron_client (145) have no cell in §6.6 (§6.1's `{kind}` list names "political / respect", §6.6 does not); and **no `lover` type exists at birth** (§6.6's "family/lover" is family only). Default: written as §6.6 counts; car 4 maps political/respect to no TIES cell (they fall to other families). The chair may add a cell.
+4. **The TIES sub-kinds miss 28% of the ties.** Political (5,061) and respect (2,993) ties, 8,054 of 28,916 (27.9%), and patron_client (145) have no cell in §6.6 (§6.1's `{kind}` list names "political / respect", §6.6 does not). **RULED by the chair (2026-11-08):** no new cells; `TIE_TYPE_TO_GOAL_SUBKIND` maps every type onto the nearest cell by valence (§4 item 10). **No `lover` type exists at birth** (0 of 28,916): §6.6's "family/lover" cell is written as family lines, and `lover` maps onto it — *unreachable at birth; the simulation may light it.*
 5. **Only 13 of the 17 corruptible flaws can corrupt at birth.** ambitious, calculating, opportunistic and cynical are in the NEUTRAL list, drawn as the `modifier`, never the `flaw` (`npcGenerator.js :: generateReligionType`), and `corruption.js :: npcCorruptibleFlaw` reads the flaw. So `hunger_for_status` reaches only through "vain" (89 corrupt cards, all vain), `forbidden_patron` only through deceitful, manipulative and mendacious. The cluster map keeps all 17 in their vectors (it is a trait map, not a reach map).
 6. **INSTITUTION and SUPPLY presume nothing about the shelf, but some sub-kinds are trade-shaped.** Every house face supports INSTITUTION, including a prison or a garrison; `takeover` ("Buy a share in {otherHouse}") and SUPPLY `expansion` ("Train an apprentice at {house}") read best on the Crafts, Economy and Entertainment shelves. The lines were written shelf-neutral where possible (the charter lines were rewritten to drop "market days" and "a rival opening beside"); **PLAUSIBLE** that car 4's fit should gate `takeover` and `expansion` to the trading shelves.
 7. **139 card names carry a parenthetical nickname** ("Vasileia Xiphilinos (the crier)"): a person slot filled with it prints "Milko Solovyov (the lanista)'s place". Car 4 strips it, or the person slots fill with the name before the parenthesis.
 
-## 6. The gates (each read with `sh scripts/gate-tail.sh`)
+8. **Unreachable at birth; the simulation may light it** (the chair's ruling: lines only where §6.6 counts them, nothing beyond):
+   - ALLEGIANCE `keep_cause` (5 lines): the CAUSE handler tie belongs to fanaticism, which no flaw reaches at birth (J-6; 0 of 1,310 corrupt cards on the design's 1,000). *Unreachable at birth; the simulation may light it.*
+   - TIES via `lover`: the tie type is specified (`RELATIONSHIP_STRENGTHS`) and never drawn at birth (0 of 28,916). *Unreachable at birth; the simulation may light it.* It writes no lines of its own; it reaches the `family` cell.
+   - The `{flaw}` `{dominant}` `{modifier}` slots: allowed, unused.
+9. **Every struck slot, in one place** (each also in `GOAL_SLOTS_STRUCK` with its reason):
+
+   | family | slot | why it did not survive |
+   |---|---|---|
+   | ALLEGIANCE | `{season}` | no season field at birth; the fact vocabulary has no season atom (ruling 8). The WARRANT lines carry none |
+   | SUPPLY | `{route}` | the isolation receipt holds path keys (local_foodshed, seasonal_access, reserves, patronage, hinterland, magical_transit) |
+   | SUPPLY | `{status}` | machinery words (vulnerable, operational, running, impaired, entrepot, magically_sustained); the sub-kind carries them |
+   | INSTITUTION | `{condition}` | no single field: a chain status, or a dependency key ("Grain + water power") with a machinery `impact` sentence |
+   | TIES | `{kind}` | the tie type is the sub-kind; its label ("Mutual Leverage") is a card label |
+   | RANK | `{rank}` | a number (1, 2, 3); climb, defend and enter carry it |
+
+## 6. For car 4 (wiring items this seat's lines depend on)
+
+**The `{house}` noun table** (and the same fill for `{otherHouse}`, `{front}`, `{targetHouse}` and a house `{guild}`). The lines read the slot as "the" + a lower-cased noun; the catalogue keys come in these shapes on the soak 1,000:
+
+| key shape | three examples (faces) | the fill the lines need |
+|---|---|---|
+| a count range in parentheses | "Mills (2-5)" 499 · "Blacksmiths (3-10)" 386 · "Craft guilds (5-15)" 167 | the noun without the range: "the mills", "the blacksmiths", "the craft guilds" |
+| a qualifier in parentheses (kept by `institutionDisplayName`) | "Inns and taverns (district)" 332 · "Sawmill (commercial)" 274 · "Tanner (established)" 229 | the noun: "the inns and taverns", "the sawmill", then the person-noun rule for "tanner" |
+| a person noun (4,642 faces) | "Potter" 359 · "Cooper" 333 · "Midwife" 305 (and "Contract killer" 67, "Fence" 27) | the place, not the person: "the potter's workshop", "the cooper's yard", "the midwife's house"; for the criminal ones, "the contract killer's people" |
+| "Multiple …" / "Massive …" (1,358 faces) | "Multiple adventurers' guilds" 304 · "Multiple garrisons" 166 · "Massive prison" 162 | the plain noun: "the adventurers' guilds", "the garrisons", "the prison" |
+| a slash | "Weavers/Textile workers" 371 · "Docks/port facilities" · "Colosseum/arena" | one noun: "the weavers", "the docks", "the arena" |
+| a plain noun (reads as is) | "Fish market" 378 · "Brewery" 313 · "Public bathhouse" 299 | "the fish market", "the brewery", "the public bathhouse" |
+
+**The other fills** (§1): person slots take the name before any parenthesis (139 names carry one); `{issue}` lower-cases its first letter; `{resource}` is goods with no article ("+" read as "and"), and a dependency on trade access, ley lines, capital or "Fishing + timber" fills nothing; `{import}` drops its parenthesis; power names print as the dossier prints them. **The tie table** `TIE_TYPE_TO_GOAL_SUBKIND` picks the TIES cell for each end. **The fit**: `takeover` and `expansion` read best on the Crafts, Economy and Entertainment shelves (§5 item 6, PLAUSIBLE).
+
+## 7. The gates (each read with `sh scripts/gate-tail.sh`)
 
 | gate | result |
 |---|---|
-| `npx vitest run tests/data/goalFamilies.test.js` | 15 of 15, exit 0 |
+| `npx vitest run tests/data/goalFamilies.test.js` | 18 of 18, exit 0 |
 | `npx eslint src/data/people/goalFamilies.js tests/data/goalFamilies.test.js` | exit 0 |
 | `npx vitest run tests/lint/sourceCitationIntegrity.walker.test.js` | 18 of 18, exit 0: `dated` 154 (this record, 153 → 154), `tree` 112 (the base's red, 109 against 112, was already cured on the integration branch at 2a95b5917; this seat touched no `tree` row) |
 
