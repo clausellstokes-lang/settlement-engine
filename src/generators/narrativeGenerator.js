@@ -32,7 +32,7 @@ import {
   setActiveRng,
 } from '../kernel/rngContext.js';
 import { landMemberships, rankPowers } from './people/castPowers.js';
-import { assignHandlers, dealAllegiances, leaveAllegianceReceipts } from '../domain/people/allegiance.js';
+import { CORRUPT_SHORT_GOAL, assignHandlers, dealAllegiances, leaveAllegianceReceipts } from '../domain/people/allegiance.js';
 import { cardInstitutionVeilOf } from '../domain/people/cardPowers.js';
 import { drawTies } from './people/ties.js';
 import { pickVariant } from '../kernel/proseHash.js';
@@ -914,6 +914,19 @@ export const enrichNpcCoherence = (settlement) => {
   const rng = getActiveRng();
   const landed = landMemberships(settlement, rawMergedNpcs, rng, settlement?._seed ?? null);
   const dealt = dealAllegiances(settlement, landed.all, rng);
+  // the retired pass's compromised short goal, KEPT verbatim until car 4 (REVIEW-INTAKE-4: a goal another figure
+  // carries is refused, and the figure keeps its own). Draw-free, in roster order.
+  if (dealt.length) {
+    const goalsNow = landed.all.map((n) => n?.goal?.short);
+    for (const { card } of dealt) {
+      const k = landed.all.indexOf(card);
+      const corruptGoal = CORRUPT_SHORT_GOAL[card.allegiance.vector] || CORRUPT_SHORT_GOAL.greed;
+      if (card.goal && typeof card.goal === 'object' && !heldByOthers(goalsNow, k).has(corruptGoal)) {
+        card.goal = { ...card.goal, short: corruptGoal };
+        goalsNow[k] = corruptGoal;
+      }
+    }
+  }
   const withPowers = rankPowers(settlement, landed);
   assignHandlers(withPowers, settlement);
   leaveAllegianceReceipts(settlement, dealt);

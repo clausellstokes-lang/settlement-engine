@@ -29,7 +29,9 @@
  *   the house — a roster criminal house drawn on the card's fork (today's pick, uniform);
  *   the vector — corruptionVectorForFlaw, unchanged (fanaticism stays the simulation's, J-6);
  *   `via` — draw-free from the card's own house (§1.4): office · front · retainer;
- *   the goal rewrite the retired corruptionPass did is KEPT here verbatim until car 4 replaces it.
+ *   the goal rewrite the retired corruptionPass did is KEPT verbatim until car 4 replaces it: its table is here
+ *   (CORRUPT_SHORT_GOAL), its draw-free application at the seam (narrativeGenerator.js :: enrichNpcCoherence), so this
+ *   domain module imports nothing from src/generators (tests/build/domainGeneratorsBoundary.test.js).
  *
  * THE HANDLERS (A4, `assignHandlers`), after the rank deal, DRAW-FREE (J-10), so a save's migration
  * and a birth pick the same handler: agents by standing (best rank, importance, roster order) dealt
@@ -46,7 +48,6 @@ import { backingRowFor } from '../../data/institutionBacking.js';
 import { familyOfInstitution, frontClassOfInstitution } from '../../data/institutionalCatalog.js';
 import { governingFactionOf, nameOf } from '../rulingPower.js';
 import { membershipsOf } from './membership.js';
-import { heldByOthers } from '../../generators/hookVariety.js';
 
 /** @typedef {Record<string, unknown>} Rec */
 /**
@@ -250,8 +251,8 @@ export function takeAllegianceReceipts(settlement) {
 }
 
 /**
- * A2 — THE DEAL. Writes `allegiance` (no handler yet) onto the cards the roll turns, rewrites their
- * short goal as the retired pass did, and returns the receipts' working rows (completed by
+ * A2 — THE DEAL. Writes `allegiance` (no handler yet) onto the cards the roll turns (the seam rewrites
+ * their short goal from CORRUPT_SHORT_GOAL, as the retired pass did), and returns the receipts' working rows (completed by
  * `assignHandlers`). A card already holding a well-formed allegiance (a held DM card) keeps it and
  * draws nothing. Mutates the cards in place.
  *
@@ -277,10 +278,7 @@ export function dealAllegiances(settlement, cards, rng) {
   const p = spawnCorruptionChance(climate, organized * ALLEGIANCE_TUNING.organizedCrime);
   const housePool = crimHouses.map((h) => str(h.name)).filter(Boolean);
   const family = rng.fork(ALLEGIANCE_FORK_LABEL);
-  // REVIEW-INTAKE-4 (kept verbatim from the retired pass): a compromised goal another figure carries
-  // is refused, and the figure keeps its own. Draw-free.
-  const goalsNow = cards.map((n) => rec(rec(n).goal).short);
-  cards.forEach((card, k) => {
+  cards.forEach((card) => {
     if (!card || card.id == null) return;
     if (allegianceOf(card)) return;
     const flaw = npcCorruptibleFlaw(/** @type {import('../settlement.schema.js').SimNpc} */ (/** @type {unknown} */ (card)));
@@ -300,12 +298,6 @@ export function dealAllegiances(settlement, cards, rng) {
       veiled: true,
       covert: true,
     };
-    const corruptGoal = CORRUPT_SHORT_GOAL[vector] || CORRUPT_SHORT_GOAL.greed;
-    const goal = card.goal;
-    if (goal && typeof goal === 'object' && !heldByOthers(goalsNow, k).has(corruptGoal)) {
-      card.goal = { ...rec(goal), short: corruptGoal };
-      goalsNow[k] = corruptGoal;
-    }
     dealt.push({ card, flaw, p, organized, climate: /** @type {Rec} */ (/** @type {unknown} */ (climate)) });
   });
   return dealt;
