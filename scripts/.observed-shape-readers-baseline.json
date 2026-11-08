@@ -177,14 +177,14 @@
  "digests": {
   "corpusMeta": "1a4216a0fb4db8841e27ac3e2c45851c67d411b6aae8da02ab3145b4076a224d",
   "inventory": "8a95fac189c16a52417124e88e0b8b5ba7139f93e9bb12e4b82df75644898011",
-  "manifests": "bb6469a515128596df8c8d66a75448a413126b466bc4aea4021cf8b8bfa7cc2a",
+  "manifests": "567f03e1fc672795bec32cefec6707a9380c4db6257b07cff53b73d278a9def5",
   "migrationReview": "0f122dc60cecf83441c50da0d0e3438d854564666edaf4fefc9dd41f6712666d",
   "rowTags": "1ebab9f067e5ec39f32a8c38b8e1a18c24d8ad0c66109851551ef84efc314447",
-  "scanStats": "d150ca151dbb08a0492e041db572211d6cd18bca0d1e1779ee7ad4409ab61da5",
-  "sentinel": "d3dfe74d29145e646b1d52e6765e72158bf714f7ee803b3fd451a00d77a0c987"
+  "scanStats": "8e5b481f26800c79d362900314c4b4d3b2241f5b564264830b3d748744825bf9",
+  "sentinel": "78d19ad57ce12bb0c005634b46ccf795276ee9fa1a30fe6014ed18ea20694309"
  },
  "frozen": "2026-11-08",
- "frozenAtSha": "bd47c29c7184decf4f08f089ed486eabd1e9bc5a",
+ "frozenAtSha": "4c490dc7a9000104ba672167f8c081b0414ebfc0",
  "identities": 1548,
  "inventory": {
   "src/components/BuyThisDossier.jsx": {
@@ -2684,7 +2684,7 @@
   },
   "executionTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "038319088aff43bf8c8ff7ac998249e13dae05669ac239428bd90b36133caefa",
+   "digest": "ebfdb5498aa18caa09653706d6cc40bc53c018788da0eac21b8e3405f330018b",
    "entries": [
     {
      "mode": "100644",
@@ -5713,8 +5713,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/npcComponents.jsx",
-     "sha256": "fbd88e4fe40945ff05943e373155d032bc4f5114d7c6baca84d107ed8bb07a9b",
-     "size": 31280,
+     "sha256": "8a57f2232127e82811a0e39b6b496790bc781c4b6a4fe5613e830b9c4a962828",
+     "size": 31346,
      "type": "file"
     },
     {
@@ -5811,8 +5811,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/InstitutionsTab.jsx",
-     "sha256": "ce4f2dc4aa686ec907624193371a1c6551261cba84098f6ddccd39ede1faeb00",
-     "size": 23650,
+     "sha256": "baaed4e6cc50457297c884b106c762c86c141b967cc881796d07c1063ae2b77f",
+     "size": 23705,
      "type": "file"
     },
     {
@@ -5853,15 +5853,15 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/PlotHooksTab.jsx",
-     "sha256": "c792ba6446ef2dbc343b96dac4a5d58fdf5ff22022d480ae2dbf5ee881ae4c89",
-     "size": 6484,
+     "sha256": "9acde4a84214646648a027ab5928267d3347953b1adbdaf7ec0d7bfe8ec87031",
+     "size": 7697,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/components/new/tabs/PowerTab.jsx",
-     "sha256": "16abfd3fe99d8f597a5efc19670a8861d902bd6ecca2dc04e2e3fd785ddb6bd0",
-     "size": 34551,
+     "sha256": "aed3ace1e5dda63c538f2c41dd33284c5f66e583a49c4f415257e6decf15a9d3",
+     "size": 35142,
      "type": "file"
     },
     {
@@ -7267,8 +7267,8 @@
     {
      "mode": "100644",
      "path": "src/data/dossierStateProse/power.generated.js",
-     "sha256": "829244b6bf2b485a7d6afb5c6d29cdea7836cdc89bd53141d1b4274d30eb39b2",
-     "size": 115715,
+     "sha256": "238b49086b81602f6e483cf926721292cdd013954140c940317cae54162a794f",
+     "size": 123197,
      "type": "file"
     },
     {
@@ -7309,8 +7309,8 @@
     {
      "mode": "100644",
      "path": "src/data/faceHonorifics.js",
-     "sha256": "524f104b1ece1ed4b194ca9b34f227d5a8f1a9f123f90f8ba041c88afdcbbcdd",
-     "size": 13908,
+     "sha256": "f7028c415907df5f8cc9411fe2c8e718928ea1497ff65b34733a66a915ef50ad",
+     "size": 14919,
      "type": "file"
     },
     {
@@ -7526,7 +7526,7 @@
     {
      "mode": "100644",
      "path": "src/data/proseNorms.generated.js",
-     "sha256": "1f5764df867a739c470bf3c78acbf350eeb3297a11b2d3110cf823097b223a29",
+     "sha256": "849c0cc60281984361d55825dd510f11f2e97243bce03ffd819654cbcb7ad02d",
      "size": 19938,
      "type": "file"
     },
@@ -9801,8 +9801,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/stateProse/powerStateProse.js",
-     "sha256": "11c913c83fa1e88d5f75d5415f8723936acf9aae37d6465a87b1ad3cb4d21e7b",
-     "size": 58278,
+     "sha256": "034ceabc22cf2861075a9083d31f6be93aec2b67e5cce251334ee01529b66e89",
+     "size": 63156,
      "type": "file"
     },
     {
@@ -9815,8 +9815,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/stateProse/printProse.js",
-     "sha256": "ae57f93c3d53e1ad33b44ea29705fd0b71aa19de4a44a0544c7b81a27a2c074b",
-     "size": 40385,
+     "sha256": "29e5ffd139e4a63d901f012bf217f69b6202780830781a7f65267ef5524de36c",
+     "size": 40502,
      "type": "file"
     },
     {
@@ -11229,8 +11229,8 @@
     {
      "mode": "100644",
      "path": "src/domain/people/cardDoor.js",
-     "sha256": "ef6ea018c9ad6a4cba290aa1bf33e616b7098921289d7f6c83d15c2831ab1820",
-     "size": 3227,
+     "sha256": "d2b323e7d92d3d6e2850d737f29d1e8827d9d4b13b5f554dfaab85a91088ad40",
+     "size": 3822,
      "type": "file"
     },
     {
@@ -18901,8 +18901,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/primitives/StateProse.jsx",
-     "sha256": "05f910df28e6deae3cf3873cbacdca3e1be69367b7fa7406ffe7b7cbc3995e46",
-     "size": 9465,
+     "sha256": "1d837068caa638fb3e60dd36253856f413706ac5bd892780943253756cd5fb57",
+     "size": 9461,
      "type": "file"
     },
     {
@@ -19006,8 +19006,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/sections/PowerStructure.jsx",
-     "sha256": "3d157d7bdd19e9a153f2c40c7c479ac334c8b2528f734f97db7f8088bc751a19",
-     "size": 12800,
+     "sha256": "3c4e8f83a12c840326ee74aab2a1eff005dcc48c1e2be335bd68dd2a1b2429c2",
+     "size": 12767,
      "type": "file"
     },
     {
@@ -19854,7 +19854,7 @@
   },
   "scanTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "77fedcb5de90dddb93e739bdba3cf47d525a5ee06abc5b07c09e954afc8aad56",
+   "digest": "b6b5594c0e44ecbc40d93c479a23e33fb22efc309e2f6b7ba958f81f31eb297f",
    "entries": [
     {
      "mode": "100644",
@@ -22813,8 +22813,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/npcComponents.jsx",
-     "sha256": "fbd88e4fe40945ff05943e373155d032bc4f5114d7c6baca84d107ed8bb07a9b",
-     "size": 31280,
+     "sha256": "8a57f2232127e82811a0e39b6b496790bc781c4b6a4fe5613e830b9c4a962828",
+     "size": 31346,
      "type": "file"
     },
     {
@@ -22911,8 +22911,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/InstitutionsTab.jsx",
-     "sha256": "ce4f2dc4aa686ec907624193371a1c6551261cba84098f6ddccd39ede1faeb00",
-     "size": 23650,
+     "sha256": "baaed4e6cc50457297c884b106c762c86c141b967cc881796d07c1063ae2b77f",
+     "size": 23705,
      "type": "file"
     },
     {
@@ -22953,15 +22953,15 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/PlotHooksTab.jsx",
-     "sha256": "c792ba6446ef2dbc343b96dac4a5d58fdf5ff22022d480ae2dbf5ee881ae4c89",
-     "size": 6484,
+     "sha256": "9acde4a84214646648a027ab5928267d3347953b1adbdaf7ec0d7bfe8ec87031",
+     "size": 7697,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/components/new/tabs/PowerTab.jsx",
-     "sha256": "16abfd3fe99d8f597a5efc19670a8861d902bd6ecca2dc04e2e3fd785ddb6bd0",
-     "size": 34551,
+     "sha256": "aed3ace1e5dda63c538f2c41dd33284c5f66e583a49c4f415257e6decf15a9d3",
+     "size": 35142,
      "type": "file"
     },
     {
@@ -24346,8 +24346,8 @@
     {
      "mode": "100644",
      "path": "src/data/faceHonorifics.js",
-     "sha256": "524f104b1ece1ed4b194ca9b34f227d5a8f1a9f123f90f8ba041c88afdcbbcdd",
-     "size": 13908,
+     "sha256": "f7028c415907df5f8cc9411fe2c8e718928ea1497ff65b34733a66a915ef50ad",
+     "size": 14919,
      "type": "file"
     },
     {
@@ -26782,8 +26782,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/stateProse/powerStateProse.js",
-     "sha256": "11c913c83fa1e88d5f75d5415f8723936acf9aae37d6465a87b1ad3cb4d21e7b",
-     "size": 58278,
+     "sha256": "034ceabc22cf2861075a9083d31f6be93aec2b67e5cce251334ee01529b66e89",
+     "size": 63156,
      "type": "file"
     },
     {
@@ -26796,8 +26796,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/stateProse/printProse.js",
-     "sha256": "ae57f93c3d53e1ad33b44ea29705fd0b71aa19de4a44a0544c7b81a27a2c074b",
-     "size": 40385,
+     "sha256": "29e5ffd139e4a63d901f012bf217f69b6202780830781a7f65267ef5524de36c",
+     "size": 40502,
      "type": "file"
     },
     {
@@ -28210,8 +28210,8 @@
     {
      "mode": "100644",
      "path": "src/domain/people/cardDoor.js",
-     "sha256": "ef6ea018c9ad6a4cba290aa1bf33e616b7098921289d7f6c83d15c2831ab1820",
-     "size": 3227,
+     "sha256": "d2b323e7d92d3d6e2850d737f29d1e8827d9d4b13b5f554dfaab85a91088ad40",
+     "size": 3822,
      "type": "file"
     },
     {
@@ -35882,8 +35882,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/primitives/StateProse.jsx",
-     "sha256": "05f910df28e6deae3cf3873cbacdca3e1be69367b7fa7406ffe7b7cbc3995e46",
-     "size": 9465,
+     "sha256": "1d837068caa638fb3e60dd36253856f413706ac5bd892780943253756cd5fb57",
+     "size": 9461,
      "type": "file"
     },
     {
@@ -35987,8 +35987,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/sections/PowerStructure.jsx",
-     "sha256": "3d157d7bdd19e9a153f2c40c7c479ac334c8b2528f734f97db7f8088bc751a19",
-     "size": 12800,
+     "sha256": "3c4e8f83a12c840326ee74aab2a1eff005dcc48c1e2be335bd68dd2a1b2429c2",
+     "size": 12767,
      "type": "file"
     },
     {
@@ -36828,7 +36828,7 @@
   },
   "sourceTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "37314b840e919c0b10a285ce5420cad528ea05d7fa47fc95a052c4e59e44997f",
+   "digest": "eb4293fefb7f279cc4b15b9835e07929fd1c082a51d55120c61e973abf839cf3",
    "entries": [
     {
      "mode": "100644",
@@ -39787,8 +39787,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/npcComponents.jsx",
-     "sha256": "fbd88e4fe40945ff05943e373155d032bc4f5114d7c6baca84d107ed8bb07a9b",
-     "size": 31280,
+     "sha256": "8a57f2232127e82811a0e39b6b496790bc781c4b6a4fe5613e830b9c4a962828",
+     "size": 31346,
      "type": "file"
     },
     {
@@ -39885,8 +39885,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/InstitutionsTab.jsx",
-     "sha256": "ce4f2dc4aa686ec907624193371a1c6551261cba84098f6ddccd39ede1faeb00",
-     "size": 23650,
+     "sha256": "baaed4e6cc50457297c884b106c762c86c141b967cc881796d07c1063ae2b77f",
+     "size": 23705,
      "type": "file"
     },
     {
@@ -39927,15 +39927,15 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/PlotHooksTab.jsx",
-     "sha256": "c792ba6446ef2dbc343b96dac4a5d58fdf5ff22022d480ae2dbf5ee881ae4c89",
-     "size": 6484,
+     "sha256": "9acde4a84214646648a027ab5928267d3347953b1adbdaf7ec0d7bfe8ec87031",
+     "size": 7697,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/components/new/tabs/PowerTab.jsx",
-     "sha256": "16abfd3fe99d8f597a5efc19670a8861d902bd6ecca2dc04e2e3fd785ddb6bd0",
-     "size": 34551,
+     "sha256": "aed3ace1e5dda63c538f2c41dd33284c5f66e583a49c4f415257e6decf15a9d3",
+     "size": 35142,
      "type": "file"
     },
     {
@@ -41341,8 +41341,8 @@
     {
      "mode": "100644",
      "path": "src/data/dossierStateProse/power.generated.js",
-     "sha256": "829244b6bf2b485a7d6afb5c6d29cdea7836cdc89bd53141d1b4274d30eb39b2",
-     "size": 115715,
+     "sha256": "238b49086b81602f6e483cf926721292cdd013954140c940317cae54162a794f",
+     "size": 123197,
      "type": "file"
     },
     {
@@ -41383,8 +41383,8 @@
     {
      "mode": "100644",
      "path": "src/data/faceHonorifics.js",
-     "sha256": "524f104b1ece1ed4b194ca9b34f227d5a8f1a9f123f90f8ba041c88afdcbbcdd",
-     "size": 13908,
+     "sha256": "f7028c415907df5f8cc9411fe2c8e718928ea1497ff65b34733a66a915ef50ad",
+     "size": 14919,
      "type": "file"
     },
     {
@@ -41600,7 +41600,7 @@
     {
      "mode": "100644",
      "path": "src/data/proseNorms.generated.js",
-     "sha256": "1f5764df867a739c470bf3c78acbf350eeb3297a11b2d3110cf823097b223a29",
+     "sha256": "849c0cc60281984361d55825dd510f11f2e97243bce03ffd819654cbcb7ad02d",
      "size": 19938,
      "type": "file"
     },
@@ -43875,8 +43875,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/stateProse/powerStateProse.js",
-     "sha256": "11c913c83fa1e88d5f75d5415f8723936acf9aae37d6465a87b1ad3cb4d21e7b",
-     "size": 58278,
+     "sha256": "034ceabc22cf2861075a9083d31f6be93aec2b67e5cce251334ee01529b66e89",
+     "size": 63156,
      "type": "file"
     },
     {
@@ -43889,8 +43889,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/stateProse/printProse.js",
-     "sha256": "ae57f93c3d53e1ad33b44ea29705fd0b71aa19de4a44a0544c7b81a27a2c074b",
-     "size": 40385,
+     "sha256": "29e5ffd139e4a63d901f012bf217f69b6202780830781a7f65267ef5524de36c",
+     "size": 40502,
      "type": "file"
     },
     {
@@ -45303,8 +45303,8 @@
     {
      "mode": "100644",
      "path": "src/domain/people/cardDoor.js",
-     "sha256": "ef6ea018c9ad6a4cba290aa1bf33e616b7098921289d7f6c83d15c2831ab1820",
-     "size": 3227,
+     "sha256": "d2b323e7d92d3d6e2850d737f29d1e8827d9d4b13b5f554dfaab85a91088ad40",
+     "size": 3822,
      "type": "file"
     },
     {
@@ -52975,8 +52975,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/primitives/StateProse.jsx",
-     "sha256": "05f910df28e6deae3cf3873cbacdca3e1be69367b7fa7406ffe7b7cbc3995e46",
-     "size": 9465,
+     "sha256": "1d837068caa638fb3e60dd36253856f413706ac5bd892780943253756cd5fb57",
+     "size": 9461,
      "type": "file"
     },
     {
@@ -53080,8 +53080,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/sections/PowerStructure.jsx",
-     "sha256": "3d157d7bdd19e9a153f2c40c7c479ac334c8b2528f734f97db7f8088bc751a19",
-     "size": 12800,
+     "sha256": "3c4e8f83a12c840326ee74aab2a1eff005dcc48c1e2be335bd68dd2a1b2429c2",
+     "size": 12767,
      "type": "file"
     },
     {
@@ -54238,20 +54238,20 @@
  },
  "scanStats": {
   "files": 2424,
-  "reads": 138642,
-  "resolved": 10856,
-  "unresolved": 127786
+  "reads": 138675,
+  "resolved": 10873,
+  "unresolved": 127802
  },
  "scannerProvenance": {
   "detectorDigest": "cb5dac5989089c789d38f0689a859a2dd8e64d78bb3f378a7aab1e0a255d1de5",
-  "executionTreeDigest": "038319088aff43bf8c8ff7ac998249e13dae05669ac239428bd90b36133caefa",
-  "scanTreeDigest": "77fedcb5de90dddb93e739bdba3cf47d525a5ee06abc5b07c09e954afc8aad56",
-  "sourceTreeDigest": "37314b840e919c0b10a285ce5420cad528ea05d7fa47fc95a052c4e59e44997f",
-  "unscannedInputDigest": "aecc87d791729dcfa00a43ef5df515d9a0f817235d08efe5db16c4f7b5c0b8ad"
+  "executionTreeDigest": "ebfdb5498aa18caa09653706d6cc40bc53c018788da0eac21b8e3405f330018b",
+  "scanTreeDigest": "b6b5594c0e44ecbc40d93c479a23e33fb22efc309e2f6b7ba958f81f31eb297f",
+  "sourceTreeDigest": "eb4293fefb7f279cc4b15b9835e07929fd1c082a51d55120c61e973abf839cf3",
+  "unscannedInputDigest": "edd8eeeef1e7f9adc595539074b4119a12cefbe92ac0884f6bb8692d76b05154"
  },
  "schema": 32,
  "sentinel": {
-  "resolvedReads": 10856,
+  "resolvedReads": 10873,
   "totalKeys": 11997,
   "usableShapes": 517
  },
