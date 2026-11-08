@@ -498,7 +498,13 @@ describe('A0b — the text claims every declared field and no other', () => {
     // new (their one read is the table label), and the four MIGRATION pools inherit their direction reads unclaimed
     // (DS-DEF-3 arrivals/departures 2 each x 3 lines, DS-DEF-8 1 each x 3): 1553 -> 1571 measured line by line
     // against the parent, all eighteen on those twelve lines; no other line moved.
-    const UNDER_CLAIM_OWED = 289;
+    // 289 -> 431 OWED at MERGE-WAVE's W2 DEF merge point (2026-11-08, the chair's ruling: W1 ECO's A0b debt, unrecorded on its
+    // lane, attributed to its new and rewritten pools by block, W2 DEF's idiom; the census wave buys them back): measured by
+    // armA0b over the shipped corpus, the composed tip against W2 DEF's tip 091b23bb3, so the delta is W1 ECO's — DS-ECO-9 53
+    // (its eight food-lens pools), DS-GEN-13 34 (five), DS-ECO-6 21 (four), DS-ECO-12 16 (four), DS-ECO-11 13 (two), DS-ECO-8 9
+    // (three), DS-SUP-2 1 (the mounted pool), DS-ECO-2 -3 (a style rewrite claims three reads it left): +144 gross; W2 DEF's tip sat
+    // 2 under its own ceiling, so 1571 -> 1713 measured is +142 on the ceiling. Red at W1 ECO's own tip b7e54f1b4 (1,488 / 1,344).
+    const UNDER_CLAIM_OWED = 431;
     const UNDER_CLAIM_CEILING = UNDER_CLAIM_BASE + UNDER_CLAIM_OWED;
     // ⛔ THE OVER-CLAIM CEILING, RE-KEYED THE SAME WAY (census-1b unit A (d), 427f7b112). From that
     // commit the wiring census records `settlement` among DS-GEN-17's fieldsRead (the roster key
@@ -545,7 +551,7 @@ describe('A0b — the text claims every declared field and no other', () => {
       + `\n  over-claims          ${tally['over-claim']}   ceiling ${OVER_CLAIM_CEILING}`
       + ` = ${OVER_CLAIM_BASE} + ${OVER_CLAIM_OWED} OWED (427f7b112: DS-GEN-17's name slot)`
       + `\n  under-claims         ${tally['under-claim']}   ceiling ${UNDER_CLAIM_CEILING}`
-      + ` = ${UNDER_CLAIM_BASE} + ${UNDER_CLAIM_OWED} OWED (R-F5 26 + the pool census 34 + DS-GEN-17 PROVISIONED v3 1 + DS-CND-1 boom v4 1 + W2 DEF DS-DEF-9 FLAG pools 8 + W2 DEF DS-DEF-4 FIXTURE pools 17 + W2 DEF DS-DEF-5 FIXTURE pools 10 + W2 DEF DS-DEF-5 ARCANE pools 79 + FIXTURE: gates v3-v4 4 + the ledger rewrite of FIXTURE: gangs v2 3 + W2 DEF DS-DEF-12 isolation support 66 + W2 DEF DS-DEF-2 CHAIN clauses 22 + W2 DEF stress-type migration pools 18: the census wave buys them back)`
+      + ` = ${UNDER_CLAIM_BASE} + ${UNDER_CLAIM_OWED} OWED (R-F5 26 + the pool census 34 + DS-GEN-17 PROVISIONED v3 1 + DS-CND-1 boom v4 1 + W2 DEF DS-DEF-9 FLAG pools 8 + W2 DEF DS-DEF-4 FIXTURE pools 17 + W2 DEF DS-DEF-5 FIXTURE pools 10 + W2 DEF DS-DEF-5 ARCANE pools 79 + FIXTURE: gates v3-v4 4 + the ledger rewrite of FIXTURE: gangs v2 3 + W2 DEF DS-DEF-12 isolation support 66 + W2 DEF DS-DEF-2 CHAIN clauses 22 + W2 DEF stress-type migration pools 18 + W1 ECO's pools 142 (MERGE-WAVE): the census wave buys them back)`
       + `\n  implicit negations   ${tally['implicit-negation']}`
       + `\n  absences claimed by silence (R-F4, REPORT) ${silent}`
       + `\n  NOT-EXECUTABLE reads ${notExecutable}   pools carrying a finding ${pools.size}\n`);
@@ -564,7 +570,9 @@ describe('A0b — the text claims every declared field and no other', () => {
     // 255 -> 260 at W2 DEF C3–C5 (2026-11-07, the third seat): the five DS-DEF-12 pools carry the under-claim debt above.
     // 260 -> 264 at W2 DEF C6 (2026-11-07, the third seat): the four DS-DEF-2 CHAIN pools carry the under-claim debt above.
     // 264 -> 268 at W2 DEF's stress-type keys (2026-11-07): the four migration pools carry the under-claim debt above.
-    expect(pools.size).toBeLessThanOrEqual(268);
+    // 268 -> 295 at MERGE-WAVE's W2 DEF merge point (2026-11-08, the chair's ruling): W1 ECO's twenty-seven new pools carrying
+    // the under-claim debt above (DS-ECO-9 8, DS-GEN-13 5, DS-ECO-12 4, DS-ECO-6 4, DS-ECO-8 3, DS-ECO-11 2, DS-SUP-2 1).
+    expect(pools.size).toBeLessThanOrEqual(295);
   });
 });
 
