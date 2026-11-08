@@ -63,7 +63,6 @@ const ADVISORY_STATUS = new Map();
  *  1bff51c6d and the merge base bf263a78d fail it; the compose's census-1b merge 0856c09d3 does not; inside
  *  census-1b's first-parent line the flip is the census-4 merge fe7bb1d4a, and on census-4's side
  *  fa39513d3 fails it, 1abf16d8d does not. */
- *                                                     isolated-arcane-town-cinder, mundane-river-port-city-bracken */
 /* RE-KEYED 2026-11-07 (PEOPLE-1 CAST, the people car's lane 1): 60 -> 59 of 65, MEASURED at the lane's tip. The cast
  * replaces the rung roster and the battery over the stored record reads a different cast: criminal-crossroads-town-alder,
  * -cinder, isolated-arcane-town-ember, mercantile-seaport-town-cinder and religious-river-village-cinder STOPPED
