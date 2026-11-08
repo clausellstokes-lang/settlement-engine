@@ -147,12 +147,20 @@ const FIXTURE_INPUT_FILES = Object.freeze([
  *     18-character floor. Generator text, never drawn, the same class as the first two rows. The
  *     "never add a file" law stops new DRAWN-prose anchors; a false positive is carried with its
  *     reason rather than split into sub-floor pieces to slip past the matcher.
+ *   envoyKindPools:55 — ADDED 2026-11-08 (MERGE-WAVE at the W3 POW merge): the envoy-kind pool line
+ *     "The messenger has no new vote to cast between one mile and the next." — generator text of the
+ *     envoy kind, never drawn from a state leaf — which the matcher aligns against DS-ECO-11's
+ *     partiallyExploited vid 3 at EXACTLY the 18-character floor, as treatyVoiceCure's row above. It
+ *     appears at the W3 composition (absent at the W2 merge point): the corpus W3 POW adds re-ranks the
+ *     four rarest indexed words that narrow the candidates, so this pool now reaches that vid. A false
+ *     positive, carried with its reason.
  */
 const FROZEN_LITERAL_ANCHORS = Object.freeze({
   'tests/domain/magicRegimeLifecycle.test.js': 1,
   'tests/domain/settlementLifecycleFirstClass.test.js': 1,
   'tests/domain/stressorAftermath.test.js': 1,
   'tests/domain/treatyVoiceCure.test.js': 1,
+  'tests/lint/envoyKindPools.walker.test.js': 1,
   'tests/lint/dossierMountRegistry.walker.test.js': 1,
   'tests/lint/economyReadModelCoverage.walker.test.js': 1,
 });
