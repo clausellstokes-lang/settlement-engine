@@ -220,22 +220,39 @@ describe('goal families — the personality clusters', () => {
   });
 });
 
+/** Every violation of the tie table against the tie types and the TIES cells; [] when lawful. */
+function tieTableViolations(table, types, tiesCells) {
+  const out = [];
+  for (const t of types) if (!(t in table)) out.push(`missing: tie type '${t}' has no entry`);
+  for (const [t, ends] of Object.entries(table)) {
+    if (!types.includes(t)) out.push(`unknown: '${t}' is not a tie type the record can produce`);
+    if (!ends || Object.keys(ends).sort().join(',') !== 'from,to') { out.push(`shape: '${t}' must name exactly from and to`); continue; }
+    for (const end of ['from', 'to']) if (!tiesCells.includes(ends[end])) out.push(`target: '${t}'.${end} -> '${ends[end]}' is not a TIES sub-kind`);
+  }
+  const reached = new Set(Object.values(table).flatMap((e) => [e?.from, e?.to]));
+  for (const c of tiesCells) if (!reached.has(c)) out.push(`orphan: TIES cell '${c}' is reached by no tie type`);
+  return out;
+}
+
 describe('goal families — the tie types onto the TIES sub-kinds', () => {
-  test('TIE_TYPE_TO_GOAL_SUBKIND is total over the tie types the record can produce, and names nothing else', () => {
-    expect(Object.keys(TIE_TYPE_TO_GOAL_SUBKIND).sort()).toEqual(Object.keys(RELATIONSHIP_STRENGTHS).sort());
+  const types = Object.keys(RELATIONSHIP_STRENGTHS);
+  const cells = Object.keys(GOAL_FAMILY_LINES.TIES);
+
+  test('TIE_TYPE_TO_GOAL_SUBKIND is total over the imported tie types, every target a real TIES sub-kind, no cell orphaned', () => {
+    expect(types.length).toBeGreaterThan(0);
+    expect(tieTableViolations(TIE_TYPE_TO_GOAL_SUBKIND, types, cells)).toEqual([]);
+    expect(Object.isFrozen(TIE_TYPE_TO_GOAL_SUBKIND)).toBe(true);
   });
 
-  test('every end of every tie type lands on a TIES sub-kind that has its cell', () => {
-    const subs = Object.keys(GOAL_FAMILY_LINES.TIES);
-    for (const ends of Object.values(TIE_TYPE_TO_GOAL_SUBKIND)) {
-      expect(Object.keys(ends).sort()).toEqual(['from', 'to']);
-      expect(subs).toContain(ends.from);
-      expect(subs).toContain(ends.to);
-    }
+  test('CONTROL: a planted unknown tie type reds the checker', () => {
+    const planted = { ...TIE_TYPE_TO_GOAL_SUBKIND, courtship: { from: 'family', to: 'family' } };
+    expect(tieTableViolations(planted, types, cells).some((x) => x.startsWith("unknown: 'courtship'"))).toBe(true);
   });
 
-  test('every TIES sub-kind is reached by some tie type (no cell is orphaned)', () => {
-    const reached = new Set(Object.values(TIE_TYPE_TO_GOAL_SUBKIND).flatMap((e) => [e.from, e.to]));
-    expect(Object.keys(GOAL_FAMILY_LINES.TIES).filter((s) => !reached.has(s))).toEqual([]);
+  test('CONTROL: a dropped type and a bad target each red the checker', () => {
+    const { political: _dropped, ...missing } = TIE_TYPE_TO_GOAL_SUBKIND;
+    expect(tieTableViolations(missing, types, cells).some((x) => x.startsWith("missing: tie type 'political'"))).toBe(true);
+    const bad = { ...TIE_TYPE_TO_GOAL_SUBKIND, respect: { from: 'friend', to: 'ally' } };
+    expect(tieTableViolations(bad, types, cells).some((x) => x.startsWith("target: 'respect'.from -> 'friend'"))).toBe(true);
   });
 });
