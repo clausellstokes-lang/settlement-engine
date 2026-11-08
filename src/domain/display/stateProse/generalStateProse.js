@@ -1183,7 +1183,7 @@ export function marketPoolKey(state) {
  */
 export function commercePoolKey(inst) {
   if (inst?.hasBank === true) return 'COMMERCE: a bank';
-  if (inst?.hasMerchantGuild === true) return 'COMMERCE: a merchant guild, no bank';
+  if (inst?.hasMerchantGuild === true && inst?.hasGuild === true) return 'COMMERCE: a merchant guild, no bank';
   if (inst?.hasGuild === true) return 'COMMERCE: craft guilds, no merchant guild';
   if (inst?.hasMarket === true) return 'COMMERCE: a market, no guild';
   return null;
