@@ -95,7 +95,10 @@ describe('the rung-2 seeds, re-born', () => {
     const failures = collectSeedFailures([0, 4204], (i) => {
       const s = birth(i).settlement;
       const entry = (Array.isArray(s.stress) ? s.stress : [s.stress]).find((e) => e?.type === 'mass_migration');
-      expect(entry?.direction, `soak1k-${i}`).toBe('influx');
+      // GREEN-BASE (2026-11-08): the field is W0's one fact, in W0's words ({'arrivals','departures'},
+      // domain/migrationDirection.js); the census's `influx` is what `migrationDirectionOf` answers for it.
+      expect(entry?.direction, `soak1k-${i}`).toBe('arrivals');
+      expect(migrationDirectionOf(entry), `soak1k-${i}`).toBe('influx');
       expect(migrationDirectionFindings(s, recordText(s)).map((f) => f.quote), `soak1k-${i}`).toEqual([]);
     });
     expectNoSeedFailures(failures, 'no influx is told as a departure');
