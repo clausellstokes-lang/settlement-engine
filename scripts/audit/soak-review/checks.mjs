@@ -506,7 +506,9 @@ export function reviewSettlement(s, config, r) {
   }
 
   // ── A-12: the page vouches for itself while the battery finds a contradiction
-  const vouch = sentencesOf(screenText).find((x) => /contradicts anything else in it/i.test(x));
+  // The DS-GEN-11 `criticalIssueCount zero` lines, as W5 HIS reworded them under the owner's style law
+  // (2026-11-07); the old wording ("contradicts anything else in it") is kept so a saved page still reads.
+  const vouch = sentencesOf(screenText).find((x) => /contradicts anything else|nothing contradicting anything else|nothing about it fails to add up|account of itself (?:is|stays) clean/i.test(x));
   const contradictions = out.filter((f) => (KIND_OF[f.check] || 0) >= 1 && KIND_OF[f.check] !== 6).length;
   if (vouch && contradictions) add('A-12:self-vouch-false', 'screen', vouch, `${contradictions} contradiction findings`);
 

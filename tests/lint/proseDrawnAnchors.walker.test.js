@@ -154,14 +154,18 @@ const FIXTURE_INPUT_FILES = Object.freeze([
  *     appears at the W3 composition (absent at the W2 merge point): the corpus W3 POW adds re-ranks the
  *     four rarest indexed words that narrow the candidates, so this pool now reaches that vid. A false
  *     positive, carried with its reason.
+ *   AT MERGE-WAVE's W5 HIS merge (2026-11-08): THREE rows RETIRED, spent (magicRegimeLifecycle,
+ *     stressorAftermath, dossierMountRegistry): the scan no longer finds their literals in any shipped
+ *     variant once W5 HIS's style rewrites land, so the banked wins are banked by deleting the rows. ONE
+ *     row ADDED (demographicReading:117, "Nobody has counted the harvest"): the demographic reader's own
+ *     sentence (src code, never drawn from a state leaf), which the matcher aligns at 19 fixed chars
+ *     against W5 HIS's rewritten DS-POP-2 WINDOW vid 2. A false positive, carried with its reason.
  */
 const FROZEN_LITERAL_ANCHORS = Object.freeze({
-  'tests/domain/magicRegimeLifecycle.test.js': 1,
+  'tests/domain/demographicReading.test.js': 1,
   'tests/domain/settlementLifecycleFirstClass.test.js': 1,
-  'tests/domain/stressorAftermath.test.js': 1,
   'tests/domain/treatyVoiceCure.test.js': 1,
   'tests/lint/envoyKindPools.walker.test.js': 1,
-  'tests/lint/dossierMountRegistry.walker.test.js': 1,
   'tests/lint/economyReadModelCoverage.walker.test.js': 1,
 });
 

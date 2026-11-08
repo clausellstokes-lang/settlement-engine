@@ -234,7 +234,7 @@ export const HOLDER_SOURCES = Object.freeze({
   unaffiliated: Object.freeze({ kind: 'parish', cite: 'src/domain/worldPulse/religionState.js:644', read: true }),
 
   // ── the elders: how long ago a thing happened ──
-  yearsAgo: Object.freeze({ kind: 'elders', cite: 'src/generators/historyGenerator.js:326', read: true }),
+  yearsAgo: Object.freeze({ kind: 'elders', cite: 'src/generators/historyGenerator.js:328', read: true }),
 
   // ── the road: the look of the country, which anyone travelling it can see ──
   terrainType: Object.freeze({ kind: 'road', cite: 'src/generators/steps/resolveConfig.js:209', read: true }),
@@ -243,7 +243,7 @@ export const HOLDER_SOURCES = Object.freeze({
   // ── the office itself: the record's own audit of the record ──
   structuralViolations: Object.freeze({ kind: 'office', cite: 'src/generators/steps/assembleSettlement.js:135', read: true }),
   structuralSuggestions: Object.freeze({ kind: 'office', cite: 'src/generators/steps/assembleSettlement.js:136', read: true }),
-  prominentRelationship: Object.freeze({ kind: 'office', cite: 'src/generators/narrativeGenerator.js:1006', read: true }),
+  prominentRelationship: Object.freeze({ kind: 'office', cite: 'src/generators/narrativeGenerator.js:1034', read: true }),
 });
 
 /**

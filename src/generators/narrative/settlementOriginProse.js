@@ -154,12 +154,19 @@ export const ORIGIN_ARMS = Object.freeze(Object.keys(ORIGIN_POOLS));
 /**
  * Resolve the ARM for a founding state. This is the pre-RR branch structure
  * exactly: route, with the port terrain sub-arms and the isolated deficit split.
- * @param {{ route?: string, terrainType?: string|null, hasFoodDeficit?: boolean }} state
+ * @param {{ route?: string, terrainType?: string|null, hasFoodDeficit?: boolean, hasDocks?: boolean }} state
  * @returns {string} an ORIGIN_POOLS key
  */
-export const originArmKey = ({ route, terrainType = null, hasFoodDeficit = false }) => {
+export const originArmKey = ({ route, terrainType = null, hasFoodDeficit = false, hasDocks }) => {
   if (route === 'crossroads') return 'crossroads';
   if (route === 'river') return 'river';
+  // #10 (STYLE-RULINGS §1, W5 HIS 2026-11-07) — A RECORD DEFECT, NOT A WORDING: a port reason
+  // over a roster with no docks or wharf institution contradicted the record (a mountain thorp
+  // with no docks read "A port. The wharves are the reason the place exists"). `hasDocks` is the
+  // roster's port-infrastructure flag; an EXPLICIT false takes the arm the terrain gives (the
+  // river for a riverside town, else the road). An absent flag is a caller that did not say, and
+  // keeps the port arm exactly as before.
+  if (route === 'port' && hasDocks === false) return terrainType === 'riverside' ? 'river' : 'road';
   if (route === 'port') {
     if (terrainType === 'riverside') return 'port.riverside';
     if (terrainType === 'coastal') return 'port.coastal';

@@ -8,7 +8,7 @@
     "tip": "the six state leaves at the car-4 projection; base c45a46a78",
     "blocks": 68,
     "pools": 709,
-    "variants": 2754
+    "variants": 2764
   },
   "mechanisms": [
     {
@@ -21,13 +21,13 @@
         {
           "kind": "integer",
           "over": "the sum of poolMeta.variantCount over all 708 pools",
-          "value": 2754
+          "value": 2764
         },
         {
           "kind": "digest",
           "algo": "sha256",
           "over": "poolMeta.variantCount per pool",
-          "value": "8f809ed43c400356e9514be990e47940da435ea17fc54bf54fbfb95c797ef90a"
+          "value": "b81de52bf9a610bead169b6bb806e679af6ceb3aaf85922baeed2043594bc3ad"
         }
       ]
     },
@@ -42,7 +42,7 @@
         {
           "kind": "integer",
           "over": "the sum of every faceCounts entry over all 708 pools",
-          "value": 2754
+          "value": 2764
         },
         {
           "kind": "integer",
@@ -53,7 +53,7 @@
           "kind": "digest",
           "algo": "sha256",
           "over": "poolMeta.faceCounts per pool, joined by commas",
-          "value": "6114884225ca235cdc8ea504dca6346e4638ad0757da5951d7ad2dfef905c27b"
+          "value": "0bec69aa86038ba4e7009f1d5ba4c3282dafa7b34936ec49a4428ce4ecccf2f0"
         }
       ]
     },
@@ -68,7 +68,7 @@
           "kind": "digest",
           "algo": "sha256",
           "over": "poolMeta.vids per pool, joined by commas",
-          "value": "2a9dd2d2d278fc24352a8580b8e371e6a2393b907919abddfcc557e1fb6aa1a1"
+          "value": "7668e9caa3eeaf758f9642dfb8702f20e2c9defd233bd246691ab93cd6bdc155"
         }
       ]
     },
@@ -83,7 +83,7 @@
           "kind": "digest",
           "algo": "sha256",
           "over": "`${block} :: ${pool}` for all 708 pools, in order",
-          "value": "8f8e3cac14d261c50185fa1fe6b6081640e4811b73335d34eb4b6209f5971c69"
+          "value": "67c7ea11d435a9f9d42731c71d80626b5d0e0d01412e2524f07190a80cab1e80"
         }
       ]
     },
@@ -152,7 +152,7 @@
           "kind": "digest",
           "algo": "sha256",
           "over": "poolMeta.attach per pool, joined by pipes",
-          "value": "6264d4a54a16ceb4b98323a5d1c4a3203186527fb9b8d0744985c1a6e31cede2"
+          "value": "6d5b0689ea4a46c4a16b79aa54460db3ad146d33e46571c6421404d779c19172"
         }
       ]
     },

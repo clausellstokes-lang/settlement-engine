@@ -189,7 +189,12 @@ describe('composeSettlementQuickGuide', () => {
     // ⚠ RE-RECORDING IS A CONTENT DECISION, NEVER A FORMALITY: read the changed scope
     // against its phrase in SCOPE_PHRASE, move the phrase if the terms moved, and only
     // then re-record, with the reason written down.
-    const SCOPE_TEXT_DIGEST = '912bcf91c35b';
+    // 912bcf91c35b -> 0268f53d29cd at W5 HIS's style pass (2026-11-07, the owner's style law, STYLE-AUDIT §2b-5
+    // row 30): every scope lost its "design grammar" filing word and reads as a plain sentence; each keeps its
+    // terms, so every SCOPE_PHRASE paraphrase was re-read and still holds (none moved).
+    // 0268f53d29cd -> 48db1bc0fdfc, same pass: the east-asian scope drops "Walled" (the soak's coh:defense-words read it
+    // on 35 wall-less towns); its paraphrase never named walls and still holds.
+    const SCOPE_TEXT_DIGEST = '48db1bc0fdfc';
     const scopesInKeyOrder = Object.values(CULTURE_PROFILES).map((profile) => profile.scope);
     const digest = (parts) => createHash('sha256').update(parts.join('\n')).digest('hex').slice(0, 12);
 

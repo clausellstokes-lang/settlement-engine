@@ -2,13 +2,13 @@
   "schema": "wiring-census/1",
   "stamp": {
     "files": {
-      "src/domain/display/stateProse/generalStateProse.js": "dc10aa0d637267bdae1e5b809c2c7244ea1df1c9e3e967e3c15d5a5154777e13",
+      "src/domain/display/stateProse/generalStateProse.js": "88665e91116f258996473915208e51e0c391f71886771ac4110e1343e9f62b5a",
       "src/domain/display/stateProse/powerStateProse.js": "af9935cf52a1efb0c55a292538334d4f239b916ad92b01898a51e53f780fa8af",
       "src/domain/display/stateProse/economyStateProse.js": "4338681a6ebb687315187094bf06893b8d07b3b8a9d7a4c4f03f5eea2c01d3bb",
       "src/domain/display/stateProse/defenseStateProse.js": "27538b1c57b2a0afd445d348027c92e047973e442c0cbfd4b8665df48383dea0",
       "src/domain/display/stateProse/stressorsStateProse.js": "e35010d5433bd9cdbde3f6b67c82302bef32d95f51f5b25cb58b0bb1a063d212",
       "src/domain/display/stateProse/warFaithStateProse.js": "cd457c6496e5d84828e782f46c8a242c395c3636d62b0096469d14c3a1e1e3df",
-      "src/domain/display/stateProse/dossierMounts.js": "d0a19e8a48592607237bc07036efa63a7a52c0a299f7fd1e4a4305cc7fe15d8f"
+      "src/domain/display/stateProse/dossierMounts.js": "1c5557a2e848a496d9a20099634bf5d1e894d60fc6110743083c87cf7ce20d2d"
     },
     "candidateLeaves": {
       "src/domain/display/stateProse/defenseStateProseCandidates.js": "b4833f55274b040dc5627b0eedafe7f98f508cec73ac829ce213adabe8c3e96c",
@@ -21,24 +21,24 @@
     "producerIndexFiles": 1309
   },
   "totals": {
-    "pools": 852,
+    "pools": 857,
     "blocks": 69,
-    "variants": 2754,
-    "resolved": 485,
-    "unresolved": 367,
+    "variants": 2764,
+    "resolved": 489,
+    "unresolved": 368,
     "resolvedWithPredicate": 317,
     "resolvedWithCleanPredicate": 317,
-    "keyFunctions": 150,
-    "keyFunctionsConsulted": 150,
+    "keyFunctions": 151,
+    "keyFunctionsConsulted": 151,
     "keyTables": 39,
-    "slotless": 70,
+    "slotless": 69,
     "bagless": 129,
     "predicatesOverUnreadFields": 108,
     "syntheticTableFields": 174,
     "tiers": {
       "MISSING": 33,
-      "THIN": 615,
-      "COVERED": 237,
+      "THIN": 617,
+      "COVERED": 240,
       "MISSING-AT-TIER": 45
     },
     "tierSilences": 352,
@@ -47,18 +47,18 @@
     "narrowedRows": 0,
     "covertRows": 4,
     "objectClassed": 112,
-    "mountedRows": 721,
+    "mountedRows": 726,
     "absent": {
-      "measured": 578,
+      "measured": 582,
       "default": 3,
       "not-produced": 71,
       "method-call": 18
     },
     "zeroK": 85,
-    "kExecutable": 485,
-    "kNotExecutable": 367,
-    "branchGrainRows": 452,
-    "functionGrainRows": 400,
+    "kExecutable": 489,
+    "kNotExecutable": 368,
+    "branchGrainRows": 456,
+    "functionGrainRows": 401,
     "customReachableRows": 28,
     "relationRows": 165,
     "relationRowsJoinable": 0,
@@ -120,10 +120,10 @@
     ],
     "sourceLicensedRows": 132,
     "sourceOfficeRows": 3,
-    "sourceUnresolvedRows": 717,
+    "sourceUnresolvedRows": 722,
     "sourceTwoSourceRows": 10,
     "modifierRows": 0,
-    "declaredColumnRows": 852,
+    "declaredColumnRows": 857,
     "tablePools": 50
   },
   "rows": [
@@ -20213,7 +20213,7 @@
       ],
       "hasBag": false,
       "variants": 3,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -20361,7 +20361,7 @@
       ],
       "hasBag": false,
       "variants": 3,
-      "grammars": 1,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -20412,7 +20412,7 @@
       ],
       "hasBag": false,
       "variants": 3,
-      "grammars": 2,
+      "grammars": 3,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -20649,7 +20649,7 @@
       ],
       "hasBag": false,
       "variants": 3,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -21159,7 +21159,7 @@
       ],
       "hasBag": false,
       "variants": 5,
-      "grammars": 3,
+      "grammars": 1,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -21318,7 +21318,7 @@
       ],
       "hasBag": false,
       "variants": 5,
-      "grammars": 3,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -21753,7 +21753,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 5,
-      "grammars": 3,
+      "grammars": 4,
       "predicate": [
         {
           "field": "conflict.intensity",
@@ -21826,7 +21826,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 5,
-      "grammars": 3,
+      "grammars": 2,
       "predicate": [
         {
           "field": "conflict.intensity",
@@ -23321,7 +23321,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [
         {
           "field": "text(label) (via PROSPERITY_POOL_OF in generalStateProse.js)",
@@ -23634,7 +23634,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 4,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [
         {
           "field": "head (via SAFETY_POOL_OF in generalStateProse.js)",
@@ -23769,7 +23769,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 1,
+      "grammars": 2,
       "predicate": [
         {
           "field": "head (via SAFETY_POOL_OF in generalStateProse.js)",
@@ -23833,7 +23833,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 4,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [
         {
           "field": "readings.viable",
@@ -24099,7 +24099,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 2,
-      "grammars": 1,
+      "grammars": 2,
       "predicate": [
         {
           "field": "text(label) (via READINESS_POOL_OF in generalStateProse.js)",
@@ -24490,7 +24490,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 4,
-      "grammars": 2,
+      "grammars": 3,
       "predicate": [
         {
           "field": "text(label) (via FOOD_POOL_OF in generalStateProse.js)",
@@ -24558,7 +24558,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 5,
-      "grammars": 2,
+      "grammars": 4,
       "predicate": [
         {
           "field": "text(label) (via FOOD_POOL_OF in generalStateProse.js)",
@@ -24699,7 +24699,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 4,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [
         {
           "field": "text(label) (via FOOD_POOL_OF in generalStateProse.js)",
@@ -24900,7 +24900,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 4,
-      "grammars": 2,
+      "grammars": 3,
       "predicate": [],
       "branchReads": [
         "readings",
@@ -25095,7 +25095,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 4,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [
         {
           "field": "text(tradeRouteAccess) (via ORIGIN_POOL_OF_ROUTE in generalStateProse.js)",
@@ -25295,7 +25295,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 4,
-      "grammars": 1,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [
         "granary",
@@ -25744,7 +25744,7 @@
       ],
       "hasBag": true,
       "variants": 4,
-      "grammars": 2,
+      "grammars": 3,
       "predicate": [
         {
           "field": "`${text(note?.type)}|${text(note?.tab)}` (via COHERENCE_POOL_OF in generalStateProse.js)",
@@ -25814,7 +25814,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 4,
-      "grammars": 2,
+      "grammars": 3,
       "predicate": [
         {
           "field": "`${text(note?.type)}|${text(note?.tab)}` (via COHERENCE_POOL_OF in generalStateProse.js)",
@@ -25955,7 +25955,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 4,
-      "grammars": 4,
+      "grammars": 3,
       "predicate": [
         {
           "field": "`${text(note?.type)}|${text(note?.tab)}` (via COHERENCE_POOL_OF in generalStateProse.js)",
@@ -26098,7 +26098,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 1,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [
@@ -26229,7 +26229,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 4,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -26281,7 +26281,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 4,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -26336,7 +26336,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 4,
-      "grammars": 4,
+      "grammars": 3,
       "predicate": [],
       "branchReads": [
         "ruin",
@@ -26899,7 +26899,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 1,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -27055,7 +27055,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 2,
+      "grammars": 3,
       "predicate": [],
       "branchReads": [
         "link.npcConnections"
@@ -27238,12 +27238,9 @@
         "settlement"
       ],
       "slotsNamed": [
-        "band",
         "settlement"
       ],
-      "slotsWithoutProvider": [
-        "band"
-      ],
+      "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 4,
       "grammars": 1,
@@ -27310,7 +27307,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 4,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [],
       "branchReads": [
         "readings.relationships",
@@ -27600,7 +27597,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 4,
-      "grammars": 2,
+      "grammars": 3,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -28599,7 +28596,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 4,
-      "grammars": 3,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -28754,7 +28751,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 4,
-      "grammars": 1,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -28852,7 +28849,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 4,
-      "grammars": 1,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -28905,7 +28902,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 4,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -28958,7 +28955,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 4,
-      "grammars": 4,
+      "grammars": 3,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -29190,7 +29187,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 4,
-      "grammars": 3,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [
@@ -29384,7 +29381,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 1,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -29758,7 +29755,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 4,
-      "grammars": 3,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [
@@ -30445,7 +30442,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [],
       "branchReads": [
         "hist"
@@ -30628,7 +30625,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [],
       "branchReads": [
         "readings.populationTrend.band",
@@ -30823,7 +30820,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [],
       "branchReads": [
         "readings.populationTrend.band",
@@ -31146,7 +31143,7 @@
       ],
       "hasBag": false,
       "variants": 2,
-      "grammars": 1,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -31219,6 +31216,7 @@
       "objectClasses": [],
       "objectClass": null,
       "sites": [
+        "history.legacy",
         "history.record"
       ],
       "attach": [],
@@ -31257,7 +31255,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 1,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [
@@ -31279,6 +31277,7 @@
       "objectClasses": [],
       "objectClass": null,
       "sites": [
+        "history.legacy",
         "history.record"
       ],
       "attach": [],
@@ -31337,6 +31336,7 @@
       "objectClasses": [],
       "objectClass": null,
       "sites": [
+        "history.legacy",
         "history.record"
       ],
       "attach": [],
@@ -31396,6 +31396,7 @@
       "objectClasses": [],
       "objectClass": null,
       "sites": [
+        "history.legacy",
         "history.record"
       ],
       "attach": [],
@@ -31432,7 +31433,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 2,
-      "grammars": 1,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [
@@ -31454,6 +31455,7 @@
       "objectClasses": [],
       "objectClass": null,
       "sites": [
+        "history.legacy",
         "history.record"
       ],
       "attach": [],
@@ -31479,6 +31481,310 @@
       "crisisScoped": true
     },
     {
+      "block": "DS-GEN-16",
+      "pool": "LIVING-MEMORY",
+      "slotsFilled": [
+        "calamity",
+        "settlement",
+        "timeband_age"
+      ],
+      "slotsNamed": [
+        "calamity",
+        "settlement"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 2,
+      "grammars": 2,
+      "predicate": [],
+      "branchReads": [],
+      "fieldsRead": [],
+      "status": "WIRING-UNRESOLVED",
+      "reason": "no pool-key function returns this key as a literal, no template of one binds it, and no module-level key table names it",
+      "keyFunction": "",
+      "rung": "none",
+      "reads": [],
+      "readsGrain": "function",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "history.legacy",
+        "history.record"
+      ],
+      "attach": [],
+      "k": null,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {},
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-GEN-16",
+      "pool": "LEGACY-UNRESOLVED",
+      "slotsFilled": [
+        "calamity",
+        "settlement",
+        "timeband_age"
+      ],
+      "slotsNamed": [
+        "calamity",
+        "settlement",
+        "timeband_age"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 2,
+      "grammars": 1,
+      "predicate": [],
+      "branchReads": [
+        "hist.legacyAnnotations"
+      ],
+      "fieldsRead": [
+        "hist.legacyAnnotations"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "legacyPoolKey",
+      "rung": "literal",
+      "reads": [
+        "hist.legacyAnnotations"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "hist.legacyAnnotations": "measured"
+      },
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "history.legacy",
+        "history.record"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "hist.legacyAnnotations": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-GEN-16",
+      "pool": "LEGACY-RECOVERED",
+      "slotsFilled": [
+        "calamity",
+        "settlement",
+        "timeband_age"
+      ],
+      "slotsNamed": [
+        "calamity",
+        "settlement",
+        "timeband_age"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 2,
+      "grammars": 2,
+      "predicate": [],
+      "branchReads": [
+        "hist.legacyAnnotations"
+      ],
+      "fieldsRead": [
+        "hist.legacyAnnotations"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "legacyPoolKey",
+      "rung": "literal",
+      "reads": [
+        "hist.legacyAnnotations"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "hist.legacyAnnotations": "measured"
+      },
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "history.legacy",
+        "history.record"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "hist.legacyAnnotations": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-GEN-16",
+      "pool": "LEGACY-SHIFTED",
+      "slotsFilled": [
+        "calamity",
+        "settlement",
+        "timeband_age"
+      ],
+      "slotsNamed": [
+        "calamity",
+        "settlement",
+        "timeband_age"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 2,
+      "grammars": 1,
+      "predicate": [],
+      "branchReads": [
+        "hist.legacyAnnotations"
+      ],
+      "fieldsRead": [
+        "hist.legacyAnnotations"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "legacyPoolKey",
+      "rung": "literal",
+      "reads": [
+        "hist.legacyAnnotations"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "hist.legacyAnnotations": "measured"
+      },
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "history.legacy",
+        "history.record"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "hist.legacyAnnotations": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-GEN-16",
+      "pool": "LEGACY-LINKED",
+      "slotsFilled": [
+        "calamity",
+        "settlement",
+        "timeband_age"
+      ],
+      "slotsNamed": [
+        "calamity",
+        "settlement",
+        "timeband_age"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 2,
+      "grammars": 1,
+      "predicate": [],
+      "branchReads": [
+        "hist.legacyAnnotations"
+      ],
+      "fieldsRead": [
+        "hist.legacyAnnotations"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "legacyPoolKey",
+      "rung": "literal",
+      "reads": [
+        "hist.legacyAnnotations"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "hist.legacyAnnotations": "measured"
+      },
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "history.legacy",
+        "history.record"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "hist.legacyAnnotations": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
       "block": "DS-GEN-17",
       "pool": "ADMINISTERED",
       "slotsFilled": [
@@ -31490,7 +31796,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [],
       "branchReads": [
         "readings.inst"
@@ -31557,7 +31863,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 2,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [],
       "branchReads": [
         "readings.inst"
@@ -31955,7 +32261,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 2,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [
@@ -54246,7 +54552,7 @@
         "DS-GEN-7 :: historical_economic: the recovery narrative"
       ],
       "variants": 24,
-      "grammars": 12,
+      "grammars": 13,
       "blocks": [
         "DS-GEN-7"
       ]
@@ -54918,7 +55224,7 @@
         "DS-GEN-3 :: economicViability.viable: false"
       ],
       "variants": 8,
-      "grammars": 3,
+      "grammars": 2,
       "blocks": [
         "DS-GEN-3"
       ]
@@ -55273,7 +55579,7 @@
         "DS-GEN-3 :: foodSecurity.label: Deficit × Active Famine"
       ],
       "variants": 25,
-      "grammars": 11,
+      "grammars": 13,
       "blocks": [
         "DS-GEN-3"
       ]
@@ -55288,7 +55594,7 @@
         "DS-GEN-3 :: prosperity: Wealthy / Thriving"
       ],
       "variants": 15,
-      "grammars": 7,
+      "grammars": 6,
       "blocks": [
         "DS-GEN-3"
       ]
@@ -55304,7 +55610,7 @@
         "DS-GEN-3 :: defenseProfile.readiness.label: Undefended"
       ],
       "variants": 14,
-      "grammars": 7,
+      "grammars": 8,
       "blocks": [
         "DS-GEN-3"
       ]
@@ -55397,7 +55703,7 @@
         "DS-GEN-6 :: crossroads"
       ],
       "variants": 4,
-      "grammars": 2,
+      "grammars": 1,
       "blocks": [
         "DS-GEN-6"
       ]
@@ -55688,7 +55994,7 @@
       },
       {
         "field": "events",
-        "mountsSpine": 1,
+        "mountsSpine": 2,
         "mountsModifier": 0,
         "spineTabs": [
           "history"
@@ -55806,7 +56112,7 @@
       },
       {
         "field": "hist",
-        "mountsSpine": 1,
+        "mountsSpine": 3,
         "mountsModifier": 0,
         "spineTabs": [
           "history"
@@ -55998,13 +56304,14 @@
       {
         "field": "readings.activeChains",
         "mountsSpine": 1,
-        "mountsModifier": 21,
+        "mountsModifier": 22,
         "spineTabs": [
           "economics"
         ],
         "modifierMounts": [
           "history.founded",
           "history.identity",
+          "history.legacy",
           "history.record",
           "overview.activeConditions",
           "overview.conflicts",
@@ -56029,7 +56336,7 @@
       {
         "field": "readings.ancientRuin",
         "mountsSpine": 0,
-        "mountsModifier": 32,
+        "mountsModifier": 33,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -56045,6 +56352,7 @@
           "economics.upstreamSupply",
           "history.founded",
           "history.identity",
+          "history.legacy",
           "history.record",
           "overview.activeConditions",
           "overview.conflicts",
@@ -56091,7 +56399,7 @@
       {
         "field": "readings.clockIds",
         "mountsSpine": 0,
-        "mountsModifier": 32,
+        "mountsModifier": 33,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -56107,6 +56415,7 @@
           "economics.upstreamSupply",
           "history.founded",
           "history.identity",
+          "history.legacy",
           "history.record",
           "overview.activeConditions",
           "overview.conflicts",
@@ -56131,7 +56440,7 @@
       {
         "field": "readings.coherenceNotes",
         "mountsSpine": 0,
-        "mountsModifier": 32,
+        "mountsModifier": 33,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -56147,6 +56456,7 @@
           "economics.upstreamSupply",
           "history.founded",
           "history.identity",
+          "history.legacy",
           "history.record",
           "overview.activeConditions",
           "overview.conflicts",
@@ -56193,7 +56503,7 @@
       {
         "field": "readings.conflicts",
         "mountsSpine": 0,
-        "mountsModifier": 32,
+        "mountsModifier": 33,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -56209,6 +56519,7 @@
           "economics.upstreamSupply",
           "history.founded",
           "history.identity",
+          "history.legacy",
           "history.record",
           "overview.activeConditions",
           "overview.conflicts",
@@ -56248,7 +56559,7 @@
       {
         "field": "readings.criticalIssueCount",
         "mountsSpine": 1,
-        "mountsModifier": 29,
+        "mountsModifier": 30,
         "spineTabs": [
           "viability"
         ],
@@ -56266,6 +56577,7 @@
           "economics.upstreamSupply",
           "history.founded",
           "history.identity",
+          "history.legacy",
           "history.record",
           "overview.activeConditions",
           "overview.conflicts",
@@ -56287,7 +56599,7 @@
       {
         "field": "readings.crossEngagements",
         "mountsSpine": 0,
-        "mountsModifier": 32,
+        "mountsModifier": 33,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -56303,6 +56615,7 @@
           "economics.upstreamSupply",
           "history.founded",
           "history.identity",
+          "history.legacy",
           "history.record",
           "overview.activeConditions",
           "overview.conflicts",
@@ -56327,13 +56640,14 @@
       {
         "field": "readings.exploitation",
         "mountsSpine": 1,
-        "mountsModifier": 21,
+        "mountsModifier": 22,
         "spineTabs": [
           "economics"
         ],
         "modifierMounts": [
           "history.founded",
           "history.identity",
+          "history.legacy",
           "history.record",
           "overview.activeConditions",
           "overview.conflicts",
@@ -56413,7 +56727,7 @@
       {
         "field": "readings.foodBalance",
         "mountsSpine": 0,
-        "mountsModifier": 35,
+        "mountsModifier": 36,
         "spineTabs": [],
         "modifierMounts": [
           "daily_life.standingOfLiving",
@@ -56430,6 +56744,7 @@
           "economics.upstreamSupply",
           "history.founded",
           "history.identity",
+          "history.legacy",
           "history.record",
           "overview.activeConditions",
           "overview.conflicts",
@@ -56456,7 +56771,7 @@
       {
         "field": "readings.foodSecurityLabel",
         "mountsSpine": 0,
-        "mountsModifier": 32,
+        "mountsModifier": 33,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -56472,6 +56787,7 @@
           "economics.upstreamSupply",
           "history.founded",
           "history.identity",
+          "history.legacy",
           "history.record",
           "overview.activeConditions",
           "overview.conflicts",
@@ -56496,7 +56812,7 @@
       {
         "field": "readings.govFaction",
         "mountsSpine": 0,
-        "mountsModifier": 32,
+        "mountsModifier": 33,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -56512,6 +56828,7 @@
           "economics.upstreamSupply",
           "history.founded",
           "history.identity",
+          "history.legacy",
           "history.record",
           "overview.activeConditions",
           "overview.conflicts",
@@ -56536,7 +56853,7 @@
       {
         "field": "readings.governingName",
         "mountsSpine": 0,
-        "mountsModifier": 32,
+        "mountsModifier": 33,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -56552,6 +56869,7 @@
           "economics.upstreamSupply",
           "history.founded",
           "history.identity",
+          "history.legacy",
           "history.record",
           "overview.activeConditions",
           "overview.conflicts",
@@ -56614,7 +56932,7 @@
       {
         "field": "readings.history",
         "mountsSpine": 0,
-        "mountsModifier": 32,
+        "mountsModifier": 33,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -56630,6 +56948,7 @@
           "economics.upstreamSupply",
           "history.founded",
           "history.identity",
+          "history.legacy",
           "history.record",
           "overview.activeConditions",
           "overview.conflicts",
@@ -56654,7 +56973,7 @@
       {
         "field": "readings.hookCategories",
         "mountsSpine": 0,
-        "mountsModifier": 32,
+        "mountsModifier": 33,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -56670,6 +56989,7 @@
           "economics.upstreamSupply",
           "history.founded",
           "history.identity",
+          "history.legacy",
           "history.record",
           "overview.activeConditions",
           "overview.conflicts",
@@ -56717,7 +57037,7 @@
       {
         "field": "readings.inst",
         "mountsSpine": 2,
-        "mountsModifier": 18,
+        "mountsModifier": 19,
         "spineTabs": [
           "overview"
         ],
@@ -56735,6 +57055,7 @@
           "economics.upstreamSupply",
           "history.founded",
           "history.identity",
+          "history.legacy",
           "history.record",
           "relationships.network",
           "viability.isolationSupport",
@@ -56745,7 +57066,7 @@
       {
         "field": "readings.isEntrepot",
         "mountsSpine": 2,
-        "mountsModifier": 7,
+        "mountsModifier": 8,
         "spineTabs": [
           "economics",
           "overview"
@@ -56753,6 +57074,7 @@
         "modifierMounts": [
           "history.founded",
           "history.identity",
+          "history.legacy",
           "history.record",
           "relationships.network",
           "viability.isolationSupport",
@@ -56763,7 +57085,7 @@
       {
         "field": "readings.lifecycleStatus",
         "mountsSpine": 0,
-        "mountsModifier": 32,
+        "mountsModifier": 33,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -56779,6 +57101,7 @@
           "economics.upstreamSupply",
           "history.founded",
           "history.identity",
+          "history.legacy",
           "history.record",
           "overview.activeConditions",
           "overview.conflicts",
@@ -56803,7 +57126,7 @@
       {
         "field": "readings.neighbours",
         "mountsSpine": 0,
-        "mountsModifier": 32,
+        "mountsModifier": 33,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -56819,6 +57142,7 @@
           "economics.upstreamSupply",
           "history.founded",
           "history.identity",
+          "history.legacy",
           "history.record",
           "overview.activeConditions",
           "overview.conflicts",
@@ -56897,7 +57221,7 @@
       {
         "field": "readings.populationTrend",
         "mountsSpine": 1,
-        "mountsModifier": 18,
+        "mountsModifier": 19,
         "spineTabs": [
           "overview"
         ],
@@ -56915,6 +57239,7 @@
           "economics.upstreamSupply",
           "history.founded",
           "history.identity",
+          "history.legacy",
           "history.record",
           "relationships.network",
           "viability.isolationSupport",
@@ -56925,13 +57250,14 @@
       {
         "field": "readings.primaryImports",
         "mountsSpine": 1,
-        "mountsModifier": 21,
+        "mountsModifier": 22,
         "spineTabs": [
           "economics"
         ],
         "modifierMounts": [
           "history.founded",
           "history.identity",
+          "history.legacy",
           "history.record",
           "overview.activeConditions",
           "overview.conflicts",
@@ -56965,7 +57291,7 @@
       {
         "field": "readings.prominentRelationship",
         "mountsSpine": 1,
-        "mountsModifier": 18,
+        "mountsModifier": 19,
         "spineTabs": [
           "overview"
         ],
@@ -56983,6 +57309,7 @@
           "economics.upstreamSupply",
           "history.founded",
           "history.identity",
+          "history.legacy",
           "history.record",
           "relationships.network",
           "viability.isolationSupport",
@@ -56993,7 +57320,7 @@
       {
         "field": "readings.prosperity",
         "mountsSpine": 0,
-        "mountsModifier": 32,
+        "mountsModifier": 33,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -57009,6 +57336,7 @@
           "economics.upstreamSupply",
           "history.founded",
           "history.identity",
+          "history.legacy",
           "history.record",
           "overview.activeConditions",
           "overview.conflicts",
@@ -57033,7 +57361,7 @@
       {
         "field": "readings.readinessLabel",
         "mountsSpine": 0,
-        "mountsModifier": 32,
+        "mountsModifier": 33,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -57049,6 +57377,7 @@
           "economics.upstreamSupply",
           "history.founded",
           "history.identity",
+          "history.legacy",
           "history.record",
           "overview.activeConditions",
           "overview.conflicts",
@@ -57073,7 +57402,7 @@
       {
         "field": "readings.recordClean",
         "mountsSpine": 1,
-        "mountsModifier": 29,
+        "mountsModifier": 30,
         "spineTabs": [
           "viability"
         ],
@@ -57091,6 +57420,7 @@
           "economics.upstreamSupply",
           "history.founded",
           "history.identity",
+          "history.legacy",
           "history.record",
           "overview.activeConditions",
           "overview.conflicts",
@@ -57112,7 +57442,7 @@
       {
         "field": "readings.relationships",
         "mountsSpine": 1,
-        "mountsModifier": 18,
+        "mountsModifier": 19,
         "spineTabs": [
           "overview"
         ],
@@ -57130,6 +57460,7 @@
           "economics.upstreamSupply",
           "history.founded",
           "history.identity",
+          "history.legacy",
           "history.record",
           "relationships.network",
           "viability.isolationSupport",
@@ -57155,7 +57486,7 @@
       {
         "field": "readings.safetyLabel",
         "mountsSpine": 0,
-        "mountsModifier": 32,
+        "mountsModifier": 33,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -57171,6 +57502,7 @@
           "economics.upstreamSupply",
           "history.founded",
           "history.identity",
+          "history.legacy",
           "history.record",
           "overview.activeConditions",
           "overview.conflicts",
@@ -57195,7 +57527,7 @@
       {
         "field": "readings.scores",
         "mountsSpine": 0,
-        "mountsModifier": 32,
+        "mountsModifier": 33,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -57211,6 +57543,7 @@
           "economics.upstreamSupply",
           "history.founded",
           "history.identity",
+          "history.legacy",
           "history.record",
           "overview.activeConditions",
           "overview.conflicts",
@@ -57251,7 +57584,7 @@
       {
         "field": "readings.steadings",
         "mountsSpine": 0,
-        "mountsModifier": 32,
+        "mountsModifier": 33,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -57267,6 +57600,7 @@
           "economics.upstreamSupply",
           "history.founded",
           "history.identity",
+          "history.legacy",
           "history.record",
           "overview.activeConditions",
           "overview.conflicts",
@@ -57306,7 +57640,7 @@
       {
         "field": "readings.structuralSuggestions",
         "mountsSpine": 1,
-        "mountsModifier": 18,
+        "mountsModifier": 19,
         "spineTabs": [
           "overview"
         ],
@@ -57324,6 +57658,7 @@
           "economics.upstreamSupply",
           "history.founded",
           "history.identity",
+          "history.legacy",
           "history.record",
           "relationships.network",
           "viability.isolationSupport",
@@ -57334,7 +57669,7 @@
       {
         "field": "readings.structuralViolations",
         "mountsSpine": 1,
-        "mountsModifier": 18,
+        "mountsModifier": 19,
         "spineTabs": [
           "overview"
         ],
@@ -57352,6 +57687,7 @@
           "economics.upstreamSupply",
           "history.founded",
           "history.identity",
+          "history.legacy",
           "history.record",
           "relationships.network",
           "viability.isolationSupport",
@@ -57362,7 +57698,7 @@
       {
         "field": "readings.terrainType",
         "mountsSpine": 0,
-        "mountsModifier": 32,
+        "mountsModifier": 33,
         "spineTabs": [],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -57378,6 +57714,7 @@
           "economics.upstreamSupply",
           "history.founded",
           "history.identity",
+          "history.legacy",
           "history.record",
           "overview.activeConditions",
           "overview.conflicts",
@@ -57402,7 +57739,7 @@
       {
         "field": "readings.tier",
         "mountsSpine": 1,
-        "mountsModifier": 18,
+        "mountsModifier": 19,
         "spineTabs": [
           "overview"
         ],
@@ -57420,6 +57757,7 @@
           "economics.upstreamSupply",
           "history.founded",
           "history.identity",
+          "history.legacy",
           "history.record",
           "relationships.network",
           "viability.isolationSupport",
@@ -57430,7 +57768,7 @@
       {
         "field": "readings.tradeRouteAccess",
         "mountsSpine": 2,
-        "mountsModifier": 18,
+        "mountsModifier": 19,
         "spineTabs": [
           "overview"
         ],
@@ -57448,6 +57786,7 @@
           "economics.upstreamSupply",
           "history.founded",
           "history.identity",
+          "history.legacy",
           "history.record",
           "relationships.network",
           "viability.isolationSupport",
@@ -57458,7 +57797,7 @@
       {
         "field": "readings.viable",
         "mountsSpine": 2,
-        "mountsModifier": 15,
+        "mountsModifier": 16,
         "spineTabs": [
           "overview",
           "viability"
@@ -57477,6 +57816,7 @@
           "economics.upstreamSupply",
           "history.founded",
           "history.identity",
+          "history.legacy",
           "history.record",
           "relationships.network"
         ]
@@ -57710,7 +58050,7 @@
       {
         "field": "settlement.name",
         "mountsSpine": 0,
-        "mountsModifier": 58,
+        "mountsModifier": 59,
         "spineTabs": [],
         "modifierMounts": [
           "daily_life.standingOfLiving",
@@ -57740,6 +58080,7 @@
           "faith.templeGround",
           "history.founded",
           "history.identity",
+          "history.legacy",
           "history.record",
           "overview.activeConditions",
           "overview.conflicts",
@@ -58308,10 +58649,10 @@
     },
     {
       "block": "DS-GEN-16",
-      "spines": 5,
-      "facts": 1,
-      "spinesReachedBp": 0,
-      "meanReachBp": 0
+      "spines": 9,
+      "facts": 2,
+      "spinesReachedBp": 10000,
+      "meanReachBp": 5000
     },
     {
       "block": "DS-GEN-17",
@@ -61101,14 +61442,29 @@
     },
     {
       "block": "DS-GEN-16",
-      "spines": 5,
-      "facts": 1,
-      "spinesReachedBp": 0,
-      "meanReachBp": 0,
+      "spines": 9,
+      "facts": 2,
+      "spinesReachedBp": 10000,
+      "meanReachBp": 5000,
       "byFact": [
         {
           "field": "events",
-          "attach": []
+          "attach": [
+            "LEGACY-UNRESOLVED",
+            "LEGACY-RECOVERED",
+            "LEGACY-SHIFTED",
+            "LEGACY-LINKED"
+          ]
+        },
+        {
+          "field": "hist.legacyAnnotations",
+          "attach": [
+            "ANCHORED-RECENT",
+            "ANCHORED-OLD",
+            "LAYERED-ANCHORED",
+            "RECORDED-UNANCHORED",
+            "UNMARKED"
+          ]
         }
       ]
     },
@@ -62458,8 +62814,8 @@
   ],
   "factBudget": {
     "zeroK": 85,
-    "executable": 485,
-    "notExecutable": 367,
+    "executable": 489,
+    "notExecutable": 368,
     "byBlock": [
       [
         "DS-DEF-5",
@@ -62773,7 +63129,7 @@
         "DS-GEN-16",
         {
           "zeroK": 0,
-          "spines": 5
+          "spines": 9
         }
       ],
       [
@@ -62886,15 +63242,15 @@
       ],
       [
         2,
-        296
+        300
       ]
     ]
   },
   "grains": {
     "branch": {
       "zeroK": 85,
-      "executable": 485,
-      "notExecutable": 367,
+      "executable": 489,
+      "notExecutable": 368,
       "histogram": [
         [
           -8,
@@ -62934,7 +63290,7 @@
         ],
         [
           2,
-          296
+          300
         ]
       ],
       "blocksWithSpine": 55,
@@ -62948,7 +63304,6 @@
         "DS-FTH-3",
         "DS-GEN-12",
         "DS-GEN-14",
-        "DS-GEN-16",
         "DS-GEN-18",
         "DS-GEN-2",
         "DS-GEN-9",
@@ -62959,7 +63314,7 @@
         "DS-SUP-2",
         "DS-WAR-3"
       ],
-      "readPaths": 844,
+      "readPaths": 848,
       "modifierEligibleFactsByTab": [
         [
           "economics",
@@ -63017,8 +63372,8 @@
     },
     "function": {
       "zeroK": 169,
-      "executable": 485,
-      "notExecutable": 367,
+      "executable": 489,
+      "notExecutable": 368,
       "histogram": [
         [
           -8,
@@ -63050,7 +63405,7 @@
         ],
         [
           2,
-          213
+          217
         ]
       ],
       "blocksWithSpine": 55,
@@ -63066,7 +63421,6 @@
         "DS-FTH-3",
         "DS-GEN-12",
         "DS-GEN-14",
-        "DS-GEN-16",
         "DS-GEN-18",
         "DS-GEN-2",
         "DS-GEN-9",
@@ -63078,7 +63432,7 @@
         "DS-SUP-2",
         "DS-WAR-3"
       ],
-      "readPaths": 1144,
+      "readPaths": 1148,
       "modifierEligibleFactsByTab": [
         [
           "economics",
@@ -63473,12 +63827,12 @@
       "rows": {
         "LICENSED": 132,
         "OFFICE": 3,
-        "SOURCE-UNRESOLVED": 717
+        "SOURCE-UNRESOLVED": 722
       },
       "fields": {
         "LICENSED": 234,
         "OFFICE": 5,
-        "SOURCE-UNRESOLVED": 845
+        "SOURCE-UNRESOLVED": 849
       },
       "byKind": [
         [
@@ -63523,11 +63877,11 @@
         ]
       ],
       "unresolvedGrounds": {
-        "no-mapping": 845,
+        "no-mapping": 849,
         "no-institution-in-roster": 0
       },
       "twoSourceRows": 10,
-      "rowsWithNoReading": 367,
+      "rowsWithNoReading": 368,
       "kindsWithNoInstitution": [
         "tradition"
       ]
@@ -64883,7 +65237,7 @@
       "leafEither": 2,
       "leafRows": [],
       "deskRoots": 108,
-      "deskSegments": 275
+      "deskSegments": 276
     }
   },
   "ratifiedAliases": {
@@ -68507,7 +68861,7 @@
       "subject": "QUANTITY: a hundred or so",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -68531,7 +68885,7 @@
       "subject": "QUANTITY: thousands",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "COVERED",
@@ -68539,7 +68893,7 @@
       "subject": "HERALD KIND: hungry_gap",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 2 grammar(s) · slots {season, settlement}"
+      "count": "3 variant(s) · 3 grammar(s) · slots {season, settlement}"
     },
     {
       "tier": "THIN",
@@ -68579,7 +68933,7 @@
       "subject": "CANDIDATE KIND: growth",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -68667,7 +69021,7 @@
       "subject": "crime_wave",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "5 variant(s) · 3 grammar(s) · slots {settlement}"
+      "count": "5 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "COVERED",
@@ -68691,7 +69045,7 @@
       "subject": "infiltration_fear",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "5 variant(s) · 3 grammar(s) · slots {faction, settlement}"
+      "count": "5 variant(s) · 2 grammar(s) · slots {faction, settlement}"
     },
     {
       "tier": "COVERED",
@@ -68759,7 +69113,7 @@
         "conflict.intensity"
       ],
       "readingFunction": "conflictIntensityPoolKey",
-      "count": "5 variant(s) · 3 grammar(s) · slots {faction, faction2, issue, settlement, stakes}"
+      "count": "5 variant(s) · 4 grammar(s) · slots {faction, faction2, issue, settlement, stakes}"
     },
     {
       "tier": "COVERED",
@@ -68769,7 +69123,7 @@
         "conflict.intensity"
       ],
       "readingFunction": "conflictIntensityPoolKey",
-      "count": "5 variant(s) · 3 grammar(s) · slots {faction, faction2, issue, settlement, stakes}"
+      "count": "5 variant(s) · 2 grammar(s) · slots {faction, faction2, issue, settlement, stakes}"
     },
     {
       "tier": "THIN",
@@ -68979,7 +69333,7 @@
         "text(label) (via PROSPERITY_POOL_OF in generalStateProse.js)"
       ],
       "readingFunction": "PROSPERITY_POOL_OF",
-      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -69029,7 +69383,7 @@
         "head (via SAFETY_POOL_OF in generalStateProse.js)"
       ],
       "readingFunction": "SAFETY_POOL_OF",
-      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -69049,7 +69403,7 @@
         "head (via SAFETY_POOL_OF in generalStateProse.js)"
       ],
       "readingFunction": "SAFETY_POOL_OF",
-      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -69059,7 +69413,7 @@
         "readings.viable"
       ],
       "readingFunction": "viabilityPoolKey",
-      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -69099,7 +69453,7 @@
         "text(label) (via READINESS_POOL_OF in generalStateProse.js)"
       ],
       "readingFunction": "READINESS_POOL_OF",
-      "count": "2 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "2 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -69159,7 +69513,7 @@
         "text(label) (via FOOD_POOL_OF in generalStateProse.js)"
       ],
       "readingFunction": "FOOD_POOL_OF",
-      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 3 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -69169,7 +69523,7 @@
         "text(label) (via FOOD_POOL_OF in generalStateProse.js)"
       ],
       "readingFunction": "FOOD_POOL_OF",
-      "count": "5 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "5 variant(s) · 4 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -69189,7 +69543,7 @@
         "text(label) (via FOOD_POOL_OF in generalStateProse.js)"
       ],
       "readingFunction": "FOOD_POOL_OF",
-      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -69215,7 +69569,7 @@
       "subject": "river",
       "fields": [],
       "readingFunction": "situationPoolKey",
-      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 3 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -69245,7 +69599,7 @@
         "text(tradeRouteAccess) (via ORIGIN_POOL_OF_ROUTE in generalStateProse.js)"
       ],
       "readingFunction": "ORIGIN_POOL_OF_ROUTE",
-      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -69269,7 +69623,7 @@
       "subject": "isolated",
       "fields": [],
       "readingFunction": "supplyLogisticsPoolKey",
-      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -69335,7 +69689,7 @@
         "`${text(note?.type)}|${text(note?.tab)}` (via COHERENCE_POOL_OF in generalStateProse.js)"
       ],
       "readingFunction": "COHERENCE_POOL_OF",
-      "count": "4 variant(s) · 2 grammar(s) · slots {band, faction, settlement}"
+      "count": "4 variant(s) · 3 grammar(s) · slots {band, faction, settlement}"
     },
     {
       "tier": "THIN",
@@ -69345,7 +69699,7 @@
         "`${text(note?.type)}|${text(note?.tab)}` (via COHERENCE_POOL_OF in generalStateProse.js)"
       ],
       "readingFunction": "COHERENCE_POOL_OF",
-      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 3 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -69365,7 +69719,7 @@
         "`${text(note?.type)}|${text(note?.tab)}` (via COHERENCE_POOL_OF in generalStateProse.js)"
       ],
       "readingFunction": "COHERENCE_POOL_OF",
-      "count": "4 variant(s) · 4 grammar(s) · slots {govFaction, settlement}"
+      "count": "4 variant(s) · 3 grammar(s) · slots {govFaction, settlement}"
     },
     {
       "tier": "THIN",
@@ -69383,7 +69737,7 @@
       "subject": "structuralViolations[]",
       "fields": [],
       "readingFunction": "structuralViolationsPoolKey",
-      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -69399,7 +69753,7 @@
       "subject": "lifecycleStatus: relic_ruin",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -69407,7 +69761,7 @@
       "subject": "lifecycleStatus: abandoned_site",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "COVERED",
@@ -69415,7 +69769,7 @@
       "subject": "history.ancientRuin present",
       "fields": [],
       "readingFunction": "ancientRuinPoolKey",
-      "count": "4 variant(s) · 4 grammar(s) · slots {ruin, settlement, timeband_age, timeband_since}"
+      "count": "4 variant(s) · 3 grammar(s) · slots {ruin, settlement, timeband_age, timeband_since}"
     },
     {
       "tier": "COVERED",
@@ -69482,12 +69836,12 @@
       "count": "3 variant(s) · 2 grammar(s) · slots {counterpart, settlement}"
     },
     {
-      "tier": "THIN",
+      "tier": "COVERED",
       "block": "DS-REL-1",
       "subject": "cold_war",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 1 grammar(s) · slots {counterpart, settlement}"
+      "count": "3 variant(s) · 2 grammar(s) · slots {counterpart, settlement}"
     },
     {
       "tier": "COVERED",
@@ -69511,7 +69865,7 @@
       "subject": "cross-settlement NPC contacts",
       "fields": [],
       "readingFunction": "crossSettlementNpcPoolKey",
-      "count": "3 variant(s) · 2 grammar(s) · slots {counterpart, npc, settlement}"
+      "count": "3 variant(s) · 3 grammar(s) · slots {counterpart, npc, settlement}"
     },
     {
       "tier": "COVERED",
@@ -69535,7 +69889,7 @@
       "subject": "flagDriven count > 0",
       "fields": [],
       "readingFunction": "flagDrivenPoolKey",
-      "count": "4 variant(s) · 1 grammar(s) · slots {band, settlement}"
+      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -69543,7 +69897,7 @@
       "subject": "flagDriven count zero",
       "fields": [],
       "readingFunction": "flagDrivenPoolKey",
-      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "COVERED",
@@ -69583,7 +69937,7 @@
       "subject": "event type: economic",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "4 variant(s) · 2 grammar(s) · slots {event, settlement, timeband_since}"
+      "count": "4 variant(s) · 3 grammar(s) · slots {event, settlement, timeband_since}"
     },
     {
       "tier": "COVERED",
@@ -69737,7 +70091,7 @@
       "subject": "category tension: the standing quarrels are the opening",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "4 variant(s) · 3 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -69761,7 +70115,7 @@
       "subject": "category history: the past is the opening",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -69777,7 +70131,7 @@
       "subject": "clock bread_riot",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -69785,7 +70139,7 @@
       "subject": "clock smuggling_rise",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "COVERED",
@@ -69793,7 +70147,7 @@
       "subject": "clock legitimacy_crisis",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "4 variant(s) · 4 grammar(s) · slots {governing, settlement}"
+      "count": "4 variant(s) · 3 grammar(s) · slots {governing, settlement}"
     },
     {
       "tier": "COVERED",
@@ -69825,7 +70179,7 @@
       "subject": "viable: false: the arithmetic does not close",
       "fields": [],
       "readingFunction": "viabilityVerdictPoolKey",
-      "count": "4 variant(s) · 3 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -69849,7 +70203,7 @@
       "subject": "THE FIRST-SURVEY QUALIFICATION",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -69907,7 +70261,7 @@
       "subject": "MARKET-OPEN",
       "fields": [],
       "readingFunction": "marketPoolKey",
-      "count": "4 variant(s) · 3 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -69987,7 +70341,7 @@
       "subject": "FOUNDED-YOUNG",
       "fields": [],
       "readingFunction": "foundedPoolKey",
-      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "COVERED",
@@ -70011,7 +70365,7 @@
       "subject": "RISING-OPEN",
       "fields": [],
       "readingFunction": "populationDirectionPoolKey",
-      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -70035,7 +70389,7 @@
       "subject": "FALLING-OPEN",
       "fields": [],
       "readingFunction": "populationDirectionPoolKey",
-      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -70083,7 +70437,7 @@
       "subject": "WORN-PLAIN",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "2 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "2 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "COVERED",
@@ -70094,12 +70448,12 @@
       "count": "3 variant(s) · 2 grammar(s) · slots {calamity, settlement}"
     },
     {
-      "tier": "THIN",
+      "tier": "COVERED",
       "block": "DS-GEN-16",
       "subject": "ANCHORED-OLD",
       "fields": [],
       "readingFunction": "eventRecordPoolKey",
-      "count": "3 variant(s) · 1 grammar(s) · slots {calamity, settlement, timeband_age}"
+      "count": "3 variant(s) · 2 grammar(s) · slots {calamity, settlement, timeband_age}"
     },
     {
       "tier": "THIN",
@@ -70123,7 +70477,47 @@
       "subject": "UNMARKED",
       "fields": [],
       "readingFunction": "eventRecordPoolKey",
-      "count": "2 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "2 variant(s) · 2 grammar(s) · slots {settlement}"
+    },
+    {
+      "tier": "COVERED",
+      "block": "DS-GEN-16",
+      "subject": "LIVING-MEMORY",
+      "fields": [],
+      "readingFunction": "(unresolved)",
+      "count": "2 variant(s) · 2 grammar(s) · slots {calamity, settlement}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-GEN-16",
+      "subject": "LEGACY-UNRESOLVED",
+      "fields": [],
+      "readingFunction": "legacyPoolKey",
+      "count": "2 variant(s) · 1 grammar(s) · slots {calamity, settlement, timeband_age}"
+    },
+    {
+      "tier": "COVERED",
+      "block": "DS-GEN-16",
+      "subject": "LEGACY-RECOVERED",
+      "fields": [],
+      "readingFunction": "legacyPoolKey",
+      "count": "2 variant(s) · 2 grammar(s) · slots {calamity, settlement, timeband_age}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-GEN-16",
+      "subject": "LEGACY-SHIFTED",
+      "fields": [],
+      "readingFunction": "legacyPoolKey",
+      "count": "2 variant(s) · 1 grammar(s) · slots {calamity, settlement, timeband_age}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-GEN-16",
+      "subject": "LEGACY-LINKED",
+      "fields": [],
+      "readingFunction": "legacyPoolKey",
+      "count": "2 variant(s) · 1 grammar(s) · slots {calamity, settlement, timeband_age}"
     },
     {
       "tier": "THIN",
@@ -70131,7 +70525,7 @@
       "subject": "ADMINISTERED",
       "fields": [],
       "readingFunction": "institutionsPoolKey",
-      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -70139,7 +70533,7 @@
       "subject": "GARRISONED",
       "fields": [],
       "readingFunction": "institutionsPoolKey",
-      "count": "2 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "2 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -70182,12 +70576,12 @@
       "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
-      "tier": "COVERED",
+      "tier": "THIN",
       "block": "DS-GEN-18",
       "subject": "STALLED",
       "fields": [],
       "readingFunction": "craftReasonPoolKey",
-      "count": "2 variant(s) · 2 grammar(s) · slots {institution, resource, settlement}"
+      "count": "2 variant(s) · 1 grammar(s) · slots {institution, resource, settlement}"
     },
     {
       "tier": "COVERED",

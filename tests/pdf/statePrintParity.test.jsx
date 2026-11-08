@@ -300,6 +300,7 @@ function screenProse(s, faithUnlocked = false) {
 
   set('history.identity', screenWeave(s, general.history.identityLines));
   set('history.founded', screenWeave(s, [general.history.foundedLine, general.history.recordLine]));
+  set('history.legacy', screenWeave(s, general.history.legacyLines));
   set('plot_hooks.framing', screenWeave(s, general.hooks.framingLines.slice(0, 3)));
 
   // DS-REL-1. The screen renders each inner pair beside its own neighbour card and each

@@ -631,9 +631,10 @@ export function buildPrintProse(settlement, ctx = {}) {
   // positive and this exact cure: `history` has a single home in the corpus, so the scan
   // grounds `general.history` to the settlement's history container and reads these three as
   // keys no writer produces there. They are this reader's own frozen return value.
-  const { identityLines, foundedLine, recordLine } = general.history;
+  const { identityLines, foundedLine, recordLine, legacyLines } = general.history;
   put('history', 'history.identity', identityLines);
   put('history', 'history.founded', [foundedLine, recordLine]);
+  put('history', 'history.legacy', legacyLines);
 
   put('plot_hooks', 'plot_hooks.framing', general.hooks.framingLines.slice(0, HOOK_FRAMING.cap));
 

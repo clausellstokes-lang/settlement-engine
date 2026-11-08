@@ -415,7 +415,9 @@ describe('RR — the REAL pipeline, not only the pool module', () => {
     let generated = 0;
     for (const [arm, cfg] of ARM_CONFIGS) {
       for (const tier of ['village', 'city']) {
-        for (let i = 0; i < 6; i += 1) {
+        // 6 -> 16 per arm and tier at #10 (W5 HIS 2026-11-07): a port route whose roster carries no docks
+        // now takes its terrain's reason, so the port arms need more births to keep the body floor honest.
+        for (let i = 0; i < 16; i += 1) {
           const s = gen({ settType: tier, culture: 'germanic', monsterThreat: 'civilized', ...cfg }, `rr-coh-${arm}-${tier}-${i}`);
           generated += 1;
           bodies.add(originOf(s));
@@ -432,7 +434,7 @@ describe('RR — the REAL pipeline, not only the pool module', () => {
     expect(findings, `settlementReason coherence findings:\n${findings.join('\n')}`).toEqual([]);
     // LIVENESS: a sweep that generated nothing, or that reached one body, would
     // satisfy the exclusion above while proving nothing at all.
-    expect(generated).toBe(ARM_CONFIGS.length * 2 * 6);
+    expect(generated).toBe(ARM_CONFIGS.length * 2 * 16);
     expect(bodies.size, 'distinct origin bodies reached by the sweep').toBeGreaterThanOrEqual(30);
   }, 120_000);
 });

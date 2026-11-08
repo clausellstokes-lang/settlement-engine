@@ -59,6 +59,7 @@ const POPULATION_MOUNT = 'overview.populationDirection';
 const IDENTITY_MOUNT = 'history.identity';
 const FOUNDED_MOUNT = 'history.founded';
 const RECORD_MOUNT = 'history.record';
+const LEGACY_MOUNT = 'history.legacy';
 
 /** The VIABILITY and PLOT-HOOKS positions. */
 const VERDICT_MOUNT = 'viability.verdict';
@@ -95,6 +96,7 @@ const SILENT_HISTORY = Object.freeze({
   identityLines: Object.freeze([]),
   foundedLine: null,
   recordLine: null,
+  legacyLines: Object.freeze([]),
 });
 
 /** The same, for the viability verdict and the plot-hook framing. */
@@ -304,7 +306,7 @@ export function generalDeskLines(settlement, options = {}) {
   // defect that scan already documents for `window.history.replaceState`, with `prose` in
   // the receiver slot; the exclusion there is a host-global list this name cannot join, and
   // the baseline refuses to absorb a NEW identity, so the cure is at the read.
-  const { identity, founded, record } = prose.history;
+  const { identity, founded, record, legacy } = prose.history;
   return Object.freeze({
     overview: Object.freeze({
       // ⛔ ALWAYS EMPTY SINCE OWNER ORDER 2026-09-17: `overview.systemsHealth` is a GLANCE row,
@@ -340,6 +342,7 @@ export function generalDeskLines(settlement, options = {}) {
         .map((rung) => line(IDENTITY_MOUNT, rung)).filter(Boolean)),
       foundedLine: line(FOUNDED_MOUNT, founded),
       recordLine: line(RECORD_MOUNT, record),
+      legacyLines: Object.freeze(legacy.map((rung) => line(LEGACY_MOUNT, rung)).filter(Boolean)),
     }),
     viability: Object.freeze({
       // ONE LENS OF THREE (UX consolidation 2026-10-30, RULINGS-T2 T2-13; RUBRIC R2): the

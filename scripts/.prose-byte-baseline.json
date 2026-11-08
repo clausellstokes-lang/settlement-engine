@@ -67,8 +67,8 @@
       "ceilingGzip": 87513
     },
     "src/data/dossierStateProse/general.generated.js": {
-      "raw": 283292,
-      "gzip": 37813,
+      "raw": 278685,
+      "gzip": 35421,
       "ceilingRaw": 796761,
       "ceilingGzip": 177058
     },
@@ -507,6 +507,14 @@
       "toRaw": 147476,
       "gzipAfter": 20772,
       "reason": "+6 B raw (gzip level 9: 20,773 -> 20,772): one line re-worded ('nothing is left over' -> 'there is never enough left') because proseDrawnAnchors read an unrelated assertion message in proseWiringCensus.walker.test.js as a literal anchor on it; no pool, variant, mark or slot added. Projected through node scripts/generate-dossier-state-prose.mjs; --check exit 0."
+    },
+    {
+      "car": "W5 HIS construction 2026-11-07 (WIRING-RULINGS R-W1, ODQ §934.105): DS-GEN-16's living-memory and legacy lines said",
+      "leaf": "src/data/dossierStateProse/general.generated.js",
+      "fromRaw": 283292,
+      "toRaw": 287856,
+      "gzipAfter": 36900,
+      "reason": "+4564 B raw (gzip level 9: 36,445 -> 36,900), one commit: DS-GEN-16 gains LIVING-MEMORY and four LEGACY-* pools, two variants each (10 variants), reading history.siegeNarrative and history.legacyAnnotations[]; projected through `node scripts/generate-dossier-state-prose.mjs`; `--check` exit 0. RE-CHAINED at MERGE-WAVE's W5 HIS merge (2026-11-08): the lane measured 272147 -> 276711 over the base; composed over W1 ECO's and W4 PEOPLE's general-leaf rows (272147 -> 283292) the same +4564 stands from 283292. The lane's later style-law rewrites shrink the leaf with no declaration owed; the committed figure is the composed leaf's."
     }
   ],
   "ceilingTransfersNewLeaves": [

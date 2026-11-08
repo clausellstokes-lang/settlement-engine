@@ -18,7 +18,8 @@
  * No imports. No closures. No runtime work. Pure data.
  */
 
-/** @typedef {{ label: string, historyColour: string, viabilityNote: string }} StressTypeMeta */
+/** @typedef {{ label: string, historyColour: string, viabilityNote: string,
+ *   viabilityNoteByDirection?: {arrivals: string, departures: string} }} StressTypeMeta */
 
 /** @type {Record<string, StressTypeMeta>} */
 export const STRESS_TYPE_META = {
@@ -95,6 +96,16 @@ export const STRESS_TYPE_META = {
   mass_migration: {
     label: 'Mass Migration',
     historyColour: 'demographic',
+    // The TYPE's note names both directions because the catalogue lists the kind, not a town
+    // (R-W7 e, W0's `stress[].direction`). A settlement's entry never prints this line: it carries
+    // the ONE half its own direction names, declared here exactly as `stressTypes.js` declares it
+    // (W5 HIS, WAVE-RULINGS item 9, 2026-11-07), so this pure-data mirror reads the direction too.
+    // MERGE-WAVE (2026-11-08, brief §0.4): W5's per-direction halves take W4 PEOPLE's new note (0f41f075a), split
+    // exactly as src/data/stressTypes.js derives them (MIGRATION_VIABILITY_NOTE at the cut, first letter raised).
     viabilityNote: 'If people arrive: food will run short, there will not be work for everyone, and some newcomers will take what they cannot earn. If people leave: taxes will fall short, offices will stand empty, and the fields will lack the hands to work them.',
+    viabilityNoteByDirection: {
+      arrivals: 'Food will run short, there will not be work for everyone, and some newcomers will take what they cannot earn.',
+      departures: 'Taxes will fall short, offices will stand empty, and the fields will lack the hands to work them.',
+    },
   },
 };
