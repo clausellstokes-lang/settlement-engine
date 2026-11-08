@@ -12,7 +12,7 @@
  * those precedence rules explicit when adding new narrative cases.
  */
 
-import { resolveGenerationWorldLaw } from '../generationContext.js'; import { migrationDirectionOfConfig } from '../../domain/migrationDirection.js'; import { resolveSibling } from '../../domain/facts/drawDeclared.js'; import { factsOf } from '../../domain/facts/factsOf.js'; import { BASELINE_CONFLICT_SIBLINGS } from '../../data/powerSiblings.js'; export { BASELINE_CONFLICT_SIBLINGS }; import { buildInsurgencyNarrative, buildMigrationNarrative, buildReligiousConversionNarrative, buildWartimeNarrative } from './governingStressVignettes.js'; // F10, CENSUS-1c, CENSUS-5c (R-AB: the table moved to data/powerSiblings.js, re-exported): one line, so no cited line moves — LANDING-R2 (ODQ §934.105): the four governing-faction stress vignettes moved verbatim to power/governingStressVignettes.js, imported on this line, so no cited line moves
+import { resolveGenerationWorldLaw } from '../generationContext.js'; import { migrationDirectionOfConfig } from '../../domain/migrationDirection.js'; import { resolveSibling } from '../../domain/facts/drawDeclared.js'; import { factsOf } from '../../domain/facts/factsOf.js'; import { BASELINE_CONFLICT_SIBLINGS } from '../../data/powerSiblings.js'; export { BASELINE_CONFLICT_SIBLINGS }; import { buildInsurgencyNarrative, buildMigrationNarrative, buildReligiousConversionNarrative, buildWartimeNarrative } from './governingStressVignettes.js'; import { migrationDirectionOf } from '../../domain/crisis/migrationDirection.js'; // F10, CENSUS-1c, CENSUS-5c (R-AB: the table moved to data/powerSiblings.js, re-exported): one line, so no cited line moves — LANDING-R2 (ODQ §934.105): the four governing-faction stress vignettes moved verbatim to power/governingStressVignettes.js, imported on this line, so no cited line moves — W3 POW (WAVE-RULINGS item 8): the label reads the entry's direction through F13's reader, imported on this line
 
 const SMALL_SETTLEMENT_TIERS = new Set(['thorp', 'hamlet', 'village']);
 
@@ -280,7 +280,7 @@ const deriveBaselineStability = ({
  */
 const applyStressStability = (baselineStability, hasStress, migrationDirection = 'arrivals') => {
   if (hasStress('under_siege')) {
-    return 'Critical (active siege — survival priority)';
+    return 'Critical (under siege)';
   }
   if (hasStress('occupied')) {
     return 'Suppressed (under occupation: resistance simmers)';
@@ -289,13 +289,13 @@ const applyStressStability = (baselineStability, hasStress, migrationDirection =
     return 'Fractured — no stable governing authority';
   }
   if (hasStress('recently_betrayed')) {
-    return 'Shaken — institutional trust collapsed';
+    return 'Shaken — nobody trusts those in charge';
   }
   if (hasStress('famine')) {
     return 'Desperate — hunger is eroding order';
   }
   if (hasStress('plague_onset')) {
-    return 'Anxious — disease is overriding normal authority';
+    return 'Anxious — people fear the sickness more than they heed orders';
   }
   if (hasStress('succession_void')) {
     return 'Volatile — power is available to whoever moves first';
@@ -303,7 +303,7 @@ const applyStressStability = (baselineStability, hasStress, migrationDirection =
   if (hasStress('indebted')) {
     return baselineStability.includes('Unstable')
       ? baselineStability
-      : 'Strained — debt obligations constrain every decision';
+      : 'Strained — the creditors have a say in every decision';
   }
   if (
     hasStress('monster_pressure') &&
@@ -330,7 +330,7 @@ const annotateMonsterThreat = (stability, monsterThreat) => {
   if (monsterThreat !== 'plagued') return stability;
   const alreadyExpressesPressure = MONSTER_THREAT_ANNOTATION_MARKERS.test(stability);
   return alreadyExpressesPressure
-    ? `${stability}; monster threat active`
+    ? `${stability}; monsters on the roads`
     : 'Tense — regional monster threat';
 };
 
@@ -421,10 +421,10 @@ const deriveBaselineConflict = ({
       ? "Two guild masters are having each other's warehouses robbed. Both deny it publicly. Both are losing patience."
       : "Two households have been undercutting each other on market day for months. Last week someone's cart was damaged. No one saw anything.";
   }
-  if (neighbourRelationship) return `Ongoing tensions with ${neighbourRelationship.neighborName}`;
+  if (neighbourRelationship) return `Relations with ${neighbourRelationship.neighborName} have soured, and everyone here knows it.`;
   if (institutionFlags.criminalEffective > 65) {
     return hasMilitaryInstitution || hasCivicInstitution
-      ? 'Crime rates are rising; several merchants have been found murdered, and the guard is being accused of inaction.'
+      ? 'Several merchants have been found murdered this season, and people say the guard is doing nothing about it.'
       : 'Someone has been stealing from the communal stores. Everyone suspects someone. No one is saying anything.';
   }
   if (hasRoyalAuthority && hasNoblePower && priorities.military > 55) {
@@ -434,7 +434,7 @@ const deriveBaselineConflict = ({
     if (priorities.military > 70) {
       return 'A noble house has begun recruiting its own soldiers beyond its traditional levy obligation. The crown has noticed and has not yet decided what to say about it.';
     }
-    return "The crown's relationship with the noble houses is transactional and increasingly strained. The last royal directive was delayed six weeks while passing through noble intermediaries.";
+    return "The crown's last order took six weeks to get through the noble houses that were meant to pass it on. The crown and the nobles bargain over everything now, and each bargain comes harder.";
   }
   if (hasNoblePower && institutionFlags.economyOutput > 55) {
     return priorities.economy > 65
@@ -483,7 +483,7 @@ const deriveBaselineConflict = ({
   if (hasMarketInstitution) {
     return 'A dispute over field rotation and grazing rights has divided the village for most of this season.';
   }
-  return 'A dispute over grazing rights and water access has been running for two seasons. It has stopped being about grazing rights and water access.';
+  return 'A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.';
 };
 
 const selectPrimaryStress = (stressTypes, fallbackStressType) => {
@@ -533,13 +533,13 @@ const buildBetrayalNarrative = ({
 
 const buildSlaveRevoltNarrative = (institutionNames) => {
   const revoltOrigin = includesInstitution(institutionNames, 'slave market')
-    ? 'the slave market'
-    : "the settlement's labour system";
+    ? 'at the slave market'
+    : 'among the bonded labourers';
   return (
-    `The revolt began at ${revoltOrigin} and has not been contained. ` +
-    'The security response has been slow, partly because no one in authority wanted to admit publicly how organised the resistance was. ' +
-    "Buildings controlled by the revolt's leadership are marked. Movement in and out of certain districts is contested. " +
-    "The governing faction's official position is that this is being handled. Its private position involves considerably more urgency."
+    `The revolt began ${revoltOrigin} and has not been put down. ` +
+    'Those in charge were slow to act, because nobody wanted to admit how organised the rebels were. ' +
+    "The rebels' buildings are marked, and some streets are contested. " +
+    'In public, those in charge say it is being handled; in private, they are scrambling.'
   );
 };
 
@@ -563,10 +563,10 @@ const buildStressNarratives = ({
 
   return {
     under_siege:
-      'The settlement is under active siege. Every resource decision is a military decision. The debate is no longer about policy. It is about survival.',
+      'The settlement is under siege. Its stores and every able pair of hands now go to the defence, and nothing else is discussed.',
     famine:
       hasMilitaryInstitution || hasCivicInstitution || hasMarketInstitution
-        ? 'Food shortages have sharpened every tension in the settlement. Those with stocks are not advertising the fact. Those without are watching those with.'
+        ? 'Food is short, and every quarrel in the settlement has grown sharper for it. Those with stocks are not advertising the fact. Those without are watching those with.'
         : 'The last harvest failed badly. What remains is being rationed by whoever holds the stores. Neighbours who shared meals last winter are watching each other carefully.',
     occupied:
       `An occupying officer arrested a local elder for "seditious speech". ${governingFactionName}` +
@@ -575,12 +575,12 @@ const buildStressNarratives = ({
       hasCivicInstitution ||
       hasMilitaryInstitution ||
       hasUrbanCommerceInstitution
-        ? 'Two of the three factions are no longer attending joint council meetings. Decisions are being made unilaterally and contradicted by rivals within days.'
+        ? 'Two factions have stopped coming to council meetings. Each makes its own decisions now, and the others overturn them within days.'
         : 'The community is split. Two households are not speaking to each other or to anyone who sides with the other. Everything requiring collective decision has stopped.',
     indebted:
       hasRoyalAuthority && hasNoblePower
-        ? "The crown's debt to the noble houses has become structural. Three major policy decisions this year were reversed after private meetings with creditor lords. No one publicly acknowledges the connection."
-        : "The creditor's representative blocked the infrastructure repair budget. Publicly they cited fiscal responsibility. Privately they cited a clause in the debt agreement.",
+        ? "The crown owes the noble houses more than it can repay. Three of its decisions this year were reversed after private meetings with the lords it owes, and nobody admits the connection."
+        : "The creditor's agent has blocked the money for repairs. In public they talk of prudence; in private they point to a clause in the loan.",
     recently_betrayed: buildBetrayalNarrative({
       hasRoyalAuthority,
       hasNoblePower,
@@ -589,7 +589,7 @@ const buildStressNarratives = ({
     }),
     infiltrated: baselineConflict,
     plague_onset:
-      'The quarantine has been imposed on the affected district. Compliance is partial. Two people who attempted to enforce it were assaulted.',
+      'The sick have been shut away under quarantine. Many ignore it, and two people who tried to enforce it were beaten.',
     succession_void: hasRoyalAuthority
       ? hasNoblePower
         ? 'Two noble houses are contesting the succession. Both have legal arguments. Both have soldiers. The settlement is watching which house the other noble families back, because that is what will decide it.'
@@ -647,7 +647,7 @@ export const buildGovernanceLabels = ({
   const magicWorks = resolveGenerationWorldLaw(worldLaw, config).magicFunctions();
   const hasStress = stressType => stressTypes.includes(stressType);
   const monsterThreat = config?.monsterThreat || 'frontier';
-  const migrationDirection = migrationDirectionOfConfig(config) || 'arrivals'; // WIRING-W0 (R-W7 e): the one declared direction
+  const migrationEntry = (stressEntries || []).find((e) => e?.type === 'mass_migration') ?? { type: 'mass_migration', direction: migrationDirectionOfConfig(config) || 'arrivals' }; const migrationDirection = migrationDirectionOf(migrationEntry) === 'exodus' ? 'departures' : 'arrivals'; // WAVE-RULINGS item 8 (W3 POW): the stability label reads stress[].direction — the entry's own, else its config projection — the one field the vignette reads; both sets, arrivals and departures
 
   const baselineStability = deriveBaselineStability({
     stressFlags,
@@ -699,7 +699,7 @@ export const buildGovernanceLabels = ({
   const stressNarratives = buildStressNarratives({
     // MERGE-R2 (the chair's ruling 1): the vignette reads W0's one field — the entry's own, else its
     // config projection (stressConfirmPass) — through F13's reader; no second derivation.
-    migrationEntry: (stressEntries || []).find((e) => e?.type === 'mass_migration') ?? { type: 'mass_migration', direction: migrationDirection },
+    migrationEntry,
     baselineConflict: null, // set below, once resolved where it prints
     institutionFlags,
     institutionNames,

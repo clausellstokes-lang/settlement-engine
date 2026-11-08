@@ -297,7 +297,7 @@ export function legitimacyLensPoolKey(legitimacy) {
  * existing worlds), and it is raised for the chair rather than patched here.
  *
  * ⚠ `siege matched` IS CHECKED BEFORE THE FIRST WORD, and it costs a pool. The only label
- * carrying either token is `Critical (active siege — survival priority)`, so exactly one of
+ * carrying either token is `Critical (under siege)`, so exactly one of
  * `siege matched` / `critical matched` can ever fire. The siege prose ("the walls have
  * settled it") is written for precisely that state and the critical prose is the general
  * case, so most-specific-wins takes siege — the same rule DS-POW-1's lens uses.

@@ -46,7 +46,7 @@ describe('R-D1 unit 2: the baseline conflict is resolved only where it prints', 
 
   it('a siege narrative overrides the baseline: the set is not drawn and writes no note', () => {
     const { result, ledger } = run(['under_siege']);
-    expect(result.recentConflict).toMatch(/^The settlement is under active siege\./);
+    expect(result.recentConflict).toMatch(/^The settlement is under siege\./); // W3 POW: the siege narrative's words of 2026-11-07
     expect(baselineNotes(ledger)).toEqual([]);
   });
 

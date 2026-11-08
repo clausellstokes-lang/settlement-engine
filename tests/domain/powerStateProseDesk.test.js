@@ -398,14 +398,14 @@ const REAL_STABILITY = Object.freeze([
   ['Unstable (pervasive organized crime)', 'unstable matched'],
   ['Unstable — criminal governance', 'unstable matched'],
   ['Volatile — power is available to whoever moves first', 'unstable matched'],
-  ['Critical (active siege — survival priority)', 'siege matched'],
+  ['Critical (under siege)', 'siege matched'], // W3 POW: the producer's words of 2026-11-07
   ['Desperate — hunger is eroding order', 'Desperate matched'],
   // ⛔ THE REGRESSION PIN. A substring test for `stable` MATCHES "no stable governing
   // authority" and would print "The hall is settled" about a settlement that has none.
   ['Fractured — no stable governing authority', 'no token matched: unclassified (the plain-description floor)'],
-  ['Shaken — institutional trust collapsed', 'no token matched: unclassified (the plain-description floor)'],
+  ['Shaken — nobody trusts those in charge', 'no token matched: unclassified (the plain-description floor)'],
   ['Tense (external threat)', 'no token matched: unclassified (the plain-description floor)'],
-  ['Anxious — disease is overriding normal authority', 'no token matched: unclassified (the plain-description floor)'],
+  ['Anxious — people fear the sickness more than they heed orders', 'no token matched: unclassified (the plain-description floor)'],
   ['Suppressed (under occupation — resistance simmers)', 'no token matched: unclassified (the plain-description floor)'],
   ['Ordered (strong military presence)', 'no token matched: unclassified (the plain-description floor)'],
   ['Vulnerable (prosperous but underdefended)', 'no token matched: unclassified (the plain-description floor)'],
@@ -472,10 +472,10 @@ describe('DS-POW-2 — the ladder is the producer\'s, and the substring bug stay
     expect(arcOf('Stable')).toBe('continuity');
     expect(arcOf('Unstable (pervasive organized crime)')).toBe('test');
     expect(arcOf('Volatile — power is available to whoever moves first')).toBe('test');
-    expect(arcOf('Critical (active siege — survival priority)')).toBe('crisis');
+    expect(arcOf('Critical (under siege)')).toBe('crisis');
     expect(arcOf('Desperate — hunger is eroding order')).toBe('crisis');
     // A monster-threat annotation appends a suffix and must not move the classification.
-    expect(arcOf('Unstable — criminal governance; monster threat active')).toBe('test');
+    expect(arcOf('Unstable — criminal governance; monsters on the roads')).toBe('test');
   });
 
   it('the desk REFINES the canonical arc rather than forking it', () => {
@@ -500,7 +500,7 @@ describe('DS-POW-2 — the ladder is the producer\'s, and the substring bug stay
   });
 
   it('⚠ `critical matched` has NO producer today — declared, and pinned so it cannot hide', () => {
-    // The only label carrying either token is `Critical (active siege — survival priority)`,
+    // The only label carrying either token is `Critical (under siege)`,
     // and most-specific-wins routes it to `siege matched`. So this pool is mounted and
     // unreachable. If a producer ever emits a critical stability WITHOUT a siege, this arm
     // reds and someone lights the pool instead of it staying quietly dead.
@@ -556,7 +556,7 @@ describe('DS-POW-2 — ALIVENESS: all nine pools fire, and {seat} stays delibera
     const CASES = [
       ['stable matched', ruled('Stable', { factions: DOMINANT_FACTIONS })],
       ['unstable matched', ruled('Unstable — criminal governance', { factions: DOMINANT_FACTIONS })],
-      ['siege matched', ruled('Critical (active siege — survival priority)', { factions: DOMINANT_FACTIONS })],
+      ['siege matched', ruled('Critical (under siege)', { factions: DOMINANT_FACTIONS })],
       ['Desperate matched', ruled('Desperate — hunger is eroding order', { factions: DOMINANT_FACTIONS })],
       ['no token matched: unclassified (the plain-description floor)', ruled('Tense (external threat)', { factions: DOMINANT_FACTIONS })],
       ['critical matched', ruled('Critical — the seat is failing', { factions: DOMINANT_FACTIONS })],

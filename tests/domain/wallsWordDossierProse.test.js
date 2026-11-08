@@ -31,7 +31,7 @@ import { CALM_FACTS_ADMIT_ALL } from '../helpers/calmFactsDouble.js';
 /** CENSUS-5: the no-walls read hands facts too (a pool may declare fact atoms): calm, every presence fact held but the perimeter. */
 const NO_WALLS_FACTS = Object.freeze({ ...CALM_FACTS_ADMIT_ALL, defence: Object.freeze({ ...CALM_FACTS_ADMIT_ALL.defence, walls: false, wallKind: null, palisade: false, gate: false }) });
 
-const SIEGE = 'Critical (active siege — survival priority)';
+const SIEGE = 'Critical (under siege)'; // W3 POW: the producer's words of 2026-11-07
 
 /** The three births, trimmed to what the stability header reads. */
 const BIRTHS = Object.freeze([
