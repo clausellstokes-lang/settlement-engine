@@ -29,6 +29,9 @@ import { deepClone } from '../clone.js';
 // the authored word lists), so this domain→lib edge stays headless — no React,
 // no store, nothing that could taint the engine spine through the back door.
 import { veilDeep } from '../../lib/civility.js';
+// FIX-PUBLIC-VEIL (migration 206 twin): the veil bit's reader (people/cardPowers.js, a leaf whose
+// closure is membership.js and deterministicSort.js): read, never re-derived.
+import { cardInstitutionVeilOf, publicMembershipsOf } from '../people/cardPowers.js';
 
 // ── Public top-level allowlist ──────────────────────────────────────────────
 // Character-identical (order-independent) to the NET-CURRENT public_toplevel
@@ -115,7 +118,7 @@ export const PRIVATE_KEY_RE = /(secret|private|\bdm|\bgm|guidance|dossierNotes|t
 
 // ── Public NPC field allowlist ──────────────────────────────────────────────
 // Character-identical (order-independent) to the SQL npc_allowed array in
-// _gallery_sanitize_public_json (033, recreated net-current through 205) and to
+// _gallery_sanitize_public_json (033, recreated net-current through 206) and to
 // the publicNpc() object literal below. KEEP publicNpc a plain object literal —
 // tests/security/gallerySanitizer.pglite.test.js parses that literal by regex
 // and pins it to the SQL npc_allowed; this constant is behaviourally pinned to
@@ -124,13 +127,49 @@ export const PRIVATE_KEY_RE = /(secret|private|\bdm|\bgm|guidance|dossierNotes|t
 // Used by sanitizePublicValue to reduce ROSTER member records — see the member
 // gate there (migration 189 twin). Migration 205 drops 'factionAffiliation' and
 // 'secondaryAffiliation', the people car's retired per-NPC faction fields (a card's
-// standing in the powers is its `memberships`, which is not public); the card's
-// `institution` and `memberships` stay off this list until the chair rules how a
-// hidden or criminal house is told apart per row (docs/FIX_EXPORT_KEYS_2026-11-07.md §3).
+// standing in the powers is its `memberships`). The card's `institution` and
+// `memberships` are NOT on this list: they are public PER ROW, by the veil bit
+// (NPC_HOUSE_KEYS below, migration 206).
 export const NPC_PUBLIC_KEYS = Object.freeze([
   'id', 'name', 'role', 'title', 'category', 'personality', 'physical',
   'presentation', 'influence',
 ]);
+
+// ── THE VEIL BIT (FIX-PUBLIC-VEIL, migration 206 twin) ─────────────────────
+// The chair's ruling of 2026-11-07, shape (a): every writer of a card's
+// `institution` stamps `institution.veiled: true | false` at birth from ONE
+// predicate (src/domain/people/cardVeil.js — the gallery veil's hideable house,
+// a hidden or criminal power for a minted face). This projection READS the bit
+// and never re-derives it:
+//   • `veiled === false` — the house is public: NPC_HOUSE_KEYS (`institution`,
+//     `memberships`) join the card, and `title`/`role` stay; each membership rides
+//     only where its OWN `veiled` is false (the same law per entry);
+//   • the card carries an `institution` RECORD with the bit true or ABSENT (a
+//     card born before the fix) — fail-closed: NPC_HOUSE_KEYS stay off and
+//     NPC_HOUSE_NAMED_KEYS (`title`, `role` — the face's title, "the bloc's
+//     speaker" for the hidden infiltrator's mint) are stripped too: the bare name;
+//   • no `institution` record — no object of kind 'house' | 'power' naming a key, as
+//     people/cardPowers.js :: cardInstitutionOf reads it (a pre-car card, a DM's person,
+//     `institution: null`, a legacy string, a malformed object) — untouched: today's
+//     NPC_PUBLIC_KEYS, nothing of a house to name.
+// Character-identical to the SQL npc_house_keys / npc_house_named arrays in
+// _gallery_sanitize_public_json (206); pinned by gallerySanitizer.pglite.test.js.
+export const NPC_HOUSE_KEYS = Object.freeze(['institution', 'memberships']);
+export const NPC_HOUSE_NAMED_KEYS = Object.freeze(['title', 'role']);
+
+// The bit's reader is the people leaf src/domain/people/cardPowers.js: read, never re-derived.
+/**
+ * Is `key` public on this NPC object? NPC_PUBLIC_KEYS, less NPC_HOUSE_NAMED_KEYS on a
+ * veiled card, plus NPC_HOUSE_KEYS on a public one. The roster-member gate and
+ * publicCard below share it, as the SQL's one is_npc_obj arm does.
+ * @param {Record<string, unknown>} npc @param {string} key @returns {boolean}
+ */
+function isNpcKeyPublic(npc, key) {
+  const veil = cardInstitutionVeilOf(npc);
+  if (NPC_HOUSE_KEYS.includes(key)) return veil === 'public';
+  if (NPC_HOUSE_NAMED_KEYS.includes(key) && veil === 'veiled') return false;
+  return NPC_PUBLIC_KEYS.includes(key);
+}
 
 /**
  * Recursively strip denied keys from a subtree; preserves history.currentTensions.
@@ -184,12 +223,14 @@ export function sanitizePublicValue(value, path = []) {
     const childPath = [...path, key];
     if (PRIVATE_KEY_RE.test(key)) continue;
     if (childPath.includes('npcs') && ['goal', 'secret', 'plotHooks', 'relationships'].includes(key)) continue;
-    if (isFactionMember && !NPC_PUBLIC_KEYS.includes(key)) continue;
+    if (isFactionMember && !isNpcKeyPublic(/** @type {Record<string, unknown>} */ (value), key)) continue;
     if (childPath.includes('history') && key === 'currentTensions') {
       out[key] = sanitizePublicValue(child, childPath);
       continue;
     }
-    const sanitized = sanitizePublicValue(child, childPath);
+    let sanitized = sanitizePublicValue(child, childPath);
+    // 206 twin: a roster member's memberships, entry by entry, as the npcs[] projection's
+    if (isFactionMember && key === 'memberships') sanitized = publicMembershipsOf(sanitized);
     if (sanitized !== undefined) out[key] = sanitized;
   }
   return out;
@@ -229,6 +270,126 @@ function publicNpc(npc) {
     presentation: npc.presentation,
     influence: npc.influence,
   };
+}
+
+/**
+ * THE PUBLIC CARD (206 twin): publicNpc's allowlist, then the veil bit's per-row rule —
+ * a public house adds `institution` and `memberships` (where the card carries them);
+ * a veiled card loses `title` and `role`. A card with no `institution` record is
+ * publicNpc's projection exactly.
+ * @param {Record<string, unknown>} npc
+ */
+function publicCard(npc) {
+  /** @type {Record<string, unknown>} */
+  const out = publicNpc(npc);
+  for (const key of NPC_HOUSE_NAMED_KEYS) if (!isNpcKeyPublic(npc, key)) delete out[key];
+  for (const key of NPC_HOUSE_KEYS) {
+    if (!isNpcKeyPublic(npc, key) || !Object.prototype.hasOwnProperty.call(npc, key)) continue;
+    const value = key === 'memberships' ? publicMembershipsOf(npc[key]) : npc[key];
+    if (value !== undefined) out[key] = value;
+  }
+  return out;
+}
+
+// ── THE ROOT PASS (206 twin, the chair's second-seat ruling of 2026-11-08) ──────
+// A hidden power's own row (`powerStructure.factions[]` stamped `hidden: true` — the stress
+// infiltrator) is not public, and nor is its NAME anywhere else in the public JSON; and a
+// veiled face's title does not ride its ties (`relationships[].npc1Role` for the `from`
+// end, `npc2Role` for the `to` end). One pass over the projected output, with two sets read
+// from the ORIGINAL record: each power row's own stamped `hidden`, each card's own bit.
+// The stress TYPE stays ("Military status: infiltrated", W2 §F7). Character for character
+// the SQL's root branch in _gallery_sanitize_public_json (206); the mask phrase is pinned.
+export const HIDDEN_POWER_MASK = 'an unseen interest';
+
+/** @param {unknown} v @returns {unknown[]} */
+const arrayOf = (v) => (Array.isArray(v) ? v : []);
+
+/**
+ * The names of the record's hidden powers (each row's `faction`), from its own stamp.
+ * @param {Record<string, unknown>} settlement @returns {string[]}
+ */
+function hiddenPowerNamesOf(settlement) {
+  const ps = settlement.powerStructure;
+  const rows = ps && typeof ps === 'object' ? arrayOf(/** @type {Record<string, unknown>} */ (ps).factions) : [];
+  const names = new Set();
+  for (const row of rows) {
+    if (!row || typeof row !== 'object' || Array.isArray(row)) continue;
+    const power = /** @type {Record<string, unknown>} */ (row);
+    if (power.hidden !== true) continue;
+    if (typeof power.faction === 'string' && power.faction) names.add(power.faction);
+  }
+  return [...names];
+}
+
+/**
+ * The ids of the record's veiled faces: a house record stamped true or not stamped.
+ * @param {Record<string, unknown>} settlement @returns {string[]}
+ */
+function veiledCardIdsOf(settlement) {
+  return arrayOf(settlement.npcs)
+    .filter((card) => cardInstitutionVeilOf(card) === 'veiled')
+    .map((card) => /** @type {Record<string, unknown>} */ (card).id)
+    .filter((id) => typeof id === 'string' && id !== '')
+    .map(String);
+}
+
+/** @param {string} text @param {string[]} names @returns {string} */
+const maskText = (text, names) => names.reduce((t, name) => t.split(name).join(HIDDEN_POWER_MASK), text);
+
+/**
+ * Every string — value AND key, as the SQL's text-level replace reaches both — with each hidden
+ * name masked.
+ * @param {unknown} value @param {string[]} names @returns {unknown}
+ */
+function maskHiddenNames(value, names) {
+  if (typeof value === 'string') return maskText(value, names);
+  if (Array.isArray(value)) return value.map((v) => maskHiddenNames(v, names));
+  if (value && typeof value === 'object') {
+    /** @type {Record<string, unknown>} */
+    const out = {};
+    for (const [k, v] of Object.entries(value)) out[maskText(k, names)] = maskHiddenNames(v, names);
+    return out;
+  }
+  return value;
+}
+
+/**
+ * The root pass over a projected settlement (206 twin).
+ * @param {Record<string, any>} pub @param {string[]} hiddenNames @param {string[]} veiledIds
+ * @returns {Record<string, any>}
+ */
+function publicVeilPass(pub, hiddenNames, veiledIds) {
+  const veiled = new Set(veiledIds);
+  if (veiled.size && Array.isArray(pub.relationships)) {
+    pub.relationships = pub.relationships.map((tie) => {
+      if (!tie || typeof tie !== 'object' || Array.isArray(tie)) return tie;
+      const out = { ...tie };
+      if (veiled.has(String(out.from))) delete out.npc1Role;
+      if (veiled.has(String(out.to))) delete out.npc2Role;
+      return out;
+    });
+  }
+  if (!hiddenNames.length) return pub;
+  const hidden = new Set(hiddenNames);
+  const isRow = (v) => !!v && typeof v === 'object' && !Array.isArray(v);
+  const ps = pub.powerStructure;
+  if (isRow(ps) && Array.isArray(ps.factions)) {
+    ps.factions = ps.factions.filter((f) => !(isRow(f) && (f.hidden === true || hidden.has(f.faction))));
+  }
+  /** @param {unknown} list */
+  const dropConflicts = (list) => list.filter((c) => !(isRow(c) && Array.isArray(c.parties) && c.parties.some((p) => hidden.has(p))));
+  if (Array.isArray(pub.conflicts)) pub.conflicts = dropConflicts(pub.conflicts);
+  if (isRow(ps) && Array.isArray(ps.conflicts)) ps.conflicts = dropConflicts(ps.conflicts);
+  /** @param {unknown} entry */
+  const dropStakes = (entry) => {
+    if (!(isRow(entry) && isRow(entry.cast) && Array.isArray(entry.cast.stakes))) return entry;
+    return { ...entry, cast: { ...entry.cast, stakes: entry.cast.stakes.filter((st) => !(isRow(st) && hidden.has(st.factionId))) } };
+  };
+  for (const key of ['stress', 'stressors']) {
+    if (Array.isArray(pub[key])) pub[key] = pub[key].map(dropStakes);
+    else if (isRow(pub[key])) pub[key] = dropStakes(pub[key]);
+  }
+  return /** @type {Record<string, any>} */ (maskHiddenNames(pub, hiddenNames));
 }
 
 /**
@@ -392,9 +553,9 @@ export function toPublicSafe(settlement, { full = false, memberOverrides = null 
     if (sanitized !== undefined) clean[key] = sanitized;
   }
   if (Array.isArray(clean.npcs)) {
-    clean.npcs = clean.npcs.map(publicNpc).filter(npc => npc.name || npc.role);
+    clean.npcs = clean.npcs.map(publicCard).filter(npc => npc.name || npc.role);
   }
-  result = clean;
+  result = publicVeilPass(clean, hiddenPowerNamesOf(src), veiledCardIdsOf(src));
   }
 
   // Per-member overrides: a member with no override follows the settlement `full`
@@ -422,7 +583,7 @@ export function toPublicSafe(settlement, { full = false, memberOverrides = null 
         const key = galleryMemberKey(npc);
         const ov = overrides[key];
         const effReveal = ov && typeof ov.revealDm === 'boolean' ? ov.revealDm : full;
-        return effReveal ? (fullByKey.get(key) || npc) : publicNpc(npc);
+        return effReveal ? (fullByKey.get(key) || npc) : publicCard(npc);
       })
       .filter(npc => npc.name || npc.role);
   }

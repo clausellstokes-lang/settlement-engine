@@ -69,7 +69,8 @@ describe('P2 — reassign: the three seat mirrors move together', () => {
     const target = { memberships: [{ power: 'Temple of Dawn', rank: 2, share: null }], institution: null };
     const out = reassignNpc(s, 0, target);
     expect(out.ok).toBe(true);
-    expect(out.settlement.npcs[0].memberships).toEqual(target.memberships);
+    // FIX-PUBLIC-VEIL (re-keyed with the cause): the writer stamps each membership's veil bit against the record
+    expect(out.settlement.npcs[0].memberships).toEqual([{ ...target.memberships[0], veiled: false }]);
     expect(out.settlement.npcs[0].institution).toBeNull();
     expect(s.npcs[0].memberships[0].power, 'pure: the input is untouched').toBe('Merchant Guilds');
   });
@@ -108,7 +109,8 @@ describe('P2 — reassign: the three seat mirrors move together', () => {
     expect(state.settlement.npcs[0].memberships[0].power).toBe('Merchant Guilds');
     const applied = run({ memberships: [{ power: 'Thieves\' Guild', rank: 2, share: null }] });
     expect(applied.ok).toBe(true);
-    expect(state.settlement.npcs[0].memberships).toEqual([{ power: 'Thieves\' Guild', rank: 2, share: null }]);
+    // FIX-PUBLIC-VEIL (re-keyed with the cause): stamped against the record (the planted guild has no criminal class)
+    expect(state.settlement.npcs[0].memberships).toEqual([{ power: 'Thieves\' Guild', rank: 2, share: null, veiled: false }]);
   });
 });
 

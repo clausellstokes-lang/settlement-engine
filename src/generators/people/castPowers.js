@@ -50,6 +50,8 @@ import { isNoPowerInstitution } from '../../data/institutionalCatalog.js';
 import { hookPoolFor } from './poolMap.js';
 import { drawCardHooks, HOOKS_FORK_LABEL, mintPowerFace, onStream, seatHouseOf, SEAT_CARD_ID } from './representatives.js';
 import { OTHER_CARD_PREFIX, otherMintRowFor } from './mintTitles.js';
+import { isVeiledPower, veiledCardIdFor } from '../../domain/people/cardVeil.js';
+import { veiledEpithetFor } from '../npcDisplayNames.js';
 import { RUNG_KEYS, rungBandsForTier } from '../../domain/density/densityRungs.js';
 
 /** The keyed fork the late mints and the ranks draw under (declared in the fork census). */
@@ -92,14 +94,17 @@ export function rollWeightOf(share, weight) {
  *   (tier, institutions, powerStructure, economicState, config, _userEdits for the DM's `backs`)
  * @param {Array<Record<string, any>>} cards the cast as born (step 2)
  * @param {{ fork: (label: string) => any } | null} rng the seam's stream; null ranks by weight alone, no roll
+ * @param {unknown} [seed] the record's `_seed`, the salt of a veiled mint's opaque id (FIX-PUBLIC-VEIL)
  * @returns {Array<Record<string, any>>}
  */
-export function assignCastPowers(settlement, cards, rng) {
+export function assignCastPowers(settlement, cards, rng, seed = settlement?._seed ?? null) {
   const factions = Array.isArray(settlement?.powerStructure?.factions) ? settlement.powerStructure.factions : [];
   const institutions = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
   const powers = factions.map((f) => nameOf(f)).filter(Boolean);
   if (!powers.length || !Array.isArray(cards)) return cards;
   const powerSet = new Set(powers);
+  /** @type {Set<string>} the powers a membership may not name publicly (domain/people/cardVeil.js) */
+  const veiledPowers = new Set(factions.filter((f) => isVeiledPower(f)).map((f) => nameOf(f)));
   const governing = nameOf(governingFactionOf(settlement)) || null;
   const stream = rng && typeof rng.fork === 'function' ? rng.fork(POWERS_FORK_LABEL) : null;
   // ONE mint per label (the fork census counts every stream minted): the two families are forked
@@ -118,7 +123,9 @@ export function assignCastPowers(settlement, cards, rng) {
   /** @param {Record<string, any>} card @param {string} power @param {number} share @param {number | null} weight @param {boolean} largest @param {number} at */
   const join = (card, power, share, weight, largest, at) => {
     if (!powerSet.has(power)) return;
-    card.memberships.push({ power, rank: null, share: round4(share) });
+    // FIX-PUBLIC-VEIL (the chair's ruling: the same law per entry): each membership carries the veil bit
+    // of THAT power at birth — a membership in a hidden or criminal power is never published.
+    card.memberships.push({ power, rank: null, share: round4(share), veiled: veiledPowers.has(power) });
     members.get(power).push({ card, share, weight, largest, at });
   };
 
@@ -147,10 +154,15 @@ export function assignCastPowers(settlement, cards, rng) {
   const config = settlement?.config || {};
   const economicState = settlement?.economicState || {};
   const existingIds = new Set(cards.map((c) => c?.id));
+  // FIX-PUBLIC-VEIL (the second seat): a hidden or criminal power's face is born with the opaque id
+  // of people/cardVeil.js (salted by the record's seed), so its slug never names the power publicly.
+  const mintIdOf = (/** @type {Record<string, unknown>} */ f) => (isVeiledPower(f)
+    ? veiledCardIdFor(seed, `power_${powerSlug(nameOf(f))}`)
+    : `${OTHER_CARD_PREFIX}${powerSlug(nameOf(f))}`);
   const unfaced = factions.filter((f) => {
     const name = nameOf(f);
     return name && name !== governing && !BACKING_ARCHETYPES.includes(backingArchetypeOf(f))
-      && !existingIds.has(`${OTHER_CARD_PREFIX}${powerSlug(name)}`);
+      && !existingIds.has(mintIdOf(f));
   });
   if (unfaced.length) {
     const tier = String(settlement?.tier || 'town');
@@ -180,7 +192,7 @@ export function assignCastPowers(settlement, cards, rng) {
     const mintHookPools = new Map();
     unfaced.forEach((f) => {
       const name = nameOf(f);
-      const id = `${OTHER_CARD_PREFIX}${powerSlug(name)}`;
+      const id = mintIdOf(f);
       existingIds.add(id);
       const row = otherMintRowFor(name);
       const draw = () => mintPowerFace(row, mintCtx, { hook: false });
@@ -188,12 +200,22 @@ export function assignCastPowers(settlement, cards, rng) {
       card.id = id;
       card.title = row.title;
       card.role = row.title; // M-1b
-      card.institution = { kind: 'power', key: name, family: null, title: row.title };
+      // FIX-PUBLIC-VEIL: the veil bit at birth — a hidden power's mint (the stress infiltrator) or a criminal one's
+      card.institution = { kind: 'power', key: name, family: null, title: row.title, veiled: isVeiledPower(f) };
       card.memberships = [];
       // a name a card already bears takes the mint's TITLE as its qualifier — the MINT's name moves,
       // never an existing card's (the population step's ties store the names they were drawn with)
       const taken = new Set([...cards, ...lateMints].map((c) => String(c?.name || '').trim().toLowerCase()));
-      if (taken.has(String(card.name || '').trim().toLowerCase())) card.name = `${String(card.name).trim()} (${row.title})`;
+      if (taken.has(String(card.name || '').trim().toLowerCase())) {
+        // FIX-PUBLIC-VEIL (the chair's ruling, finding (b)): a hidden or criminal power's face never takes its
+        // title as the qualifier; born after its namesake, it is "the Younger" (npcDisplayNames.js's epithets)
+        const base = String(card.name).trim();
+        if (isVeiledPower(f)) {
+          let epithet = veiledEpithetFor(1, 2);
+          for (let n = 2; taken.has(`${base} ${epithet}`.toLowerCase()); n += 1) epithet = veiledEpithetFor(n + 1, n + 2);
+          card.name = `${base} ${epithet}`;
+        } else card.name = `${base} (${row.title})`;
+      }
       lateMints.push(card);
       // the hook's pool from the mint's EFFECTIVE category (no title-table row is `magic`, so no swap here)
       mintHookPools.set(id, hookPoolFor(row.title, null, { category: row.category }).pool);

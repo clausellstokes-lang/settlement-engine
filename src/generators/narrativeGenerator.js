@@ -32,6 +32,7 @@ import {
   setActiveRng,
 } from '../kernel/rngContext.js';
 import { assignCastPowers } from './people/castPowers.js';
+import { cardInstitutionVeilOf } from '../domain/people/cardPowers.js';
 import { drawTies } from './people/ties.js';
 import { pickVariant } from '../kernel/proseHash.js';
 import { selectOriginBody } from './narrative/settlementOriginProse.js';
@@ -508,6 +509,8 @@ const genPressureDetail = settlement => {
             ? 'the local herbalist'
             : 'the healers';
 
+  // FIX-PUBLIC-VEIL (the second seat): is the top card a veiled face (its house record veiled)?
+  const topCardVeiled = cardInstitutionVeilOf(npcs?.[0]) === 'veiled';
   return {
     name,
     tier,
@@ -532,8 +535,11 @@ const genPressureDetail = settlement => {
     topNPC: npcs?.[0] || null,
     // M-1b (PEOPLE-1 CAST): a card's role is its TITLE and carries its article ('the master fishmonger'); the pressure
     // lines prefix ", the " themselves, so the noun is handed over without it (never "the the").
-    topNPCRole: String(npcs?.[0]?.role || '').replace(/^the\s+/i, '') || null,
-    topNPCName: npcs?.[0]?.name || null,
+    // FIX-PUBLIC-VEIL (the second seat): a VEILED top card's title would name its hidden house in the public
+    // pressure sentence ("Qian Deng, the smuggler, knows more…"), so neither is handed over and each template
+    // takes its own anonymous fallback ("the most senior official"); an open card's lines are unchanged.
+    topNPCRole: topCardVeiled ? null : (String(npcs?.[0]?.role || '').replace(/^the\s+/i, '') || null),
+    topNPCName: topCardVeiled ? null : (npcs?.[0]?.name || null),
     viabilityIssues: economicViability?.issues || [],
     isViable: economicViability?.viable !== false,
     topTension: (history?.currentTensions || [])[0]?.type || null,
@@ -926,7 +932,7 @@ export const enrichNpcCoherence = (settlement) => {
   // pass reads the memberships (npcStructure.js) and no card carries the old fields. This tail is still
   // the one BOTH full assembly and NPC section-regen run, so a regenerated cast carries the
   // same powers as a born one.
-  const withPowers = assignCastPowers(settlement, rawMergedNpcs, getActiveRng());
+  const withPowers = assignCastPowers(settlement, rawMergedNpcs, getActiveRng(), settlement?._seed ?? null);
   return enrichNPCsWithStructure(withPowers, settlement);
 };
 
@@ -951,7 +957,7 @@ function inCoherenceSubstream(rng, label, operation) {
   }
 }
 
-export const generateCoherence = (settlement, coherenceRng = null, pins = null) => {
+export const generateCoherence = (settlement, coherenceRng = null, pins = null, seed = null) => {
   if (!settlement) return settlement;
 
   // Each output owns a stable draw budget. Conditional work in NPC enrichment
@@ -975,7 +981,18 @@ export const generateCoherence = (settlement, coherenceRng = null, pins = null) 
   const mergedNpcs = chooseOrPin(pins, 'npcs', () => inCoherenceSubstream(
     coherenceRng,
     'npc-enrichment',
-    () => enrichNpcCoherence(settlement),
+    // FIX-PUBLIC-VEIL (the second seat): the record's seed salts a veiled mint's opaque id at the cast seam. It is
+    // LENT to the settlement for this call only (assembly attaches `_seed` after the seam; nothing on this path
+    // read it before), so the enrichment's signature, pinned by packet EM-R2, is unchanged.
+    () => {
+      const lend = seed != null && settlement._seed == null;
+      if (lend) settlement._seed = seed;
+      try {
+        return enrichNpcCoherence(settlement);
+      } finally {
+        if (lend) delete settlement._seed;
+      }
+    },
   ));
 
   // ── THE PEOPLE CAR (PEOPLE-4 TIES, 2026-11-07; R-P7): ONE OUTGOING TIE PER CARD, drawn HERE over

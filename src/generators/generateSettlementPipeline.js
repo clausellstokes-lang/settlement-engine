@@ -531,6 +531,8 @@ export function regenNPCsPipeline(settlement, config, options = {}) {
       institutions: settlement.institutions || [],
       powerStructure: settlement.powerStructure,
       economicState: settlement.economicState,
+      // FIX-PUBLIC-VEIL (the second seat): the record's seed salts a veiled face's opaque id
+      _seed: settlement._seed,
     }, config.culture || 'germanic', config, generationContext);
     // GS-2 (ODQ §934.101): the faction groups and the conflicts are derived from the FINAL
     // roster below, exactly as assembly derives them, because an NPC's power affiliation is

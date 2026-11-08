@@ -24,6 +24,7 @@
 
 import { createPRNG } from '../../kernel/prng.js';
 import { makeReceipt } from '../trace.js';
+import { stampMembershipsVeil, stampVeil } from '../people/cardVeil.js';
 import {
   validateNpcFacet, goalChainForRole, npcFacetOf,
   NPC_ALIGNMENTS, NPC_TEMPERAMENTS, NPC_ROLE_ARCHETYPES, ROLE_GOAL_CHAIN,
@@ -102,6 +103,11 @@ export function reassignNpc(settlement, npcIndex, target) {
   for (const f of SEAT_HELD_FIELDS) {
     if (f in target) nextNpc[f] = target[f];
   }
+  // FIX-PUBLIC-VEIL: a new house and each new membership are stamped with their veil bits against this
+  // record (people/cardVeil.js), so the public projection never names a hideable house or a hidden power
+  // the DM reassigned the card into.
+  if ('institution' in target) nextNpc.institution = stampVeil(target.institution, settlement);
+  if ('memberships' in target) nextNpc.memberships = stampMembershipsVeil(target.memberships, settlement);
   // Record the reassignment as a declared facet-style provenance stamp (no free-text).
   nextNpc.reassignedTo = {
     institutionId: target.institutionId ?? null,

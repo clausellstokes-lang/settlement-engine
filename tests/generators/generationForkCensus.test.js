@@ -230,7 +230,13 @@ const PICK_VARIANT_CALLS = 31;
 // above): 15 -> 16, MEASURED by this arm at the merged tree. R12's fitter (acd70a977) is retired with its hashes (the
 // chair's SC-1 ruling); R3's tie rule (596cb8b1b, resolveTieKey) is ported into the one tie writer (people/ties.js ::
 // drawTies), one tie per card. PLAUSIBLE attribution, not bisected. The register's fnv1a32External moves with it.
-const FNV_EXTERNAL_CALLS = 16;
+// RE-KEYED 2026-11-08 (FIX-PUBLIC-VEIL, the second seat): 15 -> 13, measured by A6. A veiled face is born with an
+// opaque id, and its keyed forks (`people-faces::`, `people-ties::`, `people-hooks::<card id>`) re-deal, so two of
+// the probe row's ties draw archetypes whose prose takes no external fnv1a32 hash. The cause is the lane's one
+// UNSIGNED generator move.
+// MERGE-WAVE at the FIX-PUBLIC-VEIL merge (2026-11-08): 16 - 2 = 14 composed (the integration side's 16 with the veil's
+// two re-dealt ties), MEASURED by A6 at the merged tree; the register's fnv1a32External moves with it.
+const FNV_EXTERNAL_CALLS = 14;
 /** The fork law A1 pins: the mint wrapper's equivalence rests on this line and nothing else. */
 const FORK_LAW = 'fork: (label) => createPRNG(`${seed}::${label}`),';
 /** §6.4's off-corpus block: a wizard-reachable switch, the keys it moves, and 24 seeds. */

@@ -47,7 +47,7 @@
     "pastEofCitationsExcluded": 382,
     "byRule": {
       "banner": 9,
-      "dated": 165,
+      "dated": 166,
       "sha-pin": 2,
       "tree": 139
     },
@@ -375,7 +375,9 @@
     "_rosterGrowth2026-11-07-fix-food-isolation": "ONE document JOINED the roster by being BORN into it (FIX-FOOD-ISOLATION, measured with this walker's own arm): `dated` 136 -> 137, docs/FIX_FOOD_ISOLATION_2026-11-07.md, the seat's record, born dated, 0 past-EOF; nothing changed class.",
     "_rosterGrowth2026-11-08-merge-wave-food-isolation": "THE UNION AT THE FIX-FOOD-ISOLATION MERGE (MERGE-WAVE, session session_01FbPLbdbKovNtK8Fx32oQ24): both sides' notes kept; `dated` 163 -> 164 (docs/FIX_FOOD_ISOLATION_2026-11-07.md); the count measured once by the walker; nothing changed class.",
     "_rosterGrowth2026-11-07-fix-export-keys": "ONE document JOINED the roster by being BORN into it (FIX-EXPORT-KEYS, migration 205 and its client twin, measured with this walker's own arm): `dated` 104 -> 105, docs/FIX_EXPORT_KEYS_2026-11-07.md (the seat's record), born dated. A GROWTH, not a re-classification: no document changed class.",
-    "_rosterGrowth2026-11-08-merge-wave-export-keys": "THE UNION AT THE FIX-EXPORT-KEYS MERGE (MERGE-WAVE, session session_01FbPLbdbKovNtK8Fx32oQ24): both sides' notes kept; `dated` 164 -> 165 (docs/FIX_EXPORT_KEYS_2026-11-07.md); the count measured once by the walker; nothing changed class."
+    "_rosterGrowth2026-11-08-merge-wave-export-keys": "THE UNION AT THE FIX-EXPORT-KEYS MERGE (MERGE-WAVE, session session_01FbPLbdbKovNtK8Fx32oQ24): both sides' notes kept; `dated` 164 -> 165 (docs/FIX_EXPORT_KEYS_2026-11-07.md); the count measured once by the walker; nothing changed class.",
+    "_rosterGrowth2026-11-07-fix-public-veil": "ONE document JOINED the roster by being BORN into it (FIX-PUBLIC-VEIL, the veil bit and migration 206, measured with this walker's own arm): `dated` 105 -> 106, docs/FIX_PUBLIC_VEIL_2026-11-07.md (the seat's record), born dated. A GROWTH, not a re-classification: no document changed class.",
+    "_rosterGrowth2026-11-08-merge-wave-public-veil": "THE UNION AT THE FIX-PUBLIC-VEIL MERGE (MERGE-WAVE, session session_01FbPLbdbKovNtK8Fx32oQ24): both sides' notes kept; `dated` 165 -> 166 (docs/FIX_PUBLIC_VEIL_2026-11-07.md); the count measured once by the walker; nothing changed class."
   },
   "rows": []
 }
