@@ -61,7 +61,7 @@ finite semantics (closed banded vocabularies; no float ever reaches a surface).
    posture, casting, receipts, pins (negative hardest), bands, couplings, clock,
    posture consumption, endings entries, and the dossier round-trip. The audit
    stage hunts shallow spots wearing deep clothing.
-4. **NAMED-ACTOR RULE:** clergy already exist as planes (npcAgency religious roles
+4. **NAMED-ACTOR RULE:** [RE-BASED 2026-11-08 (FP-REBASE, seat FPR-CONSTITUTION; the census §2 row "WF / FAITH") — the clergy were read as "planes (npcAgency religious roles …)" over the NPC grouping's faction roles, whose `factions[].members[]` aliased the cards → the faction roles DISSOLVED with the grouping (the people car's M-1b: "the village church's face is its priest"): THE CHURCH'S FACE IS ITS PRIEST — a temple, shrine or monastery house's one face, titled by its institution (pastor, abbot, high priest; R-P9), ranked in the religious power by what its house backs; the ranking cleric is that power's rank-1 face through the ONE READER MODULE (`DESIGN_FP_ARCHITECTURE.md` §1 L11), never a picked role-holder; a `shepherdRef` names a card by id. THE OFFICE-VOICE FALLBACK below covers every town with no church face, unchanged. "Never a killed named soul" is now the owner's law for every volume (the fold §7 OD-FC-146)] clergy already exist as planes (npcAgency religious roles
    priest/cleric/bishop/abbot/oracle; clergyTraitPlane's per-minister leans;
    rankings). Casting is read-wiring through those planes — never new NPC state,
    never a killed named soul, never a resolved fate. The exposure paths in WF-5
@@ -171,7 +171,7 @@ finite semantics (closed banded vocabularies; no float ever reaches a surface).
 - **wizard-news id token skew:** every `wizard_news.*` id classifies mover-family
   `knowledge` — never declare a wizard-news id on a faith certification row; WF-0's
   bearer count exists precisely so certification never leans on those ids.
-- **JSON-alias trap:** clergy in factions[].members[] ARE npcs[] objects in memory;
+- **JSON-alias trap:** [RE-BASED 2026-11-08 (FP-REBASE, seat FPR-CONSTITUTION; the census §2 row "WF / FAITH") — presumed the grouping → RETIRED with it; clergy are cards named by id; the fixtures still round-trip as plain data] clergy in factions[].members[] ARE npcs[] objects in memory;
   every covert-congregation / legate / foothold fixture JSON-round-trips.
 - **Writer/reader payload-spelling drift:** every new ledger (omen readings, covert
   fields, fall records) gets a pin booting the REAL writer and reading through the
@@ -1704,3 +1704,12 @@ STOP-and-report.
    CPL-7 port shapes in the couplings volume for the TRADE-lit lane.
 6. **Report, don't rule.** Any conflict between this volume, the spine, the
    amendments, or the tree is a STOP-and-report to the validation chair.
+
+---
+
+## RE-BASED 2026-11-08 (FP-REBASE) — what moved in this volume
+
+Seat FPR-CONSTITUTION, against `docs/chair/2026-11-08/FP-REBASE-CENSUS-2026-11-08.md` §2 row "WF / FAITH".
+
+- §1 rule 4, THE NAMED-ACTOR RULE — the church's face is its priest; the ranking cleric the religious power's rank-1 face; the office-voice fallback stands; the death law.
+- §1d the JSON-alias hazard — retired with the grouping.

@@ -1,5 +1,7 @@
 # DESIGN — THE SP PROGRAM ARCHITECTURE (the shared spine compiled for build)
 
+[RE-READ 2026-11-08 (FP-REBASE) — unaffected by the people car and the allegiance train: the spine's machinery (the believed world, posture, banded stocks, the temporal walker, the errand spine) is settlement- and court-grain, its travellers are cast by their owning programs, and its text reads no NPC grouping, per-person faction field or local corruption mark (grep, 2026-11-08: none).]
+
 ## SP program architect, 2026-08-04. Compiles DESIGN_FP_SPINE.md §2 (SP-1..SP-8,
 ## the believed-world / posture / banded-stock / temporal-walker / narration-kit
 ## infrastructure) into implementation-grade wave specs in the war-volume idiom

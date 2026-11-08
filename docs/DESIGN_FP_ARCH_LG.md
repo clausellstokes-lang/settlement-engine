@@ -1,5 +1,7 @@
 # DESIGN — THE LG FAMILY: THE LOGISTICS NETWORK (circles, fleets, journeys)
 
+[RE-READ 2026-11-08 (FP-REBASE) — unaffected by the people car and the allegiance train: logistics (circles, fleets, journeys) is unit- and route-grain, and no person record, roster or mark is read.]
+
 - **Status:** ARCHITECTED 2026-08-15 (Fable chair, the §46 sitting). Lands on
   the ledger branch (the build branch is mid-train); **fold obligation:** to
   the build branch, CLAIM_RE-checked, at the next integration point. [CORRECTED 2026-10-16 (coherence fold) — THE STATUS OF RECORD IS docs/DESIGN_FP_COHERENCE_FOLD.md §2; this header is history. The fold obligation is DISCHARGED: this volume is on master (J-EM-12). It is NOT in the compiled order and carries none of the spine's obligations (no Req 13/14 or L10 line, no coupling prefix, no annex). In one line: LIT: none · BUILT DARK: none · UNBUILT: LG-0..LG-13+ entire (zero code at 00b648c9d: `circleNetworkEnabled`, `vesselFleetsEnabled` — 0 hits).] Compiles

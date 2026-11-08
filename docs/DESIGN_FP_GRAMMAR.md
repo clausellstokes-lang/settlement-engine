@@ -166,7 +166,7 @@ verdict — a Clock line that gives only a denomination is a defect.
 - **Writer/reader payload-spelling drift:** every new ledger (pactProposals) gets
   a pin that boots the REAL writer and reads through the REAL reader.
 - **JSON-alias trap:** oath stamps reference roster NPC objects — every
-  stamp/round-trip fixture JSON-round-trips.
+  stamp/round-trip fixture JSON-round-trips. [RE-BASED 2026-11-08 (FP-REBASE, seat FPR-CONSTITUTION; the census §2 row "GR / GRAMMAR (GR-1)") — the hazard presumed the NPC grouping's roster objects → RETIRED with the grouping; a stamp names its card by id, and the round-trip pin stands as plain-data serialization]
 - **Vacuous absence pins:** a `toHaveLength(0)` against a harness defaulting the
   producing state empty proves nothing — seed non-empty state first.
 - **Golden discipline:** a golden that moves unexpectedly is STOP-and-report;
@@ -599,6 +599,8 @@ three.
 (ticks), age-line phrasing thresholds (young/settled/old — band words, SP-6).
 
 ### GR-1 — THE OATH-HOLDER IDENTITY (flag `oathHolderEnabled`; settled law, spine §3)
+
+[RE-BASED 2026-11-08 (FP-REBASE, seat FPR-CONSTITUTION; the census §2 row "GR / GRAMMAR (GR-1)") — the read was composed `governingFactionOf` → that faction's seated NPCs (`npcInFaction`) → a codepoint-stable pick among seat-holders, over the NPC grouping whose roster objects aliased the cards → the OATH-HOLDER IS THE SEAT'S RANK-1 FACE: the governing power's rank-1 face through the ONE READER MODULE (`DESIGN_FP_ARCHITECTURE.md` §1 L11; `src/domain/people/membership.js`), NO PICK and no tie-break; null (no governing power, or no rank-1 face) ⇒ no stamp ⇒ seat-voice, the contract unchanged; `npcId` names the card by its id (the JSON-alias trap is retired with the grouping); the SAME-SEAT pin reads "the same rank-1 face", the codepoint mutant retires with the pick; `oathHolder.js` is on the FPZ list (`tests/lint/legacyFactionReaders/fpz-list.json`) and is re-pointed at its rebuild. The bond's mortality ("Aldric is dying") is a fact only the DM sets: no simulated death of a named person (the fold §7 OD-FC-146); an oath-holder dies by the DM's decree, and the stamp records it as history]
 [ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: none at the table — the sworn stamp is ledger fact with no signature line (UNBUILT); it surfaces only through GR-4's succession lines, event-timed · TIER: aspatial-safe; host flags: `oathHolderEnabled` (dramatic_campaign + full_simulation) · DEGRADED ARM: unstamped seat-voice (the null and legacy contract)]
 Treaties and obligations record WHO swore. Historical register: the medieval
 treaty was a personal oath between princes — every royal death reopened every
@@ -1610,3 +1612,12 @@ labeling). Grammar-specific additions:
    row, decisionTier row, actor-major routing entry where routed, and the
    execution handler — plus the parity pin (item 3's news-kind checklist does
    not cover verbs; this item does).
+
+---
+
+## RE-BASED 2026-11-08 (FP-REBASE) — what moved in this volume
+
+Seat FPR-CONSTITUTION, against `docs/chair/2026-11-08/FP-REBASE-CENSUS-2026-11-08.md` §2 row "GR / GRAMMAR (GR-1)".
+
+- §1d the JSON-alias hazard — retired with the grouping (the census §5 UNNECESSARY).
+- §5 GR-1 — the oath-holder is the seat's rank-1 face through the one reader module, no pick; the oath-holder's death the DM's alone (the census §9).

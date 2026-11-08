@@ -40,7 +40,7 @@
 | S20 | Commons beat ids are `wizard_news.*`-shaped | `commonsVoiceKernel.js:168` `` id: `wizard_news.${tick}.${RUNG_KIND[rung]}.${sid}` `` ; the observation classifier files every `wizard_news.*` id under moverFamily `knowledge` (`subsystemRowsWaves.js:55`, recorded in prose) | VERIFIED — §1c skew prohibition stands |
 | S21 | Commons runs BEFORE the assize, same tick | `assizeKernel.js:428-441` — the combined mover runs `advanceCommonsVoice` at :435 with the comment "first, so the petition it deposits is answerable THIS tick"; mounted `pulseKernel.js:2553-2563` | VERIFIED |
 | S22 | The built answer reaches only named-accused / corruption-kind grievances | `assizeKernel.js:344-347` (`coupled = … namedAccused===accusedNid || (kind==='corruption' && charge==='corruption')`) | VERIFIED — POP-2's misrule-answer gap is real |
-| S23 | The crowd's corruption input is REVEALED-only (POP-2's VERIFY-AT-BUILD, answered now) | `commonsVoiceKernel.js:134-150` `corruptionSignalOf` requires `corrupt===true && ousted!==true && timesExposed>0`, OR a live `exposedCorruption` ledger entry | VERIFIED — pin it as the volume orders |
+| S23 | [RE-BASED 2026-11-08 (FP-REBASE, seat FPR-CONSTITUTION; the census §2 row "POP (POP-2)") — `corrupt`/`timesExposed` retired → `allegianceOf` + the allegiance's exposure record; the revealed-only law stands] The crowd's corruption input is REVEALED-only (POP-2's VERIFY-AT-BUILD, answered now) | `commonsVoiceKernel.js:134-150` `corruptionSignalOf` requires `corrupt===true && ousted!==true && timesExposed>0`, OR a live `exposedCorruption` ledger entry | VERIFIED — pin it as the volume orders |
 | S24 | Commons three kinds registered in ALL THREE walkers (the shape POP-2 copies) | `display/settlementRumors.js:353-355` (WHAT_PHRASES); `tests/domain/impactKindWalkers.test.js:134-136` (EXPECTED_VOICE, `null` = deliberately crier-unvoiced); `realm/heraldRouting.js:228` | VERIFIED |
 | S25 | Traditions adoption: ≥12% influx over 3y, fed from the live column ledger | `traditions/relations.js:48-49` (`ADOPTION_THRESHOLD: 0.12`, `INFLUX_WINDOW_YEARS: 3`); `traditionsKernel.js:624-644` influx captured from in-transit columns | VERIFIED |
 | S26 | Arrival folds to a count + one history line; origins survive only in the transient receipt | `demographicsMigration.js:~483-497` (`demographic_arrival` receipt carries `origins[]`; settlement gets population + populationHistory row only) | VERIFIED |
@@ -331,6 +331,7 @@ the lifecycle host, an existing seam, or a new lazy leaf.
   degraded while GR-3 is unbuilt — §5). [CORRECTED 2026-10-16 (coherence fold) — GR-3 is LANDED; the degraded arm is history (C-5/C-6). And the labor_compact lift has no target: no wages axis exists and GR colours production (see DESIGN_FP_POPULATIONS.md POP-1 Couplings).]
 
 ### POP-2 — THE COMMONS ARC (`commonsArcEnabled`)
+[RE-BASED 2026-11-08 (FP-REBASE, seat FPR-CONSTITUTION; the census §2 row "POP (POP-2)") — the crowd's corruption input read the local corruption mark (`commonsVoiceKernel.js :: corruptionSignalOf`: `corrupt===true && ousted!==true && timesExposed>0`) and the assize coupling read `kind==='corruption'` grievances against it → the mark is RETIRED (the allegiance train's car 1): the crowd's input is ONE read through `allegianceOf` (`src/domain/people/allegiance.js`) and the allegiance's EXPOSURE record (`allegiance.revealed`, carried by the v2 → v3 migration; `ousted` read from the card's standing, a person fallen from rank); THE REVEALED-ONLY PIN STANDS VERBATIM — a covert allegiance moves nothing until exposed — and the mutant (widen the coupling to an unexposed allegiance ⇒ the pin reds) stands; `commonsVoiceKernel.js` and `assizeKernel.js` are FP-dormant readers re-pointed at their rebuild. The crowd itself is the masses (the owner's law, the fold §7 OD-FC-146): an aggregate, never a person record]
 [ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: the refusal beat and the answered-petition beat ("the seat heard them, and the square emptied") at the built 3-tick dwell — weekly, the family's most felt clock, inside a one-month advance · TIER: aspatial-safe · host flags: `commonsVoiceEnabled` (in no preset, not in the manifest — OD-FC-3); `demographicsEnabled` for the plan-refusal arm only; a lit war lane for the levy arm · DEGRADED ARM: `commonsArcEnabled` dark ⇒ the built three-rung ladder (petition → gathering → riot), itself dark until OD-FC-3]
 - **Files touched:** `commonsVoiceKernel.js` (raw 340 — the rung, the jump rule,
   LEGIT_DIP to five slots, the refusal fields; ≤ +120 raw keeps it far under
@@ -622,3 +623,12 @@ generation-tree tests use tests/helpers/{anchoredNegatives,seedFailures}.js; eve
 executed mutant is cp-backed, cmp/md5-restored, NEVER checkout-family, and
 manifest-entered; every doc-reading pin asserts exactly-once; gates through
 check:tail / gate-tail.sh only; STOP-and-report is a success mode.
+
+---
+
+## RE-BASED 2026-11-08 (FP-REBASE) — what moved in this volume
+
+Seat FPR-CONSTITUTION, against `docs/chair/2026-11-08/FP-REBASE-CENSUS-2026-11-08.md` §2 row "POP (POP-2)".
+
+- §1 S23 — the corruption input re-read through `allegianceOf` and the exposure record.
+- §4 POP-2 — the revealed-only pin through `allegianceOf`; the crowd is the masses.

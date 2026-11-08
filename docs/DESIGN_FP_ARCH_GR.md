@@ -195,7 +195,7 @@ Live code outranks every table in this file — re-verify anything you build on.
 | V-20 | Embassy = war-exit channel only; bounded-multiplier idiom | `embassyLedger.js` header (deposit-and-consume; ×1 exactly when dark) | VERIFIED — the idiom GR-6's occasion-1 cure reuses (R-6) |
 | V-21 | `believedMarginAtSignature` persisted; credibility ledger + fracture deltas exist; NOTHING ties a lie to a treaty | `peaceTerms.js:860`; `spatialLedgers.credibility` (`informationStatecraft.js:120`), `fractureCredibilityDeltas` :378 (consumed :1364); zero treaty tokens in the credibility region | VERIFIED — GR-0's read and GR-4's charge both NEW, both have real homes |
 | V-22 | Succession-repudiation, renewal/renegotiation, standalone NAP, faith/population terms, `sworn`, `provenance:'negotiated'`, `lineage`, `oathHolderOf`, `pactProposals`, all five GR flag names | grep ZERO across src/ and tests/ | VERIFIED ABSENT — every GR symbol is virgin namespace |
-| V-23 | Ruler-person read absent; the compose path exists | no `rulerOf`/`seatHolder`; `governingFactionOf` `rulingPower.js:189`, `npcInFaction` `npcLadderState.js:153`, `durableIdForRoster` `npcLedger.js:586` | VERIFIED — GR-1 composes exactly these sanctioned helpers |
+| V-23 | [RE-BASED 2026-11-08 (FP-REBASE, seat FPR-CONSTITUTION; the census §2 row "GR / GRAMMAR (GR-1)") — the compose path ran through `npcInFaction` and a pick → the rank-1 face of the governing power, §1 L11] Ruler-person read absent; the compose path exists | no `rulerOf`/`seatHolder`; `governingFactionOf` `rulingPower.js:189`, `npcInFaction` `npcLadderState.js:153`, `durableIdForRoster` `npcLedger.js:586` | VERIFIED — GR-1 composes exactly these sanctioned helpers |
 | V-24 | Dossier surfaces | `WarFaithTab.jsx` TreatyBlock :109-116 (230 raw); `TreatyPanel.jsx` :18 renderAllTreaties (152 raw); `HeraldBody.jsx` (294); `pdf/lib/liveWorld.js` treaty chapter :83,:274,:344 | VERIFIED — all landing pads live; sizes small enough for line additions without leaf extraction [see the bracket at :191] |
 | V-25 | WR-6 alliance-web read exists with a CLOSED consumer census | `readAllianceWebRisk` (`warAllianceRisk.js`, 57 raw); `tests/lint/allianceWebRiskConsumers.walker.test.js` pins EXACTLY TWO named consumers and forbids rebuilt walks | VERIFIED — GR-2's `shared_threat` trigger is a THIRD consumer: the walker reds at GR-2 and the census update must be ARGUED in the wave commit (§6 seam 4) |
 | V-26 | The WR-10 catalog tripwire is live and will fire at GR-3 | `catalogGrewSinceWr10` `sovereigntyBundle.js:166`; asserted `false` at `tests/domain/sovereigntyBundleWr10.test.js:321,:388`; `sovereigntyBundle.js` derives components from TERM_FAMILIES at call time (no literals — comment-stripped scan pinned both directions) | VERIFIED — the red is RECORDED as the instruction: re-read WAR §5's degradation note, confirm the bundle widened mechanically, update/delete the tripwire pins and the WAR §3 row, all in GR-3's commit (§6 seam 1) |
@@ -406,6 +406,7 @@ finder, no new relationship vocabulary.
   assignments only).
 
 ### GR-1 — THE OATH-HOLDER IDENTITY (`oathHolderEnabled`)
+[RE-BASED 2026-11-08 (FP-REBASE, seat FPR-CONSTITUTION; the census §2 row "GR / GRAMMAR (GR-1)") — `oathHolder.js` was composed `governingFactionOf` → `npcInFaction` → codepoint-stable pick → `durableIdForRoster`, over the NPC grouping's roster objects (the alias trap) → the oath-holder is THE SEAT'S RANK-1 FACE through the ONE READER MODULE (`DESIGN_FP_ARCHITECTURE.md` §1 L11), NO PICK; null ⇒ no stamp ⇒ seat-voice as before; the codepoint tie-break mutant and the alias round-trip pin retire with the pick and the grouping (the SAME-SEAT pin reads the same rank-1 face; the round-trip pin stands as plain data); `oathHolder.js` is on the FPZ list and is re-pointed at its rebuild; "death changes NOTHING" stands, and a named oath-holder dies only by the DM's decree (the fold §7 OD-FC-146)]
 [ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: none at the table — the sworn stamp is ledger fact with no signature line (UNBUILT); it surfaces only through GR-4's succession lines, event-timed · TIER: aspatial-safe; host flags: `oathHolderEnabled` (dramatic_campaign + full_simulation) · DEGRADED ARM: unstamped seat-voice (the null and legacy contract)]
 **Builds NOW (composes existing helpers — V-23).**
 - **Files touched:** the writer family's THREE stamp sites (war mint
@@ -713,3 +714,12 @@ treaty outside peaceTerms.js" now reads "outside the peaceTerms WRITER FAMILY"
 (R-2 — the sale precedent is the family's own definition); item 5's ceiling
 obligation uses the MEASURED ~766/800 figure re-measured at each publishing
 commit, never inherited — including from this document. [see the bracket at :91]
+
+---
+
+## RE-BASED 2026-11-08 (FP-REBASE) — what moved in this volume
+
+Seat FPR-CONSTITUTION, against `docs/chair/2026-11-08/FP-REBASE-CENSUS-2026-11-08.md` §2 row "GR / GRAMMAR (GR-1)".
+
+- §2 V-23 — the compose path re-based on the rank-1 face.
+- §5 GR-1 — the oath-holder is the seat's rank-1 face, no pick; the alias trap and the codepoint mutant retired; the death law (the census §9).

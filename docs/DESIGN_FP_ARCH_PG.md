@@ -1,6 +1,8 @@
 # DESIGN_FP_ARCH_PG — THE PESTILENCE-COHERENCE VOLUME
 ## (contagion on arrival · resistance and duration · belief-based refusal at the gates)
 
+[RE-READ 2026-11-08 (FP-REBASE) — unaffected by the people car and the allegiance train: pestilence is settlement- and road-grain with its harm in the masses, and no named person's record, roster or mark is read.]
+
 ## ⚠⚠ **DRAFT — NOT YET LANDED.** Composed by lane UF-1 (the docs unfork train,
 ## ODQ §151.4/§182.4) from `lanePGC-PG-CHARTER.md` (lane PG-C, advisory) folded
 ## into the docs/DESIGN_FP_ARCH_* volume form. **The ledger landing is the

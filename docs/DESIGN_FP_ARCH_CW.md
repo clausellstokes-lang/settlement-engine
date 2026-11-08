@@ -13,6 +13,8 @@
 ## OUTRANKS EVERY TABLE IN THIS FILE. Judgments are labeled JUDGMENT and are
 ## vetoable by the chair or the owner.
 
+[RE-BASED 2026-11-08 (FP-REBASE, seat FPR-CONSTITUTION; the census §2 row "CW (§4 universal law)") — the census row's "JSON-ALIAS TRAP (factions[].members[] ARE npcs[] objects)" is the COUPLINGS program's universal lifecycle clause as COMPILED in `DESIGN_FP_ARCHITECTURE.md` §4, which presumed the NPC grouping → THE ALIAS TRAP IS GONE with the grouping (retired there with its bracket); this volume's own text carries no alias clause (measured by grep, 2026-11-08), and the one person-grain read it names — the owed cross-layer row `oathHolder.js` → `npcLadderState.js` (§4 CW-0, the REACH_OWED_ROWS register) — is re-based below]
+
 **Status: IMPLEMENTATION ARCHITECTURE. [CORRECTED 2026-10-16 (coherence fold) — THE STATUS OF RECORD IS docs/DESIGN_FP_COHERENCE_FOLD.md §2; this header is history. In one line: LIT: — (no CW flag lights) · BUILT DARK: CW-0 registry (68 rows, eight files, schema v4) and the CW-0w walkers, LANDED (instrumentation, no flag); CW-1 cascade braid LANDED 2026-09-24 @ 155da82f2, DARK (cascadeGovernorEnabled) — pulled forward as FP-25, not "LAST" · UNBUILT: CW-2x (causeWalkCouplingJoin.js absent); CW-3 (subsystemRowsCoupling.js absent)] Sequencing per SOL_QUEUE.md row 18
 (verified at docs/SOL_QUEUE.md:72-75): CW-1 → CW-2 → CW-3 land LAST; CW-0 does
 NOT wait — it landed EARLY with WR-3 and grows under the same-commit
@@ -263,7 +265,7 @@ aspirational until this lands.
   revealed two program-era cross-layer reads that landed with no registry row
   because the importer was invisible: `commercialReasons.js` →
   `relationshipState.js` (INTERIOR→TRADE, TR-1) and `oathHolder.js` →
-  `npcLadderState.js` (INTERIOR→GRAMMAR, GR-1). They are held in the walker's
+  `npcLadderState.js` (INTERIOR→GRAMMAR, GR-1). [RE-BASED 2026-11-08 (FP-REBASE, seat FPR-CONSTITUTION; the census §2 row "GR / GRAMMAR (GR-1)") — the import existed for `npcInFaction`, the grouping's roster helper → GR-1's oath-holder is the seat's rank-1 face read through `src/domain/people/membership.js` (`DESIGN_FP_ARCHITECTURE.md` §1 L11), so at `oathHolder.js`'s rebuild this owed edge DISSOLVES (no INTERIOR→GRAMMAR read remains) and its `REACH_OWED_ROWS` entry is deleted by the shrink-only rule, never minted as a row; until that rebuild the register stands as written] They are held in the walker's
   `REACH_OWED_ROWS` register — exact and shrink-only, reddening the moment
   either gains a row — rather than dropped into the legacy pair baseline,
   which is reserved for the volume's §4 pre-program EXISTS blocks; baselining
@@ -627,3 +629,12 @@ kernel yet remembers to record, and the assay office is a named hole in the
 certification wall — so this program's build order is: post the watchman and
 unlock the gate (CW-0w), then braid (CW-1), then extend the inquest (CW-2x),
 then weigh everything (CW-3), persisting not one byte along the way.
+
+---
+
+## RE-BASED 2026-11-08 (FP-REBASE) — what moved in this volume
+
+Seat FPR-CONSTITUTION, against `docs/chair/2026-11-08/FP-REBASE-CENSUS-2026-11-08.md` §2 row "CW (§4 universal law)".
+
+- Header — the alias trap gone (the clause lived in `DESIGN_FP_ARCHITECTURE.md` §4 and is retired there).
+- §4 CW-0's owed row `oathHolder.js` → `npcLadderState.js` — dissolves at GR-1's rebuild on the rank-1 face (a presumption the census did not list for CW, found by this seat's grep).

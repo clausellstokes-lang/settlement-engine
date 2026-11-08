@@ -1,6 +1,8 @@
 # DESIGN_FP_ARCH_CN — THE DM CONSOLE CLUSTER
 ## (war console · stressor seal · external host · conversion valve · two-hat law)
 
+[RE-READ 2026-11-08 (FP-REBASE) — unaffected by the people car and the allegiance train: the DM console cluster is settlement- and court-grain, and its text reads no person roster, faction field or corruption mark (grep, 2026-11-08: none).]
+
 ## Chartered on the owner's order of 2026-08-15 (ODQ §130) as `laneCNC-CN-CHARTER.md` and folded into the docs/DESIGN_FP_ARCH_* volume form; LANDED on the ledger at 1d77ceb67; FOLDED INTO THE EDIT MODE PROGRAM (the fold §3.1.20, OD-FC-38); as chartered, ONE engine-gated virtual flag (`stressorPinsEnabled`, cn-4), minted nowhere; nothing scheduled.
 ## CONSOLIDATED 2026-10-23 from the bracketed text of record at `1beabdc85` — the old header block (its draft banner and composition notes) and §10 FOLD PROVENANCE are in `settlement-engine-kits/fp-final-a73343ed-2026-10-17/history/CN-review-record.md`; the review trail is in git at `1beabdc85`.
 ## Bound by the FP constitution's requirements 1–24 (`DESIGN_FP_SPINE.md` §1; 15–24's text of record is `DESIGN_FP_COHERENCE_FOLD.md` §1) and by the fold; the status of record is the fold's §2. ⭐ marks the OWNER's rows; every judgment J-CNC-n is vetoable.

@@ -1,5 +1,7 @@
 # THE SHARED SUBSTRATE CENSUS — the ground all eight FP programs stand on
 
+[RE-READ 2026-11-08 (FP-REBASE) — unaffected by the people car and the allegiance train: the shared substrate census is a measured record of its day (2026-08-04 at `3754c6f3`); its `npcAgency.js` and npc-ladder lines measure the machinery as it then stood and build nothing on it, and the retirements are carried by `DESIGN_FP_ARCHITECTURE.md` §2a CLASS 5.]
+
 ## Cross-program verification pass, 2026-08-04. Measured READ-ONLY against
 ## `.claude/worktrees/minifold`, branch `claude/composite-r4`, HEAD `3754c6f3`
 ## ("WR-10w wave close: the two proofs no single lane could make").

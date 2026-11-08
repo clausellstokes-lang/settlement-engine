@@ -1,5 +1,7 @@
 # DESIGN — THE WAYFARE PROGRAM (WY: the inhabited roads, the physical flows, the mirror law)
 
+[RE-READ 2026-11-08 (FP-REBASE) — unaffected by the people car and the allegiance train: roads, physical flows, rumor durability and absolute distance are route- and settlement-grain, and its text reads no person roster, faction field or corruption mark (grep, 2026-11-08: none).]
+
 ## docs/DESIGN_FP_ARCH_WY.md — A LANDED MEMBER OF THE docs/DESIGN_FP_ARCH_*
 ## FAMILY; WY is the ELEVENTH chartered volume prefix (admitted at §5b item 7,
 ## in the same commit as this program's first cross-layer registry row).

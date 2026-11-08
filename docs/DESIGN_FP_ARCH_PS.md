@@ -1,5 +1,7 @@
 # DESIGN_FP_ARCH_PS — THE PASSAGE: a foreign military unit moving through another settlement's or kingdom's land
 
+[RE-READ 2026-11-08 (FP-REBASE) — unaffected by the people car and the allegiance train: the passage is unit-grain and already kills no named person ("a commander's or captain's death is the DM's verdict alone" — the owner's death law of 2026-11-08 in advance); it reads no roster, faction field or mark.]
+
 ## Compiled on the owner's word of 2026-10-18 in the FP final architecture program (kit `settlement-engine-kits/fp-final-a73343ed-2026-10-17/`); DARK behind two virtual flags (`passageEnabled`, `passageStanceEnabled`, §10); nothing scheduled.
 ## CONSOLIDATED 2026-10-23 from the bracketed text of record at `1beabdc85` — the review trail is in git and in `settlement-engine-kits/fp-final-a73343ed-2026-10-17/history/PS-cure-record.md`; the compile's log and measurements (taken at master `81f1cd963`) are `settlement-engine-kits/fp-final-a73343ed-2026-10-17/cure/L-PS.md` (probes `cure/L-PS-probe/`).
 ## Bound by the FP constitution's requirements 1–24 (`DESIGN_FP_SPINE.md` §1; 15–24's text of record is `DESIGN_FP_COHERENCE_FOLD.md` §1) and by the coherence fold. The owner's own row is marked; every ruling is vetoable (§16).

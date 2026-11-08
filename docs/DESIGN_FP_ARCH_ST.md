@@ -1,5 +1,7 @@
 # FP ARCHITECTURE — THE SITES (`ST`): forts, towers, shrines and dens on the land, and what they do to the towns they are attached to
 
+[RE-READ 2026-11-08 (FP-REBASE) — unaffected by the people car and the allegiance train: sites are place-grain; a person holder is a `wnpc_` card (a tower's face may be one), and a holder's death is already the DM's verdict ("death is never the engine's"), so nothing presumes the grouping or the mark.]
+
 ## Compiled on the owner's word of 2026-10-18 in the FP final architecture program (kit `settlement-engine-kits/fp-final-a73343ed-2026-10-17/`); DARK behind four virtual flags (§9); nothing scheduled. Every constant is DRAFT and UNMEASURED on the FP-46 roster.
 ## CONSOLIDATED 2026-10-23 from the bracketed text of record at `1beabdc85` — the review trail is in git and in `settlement-engine-kits/fp-final-a73343ed-2026-10-17/history/ST-cure-record.md`; the compile's measurements (taken at master `81f1cd963`) are `settlement-engine-kits/fp-final-a73343ed-2026-10-17/cure/L-ST.md`.
 ## Bound by the FP constitution's requirements 1–24 (`DESIGN_FP_SPINE.md` §1; 15–24's text of record is `DESIGN_FP_COHERENCE_FOLD.md` §1) and by the coherence fold. The OWNER's rows are marked ⭐; every ruling is vetoable (§13).

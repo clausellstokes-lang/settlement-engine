@@ -147,7 +147,7 @@ diverge is a STOP-and-report, and any wave that amends a DS-FTH row re-runs
 | V14 | sacred_claim quadrant table (0.75/0.60; rite 0.80/0.45), both-patrons guard load-bearing, flag+patrons dual gate | sacredClaim.js:39-49 (guards), :67-84 (CLAIM_BY_QUADRANT / RITE_BY_QUADRANT) | VERIFIED |
 | V15 | Amendment-C dissolution keyed on patron-anchor change; anchor_unavailable legacy arm; warTerminationEnabled BUILT and read | warTermination.js:225-259 (sacredAnchors mint via patronRefOf), :320-345 (re-read + `anchor_unavailable`); flag read applyWorldPulse.js:536 | VERIFIED — WF-1's join surface is live |
 | V16 | Realm pantheon: seats/tier lazy view, dwell + hysteresis, no deletion path, Ascendancy/Twilight | pantheon.js:8-57 (MINOR_PROMOTE 2 / MAJOR_PROMOTE 4 / MAJOR_DEMOTE 2); zero `delete` statements in pantheon.js; realmEvents.js:270-294 (tier-change beats) | VERIFIED (J-WF-1's ground) |
-| V17 | Church agency: CHURCH_OBJECTIVE missionize/legitimacy levers; temple_authority prize; tithe_rights token; clergy roles; deityWriteGate fail-closed | scoringObjective.js:86-96; factionCompetition.js:29/:62/:74; npcAgency.js:42-46; settlementDeityHelpers.js:~96-112 | VERIFIED |
+| V17 | [RE-BASED 2026-11-08 (FP-REBASE, seat FPR-CONSTITUTION; the census §2 row "WF / FAITH") — "clergy roles" were the grouping's faction roles (`npcAgency.js`, on the FPZ list) → THE CHURCH'S FACE IS ITS PRIEST (the temple house's one face, ranked in the religious power; its rank-1 face the ranking cleric, `DESIGN_FP_ARCHITECTURE.md` §1 L11); the power-grain levers (`CHURCH_OBJECTIVE`, `temple_authority`) stand] Church agency: CHURCH_OBJECTIVE missionize/legitimacy levers; temple_authority prize; tithe_rights token; clergy roles; deityWriteGate fail-closed | scoringObjective.js:86-96; factionCompetition.js:29/:62/:74; npcAgency.js:42-46; settlementDeityHelpers.js:~96-112 | VERIFIED |
 | V18 | Divine mandate → publicLegitimacy, theocracy 1.0 / royal 0.45 | religionState.js:~557-575 (MANDATE_GOV_WEIGHT, MANDATE_RANGE 30, MANDATE_PULL 0.15, MANDATE_STEP 2) | VERIFIED |
 | V19 | beliefMap faithLabel + observanceLabel (stale rite beliefs) | beliefAxes.js:8-18 | VERIFIED |
 | V20 | Herald: 'faith' + 'divination' sections; divination = forecast-shaped, structural | heraldRouting.js:64 (HERALD_SECTIONS), :132-144 (faith tokens), :~300 (pressure tokens → divination), :26-38 (structural doctrine) | VERIFIED (WF-4's routing split stands) |
@@ -329,7 +329,7 @@ ledger under SP-1's lifecycle, when built), fall/split/exposure receipts
 - **PERSIST:** all six ride existing serialization homes (religionStates,
   settlement.institutions, spatialLedgers). JSON-round-trip pinned per shape,
   both arms (with/without the conditional field). The JSON-alias trap applies to
-  shepherdRef/clergy (factions[].members[] ARE npcs[] — fixtures round-trip).
+  shepherdRef/clergy (factions[].members[] ARE npcs[] — fixtures round-trip). [RE-BASED 2026-11-08 (FP-REBASE, seat FPR-CONSTITUTION; the census §2 row "WF / FAITH") — the trap presumed the grouping → RETIRED; `shepherdRef` names a card by id; the round-trip pin stands as plain data]
 - **REGENERATE (THE PROMISE):** all folds are keyed hash01
   (`wf.<facet>.<realmId>.<cid>...`, codepoint-ordered enumeration; zero new PRNG
   streams dark AND lit) so same-seed replay is byte-identical and the kernel's
@@ -857,3 +857,12 @@ extension surface (WF-8), the SP module names/paths (all), the covert seam's
 reusable surface (WF-5b), and warDeployment headroom at WF-7's build). Report,
 don't rule: any conflict between this layer, the volume, the spine, the
 amendments, or the tree is a STOP-and-report to the validation chair.
+
+---
+
+## RE-BASED 2026-11-08 (FP-REBASE) — what moved in this volume
+
+Seat FPR-CONSTITUTION, against `docs/chair/2026-11-08/FP-REBASE-CENSUS-2026-11-08.md` §2 row "WF / FAITH".
+
+- §1b V17 — clergy roles → the church's face is its priest.
+- §3 PERSIST — the JSON-alias clause retired.

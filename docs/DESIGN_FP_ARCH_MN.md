@@ -1,5 +1,7 @@
 # DESIGN_FP_ARCH_MN — THE MENACE: one generic threat from outside the settlement system, named by the DM, answered by the world
 
+[RE-READ 2026-11-08 (FP-REBASE) — unaffected by the people car and the allegiance train: the menace is a DM-named outside force against settlements and armies, with no faction of its own; it reads no person roster or mark, and its violence falls on the masses.]
+
 ## Compiled on the owner's word of 2026-10-17 in the FP final architecture program (kit `settlement-engine-kits/fp-final-a73343ed-2026-10-17/`); DARK behind four virtual flags (§8); nothing scheduled.
 ## CONSOLIDATED 2026-10-23 from the bracketed text of record at `1beabdc85` — the review trail is in git and in `settlement-engine-kits/fp-final-a73343ed-2026-10-17/history/MN-cure-record.md`; the measurements (taken at master `81f1cd963`) are the kit's `cure/L-MN.md` and the menace lanes' logs under `cure/`.
 ## Bound by the FP constitution's requirements 1–24 (`DESIGN_FP_SPINE.md` §1; 15–24's text of record is `DESIGN_FP_COHERENCE_FOLD.md` §1) and by the fold. The OWNER's rows are marked ⭐ or named THE OWNER'S; every ruling is vetoable (§12).

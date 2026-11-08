@@ -1,5 +1,7 @@
 # DESIGN — THE MOVEMENT GRAMMAR (MG): how every unit moves on the map, week by week, and why
 
+[RE-READ 2026-11-08 (FP-REBASE) — unaffected by the people car and the allegiance train: the movement grammar is unit-grain, and no person roster, faction field or corruption mark is read (grep, 2026-11-08: none).]
+
 ## Compiled on the owner's words of 2026-10-20 (08:43, 12:25, 12:41 and 12:49 CDT) in the FP final architecture program, from the brief `briefs/L-MG.md` (the kit `settlement-engine-kits/fp-final-a73343ed-2026-10-17/`); DARK behind three virtual flags (`movementGrammarEnabled`, `wingsEnabled`, `ridingEnabled`, §11); nothing scheduled.
 ## CONSOLIDATED 2026-10-20 from the bracketed text of record at `1beabdc85` — the review trail is in git and in `settlement-engine-kits/fp-final-a73343ed-2026-10-17/history/MG-cure-record.md`; the compile log, every measurement (taken FIRST, at master `81f1cd963`), every STOP and the routes are `settlement-engine-kits/fp-final-a73343ed-2026-10-17/cure/L-MG.md` (probes `cure/L-MG-probe/`).
 ## Bound by the FP constitution's requirements 1–24 (`DESIGN_FP_SPINE.md` §1; 15–24's text of record is `DESIGN_FP_COHERENCE_FOLD.md` §1) and by the fold. Owned under WAYFARE: WY owns the one physics; MG is a VERB LAYER over it, never a second travel law. Every claim about code is CONFIRMED (read at the cited symbol at master `81f1cd963`) unless marked PLAUSIBLE; a claim about a sibling volume's design is PLAUSIBLE until that volume's car-0. The OWNER's shapes and rows are marked ⭐; every ruling is vetoable (§17).

@@ -1,5 +1,7 @@
 # EC-ARCHITECTURE — THE ECONOMY PROGRAM: SCARCITY, ALLOCATION AND CAUSE (compiled implementation layer; absorbs TR)
 
+[RE-READ 2026-11-08 (FP-REBASE) — unaffected by the people car and the allegiance train: the economy is settlement-, house- and court-grain; its casting lines name "the seat NPC" and "the house's factor" through existing reads, which now resolve to the seat face (`DESIGN_FP_ARCHITECTURE.md` §1 L11) and to TR-2's re-based factor (`DESIGN_FP_ARCH_TR.md`), and no line presumes the grouping or the mark.]
+
 ## EC program architect (chair session 2fc13d59, Fable 5.1), 2026-10-16. Measured
 ## against the DEPLOYED master tip `origin/master` @ `00b648c9d` (a detached
 ## read-only worktree; the FP release branches of 10-02/03 are NOT yet composed

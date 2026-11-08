@@ -193,7 +193,7 @@ supplyShipments + the granary.
   settlement's death drops its pairs through the writer.
 - **houses** — create: the TR-2 formation rule (eligibility predicate +
   deterministic selection, codepoint tie-break); read: band words only; persist:
-  JSON-round-trip (members ARE npcs[] — JSON-alias round-trip mandatory);
+  JSON-round-trip (members ARE npcs[] — JSON-alias round-trip mandatory [RE-BASED 2026-11-08 (FP-REBASE, seat FPR-CONSTITUTION; the census §2 row "TR") — the alias presumed the grouping → retired; a house names its factor by card id]);
   **regenerate: books are event-accrued, NOT re-derivable — regen PRESERVES
   books (the J-TR-3 disclosed exception, second instance of J-WR-3's idiom)**;
   undo/import: round-trip both shapes; migrate: a load-time normalizer LANDS
@@ -264,6 +264,7 @@ the publishing commit (S40).
   simulationRules.js + settlementRumors.js (re-grep after rebase).
 
 ### TR-2 — THE HOUSE (`merchantHousesEnabled`) — buildable after TR-1
+[RE-BASED 2026-11-08 (FP-REBASE, seat FPR-CONSTITUTION; the census §2 row "TR") — the factor was cast from the NPC grouping (`houseLedger.js` reads `npc.factionAffiliation === house`; `houseLedger.js` is on the FPZ list, `tests/lint/legacyFactionReaders/fpz-list.json`) and the house's members aliased the cards (the JSON-alias trap) → FACTOR CASTING reads MEMBERSHIPS: a factor is cast from the members of the MERCHANT POWER the house backs (`membersOf(power)` and `rankIn`, through the ONE READER MODULE, `DESIGN_FP_ARCHITECTURE.md` §1 L11; the best-ranked member first, then share, then card id — never a codepoint pick over a roster), or, where the house has a face, the house's LINKED FACE (its representative on the institution card, the people car's R-P8); eligibility ONLY via `factionArchetype()` STANDS (a power-grain archetype read — "faction" is read as "power", the fold §5; a LANDED token never renames); the JSON-alias round-trip pin is RETIRED with the grouping (a factor is named by its card id; the round-trip pin stands as plain data); a cast factor is a named person, so the death law holds (the fold §7 OD-FC-146: the engine never kills it; the DM-KILL edit is the only door)]
 [ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: within a month once mounted (EC-11) — a house act receipt ("House Verren took an interest in the river road"); books bands move on season-grade dwell; today NONE (no pulse mount) · TIER: aspatial-safe (books, acts); sponsored caravans need spatial canon + `commodityFlowEnabled` · dispatch: as EC's absorbed wave, after the release is pushed and deployed (OD-EC-4) · DEGRADED ARM: books and acts without caravans]
 [CORRECTED 2026-10-16 (coherence fold §3.2.10) — ABSORBED BY DESIGN_FP_ARCH_EC.md: cleanly, as EC-11 (OD-EC-1); BUILT DARK at c8c21a9f3 (09-24; cures d36f43c21), no pulse mount — EC-11 lands it from the EC kernel]
 - **New leaves:** `houseLedger.js` (writer + formation/ruin-latch/rename rules
@@ -473,7 +474,7 @@ the publishing commit (S40).
   idiom verbatim; venture supercargo; fair circuit with ARRIVAL-grade belief
   writes}; K.2 snapshot decays, never truth-refreshed; ~300 eff).
 - **Slice 2:** compromised factor (declared vs true purpose on the covert
-  seam) + the prize: capture lands in `foreignGuestHold.js` through ITS one
+  seam) [RE-BASED 2026-11-08 (FP-REBASE, seat FPR-CONSTITUTION; the census §2 row "TR") — "compromised" and "corruption-web material" read the one corruption mark → the fold §3.2.23's TWO AXES: a factor compromised ABROAD is ES's FOREIGN mark (leashed to another court, carried in `allegiance.leash`), its home-town hidden hand, if any, is its ALLEGIANCE read through `allegianceOf`; the slice declares which axis its true purpose rides] + the prize: capture lands in `foreignGuestHold.js` through ITS one
   writer (S34 — consumed, import pin proves no second hold writer); ransom on
   the I2 person-subject claim.
 - **Pins:** speed-floor walker extends to commercial errands (every movement
@@ -625,3 +626,13 @@ FP_TRADE §10 deltas (two commits for TR-4/TR-8; WHAT_PHRASES + heraldRouting
 before first mint; the T7 walker in TR-4 slice 1; J-WR-13's STOP rule on a
 fourth census overstatement; CW-0 registry row in the same commit as any
 cross-layer read). STOP-and-report on measured blockers is a SUCCESS mode.*
+
+---
+
+## RE-BASED 2026-11-08 (FP-REBASE) — what moved in this volume
+
+Seat FPR-CONSTITUTION, against `docs/chair/2026-11-08/FP-REBASE-CENSUS-2026-11-08.md` §2 row "TR".
+
+- §3 the houses' lifecycle — the JSON-alias clause retired (row "CW"'s clause, met here too).
+- §4 TR-2 — factor casting by memberships in the merchant power or the house's linked face; `factionArchetype()` stands as a power read; the death law.
+- §4 TR-8 slice 2 — the compromised factor placed on the two axes (a presumption the census did not list for TR, found by this seat's grep; the fold §3.2.23).

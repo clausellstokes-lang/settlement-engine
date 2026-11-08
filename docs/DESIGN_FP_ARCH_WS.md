@@ -1,5 +1,7 @@
 # DESIGN_FP_ARCH_WS — THE WAY OF WAR: the closed ways a court fights, chosen by its personality against its strengths and weaknesses, deviated per war
 
+[RE-READ 2026-11-08 (FP-REBASE) — unaffected by the people car and the allegiance train: a court's way of war is weighted by the governing power's archetype (`factionArchetype(governingFactionOf(settlement))`, a power-grain read in which "faction" reads "power", the fold §5), and the chooser binds no NPC to a power.]
+
 ## Compiled on the owner's word of 2026-10-20 (12:29 CDT) in the FP final architecture program; DARK behind three virtual flags (`wayOfWarEnabled`, `wayOfWarDeviationEnabled`, `wayOfWarBeliefEnabled`, §9); nothing scheduled.
 ## CONSOLIDATED 2026-10-20 from the bracketed text of record at `1beabdc85` — the review trail is in git and in `settlement-engine-kits/fp-final-a73343ed-2026-10-17/history/WS-cure-record.md`; the compile log, every measurement (taken FIRST, at master `81f1cd963`) and the routes are `settlement-engine-kits/fp-final-a73343ed-2026-10-17/cure/L-WS.md`.
 ## Bound by the FP constitution's requirements 1–24 (`DESIGN_FP_SPINE.md` §1; 15–24's text of record is `DESIGN_FP_COHERENCE_FOLD.md` §1) and by the fold. The OWNER's shapes and rows are marked ⭐; every ruling is vetoable (§15).
