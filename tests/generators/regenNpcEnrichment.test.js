@@ -42,8 +42,13 @@ describe('[generators-domain-3] rerolled NPCs get the same coherence enrichment 
   });
 
   test('regen enrichment holds across tiers', () => {
+    // MERGE-CAR-2 (2026-11-08, re-keyed by cause, arm 1's CENSUS-1d precedent): the town seed rolls a
+    // succession void, under which CENSUS-4b's CALM_ONLY `stable` entries are refused (structuralPosition
+    // 0 at the integration parent 7b3ffb6ee too — the sum held there by factionAffiliation alone, 10/6),
+    // and the people car retired factionAffiliation from the card, so the composed tip read 0 + 0. Each
+    // tier now reads a CALM settlement (no stress selected); the parity it proves is unchanged.
     for (const tier of ['town', 'village']) {
-      const s = gen({ settType: tier, culture: 'germanic', terrainOverride: 'plains', tradeRouteAccess: 'road' }, `d3-${tier}`);
+      const s = gen({ settType: tier, culture: 'germanic', terrainOverride: 'plains', tradeRouteAccess: 'road', selectedStressesRandom: false, selectedStresses: [] }, `d3-${tier}`);
       const regen = regenNPCsPipeline(s, s.config || {}, { seed: `d3-${tier}-r` });
       const cov = enrichmentCoverage(regen.npcs || []);
       expect(cov.factionAffiliation + cov.structuralPosition).toBeGreaterThan(0);
