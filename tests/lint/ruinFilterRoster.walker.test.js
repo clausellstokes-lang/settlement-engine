@@ -165,6 +165,8 @@ const RUIN_AGNOSTIC_EXEMPT = Object.freeze({
   'src/domain/worldPulse/magicBufferModel.js': 'loss-count scalar — `loss.institutions` is the StrikeLoss COUNT of buildings one calamity would fell (an integer supplied by the calamity producer via magicBufferApply), never a settlement roster; the leaf is pure arithmetic that sees no settlement, roster, world or name, so there is no row to ruin-filter and no provider capacity is credited',
   // ── penalty-side: counts impaired/criminal for a PENALTY, not live crediting ─────
   'src/domain/corruption.js': 'penalty-side — criminal/corruption-impairment classifier (drag, not credit)',
+  // ALLEGIANCE-CAR1 (2026-11-08): the retired corruptionPass's roster read moved here with the deal (J-2), measured.
+  'src/domain/people/allegiance.js': 'penalty-side — the allegiance deal reads the roster\'s CRIMINAL houses (isCriminalInstitution) for the corruption climate and organized-crime pressure (drag, not credit), as the retired corruptionPass did through corruption.js, and looks a card\'s house up by name (the handler pool, the `via` mark); it credits no provider capacity',
   'src/domain/state/deriveSystemState.js': 'penalty-side — countByStatus impaired/critical risk penalty (status-aware)',
   // ── mutation / write / undo: rewrites the roster ─────────────────────────────────
   'src/domain/factionRename.js': 'mutation — a faction rename rewrites `institutions[].factionSource`, the exact-name marker recording WHICH faction raised an institution. A ruined institution keeps that provenance, so filtering the roster here would strand the ruin under the old faction name and split the join the rename exists to hold together. Credits nothing.',
@@ -505,7 +507,8 @@ describe('ruin-filter roster ratchet (structural-prevention Pattern 2)', () => {
     // by this file's own scan at the merged tip; both sides' readers composed, no new one.
     // FIX-PUBLIC-VEIL (2026-11-07): 101 -> 102, src/domain/people/cardVeil.js :: veiledOfInstitution's roster-name read (EXEMPT above).
     // ALLEGIANCE-CAR1 (2026-11-08, the veil merged over MERGE-CAR): 105 + 1 (cardVeil.js, EXEMPT) = 106, measured by this file's own scan.
-    expect(readers.length).toBe(106);
+    // ALLEGIANCE-CAR1 (2026-11-08): 106 -> 107, src/domain/people/allegiance.js (the deal's criminal-house read, EXEMPT above), measured by this file's own scan.
+    expect(readers.length).toBe(107);
   });
 
   test('exempt honesty: every exempt entry still reads .institutions and is not already compliant', () => {
