@@ -197,7 +197,11 @@
  *     roster 10 -> 13, the bank 69/45 -> 76/50), and ADMITS the window's other rows with
  *     attribution. Its full rationale lives beside `WINDOW_RUNG1_TARGET_SCHEMA` (RETIRED).
  *
- *   schema 33 -> 34 (LIVE)   the same tagged numeric reconciliation, and MERGE-WAVE AT THE FIX-FOOD-ISOLATION
+ *   schema 34 -> 35 (LIVE)   MERGE-WAVE AT THE FIX-PUBLIC-VEIL MERGE (7e65c7bec; the chair's option B): one rung,
+ *     two causes — the corpus builder's producer 1b′ (no row moves) and the veiled re-deal (4 admitted, 13
+ *     gone); none declared, the bank 76/50. Its full rationale lives beside `WAVE_VEIL_TARGET_SCHEMA`.
+ *
+ *   schema 33 -> 34 (RETIRED) the same tagged numeric reconciliation, and MERGE-WAVE AT THE FIX-FOOD-ISOLATION
  *     MERGE (c6e8a4ad6; one rung per cause): ONE row ADMITTED by cause, `nearbyResourcesState on config` at
  *     foodGenerator.js (its own existing read, newly observed on the receipt's call path); nothing goes,
  *     none declared, the bank 76/50. Its full rationale lives beside `WAVE_FOOD_TARGET_SCHEMA`.
@@ -336,6 +340,7 @@ import {
   validateSchema31Baseline,
   validateSchema32Baseline,
   validateSchema33Baseline,
+  validateSchema34Baseline,
 } from './lib/observed-shape-baseline.mjs';
 
 export const MIGRATION_REPORT_SCHEMA = 2;
@@ -1510,6 +1515,38 @@ export const WAVE_W2_TARGET_SCHEMA = 33;
  *  mint STOPS. Its delta is the three bookkeeping paths; see `WAVE_FOOD_SCANNER_DELTA_PATHS`. */
 export const WAVE_FOOD_TARGET_SCHEMA = 34;
 
+/* ⭐⭐ THE SCHEMA 34 → 35 RUNG — MERGE-WAVE AT THE FIX-PUBLIC-VEIL MERGE (one rung, two causes: the chair's
+ *  option B of 2026-11-08)
+ *
+ *  The merge commit 7e65c7bec merged lane/fix-public-veil-2026-11-07 (eb18cb458, cut from the car branch)
+ *  into the integration branch. The lane carried two rungs of its own: its 32 (the corpus's infiltrated
+ *  topology, producer 1b′ in scripts/lib/observed-shape-corpus.mjs) and its 33 (the veiled re-deal). The
+ *  corpus builder auto-merged; at the merged tip both causes stand in one tree, so the ritual cannot
+ *  measure them apart. THE CHAIR'S RULING (option B): ONE rung on the merged tip, predecessor 34, its
+ *  transition carrying the corpus builder path as CAUSE 1 and its review attributing every moved row to
+ *  CAUSE 2, both causes named per row; every row has exactly one cause.
+ *
+ *  CAUSE 1 — the corpus definition: producer 1b′, CONFIGS[0] × the four seeds with stressTypes
+ *  ['infiltrated'], entering `roots` (topology only). It moves NO row: the lane's own rung-32
+ *  measurement, NEW 0 · GONE 0 · SAME 1,545, is the evidence (docs/FIX_PUBLIC_VEIL_2026-11-07.md §2).
+ *  CAUSE 2 — the veiled re-deal (the lane's 48bcc1f3e: a veiled face's opaque id keys its forks), MEASURED
+ *  at the merged tip against the schema-34 register: NEW 4 · GONE 13 · INCREASED 0 · DECREASED 0.
+ *    NEW, ADMITTED with attribution — `covert on impairments` x1 in src/domain/corruption.js,
+ *      src/domain/worldPulse/beliefMap.js, src/domain/entities/status.js and
+ *      src/domain/worldPulse/institutionStatusLifecycle.js (the re-dealt year no longer reaches the
+ *      covert-corruption writer; the lane's rung-33 rows).
+ *    GONE, retired with that cause — `nearbyResourcesState on config` in affordanceManifest.js,
+ *      mutateWorld.js (4), targetRosters.js, resourceSemantics.js, deriveSystemState.js,
+ *      institutionLifecycleResourceRead.js, resourceDynamicsKernel.js, tierResourceDynamics.js (2),
+ *      foodGenerator.js (FIX-FOOD-ISOLATION's row admitted at 34) and resolveResources.js (3);
+ *      `resourceHistory on settlement` in rosterProvenance.js, resourceDynamicsKernel.js (2) and
+ *      tierResourceDynamics.js (2): the re-dealt year now observes both keys.
+ *
+ *  Nothing is declared (the roster stays fourteen; thirteen bank, 76/50). ⛔ The reconciliation must be
+ *  EXACTLY those seventeen rows; any other moved row means the review was not the whole cause and the
+ *  mint STOPS. The delta is FOUR paths: the corpus builder (cause 1) and the three bookkeeping paths. */
+export const WAVE_VEIL_TARGET_SCHEMA = 35;
+
 export const DECLARED_BANK_BY_TARGET = Object.freeze({
   [EXEMPTION_RETIREMENT_TARGET_SCHEMA]: Object.freeze({ bankedReads: 60, taggedRows: 39 }),
   [BANK_FENCE_TARGET_SCHEMA]: Object.freeze({ bankedReads: 60, taggedRows: 39 }),
@@ -1579,6 +1616,8 @@ export const DECLARED_BANK_BY_TARGET = Object.freeze({
   [WAVE_W2_TARGET_SCHEMA]: Object.freeze({ bankedReads: 76, taggedRows: 50 }),
   // HELD at 34 (MERGE-WAVE, FIX-FOOD-ISOLATION): the one admitted row is ordinary debt, on no declared identity.
   [WAVE_FOOD_TARGET_SCHEMA]: Object.freeze({ bankedReads: 76, taggedRows: 50 }),
+  // HELD at 35 (MERGE-WAVE, FIX-PUBLIC-VEIL): no moved row is on a declared identity.
+  [WAVE_VEIL_TARGET_SCHEMA]: Object.freeze({ bankedReads: 76, taggedRows: 50 }),
 });
 
 /** The declared post-bank of a target, or `null` for a rung that predates the law. */
@@ -2166,6 +2205,15 @@ export const WAVE_FOOD_SCANNER_DELTA_PATHS = Object.freeze([
   'scripts/migrate-observed-shape-readers.mjs',
 ]);
 
+/** The schema-34 → 35 delta: FOUR paths — the corpus builder (cause 1, producer 1b′) and the three
+ *  bookkeeping paths. */
+export const WAVE_VEIL_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/lib/observed-shape-corpus.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
 export const BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS = Object.freeze([
   'package-lock.json',
   'package.json',
@@ -2230,6 +2278,8 @@ const WAVE_W2_SCANNER_TRANSITION_POLICY =
   'schema-32-to-33-exact-scanner-transition-v1';
 const WAVE_FOOD_SCANNER_TRANSITION_POLICY =
   'schema-33-to-34-exact-scanner-transition-v1';
+const WAVE_VEIL_SCANNER_TRANSITION_POLICY =
+  'schema-34-to-35-infiltrated-topology-and-veiled-redeal-v1';
 const CORPUS_COVERAGE_SCANNER_TRANSITION_POLICY =
   'schema-7-to-8-exact-scanner-transition-v1';
 const EPOCH_DARK_CORPUS_SCANNER_TRANSITION_POLICY =
@@ -2282,6 +2332,7 @@ export const LEAF_MIGRATION_PREDECESSOR = Object.freeze({
   [CAR_MERGE_TARGET_SCHEMA]: PEOPLE_LANDING_TARGET_SCHEMA,
   [WAVE_W2_TARGET_SCHEMA]: CAR_MERGE_TARGET_SCHEMA,
   [WAVE_FOOD_TARGET_SCHEMA]: WAVE_W2_TARGET_SCHEMA,
+  [WAVE_VEIL_TARGET_SCHEMA]: WAVE_FOOD_TARGET_SCHEMA,
 });
 
 /**
@@ -2381,6 +2432,8 @@ const LEAF_PREDECESSOR_VALIDATOR = Object.freeze({
   [CAR_MERGE_TARGET_SCHEMA]: validateSchema32Baseline,
   // The schema-34 rung's own predecessor (MERGE-WAVE, W2 DEF), validated as schema 33 by its retired literal.
   [WAVE_W2_TARGET_SCHEMA]: validateSchema33Baseline,
+  // The schema-35 rung's own predecessor (MERGE-WAVE, FIX-FOOD-ISOLATION), validated as schema 34.
+  [WAVE_FOOD_TARGET_SCHEMA]: validateSchema34Baseline,
 });
 
 const RETIRED_EXACT_MIGRATION_KIND = `observed-shape-schema-2-to-${RETIRED_EXACT_TARGET_SCHEMA}-migration`;
@@ -2904,6 +2957,12 @@ const SCANNER_TRANSITION_BY_TARGET = new Map([
     // governed execution inputs (the dossier-state prose, the institution service keys, the prose
     // norms, …) by their documented commands after the predecessor was frozen, and the report
     // records that movement for the review's decision.
+    reviewableUnscannedMovement: true,
+  })],
+  [WAVE_VEIL_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: WAVE_VEIL_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: WAVE_VEIL_SCANNER_TRANSITION_POLICY,
     reviewableUnscannedMovement: true,
   })],
   [WAVE_FOOD_TARGET_SCHEMA, Object.freeze({
@@ -4063,7 +4122,7 @@ export function run(argv = process.argv.slice(2)) {
   // any mismatch into a refusal rather than a silent mode switch.
   const targetSchema = command.targetSchema
     ? Number(command.targetSchema)
-    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : WAVE_FOOD_TARGET_SCHEMA);
+    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : WAVE_VEIL_TARGET_SCHEMA);
   if (![RETIRED_EXACT_TARGET_SCHEMA, HEURISTIC_TARGET_SCHEMA, FILTERED_TARGET_SCHEMA,
     SURFACE_FILTERED_TARGET_SCHEMA, BANKED_EXPLAINED_WRITER_TARGET_SCHEMA,
     CORPUS_COVERAGE_TARGET_SCHEMA, EPOCH_DARK_CORPUS_TARGET_SCHEMA,
@@ -4077,8 +4136,9 @@ export function run(argv = process.argv.slice(2)) {
     CORPUS_REDEAL_TARGET_SCHEMA, ADVISORY_LOCKFILE_TARGET_SCHEMA,
     FED_WORLD_TARGET_SCHEMA, WINDOW_RUNG1_TARGET_SCHEMA, TIER_COVERAGE_TARGET_SCHEMA,
     MIGRATION_DIRECTION_TARGET_SCHEMA, PEOPLE_CAST_TARGET_SCHEMA,
-    PEOPLE_LANDING_TARGET_SCHEMA, CAR_MERGE_TARGET_SCHEMA, WAVE_W2_TARGET_SCHEMA, WAVE_FOOD_TARGET_SCHEMA].includes(targetSchema)) {
-    throw new Error(`observed-shape --target-schema must be ${WAVE_FOOD_TARGET_SCHEMA} (live food-isolation leaf),`
+    PEOPLE_LANDING_TARGET_SCHEMA, CAR_MERGE_TARGET_SCHEMA, WAVE_W2_TARGET_SCHEMA, WAVE_FOOD_TARGET_SCHEMA, WAVE_VEIL_TARGET_SCHEMA].includes(targetSchema)) {
+    throw new Error(`observed-shape --target-schema must be ${WAVE_VEIL_TARGET_SCHEMA} (live public-veil leaf),`
+      + ` ${WAVE_FOOD_TARGET_SCHEMA} (retired food-isolation leaf),`
       + ` ${WAVE_W2_TARGET_SCHEMA} (retired W2-merge leaf),`
       + ` ${CAR_MERGE_TARGET_SCHEMA} (retired car-merge leaf),`
       + ` ${PEOPLE_LANDING_TARGET_SCHEMA} (retired people-landing leaf),`

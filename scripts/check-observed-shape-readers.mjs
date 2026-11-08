@@ -107,11 +107,12 @@ import {
   RETIRED_PEOPLE_LANDING_BASELINE_SCHEMA,
   RETIRED_CAR_MERGE_BASELINE_SCHEMA,
   RETIRED_WAVE_W2_BASELINE_SCHEMA,
+  RETIRED_WAVE_FOOD_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA,
   RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
-  validateSchema34Baseline,
+  validateSchema35Baseline,
 } from './lib/observed-shape-baseline.mjs';
 import {
   parseExactFlags,
@@ -257,7 +258,11 @@ const BASELINE = join(ROOT, 'scripts/.observed-shape-readers-baseline.json');
  * 34 = schema 33's topology, tag law, roster and corpus definition, re-governed to MERGE-WAVE at the
  *     FIX-FOOD-ISOLATION merge (one rung per cause): ONE new row ADMITTED with attribution —
  *     `nearbyResourcesState on config` at foodGenerator.js, its own existing read observed on the
- *     isolation receipt's call path; nothing goes, nothing declared, the bank 76/50. THE LIVE AUTHORITY.
+ *     isolation receipt's call path; nothing goes, nothing declared, the bank 76/50 (RETIRED).
+ * 35 = schema 34's topology, tag law and roster, re-governed to MERGE-WAVE at the FIX-PUBLIC-VEIL merge
+ *     (the chair's option B: one rung, two causes, every row with one): the corpus gains producer 1b′
+ *     (the infiltrated topology; no row moves), and the veiled re-deal admits 4 `covert on impairments`
+ *     rows and retires 13; nothing declared, the bank 76/50. THE LIVE AUTHORITY.
  * ⚠ THIS LIST WENT STALE FOR EIGHT RUNGS — it marked 10 as "THE LIVE AUTHORITY" while
  *   the number stood at 18 — so it is filled in here rather than extended by one. Each
  *   rung's full rationale lives beside its own target constant in
@@ -287,6 +292,7 @@ export {
   RETIRED_PEOPLE_LANDING_BASELINE_SCHEMA,
   RETIRED_CAR_MERGE_BASELINE_SCHEMA,
   RETIRED_WAVE_W2_BASELINE_SCHEMA,
+  RETIRED_WAVE_FOOD_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA, RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
@@ -1598,7 +1604,7 @@ export function assertExplainedWriterRowTags(
   baseline,
   entries = EXPLAINED_WRITER_EXEMPTIONS,
 ) {
-  validateSchema34Baseline(baseline);
+  validateSchema35Baseline(baseline);
   assertExplainedWriterExemptions(entries);
   const declarations = new Map(entries.map((entry) => [entry.identity, entry]));
   const genesis = baseline.frozenAtSha === baseline.migrationReview.subjectSha;
@@ -3115,10 +3121,14 @@ export function baselineOf({
       'W2 DEF merge (one rung per cause): ONE row ADMITTED by cause, `direction on stress` at migrationDirection.js,',
       'grounded to the `stress` shape by the W2 composition, its writer W0-1\'s draw (343bd4eec), which no corpus',
       'seed reaches; nothing goes, nothing is declared and the bank is 76/50 (RETIRED).',
-      'SCHEMA 34 = schema 33\'s topology, tag law, roster and corpus definition, re-governed to MERGE-WAVE at the',
+      'SCHEMA 34 (RETIRED) held schema 33\'s topology, tag law, roster and corpus definition, re-governed to MERGE-WAVE at the',
       'FIX-FOOD-ISOLATION merge (one rung per cause): ONE row ADMITTED by cause, `nearbyResourcesState on config` at',
       'foodGenerator.js, its own existing read observed on the isolation receipt\'s call path; nothing goes,',
-      'nothing is declared and the bank is 76/50.',
+      'nothing is declared and the bank is 76/50 (RETIRED).',
+      'SCHEMA 35 = schema 34\'s topology, tag law and roster, re-governed to MERGE-WAVE at the FIX-PUBLIC-VEIL merge',
+      '(one rung, two causes, every row with one): the corpus gains producer 1b\u2032 (the infiltrated topology; no',
+      'row moves) and the veiled re-deal ADMITS 4 `covert on impairments` rows and retires 13; nothing is declared',
+      'and the bank is 76/50.',
       'Of the fourteen declared bank entries THIRTEEN bank reads today; `isCriminal on incomeSources`',
       'has banked nothing since schema 17 made its writer observable, and banked is always a',
       `subset of declared. This envelope banks ${bankPhrase(bankOf(inventory, rowTags))}.`,
@@ -3129,7 +3139,7 @@ export function baselineOf({
       'An untagged row means: a guarded read, of a real record rather than browser or language surface,',
       'of a key no writer the corpus runs produces and no declared out-of-corpus writer explains.',
       'A tagged row stays visible as governed explained-writer debt under its numeric ceiling and reason.',
-      'Schemas 4–33 are the RETIRED numeric predecessors.',
+      'Schemas 4–34 are the RETIRED numeric predecessors.',
     ],
     schema: BASELINE_SCHEMA,
     frozen: new Date().toISOString().slice(0, 10),
@@ -3303,7 +3313,7 @@ export async function run(argv = [], overrides = {}) {
     createScanArtifact,
     validateScanArtifact,
     assertFindingSourceEvidence,
-    validateBaseline: validateSchema34Baseline,
+    validateBaseline: validateSchema35Baseline,
     // ⭐ THE BANK FENCE'S TWO HAND-OWNED SIDES, overridable so the sentinel can drive
     // every refusal: the literal module and the migration script's declared post-bank.
     readBankLiteral: readBankLiteralModule,
