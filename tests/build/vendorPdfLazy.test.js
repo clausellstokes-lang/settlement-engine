@@ -570,7 +570,17 @@ const requireDistRead = process.env.VERIFY_DIST === '1';
 // 5B a725df7e4 +232 · step 1 2981f23f6 0 · L0 147fa6c3f +138 (the links lane's honorific registry and door) · the cures
 // and records to the tip 0. The sum closes: 1,041,311 + 6,279 + 1,507 + 118 + 34 + 1,547 + 232 + 138 = 1,051,166.
 // gzip 335,954 < 336,286 and Brotli 282,052 < 282,346: both transfer budgets hold, unmoved.
-const CLOSURE_BUDGET_BYTES = 1_051_166; // 2026-11-07: re-recorded AT the measured people-car landing tip, PEOPLE-LAND (note above); was 1_042_033, LANDING-8
+// 2026-11-08, MERGE-CAR: the three first-paint budgets re-recorded AT the measured tip (2026-11-08, MERGE-CAR, the integration landing; the chair's standing ruling "trim where no output byte moves,
+// then re-record at the measured figure", under the owner's delegation of 2026-11-06; VETOABLE BY THE OWNER). No trim
+// that moves no output byte was attempted in this seat. MEASURED by a fresh `vite build` of a git archive of each tree,
+// the five figures read exactly as this file's arms read them (the tip at the merged checkout):
+//   raw   1,041,311 (base) + 21,357 (the integration parent, 1,062,668) + 9,855 (the car, 1,051,166) - 35 (the merge's
+//         interaction) + 0 (every commit after) = 1,072,488.
+//   gzip  332,916 + 5,619 + 3,033 + 88 + 7 (4c39885fc) - 16 (the cure, at the checkout) = 341,647.
+//   Brotli 279,545 + 5,405 + 2,642 - 195 - 80 + 210 = 287,527. (The compressed figures drift by tens of bytes across
+//   environments at an equal raw closure — measured: the tip's gzip read 341,663 in the archive build and 341,647 here; the
+//   checkout's figures are recorded, as the gate reads them.)
+const CLOSURE_BUDGET_BYTES = 1_072_488; // 2026-11-08: re-recorded AT the measured merged tip, MERGE-CAR (note above); was 1_051_166 (PEOPLE-LAND) / 1_062_940 (LANDING-R2)
 // Transfer budgets measure each fetched chunk independently, matching CDN
 // compression rather than compressing an artificial concatenation. Recorded
 // 2026-07-24 from the seven-file closure: raw 1,034,954; gzip 321,341;
@@ -600,8 +610,8 @@ const CLOSURE_BUDGET_BYTES = 1_051_166; // 2026-11-07: re-recorded AT the measur
 //     it spends ~11.3 kB / ~9.5 kB of headroom no measurement asks for.
 // Leaving both untouched is the only one of the three that neither spends owner headroom
 // nor weakens the instrument. Monotone-down unchanged; raises stay owner-signed.
-const CLOSURE_GZIP_BUDGET_BYTES = 338_535; // 2026-11-07: re-recorded AT the measured 338,535, MERGE-R2 under the chair's standing ruling, a vetoable rise of 150 B over the rung-2 parent's 338,385 (note at file end)
-const CLOSURE_BROTLI_BUDGET_BYTES = 284_950; // 2026-11-07: re-recorded AT the measured 284,950, MERGE-R2 under the chair's standing ruling, a vetoable rise of 172 B over the rung-2 parent's 284,778 (note at file end)
+const CLOSURE_GZIP_BUDGET_BYTES = 341_647; // 2026-11-08: re-recorded AT the measured merged tip, MERGE-CAR (note above); was 338_535 (MERGE-R2) / 336_286 (PEOPLE-LAND)
+const CLOSURE_BROTLI_BUDGET_BYTES = 287_527; // 2026-11-08: re-recorded AT the measured merged tip, MERGE-CAR (note above); was 284_950 (MERGE-R2) / 282_346 (PEOPLE-LAND)
 
 // Parse the top-level *static* module edges out of a built chunk. Static
 // edges use the `from` keyword — `import{..}from"./x.js"` and re-exports
@@ -859,7 +869,11 @@ describe.runIf(distExists)('Tier 9.7 — vendor-pdf lazy load contract', () => {
     // merges) · lane 1 +12,929 (the cast's generators) · lane 2 +248 · lane 3 +3,366 · lane 4 +549 · 5A -447 · 5B +3 ·
     // step 1 -1,782 (the shim and the grouping out) · L0 0 · the cures and records 0. Sum: 681,803 + 12,929 + 248 + 3,366
     // + 549 - 447 + 3 - 1,782 = 696,669. Nothing eager re-merged: the first-paint closure arm reads 8 chunks.
-    expect(size).toBeLessThan(696_670);
+    // CEILING 696_670 (the car's) / 707_703 (MERGE-R2's) -> 722_205 (2026-11-08, MERGE-CAR; VETOABLE BY THE OWNER): measured
+    // 722,204 at the tip; the bound is strict, so the measured figure + 1. Fresh builds of git archives: the base 262e8b255
+    // 681,803 · the integration parent +25,899 (707,702) · the car +14,866 (696,669) · the merge's interaction -491
+    // (722,077) · 4c39885fc 0 · the composition cure b19740ab3 +127. Sum: 681,803 + 25,899 + 14,866 - 491 + 127 = 722,204.
+    expect(size).toBeLessThan(722_205);
   });
 
   // ── T13 TRANS: the transcendental kernel's CHUNK PLACEMENT ───────────────
@@ -1797,9 +1811,9 @@ describe.runIf(distExists)('ARCH car 2 — the corpus rides data-lazy, and that 
 // ratification histories above each constant are the record of what that costs.
 describe('ARCH car 2 — the three first-paint budgets stay where the owner signed them', () => {
   it('the raw, gzip and Brotli closure budgets are unmoved', () => {
-    expect(CLOSURE_BUDGET_BYTES, 'the raw first-paint budget moved').toBe(1_051_166); // PEOPLE-LAND, 2026-11-07 (note at the constant); LANDING-8 1_042_033 before
-    expect(CLOSURE_GZIP_BUDGET_BYTES, 'the gzip transfer budget moved').toBe(336_286);
-    expect(CLOSURE_BROTLI_BUDGET_BYTES, 'the Brotli transfer budget moved').toBe(282_346);
+    expect(CLOSURE_BUDGET_BYTES, 'the raw first-paint budget moved').toBe(1_072_488); // MERGE-CAR, 2026-11-08 (note at the constant); PEOPLE-LAND 1_051_166 / LANDING-R2 1_062_940 before
+    expect(CLOSURE_GZIP_BUDGET_BYTES, 'the gzip transfer budget moved').toBe(341_647); // MERGE-CAR, 2026-11-08
+    expect(CLOSURE_BROTLI_BUDGET_BYTES, 'the Brotli transfer budget moved').toBe(287_527); // MERGE-CAR, 2026-11-08
 
     // ⭐ THE SETTLEMENT-EDITOR TRAIN'S SUMMED FIRST-PAINT PRICE, recorded by the member that
     // holds this file's row. The three budgets above are unmoved because the train's MEMBERSHIP

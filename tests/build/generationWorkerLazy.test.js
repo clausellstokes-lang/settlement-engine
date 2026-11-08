@@ -400,7 +400,17 @@ const SENTINEL = 'settlementforge:generation:worker-v1';
 //   lane 147fa6c3f 0 · the landing's cures and records to the tip -3 (6851c4c89, an em dash). The sum closes exactly:
 //   1,574,838 + 4,822 + 17,607 + 420 + 3,214 + 327 - 568 + 4,645 - 1,738 - 3 = 1,603,564, the tip's worker bundle.
 // The ceiling is recorded AT the measured figure. MONOTONE-DOWN from here.
-export const WORKER_BUNDLE_CEILING_BYTES = 1603564;
+// 1,603,564 (the car's) / 1,695,569 (MERGE-R2's) -> 1,735,881 (2026-11-08, MERGE-CAR, the integration landing; the chair's standing ruling "trim where no output byte moves,
+// then re-record at the measured figure", under the owner's delegation of 2026-11-06; VETOABLE BY THE OWNER). No trim
+// that moves no output byte was attempted in this seat. MEASURED by a fresh `vite build` of a git archive of each tree,
+// the five figures read exactly as this file's arms read them (the tip at the merged checkout):
+//   the shared base 262e8b255 1,579,660 · the integration parent 7b3ffb6ee 1,695,569 (+115,909: the rung-2 landing, W0, the
+//   review intake — MERGE-R2's attribution above) · the car 373a2947b 1,603,564 (+23,904: PEOPLE-LAND's attribution above) ·
+//   the merge 8dff691f3 1,735,669 (+16,196 of interaction: the two lines composed — the census's declared draws inside the
+//   car's hook and tie writers, the ported R3 rule, the reader's membership port) · 4c39885fc 0 · the composition cure
+//   b19740ab3 + the display fix 9fd906c23 +212. The sum closes exactly: 1,579,660 + 115,909 + 23,904 + 16,196 + 212 =
+//   1,735,881, the tip's worker bundle. Recorded AT the measured figure; MONOTONE-DOWN from here.
+export const WORKER_BUNDLE_CEILING_BYTES = 1735881;
 
 const source = (path) => readFileSync(join(ROOT, path), 'utf8');
 
