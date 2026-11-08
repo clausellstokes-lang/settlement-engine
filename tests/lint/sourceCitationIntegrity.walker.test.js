@@ -43,7 +43,7 @@
  * ⚠ THE ARCHIVAL EXCLUSION, MEASURED AND LISTED. 35 documents are frozen records
  * of their day, and re-addressing them to today's tree would FALSIFY a record
  * rather than repair it — `docs/review-r2/VERIFY_SUBSYSTEMS_RESULTS.json` pins a
- * sha and states that all its cited lines matched AT THAT SHA. They carry 377
+ * sha and states that all its cited lines matched AT THAT SHA. They carry 382 (377 -> 382 at MERGE-CAR, the sha-pin move)
  * past-EOF citations this gate deliberately does not see. FOUR rules select them,
  * each checkable, and the full roster is committed in the baseline's
  * `archivalExclusionAtFreeze.files`:
@@ -149,8 +149,10 @@
  *                and SOAK_1000_2026-11-03 (joined 2026-11-03, 8 -> 9, born into the roster
  *                as the SOAK-1000 dry-run report; its citations address 1169b3cd5; a GROWTH
  *                that hid nothing)
- *   sha-pin (1)  a header that pins the tree it describes (`**Snapshot base:**`):
- *                SETTLEMENT_CAPABILITY_ATLAS
+ *   sha-pin (2)  a header that pins the tree it describes (`**Snapshot base:**`):
+ *                SETTLEMENT_CAPABILITY_ATLAS; docs/chair/2026-11-07/people-5-prep/walker-draft-at-base.txt (2026-11-08, MERGE-CAR,
+ *                the chair's ruling: a listing frozen at 1031233a4 that the people car's shorter files put past EOF;
+ *                377 -> 382 excluded, no row re-addressed)
  * The BLOCKQUOTE is required, not decoration: docs/README.md discusses the word
  * HISTORICAL in body prose while being the most live document in the tree, and a
  * bare word match excluded it. A first pass tried "any hex sha in the header"
