@@ -647,8 +647,15 @@ export function instigatorCandidates(s, kind, stakes) {
   }
   /** @type {CastRow[]} */
   const out = [];
+  // MERGE-CAR (the car × rung-2 composition, the one-source rule): a card's HOUSE is its FIRST-RANK power (the people
+  // car's shape, M-1b), so a member of an instigating house whose best standing is in a house that holds the seat acts
+  // for the seat, and RUNG2-F13 refuses it as an instigator exactly as it refuses that house (coh:crisis-cast-sense's
+  // plotter_governs, soak1k-21, -173, -231, -304, -358, -711, -891 at the merged tip).
+  const order = powerOrderOf(s);
+  const seatHouses = new Set(factionsOf(s).filter((f) => holdsTheSeat(s, f)).map(factionName));
+  const actsForTheSeat = (/** @type {CastNpc} */ n) => seatHouses.has(str(firstRankMembershipOf(n, order)?.power));
   for (const { f, reason } of picks) {
-    for (const n of membersOf(s, factionName(f))) out.push(npcRow(n, 'instigator', reason));
+    for (const n of membersOf(s, factionName(f))) if (!actsForTheSeat(n)) out.push(npcRow(n, 'instigator', reason));
     out.push(factionRow(f, 'instigator', reason));
   }
   return { candidates: out, absent: nature === 'engineered' ? CAST_ABSENCES.outsideHand : CAST_ABSENCES.noGains };

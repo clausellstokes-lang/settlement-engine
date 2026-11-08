@@ -173,6 +173,7 @@ export function assignCastPowers(settlement, cards, rng) {
       ...config,
       _tradeCommodity: deriveTradeCommodity(economicState, { firstWordFallback: true }),
       _dominantFaction: factions[0]?.faction || null,
+      _government: settlement?.powerStructure?.government ?? null, // MERGE-CAR: CENSUS-4d (R-V) — the goal draw reads the ruler kind the record already has (generateNPCs' npcConfig carries it; the car's birth seams now do too)
       _prosperity: economicState?.prosperity || null,
     };
     /** @type {Map<string, string>} minted card id → the person hook's pool */

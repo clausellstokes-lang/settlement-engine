@@ -94,6 +94,7 @@ export function mintPowerFace(row, ctx, options = {}) {
     ...ctx.config,
     _tradeCommodity: deriveTradeCommodity(ctx.economicState || {}, { firstWordFallback: true }),
     _dominantFaction: ctx.powerStructure?.factions?.[0]?.faction || null,
+    _government: ctx.powerStructure?.government ?? null, // MERGE-CAR: CENSUS-4d (R-V) — the goal draw reads the ruler kind the record already has (generateNPCs' npcConfig carries it; the car's birth seams now do too)
     _prosperity: ctx.economicState?.prosperity || null,
   };
   return generateSingleNPC(row.role, row.titleKey, row.category, ctx.culture, ctx.tier, npcConfig, ctx.institutions, ctx.hookRegistry, ctx.worldLaw, options);
@@ -265,6 +266,7 @@ export function generateRepresentatives(settlement, culture = 'germanic', config
     ...config,
     _tradeCommodity: deriveTradeCommodity(economicState, { firstWordFallback: true }),
     _dominantFaction: powerStructure?.factions?.[0]?.faction || null,
+    _government: powerStructure?.government ?? null, // MERGE-CAR: CENSUS-4d (R-V) — the goal draw reads the ruler kind the record already has (generateNPCs' npcConfig carries it; the car's birth seams now do too)
     _prosperity: economicState?.prosperity || null,
   };
   // The settlement-scoped anti-repetition registry (see generateNPCs): one loyalty string, one
