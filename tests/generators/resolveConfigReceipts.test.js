@@ -33,10 +33,14 @@ const floorEffects = (s) => configTraces(s).flatMap(t =>
 // ── Explicit isolation is preserved and certified ───────────────────────────
 
 describe('explicit isolation carries a support-model receipt', () => {
+  // RE-KEYED 'receipts-iso-town' → 'receipts-iso-town-2' BY IDENTITY (FIX-FOOD-ISOLATION second seat,
+  // 2026-11-07), one cause: the receipt's local foodshed is the land's harvest as the food writer grows it,
+  // so the first seed's forest town now grows enough to be viable (56/52) and has no gap to label. The second
+  // seed's town is precarious (51/52) and still carries the gap this arm is about.
   test('town + no-magic + explicit isolated stays isolated and labels its support gap', () => {
     const s = gen(
       { ...BASE_CFG, settType: 'town', magicExists: false, tradeRouteAccess: 'isolated' },
-      'receipts-iso-town',
+      'receipts-iso-town-2',
     );
     expect(s.config.tradeRouteAccess).toBe('isolated');
 

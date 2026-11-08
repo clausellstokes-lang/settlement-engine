@@ -424,7 +424,11 @@ describe('FIX-G1 — the viability summary counts the list the record publishes'
     // NON-VACUITY: the corpus really does reach the sentence that states a count. Measured
     // at 370 of 525 before and after the cure; the floor is well under it so an unrelated
     // corpus edit cannot red this, while a corpus that stopped producing the sentence does.
-    expect(stating, 'no row stated a dependency count — the sweep judged nothing').toBeGreaterThan(300);
+    // RE-KEYED 300 → 250 BY MEASUREMENT (FIX-FOOD-ISOLATION, 2026-11-07), one cause: 305 at the
+    // base → 274. An isolated town is fed from outside only as far as its support receipt carries,
+    // so 31 golden isolated towns (receipt `untenable`) now carry an uncovered local food deficit
+    // and read NOT VIABLE — the "has N operational dependencies" sentence is the VIABLE verdict's.
+    expect(stating, 'no row stated a dependency count — the sweep judged nothing').toBeGreaterThan(250);
     expect(offenders, `\n${offenders.join('\n')}\n`).toEqual([]);
   }, 120_000);
 });

@@ -1,8 +1,10 @@
 import { describe, expect, it } from 'vitest';
 import {
   deriveIsolationSupport,
+  isolationFoodImportShareOf,
   shouldAddMagicalSubstitution,
 } from '../../src/generators/isolationSupport.js';
+import { foodLandOf } from '../../src/generators/foodGenerator.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { checkStructuralValidity } from '../../src/generators/structuralValidator.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
@@ -36,6 +38,51 @@ describe('isolation support model', () => {
     ]));
   });
 
+  // FIX-FOOD-ISOLATION (the chair's ruling, 2026-11-07): the receipt says how much of the place's need
+  // can reach it from outside — its import-bearing paths over the capacity its size needs — and the food
+  // writer reads that bound. Anchored: the foodshed and the reserves (the harvest and the stores) are in
+  // the receipt and out of the bound; a connected receipt bounds nothing.
+  it('reads the food import bound from the paths that carry food in from outside', () => {
+    const support = deriveIsolationSupport({
+      tier: 'town',
+      tradeRoute: 'isolated',
+      institutions: [{ name: 'Farmland' }, { name: 'Grain fields' }, { name: 'Granary' }, { name: "Caravaneer's post" }],
+      config: {
+        tradeRouteAccess: 'isolated',
+        nearbyResources: ['grain_fields', 'grazing_land', 'foraging_areas'],
+        nearbyResourcesDepleted: [],
+        magicExists: false,
+        priorityMagic: 0,
+      },
+    });
+    expect(support.paths.map(path => path.type)).toEqual(expect.arrayContaining(['local_foodshed', 'reserves']));
+    // hinterland 10 (the town's 20% hinterland share of 52, second seat) + seasonal access 8 of the 52 a town
+    // needs; the foodshed and the reserves' 6 are not imports.
+    expect(support.paths.find(path => path.type === 'hinterland').capacity).toBe(10);
+    expect(isolationFoodImportShareOf(support)).toBe(18 / 52);
+    const connected = deriveIsolationSupport({ tier: 'town', tradeRoute: 'road', institutions: [], config: {} });
+    expect(isolationFoodImportShareOf(connected)).toBeNull();
+  });
+
+  // FIX-FOOD-ISOLATION second seat (the chair's ruling, 2026-11-07): ONE source for how much the land grows.
+  // The receipt's local foodshed is the food writer's own harvest share (foodGenerator.js :: foodLandOf) of the
+  // capacity the tier needs, and its evidence says what it read. Anchored: the same town on poor land
+  // scores lower, so the figure is the land's, not a constant.
+  it('scores the local foodshed by the share of need the food writer grows', () => {
+    const at = (terrainType) => deriveIsolationSupport({
+      tier: 'town', tradeRoute: 'isolated', institutions: [{ name: 'Mills (2-5)' }],
+      config: { tradeRouteAccess: 'isolated', terrainType, nearbyResources: [], magicExists: false, priorityMagic: 0 },
+    });
+    const plains = at('plains');
+    const foodshed = plains.paths.find(path => path.type === 'local_foodshed');
+    const land = foodLandOf('town', [{ name: 'Mills (2-5)' }], { tradeRouteAccess: 'isolated', terrainType: 'plains', nearbyResources: [] }, 'isolated');
+    expect(foodshed.capacity).toBe(Math.round(land.grownShareOfNeed * 52));
+    expect(foodshed.capacity, 'a plains town grows 99% of its need: 51 of 52').toBe(51);
+    expect(foodshed.evidence).toEqual(['land:plains', 'grown:99% of need']);
+    expect(plains.status, 'a town that grows its need is not untenable on food').toBe('viable');
+    expect(at('mountain').paths.find(path => path.type === 'local_foodshed').capacity).toBeLessThan(foodshed.capacity);
+  });
+
   it('offers magical substitution only for a real gap at functional high magic', () => {
     const support = deriveIsolationSupport({
       tier: 'city',
@@ -54,13 +101,18 @@ describe('isolation support model', () => {
     expect(shouldAddMagicalSubstitution(support, { magicExists: false, priorityMagic: 100 })).toBe(false);
   });
 
+  // RE-KEYED city/plains → metropolis/desert BY IDENTITY (FIX-FOOD-ISOLATION second seat, 2026-11-07), one
+  // cause: the local foodshed is the land's harvest as the food writer grows it (foodLandOf), so a bare
+  // plains city grows 77% of its need and its gap (12) sits under the 42 floor. A desert metropolis grows
+  // 44% (38 of 88) with 4 of pack access, so the gap (46) is above the floor and the scaling is still driven.
   it('scales magical transit to the remaining gap after mundane support', () => {
     const support = deriveIsolationSupport({
-      tier: 'city',
+      tier: 'metropolis',
       tradeRoute: 'isolated',
       institutions: [{ name: 'Teleportation circle' }],
       config: {
         tradeRouteAccess: 'isolated',
+        terrainType: 'desert',
         nearbyResources: [],
         magicExists: true,
         priorityMagic: 80,
@@ -68,7 +120,7 @@ describe('isolation support model', () => {
     });
     const transit = support.paths.find(path => path.type === 'magical_transit');
 
-    expect(transit.capacity).toBe(66);
+    expect(transit.capacity).toBe(46);
     expect(support.capacity).toBe(support.requiredCapacity);
     expect(support.deficit).toBe(0);
     expect(support.magicDependent).toBe(true);
