@@ -243,3 +243,129 @@ describe('the people car — the powers\' people (step 3)', () => {
     expect(barracks.memberships).toEqual([{ power: 'The Shield Compact', rank: 1, share: 1, veiled: true }]);
   });
 });
+
+/**
+ * THE GUILD'S PUSH (the allegiance train, car 2, ALLEGIANCE-CAR2, 2026-11-08; the design §3.2, §4 I-5 and I-13; the
+ * chair's J-11: "the push never moves FLOOR 1 or FLOOR 2. Only the weighted ranks move"). Written red-first: at car
+ * 1's tip (7395b5dab) `GUILD_PUSH_TUNING` and `guildPushOf` do not exist and `rankPowers` takes no tuning, so every
+ * arm below reds; the floor checker reds on a planted floor breach (its control).
+ */
+describe('the guild\'s push (car 2): I-5 the floors hold under a maximal push; I-13 keyed', () => {
+  const SLICE = Array.from({ length: 240 }, (_, i) => i).filter((i) => i % 6 === 4 || i % 6 === 5);
+  /** @type {Map<number, any>} */
+  const BORN = new Map();
+  const born = async () => { await ensureLaws(); for (const i of SLICE) if (!BORN.has(i)) BORN.set(i, birth(i).settlement); return SLICE.map((i) => ({ i, s: BORN.get(i) })); };
+  const MAXIMAL = Object.freeze({ strength: 1e6, strengthFull: 30, organized: 1e6, max: 1e6 });
+  const NONE = Object.freeze({ strength: 0, strengthFull: 30, organized: 0, max: 1 });
+
+  /** Re-deal a born town's ranks under a push tuning: the cast's memberships re-landed, its allegiances kept. */
+  async function redeal(s, i, tuning, drop = null) {
+    const { landMemberships, rankPowers } = await import('../../../src/generators/people/castPowers.js');
+    const { createPRNG } = await import('../../../src/kernel/prng.js');
+    const cast = JSON.parse(JSON.stringify(s.npcs)).filter((n) => n.id !== drop);
+    const view = { tier: s.tier, institutions: s.institutions, powerStructure: s.powerStructure, economicState: s.economicState, config: s.config, _seed: s._seed };
+    const landed = landMemberships(view, cast, createPRNG(`push-${i}`), s._seed);
+    const plan = landed.plan;
+    const floors = new Map();
+    if (plan) {
+      for (const power of plan.powers) {
+        const pool = plan.members.get(power);
+        if (!pool.length) continue;
+        const picks = [];
+        const isGov = power === plan.governing;
+        const f1 = isGov
+          ? pool.find((m) => (plan.seatKey ? m.card.institution?.key === plan.seatKey && m.card.institution?.kind === 'house' : m.card.id === SEAT_CARD_ID))
+          : pool.find((m) => m.card.institution?.kind === 'power' && m.card.institution?.key === power);
+        if (f1) picks.push(f1.card.id);
+        const landmark = pool.filter((m) => m.largest && m.weight !== null && !picks.includes(m.card.id))
+          .sort((x, y) => (y.weight - x.weight) || (y.share - x.share) || (x.at - y.at))[0];
+        if (landmark && picks.length < RANKS) picks.push(landmark.card.id);
+        floors.set(power, picks);
+      }
+    }
+    const out = rankPowers(view, landed, tuning);
+    return { out, floors };
+  }
+  /** power -> [rank-1 id, rank-2 id, rank-3 id] */
+  const ranksOf = (cards) => {
+    const by = new Map();
+    for (const c of cards) for (const m of c.memberships || []) if (m.rank) { if (!by.has(m.power)) by.set(m.power, []); by.get(m.power)[m.rank - 1] = c.id; }
+    return by;
+  };
+  /** I-5 by the deal: every power's floor picks hold their ranks (FLOOR 1 rank 1; FLOOR 2 the next). */
+  const floorFindings = (cards, floors) => {
+    const ranks = ranksOf(cards); const out = [];
+    for (const [power, picks] of floors) picks.forEach((id, k) => { if ((ranks.get(power) || [])[k] !== id) out.push(`${power} rank ${k + 1}: ${(ranks.get(power) || [])[k]} where the floor is ${id}`); });
+    return out;
+  };
+
+  it('the dials: a draft table of four leaves, and the push of a clean card is 1, an agent\'s within [1, max]', async () => {
+    const { GUILD_PUSH_TUNING, guildPushOf } = await import('../../../src/generators/people/castPowers.js');
+    expect(GUILD_PUSH_TUNING).toEqual({ strength: 0.6, strengthFull: 30, organized: 0.4, max: 2.0 });
+    expect(Object.isFrozen(GUILD_PUSH_TUNING)).toBe(true);
+    const s = { powerStructure: { factions: [{ faction: "Thieves' Guild", category: 'criminal', power: 15 }] }, institutions: [] };
+    const agent = { allegiance: { power: "Thieves' Guild", house: 'Rookery', vector: 'greed', via: 'office', handler: 'h', share: 0.15 } };
+    expect(guildPushOf({}, s)).toBe(1);
+    // 1 + 0.6·(15 ÷ 30) + 0.4·organized, organized = 0.25 (the independent power's bonus; no criminal house)
+    expect(guildPushOf(agent, s)).toBeCloseTo(1 + 0.6 * 0.5 + 0.4 * 0.25, 10);
+    expect(guildPushOf(agent, s, { organized: 1, tuning: { ...GUILD_PUSH_TUNING, strength: 5 } })).toBe(2);
+    expect(guildPushOf({ allegiance: { ...agent.allegiance, power: null } }, s, { organized: 1 })).toBeCloseTo(1.4, 10);
+  });
+
+  it('I-5: under a MAXIMAL push every floor holds on the soak slice, and the push is live (it moves weighted ranks)', async () => {
+    const rows = await born();
+    let floorsSeen = 0; let moved = 0; const agentWeighted = { none: 0, max: 0 };
+    const found = [];
+    for (const { i, s } of rows) {
+      if (!(s.npcs || []).some((n) => n.allegiance)) continue;
+      const max = await redeal(s, i, MAXIMAL);
+      const none = await redeal(s, i, NONE);
+      found.push(...floorFindings(max.out, max.floors).map((f) => `${i} ${f}`));
+      floorsSeen += [...max.floors.values()].reduce((a, p) => a + p.length, 0);
+      const rm = ranksOf(max.out); const rn = ranksOf(none.out);
+      for (const [power, ids] of rm) if (JSON.stringify(ids) !== JSON.stringify(rn.get(power))) moved += 1;
+      const agents = new Set(max.out.filter((c) => c.allegiance).map((c) => c.id));
+      const weighted = (r, floors) => [...r].reduce((a, [p, ids]) => a + ids.filter((id, k) => k >= (floors.get(p) || []).length && agents.has(id)).length, 0);
+      agentWeighted.max += weighted(rm, max.floors); agentWeighted.none += weighted(rn, none.floors);
+    }
+    expect(found).toEqual([]);
+    expect(floorsSeen).toBeGreaterThan(200);
+    expect(moved, 'the maximal push moves some power\'s weighted ranks').toBeGreaterThan(5);
+    expect(agentWeighted.max, 'agents hold more weighted ranks under the push').toBeGreaterThan(agentWeighted.none);
+  }, 180_000);
+
+  it('I-5\'s control: the floor checker reds on a planted floor breach', async () => {
+    const rows = await born();
+    const { i, s } = rows.find(({ s }) => (s.npcs || []).some((n) => n.allegiance));
+    const { out, floors } = await redeal(s, i, MAXIMAL);
+    const [power, picks] = [...floors].find(([, p]) => p.length);
+    const holder = out.find((c) => c.id === picks[0]);
+    const other = out.find((c) => c.id !== picks[0] && (c.memberships || []).some((m) => m.power === power));
+    const planted = out.map((c) => JSON.parse(JSON.stringify(c)));
+    const swap = (id, rank) => { const m = planted.find((c) => c.id === id).memberships.find((x) => x.power === power); m.rank = rank; };
+    const was = other.memberships.find((m) => m.power === power).rank;
+    swap(holder.id, was); swap(other.id, 1);
+    expect(floorFindings(planted, floors).length).toBeGreaterThan(0);
+  }, 180_000);
+
+  it('I-13: removing a card leaves every other card\'s push, and the ranks of every power it held no membership in, byte-identical', async () => {
+    const { guildPushOf } = await import('../../../src/generators/people/castPowers.js');
+    const rows = await born();
+    let compared = 0;
+    for (const { i, s } of rows.slice(0, 20)) {
+      const victim = (s.npcs || []).find((n) => n.institution?.kind === 'house' && !n.allegiance && (n.memberships || []).length);
+      if (!victim) continue;
+      const whole = await redeal(s, i, undefined);
+      const less = await redeal(s, i, undefined, victim.id);
+      const held = new Set((whole.out.find((c) => c.id === victim.id)?.memberships || []).map((m) => m.power));
+      const rw = ranksOf(whole.out); const rl = ranksOf(less.out);
+      for (const [power, ids] of rw) {
+        if (held.has(power)) continue;
+        expect(`${i} ${power} ${JSON.stringify(rl.get(power))}`).toBe(`${i} ${power} ${JSON.stringify(ids)}`);
+        compared += 1;
+      }
+      for (const c of less.out) expect(guildPushOf(c, s)).toBe(guildPushOf(whole.out.find((x) => x.id === c.id), s));
+    }
+    expect(compared).toBeGreaterThan(50);
+  }, 180_000);
+});
