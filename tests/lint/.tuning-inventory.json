@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "3688e4ec42069026130f30b449610b2e2ed9f0e4",
-  "measuredBy": "MERGE-WAVE (W4 PEOPLE merge point)",
+  "measuredAtSha": "d8563dadba9cd588350940fcdbe48b200a784f4d",
+  "measuredBy": "MERGE-WAVE (FIX-FOOD-ISOLATION merge point)",
   "date": "2026-11-08",
-  "note": "the W4 PEOPLE merge at 66c23bfea: warFaithStateProse.js gains one bare decimal (W4 construction 86a30fdf2), attributed by its DECLARED_GROWTH row; refrozen at the merged tip, Register VII v2 stands",
+  "note": "the FIX-FOOD-ISOLATION merge at c6e8a4ad6: foodGenerator.js / isolationSupport.js re-shaped by the fix lane (the receipt reads the land through foodLandOf; the harvest side), the registered constants dependents moved, no value; refrozen at the merged tip, Register VII v2 stands",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -1048,7 +1048,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 943,
+      "line": 983,
       "spanDigest": "d8ad20f683ec92a4a0b123ebd6748169b8712e96577f567cd56d3cdd08f76113",
       "leaves": {
         "value": 0.05
@@ -8116,14 +8116,15 @@
       "exported": true,
       "idiom": "literal",
       "keys": 1,
-      "line": 58,
+      "line": 59,
       "spanDigest": "80a30b61941b4ce767eb70294da0e598be1b01e5d109279817fa9898c18c919a",
       "leaves": {
         "value": 12
       },
       "dependents": [
         "src/generators/economy/economicState.js",
-        "src/generators/economy/prosperity.js"
+        "src/generators/economy/prosperity.js",
+        "src/generators/isolationSupport.js"
       ],
       "namedDependents": []
     },
@@ -8131,14 +8132,15 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 60,
+      "line": 61,
       "spanDigest": "d70a3c36f3d2b697eda6a63ffcd293fc11e35364c9d6dc4619e552583b9f41a9",
       "leaves": {
         "value": 0.1
       },
       "dependents": [
         "src/generators/economy/economicState.js",
-        "src/generators/economy/prosperity.js"
+        "src/generators/economy/prosperity.js",
+        "src/generators/isolationSupport.js"
       ],
       "namedDependents": []
     },
@@ -8146,7 +8148,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 4,
-      "line": 61,
+      "line": 62,
       "spanDigest": "d2e49a612404d3d5836706cd0d20b875f6f1f6758ac155284dcebb2f44a36782",
       "leaves": {
         "rationFloorPct": 5,
@@ -8156,7 +8158,8 @@
       },
       "dependents": [
         "src/generators/economy/economicState.js",
-        "src/generators/economy/prosperity.js"
+        "src/generators/economy/prosperity.js",
+        "src/generators/isolationSupport.js"
       ],
       "namedDependents": []
     },
