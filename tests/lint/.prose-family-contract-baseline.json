@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "corpus": {
-    "scalarRows": 37469,
+    "scalarRows": 37359,
     "canonEventLogEntries": 1,
-    "wizardNewsFinalEntries": 399,
-    "wizardNewsAccumulatedEntries": 2518,
-    "wizardNewsUnique": 400,
+    "wizardNewsFinalEntries": 395,
+    "wizardNewsAccumulatedEntries": 2511,
+    "wizardNewsUnique": 396,
     "pulseHistory": 12,
     "regionalEventLog": 81,
     "regionalEventLogUnique": 81,
@@ -21,7 +21,7 @@
     {
       "family": "pulseHistory",
       "identities": 45,
-      "distinctValues": 1027,
+      "distinctValues": 1030,
       "occurrences": 5331
     },
     {
@@ -385,7 +385,7 @@
       "family": "pulseHistory",
       "path": "pulseHistory[].timeTicks[].summary[]",
       "field": "summary",
-      "distinctValues": 38,
+      "distinctValues": 41,
       "occurrences": 804
     },
     {
@@ -445,11 +445,11 @@
       "occurrences": 1
     }
   ],
-  "rowsSha256": "afddb136c9c6dab4f19ed17fef287e7ec1ef76ccded7e7f5578081c2407f9ce3",
+  "rowsSha256": "2bb92026f194ffb8f92c2f06a89d3bbfb7beb45a774705145fc4265c50a7f2cd",
   "totals": {
     "families": 4,
     "identities": 58,
-    "distinctValues": 1046,
+    "distinctValues": 1049,
     "occurrences": 5508
   }
 }

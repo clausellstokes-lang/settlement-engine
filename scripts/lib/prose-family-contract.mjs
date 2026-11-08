@@ -223,15 +223,26 @@ const EXPECTED_ROOTS = new Map([
 // Families: pulseHistory 46/957/5042 -> 45/1027/5331, regionalLog 2/4/189 -> 2/4/158; chronicle and timeline hold. Totals
 // 59/976/5250 -> 58/1046/5508 (one identity out, none in; 39 surviving rows move a count); bytes 7669 -> 7523; digest
 // 7c53b1cd -> afddb136. The regional root reach 0..11 holds.
+// ── RE-RECORDED 2026-11-08 AT MERGE-CAR (the people car merged into the integration branch, 8dff691f3; re-keyed by identity with
+// its cause), IN THE SAME ACT AS THE NEWS-VOICE AND NEWS-HEADLINE CONTRACTS (the 3d50676bb / 4e010ec54 door; ONE corpus build per
+// tree, this library's own functions). The car parent 373a2947b reproduces every frozen figure below EXACTLY (37469; 399/2518/400;
+// 81/81; 58/1046/5508; 7523; afddb136) and the integration parent 7b3ffb6ee its own MERGE-R2 pins (26701; 266/1598/266; 86/86;
+// 59/976/5259; 7669; 4c5a458d). The merge 8dff691f3 and the working tree (75a9da9bc) read, byte-equal: scalarRows 37469 → 37359,
+// wizardNews final/accumulated/unique 399/2518/400 → 395/2511/396, regional 81/81 HOLDS. THE SHAPE HOLDS: 58 identities, none in or
+// out; ONE row moves a count: pulseHistory[].timeTicks[].summary[] 38/804 → 41/804 (the integration parent's own 41/804).
+// pulseHistory 45/1027/5331 → 45/1030/5331; regionalLog, chronicle and timeline hold. Totals 58/1046/5508 → 58/1049/5508; bytes
+// 7523 → 7523 (digit widths); digest afddb136 → 2bb92026. Reach 0..11 holds. ATTRIBUTION: the car's re-dealt cast × the rung-2
+// landing's pool census (−4 applied|tradition introductions and three more time-tick spellings, each at the integration side's
+// measured value), PLAUSIBLE, not bisected.
 const EXPECTED_CORPUS = Object.freeze({
-  scalarRows: 37469, canonEventLogEntries: 1, wizardNewsFinalEntries: 399,
-  wizardNewsAccumulatedEntries: 2518, wizardNewsUnique: 400, pulseHistory: 12,
+  scalarRows: 37359, canonEventLogEntries: 1, wizardNewsFinalEntries: 395,
+  wizardNewsAccumulatedEntries: 2511, wizardNewsUnique: 396, pulseHistory: 12,
   regionalEventLog: 81, regionalEventLogUnique: 81, aiChronicle: 1,
 });
 const EXPECTED_REGIONAL_ROOTS = Object.freeze([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
 const EXPECTED_FAMILY_TOTALS = Object.freeze([
   { family: 'chronicle', identities: 7, distinctValues: 7, occurrences: 7 },
-  { family: 'pulseHistory', identities: 45, distinctValues: 1027, occurrences: 5331 },
+  { family: 'pulseHistory', identities: 45, distinctValues: 1030, occurrences: 5331 },
   { family: 'regionalLog', identities: 2, distinctValues: 4, occurrences: 158 },
   { family: 'timeline', identities: 4, distinctValues: 8, occurrences: 12 },
 ]);
@@ -241,9 +252,9 @@ const EXPECTED_FAMILY_TOTALS = Object.freeze([
 // (+6, +7, +9: both towns named, a deed per kind) and the three SUMMARY rows shrink (−1, −3, −1: the NPC line now states
 // the aim alone, its move having gone to the headline). EXPECTED_ROWS_BYTES holds at 8000 by digit-width coincidence again;
 // the digest below is the pin that convicts.
-const EXPECTED_TOTALS = Object.freeze({ families: 4, identities: 58, distinctValues: 1046, occurrences: 5508 });
+const EXPECTED_TOTALS = Object.freeze({ families: 4, identities: 58, distinctValues: 1049, occurrences: 5508 });
 const EXPECTED_ROWS_BYTES = 7523;
-const EXPECTED_ROWS_SHA256 = 'afddb136c9c6dab4f19ed17fef287e7ec1ef76ccded7e7f5578081c2407f9ce3';
+const EXPECTED_ROWS_SHA256 = '2bb92026f194ffb8f92c2f06a89d3bbfb7beb45a774705145fc4265c50a7f2cd';
 const codepoint = (left, right) => (left < right ? -1 : left > right ? 1 : 0);
 const same = (left, right) => JSON.stringify(left) === JSON.stringify(right);
 const identityOf = (row) => `${row.family}\0${row.path}\0${row.field}`;

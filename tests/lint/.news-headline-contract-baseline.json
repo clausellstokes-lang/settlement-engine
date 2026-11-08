@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "corpus": {
     "pulseRoots": 12,
-    "introductions": 400,
+    "introductions": 396,
     "retirements": 1,
-    "finalEntries": 399,
+    "finalEntries": 395,
     "homes": 40
   },
   "addressTotality": {
@@ -349,15 +349,15 @@
         "home": "applied|tradition",
         "field": "headline",
         "voiceClass": "indicative",
-        "distinctValues": 22,
-        "occurrences": 22
+        "distinctValues": 18,
+        "occurrences": 18
       },
       {
         "home": "applied|tradition",
         "field": "summary",
         "voiceClass": "indicative",
-        "distinctValues": 22,
-        "occurrences": 22
+        "distinctValues": 18,
+        "occurrences": 18
       },
       {
         "home": "applied|urban_fabric",
@@ -570,15 +570,15 @@
         "occurrences": 1
       }
     ],
-    "rowsSha256": "77f913478288c243a89fb98815f8a522bb2861d8df887439e6fa671b695de3d2",
+    "rowsSha256": "c62116c2d22e02176d27a1bb59181b0b2e4927d062beeb90b285e678ae2144c4",
     "totals": {
       "homes": 40,
       "fields": 2,
       "identities": 80,
       "prospectiveIdentities": 0,
       "indicativeIdentities": 80,
-      "distinctValues": 596,
-      "occurrences": 800
+      "distinctValues": 588,
+      "occurrences": 792
     }
   },
   "rewriteLiveness": {

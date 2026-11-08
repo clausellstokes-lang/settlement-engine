@@ -170,8 +170,19 @@ const TOTAL_KEYS = Object.freeze(['identities', 'distinctValues', 'occurrences']
 // applied|npc_bargain, queued|npc_reform). Conservation closes: 400 − 1 = 399. No surviving row flips its voice class (every
 // owned home, applied|npc_bargain arriving and applied|npc_expose leaving included, reads indicative at every point); the
 // voice debt stays EMPTY.
+// ── RE-RECORDED 2026-11-08 AT MERGE-CAR (the people car merged into the integration branch, 8dff691f3; re-keyed by identity
+// with its cause), IN THE SAME ACT AS THE NEWS-HEADLINE AND PROSE-FAMILY CONTRACTS (the 3d50676bb / 4e010ec54 door) ──────────
+// 400/1/399/40 → 396/1/395/40. ONE CORPUS BUILD PER TREE, every field measured (the throw below disabled in a scratch copy only):
+// the car parent 373a2947b reproduces its own pin 400/1/399/40 exactly and the integration parent 7b3ffb6ee its own 266/0/266/44
+// exactly; the merge 8dff691f3 and the working tree at 75a9da9bc both read 396/1/395/40, byte-equal on every field. Against the
+// car pin: −4 introductions and −4 final entries, ALL of them applied|tradition (22/22 → 18/18 on headline and summary, the
+// integration parent's own 18/18); the same 40 homes, none in or out; the year's one retirement holds. Against the integration
+// pin: the car's re-dealt cast (+130 introductions, +1 retirement, net four homes out). THE MERGE'S COMPOSITION OF THE TWO
+// LINES: the car's re-dealt cast × the rung-2 landing's pool census (its tradition home at the integration side's count),
+// attributed by equality with each parent's measured row, PLAUSIBLE, not bisected. Conservation closes: 396 − 1 = 395. No row
+// flips its voice class (every owned home reads indicative); the voice debt stays EMPTY.
 const CORPUS = Object.freeze({
-  pulseRoots: 12, introductions: 400, retirements: 1, finalEntries: 399, homes: 40,
+  pulseRoots: 12, introductions: 396, retirements: 1, finalEntries: 395, homes: 40,
 });
 
 export const NEWS_VOICE_PROTECTED_SUBSTRATE = Object.freeze([

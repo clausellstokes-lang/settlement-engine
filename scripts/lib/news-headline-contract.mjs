@@ -58,7 +58,13 @@ const LANES = Object.freeze({ mechanicalOutcomes: 8, selectedOutcomes: 24 });
 // CONTRACT (the 4e010ec54 door): CORPUS 270/0/270/44 → 400/1/399/40, ONE CAUSE, the people car re-dealing the AO-0 year (the
 // first-parent points and the named homes recorded once, at the voice contract's copy); ADDRESS_TOTALS and RAW_LIVENESS
 // below, each noted. REWRITE_TOTALS and KNOWN_INERT_HEADLINE_REWRITES hold (all 26 inert).
-const CORPUS = Object.freeze({ pulseRoots: 12, introductions: 400, retirements: 1, finalEntries: 399, homes: 40 });
+// ── RE-RECORDED 2026-11-08 AT MERGE-CAR (the people car merged into the integration branch, 8dff691f3; re-keyed by identity with
+// its cause), IN THE SAME ACT AS THE NEWS-VOICE CONTRACT (the 3d50676bb / 4e010ec54 door): CORPUS 400/1/399/40 → 396/1/395/40,
+// measured at the working tree (75a9da9bc, byte-equal to the merge 8dff691f3); the parents reproduce their own pins (373a2947b
+// 400/1/399/40, 7b3ffb6ee 266/0/266/44). −4 introductions, all applied|tradition, no home in or out (recorded once, at the voice
+// contract's copy; PLAUSIBLE, not bisected). ADDRESS_TOTALS below, noted. RAW_LIVENESS HOLDS (49/26, 165/96, 214/96, measured);
+// REWRITE_TOTALS and KNOWN_INERT_HEADLINE_REWRITES hold (all 26 inert; no gap, overlap or indicative match).
+const CORPUS = Object.freeze({ pulseRoots: 12, introductions: 396, retirements: 1, finalEntries: 395, homes: 40 });
 // ── RE-RECORDED 2026-09-01 BY T8 · SHIFT (ODQ §858 + §860) ─────────────────────────────────────
 // 53/106/14/92/400/544 → 51/102/12/90/393/536. `fields` holds at 2, as it must: the address grammar
 // is still headline-and-summary and nothing was added to it.
@@ -114,7 +120,12 @@ const CORPUS = Object.freeze({ pulseRoots: 12, introductions: 400, retirements: 
 // returns), digest 5b0965a9; lanes 3, 4, 5A hold; lane 5B a725df7e4 holds every total and moves four rows' counts (digest
 // 5b0965a9 → 77f91347); 2981f23f6 and the tip as now. Net seven homes out and three in, named at the voice contract's copy;
 // 28 surviving rows move a count; every row stays indicative.
-const ADDRESS_TOTALS = Object.freeze({ homes: 40, fields: 2, identities: 80, prospectiveIdentities: 0, indicativeIdentities: 80, distinctValues: 596, occurrences: 800 });
+// 2026-11-08 (MERGE-CAR, the people car merged into the integration branch, 8dff691f3; re-keyed by identity with its cause, measured
+// at the working tree, byte-equal to the merge): 40/2/80/0/80/596/800 → 40/2/80/0/80/588/792. NO HOME ARRIVES OR LEAVES; 2 rows move
+// a count: applied|tradition headline and summary 22/22 → 18/18 (the integration parent 7b3ffb6ee's own 18/18; the car parent
+// 373a2947b reproduces 596/800 and digest 77f91347 exactly). Every row stays indicative; digest 77f91347 → c62116c2, re-derived
+// with the rows in the baseline. PLAUSIBLE (the car's re-dealt cast × the rung-2 landing's pool census), not bisected.
+const ADDRESS_TOTALS = Object.freeze({ homes: 40, fields: 2, identities: 80, prospectiveIdentities: 0, indicativeIdentities: 80, distinctValues: 588, occurrences: 792 });
 const RAW_LIVENESS = Object.freeze({
   pulseRecords: 12,
   lanes: Object.freeze([
