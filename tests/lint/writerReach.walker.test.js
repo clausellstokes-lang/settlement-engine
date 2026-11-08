@@ -318,7 +318,9 @@ describe('writer-with-no-reader ratchet: the frozen register', () => {
     // resourceConditions (clause S, LIT-NAME at the merged tip); scripts/lib/writer-dark-register.mjs names both.
     // FORTY-FIVE BECAME FORTY-FOUR (2026-11-07, PEOPLE-5B EDIT, M-7): `generatedAs on members` LEFT with the grouping's
     // member copy — no shape carries the identity once the grouping leaves the record.
-    expect(WRITER_DARK_REGISTER.length).toBe(44);
+    // MERGE-CAR (2026-11-07): both sides' strikes composed — MERGE-R2's two (growsMoreThanEats, randomDepletionEligible)
+    // and PEOPLE-5B's one (generatedAs on members): 45 -> 42.
+    expect(WRITER_DARK_REGISTER.length).toBe(42);
     expect(liveEvidence.map((row) => row.identity).sort())
       .toEqual(WRITER_DARK_REGISTER.map((row) => row.identity).sort());
     for (const row of liveEvidence) {
@@ -519,7 +521,8 @@ describe('writer-with-no-reader ratchet: the live judgment', () => {
     // domain/foodSurplus.js inside the dossier-pdf closure since the rung-2 chunk cure) and randomDepletionEligible on
     // resourceConditions (clause S, LIT-NAME at the merged tip); scripts/lib/writer-dark-register.mjs names both.
     // 2026-11-07 (PEOPLE-5B EDIT, M-7): `generatedAs on members` left with the grouping: forty-five became forty-four.
-    expect(registeredAndDark.length).toBe(44);
+    // MERGE-CAR: 45 -> 42, both sides' strikes composed (MERGE-R2's two, PEOPLE-5B's one).
+    expect(registeredAndDark.length).toBe(42);
     expect(baseline.darkUnregistered.length).toBe(cohort.length - registeredAndDark.length);
     expect(reviewableDark(cohort).length).toBe(baseline.reviewableDarkCount);
     expect(reviewableDark(cohort).length).toBeLessThan(cohort.length);
