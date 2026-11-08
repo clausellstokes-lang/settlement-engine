@@ -96,12 +96,12 @@ describe('EM-P2 — the generation fork register: totality, derivation, and Tier
     const pairs = registryPairs();
     // ANTI-VACUITY FIRST: an empty registry would make every equality below trivially true.
     expect(pairs.length, 'the live registry produced no pairs').toBeGreaterThan(70);
-    expect(getStepOrder().length, 'the live step order').toBe(23); // lane CRISIS (2026-11-03): resolveCrisisCast joins (22 -> 23)
+    expect(getStepOrder().length, 'the live step order').toBe(22); // ALLEGIANCE-CAR1 (2026-11-08): 23 -> 22, corruptionPass retired (J-2), measured; lane CRISIS (2026-11-03): resolveCrisisCast joins (22 -> 23)
 
     expect(GENERATION_TIER1.length, 'the register declares one row per live pair').toBe(pairs.length);
     // GS-2 one faction set (2026-10-31, ODQ §934.101): 75 -> 72; generatePopulation|factions, generatePopulation|conflicts
     // and corruptionPass|factions left with the keys (the groups and conflicts are derived at assembly).
-    expect(GENERATION_TIER1.length, 'the measured denominator at this base').toBe(75); // 2026-11-07 PEOPLE-1 CAST: 74 -> 75, `assembleSettlement|relationships|mutates` (the seam's ties) // lane CRISIS (2026-11-03): resolveCrisisCast joins: two rows (72 -> 74)
+    expect(GENERATION_TIER1.length, 'the measured denominator at this base').toBe(74); // ALLEGIANCE-CAR1 (2026-11-08): 75 -> 74, `corruptionPass|npcs|mutates` retired with the step (J-2), measured; 2026-11-07 PEOPLE-1 CAST: 74 -> 75, `assembleSettlement|relationships|mutates` (the seam's ties) // lane CRISIS (2026-11-03): resolveCrisisCast joins: two rows (72 -> 74)
 
     const declared = GENERATION_TIER1.map((row) => `${row.step}|${row.key}`);
     const live = pairs.map((pair) => `${pair.step}|${pair.key}`);
@@ -118,7 +118,7 @@ describe('EM-P2 — the generation fork register: totality, derivation, and Tier
     // The crisis cast (lane CRISIS, 2026-11-03): provides 55 -> 56 (resolveCrisisCast|crisisCast), mutates 17 -> 18
     // (resolveCrisisCast|settlement).
     expect(GENERATION_TIER1.filter((row) => row.via === 'provides').length, 'provides entries').toBe(56);
-    expect(GENERATION_TIER1.filter((row) => row.via === 'mutates').length, 'mutates-only entries').toBe(19) /* 18 -> 19, PEOPLE-1 CAST: assembleSettlement|relationships|mutates */;
+    expect(GENERATION_TIER1.filter((row) => row.via === 'mutates').length, 'mutates-only entries').toBe(18) /* ALLEGIANCE-CAR1 (2026-11-08): 19 -> 18, corruptionPass|npcs|mutates retired (J-2), measured; 18 -> 19, PEOPLE-1 CAST: assembleSettlement|relationships|mutates */;
 
     // The accessors: a miss is `null` and `[]`, never `undefined` and never `null`.
     expect(tier1For('resolveConfig', 'tier'), 'tier1For hit').toBe(GENERATION_TIER1[0]);
@@ -170,7 +170,7 @@ describe('EM-P2 — the generation fork register: totality, derivation, and Tier
     // GS-2 one faction set (2026-10-31, ODQ §934.101): drawn 29 -> 26; the three retired rows were all drawn.
     // PEOPLE-4 TIES (2026-11-07, R-P7): drawn 27 -> 26, pure 46 -> 47 — generatePopulation|relationships measures pure (the step
     // provides `[]`; the ties are drawn at the coherence seam on their own family), the register's own re-measure.
-    expect(tallyOf(GENERATION_TIER1, 'class'), 'the entropy tally').toEqual({ drawn: 26, label: 1, pure: 48 /* MERGE-234 (one tie writer): 47 -> 48, assembleSettlement|relationships measures pure (the seam mint's `::tie` fork retired) */ }); // LANDING-1 (2026-11-04): factionCorrelationPass measures drawn at the landed tip (6 of 63 rows draw); before that, lane CRISIS (2026-11-03): resolveCrisisCast joins: both its rows are pure (45 -> 47)
+    expect(tallyOf(GENERATION_TIER1, 'class'), 'the entropy tally').toEqual({ drawn: 25, label: 1, pure: 48 /* ALLEGIANCE-CAR1 (2026-11-08): drawn 26 -> 25, the retired corruptionPass|npcs row was drawn (measured); */ /* MERGE-234 (one tie writer): 47 -> 48, assembleSettlement|relationships measures pure (the seam mint's `::tie` fork retired) */ }); // LANDING-1 (2026-11-04): factionCorrelationPass measures drawn at the landed tip (6 of 63 rows draw); before that, lane CRISIS (2026-11-03): resolveCrisisCast joins: both its rows are pure (45 -> 47)
     expect(GENERATION_TIER1.filter((row) => row.class === 'label').map((row) => `${row.step}|${row.key}`),
       'the single label row: a key that moves under a zero-draw step').toEqual(['generatePower|powerIntent']);
     // GS-2 (2026-10-31, ODQ §934.101): same 35 -> 34 and transformed 15 -> 13 in BOTH comparands below, the three
@@ -178,12 +178,12 @@ describe('EM-P2 — the generation fork register: totality, derivation, and Tier
     // PEOPLE-4 TIES (2026-11-07, R-P7): same 30 -> 29, transformed 13 -> 14 in BOTH comparands — generatePopulation|relationships
     // is rewritten on the record by the coherence seam's tie draw (the step provides `[]`); the disagreement count is unmoved.
     expect(tallyOf(GENERATION_TIER1, 'onRecordClass'), 'the FINAL comparand tally')
-      .toEqual({ absent: 20, same: 29, transformed: 15, varies: 11 }); // MERGE-234 (one tie writer): transformed 14 -> 15, assembleSettlement|relationships same -> transformed (the seam mint's `::tie` fork retired) // LANDING-8 (2026-11-06): same 34 -> 30, varies 7 -> 11, the four stress rows under the copy-on-write crisis cast (lane D, 8befe5a0d). LANDING-1 (2026-11-04): one row same -> varies, re-measured by the census at the landed tip. lane CRISIS (2026-11-03): resolveCrisisCast joins: crisisCast absent, settlement same
+      .toEqual({ absent: 20, same: 29, transformed: 14, varies: 11 }); // ALLEGIANCE-CAR1 (2026-11-08): transformed 15 -> 14, the retired corruptionPass|npcs row (measured) // MERGE-234 (one tie writer): transformed 14 -> 15, assembleSettlement|relationships same -> transformed (the seam mint's `::tie` fork retired) // LANDING-8 (2026-11-06): same 34 -> 30, varies 7 -> 11, the four stress rows under the copy-on-write crisis cast (lane D, 8befe5a0d). LANDING-1 (2026-11-04): one row same -> varies, re-measured by the census at the landed tip. lane CRISIS (2026-11-03): resolveCrisisCast joins: crisisCast absent, settlement same
     // 2026-10-01, the urban band (ODQ §934.86): absent 27 -> 26, same 18 -> 19. The same re-measure moved two rows'
     // post-step comparand (generationRepairs absent -> varies; isolationSupport varies -> same), and both now agree
     // with their final comparand, so the disagreeing rows below go 18 -> 16 (generationForkCensus records the same).
     expect(tallyOf(GENERATION_TIER1, 'producedOnRecordClass'), 'the POST-STEP comparand tally')
-      .toEqual({ absent: 27, same: 16, transformed: 15, varies: 17 }); // MERGE-234 (one tie writer): transformed 14 -> 15, the same row // LANDING-1 (2026-11-04): one row same -> varies, re-measured at the landed tip. lane CRISIS (2026-11-03): resolveCrisisCast joins; assembleSettlement|stress produced same -> varies
+      .toEqual({ absent: 27, same: 16, transformed: 14, varies: 17 }); // ALLEGIANCE-CAR1 (2026-11-08): transformed 15 -> 14, the same retired row (measured) // MERGE-234 (one tie writer): transformed 14 -> 15, the same row // LANDING-1 (2026-11-04): one row same -> varies, re-measured at the landed tip. lane CRISIS (2026-11-03): resolveCrisisCast joins; assembleSettlement|stress produced same -> varies
 
     // §6.2b: the register carries both comparands BECAUSE sixteen rows disagree, and every
     // one of them is a key a LATER step rewrites. The set is derived from the register itself.
@@ -209,7 +209,7 @@ describe('EM-P2 — the generation fork register: totality, derivation, and Tier
 
     // ── GUARD THE GUARD, FIRST. Nothing below means anything until the resolver is proved.
     const steps = getStepMeta().map((entry) => entry.name);
-    expect(steps.length, 'anti-vacuity: the live step list').toBe(23); // lane CRISIS (2026-11-03): resolveCrisisCast joins
+    expect(steps.length, 'anti-vacuity: the live step list').toBe(22); // ALLEGIANCE-CAR1 (2026-11-08): 23 -> 22, corruptionPass retired (J-2), measured; lane CRISIS (2026-11-03): resolveCrisisCast joins
     const ourHits = [];
     const modelHits = [];
     for (const step of steps) {
@@ -217,7 +217,7 @@ describe('EM-P2 — the generation fork register: totality, derivation, and Tier
       if ((declaredSymbols(raw).get(step) || 0) === 1) ourHits.push(step);
       if ((modelDeclaredSymbols(raw).get(step) || 0) === 1) modelHits.push(step);
     }
-    expect(ourHits.length, 'every registered step is declared exactly once in its own step file').toBe(23); // lane CRISIS (2026-11-03): resolveCrisisCast joins
+    expect(ourHits.length, 'every registered step is declared exactly once in its own step file').toBe(22); // ALLEGIANCE-CAR1 (2026-11-08): 23 -> 22, corruptionPass retired (J-2), measured; lane CRISIS (2026-11-03): resolveCrisisCast joins
     expect(modelHits, 'the model\'s form set cannot name a registerStep host, which is why this resolver exists').toEqual([]);
     expect(sourceOf(CHOOSER_WALKER), `${CHOOSER_WALKER} no longer spells the form set this control quotes`)
       .toContain(MODEL_DECL_LINE);

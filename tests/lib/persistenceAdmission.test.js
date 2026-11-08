@@ -87,7 +87,8 @@ describe('saved-settlement admission', () => {
         name: 'Current cloud save',
         // PEOPLE-LAND re-key, cause M-7: the save's current schema is 2 (the v2 boundary, PEOPLE_5B_EDIT §1); a
         // schema-1 row is now a MIGRATED row, so the row named current carries 2.
-        data: { schemaVersion: 2, name: 'Current cloud save' },
+        // ALLEGIANCE-CAR1 (2026-11-08): the current schema is 3 (v2 -> v3, the hidden allegiance), so the current row carries 3.
+        data: { schemaVersion: 3, name: 'Current cloud save' },
         config: {},
         toggles: {},
         ai_data: {},
@@ -116,7 +117,7 @@ describe('saved-settlement admission', () => {
       'save-current',
       'save-legacy',
     ]);
-    expect(admitted.entries[1].settlement.schemaVersion).toBe(2); // M-7: a legacy row migrates to schema 2
+    expect(admitted.entries[1].settlement.schemaVersion).toBe(3); // ALLEGIANCE-CAR1 (2026-11-08): a legacy row migrates to schema 3 (M-7: 2, then v2 -> v3)
     expect(admitted.entries[1].campaignState.phase).toBe('draft');
     expect(admitted.diagnostics).toMatchObject({
       current: 1,
@@ -136,7 +137,7 @@ describe('saved-settlement admission', () => {
       {
         id: 'live-save',
         name: 'Live',
-        settlement: { schemaVersion: 2 }, // M-7: the current schema is 2
+        settlement: { schemaVersion: 3 }, // ALLEGIANCE-CAR1 (2026-11-08): the current schema is 3 (M-7: it was 2)
         campaignState: { phase: 'draft' },
         accessState: 'active',
       },
