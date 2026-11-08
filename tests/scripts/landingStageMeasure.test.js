@@ -177,6 +177,48 @@ describe('landing-stage.sh build guard', () => {
     expect(r.stderr).toContain(`tests/fixtures/g.json (the named merge ${merge.slice(0, 9)} hand-edits it: its bytes differ from its second parent's)`);
   });
 
+  // TOOLING vs GOLDEN door paths (the chair's ruling on MERGE-CAR's STOP at record B, 2026-11-08): a tooling path (the
+  // explicit list in landing-stage.sh :: is_tooling_path) is ALWAYS carried from the carry with a receipt naming every
+  // commit that moved it since the step; a golden path keeps the signed rule.
+  function toolingRepo() {
+    const r0 = repo();
+    const { dir, git } = r0;
+    mkdirSync(join(dir, 'scripts'), { recursive: true });
+    writeFileSync(join(dir, 'scripts/prose-manifest-cells.mjs'), 'export const V = 1;\n');
+    git('add', '-A');
+    git('commit', '-q', '-m', 'the tool arrives');
+    writeFileSync(join(dir, 'scripts/prose-manifest-cells.mjs'), 'export const V = 2;\n');
+    writeFileSync(join(dir, 'tests/fixtures/g.json'), '{"a":7}\n');
+    git('commit', '-qam', 'the step: a door write that also touches the tool');
+    return { ...r0, step: git('rev-parse', 'HEAD') };
+  }
+
+  test('POSITIVE: a tooling path moved after the step by an UNSIGNED commit is carried, the receipt naming that commit', () => {
+    const { dir, git, step } = toolingRepo();
+    writeFileSync(join(dir, 'scripts/prose-manifest-cells.mjs'), 'export const V = 3;\n');
+    git('commit', '-qam', 'an unsigned tooling commit');
+    const tool = git('rev-parse', '--short=9', 'HEAD');
+    const r = run('sh', [script, 'guard', step], dir);
+    rmSync(dir, { recursive: true, force: true });
+    expect(r.status, r.stderr).toBe(0);
+    expect(r.stderr).toContain(`tooling path carried from the carry — moved since the step by ${tool}: scripts/prose-manifest-cells.mjs`);
+    expect(r.stderr).toContain('door path touched by the step, equal to the carry — carried: tests/fixtures/g.json'); // anchored: the golden path took its own rule
+  });
+
+  test('NEGATIVE: a GOLDEN path with an unsigned later toucher still STOPs beside a carried tooling path', () => {
+    const { dir, git, step } = toolingRepo();
+    writeFileSync(join(dir, 'scripts/prose-manifest-cells.mjs'), 'export const V = 3;\n');
+    writeFileSync(join(dir, 'tests/fixtures/g.json'), '{"a":8}\n');
+    git('commit', '-qam', 'an unsigned commit moving the tool and a golden');
+    const bad = git('rev-parse', '--short=9', 'HEAD');
+    const r = run('sh', [script, 'guard', step], dir);
+    rmSync(dir, { recursive: true, force: true });
+    expect(r.status).toBe(1);
+    expect(r.stderr).toContain(`tests/fixtures/g.json (first unsigned toucher ${bad})`);
+    expect(r.stderr).toContain(`tooling path carried from the carry — moved since the step by ${bad}: scripts/prose-manifest-cells.mjs`);
+    expect(r.stderr.split('STOP')[1]).not.toMatch(/prose-manifest-cells/); // anchored: the tool is not on the STOP list
+  });
+
   test('merge arm: a name that is not one merge on the first-parent line between the step and the carry STOPs', () => {
     const { dir, step, side } = mergeRepo();
     const notMerge = spawnSync('sh', [script, 'guard', step], { cwd: dir, encoding: 'utf8', env: { ...process.env, LANDING_STAGE_MERGE_SIDE: side } });

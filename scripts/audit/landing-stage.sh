@@ -43,6 +43,18 @@ door_paths() {
     scripts/audit/landing-stage.sh scripts/audit/carry-calibration.mjs scripts/audit/stage-chain.mjs
 }
 
+# THE TOOLING PATHS (the chair's ruling, 2026-11-08): the stage tool's own files and the door's machinery — the
+# measuring things. An EXPLICIT list, never a pattern; a path not named here is a GOLDEN path.
+is_tooling_path() {
+  case "$1" in
+    scripts/audit/landing-stage.sh|scripts/audit/landing-act.mjs|scripts/prose-manifest-cells.mjs|\
+    scripts/audit/golden-master-stage.mjs|scripts/audit/refence.mjs|scripts/audit/witness-stage.mjs|\
+    scripts/audit/herald-stage.mjs|scripts/audit/door-write.mjs|scripts/audit/carry-calibration.mjs|\
+    scripts/audit/stage-chain.mjs|tests/helpers/goldenRecordDoor.js|tests/lint/goldenFreeze.walker.test.js) return 0 ;;
+    *) return 1 ;;
+  esac
+}
+
 case "$cmd" in
   guard|build)
     step=$2; stage=${3:-}
@@ -85,6 +97,14 @@ case "$cmd" in
     for p in $touched; do
       if git diff --quiet "$full" "$carry" -- "$p"; then
         echo "door path touched by the step, equal to the carry — carried: $p" >&2
+        continue
+      fi
+      # TOOLING PATHS ARE ALWAYS CARRIED (the chair's ruling on MERGE-CAR's STOP at record B, 2026-11-08): a stage MUST run
+      # the current tool, or no two stages measure alike. A tooling path is the measuring thing, not a measured one: it
+      # is carried from the carry with a receipt naming every commit that moved it since the step. The list is explicit
+      # (is_tooling_path below), never a pattern; every other door path is a GOLDEN path and keeps the signed rule.
+      if is_tooling_path "$p"; then
+        echo "tooling path carried from the carry — moved since the step by $(git rev-list --reverse "$full..$carry" -- "$p" | cut -c1-9 | tr '\n' ' ' | sed 's/ $//'): $p" >&2
         continue
       fi
       if [ -n "$merge" ]; then
