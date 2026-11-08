@@ -9,6 +9,7 @@ import { entityIdFor } from '../dossier/entityLinks.js';
 import { factionIdFromName } from '../../lib/entities.js';
 import { honorificOfTitle } from '../../data/faceHonorifics.js';
 import { waterOf } from '../facts/water.js';
+import { resolveSettlementCulture } from '../resolveCulture.js';
 
 /** @param {unknown} v @returns {Record<string, unknown>} */
 const recordOf = (v) => (v && typeof v === 'object' ? /** @type {Record<string, unknown>} */ (v) : {});
@@ -39,21 +40,25 @@ export function cardInstitutionDoorOf(card, settlement) {
  * person) — and for a card whose institution the veil or the public projection removed, so the
  * honorific goes wherever the house goes and is never resolved from anything else. With the settlement,
  * the pool is the one its COAST admits (MERGE-CAR, the chair's A-11 ruling: a harbour master on a
- * settlement with no coast is a Dockmaster or Wharfinger; the coast is domain/facts/water.js's fact).
+ * settlement with no coast is a Dockmaster or Wharfinger; the coast is domain/facts/water.js's fact) and
+ * its CULTURE admits (WAVE-RULINGS item 14: a Norse place's lord is a Jarl; the culture is the one culture
+ * read, domain/resolveCulture.js; no culture, or 'mixed', reads the registry's pool).
  * @param {unknown} card @param {unknown} [settlement] @returns {string}
  */
 export function cardHonorificOf(card, settlement) {
   const inst = cardInstitutionOf(card);
   if (!inst) return '';
   const c = recordOf(card);
-  const place = settlement && typeof settlement === 'object' ? { coastal: waterOf(/** @type {import('../facts/terrain.js').TerrainRecord} */ (settlement)).coast } : {};
+  const place = settlement && typeof settlement === 'object'
+    ? { coastal: waterOf(/** @type {import('../facts/terrain.js').TerrainRecord} */ (settlement)).coast, culture: resolveSettlementCulture(/** @type {object} */ (settlement)) }
+    : {};
   return honorificOfTitle(inst.title, c.gender, `${String(c.id || c.name || '')}::${inst.name}`, place);
 }
 
 /**
  * THE FACE'S NAME AS THE INSTITUTION CARD PRINTS IT: "Pastor Robert Thomas" (the honorific, then
  * the full name); the bare name where the card has no honorific.
- * @param {unknown} card @param {unknown} [settlement] the place whose coast picks the pool (cardHonorificOf) @returns {string}
+ * @param {unknown} card @param {unknown} [settlement] the place whose coast and culture pick the pool (cardHonorificOf) @returns {string}
  */
 export function faceNameOf(card, settlement) {
   const name = String(recordOf(card).name || '');

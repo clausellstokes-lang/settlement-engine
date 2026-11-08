@@ -343,15 +343,20 @@ const HEAD_OF = /^the head of (.+)$/i;
 /**
  * THE HONORIFIC OF A TITLE: the form `seed` picks from the title's pool (index 0 for no seed), by
  * gender; "the head of X" → "Head of X"; a title the registry does not name (a DM's own, a future
- * row) → the title without its article, capitalised. '' for no title. `place.coastal === false` (a
- * settlement with no coast) reads FACE_HONORIFICS_INLAND first; any other place reads the registry.
+ * row) → the title without its article, capitalised. '' for no title. `place.culture` (the settlement's
+ * canonical culture key) reads that culture's pool in FACE_HONORIFICS_BY_CULTURE first; then
+ * `place.coastal === false` (a settlement with no coast) reads FACE_HONORIFICS_INLAND; any other
+ * place, culture or title reads the registry.
  * @param {unknown} title @param {unknown} [gender] @param {string} [seed]
- * @param {{ coastal?: boolean | null }} [place] @returns {string}
+ * @param {{ coastal?: boolean | null, culture?: string | null }} [place] @returns {string}
  */
 export function honorificOfTitle(title, gender, seed, place = {}) {
   const t = String(title ?? '').trim();
   if (!t) return '';
-  const pool = (place?.coastal === false && FACE_HONORIFICS_INLAND[t]) || FACE_HONORIFICS[t];
+  const culture = place?.culture;
+  const byCulture = typeof culture === 'string' && Object.hasOwn(FACE_HONORIFICS_BY_CULTURE, culture) ? FACE_HONORIFICS_BY_CULTURE[culture] : null;
+  const pool = (byCulture && Object.hasOwn(byCulture, t) && byCulture[t])
+    || (place?.coastal === false && FACE_HONORIFICS_INLAND[t]) || FACE_HONORIFICS[t];
   if (pool) {
     const h = /** @type {Honorific} */ (pickVariant(pool, seed));
     return typeof h === 'string' ? h : gender === 'female' ? h.female : h.male;

@@ -108,3 +108,43 @@ describe("the harbour master's pool is the one its coast admits (A-11)", () => {
     expect(Object.keys(FACE_HONORIFICS_INLAND)).toEqual(['the harbour master']);
   });
 });
+
+// WRITE-TITLES-14 (WAVE-RULINGS item 14): the settlement's culture picks the culture's own pool for an office it names;
+// any other culture, title or place reads the registry's pool — the fallback, display-only.
+describe("the settlement's culture picks its own word for the office (item 14)", () => {
+  const seeds = Array.from({ length: 40 }, (_, i) => `seed-${i}`);
+  const formsOf = (title, gender, place) => [...new Set(seeds.map((seed) => honorificOfTitle(title, gender, seed, place)))].sort();
+  it("the owner's two: a Norse place's lord and headman read Jarl, a Celtic place's priest reads Druid", () => {
+    expect(formsOf('the lord', 'male', { culture: 'norse' })).toEqual(['Jarl']);
+    expect(formsOf('the headman', 'female', { culture: 'norse' })).toEqual(['Jarl']);
+    expect(formsOf('the priest', 'female', { culture: 'celtic' })).toEqual(['Druid']);
+    expect(honorificOfTitle('the priest', 'female', 'seed-1', { culture: 'norse' })).toBe('Gydja');
+    expect(honorificOfTitle('the priest', 'male', 'seed-1', { culture: 'norse' })).toBe('Godi');
+  });
+  it("a title the culture names no form for reads the registry's pool", () => {
+    expect(formsOf('the mayor', 'male', { culture: 'celtic' })).toEqual(formsOf('the mayor', 'male'));
+    expect(formsOf('the priest', 'male', { culture: 'germanic' })).toEqual(['Father', 'Pastor', 'Reverend', 'Vicar']);
+  });
+  it("a culture with no pool, 'mixed', an unknown key and no culture all read the registry's pool", () => {
+    for (const culture of ['east_asian', 'mixed', 'random_culture', 'atlantean', null, undefined]) {
+      expect(formsOf('the lord', 'female', { culture }), String(culture)).toEqual(['Lady']);
+      expect(formsOf('the priest', 'male', { culture }), String(culture)).toEqual(['Father', 'Pastor', 'Reverend', 'Vicar']);
+    }
+    expect(formsOf('the lord', 'female')).toEqual(['Lady']);
+  });
+  it('the coast guard and the culture read compose: an inland Norse harbour master is still a Dockmaster or Wharfinger', () => {
+    expect(formsOf('the harbour master', null, { coastal: false, culture: 'norse' })).toEqual(['Dockmaster', 'Wharfinger']);
+  });
+  it("the card door reads the settlement's culture through the one culture read, and falls back without one", () => {
+    const lordCard = { id: 'npc_l', name: 'Sigrid Ulfsdottir', gender: 'female', institution: { kind: 'power', key: 'Noble Houses', name: 'Noble Houses', title: 'the lord' } };
+    const priestCard = { id: 'npc_p', name: 'Bran Mac Lir', gender: 'male', institution: { kind: 'house', key: 'Parish church', name: 'Parish church', title: 'the priest' } };
+    expect(cardHonorificOf({ ...lordCard, gender: 'male' }, { config: { culture: 'norse' }, institutions: [] })).toBe('Jarl');
+    expect(cardHonorificOf(lordCard, { config: { culture: 'steppe' }, institutions: [] })).toBe('Khatun');
+    // the materialized identity is the second leg, for a config-stripped save
+    expect(cardHonorificOf(priestCard, { culturalIdentity: { key: 'celtic' }, institutions: [] })).toBe('Druid');
+    // no settlement culture, no settlement, and a 'mixed' place: the registry
+    expect(cardHonorificOf(lordCard, { config: {}, institutions: [] })).toBe('Lady');
+    expect(cardHonorificOf(lordCard)).toBe('Lady');
+    expect(cardHonorificOf(lordCard, { config: { culture: 'mixed' }, culturalIdentity: { key: 'mixed' }, institutions: [] })).toBe('Lady');
+  });
+});
