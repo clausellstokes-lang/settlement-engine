@@ -197,7 +197,13 @@
  *     roster 10 -> 13, the bank 69/45 -> 76/50), and ADMITS the window's other rows with
  *     attribution. Its full rationale lives beside `WINDOW_RUNG1_TARGET_SCHEMA` (RETIRED).
  *
- *   schema 31 -> 32 (LIVE)   the same tagged numeric reconciliation, and MERGE-CAR: the people car
+ *   schema 32 -> 33 (LIVE)   the same tagged numeric reconciliation, and MERGE-WAVE AT THE W2 DEF MERGE
+ *     (82a4e2856; the chair's ruling of 2026-11-08: one rung per cause): ONE row ADMITTED by cause,
+ *     `direction on stress` at migrationDirection.js (grounded by the W2 composition; the writer is
+ *     W0-1's draw); nothing goes, none declared, the bank 76/50. Its full rationale lives beside
+ *     `WAVE_W2_TARGET_SCHEMA`.
+ *
+ *   schema 31 -> 32 (RETIRED) the same tagged numeric reconciliation, and MERGE-CAR: the people car
  *     merged into the integration branch over the rung-2 landing (the chair's brief, 2026-11-08). The
  *     car's genesis at 31 STANDS; the integration side's schema-30 reads (R2's census readers) are
  *     ADMITTED at this rung by cause, the rows they retired go with cause: 15 new, 12 gone, none
@@ -323,6 +329,7 @@ import {
   validateSchema29Baseline,
   validateSchema30Baseline,
   validateSchema31Baseline,
+  validateSchema32Baseline,
 } from './lib/observed-shape-baseline.mjs';
 
 export const MIGRATION_REPORT_SCHEMA = 2;
@@ -1446,6 +1453,35 @@ export const PEOPLE_LANDING_TARGET_SCHEMA = 31;
  *  holds as at every rung: this rung lands ratchet-red, and its re-freeze lands next. */
 export const CAR_MERGE_TARGET_SCHEMA = 32;
 
+/* ⭐⭐ THE SCHEMA 32 → 33 RUNG — MERGE-WAVE AT THE W2 DEF MERGE (one rung per cause)
+ *
+ *  The merge commit 82a4e2856 merged lane/w2-def-2026-11-07 (091b23bb3, cut at ee3b7a168, before the
+ *  car) into the integration branch after W1 ECO's merge. THE CHAIR'S BRIEF (MERGE-WAVE §1): "the
+ *  registers through their doors AFTER the merge commit (observed-shape `--write` admitting the lane's
+ *  reads by cause, none declared)"; THE CHAIR'S RULING (2026-11-08): one rung per cause. This is
+ *  W2 DEF's rung.
+ *
+ *  THE REFUSAL, MEASURED at the merged tip (ded92e94e's content, the W2 merge point's registers in)
+ *  through `--write` (shrink-only) and `--scan-only --scan-mode=legacy-leaf` against the schema-32
+ *  register re-frozen at the W1 ECO merge point (18a3daf5b):
+ *
+ *      NEW 1 · GONE 0 · INCREASED 0 · DECREASED 0
+ *
+ *  THE ROW: src/domain/migrationDirection.js `direction on stress` x1 (`row.direction`, the reader
+ *  under the one direction fact). The file is unchanged since W0 (343bd4eec / eb4c508e1). At the W1
+ *  ECO merge point the same scan leaves that receiver ungrounded (no finding); at the W2 composition
+ *  the receiver grounds to the `stress` shape — W2 DEF's stress-type desks (DS-DEF-3/-8) read
+ *  settlement.stress entries inline. The WRITER IS REAL: W0-1 (343bd4eec) writes stress[].direction
+ *  on the mass_migration entry at the draw; no osr corpus seed draws a mass migration (the corpus's
+ *  `stress` shape: 138 rows, no `direction`, measured at both points). ADMITTED as ordinary debt
+ *  with this attribution; a corpus stimulus that draws a migration would retire it.
+ *
+ *  Nothing is declared (the roster stays fourteen; thirteen bank, 76/50). ⛔ The reconciliation must
+ *  be EXACTLY that one row; any other moved row at the mint means the review was not the whole cause
+ *  and the mint STOPS. Its delta is the three bookkeeping paths; see `WAVE_W2_SCANNER_DELTA_PATHS`.
+ *  The commit pair holds as at every rung: this rung lands ratchet-red, and its re-freeze lands next. */
+export const WAVE_W2_TARGET_SCHEMA = 33;
+
 export const DECLARED_BANK_BY_TARGET = Object.freeze({
   [EXEMPTION_RETIREMENT_TARGET_SCHEMA]: Object.freeze({ bankedReads: 60, taggedRows: 39 }),
   [BANK_FENCE_TARGET_SCHEMA]: Object.freeze({ bankedReads: 60, taggedRows: 39 }),
@@ -1511,6 +1547,8 @@ export const DECLARED_BANK_BY_TARGET = Object.freeze({
   // readers' `stresses on settlement` at canonicalAccessors.js (uncured erosion, 7af3c6797) — so the
   // pair moves 77/51 -> 76/50, the integration side's schema-30 figure. The bank does not grow.
   [CAR_MERGE_TARGET_SCHEMA]: Object.freeze({ bankedReads: 76, taggedRows: 50 }),
+  // HELD at 33 (MERGE-WAVE, W2 DEF): the one admitted row is ordinary debt, on no declared identity.
+  [WAVE_W2_TARGET_SCHEMA]: Object.freeze({ bankedReads: 76, taggedRows: 50 }),
 });
 
 /** The declared post-bank of a target, or `null` for a rung that predates the law. */
@@ -2083,6 +2121,14 @@ export const CAR_MERGE_SCANNER_DELTA_PATHS = Object.freeze([
   'scripts/migrate-observed-shape-readers.mjs',
 ]);
 
+/** The schema-32 → 33 delta: the same THREE bookkeeping paths (the live validator moving to
+ *  `validateSchema33Baseline`, the 32 → 33 bump with the retired-32 constant, this rung). */
+export const WAVE_W2_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
 export const BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS = Object.freeze([
   'package-lock.json',
   'package.json',
@@ -2143,6 +2189,8 @@ const PEOPLE_LANDING_SCANNER_TRANSITION_POLICY =
   'schema-30-to-31-exact-scanner-transition-v1';
 const CAR_MERGE_SCANNER_TRANSITION_POLICY =
   'schema-31-to-32-exact-scanner-transition-v1';
+const WAVE_W2_SCANNER_TRANSITION_POLICY =
+  'schema-32-to-33-exact-scanner-transition-v1';
 const CORPUS_COVERAGE_SCANNER_TRANSITION_POLICY =
   'schema-7-to-8-exact-scanner-transition-v1';
 const EPOCH_DARK_CORPUS_SCANNER_TRANSITION_POLICY =
@@ -2193,6 +2241,7 @@ export const LEAF_MIGRATION_PREDECESSOR = Object.freeze({
   [PEOPLE_CAST_TARGET_SCHEMA]: MIGRATION_DIRECTION_TARGET_SCHEMA,
   [PEOPLE_LANDING_TARGET_SCHEMA]: PEOPLE_CAST_TARGET_SCHEMA,
   [CAR_MERGE_TARGET_SCHEMA]: PEOPLE_LANDING_TARGET_SCHEMA,
+  [WAVE_W2_TARGET_SCHEMA]: CAR_MERGE_TARGET_SCHEMA,
 });
 
 /**
@@ -2288,6 +2337,8 @@ const LEAF_PREDECESSOR_VALIDATOR = Object.freeze({
   // The schema-32 rung's own predecessor (the car's genesis), validated as schema 31 by its
   // retired literal.
   [PEOPLE_LANDING_TARGET_SCHEMA]: validateSchema31Baseline,
+  // The schema-33 rung's own predecessor (MERGE-CAR), validated as schema 32 by its retired literal.
+  [CAR_MERGE_TARGET_SCHEMA]: validateSchema32Baseline,
 });
 
 const RETIRED_EXACT_MIGRATION_KIND = `observed-shape-schema-2-to-${RETIRED_EXACT_TARGET_SCHEMA}-migration`;
@@ -2811,6 +2862,14 @@ const SCANNER_TRANSITION_BY_TARGET = new Map([
     // governed execution inputs (the dossier-state prose, the institution service keys, the prose
     // norms, …) by their documented commands after the predecessor was frozen, and the report
     // records that movement for the review's decision.
+    reviewableUnscannedMovement: true,
+  })],
+  [WAVE_W2_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: WAVE_W2_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: WAVE_W2_SCANNER_TRANSITION_POLICY,
+    // TRUE, matching every rung since 8→9: the dossier-prose leaves regenerated by their documented
+    // command since the schema-32 freeze are recorded for the review's decision.
     reviewableUnscannedMovement: true,
   })],
   [CAR_MERGE_TARGET_SCHEMA, Object.freeze({
@@ -3956,7 +4015,7 @@ export function run(argv = process.argv.slice(2)) {
   // any mismatch into a refusal rather than a silent mode switch.
   const targetSchema = command.targetSchema
     ? Number(command.targetSchema)
-    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : CAR_MERGE_TARGET_SCHEMA);
+    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : WAVE_W2_TARGET_SCHEMA);
   if (![RETIRED_EXACT_TARGET_SCHEMA, HEURISTIC_TARGET_SCHEMA, FILTERED_TARGET_SCHEMA,
     SURFACE_FILTERED_TARGET_SCHEMA, BANKED_EXPLAINED_WRITER_TARGET_SCHEMA,
     CORPUS_COVERAGE_TARGET_SCHEMA, EPOCH_DARK_CORPUS_TARGET_SCHEMA,
@@ -3970,8 +4029,9 @@ export function run(argv = process.argv.slice(2)) {
     CORPUS_REDEAL_TARGET_SCHEMA, ADVISORY_LOCKFILE_TARGET_SCHEMA,
     FED_WORLD_TARGET_SCHEMA, WINDOW_RUNG1_TARGET_SCHEMA, TIER_COVERAGE_TARGET_SCHEMA,
     MIGRATION_DIRECTION_TARGET_SCHEMA, PEOPLE_CAST_TARGET_SCHEMA,
-    PEOPLE_LANDING_TARGET_SCHEMA, CAR_MERGE_TARGET_SCHEMA].includes(targetSchema)) {
-    throw new Error(`observed-shape --target-schema must be ${CAR_MERGE_TARGET_SCHEMA} (live car-merge leaf),`
+    PEOPLE_LANDING_TARGET_SCHEMA, CAR_MERGE_TARGET_SCHEMA, WAVE_W2_TARGET_SCHEMA].includes(targetSchema)) {
+    throw new Error(`observed-shape --target-schema must be ${WAVE_W2_TARGET_SCHEMA} (live W2-merge leaf),`
+      + ` ${CAR_MERGE_TARGET_SCHEMA} (retired car-merge leaf),`
       + ` ${PEOPLE_LANDING_TARGET_SCHEMA} (retired people-landing leaf),`
       + ` ${PEOPLE_CAST_TARGET_SCHEMA} (retired people-cast leaf),`
       + ` ${MIGRATION_DIRECTION_TARGET_SCHEMA} (retired migration-direction leaf),`
