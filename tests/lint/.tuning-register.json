@@ -2513,6 +2513,14 @@
       "band": null,
       "note": "ALLEGIANCE-CAR1 (2026-11-08, the allegiance design §3.1, J-5, J-8): the hidden allegiance's dials — organizedCrime (probability, 0.10: organized crime's weight on the birth chance, inside the spawn clamp), organizedFull (points, 8: the summed criminal-house backing weight at which organized crime reads 1), powerBonus (fraction01, 0.25: the step for an independent criminal power), share (share, 0.15: the allegiance's weight for patronage and the push, outside the open shares' sum), frontWeight (multiplier, 1: a PRIME front's roll weight, RESERVED, J-8), weightZeroHouse (multiplier, 0.5: a weight-0 criminal house's backing weight in the organized-crime sum, the design's '0 -> 0.5'); registered as a draft the day the dial was born, not signed."
     },
+    "src/domain/people/patronage.js#RULING_PATRONAGE_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": "ALLEGIANCE-CAR3 (2026-11-08, the allegiance design §3.3, J-9, J-12): ruling patronage's dials — byRank.1 / .2 / .3 (fraction01, 0.15 / 0.10 / 0.05: a ranked face's weight, by its rank in the ruling power, of the other power's own strength), steward (fraction01, 0.10: a steward in a vacant seat at rank 2's weight), cap (fraction01, 0.25: never more than a quarter of the power's own strength), ceilingGap (points, 1: a boosted power stops one point under the ruler); derived, never stored (J-9); registered as a draft the day the dial was born, not signed."
+    },
     "src/generators/people/castPowers.js#CAST_POWERS_TUNING": {
       "role": null,
       "status": "draft",
