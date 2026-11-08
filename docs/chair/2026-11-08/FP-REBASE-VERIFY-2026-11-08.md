@@ -108,3 +108,35 @@ Each through `scripts/gate-tail.sh`, on the lane with this report and the roster
 **Gates at 22074661c** (each through `scripts/gate-tail.sh`): the three record walkers, 3 files and 111 tests passed, exit 0. The FP-reading test files (`grep -rl "DESIGN_FP_" tests`: 50 paths, 47 test files including `habitBandsReconciliation.walker`), 47 files and 1,706 tests passed, exit 0. The roster needs no second bump: this report was already counted (`dated` 155).
 
 **CONFIRMED vs PLAUSIBLE (the re-read).** Every verdict above rests on a line grepped verbatim at 22074661c, or on the integration branch's brief at cde0d484f for F5. PLAUSIBLE: F3, F6, LARGE's four unmeasured rows and CH-7, as labelled.
+
+## 7. THIRD PASS at 323c47998 — ⛔ HELD DRAFT (the chair's HOLD, 2026-11-08 22:17 UTC: the owner corrected the faith gate after 323c47998; FPR-CONSTITUTION is writing OD-FC-152, TWO conditions, no FP flag; this section is REWRITTEN over both rows when that push lands. Nothing below is a verdict until then)
+
+### 7 (draft) — FPZ = FP and THE FAITH GATE (2026-11-08 22:15 UTC, read from `date`)
+
+**What changed.** The tip is 323c47998, confirmed by `git rev-parse HEAD`, over 5f7ae9baf (PEOPLE, R1) and 04f7fa46a (CONSTITUTION, R3–R5). The range from 121f342f6 touches 13 files, +42/−25 lines, and this seat read it whole. The source of record is `lane/chair-2026-11-08 :: docs/chair/2026-11-07/ODQ-934.105-DRAFT.md`, the entry "THE OWNER'S TWO WORDS ON THE FP AND ON FAITH". No fix was made in this pass; nothing qualified under §2.6.
+
+| Check | Verdict | The quoted line |
+|---|---|---|
+| 6 the two quotes | CONFIRMED. Both are character-identical to the record at every placement: the FPZ word 9 times (ARCHITECTURE, GR, PL, TR, WF, the fold ×2, FAITH, GRAMMAR, TRADE), the gate word 3 times (the fold OD-FC-151, FAITH's head, ARCH_WF's head). The owner's "diety" and curly "doesn’t" are kept | "Also note that faith is gated behind different FP and premium. Meaning that row doesn’t show on a card until a settlement has a diety to it which can only be created through custom content and then assigned to a settlement." |
+| 2 the gate's three conditions | CONFIRMED across OD-FC-151, FAITH's head, I-F0 and ARCH_WF's reader: flag · premium · an assigned custom deity, absent not agnostic, derived and nothing stored | I-F0: "no card carries a `faith` row unless the FP's faith flag is lit, the user is premium and the settlement has at least one assigned custom deity" |
+| 2 no volume still contradicts the gate | **RED (G1, G2); NOTE (G3)** | below |
+| 1 "FPZ" | CONFIRMED in CONSTITUTION's nine volumes (every hit is the §5 row, the "read as FP" end-section line or a `("FPZ" read as "FP")` bracket). **RED (G4)** elsewhere | below |
+
+Counts (the third pass): **checks 3 · rows 4 · CONFIRMED 2 · RED 2 · fixed 0**.
+
+**Findings for the chair, by severity:**
+- **G1 (RED, the faith BUILD placement contradicts the gate and the record).** The record's ruling: "the faith birth draw is no longer a stand-alone candidate car after the deploy — it is FP-GATED and belongs to the FP ledger with the drift". Three sites still place it as a car after the deploy:
+  - FAITH § THE BUILD: "The BIRTH DRAW is a candidate car AFTER THE DEPLOY (a generator change: a same-seed shift on every born world, signed at its golden door)".
+  - ARCH_WF: "**BUILD.** The birth draw a candidate car after the deploy".
+  - The fold OD-FC-147: "THE BUILD: the BIRTH DRAW a candidate car AFTER THE DEPLOY", with its consequence column "a same-seed shift on every born world when the birth draw lands".
+
+  Under OD-FC-151 the draw is "a DERIVED read … NOTHING STORED", behind a gate that is shut on every born world, so there is no same-seed shift to sign.
+- **G2 (RED, the draw's time).** The gate draws the roster "when the first deity is assigned … THEN". FAITH's body still says the draw is "FROM THE SETTLEMENT'S PANTHEON AT THAT TIME (the deities the record holds at birth — a deity added later moves no born card)", and I-F5 says "The draw reads the pantheon AT BIRTH". ARCH_WF's draw line ("from the settlement's pantheon AT THAT TIME") stands under its head bracket. The parenthesis "a deity added later moves no born card" directly contradicts the gate's first-assignment draw, unless it means "a SECOND deity added later" — the chair's to rule.
+- **G3 (NOTE, ARCHITECTURE's person model).** The canonical person model still reads "`faith` — `{ deity: <deityRef> | null, fervour }`, the person's own patron drawn at birth from the pantheon at that time", with no word of the gate, `faithOf` or OD-FC-151.
+- **G4 (RED, check 1).** 47 "FPZ" spellings stand unbracketed in twelve volumes the CONSTITUTION sweep did not own: GENERALS 8, ARCH_INT 8, INTERIOR 6, ARCH_CH 6, ES 5, PT 3, OP 3, BD 3, IN 2, CHAMPIONS 1, HB 1, EP 1. Their forms include "when FPZ is built", "on the FPZ list", "an FPZ file" and "FPZ rebuilds". The fold §5 row ("READ AS "FP" EVERYWHERE") governs how they read, so nothing misleads. But the chair's check asked for none outside the row, the file name and quoted-old brackets. The swap is mechanical (FPZ → FP; "the FPZ list" → "the FP dormant-reader list"), yet it spans three other seats' text in twelve volumes, so this seat names it rather than sweeps it: one script for the seats, or a ruling that the §5 row suffices.
+- **G5 (NOTE, a time label).** Every new bracket says "read 22:07 UTC"; the record says "read at 22:09 UTC, the message minutes before".
+
+**Gates at 323c47998 (with this draft in the tree):** the three record walkers 3 files / 111 tests, exit 0; the FP-reading test files 47 files / 1,706 tests, exit 0 (each through `scripts/gate-tail.sh`).
+
+**CONFIRMED vs PLAUSIBLE (the third pass).** Every verdict rests on a line grepped verbatim at 323c47998 or in the record at `origin/lane/chair-2026-11-08`. No PLAUSIBLE row.
+
