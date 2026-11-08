@@ -112,9 +112,11 @@ describe('6. moralInstitutionPressure openers', () => {
 });
 
 describe('7. clergyTraitPlane targetedFootholds minister name', () => {
+  // MERGE-CAR-2 (2026-11-08): the minister in the people car's shape — `entityLinksFaction` reads
+  // `memberships[].power` since PEOPLE-5B (57b0de61e); `linkedFactionIds` left the card.
   const settlementWith = (/** @type {any} */ npc) => ({
     powerStructure: { factions: [{ id: 'temple', archetype: 'religious' }] },
-    npcs: [{ importance: 'pillar', linkedFactionIds: ['temple'], personality: { dominant: 'corrupt', flaw: 'deceitful' }, ...npc }],
+    npcs: [{ importance: 'pillar', memberships: [{ power: 'temple', rank: 1, share: 1 }], personality: { dominant: 'corrupt', flaw: 'deceitful' }, ...npc }],
   });
   const patron = { name: 'The Lawgiver', alignmentAxis: 'good', lawAxis: 'lawful' };
   const rivals = [{ ref: 'maw', snapshot: { name: 'The Red Maw', alignmentAxis: 'evil', lawAxis: 'chaotic' } }];
