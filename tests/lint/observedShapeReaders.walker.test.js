@@ -667,10 +667,16 @@ describe('reader-with-no-writer ratchet: the EXECUTED corpus', () => {
     // its first — and the seat row is the governing power's rank-1 face) 417/2626/418/80; step 3 07e027b0c (structuralRank
     // from the standing; the roster's order is the structural pass's relevance order, the powers' heads first)
     // 399/2518/400/81. ⚠ NOT cross-recorded in news-voice, news-headline and prose-family (red at the base, lane 1's list).
+    // 2026-11-08 (MERGE-CAR, the people car merged into the integration branch, 8dff691f3; re-keyed by identity at the
+    // schema-32 rung): final 399 → 395, accumulated 2518 → 2511, unique 400 → 396; regional 81/81 HOLDS. The parents' own
+    // pins: the car 373a2947b 399/2518/400/81 (this pin), the integration side 7b3ffb6ee 266/1598/266/86 (MERGE-R2's, the
+    // census readers over the rung-2 landing). The merged tip keeps the car's re-dealt year (the cast, lanes 1-5B) and
+    // composes the integration side's census / WIRING-W0 / REVIEW-INTAKE lines into it, an INTERACTION of -4/-7/-4 (PLAUSIBLE
+    // as attributed; not bisected per step). c12c28af0 moved registers only, so the merge commit measures the same.
     expect(scalarCorpus.scalarMeta).toEqual({
       canonEventLogEntries: 1,
-      wizardNewsFinalEntries: 399,
-      wizardNewsAccumulatedEntries: 2518,
+      wizardNewsFinalEntries: 395,
+      wizardNewsAccumulatedEntries: 2511,
       // FP BATCH 4 (2026-09-24, the FP chair): wizardNewsFinalEntries 240 → 272 and wizardNewsAccumulatedEntries 1567 → 1604 —
       // the Herald lens U2 (32315e384, FP-31): the feed keeps its newest 52 weeks whole under the 240 cap, so the corpus's
       // twelve monthly pulses retire one entry instead of thirty-three; unique 273 HOLDS. Attributed by equality with the U2
@@ -680,7 +686,7 @@ describe('reader-with-no-writer ratchet: the EXECUTED corpus', () => {
       // (a peacetime suit retires when a war opens against its court; its feed reconcile mints the one id). Accumulated 1567
       // and final 240 DO NOT MOVE. Cross-recorded in the same act: news-voice (introductions 273), prose-family
       // (scalarRows 25549, pulseHistory 1055/5097), the OSR register --write at 98e0d8664 (exact, 1970 findings).
-      wizardNewsUnique: 400,
+      wizardNewsUnique: 396,
       pulseHistory: 12,
       // TE36 (ODQ §271): 109 → 73, one cause — the regional event log carries the pulse's
       // selected outcomes, and the retired bare-decline family was 36 of them. That mint's
@@ -1385,7 +1391,12 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
     // the ROSTER grows by one — `migrationDirection on config`, the migration direction's config
     // projection — whose one address (src/domain/migrationDirection.js) carries one read.
     // MEASURED off this scan.
-    expect(live.explainedWriters.banked).toBe(77);
+    // ⭐ 77 → 76 AT THE SCHEMA-32 CAR-MERGE RUNG (2026-11-08, MERGE-CAR, the chair's brief: the census
+    // readers' reads admitted by cause): the ROSTER does not move; one `stresses on settlement` address goes
+    // — src/domain/canonicalAccessors.js, whose read stands and which the detector stopped grounding at
+    // 7af3c6797 (census-3b(3); recorded in the rung's review as uncured instrument erosion, as MERGE-R2's
+    // schema-30 rung recorded it on the integration side). MEASURED off this scan.
+    expect(live.explainedWriters.banked).toBe(76);
     expect(Object.entries(corpus.shapes)
       .filter(([, shape]) => shape.keys.includes('source'))
       .map(([name]) => name)).toEqual([
@@ -1613,7 +1624,8 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
       // the register's from the frozen rowTags — so a re-freeze that moved one without the
       // other would still red here.
       'neighbourNetwork on settlement': { reads: 39, addresses: 26 },
-      'stresses on settlement': { reads: 4, addresses: 3 },
+      // ⭐ 4/3 → 3/2 at the schema-32 car-merge rung (MERGE-CAR): canonicalAccessors.js's address goes (7af3c6797).
+      'stresses on settlement': { reads: 3, addresses: 2 },
       'worldPulse on campaignState': { reads: 2, addresses: 2 },
       'appliedAt on eventLog': { reads: 1, addresses: 1 },
       'deltas on eventLog': { reads: 2, addresses: 1 },
@@ -1659,7 +1671,8 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
     const clearOutright = live.findings.filter((finding) => !bankedIdentities.has(identityOf(finding)));
     // − 69 from the schema-23 rung, − 76 from the schema-27 rung, − 77 from the schema-29 rung,
     // moving with the banked figure pinned above rather than being a second hand-held copy of it.
-    expect(clearOutright).toHaveLength(live.findings.length - 77);
+    // − 76 from the schema-32 car-merge rung (MERGE-CAR).
+    expect(clearOutright).toHaveLength(live.findings.length - 76);
     expect(inventoryOf(clearOutright)).not.toEqual(liveInventory);
   });
 
