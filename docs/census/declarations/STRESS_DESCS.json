@@ -514,7 +514,7 @@
     },
     {
      "lineId": "STRESS_DESCS.indebted[1]",
-     "text": "A building near the gate has a new sign: an institution that wasn't there last season, with a name that is recognisably the name of an outside creditor. Someone has arrived and set up an office. This is not a good sign.",
+     "text": "A building near the gate has a new sign, freshly painted with the name of an outside creditor. The creditor has opened an office here, and the locals walk past it without looking in.",
      "needs": [
       "gate"
      ],
@@ -527,7 +527,7 @@
     },
     {
      "lineId": "STRESS_DESCS.indebted[2]",
-     "text": "{name} functions. The market is busy enough. The streets are clean enough. The civic buildings are maintained enough. 'Enough' is doing a lot of work in every impression.",
+     "text": "{name} gets by. The market is busy enough, the streets clean enough and the civic buildings kept up just enough, and nothing more is being spent.",
      "needs": [
       "market"
      ],
@@ -611,7 +611,7 @@
     },
     {
      "lineId": "STRESS_DESCS.recently_betrayed[1]",
-     "text": "Something happened in {name} recently. You cannot immediately say what, but the settlement has the quality of a place that is still processing something: hushed conversations, people watching the street.",
+     "text": "Something has happened in {name} lately. Conversations drop to a murmur as you pass, and people watch the street from their doorways.",
      "needs": [],
      "excludes": [],
      "crisis": [
@@ -1582,7 +1582,7 @@
     },
     {
      "lineId": "STRESS_DESCS.religious_conversion[3]",
-     "text": "The bells of {name} ring at competing times: one set of chimes answered a beat later by another, from a different quarter, slightly out of tune with the first. No one seems to find this strange, which is the strangest part.",
+     "text": "The bells of {name} ring twice for every hour: one set of chimes, then another from a different quarter, a beat later and out of tune. Nobody in the street looks up.",
      "needs": [
       "institution: temple"
      ],

@@ -24,7 +24,7 @@ describe('CENSUS-5d unit 2 · DS-FTH / DS-WAR: every read line declares or is ma
     const rows = undeclaredRows(statePoolCounts([LEAF]));
     const mine = Object.entries(rows).filter(([k]) => /^DS-(FTH|WAR)-/.test(k));
     expect(mine).toEqual([]);
-    expect(marksOf('DS-FTH-1', 'SINK: unaffiliated present, arc rising', /Crisis has a way of ending indifference/)).toContain('crisis');
+    expect(marksOf('DS-FTH-1', 'SINK: unaffiliated present, arc rising', /now that times are hard/)).toContain('crisis'); // W4 PEOPLE second seat 2026-11-07: re-keyed to the line's text after the first seat's faith style pass (05da0e050, the owner's style law)
   });
 
   it('the reading\'s presumptions declare', () => {

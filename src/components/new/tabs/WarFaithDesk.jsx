@@ -70,6 +70,8 @@ const PATRON_SEAT_MOUNT = 'faith.patronSeat';
 const TEASER_MOUNT = 'faith.teaser';
 const CREED_STANDING_MOUNT = 'faith.creedStanding';
 const NICHE_ROW_MOUNT = 'faith.nicheRow';
+/** DS-FTH-4's generation lens (W4 PEOPLE, 2026-11-07). */
+const TEMPLE_GROUND_MOUNT = 'faith.templeGround';
 
 /** Every key `warFaithStateProse` returns, nulled — the public dossier's whole answer. */
 const SILENT = Object.freeze({
@@ -78,7 +80,8 @@ const SILENT = Object.freeze({
   dormantNote: null, patronRank: null, patronCults: null, devotion: null, pietyArc: null,
   standings: null, sink: null, mandate: null, faithDark: null, faithTeaser: null,
   creedStanding: null, creedLegitimacy: null, creedNiche: null, creedFall: null,
-  nicheRow: null,
+  nicheRow: null, templeCrusader: null, templeHeresy: null, templeFraud: null,
+  templeMageTheocracy: null,
 });
 
 /**
@@ -279,6 +282,21 @@ export function FaithCreedLines({ desk, settlement }) {
   return <DeskLines mount={CREED_STANDING_MOUNT} testId="faith-desk-creed"
     settlementName={settlement?.name} tier={settlement?.tier} rungs={[
       desk.creedStanding, desk.creedLegitimacy, desk.creedNiche, desk.creedFall,
+    ]} />;
+}
+
+/**
+ * The faith tab's temple-ground paragraph — DS-FTH-4's generation lens (W4 PEOPLE,
+ * 2026-11-07): the church beside the garrison, the court, the thieves or the mages, as the
+ * birth-time stress flags record it. Every settlement carries the flags, so this position
+ * speaks on the deity-free town as well as under a patron; no variant names a creed.
+ * @param {{desk: Record<string, any>, settlement: object}} props `settlement` is REQUIRED.
+ */
+export function FaithGroundLines({ desk, settlement }) {
+  requireSettlement(settlement, 'FaithGroundLines');
+  return <DeskLines mount={TEMPLE_GROUND_MOUNT} testId="faith-desk-ground"
+    settlementName={settlement?.name} tier={settlement?.tier} rungs={[
+      desk.templeCrusader, desk.templeHeresy, desk.templeFraud, desk.templeMageTheocracy,
     ]} />;
 }
 

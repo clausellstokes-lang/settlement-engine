@@ -324,7 +324,8 @@ describe('writer-with-no-reader ratchet: the frozen register', () => {
     // (DS-DEF-12 says the isolation-support finding on the Viability tab: LIT at web-display, clause P) and the two
     // W6 engine-internal twins on _isolationSupport struck by clause S (LIT-NAME once the surface reads the same keys);
     // scripts/lib/writer-dark-register.mjs names all five.
-    expect(WRITER_DARK_REGISTER.length).toBe(37); // MERGE-WAVE at the W2 DEF merge: both lanes' deltas composed (43 -> 37)
+    // W4 PEOPLE second seat (merging the car, 2026-11-08): and the lane's one strike, `isSurplus on foodSecurity` (its consumer conditionPromotion.js entered the dossier-pdf closure through the DS-CND-1 condition desk; clause E): 42 -> 41.
+    expect(WRITER_DARK_REGISTER.length).toBe(36); // MERGE-WAVE at the W2 DEF merge: both lanes' deltas composed (43 -> 37) // MERGE-WAVE at the W4 PEOPLE merge: both lanes' deltas composed (42 -> 36)
     expect(liveEvidence.map((row) => row.identity).sort())
       .toEqual(WRITER_DARK_REGISTER.map((row) => row.identity).sort());
     for (const row of liveEvidence) {
@@ -533,7 +534,8 @@ describe('writer-with-no-reader ratchet: the live judgment', () => {
     // 2026-11-07 (PEOPLE-5B EDIT, M-7): `generatedAs on members` left with the grouping: forty-five became forty-four.
     // MERGE-CAR: 45 -> 42, both sides' strikes composed (MERGE-R2's two, PEOPLE-5B's one).
     // 43 -> 38 (2026-11-07, W2 DEF third seat): the five isolation-support rows struck with cause (the register names them).
-    expect(registeredAndDark.length).toBe(37); // MERGE-WAVE at the W2 DEF merge: both lanes' deltas composed (43 -> 37)
+    // W4 PEOPLE second seat (merging the car, 2026-11-08): and the lane's one strike, `isSurplus on foodSecurity` (its consumer conditionPromotion.js entered the dossier-pdf closure through the DS-CND-1 condition desk; clause E): 42 -> 41.
+    expect(registeredAndDark.length).toBe(36); // MERGE-WAVE at the W2 DEF merge: both lanes' deltas composed (43 -> 37) // MERGE-WAVE at the W4 PEOPLE merge: both lanes' deltas composed (42 -> 36)
     expect(baseline.darkUnregistered.length).toBe(cohort.length - registeredAndDark.length);
     expect(reviewableDark(cohort).length).toBe(baseline.reviewableDarkCount);
     expect(reviewableDark(cohort).length).toBeLessThan(cohort.length);

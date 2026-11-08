@@ -439,6 +439,7 @@ export function buildPrintProse(settlement, ctx = {}) {
     faith: faithModel,
     hasPatron: !!faithModel.hasEmbed,
     patronFallCause: patronFallCauseOf(faithModel.patronFallSentence),
+    faithFlags: r?.economicState?.safetyProfile?.flags || null,
   }, opts), faithModel);
 
   // ── THE POSITIONS, IN PAGE ORDER ────────────────────────────────────────────────────
@@ -678,6 +679,14 @@ export function buildPrintProse(settlement, ctx = {}) {
     printed('faith.creedStanding', faith.creedLegitimacy),
     printed('faith.creedStanding', faith.creedNiche),
     printed('faith.creedStanding', faith.creedFall),
+  ]);
+  // DS-FTH-4's generation lens (W4 PEOPLE, 2026-11-07): names no creed, so it is not behind
+  // the premium seam; every settlement carries the flags it reads.
+  put('faith', 'faith.templeGround', [
+    printed('faith.templeGround', faith.templeCrusader),
+    printed('faith.templeGround', faith.templeHeresy),
+    printed('faith.templeGround', faith.templeFraud),
+    printed('faith.templeGround', faith.templeMageTheocracy),
   ]);
 
   return Object.freeze(Object.fromEntries(

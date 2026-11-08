@@ -25,8 +25,19 @@
  */
 import { drawDeclared, resolveSiblingSentences } from '../domain/facts/drawDeclared.js';
 
+/**
+ * #8 (STYLE-RULINGS §1(b), WAVE-RULINGS item 8; W4 PEOPLE second seat 2026-11-07): the migration's crisis
+ * hook in TWO sets on W0's `stress[].direction`, never one for both. Kept here, beside the summary the
+ * same direction picks, and not in `data/stressTypes.js`: only the generator reads it, and the data file
+ * rides first paint. The type-level hook in STRESS_TYPE_MAP stays the catalogue's (it lists the kind).
+ */
+export const MIGRATION_HOOK_BY_DIRECTION = Object.freeze({
+  arrivals: 'Someone has offered to find the newcomers work and a roof, for a price, and those in charge must decide whether to pay it.',
+  departures: 'Someone is paying families to leave, and nobody yet knows who wants the houses they leave behind.',
+});
+
 /** mass_migration's food sentence, the key of its declared sibling set (STRESS_SUMMARY_SIBLINGS). */
-const MIGRATION_FOOD = 'New arrivals come faster than housing, food, and employment can absorb them.';
+const MIGRATION_FOOD = 'Newcomers arrive faster than housing, food and work can be found for them.';
 /** wartime (loss)'s price sentence, the key of its declared sibling set (CENSUS-2d; the chair's answer 1, R-U). */
 const WARTIME_PRICES = 'Food prices have doubled.';
 /** plague_onset's healer sentence, the key of its declared sibling set. */
@@ -90,7 +101,7 @@ export const STRESS_SUMMARY_SIBLINGS = Object.freeze({
   // food record counts the influx at ×1.15, so a fed influx is FED: CENSUS-1c unit 7).
   [MIGRATION_FOOD]: Object.freeze([
     Object.freeze({ text: MIGRATION_FOOD, crisis: ['hunger'] }),
-    Object.freeze({ text: 'New arrivals come faster than housing and employment can absorb them.', twinOf: MIGRATION_FOOD, excludes: ['crisis: hunger'] }),
+    Object.freeze({ text: 'Newcomers arrive faster than housing and work can be found for them.', twinOf: MIGRATION_FOOD, excludes: ['crisis: hunger'] }),
   ]),
   // plague_onset: "Healers are overwhelmed" needs a healer, an infirmary or a monastic house
   // (`factsOf(record).defence.healer`); most thorps and hamlets have none (Phase A's ledger).
@@ -123,34 +134,34 @@ export function stressSummary(type, ctx = {}, { rng } = {}) {
 
 const RENDERERS = {
   under_siege: (name) =>
-    `${name} is under active siege. Land supply lines are cut or contested. Morale is fracturing under sustained pressure. Every decision carries the weight of survival.`,
+    `Enemies are camped around ${name}, and nothing comes in by road. Inside, people argue over whether to hold out or give in.`,
 
   famine: (name) =>
-    `${name} is in its second failed harvest season. Rationing has begun. The wealthy are hoarding. Children are visibly hungry.`,
+    `${name} has lost its harvest for a second season. Rationing has begun, the wealthy are hoarding, and the children are visibly hungry.`,
 
   occupied: (name) =>
-    `${name} is under the administrative control of an outside power. Locals comply outwardly. Resistance exists, distributed and careful.`,
+    `The forces of another power hold ${name}, and its own officials take their orders. Most people keep their heads down; a few fight back in secret.`,
 
   politically_fractured: (name) =>
-    `${name} has no stable governing authority. Two or three factions each control part of the settlement and none will yield. Daily life continues, but every interaction has a political valence.`,
+    `Two or three factions each run part of ${name}, and none will give way. Daily life goes on, but nothing is done without asking whose side it helps.`,
 
   indebted: (name) =>
-    `${name} owes a debt it cannot repay to an external power: a merchant house, a noble, a guild confederation, or something older. The debt is now a leash.`,
+    `${name} owes an outside power more than it can ever repay, and the debt now decides what it can and cannot do.`,
 
   recently_betrayed: (name) =>
-    `${name} was betrayed from within: recently enough that the wound hasn't closed. Someone trusted sold something important. The settlement knows it, but the full picture is not yet known.`,
+    `Someone trusted in ${name} sold something important, not long ago. Everyone knows it happened; nobody yet knows who, or how much was lost.`,
 
   infiltrated: (name) =>
-    `${name} has been quietly penetrated by an outside interest. Enemy agents, a cult, a merchant intelligence network. The settlement does not know. Key decisions are being subtly shaped.`,
+    `Agents of an outside power have worked their way into ${name}, close to the people who decide things, and nobody there knows it.`,
 
   plague_onset: (name) =>
     `Something is spreading in ${name}. It is not yet a plague, but it will be if nothing changes. ${PLAGUE_HEALERS} The origin is disputed. Quarantine measures are being resisted.`,
 
   succession_void: (name) =>
-    `The last strong leader of ${name} died recently. No one has consolidated authority. Power is available to whoever moves first, and several parties are aware of this simultaneously.`,
+    `${name}'s last strong leader died recently with no clear heir, and several people are racing to take the seat first.`,
 
-  monster_pressure: () =>
-    "Something in the surrounding region has grown bolder. Caravans are disappearing. A farmstead burned last week. Whether wolves, raiders, or worse. The settlement's defences are adequate for normal times, but these are not normal times.",
+  monster_pressure: (name) =>
+    `Something in the country around ${name || 'the settlement'} has grown bolder: caravans go missing, and a farmstead was lost to fire last week. Its defences were built for quieter times.`,
 
   // insurgency: the old closure branched on `typeof getInstFlags == 'function'`
   // (ALWAYS FALSE under ESM) → only the else-branch ever rendered. data-schema.6:
@@ -160,7 +171,7 @@ const RENDERERS = {
     return (
       "A powerful faction in " +
       h +
-      " has decided the current government is illegitimate. The challenge is quiet, institutional, and dangerous, not street fighting but the systematic withdrawal of cooperation."
+      " has stopped obeying the government. Its people stall, its taxes go unpaid, and it waits."
     );
   },
 
@@ -197,7 +208,7 @@ const RENDERERS = {
     const s = name || "the settlement";
     return roll?.profit
       ? s +
-          " is in a kingdom at war and currently positioned to profit. Military contracts are flowing. Prices are high and merchants with the right connections are getting richer. The cost will come due (it always does), but for now the war is good for business."
+          " is in a kingdom at war and doing well out of it: army contracts pay, prices are high, and merchants with the right friends are getting rich. The bill will come later."
       : s +
           " is in a kingdom fighting a war it may not win. Conscription has taken a third of the working-age men. Supply caravans pass through on crown requisition. " + WARTIME_PRICES + " The governing authority is demanding sacrifice while certain families are quietly thriving on contracts.";
   },
@@ -221,7 +232,7 @@ const RENDERERS = {
     }
     return (
       l +
-      " is receiving more people than its infrastructure was built for. " + MIGRATION_FOOD + " The old residents and the new ones are not yet the same community."
+      " is taking in more people than it has houses or work for. " + MIGRATION_FOOD + " The old residents and the new ones keep apart."
     );
   },
 };
@@ -235,7 +246,7 @@ const RENDERERS = {
  */
 function RELIGIOUS_CONVERSION_VARIANTS(s) {
   return [
-    { id: 0, needs: ['institution: temple'], text: "A new faith is gaining ground in " + s + ". The old religious institution still holds its buildings and its records, but it is losing the congregation. The priest gives a service on Sunday to a room that is quietly, consistently, slightly emptier than the week before." },
+    { id: 0, needs: ['institution: temple'], text: "A new faith is gaining ground in " + s + ". The old house keeps its buildings and its records, but each week its priest preaches to fewer people." },
     { id: 1, needs: ['institution: temple'], text: "The religious community of " + s + " has fractured. Both factions claim the legitimate succession. Both hold services. Both have a priest who will not acknowledge the other. The congregation has been forced to choose, and some of them have chosen neither." },
     { id: 2, text: "An outside authority is requiring " + s + " to convert. The governing faction has formally complied. The population's compliance is more varied, more private, and more complicated than the official record shows." },
   ];

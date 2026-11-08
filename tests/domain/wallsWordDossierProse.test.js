@@ -29,7 +29,10 @@ import { DOSSIER_STATE_PROSE_DEFENSE } from '../../src/data/dossierStateProse/de
 import { CALM_FACTS_ADMIT_ALL } from '../helpers/calmFactsDouble.js';
 
 /** CENSUS-5: the no-walls read hands facts too (a pool may declare fact atoms): calm, every presence fact held but the perimeter. */
-const NO_WALLS_FACTS = Object.freeze({ ...CALM_FACTS_ADMIT_ALL, defence: Object.freeze({ ...CALM_FACTS_ADMIT_ALL.defence, walls: false, wallKind: null, palisade: false, gate: false }) });
+// W4 PEOPLE second seat 2026-11-07: + the migration's birth direction, so a walls pool that also declares its
+// direction (DS-STR-1 MASS MIGRATION, WAVE-RULINGS item 8) is read as a real record reads it, not muted by
+// an atom the calm double does not carry.
+const NO_WALLS_FACTS = Object.freeze({ ...CALM_FACTS_ADMIT_ALL, migration: Object.freeze({ active: true, direction: 'influx' }), defence: Object.freeze({ ...CALM_FACTS_ADMIT_ALL.defence, walls: false, wallKind: null, palisade: false, gate: false }) });
 
 const SIEGE = 'Critical (under siege)'; // W3 POW: the producer's words of 2026-11-07
 

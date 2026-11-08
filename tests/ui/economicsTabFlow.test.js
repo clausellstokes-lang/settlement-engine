@@ -995,11 +995,17 @@ describe('DAILY LIFE — the four anchors, one offer line, no marketing', () => 
     useStore.setState({ campaigns: [] });
     const { container, getByTestId } = render(e(DailyLifeTab, { settlement: STRESSED(), publicDossier: false }));
     const text = container.textContent;
-    const offer = getByTestId('daily-life-offer').textContent;
+    // #37 (W4 PEOPLE 2026-11-07): where the button stands the offer line is its CAPTION (the
+    // `data-caption` the button carries, and the lead of its title), never a body paragraph;
+    // where no button stands it is the paragraph that says how to get one.
+    const node = getByTestId('daily-life-offer');
+    const offer = node.tagName === 'P' ? node.textContent : node.getAttribute('data-caption');
     expect(offer).toMatch(/^Ordinary life here in prose|^Save this settlement/);
+    if (node.tagName !== 'P') expectAbsentWithAnchor(text, offer, node.textContent, 'the caption as body text (#37)');
     expect(container.querySelectorAll('[data-testid="daily-life-offer"]')).toHaveLength(1);
+    // The anchor is what the reader meets in the body: the paragraph, or the button's own label.
     for (const gone of ['Opus-grade', 'evocative', 'five paragraphs', 'Five paragraphs', 'What is daily life like here?', 'Anchor facts above remain available']) {
-      expectAbsentWithAnchor(text, gone, offer, 'the D3/D6 marketing');
+      expectAbsentWithAnchor(text, gone, node.textContent, 'the D3/D6 marketing');
     }
   });
 });

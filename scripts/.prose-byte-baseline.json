@@ -67,8 +67,8 @@
       "ceilingGzip": 87513
     },
     "src/data/dossierStateProse/general.generated.js": {
-      "raw": 280083,
-      "gzip": 37435,
+      "raw": 283292,
+      "gzip": 37813,
       "ceilingRaw": 796761,
       "ceilingGzip": 177058
     },
@@ -79,13 +79,13 @@
       "ceilingGzip": 79355
     },
     "src/data/dossierStateProse/stressors.generated.js": {
-      "raw": 94080,
-      "gzip": 15105,
+      "raw": 147476,
+      "gzip": 20772,
       "ceilingRaw": 258858,
       "ceilingGzip": 57524
     },
     "src/data/dossierStateProse/warFaith.generated.js": {
-      "raw": 174395,
+      "raw": 178233,
       "gzip": 24601,
       "ceilingRaw": 505306,
       "ceilingGzip": 112290
@@ -451,6 +451,62 @@
       "toRaw": 125681,
       "gzipAfter": 18543,
       "reason": "+9,966 B: eight new pools (the five structure flags, stateCrime banded by intensity, in DS-POW-5; the GM advisory's two in DS-POW-6), 19 variants with their poolMeta. Projected through node scripts/generate-dossier-state-prose.mjs; --check exit 0 at the tip."
+    },
+    {
+      "car": "W4 PEOPLE (2026-11-07, the construction-and-wiring wave; ODQ §934.105): the faith and great-house construction rows C1-C5",
+      "leaf": "src/data/dossierStateProse/general.generated.js",
+      "fromRaw": 280083,
+      "toRaw": 283258,
+      "gzipAfter": 36858,
+      "reason": "+3,175 B raw (gzip level 9: 36,445 -> 36,858): DS-FTH-4 gains five FLAG pools on the birth-time stress flags (crusaderSynthesis, heresySuppression hunted/preached, religiousFraud, mageTheocracy; 10 variants) and is MOUNTED at faith.templeGround; DS-GEN-17 gains the two GREAT HOUSE lenses (cathedral, monastery; 8 variants, four vantages each). Projected through node scripts/generate-dossier-state-prose.mjs; --check exit 0. RE-CHAINED at MERGE-WAVE's W4 PEOPLE merge (2026-11-08): the lane measured 272147 -> 275322 over the base; composed over W1 ECO's two general-leaf rows (272147 -> 280083) the same delta stands from 280083."
+    },
+    {
+      "car": "W4 PEOPLE (2026-11-07, the construction-and-wiring wave; ODQ §934.105): the faith and great-house construction rows C1-C5",
+      "leaf": "src/data/dossierStateProse/warFaith.generated.js",
+      "fromRaw": 176442,
+      "toRaw": 181741,
+      "gzipAfter": 25922,
+      "reason": "+5,299 B raw (gzip level 9: 25,180 -> 25,922): DS-FTH-4 gains five FLAG pools on the birth-time stress flags (crusaderSynthesis, heresySuppression hunted/preached, religiousFraud, mageTheocracy; 10 variants) and is MOUNTED at faith.templeGround; DS-GEN-17 gains the two GREAT HOUSE lenses (cathedral, monastery; 8 variants, four vantages each). Projected through node scripts/generate-dossier-state-prose.mjs; --check exit 0."
+    },
+    {
+      "car": "W4 PEOPLE (2026-11-07): the owner's style law of 2026-11-07 — DS-FTH-1, DS-FTH-3, DS-FTH-4 (48 rewrites); DS-GEN-17 monastery v02",
+      "leaf": "src/data/dossierStateProse/general.generated.js",
+      "fromRaw": 283258,
+      "toRaw": 283292,
+      "gzipAfter": 37813,
+      "reason": "+34 B raw (gzip level 9: 36,858 -> 36,869): the faith blocks' style rows (STYLE-AUDIT §2b-4) rewritten in the plain register; DS-GEN-17 GREAT HOUSE: monastery v02 reworded so it never echoes the cathedral's bells line in a town with both. RE-CHAINED at MERGE-WAVE's W4 PEOPLE merge (2026-11-08): the lane measured 275322 -> 275356 over the base; composed over W1 ECO's two general-leaf rows (272147 -> 280083) the same delta stands from 283258. gzipAfter re-measured on the composed leaf (36869 on the lane)."
+    },
+    {
+      "car": "W4 PEOPLE second seat (2026-11-07): the owner's style law of 2026-11-07 — DS-CND-1, the stress type in the pool key (STYLE-RULINGS §1a)",
+      "leaf": "src/data/dossierStateProse/stressors.generated.js",
+      "fromRaw": 94103,
+      "toRaw": 145959,
+      "gzipAfter": 20614,
+      "reason": "+51,856 B raw over the chain's 94,103 (the committed row stood at 94,080 after a banked shrink; gzip level 9: 15,105 -> 20,614): DS-CND-1 gains forty-five crisis-keyed direction pools (DIRECTION: worsening / stable / easing · CRISIS: <kind>, one set per crisis kind, 128 variants: four vantages on the direction each crisis is born with, two on the others, the migration pools in both directions) and its 33 style rows rewritten in the plain register; most of the bytes are the projection's per-variant metadata (marks, slots, vids, poolMeta). Projected through node scripts/generate-dossier-state-prose.mjs; --check exit 0."
+    },
+    {
+      "car": "W4 PEOPLE second seat (2026-11-07): the owner's style law of 2026-11-07 — DS-STR-1 (rows 5, 128-153; the migration in two sets, WAVE-RULINGS item 8)",
+      "leaf": "src/data/dossierStateProse/stressors.generated.js",
+      "fromRaw": 145959,
+      "toRaw": 147408,
+      "gzipAfter": 20851,
+      "reason": "+1,449 B raw (gzip level 9: 20,614 -> 20,851): DS-STR-1's 27 style rows and eleven tic strikes rewritten in the plain register; MASS MIGRATION's seven arrivals lines declare `migration: influx` and four departures lines (`migration: exodus`) join them, so a departures record never prints an arrival. Projected through node scripts/generate-dossier-state-prose.mjs; --check exit 0."
+    },
+    {
+      "car": "W4 PEOPLE second seat (2026-11-07): the owner's style law of 2026-11-07 — DS-STR-2 (rows 154-183)",
+      "leaf": "src/data/dossierStateProse/stressors.generated.js",
+      "fromRaw": 147408,
+      "toRaw": 147470,
+      "gzipAfter": 20773,
+      "reason": "+62 B raw (gzip level 9: 20,851 -> 20,773, smaller): DS-STR-2's 30 style rows (lifecycle, counterforce, synergy and origin lines) rewritten in the plain register; no pool, variant, mark or slot added. Projected through node scripts/generate-dossier-state-prose.mjs; --check exit 0."
+    },
+    {
+      "car": "W4 PEOPLE second seat (merging the people car, 2026-11-08): DS-CND-1 DIRECTION: stable · CRISIS: indebted v1 re-worded off a test literal",
+      "leaf": "src/data/dossierStateProse/stressors.generated.js",
+      "fromRaw": 147470,
+      "toRaw": 147476,
+      "gzipAfter": 20772,
+      "reason": "+6 B raw (gzip level 9: 20,773 -> 20,772): one line re-worded ('nothing is left over' -> 'there is never enough left') because proseDrawnAnchors read an unrelated assertion message in proseWiringCensus.walker.test.js as a literal anchor on it; no pool, variant, mark or slot added. Projected through node scripts/generate-dossier-state-prose.mjs; --check exit 0."
     }
   ],
   "ceilingTransfersNewLeaves": [

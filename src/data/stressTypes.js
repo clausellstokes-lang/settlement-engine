@@ -9,9 +9,16 @@
 
 // WIRING-W0 (2026-11-07, R-W7 e): the mass migration's ONE catalogue note, written once; its two
 // halves (arrivals, departures) are cut from it below rather than restated (WIRING-W0-CLOSE trim).
+// W4 PEOPLE second seat (2026-11-07, #30, the owner's style law): the two halves in plain words, each the
+// consequence its own direction carries; the catalogue note names both, labelled, and the halves are
+// cut from it after their labels, so each string still exists once.
+const MIGRATION_ARRIVE = "If people arrive: ";
+const MIGRATION_LEAVE = " If people leave: ";
 const MIGRATION_VIABILITY_NOTE =
-  "Immigration: food balance stressed, labour market disrupted, criminal opportunity elevated. Emigration: tax base shrinking, institutions hollowing, labour shortage emerging.";
-const MIGRATION_NOTE_CUT = MIGRATION_VIABILITY_NOTE.indexOf(" Emigration:");
+  "If people arrive: food will run short, there will not be work for everyone, and some newcomers will take what they cannot earn. If people leave: taxes will fall short, offices will stand empty, and the fields will lack the hands to work them.";
+const MIGRATION_NOTE_CUT = MIGRATION_VIABILITY_NOTE.indexOf(MIGRATION_LEAVE);
+/** @param {string} half @returns {string} the half with its first letter raised */
+const sentenceOf = (half) => half.charAt(0).toUpperCase() + half.slice(1);
 
 export const STRESS_TYPE_MAP = {
   under_siege: {
@@ -22,7 +29,7 @@ export const STRESS_TYPE_MAP = {
     crisisHook:
       "The settlement is surrounded. Someone in the leadership is considering terms. Someone else is considering a desperate sortie. The players arrive as this decision is being forced.",
     viabilityNote:
-      "Land-based economic activity is suspended. Port access (if present) provides a partial lifeline. The only metric that matters is how long food, water, and ammunition hold out.",
+      "Field work and trade have stopped, and everything now turns on how long the food and water last.",
     historyColour: "military",
   },
   famine: {
@@ -32,7 +39,7 @@ export const STRESS_TYPE_MAP = {
     requiresTier: null,
     crisisHook:
       "A grain merchant has food, enough to matter. They will sell it, but their price is not money. The players can intervene in how this plays out.",
-    viabilityNote: "Short-term economic viability is critically compromised. Normal income projections do not apply.",
+    viabilityNote: "No one can earn a normal living while the famine lasts, and every coin goes on food.",
     historyColour: "economic",
   },
   occupied: {
@@ -42,7 +49,7 @@ export const STRESS_TYPE_MAP = {
     requiresTier: null,
     crisisHook:
       "A resistance cell needs outside help: people who aren't known faces. The occupation's local collaborators include someone the players will recognise.",
-    viabilityNote: "Revenue flows to the occupying authority. Local institutions continue under oversight.",
+    viabilityNote: "The occupiers take the revenue, and local offices work only under their eye.",
     historyColour: "political",
   },
   politically_fractured: {
@@ -53,7 +60,7 @@ export const STRESS_TYPE_MAP = {
     crisisHook:
       "Something important (a resource, a prisoner, a decision) falls into the contested space between factions. The players can't avoid taking a side.",
     viabilityNote:
-      "Decision-making is paralysed. Infrastructure maintenance is being neglected. Crisis is deferred, not resolved.",
+      "Nothing gets decided, repairs are put off, and every problem is left for later.",
     historyColour: "political",
   },
   indebted: {
@@ -62,9 +69,9 @@ export const STRESS_TYPE_MAP = {
     probability: 0.036,
     requiresTier: null,
     crisisHook:
-      "The creditor has sent a representative to collect (not money, but something specific). Locals are divided between compliance and resistance, and neither option is clean.",
+      "The creditor has sent someone to collect, not money but something particular, and the locals are split between handing it over and refusing.",
     viabilityNote:
-      "A significant portion of revenue is being extracted by the creditor. Capital investment has stopped.",
+      "Much of what is earned here goes straight to the creditor, and nothing is left to build with.",
     historyColour: "economic",
   },
   recently_betrayed: {
@@ -74,7 +81,7 @@ export const STRESS_TYPE_MAP = {
     requiresTier: null,
     crisisHook:
       "The betrayal had consequences that are still unfolding. The betrayer may still be here. The players know something that could help identify them, or they are the only people who don't have a motive.",
-    viabilityNote: "Trust in institutions is low. Some key systems are not operating at full capacity as a result.",
+    viabilityNote: "People no longer trust those in charge, and some of the work that depends on that trust has stopped.",
     historyColour: "political",
   },
   infiltrated: {
@@ -84,7 +91,7 @@ export const STRESS_TYPE_MAP = {
     requiresTier: null,
     crisisHook:
       "Something is slightly wrong: a decision that doesn't make sense, a face seen in too many places, a piece of information that reached the wrong hands. The players can notice if they pay attention.",
-    viabilityNote: "No economic impact yet. The infiltration is strategic, not extractive (so far).",
+    viabilityNote: "Nothing is being taken yet; whoever has got inside wants influence, not money, for now.",
     historyColour: "political",
   },
   plague_onset: {
@@ -94,7 +101,7 @@ export const STRESS_TYPE_MAP = {
     requiresTier: null,
     crisisHook:
       "The healer who identified the outbreak first has gone quiet. Their last message suggested the disease is not natural. Accessing them means navigating a quarantine that is not being enforced consistently.",
-    viabilityNote: "Market activity is reduced. Travel is being discouraged. Some supply chains are disrupted.",
+    viabilityNote: "Fewer people come to market, travel is discouraged, and some goods stop arriving.",
     historyColour: "disaster",
   },
   succession_void: {
@@ -104,7 +111,7 @@ export const STRESS_TYPE_MAP = {
     requiresTier: null,
     crisisHook:
       "Three different factions have approached the players for support, each believing they represent the legitimate or best claim. All three are partly right.",
-    viabilityNote: "Major decisions are deferred. Some institutions are operating autonomously, for better or worse.",
+    viabilityNote: "Big decisions wait for a new leader, and in the meantime each office does as it sees fit.",
     historyColour: "political",
   },
   monster_pressure: {
@@ -115,7 +122,7 @@ export const STRESS_TYPE_MAP = {
     crisisHook:
       "The attacks are following a pattern that suggests coordination, not desperation. Someone is directing this (whether a rival lord, a beast of unusual cunning, or something stranger). The evidence is there for anyone who looks carefully.",
     viabilityNote:
-      "Trade disruption is reducing income. Defensive expenditure is increasing. Population anxiety is rising.",
+      "Trade suffers as carts stop coming, more is spent on defence, and people grow afraid.",
     historyColour: "military",
   },
   insurgency: {
@@ -126,7 +133,7 @@ export const STRESS_TYPE_MAP = {
     crisisHook:
       "The governing faction knows what is happening but cannot admit it publicly without legitimising the insurgency. They need something done that cannot be official.",
     viabilityNote:
-      "Tax collection is contested. Several institutions have stopped forwarding revenue to the central authority. Normal governance is functioning on momentum.",
+      "Taxes are disputed, some offices no longer send their revenue on, and the government runs on habit.",
     historyColour: "political",
   },
   religious_conversion: {
@@ -137,7 +144,7 @@ export const STRESS_TYPE_MAP = {
     crisisHook:
       "The contested religious authority has left a gap in the institutions that depended on it: records, oaths, property, sanctuary. Someone is about to exploit that gap.",
     viabilityNote:
-      "Tithing income splits or redirects. Religious market days and fairs are contested or duplicated. Properties of the old institution are in legal ambiguity. Cross-faith trade is complicated.",
+      "The tithe is split, feast days and fairs are held twice over, the old house's property has no clear owner, and trade across the faiths is harder.",
     historyColour: "religious",
   },
   slave_revolt: {
@@ -151,7 +158,7 @@ export const STRESS_TYPE_MAP = {
     // "The slave market's commercial operations are suspended." presumed a slave market, which has
     // no fact home (`institution: slave market` is listed under "needs a home").
     viabilityNote:
-      "Owners have pulled their work gangs off every task they cannot watch. Labour-dependent production is disrupted. The security apparatus is entirely focused on containment.",
+      "Owners keep their gangs only on work they can watch, less gets made, and everyone who keeps order is busy containing the revolt.",
     historyColour: "political",
   },
   wartime: {
@@ -162,7 +169,7 @@ export const STRESS_TYPE_MAP = {
     crisisHook:
       "A crown officer has arrived with requisition orders that will strip the settlement of something it cannot spare. The governing faction must decide whether to comply, negotiate, or find a third option.",
     viabilityNote:
-      "Military expenditure dominates the economy. Trade disruption is significant but offset by war contracts for some. Labour shortage from conscription affects agricultural and craft output.",
+      "The war takes most of the money: trade suffers, a few grow rich on army contracts, and the fields are short of the men called up.",
     historyColour: "military",
   },
   mass_migration: {
@@ -171,15 +178,15 @@ export const STRESS_TYPE_MAP = {
     probability: 0.025,
     requiresTier: null,
     crisisHook:
-      "The question is not whether things will change, but who will shape the change and what they will want in return.",
+      "Whoever takes charge of the migration will decide who may stay and who must go, and will want something in return.",
     viabilityNote: MIGRATION_VIABILITY_NOTE,
     // WIRING-W0 (2026-11-07, R-W7 e): the catalogue's note above describes the TYPE both ways (the
     // compendium reads it); a settlement's entry carries the ONE half its own `direction` names
     // (stressGenerator.js :: buildStressEntry; domain/migrationDirection.js). The halves are the
     // note's own two parts, cut at " Emigration:", so the strings exist once.
     viabilityNoteByDirection: {
-      arrivals: MIGRATION_VIABILITY_NOTE.slice(0, MIGRATION_NOTE_CUT),
-      departures: MIGRATION_VIABILITY_NOTE.slice(MIGRATION_NOTE_CUT + 1),
+      arrivals: sentenceOf(MIGRATION_VIABILITY_NOTE.slice(MIGRATION_ARRIVE.length, MIGRATION_NOTE_CUT)),
+      departures: sentenceOf(MIGRATION_VIABILITY_NOTE.slice(MIGRATION_NOTE_CUT + MIGRATION_LEAVE.length)),
     },
     historyColour: "demographic",
     // ONE DIRECTION (lane RUNG2-F13, on the chair's ruling 2 of 2026-10-30, ODQ §934.101): the
@@ -208,13 +215,13 @@ export const STRESS_TYPE_SIBLINGS = Object.freeze({
   ]),
   [STRESS_TYPE_MAP.plague_onset.viabilityNote]: Object.freeze([
     Object.freeze({ text: STRESS_TYPE_MAP.plague_onset.viabilityNote, needs: ['market'] }),
-    Object.freeze({ text: 'Travel is being discouraged. Some supply chains are disrupted.', twinOf: STRESS_TYPE_MAP.plague_onset.viabilityNote, excludes: ['market'] }),
+    Object.freeze({ text: 'Travel is discouraged, and some goods stop arriving.', twinOf: STRESS_TYPE_MAP.plague_onset.viabilityNote, excludes: ['market'] }),
   ]),
   [STRESS_TYPE_MAP.religious_conversion.crisisHook]: Object.freeze([
     Object.freeze({ text: STRESS_TYPE_MAP.religious_conversion.crisisHook, needs: ['institution: temple'] }),
   ]),
   [STRESS_TYPE_MAP.religious_conversion.viabilityNote]: Object.freeze([
     Object.freeze({ text: STRESS_TYPE_MAP.religious_conversion.viabilityNote, needs: ['institution: temple', 'market'] }),
-    Object.freeze({ text: 'Tithing income splits or redirects. Properties of the old institution are in legal ambiguity.', twinOf: STRESS_TYPE_MAP.religious_conversion.viabilityNote, needs: ['institution: temple'], excludes: ['market'] }),
+    Object.freeze({ text: 'The tithe is split, and the old house\'s property has no clear owner.', twinOf: STRESS_TYPE_MAP.religious_conversion.viabilityNote, needs: ['institution: temple'], excludes: ['market'] }),
   ]),
 });

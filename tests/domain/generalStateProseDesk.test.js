@@ -53,7 +53,7 @@ import {
   recencyFramingPoolKey,
   significantEvent,
   groundPoolKey,
-  institutionsPoolKey,
+  institutionsPoolKey, cathedralPoolKey, monasteryPoolKey,
   marketPoolKey,
   commercePoolKey,
   warehousesPoolKey,
@@ -110,7 +110,7 @@ const mergedShapes = () => mergeSlotShapes([
 /** Every block this desk lights, and the pool counts the shipped leaf carries. */
 const BLOCK_POOLS = Object.freeze({
   'DS-GEN-2': 3, 'DS-GEN-3': 42, 'DS-GEN-5': 5, 'DS-GEN-6': 9, 'DS-GEN-12': 5, 'DS-GEN-13': 9, /* W1 ECO construction (2026-11-07): +4 COMMERCE, +1 WAREHOUSES */
-  'DS-GEN-7': 8, 'DS-GEN-17': 5,
+  'DS-GEN-7': 8, 'DS-GEN-17': 7, // W4 PEOPLE 2026-11-07: +2, the GREAT HOUSE lens (C5) — composed with W1 ECO's DS-GEN-13 9 (MERGE-WAVE at the W4 PEOPLE merge)
   // The history chapter (DESK-GEN2 car 1).
   'DS-GEN-9': 15, 'DS-GEN-14': 3, 'DS-GEN-16': 5,
   // The viability verdict and the plot-hook framing (DESK-GEN2 car 2).
@@ -586,7 +586,14 @@ describe('DS-GEN-12 / DS-GEN-13 / DS-GEN-17 — three total partitions', () => {
     // on the `{}` case above, which proves the same function answers on an empty record.
     expect(institutionsPoolKey({ hasCathedral: true, hasBank: true })).toBe('BARE');
     expect(new Set(cases.map(([inst]) => institutionsPoolKey(inst))).size).toBe(5);
-    expect([...new Set(cases.map(([, key]) => key))].sort()).toEqual(poolsOf('DS-GEN-17').sort());
+    // W4 PEOPLE 2026-11-07: the two GREAT HOUSE pools are a second lenses (cathedralPoolKey, monasteryPoolKey),
+    // never a key of the composition partition; the partition covers the other five exactly.
+    expect([...new Set(cases.map(([, key]) => key))].sort())
+      .toEqual(poolsOf('DS-GEN-17').filter((k) => !k.startsWith('GREAT HOUSE: ')).sort());
+    expect(cathedralPoolKey(true)).toBe('GREAT HOUSE: cathedral');
+    expect(monasteryPoolKey(true)).toBe('GREAT HOUSE: monastery');
+    expect(cathedralPoolKey(undefined)).toBeNull();
+    expect(monasteryPoolKey(false)).toBeNull();
   });
 });
 

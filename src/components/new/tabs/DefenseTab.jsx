@@ -18,6 +18,7 @@ import useIsMobile from '../../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 import { edged } from '../../../design/edgedBox.js';
 import { isVeiled } from '../../../domain/display/galleryVeil.js';
+import { crisisSummaryForSurface } from '../../../domain/crisis/crisisSummaryVantage.js';
 // THE ONE PARAGRAPH RENDERER (owner finding 2026-09-18). Every position on this tab used to
 // map its drawn sentences to one `<p>` EACH, so a five-lens position printed five paragraphs
 // that each opened on the town's name. The DRAW is unchanged: the lines handed over are the
@@ -339,7 +340,9 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
   const STRESS_STATUS = DEFENSE_STRESS_STATUS;
   const activeStress = stressTypes.find(t=>STRESS_STATUS[t]);
   const stressStatus = activeStress ? STRESS_STATUS[activeStress] : null;
-  const stressObj    = stresses.find(s=>s?.type===activeStress);
+  const stressEntry  = stresses.find(s=>s?.type===activeStress);
+  // #29 (STYLE-RULINGS §1(c)): Defence prints the watch's vantage of the crisis summary; the Crisis tab keeps the full text.
+  const stressObj    = stressEntry ? { ...stressEntry, summary: crisisSummaryForSurface(stressEntry, r?.name, 'defence') } : stressEntry;
 
   // Supporting capabilities (shared with the PDF viewModel)
   // T2-23: Economic Backing restated the Threat Assessment's Economic Survival row (one

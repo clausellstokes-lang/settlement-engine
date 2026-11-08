@@ -9,7 +9,7 @@
 //      EVENT_TYPE_NAMES) consumed by historyGenerator.js.
 
 import { HISTORY_DESC_VARIANTS } from './historyDescVariants.js';
-import { pickVariant } from '../kernel/proseHash.js';
+import { pickVariant } from '../kernel/proseHash.js'; import { migrationDirectionOfConfig } from '../domain/migrationDirection.js';
 
 // Notable power-holder roles by domain (government, religious, crafts,
 // military, economy, criminal, magic, other). Each entry describes a role that
@@ -1144,7 +1144,7 @@ export const HISTORICAL_EVENTS_DATA = [
   },
   {
     type: 'economic_disparity',
-    description: 'Growing wealth gap between merchant class and common laborers creates resentment',
+    description: 'The merchants are getting richer and the labourers are not, and the labourers have noticed',
     factions: ['Wealthy merchants', 'Poor workers', 'Moderate reformers'],
     lastingEffects: [
       'Wage disputes settled by a standing arbitration council since founded',
@@ -1174,7 +1174,7 @@ export const HISTORICAL_EVENTS_DATA = [
   },
   {
     type: 'guild_conflict',
-    description: 'Rival guilds competed for market share and political influence',
+    description: 'Rival guilds fought over who may sell what, and over a say in how the place is run',
     factions: ['Established guilds', 'Upstart guilds', 'Non-guild workers'],
     lastingEffects: [
       'Guild membership rolls now audited by an outside adjudicator',
@@ -1249,7 +1249,7 @@ export const HISTORICAL_EVENTS_DATA = [
   },
   {
     type: 'generational_divide',
-    description: 'Old ways vs new ideas creates conflict between age groups',
+    description: 'The young want to change how things are done, and the old will not let them',
     factions: ['Traditionalists', 'Progressives', 'Pragmatic middle'],
     lastingEffects: [
       'Council seats now formally split between the old and young factions',
@@ -1531,7 +1531,13 @@ export const HISTORICAL_EVENTS_DATA = [
   },
   {
     type: 'demographic_pressure',
-    description: 'The population changed faster than the settlement’s institutions could absorb (through arrivals, departures, or both) and the strain reshaped daily life',
+    description: 'Newcomers have come faster than they can be housed or given work, and the old families and the new now compete for the same jobs',
+    // #20 (STYLE-RULINGS §1(b), WAVE-RULINGS item 8; W4 PEOPLE second seat 2026-11-07): one description per
+    // direction, never the both-ways hedge; the live tension reads its own (`tensionDescription`).
+    descriptionByDirection: {
+      arrivals: 'Newcomers have come faster than they can be housed or given work, and the old families and the new now compete for the same jobs',
+      departures: 'Season after season families have moved away, and the houses, fields and posts they left are hard to fill',
+    },
     factions: ['Established residents', 'The newly arrived or departing', 'Those profiting from the churn'],
     // CENSUS-3e (R-AA): one template, two directions, is two lines. The migration direction is
     // homed (`facts/migration.js`), so each hook declares the direction it presumes, and a tension's
@@ -1606,6 +1612,20 @@ export const EVENT_TYPE_NAMES = {
  * @param {string|number|null} [seed]
  * @returns {string}
  */
+/**
+ * #20 (W4 PEOPLE second seat, 2026-11-07): a live tension's description, in the migration direction the
+ * config's projection declares (`config.migrationDirection`, W0) where its template is keyed by direction;
+ * else the template's own. Departures only where the record says so; arrivals is the ruled default.
+ * @param {{description: string, descriptionByDirection?: {arrivals: string, departures: string}}} tension
+ * @param {unknown} config
+ * @returns {string}
+ */
+export const tensionDescription = (tension, config) => {
+  const byDirection = tension?.descriptionByDirection;
+  if (!byDirection) return tension.description;
+  return byDirection[migrationDirectionOfConfig(/** @type {any} */ (config)) === 'departures' ? 'departures' : 'arrivals'] || tension.description;
+};
+
 export const historyDescription = (eventTemplate, seed) => {
   const variants = HISTORY_DESC_VARIANTS[eventTemplate.type];
   return variants

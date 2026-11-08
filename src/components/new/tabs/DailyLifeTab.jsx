@@ -191,7 +191,12 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
           The unsaved hint and the empty state were one pitch told twice; they are one plain
           line now, shown until there is prose, with the button beneath it once the
           settlement is saved. */}
-      {!hasContent && !loading && (
+      {/* ⭐ #37 (STYLE-RULINGS §1, W4 PEOPLE 2026-11-07): THE CAPTION LEAVES THE BODY. Where the
+          button stands, the offer line is the BUTTON'S caption (its title, the words a reader
+          meets on the control), never a paragraph of the dossier: it printed as body text in
+          500 of 1,000 towns. Where no button stands (an unsaved settlement), the line is the
+          instruction that says how to get one, and it stays. The heading and the lines stay. */}
+      {!hasContent && !loading && !dailyLifeEnabled && (
         <p data-testid="daily-life-offer" style={{ margin: '0 0 10px', fontSize: proseFontSize(FS.sm, mobile), color: SECOND, lineHeight: 1.5 }}>
           {/* CENSUS-2 (R10): names only the market, tavern and watch the place has */}
           {dailyLifeOfferLine(r, dailyLifeEnabled)}
@@ -204,9 +209,11 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
           fullWidth
           onClick={generate}
           busy={loading}
+          data-testid={!hasContent && !loading ? 'daily-life-offer' : undefined}
+          data-caption={!hasContent && !loading ? dailyLifeOfferLine(r, dailyLifeEnabled) : undefined}
           title={hasContent
             ? `Regenerate replaces the current daily-life prose with a fresh narrative pass against the simulator output. Spends ${getCost('dailyLife')} credits.`
-            : `Refine the simulator output into daily-life prose for this settlement. Spends ${getCost('dailyLife')} credits.`}
+            : `${dailyLifeOfferLine(r, dailyLifeEnabled)} Refine the simulator output into daily-life prose for this settlement. Spends ${getCost('dailyLife')} credits.`}
           style={{ marginBottom: 16 }}
         >
           {buttonLabel}

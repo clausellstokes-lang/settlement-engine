@@ -19,9 +19,8 @@
  *     record) and defence (defenseFactsOf);
  *   - the hooks, as the record holds them, highest priority first.
  *
- * ⛔ NOTHING IS INVENTED. Every string on the sheet is a record value or a label from
- * TONIGHT_COPY. An absent person is absent (never "Unnamed NPC"); an absent fact is absent.
- *
+ * ⛔ NOTHING IS INVENTED. Every string is a record value, a TONIGHT_COPY label or a crisis's official
+ * vantage (crisis/crisisSummaryVantage.js). An absent person is absent; an absent fact is absent.
  * Pure: same settlement in, same sheet out. Lazy-only: its consumers are the Table View,
  * Session Mode, the PDF and the journal, none of which is first paint.
  */
@@ -33,6 +32,7 @@ import { institutionDisplayName } from '../display/institutionDisplayName.js';
 import { FOOD_SECURITY_BANDS } from '../../data/bandLadders.js';
 import { STRESS_INSTITUTION_EFFECTS } from '../../data/stressInstitutionEffects.js';
 import { CRISIS_ROLE_LABEL, castHash, effectiveCastOf } from '../crisis/crisisCast.js';
+import { crisisSummaryForSurface } from '../crisis/crisisSummaryVantage.js';
 
 /**
  * THE ONE COPY CONSTANT for the sheet, on every surface that prints it.
@@ -224,6 +224,8 @@ const HOOK_COUNT = 3;
  * @typedef {Object} TonightStress
  * @property {unknown} [type]
  * @property {unknown} [label]
+ * @property {unknown} [summary]
+ * @property {unknown} [direction]
  * @property {import('../crisis/crisisCast.js').CrisisCast} [cast]
  * @property {Record<string, { value?: unknown }>} [_userEdits]
  *
@@ -309,9 +311,28 @@ function crisisOf(source) {
       break;
     }
   }
-  const head = place ? `${place}: ${type}` : type;
-  const line = persons.length ? `${head}. ${persons.map((p) => `${p.name} (${p.roleLabel})`).join('; ')}.` : head;
+  // #29 / #38 (STYLE-RULINGS §1(c), WAVE-RULINGS item 2; W4 PEOPLE second seat 2026-11-07): Tonight's card
+  // carries the OFFICIAL vantage of the worst crisis's summary (what those in charge must decide), between
+  // the label and the people; the crisis page keeps the full text. The place is named in that sentence, so
+  // the head is the label alone. A crisis with no vantage line (an authored custom kind) keeps the old head.
+  const lead = leadStressOf(source);
+  const official = lead && place ? crisisSummaryForSurface(lead, place, 'tonight') : null;
+  const said = official && official !== clean(lead?.summary) ? official : null;
+  const head = said ? `${type}. ${said}` : place ? `${place}: ${type}` : type;
+  const tail = persons.length ? `${persons.map((p) => `${p.name} (${p.roleLabel})`).join('; ')}.` : '';
+  const line = tail ? `${said ? head : `${head}.`} ${tail}` : head;
   return { type, place, person: persons[0]?.name || null, persons, line };
+}
+
+/**
+ * The worst active crisis, as castsOf orders them (the cast's rank, then the record's order).
+ * @param {TonightSource} source @returns {TonightStress | null}
+ */
+function leadStressOf(source) {
+  const ranked = stressesOf(source)
+    .map((s, at) => ({ s, at }))
+    .sort((a, b) => ((a.s.cast?.rank || 0) - (b.s.cast?.rank || 0)) || (a.at - b.at));
+  return ranked.length ? ranked[0].s : null;
 }
 
 /** @param {TonightNpc} npc @returns {number} */

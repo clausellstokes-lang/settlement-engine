@@ -159,6 +159,8 @@ const PRINT_DEFERRED = [
 
 /** Reaches a read-model, owns no freshness claim. Reason is mandatory. */
 const FROZEN_DEFERRED = {
+  'src/components/new/tabs/FaithTab.jsx':
+    'Reads `economicState.safetyProfile.flags` ONLY (W4 PEOPLE, DS-FTH-4\'s mount at faith.templeGround, 86c893cc8): the birth-time faith stress flags (crusaderSynthesis, heresySuppression, religiousFraud, mageTheocracy) choose which temple-ground pool prints. A flag is a fact of the faith, not an economy tally: the tab prints no prosperity, chain, service or output figure, so it owns no economy freshness claim.',
   'src/components/new/tabs/SubstrateTab.jsx':
     'Reads `economicState.foodSecurity.foodRecord` ONLY, through domain/foodSurplus.js :: offersFoodSurplus, to keep the Foundations Food row from grading "Surplus" on a place whose record says it grows less than it eats (FOOD-EXPORTS residue, 2026-11-04). The record is written once at generation and the row is a band WORD, never a tally, so the tab owns no freshness claim of its own.',
   'src/components/new/tabs/MagicTab.jsx':
