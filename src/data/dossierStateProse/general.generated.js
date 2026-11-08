@@ -6474,7 +6474,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "vid": 1
         },
         {
-          "angle": "ledger",
+          "angle": "unfolding",
           "text": "One tie between two of {settlement}'s people outweighs the rest, and everyone here watches what the pair do next.",
           "slots": [
             "settlement"
@@ -6508,7 +6508,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "vid": 1
         },
         {
-          "angle": "ledger",
+          "angle": "unfolding",
           "text": "Ties that cross between {settlement}'s powers exist here because of how those powers are balanced, and they will shift when the balance does.",
           "slots": [
             "settlement"
@@ -6542,7 +6542,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "vid": 1
         },
         {
-          "angle": "ledger",
+          "angle": "street",
           "text": "No tie between people in {settlement} was forced by the balance of its powers; each has a cause anyone would recognise.",
           "slots": [
             "settlement"

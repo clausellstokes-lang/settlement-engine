@@ -5699,19 +5699,19 @@ unchanged.
 
 **`prominentRelationship` present** {colour}
 1. `[street]` Of all the ties between people in {settlement}, one is talked about before the rest.
-2. `[ledger]` One tie between two of {settlement}'s people outweighs the rest, and everyone here watches what the pair do next.
+2. `[unfolding]` One tie between two of {settlement}'s people outweighs the rest, and everyone here watches what the pair do next.
 3. `[visitor]` Ask {settlement} about its neighbours and you will get one name before you get a list.
 4. `[counterforce]` {settlement} has one tie that matters more than the others and has not let it become the only one.
 
 **`flagDriven` count > 0** {colour}
 1. `[street]` Part of what ties people together in {settlement} grew out of how its powers stand against each other; where they stood differently, those ties would not exist.
-2. `[ledger]` Ties that cross between {settlement}'s powers exist here because of how those powers are balanced, and they will shift when the balance does.
+2. `[unfolding]` Ties that cross between {settlement}'s powers exist here because of how those powers are balanced, and they will shift when the balance does.
 3. `[visitor]` Some of the bonds between people in {settlement} only make sense once you see which of its powers are strong and which are missing.
 4. `[unfolding]` Not every tie in {settlement} was chosen: some rest on the present balance of its powers, and will likely break if that balance changes.
 
 **`flagDriven` count zero** *(the good state deserves its sentence)* {colour}
 1. `[street]` Everyone in {settlement} is tied to everyone else for the ordinary reasons: work, family, proximity, and time.
-2. `[ledger]` No tie between people in {settlement} was forced by the balance of its powers; each has a cause anyone would recognise.
+2. `[street]` No tie between people in {settlement} was forced by the balance of its powers; each has a cause anyone would recognise.
 3. `[visitor]` Ask how people in {settlement} know each other and the answers are ordinary: kin, trade, neighbours.
 4. `[counterforce]` However {settlement}'s powers are balanced, none of its ties has bent to fit them; people here deal with each other as they would anywhere.
 
