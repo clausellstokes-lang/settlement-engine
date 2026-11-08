@@ -73,8 +73,8 @@
       "ceilingGzip": 177058
     },
     "src/data/dossierStateProse/power.generated.js": {
-      "raw": 115715,
-      "gzip": 17079,
+      "raw": 123080,
+      "gzip": 17456,
       "ceilingRaw": 357097,
       "ceilingGzip": 79355
     },
@@ -443,6 +443,14 @@
       "toRaw": 234278,
       "gzipAfter": 32212,
       "reason": "+37199 B raw (gzip level 9: 27,733 -> 32,212), one commit: DS-DEF-3 gains seventeen COMPOUND condition pools and DS-DEF-8 sixteen per-type override pools (three lines each), and both blocks' style rows are rewritten (DS-DEF-3 rows 27-30 and 158-170; DS-DEF-8 rows 49-55, 233, 234). Projected through `node scripts/generate-dossier-state-prose.mjs`; `--check` exit 0."
+    },
+    {
+      "car": "WIRING W3 POW (2026-11-07), the construction: C1-C6 said in DS-POW-5 / DS-POW-6",
+      "leaf": "src/data/dossierStateProse/power.generated.js",
+      "fromRaw": 115715,
+      "toRaw": 125681,
+      "gzipAfter": 18543,
+      "reason": "+9,966 B: eight new pools (the five structure flags, stateCrime banded by intensity, in DS-POW-5; the GM advisory's two in DS-POW-6), 19 variants with their poolMeta. Projected through node scripts/generate-dossier-state-prose.mjs; --check exit 0 at the tip."
     }
   ],
   "ceilingTransfersNewLeaves": [

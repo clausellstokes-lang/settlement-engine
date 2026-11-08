@@ -205,8 +205,12 @@ describe('GUARD THE GUARD — the inputs this file judges are the real ones', ()
     // census-2b item 5 70d05b25b +4, census-5 unit 2 06b59812f +1, census-3c unit 4 e3295d168 +10,
     // census-5b unit 3 c00b30eb6 +4. 2342 -> 2343 at LANDING-R2 helper G (the chair's §934.105 ruling (1): DS-GEN-17 PROVISIONED v3, the hospital-only line) +1.
     // 2343 -> 2344 at LANDING-R2 helper G2 (the chair's 06:5x DS-CND-1 boom line (ODQ §934.105, ruling (2)): ARCHETYPE: boom v4 `[street · crisis: any]`) +1.
-    expect(corpus.length, 'the shipped state corpus').toBe(2582); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 2348 -> 2356 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 2356 -> 2362 // W2 DEF C8/C10 (DS-DEF-5 ARCANE pools, 2026-11-07): 2362 -> 2374 // W2 DEF (FIXTURE: gates v3-v4, the referee's frame cure, 2026-11-07): 2374 -> 2376 // W2 DEF C3–C5 (DS-DEF-12, 2026-11-07): 2376 -> 2391 // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 2391 -> 2405 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 2405 -> 2504 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 2504 -> 2505 // MERGE-WAVE at the W2 DEF merge (2026-11-08): W1 ECO's +77 variants / +26 pools composed with W2 DEF's (measured at the merged tip)
-    expect(census.rows.length, 'the committed wiring census').toBe(792); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 711 -> 715 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 715 -> 718 // W2 DEF C8/C10 (DS-DEF-5 ARCANE pools, 2026-11-07): 718 -> 724 // W2 DEF C3–C5 (DS-DEF-12, 2026-11-07): 724 -> 729 // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 729 -> 733 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 733 -> 766 // MERGE-WAVE at the W2 DEF merge (2026-11-08): W1 ECO's +77 variants / +26 pools composed with W2 DEF's (measured at the merged tip)
+    // WIRING W3 (2026-11-07), C1-C6 said in DS-POW-5/-6 (+8 pools, +19 variants): 2344 -> 2363.
+    // WIRING W3 second seat (2026-11-07), the owner's style law over DS-POW-1 (the #23 tier twins, Endorsed v5 and Legitimacy Crisis v5, +2 variants): 2363 -> 2365.
+    // W3 POW fourth seat (2026-11-08): DS-POW-1 governanceFractured `[newcomer]` v5 (STYLE-AUDIT §2a #24), +1: 2365 -> 2366.
+    // WIRING W3 (2026-11-07), C1-C6 said in DS-POW-5/-6 (+8 pools, +19 variants): 709 -> 717.
+    expect(corpus.length, 'the shipped state corpus').toBe(2604); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 2348 -> 2356 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 2356 -> 2362 // W2 DEF C8/C10 (DS-DEF-5 ARCANE pools, 2026-11-07): 2362 -> 2374 // W2 DEF (FIXTURE: gates v3-v4, the referee's frame cure, 2026-11-07): 2374 -> 2376 // W2 DEF C3–C5 (DS-DEF-12, 2026-11-07): 2376 -> 2391 // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 2391 -> 2405 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 2405 -> 2504 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 2504 -> 2505 // MERGE-WAVE at the W2 DEF merge (2026-11-08): W1 ECO's +77 variants / +26 pools composed with W2 DEF's (measured at the merged tip) // MERGE-WAVE at the W3 POW merge: both lanes' deltas composed (2344 -> 2604)
+    expect(census.rows.length, 'the committed wiring census').toBe(800); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 711 -> 715 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 715 -> 718 // W2 DEF C8/C10 (DS-DEF-5 ARCANE pools, 2026-11-07): 718 -> 724 // W2 DEF C3–C5 (DS-DEF-12, 2026-11-07): 724 -> 729 // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 729 -> 733 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 733 -> 766 // MERGE-WAVE at the W2 DEF merge (2026-11-08): W1 ECO's +77 variants / +26 pools composed with W2 DEF's (measured at the merged tip) // MERGE-WAVE at the W3 POW merge: both lanes' deltas composed (709 -> 800)
     expect(Object.keys(DOSSIER_RELATIONS).length, 'the committed relation leaf').toBe(165);
     // Every arm this module owns is exercised below; a roster that quietly shrank would make
     // a whole describe disappear with nothing red.
@@ -504,7 +508,18 @@ describe('A0b — the text claims every declared field and no other', () => {
     // (its eight food-lens pools), DS-GEN-13 34 (five), DS-ECO-6 21 (four), DS-ECO-12 16 (four), DS-ECO-11 13 (two), DS-ECO-8 9
     // (three), DS-SUP-2 1 (the mounted pool), DS-ECO-2 -3 (a style rewrite claims three reads it left): +144 gross; W2 DEF's tip sat
     // 2 under its own ceiling, so 1571 -> 1713 measured is +142 on the ceiling. Red at W1 ECO's own tip b7e54f1b4 (1,488 / 1,344).
-    const UNDER_CLAIM_OWED = 431;
+    // 62 -> 114 OWED at WIRING W3 C1-C6 (2026-11-07, ODQ §934.105, WIRING-RULINGS R-W1; the W2 DEF DS-DEF-9 precedent of
+    // the same day): the six DS-POW-5 FLAG pools and DS-POW-6's commander advisory inherit their pools' declared reads
+    // unclaimed — `safetyProfile.flags`, the flag itself, and the flags `structureFlagPoolKey` tests BEFORE the drawn
+    // one in its gravity order (crimeIsGovt > stateCrime > merchantArmy > merchantCriminalBlur > secularBrutalism),
+    // which no sentence can name: 1344 -> 1396 measured at the second seat, the 52 new under-claims are FLAG:
+    // crimeIsGovt 6, stateCrime 9, stateCrime heavy 9, merchantArmy 6, merchantCriminalBlur 8, secularBrutalism 12,
+    // GM ADVISORY: the commander 2 (`power.factionRelationships`). The four over-claims the same pools first carried
+    // ("criminal"/"merchant" read as merchantCriminalBlur) were CURED in the lines, not owed: 71 -> 67.
+    // 114 -> 116 OWED at W3 POW's fourth seat (2026-11-08, STYLE-AUDIT §2a #24): DS-POW-1 governanceFractured's
+    // `[newcomer]` v5 inherits its pool's per-line debt as v1-v4 do (the pool's declared reads `legitimacy` and
+    // `legitimacy.governanceFractured`, unclaimed by name; 1396 -> 1398 measured, both new under-claims on that line).
+    const UNDER_CLAIM_OWED = 485; // MERGE-WAVE at the W3 POW merge: both lanes' deltas composed (62 -> 485)
     const UNDER_CLAIM_CEILING = UNDER_CLAIM_BASE + UNDER_CLAIM_OWED;
     // ⛔ THE OVER-CLAIM CEILING, RE-KEYED THE SAME WAY (census-1b unit A (d), 427f7b112). From that
     // commit the wiring census records `settlement` among DS-GEN-17's fieldsRead (the roster key
@@ -551,7 +566,7 @@ describe('A0b — the text claims every declared field and no other', () => {
       + `\n  over-claims          ${tally['over-claim']}   ceiling ${OVER_CLAIM_CEILING}`
       + ` = ${OVER_CLAIM_BASE} + ${OVER_CLAIM_OWED} OWED (427f7b112: DS-GEN-17's name slot)`
       + `\n  under-claims         ${tally['under-claim']}   ceiling ${UNDER_CLAIM_CEILING}`
-      + ` = ${UNDER_CLAIM_BASE} + ${UNDER_CLAIM_OWED} OWED (R-F5 26 + the pool census 34 + DS-GEN-17 PROVISIONED v3 1 + DS-CND-1 boom v4 1 + W2 DEF DS-DEF-9 FLAG pools 8 + W2 DEF DS-DEF-4 FIXTURE pools 17 + W2 DEF DS-DEF-5 FIXTURE pools 10 + W2 DEF DS-DEF-5 ARCANE pools 79 + FIXTURE: gates v3-v4 4 + the ledger rewrite of FIXTURE: gangs v2 3 + W2 DEF DS-DEF-12 isolation support 66 + W2 DEF DS-DEF-2 CHAIN clauses 22 + W2 DEF stress-type migration pools 18 + W1 ECO's pools 142 (MERGE-WAVE): the census wave buys them back)`
+      + ` = ${UNDER_CLAIM_BASE} + ${UNDER_CLAIM_OWED} OWED (R-F5 26 + the pool census 34 + DS-GEN-17 PROVISIONED v3 1 + DS-CND-1 boom v4 1 + W2 DEF DS-DEF-9 FLAG pools 8 + W2 DEF DS-DEF-4 FIXTURE pools 17 + W2 DEF DS-DEF-5 FIXTURE pools 10 + W2 DEF DS-DEF-5 ARCANE pools 79 + FIXTURE: gates v3-v4 4 + the ledger rewrite of FIXTURE: gangs v2 3 + W2 DEF DS-DEF-12 isolation support 66 + W2 DEF DS-DEF-2 CHAIN clauses 22 + W2 DEF stress-type migration pools 18 + W1 ECO's pools 142 (MERGE-WAVE) + W3 POW DS-POW-5/-6 FLAG and advisory pools 52 + W3 POW DS-POW-1 newcomer v5 2: the census wave buys them back)`
       + `\n  implicit negations   ${tally['implicit-negation']}`
       + `\n  absences claimed by silence (R-F4, REPORT) ${silent}`
       + `\n  NOT-EXECUTABLE reads ${notExecutable}   pools carrying a finding ${pools.size}\n`);
@@ -572,7 +587,8 @@ describe('A0b — the text claims every declared field and no other', () => {
     // 264 -> 268 at W2 DEF's stress-type keys (2026-11-07): the four migration pools carry the under-claim debt above.
     // 268 -> 295 at MERGE-WAVE's W2 DEF merge point (2026-11-08, the chair's ruling): W1 ECO's twenty-seven new pools carrying
     // the under-claim debt above (DS-ECO-9 8, DS-GEN-13 5, DS-ECO-12 4, DS-ECO-6 4, DS-ECO-8 3, DS-ECO-11 2, DS-SUP-2 1).
-    expect(pools.size).toBeLessThanOrEqual(295);
+    // 240 -> 247 at WIRING W3 C1-C6 (2026-11-07): the seven pools above carry the under-claim debt they owe.
+    expect(pools.size).toBeLessThanOrEqual(302); // MERGE-WAVE at the W3 POW merge: both lanes' deltas composed (240 -> 302)
   });
 });
 

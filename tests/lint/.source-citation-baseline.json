@@ -47,9 +47,9 @@
     "pastEofCitationsExcluded": 382,
     "byRule": {
       "banner": 9,
-      "dated": 159,
+      "dated": 160,
       "sha-pin": 2,
-      "tree": 124
+      "tree": 133
     },
     "files": {
       "banner": [
@@ -290,7 +290,15 @@
         "docs/shift-records/2026-11-07-w1-09-style-ds-eco-2.json",
         "docs/shift-records/2026-11-07-w1-10-style-amendments.json",
         "docs/shift-records/2026-11-07-w1-11-style-ds-eco-11-spread.json",
-        "docs/shift-records/2026-11-07-w1-12-style-ds-eco-6-scalenote.json"
+        "docs/shift-records/2026-11-07-w1-12-style-ds-eco-6-scalenote.json",
+        "docs/shift-records/2026-11-07-w3-01-construction-c1-c6-said.json",
+        "docs/shift-records/2026-11-07-w3-02-style-ds-pow-1.json",
+        "docs/shift-records/2026-11-07-w3-03-style-ds-pow-2.json",
+        "docs/shift-records/2026-11-07-w3-04-style-ds-pow-5.json",
+        "docs/shift-records/2026-11-07-w3-05-style-ds-pow-6.json",
+        "docs/shift-records/2026-11-07-w3-06-style-ds-pow-7.json",
+        "docs/shift-records/2026-11-07-w3-07-ledger-ds-pow-2.json",
+        "docs/shift-records/2026-11-07-w3-08-ledger-ds-pow-6.json"
       ]
     },
     "_rosterGrowth2026-10-30-consolidation": "FIVE documents JOINED the roster by being BORN into it, and they hid NOTHING (re-measured by BUILD-T1 on claude/ux-T1 rebased onto 2acd0206): the integration branch's docs/UX_CONSOLIDATION_2026-10-30.md joined `dated` (5 -> 6) and BUILD-S's docs/shift-records/2026-10-30-service-category-fidelity.json joined `tree` (40 -> 41), both already on the tip; BUILD-T1's three signed records docs/shift-records/2026-10-30-arrival-market-gate.json, -no-market-pool.json and -migration-one-direction.json joined `tree` (41 -> 44). GROWTHS, not class moves: each file entered the tree already archival by rule, and each shift record is a JSON signature with zero path:line citations of its own, so pastEofCitationsExcluded stays at 377.",
@@ -346,7 +354,11 @@
     "_rosterGrowth2026-11-07-w1": "W1 ECO (the economy lane of the construction-and-wiring wave, measured with this walker's own arm at the lane tip): ONE document BORN dated, `dated` 131 -> 132, docs/WIRING_W1_2026-11-07.md, the lane's record, 0 past-EOF; and 11 signed shift records BORN into `tree`, 100 -> 111, docs/shift-records/2026-11-07-w1-01 .. -11 (the construction re-record and the style law's re-records of the composed-prose manifest). A GROWTH, not a re-classification.",
     "_rosterGrowth2026-11-08-merge-wave-w1": "THE UNION AT THE W1 ECO MERGE (MERGE-WAVE, session session_01FbPLbdbKovNtK8Fx32oQ24): both sides' notes kept; `dated` 157 -> 158 (W1 ECO's docs/WIRING_W1_2026-11-07.md, 131 -> 132 on that side), `tree` 112 -> 124 (W1 ECO's twelve signed lane records docs/shift-records/2026-11-07-w1-01..w1-12, components of the W1 composition record); the count measured once by the walker; nothing changed class.",
     "_rosterGrowth2026-11-07-w2": "ONE document JOINED the roster by being BORN into it (W2 DEF, the defence lane of the construction-and-wiring wave): `dated` 131 -> 132, docs/WIRING_W2_2026-11-07.md, the lane's record, born dated, 0 past-EOF citations. A GROWTH, not a re-classification.",
-    "_rosterGrowth2026-11-08-merge-wave-w2": "THE UNION AT THE W2 DEF MERGE (MERGE-WAVE, session session_01FbPLbdbKovNtK8Fx32oQ24): both sides' notes kept; `dated` 158 -> 159 (W2 DEF's docs/WIRING_W2_2026-11-07.md, born dated); the count measured once by the walker; nothing changed class."
+    "_rosterGrowth2026-11-08-merge-wave-w2": "THE UNION AT THE W2 DEF MERGE (MERGE-WAVE, session session_01FbPLbdbKovNtK8Fx32oQ24): both sides' notes kept; `dated` 158 -> 159 (W2 DEF's docs/WIRING_W2_2026-11-07.md, born dated); the count measured once by the walker; nothing changed class.",
+    "_rosterGrowth2026-11-07-w3": "ONE document JOINED the roster by being BORN into it (lane W3 POW): `dated` 131 -> 132, docs/WIRING_W3_2026-11-07.md, the lane's record, born dated. A GROWTH, not a re-classification.",
+    "_rosterGrowth2026-11-07-w3-records": "SIX documents JOINED `tree` (100 -> 106) by being BORN into it (lane W3 POW, second seat), and they hid NOTHING: docs/shift-records/2026-11-07-w3-01 … -06, the signed re-records of the composed-prose manifest (C1-C6 said; the owner's style law over DS-POW-1, -2, -5, -6, -7). GROWTHS, not class moves: each entered the tree inside docs/shift-records/ and the ARCHIVAL_TREES rule classified it on its first commit; each is a JSON signature with zero path:line citations of its own, so pastEofCitationsExcluded stays 377 and ARM 2 over live docs stays 0. Then -07 and -08 (the ledger vantage, WAVE-RULINGS item 16): `tree` 106 -> 108, the same class, zero citations each.",
+    "_rosterMeasure2026-11-08-w3-merge": "W3 POW's merge of the integration (ffafe2a0e, the people car) into the power lane, measured ONCE by this walker at the merged tip: dated 148 -> 149 and tree 117 -> 118. The +1 dated is this lane's record docs/WIRING_W3_2026-11-07.md (counted on the lane as `_rosterGrowth2026-11-07-w3`, absent from the integration's 148); the +1 tree is CARRIED from the integration tip itself (measured there: tree 110 against its committed 109, MERGE-CAR's registration, not this lane's cause). The lane's other growth is its eight shift records in `tree` (`_rosterGrowth2026-11-07-w3-records`). Every document here is a growth, not a class move; pastEofCitationsExcluded unchanged.",
+    "_rosterGrowth2026-11-08-merge-wave-w3": "THE UNION AT THE W3 POW MERGE (MERGE-WAVE, session session_01FbPLbdbKovNtK8Fx32oQ24): both sides' notes kept; `dated` 159 -> 160 (docs/WIRING_W3_2026-11-07.md), `tree` 124 -> 133 (W3 POW's signed lane records w3-01..w3-08, components of the W3 composition record, and the lane's own tree delta as its side measured it); the count measured once by the walker; nothing changed class."
   },
   "rows": []
 }

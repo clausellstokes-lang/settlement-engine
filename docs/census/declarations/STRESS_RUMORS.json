@@ -18,7 +18,7 @@
       "lines": [
         {
           "lineId": "STRESS_RUMORS[0]",
-          "text": "${npc1Name} and ${npc2Name} are connected by something neither discusses openly: ${descriptionTail || tension}",
+          "text": "${descriptionTail || tension}",
           "needs": [],
           "excludes": [],
           "crisis": null,
@@ -27,7 +27,7 @@
         },
         {
           "lineId": "STRESS_RUMORS[1]",
-          "text": "${npc1Name}'s relationship with ${npc2Name} is more complicated than their public roles suggest. ${tension}",
+          "text": "${tension}",
           "needs": [],
           "excludes": [],
           "crisis": null,
@@ -36,7 +36,7 @@
         },
         {
           "lineId": "STRESS_RUMORS[2]",
-          "text": "The relationship between ${npc1Name} and ${npc2Name} is best understood as ${typeName}. ${tension}",
+          "text": "${npc1Name} and ${npc2Name} ${TIE_GLOSS[typeName] || 'are closely tied'}. ${tension}",
           "needs": [],
           "excludes": [],
           "crisis": null,

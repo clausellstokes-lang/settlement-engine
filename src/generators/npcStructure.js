@@ -129,7 +129,7 @@ reg('government','contested',
 );
 reg('government','stable',
   { tags: CALM_ONLY, position:  'Holds governing authority in a settlement with functional legitimacy. The position is secure enough to act from rather than defend.',
-    goal:      'Fix the weakness in the seat that nobody wants to talk about, before someone uses it.',
+    goal:      "Find and mend the seat's weak spot before a rival finds it first.", // W3 POW (the owner's style law of 2026-11-07; STYLE-AUDIT #211): the CLAIMS 'current stability' row re-anchored
     constraint:'Stability reduces the sense of urgency that would justify the resources and disruption required to address those vulnerabilities.' },
   { tags: CALM_ONLY, position:  'Holds a civic position in a well-functioning settlement. The role is defined by administration rather than crisis.',
     goal:      'Do every task the seat hands them so well that the seat cannot do without them.',

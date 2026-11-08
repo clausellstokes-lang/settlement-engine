@@ -94,7 +94,8 @@ const CLAIMS = Object.freeze([
   // and the desk lines keep their words; the cure is their declarations, not this table.
   // A ruler's want of "current stability" (×4 in the city tier: a fracture, a debt). CENSUS-4b: the
   // three goal rows re-anchored to R11's rewritten wording (efb84c0), the claims unchanged.
-  { claim: 'current stability', re: /\b[Ff]ix the weakness in the seat that nobody wants to talk about\b/, family: 'crisis' },
+  // W3 POW (2026-11-08): the government stable dominant goal reworded under the owner's style law; the claim kept.
+  { claim: 'current stability', re: /\b[Ff]ind and mend the seat.s weak spot\b/, family: 'crisis' },
   // A ruler's want that takes the order as settled, under an open succession or an uprising.
   { claim: 'competent administration', re: /\b[Dd]o every task the seat hands them so well that the seat cannot do without them\b/, family: 'succession' },
   { claim: 'competent administration', re: /\b[Dd]o every task the seat hands them so well that the seat cannot do without them\b/, family: 'unrest' },

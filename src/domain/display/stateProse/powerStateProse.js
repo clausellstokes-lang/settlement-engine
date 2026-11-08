@@ -131,12 +131,13 @@ const CORPUS = /** @type {import('./stateProseKernel.js').StateProseCorpus} */ (
  * @property {unknown} [recentConflict]
  * @property {ReadonlyArray<RulingFactionView>|null} [factions]
  * @property {unknown} [criminalCaptureState]
+ * @property {ReadonlyArray<GmAdvisoryRelationView>|null} [factionRelationships]
  */
 /**
  * @typedef {object} PowerDeskSettlement
  * @property {string} [name]
  * @property {PowerStructureView|null} [powerStructure]
- * @property {{safetyProfile?: {criminalInstitutions?: unknown}|null}|null} [economicState]
+ * @property {{safetyProfile?: {criminalInstitutions?: unknown, flags?: StructureFlagsView|null}|null}|null} [economicState]
  */
 
 /**
@@ -296,7 +297,7 @@ export function legitimacyLensPoolKey(legitimacy) {
  * existing worlds), and it is raised for the chair rather than patched here.
  *
  * ⚠ `siege matched` IS CHECKED BEFORE THE FIRST WORD, and it costs a pool. The only label
- * carrying either token is `Critical (active siege — survival priority)`, so exactly one of
+ * carrying either token is `Critical (under siege)`, so exactly one of
  * `siege matched` / `critical matched` can ever fire. The siege prose ("the walls have
  * settled it") is written for precisely that state and the critical prose is the general
  * case, so most-specific-wins takes siege — the same rule DS-POW-1's lens uses.
@@ -721,6 +722,82 @@ export function rulingPowerPoolKey(lens) {
 const GOVERNING_NAME_POOL = 'governing body name: a SLOT, never a baked noun';
 
 /**
+ * ── WIRING W3 (2026-11-07): THE STRUCTURE FLAGS (DS-POW-5) AND THE GM ADVISORY (DS-POW-6) ──
+ *
+ * Five generation facts the safety profile has always carried and no surface said: the
+ * garrison as an extraction apparatus (`stateCrime`, banded by `stateCrimeIntensity`), crime
+ * as the government (`crimeIsGovt`), the merchant army, the merchant-criminal blur and secular
+ * brutalism. Each is a DESCRIPTION line under the ruling structure, said only when the flag is
+ * TRUE (the default says nothing). ONE flag speaks per page, in the order below — the gravest
+ * reading of who actually holds the force first — because the position is one sentence deep.
+ * The flags are read off `economicState.safetyProfile.flags` as the generator wrote them; this
+ * desk derives none of them (W0's R-W7 (b) computes them after the roster is final).
+ *
+ * The GM advisory is the `dmNote` the faction-dynamics writer attaches to two relationships —
+ * a competitive governing↔military pair, and a governing↔criminal pair whose capture state is
+ * past adversarial. It is DM-PRIVATE (`publicSafe` strips `dmNote`), and every variant of both
+ * pools is `dm-only`, so a player page draws the key and then silence.
+ */
+
+/**
+ * @typedef {object} StructureFlagsView
+ * @property {unknown} [stateCrime] @property {unknown} [stateCrimeIntensity]
+ * @property {unknown} [crimeIsGovt] @property {unknown} [merchantArmy]
+ * @property {unknown} [merchantCriminalBlur] @property {unknown} [secularBrutalism]
+ */
+/**
+ * @typedef {object} GmAdvisoryRelationView
+ * @property {unknown} [dmNote] @property {unknown} [type] @property {unknown} [captureState]
+ * @property {ReadonlyArray<unknown>} [pair]
+ */
+
+/** `stateCrimeIntensity` runs 0 to 1/3 at the producer; the upper half of that range is heavy. */
+const HEAVY_STATE_CRIME_FROM = 1 / 6;
+
+/**
+ * DS-POW-5's structure-flag pool key: the gravest TRUE flag, or null.
+ * @param {StructureFlagsView|null|undefined} flags `economicState.safetyProfile.flags`
+ * @returns {string|null}
+ */
+export function structureFlagPoolKey(flags) {
+  if (!flags || typeof flags !== 'object') return null;
+  if (flags.crimeIsGovt === true) return 'FLAG: crimeIsGovt';
+  if (flags.stateCrime === true) {
+    const intensity = typeof flags.stateCrimeIntensity === 'number' ? flags.stateCrimeIntensity : 0;
+    return intensity >= HEAVY_STATE_CRIME_FROM ? 'FLAG: stateCrime, heavy' : 'FLAG: stateCrime';
+  }
+  if (flags.merchantArmy === true) return 'FLAG: merchantArmy';
+  if (flags.merchantCriminalBlur === true) return 'FLAG: merchantCriminalBlur';
+  if (flags.secularBrutalism === true) return 'FLAG: secularBrutalism';
+  return null;
+}
+
+/**
+ * The relationship whose `dmNote` the advisory narrates: the first one carrying a note.
+ * @param {ReadonlyArray<GmAdvisoryRelationView>|null|undefined} relationships
+ * @returns {GmAdvisoryRelationView|null}
+ */
+function advisedRelationOf(relationships) {
+  if (!Array.isArray(relationships)) return null;
+  return relationships.find((rel) => rel && text(rel.dmNote)) || null;
+}
+
+/**
+ * DS-POW-6's GM-advisory pool key, read off the advised relationship's own typed fields.
+ * @param {ReadonlyArray<GmAdvisoryRelationView>|null|undefined} relationships
+ *   `powerStructure.factionRelationships`
+ * @returns {string|null}
+ */
+export function gmAdvisoryPoolKey(relationships) {
+  const rel = advisedRelationOf(relationships);
+  if (!rel) return null;
+  const capture = text(rel.captureState);
+  if (capture && capture !== 'none' && capture !== 'adversarial') return 'GM ADVISORY: officials with criminal arrangements';
+  if (!capture && rel.type === 'competitive') return 'GM ADVISORY: the commander is a political actor';
+  return null;
+}
+
+/**
  * ── DS-POW-7, THE BLOCS — the last block in the leaf, and the only one needing a data route ─
  *
  * ⚠ CONDITIONAL SURFACE, the DS-POW-3 class. `worldState.politicsLedgers` is written only by
@@ -849,7 +926,7 @@ export function politicsEndPoolKey(projection) {
  *   stabilityHeader: object|null, stabilityLens: object|null, legitimacyReading: object|null,
  *   captureReading: object|null, operationReading: object|null, successionRisk: object|null,
  *   successionHold: object|null, rulingStructure: object|null, governingTitle: object|null,
- *   blocPresence: object|null, blocGlue: object|null, blocEnd: object|null}>}
+ *   structureFlag: object|null, gmAdvisory: object|null, blocPresence: object|null, blocGlue: object|null, blocEnd: object|null}>}
  */
 export function powerStateProse(settlement, readings = {}, options = {}) {
   // F10 + F12: the walls and the five crisis dimensions answered once, from the defence and crisis readers (stateProseKernel law 5).
@@ -1004,6 +1081,14 @@ export function powerStateProse(settlement, readings = {}, options = {}) {
   // and both mappers are total, so these two lenses answer on every generated world.
   const rulingKey = rulingPowerPoolKey(readings.structuralLens);
   const namedKey = governing ? GOVERNING_NAME_POOL : null;
+  // WIRING W3: the structure flag (DS-POW-5) and the GM advisory (DS-POW-6), both read off the
+  // generator's own record; the advisory's {faction} is the OTHER party of the advised pair.
+  const flagKey = structureFlagPoolKey(settlement?.economicState?.safetyProfile?.flags);
+  const advisoryKey = gmAdvisoryPoolKey(power.factionRelationships);
+  const advisedPair = advisedRelationOf(power.factionRelationships)?.pair;
+  const advisedParty = Array.isArray(advisedPair)
+    ? properFill(text(advisedPair.find((name) => text(name) && text(name) !== text(power.governingName))))
+    : undefined;
 
   // DS-POW-7. The projection is the caller's `politicsRead` read; the ruling-power word comes
   // from the DS-POW-5 lens it already holds, so no second derivation is made here.
@@ -1028,6 +1113,15 @@ export function powerStateProse(settlement, readings = {}, options = {}) {
     successionHold: holdKey ? legibilityRung('', line4(holdKey), []) : null,
     rulingStructure: rulingKey ? legibilityRung(rulingKey, line5(rulingKey), []) : null,
     governingTitle: namedKey ? legibilityRung('', line5(namedKey), []) : null,
+    structureFlag: flagKey ? legibilityRung('', line5(flagKey), []) : null,
+    gmAdvisory: advisoryKey
+      ? legibilityRung('', composeStateProse(CORPUS, 'DS-POW-6', {
+        ...options,
+        slots: { settlement: town, seat: governing, faction: advisedParty },
+        spineKey: advisoryKey,
+        candidates: powerStateProseCandidates('DS-POW-6', readings),
+      }), [])
+      : null,
     blocPresence: presenceKey ? legibilityRung('', line7(presenceKey), []) : null,
     blocGlue: glueKey ? legibilityRung('', line7(glueKey), []) : null,
     blocEnd: endKey ? legibilityRung('', line7(endKey), []) : null,

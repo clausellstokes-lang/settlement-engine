@@ -58,7 +58,7 @@ export function PowerStructure({ settlement, narrativeMode, vm, stateProse }) {
           scoreLabel={cap(p.legitimacy.label) || ''}
           tone={legitTone(p.legitimacy.score)}
           breakdown={p.legitimacyBreakdown}
-          footer={p.governanceFractured ? 'Governance fractured. No faction holds clear authority' : null}
+          footer={p.governanceFractured ? 'Governance fractured.' : null}
         />
       )}
 

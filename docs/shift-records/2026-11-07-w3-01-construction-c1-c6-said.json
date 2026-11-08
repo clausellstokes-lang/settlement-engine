@@ -1,0 +1,16 @@
+{
+  "_doc": "W3 POW CONSTRUCTION, ONE SIGNED RE-RECORD OF THE SURFACE 'dossier-prose-manifest' OF THE CONSTRUCTION-AND-WIRING WAVE'S POWER LANE, ODQ §934.105 (the cloud chair signs by the owner's delegation of 2026-11-06, vetoable; a successor chair does not inherit this signature; the chair's rulings R-W1, R-W9 of docs/chair/2026-11-07/WIRING-RULINGS-2026-11-07.md). THE CAUSE, ONE (commit 2bb81a867 on lane/w3-pow-2026-11-07): the five structure flags of the safety profile (stateCrime with its intensity band, crimeIsGovt, merchantArmy, merchantCriminalBlur, secularBrutalism) said in DS-POW-5's `FLAG:` pools at power.rulingStructure, and the GM advisory (`factionRelationships[].dmNote`) said in two dm-only DS-POW-6 pools at power.criminalUnderside. THE MOVE, MEASURED at the stage of 2bb81a867 before the write: this cause's OWN rows 0 of 1,050 (the flags and the dmNote fire on no default-priority golden town; base ee3b7a168 -> 2bb81a867, 0 moved). THE BASE'S CARRIED ROWS, NAMED SEPARATELY: the committed fixture was already 248 rows behind the base ee3b7a168 (city 44, hamlet 72, metropolis 120, town 12; cells on golden-master-v3 67,730 -> 67,802, gm-seed-a 372 -> 378, gm-seed-b 364 -> 366, gm-seed-c 358 unmoved), drift the integration merges carried in and no W3 cause wrote; this record re-records them at the same stage because the door writes the drift corpus whole, so the lane's per-block records that follow measure their own rows only. None added or removed. No writer is changed; the generator golden master does not move. HOW: the stage is built in a scratch checkout of 2bb81a867 (the construction commit), with the annex blocks of the cumulative style pass taken from the lane's tip in the order DS-POW-1, DS-POW-2, DS-POW-5, DS-POW-6, DS-POW-7 (the style diff lives wholly in those five blocks: the five-block stage is byte-identical to the tip's annex), the state-prose leaves regenerated, the door run there on a clean tree; the produced fixture and register row are committed on the lane with this record. Measured with scripts/prose-manifest-cells.mjs --out at each stage against the previous one.",
+  "ownerWords": "I also now give all permissions required now and in the future. I also defer all judgement to you. · Deploy after the construction and wiring. · Regarding construction, I only meant for the facts from generation only. Nothing from advance time or simulation as that has to wait until after we build FPZ.",
+  "ownerDate": "2026-11-07",
+  "odqRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation of 2026-11-06 to the cloud chair, session 01FE9mEvGxnFx6WTBkEC6ie9; the construction-and-wiring wave of 2026-11-07, the chair's rulings R-W1 and R-W9)",
+  "cause": "C1-C6 said — DS-POW-5, DS-POW-6 (commit 2bb81a867)",
+  "seat": "W3 POW, second seat (Opus 5.5) under the cloud chair (Fable 5.1), session 01FE9mEvGxnFx6WTBkEC6ie9, at the stage named in _doc",
+  "surfaces": [
+    {
+      "surface": "dossier-prose-manifest",
+      "action": "re-record",
+      "predictedRows": 2,
+      "proofForm": "derived-artefact"
+    }
+  ]
+}

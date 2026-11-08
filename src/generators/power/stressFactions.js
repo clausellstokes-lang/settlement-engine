@@ -287,7 +287,7 @@ export const applyStressEventFactions = (factions, ke, P, S, config, institution
                 ((he.power = Math.round(he.power * MIGRATION_GOVERNING_DAMP)),
                 (he.desc =
                   (he.desc || '') +
-                  ' Managing the emigration crisis while maintaining the appearance that it is not a crisis.'));
+                  ' Tells people the departures are nothing to worry about, while it struggles to run the place with fewer hands.'));
             }));
       })(),
     ke('wartime') &&
@@ -407,7 +407,7 @@ export const applyStressEventFactions = (factions, ke, P, S, config, institution
               (N.modifiers = [...(N.modifiers || []), 'authority contested']),
               (N.desc =
                 (N.desc || '') +
-                ' Managing an active slave revolt: the public posture is control, the private reality is containment at best.')),
+                ' Says in public that the revolt is under control; in private it can barely keep it from spreading.')),
               (N.faction.toLowerCase().includes('military') ||
                 N.faction.toLowerCase().includes('guard') ||
                 N.faction.toLowerCase().includes('garrison')) &&

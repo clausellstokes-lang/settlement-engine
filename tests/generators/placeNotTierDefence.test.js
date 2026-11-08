@@ -5,7 +5,8 @@
  * the place's own record (`src/domain/defense/defenseFacts.js :: defenseFactsOf`) does not hold:
  *
  *   - `factionDynamics.js :: computeFactionRelationships`, the Governing ↔ Military subordinate
- *     line "Command authority is unambiguous: soldiers enforce rather than govern.";
+ *     line "Command authority is unambiguous: soldiers enforce rather than govern." (since the W3 POW
+ *     third seat's style pass: "The soldiers enforce the law; they do not make it.");
  *   - `npcGenerator.js :: generateNPCs`, the tier's mandated "Guard Captain" (and the pool's);
  *   - `historyGenerator.js :: buildHistoricalEvent`, "Official guards" → "The garrison".
  *
@@ -20,7 +21,8 @@ import { defenseFactsOf } from '../../src/domain/defense/defenseFacts.js';
 import { defenseWordsFindings } from '../../src/domain/coherence/defenseWordsFindings.js';
 import { computeFactionRelationships } from '../../src/generators/factionDynamics.js';
 
-const LINE = 'Command authority is unambiguous: soldiers enforce rather than govern.';
+// Re-keyed with cause (W3 POW third seat, the owner's style law of 2026-11-07, worklist #30): the line's words moved, its gate did not.
+const LINE = 'The soldiers enforce the law; they do not make it.';
 const NO_FORCE = Object.freeze({ hasGarrison: false, hasWatch: false, hasMilitia: false, hasMercenary: false });
 
 /** @param {any} s */
@@ -44,7 +46,7 @@ describe('the military government line reads the standing forces', () => {
     const rel = relOf({ ...NO_FORCE, hasMilitia: true });
     expect(rel.type).toBe('subordinate');
     expect(rel.narrative).not.toContain('soldiers'); // anchored: the next line pins the relationship's whole narrative
-    expect(rel.narrative).toBe('Military/Guard operates as the executive arm of Town Council.');
+    expect(rel.narrative).toBe('Military/Guard carries out what Town Council decides.');
   });
 });
 
@@ -61,7 +63,7 @@ describe('a village with no garrison, watch or militia (soak1k-110)', () => {
   it('prints no soldiers line on its Power tab', () => {
     const narratives = (s.powerStructure.factionRelationships || []).map((r) => r.narrative);
     expect(narratives.length).toBeGreaterThan(0);
-    expect(narratives.join('\n')).not.toContain('soldiers enforce rather than govern'); // anchored: the line above proves the relationship narratives are live
+    expect(narratives.join('\n')).not.toContain('The soldiers enforce the law'); // anchored: the line above proves the relationship narratives are live
     expect(forceTerms(s, narratives)).toEqual([]);
   });
 

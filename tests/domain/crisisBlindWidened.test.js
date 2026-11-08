@@ -38,7 +38,7 @@ function rulerWant(s, fragment) {
 
 /** The three goals' R11 wording (efb84c0); the claims keep their rung-2D names. */
 const GOAL = {
-  stability: 'Fix the weakness in the seat that nobody wants to talk about',
+  stability: "Find and mend the seat's weak spot", // W3 POW: the goal's words of 2026-11-08
   administration: 'Do every task the seat hands them so well',
   competition: 'Keep the family\'s name honoured at every feast',
 };
@@ -54,7 +54,7 @@ const GOAL = {
  * born crisis: both halves asserted, the cure and the instrument.
  */
 const WANT = {
-  stability: 'Fix the weakness in the seat that nobody wants to talk about, before someone uses it.',
+  stability: "Find and mend the seat's weak spot before a rival finds it first.",
   administration: 'Do every task the seat hands them so well that the seat cannot do without them.',
   competition: 'Keep the family\'s name honoured at every feast while the new offices take its old work.',
 };

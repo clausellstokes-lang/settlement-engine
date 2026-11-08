@@ -223,6 +223,7 @@ function FullCard({ npc, index }) {
       <View style={{ marginTop: 4 }}>
         <TextRow label="PERSONALITY" value={npc.personality} multiline />
         <TextRow label="MOTIVATION"  value={npc.motivation}  multiline index={index} />
+        <TextRow label="HOW THEY DEAL" value={npc.dealing} multiline />
       </View>
 
       {/* Secrets */}

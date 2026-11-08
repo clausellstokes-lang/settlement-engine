@@ -481,7 +481,7 @@ export function reviewSettlement(s, config, r) {
   if (crimeAbsent) add('A-06:crime-absent-and-organised', 'screen', 'No criminal infrastructure', crimeAbsent);
 
   // ── A-08: the fixed hidden-ruler note that never says who
-  const hidden = sentencesOf(screenText).find((x) => /appears to govern is not the faction that governs/i.test(x));
+  const hidden = sentencesOf(screenText).find((x) => /Holds the title, but the decisions that matter are made elsewhere/i.test(x));
   if (hidden) add('A-08:hidden-ruler-note', 'screen', hidden);
 
   // ── A-09: one behaviour line covering much of a roster
