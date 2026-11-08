@@ -8,7 +8,7 @@
   "The reviewable slice is computed by RULE (reviewableDark), never hand-listed."
  ],
  "schema": 1,
- "frozenAtSha": "0796254aa4bdbdc1981b0ffbd91dfe7c50a0160b",
+ "frozenAtSha": "fae42332d6d87bd1121e16aa432b58a5e565e905",
  "charter": "§18.1 WRWALKER Car 1 (HORIZON) — chair-signed vetoably at the INSTR-WRW pre-stage",
  "minRows": 40,
  "corpusMeta": {
@@ -24,7 +24,7 @@
  },
  "shapesDigest": "3d5f894219f7b28cb1c469a523a4931e9bc54da28a6852eaca106ccfa85735ba",
  "detectorDigest": "6de1fcb17cc758e4e0ddb8d549ea9a65bd69d25c05668ca68b37bc193bd19c1e",
- "verdictDigest": "91d28ab04a4f966aa2326540a94cf2644edfcc34e8c589ea54b33a3a9c51fcd5",
+ "verdictDigest": "ff4744f4359d93caf661f8934289af7a118f86183785fcbd03c87a2184dcdd21",
  "surfaceRoots": {
   "web": [
    "src/main.jsx"
@@ -83,27 +83,27 @@
  },
  "population": {
   "judged": 11997,
-  "lit": 605,
+  "lit": 606,
   "litName": 9965,
-  "dark": 1427,
+  "dark": 1426,
   "thinKeys": 17280,
   "thinShapes": 1203,
   "knownShapes": 517
  },
  "scanStats": {
   "files": 1747,
-  "sites": 41136,
-  "propRead": 38954,
+  "sites": 41144,
+  "propRead": 38962,
   "elemRead": 0,
   "destructure": 2166,
   "inOp": 16,
-  "rGrades": 6356,
-  "nGrades": 1618729,
-  "resolvedReceivers": 7240
+  "rGrades": 6362,
+  "nGrades": 1618737,
+  "resolvedReceivers": 7246
  },
  "registerDigest": "511672c01b1b5660c194a2a586e43e5be1455ab7f6cf1c888113258e54a0dc6e",
  "pendingSurfaceCeiling": 3,
- "reviewableDarkCount": 440,
+ "reviewableDarkCount": 439,
  "darkUnregistered": [
   {
    "identity": "Bulk grain and flour on reasons",
@@ -464,12 +464,6 @@
    "key": "because",
    "shape": "plan",
    "rows": 800
-  },
-  {
-   "identity": "behaviour on presentation",
-   "key": "behaviour",
-   "shape": "presentation",
-   "rows": 15613
   },
   {
    "identity": "belief_convergence on reasons",
@@ -19470,7 +19464,7 @@
   "publicLegitimacy on powerStructure": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
   "recentConflict on powerStructure": "dossier-pdf=R foundry=R web-display=R",
   "stability on powerStructure": "dossier-pdf=R foundry=R web-display=R web-transitive=R",
-  "behaviour on presentation": "",
+  "behaviour on presentation": "dossier-pdf=R foundry=R web-display=R",
   "disposition on presentation": "web-display=N web-transitive=N",
   "impression on presentation": "",
   "kind on pressureEvidence": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",

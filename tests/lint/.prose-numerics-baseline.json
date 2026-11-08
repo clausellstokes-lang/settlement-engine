@@ -1177,13 +1177,13 @@
   },
   {
     "path": "src/pdf/sections/NotableNPCs.jsx",
-    "line": 328,
+    "line": 329,
     "category": "floatInterpolation",
     "snippet": "{npc.power}"
   },
   {
     "path": "src/pdf/sections/NotableNPCs.jsx",
-    "line": 381,
+    "line": 382,
     "category": "floatInterpolation",
     "snippet": "{npc.power}"
   },

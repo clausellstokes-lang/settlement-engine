@@ -290,6 +290,9 @@ export function NPCInlineCard({
   ));
   const wants = readWants.length > 0 ? readWants : (goalText ? [goalText] : []);
   const disposition = interiority?.disposition || [];
+  // WIRING W3 C9 (R-W6, FOR THE OWNER'S VETO): how the face deals with strangers, the authored
+  // `presentation.behaviour` line drawn at birth. X-48's look-and-voice class (`impression`) stays dark.
+  const dealing = typeof npc.presentation?.behaviour === 'string' ? npc.presentation.behaviour.trim() : '';
   // NO CHIP REPEATS A WANT (2026-09-18). The `Goal:` chip went first, because the
   // card printed that one sentence three times over. The rule behind it is wider
   // than the goal, and keying it on a LABEL would have left the same defect a row
@@ -465,7 +468,7 @@ export function NPCInlineCard({
               <span style={{fontWeight:700}}>Constraint: </span><MentionText text={npc.activeConstraint} selfId={entityIdFor('npc', npc)}/>
             </p>
           )}
-          {(wants.length > 0 || disposition.length > 0) && (
+          {(wants.length > 0 || disposition.length > 0 || dealing) && (
             <div style={{margin:'6px 0',display:'flex',flexDirection:'column',gap:2}}>
               {wants.length > 0 && (
                 // Each want goes through ProseParagraph: the first one is the goal the
@@ -483,6 +486,11 @@ export function NPCInlineCard({
               {disposition.length > 0 && (
                 <div style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch.inkMag3,lineHeight:1.4}}>
                   <span style={{fontWeight:700,color:MUTED}}>Disposition </span>{disposition.join(', ')}
+                </div>
+              )}
+              {dealing && (
+                <div style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch.inkMag3,lineHeight:1.4}}>
+                  <span style={{fontWeight:700,color:MUTED}}>How they deal </span>{dealing}
                 </div>
               )}
             </div>

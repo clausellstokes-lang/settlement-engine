@@ -765,6 +765,8 @@ function npcsSlice(active) {
       blurb: n?.blurb || n?.description || null,
       personality: personalityStr,
       motivation: motivationStr,
+      // WIRING W3 C9 (R-W6): how the face deals with strangers, the birth-drawn `presentation.behaviour`.
+      dealing: typeof n?.presentation?.behaviour === 'string' ? n.presentation.behaviour.trim() || null : null,
       secrets: cleanSecrets,
       plotHooks: cleanHooks(n?.plotHooks),
       // THE PEOPLE CAR (PEOPLE-4 TIES, R-P7): the card's OWN directed tie first, then the ties

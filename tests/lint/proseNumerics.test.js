@@ -126,6 +126,8 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 // byte-identical on every one, the census stays at 227 against a 227 ceiling, and no other
 // row in either file could have moved with them. The whole baseline diff is fourteen lines,
 // seven -/+ pairs.
+// WIRING W3 POW C9 (2026-11-08) — TWO PURE LINE MOVES: NotableNPCs.jsx gained the HOW THEY DEAL row above its two
+// banked `{npc.power}` rows (328 -> 329, 381 -> 382); path, category and snippet byte-identical.
 // WIRING W3 POW (2026-11-07, its second seat) — FOUR PURE LINE MOVES, NO DEBT MOTION. PowerTab.jsx gained the
 // structure-flag and GM-advisory rungs (C1-C6, 2bb81a867) above its banked rows, so `{leg.score}` 310 -> 317,
 // both `{Math.round(instab*100)}` rows 505 -> 512 and `{Math.round(rung.standing*100)}` 543 -> 550 (+7 each);
