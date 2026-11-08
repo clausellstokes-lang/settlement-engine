@@ -151,10 +151,14 @@
   "people car merged into the integration branch over the rung-2 landing. The car's genesis at 31 STANDS;",
   "the integration side's schema-30 reads (R2's census readers) are ADMITTED at this rung by cause, the",
   "rows they retired go with cause; nothing is declared and the bank is 76/50 (RETIRED).",
-  "SCHEMA 33 = schema 32's topology, tag law, roster and corpus definition, re-governed to MERGE-WAVE at the",
+  "SCHEMA 33 (RETIRED) held schema 32's topology, tag law, roster and corpus definition, re-governed to MERGE-WAVE at the",
   "W2 DEF merge (one rung per cause): ONE row ADMITTED by cause, `direction on stress` at migrationDirection.js,",
   "grounded to the `stress` shape by the W2 composition, its writer W0-1's draw (343bd4eec), which no corpus",
-  "seed reaches; nothing goes, nothing is declared and the bank is 76/50.",
+  "seed reaches; nothing goes, nothing is declared and the bank is 76/50 (RETIRED).",
+  "SCHEMA 34 = schema 33's topology, tag law, roster and corpus definition, re-governed to MERGE-WAVE at the",
+  "FIX-FOOD-ISOLATION merge (one rung per cause): ONE row ADMITTED by cause, `nearbyResourcesState on config` at",
+  "foodGenerator.js, its own existing read observed on the isolation receipt's call path; nothing goes,",
+  "nothing is declared and the bank is 76/50.",
   "Of the fourteen declared bank entries THIRTEEN bank reads today; `isCriminal on incomeSources`",
   "has banked nothing since schema 17 made its writer observable, and banked is always a",
   "subset of declared. This envelope banks 76 banked read(s) across 50 tagged address(es).",
@@ -165,7 +169,7 @@
   "An untagged row means: a guarded read, of a real record rather than browser or language surface,",
   "of a key no writer the corpus runs produces and no declared out-of-corpus writer explains.",
   "A tagged row stays visible as governed explained-writer debt under its numeric ceiling and reason.",
-  "Schemas 4–32 are the RETIRED numeric predecessors."
+  "Schemas 4–33 are the RETIRED numeric predecessors."
  ],
  "corpusMeta": {
   "configs": 4,
@@ -180,16 +184,16 @@
  },
  "digests": {
   "corpusMeta": "1a4216a0fb4db8841e27ac3e2c45851c67d411b6aae8da02ab3145b4076a224d",
-  "inventory": "cc74f6e33ee581322a5c5da8441d877550340b932fc3511966caf5857530ed24",
-  "manifests": "11339f163118f7f83f607884221fd3b099349eeb7ad095a1be3adb03722a833b",
-  "migrationReview": "72a1dc05ac8c07a745902dd00d26365360e061b63988c4bb50a8061b9951b339",
+  "inventory": "48d7d9e53b67208bdc4779e82d6b5e866d9012abd651f36e79cb8f396fffc37c",
+  "manifests": "da3d4b615623a421efd1ce712cb95cfe4c49658fcc487ad3ca1b8efc98c98602",
+  "migrationReview": "c3b5b449acc69e63f1eda78cba1bd2b0ccfffef83575b717f256891def128c37",
   "rowTags": "1ebab9f067e5ec39f32a8c38b8e1a18c24d8ad0c66109851551ef84efc314447",
-  "scanStats": "ef75bc253a4d8c9d8d7fe7ee13bba1b9d20e1f5ae156e859e7bbf6661b8f9db7",
-  "sentinel": "fc0ac67a7f345a95f04ca30707f7373a238d319c61204b136b363f0f0ee81739"
+  "scanStats": "4bde0b0a321afa520ac405d9382bb25834681aab00282160f38a4f0e926bd694",
+  "sentinel": "f29c329f1518cb21d84b2a6b1b61466734d7c3fe03c6d0836b113580f1ae6136"
  },
  "frozen": "2026-11-08",
- "frozenAtSha": "501c974123fd3e73f4368bae29566c9d6d8c5e6d",
- "identities": 1549,
+ "frozenAtSha": "7f62ffadd23946f693355b4f916920b30c77b950",
+ "identities": 1550,
  "inventory": {
   "src/components/BuyThisDossier.jsx": {
    "mapEdits on settlement": 1
@@ -2078,6 +2082,9 @@
   "src/generators/factionRoles.js": {
    "id on institutions": 1
   },
+  "src/generators/foodGenerator.js": {
+   "nearbyResourcesState on config": 1
+  },
   "src/generators/generationContext.js": {
    "contentProfileId on config": 1,
    "cultureProfileId on config": 1
@@ -2606,7 +2613,7 @@
  "manifests": {
   "detectorTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "536016d8a7785f9752268c9f01ad8d1cfef8672f9fba2d48d184252852aeae62",
+   "digest": "fadd43d00797738f3169460502d8ac945d9871215d0ef5c2b34766e40fbd9569",
    "entries": [
     {
      "mode": "100644",
@@ -2625,8 +2632,8 @@
     {
      "mode": "100644",
      "path": "scripts/check-observed-shape-readers.mjs",
-     "sha256": "35fde2d3bc768cf730ad1d48acc028f45cfacdab5b9f81e90bd4bdc675c563f7",
-     "size": 210292,
+     "sha256": "5aa384f9da30f812079c81dea96750c6e5df32fdec77d7232d2d34511dad03a1",
+     "size": 211176,
      "type": "file"
     },
     {
@@ -2646,8 +2653,8 @@
     {
      "mode": "100644",
      "path": "scripts/lib/observed-shape-baseline.mjs",
-     "sha256": "5211e753f0181cc95436706fa1be7c635a489f3b8c25a421bb0195685d4cd7e6",
-     "size": 84740,
+     "sha256": "50a4516e97cf29fbad4e350f2f2b9c298e1582a8fd89b1eabfbbe96482862b69",
+     "size": 86210,
      "type": "file"
     },
     {
@@ -2674,8 +2681,8 @@
     {
      "mode": "100644",
      "path": "scripts/migrate-observed-shape-readers.mjs",
-     "sha256": "c80e831e032df150d25ecd4054d10d180ce489d597017c853be12f65c95e681d",
-     "size": 245800,
+     "sha256": "7d489ee333dff1c87ddb1dc8e54626099486592a2a04f1104a7c30b3c7a28c80",
+     "size": 248937,
      "type": "file"
     },
     {
@@ -2689,7 +2696,7 @@
   },
   "executionTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "def9d68a5690e38307f77c3e30ab59a557507b262a5e3d2f9b41b893c54e0864",
+   "digest": "18fc310b49903c4c1f282857892fd726d126187fbfe076eec1063b5de8695ce2",
    "entries": [
     {
      "mode": "100644",
@@ -2708,8 +2715,8 @@
     {
      "mode": "100644",
      "path": "scripts/check-observed-shape-readers.mjs",
-     "sha256": "35fde2d3bc768cf730ad1d48acc028f45cfacdab5b9f81e90bd4bdc675c563f7",
-     "size": 210292,
+     "sha256": "5aa384f9da30f812079c81dea96750c6e5df32fdec77d7232d2d34511dad03a1",
+     "size": 211176,
      "type": "file"
     },
     {
@@ -2729,8 +2736,8 @@
     {
      "mode": "100644",
      "path": "scripts/lib/observed-shape-baseline.mjs",
-     "sha256": "5211e753f0181cc95436706fa1be7c635a489f3b8c25a421bb0195685d4cd7e6",
-     "size": 84740,
+     "sha256": "50a4516e97cf29fbad4e350f2f2b9c298e1582a8fd89b1eabfbbe96482862b69",
+     "size": 86210,
      "type": "file"
     },
     {
@@ -2757,8 +2764,8 @@
     {
      "mode": "100644",
      "path": "scripts/migrate-observed-shape-readers.mjs",
-     "sha256": "c80e831e032df150d25ecd4054d10d180ce489d597017c853be12f65c95e681d",
-     "size": 245800,
+     "sha256": "7d489ee333dff1c87ddb1dc8e54626099486592a2a04f1104a7c30b3c7a28c80",
+     "size": 248937,
      "type": "file"
     },
     {
@@ -16386,8 +16393,8 @@
     {
      "mode": "100644",
      "path": "src/generators/foodGenerator.js",
-     "sha256": "444258b92171c4a2217112389a9775fdec8e0dfca2e19d334f784e6329c764ca",
-     "size": 37725,
+     "sha256": "69e673ec2c5f9373fd4360a9bc8895cb461c09a378943a8d69c8aa5bae98834d",
+     "size": 41607,
      "type": "file"
     },
     {
@@ -16491,8 +16498,8 @@
     {
      "mode": "100644",
      "path": "src/generators/isolationSupport.js",
-     "sha256": "64f963e1323325ac824f102c92cdb4be07fcc4284daf0ab035b40dbff93e6f44",
-     "size": 8987,
+     "sha256": "b1462806072a8f58bea7f203af80cd1dab113d46e1bfd2e001dd19671e3fe7aa",
+     "size": 11896,
      "type": "file"
     },
     {
@@ -19873,7 +19880,7 @@
   },
   "scanTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "323aec4d898949307988589d2decbaf91d2a3a464d0124d7f2c1c1a201171500",
+   "digest": "91dcea0e64320c3030262946a0f43fc8bf3a8469e8cfeb92ef60f1f5eda9b71a",
    "entries": [
     {
      "mode": "100644",
@@ -33381,8 +33388,8 @@
     {
      "mode": "100644",
      "path": "src/generators/foodGenerator.js",
-     "sha256": "444258b92171c4a2217112389a9775fdec8e0dfca2e19d334f784e6329c764ca",
-     "size": 37725,
+     "sha256": "69e673ec2c5f9373fd4360a9bc8895cb461c09a378943a8d69c8aa5bae98834d",
+     "size": 41607,
      "type": "file"
     },
     {
@@ -33486,8 +33493,8 @@
     {
      "mode": "100644",
      "path": "src/generators/isolationSupport.js",
-     "sha256": "64f963e1323325ac824f102c92cdb4be07fcc4284daf0ab035b40dbff93e6f44",
-     "size": 8987,
+     "sha256": "b1462806072a8f58bea7f203af80cd1dab113d46e1bfd2e001dd19671e3fe7aa",
+     "size": 11896,
      "type": "file"
     },
     {
@@ -36861,7 +36868,7 @@
   },
   "sourceTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "b9ba565ea4d7f8a73fb2095737c196f35f275330af4f60c605afc5dce2d19eaa",
+   "digest": "fae533b9913087ff57a97eeb7e8385c629e381e7b25e3bca3eaf6f87659add27",
    "entries": [
     {
      "mode": "100644",
@@ -50488,8 +50495,8 @@
     {
      "mode": "100644",
      "path": "src/generators/foodGenerator.js",
-     "sha256": "444258b92171c4a2217112389a9775fdec8e0dfca2e19d334f784e6329c764ca",
-     "size": 37725,
+     "sha256": "69e673ec2c5f9373fd4360a9bc8895cb461c09a378943a8d69c8aa5bae98834d",
+     "size": 41607,
      "type": "file"
     },
     {
@@ -50593,8 +50600,8 @@
     {
      "mode": "100644",
      "path": "src/generators/isolationSupport.js",
-     "sha256": "64f963e1323325ac824f102c92cdb4be07fcc4284daf0ab035b40dbff93e6f44",
-     "size": 8987,
+     "sha256": "b1462806072a8f58bea7f203af80cd1dab113d46e1bfd2e001dd19671e3fe7aa",
+     "size": 11896,
      "type": "file"
     },
     {
@@ -53968,30 +53975,30 @@
   }
  },
  "migrationReview": {
-  "bundleDigest": "83c52da47212ac09c08238148d0b7fdb09b2c5f748ecadc399b724888ec4eff8",
-  "corpusDigest": "d610699b08b753aae314dc95846689e94ca33fc1c05ff06c2ccc33ea2d17f9c8",
-  "currentArtifactDigest": "a0f2f59d695806bdee5ddfaafad5fe3e7783765bd602b7ee1423c1202ab4c341",
-  "currentDetectorDigest": "536016d8a7785f9752268c9f01ad8d1cfef8672f9fba2d48d184252852aeae62",
-  "currentFindingsDigest": "e0e8a464c0a5c7f289324cdad60359b61d886586daa9dd9a841626e3e9bcc7c2",
-  "currentScannerSha": "358de168241e5fe4c492b962b63df4e618cc97a2",
-  "currentScannerToolDigest": "ebc50a5380a9a86e7674f46b8a8b2bab9dae55abe3dd7e0c0129d28d3c59d318",
-  "detectorTreeDigest": "536016d8a7785f9752268c9f01ad8d1cfef8672f9fba2d48d184252852aeae62",
-  "executionTreeDigest": "706b1acacc44071526df3124d29587feb43ec84115120ae33b5c21d91f6036e5",
+  "bundleDigest": "783f35d3a6440b303598d2b584777368b232a303792b180c5a6cb69bc65c8f94",
+  "corpusDigest": "a91d24d3adf83aabce4da90370b9d0166f26d944d1275ed86f0e64292c9cad24",
+  "currentArtifactDigest": "6e62cdce93498dbb009a60fdfbf202acd2bb5610a013ebe3ebb3f81d6f8f6a94",
+  "currentDetectorDigest": "fadd43d00797738f3169460502d8ac945d9871215d0ef5c2b34766e40fbd9569",
+  "currentFindingsDigest": "b129a565280a00fc43bf664deec9e0754117db6596595165e22bc842d1157ebd",
+  "currentScannerSha": "7f62ffadd23946f693355b4f916920b30c77b950",
+  "currentScannerToolDigest": "2a03f883c224f9f916cd634bfde46374ecac94917307bc618cd60b134c023fb1",
+  "detectorTreeDigest": "fadd43d00797738f3169460502d8ac945d9871215d0ef5c2b34766e40fbd9569",
+  "executionTreeDigest": "18fc310b49903c4c1f282857892fd726d126187fbfe076eec1063b5de8695ce2",
   "legacyAlgorithmBaseSha": "6e7acc4dd88a43cb608f40bc77db3b2130a1e2de",
-  "legacyArtifactDigest": "a0f2f59d695806bdee5ddfaafad5fe3e7783765bd602b7ee1423c1202ab4c341",
-  "legacyDetectorDigest": "536016d8a7785f9752268c9f01ad8d1cfef8672f9fba2d48d184252852aeae62",
-  "legacyScannerSha": "358de168241e5fe4c492b962b63df4e618cc97a2",
-  "legacyScannerToolDigest": "ebc50a5380a9a86e7674f46b8a8b2bab9dae55abe3dd7e0c0129d28d3c59d318",
-  "predecessorBaselineDigest": "ed264f75116819197b6da7077603952ef8c7ae2cdba906584a2b5668e4d5315f",
-  "predecessorBaselineTextSha256": "a6a9922140a4e70153685db8aceca9d07822c20581ca6394ba14dae8e64eae73",
-  "predecessorInventoryDigest": "8a95fac189c16a52417124e88e0b8b5ba7139f93e9bb12e4b82df75644898011",
-  "reportDigest": "ce89667e18c6f47a16d0723602a320c88cdf9b027f479853cbed4a38066183d9",
-  "reviewDigest": "27e8fa780cd93082b7d86d5a99fbf3350f5375699dfc1bf71cc8f96dca47aca5",
+  "legacyArtifactDigest": "6e62cdce93498dbb009a60fdfbf202acd2bb5610a013ebe3ebb3f81d6f8f6a94",
+  "legacyDetectorDigest": "fadd43d00797738f3169460502d8ac945d9871215d0ef5c2b34766e40fbd9569",
+  "legacyScannerSha": "7f62ffadd23946f693355b4f916920b30c77b950",
+  "legacyScannerToolDigest": "2a03f883c224f9f916cd634bfde46374ecac94917307bc618cd60b134c023fb1",
+  "predecessorBaselineDigest": "2827dd8738743e9f07c08771be7a7099cd34b81ec75584ca67729741a30ba0a7",
+  "predecessorBaselineTextSha256": "323afa89ce5f2833aae2255d651e2407b122cfc1a14575d8f20602c85aee867f",
+  "predecessorInventoryDigest": "cc74f6e33ee581322a5c5da8441d877550340b932fc3511966caf5857530ed24",
+  "reportDigest": "35c91d58f1b55da8f371f0ac1d0835af618485239c24e07117e07f4908db805f",
+  "reviewDigest": "f092e768550840f3d2791f1ffff1a3a029ae2096273d09ba4248b043b0bf9a64",
   "scanConfigDigest": "cef0ab59a909576cf6a8820ada14f6afba8acad45fe13dd7b91b60f4c63335fc",
-  "scanTreeDigest": "db947280d8c84c0960b90f54754649f24a0d8ffbfd4ef85492dd19dfdeab0a3d",
-  "sourceTreeDigest": "8a00238a6bce0c21b79579384247e51501d0ee02081d59d4194a86c53ad8aa48",
-  "subjectSha": "358de168241e5fe4c492b962b63df4e618cc97a2",
-  "targetInventoryDigest": "cc74f6e33ee581322a5c5da8441d877550340b932fc3511966caf5857530ed24"
+  "scanTreeDigest": "91dcea0e64320c3030262946a0f43fc8bf3a8469e8cfeb92ef60f1f5eda9b71a",
+  "sourceTreeDigest": "fae533b9913087ff57a97eeb7e8385c629e381e7b25e3bca3eaf6f87659add27",
+  "subjectSha": "7f62ffadd23946f693355b4f916920b30c77b950",
+  "targetInventoryDigest": "48d7d9e53b67208bdc4779e82d6b5e866d9012abd651f36e79cb8f396fffc37c"
  },
  "minRows": 40,
  "originMinRows": 8,
@@ -54285,22 +54292,22 @@
  },
  "scanStats": {
   "files": 2426,
-  "reads": 139073,
-  "resolved": 11044,
-  "unresolved": 128029
+  "reads": 139095,
+  "resolved": 11054,
+  "unresolved": 128041
  },
  "scannerProvenance": {
-  "detectorDigest": "536016d8a7785f9752268c9f01ad8d1cfef8672f9fba2d48d184252852aeae62",
-  "executionTreeDigest": "def9d68a5690e38307f77c3e30ab59a557507b262a5e3d2f9b41b893c54e0864",
-  "scanTreeDigest": "323aec4d898949307988589d2decbaf91d2a3a464d0124d7f2c1c1a201171500",
-  "sourceTreeDigest": "b9ba565ea4d7f8a73fb2095737c196f35f275330af4f60c605afc5dce2d19eaa",
+  "detectorDigest": "fadd43d00797738f3169460502d8ac945d9871215d0ef5c2b34766e40fbd9569",
+  "executionTreeDigest": "18fc310b49903c4c1f282857892fd726d126187fbfe076eec1063b5de8695ce2",
+  "scanTreeDigest": "91dcea0e64320c3030262946a0f43fc8bf3a8469e8cfeb92ef60f1f5eda9b71a",
+  "sourceTreeDigest": "fae533b9913087ff57a97eeb7e8385c629e381e7b25e3bca3eaf6f87659add27",
   "unscannedInputDigest": "246bb81f92841f6a1e3a967cf621101eda14b8dec3c6144738c0ac77df55df06"
  },
- "schema": 33,
+ "schema": 34,
  "sentinel": {
-  "resolvedReads": 11044,
+  "resolvedReads": 11054,
   "totalKeys": 11997,
   "usableShapes": 517
  },
- "total": 2203
+ "total": 2204
 }
