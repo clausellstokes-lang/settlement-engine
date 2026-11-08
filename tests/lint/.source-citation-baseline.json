@@ -47,7 +47,7 @@
     "pastEofCitationsExcluded": 382,
     "byRule": {
       "banner": 9,
-      "dated": 161,
+      "dated": 162,
       "sha-pin": 2,
       "tree": 112
     },
@@ -333,7 +333,8 @@
     "_rosterGrowth2026-11-08-chair-pickup": "TWO documents JOINED the roster by being BORN into it (the chair, the new account's session session_01FbPLbejcfwX5nii12VM673, at the account-switch pickup on the integration branch, measured once with this walker's own arm): `dated` 148 -> 150, docs/chair/2026-11-08/BRIEF-MERGE-CAR-2-2026-11-08.md and docs/chair/2026-11-08/BRIEF-GREEN-BASE-2026-11-08.md, the two re-dispatch briefs, each born dated (their citations are `path :: symbol`), 0 past-EOF; nothing changed class; pastEofCitationsExcluded unchanged at 382.",
     "_rosterGrowth2026-11-08-chair-car-briefs": "TWO documents JOINED the roster by being BORN into it (the chair, session session_01FbPLbejcfwX5nii12VM673, on the integration branch, measured once with this walker's own arm): `dated` 150 -> 152, docs/allegiance/BRIEF-ALLEGIANCE-CAR2-2026-11-08.md and docs/allegiance/BRIEF-ALLEGIANCE-CAR3-2026-11-08.md, the allegiance train's car 2 and car 3 briefs written one train ahead of car 1 (rule 3), each born dated (citations `path :: symbol`), 0 past-EOF; nothing changed class; pastEofCitationsExcluded unchanged at 382.",
     "_rosterGrowth2026-11-08-allegiance-car1-record": "ONE document JOINED the roster by being BORN into it (ALLEGIANCE-CAR1, session session_01FbPLbcPJVJAQ3QWDuyY2fZ, on lane/allegiance-car1-2026-11-08, measured once with this walker's own arm): `dated` 160 -> 161, docs/allegiance/ALLEGIANCE_CAR1_2026-11-08.md, the car's record, born dated (its citations are `path :: symbol` and commit shas), 0 past-EOF; nothing changed class.",
-    "_rosterGrowth2026-11-08-fp-rebase-census": "ONE document JOINED the roster by being BORN into it (the chair, session session_01FbPLbejcfwX5nii12VM673, on the integration branch, measured once with this walker's own arm): `dated` 152 -> 153, docs/chair/2026-11-08/FP-REBASE-CENSUS-2026-11-08.md, the three census seats' read of the FP corpus against the people car and the allegiance train, born dated (citations `path :: heading`), 0 past-EOF; nothing changed class; pastEofCitationsExcluded unchanged at 382."
+    "_rosterGrowth2026-11-08-fp-rebase-census": "ONE document JOINED the roster by being BORN into it (the chair, session session_01FbPLbejcfwX5nii12VM673, on the integration branch, measured once with this walker's own arm): `dated` 152 -> 153, docs/chair/2026-11-08/FP-REBASE-CENSUS-2026-11-08.md, the three census seats' read of the FP corpus against the people car and the allegiance train, born dated (citations `path :: heading`), 0 past-EOF; nothing changed class; pastEofCitationsExcluded unchanged at 382.",
+    "_rosterGrowth2026-11-08-write-people": "ONE document JOINED the roster by being BORN into it (WRITE-PEOPLE, the allegiance train's writing seat B, a child of the cloud chair under the owner's delegation, on lane/write-people-2026-11-08): `dated` 153 -> 154 on its lane; 161 + 1 = 162 at ALLEGIANCE-CAR3's merge of that lane, docs/allegiance/WRITE_PEOPLE_2026-11-08.md, the seat's record, born dated (its citations are `path :: symbol`), 0 past-EOF; nothing changed class. The `tree` count (112 on disk against 109) is MERGE-CAR's line, untouched."
   },
   "rows": []
 }
